@@ -1,0 +1,36 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.12023.21
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NovaCore.Core", "src\NovaCore.Core\NovaCore.Core.csproj", "{B1C86B85-5566-4F68-9590-DBE6EAFE6F12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NovaCore.Interop", "src\NovaCore.Interop\NovaCore.Interop.csproj", "{B9D9462D-DF63-46B8-964B-6E8020D5A8C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NovaCore.Graphics", "src\NovaCore.Graphics\NovaCore.Graphics.csproj", "{D6B8EC8B-A8D7-46B6-A890-C2A7B9EF8D86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NovaCore.Simulation", "src\NovaCore.Simulation\NovaCore.Simulation.csproj", "{BF3DE076-FFE1-4557-A759-5FA68D7E877A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NovaCore.Platform", "src\NovaCore.Platform\NovaCore.Platform.csproj", "{F0846DEB-55A1-4AF4-A70B-C214387F0E3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NovaCore.Triangle", "samples\NovaCore.Triangle\NovaCore.Triangle.csproj", "{09EA9F68-B175-4B6F-B077-E2E1AACA9351}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B1C86B85-5566-4F68-9590-DBE6EAFE6F12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1C86B85-5566-4F68-9590-DBE6EAFE6F12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9D9462D-DF63-46B8-964B-6E8020D5A8C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9D9462D-DF63-46B8-964B-6E8020D5A8C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6B8EC8B-A8D7-46B6-A890-C2A7B9EF8D86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6B8EC8B-A8D7-46B6-A890-C2A7B9EF8D86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF3DE076-FFE1-4557-A759-5FA68D7E877A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF3DE076-FFE1-4557-A759-5FA68D7E877A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0846DEB-55A1-4AF4-A70B-C214387F0E3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0846DEB-55A1-4AF4-A70B-C214387F0E3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09EA9F68-B175-4B6F-B077-E2E1AACA9351}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09EA9F68-B175-4B6F-B077-E2E1AACA9351}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+EndGlobal
