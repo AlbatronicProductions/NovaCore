@@ -1,0 +1,14 @@
+using NovaCore.Simulation.Time;
+using NovaCore.Simulation.Timeline;
+
+namespace NovaCore.Simulation.Transactions;
+
+/// <summary>Immutable proposed mutation; evaluation never commits it.</summary>
+internal readonly record struct SimulationTransaction(
+    SimulationEventHeader Event,
+    SimulationInstant EvaluationTime,
+    TimelineRevision ExpectedTimelineRevision,
+    StateRevision ExpectedStateRevision,
+    long ProposedMarkerValue,
+    bool ChangesAuthoritativeState,
+    bool IsInternallyConsistent);

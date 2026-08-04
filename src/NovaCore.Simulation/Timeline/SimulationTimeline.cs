@@ -33,6 +33,17 @@ public sealed class SimulationTimeline
     public bool TryGetPending(SimulationEventId id, out ScheduledSimulationEvent value) => _pending.TryGet(id, out value);
     public int CopyPending(Span<ScheduledSimulationEvent> destination) => _pending.CopyTo(destination);
 
+    internal bool CanConsumeCanonical(SimulationEventHeader expected) =>
+        CanAdvanceRevision() && _pending.TryPeek(out var pending) && pending.Header == expected;
+
+    internal bool TryConsumeCanonical(SimulationEventHeader expected, out ScheduledSimulationEvent consumed)
+    {
+        if (!CanConsumeCanonical(expected)) { consumed = default; return false; }
+        if (!_pending.TryRemove(expected.Id, out consumed)) throw new InvalidOperationException("Canonical event lookup became inconsistent.");
+        _revision = _revision.Next();
+        return true;
+    }
+
     public SimulationScheduleResult Schedule(SimulationInstant currentTime, SimulationEventRequest request)
     {
         var status = ValidateRequest(currentTime, request);

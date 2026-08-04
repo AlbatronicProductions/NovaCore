@@ -1,6 +1,7 @@
 using NovaCore.Simulation.Time;
 using NovaCore.Simulation.Timeline;
 using NovaCore.Simulation.Clock;
+using NovaCore.Simulation.Transactions;
 
 var tests = new (string Name, Action Test)[]
 {
@@ -10,6 +11,7 @@ var tests = new (string Name, Action Test)[]
     ("Event ordering", EventOrderingTests),
     ("Timeline topology", TimelineTopologyTests),
     ("Simulation clock", ClockTests),
+    ("Transaction contracts", TransactionTests),
     ("Allocation", AllocationTests),
 };
 foreach (var (name, test) in tests) { test(); Console.WriteLine($"PASS {name}"); }
@@ -198,12 +200,46 @@ static void ClockTests()
     Console.WriteLine($"Deterministic clock stress hash: 0x{hash:X16}");
 }
 
+static void TransactionTests()
+{
+    var timeline = new SimulationTimeline(8);
+    Check(timeline.Schedule(SimulationInstant.Zero, Request(1, 10, 0)).Succeeded, "transaction schedule");
+    var clock = new SimulationClock(SimulationInstant.Zero, timeline);
+    Check(clock.AdvanceTo(new SimulationInstant(10)).ReachedBoundary, "reach transaction boundary");
+    var state = new SimulationState();
+    var engine = new SimulationTransactionEngine(clock, state, 8);
+    var transaction = engine.EvaluateNext();
+    Check(engine.State.MarkerValue == 0 && transaction.ProposedMarkerValue == 1 && transaction.Event.Id == new SimulationEventId(1), "evaluation is immutable");
+    var beforeTimeline = timeline.Revision; var result = engine.ValidateAndCommit(transaction);
+    Check(result.Committed && result.ProcessedEvent!.Value.Event.Id == new SimulationEventId(1), "transaction committed");
+    Check(engine.State.MarkerValue == 1 && engine.State.Revision.Value == 1 && timeline.PendingCount == 0 && timeline.Revision.Value == beforeTimeline.Value + 1 && clock.CurrentTime.Ticks == 10, "atomic state and timeline commit");
+    Check(engine.ProcessedCount == 1 && engine.TryGetProcessed(0, out var processed) && processed.ExecutionTime.Ticks == 10 && processed.TimelineRevisionBefore == beforeTimeline && processed.TimelineRevisionAfter == timeline.Revision && processed.StateRevisionBefore == StateRevision.Zero && processed.StateRevisionAfter == engine.State.Revision, "append-only processed history");
+
+    Check(timeline.Schedule(clock.CurrentTime, Request(2, 10, 0)).Succeeded, "failure schedule");
+    var invalid = engine.EvaluateNext() with { ExpectedTimelineRevision = TimelineRevision.Zero };
+    var stateBefore = engine.State; beforeTimeline = timeline.Revision; var historyBefore = engine.ProcessedCount;
+    var failed = engine.ValidateAndCommit(invalid);
+    Check(!failed.Committed && failed.Validation.Status == SimulationTransactionValidationStatus.TimelineRevisionMismatch, "controlled validation failure");
+    Check(engine.State == stateBefore && timeline.Revision == beforeTimeline && timeline.PendingCount == 1 && engine.ProcessedCount == historyBefore && clock.CurrentTime.Ticks == 10, "failed validation leaves all authority unchanged");
+
+    var allocationTimeline = new SimulationTimeline(5_000); var allocationClock = new SimulationClock(SimulationInstant.Zero, allocationTimeline); var allocationEngine = new SimulationTransactionEngine(allocationClock, new SimulationState(), 5_000);
+    for (ulong id = 1; id <= 5_000; id++) Check(allocationTimeline.Schedule(SimulationInstant.Zero, Request(id, 0, 0)).Succeeded, "allocation transaction schedule");
+    _ = allocationEngine.EvaluateNext();
+    var before = GC.GetAllocatedBytesForCurrentThread();
+    for (var index = 0; index < 5_000; index++) Check(allocationEngine.ValidateAndCommit(allocationEngine.EvaluateNext()).Committed, "allocation transaction commit");
+    Check(GC.GetAllocatedBytesForCurrentThread() == before && allocationEngine.ProcessedCount == 5_000, "preallocated transaction execution allocates zero bytes");
+
+    var hash = TransactionHash(); Check(TransactionHash() == hash, "deterministic transaction replay hash");
+    Console.WriteLine($"Deterministic transaction replay hash: 0x{hash:X16}");
+}
+
 static SimulationEventHeader Header(ulong id, long time, int priority, ulong sequence) => new(new SimulationEventId(id), new SimulationInstant(time), priority, new SimulationEventSequence(sequence), SimulationEventKind.Marker);
 static SimulationEventRequest Request(ulong id, long time, int priority) => new(new SimulationEventId(id), new SimulationInstant(time), priority, SimulationEventKind.Marker);
 static SimulationEventRequest[] CanonicalHeaders(){var random=new FixedRandom(0xD6E8FEB86659FD93);var values=new SimulationEventRequest[1024];for(var index=0;index<values.Length;index++){values[index]=Request((ulong)index+1,(long)(random.Next()>>1)-long.MaxValue/2,(int)(random.Next()%2001)-1000);}Array.Sort(values,static(left,right)=>{var time=left.Time.CompareTo(right.Time);if(time!=0)return time;var priority=left.Priority.CompareTo(right.Priority);return priority!=0?priority:left.Id.CompareTo(right.Id);});return values;}
 static void ShuffleRequests(SimulationEventRequest[] values,ulong seed){var random=new FixedRandom(seed);for(var index=values.Length-1;index>0;index--){var other=(int)(random.Next()%(ulong)(index+1));(values[index],values[other])=(values[other],values[index]);}}
 static ulong TimelineHash(ReadOnlySpan<SimulationEventRequest> values){ulong hash=14695981039346656037;foreach(ref readonly var value in values){hash=Mix(hash,(ulong)value.Time.Ticks);hash=Mix(hash,(uint)value.Priority);hash=Mix(hash,value.Id.Value);}return hash;}
 static ulong ClockHash(){var timeline=new SimulationTimeline(4);Check(timeline.Schedule(SimulationInstant.Zero,Request(10,30,0)).Succeeded,"clock hash schedule");Check(timeline.Schedule(SimulationInstant.Zero,Request(11,10,0)).Succeeded,"clock hash schedule");var clock=new SimulationClock(SimulationInstant.Zero,timeline);var first=clock.AdvanceTo(new SimulationInstant(100));var second=clock.AdvanceUntilNextEvent();ulong hash=14695981039346656037;hash=Mix(hash,(ulong)first.ReachedTime.Ticks);hash=Mix(hash,first.BoundaryEvent!.Value.Id.Value);hash=Mix(hash,(ulong)second.ReachedTime.Ticks);return Mix(hash,second.BoundaryEvent!.Value.Id.Value);}
+static ulong TransactionHash(){var timeline=new SimulationTimeline(32);for(ulong id=1;id<=32;id++)Check(timeline.Schedule(SimulationInstant.Zero,Request(id,0,(int)(id%3))).Succeeded,"hash transaction schedule");var clock=new SimulationClock(SimulationInstant.Zero,timeline);var engine=new SimulationTransactionEngine(clock,new SimulationState(),32);ulong hash=14695981039346656037;while(timeline.PendingCount!=0){var result=engine.ValidateAndCommit(engine.EvaluateNext());Check(result.Committed,"hash transaction commit");var entry=result.ProcessedEvent!.Value;hash=Mix(hash,entry.Event.Id.Value);hash=Mix(hash,entry.StateRevisionAfter.Value);hash=Mix(hash,entry.TimelineRevisionAfter.Value);}return hash;}
 static ulong MixedTimelineHash(){var timeline=new SimulationTimeline(4096);var random=new FixedRandom(0xA24BAED4963EE407);var active=new SimulationEventId[4096];var activeCount=0;ulong nextId=1;for(var operation=0;operation<4096;operation++){if(activeCount==0||(random.Next()%3)!=0){var request=Request(nextId++,(long)(random.Next()>>1)-long.MaxValue/2,(int)(random.Next()%101)-50);Check(timeline.Schedule(new SimulationInstant(long.MinValue),request).Succeeded,"mixed schedule");active[activeCount++]=request.Id;}else{var index=(int)(random.Next()%(ulong)activeCount);Check(timeline.Cancel(active[index]).Succeeded,"mixed cancel");active[index]=active[--activeCount];}Check(timeline.ValidateInvariants(),"mixed invariant");}var pending=new ScheduledSimulationEvent[timeline.PendingCount];timeline.CopyPending(pending);Array.Sort(pending,static(left,right)=>SimulationEventHeaderComparer.Compare(left.Header,right.Header));ulong hash=14695981039346656037;foreach(var value in pending){hash=Mix(hash,(ulong)value.Header.Time.Ticks);hash=Mix(hash,(uint)value.Header.Priority);hash=Mix(hash,value.Header.Sequence.Value);hash=Mix(hash,value.Header.Id.Value);}return Mix(hash,timeline.Revision.Value);}
 static SimulationEventHeader[] CreateStressHeaders(){var random=new FixedRandom(0x6A09E667F3BCC909);var result=new SimulationEventHeader[2048];for(var index=0;index<result.Length;index++){var time=(long)(random.Next()>>1)-long.MaxValue/2;var priority=(int)(random.Next()%2001)-1000;result[index]=Header((ulong)index+1,time,priority,(ulong)index+1);}return result;}
 static void Shuffle(SimulationEventHeader[] values,ulong seed){var random=new FixedRandom(seed);for(var index=values.Length-1;index>0;index--){var other=(int)(random.Next()%(ulong)(index+1));(values[index],values[other])=(values[other],values[index]);}}

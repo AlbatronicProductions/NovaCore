@@ -36,12 +36,24 @@ The clock rejects nested advancement with a controlled result and restores its g
 
 There is no event transition evaluator, state mutation, generated event, payload, processed-event history, `StateRevision` update, host-duration advancement, host-time debt, analytical trajectory, `SimulationSnapshot`, reference-frame integration, or sample integration. Milestone 6B-3 will add transactional event execution; Milestone 6B-4 will add host-duration rational advancement.
 
+## Authoritative transaction contracts (Milestone 6B-3A)
+
+Milestone 6B-3A establishes the managed authoritative mutation boundary. `SimulationClock` still owns time and `SimulationTimeline` still owns pending topology. `SimulationTransactionEngine` is the only component permitted to commit the minimal internal `SimulationState`, consume a canonical pending event, and append immutable processed history.
+
+The flow is deliberately separated: scheduled simulation command → pure evaluation → immutable `SimulationTransaction` → validation → commit. Evaluators receive only `SimulationStateView`; they cannot mutate authoritative state. The current marker transaction is infrastructure proof only and does not represent gameplay, propulsion, trajectory propagation, or a payload framework.
+
+Validation occurs before mutation and verifies that the event remains canonical, clock time matches the evaluation timestamp, expected timeline and state revisions still match, and the transaction is internally consistent. Normal validation failure returns a controlled result and leaves current time, pending topology, both revisions, processed history, and authoritative state unchanged.
+
+After validation, history capacity is reserved before the irreversible sequence. A successful commit changes state, consumes the canonical event, advances `TimelineRevision` through that existing consumption operation, advances `StateRevision` exactly once for the marker-state change, advances clock time only after successful state/timeline mutation, and appends `ProcessedSimulationEvent`. Processed history is immutable append-only metadata containing the event header, execution time, and revision values before and after commit.
+
+This is not event sourcing, replay implementation, or snapshot implementation. It is the stable mutation contract that later transaction kinds will use.
+
 ### FUTURE ROADMAP — SimulationSnapshot
 
-A later milestone will introduce an immutable `SimulationSnapshot` tied to one explicit `SimulationInstant`. It is expected to carry the matching `TimelineRevision`, `StateRevision`, authoritative state or a stable state reference, the matching `ReferenceFrameSnapshot`, deterministic identity/version information, and optionally a canonical state/event hash. That future boundary will support replay validation, save/load foundations, debugging, prediction invalidation, rollback, and future synchronization while preserving the flow: authoritative simulation → evaluated reference frames → resolved render snapshot → Graphics transport. None of those snapshot, rollback, networking, save/load, replay-restoration, or cross-platform bitwise-determinism capabilities exists today.
+A later milestone will introduce an immutable `SimulationSnapshot` tied to one explicit `SimulationInstant`. It is expected to carry the matching `TimelineRevision`, `StateRevision`, immutable authoritative state or stable state references, pending-event topology, processed-history version, the matching `ReferenceFrameSnapshot`, deterministic identity/version information, and optionally a canonical state/event hash. It will become the sole immutable simulation-facing snapshot for rendering and external consumers, preserving the flow: authoritative simulation → evaluated reference frames → resolved render snapshot → Graphics transport. None of snapshot publication, rollback, networking, save/load, replay restoration, or cross-platform bitwise determinism exists today.
 
-Simulation clocks, event execution, analytical propagation, snapshots, time warp controls, reference-frame integration, and sample integration remain pending Milestone 6 work.
+Host-duration advancement, generated events, additional transaction kinds, analytical propagation, snapshots, time warp controls, reference-frame integration, and sample integration remain pending Milestone 6 work.
 
 ## Intentional 6A limitations
 
-The value types are allocation-free for normal arithmetic, comparison, and rate scaling. Diagnostic formatting (`ToString`) and exceptional validation paths may allocate, and are not part of the steady-state contract. `FromSecondsRounded` is explicitly derived-input convenience only; it rounds to the nearest microtick using ties-to-even and must not be used for authoritative serialized timestamps. A carried rate remainder belongs to one normalized rate denominator and must be reset when that rate changes. No clock, event queue, payload, or timeline exists yet.
+The value types are allocation-free for normal arithmetic, comparison, and rate scaling. Diagnostic formatting (`ToString`) and exceptional validation paths may allocate, and are not part of the steady-state contract. `FromSecondsRounded` is explicitly derived-input convenience only; it rounds to the nearest microtick using ties-to-even and must not be used for authoritative serialized timestamps. A carried rate remainder belongs to one normalized rate denominator and must be reset when that rate changes.

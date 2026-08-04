@@ -111,6 +111,12 @@ public sealed class SimulationClock
         finally { _isAdvancing = false; }
     }
 
+    internal void AdvanceAfterSuccessfulTransaction(SimulationInstant time)
+    {
+        if (time < _currentTime) throw new InvalidOperationException("A transaction cannot move authoritative time backward.");
+        _currentTime = time;
+    }
+
     private SimulationAdvanceResult Result(SimulationAdvanceStopReason reason, SimulationInstant requested, SimulationEventHeader? boundary, int examined) =>
         new(reason, requested, _currentTime, boundary, Timeline.Revision, examined);
 }
