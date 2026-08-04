@@ -4,6 +4,8 @@ public readonly record struct Double2(double X, double Y);
 public readonly record struct Double3(double X, double Y, double Z)
 {
     public static Double3 operator -(Double3 left, Double3 right) => new(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
+    public static Double3 operator +(Double3 left, Double3 right) => new(left.X + right.X, left.Y + right.Y, left.Z + right.Z);
+    public static Double3 operator *(Double3 value, double scalar) => new(value.X * scalar, value.Y * scalar, value.Z * scalar);
 }
 public readonly record struct DoubleQuaternion(double X, double Y, double Z, double W);
 public readonly record struct ReferenceFrameId(long Value);

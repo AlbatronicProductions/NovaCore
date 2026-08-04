@@ -1,5 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup><OutputType>Exe</OutputType><PlatformTarget>x64</PlatformTarget></PropertyGroup>
+  <PropertyGroup><OutputType>Exe</OutputType><PlatformTarget>x64</PlatformTarget><AllowUnsafeBlocks>true</AllowUnsafeBlocks></PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\NovaCore.Core\NovaCore.Core.csproj" />
     <ProjectReference Include="..\..\src\NovaCore.Graphics\NovaCore.Graphics.csproj" />

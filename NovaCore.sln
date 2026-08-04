@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NovaCore.Platform", "src\No
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NovaCore.Triangle", "samples\NovaCore.Triangle\NovaCore.Triangle.csproj", "{09EA9F68-B175-4B6F-B077-E2E1AACA9351}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NovaCore.Precision.Tests", "tests\NovaCore.Precision.Tests\NovaCore.Precision.Tests.csproj", "{C493C467-8B3E-4E07-A132-64190F3A9D4B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,5 +34,7 @@ Global
 		{F0846DEB-55A1-4AF4-A70B-C214387F0E3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09EA9F68-B175-4B6F-B077-E2E1AACA9351}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{09EA9F68-B175-4B6F-B077-E2E1AACA9351}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C493C467-8B3E-4E07-A132-64190F3A9D4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C493C467-8B3E-4E07-A132-64190F3A9D4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 EndGlobal

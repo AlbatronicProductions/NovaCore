@@ -5,5 +5,11 @@ namespace NovaCore.Graphics;
 
 public static class RenderSubmission
 {
-    public static NativeRelativePosition ForNative(in RelativePosition position) => new() { X = position.Value.X, Y = position.Value.Y, Z = position.Value.Z };
+    public static RenderObject CreateObject(in UniversePosition position, in RenderOrigin origin, MeshHandle mesh)
+    {
+        _ = ReferenceFrame.Resolve(position, origin);
+        return new RenderObject(EncodedPosition.Encode(position.Value), mesh);
+    }
+
+    public static EncodedPosition EncodeCamera(in RenderOrigin origin) => EncodedPosition.Encode(origin.CameraPosition.Value);
 }
