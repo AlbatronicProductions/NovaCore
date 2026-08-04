@@ -1,14 +1,15 @@
 using NovaCore.Core;
-using NovaCore.Interop;
 
 namespace NovaCore.Graphics;
 
 public static class RenderSubmission
 {
-    public static RenderObject CreateObject(in UniversePosition position, in RenderOrigin origin, MeshHandle mesh)
+    public static RenderObject CreateObject(in UniversePosition position, in DoubleQuaternion rotation, in Double3 scale, MeshHandle mesh)
     {
-        _ = ReferenceFrame.Resolve(position, origin);
-        return new RenderObject(EncodedPosition.Encode(position.Value), mesh);
+        if (!mesh.IsValid) throw new ArgumentOutOfRangeException(nameof(mesh), "Mesh handle zero is invalid.");
+        var transform = RenderTransform.FromAuthoritative(rotation, scale);
+        if (!transform.IsFinite) throw new ArgumentException("Render transform must be finite.");
+        return new RenderObject(EncodedPosition.Encode(position.Value), transform, mesh);
     }
 
     public static EncodedPosition EncodeCamera(in RenderOrigin origin) => EncodedPosition.Encode(origin.CameraPosition.Value);

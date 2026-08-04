@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><PlatformTarget>x64</PlatformTarget><AllowUnsafeBlocks>true</AllowUnsafeBlocks></PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\NovaCore.Core\NovaCore.Core.csproj" />
+    <ProjectReference Include="..\..\src\NovaCore.Graphics\NovaCore.Graphics.csproj" />
+    <ProjectReference Include="..\..\src\NovaCore.Interop\NovaCore.Interop.csproj" />
+  </ItemGroup>
+  <Target Name="CopyNativeRuntime" AfterTargets="Build">
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)..\..\build\native-ninja\NovaCore.Native.dll" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
+  </Target>
+</Project>

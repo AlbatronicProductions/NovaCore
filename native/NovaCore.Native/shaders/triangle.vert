@@ -1,12 +1,35 @@
 #version 460
+
 struct EncodedPosition { vec4 high; vec4 low; };
-struct RenderObject { EncodedPosition position; uint mesh; uint padding0; uint padding1; uint padding2; };
-layout(std430, set = 0, binding = 0) readonly buffer RenderData { EncodedPosition camera; RenderObject objects[]; } renderData;
+struct GpuRenderObject {
+  EncodedPosition position;
+  vec4 rotation;
+  vec4 scale;
+  uint mesh;
+  uint padding0;
+  uint padding1;
+  uint padding2;
+};
+
+layout(std430, set = 0, binding = 0) readonly buffer GpuFrameData {
+  EncodedPosition camera;
+  GpuRenderObject objects[];
+} frameData;
+
+layout(location = 0) in vec3 inPosition;
+layout(location = 1) in vec3 inColor;
 layout(location = 0) out vec3 color;
+
+// Right-handed Hamilton rotation, XYZW quaternion: q * v * conjugate(q).
+vec3 Rotate(vec4 q, vec3 v) {
+  return v + 2.0 * cross(q.xyz, cross(q.xyz, v) + q.w * v);
+}
+
 void main() {
-  vec2 positions[3] = vec2[](vec2(0.0, -0.5), vec2(0.5, 0.5), vec2(-0.5, 0.5));
-  vec3 colors[3] = vec3[](vec3(1,0,0), vec3(0,1,0), vec3(0,0,1));
-  vec3 relativePosition = (renderData.objects[gl_InstanceIndex].position.high.xyz - renderData.camera.high.xyz) + (renderData.objects[gl_InstanceIndex].position.low.xyz - renderData.camera.low.xyz);
-  gl_Position = vec4(positions[gl_VertexIndex] + relativePosition.xy, 0.0, 1.0);
-  color = colors[gl_VertexIndex];
+  GpuRenderObject object = frameData.objects[gl_InstanceIndex];
+  vec3 relativePosition = (object.position.high.xyz - frameData.camera.high.xyz) +
+                          (object.position.low.xyz - frameData.camera.low.xyz);
+  vec3 local = Rotate(object.rotation, inPosition * object.scale.xyz);
+  gl_Position = vec4(local + relativePosition, 1.0);
+  color = inColor;
 }

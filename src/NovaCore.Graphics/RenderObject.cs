@@ -1,9 +1,15 @@
 namespace NovaCore.Graphics;
 
+/// <summary>Fixed-width GPU mesh identifier. Zero is never a valid mesh.</summary>
 public readonly record struct MeshHandle(uint Value)
 {
+    public static MeshHandle Invalid { get; } = new(0);
     public static MeshHandle Triangle { get; } = new(1);
+    public bool IsValid => Value != 0;
 }
 
-/// <summary>Renderer submission data; not available to gameplay or simulation assemblies.</summary>
-public readonly record struct RenderObject(EncodedPosition Position, MeshHandle Mesh);
+/// <summary>GPU transport data only; simulation state must remain in managed doubles.</summary>
+public readonly record struct RenderObject(EncodedPosition Position, RenderTransform Transform, MeshHandle Mesh);
+
+/// <summary>Derived, stable-order transport batch. Sample and simulation code never construct this.</summary>
+public readonly record struct RenderBatch(MeshHandle Mesh, uint FirstObject, uint ObjectCount);

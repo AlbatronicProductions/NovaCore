@@ -12,10 +12,30 @@ public struct NativeEncodedPosition
 }
 
 [StructLayout(LayoutKind.Sequential)]
-public struct NativeRenderObject { public NativeEncodedPosition Position; public uint Mesh; public uint Padding0, Padding1, Padding2; }
+public struct NativeMeshHandle { public uint Value; }
 
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct NativeFrameSubmission { public NativeEncodedPosition Camera; public NativeRenderObject* Objects; public uint ObjectCount; public uint Padding; }
+public struct NativeRenderTransform
+{
+    public float RotationX, RotationY, RotationZ, RotationW;
+    public float ScaleX, ScaleY, ScaleZ, ScalePadding;
+}
+
+[StructLayout(LayoutKind.Sequential)]
+public struct NativeRenderObject { public NativeEncodedPosition Position; public NativeRenderTransform Transform; public NativeMeshHandle Mesh; public uint Padding0, Padding1, Padding2; }
+
+[StructLayout(LayoutKind.Sequential)]
+public struct NativeDrawBatch { public NativeMeshHandle Mesh; public uint FirstObject, ObjectCount, Padding; }
+
+[StructLayout(LayoutKind.Sequential)]
+public unsafe struct NativeFrameSubmission { public NativeEncodedPosition Camera; public NativeRenderObject* Objects; public uint ObjectCount; public NativeDrawBatch* Batches; public uint BatchCount; }
+
+[StructLayout(LayoutKind.Sequential)]
+public struct NativeAbiLayout
+{
+    public uint EncodedPositionSize, RenderTransformSize, RenderObjectSize, RenderObjectPositionOffset, RenderObjectTransformOffset, RenderObjectMeshOffset;
+    public uint DrawBatchSize, FrameSubmissionSize, FrameObjectsOffset, FrameBatchesOffset;
+}
 
 [StructLayout(LayoutKind.Sequential)]
 public struct NativeInputState { public float DeltaSeconds; public uint MoveLeft, MoveRight, MoveForward, MoveBackward; }
@@ -32,4 +52,7 @@ public static partial class NativeRuntime
 
     [LibraryImport("NovaCore.Native", EntryPoint = "nc_run_renderer")]
     public static unsafe partial NativeResult RunRenderer(NativeFrameSubmission* submission, HostCallback callback, IntPtr userData);
+
+    [LibraryImport("NovaCore.Native", EntryPoint = "nc_get_abi_layout")]
+    public static partial NativeResult GetAbiLayout(out NativeAbiLayout layout);
 }
