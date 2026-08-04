@@ -1,131 +1,104 @@
 # NovaCore
 
-NovaCore is a precision-first rendering and simulation foundation for large-scale spaceflight games. It is not a complete game engine.
+NovaCore is a deterministic, high-precision simulation framework with a native C++20/Vulkan rendering backend. It is a foundation for large-scale spaceflight games, not a complete game engine. Within its implemented deterministic contracts, identical authoritative inputs are intended to produce identical simulation results.
 
-## Philosophy
+## Project Overview
 
-Authoritative simulation state remains managed C# data in double precision. Rendering is camera-relative, and Graphics never owns simulation state. Immutable frame snapshots provide a deterministic evaluation boundary. The native backend is C++20 and Vulkan; the managed runtime remains CLR/JIT compiled.
-
-Hierarchical celestial reference frames, camera state, and camera control remain managed. Vulkan consumes only resolved GPU transport data.
-
-## Current Architecture
-
-```text
-Win32 input
-    ↓
-NativeInputState
-    ↓
-DebugCameraInput → bounded CameraCommand span → FreeCameraController
-    ↓
-CameraState + ReferenceFrameSnapshot / ReferenceFrameResolver
-    ↓
-CameraRenderSnapshotBuilder
-    ↓
-GpuCameraData + RenderFrameSubmission
-    ↓
-NcCameraData → Vulkan storage buffer → vertex shader view/projection
-```
-
-`CameraState` is the only authoritative camera state. Native code reports input snapshots and owns rendering transport; it does not control the camera or resolve reference frames. `GpuCameraData` is the only camera record that crosses the render-submission boundary.
+Authoritative simulation remains managed C# data. The native layer owns only platform input and Vulkan rendering. Double-precision spatial mathematics, immutable evaluated reference-frame snapshots, and camera-relative GPU transport keep simulation ownership separate from rendering concerns.
 
 ## Current Capabilities
 
-- Double-precision managed spatial and frame mathematics.
-- Immutable evaluated ECL/ORB/CCE/CCI/CCF frame snapshots.
-- GPU high/low camera-relative position transport.
-- A frame-aware Free camera with Raw Input look and logarithmic speed adjustment.
-- Reusable indexed triangle geometry, stable mesh batching, and indexed instanced Vulkan drawing.
-- Resize-safe swapchain lifecycle, validation-enabled Debug runs, and deterministic shutdown.
+- **Precision mathematics** — checked microtick time primitives, double-precision spatial values, and high/low FP32 GPU position encoding.
+- **Reference-frame system** — immutable ECL, ORB, CCE, CCI, and CCF frame snapshots resolved in managed code.
+- **Graphics abstraction** — reusable mesh handles, indexed instanced drawing, batched render submissions, and Vulkan resource ownership in native code.
+- **Camera system** — managed frame-aware Free camera state and control; the renderer receives resolved GPU camera transport only.
+- **Deterministic simulation time primitives (6A)** — `SimulationInstant`, `SimulationDuration`, and normalized rational `SimulationRate`.
+- **Deterministic event timeline (6B-1)** — canonical pending-event ordering, stable IDs, sequence assignment, cancellation, replacement, and timeline revisions.
+- **Exact authoritative simulation clock (6B-2)** — explicit forward advancement, pause state, rate ownership, and deterministic event-boundary detection.
 
-## Precision Model
+## Current Milestone Status
 
-`FramePosition` is authoritative contextual position data. It resolves through the managed frame snapshot to root/ECL `UniversePosition` before Graphics. Each root-space component is encoded as high/low FP32 values; the shader reconstructs object-minus-camera translation before applying the FP32 view/projection transform. The camera remains at render-space origin.
+Milestone 6B-2 — Exact Authoritative Simulation Clock — is complete.
 
-See [Precision Model](docs/precision-model.md).
+The clock advances through empty spans or stops exactly at the canonical next deterministic event boundary. Events deliberately remain pending at that boundary: execution begins in Milestone 6B-3.
 
-## Reference Frames
+## Design Principles
 
-The managed hierarchy is:
+- **Determinism** — canonical event ordering and exact authoritative timestamps.
+- **Replayability** — stable IDs, revisions, and deterministic evaluation boundaries support future replay validation.
+- **Numerical stability** — simulation uses doubles; rendering resolves positions camera-relatively as late as possible.
+- **Allocation-free steady-state execution** — tested arithmetic, timeline, and clock paths avoid managed allocation after adequate preallocation.
+- **Immutable simulation data** — immutable evaluated frame snapshots separate consumers from mutable authoritative topology.
+- **Explicit ownership** — simulation is managed; Graphics transports resolved data; native code owns Vulkan and platform details.
+- **Long-term maintainability** — small focused abstractions, fixed-width contracts, and deferred features until their ownership model is justified.
+
+## Architecture
 
 ```text
-ECL
-├── ORB
-└── CCE
-    └── CCI
-        └── CCF
+Authoritative simulation
+    ↓
+Reference-frame snapshot and resolution
+    ↓
+Resolved render snapshot
+    ↓
+GPU high/low position transport
+    ↓
+Native Vulkan renderer
 ```
 
-See [Hierarchical Celestial Reference Frames](docs/reference-frames.md).
+The event timeline and simulation clock remain managed and independent of Graphics. Vulkan, shaders, mesh batching, and native code do not interpret reference-frame or simulation-time semantics.
 
-## Camera Controls
+## Building and Testing
 
-- `W` / `S` — forward along local `-Z` / backward along local `+Z`
-- `A` / `D` — strafe left / right
-- `Q` / `E` — down / up
-- Hold RMB and move the mouse — relative Raw Input look
-- Mouse wheel — logarithmically adjust movement speed
-- `R` — restore the default pose and movement speed
-
-The implemented controller is Free camera only. Orbit and Follow cameras are planned work.
-
-## Build and Run
+Windows development uses .NET and the configured native Vulkan build.
 
 ```powershell
 cmake -S native/NovaCore.Native -B build/native-ninja -G Ninja
 cmake --build build/native-ninja --config Debug
+
 dotnet build NovaCore.sln -c Debug
 
-dotnet run --project samples/NovaCore.Triangle -c Debug -- --objects=1000
-dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=frames
-dotnet run --project samples/NovaCore.Triangle -c Debug -- --objects=1000 --log=camera
-```
-
-See [Build on Windows](docs/build-windows.md).
-
-## Testing
-
-```powershell
+dotnet run --project tests/NovaCore.Simulation.Tests -c Debug
 dotnet run --project tests/NovaCore.Precision.Tests -c Debug
 dotnet run --project tests/NovaCore.Graphics.Tests -c Debug
 dotnet run --project tests/NovaCore.ReferenceFrames.Tests -c Debug
 dotnet run --project tests/NovaCore.Camera.Tests -c Debug
 ```
 
-Tests cover precision transport, render and ABI layouts, mesh batching, reference-frame mathematics, camera control, input command mapping, and steady-state allocation checks.
+For the current rendering sample:
 
-## Current Limitations
+```powershell
+dotnet run --project samples/NovaCore.Triangle -c Debug -- --objects=1000
+dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=frames
+```
 
-NovaCore has no deterministic simulation clock, orbital propagation, gravity, celestial-body simulation, spacecraft simulation, Orbit or Follow camera, terrain, materials, ECS, scene graph, gameplay, or asset pipeline.
-
-## Milestone Roadmap
-
-Completed implementation:
-
-- Milestone 1 — Precision foundation
-- Milestone 2 — Camera-relative rendering
-- Milestone 3 — Reusable meshes and indexed instanced rendering
-- Milestone 4 — Hierarchical celestial reference frames
-- Milestone 5 — Frame-aware Free camera architecture
-
-Planned work; not present in this repository:
-
-- Milestone 6 — Deterministic simulation clock
-- Milestone 7 — Celestial-body state and orbital geometry
-- Milestone 8 — Spacecraft dynamics and flight controls
-
-## Repository Layout
-
-- `src/` — managed Core, Graphics, Interop, Platform, and reserved Simulation assemblies.
-- `native/` — C++20 Vulkan library and shaders.
-- `tests/` — deterministic console test projects.
-- `samples/` — managed Vulkan demonstration sample and scenes.
-- `docs/` — technical architecture and build documentation.
+See [Build on Windows](docs/build-windows.md) for prerequisites and environment setup.
 
 ## Documentation
 
 - [Architecture](docs/architecture.md)
-- [Camera](docs/camera.md)
 - [Precision Model](docs/precision-model.md)
+- [Reference Frames](docs/reference-frames.md)
+- [Camera](docs/camera.md)
 - [Interop](docs/interop.md)
-- [Hierarchical Celestial Reference Frames](docs/reference-frames.md)
+- [Simulation Time](docs/simulation-time.md)
 - [Build on Windows](docs/build-windows.md)
+
+## Future Roadmap
+
+Planned work, not current functionality:
+
+- Milestone 6B-3 — deterministic transaction engine and event execution.
+- Generated events and processed-event history.
+- Deterministic replay foundations.
+- Orbital mechanics and analytical propagation.
+- Spacecraft simulation.
+- Renderer synchronization with evaluated simulation state.
+- `SimulationSnapshot` — an immutable capture of complete deterministic simulation state at one `SimulationInstant`, intended to support replay, save/load foundations, rollback, renderer synchronization, debugging, and deterministic verification.
+
+## Current Status
+
+- **Current milestone:** Milestone 6B-2 — Exact Authoritative Simulation Clock
+- **Next milestone:** Milestone 6B-3 — Deterministic Transaction Engine
+
+NovaCore remains a focused foundation. It does not yet implement event execution, trajectories, orbital mechanics, gravity, spacecraft dynamics, networking, ECS, terrain, assets, materials, or gameplay systems.
