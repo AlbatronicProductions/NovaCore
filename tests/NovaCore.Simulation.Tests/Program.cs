@@ -7,6 +7,7 @@ var tests = new (string Name, Action Test)[]
     ("SimulationDuration", DurationTests),
     ("SimulationRate", RateTests),
     ("Event ordering", EventOrderingTests),
+    ("Timeline topology", TimelineTopologyTests),
     ("Allocation", AllocationTests),
 };
 foreach (var (name, test) in tests) { test(); Console.WriteLine($"PASS {name}"); }
@@ -89,7 +90,74 @@ static void AllocationTests()
     Check(GC.GetAllocatedBytesForCurrentThread() == before, "steady-state arithmetic, scaling, and comparison allocations");
 }
 
+static void TimelineTopologyTests()
+{
+    var now = new SimulationInstant(100);
+    var timeline = new SimulationTimeline(32);
+    var first = timeline.Schedule(now, Request(1, 100, 0));
+    Check(first.Succeeded && first.ScheduledEvent.Header.Sequence.Value == 1 && timeline.Revision.Value == 1, "first sequence and revision");
+    var second = timeline.Schedule(now, Request(2, 101, 0));
+    Check(second.Succeeded && second.ScheduledEvent.Header.Sequence.Value == 2, "monotonic sequence");
+    var revision = timeline.Revision;
+    Check(timeline.Schedule(now, Request(0, 101, 0)).Status == SimulationScheduleStatus.InvalidId, "zero ID rejected");
+    Check(timeline.Schedule(now, new SimulationEventRequest(new SimulationEventId(3), now, 0, (SimulationEventKind)255)).Status == SimulationScheduleStatus.InvalidKind, "kind rejected");
+    Check(timeline.Schedule(now, Request(3, 99, 0)).Status == SimulationScheduleStatus.PastTime, "past event rejected");
+    Check(timeline.Schedule(now, Request(1, 102, 0)).Status == SimulationScheduleStatus.DuplicateId, "duplicate ID rejected");
+    Check(timeline.Revision == revision && timeline.ValidateInvariants(), "failed schedule leaves topology unchanged");
+
+    var middle = timeline.Schedule(now, Request(4, 102, 0));
+    var leaf = timeline.Schedule(now, Request(5, 103, 0));
+    Check(middle.Succeeded && leaf.Succeeded && timeline.ValidateInvariants(), "insert heap entries");
+    Check(timeline.TryPeekPending(out var minimumPending) && minimumPending.Header.Id == new SimulationEventId(1), "heap root is canonical minimum");
+    Check(timeline.Cancel(new SimulationEventId(1)).Succeeded && timeline.ValidateInvariants(), "cancel root");
+    Check(timeline.Cancel(new SimulationEventId(4)).Succeeded && timeline.ValidateInvariants(), "cancel middle");
+    Check(timeline.Cancel(new SimulationEventId(5)).Succeeded && timeline.ValidateInvariants(), "cancel leaf");
+    Check(timeline.Cancel(new SimulationEventId(5)).Status == SimulationCancelStatus.NotPending && timeline.IsIdReserved(new SimulationEventId(5)), "cancelled ID remains reserved");
+
+    var beforeReplacement = timeline.Revision;
+    var replacement = timeline.Replace(now, new SimulationEventId(2), Request(6, 104, -1));
+    Check(replacement.Succeeded && replacement.ScheduledEvent.Header.Sequence.Value == 5 && timeline.Revision.Value == beforeReplacement.Value + 1, "atomic replacement");
+    Check(timeline.IsIdReserved(new SimulationEventId(2)) && timeline.IsIdReserved(new SimulationEventId(6)) && timeline.ValidateInvariants(), "replacement reserves both IDs");
+    revision = timeline.Revision;
+    Check(timeline.Replace(now, new SimulationEventId(2), Request(7, 104, 0)).Status == SimulationScheduleStatus.ReplacementTargetNotPending, "missing replacement target");
+    Check(timeline.Replace(now, new SimulationEventId(6), Request(6, 104, 0)).Status == SimulationScheduleStatus.DuplicateId, "replacement duplicate new ID");
+    Check(timeline.Revision == revision && timeline.ValidateInvariants(), "failed replacement unchanged");
+
+    var overflow = new SimulationTimeline(1, ulong.MaxValue, TimelineRevision.Zero);
+    Check(overflow.Schedule(SimulationInstant.Zero, Request(100, 0, 0)).Status == SimulationScheduleStatus.SequenceOverflow && overflow.PendingCount == 0 && overflow.Revision == TimelineRevision.Zero, "sequence overflow controlled");
+    var revisionOverflow = new SimulationTimeline(1, 1, new TimelineRevision(ulong.MaxValue));
+    Check(revisionOverflow.Schedule(SimulationInstant.Zero, Request(101, 0, 0)).Status == SimulationScheduleStatus.RevisionOverflow, "revision overflow controlled");
+
+    var expected = CanonicalHeaders();
+    for (var pass = 0; pass < 8; pass++)
+    {
+        var permuted = (SimulationEventRequest[])expected.Clone(); ShuffleRequests(permuted, (ulong)(pass + 41));
+        var orderedTimeline = new SimulationTimeline(permuted.Length);
+        foreach (var request in permuted) Check(orderedTimeline.Schedule(new SimulationInstant(long.MinValue), request).Succeeded, "permuted schedule");
+        var actual = new ScheduledSimulationEvent[orderedTimeline.PendingCount]; orderedTimeline.CopyPending(actual);
+        Array.Sort(actual, static (left, right) => SimulationEventHeaderComparer.Compare(left.Header, right.Header));
+        for (var index = 0; index < actual.Length; index++) Check(actual[index].Header.Time == expected[index].Time && actual[index].Header.Priority == expected[index].Priority && actual[index].Header.Id == expected[index].Id, "canonical heap order");
+        Check(orderedTimeline.ValidateInvariants(), "permuted heap invariants");
+    }
+
+    var allocatedTimeline = new SimulationTimeline(20_000);
+    for (ulong id = 1; id <= 100; id++) Check(allocatedTimeline.Schedule(SimulationInstant.Zero, Request(id, (long)id, 0)).Succeeded, "allocation warmup");
+    var before = GC.GetAllocatedBytesForCurrentThread();
+    for (ulong id = 101; id <= 10_000; id++) { Check(allocatedTimeline.Schedule(SimulationInstant.Zero, Request(id, (long)id, 0)).Succeeded, "allocation schedule"); Check(allocatedTimeline.Cancel(new SimulationEventId(id)).Succeeded, "allocation cancel"); }
+    Check(GC.GetAllocatedBytesForCurrentThread() == before && allocatedTimeline.ValidateInvariants(), "preallocated timeline operations allocate zero bytes");
+
+    var hash = TimelineHash(expected); Check(TimelineHash(CanonicalHeaders()) == hash, "deterministic timeline stress hash");
+    Console.WriteLine($"Deterministic timeline stress hash: 0x{hash:X16}");
+    var mixedHash = MixedTimelineHash(); Check(MixedTimelineHash() == mixedHash, "fixed-seed mixed timeline operations");
+    Console.WriteLine($"Deterministic mixed-timeline stress hash: 0x{mixedHash:X16}");
+}
+
 static SimulationEventHeader Header(ulong id, long time, int priority, ulong sequence) => new(new SimulationEventId(id), new SimulationInstant(time), priority, new SimulationEventSequence(sequence), SimulationEventKind.Marker);
+static SimulationEventRequest Request(ulong id, long time, int priority) => new(new SimulationEventId(id), new SimulationInstant(time), priority, SimulationEventKind.Marker);
+static SimulationEventRequest[] CanonicalHeaders(){var random=new FixedRandom(0xD6E8FEB86659FD93);var values=new SimulationEventRequest[1024];for(var index=0;index<values.Length;index++){values[index]=Request((ulong)index+1,(long)(random.Next()>>1)-long.MaxValue/2,(int)(random.Next()%2001)-1000);}Array.Sort(values,static(left,right)=>{var time=left.Time.CompareTo(right.Time);if(time!=0)return time;var priority=left.Priority.CompareTo(right.Priority);return priority!=0?priority:left.Id.CompareTo(right.Id);});return values;}
+static void ShuffleRequests(SimulationEventRequest[] values,ulong seed){var random=new FixedRandom(seed);for(var index=values.Length-1;index>0;index--){var other=(int)(random.Next()%(ulong)(index+1));(values[index],values[other])=(values[other],values[index]);}}
+static ulong TimelineHash(ReadOnlySpan<SimulationEventRequest> values){ulong hash=14695981039346656037;foreach(ref readonly var value in values){hash=Mix(hash,(ulong)value.Time.Ticks);hash=Mix(hash,(uint)value.Priority);hash=Mix(hash,value.Id.Value);}return hash;}
+static ulong MixedTimelineHash(){var timeline=new SimulationTimeline(4096);var random=new FixedRandom(0xA24BAED4963EE407);var active=new SimulationEventId[4096];var activeCount=0;ulong nextId=1;for(var operation=0;operation<4096;operation++){if(activeCount==0||(random.Next()%3)!=0){var request=Request(nextId++,(long)(random.Next()>>1)-long.MaxValue/2,(int)(random.Next()%101)-50);Check(timeline.Schedule(new SimulationInstant(long.MinValue),request).Succeeded,"mixed schedule");active[activeCount++]=request.Id;}else{var index=(int)(random.Next()%(ulong)activeCount);Check(timeline.Cancel(active[index]).Succeeded,"mixed cancel");active[index]=active[--activeCount];}Check(timeline.ValidateInvariants(),"mixed invariant");}var pending=new ScheduledSimulationEvent[timeline.PendingCount];timeline.CopyPending(pending);Array.Sort(pending,static(left,right)=>SimulationEventHeaderComparer.Compare(left.Header,right.Header));ulong hash=14695981039346656037;foreach(var value in pending){hash=Mix(hash,(ulong)value.Header.Time.Ticks);hash=Mix(hash,(uint)value.Header.Priority);hash=Mix(hash,value.Header.Sequence.Value);hash=Mix(hash,value.Header.Id.Value);}return Mix(hash,timeline.Revision.Value);}
 static SimulationEventHeader[] CreateStressHeaders(){var random=new FixedRandom(0x6A09E667F3BCC909);var result=new SimulationEventHeader[2048];for(var index=0;index<result.Length;index++){var time=(long)(random.Next()>>1)-long.MaxValue/2;var priority=(int)(random.Next()%2001)-1000;result[index]=Header((ulong)index+1,time,priority,(ulong)index+1);}return result;}
 static void Shuffle(SimulationEventHeader[] values,ulong seed){var random=new FixedRandom(seed);for(var index=values.Length-1;index>0;index--){var other=(int)(random.Next()%(ulong)(index+1));(values[index],values[other])=(values[other],values[index]);}}
 static ulong Hash(ReadOnlySpan<SimulationEventHeader> values){ulong hash=14695981039346656037;foreach(ref readonly var value in values){hash=Mix(hash,(ulong)value.Time.Ticks);hash=Mix(hash,(uint)value.Priority);hash=Mix(hash,value.Sequence.Value);hash=Mix(hash,value.Id.Value);}return hash;}
