@@ -1,44 +1,51 @@
 # NovaCore
 
-NovaCore is a precision-first rendering and simulation foundation for future large-scale spaceflight games. It is not a complete game engine.
+NovaCore is a precision-first rendering and simulation foundation for large-scale spaceflight games. It is not a complete game engine.
 
 ## Philosophy
 
-Authoritative spatial state is managed C# data using double precision. Rendering is camera-relative: the renderer receives derived positions and never owns simulation state. Managed immutable snapshots provide a consistent frame of reference for resolution and rendering boundaries.
+Authoritative simulation state remains managed C# data in double precision. Rendering is camera-relative, and Graphics never owns simulation state. Immutable frame snapshots provide a deterministic evaluation boundary. The native backend is C++20 and Vulkan; the managed runtime remains CLR/JIT compiled.
 
-The current renderer is a C++20 Vulkan backend called from a JIT-compiled .NET host through a narrow C ABI. Hierarchical celestial reference-frame mathematics remains managed and uses double precision throughout.
+Hierarchical celestial reference frames, camera state, and camera control remain managed. Vulkan consumes only resolved GPU transport data.
 
 ## Current Architecture
 
 ```text
-Managed sample state
+Win32 input
     ↓
-Reference Frames
+NativeInputState
     ↓
-ReferenceFrameSnapshot
+DebugCameraInput → bounded CameraCommand span → FreeCameraController
     ↓
-Root/ECL UniversePosition
+CameraState + ReferenceFrameSnapshot / ReferenceFrameResolver
     ↓
-RenderFrameSubmission
+CameraRenderSnapshotBuilder
     ↓
-EncodedPosition GPU transport
+GpuCameraData + RenderFrameSubmission
     ↓
-Vulkan renderer
+NcCameraData → Vulkan storage buffer → vertex shader view/projection
 ```
 
-The repository currently contains a single-threaded sample host, managed reference-frame resolution, reusable native triangle geometry, batched render submissions, and an indexed-instanced Vulkan draw path.
+`CameraState` is the only authoritative camera state. Native code reports input snapshots and owns rendering transport; it does not control the camera or resolve reference frames. `GpuCameraData` is the only camera record that crosses the render-submission boundary.
+
+## Current Capabilities
+
+- Double-precision managed spatial and frame mathematics.
+- Immutable evaluated ECL/ORB/CCE/CCI/CCF frame snapshots.
+- GPU high/low camera-relative position transport.
+- A frame-aware Free camera with Raw Input look and logarithmic speed adjustment.
+- Reusable indexed triangle geometry, stable mesh batching, and indexed instanced Vulkan drawing.
+- Resize-safe swapchain lifecycle, validation-enabled Debug runs, and deterministic shutdown.
 
 ## Precision Model
 
-`UniversePosition` is the root/ECL-resolved compatibility representation used at the rendering boundary. Contextual positions use `FramePosition` and resolve through a managed `ReferenceFrameSnapshot` before entering Graphics.
-
-The renderer encodes each root-space double component as high/low FP32 values. The vertex shader reconstructs object-minus-camera translation from those pairs, so normal GPU FP32 rendering operates on small camera-relative values. Graphics transport data is not authoritative simulation state.
+`FramePosition` is authoritative contextual position data. It resolves through the managed frame snapshot to root/ECL `UniversePosition` before Graphics. Each root-space component is encoded as high/low FP32 values; the shader reconstructs object-minus-camera translation before applying the FP32 view/projection transform. The camera remains at render-space origin.
 
 See [Precision Model](docs/precision-model.md).
 
 ## Reference Frames
 
-The current managed frame system supports a validated immutable hierarchy:
+The managed hierarchy is:
 
 ```text
 ECL
@@ -48,58 +55,77 @@ ECL
         └── CCF
 ```
 
-ECL is the root star-centered ecliptic inertial frame. ORB, CCE, CCI, and CCF are evaluated frame types with explicit snapshot-time transforms and kinematics. The system resolves positions, directions, orientations, and velocities, including rotating-frame transport.
-
 See [Hierarchical Celestial Reference Frames](docs/reference-frames.md).
 
-## Rendering
+## Camera Controls
 
-The native Vulkan renderer owns the Win32 window, Vulkan resources, reusable vertex/index buffers, mesh lookup, draw recording, and destruction. The managed side assembles immutable-style `RenderFrameSubmission` snapshots containing contiguous `RenderObject` records.
+- `W` / `S` — forward along local `-Z` / backward along local `+Z`
+- `A` / `D` — strafe left / right
+- `Q` / `E` — down / up
+- Hold RMB and move the mouse — relative Raw Input look
+- Mouse wheel — logarithmically adjust movement speed
+- `R` — restore the default pose and movement speed
 
-`MeshHandle` is a fixed-width transport identifier. The current native mesh table contains one built-in colored triangle. Objects sharing a mesh are assembled into stable batches and rendered with indexed instancing: one draw call per mesh batch.
+The implemented controller is Free camera only. Orbit and Follow cameras are planned work.
+
+## Build and Run
+
+```powershell
+cmake -S native/NovaCore.Native -B build/native-ninja -G Ninja
+cmake --build build/native-ninja --config Debug
+dotnet build NovaCore.sln -c Debug
+
+dotnet run --project samples/NovaCore.Triangle -c Debug -- --objects=1000
+dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=frames
+dotnet run --project samples/NovaCore.Triangle -c Debug -- --objects=1000 --log=camera
+```
+
+See [Build on Windows](docs/build-windows.md).
 
 ## Testing
 
-Automated console tests cover:
+```powershell
+dotnet run --project tests/NovaCore.Precision.Tests -c Debug
+dotnet run --project tests/NovaCore.Graphics.Tests -c Debug
+dotnet run --project tests/NovaCore.ReferenceFrames.Tests -c Debug
+dotnet run --project tests/NovaCore.Camera.Tests -c Debug
+```
 
-- high/low precision encoding and camera-relative reconstruction;
-- Graphics transport conversion, batch assembly, capacity checks, and ABI/layout validation;
-- reference-frame transform algebra, hierarchy validation, frame conversion, ORB/CCI/CCF construction, rotating-frame velocity transport, and allocation checks.
+Tests cover precision transport, render and ABI layouts, mesh batching, reference-frame mathematics, camera control, input command mapping, and steady-state allocation checks.
 
-The reference-frame benchmark resolves 10,000 positions after snapshot construction and verifies steady-state managed allocations are zero. Vulkan ABI structure layout is checked between managed interop and the loaded native library.
+## Current Limitations
+
+NovaCore has no deterministic simulation clock, orbital propagation, gravity, celestial-body simulation, spacecraft simulation, Orbit or Follow camera, terrain, materials, ECS, scene graph, gameplay, or asset pipeline.
 
 ## Milestone Roadmap
 
 Completed implementation:
 
-- ✓ Milestone 1 — Precision foundation
-- ✓ Milestone 2 — Camera-relative rendering
-- ✓ Milestone 3 — Reusable meshes and indexed instanced rendering
-- ✓ Milestone 4 — Hierarchical celestial reference frames
+- Milestone 1 — Precision foundation
+- Milestone 2 — Camera-relative rendering
+- Milestone 3 — Reusable meshes and indexed instanced rendering
+- Milestone 4 — Hierarchical celestial reference frames
+- Milestone 5 — Frame-aware Free camera architecture
 
-Planned work; not present in the current repository:
+Planned work; not present in this repository:
 
-- □ Milestone 5 — Frame-aware camera architecture
-- □ Milestone 6 — Deterministic simulation clock
-- □ Milestone 7 — Celestial-body state and orbital geometry
-- □ Milestone 8 — Spacecraft dynamics and flight controls
+- Milestone 6 — Deterministic simulation clock
+- Milestone 7 — Celestial-body state and orbital geometry
+- Milestone 8 — Spacecraft dynamics and flight controls
 
 ## Repository Layout
 
 - `src/` — managed Core, Graphics, Interop, Platform, and reserved Simulation assemblies.
 - `native/` — C++20 Vulkan library and shaders.
-- `tests/` — deterministic precision, graphics, and reference-frame tests.
-- `samples/` — the managed Vulkan triangle sample and demonstration scenes.
-- `docs/` — architecture, precision, interop, reference-frame, and Windows build documentation.
+- `tests/` — deterministic console test projects.
+- `samples/` — managed Vulkan demonstration sample and scenes.
+- `docs/` — technical architecture and build documentation.
 
 ## Documentation
 
 - [Architecture](docs/architecture.md)
+- [Camera](docs/camera.md)
 - [Precision Model](docs/precision-model.md)
 - [Interop](docs/interop.md)
 - [Hierarchical Celestial Reference Frames](docs/reference-frames.md)
 - [Build on Windows](docs/build-windows.md)
-
-## Current Status
-
-NovaCore currently provides a managed double-precision spatial foundation, immutable evaluated celestial reference-frame snapshots, high/low camera-relative GPU transport, and a minimal Vulkan indexed-instancing sample. It remains a foundation rather than a complete engine: it has no gameplay, orbital propagation, simulation clock, camera architecture, asset pipeline, or general resource system.

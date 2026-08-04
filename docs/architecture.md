@@ -10,4 +10,6 @@ The native library owns the Win32 window, Vulkan instance, selected GPU, device,
 
 The current sample is single-threaded and uses one frame in flight. Each frame pumps Win32 messages, invokes the managed callback, uploads a contiguous camera/object storage-buffer submission, acquires an image, records indexed instanced draws, submits, and presents. Resize recreates swapchain-dependent resources after in-flight work completes. The sample remains open until its window closes, then reports average frame time and shuts down deterministically.
 
-Current limitations include one window, one built-in triangle mesh, one foreground thread, no asset pipeline, no camera architecture, no simulation clock, and no celestial-body or spacecraft simulation.
+The camera path is managed: native Win32 input is mapped to a bounded `CameraCommand` span, `FreeCameraController` updates authoritative frame-aware `CameraState`, and `CameraRenderSnapshotBuilder` converts it to `GpuCameraData`. Native code neither controls the camera nor resolves reference frames. The current implementation is Free camera only.
+
+Current limitations include one window, one built-in triangle mesh, one foreground thread, no asset pipeline, no deterministic simulation clock, and no celestial-body or spacecraft simulation.

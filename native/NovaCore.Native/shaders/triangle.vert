@@ -1,6 +1,7 @@
 #version 460
 
 struct EncodedPosition { vec4 high; vec4 low; };
+struct GpuCameraData { EncodedPosition position; mat4 viewProjection; };
 struct GpuRenderObject {
   EncodedPosition position;
   vec4 rotation;
@@ -12,7 +13,7 @@ struct GpuRenderObject {
 };
 
 layout(std430, set = 0, binding = 0) readonly buffer GpuFrameData {
-  EncodedPosition camera;
+  GpuCameraData camera;
   GpuRenderObject objects[];
 } frameData;
 
@@ -27,9 +28,9 @@ vec3 Rotate(vec4 q, vec3 v) {
 
 void main() {
   GpuRenderObject object = frameData.objects[gl_InstanceIndex];
-  vec3 relativePosition = (object.position.high.xyz - frameData.camera.high.xyz) +
-                          (object.position.low.xyz - frameData.camera.low.xyz);
+  vec3 relativePosition = (object.position.high.xyz - frameData.camera.position.high.xyz) +
+                          (object.position.low.xyz - frameData.camera.position.low.xyz);
   vec3 local = Rotate(object.rotation, inPosition * object.scale.xyz);
-  gl_Position = vec4(local + relativePosition, 1.0);
+  gl_Position = frameData.camera.viewProjection * vec4(local + relativePosition, 1.0);
   color = inColor;
 }

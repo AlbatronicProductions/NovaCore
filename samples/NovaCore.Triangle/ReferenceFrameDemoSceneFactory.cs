@@ -15,7 +15,8 @@ internal static class ReferenceFrameDemoSceneFactory
             (new ReferenceFrameDefinition(cciId,cceId,ReferenceFrameKind.Cci,"CCI"),CelestialFrameFactory.Cci(Double3.Zero,Double3.Zero,Double3.UnitZ,Double3.UnitX)),
             (new ReferenceFrameDefinition(ccfId,cciId,ReferenceFrameKind.Ccf,"CCF"),CelestialFrameFactory.Ccf(Math.PI/4d,.1d))]);
         var resolver=new ReferenceFrameResolver(snapshot);
-        var local=new[]{new FramePosition(root.Frame,Double3.Zero),new FramePosition(orbId,new Double3(.1,0,0)),new FramePosition(cceId,Double3.Zero),new FramePosition(cciId,new Double3(0,.1,0)),new FramePosition(ccfId,new Double3(.1,0,0))};
+        // All markers begin in front of the identity ECL camera (local -Z), with visible depth separation.
+        var local=new[]{new FramePosition(root.Frame,root.Value+new Double3(0,0,-2)),new FramePosition(orbId,new Double3(-.20,.10,-3)),new FramePosition(cceId,new Double3(.10,-.15,-2.5)),new FramePosition(cciId,new Double3(0,.20,-3.5)),new FramePosition(ccfId,new Double3(.12,0,-4))};
         var result=new SampleRenderableState[local.Length];
         for(var i=0;i<result.Length;i++){resolver.TryResolvePosition(local[i],out var pos);result[i]=new(pos,DoubleQuaternion.Identity,new Double3(1,1,1),MeshHandle.Triangle);}
         return result;

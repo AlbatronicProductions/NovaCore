@@ -12,5 +12,4 @@ public static class RenderSubmission
         return new RenderObject(EncodedPosition.Encode(position.Value), transform, mesh);
     }
 
-    public static EncodedPosition EncodeCamera(in RenderOrigin origin) => EncodedPosition.Encode(origin.CameraPosition.Value);
 }

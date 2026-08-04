@@ -15,19 +15,20 @@ public sealed class RenderFrameSubmission
         _batches = new RenderBatch[capacity];
     }
 
-    public EncodedPosition Camera { get; private set; }
+    public GpuCameraData Camera { get; private set; }
     public ReadOnlySpan<RenderObject> Objects => _objects.AsSpan(0, ObjectCount);
     public ReadOnlySpan<RenderBatch> Batches => _batches.AsSpan(0, BatchCount);
     public int Capacity => _objects.Length;
     public int ObjectCount { get; private set; }
     public int BatchCount { get; private set; }
 
-    public void Begin(in RenderOrigin camera)
+    public void Begin(in GpuCameraData camera)
     {
-        Camera = RenderSubmission.EncodeCamera(camera);
+        Camera = camera;
         ObjectCount = 0;
         BatchCount = 0;
     }
+
 
     public void Add(in UniversePosition position, in DoubleQuaternion rotation, in Double3 scale, MeshHandle mesh)
     {

@@ -10,7 +10,8 @@ public enum LogCategory : uint
     Input = 1 << 3,
     Renderer = 1 << 4,
     Validation = 1 << 5,
-    All = Startup | Vulkan | Precision | Input | Renderer | Validation,
+    Camera = 1 << 6,
+    All = Startup | Vulkan | Precision | Input | Renderer | Validation | Camera,
 }
 
 public readonly record struct LogOptions(LogCategory Enabled)
@@ -29,7 +30,7 @@ public readonly record struct LogOptions(LogCategory Enabled)
                 if (value.Equals("all", StringComparison.OrdinalIgnoreCase)) { enabled |= LogCategory.All; continue; }
                 if (!Enum.TryParse<LogCategory>(value, true, out var category) || category is LogCategory.None or LogCategory.All)
                 {
-                    options = default; error = $"Unknown log category '{value}'. Use startup, vulkan, precision, input, renderer, validation, or all."; return false;
+                    options = default; error = $"Unknown log category '{value}'. Use startup, vulkan, precision, input, renderer, validation, camera, or all."; return false;
                 }
                 enabled |= category;
             }

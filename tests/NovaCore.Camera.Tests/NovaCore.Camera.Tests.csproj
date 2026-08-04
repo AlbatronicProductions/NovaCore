@@ -1,0 +1,1 @@
+<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><OutputType>Exe</OutputType></PropertyGroup><ItemGroup><ProjectReference Include="..\..\src\NovaCore.Core\NovaCore.Core.csproj" /><ProjectReference Include="..\..\src\NovaCore.Interop\NovaCore.Interop.csproj" /><Compile Include="..\..\samples\NovaCore.Triangle\DebugCameraInput.cs" Link="DebugCameraInput.cs" /></ItemGroup></Project>

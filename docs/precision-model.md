@@ -2,7 +2,7 @@
 
 Authoritative spatial values use `Double3` and double-precision quaternions. `FramePosition` is the contextual authoritative position representation. It resolves through a managed immutable `ReferenceFrameSnapshot` to a root/ECL `UniversePosition` before entering Graphics.
 
-`UniversePosition` contains a root-space `Double3` and root `ReferenceFrameId`. `RenderOrigin` identifies the camera root position at the rendering boundary. `ReferenceFrame.Resolve` verifies the shared root frame and produces a camera-relative `RelativePosition`.
+`UniversePosition` contains a root-space `Double3` and root `ReferenceFrameId`. The authoritative camera resolves through `CameraRenderSnapshotBuilder` to root/ECL position and orientation before it becomes `GpuCameraData`. Graphics receives the resulting encoded camera position as GPU transport.
 
 The rendering flow is:
 

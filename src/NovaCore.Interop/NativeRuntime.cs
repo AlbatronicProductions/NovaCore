@@ -10,6 +10,8 @@ public struct NativeEncodedPosition
     public float HighX, HighY, HighZ, HighPadding;
     public float LowX, LowY, LowZ, LowPadding;
 }
+[StructLayout(LayoutKind.Sequential)] public struct NativeFloat4x4 { public float C0R0,C0R1,C0R2,C0R3,C1R0,C1R1,C1R2,C1R3,C2R0,C2R1,C2R2,C2R3,C3R0,C3R1,C3R2,C3R3; }
+[StructLayout(LayoutKind.Sequential)] public struct NativeCameraData { public NativeEncodedPosition Position; public NativeFloat4x4 ViewProjection; }
 
 [StructLayout(LayoutKind.Sequential)]
 public struct NativeMeshHandle { public uint Value; }
@@ -28,17 +30,18 @@ public struct NativeRenderObject { public NativeEncodedPosition Position; public
 public struct NativeDrawBatch { public NativeMeshHandle Mesh; public uint FirstObject, ObjectCount, Padding; }
 
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct NativeFrameSubmission { public NativeEncodedPosition Camera; public NativeRenderObject* Objects; public uint ObjectCount; public NativeDrawBatch* Batches; public uint BatchCount; }
+public unsafe struct NativeFrameSubmission { public NativeCameraData Camera; public NativeRenderObject* Objects; public uint ObjectCount; public NativeDrawBatch* Batches; public uint BatchCount; }
 
 [StructLayout(LayoutKind.Sequential)]
 public struct NativeAbiLayout
 {
-    public uint EncodedPositionSize, RenderTransformSize, RenderObjectSize, RenderObjectPositionOffset, RenderObjectTransformOffset, RenderObjectMeshOffset;
+    public uint EncodedPositionSize, CameraDataSize, CameraPositionOffset, CameraViewProjectionOffset, RenderTransformSize, RenderObjectSize, RenderObjectPositionOffset, RenderObjectTransformOffset, RenderObjectMeshOffset;
     public uint DrawBatchSize, FrameSubmissionSize, FrameObjectsOffset, FrameBatchesOffset;
+    public uint InputStateSize, InputDeltaSecondsOffset, InputMoveLeftOffset, InputMoveRightOffset, InputMoveForwardOffset, InputMoveBackwardOffset, InputMoveDownOffset, InputMoveUpOffset, InputResetOffset, InputLookActiveOffset, InputMouseDeltaXOffset, InputMouseDeltaYOffset, InputMouseWheelDetentsOffset;
 }
 
 [StructLayout(LayoutKind.Sequential)]
-public struct NativeInputState { public float DeltaSeconds; public uint MoveLeft, MoveRight, MoveForward, MoveBackward; }
+public struct NativeInputState { public float DeltaSeconds; public uint MoveLeft, MoveRight, MoveForward, MoveBackward, MoveDown, MoveUp, Reset, LookActive; public float MouseDeltaX, MouseDeltaY; public int MouseWheelDetents; }
 
 public enum NativeHostEventType : uint { Diagnostic = 1, UpdateFrame = 2 }
 

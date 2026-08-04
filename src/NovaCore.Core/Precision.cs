@@ -32,14 +32,3 @@ public readonly record struct DoubleQuaternion(double X, double Y, double Z, dou
 public readonly record struct ReferenceFrameId(long Value);
 public readonly record struct UniversePosition(Double3 Value, ReferenceFrameId Frame);
 public readonly record struct RelativePosition(Double3 Value);
-public readonly record struct RenderOrigin(UniversePosition CameraPosition);
-
-public static class ReferenceFrame
-{
-    public static RelativePosition Resolve(in UniversePosition position, in RenderOrigin origin)
-    {
-        if (position.Frame != origin.CameraPosition.Frame)
-            throw new InvalidOperationException("Reference-frame conversion is not implemented in Milestone 1.");
-        return new RelativePosition(position.Value - origin.CameraPosition.Value);
-    }
-}
