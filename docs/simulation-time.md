@@ -20,6 +20,22 @@ Preallocation may allocate during setup. After adequate capacity has been suppli
 
 There is no `SimulationClock`, event execution, processed-event history, payload framework, state transition evaluator, analytical trajectory, or snapshot implementation in 6B-1.
 
+## Exact authoritative clock (Milestone 6B-2)
+
+`SimulationClock` owns the managed authoritative `CurrentTime`, pause state, active normalized `SimulationRate`, carried rate remainder, advancement guard, configured `MaximumEventsPerAdvance`, and one injected `SimulationTimeline`. Its default event cap is 10,000. The clock does not own simulation state, reference frames, rendering, or native time.
+
+`AdvanceTo(target)` is an explicit exact-time command and is allowed while paused. It never moves time backward. With no pending event, or when the canonical next event is after the target, it reaches the target. When the next event is at or before the target, it stops exactly at that event boundary and returns the canonical header. `AdvanceUntilNextEvent()` similarly moves to the next boundary, or returns `NoPendingEvent` without moving time.
+
+In 6B-2, reaching a boundary does not execute, dequeue, cancel, consume, or otherwise mutate the event. Repeated advancement at or beyond the boundary intentionally returns the same pending event until 6B-3 introduces transactional event execution. Clock advancement does not change `TimelineRevision` or `StateRevision`.
+
+Pause and resume are idempotent and do not move time, alter the rate, or catch up host time. `TrySetRate` changes only a non-equivalent normalized rate and resets its carried remainder; 6B-2 has no host-duration scaling, so that remainder remains zero in normal operation. 6B-4 will add rational host-duration advancement and its exact carried-debt semantics.
+
+The clock rejects nested advancement with a controlled result and restores its guard with `finally`. It has no event-loop processing yet; the maximum-event setting is retained solely for the approved later execution API.
+
+### Explicit 6B-2 exclusions
+
+There is no event transition evaluator, state mutation, generated event, payload, processed-event history, `StateRevision` update, host-duration advancement, host-time debt, analytical trajectory, `SimulationSnapshot`, reference-frame integration, or sample integration. Milestone 6B-3 will add transactional event execution; Milestone 6B-4 will add host-duration rational advancement.
+
 ### FUTURE ROADMAP — SimulationSnapshot
 
 A later milestone will introduce an immutable `SimulationSnapshot` tied to one explicit `SimulationInstant`. It is expected to carry the matching `TimelineRevision`, `StateRevision`, authoritative state or a stable state reference, the matching `ReferenceFrameSnapshot`, deterministic identity/version information, and optionally a canonical state/event hash. That future boundary will support replay validation, save/load foundations, debugging, prediction invalidation, rollback, and future synchronization while preserving the flow: authoritative simulation → evaluated reference frames → resolved render snapshot → Graphics transport. None of those snapshot, rollback, networking, save/load, replay-restoration, or cross-platform bitwise-determinism capabilities exists today.
