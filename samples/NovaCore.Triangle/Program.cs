@@ -2,22 +2,29 @@ using System.Runtime.InteropServices;
 using NovaCore.Core;
 using NovaCore.Graphics;
 using NovaCore.Interop;
+using NovaCore.Platform;
 
-return Run(args.Contains("--verbose-input", StringComparer.Ordinal));
+if (!LogOptions.TryParse(args, out var logOptions, out var logError))
+{
+    Console.Error.WriteLine(logError);
+    return 2;
+}
 
-static unsafe int Run(bool verboseInput)
+return Run(logOptions);
+
+static unsafe int Run(LogOptions logOptions)
 {
     var frame = new ReferenceFrameId(1);
     var diagnosticCamera = new RenderOrigin(new UniversePosition(new Double3(4_000_000_000_000d, -3_000_000_000_000d, 7_000_000_000_000d), frame));
     var diagnosticObject = new UniversePosition(new Double3(4_000_000_000_000d + 0.25d, -3_000_000_000_000d - 0.125d, 7_000_000_000_000d + 0.5d), frame);
     var visualObject = new UniversePosition(diagnosticCamera.CameraPosition.Value, frame);
-    var state = new CameraState(diagnosticCamera, visualObject, verboseInput);
+    var state = new CameraState(diagnosticCamera, visualObject, logOptions);
     var renderObject = RenderSubmission.CreateObject(visualObject, state.Origin, MeshHandle.Triangle);
     NativeRenderObject nativeObject = ToNativeObject(renderObject);
     NativeFrameSubmission submission = new() { Camera = ToNativePosition(RenderSubmission.EncodeCamera(state.Origin)), Objects = &nativeObject, ObjectCount = 1 };
 
-    PrintPrecisionReport(diagnosticCamera, diagnosticObject);
-    PrintVisualMode(state, renderObject.Position, submission.Camera);
+    if (logOptions.IsEnabled(LogCategory.Precision)) PrintPrecisionReport(diagnosticCamera, diagnosticObject);
+    if (logOptions.IsEnabled(LogCategory.Startup)) PrintVisualMode(state, renderObject.Position, submission.Camera);
     var handle = GCHandle.Alloc(state);
     try
     {
@@ -32,7 +39,9 @@ static unsafe void HostCallback(NativeHostEvent* hostEvent, IntPtr userData)
     var state = (CameraState)GCHandle.FromIntPtr(userData).Target!;
     if (hostEvent->Type == NativeHostEventType.Diagnostic)
     {
-        Console.WriteLine($"[native] {Marshal.PtrToStringUTF8((IntPtr)hostEvent->Utf8Message)}");
+        var category = (LogCategory)hostEvent->LogCategory;
+        if (category is LogCategory.None or LogCategory.Validation || state.LogOptions.IsEnabled(category))
+            Console.WriteLine($"[native] {Marshal.PtrToStringUTF8((IntPtr)hostEvent->Utf8Message)}");
         return;
     }
 
@@ -46,10 +55,10 @@ static unsafe void HostCallback(NativeHostEvent* hostEvent, IntPtr userData)
     else if (direction.X != 0d || direction.Y != 0d)
         state.Origin = new RenderOrigin(new UniversePosition(cameraBefore.Value + movement, cameraBefore.Frame));
     hostEvent->Submission->Camera = ToNativePosition(RenderSubmission.EncodeCamera(state.Origin));
-    if (state.VerboseInput && (reset || direction.X != 0d || direction.Y != 0d))
+    if (state.LogOptions.IsEnabled(LogCategory.Input) && (reset || direction.X != 0d || direction.Y != 0d))
         LogMovement(reset ? "R" : DirectionName(direction), input.DeltaSeconds, movement, cameraBefore, state.Origin.CameraPosition, state.ObjectPosition);
     state.ReportElapsed += input.DeltaSeconds;
-    if (state.ReportElapsed >= 1f)
+    if (state.LogOptions.IsEnabled(LogCategory.Input) && state.ReportElapsed >= 1f)
     {
         state.ReportElapsed = 0f;
         PrintCurrentVisualState(state);
@@ -108,13 +117,13 @@ static string DirectionName(Double3 direction) => direction switch
     _ => "combined",
 };
 
-file sealed class CameraState(RenderOrigin initialOrigin, UniversePosition objectPosition, bool verboseInput)
+file sealed class CameraState(RenderOrigin initialOrigin, UniversePosition objectPosition, LogOptions logOptions)
 {
     public const double MovementSpeed = 0.1d;
     public RenderOrigin InitialOrigin { get; } = initialOrigin;
     public RenderOrigin Origin = initialOrigin;
     public UniversePosition ObjectPosition { get; } = objectPosition;
-    public bool VerboseInput { get; } = verboseInput;
+    public LogOptions LogOptions { get; } = logOptions;
     public float ReportElapsed;
 }
 

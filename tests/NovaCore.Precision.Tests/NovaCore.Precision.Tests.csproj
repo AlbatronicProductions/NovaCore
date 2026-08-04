@@ -3,5 +3,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\NovaCore.Core\NovaCore.Core.csproj" />
     <ProjectReference Include="..\..\src\NovaCore.Graphics\NovaCore.Graphics.csproj" />
+    <ProjectReference Include="..\..\src\NovaCore.Platform\NovaCore.Platform.csproj" />
   </ItemGroup>
 </Project>

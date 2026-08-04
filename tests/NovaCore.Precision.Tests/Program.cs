@@ -1,5 +1,6 @@
 using NovaCore.Core;
 using NovaCore.Graphics;
+using NovaCore.Platform;
 
 var cases = new[]
 {
@@ -32,6 +33,7 @@ foreach (var test in cases)
 var plainFloat = (float)cases[0].Object.X - (float)cases[0].Camera.X;
 Assert(plainFloat == 0f, "single-float control case should lose the 0.25-unit delta");
 VerifyCameraMovementSymmetry();
+VerifyLogOptions();
 Console.WriteLine();
 Console.WriteLine("PASS");
 
@@ -53,6 +55,15 @@ static void VerifyCameraMovementSymmetry()
     Assert(Math.Abs(plusY.Y + minusY.Y) <= tolerance && Math.Abs(Math.Abs(plusY.Y) - Math.Abs(minusY.Y)) <= tolerance, "+Y/-Y camera movement is not symmetric");
     Assert(plusX.X < 0d && minusX.X > 0d, "X camera-relative subtraction has the wrong sign");
     Assert(plusY.Y < 0d && minusY.Y > 0d, "Y camera-relative subtraction has the wrong sign");
+}
+
+static void VerifyLogOptions()
+{
+    Assert(LogOptions.TryParse(["--log=input,precision", "--log=vulkan"], out var options, out _), "valid log options were rejected");
+    Assert(options.IsEnabled(LogCategory.Input) && options.IsEnabled(LogCategory.Precision) && options.IsEnabled(LogCategory.Vulkan), "log categories were not combined");
+    Assert(LogOptions.TryParse(["--verbose-input"], out var compatibility, out _) && compatibility.IsEnabled(LogCategory.Input), "verbose input alias failed");
+    Assert(!LogOptions.TryParse(["--log=unknown"], out _, out _), "invalid log category was accepted");
+    Console.WriteLine("log options: parsing and verbose-input compatibility passed");
 }
 file readonly record struct PrecisionCase(string Name, Double3 Object, Double3 Camera, double MaximumError)
 {

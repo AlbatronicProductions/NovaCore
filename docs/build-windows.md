@@ -12,4 +12,6 @@ dotnet run --project tests/NovaCore.Precision.Tests -c Debug
 dotnet run --project samples/NovaCore.Triangle -c Debug
 ```
 
-The sample places the native DLL and compiled SPIR-V shaders beside the managed executable. It runs for approximately five seconds, prints the authoritative and encoded positions, GPU diagnostics, and average frame time, then shuts down deterministically. A/D and W/S move the managed camera's universe position while the render camera remains at zero. Close the window early to end it sooner.
+The sample places the native DLL and compiled SPIR-V shaders beside the managed executable. It runs until the window is closed, then reports average frame time and shuts down deterministically. A/D and W/S move the managed camera's universe position while the render camera remains at zero.
+
+Logging is selected with repeated or comma-separated `--log=` values, for example `--log=input,precision` or `--log=vulkan --log=renderer`. Valid categories are `startup`, `vulkan`, `precision`, `input`, `renderer`, `validation`, and `all`. `--verbose-input` remains a temporary compatibility alias for `--log=input` and may be removed later.

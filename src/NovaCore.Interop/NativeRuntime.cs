@@ -23,7 +23,7 @@ public struct NativeInputState { public float DeltaSeconds; public uint MoveLeft
 public enum NativeHostEventType : uint { Diagnostic = 1, UpdateFrame = 2 }
 
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct NativeHostEvent { public NativeHostEventType Type; public byte* Utf8Message; public NativeInputState Input; public NativeFrameSubmission* Submission; }
+public unsafe struct NativeHostEvent { public NativeHostEventType Type; public uint LogCategory; public byte* Utf8Message; public NativeInputState Input; public NativeFrameSubmission* Submission; }
 
 public static partial class NativeRuntime
 {
