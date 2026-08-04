@@ -66,6 +66,30 @@ ProcessedSimulationEvent
 
 `SimulationTransactionEngine` is the sole write authority for `SimulationState`. State exposes an immutable view for evaluation; there is no public state mutation API. A canonical execution consumes exactly one event only after validation succeeds. Failed validation retains the event, state, clock time, timeline topology, ID/sequence lifetime, revisions, and processed history unchanged.
 
+## Canonical same-time group execution (Milestone 6B-3C)
+
+One execution pass represents one canonical simulation-time group at one `SimulationInstant`; one transaction remains exactly one event. `ExecuteCanonicalGroup()` may run only while the clock is already at the earliest pending timestamp. It discovers events at that timestamp and evaluates, validates, commits, consumes, and records them sequentially in canonical `(Time, Priority, Sequence, EventId)` order. Events at later timestamps remain pending.
+
+```text
+Authoritative execution pipeline
+
+SimulationClock
+    ↓
+Canonical Time Group at one SimulationInstant
+    ↓
+Event A → Evaluate → Validate → Atomic Commit
+    ↓
+Event B → Evaluate → Validate → Atomic Commit
+    ↓
+Event C → Evaluate → Validate → Atomic Commit
+    ↓
+Boundary Complete
+```
+
+Transactions intentionally remain small so every event has its own validation, atomic commit, revision change, and append-only history record. Same-time events are not merged into a compound transaction. Per-event commits are atomic; whole-group rollback is not claimed. If a later event is rejected, earlier successful commits remain, while the failing event and all later same-time events remain pending for explicit future handling.
+
+The clock's positive `MaximumEventsPerAdvance` is active for group execution. At the cap, execution returns a controlled result and preserves the canonical next event and all remaining events at the active timestamp. Reentrant group execution is rejected without mutation. Generated events remain deliberately deferred; this group boundary shape permits their future introduction without replacing the execution architecture.
+
 Validation occurs before mutation and verifies that the event remains canonical, clock time matches the evaluation timestamp, expected timeline and state revisions still match, and the transaction is internally consistent. Normal validation failure returns a controlled result and leaves current time, pending topology, both revisions, processed history, and authoritative state unchanged.
 
 After validation, history capacity is reserved before the irreversible sequence. A successful commit changes state, consumes the canonical event, advances `TimelineRevision` through that existing consumption operation, advances `StateRevision` exactly once for the marker-state change, advances clock time only after successful state/timeline mutation, and appends `ProcessedSimulationEvent`. Processed history is immutable append-only metadata containing the event header, execution time, and revision values before and after commit.

@@ -12,15 +12,17 @@ internal static class SimulationEventEvaluator
         SimulationInstant evaluationTime,
         TimelineRevision timelineRevision)
     {
-        var consistent = pending.Header.Kind == SimulationEventKind.Marker && state.MarkerValue != long.MaxValue;
-        var markerValue = consistent ? state.MarkerValue + 1 : state.MarkerValue;
+        var changesState = pending.Header.Kind == SimulationEventKind.Marker && state.MarkerValue != long.MaxValue;
+        var isNoOp = pending.Header.Kind == SimulationEventKind.NoOpMarker;
+        var consistent = changesState || isNoOp;
+        var markerValue = changesState ? state.MarkerValue + 1 : state.MarkerValue;
         return new SimulationTransaction(
             pending.Header,
             evaluationTime,
             timelineRevision,
             state.Revision,
             markerValue,
-            ChangesAuthoritativeState: consistent,
+            ChangesAuthoritativeState: changesState,
             IsInternallyConsistent: consistent);
     }
 }

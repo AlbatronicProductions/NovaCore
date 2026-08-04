@@ -10,6 +10,7 @@ internal sealed class SimulationTransactionEngine
     private readonly SimulationClock _clock;
     private readonly SimulationState _state;
     private readonly List<ProcessedSimulationEvent> _history;
+    private bool _isExecutingGroup;
 
     public SimulationTransactionEngine(SimulationClock clock, SimulationState state, int initialHistoryCapacity = 0)
     {
@@ -39,6 +40,39 @@ internal sealed class SimulationTransactionEngine
     /// </summary>
     public SimulationTransactionResult ExecuteCanonicalPendingEvent() => ValidateAndCommit(EvaluateNext());
 
+    /// <summary>
+    /// Orchestrates the canonical pending events at exactly the current clock instant. Each event
+    /// retains independent evaluation, validation, and atomic commit semantics.
+    /// </summary>
+    public SimulationCanonicalGroupResult ExecuteCanonicalGroup()
+    {
+        var groupTime = _clock.CurrentTime;
+        if (_isExecutingGroup) return GroupResult(SimulationCanonicalGroupStopReason.ReentrantExecution, groupTime, 0, false, null);
+        _isExecutingGroup = true;
+        try
+        {
+            if (!_clock.Timeline.TryPeekPending(out var pending)) return GroupResult(SimulationCanonicalGroupStopReason.NoPendingEvent, groupTime, 0, true, null);
+            if (pending.Header.Time != groupTime) return GroupResult(SimulationCanonicalGroupStopReason.NotAtBoundary, groupTime, 0, false, pending.Header);
+
+            var processed = 0;
+            while (true)
+            {
+                if (!_clock.Timeline.TryPeekPending(out pending))
+                    return GroupResult(SimulationCanonicalGroupStopReason.Completed, groupTime, processed, true, null);
+                if (pending.Header.Time != groupTime)
+                    return GroupResult(SimulationCanonicalGroupStopReason.Completed, groupTime, processed, true, pending.Header);
+                if (processed == _clock.MaximumEventsPerAdvance)
+                    return GroupResult(SimulationCanonicalGroupStopReason.EventLimitReached, groupTime, processed, false, pending.Header);
+
+                var result = ExecuteCanonicalPendingEvent();
+                if (!result.Committed)
+                    return GroupResult(SimulationCanonicalGroupStopReason.ValidationRejected, groupTime, processed, false, pending.Header);
+                processed++;
+            }
+        }
+        finally { _isExecutingGroup = false; }
+    }
+
     public SimulationTransactionResult ValidateAndCommit(SimulationTransaction transaction)
     {
         var validation = Validate(transaction);
@@ -49,7 +83,7 @@ internal sealed class SimulationTransactionEngine
         if (_history.Count == _history.Capacity) _history.EnsureCapacity(checked(_history.Count + 1));
         var timelineBefore = _clock.Timeline.Revision;
         var stateBefore = _state.CreateView().Revision;
-        _state.CommitMarkerValue(transaction.ProposedMarkerValue);
+        if (transaction.ChangesAuthoritativeState) _state.CommitMarkerValue(transaction.ProposedMarkerValue);
         if (!_clock.Timeline.TryConsumeCanonical(transaction.Event, out _)) throw new InvalidOperationException("Validated canonical event could not be consumed.");
         _clock.AdvanceAfterSuccessfulTransaction(transaction.EvaluationTime);
         var processed = new ProcessedSimulationEvent(transaction.Event, transaction.EvaluationTime, timelineBefore, _clock.Timeline.Revision, stateBefore, _state.CreateView().Revision);
@@ -65,9 +99,22 @@ internal sealed class SimulationTransactionEngine
         if (transaction.ExpectedTimelineRevision != _clock.Timeline.Revision) return new(SimulationTransactionValidationStatus.TimelineRevisionMismatch);
         var state = _state.CreateView();
         if (transaction.ExpectedStateRevision != state.Revision) return new(SimulationTransactionValidationStatus.StateRevisionMismatch);
-        if (!transaction.IsInternallyConsistent || !transaction.ChangesAuthoritativeState || transaction.ProposedMarkerValue != state.MarkerValue + 1) return new(SimulationTransactionValidationStatus.InvalidTransaction);
-        if (state.Revision.Value == ulong.MaxValue) return new(SimulationTransactionValidationStatus.StateRevisionOverflow);
+        if (!transaction.IsInternallyConsistent) return new(SimulationTransactionValidationStatus.InvalidTransaction);
+        if (transaction.ChangesAuthoritativeState && transaction.ProposedMarkerValue != state.MarkerValue + 1) return new(SimulationTransactionValidationStatus.InvalidTransaction);
+        if (!transaction.ChangesAuthoritativeState && transaction.ProposedMarkerValue != state.MarkerValue) return new(SimulationTransactionValidationStatus.InvalidTransaction);
+        if (transaction.ChangesAuthoritativeState && state.Revision.Value == ulong.MaxValue) return new(SimulationTransactionValidationStatus.StateRevisionOverflow);
         if (!_clock.Timeline.CanConsumeCanonical(transaction.Event)) return new(SimulationTransactionValidationStatus.TimelineRevisionOverflow);
         return SimulationTransactionValidationResult.Valid;
     }
+
+    internal SimulationCanonicalGroupResult ExecuteCanonicalGroupWhileGuardedForTest()
+    {
+        if (_isExecutingGroup) throw new InvalidOperationException("Test seam cannot nest its own group guard.");
+        _isExecutingGroup = true;
+        try { return ExecuteCanonicalGroup(); }
+        finally { _isExecutingGroup = false; }
+    }
+
+    private SimulationCanonicalGroupResult GroupResult(SimulationCanonicalGroupStopReason reason, SimulationInstant groupTime, int processed, bool complete, SimulationEventHeader? pending) =>
+        new(reason, groupTime, processed, complete, pending, _clock.Timeline.Revision, _state.CreateView().Revision);
 }
