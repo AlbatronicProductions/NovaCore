@@ -42,6 +42,30 @@ Milestone 6B-3A establishes the managed authoritative mutation boundary. `Simula
 
 The flow is deliberately separated: scheduled simulation command → pure evaluation → immutable `SimulationTransaction` → validation → commit. Evaluators receive only `SimulationStateView`; they cannot mutate authoritative state. The current marker transaction is infrastructure proof only and does not represent gameplay, propulsion, trajectory propagation, or a payload framework.
 
+### Canonical execution (Milestone 6B-3B)
+
+`SimulationTransactionEngine.ExecuteCanonicalPendingEvent()` performs exactly one canonical execution at the clock's current event boundary. It obtains the timeline minimum, invokes the pure evaluator, validates the immutable transaction, and commits it. It neither advances toward a future boundary nor processes a same-time group; `SimulationClock` retains advancement orchestration and a later slice will define grouped execution.
+
+```text
+Authoritative mutation pipeline
+
+SimulationClock
+    ↓
+SimulationEventEvaluator (pure)
+    ↓
+SimulationTransaction (immutable)
+    ↓
+Validation
+    ↓
+SimulationTransactionEngine (sole mutation authority)
+    ↓
+SimulationState
+SimulationTimeline
+ProcessedSimulationEvent
+```
+
+`SimulationTransactionEngine` is the sole write authority for `SimulationState`. State exposes an immutable view for evaluation; there is no public state mutation API. A canonical execution consumes exactly one event only after validation succeeds. Failed validation retains the event, state, clock time, timeline topology, ID/sequence lifetime, revisions, and processed history unchanged.
+
 Validation occurs before mutation and verifies that the event remains canonical, clock time matches the evaluation timestamp, expected timeline and state revisions still match, and the transaction is internally consistent. Normal validation failure returns a controlled result and leaves current time, pending topology, both revisions, processed history, and authoritative state unchanged.
 
 After validation, history capacity is reserved before the irreversible sequence. A successful commit changes state, consumes the canonical event, advances `TimelineRevision` through that existing consumption operation, advances `StateRevision` exactly once for the marker-state change, advances clock time only after successful state/timeline mutation, and appends `ProcessedSimulationEvent`. Processed history is immutable append-only metadata containing the event header, execution time, and revision values before and after commit.

@@ -33,6 +33,12 @@ internal sealed class SimulationTransactionEngine
         return SimulationEventEvaluator.Evaluate(pending, _state.CreateView(), _clock.CurrentTime, _clock.Timeline.Revision);
     }
 
+    /// <summary>
+    /// Executes exactly the canonical pending event at the authoritative clock boundary. It does
+    /// not advance to a future boundary; <see cref="SimulationClock"/> remains responsible for that.
+    /// </summary>
+    public SimulationTransactionResult ExecuteCanonicalPendingEvent() => ValidateAndCommit(EvaluateNext());
+
     public SimulationTransactionResult ValidateAndCommit(SimulationTransaction transaction)
     {
         var validation = Validate(transaction);
