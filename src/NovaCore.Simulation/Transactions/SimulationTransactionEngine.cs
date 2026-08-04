@@ -11,6 +11,7 @@ internal sealed class SimulationTransactionEngine
     private readonly SimulationState _state;
     private readonly List<ProcessedSimulationEvent> _history;
     private bool _isExecutingGroup;
+    private bool _isOrchestratingExecution;
 
     public SimulationTransactionEngine(SimulationClock clock, SimulationState state, int initialHistoryCapacity = 0)
     {
@@ -73,6 +74,41 @@ internal sealed class SimulationTransactionEngine
         finally { _isExecutingGroup = false; }
     }
 
+    /// <summary>
+    /// Coasts to one boundary, executes at most that one canonical group, then resumes coasting
+    /// toward the requested time without executing a second boundary group.
+    /// </summary>
+    public SimulationExecutionResult AdvanceAndExecuteOneCanonicalGroup(SimulationInstant target)
+    {
+        if (_isOrchestratingExecution) return ExecutionResult(SimulationExecutionStopReason.ReentrantExecution, target, SimulationAdvanceStopReason.ReentrantAdvance, null, null);
+        _isOrchestratingExecution = true;
+        try
+        {
+            var initial = _clock.AdvanceTo(target);
+            if (initial.Reason == SimulationAdvanceStopReason.ReachedTarget)
+                return ExecutionResult(SimulationExecutionStopReason.ReachedTarget, target, initial.Reason, null, null);
+            if (initial.Reason == SimulationAdvanceStopReason.TargetBeforeCurrent)
+                return ExecutionResult(SimulationExecutionStopReason.TargetBeforeCurrent, target, initial.Reason, null, null);
+            if (initial.Reason == SimulationAdvanceStopReason.ReentrantAdvance)
+                return ExecutionResult(SimulationExecutionStopReason.ReentrantAdvance, target, initial.Reason, null, null);
+
+            var group = ExecuteCanonicalGroup();
+            if (!group.IsComplete)
+                return ExecutionResult(MapGroupReason(group.Reason), target, initial.Reason, null, group);
+
+            var continuation = _clock.AdvanceTo(target);
+            var reason = continuation.Reason == SimulationAdvanceStopReason.ReachedTarget
+                ? SimulationExecutionStopReason.Completed
+                : continuation.Reason == SimulationAdvanceStopReason.ReachedEventBoundary
+                    ? SimulationExecutionStopReason.NextBoundaryReached
+                    : continuation.Reason == SimulationAdvanceStopReason.TargetBeforeCurrent
+                        ? SimulationExecutionStopReason.TargetBeforeCurrent
+                        : SimulationExecutionStopReason.ReentrantAdvance;
+            return ExecutionResult(reason, target, initial.Reason, continuation.Reason, group);
+        }
+        finally { _isOrchestratingExecution = false; }
+    }
+
     public SimulationTransactionResult ValidateAndCommit(SimulationTransaction transaction)
     {
         var validation = Validate(transaction);
@@ -115,6 +151,27 @@ internal sealed class SimulationTransactionEngine
         finally { _isExecutingGroup = false; }
     }
 
+    internal SimulationExecutionResult AdvanceAndExecuteOneCanonicalGroupWhileGuardedForTest(SimulationInstant target)
+    {
+        if (_isOrchestratingExecution) throw new InvalidOperationException("Test seam cannot nest its own execution guard.");
+        _isOrchestratingExecution = true;
+        try { return AdvanceAndExecuteOneCanonicalGroup(target); }
+        finally { _isOrchestratingExecution = false; }
+    }
+
     private SimulationCanonicalGroupResult GroupResult(SimulationCanonicalGroupStopReason reason, SimulationInstant groupTime, int processed, bool complete, SimulationEventHeader? pending) =>
         new(reason, groupTime, processed, complete, pending, _clock.Timeline.Revision, _state.CreateView().Revision);
+
+    private SimulationExecutionResult ExecutionResult(SimulationExecutionStopReason reason, SimulationInstant requested, SimulationAdvanceStopReason initial, SimulationAdvanceStopReason? continuation, SimulationCanonicalGroupResult? group) =>
+        new(reason, requested, _clock.CurrentTime, initial, continuation, group);
+
+    private static SimulationExecutionStopReason MapGroupReason(SimulationCanonicalGroupStopReason reason) => reason switch
+    {
+        SimulationCanonicalGroupStopReason.NoPendingEvent => SimulationExecutionStopReason.NoPendingEvent,
+        SimulationCanonicalGroupStopReason.NotAtBoundary => SimulationExecutionStopReason.NotAtBoundary,
+        SimulationCanonicalGroupStopReason.EventLimitReached => SimulationExecutionStopReason.EventLimitReached,
+        SimulationCanonicalGroupStopReason.ValidationRejected => SimulationExecutionStopReason.ValidationRejected,
+        SimulationCanonicalGroupStopReason.ReentrantExecution => SimulationExecutionStopReason.ReentrantExecution,
+        _ => SimulationExecutionStopReason.Completed,
+    };
 }

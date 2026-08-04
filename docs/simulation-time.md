@@ -90,6 +90,14 @@ Transactions intentionally remain small so every event has its own validation, a
 
 The clock's positive `MaximumEventsPerAdvance` is active for group execution. At the cap, execution returns a controlled result and preserves the canonical next event and all remaining events at the active timestamp. Reentrant group execution is rejected without mutation. Generated events remain deliberately deferred; this group boundary shape permits their future introduction without replacing the execution architecture.
 
+## Clock execution orchestration (Milestone 6B-3D)
+
+`SimulationTransactionEngine.AdvanceAndExecuteOneCanonicalGroup(target)` composes existing ownership without taking time ownership from `SimulationClock`. The clock first coasts toward `target`. If it reaches a canonical boundary, the engine executes exactly that one time group. After a completed group, the clock resumes coasting toward the requested target but does not execute a second group in the same call.
+
+The immutable execution result records requested and reached time, initial and continuation clock stop reasons, the optional group result, and one explicit deterministic termination reason. Normal reasons include reaching the target, completed execution, event-limit stop, validation rejection, reentrancy, and stopping at the next unexecuted boundary. This supplies deterministic diagnostics for later validation and replay work without exposing mutable state.
+
+Clock orchestration does not change transaction atomicity: every event is still evaluated, validated, committed, and recorded independently. A rejected group leaves the clock at its active boundary and preserves the failing pending event. `SimulationTransactionEngine` remains the sole `SimulationState` write authority.
+
 Validation occurs before mutation and verifies that the event remains canonical, clock time matches the evaluation timestamp, expected timeline and state revisions still match, and the transaction is internally consistent. Normal validation failure returns a controlled result and leaves current time, pending topology, both revisions, processed history, and authoritative state unchanged.
 
 After validation, history capacity is reserved before the irreversible sequence. A successful commit changes state, consumes the canonical event, advances `TimelineRevision` through that existing consumption operation, advances `StateRevision` exactly once for the marker-state change, advances clock time only after successful state/timeline mutation, and appends `ProcessedSimulationEvent`. Processed history is immutable append-only metadata containing the event header, execution time, and revision values before and after commit.

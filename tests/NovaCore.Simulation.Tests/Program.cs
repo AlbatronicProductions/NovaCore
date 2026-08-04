@@ -13,6 +13,7 @@ var tests = new (string Name, Action Test)[]
     ("Simulation clock", ClockTests),
     ("Transaction contracts", TransactionTests),
     ("Canonical transaction groups", CanonicalGroupTests),
+    ("Clock execution orchestration", ClockExecutionTests),
     ("Allocation", AllocationTests),
 };
 foreach (var (name, test) in tests) { test(); Console.WriteLine($"PASS {name}"); }
@@ -283,6 +284,44 @@ static void CanonicalGroupTests()
     Console.WriteLine($"Deterministic canonical-group replay hash: 0x{hash:X16}");
 }
 
+static void ClockExecutionTests()
+{
+    var timeline = new SimulationTimeline(8);
+    Check(timeline.Schedule(SimulationInstant.Zero, Request(1, 10, -1)).Succeeded, "orchestration schedule A");
+    Check(timeline.Schedule(SimulationInstant.Zero, RequestWithKind(2, 10, 0, SimulationEventKind.NoOpMarker)).Succeeded, "orchestration schedule no-op");
+    Check(timeline.Schedule(SimulationInstant.Zero, Request(3, 30, 0)).Succeeded, "orchestration later schedule");
+    var clock = new SimulationClock(SimulationInstant.Zero, timeline);
+    var engine = new SimulationTransactionEngine(clock, new SimulationState(), 8);
+    var first = engine.AdvanceAndExecuteOneCanonicalGroup(new SimulationInstant(20));
+    Check(first.Reason == SimulationExecutionStopReason.Completed && first.InitialAdvanceReason == SimulationAdvanceStopReason.ReachedEventBoundary && first.ContinuationAdvanceReason == SimulationAdvanceStopReason.ReachedTarget && first.Group!.Value.ProcessedEventCount == 2 && first.ReachedTime.Ticks == 20, "coast execute and resume");
+    Check(engine.State.MarkerValue == 1 && engine.State.Revision.Value == 1 && engine.ProcessedCount == 2 && timeline.PendingCount == 1 && timeline.TryPeekPending(out var later) && later.Header.Id == new SimulationEventId(3), "later timestamp remains pending");
+    var second = engine.AdvanceAndExecuteOneCanonicalGroup(new SimulationInstant(100));
+    Check(second.Reason == SimulationExecutionStopReason.Completed && second.Group!.Value.ProcessedEventCount == 1 && clock.CurrentTime.Ticks == 100 && timeline.PendingCount == 0, "subsequent boundary executes once");
+    Check(engine.AdvanceAndExecuteOneCanonicalGroup(new SimulationInstant(101)).Reason == SimulationExecutionStopReason.ReachedTarget, "empty coast diagnostics");
+
+    var failureTimeline = new SimulationTimeline(4);
+    Check(failureTimeline.Schedule(SimulationInstant.Zero, Request(10, 5, -1)).Succeeded, "orchestration failure marker");
+    Check(failureTimeline.Schedule(SimulationInstant.Zero, RequestWithKind(11, 5, 0, SimulationEventKind.ReplaceTrajectory)).Succeeded, "orchestration failure invalid");
+    var failureClock = new SimulationClock(SimulationInstant.Zero, failureTimeline);
+    var failureEngine = new SimulationTransactionEngine(failureClock, new SimulationState(), 4);
+    var failure = failureEngine.AdvanceAndExecuteOneCanonicalGroup(new SimulationInstant(50));
+    Check(failure.Reason == SimulationExecutionStopReason.ValidationRejected && failure.Group!.Value.ProcessedEventCount == 1 && failure.ReachedTime.Ticks == 5, "validation rejection diagnostics");
+    Check(failureEngine.State.MarkerValue == 1 && failureEngine.ProcessedCount == 1 && failureTimeline.PendingCount == 1 && failureTimeline.TryPeekPending(out var rejected) && rejected.Header.Id == new SimulationEventId(11), "rejection preserves failing authority");
+    Check(failureEngine.AdvanceAndExecuteOneCanonicalGroupWhileGuardedForTest(new SimulationInstant(50)).Reason == SimulationExecutionStopReason.ReentrantExecution, "orchestration reentrancy rejected");
+
+    var warmTimeline = new SimulationTimeline(1); Check(warmTimeline.Schedule(SimulationInstant.Zero, Request(90, 1, 0)).Succeeded, "orchestration allocation warmup schedule");
+    _ = new SimulationTransactionEngine(new SimulationClock(SimulationInstant.Zero, warmTimeline), new SimulationState(), 1).AdvanceAndExecuteOneCanonicalGroup(new SimulationInstant(2));
+    var allocationTimeline = new SimulationTimeline(1_000);
+    for (ulong id = 1; id <= 1_000; id++) Check(allocationTimeline.Schedule(SimulationInstant.Zero, Request(id, 1, (int)id)).Succeeded, "orchestration allocation schedule");
+    var allocationEngine = new SimulationTransactionEngine(new SimulationClock(SimulationInstant.Zero, allocationTimeline), new SimulationState(), 1_000);
+    var allocationBefore = GC.GetAllocatedBytesForCurrentThread();
+    var allocation = allocationEngine.AdvanceAndExecuteOneCanonicalGroup(new SimulationInstant(2));
+    Check(GC.GetAllocatedBytesForCurrentThread() == allocationBefore && allocation.Reason == SimulationExecutionStopReason.Completed && allocationEngine.ProcessedCount == 1_000, "preallocated orchestration allocates zero bytes");
+
+    var hash = ClockExecutionHash(); Check(ClockExecutionHash() == hash, "deterministic orchestration hash");
+    Console.WriteLine($"Deterministic clock-orchestration hash: 0x{hash:X16}");
+}
+
 static SimulationEventHeader Header(ulong id, long time, int priority, ulong sequence) => new(new SimulationEventId(id), new SimulationInstant(time), priority, new SimulationEventSequence(sequence), SimulationEventKind.Marker);
 static SimulationEventRequest Request(ulong id, long time, int priority) => new(new SimulationEventId(id), new SimulationInstant(time), priority, SimulationEventKind.Marker);
 static SimulationEventRequest RequestWithKind(ulong id, long time, int priority, SimulationEventKind kind) => new(new SimulationEventId(id), new SimulationInstant(time), priority, kind);
@@ -292,6 +331,7 @@ static ulong TimelineHash(ReadOnlySpan<SimulationEventRequest> values){ulong has
 static ulong ClockHash(){var timeline=new SimulationTimeline(4);Check(timeline.Schedule(SimulationInstant.Zero,Request(10,30,0)).Succeeded,"clock hash schedule");Check(timeline.Schedule(SimulationInstant.Zero,Request(11,10,0)).Succeeded,"clock hash schedule");var clock=new SimulationClock(SimulationInstant.Zero,timeline);var first=clock.AdvanceTo(new SimulationInstant(100));var second=clock.AdvanceUntilNextEvent();ulong hash=14695981039346656037;hash=Mix(hash,(ulong)first.ReachedTime.Ticks);hash=Mix(hash,first.BoundaryEvent!.Value.Id.Value);hash=Mix(hash,(ulong)second.ReachedTime.Ticks);return Mix(hash,second.BoundaryEvent!.Value.Id.Value);}
 static ulong TransactionHash(){var timeline=new SimulationTimeline(32);for(ulong id=1;id<=32;id++)Check(timeline.Schedule(SimulationInstant.Zero,Request(id,0,(int)(id%3))).Succeeded,"hash transaction schedule");var clock=new SimulationClock(SimulationInstant.Zero,timeline);var engine=new SimulationTransactionEngine(clock,new SimulationState(),32);ulong hash=14695981039346656037;while(timeline.PendingCount!=0){var result=engine.ExecuteCanonicalPendingEvent();Check(result.Committed,"hash transaction commit");var entry=result.ProcessedEvent!.Value;hash=Mix(hash,entry.Event.Id.Value);hash=Mix(hash,entry.StateRevisionAfter.Value);hash=Mix(hash,entry.TimelineRevisionAfter.Value);}return hash;}
 static ulong CanonicalGroupHash(){var requests=new[]{Request(31,0,2),Request(32,0,-1),RequestWithKind(33,0,0,SimulationEventKind.NoOpMarker),Request(34,0,1)};ulong expected=0;for(var pass=0;pass<8;pass++){var shuffled=(SimulationEventRequest[])requests.Clone();ShuffleRequests(shuffled,(ulong)(pass+101));var timeline=new SimulationTimeline(4);foreach(var request in shuffled)Check(timeline.Schedule(SimulationInstant.Zero,request).Succeeded,"group permutation schedule");var engine=new SimulationTransactionEngine(new SimulationClock(SimulationInstant.Zero,timeline),new SimulationState(),4);Check(engine.ExecuteCanonicalGroup().IsComplete,"group permutation execute");ulong hash=14695981039346656037;for(var index=0;index<engine.ProcessedCount;index++){Check(engine.TryGetProcessed(index,out var entry),"group permutation history");hash=Mix(hash,entry.Event.Id.Value);hash=Mix(hash,entry.StateRevisionAfter.Value);hash=Mix(hash,entry.TimelineRevisionAfter.Value);}if(pass==0)expected=hash;else Check(hash==expected,"group permutation canonical order");}return expected;}
+static ulong ClockExecutionHash(){var timeline=new SimulationTimeline(3);Check(timeline.Schedule(SimulationInstant.Zero,Request(41,10,-1)).Succeeded,"orchestration hash schedule");Check(timeline.Schedule(SimulationInstant.Zero,RequestWithKind(42,10,0,SimulationEventKind.NoOpMarker)).Succeeded,"orchestration hash schedule");Check(timeline.Schedule(SimulationInstant.Zero,Request(43,20,0)).Succeeded,"orchestration hash schedule");var engine=new SimulationTransactionEngine(new SimulationClock(SimulationInstant.Zero,timeline),new SimulationState(),3);var first=engine.AdvanceAndExecuteOneCanonicalGroup(new SimulationInstant(15));var second=engine.AdvanceAndExecuteOneCanonicalGroup(new SimulationInstant(30));ulong hash=14695981039346656037;hash=Mix(hash,(ulong)first.Reason);hash=Mix(hash,(ulong)first.ReachedTime.Ticks);hash=Mix(hash,(ulong)second.Reason);hash=Mix(hash,(ulong)second.ReachedTime.Ticks);for(var index=0;index<engine.ProcessedCount;index++){Check(engine.TryGetProcessed(index,out var entry),"orchestration hash history");hash=Mix(hash,entry.Event.Id.Value);hash=Mix(hash,entry.StateRevisionAfter.Value);}return hash;}
 static ulong MixedTimelineHash(){var timeline=new SimulationTimeline(4096);var random=new FixedRandom(0xA24BAED4963EE407);var active=new SimulationEventId[4096];var activeCount=0;ulong nextId=1;for(var operation=0;operation<4096;operation++){if(activeCount==0||(random.Next()%3)!=0){var request=Request(nextId++,(long)(random.Next()>>1)-long.MaxValue/2,(int)(random.Next()%101)-50);Check(timeline.Schedule(new SimulationInstant(long.MinValue),request).Succeeded,"mixed schedule");active[activeCount++]=request.Id;}else{var index=(int)(random.Next()%(ulong)activeCount);Check(timeline.Cancel(active[index]).Succeeded,"mixed cancel");active[index]=active[--activeCount];}Check(timeline.ValidateInvariants(),"mixed invariant");}var pending=new ScheduledSimulationEvent[timeline.PendingCount];timeline.CopyPending(pending);Array.Sort(pending,static(left,right)=>SimulationEventHeaderComparer.Compare(left.Header,right.Header));ulong hash=14695981039346656037;foreach(var value in pending){hash=Mix(hash,(ulong)value.Header.Time.Ticks);hash=Mix(hash,(uint)value.Header.Priority);hash=Mix(hash,value.Header.Sequence.Value);hash=Mix(hash,value.Header.Id.Value);}return Mix(hash,timeline.Revision.Value);}
 static SimulationEventHeader[] CreateStressHeaders(){var random=new FixedRandom(0x6A09E667F3BCC909);var result=new SimulationEventHeader[2048];for(var index=0;index<result.Length;index++){var time=(long)(random.Next()>>1)-long.MaxValue/2;var priority=(int)(random.Next()%2001)-1000;result[index]=Header((ulong)index+1,time,priority,(ulong)index+1);}return result;}
 static void Shuffle(SimulationEventHeader[] values,ulong seed){var random=new FixedRandom(seed);for(var index=values.Length-1;index>0;index--){var other=(int)(random.Next()%(ulong)(index+1));(values[index],values[other])=(values[other],values[index]);}}
