@@ -98,6 +98,8 @@ The immutable execution result records requested and reached time, initial and c
 
 Clock orchestration does not change transaction atomicity: every event is still evaluated, validated, committed, and recorded independently. A rejected group leaves the clock at its active boundary and preserves the failing pending event. `SimulationTransactionEngine` remains the sole `SimulationState` write authority.
 
+The internal `SimulationExecutionOrchestrator` is the composition boundary for future duration-based clock APIs. It coordinates calls to `SimulationClock` and `SimulationTransactionEngine` but owns neither authoritative time nor state mutation. The existing one-group orchestration method delegates through this layer; canonical group execution is internal infrastructure rather than the long-term public simulation API.
+
 Validation occurs before mutation and verifies that the event remains canonical, clock time matches the evaluation timestamp, expected timeline and state revisions still match, and the transaction is internally consistent. Normal validation failure returns a controlled result and leaves current time, pending topology, both revisions, processed history, and authoritative state unchanged.
 
 After validation, history capacity is reserved before the irreversible sequence. A successful commit changes state, consumes the canonical event, advances `TimelineRevision` through that existing consumption operation, advances `StateRevision` exactly once for the marker-state change, advances clock time only after successful state/timeline mutation, and appends `ProcessedSimulationEvent`. Processed history is immutable append-only metadata containing the event header, execution time, and revision values before and after commit.
