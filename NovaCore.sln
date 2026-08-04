@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NovaCore.ReferenceFrames.Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NovaCore.Camera.Tests", "tests\NovaCore.Camera.Tests\NovaCore.Camera.Tests.csproj", "{431C07C3-7F14-4B26-A357-F8BF7F7B5E80}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NovaCore.Simulation.Tests", "tests\NovaCore.Simulation.Tests\NovaCore.Simulation.Tests.csproj", "{D8E5B543-265B-4C19-BD7B-3F0DBD6BFC1D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,5 +50,7 @@ Global
 		{9CF1E7FE-1B4D-4E33-8A04-80895D683E64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{431C07C3-7F14-4B26-A357-F8BF7F7B5E80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{431C07C3-7F14-4B26-A357-F8BF7F7B5E80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8E5B543-265B-4C19-BD7B-3F0DBD6BFC1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8E5B543-265B-4C19-BD7B-3F0DBD6BFC1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 EndGlobal
