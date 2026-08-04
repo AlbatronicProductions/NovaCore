@@ -16,7 +16,7 @@ static unsafe int Run(SampleOptions options, LogOptions logOptions)
 {
     var frame = new ReferenceFrameId(1);
     var initial = new RenderOrigin(new UniversePosition(new Double3(4_000_000_000_000d, -3_000_000_000_000d, 7_000_000_000_000d), frame));
-    var source = SampleSceneFactory.Create(options.ObjectCount, initial.CameraPosition);
+    var source = options.Scene == "frames" ? ReferenceFrameDemoSceneFactory.Create(initial.CameraPosition) : SampleSceneFactory.Create(options.ObjectCount, initial.CameraPosition);
     var snapshot = new RenderFrameSubmission(source.Length);
     Assemble(snapshot, source, initial);
     var state = new CameraState(initial, source, snapshot, logOptions);
@@ -66,5 +66,5 @@ static void UpdateNative(RenderFrameSubmission snapshot, NativeRenderObject[] ob
 }
 static NativeEncodedPosition ToNative(EncodedPosition p)=>new(){HighX=p.HighX,HighY=p.HighY,HighZ=p.HighZ,LowX=p.LowX,LowY=p.LowY,LowZ=p.LowZ};
 file sealed class CameraState(RenderOrigin initial, SampleRenderableState[] source, RenderFrameSubmission snapshot, LogOptions log){public RenderOrigin Initial{get;}=initial;public RenderOrigin Camera=initial;public SampleRenderableState[] Source{get;}=source;public RenderFrameSubmission Snapshot{get;}=snapshot;public LogOptions Log{get;}=log;}
-file readonly record struct SampleOptions(int ObjectCount,string[] LogArguments){public static bool TryParse(string[] args,out SampleOptions value,out string? error){var count=100;var logs=new List<string>();foreach(var arg in args){if(arg.StartsWith("--objects=")){if(!int.TryParse(arg[10..],out count)||count is not(1 or 100 or 1000 or 10000)){value=default;error="Usage: --objects=1|100|1000|10000";return false;}}else logs.Add(arg);}value=new(count,logs.ToArray());error=null;return true;}}
+file readonly record struct SampleOptions(int ObjectCount,string Scene,string[] LogArguments){public static bool TryParse(string[] args,out SampleOptions value,out string? error){var count=100;var scene="grid";var logs=new List<string>();foreach(var arg in args){if(arg.StartsWith("--objects=")){if(!int.TryParse(arg[10..],out count)||count is not(1 or 100 or 1000 or 10000)){value=default;error="Usage: --objects=1|100|1000|10000 [--scene=frames]";return false;}}else if(arg.StartsWith("--scene=")){scene=arg[8..];if(scene!="frames"&&scene!="grid"){value=default;error="Usage: --scene=grid|frames";return false;}}else logs.Add(arg);}value=new(count,scene,logs.ToArray());error=null;return true;}}
 internal static partial class NativeKeyboard { [LibraryImport("user32.dll",EntryPoint="GetAsyncKeyState")] private static partial short State(int key); public static bool IsDown(int key)=>(State(key)&0x8000)!=0; }
