@@ -1,4 +1,4 @@
-# Simulation Time (Milestone 6A and 6B-1)
+# Simulation Time (Milestones 6A through 6B-4A)
 
 Milestone 6A establishes the managed temporal value types used by later simulation work. `SimulationInstant` is a signed 64-bit microtick timestamp relative to a project-defined epoch at tick zero. One simulated second is exactly 1,000,000 ticks, giving a range of approximately plus or minus 292,471 years. Arithmetic is checked; negative instants and durations are valid.
 
@@ -109,6 +109,23 @@ This is not event sourcing, replay implementation, or snapshot implementation. I
 ### FUTURE ROADMAP — SimulationSnapshot
 
 A later milestone will introduce an immutable `SimulationSnapshot` tied to one explicit `SimulationInstant`. It is expected to carry the matching `TimelineRevision`, `StateRevision`, immutable authoritative state or stable state references, pending-event topology, processed-history version, the matching `ReferenceFrameSnapshot`, deterministic identity/version information, and optionally a canonical state/event hash. It will become the sole immutable simulation-facing snapshot for rendering and external consumers, preserving the flow: authoritative simulation → evaluated reference frames → resolved render snapshot → Graphics transport. None of snapshot publication, rollback, networking, save/load, replay restoration, or cross-platform bitwise determinism exists today.
+
+## Exact host-duration conversion and retained debt (Milestone 6B-4A)
+
+`SimulationClock` now accepts an internal, exact non-authoritative host-duration sample and converts it into retained simulation-time debt. The host duration is an integer `SimulationDuration`; platform wall-clock measurement remains outside authoritative simulation. This slice does not advance `CurrentTime`, traverse events, execute a canonical group, or service existing debt.
+
+For a nonnegative host duration `H`, normalized rate `N / D`, and clock-owned remainder `R`, conversion uses checked `Int128` intermediate arithmetic:
+
+```text
+scaled            = H * N + R
+derivedTicks      = scaled / D
+proposedRemainder = scaled % D
+proposedDebt      = existingDebt + derivedTicks
+```
+
+The clock commits the proposed remainder and debt together only after every conversion and debt-overflow check succeeds. A controlled result reports accepted work, no work, pause, invalid negative input, or arithmetic overflow. On a rejection, the remainder, debt, and authoritative current time are unchanged. Debt is nonnegative and remains retained across calls; a zero host duration intentionally does not service it in 6B-4A.
+
+Pausing prevents conversion and leaves both remainder and debt unchanged. Changing to a non-equivalent rate resets only the fractional remainder because it is expressed against the old denominator; it deliberately preserves accumulated debt. An equivalent normalized rate is a no-op. Later 6B-4 work will define how retained debt composes with the internal execution orchestrator to coast toward and execute canonical event boundaries.
 
 Host-duration advancement, generated events, additional transaction kinds, analytical propagation, snapshots, time warp controls, reference-frame integration, and sample integration remain pending Milestone 6 work.
 

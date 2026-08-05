@@ -11,6 +11,7 @@ var tests = new (string Name, Action Test)[]
     ("Event ordering", EventOrderingTests),
     ("Timeline topology", TimelineTopologyTests),
     ("Simulation clock", ClockTests),
+    ("Host-duration conversion", HostDurationTests),
     ("Transaction contracts", TransactionTests),
     ("Canonical transaction groups", CanonicalGroupTests),
     ("Clock execution orchestration", ClockExecutionTests),
@@ -202,6 +203,59 @@ static void ClockTests()
     Console.WriteLine($"Deterministic clock stress hash: 0x{hash:X16}");
 }
 
+static void HostDurationTests()
+{
+    var one = new SimulationClock(SimulationInstant.Zero, new SimulationTimeline());
+    var accepted = one.AdvanceByHostDuration(new SimulationDuration(10));
+    Check(accepted.Reason == SimulationHostAdvanceStopReason.Accepted && accepted.DerivedSimulationDuration.Ticks == 10 && one.PendingSimulationDebt.Ticks == 10 && one.RateRemainder == 0 && one.CurrentTime == SimulationInstant.Zero, "one-to-one host conversion");
+
+    var half = new SimulationClock(SimulationInstant.Zero, new SimulationTimeline(), SimulationRate.Half);
+    Check(half.AdvanceByHostDuration(new SimulationDuration(1)).DerivedSimulationDuration.Ticks == 0 && half.RateRemainder == 1, "half fractional remainder");
+    Check(half.AdvanceByHostDuration(new SimulationDuration(1)).DerivedSimulationDuration.Ticks == 1 && half.PendingSimulationDebt.Ticks == 1 && half.RateRemainder == 0, "half retained remainder");
+    var quarter = new SimulationClock(SimulationInstant.Zero, new SimulationTimeline(), SimulationRate.Quarter);
+    for (var index = 0; index < 4; index++) _ = quarter.AdvanceByHostDuration(new SimulationDuration(1));
+    Check(quarter.PendingSimulationDebt.Ticks == 1 && quarter.RateRemainder == 0, "quarter rate");
+    var twice = new SimulationClock(SimulationInstant.Zero, new SimulationTimeline(), SimulationRate.Two);
+    Check(twice.AdvanceByHostDuration(new SimulationDuration(3)).DerivedSimulationDuration.Ticks == 6 && twice.PendingSimulationDebt.Ticks == 6, "accelerated rate");
+
+    var split = new SimulationClock(SimulationInstant.Zero, new SimulationTimeline(), new SimulationRate(5, 7));
+    var combined = new SimulationClock(SimulationInstant.Zero, new SimulationTimeline(), new SimulationRate(5, 7));
+    for (var index = 0; index < 10_000; index++) _ = split.AdvanceByHostDuration(new SimulationDuration(13));
+    _ = combined.AdvanceByHostDuration(new SimulationDuration(130_000));
+    Check(split.PendingSimulationDebt == combined.PendingSimulationDebt && split.RateRemainder == combined.RateRemainder, "split and combined exact composition");
+
+    var rateChange = new SimulationClock(SimulationInstant.Zero, new SimulationTimeline(), SimulationRate.Half);
+    _ = rateChange.AdvanceByHostDuration(new SimulationDuration(1));
+    Check(!rateChange.TrySetRate(new SimulationRate(2, 4)) && rateChange.RateRemainder == 1, "equivalent rate complete no-op");
+    _ = rateChange.AdvanceByHostDuration(new SimulationDuration(1));
+    var debtBeforeChange = rateChange.PendingSimulationDebt;
+    Check(rateChange.TrySetRate(SimulationRate.Two) && rateChange.RateRemainder == 0 && rateChange.PendingSimulationDebt == debtBeforeChange, "changed rate resets only remainder");
+
+    rateChange.Pause(); var pausedDebt = rateChange.PendingSimulationDebt; var pausedRemainder = rateChange.RateRemainder;
+    Check(rateChange.AdvanceByHostDuration(new SimulationDuration(100)).Reason == SimulationHostAdvanceStopReason.Paused && rateChange.PendingSimulationDebt == pausedDebt && rateChange.RateRemainder == pausedRemainder, "pause preserves debt and remainder");
+    rateChange.Resume();
+    var zeroDebt = new SimulationClock(SimulationInstant.Zero, new SimulationTimeline());
+    Check(zeroDebt.AdvanceByHostDuration(SimulationDuration.Zero).Reason == SimulationHostAdvanceStopReason.NoWork && zeroDebt.PendingSimulationDebt.IsZero, "zero duration with no debt");
+    Check(rateChange.AdvanceByHostDuration(SimulationDuration.Zero).Reason == SimulationHostAdvanceStopReason.NoWork && rateChange.PendingSimulationDebt == pausedDebt, "zero duration retains debt in 4A");
+
+    var invalid = new SimulationClock(SimulationInstant.Zero, new SimulationTimeline());
+    Check(invalid.AdvanceByHostDuration(new SimulationDuration(-1)).Reason == SimulationHostAdvanceStopReason.InvalidHostDuration && invalid.PendingSimulationDebt.IsZero && invalid.RateRemainder == 0, "negative host duration rejected");
+    var scaleOverflow = new SimulationClock(SimulationInstant.Zero, new SimulationTimeline(), SimulationRate.Two);
+    Check(scaleOverflow.AdvanceByHostDuration(new SimulationDuration(long.MaxValue)).Reason == SimulationHostAdvanceStopReason.ArithmeticOverflow && scaleOverflow.PendingSimulationDebt.IsZero && scaleOverflow.RateRemainder == 0, "scaling overflow no partial state");
+    var debtOverflow = new SimulationClock(SimulationInstant.Zero, new SimulationTimeline());
+    _ = debtOverflow.AdvanceByHostDuration(new SimulationDuration(1)); Check(debtOverflow.TrySetRate(new SimulationRate(long.MaxValue, 1)), "debt overflow rate setup");
+    Check(debtOverflow.AdvanceByHostDuration(new SimulationDuration(1)).Reason == SimulationHostAdvanceStopReason.ArithmeticOverflow && debtOverflow.PendingSimulationDebt.Ticks == 1 && debtOverflow.RateRemainder == 0, "debt overflow no partial state");
+
+    var warm = new SimulationClock(SimulationInstant.Zero, new SimulationTimeline(), new SimulationRate(5, 7)); _ = warm.AdvanceByHostDuration(new SimulationDuration(1));
+    var allocation = new SimulationClock(SimulationInstant.Zero, new SimulationTimeline(), new SimulationRate(5, 7));
+    var allocationBefore = GC.GetAllocatedBytesForCurrentThread();
+    for (var index = 0; index < 100_000; index++) _ = allocation.AdvanceByHostDuration(new SimulationDuration(13));
+    Check(GC.GetAllocatedBytesForCurrentThread() == allocationBefore, "host conversion and debt accumulation allocate zero bytes");
+
+    var hash = HostDurationHash(); Check(HostDurationHash() == hash, "deterministic host conversion replay hash");
+    Console.WriteLine($"Deterministic host-duration conversion hash: 0x{hash:X16}");
+}
+
 static void TransactionTests()
 {
     var timeline = new SimulationTimeline(8);
@@ -332,6 +386,7 @@ static ulong ClockHash(){var timeline=new SimulationTimeline(4);Check(timeline.S
 static ulong TransactionHash(){var timeline=new SimulationTimeline(32);for(ulong id=1;id<=32;id++)Check(timeline.Schedule(SimulationInstant.Zero,Request(id,0,(int)(id%3))).Succeeded,"hash transaction schedule");var clock=new SimulationClock(SimulationInstant.Zero,timeline);var engine=new SimulationTransactionEngine(clock,new SimulationState(),32);ulong hash=14695981039346656037;while(timeline.PendingCount!=0){var result=engine.ExecuteCanonicalPendingEvent();Check(result.Committed,"hash transaction commit");var entry=result.ProcessedEvent!.Value;hash=Mix(hash,entry.Event.Id.Value);hash=Mix(hash,entry.StateRevisionAfter.Value);hash=Mix(hash,entry.TimelineRevisionAfter.Value);}return hash;}
 static ulong CanonicalGroupHash(){var requests=new[]{Request(31,0,2),Request(32,0,-1),RequestWithKind(33,0,0,SimulationEventKind.NoOpMarker),Request(34,0,1)};ulong expected=0;for(var pass=0;pass<8;pass++){var shuffled=(SimulationEventRequest[])requests.Clone();ShuffleRequests(shuffled,(ulong)(pass+101));var timeline=new SimulationTimeline(4);foreach(var request in shuffled)Check(timeline.Schedule(SimulationInstant.Zero,request).Succeeded,"group permutation schedule");var engine=new SimulationTransactionEngine(new SimulationClock(SimulationInstant.Zero,timeline),new SimulationState(),4);Check(engine.ExecuteCanonicalGroup().IsComplete,"group permutation execute");ulong hash=14695981039346656037;for(var index=0;index<engine.ProcessedCount;index++){Check(engine.TryGetProcessed(index,out var entry),"group permutation history");hash=Mix(hash,entry.Event.Id.Value);hash=Mix(hash,entry.StateRevisionAfter.Value);hash=Mix(hash,entry.TimelineRevisionAfter.Value);}if(pass==0)expected=hash;else Check(hash==expected,"group permutation canonical order");}return expected;}
 static ulong ClockExecutionHash(){var timeline=new SimulationTimeline(3);Check(timeline.Schedule(SimulationInstant.Zero,Request(41,10,-1)).Succeeded,"orchestration hash schedule");Check(timeline.Schedule(SimulationInstant.Zero,RequestWithKind(42,10,0,SimulationEventKind.NoOpMarker)).Succeeded,"orchestration hash schedule");Check(timeline.Schedule(SimulationInstant.Zero,Request(43,20,0)).Succeeded,"orchestration hash schedule");var engine=new SimulationTransactionEngine(new SimulationClock(SimulationInstant.Zero,timeline),new SimulationState(),3);var first=engine.AdvanceAndExecuteOneCanonicalGroup(new SimulationInstant(15));var second=engine.AdvanceAndExecuteOneCanonicalGroup(new SimulationInstant(30));ulong hash=14695981039346656037;hash=Mix(hash,(ulong)first.Reason);hash=Mix(hash,(ulong)first.ReachedTime.Ticks);hash=Mix(hash,(ulong)second.Reason);hash=Mix(hash,(ulong)second.ReachedTime.Ticks);for(var index=0;index<engine.ProcessedCount;index++){Check(engine.TryGetProcessed(index,out var entry),"orchestration hash history");hash=Mix(hash,entry.Event.Id.Value);hash=Mix(hash,entry.StateRevisionAfter.Value);}return hash;}
+static ulong HostDurationHash(){var clock=new SimulationClock(SimulationInstant.Zero,new SimulationTimeline(),new SimulationRate(5,7));ulong hash=14695981039346656037;for(var index=0;index<1024;index++){var result=clock.AdvanceByHostDuration(new SimulationDuration(13));hash=Mix(hash,(ulong)result.DerivedSimulationDuration.Ticks);hash=Mix(hash,(ulong)result.DebtAfter.Ticks);hash=Mix(hash,(ulong)result.RateRemainderAfter);}return hash;}
 static ulong MixedTimelineHash(){var timeline=new SimulationTimeline(4096);var random=new FixedRandom(0xA24BAED4963EE407);var active=new SimulationEventId[4096];var activeCount=0;ulong nextId=1;for(var operation=0;operation<4096;operation++){if(activeCount==0||(random.Next()%3)!=0){var request=Request(nextId++,(long)(random.Next()>>1)-long.MaxValue/2,(int)(random.Next()%101)-50);Check(timeline.Schedule(new SimulationInstant(long.MinValue),request).Succeeded,"mixed schedule");active[activeCount++]=request.Id;}else{var index=(int)(random.Next()%(ulong)activeCount);Check(timeline.Cancel(active[index]).Succeeded,"mixed cancel");active[index]=active[--activeCount];}Check(timeline.ValidateInvariants(),"mixed invariant");}var pending=new ScheduledSimulationEvent[timeline.PendingCount];timeline.CopyPending(pending);Array.Sort(pending,static(left,right)=>SimulationEventHeaderComparer.Compare(left.Header,right.Header));ulong hash=14695981039346656037;foreach(var value in pending){hash=Mix(hash,(ulong)value.Header.Time.Ticks);hash=Mix(hash,(uint)value.Header.Priority);hash=Mix(hash,value.Header.Sequence.Value);hash=Mix(hash,value.Header.Id.Value);}return Mix(hash,timeline.Revision.Value);}
 static SimulationEventHeader[] CreateStressHeaders(){var random=new FixedRandom(0x6A09E667F3BCC909);var result=new SimulationEventHeader[2048];for(var index=0;index<result.Length;index++){var time=(long)(random.Next()>>1)-long.MaxValue/2;var priority=(int)(random.Next()%2001)-1000;result[index]=Header((ulong)index+1,time,priority,(ulong)index+1);}return result;}
 static void Shuffle(SimulationEventHeader[] values,ulong seed){var random=new FixedRandom(seed);for(var index=values.Length-1;index>0;index--){var other=(int)(random.Next()%(ulong)(index+1));(values[index],values[other])=(values[other],values[index]);}}

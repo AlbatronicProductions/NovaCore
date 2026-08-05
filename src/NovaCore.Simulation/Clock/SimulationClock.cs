@@ -15,6 +15,7 @@ public sealed class SimulationClock
     private SimulationInstant _currentTime;
     private SimulationRate _rate;
     private long _rateRemainder;
+    private SimulationDuration _pendingSimulationDebt;
 
     public SimulationClock(
         SimulationInstant initialTime,
@@ -37,6 +38,7 @@ public sealed class SimulationClock
     public SimulationTimeline Timeline { get; }
     public SimulationClockSettings Settings => _settings;
     public int MaximumEventsPerAdvance => _settings.MaximumEventsPerAdvance;
+    internal SimulationDuration PendingSimulationDebt => _pendingSimulationDebt;
 
     public void Pause() => _isPaused = true;
     public void Resume() => _isPaused = false;
@@ -48,6 +50,31 @@ public sealed class SimulationClock
         _rate = rate;
         _rateRemainder = 0;
         return true;
+    }
+
+    /// <summary>
+    /// Converts a non-authoritative integer host-duration sample into retained simulation-time debt.
+    /// Milestone 6B-4A deliberately does not traverse debt or execute pending event groups.
+    /// </summary>
+    internal SimulationHostAdvanceResult AdvanceByHostDuration(SimulationDuration hostDuration)
+    {
+        var debtBefore = _pendingSimulationDebt;
+        var remainderBefore = _rateRemainder;
+        if (_isPaused) return HostResult(SimulationHostAdvanceStopReason.Paused, hostDuration, SimulationDuration.Zero, debtBefore, remainderBefore);
+        if (hostDuration.Ticks < 0) return HostResult(SimulationHostAdvanceStopReason.InvalidHostDuration, hostDuration, SimulationDuration.Zero, debtBefore, remainderBefore);
+        if (hostDuration.IsZero) return HostResult(SimulationHostAdvanceStopReason.NoWork, hostDuration, SimulationDuration.Zero, debtBefore, remainderBefore);
+
+        var proposedRemainder = _rateRemainder;
+        if (!_rate.TryScale(hostDuration.Ticks, ref proposedRemainder, out var derivedTicks))
+            return HostResult(SimulationHostAdvanceStopReason.ArithmeticOverflow, hostDuration, SimulationDuration.Zero, debtBefore, remainderBefore);
+        if (derivedTicks > long.MaxValue - debtBefore.Ticks)
+            return HostResult(SimulationHostAdvanceStopReason.ArithmeticOverflow, hostDuration, SimulationDuration.Zero, debtBefore, remainderBefore);
+
+        var derived = new SimulationDuration(derivedTicks);
+        var proposedDebt = new SimulationDuration(debtBefore.Ticks + derivedTicks);
+        _rateRemainder = proposedRemainder;
+        _pendingSimulationDebt = proposedDebt;
+        return new(SimulationHostAdvanceStopReason.Accepted, hostDuration, derived, debtBefore, proposedDebt, remainderBefore, proposedRemainder, _currentTime);
     }
 
     /// <summary>
@@ -119,4 +146,7 @@ public sealed class SimulationClock
 
     private SimulationAdvanceResult Result(SimulationAdvanceStopReason reason, SimulationInstant requested, SimulationEventHeader? boundary, int examined) =>
         new(reason, requested, _currentTime, boundary, Timeline.Revision, examined);
+
+    private SimulationHostAdvanceResult HostResult(SimulationHostAdvanceStopReason reason, SimulationDuration requested, SimulationDuration derived, SimulationDuration debt, long remainder) =>
+        new(reason, requested, derived, debt, debt, remainder, remainder, _currentTime);
 }
