@@ -8,6 +8,7 @@ using NovaCore.Simulation.Spacecraft;
 using NovaCore.Simulation.Spacecraft.ReferenceFrames;
 using NovaCore.Simulation.Spacecraft.Rotation;
 using NovaCore.Simulation.Spacecraft.Rotation.Transactions;
+using NovaCore.Simulation.Spacecraft.Guidance;
 using NovaCore.Simulation.Clock;
 using NovaCore.Simulation.Time;
 using NovaCore.Simulation.Timeline;
@@ -44,6 +45,9 @@ internal sealed class CelestialAnalyticalScene
     private readonly SimulationTransactionEngine _transactions;
     private readonly SpacecraftId _spacecraftId = new(1);
     private Double3 _requestedTorque;
+    private SpacecraftSasMode _sasMode;
+    private DoubleQuaternion _holdTarget;
+    private bool _hasHoldTarget;
     private double _orbitDistance = 24d;
     private double _orbitYawRadians;
     private double _orbitPitchRadians;
@@ -66,6 +70,9 @@ internal sealed class CelestialAnalyticalScene
     public SimulationInstant CurrentTime => _clock.CurrentTime;
     public SimulationRate Rate => _clock.Rate;
     public bool IsPaused => _clock.IsPaused;
+    internal SpacecraftSasMode SasMode => _sasMode;
+    internal bool HasHoldTarget => _hasHoldTarget;
+    internal DoubleQuaternion HoldTarget => _holdTarget;
     internal int TorqueTransitionCount => _transactions.ProcessedRigidBodyTorqueCount;
     public double OrbitDistance => _orbitDistance;
     public static FixtureCameraConfiguration Camera => new(
@@ -159,13 +166,14 @@ internal sealed class CelestialAnalyticalScene
             error = $"Celestial clock execution failed: {service.Reason}";
             return false;
         }
-        if (!TryApplyTorqueControl(input, out error)) return false;
+        if (!TryApplySasMode(input, out error) || !TryApplyTorqueControl(input, out error)) return false;
         return TryPublishCandidate(false, out error);
     }
 
     private bool TryApplyTorqueControl(in NativeInputState input, out string error)
     {
         var command = CreateTorqueCommand(input);
+        if (command.RequestedBodyTorque != Double3.Zero && _sasMode != SpacecraftSasMode.Off) { _sasMode = SpacecraftSasMode.Off; _hasHoldTarget = false; }
         // An unchanged request is already authoritative. Do not pollute history or rebase its epoch.
         if (command.RequestedBodyTorque == _requestedTorque) { error = string.Empty; return true; }
         var candidate = RigidBodyTorqueTransactionEvaluator.TryCreateControlReplacement(_transactions.State, command);
@@ -174,6 +182,22 @@ internal sealed class CelestialAnalyticalScene
         var committed = _transactions.ValidateAndCommit(candidate.Transaction.Value);
         if (!committed.Committed) { error = $"Spacecraft torque commit failed: {committed.Status}"; return false; }
         _requestedTorque = command.RequestedBodyTorque; error = string.Empty; return true;
+    }
+
+    private bool TryApplySasMode(in NativeInputState input, out string error)
+    {
+        error = string.Empty;
+        if (input.SasModeKey == 0) return true;
+        if (input.SasModeKey is > 8) { error = "Invalid SAS mode key."; return false; }
+        if (input.SasModeKey == 1) { _sasMode = SpacecraftSasMode.Off; _hasHoldTarget = false; return true; }
+        if (input.SasModeKey == 2)
+        {
+            if (!_transactions.State.Spacecraft.TryGetRigidBody(_spacecraftId, out var rotation)) { error = "SAS hold spacecraft state unavailable."; return false; }
+            var evaluated = SpacecraftRigidBodyRotationEvaluator.TryEvaluate(rotation, _clock.CurrentTime);
+            if (!evaluated.Succeeded || SpacecraftAttitudeEvaluator.TryCanonicalize(evaluated.OrientationLocalToParent, out _holdTarget) != SpacecraftAttitudeEvaluationStatus.Success) { error = "SAS hold capture failed."; return false; }
+            _sasMode = SpacecraftSasMode.HoldAttitude; _hasHoldTarget = true; return true;
+        }
+        _sasMode = (SpacecraftSasMode)(input.SasModeKey - 1); _hasHoldTarget = false; return true;
     }
 
     private SpacecraftTorqueCommand CreateTorqueCommand(in NativeInputState input) => new(

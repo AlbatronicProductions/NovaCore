@@ -4,6 +4,7 @@ using NovaCore.Core.Camera;
 using NovaCore.Core.ReferenceFrames;
 using NovaCore.Graphics;
 using NovaCore.Interop;
+using NovaCore.Simulation.Spacecraft.Guidance;
 using NovaCore.Simulation.Time;
 
 var tests = new (string, Action)[]
@@ -19,6 +20,7 @@ var tests = new (string, Action)[]
     ("Dynamic reference-frame fixture publication", DynamicReferenceFrameFixturePublicationTest),
     ("Celestial analytical fixture publication", CelestialAnalyticalFixturePublicationTest),
     ("Celestial player torque controls", CelestialPlayerTorqueControlsTest),
+    ("Celestial SAS mode selection", CelestialSasModeSelectionTest),
     ("Camera snapshot allocation", CameraSnapshotAllocationTest),
 };
 foreach (var (name, test) in tests) { test(); Console.WriteLine($"PASS {name}"); }
@@ -47,10 +49,35 @@ static void CelestialPlayerTorqueControlsTest()
     Check(held.TryAdvanceByHostDuration(SimulationDuration.FromTicks(1), default, out heldError) && held.TorqueTransitionCount == 2, "one torque-off edge commit");
 }
 
+static void CelestialSasModeSelectionTest()
+{
+    Check(CelestialAnalyticalScene.TryCreate(out var scene, out var error) && scene is not null, $"SAS selection scene: {error}");
+    var hold = new NativeInputState { SasModeKey = 2 };
+    Check(scene!.TryAdvanceByHostDuration(SimulationDuration.FromTicks(1), hold, out error), $"hold selection: {error}");
+    Check(scene.SasMode == SpacecraftSasMode.HoldAttitude && scene.HasHoldTarget && scene.HoldTarget == scene.CurrentSnapshot.Objects[1].RootOrientation, "hold captures the current authoritative orientation");
+    Check(scene.TorqueTransitionCount == 0, "mode selection does not create a torque transaction");
+
+    var cancelled = new NativeInputState { MoveForward = 1, MoveBackward = 1 };
+    Check(scene.TryAdvanceByHostDuration(SimulationDuration.FromTicks(1), cancelled, out error), $"cancelled manual input: {error}");
+    Check(scene.SasMode == SpacecraftSasMode.HoldAttitude && scene.HasHoldTarget && scene.TorqueTransitionCount == 0, "opposed manual input preserves SAS state");
+
+    var manual = new NativeInputState { MoveForward = 1 };
+    Check(scene.TryAdvanceByHostDuration(SimulationDuration.FromTicks(1), manual, out error), $"manual disengage: {error}");
+    Check(scene.SasMode == SpacecraftSasMode.Off && !scene.HasHoldTarget && scene.TorqueTransitionCount == 1, "manual torque disengages SAS before its authoritative commit");
+
+    for (uint key = 3; key <= 8; key++)
+    {
+        Check(scene.TryAdvanceByHostDuration(SimulationDuration.FromTicks(1), new NativeInputState { SasModeKey = key }, out error), $"SAS mode {key}: {error}");
+        Check(scene.SasMode == (SpacecraftSasMode)(key - 1) && !scene.HasHoldTarget, $"SAS key {key} maps deterministically");
+    }
+    Check(scene.TryAdvanceByHostDuration(SimulationDuration.FromTicks(1), new NativeInputState { SasModeKey = 1 }, out error), $"SAS off: {error}");
+    Check(scene.SasMode == SpacecraftSasMode.Off && !scene.HasHoldTarget, "SAS off clears hold state");
+}
+
 static void MeshHandleTest() { Check(!MeshHandle.Invalid.IsValid, "zero invalid"); Check(MeshHandle.Triangle.IsValid, "triangle valid"); }
 static void LayoutTest()
 {
-    Check(Marshal.SizeOf<NativeEncodedPosition>() == 32, "encoded size"); Check(Marshal.SizeOf<NativeCameraData>() == 96, "native camera size"); Check(Marshal.OffsetOf<NativeCameraData>(nameof(NativeCameraData.Position)).ToInt32() == 0, "native camera position offset"); Check(Marshal.OffsetOf<NativeCameraData>(nameof(NativeCameraData.ViewProjection)).ToInt32() == 32, "native camera matrix offset"); Check(Marshal.SizeOf<GpuCameraData>() == 96, "GPU camera size"); Check(Marshal.OffsetOf<GpuCameraData>(nameof(GpuCameraData.Position)).ToInt32() == 0, "GPU camera position offset"); Check(Marshal.OffsetOf<GpuCameraData>(nameof(GpuCameraData.ViewProjection)).ToInt32() == 32, "GPU camera matrix offset"); Check(Marshal.SizeOf<NativeRenderTransform>() == 32, "transform size"); Check(Marshal.SizeOf<NativeRenderObject>() == 80, "object stride"); Check(Marshal.OffsetOf<NativeRenderObject>(nameof(NativeRenderObject.Position)).ToInt32() == 0, "position offset"); Check(Marshal.OffsetOf<NativeRenderObject>(nameof(NativeRenderObject.Transform)).ToInt32() == 32, "transform offset"); Check(Marshal.OffsetOf<NativeRenderObject>(nameof(NativeRenderObject.Mesh)).ToInt32() == 64, "mesh offset"); Check(Marshal.SizeOf<NativeDrawBatch>() == 16, "batch stride"); Check(Marshal.SizeOf<NativeInputState>() == 60, "input size"); Check(Marshal.OffsetOf<NativeInputState>(nameof(NativeInputState.MouseWheelDetents)).ToInt32() == 44 && Marshal.OffsetOf<NativeInputState>(nameof(NativeInputState.PauseToggle)).ToInt32() == 48 && Marshal.OffsetOf<NativeInputState>(nameof(NativeInputState.RateDecrease)).ToInt32() == 52 && Marshal.OffsetOf<NativeInputState>(nameof(NativeInputState.RateIncrease)).ToInt32() == 56, "input control offsets"); Check(NativeRuntime.GetAbiLayout(out var abi) == NativeResult.Success && abi.CameraDataSize == 96 && abi.CameraPositionOffset == 0 && abi.CameraViewProjectionOffset == 32 && abi.RenderObjectSize == 80 && abi.RenderObjectTransformOffset == 32 && abi.RenderObjectMeshOffset == 64 && abi.InputStateSize == 60 && abi.InputMouseWheelDetentsOffset == 44 && abi.InputPauseToggleOffset == 48 && abi.InputRateDecreaseOffset == 52 && abi.InputRateIncreaseOffset == 56, "native ABI layout");
+    Check(Marshal.SizeOf<NativeEncodedPosition>() == 32, "encoded size"); Check(Marshal.SizeOf<NativeCameraData>() == 96, "native camera size"); Check(Marshal.OffsetOf<NativeCameraData>(nameof(NativeCameraData.Position)).ToInt32() == 0, "native camera position offset"); Check(Marshal.OffsetOf<NativeCameraData>(nameof(NativeCameraData.ViewProjection)).ToInt32() == 32, "native camera matrix offset"); Check(Marshal.SizeOf<GpuCameraData>() == 96, "GPU camera size"); Check(Marshal.OffsetOf<GpuCameraData>(nameof(GpuCameraData.Position)).ToInt32() == 0, "GPU camera position offset"); Check(Marshal.OffsetOf<GpuCameraData>(nameof(GpuCameraData.ViewProjection)).ToInt32() == 32, "GPU camera matrix offset"); Check(Marshal.SizeOf<NativeRenderTransform>() == 32, "transform size"); Check(Marshal.SizeOf<NativeRenderObject>() == 80, "object stride"); Check(Marshal.OffsetOf<NativeRenderObject>(nameof(NativeRenderObject.Position)).ToInt32() == 0, "position offset"); Check(Marshal.OffsetOf<NativeRenderObject>(nameof(NativeRenderObject.Transform)).ToInt32() == 32, "transform offset"); Check(Marshal.OffsetOf<NativeRenderObject>(nameof(NativeRenderObject.Mesh)).ToInt32() == 64, "mesh offset"); Check(Marshal.SizeOf<NativeDrawBatch>() == 16, "batch stride"); Check(Marshal.SizeOf<NativeInputState>() == 64 && Marshal.OffsetOf<NativeInputState>(nameof(NativeInputState.SasModeKey)).ToInt32() == 60, "SAS input layout"); Check(NativeRuntime.GetAbiLayout(out var abi) == NativeResult.Success && abi.InputStateSize == 64 && abi.InputSasModeKeyOffset == 60, "native SAS ABI layout");
 }
 static void TransformTest() { var t = RenderTransform.FromAuthoritative(new DoubleQuaternion(0, 0, Math.Sqrt(.5), Math.Sqrt(.5)), new Double3(-1, 2, 3)); Check(t.Rotation.W > .7f && t.Scale.X == -1, "conversion/negative scale policy"); Check(FloatQuaternion.Identity == new FloatQuaternion(0, 0, 0, 1), "identity"); }
 static void OrbitCurveTransportTest()

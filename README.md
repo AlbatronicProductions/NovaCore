@@ -18,6 +18,7 @@ Authoritative simulation is managed C#. Native code owns only platform input and
 - Double-precision, camera-relative rendering with a deterministic Vulkan backend.
 - Analytical orbit visualization, including a previous-orbit ghost after an impulse.
 - Spacecraft attitude and torque-driven rigid-body rotation with quaternion-based body orientation and an authoritative spacecraft body reference frame.
+- Sample-local SAS mode selection and exact-time hold-attitude capture; automatic SAS pointing remains a later control-integration step.
 
 ## Architecture
 
@@ -41,7 +42,7 @@ Graphics never traverses frame graphs, evaluates transforms, owns simulation tim
 
 `--scene=celestial` is a compact analytical visual fixture: cyan denotes the current authoritative orbit and, after its scheduled impulse, a dim curve denotes the immediately previous orbit. A small marker identifies the exact impulse location. These curves and marker are derived visualization only—not mutable trails, prediction state, saved history, or renderer-owned orbit models. Triangle markers and their presentation scale are debug geometry only, not physical body rendering.
 
-Hyperbolic and parabolic propagation, patched conics, sphere-of-influence transitions, N-body gravity, controllable spacecraft dynamics, terrain, atmosphere, networking, and save/load remain future work.
+Hyperbolic and parabolic propagation, patched conics, sphere-of-influence transitions, N-body gravity, automatic SAS pointing, terrain, atmosphere, networking, and save/load remain future work.
 
 ## Building and Testing
 
@@ -73,7 +74,7 @@ dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=fixture-dynam
 dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=celestial
 ```
 
-The default triangle command renders the reusable mesh field. `--scene=frames` retains the frame-marker view. `NovaCore.ReferenceFrameFixture` verifies static graph and transform resolution in the terminal. `--scene=fixture` draws static Star, Planet, Moon, and TestVessel markers; `--scene=fixture-dynamic` publishes complete immutable snapshots for prescribed transform motion. `--scene=celestial` uses the authoritative clock, trajectory evaluator, frame extraction, and existing camera-relative Vulkan path. Its spacecraft marker rotates from simulation time, and its fixture torque changes that spin at an exact authoritative instant. It is not N-body gravity, patched conics, terrain, spacecraft gameplay, lighting, or final planet rendering.
+The default triangle command renders the reusable mesh field. `--scene=frames` retains the frame-marker view. `NovaCore.ReferenceFrameFixture` verifies static graph and transform resolution in the terminal. `--scene=fixture` draws static Star, Planet, Moon, and TestVessel markers; `--scene=fixture-dynamic` publishes complete immutable snapshots for prescribed transform motion. `--scene=celestial` uses the authoritative clock, trajectory evaluator, frame extraction, and existing camera-relative Vulkan path. Its spacecraft marker rotates from simulation time, and its fixture torque changes that spin at an exact authoritative instant. Keys `1`–`7` select sample-local SAS modes (`1` captures hold attitude); `0` disables SAS. These selections do not yet steer the spacecraft automatically. It is not N-body gravity, patched conics, terrain, spacecraft gameplay, lighting, or final planet rendering.
 
 ## Documentation
 

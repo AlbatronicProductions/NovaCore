@@ -25,6 +25,6 @@ The existing immutable reference-frame graph contains each spacecraft body frame
 
 RCS, propulsion, SAS, control input, persistence, and spacecraft graphics remain deferred.
 
-Milestone 8B-4A adds pure guidance math only. Flight-reference directions derive from exact Cartesian trajectory position and velocity, never camera-relative values. A deterministic target basis maps body `+X` to the selected direction, body `+Y` right, and body `+Z` down; degenerate up vectors use a fixed `+Z`, `+Y`, `+X` fallback order. Input, control cadence, authoritative SAS integration, and high-warp behavior remain deferred.
+Milestone 8B-4A adds pure guidance math. Flight-reference directions derive from exact Cartesian trajectory position and velocity, never camera-relative values. A deterministic target basis maps body `+X` to the selected direction, body `+Y` right, and body `+Z` down; degenerate up vectors use a fixed `+Z`, `+Y`, `+X` fallback order. The sample additionally supports local numeric SAS mode selection and exact-time hold-target capture, but it does not yet execute automatic SAS torque. Control cadence, authoritative SAS integration, and high-warp behavior remain deferred.
 
 The Milestone 8B rigid-body contract evaluates prescribed constant body-space torque with diagonal principal inertia. When present in the store, it is the authoritative source used by body-frame extraction and exact-time replacement transactions; see [Rotational Dynamics](rotational-dynamics.md).

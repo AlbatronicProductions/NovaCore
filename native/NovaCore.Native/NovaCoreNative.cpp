@@ -28,7 +28,7 @@ static_assert(offsetof(NcRenderObject, position) == 0 &&
               offsetof(NcRenderObject, mesh) == 64);
 static_assert(sizeof(NcDrawBatch) == 16);
 static_assert(sizeof(NcOrbitLineVertex) == 12);
-static_assert(sizeof(NcInputState) == 60);
+static_assert(sizeof(NcInputState) == 64);
 static_assert(offsetof(NcInputState, deltaSeconds) == 0);
 static_assert(offsetof(NcInputState, moveLeft) == 4);
 static_assert(offsetof(NcInputState, moveRight) == 8);
@@ -44,6 +44,7 @@ static_assert(offsetof(NcInputState, mouseWheelDetents) == 44);
 static_assert(offsetof(NcInputState, pauseToggle) == 48);
 static_assert(offsetof(NcInputState, rateDecrease) == 52);
 static_assert(offsetof(NcInputState, rateIncrease) == 56);
+static_assert(offsetof(NcInputState, sasModeKey) == 60);
 struct Vertex {
   float position[3];
   float color[3];
@@ -107,6 +108,7 @@ struct App {
   LONG wheelDeltaRaw{};
   bool lookActive{};
   bool pauseWasDown{}, rateDecreaseWasDown{}, rateIncreaseWasDown{};
+  std::array<bool, 8> sasModeWasDown{};
   void Log(uint32_t cat, const char *msg) const {
     if (cb) {
       NcHostEvent e{NC_DIAGNOSTIC, cat, msg, {}, {}};
@@ -129,6 +131,7 @@ void ClearRawInput(App &a) {
   a.pauseWasDown = false;
   a.rateDecreaseWasDown = false;
   a.rateIncreaseWasDown = false;
+  a.sasModeWasDown.fill(false);
 }
 void ClearLookInput(App &a) {
   a.rawMouseX = 0;
@@ -938,6 +941,8 @@ void Update(App &a, float dt) {
     wasDown = down;
     return result;
   };
+  uint32_t sasModeKey = 0;
+  for (int key = 0; key < 8; ++key) if (rising('0' + key, a.sasModeWasDown[key])) { sasModeKey = static_cast<uint32_t>(key + 1); break; }
   NcInputState in{dt,
                   (GetAsyncKeyState('A') & 0x8000) != 0,
                   (GetAsyncKeyState('D') & 0x8000) != 0,
@@ -952,7 +957,7 @@ void Update(App &a, float dt) {
                   wheel,
                   rising(VK_SPACE, a.pauseWasDown),
                   rising(VK_OEM_COMMA, a.rateDecreaseWasDown),
-                  rising(VK_OEM_PERIOD, a.rateIncreaseWasDown)};
+                  rising(VK_OEM_PERIOD, a.rateIncreaseWasDown), sasModeKey};
   NcHostEvent e{NC_UPDATE_FRAME, NC_LOG_NONE, nullptr, in, a.submission};
   a.cb(&e, a.cbData);
   Validate(a);
@@ -993,7 +998,8 @@ extern "C" NC_API NcResult __cdecl nc_get_abi_layout(NcAbiLayout *o) {
         (uint32_t)offsetof(NcInputState, mouseWheelDetents),
         (uint32_t)offsetof(NcInputState, pauseToggle),
         (uint32_t)offsetof(NcInputState, rateDecrease),
-        (uint32_t)offsetof(NcInputState, rateIncrease)};
+        (uint32_t)offsetof(NcInputState, rateIncrease),
+        (uint32_t)offsetof(NcInputState, sasModeKey)};
   return NC_SUCCESS;
 }
 extern "C" NC_API NcResult __cdecl
