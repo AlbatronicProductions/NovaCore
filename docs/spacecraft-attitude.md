@@ -1,6 +1,6 @@
 # Spacecraft Attitude
 
-Milestone 8A-1 defines the internal, authoritative attitude contract for a future spacecraft simulation. It does not add a spacecraft store, transaction payload, frame extraction, rendering path, input path, or control system.
+Milestone 8A-2 integrates the internal attitude contract into the authoritative fixed spacecraft store. `SimulationState` owns the store and exposes only `SpacecraftStateView` to evaluators. Declaration order and IDs are stable; warmed lookup and attitude evaluation allocate no managed memory.
 
 `SpacecraftAttitudeState` identifies a nonzero `SpacecraftId`, an exact `SimulationInstant` epoch, a local-to-parent `DoubleQuaternion`, a body-frame angular velocity in radians per second, and `ConstantBodyAngularVelocityV1`. The state is a value contract; `SpacecraftAttitudeEvaluator` is pure and returns a controlled status instead of using expected failures as exceptions.
 
@@ -19,4 +19,8 @@ Orientation inputs are rejected when non-finite or when squared norm is at most 
 
 The only supported model is constant body angular velocity. Torque, inertia, RCS, propulsion, SAS, control input, celestial/frame extraction, persistence, and graphics integration remain deferred.
 
-Future transaction work will make a validated attitude state part of authoritative `SimulationState`; a later immutable `SimulationSnapshot` will publish it to frame extraction and rendering. Graphics will receive only resolved derived transport data and will never evaluate or own spacecraft attitude.
+Direct immutable replacement candidates are built by a pure evaluator and committed only by `SimulationTransactionEngine`. A successful candidate atomically replaces one stored attitude, increments state revision once, and appends compact transition metadata. It does not advance the clock or consume an event in this slice.
+
+The existing immutable reference-frame graph contains each spacecraft body frame beneath its declared carrier frame. At an exact clock instant, celestial extraction produces carrier position and velocity; spacecraft extraction produces zero body translation and origin velocity, evaluated local-to-parent orientation, and parent-space angular velocity `q.Rotate(ω_body)`. Graphics receives only the resolved derived transform later in the existing snapshot path.
+
+Torque, inertia, RCS, propulsion, SAS, control input, persistence, and spacecraft graphics remain deferred.

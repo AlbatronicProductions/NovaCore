@@ -69,7 +69,7 @@ dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=fixture-dynam
 dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=celestial
 ```
 
-The default triangle command renders the reusable mesh field. `--scene=frames` retains the frame-marker view. `NovaCore.ReferenceFrameFixture` verifies static graph and transform resolution in the terminal. `--scene=fixture` draws static Star, Planet, Moon, and TestVessel markers; `--scene=fixture-dynamic` publishes complete immutable snapshots for prescribed transform motion. `--scene=celestial` uses the authoritative clock, trajectory evaluator, frame extraction, and existing camera-relative Vulkan path. It is not N-body gravity, patched conics, terrain, spacecraft gameplay, lighting, or final planet rendering.
+The default triangle command renders the reusable mesh field. `--scene=frames` retains the frame-marker view. `NovaCore.ReferenceFrameFixture` verifies static graph and transform resolution in the terminal. `--scene=fixture` draws static Star, Planet, Moon, and TestVessel markers; `--scene=fixture-dynamic` publishes complete immutable snapshots for prescribed transform motion. `--scene=celestial` uses the authoritative clock, trajectory evaluator, frame extraction, and existing camera-relative Vulkan path. Its spacecraft marker has simulation-driven orientation derived from authoritative time. It is not N-body gravity, patched conics, terrain, spacecraft gameplay, lighting, or final planet rendering.
 
 ## Documentation
 

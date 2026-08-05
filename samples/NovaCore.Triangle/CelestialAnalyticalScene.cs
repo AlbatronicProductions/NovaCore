@@ -4,6 +4,8 @@ using NovaCore.Core.ReferenceFrames;
 using NovaCore.Graphics;
 using NovaCore.Simulation.Celestial;
 using NovaCore.Simulation.Celestial.ReferenceFrames;
+using NovaCore.Simulation.Spacecraft;
+using NovaCore.Simulation.Spacecraft.ReferenceFrames;
 using NovaCore.Simulation.Clock;
 using NovaCore.Simulation.Time;
 using NovaCore.Simulation.Timeline;
@@ -24,10 +26,11 @@ internal sealed class CelestialAnalyticalScene
     private readonly ReferenceFrameId _rootFrame = new(1);
     private readonly ReferenceFrameId _satelliteFrame = new(2);
     private readonly ReferenceFrameGraph _graph;
-    private readonly ReferenceFrameEvaluation[] _evaluations = new ReferenceFrameEvaluation[2];
-    private readonly ReferenceFrameId[] _sourcePath = new ReferenceFrameId[2];
-    private readonly ReferenceFrameId[] _targetPath = new ReferenceFrameId[2];
-    private readonly ReferenceFrameId[] _traversalPath = new ReferenceFrameId[3];
+    private readonly ReferenceFrameId _spacecraftFrame = new(3);
+    private readonly ReferenceFrameEvaluation[] _evaluations = new ReferenceFrameEvaluation[3];
+    private readonly ReferenceFrameId[] _sourcePath = new ReferenceFrameId[3];
+    private readonly ReferenceFrameId[] _targetPath = new ReferenceFrameId[3];
+    private readonly ReferenceFrameId[] _traversalPath = new ReferenceFrameId[5];
     private readonly ResolvedRenderObject[] _objects = new ResolvedRenderObject[3];
     private readonly Double3[] _orbitSamples = new Double3[AnalyticalOrbitSampler.VertexCount];
     private readonly UniversePosition[] _orbitPositions = new UniversePosition[AnalyticalOrbitSampler.VertexCount];
@@ -68,6 +71,7 @@ internal sealed class CelestialAnalyticalScene
         {
             var rootBody = new CelestialBodyId(1);
             var satelliteBody = new CelestialBodyId(2);
+            var spacecraftId = new SpacecraftId(1);
             var rootFrame = new ReferenceFrameId(1);
             var satelliteFrame = new ReferenceFrameId(2);
             var speed = Math.Sqrt(RootMu / OrbitRadiusMetres);
@@ -87,10 +91,18 @@ internal sealed class CelestialAnalyticalScene
                 error = $"Celestial scene state failed: {celestialStatus}";
                 return false;
             }
+            if (SpacecraftAttitudeState.TryCreate(spacecraftId, SimulationInstant.Zero, DoubleQuaternion.Identity, new Double3(0d, 0d, .35d), SpacecraftAttitudeModel.ConstantBodyAngularVelocityV1, out var attitude) != SpacecraftAttitudeEvaluationStatus.Success)
+            {
+                error = "Celestial spacecraft attitude failed.";
+                return false;
+            }
+            if (!SpacecraftStateStore.TryCreate([new SpacecraftDefinition(spacecraftId, satelliteFrame, new ReferenceFrameId(3), "celestial-spacecraft")], [attitude], out var spacecraft, out var spacecraftStatus) || spacecraft is null)
+            { error = $"Celestial spacecraft state failed: {spacecraftStatus}"; return false; }
 
             var graphBuilder = new ReferenceFrameGraphBuilder();
             graphBuilder.Add(new ReferenceFrameNode(rootFrame, null, ReferenceFrameKind.Ecl, "celestial-root-inertial"));
             graphBuilder.Add(new ReferenceFrameNode(satelliteFrame, rootFrame, ReferenceFrameKind.Cce, "celestial-satellite-inertial"));
+            graphBuilder.Add(new ReferenceFrameNode(new ReferenceFrameId(3), satelliteFrame, ReferenceFrameKind.Ccf, "celestial-spacecraft-body"));
             var graph = graphBuilder.Build();
             var timeline = new SimulationTimeline(initialCapacity: 1);
             if (!SimulationEventRequest.TryCreateCelestialImpulse(new SimulationEventId(1), ImpulseTime, 0, satelliteBody, new Double3(0d, ImpulseMetresPerSecond, 0d), out var impulse) ||
@@ -101,7 +113,7 @@ internal sealed class CelestialAnalyticalScene
             }
 
             var clock = new SimulationClock(SimulationInstant.Zero, timeline, new SimulationRate(SampleRate, 1));
-            var transactions = new SimulationTransactionEngine(clock, new SimulationState(celestial), initialHistoryCapacity: 1);
+            var transactions = new SimulationTransactionEngine(clock, new SimulationState(celestial, spacecraft), initialHistoryCapacity: 1);
             var candidate = new CelestialAnalyticalScene(graph, clock, transactions);
             if (!candidate.TryPublishCandidate(false, out error)) return false;
             scene = candidate;
@@ -181,7 +193,8 @@ internal sealed class CelestialAnalyticalScene
 
     private bool TryBuildCandidate(bool forceInvalidMesh, out ResolvedRenderSnapshot? snapshot, out string error)
     {
-        var view = _transactions.State.Celestial;
+        var state = _transactions.State;
+        var view = state.Celestial;
         var extraction = CelestialReferenceFrameEvaluator.TryEvaluate(view, _graph, _clock.CurrentTime, _evaluations);
         if (extraction != CelestialReferenceFrameEvaluationStatus.Success)
         {
@@ -189,18 +202,25 @@ internal sealed class CelestialAnalyticalScene
             error = $"Celestial frame extraction failed: {extraction}";
             return false;
         }
+        var spacecraftExtraction = SpacecraftReferenceFrameEvaluator.TryEvaluate(state.Spacecraft, _graph, _clock.CurrentTime, _evaluations);
+        if (spacecraftExtraction != SpacecraftReferenceFrameEvaluationStatus.Success)
+        {
+            snapshot = null;
+            error = $"Spacecraft frame extraction failed: {spacecraftExtraction}";
+            return false;
+        }
 
         try
         {
             var transforms = new ReferenceFrameTransformSet(_graph, _evaluations);
-            if (!TryResolve(transforms, _rootFrame, out var root, out error) || !TryResolve(transforms, _satelliteFrame, out var satellite, out error))
+            if (!TryResolve(transforms, _rootFrame, out var root, out error) || !TryResolve(transforms, _satelliteFrame, out var satellite, out error) || !TryResolve(transforms, _spacecraftFrame, out var spacecraft, out error))
             {
                 snapshot = null;
                 return false;
             }
 
             _objects[0] = Marker(1, root.ConvertPosition(Double3.Zero), new Double3(20d, 20d, 1d), MeshHandle.Triangle);
-            _objects[1] = Marker(2, satellite.ConvertPosition(Double3.Zero), new Double3(10d, 10d, 1d), forceInvalidMesh ? MeshHandle.Invalid : MeshHandle.Triangle);
+            _objects[1] = Marker(2, spacecraft.ConvertPosition(Double3.Zero), new Double3(12d, 4d, 1d), forceInvalidMesh ? MeshHandle.Invalid : MeshHandle.Triangle, spacecraft.SourceToTarget.Rotation);
             _objects[2] = Marker(3, _burnPointMetres, _burnVisible ? new Double3(2.5d, 2.5d, 1d) : Double3.Zero, MeshHandle.Triangle);
             if (!view.TryGetState(new CelestialBodyId(2), out var satelliteState) || satelliteState.Trajectory is not { } trajectory || !view.TryGetDefinition(trajectory.CentralBody, out var central))
             {
@@ -248,8 +268,8 @@ internal sealed class CelestialAnalyticalScene
         }
     }
 
-    private ResolvedRenderObject Marker(uint id, in Double3 resolvedMetres, in Double3 scale, MeshHandle mesh) =>
-        new(new RenderObjectId(id), new UniversePosition(resolvedMetres / MetresPerDisplayUnit, _rootFrame), DoubleQuaternion.Identity, scale, mesh);
+    private ResolvedRenderObject Marker(uint id, in Double3 resolvedMetres, in Double3 scale, MeshHandle mesh, DoubleQuaternion? rotation = null) =>
+        new(new RenderObjectId(id), new UniversePosition(resolvedMetres / MetresPerDisplayUnit, _rootFrame), rotation ?? DoubleQuaternion.Identity, scale, mesh);
 
     private bool TryResolve(ReferenceFrameTransformSet transforms, ReferenceFrameId source, out ResolvedReferenceFrameTransform resolved, out string error)
     {

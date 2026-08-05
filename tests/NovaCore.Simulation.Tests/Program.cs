@@ -6,6 +6,8 @@ using NovaCore.Simulation.Celestial;
 using NovaCore.Simulation.Celestial.Transactions;
 using NovaCore.Simulation.Celestial.ReferenceFrames;
 using NovaCore.Simulation.Spacecraft;
+using NovaCore.Simulation.Spacecraft.ReferenceFrames;
+using NovaCore.Simulation.Spacecraft.Transactions;
 using NovaCore.Core;
 using NovaCore.Core.ReferenceFrames;
 using System.Diagnostics;
@@ -26,6 +28,7 @@ var tests = new (string Name, Action Test)[]
     ("Celestial contracts", CelestialContractTests),
     ("Two-body propagation", TwoBodyPropagationTests),
     ("Spacecraft attitude", SpacecraftAttitudeTests),
+    ("Spacecraft attitude integration", SpacecraftAttitudeIntegrationTests),
     ("Analytical orbit sampling", AnalyticalOrbitSamplingTests),
     ("Celestial frame extraction", CelestialFrameExtractionTests),
     ("Celestial trajectory replacement", CelestialTrajectoryReplacementTests),
@@ -85,6 +88,29 @@ static void SpacecraftAttitudeTests()
         hash = Mix(hash, (ulong)evaluated.RequestedTime.Ticks); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(orientation.X)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(orientation.Y)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(orientation.Z)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(orientation.W)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(evaluated.AngularVelocityBody.Z)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(basis.X)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(basis.Y)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(basis.Z));
     }
     Check(GC.GetAllocatedBytesForCurrentThread() == before, "warm attitude allocation"); Console.WriteLine($"Deterministic spacecraft-attitude hash: 0x{hash:X16}; allocation=0 bytes");
+}
+
+static void SpacecraftAttitudeIntegrationTests()
+{
+    var id = new SpacecraftId(44); var carrier = new ReferenceFrameId(2); var body = new ReferenceFrameId(3);
+    Check(SpacecraftAttitudeState.TryCreate(id, SimulationInstant.Zero, DoubleQuaternion.Identity, new Double3(0d, 0d, Math.PI), SpacecraftAttitudeModel.ConstantBodyAngularVelocityV1, out var initial) == SpacecraftAttitudeEvaluationStatus.Success, "spacecraft initial attitude");
+    var definitions = new[] { new SpacecraftDefinition(id, carrier, body, "test-spacecraft") };
+    Check(SpacecraftStateStore.TryCreate(definitions, new[] { initial }, out var store, out var storeStatus) && store is not null && storeStatus == SpacecraftStateStoreStatus.Success, "spacecraft store construction");
+    var view = store!.CreateView(); Check(view.Count == 1 && view.TryGetDefinition(id, out var definition) && definition.BodyFrame == body && view.TryGetAttitude(id, out var stored) && stored == initial, "spacecraft lookup/declaration order");
+    Check(!SpacecraftStateStore.TryCreate([definitions[0], definitions[0]], [initial, initial], out _, out var duplicateStatus) && duplicateStatus == SpacecraftStateStoreStatus.DuplicateSpacecraftId, "duplicate spacecraft rejection");
+    var graphBuilder = new ReferenceFrameGraphBuilder(); graphBuilder.Add(new ReferenceFrameNode(new ReferenceFrameId(1), null, ReferenceFrameKind.Ecl, "root")); graphBuilder.Add(new ReferenceFrameNode(carrier, new ReferenceFrameId(1), ReferenceFrameKind.Cce, "carrier")); graphBuilder.Add(new ReferenceFrameNode(body, carrier, ReferenceFrameKind.Ccf, "body")); var graph = graphBuilder.Build();
+    var evaluations = new ReferenceFrameEvaluation[3]; var frameStatus = SpacecraftReferenceFrameEvaluator.TryEvaluate(view, graph, SimulationInstant.FromSecondsRounded(.5d), evaluations); Check(frameStatus == SpacecraftReferenceFrameEvaluationStatus.Success, "spacecraft body-frame extraction");
+    var bodyEvaluation = evaluations[2].Value; Check(bodyEvaluation.LocalToParent.Translation == Double3.Zero && bodyEvaluation.OriginVelocityInParent == Double3.Zero && Math.Abs(bodyEvaluation.AngularVelocityInParent.Z - Math.PI) < 1e-12d && Math.Abs(SpacecraftAttitudeEvaluator.Forward(bodyEvaluation.LocalToParent.Rotation).Y - 1d) < 1e-12d, "body frame attitude and parent angular velocity");
+    var clock = new SimulationClock(SimulationInstant.Zero, new SimulationTimeline(), SimulationRate.One); var engine = new SimulationTransactionEngine(clock, new SimulationState(null, store), initialHistoryCapacity: 1);
+    Check(SpacecraftAttitudeState.TryCreate(id, SimulationInstant.Zero, DoubleQuaternion.FromAxisAngle(Double3.UnitX, .25d), initial.AngularVelocityBody, initial.Model, out var replacement) == SpacecraftAttitudeEvaluationStatus.Success, "replacement state");
+    var created = SpacecraftAttitudeTransactionEvaluator.TryCreateReplacement(engine.State, clock.CurrentTime, id, replacement); Check(created.Succeeded && created.Transaction is not null, "pure attitude replacement candidate"); var transaction = created.Transaction!.Value;
+    var committed = engine.ValidateAndCommit(transaction); Check(committed.Committed && engine.ProcessedSpacecraftAttitudeCount == 1 && engine.State.Revision == new StateRevision(1) && engine.State.Spacecraft.TryGetAttitude(id, out var current) && current == replacement, "direct attitude commit and history");
+    Check(engine.ValidateAndCommit(transaction).Status == SpacecraftAttitudeTransactionStatus.StateRevisionMismatch, "stale attitude candidate rejection");
+    var noOp = SpacecraftAttitudeTransactionEvaluator.TryCreateReplacement(engine.State, clock.CurrentTime, id, replacement); Check(noOp.Status == SpacecraftAttitudeTransactionStatus.ReplacementNoOp, "attitude no-op rejection");
+    var mismatch = new SpacecraftAttitudeReplacementTransaction(SimulationInstant.FromWholeSeconds(1), engine.State.Revision, id, replacement, initial); Check(engine.ValidateAndCommit(mismatch).Status == SpacecraftAttitudeTransactionStatus.TimeMismatch, "attitude time mismatch rejection");
+    _ = view.TryGetAttitude(id, out _); var before = GC.GetAllocatedBytesForCurrentThread(); ulong hash = 14695981039346656037UL;
+    for (var index = 0; index < 100_000; index++) { Check(view.TryGetAttitude(id, out var warm), "warm spacecraft lookup"); var evaluated = SpacecraftAttitudeEvaluator.TryEvaluate(warm, new SimulationInstant(index)); Check(evaluated.Succeeded && SpacecraftReferenceFrameEvaluator.TryEvaluate(view, graph, new SimulationInstant(index), evaluations) == SpacecraftReferenceFrameEvaluationStatus.Success, "warm spacecraft evaluation/extraction"); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(evaluated.OrientationLocalToParent.W)); }
+    Check(GC.GetAllocatedBytesForCurrentThread() == before, "warm spacecraft store/evaluation/frame extraction allocation"); Console.WriteLine($"Deterministic spacecraft-attitude integration hash: 0x{hash:X16}; allocation=0 bytes");
 }
 
 static void AnalyticalOrbitSamplingTests()

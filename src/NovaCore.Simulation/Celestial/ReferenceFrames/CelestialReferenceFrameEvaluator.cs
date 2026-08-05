@@ -20,11 +20,11 @@ internal static class CelestialReferenceFrameEvaluator
         if (destination.Length < graph.Count) return CelestialReferenceFrameEvaluationStatus.DestinationTooSmall;
         if (celestial.Count == 0) return CelestialReferenceFrameEvaluationStatus.EmptySystem;
         if (graph.RootCount != 1) return CelestialReferenceFrameEvaluationStatus.MultipleGraphRoots;
-        if (celestial.Count != graph.Count) return CelestialReferenceFrameEvaluationStatus.GraphCelestialCountMismatch;
+        if (celestial.Count > graph.Count) return CelestialReferenceFrameEvaluationStatus.GraphCelestialCountMismatch;
 
         // Graph insertion order is canonical and parent-before-child. Require the celestial
         // declaration to match it rather than creating a second hierarchy or runtime index.
-        for (var index = 0; index < graph.Count; index++)
+        for (var index = 0; index < celestial.Count; index++)
         {
             var node = graph.GetNodeAt(index);
             var definition = celestial.GetDefinition(index);
@@ -45,7 +45,7 @@ internal static class CelestialReferenceFrameEvaluator
             if (trajectory.CentralBody != parentDefinition.Id) return CelestialReferenceFrameEvaluationStatus.TrajectoryPrimaryMismatch;
         }
 
-        for (var index = 0; index < graph.Count; index++)
+        for (var index = 0; index < celestial.Count; index++)
         {
             var definition = celestial.GetDefinition(index);
             if (graph.GetParentIndexAt(index) < 0)

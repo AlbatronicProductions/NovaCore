@@ -3,6 +3,8 @@ using NovaCore.Simulation.Time;
 using NovaCore.Simulation.Timeline;
 using NovaCore.Simulation.Celestial;
 using NovaCore.Simulation.Celestial.Transactions;
+using NovaCore.Simulation.Spacecraft;
+using NovaCore.Simulation.Spacecraft.Transactions;
 using System.Diagnostics;
 
 namespace NovaCore.Simulation.Transactions;
@@ -13,6 +15,7 @@ internal sealed class SimulationTransactionEngine
     private readonly SimulationClock _clock;
     private readonly SimulationState _state;
     private readonly List<ProcessedSimulationEvent> _history;
+    private readonly List<ProcessedSpacecraftAttitudeTransition> _spacecraftAttitudeHistory;
     private bool _isExecutingGroup;
     private readonly SimulationExecutionOrchestrator _orchestrator;
 
@@ -22,11 +25,15 @@ internal sealed class SimulationTransactionEngine
         _state = state ?? throw new ArgumentNullException(nameof(state));
         if (initialHistoryCapacity < 0) throw new ArgumentOutOfRangeException(nameof(initialHistoryCapacity));
         _history = new List<ProcessedSimulationEvent>(initialHistoryCapacity);
+        _spacecraftAttitudeHistory = new List<ProcessedSpacecraftAttitudeTransition>(initialHistoryCapacity);
         _orchestrator = new SimulationExecutionOrchestrator(_clock, this);
     }
 
     public SimulationStateView State => _state.CreateView();
     public int ProcessedCount => _history.Count;
+    internal int ProcessedSpacecraftAttitudeCount => _spacecraftAttitudeHistory.Count;
+    internal bool TryGetProcessedSpacecraftAttitude(int index, out ProcessedSpacecraftAttitudeTransition value)
+    { if ((uint)index < (uint)_spacecraftAttitudeHistory.Count) { value = _spacecraftAttitudeHistory[index]; return true; } value = default; return false; }
     public bool TryGetProcessed(int index, out ProcessedSimulationEvent value)
     {
         if ((uint)index < (uint)_history.Count) { value = _history[index]; return true; }
@@ -159,6 +166,22 @@ internal sealed class SimulationTransactionEngine
         return new(CelestialTrajectoryTransactionStatus.Success, processed);
     }
 
+    /// <summary>Commits one pure direct attitude candidate. It neither consumes a timeline event nor advances time.</summary>
+    internal SpacecraftAttitudeTransactionResult ValidateAndCommit(SpacecraftAttitudeReplacementTransaction transaction)
+    {
+        var validation = Validate(transaction);
+        if (validation != SpacecraftAttitudeTransactionStatus.Success) return new(validation, null);
+        if (_spacecraftAttitudeHistory.Count == _spacecraftAttitudeHistory.Capacity)
+            _spacecraftAttitudeHistory.EnsureCapacity(checked(_spacecraftAttitudeHistory.Count + 1));
+        var before = _state.CreateView().Revision;
+        if (!_state.CommitSpacecraftAttitudeReplacement(transaction.Subject, transaction.ExpectedAttitude, transaction.ReplacementAttitude, out var storeStatus))
+            throw new InvalidOperationException($"Validated spacecraft attitude replacement failed in store: {storeStatus}.");
+        var after = _state.CreateView().Revision;
+        var processed = new ProcessedSpacecraftAttitudeTransition(transaction.Subject, transaction.EvaluationTime, before, after, SpacecraftAttitudeTransactionEvaluator.ComputeHash(transaction.ExpectedAttitude), SpacecraftAttitudeTransactionEvaluator.ComputeHash(transaction.ReplacementAttitude));
+        _spacecraftAttitudeHistory.Add(processed);
+        return new(SpacecraftAttitudeTransactionStatus.Success, processed);
+    }
+
     private SimulationTransactionValidationResult Validate(SimulationTransaction transaction)
     {
         if (!_clock.Timeline.TryPeekPending(out var pending)) return new(SimulationTransactionValidationStatus.NoPendingEvent);
@@ -204,6 +227,16 @@ internal sealed class SimulationTransactionEngine
             transaction.ReplacementTrajectory,
             requireExpected: true,
             out _);
+    }
+
+    private SpacecraftAttitudeTransactionStatus Validate(SpacecraftAttitudeReplacementTransaction transaction)
+    {
+        if (transaction.EvaluationTime != _clock.CurrentTime) return SpacecraftAttitudeTransactionStatus.TimeMismatch;
+        var state = _state.CreateView();
+        if (transaction.ExpectedStateRevision != state.Revision) return SpacecraftAttitudeTransactionStatus.StateRevisionMismatch;
+        if (_spacecraftAttitudeHistory.Count == _spacecraftAttitudeHistory.Capacity) return SpacecraftAttitudeTransactionStatus.HistoryCapacityFailure;
+        if (state.Revision.Value == ulong.MaxValue) return SpacecraftAttitudeTransactionStatus.StateRevisionOverflow;
+        return SpacecraftAttitudeTransactionEvaluator.Validate(state, transaction.EvaluationTime, transaction.Subject, transaction.ExpectedAttitude, transaction.ReplacementAttitude, true);
     }
 
     internal SimulationCanonicalGroupResult ExecuteCanonicalGroupWhileGuardedForTest()
