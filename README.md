@@ -1,54 +1,43 @@
 # NovaCore
 
-NovaCore is a deterministic, high-precision simulation framework with a native C++20/Vulkan rendering backend. It is a foundation for large-scale spaceflight games, not a complete game engine. Within its implemented deterministic contracts, identical authoritative inputs are intended to produce identical simulation results.
+NovaCore is a deterministic, high-precision simulation foundation with a native C++20/Vulkan rendering backend. It is intended for large-scale spaceflight games, not a complete game engine. Within its tested .NET x64 contracts, identical authoritative inputs produce identical deterministic results.
 
-## Project Overview
+## Overview
 
-Authoritative simulation remains managed C# data. The native layer owns only platform input and Vulkan rendering. Double-precision spatial mathematics, immutable evaluated reference-frame snapshots, and camera-relative GPU transport keep simulation ownership separate from rendering concerns.
+Authoritative simulation is managed C#. Native code owns only platform input and Vulkan rendering. Double-precision spatial mathematics, immutable evaluated reference-frame data, and camera-relative GPU transport keep simulation meaning outside the renderer.
 
 ## Current Capabilities
 
-- **Precision mathematics** — checked microtick time primitives, double-precision spatial values, and high/low FP32 GPU position encoding.
-- **Reference-frame system** — immutable structural graphs and evaluated transforms resolved in managed code, including the terminal Star–Planet–Moon–Vessel fixture.
-- **Resolved render transport** — immutable root-resolved render snapshots feed camera-relative GPU transport without giving Graphics frame-graph ownership.
-- **Graphics abstraction** — reusable mesh handles, indexed instanced drawing, batched render submissions, and Vulkan resource ownership in native code.
-- **Camera system** — managed frame-aware Free camera state and control; the renderer receives resolved GPU camera transport only.
-- **Deterministic simulation time primitives (6A)** — `SimulationInstant`, `SimulationDuration`, and normalized rational `SimulationRate`.
-- **Deterministic event timeline (6B-1)** — canonical pending-event ordering, stable IDs, sequence assignment, cancellation, replacement, and timeline revisions.
-- **Deterministic simulation foundation** — exact simulation time, canonical event topology, clock orchestration, and authoritative transaction contracts.
-- **Vulkan visual fixture modes** — static and prescribed-dynamic reference-frame fixtures render through the existing managed/native triangle path.
-
-## Current Milestone Status
-
-Milestone 6E-2 — Static Reference-Frame Fixture Visual Integration — is complete.
-
-The visual fixture is a static transform and render-transport demonstration. It does not imply orbital propagation, gravity, gameplay, `SimulationSnapshot`, or physically realistic bodies.
-
-## Design Principles
-
-- **Determinism** — canonical event ordering and exact authoritative timestamps.
-- **Replayability** — stable IDs, revisions, and deterministic evaluation boundaries support future replay validation.
-- **Numerical stability** — simulation uses doubles; rendering resolves positions camera-relatively as late as possible.
-- **Allocation-free steady-state execution** — tested arithmetic, timeline, and clock paths avoid managed allocation after adequate preallocation.
-- **Immutable simulation data** — immutable evaluated frame snapshots separate consumers from mutable authoritative topology.
-- **Explicit ownership** — simulation is managed; Graphics transports resolved data; native code owns Vulkan and platform details.
-- **Long-term maintainability** — small focused abstractions, fixed-width contracts, and deferred features until their ownership model is justified.
+- **Simulation foundation** — exact deterministic time primitives, canonical scheduled-event ordering, transaction-controlled authoritative mutation, same-time group execution, host-duration conversion and advancement, and immutable processed history with revision semantics.
+- **Reference frames** — immutable frame topology, allocation-free path queries, deterministic transform composition, and root-resolved position, orientation, direction, and rotating-frame velocity. Static and prescribed-dynamic fixtures exercise this path.
+- **Graphics foundation** — a flat immutable `ResolvedRenderSnapshot` is the only render-data boundary. It feeds camera-relative high/low FP32 transport, reusable meshes, indexed instancing, warmed allocation-free frame assembly, and the native Vulkan renderer. There is no `RenderWorld`, renderer-owned scene graph, or renderer-owned spatial hierarchy.
+- **Camera system** — managed, frame-aware Free-camera state and control. Graphics receives resolved `GpuCameraData` only.
+- **Celestial contracts** — authoritative celestial identities, central-body definitions with gravitational parameter μ, canonical Cartesian position and velocity at an exact epoch, and immutable two-body trajectory records.
+- **Elliptic two-body propagation** — pure exact-time universal-variable f/g propagation for circular through tested high-eccentricity elliptic trajectories, including backward-time evaluation. Celestial values use SI units: metres, metres per second, seconds, and m³/s² for μ. Warmed propagation is allocation-free on the tested runtime and rejects unsupported or invalid inputs through controlled results.
 
 ## Architecture
 
 ```text
-Authoritative simulation
+Authoritative celestial state
     ↓
-Reference-frame snapshot and resolution
+Pure exact-time two-body propagation
     ↓
-Resolved render snapshot
+Future evaluated reference-frame transforms
     ↓
-GPU high/low position transport
+ResolvedRenderSnapshot
+    ↓
+Graphics transport
     ↓
 Native Vulkan renderer
 ```
 
-The event timeline and simulation clock remain managed and independent of Graphics. Vulkan, shaders, mesh batching, and native code do not interpret reference-frame or simulation-time semantics.
+The propagation-to-reference-frame connection is planned, not implemented. Graphics never traverses frame graphs, evaluates transforms, owns simulation time, or mutates simulation state.
+
+## Current Limitations
+
+The current propagation contracts are not yet connected to transaction-based trajectory replacement, reference-frame evaluation, or visible orbital rendering. The dynamic visual fixture uses prescribed deterministic transform motion, not real orbital propagation.
+
+Hyperbolic and parabolic propagation, patched conics, sphere-of-influence transitions, N-body gravity, maneuvers, spacecraft gameplay, terrain, atmosphere, networking, and save/load remain future work.
 
 ## Building and Testing
 
@@ -67,7 +56,9 @@ dotnet run --project tests/NovaCore.ReferenceFrames.Tests -c Debug
 dotnet run --project tests/NovaCore.Camera.Tests -c Debug
 ```
 
-For the current rendering sample:
+`NovaCore.Simulation.Tests` is the deterministic terminal verification suite for simulation-time, event, transaction, celestial-contract, and two-body propagation behavior. It is not a visual orbital scene.
+
+## Run the Samples
 
 ```powershell
 dotnet run --project samples/NovaCore.Triangle -c Debug -- --objects=1000
@@ -77,45 +68,27 @@ dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=fixture
 dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=fixture-dynamic
 ```
 
-`NovaCore.ReferenceFrameFixture` verifies static graph and transform resolution in the terminal. The default triangle command renders the reusable mesh field; `--scene=frames` retains the existing frame-marker view; `--scene=fixture` renders four static Star, Planet, Moon, and TestVessel markers; `--scene=fixture-dynamic` republishes complete immutable snapshots for prescribed Moon and TestVessel transform motion. The dynamic mode is not gravity or orbital physics.
-
-See [Build on Windows](docs/build-windows.md) for prerequisites and environment setup.
+The default triangle command renders the reusable mesh field. `--scene=frames` retains the frame-marker view. `NovaCore.ReferenceFrameFixture` verifies static graph and transform resolution in the terminal. `--scene=fixture` draws static Star, Planet, Moon, and TestVessel markers; `--scene=fixture-dynamic` publishes complete immutable snapshots for prescribed transform motion. Neither fixture mode is gravity or orbital physics.
 
 ## Documentation
 
 - [Architecture](docs/architecture.md)
-- [Precision Model](docs/precision-model.md)
+- [Celestial Simulation](docs/celestial-simulation.md)
+- [Simulation Time](docs/simulation-time.md)
 - [Reference Frames](docs/reference-frames.md)
+- [Precision Model](docs/precision-model.md)
 - [Camera](docs/camera.md)
 - [Interop](docs/interop.md)
-- [Simulation Time](docs/simulation-time.md)
 - [Build on Windows](docs/build-windows.md)
 
-## Run the Samples
+## Status and Roadmap
 
-```powershell
-dotnet run --project samples/NovaCore.ReferenceFrameFixture -c Debug
-dotnet run --project samples/NovaCore.Triangle -c Debug
-dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=frames
-dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=fixture
-dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=fixture-dynamic
-```
+The completed foundation includes deterministic simulation orchestration, the reference-frame system, immutable graphics transport, dynamic snapshot publication, authoritative celestial contracts, and pure elliptic two-body propagation.
 
-The fixture modes follow: reference-frame resolution → `ResolvedRenderSnapshot` → camera-relative GPU transport → Vulkan rendering. The dynamic fixture uses prescribed deterministic transform motion and complete immutable snapshot replacement; it is not orbital propagation, gravity, gameplay, `SimulationSnapshot`, or physically realistic bodies.
+Next planned integration is deliberately narrow:
 
-## Future Roadmap
+- Transaction-based authoritative trajectory replacement.
+- Propagated celestial state feeding evaluated reference frames.
+- Visible analytical orbital propagation through the existing Vulkan pipeline.
 
-Planned work, not current functionality:
-
-- Analytical trajectory and orbital-mechanics propagation.
-- Celestial-body and spacecraft simulation.
-- Generated simulation events and expanded processed-event history.
-- Immutable `SimulationSnapshot` publication for renderer synchronization and external consumers.
-- Save/load, replay restoration, and networking built on deterministic revisions and event history.
-
-## Current Status
-
-- **Current milestone:** Milestone 6E-2 — Static Reference-Frame Fixture Visual Integration
-- **Next milestone:** Deferred pending review
-
-NovaCore remains a focused foundation. It does not yet implement trajectories, orbital mechanics, gravity, spacecraft dynamics, networking, ECS, terrain, assets, materials, or gameplay systems.
+NovaCore remains a focused foundation. It does not yet provide complete orbital gameplay, general physics, an ECS, a scene graph, asset tooling, or a renderer-owned world model.
