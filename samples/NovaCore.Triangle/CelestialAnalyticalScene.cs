@@ -22,8 +22,10 @@ internal sealed class CelestialAnalyticalScene
     internal const double OrbitRadiusMetres = 100_000_000d;
     internal const double ImpulseMetresPerSecond = 200d;
     internal static readonly PrincipalMomentsOfInertia FixtureInertia = new(120d, 120d, 120d);
-    internal static readonly Double3 FixtureInitialAngularVelocity = new(.08d, .12d, .35d);
-    internal static readonly Double3 FixtureTorque = new(1.5d, -.8d, .6d);
+    // Presentation-only: deliberately calm at 1× while retaining visible multi-axis response.
+    internal static readonly Double3 FixtureInitialAngularVelocity = new(.01d, .015d, .03d);
+    // Over 5,000 s and 120 kg·m² this adds (.02, -.01, .006̅) rad/s.
+    internal static readonly Double3 FixtureTorque = new(.00048d, -.00024d, .00016d);
     private static readonly SimulationInstant TorqueEndTime = SimulationInstant.FromWholeSeconds(5_000);
     private static readonly SimulationInstant ImpulseTime = SimulationInstant.FromWholeSeconds(100_000);
     private static readonly SimulationRate[] RateSteps = [new(1, 1), new(10, 1), new(100, 1), new(1_000, 1), new(5_000, 1), new(SampleRate, 1), new(50_000, 1)];
