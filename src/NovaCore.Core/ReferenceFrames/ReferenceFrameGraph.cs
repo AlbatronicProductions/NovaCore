@@ -9,6 +9,7 @@ public sealed class ReferenceFrameGraph
     private const int NoIndex = -1;
     private readonly ReferenceFrameNode[] _nodes;
     private readonly int[] _parentIndices;
+    private readonly int[] _depths;
     private readonly int[] _childOffsets;
     private readonly int[] _childCounts;
     private readonly int[] _childIndices;
@@ -21,6 +22,7 @@ public sealed class ReferenceFrameGraph
         _nodes = nodes;
         _indices = new Dictionary<ReferenceFrameId, int>(nodes.Length);
         _parentIndices = new int[nodes.Length];
+        _depths = new int[nodes.Length];
         Array.Fill(_parentIndices, NoIndex);
         for (var index = 0; index < nodes.Length; index++)
         {
@@ -31,6 +33,7 @@ public sealed class ReferenceFrameGraph
             {
                 if (!_indices.TryGetValue(parent, out var parentIndex)) throw new ArgumentException("Frame parent must already exist.", nameof(nodes));
                 _parentIndices[index] = parentIndex;
+                _depths[index] = checked(_depths[parentIndex] + 1);
             }
         }
 
@@ -95,6 +98,11 @@ public sealed class ReferenceFrameGraph
     /// <summary>Returns strict ancestors from immediate parent through the root without allocation.</summary>
     public ReferenceFrameAncestorSequence GetAncestors(ReferenceFrameId descendant) =>
         _indices.TryGetValue(descendant, out var index) ? new(this, index) : default;
+
+    internal bool TryGetIndex(ReferenceFrameId id, out int index) => _indices.TryGetValue(id, out index);
+    internal ReferenceFrameNode GetNodeAt(int index) => _nodes[index];
+    internal int GetParentIndexAt(int index) => _parentIndices[index];
+    internal int GetDepthAt(int index) => _depths[index];
 
     private int[] BuildDepthFirstIndices()
     {
