@@ -9,6 +9,7 @@
   <ItemGroup>
     <Compile Include="..\..\samples\NovaCore.Triangle\StaticReferenceFrameFixtureSceneFactory.cs" Link="StaticReferenceFrameFixtureSceneFactory.cs" />
     <Compile Include="..\..\samples\NovaCore.Triangle\DynamicReferenceFrameFixtureScene.cs" Link="DynamicReferenceFrameFixtureScene.cs" />
+    <Compile Include="..\..\samples\NovaCore.Triangle\CelestialAnalyticalScene.cs" Link="CelestialAnalyticalScene.cs" />
   </ItemGroup>
   <Target Name="CopyNativeRuntime" AfterTargets="Build">
     <Copy SourceFiles="$(MSBuildThisFileDirectory)..\..\build\native-ninja\NovaCore.Native.dll" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />

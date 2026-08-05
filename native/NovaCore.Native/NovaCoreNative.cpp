@@ -27,7 +27,7 @@ static_assert(offsetof(NcRenderObject, position) == 0 &&
               offsetof(NcRenderObject, transform) == 32 &&
               offsetof(NcRenderObject, mesh) == 64);
 static_assert(sizeof(NcDrawBatch) == 16);
-static_assert(sizeof(NcInputState) == 48);
+static_assert(sizeof(NcInputState) == 60);
 static_assert(offsetof(NcInputState, deltaSeconds) == 0);
 static_assert(offsetof(NcInputState, moveLeft) == 4);
 static_assert(offsetof(NcInputState, moveRight) == 8);
@@ -40,6 +40,9 @@ static_assert(offsetof(NcInputState, lookActive) == 32);
 static_assert(offsetof(NcInputState, mouseDeltaX) == 36);
 static_assert(offsetof(NcInputState, mouseDeltaY) == 40);
 static_assert(offsetof(NcInputState, mouseWheelDetents) == 44);
+static_assert(offsetof(NcInputState, pauseToggle) == 48);
+static_assert(offsetof(NcInputState, rateDecrease) == 52);
+static_assert(offsetof(NcInputState, rateIncrease) == 56);
 struct Vertex {
   float position[3];
   float color[3];
@@ -92,6 +95,7 @@ struct App {
   LONG rawMouseX{}, rawMouseY{};
   LONG wheelDeltaRaw{};
   bool lookActive{};
+  bool pauseWasDown{}, rateDecreaseWasDown{}, rateIncreaseWasDown{};
   void Log(uint32_t cat, const char *msg) const {
     if (cb) {
       NcHostEvent e{NC_DIAGNOSTIC, cat, msg, {}, {}};
@@ -111,6 +115,9 @@ void ClearRawInput(App &a) {
   a.rawMouseY = 0;
   a.lookActive = false;
   a.wheelDeltaRaw = 0;
+  a.pauseWasDown = false;
+  a.rateDecreaseWasDown = false;
+  a.rateIncreaseWasDown = false;
 }
 void ClearLookInput(App &a) {
   a.rawMouseX = 0;
@@ -827,7 +834,7 @@ void Destroy(App &a) {
   gApp = nullptr;
 }
 void Update(App &a, float dt) {
-  bool active = (GetAsyncKeyState(VK_RBUTTON) & 0x8000) != 0;
+  bool active = (GetAsyncKeyState(VK_LBUTTON) & 0x8000) != 0 || (GetAsyncKeyState(VK_RBUTTON) & 0x8000) != 0;
   if (active && !a.lookActive) {
     a.lookActive = true;
     a.rawMouseX = 0;
@@ -841,6 +848,12 @@ void Update(App &a, float dt) {
   a.wheelDeltaRaw %= WHEEL_DELTA;
   a.rawMouseX = 0;
   a.rawMouseY = 0;
+  auto rising = [](int key, bool &wasDown) {
+    const bool down = (GetAsyncKeyState(key) & 0x8000) != 0;
+    const bool result = down && !wasDown;
+    wasDown = down;
+    return result;
+  };
   NcInputState in{dt,
                   (GetAsyncKeyState('A') & 0x8000) != 0,
                   (GetAsyncKeyState('D') & 0x8000) != 0,
@@ -852,7 +865,10 @@ void Update(App &a, float dt) {
                   a.lookActive,
                   x,
                   y,
-                  wheel};
+                  wheel,
+                  rising(VK_SPACE, a.pauseWasDown),
+                  rising(VK_OEM_COMMA, a.rateDecreaseWasDown),
+                  rising(VK_OEM_PERIOD, a.rateIncreaseWasDown)};
   NcHostEvent e{NC_UPDATE_FRAME, NC_LOG_NONE, nullptr, in, a.submission};
   a.cb(&e, a.cbData);
   Validate(a);
@@ -887,7 +903,10 @@ extern "C" NC_API NcResult __cdecl nc_get_abi_layout(NcAbiLayout *o) {
         (uint32_t)offsetof(NcInputState, lookActive),
         (uint32_t)offsetof(NcInputState, mouseDeltaX),
         (uint32_t)offsetof(NcInputState, mouseDeltaY),
-        (uint32_t)offsetof(NcInputState, mouseWheelDetents)};
+        (uint32_t)offsetof(NcInputState, mouseWheelDetents),
+        (uint32_t)offsetof(NcInputState, pauseToggle),
+        (uint32_t)offsetof(NcInputState, rateDecrease),
+        (uint32_t)offsetof(NcInputState, rateIncrease)};
   return NC_SUCCESS;
 }
 extern "C" NC_API NcResult __cdecl

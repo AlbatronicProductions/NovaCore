@@ -13,16 +13,16 @@ Authoritative simulation is managed C#. Native code owns only platform input and
 - **Graphics foundation** — a flat immutable `ResolvedRenderSnapshot` is the only render-data boundary. It feeds camera-relative high/low FP32 transport, reusable meshes, indexed instancing, warmed allocation-free frame assembly, and the native Vulkan renderer. There is no `RenderWorld`, renderer-owned scene graph, or renderer-owned spatial hierarchy.
 - **Camera system** — managed, frame-aware Free-camera state and control. Graphics receives resolved `GpuCameraData` only.
 - **Celestial contracts** — authoritative celestial identities, central-body definitions with gravitational parameter μ, canonical Cartesian position and velocity at an exact epoch, and immutable two-body trajectory records.
-- **Elliptic two-body propagation** — pure exact-time universal-variable f/g propagation for circular through tested high-eccentricity elliptic trajectories, including backward-time evaluation. Celestial values use SI units: metres, metres per second, seconds, and m³/s² for μ. Warmed propagation is allocation-free on the tested runtime and rejects unsupported or invalid inputs through controlled results.
+- **Elliptic two-body propagation and frame extraction** — pure exact-time universal-variable f/g propagation evaluates authoritative Cartesian trajectories at `SimulationClock.CurrentTime`. `CelestialReferenceFrameEvaluator` maps the result into immutable local-to-parent frame candidates without mutating state, time, topology, or rendering. Celestial values use SI units: metres, metres per second, seconds, and m³/s² for μ.
 
 ## Architecture
 
 ```text
-Authoritative celestial state
+SimulationClock.CurrentTime
     ↓
 Pure exact-time two-body propagation
     ↓
-Future evaluated reference-frame transforms
+Immutable evaluated reference-frame transforms
     ↓
 ResolvedRenderSnapshot
     ↓
@@ -31,11 +31,11 @@ Graphics transport
 Native Vulkan renderer
 ```
 
-The propagation-to-reference-frame connection is planned, not implemented. Graphics never traverses frame graphs, evaluates transforms, owns simulation time, or mutates simulation state.
+Graphics never traverses frame graphs, evaluates transforms, owns simulation time, or mutates simulation state.
 
 ## Current Limitations
 
-The current propagation contracts are not yet connected to transaction-based trajectory replacement, reference-frame evaluation, or visible orbital rendering. The dynamic visual fixture uses prescribed deterministic transform motion, not real orbital propagation.
+`--scene=celestial` is a compact analytical visual fixture: a central marker and satellite marker are sampled from authoritative two-body trajectories at exact clock instants. A scheduled inertial impulse demonstrates transaction-based trajectory replacement. Triangle markers and their presentation scale are debug geometry only, not physical body rendering.
 
 Hyperbolic and parabolic propagation, patched conics, sphere-of-influence transitions, N-body gravity, maneuvers, spacecraft gameplay, terrain, atmosphere, networking, and save/load remain future work.
 
@@ -66,9 +66,10 @@ dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=frames
 dotnet run --project samples/NovaCore.ReferenceFrameFixture -c Debug
 dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=fixture
 dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=fixture-dynamic
+dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=celestial
 ```
 
-The default triangle command renders the reusable mesh field. `--scene=frames` retains the frame-marker view. `NovaCore.ReferenceFrameFixture` verifies static graph and transform resolution in the terminal. `--scene=fixture` draws static Star, Planet, Moon, and TestVessel markers; `--scene=fixture-dynamic` publishes complete immutable snapshots for prescribed transform motion. Neither fixture mode is gravity or orbital physics.
+The default triangle command renders the reusable mesh field. `--scene=frames` retains the frame-marker view. `NovaCore.ReferenceFrameFixture` verifies static graph and transform resolution in the terminal. `--scene=fixture` draws static Star, Planet, Moon, and TestVessel markers; `--scene=fixture-dynamic` publishes complete immutable snapshots for prescribed transform motion. `--scene=celestial` uses the authoritative clock, trajectory evaluator, frame extraction, and existing camera-relative Vulkan path. It is not N-body gravity, patched conics, terrain, spacecraft gameplay, lighting, or final planet rendering.
 
 ## Documentation
 
@@ -83,12 +84,12 @@ The default triangle command renders the reusable mesh field. `--scene=frames` r
 
 ## Status and Roadmap
 
-The completed foundation includes deterministic simulation orchestration, the reference-frame system, immutable graphics transport, dynamic snapshot publication, authoritative celestial contracts, and pure elliptic two-body propagation.
+The completed foundation includes deterministic simulation orchestration, the reference-frame system, immutable graphics transport, dynamic snapshot publication, authoritative celestial contracts, pure elliptic two-body propagation, exact-time celestial impulses, and visible celestial-to-frame extraction.
 
 Next planned integration is deliberately narrow:
 
-- Transaction-based authoritative trajectory replacement.
-- Propagated celestial state feeding evaluated reference frames.
-- Visible analytical orbital propagation through the existing Vulkan pipeline.
+- Multi-body and non-inertial celestial frame evaluation.
+- Hyperbolic/parabolic propagation and future regime transitions.
+- Physical body and spacecraft presentation without changing simulation authority.
 
 NovaCore remains a focused foundation. It does not yet provide complete orbital gameplay, general physics, an ECS, a scene graph, asset tooling, or a renderer-owned world model.

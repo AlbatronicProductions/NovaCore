@@ -4,7 +4,9 @@ using NovaCore.Simulation.Clock;
 using NovaCore.Simulation.Transactions;
 using NovaCore.Simulation.Celestial;
 using NovaCore.Simulation.Celestial.Transactions;
+using NovaCore.Simulation.Celestial.ReferenceFrames;
 using NovaCore.Core;
+using NovaCore.Core.ReferenceFrames;
 using System.Diagnostics;
 
 var tests = new (string Name, Action Test)[]
@@ -22,6 +24,7 @@ var tests = new (string Name, Action Test)[]
     ("Clock execution orchestration", ClockExecutionTests),
     ("Celestial contracts", CelestialContractTests),
     ("Two-body propagation", TwoBodyPropagationTests),
+    ("Celestial frame extraction", CelestialFrameExtractionTests),
     ("Celestial trajectory replacement", CelestialTrajectoryReplacementTests),
     ("Celestial impulse events", CelestialImpulseEventTests),
     ("Allocation", AllocationTests),
@@ -238,6 +241,40 @@ static bool RawCartesianEqual(in CartesianState left, in CartesianState right) =
 static ulong PropagationHash(in CartesianState state, SimulationInstant epoch, double mu, ReadOnlySpan<SimulationInstant> times) { ulong hash = 14695981039346656037UL; foreach (ref readonly var time in times) { var result = UniversalVariableTwoBodyPropagator.TryEvaluate(state, epoch, time, mu); hash = Mix(hash, (ulong)result.Status); hash = Mix(hash, (ulong)time.Ticks); if (result.Succeeded) { hash = MixCartesian(hash, result.State); } } return hash; }
 static ulong ValidationHash(in CartesianState circular, SimulationInstant epoch, double mu) { ulong hash = 14695981039346656037UL; var hyper = new CartesianState(circular.Position, new Double3(0, Math.Sqrt(2d * mu / circular.Position.X) * 1.01d, 0)); foreach (var result in new[] { UniversalVariableTwoBodyPropagator.TryEvaluate(circular, epoch, SimulationInstant.FromWholeSeconds(1), 0d), UniversalVariableTwoBodyPropagator.TryEvaluate(hyper, epoch, SimulationInstant.FromWholeSeconds(1), mu), UniversalVariableTwoBodyPropagator.TryEvaluate(circular, epoch, new SimulationInstant(UniversalVariableTwoBodyPropagator.MaximumEvaluationTicks + 1), mu) }) { hash = Mix(hash, (ulong)result.Status); hash = Mix(hash, (ulong)result.RequestedTime.Ticks); } return hash; }
 static ulong MixCartesian(ulong hash, in CartesianState state) { hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(state.Position.X)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(state.Position.Y)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(state.Position.Z)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(state.Velocity.X)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(state.Velocity.Y)); return Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(state.Velocity.Z)); }
+
+static void CelestialFrameExtractionTests()
+{
+    var rootBody = new CelestialBodyId(1); var planetBody = new CelestialBodyId(2); var moonBody = new CelestialBodyId(3);
+    var rootFrame = new ReferenceFrameId(1); var planetFrame = new ReferenceFrameId(2); var moonFrame = new ReferenceFrameId(3);
+    var definitions = new[]
+    {
+        new CelestialBodyDefinition(rootBody, null, rootFrame, 1_000d),
+        new CelestialBodyDefinition(planetBody, rootBody, planetFrame, 100d),
+        new CelestialBodyDefinition(moonBody, planetBody, moonFrame, 1d),
+    };
+    var states = new[]
+    {
+        CelestialBodyState.Root(rootBody),
+        CelestialBodyState.Orbiting(planetBody, new TwoBodyTrajectory(rootBody, SimulationInstant.Zero, new CartesianState(new Double3(100d, 0d, 0d), new Double3(0d, Math.Sqrt(10d), 0d)), TwoBodyPropagationModel.CartesianTwoBodyV1)),
+        CelestialBodyState.Orbiting(moonBody, new TwoBodyTrajectory(planetBody, SimulationInstant.Zero, new CartesianState(new Double3(10d, 0d, 0d), new Double3(0d, Math.Sqrt(10d), 0d)), TwoBodyPropagationModel.CartesianTwoBodyV1)),
+    };
+    Check(CelestialStateStore.TryCreate(definitions, states, out var store, out var storeStatus) && store is not null && storeStatus == CelestialStateStoreStatus.Success, "extraction authoritative store");
+    var builder = new ReferenceFrameGraphBuilder(); builder.Add(new ReferenceFrameNode(rootFrame, null, ReferenceFrameKind.Ecl, "root")); builder.Add(new ReferenceFrameNode(planetFrame, rootFrame, ReferenceFrameKind.Cce, "planet")); builder.Add(new ReferenceFrameNode(moonFrame, planetFrame, ReferenceFrameKind.Cci, "moon")); var graph = builder.Build();
+    Span<ReferenceFrameEvaluation> values = stackalloc ReferenceFrameEvaluation[3];
+    Check(CelestialReferenceFrameEvaluator.TryEvaluate(store!.CreateView(), graph, SimulationInstant.Zero, values) == CelestialReferenceFrameEvaluationStatus.Success, "epoch extraction");
+    Check(values[0].Value.LocalToParent == FrameTransform.Identity && values[0].Value.OriginVelocityInParent == Double3.Zero && values[0].Value.AngularVelocityInParent == Double3.Zero, "root identity and velocity");
+    CheckVectorNear(values[1].Value.LocalToParent.Translation, new Double3(100d, 0d, 0d), 1e-12d, "planet local epoch"); CheckVectorNear(values[1].Value.OriginVelocityInParent, new Double3(0d, Math.Sqrt(10d), 0d), 1e-12d, "planet local velocity");
+    var transforms = new ReferenceFrameTransformSet(graph, values); Span<ReferenceFrameId> source = stackalloc ReferenceFrameId[3]; Span<ReferenceFrameId> target = stackalloc ReferenceFrameId[3]; Span<ReferenceFrameId> traversal = stackalloc ReferenceFrameId[5];
+    Check(ReferenceFrameTransformResolver.TryResolveTransform(transforms, moonFrame, rootFrame, source, target, traversal, out var resolved) == ReferenceFrameTransformResolutionStatus.Success, "nested extraction resolution");
+    CheckVectorNear(resolved.ConvertPosition(Double3.Zero), new Double3(110d, 0d, 0d), 1e-12d, "nested root position"); CheckVectorNear(resolved.SourceOriginVelocityInTarget, new Double3(0d, 2d * Math.Sqrt(10d), 0d), 1e-12d, "nested root velocity");
+    var quarter = SimulationInstant.FromSecondsRounded((2d * Math.PI * Math.Sqrt(100d * 100d * 100d / 1_000d)) / 4d); Check(CelestialReferenceFrameEvaluator.TryEvaluate(store.CreateView(), graph, quarter, values) == CelestialReferenceFrameEvaluationStatus.Success && Math.Abs(values[1].Value.LocalToParent.Translation.X) < .01d && values[1].Value.LocalToParent.Translation.Y > 99.99d, "quarter-period local position");
+    Check(CelestialReferenceFrameEvaluator.TryEvaluate(store.CreateView(), graph, SimulationInstant.Zero, values[..2]) == CelestialReferenceFrameEvaluationStatus.DestinationTooSmall, "capacity rejection");
+    var mismatchBuilder = new ReferenceFrameGraphBuilder(); mismatchBuilder.Add(new ReferenceFrameNode(rootFrame, null, ReferenceFrameKind.Ecl, "root")); mismatchBuilder.Add(new ReferenceFrameNode(moonFrame, rootFrame, ReferenceFrameKind.Cce, "mismatch")); mismatchBuilder.Add(new ReferenceFrameNode(planetFrame, moonFrame, ReferenceFrameKind.Cci, "mismatch-child"));
+    Check(CelestialReferenceFrameEvaluator.TryEvaluate(store.CreateView(), mismatchBuilder.Build(), SimulationInstant.Zero, values) == CelestialReferenceFrameEvaluationStatus.FrameMappingMismatch, "mapping mismatch rejection");
+    _ = CelestialReferenceFrameEvaluator.TryEvaluate(store.CreateView(), graph, SimulationInstant.Zero, values); var before = GC.GetAllocatedBytesForCurrentThread(); ulong hash = 14695981039346656037UL;
+    for (var index = 0; index < 100_000; index++) { Check(CelestialReferenceFrameEvaluator.TryEvaluate(store.CreateView(), graph, SimulationInstant.Zero, values) == CelestialReferenceFrameEvaluationStatus.Success, "warm extraction"); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(values[2].Value.LocalToParent.Translation.X)); }
+    Check(GC.GetAllocatedBytesForCurrentThread() == before, "warm celestial extraction allocation"); Console.WriteLine($"Celestial frame extraction: allocation=0 bytes; hash=0x{hash:X16}");
+}
 
 static void CelestialTrajectoryReplacementTests()
 {

@@ -23,6 +23,15 @@ controller.Update(state, [new(CameraCommandKind.MoveLocal, new Double3(0, 0, 1),
 var backward = state.Position;
 Check(backward.Value.Z > initial.Value.Z && Math.Abs((forward.Value - initial.Value).Z + (backward.Value - initial.Value).Z) < 1e-12, "forward/back symmetry");
 
+state.Position = initial; controller.Update(state, [new(CameraCommandKind.MoveLocal, new Double3(1, 0, 0), default)], 1); var right = state.Position;
+state.Position = initial; controller.Update(state, [new(CameraCommandKind.MoveLocal, new Double3(-1, 0, 0), default)], 1); var left = state.Position;
+Check(right.Value.X > initial.Value.X && left.Value.X < initial.Value.X, "strafe signs");
+state.Position = initial; controller.Update(state, [new(CameraCommandKind.MoveLocal, new Double3(0, 1, 0), default)], 1); var up = state.Position;
+state.Position = initial; controller.Update(state, [new(CameraCommandKind.MoveLocal, new Double3(0, -1, 0), default)], 1); var down = state.Position;
+Check(up.Value.Y > initial.Value.Y && down.Value.Y < initial.Value.Y, "vertical signs");
+var look = NewState(); controller.Update(look, [new(CameraCommandKind.Look, default, new Double2(1, 0))], 0); Check(look.Orientation.Rotate(new Double3(0, 0, -1)).X > 0d, "right drag looks right");
+look = NewState(); controller.Update(look, [new(CameraCommandKind.Look, default, new Double2(0, -1))], 0); Check(look.Orientation.Rotate(new Double3(0, 0, -1)).Y > 0d, "up drag looks up");
+
 var local = new CameraState(new FramePosition(frame, Double3.Zero), DoubleQuaternion.Identity, projection, CameraMode.Free);
 var before = local.Position;
 controller.Update(local, [new(CameraCommandKind.MoveLocal, new Double3(1, 1, 0), default)], 1);
