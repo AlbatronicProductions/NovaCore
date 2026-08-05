@@ -2,18 +2,22 @@
 
 NovaCore is a deterministic, high-precision simulation foundation with a native C++20/Vulkan rendering backend. It is intended for large-scale spaceflight games, not a complete game engine. Within its tested .NET x64 contracts, identical authoritative inputs produce identical deterministic results.
 
+## Current Development Status
+
+NovaCore is progressing from deterministic orbital mechanics toward full spacecraft dynamics. It now supports authoritative orbital propagation, spacecraft attitude evaluation, reference-frame extraction, and deterministic visualization. The next milestone focuses on controllable spacecraft dynamics, propulsion, and guidance.
+
 ## Overview
 
 Authoritative simulation is managed C#. Native code owns only platform input and Vulkan rendering. Double-precision spatial mathematics, immutable evaluated reference-frame data, and camera-relative GPU transport keep simulation meaning outside the renderer.
 
 ## Current Capabilities
 
-- **Simulation foundation** — exact deterministic time primitives, canonical scheduled-event ordering, transaction-controlled authoritative mutation, same-time group execution, host-duration conversion and advancement, and immutable processed history with revision semantics.
-- **Reference frames** — immutable frame topology, allocation-free path queries, deterministic transform composition, and root-resolved position, orientation, direction, and rotating-frame velocity. Static and prescribed-dynamic fixtures exercise this path.
-- **Graphics foundation** — a flat immutable `ResolvedRenderSnapshot` is the only render-data boundary. It feeds camera-relative high/low FP32 transport, reusable meshes, indexed instancing, warmed allocation-free frame assembly, and the native Vulkan renderer. There is no `RenderWorld`, renderer-owned scene graph, or renderer-owned spatial hierarchy.
-- **Camera system** — managed, frame-aware Free-camera state and control. Graphics receives resolved `GpuCameraData` only.
-- **Celestial contracts** — authoritative celestial identities, central-body definitions with gravitational parameter μ, canonical Cartesian position and velocity at an exact epoch, and immutable two-body trajectory records.
-- **Elliptic two-body propagation, orbit visualization, and frame extraction** — pure exact-time universal-variable f/g propagation evaluates authoritative Cartesian trajectories at `SimulationClock.CurrentTime`. The celestial fixture derives one fixed-count elliptic orbit curve from the active trajectory; it is not simulation state or a historical trail. `CelestialReferenceFrameEvaluator` maps the result into immutable local-to-parent frame candidates without mutating state, time, topology, or rendering. Celestial values use SI units: metres, metres per second, seconds, and m³/s² for μ.
+- Deterministic simulation clock and transaction-driven authoritative simulation state with immutable evaluated data.
+- Deterministic elliptic two-body orbital propagation and scheduled inertial impulses.
+- Hierarchical reference-frame graph and authoritative celestial/body-frame extraction.
+- Double-precision, camera-relative rendering with a deterministic Vulkan backend.
+- Analytical orbit visualization, including a previous-orbit ghost after an impulse.
+- Spacecraft attitude evaluation with quaternion-based body orientation and an authoritative spacecraft body reference frame.
 
 ## Architecture
 
@@ -37,7 +41,7 @@ Graphics never traverses frame graphs, evaluates transforms, owns simulation tim
 
 `--scene=celestial` is a compact analytical visual fixture: cyan denotes the current authoritative orbit and, after its scheduled impulse, a dim curve denotes the immediately previous orbit. A small marker identifies the exact impulse location. These curves and marker are derived visualization only—not mutable trails, prediction state, saved history, or renderer-owned orbit models. Triangle markers and their presentation scale are debug geometry only, not physical body rendering.
 
-Hyperbolic and parabolic propagation, patched conics, sphere-of-influence transitions, N-body gravity, maneuvers, spacecraft gameplay, terrain, atmosphere, networking, and save/load remain future work.
+Hyperbolic and parabolic propagation, patched conics, sphere-of-influence transitions, N-body gravity, controllable spacecraft dynamics, terrain, atmosphere, networking, and save/load remain future work.
 
 ## Building and Testing
 
@@ -84,12 +88,11 @@ The default triangle command renders the reusable mesh field. `--scene=frames` r
 
 ## Status and Roadmap
 
-The completed foundation includes deterministic simulation orchestration, the reference-frame system, immutable graphics transport, dynamic snapshot publication, authoritative celestial contracts, pure elliptic two-body propagation, exact-time celestial impulses, and visible celestial-to-frame extraction.
+Progress:
 
-Next planned integration is deliberately narrow:
-
-- Multi-body and non-inertial celestial frame evaluation.
-- Hyperbolic/parabolic propagation and future regime transitions.
-- Physical body and spacecraft presentation without changing simulation authority.
+- Deterministic orbital mechanics: complete.
+- Orbit visualization: complete.
+- Spacecraft attitude: complete.
+- Spacecraft control: next milestone.
 
 NovaCore remains a focused foundation. It does not yet provide complete orbital gameplay, general physics, an ECS, a scene graph, asset tooling, or a renderer-owned world model.
