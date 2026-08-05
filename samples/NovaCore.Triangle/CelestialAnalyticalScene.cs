@@ -24,10 +24,8 @@ internal sealed class CelestialAnalyticalScene
     internal const double ImpulseMetresPerSecond = 200d;
     internal static readonly PrincipalMomentsOfInertia FixtureInertia = new(120d, 120d, 120d);
     // Presentation-only: deliberately calm at 1× while retaining visible multi-axis response.
-    internal static readonly Double3 FixtureInitialAngularVelocity = new(.01d, .015d, .03d);
-    // Over 5,000 s and 120 kg·m² this adds (.02, -.01, .006̅) rad/s.
-    internal static readonly Double3 FixtureTorque = new(.00048d, -.00024d, .00016d);
-    internal const double PlayerTorqueMagnitude = .00048d;
+    internal static readonly Double3 FixtureInitialAngularVelocity = Double3.Zero;
+    internal const double PlayerTorqueMagnitude = 4d;
     private static readonly SimulationInstant ImpulseTime = SimulationInstant.FromWholeSeconds(100_000);
     private static readonly SimulationRate[] RateSteps = [new(1, 1), new(10, 1), new(100, 1), new(1_000, 1), new(5_000, 1), new(SampleRate, 1), new(50_000, 1)];
 
@@ -68,6 +66,7 @@ internal sealed class CelestialAnalyticalScene
     public SimulationInstant CurrentTime => _clock.CurrentTime;
     public SimulationRate Rate => _clock.Rate;
     public bool IsPaused => _clock.IsPaused;
+    internal int TorqueTransitionCount => _transactions.ProcessedRigidBodyTorqueCount;
     public double OrbitDistance => _orbitDistance;
     public static FixtureCameraConfiguration Camera => new(
         new Double3(0d, 0d, 24d),
@@ -167,8 +166,8 @@ internal sealed class CelestialAnalyticalScene
     private bool TryApplyTorqueControl(in NativeInputState input, out string error)
     {
         var command = CreateTorqueCommand(input);
-        // Holding torque rebases at each simulation update; releasing commits zero exactly once.
-        if (command.RequestedBodyTorque == _requestedTorque && command.RequestedBodyTorque == Double3.Zero) { error = string.Empty; return true; }
+        // An unchanged request is already authoritative. Do not pollute history or rebase its epoch.
+        if (command.RequestedBodyTorque == _requestedTorque) { error = string.Empty; return true; }
         var candidate = RigidBodyTorqueTransactionEvaluator.TryCreateControlReplacement(_transactions.State, command);
         if (candidate.Status == RigidBodyTorqueTransactionStatus.ReplacementNoOp) { _requestedTorque = command.RequestedBodyTorque; error = string.Empty; return true; }
         if (!candidate.Succeeded || candidate.Transaction is null) { error = $"Spacecraft torque candidate failed: {candidate.Status}"; return false; }
