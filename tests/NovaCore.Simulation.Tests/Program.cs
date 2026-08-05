@@ -2,6 +2,8 @@ using NovaCore.Simulation.Time;
 using NovaCore.Simulation.Timeline;
 using NovaCore.Simulation.Clock;
 using NovaCore.Simulation.Transactions;
+using NovaCore.Simulation.Celestial;
+using NovaCore.Core;
 
 var tests = new (string Name, Action Test)[]
 {
@@ -16,6 +18,7 @@ var tests = new (string Name, Action Test)[]
     ("Transaction contracts", TransactionTests),
     ("Canonical transaction groups", CanonicalGroupTests),
     ("Clock execution orchestration", ClockExecutionTests),
+    ("Celestial contracts", CelestialContractTests),
     ("Allocation", AllocationTests),
 };
 foreach (var (name, test) in tests) { test(); Console.WriteLine($"PASS {name}"); }
@@ -97,6 +100,58 @@ static void AllocationTests()
     for (var index = 0; index < 100_000; index++) { instant += duration; _ = instant - duration; rate.TryScale(13, ref remainder, out _); _ = SimulationEventHeaderComparer.Compare(left, right); }
     Check(GC.GetAllocatedBytesForCurrentThread() == before, "steady-state arithmetic, scaling, and comparison allocations");
 }
+
+static void CelestialContractTests()
+{
+    Check(CelestialBodyId.Invalid.Value == 0 && !CelestialBodyId.Invalid.IsValid && new CelestialBodyId(2) > new CelestialBodyId(1), "celestial ID value behavior");
+    var definitions = new[]
+    {
+        new CelestialBodyDefinition(new CelestialBodyId(10), null, new ReferenceFrameId(1), 1000d),
+        new CelestialBodyDefinition(new CelestialBodyId(20), new CelestialBodyId(10), new ReferenceFrameId(2), 100d),
+        new CelestialBodyDefinition(new CelestialBodyId(30), new CelestialBodyId(20), new ReferenceFrameId(3), 10d),
+    };
+    var states = new[]
+    {
+        CelestialBodyState.Root(new CelestialBodyId(10)),
+        CelestialBodyState.Orbiting(new CelestialBodyId(20), new TwoBodyTrajectory(new CelestialBodyId(10), SimulationInstant.Zero, new CartesianState(new Double3(100, 0, 0), new Double3(0, 10, 0)), TwoBodyPropagationModel.CartesianTwoBodyV1)),
+        CelestialBodyState.Orbiting(new CelestialBodyId(30), new TwoBodyTrajectory(new CelestialBodyId(20), SimulationInstant.FromWholeSeconds(7), new CartesianState(new Double3(20, 0, 0), new Double3(0, 3, 0)), TwoBodyPropagationModel.CartesianTwoBodyV1)),
+    };
+    Check(CelestialStateStore.TryCreate(definitions, states, out var store, out var status) && store is not null && status == CelestialStateStoreStatus.Success, "valid authoritative celestial catalog");
+    var view = store!.CreateView();
+    Check(view.Count == 3 && view.GetDefinition(0).Id.Value == 10 && view.GetDefinition(1).Id.Value == 20 && view.GetState(0).Trajectory is null, "root representation and caller declaration order");
+    Check(view.TryGetIndex(new CelestialBodyId(30), out var moonIndex) && moonIndex == 2 && view.TryGetDefinition(new CelestialBodyId(10), out var star) && star.GravitationalParameter == 1000d && view.TryGetState(new CelestialBodyId(20), out var planet) && planet.Trajectory!.Value.CentralBody == new CelestialBodyId(10), "allocation-free ID lookup and immutable records");
+    var state = new SimulationState(store); var stateView = state.CreateView(); Check(stateView.Revision == StateRevision.Zero && stateView.Celestial.Count == 3, "SimulationState owns celestial store without revision mutation");
+    var hash = CelestialContractHash.Compute(view); Check(hash == CelestialContractHash.Compute(view), "celestial raw-value hash repeatability"); Console.WriteLine($"Deterministic celestial-contract hash: 0x{hash:X16}");
+    Check(CelestialStateStore.TryCreate(definitions, states, out var repeatedStore, out var repeatedStatus) && repeatedStore is not null && repeatedStatus == CelestialStateStoreStatus.Success && CelestialContractHash.Compute(repeatedStore.CreateView()) == hash, "repeated construction produces identical celestial hash");
+    definitions[1] = definitions[1] with { GravitationalParameter = 999d }; states[1] = CelestialBodyState.Root(new CelestialBodyId(20));
+    Check(view.GetDefinition(1).GravitationalParameter == 100d && view.GetState(1).Trajectory is not null, "source arrays cannot mutate authoritative store");
+
+    var zeroDefinitions = new[] { new CelestialBodyDefinition(CelestialBodyId.Invalid, null, new ReferenceFrameId(1), 1d) }; var zeroStates = new[] { CelestialBodyState.Root(CelestialBodyId.Invalid) };
+    CheckStore(zeroDefinitions, zeroStates, CelestialStateStoreStatus.InvalidBodyId, "zero ID rejection");
+    CheckStore(new[] { new CelestialBodyDefinition(new CelestialBodyId(1), null, new ReferenceFrameId(0), 1d) }, new[] { CelestialBodyState.Root(new CelestialBodyId(1)) }, CelestialStateStoreStatus.InvalidInertialFrame, "invalid frame rejection");
+    CheckStore(new[] { new CelestialBodyDefinition(new CelestialBodyId(1), null, new ReferenceFrameId(1), double.NaN) }, new[] { CelestialBodyState.Root(new CelestialBodyId(1)) }, CelestialStateStoreStatus.InvalidGravitationalParameter, "non-finite mu rejection");
+    CheckStore(new[] { new CelestialBodyDefinition(new CelestialBodyId(1), new CelestialBodyId(1), new ReferenceFrameId(1), 1d) }, new[] { CelestialBodyState.Orbiting(new CelestialBodyId(1), new TwoBodyTrajectory(new CelestialBodyId(1), SimulationInstant.Zero, new CartesianState(Double3.Zero, Double3.Zero), TwoBodyPropagationModel.CartesianTwoBodyV1)) }, CelestialStateStoreStatus.SelfPrimaryBody, "self-primary rejection");
+    CheckStore(new[] { new CelestialBodyDefinition(new CelestialBodyId(1), new CelestialBodyId(2), new ReferenceFrameId(1), 1d) }, new[] { CelestialBodyState.Orbiting(new CelestialBodyId(1), new TwoBodyTrajectory(new CelestialBodyId(2), SimulationInstant.Zero, new CartesianState(Double3.Zero, Double3.Zero), TwoBodyPropagationModel.CartesianTwoBodyV1)) }, CelestialStateStoreStatus.MissingPrimaryBody, "missing-primary rejection");
+    var cycleDefinitions = new[] { new CelestialBodyDefinition(new CelestialBodyId(1), new CelestialBodyId(2), new ReferenceFrameId(1), 1d), new CelestialBodyDefinition(new CelestialBodyId(2), new CelestialBodyId(1), new ReferenceFrameId(2), 1d) }; var cycleStates = new[] { CelestialBodyState.Orbiting(new CelestialBodyId(1), new TwoBodyTrajectory(new CelestialBodyId(2), SimulationInstant.Zero, new CartesianState(Double3.Zero, Double3.Zero), TwoBodyPropagationModel.CartesianTwoBodyV1)), CelestialBodyState.Orbiting(new CelestialBodyId(2), new TwoBodyTrajectory(new CelestialBodyId(1), SimulationInstant.Zero, new CartesianState(Double3.Zero, Double3.Zero), TwoBodyPropagationModel.CartesianTwoBodyV1)) };
+    CheckStore(cycleDefinitions, cycleStates, CelestialStateStoreStatus.PrimaryBodyCycle, "cycle rejection");
+    CheckStore(new[] { new CelestialBodyDefinition(new CelestialBodyId(1), null, new ReferenceFrameId(1), 1d), new CelestialBodyDefinition(new CelestialBodyId(1), null, new ReferenceFrameId(2), 1d) }, new[] { CelestialBodyState.Root(new CelestialBodyId(1)), CelestialBodyState.Root(new CelestialBodyId(1)) }, CelestialStateStoreStatus.DuplicateBodyId, "duplicate ID rejection");
+    CheckStore(new[] { new CelestialBodyDefinition(new CelestialBodyId(1), null, new ReferenceFrameId(1), 1d), new CelestialBodyDefinition(new CelestialBodyId(2), null, new ReferenceFrameId(1), 1d) }, new[] { CelestialBodyState.Root(new CelestialBodyId(1)), CelestialBodyState.Root(new CelestialBodyId(2)) }, CelestialStateStoreStatus.DuplicateInertialFrame, "duplicate frame rejection");
+    CheckStore(new[] { new CelestialBodyDefinition(new CelestialBodyId(1), null, new ReferenceFrameId(1), 1d) }, new[] { CelestialBodyState.Orbiting(new CelestialBodyId(1), new TwoBodyTrajectory(new CelestialBodyId(2), SimulationInstant.Zero, new CartesianState(Double3.Zero, Double3.Zero), TwoBodyPropagationModel.CartesianTwoBodyV1)) }, CelestialStateStoreStatus.RootTrajectoryNotAllowed, "root trajectory rejection");
+    CheckStore(new[] { new CelestialBodyDefinition(new CelestialBodyId(1), null, new ReferenceFrameId(1), 1d), new CelestialBodyDefinition(new CelestialBodyId(2), new CelestialBodyId(1), new ReferenceFrameId(2), 1d) }, new[] { CelestialBodyState.Root(new CelestialBodyId(1)), CelestialBodyState.Root(new CelestialBodyId(2)) }, CelestialStateStoreStatus.ChildTrajectoryRequired, "child trajectory requirement");
+    CheckStore(new[] { new CelestialBodyDefinition(new CelestialBodyId(1), null, new ReferenceFrameId(1), 1d), new CelestialBodyDefinition(new CelestialBodyId(2), new CelestialBodyId(1), new ReferenceFrameId(2), 1d) }, new[] { CelestialBodyState.Root(new CelestialBodyId(1)), CelestialBodyState.Orbiting(new CelestialBodyId(2), new TwoBodyTrajectory(CelestialBodyId.Invalid, SimulationInstant.Zero, new CartesianState(Double3.Zero, Double3.Zero), TwoBodyPropagationModel.CartesianTwoBodyV1)) }, CelestialStateStoreStatus.InvalidTrajectoryCentralBody, "invalid central-body rejection");
+    CheckStore(new[] { new CelestialBodyDefinition(new CelestialBodyId(1), null, new ReferenceFrameId(1), 1d), new CelestialBodyDefinition(new CelestialBodyId(2), new CelestialBodyId(1), new ReferenceFrameId(2), 1d) }, new[] { CelestialBodyState.Root(new CelestialBodyId(1)), CelestialBodyState.Orbiting(new CelestialBodyId(2), new TwoBodyTrajectory(new CelestialBodyId(2), SimulationInstant.Zero, new CartesianState(Double3.Zero, Double3.Zero), TwoBodyPropagationModel.CartesianTwoBodyV1)) }, CelestialStateStoreStatus.TrajectoryPrimaryMismatch, "central/primary mismatch rejection");
+    CheckStore(new[] { new CelestialBodyDefinition(new CelestialBodyId(1), null, new ReferenceFrameId(1), 1d), new CelestialBodyDefinition(new CelestialBodyId(2), new CelestialBodyId(1), new ReferenceFrameId(2), 1d) }, new[] { CelestialBodyState.Root(new CelestialBodyId(1)), CelestialBodyState.Orbiting(new CelestialBodyId(2), new TwoBodyTrajectory(new CelestialBodyId(1), SimulationInstant.Zero, new CartesianState(new Double3(double.NaN, 0, 0), Double3.Zero), TwoBodyPropagationModel.CartesianTwoBodyV1)) }, CelestialStateStoreStatus.NonFiniteCartesianState, "non-finite Cartesian rejection");
+    CheckStore(new[] { new CelestialBodyDefinition(new CelestialBodyId(1), null, new ReferenceFrameId(1), 1d), new CelestialBodyDefinition(new CelestialBodyId(2), new CelestialBodyId(1), new ReferenceFrameId(2), 1d) }, new[] { CelestialBodyState.Root(new CelestialBodyId(1)), CelestialBodyState.Orbiting(new CelestialBodyId(2), new TwoBodyTrajectory(new CelestialBodyId(1), SimulationInstant.Zero, new CartesianState(Double3.Zero, Double3.Zero), (TwoBodyPropagationModel)99)) }, CelestialStateStoreStatus.InvalidTrajectoryModel, "trajectory model rejection");
+    Check(!CelestialStateStore.TryCreate(new[] { new CelestialBodyDefinition(new CelestialBodyId(1), null, new ReferenceFrameId(1), 1d) }, Array.Empty<CelestialBodyState>(), out var failedStore, out var failedStatus) && failedStore is null && failedStatus == CelestialStateStoreStatus.StateCountMismatch, "failed construction publishes no store");
+
+    _ = CelestialContractHash.Compute(view); _ = view.TryGetIndex(new CelestialBodyId(20), out _); var before = GC.GetAllocatedBytesForCurrentThread(); ulong traversal = 0;
+    for (var iteration = 0; iteration < 100_000; iteration++) { for (var index = 0; index < view.Count; index++) traversal = Mix(traversal, view.GetDefinition(index).Id.Value); Check(view.TryGetIndex(new CelestialBodyId(30), out var lookup) && lookup == 2 && view.GetState(1).Trajectory!.Value.StateAtEpoch.IsFinite, "warm lookup and validation"); traversal = Mix(traversal, CelestialContractHash.Compute(view)); }
+    var allocated = GC.GetAllocatedBytesForCurrentThread() - before;
+    Check(allocated == 0 && traversal != 0, "warmed celestial traversal, lookup, validation, and hashing allocate zero bytes");
+    Console.WriteLine($"Warm celestial view traversal and lookup allocations: {allocated} bytes");
+}
+
+static void CheckStore(CelestialBodyDefinition[] definitions, CelestialBodyState[] states, CelestialStateStoreStatus expected, string message) => Check(!CelestialStateStore.TryCreate(definitions, states, out var store, out var status) && store is null && status == expected, message);
 
 static void TimelineTopologyTests()
 {

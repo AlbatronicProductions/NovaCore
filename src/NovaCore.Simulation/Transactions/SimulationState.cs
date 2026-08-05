@@ -1,4 +1,5 @@
 using NovaCore.Simulation.Timeline;
+using NovaCore.Simulation.Celestial;
 
 namespace NovaCore.Simulation.Transactions;
 
@@ -7,8 +8,11 @@ internal sealed class SimulationState
 {
     private long _markerValue;
     private StateRevision _revision;
+    private readonly CelestialStateStore _celestial;
 
-    public SimulationStateView CreateView() => new(_markerValue, _revision);
+    internal SimulationState(CelestialStateStore? celestial = null) => _celestial = celestial ?? CelestialStateStore.Empty;
+
+    public SimulationStateView CreateView() => new(_markerValue, _revision, _celestial.CreateView());
 
     internal void CommitMarkerValue(long markerValue)
     {
