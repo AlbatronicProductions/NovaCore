@@ -133,6 +133,12 @@ The internal `SimulationExecutionOrchestrator` now services retained debt withou
 
 `MaximumEventsPerAdvance` is one call-wide event budget, not a per-group budget. Each group receives only the remaining budget, preserving canonical `(Time, Priority, Sequence, EventId)` order across the complete servicing call. A cap, validation rejection, arithmetic overflow, or controlled lack of progress returns without fabricating traversal: the clock remains at its reached instant and debt retains precisely the untraversed duration for the next call. No public duration-advance API is introduced in this slice.
 
+### Completion diagnostics and verification (Milestone 6B-4C)
+
+The internal debt-service result is an allocation-free immutable diagnostic value. It records the starting instant, exact target implied by the initial debt, reached instant, debt before and after servicing, total committed events, canonical groups attempted, and the terminal group outcome when a group ran. These fields are diagnostic only; they do not alter clock, timeline, transaction, or state ownership.
+
+Debug assertions check that retained debt remains nonnegative, the clock never advances beyond the exact debt target, and cumulative committed events do not exceed the call-wide budget. Deterministic replay tests cover repeated conversion-and-service cycles, while preallocated long-run stress tests verify that 5,000 events can be serviced over 500 host-duration cycles without managed allocation. Existing canonical event, timeline, transaction, and one-group orchestration hashes remain independent regression guards.
+
 Host-duration advancement, generated events, additional transaction kinds, analytical propagation, snapshots, time warp controls, reference-frame integration, and sample integration remain pending Milestone 6 work.
 
 ## Intentional 6A limitations

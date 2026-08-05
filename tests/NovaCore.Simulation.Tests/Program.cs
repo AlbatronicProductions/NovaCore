@@ -264,7 +264,7 @@ static void HostDurationDebtServiceTests()
     Check(emptyEngine.ServicePendingHostDurationDebt().Reason == SimulationDebtServiceStopReason.NoDebt, "no debt service is controlled");
     _ = emptyClock.AdvanceByHostDuration(new SimulationDuration(20));
     var coast = emptyEngine.ServicePendingHostDurationDebt();
-    Check(coast.Reason == SimulationDebtServiceStopReason.Completed && coast.ReachedTime.Ticks == 20 && coast.DebtAfter.IsZero && coast.ProcessedEventCount == 0, "debt coasts without events");
+    Check(coast.Reason == SimulationDebtServiceStopReason.Completed && coast.TargetTime.Ticks == 20 && coast.ReachedTime.Ticks == 20 && coast.DebtAfter.IsZero && coast.ProcessedEventCount == 0 && coast.ExecutedGroupCount == 0 && coast.LastGroupStopReason is null, "debt coast diagnostics");
 
     var timeline = new SimulationTimeline(4);
     Check(timeline.Schedule(SimulationInstant.Zero, Request(1, 5, 1)).Succeeded, "debt schedule A");
@@ -273,7 +273,7 @@ static void HostDurationDebtServiceTests()
     var engine = new SimulationTransactionEngine(clock, new SimulationState(), 4);
     _ = clock.AdvanceByHostDuration(new SimulationDuration(15));
     var executed = engine.ServicePendingHostDurationDebt();
-    Check(executed.Reason == SimulationDebtServiceStopReason.Completed && clock.CurrentTime.Ticks == 15 && clock.PendingSimulationDebt.IsZero && executed.ProcessedEventCount == 2 && engine.ProcessedCount == 2, "debt coasts and executes canonical groups");
+    Check(executed.Reason == SimulationDebtServiceStopReason.Completed && executed.TargetTime.Ticks == 15 && clock.CurrentTime.Ticks == 15 && clock.PendingSimulationDebt.IsZero && executed.ProcessedEventCount == 2 && executed.ExecutedGroupCount == 2 && executed.LastGroupStopReason == SimulationCanonicalGroupStopReason.Completed && engine.ProcessedCount == 2, "debt group diagnostics");
 
     var capTimeline = new SimulationTimeline(4);
     Check(capTimeline.Schedule(SimulationInstant.Zero, Request(10, 5, 0)).Succeeded, "budget schedule A");
@@ -283,7 +283,7 @@ static void HostDurationDebtServiceTests()
     var capEngine = new SimulationTransactionEngine(capClock, new SimulationState(), 4);
     _ = capClock.AdvanceByHostDuration(new SimulationDuration(20));
     var capped = capEngine.ServicePendingHostDurationDebt();
-    Check(capped.Reason == SimulationDebtServiceStopReason.EventLimitReached && capped.ProcessedEventCount == 2 && capClock.CurrentTime.Ticks == 10 && capClock.PendingSimulationDebt.Ticks == 10 && capTimeline.PendingCount == 1, "one call-wide budget retains accurate debt");
+    Check(capped.Reason == SimulationDebtServiceStopReason.EventLimitReached && capped.TargetTime.Ticks == 20 && capped.ProcessedEventCount == 2 && capped.ExecutedGroupCount == 1 && capped.LastGroupStopReason == SimulationCanonicalGroupStopReason.Completed && capClock.CurrentTime.Ticks == 10 && capClock.PendingSimulationDebt.Ticks == 10 && capTimeline.PendingCount == 1, "one call-wide budget retains accurate debt");
     Check(capEngine.ServicePendingHostDurationDebt().Reason == SimulationDebtServiceStopReason.Completed && capClock.CurrentTime.Ticks == 20 && capClock.PendingSimulationDebt.IsZero && capEngine.ProcessedCount == 3, "next service resumes retained debt");
 
     var rejectionTimeline = new SimulationTimeline(2);
@@ -292,7 +292,7 @@ static void HostDurationDebtServiceTests()
     var rejectionEngine = new SimulationTransactionEngine(rejectionClock, new SimulationState(), 2);
     _ = rejectionClock.AdvanceByHostDuration(new SimulationDuration(20));
     var rejected = rejectionEngine.ServicePendingHostDurationDebt();
-    Check(rejected.Reason == SimulationDebtServiceStopReason.ValidationRejected && rejected.ProcessedEventCount == 0 && rejectionClock.CurrentTime.Ticks == 5 && rejectionClock.PendingSimulationDebt.Ticks == 15 && rejectionEngine.ProcessedCount == 0 && rejectionTimeline.PendingCount == 1, "validation rejection retains untraversed debt and authority");
+    Check(rejected.Reason == SimulationDebtServiceStopReason.ValidationRejected && rejected.TargetTime.Ticks == 20 && rejected.ProcessedEventCount == 0 && rejected.ExecutedGroupCount == 1 && rejected.LastGroupStopReason == SimulationCanonicalGroupStopReason.ValidationRejected && rejectionClock.CurrentTime.Ticks == 5 && rejectionClock.PendingSimulationDebt.Ticks == 15 && rejectionEngine.ProcessedCount == 0 && rejectionTimeline.PendingCount == 1, "validation rejection retains untraversed debt and authority");
 
     var laterTimeline = new SimulationTimeline(1); Check(laterTimeline.Schedule(SimulationInstant.Zero, Request(30, 25, 0)).Succeeded, "later boundary schedule");
     var laterClock = new SimulationClock(SimulationInstant.Zero, laterTimeline); var laterEngine = new SimulationTransactionEngine(laterClock, new SimulationState(), 1);
@@ -307,8 +307,20 @@ static void HostDurationDebtServiceTests()
     var allocationBefore = GC.GetAllocatedBytesForCurrentThread(); var allocation = allocationEngine.ServicePendingHostDurationDebt();
     Check(GC.GetAllocatedBytesForCurrentThread() == allocationBefore && allocation.Reason == SimulationDebtServiceStopReason.Completed && allocation.ProcessedEventCount == 1_000, "preallocated debt servicing allocates zero bytes");
 
+    const int stressEventCount = 5_000;
+    var stressTimeline = new SimulationTimeline(stressEventCount);
+    for (ulong id = 1; id <= stressEventCount; id++) Check(stressTimeline.Schedule(SimulationInstant.Zero, Request(id, (long)id * 10, 0)).Succeeded, "long-run schedule");
+    var stressClock = new SimulationClock(SimulationInstant.Zero, stressTimeline, settings: new SimulationClockSettings(16));
+    var stressEngine = new SimulationTransactionEngine(stressClock, new SimulationState(), stressEventCount);
+    _ = stressClock.AdvanceByHostDuration(new SimulationDuration(100)); _ = stressEngine.ServicePendingHostDurationDebt();
+    var stressBefore = GC.GetAllocatedBytesForCurrentThread();
+    for (var cycle = 1; cycle < 500; cycle++) { _ = stressClock.AdvanceByHostDuration(new SimulationDuration(100)); Check(stressEngine.ServicePendingHostDurationDebt().Reason == SimulationDebtServiceStopReason.Completed, "long-run debt service"); }
+    Check(GC.GetAllocatedBytesForCurrentThread() == stressBefore && stressClock.CurrentTime.Ticks == 50_000 && stressClock.PendingSimulationDebt.IsZero && stressEngine.ProcessedCount == stressEventCount && stressTimeline.PendingCount == 0, "repeated long-duration servicing is allocation-free");
+
     var hash = HostDurationDebtServiceHash(); Check(HostDurationDebtServiceHash() == hash, "deterministic host-duration orchestration hash");
     Console.WriteLine($"Deterministic host-duration orchestration hash: 0x{hash:X16}");
+    var longRunHash = HostDurationLongRunHash(); Check(HostDurationLongRunHash() == longRunHash, "deterministic long-duration replay hash");
+    Console.WriteLine($"Deterministic long-duration host advancement hash: 0x{longRunHash:X16}");
 }
 
 static void TransactionTests()
@@ -443,6 +455,7 @@ static ulong CanonicalGroupHash(){var requests=new[]{Request(31,0,2),Request(32,
 static ulong ClockExecutionHash(){var timeline=new SimulationTimeline(3);Check(timeline.Schedule(SimulationInstant.Zero,Request(41,10,-1)).Succeeded,"orchestration hash schedule");Check(timeline.Schedule(SimulationInstant.Zero,RequestWithKind(42,10,0,SimulationEventKind.NoOpMarker)).Succeeded,"orchestration hash schedule");Check(timeline.Schedule(SimulationInstant.Zero,Request(43,20,0)).Succeeded,"orchestration hash schedule");var engine=new SimulationTransactionEngine(new SimulationClock(SimulationInstant.Zero,timeline),new SimulationState(),3);var first=engine.AdvanceAndExecuteOneCanonicalGroup(new SimulationInstant(15));var second=engine.AdvanceAndExecuteOneCanonicalGroup(new SimulationInstant(30));ulong hash=14695981039346656037;hash=Mix(hash,(ulong)first.Reason);hash=Mix(hash,(ulong)first.ReachedTime.Ticks);hash=Mix(hash,(ulong)second.Reason);hash=Mix(hash,(ulong)second.ReachedTime.Ticks);for(var index=0;index<engine.ProcessedCount;index++){Check(engine.TryGetProcessed(index,out var entry),"orchestration hash history");hash=Mix(hash,entry.Event.Id.Value);hash=Mix(hash,entry.StateRevisionAfter.Value);}return hash;}
 static ulong HostDurationHash(){var clock=new SimulationClock(SimulationInstant.Zero,new SimulationTimeline(),new SimulationRate(5,7));ulong hash=14695981039346656037;for(var index=0;index<1024;index++){var result=clock.AdvanceByHostDuration(new SimulationDuration(13));hash=Mix(hash,(ulong)result.DerivedSimulationDuration.Ticks);hash=Mix(hash,(ulong)result.DebtAfter.Ticks);hash=Mix(hash,(ulong)result.RateRemainderAfter);}return hash;}
 static ulong HostDurationDebtServiceHash(){var timeline=new SimulationTimeline(4);Check(timeline.Schedule(SimulationInstant.Zero,Request(70,3,1)).Succeeded,"debt hash schedule");Check(timeline.Schedule(SimulationInstant.Zero,Request(71,7,-1)).Succeeded,"debt hash schedule");Check(timeline.Schedule(SimulationInstant.Zero,RequestWithKind(72,7,0,SimulationEventKind.NoOpMarker)).Succeeded,"debt hash schedule");var clock=new SimulationClock(SimulationInstant.Zero,timeline);var engine=new SimulationTransactionEngine(clock,new SimulationState(),4);_=clock.AdvanceByHostDuration(new SimulationDuration(11));var result=engine.ServicePendingHostDurationDebt();ulong hash=14695981039346656037;hash=Mix(hash,(ulong)result.Reason);hash=Mix(hash,(ulong)result.ReachedTime.Ticks);hash=Mix(hash,(ulong)result.ProcessedEventCount);hash=Mix(hash,(ulong)result.DebtAfter.Ticks);for(var index=0;index<engine.ProcessedCount;index++){Check(engine.TryGetProcessed(index,out var entry),"debt hash history");hash=Mix(hash,entry.Event.Id.Value);hash=Mix(hash,entry.StateRevisionAfter.Value);}return hash;}
+static ulong HostDurationLongRunHash(){const int count=128;var timeline=new SimulationTimeline(count);for(ulong id=1;id<=count;id++)Check(timeline.Schedule(SimulationInstant.Zero,RequestWithKind(id,(long)id*5,(int)(id%3),id%5==0?SimulationEventKind.NoOpMarker:SimulationEventKind.Marker)).Succeeded,"long hash schedule");var clock=new SimulationClock(SimulationInstant.Zero,timeline,new SimulationRate(5,7),new SimulationClockSettings(16));var engine=new SimulationTransactionEngine(clock,new SimulationState(),count);ulong hash=14695981039346656037;for(var cycle=0;cycle<count;cycle++){var converted=clock.AdvanceByHostDuration(new SimulationDuration(7));var serviced=engine.ServicePendingHostDurationDebt();Check(converted.Reason==SimulationHostAdvanceStopReason.Accepted&&serviced.Reason==SimulationDebtServiceStopReason.Completed,"long hash service");hash=Mix(hash,(ulong)converted.DerivedSimulationDuration.Ticks);hash=Mix(hash,(ulong)serviced.ReachedTime.Ticks);hash=Mix(hash,(ulong)serviced.ProcessedEventCount);hash=Mix(hash,(ulong)serviced.ExecutedGroupCount);hash=Mix(hash,(ulong)serviced.LastGroupStopReason!.Value);}Check(clock.CurrentTime.Ticks==count*5&&engine.ProcessedCount==count&&timeline.PendingCount==0,"long hash completion");return Mix(hash,engine.State.Revision.Value);}
 static ulong MixedTimelineHash(){var timeline=new SimulationTimeline(4096);var random=new FixedRandom(0xA24BAED4963EE407);var active=new SimulationEventId[4096];var activeCount=0;ulong nextId=1;for(var operation=0;operation<4096;operation++){if(activeCount==0||(random.Next()%3)!=0){var request=Request(nextId++,(long)(random.Next()>>1)-long.MaxValue/2,(int)(random.Next()%101)-50);Check(timeline.Schedule(new SimulationInstant(long.MinValue),request).Succeeded,"mixed schedule");active[activeCount++]=request.Id;}else{var index=(int)(random.Next()%(ulong)activeCount);Check(timeline.Cancel(active[index]).Succeeded,"mixed cancel");active[index]=active[--activeCount];}Check(timeline.ValidateInvariants(),"mixed invariant");}var pending=new ScheduledSimulationEvent[timeline.PendingCount];timeline.CopyPending(pending);Array.Sort(pending,static(left,right)=>SimulationEventHeaderComparer.Compare(left.Header,right.Header));ulong hash=14695981039346656037;foreach(var value in pending){hash=Mix(hash,(ulong)value.Header.Time.Ticks);hash=Mix(hash,(uint)value.Header.Priority);hash=Mix(hash,value.Header.Sequence.Value);hash=Mix(hash,value.Header.Id.Value);}return Mix(hash,timeline.Revision.Value);}
 static SimulationEventHeader[] CreateStressHeaders(){var random=new FixedRandom(0x6A09E667F3BCC909);var result=new SimulationEventHeader[2048];for(var index=0;index<result.Length;index++){var time=(long)(random.Next()>>1)-long.MaxValue/2;var priority=(int)(random.Next()%2001)-1000;result[index]=Header((ulong)index+1,time,priority,(ulong)index+1);}return result;}
 static void Shuffle(SimulationEventHeader[] values,ulong seed){var random=new FixedRandom(seed);for(var index=values.Length-1;index>0;index--){var other=(int)(random.Next()%(ulong)(index+1));(values[index],values[other])=(values[other],values[index]);}}

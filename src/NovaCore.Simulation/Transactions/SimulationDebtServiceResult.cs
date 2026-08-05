@@ -17,7 +17,10 @@ internal enum SimulationDebtServiceStopReason : byte
 internal readonly record struct SimulationDebtServiceResult(
     SimulationDebtServiceStopReason Reason,
     SimulationInstant StartTime,
+    SimulationInstant TargetTime,
     SimulationInstant ReachedTime,
     SimulationDuration DebtBefore,
     SimulationDuration DebtAfter,
-    int ProcessedEventCount);
+    int ProcessedEventCount,
+    int ExecutedGroupCount,
+    SimulationCanonicalGroupStopReason? LastGroupStopReason);

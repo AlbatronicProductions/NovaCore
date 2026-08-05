@@ -1,5 +1,6 @@
 using NovaCore.Simulation.Clock;
 using NovaCore.Simulation.Time;
+using System.Diagnostics;
 
 namespace NovaCore.Simulation.Transactions;
 
@@ -58,48 +59,55 @@ internal sealed class SimulationExecutionOrchestrator
     {
         var startTime = _clock.CurrentTime;
         var debtBefore = _clock.PendingSimulationDebt;
-        if (debtBefore.IsZero) return DebtResult(SimulationDebtServiceStopReason.NoDebt, startTime, debtBefore, 0);
-        if (_isOrchestrating) return DebtResult(SimulationDebtServiceStopReason.ReentrantExecution, startTime, debtBefore, 0);
+        Debug.Assert(debtBefore.Ticks >= 0);
+        if (debtBefore.IsZero) return DebtResult(SimulationDebtServiceStopReason.NoDebt, startTime, startTime, debtBefore, 0, 0, null);
+        if (_isOrchestrating) return DebtResult(SimulationDebtServiceStopReason.ReentrantExecution, startTime, startTime, debtBefore, 0, 0, null);
+        if (!_clock.TryGetPendingSimulationDebtTarget(out var target))
+            return DebtResult(SimulationDebtServiceStopReason.ArithmeticOverflow, startTime, default, debtBefore, 0, 0, null);
 
         _isOrchestrating = true;
         try
         {
             var processedEvents = 0;
+            var executedGroups = 0;
+            SimulationCanonicalGroupStopReason? lastGroupReason = null;
             while (!_clock.PendingSimulationDebt.IsZero)
             {
-                if (!_clock.TryGetPendingSimulationDebtTarget(out var target))
-                    return DebtResult(SimulationDebtServiceStopReason.ArithmeticOverflow, startTime, debtBefore, processedEvents);
-
                 var timeBefore = _clock.CurrentTime;
                 var advance = _clock.AdvanceTo(target);
                 if (advance.Reason is SimulationAdvanceStopReason.ReentrantAdvance or SimulationAdvanceStopReason.TargetBeforeCurrent)
-                    return DebtResult(SimulationDebtServiceStopReason.NoProgress, startTime, debtBefore, processedEvents);
+                    return DebtResult(SimulationDebtServiceStopReason.NoProgress, startTime, target, debtBefore, processedEvents, executedGroups, lastGroupReason);
 
                 var traversedTicks = _clock.CurrentTime.Ticks - timeBefore.Ticks;
                 if (traversedTicks > 0)
                     _clock.ConsumePendingSimulationDebt(new SimulationDuration(traversedTicks));
+                Debug.Assert(_clock.PendingSimulationDebt.Ticks >= 0);
+                Debug.Assert(_clock.CurrentTime <= target);
 
                 if (advance.Reason == SimulationAdvanceStopReason.ReachedTarget)
-                    return DebtResult(SimulationDebtServiceStopReason.Completed, startTime, debtBefore, processedEvents);
+                    return DebtResult(SimulationDebtServiceStopReason.Completed, startTime, target, debtBefore, processedEvents, executedGroups, lastGroupReason);
 
                 if (advance.Reason != SimulationAdvanceStopReason.ReachedEventBoundary)
-                    return DebtResult(SimulationDebtServiceStopReason.NoProgress, startTime, debtBefore, processedEvents);
+                    return DebtResult(SimulationDebtServiceStopReason.NoProgress, startTime, target, debtBefore, processedEvents, executedGroups, lastGroupReason);
 
                 var remainingBudget = _clock.MaximumEventsPerAdvance - processedEvents;
                 if (remainingBudget == 0)
-                    return DebtResult(SimulationDebtServiceStopReason.EventLimitReached, startTime, debtBefore, processedEvents);
+                    return DebtResult(SimulationDebtServiceStopReason.EventLimitReached, startTime, target, debtBefore, processedEvents, executedGroups, lastGroupReason);
 
                 var group = _transactions.ExecuteCanonicalGroup(remainingBudget);
                 processedEvents += group.ProcessedEventCount;
+                executedGroups++;
+                lastGroupReason = group.Reason;
+                Debug.Assert(processedEvents <= _clock.MaximumEventsPerAdvance);
                 if (group.Reason == SimulationCanonicalGroupStopReason.EventLimitReached)
-                    return DebtResult(SimulationDebtServiceStopReason.EventLimitReached, startTime, debtBefore, processedEvents);
+                    return DebtResult(SimulationDebtServiceStopReason.EventLimitReached, startTime, target, debtBefore, processedEvents, executedGroups, lastGroupReason);
                 if (group.Reason == SimulationCanonicalGroupStopReason.ValidationRejected)
-                    return DebtResult(SimulationDebtServiceStopReason.ValidationRejected, startTime, debtBefore, processedEvents);
+                    return DebtResult(SimulationDebtServiceStopReason.ValidationRejected, startTime, target, debtBefore, processedEvents, executedGroups, lastGroupReason);
                 if (!group.IsComplete)
-                    return DebtResult(SimulationDebtServiceStopReason.NoProgress, startTime, debtBefore, processedEvents);
+                    return DebtResult(SimulationDebtServiceStopReason.NoProgress, startTime, target, debtBefore, processedEvents, executedGroups, lastGroupReason);
             }
 
-            return DebtResult(SimulationDebtServiceStopReason.Completed, startTime, debtBefore, processedEvents);
+            return DebtResult(SimulationDebtServiceStopReason.Completed, startTime, target, debtBefore, processedEvents, executedGroups, lastGroupReason);
         }
         finally { _isOrchestrating = false; }
     }
@@ -115,8 +123,8 @@ internal sealed class SimulationExecutionOrchestrator
     private SimulationExecutionResult Result(SimulationExecutionStopReason reason, SimulationInstant requested, SimulationAdvanceStopReason initial, SimulationAdvanceStopReason? continuation, SimulationCanonicalGroupResult? group) =>
         new(reason, requested, _clock.CurrentTime, initial, continuation, group);
 
-    private SimulationDebtServiceResult DebtResult(SimulationDebtServiceStopReason reason, SimulationInstant startTime, SimulationDuration debtBefore, int processedEvents) =>
-        new(reason, startTime, _clock.CurrentTime, debtBefore, _clock.PendingSimulationDebt, processedEvents);
+    private SimulationDebtServiceResult DebtResult(SimulationDebtServiceStopReason reason, SimulationInstant startTime, SimulationInstant targetTime, SimulationDuration debtBefore, int processedEvents, int executedGroups, SimulationCanonicalGroupStopReason? lastGroupReason) =>
+        new(reason, startTime, targetTime, _clock.CurrentTime, debtBefore, _clock.PendingSimulationDebt, processedEvents, executedGroups, lastGroupReason);
 
     private static SimulationExecutionStopReason MapGroupReason(SimulationCanonicalGroupStopReason reason) => reason switch
     {
