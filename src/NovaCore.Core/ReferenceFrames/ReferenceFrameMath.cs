@@ -46,18 +46,21 @@ internal static class ReferenceFrameMath
         in Double3 angularVelocityInParent) =>
         parentAngularVelocityInRoot + parentLocalToRoot.Rotation.Rotate(angularVelocityInParent);
 
-    public static Double3 ResolveVelocityToRoot(
-        in FrameTransform localToRoot,
-        in Double3 originVelocityInRoot,
-        in Double3 angularVelocityInRoot,
+    public static Double3 TransformVelocity(
+        in FrameTransform localToParent,
+        in Double3 originVelocityInParent,
+        in Double3 angularVelocityInParent,
         in Double3 localPosition,
         in Double3 localVelocity)
     {
-        var offset = localToRoot.Rotation.Rotate(localPosition);
-        return originVelocityInRoot
-            + localToRoot.Rotation.Rotate(localVelocity)
-            + Double3.Cross(angularVelocityInRoot, offset);
+        var offset = localToParent.Rotation.Rotate(localPosition);
+        return originVelocityInParent
+            + localToParent.Rotation.Rotate(localVelocity)
+            + Double3.Cross(angularVelocityInParent, offset);
     }
+
+    public static Double3 ResolveVelocityToRoot(in FrameTransform localToRoot, in Double3 originVelocityInRoot, in Double3 angularVelocityInRoot, in Double3 localPosition, in Double3 localVelocity) =>
+        TransformVelocity(localToRoot, originVelocityInRoot, angularVelocityInRoot, localPosition, localVelocity);
 
     public static Double3 ConvertRootVelocityToLocal(
         in FrameTransform targetLocalToRoot,
