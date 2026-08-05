@@ -1,6 +1,8 @@
 using NovaCore.Simulation.Clock;
 using NovaCore.Simulation.Time;
 using NovaCore.Simulation.Timeline;
+using NovaCore.Simulation.Celestial;
+using NovaCore.Simulation.Celestial.Transactions;
 using System.Diagnostics;
 
 namespace NovaCore.Simulation.Transactions;
@@ -110,6 +112,42 @@ internal sealed class SimulationTransactionEngine
         return new(SimulationTransactionStatus.Committed, SimulationTransactionValidationResult.Valid, processed);
     }
 
+    /// <summary>Commits one already-evaluated celestial replacement without introducing a second state mutation path.</summary>
+    internal CelestialTrajectoryTransactionResult ValidateAndCommit(CelestialTrajectoryReplacementTransaction transaction)
+    {
+        var validation = Validate(transaction);
+        if (validation != CelestialTrajectoryTransactionStatus.Success) return new(validation, null);
+
+        // Celestial commits require preallocated history capacity so no fallible operation remains after mutation.
+        var timelineBefore = _clock.Timeline.Revision;
+        var stateBefore = _state.CreateView().Revision;
+        if (!_state.CommitCelestialTrajectoryReplacement(transaction.Subject, transaction.ExpectedTrajectory, transaction.ReplacementTrajectory, out var storeStatus))
+            throw new InvalidOperationException($"Validated celestial trajectory replacement failed in store: {storeStatus}.");
+        if (!_clock.Timeline.TryConsumeCanonical(transaction.Event.Header, out _))
+            throw new InvalidOperationException("Validated canonical celestial event could not be consumed.");
+        _clock.AdvanceAfterSuccessfulTransaction(transaction.EvaluationTime);
+        var stateAfter = _state.CreateView().Revision;
+        var transition = new ProcessedCelestialTrajectoryTransition(
+            transaction.Subject,
+            transaction.EvaluationTime,
+            transaction.ExpectedTrajectory.Epoch,
+            transaction.ReplacementTrajectory.Epoch,
+            stateBefore,
+            stateAfter,
+            TwoBodyTrajectoryIdentity.ComputeHash(transaction.ExpectedTrajectory),
+            TwoBodyTrajectoryIdentity.ComputeHash(transaction.ReplacementTrajectory));
+        var processed = new ProcessedSimulationEvent(
+            transaction.Event.Header,
+            transaction.EvaluationTime,
+            timelineBefore,
+            _clock.Timeline.Revision,
+            stateBefore,
+            stateAfter,
+            transition);
+        _history.Add(processed);
+        return new(CelestialTrajectoryTransactionStatus.Success, processed);
+    }
+
     private SimulationTransactionValidationResult Validate(SimulationTransaction transaction)
     {
         if (!_clock.Timeline.TryPeekPending(out var pending)) return new(SimulationTransactionValidationStatus.NoPendingEvent);
@@ -124,6 +162,37 @@ internal sealed class SimulationTransactionEngine
         if (transaction.ChangesAuthoritativeState && state.Revision.Value == ulong.MaxValue) return new(SimulationTransactionValidationStatus.StateRevisionOverflow);
         if (!_clock.Timeline.CanConsumeCanonical(transaction.Event)) return new(SimulationTransactionValidationStatus.TimelineRevisionOverflow);
         return SimulationTransactionValidationResult.Valid;
+    }
+
+    private CelestialTrajectoryTransactionStatus Validate(CelestialTrajectoryReplacementTransaction transaction)
+    {
+        if (transaction.Event.Header.Kind != SimulationEventKind.ReplaceTrajectory)
+            return CelestialTrajectoryTransactionStatus.InvalidEventKind;
+        if (!_clock.Timeline.TryPeekPending(out var pending) || pending.Header != transaction.Event.Header)
+            return CelestialTrajectoryTransactionStatus.EventNotCanonical;
+        if (transaction.Event.Header.Time != transaction.EvaluationTime)
+            return CelestialTrajectoryTransactionStatus.EventTimeMismatch;
+        if (_clock.CurrentTime != transaction.EvaluationTime)
+            return CelestialTrajectoryTransactionStatus.ClockMismatch;
+        if (_clock.Timeline.Revision != transaction.ExpectedTimelineRevision)
+            return CelestialTrajectoryTransactionStatus.TimelineRevisionMismatch;
+        var state = _state.CreateView();
+        if (state.Revision != transaction.ExpectedStateRevision)
+            return CelestialTrajectoryTransactionStatus.StateRevisionMismatch;
+        if (_history.Count == _history.Capacity)
+            return CelestialTrajectoryTransactionStatus.HistoryCapacityFailure;
+        if (state.Revision.Value == ulong.MaxValue)
+            return CelestialTrajectoryTransactionStatus.StateRevisionOverflow;
+        if (!_clock.Timeline.CanConsumeCanonical(transaction.Event.Header))
+            return CelestialTrajectoryTransactionStatus.TimelineRevisionOverflow;
+        return CelestialTrajectoryTransactionEvaluator.ValidateReplacement(
+            transaction.EvaluationTime,
+            state.Celestial,
+            transaction.Subject,
+            transaction.ExpectedTrajectory,
+            transaction.ReplacementTrajectory,
+            requireExpected: true,
+            out _);
     }
 
     internal SimulationCanonicalGroupResult ExecuteCanonicalGroupWhileGuardedForTest()

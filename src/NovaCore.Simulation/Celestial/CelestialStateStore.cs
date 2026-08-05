@@ -103,6 +103,18 @@ internal sealed class CelestialStateStore
         state = default; return false;
     }
 
+    /// <summary>Engine-owned, in-place mutation seam. It changes no revision, timeline, clock, or history state.</summary>
+    internal bool TryReplaceTrajectory(CelestialBodyId subject, in TwoBodyTrajectory expected, in TwoBodyTrajectory replacement, out CelestialStateStoreMutationStatus status)
+    {
+        if (!TryGetIndex(subject, out var index)) { status = CelestialStateStoreMutationStatus.SubjectNotFound; return false; }
+        if (_definitions[index].PrimaryBody is null) { status = CelestialStateStoreMutationStatus.RootBody; return false; }
+        if (_states[index].Trajectory is not { } current) { status = CelestialStateStoreMutationStatus.NoCurrentTrajectory; return false; }
+        if (!TwoBodyTrajectoryIdentity.EqualsRaw(current, expected)) { status = CelestialStateStoreMutationStatus.ExpectedTrajectoryMismatch; return false; }
+        _states[index] = CelestialBodyState.Orbiting(subject, replacement);
+        status = CelestialStateStoreMutationStatus.Success;
+        return true;
+    }
+
     private static int FindDefinitionIndex(ReadOnlySpan<CelestialBodyDefinition> definitions, CelestialBodyId id)
     {
         for (var index = 0; index < definitions.Length; index++) if (definitions[index].Id == id) return index;

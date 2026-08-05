@@ -29,3 +29,17 @@ Stumpff C/S functions use a fixed polynomial branch through `z = 1e-4`, then dir
 On the tested .NET x64 runtime, warmed direct propagation, domain-adapter evaluation, and controlled failure paths allocate zero managed bytes. Deterministic raw hashes cover circular, elliptic, backward, and validation sequences. No cross-platform bitwise determinism claim is made.
 
 Future slices will add transaction-based trajectory replacement and celestial-to-frame evaluation. Hyperbolic/parabolic propagation, numerical integration, reference-frame integration, snapshots, and rendering remain deferred.
+
+## Authoritative trajectory replacement
+
+Milestone 7C-1 adds the first celestial discontinuity without changing pure coast evaluation. `UniversalVariableTwoBodyPropagator` and `CelestialTrajectoryEvaluator` remain read-only: evaluating a trajectory at an arbitrary instant never changes the stored trajectory, revisions, event topology, clock, or processed history.
+
+The permanent mutation primitive is an internal immutable `CelestialTrajectoryReplacementTransaction`. It binds one canonical `ReplaceTrajectory` event header, exact event/evaluation time, expected timeline and state revisions, subject body, expected current trajectory, and a complete replacement `TwoBodyTrajectory`. Candidate construction reads `SimulationStateView` only. There is no scheduled celestial payload or delta-v intent in this slice.
+
+At commit, `SimulationTransactionEngine` validates the canonical pending event, exact event-time epoch, clock boundary, revisions, subject/primary relationship, expected trajectory bits, finite replacement Cartesian state, supported model, central μ, and immediate elliptic evaluatability. Root bodies, topology changes, no-op replacements, stale candidates, radial or degenerate replacements, hyperbolic/parabolic replacements, and invalid states are controlled rejections.
+
+After history capacity and revision/timeline checks succeed, the engine replaces exactly one engine-owned `CelestialStateStore` trajectory slot in place, increments `StateRevision` once, consumes the canonical event (advancing `TimelineRevision`), advances the clock to the already-canonical event instant, and appends one immutable processed record. The store itself owns no revisions, clock state, or history. Every controlled rejection leaves authoritative celestial values, marker value, revisions, pending topology, clock time, and history unchanged.
+
+Processed celestial transition metadata records the subject, exact event time, prior and replacement epochs, state revisions, and stable raw trajectory hashes. Same-time replacements remain separate transactions in canonical `(time, priority, sequence, event ID)` order; a later candidate must be evaluated against the trajectory committed by earlier successful events.
+
+Impulse payloads, delta-v semantics, burn frames, maneuver planning, fuel, reparenting, sphere-of-influence changes, and celestial-to-reference-frame evaluation remain deferred to later work.

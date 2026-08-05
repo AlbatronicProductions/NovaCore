@@ -3,6 +3,7 @@ using NovaCore.Simulation.Timeline;
 using NovaCore.Simulation.Clock;
 using NovaCore.Simulation.Transactions;
 using NovaCore.Simulation.Celestial;
+using NovaCore.Simulation.Celestial.Transactions;
 using NovaCore.Core;
 using System.Diagnostics;
 
@@ -21,6 +22,7 @@ var tests = new (string Name, Action Test)[]
     ("Clock execution orchestration", ClockExecutionTests),
     ("Celestial contracts", CelestialContractTests),
     ("Two-body propagation", TwoBodyPropagationTests),
+    ("Celestial trajectory replacement", CelestialTrajectoryReplacementTests),
     ("Allocation", AllocationTests),
 };
 foreach (var (name, test) in tests) { test(); Console.WriteLine($"PASS {name}"); }
@@ -235,6 +237,130 @@ static bool RawCartesianEqual(in CartesianState left, in CartesianState right) =
 static ulong PropagationHash(in CartesianState state, SimulationInstant epoch, double mu, ReadOnlySpan<SimulationInstant> times) { ulong hash = 14695981039346656037UL; foreach (ref readonly var time in times) { var result = UniversalVariableTwoBodyPropagator.TryEvaluate(state, epoch, time, mu); hash = Mix(hash, (ulong)result.Status); hash = Mix(hash, (ulong)time.Ticks); if (result.Succeeded) { hash = MixCartesian(hash, result.State); } } return hash; }
 static ulong ValidationHash(in CartesianState circular, SimulationInstant epoch, double mu) { ulong hash = 14695981039346656037UL; var hyper = new CartesianState(circular.Position, new Double3(0, Math.Sqrt(2d * mu / circular.Position.X) * 1.01d, 0)); foreach (var result in new[] { UniversalVariableTwoBodyPropagator.TryEvaluate(circular, epoch, SimulationInstant.FromWholeSeconds(1), 0d), UniversalVariableTwoBodyPropagator.TryEvaluate(hyper, epoch, SimulationInstant.FromWholeSeconds(1), mu), UniversalVariableTwoBodyPropagator.TryEvaluate(circular, epoch, new SimulationInstant(UniversalVariableTwoBodyPropagator.MaximumEvaluationTicks + 1), mu) }) { hash = Mix(hash, (ulong)result.Status); hash = Mix(hash, (ulong)result.RequestedTime.Ticks); } return hash; }
 static ulong MixCartesian(ulong hash, in CartesianState state) { hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(state.Position.X)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(state.Position.Y)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(state.Position.Z)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(state.Velocity.X)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(state.Velocity.Y)); return Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(state.Velocity.Z)); }
+
+static void CelestialTrajectoryReplacementTests()
+{
+    const double mu = 3.986004418e14d; const double radius = 7_000_000d;
+    var initialState = new CartesianState(new Double3(radius, 0d, 0d), new Double3(0d, Math.Sqrt(mu / radius), 0d));
+    var eventTime = SimulationInstant.FromWholeSeconds(1_234);
+    var initial = new TwoBodyTrajectory(new CelestialBodyId(1), SimulationInstant.Zero, initialState, TwoBodyPropagationModel.CartesianTwoBodyV1);
+    var eventState = RequirePropagation(initialState, SimulationInstant.Zero, eventTime, mu, "replacement event state").State;
+    var replacement = new TwoBodyTrajectory(new CelestialBodyId(1), eventTime, new CartesianState(eventState.Position, eventState.Velocity * .99d), TwoBodyPropagationModel.CartesianTwoBodyV1);
+
+    var (timeline, state, engine, scheduled) = CreateReplacementScenario(initial, eventTime, 8, 10, 0);
+    var creation = CelestialTrajectoryTransactionEvaluator.TryCreateReplacement(scheduled, engine.State, timeline.Revision, new CelestialBodyId(2), replacement);
+    Check(creation.Succeeded && creation.Transaction is not null, "candidate creation");
+    var candidate = creation.Transaction!.Value;
+    var beforeHash = CelestialContractHash.Compute(engine.State.Celestial); var beforeRevision = engine.State.Revision;
+    var result = engine.ValidateAndCommit(candidate);
+    Check(result.Committed && result.ProcessedEvent is not null && result.ProcessedEvent.Value.CelestialTransition is not null, "atomic replacement commit");
+    var processed = result.ProcessedEvent!.Value; var transition = processed.CelestialTransition!.Value;
+    Check(engine.State.Revision.Value == beforeRevision.Value + 1 && timeline.Revision.Value == candidate.ExpectedTimelineRevision.Value + 1 && timeline.PendingCount == 0 && engine.ProcessedCount == 1, "replacement revisions and consumption");
+    Check(engine.State.Celestial.TryGetState(new CelestialBodyId(2), out var replacedState) && replacedState.Trajectory is not null, "store exposes replacement");
+    var actual = replacedState.Trajectory!.Value; Check(TwoBodyTrajectoryIdentity.EqualsRaw(actual, replacement), "replacement value matches");
+    Check(beforeHash != CelestialContractHash.Compute(engine.State.Celestial) && transition.EventTime == eventTime && transition.Subject == new CelestialBodyId(2) && transition.StateRevisionAfter == engine.State.Revision, "history transition metadata");
+    Check(UniversalVariableTwoBodyPropagator.TryEvaluate(actual.StateAtEpoch, actual.Epoch, eventTime, mu).Succeeded, "replacement remains propagatable");
+    Check(TwoBodyTrajectoryIdentity.EqualsRaw(initial, new TwoBodyTrajectory(new CelestialBodyId(1), SimulationInstant.Zero, initialState, TwoBodyPropagationModel.CartesianTwoBodyV1)), "original trajectory value unchanged");
+
+    var unsupported = new TwoBodyTrajectory(new CelestialBodyId(1), eventTime, new CartesianState(eventState.Position, eventState.Position * .001d), TwoBodyPropagationModel.CartesianTwoBodyV1);
+    var unsupportedScenario = CreateReplacementScenario(initial, eventTime, 8, 11, 0);
+    var unsupportedBefore = ReplacementSnapshot(unsupportedScenario.engine, unsupportedScenario.timeline);
+    var unsupportedCreation = CelestialTrajectoryTransactionEvaluator.TryCreateReplacement(unsupportedScenario.scheduled, unsupportedScenario.engine.State, unsupportedScenario.timeline.Revision, new CelestialBodyId(2), unsupported);
+    Check(unsupportedCreation.Status == CelestialTrajectoryTransactionStatus.UnsupportedReplacementOrbit, "unsupported replacement rejected during pure creation");
+    Check(unsupportedBefore == ReplacementSnapshot(unsupportedScenario.engine, unsupportedScenario.timeline), "creation rejection is atomic");
+
+    var validationScenario = CreateReplacementScenario(initial, eventTime, 2, 111, 0);
+    Check(CelestialTrajectoryTransactionEvaluator.TryCreateReplacement(validationScenario.scheduled, validationScenario.engine.State, validationScenario.timeline.Revision, new CelestialBodyId(99), replacement).Status == CelestialTrajectoryTransactionStatus.SubjectNotFound, "missing subject rejection");
+    Check(CelestialTrajectoryTransactionEvaluator.TryCreateReplacement(validationScenario.scheduled, validationScenario.engine.State, validationScenario.timeline.Revision, new CelestialBodyId(1), replacement).Status == CelestialTrajectoryTransactionStatus.RootBody, "root subject rejection");
+    var noOpScenario = CreateReplacementScenario(replacement, eventTime, 2, 113, 0);
+    Check(CelestialTrajectoryTransactionEvaluator.TryCreateReplacement(noOpScenario.scheduled, noOpScenario.engine.State, noOpScenario.timeline.Revision, new CelestialBodyId(2), replacement).Status == CelestialTrajectoryTransactionStatus.ReplacementNoOp, "no-op replacement rejection");
+    Check(CelestialTrajectoryTransactionEvaluator.TryCreateReplacement(validationScenario.scheduled, validationScenario.engine.State, validationScenario.timeline.Revision, new CelestialBodyId(2), replacement with { CentralBody = new CelestialBodyId(2) }).Status == CelestialTrajectoryTransactionStatus.ReplacementCentralMismatch, "central mismatch rejection");
+    Check(CelestialTrajectoryTransactionEvaluator.TryCreateReplacement(validationScenario.scheduled, validationScenario.engine.State, validationScenario.timeline.Revision, new CelestialBodyId(2), replacement with { StateAtEpoch = new CartesianState(new Double3(double.NaN, 0d, 0d), replacement.StateAtEpoch.Velocity) }).Status == CelestialTrajectoryTransactionStatus.InvalidReplacementState, "non-finite replacement rejection");
+    Check(CelestialTrajectoryTransactionEvaluator.TryCreateReplacement(validationScenario.scheduled, validationScenario.engine.State, validationScenario.timeline.Revision, new CelestialBodyId(2), replacement with { Epoch = eventTime + new SimulationDuration(1) }).Status == CelestialTrajectoryTransactionStatus.EventTimeMismatch, "event epoch mismatch rejection");
+
+    var capacityScenario = CreateReplacementScenario(initial, eventTime, 0, 112, 0);
+    var capacityCandidate = CelestialTrajectoryTransactionEvaluator.TryCreateReplacement(capacityScenario.scheduled, capacityScenario.engine.State, capacityScenario.timeline.Revision, new CelestialBodyId(2), replacement).Transaction!.Value;
+    var capacityBefore = ReplacementSnapshot(capacityScenario.engine, capacityScenario.timeline);
+    Check(capacityScenario.engine.ValidateAndCommit(capacityCandidate).Status == CelestialTrajectoryTransactionStatus.HistoryCapacityFailure, "history capacity rejection");
+    Check(capacityBefore == ReplacementSnapshot(capacityScenario.engine, capacityScenario.timeline), "history capacity rejection is atomic");
+
+    var staleScenario = CreateReplacementScenario(initial, eventTime, 8, 12, 0);
+    var staleCreation = CelestialTrajectoryTransactionEvaluator.TryCreateReplacement(staleScenario.scheduled, staleScenario.engine.State, staleScenario.timeline.Revision, new CelestialBodyId(2), replacement);
+    Check(staleCreation.Transaction is not null, "stale candidate creation");
+    var staleCandidate = staleCreation.Transaction!.Value;
+    var forged = staleCandidate with { ExpectedStateRevision = new StateRevision(staleCandidate.ExpectedStateRevision.Value + 1) };
+    var staleBefore = ReplacementSnapshot(staleScenario.engine, staleScenario.timeline);
+    Check(staleScenario.engine.ValidateAndCommit(forged).Status == CelestialTrajectoryTransactionStatus.StateRevisionMismatch, "stale revision rejection");
+    Check(staleBefore == ReplacementSnapshot(staleScenario.engine, staleScenario.timeline), "stale rejection is atomic");
+
+    var sameTime = CreateSameTimeReplacementScenario(initial, eventTime, replacement);
+    Check(sameTime.first.Transaction is not null && sameTime.secondStale.Transaction is not null, "same-time candidate creation");
+    var first = sameTime.first.Transaction!.Value; var staleSecond = sameTime.secondStale.Transaction!.Value;
+    Check(sameTime.engine.ValidateAndCommit(first).Committed, "first same-time replacement commits");
+    var afterFirst = ReplacementSnapshot(sameTime.engine, sameTime.timeline);
+    var staleAtCurrentTimeline = staleSecond with { ExpectedTimelineRevision = sameTime.timeline.Revision };
+    Check(sameTime.engine.ValidateAndCommit(staleAtCurrentTimeline).Status == CelestialTrajectoryTransactionStatus.StateRevisionMismatch, "stale same-time candidate rejected");
+    Check(afterFirst == ReplacementSnapshot(sameTime.engine, sameTime.timeline), "later rejection preserves earlier commit");
+    Check(sameTime.timeline.TryPeekPending(out var secondPending), "second remains canonical pending");
+    var secondFresh = CelestialTrajectoryTransactionEvaluator.TryCreateReplacement(secondPending, sameTime.engine.State, sameTime.timeline.Revision, new CelestialBodyId(2), sameTime.secondReplacement);
+    Check(secondFresh.Transaction is { } second && sameTime.engine.ValidateAndCommit(second).Committed, "second same-time candidate evaluates against first replacement");
+    Check(sameTime.engine.ProcessedCount == 2 && sameTime.engine.TryGetProcessed(0, out var firstHistory) && sameTime.engine.TryGetProcessed(1, out var secondHistory) && firstHistory.Event.Priority < secondHistory.Event.Priority && sameTime.engine.State.Revision.Value == 2, "same-time canonical history ordering");
+
+    var replayA = ReplacementReplayHash(initial, eventTime, replacement); var replayB = ReplacementReplayHash(initial, eventTime, replacement);
+    Check(replayA == replayB, "replacement replay hash");
+
+    var allocationScenario = CreateReplacementScenario(initial, eventTime, 2, 13, 0);
+    _ = CelestialTrajectoryTransactionEvaluator.TryCreateReplacement(allocationScenario.scheduled, allocationScenario.engine.State, allocationScenario.timeline.Revision, new CelestialBodyId(2), replacement);
+    var allocationCandidate = CelestialTrajectoryTransactionEvaluator.TryCreateReplacement(allocationScenario.scheduled, allocationScenario.engine.State, allocationScenario.timeline.Revision, new CelestialBodyId(2), replacement).Transaction!.Value;
+    var allocationBefore = GC.GetAllocatedBytesForCurrentThread();
+    for (var index = 0; index < 100_000; index++) Check(CelestialTrajectoryTransactionEvaluator.TryCreateReplacement(allocationScenario.scheduled, allocationScenario.engine.State, allocationScenario.timeline.Revision, new CelestialBodyId(2), replacement).Succeeded, "warm replacement creation");
+    var creationAllocated = GC.GetAllocatedBytesForCurrentThread() - allocationBefore;
+    allocationBefore = GC.GetAllocatedBytesForCurrentThread(); var allocationCommit = allocationScenario.engine.ValidateAndCommit(allocationCandidate); var commitAllocated = GC.GetAllocatedBytesForCurrentThread() - allocationBefore;
+    Check(allocationCommit.Committed && creationAllocated == 0 && commitAllocated == 0, "replacement paths allocate zero bytes after warmup");
+
+    Console.WriteLine("Celestial Trajectory Replacement");
+    Console.WriteLine("Initial authoritative trajectory: PASS; Candidate evaluation: PASS; Atomic replacement commit: PASS");
+    Console.WriteLine("Replacement epoch: PASS; Post-replacement propagation: PASS; Stale candidate rejection: PASS");
+    Console.WriteLine("Same-time ordering: PASS; Failure atomicity: PASS; Replay: PASS");
+    Console.WriteLine($"Allocation: {creationAllocated + commitAllocated} bytes; Replacement hash: 0x{replayA:X16}");
+}
+
+static (SimulationTimeline timeline, SimulationState state, SimulationTransactionEngine engine, ScheduledSimulationEvent scheduled) CreateReplacementScenario(TwoBodyTrajectory initial, SimulationInstant eventTime, int historyCapacity, ulong eventId, int priority)
+{
+    const double mu = 3.986004418e14d;
+    var definitions = new[] { new CelestialBodyDefinition(new CelestialBodyId(1), null, new ReferenceFrameId(1), mu), new CelestialBodyDefinition(new CelestialBodyId(2), new CelestialBodyId(1), new ReferenceFrameId(2), 1d) };
+    var states = new[] { CelestialBodyState.Root(new CelestialBodyId(1)), CelestialBodyState.Orbiting(new CelestialBodyId(2), initial) };
+    Check(CelestialStateStore.TryCreate(definitions, states, out var store, out var status) && store is not null && status == CelestialStateStoreStatus.Success, "replacement store creation");
+    var timeline = new SimulationTimeline(4); Check(timeline.Schedule(SimulationInstant.Zero, new SimulationEventRequest(new SimulationEventId(eventId), eventTime, priority, SimulationEventKind.ReplaceTrajectory)).Succeeded, "replacement event schedule");
+    Check(timeline.TryPeekPending(out var scheduled), "replacement pending event");
+    var state = new SimulationState(store); var engine = new SimulationTransactionEngine(new SimulationClock(eventTime, timeline), state, historyCapacity);
+    return (timeline, state, engine, scheduled);
+}
+
+static (SimulationTimeline timeline, SimulationTransactionEngine engine, CelestialTrajectoryTransactionCreationResult first, CelestialTrajectoryTransactionCreationResult secondStale, TwoBodyTrajectory secondReplacement) CreateSameTimeReplacementScenario(TwoBodyTrajectory initial, SimulationInstant eventTime, TwoBodyTrajectory firstReplacement)
+{
+    var scenario = CreateReplacementScenario(initial, eventTime, 4, 14, -1);
+    Check(scenario.timeline.Schedule(SimulationInstant.Zero, new SimulationEventRequest(new SimulationEventId(15), eventTime, 1, SimulationEventKind.ReplaceTrajectory)).Succeeded, "second same-time schedule");
+    Check(scenario.timeline.TryPeekPending(out var firstPending), "first same-time pending");
+    var first = CelestialTrajectoryTransactionEvaluator.TryCreateReplacement(firstPending, scenario.engine.State, scenario.timeline.Revision, new CelestialBodyId(2), firstReplacement);
+    var secondReplacement = firstReplacement with { StateAtEpoch = new CartesianState(firstReplacement.StateAtEpoch.Position, firstReplacement.StateAtEpoch.Velocity * .98d) };
+    Check(scenario.timeline.TryGetPending(new SimulationEventId(15), out var secondPending), "second same-time locate");
+    var secondStale = CelestialTrajectoryTransactionEvaluator.TryCreateReplacement(secondPending, scenario.engine.State, scenario.timeline.Revision, new CelestialBodyId(2), secondReplacement);
+    return (scenario.timeline, scenario.engine, first, secondStale, secondReplacement);
+}
+
+static ulong ReplacementReplayHash(TwoBodyTrajectory initial, SimulationInstant eventTime, TwoBodyTrajectory replacement)
+{
+    var scenario = CreateReplacementScenario(initial, eventTime, 2, 20, 0);
+    var candidate = CelestialTrajectoryTransactionEvaluator.TryCreateReplacement(scenario.scheduled, scenario.engine.State, scenario.timeline.Revision, new CelestialBodyId(2), replacement).Transaction!.Value;
+    var result = scenario.engine.ValidateAndCommit(candidate); Check(result.Committed && result.ProcessedEvent is not null && result.ProcessedEvent.Value.CelestialTransition is not null, "replacement replay commit");
+    var history = result.ProcessedEvent!.Value; var transition = history.CelestialTransition!.Value;
+    ulong hash = 14695981039346656037UL;
+    hash = Mix(hash, CelestialContractHash.Compute(scenario.engine.State.Celestial)); hash = Mix(hash, scenario.engine.State.Revision.Value); hash = Mix(hash, scenario.timeline.Revision.Value); hash = Mix(hash, (ulong)scenario.engine.ProcessedCount);
+    hash = Mix(hash, transition.PriorTrajectoryHash); hash = Mix(hash, transition.ReplacementTrajectoryHash); return Mix(hash, (ulong)history.Event.Id.Value);
+}
+
+static ReplacementStateSnapshot ReplacementSnapshot(SimulationTransactionEngine engine, SimulationTimeline timeline) => new(engine.State.MarkerValue, engine.State.Revision, CelestialContractHash.Compute(engine.State.Celestial), timeline.Revision, timeline.PendingCount, engine.ProcessedCount, engine.State.Celestial.GetState(1).Trajectory);
 
 static void TimelineTopologyTests()
 {
@@ -602,3 +728,4 @@ static ulong Mix(ulong hash,ulong value){for(var index=0;index<8;index++){hash^=
 static void Check(bool condition,string message){if(!condition)throw new Exception(message);}
 static void Throws<T>(Action action) where T:Exception {try{action();throw new Exception($"Expected {typeof(T).Name}.");}catch(T){}}
 struct FixedRandom(ulong state){private ulong _state=state;public ulong Next(){_state^=_state>>12;_state^=_state<<25;_state^=_state>>27;return _state*2685821657736338717UL;}}
+readonly record struct ReplacementStateSnapshot(long MarkerValue, StateRevision StateRevision, ulong CelestialHash, TimelineRevision TimelineRevision, int PendingCount, int HistoryCount, TwoBodyTrajectory? SubjectTrajectory);

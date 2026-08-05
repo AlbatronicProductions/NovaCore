@@ -1,5 +1,6 @@
 using NovaCore.Simulation.Time;
 using NovaCore.Simulation.Timeline;
+using NovaCore.Simulation.Celestial.Transactions;
 
 namespace NovaCore.Simulation.Transactions;
 
@@ -10,4 +11,5 @@ internal readonly record struct ProcessedSimulationEvent(
     TimelineRevision TimelineRevisionBefore,
     TimelineRevision TimelineRevisionAfter,
     StateRevision StateRevisionBefore,
-    StateRevision StateRevisionAfter);
+    StateRevision StateRevisionAfter,
+    ProcessedCelestialTrajectoryTransition? CelestialTransition = null);

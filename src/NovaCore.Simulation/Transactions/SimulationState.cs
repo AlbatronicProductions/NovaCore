@@ -19,4 +19,12 @@ internal sealed class SimulationState
         _markerValue = markerValue;
         _revision = new StateRevision(checked(_revision.Value + 1));
     }
+
+    /// <summary>Called only by the transaction engine after all celestial validation and capacity checks succeed.</summary>
+    internal bool CommitCelestialTrajectoryReplacement(CelestialBodyId subject, in TwoBodyTrajectory expected, in TwoBodyTrajectory replacement, out CelestialStateStoreMutationStatus status)
+    {
+        if (!_celestial.TryReplaceTrajectory(subject, expected, replacement, out status)) return false;
+        _revision = new StateRevision(checked(_revision.Value + 1));
+        return true;
+    }
 }
