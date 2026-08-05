@@ -1,6 +1,7 @@
 using NovaCore.Simulation.Time;
 using NovaCore.Simulation.Timeline;
 using NovaCore.Simulation.Celestial.Transactions;
+using NovaCore.Simulation.Spacecraft.Rotation.Transactions;
 
 namespace NovaCore.Simulation.Transactions;
 
@@ -22,6 +23,15 @@ internal static class SimulationEventEvaluator
                 return new(pending.Header, evaluationTime, timelineRevision, state.Revision, state.MarkerValue, true, true, replacement, impulse.Status);
             }
             return new(pending.Header, evaluationTime, timelineRevision, state.Revision, state.MarkerValue, false, false, null, impulse.Status);
+        }
+        if (pending.Header.Kind == SimulationEventKind.RigidBodyTorque)
+        {
+            if (pending.Payload.Kind != SimulationEventPayloadKind.RigidBodyTorque || pending.Header.Time != evaluationTime)
+                return new(pending.Header, evaluationTime, timelineRevision, state.Revision, state.MarkerValue, false, false);
+            var result = RigidBodyTorqueTransactionEvaluator.TryCreateReplacement(state, evaluationTime, pending.Payload.SpacecraftSubject);
+            return result.Succeeded
+                ? new(pending.Header, evaluationTime, timelineRevision, state.Revision, state.MarkerValue, true, true, null, null, result.Transaction)
+                : new(pending.Header, evaluationTime, timelineRevision, state.Revision, state.MarkerValue, false, false);
         }
         var changesState = pending.Header.Kind == SimulationEventKind.Marker && state.MarkerValue != long.MaxValue;
         var isNoOp = pending.Header.Kind == SimulationEventKind.NoOpMarker;

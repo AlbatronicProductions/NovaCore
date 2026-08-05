@@ -1,6 +1,7 @@
 using NovaCore.Simulation.Timeline;
 using NovaCore.Simulation.Celestial;
 using NovaCore.Simulation.Spacecraft;
+using NovaCore.Simulation.Spacecraft.Rotation;
 
 namespace NovaCore.Simulation.Transactions;
 
@@ -34,6 +35,13 @@ internal sealed class SimulationState
     internal bool CommitSpacecraftAttitudeReplacement(SpacecraftId subject, in SpacecraftAttitudeState expected, in SpacecraftAttitudeState replacement, out SpacecraftStateStoreMutationStatus status)
     {
         if (!_spacecraft.TryReplaceAttitude(subject, expected, replacement, out status)) return false;
+        _revision = new StateRevision(checked(_revision.Value + 1)); return true;
+    }
+
+    /// <summary>Called only by the transaction engine after a rigid-body replacement is fully validated.</summary>
+    internal bool CommitSpacecraftRigidBodyReplacement(SpacecraftId subject, in SpacecraftRigidBodyRotationState expected, in SpacecraftRigidBodyRotationState replacement, out SpacecraftStateStoreMutationStatus status)
+    {
+        if (!_spacecraft.TryReplaceRigidBody(subject, expected, replacement, out status)) return false;
         _revision = new StateRevision(checked(_revision.Value + 1)); return true;
     }
 }

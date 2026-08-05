@@ -17,7 +17,7 @@ Authoritative simulation is managed C#. Native code owns only platform input and
 - Hierarchical reference-frame graph and authoritative celestial/body-frame extraction.
 - Double-precision, camera-relative rendering with a deterministic Vulkan backend.
 - Analytical orbit visualization, including a previous-orbit ghost after an impulse.
-- Spacecraft attitude evaluation with quaternion-based body orientation and an authoritative spacecraft body reference frame.
+- Spacecraft attitude and torque-driven rigid-body rotation with quaternion-based body orientation and an authoritative spacecraft body reference frame.
 
 ## Architecture
 
@@ -73,7 +73,7 @@ dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=fixture-dynam
 dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=celestial
 ```
 
-The default triangle command renders the reusable mesh field. `--scene=frames` retains the frame-marker view. `NovaCore.ReferenceFrameFixture` verifies static graph and transform resolution in the terminal. `--scene=fixture` draws static Star, Planet, Moon, and TestVessel markers; `--scene=fixture-dynamic` publishes complete immutable snapshots for prescribed transform motion. `--scene=celestial` uses the authoritative clock, trajectory evaluator, frame extraction, and existing camera-relative Vulkan path. Its spacecraft marker has simulation-driven orientation derived from authoritative time. It is not N-body gravity, patched conics, terrain, spacecraft gameplay, lighting, or final planet rendering.
+The default triangle command renders the reusable mesh field. `--scene=frames` retains the frame-marker view. `NovaCore.ReferenceFrameFixture` verifies static graph and transform resolution in the terminal. `--scene=fixture` draws static Star, Planet, Moon, and TestVessel markers; `--scene=fixture-dynamic` publishes complete immutable snapshots for prescribed transform motion. `--scene=celestial` uses the authoritative clock, trajectory evaluator, frame extraction, and existing camera-relative Vulkan path. Its spacecraft marker rotates from simulation time, and its fixture torque changes that spin at an exact authoritative instant. It is not N-body gravity, patched conics, terrain, spacecraft gameplay, lighting, or final planet rendering.
 
 ## Documentation
 

@@ -9,6 +9,7 @@ using NovaCore.Simulation.Spacecraft;
 using NovaCore.Simulation.Spacecraft.ReferenceFrames;
 using NovaCore.Simulation.Spacecraft.Transactions;
 using NovaCore.Simulation.Spacecraft.Rotation;
+using NovaCore.Simulation.Spacecraft.Rotation.Transactions;
 using NovaCore.Core;
 using NovaCore.Core.ReferenceFrames;
 using System.Diagnostics;
@@ -31,6 +32,7 @@ var tests = new (string Name, Action Test)[]
     ("Spacecraft attitude", SpacecraftAttitudeTests),
     ("Spacecraft attitude integration", SpacecraftAttitudeIntegrationTests),
     ("Rigid-body rotation", RigidBodyRotationTests),
+    ("Rigid-body torque transaction", RigidBodyTorqueTransactionTests),
     ("Analytical orbit sampling", AnalyticalOrbitSamplingTests),
     ("Celestial frame extraction", CelestialFrameExtractionTests),
     ("Celestial trajectory replacement", CelestialTrajectoryReplacementTests),
@@ -137,6 +139,28 @@ static void RigidBodyRotationTests()
 static SpacecraftRigidBodyRotationState CreateRigid(SpacecraftId id, PrincipalMomentsOfInertia inertia, Double3 torque, Double3 angularVelocity)
 {
     Check(SpacecraftRigidBodyRotationState.TryCreate(id, SimulationInstant.Zero, DoubleQuaternion.Identity, angularVelocity, inertia, torque, RigidBodyRotationModel.ConstantBodyTorqueV1, out var state) == SpacecraftRigidBodyRotationEvaluationStatus.Success, "create rigid test state"); return state;
+}
+
+static void RigidBodyTorqueTransactionTests()
+{
+    var id = new SpacecraftId(91); var carrier = new ReferenceFrameId(2); var body = new ReferenceFrameId(3);
+    var inertia = new PrincipalMomentsOfInertia(10d, 15d, 20d);
+    Check(SpacecraftRigidBodyRotationState.TryCreate(id, SimulationInstant.Zero, DoubleQuaternion.Identity, new Double3(.1d, .2d, .3d), inertia, new Double3(2d, -1d, .5d), RigidBodyRotationModel.ConstantBodyTorqueV1, out var initial) == SpacecraftRigidBodyRotationEvaluationStatus.Success, "torque transaction source");
+    var definitions = new[] { new SpacecraftDefinition(id, carrier, body, "rigid-transaction") };
+    Check(SpacecraftStateStore.TryCreateRigidBody(definitions, new[] { initial }, out var store, out var storeStatus) && store is not null && storeStatus == SpacecraftStateStoreStatus.Success, "rigid store setup");
+    var eventTime = SimulationInstant.FromWholeSeconds(1);
+    var timeline = new SimulationTimeline(1); Check(SimulationEventRequest.TryCreateRigidBodyTorque(new SimulationEventId(901), eventTime, 0, id, out var request) && timeline.Schedule(SimulationInstant.Zero, request).Succeeded, "torque event schedule");
+    var clock = new SimulationClock(SimulationInstant.Zero, timeline); var engine = new SimulationTransactionEngine(clock, new SimulationState(null, store), 1);
+    var candidate = RigidBodyTorqueTransactionEvaluator.TryCreateReplacement(engine.State, eventTime, id); Check(candidate.Succeeded && candidate.Transaction is not null, "pure exact torque candidate"); var proposed = candidate.Transaction!.Value; Check(proposed.ReplacementRotation.Epoch == eventTime && proposed.ReplacementRotation.ConstantBodyTorque == Double3.Zero, "replacement epoch and torque-free continuation");
+    Check(clock.AdvanceTo(eventTime).ReachedBoundary, "torque boundary reached"); var result = engine.ExecuteCanonicalPendingEvent();
+    Check(result.Committed && engine.ProcessedRigidBodyTorqueCount == 1 && engine.State.Revision == new StateRevision(1) && engine.State.Spacecraft.TryGetRigidBody(id, out _), "atomic rigid commit"); var committed = engine.State.Spacecraft.TryGetRigidBody(id, out var currentRotation) ? currentRotation : default; Check(committed == proposed.ReplacementRotation, "committed rigid replacement");
+    Check(committed.AngularVelocityBody.X > initial.AngularVelocityBody.X && !engine.EvaluateNext().IsInternallyConsistent, "torque direction and event consumed");
+    var graphBuilder = new ReferenceFrameGraphBuilder(); graphBuilder.Add(new ReferenceFrameNode(new ReferenceFrameId(1), null, ReferenceFrameKind.Ecl, "root")); graphBuilder.Add(new ReferenceFrameNode(carrier, new ReferenceFrameId(1), ReferenceFrameKind.Cce, "carrier")); graphBuilder.Add(new ReferenceFrameNode(body, carrier, ReferenceFrameKind.Ccf, "body")); var graph = graphBuilder.Build(); var evaluations = new ReferenceFrameEvaluation[3];
+    Check(SpacecraftReferenceFrameEvaluator.TryEvaluate(engine.State.Spacecraft, graph, eventTime, evaluations) == SpacecraftReferenceFrameEvaluationStatus.Success && evaluations[2].Value.LocalToParent.Rotation == committed.OrientationLocalToParent, "rigid source frame extraction");
+    var stale = new RigidBodyTorqueReplacementTransaction(eventTime, StateRevision.Zero, id, initial, proposed.ReplacementRotation); Check(RigidBodyTorqueTransactionEvaluator.Validate(engine.State, eventTime, id, stale.ExpectedRotation, stale.ReplacementRotation, true) == RigidBodyTorqueTransactionStatus.RotationBasisMismatch, "stale rigid candidate rejection");
+    _ = RigidBodyTorqueTransactionEvaluator.TryCreateReplacement(engine.State, eventTime, id); var before = GC.GetAllocatedBytesForCurrentThread(); ulong hash = 14695981039346656037UL;
+    for (var index = 0; index < 100_000; index++) { Check(engine.State.Spacecraft.TryGetRigidBody(id, out var warm), "warm rigid lookup"); hash = Mix(hash, RigidBodyTorqueTransactionEvaluator.ComputeHash(warm)); }
+    Check(GC.GetAllocatedBytesForCurrentThread() == before, "warm rigid transaction lookup allocation"); Console.WriteLine($"Rigid-body torque transaction hash: 0x{hash:X16}; allocation=0 bytes");
 }
 
 static void AnalyticalOrbitSamplingTests()

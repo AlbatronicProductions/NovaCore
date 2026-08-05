@@ -25,4 +25,4 @@ The existing immutable reference-frame graph contains each spacecraft body frame
 
 RCS, propulsion, SAS, control input, persistence, and spacecraft graphics remain deferred.
 
-The separate Milestone 8B-1 rigid-body contract now evaluates prescribed constant body-space torque with diagonal principal inertia. It is still pure and not wired into the authoritative spacecraft store or body-frame extraction; see [Rotational Dynamics](rotational-dynamics.md).
+The Milestone 8B rigid-body contract evaluates prescribed constant body-space torque with diagonal principal inertia. When present in the store, it is the authoritative source used by body-frame extraction and exact-time replacement transactions; see [Rotational Dynamics](rotational-dynamics.md).

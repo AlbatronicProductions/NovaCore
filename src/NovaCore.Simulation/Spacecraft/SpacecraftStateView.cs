@@ -1,5 +1,7 @@
 namespace NovaCore.Simulation.Spacecraft;
 
+using NovaCore.Simulation.Spacecraft.Rotation;
+
 /// <summary>Allocation-free read-only traversal over the authoritative fixed spacecraft store.</summary>
 internal readonly struct SpacecraftStateView
 {
@@ -11,4 +13,6 @@ internal readonly struct SpacecraftStateView
     internal bool TryGetIndex(SpacecraftId id, out int index) => _store.TryGetIndex(id, out index);
     internal bool TryGetDefinition(SpacecraftId id, out SpacecraftDefinition definition) => _store.TryGetDefinition(id, out definition);
     internal bool TryGetAttitude(SpacecraftId id, out SpacecraftAttitudeState attitude) => _store.TryGetAttitude(id, out attitude);
+    /// <summary>Rigid-body state is the authoritative rotation source when present.</summary>
+    internal bool TryGetRigidBody(SpacecraftId id, out SpacecraftRigidBodyRotationState rotation) => _store.TryGetRigidBody(id, out rotation);
 }

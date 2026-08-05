@@ -6,6 +6,7 @@ using NovaCore.Simulation.Celestial;
 using NovaCore.Simulation.Celestial.ReferenceFrames;
 using NovaCore.Simulation.Spacecraft;
 using NovaCore.Simulation.Spacecraft.ReferenceFrames;
+using NovaCore.Simulation.Spacecraft.Rotation;
 using NovaCore.Simulation.Clock;
 using NovaCore.Simulation.Time;
 using NovaCore.Simulation.Timeline;
@@ -20,6 +21,10 @@ internal sealed class CelestialAnalyticalScene
     internal const double RootMu = 3.986004418e14d;
     internal const double OrbitRadiusMetres = 100_000_000d;
     internal const double ImpulseMetresPerSecond = 200d;
+    internal static readonly PrincipalMomentsOfInertia FixtureInertia = new(120d, 120d, 120d);
+    internal static readonly Double3 FixtureInitialAngularVelocity = new(.08d, .12d, .35d);
+    internal static readonly Double3 FixtureTorque = new(1.5d, -.8d, .6d);
+    private static readonly SimulationInstant TorqueEndTime = SimulationInstant.FromWholeSeconds(5_000);
     private static readonly SimulationInstant ImpulseTime = SimulationInstant.FromWholeSeconds(100_000);
     private static readonly SimulationRate[] RateSteps = [new(1, 1), new(10, 1), new(100, 1), new(1_000, 1), new(5_000, 1), new(SampleRate, 1), new(50_000, 1)];
 
@@ -91,12 +96,12 @@ internal sealed class CelestialAnalyticalScene
                 error = $"Celestial scene state failed: {celestialStatus}";
                 return false;
             }
-            if (SpacecraftAttitudeState.TryCreate(spacecraftId, SimulationInstant.Zero, DoubleQuaternion.Identity, new Double3(0d, 0d, .35d), SpacecraftAttitudeModel.ConstantBodyAngularVelocityV1, out var attitude) != SpacecraftAttitudeEvaluationStatus.Success)
+            if (SpacecraftRigidBodyRotationState.TryCreate(spacecraftId, SimulationInstant.Zero, DoubleQuaternion.Identity, FixtureInitialAngularVelocity, FixtureInertia, FixtureTorque, RigidBodyRotationModel.ConstantBodyTorqueV1, out var rotation) != SpacecraftRigidBodyRotationEvaluationStatus.Success)
             {
-                error = "Celestial spacecraft attitude failed.";
+                error = "Celestial spacecraft rigid-body state failed.";
                 return false;
             }
-            if (!SpacecraftStateStore.TryCreate([new SpacecraftDefinition(spacecraftId, satelliteFrame, new ReferenceFrameId(3), "celestial-spacecraft")], [attitude], out var spacecraft, out var spacecraftStatus) || spacecraft is null)
+            if (!SpacecraftStateStore.TryCreateRigidBody([new SpacecraftDefinition(spacecraftId, satelliteFrame, new ReferenceFrameId(3), "celestial-spacecraft")], [rotation], out var spacecraft, out var spacecraftStatus) || spacecraft is null)
             { error = $"Celestial spacecraft state failed: {spacecraftStatus}"; return false; }
 
             var graphBuilder = new ReferenceFrameGraphBuilder();
@@ -104,16 +109,18 @@ internal sealed class CelestialAnalyticalScene
             graphBuilder.Add(new ReferenceFrameNode(satelliteFrame, rootFrame, ReferenceFrameKind.Cce, "celestial-satellite-inertial"));
             graphBuilder.Add(new ReferenceFrameNode(new ReferenceFrameId(3), satelliteFrame, ReferenceFrameKind.Ccf, "celestial-spacecraft-body"));
             var graph = graphBuilder.Build();
-            var timeline = new SimulationTimeline(initialCapacity: 1);
+            var timeline = new SimulationTimeline(initialCapacity: 2);
             if (!SimulationEventRequest.TryCreateCelestialImpulse(new SimulationEventId(1), ImpulseTime, 0, satelliteBody, new Double3(0d, ImpulseMetresPerSecond, 0d), out var impulse) ||
-                timeline.Schedule(SimulationInstant.Zero, impulse).Status != SimulationScheduleStatus.Scheduled)
+                timeline.Schedule(SimulationInstant.Zero, impulse).Status != SimulationScheduleStatus.Scheduled ||
+                !SimulationEventRequest.TryCreateRigidBodyTorque(new SimulationEventId(2), TorqueEndTime, 0, spacecraftId, out var torque) ||
+                timeline.Schedule(SimulationInstant.Zero, torque).Status != SimulationScheduleStatus.Scheduled)
             {
                 error = "Celestial scene impulse scheduling failed.";
                 return false;
             }
 
             var clock = new SimulationClock(SimulationInstant.Zero, timeline, new SimulationRate(SampleRate, 1));
-            var transactions = new SimulationTransactionEngine(clock, new SimulationState(celestial, spacecraft), initialHistoryCapacity: 1);
+            var transactions = new SimulationTransactionEngine(clock, new SimulationState(celestial, spacecraft), initialHistoryCapacity: 2);
             var candidate = new CelestialAnalyticalScene(graph, clock, transactions);
             if (!candidate.TryPublishCandidate(false, out error)) return false;
             scene = candidate;

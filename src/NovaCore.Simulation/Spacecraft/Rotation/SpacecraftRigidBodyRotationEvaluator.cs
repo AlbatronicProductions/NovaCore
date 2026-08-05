@@ -19,6 +19,17 @@ internal static class SpacecraftRigidBodyRotationEvaluator
         try { ticks = (requestedTime - state.Epoch).Ticks; }
         catch (OverflowException) { return Failure(SpacecraftRigidBodyRotationEvaluationStatus.DurationOverflow, requestedTime); }
         if (ticks < -MaximumEvaluationTicks || ticks > MaximumEvaluationTicks) return Failure(SpacecraftRigidBodyRotationEvaluationStatus.DurationBoundExceeded, requestedTime);
+        // A spherical, torque-free body has an exact constant-body-angular-velocity solution.
+        // Retaining it here avoids unnecessary bounded RK4 work after an authoritative torque transition.
+        if (state.ConstantBodyTorque == Double3.Zero && state.PrincipalInertia.X == state.PrincipalInertia.Y && state.PrincipalInertia.Y == state.PrincipalInertia.Z)
+        {
+            if (SpacecraftAttitudeState.TryCreate(state.Spacecraft, state.Epoch, orientation, state.AngularVelocityBody, SpacecraftAttitudeModel.ConstantBodyAngularVelocityV1, out var attitude) != SpacecraftAttitudeEvaluationStatus.Success)
+                return Failure(SpacecraftRigidBodyRotationEvaluationStatus.QuaternionNormalizationFailure, requestedTime);
+            var exact = SpacecraftAttitudeEvaluator.TryEvaluate(attitude, requestedTime);
+            return exact.Succeeded
+                ? new(SpacecraftRigidBodyRotationEvaluationStatus.Success, requestedTime, exact.OrientationLocalToParent, exact.AngularVelocityBody, 0)
+                : Failure(SpacecraftRigidBodyRotationEvaluationStatus.NonFiniteIntermediate, requestedTime);
+        }
         var absoluteTicks = ticks < 0 ? -ticks : ticks;
         var fullSteps = absoluteTicks / FullSubstepTicks;
         var remainder = absoluteTicks % FullSubstepTicks;

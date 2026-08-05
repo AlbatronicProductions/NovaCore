@@ -97,7 +97,7 @@ public sealed class SimulationTimeline
     private SimulationScheduleStatus? ValidateRequest(SimulationInstant currentTime, SimulationEventRequest request)
     {
         if (!request.Id.IsValid) return SimulationScheduleStatus.InvalidId;
-        if (request.Kind is not (SimulationEventKind.Marker or SimulationEventKind.ReplaceTrajectory or SimulationEventKind.NoOpMarker or SimulationEventKind.CelestialImpulse)) return SimulationScheduleStatus.InvalidKind;
+        if (request.Kind is not (SimulationEventKind.Marker or SimulationEventKind.ReplaceTrajectory or SimulationEventKind.NoOpMarker or SimulationEventKind.CelestialImpulse or SimulationEventKind.RigidBodyTorque)) return SimulationScheduleStatus.InvalidKind;
         if (!request.Payload.IsCompatibleWith(request.Kind)) return SimulationScheduleStatus.InvalidPayload;
         if (_usedIds.Contains(request.Id)) return SimulationScheduleStatus.DuplicateId;
         if (request.Time < currentTime) return SimulationScheduleStatus.PastTime;
