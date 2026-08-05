@@ -8,6 +8,7 @@ using NovaCore.Simulation.Celestial.ReferenceFrames;
 using NovaCore.Simulation.Spacecraft;
 using NovaCore.Simulation.Spacecraft.ReferenceFrames;
 using NovaCore.Simulation.Spacecraft.Transactions;
+using NovaCore.Simulation.Spacecraft.Rotation;
 using NovaCore.Core;
 using NovaCore.Core.ReferenceFrames;
 using System.Diagnostics;
@@ -29,6 +30,7 @@ var tests = new (string Name, Action Test)[]
     ("Two-body propagation", TwoBodyPropagationTests),
     ("Spacecraft attitude", SpacecraftAttitudeTests),
     ("Spacecraft attitude integration", SpacecraftAttitudeIntegrationTests),
+    ("Rigid-body rotation", RigidBodyRotationTests),
     ("Analytical orbit sampling", AnalyticalOrbitSamplingTests),
     ("Celestial frame extraction", CelestialFrameExtractionTests),
     ("Celestial trajectory replacement", CelestialTrajectoryReplacementTests),
@@ -111,6 +113,30 @@ static void SpacecraftAttitudeIntegrationTests()
     _ = view.TryGetAttitude(id, out _); var before = GC.GetAllocatedBytesForCurrentThread(); ulong hash = 14695981039346656037UL;
     for (var index = 0; index < 100_000; index++) { Check(view.TryGetAttitude(id, out var warm), "warm spacecraft lookup"); var evaluated = SpacecraftAttitudeEvaluator.TryEvaluate(warm, new SimulationInstant(index)); Check(evaluated.Succeeded && SpacecraftReferenceFrameEvaluator.TryEvaluate(view, graph, new SimulationInstant(index), evaluations) == SpacecraftReferenceFrameEvaluationStatus.Success, "warm spacecraft evaluation/extraction"); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(evaluated.OrientationLocalToParent.W)); }
     Check(GC.GetAllocatedBytesForCurrentThread() == before, "warm spacecraft store/evaluation/frame extraction allocation"); Console.WriteLine($"Deterministic spacecraft-attitude integration hash: 0x{hash:X16}; allocation=0 bytes");
+}
+
+static void RigidBodyRotationTests()
+{
+    var id = new SpacecraftId(81); var spherical = new PrincipalMomentsOfInertia(2d, 2d, 2d);
+    Check(SpacecraftRigidBodyRotationState.TryCreate(id, SimulationInstant.Zero, DoubleQuaternion.Identity, new Double3(0d, 0d, Math.PI), spherical, Double3.Zero, RigidBodyRotationModel.ConstantBodyTorqueV1, out var zeroTorque) == SpacecraftRigidBodyRotationEvaluationStatus.Success, "rigid-body state");
+    var zero = SpacecraftRigidBodyRotationEvaluator.TryEvaluate(zeroTorque, SimulationInstant.Zero); Check(zero.Succeeded && zero.SubstepCount == 0 && zero.OrientationLocalToParent == DoubleQuaternion.Identity, "rigid zero duration");
+    Check(SpacecraftAttitudeState.TryCreate(id, SimulationInstant.Zero, DoubleQuaternion.Identity, zeroTorque.AngularVelocityBody, SpacecraftAttitudeModel.ConstantBodyAngularVelocityV1, out var kinematic) == SpacecraftAttitudeEvaluationStatus.Success, "kinematic comparison state");
+    var oneSecond = SpacecraftRigidBodyRotationEvaluator.TryEvaluate(zeroTorque, SimulationInstant.FromWholeSeconds(1)); var kinematicOneSecond = SpacecraftAttitudeEvaluator.TryEvaluate(kinematic, SimulationInstant.FromWholeSeconds(1)); var sphericalOrientationError = Math.Abs(oneSecond.OrientationLocalToParent.W - kinematicOneSecond.OrientationLocalToParent.W); Check(oneSecond.Succeeded && sphericalOrientationError < 1e-8d && oneSecond.AngularVelocityBody == zeroTorque.AngularVelocityBody, "spherical zero torque matches 8A");
+    var xTorque = CreateRigid(id, spherical, new Double3(4d, 0d, 0d), Double3.Zero); var yTorque = CreateRigid(id, spherical, new Double3(0d, 4d, 0d), Double3.Zero); var zTorque = CreateRigid(id, spherical, new Double3(0d, 0d, 4d), Double3.Zero);
+    Check(Math.Abs(SpacecraftRigidBodyRotationEvaluator.TryEvaluate(xTorque, SimulationInstant.FromWholeSeconds(1)).AngularVelocityBody.X - 2d) < 1e-12d, "principal X torque"); Check(Math.Abs(SpacecraftRigidBodyRotationEvaluator.TryEvaluate(yTorque, SimulationInstant.FromWholeSeconds(1)).AngularVelocityBody.Y - 2d) < 1e-12d, "principal Y torque"); Check(Math.Abs(SpacecraftRigidBodyRotationEvaluator.TryEvaluate(zTorque, SimulationInstant.FromWholeSeconds(1)).AngularVelocityBody.Z - 2d) < 1e-12d, "principal Z torque");
+    var asymmetric = new PrincipalMomentsOfInertia(2d, 3d, 5d); var coupled = CreateRigid(id, asymmetric, new Double3(.5d, -.75d, 1.25d), new Double3(.2d, -.3d, .4d)); var coupledResult = SpacecraftRigidBodyRotationEvaluator.TryEvaluate(coupled, SimulationInstant.FromWholeSeconds(1)); Check(coupledResult.Succeeded && coupledResult.AngularVelocityBody != coupled.AngularVelocityBody, "asymmetric gyroscopic coupling");
+    var free = CreateRigid(id, asymmetric, Double3.Zero, new Double3(.5d, -.75d, 1.25d)); var h0 = SpacecraftRigidBodyRotationEvaluator.AngularMomentum(asymmetric, free.AngularVelocityBody); var e0 = SpacecraftRigidBodyRotationEvaluator.RotationalEnergy(asymmetric, free.AngularVelocityBody); var freeResult = SpacecraftRigidBodyRotationEvaluator.TryEvaluate(free, SimulationInstant.FromWholeSeconds(10)); var h1 = SpacecraftRigidBodyRotationEvaluator.AngularMomentum(asymmetric, freeResult.AngularVelocityBody); var e1 = SpacecraftRigidBodyRotationEvaluator.RotationalEnergy(asymmetric, freeResult.AngularVelocityBody); var momentumError = Math.Abs(Math.Sqrt(h1.LengthSquared) - Math.Sqrt(h0.LengthSquared)); var energyError = Math.Abs(e1-e0); Check(momentumError < 1e-9d && energyError < 1e-9d && Math.Abs(freeResult.OrientationLocalToParent.LengthSquared - 1d) < 1e-12d, "torque-free invariants and quaternion norm");
+    var forward = SpacecraftRigidBodyRotationEvaluator.TryEvaluate(coupled, SimulationInstant.FromWholeSeconds(1)); Check(SpacecraftRigidBodyRotationState.TryCreate(id, SimulationInstant.FromWholeSeconds(1), forward.OrientationLocalToParent, forward.AngularVelocityBody, asymmetric, coupled.ConstantBodyTorque, coupled.Model, out var reverseState) == SpacecraftRigidBodyRotationEvaluationStatus.Success, "reverse state"); var backward = SpacecraftRigidBodyRotationEvaluator.TryEvaluate(reverseState, SimulationInstant.Zero); Check(backward.Succeeded && Math.Abs(backward.AngularVelocityBody.X-coupled.AngularVelocityBody.X) < 1e-8d, "forward/backward bounded evaluation");
+    var remainder = SpacecraftRigidBodyRotationEvaluator.TryEvaluate(xTorque, new SimulationInstant(SpacecraftRigidBodyRotationEvaluator.FullSubstepTicks + 1)); Check(remainder.Succeeded && remainder.SubstepCount == 2, "integer full and remainder steps"); Check(SpacecraftRigidBodyRotationEvaluator.TryEvaluate(xTorque, new SimulationInstant((long)SpacecraftRigidBodyRotationEvaluator.MaximumSubstepCount * SpacecraftRigidBodyRotationEvaluator.FullSubstepTicks + 1)).Status == SpacecraftRigidBodyRotationEvaluationStatus.ExcessiveStepCount, "maximum step boundary");
+    Check(SpacecraftRigidBodyRotationState.TryCreate(id, SimulationInstant.Zero, DoubleQuaternion.Identity, Double3.Zero, new PrincipalMomentsOfInertia(0d, 1d, 1d), Double3.Zero, RigidBodyRotationModel.ConstantBodyTorqueV1, out _) == SpacecraftRigidBodyRotationEvaluationStatus.NonPositiveInertia, "invalid inertia"); Check(SpacecraftRigidBodyRotationState.TryCreate(id, SimulationInstant.Zero, DoubleQuaternion.Identity, Double3.Zero, spherical, new Double3(double.NaN, 0d, 0d), RigidBodyRotationModel.ConstantBodyTorqueV1, out _) == SpacecraftRigidBodyRotationEvaluationStatus.NonFiniteTorque, "invalid torque"); Check(SpacecraftRigidBodyRotationState.TryCreate(id, SimulationInstant.Zero, DoubleQuaternion.Identity, Double3.Zero, spherical, Double3.Zero, (RigidBodyRotationModel)99, out _) == SpacecraftRigidBodyRotationEvaluationStatus.UnsupportedModel, "unsupported rigid model");
+    _ = SpacecraftRigidBodyRotationEvaluator.TryEvaluate(coupled, new SimulationInstant(1)); var before = GC.GetAllocatedBytesForCurrentThread(); ulong hash = 14695981039346656037UL;
+    for (var index = 0; index < 100_000; index++) { var result = SpacecraftRigidBodyRotationEvaluator.TryEvaluate(coupled, new SimulationInstant(index % 10)); Check(result.Succeeded, "warm rigid evaluation"); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(result.OrientationLocalToParent.W)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(result.AngularVelocityBody.X)); hash = Mix(hash, (ulong)result.RequestedTime.Ticks); hash = Mix(hash, (uint)result.SubstepCount); }
+    Check(GC.GetAllocatedBytesForCurrentThread() == before, "warm rigid evaluation allocation"); Console.WriteLine($"Rigid-body rotation: spherical orientation error={sphericalOrientationError:E3}; momentum error={momentumError:E3}; energy error={energyError:E3}; hash=0x{hash:X16}; allocation=0 bytes");
+}
+
+static SpacecraftRigidBodyRotationState CreateRigid(SpacecraftId id, PrincipalMomentsOfInertia inertia, Double3 torque, Double3 angularVelocity)
+{
+    Check(SpacecraftRigidBodyRotationState.TryCreate(id, SimulationInstant.Zero, DoubleQuaternion.Identity, angularVelocity, inertia, torque, RigidBodyRotationModel.ConstantBodyTorqueV1, out var state) == SpacecraftRigidBodyRotationEvaluationStatus.Success, "create rigid test state"); return state;
 }
 
 static void AnalyticalOrbitSamplingTests()

@@ -23,4 +23,6 @@ Direct immutable replacement candidates are built by a pure evaluator and commit
 
 The existing immutable reference-frame graph contains each spacecraft body frame beneath its declared carrier frame. At an exact clock instant, celestial extraction produces carrier position and velocity; spacecraft extraction produces zero body translation and origin velocity, evaluated local-to-parent orientation, and parent-space angular velocity `q.Rotate(ω_body)`. Graphics receives only the resolved derived transform later in the existing snapshot path.
 
-Torque, inertia, RCS, propulsion, SAS, control input, persistence, and spacecraft graphics remain deferred.
+RCS, propulsion, SAS, control input, persistence, and spacecraft graphics remain deferred.
+
+The separate Milestone 8B-1 rigid-body contract now evaluates prescribed constant body-space torque with diagonal principal inertia. It is still pure and not wired into the authoritative spacecraft store or body-frame extraction; see [Rotational Dynamics](rotational-dynamics.md).
