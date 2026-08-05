@@ -23,6 +23,7 @@ var tests = new (string Name, Action Test)[]
     ("Celestial contracts", CelestialContractTests),
     ("Two-body propagation", TwoBodyPropagationTests),
     ("Celestial trajectory replacement", CelestialTrajectoryReplacementTests),
+    ("Celestial impulse events", CelestialImpulseEventTests),
     ("Allocation", AllocationTests),
 };
 foreach (var (name, test) in tests) { test(); Console.WriteLine($"PASS {name}"); }
@@ -361,6 +362,58 @@ static ulong ReplacementReplayHash(TwoBodyTrajectory initial, SimulationInstant 
 }
 
 static ReplacementStateSnapshot ReplacementSnapshot(SimulationTransactionEngine engine, SimulationTimeline timeline) => new(engine.State.MarkerValue, engine.State.Revision, CelestialContractHash.Compute(engine.State.Celestial), timeline.Revision, timeline.PendingCount, engine.ProcessedCount, engine.State.Celestial.GetState(1).Trajectory);
+
+static void CelestialImpulseEventTests()
+{
+    const double mu = 3.986004418e14d; const double radius = 7_000_000d;
+    var initialState = new CartesianState(new Double3(radius, 0d, 0d), new Double3(0d, Math.Sqrt(mu / radius), 0d));
+    var initial = new TwoBodyTrajectory(new CelestialBodyId(1), SimulationInstant.Zero, initialState, TwoBodyPropagationModel.CartesianTwoBodyV1);
+    var eventTime = SimulationInstant.FromWholeSeconds(1_234); var delta = new Double3(0d, 25d, 0d);
+    var scenario = CreateImpulseScenario(initial, eventTime, (30UL, 0, delta));
+    var expected = RequirePropagation(initialState, SimulationInstant.Zero, eventTime, mu, "impulse event state").State;
+    var execution = scenario.engine.AdvanceAndExecuteOneCanonicalGroup(eventTime);
+    Check(execution.Reason == SimulationExecutionStopReason.Completed && scenario.engine.ProcessedCount == 1 && scenario.engine.State.Revision.Value == 1, "canonical impulse execution");
+    Check(scenario.engine.State.Celestial.TryGetState(new CelestialBodyId(2), out var updatedBody) && updatedBody.Trajectory is not null, "impulse replacement available");
+    var updated = updatedBody.Trajectory!.Value;
+    CheckVectorNear(updated.StateAtEpoch.Position, expected.Position, PositionTolerance(radius), "impulse position continuity");
+    CheckVectorNear(updated.StateAtEpoch.Velocity, expected.Velocity + delta, VelocityTolerance(Math.Sqrt(expected.Velocity.LengthSquared)), "impulse velocity addition");
+    Check(updated.Epoch == eventTime && UniversalVariableTwoBodyPropagator.TryEvaluate(updated.StateAtEpoch, updated.Epoch, eventTime + SimulationDuration.FromWholeSeconds(60), mu).Succeeded, "post-impulse propagation");
+    Check(scenario.engine.TryGetProcessed(0, out var history) && history.CelestialTransition is { } transition && transition.ImpulseAudit is { } audit && RawVectorEqual(audit.DeltaVelocity, delta), "impulse history audit");
+
+    var sameTime = CreateImpulseScenario(initial, eventTime, (40UL, -1, new Double3(0d, 10d, 0d)), (41UL, 1, new Double3(0d, 15d, 0d)));
+    Check(sameTime.engine.AdvanceAndExecuteOneCanonicalGroup(eventTime).Reason == SimulationExecutionStopReason.Completed && sameTime.engine.ProcessedCount == 2 && sameTime.engine.State.Revision.Value == 2, "same-time impulses commit serially");
+    Check(sameTime.engine.TryGetProcessed(0, out var first) && sameTime.engine.TryGetProcessed(1, out var second) && first.Event.Priority < second.Event.Priority && first.CelestialTransition!.Value.ImpulseAudit!.Value.DeltaVelocity.Y == 10d && second.CelestialTransition!.Value.ImpulseAudit!.Value.DeltaVelocity.Y == 15d, "same-time impulse audit order");
+
+    var unsupported = CreateImpulseScenario(initial, eventTime, (50UL, 0, new Double3(0d, 20_000d, 0d)));
+    Check(unsupported.engine.AdvanceAndExecuteOneCanonicalGroup(eventTime).Reason == SimulationExecutionStopReason.ValidationRejected, "unsupported impulse reaches canonical rejection");
+    var before = ReplacementSnapshot(unsupported.engine, unsupported.timeline);
+    var unsupportedResult = unsupported.engine.ExecuteCanonicalPendingEvent();
+    Check(!unsupportedResult.Committed && unsupportedResult.CelestialImpulseStatus == CelestialImpulseEvaluationStatus.UnsupportedResultingOrbit && before == ReplacementSnapshot(unsupported.engine, unsupported.timeline), "unsupported impulse rejection is atomic");
+
+    var invalidPayload = new SimulationTimeline(1);
+    Check(invalidPayload.Schedule(SimulationInstant.Zero, new SimulationEventRequest(new SimulationEventId(51), eventTime, 0, SimulationEventKind.CelestialImpulse)).Status == SimulationScheduleStatus.InvalidPayload, "kind/payload mismatch rejected");
+    Check(!SimulationEventRequest.TryCreateCelestialImpulse(new SimulationEventId(52), eventTime, 0, CelestialBodyId.Invalid, delta, out _) && !SimulationEventRequest.TryCreateCelestialImpulse(new SimulationEventId(53), eventTime, 0, new CelestialBodyId(2), Double3.Zero, out _), "invalid payload creation rejected");
+
+    var replayA = ImpulseReplayHash(initial, eventTime); var replayB = ImpulseReplayHash(initial, eventTime); Check(replayA == replayB, "impulse replay hash");
+    var allocation = CreateImpulseScenario(initial, eventTime, (60UL, 0, delta)); Check(allocation.timeline.TryPeekPending(out var pending), "allocation impulse pending"); _ = CelestialImpulseEvaluator.TryEvaluate(pending, allocation.engine.State, eventTime, allocation.timeline.Revision);
+    var allocationBefore = GC.GetAllocatedBytesForCurrentThread(); for (var index = 0; index < 100_000; index++) Check(CelestialImpulseEvaluator.TryEvaluate(pending, allocation.engine.State, eventTime, allocation.timeline.Revision).Succeeded, "warm impulse evaluation"); var evaluationAllocated = GC.GetAllocatedBytesForCurrentThread() - allocationBefore;
+    allocationBefore = GC.GetAllocatedBytesForCurrentThread(); var allocationResult = allocation.engine.AdvanceAndExecuteOneCanonicalGroup(eventTime); var commitAllocated = GC.GetAllocatedBytesForCurrentThread() - allocationBefore;
+    Check(allocationResult.Reason == SimulationExecutionStopReason.Completed && evaluationAllocated == 0 && commitAllocated == 0, "impulse paths allocate zero bytes after warmup");
+    Console.WriteLine("Celestial Impulse Events"); Console.WriteLine("Impulse scheduling: PASS; Exact event-time propagation: PASS; Delta-v application: PASS"); Console.WriteLine("Authoritative replacement: PASS; Post-impulse propagation: PASS; Same-time impulse ordering: PASS"); Console.WriteLine("Unsupported resulting orbit rejection: PASS; Failure atomicity: PASS; Replay: PASS"); Console.WriteLine($"Allocation: {evaluationAllocated + commitAllocated} bytes; Impulse hash: 0x{replayA:X16}");
+}
+
+static (SimulationTimeline timeline, SimulationTransactionEngine engine, SimulationClock clock) CreateImpulseScenario(TwoBodyTrajectory initial, SimulationInstant eventTime, params (ulong Id, int Priority, Double3 DeltaVelocity)[] impulses)
+{
+    const double mu = 3.986004418e14d; var definitions = new[] { new CelestialBodyDefinition(new CelestialBodyId(1), null, new ReferenceFrameId(1), mu), new CelestialBodyDefinition(new CelestialBodyId(2), new CelestialBodyId(1), new ReferenceFrameId(2), 1d) }; var states = new[] { CelestialBodyState.Root(new CelestialBodyId(1)), CelestialBodyState.Orbiting(new CelestialBodyId(2), initial) };
+    Check(CelestialStateStore.TryCreate(definitions, states, out var store, out var status) && store is not null && status == CelestialStateStoreStatus.Success, "impulse store creation"); var timeline = new SimulationTimeline(impulses.Length);
+    foreach (var impulse in impulses) { if (!SimulationEventRequest.TryCreateCelestialImpulse(new SimulationEventId(impulse.Id), eventTime, impulse.Priority, new CelestialBodyId(2), impulse.DeltaVelocity, out var request)) continue; Check(timeline.Schedule(SimulationInstant.Zero, request).Succeeded, "impulse schedule"); }
+    var clock = new SimulationClock(SimulationInstant.Zero, timeline); return (timeline, new SimulationTransactionEngine(clock, new SimulationState(store), impulses.Length), clock);
+}
+static ulong ImpulseReplayHash(TwoBodyTrajectory initial, SimulationInstant eventTime)
+{
+    var scenario = CreateImpulseScenario(initial, eventTime, (70UL, -1, new Double3(0d, 10d, 0d)), (71UL, 0, new Double3(0d, 15d, 0d)), (72UL, 1, new Double3(0d, 2d, 0d))); Check(scenario.engine.AdvanceAndExecuteOneCanonicalGroup(eventTime).Reason == SimulationExecutionStopReason.Completed && scenario.engine.ProcessedCount == 3 && scenario.timeline.PendingCount == 0, "impulse replay group"); ulong hash = Mix(14695981039346656037UL, CelestialContractHash.Compute(scenario.engine.State.Celestial)); for (var index = 0; index < scenario.engine.ProcessedCount; index++) { Check(scenario.engine.TryGetProcessed(index, out var entry) && entry.CelestialTransition is not null && entry.CelestialTransition.Value.ImpulseAudit is not null, "impulse replay history"); var transition = entry.CelestialTransition!.Value; var audit = transition.ImpulseAudit!.Value; hash = Mix(hash, entry.Event.Id.Value); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(audit.DeltaVelocity.Y)); hash = Mix(hash, transition.ReplacementTrajectoryHash); } return hash;
+}
+static bool RawVectorEqual(in Double3 left, in Double3 right) => BitConverter.DoubleToInt64Bits(left.X) == BitConverter.DoubleToInt64Bits(right.X) && BitConverter.DoubleToInt64Bits(left.Y) == BitConverter.DoubleToInt64Bits(right.Y) && BitConverter.DoubleToInt64Bits(left.Z) == BitConverter.DoubleToInt64Bits(right.Z);
 
 static void TimelineTopologyTests()
 {

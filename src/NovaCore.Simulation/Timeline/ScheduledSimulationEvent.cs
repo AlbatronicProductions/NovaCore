@@ -1,4 +1,9 @@
 namespace NovaCore.Simulation.Timeline;
 
-/// <summary>Immutable pending-event record. Event payloads are deliberately deferred beyond Milestone 6B-1.</summary>
-public readonly record struct ScheduledSimulationEvent(SimulationEventHeader Header);
+/// <summary>Immutable pending record with a closed internal payload paired to its public header kind.</summary>
+public readonly record struct ScheduledSimulationEvent
+{
+    public SimulationEventHeader Header { get; }
+    internal SimulationEventPayload Payload { get; }
+    internal ScheduledSimulationEvent(SimulationEventHeader header, SimulationEventPayload payload) { Header = header; Payload = payload; }
+}

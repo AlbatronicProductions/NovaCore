@@ -12,4 +12,5 @@ internal readonly record struct ProcessedCelestialTrajectoryTransition(
     StateRevision StateRevisionBefore,
     StateRevision StateRevisionAfter,
     ulong PriorTrajectoryHash,
-    ulong ReplacementTrajectoryHash);
+    ulong ReplacementTrajectoryHash,
+    ProcessedCelestialImpulseAudit? ImpulseAudit = null);

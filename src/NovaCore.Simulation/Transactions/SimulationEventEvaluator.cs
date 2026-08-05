@@ -1,9 +1,10 @@
 using NovaCore.Simulation.Time;
 using NovaCore.Simulation.Timeline;
+using NovaCore.Simulation.Celestial.Transactions;
 
 namespace NovaCore.Simulation.Transactions;
 
-/// <summary>Pure deterministic evaluation of the single 6B-3A marker event contract.</summary>
+/// <summary>Pure closed dispatch for marker and celestial impulse event intents.</summary>
 internal static class SimulationEventEvaluator
 {
     public static SimulationTransaction Evaluate(
@@ -12,6 +13,16 @@ internal static class SimulationEventEvaluator
         SimulationInstant evaluationTime,
         TimelineRevision timelineRevision)
     {
+        if (pending.Header.Kind == SimulationEventKind.CelestialImpulse)
+        {
+            var impulse = CelestialImpulseEvaluator.TryEvaluate(pending, state, evaluationTime, timelineRevision);
+            if (impulse.Succeeded)
+            {
+                var replacement = impulse.Transaction!.Value;
+                return new(pending.Header, evaluationTime, timelineRevision, state.Revision, state.MarkerValue, true, true, replacement, impulse.Status);
+            }
+            return new(pending.Header, evaluationTime, timelineRevision, state.Revision, state.MarkerValue, false, false, null, impulse.Status);
+        }
         var changesState = pending.Header.Kind == SimulationEventKind.Marker && state.MarkerValue != long.MaxValue;
         var isNoOp = pending.Header.Kind == SimulationEventKind.NoOpMarker;
         var consistent = changesState || isNoOp;

@@ -1,5 +1,6 @@
 using NovaCore.Simulation.Time;
 using NovaCore.Simulation.Timeline;
+using NovaCore.Simulation.Celestial.Transactions;
 
 namespace NovaCore.Simulation.Transactions;
 
@@ -11,4 +12,6 @@ internal readonly record struct SimulationTransaction(
     StateRevision ExpectedStateRevision,
     long ProposedMarkerValue,
     bool ChangesAuthoritativeState,
-    bool IsInternallyConsistent);
+    bool IsInternallyConsistent,
+    CelestialTrajectoryReplacementTransaction? CelestialReplacement = null,
+    CelestialImpulseEvaluationStatus? CelestialImpulseStatus = null);

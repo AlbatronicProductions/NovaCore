@@ -43,3 +43,11 @@ After history capacity and revision/timeline checks succeed, the engine replaces
 Processed celestial transition metadata records the subject, exact event time, prior and replacement epochs, state revisions, and stable raw trajectory hashes. Same-time replacements remain separate transactions in canonical `(time, priority, sequence, event ID)` order; a later candidate must be evaluated against the trajectory committed by earlier successful events.
 
 Impulse payloads, delta-v semantics, burn frames, maneuver planning, fuel, reparenting, sphere-of-influence changes, and celestial-to-reference-frame evaluation remain deferred to later work.
+
+## Scheduled inertial impulses
+
+Milestone 7C-2 adds one closed scheduled intent: `CelestialImpulse`. Its internal fixed payload contains only a subject `CelestialBodyId` and finite nonzero `Double3` delta-v in metres per second. Marker, no-op, and direct replacement events retain an empty payload; mismatched kinds and payloads are rejected during scheduling.
+
+At the canonical event instant, the pure impulse evaluator propagates the current authoritative trajectory first, keeps the propagated position, adds delta-v in the subject trajectory's inertial parent frame, and creates an exact-epoch `CartesianTwoBodyV1` replacement candidate. The existing 7C-1 replacement transaction remains the only mutation primitive. Unsupported resulting elliptic regimes are rejected before commit, leaving the event pending and authoritative state unchanged.
+
+Same-time impulses execute serially in canonical order and each later event evaluates the trajectory committed by earlier successful events. Processed celestial transition metadata records the non-derivable impulse delta-v alongside existing trajectory hashes and revisions. Local burn frames, maneuver planning, finite burns, fuel, hyperbolic/parabolic support, frame integration, and rendering remain deferred.

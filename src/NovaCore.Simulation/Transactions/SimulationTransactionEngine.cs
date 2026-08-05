@@ -96,8 +96,18 @@ internal sealed class SimulationTransactionEngine
 
     public SimulationTransactionResult ValidateAndCommit(SimulationTransaction transaction)
     {
+        if (transaction.CelestialReplacement is { } celestialReplacement)
+        {
+            var celestial = ValidateAndCommit(celestialReplacement);
+            return new(
+                celestial.Committed ? SimulationTransactionStatus.Committed : SimulationTransactionStatus.ValidationFailed,
+                celestial.Committed ? SimulationTransactionValidationResult.Valid : new(SimulationTransactionValidationStatus.InvalidTransaction),
+                celestial.ProcessedEvent,
+                transaction.CelestialImpulseStatus,
+                celestial.Status);
+        }
         var validation = Validate(transaction);
-        if (!validation.IsValid) return new(SimulationTransactionStatus.ValidationFailed, validation, null);
+        if (!validation.IsValid) return new(SimulationTransactionStatus.ValidationFailed, validation, null, transaction.CelestialImpulseStatus);
 
         // Capacity is reserved before any authoritative mutation. All remaining operations are validated,
         // allocation-free state/list/heap updates with no normal failure path.
@@ -135,7 +145,8 @@ internal sealed class SimulationTransactionEngine
             stateBefore,
             stateAfter,
             TwoBodyTrajectoryIdentity.ComputeHash(transaction.ExpectedTrajectory),
-            TwoBodyTrajectoryIdentity.ComputeHash(transaction.ReplacementTrajectory));
+            TwoBodyTrajectoryIdentity.ComputeHash(transaction.ReplacementTrajectory),
+            transaction.ImpulseAudit);
         var processed = new ProcessedSimulationEvent(
             transaction.Event.Header,
             transaction.EvaluationTime,
@@ -166,7 +177,7 @@ internal sealed class SimulationTransactionEngine
 
     private CelestialTrajectoryTransactionStatus Validate(CelestialTrajectoryReplacementTransaction transaction)
     {
-        if (transaction.Event.Header.Kind != SimulationEventKind.ReplaceTrajectory)
+        if (transaction.Event.Header.Kind is not (SimulationEventKind.ReplaceTrajectory or SimulationEventKind.CelestialImpulse))
             return CelestialTrajectoryTransactionStatus.InvalidEventKind;
         if (!_clock.Timeline.TryPeekPending(out var pending) || pending.Header != transaction.Event.Header)
             return CelestialTrajectoryTransactionStatus.EventNotCanonical;
