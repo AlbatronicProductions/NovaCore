@@ -77,6 +77,23 @@ public sealed class SimulationClock
         return new(SimulationHostAdvanceStopReason.Accepted, hostDuration, derived, debtBefore, proposedDebt, remainderBefore, proposedRemainder, _currentTime);
     }
 
+    /// <summary>Returns the exact target represented by retained debt without advancing time.</summary>
+    internal bool TryGetPendingSimulationDebtTarget(out SimulationInstant target)
+    {
+        var targetTicks = (Int128)_currentTime.Ticks + _pendingSimulationDebt.Ticks;
+        if (targetTicks > long.MaxValue) { target = default; return false; }
+        target = new SimulationInstant((long)targetTicks);
+        return true;
+    }
+
+    /// <summary>Consumes only simulation time already traversed by the authoritative clock.</summary>
+    internal void ConsumePendingSimulationDebt(SimulationDuration traversed)
+    {
+        if (traversed.Ticks < 0 || traversed.Ticks > _pendingSimulationDebt.Ticks)
+            throw new InvalidOperationException("Only traversed nonnegative simulation time may reduce retained debt.");
+        _pendingSimulationDebt = new SimulationDuration(_pendingSimulationDebt.Ticks - traversed.Ticks);
+    }
+
     /// <summary>
     /// Advances forward exactly until the requested time or canonical first pending boundary.
     /// Explicit commands remain valid while paused.

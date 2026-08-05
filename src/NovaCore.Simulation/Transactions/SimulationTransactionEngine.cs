@@ -46,8 +46,12 @@ internal sealed class SimulationTransactionEngine
     /// Orchestrates the canonical pending events at exactly the current clock instant. Each event
     /// retains independent evaluation, validation, and atomic commit semantics.
     /// </summary>
-    public SimulationCanonicalGroupResult ExecuteCanonicalGroup()
+    public SimulationCanonicalGroupResult ExecuteCanonicalGroup() => ExecuteCanonicalGroup(_clock.MaximumEventsPerAdvance);
+
+    /// <summary>Executes one same-time group without exceeding the supplied call-wide event budget.</summary>
+    internal SimulationCanonicalGroupResult ExecuteCanonicalGroup(int maximumEventCount)
     {
+        if (maximumEventCount <= 0) throw new ArgumentOutOfRangeException(nameof(maximumEventCount));
         var groupTime = _clock.CurrentTime;
         if (_isExecutingGroup) return GroupResult(SimulationCanonicalGroupStopReason.ReentrantExecution, groupTime, 0, false, null);
         _isExecutingGroup = true;
@@ -63,7 +67,7 @@ internal sealed class SimulationTransactionEngine
                     return GroupResult(SimulationCanonicalGroupStopReason.Completed, groupTime, processed, true, null);
                 if (pending.Header.Time != groupTime)
                     return GroupResult(SimulationCanonicalGroupStopReason.Completed, groupTime, processed, true, pending.Header);
-                if (processed == _clock.MaximumEventsPerAdvance)
+                if (processed == maximumEventCount)
                     return GroupResult(SimulationCanonicalGroupStopReason.EventLimitReached, groupTime, processed, false, pending.Header);
 
                 var result = ExecuteCanonicalPendingEvent();
@@ -81,6 +85,10 @@ internal sealed class SimulationTransactionEngine
     /// </summary>
     public SimulationExecutionResult AdvanceAndExecuteOneCanonicalGroup(SimulationInstant target) =>
         _orchestrator.AdvanceAndExecuteOneCanonicalGroup(target);
+
+    /// <summary>Internal 6B-4B composition entry point; public duration advancement remains deferred.</summary>
+    internal SimulationDebtServiceResult ServicePendingHostDurationDebt() =>
+        _orchestrator.ServicePendingHostDurationDebt();
 
     public SimulationTransactionResult ValidateAndCommit(SimulationTransaction transaction)
     {

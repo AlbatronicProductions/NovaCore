@@ -127,6 +127,12 @@ The clock commits the proposed remainder and debt together only after every conv
 
 Pausing prevents conversion and leaves both remainder and debt unchanged. Changing to a non-equivalent rate resets only the fractional remainder because it is expressed against the old denominator; it deliberately preserves accumulated debt. An equivalent normalized rate is a no-op. Later 6B-4 work will define how retained debt composes with the internal execution orchestrator to coast toward and execute canonical event boundaries.
 
+### Debt servicing (Milestone 6B-4B)
+
+The internal `SimulationExecutionOrchestrator` now services retained debt without acquiring ownership of time or state. It repeatedly asks `SimulationClock` to coast toward the exact target represented by current debt, then invokes canonical same-time group execution when the clock reaches a boundary. `SimulationClock` alone reduces debt, and only by the positive time it successfully traversed.
+
+`MaximumEventsPerAdvance` is one call-wide event budget, not a per-group budget. Each group receives only the remaining budget, preserving canonical `(Time, Priority, Sequence, EventId)` order across the complete servicing call. A cap, validation rejection, arithmetic overflow, or controlled lack of progress returns without fabricating traversal: the clock remains at its reached instant and debt retains precisely the untraversed duration for the next call. No public duration-advance API is introduced in this slice.
+
 Host-duration advancement, generated events, additional transaction kinds, analytical propagation, snapshots, time warp controls, reference-frame integration, and sample integration remain pending Milestone 6 work.
 
 ## Intentional 6A limitations
