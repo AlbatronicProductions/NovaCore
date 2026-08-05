@@ -5,6 +5,7 @@ using NovaCore.Simulation.Transactions;
 using NovaCore.Simulation.Celestial;
 using NovaCore.Simulation.Celestial.Transactions;
 using NovaCore.Simulation.Celestial.ReferenceFrames;
+using NovaCore.Simulation.Spacecraft;
 using NovaCore.Core;
 using NovaCore.Core.ReferenceFrames;
 using System.Diagnostics;
@@ -24,6 +25,7 @@ var tests = new (string Name, Action Test)[]
     ("Clock execution orchestration", ClockExecutionTests),
     ("Celestial contracts", CelestialContractTests),
     ("Two-body propagation", TwoBodyPropagationTests),
+    ("Spacecraft attitude", SpacecraftAttitudeTests),
     ("Analytical orbit sampling", AnalyticalOrbitSamplingTests),
     ("Celestial frame extraction", CelestialFrameExtractionTests),
     ("Celestial trajectory replacement", CelestialTrajectoryReplacementTests),
@@ -46,6 +48,43 @@ static void InstantTests()
     Throws<ArgumentOutOfRangeException>(() => SimulationInstant.FromSecondsRounded(double.PositiveInfinity));
     Throws<ArgumentOutOfRangeException>(() => SimulationInstant.FromSecondsRounded(double.NegativeInfinity));
     Throws<OverflowException>(() => SimulationInstant.FromSecondsRounded(double.MaxValue));
+}
+
+static void SpacecraftAttitudeTests()
+{
+    var id = new SpacecraftId(1);
+    Check(SpacecraftAttitudeState.TryCreate(id, SimulationInstant.Zero, DoubleQuaternion.Identity, Double3.Zero, SpacecraftAttitudeModel.ConstantBodyAngularVelocityV1, out var identity) == SpacecraftAttitudeEvaluationStatus.Success, "identity state");
+    var zero = SpacecraftAttitudeEvaluator.TryEvaluate(identity, SimulationInstant.Zero); Check(zero.Succeeded && zero.OrientationLocalToParent == DoubleQuaternion.Identity, "identity/zero duration");
+    Check(SpacecraftAttitudeEvaluator.TryEvaluate(identity, SimulationInstant.FromWholeSeconds(123)).Succeeded && SpacecraftAttitudeEvaluator.TryEvaluate(identity, SimulationInstant.FromWholeSeconds(123)).OrientationLocalToParent == DoubleQuaternion.Identity, "zero angular velocity");
+    Check(SpacecraftAttitudeEvaluator.TryCanonicalize(new DoubleQuaternion(0, 0, 0, -1), out var negativeIdentity) == SpacecraftAttitudeEvaluationStatus.Success && negativeIdentity == DoubleQuaternion.Identity, "q/-q canonicalization");
+    Check(SpacecraftAttitudeEvaluator.TryCanonicalize(new DoubleQuaternion(-1, 0, 0, 0), out var tie) == SpacecraftAttitudeEvaluationStatus.Success && tie.X > 0d, "zero-W tie break");
+    Check(SpacecraftAttitudeEvaluator.TryCanonicalize(default, out _) == SpacecraftAttitudeEvaluationStatus.NearZeroOrientation, "near-zero rejection");
+    Check(SpacecraftAttitudeEvaluator.TryCanonicalize(new DoubleQuaternion(double.NaN, 0, 0, 1), out _) == SpacecraftAttitudeEvaluationStatus.NonFiniteOrientation, "non-finite orientation rejection");
+    Check(SpacecraftAttitudeState.TryCreate(SpacecraftId.Invalid, SimulationInstant.Zero, DoubleQuaternion.Identity, Double3.Zero, SpacecraftAttitudeModel.ConstantBodyAngularVelocityV1, out _) == SpacecraftAttitudeEvaluationStatus.InvalidSpacecraftId, "invalid spacecraft rejection");
+    Check(SpacecraftAttitudeState.TryCreate(id, SimulationInstant.Zero, DoubleQuaternion.Identity, new Double3(double.NaN, 0, 0), SpacecraftAttitudeModel.ConstantBodyAngularVelocityV1, out _) == SpacecraftAttitudeEvaluationStatus.NonFiniteAngularVelocity, "non-finite omega rejection");
+    Check(SpacecraftAttitudeState.TryCreate(id, SimulationInstant.Zero, DoubleQuaternion.Identity, Double3.Zero, (SpacecraftAttitudeModel)99, out _) == SpacecraftAttitudeEvaluationStatus.UnsupportedModel, "model rejection");
+    Check(SpacecraftAttitudeState.TryCreate(id, SimulationInstant.Zero, DoubleQuaternion.Identity, new Double3(0, 0, Math.PI), SpacecraftAttitudeModel.ConstantBodyAngularVelocityV1, out var zSpin) == SpacecraftAttitudeEvaluationStatus.Success, "z spin state");
+    var half = SpacecraftAttitudeEvaluator.TryEvaluate(zSpin, SimulationInstant.FromSecondsRounded(.5d)); Check(half.Succeeded && Math.Abs(SpacecraftAttitudeEvaluator.Forward(half.OrientationLocalToParent).Y - 1d) < 1e-12d, "body Z rotation");
+    Check(SpacecraftAttitudeState.TryCreate(id, SimulationInstant.Zero, DoubleQuaternion.Identity, new Double3(Math.PI, 0, 0), SpacecraftAttitudeModel.ConstantBodyAngularVelocityV1, out var xSpin) == SpacecraftAttitudeEvaluationStatus.Success, "x spin state");
+    var xHalf = SpacecraftAttitudeEvaluator.TryEvaluate(xSpin, SimulationInstant.FromSecondsRounded(.5d)); Check(Math.Abs(SpacecraftAttitudeEvaluator.Right(xHalf.OrientationLocalToParent).Z - 1d) < 1e-12d, "body X rotation");
+    Check(SpacecraftAttitudeState.TryCreate(id, SimulationInstant.Zero, DoubleQuaternion.Identity, new Double3(0, Math.PI, 0), SpacecraftAttitudeModel.ConstantBodyAngularVelocityV1, out var ySpin) == SpacecraftAttitudeEvaluationStatus.Success, "y spin state");
+    var yHalf = SpacecraftAttitudeEvaluator.TryEvaluate(ySpin, SimulationInstant.FromSecondsRounded(.5d)); Check(Math.Abs(SpacecraftAttitudeEvaluator.Forward(yHalf.OrientationLocalToParent).Z + 1d) < 1e-12d, "body Y rotation");
+    var forward = SpacecraftAttitudeEvaluator.Forward(DoubleQuaternion.Identity); var right = SpacecraftAttitudeEvaluator.Right(DoubleQuaternion.Identity); var down = SpacecraftAttitudeEvaluator.Down(DoubleQuaternion.Identity); Check(forward == Double3.UnitX && right == Double3.UnitY && down == Double3.UnitZ && SpacecraftAttitudeEvaluator.Up(DoubleQuaternion.Identity) == -Double3.UnitZ, "body axes");
+    var xQuarter = DoubleQuaternion.FromAxisAngle(Double3.UnitX, Math.PI / 2d); var yQuarter = DoubleQuaternion.FromAxisAngle(Double3.UnitY, Math.PI / 2d); var composed = yQuarter * xQuarter; var local = new Double3(.25d, -.5d, .75d); CheckVectorNear(composed.Rotate(local), yQuarter.Rotate(xQuarter.Rotate(local)), 1e-12d, "Hamilton composition applies RHS first");
+    var future = SpacecraftAttitudeEvaluator.TryEvaluate(zSpin, SimulationInstant.FromWholeSeconds(10)); var backward = SpacecraftAttitudeEvaluator.TryEvaluate(zSpin, SimulationInstant.Zero); Check(future.Succeeded && backward.Succeeded && backward.OrientationLocalToParent == DoubleQuaternion.Identity, "exact-time repeatability");
+    Check(SpacecraftAttitudeState.TryCreate(id, SimulationInstant.FromWholeSeconds(10), future.OrientationLocalToParent, new Double3(0, 0, -Math.PI), SpacecraftAttitudeModel.ConstantBodyAngularVelocityV1, out var reverse) == SpacecraftAttitudeEvaluationStatus.Success && Math.Abs(SpacecraftAttitudeEvaluator.TryEvaluate(reverse, SimulationInstant.Zero).OrientationLocalToParent.W - 1d) < 1e-12d, "forward/backward round trip");
+    Check(SpacecraftAttitudeState.TryCreate(id, SimulationInstant.Zero, DoubleQuaternion.Identity, new Double3(1e-12d, 0d, 0d), SpacecraftAttitudeModel.ConstantBodyAngularVelocityV1, out var smallSpin) == SpacecraftAttitudeEvaluationStatus.Success && SpacecraftAttitudeEvaluator.TryEvaluate(smallSpin, SimulationInstant.FromWholeSeconds(1)).Succeeded, "small-angle evaluation");
+    var longDuration = SpacecraftAttitudeEvaluator.TryEvaluate(zSpin, new SimulationInstant(SpacecraftAttitudeEvaluator.MaximumEvaluationTicks)); Check(longDuration.Succeeded && Math.Abs(longDuration.OrientationLocalToParent.LengthSquared - 1d) < 1e-12d, "long-duration normalization stability");
+    var overflowingEpoch = new SpacecraftAttitudeState(id, new SimulationInstant(long.MinValue), DoubleQuaternion.Identity, Double3.Zero, SpacecraftAttitudeModel.ConstantBodyAngularVelocityV1); Check(SpacecraftAttitudeEvaluator.TryEvaluate(overflowingEpoch, new SimulationInstant(long.MaxValue)).Status == SpacecraftAttitudeEvaluationStatus.DurationOverflow, "duration subtraction overflow");
+    Check(SpacecraftAttitudeEvaluator.TryEvaluate(zSpin, new SimulationInstant(SpacecraftAttitudeEvaluator.MaximumEvaluationTicks + 1)).Status == SpacecraftAttitudeEvaluationStatus.EvaluationSpanExceeded, "duration bound");
+    _ = SpacecraftAttitudeEvaluator.TryEvaluate(zSpin, SimulationInstant.FromWholeSeconds(1)); var before = GC.GetAllocatedBytesForCurrentThread(); ulong hash = 14695981039346656037UL;
+    for (var index = 0; index < 100_000; index++)
+    {
+        var evaluated = SpacecraftAttitudeEvaluator.TryEvaluate(zSpin, new SimulationInstant(index)); Check(evaluated.Succeeded, "warm attitude");
+        var orientation = evaluated.OrientationLocalToParent; var basis = SpacecraftAttitudeEvaluator.Forward(orientation);
+        hash = Mix(hash, (ulong)evaluated.RequestedTime.Ticks); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(orientation.X)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(orientation.Y)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(orientation.Z)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(orientation.W)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(evaluated.AngularVelocityBody.Z)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(basis.X)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(basis.Y)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(basis.Z));
+    }
+    Check(GC.GetAllocatedBytesForCurrentThread() == before, "warm attitude allocation"); Console.WriteLine($"Deterministic spacecraft-attitude hash: 0x{hash:X16}; allocation=0 bytes");
 }
 
 static void AnalyticalOrbitSamplingTests()
