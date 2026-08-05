@@ -5,6 +5,7 @@ public enum SimulationScheduleStatus : byte
     Scheduled = 0,
     InvalidId,
     InvalidKind,
+    InvalidPayload,
     DuplicateId,
     PastTime,
     ReplacementTargetNotPending,

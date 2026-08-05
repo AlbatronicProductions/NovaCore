@@ -15,7 +15,7 @@ internal static class CelestialTrajectoryTransactionEvaluator
         TwoBodyTrajectory replacement)
     {
         var status = ValidateReplacement(canonicalEvent.Header.Time, state.Celestial, subject, default, replacement, requireExpected: false, out var current);
-        if (canonicalEvent.Header.Kind != SimulationEventKind.ReplaceTrajectory)
+        if (canonicalEvent.Header.Kind is not (SimulationEventKind.ReplaceTrajectory or SimulationEventKind.CelestialImpulse))
             status = CelestialTrajectoryTransactionStatus.InvalidEventKind;
         if (status != CelestialTrajectoryTransactionStatus.Success)
             return new(status, null);
