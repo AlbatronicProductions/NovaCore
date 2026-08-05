@@ -29,12 +29,17 @@ internal sealed class CelestialAnalyticalScene
     private readonly ReferenceFrameId[] _targetPath = new ReferenceFrameId[2];
     private readonly ReferenceFrameId[] _traversalPath = new ReferenceFrameId[3];
     private readonly ResolvedRenderObject[] _objects = new ResolvedRenderObject[2];
+    private readonly Double3[] _orbitSamples = new Double3[AnalyticalOrbitSampler.VertexCount];
+    private readonly UniversePosition[] _orbitPositions = new UniversePosition[AnalyticalOrbitSampler.VertexCount];
     private readonly SimulationClock _clock;
     private readonly SimulationTransactionEngine _transactions;
     private double _orbitDistance = 24d;
     private double _orbitYawRadians;
     private double _orbitPitchRadians;
     private int _rateStepIndex = 5;
+    private ResolvedOrbitCurve? _orbitCurve;
+    private ulong _orbitCurveKey;
+    internal int OrbitCurveBuildCount { get; private set; }
 
     private CelestialAnalyticalScene(ReferenceFrameGraph graph, SimulationClock clock, SimulationTransactionEngine transactions)
     {
@@ -193,11 +198,38 @@ internal sealed class CelestialAnalyticalScene
 
             _objects[0] = Marker(1, root.ConvertPosition(Double3.Zero), new Double3(20d, 20d, 1d), MeshHandle.Triangle);
             _objects[1] = Marker(2, satellite.ConvertPosition(Double3.Zero), new Double3(10d, 10d, 1d), forceInvalidMesh ? MeshHandle.Invalid : MeshHandle.Triangle);
-            if (!ResolvedRenderSnapshot.TryCreate(_objects, out snapshot, out var snapshotStatus) || snapshot is null)
+            if (!view.TryGetState(new CelestialBodyId(2), out var satelliteState) || satelliteState.Trajectory is not { } trajectory || !view.TryGetDefinition(trajectory.CentralBody, out var central))
+            {
+                snapshot = null;
+                error = "Celestial orbit curve source is unavailable.";
+                return false;
+            }
+            var curveKey = AnalyticalOrbitSampler.ComputeIdentityKey(trajectory, central.GravitationalParameter);
+            var candidateCurve = _orbitCurve;
+            var rebuildCurve = candidateCurve is null || curveKey != _orbitCurveKey;
+            if (rebuildCurve)
+            {
+                var sampled = AnalyticalOrbitSampler.TrySample(trajectory, view, _orbitSamples);
+                if (sampled.Status != AnalyticalOrbitSamplingStatus.Success)
+                {
+                    snapshot = null;
+                    error = $"Celestial orbit sampling failed: {sampled.Status}";
+                    return false;
+                }
+                for (var index = 0; index < sampled.VertexCount; index++) _orbitPositions[index] = new UniversePosition(_orbitSamples[index] / MetresPerDisplayUnit, _rootFrame);
+                if (!ResolvedOrbitCurve.TryCreate(_orbitPositions, out candidateCurve) || candidateCurve is null)
+                {
+                    snapshot = null;
+                    error = "Celestial orbit curve construction failed.";
+                    return false;
+                }
+            }
+            if (!ResolvedRenderSnapshot.TryCreate(_objects, candidateCurve, out snapshot, out var snapshotStatus) || snapshot is null)
             {
                 error = $"Celestial render snapshot failed: {snapshotStatus}";
                 return false;
             }
+            if (rebuildCurve) { _orbitCurve = candidateCurve; _orbitCurveKey = curveKey; OrbitCurveBuildCount++; }
             error = string.Empty;
             return true;
         }

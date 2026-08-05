@@ -27,6 +27,7 @@ static_assert(offsetof(NcRenderObject, position) == 0 &&
               offsetof(NcRenderObject, transform) == 32 &&
               offsetof(NcRenderObject, mesh) == 64);
 static_assert(sizeof(NcDrawBatch) == 16);
+static_assert(sizeof(NcOrbitLineVertex) == 12);
 static_assert(sizeof(NcInputState) == 60);
 static_assert(offsetof(NcInputState, deltaSeconds) == 0);
 static_assert(offsetof(NcInputState, moveLeft) == 4);
@@ -76,6 +77,7 @@ struct App {
   VkRenderPass renderPass{};
   VkPipelineLayout pipelineLayout{};
   VkPipeline pipeline{};
+  VkPipeline orbitPipeline{};
   std::vector<VkFramebuffer> framebuffers;
   VkCommandPool pool{};
   std::vector<VkCommandBuffer> commands;
@@ -91,6 +93,10 @@ struct App {
   VkDescriptorSetLayout descriptorLayout{};
   VkDescriptorPool descriptorPool{};
   VkDescriptorSet descriptor{};
+  VkBuffer orbitBuffer{};
+  VkDeviceMemory orbitMemory{};
+  void *orbitMapped{};
+  VkDeviceSize orbitSize{};
   Mesh triangle{};
   LONG rawMouseX{}, rawMouseY{};
   LONG wheelDeltaRaw{};
@@ -393,6 +399,8 @@ void DestroySwap(App &a) {
   a.framebuffers.clear();
   if (a.pipeline)
     vkDestroyPipeline(a.device, a.pipeline, nullptr);
+  if (a.orbitPipeline)
+    vkDestroyPipeline(a.device, a.orbitPipeline, nullptr);
   if (a.pipelineLayout)
     vkDestroyPipelineLayout(a.device, a.pipelineLayout, nullptr);
   if (a.descriptorLayout)
@@ -581,6 +589,15 @@ void Swap(App &a) {
           "pipeline failed");
   vkDestroyShaderModule(a.device, vs, nullptr);
   vkDestroyShaderModule(a.device, fs, nullptr);
+  auto orbitVs = Shader(a, "shaders/orbit.vert.spv"), orbitFs = Shader(a, "shaders/orbit.frag.spv");
+  VkPipelineShaderStageCreateInfo orbitStages[2]{{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO, nullptr, 0, VK_SHADER_STAGE_VERTEX_BIT, orbitVs, "main"}, {VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO, nullptr, 0, VK_SHADER_STAGE_FRAGMENT_BIT, orbitFs, "main"}};
+  VkVertexInputBindingDescription orbitBinding{0, sizeof(NcOrbitLineVertex), VK_VERTEX_INPUT_RATE_VERTEX};
+  VkVertexInputAttributeDescription orbitAttribute{0, 0, VK_FORMAT_R32G32B32_SFLOAT, 0};
+  VkPipelineVertexInputStateCreateInfo orbitInput{VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO}; orbitInput.vertexBindingDescriptionCount = 1; orbitInput.pVertexBindingDescriptions = &orbitBinding; orbitInput.vertexAttributeDescriptionCount = 1; orbitInput.pVertexAttributeDescriptions = &orbitAttribute;
+  VkPipelineInputAssemblyStateCreateInfo orbitAssembly{VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO}; orbitAssembly.topology = VK_PRIMITIVE_TOPOLOGY_LINE_STRIP;
+  VkGraphicsPipelineCreateInfo orbitPipeline = gp; orbitPipeline.pStages = orbitStages; orbitPipeline.pVertexInputState = &orbitInput; orbitPipeline.pInputAssemblyState = &orbitAssembly;
+  a.Check(vkCreateGraphicsPipelines(a.device, {}, 1, &orbitPipeline, nullptr, &a.orbitPipeline), "orbit pipeline failed");
+  vkDestroyShaderModule(a.device, orbitVs, nullptr); vkDestroyShaderModule(a.device, orbitFs, nullptr);
   a.framebuffers.resize(a.views.size());
   for (size_t i = 0; i < a.views.size(); i++) {
     VkImageView x = a.views[i];
@@ -608,6 +625,10 @@ void DestroySubmission(App &a) {
   a.descriptorPool = {};
   a.submissionBuffer = {};
   a.submissionMemory = {};
+  if (a.orbitMapped) vkUnmapMemory(a.device, a.orbitMemory);
+  if (a.orbitBuffer) vkDestroyBuffer(a.device, a.orbitBuffer, nullptr);
+  if (a.orbitMemory) vkFreeMemory(a.device, a.orbitMemory, nullptr);
+  a.orbitMapped = nullptr; a.orbitBuffer = {}; a.orbitMemory = {}; a.orbitSize = 0;
 }
 void Submission(App &a) {
   a.submissionSize = sizeof(NcCameraData) +
@@ -669,6 +690,20 @@ void Upload(App &a) {
   std::memcpy((char *)a.mapped + sizeof(NcCameraData),
               a.submission->objects,
               sizeof(NcRenderObject) * a.submission->objectCount);
+  if (a.submission->orbitVertexCount) {
+    auto needed = sizeof(NcOrbitLineVertex) * a.submission->orbitVertexCount;
+    if (needed != a.orbitSize) {
+      if (a.orbitMapped) vkUnmapMemory(a.device, a.orbitMemory);
+      if (a.orbitBuffer) vkDestroyBuffer(a.device, a.orbitBuffer, nullptr);
+      if (a.orbitMemory) vkFreeMemory(a.device, a.orbitMemory, nullptr);
+      a.orbitMapped = nullptr; a.orbitBuffer = {}; a.orbitMemory = {}; a.orbitSize = needed;
+      VkBufferCreateInfo ci{VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO}; ci.size = needed; ci.usage = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT; ci.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
+      a.Check(vkCreateBuffer(a.device, &ci, nullptr, &a.orbitBuffer), "orbit buffer failed"); VkMemoryRequirements r; vkGetBufferMemoryRequirements(a.device, a.orbitBuffer, &r);
+      VkMemoryAllocateInfo ai{VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO}; ai.allocationSize = r.size; ai.memoryTypeIndex = Memory(a, r.memoryTypeBits, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
+      a.Check(vkAllocateMemory(a.device, &ai, nullptr, &a.orbitMemory), "orbit memory failed"); a.Check(vkBindBufferMemory(a.device, a.orbitBuffer, a.orbitMemory, 0), "orbit bind failed"); a.Check(vkMapMemory(a.device, a.orbitMemory, 0, needed, 0, &a.orbitMapped), "orbit map failed");
+    }
+    std::memcpy(a.orbitMapped, a.submission->orbitVertices, needed);
+  }
 }
 void Commands(App &a) {
   auto q = FindQueues(a.physical, a.surface);
@@ -720,6 +755,7 @@ void Record(App &a, uint32_t image) {
     vkCmdBindIndexBuffer(c, m->ib, 0, VK_INDEX_TYPE_UINT32);
     vkCmdDrawIndexed(c, m->indices, b.objectCount, 0, 0, b.firstObject);
   }
+  if (a.submission->orbitVertexCount >= 2 && a.orbitBuffer) { VkDeviceSize offset = 0; vkCmdBindPipeline(c, VK_PIPELINE_BIND_POINT_GRAPHICS, a.orbitPipeline); vkCmdBindVertexBuffers(c, 0, 1, &a.orbitBuffer, &offset); vkCmdDraw(c, a.submission->orbitVertexCount, 1, 0, 0); }
   vkCmdEndRenderPass(c);
   a.Check(vkEndCommandBuffer(c), "command end failed");
 }
@@ -888,9 +924,12 @@ extern "C" NC_API NcResult __cdecl nc_get_abi_layout(NcAbiLayout *o) {
         (uint32_t)offsetof(NcRenderObject, transform),
         (uint32_t)offsetof(NcRenderObject, mesh),
         (uint32_t)sizeof(NcDrawBatch),
+        (uint32_t)sizeof(NcOrbitLineVertex),
         (uint32_t)sizeof(NcFrameSubmission),
         (uint32_t)offsetof(NcFrameSubmission, objects),
         (uint32_t)offsetof(NcFrameSubmission, batches),
+        (uint32_t)offsetof(NcFrameSubmission, orbitVertices),
+        (uint32_t)offsetof(NcFrameSubmission, orbitVertexCount),
         (uint32_t)sizeof(NcInputState),
         (uint32_t)offsetof(NcInputState, deltaSeconds),
         (uint32_t)offsetof(NcInputState, moveLeft),

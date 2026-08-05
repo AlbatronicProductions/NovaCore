@@ -13,7 +13,7 @@ Authoritative simulation is managed C#. Native code owns only platform input and
 - **Graphics foundation** — a flat immutable `ResolvedRenderSnapshot` is the only render-data boundary. It feeds camera-relative high/low FP32 transport, reusable meshes, indexed instancing, warmed allocation-free frame assembly, and the native Vulkan renderer. There is no `RenderWorld`, renderer-owned scene graph, or renderer-owned spatial hierarchy.
 - **Camera system** — managed, frame-aware Free-camera state and control. Graphics receives resolved `GpuCameraData` only.
 - **Celestial contracts** — authoritative celestial identities, central-body definitions with gravitational parameter μ, canonical Cartesian position and velocity at an exact epoch, and immutable two-body trajectory records.
-- **Elliptic two-body propagation and frame extraction** — pure exact-time universal-variable f/g propagation evaluates authoritative Cartesian trajectories at `SimulationClock.CurrentTime`. `CelestialReferenceFrameEvaluator` maps the result into immutable local-to-parent frame candidates without mutating state, time, topology, or rendering. Celestial values use SI units: metres, metres per second, seconds, and m³/s² for μ.
+- **Elliptic two-body propagation, orbit visualization, and frame extraction** — pure exact-time universal-variable f/g propagation evaluates authoritative Cartesian trajectories at `SimulationClock.CurrentTime`. The celestial fixture derives one fixed-count elliptic orbit curve from the active trajectory; it is not simulation state or a historical trail. `CelestialReferenceFrameEvaluator` maps the result into immutable local-to-parent frame candidates without mutating state, time, topology, or rendering. Celestial values use SI units: metres, metres per second, seconds, and m³/s² for μ.
 
 ## Architecture
 
@@ -35,7 +35,7 @@ Graphics never traverses frame graphs, evaluates transforms, owns simulation tim
 
 ## Current Limitations
 
-`--scene=celestial` is a compact analytical visual fixture: a central marker and satellite marker are sampled from authoritative two-body trajectories at exact clock instants. A scheduled inertial impulse demonstrates transaction-based trajectory replacement. Triangle markers and their presentation scale are debug geometry only, not physical body rendering.
+`--scene=celestial` is a compact analytical visual fixture: a central marker and satellite marker are sampled from authoritative two-body trajectories at exact clock instants, and one muted orbit curve is analytically regenerated when the active trajectory changes. A scheduled inertial impulse demonstrates transaction-based trajectory replacement. The curve is not a mutable trail, prediction system, or renderer-owned orbit model. Triangle markers and their presentation scale are debug geometry only, not physical body rendering.
 
 Hyperbolic and parabolic propagation, patched conics, sphere-of-influence transitions, N-body gravity, maneuvers, spacecraft gameplay, terrain, atmosphere, networking, and save/load remain future work.
 

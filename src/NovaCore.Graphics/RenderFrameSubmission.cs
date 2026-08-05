@@ -7,12 +7,14 @@ public sealed class RenderFrameSubmission
 {
     private readonly RenderObject[] _objects;
     private readonly RenderBatch[] _batches;
+    private readonly OrbitLineVertex[] _orbitVertices;
 
-    public RenderFrameSubmission(int capacity)
+    public RenderFrameSubmission(int capacity, int orbitVertexCapacity = 0)
     {
         if (capacity <= 0) throw new ArgumentOutOfRangeException(nameof(capacity));
         _objects = new RenderObject[capacity];
         _batches = new RenderBatch[capacity];
+        _orbitVertices = new OrbitLineVertex[orbitVertexCapacity];
     }
 
     public GpuCameraData Camera { get; private set; }
@@ -21,12 +23,28 @@ public sealed class RenderFrameSubmission
     public int Capacity => _objects.Length;
     public int ObjectCount { get; private set; }
     public int BatchCount { get; private set; }
+    public ReadOnlySpan<OrbitLineVertex> OrbitVertices => _orbitVertices.AsSpan(0, OrbitVertexCount);
+    public int OrbitVertexCount { get; private set; }
 
     public void Begin(in GpuCameraData camera)
     {
         Camera = camera;
         ObjectCount = 0;
         BatchCount = 0;
+        OrbitVertexCount = 0;
+    }
+
+    internal bool TrySetOrbitVertices(ResolvedOrbitCurve curve, in UniversePosition camera)
+    {
+        if (curve.Count > _orbitVertices.Length || curve.RootFrame != camera.Frame) return false;
+        for (var index = 0; index < curve.Count; index++)
+        {
+            var relative = curve.Positions[index].Value - camera.Value;
+            if (!relative.IsFinite || !float.IsFinite((float)relative.X) || !float.IsFinite((float)relative.Y) || !float.IsFinite((float)relative.Z)) return false;
+            _orbitVertices[index] = new OrbitLineVertex { X = (float)relative.X, Y = (float)relative.Y, Z = (float)relative.Z };
+        }
+        OrbitVertexCount = curve.Count;
+        return true;
     }
 
 

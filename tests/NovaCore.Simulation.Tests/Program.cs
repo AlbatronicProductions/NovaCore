@@ -24,6 +24,7 @@ var tests = new (string Name, Action Test)[]
     ("Clock execution orchestration", ClockExecutionTests),
     ("Celestial contracts", CelestialContractTests),
     ("Two-body propagation", TwoBodyPropagationTests),
+    ("Analytical orbit sampling", AnalyticalOrbitSamplingTests),
     ("Celestial frame extraction", CelestialFrameExtractionTests),
     ("Celestial trajectory replacement", CelestialTrajectoryReplacementTests),
     ("Celestial impulse events", CelestialImpulseEventTests),
@@ -45,6 +46,23 @@ static void InstantTests()
     Throws<ArgumentOutOfRangeException>(() => SimulationInstant.FromSecondsRounded(double.PositiveInfinity));
     Throws<ArgumentOutOfRangeException>(() => SimulationInstant.FromSecondsRounded(double.NegativeInfinity));
     Throws<OverflowException>(() => SimulationInstant.FromSecondsRounded(double.MaxValue));
+}
+
+static void AnalyticalOrbitSamplingTests()
+{
+    const double mu = 1_000d;
+    var state = new CartesianState(new Double3(100d, 0d, 0d), new Double3(0d, Math.Sqrt(mu / 100d), 0d));
+    var view = CreatePropagationView(mu, state);
+    var trajectory = new TwoBodyTrajectory(new CelestialBodyId(1), SimulationInstant.Zero, state, TwoBodyPropagationModel.CartesianTwoBodyV1);
+    Span<Double3> samples = stackalloc Double3[AnalyticalOrbitSampler.VertexCount];
+    var result = AnalyticalOrbitSampler.TrySample(trajectory, view, samples);
+    Check(result.Status == AnalyticalOrbitSamplingStatus.Success && result.VertexCount == 257 && samples[0] == samples[^1], "fixed exact closed circular sampling");
+    var repeated = AnalyticalOrbitSampler.TrySample(trajectory, view, samples); Check(repeated == result, "deterministic sampler result");
+    Check(AnalyticalOrbitSampler.TrySample(trajectory, view, samples[..256]).Status == AnalyticalOrbitSamplingStatus.DestinationTooSmall, "sampler capacity rejection");
+    Check(AnalyticalOrbitSampler.TrySample(trajectory with { Model = 0 }, view, samples).Status == AnalyticalOrbitSamplingStatus.UnsupportedModel, "unsupported sampler model");
+    _ = AnalyticalOrbitSampler.TrySample(trajectory, view, samples); var before = GC.GetAllocatedBytesForCurrentThread(); ulong hash = 14695981039346656037UL;
+    for (var index = 0; index < 10_000; index++) { var warm = AnalyticalOrbitSampler.TrySample(trajectory, view, samples); Check(warm.Status == AnalyticalOrbitSamplingStatus.Success, "warm sampling"); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(samples[64].X)); }
+    Check(GC.GetAllocatedBytesForCurrentThread() == before, "warm orbit sampling allocation"); Console.WriteLine($"Analytical orbit sampler: vertices=257; allocation=0 bytes; hash=0x{hash:X16}");
 }
 
 static void DurationTests()

@@ -9,6 +9,7 @@ public enum ResolvedRenderSubmissionBuildStatus : byte
     InvalidCameraData,
     DestinationCapacityExceeded,
     InvalidSnapshotObject,
+    InvalidOrbitCurve,
 }
 
 /// <summary>Deterministically copies a validated resolved snapshot into reusable GPU-facing frame storage.</summary>
@@ -34,6 +35,7 @@ public static class ResolvedRenderSubmissionBuilder
         foreach (ref readonly var current in snapshot.Objects)
             destination.Add(current.RootPosition, current.RootOrientation, current.Scale, current.Mesh);
         destination.Complete();
+        if (snapshot.OrbitCurve is not null && !destination.TrySetOrbitVertices(snapshot.OrbitCurve, cameraRootPosition)) return ResolvedRenderSubmissionBuildStatus.InvalidOrbitCurve;
         return ResolvedRenderSubmissionBuildStatus.Success;
     }
 
