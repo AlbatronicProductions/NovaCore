@@ -11,7 +11,8 @@ internal readonly record struct CelestialTrajectoryReplacementTransaction(
     StateRevision ExpectedStateRevision,
     CelestialBodyId Subject,
     TwoBodyTrajectory ExpectedTrajectory,
-    TwoBodyTrajectory ReplacementTrajectory);
+    TwoBodyTrajectory ReplacementTrajectory,
+    ProcessedCelestialImpulseAudit? ImpulseAudit = null);
 
 internal readonly record struct CelestialTrajectoryTransactionCreationResult(
     CelestialTrajectoryTransactionStatus Status,

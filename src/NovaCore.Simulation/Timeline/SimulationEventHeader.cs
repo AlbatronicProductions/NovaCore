@@ -15,7 +15,7 @@ public readonly record struct SimulationEventHeader
     {
         if (!id.IsValid) throw new ArgumentOutOfRangeException(nameof(id));
         if (!sequence.IsAssigned) throw new ArgumentOutOfRangeException(nameof(sequence));
-        if (kind is not (SimulationEventKind.Marker or SimulationEventKind.ReplaceTrajectory or SimulationEventKind.NoOpMarker)) throw new ArgumentOutOfRangeException(nameof(kind));
+        if (kind is not (SimulationEventKind.Marker or SimulationEventKind.ReplaceTrajectory or SimulationEventKind.NoOpMarker or SimulationEventKind.CelestialImpulse)) throw new ArgumentOutOfRangeException(nameof(kind));
         Id = id; Time = time; Priority = priority; Sequence = sequence; Kind = kind;
     }
 }
