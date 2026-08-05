@@ -5,6 +5,7 @@
     <ProjectReference Include="..\..\src\NovaCore.Graphics\NovaCore.Graphics.csproj" />
     <ProjectReference Include="..\..\src\NovaCore.Interop\NovaCore.Interop.csproj" />
     <ProjectReference Include="..\..\src\NovaCore.Platform\NovaCore.Platform.csproj" />
+    <ProjectReference Include="..\..\src\NovaCore.Simulation\NovaCore.Simulation.csproj" />
   </ItemGroup>
   <Target Name="CopyNativeRuntime" AfterTargets="Build">
     <Copy SourceFiles="$(MSBuildThisFileDirectory)..\..\build\native-ninja\NovaCore.Native.dll" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />

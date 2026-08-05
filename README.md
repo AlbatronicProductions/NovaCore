@@ -16,7 +16,7 @@ Authoritative simulation remains managed C# data. The native layer owns only pla
 - **Deterministic simulation time primitives (6A)** — `SimulationInstant`, `SimulationDuration`, and normalized rational `SimulationRate`.
 - **Deterministic event timeline (6B-1)** — canonical pending-event ordering, stable IDs, sequence assignment, cancellation, replacement, and timeline revisions.
 - **Deterministic simulation foundation** — exact simulation time, canonical event topology, clock orchestration, and authoritative transaction contracts.
-- **Vulkan visual fixture mode** — `--scene=fixture` renders the static reference-frame fixture through the existing managed/native triangle path.
+- **Vulkan visual fixture modes** — static and prescribed-dynamic reference-frame fixtures render through the existing managed/native triangle path.
 
 ## Current Milestone Status
 
@@ -74,9 +74,10 @@ dotnet run --project samples/NovaCore.Triangle -c Debug -- --objects=1000
 dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=frames
 dotnet run --project samples/NovaCore.ReferenceFrameFixture -c Debug
 dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=fixture
+dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=fixture-dynamic
 ```
 
-`NovaCore.ReferenceFrameFixture` verifies static graph and transform resolution in the terminal. The default triangle command renders the reusable mesh field; `--scene=frames` retains the existing frame-marker view; `--scene=fixture` renders four static Star, Planet, Moon, and TestVessel markers through `ResolvedRenderSnapshot`.
+`NovaCore.ReferenceFrameFixture` verifies static graph and transform resolution in the terminal. The default triangle command renders the reusable mesh field; `--scene=frames` retains the existing frame-marker view; `--scene=fixture` renders four static Star, Planet, Moon, and TestVessel markers; `--scene=fixture-dynamic` republishes complete immutable snapshots for prescribed Moon and TestVessel transform motion. The dynamic mode is not gravity or orbital physics.
 
 See [Build on Windows](docs/build-windows.md) for prerequisites and environment setup.
 
@@ -97,9 +98,10 @@ dotnet run --project samples/NovaCore.ReferenceFrameFixture -c Debug
 dotnet run --project samples/NovaCore.Triangle -c Debug
 dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=frames
 dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=fixture
+dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=fixture-dynamic
 ```
 
-The fixture mode follows: reference-frame resolution → `ResolvedRenderSnapshot` → camera-relative GPU transport → Vulkan rendering. It remains static; orbital propagation, gravity, gameplay, `SimulationSnapshot`, and physically realistic bodies are deferred.
+The fixture modes follow: reference-frame resolution → `ResolvedRenderSnapshot` → camera-relative GPU transport → Vulkan rendering. The dynamic fixture uses prescribed deterministic transform motion and complete immutable snapshot replacement; it is not orbital propagation, gravity, gameplay, `SimulationSnapshot`, or physically realistic bodies.
 
 ## Future Roadmap
 
