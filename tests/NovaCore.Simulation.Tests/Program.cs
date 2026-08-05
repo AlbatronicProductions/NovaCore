@@ -4,6 +4,7 @@ using NovaCore.Simulation.Clock;
 using NovaCore.Simulation.Transactions;
 using NovaCore.Simulation.Celestial;
 using NovaCore.Core;
+using System.Diagnostics;
 
 var tests = new (string Name, Action Test)[]
 {
@@ -19,6 +20,7 @@ var tests = new (string Name, Action Test)[]
     ("Canonical transaction groups", CanonicalGroupTests),
     ("Clock execution orchestration", ClockExecutionTests),
     ("Celestial contracts", CelestialContractTests),
+    ("Two-body propagation", TwoBodyPropagationTests),
     ("Allocation", AllocationTests),
 };
 foreach (var (name, test) in tests) { test(); Console.WriteLine($"PASS {name}"); }
@@ -152,6 +154,87 @@ static void CelestialContractTests()
 }
 
 static void CheckStore(CelestialBodyDefinition[] definitions, CelestialBodyState[] states, CelestialStateStoreStatus expected, string message) => Check(!CelestialStateStore.TryCreate(definitions, states, out var store, out var status) && store is null && status == expected, message);
+
+static void TwoBodyPropagationTests()
+{
+    const double mu = 3.986004418e14d; const double radius = 7_000_000d;
+    var circular = new CartesianState(new Double3(radius, 0, 0), new Double3(0, Math.Sqrt(mu / radius), 0));
+    var epoch = SimulationInstant.Zero; var periodSeconds = 2d * Math.PI * Math.Sqrt(radius * radius * radius / mu);
+    var quarter = SimulationInstant.FromSecondsRounded(periodSeconds * .25d); var half = SimulationInstant.FromSecondsRounded(periodSeconds * .5d); var full = SimulationInstant.FromSecondsRounded(periodSeconds);
+    var zero = UniversalVariableTwoBodyPropagator.TryEvaluate(circular, epoch, epoch, mu);
+    Check(zero.Succeeded && zero.Iterations == 0 && RawCartesianEqual(zero.State, circular), "zero-duration raw identity");
+    var q = RequirePropagation(circular, epoch, quarter, mu, "circular quarter"); var h = RequirePropagation(circular, epoch, half, mu, "circular half"); var f = RequirePropagation(circular, epoch, full, mu, "circular full");
+    var circularPositionCheckpointTolerance = Math.Max(PositionTolerance(radius), .01d); var circularVelocityCheckpointTolerance = Math.Max(VelocityTolerance(circular.Velocity.Y), 1e-5d);
+    CheckVectorNear(q.State.Position, new Double3(0, radius, 0), circularPositionCheckpointTolerance, "quarter position"); CheckVectorNear(q.State.Velocity, new Double3(-circular.Velocity.Y, 0, 0), circularVelocityCheckpointTolerance, "quarter velocity");
+    CheckVectorNear(h.State.Position, new Double3(-radius, 0, 0), circularPositionCheckpointTolerance, "half position"); CheckVectorNear(h.State.Velocity, new Double3(0, -circular.Velocity.Y, 0), circularVelocityCheckpointTolerance, "half velocity");
+    CheckVectorNear(f.State.Position, circular.Position, circularPositionCheckpointTolerance * 2d, "full position"); CheckVectorNear(f.State.Velocity, circular.Velocity, circularVelocityCheckpointTolerance * 2d, "full velocity");
+    var circularCheckpointPositionError = Math.Max(Math.Max(VectorError(q.State.Position, new Double3(0, radius, 0)), VectorError(h.State.Position, new Double3(-radius, 0, 0))), VectorError(f.State.Position, circular.Position));
+    var circularCheckpointVelocityError = Math.Max(Math.Max(VectorError(q.State.Velocity, new Double3(-circular.Velocity.Y, 0, 0)), VectorError(h.State.Velocity, new Double3(0, -circular.Velocity.Y, 0))), VectorError(f.State.Velocity, circular.Velocity));
+    var circularEnergyError = RelativeError(SpecificEnergy(q.State, mu), SpecificEnergy(circular, mu)); var circularMomentumError = RelativeError(AngularMomentumMagnitude(q.State), AngularMomentumMagnitude(circular));
+    Check(circularEnergyError <= 1e-11d && circularMomentumError <= 1e-11d, "circular invariants");
+
+    var moderate = EllipticState(mu, 12_000_000d, .35d); var high = EllipticState(mu, 20_000_000d, .90d); var moderateTime = SimulationInstant.FromWholeSeconds(4_321); var highTime = SimulationInstant.FromWholeSeconds(7_654);
+    var moderateResult = RequirePropagation(moderate, epoch, moderateTime, mu, "moderate ellipse"); var highResult = RequirePropagation(high, epoch, highTime, mu, "high ellipse");
+    var moderateEnergyError = RelativeError(SpecificEnergy(moderateResult.State, mu), SpecificEnergy(moderate, mu)); var moderateMomentumError = RelativeError(AngularMomentumMagnitude(moderateResult.State), AngularMomentumMagnitude(moderate));
+    var highEnergyError = RelativeError(SpecificEnergy(highResult.State, mu), SpecificEnergy(high, mu)); var highMomentumError = RelativeError(AngularMomentumMagnitude(highResult.State), AngularMomentumMagnitude(high));
+    Check(moderateEnergyError <= 1e-11d && moderateMomentumError <= 1e-11d && highEnergyError <= 1e-10d && highMomentumError <= 1e-10d, "elliptic invariants");
+    var backward = RequirePropagation(moderateResult.State, moderateTime, epoch, mu, "backward ellipse"); CheckVectorNear(backward.State.Position, moderate.Position, PositionTolerance(Math.Sqrt(moderate.Position.LengthSquared)) * 2d, "backward position"); CheckVectorNear(backward.State.Velocity, moderate.Velocity, VelocityTolerance(Math.Sqrt(moderate.Velocity.LengthSquared)) * 2d, "backward velocity");
+    var t2 = SimulationInstant.FromWholeSeconds(8_000); var direct = RequirePropagation(moderate, epoch, t2, mu, "epoch direct"); var replacement = RequirePropagation(moderateResult.State, moderateTime, t2, mu, "epoch replacement"); CheckVectorNear(replacement.State.Position, direct.State.Position, PositionTolerance(Math.Sqrt(direct.State.Position.LengthSquared)) * 2d, "epoch replacement position"); CheckVectorNear(replacement.State.Velocity, direct.State.Velocity, VelocityTolerance(Math.Sqrt(direct.State.Velocity.LengthSquared)) * 2d, "epoch replacement velocity");
+    var nearCircular = EllipticState(mu, 9_000_000d, 1e-6d); Check(UniversalVariableTwoBodyPropagator.TryEvaluate(nearCircular, epoch, SimulationInstant.FromWholeSeconds(500), mu).Succeeded, "near-circular supported");
+
+    var hyperbolic = new CartesianState(new Double3(radius, 0, 0), new Double3(0, Math.Sqrt(2d * mu / radius) * 1.01d, 0)); Check(UniversalVariableTwoBodyPropagator.TryEvaluate(hyperbolic, epoch, SimulationInstant.FromWholeSeconds(1), mu).Status == TwoBodyPropagationStatus.HyperbolicUnsupported, "hyperbolic controlled rejection");
+    var parabolic = new CartesianState(new Double3(radius, 0, 0), new Double3(0, Math.Sqrt(2d * mu / radius), 0)); Check(UniversalVariableTwoBodyPropagator.TryEvaluate(parabolic, epoch, SimulationInstant.FromWholeSeconds(1), mu).Status == TwoBodyPropagationStatus.NearParabolicUnsupported, "near-parabolic controlled rejection");
+    Check(UniversalVariableTwoBodyPropagator.TryEvaluate(new CartesianState(new Double3(radius, 0, 0), new Double3(circular.Velocity.Y, 0, 0)), epoch, SimulationInstant.FromWholeSeconds(1), mu).Status == TwoBodyPropagationStatus.DegenerateAngularMomentum, "radial rejection");
+    Check(UniversalVariableTwoBodyPropagator.TryEvaluate(new CartesianState(Double3.Zero, circular.Velocity), epoch, SimulationInstant.FromWholeSeconds(1), mu).Status == TwoBodyPropagationStatus.DegenerateRadius, "zero-radius rejection");
+    Check(UniversalVariableTwoBodyPropagator.TryEvaluate(new CartesianState(new Double3(double.NaN, 0, 0), circular.Velocity), epoch, SimulationInstant.FromWholeSeconds(1), mu).Status == TwoBodyPropagationStatus.NonFiniteState, "non-finite state rejection");
+    Check(UniversalVariableTwoBodyPropagator.TryEvaluate(circular, epoch, SimulationInstant.FromWholeSeconds(1), 0d).Status == TwoBodyPropagationStatus.InvalidGravitationalParameter, "invalid mu rejection");
+    Check(UniversalVariableTwoBodyPropagator.TryEvaluate(circular, epoch, new SimulationInstant(UniversalVariableTwoBodyPropagator.MaximumEvaluationTicks), mu).Succeeded, "time-span boundary accepted");
+    Check(UniversalVariableTwoBodyPropagator.TryEvaluate(circular, epoch, new SimulationInstant(UniversalVariableTwoBodyPropagator.MaximumEvaluationTicks + 1), mu).Status == TwoBodyPropagationStatus.EvaluationSpanExceeded, "time-span overflow rejected");
+    Check(UniversalVariableTwoBodyPropagator.TryEvaluateWithIterationLimitForTest(high, epoch, highTime, mu, 1).Status == TwoBodyPropagationStatus.NonConvergent, "bounded non-convergence seam");
+
+    Check(UniversalVariableTwoBodyPropagator.TryEvaluateStumpffForTest(0d, out var c0, out var s0) && NearlyEqual(c0, .5d, 0d) && NearlyEqual(s0, 1d / 6d, 0d), "Stumpff zero");
+    Check(UniversalVariableTwoBodyPropagator.TryEvaluateStumpffForTest(1e-6d, out var cSmall, out var sSmall) && NearlyEqual(cSmall, .5d - 1e-6d / 24d + 1e-12d / 720d, 1e-16d) && NearlyEqual(sSmall, 1d / 6d - 1e-6d / 120d + 1e-12d / 5040d, 1e-16d), "Stumpff series");
+    Check(UniversalVariableTwoBodyPropagator.TryEvaluateStumpffForTest(1e-4d, out _, out _) && UniversalVariableTwoBodyPropagator.TryEvaluateStumpffForTest(1e-3d, out _, out _) && UniversalVariableTwoBodyPropagator.TryEvaluateStumpffForTest(100d, out _, out _) && !UniversalVariableTwoBodyPropagator.TryEvaluateStumpffForTest(-1d, out _, out _), "Stumpff branches");
+
+    var adapterView = CreatePropagationView(mu, moderate); var adapter = CelestialTrajectoryEvaluator.TryEvaluate(new CelestialBodyId(2), adapterView, moderateTime); Check(adapter.Succeeded && RawCartesianEqual(adapter.State, moderateResult.State), "celestial adapter resolves central mu"); Check(CelestialTrajectoryEvaluator.TryEvaluate(new CelestialBodyId(1), adapterView, moderateTime).Status == TwoBodyPropagationStatus.NoTrajectory && CelestialTrajectoryEvaluator.TryEvaluate(new CelestialBodyId(99), adapterView, moderateTime).Status == TwoBodyPropagationStatus.BodyNotFound, "adapter root and missing body statuses");
+
+    var circularHash = PropagationHash(circular, epoch, mu, [epoch, quarter, half, full]); var ellipticHash = PropagationHash(moderate, epoch, mu, [epoch, moderateTime, highTime]); var backwardHash = PropagationHash(moderateResult.State, moderateTime, mu, [epoch, moderateTime]); var validationHash = ValidationHash(circular, epoch, mu); var combined = Mix(Mix(Mix(circularHash, ellipticHash), backwardHash), validationHash);
+    Check(circularHash == PropagationHash(circular, epoch, mu, [epoch, quarter, half, full]) && combined != 0, "propagator raw-hash repeatability");
+
+    _ = UniversalVariableTwoBodyPropagator.TryEvaluate(circular, epoch, quarter, mu); _ = CelestialTrajectoryEvaluator.TryEvaluate(new CelestialBodyId(2), adapterView, quarter);
+    var stopwatch = Stopwatch.StartNew(); var before = GC.GetAllocatedBytesForCurrentThread(); var maximumIterations = 0;
+    for (var index = 0; index < 100_000; index++) { var result = UniversalVariableTwoBodyPropagator.TryEvaluate(circular, epoch, quarter, mu); Check(result.Succeeded, "warm circular"); maximumIterations = Math.Max(maximumIterations, result.Iterations); }
+    var circularMilliseconds = stopwatch.Elapsed.TotalMilliseconds; var circularAllocated = GC.GetAllocatedBytesForCurrentThread() - before;
+    stopwatch.Restart(); before = GC.GetAllocatedBytesForCurrentThread();
+    for (var index = 0; index < 100_000; index++) { var result = UniversalVariableTwoBodyPropagator.TryEvaluate(moderate, epoch, moderateTime, mu); Check(result.Succeeded, "warm elliptic"); maximumIterations = Math.Max(maximumIterations, result.Iterations); }
+    var ellipticMilliseconds = stopwatch.Elapsed.TotalMilliseconds; var ellipticAllocated = GC.GetAllocatedBytesForCurrentThread() - before;
+    before = GC.GetAllocatedBytesForCurrentThread();
+    for (var index = 0; index < 100_000; index++) { Check(CelestialTrajectoryEvaluator.TryEvaluate(new CelestialBodyId(2), adapterView, moderateTime).Succeeded, "warm adapter"); Check(UniversalVariableTwoBodyPropagator.TryEvaluate(circular, epoch, SimulationInstant.FromWholeSeconds(1), 0d).Status == TwoBodyPropagationStatus.InvalidGravitationalParameter, "warm invalid"); Check(UniversalVariableTwoBodyPropagator.TryEvaluate(hyperbolic, epoch, SimulationInstant.FromWholeSeconds(1), mu).Status == TwoBodyPropagationStatus.HyperbolicUnsupported, "warm unsupported"); Check(UniversalVariableTwoBodyPropagator.TryEvaluateWithIterationLimitForTest(high, epoch, highTime, mu, 1).Status == TwoBodyPropagationStatus.NonConvergent, "warm nonconvergent"); }
+    var adapterAllocated = GC.GetAllocatedBytesForCurrentThread() - before;
+    Check(circularAllocated == 0 && ellipticAllocated == 0 && adapterAllocated == 0, "propagation paths allocate zero bytes");
+    Console.WriteLine("Two-Body Propagation"); Console.WriteLine($"Circular orbit: t=0 PASS; t=0.25P PASS; t=0.50P PASS; t=1.00P PASS; max checkpoint position error={circularCheckpointPositionError:E3} m; velocity error={circularCheckpointVelocityError:E3} m/s"); Console.WriteLine($"Elliptic orbit: energy relative error={Math.Max(moderateEnergyError, highEnergyError):E3}; angular momentum relative error={Math.Max(moderateMomentumError, highMomentumError):E3}; maximum iterations={maximumIterations}"); Console.WriteLine("Backward propagation: PASS; Epoch replacement equivalence: PASS; Unsupported regimes: PASS"); Console.WriteLine($"Allocation: circular={circularAllocated} bytes, elliptic={ellipticAllocated} bytes, adapter/failure={adapterAllocated} bytes"); Console.WriteLine($"Benchmark: circular={circularMilliseconds:F3} ms, elliptic={ellipticMilliseconds:F3} ms"); Console.WriteLine($"Deterministic propagation hashes: circular=0x{circularHash:X16}, elliptic=0x{ellipticHash:X16}, backward=0x{backwardHash:X16}, validation=0x{validationHash:X16}, combined=0x{combined:X16}");
+}
+
+static TwoBodyPropagationResult RequirePropagation(in CartesianState state, SimulationInstant epoch, SimulationInstant time, double mu, string message) { var result = UniversalVariableTwoBodyPropagator.TryEvaluate(state, epoch, time, mu); Check(result.Succeeded, $"{message}: {result.Status}"); return result; }
+static CelestialStateView CreatePropagationView(double mu, CartesianState trajectoryState)
+{
+    var definitions = new[] { new CelestialBodyDefinition(new CelestialBodyId(1), null, new ReferenceFrameId(1), mu), new CelestialBodyDefinition(new CelestialBodyId(2), new CelestialBodyId(1), new ReferenceFrameId(2), 1d) };
+    var states = new[] { CelestialBodyState.Root(new CelestialBodyId(1)), CelestialBodyState.Orbiting(new CelestialBodyId(2), new TwoBodyTrajectory(new CelestialBodyId(1), SimulationInstant.Zero, trajectoryState, TwoBodyPropagationModel.CartesianTwoBodyV1)) };
+    Check(CelestialStateStore.TryCreate(definitions, states, out var store, out var status) && store is not null && status == CelestialStateStoreStatus.Success, "propagation adapter catalog"); return store!.CreateView();
+}
+static CartesianState EllipticState(double mu, double semiMajorAxis, double eccentricity) { var periapsis = semiMajorAxis * (1d - eccentricity); return new(new Double3(periapsis, 0, 0), new Double3(0, Math.Sqrt(mu * (2d / periapsis - 1d / semiMajorAxis)), 0)); }
+static double SpecificEnergy(in CartesianState state, double mu) => state.Velocity.LengthSquared * .5d - mu / Math.Sqrt(state.Position.LengthSquared);
+static double AngularMomentumMagnitude(in CartesianState state) => Math.Sqrt(Double3.Cross(state.Position, state.Velocity).LengthSquared);
+static double RelativeError(double actual, double expected) => Math.Abs(actual - expected) / Math.Max(Math.Abs(expected), double.Epsilon);
+static double PositionTolerance(double magnitude) => Math.Max(1d, Math.Abs(magnitude)) * 1e-11d;
+static double VelocityTolerance(double magnitude) => Math.Max(1d, Math.Abs(magnitude)) * 1e-11d;
+static bool NearlyEqual(double actual, double expected, double tolerance) => Math.Abs(actual - expected) <= tolerance;
+static double VectorError(in Double3 actual, in Double3 expected) => Math.Sqrt((actual - expected).LengthSquared);
+static void CheckVectorNear(in Double3 actual, in Double3 expected, double tolerance, string message) => Check((actual - expected).LengthSquared <= tolerance * tolerance, $"{message}; actual={actual}; expected={expected}; tolerance={tolerance:R}");
+static bool RawCartesianEqual(in CartesianState left, in CartesianState right) => BitConverter.DoubleToInt64Bits(left.Position.X) == BitConverter.DoubleToInt64Bits(right.Position.X) && BitConverter.DoubleToInt64Bits(left.Position.Y) == BitConverter.DoubleToInt64Bits(right.Position.Y) && BitConverter.DoubleToInt64Bits(left.Position.Z) == BitConverter.DoubleToInt64Bits(right.Position.Z) && BitConverter.DoubleToInt64Bits(left.Velocity.X) == BitConverter.DoubleToInt64Bits(right.Velocity.X) && BitConverter.DoubleToInt64Bits(left.Velocity.Y) == BitConverter.DoubleToInt64Bits(right.Velocity.Y) && BitConverter.DoubleToInt64Bits(left.Velocity.Z) == BitConverter.DoubleToInt64Bits(right.Velocity.Z);
+static ulong PropagationHash(in CartesianState state, SimulationInstant epoch, double mu, ReadOnlySpan<SimulationInstant> times) { ulong hash = 14695981039346656037UL; foreach (ref readonly var time in times) { var result = UniversalVariableTwoBodyPropagator.TryEvaluate(state, epoch, time, mu); hash = Mix(hash, (ulong)result.Status); hash = Mix(hash, (ulong)time.Ticks); if (result.Succeeded) { hash = MixCartesian(hash, result.State); } } return hash; }
+static ulong ValidationHash(in CartesianState circular, SimulationInstant epoch, double mu) { ulong hash = 14695981039346656037UL; var hyper = new CartesianState(circular.Position, new Double3(0, Math.Sqrt(2d * mu / circular.Position.X) * 1.01d, 0)); foreach (var result in new[] { UniversalVariableTwoBodyPropagator.TryEvaluate(circular, epoch, SimulationInstant.FromWholeSeconds(1), 0d), UniversalVariableTwoBodyPropagator.TryEvaluate(hyper, epoch, SimulationInstant.FromWholeSeconds(1), mu), UniversalVariableTwoBodyPropagator.TryEvaluate(circular, epoch, new SimulationInstant(UniversalVariableTwoBodyPropagator.MaximumEvaluationTicks + 1), mu) }) { hash = Mix(hash, (ulong)result.Status); hash = Mix(hash, (ulong)result.RequestedTime.Ticks); } return hash; }
+static ulong MixCartesian(ulong hash, in CartesianState state) { hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(state.Position.X)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(state.Position.Y)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(state.Position.Z)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(state.Velocity.X)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(state.Velocity.Y)); return Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(state.Velocity.Z)); }
 
 static void TimelineTopologyTests()
 {

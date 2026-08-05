@@ -12,4 +12,20 @@ Root bodies have no primary and explicitly have no trajectory. Non-root bodies h
 
 All position, velocity, and μ values must use one internally consistent simulation unit system. NovaCore does not introduce a unit framework in this slice.
 
-The next slices will add a pure analytical evaluator, then transaction-based trajectory replacement, then celestial-to-frame evaluation. Graphics and native code remain unaware of celestial-domain types throughout.
+## Pure elliptic propagation
+
+Milestone 7B defines `CartesianTwoBodyV1` as pure elliptic universal-variable f/g evaluation. It receives immutable Cartesian state at its exact epoch, one requested `SimulationInstant`, and the central body's μ. It returns a controlled `TwoBodyPropagationResult`; it does not mutate `SimulationState`, the clock, revisions, event topology, processed history, reference frames, or renderer data.
+
+The celestial domain adapter resolves a subject body and its primary through `CelestialStateView`, verifies that the trajectory central body matches the declared primary, and reads μ only from the primary definition. The mathematical core has no celestial-store access.
+
+Authoritative celestial mechanics use SI: position in metres, velocity in metres per second, elapsed propagation time in seconds, and μ in m³/s². Existing non-celestial presentation fixtures retain their generic units.
+
+The first supported regimes are circular through high-eccentricity elliptic trajectories, including backward-time evaluation. Hyperbolic, parabolic or near-parabolic, radial/zero-angular-momentum, and degenerate-radius inputs return controlled statuses. Near-parabolic classification uses `abs(alpha * r0) <= 1e-10`; tested high-eccentricity elliptical inputs remain well outside this boundary.
+
+Exact timestamp subtraction is checked, then microticks convert once using `deltaTicks / 1,000,000.0`. The evaluator supports a numerical interval of ±2^31 seconds (±2,147,483,648,000,000 microticks), not a restriction on `SimulationInstant`. For elliptic conditioning over many revolutions, the solver reduces its local interval by the analytically derived period; the requested authoritative timestamp and stored epoch remain unchanged.
+
+Stumpff C/S functions use a fixed polynomial branch through `z = 1e-4`, then direct trigonometric forms for positive z. Universal anomaly solving uses a signed alpha-based initial guess, a bounded 64-expansion bracket, safeguarded Newton steps, midpoint fallback, and a 48-iteration cap. Its residual limit is `2^-48 * max(|r0 * chi|, |sqrt(mu) * deltaSeconds|, double.Epsilon)`, matching the universal Kepler equation's length-to-the-three-halves scale. Normal failure uses allocation-free statuses rather than exceptions.
+
+On the tested .NET x64 runtime, warmed direct propagation, domain-adapter evaluation, and controlled failure paths allocate zero managed bytes. Deterministic raw hashes cover circular, elliptic, backward, and validation sequences. No cross-platform bitwise determinism claim is made.
+
+Future slices will add transaction-based trajectory replacement and celestial-to-frame evaluation. Hyperbolic/parabolic propagation, numerical integration, reference-frame integration, snapshots, and rendering remain deferred.
