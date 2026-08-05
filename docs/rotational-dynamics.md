@@ -20,3 +20,5 @@ Evaluation uses deterministic fixed-step RK4: full substeps are exactly 10,000 s
 The player fixture starts stationary with spherical inertia `(120, 120, 120) kg·m²`. Each requested control axis uses `4 N·m`; this produces an acceleration of approximately `.0333 rad/s²` about that axis, making a short 1× hold visible without automatic scripted rotation.
 
 In `--scene=celestial`, W/S request positive/negative body-X pitch torque, A/D request positive/negative body-Y yaw torque, and Q/E request positive/negative body-Z roll torque. A key edge or changed combination commits one exact-time replacement; unchanged held input creates no transaction or history entry. Releasing commits zero torque once. This is a one-spacecraft fixture control path only. RCS, inertia-from-geometry, propellant, reaction wheels, and SAS remain deferred.
+
+The guidance module now provides a pure PD SAS torque calculation, `Kp ⊙ attitudeErrorBody - Kd ⊙ angularVelocityBody`, with canonical shortest-path quaternion error, deadbands, and per-axis clamping. It owns no scheduling, input, transaction, or state mutation.

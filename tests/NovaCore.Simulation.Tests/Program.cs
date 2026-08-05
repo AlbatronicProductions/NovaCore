@@ -10,6 +10,7 @@ using NovaCore.Simulation.Spacecraft.ReferenceFrames;
 using NovaCore.Simulation.Spacecraft.Transactions;
 using NovaCore.Simulation.Spacecraft.Rotation;
 using NovaCore.Simulation.Spacecraft.Rotation.Transactions;
+using NovaCore.Simulation.Spacecraft.Guidance;
 using NovaCore.Core;
 using NovaCore.Core.ReferenceFrames;
 using System.Diagnostics;
@@ -33,6 +34,7 @@ var tests = new (string Name, Action Test)[]
     ("Spacecraft attitude integration", SpacecraftAttitudeIntegrationTests),
     ("Rigid-body rotation", RigidBodyRotationTests),
     ("Rigid-body torque transaction", RigidBodyTorqueTransactionTests),
+    ("Flight reference and SAS guidance", FlightReferenceAndSasTests),
     ("Analytical orbit sampling", AnalyticalOrbitSamplingTests),
     ("Celestial frame extraction", CelestialFrameExtractionTests),
     ("Celestial trajectory replacement", CelestialTrajectoryReplacementTests),
@@ -139,6 +141,26 @@ static void RigidBodyRotationTests()
 static SpacecraftRigidBodyRotationState CreateRigid(SpacecraftId id, PrincipalMomentsOfInertia inertia, Double3 torque, Double3 angularVelocity)
 {
     Check(SpacecraftRigidBodyRotationState.TryCreate(id, SimulationInstant.Zero, DoubleQuaternion.Identity, angularVelocity, inertia, torque, RigidBodyRotationModel.ConstantBodyTorqueV1, out var state) == SpacecraftRigidBodyRotationEvaluationStatus.Success, "create rigid test state"); return state;
+}
+
+static void FlightReferenceAndSasTests()
+{
+    var r = new Double3(3d, 0d, 0d); var v = new Double3(0d, 4d, 0d);
+    Check(FlightReferenceEvaluator.TryEvaluate(r, v, DoubleQuaternion.Identity, FlightReferenceMode.Prograde).DirectionCarrierParent == Double3.UnitY, "prograde");
+    Check(FlightReferenceEvaluator.TryEvaluate(r, v, DoubleQuaternion.Identity, FlightReferenceMode.Retrograde).DirectionCarrierParent == -Double3.UnitY, "retrograde");
+    Check(FlightReferenceEvaluator.TryEvaluate(r, v, DoubleQuaternion.Identity, FlightReferenceMode.Normal).DirectionCarrierParent == Double3.UnitZ, "normal");
+    Check(FlightReferenceEvaluator.TryEvaluate(r, v, DoubleQuaternion.Identity, FlightReferenceMode.AntiNormal).DirectionCarrierParent == -Double3.UnitZ, "anti-normal");
+    Check(FlightReferenceEvaluator.TryEvaluate(r, v, DoubleQuaternion.Identity, FlightReferenceMode.RadialOut).DirectionCarrierParent == Double3.UnitX && FlightReferenceEvaluator.TryEvaluate(r, v, DoubleQuaternion.Identity, FlightReferenceMode.RadialIn).DirectionCarrierParent == -Double3.UnitX, "radial directions");
+    Check(FlightReferenceEvaluator.TryEvaluate(Double3.Zero, v, DoubleQuaternion.Identity, FlightReferenceMode.RadialOut).Status == FlightReferenceEvaluationStatus.NearZeroRadius && FlightReferenceEvaluator.TryEvaluate(r, Double3.Zero, DoubleQuaternion.Identity, FlightReferenceMode.Prograde).Status == FlightReferenceEvaluationStatus.NearZeroVelocity, "degenerate vectors");
+    Check(SpacecraftSasTargetOrientation.TryCreate(Double3.UnitY, -Double3.UnitZ, out var target) == SpacecraftSasControlStatus.Success && Double3.Dot(target.Rotate(Double3.UnitX), Double3.UnitY) > 1d - 1e-12d, "target forward basis");
+    var config = new SpacecraftSasControllerConfiguration(new Double3(10, 10, 10), new Double3(2, 2, 2), new Double3(1, 1, 1), 1e-6, 1e-6, 1e-5, 1e-5); var inertia = new PrincipalMomentsOfInertia(1, 1, 1);
+    var zero = SpacecraftSasController.TryEvaluate(DoubleQuaternion.Identity, Double3.Zero, DoubleQuaternion.Identity, inertia, config); Check(zero.Status == SpacecraftSasControlStatus.Settled && zero.RequestedBodyTorque == Double3.Zero, "zero settled");
+    var damping = SpacecraftSasController.TryEvaluate(DoubleQuaternion.Identity, new Double3(.5, 0, 0), DoubleQuaternion.Identity, inertia, config); Check(damping.RequestedBodyTorque.X < 0d, "rate damping");
+    var correction = SpacecraftSasController.TryEvaluate(DoubleQuaternion.Identity, Double3.Zero, DoubleQuaternion.FromAxisAngle(Double3.UnitX, Math.PI), inertia, config); Check(correction.RequestedBodyTorque.X == 1d, "shortest path clamp");
+    Check(SpacecraftSasTargetOrientation.CaptureHold(new DoubleQuaternion(0, 0, 0, -1)) == DoubleQuaternion.Identity, "canonical hold capture");
+    _ = SpacecraftSasController.TryEvaluate(DoubleQuaternion.Identity, Double3.Zero, target, inertia, config); var before = GC.GetAllocatedBytesForCurrentThread(); ulong hash = 14695981039346656037UL;
+    for (var index = 0; index < 100_000; index++) { var reference = FlightReferenceEvaluator.TryEvaluate(r, v, DoubleQuaternion.Identity, FlightReferenceMode.Prograde); var t = SpacecraftSasTargetOrientation.TryCreate(reference.DirectionCarrierParent, -Double3.UnitZ, out var q); var result = SpacecraftSasController.TryEvaluate(DoubleQuaternion.Identity, Double3.Zero, q, inertia, config); Check(t == SpacecraftSasControlStatus.Success && result.Succeeded, "warm guidance"); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(result.RequestedBodyTorque.X)); }
+    Check(GC.GetAllocatedBytesForCurrentThread() == before, "warm guidance allocation"); Console.WriteLine($"Flight-reference/SAS guidance hash: 0x{hash:X16}; allocation=0 bytes");
 }
 
 static void RigidBodyTorqueTransactionTests()
