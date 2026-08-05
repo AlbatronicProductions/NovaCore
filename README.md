@@ -9,18 +9,20 @@ Authoritative simulation remains managed C# data. The native layer owns only pla
 ## Current Capabilities
 
 - **Precision mathematics** — checked microtick time primitives, double-precision spatial values, and high/low FP32 GPU position encoding.
-- **Reference-frame system** — immutable ECL, ORB, CCE, CCI, and CCF frame snapshots resolved in managed code.
+- **Reference-frame system** — immutable structural graphs and evaluated transforms resolved in managed code, including the terminal Star–Planet–Moon–Vessel fixture.
+- **Resolved render transport** — immutable root-resolved render snapshots feed camera-relative GPU transport without giving Graphics frame-graph ownership.
 - **Graphics abstraction** — reusable mesh handles, indexed instanced drawing, batched render submissions, and Vulkan resource ownership in native code.
 - **Camera system** — managed frame-aware Free camera state and control; the renderer receives resolved GPU camera transport only.
 - **Deterministic simulation time primitives (6A)** — `SimulationInstant`, `SimulationDuration`, and normalized rational `SimulationRate`.
 - **Deterministic event timeline (6B-1)** — canonical pending-event ordering, stable IDs, sequence assignment, cancellation, replacement, and timeline revisions.
-- **Exact authoritative simulation clock (6B-2)** — explicit forward advancement, pause state, rate ownership, and deterministic event-boundary detection.
+- **Deterministic simulation foundation** — exact simulation time, canonical event topology, clock orchestration, and authoritative transaction contracts.
+- **Vulkan visual fixture mode** — `--scene=fixture` renders the static reference-frame fixture through the existing managed/native triangle path.
 
 ## Current Milestone Status
 
-Milestone 6B-2 — Exact Authoritative Simulation Clock — is complete.
+Milestone 6E-2 — Static Reference-Frame Fixture Visual Integration — is complete.
 
-The clock advances through empty spans or stops exactly at the canonical next deterministic event boundary. Events deliberately remain pending at that boundary: execution begins in Milestone 6B-3.
+The visual fixture is a static transform and render-transport demonstration. It does not imply orbital propagation, gravity, gameplay, `SimulationSnapshot`, or physically realistic bodies.
 
 ## Design Principles
 
@@ -70,7 +72,11 @@ For the current rendering sample:
 ```powershell
 dotnet run --project samples/NovaCore.Triangle -c Debug -- --objects=1000
 dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=frames
+dotnet run --project samples/NovaCore.ReferenceFrameFixture -c Debug
+dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=fixture
 ```
+
+`NovaCore.ReferenceFrameFixture` verifies static graph and transform resolution in the terminal. The default triangle command renders the reusable mesh field; `--scene=frames` retains the existing frame-marker view; `--scene=fixture` renders four static Star, Planet, Moon, and TestVessel markers through `ResolvedRenderSnapshot`.
 
 See [Build on Windows](docs/build-windows.md) for prerequisites and environment setup.
 
@@ -84,21 +90,30 @@ See [Build on Windows](docs/build-windows.md) for prerequisites and environment 
 - [Simulation Time](docs/simulation-time.md)
 - [Build on Windows](docs/build-windows.md)
 
+## Run the Samples
+
+```powershell
+dotnet run --project samples/NovaCore.ReferenceFrameFixture -c Debug
+dotnet run --project samples/NovaCore.Triangle -c Debug
+dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=frames
+dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=fixture
+```
+
+The fixture mode follows: reference-frame resolution → `ResolvedRenderSnapshot` → camera-relative GPU transport → Vulkan rendering. It remains static; orbital propagation, gravity, gameplay, `SimulationSnapshot`, and physically realistic bodies are deferred.
+
 ## Future Roadmap
 
 Planned work, not current functionality:
 
-- Milestone 6B-3 — deterministic transaction engine and event execution.
-- Generated events and processed-event history.
-- Deterministic replay foundations.
-- Orbital mechanics and analytical propagation.
-- Spacecraft simulation.
-- Renderer synchronization with evaluated simulation state.
-- `SimulationSnapshot` — an immutable capture of complete deterministic simulation state at one `SimulationInstant`, intended to support replay, save/load foundations, rollback, renderer synchronization, debugging, and deterministic verification.
+- Analytical trajectory and orbital-mechanics propagation.
+- Celestial-body and spacecraft simulation.
+- Generated simulation events and expanded processed-event history.
+- Immutable `SimulationSnapshot` publication for renderer synchronization and external consumers.
+- Save/load, replay restoration, and networking built on deterministic revisions and event history.
 
 ## Current Status
 
-- **Current milestone:** Milestone 6B-2 — Exact Authoritative Simulation Clock
-- **Next milestone:** Milestone 6B-3 — Deterministic Transaction Engine
+- **Current milestone:** Milestone 6E-2 — Static Reference-Frame Fixture Visual Integration
+- **Next milestone:** Deferred pending review
 
-NovaCore remains a focused foundation. It does not yet implement event execution, trajectories, orbital mechanics, gravity, spacecraft dynamics, networking, ECS, terrain, assets, materials, or gameplay systems.
+NovaCore remains a focused foundation. It does not yet implement trajectories, orbital mechanics, gravity, spacecraft dynamics, networking, ECS, terrain, assets, materials, or gameplay systems.
