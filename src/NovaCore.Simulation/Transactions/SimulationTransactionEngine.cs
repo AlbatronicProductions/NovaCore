@@ -1,6 +1,7 @@
 using NovaCore.Simulation.Clock;
 using NovaCore.Simulation.Time;
 using NovaCore.Simulation.Timeline;
+using System.Diagnostics;
 
 namespace NovaCore.Simulation.Transactions;
 
@@ -52,6 +53,7 @@ internal sealed class SimulationTransactionEngine
     internal SimulationCanonicalGroupResult ExecuteCanonicalGroup(int maximumEventCount)
     {
         if (maximumEventCount <= 0) throw new ArgumentOutOfRangeException(nameof(maximumEventCount));
+        Debug.Assert(maximumEventCount <= _clock.MaximumEventsPerAdvance);
         var groupTime = _clock.CurrentTime;
         if (_isExecutingGroup) return GroupResult(SimulationCanonicalGroupStopReason.ReentrantExecution, groupTime, 0, false, null);
         _isExecutingGroup = true;
@@ -86,7 +88,7 @@ internal sealed class SimulationTransactionEngine
     public SimulationExecutionResult AdvanceAndExecuteOneCanonicalGroup(SimulationInstant target) =>
         _orchestrator.AdvanceAndExecuteOneCanonicalGroup(target);
 
-    /// <summary>Internal 6B-4B composition entry point; public duration advancement remains deferred.</summary>
+    /// <summary>Internal clock-duration composition entry point; public duration advancement remains deferred.</summary>
     internal SimulationDebtServiceResult ServicePendingHostDurationDebt() =>
         _orchestrator.ServicePendingHostDurationDebt();
 

@@ -1,6 +1,6 @@
+using System.Diagnostics;
 using NovaCore.Simulation.Clock;
 using NovaCore.Simulation.Time;
-using System.Diagnostics;
 
 namespace NovaCore.Simulation.Transactions;
 
@@ -11,32 +11,33 @@ namespace NovaCore.Simulation.Transactions;
 internal sealed class SimulationExecutionOrchestrator
 {
     private readonly SimulationClock _clock;
-    private readonly SimulationTransactionEngine _transactions;
+    // The coordinator delegates all event execution; it never mutates state itself.
+    private readonly SimulationTransactionEngine _transactionEngine;
     private bool _isOrchestrating;
 
-    public SimulationExecutionOrchestrator(SimulationClock clock, SimulationTransactionEngine transactions)
+    public SimulationExecutionOrchestrator(SimulationClock clock, SimulationTransactionEngine transactionEngine)
     {
         _clock = clock;
-        _transactions = transactions;
+        _transactionEngine = transactionEngine;
     }
 
     public SimulationExecutionResult AdvanceAndExecuteOneCanonicalGroup(SimulationInstant target)
     {
-        if (_isOrchestrating) return Result(SimulationExecutionStopReason.ReentrantExecution, target, SimulationAdvanceStopReason.ReentrantAdvance, null, null);
+        if (_isOrchestrating) return CreateExecutionResult(SimulationExecutionStopReason.ReentrantExecution, target, SimulationAdvanceStopReason.ReentrantAdvance, null, null);
         _isOrchestrating = true;
         try
         {
             var initial = _clock.AdvanceTo(target);
             if (initial.Reason == SimulationAdvanceStopReason.ReachedTarget)
-                return Result(SimulationExecutionStopReason.ReachedTarget, target, initial.Reason, null, null);
+                return CreateExecutionResult(SimulationExecutionStopReason.ReachedTarget, target, initial.Reason, null, null);
             if (initial.Reason == SimulationAdvanceStopReason.TargetBeforeCurrent)
-                return Result(SimulationExecutionStopReason.TargetBeforeCurrent, target, initial.Reason, null, null);
+                return CreateExecutionResult(SimulationExecutionStopReason.TargetBeforeCurrent, target, initial.Reason, null, null);
             if (initial.Reason == SimulationAdvanceStopReason.ReentrantAdvance)
-                return Result(SimulationExecutionStopReason.ReentrantAdvance, target, initial.Reason, null, null);
+                return CreateExecutionResult(SimulationExecutionStopReason.ReentrantAdvance, target, initial.Reason, null, null);
 
-            var group = _transactions.ExecuteCanonicalGroup();
+            var group = _transactionEngine.ExecuteCanonicalGroup();
             if (!group.IsComplete)
-                return Result(MapGroupReason(group.Reason), target, initial.Reason, null, group);
+                return CreateExecutionResult(MapGroupReason(group.Reason), target, initial.Reason, null, group);
 
             var continuation = _clock.AdvanceTo(target);
             var reason = continuation.Reason == SimulationAdvanceStopReason.ReachedTarget
@@ -46,7 +47,7 @@ internal sealed class SimulationExecutionOrchestrator
                     : continuation.Reason == SimulationAdvanceStopReason.TargetBeforeCurrent
                         ? SimulationExecutionStopReason.TargetBeforeCurrent
                         : SimulationExecutionStopReason.ReentrantAdvance;
-            return Result(reason, target, initial.Reason, continuation.Reason, group);
+            return CreateExecutionResult(reason, target, initial.Reason, continuation.Reason, group);
         }
         finally { _isOrchestrating = false; }
     }
@@ -94,7 +95,7 @@ internal sealed class SimulationExecutionOrchestrator
                 if (remainingBudget == 0)
                     return DebtResult(SimulationDebtServiceStopReason.EventLimitReached, startTime, target, debtBefore, processedEvents, executedGroups, lastGroupReason);
 
-                var group = _transactions.ExecuteCanonicalGroup(remainingBudget);
+                var group = _transactionEngine.ExecuteCanonicalGroup(remainingBudget);
                 processedEvents += group.ProcessedEventCount;
                 executedGroups++;
                 lastGroupReason = group.Reason;
@@ -120,7 +121,7 @@ internal sealed class SimulationExecutionOrchestrator
         finally { _isOrchestrating = false; }
     }
 
-    private SimulationExecutionResult Result(SimulationExecutionStopReason reason, SimulationInstant requested, SimulationAdvanceStopReason initial, SimulationAdvanceStopReason? continuation, SimulationCanonicalGroupResult? group) =>
+    private SimulationExecutionResult CreateExecutionResult(SimulationExecutionStopReason reason, SimulationInstant requested, SimulationAdvanceStopReason initial, SimulationAdvanceStopReason? continuation, SimulationCanonicalGroupResult? group) =>
         new(reason, requested, _clock.CurrentTime, initial, continuation, group);
 
     private SimulationDebtServiceResult DebtResult(SimulationDebtServiceStopReason reason, SimulationInstant startTime, SimulationInstant targetTime, SimulationDuration debtBefore, int processedEvents, int executedGroups, SimulationCanonicalGroupStopReason? lastGroupReason) =>

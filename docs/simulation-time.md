@@ -1,4 +1,4 @@
-# Simulation Time (Milestones 6A through 6B-4A)
+# Simulation Time (Milestones 6A through 6B-4C)
 
 Milestone 6A establishes the managed temporal value types used by later simulation work. `SimulationInstant` is a signed 64-bit microtick timestamp relative to a project-defined epoch at tick zero. One simulated second is exactly 1,000,000 ticks, giving a range of approximately plus or minus 292,471 years. Arithmetic is checked; negative instants and durations are valid.
 
