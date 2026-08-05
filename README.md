@@ -35,7 +35,7 @@ Graphics never traverses frame graphs, evaluates transforms, owns simulation tim
 
 ## Current Limitations
 
-`--scene=celestial` is a compact analytical visual fixture: a central marker and satellite marker are sampled from authoritative two-body trajectories at exact clock instants, and one muted orbit curve is analytically regenerated when the active trajectory changes. A scheduled inertial impulse demonstrates transaction-based trajectory replacement. The curve is not a mutable trail, prediction system, or renderer-owned orbit model. Triangle markers and their presentation scale are debug geometry only, not physical body rendering.
+`--scene=celestial` is a compact analytical visual fixture: cyan denotes the current authoritative orbit and, after its scheduled impulse, a dim curve denotes the immediately previous orbit. A small marker identifies the exact impulse location. These curves and marker are derived visualization only—not mutable trails, prediction state, saved history, or renderer-owned orbit models. Triangle markers and their presentation scale are debug geometry only, not physical body rendering.
 
 Hyperbolic and parabolic propagation, patched conics, sphere-of-influence transitions, N-body gravity, maneuvers, spacecraft gameplay, terrain, atmosphere, networking, and save/load remain future work.
 

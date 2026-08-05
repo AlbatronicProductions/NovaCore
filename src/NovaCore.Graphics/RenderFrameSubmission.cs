@@ -8,6 +8,7 @@ public sealed class RenderFrameSubmission
     private readonly RenderObject[] _objects;
     private readonly RenderBatch[] _batches;
     private readonly OrbitLineVertex[] _orbitVertices;
+    private readonly OrbitLineVertex[] _previousOrbitVertices;
 
     public RenderFrameSubmission(int capacity, int orbitVertexCapacity = 0)
     {
@@ -15,6 +16,7 @@ public sealed class RenderFrameSubmission
         _objects = new RenderObject[capacity];
         _batches = new RenderBatch[capacity];
         _orbitVertices = new OrbitLineVertex[orbitVertexCapacity];
+        _previousOrbitVertices = new OrbitLineVertex[orbitVertexCapacity];
     }
 
     public GpuCameraData Camera { get; private set; }
@@ -25,6 +27,8 @@ public sealed class RenderFrameSubmission
     public int BatchCount { get; private set; }
     public ReadOnlySpan<OrbitLineVertex> OrbitVertices => _orbitVertices.AsSpan(0, OrbitVertexCount);
     public int OrbitVertexCount { get; private set; }
+    public ReadOnlySpan<OrbitLineVertex> PreviousOrbitVertices => _previousOrbitVertices.AsSpan(0, PreviousOrbitVertexCount);
+    public int PreviousOrbitVertexCount { get; private set; }
 
     public void Begin(in GpuCameraData camera)
     {
@@ -32,18 +36,20 @@ public sealed class RenderFrameSubmission
         ObjectCount = 0;
         BatchCount = 0;
         OrbitVertexCount = 0;
+        PreviousOrbitVertexCount = 0;
     }
 
-    internal bool TrySetOrbitVertices(ResolvedOrbitCurve curve, in UniversePosition camera)
+    internal bool TrySetOrbitVertices(ResolvedOrbitCurve curve, in UniversePosition camera, bool previous = false)
     {
-        if (curve.Count > _orbitVertices.Length || curve.RootFrame != camera.Frame) return false;
+        var destination = previous ? _previousOrbitVertices : _orbitVertices;
+        if (curve.Count > destination.Length || curve.RootFrame != camera.Frame) return false;
         for (var index = 0; index < curve.Count; index++)
         {
             var relative = curve.Positions[index].Value - camera.Value;
             if (!relative.IsFinite || !float.IsFinite((float)relative.X) || !float.IsFinite((float)relative.Y) || !float.IsFinite((float)relative.Z)) return false;
-            _orbitVertices[index] = new OrbitLineVertex { X = (float)relative.X, Y = (float)relative.Y, Z = (float)relative.Z };
+            destination[index] = new OrbitLineVertex { X = (float)relative.X, Y = (float)relative.Y, Z = (float)relative.Z };
         }
-        OrbitVertexCount = curve.Count;
+        if (previous) PreviousOrbitVertexCount = curve.Count; else OrbitVertexCount = curve.Count;
         return true;
     }
 

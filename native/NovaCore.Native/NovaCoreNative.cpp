@@ -78,6 +78,7 @@ struct App {
   VkPipelineLayout pipelineLayout{};
   VkPipeline pipeline{};
   VkPipeline orbitPipeline{};
+  VkPipeline previousOrbitPipeline{};
   std::vector<VkFramebuffer> framebuffers;
   VkCommandPool pool{};
   std::vector<VkCommandBuffer> commands;
@@ -97,6 +98,10 @@ struct App {
   VkDeviceMemory orbitMemory{};
   void *orbitMapped{};
   VkDeviceSize orbitSize{};
+  VkBuffer previousOrbitBuffer{};
+  VkDeviceMemory previousOrbitMemory{};
+  void *previousOrbitMapped{};
+  VkDeviceSize previousOrbitSize{};
   Mesh triangle{};
   LONG rawMouseX{}, rawMouseY{};
   LONG wheelDeltaRaw{};
@@ -401,6 +406,11 @@ void DestroySwap(App &a) {
     vkDestroyPipeline(a.device, a.pipeline, nullptr);
   if (a.orbitPipeline)
     vkDestroyPipeline(a.device, a.orbitPipeline, nullptr);
+  if (a.previousOrbitPipeline)
+    vkDestroyPipeline(a.device, a.previousOrbitPipeline, nullptr);
+  a.pipeline = {};
+  a.orbitPipeline = {};
+  a.previousOrbitPipeline = {};
   if (a.pipelineLayout)
     vkDestroyPipelineLayout(a.device, a.pipelineLayout, nullptr);
   if (a.descriptorLayout)
@@ -529,8 +539,9 @@ void Swap(App &a) {
   pl.pSetLayouts = &a.descriptorLayout;
   a.Check(vkCreatePipelineLayout(a.device, &pl, nullptr, &a.pipelineLayout),
           "pipeline layout failed");
-  auto vs = Shader(a, "shaders/triangle.vert.spv"),
-       fs = Shader(a, "shaders/triangle.frag.spv");
+  VkShaderModule vs{}, fs{};
+  try { vs = Shader(a, "shaders/triangle.vert.spv"); fs = Shader(a, "shaders/triangle.frag.spv"); }
+  catch (...) { if (vs) vkDestroyShaderModule(a.device, vs, nullptr); throw; }
   VkPipelineShaderStageCreateInfo stages[2]{
       {VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO, nullptr, 0,
        VK_SHADER_STAGE_VERTEX_BIT, vs, "main"},
@@ -585,19 +596,41 @@ void Swap(App &a) {
   gp.pColorBlendState = &cb;
   gp.layout = a.pipelineLayout;
   gp.renderPass = a.renderPass;
-  a.Check(vkCreateGraphicsPipelines(a.device, {}, 1, &gp, nullptr, &a.pipeline),
-          "pipeline failed");
+  VkPipeline trianglePipeline{};
+  VkResult triangleResult = vkCreateGraphicsPipelines(a.device, {}, 1, &gp, nullptr, &trianglePipeline);
   vkDestroyShaderModule(a.device, vs, nullptr);
   vkDestroyShaderModule(a.device, fs, nullptr);
-  auto orbitVs = Shader(a, "shaders/orbit.vert.spv"), orbitFs = Shader(a, "shaders/orbit.frag.spv");
+  if (triangleResult != VK_SUCCESS && trianglePipeline) vkDestroyPipeline(a.device, trianglePipeline, nullptr);
+  a.Check(triangleResult, "pipeline failed");
+  a.pipeline = trianglePipeline;
+  VkShaderModule orbitVs{}, orbitFs{};
+  try { orbitVs = Shader(a, "shaders/orbit.vert.spv"); orbitFs = Shader(a, "shaders/orbit.frag.spv"); }
+  catch (...) { if (orbitVs) vkDestroyShaderModule(a.device, orbitVs, nullptr); throw; }
   VkPipelineShaderStageCreateInfo orbitStages[2]{{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO, nullptr, 0, VK_SHADER_STAGE_VERTEX_BIT, orbitVs, "main"}, {VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO, nullptr, 0, VK_SHADER_STAGE_FRAGMENT_BIT, orbitFs, "main"}};
   VkVertexInputBindingDescription orbitBinding{0, sizeof(NcOrbitLineVertex), VK_VERTEX_INPUT_RATE_VERTEX};
   VkVertexInputAttributeDescription orbitAttribute{0, 0, VK_FORMAT_R32G32B32_SFLOAT, 0};
   VkPipelineVertexInputStateCreateInfo orbitInput{VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO}; orbitInput.vertexBindingDescriptionCount = 1; orbitInput.pVertexBindingDescriptions = &orbitBinding; orbitInput.vertexAttributeDescriptionCount = 1; orbitInput.pVertexAttributeDescriptions = &orbitAttribute;
   VkPipelineInputAssemblyStateCreateInfo orbitAssembly{VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO}; orbitAssembly.topology = VK_PRIMITIVE_TOPOLOGY_LINE_STRIP;
   VkGraphicsPipelineCreateInfo orbitPipeline = gp; orbitPipeline.pStages = orbitStages; orbitPipeline.pVertexInputState = &orbitInput; orbitPipeline.pInputAssemblyState = &orbitAssembly;
-  a.Check(vkCreateGraphicsPipelines(a.device, {}, 1, &orbitPipeline, nullptr, &a.orbitPipeline), "orbit pipeline failed");
-  vkDestroyShaderModule(a.device, orbitVs, nullptr); vkDestroyShaderModule(a.device, orbitFs, nullptr);
+  VkPipeline activeOrbitPipeline{};
+  VkResult activeOrbitResult = vkCreateGraphicsPipelines(a.device, {}, 1, &orbitPipeline, nullptr, &activeOrbitPipeline);
+  vkDestroyShaderModule(a.device, orbitVs, nullptr);
+  vkDestroyShaderModule(a.device, orbitFs, nullptr);
+  if (activeOrbitResult != VK_SUCCESS && activeOrbitPipeline) vkDestroyPipeline(a.device, activeOrbitPipeline, nullptr);
+  a.Check(activeOrbitResult, "orbit pipeline failed");
+  a.orbitPipeline = activeOrbitPipeline;
+  VkShaderModule previousOrbitVs{}, previousOrbitFs{};
+  try { previousOrbitVs = Shader(a, "shaders/orbit.vert.spv"); previousOrbitFs = Shader(a, "shaders/orbit_previous.frag.spv"); }
+  catch (...) { if (previousOrbitVs) vkDestroyShaderModule(a.device, previousOrbitVs, nullptr); throw; }
+  orbitStages[0].module = previousOrbitVs;
+  orbitStages[1].module = previousOrbitFs;
+  VkPipeline dimOrbitPipeline{};
+  VkResult previousOrbitResult = vkCreateGraphicsPipelines(a.device, {}, 1, &orbitPipeline, nullptr, &dimOrbitPipeline);
+  vkDestroyShaderModule(a.device, previousOrbitVs, nullptr);
+  vkDestroyShaderModule(a.device, previousOrbitFs, nullptr);
+  if (previousOrbitResult != VK_SUCCESS && dimOrbitPipeline) vkDestroyPipeline(a.device, dimOrbitPipeline, nullptr);
+  a.Check(previousOrbitResult, "previous orbit pipeline failed");
+  a.previousOrbitPipeline = dimOrbitPipeline;
   a.framebuffers.resize(a.views.size());
   for (size_t i = 0; i < a.views.size(); i++) {
     VkImageView x = a.views[i];
@@ -629,6 +662,10 @@ void DestroySubmission(App &a) {
   if (a.orbitBuffer) vkDestroyBuffer(a.device, a.orbitBuffer, nullptr);
   if (a.orbitMemory) vkFreeMemory(a.device, a.orbitMemory, nullptr);
   a.orbitMapped = nullptr; a.orbitBuffer = {}; a.orbitMemory = {}; a.orbitSize = 0;
+  if (a.previousOrbitMapped) vkUnmapMemory(a.device, a.previousOrbitMemory);
+  if (a.previousOrbitBuffer) vkDestroyBuffer(a.device, a.previousOrbitBuffer, nullptr);
+  if (a.previousOrbitMemory) vkFreeMemory(a.device, a.previousOrbitMemory, nullptr);
+  a.previousOrbitMapped = nullptr; a.previousOrbitBuffer = {}; a.previousOrbitMemory = {}; a.previousOrbitSize = 0;
 }
 void Submission(App &a) {
   a.submissionSize = sizeof(NcCameraData) +
@@ -704,6 +741,16 @@ void Upload(App &a) {
     }
     std::memcpy(a.orbitMapped, a.submission->orbitVertices, needed);
   }
+  if (a.submission->previousOrbitVertexCount) {
+    auto needed = sizeof(NcOrbitLineVertex) * a.submission->previousOrbitVertexCount;
+    if (needed != a.previousOrbitSize) {
+      if (a.previousOrbitMapped) vkUnmapMemory(a.device, a.previousOrbitMemory); if (a.previousOrbitBuffer) vkDestroyBuffer(a.device, a.previousOrbitBuffer, nullptr); if (a.previousOrbitMemory) vkFreeMemory(a.device, a.previousOrbitMemory, nullptr);
+      a.previousOrbitMapped = nullptr; a.previousOrbitBuffer = {}; a.previousOrbitMemory = {}; a.previousOrbitSize = needed;
+      VkBufferCreateInfo ci{VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO}; ci.size = needed; ci.usage = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT; ci.sharingMode = VK_SHARING_MODE_EXCLUSIVE; a.Check(vkCreateBuffer(a.device, &ci, nullptr, &a.previousOrbitBuffer), "previous orbit buffer failed"); VkMemoryRequirements r; vkGetBufferMemoryRequirements(a.device, a.previousOrbitBuffer, &r);
+      VkMemoryAllocateInfo ai{VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO}; ai.allocationSize = r.size; ai.memoryTypeIndex = Memory(a, r.memoryTypeBits, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT); a.Check(vkAllocateMemory(a.device, &ai, nullptr, &a.previousOrbitMemory), "previous orbit memory failed"); a.Check(vkBindBufferMemory(a.device, a.previousOrbitBuffer, a.previousOrbitMemory, 0), "previous orbit bind failed"); a.Check(vkMapMemory(a.device, a.previousOrbitMemory, 0, needed, 0, &a.previousOrbitMapped), "previous orbit map failed");
+    }
+    std::memcpy(a.previousOrbitMapped, a.submission->previousOrbitVertices, needed);
+  }
 }
 void Commands(App &a) {
   auto q = FindQueues(a.physical, a.surface);
@@ -756,6 +803,7 @@ void Record(App &a, uint32_t image) {
     vkCmdDrawIndexed(c, m->indices, b.objectCount, 0, 0, b.firstObject);
   }
   if (a.submission->orbitVertexCount >= 2 && a.orbitBuffer) { VkDeviceSize offset = 0; vkCmdBindPipeline(c, VK_PIPELINE_BIND_POINT_GRAPHICS, a.orbitPipeline); vkCmdBindVertexBuffers(c, 0, 1, &a.orbitBuffer, &offset); vkCmdDraw(c, a.submission->orbitVertexCount, 1, 0, 0); }
+  if (a.submission->previousOrbitVertexCount >= 2 && a.previousOrbitBuffer) { VkDeviceSize offset = 0; vkCmdBindPipeline(c, VK_PIPELINE_BIND_POINT_GRAPHICS, a.previousOrbitPipeline); vkCmdBindVertexBuffers(c, 0, 1, &a.previousOrbitBuffer, &offset); vkCmdDraw(c, a.submission->previousOrbitVertexCount, 1, 0, 0); }
   vkCmdEndRenderPass(c);
   a.Check(vkEndCommandBuffer(c), "command end failed");
 }

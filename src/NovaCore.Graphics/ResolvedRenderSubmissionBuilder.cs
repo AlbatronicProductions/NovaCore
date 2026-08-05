@@ -36,6 +36,7 @@ public static class ResolvedRenderSubmissionBuilder
             destination.Add(current.RootPosition, current.RootOrientation, current.Scale, current.Mesh);
         destination.Complete();
         if (snapshot.OrbitCurve is not null && !destination.TrySetOrbitVertices(snapshot.OrbitCurve, cameraRootPosition)) return ResolvedRenderSubmissionBuildStatus.InvalidOrbitCurve;
+        if (snapshot.PreviousOrbitCurve is not null && !destination.TrySetOrbitVertices(snapshot.PreviousOrbitCurve, cameraRootPosition, true)) return ResolvedRenderSubmissionBuildStatus.InvalidOrbitCurve;
         return ResolvedRenderSubmissionBuildStatus.Success;
     }
 

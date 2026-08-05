@@ -19,7 +19,10 @@ add_custom_command(OUTPUT "${SPIRV_DIR}/orbit.vert.spv" "${SPIRV_DIR}/orbit.frag
   COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/orbit.vert" -o "${SPIRV_DIR}/orbit.vert.spv"
   COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/orbit.frag" -o "${SPIRV_DIR}/orbit.frag.spv"
   DEPENDS "${SHADER_DIR}/orbit.vert" "${SHADER_DIR}/orbit.frag")
-add_custom_target(NovaCoreShaders DEPENDS "${SPIRV_DIR}/triangle.vert.spv" "${SPIRV_DIR}/triangle.frag.spv" "${SPIRV_DIR}/orbit.vert.spv" "${SPIRV_DIR}/orbit.frag.spv")
+add_custom_command(OUTPUT "${SPIRV_DIR}/orbit_previous.frag.spv"
+  COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/orbit_previous.frag" -o "${SPIRV_DIR}/orbit_previous.frag.spv"
+  DEPENDS "${SHADER_DIR}/orbit_previous.frag")
+add_custom_target(NovaCoreShaders DEPENDS "${SPIRV_DIR}/triangle.vert.spv" "${SPIRV_DIR}/triangle.frag.spv" "${SPIRV_DIR}/orbit.vert.spv" "${SPIRV_DIR}/orbit.frag.spv" "${SPIRV_DIR}/orbit_previous.frag.spv")
 
 add_library(NovaCore.Native SHARED NovaCoreNative.cpp NovaCoreNative.h)
 add_dependencies(NovaCore.Native NovaCoreShaders)

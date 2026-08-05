@@ -28,7 +28,7 @@ internal sealed class CelestialAnalyticalScene
     private readonly ReferenceFrameId[] _sourcePath = new ReferenceFrameId[2];
     private readonly ReferenceFrameId[] _targetPath = new ReferenceFrameId[2];
     private readonly ReferenceFrameId[] _traversalPath = new ReferenceFrameId[3];
-    private readonly ResolvedRenderObject[] _objects = new ResolvedRenderObject[2];
+    private readonly ResolvedRenderObject[] _objects = new ResolvedRenderObject[3];
     private readonly Double3[] _orbitSamples = new Double3[AnalyticalOrbitSampler.VertexCount];
     private readonly UniversePosition[] _orbitPositions = new UniversePosition[AnalyticalOrbitSampler.VertexCount];
     private readonly SimulationClock _clock;
@@ -38,7 +38,10 @@ internal sealed class CelestialAnalyticalScene
     private double _orbitPitchRadians;
     private int _rateStepIndex = 5;
     private ResolvedOrbitCurve? _orbitCurve;
+    private ResolvedOrbitCurve? _previousOrbitCurve;
     private ulong _orbitCurveKey;
+    private Double3 _burnPointMetres;
+    private bool _burnVisible;
     internal int OrbitCurveBuildCount { get; private set; }
 
     private CelestialAnalyticalScene(ReferenceFrameGraph graph, SimulationClock clock, SimulationTransactionEngine transactions)
@@ -198,6 +201,7 @@ internal sealed class CelestialAnalyticalScene
 
             _objects[0] = Marker(1, root.ConvertPosition(Double3.Zero), new Double3(20d, 20d, 1d), MeshHandle.Triangle);
             _objects[1] = Marker(2, satellite.ConvertPosition(Double3.Zero), new Double3(10d, 10d, 1d), forceInvalidMesh ? MeshHandle.Invalid : MeshHandle.Triangle);
+            _objects[2] = Marker(3, _burnPointMetres, _burnVisible ? new Double3(2.5d, 2.5d, 1d) : Double3.Zero, MeshHandle.Triangle);
             if (!view.TryGetState(new CelestialBodyId(2), out var satelliteState) || satelliteState.Trajectory is not { } trajectory || !view.TryGetDefinition(trajectory.CentralBody, out var central))
             {
                 snapshot = null;
@@ -206,6 +210,7 @@ internal sealed class CelestialAnalyticalScene
             }
             var curveKey = AnalyticalOrbitSampler.ComputeIdentityKey(trajectory, central.GravitationalParameter);
             var candidateCurve = _orbitCurve;
+            var candidatePreviousCurve = _previousOrbitCurve;
             var rebuildCurve = candidateCurve is null || curveKey != _orbitCurveKey;
             if (rebuildCurve)
             {
@@ -223,13 +228,15 @@ internal sealed class CelestialAnalyticalScene
                     error = "Celestial orbit curve construction failed.";
                     return false;
                 }
+                if (_orbitCurve is not null) candidatePreviousCurve = _orbitCurve;
             }
-            if (!ResolvedRenderSnapshot.TryCreate(_objects, candidateCurve, out snapshot, out var snapshotStatus) || snapshot is null)
+            if (rebuildCurve && _orbitCurve is not null && trajectory.Epoch == ImpulseTime) { _burnPointMetres = trajectory.StateAtEpoch.Position; _burnVisible = true; _objects[2] = Marker(3, _burnPointMetres, new Double3(2.5d, 2.5d, 1d), MeshHandle.Triangle); }
+            if (!ResolvedRenderSnapshot.TryCreate(_objects, candidateCurve, candidatePreviousCurve, out snapshot, out var snapshotStatus) || snapshot is null)
             {
                 error = $"Celestial render snapshot failed: {snapshotStatus}";
                 return false;
             }
-            if (rebuildCurve) { _orbitCurve = candidateCurve; _orbitCurveKey = curveKey; OrbitCurveBuildCount++; }
+            if (rebuildCurve) { _previousOrbitCurve = candidatePreviousCurve; _orbitCurve = candidateCurve; _orbitCurveKey = curveKey; OrbitCurveBuildCount++; }
             error = string.Empty;
             return true;
         }
