@@ -18,6 +18,19 @@ internal static class RigidBodyTorqueTransactionEvaluator
         return status == RigidBodyTorqueTransactionStatus.Success ? new(status, new(end, state.Revision, subject, current, replacement)) : new(status, null);
     }
 
+    /// <summary>Pure control candidate: advances the prior authoritative state to command time, then replaces only requested torque.</summary>
+    internal static RigidBodyTorqueTransactionCreationResult TryCreateControlReplacement(SimulationStateView state, in SpacecraftTorqueCommand command)
+    {
+        if (!command.IsValid) return new(RigidBodyTorqueTransactionStatus.ReplacementInvalid, null);
+        if (!state.Spacecraft.TryGetRigidBody(command.Spacecraft, out var current)) return new(RigidBodyTorqueTransactionStatus.SubjectNotFound, null);
+        var evaluated = SpacecraftRigidBodyRotationEvaluator.TryEvaluate(current, command.Time);
+        if (!evaluated.Succeeded) return new(RigidBodyTorqueTransactionStatus.EvaluationFailed, null);
+        if (SpacecraftRigidBodyRotationState.TryCreate(command.Spacecraft, command.Time, evaluated.OrientationLocalToParent, evaluated.AngularVelocityBody, current.PrincipalInertia, command.RequestedBodyTorque, current.Model, out var replacement) != SpacecraftRigidBodyRotationEvaluationStatus.Success)
+            return new(RigidBodyTorqueTransactionStatus.ReplacementInvalid, null);
+        var status = Validate(state, command.Time, command.Spacecraft, current, replacement, false);
+        return status == RigidBodyTorqueTransactionStatus.Success ? new(status, new(command.Time, state.Revision, command.Spacecraft, current, replacement)) : new(status, null);
+    }
+
     internal static RigidBodyTorqueTransactionStatus Validate(SimulationStateView state, SimulationInstant end, SpacecraftId subject, in SpacecraftRigidBodyRotationState expected, in SpacecraftRigidBodyRotationState replacement, bool requireExpected)
     {
         if (!state.Spacecraft.TryGetRigidBody(subject, out var current)) return RigidBodyTorqueTransactionStatus.SubjectNotFound;

@@ -210,6 +210,20 @@ internal sealed class SimulationTransactionEngine
         return new(RigidBodyTorqueTransactionStatus.Success, transition);
     }
 
+    /// <summary>Commits one direct player-control replacement; it neither consumes a timeline event nor advances time.</summary>
+    internal RigidBodyTorqueTransactionResult ValidateAndCommit(RigidBodyTorqueReplacementTransaction transaction)
+    {
+        var validation = ValidateDirect(transaction);
+        if (validation != RigidBodyTorqueTransactionStatus.Success) return new(validation, null);
+        var before = _state.CreateView().Revision;
+        if (!_state.CommitSpacecraftRigidBodyReplacement(transaction.Subject, transaction.ExpectedRotation, transaction.ReplacementRotation, out var storeStatus))
+            throw new InvalidOperationException($"Validated rigid-body control replacement failed in store: {storeStatus}.");
+        var after = _state.CreateView().Revision;
+        var transition = new ProcessedRigidBodyTorqueTransition(transaction.Subject, transaction.EvaluationTime, before, after, RigidBodyTorqueTransactionEvaluator.ComputeHash(transaction.ExpectedRotation), RigidBodyTorqueTransactionEvaluator.ComputeHash(transaction.ReplacementRotation));
+        _rigidBodyTorqueHistory.Add(transition);
+        return new(RigidBodyTorqueTransactionStatus.Success, transition);
+    }
+
     private SimulationTransactionValidationResult Validate(SimulationTransaction transaction)
     {
         if (!_clock.Timeline.TryPeekPending(out var pending)) return new(SimulationTransactionValidationStatus.NoPendingEvent);
@@ -274,6 +288,16 @@ internal sealed class SimulationTransactionEngine
         var state = _state.CreateView();
         if (transaction.ExpectedStateRevision != state.Revision) return RigidBodyTorqueTransactionStatus.StateRevisionMismatch;
         if (_history.Count == _history.Capacity || _rigidBodyTorqueHistory.Count == _rigidBodyTorqueHistory.Capacity) return RigidBodyTorqueTransactionStatus.HistoryCapacityFailure;
+        if (state.Revision.Value == ulong.MaxValue) return RigidBodyTorqueTransactionStatus.StateRevisionOverflow;
+        return RigidBodyTorqueTransactionEvaluator.Validate(state, transaction.EvaluationTime, transaction.Subject, transaction.ExpectedRotation, transaction.ReplacementRotation, true);
+    }
+
+    private RigidBodyTorqueTransactionStatus ValidateDirect(RigidBodyTorqueReplacementTransaction transaction)
+    {
+        if (transaction.EvaluationTime != _clock.CurrentTime) return RigidBodyTorqueTransactionStatus.TimeMismatch;
+        var state = _state.CreateView();
+        if (transaction.ExpectedStateRevision != state.Revision) return RigidBodyTorqueTransactionStatus.StateRevisionMismatch;
+        if (_rigidBodyTorqueHistory.Count == _rigidBodyTorqueHistory.Capacity) return RigidBodyTorqueTransactionStatus.HistoryCapacityFailure;
         if (state.Revision.Value == ulong.MaxValue) return RigidBodyTorqueTransactionStatus.StateRevisionOverflow;
         return RigidBodyTorqueTransactionEvaluator.Validate(state, transaction.EvaluationTime, transaction.Subject, transaction.ExpectedRotation, transaction.ReplacementRotation, true);
     }

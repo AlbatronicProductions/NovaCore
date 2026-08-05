@@ -93,6 +93,6 @@ Progress:
 - Deterministic orbital mechanics: complete.
 - Orbit visualization: complete.
 - Spacecraft attitude: complete.
-- Spacecraft control: next milestone.
+- Spacecraft torque control: complete fixture path.
 
 NovaCore remains a focused foundation. It does not yet provide complete orbital gameplay, general physics, an ECS, a scene graph, asset tooling, or a renderer-owned world model.

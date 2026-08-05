@@ -7,6 +7,7 @@ using NovaCore.Simulation.Celestial.ReferenceFrames;
 using NovaCore.Simulation.Spacecraft;
 using NovaCore.Simulation.Spacecraft.ReferenceFrames;
 using NovaCore.Simulation.Spacecraft.Rotation;
+using NovaCore.Simulation.Spacecraft.Rotation.Transactions;
 using NovaCore.Simulation.Clock;
 using NovaCore.Simulation.Time;
 using NovaCore.Simulation.Timeline;
@@ -26,7 +27,7 @@ internal sealed class CelestialAnalyticalScene
     internal static readonly Double3 FixtureInitialAngularVelocity = new(.01d, .015d, .03d);
     // Over 5,000 s and 120 kg·m² this adds (.02, -.01, .006̅) rad/s.
     internal static readonly Double3 FixtureTorque = new(.00048d, -.00024d, .00016d);
-    private static readonly SimulationInstant TorqueEndTime = SimulationInstant.FromWholeSeconds(5_000);
+    internal const double PlayerTorqueMagnitude = .00048d;
     private static readonly SimulationInstant ImpulseTime = SimulationInstant.FromWholeSeconds(100_000);
     private static readonly SimulationRate[] RateSteps = [new(1, 1), new(10, 1), new(100, 1), new(1_000, 1), new(5_000, 1), new(SampleRate, 1), new(50_000, 1)];
 
@@ -43,6 +44,8 @@ internal sealed class CelestialAnalyticalScene
     private readonly UniversePosition[] _orbitPositions = new UniversePosition[AnalyticalOrbitSampler.VertexCount];
     private readonly SimulationClock _clock;
     private readonly SimulationTransactionEngine _transactions;
+    private readonly SpacecraftId _spacecraftId = new(1);
+    private Double3 _requestedTorque;
     private double _orbitDistance = 24d;
     private double _orbitYawRadians;
     private double _orbitPitchRadians;
@@ -98,7 +101,7 @@ internal sealed class CelestialAnalyticalScene
                 error = $"Celestial scene state failed: {celestialStatus}";
                 return false;
             }
-            if (SpacecraftRigidBodyRotationState.TryCreate(spacecraftId, SimulationInstant.Zero, DoubleQuaternion.Identity, FixtureInitialAngularVelocity, FixtureInertia, FixtureTorque, RigidBodyRotationModel.ConstantBodyTorqueV1, out var rotation) != SpacecraftRigidBodyRotationEvaluationStatus.Success)
+            if (SpacecraftRigidBodyRotationState.TryCreate(spacecraftId, SimulationInstant.Zero, DoubleQuaternion.Identity, FixtureInitialAngularVelocity, FixtureInertia, Double3.Zero, RigidBodyRotationModel.ConstantBodyTorqueV1, out var rotation) != SpacecraftRigidBodyRotationEvaluationStatus.Success)
             {
                 error = "Celestial spacecraft rigid-body state failed.";
                 return false;
@@ -111,18 +114,16 @@ internal sealed class CelestialAnalyticalScene
             graphBuilder.Add(new ReferenceFrameNode(satelliteFrame, rootFrame, ReferenceFrameKind.Cce, "celestial-satellite-inertial"));
             graphBuilder.Add(new ReferenceFrameNode(new ReferenceFrameId(3), satelliteFrame, ReferenceFrameKind.Ccf, "celestial-spacecraft-body"));
             var graph = graphBuilder.Build();
-            var timeline = new SimulationTimeline(initialCapacity: 2);
+            var timeline = new SimulationTimeline(initialCapacity: 1);
             if (!SimulationEventRequest.TryCreateCelestialImpulse(new SimulationEventId(1), ImpulseTime, 0, satelliteBody, new Double3(0d, ImpulseMetresPerSecond, 0d), out var impulse) ||
-                timeline.Schedule(SimulationInstant.Zero, impulse).Status != SimulationScheduleStatus.Scheduled ||
-                !SimulationEventRequest.TryCreateRigidBodyTorque(new SimulationEventId(2), TorqueEndTime, 0, spacecraftId, out var torque) ||
-                timeline.Schedule(SimulationInstant.Zero, torque).Status != SimulationScheduleStatus.Scheduled)
+                timeline.Schedule(SimulationInstant.Zero, impulse).Status != SimulationScheduleStatus.Scheduled)
             {
                 error = "Celestial scene impulse scheduling failed.";
                 return false;
             }
 
             var clock = new SimulationClock(SimulationInstant.Zero, timeline, new SimulationRate(SampleRate, 1));
-            var transactions = new SimulationTransactionEngine(clock, new SimulationState(celestial, spacecraft), initialHistoryCapacity: 2);
+            var transactions = new SimulationTransactionEngine(clock, new SimulationState(celestial, spacecraft), initialHistoryCapacity: 32_768);
             var candidate = new CelestialAnalyticalScene(graph, clock, transactions);
             if (!candidate.TryPublishCandidate(false, out error)) return false;
             scene = candidate;
@@ -137,6 +138,9 @@ internal sealed class CelestialAnalyticalScene
     }
 
     public bool TryAdvanceByHostDuration(SimulationDuration hostDuration, out string error)
+        => TryAdvanceByHostDuration(hostDuration, default, out error);
+
+    public bool TryAdvanceByHostDuration(SimulationDuration hostDuration, in NativeInputState input, out string error)
     {
         var host = _clock.AdvanceByHostDuration(hostDuration);
         if (host.Reason is SimulationHostAdvanceStopReason.Paused or SimulationHostAdvanceStopReason.NoWork)
@@ -156,8 +160,30 @@ internal sealed class CelestialAnalyticalScene
             error = $"Celestial clock execution failed: {service.Reason}";
             return false;
         }
+        if (!TryApplyTorqueControl(input, out error)) return false;
         return TryPublishCandidate(false, out error);
     }
+
+    private bool TryApplyTorqueControl(in NativeInputState input, out string error)
+    {
+        var command = CreateTorqueCommand(input);
+        // Holding torque rebases at each simulation update; releasing commits zero exactly once.
+        if (command.RequestedBodyTorque == _requestedTorque && command.RequestedBodyTorque == Double3.Zero) { error = string.Empty; return true; }
+        var candidate = RigidBodyTorqueTransactionEvaluator.TryCreateControlReplacement(_transactions.State, command);
+        if (candidate.Status == RigidBodyTorqueTransactionStatus.ReplacementNoOp) { _requestedTorque = command.RequestedBodyTorque; error = string.Empty; return true; }
+        if (!candidate.Succeeded || candidate.Transaction is null) { error = $"Spacecraft torque candidate failed: {candidate.Status}"; return false; }
+        var committed = _transactions.ValidateAndCommit(candidate.Transaction.Value);
+        if (!committed.Committed) { error = $"Spacecraft torque commit failed: {committed.Status}"; return false; }
+        _requestedTorque = command.RequestedBodyTorque; error = string.Empty; return true;
+    }
+
+    private SpacecraftTorqueCommand CreateTorqueCommand(in NativeInputState input) => new(
+        _spacecraftId,
+        new Double3(
+            ((input.MoveForward != 0 ? 1d : 0d) - (input.MoveBackward != 0 ? 1d : 0d)) * PlayerTorqueMagnitude,
+            ((input.MoveLeft != 0 ? 1d : 0d) - (input.MoveRight != 0 ? 1d : 0d)) * PlayerTorqueMagnitude,
+            ((input.MoveDown != 0 ? 1d : 0d) - (input.MoveUp != 0 ? 1d : 0d)) * PlayerTorqueMagnitude),
+        _clock.CurrentTime);
 
     internal void ApplyPresentationInput(CameraState camera, in NativeInputState input, out bool rateChanged, out bool pauseChanged)
     {

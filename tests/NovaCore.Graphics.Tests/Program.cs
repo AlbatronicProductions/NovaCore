@@ -18,9 +18,27 @@ var tests = new (string, Action)[]
     ("Static reference-frame fixture transport", StaticReferenceFrameFixtureTransportTest),
     ("Dynamic reference-frame fixture publication", DynamicReferenceFrameFixturePublicationTest),
     ("Celestial analytical fixture publication", CelestialAnalyticalFixturePublicationTest),
+    ("Celestial player torque controls", CelestialPlayerTorqueControlsTest),
     ("Camera snapshot allocation", CameraSnapshotAllocationTest),
 };
 foreach (var (name, test) in tests) { test(); Console.WriteLine($"PASS {name}"); }
+
+static void CelestialPlayerTorqueControlsTest()
+{
+    static DoubleQuaternion Advance(NativeInputState input)
+    {
+        Check(CelestialAnalyticalScene.TryCreate(out var scene, out var error) && scene is not null, $"player torque scene: {error}");
+        Check(scene!.TryAdvanceByHostDuration(SimulationDuration.FromTicks(1), input, out error), $"player torque input: {error}");
+        Check(scene.TryAdvanceByHostDuration(SimulationDuration.FromTicks(1), default, out error), $"player torque release: {error}");
+        return scene.CurrentSnapshot.Objects[1].RootOrientation;
+    }
+    var w = Advance(new NativeInputState { MoveForward = 1 }); var s = Advance(new NativeInputState { MoveBackward = 1 });
+    var a = Advance(new NativeInputState { MoveLeft = 1 }); var d = Advance(new NativeInputState { MoveRight = 1 });
+    var q = Advance(new NativeInputState { MoveDown = 1 }); var e = Advance(new NativeInputState { MoveUp = 1 });
+    var neutral = Advance(default); var cancelled = Advance(new NativeInputState { MoveForward = 1, MoveBackward = 1 });
+    Check(w != s && a != d && q != e, "opposed pitch/yaw/roll inputs produce opposite authoritative torque states");
+    Check(cancelled == neutral, "opposing inputs cancel");
+}
 
 static void MeshHandleTest() { Check(!MeshHandle.Invalid.IsValid, "zero invalid"); Check(MeshHandle.Triangle.IsValid, "triangle valid"); }
 static void LayoutTest()

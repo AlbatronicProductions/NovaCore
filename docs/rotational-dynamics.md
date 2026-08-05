@@ -19,4 +19,4 @@ Evaluation uses deterministic fixed-step RK4: full substeps are exactly 10,000 s
 
 The sample fixture starts with spherical inertia `(120, 120, 120) kg·m²`, body angular velocity `(.01, .015, .03) rad/s`, and constant body torque `(.00048, -.00024, .00016) N·m`. Over the fixed 5,000-second interval this adds approximately `(.02, -.01, .0067) rad/s`, then the exact event commits a torque-free replacement. These calm values are fixture-only presentation, not player control.
 
-Extreme-duration and high-warp rotational propagation, structure-preserving integration, torque controls, RCS, inertia-from-geometry, propellant, reaction wheels, and SAS remain deferred.
+In `--scene=celestial`, W/S request positive/negative body-X pitch torque, A/D request positive/negative body-Y yaw torque, and Q/E request positive/negative body-Z roll torque. Holding keys rebases an authoritative exact-time replacement each simulation update; releasing them commits zero requested torque. This is a one-spacecraft fixture control path only. RCS, inertia-from-geometry, propellant, reaction wheels, and SAS remain deferred.
