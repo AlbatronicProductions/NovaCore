@@ -14,7 +14,7 @@ Authoritative simulation is managed C#. Native code owns only platform input and
 
 - Deterministic simulation clock and transaction-driven authoritative simulation state with immutable evaluated data.
 - Deterministic elliptic two-body orbital propagation and scheduled inertial impulses.
-- Generic immutable authored celestial-system definitions with validated root/parent hierarchies; NovaCore does not assume a fixed Solar System.
+- Generic authored celestial-system definitions and pure deterministic evaluation for fixed, circular, and elliptic two-body bodies; NovaCore does not assume a fixed Solar System.
 - Hierarchical reference-frame graph and authoritative celestial/body-frame extraction.
 - Double-precision, camera-relative rendering with a deterministic Vulkan backend.
 - Analytical orbit visualization, including a previous-orbit ghost after an impulse.

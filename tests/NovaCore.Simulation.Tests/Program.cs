@@ -30,6 +30,7 @@ var tests = new (string Name, Action Test)[]
     ("Clock execution orchestration", ClockExecutionTests),
     ("Celestial contracts", CelestialContractTests),
     ("Celestial system definitions", CelestialSystemDefinitionTests),
+    ("Celestial system evaluation", CelestialSystemEvaluationTests),
     ("Two-body propagation", TwoBodyPropagationTests),
     ("Spacecraft attitude", SpacecraftAttitudeTests),
     ("Spacecraft attitude integration", SpacecraftAttitudeIntegrationTests),
@@ -402,7 +403,7 @@ static void CelestialSystemDefinitionTests()
     var sol = CelestialSystemFixtures.SolMini; var geocentric = CelestialSystemFixtures.GeocentricDemo; var binary = CelestialSystemFixtures.BinaryDemo;
     Check(sol.Count == 3 && sol.RootBody == new CelestialBodyId(1) && sol.GetNodeInTraversalOrder(0).TrajectoryModel == CelestialTrajectoryModel.FixedBody && sol.GetNodeInTraversalOrder(2).Id == new CelestialBodyId(3), "valid Sol hierarchy has root-first deterministic traversal");
     Check(geocentric.Count == 2 && geocentric.RootBody == new CelestialBodyId(10) && geocentric.GetNodeInTraversalOrder(1).TrajectoryModel == CelestialTrajectoryModel.CircularOrbit, "valid geocentric hierarchy");
-    Check(binary.Count == 2 && binary.GetNodeInTraversalOrder(1).TrajectoryModel == CelestialTrajectoryModel.ReservedNumericalNBody, "valid binary hierarchy preserves reserved N-body selection");
+    Check(binary.Count == 2 && binary.GetNodeInTraversalOrder(1).TrajectoryModel == CelestialTrajectoryModel.CircularOrbit, "valid binary hierarchy supports authored circular evaluation");
     Check(sol.TryGetNode(new CelestialBodyId(2), out var earth) && earth.ParentId == new CelestialBodyId(1) && !sol.TryGetNode(new CelestialBodyId(99), out _), "deterministic body lookup");
 
     var nodes = new[]
@@ -430,6 +431,32 @@ static void CelestialSystemDefinitionTests()
 
     static CelestialHierarchyNode Node(ulong id, ulong? parent, long frame, CelestialTrajectoryModel model) => new(new CelestialBodyDefinition(new(id), parent is { } value ? new CelestialBodyId(value) : null, new ReferenceFrameId(frame), 1d), model);
     static void CheckSystem(CelestialHierarchyNode[] candidates, CelestialSystemValidationStatus expected, string message) => Check(!CelestialSystemDefinition.TryCreate(new CelestialSystemId(99), candidates, out var definition, out var result) && definition is null && result.Status == expected, message);
+}
+
+static void CelestialSystemEvaluationTests()
+{
+    var instant = SimulationInstant.FromWholeSeconds(12_345);
+    var solEvaluations = new ReferenceFrameEvaluation[CelestialSystemFixtures.SolMini.Count]; var solRoots = new FrameTransform[solEvaluations.Length]; var solStaging = new ReferenceFrameEvaluation[solEvaluations.Length]; var solRootStaging = new FrameTransform[solEvaluations.Length];
+    var geocentricEvaluations = new ReferenceFrameEvaluation[CelestialSystemFixtures.GeocentricDemo.Count]; var geocentricRoots = new FrameTransform[geocentricEvaluations.Length]; var geocentricStaging = new ReferenceFrameEvaluation[geocentricEvaluations.Length]; var geocentricRootStaging = new FrameTransform[geocentricEvaluations.Length];
+    var binaryEvaluations = new ReferenceFrameEvaluation[CelestialSystemFixtures.BinaryDemo.Count]; var binaryRoots = new FrameTransform[binaryEvaluations.Length]; var binaryStaging = new ReferenceFrameEvaluation[binaryEvaluations.Length]; var binaryRootStaging = new FrameTransform[binaryEvaluations.Length];
+    var sol = CelestialSystemEvaluator.TryEvaluateSystem(CelestialSystemFixtures.SolMini, instant, solEvaluations, solRoots, solStaging, solRootStaging);
+    var geocentric = CelestialSystemEvaluator.TryEvaluateSystem(CelestialSystemFixtures.GeocentricDemo, instant, geocentricEvaluations, geocentricRoots, geocentricStaging, geocentricRootStaging);
+    var binary = CelestialSystemEvaluator.TryEvaluateSystem(CelestialSystemFixtures.BinaryDemo, instant, binaryEvaluations, binaryRoots, binaryStaging, binaryRootStaging);
+    Check(sol.Succeeded && geocentric.Succeeded && binary.Succeeded, "Kepler and circular evaluator dispatch succeeds for all authored fixtures");
+    var unsupportedNodes = new[] { new CelestialHierarchyNode(new(new(900), null, new ReferenceFrameId(900), 1d), CelestialTrajectoryModel.FixedBody), new CelestialHierarchyNode(new(new(901), new CelestialBodyId(900), new ReferenceFrameId(901), 1d), CelestialTrajectoryModel.ReservedNumericalNBody) };
+    var unsupportedOutput = new ReferenceFrameEvaluation[2]; var unsupportedRoots = new FrameTransform[2]; var unsupportedStaging = new ReferenceFrameEvaluation[2]; var unsupportedRootStaging = new FrameTransform[2];
+    Check(CelestialSystemDefinition.TryCreate(new(900), unsupportedNodes, out var unsupported, out _) && unsupported is not null && CelestialSystemEvaluator.TryEvaluateSystem(unsupported, instant, unsupportedOutput, unsupportedRoots, unsupportedStaging, unsupportedRootStaging).Status == CelestialSystemEvaluationStatus.UnsupportedTrajectoryModel && unsupportedOutput[0] == default, "reserved numerical model rejects without publication");
+    Check(solEvaluations[0].Frame == new ReferenceFrameId(1) && solEvaluations[0].Value.LocalToParent == FrameTransform.Identity && solEvaluations[1].Frame == new ReferenceFrameId(2) && solRoots[2].Translation != solEvaluations[2].Value.LocalToParent.Translation, "root-first parent-before-child transform composition");
+    Check(geocentricEvaluations[0].Value.LocalToParent == FrameTransform.Identity && geocentricEvaluations[1].Value.LocalToParent.Translation.IsFinite && geocentricEvaluations[1].Value.OriginVelocityInParent.IsFinite, "fixed body and circular orbit evaluation");
+    Check(CelestialSystemEvaluator.TryEvaluateSystem(CelestialSystemFixtures.SolMini, instant, solEvaluations.AsSpan(0, 2), solRoots, solStaging, solRootStaging).Status == CelestialSystemEvaluationStatus.DestinationTooSmall, "undersized evaluated-frame destination rejection");
+    var solHash = CelestialSystemEvaluationHash.Compute(solEvaluations); var geocentricHash = CelestialSystemEvaluationHash.Compute(geocentricEvaluations); var binaryHash = CelestialSystemEvaluationHash.Compute(binaryEvaluations);
+    Check(CelestialSystemEvaluator.TryEvaluateSystem(CelestialSystemFixtures.SolMini, instant, solEvaluations, solRoots, solStaging, solRootStaging).Succeeded && CelestialSystemEvaluationHash.Compute(solEvaluations) == solHash, "SolMini repeatability");
+    Check(CelestialSystemEvaluator.TryEvaluateSystem(CelestialSystemFixtures.GeocentricDemo, instant, geocentricEvaluations, geocentricRoots, geocentricStaging, geocentricRootStaging).Succeeded && CelestialSystemEvaluationHash.Compute(geocentricEvaluations) == geocentricHash, "GeocentricDemo repeatability");
+    Check(CelestialSystemEvaluator.TryEvaluateSystem(CelestialSystemFixtures.BinaryDemo, instant, binaryEvaluations, binaryRoots, binaryStaging, binaryRootStaging).Succeeded && CelestialSystemEvaluationHash.Compute(binaryEvaluations) == binaryHash, "BinaryDemo repeatability");
+    _ = CelestialSystemEvaluator.TryEvaluateSystem(CelestialSystemFixtures.SolMini, instant, solEvaluations, solRoots, solStaging, solRootStaging); var before = GC.GetAllocatedBytesForCurrentThread(); ulong composition = 14695981039346656037UL;
+    for (var index = 0; index < 100_000; index++) { Check(CelestialSystemEvaluator.TryEvaluateSystem(CelestialSystemFixtures.SolMini, instant, solEvaluations, solRoots, solStaging, solRootStaging).Succeeded, "warm SolMini evaluation"); composition = Mix(composition, (ulong)BitConverter.DoubleToInt64Bits(solRoots[2].Translation.X)); }
+    var allocated = GC.GetAllocatedBytesForCurrentThread() - before; Check(allocated == 0 && composition != 0, "warmed system evaluation and transform composition allocate zero bytes");
+    Console.WriteLine($"Deterministic celestial-system evaluation hashes: sol=0x{solHash:X16}; geocentric=0x{geocentricHash:X16}; binary=0x{binaryHash:X16}; warm allocations={allocated} bytes");
 }
 
 static void TwoBodyPropagationTests()
