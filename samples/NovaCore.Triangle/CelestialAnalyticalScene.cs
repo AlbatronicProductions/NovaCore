@@ -27,6 +27,9 @@ internal sealed class CelestialAnalyticalScene
     // Presentation-only: deliberately calm at 1× while retaining visible multi-axis response.
     internal static readonly Double3 FixtureInitialAngularVelocity = Double3.Zero;
     internal const double PlayerTorqueMagnitude = 4d;
+    // Presentation-only lengths in authoritative metres. They do not participate in SAS evaluation.
+    internal const double BodyForwardIndicatorLengthMetres = 35_000_000d;
+    internal const double SasTargetIndicatorLengthMetres = 70_000_000d;
     internal const long SasControlIntervalTicks = 50_000;
     internal const int MaximumSasControlBoundariesPerHostUpdate = 2_048;
     internal const double SasTorqueQuantizationIncrement = .01d;
@@ -463,8 +466,14 @@ internal sealed class CelestialAnalyticalScene
             }
 
             _objects[0] = Marker(1, root.ConvertPosition(Double3.Zero), new Double3(20d, 20d, 1d), MeshHandle.Triangle);
-            _objects[1] = Marker(2, spacecraft.ConvertPosition(Double3.Zero), new Double3(12d, 4d, 1d), forceInvalidMesh ? MeshHandle.Invalid : MeshHandle.Triangle, spacecraft.SourceToTarget.Rotation);
+            var spacecraftRootPosition = spacecraft.ConvertPosition(Double3.Zero);
+            _objects[1] = Marker(2, spacecraftRootPosition, new Double3(12d, 4d, 1d), forceInvalidMesh ? MeshHandle.Invalid : MeshHandle.Triangle, spacecraft.SourceToTarget.Rotation);
             _objects[2] = Marker(3, _burnPointMetres, _burnVisible ? new Double3(2.5d, 2.5d, 1d) : Double3.Zero, MeshHandle.Triangle);
+            var bodyForward = spacecraft.SourceToTarget.Rotation.Rotate(Double3.UnitX);
+            var bodyForwardIndicator = DirectionIndicator(spacecraftRootPosition, bodyForward, BodyForwardIndicatorLengthMetres);
+            ResolvedDirectionIndicator? targetDirectionIndicator = null;
+            if (_sasMode != SpacecraftSasMode.Off && !_sasControlSuspended && TryGetPresentationSasTarget(_clock.CurrentTime, out var sasTarget))
+                targetDirectionIndicator = DirectionIndicator(spacecraftRootPosition, sasTarget.Rotate(Double3.UnitX), SasTargetIndicatorLengthMetres);
             if (!view.TryGetState(new CelestialBodyId(2), out var satelliteState) || satelliteState.Trajectory is not { } trajectory || !view.TryGetDefinition(trajectory.CentralBody, out var central))
             {
                 snapshot = null;
@@ -494,7 +503,7 @@ internal sealed class CelestialAnalyticalScene
                 if (_orbitCurve is not null) candidatePreviousCurve = _orbitCurve;
             }
             if (rebuildCurve && _orbitCurve is not null && trajectory.Epoch == ImpulseTime) { _burnPointMetres = trajectory.StateAtEpoch.Position; _burnVisible = true; _objects[2] = Marker(3, _burnPointMetres, new Double3(2.5d, 2.5d, 1d), MeshHandle.Triangle); }
-            if (!ResolvedRenderSnapshot.TryCreate(_objects, candidateCurve, candidatePreviousCurve, out snapshot, out var snapshotStatus) || snapshot is null)
+            if (!ResolvedRenderSnapshot.TryCreate(_objects, candidateCurve, candidatePreviousCurve, bodyForwardIndicator, targetDirectionIndicator, out snapshot, out var snapshotStatus) || snapshot is null)
             {
                 error = $"Celestial render snapshot failed: {snapshotStatus}";
                 return false;
@@ -513,6 +522,21 @@ internal sealed class CelestialAnalyticalScene
 
     private ResolvedRenderObject Marker(uint id, in Double3 resolvedMetres, in Double3 scale, MeshHandle mesh, DoubleQuaternion? rotation = null) =>
         new(new RenderObjectId(id), new UniversePosition(resolvedMetres / MetresPerDisplayUnit, _rootFrame), rotation ?? DoubleQuaternion.Identity, scale, mesh);
+
+    private ResolvedDirectionIndicator DirectionIndicator(in Double3 startMetres, in Double3 direction, double lengthMetres) =>
+        new(new UniversePosition(startMetres / MetresPerDisplayUnit, _rootFrame), new UniversePosition((startMetres + direction * lengthMetres) / MetresPerDisplayUnit, _rootFrame));
+
+    private bool TryGetPresentationSasTarget(SimulationInstant time, out DoubleQuaternion target)
+    {
+        if (_sasMode == SpacecraftSasMode.HoldAttitude)
+        {
+            target = _holdTarget;
+            return _hasHoldTarget;
+        }
+        return TryEvaluateSasTarget(time, out target);
+    }
+
+    internal bool TryGetPresentationSasTargetForTest(SimulationInstant time, out DoubleQuaternion target) => TryGetPresentationSasTarget(time, out target);
 
     private bool TryResolve(ReferenceFrameTransformSet transforms, ReferenceFrameId source, out ResolvedReferenceFrameTransform resolved, out string error)
     {

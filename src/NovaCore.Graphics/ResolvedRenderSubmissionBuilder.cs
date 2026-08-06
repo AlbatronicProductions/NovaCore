@@ -37,6 +37,8 @@ public static class ResolvedRenderSubmissionBuilder
         destination.Complete();
         if (snapshot.OrbitCurve is not null && !destination.TrySetOrbitVertices(snapshot.OrbitCurve, cameraRootPosition)) return ResolvedRenderSubmissionBuildStatus.InvalidOrbitCurve;
         if (snapshot.PreviousOrbitCurve is not null && !destination.TrySetOrbitVertices(snapshot.PreviousOrbitCurve, cameraRootPosition, true)) return ResolvedRenderSubmissionBuildStatus.InvalidOrbitCurve;
+        if (snapshot.BodyForwardIndicator is { } bodyForward && !destination.TrySetDirectionIndicator(bodyForward, cameraRootPosition, false)) return ResolvedRenderSubmissionBuildStatus.InvalidOrbitCurve;
+        if (snapshot.TargetDirectionIndicator is { } targetDirection && !destination.TrySetDirectionIndicator(targetDirection, cameraRootPosition, true)) return ResolvedRenderSubmissionBuildStatus.InvalidOrbitCurve;
         return ResolvedRenderSubmissionBuildStatus.Success;
     }
 

@@ -80,6 +80,8 @@ struct App {
   VkPipeline pipeline{};
   VkPipeline orbitPipeline{};
   VkPipeline previousOrbitPipeline{};
+  VkPipeline bodyForwardPipeline{};
+  VkPipeline targetDirectionPipeline{};
   std::vector<VkFramebuffer> framebuffers;
   VkCommandPool pool{};
   std::vector<VkCommandBuffer> commands;
@@ -103,6 +105,14 @@ struct App {
   VkDeviceMemory previousOrbitMemory{};
   void *previousOrbitMapped{};
   VkDeviceSize previousOrbitSize{};
+  VkBuffer bodyForwardBuffer{};
+  VkDeviceMemory bodyForwardMemory{};
+  void *bodyForwardMapped{};
+  VkDeviceSize bodyForwardSize{};
+  VkBuffer targetDirectionBuffer{};
+  VkDeviceMemory targetDirectionMemory{};
+  void *targetDirectionMapped{};
+  VkDeviceSize targetDirectionSize{};
   Mesh triangle{};
   LONG rawMouseX{}, rawMouseY{};
   LONG wheelDeltaRaw{};
@@ -411,9 +421,15 @@ void DestroySwap(App &a) {
     vkDestroyPipeline(a.device, a.orbitPipeline, nullptr);
   if (a.previousOrbitPipeline)
     vkDestroyPipeline(a.device, a.previousOrbitPipeline, nullptr);
+  if (a.bodyForwardPipeline)
+    vkDestroyPipeline(a.device, a.bodyForwardPipeline, nullptr);
+  if (a.targetDirectionPipeline)
+    vkDestroyPipeline(a.device, a.targetDirectionPipeline, nullptr);
   a.pipeline = {};
   a.orbitPipeline = {};
   a.previousOrbitPipeline = {};
+  a.bodyForwardPipeline = {};
+  a.targetDirectionPipeline = {};
   if (a.pipelineLayout)
     vkDestroyPipelineLayout(a.device, a.pipelineLayout, nullptr);
   if (a.descriptorLayout)
@@ -634,6 +650,30 @@ void Swap(App &a) {
   if (previousOrbitResult != VK_SUCCESS && dimOrbitPipeline) vkDestroyPipeline(a.device, dimOrbitPipeline, nullptr);
   a.Check(previousOrbitResult, "previous orbit pipeline failed");
   a.previousOrbitPipeline = dimOrbitPipeline;
+  VkShaderModule bodyForwardVs{}, bodyForwardFs{};
+  try { bodyForwardVs = Shader(a, "shaders/orbit.vert.spv"); bodyForwardFs = Shader(a, "shaders/body_forward.frag.spv"); }
+  catch (...) { if (bodyForwardVs) vkDestroyShaderModule(a.device, bodyForwardVs, nullptr); throw; }
+  orbitStages[0].module = bodyForwardVs;
+  orbitStages[1].module = bodyForwardFs;
+  VkPipeline bodyForwardPipeline{};
+  VkResult bodyForwardResult = vkCreateGraphicsPipelines(a.device, {}, 1, &orbitPipeline, nullptr, &bodyForwardPipeline);
+  vkDestroyShaderModule(a.device, bodyForwardVs, nullptr);
+  vkDestroyShaderModule(a.device, bodyForwardFs, nullptr);
+  if (bodyForwardResult != VK_SUCCESS && bodyForwardPipeline) vkDestroyPipeline(a.device, bodyForwardPipeline, nullptr);
+  a.Check(bodyForwardResult, "body-forward pipeline failed");
+  a.bodyForwardPipeline = bodyForwardPipeline;
+  VkShaderModule targetDirectionVs{}, targetDirectionFs{};
+  try { targetDirectionVs = Shader(a, "shaders/orbit.vert.spv"); targetDirectionFs = Shader(a, "shaders/sas_target.frag.spv"); }
+  catch (...) { if (targetDirectionVs) vkDestroyShaderModule(a.device, targetDirectionVs, nullptr); throw; }
+  orbitStages[0].module = targetDirectionVs;
+  orbitStages[1].module = targetDirectionFs;
+  VkPipeline targetDirectionPipeline{};
+  VkResult targetDirectionResult = vkCreateGraphicsPipelines(a.device, {}, 1, &orbitPipeline, nullptr, &targetDirectionPipeline);
+  vkDestroyShaderModule(a.device, targetDirectionVs, nullptr);
+  vkDestroyShaderModule(a.device, targetDirectionFs, nullptr);
+  if (targetDirectionResult != VK_SUCCESS && targetDirectionPipeline) vkDestroyPipeline(a.device, targetDirectionPipeline, nullptr);
+  a.Check(targetDirectionResult, "SAS target pipeline failed");
+  a.targetDirectionPipeline = targetDirectionPipeline;
   a.framebuffers.resize(a.views.size());
   for (size_t i = 0; i < a.views.size(); i++) {
     VkImageView x = a.views[i];
@@ -669,6 +709,14 @@ void DestroySubmission(App &a) {
   if (a.previousOrbitBuffer) vkDestroyBuffer(a.device, a.previousOrbitBuffer, nullptr);
   if (a.previousOrbitMemory) vkFreeMemory(a.device, a.previousOrbitMemory, nullptr);
   a.previousOrbitMapped = nullptr; a.previousOrbitBuffer = {}; a.previousOrbitMemory = {}; a.previousOrbitSize = 0;
+  if (a.bodyForwardMapped) vkUnmapMemory(a.device, a.bodyForwardMemory);
+  if (a.bodyForwardBuffer) vkDestroyBuffer(a.device, a.bodyForwardBuffer, nullptr);
+  if (a.bodyForwardMemory) vkFreeMemory(a.device, a.bodyForwardMemory, nullptr);
+  a.bodyForwardMapped = nullptr; a.bodyForwardBuffer = {}; a.bodyForwardMemory = {}; a.bodyForwardSize = 0;
+  if (a.targetDirectionMapped) vkUnmapMemory(a.device, a.targetDirectionMemory);
+  if (a.targetDirectionBuffer) vkDestroyBuffer(a.device, a.targetDirectionBuffer, nullptr);
+  if (a.targetDirectionMemory) vkFreeMemory(a.device, a.targetDirectionMemory, nullptr);
+  a.targetDirectionMapped = nullptr; a.targetDirectionBuffer = {}; a.targetDirectionMemory = {}; a.targetDirectionSize = 0;
 }
 void Submission(App &a) {
   a.submissionSize = sizeof(NcCameraData) +
@@ -754,6 +802,26 @@ void Upload(App &a) {
     }
     std::memcpy(a.previousOrbitMapped, a.submission->previousOrbitVertices, needed);
   }
+  if (a.submission->bodyForwardVertexCount) {
+    auto needed = sizeof(NcOrbitLineVertex) * a.submission->bodyForwardVertexCount;
+    if (needed != a.bodyForwardSize) {
+      if (a.bodyForwardMapped) vkUnmapMemory(a.device, a.bodyForwardMemory); if (a.bodyForwardBuffer) vkDestroyBuffer(a.device, a.bodyForwardBuffer, nullptr); if (a.bodyForwardMemory) vkFreeMemory(a.device, a.bodyForwardMemory, nullptr);
+      a.bodyForwardMapped = nullptr; a.bodyForwardBuffer = {}; a.bodyForwardMemory = {}; a.bodyForwardSize = needed;
+      VkBufferCreateInfo ci{VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO}; ci.size = needed; ci.usage = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT; ci.sharingMode = VK_SHARING_MODE_EXCLUSIVE; a.Check(vkCreateBuffer(a.device, &ci, nullptr, &a.bodyForwardBuffer), "body-forward buffer failed"); VkMemoryRequirements r; vkGetBufferMemoryRequirements(a.device, a.bodyForwardBuffer, &r);
+      VkMemoryAllocateInfo ai{VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO}; ai.allocationSize = r.size; ai.memoryTypeIndex = Memory(a, r.memoryTypeBits, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT); a.Check(vkAllocateMemory(a.device, &ai, nullptr, &a.bodyForwardMemory), "body-forward memory failed"); a.Check(vkBindBufferMemory(a.device, a.bodyForwardBuffer, a.bodyForwardMemory, 0), "body-forward bind failed"); a.Check(vkMapMemory(a.device, a.bodyForwardMemory, 0, needed, 0, &a.bodyForwardMapped), "body-forward map failed");
+    }
+    std::memcpy(a.bodyForwardMapped, a.submission->bodyForwardVertices, needed);
+  }
+  if (a.submission->targetDirectionVertexCount) {
+    auto needed = sizeof(NcOrbitLineVertex) * a.submission->targetDirectionVertexCount;
+    if (needed != a.targetDirectionSize) {
+      if (a.targetDirectionMapped) vkUnmapMemory(a.device, a.targetDirectionMemory); if (a.targetDirectionBuffer) vkDestroyBuffer(a.device, a.targetDirectionBuffer, nullptr); if (a.targetDirectionMemory) vkFreeMemory(a.device, a.targetDirectionMemory, nullptr);
+      a.targetDirectionMapped = nullptr; a.targetDirectionBuffer = {}; a.targetDirectionMemory = {}; a.targetDirectionSize = needed;
+      VkBufferCreateInfo ci{VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO}; ci.size = needed; ci.usage = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT; ci.sharingMode = VK_SHARING_MODE_EXCLUSIVE; a.Check(vkCreateBuffer(a.device, &ci, nullptr, &a.targetDirectionBuffer), "SAS target buffer failed"); VkMemoryRequirements r; vkGetBufferMemoryRequirements(a.device, a.targetDirectionBuffer, &r);
+      VkMemoryAllocateInfo ai{VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO}; ai.allocationSize = r.size; ai.memoryTypeIndex = Memory(a, r.memoryTypeBits, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT); a.Check(vkAllocateMemory(a.device, &ai, nullptr, &a.targetDirectionMemory), "SAS target memory failed"); a.Check(vkBindBufferMemory(a.device, a.targetDirectionBuffer, a.targetDirectionMemory, 0), "SAS target bind failed"); a.Check(vkMapMemory(a.device, a.targetDirectionMemory, 0, needed, 0, &a.targetDirectionMapped), "SAS target map failed");
+    }
+    std::memcpy(a.targetDirectionMapped, a.submission->targetDirectionVertices, needed);
+  }
 }
 void Commands(App &a) {
   auto q = FindQueues(a.physical, a.surface);
@@ -807,6 +875,8 @@ void Record(App &a, uint32_t image) {
   }
   if (a.submission->orbitVertexCount >= 2 && a.orbitBuffer) { VkDeviceSize offset = 0; vkCmdBindPipeline(c, VK_PIPELINE_BIND_POINT_GRAPHICS, a.orbitPipeline); vkCmdBindVertexBuffers(c, 0, 1, &a.orbitBuffer, &offset); vkCmdDraw(c, a.submission->orbitVertexCount, 1, 0, 0); }
   if (a.submission->previousOrbitVertexCount >= 2 && a.previousOrbitBuffer) { VkDeviceSize offset = 0; vkCmdBindPipeline(c, VK_PIPELINE_BIND_POINT_GRAPHICS, a.previousOrbitPipeline); vkCmdBindVertexBuffers(c, 0, 1, &a.previousOrbitBuffer, &offset); vkCmdDraw(c, a.submission->previousOrbitVertexCount, 1, 0, 0); }
+  if (a.submission->bodyForwardVertexCount == 2 && a.bodyForwardBuffer) { VkDeviceSize offset = 0; vkCmdBindPipeline(c, VK_PIPELINE_BIND_POINT_GRAPHICS, a.bodyForwardPipeline); vkCmdBindVertexBuffers(c, 0, 1, &a.bodyForwardBuffer, &offset); vkCmdDraw(c, 2, 1, 0, 0); }
+  if (a.submission->targetDirectionVertexCount == 2 && a.targetDirectionBuffer) { VkDeviceSize offset = 0; vkCmdBindPipeline(c, VK_PIPELINE_BIND_POINT_GRAPHICS, a.targetDirectionPipeline); vkCmdBindVertexBuffers(c, 0, 1, &a.targetDirectionBuffer, &offset); vkCmdDraw(c, 2, 1, 0, 0); }
   vkCmdEndRenderPass(c);
   a.Check(vkEndCommandBuffer(c), "command end failed");
 }

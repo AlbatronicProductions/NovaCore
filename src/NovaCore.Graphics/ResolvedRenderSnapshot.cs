@@ -23,12 +23,14 @@ public sealed class ResolvedRenderSnapshot
 {
     private readonly ResolvedRenderObject[] _objects;
 
-    private ResolvedRenderSnapshot(ReferenceFrameId rootFrame, ResolvedRenderObject[] objects, ResolvedOrbitCurve? orbitCurve, ResolvedOrbitCurve? previousOrbitCurve)
+    private ResolvedRenderSnapshot(ReferenceFrameId rootFrame, ResolvedRenderObject[] objects, ResolvedOrbitCurve? orbitCurve, ResolvedOrbitCurve? previousOrbitCurve, ResolvedDirectionIndicator? bodyForwardIndicator, ResolvedDirectionIndicator? targetDirectionIndicator)
     {
         RootFrame = rootFrame;
         _objects = objects;
         OrbitCurve = orbitCurve;
         PreviousOrbitCurve = previousOrbitCurve;
+        BodyForwardIndicator = bodyForwardIndicator;
+        TargetDirectionIndicator = targetDirectionIndicator;
     }
 
     public ReferenceFrameId RootFrame { get; }
@@ -37,11 +39,16 @@ public sealed class ResolvedRenderSnapshot
     public ResolvedOrbitCurve? OrbitCurve { get; }
     /// <summary>Optional single pre-transition curve; derived presentation only.</summary>
     public ResolvedOrbitCurve? PreviousOrbitCurve { get; }
+    /// <summary>Optional derived body-forward overlay; never authoritative simulation state.</summary>
+    public ResolvedDirectionIndicator? BodyForwardIndicator { get; }
+    /// <summary>Optional derived target-direction overlay; never authoritative guidance state.</summary>
+    public ResolvedDirectionIndicator? TargetDirectionIndicator { get; }
 
     /// <summary>Copies validated caller input once, preserving its explicit declaration order.</summary>
-    public static bool TryCreate(ReadOnlySpan<ResolvedRenderObject> objects, out ResolvedRenderSnapshot? snapshot, out ResolvedRenderSnapshotStatus status) => TryCreate(objects, null, null, out snapshot, out status);
-    public static bool TryCreate(ReadOnlySpan<ResolvedRenderObject> objects, ResolvedOrbitCurve? orbitCurve, out ResolvedRenderSnapshot? snapshot, out ResolvedRenderSnapshotStatus status) => TryCreate(objects, orbitCurve, null, out snapshot, out status);
-    public static bool TryCreate(ReadOnlySpan<ResolvedRenderObject> objects, ResolvedOrbitCurve? orbitCurve, ResolvedOrbitCurve? previousOrbitCurve, out ResolvedRenderSnapshot? snapshot, out ResolvedRenderSnapshotStatus status)
+    public static bool TryCreate(ReadOnlySpan<ResolvedRenderObject> objects, out ResolvedRenderSnapshot? snapshot, out ResolvedRenderSnapshotStatus status) => TryCreate(objects, null, null, null, null, out snapshot, out status);
+    public static bool TryCreate(ReadOnlySpan<ResolvedRenderObject> objects, ResolvedOrbitCurve? orbitCurve, out ResolvedRenderSnapshot? snapshot, out ResolvedRenderSnapshotStatus status) => TryCreate(objects, orbitCurve, null, null, null, out snapshot, out status);
+    public static bool TryCreate(ReadOnlySpan<ResolvedRenderObject> objects, ResolvedOrbitCurve? orbitCurve, ResolvedOrbitCurve? previousOrbitCurve, out ResolvedRenderSnapshot? snapshot, out ResolvedRenderSnapshotStatus status) => TryCreate(objects, orbitCurve, previousOrbitCurve, null, null, out snapshot, out status);
+    public static bool TryCreate(ReadOnlySpan<ResolvedRenderObject> objects, ResolvedOrbitCurve? orbitCurve, ResolvedOrbitCurve? previousOrbitCurve, ResolvedDirectionIndicator? bodyForwardIndicator, ResolvedDirectionIndicator? targetDirectionIndicator, out ResolvedRenderSnapshot? snapshot, out ResolvedRenderSnapshotStatus status)
     {
         snapshot = null;
         if (objects.Length == 0) { status = ResolvedRenderSnapshotStatus.Empty; return false; }
@@ -57,8 +64,9 @@ public sealed class ResolvedRenderSnapshot
         }
 
         var copy = objects.ToArray();
-        if ((orbitCurve is not null && orbitCurve.RootFrame != rootFrame) || (previousOrbitCurve is not null && previousOrbitCurve.RootFrame != rootFrame)) { status = ResolvedRenderSnapshotStatus.MixedRootFrame; return false; }
-        snapshot = new ResolvedRenderSnapshot(rootFrame, copy, orbitCurve, previousOrbitCurve);
+        if ((orbitCurve is not null && orbitCurve.RootFrame != rootFrame) || (previousOrbitCurve is not null && previousOrbitCurve.RootFrame != rootFrame) ||
+            (bodyForwardIndicator is { } bodyForward && !bodyForward.IsValid(rootFrame)) || (targetDirectionIndicator is { } targetDirection && !targetDirection.IsValid(rootFrame))) { status = ResolvedRenderSnapshotStatus.MixedRootFrame; return false; }
+        snapshot = new ResolvedRenderSnapshot(rootFrame, copy, orbitCurve, previousOrbitCurve, bodyForwardIndicator, targetDirectionIndicator);
         status = ResolvedRenderSnapshotStatus.Success;
         return true;
     }

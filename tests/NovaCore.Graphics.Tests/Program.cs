@@ -22,6 +22,7 @@ var tests = new (string, Action)[]
     ("Celestial player torque controls", CelestialPlayerTorqueControlsTest),
     ("Celestial SAS mode selection", CelestialSasModeSelectionTest),
     ("Celestial SAS control cadence", CelestialSasControlCadenceTest),
+    ("Celestial SAS diagnostic indicators", CelestialSasDiagnosticIndicatorsTest),
     ("Camera snapshot allocation", CameraSnapshotAllocationTest),
 };
 foreach (var (name, test) in tests) { test(); Console.WriteLine($"PASS {name}"); }
@@ -186,6 +187,52 @@ static void CelestialSasControlCadenceTest()
     Check(highWarp.TryAdvanceByHostDuration(SimulationDuration.FromTicks(1), new NativeInputState { SasModeKey = 1 }, out highWarpError) && highWarp.SasMode == SpacecraftSasMode.Off && !highWarp.SasControlSuspended && highWarp.TorqueTransitionCount == activeTransitions + 1, $"off while suspended clears without duplicate zero torque: {highWarpError}");
     _ = CelestialAnalyticalScene.QuantizeSasTorque(Double3.UnitX); var allocationBefore = GC.GetAllocatedBytesForCurrentThread(); for (var index = 0; index < 100_000; index++) _ = CelestialAnalyticalScene.QuantizeSasTorque(new Double3(index * .001d, -index * .001d, 0d)); Check(GC.GetAllocatedBytesForCurrentThread() == allocationBefore, "warmed SAS torque quantization allocates zero bytes");
     Console.WriteLine($"Deterministic SAS cadence hash: 0x{cadenceHash:X16}; quantization allocation=0 bytes");
+}
+
+static void CelestialSasDiagnosticIndicatorsTest()
+{
+    static void SetSupportedRate(CelestialAnalyticalScene scene, CameraState camera)
+    {
+        for (var index = 0; index < 4; index++) scene.ApplyPresentationInput(camera, new NativeInputState { RateDecrease = 1 }, out _, out _);
+    }
+    Check(CelestialAnalyticalScene.TryCreate(out var scene, out var createError) && scene is not null, $"SAS indicator fixture: {createError}");
+    var root = new ReferenceFrameId(1); var camera = new CameraState(new FramePosition(root, CelestialAnalyticalScene.Camera.Position), DoubleQuaternion.Identity, CelestialAnalyticalScene.Camera.Projection, CameraMode.Free);
+    var initial = scene!.CurrentSnapshot;
+    Check(initial.BodyForwardIndicator is { } initialForward && initial.TargetDirectionIndicator is null, "body-forward is visible while SAS-off target is hidden");
+    initialForward = initial.BodyForwardIndicator.GetValueOrDefault();
+    var expectedForward = initial.Objects[1].RootOrientation.Rotate(Double3.UnitX);
+    CheckNear((initialForward.End.Value - initialForward.Start.Value).Normalized(), expectedForward, "body-forward endpoint matches q.Rotate(+X)");
+
+    SetSupportedRate(scene, camera);
+    Check(scene.TryAdvanceByHostDuration(SimulationDuration.FromTicks(1), new NativeInputState { SasModeKey = 3 }, out var advanceError), $"select prograde for indicators: {advanceError}");
+    var prograde = scene.CurrentSnapshot;
+    Check(prograde.BodyForwardIndicator is not null && prograde.TargetDirectionIndicator is { } target, "active valid SAS publishes both indicators");
+    target = prograde.TargetDirectionIndicator.GetValueOrDefault();
+    Check(target.Start == prograde.BodyForwardIndicator!.Value.Start && (target.End.Value - target.Start.Value).LengthSquared > 0d, "target indicator begins at spacecraft and has direction");
+    Check(scene.TryGetPresentationSasTargetForTest(scene.CurrentTime, out var targetOrientation), "pure SAS target available");
+    CheckNear((target.End.Value - target.Start.Value).Normalized(), targetOrientation.Rotate(Double3.UnitX), "target endpoint matches selected reference direction");
+
+    Check(scene.TryAdvanceByHostDuration(SimulationDuration.FromTicks(1), new NativeInputState { SasModeKey = 2 }, out advanceError), $"select hold for indicators: {advanceError}");
+    var hold = scene.CurrentSnapshot; Check(hold.TargetDirectionIndicator is { } holdTarget && scene.HasHoldTarget, "hold target indicator visible");
+    holdTarget = hold.TargetDirectionIndicator.GetValueOrDefault();
+    CheckNear((holdTarget.End.Value - holdTarget.Start.Value).Normalized(), scene.HoldTarget.Rotate(Double3.UnitX), "hold indicator follows captured target +X");
+
+    scene.ApplyPresentationInput(camera, new NativeInputState { LookActive = 1, MouseDeltaX = 10f }, out _, out _);
+    Check(scene.TryBuildCandidateForTest(out var afterCamera, out var candidateError) && afterCamera is not null, $"camera-independent indicator candidate: {candidateError}");
+    Check(IndicatorHash(hold.BodyForwardIndicator!.Value) == IndicatorHash(afterCamera!.BodyForwardIndicator!.Value) && IndicatorHash(hold.TargetDirectionIndicator!.Value) == IndicatorHash(afterCamera.TargetDirectionIndicator!.Value), "camera movement does not alter world-space indicators");
+
+    scene.ApplyPresentationInput(camera, new NativeInputState { PauseToggle = 1 }, out _, out _);
+    Check(scene.TryAdvanceByHostDuration(SimulationDuration.FromTicks(1), default, out advanceError), $"paused indicator publication: {advanceError}");
+    Check(IndicatorHash(hold.BodyForwardIndicator!.Value) == IndicatorHash(scene.CurrentSnapshot.BodyForwardIndicator!.Value), "pause freezes authoritative body-forward orientation");
+    scene.ApplyPresentationInput(camera, new NativeInputState { PauseToggle = 1 }, out _, out _);
+    Check(scene.TryAdvanceByHostDuration(SimulationDuration.FromTicks(1), new NativeInputState { SasModeKey = 1 }, out advanceError), $"disable SAS indicators: {advanceError}");
+    Check(scene.CurrentSnapshot.TargetDirectionIndicator is null, "SAS-off hides target indicator");
+
+    Check(CelestialAnalyticalScene.TryCreate(out var replay, out var replayError) && replay is not null, $"SAS indicator replay: {replayError}"); var replayScene = replay!; var replayCamera = new CameraState(new FramePosition(root, CelestialAnalyticalScene.Camera.Position), DoubleQuaternion.Identity, CelestialAnalyticalScene.Camera.Projection, CameraMode.Free); SetSupportedRate(replayScene, replayCamera); Check(replayScene.TryAdvanceByHostDuration(SimulationDuration.FromTicks(1), new NativeInputState { SasModeKey = 3 }, out replayError), $"SAS indicator replay advance: {replayError}");
+    var forwardHash = IndicatorHash(prograde.BodyForwardIndicator!.Value); var targetHash = IndicatorHash(prograde.TargetDirectionIndicator!.Value); Check(forwardHash == IndicatorHash(replayScene.CurrentSnapshot.BodyForwardIndicator!.Value) && targetHash == IndicatorHash(replayScene.CurrentSnapshot.TargetDirectionIndicator!.Value), "indicator hashes are deterministic");
+    var submission = new RenderFrameSubmission(3, 257); var cameraRoot = new UniversePosition(CelestialAnalyticalScene.Camera.Position, root); var gpuCamera = Camera(cameraRoot); Check(ResolvedRenderSubmissionBuilder.TryBuild(prograde, gpuCamera, cameraRoot, submission) == ResolvedRenderSubmissionBuildStatus.Success && submission.BodyForwardVertexCount == 2 && submission.TargetDirectionVertexCount == 2, "indicator transport uses fixed two-vertex streams");
+    _ = ResolvedRenderSubmissionBuilder.TryBuild(prograde, gpuCamera, cameraRoot, submission); var before = GC.GetAllocatedBytesForCurrentThread(); for (var index = 0; index < 100_000; index++) Check(ResolvedRenderSubmissionBuilder.TryBuild(prograde, gpuCamera, cameraRoot, submission) == ResolvedRenderSubmissionBuildStatus.Success, "warm indicator transport"); Check(GC.GetAllocatedBytesForCurrentThread() == before, "warm indicator transport allocation");
+    Console.WriteLine($"Deterministic SAS indicator hashes: forward=0x{forwardHash:X16}; target=0x{targetHash:X16}; transport allocation=0 bytes");
 }
 
 static void MeshHandleTest() { Check(!MeshHandle.Invalid.IsValid, "zero invalid"); Check(MeshHandle.Triangle.IsValid, "triangle valid"); }
@@ -381,6 +428,7 @@ static ulong CameraHash(in GpuCameraData camera) { ulong hash = 1469598103934665
 static ulong FixtureSetupHash(ReadOnlySpan<ResolvedRenderObject> objects) { ulong hash = 14695981039346656037UL; foreach (ref readonly var value in objects) { hash = Mix(hash, value.Id.Value); hash = Mix(hash, (ulong)value.RootPosition.Frame.Value); hash = MixDouble3(hash, value.RootPosition.Value); hash = MixQuaternion(hash, value.RootOrientation); hash = MixDouble3(hash, value.Scale); hash = Mix(hash, value.Mesh.Value); } return hash; }
 static ulong DynamicSnapshotHash(SimulationInstant time, ResolvedRenderSnapshot snapshot) { ulong hash = Mix(14695981039346656037UL, (ulong)time.Ticks); return Mix(hash, FixtureSetupHash(snapshot.Objects)); }
 static ulong OrbitHash(ResolvedOrbitCurve curve) { ulong hash = 14695981039346656037UL; foreach (ref readonly var position in curve.Positions) hash = MixDouble3(hash, position.Value); return hash; }
+static ulong IndicatorHash(in ResolvedDirectionIndicator indicator) => MixDouble3(MixDouble3(14695981039346656037UL, indicator.Start.Value), indicator.End.Value);
 static ulong MixDouble3(ulong hash, in Double3 value) { hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(value.X)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(value.Y)); return Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(value.Z)); }
 static ulong MixQuaternion(ulong hash, in DoubleQuaternion value) { hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(value.X)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(value.Y)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(value.Z)); return Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(value.W)); }
 static ulong Mix(ulong hash, ulong value) => (hash ^ value) * 1099511628211UL;
