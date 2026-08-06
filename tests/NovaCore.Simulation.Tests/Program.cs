@@ -35,6 +35,7 @@ var tests = new (string Name, Action Test)[]
     ("Rigid-body rotation", RigidBodyRotationTests),
     ("Rigid-body torque transaction", RigidBodyTorqueTransactionTests),
     ("Flight reference and SAS guidance", FlightReferenceAndSasTests),
+    ("SAS sign/frame continuity proof", SasSignFrameContinuityProofTests),
     ("Analytical orbit sampling", AnalyticalOrbitSamplingTests),
     ("Celestial frame extraction", CelestialFrameExtractionTests),
     ("Celestial trajectory replacement", CelestialTrajectoryReplacementTests),
@@ -161,6 +162,84 @@ static void FlightReferenceAndSasTests()
     _ = SpacecraftSasController.TryEvaluate(DoubleQuaternion.Identity, Double3.Zero, target, inertia, config); var before = GC.GetAllocatedBytesForCurrentThread(); ulong hash = 14695981039346656037UL;
     for (var index = 0; index < 100_000; index++) { var reference = FlightReferenceEvaluator.TryEvaluate(r, v, DoubleQuaternion.Identity, FlightReferenceMode.Prograde); var t = SpacecraftSasTargetOrientation.TryCreate(reference.DirectionCarrierParent, -Double3.UnitZ, out var q); var result = SpacecraftSasController.TryEvaluate(DoubleQuaternion.Identity, Double3.Zero, q, inertia, config); Check(t == SpacecraftSasControlStatus.Success && result.Succeeded, "warm guidance"); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(result.RequestedBodyTorque.X)); }
     Check(GC.GetAllocatedBytesForCurrentThread() == before, "warm guidance allocation"); Console.WriteLine($"Flight-reference/SAS guidance hash: 0x{hash:X16}; allocation=0 bytes");
+}
+
+static void SasSignFrameContinuityProofTests()
+{
+    var inertia = new PrincipalMomentsOfInertia(1d, 1d, 1d);
+    var correction = new SpacecraftSasControllerConfiguration(new Double3(10d, 10d, 10d), Double3.Zero, new Double3(100d, 100d, 100d), 0d, 0d, .001d, .001d);
+    var damping = new SpacecraftSasControllerConfiguration(new Double3(10d, 10d, 10d), new Double3(5d, 5d, 5d), new Double3(100d, 100d, 100d), 0d, 0d, .001d, .001d);
+    ulong hash = 14695981039346656037UL;
+    foreach (var axis in new[] { Double3.UnitX, Double3.UnitY, Double3.UnitZ })
+    foreach (var angle in new[] { -.15d, .15d, -Math.PI / 2d, Math.PI / 2d })
+    {
+        var target = DoubleQuaternion.FromAxisAngle(axis, angle);
+        var result = SpacecraftSasController.TryEvaluate(DoubleQuaternion.Identity, Double3.Zero, target, inertia, correction);
+        var after = ApplyShortStep(DoubleQuaternion.Identity, Double3.Zero, result.RequestedBodyTorque, inertia);
+        var beforeError = QuaternionAngle(DoubleQuaternion.Identity, target); var afterError = QuaternionAngle(after.OrientationLocalToParent, target);
+        Check(result.Succeeded && afterError < beforeError, $"{axis} {angle:R} controller torque reduces orientation error");
+        hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(afterError)); hash = MixDouble3(hash, result.RequestedBodyTorque);
+    }
+
+    var r = new Double3(3d, 0d, 0d); var v = new Double3(0d, 4d, 0d);
+    VerifyFullPipeline(FlightReferenceMode.Prograde, Double3.UnitY, DoubleQuaternion.Identity);
+    VerifyFullPipeline(FlightReferenceMode.Normal, Double3.UnitZ, DoubleQuaternion.Identity);
+    VerifyFullPipeline(FlightReferenceMode.RadialOut, Double3.UnitX, DoubleQuaternion.FromAxisAngle(Double3.UnitZ, Math.PI / 2d));
+
+    var equivalent = DoubleQuaternion.FromAxisAngle(Double3.UnitY, Math.PI / 2d); var negativeEquivalent = new DoubleQuaternion(-equivalent.X, -equivalent.Y, -equivalent.Z, -equivalent.W);
+    var positiveResult = SpacecraftSasController.TryEvaluate(DoubleQuaternion.Identity, Double3.Zero, equivalent, inertia, correction); var negativeResult = SpacecraftSasController.TryEvaluate(DoubleQuaternion.Identity, Double3.Zero, negativeEquivalent, inertia, correction);
+    Check(positiveResult.AttitudeErrorBody == negativeResult.AttitudeErrorBody && positiveResult.RequestedBodyTorque == negativeResult.RequestedBodyTorque, "q/-q shortest-path error and torque equivalence");
+    Check(QuaternionAngle(ApplyShortStep(DoubleQuaternion.Identity, Double3.Zero, positiveResult.RequestedBodyTorque, inertia).OrientationLocalToParent, equivalent) < Math.PI / 2d, "q/-q short step follows the short path");
+    var near180 = DoubleQuaternion.FromAxisAngle(Double3.UnitY, Math.PI - 1e-9d); var near180Result = SpacecraftSasController.TryEvaluate(DoubleQuaternion.Identity, Double3.Zero, near180, inertia, correction); Check(near180Result.RequestedBodyTorque.Y > 0d && near180Result.AttitudeErrorBody.Y > 0d, "near-180 tie has deterministic positive-axis correction");
+
+    var hold = SpacecraftSasTargetOrientation.CaptureHold(DoubleQuaternion.Identity); var holdResult = SpacecraftSasController.TryEvaluate(DoubleQuaternion.Identity, new Double3(.2d, 0d, 0d), hold, inertia, damping); var damped = ApplyShortStep(DoubleQuaternion.Identity, new Double3(.2d, 0d, 0d), holdResult.RequestedBodyTorque, inertia);
+    Check(hold == SpacecraftSasTargetOrientation.CaptureHold(hold) && holdResult.RequestedBodyTorque.X < 0d && Math.Abs(damped.AngularVelocityBody.X) < .2d, "hold is stable and damps angular velocity");
+    Check(SpacecraftSasController.TryEvaluate(hold, Double3.Zero, hold, inertia, damping).RequestedBodyTorque == Double3.Zero, "hold zero error and rate requests zero torque");
+
+    var progradeJump = MeasurePlanarPath(false, out var progradeFallbacks); var radialJump = MeasurePlanarPath(true, out var radialFallbacks); var normal = CreateTarget(Double3.UnitZ); var antiNormal = CreateTarget(-Double3.UnitZ);
+    Check(progradeJump < .03d && radialJump < .03d && progradeFallbacks == 0 && radialFallbacks == 0, "planar prograde/radial target bases remain continuous without fallback");
+    Check(Double3.Dot(normal.Rotate(Double3.UnitX), Double3.UnitZ) > 1d - 1e-12d && Double3.Dot(antiNormal.Rotate(Double3.UnitX), -Double3.UnitZ) > 1d - 1e-12d, "normal and anti-normal target bases are correct");
+    var parallelJump = MeasurePreferredUpParallelPath(out var fallbackTransitions);
+    Check(parallelJump <= Math.PI / 2d + 1e-6d && fallbackTransitions == 2, "preferred-up singularity has deterministic bounded fallback transitions");
+
+    VerifyModeSwitch(FlightReferenceMode.Prograde, FlightReferenceMode.Normal); VerifyModeSwitch(FlightReferenceMode.Normal, FlightReferenceMode.RadialOut); VerifyModeSwitch(FlightReferenceMode.RadialOut, FlightReferenceMode.Retrograde);
+    _ = SpacecraftSasController.TryEvaluate(DoubleQuaternion.Identity, Double3.Zero, equivalent, inertia, correction); var before = GC.GetAllocatedBytesForCurrentThread(); for (var index = 0; index < 100_000; index++) { var result = SpacecraftSasController.TryEvaluate(DoubleQuaternion.Identity, Double3.Zero, equivalent, inertia, correction); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(result.RequestedBodyTorque.Y)); } Check(GC.GetAllocatedBytesForCurrentThread() == before, "warm SAS proof evaluation allocation");
+    Console.WriteLine($"SAS sign/frame proof: one-step 90-degree error={QuaternionAngle(ApplyShortStep(DoubleQuaternion.Identity, Double3.Zero, positiveResult.RequestedBodyTorque, inertia).OrientationLocalToParent, equivalent):E6} rad; continuity prograde={progradeJump:E6}, radial={radialJump:E6}, preferred-up={parallelJump:E6} rad; fallback transitions={fallbackTransitions}; hash=0x{hash:X16}; allocation=0 bytes");
+
+    void VerifyFullPipeline(FlightReferenceMode mode, in Double3 expected, in DoubleQuaternion current)
+    {
+        var reference = FlightReferenceEvaluator.TryEvaluate(r, v, DoubleQuaternion.Identity, mode); var target = CreateTarget(reference.DirectionCarrierParent); var result = SpacecraftSasController.TryEvaluate(current, Double3.Zero, target, inertia, correction); var after = ApplyShortStep(current, Double3.Zero, result.RequestedBodyTorque, inertia);
+        Check(reference.Succeeded && Double3.Dot(target.Rotate(Double3.UnitX), expected) > 1d - 1e-12d, $"{mode} target maps body +X into carrier target");
+        Check(QuaternionAngle(after.OrientationLocalToParent, target) < QuaternionAngle(current, target), $"{mode} full pipeline correction reduces error"); hash = MixDouble3(hash, result.RequestedBodyTorque);
+    }
+
+    void VerifyModeSwitch(FlightReferenceMode from, FlightReferenceMode to)
+    {
+        var first = CreateTarget(FlightReferenceEvaluator.TryEvaluate(r, v, DoubleQuaternion.Identity, from).DirectionCarrierParent); var second = CreateTarget(FlightReferenceEvaluator.TryEvaluate(r, v, DoubleQuaternion.Identity, to).DirectionCarrierParent); var result = SpacecraftSasController.TryEvaluate(first, Double3.Zero, second, inertia, correction); var after = ApplyShortStep(first, Double3.Zero, result.RequestedBodyTorque, inertia);
+        Check(QuaternionAngle(after.OrientationLocalToParent, second) < QuaternionAngle(first, second), $"{from}->{to} begins shortest corrective turn without unrelated roll flip"); hash = MixDouble3(hash, result.RequestedBodyTorque);
+    }
+}
+
+static DoubleQuaternion CreateTarget(in Double3 direction) { Check(SpacecraftSasTargetOrientation.TryCreate(direction, Double3.UnitZ, out var target) == SpacecraftSasControlStatus.Success, "target orientation construction"); return target; }
+static SpacecraftRigidBodyRotationEvaluationResult ApplyShortStep(in DoubleQuaternion orientation, in Double3 angularVelocity, in Double3 torque, in PrincipalMomentsOfInertia inertia)
+{
+    var id = new SpacecraftId(777); Check(SpacecraftRigidBodyRotationState.TryCreate(id, SimulationInstant.Zero, orientation, angularVelocity, inertia, torque, RigidBodyRotationModel.ConstantBodyTorqueV1, out var state) == SpacecraftRigidBodyRotationEvaluationStatus.Success, "short correction state"); var result = SpacecraftRigidBodyRotationEvaluator.TryEvaluate(state, new SimulationInstant(50_000)); Check(result.Succeeded, "short correction evaluation"); return result;
+}
+static double QuaternionAngle(in DoubleQuaternion current, in DoubleQuaternion target)
+{
+    var error = current.Conjugate() * target; if (error.W < 0d) error = new(-error.X, -error.Y, -error.Z, -error.W); return 2d * Math.Atan2(Math.Sqrt(error.X * error.X + error.Y * error.Y + error.Z * error.Z), error.W);
+}
+static double MeasurePlanarPath(bool radial, out int fallbackTransitions)
+{
+    fallbackTransitions = 0; var previous = default(DoubleQuaternion); var maximum = 0d;
+    for (var index = 0; index <= 256; index++) { var angle = Math.Tau * index / 256d; var direction = radial ? new Double3(Math.Cos(angle), Math.Sin(angle), 0d) : new Double3(-Math.Sin(angle), Math.Cos(angle), 0d); var current = CreateTarget(direction); if (index != 0) maximum = Math.Max(maximum, QuaternionAngle(previous, current)); previous = current; }
+    return maximum;
+}
+static double MeasurePreferredUpParallelPath(out int fallbackTransitions)
+{
+    fallbackTransitions = 0; var previous = default(DoubleQuaternion); var maximum = 0d; var priorUsedFallback = false;
+    for (var index = -16; index <= 16; index++) { var theta = index * 1e-7d; var direction = new Double3(Math.Sin(theta), 0d, Math.Cos(theta)); var projection = Double3.UnitZ - direction * Double3.Dot(Double3.UnitZ, direction); var usesFallback = projection.LengthSquared <= SpacecraftSasTargetOrientation.BasisMinimumSquared; var current = CreateTarget(direction); if (index != -16) { maximum = Math.Max(maximum, QuaternionAngle(previous, current)); if (usesFallback != priorUsedFallback) fallbackTransitions++; } previous = current; priorUsedFallback = usesFallback; }
+    return maximum;
 }
 
 static void RigidBodyTorqueTransactionTests()
@@ -970,6 +1049,7 @@ static SimulationEventHeader[] CreateStressHeaders(){var random=new FixedRandom(
 static void Shuffle(SimulationEventHeader[] values,ulong seed){var random=new FixedRandom(seed);for(var index=values.Length-1;index>0;index--){var other=(int)(random.Next()%(ulong)(index+1));(values[index],values[other])=(values[other],values[index]);}}
 static ulong Hash(ReadOnlySpan<SimulationEventHeader> values){ulong hash=14695981039346656037;foreach(ref readonly var value in values){hash=Mix(hash,(ulong)value.Time.Ticks);hash=Mix(hash,(uint)value.Priority);hash=Mix(hash,value.Sequence.Value);hash=Mix(hash,value.Id.Value);}return hash;}
 static ulong Mix(ulong hash,ulong value){for(var index=0;index<8;index++){hash^=(byte)value;hash*=1099511628211;value>>=8;}return hash;}
+static ulong MixDouble3(ulong hash,in Double3 value){hash=Mix(hash,(ulong)BitConverter.DoubleToInt64Bits(value.X));hash=Mix(hash,(ulong)BitConverter.DoubleToInt64Bits(value.Y));return Mix(hash,(ulong)BitConverter.DoubleToInt64Bits(value.Z));}
 static void Check(bool condition,string message){if(!condition)throw new Exception(message);}
 static void Throws<T>(Action action) where T:Exception {try{action();throw new Exception($"Expected {typeof(T).Name}.");}catch(T){}}
 struct FixedRandom(ulong state){private ulong _state=state;public ulong Next(){_state^=_state>>12;_state^=_state<<25;_state^=_state>>27;return _state*2685821657736338717UL;}}
