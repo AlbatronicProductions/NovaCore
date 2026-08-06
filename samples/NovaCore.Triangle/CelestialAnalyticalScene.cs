@@ -35,8 +35,8 @@ internal sealed class CelestialAnalyticalScene
     internal const double SasTorqueQuantizationIncrement = .01d;
     internal static readonly SimulationRate MaximumSupportedSasRate = SimulationRate.Ten;
     private static readonly SpacecraftSasControllerConfiguration SasControllerConfiguration = new(
-        new Double3(6d, 6d, 6d), new Double3(20d, 20d, 20d), new Double3(4d, 4d, 4d),
-        .001d, .001d, .005d, .005d);
+        new Double3(7.5d, 7.5d, 7.5d), new Double3(63d, 63d, 63d), new Double3(8d, 8d, 8d),
+        .002d, .002d, .01d, .01d);
     private static readonly SimulationInstant ImpulseTime = SimulationInstant.FromWholeSeconds(100_000);
     private static readonly SimulationRate[] RateSteps = [new(1, 1), new(10, 1), new(100, 1), new(1_000, 1), new(5_000, 1), new(SampleRate, 1), new(50_000, 1)];
 
@@ -60,6 +60,8 @@ internal sealed class CelestialAnalyticalScene
     private bool _hasHoldTarget;
     private SimulationInstant _nextSasControlBoundary = new(SasControlIntervalTicks);
     private Double3 _lastSasTorque;
+    private Double3 _lastRawSasTorque;
+    private SpacecraftSasControlStatus _lastSasControlStatus;
     private bool _hasSasTorqueRequest;
     private int _sasCrossedBoundaryCount;
     private bool _sasBoundaryRecoveryReported;
@@ -94,6 +96,8 @@ internal sealed class CelestialAnalyticalScene
     internal int SasCrossedBoundaryCount => _sasCrossedBoundaryCount;
     internal bool HasSasTorqueRequest => _hasSasTorqueRequest;
     internal Double3 LastSasTorque => _lastSasTorque;
+    internal Double3 LastRawSasTorque => _lastRawSasTorque;
+    internal SpacecraftSasControlStatus LastSasControlStatus => _lastSasControlStatus;
     internal SimulationInstant NextSasControlBoundary => _nextSasControlBoundary;
     internal bool SasControlSuspended => _sasControlSuspended;
     public double OrbitDistance => _orbitDistance;
@@ -102,7 +106,11 @@ internal sealed class CelestialAnalyticalScene
         new CameraProjection(Math.PI / 3d, 16d / 9d, .01d, 1_000d),
         .1d);
 
-    public static bool TryCreate(out CelestialAnalyticalScene? scene, out string error)
+    public static bool TryCreate(out CelestialAnalyticalScene? scene, out string error) => TryCreateCore(DoubleQuaternion.Identity, FixtureInitialAngularVelocity, out scene, out error);
+
+    internal static bool TryCreateForTest(in DoubleQuaternion initialOrientation, in Double3 initialAngularVelocity, out CelestialAnalyticalScene? scene, out string error) => TryCreateCore(initialOrientation, initialAngularVelocity, out scene, out error);
+
+    private static bool TryCreateCore(in DoubleQuaternion initialOrientation, in Double3 initialAngularVelocity, out CelestialAnalyticalScene? scene, out string error)
     {
         scene = null;
         try
@@ -129,7 +137,7 @@ internal sealed class CelestialAnalyticalScene
                 error = $"Celestial scene state failed: {celestialStatus}";
                 return false;
             }
-            if (SpacecraftRigidBodyRotationState.TryCreate(spacecraftId, SimulationInstant.Zero, DoubleQuaternion.Identity, FixtureInitialAngularVelocity, FixtureInertia, Double3.Zero, RigidBodyRotationModel.ConstantBodyTorqueV1, out var rotation) != SpacecraftRigidBodyRotationEvaluationStatus.Success)
+            if (SpacecraftRigidBodyRotationState.TryCreate(spacecraftId, SimulationInstant.Zero, initialOrientation, initialAngularVelocity, FixtureInertia, Double3.Zero, RigidBodyRotationModel.ConstantBodyTorqueV1, out var rotation) != SpacecraftRigidBodyRotationEvaluationStatus.Success)
             {
                 error = "Celestial spacecraft rigid-body state failed.";
                 return false;
@@ -318,6 +326,8 @@ internal sealed class CelestialAnalyticalScene
             if (!TryEvaluateSasTarget(boundary, out target)) return TryCommitSasTorque(Double3.Zero, boundary, out error);
         }
         var result = SpacecraftSasController.TryEvaluate(current.OrientationLocalToParent, current.AngularVelocityBody, target, rotation.PrincipalInertia, SasControllerConfiguration);
+        _lastSasControlStatus = result.Status;
+        _lastRawSasTorque = result.Succeeded ? result.RequestedBodyTorque : Double3.Zero;
         return result.Succeeded ? TryCommitSasTorque(QuantizeSasTorque(result.RequestedBodyTorque), boundary, out error) : TryCommitSasTorque(Double3.Zero, boundary, out error);
     }
 
@@ -537,6 +547,15 @@ internal sealed class CelestialAnalyticalScene
     }
 
     internal bool TryGetPresentationSasTargetForTest(SimulationInstant time, out DoubleQuaternion target) => TryGetPresentationSasTarget(time, out target);
+    internal bool TryGetCurrentAngularVelocityForTest(out Double3 angularVelocity)
+    {
+        angularVelocity = default;
+        if (!_transactions.State.Spacecraft.TryGetRigidBody(_spacecraftId, out var rotation)) return false;
+        var evaluated = SpacecraftRigidBodyRotationEvaluator.TryEvaluate(rotation, _clock.CurrentTime);
+        if (!evaluated.Succeeded) return false;
+        angularVelocity = evaluated.AngularVelocityBody;
+        return true;
+    }
 
     private bool TryResolve(ReferenceFrameTransformSet transforms, ReferenceFrameId source, out ResolvedReferenceFrameTransform resolved, out string error)
     {

@@ -22,6 +22,7 @@ var tests = new (string, Action)[]
     ("Celestial player torque controls", CelestialPlayerTorqueControlsTest),
     ("Celestial SAS mode selection", CelestialSasModeSelectionTest),
     ("Celestial SAS control cadence", CelestialSasControlCadenceTest),
+    ("Celestial SAS convergence", CelestialSasConvergenceTest),
     ("Celestial SAS diagnostic indicators", CelestialSasDiagnosticIndicatorsTest),
     ("Camera snapshot allocation", CameraSnapshotAllocationTest),
 };
@@ -188,6 +189,44 @@ static void CelestialSasControlCadenceTest()
     _ = CelestialAnalyticalScene.QuantizeSasTorque(Double3.UnitX); var allocationBefore = GC.GetAllocatedBytesForCurrentThread(); for (var index = 0; index < 100_000; index++) _ = CelestialAnalyticalScene.QuantizeSasTorque(new Double3(index * .001d, -index * .001d, 0d)); Check(GC.GetAllocatedBytesForCurrentThread() == allocationBefore, "warmed SAS torque quantization allocates zero bytes");
     Console.WriteLine($"Deterministic SAS cadence hash: 0x{cadenceHash:X16}; quantization allocation=0 bytes");
 }
+
+static void CelestialSasConvergenceTest()
+{
+    var progradeTarget = Target(FlightReferenceMode.Prograde); var normalTarget = Target(FlightReferenceMode.Normal); var radialTarget = Target(FlightReferenceMode.RadialOut); var retrogradeTarget = Target(FlightReferenceMode.Retrograde);
+    var progradeResult = Run(CreateOneXScene(progradeTarget * DoubleQuaternion.FromAxisAngle(Double3.UnitZ, -Math.PI / 2d), Double3.Zero), 3, 35d);
+    var normalResult = Run(CreateOneXScene(normalTarget * DoubleQuaternion.FromAxisAngle(Double3.UnitY, -Math.PI / 2d), Double3.Zero), 5, 35d);
+    var radialResult = Run(CreateOneXScene(radialTarget * DoubleQuaternion.FromAxisAngle(Double3.UnitZ, -Math.PI / 2d), Double3.Zero), 7, 35d);
+    var retrogradeResult = Run(CreateOneXScene(retrogradeTarget * DoubleQuaternion.FromAxisAngle(Double3.UnitZ, -Math.PI), Double3.Zero), 4, 55d);
+    Assert90(progradeResult, "Prograde"); Assert90(normalResult, "Normal"); Assert90(radialResult, "Radial Out");
+    Check(retrogradeResult.FinalError <= .01d && retrogradeResult.FinalRate <= .01d && retrogradeResult.SettledSeconds is > 0d and <= 55d && retrogradeResult.Crossings <= 1 && retrogradeResult.PeakOvershoot <= 8d * Math.PI / 180d, $"180-degree Retrograde converges through deterministic shortest path: {retrogradeResult}");
+    var hold = CreateOneXScene(DoubleQuaternion.Identity, new Double3(.05d, 0d, 0d)); Select(hold, 2); var holdResult = RunToSettled(hold, 20d); Check(holdResult.FinalRate <= .01d && holdResult.FinalError <= .01d, "hold damping settles without target drift");
+    var switches = CreateOneXScene(progradeTarget, Double3.Zero); Select(switches, 3); _ = RunToSettled(switches, 2d); Select(switches, 5); var switchOne = RunToSettled(switches, 55d); Select(switches, 7); var switchTwo = RunToSettled(switches, 35d); Check(switchOne.FinalError <= .01d && switchTwo.FinalError <= .01d, $"Prograde->Normal and Normal->Radial Out settle: normal={switchOne}; radial={switchTwo}");
+    var hash = Mix(Mix(Mix(Mix(Mix(Mix(14695981039346656037UL, MetricsHash(progradeResult)), MetricsHash(retrogradeResult)), MetricsHash(normalResult)), MetricsHash(radialResult)), MetricsHash(holdResult)), MetricsHash(switchTwo));
+    Console.WriteLine($"Deterministic SAS convergence hash: 0x{hash:X16}; prograde={progradeResult}; retrograde={retrogradeResult}; normal={normalResult}; radial={radialResult}; hold={holdResult}; switch-normal={switchOne}; switch-radial={switchTwo}");
+
+    static void Assert90(in SasConvergenceMetrics value, string name) => Check(value.InitialError > 1.5d && value.FinalError <= .01d && value.FinalRate <= .01d && value.SettledSeconds is > 0d and <= 35d && value.Crossings <= 1 && value.PeakOvershoot <= 5d * Math.PI / 180d, $"{name} 90-degree acquisition converges through its moving reference target: {value}");
+    static DoubleQuaternion Target(FlightReferenceMode mode) { var result = FlightReferenceEvaluator.TryEvaluate(new Double3(CelestialAnalyticalScene.OrbitRadiusMetres, 0d, 0d), new Double3(0d, Math.Sqrt(CelestialAnalyticalScene.RootMu / CelestialAnalyticalScene.OrbitRadiusMetres), 0d), DoubleQuaternion.Identity, mode); var status = SpacecraftSasTargetOrientation.TryCreate(result.DirectionCarrierParent, Double3.UnitZ, out var target); Check(result.Succeeded && status == SpacecraftSasControlStatus.Success, $"{mode} convergence target"); return target; }
+    static SasConvergenceMetrics Run(CelestialAnalyticalScene scene, uint key, double seconds) { Select(scene, key); return RunToSettled(scene, seconds); }
+    static CelestialAnalyticalScene CreateOneXScene(in DoubleQuaternion initialOrientation, in Double3 initialAngularVelocity)
+    {
+        Check(CelestialAnalyticalScene.TryCreateForTest(initialOrientation, initialAngularVelocity, out var scene, out var error) && scene is not null, $"convergence scene: {error}"); var root = new ReferenceFrameId(1); var camera = new CameraState(new FramePosition(root, CelestialAnalyticalScene.Camera.Position), DoubleQuaternion.Identity, CelestialAnalyticalScene.Camera.Projection, CameraMode.Free); for (var index = 0; index < 5; index++) scene!.ApplyPresentationInput(camera, new NativeInputState { RateDecrease = 1 }, out _, out _); Check(scene!.Rate == SimulationRate.One, "convergence fixture runs at 1x"); return scene;
+    }
+    static void Select(CelestialAnalyticalScene scene, uint key) => Check(scene.TryAdvanceByHostDuration(SimulationDuration.FromTicks(1), new NativeInputState { SasModeKey = key }, out var error), $"select SAS mode {key}: {error}");
+    static SasConvergenceMetrics RunToSettled(CelestialAnalyticalScene scene, double maximumSeconds)
+    {
+        var initial = Error(scene); var previous = initial; var peakOvershoot = 0d; var crossings = 0; var transactionStart = scene.TorqueTransitionCount; var settledAt = -1d; var settledTransactionCount = -1; var postSettle = 0;
+        for (var boundary = 1; boundary <= (int)(maximumSeconds / .05d); boundary++)
+        {
+            Check(scene.TryAdvanceByHostDuration(SimulationDuration.FromTicks(50_000), default, out var error), $"convergence boundary {boundary}: {error}"); var current = Error(scene); if (current > previous + .001d && previous < .01d) { crossings++; peakOvershoot = Math.Max(peakOvershoot, current); } previous = current;
+            if (settledAt < 0d && scene.LastSasControlStatus == SpacecraftSasControlStatus.Settled) { settledAt = boundary * .05d; settledTransactionCount = scene.TorqueTransitionCount; }
+            else if (settledTransactionCount >= 0 && scene.TorqueTransitionCount > settledTransactionCount) { postSettle += scene.TorqueTransitionCount - settledTransactionCount; settledTransactionCount = scene.TorqueTransitionCount; }
+        }
+        var rate = CurrentAngularRate(scene); return new(initial, previous, rate, peakOvershoot, crossings, settledAt, scene.TorqueTransitionCount - transactionStart, postSettle, scene.LastRawSasTorque, scene.LastSasTorque);
+    }
+    static double Error(CelestialAnalyticalScene scene) { Check(scene.TryGetPresentationSasTargetForTest(scene.CurrentTime, out var target), "convergence target"); var current = scene.CurrentSnapshot.Objects[1].RootOrientation; var error = current.Conjugate() * target; if (error.W < 0d) error = new(-error.X, -error.Y, -error.Z, -error.W); return 2d * Math.Atan2(Math.Sqrt(error.X * error.X + error.Y * error.Y + error.Z * error.Z), error.W); }
+    static double CurrentAngularRate(CelestialAnalyticalScene scene) { Check(scene.TryGetCurrentAngularVelocityForTest(out var angularVelocity), "convergence angular velocity"); return Math.Sqrt(angularVelocity.LengthSquared); }
+}
+static ulong MetricsHash(in SasConvergenceMetrics value) { var hash = Mix(14695981039346656037UL, (ulong)BitConverter.DoubleToInt64Bits(value.InitialError)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(value.FinalError)); return Mix(hash, (ulong)value.TransactionCount); }
 
 static void CelestialSasDiagnosticIndicatorsTest()
 {
@@ -441,3 +480,4 @@ readonly record struct ProjectedBounds(double MinX, double MaxX, double MinY, do
     public double CenterY => (MinY + MaxY) * .5d;
     public double PixelHeight(int height) => (MaxY - MinY) * height * .5d;
 }
+readonly record struct SasConvergenceMetrics(double InitialError, double FinalError, double FinalRate, double PeakOvershoot, int Crossings, double SettledSeconds, int TransactionCount, int PostSettleChanges, Double3 RawTorque, Double3 QuantizedTorque);
