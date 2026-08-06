@@ -57,4 +57,13 @@ internal enum CelestialSystemValidationStatus : byte
     DuplicateSampleTimestamp,
     NonMonotonicSampleTimestamp,
     OverlappingSampleRanges,
+    EmptyBodyCatalog,
+    MissingCatalogBody,
+    MissingCatalogParent,
+    InvalidBodyClassification,
+    InvalidBodyDisplayName,
+    DuplicateBodyDisplayName,
+    InvalidPhysicalProperties,
+    InvalidBodyAlias,
+    DuplicateBodyAlias,
 }

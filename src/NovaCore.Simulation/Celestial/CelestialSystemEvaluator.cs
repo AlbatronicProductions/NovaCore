@@ -18,7 +18,9 @@ internal static class CelestialSystemEvaluator
         if (!requestedArgument.TryToSimulationInstant(domainTicksPerSecond, out var requestedSolverTime)) return new(CelestialSystemEvaluationStatus.TimeMappingFailure);
         for (var index = 0; index < system.Count; index++)
         {
-            var node = system.GetNodeInTraversalOrder(index); var body = node.Body;
+            var node = system.GetNodeInTraversalOrder(index);
+            if (!system.TryGetBody(node.Id, out var body)) return new(CelestialSystemEvaluationStatus.InvalidHierarchy);
+            var parentId = body.Identity.ParentBody;
             FrameTransform local; Double3 velocity;
             if (node.TrajectoryModel == CelestialTrajectoryModel.FixedBody)
             {
@@ -27,8 +29,8 @@ internal static class CelestialSystemEvaluator
             }
             else
             {
-                if (node.ParentId is null) return new(CelestialSystemEvaluationStatus.InvalidHierarchy);
-                var parentIndex = FindParentTraversalIndex(system, index, node.ParentId.Value);
+                if (parentId is null) return new(CelestialSystemEvaluationStatus.InvalidHierarchy);
+                var parentIndex = FindParentTraversalIndex(system, index, parentId.Value);
                 if (parentIndex < 0) return new(CelestialSystemEvaluationStatus.ParentEvaluationFailed);
                 var parent = system.GetNodeInTraversalOrder(parentIndex);
                 if (node.TrajectoryModel == CelestialTrajectoryModel.ReservedNumericalNBody) return new(CelestialSystemEvaluationStatus.UnsupportedTrajectoryModel);
@@ -52,16 +54,16 @@ internal static class CelestialSystemEvaluator
                     epochState = circular.ToCartesianState();
                 }
                 else return new(CelestialSystemEvaluationStatus.UnsupportedTrajectoryModel);
-                if (!double.IsFinite(parent.Body.GravitationalParameter) || parent.Body.GravitationalParameter <= 0d) return new(CelestialSystemEvaluationStatus.InvalidConstants);
-                var propagation = UniversalVariableTwoBodyPropagator.TryEvaluate(epochState, epochSolverTime, requestedSolverTime, parent.Body.GravitationalParameter);
+                if (!system.TryGetPhysicalProperties(parent.Id, out var parentProperties) || !double.IsFinite(parentProperties.GravitationalParameter) || parentProperties.GravitationalParameter <= 0d) return new(CelestialSystemEvaluationStatus.InvalidConstants);
+                var propagation = UniversalVariableTwoBodyPropagator.TryEvaluate(epochState, epochSolverTime, requestedSolverTime, parentProperties.GravitationalParameter);
                 if (!propagation.Succeeded) return new(CelestialSystemEvaluationStatus.NumericalFailure);
                 if (!propagation.State.IsFinite) return new(CelestialSystemEvaluationStatus.NonFiniteResult);
                 local = new FrameTransform(propagation.State.Position, DoubleQuaternion.Identity); velocity = propagation.State.Velocity;
             }
         LocalResolved:
-            var root = node.ParentId is null ? local : FrameTransform.Compose(stagingRoots[FindParentTraversalIndex(system, index, node.ParentId.Value)], local);
+            var root = parentId is null ? local : FrameTransform.Compose(stagingRoots[FindParentTraversalIndex(system, index, parentId.Value)], local);
             if (!local.IsFinite || !root.IsFinite || !velocity.IsFinite) return new(CelestialSystemEvaluationStatus.NonFiniteResult);
-            staging[index] = new(body.InertialFrame, new EvaluatedReferenceFrame(local, velocity, Double3.Zero, true));
+            staging[index] = new(new ReferenceFrameId((long)body.Id.Value), new EvaluatedReferenceFrame(local, velocity, Double3.Zero, true));
             stagingRoots[index] = root;
         }
         staging[..system.Count].CopyTo(destination); stagingRoots[..system.Count].CopyTo(rootTransforms);
@@ -73,10 +75,11 @@ internal static class CelestialSystemEvaluator
         var rootSeen = false;
         for (var index = 0; index < system.Count; index++)
         {
-            var node = system.GetNodeInTraversalOrder(index); var body = node.Body;
-            if (!body.Id.IsValid || body.InertialFrame.Value == 0 || !double.IsFinite(body.GravitationalParameter) || body.GravitationalParameter <= 0d) return new(CelestialSystemEvaluationStatus.InvalidConstants);
-            if (node.ParentId is null) { if (index != 0 || rootSeen || node.TrajectoryModel != CelestialTrajectoryModel.FixedBody) return new(CelestialSystemEvaluationStatus.InvalidHierarchy); rootSeen = true; }
-            else if (!rootSeen || FindParentTraversalIndex(system, index, node.ParentId.Value) < 0) return new(CelestialSystemEvaluationStatus.InvalidHierarchy);
+            var node = system.GetNodeInTraversalOrder(index);
+            if (!system.TryGetBody(node.Id, out var body)) return new(CelestialSystemEvaluationStatus.InvalidHierarchy);
+            if (!body.Id.IsValid || !body.PhysicalProperties.IsValid) return new(CelestialSystemEvaluationStatus.InvalidConstants);
+            if (body.Identity.ParentBody is null) { if (index != 0 || rootSeen || node.TrajectoryModel != CelestialTrajectoryModel.FixedBody) return new(CelestialSystemEvaluationStatus.InvalidHierarchy); rootSeen = true; }
+            else if (!rootSeen || FindParentTraversalIndex(system, index, body.Identity.ParentBody.Value) < 0) return new(CelestialSystemEvaluationStatus.InvalidHierarchy);
         }
         return rootSeen ? new(CelestialSystemEvaluationStatus.Success) : new(CelestialSystemEvaluationStatus.InvalidHierarchy);
     }

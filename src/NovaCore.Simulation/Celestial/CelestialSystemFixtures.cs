@@ -6,6 +6,7 @@ namespace NovaCore.Simulation.Celestial;
 /// <summary>Small immutable authored fixtures. They are topology/evaluation examples, not simulation state or render content.</summary>
 internal static class CelestialSystemFixtures
 {
+    private static readonly Dictionary<ulong, (ulong? Parent, double Mu)> FixtureBodyData = new();
     private static readonly CelestialSystemTimeMapping IdentityMapping = CelestialSystemTimeMapping.Identity(new(1));
     private static readonly CelestialEphemerisMetadata FixtureMetadata = Metadata(1);
 
@@ -32,7 +33,8 @@ internal static class CelestialSystemFixtures
 
     private static CelestialSystemDefinition Create(CelestialSystemId id, CelestialHierarchyNode[] nodes, CelestialEphemerisSource[] sources, FixedBodyEphemerisPayload[] fixedBodies, CircularOrbitEphemerisPayload[] circular, TwoBodyTrajectory[] kepler)
     {
-        if (CelestialSystemDefinition.TryCreate(id, nodes, IdentityMapping, FixtureMetadata, sources, fixedBodies, circular, kepler, out var definition, out _)) return definition!;
+        var bodies = Bodies(nodes);
+        if (CelestialSystemDefinition.TryCreate(id, bodies, nodes, IdentityMapping, FixtureMetadata, sources, fixedBodies, circular, kepler, out var definition, out _)) return definition!;
         throw new InvalidOperationException("Built-in celestial-system fixture is invalid.");
     }
     private static CelestialEphemerisSource[] Sources(ulong fixedId, bool kepler, bool circular)
@@ -42,7 +44,13 @@ internal static class CelestialSystemFixtures
         if (circular) values[index] = new(new(3), CelestialTrajectoryModel.CircularOrbit, Metadata(3)); return values;
     }
     private static CelestialEphemerisMetadata Metadata(ulong source) => new(new(source), new(1), new(1), long.MinValue, long.MaxValue, new(1), new(1), new(0, 0), new(0, 0));
-    private static CelestialHierarchyNode Node(ulong id, ulong? parent, long frame, double mu, CelestialTrajectoryModel model, ulong source, int index) => new(new(new(id), parent is { } value ? new CelestialBodyId(value) : null, new ReferenceFrameId(frame), mu), new CelestialEphemerisBinding(model, new(source), index));
+    private static CelestialHierarchyNode Node(ulong id, ulong? parent, long frame, double mu, CelestialTrajectoryModel model, ulong source, int index) { FixtureBodyData[id] = (parent, mu); return new(new CelestialBodyId(id), new CelestialEphemerisBinding(model, new(source), index)); }
+    private static CelestialBodyCatalogEntry[] Bodies(ReadOnlySpan<CelestialHierarchyNode> nodes)
+    {
+        var bodies = new CelestialBodyCatalogEntry[nodes.Length];
+        for (var index = 0; index < nodes.Length; index++) { var data = FixtureBodyData[nodes[index].Id.Value]; bodies[index] = new(new(nodes[index].Id, $"Fixture-{nodes[index].Id.Value}", CelestialBodyClassification.Other, data.Parent is { } parent ? new CelestialBodyId(parent) : null, default, default, default), new(data.Mu, 0d, 0d, 0d, 0d, default, default, default)); }
+        return bodies;
+    }
     private static TwoBodyTrajectory Kepler(ulong central, double radius, double mu) => new(new(central), SimulationInstant.Zero, new(new Double3(radius, 0d, 0d), new Double3(0d, Math.Sqrt(mu / radius), 0d)), TwoBodyPropagationModel.CartesianTwoBodyV1);
     private static CircularOrbitEphemerisPayload Circular(double radius, double mu) => new(0, radius, 0d, DoubleQuaternion.Identity, mu);
     private static CelestialSystemDefinition CreateSampled()
@@ -51,7 +59,7 @@ internal static class CelestialSystemFixtures
         var sources = new[] { new CelestialEphemerisSource(new(1), CelestialTrajectoryModel.FixedBody, Metadata(1)), new CelestialEphemerisSource(new(4), CelestialTrajectoryModel.SampledEphemeris, Metadata(4)) };
         var samples = new[] { new CelestialEphemerisSample(-1_000_000, new(-1d, 1d, 0d), new(3d, -2d, 1d)), new CelestialEphemerisSample(0, new(0d, 0d, 0d), new(0d, 0d, 1d)), new CelestialEphemerisSample(1_000_000, new(1d, 1d, 1d), new(3d, 2d, 1d)), new CelestialEphemerisSample(2_000_000, new(8d, 4d, 2d), new(12d, 4d, 1d)) };
         var payload = new SampledEphemerisPayload(new(1), 0, samples.Length, SampledEphemerisInterpolationModel.CubicHermitePositionVelocityV1, -1_000_000, 2_000_000);
-        if (CelestialSystemDefinition.TryCreate(new(4), nodes, IdentityMapping, FixtureMetadata, sources, [FixedBodyEphemerisPayload.Identity], [], [], [payload], samples, out var definition, out _)) return definition!;
+        if (CelestialSystemDefinition.TryCreate(new(4), Bodies(nodes), nodes, IdentityMapping, FixtureMetadata, sources, [FixedBodyEphemerisPayload.Identity], [], [], [payload], samples, out var definition, out _)) return definition!;
         throw new InvalidOperationException("Built-in sampled fixture is invalid.");
     }
 }

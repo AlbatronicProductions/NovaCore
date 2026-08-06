@@ -30,6 +30,7 @@ var tests = new (string Name, Action Test)[]
     ("Clock execution orchestration", ClockExecutionTests),
     ("Celestial contracts", CelestialContractTests),
     ("Celestial system definitions", CelestialSystemDefinitionTests),
+    ("Celestial body catalog", CelestialBodyCatalogTests),
     ("Celestial system time and provenance", CelestialSystemTimeAndProvenanceTests),
     ("Celestial ephemeris catalogs", CelestialEphemerisCatalogTests),
     ("Celestial system evaluation", CelestialSystemEvaluationTests),
@@ -406,7 +407,7 @@ static void CelestialSystemDefinitionTests()
     Check(sol.Count == 3 && sol.RootBody == new CelestialBodyId(1) && sol.GetNodeInTraversalOrder(0).TrajectoryModel == CelestialTrajectoryModel.FixedBody && sol.GetNodeInTraversalOrder(2).Id == new CelestialBodyId(3), "valid Sol hierarchy has root-first deterministic traversal");
     Check(geocentric.Count == 2 && geocentric.RootBody == new CelestialBodyId(10) && geocentric.GetNodeInTraversalOrder(1).TrajectoryModel == CelestialTrajectoryModel.CircularOrbit, "valid geocentric hierarchy");
     Check(binary.Count == 2 && binary.GetNodeInTraversalOrder(1).TrajectoryModel == CelestialTrajectoryModel.CircularOrbit, "valid binary hierarchy supports authored circular evaluation");
-    Check(sol.TryGetNode(new CelestialBodyId(2), out var earth) && earth.ParentId == new CelestialBodyId(1) && !sol.TryGetNode(new CelestialBodyId(99), out _), "deterministic body lookup");
+    Check(sol.TryGetBody(new CelestialBodyId(2), out var earth) && earth.Identity.ParentBody == new CelestialBodyId(1) && !sol.TryGetBody(new CelestialBodyId(99), out _), "deterministic body lookup");
 
     var nodes = new[]
     {
@@ -421,7 +422,7 @@ static void CelestialSystemDefinitionTests()
 
     CheckSystem([Node(1, null, 1, CelestialTrajectoryModel.FixedBody), Node(1, 2, 2, CelestialTrajectoryModel.AnalyticalKepler)], CelestialSystemValidationStatus.DuplicateBodyId, "duplicate ID rejection");
     CheckSystem([Node(1, null, 1, CelestialTrajectoryModel.FixedBody), Node(2, 3, 2, CelestialTrajectoryModel.AnalyticalKepler), Node(3, 2, 3, CelestialTrajectoryModel.AnalyticalKepler)], CelestialSystemValidationStatus.ParentCycle, "cycle rejection");
-    CheckSystem([Node(1, null, 1, CelestialTrajectoryModel.FixedBody), Node(2, 99, 2, CelestialTrajectoryModel.AnalyticalKepler)], CelestialSystemValidationStatus.MissingParent, "missing parent rejection");
+    CheckSystem([Node(1, null, 1, CelestialTrajectoryModel.FixedBody), Node(2, 99, 2, CelestialTrajectoryModel.AnalyticalKepler)], CelestialSystemValidationStatus.MissingCatalogParent, "missing parent rejection");
     CheckSystem([Node(1, null, 1, CelestialTrajectoryModel.FixedBody), Node(2, null, 2, CelestialTrajectoryModel.FixedBody)], CelestialSystemValidationStatus.MultipleRoots, "multiple roots rejection");
     CheckSystem([Node(1, null, 1, (CelestialTrajectoryModel)99)], CelestialSystemValidationStatus.InvalidTrajectoryModel, "unsupported trajectory model rejection");
     CheckSystem([Node(1, null, 1, CelestialTrajectoryModel.AnalyticalKepler)], CelestialSystemValidationStatus.RootModelInvalid, "root model rejection");
@@ -435,6 +436,26 @@ static void CelestialSystemDefinitionTests()
     static CelestialSystemTimeMapping Mapping() => CelestialSystemTimeMapping.Identity(new(1));
     static CelestialEphemerisMetadata Metadata() => new(new(1), new(1), new(1), long.MinValue, long.MaxValue, new(1), new(1), new(0, 0), new(0, 0));
     static void CheckSystem(CelestialHierarchyNode[] candidates, CelestialSystemValidationStatus expected, string message) => Check(!CelestialSystemDefinition.TryCreate(new CelestialSystemId(99), candidates, Mapping(), Metadata(), out var definition, out var result) && definition is null && result.Status == expected, message);
+}
+
+static void CelestialBodyCatalogTests()
+{
+    var root = new CelestialBodyCatalogEntry(new(new(700), "Barycenter", CelestialBodyClassification.Barycenter, null, default, default, default), new(0d, 0d, 0d, 0d, 0d, default, default, default));
+    var child = new CelestialBodyCatalogEntry(new(new(701), "World", CelestialBodyClassification.Planet, new(700), default, default, default), new(3.986004418e14d, 6_371_000d, 6_378_137d, 6_356_752d, 1d / 298.257223563d, default, default, default));
+    var entries = new[] { root, child };
+    Check(CelestialBodyCatalog.TryCreate(entries, out var catalog, out var validation) && catalog is not null && validation.Succeeded, "valid immutable body catalog");
+    Check(catalog!.TryGet(new(701), out var lookedUp) && lookedUp.Identity.DisplayName == "World" && catalog.TryGetPhysicalProperties(new(701), out var physical) && physical.GravitationalParameter == child.PhysicalProperties.GravitationalParameter, "stable ID and physical lookup");
+    Check(!CelestialBodyCatalog.TryCreate([root, root], out _, out validation) && validation.Status == CelestialSystemValidationStatus.DuplicateBodyId, "duplicate body ID rejection");
+    Check(!CelestialBodyCatalog.TryCreate([root, child with { Identity = child.Identity with { DisplayName = "Barycenter" } }], out _, out validation) && validation.Status == CelestialSystemValidationStatus.DuplicateBodyDisplayName, "duplicate display name rejection");
+    Check(!CelestialBodyCatalog.TryCreate([root, child with { Identity = child.Identity with { ParentBody = new(999) } }], out _, out validation) && validation.Status == CelestialSystemValidationStatus.MissingCatalogParent, "missing catalog parent rejection");
+    Check(!CelestialBodyCatalog.TryCreate([root, child with { PhysicalProperties = child.PhysicalProperties with { GravitationalParameter = -1d } }], out _, out validation) && validation.Status == CelestialSystemValidationStatus.InvalidPhysicalProperties, "negative physical constants rejection");
+    Check(!CelestialBodyCatalog.TryCreate([root, child with { Identity = child.Identity with { Aliases = new CelestialBodyAliases(["World", "World"]) } }], out _, out validation) && validation.Status == CelestialSystemValidationStatus.InvalidBodyAlias, "invalid aliases rejection");
+    Check(SolarSystemBodyIds.SolarSystemBarycenter.IsValid && SolarSystemBodyIds.Sun.Value < SolarSystemBodyIds.Neptune.Value, "reserved solar IDs stable");
+    var firstHash = CatalogHash(catalog); Check(CelestialBodyCatalog.TryCreate(entries, out var copy, out _) && CatalogHash(copy!) == firstHash, "catalog hash determinism");
+    Check(CelestialBodyCatalog.TryCreate([root, child with { PhysicalProperties = child.PhysicalProperties with { MeanRadius = 6_372_000d } }], out var changed, out _) && CatalogHash(changed!) != firstHash, "catalog hash sensitivity");
+    _ = catalog.TryGet(new(701), out _); _ = catalog.TryGetPhysicalProperties(new(701), out _); var before = GC.GetAllocatedBytesForCurrentThread(); ulong checksum = 0;
+    for (var index = 0; index < 100_000; index++) { Check(catalog.TryGet(new(701), out var body), "warm catalog lookup"); Check(catalog.TryGetPhysicalProperties(new(701), out var props), "warm property lookup"); checksum = Mix(checksum, body.Id.Value ^ (ulong)BitConverter.DoubleToInt64Bits(props.MeanRadius)); }
+    Check(GC.GetAllocatedBytesForCurrentThread() - before == 0 && checksum != 0, "warmed catalog lookup allocation");
 }
 
 static void CelestialSystemTimeAndProvenanceTests()
@@ -480,7 +501,7 @@ static void CelestialEphemerisCatalogTests()
     var fixedSource = new CelestialEphemerisSource(new(1), CelestialTrajectoryModel.FixedBody, metadata with { Source = new(1) });
     var circularSource = new CelestialEphemerisSource(new(2), CelestialTrajectoryModel.CircularOrbit, metadata with { Source = new(2) });
     var fixedPayloads = new[] { FixedBodyEphemerisPayload.Identity }; var circularPayloads = new[] { new CircularOrbitEphemerisPayload(0, 2d, 0d, DoubleQuaternion.Identity, 1d) };
-    var nodes = new[] { new CelestialHierarchyNode(new(new(1), null, new ReferenceFrameId(1), 1d), new CelestialEphemerisBinding(CelestialTrajectoryModel.FixedBody, new(1), 0)), new CelestialHierarchyNode(new(new(2), new CelestialBodyId(1), new ReferenceFrameId(2), 1d), new CelestialEphemerisBinding(CelestialTrajectoryModel.CircularOrbit, new(2), 0)) };
+    var nodes = new[] { new CelestialHierarchyNode(new CelestialBodyDefinition(new(1), null, new ReferenceFrameId(1), 1d), new CelestialEphemerisBinding(CelestialTrajectoryModel.FixedBody, new(1), 0)), new CelestialHierarchyNode(new CelestialBodyDefinition(new(2), new CelestialBodyId(1), new ReferenceFrameId(2), 1d), new CelestialEphemerisBinding(CelestialTrajectoryModel.CircularOrbit, new(2), 0)) };
     Check(CelestialSystemDefinition.TryCreate(new(901), nodes, mapping, metadata, [fixedSource, circularSource], fixedPayloads, circularPayloads, [], out var system, out var validation) && system is not null && validation.Succeeded, "typed FixedBody and CircularOrbit bindings validate");
     var constructionBefore = GC.GetAllocatedBytesForCurrentThread(); Check(CelestialSystemDefinition.TryCreate(new(901), nodes, mapping, metadata, [fixedSource, circularSource], fixedPayloads, circularPayloads, [], out var constructionCopy, out _) && constructionCopy is not null, "catalog construction copy"); var constructionAllocated = GC.GetAllocatedBytesForCurrentThread() - constructionBefore;
     Check(system!.TryGetSource(new(2), out var lookedUp) && lookedUp == circularSource && system.TryGetFixedBody(0, out _) && system.TryGetCircularOrbit(0, out _), "deterministic source and typed payload lookup");
@@ -1184,6 +1205,7 @@ static ulong MixedTimelineHash(){var timeline=new SimulationTimeline(4096);var r
 static SimulationEventHeader[] CreateStressHeaders(){var random=new FixedRandom(0x6A09E667F3BCC909);var result=new SimulationEventHeader[2048];for(var index=0;index<result.Length;index++){var time=(long)(random.Next()>>1)-long.MaxValue/2;var priority=(int)(random.Next()%2001)-1000;result[index]=Header((ulong)index+1,time,priority,(ulong)index+1);}return result;}
 static void Shuffle(SimulationEventHeader[] values,ulong seed){var random=new FixedRandom(seed);for(var index=values.Length-1;index>0;index--){var other=(int)(random.Next()%(ulong)(index+1));(values[index],values[other])=(values[other],values[index]);}}
 static ulong Hash(ReadOnlySpan<SimulationEventHeader> values){ulong hash=14695981039346656037;foreach(ref readonly var value in values){hash=Mix(hash,(ulong)value.Time.Ticks);hash=Mix(hash,(uint)value.Priority);hash=Mix(hash,value.Sequence.Value);hash=Mix(hash,value.Id.Value);}return hash;}
+static ulong CatalogHash(CelestialBodyCatalog catalog){ulong hash=14695981039346656037;for(var index=0;index<catalog.Count;index++){var entry=catalog.GetEntry(index);hash=Mix(hash,entry.Id.Value);hash=Mix(hash,(ulong)entry.Identity.Classification);hash=Mix(hash,entry.Identity.ParentBody?.Value??0UL);hash=Mix(hash,(ulong)BitConverter.DoubleToInt64Bits(entry.PhysicalProperties.GravitationalParameter));hash=Mix(hash,(ulong)BitConverter.DoubleToInt64Bits(entry.PhysicalProperties.MeanRadius));}return hash;}
 static ulong Mix(ulong hash,ulong value){for(var index=0;index<8;index++){hash^=(byte)value;hash*=1099511628211;value>>=8;}return hash;}
 static ulong MixDouble3(ulong hash,in Double3 value){hash=Mix(hash,(ulong)BitConverter.DoubleToInt64Bits(value.X));hash=Mix(hash,(ulong)BitConverter.DoubleToInt64Bits(value.Y));return Mix(hash,(ulong)BitConverter.DoubleToInt64Bits(value.Z));}
 static void Check(bool condition,string message){if(!condition)throw new Exception(message);}

@@ -15,6 +15,7 @@ Authoritative simulation is managed C#. Native code owns only platform input and
 - Deterministic simulation clock and transaction-driven authoritative simulation state with immutable evaluated data.
 - Deterministic elliptic two-body orbital propagation and scheduled inertial impulses.
 - Generic authored celestial-system definitions and pure deterministic evaluation for fixed, circular, and elliptic two-body bodies; NovaCore does not assume a fixed Solar System.
+- Immutable celestial body catalogs separate stable identity and physical constants from ephemeris bindings, supporting barycenter-rooted, geocentric, binary, and fictional authored systems.
 - System-wide exact celestial-time mappings and immutable ephemeris provenance contracts; no external ephemeris provider is implemented yet.
 - Typed immutable ephemeris catalogs: hierarchy nodes bind to declared source-backed fixed, circular, or analytical Kepler payloads without embedding model data.
 - Immutable flat sampled-ephemeris catalogs with deterministic finite-coverage cubic-Hermite evaluation; external dataset loading remains deferred.
@@ -84,6 +85,7 @@ The default triangle command renders the reusable mesh field. `--scene=frames` r
 
 - [Architecture](docs/architecture.md)
 - [Celestial Simulation](docs/celestial-simulation.md)
+- [Celestial Bodies](docs/celestial-bodies.md)
 - [Simulation Time](docs/simulation-time.md)
 - [Reference Frames](docs/reference-frames.md)
 - [Precision Model](docs/precision-model.md)
