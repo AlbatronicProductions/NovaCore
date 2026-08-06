@@ -8,4 +8,4 @@ The evaluator maps `SimulationInstant` into `CelestialTimeArgument`, preserves i
 
 No JPL/SPICE importer, real astronomical dataset, packed unmanaged storage, or memory mapping exists yet. The logical flat catalog can later sit over packed or memory-mapped storage, and future sampled-Chebyshev support can use the same binding and hierarchy contracts. `SampledDemo` is deliberately authored test data, not real astronomy.
 
-The offline-only `NCPE` v1 artifact and `NovaCore.EphemerisBuilder` now define the reproducible conversion seam for future source adapters. They are separate from runtime simulation: no runtime project parses source data or accesses the file system. See [Ephemeris dataset format](ephemeris-dataset-format.md) and [Ephemeris builder](ephemeris-builder.md).
+The offline-only self-describing `NCPE` v2 artifact and `NovaCore.EphemerisBuilder` define the reproducible conversion seam for future source adapters. They are separate from runtime simulation: no runtime project parses source data or accesses the file system. See [Ephemeris dataset format](ephemeris-dataset-format.md) and [Ephemeris builder](ephemeris-builder.md).

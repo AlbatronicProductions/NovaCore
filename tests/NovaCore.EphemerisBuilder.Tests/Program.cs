@@ -1,6 +1,9 @@
 using NovaCore.EphemerisFormat;
 
 var input = Fixture();
+Check(NcpeV2Codec.TryWrite(V2Fixture(), out var v2) == NcpeV2Status.Success && v2 is not null, "v2 build");
+Check(NcpeV2Codec.TryRead(v2!, out var decoded, out _, out var expectedHash) == NcpeV2Status.Success && decoded is not null && expectedHash == NcpeV2SemanticHash.Compute(decoded), "v2 self description/hash");
+var v1 = new byte[40]; System.Buffers.Binary.BinaryPrimitives.WriteUInt32LittleEndian(v1, 0x4550434E); System.Buffers.Binary.BinaryPrimitives.WriteUInt16LittleEndian(v1.AsSpan(4), 1); Check(NcpeV2Codec.TryRead(v1,out _,out _,out _) == NcpeV2Status.UnsupportedV1Reconstruction,"v1 controlled compatibility");
 Check(EphemerisArtifactCodec.TryBuild(input, out var first) == EphemerisArtifactStatus.Success && first is not null, "build");
 Check(EphemerisArtifactCodec.TryBuild(input with { Bodies = input.Bodies.Reverse().ToArray() }, out var reordered) == EphemerisArtifactStatus.Success && reordered is not null && first!.Bytes.SequenceEqual(reordered.Bytes), "canonical order");
 Check(EphemerisArtifactCodec.TryRead(first!.Bytes, out var roundTrip) == EphemerisArtifactStatus.Success && roundTrip is not null && first.Bytes.SequenceEqual(roundTrip.Bytes), "round trip");
@@ -10,3 +13,4 @@ var before=GC.GetAllocatedBytesForCurrentThread(); ulong hash=0; for(var i=0;i<1
 static void Check(bool value,string name){if(!value)throw new InvalidOperationException(name);}
 static NormalizedEphemerisInput Fixture()=>new(1,2,3,4,5,6,7,8,-20,20,9,10,[Body(1,0,0),Body(2,1,10),Body(3,1,-10)]);
 static NormalizedEphemerisBody Body(ulong id,ulong parent,double d)=>new(id,parent,id,EphemerisInterpolationModel.CubicHermitePositionVelocityV1,[new(-20,d-20,1,2,1,0,0),new(-5,d-5,2,3,1,0,0),new(5,d+5,3,4,1,0,0),new(20,d+20,4,5,1,0,0)],.1,.01);
+static NcpeV2Definition V2Fixture(){var s=new[]{new NormalizedEphemerisSample(-20,-20,1,2,1,0,0),new(-5,-5,2,3,1,0,0),new(5,5,3,4,1,0,0),new(20,20,4,5,1,0,0),new(-20,-10,1,2,1,0,0),new(-5,5,2,3,1,0,0),new(5,15,3,4,1,0,0),new(20,30,4,5,1,0,0)};var sys=new NcpeV2System(9001,0,0,1,1,1,71,2,17,-20,20,23,29,1,2,3,4,9002,2,0x5A5A);var src=new[]{new NcpeV2Source(71,0,2,17,-20,20,23,29,1,2,3,4),new NcpeV2Source(72,1,2,17,-20,20,23,29,1,2,3,4)};NcpeV2Body B(ulong id,string n,byte c,ulong p)=>new(id,n,c,p,0,0,0,Array.Empty<string>(),1,1,1,1,0,0,0,0,0,0);var bind=new[]{new NcpeV2Binding(1,0,71,0,0,0,0,0,0,0,0,0,0,1,0,0,0),new NcpeV2Binding(2,1,72,0,0,0,0,0,0,0,0,0,0,1,0,0,0),new NcpeV2Binding(3,1,72,1,0,0,0,0,0,0,0,0,0,1,0,0,0)};return new(sys,src,new[]{B(1,"Root",0,0),B(2,"Alpha",7,1),B(3,"Beta",7,1)},bind,new[]{new NcpeV2Payload(17,0,4,1,-20,20),new NcpeV2Payload(17,4,4,1,-20,20)},s);}
