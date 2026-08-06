@@ -1,0 +1,12 @@
+cmake_minimum_required(VERSION 3.24)
+project(NovaCoreCSpiceShim LANGUAGES CXX)
+
+set(NAIF_CSPICE_ROOT "${CMAKE_CURRENT_LIST_DIR}/../../external/naif/toolkit/cspice" CACHE PATH "Extracted official CSPICE root")
+if(NOT EXISTS "${NAIF_CSPICE_ROOT}/include/SpiceUsr.h" OR NOT EXISTS "${NAIF_CSPICE_ROOT}/lib/cspice.lib")
+  message(FATAL_ERROR "Set NAIF_CSPICE_ROOT to an extracted official Windows x64 CSPICE package.")
+endif()
+add_library(NovaCore.CSpiceShim SHARED NovaCoreCSpiceShim.cpp NovaCoreCSpiceShim.h)
+target_compile_features(NovaCore.CSpiceShim PRIVATE cxx_std_20)
+target_compile_definitions(NovaCore.CSpiceShim PRIVATE WIN32_LEAN_AND_MEAN NOMINMAX NC_CSPICE_SHIM_EXPORTS)
+target_include_directories(NovaCore.CSpiceShim PRIVATE "${NAIF_CSPICE_ROOT}/include")
+target_link_libraries(NovaCore.CSpiceShim PRIVATE "${NAIF_CSPICE_ROOT}/lib/cspice.lib")
