@@ -18,6 +18,10 @@ internal static class CelestialSystemDefinitionHash
         for (var index = 0; index < definition.CircularOrbitCount; index++) { var value = definition.GetCircularOrbit(index); hash = Mix(hash, (ulong)value.EpochDomainTicks); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(value.Radius)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(value.InitialPhaseRadians)); HashQuaternion(ref hash, value.PlaneOrientation); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(value.CentralGravitationalParameter)); }
         hash = Mix(hash, (ulong)definition.AnalyticalKeplerCount);
         for (var index = 0; index < definition.AnalyticalKeplerCount; index++) { var value = definition.GetAnalyticalKepler(index); hash = Mix(hash, value.CentralBody.Value); hash = Mix(hash, (ulong)value.Epoch.Ticks); HashVector(ref hash, value.StateAtEpoch.Position); HashVector(ref hash, value.StateAtEpoch.Velocity); hash = Mix(hash, (ulong)value.Model); }
+        hash = Mix(hash, (ulong)definition.SampledEphemerisCount);
+        for (var index = 0; index < definition.SampledEphemerisCount; index++) { var value = definition.GetSampledEphemeris(index); hash = Mix(hash, value.Domain.Value); hash = Mix(hash, (ulong)value.FirstSampleIndex); hash = Mix(hash, (ulong)value.SampleCount); hash = Mix(hash, (ulong)value.InterpolationModel); hash = Mix(hash, (ulong)value.SupportedStartDomainTick); hash = Mix(hash, (ulong)value.SupportedEndDomainTick); }
+        hash = Mix(hash, (ulong)definition.SampleCount);
+        for (var index = 0; index < definition.SampleCount; index++) { var value = definition.GetSample(index); hash = Mix(hash, (ulong)value.DomainTick); HashVector(ref hash, value.Position); HashVector(ref hash, value.Velocity); }
         for (var index = 0; index < definition.Count; index++)
         {
             var node = definition.GetNodeInTraversalOrder(index); var body = node.Body;

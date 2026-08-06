@@ -32,6 +32,13 @@ internal static class CelestialSystemEvaluator
                 if (parentIndex < 0) return new(CelestialSystemEvaluationStatus.ParentEvaluationFailed);
                 var parent = system.GetNodeInTraversalOrder(parentIndex);
                 if (node.TrajectoryModel == CelestialTrajectoryModel.ReservedNumericalNBody) return new(CelestialSystemEvaluationStatus.UnsupportedTrajectoryModel);
+                if (node.TrajectoryModel == CelestialTrajectoryModel.SampledEphemeris && system.TryGetSampledEphemeris(node.Ephemeris.PayloadIndex, out var sampled))
+                {
+                    var sampledResult = SampledEphemerisEvaluator.TryEvaluate(system.Samples, sampled, requestedArgument, domainTicksPerSecond);
+                    if (!sampledResult.Succeeded) return new(sampledResult.Status is SampledEphemerisEvaluationStatus.BeforeCoverage or SampledEphemerisEvaluationStatus.AfterCoverage ? CelestialSystemEvaluationStatus.TimeMappingFailure : CelestialSystemEvaluationStatus.NumericalFailure);
+                    local = new FrameTransform(sampledResult.State.Position, DoubleQuaternion.Identity); velocity = sampledResult.State.Velocity;
+                    goto LocalResolved;
+                }
                 CartesianState epochState; SimulationInstant epochSolverTime;
                 if (node.TrajectoryModel == CelestialTrajectoryModel.AnalyticalKepler && system.TryGetAnalyticalKepler(node.Ephemeris.PayloadIndex, out var trajectory))
                 {
@@ -51,6 +58,7 @@ internal static class CelestialSystemEvaluator
                 if (!propagation.State.IsFinite) return new(CelestialSystemEvaluationStatus.NonFiniteResult);
                 local = new FrameTransform(propagation.State.Position, DoubleQuaternion.Identity); velocity = propagation.State.Velocity;
             }
+        LocalResolved:
             var root = node.ParentId is null ? local : FrameTransform.Compose(stagingRoots[FindParentTraversalIndex(system, index, node.ParentId.Value)], local);
             if (!local.IsFinite || !root.IsFinite || !velocity.IsFinite) return new(CelestialSystemEvaluationStatus.NonFiniteResult);
             staging[index] = new(body.InertialFrame, new EvaluatedReferenceFrame(local, velocity, Double3.Zero, true));

@@ -15,9 +15,11 @@ internal sealed class CelestialSystemDefinition
     private readonly FixedBodyEphemerisPayload[] _fixedBodies;
     private readonly CircularOrbitEphemerisPayload[] _circularOrbits;
     private readonly TwoBodyTrajectory[] _analyticalKepler;
+    private readonly SampledEphemerisPayload[] _sampledEphemerides;
+    private readonly CelestialEphemerisSample[] _samples;
 
-    private CelestialSystemDefinition(CelestialSystemId id, CelestialSystemTimeMapping mapping, CelestialEphemerisMetadata metadata, CelestialHierarchyNode[] nodes, ulong[] lookupIds, int[] lookupIndices, int[] traversal, CelestialBodyId root, CelestialEphemerisSource[] sources, ulong[] sourceIds, int[] sourceIndices, FixedBodyEphemerisPayload[] fixedBodies, CircularOrbitEphemerisPayload[] circularOrbits, TwoBodyTrajectory[] analyticalKepler)
-    { Id = id; TimeMapping = mapping; EphemerisMetadata = metadata; _nodes = nodes; _lookupIds = lookupIds; _lookupIndices = lookupIndices; _traversalIndices = traversal; RootBody = root; _sources = sources; _sourceLookupIds = sourceIds; _sourceLookupIndices = sourceIndices; _fixedBodies = fixedBodies; _circularOrbits = circularOrbits; _analyticalKepler = analyticalKepler; }
+    private CelestialSystemDefinition(CelestialSystemId id, CelestialSystemTimeMapping mapping, CelestialEphemerisMetadata metadata, CelestialHierarchyNode[] nodes, ulong[] lookupIds, int[] lookupIndices, int[] traversal, CelestialBodyId root, CelestialEphemerisSource[] sources, ulong[] sourceIds, int[] sourceIndices, FixedBodyEphemerisPayload[] fixedBodies, CircularOrbitEphemerisPayload[] circularOrbits, TwoBodyTrajectory[] analyticalKepler, SampledEphemerisPayload[] sampledEphemerides, CelestialEphemerisSample[] samples)
+    { Id = id; TimeMapping = mapping; EphemerisMetadata = metadata; _nodes = nodes; _lookupIds = lookupIds; _lookupIndices = lookupIndices; _traversalIndices = traversal; RootBody = root; _sources = sources; _sourceLookupIds = sourceIds; _sourceLookupIndices = sourceIndices; _fixedBodies = fixedBodies; _circularOrbits = circularOrbits; _analyticalKepler = analyticalKepler; _sampledEphemerides = sampledEphemerides; _samples = samples; }
 
     public CelestialSystemId Id { get; }
     public CelestialSystemTimeMapping TimeMapping { get; }
@@ -26,9 +28,12 @@ internal sealed class CelestialSystemDefinition
     public int Count => _nodes.Length;
 
     public static bool TryCreate(CelestialSystemId id, ReadOnlySpan<CelestialHierarchyNode> nodes, CelestialSystemTimeMapping mapping, CelestialEphemerisMetadata metadata, ReadOnlySpan<CelestialEphemerisSource> sources, ReadOnlySpan<FixedBodyEphemerisPayload> fixedBodies, ReadOnlySpan<CircularOrbitEphemerisPayload> circularOrbits, ReadOnlySpan<TwoBodyTrajectory> analyticalKepler, out CelestialSystemDefinition? definition, out CelestialSystemValidationResult validation)
+        => TryCreate(id, nodes, mapping, metadata, sources, fixedBodies, circularOrbits, analyticalKepler, [], [], out definition, out validation);
+
+    public static bool TryCreate(CelestialSystemId id, ReadOnlySpan<CelestialHierarchyNode> nodes, CelestialSystemTimeMapping mapping, CelestialEphemerisMetadata metadata, ReadOnlySpan<CelestialEphemerisSource> sources, ReadOnlySpan<FixedBodyEphemerisPayload> fixedBodies, ReadOnlySpan<CircularOrbitEphemerisPayload> circularOrbits, ReadOnlySpan<TwoBodyTrajectory> analyticalKepler, ReadOnlySpan<SampledEphemerisPayload> sampledEphemerides, ReadOnlySpan<CelestialEphemerisSample> samples, out CelestialSystemDefinition? definition, out CelestialSystemValidationResult validation)
     {
         definition = null;
-        validation = CelestialSystemValidator.Validate(id, nodes, mapping, metadata, sources, fixedBodies, circularOrbits, analyticalKepler);
+        validation = CelestialSystemValidator.Validate(id, nodes, mapping, metadata, sources, fixedBodies, circularOrbits, analyticalKepler, sampledEphemerides, samples);
         if (!validation.Succeeded) return false;
         if (nodes.Length > int.MaxValue / 2 || sources.Length > int.MaxValue / 2) { validation = new(CelestialSystemValidationStatus.CapacityOverflow); return false; }
         var copy = nodes.ToArray(); var sourceCopy = sources.ToArray();
@@ -37,19 +42,19 @@ internal sealed class CelestialSystemDefinition
         for (var i = 0; i < copy.Length; i++) { lookupIds[i] = copy[i].Id.Value; lookupIndices[i] = i; }
         for (var i = 0; i < sourceCopy.Length; i++) { sourceIds[i] = sourceCopy[i].Id.Value; sourceIndices[i] = i; }
         Array.Sort(lookupIds, lookupIndices); Array.Sort(sourceIds, sourceIndices);
-        definition = new(id, mapping, metadata, copy, lookupIds, lookupIndices, BuildTraversal(copy, validation.RootIndex), copy[validation.RootIndex].Id, sourceCopy, sourceIds, sourceIndices, fixedBodies.ToArray(), circularOrbits.ToArray(), analyticalKepler.ToArray());
+        definition = new(id, mapping, metadata, copy, lookupIds, lookupIndices, BuildTraversal(copy, validation.RootIndex), copy[validation.RootIndex].Id, sourceCopy, sourceIds, sourceIndices, fixedBodies.ToArray(), circularOrbits.ToArray(), analyticalKepler.ToArray(), sampledEphemerides.ToArray(), samples.ToArray());
         return true;
     }
 
     // Temporary topology-test convenience overload. Production authored systems must declare explicit catalogs.
     internal static bool TryCreate(CelestialSystemId id, ReadOnlySpan<CelestialHierarchyNode> nodes, CelestialSystemTimeMapping mapping, CelestialEphemerisMetadata metadata, out CelestialSystemDefinition? definition, out CelestialSystemValidationResult validation)
     {
-        Span<CelestialEphemerisSource> sources = stackalloc CelestialEphemerisSource[4]; var sourceCount = 0; var fixedNeeded = false; var circularNeeded = false; var keplerNeeded = false; var reservedNeeded = false;
+        Span<CelestialEphemerisSource> sources = stackalloc CelestialEphemerisSource[5]; var sourceCount = 0; var fixedNeeded = false; var circularNeeded = false; var keplerNeeded = false; var reservedNeeded = false;
         for (var i = 0; i < nodes.Length; i++) { switch (nodes[i].TrajectoryModel) { case CelestialTrajectoryModel.FixedBody: fixedNeeded = true; break; case CelestialTrajectoryModel.CircularOrbit: circularNeeded = true; break; case CelestialTrajectoryModel.AnalyticalKepler: keplerNeeded = true; break; case CelestialTrajectoryModel.ReservedNumericalNBody: reservedNeeded = true; break; } }
         if (fixedNeeded) sources[sourceCount++] = new(new(2), CelestialTrajectoryModel.FixedBody, metadata with { Source = new(2) });
         if (circularNeeded) sources[sourceCount++] = new(new(3), CelestialTrajectoryModel.CircularOrbit, metadata with { Source = new(3) });
         if (keplerNeeded) sources[sourceCount++] = new(new(1), CelestialTrajectoryModel.AnalyticalKepler, metadata with { Source = new(1) });
-        if (reservedNeeded) sources[sourceCount++] = new(new(4), CelestialTrajectoryModel.ReservedNumericalNBody, metadata with { Source = new(4) });
+        if (reservedNeeded) sources[sourceCount++] = new(new(5), CelestialTrajectoryModel.ReservedNumericalNBody, metadata with { Source = new(5) });
         var firstParent = nodes.Length > 1 && nodes[1].ParentId is { } parent ? parent : new CelestialBodyId(1);
         var mu = 1d; for (var i = 0; i < nodes.Length; i++) if (nodes[i].Id == firstParent) { mu = nodes[i].Body.GravitationalParameter; break; } if (!double.IsFinite(mu) || mu <= 0d) mu = 1d;
         Span<FixedBodyEphemerisPayload> fixedBodies = fixedNeeded ? stackalloc FixedBodyEphemerisPayload[1] : [];
@@ -68,14 +73,20 @@ internal sealed class CelestialSystemDefinition
     internal bool TryGetFixedBody(int index, out FixedBodyEphemerisPayload payload) => TryGet(_fixedBodies, index, out payload);
     internal bool TryGetCircularOrbit(int index, out CircularOrbitEphemerisPayload payload) => TryGet(_circularOrbits, index, out payload);
     internal bool TryGetAnalyticalKepler(int index, out TwoBodyTrajectory payload) => TryGet(_analyticalKepler, index, out payload);
+    internal bool TryGetSampledEphemeris(int index, out SampledEphemerisPayload payload) => TryGet(_sampledEphemerides, index, out payload);
+    internal ReadOnlySpan<CelestialEphemerisSample> Samples => _samples;
     internal int SourceCount => _sources.Length;
     internal int FixedBodyCount => _fixedBodies.Length;
     internal int CircularOrbitCount => _circularOrbits.Length;
     internal int AnalyticalKeplerCount => _analyticalKepler.Length;
+    internal int SampledEphemerisCount => _sampledEphemerides.Length;
+    internal int SampleCount => _samples.Length;
     internal CelestialEphemerisSource GetSource(int index) => _sources[index];
     internal FixedBodyEphemerisPayload GetFixedBody(int index) => _fixedBodies[index];
     internal CircularOrbitEphemerisPayload GetCircularOrbit(int index) => _circularOrbits[index];
     internal TwoBodyTrajectory GetAnalyticalKepler(int index) => _analyticalKepler[index];
+    internal SampledEphemerisPayload GetSampledEphemeris(int index) => _sampledEphemerides[index];
+    internal CelestialEphemerisSample GetSample(int index) => _samples[index];
     public CelestialSystemTimeMappingStatus TryMapTime(Simulation.Time.SimulationInstant instant, out CelestialTimeArgument argument) { var status = TimeMapping.TryMap(instant, out argument); return status != CelestialSystemTimeMappingStatus.Success ? status : EphemerisMetadata.Contains(argument.WholeDomainTicks) ? CelestialSystemTimeMappingStatus.Success : CelestialSystemTimeMappingStatus.OutsideSupportedInterval; }
 
     private static bool TryGet<T>(T[] catalog, int index, out T payload) where T : struct { if ((uint)index < (uint)catalog.Length) { payload = catalog[index]; return true; } payload = default; return false; }
@@ -87,7 +98,7 @@ internal sealed class CelestialSystemDefinition
 /// <summary>Pure catalog and topology validator. It retains no caller data.</summary>
 internal static class CelestialSystemValidator
 {
-    internal static CelestialSystemValidationResult Validate(CelestialSystemId id, ReadOnlySpan<CelestialHierarchyNode> nodes, CelestialSystemTimeMapping mapping, CelestialEphemerisMetadata metadata, ReadOnlySpan<CelestialEphemerisSource> sources, ReadOnlySpan<FixedBodyEphemerisPayload> fixedBodies, ReadOnlySpan<CircularOrbitEphemerisPayload> circularOrbits, ReadOnlySpan<TwoBodyTrajectory> analyticalKepler)
+    internal static CelestialSystemValidationResult Validate(CelestialSystemId id, ReadOnlySpan<CelestialHierarchyNode> nodes, CelestialSystemTimeMapping mapping, CelestialEphemerisMetadata metadata, ReadOnlySpan<CelestialEphemerisSource> sources, ReadOnlySpan<FixedBodyEphemerisPayload> fixedBodies, ReadOnlySpan<CircularOrbitEphemerisPayload> circularOrbits, ReadOnlySpan<TwoBodyTrajectory> analyticalKepler, ReadOnlySpan<SampledEphemerisPayload> sampledEphemerides, ReadOnlySpan<CelestialEphemerisSample> samples)
     {
         var common = ValidateCommon(id, nodes, mapping, metadata); if (!common.Succeeded) return common;
         if (sources.Length == 0) return new(CelestialSystemValidationStatus.MissingEphemerisSource);
@@ -95,6 +106,21 @@ internal static class CelestialSystemValidator
         for (var i = 0; i < fixedBodies.Length; i++) if (!fixedBodies[i].IsCanonical) return new(CelestialSystemValidationStatus.InvalidFixedBodyPayload);
         for (var i = 0; i < circularOrbits.Length; i++) if (!circularOrbits[i].IsValid) return new(CelestialSystemValidationStatus.InvalidCircularOrbitPayload);
         for (var i = 0; i < analyticalKepler.Length; i++) if (!ValidKepler(analyticalKepler[i])) return new(CelestialSystemValidationStatus.InvalidAnalyticalKeplerPayload);
+        for (var i = 0; i < sampledEphemerides.Length; i++)
+        {
+            ref readonly var payload = ref sampledEphemerides[i];
+            if (!payload.Domain.IsValid) return new(CelestialSystemValidationStatus.InvalidSampledTimeDomain);
+            if (payload.Domain != mapping.DomainAnchor.Domain) return new(CelestialSystemValidationStatus.SampledPayloadTimeDomainMismatch);
+            if (payload.FirstSampleIndex < 0) return new(CelestialSystemValidationStatus.NegativeSampleFirstIndex);
+            if (payload.SampleCount < 2) return new(CelestialSystemValidationStatus.InvalidSampleCount);
+            if (payload.InterpolationModel != SampledEphemerisInterpolationModel.CubicHermitePositionVelocityV1) return new(CelestialSystemValidationStatus.UnsupportedSampledInterpolationModel);
+            int end; try { end = checked(payload.FirstSampleIndex + payload.SampleCount); } catch (OverflowException) { return new(CelestialSystemValidationStatus.SampleRangeOverflow); }
+            if (end > samples.Length) return new(CelestialSystemValidationStatus.SampleRangeOutsideStorage);
+            if (payload.SupportedStartDomainTick != samples[payload.FirstSampleIndex].DomainTick || payload.SupportedEndDomainTick != samples[end - 1].DomainTick || payload.SupportedStartDomainTick > payload.SupportedEndDomainTick) return new(CelestialSystemValidationStatus.SampleCoverageMismatch);
+            for (var sample = payload.FirstSampleIndex; sample < end; sample++) { if (!samples[sample].IsFinite) return new(CelestialSystemValidationStatus.NonFiniteEphemerisSample); if (sample > payload.FirstSampleIndex && samples[sample - 1].DomainTick >= samples[sample].DomainTick) return new(samples[sample - 1].DomainTick == samples[sample].DomainTick ? CelestialSystemValidationStatus.DuplicateSampleTimestamp : CelestialSystemValidationStatus.NonMonotonicSampleTimestamp); }
+            for (var prior = 0; prior < i; prior++) { var priorPayload = sampledEphemerides[prior]; if (payload.FirstSampleIndex < priorPayload.FirstSampleIndex + priorPayload.SampleCount && priorPayload.FirstSampleIndex < end) return new(CelestialSystemValidationStatus.OverlappingSampleRanges); }
+        }
+        for (var sample = 0; sample < samples.Length; sample++) { var used = false; for (var payload = 0; payload < sampledEphemerides.Length; payload++) if (sample >= sampledEphemerides[payload].FirstSampleIndex && sample < sampledEphemerides[payload].FirstSampleIndex + sampledEphemerides[payload].SampleCount) { used = true; break; } if (!used) return new(CelestialSystemValidationStatus.UnusedEphemerisPayload); }
         for (var i = 0; i < nodes.Length; i++)
         {
             ref readonly var node = ref nodes[i]; var binding = node.Ephemeris;
@@ -109,10 +135,11 @@ internal static class CelestialSystemValidator
                 case CelestialTrajectoryModel.FixedBody: if ((uint)binding.PayloadIndex >= (uint)fixedBodies.Length) return new(CelestialSystemValidationStatus.PayloadIndexOutOfRange); break;
                 case CelestialTrajectoryModel.CircularOrbit: if ((uint)binding.PayloadIndex >= (uint)circularOrbits.Length) return new(CelestialSystemValidationStatus.PayloadIndexOutOfRange); if (node.ParentId is { } parent && !SameMu(circularOrbits[binding.PayloadIndex].CentralGravitationalParameter, FindBody(nodes, parent).GravitationalParameter)) return new(CelestialSystemValidationStatus.InvalidCircularOrbitPayload); break;
                 case CelestialTrajectoryModel.AnalyticalKepler: if ((uint)binding.PayloadIndex >= (uint)analyticalKepler.Length) return new(CelestialSystemValidationStatus.PayloadIndexOutOfRange); if (node.ParentId is { } central && analyticalKepler[binding.PayloadIndex].CentralBody != central) return new(CelestialSystemValidationStatus.InvalidAnalyticalKeplerPayload); break;
+                case CelestialTrajectoryModel.SampledEphemeris: if ((uint)binding.PayloadIndex >= (uint)sampledEphemerides.Length) return new(CelestialSystemValidationStatus.PayloadIndexOutOfRange); if (source.Metadata.Domain != sampledEphemerides[binding.PayloadIndex].Domain) return new(CelestialSystemValidationStatus.SampledPayloadTimeDomainMismatch); break;
                 default: return new(CelestialSystemValidationStatus.ModelCatalogMismatch);
             }
         }
-        if (HasUnused(nodes, CelestialTrajectoryModel.FixedBody, fixedBodies.Length) || HasUnused(nodes, CelestialTrajectoryModel.CircularOrbit, circularOrbits.Length) || HasUnused(nodes, CelestialTrajectoryModel.AnalyticalKepler, analyticalKepler.Length)) return new(CelestialSystemValidationStatus.UnusedEphemerisPayload);
+        if (HasUnused(nodes, CelestialTrajectoryModel.FixedBody, fixedBodies.Length) || HasUnused(nodes, CelestialTrajectoryModel.CircularOrbit, circularOrbits.Length) || HasUnused(nodes, CelestialTrajectoryModel.AnalyticalKepler, analyticalKepler.Length) || HasUnused(nodes, CelestialTrajectoryModel.SampledEphemeris, sampledEphemerides.Length)) return new(CelestialSystemValidationStatus.UnusedEphemerisPayload);
         return common;
     }
 

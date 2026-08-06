@@ -8,6 +8,8 @@ The mapping is evaluated directly with checked integer arithmetic and `Int128` i
 
 `CelestialEphemerisMetadata` records opaque source, version, coordinate-frame, and constants-version identities; an inclusive supported domain-tick interval; and content and authored-modification hashes. This metadata is included in the immutable system-definition hash so future save/load and replay paths can detect incompatible authored systems or datasets.
 
-Hierarchy nodes hold only a compact `CelestialEphemerisBinding` (model, source ID, and payload index). A system owns immutable typed catalogs for fixed bodies, circular orbits, and analytical Kepler trajectories, plus its declared source metadata. Validation resolves every binding before publication; there is no embedded polymorphic payload in a node. Source loading, sampled ephemerides, and mapped-domain evaluator dispatch remain deferred.
+Hierarchy nodes hold only a compact `CelestialEphemerisBinding` (model, source ID, and payload index). A system owns immutable typed catalogs for fixed bodies, circular orbits, analytical Kepler trajectories, and sampled ephemerides, plus its declared source metadata. Validation resolves every binding before publication; there is no embedded polymorphic payload in a node. Source loading and future provider-model dispatch remain deferred.
+
+Sampled ephemerides now use the same time mapping and binding boundary; see [Sampled Ephemerides](sampled-ephemerides.md).
 
 No ephemeris provider, external dataset ingestion, calendar formatting, sampled evaluation, or real Solar System dataset is implemented in this milestone.

@@ -6,5 +6,6 @@ internal enum CelestialTrajectoryModel : byte
     AnalyticalKepler = 0,
     FixedBody = 1,
     CircularOrbit = 2,
-    ReservedNumericalNBody = 3,
+    SampledEphemeris = 3,
+    ReservedNumericalNBody = 4,
 }
