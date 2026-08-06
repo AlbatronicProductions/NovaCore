@@ -21,6 +21,7 @@ var tests = new (string, Action)[]
     ("Celestial analytical fixture publication", CelestialAnalyticalFixturePublicationTest),
     ("Celestial player torque controls", CelestialPlayerTorqueControlsTest),
     ("Celestial SAS mode selection", CelestialSasModeSelectionTest),
+    ("Celestial SAS control cadence", CelestialSasControlCadenceTest),
     ("Camera snapshot allocation", CameraSnapshotAllocationTest),
 };
 foreach (var (name, test) in tests) { test(); Console.WriteLine($"PASS {name}"); }
@@ -72,6 +73,119 @@ static void CelestialSasModeSelectionTest()
     }
     Check(scene.TryAdvanceByHostDuration(SimulationDuration.FromTicks(1), new NativeInputState { SasModeKey = 1 }, out error), $"SAS off: {error}");
     Check(scene.SasMode == SpacecraftSasMode.Off && !scene.HasHoldTarget, "SAS off clears hold state");
+}
+
+static void CelestialSasControlCadenceTest()
+{
+    Check(CelestialAnalyticalScene.QuantizeSasTorque(new Double3(.005d, -.005d, 4.004d)) == new Double3(.01d, -.01d, 4d), "SAS torque quantizes midpoint away from zero after controller clamp");
+    Check(CelestialAnalyticalScene.TryGetFirstSasControlBoundaryAfter(SimulationInstant.Zero, out var zeroBoundary) && zeroBoundary == new SimulationInstant(50_000), "zero-time SAS engagement schedules the first boundary");
+    Check(CelestialAnalyticalScene.TryGetFirstSasControlBoundaryAfter(new SimulationInstant(50_000), out var exactBoundary) && exactBoundary == new SimulationInstant(100_000), "exact cadence time schedules the strictly next boundary");
+    Check(CelestialAnalyticalScene.TryGetFirstSasControlBoundaryAfter(new SimulationInstant(73_000), out var betweenBoundary) && betweenBoundary == new SimulationInstant(100_000), "between-boundary engagement schedules the next boundary");
+    static void SetSupportedSasRate(CelestialAnalyticalScene scene)
+    {
+        var fixtureCamera = CelestialAnalyticalScene.Camera;
+        var camera = new CameraState(new FramePosition(new ReferenceFrameId(1), fixtureCamera.Position), DoubleQuaternion.Identity, fixtureCamera.Projection, CameraMode.Free);
+        for (var index = 0; index < 4; index++) scene.ApplyPresentationInput(camera, new NativeInputState { RateDecrease = 1 }, out _, out _);
+        Check(scene.Rate == SimulationRate.Ten, "10x is the highest supported SAS rate");
+    }
+    static CelestialAnalyticalScene CreateSelected()
+    {
+        Check(CelestialAnalyticalScene.TryCreate(out var scene, out var error) && scene is not null, $"SAS cadence scene: {error}");
+        SetSupportedSasRate(scene!);
+        Check(scene!.TryAdvanceByHostDuration(SimulationDuration.FromTicks(1_000), new NativeInputState { SasModeKey = 3 }, out error), $"SAS prograde selection: {error}");
+        return scene;
+    }
+    var scene = CreateSelected();
+    Check(scene.CurrentTime == new SimulationInstant(10_000) && scene.TorqueTransitionCount == 0, "mode selection advances no SAS boundary");
+    Check(scene.TryAdvanceByHostDuration(SimulationDuration.FromTicks(3_000), out var error), $"pre-boundary coast: {error}");
+    Check(scene.SasCrossedBoundaryCount == 0 && scene.TorqueTransitionCount == 0, "no SAS boundary before 50000 microticks");
+    Check(scene.TryAdvanceByHostDuration(SimulationDuration.FromTicks(1_000), out error), $"first SAS boundary: {error}");
+    Check(scene.CurrentTime == new SimulationInstant(50_000) && scene.SasCrossedBoundaryCount == 1 && scene.HasSasTorqueRequest && scene.LastSasTorque != Double3.Zero && scene.TorqueTransitionCount == 1, $"first exact SAS boundary commits one quantized torque: time={scene.CurrentTime.Ticks}, rate={scene.Rate.Numerator}:{scene.Rate.Denominator}, mode={scene.SasMode}, suspended={scene.SasControlSuspended}, next={scene.NextSasControlBoundary.Ticks}, boundaries={scene.SasCrossedBoundaryCount}, torque={scene.LastSasTorque}, transitions={scene.TorqueTransitionCount}");
+    var transitions = scene.TorqueTransitionCount;
+    Check(scene.TryAdvanceByHostDuration(SimulationDuration.FromTicks(1_000), out error), $"between-boundary coast: {error}");
+    Check(scene.SasCrossedBoundaryCount == 0 && scene.TorqueTransitionCount == transitions, "between boundaries creates no transaction");
+
+    static (DoubleQuaternion Orientation, Double3 Torque, int Transitions) AdvancePartition(ReadOnlySpan<long> partitions)
+    {
+        var candidate = CreateSelected();
+        foreach (var ticks in partitions) Check(candidate.TryAdvanceByHostDuration(SimulationDuration.FromTicks(ticks), out var error), $"partitioned SAS advance: {error}");
+        return (candidate.CurrentSnapshot.Objects[1].RootOrientation, candidate.LastSasTorque, candidate.TorqueTransitionCount);
+    }
+    var whole = AdvancePartition([10_000]);
+    var partitioned = AdvancePartition([3_000, 4_000, 3_000]);
+    Check(whole == partitioned, "SAS control boundaries are partition-independent");
+    var cadenceHash = MixQuaternion(MixDouble3(14695981039346656037UL, whole.Torque), whole.Orientation);
+    Check(cadenceHash == MixQuaternion(MixDouble3(14695981039346656037UL, partitioned.Torque), partitioned.Orientation), "SAS scripted sequence hash is deterministic");
+
+    static (Double3 Torque, int Boundaries) EvaluateMode(uint key)
+    {
+        Check(CelestialAnalyticalScene.TryCreate(out var selected, out var selectionError) && selected is not null, $"SAS mode fixture: {selectionError}");
+        SetSupportedSasRate(selected!);
+        Check(selected!.TryAdvanceByHostDuration(SimulationDuration.FromTicks(1_000), new NativeInputState { SasModeKey = key }, out selectionError), $"SAS mode select: {selectionError}");
+        Check(selected.TryAdvanceByHostDuration(SimulationDuration.FromTicks(4_000), out selectionError), $"SAS mode boundary: {selectionError}");
+        return (selected.LastSasTorque, selected.SasCrossedBoundaryCount);
+    }
+    Check(EvaluateMode(2) is { Torque: var holdTorque, Boundaries: 1 } && holdTorque == Double3.Zero, "hold-attitude evaluates its captured target at the boundary");
+    Check(EvaluateMode(3).Torque != Double3.Zero, "prograde target evaluates at the boundary");
+    Check(EvaluateMode(5).Torque != Double3.Zero, "normal target evaluates at the boundary");
+    Check(EvaluateMode(7).Boundaries == 1, "radial-out target evaluates at the boundary");
+
+    var multiple = CreateSelected();
+    Check(multiple.TryAdvanceByHostDuration(SimulationDuration.FromTicks(10_000), out error), $"multiple SAS boundaries: {error}");
+    Check(multiple.SasCrossedBoundaryCount == 2, "crossed SAS boundaries process chronologically");
+    var beforeOff = multiple.TorqueTransitionCount;
+    Check(multiple.TryAdvanceByHostDuration(SimulationDuration.FromTicks(1_000), new NativeInputState { SasModeKey = 1 }, out error), $"SAS off: {error}");
+    Check(multiple.SasMode == SpacecraftSasMode.Off && multiple.LastSasTorque == Double3.Zero && multiple.TorqueTransitionCount == beforeOff + 1, "SAS off commits zero torque once");
+
+    var switched = CreateSelected(); var nextBeforeSwitch = switched.NextSasControlBoundary;
+    Check(switched.TryAdvanceByHostDuration(SimulationDuration.FromTicks(1_000), new NativeInputState { SasModeKey = 5 }, out error), $"pre-boundary mode switch: {error}");
+    Check(switched.SasMode == SpacecraftSasMode.Normal && switched.NextSasControlBoundary == nextBeforeSwitch && switched.NextSasControlBoundary > switched.CurrentTime, "active mode switch preserves a future cadence boundary");
+    Check(switched.TryAdvanceByHostDuration(SimulationDuration.FromTicks(10_000), out error), $"post-boundary mode switch coast: {error}");
+    var nextAfterBoundaries = switched.NextSasControlBoundary;
+    Check(switched.TryAdvanceByHostDuration(SimulationDuration.FromTicks(1_000), new NativeInputState { SasModeKey = 7 }, out error), $"post-boundary mode switch: {error}");
+    Check(switched.SasMode == SpacecraftSasMode.RadialOut && switched.NextSasControlBoundary == nextAfterBoundaries && switched.NextSasControlBoundary > switched.CurrentTime, "post-boundary switch retains no stale target");
+
+    Check(CelestialAnalyticalScene.TryCreate(out var late, out var lateError) && late is not null, $"late SAS fixture: {lateError}"); SetSupportedSasRate(late!);
+    Check(late!.TryAdvanceByHostDuration(SimulationDuration.FromTicks(100_000), out lateError), $"large off-mode advance: {lateError}");
+    Check(late.TryAdvanceByHostDuration(SimulationDuration.FromTicks(1_000), new NativeInputState { SasModeKey = 3 }, out lateError), $"late SAS engagement: {lateError}");
+    Check(late.NextSasControlBoundary > late.CurrentTime, "late SAS engagement reinitializes a strictly future boundary");
+    Check(late.TryAdvanceByHostDuration(SimulationDuration.FromTicks(4_000), out lateError), $"late SAS cadence advance: {lateError}");
+    Check(late.CurrentTime > new SimulationInstant(1_000_000) && late.SasCrossedBoundaryCount == 1, "late SAS engagement continues authoritative time without TargetBeforeCurrent");
+
+    Check(multiple.TryAdvanceByHostDuration(SimulationDuration.FromTicks(1_000), new NativeInputState { SasModeKey = 3 }, out error), $"off-to-active reengagement: {error}");
+    Check(multiple.NextSasControlBoundary > multiple.CurrentTime, "off-to-active transition schedules a future boundary");
+    Check(multiple.TryAdvanceByHostDuration(SimulationDuration.FromTicks(1_000), new NativeInputState { MoveForward = 1 }, out error), $"manual SAS disengagement: {error}");
+    Check(multiple.SasMode == SpacecraftSasMode.Off, "manual torque disengages SAS");
+    Check(multiple.TryAdvanceByHostDuration(SimulationDuration.FromTicks(1_000), new NativeInputState { SasModeKey = 3 }, out error) && multiple.NextSasControlBoundary > multiple.CurrentTime, $"manual reengagement: {error}");
+
+    var paused = CreateSelected(); var camera = new CameraState(new FramePosition(new ReferenceFrameId(1), CelestialAnalyticalScene.Camera.Position), DoubleQuaternion.Identity, CelestialAnalyticalScene.Camera.Projection, CameraMode.Free);
+    paused.ApplyPresentationInput(camera, new NativeInputState { PauseToggle = 1 }, out _, out _);
+    var pausedBoundary = paused.NextSasControlBoundary; var pausedTime = paused.CurrentTime;
+    Check(paused.TryAdvanceByHostDuration(SimulationDuration.FromTicks(10_000), out error) && paused.SasCrossedBoundaryCount == 0 && paused.TorqueTransitionCount == 0 && paused.CurrentTime == pausedTime && paused.NextSasControlBoundary == pausedBoundary, $"pause suppresses SAS cadence: {error}");
+    paused.ApplyPresentationInput(camera, new NativeInputState { PauseToggle = 1 }, out _, out _);
+    Check(paused.TryAdvanceByHostDuration(SimulationDuration.FromTicks(4_000), out error) && paused.SasCrossedBoundaryCount == 1, $"resume preserves the next future cadence boundary: {error}");
+
+    Check(CelestialAnalyticalScene.TryCreate(out var highWarp, out var highWarpError) && highWarp is not null, $"high-warp SAS fixture: {highWarpError}");
+    Check(highWarp!.TryAdvanceByHostDuration(SimulationDuration.FromTicks(1), new NativeInputState { SasModeKey = 3 }, out highWarpError), $"high-warp SAS selection: {highWarpError}");
+    Check(highWarp.SasControlSuspended && highWarp.SasCrossedBoundaryCount == 0 && highWarp.SasMode == SpacecraftSasMode.Prograde, "SAS selection at 10000x suspends without cadence work");
+    var highWarpTime = highWarp.CurrentTime; var highWarpTransitions = highWarp.TorqueTransitionCount;
+    Check(highWarp.TryAdvanceByHostDuration(SimulationDuration.FromTicks(1), out highWarpError), $"high-warp suspended coast: {highWarpError}");
+    Check(highWarp.CurrentTime > highWarpTime && highWarp.SasControlSuspended && highWarp.SasCrossedBoundaryCount == 0 && highWarp.TorqueTransitionCount == highWarpTransitions, "suspended SAS leaves clock advancing without cap or transaction growth");
+    Check(highWarp.TryAdvanceByHostDuration(SimulationDuration.FromTicks(1), new NativeInputState { SasModeKey = 5 }, out highWarpError), $"high-warp mode switch: {highWarpError}");
+    Check(highWarp.SasControlSuspended && highWarp.SasMode == SpacecraftSasMode.Normal && highWarp.SasCrossedBoundaryCount == 0, "mode switch while suspended retains the newest mode");
+    var highWarpCamera = new CameraState(new FramePosition(new ReferenceFrameId(1), CelestialAnalyticalScene.Camera.Position), DoubleQuaternion.Identity, CelestialAnalyticalScene.Camera.Projection, CameraMode.Free);
+    for (var index = 0; index < 4; index++) highWarp.ApplyPresentationInput(highWarpCamera, new NativeInputState { RateDecrease = 1 }, out _, out _);
+    Check(highWarp.Rate == SimulationRate.Ten && !highWarp.SasControlSuspended && highWarp.NextSasControlBoundary > highWarp.CurrentTime, "supported-rate transition resumes at a strictly future boundary");
+    var ticksToResume = (highWarp.NextSasControlBoundary.Ticks - highWarp.CurrentTime.Ticks) / SimulationRate.Ten.Numerator;
+    Check(highWarp.TryAdvanceByHostDuration(SimulationDuration.FromTicks(ticksToResume), out highWarpError) && highWarp.SasCrossedBoundaryCount == 1, $"supported-rate resume runs only the future boundary: {highWarpError}");
+    var activeTransitions = highWarp.TorqueTransitionCount;
+    highWarp.ApplyPresentationInput(highWarpCamera, new NativeInputState { RateIncrease = 1 }, out _, out _);
+    Check(highWarp.Rate == SimulationRate.Hundred && highWarp.SasControlSuspended && highWarp.LastSasTorque == Double3.Zero && highWarp.TorqueTransitionCount == activeTransitions + 1, "unsupported-rate transition commits zero torque once");
+    highWarp.ApplyPresentationInput(highWarpCamera, new NativeInputState { RateIncrease = 1 }, out _, out _);
+    Check(highWarp.TorqueTransitionCount == activeTransitions + 1, "repeated unsupported rate changes do not duplicate zero torque");
+    Check(highWarp.TryAdvanceByHostDuration(SimulationDuration.FromTicks(1), new NativeInputState { SasModeKey = 1 }, out highWarpError) && highWarp.SasMode == SpacecraftSasMode.Off && !highWarp.SasControlSuspended && highWarp.TorqueTransitionCount == activeTransitions + 1, $"off while suspended clears without duplicate zero torque: {highWarpError}");
+    _ = CelestialAnalyticalScene.QuantizeSasTorque(Double3.UnitX); var allocationBefore = GC.GetAllocatedBytesForCurrentThread(); for (var index = 0; index < 100_000; index++) _ = CelestialAnalyticalScene.QuantizeSasTorque(new Double3(index * .001d, -index * .001d, 0d)); Check(GC.GetAllocatedBytesForCurrentThread() == allocationBefore, "warmed SAS torque quantization allocates zero bytes");
+    Console.WriteLine($"Deterministic SAS cadence hash: 0x{cadenceHash:X16}; quantization allocation=0 bytes");
 }
 
 static void MeshHandleTest() { Check(!MeshHandle.Invalid.IsValid, "zero invalid"); Check(MeshHandle.Triangle.IsValid, "triangle valid"); }

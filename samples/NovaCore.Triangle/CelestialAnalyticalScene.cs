@@ -27,6 +27,13 @@ internal sealed class CelestialAnalyticalScene
     // Presentation-only: deliberately calm at 1× while retaining visible multi-axis response.
     internal static readonly Double3 FixtureInitialAngularVelocity = Double3.Zero;
     internal const double PlayerTorqueMagnitude = 4d;
+    internal const long SasControlIntervalTicks = 50_000;
+    internal const int MaximumSasControlBoundariesPerHostUpdate = 2_048;
+    internal const double SasTorqueQuantizationIncrement = .01d;
+    internal static readonly SimulationRate MaximumSupportedSasRate = SimulationRate.Ten;
+    private static readonly SpacecraftSasControllerConfiguration SasControllerConfiguration = new(
+        new Double3(6d, 6d, 6d), new Double3(20d, 20d, 20d), new Double3(4d, 4d, 4d),
+        .001d, .001d, .005d, .005d);
     private static readonly SimulationInstant ImpulseTime = SimulationInstant.FromWholeSeconds(100_000);
     private static readonly SimulationRate[] RateSteps = [new(1, 1), new(10, 1), new(100, 1), new(1_000, 1), new(5_000, 1), new(SampleRate, 1), new(50_000, 1)];
 
@@ -48,6 +55,13 @@ internal sealed class CelestialAnalyticalScene
     private SpacecraftSasMode _sasMode;
     private DoubleQuaternion _holdTarget;
     private bool _hasHoldTarget;
+    private SimulationInstant _nextSasControlBoundary = new(SasControlIntervalTicks);
+    private Double3 _lastSasTorque;
+    private bool _hasSasTorqueRequest;
+    private int _sasCrossedBoundaryCount;
+    private bool _sasBoundaryRecoveryReported;
+    private bool _sasControlSuspended;
+    private bool _sasBoundaryCapReported;
     private double _orbitDistance = 24d;
     private double _orbitYawRadians;
     private double _orbitPitchRadians;
@@ -74,6 +88,11 @@ internal sealed class CelestialAnalyticalScene
     internal bool HasHoldTarget => _hasHoldTarget;
     internal DoubleQuaternion HoldTarget => _holdTarget;
     internal int TorqueTransitionCount => _transactions.ProcessedRigidBodyTorqueCount;
+    internal int SasCrossedBoundaryCount => _sasCrossedBoundaryCount;
+    internal bool HasSasTorqueRequest => _hasSasTorqueRequest;
+    internal Double3 LastSasTorque => _lastSasTorque;
+    internal SimulationInstant NextSasControlBoundary => _nextSasControlBoundary;
+    internal bool SasControlSuspended => _sasControlSuspended;
     public double OrbitDistance => _orbitDistance;
     public static FixtureCameraConfiguration Camera => new(
         new Double3(0d, 0d, 24d),
@@ -160,28 +179,193 @@ internal sealed class CelestialAnalyticalScene
             return false;
         }
 
-        var service = _transactions.ServicePendingHostDurationDebt();
-        if (service.Reason is not (SimulationDebtServiceStopReason.Completed or SimulationDebtServiceStopReason.NoDebt))
+        // A manual request wins for this update, so no SAS boundary may run before it disengages.
+        if (CreateTorqueCommand(input).RequestedBodyTorque != Double3.Zero && _sasMode != SpacecraftSasMode.Off)
         {
+            _sasMode = SpacecraftSasMode.Off;
+            _hasHoldTarget = false;
+            _hasSasTorqueRequest = false;
+        }
+
+        if (!TryServiceHostDurationWithSasCadence(out error)) return false;
+        if (!TryApplySasMode(input, out error) || !TryApplyTorqueControl(input, out error)) return false;
+        return TryPublishCandidate(false, out error);
+    }
+
+    private bool TryServiceHostDurationWithSasCadence(out string error)
+    {
+        _sasCrossedBoundaryCount = 0;
+        if (_sasMode == SpacecraftSasMode.Off)
+        {
+            var service = _transactions.ServicePendingHostDurationDebt();
+            if (service.Reason is SimulationDebtServiceStopReason.Completed or SimulationDebtServiceStopReason.NoDebt) { error = string.Empty; return true; }
             error = $"Celestial clock execution failed: {service.Reason}";
             return false;
         }
-        if (!TryApplySasMode(input, out error) || !TryApplyTorqueControl(input, out error)) return false;
-        return TryPublishCandidate(false, out error);
+        if (_sasControlSuspended)
+        {
+            var service = _transactions.ServicePendingHostDurationDebt();
+            if (service.Reason is SimulationDebtServiceStopReason.Completed or SimulationDebtServiceStopReason.NoDebt) { error = string.Empty; return true; }
+            error = $"Celestial clock execution failed: {service.Reason}";
+            return false;
+        }
+        if (!TryEnsureFutureSasControlBoundary(true, out error)) return false;
+        if (!_clock.TryGetPendingSimulationDebtTarget(out var target)) { error = "Celestial SAS cadence target overflow."; return false; }
+        var processedEvents = 0;
+        while (_clock.PendingSimulationDebt.Ticks > 0)
+        {
+            if (_nextSasControlBoundary <= target && _sasCrossedBoundaryCount == MaximumSasControlBoundariesPerHostUpdate)
+            {
+                if (!TryCommitSasTorque(Double3.Zero, _clock.CurrentTime, out error)) return false;
+                if (!TryGetFirstSasControlBoundaryAfter(_clock.CurrentTime, out _nextSasControlBoundary)) { error = "Celestial SAS control boundary overflow."; return false; }
+                if (!_sasBoundaryCapReported) { Console.Error.WriteLine("Celestial SAS cadence cap reached; control will resume at the next future boundary."); _sasBoundaryCapReported = true; }
+                error = string.Empty;
+                return true;
+            }
+            var boundary = _nextSasControlBoundary <= target ? _nextSasControlBoundary : target;
+            var before = _clock.CurrentTime;
+            var advance = _clock.AdvanceTo(boundary);
+            var traversed = _clock.CurrentTime.Ticks - before.Ticks;
+            if (traversed > 0) _clock.ConsumePendingSimulationDebt(new SimulationDuration(traversed));
+            if (advance.Reason == SimulationAdvanceStopReason.ReachedEventBoundary)
+            {
+                var remainingEvents = _clock.MaximumEventsPerAdvance - processedEvents;
+                if (remainingEvents <= 0) { error = "Celestial canonical event budget reached."; return false; }
+                var group = _transactions.ExecuteCanonicalGroup(remainingEvents);
+                processedEvents += group.ProcessedEventCount;
+                if (!group.IsComplete) { error = $"Celestial clock execution failed: {group.Reason}"; return false; }
+                continue;
+            }
+            if (advance.Reason != SimulationAdvanceStopReason.ReachedTarget) { error = $"Celestial cadence advance failed: {advance.Reason}"; return false; }
+            if (_clock.CurrentTime == _nextSasControlBoundary)
+            {
+                _sasCrossedBoundaryCount++;
+                if (!TryApplySasControlAtBoundary(_clock.CurrentTime, out error)) return false;
+                try { _nextSasControlBoundary = new SimulationInstant(checked(_nextSasControlBoundary.Ticks + SasControlIntervalTicks)); }
+                catch (OverflowException) { error = "Celestial SAS control boundary overflow."; return false; }
+            }
+            if (traversed == 0 && _clock.CurrentTime != _nextSasControlBoundary) { error = "Celestial cadence made no progress."; return false; }
+        }
+        error = string.Empty;
+        return true;
+    }
+
+    private bool TryEnsureFutureSasControlBoundary(bool reportRecovery, out string error)
+    {
+        if (_nextSasControlBoundary > _clock.CurrentTime) { error = string.Empty; return true; }
+        if (!TryGetFirstSasControlBoundaryAfter(_clock.CurrentTime, out _nextSasControlBoundary)) { error = "Celestial SAS control boundary overflow."; return false; }
+        if (reportRecovery && !_sasBoundaryRecoveryReported)
+        {
+            Console.Error.WriteLine($"Celestial SAS cadence recovered stale boundary at simulation tick {_clock.CurrentTime.Ticks}.");
+            _sasBoundaryRecoveryReported = true;
+        }
+        error = string.Empty;
+        return true;
+    }
+
+    internal static bool TryGetFirstSasControlBoundaryAfter(SimulationInstant current, out SimulationInstant next)
+    {
+        var remainder = current.Ticks % SasControlIntervalTicks;
+        var increment = remainder >= 0 ? SasControlIntervalTicks - remainder : -remainder;
+        try { next = new SimulationInstant(checked(current.Ticks + increment)); return true; }
+        catch (OverflowException) { next = default; return false; }
+    }
+
+    private bool TryUpdateSasRateSupport(out string error)
+    {
+        if (_sasMode == SpacecraftSasMode.Off) { _sasControlSuspended = false; error = string.Empty; return true; }
+        var supported = (Int128)_clock.Rate.Numerator <= (Int128)MaximumSupportedSasRate.Numerator * _clock.Rate.Denominator;
+        if (!supported)
+        {
+            if (!_sasControlSuspended)
+            {
+                if (!TryCommitSasTorque(Double3.Zero, _clock.CurrentTime, out error)) return false;
+                _sasControlSuspended = true;
+                Console.WriteLine($"Celestial SAS suspended: rate {_clock.Rate.Numerator}:{_clock.Rate.Denominator} exceeds 10:1.");
+            }
+            error = string.Empty;
+            return true;
+        }
+        if (_sasControlSuspended)
+        {
+            _sasControlSuspended = false;
+            _hasSasTorqueRequest = false;
+            if (!TryGetFirstSasControlBoundaryAfter(_clock.CurrentTime, out _nextSasControlBoundary)) { error = "Celestial SAS control boundary overflow."; return false; }
+            Console.WriteLine("Celestial SAS resumed at supported rate.");
+        }
+        error = string.Empty;
+        return true;
+    }
+
+    private bool TryApplySasControlAtBoundary(SimulationInstant boundary, out string error)
+    {
+        if (_sasMode == SpacecraftSasMode.Off) { error = string.Empty; return true; }
+        if (!_transactions.State.Spacecraft.TryGetRigidBody(_spacecraftId, out var rotation)) { error = "SAS spacecraft state unavailable."; return false; }
+        var current = SpacecraftRigidBodyRotationEvaluator.TryEvaluate(rotation, boundary);
+        if (!current.Succeeded) { error = $"SAS rigid-body evaluation failed: {current.Status}"; return false; }
+
+        DoubleQuaternion target;
+        if (_sasMode == SpacecraftSasMode.HoldAttitude)
+        {
+            if (!_hasHoldTarget) return TryCommitSasTorque(Double3.Zero, boundary, out error);
+            target = _holdTarget;
+        }
+        else
+        {
+            if (!TryEvaluateSasTarget(boundary, out target)) return TryCommitSasTorque(Double3.Zero, boundary, out error);
+        }
+        var result = SpacecraftSasController.TryEvaluate(current.OrientationLocalToParent, current.AngularVelocityBody, target, rotation.PrincipalInertia, SasControllerConfiguration);
+        return result.Succeeded ? TryCommitSasTorque(QuantizeSasTorque(result.RequestedBodyTorque), boundary, out error) : TryCommitSasTorque(Double3.Zero, boundary, out error);
+    }
+
+    private bool TryEvaluateSasTarget(SimulationInstant boundary, out DoubleQuaternion target)
+    {
+        target = default;
+        var propagated = CelestialTrajectoryEvaluator.TryEvaluate(new CelestialBodyId(2), _transactions.State.Celestial, boundary);
+        if (!propagated.Succeeded || !TryFlightReferenceMode(_sasMode, out var mode)) return false;
+        var reference = FlightReferenceEvaluator.TryEvaluate(propagated.State.Position, propagated.State.Velocity, DoubleQuaternion.Identity, mode);
+        return reference.Succeeded && SpacecraftSasTargetOrientation.TryCreate(reference.DirectionCarrierParent, Double3.UnitZ, out target) == SpacecraftSasControlStatus.Success;
+    }
+
+    private bool TryCommitSasTorque(in Double3 torque, SimulationInstant time, out string error)
+    {
+        if (!torque.IsFinite) { error = "SAS torque was non-finite."; return false; }
+        if (_hasSasTorqueRequest && torque == _lastSasTorque) { error = string.Empty; return true; }
+        if (!TryCommitTorqueRequest(torque, time, out error)) return false;
+        _lastSasTorque = torque;
+        _hasSasTorqueRequest = true;
+        return true;
+    }
+
+    private bool TryCommitTorqueRequest(in Double3 torque, SimulationInstant time, out string error)
+    {
+        if (torque == _requestedTorque) { error = string.Empty; return true; }
+        var command = new SpacecraftTorqueCommand(_spacecraftId, torque, time);
+        var candidate = RigidBodyTorqueTransactionEvaluator.TryCreateControlReplacement(_transactions.State, command);
+        if (candidate.Status == RigidBodyTorqueTransactionStatus.ReplacementNoOp) { _requestedTorque = torque; error = string.Empty; return true; }
+        if (!candidate.Succeeded || candidate.Transaction is null) { error = $"Spacecraft torque candidate failed: {candidate.Status}"; return false; }
+        var committed = _transactions.ValidateAndCommit(candidate.Transaction.Value);
+        if (!committed.Committed) { error = $"Spacecraft torque commit failed: {committed.Status}"; return false; }
+        _requestedTorque = torque; error = string.Empty; return true;
+    }
+
+    internal static Double3 QuantizeSasTorque(in Double3 torque) => new(QuantizeSasTorqueComponent(torque.X), QuantizeSasTorqueComponent(torque.Y), QuantizeSasTorqueComponent(torque.Z));
+    private static double QuantizeSasTorqueComponent(double value) => !double.IsFinite(value) ? double.NaN : Math.Round(value / SasTorqueQuantizationIncrement, MidpointRounding.AwayFromZero) * SasTorqueQuantizationIncrement;
+    private static bool TryFlightReferenceMode(SpacecraftSasMode mode, out FlightReferenceMode value)
+    {
+        value = mode switch { SpacecraftSasMode.Prograde => FlightReferenceMode.Prograde, SpacecraftSasMode.Retrograde => FlightReferenceMode.Retrograde, SpacecraftSasMode.Normal => FlightReferenceMode.Normal, SpacecraftSasMode.AntiNormal => FlightReferenceMode.AntiNormal, SpacecraftSasMode.RadialOut => FlightReferenceMode.RadialOut, SpacecraftSasMode.RadialIn => FlightReferenceMode.RadialIn, _ => default };
+        return mode is not (SpacecraftSasMode.Off or SpacecraftSasMode.HoldAttitude);
     }
 
     private bool TryApplyTorqueControl(in NativeInputState input, out string error)
     {
         var command = CreateTorqueCommand(input);
-        if (command.RequestedBodyTorque != Double3.Zero && _sasMode != SpacecraftSasMode.Off) { _sasMode = SpacecraftSasMode.Off; _hasHoldTarget = false; }
+        if (command.RequestedBodyTorque != Double3.Zero && _sasMode != SpacecraftSasMode.Off) { _sasMode = SpacecraftSasMode.Off; _hasHoldTarget = false; _hasSasTorqueRequest = false; _sasControlSuspended = false; }
+        // A released manual key is not a zero-torque request while SAS owns the active command.
+        if (command.RequestedBodyTorque == Double3.Zero && _sasMode != SpacecraftSasMode.Off) { error = string.Empty; return true; }
         // An unchanged request is already authoritative. Do not pollute history or rebase its epoch.
         if (command.RequestedBodyTorque == _requestedTorque) { error = string.Empty; return true; }
-        var candidate = RigidBodyTorqueTransactionEvaluator.TryCreateControlReplacement(_transactions.State, command);
-        if (candidate.Status == RigidBodyTorqueTransactionStatus.ReplacementNoOp) { _requestedTorque = command.RequestedBodyTorque; error = string.Empty; return true; }
-        if (!candidate.Succeeded || candidate.Transaction is null) { error = $"Spacecraft torque candidate failed: {candidate.Status}"; return false; }
-        var committed = _transactions.ValidateAndCommit(candidate.Transaction.Value);
-        if (!committed.Committed) { error = $"Spacecraft torque commit failed: {committed.Status}"; return false; }
-        _requestedTorque = command.RequestedBodyTorque; error = string.Empty; return true;
+        return TryCommitTorqueRequest(command.RequestedBodyTorque, command.Time, out error);
     }
 
     private bool TryApplySasMode(in NativeInputState input, out string error)
@@ -189,15 +373,15 @@ internal sealed class CelestialAnalyticalScene
         error = string.Empty;
         if (input.SasModeKey == 0) return true;
         if (input.SasModeKey is > 8) { error = "Invalid SAS mode key."; return false; }
-        if (input.SasModeKey == 1) { _sasMode = SpacecraftSasMode.Off; _hasHoldTarget = false; return true; }
+        if (input.SasModeKey == 1) { _sasMode = SpacecraftSasMode.Off; _hasHoldTarget = false; _sasControlSuspended = false; var committed = TryCommitSasTorque(Double3.Zero, _clock.CurrentTime, out error); _hasSasTorqueRequest = false; return committed; }
         if (input.SasModeKey == 2)
         {
             if (!_transactions.State.Spacecraft.TryGetRigidBody(_spacecraftId, out var rotation)) { error = "SAS hold spacecraft state unavailable."; return false; }
             var evaluated = SpacecraftRigidBodyRotationEvaluator.TryEvaluate(rotation, _clock.CurrentTime);
             if (!evaluated.Succeeded || SpacecraftAttitudeEvaluator.TryCanonicalize(evaluated.OrientationLocalToParent, out _holdTarget) != SpacecraftAttitudeEvaluationStatus.Success) { error = "SAS hold capture failed."; return false; }
-            _sasMode = SpacecraftSasMode.HoldAttitude; _hasHoldTarget = true; return true;
+            _sasMode = SpacecraftSasMode.HoldAttitude; _hasHoldTarget = true; _hasSasTorqueRequest = false; return TryUpdateSasRateSupport(out error) && (!_sasControlSuspended ? TryEnsureFutureSasControlBoundary(false, out error) : true);
         }
-        _sasMode = (SpacecraftSasMode)(input.SasModeKey - 1); _hasHoldTarget = false; return true;
+        _sasMode = (SpacecraftSasMode)(input.SasModeKey - 1); _hasHoldTarget = false; _hasSasTorqueRequest = false; return TryUpdateSasRateSupport(out error) && (!_sasControlSuspended ? TryEnsureFutureSasControlBoundary(false, out error) : true);
     }
 
     private SpacecraftTorqueCommand CreateTorqueCommand(in NativeInputState input) => new(
@@ -214,6 +398,7 @@ internal sealed class CelestialAnalyticalScene
         pauseChanged = false;
         if (input.RateDecrease != 0 && _rateStepIndex > 0) { _rateStepIndex--; _clock.TrySetRate(RateSteps[_rateStepIndex]); rateChanged = true; }
         if (input.RateIncrease != 0 && _rateStepIndex + 1 < RateSteps.Length) { _rateStepIndex++; _clock.TrySetRate(RateSteps[_rateStepIndex]); rateChanged = true; }
+        if (rateChanged && !TryUpdateSasRateSupport(out var supportError)) Console.Error.WriteLine(supportError);
         if (input.PauseToggle != 0) { if (_clock.IsPaused) _clock.Resume(); else _clock.Pause(); pauseChanged = true; }
 
         var changed = false;
