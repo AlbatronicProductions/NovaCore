@@ -19,6 +19,7 @@ Authoritative simulation is managed C#. Native code owns only platform input and
 - System-wide exact celestial-time mappings and immutable ephemeris provenance contracts; no external ephemeris provider is implemented yet.
 - Typed immutable ephemeris catalogs: hierarchy nodes bind to declared source-backed fixed, circular, or analytical Kepler payloads without embedding model data.
 - Immutable flat sampled-ephemeris catalogs with deterministic finite-coverage cubic-Hermite evaluation; external dataset loading remains deferred.
+- `SolAnalytical`: a complete Sun-rooted, approximately modeled fixed-J2000 Solar-System dataset for Mercury through Neptune plus an Earth-relative Moon; it is not a JPL ephemeris.
 - Hierarchical reference-frame graph and authoritative celestial/body-frame extraction.
 - Double-precision, camera-relative rendering with a deterministic Vulkan backend.
 - Analytical orbit visualization, including a previous-orbit ghost after an impulse.
@@ -86,6 +87,7 @@ The default triangle command renders the reusable mesh field. `--scene=frames` r
 - [Architecture](docs/architecture.md)
 - [Celestial Simulation](docs/celestial-simulation.md)
 - [Celestial Bodies](docs/celestial-bodies.md)
+- [SolAnalytical Dataset](docs/sol-analytical.md)
 - [Simulation Time](docs/simulation-time.md)
 - [Reference Frames](docs/reference-frames.md)
 - [Precision Model](docs/precision-model.md)

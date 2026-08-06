@@ -55,7 +55,7 @@ internal static class CelestialSystemEvaluator
                 }
                 else return new(CelestialSystemEvaluationStatus.UnsupportedTrajectoryModel);
                 if (!system.TryGetPhysicalProperties(parent.Id, out var parentProperties) || !double.IsFinite(parentProperties.GravitationalParameter) || parentProperties.GravitationalParameter <= 0d) return new(CelestialSystemEvaluationStatus.InvalidConstants);
-                var propagation = UniversalVariableTwoBodyPropagator.TryEvaluate(epochState, epochSolverTime, requestedSolverTime, parentProperties.GravitationalParameter);
+                var propagation = TryEvaluateAnalyticalKepler(epochState, epochSolverTime, requestedSolverTime, parentProperties.GravitationalParameter);
                 if (!propagation.Succeeded) return new(CelestialSystemEvaluationStatus.NumericalFailure);
                 if (!propagation.State.IsFinite) return new(CelestialSystemEvaluationStatus.NonFiniteResult);
                 local = new FrameTransform(propagation.State.Position, DoubleQuaternion.Identity); velocity = propagation.State.Velocity;
@@ -88,5 +88,25 @@ internal static class CelestialSystemEvaluator
     {
         for (var index = 0; index < beforeIndex; index++) if (system.GetNodeInTraversalOrder(index).Id == parent) return index;
         return -1;
+    }
+
+    // The propagator's existing bounded interval is retained. Broad authored coverage composes a finite number of exact-time
+    // universal-variable evaluations rather than changing the global propagation contract or introducing a second solver.
+    private static TwoBodyPropagationResult TryEvaluateAnalyticalKepler(CartesianState epochState, SimulationInstant epoch, SimulationInstant requested, double mu)
+    {
+        long remaining;
+        try { remaining = (requested - epoch).Ticks; } catch (OverflowException) { return new(TwoBodyPropagationStatus.EvaluationSpanExceeded, requested, default, 0); }
+        var state = epoch; var current = epochState; var iterations = 0;
+        while (remaining != 0)
+        {
+            var step = remaining > 0 ? Math.Min(remaining, UniversalVariableTwoBodyPropagator.MaximumEvaluationTicks) : Math.Max(remaining, -UniversalVariableTwoBodyPropagator.MaximumEvaluationTicks);
+            SimulationInstant next;
+            try { next = state + new SimulationDuration(step); } catch (OverflowException) { return new(TwoBodyPropagationStatus.EvaluationSpanExceeded, requested, default, iterations); }
+            var result = UniversalVariableTwoBodyPropagator.TryEvaluate(current, state, next, mu);
+            iterations += result.Iterations;
+            if (!result.Succeeded) return new(result.Status, requested, default, iterations);
+            current = result.State; state = next; remaining -= step;
+        }
+        return new(TwoBodyPropagationStatus.Success, requested, current, iterations);
     }
 }

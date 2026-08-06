@@ -67,7 +67,9 @@ internal readonly record struct CelestialPhysicalProperties(
     double Flattening,
     CelestialMetadataReferenceId SiderealRotationReference,
     CelestialMetadataReferenceId AtmosphereReference,
-    CelestialMetadataReferenceId VisualReference)
+    CelestialMetadataReferenceId VisualReference,
+    CelestialEphemerisSourceId PhysicalConstantsSource = default,
+    CelestialConstantsVersionId PhysicalConstantsVersion = default)
 {
     internal static CelestialPhysicalProperties Unspecified => default;
     internal bool IsValid =>
