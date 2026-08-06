@@ -27,12 +27,12 @@ internal readonly record struct CircularOrbitEphemerisPayload(long EpochDomainTi
     internal bool IsValid => double.IsFinite(Radius) && Radius > 0d && double.IsFinite(InitialPhaseRadians) && PlaneOrientation.IsFinite &&
         PlaneOrientation.LengthSquared > 0d && Math.Abs(PlaneOrientation.LengthSquared - 1d) <= 1e-12d && double.IsFinite(CentralGravitationalParameter) && CentralGravitationalParameter > 0d;
 
-    // Temporary 9A-3B adapter: fixtures use the identity time mapping. 9A-3C replaces this with mapped-domain dispatch.
-    internal TwoBodyTrajectory ToLegacyTrajectory(CelestialBodyId centralBody)
+    /// <summary>Builds the epoch Cartesian state without assigning trajectory ownership to a hierarchy node.</summary>
+    internal CartesianState ToCartesianState()
     {
         var localPosition = new Double3(Radius * Math.Cos(InitialPhaseRadians), Radius * Math.Sin(InitialPhaseRadians), 0d);
         var speed = Math.Sqrt(CentralGravitationalParameter / Radius);
         var localVelocity = new Double3(-speed * Math.Sin(InitialPhaseRadians), speed * Math.Cos(InitialPhaseRadians), 0d);
-        return new TwoBodyTrajectory(centralBody, new SimulationInstant(EpochDomainTicks), new CartesianState(PlaneOrientation.Rotate(localPosition), PlaneOrientation.Rotate(localVelocity)), TwoBodyPropagationModel.CartesianTwoBodyV1);
+        return new CartesianState(PlaneOrientation.Rotate(localPosition), PlaneOrientation.Rotate(localVelocity));
     }
 }

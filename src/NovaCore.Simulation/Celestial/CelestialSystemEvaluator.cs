@@ -13,6 +13,9 @@ internal static class CelestialSystemEvaluator
         if (destination.Length < system.Count || rootTransforms.Length < system.Count || staging.Length < system.Count || stagingRoots.Length < system.Count) return new(CelestialSystemEvaluationStatus.DestinationTooSmall);
         var validation = ValidateSystem(system);
         if (!validation.Succeeded) return validation;
+        if (system.TryMapTime(instant, out var requestedArgument) != CelestialSystemTimeMappingStatus.Success) return new(CelestialSystemEvaluationStatus.TimeMappingFailure);
+        var domainTicksPerSecond = system.TimeMapping.DomainAnchor.DomainTicksPerSecond;
+        if (!requestedArgument.TryToSimulationInstant(domainTicksPerSecond, out var requestedSolverTime)) return new(CelestialSystemEvaluationStatus.TimeMappingFailure);
         for (var index = 0; index < system.Count; index++)
         {
             var node = system.GetNodeInTraversalOrder(index); var body = node.Body;
@@ -29,13 +32,21 @@ internal static class CelestialSystemEvaluator
                 if (parentIndex < 0) return new(CelestialSystemEvaluationStatus.ParentEvaluationFailed);
                 var parent = system.GetNodeInTraversalOrder(parentIndex);
                 if (node.TrajectoryModel == CelestialTrajectoryModel.ReservedNumericalNBody) return new(CelestialSystemEvaluationStatus.UnsupportedTrajectoryModel);
-                TwoBodyTrajectory trajectory;
-                if (node.TrajectoryModel == CelestialTrajectoryModel.AnalyticalKepler && system.TryGetAnalyticalKepler(node.Ephemeris.PayloadIndex, out trajectory)) { }
-                else if (node.TrajectoryModel == CelestialTrajectoryModel.CircularOrbit && system.TryGetCircularOrbit(node.Ephemeris.PayloadIndex, out var circular)) trajectory = circular.ToLegacyTrajectory(node.ParentId.Value);
+                CartesianState epochState; SimulationInstant epochSolverTime;
+                if (node.TrajectoryModel == CelestialTrajectoryModel.AnalyticalKepler && system.TryGetAnalyticalKepler(node.Ephemeris.PayloadIndex, out var trajectory))
+                {
+                    if (system.TryMapTime(trajectory.Epoch, out var epochArgument) != CelestialSystemTimeMappingStatus.Success || !epochArgument.TryToSimulationInstant(domainTicksPerSecond, out epochSolverTime)) return new(CelestialSystemEvaluationStatus.TimeMappingFailure);
+                    epochState = trajectory.StateAtEpoch;
+                }
+                else if (node.TrajectoryModel == CelestialTrajectoryModel.CircularOrbit && system.TryGetCircularOrbit(node.Ephemeris.PayloadIndex, out var circular))
+                {
+                    var epochArgument = new CelestialTimeArgument(system.TimeMapping.DomainAnchor.Domain, circular.EpochDomainTicks, 0, 1);
+                    if (!epochArgument.TryToSimulationInstant(domainTicksPerSecond, out epochSolverTime)) return new(CelestialSystemEvaluationStatus.TimeMappingFailure);
+                    epochState = circular.ToCartesianState();
+                }
                 else return new(CelestialSystemEvaluationStatus.UnsupportedTrajectoryModel);
-                if (trajectory.CentralBody != node.ParentId.Value) return new(CelestialSystemEvaluationStatus.ParentEvaluationFailed);
                 if (!double.IsFinite(parent.Body.GravitationalParameter) || parent.Body.GravitationalParameter <= 0d) return new(CelestialSystemEvaluationStatus.InvalidConstants);
-                var propagation = UniversalVariableTwoBodyPropagator.TryEvaluate(trajectory.StateAtEpoch, trajectory.Epoch, instant, parent.Body.GravitationalParameter);
+                var propagation = UniversalVariableTwoBodyPropagator.TryEvaluate(epochState, epochSolverTime, requestedSolverTime, parent.Body.GravitationalParameter);
                 if (!propagation.Succeeded) return new(CelestialSystemEvaluationStatus.NumericalFailure);
                 if (!propagation.State.IsFinite) return new(CelestialSystemEvaluationStatus.NonFiniteResult);
                 local = new FrameTransform(propagation.State.Position, DoubleQuaternion.Identity); velocity = propagation.State.Velocity;

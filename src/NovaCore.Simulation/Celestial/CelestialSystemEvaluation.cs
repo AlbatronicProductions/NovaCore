@@ -12,6 +12,7 @@ internal enum CelestialSystemEvaluationStatus : byte
     ParentEvaluationFailed,
     NumericalFailure,
     NonFiniteResult,
+    TimeMappingFailure,
 }
 
 internal readonly record struct CelestialSystemEvaluationResult(CelestialSystemEvaluationStatus Status)

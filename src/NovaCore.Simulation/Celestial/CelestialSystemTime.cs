@@ -13,6 +13,18 @@ internal readonly record struct CelestialEpoch(CelestialTimeDomainId Domain, lon
 internal readonly record struct CelestialTimeArgument(CelestialTimeDomainId Domain, long WholeDomainTicks, Int128 RemainderNumerator, Int128 RemainderDenominator)
 {
     internal bool IsExact => RemainderNumerator == 0;
+
+    /// <summary>Converts one exact domain argument into the existing solver's microtick coordinate without consulting host time.</summary>
+    internal bool TryToSimulationInstant(long domainTicksPerSecond, out SimulationInstant instant)
+    {
+        instant = default;
+        if (!Domain.IsValid || domainTicksPerSecond <= 0 || RemainderDenominator <= 0 || RemainderNumerator < 0 || RemainderNumerator >= RemainderDenominator) return false;
+        var seconds = WholeDomainTicks / (double)domainTicksPerSecond + (double)RemainderNumerator / (double)RemainderDenominator / domainTicksPerSecond;
+        if (!double.IsFinite(seconds)) return false;
+        try { instant = SimulationInstant.FromSecondsRounded(seconds); return true; }
+        catch (ArgumentOutOfRangeException) { return false; }
+        catch (OverflowException) { return false; }
+    }
 }
 
 internal readonly record struct CelestialSystemTimeMapping(SimulationInstant SimulationAnchor, CelestialEpoch DomainAnchor, long ScaleNumerator, long ScaleDenominator)
