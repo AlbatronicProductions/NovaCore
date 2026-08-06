@@ -26,6 +26,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NovaCore.Camera.Tests", "te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NovaCore.Simulation.Tests", "tests\NovaCore.Simulation.Tests\NovaCore.Simulation.Tests.csproj", "{D8E5B543-265B-4C19-BD7B-3F0DBD6BFC1D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NovaCore.EphemerisFormat", "src\NovaCore.EphemerisFormat\NovaCore.EphemerisFormat.csproj", "{17A1AE6F-9A3F-47BB-801B-CB2F045F5B87}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NovaCore.EphemerisBuilder", "tools\NovaCore.EphemerisBuilder\NovaCore.EphemerisBuilder.csproj", "{FFEC8D4B-4939-49ED-B74F-CC251039D003}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NovaCore.EphemerisBuilder.Tests", "tests\NovaCore.EphemerisBuilder.Tests\NovaCore.EphemerisBuilder.Tests.csproj", "{A9DCD5C2-3C68-4C55-8D9D-00C7A1E31B5A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,5 +62,11 @@ Global
 		{431C07C3-7F14-4B26-A357-F8BF7F7B5E80}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D8E5B543-265B-4C19-BD7B-3F0DBD6BFC1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D8E5B543-265B-4C19-BD7B-3F0DBD6BFC1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17A1AE6F-9A3F-47BB-801B-CB2F045F5B87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17A1AE6F-9A3F-47BB-801B-CB2F045F5B87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFEC8D4B-4939-49ED-B74F-CC251039D003}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFEC8D4B-4939-49ED-B74F-CC251039D003}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9DCD5C2-3C68-4C55-8D9D-00C7A1E31B5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9DCD5C2-3C68-4C55-8D9D-00C7A1E31B5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 EndGlobal
