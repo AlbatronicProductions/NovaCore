@@ -7,7 +7,7 @@ if (result != NcpeV2Status.Success || bytes is null) return Fail($"Build failed:
 try
 {
     AtomicWrite(args[1], bytes);
-    if (args.Length == 3) AtomicWrite(args[2], System.Text.Encoding.UTF8.GetBytes($"formatVersion=2\nartifactHash={EphemerisHash.Compute(bytes.AsSpan(0, bytes.Length - 16))}\ndefinitionHash={NcpeV2SemanticHash.Compute(SyntheticEphemerisDemo.CreateV2()):X16}\n"));
+    if (args.Length == 3) AtomicWrite(args[2], System.Text.Encoding.UTF8.GetBytes($"formatVersion=2\nartifactHash={EphemerisHash.Compute(bytes.AsSpan(0, bytes.Length - 16))}\ndefinitionHash={NcpeV2RuntimeHash.Compute(SyntheticEphemerisDemo.CreateV2()):X16}\n"));
     Console.WriteLine($"SyntheticEphemerisDemo v2 artifactHash={EphemerisHash.Compute(bytes.AsSpan(0, bytes.Length - 16))}"); return 0;
 }
 catch (IOException ex) { return Fail($"OutputPathFailure: {ex.Message}"); }
@@ -29,9 +29,9 @@ internal static class SyntheticEphemerisDemo
     {
         var samples = new List<NormalizedEphemerisSample>(); samples.AddRange(Samples(0)); samples.AddRange(Samples(10));
         var system=new NcpeV2System(9001,0,0,1,1,1,71,2,17,-20,20,23,29,1,2,3,4,9002,2,0x5A5A);
-        var sources=new[]{new NcpeV2Source(71,0,2,17,-20,20,23,29,1,2,3,4),new NcpeV2Source(72,1,2,17,-20,20,23,29,1,2,3,4)};
+        var sources=new[]{new NcpeV2Source(71,1,2,17,-20,20,23,29,1,2,3,4),new NcpeV2Source(72,3,2,17,-20,20,23,29,1,2,3,4)};
         var bodies=new[]{Body(1,"Synthetic Root",0,0),Body(2,"Synthetic Alpha",7,1),Body(3,"Synthetic Beta",7,1)};
-        var bindings=new[]{new NcpeV2Binding(1,0,71,0,0,0,0,0,0,0,0,0,0,1,0,0,0),new NcpeV2Binding(2,1,72,0,0,0,0,0,0,0,0,0,0,1,0,0,0),new NcpeV2Binding(3,1,72,1,0,0,0,0,0,0,0,0,0,1,0,0,0)};
+        var bindings=new[]{new NcpeV2Binding(1,1,71,0,0,0,0,0,0,0,0,0,0,1,0,0,0),new NcpeV2Binding(2,3,72,0,0,0,0,0,0,0,0,0,0,1,0,0,0),new NcpeV2Binding(3,3,72,1,0,0,0,0,0,0,0,0,0,1,0,0,0)};
         var payloads=new[]{new NcpeV2Payload(17,0,4,1,-20,20),new NcpeV2Payload(17,4,4,1,-20,20)};return new(system,sources,bodies,bindings,payloads,samples);
     }
     private static NcpeV2Body Body(ulong id,string name,byte classification,ulong parent)=>new(id,name,classification,parent,0,0,0,Array.Empty<string>(),1d,1d,1d,1d,0d,0,0,0,0,0);

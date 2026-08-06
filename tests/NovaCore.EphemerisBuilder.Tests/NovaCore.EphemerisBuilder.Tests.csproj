@@ -1,4 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup><OutputType>Exe</OutputType></PropertyGroup>
-  <ItemGroup><ProjectReference Include="..\..\src\NovaCore.EphemerisFormat\NovaCore.EphemerisFormat.csproj" /></ItemGroup>
+  <ItemGroup><ProjectReference Include="..\..\src\NovaCore.EphemerisFormat\NovaCore.EphemerisFormat.csproj" /><ProjectReference Include="..\..\src\NovaCore.Simulation\NovaCore.Simulation.csproj" /></ItemGroup>
 </Project>

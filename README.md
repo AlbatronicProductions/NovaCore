@@ -19,7 +19,8 @@ Authoritative simulation is managed C#. Native code owns only platform input and
 - System-wide exact celestial-time mappings and immutable ephemeris provenance contracts; no external ephemeris provider is implemented yet.
 - Typed immutable ephemeris catalogs: hierarchy nodes bind to declared source-backed fixed, circular, or analytical Kepler payloads without embedding model data.
 - Immutable flat sampled-ephemeris catalogs with deterministic finite-coverage cubic-Hermite evaluation; external dataset loading remains deferred.
-- An offline deterministic, self-describing `NCPE` v2 ephemeris-artifact builder with a synthetic fixture; source ingestion and runtime loading remain deferred.
+- An offline deterministic, self-describing `NCPE` v2 ephemeris-artifact builder with a synthetic fixture; source ingestion, real datasets, and registry selection remain deferred.
+- Byte-only NCPE v2 reconstruction into validated immutable celestial-system definitions; real ephemeris datasets and registry selection remain deferred.
 - `SolAnalytical`: a complete Sun-rooted, approximately modeled fixed-J2000 Solar-System dataset for Mercury through Neptune plus an Earth-relative Moon; it is not a JPL ephemeris.
 - Hierarchical reference-frame graph and authoritative celestial/body-frame extraction.
 - Double-precision, camera-relative rendering with a deterministic Vulkan backend.

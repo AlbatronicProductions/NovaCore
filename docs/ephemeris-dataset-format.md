@@ -10,4 +10,6 @@ Hash layers cover metadata/source identity, conversion policy, catalog, hierarch
 
 NCPE v1 remains readable only as a legacy format; it is explicitly reported as insufficient for runtime reconstruction. The builder writes v2 only. The future runtime reader will defensively reconstruct immutable runtime arrays, recompute the stored definition hash, and publish only after complete validation.
 
+The current byte-only runtime reader implements that v2 reconstruction policy. It rejects v1, malformed sections, invalid artifact hashes, and semantic/runtime-definition hash disagreement; it has no registry or filesystem requirement.
+
 This milestone uses only a synthetic fixture. It does not ingest JPL, SPICE, or a real Solar System dataset.
