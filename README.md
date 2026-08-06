@@ -1,56 +1,61 @@
 # NovaCore
 
-NovaCore is a deterministic, high-precision simulation foundation with a native C++20/Vulkan rendering backend. It is intended for large-scale spaceflight games, not a complete game engine. Within its tested .NET x64 contracts, identical authoritative inputs produce identical deterministic results.
+NovaCore is a deterministic C# spaceflight-simulation foundation with a native C++20/Vulkan rendering backend. It is designed around immutable datasets, reproducible celestial mechanics, and offline-generated ephemerides. It is a foundation, not a complete game engine.
 
-## Current Development Status
+## Current Architecture
 
-NovaCore is progressing from deterministic orbital mechanics toward full spacecraft dynamics. It now supports authoritative orbital propagation, spacecraft attitude evaluation, reference-frame extraction, and deterministic visualization. The next milestone focuses on controllable spacecraft dynamics, propulsion, and guidance.
+NovaCore keeps authority in managed simulation and treats rendering as a downstream consumer of immutable evaluated data.
 
-## Overview
-
-Authoritative simulation is managed C#. Native code owns only platform input and Vulkan rendering. Double-precision spatial mathematics, immutable evaluated reference-frame data, and camera-relative GPU transport keep simulation meaning outside the renderer.
-
-## Current Capabilities
-
-- Deterministic simulation clock and transaction-driven authoritative simulation state with immutable evaluated data.
-- Deterministic elliptic two-body orbital propagation and scheduled inertial impulses.
-- Generic authored celestial-system definitions and pure deterministic evaluation for fixed, circular, and elliptic two-body bodies; NovaCore does not assume a fixed Solar System.
-- Immutable celestial body catalogs separate stable identity and physical constants from ephemeris bindings, supporting barycenter-rooted, geocentric, binary, and fictional authored systems.
-- System-wide exact celestial-time mappings and immutable ephemeris provenance contracts; no external ephemeris provider is implemented yet.
-- Typed immutable ephemeris catalogs: hierarchy nodes bind to declared source-backed fixed, circular, or analytical Kepler payloads without embedding model data.
-- Immutable flat sampled-ephemeris catalogs with deterministic finite-coverage cubic-Hermite evaluation; external dataset loading remains deferred.
-- An offline deterministic, self-describing `NCPE` v2 ephemeris-artifact builder with a synthetic fixture; source ingestion, real datasets, and registry selection remain deferred.
-- Byte-only NCPE v2 reconstruction into validated immutable celestial-system definitions; real ephemeris datasets and registry selection remain deferred.
-- `SolAnalytical`: a complete Sun-rooted, approximately modeled fixed-J2000 Solar-System dataset for Mercury through Neptune plus an Earth-relative Moon; it is not a JPL ephemeris.
-- Hierarchical reference-frame graph and authoritative celestial/body-frame extraction.
-- Double-precision, camera-relative rendering with a deterministic Vulkan backend.
-- Analytical orbit visualization, including a previous-orbit ghost after an impulse.
-- Spacecraft attitude and torque-driven rigid-body rotation with quaternion-based body orientation and an authoritative spacecraft body reference frame.
-- Sample-local SAS mode selection, exact-time hold-attitude capture, and deterministic 20 Hz torque generation at rates up to 10×; SAS safely suspends above that rate pending future high-warp control work.
-
-## Architecture
+- **Simulation** owns exact time, transactions, authoritative celestial and spacecraft state, and deterministic evaluation.
+- **Precision** provides double-precision spatial mathematics and camera-relative GPU transport.
+- **Graphics** consumes resolved immutable render data and owns no simulation state.
+- **Camera** is managed, frame-aware, and resolves its authoritative state before graphics transport.
+- **Reference Frames** provide immutable topology, evaluated transforms, and deterministic frame resolution.
+- **EphemerisFormat** defines the neutral, self-describing NCPE v2 storage contract.
+- **EphemerisBuilder** is the offline deterministic artifact builder.
+- **NaifEphemerisAdapter** is an offline-only contract boundary for a future pinned NAIF/CSPICE source adapter.
 
 ```text
-SimulationClock.CurrentTime
+Official Sources
     ↓
-Pure exact-time two-body propagation
+NaifEphemerisAdapter
     ↓
-Immutable evaluated reference-frame transforms
+EphemerisBuilder
     ↓
-ResolvedRenderSnapshot
+NCPE v2
     ↓
-Graphics transport
+Runtime Loader
     ↓
-Native Vulkan renderer
+CelestialSystemDefinition
+    ↓
+Simulation
 ```
 
-Graphics never traverses frame graphs, evaluates transforms, owns simulation time, or mutates simulation state.
+Runtime code never depends on CSPICE, NAIF kernels, network resources, calendars, or the builder. The current NAIF manifest is an explicitly unpinned template; it cannot produce an authoritative dataset until official files are locally verified and pinned.
 
-## Current Limitations
+## Implemented Features
 
-`--scene=celestial` is a compact analytical visual fixture: cyan denotes the current authoritative orbit and, after its scheduled impulse, a dim curve denotes the immediately previous orbit. A small marker identifies the exact impulse location. These curves and marker are derived visualization only—not mutable trails, prediction state, saved history, or renderer-owned orbit models. Triangle markers and their presentation scale are debug geometry only, not physical body rendering.
+- Immutable `CelestialSystemDefinition` runtime authority.
+- Binding-only celestial hierarchy with typed fixed, circular, analytical-Kepler, and sampled ephemeris catalogs.
+- Exact `SimulationInstant` to `CelestialTimeArgument` mapping.
+- Deterministic analytical trajectories, scheduled inertial impulses, and rigid-body attitude evaluation.
+- Flat sampled cubic-Hermite ephemerides with finite coverage and no extrapolation.
+- Deterministic raw-value hashing and immutable reference-frame extraction.
+- Self-describing NCPE v2 artifacts and byte-only runtime reconstruction.
+- Three-way NCPE definition-hash verification: stored, neutral semantic, and reconstructed runtime definition hashes must agree.
+- Offline NCPE builder with a synthetic fixture.
+- Offline NAIF adapter contracts, stable Sol target map, source manifest template, and deterministic parent-relative SI conversion.
+- Double-precision camera-relative Vulkan rendering, reusable meshes, instancing, and analytical orbit visualization.
 
-Hyperbolic and parabolic propagation, patched conics, sphere-of-influence transitions, N-body gravity, final SAS tuning and high-warp control behavior, terrain, atmosphere, networking, and save/load remain future work.
+## Engineering Principles
+
+- Deterministic execution from explicit authoritative inputs.
+- Immutable runtime definitions and evaluated snapshots.
+- Offline preprocessing for source-dependent data.
+- Zero-allocation warmed runtime evaluation paths where measured contracts require it.
+- Explicit source, constants, conversion-policy, and artifact provenance.
+- Reproducible generated datasets and stable raw-value hashes.
+- Runtime independence from astronomy libraries and source files.
 
 ## Building and Testing
 
@@ -67,43 +72,40 @@ dotnet run --project tests/NovaCore.Precision.Tests -c Debug
 dotnet run --project tests/NovaCore.Graphics.Tests -c Debug
 dotnet run --project tests/NovaCore.ReferenceFrames.Tests -c Debug
 dotnet run --project tests/NovaCore.Camera.Tests -c Debug
+dotnet run --project tests/NovaCore.EphemerisBuilder.Tests -c Debug
+dotnet run --project tests/NovaCore.NaifEphemerisAdapter.Tests -c Debug
 ```
-
-`NovaCore.Simulation.Tests` is the deterministic terminal verification suite for simulation-time, event, transaction, celestial-contract, and two-body propagation behavior. It is not a visual orbital scene.
-
-## Run the Samples
-
-```powershell
-dotnet run --project samples/NovaCore.Triangle -c Debug -- --objects=1000
-dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=frames
-dotnet run --project samples/NovaCore.ReferenceFrameFixture -c Debug
-dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=fixture
-dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=fixture-dynamic
-dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=celestial
-```
-
-The default triangle command renders the reusable mesh field. `--scene=frames` retains the frame-marker view. `NovaCore.ReferenceFrameFixture` verifies static graph and transform resolution in the terminal. `--scene=fixture` draws static Star, Planet, Moon, and TestVessel markers; `--scene=fixture-dynamic` publishes complete immutable snapshots for prescribed transform motion. `--scene=celestial` uses the authoritative clock, trajectory evaluator, frame extraction, and existing camera-relative Vulkan path. Its spacecraft marker rotates from simulation time, and its fixture torque changes that spin at an exact authoritative instant. Keys `1`–`7` select SAS modes (`1` captures hold attitude); `0` disables SAS. Active SAS evaluates and commits quantized torque at deterministic 20 Hz simulation-time boundaries up to 10×; it suspends above 10× without stopping orbital simulation. It is not N-body gravity, patched conics, terrain, spacecraft gameplay, lighting, or final planet rendering.
 
 ## Documentation
 
 - [Architecture](docs/architecture.md)
 - [Celestial Simulation](docs/celestial-simulation.md)
-- [Celestial Bodies](docs/celestial-bodies.md)
-- [SolAnalytical Dataset](docs/sol-analytical.md)
-- [Simulation Time](docs/simulation-time.md)
+- [Sampled Ephemerides](docs/sampled-ephemerides.md)
+- [Ephemeris Dataset Format](docs/ephemeris-dataset-format.md)
+- [Ephemeris Builder](docs/ephemeris-builder.md)
+- [Ephemeris Runtime Loader](docs/ephemeris-runtime-loader.md)
+- [NAIF Source Adapter](docs/naif-source-adapter.md)
 - [Reference Frames](docs/reference-frames.md)
 - [Precision Model](docs/precision-model.md)
 - [Camera](docs/camera.md)
-- [Interop](docs/interop.md)
 - [Build on Windows](docs/build-windows.md)
 
-## Status and Roadmap
+## Current Roadmap
 
-Progress:
+Completed:
 
-- Deterministic orbital mechanics: complete.
-- Orbit visualization: complete.
-- Spacecraft attitude: complete.
-- Spacecraft torque control: complete fixture path.
+- 9A-1 — generic celestial-system definitions.
+- 9A-2 — deterministic celestial-system evaluation.
+- 9A-3 — celestial time, ephemeris binding, and sampled-storage contracts.
+- 9A-4B — immutable celestial identity and physical constants.
+- 9A-4C — `SolAnalytical` authored analytical dataset.
+- 9A-4D — deterministic NCPE artifact format and builder.
+- 9A-4E-1 — NCPE v2 runtime reconstruction and hash verification.
+- 9A-4E-2 — official-source adapter design.
+- 9A-4E-3 — NAIF source manifest and offline adapter contracts.
 
-NovaCore remains a focused foundation. It does not yet provide complete orbital gameplay, general physics, an ECS, a scene graph, asset tooling, or a renderer-owned world model.
+Next:
+
+- 9A-4E-4 — extract bounded real DE440 states through CSPICE in the offline adapter.
+
+NovaCore does not yet include real ephemeris samples, N-body gravity, patched conics, SOIs, asset tooling, an ECS, a scene graph, a runtime dataset registry, or save/replay loading.
