@@ -31,6 +31,7 @@ var tests = new (string Name, Action Test)[]
     ("Celestial contracts", CelestialContractTests),
     ("Celestial system definitions", CelestialSystemDefinitionTests),
     ("Celestial system time and provenance", CelestialSystemTimeAndProvenanceTests),
+    ("Celestial ephemeris catalogs", CelestialEphemerisCatalogTests),
     ("Celestial system evaluation", CelestialSystemEvaluationTests),
     ("Two-body propagation", TwoBodyPropagationTests),
     ("Spacecraft attitude", SpacecraftAttitudeTests),
@@ -473,6 +474,32 @@ static void CelestialSystemTimeAndProvenanceTests()
     Console.WriteLine($"Deterministic celestial-system time hash: 0x{hash:X16}; warm mappings={allocated} bytes");
 }
 
+static void CelestialEphemerisCatalogTests()
+{
+    var mapping = CelestialSystemTimeMapping.Identity(new(1)); var metadata = new CelestialEphemerisMetadata(new(99), new(1), new(1), long.MinValue, long.MaxValue, new(1), new(1), new(0, 0), new(0, 0));
+    var fixedSource = new CelestialEphemerisSource(new(1), CelestialTrajectoryModel.FixedBody, metadata with { Source = new(1) });
+    var circularSource = new CelestialEphemerisSource(new(2), CelestialTrajectoryModel.CircularOrbit, metadata with { Source = new(2) });
+    var fixedPayloads = new[] { FixedBodyEphemerisPayload.Identity }; var circularPayloads = new[] { new CircularOrbitEphemerisPayload(0, 2d, 0d, DoubleQuaternion.Identity, 1d) };
+    var nodes = new[] { new CelestialHierarchyNode(new(new(1), null, new ReferenceFrameId(1), 1d), new CelestialEphemerisBinding(CelestialTrajectoryModel.FixedBody, new(1), 0)), new CelestialHierarchyNode(new(new(2), new CelestialBodyId(1), new ReferenceFrameId(2), 1d), new CelestialEphemerisBinding(CelestialTrajectoryModel.CircularOrbit, new(2), 0)) };
+    Check(CelestialSystemDefinition.TryCreate(new(901), nodes, mapping, metadata, [fixedSource, circularSource], fixedPayloads, circularPayloads, [], out var system, out var validation) && system is not null && validation.Succeeded, "typed FixedBody and CircularOrbit bindings validate");
+    var constructionBefore = GC.GetAllocatedBytesForCurrentThread(); Check(CelestialSystemDefinition.TryCreate(new(901), nodes, mapping, metadata, [fixedSource, circularSource], fixedPayloads, circularPayloads, [], out var constructionCopy, out _) && constructionCopy is not null, "catalog construction copy"); var constructionAllocated = GC.GetAllocatedBytesForCurrentThread() - constructionBefore;
+    Check(system!.TryGetSource(new(2), out var lookedUp) && lookedUp == circularSource && system.TryGetFixedBody(0, out _) && system.TryGetCircularOrbit(0, out _), "deterministic source and typed payload lookup");
+    var hash = CelestialSystemDefinitionHash.Compute(system);
+    Check(CelestialSystemDefinition.TryCreate(new(901), nodes, mapping, metadata, [fixedSource, circularSource], fixedPayloads, [circularPayloads[0] with { InitialPhaseRadians = .25d }], [], out var changed, out _) && CelestialSystemDefinitionHash.Compute(changed!) != hash, "payload value changes definition hash");
+    Check(CelestialSystemDefinition.TryCreate(new(901), nodes, mapping, metadata, [circularSource, fixedSource], fixedPayloads, circularPayloads, [], out changed, out _) && CelestialSystemDefinitionHash.Compute(changed!) != hash, "source declaration order changes definition hash");
+    Check(!CelestialSystemDefinition.TryCreate(new(902), nodes, mapping, metadata, [fixedSource, fixedSource], fixedPayloads, circularPayloads, [], out _, out validation) && validation.Status == CelestialSystemValidationStatus.DuplicateEphemerisSourceId, "duplicate source rejection");
+    Check(!CelestialSystemDefinition.TryCreate(new(902), [nodes[0], nodes[1] with { Ephemeris = new(CelestialTrajectoryModel.CircularOrbit, new(9), 0) }], mapping, metadata, [fixedSource, circularSource], fixedPayloads, circularPayloads, [], out _, out validation) && validation.Status == CelestialSystemValidationStatus.MissingEphemerisSource, "missing source rejection");
+    Check(!CelestialSystemDefinition.TryCreate(new(902), [nodes[0], nodes[1] with { Ephemeris = new(CelestialTrajectoryModel.CircularOrbit, new(2), -1) }], mapping, metadata, [fixedSource, circularSource], fixedPayloads, circularPayloads, [], out _, out validation) && validation.Status == CelestialSystemValidationStatus.NegativePayloadIndex, "negative payload index rejection");
+    Check(!CelestialSystemDefinition.TryCreate(new(902), [nodes[0], nodes[1] with { Ephemeris = new(CelestialTrajectoryModel.CircularOrbit, new(2), 1) }], mapping, metadata, [fixedSource, circularSource], fixedPayloads, circularPayloads, [], out _, out validation) && validation.Status == CelestialSystemValidationStatus.PayloadIndexOutOfRange, "payload bounds rejection");
+    Check(!CelestialSystemDefinition.TryCreate(new(902), [nodes[0] with { Ephemeris = new(CelestialTrajectoryModel.CircularOrbit, new(2), 0) }, nodes[1]], mapping, metadata, [fixedSource, circularSource], fixedPayloads, circularPayloads, [], out _, out validation) && validation.Status == CelestialSystemValidationStatus.RootModelInvalid, "root FixedBody requirement");
+    Check(!CelestialSystemDefinition.TryCreate(new(902), nodes, mapping, metadata, [fixedSource, circularSource], [FixedBodyEphemerisPayload.Identity with { Position = new Double3(double.NaN, 0, 0) }], circularPayloads, [], out _, out validation) && validation.Status == CelestialSystemValidationStatus.InvalidFixedBodyPayload, "invalid FixedBody rejection");
+    Check(!CelestialSystemDefinition.TryCreate(new(902), nodes, mapping, metadata, [fixedSource, circularSource], fixedPayloads, [circularPayloads[0] with { Radius = 0d }], [], out _, out validation) && validation.Status == CelestialSystemValidationStatus.InvalidCircularOrbitPayload, "invalid CircularOrbit rejection");
+    Check(!CelestialSystemDefinition.TryCreate(new(902), nodes, mapping, metadata, [fixedSource, circularSource with { Metadata = circularSource.Metadata with { Domain = new(2) } }], fixedPayloads, circularPayloads, [], out _, out validation) && validation.Status == CelestialSystemValidationStatus.SourceSystemTimeDomainMismatch, "source/system time-domain mismatch rejection");
+    _ = system.TryGetSource(new(2), out _); _ = CelestialSystemDefinitionHash.Compute(system); var before = GC.GetAllocatedBytesForCurrentThread(); ulong checksum = 0;
+    for (var i = 0; i < 100_000; i++) { Check(system.TryGetSource(new(2), out var source), "warm source lookup"); Check(system.TryGetCircularOrbit(0, out var payload), "warm payload lookup"); checksum = Mix(checksum, source.Id.Value ^ (ulong)BitConverter.DoubleToInt64Bits(payload.Radius) ^ CelestialSystemDefinitionHash.Compute(system)); }
+    var allocated = GC.GetAllocatedBytesForCurrentThread() - before; Check(allocated == 0 && checksum != 0, "warmed catalog lookup and hashing allocate zero bytes"); Console.WriteLine($"Deterministic celestial ephemeris-catalog hash: 0x{hash:X16}; construction={constructionAllocated} bytes; warm allocations={allocated} bytes");
+}
+
 static void CelestialSystemEvaluationTests()
 {
     var instant = SimulationInstant.FromWholeSeconds(12_345);
@@ -484,8 +511,7 @@ static void CelestialSystemEvaluationTests()
     var binary = CelestialSystemEvaluator.TryEvaluateSystem(CelestialSystemFixtures.BinaryDemo, instant, binaryEvaluations, binaryRoots, binaryStaging, binaryRootStaging);
     Check(sol.Succeeded && geocentric.Succeeded && binary.Succeeded, "Kepler and circular evaluator dispatch succeeds for all authored fixtures");
     var unsupportedNodes = new[] { new CelestialHierarchyNode(new(new(900), null, new ReferenceFrameId(900), 1d), CelestialTrajectoryModel.FixedBody), new CelestialHierarchyNode(new(new(901), new CelestialBodyId(900), new ReferenceFrameId(901), 1d), CelestialTrajectoryModel.ReservedNumericalNBody) };
-    var unsupportedOutput = new ReferenceFrameEvaluation[2]; var unsupportedRoots = new FrameTransform[2]; var unsupportedStaging = new ReferenceFrameEvaluation[2]; var unsupportedRootStaging = new FrameTransform[2];
-    Check(CelestialSystemDefinition.TryCreate(new(900), unsupportedNodes, CelestialSystemTimeMapping.Identity(new(1)), new(new(1), new(1), new(1), long.MinValue, long.MaxValue, new(1), new(1), new(0, 0), new(0, 0)), out var unsupported, out _) && unsupported is not null && CelestialSystemEvaluator.TryEvaluateSystem(unsupported, instant, unsupportedOutput, unsupportedRoots, unsupportedStaging, unsupportedRootStaging).Status == CelestialSystemEvaluationStatus.UnsupportedTrajectoryModel && unsupportedOutput[0] == default, "reserved numerical model rejects without publication");
+    Check(!CelestialSystemDefinition.TryCreate(new(900), unsupportedNodes, CelestialSystemTimeMapping.Identity(new(1)), new(new(1), new(1), new(1), long.MinValue, long.MaxValue, new(1), new(1), new(0, 0), new(0, 0)), out _, out var unsupportedValidation) && unsupportedValidation.Status == CelestialSystemValidationStatus.UnsupportedReservedTrajectoryModel, "reserved numerical model rejects before publication");
     Check(solEvaluations[0].Frame == new ReferenceFrameId(1) && solEvaluations[0].Value.LocalToParent == FrameTransform.Identity && solEvaluations[1].Frame == new ReferenceFrameId(2) && solRoots[2].Translation != solEvaluations[2].Value.LocalToParent.Translation, "root-first parent-before-child transform composition");
     Check(geocentricEvaluations[0].Value.LocalToParent == FrameTransform.Identity && geocentricEvaluations[1].Value.LocalToParent.Translation.IsFinite && geocentricEvaluations[1].Value.OriginVelocityInParent.IsFinite, "fixed body and circular orbit evaluation");
     Check(CelestialSystemEvaluator.TryEvaluateSystem(CelestialSystemFixtures.SolMini, instant, solEvaluations.AsSpan(0, 2), solRoots, solStaging, solRootStaging).Status == CelestialSystemEvaluationStatus.DestinationTooSmall, "undersized evaluated-frame destination rejection");

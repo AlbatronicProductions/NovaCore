@@ -10,14 +10,25 @@ internal static class CelestialSystemDefinitionHash
         var mapping = definition.TimeMapping; var epoch = mapping.DomainAnchor; var metadata = definition.EphemerisMetadata;
         hash = Mix(hash, (ulong)mapping.SimulationAnchor.Ticks); hash = Mix(hash, epoch.Domain.Value); hash = Mix(hash, (ulong)epoch.DomainTicks); hash = Mix(hash, (ulong)epoch.DomainTicksPerSecond); hash = Mix(hash, (ulong)mapping.ScaleNumerator); hash = Mix(hash, (ulong)mapping.ScaleDenominator);
         hash = Mix(hash, metadata.Source.Value); hash = Mix(hash, metadata.Version.Value); hash = Mix(hash, metadata.Domain.Value); hash = Mix(hash, (ulong)metadata.SupportedStartDomainTicks); hash = Mix(hash, (ulong)metadata.SupportedEndDomainTicks); hash = Mix(hash, metadata.CoordinateFrame.Value); hash = Mix(hash, metadata.ConstantsVersion.Value); hash = Mix(hash, metadata.ContentHash.High); hash = Mix(hash, metadata.ContentHash.Low); hash = Mix(hash, metadata.AuthoredModificationHash.High); hash = Mix(hash, metadata.AuthoredModificationHash.Low);
+        hash = Mix(hash, (ulong)definition.SourceCount);
+        for (var index = 0; index < definition.SourceCount; index++) { var source = definition.GetSource(index); hash = Mix(hash, source.Id.Value); hash = Mix(hash, (ulong)source.Model); HashMetadata(ref hash, source.Metadata); }
+        hash = Mix(hash, (ulong)definition.FixedBodyCount);
+        for (var index = 0; index < definition.FixedBodyCount; index++) { var value = definition.GetFixedBody(index); HashVector(ref hash, value.Position); HashVector(ref hash, value.Velocity); HashQuaternion(ref hash, value.Orientation); HashVector(ref hash, value.AngularVelocity); }
+        hash = Mix(hash, (ulong)definition.CircularOrbitCount);
+        for (var index = 0; index < definition.CircularOrbitCount; index++) { var value = definition.GetCircularOrbit(index); hash = Mix(hash, (ulong)value.EpochDomainTicks); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(value.Radius)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(value.InitialPhaseRadians)); HashQuaternion(ref hash, value.PlaneOrientation); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(value.CentralGravitationalParameter)); }
+        hash = Mix(hash, (ulong)definition.AnalyticalKeplerCount);
+        for (var index = 0; index < definition.AnalyticalKeplerCount; index++) { var value = definition.GetAnalyticalKepler(index); hash = Mix(hash, value.CentralBody.Value); hash = Mix(hash, (ulong)value.Epoch.Ticks); HashVector(ref hash, value.StateAtEpoch.Position); HashVector(ref hash, value.StateAtEpoch.Velocity); hash = Mix(hash, (ulong)value.Model); }
         for (var index = 0; index < definition.Count; index++)
         {
             var node = definition.GetNodeInTraversalOrder(index); var body = node.Body;
             hash = Mix(hash, body.Id.Value); hash = Mix(hash, body.PrimaryBody?.Value ?? 0UL); hash = Mix(hash, (ulong)body.InertialFrame.Value);
-            hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(body.GravitationalParameter)); hash = Mix(hash, (ulong)node.TrajectoryModel);
+            hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(body.GravitationalParameter)); hash = Mix(hash, (ulong)node.TrajectoryModel); hash = Mix(hash, node.Ephemeris.SourceId.Value); hash = Mix(hash, (ulong)node.Ephemeris.PayloadIndex);
         }
         return hash;
     }
 
     private static ulong Mix(ulong hash, ulong value) { for (var index = 0; index < 8; index++) { hash ^= (byte)value; hash *= 1099511628211UL; value >>= 8; } return hash; }
+    private static void HashMetadata(ref ulong hash, CelestialEphemerisMetadata value) { hash = Mix(hash, value.Source.Value); hash = Mix(hash, value.Version.Value); hash = Mix(hash, value.Domain.Value); hash = Mix(hash, (ulong)value.SupportedStartDomainTicks); hash = Mix(hash, (ulong)value.SupportedEndDomainTicks); hash = Mix(hash, value.CoordinateFrame.Value); hash = Mix(hash, value.ConstantsVersion.Value); hash = Mix(hash, value.ContentHash.High); hash = Mix(hash, value.ContentHash.Low); hash = Mix(hash, value.AuthoredModificationHash.High); hash = Mix(hash, value.AuthoredModificationHash.Low); }
+    private static void HashVector(ref ulong hash, NovaCore.Core.Double3 value) { hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(value.X)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(value.Y)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(value.Z)); }
+    private static void HashQuaternion(ref ulong hash, NovaCore.Core.DoubleQuaternion value) { hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(value.X)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(value.Y)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(value.Z)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(value.W)); }
 }

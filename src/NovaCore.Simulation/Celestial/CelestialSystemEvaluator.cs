@@ -17,25 +17,30 @@ internal static class CelestialSystemEvaluator
         {
             var node = system.GetNodeInTraversalOrder(index); var body = node.Body;
             FrameTransform local; Double3 velocity;
-            if (node.ParentId is null)
+            if (node.TrajectoryModel == CelestialTrajectoryModel.FixedBody)
             {
-                local = FrameTransform.Identity; velocity = Double3.Zero;
+                if (!system.TryGetFixedBody(node.Ephemeris.PayloadIndex, out var fixedBody)) return new(CelestialSystemEvaluationStatus.InvalidHierarchy);
+                local = new FrameTransform(fixedBody.Position, fixedBody.Orientation); velocity = fixedBody.Velocity;
             }
             else
             {
+                if (node.ParentId is null) return new(CelestialSystemEvaluationStatus.InvalidHierarchy);
                 var parentIndex = FindParentTraversalIndex(system, index, node.ParentId.Value);
                 if (parentIndex < 0) return new(CelestialSystemEvaluationStatus.ParentEvaluationFailed);
                 var parent = system.GetNodeInTraversalOrder(parentIndex);
                 if (node.TrajectoryModel == CelestialTrajectoryModel.ReservedNumericalNBody) return new(CelestialSystemEvaluationStatus.UnsupportedTrajectoryModel);
-                if (node.Trajectory is not { } trajectory || trajectory.CentralBody != node.ParentId.Value) return new(CelestialSystemEvaluationStatus.ParentEvaluationFailed);
-                if (node.TrajectoryModel is not (CelestialTrajectoryModel.AnalyticalKepler or CelestialTrajectoryModel.CircularOrbit)) return new(CelestialSystemEvaluationStatus.UnsupportedTrajectoryModel);
+                TwoBodyTrajectory trajectory;
+                if (node.TrajectoryModel == CelestialTrajectoryModel.AnalyticalKepler && system.TryGetAnalyticalKepler(node.Ephemeris.PayloadIndex, out trajectory)) { }
+                else if (node.TrajectoryModel == CelestialTrajectoryModel.CircularOrbit && system.TryGetCircularOrbit(node.Ephemeris.PayloadIndex, out var circular)) trajectory = circular.ToLegacyTrajectory(node.ParentId.Value);
+                else return new(CelestialSystemEvaluationStatus.UnsupportedTrajectoryModel);
+                if (trajectory.CentralBody != node.ParentId.Value) return new(CelestialSystemEvaluationStatus.ParentEvaluationFailed);
                 if (!double.IsFinite(parent.Body.GravitationalParameter) || parent.Body.GravitationalParameter <= 0d) return new(CelestialSystemEvaluationStatus.InvalidConstants);
                 var propagation = UniversalVariableTwoBodyPropagator.TryEvaluate(trajectory.StateAtEpoch, trajectory.Epoch, instant, parent.Body.GravitationalParameter);
                 if (!propagation.Succeeded) return new(CelestialSystemEvaluationStatus.NumericalFailure);
                 if (!propagation.State.IsFinite) return new(CelestialSystemEvaluationStatus.NonFiniteResult);
                 local = new FrameTransform(propagation.State.Position, DoubleQuaternion.Identity); velocity = propagation.State.Velocity;
             }
-            var root = index == 0 ? FrameTransform.Identity : FrameTransform.Compose(stagingRoots[FindParentTraversalIndex(system, index, node.ParentId!.Value)], local);
+            var root = node.ParentId is null ? local : FrameTransform.Compose(stagingRoots[FindParentTraversalIndex(system, index, node.ParentId.Value)], local);
             if (!local.IsFinite || !root.IsFinite || !velocity.IsFinite) return new(CelestialSystemEvaluationStatus.NonFiniteResult);
             staging[index] = new(body.InertialFrame, new EvaluatedReferenceFrame(local, velocity, Double3.Zero, true));
             stagingRoots[index] = root;
