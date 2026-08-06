@@ -29,6 +29,7 @@ var tests = new (string Name, Action Test)[]
     ("Canonical transaction groups", CanonicalGroupTests),
     ("Clock execution orchestration", ClockExecutionTests),
     ("Celestial contracts", CelestialContractTests),
+    ("Celestial system definitions", CelestialSystemDefinitionTests),
     ("Two-body propagation", TwoBodyPropagationTests),
     ("Spacecraft attitude", SpacecraftAttitudeTests),
     ("Spacecraft attitude integration", SpacecraftAttitudeIntegrationTests),
@@ -394,6 +395,42 @@ static void CelestialContractTests()
 }
 
 static void CheckStore(CelestialBodyDefinition[] definitions, CelestialBodyState[] states, CelestialStateStoreStatus expected, string message) => Check(!CelestialStateStore.TryCreate(definitions, states, out var store, out var status) && store is null && status == expected, message);
+
+static void CelestialSystemDefinitionTests()
+{
+    Check(CelestialSystemId.Invalid.Value == 0 && !CelestialSystemId.Invalid.IsValid, "celestial system ID value behavior");
+    var sol = CelestialSystemFixtures.SolMini; var geocentric = CelestialSystemFixtures.GeocentricDemo; var binary = CelestialSystemFixtures.BinaryDemo;
+    Check(sol.Count == 3 && sol.RootBody == new CelestialBodyId(1) && sol.GetNodeInTraversalOrder(0).TrajectoryModel == CelestialTrajectoryModel.FixedBody && sol.GetNodeInTraversalOrder(2).Id == new CelestialBodyId(3), "valid Sol hierarchy has root-first deterministic traversal");
+    Check(geocentric.Count == 2 && geocentric.RootBody == new CelestialBodyId(10) && geocentric.GetNodeInTraversalOrder(1).TrajectoryModel == CelestialTrajectoryModel.CircularOrbit, "valid geocentric hierarchy");
+    Check(binary.Count == 2 && binary.GetNodeInTraversalOrder(1).TrajectoryModel == CelestialTrajectoryModel.ReservedNumericalNBody, "valid binary hierarchy preserves reserved N-body selection");
+    Check(sol.TryGetNode(new CelestialBodyId(2), out var earth) && earth.ParentId == new CelestialBodyId(1) && !sol.TryGetNode(new CelestialBodyId(99), out _), "deterministic body lookup");
+
+    var nodes = new[]
+    {
+        Node(30, 10, 3, CelestialTrajectoryModel.AnalyticalKepler),
+        Node(20, 10, 2, CelestialTrajectoryModel.CircularOrbit),
+        Node(10, null, 1, CelestialTrajectoryModel.FixedBody),
+    };
+    Check(CelestialSystemDefinition.TryCreate(new CelestialSystemId(77), nodes, out var ordered, out var validation) && ordered is not null && validation.Succeeded && ordered.GetNodeInTraversalOrder(0).Id.Value == 10 && ordered.GetNodeInTraversalOrder(1).Id.Value == 20 && ordered.GetNodeInTraversalOrder(2).Id.Value == 30, "traversal order is root-first then stable body ID");
+    var hash = CelestialSystemDefinitionHash.Compute(ordered!); Check(hash == CelestialSystemDefinitionHash.Compute(ordered!), "celestial-system hash repeatability");
+    Check(CelestialSystemDefinition.TryCreate(new CelestialSystemId(77), nodes, out var repeated, out _) && repeated is not null && CelestialSystemDefinitionHash.Compute(repeated) == hash, "repeated system construction hash");
+    nodes[0] = Node(30, null, 3, CelestialTrajectoryModel.FixedBody); Check(ordered!.GetNodeInTraversalOrder(2).ParentId == new CelestialBodyId(10), "system definition copies caller data");
+
+    CheckSystem([Node(1, null, 1, CelestialTrajectoryModel.FixedBody), Node(1, 2, 2, CelestialTrajectoryModel.AnalyticalKepler)], CelestialSystemValidationStatus.DuplicateBodyId, "duplicate ID rejection");
+    CheckSystem([Node(1, null, 1, CelestialTrajectoryModel.FixedBody), Node(2, 3, 2, CelestialTrajectoryModel.AnalyticalKepler), Node(3, 2, 3, CelestialTrajectoryModel.AnalyticalKepler)], CelestialSystemValidationStatus.ParentCycle, "cycle rejection");
+    CheckSystem([Node(1, null, 1, CelestialTrajectoryModel.FixedBody), Node(2, 99, 2, CelestialTrajectoryModel.AnalyticalKepler)], CelestialSystemValidationStatus.MissingParent, "missing parent rejection");
+    CheckSystem([Node(1, null, 1, CelestialTrajectoryModel.FixedBody), Node(2, null, 2, CelestialTrajectoryModel.FixedBody)], CelestialSystemValidationStatus.MultipleRoots, "multiple roots rejection");
+    CheckSystem([Node(1, null, 1, (CelestialTrajectoryModel)99)], CelestialSystemValidationStatus.InvalidTrajectoryModel, "unsupported trajectory model rejection");
+    CheckSystem([Node(1, null, 1, CelestialTrajectoryModel.AnalyticalKepler)], CelestialSystemValidationStatus.RootModelInvalid, "root model rejection");
+
+    _ = CelestialSystemDefinitionHash.Compute(sol); _ = sol.TryGetNode(new CelestialBodyId(3), out _); var before = GC.GetAllocatedBytesForCurrentThread(); ulong traversal = 14695981039346656037UL;
+    for (var iteration = 0; iteration < 100_000; iteration++) { for (var index = 0; index < sol.Count; index++) traversal = Mix(traversal, sol.GetNodeInTraversalOrder(index).Id.Value); Check(sol.TryGetNode(new CelestialBodyId(3), out var moon) && moon.TrajectoryModel == CelestialTrajectoryModel.AnalyticalKepler, "warm system lookup"); traversal = Mix(traversal, CelestialSystemDefinitionHash.Compute(sol)); }
+    var allocated = GC.GetAllocatedBytesForCurrentThread() - before; Check(allocated == 0 && traversal != 0, "warmed celestial-system traversal, lookup, and hashing allocate zero bytes");
+    Console.WriteLine($"Deterministic celestial-system validation hash: 0x{hash:X16}; warm allocations={allocated} bytes");
+
+    static CelestialHierarchyNode Node(ulong id, ulong? parent, long frame, CelestialTrajectoryModel model) => new(new CelestialBodyDefinition(new(id), parent is { } value ? new CelestialBodyId(value) : null, new ReferenceFrameId(frame), 1d), model);
+    static void CheckSystem(CelestialHierarchyNode[] candidates, CelestialSystemValidationStatus expected, string message) => Check(!CelestialSystemDefinition.TryCreate(new CelestialSystemId(99), candidates, out var definition, out var result) && definition is null && result.Status == expected, message);
+}
 
 static void TwoBodyPropagationTests()
 {
