@@ -30,6 +30,7 @@ var tests = new (string Name, Action Test)[]
     ("Clock execution orchestration", ClockExecutionTests),
     ("Celestial contracts", CelestialContractTests),
     ("Celestial system definitions", CelestialSystemDefinitionTests),
+    ("Celestial system time and provenance", CelestialSystemTimeAndProvenanceTests),
     ("Celestial system evaluation", CelestialSystemEvaluationTests),
     ("Two-body propagation", TwoBodyPropagationTests),
     ("Spacecraft attitude", SpacecraftAttitudeTests),
@@ -412,9 +413,9 @@ static void CelestialSystemDefinitionTests()
         Node(20, 10, 2, CelestialTrajectoryModel.CircularOrbit),
         Node(10, null, 1, CelestialTrajectoryModel.FixedBody),
     };
-    Check(CelestialSystemDefinition.TryCreate(new CelestialSystemId(77), nodes, out var ordered, out var validation) && ordered is not null && validation.Succeeded && ordered.GetNodeInTraversalOrder(0).Id.Value == 10 && ordered.GetNodeInTraversalOrder(1).Id.Value == 20 && ordered.GetNodeInTraversalOrder(2).Id.Value == 30, "traversal order is root-first then stable body ID");
+    Check(CelestialSystemDefinition.TryCreate(new CelestialSystemId(77), nodes, Mapping(), Metadata(), out var ordered, out var validation) && ordered is not null && validation.Succeeded && ordered.GetNodeInTraversalOrder(0).Id.Value == 10 && ordered.GetNodeInTraversalOrder(1).Id.Value == 20 && ordered.GetNodeInTraversalOrder(2).Id.Value == 30, "traversal order is root-first then stable body ID");
     var hash = CelestialSystemDefinitionHash.Compute(ordered!); Check(hash == CelestialSystemDefinitionHash.Compute(ordered!), "celestial-system hash repeatability");
-    Check(CelestialSystemDefinition.TryCreate(new CelestialSystemId(77), nodes, out var repeated, out _) && repeated is not null && CelestialSystemDefinitionHash.Compute(repeated) == hash, "repeated system construction hash");
+    Check(CelestialSystemDefinition.TryCreate(new CelestialSystemId(77), nodes, Mapping(), Metadata(), out var repeated, out _) && repeated is not null && CelestialSystemDefinitionHash.Compute(repeated) == hash, "repeated system construction hash");
     nodes[0] = Node(30, null, 3, CelestialTrajectoryModel.FixedBody); Check(ordered!.GetNodeInTraversalOrder(2).ParentId == new CelestialBodyId(10), "system definition copies caller data");
 
     CheckSystem([Node(1, null, 1, CelestialTrajectoryModel.FixedBody), Node(1, 2, 2, CelestialTrajectoryModel.AnalyticalKepler)], CelestialSystemValidationStatus.DuplicateBodyId, "duplicate ID rejection");
@@ -430,7 +431,46 @@ static void CelestialSystemDefinitionTests()
     Console.WriteLine($"Deterministic celestial-system validation hash: 0x{hash:X16}; warm allocations={allocated} bytes");
 
     static CelestialHierarchyNode Node(ulong id, ulong? parent, long frame, CelestialTrajectoryModel model) => new(new CelestialBodyDefinition(new(id), parent is { } value ? new CelestialBodyId(value) : null, new ReferenceFrameId(frame), 1d), model);
-    static void CheckSystem(CelestialHierarchyNode[] candidates, CelestialSystemValidationStatus expected, string message) => Check(!CelestialSystemDefinition.TryCreate(new CelestialSystemId(99), candidates, out var definition, out var result) && definition is null && result.Status == expected, message);
+    static CelestialSystemTimeMapping Mapping() => CelestialSystemTimeMapping.Identity(new(1));
+    static CelestialEphemerisMetadata Metadata() => new(new(1), new(1), new(1), long.MinValue, long.MaxValue, new(1), new(1), new(0, 0), new(0, 0));
+    static void CheckSystem(CelestialHierarchyNode[] candidates, CelestialSystemValidationStatus expected, string message) => Check(!CelestialSystemDefinition.TryCreate(new CelestialSystemId(99), candidates, Mapping(), Metadata(), out var definition, out var result) && definition is null && result.Status == expected, message);
+}
+
+static void CelestialSystemTimeAndProvenanceTests()
+{
+    var domain = new CelestialTimeDomainId(7); var identity = CelestialSystemTimeMapping.Identity(domain);
+    Check(identity.TryMap(SimulationInstant.FromWholeSeconds(12), out var mapped) == CelestialSystemTimeMappingStatus.Success && mapped.Domain == domain && mapped.WholeDomainTicks == 12_000_000 && mapped.IsExact, "identity time mapping");
+    var offset = new CelestialSystemTimeMapping(SimulationInstant.FromWholeSeconds(10), new(domain, 100, 10), 1, 1);
+    Check(offset.TryMap(SimulationInstant.FromWholeSeconds(12), out mapped) == CelestialSystemTimeMappingStatus.Success && mapped.WholeDomainTicks == 120 && mapped.IsExact, "positive epoch offset");
+    var scaled = new CelestialSystemTimeMapping(SimulationInstant.Zero, new(domain, 0, 10), 3, 2);
+    Check(scaled.TryMap(SimulationInstant.FromWholeSeconds(2), out mapped) == CelestialSystemTimeMappingStatus.Success && mapped.WholeDomainTicks == 30 && mapped.IsExact, "rational time scaling");
+    var inexact = new CelestialSystemTimeMapping(SimulationInstant.Zero, new(domain, 0, 1), 1, 3);
+    Check(inexact.TryMap(SimulationInstant.FromWholeSeconds(1), out mapped) == CelestialSystemTimeMappingStatus.Success && mapped.WholeDomainTicks == 0 && mapped.RemainderNumerator == 1_000_000 && mapped.RemainderDenominator == 3_000_000, "inexact mapping retains exact remainder");
+    Check(inexact.TryMap(SimulationInstant.FromWholeSeconds(-1), out mapped) == CelestialSystemTimeMappingStatus.Success && mapped.WholeDomainTicks == -1 && mapped.RemainderNumerator == 2_000_000 && mapped.RemainderDenominator == 3_000_000, "negative mapping uses Euclidean remainder");
+    Check(offset.TryMap(SimulationInstant.FromWholeSeconds(8), out mapped) == CelestialSystemTimeMappingStatus.Success && mapped.WholeDomainTicks == 80, "requested time before anchor");
+    Check(offset.TryMap(SimulationInstant.FromWholeSeconds(9), out var before) == CelestialSystemTimeMappingStatus.Success && offset.TryMap(SimulationInstant.FromWholeSeconds(11), out var after) == CelestialSystemTimeMappingStatus.Success && before.WholeDomainTicks == 90 && after.WholeDomainTicks == 110, "forward and backward anchor queries");
+    Check(new CelestialSystemTimeMapping(new(long.MaxValue), new(domain, 0, 1), 1, 1).TryMap(new(long.MinValue), out _) == CelestialSystemTimeMappingStatus.ArithmeticOverflow, "checked subtraction overflow");
+    Check(new CelestialSystemTimeMapping(SimulationInstant.Zero, new(domain, 0, long.MaxValue), long.MaxValue, 1).TryMap(new(long.MaxValue), out _) == CelestialSystemTimeMappingStatus.ArithmeticOverflow, "Int128 multiplication overflow");
+    Check(new CelestialSystemTimeMapping(SimulationInstant.Zero, new(domain, long.MaxValue, 1), 1, 1).TryMap(new(1_000_000), out _) == CelestialSystemTimeMappingStatus.MappedTimeOverflow, "mapped Int64 overflow");
+    Check(new CelestialSystemTimeMapping(SimulationInstant.Zero, new(domain, 0, 1), 0, 1).TryMap(SimulationInstant.Zero, out _) == CelestialSystemTimeMappingStatus.InvalidScaleNumerator, "invalid numerator");
+    Check(new CelestialSystemTimeMapping(SimulationInstant.Zero, new(domain, 0, 1), 1, 0).TryMap(SimulationInstant.Zero, out _) == CelestialSystemTimeMappingStatus.InvalidScaleDenominator, "invalid denominator");
+    Check(new CelestialSystemTimeMapping(SimulationInstant.Zero, new(domain, 0, 0), 1, 1).TryMap(SimulationInstant.Zero, out _) == CelestialSystemTimeMappingStatus.InvalidDomainTickRate, "invalid tick rate");
+    Check(CelestialSystemTimeMapping.Identity(CelestialTimeDomainId.Invalid).TryMap(SimulationInstant.Zero, out _) == CelestialSystemTimeMappingStatus.InvalidTimeDomain, "invalid time domain");
+    Check(CelestialSystemFixtures.SolMini.TimeMapping == CelestialSystemTimeMapping.Identity(new(1)), "fixtures declare explicit identity mapping");
+
+    var nodes = new[] { new CelestialHierarchyNode(new(new(1), null, new ReferenceFrameId(1), 1d), CelestialTrajectoryModel.FixedBody) };
+    var metadata = new CelestialEphemerisMetadata(new(1), new(2), domain, -5, 5, new(3), new(4), new(5, 6), new(7, 8));
+    Check(CelestialSystemDefinition.TryCreate(new(400), nodes, new(SimulationInstant.Zero, new(domain, 0, 1), 1, 1), metadata, out var system, out var validation) && system is not null && validation.Succeeded, "one system-wide mapping and compatible metadata");
+    Check(system!.TryMapTime(new(-5_000_000), out _) == CelestialSystemTimeMappingStatus.Success && system.TryMapTime(new(5_000_000), out _) == CelestialSystemTimeMappingStatus.Success && system.TryMapTime(new(-6_000_000), out _) == CelestialSystemTimeMappingStatus.OutsideSupportedInterval && system.TryMapTime(new(6_000_000), out _) == CelestialSystemTimeMappingStatus.OutsideSupportedInterval, "inclusive supported interval boundaries");
+    Check(!CelestialSystemDefinition.TryCreate(new(401), nodes, new(SimulationInstant.Zero, new(domain, 0, 1), 1, 1), metadata with { Domain = new(8) }, out _, out validation) && validation.Status == CelestialSystemValidationStatus.MappingMetadataDomainMismatch, "metadata domain compatibility");
+    Check(!CelestialSystemDefinition.TryCreate(new(401), nodes, new(SimulationInstant.Zero, new(domain, 0, 1), 1, 1), metadata with { SupportedStartDomainTicks = 6, SupportedEndDomainTicks = 5 }, out _, out validation) && validation.Status == CelestialSystemValidationStatus.InvalidSupportedInterval, "invalid interval rejection");
+    var hash = CelestialSystemDefinitionHash.Compute(system); Check(CelestialSystemDefinition.TryCreate(new(400), nodes, new(SimulationInstant.Zero, new(domain, 0, 1), 1, 1), metadata with { Version = new(9) }, out var changed, out _) && CelestialSystemDefinitionHash.Compute(changed!) != hash, "dataset version changes definition hash");
+    Check(CelestialSystemDefinition.TryCreate(new(400), nodes, new(SimulationInstant.Zero, new(domain, 0, 1), 1, 1), metadata with { ContentHash = new(9, 9) }, out changed, out _) && CelestialSystemDefinitionHash.Compute(changed!) != hash, "content hash changes definition hash");
+    Check(CelestialSystemDefinition.TryCreate(new(400), nodes, new(SimulationInstant.Zero, new(domain, 0, 1), 1, 1), metadata with { AuthoredModificationHash = new(9, 9), CoordinateFrame = new(9), ConstantsVersion = new(9) }, out changed, out _) && CelestialSystemDefinitionHash.Compute(changed!) != hash, "authored metadata changes definition hash");
+    _ = system.TryMapTime(SimulationInstant.Zero, out _); var allocationBefore = GC.GetAllocatedBytesForCurrentThread(); ulong checksum = 14695981039346656037UL;
+    for (var index = 0; index < 100_000; index++) { Check(system.TryMapTime(new SimulationInstant(index - 50_000), out var value) == CelestialSystemTimeMappingStatus.Success, "warm system mapping"); checksum = Mix(checksum, (ulong)value.WholeDomainTicks); }
+    var allocated = GC.GetAllocatedBytesForCurrentThread() - allocationBefore; Check(allocated == 0 && checksum != 0, "warmed system mapping allocates zero bytes");
+    Console.WriteLine($"Deterministic celestial-system time hash: 0x{hash:X16}; warm mappings={allocated} bytes");
 }
 
 static void CelestialSystemEvaluationTests()
@@ -445,7 +485,7 @@ static void CelestialSystemEvaluationTests()
     Check(sol.Succeeded && geocentric.Succeeded && binary.Succeeded, "Kepler and circular evaluator dispatch succeeds for all authored fixtures");
     var unsupportedNodes = new[] { new CelestialHierarchyNode(new(new(900), null, new ReferenceFrameId(900), 1d), CelestialTrajectoryModel.FixedBody), new CelestialHierarchyNode(new(new(901), new CelestialBodyId(900), new ReferenceFrameId(901), 1d), CelestialTrajectoryModel.ReservedNumericalNBody) };
     var unsupportedOutput = new ReferenceFrameEvaluation[2]; var unsupportedRoots = new FrameTransform[2]; var unsupportedStaging = new ReferenceFrameEvaluation[2]; var unsupportedRootStaging = new FrameTransform[2];
-    Check(CelestialSystemDefinition.TryCreate(new(900), unsupportedNodes, out var unsupported, out _) && unsupported is not null && CelestialSystemEvaluator.TryEvaluateSystem(unsupported, instant, unsupportedOutput, unsupportedRoots, unsupportedStaging, unsupportedRootStaging).Status == CelestialSystemEvaluationStatus.UnsupportedTrajectoryModel && unsupportedOutput[0] == default, "reserved numerical model rejects without publication");
+    Check(CelestialSystemDefinition.TryCreate(new(900), unsupportedNodes, CelestialSystemTimeMapping.Identity(new(1)), new(new(1), new(1), new(1), long.MinValue, long.MaxValue, new(1), new(1), new(0, 0), new(0, 0)), out var unsupported, out _) && unsupported is not null && CelestialSystemEvaluator.TryEvaluateSystem(unsupported, instant, unsupportedOutput, unsupportedRoots, unsupportedStaging, unsupportedRootStaging).Status == CelestialSystemEvaluationStatus.UnsupportedTrajectoryModel && unsupportedOutput[0] == default, "reserved numerical model rejects without publication");
     Check(solEvaluations[0].Frame == new ReferenceFrameId(1) && solEvaluations[0].Value.LocalToParent == FrameTransform.Identity && solEvaluations[1].Frame == new ReferenceFrameId(2) && solRoots[2].Translation != solEvaluations[2].Value.LocalToParent.Translation, "root-first parent-before-child transform composition");
     Check(geocentricEvaluations[0].Value.LocalToParent == FrameTransform.Identity && geocentricEvaluations[1].Value.LocalToParent.Translation.IsFinite && geocentricEvaluations[1].Value.OriginVelocityInParent.IsFinite, "fixed body and circular orbit evaluation");
     Check(CelestialSystemEvaluator.TryEvaluateSystem(CelestialSystemFixtures.SolMini, instant, solEvaluations.AsSpan(0, 2), solRoots, solStaging, solRootStaging).Status == CelestialSystemEvaluationStatus.DestinationTooSmall, "undersized evaluated-frame destination rejection");

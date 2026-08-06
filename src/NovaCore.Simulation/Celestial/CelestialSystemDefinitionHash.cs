@@ -7,6 +7,9 @@ internal static class CelestialSystemDefinitionHash
     {
         ulong hash = 14695981039346656037UL;
         hash = Mix(hash, definition.Id.Value); hash = Mix(hash, definition.RootBody.Value); hash = Mix(hash, (ulong)definition.Count);
+        var mapping = definition.TimeMapping; var epoch = mapping.DomainAnchor; var metadata = definition.EphemerisMetadata;
+        hash = Mix(hash, (ulong)mapping.SimulationAnchor.Ticks); hash = Mix(hash, epoch.Domain.Value); hash = Mix(hash, (ulong)epoch.DomainTicks); hash = Mix(hash, (ulong)epoch.DomainTicksPerSecond); hash = Mix(hash, (ulong)mapping.ScaleNumerator); hash = Mix(hash, (ulong)mapping.ScaleDenominator);
+        hash = Mix(hash, metadata.Source.Value); hash = Mix(hash, metadata.Version.Value); hash = Mix(hash, metadata.Domain.Value); hash = Mix(hash, (ulong)metadata.SupportedStartDomainTicks); hash = Mix(hash, (ulong)metadata.SupportedEndDomainTicks); hash = Mix(hash, metadata.CoordinateFrame.Value); hash = Mix(hash, metadata.ConstantsVersion.Value); hash = Mix(hash, metadata.ContentHash.High); hash = Mix(hash, metadata.ContentHash.Low); hash = Mix(hash, metadata.AuthoredModificationHash.High); hash = Mix(hash, metadata.AuthoredModificationHash.Low);
         for (var index = 0; index < definition.Count; index++)
         {
             var node = definition.GetNodeInTraversalOrder(index); var body = node.Body;
