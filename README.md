@@ -1,93 +1,140 @@
 # NovaCore
 
-NovaCore is a deterministic space simulation engine featuring a C# managed core, a native Vulkan renderer, and a high-precision camera-relative architecture for seamless planetary and Solar System visualization.
-
-NovaCore is designed around one core principle: **simulation owns truth; rendering owns presentation.**
-
-Celestial mechanics, reference frames, and time remain authoritative in the simulation. The renderer consumes immutable presentation snapshots, allowing GPU rendering, visualization, and future graphical improvements without compromising deterministic simulation.
-
-## Current capabilities
-
-- ✓ Deterministic celestial simulation with immutable definitions and exact simulation time.
-- ✓ Immutable runtime architecture: evaluation publishes derived presentation snapshots; graphics consumes them.
-- ✓ NCPE v2 artifact format, byte-only runtime reconstruction, and deterministic hash verification.
-- ✓ DE440-validated compact analytical Solar runtime (`SolCompact-DE440Validated-v3`) with deterministic lunar secular and bounded periodic corrections; DE440/CSPICE remains an offline validation oracle rather than a runtime dependency.
-- ✓ CSPICE/kernel-free, zero-allocation runtime celestial evaluation, measured below 25 µs for all ten Solar bodies on the current development machine.
-- ✓ Deterministic arbitrary-time evaluation and 50,000× time-warp validation.
-- ✓ GPU-driven adaptive cube-sphere planetary rendering with CPU-reference and CPU/GPU parity validation.
-- ✓ Crack-safe mixed-level planetary LOD through deterministic neighbor balancing and edge-stitch metadata.
-- ✓ Distant/detail planetary handoff using shared physical radius and camera-relative center authority.
-- ✓ Evaluated `SolAnalytical` presentation for Sun, Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn, Uranus, and Neptune.
-- ✓ Orbit paths and body motion use the same `CelestialSystemEvaluator` authority, with deterministic labels, markers, focus navigation, and `SimulationClock` integration.
-- ✓ Double-precision camera-relative subtraction before GPU float transport, plus Vulkan validation-layer verification.
-- ✓ FP16 scene color, fixed tone mapping, procedural deep space, dedicated stellar Sun presentation, and evaluated-Sun planetary lighting.
-
-`SolCompact-DE440Validated-v3` is currently sufficient for Solar presentation, time warp, and approximate translunar gameplay. It is not DE440 playback or a precision lunar-navigation ephemeris, and it is not intended as the precision truth for lunar orbit insertion, close lunar navigation, or precision long-horizon targeting.
-
-NovaCore does **not** yet provide terrain, textures, cubemap materials, atmosphere, oceans, clouds, spacecraft gameplay, colonies, or a higher-fidelity lunar ephemeris for measured precision-navigation requirements.
-
-## Architecture
-
-```text
-Offline
-JPL/NAIF DE440
-            ↓
-CSPICE validation oracle
-            ↓
-Compact, versioned Solar definitions
-
-Runtime
-SimulationClock
-            ↓
-CelestialSystemEvaluator
-            ↓
-Parent-relative / reference-frame resolution
-            ↓
-Immutable presentation snapshots
-            ↓
-Vulkan renderer
-
-Exceptional future fidelity path
-Measured requirement → SampledHermite / Chebyshev
-```
-
-High-authority astronomy validates compact, deterministic runtime models offline; the runtime never loads CSPICE or DE440 kernels. Simulation owns celestial truth. Graphics owns presentation resources and never changes body positions, hierarchy, ephemerides, simulation time, or physical radii. SampledHermite and Chebyshev remain exceptional future fidelity layers, used only where measured requirements justify them rather than as the normal Solar runtime.
-
-## Current screenshots
-
-The current Solar System overview uses true evaluated distances and physical body radii. Labels and markers are presentation aids; they do not relocate or inflate bodies.
+**A deterministic, true-scale space simulation engine with a custom Vulkan renderer.**
 
 ![NovaCore Solar System overview](docs/images/solar-system-overview.png)
 
-## Current Milestone
+NovaCore is an experimental space-simulation engine built around a simple rule:
 
-9A-4F-2 / 10B-1A
+> **Simulation owns truth. Rendering owns presentation.**
 
-✓ True-distance Solar System visualization
-✓ DE440-validated compact analytical Solar runtime
-✓ GPU adaptive planetary rendering
-✓ Interactive camera and body focus
-✓ Deterministic orbit visualization
-✓ HDR/deep-space/Solar-lighting foundation
+Celestial mechanics, reference frames, physical radii, and simulation time remain authoritative in the managed simulation. The renderer consumes immutable presentation state and is free to add GPU LOD, materials, lighting, labels, rings, and other visual systems without changing the underlying universe.
+
+NovaCore currently combines a C# simulation core with a native Vulkan renderer, compact DE440-validated Solar propagation, camera-relative high-precision transport, GPU-driven planetary rendering, HDR presentation, procedural planetary materials, Saturn rings, and an interactive Solar map.
+
+## What works today
+
+### Celestial simulation
+
+- **DE440-validated compact Solar runtime** — `SolCompact-DE440Validated-v3` evaluates the current Solar model without loading CSPICE or DE440 kernels at runtime.
+- **Deterministic arbitrary-time evaluation** with immutable definitions and exact `SimulationClock` state.
+- **50,000× time-warp validation** with deterministic body motion and presentation updates.
+- **Compact lunar corrections** — generic secular plus bounded periodic corrections improve the Moon while retaining a lightweight analytical runtime.
+- **Zero-allocation warmed celestial evaluation**, measured below 25 µs for all ten currently presented Solar bodies on the development machine.
+- **NCPE v2** artifact reconstruction and deterministic definition/hash verification.
+
+### Rendering and presentation
+
+- **Native Vulkan renderer** with double-precision camera-relative subtraction before GPU float transport.
+- **GPU-driven adaptive cube-sphere planets** with deterministic mixed-level LOD, neighbor balancing, edge stitching, horizon culling, compaction, and indirect drawing.
+- **Distant/detail handoff** sharing authoritative physical center, radius, material identity, and Solar-light direction.
+- **FP16 HDR scene color** with fixed exposure and ACES-style tone mapping.
+- **Procedural deep-space background** and dedicated stellar-Sun presentation with controlled HDR corona/glow.
+- **Evaluated-Sun lighting** for coherent planetary day/night terminators.
+- **Generic procedural planet materials** with distinct presentations for Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn, Uranus, and Neptune.
+- **Generic ring presentation**, currently demonstrated by Saturn.
+- **Solar Map and Free 3D camera modes** with deterministic home framing and body focus.
+- **Authoritative orbit visualization** sourced from the same `CelestialSystemEvaluator` used for body motion.
+- **Deterministic label/marker hierarchy** with collision suppression, distance-aware presentation, and focused-body clutter reduction.
+
+### Validation
+
+NovaCore treats correctness tooling as part of the engine rather than as presentation behavior:
+
+- CPU-reference / GPU planetary parity validation.
+- Vulkan validation-layer verification.
+- Deterministic celestial and topology hashes.
+- Camera/reference-frame precision tests.
+- Native, managed, Solar-scene, Earth-LOD, resize, and triangle regression coverage.
+
+The CPU reference/parity path is a development and regression oracle; the intended production planetary path remains GPU-driven.
+
+## Why NovaCore?
+
+NovaCore is exploring how far a compact custom engine can push seamless space simulation without making the renderer the owner of simulation truth.
+
+```text
+Offline astronomical truth
+        │
+        ▼
+JPL/NAIF DE440 + CSPICE
+        │  validation only
+        ▼
+Compact versioned Solar definitions
+
+Runtime simulation
+SimulationClock
+        ↓
+CelestialSystemEvaluator
+        ↓
+Parent-relative / reference-frame resolution
+        ↓
+Immutable presentation snapshots
+        ↓
+Native Vulkan renderer
+        ↓
+HDR / GPU planets / materials / rings / overlays
+```
+
+The runtime never needs to stream DE440 kernels or call CSPICE. High-authority astronomy is used offline to measure and validate compact deterministic models.
+
+For exceptional future precision requirements, a bounded sampled or Chebyshev ephemeris layer can be introduced where measurement proves it necessary rather than becoming the default representation for every body.
+
+## Run the Solar System
+
+From the repository root on a configured Windows development environment:
+
+```powershell
+dotnet run --project samples/NovaCore.Triangle/NovaCore.Triangle.csproj -c Debug -- --scene=sol
+```
+
+After it has already been built:
+
+```powershell
+dotnet run --project samples/NovaCore.Triangle/NovaCore.Triangle.csproj -c Debug --no-build -- --scene=sol
+```
+
+Current Solar-scene controls include mouse drag for free orbiting, mouse wheel zoom, number-key body focus, `.` / `,` simulation-rate changes, Space pause/resume, and `R` to return to the deterministic Solar Map home view.
+
+## Current checkpoint — Milestone 10B-1
+
+Milestone 10B-1 establishes NovaCore's first cohesive Solar presentation foundation:
+
+- HDR scene-color and tone-mapping path
+- procedural deep space
+- dedicated stellar Sun
+- evaluated-Sun planetary lighting
+- generic planet materials
+- Saturn ring presentation
+- Solar Map / Free 3D camera behavior
+- hierarchical orbit, label, and marker presentation
+- GPU planetary LOD preserved underneath the new visual stack
+
+All of this remains downstream of the authoritative celestial simulation.
+
+## Accuracy and current scope
+
+`SolCompact-DE440Validated-v3` is intended for Solar presentation, deterministic time warp, and approximate translunar gameplay. It is **not** JPL DE440 playback and should not be described as a precision lunar-navigation ephemeris.
+
+Precision translunar targeting, lunar orbit insertion, close lunar navigation, or other requirements that exceed the compact model's measured accuracy will receive a dedicated higher-fidelity layer when those gameplay requirements exist.
+
+NovaCore is still under active development. It does **not** yet provide production terrain, atmospheric scattering, volumetric clouds, ocean simulation, weather, spacecraft gameplay, colonies, maneuver planning, or SOI/patched-conic navigation.
 
 ## Roadmap
 
-Near-term visual work:
+**Next visual frontier**
 
-- Planet materials
-- Atmosphere
-- Terrain rendering
+Atmosphere and cloud presentation → richer/lawful authored surface detail → terrain and surface-scale rendering → additional planetary effects and polish.
 
-Future spacecraft and navigation foundation:
+**Future flight and navigation**
 
-- Local/floating reference-frame transitions where required
-- SOI / patched-conic transition policy
-- Spacecraft force/torque dynamics
-- Higher-fidelity lunar ephemeris if measured gameplay accuracy requires it
+Local/floating reference-frame transitions → SOI/patched-conic policy → spacecraft force/torque dynamics → maneuver planning and navigation → higher-fidelity ephemerides wherever measured accuracy requires them.
 
-## Building and testing
+The goal is to add those systems without weakening the existing authority boundary between simulation and presentation.
 
-Windows development uses .NET, the configured MSVC x64 environment, Ninja/CMake, and Vulkan.
+## Build and test
+
+Windows development currently uses .NET, MSVC x64, Ninja/CMake, and Vulkan.
 
 ```powershell
 cmake -S native/NovaCore.Native -B build/native-ninja -G Ninja
@@ -97,7 +144,7 @@ dotnet build NovaCore.sln -c Debug
 dotnet run --project tests/NovaCore.Graphics.Tests -c Debug
 ```
 
-The focused Solar sample is `samples/NovaCore.Triangle` with `--scene=sol`. See the engineering documents below for scoped build/test commands and architecture constraints.
+See the engineering documentation for the complete scoped build, validation, and architecture requirements.
 
 ## Documentation
 
@@ -109,3 +156,7 @@ The focused Solar sample is `samples/NovaCore.Triangle` with `--scene=sol`. See 
 - [Ephemeris runtime loader](docs/ephemeris-runtime-loader.md)
 - [NAIF source adapter](docs/naif-source-adapter.md)
 - [Build on Windows](docs/build-windows.md)
+
+---
+
+**NovaCore is a work in progress.** The repository documents implemented systems and measured limitations explicitly; roadmap items are not presented as completed features.
