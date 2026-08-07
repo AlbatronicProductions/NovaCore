@@ -20,6 +20,7 @@ Celestial mechanics, reference frames, and time remain authoritative in the simu
 - ✓ Evaluated `SolAnalytical` presentation for Sun, Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn, Uranus, and Neptune.
 - ✓ Orbit paths and body motion use the same `CelestialSystemEvaluator` authority, with deterministic labels, markers, focus navigation, and `SimulationClock` integration.
 - ✓ Double-precision camera-relative subtraction before GPU float transport, plus Vulkan validation-layer verification.
+- ✓ FP16 scene color, fixed tone mapping, procedural deep space, dedicated stellar Sun presentation, and evaluated-Sun planetary lighting.
 
 `SolCompact-DE440Validated-v3` is currently sufficient for Solar presentation, time warp, and approximate translunar gameplay. It is not DE440 playback or a precision lunar-navigation ephemeris, and it is not intended as the precision truth for lunar orbit insertion, close lunar navigation, or precision long-horizon targeting.
 
@@ -60,19 +61,19 @@ The current Solar System overview uses true evaluated distances and physical bod
 
 ## Current Milestone
 
-9A-4F-2 / 10A-9B
+9A-4F-2 / 10B-1A
 
 ✓ True-distance Solar System visualization
 ✓ DE440-validated compact analytical Solar runtime
 ✓ GPU adaptive planetary rendering
 ✓ Interactive camera and body focus
 ✓ Deterministic orbit visualization
+✓ HDR/deep-space/Solar-lighting foundation
 
 ## Roadmap
 
 Near-term visual work:
 
-- Stellar/Sun presentation
 - Planet materials
 - Atmosphere
 - Terrain rendering

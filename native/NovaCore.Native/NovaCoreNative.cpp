@@ -34,17 +34,28 @@ static_assert(sizeof(NcPlanetaryGpuConstants) == 48);
 static_assert(alignof(NcPlanetaryGpuConstants) == 16);
 static_assert(offsetof(NcPlanetaryGpuConstants, refinementThreshold) == 16 &&
               offsetof(NcPlanetaryGpuConstants, maximumLevel) == 32);
-static_assert(sizeof(NcPlanetaryPresentation) == 48);
+static_assert(sizeof(NcPlanetaryPresentation) == 144);
 static_assert(alignof(NcPlanetaryPresentation) == 16);
 static_assert(offsetof(NcPlanetaryPresentation, colorR) == 16);
 static_assert(offsetof(NcPlanetaryPresentation, detailedAlpha) == 32);
-static_assert(sizeof(NcFrameSubmission) == 336);
+static_assert(offsetof(NcPlanetaryPresentation, bodyIdLow) == 48);
+static_assert(offsetof(NcPlanetaryPresentation, roughness) == 64);
+static_assert(offsetof(NcPlanetaryPresentation, projectionKind) == 80);
+static_assert(offsetof(NcPlanetaryPresentation, ringInnerRadiusRatio) == 96);
+static_assert(offsetof(NcPlanetaryPresentation, ringOrientationX) == 112);
+static_assert(offsetof(NcPlanetaryPresentation, ringColorR) == 128);
+static_assert(sizeof(NcSolarLighting) == 48);
+static_assert(alignof(NcSolarLighting) == 16);
+static_assert(offsetof(NcSolarLighting, photosphereR) == 16);
+static_assert(offsetof(NcSolarLighting, sourceRadiance) == 32);
+static_assert(sizeof(NcFrameSubmission) == 480);
 static_assert(offsetof(NcFrameSubmission, planetaryGpu) == 208);
 static_assert(offsetof(NcFrameSubmission, planetaryMode) == 256);
 static_assert(offsetof(NcFrameSubmission, planetaryPresentation) == 272);
-static_assert(offsetof(NcFrameSubmission, distantBodies) == 320);
-static_assert(offsetof(NcFrameSubmission, distantBodyCount) == 328);
-static_assert(offsetof(NcFrameSubmission, distantBodyPadding) == 332);
+static_assert(offsetof(NcFrameSubmission, distantBodies) == 416);
+static_assert(offsetof(NcFrameSubmission, distantBodyCount) == 424);
+static_assert(offsetof(NcFrameSubmission, distantBodyPadding) == 428);
+static_assert(offsetof(NcFrameSubmission, solarLighting) == 432);
 static_assert(sizeof(NcOrbitLineVertex) == 12);
 static_assert(sizeof(NcInputState) == 68);
 static_assert(sizeof(NcPresentationFocus) == 4);
@@ -74,6 +85,8 @@ struct PatchVertex { float uv[2]; };
 static_assert(sizeof(PatchVertex) == 8);
 struct DistantVertex { float position[3]; };
 static_assert(sizeof(DistantVertex) == 12);
+struct RingVertex { float directionX, directionZ, radial; };
+static_assert(sizeof(RingVertex) == 12);
 struct Mesh {
   VkBuffer vb{}, ib{};
   VkDeviceMemory vm{}, im{};
@@ -106,15 +119,25 @@ struct App {
   VkQueue graphicsQueue{}, presentQueue{};
   VkSwapchainKHR swapchain{};
   VkFormat format{};
+  static constexpr VkFormat SceneFormat = VK_FORMAT_R16G16B16A16_SFLOAT;
   VkExtent2D extent{};
   std::vector<VkImage> images;
   std::vector<VkImageView> views;
   VkRenderPass renderPass{};
+  VkImage sceneColor{};
+  VkDeviceMemory sceneColorMemory{};
+  VkImageView sceneColorView{};
   VkPipelineLayout pipelineLayout{};
   VkPipeline pipeline{};
+  VkPipeline backgroundPipeline{};
+  VkPipeline toneMapPipeline{};
+  VkPipeline stellarSunPipeline{};
+  VkPipeline stellarGlowPipeline{};
   VkPipeline planetaryPipeline{};
   VkPipeline planetaryComputePipeline{};
   VkPipeline distantPlanetaryPipeline{};
+  VkPipeline planetaryRingFarPipeline{};
+  VkPipeline planetaryRingNearPipeline{};
   VkPipeline solarOrbitPipeline{};
   VkPipeline solarMarkerPipeline{};
   VkPipeline solarLabelPipeline{};
@@ -170,12 +193,15 @@ struct App {
   Mesh triangle{};
   Mesh planetaryPatch{};
   Mesh distantPlanetary{};
+  Mesh stellarSun{};
+  Mesh planetaryRing{};
   LONG rawMouseX{}, rawMouseY{};
   LONG wheelDeltaRaw{};
   bool lookActive{};
   bool pauseWasDown{}, rateDecreaseWasDown{}, rateIncreaseWasDown{};
   std::array<bool, 8> sasModeWasDown{};
   std::array<bool, 10> presentationFocusWasDown{};
+  bool resetWasDown{};
   void Log(uint32_t cat, const char *msg) const {
     if (cb) {
       NcHostEvent e{NC_DIAGNOSTIC, cat, msg, {}, {}};
@@ -322,6 +348,8 @@ void CreateMesh(App &a) {
   for(uint32_t latitude=0;latitude<latitudeSegments-2;latitude++)for(uint32_t longitude=0;longitude<longitudeSegments;longitude++){const auto next=(longitude+1)%longitudeSegments;const auto upper=1+latitude*longitudeSegments+longitude,upperNext=1+latitude*longitudeSegments+next,lower=upper+longitudeSegments,lowerNext=upperNext+longitudeSegments;distantIndices.insert(distantIndices.end(),{upper,upperNext,lower,upperNext,lowerNext,lower});}
   const auto lastRing=1+(latitudeSegments-2)*longitudeSegments;for(uint32_t longitude=0;longitude<longitudeSegments;longitude++){const auto next=(longitude+1)%longitudeSegments;distantIndices.insert(distantIndices.end(),{lastRing+longitude,lastRing+next,bottom});}
   Buffer(a,sizeof(DistantVertex)*distantVertices.size(),VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,a.distantPlanetary.vb,a.distantPlanetary.vm,distantVertices.data());Buffer(a,sizeof(uint32_t)*distantIndices.size(),VK_BUFFER_USAGE_INDEX_BUFFER_BIT,a.distantPlanetary.ib,a.distantPlanetary.im,distantIndices.data());a.distantPlanetary.indices=(uint32_t)distantIndices.size();
+  constexpr uint32_t stellarLatitudeSegments=32,stellarLongitudeSegments=64;std::vector<DistantVertex> stellarVertices;stellarVertices.reserve(2+(stellarLatitudeSegments-1)*stellarLongitudeSegments);stellarVertices.push_back({{0,1,0}});for(uint32_t latitude=1;latitude<stellarLatitudeSegments;latitude++){const auto phi=3.14159265358979323846*double(latitude)/stellarLatitudeSegments;const auto ring=std::sin(phi),height=std::cos(phi);for(uint32_t longitude=0;longitude<stellarLongitudeSegments;longitude++){const auto theta=2.0*3.14159265358979323846*double(longitude)/stellarLongitudeSegments;stellarVertices.push_back({{float(ring*std::cos(theta)),float(height),float(ring*std::sin(theta))}});}}const uint32_t stellarBottom=(uint32_t)stellarVertices.size();stellarVertices.push_back({{0,-1,0}});std::vector<uint32_t> stellarIndices;stellarIndices.reserve(6*stellarLongitudeSegments*(stellarLatitudeSegments-1));for(uint32_t longitude=0;longitude<stellarLongitudeSegments;longitude++){const auto next=(longitude+1)%stellarLongitudeSegments;stellarIndices.insert(stellarIndices.end(),{0,1+next,1+longitude});}for(uint32_t latitude=0;latitude<stellarLatitudeSegments-2;latitude++)for(uint32_t longitude=0;longitude<stellarLongitudeSegments;longitude++){const auto next=(longitude+1)%stellarLongitudeSegments;const auto upper=1+latitude*stellarLongitudeSegments+longitude,upperNext=1+latitude*stellarLongitudeSegments+next,lower=upper+stellarLongitudeSegments,lowerNext=upperNext+stellarLongitudeSegments;stellarIndices.insert(stellarIndices.end(),{upper,upperNext,lower,upperNext,lowerNext,lower});}const auto stellarLastRing=1+(stellarLatitudeSegments-2)*stellarLongitudeSegments;for(uint32_t longitude=0;longitude<stellarLongitudeSegments;longitude++){const auto next=(longitude+1)%stellarLongitudeSegments;stellarIndices.insert(stellarIndices.end(),{stellarLastRing+longitude,stellarLastRing+next,stellarBottom});}Buffer(a,sizeof(DistantVertex)*stellarVertices.size(),VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,a.stellarSun.vb,a.stellarSun.vm,stellarVertices.data());Buffer(a,sizeof(uint32_t)*stellarIndices.size(),VK_BUFFER_USAGE_INDEX_BUFFER_BIT,a.stellarSun.ib,a.stellarSun.im,stellarIndices.data());a.stellarSun.indices=(uint32_t)stellarIndices.size();
+  constexpr uint32_t ringSegments=256;std::array<RingVertex,ringSegments*2> ringVertices{};std::array<uint32_t,ringSegments*6> ringIndices{};for(uint32_t segment=0;segment<ringSegments;segment++){const double angle=2.0*3.14159265358979323846*double(segment)/ringSegments;const float x=float(std::cos(angle)),z=float(std::sin(angle));ringVertices[segment*2]={x,z,0};ringVertices[segment*2+1]={x,z,1};const uint32_t next=(segment+1)%ringSegments,base=segment*6;ringIndices[base]=segment*2;ringIndices[base+1]=next*2;ringIndices[base+2]=segment*2+1;ringIndices[base+3]=segment*2+1;ringIndices[base+4]=next*2;ringIndices[base+5]=next*2+1;}Buffer(a,sizeof(ringVertices),VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,a.planetaryRing.vb,a.planetaryRing.vm,ringVertices.data());Buffer(a,sizeof(ringIndices),VK_BUFFER_USAGE_INDEX_BUFFER_BIT,a.planetaryRing.ib,a.planetaryRing.im,ringIndices.data());a.planetaryRing.indices=(uint32_t)ringIndices.size();
   a.Log(NC_LOG_VULKAN, "Created built-in triangle mesh (host-visible static "
                        "vertex/index buffers)");
 }
@@ -345,6 +373,16 @@ void DestroyMesh(App &a) {
   if(a.distantPlanetary.ib)vkDestroyBuffer(a.device,a.distantPlanetary.ib,nullptr);
   if(a.distantPlanetary.im)vkFreeMemory(a.device,a.distantPlanetary.im,nullptr);
   a.distantPlanetary={};
+  if(a.stellarSun.vb)vkDestroyBuffer(a.device,a.stellarSun.vb,nullptr);
+  if(a.stellarSun.vm)vkFreeMemory(a.device,a.stellarSun.vm,nullptr);
+  if(a.stellarSun.ib)vkDestroyBuffer(a.device,a.stellarSun.ib,nullptr);
+  if(a.stellarSun.im)vkFreeMemory(a.device,a.stellarSun.im,nullptr);
+  a.stellarSun={};
+  if(a.planetaryRing.vb)vkDestroyBuffer(a.device,a.planetaryRing.vb,nullptr);
+  if(a.planetaryRing.vm)vkFreeMemory(a.device,a.planetaryRing.vm,nullptr);
+  if(a.planetaryRing.ib)vkDestroyBuffer(a.device,a.planetaryRing.ib,nullptr);
+  if(a.planetaryRing.im)vkFreeMemory(a.device,a.planetaryRing.im,nullptr);
+  a.planetaryRing={};
 }
 Mesh *MeshFor(App &a, NcMeshHandle h) {
   return h.value == 1 ? &a.triangle : nullptr;
@@ -372,14 +410,16 @@ void Validate(App &a) {
       throw std::runtime_error("invalid render batch");
   }
   if(nc_validate_planetary_patches(s->planetaryPatches,s->planetaryPatchCount)!=NC_SUCCESS)throw std::runtime_error("invalid planetary patch submission");
+  const auto validMaterial=[](const NcPlanetaryPresentation &body){const bool stellarMaterial=body.bodyIdLow==2&&body.bodyIdHigh==0&&body.materialKind==0&&body.albedoSource==0;const bool finite=std::isfinite(body.roughness)&&std::isfinite(body.specular)&&std::isfinite(body.emissive)&&std::isfinite(body.presentationRotationRadians)&&std::isfinite(body.ringInnerRadiusRatio)&&std::isfinite(body.ringOuterRadiusRatio)&&std::isfinite(body.ringOpacity)&&std::isfinite(body.ringBandFrequency)&&std::isfinite(body.ringOrientationX)&&std::isfinite(body.ringOrientationY)&&std::isfinite(body.ringOrientationZ)&&std::isfinite(body.ringOrientationW)&&std::isfinite(body.ringColorR)&&std::isfinite(body.ringColorG)&&std::isfinite(body.ringColorB)&&std::isfinite(body.ringColorA);if(!finite||body.roughness<0||body.roughness>1||body.specular<0||body.specular>1||body.emissive<0||body.projectionKind>0)return false;if(!stellarMaterial&&((!body.bodyIdLow&&!body.bodyIdHigh)||body.materialKind<1||body.materialKind>4||body.albedoSource<1||body.albedoSource>9))return false;if(!body.ringAssociation)return body.ringInnerRadiusRatio==0&&body.ringOuterRadiusRatio==0&&body.ringOpacity==0&&body.ringBandFrequency==0;if(body.ringInnerRadiusRatio<=1||body.ringOuterRadiusRatio<=body.ringInnerRadiusRatio||body.ringOpacity<=0||body.ringOpacity>1||body.ringBandFrequency<=0)return false;const float q=body.ringOrientationX*body.ringOrientationX+body.ringOrientationY*body.ringOrientationY+body.ringOrientationZ*body.ringOrientationZ+body.ringOrientationW*body.ringOrientationW;return std::abs(q-1)<1e-4f;};
   if(s->planetaryGpuAlignmentPadding||s->planetaryPadding[0]||s->planetaryPadding[1]||s->planetaryPadding[2])throw std::runtime_error("invalid planetary frame padding");
   if(s->planetaryMode>NC_PLANETARY_CPU_GPU_VALIDATION)throw std::runtime_error("invalid planetary mode");
   const auto &presentation=s->planetaryPresentation;const bool hasPresentation=presentation.enabled!=0;
   if(s->distantBodyPadding||s->distantBodyCount>10||(s->distantBodyCount&&!s->distantBodies))throw std::runtime_error("invalid distant body batch");
-  for(uint32_t i=0;i<s->distantBodyCount;i++){const auto &body=s->distantBodies[i];if(!body.enabled||!std::isfinite(body.centerX)||!std::isfinite(body.centerY)||!std::isfinite(body.centerZ)||!std::isfinite(body.radius)||body.radius<=0||!std::isfinite(body.colorR)||!std::isfinite(body.colorG)||!std::isfinite(body.colorB)||!std::isfinite(body.distantAlpha)||body.distantAlpha<0||body.distantAlpha>1)throw std::runtime_error("invalid distant body record");}
+  for(uint32_t i=0;i<s->distantBodyCount;i++){const auto &body=s->distantBodies[i];if(!body.enabled||!std::isfinite(body.centerX)||!std::isfinite(body.centerY)||!std::isfinite(body.centerZ)||!std::isfinite(body.radius)||body.radius<=0||!std::isfinite(body.colorR)||!std::isfinite(body.colorG)||!std::isfinite(body.colorB)||!std::isfinite(body.distantAlpha)||body.distantAlpha<0||body.distantAlpha>1||!validMaterial(body))throw std::runtime_error("invalid distant body record");}
   if(presentation.enabled>1)throw std::runtime_error("invalid planetary presentation enable");
-  if(hasPresentation){if(presentation.regime>NC_PLANETARY_DETAILED_ONLY||!std::isfinite(presentation.centerX)||!std::isfinite(presentation.centerY)||!std::isfinite(presentation.centerZ)||!std::isfinite(presentation.radius)||presentation.radius<=0||!std::isfinite(presentation.colorR)||!std::isfinite(presentation.colorG)||!std::isfinite(presentation.colorB)||!std::isfinite(presentation.distantAlpha)||!std::isfinite(presentation.detailedAlpha)||!std::isfinite(presentation.distanceRadii)||presentation.distanceRadii<1||presentation.distantAlpha<0||presentation.distantAlpha>1||presentation.detailedAlpha<0||presentation.detailedAlpha>1||std::abs(presentation.distantAlpha+presentation.detailedAlpha-1)>1e-5f)throw std::runtime_error("invalid planetary presentation");if(presentation.regime==NC_PLANETARY_DISTANT_ONLY&&(presentation.distantAlpha!=1||presentation.detailedAlpha!=0||s->planetaryPatchCount))throw std::runtime_error("invalid distant-only planetary submission");if(presentation.regime==NC_PLANETARY_DETAILED_ONLY&&(presentation.distantAlpha!=0||presentation.detailedAlpha!=1))throw std::runtime_error("invalid detailed-only planetary submission");}
+  if(hasPresentation){if(presentation.regime>NC_PLANETARY_DETAILED_ONLY||!std::isfinite(presentation.centerX)||!std::isfinite(presentation.centerY)||!std::isfinite(presentation.centerZ)||!std::isfinite(presentation.radius)||presentation.radius<=0||!std::isfinite(presentation.colorR)||!std::isfinite(presentation.colorG)||!std::isfinite(presentation.colorB)||!std::isfinite(presentation.distantAlpha)||!std::isfinite(presentation.detailedAlpha)||!std::isfinite(presentation.distanceRadii)||presentation.distanceRadii<1||presentation.distantAlpha<0||presentation.distantAlpha>1||presentation.detailedAlpha<0||presentation.detailedAlpha>1||std::abs(presentation.distantAlpha+presentation.detailedAlpha-1)>1e-5f||!validMaterial(presentation))throw std::runtime_error("invalid planetary presentation");if(presentation.regime==NC_PLANETARY_DISTANT_ONLY&&(presentation.distantAlpha!=1||presentation.detailedAlpha!=0||s->planetaryPatchCount))throw std::runtime_error("invalid distant-only planetary submission");if(presentation.regime==NC_PLANETARY_DETAILED_ONLY&&(presentation.distantAlpha!=0||presentation.detailedAlpha!=1))throw std::runtime_error("invalid detailed-only planetary submission");}
   if(s->planetaryMode!=NC_PLANETARY_CPU_REFERENCE||hasPresentation){const auto &g=s->planetaryGpu;if(!std::isfinite(g.cameraBodyX)||!std::isfinite(g.cameraBodyY)||!std::isfinite(g.cameraBodyZ)||!std::isfinite(g.radius)||g.radius<=0||!std::isfinite(g.refinementThreshold)||g.refinementThreshold<=0||!std::isfinite(g.nearFieldAltitudeRadii)||g.nearFieldAltitudeRadii<=0||!std::isfinite(g.detailedAlpha)||g.detailedAlpha<0||g.detailedAlpha>1||g.maximumLevel>5||!g.outputCapacity||g.outputCapacity>GpuPatchCapacity||g.padding1||g.padding2||g.padding3)throw std::runtime_error("invalid planetary GPU constants");if(hasPresentation&&(presentation.centerX!=-g.cameraBodyX||presentation.centerY!=-g.cameraBodyY||presentation.centerZ!=-g.cameraBodyZ||presentation.radius!=g.radius||presentation.detailedAlpha!=g.detailedAlpha))throw std::runtime_error("inconsistent planetary presentation authority");if(s->planetaryMode==NC_PLANETARY_GPU_PRODUCTION&&s->planetaryPatchCount)throw std::runtime_error("GPU planetary mode received CPU leaves");}
+  const auto &lighting=s->solarLighting;if(lighting.padding||lighting.enabled>1)throw std::runtime_error("invalid Solar lighting flags");if(lighting.enabled&&(!std::isfinite(lighting.sourceCenterX)||!std::isfinite(lighting.sourceCenterY)||!std::isfinite(lighting.sourceCenterZ)||!std::isfinite(lighting.exposure)||lighting.exposure<=0||!std::isfinite(lighting.photosphereR)||lighting.photosphereR<0||!std::isfinite(lighting.photosphereG)||lighting.photosphereG<0||!std::isfinite(lighting.photosphereB)||lighting.photosphereB<0||!std::isfinite(lighting.ambientFloor)||lighting.ambientFloor<0||lighting.ambientFloor>1||!std::isfinite(lighting.sourceRadiance)||lighting.sourceRadiance<=1||!std::isfinite(lighting.glowStrength)||lighting.glowStrength<0||lighting.glowStrength>4))throw std::runtime_error("invalid Solar lighting presentation");
 }
 void Window(App &a) {
   WNDCLASSW wc{.lpfnWndProc = Proc,
@@ -511,12 +551,18 @@ void DestroySwap(App &a) {
   a.framebuffers.clear();
   if (a.pipeline)
     vkDestroyPipeline(a.device, a.pipeline, nullptr);
+  if(a.backgroundPipeline)vkDestroyPipeline(a.device,a.backgroundPipeline,nullptr);
+  if(a.toneMapPipeline)vkDestroyPipeline(a.device,a.toneMapPipeline,nullptr);
+  if(a.stellarSunPipeline)vkDestroyPipeline(a.device,a.stellarSunPipeline,nullptr);
+  if(a.stellarGlowPipeline)vkDestroyPipeline(a.device,a.stellarGlowPipeline,nullptr);
   if (a.planetaryPipeline)
     vkDestroyPipeline(a.device,a.planetaryPipeline,nullptr);
   if (a.planetaryComputePipeline)
     vkDestroyPipeline(a.device,a.planetaryComputePipeline,nullptr);
   if (a.distantPlanetaryPipeline)
     vkDestroyPipeline(a.device,a.distantPlanetaryPipeline,nullptr);
+  if(a.planetaryRingFarPipeline)vkDestroyPipeline(a.device,a.planetaryRingFarPipeline,nullptr);
+  if(a.planetaryRingNearPipeline)vkDestroyPipeline(a.device,a.planetaryRingNearPipeline,nullptr);
   if (a.solarOrbitPipeline)
     vkDestroyPipeline(a.device,a.solarOrbitPipeline,nullptr);
   if (a.solarMarkerPipeline)
@@ -532,9 +578,15 @@ void DestroySwap(App &a) {
   if (a.targetDirectionPipeline)
     vkDestroyPipeline(a.device, a.targetDirectionPipeline, nullptr);
   a.pipeline = {};
+  a.backgroundPipeline={};
+  a.toneMapPipeline={};
+  a.stellarSunPipeline={};
+  a.stellarGlowPipeline={};
   a.planetaryPipeline = {};
   a.planetaryComputePipeline = {};
   a.distantPlanetaryPipeline = {};
+  a.planetaryRingFarPipeline={};
+  a.planetaryRingNearPipeline={};
   a.solarOrbitPipeline = {};
   a.solarMarkerPipeline = {};
   a.solarLabelPipeline = {};
@@ -548,6 +600,10 @@ void DestroySwap(App &a) {
     vkDestroyDescriptorSetLayout(a.device, a.descriptorLayout, nullptr);
   if (a.renderPass)
     vkDestroyRenderPass(a.device, a.renderPass, nullptr);
+  if(a.sceneColorView)vkDestroyImageView(a.device,a.sceneColorView,nullptr);
+  if(a.sceneColor)vkDestroyImage(a.device,a.sceneColor,nullptr);
+  if(a.sceneColorMemory)vkFreeMemory(a.device,a.sceneColorMemory,nullptr);
+  a.sceneColorView={};a.sceneColor={};a.sceneColorMemory={};
   for (auto x : a.views)
     vkDestroyImageView(a.device, x, nullptr);
   a.views.clear();
@@ -583,6 +639,11 @@ VkShaderModule Shader(App &a, const char *n) {
           "shader module failed");
   return m;
 }
+void CreateSceneColor(App &a){
+  VkImageCreateInfo image{VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO};image.imageType=VK_IMAGE_TYPE_2D;image.format=App::SceneFormat;image.extent={a.extent.width,a.extent.height,1};image.mipLevels=1;image.arrayLayers=1;image.samples=VK_SAMPLE_COUNT_1_BIT;image.tiling=VK_IMAGE_TILING_OPTIMAL;image.usage=VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT|VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT;image.sharingMode=VK_SHARING_MODE_EXCLUSIVE;image.initialLayout=VK_IMAGE_LAYOUT_UNDEFINED;
+  a.Check(vkCreateImage(a.device,&image,nullptr,&a.sceneColor),"HDR scene-color image failed");VkMemoryRequirements requirements;vkGetImageMemoryRequirements(a.device,a.sceneColor,&requirements);VkMemoryAllocateInfo allocation{VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO};allocation.allocationSize=requirements.size;allocation.memoryTypeIndex=Memory(a,requirements.memoryTypeBits,VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);a.Check(vkAllocateMemory(a.device,&allocation,nullptr,&a.sceneColorMemory),"HDR scene-color memory failed");a.Check(vkBindImageMemory(a.device,a.sceneColor,a.sceneColorMemory,0),"HDR scene-color bind failed");
+  VkImageViewCreateInfo view{VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO};view.image=a.sceneColor;view.viewType=VK_IMAGE_VIEW_TYPE_2D;view.format=App::SceneFormat;view.subresourceRange.aspectMask=VK_IMAGE_ASPECT_COLOR_BIT;view.subresourceRange.levelCount=1;view.subresourceRange.layerCount=1;a.Check(vkCreateImageView(a.device,&view,nullptr,&a.sceneColorView),"HDR scene-color view failed");
+}
 void Swap(App &a) {
   VkSurfaceCapabilitiesKHR c;
   a.Check(vkGetPhysicalDeviceSurfaceCapabilitiesKHR(a.physical, a.surface, &c),
@@ -617,6 +678,7 @@ void Swap(App &a) {
   a.Check(vkCreateSwapchainKHR(a.device, &ci, nullptr, &a.swapchain),
           "swapchain failed");
   a.format = sf.format;
+  {char message[192];std::snprintf(message,sizeof message,"Swapchain: format=%d colorSpace=%d extent=%ux%u; HDR scene format=%d",(int)a.format,(int)sf.colorSpace,a.extent.width,a.extent.height,(int)App::SceneFormat);a.Log(NC_LOG_VULKAN,message);}
   uint32_t n;
   a.Check(vkGetSwapchainImagesKHR(a.device, a.swapchain, &n, nullptr),
           "swap images failed");
@@ -635,29 +697,28 @@ void Swap(App &a) {
     a.Check(vkCreateImageView(a.device, &vi, nullptr, &a.views[i]),
             "view failed");
   }
-  VkAttachmentDescription ad{};
-  ad.format = a.format;
-  ad.samples = VK_SAMPLE_COUNT_1_BIT;
-  ad.loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR;
-  ad.storeOp = VK_ATTACHMENT_STORE_OP_STORE;
-  ad.finalLayout = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
-  VkAttachmentReference ar{0, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL};
-  VkSubpassDescription sub{};
-  sub.pipelineBindPoint = VK_PIPELINE_BIND_POINT_GRAPHICS;
-  sub.colorAttachmentCount = 1;
-  sub.pColorAttachments = &ar;
+  CreateSceneColor(a);
+  VkAttachmentDescription attachments[2]{};
+  attachments[0].format=App::SceneFormat;attachments[0].samples=VK_SAMPLE_COUNT_1_BIT;attachments[0].loadOp=VK_ATTACHMENT_LOAD_OP_CLEAR;attachments[0].storeOp=VK_ATTACHMENT_STORE_OP_DONT_CARE;attachments[0].initialLayout=VK_IMAGE_LAYOUT_UNDEFINED;attachments[0].finalLayout=VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+  attachments[1].format=a.format;attachments[1].samples=VK_SAMPLE_COUNT_1_BIT;attachments[1].loadOp=VK_ATTACHMENT_LOAD_OP_DONT_CARE;attachments[1].storeOp=VK_ATTACHMENT_STORE_OP_STORE;attachments[1].initialLayout=VK_IMAGE_LAYOUT_UNDEFINED;attachments[1].finalLayout=VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
+  VkAttachmentReference sceneColor{0,VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL};
+  VkAttachmentReference sceneInput{0,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL};
+  VkAttachmentReference swapColor{1,VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL};
+  VkSubpassDescription subpasses[2]{};subpasses[0].pipelineBindPoint=VK_PIPELINE_BIND_POINT_GRAPHICS;subpasses[0].colorAttachmentCount=1;subpasses[0].pColorAttachments=&sceneColor;subpasses[1].pipelineBindPoint=VK_PIPELINE_BIND_POINT_GRAPHICS;subpasses[1].inputAttachmentCount=1;subpasses[1].pInputAttachments=&sceneInput;subpasses[1].colorAttachmentCount=1;subpasses[1].pColorAttachments=&swapColor;
+  VkSubpassDependency dependencies[3]{};
+  dependencies[0].srcSubpass=VK_SUBPASS_EXTERNAL;dependencies[0].dstSubpass=0;dependencies[0].srcStageMask=VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;dependencies[0].dstStageMask=VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;dependencies[0].dstAccessMask=VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+  dependencies[1].srcSubpass=0;dependencies[1].dstSubpass=1;dependencies[1].srcStageMask=VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;dependencies[1].dstStageMask=VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;dependencies[1].srcAccessMask=VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;dependencies[1].dstAccessMask=VK_ACCESS_INPUT_ATTACHMENT_READ_BIT;dependencies[1].dependencyFlags=VK_DEPENDENCY_BY_REGION_BIT;
+  dependencies[2].srcSubpass=1;dependencies[2].dstSubpass=VK_SUBPASS_EXTERNAL;dependencies[2].srcStageMask=VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;dependencies[2].dstStageMask=VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT;dependencies[2].srcAccessMask=VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
   VkRenderPassCreateInfo rp{VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO};
-  rp.attachmentCount = 1;
-  rp.pAttachments = &ad;
-  rp.subpassCount = 1;
-  rp.pSubpasses = &sub;
+  rp.attachmentCount=2;rp.pAttachments=attachments;rp.subpassCount=2;rp.pSubpasses=subpasses;rp.dependencyCount=3;rp.pDependencies=dependencies;
   a.Check(vkCreateRenderPass(a.device, &rp, nullptr, &a.renderPass),
           "render pass failed");
-  VkDescriptorSetLayoutBinding binds[7]{};
-  for(uint32_t binding=0;binding<7;binding++){binds[binding].binding=binding;binds[binding].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;binds[binding].descriptorCount=1;binds[binding].stageFlags=binding==0?VK_SHADER_STAGE_VERTEX_BIT:(binding==1||binding==6?VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_COMPUTE_BIT:VK_SHADER_STAGE_COMPUTE_BIT);}
+  VkDescriptorSetLayoutBinding binds[8]{};
+  for(uint32_t binding=0;binding<7;binding++){binds[binding].binding=binding;binds[binding].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;binds[binding].descriptorCount=1;binds[binding].stageFlags=binding==0?VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT:(binding==1?VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_COMPUTE_BIT:(binding==6?VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT|VK_SHADER_STAGE_COMPUTE_BIT:VK_SHADER_STAGE_COMPUTE_BIT));}
+  binds[7].binding=7;binds[7].descriptorType=VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT;binds[7].descriptorCount=1;binds[7].stageFlags=VK_SHADER_STAGE_FRAGMENT_BIT;
   VkDescriptorSetLayoutCreateInfo dl{
       VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO};
-  dl.bindingCount = 7;
+  dl.bindingCount = 8;
   dl.pBindings = binds;
   a.Check(
       vkCreateDescriptorSetLayout(a.device, &dl, nullptr, &a.descriptorLayout),
@@ -665,6 +726,7 @@ void Swap(App &a) {
   VkPipelineLayoutCreateInfo pl{VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO};
   pl.setLayoutCount = 1;
   pl.pSetLayouts = &a.descriptorLayout;
+  VkPushConstantRange push{};push.stageFlags=VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT;push.size=sizeof(NcSolarLighting);pl.pushConstantRangeCount=1;pl.pPushConstantRanges=&push;
   a.Check(vkCreatePipelineLayout(a.device, &pl, nullptr, &a.pipelineLayout),
           "pipeline layout failed");
   VkShaderModule vs{}, fs{};
@@ -731,6 +793,10 @@ void Swap(App &a) {
   if (triangleResult != VK_SUCCESS && trianglePipeline) vkDestroyPipeline(a.device, trianglePipeline, nullptr);
   a.Check(triangleResult, "pipeline failed");
   a.pipeline = trianglePipeline;
+  VkPipelineVertexInputStateCreateInfo fullscreenInput{VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO};
+  auto createFullscreenPipeline=[&](const char* fragment,uint32_t subpass,VkPipeline &destination,const char* failure){VkShaderModule fullscreenVs=Shader(a,"shaders/fullscreen.vert.spv"),fullscreenFs{};try{fullscreenFs=Shader(a,fragment);}catch(...){vkDestroyShaderModule(a.device,fullscreenVs,nullptr);throw;}VkPipelineShaderStageCreateInfo fullscreenStages[2]{{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_VERTEX_BIT,fullscreenVs,"main"},{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_FRAGMENT_BIT,fullscreenFs,"main"}};VkGraphicsPipelineCreateInfo create=gp;create.pStages=fullscreenStages;create.pVertexInputState=&fullscreenInput;create.subpass=subpass;VkResult result=vkCreateGraphicsPipelines(a.device,{},1,&create,nullptr,&destination);vkDestroyShaderModule(a.device,fullscreenVs,nullptr);vkDestroyShaderModule(a.device,fullscreenFs,nullptr);a.Check(result,failure);};
+  createFullscreenPipeline("shaders/space_background.frag.spv",0,a.backgroundPipeline,"space background pipeline failed");
+  createFullscreenPipeline("shaders/tone_map.frag.spv",1,a.toneMapPipeline,"tone-map pipeline failed");
   VkShaderModule planetaryVs{},planetaryFs{};
   try{planetaryVs=Shader(a,"shaders/planetary.vert.spv");planetaryFs=Shader(a,"shaders/planetary.frag.spv");}catch(...){if(planetaryVs)vkDestroyShaderModule(a.device,planetaryVs,nullptr);throw;}
   VkPipelineShaderStageCreateInfo planetaryStages[2]{{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_VERTEX_BIT,planetaryVs,"main"},{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_FRAGMENT_BIT,planetaryFs,"main"}};
@@ -741,7 +807,10 @@ void Swap(App &a) {
   VkPipelineColorBlendAttachmentState planetaryBlendAttachment=ca;planetaryBlendAttachment.blendEnable=VK_TRUE;planetaryBlendAttachment.srcColorBlendFactor=VK_BLEND_FACTOR_SRC_ALPHA;planetaryBlendAttachment.dstColorBlendFactor=VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;planetaryBlendAttachment.colorBlendOp=VK_BLEND_OP_ADD;planetaryBlendAttachment.srcAlphaBlendFactor=VK_BLEND_FACTOR_ONE;planetaryBlendAttachment.dstAlphaBlendFactor=VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;planetaryBlendAttachment.alphaBlendOp=VK_BLEND_OP_ADD;VkPipelineColorBlendStateCreateInfo planetaryBlend=cb;planetaryBlend.pAttachments=&planetaryBlendAttachment;
   VkGraphicsPipelineCreateInfo planetaryCreate=gp;planetaryCreate.pStages=planetaryStages;planetaryCreate.pVertexInputState=&planetaryInput;planetaryCreate.pRasterizationState=&planetaryRaster;planetaryCreate.pColorBlendState=&planetaryBlend;
   VkPipeline planetaryPipeline{};VkResult planetaryResult=vkCreateGraphicsPipelines(a.device,{},1,&planetaryCreate,nullptr,&planetaryPipeline);vkDestroyShaderModule(a.device,planetaryVs,nullptr);vkDestroyShaderModule(a.device,planetaryFs,nullptr);if(planetaryResult!=VK_SUCCESS&&planetaryPipeline)vkDestroyPipeline(a.device,planetaryPipeline,nullptr);a.Check(planetaryResult,"planetary pipeline failed");a.planetaryPipeline=planetaryPipeline;
-  VkShaderModule distantVs{},distantFs{};try{distantVs=Shader(a,"shaders/distant_planet.vert.spv");distantFs=Shader(a,"shaders/distant_planet.frag.spv");}catch(...){if(distantVs)vkDestroyShaderModule(a.device,distantVs,nullptr);throw;}VkPipelineShaderStageCreateInfo distantStages[2]{{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_VERTEX_BIT,distantVs,"main"},{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_FRAGMENT_BIT,distantFs,"main"}};VkVertexInputBindingDescription distantBinding{0,sizeof(DistantVertex),VK_VERTEX_INPUT_RATE_VERTEX};VkVertexInputAttributeDescription distantAttribute{0,0,VK_FORMAT_R32G32B32_SFLOAT,0};VkPipelineVertexInputStateCreateInfo distantInput{VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO};distantInput.vertexBindingDescriptionCount=1;distantInput.pVertexBindingDescriptions=&distantBinding;distantInput.vertexAttributeDescriptionCount=1;distantInput.pVertexAttributeDescriptions=&distantAttribute;VkPipelineRasterizationStateCreateInfo distantRaster=rs;distantRaster.cullMode=VK_CULL_MODE_NONE;VkGraphicsPipelineCreateInfo distantCreate=gp;distantCreate.pStages=distantStages;distantCreate.pVertexInputState=&distantInput;distantCreate.pRasterizationState=&distantRaster;distantCreate.pColorBlendState=&planetaryBlend;VkResult distantResult=vkCreateGraphicsPipelines(a.device,{},1,&distantCreate,nullptr,&a.distantPlanetaryPipeline);vkDestroyShaderModule(a.device,distantVs,nullptr);vkDestroyShaderModule(a.device,distantFs,nullptr);a.Check(distantResult,"distant planetary pipeline failed");
+  VkShaderModule distantVs{},distantFs{};try{distantVs=Shader(a,"shaders/distant_planet.vert.spv");distantFs=Shader(a,"shaders/distant_planet.frag.spv");}catch(...){if(distantVs)vkDestroyShaderModule(a.device,distantVs,nullptr);throw;}VkPipelineShaderStageCreateInfo distantStages[2]{{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_VERTEX_BIT,distantVs,"main"},{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_FRAGMENT_BIT,distantFs,"main"}};VkVertexInputBindingDescription distantBinding{0,sizeof(DistantVertex),VK_VERTEX_INPUT_RATE_VERTEX};VkVertexInputAttributeDescription distantAttribute{0,0,VK_FORMAT_R32G32B32_SFLOAT,0};VkPipelineVertexInputStateCreateInfo distantInput{VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO};distantInput.vertexBindingDescriptionCount=1;distantInput.pVertexBindingDescriptions=&distantBinding;distantInput.vertexAttributeDescriptionCount=1;distantInput.pVertexAttributeDescriptions=&distantAttribute;VkPipelineRasterizationStateCreateInfo distantRaster=rs;distantRaster.cullMode=VK_CULL_MODE_BACK_BIT;distantRaster.frontFace=VK_FRONT_FACE_CLOCKWISE;VkGraphicsPipelineCreateInfo distantCreate=gp;distantCreate.pStages=distantStages;distantCreate.pVertexInputState=&distantInput;distantCreate.pRasterizationState=&distantRaster;distantCreate.pColorBlendState=&planetaryBlend;VkResult distantResult=vkCreateGraphicsPipelines(a.device,{},1,&distantCreate,nullptr,&a.distantPlanetaryPipeline);vkDestroyShaderModule(a.device,distantVs,nullptr);vkDestroyShaderModule(a.device,distantFs,nullptr);a.Check(distantResult,"distant planetary pipeline failed");
+  VkShaderModule ringVs=Shader(a,"shaders/planetary_ring.vert.spv"),ringFarFs{},ringNearFs{};try{ringFarFs=Shader(a,"shaders/planetary_ring_far.frag.spv");ringNearFs=Shader(a,"shaders/planetary_ring_near.frag.spv");}catch(...){vkDestroyShaderModule(a.device,ringVs,nullptr);if(ringFarFs)vkDestroyShaderModule(a.device,ringFarFs,nullptr);throw;}VkPipelineShaderStageCreateInfo ringStages[2]{{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_VERTEX_BIT,ringVs,"main"},{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_FRAGMENT_BIT,ringFarFs,"main"}};VkPipelineRasterizationStateCreateInfo ringRaster=rs;ringRaster.cullMode=VK_CULL_MODE_NONE;VkGraphicsPipelineCreateInfo ringCreate=gp;ringCreate.pStages=ringStages;ringCreate.pVertexInputState=&distantInput;ringCreate.pRasterizationState=&ringRaster;ringCreate.pColorBlendState=&planetaryBlend;a.Check(vkCreateGraphicsPipelines(a.device,{},1,&ringCreate,nullptr,&a.planetaryRingFarPipeline),"far planetary ring pipeline failed");ringStages[1].module=ringNearFs;a.Check(vkCreateGraphicsPipelines(a.device,{},1,&ringCreate,nullptr,&a.planetaryRingNearPipeline),"near planetary ring pipeline failed");vkDestroyShaderModule(a.device,ringVs,nullptr);vkDestroyShaderModule(a.device,ringFarFs,nullptr);vkDestroyShaderModule(a.device,ringNearFs,nullptr);
+  VkShaderModule stellarVs=Shader(a,"shaders/stellar_sun.vert.spv"),stellarFs{};try{stellarFs=Shader(a,"shaders/stellar_sun.frag.spv");}catch(...){vkDestroyShaderModule(a.device,stellarVs,nullptr);throw;}VkPipelineShaderStageCreateInfo stellarStages[2]{{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_VERTEX_BIT,stellarVs,"main"},{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_FRAGMENT_BIT,stellarFs,"main"}};VkGraphicsPipelineCreateInfo stellarCreate=distantCreate;stellarCreate.pStages=stellarStages;stellarCreate.pColorBlendState=&cb;VkResult stellarResult=vkCreateGraphicsPipelines(a.device,{},1,&stellarCreate,nullptr,&a.stellarSunPipeline);vkDestroyShaderModule(a.device,stellarVs,nullptr);vkDestroyShaderModule(a.device,stellarFs,nullptr);a.Check(stellarResult,"stellar Sun pipeline failed");
+  VkShaderModule glowVs=Shader(a,"shaders/stellar_glow.vert.spv"),glowFs{};try{glowFs=Shader(a,"shaders/stellar_glow.frag.spv");}catch(...){vkDestroyShaderModule(a.device,glowVs,nullptr);throw;}VkPipelineShaderStageCreateInfo glowStages[2]{{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_VERTEX_BIT,glowVs,"main"},{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_FRAGMENT_BIT,glowFs,"main"}};VkGraphicsPipelineCreateInfo glowCreate=gp;glowCreate.pStages=glowStages;glowCreate.pVertexInputState=&fullscreenInput;glowCreate.pColorBlendState=&planetaryBlend;VkResult glowResult=vkCreateGraphicsPipelines(a.device,{},1,&glowCreate,nullptr,&a.stellarGlowPipeline);vkDestroyShaderModule(a.device,glowVs,nullptr);vkDestroyShaderModule(a.device,glowFs,nullptr);a.Check(glowResult,"stellar glow pipeline failed");
   VkShaderModule planetaryCompute=Shader(a,"shaders/planetary_select.comp.spv");VkPipelineShaderStageCreateInfo planetaryComputeStage{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_COMPUTE_BIT,planetaryCompute,"main"};VkComputePipelineCreateInfo planetaryComputeCreate{VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO};planetaryComputeCreate.stage=planetaryComputeStage;planetaryComputeCreate.layout=a.pipelineLayout;VkResult planetaryComputeResult=vkCreateComputePipelines(a.device,{},1,&planetaryComputeCreate,nullptr,&a.planetaryComputePipeline);vkDestroyShaderModule(a.device,planetaryCompute,nullptr);a.Check(planetaryComputeResult,"planetary compute pipeline failed");
   VkShaderModule orbitVs{}, orbitFs{};
   try { orbitVs = Shader(a, "shaders/orbit.vert.spv"); orbitFs = Shader(a, "shaders/orbit.frag.spv"); }
@@ -759,8 +828,8 @@ void Swap(App &a) {
   if (activeOrbitResult != VK_SUCCESS && activeOrbitPipeline) vkDestroyPipeline(a.device, activeOrbitPipeline, nullptr);
   a.Check(activeOrbitResult, "orbit pipeline failed");
   a.orbitPipeline = activeOrbitPipeline;
-  VkShaderModule solarOrbitVs{},solarOrbitFs{};try{solarOrbitVs=Shader(a,"shaders/solar_orbit.vert.spv");solarOrbitFs=Shader(a,"shaders/solar_orbit.frag.spv");}catch(...){if(solarOrbitVs)vkDestroyShaderModule(a.device,solarOrbitVs,nullptr);throw;}VkPipelineShaderStageCreateInfo solarOrbitStages[2]{{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_VERTEX_BIT,solarOrbitVs,"main"},{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_FRAGMENT_BIT,solarOrbitFs,"main"}};VkPipelineInputAssemblyStateCreateInfo solarOrbitAssembly=orbitAssembly;solarOrbitAssembly.topology=VK_PRIMITIVE_TOPOLOGY_LINE_LIST;VkGraphicsPipelineCreateInfo solarOrbitCreate=orbitPipeline;solarOrbitCreate.pStages=solarOrbitStages;solarOrbitCreate.pInputAssemblyState=&solarOrbitAssembly;VkResult solarOrbitResult=vkCreateGraphicsPipelines(a.device,{},1,&solarOrbitCreate,nullptr,&a.solarOrbitPipeline);vkDestroyShaderModule(a.device,solarOrbitVs,nullptr);vkDestroyShaderModule(a.device,solarOrbitFs,nullptr);a.Check(solarOrbitResult,"solar orbit pipeline failed");
-  VkPipelineVertexInputStateCreateInfo overlayInput{VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO};VkPipelineInputAssemblyStateCreateInfo overlayAssembly{VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO};overlayAssembly.topology=VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;auto createOverlay=[&](const char *vertex,const char *fragment,VkPipeline &destination,const char *failure){VkShaderModule vs=Shader(a,vertex),fs{};try{fs=Shader(a,fragment);}catch(...){vkDestroyShaderModule(a.device,vs,nullptr);throw;}VkPipelineShaderStageCreateInfo stages[2]{{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_VERTEX_BIT,vs,"main"},{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_FRAGMENT_BIT,fs,"main"}};VkGraphicsPipelineCreateInfo create=gp;create.pStages=stages;create.pVertexInputState=&overlayInput;create.pInputAssemblyState=&overlayAssembly;VkResult result=vkCreateGraphicsPipelines(a.device,{},1,&create,nullptr,&destination);vkDestroyShaderModule(a.device,vs,nullptr);vkDestroyShaderModule(a.device,fs,nullptr);a.Check(result,failure);};createOverlay("shaders/solar_marker.vert.spv","shaders/solar_marker.frag.spv",a.solarMarkerPipeline,"solar marker pipeline failed");createOverlay("shaders/solar_label.vert.spv","shaders/solar_label.frag.spv",a.solarLabelPipeline,"solar label pipeline failed");
+  VkShaderModule solarOrbitVs{},solarOrbitFs{};try{solarOrbitVs=Shader(a,"shaders/solar_orbit.vert.spv");solarOrbitFs=Shader(a,"shaders/solar_orbit.frag.spv");}catch(...){if(solarOrbitVs)vkDestroyShaderModule(a.device,solarOrbitVs,nullptr);throw;}VkPipelineShaderStageCreateInfo solarOrbitStages[2]{{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_VERTEX_BIT,solarOrbitVs,"main"},{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_FRAGMENT_BIT,solarOrbitFs,"main"}};VkPipelineInputAssemblyStateCreateInfo solarOrbitAssembly=orbitAssembly;solarOrbitAssembly.topology=VK_PRIMITIVE_TOPOLOGY_LINE_LIST;VkGraphicsPipelineCreateInfo solarOrbitCreate=orbitPipeline;solarOrbitCreate.pStages=solarOrbitStages;solarOrbitCreate.pInputAssemblyState=&solarOrbitAssembly;solarOrbitCreate.pColorBlendState=&planetaryBlend;VkResult solarOrbitResult=vkCreateGraphicsPipelines(a.device,{},1,&solarOrbitCreate,nullptr,&a.solarOrbitPipeline);vkDestroyShaderModule(a.device,solarOrbitVs,nullptr);vkDestroyShaderModule(a.device,solarOrbitFs,nullptr);a.Check(solarOrbitResult,"solar orbit pipeline failed");
+  VkPipelineVertexInputStateCreateInfo overlayInput{VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO};VkPipelineInputAssemblyStateCreateInfo overlayAssembly{VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO};overlayAssembly.topology=VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;auto createOverlay=[&](const char *vertex,const char *fragment,VkPipeline &destination,const char *failure){VkShaderModule vs=Shader(a,vertex),fs{};try{fs=Shader(a,fragment);}catch(...){vkDestroyShaderModule(a.device,vs,nullptr);throw;}VkPipelineShaderStageCreateInfo stages[2]{{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_VERTEX_BIT,vs,"main"},{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_FRAGMENT_BIT,fs,"main"}};VkGraphicsPipelineCreateInfo create=gp;create.pStages=stages;create.pVertexInputState=&overlayInput;create.pInputAssemblyState=&overlayAssembly;create.pColorBlendState=&planetaryBlend;VkResult result=vkCreateGraphicsPipelines(a.device,{},1,&create,nullptr,&destination);vkDestroyShaderModule(a.device,vs,nullptr);vkDestroyShaderModule(a.device,fs,nullptr);a.Check(result,failure);};createOverlay("shaders/solar_marker.vert.spv","shaders/solar_marker.frag.spv",a.solarMarkerPipeline,"solar marker pipeline failed");createOverlay("shaders/solar_label.vert.spv","shaders/solar_label.frag.spv",a.solarLabelPipeline,"solar label pipeline failed");
   VkShaderModule previousOrbitVs{}, previousOrbitFs{};
   try { previousOrbitVs = Shader(a, "shaders/orbit.vert.spv"); previousOrbitFs = Shader(a, "shaders/orbit_previous.frag.spv"); }
   catch (...) { if (previousOrbitVs) vkDestroyShaderModule(a.device, previousOrbitVs, nullptr); throw; }
@@ -799,11 +868,11 @@ void Swap(App &a) {
   a.targetDirectionPipeline = targetDirectionPipeline;
   a.framebuffers.resize(a.views.size());
   for (size_t i = 0; i < a.views.size(); i++) {
-    VkImageView x = a.views[i];
+    VkImageView attachments[]{a.sceneColorView,a.views[i]};
     VkFramebufferCreateInfo fb{VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO};
     fb.renderPass = a.renderPass;
-    fb.attachmentCount = 1;
-    fb.pAttachments = &x;
+    fb.attachmentCount = 2;
+    fb.pAttachments = attachments;
     fb.width = a.extent.width;
     fb.height = a.extent.height;
     fb.layers = 1;
@@ -903,11 +972,11 @@ void CreateSubmission(App &a) {
   CreateHostBuffer(a,sizeof(uint32_t)*GpuNodeCount,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,a.gpuNodeBuffer,a.gpuNodeMemory,a.gpuNodeMapped,"planetary GPU node buffer failed");
   CreateHostBuffer(a,sizeof(GpuPlanetaryControl),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT|VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT,a.gpuControlBuffer,a.gpuControlMemory,a.gpuControlMapped,"planetary GPU control buffer failed");
   CreateHostBuffer(a,sizeof(NcPlanetaryPresentation)*10,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,a.planetaryPresentationBuffer,a.planetaryPresentationMemory,a.planetaryPresentationMapped,"planetary presentation buffer failed");
-  VkDescriptorPoolSize ps{VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 7};
+  VkDescriptorPoolSize ps[2]{{VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,7},{VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT,1}};
   VkDescriptorPoolCreateInfo pi{VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO};
   pi.maxSets = 1;
-  pi.poolSizeCount = 1;
-  pi.pPoolSizes = &ps;
+  pi.poolSizeCount = 2;
+  pi.pPoolSizes = ps;
   a.Check(vkCreateDescriptorPool(a.device, &pi, nullptr, &a.descriptorPool),
           "descriptor pool failed");
   VkDescriptorSetAllocateInfo si{
@@ -920,6 +989,7 @@ void CreateSubmission(App &a) {
   VkDescriptorBufferInfo infos[7]{{a.submissionBuffer,0,a.submissionSize},{a.patchBuffer,0,a.patchSize},{a.gpuInputBuffer,0,sizeof(NcPlanetaryGpuConstants)},{a.gpuWorkBuffer,0,sizeof(uint32_t)*4*GpuPatchCapacity*2},{a.gpuNodeBuffer,0,sizeof(uint32_t)*GpuNodeCount},{a.gpuControlBuffer,0,sizeof(GpuPlanetaryControl)},{a.planetaryPresentationBuffer,0,sizeof(NcPlanetaryPresentation)*10}};
   VkWriteDescriptorSet writes[7]{};for(uint32_t binding=0;binding<7;binding++){writes[binding].sType=VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;writes[binding].dstSet=a.descriptor;writes[binding].dstBinding=binding;writes[binding].descriptorCount=1;writes[binding].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;writes[binding].pBufferInfo=&infos[binding];}
   vkUpdateDescriptorSets(a.device,7,writes,0,nullptr);
+  VkDescriptorImageInfo sceneInput{};sceneInput.imageView=a.sceneColorView;sceneInput.imageLayout=VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;VkWriteDescriptorSet sceneWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};sceneWrite.dstSet=a.descriptor;sceneWrite.dstBinding=7;sceneWrite.descriptorCount=1;sceneWrite.descriptorType=VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT;sceneWrite.pImageInfo=&sceneInput;vkUpdateDescriptorSets(a.device,1,&sceneWrite,0,nullptr);
 }
 void EnsurePatchCapacity(App &a,uint32_t count) {
   const auto required=sizeof(NcPlanetaryPatch)*std::max<uint32_t>(1,count);
@@ -1019,14 +1089,19 @@ void Record(App &a, uint32_t image) {
   const auto &presentation=a.submission->planetaryPresentation;const bool handoff=presentation.enabled!=0;const bool detailedPresentation=!handoff||presentation.regime!=NC_PLANETARY_DISTANT_ONLY;const bool distantPresentation=handoff&&presentation.regime!=NC_PLANETARY_DETAILED_ONLY&&presentation.distantAlpha>0;const bool gpuPlanetary=detailedPresentation&&a.submission->planetaryMode!=NC_PLANETARY_CPU_REFERENCE;
   if(distantPresentation||detailedPresentation){VkMemoryBarrier hostBarrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};hostBarrier.srcAccessMask=VK_ACCESS_HOST_WRITE_BIT;hostBarrier.dstAccessMask=VK_ACCESS_SHADER_READ_BIT;VkPipelineStageFlags readers=VK_PIPELINE_STAGE_VERTEX_SHADER_BIT|(gpuPlanetary?VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT:0);vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_HOST_BIT,readers,0,1,&hostBarrier,0,nullptr,0,nullptr);}
   if(gpuPlanetary){vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_COMPUTE,a.planetaryComputePipeline);vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_COMPUTE,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);vkCmdDispatch(c,1,1,1);VkMemoryBarrier computeBarrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};computeBarrier.srcAccessMask=VK_ACCESS_SHADER_WRITE_BIT;computeBarrier.dstAccessMask=VK_ACCESS_INDIRECT_COMMAND_READ_BIT|VK_ACCESS_SHADER_READ_BIT;VkPipelineStageFlags consumers=VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT|VK_PIPELINE_STAGE_VERTEX_SHADER_BIT;if(a.submission->planetaryMode==NC_PLANETARY_CPU_GPU_VALIDATION){computeBarrier.dstAccessMask|=VK_ACCESS_HOST_READ_BIT;consumers|=VK_PIPELINE_STAGE_HOST_BIT;}vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,consumers,0,1,&computeBarrier,0,nullptr,0,nullptr);}
-  VkClearValue clear{{{.02f, .02f, .04f, 1}}};
+  NcSolarLighting lighting=a.submission->solarLighting;if(!lighting.enabled){lighting.exposure=1;lighting.ambientFloor=.025f;lighting.photosphereR=1;lighting.photosphereG=.91f;lighting.photosphereB=.68f;lighting.sourceRadiance=32;}
+  vkCmdPushConstants(c,a.pipelineLayout,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,0,sizeof(lighting),&lighting);
+  VkClearValue clears[2]{};clears[0].color={{0,0,0,1}};clears[1].color={{0,0,0,1}};
   VkRenderPassBeginInfo rp{VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO};
   rp.renderPass = a.renderPass;
   rp.framebuffer = a.framebuffers[image];
   rp.renderArea = {{0, 0}, a.extent};
-  rp.clearValueCount = 1;
-  rp.pClearValues = &clear;
+  rp.clearValueCount = 2;
+  rp.pClearValues = clears;
   vkCmdBeginRenderPass(c, &rp, VK_SUBPASS_CONTENTS_INLINE);
+  vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.backgroundPipeline);
+  vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);
+  vkCmdDraw(c,3,1,0,0);
   vkCmdBindPipeline(c, VK_PIPELINE_BIND_POINT_GRAPHICS, a.pipeline);
   vkCmdBindDescriptorSets(c, VK_PIPELINE_BIND_POINT_GRAPHICS, a.pipelineLayout,
                           0, 1, &a.descriptor, 0, nullptr);
@@ -1038,14 +1113,21 @@ void Record(App &a, uint32_t image) {
     vkCmdBindIndexBuffer(c, m->ib, 0, VK_INDEX_TYPE_UINT32);
     vkCmdDrawIndexed(c, m->indices, b.objectCount, 0, 0, b.firstObject);
   }
-  const uint32_t distantCount=a.submission->distantBodyCount?a.submission->distantBodyCount:(distantPresentation?1u:0u);if(distantCount){VkDeviceSize offset=0;vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.distantPlanetaryPipeline);vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);vkCmdBindVertexBuffers(c,0,1,&a.distantPlanetary.vb,&offset);vkCmdBindIndexBuffer(c,a.distantPlanetary.ib,0,VK_INDEX_TYPE_UINT32);vkCmdDrawIndexed(c,a.distantPlanetary.indices,distantCount,0,0,0);}
+  const uint32_t distantCount=a.submission->distantBodyCount?a.submission->distantBodyCount:(distantPresentation?1u:0u);const bool solarOverlay=a.submission->distantBodyCount==10&&a.submission->orbitVertexCount==2304;
+  if(solarOverlay&&a.submission->orbitVertexCount>=2&&a.orbitBuffer){VkDeviceSize offset=0;vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.solarOrbitPipeline);vkCmdBindVertexBuffers(c,0,1,&a.orbitBuffer,&offset);vkCmdDraw(c,a.submission->orbitVertexCount,1,0,0);}
+  if(solarOverlay){vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.stellarGlowPipeline);vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);vkCmdDraw(c,6,distantCount,0,0);VkDeviceSize offset=0;vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.planetaryRingFarPipeline);vkCmdBindVertexBuffers(c,0,1,&a.planetaryRing.vb,&offset);vkCmdBindIndexBuffer(c,a.planetaryRing.ib,0,VK_INDEX_TYPE_UINT32);vkCmdDrawIndexed(c,a.planetaryRing.indices,distantCount,0,0,0);}
+  if(distantCount){VkDeviceSize offset=0;vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.distantPlanetaryPipeline);vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);vkCmdBindVertexBuffers(c,0,1,&a.distantPlanetary.vb,&offset);vkCmdBindIndexBuffer(c,a.distantPlanetary.ib,0,VK_INDEX_TYPE_UINT32);vkCmdDrawIndexed(c,a.distantPlanetary.indices,distantCount,0,0,0);}
   if(detailedPresentation&&(a.submission->planetaryPatchCount||gpuPlanetary)){VkDeviceSize offset=0;vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.planetaryPipeline);vkCmdBindVertexBuffers(c,0,1,&a.planetaryPatch.vb,&offset);vkCmdBindIndexBuffer(c,a.planetaryPatch.ib,0,VK_INDEX_TYPE_UINT32);if(gpuPlanetary)vkCmdDrawIndexedIndirect(c,a.gpuControlBuffer,0,1,sizeof(VkDrawIndexedIndirectCommand));else vkCmdDrawIndexed(c,a.planetaryPatch.indices,a.submission->planetaryPatchCount,0,0,0);}
-  const bool solarOverlay=a.submission->distantBodyCount==10&&a.submission->orbitVertexCount==2304;
-  if (a.submission->orbitVertexCount >= 2 && a.orbitBuffer) { VkDeviceSize offset = 0; vkCmdBindPipeline(c, VK_PIPELINE_BIND_POINT_GRAPHICS, solarOverlay?a.solarOrbitPipeline:a.orbitPipeline); vkCmdBindVertexBuffers(c, 0, 1, &a.orbitBuffer, &offset); vkCmdDraw(c, a.submission->orbitVertexCount, 1, 0, 0); }
+  if(solarOverlay){VkDeviceSize offset=0;vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.planetaryRingNearPipeline);vkCmdBindVertexBuffers(c,0,1,&a.planetaryRing.vb,&offset);vkCmdBindIndexBuffer(c,a.planetaryRing.ib,0,VK_INDEX_TYPE_UINT32);vkCmdDrawIndexed(c,a.planetaryRing.indices,distantCount,0,0,0);}
+  if (!solarOverlay && a.submission->orbitVertexCount >= 2 && a.orbitBuffer) { VkDeviceSize offset = 0; vkCmdBindPipeline(c, VK_PIPELINE_BIND_POINT_GRAPHICS, a.orbitPipeline); vkCmdBindVertexBuffers(c, 0, 1, &a.orbitBuffer, &offset); vkCmdDraw(c, a.submission->orbitVertexCount, 1, 0, 0); }
   if (a.submission->previousOrbitVertexCount >= 2 && a.previousOrbitBuffer) { VkDeviceSize offset = 0; vkCmdBindPipeline(c, VK_PIPELINE_BIND_POINT_GRAPHICS, a.previousOrbitPipeline); vkCmdBindVertexBuffers(c, 0, 1, &a.previousOrbitBuffer, &offset); vkCmdDraw(c, a.submission->previousOrbitVertexCount, 1, 0, 0); }
   if (a.submission->bodyForwardVertexCount == 2 && a.bodyForwardBuffer) { VkDeviceSize offset = 0; vkCmdBindPipeline(c, VK_PIPELINE_BIND_POINT_GRAPHICS, a.bodyForwardPipeline); vkCmdBindVertexBuffers(c, 0, 1, &a.bodyForwardBuffer, &offset); vkCmdDraw(c, 2, 1, 0, 0); }
   if (a.submission->targetDirectionVertexCount == 2 && a.targetDirectionBuffer) { VkDeviceSize offset = 0; vkCmdBindPipeline(c, VK_PIPELINE_BIND_POINT_GRAPHICS, a.targetDirectionPipeline); vkCmdBindVertexBuffers(c, 0, 1, &a.targetDirectionBuffer, &offset); vkCmdDraw(c, 2, 1, 0, 0); }
-  if(solarOverlay){vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.solarMarkerPipeline);vkCmdDraw(c,24,10,0,0);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.solarLabelPipeline);vkCmdDraw(c,630,10,0,0);}
+  if(solarOverlay){VkDeviceSize offset=0;vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.stellarSunPipeline);vkCmdBindVertexBuffers(c,0,1,&a.stellarSun.vb,&offset);vkCmdBindIndexBuffer(c,a.stellarSun.ib,0,VK_INDEX_TYPE_UINT32);vkCmdDrawIndexed(c,a.stellarSun.indices,distantCount,0,0,0);vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.solarMarkerPipeline);vkCmdDraw(c,24,10,0,0);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.solarLabelPipeline);vkCmdDraw(c,630,10,0,0);}
+  vkCmdNextSubpass(c,VK_SUBPASS_CONTENTS_INLINE);
+  vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.toneMapPipeline);
+  vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);
+  vkCmdDraw(c,3,1,0,0);
   vkCmdEndRenderPass(c);
   a.Check(vkEndCommandBuffer(c), "command end failed");
 }
@@ -1215,7 +1297,7 @@ void Update(App &a, float dt) {
                   (GetAsyncKeyState('S') & 0x8000) != 0,
                   (GetAsyncKeyState('Q') & 0x8000) != 0,
                   (GetAsyncKeyState('E') & 0x8000) != 0,
-                  (GetAsyncKeyState('R') & 0x8000) != 0,
+                  rising('R', a.resetWasDown),
                   a.lookActive,
                   x,
                   y,
@@ -1274,7 +1356,8 @@ extern "C" NC_API NcResult __cdecl nc_get_abi_layout(NcAbiLayout *o) {
         (uint32_t)offsetof(NcFrameSubmission, planetaryGpu),
         (uint32_t)offsetof(NcFrameSubmission, planetaryMode),
         (uint32_t)offsetof(NcFrameSubmission, planetaryPresentation),
-        (uint32_t)offsetof(NcInputState, presentationFocus)};
+        (uint32_t)offsetof(NcInputState, presentationFocus),
+        (uint32_t)offsetof(NcFrameSubmission, solarLighting)};
   return NC_SUCCESS;
 }
 extern "C" NC_API NcResult __cdecl

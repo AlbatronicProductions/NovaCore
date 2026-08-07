@@ -2,13 +2,19 @@
 
 ## Repository state
 
-Inspect `git status --short` before editing. The working tree currently contains unstaged Milestone 10A presentation work; preserve it unless the active task explicitly changes it. Repository code and tests are authoritative if this document ever becomes stale.
+Inspect `git status --short` before editing. Preserve all existing unstaged work unless the active task explicitly changes it. Repository code and tests are authoritative if this document ever becomes stale.
 
-## Current milestones: 9A-4F-2 and 10A-9B
+## Current milestones: 9A-4F-2 and 10B-1C
 
 NovaCore now has a deterministic, true-distance Solar System presentation built from `SolCompact-DE440Validated-v3`. `--scene=sol` evaluates Sun, Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn, Uranus, and Neptune at the current `SimulationInstant`, root-resolves them through `CelestialSystemEvaluator`, and publishes immutable `PlanetaryPresentationSnapshot` data to Graphics. It is a compact analytical runtime validated offline against DE440, not runtime DE440 playback.
 
-The scene includes deterministic current-time orbit paths, body labels, screen-space reticle markers, number-row focus, orbit/zoom camera controls, and `SimulationClock` rate/pause integration. Labels use deterministic NDC collision rejection: focused body, Sun, Earth, Moon, then stable body order, with `0.004` NDC clearance. A rejected label never suppresses its marker or physical body. Solar uses an infinite-far Vulkan projection and a 100 AU presentation clamp, preserving the established double-precision camera-relative subtraction through the prior finite-depth boundary.
+The scene includes deterministic current-time orbit paths, body labels, screen-space reticle markers, number-row focus, orbit/zoom camera controls, and `SimulationClock` rate/pause integration. `SolarCameraPresentationMode` adds an explicit true-distance Solar Map home pose while preserving the same free 3D focus-orbit camera. Startup and `R` select the evaluated Sun at 58 AU, orient near the ecliptic normal, preserve the current instant, and fit the major paths. Focus uses one projected-extent rule with physical radius, optional ring extent, and the existing stellar presentation extent rather than a body-specific distance table. Solar uses an infinite-far Vulkan projection and a 100 AU presentation clamp, preserving the established double-precision camera-relative subtraction through the prior finite-depth boundary.
+
+Labels use deterministic NDC collision rejection in focused, direct parent/child, Sun, major-planet, then stable-body order. Accepted bounds include 0.0035 NDC clearance and remain wholly inside the viewport. Markers disappear when the physical rendered body is already readable; close-local views suppress unrelated labels and markers. Orbit opacity is deterministic presentation metadata: the map retains all major paths, Earth local retains Earth and Moon paths, and unrelated local paths fade away. Alpha-blended orbit lines render before opaque bodies so physical disks occlude the segment behind them without depth or orbit edits.
+
+10B-1A adds a persistent FP16 scene-color target, fixed ACES-style exposure/tone mapping, a deterministic procedural deep-space/Milky Way layer, a dedicated photosphere/corona Sun path, and evaluated-Sun illumination shared by distant and detailed spherical paths. The lighting record is presentation-only: its source center comes from the evaluated Sun snapshot, and no physical radius, evaluated center, time behavior, or deterministic celestial identity changes.
+
+10B-1B adds one immutable presentation-material catalog shared by the distant sphere and detailed cube-sphere paths. Repository-authored direction-space procedural materials now distinguish Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn, Uranus, and Neptune without textures, per-patch data, or body-specific pipelines. Saturn uses the first generic ring record and one persistent annulus mesh; ordered far-ring/body/near-ring draws provide correct planet occlusion without adding a depth attachment. Material rotation remains an explicit presentation approximation until physical body orientation is modeled.
 
 ## Completed rendering foundation
 
@@ -20,6 +26,10 @@ The scene includes deterministic current-time orbit paths, body labels, screen-s
 - GPU patch selection with a CPU oracle, bounded output, explicit synchronization, and CPU/GPU parity diagnostics.
 - Distant/detail handoff using the same physical radius and camera-relative center authority.
 - Shared distant-body batch, Solar paths/labels/markers, and Vulkan validation-layer manual regressions.
+- Swapchain-safe HDR scene color and tone mapping, procedural infinite-far space, dedicated stellar Sun presentation, and common Solar terminators.
+- Shared immutable planet-material identity and response across distant/detail handoff, with deterministic body-local procedural projection.
+- Generic renderer-owned ring presentation and persistent annulus geometry, initially configured for Saturn.
+- One deterministic Solar Map/free-3D camera, extent-aware focus framing, hierarchical path fading, bounded label priority, and marker-to-body transition.
 
 ## Milestone 9 pipeline summary
 
@@ -27,7 +37,8 @@ Milestone 9 established immutable generic celestial definitions and a pure evalu
 
 ## Remaining work
 
-- Stellar presentation, cubemap planet materials, atmosphere, and terrain.
+- Authored image textures, atmosphere, clouds, terrain, oceans, and physically modeled body rotation.
 - A declared spacecraft-navigation error budget and exceptional higher-fidelity lunar ephemeris if lunar-orbit insertion, close navigation, or precision long-horizon planning requires more than v3. Compact Chebyshev or `SampledHermite` remains the measured fallback, not the default.
-- Frustum/occlusion refinement, richer material systems, and later planetary surface features.
+- Frustum/occlusion refinement, richer material layers, ring shadowing/thickness, and later planetary surface features.
+- Automatic exposure, convolution bloom, lens flare, antialiased font rendering, and richer overlay interaction remain optional measured presentation work; 10B-1A uses fixed exposure and an analytic stellar corona, while 10B-1C retains the lightweight 3x5 overlay renderer.
 - Spacecraft, physics/gameplay, colonies, asset pipeline, and save/replay integration.

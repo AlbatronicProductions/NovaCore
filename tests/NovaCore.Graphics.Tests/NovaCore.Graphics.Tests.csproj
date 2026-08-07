@@ -12,6 +12,7 @@
     <Compile Include="..\..\samples\NovaCore.Triangle\CelestialAnalyticalScene.cs" Link="CelestialAnalyticalScene.cs" />
     <Compile Include="..\..\samples\NovaCore.Triangle\EarthPlanetaryScene.cs" Link="EarthPlanetaryScene.cs" />
     <Compile Include="..\..\samples\NovaCore.Triangle\SolarSystemScene.cs" Link="SolarSystemScene.cs" />
+    <Compile Include="..\..\samples\NovaCore.Triangle\SolarPlanetMaterials.cs" Link="SolarPlanetMaterials.cs" />
   </ItemGroup>
   <Target Name="CopyNativeRuntime" AfterTargets="Build">
     <Copy SourceFiles="$(MSBuildThisFileDirectory)..\..\build\native-ninja\NovaCore.Native.dll" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />

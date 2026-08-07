@@ -10,13 +10,14 @@ using NovaCore.Simulation.Timeline;
 
 internal static class SolarOverlayLayout
 {
-    internal const double CharacterStrideNdc = .009d;
-    internal const double CellWidthNdc = .0022d;
-    internal const double CellHeightNdc = .0028d;
-    internal const double LabelOffsetXNdc = .009d;
-    internal const double LabelOffsetYNdc = .009d;
-    internal const double FocusedLabelOffsetYNdc = .012d;
-    internal const double CollisionMarginNdc = .004d;
+    internal const double CharacterStrideNdc = .008d;
+    internal const double CellWidthNdc = .0019d;
+    internal const double CellHeightNdc = .0024d;
+    internal const double LabelOffsetXNdc = .008d;
+    internal const double LabelOffsetYNdc = .008d;
+    internal const double FocusedLabelOffsetYNdc = .0105d;
+    internal const double CollisionMarginNdc = .0035d;
+    internal const double ScreenEdgeMarginNdc = .012d;
 
     // Vulkan's positive-height viewport maps increasing NDC Y down the framebuffer.
     internal static (double X, double Y) LabelCellOffset(int characterIndex, int column, int row) =>
@@ -33,15 +34,9 @@ internal static class SolarOverlayLayout
     {
         bounds = default;
         depth = double.NaN;
-        var view = camera.Orientation.Conjugate().Normalized().Rotate(body.Position.Value - camera.Position.Value);
-        var forward = -view.Z;
-        if (!view.IsFinite || !double.IsFinite(forward) || forward < camera.Projection.NearClip) return false;
-        var scale = 1d / Math.Tan(camera.Projection.VerticalFieldOfViewRadians * .5d);
-        var anchorX = scale / camera.Projection.AspectRatio * view.X / forward;
-        var anchorY = -scale * view.Y / forward;
-        depth = 1d - camera.Projection.NearClip / forward;
+        if (!TryProjectBody(body, camera, out var anchorX, out var anchorY, out _, out depth)) return false;
         var length = body.Label?.Length ?? 0;
-        if (length == 0 || !double.IsFinite(anchorX) || !double.IsFinite(anchorY) || !double.IsFinite(depth) || depth is < 0d or >= 1d) return false;
+        if (length == 0) return false;
         var minX = anchorX + LabelOffsetXNdc;
         var minY = anchorY + (focused ? FocusedLabelOffsetYNdc : LabelOffsetYNdc);
         bounds = new SolarScreenRect(
@@ -49,12 +44,35 @@ internal static class SolarOverlayLayout
             minY,
             minX + (length - 1) * CharacterStrideNdc + 3d * CellWidthNdc,
             minY + 5d * CellHeightNdc);
-        return bounds.IsFinite && bounds.MaxX >= -1d && bounds.MinX <= 1d && bounds.MaxY >= -1d && bounds.MinY <= 1d;
+        return bounds.IsFinite && bounds.MinX >= -1d + ScreenEdgeMarginNdc && bounds.MaxX <= 1d - ScreenEdgeMarginNdc &&
+            bounds.MinY >= -1d + ScreenEdgeMarginNdc && bounds.MaxY <= 1d - ScreenEdgeMarginNdc;
+    }
+
+    internal static bool TryProjectBody(in PlanetRenderProxy body, CameraState camera, out double anchorX, out double anchorY, out double apparentRadiusNdc, out double depth)
+    {
+        anchorX = anchorY = apparentRadiusNdc = depth = double.NaN;
+        var view = camera.Orientation.Conjugate().Normalized().Rotate(body.Position.Value - camera.Position.Value);
+        var forward = -view.Z;
+        if (!view.IsFinite || !double.IsFinite(forward) || forward < camera.Projection.NearClip) return false;
+        var scale = 1d / Math.Tan(camera.Projection.VerticalFieldOfViewRadians * .5d);
+        anchorX = scale / camera.Projection.AspectRatio * view.X / forward;
+        anchorY = -scale * view.Y / forward;
+        apparentRadiusNdc = scale * body.RadiusMetres / forward;
+        depth = 1d - camera.Projection.NearClip / forward;
+        return double.IsFinite(anchorX) && double.IsFinite(anchorY) && double.IsFinite(apparentRadiusNdc) && apparentRadiusNdc >= 0d &&
+            double.IsFinite(depth) && depth is >= 0d and < 1d && anchorX + apparentRadiusNdc >= -1d && anchorX - apparentRadiusNdc <= 1d &&
+            anchorY + apparentRadiusNdc >= -1d && anchorY - apparentRadiusNdc <= 1d;
     }
 
     internal static bool Overlaps(in SolarScreenRect left, in SolarScreenRect right) =>
         left.MinX < right.MaxX + CollisionMarginNdc && left.MaxX + CollisionMarginNdc > right.MinX &&
         left.MinY < right.MaxY + CollisionMarginNdc && left.MaxY + CollisionMarginNdc > right.MinY;
+}
+
+internal enum SolarCameraPresentationMode
+{
+    Free3D,
+    SolarMap
 }
 
 internal readonly record struct SolarScreenRect(double MinX, double MinY, double MaxX, double MaxY)
@@ -69,9 +87,15 @@ internal sealed class SolarSystemScene
     internal const int OrbitSegmentCount = 128;
     internal const int OrbitSampleCount = OrbitSegmentCount + 1;
     internal const int OrbitVertexCount = OrbitPathCount * OrbitSegmentCount * 2;
-    internal const double InitialOverviewDistanceAu = 45d;
+    internal const double InitialOverviewDistanceAu = 58d;
     internal const double MaximumOverviewDistanceAu = 100d;
     internal const uint LabelVisibleBit = 0x4000_0000u;
+    internal const uint StellarPresentationBit = 0x2000_0000u;
+    internal const uint MarkerVisibleBit = 0x1000_0000u;
+    internal const int OrbitOpacityShift = 8;
+    internal const uint OrbitOpacityMask = 0x0000_FF00u;
+    internal const double SolarMapPitchRadians = 23.439291111d * Math.PI / 180d;
+    internal const double FocusTargetRadiusNdc = .15d;
 
     private static readonly Float3[] Colors =
     [
@@ -99,6 +123,8 @@ internal sealed class SolarSystemScene
     private readonly double[] _orbitPeriods;
     private readonly SimulationClock _clock;
     private readonly bool[] _visibleLabels = new bool[BodyOrder.Length];
+    private readonly bool[] _visibleMarkers = new bool[BodyOrder.Length];
+    private readonly byte[] _orbitOpacityBytes = new byte[OrbitPathCount];
     private readonly bool[] _labelBoundsValid = new bool[BodyOrder.Length];
     private readonly SolarScreenRect[] _labelBounds = new SolarScreenRect[BodyOrder.Length];
     private readonly ulong[] _visibleLabelIds = new ulong[BodyOrder.Length];
@@ -133,6 +159,8 @@ internal sealed class SolarSystemScene
         DistantBodies = new NativePlanetaryPresentation[BodyOrder.Length];
         OrbitVertices = new NativeOrbitLineVertex[OrbitVertexCount];
         _orbitDistance = SolAnalyticalDefinition.AstronomicalUnitMetres * InitialOverviewDistanceAu;
+        _orbitPitchRadians = SolarMapPitchRadians;
+        CameraPresentationMode = SolarCameraPresentationMode.SolarMap;
     }
 
     internal PlanetaryPresentationSnapshot Presentation { get; private set; } = null!;
@@ -148,9 +176,15 @@ internal sealed class SolarSystemScene
     internal SimulationRate Rate => _clock.Rate;
     internal bool IsPaused => _clock.IsPaused;
     internal double OrbitDistance => _orbitDistance;
+    internal double OrbitYawRadians => _orbitYawRadians;
+    internal double OrbitPitchRadians => _orbitPitchRadians;
+    internal SolarCameraPresentationMode CameraPresentationMode { get; private set; }
     internal CameraProjection Projection => new(Math.PI / 3d, 16d / 9d, 1e6d, SolAnalyticalDefinition.AstronomicalUnitMetres * MaximumOverviewDistanceAu);
     internal ReadOnlySpan<ulong> VisibleLabelIds => _visibleLabelIds.AsSpan(0, VisibleLabelCount);
+    internal ReadOnlySpan<byte> OrbitOpacityBytes => _orbitOpacityBytes;
     internal int VisibleLabelCount { get; private set; }
+    internal int VisibleMarkerCount { get; private set; }
+    internal int VisibleOrbitCount { get; private set; }
 
     internal static bool TryCreate(ReferenceFrameId root, out SolarSystemScene? scene, out string error)
     {
@@ -178,8 +212,11 @@ internal sealed class SolarSystemScene
 
     internal void Update(CameraState camera)
     {
-        _blend = _handoff.Update(FocusedBody, camera.Position.Value);
-        SelectVisibleLabels(camera);
+        var selectedBlend = _handoff.Update(FocusedBody, camera.Position.Value);
+        _blend = FocusIndex == 0
+            ? new PlanetaryRepresentationBlend(PlanetaryRenderRegime.DistantOnly, selectedBlend.DistanceRadii, 1f, 0f)
+            : selectedBlend;
+        SelectOverlayPresentation(camera);
         for (var output = 0; output < Presentation.Count; output++)
         {
             var index = output == 0 ? FocusIndex : output <= FocusIndex ? output - 1 : output;
@@ -194,8 +231,11 @@ internal sealed class SolarSystemScene
                 DetailedAlpha = focused ? _blend.DetailedAlpha : 0f,
                 DistanceRadii = (float)(Math.Sqrt((camera.Position.Value - body.Position.Value).LengthSquared) / body.RadiusMetres),
                 Regime = focused ? (NativePlanetaryRenderRegime)_blend.Regime : NativePlanetaryRenderRegime.DistantOnly,
-                Enabled = (uint)(index + 1) | (focused ? FocusedOverlayBit : 0u) | (_visibleLabels[index] ? LabelVisibleBit : 0u)
+                Enabled = (uint)(index + 1) | (index == 0 ? StellarPresentationBit : 0u) | (focused ? FocusedOverlayBit : 0u) |
+                    (_visibleLabels[index] ? LabelVisibleBit : 0u) | (_visibleMarkers[index] ? MarkerVisibleBit : 0u) |
+                    (index == 0 ? 0u : (uint)_orbitOpacityBytes[index - 1] << OrbitOpacityShift)
             };
+            SolarPlanetMaterials.TryApply(ref DistantBodies[output], body.BodyId);
         }
         DistantBodyCount = Presentation.Count;
         UpdateOrbitVertices(camera);
@@ -206,9 +246,8 @@ internal sealed class SolarSystemScene
         if ((uint)index >= Presentation.Count) return false;
         FocusIndex = index;
         _handoff = new PlanetaryRepresentationHandoff(EarthPlanetaryScene.HandoffConfiguration);
-        _orbitDistance = FocusedBody.RadiusMetres * 10d;
-        _orbitYawRadians = 0d;
-        _orbitPitchRadians = 0d;
+        _orbitDistance = FocusFramingDistance(FocusedBody);
+        CameraPresentationMode = SolarCameraPresentationMode.Free3D;
         ApplyOrbitPose(camera);
         return true;
     }
@@ -254,6 +293,7 @@ internal sealed class SolarSystemScene
         {
             _orbitYawRadians -= input.MouseDeltaX * OrbitSensitivity;
             _orbitPitchRadians = Math.Clamp(_orbitPitchRadians - input.MouseDeltaY * OrbitSensitivity, -1.45d, 1.45d);
+            CameraPresentationMode = SolarCameraPresentationMode.Free3D;
             cameraChanged = true;
         }
         if (cameraChanged) ApplyOrbitPose(camera);
@@ -287,23 +327,37 @@ internal sealed class SolarSystemScene
 
     internal void ResetPresentationCamera(CameraState camera)
     {
+        FocusIndex = 0;
+        _handoff = new PlanetaryRepresentationHandoff(EarthPlanetaryScene.HandoffConfiguration);
         _orbitDistance = SolAnalyticalDefinition.AstronomicalUnitMetres * InitialOverviewDistanceAu;
         _orbitYawRadians = 0d;
-        _orbitPitchRadians = 0d;
+        _orbitPitchRadians = SolarMapPitchRadians;
+        CameraPresentationMode = SolarCameraPresentationMode.SolarMap;
         ApplyOrbitPose(camera);
+    }
+
+    internal double FocusFramingDistance(in PlanetRenderProxy body)
+    {
+        var visualRadius = body.RadiusMetres;
+        if (body.BodyId == SolarSystemBodyIds.Sun.Value) visualRadius *= 1.6d;
+        else if (SolarPlanetMaterials.Catalog.TryGet(body.BodyId, out var material) && material.Ring is { } ring) visualRadius = Math.Max(visualRadius, ring.OuterRadiusMetres);
+        var projectionScale = 1d / Math.Tan(Projection.VerticalFieldOfViewRadians * .5d);
+        return Math.Max(body.RadiusMetres * 4d, projectionScale * visualRadius / FocusTargetRadiusNdc);
     }
 
     internal NativePlanetaryPresentation FocusedPresentation(CameraState camera)
     {
         var body = FocusedBody;
         var center = CubeSphereProjection.CameraRelativeCenter(body, new UniversePosition(camera.Position.Value, Presentation.RootFrame));
-        return new NativePlanetaryPresentation
+        var native = new NativePlanetaryPresentation
         {
             CenterX = (float)center.X, CenterY = (float)center.Y, CenterZ = (float)center.Z, Radius = (float)body.RadiusMetres,
             ColorR = body.Color.X, ColorG = body.Color.Y, ColorB = body.Color.Z,
             DistantAlpha = _blend.DistantAlpha, DetailedAlpha = _blend.DetailedAlpha, DistanceRadii = (float)_blend.DistanceRadii,
             Regime = (NativePlanetaryRenderRegime)_blend.Regime, Enabled = 1
         };
+        SolarPlanetMaterials.TryApply(ref native, body.BodyId);
+        return native;
     }
 
     internal NativePlanetaryGpuConstants GpuConstants(CameraState camera)
@@ -321,6 +375,14 @@ internal sealed class SolarSystemScene
         };
     }
 
+    internal NativeSolarLighting SolarLighting(CameraState camera)
+    {
+        var lighting = SolarLightingPresentation.CreateDefault(Presentation.Bodies[0].Position);
+        if (!lighting.TryEncode(new UniversePosition(camera.Position.Value, Presentation.RootFrame), out var native))
+            throw new InvalidOperationException("Solar lighting transport failed.");
+        return native;
+    }
+
     internal bool TryGetLabelBounds(ulong bodyId, out SolarScreenRect bounds)
     {
         for (var index = 0; index < BodyOrder.Length; index++)
@@ -333,23 +395,47 @@ internal sealed class SolarSystemScene
         return false;
     }
 
-    private void SelectVisibleLabels(CameraState camera)
+    private void SelectOverlayPresentation(CameraState camera)
     {
         Array.Clear(_visibleLabels);
+        Array.Clear(_visibleMarkers);
         Array.Clear(_labelBoundsValid);
         VisibleLabelCount = 0;
+        VisibleMarkerCount = 0;
+        Span<double> apparentRadii = stackalloc double[BodyOrder.Length];
+        Span<bool> projected = stackalloc bool[BodyOrder.Length];
+        for (var index = 0; index < BodyOrder.Length; index++)
+        {
+            projected[index] = SolarOverlayLayout.TryProjectBody(Presentation.Bodies[index], camera, out var x, out var y, out apparentRadii[index], out _);
+            if (!projected[index] || Math.Abs(x) > 1d - .015d || Math.Abs(y) > 1d - .015d) continue;
+            var focused = index == FocusIndex;
+            var related = IsDirectlyRelated(index, FocusIndex);
+            var closeLocal = FocusIndex != 0 && _orbitDistance < SolAnalyticalDefinition.AstronomicalUnitMetres * .05d;
+            var maximumRadius = index == 0 ? .0035d : focused ? .016d : .011d;
+            if (apparentRadii[index] < maximumRadius && (!closeLocal || focused || related))
+            {
+                _visibleMarkers[index] = true;
+                VisibleMarkerCount++;
+            }
+        }
+        SelectOrbitOpacities();
         Span<int> priority = stackalloc int[BodyOrder.Length];
         var priorityCount = 0;
         AddPriority(priority, ref priorityCount, FocusIndex);
+        AddRelatedPriorities(priority, ref priorityCount, FocusIndex);
         AddPriority(priority, ref priorityCount, 0); // Sun
-        AddPriority(priority, ref priorityCount, 3); // Earth
-        AddPriority(priority, ref priorityCount, 4); // Moon
+        for (var index = 0; index < BodyOrder.Length; index++)
+            if (_system.TryGetBody(new CelestialBodyId(BodyOrder[index]), out var body) && body.Identity.Classification == CelestialBodyClassification.Planet)
+                AddPriority(priority, ref priorityCount, index);
         for (var index = 0; index < BodyOrder.Length; index++) AddPriority(priority, ref priorityCount, index); // Stable body-ID order.
 
         for (var priorityIndex = 0; priorityIndex < priorityCount; priorityIndex++)
         {
             var index = priority[priorityIndex];
             var focused = index == FocusIndex;
+            var related = IsDirectlyRelated(index, FocusIndex);
+            var closeLocal = FocusIndex != 0 && _orbitDistance < SolAnalyticalDefinition.AstronomicalUnitMetres * .05d;
+            if (!projected[index] || apparentRadii[index] >= (focused ? .22d : .08d) || closeLocal && !focused && !related) continue;
             if (!SolarOverlayLayout.TryProjectLabel(Presentation.Bodies[index], camera, focused, out var bounds, out _)) continue;
             _labelBounds[index] = bounds;
             _labelBoundsValid[index] = true;
@@ -364,6 +450,63 @@ internal sealed class SolarSystemScene
             _visibleLabelIds[VisibleLabelCount++] = BodyOrder[index];
         }
 
+    }
+
+    private void SelectOrbitOpacities()
+    {
+        VisibleOrbitCount = 0;
+        for (var path = 0; path < OrbitPathCount; path++)
+        {
+            var bodyIndex = path + 1;
+            var isMoon = _system.TryGetBody(new CelestialBodyId(BodyOrder[bodyIndex]), out var orbitBody) &&
+                orbitBody.Identity.Classification == CelestialBodyClassification.Moon;
+            double opacity;
+            if (CameraPresentationMode == SolarCameraPresentationMode.SolarMap)
+            {
+                opacity = isMoon ? .10d : .24d;
+            }
+            else if (FocusIndex == 0)
+            {
+                var bodyDistance = Math.Sqrt((Presentation.Bodies[bodyIndex].Position.Value - Presentation.Bodies[0].Position.Value).LengthSquared);
+                var ratio = bodyDistance / Math.Max(_orbitDistance, 1d);
+                var range = 1d - SmoothStep(.65d, 1.35d, ratio);
+                opacity = (isMoon ? .035d : .04d) + range * (isMoon ? .08d : .22d);
+                if (_orbitDistance < SolAnalyticalDefinition.AstronomicalUnitMetres * .2d) opacity *= SmoothStep(.03d, .2d, _orbitDistance / SolAnalyticalDefinition.AstronomicalUnitMetres);
+            }
+            else if (bodyIndex == FocusIndex)
+            {
+                opacity = .22d;
+            }
+            else if (IsDirectlyRelated(bodyIndex, FocusIndex))
+            {
+                opacity = .48d;
+            }
+            else
+            {
+                opacity = .035d * SmoothStep(.05d, 2d, _orbitDistance / SolAnalyticalDefinition.AstronomicalUnitMetres);
+            }
+            var encoded = (byte)Math.Clamp((int)Math.Round(opacity * byte.MaxValue, MidpointRounding.AwayFromZero), 0, byte.MaxValue);
+            _orbitOpacityBytes[path] = encoded;
+            if (encoded != 0) VisibleOrbitCount++;
+        }
+    }
+
+    private void AddRelatedPriorities(Span<int> priority, ref int count, int focusIndex)
+    {
+        for (var index = 0; index < BodyOrder.Length; index++) if (IsDirectlyRelated(index, focusIndex)) AddPriority(priority, ref count, index);
+    }
+
+    private bool IsDirectlyRelated(int leftIndex, int rightIndex)
+    {
+        if ((uint)leftIndex >= BodyOrder.Length || (uint)rightIndex >= BodyOrder.Length || leftIndex == rightIndex) return false;
+        if (!_system.TryGetBody(new CelestialBodyId(BodyOrder[leftIndex]), out var left) || !_system.TryGetBody(new CelestialBodyId(BodyOrder[rightIndex]), out var right)) return false;
+        return left.Identity.ParentBody == right.Id || right.Identity.ParentBody == left.Id;
+    }
+
+    private static double SmoothStep(double minimum, double maximum, double value)
+    {
+        var t = Math.Clamp((value - minimum) / (maximum - minimum), 0d, 1d);
+        return t * t * (3d - 2d * t);
     }
 
     private static void AddPriority(Span<int> priority, ref int count, int index)

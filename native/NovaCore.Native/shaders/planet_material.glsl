@@ -1,0 +1,17 @@
+float PlanetHash(vec3 p){p=fract(p*0.1031);p+=dot(p,p.yzx+33.33);return fract((p.x+p.y)*p.z);}
+float PlanetNoise(vec3 p){vec3 i=floor(p),f=fract(p);f=f*f*(3.0-2.0*f);return mix(mix(mix(PlanetHash(i),PlanetHash(i+vec3(1,0,0)),f.x),mix(PlanetHash(i+vec3(0,1,0)),PlanetHash(i+vec3(1,1,0)),f.x),f.y),mix(mix(PlanetHash(i+vec3(0,0,1)),PlanetHash(i+vec3(1,0,1)),f.x),mix(PlanetHash(i+vec3(0,1,1)),PlanetHash(i+vec3(1)),f.x),f.y),f.z);}
+float PlanetFbm(vec3 p){float value=0.0,weight=.55;for(int octave=0;octave<5;octave++){value+=weight*PlanetNoise(p);p=p*2.03+vec3(11.7,4.3,7.1);weight*=.5;}return value;}
+vec3 RotatePlanetY(vec3 direction,float angle){float c=cos(angle),s=sin(angle);return vec3(c*direction.x+s*direction.z,direction.y,-s*direction.x+c*direction.z);}
+vec3 PlanetAlbedo(uint source,vec3 direction,vec3 tint,float rotation){
+  vec3 n=RotatePlanetY(normalize(direction),rotation);float latitude=abs(n.y);float longitude=atan(n.z,n.x);float broad=PlanetFbm(n*2.4);float detail=PlanetFbm(n*9.0);
+  if(source==1u||source==4u){float craters=smoothstep(.66,.42,abs(fract(PlanetNoise(floor(n*14.0))*7.0+detail)-.5));float shade=.55+.45*broad-.13*craters;return tint*shade;}
+  if(source==2u){float bands=.5+.5*sin(n.y*42.0+PlanetFbm(n*5.0)*7.0+longitude*.8);return mix(tint*.68,vec3(1.0,.76,.43),.35+.45*bands);}
+  if(source==3u){float continental=broad+.18*PlanetFbm(n*6.0)-.10*latitude;vec3 ocean=mix(vec3(.015,.07,.22),vec3(.03,.24,.52),detail);vec3 land=mix(vec3(.12,.25,.07),vec3(.46,.34,.16),smoothstep(.40,.75,detail));vec3 albedo=mix(ocean,land,smoothstep(.50,.57,continental));return mix(albedo,vec3(.82,.90,.94),smoothstep(.82,.94,latitude));}
+  if(source==5u){vec3 soil=mix(vec3(.24,.055,.025),tint,clamp(.35+.8*broad,0.0,1.0));soil*=.72+.38*detail;return mix(soil,vec3(.78,.73,.65),smoothstep(.88,.97,latitude));}
+  if(source==6u){float belt=.5+.5*sin(n.y*73.0+PlanetFbm(vec3(longitude*1.3,n.y*8.0,2.0))*4.0);vec3 bands=mix(vec3(.30,.13,.055),vec3(.92,.76,.53),belt);float storm=exp(-pow((longitude+1.05)/.34,2.0)-pow((n.y+.31)/.12,2.0));return mix(bands,vec3(.75,.22,.08),storm*.8);}
+  if(source==7u){float belt=.5+.5*sin(n.y*90.0+PlanetFbm(n*4.0)*2.2);return mix(vec3(.43,.32,.18),vec3(.92,.80,.57),.35+.55*belt);}
+  if(source==8u){float belt=.5+.5*sin(n.y*38.0+detail*1.2);return mix(vec3(.20,.59,.64),tint,.55+.25*belt);}
+  if(source==9u){float belt=.5+.5*sin(n.y*48.0+PlanetFbm(n*5.0)*2.5);vec3 blue=mix(vec3(.025,.08,.34),tint,.45+.45*belt);float storm=exp(-pow((longitude-.6)/.25,2.0)-pow((n.y+.18)/.13,2.0));return mix(blue,vec3(.13,.16,.30),storm*.75);}
+  return tint;
+}
+vec3 PlanetLighting(vec3 albedo,vec3 normal,vec3 lightDirection,vec3 viewDirection,float roughness,float specular,float emissive,float ambientFloor){vec3 n=normalize(normal),l=normalize(lightDirection),v=normalize(viewDirection);float diffuse=max(dot(n,l),0.0);vec3 h=normalize(l+v);float exponent=mix(96.0,5.0,clamp(roughness,0.0,1.0));float highlight=pow(max(dot(n,h),0.0),exponent)*specular*diffuse;return albedo*mix(ambientFloor,1.0,diffuse)+vec3(highlight)+albedo*emissive;}

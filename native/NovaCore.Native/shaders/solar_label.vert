@@ -2,7 +2,7 @@
 struct EncodedPosition { vec4 high; vec4 low; };
 struct GpuCameraData { EncodedPosition position; mat4 viewProjection; };
 layout(std430,set=0,binding=0) readonly buffer Frame { GpuCameraData camera; } frameData;
-struct Presentation { vec4 centerRadius; vec4 colorDistant; float detailedAlpha; float distanceRadii; uint regime; uint enabled; };
+struct Presentation { vec4 centerRadius; vec4 colorDistant; vec4 blendMetricState; uvec4 identity; vec4 surface; uvec4 hooks; vec4 ringGeometry; vec4 ringOrientation; vec4 ringColor; };
 layout(std430,set=0,binding=6) readonly buffer Presentations { Presentation values[]; } presentations;
 layout(location=0) out vec4 color;
 int labelLength(int id){return id==1?3:id==2?7:id==3?5:id==4?5:id==5?4:id==6?4:id==7?7:id==8?6:id==9?6:7;}
@@ -13,7 +13,7 @@ int glyphMask(int c,int r){
  if(c==65){int a[5]=int[](2,5,7,5,5);return a[r];}if(c==67){int a[5]=int[](7,4,4,4,7);return a[r];}if(c==69){int a[5]=int[](7,4,6,4,7);return a[r];}if(c==72){int a[5]=int[](5,5,7,5,5);return a[r];}if(c==73){int a[5]=int[](7,2,2,2,7);return a[r];}if(c==74){int a[5]=int[](1,1,1,5,2);return a[r];}if(c==77){int a[5]=int[](5,7,7,5,5);return a[r];}if(c==78){int a[5]=int[](5,7,7,7,5);return a[r];}if(c==79){int a[5]=int[](2,5,5,5,2);return a[r];}if(c==80){int a[5]=int[](6,5,6,4,4);return a[r];}if(c==82){int a[5]=int[](6,5,6,5,5);return a[r];}if(c==83){int a[5]=int[](3,4,2,1,6);return a[r];}if(c==84){int a[5]=int[](7,2,2,2,2);return a[r];}if(c==85){int a[5]=int[](5,5,5,5,7);return a[r];}if(c==86){int a[5]=int[](5,5,5,5,2);return a[r];}if(c==89){int a[5]=int[](5,5,2,2,2);return a[r];}return 0;
 }
 void main(){
- Presentation p=presentations.values[gl_InstanceIndex];vec4 clip=frameData.camera.viewProjection*vec4(p.centerRadius.xyz,1.0);int id=int(p.enabled&255u);int character=int(gl_VertexIndex/90);int local=int(gl_VertexIndex%90);int cell=local/6;int tri=local%6;int row=cell/3;int column=cell%3;
- if((p.enabled&0x40000000u)==0u||clip.w<=0.0||character>=labelLength(id)||((glyphMask(characterAt(id,character),row)>>(2-column))&1)==0){gl_Position=vec4(2.0,2.0,2.0,1.0);return;}
- const vec2 corners[6]=vec2[](vec2(0,0),vec2(1,0),vec2(1,1),vec2(0,0),vec2(1,1),vec2(0,1));vec2 anchor=clip.xy/clip.w;bool focused=(p.enabled&0x80000000u)!=0u;float xBase=.009;float yBase=focused?.012:.009;vec2 offset=vec2(xBase+float(character)*.009+float(column)*.0022,yBase+float(row)*.0028)+corners[tri]*vec2(.0022,.0028);gl_Position=vec4((anchor+offset)*clip.w,clip.z,clip.w);color=vec4(focused?vec3(.96,.90,.55):vec3(.72,.75,.80),1.0);
+ Presentation p=presentations.values[gl_InstanceIndex];uint enabled=floatBitsToUint(p.blendMetricState.w);vec4 clip=frameData.camera.viewProjection*vec4(p.centerRadius.xyz,1.0);int id=int(enabled&255u);int character=int(gl_VertexIndex/90);int local=int(gl_VertexIndex%90);int cell=local/6;int tri=local%6;int row=cell/3;int column=cell%3;
+ if((enabled&0x40000000u)==0u||clip.w<=0.0||character>=labelLength(id)||((glyphMask(characterAt(id,character),row)>>(2-column))&1)==0){gl_Position=vec4(2.0,2.0,2.0,1.0);return;}
+ const vec2 corners[6]=vec2[](vec2(0,0),vec2(1,0),vec2(1,1),vec2(0,0),vec2(1,1),vec2(0,1));vec2 anchor=clip.xy/clip.w;bool focused=(enabled&0x80000000u)!=0u;float xBase=.008;float yBase=focused?.0105:.008;vec2 offset=vec2(xBase+float(character)*.008+float(column)*.0019,yBase+float(row)*.0024)+corners[tri]*vec2(.0019,.0024);gl_Position=vec4((anchor+offset)*clip.w,clip.z,clip.w);color=vec4(focused?vec3(.96,.90,.55):vec3(.70,.74,.80),focused?.94:.76);
 }

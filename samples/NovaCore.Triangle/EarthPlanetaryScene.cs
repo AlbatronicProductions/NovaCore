@@ -16,6 +16,7 @@ internal sealed class EarthPlanetaryScene
     internal static readonly PlanetaryRepresentationHandoffConfiguration HandoffConfiguration = new(12d, 18d, .25d);
     private const double OrbitSensitivity = .002d;
     private readonly PlanetRenderProxy _earth;
+    private readonly SolarLightingPresentation _solarLighting;
     private readonly NativePlanetaryMode _mode;
     private readonly uint _gpuOutputCapacity;
     private readonly PlanetaryRepresentationHandoff _handoff = new(HandoffConfiguration);
@@ -33,10 +34,11 @@ internal sealed class EarthPlanetaryScene
     private int _balancedRefinementCount;
     private int _culledPatchCount;
 
-    private EarthPlanetaryScene(PlanetaryPresentationSnapshot presentation, in PlanetRenderProxy earth, NativePlanetaryPatch[] patches,NativePlanetaryMode mode,uint gpuOutputCapacity)
+    private EarthPlanetaryScene(PlanetaryPresentationSnapshot presentation, in PlanetRenderProxy earth, in SolarLightingPresentation solarLighting, NativePlanetaryPatch[] patches,NativePlanetaryMode mode,uint gpuOutputCapacity)
     {
         Presentation = presentation;
         _earth = earth;
+        _solarLighting = solarLighting;
         Patches = patches;
         _mode = mode;
         _gpuOutputCapacity = gpuOutputCapacity;
@@ -77,8 +79,14 @@ internal sealed class EarthPlanetaryScene
         if (!evaluation.Succeeded) { error = $"SolAnalytical evaluation failed: {evaluation.Status}"; return false; }
 
         var earthIndex = -1;
-        for (var index = 0; index < system.Count; index++) if (system.GetNodeInTraversalOrder(index).Id == SolarSystemBodyIds.Earth) { earthIndex = index; break; }
-        if (earthIndex < 0 || !system.TryGetBody(SolarSystemBodyIds.Earth, out var catalogEarth)) { error = "SolAnalytical Earth body is missing."; return false; }
+        var sunIndex = -1;
+        for (var index = 0; index < system.Count; index++)
+        {
+            var id = system.GetNodeInTraversalOrder(index).Id;
+            if (id == SolarSystemBodyIds.Earth) earthIndex = index;
+            else if (id == SolarSystemBodyIds.Sun) sunIndex = index;
+        }
+        if (earthIndex < 0 || sunIndex < 0 || !system.TryGetBody(SolarSystemBodyIds.Earth, out var catalogEarth)) { error = "SolAnalytical Sun or Earth body is missing."; return false; }
 
         var evaluatedEarth = new EvaluatedPlanetaryBody(
             catalogEarth.Id.Value,
@@ -92,7 +100,8 @@ internal sealed class EarthPlanetaryScene
 
         var initialCamera = earth.Position.Value + new Double3(0d, 0d, earth.RadiusMetres * InitialOrbitDistanceRadii);
         var patches = new NativePlanetaryPatch[MaximumPatchCapacity];
-        scene = new EarthPlanetaryScene(presentation, earth, patches,mode,gpuOutputCapacity);
+        var solarLighting = SolarLightingPresentation.CreateDefault(new UniversePosition(roots[sunIndex].Translation, presentationRoot));
+        scene = new EarthPlanetaryScene(presentation, earth, solarLighting, patches,mode,gpuOutputCapacity);
         scene.UpdatePatches(new CameraState(new FramePosition(presentationRoot,initialCamera),DoubleQuaternion.Identity,scene.Projection,CameraMode.Free));
         if(scene.RepresentationBlend.Regime!=PlanetaryRenderRegime.DistantOnly||scene.ActivePatchCount!=0){scene=null;error="Earth distant-representation selection failed.";return false;}
         error = string.Empty;
@@ -156,7 +165,16 @@ internal sealed class EarthPlanetaryScene
     internal NativePlanetaryPresentation NativePresentation(CameraState camera)
     {
         var center=CubeSphereProjection.CameraRelativeCenter(_earth,new UniversePosition(camera.Position.Value,Presentation.RootFrame));
-        return new(){CenterX=(float)center.X,CenterY=(float)center.Y,CenterZ=(float)center.Z,Radius=(float)_earth.RadiusMetres,ColorR=_earth.Color.X,ColorG=_earth.Color.Y,ColorB=_earth.Color.Z,DistantAlpha=_blend.DistantAlpha,DetailedAlpha=_blend.DetailedAlpha,DistanceRadii=(float)_blend.DistanceRadii,Regime=(NativePlanetaryRenderRegime)_blend.Regime,Enabled=1};
+        var native = new NativePlanetaryPresentation{CenterX=(float)center.X,CenterY=(float)center.Y,CenterZ=(float)center.Z,Radius=(float)_earth.RadiusMetres,ColorR=_earth.Color.X,ColorG=_earth.Color.Y,ColorB=_earth.Color.Z,DistantAlpha=_blend.DistantAlpha,DetailedAlpha=_blend.DetailedAlpha,DistanceRadii=(float)_blend.DistanceRadii,Regime=(NativePlanetaryRenderRegime)_blend.Regime,Enabled=1};
+        SolarPlanetMaterials.TryApply(ref native, _earth.BodyId);
+        return native;
+    }
+
+    internal NativeSolarLighting SolarLighting(CameraState camera)
+    {
+        if (!_solarLighting.TryEncode(new UniversePosition(camera.Position.Value, Presentation.RootFrame), out var native))
+            throw new InvalidOperationException("Earth Solar-lighting transport failed.");
+        return native;
     }
 
     private void UpdatePatchRecords(in PlanetaryLodSelection selection, in Double3 cameraRootPosition)
