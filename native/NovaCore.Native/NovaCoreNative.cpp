@@ -3,6 +3,7 @@
 #include <array>
 #include <chrono>
 #include <cmath>
+#include <compare>
 #include <cstddef>
 #include <cstdio>
 #include <cstring>
@@ -16,6 +17,7 @@
 
 namespace {
 constexpr uint32_t Width = 960, Height = 540;
+constexpr uint32_t GpuPatchCapacity = 6144, GpuNodeCount = 8190;
 static_assert(sizeof(NcEncodedPosition) == 32);
 static_assert(sizeof(NcCameraData) == 96);
 static_assert(alignof(NcCameraData) == 16);
@@ -28,6 +30,13 @@ static_assert(offsetof(NcRenderObject, position) == 0 &&
               offsetof(NcRenderObject, mesh) == 64);
 static_assert(sizeof(NcDrawBatch) == 16);
 static_assert(sizeof(NcPlanetaryPatch) == 64);
+static_assert(sizeof(NcPlanetaryGpuConstants) == 48);
+static_assert(alignof(NcPlanetaryGpuConstants) == 16);
+static_assert(offsetof(NcPlanetaryGpuConstants, refinementThreshold) == 16 &&
+              offsetof(NcPlanetaryGpuConstants, maximumLevel) == 32);
+static_assert(sizeof(NcFrameSubmission) == 272);
+static_assert(offsetof(NcFrameSubmission, planetaryGpu) == 208);
+static_assert(offsetof(NcFrameSubmission, planetaryMode) == 256);
 static_assert(sizeof(NcOrbitLineVertex) == 12);
 static_assert(sizeof(NcInputState) == 64);
 static_assert(offsetof(NcInputState, deltaSeconds) == 0);
@@ -58,6 +67,16 @@ struct Mesh {
   VkDeviceMemory vm{}, im{};
   uint32_t indices{};
 };
+struct GpuPlanetaryControl {
+  VkDrawIndexedIndirectCommand draw{};
+  uint32_t roots{}, candidates{}, refined{}, culled{}, active{}, balanced{},
+      minimumLevel{}, maximumLevel{}, overflow{}, padding[2]{};
+};
+static_assert(sizeof(GpuPlanetaryControl) == 64);
+struct PatchIdentity {
+  uint32_t face{}, level{}, x{}, y{}, stitchMask{};
+  auto operator<=>(const PatchIdentity &) const = default;
+};
 struct Queues {
   std::optional<uint32_t> graphics, present;
   bool Complete() const { return graphics && present; }
@@ -82,6 +101,7 @@ struct App {
   VkPipelineLayout pipelineLayout{};
   VkPipeline pipeline{};
   VkPipeline planetaryPipeline{};
+  VkPipeline planetaryComputePipeline{};
   VkPipeline orbitPipeline{};
   VkPipeline previousOrbitPipeline{};
   VkPipeline bodyForwardPipeline{};
@@ -105,6 +125,13 @@ struct App {
   VkDeviceMemory patchMemory{};
   void *patchMapped{};
   VkDeviceSize patchSize{};
+  VkBuffer gpuInputBuffer{}, gpuWorkBuffer{}, gpuNodeBuffer{}, gpuControlBuffer{};
+  VkDeviceMemory gpuInputMemory{}, gpuWorkMemory{}, gpuNodeMemory{}, gpuControlMemory{};
+  void *gpuInputMapped{}, *gpuWorkMapped{}, *gpuNodeMapped{}, *gpuControlMapped{};
+  std::vector<NcPlanetaryPatch> validationCpuOracle;
+  bool gpuFrameSubmitted{}, hasGpuTelemetry{}, hasParityResult{};
+  GpuPlanetaryControl lastGpuTelemetry{};
+  uint64_t lastCpuHash{}, lastGpuHash{};
   VkBuffer orbitBuffer{};
   VkDeviceMemory orbitMemory{};
   void *orbitMapped{};
@@ -207,7 +234,7 @@ Queues FindQueues(VkPhysicalDevice d, VkSurfaceKHR s) {
   std::vector<VkQueueFamilyProperties> p(n);
   vkGetPhysicalDeviceQueueFamilyProperties(d, &n, p.data());
   for (uint32_t i = 0; i < n; i++) {
-    if (p[i].queueFlags & VK_QUEUE_GRAPHICS_BIT)
+    if ((p[i].queueFlags & (VK_QUEUE_GRAPHICS_BIT|VK_QUEUE_COMPUTE_BIT)) == (VK_QUEUE_GRAPHICS_BIT|VK_QUEUE_COMPUTE_BIT))
       q.graphics = i;
     VkBool32 present{};
     vkGetPhysicalDeviceSurfaceSupportKHR(d, i, s, &present);
@@ -310,6 +337,9 @@ void Validate(App &a) {
       throw std::runtime_error("invalid render batch");
   }
   if(nc_validate_planetary_patches(s->planetaryPatches,s->planetaryPatchCount)!=NC_SUCCESS)throw std::runtime_error("invalid planetary patch submission");
+  if(s->planetaryGpuAlignmentPadding||s->planetaryPadding[0]||s->planetaryPadding[1]||s->planetaryPadding[2])throw std::runtime_error("invalid planetary frame padding");
+  if(s->planetaryMode>NC_PLANETARY_CPU_GPU_VALIDATION)throw std::runtime_error("invalid planetary mode");
+  if(s->planetaryMode!=NC_PLANETARY_CPU_REFERENCE){const auto &g=s->planetaryGpu;if(!std::isfinite(g.cameraBodyX)||!std::isfinite(g.cameraBodyY)||!std::isfinite(g.cameraBodyZ)||!std::isfinite(g.radius)||g.radius<=0||!std::isfinite(g.refinementThreshold)||g.refinementThreshold<=0||!std::isfinite(g.nearFieldAltitudeRadii)||g.nearFieldAltitudeRadii<=0||g.maximumLevel>5||!g.outputCapacity||g.outputCapacity>GpuPatchCapacity||g.padding0||g.padding1||g.padding2||g.padding3)throw std::runtime_error("invalid planetary GPU constants");if(s->planetaryMode==NC_PLANETARY_GPU_PRODUCTION&&s->planetaryPatchCount)throw std::runtime_error("GPU planetary mode received CPU leaves");}
 }
 void Window(App &a) {
   WNDCLASSW wc{.lpfnWndProc = Proc,
@@ -443,6 +473,8 @@ void DestroySwap(App &a) {
     vkDestroyPipeline(a.device, a.pipeline, nullptr);
   if (a.planetaryPipeline)
     vkDestroyPipeline(a.device,a.planetaryPipeline,nullptr);
+  if (a.planetaryComputePipeline)
+    vkDestroyPipeline(a.device,a.planetaryComputePipeline,nullptr);
   if (a.orbitPipeline)
     vkDestroyPipeline(a.device, a.orbitPipeline, nullptr);
   if (a.previousOrbitPipeline)
@@ -453,6 +485,7 @@ void DestroySwap(App &a) {
     vkDestroyPipeline(a.device, a.targetDirectionPipeline, nullptr);
   a.pipeline = {};
   a.planetaryPipeline = {};
+  a.planetaryComputePipeline = {};
   a.orbitPipeline = {};
   a.previousOrbitPipeline = {};
   a.bodyForwardPipeline = {};
@@ -568,11 +601,11 @@ void Swap(App &a) {
   rp.pSubpasses = &sub;
   a.Check(vkCreateRenderPass(a.device, &rp, nullptr, &a.renderPass),
           "render pass failed");
-  VkDescriptorSetLayoutBinding binds[2]{};
-  for(uint32_t binding=0;binding<2;binding++){binds[binding].binding=binding;binds[binding].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;binds[binding].descriptorCount=1;binds[binding].stageFlags=VK_SHADER_STAGE_VERTEX_BIT;}
+  VkDescriptorSetLayoutBinding binds[6]{};
+  for(uint32_t binding=0;binding<6;binding++){binds[binding].binding=binding;binds[binding].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;binds[binding].descriptorCount=1;binds[binding].stageFlags=binding==0?VK_SHADER_STAGE_VERTEX_BIT:(binding==1?VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_COMPUTE_BIT:VK_SHADER_STAGE_COMPUTE_BIT);}
   VkDescriptorSetLayoutCreateInfo dl{
       VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO};
-  dl.bindingCount = 2;
+  dl.bindingCount = 6;
   dl.pBindings = binds;
   a.Check(
       vkCreateDescriptorSetLayout(a.device, &dl, nullptr, &a.descriptorLayout),
@@ -655,6 +688,7 @@ void Swap(App &a) {
   VkPipelineRasterizationStateCreateInfo planetaryRaster=rs;planetaryRaster.cullMode=VK_CULL_MODE_BACK_BIT;planetaryRaster.frontFace=VK_FRONT_FACE_CLOCKWISE;
   VkGraphicsPipelineCreateInfo planetaryCreate=gp;planetaryCreate.pStages=planetaryStages;planetaryCreate.pVertexInputState=&planetaryInput;planetaryCreate.pRasterizationState=&planetaryRaster;
   VkPipeline planetaryPipeline{};VkResult planetaryResult=vkCreateGraphicsPipelines(a.device,{},1,&planetaryCreate,nullptr,&planetaryPipeline);vkDestroyShaderModule(a.device,planetaryVs,nullptr);vkDestroyShaderModule(a.device,planetaryFs,nullptr);if(planetaryResult!=VK_SUCCESS&&planetaryPipeline)vkDestroyPipeline(a.device,planetaryPipeline,nullptr);a.Check(planetaryResult,"planetary pipeline failed");a.planetaryPipeline=planetaryPipeline;
+  VkShaderModule planetaryCompute=Shader(a,"shaders/planetary_select.comp.spv");VkPipelineShaderStageCreateInfo planetaryComputeStage{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_COMPUTE_BIT,planetaryCompute,"main"};VkComputePipelineCreateInfo planetaryComputeCreate{VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO};planetaryComputeCreate.stage=planetaryComputeStage;planetaryComputeCreate.layout=a.pipelineLayout;VkResult planetaryComputeResult=vkCreateComputePipelines(a.device,{},1,&planetaryComputeCreate,nullptr,&a.planetaryComputePipeline);vkDestroyShaderModule(a.device,planetaryCompute,nullptr);a.Check(planetaryComputeResult,"planetary compute pipeline failed");
   VkShaderModule orbitVs{}, orbitFs{};
   try { orbitVs = Shader(a, "shaders/orbit.vert.spv"); orbitFs = Shader(a, "shaders/orbit.frag.spv"); }
   catch (...) { if (orbitVs) vkDestroyShaderModule(a.device, orbitVs, nullptr); throw; }
@@ -732,6 +766,12 @@ void CreatePatchBuffer(App &a,VkDeviceSize size) {
   VkBufferCreateInfo pci{VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO};pci.size=a.patchSize;pci.usage=VK_BUFFER_USAGE_STORAGE_BUFFER_BIT;pci.sharingMode=VK_SHARING_MODE_EXCLUSIVE;
   a.Check(vkCreateBuffer(a.device,&pci,nullptr,&a.patchBuffer),"patch buffer failed");VkMemoryRequirements pr;vkGetBufferMemoryRequirements(a.device,a.patchBuffer,&pr);VkMemoryAllocateInfo pai{VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO};pai.allocationSize=pr.size;pai.memoryTypeIndex=Memory(a,pr.memoryTypeBits,VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT|VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);a.Check(vkAllocateMemory(a.device,&pai,nullptr,&a.patchMemory),"patch memory failed");a.Check(vkBindBufferMemory(a.device,a.patchBuffer,a.patchMemory,0),"patch bind failed");a.Check(vkMapMemory(a.device,a.patchMemory,0,a.patchSize,0,&a.patchMapped),"patch map failed");
 }
+void CreateHostBuffer(App &a,VkDeviceSize size,VkBufferUsageFlags usage,VkBuffer &buffer,VkDeviceMemory &memory,void *&mapped,const char *failure) {
+  VkBufferCreateInfo ci{VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO};ci.size=size;ci.usage=usage;ci.sharingMode=VK_SHARING_MODE_EXCLUSIVE;a.Check(vkCreateBuffer(a.device,&ci,nullptr,&buffer),failure);VkMemoryRequirements requirements;vkGetBufferMemoryRequirements(a.device,buffer,&requirements);VkMemoryAllocateInfo allocation{VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO};allocation.allocationSize=requirements.size;allocation.memoryTypeIndex=Memory(a,requirements.memoryTypeBits,VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT|VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);a.Check(vkAllocateMemory(a.device,&allocation,nullptr,&memory),failure);a.Check(vkBindBufferMemory(a.device,buffer,memory,0),failure);a.Check(vkMapMemory(a.device,memory,0,size,0,&mapped),failure);std::memset(mapped,0,(size_t)size);
+}
+void DestroyHostBuffer(App &a,VkBuffer &buffer,VkDeviceMemory &memory,void *&mapped) {
+  if(mapped)vkUnmapMemory(a.device,memory);if(buffer)vkDestroyBuffer(a.device,buffer,nullptr);if(memory)vkFreeMemory(a.device,memory,nullptr);mapped=nullptr;buffer={};memory={};
+}
 void DestroySubmission(App &a) {
   if (a.mapped)
     vkUnmapMemory(a.device, a.submissionMemory);
@@ -746,6 +786,11 @@ void DestroySubmission(App &a) {
   a.submissionBuffer = {};
   a.submissionMemory = {};
   DestroyPatchBuffer(a);
+  DestroyHostBuffer(a,a.gpuInputBuffer,a.gpuInputMemory,a.gpuInputMapped);
+  DestroyHostBuffer(a,a.gpuWorkBuffer,a.gpuWorkMemory,a.gpuWorkMapped);
+  DestroyHostBuffer(a,a.gpuNodeBuffer,a.gpuNodeMemory,a.gpuNodeMapped);
+  DestroyHostBuffer(a,a.gpuControlBuffer,a.gpuControlMemory,a.gpuControlMapped);
+  a.validationCpuOracle.clear();a.gpuFrameSubmitted=false;a.hasGpuTelemetry=false;a.hasParityResult=false;
   if (a.orbitMapped) vkUnmapMemory(a.device, a.orbitMemory);
   if (a.orbitBuffer) vkDestroyBuffer(a.device, a.orbitBuffer, nullptr);
   if (a.orbitMemory) vkFreeMemory(a.device, a.orbitMemory, nullptr);
@@ -795,8 +840,12 @@ void CreateSubmission(App &a) {
   a.Check(vkMapMemory(a.device, a.submissionMemory, 0, a.submissionSize, 0,
                       &a.mapped),
           "submission map failed");
-  CreatePatchBuffer(a,sizeof(NcPlanetaryPatch)*std::max<uint32_t>(1,a.submission->planetaryPatchCount));
-  VkDescriptorPoolSize ps{VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 2};
+  CreatePatchBuffer(a,sizeof(NcPlanetaryPatch)*GpuPatchCapacity);
+  CreateHostBuffer(a,sizeof(NcPlanetaryGpuConstants),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,a.gpuInputBuffer,a.gpuInputMemory,a.gpuInputMapped,"planetary GPU input buffer failed");
+  CreateHostBuffer(a,sizeof(uint32_t)*4*GpuPatchCapacity*2,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,a.gpuWorkBuffer,a.gpuWorkMemory,a.gpuWorkMapped,"planetary GPU work buffer failed");
+  CreateHostBuffer(a,sizeof(uint32_t)*GpuNodeCount,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,a.gpuNodeBuffer,a.gpuNodeMemory,a.gpuNodeMapped,"planetary GPU node buffer failed");
+  CreateHostBuffer(a,sizeof(GpuPlanetaryControl),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT|VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT,a.gpuControlBuffer,a.gpuControlMemory,a.gpuControlMapped,"planetary GPU control buffer failed");
+  VkDescriptorPoolSize ps{VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 6};
   VkDescriptorPoolCreateInfo pi{VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO};
   pi.maxSets = 1;
   pi.poolSizeCount = 1;
@@ -810,9 +859,9 @@ void CreateSubmission(App &a) {
   si.pSetLayouts = &a.descriptorLayout;
   a.Check(vkAllocateDescriptorSets(a.device, &si, &a.descriptor),
           "descriptor set failed");
-  VkDescriptorBufferInfo infos[2]{{a.submissionBuffer,0,a.submissionSize},{a.patchBuffer,0,a.patchSize}};
-  VkWriteDescriptorSet writes[2]{};for(uint32_t binding=0;binding<2;binding++){writes[binding].sType=VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;writes[binding].dstSet=a.descriptor;writes[binding].dstBinding=binding;writes[binding].descriptorCount=1;writes[binding].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;writes[binding].pBufferInfo=&infos[binding];}
-  vkUpdateDescriptorSets(a.device,2,writes,0,nullptr);
+  VkDescriptorBufferInfo infos[6]{{a.submissionBuffer,0,a.submissionSize},{a.patchBuffer,0,a.patchSize},{a.gpuInputBuffer,0,sizeof(NcPlanetaryGpuConstants)},{a.gpuWorkBuffer,0,sizeof(uint32_t)*4*GpuPatchCapacity*2},{a.gpuNodeBuffer,0,sizeof(uint32_t)*GpuNodeCount},{a.gpuControlBuffer,0,sizeof(GpuPlanetaryControl)}};
+  VkWriteDescriptorSet writes[6]{};for(uint32_t binding=0;binding<6;binding++){writes[binding].sType=VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;writes[binding].dstSet=a.descriptor;writes[binding].dstBinding=binding;writes[binding].descriptorCount=1;writes[binding].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;writes[binding].pBufferInfo=&infos[binding];}
+  vkUpdateDescriptorSets(a.device,6,writes,0,nullptr);
 }
 void EnsurePatchCapacity(App &a,uint32_t count) {
   const auto required=sizeof(NcPlanetaryPatch)*std::max<uint32_t>(1,count);
@@ -829,7 +878,8 @@ void Upload(App &a) {
   std::memcpy((char *)a.mapped + sizeof(NcCameraData),
               a.submission->objects,
               sizeof(NcRenderObject) * a.submission->objectCount);
-  if(a.submission->planetaryPatchCount)std::memcpy(a.patchMapped,a.submission->planetaryPatches,sizeof(NcPlanetaryPatch)*a.submission->planetaryPatchCount);
+  std::memcpy(a.gpuInputMapped,&a.submission->planetaryGpu,sizeof(NcPlanetaryGpuConstants));
+  if(a.submission->planetaryMode==NC_PLANETARY_CPU_REFERENCE&&a.submission->planetaryPatchCount)std::memcpy(a.patchMapped,a.submission->planetaryPatches,sizeof(NcPlanetaryPatch)*a.submission->planetaryPatchCount);
   if (a.submission->orbitVertexCount) {
     auto needed = sizeof(NcOrbitLineVertex) * a.submission->orbitVertexCount;
     if (needed != a.orbitSize) {
@@ -906,6 +956,8 @@ void Record(App &a, uint32_t image) {
   vkResetCommandBuffer(c, 0);
   VkCommandBufferBeginInfo bi{VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO};
   a.Check(vkBeginCommandBuffer(c, &bi), "command begin failed");
+  const bool gpuPlanetary=a.submission->planetaryMode!=NC_PLANETARY_CPU_REFERENCE;
+  if(gpuPlanetary){VkMemoryBarrier hostBarrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};hostBarrier.srcAccessMask=VK_ACCESS_HOST_WRITE_BIT;hostBarrier.dstAccessMask=VK_ACCESS_SHADER_READ_BIT;vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_HOST_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,0,1,&hostBarrier,0,nullptr,0,nullptr);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_COMPUTE,a.planetaryComputePipeline);vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_COMPUTE,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);vkCmdDispatch(c,1,1,1);VkMemoryBarrier computeBarrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};computeBarrier.srcAccessMask=VK_ACCESS_SHADER_WRITE_BIT;computeBarrier.dstAccessMask=VK_ACCESS_INDIRECT_COMMAND_READ_BIT|VK_ACCESS_SHADER_READ_BIT;VkPipelineStageFlags consumers=VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT|VK_PIPELINE_STAGE_VERTEX_SHADER_BIT;if(a.submission->planetaryMode==NC_PLANETARY_CPU_GPU_VALIDATION){computeBarrier.dstAccessMask|=VK_ACCESS_HOST_READ_BIT;consumers|=VK_PIPELINE_STAGE_HOST_BIT;}vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,consumers,0,1,&computeBarrier,0,nullptr,0,nullptr);}
   VkClearValue clear{{{.02f, .02f, .04f, 1}}};
   VkRenderPassBeginInfo rp{VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO};
   rp.renderPass = a.renderPass;
@@ -925,7 +977,7 @@ void Record(App &a, uint32_t image) {
     vkCmdBindIndexBuffer(c, m->ib, 0, VK_INDEX_TYPE_UINT32);
     vkCmdDrawIndexed(c, m->indices, b.objectCount, 0, 0, b.firstObject);
   }
-  if(a.submission->planetaryPatchCount){VkDeviceSize offset=0;vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.planetaryPipeline);vkCmdBindVertexBuffers(c,0,1,&a.planetaryPatch.vb,&offset);vkCmdBindIndexBuffer(c,a.planetaryPatch.ib,0,VK_INDEX_TYPE_UINT32);vkCmdDrawIndexed(c,a.planetaryPatch.indices,a.submission->planetaryPatchCount,0,0,0);}
+  if(a.submission->planetaryPatchCount||gpuPlanetary){VkDeviceSize offset=0;vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.planetaryPipeline);vkCmdBindVertexBuffers(c,0,1,&a.planetaryPatch.vb,&offset);vkCmdBindIndexBuffer(c,a.planetaryPatch.ib,0,VK_INDEX_TYPE_UINT32);if(gpuPlanetary)vkCmdDrawIndexedIndirect(c,a.gpuControlBuffer,0,1,sizeof(VkDrawIndexedIndirectCommand));else vkCmdDrawIndexed(c,a.planetaryPatch.indices,a.submission->planetaryPatchCount,0,0,0);}
   if (a.submission->orbitVertexCount >= 2 && a.orbitBuffer) { VkDeviceSize offset = 0; vkCmdBindPipeline(c, VK_PIPELINE_BIND_POINT_GRAPHICS, a.orbitPipeline); vkCmdBindVertexBuffers(c, 0, 1, &a.orbitBuffer, &offset); vkCmdDraw(c, a.submission->orbitVertexCount, 1, 0, 0); }
   if (a.submission->previousOrbitVertexCount >= 2 && a.previousOrbitBuffer) { VkDeviceSize offset = 0; vkCmdBindPipeline(c, VK_PIPELINE_BIND_POINT_GRAPHICS, a.previousOrbitPipeline); vkCmdBindVertexBuffers(c, 0, 1, &a.previousOrbitBuffer, &offset); vkCmdDraw(c, a.submission->previousOrbitVertexCount, 1, 0, 0); }
   if (a.submission->bodyForwardVertexCount == 2 && a.bodyForwardBuffer) { VkDeviceSize offset = 0; vkCmdBindPipeline(c, VK_PIPELINE_BIND_POINT_GRAPHICS, a.bodyForwardPipeline); vkCmdBindVertexBuffers(c, 0, 1, &a.bodyForwardBuffer, &offset); vkCmdDraw(c, 2, 1, 0, 0); }
@@ -974,8 +1026,20 @@ void Recreate(App &a) {
   a.resized = false;
   a.Log(NC_LOG_ALWAYS, "Swapchain recreated after resize");
 }
+std::vector<PatchIdentity> CanonicalPatches(const NcPlanetaryPatch *patches,uint32_t count) {
+  std::vector<PatchIdentity> result;result.reserve(count);for(uint32_t index=0;index<count;index++){const auto &patch=patches[index];result.push_back({patch.face,patch.level,patch.x,patch.y,patch.stitchMask});}std::sort(result.begin(),result.end());return result;
+}
+uint64_t PatchHash(const std::vector<PatchIdentity> &patches) {
+  uint64_t hash=14695981039346656037ull;auto mix=[&](uint32_t value){hash=(hash^value)*1099511628211ull;};for(const auto &patch:patches){mix(patch.face);mix(patch.level);mix(patch.x);mix(patch.y);mix(patch.stitchMask);}return hash;
+}
+void InspectGpuPlanetary(App &a) {
+  if(!a.gpuFrameSubmitted||!a.gpuControlMapped)return;GpuPlanetaryControl telemetry;std::memcpy(&telemetry,a.gpuControlMapped,sizeof(telemetry));
+  if(!a.hasGpuTelemetry||std::memcmp(&telemetry,&a.lastGpuTelemetry,sizeof(telemetry))!=0){char message[256];std::snprintf(message,sizeof message,"GPU planetary: roots=%u; candidates=%u; refined=%u; culled=%u; active=%u; balanced=%u; min=%u; max=%u; overflow=%u; indirectInstances=%u",telemetry.roots,telemetry.candidates,telemetry.refined,telemetry.culled,telemetry.active,telemetry.balanced,telemetry.minimumLevel,telemetry.maximumLevel,telemetry.overflow,telemetry.draw.instanceCount);a.Log(NC_LOG_ALWAYS,message);a.lastGpuTelemetry=telemetry;a.hasGpuTelemetry=true;}
+  if(a.submission->planetaryMode!=NC_PLANETARY_CPU_GPU_VALIDATION||a.validationCpuOracle.empty())return;
+  const auto gpuCount=std::min<uint32_t>(telemetry.active,GpuPatchCapacity);auto cpu=CanonicalPatches(a.validationCpuOracle.data(),(uint32_t)a.validationCpuOracle.size());auto gpu=CanonicalPatches(static_cast<const NcPlanetaryPatch *>(a.patchMapped),gpuCount);const auto cpuHash=PatchHash(cpu),gpuHash=PatchHash(gpu);uint32_t cpuMinimum=0,cpuMaximum=0;if(!cpu.empty()){cpuMinimum=cpuMaximum=cpu.front().level;for(const auto &patch:cpu){cpuMinimum=std::min(cpuMinimum,patch.level);cpuMaximum=std::max(cpuMaximum,patch.level);}}const bool match=telemetry.roots==6&&telemetry.overflow==0&&telemetry.draw.instanceCount==telemetry.active&&telemetry.minimumLevel==cpuMinimum&&telemetry.maximumLevel==cpuMaximum&&cpu==gpu;
+  if(!a.hasParityResult||!match||cpuHash!=a.lastCpuHash||gpuHash!=a.lastGpuHash){char message[256];std::snprintf(message,sizeof message,"CPU/GPU planetary parity: match=%s; cpu=%zu; gpu=%zu; cpuHash=0x%016llX; gpuHash=0x%016llX",match?"true":"false",cpu.size(),gpu.size(),(unsigned long long)cpuHash,(unsigned long long)gpuHash);a.Log(match?NC_LOG_ALWAYS:NC_LOG_VALIDATION,message);a.lastCpuHash=cpuHash;a.lastGpuHash=gpuHash;a.hasParityResult=true;}
+}
 void Draw(App &a) {
-  vkWaitForFences(a.device, 1, &a.fence, VK_TRUE, UINT64_MAX);
   uint32_t image{};
   VkResult ar = vkAcquireNextImageKHR(a.device, a.swapchain, UINT64_MAX,
                                       a.imageAvailable, {}, &image);
@@ -989,6 +1053,7 @@ void Draw(App &a) {
   bool recreate = ar == VK_SUBOPTIMAL_KHR || a.resized;
   vkResetFences(a.device, 1, &a.fence);
   Record(a, image);
+  if(a.submission->planetaryMode==NC_PLANETARY_CPU_GPU_VALIDATION)a.validationCpuOracle.assign(a.submission->planetaryPatches,a.submission->planetaryPatches+a.submission->planetaryPatchCount);else a.validationCpuOracle.clear();a.gpuFrameSubmitted=a.submission->planetaryMode!=NC_PLANETARY_CPU_REFERENCE;
   VkPipelineStageFlags stage = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
   VkSubmitInfo si{VK_STRUCTURE_TYPE_SUBMIT_INFO};
   si.waitSemaphoreCount = 1;
@@ -1044,6 +1109,8 @@ void Destroy(App &a) {
   gApp = nullptr;
 }
 void Update(App &a, float dt) {
+  a.Check(vkWaitForFences(a.device, 1, &a.fence, VK_TRUE, UINT64_MAX), "frame fence wait failed");
+  InspectGpuPlanetary(a);
   bool active = (GetAsyncKeyState(VK_LBUTTON) & 0x8000) != 0 || (GetAsyncKeyState(VK_RBUTTON) & 0x8000) != 0;
   if (active && !a.lookActive) {
     a.lookActive = true;
@@ -1083,7 +1150,7 @@ void Update(App &a, float dt) {
                   rising(VK_OEM_PERIOD, a.rateIncreaseWasDown), sasModeKey};
   NcHostEvent e{NC_UPDATE_FRAME, NC_LOG_NONE, nullptr, in, a.submission};
   a.cb(&e, a.cbData);
-  EnsurePatchCapacity(a,a.submission->planetaryPatchCount);
+  if(a.submission->planetaryMode==NC_PLANETARY_CPU_REFERENCE)EnsurePatchCapacity(a,a.submission->planetaryPatchCount);
   Validate(a);
   Upload(a);
 }
@@ -1128,7 +1195,9 @@ extern "C" NC_API NcResult __cdecl nc_get_abi_layout(NcAbiLayout *o) {
         (uint32_t)offsetof(NcInputState, pauseToggle),
         (uint32_t)offsetof(NcInputState, rateDecrease),
         (uint32_t)offsetof(NcInputState, rateIncrease),
-        (uint32_t)offsetof(NcInputState, sasModeKey)};
+        (uint32_t)offsetof(NcInputState, sasModeKey),
+        (uint32_t)offsetof(NcFrameSubmission, planetaryGpu),
+        (uint32_t)offsetof(NcFrameSubmission, planetaryMode)};
   return NC_SUCCESS;
 }
 extern "C" NC_API NcResult __cdecl

@@ -32,7 +32,11 @@ add_custom_command(OUTPUT "${SPIRV_DIR}/planetary.vert.spv" "${SPIRV_DIR}/planet
   COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/planetary.vert" -o "${SPIRV_DIR}/planetary.vert.spv"
   COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/planetary.frag" -o "${SPIRV_DIR}/planetary.frag.spv"
   DEPENDS "${SHADER_DIR}/planetary.vert" "${SHADER_DIR}/planetary.frag")
-add_custom_target(NovaCoreShaders DEPENDS "${SPIRV_DIR}/triangle.vert.spv" "${SPIRV_DIR}/triangle.frag.spv" "${SPIRV_DIR}/orbit.vert.spv" "${SPIRV_DIR}/orbit.frag.spv" "${SPIRV_DIR}/orbit_previous.frag.spv" "${SPIRV_DIR}/body_forward.frag.spv" "${SPIRV_DIR}/sas_target.frag.spv" "${SPIRV_DIR}/planetary.vert.spv" "${SPIRV_DIR}/planetary.frag.spv")
+add_custom_command(OUTPUT "${SPIRV_DIR}/planetary_select.comp.spv"
+  COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
+  COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/planetary_select.comp" -o "${SPIRV_DIR}/planetary_select.comp.spv"
+  DEPENDS "${SHADER_DIR}/planetary_select.comp")
+add_custom_target(NovaCoreShaders DEPENDS "${SPIRV_DIR}/triangle.vert.spv" "${SPIRV_DIR}/triangle.frag.spv" "${SPIRV_DIR}/orbit.vert.spv" "${SPIRV_DIR}/orbit.frag.spv" "${SPIRV_DIR}/orbit_previous.frag.spv" "${SPIRV_DIR}/body_forward.frag.spv" "${SPIRV_DIR}/sas_target.frag.spv" "${SPIRV_DIR}/planetary.vert.spv" "${SPIRV_DIR}/planetary.frag.spv" "${SPIRV_DIR}/planetary_select.comp.spv")
 
 add_library(NovaCore.Native SHARED NovaCoreNative.cpp NovaCoreNative.h)
 add_dependencies(NovaCore.Native NovaCoreShaders)
