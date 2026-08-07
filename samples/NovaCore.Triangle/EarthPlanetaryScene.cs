@@ -11,7 +11,7 @@ internal sealed class EarthPlanetaryScene
     internal static readonly Float3 EarthColor = new(.08f, .32f, .72f);
     internal const double InitialOrbitDistanceRadii = 20d;
     internal const int MaximumLod = 5;
-    internal static readonly PlanetaryLodConfiguration LodConfiguration = new(19d, MaximumLod);
+    internal static readonly PlanetaryLodConfiguration LodConfiguration = new(19d, MaximumLod, .11d);
     private const double OrbitSensitivity = .002d;
     private readonly PlanetRenderProxy _earth;
     private PlanetaryPatch[] _activeLeaves = [];
@@ -23,6 +23,9 @@ internal sealed class EarthPlanetaryScene
     private int _maximumActiveLod;
     private PlanetaryRepresentation _representation;
     private double _altitudeRadii;
+    private int _refinementCount;
+    private int _balancedRefinementCount;
+    private int _culledPatchCount;
 
     private EarthPlanetaryScene(PlanetaryPresentationSnapshot presentation, in PlanetRenderProxy earth, NativePlanetaryPatch[] patches)
     {
@@ -41,6 +44,9 @@ internal sealed class EarthPlanetaryScene
     internal int MaximumActiveLod => _maximumActiveLod;
     internal PlanetaryRepresentation Representation => _representation;
     internal double AltitudeRadii => _altitudeRadii;
+    internal int RefinementCount => _refinementCount;
+    internal int BalancedRefinementCount => _balancedRefinementCount;
+    internal int CulledPatchCount => _culledPatchCount;
     internal ReadOnlySpan<PlanetaryPatch> ActiveLeaves => _activeLeaves.AsSpan();
     internal CameraProjection Projection => new(Math.PI / 3d, 16d / 9d, Math.Max(1d, _earth.RadiusMetres / 10_000d), _earth.RadiusMetres * 100d);
 
@@ -133,6 +139,9 @@ internal sealed class EarthPlanetaryScene
         _activePatchCount = selection.Patches.Length;
         _minimumActiveLod = _activePatchCount == 0 ? 0 : selection.Patches.Min(patch => patch.Level);
         _maximumActiveLod = _activePatchCount == 0 ? 0 : selection.Patches.Max(patch => patch.Level);
+        _refinementCount = selection.RefinementCount;
+        _balancedRefinementCount = selection.BalancedRefinementCount;
+        _culledPatchCount = selection.CulledPatchCount;
         if (_activePatchCount > Patches.Length) throw new InvalidOperationException("Earth patch capacity exceeded.");
         var center = CubeSphereProjection.CameraRelativeCenter(_earth, new UniversePosition(cameraRootPosition, Presentation.RootFrame));
         for (var index = 0; index < _activePatchCount; index++)
@@ -152,6 +161,10 @@ internal sealed class EarthPlanetaryScene
             patch.ColorG = color.Y;
             patch.ColorB = color.Z;
             patch.ColorA = 1f;
+            patch.StitchMask = (uint)selection.StitchMasks[index];
+            patch.Reserved0 = 0;
+            patch.Reserved1 = 0;
+            patch.Reserved2 = 0;
         }
     }
 
