@@ -5,6 +5,8 @@ public readonly record struct MeshHandle(uint Value)
 {
     public static MeshHandle Invalid { get; } = new(0);
     public static MeshHandle Triangle { get; } = new(1);
+    /// <summary>Reusable unit sphere presentation mesh. Body size is supplied only by a render transform.</summary>
+    public static MeshHandle Sphere { get; } = new(2);
     public bool IsValid => Value != 0;
 }
 

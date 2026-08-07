@@ -27,6 +27,7 @@ static_assert(offsetof(NcRenderObject, position) == 0 &&
               offsetof(NcRenderObject, transform) == 32 &&
               offsetof(NcRenderObject, mesh) == 64);
 static_assert(sizeof(NcDrawBatch) == 16);
+static_assert(sizeof(NcPlanetaryPatch) == 48);
 static_assert(sizeof(NcOrbitLineVertex) == 12);
 static_assert(sizeof(NcInputState) == 64);
 static_assert(offsetof(NcInputState, deltaSeconds) == 0);
@@ -50,6 +51,8 @@ struct Vertex {
   float color[3];
 };
 static_assert(sizeof(Vertex) == 24);
+struct PatchVertex { float uv[2]; };
+static_assert(sizeof(PatchVertex) == 8);
 struct Mesh {
   VkBuffer vb{}, ib{};
   VkDeviceMemory vm{}, im{};
@@ -78,6 +81,7 @@ struct App {
   VkRenderPass renderPass{};
   VkPipelineLayout pipelineLayout{};
   VkPipeline pipeline{};
+  VkPipeline planetaryPipeline{};
   VkPipeline orbitPipeline{};
   VkPipeline previousOrbitPipeline{};
   VkPipeline bodyForwardPipeline{};
@@ -97,6 +101,10 @@ struct App {
   VkDescriptorSetLayout descriptorLayout{};
   VkDescriptorPool descriptorPool{};
   VkDescriptorSet descriptor{};
+  VkBuffer patchBuffer{};
+  VkDeviceMemory patchMemory{};
+  void *patchMapped{};
+  VkDeviceSize patchSize{};
   VkBuffer orbitBuffer{};
   VkDeviceMemory orbitMemory{};
   void *orbitMapped{};
@@ -114,6 +122,7 @@ struct App {
   void *targetDirectionMapped{};
   VkDeviceSize targetDirectionSize{};
   Mesh triangle{};
+  Mesh planetaryPatch{};
   LONG rawMouseX{}, rawMouseY{};
   LONG wheelDeltaRaw{};
   bool lookActive{};
@@ -247,6 +256,15 @@ void CreateMesh(App &a) {
   Buffer(a, sizeof(i), VK_BUFFER_USAGE_INDEX_BUFFER_BIT, a.triangle.ib,
          a.triangle.im, i.data());
   a.triangle.indices = 3;
+  constexpr uint32_t cells=16, side=cells+1;
+  std::array<PatchVertex,side*side> pv{};
+  std::array<uint32_t,cells*cells*6> pi{};
+  uint32_t vertex=0,index=0;
+  for(uint32_t y=0;y<side;y++)for(uint32_t x=0;x<side;x++)pv[vertex++]={{float(x)/cells,float(y)/cells}};
+  for(uint32_t y=0;y<cells;y++)for(uint32_t x=0;x<cells;x++){uint32_t q=y*side+x;pi[index++]=q;pi[index++]=q+side;pi[index++]=q+1;pi[index++]=q+1;pi[index++]=q+side;pi[index++]=q+side+1;}
+  Buffer(a,sizeof(pv),VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,a.planetaryPatch.vb,a.planetaryPatch.vm,pv.data());
+  Buffer(a,sizeof(pi),VK_BUFFER_USAGE_INDEX_BUFFER_BIT,a.planetaryPatch.ib,a.planetaryPatch.im,pi.data());
+  a.planetaryPatch.indices=(uint32_t)pi.size();
   a.Log(NC_LOG_VULKAN, "Created built-in triangle mesh (host-visible static "
                        "vertex/index buffers)");
 }
@@ -260,6 +278,11 @@ void DestroyMesh(App &a) {
   if (a.triangle.im)
     vkFreeMemory(a.device, a.triangle.im, nullptr);
   a.triangle = {};
+  if(a.planetaryPatch.vb)vkDestroyBuffer(a.device,a.planetaryPatch.vb,nullptr);
+  if(a.planetaryPatch.vm)vkFreeMemory(a.device,a.planetaryPatch.vm,nullptr);
+  if(a.planetaryPatch.ib)vkDestroyBuffer(a.device,a.planetaryPatch.ib,nullptr);
+  if(a.planetaryPatch.im)vkFreeMemory(a.device,a.planetaryPatch.im,nullptr);
+  a.planetaryPatch={};
 }
 Mesh *MeshFor(App &a, NcMeshHandle h) {
   return h.value == 1 ? &a.triangle : nullptr;
@@ -286,6 +309,8 @@ void Validate(App &a) {
         b.objectCount > s->objectCount - b.firstObject)
       throw std::runtime_error("invalid render batch");
   }
+  if(nc_validate_planetary_patches(s->planetaryPatches,s->planetaryPatchCount)!=NC_SUCCESS)throw std::runtime_error("invalid planetary patch submission");
+  if(a.patchSize&&sizeof(NcPlanetaryPatch)*s->planetaryPatchCount>a.patchSize)throw std::runtime_error("planetary patch submission exceeds initial capacity");
 }
 void Window(App &a) {
   WNDCLASSW wc{.lpfnWndProc = Proc,
@@ -417,6 +442,8 @@ void DestroySwap(App &a) {
   a.framebuffers.clear();
   if (a.pipeline)
     vkDestroyPipeline(a.device, a.pipeline, nullptr);
+  if (a.planetaryPipeline)
+    vkDestroyPipeline(a.device,a.planetaryPipeline,nullptr);
   if (a.orbitPipeline)
     vkDestroyPipeline(a.device, a.orbitPipeline, nullptr);
   if (a.previousOrbitPipeline)
@@ -426,6 +453,7 @@ void DestroySwap(App &a) {
   if (a.targetDirectionPipeline)
     vkDestroyPipeline(a.device, a.targetDirectionPipeline, nullptr);
   a.pipeline = {};
+  a.planetaryPipeline = {};
   a.orbitPipeline = {};
   a.previousOrbitPipeline = {};
   a.bodyForwardPipeline = {};
@@ -541,15 +569,12 @@ void Swap(App &a) {
   rp.pSubpasses = &sub;
   a.Check(vkCreateRenderPass(a.device, &rp, nullptr, &a.renderPass),
           "render pass failed");
-  VkDescriptorSetLayoutBinding bind{};
-  bind.binding = 0;
-  bind.descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
-  bind.descriptorCount = 1;
-  bind.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
+  VkDescriptorSetLayoutBinding binds[2]{};
+  for(uint32_t binding=0;binding<2;binding++){binds[binding].binding=binding;binds[binding].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;binds[binding].descriptorCount=1;binds[binding].stageFlags=VK_SHADER_STAGE_VERTEX_BIT;}
   VkDescriptorSetLayoutCreateInfo dl{
       VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO};
-  dl.bindingCount = 1;
-  dl.pBindings = &bind;
+  dl.bindingCount = 2;
+  dl.pBindings = binds;
   a.Check(
       vkCreateDescriptorSetLayout(a.device, &dl, nullptr, &a.descriptorLayout),
       "descriptor layout failed");
@@ -622,6 +647,15 @@ void Swap(App &a) {
   if (triangleResult != VK_SUCCESS && trianglePipeline) vkDestroyPipeline(a.device, trianglePipeline, nullptr);
   a.Check(triangleResult, "pipeline failed");
   a.pipeline = trianglePipeline;
+  VkShaderModule planetaryVs{},planetaryFs{};
+  try{planetaryVs=Shader(a,"shaders/planetary.vert.spv");planetaryFs=Shader(a,"shaders/planetary.frag.spv");}catch(...){if(planetaryVs)vkDestroyShaderModule(a.device,planetaryVs,nullptr);throw;}
+  VkPipelineShaderStageCreateInfo planetaryStages[2]{{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_VERTEX_BIT,planetaryVs,"main"},{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_FRAGMENT_BIT,planetaryFs,"main"}};
+  VkVertexInputBindingDescription planetaryBinding{0,sizeof(PatchVertex),VK_VERTEX_INPUT_RATE_VERTEX};
+  VkVertexInputAttributeDescription planetaryAttribute{0,0,VK_FORMAT_R32G32_SFLOAT,0};
+  VkPipelineVertexInputStateCreateInfo planetaryInput{VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO};planetaryInput.vertexBindingDescriptionCount=1;planetaryInput.pVertexBindingDescriptions=&planetaryBinding;planetaryInput.vertexAttributeDescriptionCount=1;planetaryInput.pVertexAttributeDescriptions=&planetaryAttribute;
+  VkPipelineRasterizationStateCreateInfo planetaryRaster=rs;planetaryRaster.cullMode=VK_CULL_MODE_BACK_BIT;planetaryRaster.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE;
+  VkGraphicsPipelineCreateInfo planetaryCreate=gp;planetaryCreate.pStages=planetaryStages;planetaryCreate.pVertexInputState=&planetaryInput;planetaryCreate.pRasterizationState=&planetaryRaster;
+  VkPipeline planetaryPipeline{};VkResult planetaryResult=vkCreateGraphicsPipelines(a.device,{},1,&planetaryCreate,nullptr,&planetaryPipeline);vkDestroyShaderModule(a.device,planetaryVs,nullptr);vkDestroyShaderModule(a.device,planetaryFs,nullptr);if(planetaryResult!=VK_SUCCESS&&planetaryPipeline)vkDestroyPipeline(a.device,planetaryPipeline,nullptr);a.Check(planetaryResult,"planetary pipeline failed");a.planetaryPipeline=planetaryPipeline;
   VkShaderModule orbitVs{}, orbitFs{};
   try { orbitVs = Shader(a, "shaders/orbit.vert.spv"); orbitFs = Shader(a, "shaders/orbit.frag.spv"); }
   catch (...) { if (orbitVs) vkDestroyShaderModule(a.device, orbitVs, nullptr); throw; }
@@ -701,6 +735,10 @@ void DestroySubmission(App &a) {
   a.descriptorPool = {};
   a.submissionBuffer = {};
   a.submissionMemory = {};
+  if(a.patchMapped)vkUnmapMemory(a.device,a.patchMemory);
+  if(a.patchBuffer)vkDestroyBuffer(a.device,a.patchBuffer,nullptr);
+  if(a.patchMemory)vkFreeMemory(a.device,a.patchMemory,nullptr);
+  a.patchMapped=nullptr;a.patchBuffer={};a.patchMemory={};a.patchSize=0;
   if (a.orbitMapped) vkUnmapMemory(a.device, a.orbitMemory);
   if (a.orbitBuffer) vkDestroyBuffer(a.device, a.orbitBuffer, nullptr);
   if (a.orbitMemory) vkFreeMemory(a.device, a.orbitMemory, nullptr);
@@ -750,7 +788,10 @@ void CreateSubmission(App &a) {
   a.Check(vkMapMemory(a.device, a.submissionMemory, 0, a.submissionSize, 0,
                       &a.mapped),
           "submission map failed");
-  VkDescriptorPoolSize ps{VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1};
+  a.patchSize=sizeof(NcPlanetaryPatch)*std::max<uint32_t>(1,a.submission->planetaryPatchCount);
+  VkBufferCreateInfo pci{VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO};pci.size=a.patchSize;pci.usage=VK_BUFFER_USAGE_STORAGE_BUFFER_BIT;pci.sharingMode=VK_SHARING_MODE_EXCLUSIVE;
+  a.Check(vkCreateBuffer(a.device,&pci,nullptr,&a.patchBuffer),"patch buffer failed");VkMemoryRequirements pr;vkGetBufferMemoryRequirements(a.device,a.patchBuffer,&pr);VkMemoryAllocateInfo pai{VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO};pai.allocationSize=pr.size;pai.memoryTypeIndex=Memory(a,pr.memoryTypeBits,VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT|VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);a.Check(vkAllocateMemory(a.device,&pai,nullptr,&a.patchMemory),"patch memory failed");a.Check(vkBindBufferMemory(a.device,a.patchBuffer,a.patchMemory,0),"patch bind failed");a.Check(vkMapMemory(a.device,a.patchMemory,0,a.patchSize,0,&a.patchMapped),"patch map failed");
+  VkDescriptorPoolSize ps{VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 2};
   VkDescriptorPoolCreateInfo pi{VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO};
   pi.maxSets = 1;
   pi.poolSizeCount = 1;
@@ -764,20 +805,16 @@ void CreateSubmission(App &a) {
   si.pSetLayouts = &a.descriptorLayout;
   a.Check(vkAllocateDescriptorSets(a.device, &si, &a.descriptor),
           "descriptor set failed");
-  VkDescriptorBufferInfo bi{a.submissionBuffer, 0, a.submissionSize};
-  VkWriteDescriptorSet w{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
-  w.dstSet = a.descriptor;
-  w.dstBinding = 0;
-  w.descriptorCount = 1;
-  w.descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
-  w.pBufferInfo = &bi;
-  vkUpdateDescriptorSets(a.device, 1, &w, 0, nullptr);
+  VkDescriptorBufferInfo infos[2]{{a.submissionBuffer,0,a.submissionSize},{a.patchBuffer,0,a.patchSize}};
+  VkWriteDescriptorSet writes[2]{};for(uint32_t binding=0;binding<2;binding++){writes[binding].sType=VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;writes[binding].dstSet=a.descriptor;writes[binding].dstBinding=binding;writes[binding].descriptorCount=1;writes[binding].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;writes[binding].pBufferInfo=&infos[binding];}
+  vkUpdateDescriptorSets(a.device,2,writes,0,nullptr);
 }
 void Upload(App &a) {
   std::memcpy(a.mapped, &a.submission->camera, sizeof(NcCameraData));
   std::memcpy((char *)a.mapped + sizeof(NcCameraData),
               a.submission->objects,
               sizeof(NcRenderObject) * a.submission->objectCount);
+  if(a.submission->planetaryPatchCount)std::memcpy(a.patchMapped,a.submission->planetaryPatches,sizeof(NcPlanetaryPatch)*a.submission->planetaryPatchCount);
   if (a.submission->orbitVertexCount) {
     auto needed = sizeof(NcOrbitLineVertex) * a.submission->orbitVertexCount;
     if (needed != a.orbitSize) {
@@ -873,6 +910,7 @@ void Record(App &a, uint32_t image) {
     vkCmdBindIndexBuffer(c, m->ib, 0, VK_INDEX_TYPE_UINT32);
     vkCmdDrawIndexed(c, m->indices, b.objectCount, 0, 0, b.firstObject);
   }
+  if(a.submission->planetaryPatchCount){VkDeviceSize offset=0;vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.planetaryPipeline);vkCmdBindVertexBuffers(c,0,1,&a.planetaryPatch.vb,&offset);vkCmdBindIndexBuffer(c,a.planetaryPatch.ib,0,VK_INDEX_TYPE_UINT32);vkCmdDrawIndexed(c,a.planetaryPatch.indices,a.submission->planetaryPatchCount,0,0,0);}
   if (a.submission->orbitVertexCount >= 2 && a.orbitBuffer) { VkDeviceSize offset = 0; vkCmdBindPipeline(c, VK_PIPELINE_BIND_POINT_GRAPHICS, a.orbitPipeline); vkCmdBindVertexBuffers(c, 0, 1, &a.orbitBuffer, &offset); vkCmdDraw(c, a.submission->orbitVertexCount, 1, 0, 0); }
   if (a.submission->previousOrbitVertexCount >= 2 && a.previousOrbitBuffer) { VkDeviceSize offset = 0; vkCmdBindPipeline(c, VK_PIPELINE_BIND_POINT_GRAPHICS, a.previousOrbitPipeline); vkCmdBindVertexBuffers(c, 0, 1, &a.previousOrbitBuffer, &offset); vkCmdDraw(c, a.submission->previousOrbitVertexCount, 1, 0, 0); }
   if (a.submission->bodyForwardVertexCount == 2 && a.bodyForwardBuffer) { VkDeviceSize offset = 0; vkCmdBindPipeline(c, VK_PIPELINE_BIND_POINT_GRAPHICS, a.bodyForwardPipeline); vkCmdBindVertexBuffers(c, 0, 1, &a.bodyForwardBuffer, &offset); vkCmdDraw(c, 2, 1, 0, 0); }
@@ -1034,6 +1072,11 @@ void Update(App &a, float dt) {
   Upload(a);
 }
 } // namespace
+extern "C" NC_API NcResult __cdecl nc_validate_planetary_patches(const NcPlanetaryPatch *patches, uint32_t count) {
+  if (count && !patches) return NC_INVALID_ARGUMENT;
+  for (uint32_t i=0;i<count;i++) { const auto &p=patches[i]; if (p.face>=6 || !std::isfinite(p.radius) || p.radius<=0 || !std::isfinite(p.centerX) || !std::isfinite(p.centerY) || !std::isfinite(p.centerZ) || p.level>=31 || p.x >= (1u<<p.level) || p.y >= (1u<<p.level)) return NC_INVALID_ARGUMENT; }
+  return NC_SUCCESS;
+}
 extern "C" NC_API NcResult __cdecl nc_get_abi_layout(NcAbiLayout *o) {
   if (!o)
     return NC_INVALID_ARGUMENT;

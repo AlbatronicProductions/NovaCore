@@ -25,8 +25,48 @@ var tests = new (string, Action)[]
     ("Celestial SAS convergence", CelestialSasConvergenceTest),
     ("Celestial SAS diagnostic indicators", CelestialSasDiagnosticIndicatorsTest),
     ("Camera snapshot allocation", CameraSnapshotAllocationTest),
+    ("Planetary presentation pipeline", PlanetaryPresentationPipelineTest),
+    ("Cube-sphere planetary surface", CubeSpherePlanetarySurfaceTest),
+    ("Planetary patch topology and ABI", PlanetaryPatchTopologyAndAbiTest),
 };
 foreach (var (name, test) in tests) { test(); Console.WriteLine($"PASS {name}"); }
+
+static void PlanetaryPresentationPipelineTest()
+{
+    var root=new ReferenceFrameId(1);
+    var evaluated=new[]
+    {
+        new EvaluatedPlanetaryBody(10,new UniversePosition(new Double3(0,0,0),root),695_700_000,new Float3(1,.8f,.3f),"Sun",true),
+        new EvaluatedPlanetaryBody(399,new UniversePosition(new Double3(1.5e11,0,0),root),6_371_008.8,new Float3(.2f,.5f,1),"Earth",true),
+        new EvaluatedPlanetaryBody(301,new UniversePosition(new Double3(1.503844e11,0,0),root),1_737_400,new Float3(.7f,.7f,.7f),"Moon",true),
+    };
+    Check(PlanetaryBodyPresentationProvider.TryCreateSnapshot(evaluated,out var snapshot)&&snapshot is not null,"planetary snapshot creation");
+    var published=snapshot!;var original=published.Bodies[1];evaluated[1]=evaluated[1] with{RadiusMetres=1};
+    Check(published.Bodies[1]==original,"presentation snapshot copies evaluated input");
+    Span<ResolvedRenderObject> objects=stackalloc ResolvedRenderObject[3];
+    Check(FarFieldPlanetaryRenderProxyProvider.TryBuild(published,1d,1d,objects,out var count)&&count==3,"planet renderer consumes snapshot");
+    Check(objects[..count].ToArray().All(value=>value.Mesh==MeshHandle.Sphere),"one reusable sphere mesh");
+    var camera=new CameraState(new FramePosition(root,new Double3(0,0,100)),DoubleQuaternion.Identity,new CameraProjection(Math.PI/3,16d/9,.01,1000),CameraMode.Free);
+    var before=published.Bodies.ToArray();Check(PlanetaryCameraFocus.TryFocus(camera,published,399,10_000_000),"Earth focus");Check(PlanetaryCameraFocus.TryFocus(camera,published,301,10_000_000),"Moon focus");Check(PlanetaryCameraFocus.TryFocus(camera,published,10,10_000_000),"Sun focus");
+    Check(before.SequenceEqual(published.Bodies.ToArray()),"focus does not modify celestial presentation evaluation");
+}
+
+static void CubeSpherePlanetarySurfaceTest()
+{
+    var faces=Enum.GetValues<CubeSphereFace>();Check(faces.Length==6&&faces.Distinct().Count()==6,"six deterministic cube faces");var root=new PlanetaryPatch(CubeSphereFace.PositiveX,0,0,0);var children=Enumerable.Range(0,4).Select(root.Child).ToArray();Check(children.Distinct().Count()==4&&children.All(child=>child.Parent==root),"deterministic children");Check(children.Select(child=>child.Bounds).OrderBy(bounds=>bounds.MinY).ThenBy(bounds=>bounds.MinX).Count()==4,"child bounds partition root");foreach(var face in faces)foreach(var u in new[]{0d,.5d,1d})foreach(var v in new[]{0d,.5d,1d})Check(Math.Abs(Math.Sqrt(CubeSphereProjection.Project(face,u,v,10).LengthSquared)-10)<1e-10,"cube sphere radius");
+    var body=new PlanetRenderProxy(399,new UniversePosition(Double3.Zero,new ReferenceFrameId(1)),10,new Float3(0,0,1),"",true);var config=new PlanetaryLodConfiguration(8,3);var far=PlanetaryRepresentationSelector.SelectPatches(body,new Double3(1000,0,0),config);var near=PlanetaryRepresentationSelector.SelectPatches(body,new Double3(20,0,0),config);var closer=PlanetaryRepresentationSelector.SelectPatches(body,new Double3(11,0,0),config);Check(far.Representation==PlanetaryRepresentation.FarFieldBody&&near.MaximumLevel>=0&&closer.MaximumLevel>=near.MaximumLevel,"deterministic far near lod");var camera=new UniversePosition(new Double3(1e12,0,0),new ReferenceFrameId(1));var relative=CubeSphereProjection.CameraRelativeCenter(body,camera);Check(relative.X==-1e12&&body.Position.Value==Double3.Zero,"camera relative does not mutate body");
+}
+
+static unsafe void PlanetaryPatchTopologyAndAbiTest()
+{
+    var topology=PlanetaryPatchTopology.Shared;var repeated=PlanetaryPatchTopology.Shared;
+    Check(topology.Vertices.Length==289&&topology.Indices.Length==1536,"patch grid counts");Check(topology.DeterministicHash==0x654A3EA13F0C9C2DUL&&topology.DeterministicHash==repeated.DeterministicHash,"patch topology regression hash");
+    Check(topology.Indices.All(index=>index<topology.Vertices.Length),"patch indices in range");Check(topology.Vertices.All(vertex=>vertex.U is >=0 and <=1&&vertex.V is >=0 and <=1),"patch coordinates bounded");Check(topology.Vertices[0]==new PlanetaryPatchTopology.Vertex(0,0)&&topology.Vertices[^1]==new PlanetaryPatchTopology.Vertex(1,1),"patch corners");
+    Check(Marshal.SizeOf<NativePlanetaryPatch>()==48,"planetary patch ABI size");Check(Marshal.OffsetOf<NativePlanetaryPatch>(nameof(NativePlanetaryPatch.Face)).ToInt32()==0&&Marshal.OffsetOf<NativePlanetaryPatch>(nameof(NativePlanetaryPatch.CenterX)).ToInt32()==16&&Marshal.OffsetOf<NativePlanetaryPatch>(nameof(NativePlanetaryPatch.ColorR)).ToInt32()==32,"planetary patch ABI offsets");
+    var patch=new NativePlanetaryPatch{Face=5,Level=3,X=7,Y=6,CenterX=BitConverter.Int32BitsToSingle(unchecked((int)0x3F800001)),CenterY=2,CenterZ=3,Radius=BitConverter.Int32BitsToSingle(unchecked((int)0x41200001)),ColorA=1};Check(patch.Face==5&&patch.Level==3&&patch.X==7&&patch.Y==6&&BitConverter.SingleToInt32Bits(patch.CenterX)==unchecked((int)0x3F800001)&&BitConverter.SingleToInt32Bits(patch.Radius)==unchecked((int)0x41200001),"planetary patch ABI bit preservation");
+    Check(NativeRuntime.ValidatePlanetaryPatches(null,0)==NativeResult.Success,"native zero patch batch");Check(NativeRuntime.ValidatePlanetaryPatches(null,1)==NativeResult.InvalidArgument,"native null nonzero rejected");var pointer=&patch;Check(NativeRuntime.ValidatePlanetaryPatches(pointer,1)==NativeResult.Success,"native valid patch");var batch=stackalloc NativePlanetaryPatch[6];for(uint face=0;face<6;face++){batch[face]=patch;batch[face].Face=face;}Check(NativeRuntime.ValidatePlanetaryPatches(batch,6)==NativeResult.Success,"native six face batch");batch[0].Face=6;Check(NativeRuntime.ValidatePlanetaryPatches(batch,1)==NativeResult.InvalidArgument,"native face rejected");batch[0]=patch;batch[0].Radius=0;Check(NativeRuntime.ValidatePlanetaryPatches(batch,1)==NativeResult.InvalidArgument,"native zero radius rejected");batch[0]=patch;batch[0].Radius=float.NaN;Check(NativeRuntime.ValidatePlanetaryPatches(batch,1)==NativeResult.InvalidArgument,"native nan radius rejected");batch[0]=patch;batch[0].CenterX=float.PositiveInfinity;Check(NativeRuntime.ValidatePlanetaryPatches(batch,1)==NativeResult.InvalidArgument,"native infinite center rejected");batch[0]=patch;batch[0].Level=2;batch[0].X=4;Check(NativeRuntime.ValidatePlanetaryPatches(batch,1)==NativeResult.InvalidArgument,"native level coordinates rejected");
+    Console.WriteLine($"Planetary patch topology hash: 0x{topology.DeterministicHash:X16}");
+}
 
 static void CelestialPlayerTorqueControlsTest()
 {
