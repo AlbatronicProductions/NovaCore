@@ -4,6 +4,7 @@ namespace NovaCore.Interop;
 
 public enum NativeResult : int { Success = 0, Failure = 1, InvalidArgument = 2 }
 public enum NativePlanetaryMode : uint { CpuReference = 0, GpuProduction = 1, CpuGpuValidation = 2 }
+public enum NativePlanetaryRenderRegime : uint { DistantOnly = 0, Transition = 1, DetailedOnly = 2 }
 
 [StructLayout(LayoutKind.Sequential)]
 public struct NativeEncodedPosition
@@ -31,11 +32,12 @@ public struct NativeRenderObject { public NativeEncodedPosition Position; public
 public struct NativeDrawBatch { public NativeMeshHandle Mesh; public uint FirstObject, ObjectCount, Padding; }
 /// <summary>64-byte presentation-only planetary patch record; face numbering and edge-mask bits equal Graphics contracts.</summary>
 [StructLayout(LayoutKind.Sequential)] public struct NativePlanetaryPatch { public uint Face,Level,X,Y; public float CenterX,CenterY,CenterZ,Radius; public float ColorR,ColorG,ColorB,ColorA; public uint StitchMask,Reserved0,Reserved1,Reserved2; }
-[StructLayout(LayoutKind.Sequential)] public struct NativePlanetaryGpuConstants { public float CameraBodyX,CameraBodyY,CameraBodyZ,Radius; public float RefinementThreshold,NearFieldAltitudeRadii,Padding0,Padding1; public uint MaximumLevel,OutputCapacity,Padding2,Padding3; }
+[StructLayout(LayoutKind.Sequential)] public struct NativePlanetaryGpuConstants { public float CameraBodyX,CameraBodyY,CameraBodyZ,Radius; public float RefinementThreshold,NearFieldAltitudeRadii,DetailedAlpha,Padding1; public uint MaximumLevel,OutputCapacity,Padding2,Padding3; }
+[StructLayout(LayoutKind.Sequential)] public struct NativePlanetaryPresentation { public float CenterX,CenterY,CenterZ,Radius; public float ColorR,ColorG,ColorB,DistantAlpha; public float DetailedAlpha,DistanceRadii; public NativePlanetaryRenderRegime Regime; public uint Enabled; }
  [StructLayout(LayoutKind.Sequential)] public struct NativeOrbitLineVertex { public float X, Y, Z; }
 
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct NativeFrameSubmission { public NativeCameraData Camera; public NativeRenderObject* Objects; public uint ObjectCount; public NativeDrawBatch* Batches; public uint BatchCount; public NativeOrbitLineVertex* OrbitVertices; public uint OrbitVertexCount; public NativeOrbitLineVertex* PreviousOrbitVertices; public uint PreviousOrbitVertexCount; public NativeOrbitLineVertex* BodyForwardVertices; public uint BodyForwardVertexCount; public NativeOrbitLineVertex* TargetDirectionVertices; public uint TargetDirectionVertexCount; public NativePlanetaryPatch* PlanetaryPatches; public uint PlanetaryPatchCount; public uint PlanetaryGpuAlignmentPadding; public NativePlanetaryGpuConstants PlanetaryGpu; public NativePlanetaryMode PlanetaryMode; public uint PlanetaryPadding0,PlanetaryPadding1,PlanetaryPadding2; }
+public unsafe struct NativeFrameSubmission { public NativeCameraData Camera; public NativeRenderObject* Objects; public uint ObjectCount; public NativeDrawBatch* Batches; public uint BatchCount; public NativeOrbitLineVertex* OrbitVertices; public uint OrbitVertexCount; public NativeOrbitLineVertex* PreviousOrbitVertices; public uint PreviousOrbitVertexCount; public NativeOrbitLineVertex* BodyForwardVertices; public uint BodyForwardVertexCount; public NativeOrbitLineVertex* TargetDirectionVertices; public uint TargetDirectionVertexCount; public NativePlanetaryPatch* PlanetaryPatches; public uint PlanetaryPatchCount; public uint PlanetaryGpuAlignmentPadding; public NativePlanetaryGpuConstants PlanetaryGpu; public NativePlanetaryMode PlanetaryMode; public uint PlanetaryPadding0,PlanetaryPadding1,PlanetaryPadding2; public NativePlanetaryPresentation PlanetaryPresentation; }
 
 [StructLayout(LayoutKind.Sequential)]
 public struct NativeAbiLayout
@@ -43,7 +45,7 @@ public struct NativeAbiLayout
     public uint EncodedPositionSize, CameraDataSize, CameraPositionOffset, CameraViewProjectionOffset, RenderTransformSize, RenderObjectSize, RenderObjectPositionOffset, RenderObjectTransformOffset, RenderObjectMeshOffset;
     public uint DrawBatchSize, OrbitLineVertexSize, FrameSubmissionSize, FrameObjectsOffset, FrameBatchesOffset, FrameOrbitVerticesOffset, FrameOrbitVertexCountOffset;
     public uint InputStateSize, InputDeltaSecondsOffset, InputMoveLeftOffset, InputMoveRightOffset, InputMoveForwardOffset, InputMoveBackwardOffset, InputMoveDownOffset, InputMoveUpOffset, InputResetOffset, InputLookActiveOffset, InputMouseDeltaXOffset, InputMouseDeltaYOffset, InputMouseWheelDetentsOffset, InputPauseToggleOffset, InputRateDecreaseOffset, InputRateIncreaseOffset, InputSasModeKeyOffset;
-    public uint FramePlanetaryGpuOffset, FramePlanetaryModeOffset;
+    public uint FramePlanetaryGpuOffset, FramePlanetaryModeOffset, FramePlanetaryPresentationOffset;
 }
 
 [StructLayout(LayoutKind.Sequential)]

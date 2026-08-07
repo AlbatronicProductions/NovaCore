@@ -6,6 +6,7 @@ layout(std430,set=0,binding=2) readonly buffer Input { vec4 cameraRadius; vec4 t
 layout(std430,set=0,binding=3) buffer Work { uvec4 addresses[]; } workData;
 layout(std430,set=0,binding=4) buffer Nodes { uint states[]; } nodeData;
 layout(std430,set=0,binding=5) buffer Control { uint values[]; } outputData;
+layout(std430,set=0,binding=6) readonly buffer Presentation { vec4 centerRadius; vec4 colorDistant; vec4 blendMetricState; } presentation;
 layout(local_size_x=1,local_size_y=1,local_size_z=1) in;
 
 const uint GPU_CAPACITY=6144u;
@@ -36,8 +37,7 @@ uint FindLeaf(uvec4 address,uint capacity,uint leafCount){for(uint index=0u;inde
 float ProjectedSpan(uvec4 address){vec3 center=Project(address,vec2(.5));float halfSpan=0.0;halfSpan=max(halfSpan,length(center-Project(address,vec2(0,0))));halfSpan=max(halfSpan,length(center-Project(address,vec2(1,0))));halfSpan=max(halfSpan,length(center-Project(address,vec2(0,1))));halfSpan=max(halfSpan,length(center-Project(address,vec2(1,1))));vec3 camera=inputData.cameraRadius.xyz;float radius=inputData.cameraRadius.w;return 2.0*halfSpan*radius/max(length(camera-center*radius),radius*1e-12);}
 bool HorizonCulled(uvec4 address){float radius=inputData.cameraRadius.w;vec3 camera=inputData.cameraRadius.xyz;float cameraDistance=length(camera);if(cameraDistance<=radius)return false;vec3 view=camera/cameraDistance;vec3 center=Project(address,vec2(.5));float angularRadius=0.0;angularRadius=max(angularRadius,Angle(center,Project(address,vec2(0,0))));angularRadius=max(angularRadius,Angle(center,Project(address,vec2(1,0))));angularRadius=max(angularRadius,Angle(center,Project(address,vec2(0,1))));angularRadius=max(angularRadius,Angle(center,Project(address,vec2(1,1))));float horizon=acos(clamp(radius/cameraDistance,-1.0,1.0));return Angle(center,view)-angularRadius>horizon;}
 
-vec3 BaseColor(uint face){if(face==0u)return vec3(.16,.42,.92);if(face==1u)return vec3(.10,.68,.88);if(face==2u)return vec3(.20,.82,.45);if(face==3u)return vec3(.08,.48,.28);if(face==4u)return vec3(.22,.34,.78);return vec3(.12,.24,.56);}
-void WritePatch(uint index,uvec4 address,uint stitchMask){float brightness=.62+.06*float(address.y)+(((address.z^address.w)&1u)==0u?.10:-.04);patchData.patches[index].address=address;patchData.patches[index].centerRadius=vec4(-inputData.cameraRadius.xyz,inputData.cameraRadius.w);patchData.patches[index].color=vec4(BaseColor(address.x)*brightness,1);patchData.patches[index].transitions=uvec4(stitchMask,0,0,0);}
+void WritePatch(uint index,uvec4 address,uint stitchMask){patchData.patches[index].address=address;patchData.patches[index].centerRadius=vec4(-inputData.cameraRadius.xyz,inputData.cameraRadius.w);patchData.patches[index].color=vec4(presentation.colorDistant.rgb,inputData.thresholds.z);patchData.patches[index].transitions=uvec4(stitchMask,0,0,0);}
 
 void main(){
   if(gl_GlobalInvocationID.x!=0u)return;

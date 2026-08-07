@@ -13,10 +13,13 @@ internal sealed class EarthPlanetaryScene
     internal const int MaximumLod = 5;
     internal const int MaximumPatchCapacity = 6 * (1 << (2 * MaximumLod));
     internal static readonly PlanetaryLodConfiguration LodConfiguration = new(19d, MaximumLod, .11d);
+    internal static readonly PlanetaryRepresentationHandoffConfiguration HandoffConfiguration = new(12d, 18d, .25d);
     private const double OrbitSensitivity = .002d;
     private readonly PlanetRenderProxy _earth;
     private readonly NativePlanetaryMode _mode;
     private readonly uint _gpuOutputCapacity;
+    private readonly PlanetaryRepresentationHandoff _handoff = new(HandoffConfiguration);
+    private PlanetaryRepresentationBlend _blend;
     private PlanetaryPatch[] _activeLeaves = [];
     private double _orbitDistance;
     private double _orbitYawRadians;
@@ -54,6 +57,9 @@ internal sealed class EarthPlanetaryScene
     internal int CulledPatchCount => _culledPatchCount;
     internal ReadOnlySpan<PlanetaryPatch> ActiveLeaves => _activeLeaves.AsSpan();
     internal NativePlanetaryMode Mode => _mode;
+    internal PlanetaryRepresentationBlend RepresentationBlend => _blend;
+    internal bool DetailedComputeRequested => _mode is not NativePlanetaryMode.CpuReference && _blend.DrawDetailed;
+    internal int DistantDrawCount => _blend.DrawDistant ? 1 : 0;
     internal CameraProjection Projection => new(Math.PI / 3d, 16d / 9d, Math.Max(1d, _earth.RadiusMetres / 10_000d), _earth.RadiusMetres * 100d);
 
     internal static bool TryCreate(ReferenceFrameId presentationRoot, out EarthPlanetaryScene? scene, out string error)=>TryCreate(presentationRoot,NativePlanetaryMode.CpuReference,MaximumPatchCapacity,out scene,out error);
@@ -88,7 +94,7 @@ internal sealed class EarthPlanetaryScene
         var patches = new NativePlanetaryPatch[MaximumPatchCapacity];
         scene = new EarthPlanetaryScene(presentation, earth, patches,mode,gpuOutputCapacity);
         scene.UpdatePatches(new CameraState(new FramePosition(presentationRoot,initialCamera),DoubleQuaternion.Identity,scene.Projection,CameraMode.Free));
-        if(mode!=NativePlanetaryMode.GpuProduction&&(scene.Representation!=PlanetaryRepresentation.NearFieldSurface||scene.ActivePatchCount!=6)){scene=null;error="Earth root-patch selection failed.";return false;}
+        if(scene.RepresentationBlend.Regime!=PlanetaryRenderRegime.DistantOnly||scene.ActivePatchCount!=0){scene=null;error="Earth distant-representation selection failed.";return false;}
         error = string.Empty;
         return true;
     }
@@ -135,15 +141,22 @@ internal sealed class EarthPlanetaryScene
     internal void UpdatePatches(CameraState camera)
     {
         _altitudeRadii = (Math.Sqrt((camera.Position.Value - _earth.Position.Value).LengthSquared) - _earth.RadiusMetres) / _earth.RadiusMetres;
-        _representation = _altitudeRadii <= LodConfiguration.NearFieldAltitudeRadii ? PlanetaryRepresentation.NearFieldSurface : PlanetaryRepresentation.FarFieldBody;
-        if(_mode==NativePlanetaryMode.GpuProduction){_activeLeaves=[];_activePatchCount=0;_minimumActiveLod=0;_maximumActiveLod=0;_refinementCount=0;_balancedRefinementCount=0;_culledPatchCount=0;return;}
+        _blend = _handoff.Update(_earth, camera.Position.Value);
+        _representation = _blend.DrawDetailed ? PlanetaryRepresentation.NearFieldSurface : PlanetaryRepresentation.FarFieldBody;
+        if(!_blend.DrawDetailed||_mode==NativePlanetaryMode.GpuProduction){_activeLeaves=[];_activePatchCount=0;_minimumActiveLod=0;_maximumActiveLod=0;_refinementCount=0;_balancedRefinementCount=0;_culledPatchCount=0;return;}
         UpdatePatchRecords(PlanetaryRepresentationSelector.SelectPatches(_earth, camera.Position.Value, LodConfiguration), camera.Position.Value);
     }
 
     internal NativePlanetaryGpuConstants GpuConstants(CameraState camera)
     {
         var cameraBody=camera.Position.Value-_earth.Position.Value;
-        return new(){CameraBodyX=(float)cameraBody.X,CameraBodyY=(float)cameraBody.Y,CameraBodyZ=(float)cameraBody.Z,Radius=(float)_earth.RadiusMetres,RefinementThreshold=(float)LodConfiguration.MaximumProjectedPatchSpan,NearFieldAltitudeRadii=(float)LodConfiguration.NearFieldAltitudeRadii,MaximumLevel=MaximumLod,OutputCapacity=_gpuOutputCapacity};
+        return new(){CameraBodyX=(float)cameraBody.X,CameraBodyY=(float)cameraBody.Y,CameraBodyZ=(float)cameraBody.Z,Radius=(float)_earth.RadiusMetres,RefinementThreshold=(float)LodConfiguration.MaximumProjectedPatchSpan,NearFieldAltitudeRadii=(float)LodConfiguration.NearFieldAltitudeRadii,DetailedAlpha=_blend.DetailedAlpha,MaximumLevel=MaximumLod,OutputCapacity=_gpuOutputCapacity};
+    }
+
+    internal NativePlanetaryPresentation NativePresentation(CameraState camera)
+    {
+        var center=CubeSphereProjection.CameraRelativeCenter(_earth,new UniversePosition(camera.Position.Value,Presentation.RootFrame));
+        return new(){CenterX=(float)center.X,CenterY=(float)center.Y,CenterZ=(float)center.Z,Radius=(float)_earth.RadiusMetres,ColorR=_earth.Color.X,ColorG=_earth.Color.Y,ColorB=_earth.Color.Z,DistantAlpha=_blend.DistantAlpha,DetailedAlpha=_blend.DetailedAlpha,DistanceRadii=(float)_blend.DistanceRadii,Regime=(NativePlanetaryRenderRegime)_blend.Regime,Enabled=1};
     }
 
     private void UpdatePatchRecords(in PlanetaryLodSelection selection, in Double3 cameraRootPosition)
@@ -163,7 +176,7 @@ internal sealed class EarthPlanetaryScene
         {
             var leaf = selection.Patches[index];
             ref var patch = ref Patches[index];
-            var color = DebugColor(leaf);
+            var color = EarthColor;
             patch.Face = (uint)leaf.Face;
             patch.Level = (uint)leaf.Level;
             patch.X = (uint)leaf.X;
@@ -175,27 +188,12 @@ internal sealed class EarthPlanetaryScene
             patch.ColorR = color.X;
             patch.ColorG = color.Y;
             patch.ColorB = color.Z;
-            patch.ColorA = 1f;
+            patch.ColorA = _blend.DetailedAlpha;
             patch.StitchMask = (uint)selection.StitchMasks[index];
             patch.Reserved0 = 0;
             patch.Reserved1 = 0;
             patch.Reserved2 = 0;
         }
-    }
-
-    private static Float3 DebugColor(in PlanetaryPatch patch)
-    {
-        var baseColor = patch.Face switch
-        {
-            CubeSphereFace.PositiveX => new Float3(.16f, .42f, .92f),
-            CubeSphereFace.NegativeX => new Float3(.10f, .68f, .88f),
-            CubeSphereFace.PositiveY => new Float3(.20f, .82f, .45f),
-            CubeSphereFace.NegativeY => new Float3(.08f, .48f, .28f),
-            CubeSphereFace.PositiveZ => new Float3(.22f, .34f, .78f),
-            _ => new Float3(.12f, .24f, .56f),
-        };
-        var brightness = .62f + .06f * patch.Level + (((patch.X ^ patch.Y) & 1) == 0 ? .10f : -.04f);
-        return new Float3(baseColor.X * brightness, baseColor.Y * brightness, baseColor.Z * brightness);
     }
 
     private void ApplyOrbitPose(CameraState camera)
