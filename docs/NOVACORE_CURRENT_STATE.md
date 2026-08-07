@@ -2,22 +2,32 @@
 
 ## Repository state
 
-Inspect `git status --short` before edits. The committed baseline is the current `origin/main`; current uncommitted work is the offline adaptive sampler and its focused test. It must be preserved.
+Inspect `git status --short` before editing. The working tree currently contains unstaged Milestone 10A presentation work; preserve it unless the active task explicitly changes it. Repository code and tests are authoritative if this document ever becomes stale.
 
-## Architecture
+## Current milestone: 10A-9B
 
-NovaCore is a deterministic high-precision simulation foundation. It has exact simulation time, reference-frame and precision systems, immutable celestial definitions, generic analytical/sampled evaluation, NCPE v2 storage and runtime reconstruction, an offline builder, and a Vulkan rendering backend. Dependency direction is official sources → `NovaCore.NaifEphemerisAdapter` → builder input → NCPE → `NcpeCelestialSystemLoader` → `CelestialSystemDefinition` → evaluator/simulation. Runtime has no CSPICE, NAIF, adapter, builder, network, or kernel dependency.
+NovaCore now has a deterministic, true-distance Solar System presentation built from the existing `SolAnalytical` definition. `--scene=sol` evaluates Sun, Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn, Uranus, and Neptune at the current `SimulationInstant`, root-resolves them through `CelestialSystemEvaluator`, and publishes immutable `PlanetaryPresentationSnapshot` data to Graphics. It is an evaluated analytical presentation, not a production DE440 runtime artifact.
 
-## Offline NAIF state
+The scene includes deterministic orbit paths, body labels, screen-space reticle markers, number-row focus, orbit/zoom camera controls, and `SimulationClock` rate/pause integration. Labels use deterministic NDC collision rejection: focused body, Sun, Earth, Moon, then stable body order, with `0.004` NDC clearance. A rejected label never suppresses its marker or physical body. Solar uses an infinite-far Vulkan projection and a 100 AU presentation clamp, preserving the established double-precision camera-relative subtraction through the prior finite-depth boundary.
 
-Ignored `external/naif/` holds DE440 and CSPICE N0067. Verified files: `de440.bsp` (119799808 bytes, `A4CE9BF9B3282BECC9F4B2AC3CEBE03A2AE7599981AABD7265FD8482FFF7C4B5`), `gm_de440.tpc` (12406, `924DDF4FB9EAD9FE8A1AA55780BCABDE40B09D00065D58226E24B68D8092F140`), `pck00010.tpc` (126143, `59468328349AA730D18BF1F8D7E86EFE6E40B75DFB921908F99321B3A7A701D2`), `naif0012.tls` (5257, `678E32BDB5A744117A467CD9601CD6B373F0E9BC9BBDE1371D5EEE39600A039B`), and CSPICE N0067 archive (36519028, `98D60B814B412FA55294AEAAEB7DAB46D849CC87A8B709FFE835D08DE17625DC`). N0067 links with MSVC 19.51. Queries use SSB/J2000/NONE/ET and CSPICE km/km/s, converted offline to SI.
+## Completed rendering foundation
 
-SSB is exact zero. Sun, EMB, Earth, and Moon were queried at ET -86400, 0, +86400; tested parent-relative reconstruction was 0 m and 0 m/s. ET=0 Sun X was -1067706.8053809535 km / -1067706805.3809534 m. Proven constants are extraction results, not production runtime values: BODY10_GM 132712440041.27939, BODY399_GM 398600.4355070226, BODY301_GM 4902.8001184575487 km³/s².
+- Immutable renderer-facing planetary snapshots and generic body presentation conversion.
+- Shared 16×16 cube-sphere patch topology, fixed-width native patch ABI, and native layout validation.
+- Renderer-owned Vulkan planetary grid/buffer lifecycle and reusable planetary pipeline.
+- Earth presentation from its catalog radius and evaluated root position.
+- Deterministic CPU spatial quadtree LOD, horizon culling, cross-face neighbor balancing, and crack-safe edge stitching.
+- GPU patch selection with a CPU oracle, bounded output, explicit synchronization, and CPU/GPU parity diagnostics.
+- Distant/detail handoff using the same physical radius and camera-relative center authority.
+- Shared distant-body batch, Solar paths/labels/markers, and Vulkan validation-layer manual regressions.
 
-## CSPICE lifecycle
+## Milestone 9 pipeline summary
 
-`native/NovaCore.CSpiceShim` is narrow `__cdecl`; `CspiceSession` explicitly loads and disposes it. CSPICE uses RETURN and NULL output. Invalid target queries produce controlled `QueryFailure`, capture SHORT/LONG text, reset error state, preserve default failed state, and permit the next Sun query.
+Milestone 9 established immutable generic celestial definitions and a pure evaluator for fixed, circular, analytical-Kepler, and sampled trajectories. NCPE v2 provides a deterministic, self-describing offline artifact with byte-only runtime reconstruction and stored/neutral/reconstructed hash agreement. The NAIF/CSPICE adapter remains an offline-only source boundary; runtime code has no CSPICE, kernel, network, or builder dependency.
 
-## Current uncommitted sampler work
+## Remaining work
 
-`AdaptiveHermiteSampler.cs` uses real Moon/EMB DE440 queries over ET 0–86400, 21600-second seeds, Hermite position/velocity, probes 1/8, 3/8, 5/8, 7/8, and midpoint splitting. It measured max position 6.374644206047227 m, max velocity 0.0008818000029948403 m/s, no subdivision, hash `0xC1473707A33172A0`, and repeat identity. Current defect: output includes cached probes (21 timestamps) rather than 5 accepted knots. RMS, worst ET, and cadence search are deferred.
+- Stellar presentation, cubemap planet materials, atmosphere, and terrain.
+- Production sampled Solar artifacts from verified offline source data; no production DE440 runtime artifact is claimed.
+- Frustum/occlusion refinement, richer material systems, and later planetary surface features.
+- Spacecraft, physics/gameplay, colonies, asset pipeline, and save/replay integration.

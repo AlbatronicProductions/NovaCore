@@ -1,111 +1,97 @@
 # NovaCore
 
-NovaCore is a deterministic C# spaceflight-simulation foundation with a native C++20/Vulkan rendering backend. It is designed around immutable datasets, reproducible celestial mechanics, and offline-generated ephemerides. It is a foundation, not a complete game engine.
+NovaCore is a deterministic space simulation engine featuring a C# managed core, a native Vulkan renderer, and a high-precision camera-relative architecture for seamless planetary and Solar System visualization.
 
-## Current Architecture
+NovaCore is designed around one core principle: simulation owns truth, rendering owns presentation.
 
-NovaCore keeps authority in managed simulation and treats rendering as a downstream consumer of immutable evaluated data.
+Celestial mechanics, reference frames, and time remain authoritative in the simulation. The renderer consumes immutable presentation snapshots, allowing GPU rendering, visualization, and future graphical improvements without compromising deterministic simulation.
 
-- **Simulation** owns exact time, transactions, authoritative celestial and spacecraft state, and deterministic evaluation.
-- **Precision** provides double-precision spatial mathematics and camera-relative GPU transport.
-- **Graphics** consumes resolved immutable render data and owns no simulation state.
-- **Camera** is managed, frame-aware, and resolves its authoritative state before graphics transport.
-- **Reference Frames** provide immutable topology, evaluated transforms, and deterministic frame resolution.
-- **EphemerisFormat** defines the neutral, self-describing NCPE v2 storage contract.
-- **EphemerisBuilder** is the offline deterministic artifact builder.
-- **NaifEphemerisAdapter** is an offline-only contract boundary for a future pinned NAIF/CSPICE source adapter.
+## Current capabilities
+
+- ✓ Deterministic celestial simulation with immutable definitions and exact simulation time.
+- ✓ Immutable runtime architecture: evaluation publishes derived presentation snapshots; graphics consumes them.
+- ✓ NCPE v2 artifact format, byte-only runtime reconstruction, and deterministic hash verification.
+- ✓ Offline NAIF/CSPICE adapter foundation; runtime assemblies do not depend on CSPICE, kernels, network access, or the builder.
+- ✓ GPU-driven adaptive cube-sphere planetary rendering with CPU-reference and CPU/GPU parity validation.
+- ✓ Crack-safe mixed-level planetary LOD through deterministic neighbor balancing and edge-stitch metadata.
+- ✓ Distant/detail planetary handoff using shared physical radius and camera-relative center authority.
+- ✓ Evaluated `SolAnalytical` Solar presentation for Sun, Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn, Uranus, and Neptune.
+- ✓ Deterministic orbit paths, body labels, screen-space markers, focus navigation, moving bodies, and `SimulationClock` integration.
+- ✓ Double-precision camera-relative subtraction before GPU float transport, plus Vulkan validation-layer verification.
+
+NovaCore does **not** yet provide terrain, textures, cubemap materials, atmosphere, oceans, clouds, spacecraft gameplay, colonies, or a completed production DE440 Solar runtime artifact.
+
+## Architecture
 
 ```text
-Official Sources
-    ↓
-NaifEphemerisAdapter
-    ↓
-EphemerisBuilder
-    ↓
-NCPE v2
-    ↓
-Runtime Loader
-    ↓
+Offline astronomy (NAIF/CSPICE)
+            ↓
+          NCPE
+            ↓
 CelestialSystemDefinition
-    ↓
-Simulation
+            ↓
+CelestialSystemEvaluator
+            ↓
+Immutable presentation snapshots
+            ↓
+Planet renderer
+            ↓
+Native Vulkan renderer
 ```
 
-Runtime code never depends on CSPICE, NAIF kernels, network resources, calendars, or the builder. The current NAIF manifest is an explicitly unpinned template; it cannot produce an authoritative dataset until official files are locally verified and pinned.
+Simulation owns celestial truth. Graphics owns presentation resources and never changes body positions, hierarchy, ephemerides, simulation time, or physical radii.
 
-## Implemented Features
+## Current screenshots
 
-- Immutable `CelestialSystemDefinition` runtime authority.
-- Binding-only celestial hierarchy with typed fixed, circular, analytical-Kepler, and sampled ephemeris catalogs.
-- Exact `SimulationInstant` to `CelestialTimeArgument` mapping.
-- Deterministic analytical trajectories, scheduled inertial impulses, and rigid-body attitude evaluation.
-- Flat sampled cubic-Hermite ephemerides with finite coverage and no extrapolation.
-- Deterministic raw-value hashing and immutable reference-frame extraction.
-- Self-describing NCPE v2 artifacts and byte-only runtime reconstruction.
-- Three-way NCPE definition-hash verification: stored, neutral semantic, and reconstructed runtime definition hashes must agree.
-- Offline NCPE builder with a synthetic fixture.
-- Offline NAIF adapter contracts, stable Sol target map, source manifest template, and deterministic parent-relative SI conversion.
-- Double-precision camera-relative Vulkan rendering, reusable meshes, instancing, and analytical orbit visualization.
+The current Solar System overview uses true evaluated distances and physical body radii. Labels and markers are presentation aids; they do not relocate or inflate bodies.
 
-## Engineering Principles
+![NovaCore Solar System overview](docs/images/solar-system-overview.png)
 
-- Deterministic execution from explicit authoritative inputs.
-- Immutable runtime definitions and evaluated snapshots.
-- Offline preprocessing for source-dependent data.
-- Zero-allocation warmed runtime evaluation paths where measured contracts require it.
-- Explicit source, constants, conversion-policy, and artifact provenance.
-- Reproducible generated datasets and stable raw-value hashes.
-- Runtime independence from astronomy libraries and source files.
+## Current Milestone
 
-## Building and Testing
+10A-9B
 
-Windows development uses .NET and the configured native Vulkan build.
+✓ True-distance Solar System visualization
+✓ GPU adaptive planetary rendering
+✓ Interactive camera and body focus
+✓ Deterministic orbit visualization
+
+## Roadmap
+
+Current development:
+
+- Stellar rendering
+- Planet materials
+- Atmosphere
+- Terrain rendering
+
+Future:
+
+- Spacecraft
+- Physics and gameplay
+- Colonies
+
+## Building and testing
+
+Windows development uses .NET, the configured MSVC x64 environment, Ninja/CMake, and Vulkan.
 
 ```powershell
 cmake -S native/NovaCore.Native -B build/native-ninja -G Ninja
 cmake --build build/native-ninja --config Debug
 
 dotnet build NovaCore.sln -c Debug
-
-dotnet run --project tests/NovaCore.Simulation.Tests -c Debug
-dotnet run --project tests/NovaCore.Precision.Tests -c Debug
 dotnet run --project tests/NovaCore.Graphics.Tests -c Debug
-dotnet run --project tests/NovaCore.ReferenceFrames.Tests -c Debug
-dotnet run --project tests/NovaCore.Camera.Tests -c Debug
-dotnet run --project tests/NovaCore.EphemerisBuilder.Tests -c Debug
-dotnet run --project tests/NovaCore.NaifEphemerisAdapter.Tests -c Debug
 ```
+
+The focused Solar sample is `samples/NovaCore.Triangle` with `--scene=sol`. See the engineering documents below for scoped build/test commands and architecture constraints.
 
 ## Documentation
 
 - [Architecture](docs/architecture.md)
-- [Celestial Simulation](docs/celestial-simulation.md)
-- [Sampled Ephemerides](docs/sampled-ephemerides.md)
-- [Ephemeris Dataset Format](docs/ephemeris-dataset-format.md)
-- [Ephemeris Builder](docs/ephemeris-builder.md)
-- [Ephemeris Runtime Loader](docs/ephemeris-runtime-loader.md)
-- [NAIF Source Adapter](docs/naif-source-adapter.md)
-- [Reference Frames](docs/reference-frames.md)
-- [Precision Model](docs/precision-model.md)
-- [Camera](docs/camera.md)
+- [Current engineering state](docs/NOVACORE_CURRENT_STATE.md)
+- [Planetary rendering](docs/planetary-rendering.md)
+- [Celestial simulation](docs/celestial-simulation.md)
+- [Ephemeris dataset format](docs/ephemeris-dataset-format.md)
+- [Ephemeris runtime loader](docs/ephemeris-runtime-loader.md)
+- [NAIF source adapter](docs/naif-source-adapter.md)
 - [Build on Windows](docs/build-windows.md)
-
-## Current Roadmap
-
-Completed:
-
-- 9A-1 — generic celestial-system definitions.
-- 9A-2 — deterministic celestial-system evaluation.
-- 9A-3 — celestial time, ephemeris binding, and sampled-storage contracts.
-- 9A-4B — immutable celestial identity and physical constants.
-- 9A-4C — `SolAnalytical` authored analytical dataset.
-- 9A-4D — deterministic NCPE artifact format and builder.
-- 9A-4E-1 — NCPE v2 runtime reconstruction and hash verification.
-- 9A-4E-2 — official-source adapter design.
-- 9A-4E-3 — NAIF source manifest and offline adapter contracts.
-
-Next:
-
-- 9A-4E-4 — extract bounded real DE440 states through CSPICE in the offline adapter.
-
-NovaCore does not yet include real ephemeris samples, N-body gravity, patched conics, SOIs, asset tooling, an ECS, a scene graph, a runtime dataset registry, or save/replay loading.

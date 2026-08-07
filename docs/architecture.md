@@ -2,6 +2,22 @@
 
 NovaCore is a small managed/native foundation, not a complete game engine. Its current architecture keeps authoritative spatial mathematics in managed C# and Vulkan resource ownership in native C++20.
 
+```text
+NAIF/CSPICE (offline only)
+            ↓
+          NCPE
+            ↓
+CelestialSystemDefinition
+            ↓
+CelestialSystemEvaluator
+            ↓
+Immutable presentation snapshots
+            ↓
+Planet renderer
+            ↓
+Native Vulkan
+```
+
 `NovaCore.Core` contains double-precision spatial primitives and managed hierarchical reference-frame mathematics. `NovaCore.Graphics` owns GPU transport concepts: `EncodedPosition`, `RenderObject`, `MeshHandle`, `RenderBatch`, and `RenderFrameSubmission`. `NovaCore.Interop` declares the narrow C ABI. `NovaCore.Platform` currently supplies logging and a minimal host boundary. `NovaCore.Simulation` owns deterministic time, event topology, and authoritative transaction contracts.
 
 `NovaCore.Simulation.Celestial` contains internal immutable celestial identity, definition, Cartesian epoch-state, trajectory, scheduled-impulse, and celestial-to-frame extraction contracts. `SimulationState` owns its validated fixed celestial store; read-only views are the evaluator boundary.
@@ -26,7 +42,7 @@ Each `CelestialSystemDefinition` also owns exactly one immutable mapping from au
 
 Sampled celestial bodies use a system-owned immutable flat sample block and typed contiguous payload ranges. Their exact mapped rational time is bracketed with allocation-free binary search, then evaluated by cubic Hermite position/velocity interpolation before the existing parent/root composition and atomic publication boundary. Graphics never sees sample storage or interpolation. See [Sampled Ephemerides](sampled-ephemerides.md).
 
-`NovaCore.EphemerisFormat` and the offline `NovaCore.EphemerisBuilder` provide a versioned deterministic artifact contract for future sampled catalogs. They remain outside runtime ownership; a source adapter produces normalized data offline, and a later runtime loader will validate generated artifacts without source-tool dependencies.
+`NovaCore.EphemerisFormat` and the offline `NovaCore.EphemerisBuilder` provide a versioned deterministic artifact contract for sampled catalogs. They remain outside runtime ownership; a source adapter produces normalized data offline, and the runtime loader validates generated artifacts without source-tool dependencies.
 
 `NcpeCelestialSystemLoader` now consumes self-describing NCPE v2 bytes into the existing immutable `CelestialSystemDefinition` contracts. It is byte-only, copies caller data, invokes generic validation, and publishes only when the stored, neutral, and reconstructed-definition hashes agree. Runtime code references the neutral format assembly, never the builder.
 
@@ -36,16 +52,18 @@ Sampled celestial bodies use a system-owned immutable flat sample block and type
 
 `ResolvedRenderSnapshot` in Graphics is an immutable, derived renderer input. It owns a one-time copy of already root-resolved object positions, orientations, scales, mesh handles, and caller-supplied stable render IDs, and may carry one active and one immediately previous derived orbit curve. The snapshot has one opaque root-frame identity, preserves caller order, and contains no frame topology or mutable simulation state; it is explicitly not a future `SimulationSnapshot`. `ResolvedRenderSubmissionBuilder` validates root compatibility with the managed camera root position before atomically filling reusable `RenderFrameSubmission` storage. The celestial curves are sampled upstream from authoritative trajectories, then Graphics converts root-space doubles into camera-relative FP32 line vertices; native Vulkan only draws those submitted orbit-specific strips. The impulse marker uses the existing object path. Warmed submission construction and camera snapshot construction allocate no managed memory.
 
+`PlanetaryPresentationSnapshot` is the parallel immutable renderer input for evaluated celestial bodies. `PlanetaryBodyPresentationProvider` copies stable identity, root-resolved center, physical radius, color, and presentation label data from evaluated authority; graphics cannot mutate its celestial source. The Earth near-field path shares one normalized cube-sphere grid and emits deterministic `(face, level, x, y)` quadtree leaves. GPU selection is presentation-only and retains the CPU selector as a correctness oracle. Distant/detail handoff, labels, markers, and orbit paths consume the same camera-relative presentation data and do not participate in simulation identity.
+
 The `--scene=fixture` triangle sample demonstrates this boundary with a static ECL Star → CCE Planet → CCI Moon → CCF TestVessel hierarchy. Core constructs and resolves the immutable graph and evaluated transforms once at startup. The sample then publishes four root-resolved marker values into one `ResolvedRenderSnapshot`; Graphics receives only that derived transport input. Marker scale, orientation, and the fixture camera are sample-only presentation choices and never alter resolved frame values. Each frame only rebuilds allocation-free camera and submission storage. The scene is static: it performs no propagation, gravity, time advancement, or orbital simulation.
 
 `--scene=fixture-dynamic` keeps the same immutable topology but evaluates complete local-to-parent transform sets from exact sample-controlled `SimulationInstant` values. It resolves upstream, validates a complete candidate `ResolvedRenderSnapshot`, and replaces the sample's current snapshot reference only after success. On candidate failure, the last valid immutable snapshot remains published. This is single-threaded sample code: there is no RenderWorld layer, renderer-owned hierarchy, delta protocol, lock, or queue. Immutable publication allocations are measured separately from zero-allocation camera and frame-submission assembly. `SimulationSnapshot` remains deferred.
 
 Reference-frame definitions are immutable identity metadata. A `ReferenceFrameSnapshot` holds one validated evaluated frame graph for an explicit caller-supplied instant, caches local-to-root transforms and kinematics, and resolves `FramePosition` values to root/ECL `UniversePosition` values. Graphics receives only those root-resolved positions and has no reference-frame semantics.
 
-The native library owns the Win32 window, Vulkan instance, selected GPU, device, surface, swapchain, storage buffer, reusable triangle vertex/index buffers, pipeline, synchronization, and deterministic destruction. No Vulkan handle or C++ ownership-bearing object crosses into managed code.
+The native library owns the Win32 window, Vulkan instance, selected GPU, device, surface, swapchain, buffers, reusable triangle/distant-sphere/planetary-grid meshes, graphics and compute pipelines, synchronization, and deterministic destruction. No Vulkan handle or C++ ownership-bearing object crosses into managed code.
 
-The current sample is single-threaded and uses one frame in flight. Each frame pumps Win32 messages, invokes the managed callback, uploads a contiguous camera/object storage-buffer submission, acquires an image, records indexed instanced draws, submits, and presents. Resize recreates swapchain-dependent resources after in-flight work completes. The sample remains open until its window closes, then reports average frame time and shuts down deterministically.
+The current sample is single-threaded and uses one frame in flight. Each frame pumps Win32 messages, invokes the managed callback, uploads a contiguous camera/object/planetary submission, optionally runs presentation-only planetary compute selection, acquires an image, records indexed draws, submits, and presents. Resize recreates swapchain-dependent resources after in-flight work completes. The sample remains open until its window closes, then reports average frame time and shuts down deterministically.
 
-The camera path is managed: native Win32 input is mapped to a bounded `CameraCommand` span, `FreeCameraController` updates authoritative frame-aware `CameraState`, and `CameraRenderSnapshotBuilder` converts it to `GpuCameraData`. Native code neither controls the camera nor resolves reference frames. The current implementation is Free camera only.
+The camera path is managed: native Win32 input is mapped to a bounded `CameraCommand` span, managed controllers update frame-aware `CameraState`, and `CameraRenderSnapshotBuilder` converts it to `GpuCameraData`. Native code neither controls the camera nor resolves reference frames. The Solar presentation additionally uses a managed focus-orbit camera around an evaluated snapshot body; the focus selection never changes celestial evaluation.
 
-Current limitations include one window, one built-in triangle mesh, one foreground thread, no asset pipeline, no `SimulationSnapshot`, and no celestial-body or spacecraft simulation.
+Current limitations include one window, one foreground thread, no asset pipeline, no `SimulationSnapshot`, no terrain/material/atmosphere pipeline, and no spacecraft gameplay or colony systems. The renderer now has triangle, distant-body, planetary-patch, orbit-line, label, and marker presentation paths.

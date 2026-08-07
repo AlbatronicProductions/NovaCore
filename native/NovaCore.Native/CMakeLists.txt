@@ -41,7 +41,16 @@ add_custom_command(OUTPUT "${SPIRV_DIR}/distant_planet.vert.spv" "${SPIRV_DIR}/d
   COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/distant_planet.vert" -o "${SPIRV_DIR}/distant_planet.vert.spv"
   COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/distant_planet.frag" -o "${SPIRV_DIR}/distant_planet.frag.spv"
   DEPENDS "${SHADER_DIR}/distant_planet.vert" "${SHADER_DIR}/distant_planet.frag")
-add_custom_target(NovaCoreShaders DEPENDS "${SPIRV_DIR}/triangle.vert.spv" "${SPIRV_DIR}/triangle.frag.spv" "${SPIRV_DIR}/orbit.vert.spv" "${SPIRV_DIR}/orbit.frag.spv" "${SPIRV_DIR}/orbit_previous.frag.spv" "${SPIRV_DIR}/body_forward.frag.spv" "${SPIRV_DIR}/sas_target.frag.spv" "${SPIRV_DIR}/planetary.vert.spv" "${SPIRV_DIR}/planetary.frag.spv" "${SPIRV_DIR}/planetary_select.comp.spv" "${SPIRV_DIR}/distant_planet.vert.spv" "${SPIRV_DIR}/distant_planet.frag.spv")
+add_custom_command(OUTPUT "${SPIRV_DIR}/solar_orbit.vert.spv" "${SPIRV_DIR}/solar_orbit.frag.spv" "${SPIRV_DIR}/solar_marker.vert.spv" "${SPIRV_DIR}/solar_marker.frag.spv" "${SPIRV_DIR}/solar_label.vert.spv" "${SPIRV_DIR}/solar_label.frag.spv"
+  COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
+  COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/solar_orbit.vert" -o "${SPIRV_DIR}/solar_orbit.vert.spv"
+  COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/solar_orbit.frag" -o "${SPIRV_DIR}/solar_orbit.frag.spv"
+  COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/solar_marker.vert" -o "${SPIRV_DIR}/solar_marker.vert.spv"
+  COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/solar_marker.frag" -o "${SPIRV_DIR}/solar_marker.frag.spv"
+  COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/solar_label.vert" -o "${SPIRV_DIR}/solar_label.vert.spv"
+  COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/solar_label.frag" -o "${SPIRV_DIR}/solar_label.frag.spv"
+  DEPENDS "${SHADER_DIR}/solar_orbit.vert" "${SHADER_DIR}/solar_orbit.frag" "${SHADER_DIR}/solar_marker.vert" "${SHADER_DIR}/solar_marker.frag" "${SHADER_DIR}/solar_label.vert" "${SHADER_DIR}/solar_label.frag")
+add_custom_target(NovaCoreShaders DEPENDS "${SPIRV_DIR}/triangle.vert.spv" "${SPIRV_DIR}/triangle.frag.spv" "${SPIRV_DIR}/orbit.vert.spv" "${SPIRV_DIR}/orbit.frag.spv" "${SPIRV_DIR}/orbit_previous.frag.spv" "${SPIRV_DIR}/body_forward.frag.spv" "${SPIRV_DIR}/sas_target.frag.spv" "${SPIRV_DIR}/planetary.vert.spv" "${SPIRV_DIR}/planetary.frag.spv" "${SPIRV_DIR}/planetary_select.comp.spv" "${SPIRV_DIR}/distant_planet.vert.spv" "${SPIRV_DIR}/distant_planet.frag.spv" "${SPIRV_DIR}/solar_orbit.vert.spv" "${SPIRV_DIR}/solar_orbit.frag.spv" "${SPIRV_DIR}/solar_marker.vert.spv" "${SPIRV_DIR}/solar_marker.frag.spv" "${SPIRV_DIR}/solar_label.vert.spv" "${SPIRV_DIR}/solar_label.frag.spv")
 
 add_library(NovaCore.Native SHARED NovaCoreNative.cpp NovaCoreNative.h)
 add_dependencies(NovaCore.Native NovaCoreShaders)
