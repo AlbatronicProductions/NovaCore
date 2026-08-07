@@ -41,10 +41,11 @@ internal static class CelestialSystemEvaluator
                     local = new FrameTransform(sampledResult.State.Position, DoubleQuaternion.Identity); velocity = sampledResult.State.Velocity;
                     goto LocalResolved;
                 }
-                CartesianState epochState; SimulationInstant epochSolverTime;
+                CartesianState epochState; SimulationInstant epochSolverTime; var correction = default(AnalyticalKeplerSecularCorrection); var periodic = AnalyticalKeplerPeriodicCorrection.Identity;
                 if (node.TrajectoryModel == CelestialTrajectoryModel.AnalyticalKepler && system.TryGetAnalyticalKepler(node.Ephemeris.PayloadIndex, out var trajectory))
                 {
                     if (system.TryMapTime(trajectory.Epoch, out var epochArgument) != CelestialSystemTimeMappingStatus.Success || !epochArgument.TryToSimulationInstant(domainTicksPerSecond, out epochSolverTime)) return new(CelestialSystemEvaluationStatus.TimeMappingFailure);
+                    if (!system.TryGetAnalyticalCorrection(node.Ephemeris.PayloadIndex, out correction) || !correction.IsValid || !system.TryGetAnalyticalPeriodicCorrection(node.Ephemeris.PayloadIndex, out periodic) || !periodic.IsValid) return new(CelestialSystemEvaluationStatus.InvalidConstants);
                     epochState = trajectory.StateAtEpoch;
                 }
                 else if (node.TrajectoryModel == CelestialTrajectoryModel.CircularOrbit && system.TryGetCircularOrbit(node.Ephemeris.PayloadIndex, out var circular))
@@ -55,10 +56,13 @@ internal static class CelestialSystemEvaluator
                 }
                 else return new(CelestialSystemEvaluationStatus.UnsupportedTrajectoryModel);
                 if (!system.TryGetPhysicalProperties(parent.Id, out var parentProperties) || !double.IsFinite(parentProperties.GravitationalParameter) || parentProperties.GravitationalParameter <= 0d) return new(CelestialSystemEvaluationStatus.InvalidConstants);
-                var propagation = TryEvaluateAnalyticalKepler(epochState, epochSolverTime, requestedSolverTime, parentProperties.GravitationalParameter);
+                var propagationTime = requestedSolverTime;
+                if (!correction.IsIdentity && !AnalyticalKeplerSecularCorrectionEvaluator.TryScaleTime(epochSolverTime, requestedSolverTime, correction, out propagationTime)) return new(CelestialSystemEvaluationStatus.TimeMappingFailure);
+                var propagation = TryEvaluateAnalyticalKepler(epochState, epochSolverTime, propagationTime, parentProperties.GravitationalParameter);
                 if (!propagation.Succeeded) return new(CelestialSystemEvaluationStatus.NumericalFailure);
                 if (!propagation.State.IsFinite) return new(CelestialSystemEvaluationStatus.NonFiniteResult);
-                local = new FrameTransform(propagation.State.Position, DoubleQuaternion.Identity); velocity = propagation.State.Velocity;
+                if (!AnalyticalKeplerSecularCorrectionEvaluator.TryApply(propagation.State, epochState, epochSolverTime, requestedSolverTime, correction, periodic, out var corrected)) return new(CelestialSystemEvaluationStatus.NumericalFailure);
+                local = new FrameTransform(corrected.Position, DoubleQuaternion.Identity); velocity = corrected.Velocity;
             }
         LocalResolved:
             var root = parentId is null ? local : FrameTransform.Compose(stagingRoots[FindParentTraversalIndex(system, index, parentId.Value)], local);

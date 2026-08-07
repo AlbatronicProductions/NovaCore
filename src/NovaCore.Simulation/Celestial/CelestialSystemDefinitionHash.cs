@@ -24,7 +24,27 @@ internal static class CelestialSystemDefinitionHash
         hash = Mix(hash, (ulong)definition.CircularOrbitCount);
         for (var index = 0; index < definition.CircularOrbitCount; index++) { var value = definition.GetCircularOrbit(index); hash = Mix(hash, (ulong)value.EpochDomainTicks); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(value.Radius)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(value.InitialPhaseRadians)); HashQuaternion(ref hash, value.PlaneOrientation); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(value.CentralGravitationalParameter)); }
         hash = Mix(hash, (ulong)definition.AnalyticalKeplerCount);
-        for (var index = 0; index < definition.AnalyticalKeplerCount; index++) { var value = definition.GetAnalyticalKepler(index); hash = Mix(hash, value.CentralBody.Value); hash = Mix(hash, (ulong)value.Epoch.Ticks); HashVector(ref hash, value.StateAtEpoch.Position); HashVector(ref hash, value.StateAtEpoch.Velocity); hash = Mix(hash, (ulong)value.Model); }
+        for (var index = 0; index < definition.AnalyticalKeplerCount; index++)
+        {
+            var value = definition.GetAnalyticalKepler(index); hash = Mix(hash, value.CentralBody.Value); hash = Mix(hash, (ulong)value.Epoch.Ticks); HashVector(ref hash, value.StateAtEpoch.Position); HashVector(ref hash, value.StateAtEpoch.Velocity); hash = Mix(hash, (ulong)value.Model);
+            var correction = definition.GetAnalyticalCorrection(index);
+            if (!correction.IsIdentity)
+            {
+                hash = Mix(hash, 0x534543554C415231UL); hash = Mix(hash, (ulong)index); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(correction.TimeScaleDelta)); HashVector(ref hash, correction.ReferencePlaneAngularVelocity); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(correction.PeriapsisRateRadiansPerSecond));
+            }
+            var periodic = definition.GetAnalyticalPeriodicCorrection(index);
+            if (!periodic.IsIdentity)
+            {
+                hash = Mix(hash, 0x504552494F443031UL); hash = Mix(hash, (ulong)index); hash = Mix(hash, (ulong)periodic.Count);
+                for (var termIndex = 0; termIndex < periodic.Count; termIndex++)
+                {
+                    var term = periodic.GetTerm(termIndex);
+                    hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(term.AngularFrequencyRadiansPerSecond));
+                    hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(term.RadialSineAmplitudeMetres)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(term.RadialCosineAmplitudeMetres));
+                    hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(term.PhaseSineAmplitudeRadians)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(term.PhaseCosineAmplitudeRadians));
+                }
+            }
+        }
         hash = Mix(hash, (ulong)definition.SampledEphemerisCount);
         for (var index = 0; index < definition.SampledEphemerisCount; index++) { var value = definition.GetSampledEphemeris(index); hash = Mix(hash, value.Domain.Value); hash = Mix(hash, (ulong)value.FirstSampleIndex); hash = Mix(hash, (ulong)value.SampleCount); hash = Mix(hash, (ulong)value.InterpolationModel); hash = Mix(hash, (ulong)value.SupportedStartDomainTick); hash = Mix(hash, (ulong)value.SupportedEndDomainTick); }
         hash = Mix(hash, (ulong)definition.SampleCount);

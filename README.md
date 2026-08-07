@@ -2,7 +2,7 @@
 
 NovaCore is a deterministic space simulation engine featuring a C# managed core, a native Vulkan renderer, and a high-precision camera-relative architecture for seamless planetary and Solar System visualization.
 
-NovaCore is designed around one core principle: simulation owns truth, rendering owns presentation.
+NovaCore is designed around one core principle: **simulation owns truth; rendering owns presentation.**
 
 Celestial mechanics, reference frames, and time remain authoritative in the simulation. The renderer consumes immutable presentation snapshots, allowing GPU rendering, visualization, and future graphical improvements without compromising deterministic simulation.
 
@@ -11,35 +11,46 @@ Celestial mechanics, reference frames, and time remain authoritative in the simu
 - ✓ Deterministic celestial simulation with immutable definitions and exact simulation time.
 - ✓ Immutable runtime architecture: evaluation publishes derived presentation snapshots; graphics consumes them.
 - ✓ NCPE v2 artifact format, byte-only runtime reconstruction, and deterministic hash verification.
-- ✓ Offline NAIF/CSPICE adapter foundation; runtime assemblies do not depend on CSPICE, kernels, network access, or the builder.
+- ✓ DE440-validated compact analytical Solar runtime (`SolCompact-DE440Validated-v3`) with deterministic lunar secular and bounded periodic corrections; DE440/CSPICE remains an offline validation oracle rather than a runtime dependency.
+- ✓ CSPICE/kernel-free, zero-allocation runtime celestial evaluation, measured below 25 µs for all ten Solar bodies on the current development machine.
+- ✓ Deterministic arbitrary-time evaluation and 50,000× time-warp validation.
 - ✓ GPU-driven adaptive cube-sphere planetary rendering with CPU-reference and CPU/GPU parity validation.
 - ✓ Crack-safe mixed-level planetary LOD through deterministic neighbor balancing and edge-stitch metadata.
 - ✓ Distant/detail planetary handoff using shared physical radius and camera-relative center authority.
-- ✓ Evaluated `SolAnalytical` Solar presentation for Sun, Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn, Uranus, and Neptune.
-- ✓ Deterministic orbit paths, body labels, screen-space markers, focus navigation, moving bodies, and `SimulationClock` integration.
+- ✓ Evaluated `SolAnalytical` presentation for Sun, Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn, Uranus, and Neptune.
+- ✓ Orbit paths and body motion use the same `CelestialSystemEvaluator` authority, with deterministic labels, markers, focus navigation, and `SimulationClock` integration.
 - ✓ Double-precision camera-relative subtraction before GPU float transport, plus Vulkan validation-layer verification.
 
-NovaCore does **not** yet provide terrain, textures, cubemap materials, atmosphere, oceans, clouds, spacecraft gameplay, colonies, or a completed production DE440 Solar runtime artifact.
+`SolCompact-DE440Validated-v3` is currently sufficient for Solar presentation, time warp, and approximate translunar gameplay. It is not DE440 playback or a precision lunar-navigation ephemeris, and it is not intended as the precision truth for lunar orbit insertion, close lunar navigation, or precision long-horizon targeting.
+
+NovaCore does **not** yet provide terrain, textures, cubemap materials, atmosphere, oceans, clouds, spacecraft gameplay, colonies, or a higher-fidelity lunar ephemeris for measured precision-navigation requirements.
 
 ## Architecture
 
 ```text
-Offline astronomy (NAIF/CSPICE)
+Offline
+JPL/NAIF DE440
             ↓
-          NCPE
+CSPICE validation oracle
             ↓
-CelestialSystemDefinition
+Compact, versioned Solar definitions
+
+Runtime
+SimulationClock
             ↓
 CelestialSystemEvaluator
             ↓
+Parent-relative / reference-frame resolution
+            ↓
 Immutable presentation snapshots
             ↓
-Planet renderer
-            ↓
-Native Vulkan renderer
+Vulkan renderer
+
+Exceptional future fidelity path
+Measured requirement → SampledHermite / Chebyshev
 ```
 
-Simulation owns celestial truth. Graphics owns presentation resources and never changes body positions, hierarchy, ephemerides, simulation time, or physical radii.
+High-authority astronomy validates compact, deterministic runtime models offline; the runtime never loads CSPICE or DE440 kernels. Simulation owns celestial truth. Graphics owns presentation resources and never changes body positions, hierarchy, ephemerides, simulation time, or physical radii. SampledHermite and Chebyshev remain exceptional future fidelity layers, used only where measured requirements justify them rather than as the normal Solar runtime.
 
 ## Current screenshots
 
@@ -49,27 +60,29 @@ The current Solar System overview uses true evaluated distances and physical bod
 
 ## Current Milestone
 
-10A-9B
+9A-4F-2 / 10A-9B
 
 ✓ True-distance Solar System visualization
+✓ DE440-validated compact analytical Solar runtime
 ✓ GPU adaptive planetary rendering
 ✓ Interactive camera and body focus
 ✓ Deterministic orbit visualization
 
 ## Roadmap
 
-Current development:
+Near-term visual work:
 
-- Stellar rendering
+- Stellar/Sun presentation
 - Planet materials
 - Atmosphere
 - Terrain rendering
 
-Future:
+Future spacecraft and navigation foundation:
 
-- Spacecraft
-- Physics and gameplay
-- Colonies
+- Local/floating reference-frame transitions where required
+- SOI / patched-conic transition policy
+- Spacecraft force/torque dynamics
+- Higher-fidelity lunar ephemeris if measured gameplay accuracy requires it
 
 ## Building and testing
 

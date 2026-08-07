@@ -22,11 +22,13 @@ The renderer shares one normalized 16×16 cube-sphere grid. Near-field patches u
 
 ## Current milestone
 
-Milestone 10A-9B is complete in the working tree: true-distance SolAnalytical Solar visualization, focus navigation, moving bodies, deterministic orbit paths/labels/markers, label collision rejection, and extreme-range infinite-far projection correction. The Solar overview remains capped at 100 AU and resets at 45 AU. Validate that work with the focused Graphics tests, native Debug x64 build under `vcvars64`, the Earth CPU/GPU parity sample, the triangle sample, and `git diff --check`.
+Milestone 9A-4F-2 and the 10A-9B rendering baseline are complete in the working tree. `SolCompact-DE440Validated-v3` preserves the v1 DE440-grounded ET0 seeds and v2 mean/node/periapsis correction, adding a generic immutable bounded-periodic catalog. The Moon uses seven distinct frequencies containing four radial and four phase series; all other analytical bodies use identity entries. Fixed-report Moon maximum/RMS position is `34.077 / 10.243 Mm`, velocity is `76.297 / 32.262 m/s`, and maximum separation error is `8.918 Mm`. Definition hash is `0x493FE8B1E867110F`; residual hash is `0xD5E2E00FF5F1C2C2`. Runtime stays below 25 µs for all ten bodies and allocates zero warmed bytes. DE440/CSPICE remains offline-only. The fixed Sun and omitted EMB are explicit compact-runtime policies.
+
+The true-distance Solar scene retains focus navigation, moving bodies, deterministic orbit paths/labels/markers, label collision rejection, and extreme-range infinite-far projection correction. Orbit paths are now sampled from the current simulation instant through the same compact evaluator; this replaces the visibly stale ET0 path policy without a Moon renderer branch. The overview remains capped at 100 AU and resets at 45 AU.
 
 ## Recommended next milestone
 
-**10A-10 — stellar presentation foundation.** Add a presentation-only Sun/stellar treatment that consumes the existing immutable Solar snapshot and camera-relative transport. Do not introduce physical lighting authority, alter celestial evaluation, or begin terrain/material work in the same slice.
+**Spacecraft-navigation foundation with an explicit fidelity policy.** Treat Sol v3 as celestial context for launch-to-LEO and as an approximate first translunar-transfer authority, but not as precision lunar-orbit-insertion or close-navigation truth. Before those regimes, state the admissible position/separation budget and add an exceptional offline-derived lunar Chebyshev or `SampledHermite` layer if required. Active spacecraft remain a separate dynamics authority. If presentation remains the priority, 10A-10 stellar treatment is still independent and consumes the existing immutable Solar snapshot.
 
 ## Recommended models
 

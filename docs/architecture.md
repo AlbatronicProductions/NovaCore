@@ -3,9 +3,9 @@
 NovaCore is a small managed/native foundation, not a complete game engine. Its current architecture keeps authoritative spatial mathematics in managed C# and Vulkan resource ownership in native C++20.
 
 ```text
-NAIF/CSPICE (offline only)
-            ↓
-          NCPE
+DE440/CSPICE (offline validation oracle only)
+            ↓ residual measurements / offline parameter derivation
+Compact authored definitions or NCPE artifacts
             ↓
 CelestialSystemDefinition
             ↓
@@ -46,7 +46,11 @@ Sampled celestial bodies use a system-owned immutable flat sample block and type
 
 `NcpeCelestialSystemLoader` now consumes self-describing NCPE v2 bytes into the existing immutable `CelestialSystemDefinition` contracts. It is byte-only, copies caller data, invokes generic validation, and publishes only when the stored, neutral, and reconstructed-definition hashes agree. Runtime code references the neutral format assembly, never the builder.
 
-`SolAnalytical` is an authored consumer of this same generic contract: its body catalog supplies stable Solar-System identities and physical constants; hierarchy nodes only bind those bodies to fixed or analytical-Kepler payloads. It is Sun-rooted with an Earth-relative Moon, maps the J2000-equivalent epoch to `SimulationInstant.Zero`, and uses a finite ±500-Julian-year engine coverage interval. The generic evaluator composes bounded universal-variable analytical evaluations when a requested authored interval exceeds the propagator’s individual conditioning bound; no Solar-System branch, new Kepler solver, or geocentric physics hierarchy is introduced. See [SolAnalytical](sol-analytical.md).
+`SolCompact-DE440Validated-v3` is an authored consumer of this same generic contract: its body catalog supplies stable Solar-System identities and physical constants; hierarchy nodes only bind those bodies to fixed or analytical-Kepler payloads. Its ET0 osculating seeds were derived offline from pinned DE440 geometric J2000 states. It is Sun-rooted with an Earth-relative Moon, maps J2000/ET 0 to `SimulationInstant.Zero`, and uses a finite ±500-Julian-year engine coverage interval. The generic evaluator composes bounded universal-variable analytical evaluations when a requested authored interval exceeds the propagator’s individual conditioning bound; no Solar-System branch, new Kepler solver, geocentric physics hierarchy, kernel access, or source adapter is introduced. The fixed-Sun and omitted-EMB hierarchy are explicit compact-runtime policies whose DE440 consequences are measured by offline tests. See [SolAnalytical](sol-analytical.md).
+
+Authored analytical catalogs may carry one parallel immutable `AnalyticalKeplerSecularCorrection` and one immutable `AnalyticalKeplerPeriodicCorrection` per trajectory. The zero secular value and empty periodic entry are identities. Secular values contain only a mean-anomaly time-scale delta, a fixed reference-plane angular-velocity vector, and an apsidal rate. Periodic entries are copied at construction, capped at eight terms, and contain a frequency plus bounded radial and in-plane phase amplitudes. `CelestialSystemEvaluator` still runs the existing universal-variable solver, applies generic phase/secular transforms and radial displacement with direct analytical velocity derivatives, then performs normal parent/root composition. Sol v3 configures seven periodic frequencies for the Moon; rendering and the evaluator have no body-specific branch.
+
+NCPE v2 remains the deterministic artifact contract for fixed and sampled celestial definitions. It does not currently encode an analytical-Kepler payload, so the compact Solar model remains a versioned authored definition rather than being forced into sampled storage or an unjustified NCPE v3. A future data-driven analytical-payload extension must preserve neutral hashing and the existing runtime/source-tool separation.
 
 `--scene=celestial` is the first visible analytical integration. It advances only through the existing host-duration debt and canonical-event orchestration, extracts a complete transform candidate at `SimulationClock.CurrentTime`, resolves it, and publishes a complete immutable `ResolvedRenderSnapshot` only after success. The fixture retains the previous snapshot on controlled failure. Its fixed metres-to-display-units conversion, marker scale, and camera are sample presentation only; authoritative celestial and frame values remain SI doubles. Graphics still receives only root-resolved derived data.
 
@@ -66,4 +70,4 @@ The current sample is single-threaded and uses one frame in flight. Each frame p
 
 The camera path is managed: native Win32 input is mapped to a bounded `CameraCommand` span, managed controllers update frame-aware `CameraState`, and `CameraRenderSnapshotBuilder` converts it to `GpuCameraData`. Native code neither controls the camera nor resolves reference frames. The Solar presentation additionally uses a managed focus-orbit camera around an evaluated snapshot body; the focus selection never changes celestial evaluation.
 
-Current limitations include one window, one foreground thread, no asset pipeline, no `SimulationSnapshot`, no terrain/material/atmosphere pipeline, and no spacecraft gameplay or colony systems. The renderer now has triangle, distant-body, planetary-patch, orbit-line, label, and marker presentation paths.
+Current limitations include one window, one foreground thread, no asset pipeline, no `SimulationSnapshot`, no terrain/material/atmosphere pipeline, and no spacecraft gameplay or colony systems. Celestial analytical/sample authority is intentionally separate from future active-spacecraft force/torque and rigid-body authority; background craft may later use a cheaper orbital representation. The renderer now has triangle, distant-body, planetary-patch, orbit-line, label, and marker presentation paths.

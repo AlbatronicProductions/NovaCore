@@ -15,6 +15,17 @@ internal static class OfficialNaifBundle
         new("cspice.zip",36519028,"98D60B814B412FA55294AEAAEB7DAB46D849CC87A8B709FFE835D08DE17625DC","naif.jpl.nasa.gov/pub/naif/toolkit/C/PC_Windows_VisualC_64bit/packages/cspice.zip","N0067")
     ];
     internal static bool Verify(string directory) { foreach(var file in Required) { var path=Path.Combine(directory,file.CanonicalName); if(!File.Exists(path)||new FileInfo(path).Length!=file.Bytes||!Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(path))).Equals(file.Sha256,StringComparison.Ordinal)) return false; } return true; }
+    internal static bool VerifyRepositoryRoot(string root)
+    {
+        foreach(var file in Required)
+        {
+            var path=Path.Combine(root,"external","naif",file.CanonicalName=="cspice.zip"?"toolkit":"kernels",file.CanonicalName);
+            if(!File.Exists(path)||new FileInfo(path).Length!=file.Bytes)return false;
+            using var stream=File.OpenRead(path);
+            if(!Convert.ToHexString(SHA256.HashData(stream)).Equals(file.Sha256,StringComparison.Ordinal))return false;
+        }
+        return true;
+    }
 }
 
 [StructLayout(LayoutKind.Sequential)] internal struct CspiceStateKm { internal double X,Y,Z,Vx,Vy,Vz; }

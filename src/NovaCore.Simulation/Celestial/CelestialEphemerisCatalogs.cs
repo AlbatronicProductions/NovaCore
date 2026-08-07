@@ -36,3 +36,42 @@ internal readonly record struct CircularOrbitEphemerisPayload(long EpochDomainTi
         return new CartesianState(PlaneOrientation.Rotate(localPosition), PlaneOrientation.Rotate(localVelocity));
     }
 }
+
+/// <summary>Optional compact secular evolution applied around an analytical two-body seed.</summary>
+internal readonly record struct AnalyticalKeplerSecularCorrection(double TimeScaleDelta, Double3 ReferencePlaneAngularVelocity, double PeriapsisRateRadiansPerSecond)
+{
+    internal double TimeScale => 1d + TimeScaleDelta;
+    internal bool IsIdentity => TimeScaleDelta == 0d && ReferencePlaneAngularVelocity == Double3.Zero && PeriapsisRateRadiansPerSecond == 0d;
+    internal bool IsValid => double.IsFinite(TimeScaleDelta) && TimeScale > 0d && ReferencePlaneAngularVelocity.IsFinite && double.IsFinite(PeriapsisRateRadiansPerSecond);
+}
+
+/// <summary>One bounded epoch-relative periodic radial/in-plane correction term.</summary>
+internal readonly record struct AnalyticalKeplerPeriodicTerm(
+    double AngularFrequencyRadiansPerSecond,
+    double RadialSineAmplitudeMetres,
+    double RadialCosineAmplitudeMetres,
+    double PhaseSineAmplitudeRadians,
+    double PhaseCosineAmplitudeRadians)
+{
+    internal bool IsValid => double.IsFinite(AngularFrequencyRadiansPerSecond) && AngularFrequencyRadiansPerSecond > 0d &&
+        double.IsFinite(RadialSineAmplitudeMetres) && double.IsFinite(RadialCosineAmplitudeMetres) &&
+        double.IsFinite(PhaseSineAmplitudeRadians) && double.IsFinite(PhaseCosineAmplitudeRadians);
+}
+
+/// <summary>Small immutable periodic catalog entry parallel to one analytical trajectory.</summary>
+internal sealed class AnalyticalKeplerPeriodicCorrection
+{
+    private readonly AnalyticalKeplerPeriodicTerm[] _terms;
+
+    internal AnalyticalKeplerPeriodicCorrection(ReadOnlySpan<AnalyticalKeplerPeriodicTerm> terms)
+    {
+        if (terms.Length > 8) throw new ArgumentOutOfRangeException(nameof(terms));
+        _terms = terms.ToArray();
+    }
+
+    internal static AnalyticalKeplerPeriodicCorrection Identity { get; } = new([]);
+    internal int Count => _terms.Length;
+    internal bool IsIdentity => _terms.Length == 0;
+    internal bool IsValid { get { for (var index = 0; index < _terms.Length; index++) if (!_terms[index].IsValid) return false; return true; } }
+    internal AnalyticalKeplerPeriodicTerm GetTerm(int index) => _terms[index];
+}

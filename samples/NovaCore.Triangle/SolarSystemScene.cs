@@ -94,6 +94,9 @@ internal sealed class SolarSystemScene
     private readonly FrameTransform[] _stagingRoots;
     private readonly EvaluatedPlanetaryBody[] _bodyStaging;
     private readonly Double3[] _rootOrbitSamples;
+    private readonly Double3[] _orbitSampleStaging;
+    private readonly int[] _orbitTraversalIndices;
+    private readonly double[] _orbitPeriods;
     private readonly SimulationClock _clock;
     private readonly bool[] _visibleLabels = new bool[BodyOrder.Length];
     private readonly bool[] _labelBoundsValid = new bool[BodyOrder.Length];
@@ -110,12 +113,17 @@ internal sealed class SolarSystemScene
         CelestialSystemDefinition system,
         ReferenceFrameId root,
         int[] traversalIndices,
-        Double3[] rootOrbitSamples)
+        Double3[] rootOrbitSamples,
+        int[] orbitTraversalIndices,
+        double[] orbitPeriods)
     {
         _system = system;
         _root = root;
         _traversalIndices = traversalIndices;
         _rootOrbitSamples = rootOrbitSamples;
+        _orbitSampleStaging = new Double3[rootOrbitSamples.Length];
+        _orbitTraversalIndices = orbitTraversalIndices;
+        _orbitPeriods = orbitPeriods;
         _evaluations = new ReferenceFrameEvaluation[system.Count];
         _roots = new FrameTransform[system.Count];
         _staging = new ReferenceFrameEvaluation[system.Count];
@@ -160,8 +168,8 @@ internal sealed class SolarSystemScene
             }
         }
 
-        if (!TryBuildRootOrbitSamples(system, out var rootOrbitSamples, out error)) return false;
-        var candidate = new SolarSystemScene(system, root, traversalIndices, rootOrbitSamples);
+        if (!TryBuildRootOrbitSamples(system, out var rootOrbitSamples, out var orbitTraversalIndices, out var orbitPeriods, out error)) return false;
+        var candidate = new SolarSystemScene(system, root, traversalIndices, rootOrbitSamples, orbitTraversalIndices, orbitPeriods);
         if (!candidate.TryPublishAt(SimulationInstant.Zero, out error)) return false;
         scene = candidate;
         error = string.Empty;
@@ -390,11 +398,13 @@ internal sealed class SolarSystemScene
                 id.Value, new UniversePosition(_roots[_traversalIndices[index]].Translation, _root),
                 catalog.PhysicalProperties.MeanRadius, Colors[index], catalog.Identity.DisplayName, true);
         }
+        if (!TrySampleRootOrbits(time, _orbitSampleStaging, out error)) return false;
         if (!PlanetaryBodyPresentationProvider.TryCreateSnapshot(_bodyStaging, out var candidate) || candidate is null)
         {
             error = "Solar presentation publication failed.";
             return false;
         }
+        _orbitSampleStaging.CopyTo(_rootOrbitSamples, 0);
         Presentation = candidate;
         error = string.Empty;
         return true;
@@ -425,11 +435,11 @@ internal sealed class SolarSystemScene
         }
     }
 
-    private static bool TryBuildRootOrbitSamples(CelestialSystemDefinition system, out Double3[] samples, out string error)
+    private static bool TryBuildRootOrbitSamples(CelestialSystemDefinition system, out Double3[] samples, out int[] traversal, out double[] periods, out string error)
     {
         samples = new Double3[OrbitPathCount * OrbitSampleCount];
-        var traversal = new int[OrbitPathCount];
-        var periods = new double[OrbitPathCount];
+        traversal = new int[OrbitPathCount];
+        periods = new double[OrbitPathCount];
         for (var path = 0; path < OrbitPathCount; path++)
         {
             var bodyId = new CelestialBodyId(BodyOrder[path + 1]);
@@ -464,6 +474,23 @@ internal sealed class SolarSystemScene
             var result = CelestialSystemEvaluator.TryEvaluateSystem(system, time, evaluations, roots, staging, stagingRoots);
             if (!result.Succeeded) { error = $"Solar orbit evaluation failed: {result.Status}"; return false; }
             samples[path * OrbitSampleCount + sample] = roots[traversal[path]].Translation;
+        }
+        error = string.Empty;
+        return true;
+    }
+
+    private bool TrySampleRootOrbits(SimulationInstant start, Span<Double3> destination, out string error)
+    {
+        if (destination.Length < OrbitPathCount * OrbitSampleCount) { error = "Solar orbit sample destination is too small."; return false; }
+        for (var sample = 0; sample < OrbitSampleCount; sample++)
+        for (var path = 0; path < OrbitPathCount; path++)
+        {
+            SimulationInstant time;
+            try { time = start + SimulationDuration.FromSecondsRounded(_orbitPeriods[path] * sample / OrbitSegmentCount); }
+            catch (OverflowException) { error = "Solar orbit sample time overflow."; return false; }
+            var result = CelestialSystemEvaluator.TryEvaluateSystem(_system, time, _evaluations, _roots, _staging, _stagingRoots);
+            if (!result.Succeeded) { error = $"Solar orbit evaluation failed: {result.Status}"; return false; }
+            destination[path * OrbitSampleCount + sample] = _roots[_orbitTraversalIndices[path]].Translation;
         }
         error = string.Empty;
         return true;

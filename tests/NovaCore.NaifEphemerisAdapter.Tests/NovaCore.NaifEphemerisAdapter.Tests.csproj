@@ -1,1 +1,1 @@
-<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><OutputType>Exe</OutputType></PropertyGroup><ItemGroup><ProjectReference Include="..\..\tools\NovaCore.NaifEphemerisAdapter\NovaCore.NaifEphemerisAdapter.csproj" /></ItemGroup></Project>
+<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><OutputType>Exe</OutputType></PropertyGroup><ItemGroup><ProjectReference Include="..\..\tools\NovaCore.NaifEphemerisAdapter\NovaCore.NaifEphemerisAdapter.csproj" /><ProjectReference Include="..\..\src\NovaCore.Simulation\NovaCore.Simulation.csproj" /></ItemGroup></Project>

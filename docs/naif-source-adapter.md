@@ -1,15 +1,17 @@
 # NAIF source adapter
 
-`NovaCore.NaifEphemerisAdapter` is an offline-only contract boundary. It will eventually use a pinned CSPICE implementation to query geometric J2000 barycentric states relative to the Solar System barycenter, with correction mode `NONE`. It converts km and km/s to SI once, then derives parent-relative states by deterministic child-minus-parent subtraction.
+`NovaCore.NaifEphemerisAdapter` is an offline-only contract boundary. Its pinned CSPICE implementation queries geometric J2000 states with correction mode `NONE`. The compact-Solar oracle first queries canonical states against the Solar System barycenter at one ET, converts km and km/s to SI once, then derives matched parent-relative states by deterministic child-minus-parent subtraction.
 
-It is not referenced by runtime simulation, graphics, samples, or native code. It does not download, discover, or process kernels in this milestone.
+It is not referenced by runtime simulation, graphics, camera, reference-frame, or native projects. It does not download or discover kernels; explicit repository-root inputs are verified against the pinned source manifest before a session is opened.
 
-The planned first source bundle is NAIF `de440.bsp`, `gm_de440.tpc`, `pck00010.tpc`, and `naif0012.tls`, plus a pinned CSPICE binary, target map, and conversion policy. Local paths are invocation-only and never part of source identity.
-
-The current local development bundle is pinned to official DE440 inputs and CSPICE N0067. Local paths remain invocation-only and never contribute to dataset identity.
+The current development bundle is pinned to official NAIF `de440.bsp`, `gm_de440.tpc`, `pck00010.tpc`, and `naif0012.tls`, plus CSPICE N0067, a stable target map, and an explicit conversion policy. Local paths are invocation-only and never contribute to source identity.
 
 ## Current implementation status
 
-Implemented and proven locally: the official CSPICE N0067 static library links with MSVC 19.51; a narrow native C ABI shim is explicitly loaded by the offline adapter; `CspiceSession` owns kernel readiness, clearing, and disposal; CSPICE uses `RETURN` error action with `NULL` output; and a deliberately invalid query captures both SHORT and LONG diagnostics, resets CSPICE, then allows a Sun/SSB ET=0 query in the same session. Runtime projects remain independent of the adapter, shim, CSPICE, and local kernels.
+Implemented and proven locally: the official CSPICE N0067 static library links with MSVC 19.51; a narrow native C ABI shim is explicitly loaded by the offline adapter; `CspiceSession` owns kernel readiness, clearing, and disposal; CSPICE uses `RETURN` error action with `NULL` output; and a deliberately invalid query captures both SHORT and LONG diagnostics, resets CSPICE, then allows a Sun/SSB ET0 query in the same session. The focused compact-Solar harness verifies source hashes, derives deterministic ET0 osculating elements, and reports max/RMS position and velocity residuals at ET0, ±1 day, ±30 days, ±1, ±5, ±10, and ±25 Julian years. Repeated runs require identical residuals and report hashes. Runtime projects remain independent of the adapter, shim, CSPICE, and local kernels.
+
+The lunar-correction harness additionally reports radial, along-track, cross-track, phase, plane, node, periapsis, separation, and velocity errors at ET0, ±1/7/30/90/180 days, and ±1/2/5/10/25 years. Candidate mean-motion, fitted mean-anomaly, node, periapsis, and combined linear-rate models are fitted against deterministic ±10-year reference epochs and compared against separate interleaved/endpoint validation epochs. It emits exact parameters, residual hashes, and before/after epoch rows twice before the selected values may become production authored data.
+
+Milestone 9A-4F-2 extends that offline-only harness with 3,601 two-day residual samples over ±3,600 days, an interleaved held-out grid, deterministic fixed-frequency scans, constrained least squares, and dense five-day horizon checks through ±25 years. It evaluates the compact ladder from one radial term through a bounded radial-plus-phase model. The selected result has four radial and four phase series at seven distinct frequencies, repeats bit-for-bit with held-out hash `0x2831B4B39E68DAB9`, and is copied into `SolCompact-DE440Validated-v3`. No FFT, CSPICE call, kernel, fitted buffer, or source path enters runtime.
 
 Deferred hardening: broaden the lifecycle test matrix, add more exhaustive controlled-failure coverage, expand lifecycle documentation, and rerun the full repository regression suite after final lifecycle changes. Source files and generated native outputs remain under ignored `external/naif/` paths.
