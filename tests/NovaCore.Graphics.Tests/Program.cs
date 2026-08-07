@@ -4,6 +4,7 @@ using NovaCore.Core.Camera;
 using NovaCore.Core.ReferenceFrames;
 using NovaCore.Graphics;
 using NovaCore.Interop;
+using NovaCore.Simulation.Celestial;
 using NovaCore.Simulation.Spacecraft.Guidance;
 using NovaCore.Simulation.Time;
 
@@ -28,6 +29,7 @@ var tests = new (string, Action)[]
     ("Planetary presentation pipeline", PlanetaryPresentationPipelineTest),
     ("Cube-sphere planetary surface", CubeSpherePlanetarySurfaceTest),
     ("Planetary patch topology and ABI", PlanetaryPatchTopologyAndAbiTest),
+    ("SolAnalytical Earth planetary scene", EarthPlanetarySceneTest),
 };
 foreach (var (name, test) in tests) { test(); Console.WriteLine($"PASS {name}"); }
 
@@ -66,6 +68,21 @@ static unsafe void PlanetaryPatchTopologyAndAbiTest()
     var patch=new NativePlanetaryPatch{Face=5,Level=3,X=7,Y=6,CenterX=BitConverter.Int32BitsToSingle(unchecked((int)0x3F800001)),CenterY=2,CenterZ=3,Radius=BitConverter.Int32BitsToSingle(unchecked((int)0x41200001)),ColorA=1};Check(patch.Face==5&&patch.Level==3&&patch.X==7&&patch.Y==6&&BitConverter.SingleToInt32Bits(patch.CenterX)==unchecked((int)0x3F800001)&&BitConverter.SingleToInt32Bits(patch.Radius)==unchecked((int)0x41200001),"planetary patch ABI bit preservation");
     Check(NativeRuntime.ValidatePlanetaryPatches(null,0)==NativeResult.Success,"native zero patch batch");Check(NativeRuntime.ValidatePlanetaryPatches(null,1)==NativeResult.InvalidArgument,"native null nonzero rejected");var pointer=&patch;Check(NativeRuntime.ValidatePlanetaryPatches(pointer,1)==NativeResult.Success,"native valid patch");var batch=stackalloc NativePlanetaryPatch[6];for(uint face=0;face<6;face++){batch[face]=patch;batch[face].Face=face;}Check(NativeRuntime.ValidatePlanetaryPatches(batch,6)==NativeResult.Success,"native six face batch");batch[0].Face=6;Check(NativeRuntime.ValidatePlanetaryPatches(batch,1)==NativeResult.InvalidArgument,"native face rejected");batch[0]=patch;batch[0].Radius=0;Check(NativeRuntime.ValidatePlanetaryPatches(batch,1)==NativeResult.InvalidArgument,"native zero radius rejected");batch[0]=patch;batch[0].Radius=float.NaN;Check(NativeRuntime.ValidatePlanetaryPatches(batch,1)==NativeResult.InvalidArgument,"native nan radius rejected");batch[0]=patch;batch[0].CenterX=float.PositiveInfinity;Check(NativeRuntime.ValidatePlanetaryPatches(batch,1)==NativeResult.InvalidArgument,"native infinite center rejected");batch[0]=patch;batch[0].Level=2;batch[0].X=4;Check(NativeRuntime.ValidatePlanetaryPatches(batch,1)==NativeResult.InvalidArgument,"native level coordinates rejected");
     Console.WriteLine($"Planetary patch topology hash: 0x{topology.DeterministicHash:X16}");
+}
+
+static void EarthPlanetarySceneTest()
+{
+    var root=new ReferenceFrameId(1);Check(EarthPlanetaryScene.TryCreate(root,out var scene,out var error)&&scene is not null,$"Earth planetary scene: {error}");var earthScene=scene!;
+    PlanetRenderProxy publishedEarth=default;var hasEarth=earthScene.Presentation.TryGetBody(SolarSystemBodyIds.Earth.Value,out publishedEarth);Check(earthScene.Presentation.Count==1&&hasEarth,"Earth snapshot publication");var earth=publishedEarth;Check(earth==earthScene.Earth,"Earth proxy identity");
+    Check(SolAnalyticalDefinition.Instance.TryGetBody(SolarSystemBodyIds.Earth,out var catalogEarth)&&earth.RadiusMetres==catalogEarth.PhysicalProperties.MeanRadius&&earth.RadiusMetres==6_371_008.8d,"Earth catalog radius");
+    var distanceFromSun=Math.Sqrt(earth.Position.Value.LengthSquared);Check(distanceFromSun>.9d*SolAnalyticalDefinition.AstronomicalUnitMetres&&distanceFromSun<1.1d*SolAnalyticalDefinition.AstronomicalUnitMetres,"evaluated SolAnalytical Earth position");
+    Check(earth.Color==EarthPlanetaryScene.EarthColor&&earth.Label=="Earth"&&earth.Visible,"Earth presentation properties");
+    Check(earthScene.Patches.Length==6&&earthScene.Patches.Select((patch,index)=>patch.Face==(uint)index&&patch.Level==0&&patch.X==0&&patch.Y==0).All(value=>value),"six Earth root patches");
+    Check(earthScene.Patches.All(patch=>patch.Radius==(float)earth.RadiusMetres&&patch.ColorR==earth.Color.X&&patch.ColorG==earth.Color.Y&&patch.ColorB==earth.Color.Z&&patch.ColorA==1f),"Earth patch radius and color");
+    var camera=new CameraState(new FramePosition(root,Double3.Zero),DoubleQuaternion.Identity,earthScene.Projection,CameraMode.Free);var before=earthScene.Presentation.Bodies.ToArray();Check(earthScene.TryFocus(camera),"Earth focus");var focused=camera.Position.Value;var focusedDistance=Math.Sqrt((focused-earth.Position.Value).LengthSquared);Check(Math.Abs(focusedDistance-earthScene.OrbitDistance)<1e-6d,"Earth focus distance");
+    earthScene.ApplyPresentationInput(camera,new NativeInputState{LookActive=1,MouseDeltaX=100,MouseDeltaY=-50,MouseWheelDetents=1});Check(camera.Position.Value!=focused&&Math.Abs(Math.Sqrt((camera.Position.Value-earth.Position.Value).LengthSquared)-earthScene.OrbitDistance)<1e-6d,"Earth camera orbit");
+    Check(before.SequenceEqual(earthScene.Presentation.Bodies.ToArray()),"Earth focus and orbit do not mutate presentation snapshot");var relative=CubeSphereProjection.CameraRelativeCenter(earth,new UniversePosition(camera.Position.Value,root));Check(earthScene.Patches.All(patch=>patch.CenterX==(float)relative.X&&patch.CenterY==(float)relative.Y&&patch.CenterZ==(float)relative.Z),"Earth camera-relative patch centers");
+    earthScene.ResetPresentationCamera(camera);Check(camera.Orientation==DoubleQuaternion.Identity&&camera.Position.Value==earth.Position.Value+new Double3(0,0,earth.RadiusMetres*EarthPlanetaryScene.InitialOrbitDistanceRadii),"Earth focus reset");
 }
 
 static void CelestialPlayerTorqueControlsTest()
