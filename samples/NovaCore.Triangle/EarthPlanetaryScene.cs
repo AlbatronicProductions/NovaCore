@@ -9,12 +9,20 @@ using NovaCore.Simulation.Time;
 internal sealed class EarthPlanetaryScene
 {
     internal static readonly Float3 EarthColor = new(.08f, .32f, .72f);
-    internal const double InitialOrbitDistanceRadii = 3d;
+    internal const double InitialOrbitDistanceRadii = 20d;
+    internal const int MaximumLod = 5;
+    internal static readonly PlanetaryLodConfiguration LodConfiguration = new(19d, MaximumLod);
     private const double OrbitSensitivity = .002d;
     private readonly PlanetRenderProxy _earth;
+    private PlanetaryPatch[] _activeLeaves = [];
     private double _orbitDistance;
     private double _orbitYawRadians;
     private double _orbitPitchRadians;
+    private int _activePatchCount;
+    private int _minimumActiveLod;
+    private int _maximumActiveLod;
+    private PlanetaryRepresentation _representation;
+    private double _altitudeRadii;
 
     private EarthPlanetaryScene(PlanetaryPresentationSnapshot presentation, in PlanetRenderProxy earth, NativePlanetaryPatch[] patches)
     {
@@ -28,6 +36,12 @@ internal sealed class EarthPlanetaryScene
     internal NativePlanetaryPatch[] Patches { get; }
     internal PlanetRenderProxy Earth => _earth;
     internal double OrbitDistance => _orbitDistance;
+    internal int ActivePatchCount => _activePatchCount;
+    internal int MinimumActiveLod => _minimumActiveLod;
+    internal int MaximumActiveLod => _maximumActiveLod;
+    internal PlanetaryRepresentation Representation => _representation;
+    internal double AltitudeRadii => _altitudeRadii;
+    internal ReadOnlySpan<PlanetaryPatch> ActiveLeaves => _activeLeaves.AsSpan();
     internal CameraProjection Projection => new(Math.PI / 3d, 16d / 9d, Math.Max(1d, _earth.RadiusMetres / 10_000d), _earth.RadiusMetres * 100d);
 
     internal static bool TryCreate(ReferenceFrameId presentationRoot, out EarthPlanetaryScene? scene, out string error)
@@ -56,29 +70,13 @@ internal sealed class EarthPlanetaryScene
         { error = "Earth planetary presentation publication failed."; return false; }
 
         var initialCamera = earth.Position.Value + new Double3(0d, 0d, earth.RadiusMetres * InitialOrbitDistanceRadii);
-        var selection = PlanetaryRepresentationSelector.SelectPatches(earth, initialCamera, new PlanetaryLodConfiguration(4d, 0));
+        var selection = PlanetaryRepresentationSelector.SelectPatches(earth, initialCamera, LodConfiguration);
         if (selection.Representation != PlanetaryRepresentation.NearFieldSurface || selection.Patches.Length != 6)
         { error = "Earth root-patch selection failed."; return false; }
 
-        var patches = new NativePlanetaryPatch[selection.Patches.Length];
-        for (var index = 0; index < patches.Length; index++)
-        {
-            var patch = selection.Patches[index];
-            patches[index] = new NativePlanetaryPatch
-            {
-                Face = (uint)patch.Face,
-                Level = (uint)patch.Level,
-                X = (uint)patch.X,
-                Y = (uint)patch.Y,
-                Radius = (float)earth.RadiusMetres,
-                ColorR = earth.Color.X,
-                ColorG = earth.Color.Y,
-                ColorB = earth.Color.Z,
-                ColorA = 1f,
-            };
-        }
-
+        var patches = new NativePlanetaryPatch[6 * (1 << (2 * MaximumLod))];
         scene = new EarthPlanetaryScene(presentation, earth, patches);
+        scene.UpdatePatchRecords(selection, initialCamera);
         error = string.Empty;
         return true;
     }
@@ -102,7 +100,7 @@ internal sealed class EarthPlanetaryScene
             _orbitDistance = Math.Clamp(
                 _orbitDistance * Math.Pow(1.1d, -input.MouseWheelDetents),
                 _earth.RadiusMetres * 1.05d,
-                _earth.RadiusMetres * 100d);
+                _earth.RadiusMetres * (LodConfiguration.NearFieldAltitudeRadii + 1d));
             changed = true;
         }
         if (input.LookActive != 0 && (input.MouseDeltaX != 0f || input.MouseDeltaY != 0f))
@@ -124,13 +122,52 @@ internal sealed class EarthPlanetaryScene
 
     internal void UpdatePatches(CameraState camera)
     {
-        var center = CubeSphereProjection.CameraRelativeCenter(_earth, new UniversePosition(camera.Position.Value, Presentation.RootFrame));
-        foreach (ref var patch in Patches.AsSpan())
+        UpdatePatchRecords(PlanetaryRepresentationSelector.SelectPatches(_earth, camera.Position.Value, LodConfiguration), camera.Position.Value);
+    }
+
+    private void UpdatePatchRecords(in PlanetaryLodSelection selection, in Double3 cameraRootPosition)
+    {
+        _representation = selection.Representation;
+        _altitudeRadii = (Math.Sqrt((cameraRootPosition - _earth.Position.Value).LengthSquared) - _earth.RadiusMetres) / _earth.RadiusMetres;
+        _activeLeaves = selection.Patches;
+        _activePatchCount = selection.Patches.Length;
+        _minimumActiveLod = _activePatchCount == 0 ? 0 : selection.Patches.Min(patch => patch.Level);
+        _maximumActiveLod = _activePatchCount == 0 ? 0 : selection.Patches.Max(patch => patch.Level);
+        if (_activePatchCount > Patches.Length) throw new InvalidOperationException("Earth patch capacity exceeded.");
+        var center = CubeSphereProjection.CameraRelativeCenter(_earth, new UniversePosition(cameraRootPosition, Presentation.RootFrame));
+        for (var index = 0; index < _activePatchCount; index++)
         {
+            var leaf = selection.Patches[index];
+            ref var patch = ref Patches[index];
+            var color = DebugColor(leaf);
+            patch.Face = (uint)leaf.Face;
+            patch.Level = (uint)leaf.Level;
+            patch.X = (uint)leaf.X;
+            patch.Y = (uint)leaf.Y;
             patch.CenterX = (float)center.X;
             patch.CenterY = (float)center.Y;
             patch.CenterZ = (float)center.Z;
+            patch.Radius = (float)_earth.RadiusMetres;
+            patch.ColorR = color.X;
+            patch.ColorG = color.Y;
+            patch.ColorB = color.Z;
+            patch.ColorA = 1f;
         }
+    }
+
+    private static Float3 DebugColor(in PlanetaryPatch patch)
+    {
+        var baseColor = patch.Face switch
+        {
+            CubeSphereFace.PositiveX => new Float3(.16f, .42f, .92f),
+            CubeSphereFace.NegativeX => new Float3(.10f, .68f, .88f),
+            CubeSphereFace.PositiveY => new Float3(.20f, .82f, .45f),
+            CubeSphereFace.NegativeY => new Float3(.08f, .48f, .28f),
+            CubeSphereFace.PositiveZ => new Float3(.22f, .34f, .78f),
+            _ => new Float3(.12f, .24f, .56f),
+        };
+        var brightness = .62f + .06f * patch.Level + (((patch.X ^ patch.Y) & 1) == 0 ? .10f : -.04f);
+        return new Float3(baseColor.X * brightness, baseColor.Y * brightness, baseColor.Z * brightness);
     }
 
     private void ApplyOrbitPose(CameraState camera)

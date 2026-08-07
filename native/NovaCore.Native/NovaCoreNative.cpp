@@ -310,7 +310,6 @@ void Validate(App &a) {
       throw std::runtime_error("invalid render batch");
   }
   if(nc_validate_planetary_patches(s->planetaryPatches,s->planetaryPatchCount)!=NC_SUCCESS)throw std::runtime_error("invalid planetary patch submission");
-  if(a.patchSize&&sizeof(NcPlanetaryPatch)*s->planetaryPatchCount>a.patchSize)throw std::runtime_error("planetary patch submission exceeds initial capacity");
 }
 void Window(App &a) {
   WNDCLASSW wc{.lpfnWndProc = Proc,
@@ -722,6 +721,17 @@ void Swap(App &a) {
             "framebuffer failed");
   }
 }
+void DestroyPatchBuffer(App &a) {
+  if(a.patchMapped)vkUnmapMemory(a.device,a.patchMemory);
+  if(a.patchBuffer)vkDestroyBuffer(a.device,a.patchBuffer,nullptr);
+  if(a.patchMemory)vkFreeMemory(a.device,a.patchMemory,nullptr);
+  a.patchMapped=nullptr;a.patchBuffer={};a.patchMemory={};a.patchSize=0;
+}
+void CreatePatchBuffer(App &a,VkDeviceSize size) {
+  a.patchSize=size;
+  VkBufferCreateInfo pci{VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO};pci.size=a.patchSize;pci.usage=VK_BUFFER_USAGE_STORAGE_BUFFER_BIT;pci.sharingMode=VK_SHARING_MODE_EXCLUSIVE;
+  a.Check(vkCreateBuffer(a.device,&pci,nullptr,&a.patchBuffer),"patch buffer failed");VkMemoryRequirements pr;vkGetBufferMemoryRequirements(a.device,a.patchBuffer,&pr);VkMemoryAllocateInfo pai{VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO};pai.allocationSize=pr.size;pai.memoryTypeIndex=Memory(a,pr.memoryTypeBits,VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT|VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);a.Check(vkAllocateMemory(a.device,&pai,nullptr,&a.patchMemory),"patch memory failed");a.Check(vkBindBufferMemory(a.device,a.patchBuffer,a.patchMemory,0),"patch bind failed");a.Check(vkMapMemory(a.device,a.patchMemory,0,a.patchSize,0,&a.patchMapped),"patch map failed");
+}
 void DestroySubmission(App &a) {
   if (a.mapped)
     vkUnmapMemory(a.device, a.submissionMemory);
@@ -735,10 +745,7 @@ void DestroySubmission(App &a) {
   a.descriptorPool = {};
   a.submissionBuffer = {};
   a.submissionMemory = {};
-  if(a.patchMapped)vkUnmapMemory(a.device,a.patchMemory);
-  if(a.patchBuffer)vkDestroyBuffer(a.device,a.patchBuffer,nullptr);
-  if(a.patchMemory)vkFreeMemory(a.device,a.patchMemory,nullptr);
-  a.patchMapped=nullptr;a.patchBuffer={};a.patchMemory={};a.patchSize=0;
+  DestroyPatchBuffer(a);
   if (a.orbitMapped) vkUnmapMemory(a.device, a.orbitMemory);
   if (a.orbitBuffer) vkDestroyBuffer(a.device, a.orbitBuffer, nullptr);
   if (a.orbitMemory) vkFreeMemory(a.device, a.orbitMemory, nullptr);
@@ -788,9 +795,7 @@ void CreateSubmission(App &a) {
   a.Check(vkMapMemory(a.device, a.submissionMemory, 0, a.submissionSize, 0,
                       &a.mapped),
           "submission map failed");
-  a.patchSize=sizeof(NcPlanetaryPatch)*std::max<uint32_t>(1,a.submission->planetaryPatchCount);
-  VkBufferCreateInfo pci{VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO};pci.size=a.patchSize;pci.usage=VK_BUFFER_USAGE_STORAGE_BUFFER_BIT;pci.sharingMode=VK_SHARING_MODE_EXCLUSIVE;
-  a.Check(vkCreateBuffer(a.device,&pci,nullptr,&a.patchBuffer),"patch buffer failed");VkMemoryRequirements pr;vkGetBufferMemoryRequirements(a.device,a.patchBuffer,&pr);VkMemoryAllocateInfo pai{VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO};pai.allocationSize=pr.size;pai.memoryTypeIndex=Memory(a,pr.memoryTypeBits,VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT|VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);a.Check(vkAllocateMemory(a.device,&pai,nullptr,&a.patchMemory),"patch memory failed");a.Check(vkBindBufferMemory(a.device,a.patchBuffer,a.patchMemory,0),"patch bind failed");a.Check(vkMapMemory(a.device,a.patchMemory,0,a.patchSize,0,&a.patchMapped),"patch map failed");
+  CreatePatchBuffer(a,sizeof(NcPlanetaryPatch)*std::max<uint32_t>(1,a.submission->planetaryPatchCount));
   VkDescriptorPoolSize ps{VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 2};
   VkDescriptorPoolCreateInfo pi{VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO};
   pi.maxSets = 1;
@@ -808,6 +813,16 @@ void CreateSubmission(App &a) {
   VkDescriptorBufferInfo infos[2]{{a.submissionBuffer,0,a.submissionSize},{a.patchBuffer,0,a.patchSize}};
   VkWriteDescriptorSet writes[2]{};for(uint32_t binding=0;binding<2;binding++){writes[binding].sType=VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;writes[binding].dstSet=a.descriptor;writes[binding].dstBinding=binding;writes[binding].descriptorCount=1;writes[binding].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;writes[binding].pBufferInfo=&infos[binding];}
   vkUpdateDescriptorSets(a.device,2,writes,0,nullptr);
+}
+void EnsurePatchCapacity(App &a,uint32_t count) {
+  const auto required=sizeof(NcPlanetaryPatch)*std::max<uint32_t>(1,count);
+  if(required<=a.patchSize)return;
+  vkDeviceWaitIdle(a.device);
+  DestroyPatchBuffer(a);
+  CreatePatchBuffer(a,required);
+  VkDescriptorBufferInfo info{a.patchBuffer,0,a.patchSize};
+  VkWriteDescriptorSet write{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};write.dstSet=a.descriptor;write.dstBinding=1;write.descriptorCount=1;write.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;write.pBufferInfo=&info;
+  vkUpdateDescriptorSets(a.device,1,&write,0,nullptr);
 }
 void Upload(App &a) {
   std::memcpy(a.mapped, &a.submission->camera, sizeof(NcCameraData));
@@ -1068,6 +1083,7 @@ void Update(App &a, float dt) {
                   rising(VK_OEM_PERIOD, a.rateIncreaseWasDown), sasModeKey};
   NcHostEvent e{NC_UPDATE_FRAME, NC_LOG_NONE, nullptr, in, a.submission};
   a.cb(&e, a.cbData);
+  EnsurePatchCapacity(a,a.submission->planetaryPatchCount);
   Validate(a);
   Upload(a);
 }
