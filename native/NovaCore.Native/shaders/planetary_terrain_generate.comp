@@ -1,0 +1,22 @@
+#version 460
+#extension GL_GOOGLE_include_directive : require
+#extension GL_ARB_gpu_shader_fp64 : require
+#include "planet_terrain.glsl"
+
+struct PlanetaryPatch { uvec4 address; vec4 centerRadius; vec4 color; uvec4 transitions; };
+layout(std430,set=0,binding=1) readonly buffer Patches { PlanetaryPatch patches[]; } patchData;
+layout(std430,set=0,binding=2) readonly buffer Input { vec4 cameraHighRadiusHigh; vec4 cameraLowRadiusLow; vec4 thresholds; uvec4 controls; vec4 viewForwardHalfAngle; } inputData;
+layout(std430,set=0,binding=5) readonly buffer Control { uint values[]; } outputData;
+layout(std430,set=0,binding=9) buffer TerrainSamples { vec2 heights[]; } terrainData;
+layout(std430,set=0,binding=10) readonly buffer PatchTerrainSlots { uvec2 values[]; } patchTerrain;
+layout(local_size_x=64,local_size_y=1,local_size_z=1) in;
+
+const uint GRID_VERTICES=289u;
+dvec3 CubeD(uint face,double a,double b){if(face==0u)return dvec3(1,b,-a);if(face==1u)return dvec3(-1,b,a);if(face==2u)return dvec3(a,1,-b);if(face==3u)return dvec3(a,-1,b);if(face==4u)return dvec3(a,b,1);return dvec3(-a,b,-1);}
+dvec3 ProjectD(uvec4 address,dvec2 local){double cells=double(1u<<address.y);dvec2 uv=(dvec2(address.zw)+local)/cells;return normalize(CubeD(address.x,2.0*uv.x-1.0,2.0*uv.y-1.0));}
+
+void main(){
+  uint patchIndex=gl_WorkGroupID.x;if(patchIndex>=outputData.values[1])return;uvec2 mapping=patchTerrain.values[patchIndex];if(mapping.y==0u)return;
+  uvec4 address=patchData.patches[patchIndex].address;
+  for(uint vertex=gl_LocalInvocationID.x;vertex<GRID_VERTICES;vertex+=gl_WorkGroupSize.x){uint x=vertex%17u,y=vertex/17u;dvec3 direction=ProjectD(address,dvec2(x,y)/16.0);float height=float(PlanetTerrainHeightD(direction,24u,double(inputData.thresholds.w)));terrainData.heights[mapping.x*GRID_VERTICES+vertex]=vec2(height);}
+}

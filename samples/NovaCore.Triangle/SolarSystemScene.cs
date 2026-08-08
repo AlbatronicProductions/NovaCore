@@ -363,15 +363,16 @@ internal sealed class SolarSystemScene
     internal NativePlanetaryGpuConstants GpuConstants(CameraState camera)
     {
         var body = FocusedBody;
-        var relative = camera.Position.Value - body.Position.Value;
+        var relative = camera.Position.Value - body.Position.Value;var encoded=EncodedPosition.Encode(relative);var radiusHigh=(float)body.RadiusMetres;var radiusLow=(float)(body.RadiusMetres-radiusHigh);var terrain=body.BodyId==SolarSystemBodyIds.Earth.Value?EarthPlanetaryScene.Terrain:default;var viewForward=camera.Orientation.Rotate(new Double3(0,0,-1)).Normalized();var tanY=Math.Tan(camera.Projection.VerticalFieldOfViewRadians*.5d);var halfAngle=Math.Atan(Math.Sqrt(tanY*tanY+tanY*tanY*camera.Projection.AspectRatio*camera.Projection.AspectRatio));
         return new NativePlanetaryGpuConstants
         {
-            CameraBodyX = (float)relative.X, CameraBodyY = (float)relative.Y, CameraBodyZ = (float)relative.Z,
-            Radius = (float)body.RadiusMetres,
+            CameraBodyHighX=encoded.HighX,CameraBodyHighY=encoded.HighY,CameraBodyHighZ=encoded.HighZ,RadiusHigh=radiusHigh,
+            CameraBodyLowX=encoded.LowX,CameraBodyLowY=encoded.LowY,CameraBodyLowZ=encoded.LowZ,RadiusLow=radiusLow,
             RefinementThreshold = (float)EarthPlanetaryScene.LodConfiguration.MaximumProjectedPatchSpan,
             NearFieldAltitudeRadii = (float)EarthPlanetaryScene.LodConfiguration.NearFieldAltitudeRadii,
-            DetailedAlpha = _blend.DetailedAlpha, MaximumLevel = EarthPlanetaryScene.MaximumLod,
-            OutputCapacity = EarthPlanetaryScene.MaximumPatchCapacity
+            SurfaceAltitudeMetres=(float)(terrain.IsValid?Math.Max(EarthPlanetaryScene.MinimumTerrainClearanceMetres,Math.Sqrt(relative.LengthSquared)-PlanetaryTerrainQuery.SurfaceRadius(body.RadiusMetres,relative.Normalized(),terrain)):Math.Max(0d,Math.Sqrt(relative.LengthSquared)-body.RadiusMetres)),MaximumTerrainHeightMetres=(float)(terrain.IsValid?terrain.MaximumHeightMetres:0d),MaximumLevel = EarthPlanetaryScene.MaximumLod,
+            OutputCapacity = EarthPlanetaryScene.MaximumPatchCapacity,TerrainVersion=terrain.Version,
+            ViewForwardX=(float)viewForward.X,ViewForwardY=(float)viewForward.Y,ViewForwardZ=(float)viewForward.Z,ViewHalfAngleRadians=(float)halfAngle
         };
     }
 

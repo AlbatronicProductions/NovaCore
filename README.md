@@ -124,7 +124,7 @@ NovaCore is still under active development. It does **not** yet provide producti
 
 **Next visual frontier**
 
-Atmosphere and cloud presentation → richer/lawful authored surface detail → terrain and surface-scale rendering → additional planetary effects and polish.
+Atmosphere and cloud presentation → production/lawfully authored surface detail and elevation on the proven surface-scale renderer → additional planetary effects and polish.
 
 **Future flight and navigation**
 

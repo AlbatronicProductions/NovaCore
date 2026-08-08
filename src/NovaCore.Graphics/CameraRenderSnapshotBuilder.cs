@@ -5,16 +5,24 @@ namespace NovaCore.Graphics;
 public static class CameraRenderSnapshotBuilder
 {
     public static bool TryBuild(CameraState state,ReferenceFrameResolver resolver,ReferenceFrameId root,out GpuCameraData data,out UniversePosition rootPosition,out DoubleQuaternion rootOrientation)
-        => TryBuild(state,resolver,root,false,out data,out rootPosition,out rootOrientation);
+        => TryBuild(state,resolver,root,false,false,out data,out rootPosition,out rootOrientation);
+
+    /// <summary>Builds a finite Vulkan projection with near=1 and far=0 for reversed-Z depth testing.</summary>
+    public static bool TryBuildReversedZ(CameraState state,ReferenceFrameResolver resolver,ReferenceFrameId root,out GpuCameraData data,out UniversePosition rootPosition,out DoubleQuaternion rootOrientation)
+        => TryBuild(state,resolver,root,false,true,out data,out rootPosition,out rootOrientation);
 
     /// <summary>Builds a standard Vulkan 0..1 depth projection whose far limit is asymptotic.</summary>
     public static bool TryBuildInfiniteFar(CameraState state,ReferenceFrameResolver resolver,ReferenceFrameId root,out GpuCameraData data,out UniversePosition rootPosition,out DoubleQuaternion rootOrientation)
-        => TryBuild(state,resolver,root,true,out data,out rootPosition,out rootOrientation);
+        => TryBuild(state,resolver,root,true,false,out data,out rootPosition,out rootOrientation);
 
-    private static bool TryBuild(CameraState state,ReferenceFrameResolver resolver,ReferenceFrameId root,bool infiniteFar,out GpuCameraData data,out UniversePosition rootPosition,out DoubleQuaternion rootOrientation)
+    /// <summary>Builds an asymptotic infinite-far Vulkan projection with near=1 and infinity=0.</summary>
+    public static bool TryBuildReversedInfiniteFar(CameraState state,ReferenceFrameResolver resolver,ReferenceFrameId root,out GpuCameraData data,out UniversePosition rootPosition,out DoubleQuaternion rootOrientation)
+        => TryBuild(state,resolver,root,true,true,out data,out rootPosition,out rootOrientation);
+
+    private static bool TryBuild(CameraState state,ReferenceFrameResolver resolver,ReferenceFrameId root,bool infiniteFar,bool reversedZ,out GpuCameraData data,out UniversePosition rootPosition,out DoubleQuaternion rootOrientation)
     {
         state.Validate();if(!resolver.TryResolvePosition(state.Position,out rootPosition)||!resolver.TryConvertOrientation(state.Position.Frame,root,state.Orientation,out rootOrientation)){data=default;rootPosition=default;rootOrientation=default;return false;}
-        var q=rootOrientation.Conjugate().Normalized();var p=state.Projection;var f=1d/Math.Tan(p.VerticalFieldOfViewRadians*.5d);var a=f/p.AspectRatio;var za=infiniteFar?-1d:p.FarClip/(p.NearClip-p.FarClip);var zb=infiniteFar?-p.NearClip:p.NearClip*p.FarClip/(p.NearClip-p.FarClip);
+        var q=rootOrientation.Conjugate().Normalized();var p=state.Projection;var f=1d/Math.Tan(p.VerticalFieldOfViewRadians*.5d);var a=f/p.AspectRatio;var za=reversedZ?(infiniteFar?0d:p.NearClip/(p.FarClip-p.NearClip)):(infiniteFar?-1d:p.FarClip/(p.NearClip-p.FarClip));var zb=reversedZ?(infiniteFar?p.NearClip:p.NearClip*p.FarClip/(p.FarClip-p.NearClip)):(infiniteFar?-p.NearClip:p.NearClip*p.FarClip/(p.NearClip-p.FarClip));
         // P * inverse(camera orientation), column-major; camera translation is deliberately absent.
         var r=Rotation(q); data=new GpuCameraData{Position=EncodedPosition.Encode(rootPosition.Value),ViewProjection=Multiply(new Float4x4{C0R0=(float)a,C1R1=(float)-f,C2R2=(float)za,C2R3=-1,C3R2=(float)zb},r)};return true;
     }

@@ -17,7 +17,13 @@ struct NcRenderTransform { float rotation[4]; float scale[4]; };
 struct alignas(16) NcRenderObject { NcEncodedPosition position; NcRenderTransform transform; NcMeshHandle mesh; uint32_t padding[3]; };
 struct NcDrawBatch { NcMeshHandle mesh; uint32_t firstObject; uint32_t objectCount; uint32_t padding; };
 struct NcPlanetaryPatch { uint32_t face, level, x, y; float centerX, centerY, centerZ, radius; float colorR, colorG, colorB, colorA; uint32_t stitchMask, reserved0, reserved1, reserved2; };
-struct alignas(16) NcPlanetaryGpuConstants { float cameraBodyX, cameraBodyY, cameraBodyZ, radius; float refinementThreshold, nearFieldAltitudeRadii, detailedAlpha, padding1; uint32_t maximumLevel, outputCapacity, padding2, padding3; };
+struct alignas(16) NcPlanetaryGpuConstants {
+  float cameraBodyHighX, cameraBodyHighY, cameraBodyHighZ, radiusHigh;
+  float cameraBodyLowX, cameraBodyLowY, cameraBodyLowZ, radiusLow;
+  float refinementThreshold, nearFieldAltitudeRadii, surfaceAltitudeMetres, maximumTerrainHeightMetres;
+  uint32_t maximumLevel, outputCapacity, terrainVersion, terrainFrame;
+  float viewForwardX, viewForwardY, viewForwardZ, viewHalfAngleRadians;
+};
 enum NcPlanetaryMode : uint32_t { NC_PLANETARY_CPU_REFERENCE = 0, NC_PLANETARY_GPU_PRODUCTION = 1, NC_PLANETARY_CPU_GPU_VALIDATION = 2 };
 enum NcPlanetaryRenderRegime : uint32_t { NC_PLANETARY_DISTANT_ONLY = 0, NC_PLANETARY_TRANSITION = 1, NC_PLANETARY_DETAILED_ONLY = 2 };
 enum NcPresentationFocus : uint32_t { NC_PRESENTATION_FOCUS_NONE = 0, NC_PRESENTATION_FOCUS_SUN = 1, NC_PRESENTATION_FOCUS_MERCURY = 2, NC_PRESENTATION_FOCUS_VENUS = 3, NC_PRESENTATION_FOCUS_EARTH = 4, NC_PRESENTATION_FOCUS_MOON = 5, NC_PRESENTATION_FOCUS_MARS = 6, NC_PRESENTATION_FOCUS_JUPITER = 7, NC_PRESENTATION_FOCUS_SATURN = 8, NC_PRESENTATION_FOCUS_URANUS = 9, NC_PRESENTATION_FOCUS_NEPTUNE = 10 };

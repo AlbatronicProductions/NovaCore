@@ -33,7 +33,14 @@ public struct NativeRenderObject { public NativeEncodedPosition Position; public
 public struct NativeDrawBatch { public NativeMeshHandle Mesh; public uint FirstObject, ObjectCount, Padding; }
 /// <summary>64-byte presentation-only planetary patch record; face numbering and edge-mask bits equal Graphics contracts.</summary>
 [StructLayout(LayoutKind.Sequential)] public struct NativePlanetaryPatch { public uint Face,Level,X,Y; public float CenterX,CenterY,CenterZ,Radius; public float ColorR,ColorG,ColorB,ColorA; public uint StitchMask,Reserved0,Reserved1,Reserved2; }
-[StructLayout(LayoutKind.Sequential)] public struct NativePlanetaryGpuConstants { public float CameraBodyX,CameraBodyY,CameraBodyZ,Radius; public float RefinementThreshold,NearFieldAltitudeRadii,DetailedAlpha,Padding1; public uint MaximumLevel,OutputCapacity,Padding2,Padding3; }
+[StructLayout(LayoutKind.Sequential)] public struct NativePlanetaryGpuConstants
+{
+    public float CameraBodyHighX,CameraBodyHighY,CameraBodyHighZ,RadiusHigh;
+    public float CameraBodyLowX,CameraBodyLowY,CameraBodyLowZ,RadiusLow;
+    public float RefinementThreshold,NearFieldAltitudeRadii,SurfaceAltitudeMetres,MaximumTerrainHeightMetres;
+    public uint MaximumLevel,OutputCapacity,TerrainVersion,TerrainFrame;
+    public float ViewForwardX,ViewForwardY,ViewForwardZ,ViewHalfAngleRadians;
+}
 [StructLayout(LayoutKind.Sequential)] public struct NativePlanetaryPresentation
 {
     public float CenterX,CenterY,CenterZ,Radius;
