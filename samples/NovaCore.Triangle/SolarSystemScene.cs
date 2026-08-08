@@ -72,7 +72,8 @@ internal static class SolarOverlayLayout
 internal enum SolarCameraPresentationMode
 {
     Free3D,
-    SolarMap
+    SolarMap,
+    SurfaceLocal
 }
 
 internal readonly record struct SolarScreenRect(double MinX, double MinY, double MaxX, double MaxY)
@@ -134,6 +135,10 @@ internal sealed class SolarSystemScene
     private double _orbitDistance;
     private double _orbitYawRadians;
     private double _orbitPitchRadians;
+    private PlanetarySurfaceFocus? _surfaceFocus;
+    private double _surfaceYawRadians;
+    private double _surfacePitchRadians=-Math.PI/12d;
+    private PlanetaryCameraPresentationMode _surfaceCameraMode;
 
     private SolarSystemScene(
         CelestialSystemDefinition system,
@@ -179,7 +184,9 @@ internal sealed class SolarSystemScene
     internal double OrbitYawRadians => _orbitYawRadians;
     internal double OrbitPitchRadians => _orbitPitchRadians;
     internal SolarCameraPresentationMode CameraPresentationMode { get; private set; }
-    internal CameraProjection Projection => new(Math.PI / 3d, 16d / 9d, 1e6d, SolAnalyticalDefinition.AstronomicalUnitMetres * MaximumOverviewDistanceAu);
+    internal CameraProjection Projection => new(Math.PI / 3d, 16d / 9d, _surfaceCameraMode==PlanetaryCameraPresentationMode.SurfaceLocal?.05d:1e6d, SolAnalyticalDefinition.AstronomicalUnitMetres * MaximumOverviewDistanceAu);
+    internal PlanetaryCameraPresentationMode SurfaceCameraMode=>_surfaceCameraMode;
+    internal PlanetarySurfaceFocus? SurfaceFocus=>_surfaceFocus;
     internal ReadOnlySpan<ulong> VisibleLabelIds => _visibleLabelIds.AsSpan(0, VisibleLabelCount);
     internal ReadOnlySpan<byte> OrbitOpacityBytes => _orbitOpacityBytes;
     internal int VisibleLabelCount { get; private set; }
@@ -247,6 +254,7 @@ internal sealed class SolarSystemScene
         FocusIndex = index;
         _handoff = new PlanetaryRepresentationHandoff(EarthPlanetaryScene.HandoffConfiguration);
         _orbitDistance = FocusFramingDistance(FocusedBody);
+        _surfaceFocus=null;_surfaceYawRadians=0d;_surfacePitchRadians=-Math.PI/12d;_surfaceCameraMode=PlanetaryCameraPresentationMode.Orbital;
         CameraPresentationMode = SolarCameraPresentationMode.Free3D;
         ApplyOrbitPose(camera);
         return true;
@@ -283,16 +291,17 @@ internal sealed class SolarSystemScene
         var cameraChanged = false;
         if (input.MouseWheelDetents != 0)
         {
+            var earthEnvironment=TryFocusedEnvironment(out var environment);var radial=CurrentSurfaceDirection();var surfaceRadius=earthEnvironment?PlanetaryTerrainQuery.VisibleSurfaceRadius(FocusedBody.RadiusMetres,radial,EarthPlanetaryScene.Terrain,environment):FocusedBody.RadiusMetres;var altitude=Math.Max(EarthPlanetaryScene.MinimumTerrainClearanceMetres,_orbitDistance-surfaceRadius);var factor=earthEnvironment?PlanetarySurfaceCameraPolicy.ZoomFactor(altitude):1.1d;
             _orbitDistance = Math.Clamp(
-                _orbitDistance * Math.Pow(1.1d, -input.MouseWheelDetents),
-                FocusedBody.RadiusMetres * 1.05d,
+                surfaceRadius+altitude*Math.Pow(factor, -input.MouseWheelDetents),
+                earthEnvironment?surfaceRadius+EarthPlanetaryScene.MinimumTerrainClearanceMetres:FocusedBody.RadiusMetres*1.05d,
                 SolAnalyticalDefinition.AstronomicalUnitMetres * MaximumOverviewDistanceAu);
             cameraChanged = true;
         }
         if (input.LookActive != 0 && (input.MouseDeltaX != 0f || input.MouseDeltaY != 0f))
         {
-            _orbitYawRadians -= input.MouseDeltaX * OrbitSensitivity;
-            _orbitPitchRadians = Math.Clamp(_orbitPitchRadians - input.MouseDeltaY * OrbitSensitivity, -1.45d, 1.45d);
+            if(_surfaceCameraMode==PlanetaryCameraPresentationMode.Orbital){_orbitYawRadians-=input.MouseDeltaX*OrbitSensitivity;_orbitPitchRadians=Math.Clamp(_orbitPitchRadians-input.MouseDeltaY*OrbitSensitivity,-1.45d,1.45d);}
+            else{_surfaceYawRadians-=input.MouseDeltaX*OrbitSensitivity;_surfacePitchRadians=Math.Clamp(_surfacePitchRadians-input.MouseDeltaY*OrbitSensitivity,PlanetarySurfaceCameraPolicy.MinimumPitchRadians,PlanetarySurfaceCameraPolicy.MaximumPitchRadians);}
             CameraPresentationMode = SolarCameraPresentationMode.Free3D;
             cameraChanged = true;
         }
@@ -332,6 +341,7 @@ internal sealed class SolarSystemScene
         _orbitDistance = SolAnalyticalDefinition.AstronomicalUnitMetres * InitialOverviewDistanceAu;
         _orbitYawRadians = 0d;
         _orbitPitchRadians = SolarMapPitchRadians;
+        _surfaceFocus=null;_surfaceCameraMode=PlanetaryCameraPresentationMode.Orbital;
         CameraPresentationMode = SolarCameraPresentationMode.SolarMap;
         ApplyOrbitPose(camera);
     }
@@ -382,6 +392,12 @@ internal sealed class SolarSystemScene
         if (!lighting.TryEncode(new UniversePosition(camera.Position.Value, Presentation.RootFrame), out var native))
             throw new InvalidOperationException("Solar lighting transport failed.");
         return native;
+    }
+
+    internal NativePlanetaryEnvironment PlanetaryEnvironment(CameraState camera)
+    {
+        if(!TryFocusedEnvironment(out var environment))return default;
+        return environment.Encode(FocusedBody,new UniversePosition(camera.Position.Value,Presentation.RootFrame));
     }
 
     internal bool TryGetLabelBounds(ulong bodyId, out SolarScreenRect bounds)
@@ -559,12 +575,18 @@ internal sealed class SolarSystemScene
         var yaw = DoubleQuaternion.FromAxisAngle(Double3.UnitY, _orbitYawRadians);
         var pitch = DoubleQuaternion.FromAxisAngle(Double3.UnitX, _orbitPitchRadians);
         var orientation = (yaw * pitch).Normalized();
-        var forward = orientation.Rotate(new Double3(0d, 0d, -1d));
-        camera.Orientation = orientation;
-        camera.Position = camera.Position with { Value = FocusedBody.Position.Value - forward * _orbitDistance };
+        var forward = orientation.Rotate(new Double3(0d, 0d, -1d));var radial=_surfaceFocus?.TangentFrame.Direction??-forward;
+        if(TryFocusedEnvironment(out var environment)){var surfaceRadius=PlanetaryTerrainQuery.VisibleSurfaceRadius(FocusedBody.RadiusMetres,radial,EarthPlanetaryScene.Terrain,environment);_orbitDistance=Math.Max(_orbitDistance,surfaceRadius+EarthPlanetaryScene.MinimumTerrainClearanceMetres);var altitude=_orbitDistance-surfaceRadius;_surfaceCameraMode=PlanetarySurfaceCameraPolicy.Mode(altitude);if(_surfaceCameraMode!=PlanetaryCameraPresentationMode.Orbital&&_surfaceFocus is null)_surfaceFocus=PlanetarySurfaceFocus.AtDirection(FocusedBody.BodyId,radial,surfaceRadius,altitude);if(_surfaceCameraMode==PlanetaryCameraPresentationMode.Orbital)_surfaceFocus=null;radial=_surfaceFocus?.TangentFrame.Direction??radial;surfaceRadius=PlanetaryTerrainQuery.VisibleSurfaceRadius(FocusedBody.RadiusMetres,radial,EarthPlanetaryScene.Terrain,environment);_orbitDistance=surfaceRadius+altitude;var local=PlanetarySurfaceFrame.AtDirection(radial).LookOrientation(_surfaceYawRadians,_surfacePitchRadians);camera.Orientation=Nlerp(orientation,local,PlanetarySurfaceCameraPolicy.SurfaceBlend(altitude));CameraPresentationMode=_surfaceCameraMode==PlanetaryCameraPresentationMode.SurfaceLocal?SolarCameraPresentationMode.SurfaceLocal:SolarCameraPresentationMode.Free3D;}
+        else{_surfaceFocus=null;_surfaceCameraMode=PlanetaryCameraPresentationMode.Orbital;camera.Orientation=orientation;}
+        camera.Projection=Projection;
+        camera.Position = camera.Position with { Value = FocusedBody.Position.Value + radial * _orbitDistance };
         camera.Validate();
         Update(camera);
     }
+
+    private bool TryFocusedEnvironment(out PlanetaryEnvironmentPresentation environment)=>SolarPlanetMaterials.Environments.TryGet(FocusedBody.BodyId,out environment);
+    private Double3 CurrentSurfaceDirection(){if(_surfaceFocus is { } focus)return focus.TangentFrame.Direction;var yaw=DoubleQuaternion.FromAxisAngle(Double3.UnitY,_orbitYawRadians);var pitch=DoubleQuaternion.FromAxisAngle(Double3.UnitX,_orbitPitchRadians);return -(yaw*pitch).Normalized().Rotate(new Double3(0d,0d,-1d));}
+    private static DoubleQuaternion Nlerp(in DoubleQuaternion from,in DoubleQuaternion to,double amount){var target=from.X*to.X+from.Y*to.Y+from.Z*to.Z+from.W*to.W<0?new DoubleQuaternion(-to.X,-to.Y,-to.Z,-to.W):to;return new DoubleQuaternion(from.X+(target.X-from.X)*amount,from.Y+(target.Y-from.Y)*amount,from.Z+(target.Z-from.Z)*amount,from.W+(target.W-from.W)*amount).Normalized();}
 
     private void UpdateOrbitVertices(CameraState camera)
     {

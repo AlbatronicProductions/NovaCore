@@ -83,7 +83,12 @@ public readonly record struct PlanetarySurfaceFrame(Double3 Direction,Double3 Ea
     public DoubleQuaternion HorizonViewOrientation(double downwardRadians=Math.PI/12d)
     {
         if(!double.IsFinite(downwardRadians)||downwardRadians<0||downwardRadians>=Math.PI*.5d)throw new ArgumentOutOfRangeException(nameof(downwardRadians));
-        var forward=(North*Math.Cos(downwardRadians)-Up*Math.Sin(downwardRadians)).Normalized();var right=East;var cameraUp=Double3.Cross(-forward,right).Normalized();return QuaternionFromBasis(right,cameraUp,-forward);
+        return LookOrientation(0d,-downwardRadians);
+    }
+    public DoubleQuaternion LookOrientation(double yawRadians,double pitchRadians)
+    {
+        if(!double.IsFinite(yawRadians)||!double.IsFinite(pitchRadians)||pitchRadians<=-Math.PI*.5d||pitchRadians>=Math.PI*.5d)throw new ArgumentOutOfRangeException();
+        var horizontal=(North*Math.Cos(yawRadians)+East*Math.Sin(yawRadians)).Normalized();var forward=(horizontal*Math.Cos(pitchRadians)+Up*Math.Sin(pitchRadians)).Normalized();var right=Double3.Cross(forward,Up).Normalized();var cameraUp=Double3.Cross(right,forward).Normalized();return QuaternionFromBasis(right,cameraUp,-forward);
     }
     private static DoubleQuaternion QuaternionFromBasis(in Double3 x,in Double3 y,in Double3 z)
     {
@@ -101,5 +106,9 @@ public static class PlanetaryTerrainQuery
     public static double SurfaceRadius(double physicalRadius,in Double3 bodyDirection,in PlanetaryTerrainDefinition terrain)
     {
         if(!double.IsFinite(physicalRadius)||physicalRadius<=0)throw new ArgumentOutOfRangeException(nameof(physicalRadius));return physicalRadius+terrain.SampleHeight(bodyDirection,24);
+    }
+    public static double VisibleSurfaceRadius(double physicalRadius,in Double3 bodyDirection,in PlanetaryTerrainDefinition terrain,in PlanetaryEnvironmentPresentation environment)
+    {
+        if(!environment.IsValid)return SurfaceRadius(physicalRadius,bodyDirection,terrain);return physicalRadius+environment.VisibleSurfaceHeight(bodyDirection,terrain);
     }
 }

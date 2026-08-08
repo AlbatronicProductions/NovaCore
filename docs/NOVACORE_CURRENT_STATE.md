@@ -4,7 +4,7 @@
 
 Inspect `git status --short` before editing. Preserve all existing unstaged work unless the active task explicitly changes it. Repository code and tests are authoritative if this document ever becomes stale.
 
-## Current milestones: 9A-4F-2 and 10B-2A
+## Current milestones: 9A-4F-2 and 10B-2B
 
 NovaCore now has a deterministic, true-distance Solar System presentation built from `SolCompact-DE440Validated-v3`. `--scene=sol` evaluates Sun, Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn, Uranus, and Neptune at the current `SimulationInstant`, root-resolves them through `CelestialSystemEvaluator`, and publishes immutable `PlanetaryPresentationSnapshot` data to Graphics. It is a compact analytical runtime validated offline against DE440, not runtime DE440 playback.
 
@@ -19,6 +19,10 @@ Labels use deterministic NDC collision rejection in focused, direct parent/child
 10B-2A proves the surface-scale continuation of that same Earth path. The existing quadtree address extends safely through level 24, with production capped at level 22 and 8,192 active patches. GPU selection uses viewport-scaled projected error, horizon and view-cone culling, deterministic sparse traversal, the established 2:1 balancing/stitching policy, and CPU/GPU exact-set validation. A persistent 8,192-slot renderer cache stores 289 double elevations per resident patch and generates only deterministic cache misses from the versioned repository-authored Earth procedural source. Shader FP64 reconstructs deep patch coordinates and preserves the established double camera-relative transport.
 
 The renderer now owns a swapchain-dependent D32 depth target and uses direct reversed-Z projections: finite for local scenes and infinite-far for Solar scale. The Earth camera can descend to a two-metre terrain clearance, queries the same deterministic source for its presentation-only floor, and blends into a body-fixed east/north/up tangent frame below 1,000 km. Authoritative Earth center, radius, celestial time, hierarchy, and Sol v3 identity remain unchanged.
+
+10B-2B makes the camera transition explicit: `Orbital` above 1,000 km, smooth body-fixed tangent blending through 1,000–100 km, and `SurfaceLocal` at or below 100 km. The captured immutable body-local surface focus retains local yaw/pitch and the two-metre terrain/ocean floor; receding releases it and returns to orbit without changing the evaluated Earth snapshot.
+
+One immutable Earth environment record now drives a bounded 100 km HDR atmosphere, a deterministic 2–11 km body-attached procedural cloud shell, and a 180 m presentation sea level. The fullscreen atmosphere/cloud pass renders between the infinite background and opaque reversed-Z geometry. Distant and detailed planet materials share cloud density/shadow policy and evaluated-Sun lighting. Terrain below sea level clamps to a stable spherical ocean surface with radial normals, roughness/specular response, bounded procedural waves, and Fresnel color. These are repository-authored presentation proofs, not real Earth geography, production atmospheric scattering, dynamic weather, or physical ocean simulation.
 
 ## Completed rendering foundation
 
@@ -36,6 +40,9 @@ The renderer now owns a swapchain-dependent D32 depth target and uses direct rev
 - One deterministic Solar Map/free-3D camera, extent-aware focus framing, hierarchical path fading, bounded label priority, and marker-to-body transition.
 - Deep projected-error Earth LOD through level 22, deterministic GPU terrain residency, continuous procedural elevation, and cached terrain normals.
 - Persistent reversed-Z D32 depth plus a two-metre terrain-aware camera floor and body-fixed local tangent orientation.
+- Immutable body-associated atmosphere/cloud/ocean presentation and fixed-width native transport.
+- Bounded HDR atmosphere/cloud-shell rendering, evaluated-Sun cloud lighting/shadows, and stable sea-level ocean classification.
+- Explicit orbital/transition/SurfaceLocal control with deterministic round-trip and a reusable body-local focus contract.
 
 ## Milestone 9 pipeline summary
 
@@ -43,7 +50,7 @@ Milestone 9 established immutable generic celestial definitions and a pure evalu
 
 ## Remaining work
 
-- Authored image textures, atmosphere, clouds, production terrain/geography, oceans, and physically modeled body rotation.
+- Authored image textures, production multiple-scattering atmosphere, close volumetric clouds, production terrain/geography, physical ocean simulation, and physically modeled body rotation.
 - A declared spacecraft-navigation error budget and exceptional higher-fidelity lunar ephemeris if lunar-orbit insertion, close navigation, or precision long-horizon planning requires more than v3. Compact Chebyshev or `SampledHermite` remains the measured fallback, not the default.
 - Richer material layers, ring shadowing/thickness, geomorphing, occlusion refinement, and authored planetary surface features.
 - Automatic exposure, convolution bloom, lens flare, antialiased font rendering, and richer overlay interaction remain optional measured presentation work; 10B-1A uses fixed exposure and an analytic stellar corona, while 10B-1C retains the lightweight 3x5 overlay renderer.

@@ -118,13 +118,13 @@ All of this remains downstream of the authoritative celestial simulation.
 
 Precision translunar targeting, lunar orbit insertion, close lunar navigation, or other requirements that exceed the compact model's measured accuracy will receive a dedicated higher-fidelity layer when those gameplay requirements exist.
 
-NovaCore is still under active development. It does **not** yet provide production terrain, atmospheric scattering, volumetric clouds, ocean simulation, weather, spacecraft gameplay, colonies, maneuver planning, or SOI/patched-conic navigation.
+NovaCore is still under active development. It now has a compact procedural atmosphere/cloud/ocean presentation proof, but does **not** yet provide production terrain, production multiple-scattering atmosphere, close volumetric clouds, physical ocean simulation, weather, spacecraft gameplay, colonies, maneuver planning, or SOI/patched-conic navigation.
 
 ## Roadmap
 
 **Next visual frontier**
 
-Atmosphere and cloud presentation → production/lawfully authored surface detail and elevation on the proven surface-scale renderer → additional planetary effects and polish.
+Refine atmosphere/cloud/ocean and lawful production surface data on the proven surface-scale renderer → additional planetary effects and polish.
 
 **Future flight and navigation**
 
