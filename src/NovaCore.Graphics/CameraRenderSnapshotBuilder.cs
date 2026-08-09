@@ -24,7 +24,7 @@ public static class CameraRenderSnapshotBuilder
         state.Validate();if(!resolver.TryResolvePosition(state.Position,out rootPosition)||!resolver.TryConvertOrientation(state.Position.Frame,root,state.Orientation,out rootOrientation)){data=default;rootPosition=default;rootOrientation=default;return false;}
         var q=rootOrientation.Conjugate().Normalized();var p=state.Projection;var f=1d/Math.Tan(p.VerticalFieldOfViewRadians*.5d);var a=f/p.AspectRatio;var za=reversedZ?(infiniteFar?0d:p.NearClip/(p.FarClip-p.NearClip)):(infiniteFar?-1d:p.FarClip/(p.NearClip-p.FarClip));var zb=reversedZ?(infiniteFar?p.NearClip:p.NearClip*p.FarClip/(p.FarClip-p.NearClip)):(infiniteFar?-p.NearClip:p.NearClip*p.FarClip/(p.NearClip-p.FarClip));
         // P * inverse(camera orientation), column-major; camera translation is deliberately absent.
-        var r=Rotation(q); data=new GpuCameraData{Position=EncodedPosition.Encode(rootPosition.Value),ViewProjection=Multiply(new Float4x4{C0R0=(float)a,C1R1=(float)-f,C2R2=(float)za,C2R3=-1,C3R2=(float)zb},r)};return true;
+        var r=Rotation(q); data=new GpuCameraData{Position=default,ViewProjection=Multiply(new Float4x4{C0R0=(float)a,C1R1=(float)-f,C2R2=(float)za,C2R3=-1,C3R2=(float)zb},r)};return true;
     }
     private static Float4x4 Rotation(DoubleQuaternion q){var x=q.X;var y=q.Y;var z=q.Z;var w=q.W;return new(){C0R0=(float)(1-2*y*y-2*z*z),C0R1=(float)(2*x*y+2*z*w),C0R2=(float)(2*x*z-2*y*w),C1R0=(float)(2*x*y-2*z*w),C1R1=(float)(1-2*x*x-2*z*z),C1R2=(float)(2*y*z+2*x*w),C2R0=(float)(2*x*z+2*y*w),C2R1=(float)(2*y*z-2*x*w),C2R2=(float)(1-2*x*x-2*y*y),C3R3=1};}
     private static Float4x4 Multiply(Float4x4 a,Float4x4 b)=>new(){

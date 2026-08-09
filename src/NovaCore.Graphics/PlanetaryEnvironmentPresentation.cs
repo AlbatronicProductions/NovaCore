@@ -80,10 +80,11 @@ public readonly record struct PlanetaryEnvironmentPresentation(
     public NativePlanetaryEnvironment Encode(in PlanetRenderProxy body, in UniversePosition cameraRoot)
     {
         if (!IsValid || body.BodyId != BodyId || body.Position.Frame != cameraRoot.Frame) throw new ArgumentException("Planetary environment authority mismatch.");
-        var center = body.Position.Value - cameraRoot.Value;
+        var center = CameraRelativeRenderPosition.Create(body.Position, cameraRoot);
+        if (!center.TryNarrow(out var narrowed)) throw new ArgumentOutOfRangeException(nameof(cameraRoot));
         return new NativePlanetaryEnvironment
         {
-            CenterX = (float)center.X, CenterY = (float)center.Y, CenterZ = (float)center.Z, Radius = (float)body.RadiusMetres,
+            CenterX = narrowed.X, CenterY = narrowed.Y, CenterZ = narrowed.Z, Radius = (float)body.RadiusMetres,
             BodyIdLow = (uint)BodyId, BodyIdHigh = (uint)(BodyId >> 32), EnabledLayers = (uint)Layers, SourceVersion = SourceVersion,
             AtmosphereHeightMetres = (float)AtmosphereHeightMetres, RayleighScaleHeightMetres = (float)RayleighScaleHeightMetres,
             MieScaleHeightMetres = (float)MieScaleHeightMetres, MieAnisotropy = MieAnisotropy,

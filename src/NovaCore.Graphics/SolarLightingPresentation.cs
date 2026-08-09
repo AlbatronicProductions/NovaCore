@@ -28,16 +28,12 @@ public readonly record struct SolarLightingPresentation(
     {
         native = default;
         if (!IsValid || cameraRoot.Frame != SourceCenter.Frame || !cameraRoot.Value.IsFinite) return false;
-        var relative = SourceCenter.Value - cameraRoot.Value;
-        var x = (float)relative.X;
-        var y = (float)relative.Y;
-        var z = (float)relative.Z;
-        if (!float.IsFinite(x) || !float.IsFinite(y) || !float.IsFinite(z)) return false;
+        if (!CameraRelativeRenderPosition.TryCreate(SourceCenter, cameraRoot, out var relative) || !relative.TryNarrow(out var narrowed)) return false;
         native = new NativeSolarLighting
         {
-            SourceCenterX = x,
-            SourceCenterY = y,
-            SourceCenterZ = z,
+            SourceCenterX = narrowed.X,
+            SourceCenterY = narrowed.Y,
+            SourceCenterZ = narrowed.Z,
             Exposure = Exposure,
             PhotosphereR = PhotosphereColor.X,
             PhotosphereG = PhotosphereColor.Y,

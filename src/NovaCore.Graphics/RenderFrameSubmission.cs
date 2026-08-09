@@ -11,6 +11,7 @@ public sealed class RenderFrameSubmission
     private readonly OrbitLineVertex[] _previousOrbitVertices;
     private readonly OrbitLineVertex[] _bodyForwardVertices = new OrbitLineVertex[2];
     private readonly OrbitLineVertex[] _targetDirectionVertices = new OrbitLineVertex[2];
+    private UniversePosition _cameraRootPosition;
 
     public RenderFrameSubmission(int capacity, int orbitVertexCapacity = 0)
     {
@@ -36,9 +37,11 @@ public sealed class RenderFrameSubmission
     public ReadOnlySpan<OrbitLineVertex> TargetDirectionVertices => _targetDirectionVertices.AsSpan(0, TargetDirectionVertexCount);
     public int TargetDirectionVertexCount { get; private set; }
 
-    public void Begin(in GpuCameraData camera)
+    public void Begin(in GpuCameraData camera, in UniversePosition cameraRootPosition)
     {
+        if (!cameraRootPosition.Value.IsFinite) throw new ArgumentException("Camera root position must be finite.", nameof(cameraRootPosition));
         Camera = camera;
+        _cameraRootPosition = cameraRootPosition;
         ObjectCount = 0;
         BatchCount = 0;
         OrbitVertexCount = 0;
@@ -53,9 +56,8 @@ public sealed class RenderFrameSubmission
         if (curve.Count > destination.Length || curve.RootFrame != camera.Frame) return false;
         for (var index = 0; index < curve.Count; index++)
         {
-            var relative = curve.Positions[index].Value - camera.Value;
-            if (!relative.IsFinite || !float.IsFinite((float)relative.X) || !float.IsFinite((float)relative.Y) || !float.IsFinite((float)relative.Z)) return false;
-            destination[index] = new OrbitLineVertex { X = (float)relative.X, Y = (float)relative.Y, Z = (float)relative.Z };
+            if (!CameraRelativeRenderPosition.TryCreate(curve.Positions[index], camera, out var relative) || !relative.TryNarrow(out var narrowed)) return false;
+            destination[index] = new OrbitLineVertex { X = narrowed.X, Y = narrowed.Y, Z = narrowed.Z };
         }
         if (previous) PreviousOrbitVertexCount = curve.Count; else OrbitVertexCount = curve.Count;
         return true;
@@ -64,12 +66,12 @@ public sealed class RenderFrameSubmission
     internal bool TrySetDirectionIndicator(in ResolvedDirectionIndicator indicator, in UniversePosition camera, bool target)
     {
         if (!indicator.IsValid(camera.Frame)) return false;
-        var start = indicator.Start.Value - camera.Value;
-        var end = indicator.End.Value - camera.Value;
-        if (!start.IsFinite || !end.IsFinite || !float.IsFinite((float)start.X) || !float.IsFinite((float)start.Y) || !float.IsFinite((float)start.Z) || !float.IsFinite((float)end.X) || !float.IsFinite((float)end.Y) || !float.IsFinite((float)end.Z)) return false;
+        if (!CameraRelativeRenderPosition.TryCreate(indicator.Start, camera, out var start) ||
+            !CameraRelativeRenderPosition.TryCreate(indicator.End, camera, out var end) ||
+            !start.TryNarrow(out var narrowedStart) || !end.TryNarrow(out var narrowedEnd)) return false;
         var destination = target ? _targetDirectionVertices : _bodyForwardVertices;
-        destination[0] = new OrbitLineVertex { X = (float)start.X, Y = (float)start.Y, Z = (float)start.Z };
-        destination[1] = new OrbitLineVertex { X = (float)end.X, Y = (float)end.Y, Z = (float)end.Z };
+        destination[0] = new OrbitLineVertex { X = narrowedStart.X, Y = narrowedStart.Y, Z = narrowedStart.Z };
+        destination[1] = new OrbitLineVertex { X = narrowedEnd.X, Y = narrowedEnd.Y, Z = narrowedEnd.Z };
         if (target) TargetDirectionVertexCount = 2; else BodyForwardVertexCount = 2;
         return true;
     }
@@ -78,7 +80,8 @@ public sealed class RenderFrameSubmission
     public void Add(in UniversePosition position, in DoubleQuaternion rotation, in Double3 scale, MeshHandle mesh)
     {
         if (ObjectCount == _objects.Length) throw new InvalidOperationException("Render submission capacity exceeded.");
-        _objects[ObjectCount++] = RenderSubmission.CreateObject(position, rotation, scale, mesh);
+        var relative = CameraRelativeRenderPosition.Create(position, _cameraRootPosition);
+        _objects[ObjectCount++] = RenderSubmission.CreateObject(relative, rotation, scale, mesh);
     }
 
     /// <summary>Creates stable contiguous mesh batches. Objects retain their caller-provided order.</summary>

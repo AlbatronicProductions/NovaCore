@@ -31,7 +31,7 @@ public static class ResolvedRenderSubmissionBuilder
         foreach (ref readonly var current in snapshot.Objects)
             if (!current.IsValid(out _)) return ResolvedRenderSubmissionBuildStatus.InvalidSnapshotObject;
 
-        destination.Begin(camera);
+        destination.Begin(camera, cameraRootPosition);
         foreach (ref readonly var current in snapshot.Objects)
             destination.Add(current.RootPosition, current.RootOrientation, current.Scale, current.Mesh);
         destination.Complete();

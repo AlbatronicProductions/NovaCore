@@ -1,38 +1,49 @@
+using System.Diagnostics;
 using NovaCore.Core;
 using NovaCore.Graphics;
 using NovaCore.Platform;
 
+const double rootMagnitude = 4_000_000_000_000d;
+var camera = new Double3(rootMagnitude, -rootMagnitude, rootMagnitude);
 var cases = new[]
 {
-    new PrecisionCase("positive large", new Double3(4_000_000_000_000.25d, 3d, -4d), new Double3(4_000_000_000_000d, 0d, 0d), 0.001d),
-    new PrecisionCase("negative large", new Double3(-4_000_000_000_000.125d, -2d, 3d), new Double3(-4_000_000_000_000d, 0d, 0d), 0.001d),
-    new PrecisionCase("extreme large", new Double3(1_000_000_000_000_000d + 0.125d, -1_000_000_000_000_000d - 0.25d, 5d), new Double3(1_000_000_000_000_000d, -1_000_000_000_000_000d, 0d), 0.5d),
-    new PrecisionCase("small delta", new Double3(4_000_000_000_000.0078125d, 0d, 0d), new Double3(4_000_000_000_000d, 0d, 0d), 0.001d),
+    new PrecisionCase("kilometre", camera + new Double3(1_000d, -1_000d, 500d), camera, 2e-4d),
+    new PrecisionCase("metre", camera + new Double3(1d, -1d, .5d), camera, 2e-7d),
+    new PrecisionCase("centimetre", camera + new Double3(.01d, -.01d, .02d), camera, 2e-9d),
+    new PrecisionCase("millimetre", camera + new Double3(.001d, -.001d, .001d), camera, 2e-10d),
+    new PrecisionCase("negative root", new Double3(-rootMagnitude - .25d, rootMagnitude + .125d, -rootMagnitude - .5d), new Double3(-rootMagnitude, rootMagnitude, -rootMagnitude), 1e-8d),
+    new PrecisionCase("mixed signs", new Double3(-rootMagnitude + .01d, -rootMagnitude - .02d, rootMagnitude + .03d), new Double3(-rootMagnitude, -rootMagnitude, rootMagnitude), 4e-9d),
+    new PrecisionCase("near zero", new Double3(.001d, -.01d, 1_000d), Double3.Zero, 2e-10d),
 };
 
-Console.WriteLine("Precision Test");
+Console.WriteLine("Camera-Centric Precision Test");
 Console.WriteLine();
-Console.WriteLine($"{"Magnitude",-12} {"Error",-14} {"Maximum",-14} Result");
+Console.WriteLine($"{"Separation",-16} {"Represented",-14} {"GPU error",-14} Result");
 
 foreach (var test in cases)
 {
-    var objectEncoded = EncodedPosition.Encode(test.Object);
-    var cameraEncoded = EncodedPosition.Encode(test.Camera);
-    var reconstructedWorld = objectEncoded.Reconstruct();
-    var relative = EncodedPosition.Resolve(objectEncoded, cameraEncoded).Value;
-    var expected = test.Object - test.Camera;
-    var error = MaxAbs(relative - expected);
-    var deterministic = objectEncoded == EncodedPosition.Encode(test.Object) && cameraEncoded == EncodedPosition.Encode(test.Camera);
-    var withinTolerance = error <= test.MaximumError;
-    Console.WriteLine($"{test.Magnitude,-12} {error,-14:R} {test.MaximumError,-14:R} {(withinTolerance ? "PASS" : "FAIL")}");
-    Assert(withinTolerance, $"{test.Name}: relative error {error:R} exceeds {test.MaximumError:R}");
-    Assert(deterministic, $"{test.Name}: encoding was not deterministic");
-    Assert(MaxAbs(reconstructedWorld - test.Object) <= test.MaximumError, $"{test.Name}: world reconstruction out of tolerance");
+    var expected = test.ObjectRoot - test.CameraRoot;
+    var relative = CameraRelativeRenderPosition.Create(test.ObjectRoot, test.CameraRoot);
+    var encoded = relative.Encode();
+    var reconstructed = encoded.Reconstruct();
+    var error = MaxAbs(reconstructed - expected);
+    var deterministic = relative == CameraRelativeRenderPosition.Create(test.ObjectRoot, test.CameraRoot) &&
+        encoded == CameraRelativeRenderPosition.Create(test.ObjectRoot, test.CameraRoot).Encode();
+    var withinTolerance = error <= test.MaximumGpuError;
+    Console.WriteLine($"{test.Name,-16} {MaxAbs(expected),-14:R} {error,-14:R} {(withinTolerance ? "PASS" : "FAIL")}");
+    Assert(relative.IsFinite && reconstructed.IsFinite, $"{test.Name}: non-finite camera-relative transport");
+    Assert(withinTolerance, $"{test.Name}: post-subtraction GPU encoding error {error:R} exceeds {test.MaximumGpuError:R}");
+    Assert(deterministic, $"{test.Name}: subtraction/encoding was not deterministic");
 }
 
-var plainFloat = (float)cases[0].Object.X - (float)cases[0].Camera.X;
-Assert(plainFloat == 0f, "single-float control case should lose the 0.25-unit delta");
+var representedMillimetre = (camera.X + .001d) - camera.X;
+Assert(representedMillimetre > 0d && representedMillimetre < .002d, "FP64 large-root millimetre separation was not retained");
+Assert((float)(camera.X + .001d) - (float)camera.X == 0f, "single-float control should lose the millimetre separation");
+Assert(!CameraRelativeRenderPosition.TryCreate(new Double3(double.NaN, 0d, 0d), camera, out _), "NaN object accepted");
+Assert(!CameraRelativeRenderPosition.TryCreate(camera, new Double3(0d, double.PositiveInfinity, 0d), out _), "infinite camera accepted");
+
 VerifyCameraMovementSymmetry();
+VerifyHotPath(camera);
 VerifyLogOptions();
 Console.WriteLine();
 Console.WriteLine("PASS");
@@ -44,17 +55,31 @@ static void VerifyCameraMovementSymmetry()
 {
     var basePosition = new Double3(4_000_000_000_000d, -3_000_000_000_000d, 7_000_000_000_000d);
     var step = 0.1d;
-    var objectEncoded = EncodedPosition.Encode(basePosition);
-    var plusX = EncodedPosition.Resolve(objectEncoded, EncodedPosition.Encode(basePosition + new Double3(step, 0d, 0d))).Value;
-    var minusX = EncodedPosition.Resolve(objectEncoded, EncodedPosition.Encode(basePosition + new Double3(-step, 0d, 0d))).Value;
-    var plusY = EncodedPosition.Resolve(objectEncoded, EncodedPosition.Encode(basePosition + new Double3(0d, step, 0d))).Value;
-    var minusY = EncodedPosition.Resolve(objectEncoded, EncodedPosition.Encode(basePosition + new Double3(0d, -step, 0d))).Value;
+    var plusX = CameraRelativeRenderPosition.Create(basePosition, basePosition + new Double3(step, 0d, 0d)).Value;
+    var minusX = CameraRelativeRenderPosition.Create(basePosition, basePosition + new Double3(-step, 0d, 0d)).Value;
+    var plusY = CameraRelativeRenderPosition.Create(basePosition, basePosition + new Double3(0d, step, 0d)).Value;
+    var minusY = CameraRelativeRenderPosition.Create(basePosition, basePosition + new Double3(0d, -step, 0d)).Value;
     Console.WriteLine($"movement symmetry: +X={plusX.X:R}, -X={minusX.X:R}, +Y={plusY.Y:R}, -Y={minusY.Y:R}");
-    const double tolerance = 0.01d;
+    const double tolerance = 0.001d;
     Assert(Math.Abs(plusX.X + minusX.X) <= tolerance && Math.Abs(Math.Abs(plusX.X) - Math.Abs(minusX.X)) <= tolerance, "+X/-X camera movement is not symmetric");
     Assert(Math.Abs(plusY.Y + minusY.Y) <= tolerance && Math.Abs(Math.Abs(plusY.Y) - Math.Abs(minusY.Y)) <= tolerance, "+Y/-Y camera movement is not symmetric");
-    Assert(plusX.X < 0d && minusX.X > 0d, "X camera-relative subtraction has the wrong sign");
-    Assert(plusY.Y < 0d && minusY.Y > 0d, "Y camera-relative subtraction has the wrong sign");
+    Assert(plusX.X < 0d && minusX.X > 0d && plusY.Y < 0d && minusY.Y > 0d, "camera-relative subtraction sign failure");
+}
+
+static void VerifyHotPath(in Double3 camera)
+{
+    const int iterations = 1_000_000;
+    var objectRoot = camera + new Double3(.001d, -.01d, 1_000d);
+    _ = CameraRelativeRenderPosition.Create(objectRoot, camera).Encode();
+    var allocatedBefore = GC.GetAllocatedBytesForCurrentThread();
+    var started = Stopwatch.GetTimestamp();
+    var checksum = 0d;
+    for (var index = 0; index < iterations; index++)
+        checksum += CameraRelativeRenderPosition.Create(objectRoot, camera).Encode().LowX;
+    var elapsed = Stopwatch.GetElapsedTime(started);
+    var allocated = GC.GetAllocatedBytesForCurrentThread() - allocatedBefore;
+    Assert(allocated == 0 && double.IsFinite(checksum), "camera-relative subtraction/packing hot path allocated or became non-finite");
+    Console.WriteLine($"relative subtraction/pack: {elapsed.TotalNanoseconds / iterations:F2} ns/update; allocations={allocated} bytes");
 }
 
 static void VerifyLogOptions()
@@ -65,11 +90,9 @@ static void VerifyLogOptions()
     Assert(!LogOptions.TryParse(["--log=unknown"], out _, out _), "invalid log category was accepted");
     Console.WriteLine("log options: parsing and verbose-input compatibility passed");
 }
-file readonly record struct PrecisionCase(string Name, Double3 Object, Double3 Camera, double MaximumError)
-{
-    public string Magnitude => Name switch
-    {
-        "extreme large" => "1e15",
-        _ => "4e12",
-    };
-}
+
+file readonly record struct PrecisionCase(
+    string Name,
+    Double3 ObjectRoot,
+    Double3 CameraRoot,
+    double MaximumGpuError);

@@ -45,7 +45,8 @@ internal static class SolarOverlayLayout
     internal static bool TryProjectBody(in PlanetRenderProxy body, CameraState camera, out double anchorX, out double anchorY, out double apparentRadiusNdc, out double depth)
     {
         anchorX = anchorY = apparentRadiusNdc = depth = double.NaN;
-        var view = camera.Orientation.Conjugate().Normalized().Rotate(body.Position.Value - camera.Position.Value);
+        if (!CameraRelativeRenderPosition.TryCreate(body.Position.Value, camera.Position.Value, out var relative)) return false;
+        var view = camera.Orientation.Conjugate().Normalized().Rotate(relative.Value);
         var forward = -view.Z;
         if (!view.IsFinite || !double.IsFinite(forward) || forward < camera.Projection.NearClip) return false;
         var scale = 1d / Math.Tan(camera.Projection.VerticalFieldOfViewRadians * .5d);
@@ -157,6 +158,7 @@ internal sealed class SolarSystemScene
     private PlanetaryCameraPresentationMode _surfaceCameraMode;
     private float _eyeballWeight;
     private double _moonOrbitEndpointMismatchMetres;
+    private FocusTarget _focusTarget = FocusTarget.BodyCenter(BodyOrder[0]);
 
     private SolarSystemScene(
         CelestialSystemDefinition system,
@@ -209,6 +211,7 @@ internal sealed class SolarSystemScene
     internal bool EyeballComputeRequested => _blend.DrawDetailed && _eyeballWeight > 0f;
     internal float EyeballWeight => _eyeballWeight;
     internal PlanetRenderProxy FocusedBody => Presentation.Bodies[FocusIndex];
+    internal FocusTarget CurrentFocusTarget => _focusTarget;
     internal SimulationInstant CurrentTime => _clock.CurrentTime;
     internal SimulationRate Rate => _clock.Rate;
     internal int SpeedPresetIndex => _rateStepIndex;
@@ -323,6 +326,7 @@ internal sealed class SolarSystemScene
     {
         if ((uint)index >= Presentation.Count) return false;
         FocusIndex = index;
+        _focusTarget = FocusTarget.BodyCenter(Presentation.Bodies[index].BodyId);
         _handoff = new PlanetaryRepresentationHandoff(EarthPlanetaryScene.HandoffConfiguration);
         _orbitDistance = FocusFramingDistance(FocusedBody);
         _surfaceFocus=null;_surfaceYawRadians=0d;_surfacePitchRadians=-Math.PI/12d;_surfaceCameraMode=PlanetaryCameraPresentationMode.Orbital;
@@ -409,6 +413,7 @@ internal sealed class SolarSystemScene
     internal void ResetPresentationCamera(CameraState camera)
     {
         FocusIndex = 0;
+        _focusTarget = FocusTarget.BodyCenter(Presentation.Bodies[0].BodyId);
         _handoff = new PlanetaryRepresentationHandoff(EarthPlanetaryScene.HandoffConfiguration);
         _orbitDistance = SolAnalyticalDefinition.AstronomicalUnitMetres * InitialOverviewDistanceAu;
         _orbitYawRadians = 0d;
@@ -685,6 +690,8 @@ internal sealed class SolarSystemScene
 
     private void ApplyOrbitPose(CameraState camera)
     {
+        if (!_focusTarget.TryEvaluate(FocusedBody, out var focusRoot))
+            throw new InvalidOperationException("The active focus target cannot be evaluated from the current presentation snapshot.");
         var yaw = DoubleQuaternion.FromAxisAngle(Double3.UnitY, _orbitYawRadians);
         var pitch = DoubleQuaternion.FromAxisAngle(Double3.UnitX, _orbitPitchRadians);
         var orientation = (yaw * pitch).Normalized();
@@ -692,7 +699,7 @@ internal sealed class SolarSystemScene
         if(TryFocusedEnvironment(out var environment)){var bodyToRoot=FocusedBody.BodyFixedToRoot;var bodyRadial=bodyToRoot.Conjugate().Normalized().Rotate(rootRadial);var surfaceRadius=PlanetaryTerrainQuery.VisibleSurfaceRadius(FocusedBody.RadiusMetres,bodyRadial,EarthPlanetaryScene.Terrain,environment);_orbitDistance=Math.Max(_orbitDistance,surfaceRadius+EarthPlanetaryScene.MinimumTerrainClearanceMetres);var altitude=_orbitDistance-surfaceRadius;_surfaceCameraMode=PlanetarySurfaceCameraPolicy.Mode(altitude);if(_surfaceCameraMode!=PlanetaryCameraPresentationMode.Orbital&&_surfaceFocus is null)_surfaceFocus=PlanetarySurfaceFocus.AtDirection(FocusedBody.BodyId,bodyRadial,surfaceRadius,altitude);if(_surfaceCameraMode==PlanetaryCameraPresentationMode.Orbital)_surfaceFocus=null;bodyRadial=_surfaceFocus?.TangentFrame.Direction??bodyRadial;if(_surfaceCameraMode!=PlanetaryCameraPresentationMode.Orbital)rootRadial=bodyToRoot.Rotate(bodyRadial);surfaceRadius=PlanetaryTerrainQuery.VisibleSurfaceRadius(FocusedBody.RadiusMetres,bodyRadial,EarthPlanetaryScene.Terrain,environment);_orbitDistance=surfaceRadius+altitude;var localRoot=(bodyToRoot*PlanetarySurfaceFrame.AtDirection(bodyRadial).LookOrientation(_surfaceYawRadians,_surfacePitchRadians)).Normalized();camera.Orientation=Nlerp(orientation,localRoot,PlanetarySurfaceCameraPolicy.SurfaceBlend(altitude));CameraPresentationMode=_surfaceCameraMode==PlanetaryCameraPresentationMode.SurfaceLocal?SolarCameraPresentationMode.SurfaceLocal:SolarCameraPresentationMode.Free3D;}
         else{_surfaceFocus=null;_surfaceCameraMode=PlanetaryCameraPresentationMode.Orbital;camera.Orientation=orientation;}
         camera.Projection=Projection;
-        camera.Position=camera.Position with{Value=FocusedBody.Position.Value+rootRadial*_orbitDistance};
+        camera.Position=camera.Position with{Value=focusRoot.Value+rootRadial*_orbitDistance};
         camera.Validate();
         Update(camera);
     }
@@ -707,9 +714,9 @@ internal sealed class SolarSystemScene
         for (var path = 0; path < OrbitPathCount; path++)
         for (var segment = 0; segment < OrbitSegmentCount; segment++)
         {
-            var first = _rootOrbitSamples[path * OrbitSampleCount + segment] - camera.Position.Value;
+            var first = CameraRelativeRenderPosition.Create(_rootOrbitSamples[path * OrbitSampleCount + segment], camera.Position.Value).Value;
             var secondSample = path == MoonOrbitPathIndex && segment == OrbitSegmentCount - 1 ? 0 : segment + 1;
-            var second = _rootOrbitSamples[path * OrbitSampleCount + secondSample] - camera.Position.Value;
+            var second = CameraRelativeRenderPosition.Create(_rootOrbitSamples[path * OrbitSampleCount + secondSample], camera.Position.Value).Value;
             OrbitVertices[output++] = new NativeOrbitLineVertex { X = (float)first.X, Y = (float)first.Y, Z = (float)first.Z };
             OrbitVertices[output++] = new NativeOrbitLineVertex { X = (float)second.X, Y = (float)second.Y, Z = (float)second.Z };
         }

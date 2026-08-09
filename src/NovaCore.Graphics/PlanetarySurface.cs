@@ -249,6 +249,6 @@ public static class CubeSphereProjection
     }
     public static Double3 CameraRelativeCenter(in PlanetRenderProxy body,in UniversePosition cameraRootPosition)
     {
-        if(cameraRootPosition.Frame!=body.Position.Frame)throw new ArgumentException("Camera and body roots differ.");return body.Position.Value-cameraRootPosition.Value;
+        return CameraRelativeRenderPosition.Create(body.Position,cameraRootPosition).Value;
     }
 }

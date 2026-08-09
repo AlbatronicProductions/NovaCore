@@ -4,7 +4,7 @@
 
 Inspect `git status --short` before editing. Preserve all existing unstaged work unless the active task explicitly changes it. Repository code and tests are authoritative if this document ever becomes stale.
 
-## Current milestones: completed 9A-4F-2 and 11A planetary/orientation architecture
+## Current milestones: completed 9A-4F-2, 11A planetary/orientation architecture, and 11B-2A precision foundation
 
 NovaCore now has a deterministic, true-distance Solar System presentation built from `SolCompact-DE440Validated-v3`. `--scene=sol` evaluates Sun, Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn, Uranus, and Neptune at the current `SimulationInstant`, root-resolves them through `CelestialSystemEvaluator`, and publishes immutable `PlanetaryPresentationSnapshot` data to Graphics. It is a compact analytical runtime validated offline against DE440, not runtime DE440 playback.
 
@@ -40,6 +40,8 @@ The immutable planetary snapshot now carries body-fixed orientation beside each 
 
 Milestone 11A-4D closes the remaining render-path convention split at the distant/detail handoff. Distant, regional, and eyeball geometry now begin in body-fixed space and apply the same immutable body-fixed-to-root quaternion exactly once; material, lighting, terrain, SVT page identity, and surface anchors remain body fixed. The focused orbital camera retains a root-inertial body-center offset: drag changes orbital azimuth/elevation at fixed distance, body translation carries the rig, and axial rotation never rotates the offset or camera orientation. Detailed lighting subtracts the root-camera-relative body center from the root-camera-relative evaluated Sun center before entering body space, matching the distant path. Paused all-body handoff proofs and multi-body 1× through 7,776,000× tests preserve celestial authority while body-fixed longitude evolves beneath the camera. Solar speed feedback uses a dedicated compact 5×7 sans bitmap-glyph HUD pipeline with derivative antialiasing, while ordinary Solar body labels retain the established lightweight overlay path.
 
+Milestone 11B-2A formalizes four independent authorities: FP64 root/inertial simulation position, evaluated focus position, root-inertial camera orientation, and derived camera-relative render transport. `FocusTarget` activates body-center focus without changing click-drag or logarithmic zoom, and defines surface-anchor and future scene-object seams without automatic acquisition. `CameraRelativeRenderPosition` now requires CPU FP64 subtraction before float conversion or high/low packing. An audit confirmed the specialized Solar/planetary/environment paths already obeyed that rule and corrected the generic object shader path, which previously subtracted independently narrowed root high/low lanes. Large-root precision tests cover kilometre through represented millimetre separation; high-warp tests cover fixed body-center and body-fixed mock targets through 7,776,000× without camera co-rotation.
+
 ## Completed rendering foundation
 
 - Immutable renderer-facing planetary snapshots and generic body presentation conversion.
@@ -60,6 +62,7 @@ Milestone 11A-4D closes the remaining render-path convention split at the distan
 - Bounded HDR atmosphere/cloud-shell rendering, evaluated-Sun cloud lighting/shadows, and stable sea-level ocean classification.
 - Explicit orbital/transition/SurfaceLocal control with deterministic round-trip and a reusable body-local focus contract.
 - Fixed-workload spherical-billboard near-field terrain with GPU displacement, one indirect draw, body-fixed sampling, and deterministic topology/ABI validation.
+- Explicit `FocusTarget` identity and FP64-before-narrowing camera-relative transport across generic and planetary presentation paths.
 
 ## Milestone 9 pipeline summary
 
@@ -67,6 +70,7 @@ Milestone 9 established immutable generic celestial definitions and a pure evalu
 
 ## Remaining work
 
+- Phase B camera work: deterministic `SurfaceAnchor` acquisition, an explicit local east/north/up camera mode, and true surface-scale zoom without coupling focus position to camera orientation.
 - Authored non-Earth image textures, production multiple-scattering atmosphere, close volumetric clouds, production terrain/geography, and physical ocean simulation.
 - Higher-resolution lawful optional Earth packs, a production multiple-scattering atmosphere, and a genuinely close-resolution cloud/ocean/material pass on the existing bounded virtual-texture and fixed 11A geometry architecture.
 - A declared spacecraft-navigation error budget and exceptional higher-fidelity lunar ephemeris if lunar-orbit insertion, close navigation, or precision long-horizon planning requires more than v3. Compact Chebyshev or `SampledHermite` remains the measured fallback, not the default.

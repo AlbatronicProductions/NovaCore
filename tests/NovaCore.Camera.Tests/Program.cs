@@ -2,6 +2,7 @@ using NovaCore.Core;
 using NovaCore.Core.Camera;
 using NovaCore.Core.ReferenceFrames;
 using NovaCore.Interop;
+using System.Diagnostics;
 
 var frame = new ReferenceFrameId(1);
 var projection = new CameraProjection(1, 1, .1, 100);
@@ -78,4 +79,6 @@ var allocatedBefore = GC.GetAllocatedBytesForCurrentThread();
 for (var i = 0; i < 1_000; i++) { allocationController.Update(allocationState, allocationCommands, .01); DebugCameraInput.Map(default, allocationBuffer); }
 Check(GC.GetAllocatedBytesForCurrentThread() == allocatedBefore, "steady-state input mapping/controller allocations");
 
-Console.WriteLine($"PASS camera controller: W delta={(forward.Value - initial.Value).Z:R}, S delta={(backward.Value - initial.Value).Z:R}, wheel 1={increased:R}");
+var timedState=NewState();var timedController=new FreeCameraController(1,.01,1.55);timedController.Update(timedState,allocationCommands,.01);var timedAllocatedBefore=GC.GetAllocatedBytesForCurrentThread();var timedStarted=Stopwatch.GetTimestamp();for(var index=0;index<1_000_000;index++)timedController.Update(timedState,allocationCommands,.000001);var timedElapsed=Stopwatch.GetElapsedTime(timedStarted);var timedAllocated=GC.GetAllocatedBytesForCurrentThread()-timedAllocatedBefore;Check(timedAllocated==0&&timedState.Position.Value.IsFinite,"camera update benchmark remains finite and allocation-free");
+
+Console.WriteLine($"PASS camera controller: W delta={(forward.Value - initial.Value).Z:R}, S delta={(backward.Value - initial.Value).Z:R}, wheel 1={increased:R}; update={timedElapsed.TotalNanoseconds/1_000_000d:F2} ns, allocations={timedAllocated}");

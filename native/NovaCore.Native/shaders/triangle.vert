@@ -28,8 +28,8 @@ vec3 Rotate(vec4 q, vec3 v) {
 
 void main() {
   GpuRenderObject object = frameData.objects[gl_InstanceIndex];
-  vec3 relativePosition = (object.position.high.xyz - frameData.camera.position.high.xyz) +
-                          (object.position.low.xyz - frameData.camera.position.low.xyz);
+  // Object transport is already camera relative; FP64 root subtraction occurred on the CPU.
+  vec3 relativePosition = object.position.high.xyz + object.position.low.xyz;
   vec3 local = Rotate(object.rotation, inPosition * object.scale.xyz);
   gl_Position = frameData.camera.viewProjection * vec4(local + relativePosition, 1.0);
   color = inColor;
