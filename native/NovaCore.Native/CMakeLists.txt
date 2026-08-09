@@ -60,10 +60,10 @@ add_custom_command(OUTPUT "${SPIRV_DIR}/solar_orbit.vert.spv" "${SPIRV_DIR}/sola
   COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/solar_marker.vert" -o "${SPIRV_DIR}/solar_marker.vert.spv"
   COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/solar_marker.frag" -o "${SPIRV_DIR}/solar_marker.frag.spv"
   COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/solar_label.vert" -o "${SPIRV_DIR}/solar_label.vert.spv"
-  COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/solar_label.frag" -o "${SPIRV_DIR}/solar_label.frag.spv"
+  COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/solar_label.frag" -o "${SPIRV_DIR}/solar_label.frag.spv"
   COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/solar_speed_hud.vert" -o "${SPIRV_DIR}/solar_speed_hud.vert.spv"
-  COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/solar_speed_hud.frag" -o "${SPIRV_DIR}/solar_speed_hud.frag.spv"
-  DEPENDS "${SHADER_DIR}/solar_orbit.vert" "${SHADER_DIR}/solar_orbit.frag" "${SHADER_DIR}/solar_marker.vert" "${SHADER_DIR}/solar_marker.frag" "${SHADER_DIR}/solar_label.vert" "${SHADER_DIR}/solar_label.frag" "${SHADER_DIR}/solar_speed_hud.vert" "${SHADER_DIR}/solar_speed_hud.frag")
+  COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/solar_speed_hud.frag" -o "${SPIRV_DIR}/solar_speed_hud.frag.spv"
+  DEPENDS "${SHADER_DIR}/solar_orbit.vert" "${SHADER_DIR}/solar_orbit.frag" "${SHADER_DIR}/solar_marker.vert" "${SHADER_DIR}/solar_marker.frag" "${SHADER_DIR}/solar_label.vert" "${SHADER_DIR}/solar_label.frag" "${SHADER_DIR}/solar_sans_sdf.glsl" "${SHADER_DIR}/solar_speed_hud.vert" "${SHADER_DIR}/solar_speed_hud.frag")
 add_custom_command(OUTPUT "${SPIRV_DIR}/fullscreen.vert.spv" "${SPIRV_DIR}/space_background.frag.spv" "${SPIRV_DIR}/tone_map.frag.spv" "${SPIRV_DIR}/planetary_environment.frag.spv" "${SPIRV_DIR}/stellar_sun.vert.spv" "${SPIRV_DIR}/stellar_sun.frag.spv" "${SPIRV_DIR}/stellar_glow.vert.spv" "${SPIRV_DIR}/stellar_glow.frag.spv"
   COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
   COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/fullscreen.vert" -o "${SPIRV_DIR}/fullscreen.vert.spv"

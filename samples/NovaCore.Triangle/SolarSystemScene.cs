@@ -10,20 +10,14 @@ using NovaCore.Simulation.Timeline;
 
 internal static class SolarOverlayLayout
 {
-    internal const double CharacterStrideNdc = .008d;
-    internal const double CellWidthNdc = .0019d;
-    internal const double CellHeightNdc = .0024d;
-    internal const double LabelOffsetXNdc = .008d;
-    internal const double LabelOffsetYNdc = .008d;
-    internal const double FocusedLabelOffsetYNdc = .0105d;
+    internal const double CharacterStrideNdc = .0103d;
+    internal const double LabelGlyphWidthNdc = .009d;
+    internal const double LabelGlyphHeightNdc = .021d;
+    internal const double LabelOffsetXNdc = .009d;
+    internal const double LabelOffsetYNdc = .009d;
+    internal const double FocusedLabelOffsetYNdc = .013d;
     internal const double CollisionMarginNdc = .0035d;
     internal const double ScreenEdgeMarginNdc = .012d;
-
-    // Vulkan's positive-height viewport maps increasing NDC Y down the framebuffer.
-    internal static (double X, double Y) LabelCellOffset(int characterIndex, int column, int row) =>
-        (characterIndex * CharacterStrideNdc + column * CellWidthNdc, row * CellHeightNdc);
-
-    internal static int GlyphColumnBit(int column) => 1 << (2 - column);
 
     internal static bool TryProjectLabel(
         in PlanetRenderProxy body,
@@ -42,8 +36,8 @@ internal static class SolarOverlayLayout
         bounds = new SolarScreenRect(
             minX,
             minY,
-            minX + (length - 1) * CharacterStrideNdc + 3d * CellWidthNdc,
-            minY + 5d * CellHeightNdc);
+            minX + (length - 1) * CharacterStrideNdc + LabelGlyphWidthNdc,
+            minY + LabelGlyphHeightNdc);
         return bounds.IsFinite && bounds.MinX >= -1d + ScreenEdgeMarginNdc && bounds.MaxX <= 1d - ScreenEdgeMarginNdc &&
             bounds.MinY >= -1d + ScreenEdgeMarginNdc && bounds.MaxY <= 1d - ScreenEdgeMarginNdc;
     }
@@ -69,6 +63,22 @@ internal static class SolarOverlayLayout
         left.MinY < right.MaxY + CollisionMarginNdc && left.MaxY + CollisionMarginNdc > right.MinY;
 }
 
+internal static class SolarCameraZoomPolicy
+{
+    internal const double DistanceRatioPerDetent = 1.25d;
+
+    internal static double Apply(double distance, double surfaceRadius, double minimumDistance, double maximumDistance, int detents)
+    {
+        if (!double.IsFinite(distance) || !double.IsFinite(surfaceRadius) || !double.IsFinite(minimumDistance) ||
+            !double.IsFinite(maximumDistance) || surfaceRadius < 0d || minimumDistance <= surfaceRadius || maximumDistance < minimumDistance)
+            throw new ArgumentOutOfRangeException(nameof(distance));
+        if (detents == 0) return Math.Clamp(distance, minimumDistance, maximumDistance);
+        var altitude = Math.Max(minimumDistance - surfaceRadius, distance - surfaceRadius);
+        var scaledAltitude = altitude * Math.Exp(-detents * Math.Log(DistanceRatioPerDetent));
+        return Math.Clamp(surfaceRadius + scaledAltitude, minimumDistance, maximumDistance);
+    }
+}
+
 internal enum SolarCameraPresentationMode
 {
     Free3D,
@@ -86,8 +96,11 @@ internal sealed class SolarSystemScene
     internal static readonly ulong[] BodyOrder = [2, 3, 4, 6, 7, 8, 9, 10, 11, 12];
     internal const int OrbitPathCount = 9;
     internal const int OrbitSegmentCount = 128;
+    internal const int MoonOrbitPathIndex = 3;
     internal const int OrbitSampleCount = OrbitSegmentCount + 1;
     internal const int OrbitVertexCount = OrbitPathCount * OrbitSegmentCount * 2;
+    private const int MoonPeriodicSubdivisionsPerControlSegment = 8;
+    private const int MoonPeriodicDenseSampleCount = OrbitSegmentCount * MoonPeriodicSubdivisionsPerControlSegment;
     internal const double InitialOverviewDistanceAu = 58d;
     internal const double MaximumOverviewDistanceAu = 100d;
     internal const uint LabelVisibleBit = 0x4000_0000u;
@@ -117,7 +130,12 @@ internal sealed class SolarSystemScene
     private readonly EvaluatedPlanetaryBody[] _bodyStaging;
     private readonly Double3[] _rootOrbitSamples;
     private readonly Double3[] _orbitSampleStaging;
+    private readonly Double3[] _moonOrbitControlSamples;
+    private readonly Double3[] _moonOrbitPeriodicControls;
+    private readonly Double3[] _moonOrbitDenseSamples;
+    private readonly double[] _moonOrbitCumulativeLengths;
     private readonly int[] _orbitTraversalIndices;
+    private readonly int[] _orbitCenterTraversalIndices;
     private readonly double[] _orbitPeriods;
     private readonly SimulationClock _clock;
     private readonly bool[] _visibleLabels = new bool[BodyOrder.Length];
@@ -138,6 +156,7 @@ internal sealed class SolarSystemScene
     private double _surfacePitchRadians=-Math.PI/12d;
     private PlanetaryCameraPresentationMode _surfaceCameraMode;
     private float _eyeballWeight;
+    private double _moonOrbitEndpointMismatchMetres;
 
     private SolarSystemScene(
         CelestialSystemDefinition system,
@@ -145,6 +164,7 @@ internal sealed class SolarSystemScene
         int[] traversalIndices,
         Double3[] rootOrbitSamples,
         int[] orbitTraversalIndices,
+        int[] orbitCenterTraversalIndices,
         double[] orbitPeriods,
         SimulationInstant initialTime,
         DateTimeOffset? startupUtc)
@@ -154,7 +174,13 @@ internal sealed class SolarSystemScene
         _traversalIndices = traversalIndices;
         _rootOrbitSamples = rootOrbitSamples;
         _orbitSampleStaging = new Double3[rootOrbitSamples.Length];
+        _moonOrbitControlSamples = new Double3[OrbitSegmentCount];
+        _moonOrbitPeriodicControls = new Double3[OrbitSegmentCount];
+        _moonOrbitDenseSamples = new Double3[MoonPeriodicDenseSampleCount + 1];
+        _moonOrbitCumulativeLengths = new double[MoonPeriodicDenseSampleCount + 1];
+        BuildPeriodicMoonOrbit(_rootOrbitSamples);
         _orbitTraversalIndices = orbitTraversalIndices;
+        _orbitCenterTraversalIndices = orbitCenterTraversalIndices;
         _orbitPeriods = orbitPeriods;
         _evaluations = new ReferenceFrameEvaluation[system.Count];
         _roots = new FrameTransform[system.Count];
@@ -174,6 +200,8 @@ internal sealed class SolarSystemScene
     internal NativePlanetaryPresentation[] DistantBodies { get; }
     internal NativeOrbitLineVertex[] OrbitVertices { get; }
     internal ReadOnlySpan<Double3> OrbitRootSamples => _rootOrbitSamples;
+    internal ReadOnlySpan<Double3> MoonOrbitControlSamples => _moonOrbitControlSamples;
+    internal ReadOnlySpan<Double3> MoonOrbitPeriodicControlSamples => _moonOrbitPeriodicControls;
     internal int FocusIndex { get; private set; }
     internal int DistantBodyCount { get; private set; }
     internal PlanetaryRepresentationBlend FocusedBlend => _blend;
@@ -192,6 +220,8 @@ internal sealed class SolarSystemScene
     internal double OrbitDistance => _orbitDistance;
     internal double OrbitYawRadians => _orbitYawRadians;
     internal double OrbitPitchRadians => _orbitPitchRadians;
+    internal double MoonOrbitPeriodSeconds => _orbitPeriods[MoonOrbitPathIndex];
+    internal double MoonOrbitEndpointMismatchMetres => _moonOrbitEndpointMismatchMetres;
     internal SolarCameraPresentationMode CameraPresentationMode { get; private set; }
     internal CameraProjection Projection => new(Math.PI / 3d, 16d / 9d, _surfaceCameraMode==PlanetaryCameraPresentationMode.SurfaceLocal?.05d:1e6d, SolAnalyticalDefinition.AstronomicalUnitMetres * MaximumOverviewDistanceAu);
     internal PlanetaryCameraPresentationMode SurfaceCameraMode=>_surfaceCameraMode;
@@ -240,8 +270,8 @@ internal sealed class SolarSystemScene
             }
         }
 
-        if (!TryBuildRootOrbitSamples(system, out var rootOrbitSamples, out var orbitTraversalIndices, out var orbitPeriods, out error)) return false;
-        var candidate = new SolarSystemScene(system, root, traversalIndices, rootOrbitSamples, orbitTraversalIndices, orbitPeriods, initialTime, startupUtc);
+        if (!TryBuildRootOrbitSamples(system, out var rootOrbitSamples, out var orbitTraversalIndices, out var orbitCenterTraversalIndices, out var orbitPeriods, out error)) return false;
+        var candidate = new SolarSystemScene(system, root, traversalIndices, rootOrbitSamples, orbitTraversalIndices, orbitCenterTraversalIndices, orbitPeriods, initialTime, startupUtc);
         if (!candidate.TryPublishAt(initialTime, out error)) return false;
         scene = candidate;
         error = string.Empty;
@@ -329,11 +359,9 @@ internal sealed class SolarSystemScene
         var cameraChanged = false;
         if (input.MouseWheelDetents != 0)
         {
-            var earthEnvironment=TryFocusedEnvironment(out var environment);var radial=CurrentSurfaceDirection();var surfaceRadius=earthEnvironment?PlanetaryTerrainQuery.VisibleSurfaceRadius(FocusedBody.RadiusMetres,radial,EarthPlanetaryScene.Terrain,environment):FocusedBody.RadiusMetres;var altitude=Math.Max(EarthPlanetaryScene.MinimumTerrainClearanceMetres,_orbitDistance-surfaceRadius);var factor=earthEnvironment?PlanetarySurfaceCameraPolicy.ZoomFactor(altitude):1.1d;
-            _orbitDistance = Math.Clamp(
-                surfaceRadius+altitude*Math.Pow(factor, -input.MouseWheelDetents),
-                earthEnvironment?surfaceRadius+EarthPlanetaryScene.MinimumTerrainClearanceMetres:FocusedBody.RadiusMetres*1.05d,
-                SolAnalyticalDefinition.AstronomicalUnitMetres * MaximumOverviewDistanceAu);
+            var earthEnvironment=TryFocusedEnvironment(out var environment);var radial=CurrentSurfaceDirection();var surfaceRadius=earthEnvironment?PlanetaryTerrainQuery.VisibleSurfaceRadius(FocusedBody.RadiusMetres,radial,EarthPlanetaryScene.Terrain,environment):FocusedBody.RadiusMetres;
+            var minimumDistance=earthEnvironment?surfaceRadius+EarthPlanetaryScene.MinimumTerrainClearanceMetres:FocusedBody.RadiusMetres*1.05d;
+            _orbitDistance=SolarCameraZoomPolicy.Apply(_orbitDistance,surfaceRadius,minimumDistance,SolAnalyticalDefinition.AstronomicalUnitMetres*MaximumOverviewDistanceAu,input.MouseWheelDetents);
             cameraChanged = true;
         }
         if (input.LookActive != 0 && (input.MouseDeltaX != 0f || input.MouseDeltaY != 0f))
@@ -680,17 +708,21 @@ internal sealed class SolarSystemScene
         for (var segment = 0; segment < OrbitSegmentCount; segment++)
         {
             var first = _rootOrbitSamples[path * OrbitSampleCount + segment] - camera.Position.Value;
-            var second = _rootOrbitSamples[path * OrbitSampleCount + segment + 1] - camera.Position.Value;
+            var secondSample = path == MoonOrbitPathIndex && segment == OrbitSegmentCount - 1 ? 0 : segment + 1;
+            var second = _rootOrbitSamples[path * OrbitSampleCount + secondSample] - camera.Position.Value;
             OrbitVertices[output++] = new NativeOrbitLineVertex { X = (float)first.X, Y = (float)first.Y, Z = (float)first.Z };
             OrbitVertices[output++] = new NativeOrbitLineVertex { X = (float)second.X, Y = (float)second.Y, Z = (float)second.Z };
         }
     }
 
-    private static bool TryBuildRootOrbitSamples(CelestialSystemDefinition system, out Double3[] samples, out int[] traversal, out double[] periods, out string error)
+    private static bool TryBuildRootOrbitSamples(CelestialSystemDefinition system, out Double3[] samples, out int[] traversal, out int[] centers, out double[] periods, out string error)
     {
         samples = new Double3[OrbitPathCount * OrbitSampleCount];
         traversal = new int[OrbitPathCount];
+        centers = new int[OrbitPathCount];
         periods = new double[OrbitPathCount];
+        var sunTraversal = FindTraversalIndex(system, SolarSystemBodyIds.Sun);
+        if (sunTraversal < 0) { error = "Solar orbit center is missing from the hierarchy."; return false; }
         for (var path = 0; path < OrbitPathCount; path++)
         {
             var bodyId = new CelestialBodyId(BodyOrder[path + 1]);
@@ -704,18 +736,34 @@ internal sealed class SolarSystemScene
             if (node.TrajectoryModel != CelestialTrajectoryModel.AnalyticalKepler ||
                 !system.TryGetAnalyticalKepler(node.Ephemeris.PayloadIndex, out var trajectory) ||
                 !system.TryGetBody(trajectory.CentralBody, out var central) ||
+                !system.TryGetAnalyticalCorrection(node.Ephemeris.PayloadIndex, out var correction) ||
+                !correction.IsValid ||
                 !TryGetPeriodSeconds(trajectory, central.PhysicalProperties.GravitationalParameter, out periods[path]))
             {
                 error = "Solar orbit trajectory authority is unavailable.";
                 return false;
             }
+            periods[path] /= correction.TimeScale;
             traversal[path] = nodeIndex;
+            if (!system.TryGetBody(bodyId, out var catalog)) { error = "Solar orbit catalog body is missing."; return false; }
+            var centerId = catalog.Identity.Classification == CelestialBodyClassification.Moon
+                ? catalog.Identity.ParentBody
+                : SolarSystemBodyIds.Sun;
+            if (centerId is not { } resolvedCenter || (centers[path] = FindTraversalIndex(system, resolvedCenter)) < 0)
+            {
+                error = "Solar orbit presentation center is unavailable.";
+                return false;
+            }
         }
 
         var evaluations = new ReferenceFrameEvaluation[system.Count];
         var roots = new FrameTransform[system.Count];
         var staging = new ReferenceFrameEvaluation[system.Count];
         var stagingRoots = new FrameTransform[system.Count];
+        var initial = CelestialSystemEvaluator.TryEvaluateSystem(system, SimulationInstant.Zero, evaluations, roots, staging, stagingRoots);
+        if (!initial.Succeeded) { error = $"Solar orbit center evaluation failed: {initial.Status}"; return false; }
+        Span<Double3> currentCenters = stackalloc Double3[OrbitPathCount];
+        for (var path = 0; path < OrbitPathCount; path++) currentCenters[path] = roots[centers[path]].Translation;
         for (var sample = 0; sample < OrbitSampleCount; sample++)
         for (var path = 0; path < OrbitPathCount; path++)
         {
@@ -724,7 +772,9 @@ internal sealed class SolarSystemScene
             catch (OverflowException) { error = "Solar orbit sample time overflow."; return false; }
             var result = CelestialSystemEvaluator.TryEvaluateSystem(system, time, evaluations, roots, staging, stagingRoots);
             if (!result.Succeeded) { error = $"Solar orbit evaluation failed: {result.Status}"; return false; }
-            samples[path * OrbitSampleCount + sample] = roots[traversal[path]].Translation;
+            samples[path * OrbitSampleCount + sample] = sample == 0
+                ? roots[traversal[path]].Translation
+                : currentCenters[path] + roots[traversal[path]].Translation - roots[centers[path]].Translation;
         }
         error = string.Empty;
         return true;
@@ -733,6 +783,8 @@ internal sealed class SolarSystemScene
     private bool TrySampleRootOrbits(SimulationInstant start, Span<Double3> destination, out string error)
     {
         if (destination.Length < OrbitPathCount * OrbitSampleCount) { error = "Solar orbit sample destination is too small."; return false; }
+        Span<Double3> currentCenters = stackalloc Double3[OrbitPathCount];
+        for (var path = 0; path < OrbitPathCount; path++) currentCenters[path] = _roots[_orbitCenterTraversalIndices[path]].Translation;
         for (var sample = 0; sample < OrbitSampleCount; sample++)
         for (var path = 0; path < OrbitPathCount; path++)
         {
@@ -741,10 +793,107 @@ internal sealed class SolarSystemScene
             catch (OverflowException) { error = "Solar orbit sample time overflow."; return false; }
             var result = CelestialSystemEvaluator.TryEvaluateSystem(_system, time, _evaluations, _roots, _staging, _stagingRoots);
             if (!result.Succeeded) { error = $"Solar orbit evaluation failed: {result.Status}"; return false; }
-            destination[path * OrbitSampleCount + sample] = _roots[_orbitTraversalIndices[path]].Translation;
+            destination[path * OrbitSampleCount + sample] = sample == 0
+                ? _roots[_orbitTraversalIndices[path]].Translation
+                : currentCenters[path] + _roots[_orbitTraversalIndices[path]].Translation - _roots[_orbitCenterTraversalIndices[path]].Translation;
         }
+        BuildPeriodicMoonOrbit(destination);
         error = string.Empty;
         return true;
+    }
+
+    private void BuildPeriodicMoonOrbit(Span<Double3> destination)
+    {
+        var pathOffset = MoonOrbitPathIndex * OrbitSampleCount;
+        for (var sample = 0; sample < OrbitSegmentCount; sample++)
+            _moonOrbitControlSamples[sample] = destination[pathOffset + sample];
+
+        var endpoint = destination[pathOffset + OrbitSegmentCount];
+        var startDerivative =
+            (_moonOrbitControlSamples[0] * -3d + _moonOrbitControlSamples[1] * 4d - _moonOrbitControlSamples[2]) *
+            (OrbitSegmentCount * .5d);
+        var endDerivative =
+            (endpoint * 3d - _moonOrbitControlSamples[OrbitSegmentCount - 1] * 4d +
+             _moonOrbitControlSamples[OrbitSegmentCount - 2]) * (OrbitSegmentCount * .5d);
+        var positionClosure = endpoint - _moonOrbitControlSamples[0];
+        var derivativeClosure = endDerivative - startDerivative;
+        _moonOrbitEndpointMismatchMetres = Math.Sqrt(positionClosure.LengthSquared);
+        var oppositeSample = OrbitSegmentCount / 2;
+        for (var sample = 0; sample < OrbitSegmentCount; sample++)
+        {
+            if (sample <= oppositeSample)
+            {
+                _moonOrbitPeriodicControls[sample] = _moonOrbitControlSamples[sample];
+                continue;
+            }
+            var phase = (sample - oppositeSample) / (double)oppositeSample;
+            var squared = phase * phase;
+            var cubed = squared * phase;
+            var positionWeight = -2d * cubed + 3d * squared;
+            var derivativeWeight = cubed - squared;
+            _moonOrbitPeriodicControls[sample] = _moonOrbitControlSamples[sample] -
+                positionClosure * positionWeight - derivativeClosure * (.5d * derivativeWeight);
+        }
+        _moonOrbitPeriodicControls[0] = _moonOrbitControlSamples[0];
+
+        var denseIndex = 0;
+        for (var segment = 0; segment < OrbitSegmentCount; segment++)
+        {
+            var previous = _moonOrbitPeriodicControls[(segment + OrbitSegmentCount - 1) % OrbitSegmentCount];
+            var first = _moonOrbitPeriodicControls[segment];
+            var second = _moonOrbitPeriodicControls[(segment + 1) % OrbitSegmentCount];
+            var following = _moonOrbitPeriodicControls[(segment + 2) % OrbitSegmentCount];
+            var firstTangent = (second - previous) * .5d;
+            var secondTangent = (following - first) * .5d;
+            for (var subdivision = 0; subdivision < MoonPeriodicSubdivisionsPerControlSegment; subdivision++)
+            {
+                var amount = subdivision / (double)MoonPeriodicSubdivisionsPerControlSegment;
+                _moonOrbitDenseSamples[denseIndex++] = CubicHermite(first, firstTangent, second, secondTangent, amount);
+            }
+        }
+        _moonOrbitDenseSamples[MoonPeriodicDenseSampleCount] = _moonOrbitDenseSamples[0];
+        _moonOrbitCumulativeLengths[0] = 0d;
+        for (var sample = 1; sample <= MoonPeriodicDenseSampleCount; sample++)
+            _moonOrbitCumulativeLengths[sample] = _moonOrbitCumulativeLengths[sample - 1] +
+                Math.Sqrt((_moonOrbitDenseSamples[sample] - _moonOrbitDenseSamples[sample - 1]).LengthSquared);
+
+        var totalLength = _moonOrbitCumulativeLengths[MoonPeriodicDenseSampleCount];
+        if (!double.IsFinite(totalLength) || totalLength <= 0d)
+        {
+            destination[pathOffset + OrbitSegmentCount] = destination[pathOffset];
+            return;
+        }
+
+        var denseCursor = 0;
+        var oppositeDenseSample = MoonPeriodicDenseSampleCount / 2;
+        var oppositeLength = _moonOrbitCumulativeLengths[oppositeDenseSample];
+        for (var sample = 0; sample < OrbitSegmentCount; sample++)
+        {
+            var targetLength = sample < OrbitSegmentCount / 2
+                ? oppositeLength * sample / (OrbitSegmentCount / 2)
+                : oppositeLength + (totalLength - oppositeLength) *
+                    (sample - OrbitSegmentCount / 2) / (OrbitSegmentCount / 2);
+            while (denseCursor + 1 < MoonPeriodicDenseSampleCount &&
+                   _moonOrbitCumulativeLengths[denseCursor + 1] < targetLength)
+                denseCursor++;
+            var intervalLength = _moonOrbitCumulativeLengths[denseCursor + 1] - _moonOrbitCumulativeLengths[denseCursor];
+            var amount = intervalLength > 0d
+                ? (targetLength - _moonOrbitCumulativeLengths[denseCursor]) / intervalLength
+                : 0d;
+            destination[pathOffset + sample] = _moonOrbitDenseSamples[denseCursor] +
+                (_moonOrbitDenseSamples[denseCursor + 1] - _moonOrbitDenseSamples[denseCursor]) * amount;
+        }
+        destination[pathOffset + OrbitSegmentCount] = destination[pathOffset];
+    }
+
+    private static Double3 CubicHermite(in Double3 first, in Double3 firstTangent, in Double3 second, in Double3 secondTangent, double amount)
+    {
+        var squared = amount * amount;
+        var cubed = squared * amount;
+        return first * (2d * cubed - 3d * squared + 1d) +
+               firstTangent * (cubed - 2d * squared + amount) +
+               second * (-2d * cubed + 3d * squared) +
+               secondTangent * (cubed - squared);
     }
 
     private static int FindTraversalIndex(CelestialSystemDefinition system, CelestialBodyId id)
