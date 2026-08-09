@@ -4,12 +4,12 @@ using NovaCore.Core.Camera;
 namespace NovaCore.Graphics;
 
 /// <summary>Root-resolved, non-authoritative input supplied by a celestial presentation bridge.</summary>
-public readonly record struct EvaluatedPlanetaryBody(ulong BodyId,UniversePosition Position,double RadiusMetres,Float3 Color,string? Label,bool Visible);
+public readonly record struct EvaluatedPlanetaryBody(ulong BodyId,UniversePosition Position,double RadiusMetres,Float3 Color,string? Label,bool Visible,DoubleQuaternion BodyFixedToRoot);
 
 /// <summary>Immutable renderer-side planet presentation data. It contains no hierarchy, ephemeris, or time authority.</summary>
-public readonly record struct PlanetRenderProxy(ulong BodyId,UniversePosition Position,double RadiusMetres,Float3 Color,string? Label,bool Visible)
+public readonly record struct PlanetRenderProxy(ulong BodyId,UniversePosition Position,double RadiusMetres,Float3 Color,string? Label,bool Visible,DoubleQuaternion BodyFixedToRoot)
 {
-    internal bool IsValid=>BodyId!=0&&Position.Value.IsFinite&&double.IsFinite(RadiusMetres)&&RadiusMetres>0&&Color.IsFinite;
+    internal bool IsValid=>BodyId!=0&&Position.Value.IsFinite&&double.IsFinite(RadiusMetres)&&RadiusMetres>0&&Color.IsFinite&&BodyFixedToRoot.IsFinite&&Math.Abs(BodyFixedToRoot.LengthSquared-1d)<1e-10d;
 }
 
 /// <summary>Immutable copied body-proxy publication consumed by planetary rendering and presentation controls only.</summary>
@@ -34,7 +34,7 @@ public static class PlanetaryBodyPresentationProvider
 {
     public static bool TryCreateSnapshot(ReadOnlySpan<EvaluatedPlanetaryBody> bodies,out PlanetaryPresentationSnapshot? snapshot)
     {
-        var proxies=new PlanetRenderProxy[bodies.Length];for(var index=0;index<bodies.Length;index++){var body=bodies[index];proxies[index]=new(body.BodyId,body.Position,body.RadiusMetres,body.Color,body.Label,body.Visible);}return PlanetaryPresentationSnapshot.TryCreate(proxies,out snapshot);
+        var proxies=new PlanetRenderProxy[bodies.Length];for(var index=0;index<bodies.Length;index++){var body=bodies[index];proxies[index]=new(body.BodyId,body.Position,body.RadiusMetres,body.Color,body.Label,body.Visible,body.BodyFixedToRoot);}return PlanetaryPresentationSnapshot.TryCreate(proxies,out snapshot);
     }
 }
 
@@ -44,7 +44,7 @@ public static class FarFieldPlanetaryRenderProxyProvider
     public static bool TryBuild(PlanetaryPresentationSnapshot snapshot,double radiusScale,double minimumApparentRadius,Span<ResolvedRenderObject> destination,out int count)
     {
         ArgumentNullException.ThrowIfNull(snapshot);count=0;if(!double.IsFinite(radiusScale)||radiusScale<=0||!double.IsFinite(minimumApparentRadius)||minimumApparentRadius<0||destination.Length<snapshot.Count)return false;
-        foreach(ref readonly var body in snapshot.Bodies){if(!body.Visible)continue;var radius=Math.Max(body.RadiusMetres*radiusScale,minimumApparentRadius);destination[count++]=new(new RenderObjectId(checked((uint)body.BodyId)),body.Position,DoubleQuaternion.Identity,new Double3(radius,radius,radius),MeshHandle.Sphere);}return true;
+        foreach(ref readonly var body in snapshot.Bodies){if(!body.Visible)continue;var radius=Math.Max(body.RadiusMetres*radiusScale,minimumApparentRadius);destination[count++]=new(new RenderObjectId(checked((uint)body.BodyId)),body.Position,body.BodyFixedToRoot,new Double3(radius,radius,radius),MeshHandle.Sphere);}return true;
     }
 }
 

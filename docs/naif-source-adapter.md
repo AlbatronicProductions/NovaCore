@@ -4,7 +4,7 @@
 
 It is not referenced by runtime simulation, graphics, camera, reference-frame, or native projects. It does not download or discover kernels; explicit repository-root inputs are verified against the pinned source manifest before a session is opened.
 
-The current development bundle is pinned to official NAIF `de440.bsp`, `gm_de440.tpc`, `pck00010.tpc`, and `naif0012.tls`, plus CSPICE N0067, a stable target map, and an explicit conversion policy. Local paths are invocation-only and never contribute to source identity.
+The current development bundle is pinned to official NAIF `de440.bsp`, `gm_de440.tpc`, `pck00010.tpc`, `moon_pa_de440_200625.bpc`, `moon_de440_250416.tf`, and `naif0012.tls`, plus CSPICE N0067, a stable target map, and explicit conversion policies. Local paths are invocation-only and never contribute to source identity. The binary lunar PCK and frame kernel are offline inputs to the checked compact lunar-orientation pack; neither is a runtime dependency.
 
 ## Current implementation status
 

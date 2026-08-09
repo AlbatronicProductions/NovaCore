@@ -15,11 +15,19 @@ using NovaCore.Core;
 using NovaCore.Core.ReferenceFrames;
 using System.Diagnostics;
 
+if (args.Contains("--orientation-only", StringComparer.Ordinal))
+{
+    CelestialBodyOrientationTests();
+    Console.WriteLine("PASS Celestial body orientation");
+    return;
+}
+
 var tests = new (string Name, Action Test)[]
 {
     ("SimulationInstant", InstantTests),
     ("SimulationDuration", DurationTests),
     ("SimulationRate", RateTests),
+    ("Solar UTC and speed presets", SolarUtcAndSpeedPresetTests),
     ("Event ordering", EventOrderingTests),
     ("Timeline topology", TimelineTopologyTests),
     ("Simulation clock", ClockTests),
@@ -35,6 +43,7 @@ var tests = new (string Name, Action Test)[]
     ("Celestial system time and provenance", CelestialSystemTimeAndProvenanceTests),
     ("Celestial ephemeris catalogs", CelestialEphemerisCatalogTests),
     ("Celestial system evaluation", CelestialSystemEvaluationTests),
+    ("Celestial body orientation", CelestialBodyOrientationTests),
     ("Two-body propagation", TwoBodyPropagationTests),
     ("Spacecraft attitude", SpacecraftAttitudeTests),
     ("Spacecraft attitude integration", SpacecraftAttitudeIntegrationTests),
@@ -49,6 +58,56 @@ var tests = new (string Name, Action Test)[]
     ("Allocation", AllocationTests),
 };
 foreach (var (name, test) in tests) { test(); Console.WriteLine($"PASS {name}"); }
+
+static void SolarUtcAndSpeedPresetTests()
+{
+    var expectedRates = new[] { new SimulationRate(1,10),new SimulationRate(1,1),new SimulationRate(2,1),new SimulationRate(4,1),new SimulationRate(10,1),new SimulationRate(30,1),new SimulationRate(120,1),new SimulationRate(600,1),new SimulationRate(1_200,1),new SimulationRate(3_600,1),new SimulationRate(14_400,1),new SimulationRate(86_400,1),new SimulationRate(604_800,1),new SimulationRate(2_592_000,1),new SimulationRate(7_776_000,1) };
+    var expectedLabels = new[] { "Simulation Speed: 0.1x (Slow Motion)","Simulation Speed: 1x (Realtime)","Simulation Speed: 2x","Simulation Speed: 4x","Simulation Speed: 10x","Simulation Speed: 30x","Simulation Speed: 120x","Simulation Speed: 600x","Simulation Speed: 1,200x","Simulation Speed: 3,600x","Simulation Speed: 14,400x","Simulation Speed: 86,400x","Simulation Speed: 604,800x","Simulation Speed: 2,592,000x","Simulation Speed: 7,776,000x" };
+    Check(SimulationSpeedPresets.Count==15,"fifteen ordered speed presets");
+    for(var index=0;index<expectedRates.Length;index++){var preset=SimulationSpeedPresets.Get(index);Check(preset.Rate==expectedRates[index]&&preset.Label==expectedLabels[index]&&SimulationSpeedPresets.IndexOf(preset.Rate)==index,$"exact speed preset {index}");}
+    Check(SimulationSpeedPresets.IndexOf(new SimulationRate(3,1))==-1,"non-preset rate lookup");
+
+    Check(SolarUtcTime.TryToSimulationInstant(new UtcInstant(946_728_000L*UtcInstant.TicksPerSecond),out var j2000UtcNoon)&&j2000UtcNoon.Ticks==64_183_927,"NAIF0012 J2000 UTC-noon to ET reference");
+    Check(SolarUtcTime.TryToSimulationInstant(new UtcInstant(1_704_067_200L*UtcInstant.TicksPerSecond),out var startup)&&SolarUtcTime.TryToSimulationInstant(new UtcInstant(1_704_067_200L*UtcInstant.TicksPerSecond),out var repeated)&&startup==repeated,"fixed current-epoch UTC conversion deterministic");
+    Check(!SolarUtcTime.TryToSimulationInstant(new UtcInstant(0),out _),"pre-NAIF0012 leap-table UTC rejected");
+    Check(SolarUtcTime.TryToSimulationInstant(new UtcInstant(long.MaxValue),out var extremeUtc)&&extremeUtc.Ticks>0,"full fixed-width UTC domain converts without intermediate overflow");
+
+    var system=SolAnalyticalDefinition.Instance;var count=system.Count;
+    var viaValues=new ReferenceFrameEvaluation[count];var viaRoots=new FrameTransform[count];var viaStaging=new ReferenceFrameEvaluation[count];var viaRootStaging=new FrameTransform[count];
+    var directValues=new ReferenceFrameEvaluation[count];var directRoots=new FrameTransform[count];var directStaging=new ReferenceFrameEvaluation[count];var directRootStaging=new FrameTransform[count];
+    foreach(var rate in expectedRates)
+    {
+        var clock=new SimulationClock(startup,new SimulationTimeline(),rate);var converted=clock.AdvanceByHostDuration(SimulationDuration.FromWholeSeconds(10));
+        Check(converted.Reason==SimulationHostAdvanceStopReason.Accepted,$"preset host conversion {rate}");
+        Check(clock.TryGetPendingSimulationDebtTarget(out var target),$"preset debt target {rate}");
+        var advanced=clock.AdvanceTo(target);clock.ConsumePendingSimulationDebt(converted.DerivedSimulationDuration);
+        Check(advanced.Reason==SimulationAdvanceStopReason.ReachedTarget&&clock.CurrentTime==target,$"preset direct target {rate}");
+        Check(CelestialSystemEvaluator.TryEvaluateSystem(system,clock.CurrentTime,viaValues,viaRoots,viaStaging,viaRootStaging).Succeeded&&CelestialSystemEvaluator.TryEvaluateSystem(system,target,directValues,directRoots,directStaging,directRootStaging).Succeeded&&viaValues.SequenceEqual(directValues)&&viaRoots.SequenceEqual(directRoots),$"all-body direct celestial parity {rate}");
+        for(var body=0;body<CelestialBodyOrientationEvaluator.SupportedBodyCount;body++){var id=CelestialBodyOrientationEvaluator.GetSource(body).BodyId;Check(CelestialBodyOrientationEvaluator.TryEvaluate(id,clock.CurrentTime,out var viaOrientation)&&CelestialBodyOrientationEvaluator.TryEvaluate(id,target,out var directOrientation)&&viaOrientation==directOrientation,$"all-body direct orientation parity {rate} body {id.Value}");}
+    }
+
+    _=SimulationSpeedPresets.Get(0);var before=GC.GetAllocatedBytesForCurrentThread();long checksum=0;for(var pass=0;pass<100_000;pass++){var preset=SimulationSpeedPresets.Get(pass%SimulationSpeedPresets.Count);checksum^=preset.Rate.Numerator+preset.Label.Length;}var allocated=GC.GetAllocatedBytesForCurrentThread()-before;Check(allocated==0&&checksum!=long.MinValue,"warmed speed-preset access allocates zero bytes");
+    Console.WriteLine($"Solar UTC: J2000 UTC-noon ET ticks={j2000UtcNoon.Ticks}; fixed startup ticks={startup.Ticks}; max preset={expectedRates[^1].Numerator}x; allocation={allocated} bytes");
+}
+
+static void CelestialBodyOrientationTests()
+{
+    Check(CelestialBodyOrientationEvaluator.SupportedBodyCount==9,"nine major oriented bodies");
+    var expectedFrames=new[]{"IAU_MERCURY","IAU_VENUS","IAU_EARTH","MOON_ME_DE440_ME421","IAU_MARS","IAU_JUPITER","IAU_SATURN","IAU_URANUS","IAU_NEPTUNE"};
+    Check(Enumerable.Range(0,9).Select(index=>CelestialBodyOrientationEvaluator.GetSource(index).FrameName).SequenceEqual(expectedFrames),"official PCK frame table");
+    var epochs=new[]{SimulationInstant.Zero,SimulationInstant.FromWholeSeconds(86_400),SimulationInstant.FromWholeSeconds(-12_345_678),SimulationInstant.FromWholeSeconds(3_200_000)};
+    foreach(var epoch in epochs)for(var index=0;index<9;index++){var source=CelestialBodyOrientationEvaluator.GetSource(index);Check(CelestialBodyOrientationEvaluator.TryEvaluate(source.BodyId,epoch,out var first),$"{source.FrameName} direct evaluation");Check(CelestialBodyOrientationEvaluator.TryEvaluate(source.BodyId,epoch,out var repeated),$"{source.FrameName} repeated evaluation");Check(first==repeated&&Math.Abs(first.BodyFixedToInertial.LengthSquared-1d)<1e-12d&&first.AngularVelocityInInertial.IsFinite,$"{source.FrameName} deterministic unit orientation");}
+    var hash=CelestialBodyOrientationEvaluator.DeterministicHash(SimulationInstant.Zero);Check(hash==0xD5767D2C2BABE9AAUL&&CelestialBodyOrientationEvaluator.DeterministicHash(SimulationInstant.Zero)==hash,"body orientation reference hash");
+    Check(CelestialBodyOrientationEvaluator.TryEvaluate(SolarSystemBodyIds.Earth,SimulationInstant.Zero,out var earth),"Earth orientation probe");Check(CelestialBodyOrientationEvaluator.TryEvaluate(SolarSystemBodyIds.Venus,SimulationInstant.Zero,out var venus),"Venus orientation probe");Check(CelestialBodyOrientationEvaluator.TryEvaluate(SolarSystemBodyIds.Uranus,SimulationInstant.Zero,out var uranus),"Uranus orientation probe");
+    Check(Double3.Dot(earth.AngularVelocityInInertial,earth.BodyFixedToInertial.Rotate(Double3.UnitY))>0d&&Double3.Dot(venus.AngularVelocityInInertial,venus.BodyFixedToInertial.Rotate(Double3.UnitY))<0d&&Double3.Dot(uranus.AngularVelocityInInertial,uranus.BodyFixedToInertial.Rotate(Double3.UnitY))<0d,"Earth prograde and Venus/Uranus retrograde conventions");
+    Check(CelestialBodyOrientationEvaluator.TryEvaluate(SolarSystemBodyIds.Moon,SimulationInstant.Zero,out var moon0)&&CelestialBodyOrientationEvaluator.TryEvaluate(SolarSystemBodyIds.Moon,SimulationInstant.FromWholeSeconds(86400*7),out var moon7)&&moon0.BodyFixedToInertial!=moon7.BodyFixedToInertial&&moon0.Source.FrameName=="MOON_ME_DE440_ME421"&&moon0.Source.IsHighAccuracyLunarFrame,"DE440 high-precision lunar orientation active");
+    Check(CelestialBodyOrientationEvaluator.TryEvaluate(SolarSystemBodyIds.Saturn,SimulationInstant.Zero,out var saturn0),"Saturn orientation probe");Check(CelestialBodyOrientationEvaluator.TryEvaluate(SolarSystemBodyIds.Saturn,SimulationInstant.FromWholeSeconds(86_400),out var saturn1),"Saturn future orientation probe");var ringPole0=saturn0.BodyFixedToInertial.Rotate(Double3.UnitY);var ringPole1=saturn1.BodyFixedToInertial.Rotate(Double3.UnitY);Check(Double3.Dot(ringPole0,ringPole1)>.999999d&&Math.Abs(ringPole0.LengthSquared-1d)<1e-12d,"Saturn ring plane follows authoritative equatorial pole independent of prime-meridian spin");
+    var anchor=new CelestialSurfaceAnchor(SolarSystemBodyIds.Earth,.4d,-1.2d,250d);var local=anchor.BodyFixedPosition(6_371_008.8d);Check(CelestialBodyFixedFrameEvaluator.TryTransformAnchor(anchor,SimulationInstant.Zero,6_371_008.8d,new Double3(1e11,2e11,-3e11),out var anchor0)&&CelestialBodyFixedFrameEvaluator.TryTransformAnchor(anchor,SimulationInstant.FromWholeSeconds(3600),6_371_008.8d,new Double3(1e11,2e11,-3e11),out var anchor1)&&anchor0!=anchor1&&anchor.BodyFixedPosition(6_371_008.8d)==local,"surface anchor rotates in inertial space while retaining latitude/longitude/altitude");
+    Check(CelestialBodyFixedFrameEvaluator.TryEvaluate(SolarSystemBodyIds.Earth,SimulationInstant.Zero,new Double3(1,2,3),new Double3(4,5,6),out var frame)&&frame.LocalToParent.Rotation==earth.BodyFixedToInertial&&frame.LocalToParent.Translation==new Double3(1,2,3)&&!frame.IsInertial,"separate CCF frame contract");
+    for(var rateIndex=0;rateIndex<SimulationSpeedPresets.Count;rateIndex++){var rate=SimulationSpeedPresets.Get(rateIndex).Rate;var clock=new SimulationClock(SimulationInstant.Zero,new SimulationTimeline(),rate);var host=clock.AdvanceByHostDuration(SimulationDuration.FromWholeSeconds(10));Check(host.Reason==SimulationHostAdvanceStopReason.Accepted,$"orientation warp conversion {rate}");Check(clock.TryGetPendingSimulationDebtTarget(out var target),$"orientation warp target {rate}");var advance=clock.AdvanceTo(target);clock.ConsumePendingSimulationDebt(new SimulationDuration(clock.CurrentTime.Ticks));Check(advance.Reason==SimulationAdvanceStopReason.ReachedTarget&&CelestialBodyOrientationEvaluator.TryEvaluate(SolarSystemBodyIds.Earth,clock.CurrentTime,out var viaWarp)&&CelestialBodyOrientationEvaluator.TryEvaluate(SolarSystemBodyIds.Earth,target,out var direct)&&viaWarp==direct,$"orientation direct-epoch parity {rate}");}
+    for(var index=0;index<9;index++){var source=CelestialBodyOrientationEvaluator.GetSource(index);Check(CelestialBodyOrientationEvaluator.TryEvaluate(source.BodyId,SimulationInstant.Zero,out var value),$"{source.FrameName} report evaluation");var q=value.BodyFixedToInertial;Console.WriteLine($"{source.FrameName} ET0 body-fixed-to-inertial: ({q.X:R}, {q.Y:R}, {q.Z:R}, {q.W:R})");}
+    var bodyIds=new[]{SolarSystemBodyIds.Mercury,SolarSystemBodyIds.Venus,SolarSystemBodyIds.Earth,SolarSystemBodyIds.Moon,SolarSystemBodyIds.Mars,SolarSystemBodyIds.Jupiter,SolarSystemBodyIds.Saturn,SolarSystemBodyIds.Uranus,SolarSystemBodyIds.Neptune};for(var index=0;index<bodyIds.Length;index++)_=CelestialBodyOrientationEvaluator.TryEvaluate(bodyIds[index],SimulationInstant.Zero,out _);for(var index=0;index<bodyIds.Length;index++){var bodyBefore=GC.GetAllocatedBytesForCurrentThread();for(var pass=0;pass<100;pass++)_=CelestialBodyOrientationEvaluator.TryEvaluate(bodyIds[index],new SimulationInstant(pass),out _);var bodyAllocated=GC.GetAllocatedBytesForCurrentThread()-bodyBefore;Console.WriteLine($"Orientation allocation probe body {bodyIds[index].Value}: {bodyAllocated/100d:F1} bytes/evaluation");}var lunarWatch=new Stopwatch();var lunarBefore=GC.GetAllocatedBytesForCurrentThread();lunarWatch.Start();ulong lunarChecksum=0;for(var pass=0;pass<100_000;pass++){Check(CelestialBodyOrientationEvaluator.TryEvaluate(SolarSystemBodyIds.Moon,new SimulationInstant(pass*1_000_000L),out var lunarValue),"lunar orientation performance evaluation");lunarChecksum^=(ulong)BitConverter.DoubleToInt64Bits(lunarValue.BodyFixedToInertial.W);}lunarWatch.Stop();var lunarAllocated=GC.GetAllocatedBytesForCurrentThread()-lunarBefore;var lunarNanoseconds=lunarWatch.Elapsed.TotalNanoseconds/100_000d;Console.WriteLine($"Lunar orientation: {lunarNanoseconds:F1} ns/evaluation; allocated={lunarAllocated} bytes; pack=0x{LunarHighPrecisionOrientation.DeterministicHash:X16}");Check(lunarChecksum!=ulong.MaxValue&&lunarAllocated==0&&lunarNanoseconds<10_000d,"high-precision lunar orientation performance and allocation");var watch=new Stopwatch();watch.Start();watch.Stop();watch.Reset();var before=GC.GetAllocatedBytesForCurrentThread();watch.Start();ulong checksum=0;var allEvaluated=true;for(var pass=0;pass<10_000;pass++)for(var index=0;index<bodyIds.Length;index++){allEvaluated&=CelestialBodyOrientationEvaluator.TryEvaluate(bodyIds[index],new SimulationInstant(pass),out var value);checksum^=(ulong)BitConverter.DoubleToInt64Bits(value.BodyFixedToInertial.W);}watch.Stop();var allocated=GC.GetAllocatedBytesForCurrentThread()-before;Console.WriteLine($"Body orientation: hash=0x{hash:X16}; 90,000 evaluations={watch.Elapsed.TotalMilliseconds:F3} ms; all-body={watch.Elapsed.TotalNanoseconds/10_000d:F1} ns; allocated={allocated} bytes");Check(allEvaluated&&allocated==0&&checksum!=ulong.MaxValue,"all-body orientation evaluation allocates zero bytes");
+}
 
 static void InstantTests()
 {

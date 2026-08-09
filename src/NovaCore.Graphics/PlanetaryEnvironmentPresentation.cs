@@ -47,6 +47,15 @@ public readonly record struct PlanetaryEnvironmentPresentation(
         180d, .34f, 48_000f, .18f, new Float3(.008f, .055f, .16f),
         1f, PlanetaryTerrainDefinition.EarthProceduralV1.MaximumHeightMetres);
 
+    public static PlanetaryEnvironmentPresentation EarthDataV2 => new(
+        6, 2,
+        PlanetaryEnvironmentLayers.Atmosphere | PlanetaryEnvironmentLayers.Clouds | PlanetaryEnvironmentLayers.Ocean,
+        100_000d, 8_000d, 1_200d, .76f,
+        new Float3(5.8e-3f, 13.5e-3f, 33.1e-3f), 4.0e-3f,
+        2_000d, 12_000d, .42f, .82f, 1f, 8f, .22f,
+        .5d, .16f, 2_400f, .12f, new Float3(.006f, .035f, .11f),
+        .94f, PlanetaryTerrainDefinition.EarthAuthoritativeV3.MaximumHeightMetres);
+
     public bool IsValid => BodyId != 0 && SourceVersion != 0 && Layers != PlanetaryEnvironmentLayers.None &&
         double.IsFinite(AtmosphereHeightMetres) && AtmosphereHeightMetres > 0d &&
         double.IsFinite(RayleighScaleHeightMetres) && RayleighScaleHeightMetres > 0d && RayleighScaleHeightMetres < AtmosphereHeightMetres &&
@@ -145,4 +154,9 @@ public static class PlanetarySurfaceCameraPolicy
         return PlanetaryCameraPresentationMode.Orbital;
     }
     public static double ZoomFactor(double altitudeMetres)=>altitudeMetres switch{>1_000_000d=>1.6d,>100_000d=>1.35d,>10_000d=>1.22d,_=>1.12d};
+    public static double TranslationSpeedMetresPerSecond(double altitudeMetres)
+    {
+        if(!double.IsFinite(altitudeMetres)||altitudeMetres<0d)throw new ArgumentOutOfRangeException(nameof(altitudeMetres));
+        return Math.Clamp(12d+altitudeMetres*.02d,12d,2_000d);
+    }
 }

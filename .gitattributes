@@ -1,0 +1,2 @@
+assets/earth/runtime/*.ncvtex filter=lfs diff=lfs merge=lfs -text
+assets/earth/runtime/*.r16 filter=lfs diff=lfs merge=lfs -text

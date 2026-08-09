@@ -1,0 +1,42 @@
+#version 460
+#extension GL_GOOGLE_include_directive : require
+#extension GL_ARB_gpu_shader_fp64 : require
+#include "planet_terrain.glsl"
+#include "earth_virtual_texture.glsl"
+
+struct EyeballVertex { vec4 positionHeight; vec4 normal; vec4 bodyDirection; };
+layout(std430,set=0,binding=2) readonly buffer PlanetaryInput { vec4 cameraHighRadiusHigh; vec4 cameraLowRadiusLow; vec4 thresholds; uvec4 controls; vec4 viewForwardHalfAngle; } planetaryInput;
+layout(std430,set=0,binding=12) readonly buffer EyeballInput {
+  vec4 cameraHighRadiusHigh; vec4 cameraLowRadiusLow; vec4 surface;
+  uvec4 identity; vec4 viewForwardMargin; vec4 mapping;
+  uvec4 topology; uvec4 reserved;
+} eye;
+layout(std430,set=0,binding=13) writeonly buffer EyeballVertices { EyeballVertex values[]; } outputVertices;
+layout(std430,set=0,binding=14) buffer EyeballIndirect { uint values[]; } indirectData;
+layout(local_size_x=256,local_size_y=1,local_size_z=1) in;
+
+dvec3 CameraD(){return dvec3(eye.cameraHighRadiusHigh.xyz)+dvec3(eye.cameraLowRadiusLow.xyz);}
+double RadiusD(){return double(eye.cameraHighRadiusHigh.w)+double(eye.cameraLowRadiusLow.w);}
+dvec3 TangentReference(dvec3 direction){return abs(direction.y)<.95?dvec3(0,1,0):dvec3(1,0,0);}
+uint EarthRequestedLevel(){float altitude=eye.surface.x;return altitude>1000000.0?1u:altitude>100000.0?2u:altitude>10000.0?3u:4u;}
+double EarthHeight(dvec3 direction){vec4 albedo;float elevation,cloud,blend;uint resident;EarthSurfaceSample(vec3(direction),EarthRequestedLevel(),planetaryInput.controls.w,albedo,elevation,cloud,blend,resident);return double(max(elevation,0.0));}
+double SurfaceHeight(dvec3 direction){double raw=eye.identity.z==3u?EarthHeight(direction):PlanetTerrainHeightD(direction,24u,double(eye.surface.y));return max(raw,double(eye.surface.z));}
+
+void main(){
+  uint vertex=gl_GlobalInvocationID.x;if(vertex>=eye.topology.x)return;
+  dvec3 camera=CameraD();double distance=length(camera);dvec3 pupil=normalize(camera);
+  dvec3 east=normalize(cross(TangentReference(pupil),pupil));dvec3 north=normalize(cross(pupil,east));
+  dvec3 direction=pupil;
+  double localRadius=max(1.0,distance-double(eye.surface.x));
+  double horizon=double(acos(float(clamp(localRadius/distance,0.0,1.0))));
+  double maximumAngle=min(1.45,horizon*1.20+double(eye.viewForwardMargin.w));
+  if(vertex>0u){uint address=vertex-1u;uint ring=address/eye.topology.w+1u;uint segment=address%eye.topology.w;double radial=double(ring)/double(eye.topology.z);double warped=radial*radial;float azimuth=6.2831853071795864769*float(segment)/float(eye.topology.w);double angle=maximumAngle*warped;float c=cos(float(angle)),s=sin(float(angle));dvec3 tangent=east*double(cos(azimuth))+north*double(sin(azimuth));direction=normalize(pupil*double(c)+tangent*double(s));}
+  double rawHeight=eye.identity.z==3u?EarthHeight(direction):PlanetTerrainHeightD(direction,24u,double(eye.surface.y));double visibleHeight=max(rawHeight,double(eye.surface.z));double radius=RadiusD();
+  dvec3 reference=TangentReference(direction);dvec3 localEast=normalize(cross(reference,direction));dvec3 localNorth=normalize(cross(direction,localEast));double normalAngle=max(double(eye.mapping.z)/radius,maximumAngle/double(eye.topology.z)*.20);
+  dvec3 leftDirection=normalize(direction-localEast*normalAngle),rightDirection=normalize(direction+localEast*normalAngle),downDirection=normalize(direction-localNorth*normalAngle),upDirection=normalize(direction+localNorth*normalAngle);
+  dvec3 left=leftDirection*(radius+SurfaceHeight(leftDirection)),right=rightDirection*(radius+SurfaceHeight(rightDirection)),down=downDirection*(radius+SurfaceHeight(downDirection)),up=upDirection*(radius+SurfaceHeight(upDirection));
+  dvec3 surfaceNormal=normalize(cross(right-left,up-down));if(dot(surfaceNormal,direction)<0.0)surfaceNormal=-surfaceNormal;if(rawHeight<double(eye.surface.z))surfaceNormal=direction;
+  dvec3 relative=direction*(radius+visibleHeight)-camera;
+  outputVertices.values[vertex].positionHeight=vec4(vec3(relative),float(rawHeight));outputVertices.values[vertex].normal=vec4(vec3(surfaceNormal),0);outputVertices.values[vertex].bodyDirection=vec4(vec3(direction),0);
+  if(vertex==0u){indirectData.values[0]=eye.topology.y;indirectData.values[1]=1u;indirectData.values[2]=0u;indirectData.values[3]=0u;indirectData.values[4]=0u;}
+}

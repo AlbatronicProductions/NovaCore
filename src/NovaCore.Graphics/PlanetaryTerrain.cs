@@ -9,18 +9,22 @@ public readonly record struct PlanetaryTerrainDefinition(uint SourceId,uint Vers
     public const int GridVertexCount=(GridResolution+1)*(GridResolution+1);
     public const int MaximumDetailOctaves=7;
     public static PlanetaryTerrainDefinition EarthProceduralV1=>new(1,1,7_600d);
+    public static PlanetaryTerrainDefinition EarthEyeballV2=>new(1,2,7_600d);
+    public static PlanetaryTerrainDefinition EarthAuthoritativeV3=>new(2,3,EarthSurfaceDatasetContract.MaximumElevationMetres);
     public bool IsValid=>SourceId!=0&&Version!=0&&double.IsFinite(MaximumHeightMetres)&&MaximumHeightMetres>0;
 
     public double SampleHeight(in Double3 bodyDirection,int patchLevel)
     {
         if(!IsValid||!bodyDirection.IsFinite||bodyDirection.LengthSquared<=0||patchLevel is <0 or >24)throw new ArgumentOutOfRangeException();
+        if(SourceId==EarthAuthoritativeV3.SourceId&&Version==EarthAuthoritativeV3.Version)return EarthSurfaceDataset.SampleHeight(bodyDirection);
         var direction=bodyDirection.Normalized();
         var continental=.46d*Math.Sin(Double3.Dot(direction,new(.8017837257372732,.2672612419124244,.5345224838248488))*3.1d+.7d)
             +.31d*Math.Sin(Double3.Dot(direction,new(-.4082482904638631,.8164965809277261,.4082482904638631))*5.3d-1.2d)
             +.23d*Math.Sin(Double3.Dot(direction,new(.1825741858350554,-.3651483716701107,.9128709291752769))*8.7d+.35d);
         var land=Math.Max(0d,continental-.02d);var height=land*land*5_200d;
-        var octaveCount=Math.Clamp((patchLevel-7)/2,0,MaximumDetailOctaves);
-        for(var octave=0;octave<octaveCount;octave++)
+        // V2 terrain truth is level/topology independent. The legacy level
+        // parameter remains only for ABI/source compatibility and validation.
+        for(var octave=0;octave<MaximumDetailOctaves;octave++)
         {
             var frequency=64d*(1<<(2*octave));var amplitude=900d*Math.Pow(.52d,octave);
             var waveA=Math.Sin(Double3.Dot(direction,new(.8728715609439696,.4364357804719848,-.2182178902359924))*frequency

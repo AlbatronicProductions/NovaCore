@@ -24,6 +24,16 @@ struct alignas(16) NcPlanetaryGpuConstants {
   uint32_t maximumLevel, outputCapacity, terrainVersion, terrainFrame;
   float viewForwardX, viewForwardY, viewForwardZ, viewHalfAngleRadians;
 };
+struct alignas(16) NcPlanetaryEyeball {
+  float cameraBodyHighX, cameraBodyHighY, cameraBodyHighZ, radiusHigh;
+  float cameraBodyLowX, cameraBodyLowY, cameraBodyLowZ, radiusLow;
+  float surfaceAltitudeMetres, maximumTerrainHeightMetres, oceanSeaLevelMetres, blendAlpha;
+  uint32_t bodyIdLow, bodyIdHigh, terrainVersion, enabled;
+  float viewForwardX, viewForwardY, viewForwardZ, horizonMarginRadians;
+  float radialWarpExponent, detailFrequency, normalStepMetres, regionalAlpha;
+  uint32_t vertexCount, indexCount, radialRingCount, azimuthSegmentCount;
+  uint32_t reserved0, reserved1, reserved2, reserved3;
+};
 enum NcPlanetaryMode : uint32_t { NC_PLANETARY_CPU_REFERENCE = 0, NC_PLANETARY_GPU_PRODUCTION = 1, NC_PLANETARY_CPU_GPU_VALIDATION = 2 };
 enum NcPlanetaryRenderRegime : uint32_t { NC_PLANETARY_DISTANT_ONLY = 0, NC_PLANETARY_TRANSITION = 1, NC_PLANETARY_DETAILED_ONLY = 2 };
 enum NcPresentationFocus : uint32_t { NC_PRESENTATION_FOCUS_NONE = 0, NC_PRESENTATION_FOCUS_SUN = 1, NC_PRESENTATION_FOCUS_MERCURY = 2, NC_PRESENTATION_FOCUS_VENUS = 3, NC_PRESENTATION_FOCUS_EARTH = 4, NC_PRESENTATION_FOCUS_MOON = 5, NC_PRESENTATION_FOCUS_MARS = 6, NC_PRESENTATION_FOCUS_JUPITER = 7, NC_PRESENTATION_FOCUS_SATURN = 8, NC_PRESENTATION_FOCUS_URANUS = 9, NC_PRESENTATION_FOCUS_NEPTUNE = 10 };
@@ -37,8 +47,9 @@ struct alignas(16) NcPlanetaryPresentation {
   float ringInnerRadiusRatio, ringOuterRadiusRatio, ringOpacity, ringBandFrequency;
   float ringOrientationX, ringOrientationY, ringOrientationZ, ringOrientationW;
   float ringColorR, ringColorG, ringColorB, ringColorA;
+  float bodyOrientationX, bodyOrientationY, bodyOrientationZ, bodyOrientationW;
 };
-struct alignas(16) NcSolarLighting { float sourceCenterX, sourceCenterY, sourceCenterZ, exposure; float photosphereR, photosphereG, photosphereB, ambientFloor; float sourceRadiance, glowStrength; uint32_t enabled, padding; };
+struct alignas(16) NcSolarLighting { float sourceCenterX, sourceCenterY, sourceCenterZ, exposure; float photosphereR, photosphereG, photosphereB, ambientFloor; float sourceRadiance, glowStrength; uint32_t enabled, speedHud; };
 struct alignas(16) NcPlanetaryEnvironment {
   float centerX, centerY, centerZ, radius;
   uint32_t bodyIdLow, bodyIdHigh, enabledLayers, sourceVersion;
@@ -50,8 +61,8 @@ struct alignas(16) NcPlanetaryEnvironment {
   float oceanColorR, oceanColorG, oceanColorB, exposureAdjustment;
 };
 struct NcOrbitLineVertex { float position[3]; };
-struct NcFrameSubmission { NcCameraData camera; NcRenderObject* objects; uint32_t objectCount; NcDrawBatch* batches; uint32_t batchCount; NcOrbitLineVertex* orbitVertices; uint32_t orbitVertexCount; NcOrbitLineVertex* previousOrbitVertices; uint32_t previousOrbitVertexCount; NcOrbitLineVertex* bodyForwardVertices; uint32_t bodyForwardVertexCount; NcOrbitLineVertex* targetDirectionVertices; uint32_t targetDirectionVertexCount; NcPlanetaryPatch* planetaryPatches; uint32_t planetaryPatchCount; uint32_t planetaryGpuAlignmentPadding; NcPlanetaryGpuConstants planetaryGpu; NcPlanetaryMode planetaryMode; uint32_t planetaryPadding[3]; NcPlanetaryPresentation planetaryPresentation; NcPlanetaryPresentation* distantBodies; uint32_t distantBodyCount, distantBodyPadding; NcSolarLighting solarLighting; NcPlanetaryEnvironment planetaryEnvironment; };
-struct NcAbiLayout { uint32_t encodedPositionSize, cameraDataSize, cameraPositionOffset, cameraViewProjectionOffset, renderTransformSize, renderObjectSize, renderObjectPositionOffset, renderObjectTransformOffset, renderObjectMeshOffset; uint32_t drawBatchSize, orbitLineVertexSize, frameSubmissionSize, frameObjectsOffset, frameBatchesOffset, frameOrbitVerticesOffset, frameOrbitVertexCountOffset; uint32_t inputStateSize, inputDeltaSecondsOffset, inputMoveLeftOffset, inputMoveRightOffset, inputMoveForwardOffset, inputMoveBackwardOffset, inputMoveDownOffset, inputMoveUpOffset, inputResetOffset, inputLookActiveOffset, inputMouseDeltaXOffset, inputMouseDeltaYOffset, inputMouseWheelDetentsOffset, inputPauseToggleOffset, inputRateDecreaseOffset, inputRateIncreaseOffset, inputSasModeKeyOffset; uint32_t framePlanetaryGpuOffset, framePlanetaryModeOffset, framePlanetaryPresentationOffset, inputPresentationFocusOffset, frameSolarLightingOffset, framePlanetaryEnvironmentOffset; };
+struct NcFrameSubmission { NcCameraData camera; NcRenderObject* objects; uint32_t objectCount; NcDrawBatch* batches; uint32_t batchCount; NcOrbitLineVertex* orbitVertices; uint32_t orbitVertexCount; NcOrbitLineVertex* previousOrbitVertices; uint32_t previousOrbitVertexCount; NcOrbitLineVertex* bodyForwardVertices; uint32_t bodyForwardVertexCount; NcOrbitLineVertex* targetDirectionVertices; uint32_t targetDirectionVertexCount; NcPlanetaryPatch* planetaryPatches; uint32_t planetaryPatchCount; uint32_t planetaryGpuAlignmentPadding; NcPlanetaryGpuConstants planetaryGpu; NcPlanetaryMode planetaryMode; uint32_t planetaryPadding[3]; NcPlanetaryPresentation planetaryPresentation; NcPlanetaryPresentation* distantBodies; uint32_t distantBodyCount, distantBodyPadding; NcSolarLighting solarLighting; NcPlanetaryEnvironment planetaryEnvironment; NcPlanetaryEyeball planetaryEyeball; };
+struct NcAbiLayout { uint32_t encodedPositionSize, cameraDataSize, cameraPositionOffset, cameraViewProjectionOffset, renderTransformSize, renderObjectSize, renderObjectPositionOffset, renderObjectTransformOffset, renderObjectMeshOffset; uint32_t drawBatchSize, orbitLineVertexSize, frameSubmissionSize, frameObjectsOffset, frameBatchesOffset, frameOrbitVerticesOffset, frameOrbitVertexCountOffset; uint32_t inputStateSize, inputDeltaSecondsOffset, inputMoveLeftOffset, inputMoveRightOffset, inputMoveForwardOffset, inputMoveBackwardOffset, inputMoveDownOffset, inputMoveUpOffset, inputResetOffset, inputLookActiveOffset, inputMouseDeltaXOffset, inputMouseDeltaYOffset, inputMouseWheelDetentsOffset, inputPauseToggleOffset, inputRateDecreaseOffset, inputRateIncreaseOffset, inputSasModeKeyOffset; uint32_t framePlanetaryGpuOffset, framePlanetaryModeOffset, framePlanetaryPresentationOffset, inputPresentationFocusOffset, frameSolarLightingOffset, framePlanetaryEnvironmentOffset, framePlanetaryEyeballOffset; };
 // mouseWheelDetents is signed Win32 WHEEL_DELTA-normalized detents, consumed once per callback.
 struct NcInputState { float deltaSeconds; uint32_t moveLeft, moveRight, moveForward, moveBackward, moveDown, moveUp, reset, lookActive; float mouseDeltaX, mouseDeltaY; int32_t mouseWheelDetents; uint32_t pauseToggle, rateDecrease, rateIncrease, sasModeKey; NcPresentationFocus presentationFocus; };
 enum NcHostEventType : uint32_t { NC_DIAGNOSTIC = 1, NC_UPDATE_FRAME = 2 };

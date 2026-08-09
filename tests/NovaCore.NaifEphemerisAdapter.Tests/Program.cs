@@ -1,10 +1,12 @@
 using NovaCore.NaifEphemerisAdapter;
 using NovaCore.Simulation.Celestial;
+using NovaCore.Simulation.Time;
+using NovaCore.Core;
 
 var root=Environment.CurrentDirectory;
 Check(OfficialNaifBundle.VerifyRepositoryRoot(root),"pinned official DE440/CSPICE source bundle");
 var shim=Path.Combine(root,"external","naif","build","cspice-shim","NovaCore.CSpiceShim.dll");
-var kernels=new[]{"de440.bsp","gm_de440.tpc","pck00010.tpc","naif0012.tls"}.Select(name=>Path.Combine(root,"external","naif","kernels",name)).ToArray();
+var kernels=new[]{"de440.bsp","gm_de440.tpc","pck00010.tpc","moon_pa_de440_200625.bpc","moon_de440_250416.tf","naif0012.tls"}.Select(name=>Path.Combine(root,"external","naif","kernels",name)).ToArray();
 Check(CspiceSession.TryCreate(shim,out var session,out _),"explicit shim load");
 var active=session??throw new InvalidOperationException("session missing after success");
 using(active)
@@ -23,6 +25,8 @@ active=session??throw new InvalidOperationException("sampler session missing");
 using(active)
 {
     Check(active.TryLoadKernels(kernels),"sampler kernel load");
+    CheckOrientationFrames(active);
+    CheckHighPrecisionLunarFrames(active);
     var v2=SolAnalyticalDefinition.CreateV2ForTest();
     Check(CompactSolarOracleValidation.TryRun(active,v2,out var v2Baseline,out var v2BaselineError),$"compact Solar v2 baseline: {v2BaselineError}");
     Check(v2Baseline.DeterministicHash==0x0F08F6DE4502679EUL&&v2Baseline.AllocatedBytesPerAllBodyEvaluation==0,"compact Solar exact v2 baseline reproduction");
@@ -80,6 +84,47 @@ using(active)
 }
 
 static void Check(bool condition,string name){if(!condition)throw new InvalidOperationException(name);}
+static void CheckOrientationFrames(CspiceSession session)
+{
+    var epochs=new[]{0d,86400d*1234.5d,-86400d*4321.25d};
+    for(var bodyIndex=0;bodyIndex<CelestialBodyOrientationEvaluator.SupportedBodyCount;bodyIndex++)
+    {
+        var source=CelestialBodyOrientationEvaluator.GetSource(bodyIndex);
+        foreach(var et in epochs)
+        {
+            Check(session.TryQueryFrame("J2000",source.FrameName,et,out var matrix,out var diagnostic),$"{source.FrameName} frame query: {diagnostic.ShortMessage}");
+            var instant=SimulationInstant.FromSecondsRounded(et);
+            Check(CelestialBodyOrientationEvaluator.TryEvaluate(source.BodyId,instant,out var orientation),$"{source.FrameName} compact evaluation");
+            var iauX=new Double3(1,0,0);var iauZ=new Double3(0,0,1);
+            var expectedX=TransposeRotate(matrix,iauX);var expectedPole=TransposeRotate(matrix,iauZ);
+            var actualX=orientation.BodyFixedToInertial.Rotate(Double3.UnitX);var actualPole=orientation.BodyFixedToInertial.Rotate(Double3.UnitY);
+            Check((actualX-expectedX).LengthSquared<2e-20d&&(actualPole-expectedPole).LengthSquared<2e-20d,$"{source.FrameName} PCK vector parity at {et:R}; actualX={actualX}; expectedX={expectedX}; actualPole={actualPole}; expectedPole={expectedPole}");
+        }
+    }
+    Console.WriteLine($"body-orientation,pck00010,et0_hash=0x{CelestialBodyOrientationEvaluator.DeterministicHash(SimulationInstant.Zero):X16}");
+}
+static void CheckHighPrecisionLunarFrames(CspiceSession session)
+{
+    Check(LunarHighPrecisionOrientation.IsAvailable&&LunarHighPrecisionOrientation.DeterministicHash==0x3BCE78D924EA3532UL,"checked lunar residual pack identity");
+    Check(!LunarHighPrecisionOrientation.Validate([]),"invalid lunar pack rejected");
+    var epochs=new[]{0d,-86400d,86400d,-30d*86400d,30d*86400d,-365.25d*86400d,365.25d*86400d,-20d*365.25d*86400d,40d*365.25d*86400d,839_529_789.506934d,1_337_193_789.506934d,1234.375d*86400d,-4321.625d*86400d};
+    var maximum=0d;var maximumFallback=0d;var maximumPole=0d;var maximumMeridian=0d;
+    foreach(var et in epochs)
+    {
+        Check(session.TryQueryFrame("J2000",LunarHighPrecisionOrientation.FrameName,et,out var matrix,out var diagnostic),$"DE440 Moon frame query {et:R}: {diagnostic.ShortMessage}");
+        var oracle=LunarOrientationPackBuilder.ToNovaQuaternion(matrix);var instant=SimulationInstant.FromSecondsRounded(et);Check(CelestialBodyOrientationEvaluator.TryEvaluate(SolarSystemBodyIds.Moon,instant,out var actual)&&actual.Source.IsHighAccuracyLunarFrame,$"high-precision Moon active at {et:R}");var fallback=CelestialBodyOrientationEvaluator.EvaluateMoonFallbackForTest(instant.SecondsSinceEpoch);
+        var residual=Angle(actual.BodyFixedToInertial,oracle);var fallbackResidual=Angle(fallback,oracle);var pole=VectorAngle(actual.BodyFixedToInertial.Rotate(Double3.UnitY),oracle.Rotate(Double3.UnitY));var meridian=VectorAngle(actual.BodyFixedToInertial.Rotate(Double3.UnitX),oracle.Rotate(Double3.UnitX));maximum=Math.Max(maximum,residual);maximumFallback=Math.Max(maximumFallback,fallbackResidual);maximumPole=Math.Max(maximumPole,pole);maximumMeridian=Math.Max(maximumMeridian,meridian);
+        Console.WriteLine($"lunar-orientation,et={et:R},residual_arcsec={residual*206264.80624709636:R},fallback_arcsec={fallbackResidual*206264.80624709636:R},pole_arcsec={pole*206264.80624709636:R},meridian_arcsec={meridian*206264.80624709636:R}");
+    }
+    var outside=new SimulationInstant(LunarHighPrecisionOrientation.CoverageEndTicks+86_400_000_000L);Check(CelestialBodyOrientationEvaluator.TryEvaluate(SolarSystemBodyIds.Moon,outside,out var fallbackOutside)&&!fallbackOutside.Source.IsHighAccuracyLunarFrame&&fallbackOutside.Source.FrameName=="IAU_MOON"&&fallbackOutside.BodyFixedToInertial.IsFinite,"out-of-coverage Moon explicitly falls back to IAU_MOON");
+    var boundary=SimulationInstant.FromWholeSeconds(12_345_678);Check(CelestialBodyOrientationEvaluator.TryEvaluate(SolarSystemBodyIds.Moon,boundary,out var left)&&CelestialBodyOrientationEvaluator.TryEvaluate(SolarSystemBodyIds.Moon,new SimulationInstant(boundary.Ticks+1),out var right)&&Angle(left.BodyFixedToInertial,right.BodyFixedToInertial)<1e-9d,"high-precision Moon microtick continuity");
+    Check(maximum<5e-9d&&maximumPole<5e-9d&&maximumMeridian<5e-9d&&maximumFallback>1e-6d,"DE440 lunar pack full-orientation accuracy and material fallback improvement");
+    Console.WriteLine($"lunar-orientation,summary,max_arcsec={maximum*206264.80624709636:R},fallback_max_arcsec={maximumFallback*206264.80624709636:R},pole_max_arcsec={maximumPole*206264.80624709636:R},meridian_max_arcsec={maximumMeridian*206264.80624709636:R},pack_hash=0x{LunarHighPrecisionOrientation.DeterministicHash:X16}");
+
+    static double Angle(in DoubleQuaternion left,in DoubleQuaternion right){var relative=(left.Conjugate().Normalized()*right).Normalized();return 2d*Math.Atan2(Math.Sqrt(relative.X*relative.X+relative.Y*relative.Y+relative.Z*relative.Z),Math.Abs(relative.W));}
+    static double VectorAngle(in Double3 left,in Double3 right)=>Math.Atan2(Math.Sqrt(Double3.Cross(left,right).LengthSquared),Double3.Dot(left,right));
+}
+static Double3 TransposeRotate(in CspiceFrameTransform m,in Double3 v)=>new(m.M00*v.X+m.M10*v.Y+m.M20*v.Z,m.M01*v.X+m.M11*v.Y+m.M21*v.Z,m.M02*v.X+m.M12*v.Y+m.M22*v.Z);
 static double Relative(double left,double right)=>Math.Abs(left-right)/Math.Max(Math.Abs(left),Math.Abs(right));
 static double AngleDifference(double left,double right){var delta=Math.Abs(left-right)%360d;return Math.Min(delta,360d-delta);}
 static bool Same(AdaptiveSamplingResult first,AdaptiveSamplingResult second)=>first.BodyId==second.BodyId&&first.ParentBodyId==second.ParentBodyId&&first.Coverage==second.Coverage&&first.AcceptedKnots.SequenceEqual(second.AcceptedKnots)&&first.AcceptedIntervals.SequenceEqual(second.AcceptedIntervals)&&first.SampleCount==second.SampleCount&&first.IntervalCount==second.IntervalCount&&first.MaximumPositionError==second.MaximumPositionError&&first.RmsPositionError==second.RmsPositionError&&first.MaximumVelocityError==second.MaximumVelocityError&&first.RmsVelocityError==second.RmsVelocityError&&first.WorstPositionErrorET==second.WorstPositionErrorET&&first.WorstVelocityErrorET==second.WorstVelocityErrorET&&first.MaximumSubdivisionDepth==second.MaximumSubdivisionDepth&&first.DeterministicHash==second.DeterministicHash;

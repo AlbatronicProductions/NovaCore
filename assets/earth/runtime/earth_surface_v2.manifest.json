@@ -1,0 +1,104 @@
+{
+  "elevationEncoding": {
+    "format": "R16_UNORM",
+    "maximumMetres": 9000.0,
+    "minimumMetres": -11000.0
+  },
+  "fullResolution": [
+    8192,
+    4096
+  ],
+  "gutterPixels": 2,
+  "identitySha256": "53c8cea5328e20e610b1ef4ddc714a5d01f79ba2a5cbb03afb599038705e5426",
+  "layers": [
+    {
+      "alpha": "land mask",
+      "format": "R8G8B8A8_SRGB",
+      "name": "albedoLand"
+    },
+    {
+      "format": "R16_UNORM",
+      "name": "elevation"
+    },
+    {
+      "format": "R8_UNORM",
+      "name": "cloud"
+    }
+  ],
+  "levels": [
+    {
+      "level": 0,
+      "offset": 0,
+      "parentRule": "self",
+      "tileCount": 2,
+      "tilesX": 2,
+      "tilesY": 1
+    },
+    {
+      "level": 1,
+      "offset": 2,
+      "parentRule": "floor(x/2),floor(y/2)",
+      "tileCount": 8,
+      "tilesX": 4,
+      "tilesY": 2
+    },
+    {
+      "level": 2,
+      "offset": 10,
+      "parentRule": "floor(x/2),floor(y/2)",
+      "tileCount": 32,
+      "tilesX": 8,
+      "tilesY": 4
+    },
+    {
+      "level": 3,
+      "offset": 42,
+      "parentRule": "floor(x/2),floor(y/2)",
+      "tileCount": 128,
+      "tilesX": 16,
+      "tilesY": 8
+    },
+    {
+      "level": 4,
+      "offset": 170,
+      "parentRule": "floor(x/2),floor(y/2)",
+      "tileCount": 512,
+      "tilesX": 32,
+      "tilesY": 16
+    }
+  ],
+  "maximumLevel": 4,
+  "payloadSha256": "377ef730ce530bf503075d5a9f5ce0fe41b803599f6fbc5b57b8c32019e65513",
+  "physicalTileExtent": 260,
+  "projection": "EPSG:4326 equirectangular, north-up, longitude [-180,180)",
+  "runtimeFiles": {
+    "earth_elevation_8192x4096.r16": {
+      "bytes": 67108864,
+      "sha256": "4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317"
+    },
+    "earth_surface_v2.ncvtex": {
+      "bytes": 322722528,
+      "sha256": "dbcc006dc6a29d88b64b1dd4bca2ef63e7ac32879a30da6685d9db8b1860ae73"
+    }
+  },
+  "schema": "NovaCore.EarthVirtualTexture/2",
+  "sources": [
+    {
+      "file": "nasa-blue-marble-2004-12-5400x2700.jpg",
+      "role": "albedo",
+      "sha256": "3d38a8ecaceb1cdb51ced7f831e9ac18d261950049616feff6892efcae0dcc26"
+    },
+    {
+      "file": "ETOPO_2022_v1_60s_N90W180_surface.tif",
+      "role": "elevation",
+      "sha256": "9d27d4b8ea8e76977e2988bca667d7c8fa68b927355feffcddd6b4875a7fd08e"
+    },
+    {
+      "file": "nasa-blue-marble-clouds-2048.jpg",
+      "role": "cloud",
+      "sha256": "daddaad84d7a33bbbc86cdda3f591099f57cee8607b7bcf3b67eb7e4f7a1c793"
+    }
+  ],
+  "tileCount": 682,
+  "tileSize": 256
+}

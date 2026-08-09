@@ -2,6 +2,7 @@
 #extension GL_GOOGLE_include_directive : require
 #extension GL_ARB_gpu_shader_fp64 : require
 #include "planet_terrain.glsl"
+#include "earth_virtual_texture.glsl"
 
 struct PlanetaryPatch { uvec4 address; vec4 centerRadius; vec4 color; uvec4 transitions; };
 layout(std430,set=0,binding=1) readonly buffer Patches { PlanetaryPatch patches[]; } patchData;
@@ -18,5 +19,5 @@ dvec3 ProjectD(uvec4 address,dvec2 local){double cells=double(1u<<address.y);dve
 void main(){
   uint patchIndex=gl_WorkGroupID.x;if(patchIndex>=outputData.values[1])return;uvec2 mapping=patchTerrain.values[patchIndex];if(mapping.y==0u)return;
   uvec4 address=patchData.patches[patchIndex].address;
-  for(uint vertex=gl_LocalInvocationID.x;vertex<GRID_VERTICES;vertex+=gl_WorkGroupSize.x){uint x=vertex%17u,y=vertex/17u;dvec3 direction=ProjectD(address,dvec2(x,y)/16.0);float height=float(PlanetTerrainHeightD(direction,24u,double(inputData.thresholds.w)));terrainData.heights[mapping.x*GRID_VERTICES+vertex]=vec2(height);}
+  for(uint vertex=gl_LocalInvocationID.x;vertex<GRID_VERTICES;vertex+=gl_WorkGroupSize.x){uint x=vertex%17u,y=vertex/17u;dvec3 direction=ProjectD(address,dvec2(x,y)/16.0);float height;if(inputData.controls.z==3u){vec4 albedo;float elevation,cloud,blend;uint resident;EarthSurfaceSample(vec3(direction),min(address.y,EARTH_MAXIMUM_LEVEL),inputData.controls.w,albedo,elevation,cloud,blend,resident);height=max(elevation,0.0);}else height=float(PlanetTerrainHeightD(direction,24u,double(inputData.thresholds.w)));terrainData.heights[mapping.x*GRID_VERTICES+vertex]=vec2(height);}
 }

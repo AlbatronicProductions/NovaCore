@@ -23,7 +23,8 @@ public enum PlanetAlbedoSource : uint
     JupiterProcedural = 6,
     SaturnProcedural = 7,
     UranusProcedural = 8,
-    NeptuneProcedural = 9
+    NeptuneProcedural = 9,
+    EarthAuthoritative = 10
 }
 
 public enum PlanetTextureProjection : uint
@@ -111,6 +112,10 @@ public static class PlanetMaterialNativeEncoder
         native.Specular = material.Specular;
         native.Emissive = material.Emissive;
         native.PresentationRotationRadians = material.PresentationRotationRadians;
+        native.BodyOrientationX = 0f;
+        native.BodyOrientationY = 0f;
+        native.BodyOrientationZ = 0f;
+        native.BodyOrientationW = 1f;
         native.ProjectionKind = (uint)material.Projection;
         native.AtmosphereHook = material.AtmosphereHook;
         native.CloudHook = material.CloudHook;
