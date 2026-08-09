@@ -1,6 +1,6 @@
 # NovaCore
 
-**A deterministic, true-scale space simulation engine with a custom Vulkan renderer.**
+**A space simulation engine built to handle everything from entire solar systems to planetary surfaces.**
 
 ![NovaCore Earth against the Milky Way](docs/images/novacore-11a-earth-milky-way.png)
 
@@ -13,15 +13,58 @@
   <img src="docs/images/novacore-11a-solar-warp.png" alt="NovaCore Solar overview at maximum time warp" width="49%">
 </p>
 
-NovaCore is an experimental space-simulation engine built around a simple rule:
+NovaCore is an experimental space simulation and rendering engine built from the ground up for enormous differences in scale.
+
+The goal is simple to describe, even if it is difficult to build:
+
+> **Create one continuous simulation capable of taking you from the scale of a solar system all the way down to the surface of a world.**
+
+NovaCore combines astronomical simulation, planetary rendering, large-scale coordinate systems, terrain, real planetary data, and a custom Vulkan renderer into a single engine.
+
+## What can NovaCore do today?
+
+NovaCore can already:
+
+- Simulate the major bodies of the Solar System and their motion.
+- Start from the current real-world time and accelerate simulation time from 0.1× to 7,776,000×.
+- Render planets and moons across astronomical distances.
+- Approach planetary surfaces while maintaining numerical precision.
+- Transition between global planetary rendering and near-surface terrain rendering.
+- Stream real NASA/NOAA Earth imagery and elevation data.
+- Light planets using the simulated position of the Sun, producing coherent day/night boundaries.
+- Render distinct planetary appearances, Saturn's rings, orbital paths, labels, and markers.
+- Explore the Solar System using Solar Map and free 3D camera modes.
+- Reproduce simulation and rendering results deterministically for testing and validation.
+
+## The goal
+
+NovaCore is being developed toward a simulation where scale does not define the boundaries of the experience:
+
+**Solar System → Planet → Orbit → Atmosphere → Surface**
+
+Rather than treating these as completely separate environments, NovaCore is being designed so they can exist within the same underlying simulation.
+
+NovaCore is still under active development. Advanced atmospheres, close volumetric clouds, physical oceans, weather, spacecraft simulation, colonies, maneuver planning, and navigation systems remain future work.
+
+## A simple design rule
+
+NovaCore is built around one important principle:
 
 > **Simulation owns truth. Rendering owns presentation.**
 
-Celestial mechanics, reference frames, physical radii, and simulation time remain authoritative in the managed simulation. The renderer consumes immutable presentation state and is free to add GPU LOD, materials, lighting, labels, rings, and other visual systems without changing the underlying universe.
+In plain language, the simulation decides where objects really are, how large they are, how time is progressing, and how the universe is behaving. The renderer decides how that information should look on screen.
+
+Keeping those responsibilities separate allows visual systems to become more sophisticated without changing the underlying simulated universe.
+
+---
+
+# Technical overview
+
+The rest of this README goes deeper into NovaCore's current engineering state, architecture, renderer, planetary systems, validation, and limitations.
 
 NovaCore currently combines a C# simulation core with a native Vulkan renderer, compact DE440-validated Solar propagation, camera-relative high-precision transport, GPU-driven planetary rendering, HDR presentation, procedural planetary materials, Saturn rings, and an interactive Solar map.
 
-## What works today
+## Current technical capabilities
 
 ### Celestial simulation
 
@@ -62,9 +105,7 @@ NovaCore treats correctness tooling as part of the engine rather than as present
 
 The CPU reference/parity path is a development and regression oracle; the intended production planetary path remains GPU-driven.
 
-## Why NovaCore?
-
-NovaCore is exploring how far a compact custom engine can push seamless space simulation without making the renderer the owner of simulation truth.
+## How NovaCore is structured
 
 ```text
 Offline astronomical truth
@@ -133,9 +174,9 @@ All of this remains downstream of the authoritative celestial simulation.
 
 `SolCompact-DE440Validated-v3` is intended for Solar presentation, deterministic time warp, and approximate translunar gameplay. It is **not** JPL DE440 playback and should not be described as a precision lunar-navigation ephemeris.
 
-The new high-precision Moon orientation improves pole, prime-meridian, and physical-libration presentation; it does not improve lunar translation. Precision translunar targeting, lunar orbit insertion, close lunar navigation, or other requirements that exceed the compact translational model's measured accuracy will receive a dedicated higher-fidelity ephemeris layer when those gameplay requirements exist.
+The new high-precision Moon orientation improves pole, prime-meridian, and physical-libration presentation; it does not improve lunar translation. Precision translunar targeting, lunar orbit insertion, close lunar navigation, or other requirements that exceed the compact translational model's measured accuracy will receive a dedicated higher-fidelity ephemeris layer when those requirements exist.
 
-NovaCore is still under active development. It now has a compact procedural atmosphere/cloud/ocean presentation proof, but does **not** yet provide production terrain, production multiple-scattering atmosphere, close volumetric clouds, physical ocean simulation, weather, spacecraft gameplay, colonies, maneuver planning, or SOI/patched-conic navigation.
+NovaCore now has a compact procedural atmosphere/cloud/ocean presentation proof, but does **not** yet provide production terrain, production multiple-scattering atmosphere, close volumetric clouds, physical ocean simulation, weather, spacecraft simulation, colonies, maneuver planning, or SOI/patched-conic navigation.
 
 ## Roadmap
 
