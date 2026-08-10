@@ -48,6 +48,7 @@ struct alignas(16) NcPlanetaryPresentation {
   float ringOrientationX, ringOrientationY, ringOrientationZ, ringOrientationW;
   float ringColorR, ringColorG, ringColorB, ringColorA;
   float bodyOrientationX, bodyOrientationY, bodyOrientationZ, bodyOrientationW;
+  float localDetailScaleMeters, localDetailMicroScaleMeters, localDetailFadeStartMetres, localDetailFadeEndMetres;
 };
 struct alignas(16) NcSolarLighting { float sourceCenterX, sourceCenterY, sourceCenterZ, exposure; float photosphereR, photosphereG, photosphereB, ambientFloor; float sourceRadiance, glowStrength; uint32_t enabled, speedHud; };
 struct alignas(16) NcPlanetaryEnvironment {

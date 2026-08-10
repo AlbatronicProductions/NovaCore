@@ -14,7 +14,7 @@ internal static class SolarPlanetMaterials
         Material(8, PlanetMaterialKind.Rocky, PlanetAlbedoSource.MarsProcedural, new(.78f, .28f, .12f), .88f, .04f, 0f),
         Material(9, PlanetMaterialKind.GasGiant, PlanetAlbedoSource.JupiterProcedural, new(.84f, .64f, .42f), .84f, .04f, 0f),
         new PlanetMaterialPresentation(10, PlanetMaterialKind.GasGiant, PlanetAlbedoSource.SaturnProcedural, new(.88f, .73f, .46f), .88f, .03f, 0f, 0f, PlanetTextureProjection.BodyLocalDirection, 0, 0,
-            new PlanetRingPresentation(10, DoubleQuaternion.Identity, 74_658_000d, 136_775_000d, new(.78f, .69f, .52f), .78f, 17f, 1)),
+            Ring: new PlanetRingPresentation(10, DoubleQuaternion.Identity, 74_658_000d, 136_775_000d, new(.78f, .69f, .52f), .78f, 17f, 1)),
         Material(11, PlanetMaterialKind.IceGiant, PlanetAlbedoSource.UranusProcedural, new(.45f, .83f, .86f), .72f, .06f, 0f),
         Material(12, PlanetMaterialKind.IceGiant, PlanetAlbedoSource.NeptuneProcedural, new(.12f, .31f, .88f), .68f, .08f, 0f)
     ]);
@@ -25,6 +25,7 @@ internal static class SolarPlanetMaterials
         {
             native.BodyIdLow = 2;
             native.RingOrientationW = 1f;
+            PlanetMaterialNativeEncoder.ApplyLocalDefaults(ref native);
             return true;
         }
         if (!Catalog.TryGet(bodyId, out var material)) return false;
@@ -39,5 +40,5 @@ internal static class SolarPlanetMaterials
     }
 
     private static PlanetMaterialPresentation Material(ulong id, PlanetMaterialKind kind, PlanetAlbedoSource source, Float3 tint, float roughness, float specular, float rotation,uint atmosphereHook=0,uint cloudHook=0) =>
-        new(id, kind, source, tint, roughness, specular, 0f, rotation, PlanetTextureProjection.BodyLocalDirection, atmosphereHook, cloudHook, null);
+        new(id, kind, source, tint, roughness, specular, 0f, rotation, PlanetTextureProjection.BodyLocalDirection, atmosphereHook, cloudHook);
 }

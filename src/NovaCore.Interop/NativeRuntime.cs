@@ -64,6 +64,7 @@ public struct NativeDrawBatch { public NativeMeshHandle Mesh; public uint FirstO
     public float RingOrientationX,RingOrientationY,RingOrientationZ,RingOrientationW;
     public float RingColorR,RingColorG,RingColorB,RingColorA;
     public float BodyOrientationX,BodyOrientationY,BodyOrientationZ,BodyOrientationW;
+    public float LocalDetailScaleMeters,LocalDetailMicroScaleMeters,LocalDetailFadeStartMetres,LocalDetailFadeEndMetres;
 }
 [StructLayout(LayoutKind.Sequential)] public struct NativeSolarLighting { public float SourceCenterX,SourceCenterY,SourceCenterZ,Exposure; public float PhotosphereR,PhotosphereG,PhotosphereB,AmbientFloor; public float SourceRadiance,GlowStrength; public uint Enabled,SpeedHud; }
 [StructLayout(LayoutKind.Sequential)] public struct NativePlanetaryEnvironment

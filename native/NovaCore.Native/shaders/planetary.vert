@@ -3,7 +3,7 @@
 struct EncodedPosition { vec4 high; vec4 low; };
 struct GpuCameraData { EncodedPosition position; mat4 viewProjection; };
 struct PlanetaryPatch { uvec4 address; vec4 centerRadius; vec4 color; uvec4 transitions; };
-struct Presentation { vec4 centerRadius; vec4 colorDistant; vec4 blendMetricState; uvec4 identity; vec4 surface; uvec4 hooks; vec4 ringGeometry; vec4 ringOrientation; vec4 ringColor; vec4 bodyOrientation; };
+struct Presentation { vec4 centerRadius; vec4 colorDistant; vec4 blendMetricState; uvec4 identity; vec4 surface; uvec4 hooks; vec4 ringGeometry; vec4 ringOrientation; vec4 ringColor; vec4 bodyOrientation; vec4 localDetail; };
 struct Environment { vec4 centerRadius; uvec4 identity; vec4 atmosphere; vec4 scattering; vec4 clouds; vec4 cloudShape; vec4 ocean; vec4 oceanColorExposure; };
 layout(std430,set=0,binding=0) readonly buffer Frame { GpuCameraData camera; } frameData;
 layout(std430,set=0,binding=1) readonly buffer Patches { PlanetaryPatch patches[]; } patchData;
@@ -25,6 +25,7 @@ layout(location=6) out vec3 bodyDirection;
 layout(location=7) out float terrainHeight;
 layout(location=8) flat out vec3 bodyCameraHigh;
 layout(location=9) flat out vec3 bodyCameraLow;
+layout(location=10) flat out vec4 localDetail;
 const uint GRID_VERTICES=289u;
 dvec3 CubeD(uint face,double a,double b){if(face==0u)return dvec3(1,b,-a);if(face==1u)return dvec3(-1,b,a);if(face==2u)return dvec3(a,1,-b);if(face==3u)return dvec3(a,-1,b);if(face==4u)return dvec3(a,b,1);return dvec3(-a,b,-1);}
 dvec3 ProjectD(uvec4 address,dvec2 local){double cells=double(1u<<address.y);dvec2 uv=(dvec2(address.zw)+local)/cells;return normalize(CubeD(address.x,2.0*uv.x-1.0,2.0*uv.y-1.0));}
@@ -40,5 +41,5 @@ void main(){
   dvec3 direction=ProjectD(p.address,dvec2(stitched));dvec3 relativePosition;dvec3 surfaceNormal=direction;terrainHeight=-1.0;bool terrain=inputData.controls.z!=0u&&inputData.thresholds.w>0.0;
   if(terrain){uint x=uint(round(stitched.x*16.0)),y=uint(round(stitched.y*16.0));uint slot=patchTerrain.values[gl_InstanceIndex].x;float morph=1.0;double radius=RadiusD();double rawHeight=HeightAt(slot,x,y,morph);terrainHeight=float(rawHeight);bool ocean=(environmentData.value.identity.z&4u)!=0u&&environmentData.value.identity.xy==presentation.identity.xy;double height=ocean?max(rawHeight,double(environmentData.value.ocean.x)):rawHeight;dvec3 absolutePosition=direction*(radius+height);relativePosition=absolutePosition-CameraD();uint xl=x==0u?0u:x-1u,xr=x==16u?16u:x+1u,yd=y==0u?0u:y-1u,yu=y==16u?16u:y+1u;dvec3 left=ProjectD(p.address,dvec2(xl,y)/16.0)*(radius+HeightAt(slot,xl,y,morph));dvec3 right=ProjectD(p.address,dvec2(xr,y)/16.0)*(radius+HeightAt(slot,xr,y,morph));dvec3 down=ProjectD(p.address,dvec2(x,yd)/16.0)*(radius+HeightAt(slot,x,yd,morph));dvec3 up=ProjectD(p.address,dvec2(x,yu)/16.0)*(radius+HeightAt(slot,x,yu,morph));surfaceNormal=ocean&&rawHeight<double(environmentData.value.ocean.x)?direction:normalize(cross(right-left,up-down));if(dot(surfaceNormal,direction)<0.0)surfaceNormal=-surfaceNormal;}
   else{double cells=double(1u<<p.address.y);dvec2 uv=(dvec2(p.address.zw)+dvec2(stitched))/cells;direction=normalize(CubeD(p.address.x,2.0*uv.x-1.0,2.0*uv.y-1.0));relativePosition=dvec3(p.centerRadius.xyz)+direction*double(p.centerRadius.w);}
-  vec3 localPosition=vec3(relativePosition);vec3 position=RotateQuaternion(localPosition,presentation.bodyOrientation);gl_Position=frameData.camera.viewProjection*vec4(position,1);color=p.color;color.a*=eye.identity.w!=0u?eye.mapping.w:1.0;normal=vec3(surfaceNormal);bodyDirection=vec3(direction);lightDirection=normalize(RotateQuaternion(lighting.sourceCenterExposure.xyz-presentation.centerRadius.xyz,vec4(-presentation.bodyOrientation.xyz,presentation.bodyOrientation.w)));material=uvec2(presentation.identity.w,presentation.identity.z);response=presentation.surface;viewDirection=-localPosition;bodyCameraHigh=inputData.cameraHighRadiusHigh.xyz;bodyCameraLow=inputData.cameraLowRadiusLow.xyz;
-}
+	  vec3 localPosition=vec3(relativePosition);vec3 position=RotateQuaternion(localPosition,presentation.bodyOrientation);gl_Position=frameData.camera.viewProjection*vec4(position,1);color=p.color;color.a*=eye.identity.w!=0u?eye.mapping.w:1.0;normal=vec3(surfaceNormal);bodyDirection=vec3(direction);lightDirection=normalize(RotateQuaternion(lighting.sourceCenterExposure.xyz-presentation.centerRadius.xyz,vec4(-presentation.bodyOrientation.xyz,presentation.bodyOrientation.w)));material=uvec2(presentation.identity.w,presentation.identity.z);response=presentation.surface;viewDirection=-localPosition;localDetail=presentation.localDetail;bodyCameraHigh=inputData.cameraHighRadiusHigh.xyz;bodyCameraLow=inputData.cameraLowRadiusLow.xyz;
+	}

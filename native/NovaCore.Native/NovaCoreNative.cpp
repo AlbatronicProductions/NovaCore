@@ -79,7 +79,7 @@ static_assert(offsetof(NcPlanetaryEyeball, bodyIdLow) == 48);
 static_assert(offsetof(NcPlanetaryEyeball, viewForwardX) == 64);
 static_assert(offsetof(NcPlanetaryEyeball, radialWarpExponent) == 80);
 static_assert(offsetof(NcPlanetaryEyeball, vertexCount) == 96);
-static_assert(sizeof(NcPlanetaryPresentation) == 160);
+static_assert(sizeof(NcPlanetaryPresentation) == 176);
 static_assert(alignof(NcPlanetaryPresentation) == 16);
 static_assert(offsetof(NcPlanetaryPresentation, colorR) == 16);
 static_assert(offsetof(NcPlanetaryPresentation, detailedAlpha) == 32);
@@ -90,6 +90,7 @@ static_assert(offsetof(NcPlanetaryPresentation, ringInnerRadiusRatio) == 96);
 static_assert(offsetof(NcPlanetaryPresentation, ringOrientationX) == 112);
 static_assert(offsetof(NcPlanetaryPresentation, ringColorR) == 128);
 static_assert(offsetof(NcPlanetaryPresentation, bodyOrientationX) == 144);
+static_assert(offsetof(NcPlanetaryPresentation, localDetailScaleMeters) == 160);
 static_assert(sizeof(NcSolarLighting) == 48);
 static_assert(alignof(NcSolarLighting) == 16);
 static_assert(offsetof(NcSolarLighting, photosphereR) == 16);
@@ -101,16 +102,16 @@ static_assert(offsetof(NcPlanetaryEnvironment, bodyIdLow) == 16);
 static_assert(offsetof(NcPlanetaryEnvironment, atmosphereHeightMetres) == 32);
 static_assert(offsetof(NcPlanetaryEnvironment, cloudBaseHeightMetres) == 64);
 static_assert(offsetof(NcPlanetaryEnvironment, oceanSeaLevelMetres) == 96);
-static_assert(sizeof(NcFrameSubmission) == 784);
+static_assert(sizeof(NcFrameSubmission) == 800);
 static_assert(offsetof(NcFrameSubmission, planetaryGpu) == 208);
 static_assert(offsetof(NcFrameSubmission, planetaryMode) == 288);
 static_assert(offsetof(NcFrameSubmission, planetaryPresentation) == 304);
-static_assert(offsetof(NcFrameSubmission, distantBodies) == 464);
-static_assert(offsetof(NcFrameSubmission, distantBodyCount) == 472);
-static_assert(offsetof(NcFrameSubmission, distantBodyPadding) == 476);
-static_assert(offsetof(NcFrameSubmission, solarLighting) == 480);
-static_assert(offsetof(NcFrameSubmission, planetaryEnvironment) == 528);
-static_assert(offsetof(NcFrameSubmission, planetaryEyeball) == 656);
+static_assert(offsetof(NcFrameSubmission, distantBodies) == 480);
+static_assert(offsetof(NcFrameSubmission, distantBodyCount) == 488);
+static_assert(offsetof(NcFrameSubmission, distantBodyPadding) == 492);
+static_assert(offsetof(NcFrameSubmission, solarLighting) == 496);
+static_assert(offsetof(NcFrameSubmission, planetaryEnvironment) == 544);
+static_assert(offsetof(NcFrameSubmission, planetaryEyeball) == 672);
 static_assert(sizeof(NcOrbitLineVertex) == 12);
 static_assert(sizeof(NcInputState) == 68);
 static_assert(sizeof(NcPresentationFocus) == 4);
@@ -550,7 +551,22 @@ void Validate(App &a) {
       throw std::runtime_error("invalid render batch");
   }
   if(nc_validate_planetary_patches(s->planetaryPatches,s->planetaryPatchCount)!=NC_SUCCESS)throw std::runtime_error("invalid planetary patch submission");
-  const auto validMaterial=[](const NcPlanetaryPresentation &body){const bool stellarMaterial=body.bodyIdLow==2&&body.bodyIdHigh==0&&body.materialKind==0&&body.albedoSource==0;const bool finite=std::isfinite(body.roughness)&&std::isfinite(body.specular)&&std::isfinite(body.emissive)&&std::isfinite(body.presentationRotationRadians)&&std::isfinite(body.ringInnerRadiusRatio)&&std::isfinite(body.ringOuterRadiusRatio)&&std::isfinite(body.ringOpacity)&&std::isfinite(body.ringBandFrequency)&&std::isfinite(body.ringOrientationX)&&std::isfinite(body.ringOrientationY)&&std::isfinite(body.ringOrientationZ)&&std::isfinite(body.ringOrientationW)&&std::isfinite(body.ringColorR)&&std::isfinite(body.ringColorG)&&std::isfinite(body.ringColorB)&&std::isfinite(body.ringColorA)&&std::isfinite(body.bodyOrientationX)&&std::isfinite(body.bodyOrientationY)&&std::isfinite(body.bodyOrientationZ)&&std::isfinite(body.bodyOrientationW);const float bodyQ=body.bodyOrientationX*body.bodyOrientationX+body.bodyOrientationY*body.bodyOrientationY+body.bodyOrientationZ*body.bodyOrientationZ+body.bodyOrientationW*body.bodyOrientationW;if(!finite||std::abs(bodyQ-1)>1e-4f||body.roughness<0||body.roughness>1||body.specular<0||body.specular>1||body.emissive<0||body.projectionKind>0)return false;if(!stellarMaterial&&((!body.bodyIdLow&&!body.bodyIdHigh)||body.materialKind<1||body.materialKind>4||body.albedoSource<1||body.albedoSource>10))return false;if(!body.ringAssociation)return body.ringInnerRadiusRatio==0&&body.ringOuterRadiusRatio==0&&body.ringOpacity==0&&body.ringBandFrequency==0;if(body.ringInnerRadiusRatio<=1||body.ringOuterRadiusRatio<=body.ringInnerRadiusRatio||body.ringOpacity<=0||body.ringOpacity>1||body.ringBandFrequency<=0)return false;const float q=body.ringOrientationX*body.ringOrientationX+body.ringOrientationY*body.ringOrientationY+body.ringOrientationZ*body.ringOrientationZ+body.ringOrientationW*body.ringOrientationW;return std::abs(q-1)<1e-4f;};
+  const auto validMaterial=[](const NcPlanetaryPresentation &body){
+    const bool stellarMaterial=body.bodyIdLow==2&&body.bodyIdHigh==0&&body.materialKind==0&&body.albedoSource==0;
+    const bool finite=std::isfinite(body.roughness)&&std::isfinite(body.specular)&&std::isfinite(body.emissive)&&std::isfinite(body.presentationRotationRadians)&&std::isfinite(body.ringInnerRadiusRatio)&&std::isfinite(body.ringOuterRadiusRatio)&&std::isfinite(body.ringOpacity)&&std::isfinite(body.ringBandFrequency)&&std::isfinite(body.ringOrientationX)&&std::isfinite(body.ringOrientationY)&&std::isfinite(body.ringOrientationZ)&&std::isfinite(body.ringOrientationW)&&std::isfinite(body.ringColorR)&&std::isfinite(body.ringColorG)&&std::isfinite(body.ringColorB)&&std::isfinite(body.ringColorA)&&std::isfinite(body.bodyOrientationX)&&std::isfinite(body.bodyOrientationY)&&std::isfinite(body.bodyOrientationZ)&&std::isfinite(body.bodyOrientationW)&&std::isfinite(body.localDetailScaleMeters)&&std::isfinite(body.localDetailMicroScaleMeters)&&std::isfinite(body.localDetailFadeStartMetres)&&std::isfinite(body.localDetailFadeEndMetres);
+    const float bodyQ=body.bodyOrientationX*body.bodyOrientationX+body.bodyOrientationY*body.bodyOrientationY+body.bodyOrientationZ*body.bodyOrientationZ+body.bodyOrientationW*body.bodyOrientationW;
+    const bool localDetail=body.localDetailScaleMeters>0&&body.localDetailMicroScaleMeters>0&&body.localDetailFadeStartMetres>=0&&body.localDetailFadeEndMetres>body.localDetailFadeStartMetres;
+    if(!finite||std::abs(bodyQ-1)>1e-4f||body.roughness<0||body.roughness>1||body.specular<0||body.specular>1||body.emissive<0||body.projectionKind>0||!localDetail)
+      return false;
+    if(!stellarMaterial&&((!body.bodyIdLow&&!body.bodyIdHigh)||body.materialKind<1||body.materialKind>4||body.albedoSource<1||body.albedoSource>10))
+      return false;
+    if(!body.ringAssociation)
+      return body.ringInnerRadiusRatio==0&&body.ringOuterRadiusRatio==0&&body.ringOpacity==0&&body.ringBandFrequency==0;
+    if(body.ringInnerRadiusRatio<=1||body.ringOuterRadiusRatio<=body.ringInnerRadiusRatio||body.ringOpacity<=0||body.ringOpacity>1||body.ringBandFrequency<=0)
+      return false;
+    const float q=body.ringOrientationX*body.ringOrientationX+body.ringOrientationY*body.ringOrientationY+body.ringOrientationZ*body.ringOrientationZ+body.ringOrientationW*body.ringOrientationW;
+    return std::abs(q-1)<1e-4f;
+  };
   if(s->planetaryGpuAlignmentPadding||s->planetaryPadding[0]||s->planetaryPadding[1]||s->planetaryPadding[2])throw std::runtime_error("invalid planetary frame padding");
   if(s->planetaryMode>NC_PLANETARY_CPU_GPU_VALIDATION)throw std::runtime_error("invalid planetary mode");
   const auto &presentation=s->planetaryPresentation;const bool hasPresentation=presentation.enabled!=0;

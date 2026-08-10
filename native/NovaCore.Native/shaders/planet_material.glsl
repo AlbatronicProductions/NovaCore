@@ -9,7 +9,13 @@ float PlanetTriplanarNoise(vec3 position,vec3 n){vec3 w=PlanetTriplanarWeights(n
 float PlanetFilteredTriplanarNoise(vec3 position,vec3 n,float fadeStart,float fadeEnd){float footprint=max(max(length(dFdx(position)),length(dFdy(position))),0.0);return mix(.5,PlanetTriplanarNoise(position,n),1.0-smoothstep(fadeStart,fadeEnd,footprint));}
 vec3 PlanetBodyPosition(vec3 direction,float radius,float height){return normalize(direction)*(radius+height);}
 vec3 PlanetTangentDetail(vec3 position,vec3 up,vec3 normal,float scale){vec3 p=position/scale;vec3 vector=vec3(PlanetTriplanarNoise(p+vec3(7.1,0,0),normal),PlanetTriplanarNoise(p+vec3(0,19.3,0),normal),PlanetTriplanarNoise(p+vec3(0,0,37.7),normal))-.5;return vector-up*dot(vector,up);}
-vec3 PlanetWrappedBodyCoordinate(vec3 cameraHigh,vec3 cameraLow,vec3 cameraRelativePosition,float scale){return mod(mod(cameraHigh/scale,4096.0)+mod(cameraLow/scale,4096.0)+cameraRelativePosition/scale,4096.0);}
+vec3 PlanetWrappedBodyCoordinate(vec3 position,vec3 up,float scale){
+  vec3 normalizedUp=normalize(up);
+  vec3 reference=abs(normalizedUp.y)<.9?vec3(0,1,0):vec3(1,0,0);
+  vec3 east=normalize(cross(reference,normalizedUp));
+  vec3 north=normalize(cross(normalizedUp,east));
+  return mod(vec3(dot(position,east),dot(position,north),dot(position,normalizedUp))/scale,4096.0);
+}
 vec3 PlanetTangentDetailCoordinate(vec3 coordinate,vec3 up,vec3 normal){vec3 vector=vec3(PlanetTriplanarNoise(coordinate+vec3(7.1,0,0),normal),PlanetTriplanarNoise(coordinate+vec3(0,19.3,0),normal),PlanetTriplanarNoise(coordinate+vec3(0,0,37.7),normal))-.5;return vector-up*dot(vector,up);}
 vec3 RotatePlanetY(vec3 direction,float angle){float c=cos(angle),s=sin(angle);return vec3(c*direction.x+s*direction.z,direction.y,-s*direction.x+c*direction.z);}
 vec3 PlanetAlbedo(uint source,vec3 direction,vec3 tint,float rotation){

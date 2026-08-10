@@ -60,12 +60,21 @@ public readonly record struct PlanetMaterialPresentation(
     PlanetTextureProjection Projection,
     uint AtmosphereHook,
     uint CloudHook,
-    PlanetRingPresentation? Ring)
+    float LocalDetailScaleMeters = 64f,
+    float LocalDetailMicroScaleMeters = 3f,
+    float LocalDetailFadeStartMetres = 1200f,
+    float LocalDetailFadeEndMetres = 18000f,
+    PlanetRingPresentation? Ring = null)
 {
     public bool IsValid => BodyId != 0 && Kind != PlanetMaterialKind.Unspecified && AlbedoSource != PlanetAlbedoSource.Tint &&
         Tint.IsFinite && float.IsFinite(Roughness) && Roughness is >= 0f and <= 1f &&
         float.IsFinite(Specular) && Specular is >= 0f and <= 1f && float.IsFinite(Emissive) && Emissive >= 0f &&
-        float.IsFinite(PresentationRotationRadians) && (!Ring.HasValue || Ring.Value.IsValid && Ring.Value.ParentBodyId == BodyId);
+        float.IsFinite(PresentationRotationRadians) &&
+        float.IsFinite(LocalDetailScaleMeters) && LocalDetailScaleMeters > 0f &&
+        float.IsFinite(LocalDetailMicroScaleMeters) && LocalDetailMicroScaleMeters > 0f &&
+        float.IsFinite(LocalDetailFadeStartMetres) && float.IsFinite(LocalDetailFadeEndMetres) &&
+        LocalDetailFadeStartMetres >= 0f && LocalDetailFadeEndMetres > LocalDetailFadeStartMetres &&
+        (!Ring.HasValue || Ring.Value.IsValid && Ring.Value.ParentBodyId == BodyId);
 }
 
 public sealed class PlanetMaterialCatalog
@@ -99,24 +108,33 @@ public sealed class PlanetMaterialCatalog
     }
 }
 
-public static class PlanetMaterialNativeEncoder
-{
-    public static void Apply(ref NativePlanetaryPresentation native, in PlanetMaterialPresentation material)
+    public static class PlanetMaterialNativeEncoder
     {
-        if (!material.IsValid) throw new ArgumentException("Planet material is invalid.", nameof(material));
-        native.BodyIdLow = (uint)material.BodyId;
-        native.BodyIdHigh = (uint)(material.BodyId >> 32);
-        native.MaterialKind = (uint)material.Kind;
-        native.AlbedoSource = (uint)material.AlbedoSource;
-        native.Roughness = material.Roughness;
-        native.Specular = material.Specular;
-        native.Emissive = material.Emissive;
-        native.PresentationRotationRadians = material.PresentationRotationRadians;
-        native.BodyOrientationX = 0f;
-        native.BodyOrientationY = 0f;
-        native.BodyOrientationZ = 0f;
-        native.BodyOrientationW = 1f;
-        native.ProjectionKind = (uint)material.Projection;
+        public const float DefaultLocalDetailScaleMeters = 64f;
+        public const float DefaultLocalDetailMicroScaleMeters = 3f;
+        public const float DefaultLocalDetailFadeStartMetres = 1200f;
+        public const float DefaultLocalDetailFadeEndMetres = 18000f;
+
+        public static void Apply(ref NativePlanetaryPresentation native, in PlanetMaterialPresentation material)
+        {
+            if (!material.IsValid) throw new ArgumentException("Planet material is invalid.", nameof(material));
+            native.BodyIdLow = (uint)material.BodyId;
+            native.BodyIdHigh = (uint)(material.BodyId >> 32);
+            native.MaterialKind = (uint)material.Kind;
+            native.AlbedoSource = (uint)material.AlbedoSource;
+            native.Roughness = material.Roughness;
+            native.Specular = material.Specular;
+            native.Emissive = material.Emissive;
+            native.PresentationRotationRadians = material.PresentationRotationRadians;
+            native.LocalDetailScaleMeters = material.LocalDetailScaleMeters;
+            native.LocalDetailMicroScaleMeters = material.LocalDetailMicroScaleMeters;
+            native.LocalDetailFadeStartMetres = material.LocalDetailFadeStartMetres;
+            native.LocalDetailFadeEndMetres = material.LocalDetailFadeEndMetres;
+            native.BodyOrientationX = 0f;
+            native.BodyOrientationY = 0f;
+            native.BodyOrientationZ = 0f;
+            native.BodyOrientationW = 1f;
+            native.ProjectionKind = (uint)material.Projection;
         native.AtmosphereHook = material.AtmosphereHook;
         native.CloudHook = material.CloudHook;
         native.RingOrientationW = 1f;
@@ -136,5 +154,13 @@ public static class PlanetMaterialNativeEncoder
         native.RingColorG = ring.Color.Y;
         native.RingColorB = ring.Color.Z;
         native.RingColorA = ring.Opacity;
-    }
+        }
+
+        public static void ApplyLocalDefaults(ref NativePlanetaryPresentation native)
+        {
+            native.LocalDetailScaleMeters = DefaultLocalDetailScaleMeters;
+            native.LocalDetailMicroScaleMeters = DefaultLocalDetailMicroScaleMeters;
+            native.LocalDetailFadeStartMetres = DefaultLocalDetailFadeStartMetres;
+            native.LocalDetailFadeEndMetres = DefaultLocalDetailFadeEndMetres;
+        }
 }
