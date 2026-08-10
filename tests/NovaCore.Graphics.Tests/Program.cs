@@ -3,6 +3,7 @@ using System.Buffers.Binary;
 using System.Security.Cryptography;
 using System.Diagnostics;
 using System.Text.Json;
+using System.Numerics;
 using NovaCore.Core;
 using NovaCore.Core.Camera;
 using NovaCore.Core.ReferenceFrames;
@@ -33,6 +34,7 @@ var tests = new (string, Action)[]
     ("Planetary presentation pipeline", PlanetaryPresentationPipelineTest),
     ("Focus target authority", FocusTargetAuthorityTest),
     ("Planet material presentation", PlanetMaterialPresentationTest),
+    ("Planet micro-normal foundation", PlanetMicroNormalFoundationTest),
     ("Planetary environment presentation", PlanetaryEnvironmentPresentationTest),
     ("Earth authoritative presentation dataset", EarthAuthoritativeDatasetTest),
     ("SurfaceAnchor acquisition, ENU, and handoff", SurfaceAnchorPhaseBTest),
@@ -401,6 +403,44 @@ static void PlanetMaterialPresentationTest()
     Check(Math.Abs(native.RingOrientationX*native.RingOrientationX+native.RingOrientationY*native.RingOrientationY+native.RingOrientationZ*native.RingOrientationZ+native.RingOrientationW*native.RingOrientationW-1f)<1e-6f,"ring orientation transport normalized");
     Check(native.LocalDetailScaleMeters==PlanetMaterialNativeEncoder.DefaultLocalDetailScaleMeters&&native.LocalDetailMicroScaleMeters==PlanetMaterialNativeEncoder.DefaultLocalDetailMicroScaleMeters&&native.LocalDetailFadeStartMetres==PlanetMaterialNativeEncoder.DefaultLocalDetailFadeStartMetres&&native.LocalDetailFadeEndMetres==PlanetMaterialNativeEncoder.DefaultLocalDetailFadeEndMetres,"material defaults include local detail");
     Check(Marshal.SizeOf<NativePlanetaryPresentation>()==176&&Marshal.OffsetOf<NativePlanetaryPresentation>(nameof(NativePlanetaryPresentation.BodyIdLow)).ToInt32()==48&&Marshal.OffsetOf<NativePlanetaryPresentation>(nameof(NativePlanetaryPresentation.Roughness)).ToInt32()==64&&Marshal.OffsetOf<NativePlanetaryPresentation>(nameof(NativePlanetaryPresentation.ProjectionKind)).ToInt32()==80&&Marshal.OffsetOf<NativePlanetaryPresentation>(nameof(NativePlanetaryPresentation.RingInnerRadiusRatio)).ToInt32()==96&&Marshal.OffsetOf<NativePlanetaryPresentation>(nameof(NativePlanetaryPresentation.RingOrientationX)).ToInt32()==112&&Marshal.OffsetOf<NativePlanetaryPresentation>(nameof(NativePlanetaryPresentation.RingColorR)).ToInt32()==128&&Marshal.OffsetOf<NativePlanetaryPresentation>(nameof(NativePlanetaryPresentation.BodyOrientationX)).ToInt32()==144&&Marshal.OffsetOf<NativePlanetaryPresentation>(nameof(NativePlanetaryPresentation.LocalDetailScaleMeters)).ToInt32()==160,"material, ring, body-orientation, and local-detail ABI layout");
+}
+
+static void PlanetMicroNormalFoundationTest()
+{
+    var macro = Vector3.Normalize(new Vector3(0.33f, 0.82f, 0.47f));
+    var microXyFlat = new Vector2(0.5f, 0.5f);
+    var flat = ComposeMicroNormal(macro, microXyFlat, 0.73f, 0.55f);
+    Check(Vector3.Distance(flat, macro) < 1e-5f, "flat micro normal leaves macro normal unchanged");
+
+    var east = PlanetMicroBasisEast(macro);
+    var north = PlanetMicroBasisNorth(macro);
+    var plusX = ComposeMicroNormal(macro, new Vector2(0.96f, 0.5f), 1f, 0.95f);
+    var plusY = ComposeMicroNormal(macro, new Vector2(0.5f, 0.96f), 1f, 0.95f);
+    Check(Vector3.Dot(Vector3.Normalize(plusX - macro), east) > 0.12f, "known +X BC5 perturbation maps toward NovaCore east");
+    Check(Vector3.Dot(Vector3.Normalize(plusY - macro), north) > 0.12f, "known +Y BC5 perturbation maps toward NovaCore north");
+
+    var reconstructed = PlanetDecodeBc5Normal(new Vector2(0.42f, 0.84f));
+    Check(float.IsFinite(reconstructed.Z) && reconstructed.Z >= 0f, "reconstructed BC5 Z is finite and nonnegative");
+    var reconstructedProjected = new Vector2(reconstructed.X, reconstructed.Y);
+    Check(MathF.Abs(reconstructed.Z * reconstructed.Z - MathF.Max(0f, 1f - Vector2.Dot(reconstructedProjected, reconstructedProjected))) < 1e-5f, "reconstructed BC5 Z matches x/y length");
+
+    Check(MathF.Abs(Vector3.Dot(plusX, plusX) - 1f) < 3e-5f, "composed +X result is normalized");
+    Check(MathF.Abs(Vector3.Dot(plusY, plusY) - 1f) < 3e-5f, "composed +Y result is normalized");
+
+    var muted = ComposeMicroNormal(macro, new Vector2(0.3f, 0.7f), 0f, 0.95f);
+    Check(Vector3.Distance(muted, macro) < 1e-5f, "zero local contribution preserves macro normal");
+
+    for (var y = 0f; y <= 1f; y += 0.125f)
+    {
+        for (var x = 0f; x <= 1f; x += 0.125f)
+        {
+            var encoded = new Vector2(x, y);
+            var decoded = PlanetDecodeBc5Normal(encoded);
+            var composed = ComposeMicroNormal(macro, encoded, 0.4f, 0.7f);
+            Check(!float.IsNaN(decoded.X) && !float.IsNaN(decoded.Y) && !float.IsNaN(decoded.Z) && float.IsFinite(decoded.Z) && decoded.Z >= 0f, "bounded BC5 XY inputs decode to finite nonnegative Z");
+            Check(MathF.Abs(Vector3.Dot(composed, composed) - 1f) < 5e-5f, "bounded BC5 composition remains normalized");
+        }
+    }
 }
 
 static void PlanetaryEnvironmentPresentationTest()
@@ -1217,6 +1257,33 @@ static ulong Mix(ulong hash, ulong value) => (hash ^ value) * 1099511628211UL;
 static void Throws<T>(Action action) where T : Exception { try { action(); throw new Exception($"Expected {typeof(T).Name}"); } catch (T) { } }
 static void Check(bool condition, string message) { if (!condition) throw new Exception(message); }
 static void CheckNear(in Double3 actual, in Double3 expected, string message) { if ((actual - expected).LengthSquared > 1e-18) throw new Exception(message); }
+static Vector3 PlanetDecodeBc5Normal(Vector2 encodedXY)
+{
+    var xy = encodedXY * 2f - Vector2.One;
+    var z = MathF.Sqrt(MathF.Max(0f, 1f - Vector2.Dot(xy, xy)));
+    return Vector3.Normalize(new Vector3(xy, z));
+}
+static Vector3 PlanetMicroBasisEast(Vector3 up)
+{
+    var basisUp = Vector3.Normalize(up);
+    var reference = MathF.Abs(basisUp.Y) < 0.9f ? new Vector3(0, 1, 0) : new Vector3(1, 0, 0);
+    return Vector3.Normalize(Vector3.Cross(reference, basisUp));
+}
+static Vector3 PlanetMicroBasisNorth(Vector3 up)
+{
+    var east = PlanetMicroBasisEast(up);
+    return Vector3.Normalize(Vector3.Cross(Vector3.Normalize(up), east));
+}
+static Vector3 ComposeMicroNormal(Vector3 macroNormal, Vector2 encodedMicroXY, float localContribution, float detailStrength)
+{
+    var up = Vector3.Normalize(macroNormal);
+    var micro = PlanetDecodeBc5Normal(encodedMicroXY);
+    var east = PlanetMicroBasisEast(up);
+    var north = Vector3.Normalize(Vector3.Cross(up, east));
+    var microWorld = Vector3.Normalize(east * micro.X + north * micro.Y + up * micro.Z);
+    var blend = MathF.Min(MathF.Max(localContribution * detailStrength, 0f), 1f);
+    return Vector3.Normalize(Vector3.Lerp(up, microWorld, blend));
+}
 readonly record struct ProjectedBounds(double MinX, double MaxX, double MinY, double MaxY)
 {
     public double CenterX => (MinX + MaxX) * .5d;

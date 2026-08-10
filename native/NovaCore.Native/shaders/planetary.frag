@@ -76,8 +76,8 @@ void main()
     float landscape=PlanetFilteredTriplanarNoise(bodyPosition/9000.0,surfaceNormal,.05,.85);
 
     float local=PlanetTriplanarNoise(PlanetWrappedBodyCoordinate(bodyPosition,up,localScale),surfaceNormal);
-    vec3 micro=PlanetTangentDetailCoordinate(PlanetWrappedBodyCoordinate(bodyPosition,up,localMicroScale),up,surfaceNormal);
-    vec3 localNormal=normalize(surfaceNormal + micro*0.14*localContribution);
+    vec2 micro=ProjectWorldVectorToBc5Tangent(surfaceNormal,PlanetTangentDetailCoordinate(PlanetWrappedBodyCoordinate(bodyPosition,up,localMicroScale),up,surfaceNormal));
+    vec3 localNormal=ComposeMicroNormal(surfaceNormal,micro,localContribution,0.14);
 
     float aridity=clamp(.12+.76*regional+.18*elevation,0.0,1.0);
     vec3 sediment=mix(vec3(.045,.075,.025),vec3(.20,.13,.055),aridity);
@@ -98,12 +98,12 @@ void main()
     float slope=1.0-clamp(dot(surfaceNormal,up),0.0,1.0);
     float local=PlanetTriplanarNoise(PlanetWrappedBodyCoordinate(bodyPosition,up,localScale),surfaceNormal);
     float surface=PlanetTriplanarNoise(PlanetWrappedBodyCoordinate(bodyPosition,up,localMicroScale)+vec3(31.0,17.0,7.0),surfaceNormal);
-    vec3 micro=PlanetTangentDetailCoordinate(PlanetWrappedBodyCoordinate(bodyPosition,up,localMicroScale),up,surfaceNormal);
+    vec2 micro=ProjectWorldVectorToBc5Tangent(surfaceNormal,PlanetTangentDetailCoordinate(PlanetWrappedBodyCoordinate(bodyPosition,up,localMicroScale),up,surfaceNormal));
 
     albedo*=.88+.20*local+.08*surface;
     albedo=mix(albedo,albedo*(0.94+0.12*(local-.5)),localContribution);
     albedo=mix(albedo,albedo*.62+vec3(.10,.09,.075),smoothstep(.12,.36,slope)*.28);
-    surfaceNormal=normalize(surfaceNormal+micro*0.24*localContribution);
+    surfaceNormal=ComposeMicroNormal(surfaceNormal,micro,localContribution,0.24);
     roughness=clamp(.74+.16*(surface-.5)+0.12*(local-.5)*localContribution,.48,.94);
     specular=0.035;
   }

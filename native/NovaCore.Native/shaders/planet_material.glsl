@@ -17,6 +17,31 @@ vec3 PlanetWrappedBodyCoordinate(vec3 position,vec3 up,float scale){
   return mod(vec3(dot(position,east),dot(position,north),dot(position,normalizedUp))/scale,4096.0);
 }
 vec3 PlanetTangentDetailCoordinate(vec3 coordinate,vec3 up,vec3 normal){vec3 vector=vec3(PlanetTriplanarNoise(coordinate+vec3(7.1,0,0),normal),PlanetTriplanarNoise(coordinate+vec3(0,19.3,0),normal),PlanetTriplanarNoise(coordinate+vec3(0,0,37.7),normal))-.5;return vector-up*dot(vector,up);}
+vec3 DecodeBc5Normal(vec2 encodedXY)
+{
+  vec2 signedXY = encodedXY * 2.0 - 1.0;
+  float z = sqrt(max(0.0, 1.0 - dot(signedXY, signedXY)));
+  return normalize(vec3(signedXY, z));
+}
+vec2 ProjectWorldVectorToBc5Tangent(vec3 up, vec3 vector)
+{
+  vec3 normalizedUp = normalize(up);
+  vec3 reference = abs(normalizedUp.y) < .9 ? vec3(0,1,0) : vec3(1,0,0);
+  vec3 east = normalize(cross(reference, normalizedUp));
+  vec3 north = normalize(cross(normalizedUp, east));
+  return clamp(vec2(dot(vector, east), dot(vector, north)) * 0.5 + 0.5, 0.0, 1.0);
+}
+vec3 ComposeMicroNormal(vec3 macroNormal, vec2 encodedMicroXY, float localContribution, float detailStrength)
+{
+  vec3 up = normalize(macroNormal);
+  vec3 localMicroNormal = DecodeBc5Normal(encodedMicroXY);
+  vec3 reference = abs(up.y) < .9 ? vec3(0,1,0) : vec3(1,0,0);
+  vec3 east = normalize(cross(reference, up));
+  vec3 north = normalize(cross(up, east));
+  vec3 microWorld = normalize(east * localMicroNormal.x + north * localMicroNormal.y + up * localMicroNormal.z);
+  float blend = clamp(localContribution * detailStrength, 0.0, 1.0);
+  return normalize(mix(up, microWorld, blend));
+}
 vec3 RotatePlanetY(vec3 direction,float angle){float c=cos(angle),s=sin(angle);return vec3(c*direction.x+s*direction.z,direction.y,-s*direction.x+c*direction.z);}
 vec3 PlanetAlbedo(uint source,vec3 direction,vec3 tint,float rotation){
   vec3 n=normalize(direction);float latitude=abs(n.y);float longitude=atan(n.z,n.x);float broad=PlanetFbm(n*2.4);float detail=PlanetFbm(n*9.0);
