@@ -2,6 +2,7 @@ using System.Runtime.InteropServices;
 using System.Buffers.Binary;
 using System.Security.Cryptography;
 using System.Diagnostics;
+using System.Text.Json;
 using NovaCore.Core;
 using NovaCore.Core.Camera;
 using NovaCore.Core.ReferenceFrames;
@@ -419,29 +420,27 @@ static void EarthAuthoritativeDatasetTest()
     var runtime=Path.Combine(Directory.GetCurrentDirectory(),"assets","earth","runtime");
     Check(EarthSurfaceDataset.TryLoad(runtime,out var error),$"authoritative Earth elevation load: {error}");
     Check(EarthSurfaceDataset.IsLoaded&&EarthSurfaceDatasetContract.TileSize==256&&EarthSurfaceDatasetContract.TileGutter==2&&EarthSurfaceDatasetContract.PhysicalTileExtent==260&&EarthSurfaceDatasetContract.MaximumLevel==4&&EarthSurfaceDatasetContract.TileCount==682,"fixed production Earth virtual-texture contract");
-    Check(EarthSurfaceDatasetContract.IdentitySha256=="53c8cea5328e20e610b1ef4ddc714a5d01f79ba2a5cbb03afb599038705e5426"&&EarthSurfaceDatasetContract.PayloadSha256=="377ef730ce530bf503075d5a9f5ce0fe41b803599f6fbc5b57b8c32019e65513","Earth dataset identity and payload regression hashes");
-    var manifestPath=Path.Combine(runtime,"earth_surface_v2.manifest.json");var packPath=Path.Combine(runtime,"earth_surface_v2.ncvtex");
+    Check(EarthSurfaceDatasetContract.IdentitySha256=="664ff32c3a57043960f246d5d97397214cedc4b976e48e867e9803c414d796b5"&&EarthSurfaceDatasetContract.PayloadSha256=="d09a9ddf944242a7d322ae3ce58c1b0b31014feb8d6a330fb9d592e438e9d306","Earth dataset v3 identity and payload regression hashes");
+    var manifestPath=Path.Combine(runtime,"earth_surface_v3.manifest.json");var packPath=Path.Combine(runtime,"earth_surface_v3.ncvtex");
     var manifest=File.ReadAllText(manifestPath);
     Check(manifest.Contains(EarthSurfaceDatasetContract.IdentitySha256,StringComparison.Ordinal)&&manifest.Contains(EarthSurfaceDatasetContract.PayloadSha256,StringComparison.Ordinal),"manifest identifies the exact deterministic payload");
     using(var manifestStream=File.OpenRead(manifestPath))Check(Convert.ToHexStringLower(SHA256.HashData(manifestStream))==EarthSurfaceDatasetContract.ManifestSha256,"manifest file regression hash");
     using(var packHashStream=File.OpenRead(packPath))Check(Convert.ToHexStringLower(SHA256.HashData(packHashStream))==EarthSurfaceDatasetContract.RuntimePackSha256,"runtime pack regression hash");
     using(var pack=File.OpenRead(packPath))
     {
-        Span<byte> header=stackalloc byte[128];pack.ReadExactly(header);
-        Check(header[..8].SequenceEqual("NCVTEAR1"u8)&&BinaryPrimitives.ReadUInt32LittleEndian(header[8..])==2&&BinaryPrimitives.ReadUInt32LittleEndian(header[12..])==128,"production pack magic/version/header");
+        Span<byte> header=stackalloc byte[256];pack.ReadExactly(header);
+        Check(header[..8].SequenceEqual("NCVTEAR2"u8)&&BinaryPrimitives.ReadUInt32LittleEndian(header[8..])==3&&BinaryPrimitives.ReadUInt32LittleEndian(header[12..])==256,"production pack magic/version/header");
         Check(BinaryPrimitives.ReadUInt32LittleEndian(header[16..])==256&&BinaryPrimitives.ReadUInt32LittleEndian(header[20..])==2&&BinaryPrimitives.ReadUInt32LittleEndian(header[24..])==4&&BinaryPrimitives.ReadUInt32LittleEndian(header[28..])==682,"production pack tile metadata");
-        Check(BinaryPrimitives.ReadUInt32LittleEndian(header[32..])==260&&BinaryPrimitives.ReadUInt32LittleEndian(header[36..])==473_200&&BinaryPrimitives.ReadUInt32LittleEndian(header[40..])==270_400&&BinaryPrimitives.ReadUInt32LittleEndian(header[44..])==135_200&&BinaryPrimitives.ReadUInt32LittleEndian(header[48..])==67_600,"production pack record/layer sizes");
+        Check(BinaryPrimitives.ReadUInt32LittleEndian(header[32..])==260&&BinaryPrimitives.ReadUInt32LittleEndian(header[36..])==4&&EarthSurfaceDatasetContract.PhysicalTileExtent%4==0,"production pack channel count and BC block alignment");
+        (uint Semantic,uint Format,uint Color,uint Level,uint Count,uint Bytes,long Offset)[] expected=[(1u,4u,1u,4u,682u,67_600u,256L),(2u,2u,0u,4u,682u,135_200u,46_103_456L),(3u,3u,0u,4u,682u,33_800u,138_309_856L),(4u,3u,0u,2u,42u,33_800u,161_361_456L)];
+        for(var channel=0;channel<expected.Length;channel++){var descriptor=header[(112+channel*32)..];var value=expected[channel];Check(BinaryPrimitives.ReadUInt32LittleEndian(descriptor)==value.Semantic&&BinaryPrimitives.ReadUInt32LittleEndian(descriptor[4..])==value.Format&&BinaryPrimitives.ReadUInt32LittleEndian(descriptor[8..])==value.Color&&BinaryPrimitives.ReadUInt32LittleEndian(descriptor[12..])==value.Level&&BinaryPrimitives.ReadUInt32LittleEndian(descriptor[16..])==value.Count&&BinaryPrimitives.ReadUInt32LittleEndian(descriptor[20..])==value.Bytes&&BinaryPrimitives.ReadUInt64LittleEndian(descriptor[24..])==(ulong)value.Offset,$"channel {channel} explicit semantic/format/color/LOD/bytes/offset");}
         Check(pack.Length==EarthSurfaceDatasetContract.RuntimePackBytes,"production pack byte size");
-        var layers=new[]{(Offset:0,Bytes:4),(Offset:270_400,Bytes:2),(Offset:405_600,Bytes:1)};
-        foreach(var layer in layers)
-        {
-            Check(Pixel(pack,Page(4,0,5),layer.Offset,layer.Bytes,258,100).SequenceEqual(Pixel(pack,Page(4,1,5),layer.Offset,layer.Bytes,2,100))&&Pixel(pack,Page(4,0,5),layer.Offset,layer.Bytes,259,100).SequenceEqual(Pixel(pack,Page(4,1,5),layer.Offset,layer.Bytes,3,100)),"east geographic gutter registration");
-            Check(Pixel(pack,Page(4,0,5),layer.Offset,layer.Bytes,0,100).SequenceEqual(Pixel(pack,Page(4,31,5),layer.Offset,layer.Bytes,256,100))&&Pixel(pack,Page(4,31,5),layer.Offset,layer.Bytes,259,100).SequenceEqual(Pixel(pack,Page(4,0,5),layer.Offset,layer.Bytes,3,100)),"dateline wrap gutter registration");
-            Check(Pixel(pack,Page(4,7,5),layer.Offset,layer.Bytes,100,258).SequenceEqual(Pixel(pack,Page(4,7,6),layer.Offset,layer.Bytes,100,2))&&Pixel(pack,Page(4,7,5),layer.Offset,layer.Bytes,100,259).SequenceEqual(Pixel(pack,Page(4,7,6),layer.Offset,layer.Bytes,100,3)),"south geographic gutter registration");
-            Check(Pixel(pack,Page(4,7,0),layer.Offset,layer.Bytes,100,0).SequenceEqual(Pixel(pack,Page(4,7,0),layer.Offset,layer.Bytes,100,2))&&Pixel(pack,Page(4,7,0),layer.Offset,layer.Bytes,100,1).SequenceEqual(Pixel(pack,Page(4,7,0),layer.Offset,layer.Bytes,100,2)),"north-pole gutter clamp");
-            Check(Pixel(pack,Page(4,7,15),layer.Offset,layer.Bytes,100,258).SequenceEqual(Pixel(pack,Page(4,7,15),layer.Offset,layer.Bytes,100,257))&&Pixel(pack,Page(4,7,15),layer.Offset,layer.Bytes,100,259).SequenceEqual(Pixel(pack,Page(4,7,15),layer.Offset,layer.Bytes,100,257)),"south-pole gutter clamp");
-        }
+        var firstBc7=new byte[16];pack.Position=256;pack.ReadExactly(firstBc7);Check((firstBc7[0]&0x7f)==0x40,"BC7 albedo begins with deterministic mode-6 block");
+        pack.Position=46_103_456;using var elevationHash=IncrementalHash.CreateHash(HashAlgorithmName.SHA256);var elevationBuffer=new byte[1_048_576];long elevationRemaining=92_206_400;while(elevationRemaining>0){var count=pack.Read(elevationBuffer,0,(int)Math.Min(elevationBuffer.Length,elevationRemaining));Check(count>0,"complete R16 elevation section");elevationHash.AppendData(elevationBuffer,0,count);elevationRemaining-=count;}Check(Convert.ToHexStringLower(elevationHash.GetHashAndReset())==EarthSurfaceDatasetContract.ElevationPackSectionSha256,"R16 elevation tile section regression hash");
     }
+    using(var document=JsonDocument.Parse(manifest)){var quality=document.RootElement.GetProperty("quality");Check(quality.GetProperty("bc7").GetProperty("global").GetProperty("psnrDb").GetDouble()>45&&quality.GetProperty("bc1").GetProperty("coastline").GetProperty("psnrDb").GetDouble()<30&&quality.GetProperty("bc7").GetProperty("coastline").GetProperty("psnrDb").GetDouble()>32,"measured BC7 quality selection over BC1");Check(quality.GetProperty("coastlineMaskBc4").GetProperty("psnrDb").GetDouble()>50&&quality.GetProperty("cloudBc4").GetProperty("psnrDb").GetDouble()>39,"BC4 mask/cloud quality thresholds");}
+    var policies=PlanetaryTextureFormatPolicy.Earth.ToArray();Check(policies.Length==4&&policies[0].Format==PlanetaryGpuTextureFormat.Bc7Srgb&&policies[0].ColorSpace==PlanetaryTextureColorSpace.Srgb&&policies.Skip(1).All(policy=>policy.ColorSpace==PlanetaryTextureColorSpace.Linear)&&policies.Single(policy=>policy.Semantic==PlanetaryTextureSemantic.Elevation).LosslessAuthorityRequired,"explicit SRGB/linear format policy prevents gamma misuse");Check(PlanetaryTextureFormatPolicy.FutureNormal.Format==PlanetaryGpuTextureFormat.Bc5Unorm&&PlanetaryTextureFormatPolicy.FutureNormal.ColorSpace==PlanetaryTextureColorSpace.Linear,"future two-component normal contract is BC5 linear");
+    Check(EarthSurfaceDemandPolicy.RequestedLevel(PlanetaryTextureSemantic.Albedo,5_000)==4&&EarthSurfaceDemandPolicy.RequestedLevel(PlanetaryTextureSemantic.Elevation,5_000)==4&&EarthSurfaceDemandPolicy.RequestedLevel(PlanetaryTextureSemantic.LandMask,5_000)==4&&EarthSurfaceDemandPolicy.RequestedLevel(PlanetaryTextureSemantic.Cloud,5_000)==2,"independent per-channel maximum useful LOD policy");
     Check(Enumerable.Range(0,5).Select(EarthVirtualTexturePageContract.LevelOffset).SequenceEqual(new[]{0,2,10,42,170}),"deterministic level offsets");
     Check(EarthVirtualTexturePageContract.ParentIndex(4,31,15)==EarthVirtualTexturePageContract.TileIndex(3,15,7),"deterministic parent mapping");
     var resident=new bool[EarthSurfaceDatasetContract.TileCount];resident[0]=resident[1]=true;
@@ -456,11 +455,9 @@ static void EarthAuthoritativeDatasetTest()
     Check(EarthSurfaceDataset.SampleHeight(pacific)==0&&EarthSurfaceDataset.SampleHeight(everest)==everestElevation,"sea-level floor is separate from signed elevation authority");
     Check(EarthSurfaceDataset.SampleElevation(everest)==everestElevation&&EarthSurfaceDataset.SampleElevation(pacific)==pacificElevation,"repeated body-fixed samples deterministic");
     Check(PlanetaryTerrainDefinition.EarthAuthoritativeV3.SourceId==2&&PlanetaryTerrainDefinition.EarthAuthoritativeV3.Version==3&&PlanetaryTerrainDefinition.EarthAuthoritativeV3.SampleHeight(everest,24)==everestElevation,"terrain query uses the registered Earth source independent of topology LOD");
-    Check(Enum.GetValues<EarthVirtualTextureDebugMode>().Length==12&&EarthSurfaceDatasetContract.PhysicalPoolBudgetBytes==60_569_600&&EarthSurfaceDatasetContract.StagingBudgetBytes==946_400&&EarthSurfaceDatasetContract.UploadBudgetTiles==2,"bounded pool/staging budgets and complete debug-view contract");
-    Console.WriteLine($"Earth dataset v2: identity={EarthSurfaceDatasetContract.IdentitySha256}; payload={EarthSurfaceDatasetContract.PayloadSha256}; pack={EarthSurfaceDatasetContract.RuntimePackSha256}; manifest={EarthSurfaceDatasetContract.ManifestSha256}; Everest={everestElevation:F1} m; Pacific={pacificElevation:F1} m");
+    Check(Enum.GetValues<EarthVirtualTextureDebugMode>().Length==12&&EarthSurfaceDatasetContract.PhysicalPoolBudgetBytes==34_611_200&&EarthSurfaceDatasetContract.StagingBudgetBytes==1_081_600&&EarthSurfaceDatasetContract.UploadBudgetChannels==4,"bounded compressed pool/staging budgets and complete debug-view contract");
+    Console.WriteLine($"Earth dataset v3: identity={EarthSurfaceDatasetContract.IdentitySha256}; payload={EarthSurfaceDatasetContract.PayloadSha256}; pack={EarthSurfaceDatasetContract.RuntimePackSha256}; manifest={EarthSurfaceDatasetContract.ManifestSha256}; Everest={everestElevation:F1} m; Pacific={pacificElevation:F1} m");
     static Double3 Direction(double latitudeDegrees,double longitudeDegrees){var latitude=latitudeDegrees*Math.PI/180d;var longitude=longitudeDegrees*Math.PI/180d;var cosLatitude=Math.Cos(latitude);return new Double3(cosLatitude*Math.Cos(longitude),Math.Sin(latitude),cosLatitude*Math.Sin(longitude));}
-    static int Page(int level,int x,int y)=>EarthVirtualTexturePageContract.TileIndex(level,x,y);
-    static byte[] Pixel(FileStream stream,int page,int layerOffset,int bytes,int x,int y){var result=new byte[bytes];stream.Position=128L+(long)page*EarthSurfaceDatasetContract.TileRecordBytes+layerOffset+((long)y*EarthSurfaceDatasetContract.PhysicalTileExtent+x)*bytes;stream.ReadExactly(result);return result;}
 }
 
 static void CubeSpherePlanetarySurfaceTest()

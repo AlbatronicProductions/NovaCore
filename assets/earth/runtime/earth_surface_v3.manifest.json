@@ -1,0 +1,136 @@
+{
+  "schema": "NovaCore.EarthVirtualTexture/3",
+  "pack": "earth_surface_v3.ncvtex",
+  "packBytes": 162781056,
+  "packSha256": "a16aebd834f01bdd430790de499a095d55f895655ce037fe25b6e13106674dc5",
+  "identitySha256": "664ff32c3a57043960f246d5d97397214cedc4b976e48e867e9803c414d796b5",
+  "payloadSha256": "d09a9ddf944242a7d322ae3ce58c1b0b31014feb8d6a330fb9d592e438e9d306",
+  "tile": {
+    "logical": 256,
+    "gutter": 2,
+    "physical": 260,
+    "blockAligned": true
+  },
+  "channels": [
+    {
+      "semantic": "Albedo",
+      "format": "BC7_SRGB",
+      "colorSpace": "SRGB",
+      "maximumLevel": 4,
+      "tileCount": 682,
+      "tileBytes": 67600,
+      "sectionOffset": 256
+    },
+    {
+      "semantic": "Elevation",
+      "format": "R16_UNORM",
+      "colorSpace": "Linear",
+      "maximumLevel": 4,
+      "tileCount": 682,
+      "tileBytes": 135200,
+      "sectionOffset": 46103456
+    },
+    {
+      "semantic": "LandMask",
+      "format": "BC4_UNORM",
+      "colorSpace": "Linear",
+      "maximumLevel": 4,
+      "tileCount": 682,
+      "tileBytes": 33800,
+      "sectionOffset": 138309856
+    },
+    {
+      "semantic": "Cloud",
+      "format": "BC4_UNORM",
+      "colorSpace": "Linear",
+      "maximumLevel": 2,
+      "tileCount": 42,
+      "tileBytes": 33800,
+      "sectionOffset": 161361456
+    }
+  ],
+  "quality": {
+    "bc1": {
+      "global": {
+        "rmse": 3.293486836259291,
+        "psnrDb": 37.777684969699735,
+        "samples": 138309600
+      },
+      "coastline": {
+        "rmse": 11.141336839414263,
+        "psnrDb": 27.19205751697401,
+        "samples": 4876704
+      },
+      "high_contrast": {
+        "rmse": 12.058864743289574,
+        "psnrDb": 26.504675129100708,
+        "samples": 6726672
+      },
+      "desert": {
+        "rmse": 4.185554260169578,
+        "psnrDb": 35.695744081593304,
+        "samples": 8158620
+      },
+      "ice_snow": {
+        "rmse": 4.040997803429173,
+        "psnrDb": 36.00103132122604,
+        "samples": 23913336
+      },
+      "ocean": {
+        "rmse": 2.359266034711662,
+        "psnrDb": 40.67526530056507,
+        "samples": 91155690
+      }
+    },
+    "bc7": {
+      "global": {
+        "rmse": 1.3850784737868962,
+        "psnrDb": 45.30131601406822,
+        "samples": 138309600
+      },
+      "coastline": {
+        "rmse": 5.79587632225087,
+        "psnrDb": 32.868421418234874,
+        "samples": 4876704
+      },
+      "high_contrast": {
+        "rmse": 5.047081177852676,
+        "psnrDb": 34.06999780800204,
+        "samples": 6726672
+      },
+      "desert": {
+        "rmse": 1.7382738015327637,
+        "psnrDb": 43.32843991407492,
+        "samples": 8158620
+      },
+      "ice_snow": {
+        "rmse": 1.181639618866101,
+        "psnrDb": 46.681102730941255,
+        "samples": 23913336
+      },
+      "ocean": {
+        "rmse": 1.3036818924565596,
+        "psnrDb": 45.827370940338824,
+        "samples": 91155690
+      }
+    },
+    "coastlineMaskBc4": {
+      "rmse": 0.6588727281985256,
+      "psnrDb": 51.75477297322418
+    },
+    "cloudBc4": {
+      "rmse": 2.5688092561820115,
+      "psnrDb": 39.936166459616004
+    }
+  },
+  "sourcePack": {
+    "name": "earth_surface_v2.ncvtex",
+    "sha256": "dbcc006dc6a29d88b64b1dd4bca2ef63e7ac32879a30da6685d9db8b1860ae73"
+  },
+  "encoder": {
+    "name": "NovaCore deterministic NumPy BC1/BC4/BC7-mode6",
+    "version": 1,
+    "numpyVersion": "2.3.5",
+    "runtimeDependency": false
+  }
+}

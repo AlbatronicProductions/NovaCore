@@ -2,7 +2,7 @@
 
 NovaCore's Earth runtime dataset is a deterministic derivative of public U.S.
 government scientific data. The original rasters remain logically separate in
-the preprocessor and the runtime pack preserves separate albedo/land-mask,
+the preprocessor and the runtime pack preserves separate albedo, land-mask,
 elevation, and cloud channels.
 
 ## True-color albedo
@@ -34,10 +34,22 @@ elevation, and cloud channels.
 
 ## Reproduction
 
-Run `tools/earth_data/build_earth_dataset.py` with the three original inputs.
-The checked manifest records every source SHA-256, dataset identity, payload
-SHA-256, projection, tile geometry, channel format, and output size. Source
-paths never participate in identity. Production format v2 uses 256 × 256
-interiors with a two-texel geographic gutter on each side; longitude wraps and
-polar rows clamp deterministically. The builder validates all layer interiors
-and gutters before publishing the 260 × 260 physical records.
+Run `tools/earth_data/build_earth_dataset.py` with the three original inputs to
+produce the registered production-v2 intermediate, then run
+`tools/earth_data/upgrade_earth_pack_v3.py` to produce the checked GPU-native
+pack. The upgrade tool requires NumPy 2.3.5 as pinned in
+`tools/earth_data/requirements.txt`; NumPy is BSD-3-Clause licensed and is an
+offline build dependency only. The repository-authored converter implements
+its own deterministic BC1 quality candidate, BC4, and opaque BC7 mode-6
+encoders. No third-party texture encoder or decoder is shipped or loaded at
+runtime.
+
+The checked v3 manifest records source and output SHA-256 values, deterministic
+identity, tile geometry, channel semantic, GPU format, color space, maximum
+useful level, section offset, measured compression quality, and output size.
+Source paths never participate in identity. Production format v3 retains
+256 × 256 interiors with a two-texel geographic gutter on each side; longitude
+wraps and polar rows clamp deterministically. The 260 × 260 physical extent is
+already divisible by the BC 4 × 4 block size, so no geographic padding or page
+identity changes are required. R16 elevation bytes are copied verbatim from the
+validated intermediate.

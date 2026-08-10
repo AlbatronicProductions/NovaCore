@@ -7,12 +7,13 @@ namespace NovaCore.Graphics;
 /// <summary>Immutable metadata for the checked Earth presentation dataset.</summary>
 public static class EarthSurfaceDatasetContract
 {
-    public const string Schema = "NovaCore.EarthVirtualTexture/2";
-    public const string IdentitySha256 = "53c8cea5328e20e610b1ef4ddc714a5d01f79ba2a5cbb03afb599038705e5426";
-    public const string PayloadSha256 = "377ef730ce530bf503075d5a9f5ce0fe41b803599f6fbc5b57b8c32019e65513";
-    public const string RuntimePackSha256 = "dbcc006dc6a29d88b64b1dd4bca2ef63e7ac32879a30da6685d9db8b1860ae73";
-    public const string ManifestSha256 = "f684e8ed1662c919fc1f20015640bc3ecdd3f20504e48defb4c9c9884fa10f1f";
+    public const string Schema = "NovaCore.EarthVirtualTexture/3";
+    public const string IdentitySha256 = "664ff32c3a57043960f246d5d97397214cedc4b976e48e867e9803c414d796b5";
+    public const string PayloadSha256 = "d09a9ddf944242a7d322ae3ce58c1b0b31014feb8d6a330fb9d592e438e9d306";
+    public const string RuntimePackSha256 = "a16aebd834f01bdd430790de499a095d55f895655ce037fe25b6e13106674dc5";
+    public const string ManifestSha256 = "868769b2499bab96b32c3f5c5ea6b444db5c747294dd0e1e497057bf4e85e19b";
     public const string ElevationSha256 = "4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317";
+    public const string ElevationPackSectionSha256 = "e16390be4dc29f4e6d9e1f6c05da4defbdc137c4fbde04f7be1c91fd9167d1a0";
     public const int TileSize = 256;
     public const int TileGutter = 2;
     public const int PhysicalTileExtent = 260;
@@ -20,16 +21,39 @@ public static class EarthSurfaceDatasetContract
     public const int TileCount = 682;
     public const int ElevationWidth = 8192;
     public const int ElevationHeight = 4096;
-    public const int AlbedoTileBytes = 270_400;
+    public const int HeaderBytes = 256;
+    public const int ChannelCount = 4;
+    public const int AlbedoTileBytes = 67_600;
     public const int ElevationTileBytes = 135_200;
-    public const int CloudTileBytes = 67_600;
-    public const int TileRecordBytes = 473_200;
-    public const int UploadBudgetTiles = 2;
-    public const int StagingBudgetBytes = 946_400;
-    public const long RuntimePackBytes = 322_722_528;
+    public const int LandMaskTileBytes = 33_800;
+    public const int CloudTileBytes = 33_800;
+    public const int CloudMaximumLevel = 2;
+    public const int CloudTileCount = 42;
+    public const int UploadBudgetChannels = 4;
+    public const int StagingBudgetBytes = 1_081_600;
+    public const long RuntimePackBytes = 162_781_056;
     public const double MinimumElevationMetres = -11_000d;
     public const double MaximumElevationMetres = 9_000d;
-    public const long PhysicalPoolBudgetBytes = 60_569_600;
+    public const long PhysicalPoolBudgetBytes = 34_611_200;
+}
+
+public enum PlanetaryTextureSemantic:uint { Albedo=1,Elevation=2,LandMask=3,Cloud=4,Normal=5,Roughness=6 }
+public enum PlanetaryGpuTextureFormat:uint { Bc1RgbSrgb=1,R16Unorm=2,Bc4Unorm=3,Bc7Srgb=4,Bc5Unorm=5 }
+public enum PlanetaryTextureColorSpace:uint { Linear,Srgb }
+public readonly record struct PlanetaryTextureChannelPolicy(PlanetaryTextureSemantic Semantic,PlanetaryGpuTextureFormat Format,PlanetaryTextureColorSpace ColorSpace,int MaximumUsefulLevel,bool LosslessAuthorityRequired);
+
+/// <summary>Explicit GPU format and color-space policy; it is presentation metadata, never geographic authority.</summary>
+public static class PlanetaryTextureFormatPolicy
+{
+    private static readonly PlanetaryTextureChannelPolicy[] EarthChannels =
+    [
+        new(PlanetaryTextureSemantic.Albedo,PlanetaryGpuTextureFormat.Bc7Srgb,PlanetaryTextureColorSpace.Srgb,4,false),
+        new(PlanetaryTextureSemantic.Elevation,PlanetaryGpuTextureFormat.R16Unorm,PlanetaryTextureColorSpace.Linear,4,true),
+        new(PlanetaryTextureSemantic.LandMask,PlanetaryGpuTextureFormat.Bc4Unorm,PlanetaryTextureColorSpace.Linear,4,false),
+        new(PlanetaryTextureSemantic.Cloud,PlanetaryGpuTextureFormat.Bc4Unorm,PlanetaryTextureColorSpace.Linear,2,false)
+    ];
+    public static ReadOnlySpan<PlanetaryTextureChannelPolicy> Earth => EarthChannels;
+    public static PlanetaryTextureChannelPolicy FutureNormal => new(PlanetaryTextureSemantic.Normal,PlanetaryGpuTextureFormat.Bc5Unorm,PlanetaryTextureColorSpace.Linear,4,false);
 }
 
 /// <summary>Bounded view-demand policy shared conceptually with the native SVT streamer.</summary>
@@ -40,6 +64,12 @@ public static class EarthSurfaceDemandPolicy
     {
         if(!double.IsFinite(surfaceAltitudeMetres)||surfaceAltitudeMetres<0d)throw new ArgumentOutOfRangeException(nameof(surfaceAltitudeMetres));
         return surfaceAltitudeMetres>1_000_000d?1:surfaceAltitudeMetres>100_000d?2:surfaceAltitudeMetres>10_000d?3:EarthSurfaceDatasetContract.MaximumLevel;
+    }
+    public static int RequestedLevel(PlanetaryTextureSemantic semantic,double surfaceAltitudeMetres)
+    {
+        var terrain=RequestedLevel(surfaceAltitudeMetres);
+        var maximum=semantic==PlanetaryTextureSemantic.Cloud?EarthSurfaceDatasetContract.CloudMaximumLevel:EarthSurfaceDatasetContract.MaximumLevel;
+        return Math.Min(terrain,maximum);
     }
     public static double EquatorialMetresPerTexel(double bodyRadiusMetres,int level)
     {
