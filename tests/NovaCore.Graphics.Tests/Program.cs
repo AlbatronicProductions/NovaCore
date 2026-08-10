@@ -35,6 +35,7 @@ var tests = new (string, Action)[]
     ("Focus target authority", FocusTargetAuthorityTest),
     ("Planet material presentation", PlanetMaterialPresentationTest),
     ("Planet micro-normal foundation", PlanetMicroNormalFoundationTest),
+    ("Planet surface scatter placement", PlanetarySurfaceScatterPlacementTest),
     ("Planetary environment presentation", PlanetaryEnvironmentPresentationTest),
     ("Earth authoritative presentation dataset", EarthAuthoritativeDatasetTest),
     ("SurfaceAnchor acquisition, ENU, and handoff", SurfaceAnchorPhaseBTest),
@@ -441,6 +442,102 @@ static void PlanetMicroNormalFoundationTest()
             Check(MathF.Abs(Vector3.Dot(composed, composed) - 1f) < 5e-5f, "bounded BC5 composition remains normalized");
         }
     }
+}
+
+static void PlanetarySurfaceScatterPlacementTest()
+{
+    var root = new ReferenceFrameId(1);
+    var body = new PlanetRenderProxy(
+        SolarSystemBodyIds.Earth.Value,
+        new UniversePosition(new Double3(7.2e11d, -4.8e11d, 3.1e11d), root),
+        6_371_008.8d,
+        new Float3(.1f, .4f, .8f),
+        "Earth",
+        true,
+        DoubleQuaternion.Identity);
+
+    const float minimumScale = 0.35f;
+    const float maximumScale = 1.4f;
+    var terrain = PlanetaryTerrainDefinition.EarthProceduralV1;
+    var anchorDirection = new Double3(.61d, .42d, -.671d).Normalized();
+    var anchor = SurfaceAnchorFocus.AtDirection(
+        body.BodyId,
+        anchorDirection,
+        body.RadiusMetres,
+        terrain.SampleHeight(anchorDirection, 24));
+
+    var config = new PlanetarySurfaceScatterConfiguration(
+        ScatterRadiusMetres: 2_500d,
+        CellSizeMetres: 64d,
+        MaximumCandidateCells: 196,
+        MaximumInstances: 64,
+        MinimumScaleMetres: minimumScale,
+        MaximumScaleMetres: maximumScale,
+        Seed: 0xC0FFEE01u);
+
+    var first = PlanetarySurfaceScatterPlacement.Generate(body, anchor, terrain, config);
+    var repeat = PlanetarySurfaceScatterPlacement.Generate(body, anchor, terrain, config);
+    Check(first.Length > 0 && first.Length <= config.MaximumInstances && first.Length <= config.MaximumCandidateCells, "deterministic bounded scatter produces candidates");
+    Check(first.SequenceEqual(repeat), "same body/cell/seed produces identical surface scatter instances");
+
+    var anchorRoot = body.Position.Value + body.BodyFixedToRoot.Rotate(anchor.BodyLocalPosition);
+    var cameraA = new UniversePosition(anchorRoot + body.BodyFixedToRoot.Rotate(new Double3(180d, 1_200d, 2_300d)), root);
+    var cameraB = new UniversePosition(anchorRoot + body.BodyFixedToRoot.Rotate(new Double3(-700d, 1_000d, 1_950d)), root);
+    var cameraAInstances = PlanetarySurfaceScatterPlacement.Generate(body, anchor, terrain, config, cameraA, null, false);
+    var cameraBInstances = PlanetarySurfacePlacementWithCameraOptional(body, anchor, terrain, config, cameraB);
+    Check(cameraAInstances.Select(value => value.IdentityHash).SequenceEqual(cameraBInstances.Select(value => value.IdentityHash)),
+        "moving camera does not alter body-fixed scatter identity");
+
+    var secondCellDirection = (anchor.BodyLocalPosition + anchor.LocalTangentBasis.East * (config.CellSizeMetres * 3d)).Normalized();
+    var secondCell = SurfaceAnchorFocus.AtDirection(
+        body.BodyId,
+        secondCellDirection,
+        body.RadiusMetres,
+        terrain.SampleHeight(secondCellDirection, 24));
+    var differentCell = PlanetarySurfaceScatterPlacement.Generate(body, secondCell, terrain, config);
+    Check(!first.Select(value => value.BodyLocalPosition).SequenceEqual(differentCell.Select(value => value.BodyLocalPosition)),
+        "different cells produce deterministic different scatter patterns");
+
+    Check(first.All(value => value.IsFinite), "all scatter instances are finite");
+    Check(first.All(value => value.ScaleMetres >= minimumScale - 1e-9f && value.ScaleMetres <= maximumScale + 1e-9f),
+        "all scales are configured-range bounded");
+
+    foreach (var value in first)
+    {
+        var bodyDirection = value.BodyLocalPosition.Normalized();
+        Check(bodyDirection.IsFinite, "surface scatter instance body-fixed direction is finite");
+        var expectedRadius = body.RadiusMetres + terrain.SampleHeight(bodyDirection, 24);
+        var bodyRadius = Math.Sqrt(value.BodyLocalPosition.LengthSquared);
+        Check(bodyRadius + 1e-6 >= expectedRadius, "surface scatter instance body-local radius is at or above authoritative terrain");
+        Check(bodyRadius - expectedRadius <= 1e-6d, "surface scatter instance height resolves at authoritative terrain radius");
+    }
+
+    var rotatedBody = body with
+    {
+        Position = new UniversePosition(new Double3(1.25e11d, 1.75e11d, -8.4e11d), root),
+        BodyFixedToRoot = DoubleQuaternion.FromAxisAngle(new Double3(.2d, .8d, .4d).Normalized(), 0.73d),
+    };
+    var rotated = PlanetarySurfaceScatterPlacement.Generate(rotatedBody, anchor, terrain, config);
+    Check(first.Length == rotated.Length && first.Select(value => value.IdentityHash).SequenceEqual(rotated.Select(value => value.IdentityHash)),
+        "high-warp/body rotation keeps stable scatter identity");
+    for (var index = 0; index < first.Length; index++)
+    {
+        var beforeRoot = body.Position.Value + body.BodyFixedToRoot.Rotate(first[index].BodyLocalPosition);
+        var afterRoot = rotatedBody.Position.Value + rotatedBody.BodyFixedToRoot.Rotate(rotated[index].BodyLocalPosition);
+        Check(!beforeRoot.Equals(afterRoot), "body rotation/body translation changes world instance placement while body-fixed identity remains stable");
+    }
+
+    var cullCameraForward = (anchorRoot - cameraA.Value).Normalized();
+    var culled = PlanetarySurfaceScatterPlacement.Generate(body, anchor, terrain, config, cameraA, cullCameraForward, true);
+    Check(culled.Length <= first.Length, "camera relevance culling never increases scatter candidate count");
+
+    static PlanetarySurfaceScatterInstance[] PlanetarySurfacePlacementWithCameraOptional(
+        in PlanetRenderProxy bodyProxy,
+        in SurfaceAnchorFocus surfaceAnchor,
+        in PlanetaryTerrainDefinition queryTerrain,
+        in PlanetarySurfaceScatterConfiguration scatterConfiguration,
+        in UniversePosition optionalCamera)
+        => PlanetarySurfaceScatterPlacement.Generate(bodyProxy, surfaceAnchor, queryTerrain, scatterConfiguration, optionalCamera);
 }
 
 static void PlanetaryEnvironmentPresentationTest()
