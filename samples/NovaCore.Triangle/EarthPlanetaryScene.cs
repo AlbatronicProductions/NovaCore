@@ -15,7 +15,7 @@ internal sealed class EarthPlanetaryScene
     internal const int MaximumPatchCapacity = 8_192;
     internal const double TargetPatchPixels = 128d;
     internal const double ProofViewportHeightPixels = 1_440d;
-    internal const double MinimumTerrainClearanceMetres = 2d;
+    internal const double MinimumTerrainClearanceMetres = SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres;
     internal static readonly PlanetaryTerrainDefinition Terrain = PlanetaryTerrainDefinition.EarthAuthoritativeV3;
     internal static readonly PlanetaryEnvironmentPresentation EnvironmentDefinition = PlanetaryEnvironmentPresentation.EarthDataV2;
     internal static readonly PlanetaryLodConfiguration LodConfiguration = PlanetaryLodConfiguration.ForViewport(19d,MaximumLod,TargetPatchPixels,ProofViewportHeightPixels,Math.PI/3d,Terrain.MaximumHeightMetres);
@@ -40,6 +40,10 @@ internal sealed class EarthPlanetaryScene
     private int _refinementCount;
     private int _balancedRefinementCount;
     private int _culledPatchCount;
+    private int _frustumCulledPatchCount;
+    private int _horizonCulledPatchCount;
+    private int _splitPatchCount;
+    private int _mergedPatchCount;
     private double _altitudeMetres;
     private double _surfaceFrameBlend;
     private PlanetarySurfaceFocus? _surfaceFocus;
@@ -76,6 +80,10 @@ internal sealed class EarthPlanetaryScene
     internal int RefinementCount => _refinementCount;
     internal int BalancedRefinementCount => _balancedRefinementCount;
     internal int CulledPatchCount => _culledPatchCount;
+    internal int FrustumCulledPatchCount => _frustumCulledPatchCount;
+    internal int HorizonCulledPatchCount => _horizonCulledPatchCount;
+    internal int SplitPatchCount => _splitPatchCount;
+    internal int MergedPatchCount => _mergedPatchCount;
     internal ReadOnlySpan<PlanetaryPatch> ActiveLeaves => _activeLeaves.AsSpan();
     internal NativePlanetaryMode Mode => _mode;
     internal PlanetaryRepresentationBlend RepresentationBlend => _blend;
@@ -186,8 +194,8 @@ internal sealed class EarthPlanetaryScene
         var rootToBody=_earth.BodyFixedToRoot.Conjugate().Normalized();var bodyOffset=rootToBody.Rotate(camera.Position.Value-_earth.Position.Value);var distance=Math.Sqrt(bodyOffset.LengthSquared);var radial=distance>0?bodyOffset/distance:Double3.UnitZ;var surfaceRadius=PlanetaryTerrainQuery.VisibleSurfaceRadius(_earth.RadiusMetres,radial,Terrain,EnvironmentDefinition);_altitudeMetres=distance-surfaceRadius;_altitudeRadii=(distance-_earth.RadiusMetres)/_earth.RadiusMetres;_eyeballWeight=PlanetaryEyeballHandoff.EyeballWeight(_altitudeMetres);
         _blend = _handoff.Update(_earth, camera.Position.Value);
         _representation = _blend.DrawDetailed ? PlanetaryRepresentation.NearFieldSurface : PlanetaryRepresentation.FarFieldBody;
-        if(!_blend.DrawDetailed||_eyeballWeight>=1f||_mode==NativePlanetaryMode.GpuProduction){_activeLeaves=[];_activePatchCount=0;_minimumActiveLod=0;_maximumActiveLod=0;_refinementCount=0;_balancedRefinementCount=0;_culledPatchCount=0;return;}
-        var viewForward=rootToBody.Rotate(camera.Orientation.Rotate(new Double3(0,0,-1)));var localBody=_earth with{Position=new UniversePosition(Double3.Zero,Presentation.RootFrame),BodyFixedToRoot=DoubleQuaternion.Identity};UpdatePatchRecords(PlanetaryRepresentationSelector.SelectPatches(localBody,bodyOffset,RegionalLodConfiguration,viewForward,camera.Projection.VerticalFieldOfViewRadians,camera.Projection.AspectRatio,Math.Max(MinimumTerrainClearanceMetres,_altitudeMetres)),camera.Position.Value);
+        if(!_blend.DrawDetailed||_eyeballWeight>=1f||_mode==NativePlanetaryMode.GpuProduction){_activeLeaves=[];_activePatchCount=0;_minimumActiveLod=0;_maximumActiveLod=0;_refinementCount=0;_balancedRefinementCount=0;_culledPatchCount=0;_frustumCulledPatchCount=0;_horizonCulledPatchCount=0;_splitPatchCount=0;_mergedPatchCount=0;return;}
+        var previousLeaves=_activeLeaves;var viewForward=rootToBody.Rotate(camera.Orientation.Rotate(new Double3(0,0,-1)));var localBody=_earth with{Position=new UniversePosition(Double3.Zero,Presentation.RootFrame),BodyFixedToRoot=DoubleQuaternion.Identity};UpdatePatchRecords(PlanetaryRepresentationSelector.SelectPatches(localBody,bodyOffset,RegionalLodConfiguration,viewForward,camera.Projection.VerticalFieldOfViewRadians,camera.Projection.AspectRatio,Math.Max(MinimumTerrainClearanceMetres,_altitudeMetres),previousLeaves),camera.Position.Value);
     }
 
     internal NativePlanetaryGpuConstants GpuConstants(CameraState camera)
@@ -235,6 +243,10 @@ internal sealed class EarthPlanetaryScene
         _refinementCount = selection.RefinementCount;
         _balancedRefinementCount = selection.BalancedRefinementCount;
         _culledPatchCount = selection.CulledPatchCount;
+        _frustumCulledPatchCount = selection.FrustumCulledPatchCount;
+        _horizonCulledPatchCount = selection.HorizonCulledPatchCount;
+        _splitPatchCount = selection.SplitPatchCount;
+        _mergedPatchCount = selection.MergedPatchCount;
         if (_activePatchCount > Patches.Length) throw new InvalidOperationException("Earth patch capacity exceeded.");
         var center = CubeSphereProjection.CameraRelativeCenter(_earth, new UniversePosition(cameraRootPosition, Presentation.RootFrame));
         for (var index = 0; index < _activePatchCount; index++)

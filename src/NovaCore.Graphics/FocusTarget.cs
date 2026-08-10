@@ -9,7 +9,7 @@ public enum FocusTargetKind : byte
     SceneObject = 2,
 }
 
-/// <summary>Body-fixed local tangent basis reserved for Phase B surface-camera work.</summary>
+/// <summary>Body-fixed, right-handed east/north/up tangent basis.</summary>
 public readonly record struct LocalSurfaceTangentBasis(Double3 East, Double3 North, Double3 Up)
 {
     public bool IsValid => East.IsFinite && North.IsFinite && Up.IsFinite &&
@@ -18,7 +18,21 @@ public readonly record struct LocalSurfaceTangentBasis(Double3 East, Double3 Nor
         Math.Abs(Up.LengthSquared - 1d) <= 1e-10d &&
         Math.Abs(Double3.Dot(East, North)) <= 1e-10d &&
         Math.Abs(Double3.Dot(East, Up)) <= 1e-10d &&
-        Math.Abs(Double3.Dot(North, Up)) <= 1e-10d;
+        Math.Abs(Double3.Dot(North, Up)) <= 1e-10d &&
+        Double3.Dot(Double3.Cross(East, North), Up) >= 1d - 1e-10d;
+
+    public Double3 ToLocal(in Double3 bodyLocalPoint, in Double3 bodyLocalAnchor)
+    {
+        if (!IsValid || !bodyLocalPoint.IsFinite || !bodyLocalAnchor.IsFinite) throw new ArgumentOutOfRangeException();
+        var delta = bodyLocalPoint - bodyLocalAnchor;
+        return new(Double3.Dot(delta, East), Double3.Dot(delta, North), Double3.Dot(delta, Up));
+    }
+
+    public Double3 ToBodyFixed(in Double3 localEnu, in Double3 bodyLocalAnchor)
+    {
+        if (!IsValid || !localEnu.IsFinite || !bodyLocalAnchor.IsFinite) throw new ArgumentOutOfRangeException();
+        return bodyLocalAnchor + East * localEnu.X + North * localEnu.Y + Up * localEnu.Z;
+    }
 }
 
 /// <summary>
@@ -32,6 +46,9 @@ public readonly record struct SurfaceAnchorFocus(
     Double3 BodyLocalPosition,
     LocalSurfaceTangentBasis LocalTangentBasis)
 {
+    public double LatitudeRadians => Math.Asin(Math.Clamp(BodyFixedDirection.Y, -1d, 1d));
+    public double LongitudeRadians => Math.Atan2(BodyFixedDirection.Z, BodyFixedDirection.X);
+
     public bool IsValid => BodyId != 0 && BodyFixedDirection.IsFinite &&
         Math.Abs(BodyFixedDirection.LengthSquared - 1d) <= 1e-10d &&
         double.IsFinite(AuthoritativeElevationMetres) && BodyLocalPosition.IsFinite &&

@@ -82,7 +82,13 @@ public readonly record struct PlanetarySurfaceFrame(Double3 Direction,Double3 Ea
 {
     public static PlanetarySurfaceFrame AtDirection(in Double3 bodyDirection)
     {
-        var up=bodyDirection.Normalized();var reference=Math.Abs(Double3.Dot(up,Double3.UnitY))<.95d?Double3.UnitY:Double3.UnitX;var east=Double3.Cross(reference,up).Normalized();var north=Double3.Cross(up,east).Normalized();return new(up,east,north,up);
+        if(!bodyDirection.IsFinite||bodyDirection.LengthSquared<=0d)throw new ArgumentOutOfRangeException(nameof(bodyDirection));
+        var up=bodyDirection.Normalized();
+        var eastCandidate=Double3.Cross(Double3.UnitY,up);
+        // Geographic east is defined from the spin axis. At the exact poles the
+        // tangent is mathematically non-unique, so use one deterministic axis.
+        var east=eastCandidate.LengthSquared>1e-24d?eastCandidate.Normalized():Double3.Cross(Double3.UnitZ,up).Normalized();
+        var north=Double3.Cross(up,east).Normalized();return new(up,east,north,up);
     }
     public DoubleQuaternion HorizonViewOrientation(double downwardRadians=Math.PI/12d)
     {

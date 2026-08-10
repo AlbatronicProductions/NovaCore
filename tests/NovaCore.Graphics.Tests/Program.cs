@@ -34,10 +34,12 @@ var tests = new (string, Action)[]
     ("Planet material presentation", PlanetMaterialPresentationTest),
     ("Planetary environment presentation", PlanetaryEnvironmentPresentationTest),
     ("Earth authoritative presentation dataset", EarthAuthoritativeDatasetTest),
+    ("SurfaceAnchor acquisition, ENU, and handoff", SurfaceAnchorPhaseBTest),
     ("Cube-sphere planetary surface", CubeSpherePlanetarySurfaceTest),
     ("Planetary terrain residency and surface frame", PlanetaryTerrainResidencyAndSurfaceFrameTest),
     ("Planetary patch topology and ABI", PlanetaryPatchTopologyAndAbiTest),
     ("Planetary Renderer V2 eyeball topology and ABI", PlanetaryEyeballTopologyAndAbiTest),
+    ("Spatial terrain continuity and demand", SpatialTerrainContinuityAndDemandTest),
     ("Planetary representation handoff", PlanetaryRepresentationHandoffTest),
     ("Distant quaternion transform parity", DistantQuaternionTransformParityTest),
     ("Distant visible hemisphere winding", DistantVisibleHemisphereWindingTest),
@@ -46,6 +48,18 @@ var tests = new (string, Action)[]
 };
 var testFilter=args.FirstOrDefault(argument=>argument.StartsWith("--test=",StringComparison.OrdinalIgnoreCase))?[7..];
 foreach (var (name, test) in tests) if(testFilter is null||name.Contains(testFilter,StringComparison.OrdinalIgnoreCase)){test();Console.WriteLine($"PASS {name}");}
+
+static void SpatialTerrainContinuityAndDemandTest()
+{
+    var root=new ReferenceFrameId(1);const double radius=6_371_008.8d;var body=new PlanetRenderProxy(SolarSystemBodyIds.Earth.Value,new UniversePosition(Double3.Zero,root),radius,new Float3(.1f,.4f,.8f),"Earth",true,DoubleQuaternion.Identity);
+    var transitionAltitudes=new[]{2_000_000d,1_750_000d,1_500_000d,1_250_000d,1_000_001d,1_000_000d,999_999d,100_000d,10_000d,SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres};
+    foreach(var altitude in transitionAltitudes){var near=PlanetarySurfaceCameraPolicy.NearClipMetres(altitude);Check(near>=PlanetarySurfaceCameraPolicy.MinimumNearClipMetres&&near<=PlanetarySurfaceCameraPolicy.MaximumNearClipMetres&&near<altitude,"continuous near plane remains in front of the camera and behind the aimed surface");}
+    Check(Math.Abs(PlanetarySurfaceCameraPolicy.NearClipMetres(1_000_001d)-PlanetarySurfaceCameraPolicy.NearClipMetres(999_999d))<1d,"regional/eyeball boundary has no near-plane discontinuity");
+    var cameraBody=new Double3(0d,0d,radius+1_500_000d);var aimedDirection=new Double3(.18d,.08d,1d).Normalized();var aimedSurface=aimedDirection*radius;var forward=(aimedSurface-cameraBody).Normalized();Check(PlanetaryEyeballTopology.TryViewPupil(cameraBody,forward,radius,out var pupil)&&Double3.Dot(pupil,aimedDirection)>.999999999d,"eyeball footprint follows the view-ray surface hit instead of the sub-camera point");var cap=PlanetaryEyeballTopology.MaximumAngleRadians(cameraBody,radius,.62d);Check(cap>.62d&&cap<=1.45d,"eyeball cap conservatively includes the visible viewport and horizon margin");
+    var blends=new[]{new PlanetaryRepresentationBlend(PlanetaryRenderRegime.DistantOnly,20,1,0),new PlanetaryRepresentationBlend(PlanetaryRenderRegime.Transition,15,.5f,.5f),new PlanetaryRepresentationBlend(PlanetaryRenderRegime.DetailedOnly,10,0,1)};foreach(var blend in blends)foreach(var eye in new[]{0f,.5f,1f})Check(PlanetarySurfaceCoverage.HasVisibleOwner(blend,eye),"distant/regional/eyeball coverage always has an owner");
+    var config=PlanetaryLodConfiguration.ForViewport(19d,8,128d,1440d,Math.PI/3d,9_000d);var camera=new Double3(0,0,radius+200_000d);var localBody=body with{Position=new UniversePosition(Double3.Zero,root)};var first=PlanetaryRepresentationSelector.SelectPatches(localBody,camera,config,new Double3(0,0,-1),Math.PI/3d,16d/9d,200_000d);var stable=PlanetaryRepresentationSelector.SelectPatches(localBody,camera,config,new Double3(0,0,-1),Math.PI/3d,16d/9d,200_000d,first.Patches);Check(first.Patches.SequenceEqual(stable.Patches)&&stable.SplitPatchCount==0&&stable.MergedPatchCount==0,"identical camera state is deterministic and does not thrash spatial LOD");var hysteresisLeaves=stable.Patches;for(var crossing=0;crossing<32;crossing++){var jitterAltitude=(crossing&1)==0?199_000d:201_000d;var jitter=PlanetaryRepresentationSelector.SelectPatches(localBody,new Double3(0,0,radius+jitterAltitude),config,new Double3(0,0,-1),Math.PI/3d,16d/9d,jitterAltitude,hysteresisLeaves);Check(hysteresisLeaves.SequenceEqual(jitter.Patches)&&jitter.SplitPatchCount==0&&jitter.MergedPatchCount==0,"split/merge hysteresis absorbs repeated one-percent boundary motion");hysteresisLeaves=jitter.Patches;}var previousChildren=Enum.GetValues<CubeSphereFace>().SelectMany(face=>Enumerable.Range(0,4).Select(child=>new PlanetaryPatch(face,0,0,0).Child(child))).ToArray();var mergeConfig=new PlanetaryLodConfiguration(19d,8,1d);var farther=PlanetaryRepresentationSelector.SelectPatches(localBody,new Double3(0,0,radius*10d),mergeConfig,Double3.Zero,0,0,radius*9d,previousChildren);Check(farther.Patches.Length==6&&farther.MergedPatchCount==6&&farther.FrustumCulledPatchCount+farther.HorizonCulledPatchCount==farther.CulledPatchCount,"receding merges deterministic parent coverage and reports conservative culling separately");
+    for(var level=0;level<=EarthSurfaceDatasetContract.MaximumLevel;level++){var expected=Math.Tau*radius/(EarthSurfaceDatasetContract.TileSize*(1<<(level+1)));Check(Math.Abs(EarthSurfaceDemandPolicy.EquatorialMetresPerTexel(radius,level)-expected)<1e-9,"Earth level metres-per-texel contract");}Check(EarthSurfaceDemandPolicy.RequestedLevel(2_000_000d)==1&&EarthSurfaceDemandPolicy.RequestedLevel(500_000d)==2&&EarthSurfaceDemandPolicy.RequestedLevel(50_000d)==3&&EarthSurfaceDemandPolicy.RequestedLevel(5_000d)==4,"SVT demand level follows visible surface importance");
+}
 
 static void PlanetaryPresentationPipelineTest()
 {
@@ -75,6 +89,302 @@ static void FocusTargetAuthorityTest()
     var changedBody=body with{Position=new UniversePosition(body.Position.Value+new Double3(1e8,-2e8,3e8),root),BodyFixedToRoot=DoubleQuaternion.FromAxisAngle(Double3.UnitY,1.2d)};Check(surface.TryEvaluate(changedBody,out var changedRoot)&&changedRoot.Value==changedBody.Position.Value+changedBody.BodyFixedToRoot.Rotate(anchor.BodyLocalPosition)&&changedRoot!=surfaceRoot,"surface anchor follows current translation/orientation without owning either authority");
     var sceneObject=FocusTarget.SceneObject(77);var objectRoot=new UniversePosition(new Double3(-8e12,2e12,1e12),root);Check(sceneObject.TryEvaluateSceneObject(77,objectRoot,out var resolvedObject)&&resolvedObject==objectRoot&&!sceneObject.TryEvaluateSceneObject(78,objectRoot,out _),"future scene-object focus seam accepts only matching current authority");
     _=surface.TryEvaluate(body,out _);var allocatedBefore=GC.GetAllocatedBytesForCurrentThread();var started=Stopwatch.GetTimestamp();var checksum=0d;for(var index=0;index<1_000_000;index++){Check(surface.TryEvaluate(body,out var evaluated),"warm focus evaluation");checksum+=evaluated.Value.X;}var elapsed=Stopwatch.GetElapsedTime(started);var allocated=GC.GetAllocatedBytesForCurrentThread()-allocatedBefore;Check(allocated==0&&double.IsFinite(checksum),"focus target evaluation is bounded and allocation-free");Console.WriteLine($"focus target evaluation: {elapsed.TotalNanoseconds/1_000_000d:F2} ns/update; allocations={allocated} bytes");
+}
+
+static void SurfaceAnchorPhaseBTest()
+{
+    var root = new ReferenceFrameId(1);
+    var bodyOrientation = DoubleQuaternion.FromAxisAngle(new Double3(.2d, .9d, -.3d).Normalized(), .83d);
+    var earth = new PlanetRenderProxy(
+        SolarSystemBodyIds.Earth.Value,
+        new UniversePosition(new Double3(4e12d, -3e12d, 7e12d), root),
+        6_371_008.8d,
+        new Float3(.1f, .4f, .8f), "Earth", true, bodyOrientation);
+
+    var latitudes = new[] { 0d, 45d, 80d, 89.999d, 89.999999999d, -89.999999999d };
+    var maximumRoundTripError = 0d;
+    foreach (var latitude in latitudes)
+    {
+        var radians = latitude * Math.PI / 180d;
+        var direction = new Double3(Math.Cos(radians) * Math.Cos(.71d), Math.Sin(radians), Math.Cos(radians) * Math.Sin(.71d));
+        var anchor = SurfaceAnchorFocus.AtDirection(earth.BodyId, direction, earth.RadiusMetres, 321.25d);
+        var basis = anchor.LocalTangentBasis;
+        Check(anchor.IsValid && basis.IsValid && Double3.Dot(Double3.Cross(basis.East, basis.North), basis.Up) > 1d - 1e-12d,
+            $"right-handed pole-safe ENU at {latitude:R} degrees");
+        foreach (var local in new[] { new Double3(1d, -2d, 3d), new Double3(.01d, -.02d, .03d), new Double3(.001d, -.001d, .002d) })
+        {
+            var bodyPoint = basis.ToBodyFixed(local, anchor.BodyLocalPosition);
+            var recovered = basis.ToLocal(bodyPoint, anchor.BodyLocalPosition);
+            var error = Math.Sqrt((recovered - local).LengthSquared);
+            maximumRoundTripError = Math.Max(maximumRoundTripError, error);
+            Check(error <= .000000002d && recovered.IsFinite, $"BodyFixed/ENU round trip at {latitude:R} degrees and {local.LengthSquared:R} scale");
+        }
+    }
+    var northPole = SurfaceAnchorFocus.AtDirection(earth.BodyId, Double3.UnitY, earth.RadiusMetres, 0d);
+    var southPole = SurfaceAnchorFocus.AtDirection(earth.BodyId, -Double3.UnitY, earth.RadiusMetres, 0d);
+    Check(northPole.IsValid && southPole.IsValid && northPole.LocalTangentBasis.East.IsFinite && southPole.LocalTangentBasis.East.IsFinite,
+        "exact poles use deterministic finite fallback axes");
+
+    var aimedDirection = new Double3(.61d, .42d, -.671d).Normalized();
+    var elevation = EarthSurfaceDataset.SampleHeight(aimedDirection);
+    var aimedRoot = earth.Position.Value + earth.BodyFixedToRoot.Rotate(aimedDirection * (earth.RadiusMetres + elevation));
+    var cameraRoot = aimedRoot + earth.BodyFixedToRoot.Rotate(aimedDirection) * 3_000_000d;
+    var cameraForward = (aimedRoot - cameraRoot).Normalized();
+    Check(!SurfaceAnchorAcquisition.TryAcquire(earth, new UniversePosition(cameraRoot, root),
+        Double3.Cross(cameraForward, Double3.UnitY).Normalized(), PlanetaryTerrainDefinition.EarthAuthoritativeV3, out _),
+        "a view ray that misses Earth does not fabricate a SurfaceAnchor");
+    Check(SurfaceAnchorAcquisition.TryAcquire(earth, new UniversePosition(cameraRoot, root), cameraForward,
+        PlanetaryTerrainDefinition.EarthAuthoritativeV3, out var acquisition), "Earth camera ray acquires authoritative surface");
+    var acquisitionPositionError = Math.Sqrt((acquisition.RootPositionAtAcquisition.Value - aimedRoot).LengthSquared);
+    Check(acquisition.Anchor.IsValid && acquisition.SurfaceRefinementCount == SurfaceAnchorAcquisition.TerrainRefinementCount &&
+        Math.Abs(acquisition.Anchor.AuthoritativeElevationMetres - EarthSurfaceDataset.SampleHeight(acquisition.Anchor.BodyFixedDirection)) < 1e-9d &&
+        acquisitionPositionError < .01d, "Earth acquisition refines against the loaded elevation oracle");
+    var retainedOnMiss = FocusTarget.AtSurface(acquisition.Anchor);
+    if (SurfaceAnchorAcquisition.TryAcquire(earth, new UniversePosition(cameraRoot, root),
+        Double3.Cross(cameraForward, Double3.UnitY).Normalized(), PlanetaryTerrainDefinition.EarthAuthoritativeV3, out var replacement))
+        retainedOnMiss = FocusTarget.AtSurface(replacement.Anchor);
+    Check(retainedOnMiss == FocusTarget.AtSurface(acquisition.Anchor), "a missed reacquisition retains the previous valid focus state");
+
+    var anchorRoot = acquisition.RootPositionAtAcquisition.Value;
+    var maximumCameraRelativePackingError = 0d;
+    foreach (var localOffset in new[] { new Double3(1d, -.5d, .25d), new Double3(.01d, -.02d, .03d), new Double3(.001d, -.001d, .002d) })
+    {
+        var bodyPoint = acquisition.Anchor.LocalTangentBasis.ToBodyFixed(localOffset, acquisition.Anchor.BodyLocalPosition);
+        var pointRoot = earth.Position.Value + earth.BodyFixedToRoot.Rotate(bodyPoint);
+        var expectedRelative = pointRoot - anchorRoot;
+        var encodedRelative = CameraRelativeRenderPosition.Create(pointRoot, anchorRoot).Encode().Reconstruct();
+        var packingError = Math.Max(Math.Abs(encodedRelative.X - expectedRelative.X),
+            Math.Max(Math.Abs(encodedRelative.Y - expectedRelative.Y), Math.Abs(encodedRelative.Z - expectedRelative.Z)));
+        maximumCameraRelativePackingError = Math.Max(maximumCameraRelativePackingError, packingError);
+        Check(packingError <= 2e-9d, "surface-anchor camera-relative transport adds no meaningful meter/cm/mm loss");
+    }
+
+    Check(SolarSystemScene.TryCreateAt(root, SimulationInstant.Zero, out var firstScene, out var sceneError) && firstScene is not null,
+        $"SurfaceAnchor handoff scene: {sceneError}");
+    var scene = firstScene!;
+    var camera = new CameraState(new FramePosition(root, Double3.Zero), DoubleQuaternion.Identity, scene.Projection, CameraMode.Free);
+    Check(scene.Focus(camera, NativePresentationFocus.Earth), "Earth focus for SurfaceAnchor handoff");
+    scene.ApplyPresentationInput(camera, new NativeInputState { PauseToggle = 1 }, out _, out _);
+    var immutableBodies = scene.Presentation.Bodies.ToArray();
+    var maximumAcquisitionCameraError = 0d;
+    var maximumAcquisitionCameraPositionError = 0d;
+    var maximumAcquisitionTargetDistanceError = 0d;
+    var acquired = false;
+    for (var step = 0; step < 128 && !acquired; step++)
+    {
+        var beforePosition = camera.Position.Value;
+        var beforeCenter = scene.FocusedBody.Position.Value;
+        var beforeRadial = (beforePosition - beforeCenter).Normalized();
+        var beforeDistance = Math.Sqrt((beforePosition - beforeCenter).LengthSquared);
+        var beforeBodyDirection = scene.FocusedBody.BodyFixedToRoot.Conjugate().Normalized().Rotate(beforeRadial);
+        var surfaceRadius = scene.FocusedBody.RadiusMetres + EarthPlanetaryScene.Terrain.SampleHeight(beforeBodyDirection, 24);
+        var expectedDistance = SolarCameraZoomPolicy.Apply(beforeDistance, surfaceRadius,
+            surfaceRadius + SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres,
+            SolAnalyticalDefinition.AstronomicalUnitMetres * SolarSystemScene.MaximumOverviewDistanceAu, 1);
+        var expectedPosition = beforeCenter + beforeRadial * expectedDistance;
+        scene.ApplyPresentationInput(camera, new NativeInputState { MouseWheelDetents = 1 }, out _, out _);
+        acquired = scene.CurrentFocusTarget.Kind == FocusTargetKind.SurfaceAnchor;
+        if (acquired)
+        {
+            var cameraLineError = Math.Sqrt(Double3.Cross(camera.Position.Value - beforePosition, beforeRadial).LengthSquared);
+            maximumAcquisitionCameraError = Math.Max(maximumAcquisitionCameraError, cameraLineError);
+            maximumAcquisitionCameraPositionError = Math.Sqrt((camera.Position.Value - expectedPosition).LengthSquared);
+            maximumAcquisitionTargetDistanceError = Math.Abs(scene.OrbitDistance -
+                Math.Sqrt((camera.Position.Value - scene.CurrentFocusRoot).LengthSquared));
+            Check(scene.SurfaceAnchorBlend == 0d && scene.CurrentFocusRoot == scene.FocusedBody.Position.Value,
+                "SurfaceAnchor identity begins at zero positional weight");
+        }
+    }
+    Check(acquired && maximumAcquisitionCameraError < .01d && maximumAcquisitionCameraPositionError < .01d &&
+        maximumAcquisitionTargetDistanceError < 1e-6d, "BodyCenter acquisition has no camera or target-distance snap");
+    var acquiredAnchor = scene.CurrentFocusTarget.SurfaceAnchor;
+    var previousBlend = scene.SurfaceAnchorBlend;
+    var maximumOrientationStep = 0d;
+    var maximumAnchorZoomRatioError = 0d;
+    for (var step = 0; step < 64 && scene.SurfaceAnchorBlend < 1d; step++)
+    {
+        var beforeOrientation = camera.Orientation;Check(scene.CurrentFocusTarget.TryEvaluate(scene.FocusedBody,out var anchorBefore),"active anchor evaluates before zoom");var beforeAnchorDistance=Math.Sqrt((camera.Position.Value-anchorBefore.Value).LengthSquared);
+        scene.ApplyPresentationInput(camera, new NativeInputState { MouseWheelDetents = 1 }, out _, out _);
+        Check(scene.CurrentFocusTarget.TryEvaluate(scene.FocusedBody,out var anchorAfter),"active anchor evaluates after zoom");var afterAnchorDistance=Math.Sqrt((camera.Position.Value-anchorAfter.Value).LengthSquared);
+        maximumAnchorZoomRatioError=Math.Max(maximumAnchorZoomRatioError,Math.Abs(beforeAnchorDistance/afterAnchorDistance-SolarCameraZoomPolicy.DistanceRatioPerDetent));
+        maximumOrientationStep = Math.Max(maximumOrientationStep, QuaternionAngle(beforeOrientation, camera.Orientation));
+        Check(scene.SurfaceAnchorBlend >= previousBlend && scene.CurrentFocusTarget.SurfaceAnchor == acquiredAnchor,
+            "handoff blend is monotonic and does not hop anchors");
+        previousBlend = scene.SurfaceAnchorBlend;
+    }
+    Check(scene.SurfaceAnchorBlend == 1d && scene.SurfaceCameraMode == PlanetaryCameraPresentationMode.SurfaceLocal,
+        "descent reaches full SurfaceAnchor focus");
+    Check(maximumAnchorZoomRatioError<1e-9d,"post-acquisition wheel cadence is logarithmic relative to the physical anchor");
+    for (var step = 0; step < 128 && scene.SurfaceAltitudeMetres > 10d; step++)
+        scene.ApplyPresentationInput(camera, new NativeInputState { MouseWheelDetents = 1 }, out _, out _);
+    Check(scene.SurfaceAltitudeMetres >= SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres && scene.SurfaceAltitudeMetres < 20d,
+        "target-relative wheel reaches near-ground scale without terrain penetration");
+
+    var beforeDragTarget = scene.CurrentFocusRoot;
+    var beforeDragDistance = scene.OrbitDistance;
+    var beforeDragBodies = scene.Presentation.Bodies.ToArray();
+    scene.ApplyPresentationInput(camera, new NativeInputState { LookActive = 1, MouseDeltaX = 21, MouseDeltaY = -9 }, out _, out _);
+    Check(scene.CurrentFocusRoot == beforeDragTarget && scene.OrbitDistance+1e-6d>=beforeDragDistance && scene.SurfaceAltitudeMetres>=SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres &&
+        !immutableBodies.Except(beforeDragBodies).Any() && beforeDragBodies.SequenceEqual(scene.Presentation.Bodies),
+        "click-drag orbits the camera around the anchor without changing body truth and may only increase distance for terrain clearance");
+
+    var retainedAnchor = scene.CurrentFocusTarget.SurfaceAnchor;
+    for (var step = 0; step < 128 && scene.SurfaceAltitudeMetres < 2_200_000d; step++)
+        scene.ApplyPresentationInput(camera, new NativeInputState { MouseWheelDetents = -1 }, out _, out _);
+    Check(scene.CurrentFocusTarget.Kind == FocusTargetKind.SurfaceAnchor && scene.CurrentFocusTarget.SurfaceAnchor == retainedAnchor,
+        "zoom-out hysteresis retains the same anchor above the acquisition threshold");
+    for (var step = 0; step < 32 && scene.CurrentFocusTarget.Kind == FocusTargetKind.SurfaceAnchor; step++)
+        scene.ApplyPresentationInput(camera, new NativeInputState { MouseWheelDetents = -1 }, out _, out _);
+    Check(scene.CurrentFocusTarget.Kind == FocusTargetKind.BodyCenter && scene.SurfaceAnchorBlend == 0d,
+        "zoom-out beyond release threshold returns deterministically to BodyCenter");
+
+    var firstReplay = HandoffReplay();
+    var secondReplay = HandoffReplay();
+    Check(firstReplay == secondReplay && firstReplay.AcquisitionTargetError < 1e-6d && firstReplay.ReleaseTargetError < 1e-6d &&
+        firstReplay.CameraPositionError < .01d && firstReplay.TargetDistanceError < 1e-6d &&
+        firstReplay.AcquisitionOrientationError < 1e-12d && firstReplay.ReleaseOrientationError < 1e-12d,
+        "repeated BodyCenter/SurfaceAnchor crossings are deterministic and continuous");
+
+    var warpRates = new[]
+    {
+        SimulationRate.One,
+        new SimulationRate(30, 1),
+        new SimulationRate(600, 1),
+        new SimulationRate(14_400, 1),
+        new SimulationRate(7_776_000, 1),
+    };
+    foreach (var rate in warpRates)
+    {
+        Check(SolarSystemScene.TryCreateAt(root, SimulationInstant.Zero, out var warpSceneCandidate, out var warpError) && warpSceneCandidate is not null,
+            $"SurfaceAnchor warp scene {rate.Numerator}x: {warpError}");
+        var warpScene = warpSceneCandidate!;
+        var warpCamera = new CameraState(new FramePosition(root, Double3.Zero), DoubleQuaternion.Identity, warpScene.Projection, CameraMode.Free);
+        Check(warpScene.Focus(warpCamera, NativePresentationFocus.Earth), $"SurfaceAnchor Earth focus {rate.Numerator}x");
+        for (var step = 0; step < 128 && (warpScene.CurrentFocusTarget.Kind != FocusTargetKind.SurfaceAnchor || warpScene.SurfaceAnchorBlend == 0d); step++)
+            warpScene.ApplyPresentationInput(warpCamera, new NativeInputState { MouseWheelDetents = 1 }, out _, out _);
+        Check(warpScene.CurrentFocusTarget.Kind == FocusTargetKind.SurfaceAnchor && warpScene.SurfaceAnchorBlend > 0d,
+            $"SurfaceAnchor active before {rate.Numerator}x advance");
+        var requestedIndex = SimulationSpeedPresets.IndexOf(rate);
+        while (warpScene.SpeedPresetIndex < requestedIndex) warpScene.ApplyPresentationInput(warpCamera, new NativeInputState { RateIncrease = 1 }, out _, out _);
+        while (warpScene.SpeedPresetIndex > requestedIndex) warpScene.ApplyPresentationInput(warpCamera, new NativeInputState { RateDecrease = 1 }, out _, out _);
+        var stableAnchor = warpScene.CurrentFocusTarget.SurfaceAnchor;
+        var beforeTarget = warpScene.CurrentFocusRoot;
+        var beforeOffset = warpCamera.Position.Value - beforeTarget;
+        var beforeView = warpCamera.Orientation;
+        Check(warpScene.TryAdvanceByHostDuration(SimulationDuration.FromWholeSeconds(1), warpCamera, out warpError),
+            $"SurfaceAnchor {rate.Numerator}x advance: {warpError}");
+        var afterTarget = warpScene.CurrentFocusRoot;
+        var afterOffset = warpCamera.Position.Value - afterTarget;
+        var afterBody = warpScene.FocusedBody;
+        var expectedAnchorRoot = afterBody.Position.Value + afterBody.BodyFixedToRoot.Rotate(stableAnchor.BodyLocalPosition);
+        var expectedFocusRoot = SurfaceFocusHandoffPolicy.BlendedRoot(afterBody.Position.Value, expectedAnchorRoot, warpScene.SurfaceAnchorBlend);
+        var offsetError = Math.Sqrt((afterOffset - beforeOffset).LengthSquared);
+        Check(warpScene.CurrentFocusTarget.SurfaceAnchor == stableAnchor && afterTarget == expectedFocusRoot && afterTarget != beforeTarget &&
+            warpCamera.Orientation == beforeView && offsetError <= Math.Max(.01d, Math.Sqrt(beforeOffset.LengthSquared) * 1e-12d) &&
+            warpCamera.Position.Value.IsFinite && double.IsFinite(warpScene.SurfaceAltitudeMetres),
+            $"SurfaceAnchor remains geographic and camera orientation remains inertial at {rate.Numerator}x");
+        Console.WriteLine($"SurfaceAnchor warp {rate.Numerator}x: targetMotion={Math.Sqrt((afterTarget-beforeTarget).LengthSquared):R} m; offsetError={offsetError:E3} m; orientationFixed={warpCamera.Orientation==beforeView}");
+    }
+
+    var mock = new BodyFixedSceneObject(9001, earth.BodyId, acquisition.Anchor.BodyLocalPosition + acquisition.Anchor.LocalTangentBasis.Up * 30d);
+    var mockFocus = FocusTarget.SceneObject(mock.ObjectId);
+    Check(mock.TryEvaluate(earth, out var mockRoot), "mock surface rocket evaluates from its parent body");
+    Check(mockFocus.TryEvaluateSceneObject(mock.ObjectId, mockRoot, out var focusedMock),
+        "mock surface rocket resolves through the SceneObject authority seam");
+    foreach (var distance in new[] { 5d, 100_000d, 2_000_000d, 20_000_000d, 5d })
+    {
+        var mockCamera = focusedMock.Value + Double3.UnitZ * distance;
+        Check(Math.Abs(Math.Sqrt((mockCamera - focusedMock.Value).LengthSquared) - distance) < 1e-9d,
+            "mock rocket remains focusable from ground through far planetary scale");
+    }
+
+    var perfAnchor = acquisition.Anchor;
+    var perfTarget = FocusTarget.AtSurface(perfAnchor);
+    _ = perfTarget.TryEvaluate(earth, out _);
+    var allocatedBefore = GC.GetAllocatedBytesForCurrentThread();
+    var checksum = 0d;
+    var started = Stopwatch.GetTimestamp();
+    for (var index = 0; index < 100_000; index++)
+    { Check(perfTarget.TryEvaluate(earth, out var evaluated), "anchor performance evaluation"); checksum += evaluated.Value.X; }
+    var anchorElapsed = Stopwatch.GetElapsedTime(started);
+    started = Stopwatch.GetTimestamp();
+    for (var index = 0; index < 100_000; index++) checksum += perfAnchor.LocalTangentBasis.ToLocal(perfAnchor.BodyLocalPosition + perfAnchor.LocalTangentBasis.East, perfAnchor.BodyLocalPosition).X;
+    var enuElapsed = Stopwatch.GetElapsedTime(started);
+    started = Stopwatch.GetTimestamp();
+    for (var index = 0; index < 100_000; index++) checksum += SurfaceFocusHandoffPolicy.SurfaceBlend(1_500_000d);
+    var handoffElapsed = Stopwatch.GetElapsedTime(started);
+    started = Stopwatch.GetTimestamp();
+    var zoomDistance = 100_000d;
+    for (var index = 0; index < 100_000; index++) zoomDistance = SolarCameraZoomPolicy.ApplyTargetRelative(zoomDistance, 2d, 1e12d, (index & 1) == 0 ? 1 : -1);
+    var zoomElapsed = Stopwatch.GetElapsedTime(started);checksum += zoomDistance;
+    var allocated = GC.GetAllocatedBytesForCurrentThread() - allocatedBefore;
+    Check(allocated == 0 && double.IsFinite(checksum), "anchor/ENU/handoff update is allocation-free");
+    Console.WriteLine($"SurfaceAnchor: acquisitionError={acquisitionPositionError:E3} m; ENU maxError={maximumRoundTripError:E3} m; cameraRelativePackError={maximumCameraRelativePackingError:E3} m; acquisitionCameraPositionError={maximumAcquisitionCameraPositionError:E3} m; acquisitionTargetDistanceError={maximumAcquisitionTargetDistanceError:E3} m; zoomRatioError={maximumAnchorZoomRatioError:E3}; maxOrientationStep={maximumOrientationStep:E3} rad; handoffTarget={firstReplay.AcquisitionTargetError:E3}/{firstReplay.ReleaseTargetError:E3} m; handoffCamera={firstReplay.CameraPositionError:E3} m; handoffDistance={firstReplay.TargetDistanceError:E3} m; handoffOrientation={firstReplay.AcquisitionOrientationError:E3}/{firstReplay.ReleaseOrientationError:E3} rad; anchor={anchorElapsed.TotalNanoseconds / 100_000d:F2} ns; ENU={enuElapsed.TotalNanoseconds / 100_000d:F2} ns; handoff={handoffElapsed.TotalNanoseconds / 100_000d:F2} ns; zoom={zoomElapsed.TotalNanoseconds / 100_000d:F2} ns; allocations={allocated}");
+
+    (int AcquisitionSteps,int ReleaseSteps,double AcquisitionTargetError,double ReleaseTargetError,double CameraPositionError,double TargetDistanceError,double AcquisitionOrientationError,double ReleaseOrientationError,Double3 CameraRoot,DoubleQuaternion CameraOrientation) HandoffReplay()
+    {
+        Check(SolarSystemScene.TryCreateAt(root, SimulationInstant.Zero, out var replayCandidate, out var replayError) && replayCandidate is not null,
+            $"handoff replay scene: {replayError}");
+        var replay = replayCandidate!;
+        var replayCamera = new CameraState(new FramePosition(root, Double3.Zero), DoubleQuaternion.Identity, replay.Projection, CameraMode.Free);
+        Check(replay.Focus(replayCamera, NativePresentationFocus.Earth), "handoff replay Earth focus");
+        var acquisitionSteps = 0;
+        var acquisitionTargetError = double.NaN;
+        var cameraPositionError = double.NaN;
+        var targetDistanceError = double.NaN;
+        var acquisitionOrientationError = double.NaN;
+        while (replay.CurrentFocusTarget.Kind == FocusTargetKind.BodyCenter && acquisitionSteps++ < 128)
+        {
+            var beforeTarget = replay.CurrentFocusRoot;var beforeView = replayCamera.Orientation;
+            var beforeRelative = replayCamera.Position.Value - beforeTarget;
+            var beforeDistance = Math.Sqrt(beforeRelative.LengthSquared);
+            var beforeRadial = beforeRelative / beforeDistance;
+            var beforeDirection = replay.FocusedBody.BodyFixedToRoot.Conjugate().Normalized().Rotate(beforeRadial);
+            var surfaceRadius = replay.FocusedBody.RadiusMetres + EarthPlanetaryScene.Terrain.SampleHeight(beforeDirection, 24);
+            var expectedDistance = SolarCameraZoomPolicy.Apply(beforeDistance, surfaceRadius,
+                surfaceRadius + SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres,
+                SolAnalyticalDefinition.AstronomicalUnitMetres * SolarSystemScene.MaximumOverviewDistanceAu, 1);
+            var expectedPosition = beforeTarget + beforeRadial * expectedDistance;
+            replay.ApplyPresentationInput(replayCamera, new NativeInputState { MouseWheelDetents = 1 }, out _, out _);
+            if (replay.CurrentFocusTarget.Kind == FocusTargetKind.SurfaceAnchor)
+            {
+                acquisitionTargetError = Math.Sqrt((replay.CurrentFocusRoot - beforeTarget).LengthSquared);
+                cameraPositionError = Math.Sqrt((replayCamera.Position.Value - expectedPosition).LengthSquared);
+                targetDistanceError = Math.Abs(replay.OrbitDistance - Math.Sqrt((replayCamera.Position.Value - replay.CurrentFocusRoot).LengthSquared));
+                acquisitionOrientationError = QuaternionAngle(beforeView, replayCamera.Orientation);
+            }
+        }
+        while (replay.SurfaceAnchorBlend < 1d) replay.ApplyPresentationInput(replayCamera, new NativeInputState { MouseWheelDetents = 1 }, out _, out _);
+        var releaseSteps = 0;
+        var releaseTargetError = double.NaN;
+        var releaseOrientationError = double.NaN;
+        while (replay.CurrentFocusTarget.Kind == FocusTargetKind.SurfaceAnchor && releaseSteps++ < 128)
+        {
+            var beforeTarget = replay.CurrentFocusRoot;var beforeView = replayCamera.Orientation;
+            Check(replay.CurrentFocusTarget.TryEvaluate(replay.FocusedBody, out var beforeAnchor), "handoff release anchor evaluates");
+            var anchorRelative = replayCamera.Position.Value - beforeAnchor.Value;
+            var expectedDistance = SolarCameraZoomPolicy.ApplyTargetRelative(Math.Sqrt(anchorRelative.LengthSquared),
+                SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres,
+                SolAnalyticalDefinition.AstronomicalUnitMetres * SolarSystemScene.MaximumOverviewDistanceAu, -1);
+            var expectedPosition = beforeAnchor.Value + anchorRelative.Normalized() * expectedDistance;
+            replay.ApplyPresentationInput(replayCamera, new NativeInputState { MouseWheelDetents = -1 }, out _, out _);
+            if (replay.CurrentFocusTarget.Kind == FocusTargetKind.BodyCenter)
+            {
+                releaseTargetError = Math.Sqrt((replay.CurrentFocusRoot - beforeTarget).LengthSquared);
+                cameraPositionError = Math.Max(cameraPositionError, Math.Sqrt((replayCamera.Position.Value - expectedPosition).LengthSquared));
+                targetDistanceError = Math.Max(targetDistanceError, Math.Abs(replay.OrbitDistance - Math.Sqrt((replayCamera.Position.Value - replay.CurrentFocusRoot).LengthSquared)));
+                releaseOrientationError = QuaternionAngle(beforeView, replayCamera.Orientation);
+            }
+        }
+        return (acquisitionSteps, releaseSteps, acquisitionTargetError, releaseTargetError, cameraPositionError, targetDistanceError, acquisitionOrientationError, releaseOrientationError,
+            replayCamera.Position.Value, replayCamera.Orientation);
+    }
+}
+
+static double QuaternionAngle(in DoubleQuaternion first, in DoubleQuaternion second)
+{
+    var dot = Math.Abs(first.X * second.X + first.Y * second.Y + first.Z * second.Z + first.W * second.W);
+    return 2d * Math.Acos(Math.Clamp(dot, -1d, 1d));
 }
 
 static void PlanetMaterialPresentationTest()
@@ -430,9 +740,9 @@ static void EarthPlanetarySceneTest()
     var closeRefined=earthScene.RefinementCount;var closeBalanced=earthScene.BalancedRefinementCount;var closeCulled=earthScene.CulledPatchCount;earthScene.UpdatePatches(camera);Check(closeLeaves.SequenceEqual(earthScene.ActiveLeaves.ToArray())&&closeHash==Hash(earthScene.Patches.AsSpan(0,earthScene.ActivePatchCount))&&closeRefined==earthScene.RefinementCount&&closeBalanced==earthScene.BalancedRefinementCount&&closeCulled==earthScene.CulledPatchCount,"repeated camera state has deterministic leaves, balancing, metadata, and batch");
     SetAltitude(3_000_000d);var regionalLevel=earthScene.MaximumActiveLod;var regionalCount=earthScene.ActivePatchCount;Check(regionalCount>0&&regionalLevel<=EarthPlanetaryScene.RegionalMaximumLod&&!earthScene.EyeballComputeRequested,"3000 km remains on bounded regional coverage");
     SetAltitude(1_500_000d);var transitionEye=earthScene.EyeballConstants(camera);Check(Math.Abs(earthScene.EyeballWeight-.5f)<1e-5f&&earthScene.ActivePatchCount>0&&transitionEye.Enabled==1&&Math.Abs(transitionEye.RegionalAlpha-.5f)<1e-5f,"2000-to-1000 km handoff overlaps regional and eyeball paths deterministically");
-    var proofAltitudes=new[]{1_000_000d,100_000d,10_000d,1_000d,100d,10d,2d};var proofInputs=new NativePlanetaryEyeball[proofAltitudes.Length];for(var index=0;index<proofAltitudes.Length;index++){SetAltitude(proofAltitudes[index]);proofInputs[index]=earthScene.EyeballConstants(camera);Check(earthScene.ActivePatchCount==0&&!earthScene.DetailedComputeRequested&&earthScene.EyeballComputeRequested&&earthScene.EyeballWeight==1f,"near field retires regional selection");}
-    Check(proofInputs.All(eye=>eye.Enabled==1&&eye.VertexCount==PlanetaryEyeballTopology.VertexCount&&eye.IndexCount==PlanetaryEyeballTopology.IndexCount&&eye.RadialRingCount==PlanetaryEyeballTopology.RadialRingCount&&eye.AzimuthSegmentCount==PlanetaryEyeballTopology.AzimuthSegmentCount&&eye.RegionalAlpha==0f),"1000 km through 2 m uses one fixed topology and one indirect workload");
-    Console.WriteLine($"Earth V2 descent proof: regional 3000km={regionalCount}/L{regionalLevel}; fixed 1000km..2m={PlanetaryEyeballTopology.VertexCount} vertices/{PlanetaryEyeballTopology.IndexCount} indices/1 draw");
+    var proofAltitudes=new[]{1_000_000d,100_000d,10_000d,1_000d,100d,10d,EarthPlanetaryScene.MinimumTerrainClearanceMetres};var proofInputs=new NativePlanetaryEyeball[proofAltitudes.Length];for(var index=0;index<proofAltitudes.Length;index++){SetAltitude(proofAltitudes[index]);proofInputs[index]=earthScene.EyeballConstants(camera);Check(earthScene.ActivePatchCount==0&&!earthScene.DetailedComputeRequested&&earthScene.EyeballComputeRequested&&earthScene.EyeballWeight==1f,"near field retires regional selection");}
+    Check(proofInputs.All(eye=>eye.Enabled==1&&eye.VertexCount==PlanetaryEyeballTopology.VertexCount&&eye.IndexCount==PlanetaryEyeballTopology.IndexCount&&eye.RadialRingCount==PlanetaryEyeballTopology.RadialRingCount&&eye.AzimuthSegmentCount==PlanetaryEyeballTopology.AzimuthSegmentCount&&eye.RegionalAlpha==0f),"1000 km through 10 m uses one fixed topology and one indirect workload");
+    Console.WriteLine($"Earth V2 descent proof: regional 3000km={regionalCount}/L{regionalLevel}; fixed 1000km..10m={PlanetaryEyeballTopology.VertexCount} vertices/{PlanetaryEyeballTopology.IndexCount} indices/1 draw");
     SetDistance(20d);Check(earthScene.RepresentationBlend.Regime==PlanetaryRenderRegime.DistantOnly&&earthScene.ActivePatchCount==0&&earthScene.DistantDrawCount==1,"receding restores distant-only rendering");
     earthScene.ApplyPresentationInput(camera,new NativeInputState{LookActive=1,MouseDeltaX=100,MouseDeltaY=-50,MouseWheelDetents=1});Check(camera.Position.Value!=focused&&Math.Abs(Math.Sqrt((camera.Position.Value-earth.Position.Value).LengthSquared)-earthScene.OrbitDistance)<=earth.RadiusMetres*1e-8d,"Earth camera orbit");
     Check(before.SequenceEqual(earthScene.Presentation.Bodies.ToArray()),"Earth focus and orbit do not mutate presentation snapshot");var relative=CubeSphereProjection.CameraRelativeCenter(earth,new UniversePosition(camera.Position.Value,root));var nativePresentation=earthScene.NativePresentation(camera);Check(nativePresentation.CenterX==(float)relative.X&&nativePresentation.CenterY==(float)relative.Y&&nativePresentation.CenterZ==(float)relative.Z&&nativePresentation.Radius==(float)earth.RadiusMetres,"distant and detailed paths share camera-relative center and authoritative radius");Check(earthScene.Patches.AsSpan(0,earthScene.ActivePatchCount).ToArray().All(patch=>patch.CenterX==(float)relative.X&&patch.CenterY==(float)relative.Y&&patch.CenterZ==(float)relative.Z&&patch.Radius==(float)earth.RadiusMetres),"Earth camera-relative patch batch");

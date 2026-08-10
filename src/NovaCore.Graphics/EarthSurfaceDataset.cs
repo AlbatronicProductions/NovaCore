@@ -32,6 +32,22 @@ public static class EarthSurfaceDatasetContract
     public const long PhysicalPoolBudgetBytes = 60_569_600;
 }
 
+/// <summary>Bounded view-demand policy shared conceptually with the native SVT streamer.</summary>
+public static class EarthSurfaceDemandPolicy
+{
+    public const int FinestNeighborhoodRadiusTiles=2;
+    public static int RequestedLevel(double surfaceAltitudeMetres)
+    {
+        if(!double.IsFinite(surfaceAltitudeMetres)||surfaceAltitudeMetres<0d)throw new ArgumentOutOfRangeException(nameof(surfaceAltitudeMetres));
+        return surfaceAltitudeMetres>1_000_000d?1:surfaceAltitudeMetres>100_000d?2:surfaceAltitudeMetres>10_000d?3:EarthSurfaceDatasetContract.MaximumLevel;
+    }
+    public static double EquatorialMetresPerTexel(double bodyRadiusMetres,int level)
+    {
+        if(!double.IsFinite(bodyRadiusMetres)||bodyRadiusMetres<=0d||level is <0 or >EarthSurfaceDatasetContract.MaximumLevel)throw new ArgumentOutOfRangeException();
+        return Math.Tau*bodyRadiusMetres/(EarthSurfaceDatasetContract.TileSize*(1<<(level+1)));
+    }
+}
+
 /// <summary>Deterministic logical page hierarchy shared with the native Earth page table.</summary>
 public static class EarthVirtualTexturePageContract
 {

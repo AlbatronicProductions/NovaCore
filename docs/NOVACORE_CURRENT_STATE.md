@@ -18,9 +18,9 @@ Labels use deterministic NDC collision rejection in focused, direct parent/child
 
 10B-2A proves the surface-scale continuation of that same Earth path. The existing quadtree address extends safely through level 24, with production capped at level 22 and 8,192 active patches. GPU selection uses viewport-scaled projected error, horizon and view-cone culling, deterministic sparse traversal, the established 2:1 balancing/stitching policy, and CPU/GPU exact-set validation. A persistent 8,192-slot renderer cache stores 289 double elevations per resident patch and generates only deterministic cache misses from the versioned repository-authored Earth procedural source. Shader FP64 reconstructs deep patch coordinates and preserves the established double camera-relative transport.
 
-The renderer now owns a swapchain-dependent D32 depth target and uses direct reversed-Z projections: finite for local scenes and infinite-far for Solar scale. The Earth camera can descend to a two-metre terrain clearance, queries the same deterministic source for its presentation-only floor, and blends into a body-fixed east/north/up tangent frame below 1,000 km. Authoritative Earth center, radius, celestial time, hierarchy, and Sol v3 identity remain unchanged.
+The renderer now owns a swapchain-dependent D32 depth target and uses direct reversed-Z projections: finite for local scenes and infinite-far for Solar scale. The Earth camera can descend to a ten-metre terrain clearance, queries the same deterministic source for its presentation-only floor, and blends into a body-fixed east/north/up tangent frame below 1,000 km. Authoritative Earth center, radius, celestial time, hierarchy, and Sol v3 identity remain unchanged.
 
-10B-2B makes the camera transition explicit: `Orbital` above 1,000 km, smooth body-fixed tangent blending through 1,000–100 km, and `SurfaceLocal` at or below 100 km. The captured immutable body-local surface focus retains local yaw/pitch and the two-metre terrain/ocean floor; receding releases it and returns to orbit without changing the evaluated Earth snapshot.
+10B-2B makes the camera transition explicit: `Orbital` above 1,000 km, smooth body-fixed tangent blending through 1,000–100 km, and `SurfaceLocal` at or below 100 km. The captured immutable body-local surface focus retains local yaw/pitch and the ten-metre terrain/ocean floor; receding releases it and returns to orbit without changing the evaluated Earth snapshot.
 
 One immutable Earth environment record now drives a bounded 100 km HDR atmosphere, a deterministic 2–11 km body-attached procedural cloud shell, and a 180 m presentation sea level. The fullscreen atmosphere/cloud pass renders between the infinite background and opaque reversed-Z geometry. Distant and detailed planet materials share cloud density/shadow policy and evaluated-Sun lighting. Terrain below sea level clamps to a stable spherical ocean surface with radial normals, roughness/specular response, bounded procedural waves, and Fresnel color. These are repository-authored presentation proofs, not real Earth geography, production atmospheric scattering, dynamic weather, or physical ocean simulation.
 
@@ -42,6 +42,10 @@ Milestone 11A-4D closes the remaining render-path convention split at the distan
 
 Milestone 11B-2A formalizes four independent authorities: FP64 root/inertial simulation position, evaluated focus position, root-inertial camera orientation, and derived camera-relative render transport. `FocusTarget` activates body-center focus without changing click-drag or logarithmic zoom, and defines surface-anchor and future scene-object seams without automatic acquisition. `CameraRelativeRenderPosition` now requires CPU FP64 subtraction before float conversion or high/low packing. An audit confirmed the specialized Solar/planetary/environment paths already obeyed that rule and corrected the generic object shader path, which previously subtracted independently narrowed root high/low lanes. Large-root precision tests cover kilometre through represented millimetre separation; high-warp tests cover fixed body-center and body-fixed mock targets through 7,776,000× without camera co-rotation.
 
+Milestone 11B-2B activates the body-fixed focus seam without requiring a vessel. The Solar camera acquires `SurfaceAnchorFocus` only when its actual view ray intersects the focused body's physical/elevation surface; a miss retains the previous valid focus or remains at `BodyCenter`. Earth refinement uses the existing loaded CPU elevation oracle, and other bodies use physical radius. Acquisition begins at 2,000 km, reaches full anchor focus at 1,000 km, and releases only after receding through 3,000 km. Anchor-relative logarithmic zoom, a ten-metre terrain floor, pole-safe right-handed ENU transforms, and tangent translation remain allocation-free presentation behavior. Body translation/orientation reevaluates the fixed local anchor through maximum warp while click-drag and camera orientation remain root-inertial.
+
+Milestone 11B-2C fixes the demonstrated Earth dropout during SurfaceAnchor approach. The cause was the Solar camera retaining a 1,000 km near plane until full SurfaceLocal state, not loss of geometry or texture residency. The reversed-Z near plane is now continuous with altitude. Regional projected-error selection has deterministic ±12% split/merge hysteresis, separate conservative frustum/horizon telemetry, bounded parent fallback, and unchanged 8,192-leaf ownership. Eyeball geometry and bounded Earth SVT demand use the same view-ray surface footprint; SVT begins during regional presentation and always retains nearest-parent texture fallback. Current Earth source truth remains 8192×4096 at the finest level (about 4.89 km/equatorial texel), so close-ground visual fidelity remains data limited.
+
 ## Completed rendering foundation
 
 - Immutable renderer-facing planetary snapshots and generic body presentation conversion.
@@ -57,12 +61,13 @@ Milestone 11B-2A formalizes four independent authorities: FP64 root/inertial sim
 - Generic renderer-owned ring presentation and persistent annulus geometry, initially configured for Saturn.
 - One deterministic Solar Map/free-3D camera, extent-aware focus framing, hierarchical path fading, bounded label priority, and marker-to-body transition.
 - Deep projected-error Earth LOD through level 22, deterministic GPU terrain residency, continuous procedural elevation, and cached terrain normals.
-- Persistent reversed-Z D32 depth plus a two-metre terrain-aware camera floor and body-fixed local tangent orientation.
+- Persistent reversed-Z D32 depth plus a ten-metre terrain-aware camera floor and body-fixed local tangent orientation.
 - Immutable body-associated atmosphere/cloud/ocean presentation and fixed-width native transport.
 - Bounded HDR atmosphere/cloud-shell rendering, evaluated-Sun cloud lighting/shadows, and stable sea-level ocean classification.
 - Explicit orbital/transition/SurfaceLocal control with deterministic round-trip and a reusable body-local focus contract.
 - Fixed-workload spherical-billboard near-field terrain with GPU displacement, one indirect draw, body-fixed sampling, and deterministic topology/ABI validation.
 - Explicit `FocusTarget` identity and FP64-before-narrowing camera-relative transport across generic and planetary presentation paths.
+- Actual-view-ray surface-anchor acquisition, pole-safe local ENU transforms, anchor-relative zoom, and hysteretic body-center/surface-focus handoff.
 
 ## Milestone 9 pipeline summary
 
@@ -70,7 +75,7 @@ Milestone 9 established immutable generic celestial definitions and a pure evalu
 
 ## Remaining work
 
-- Phase B camera work: deterministic `SurfaceAnchor` acquisition, an explicit local east/north/up camera mode, and true surface-scale zoom without coupling focus position to camera orientation.
+- Higher-resolution regional Earth data and local material/micro-normal detail, retaining the completed spatial LOD/culling/SVT-demand foundation without coupling renderer demand to celestial truth.
 - Authored non-Earth image textures, production multiple-scattering atmosphere, close volumetric clouds, production terrain/geography, and physical ocean simulation.
 - Higher-resolution lawful optional Earth packs, a production multiple-scattering atmosphere, and a genuinely close-resolution cloud/ocean/material pass on the existing bounded virtual-texture and fixed 11A geometry architecture.
 - A declared spacecraft-navigation error budget and exceptional higher-fidelity lunar ephemeris if lunar-orbit insertion, close navigation, or precision long-horizon planning requires more than v3. Compact Chebyshev or `SampledHermite` remains the measured fallback, not the default.

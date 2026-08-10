@@ -142,6 +142,9 @@ public static class PlanetarySurfaceCameraPolicy
     public const double SurfaceLocalAltitudeMetres=100_000d;
     public const double MinimumPitchRadians=-1.45d;
     public const double MaximumPitchRadians=1.35d;
+    public const double MinimumNearClipMetres=.05d;
+    public const double MaximumNearClipMetres=1_000_000d;
+    public const double NearClipAltitudeFraction=.02d;
 
     public static double SurfaceBlend(double altitudeMetres)
     {
@@ -155,6 +158,15 @@ public static class PlanetarySurfaceCameraPolicy
         return PlanetaryCameraPresentationMode.Orbital;
     }
     public static double ZoomFactor(double altitudeMetres)=>altitudeMetres switch{>1_000_000d=>1.6d,>100_000d=>1.35d,>10_000d=>1.22d,_=>1.12d};
+    /// <summary>
+    /// Continuous reversed-Z near plane. Two percent of surface altitude keeps the
+    /// visible surface comfortably beyond the clip plane while preserving local depth precision.
+    /// </summary>
+    public static double NearClipMetres(double surfaceAltitudeMetres)
+    {
+        if(!double.IsFinite(surfaceAltitudeMetres))throw new ArgumentOutOfRangeException(nameof(surfaceAltitudeMetres));
+        return Math.Clamp(Math.Max(0d,surfaceAltitudeMetres)*NearClipAltitudeFraction,MinimumNearClipMetres,MaximumNearClipMetres);
+    }
     public static double TranslationSpeedMetresPerSecond(double altitudeMetres)
     {
         if(!double.IsFinite(altitudeMetres)||altitudeMetres<0d)throw new ArgumentOutOfRangeException(nameof(altitudeMetres));

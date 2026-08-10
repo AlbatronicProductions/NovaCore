@@ -28,6 +28,24 @@ public sealed class PlanetaryEyeballTopology
     public ReadOnlySpan<uint> Indices => _indices;
     public ulong DeterministicHash { get; }
 
+    /// <summary>Finds the body-fixed center of the visible surface footprint without fabricating a hit.</summary>
+    public static bool TryViewPupil(in Double3 cameraBody,in Double3 viewForwardBody,double surfaceRadius,out Double3 pupil)
+    {
+        pupil=default;
+        if(!cameraBody.IsFinite||!viewForwardBody.IsFinite||viewForwardBody.LengthSquared<=0d||!double.IsFinite(surfaceRadius)||surfaceRadius<=0d)return false;
+        var direction=viewForwardBody.Normalized();var b=Double3.Dot(cameraBody,direction);var c=cameraBody.LengthSquared-surfaceRadius*surfaceRadius;var discriminant=b*b-c;
+        if(!double.IsFinite(discriminant)||discriminant<0d)return false;
+        var root=Math.Sqrt(discriminant);var near=-b-root;var far=-b+root;var distance=near>=0d?near:far>=0d?far:double.NaN;
+        if(!double.IsFinite(distance))return false;pupil=(cameraBody+direction*distance).Normalized();return pupil.IsFinite;
+    }
+
+    public static double MaximumAngleRadians(in Double3 cameraBody,double surfaceRadius,double viewHalfAngleRadians)
+    {
+        if(!cameraBody.IsFinite||cameraBody.LengthSquared<=0d||!double.IsFinite(surfaceRadius)||surfaceRadius<=0d||!double.IsFinite(viewHalfAngleRadians)||viewHalfAngleRadians<0d)throw new ArgumentOutOfRangeException();
+        var distance=Math.Sqrt(cameraBody.LengthSquared);var horizon=distance<=surfaceRadius?0d:Math.Acos(Math.Clamp(surfaceRadius/distance,0d,1d));
+        return Math.Min(1.45d,horizon*1.20d+viewHalfAngleRadians+HorizonMarginRadians);
+    }
+
     public static double WarpedRadius(int ring)
     {
         if (ring is < 1 or > RadialRingCount) throw new ArgumentOutOfRangeException(nameof(ring));
@@ -108,5 +126,17 @@ public static class PlanetaryEyeballHandoff
         var value = Math.Clamp((RegionalOnlyAltitudeMetres - altitudeMetres) /
             (RegionalOnlyAltitudeMetres - EyeballOnlyAltitudeMetres), 0d, 1d);
         return (float)(value * value * (3d - 2d * value));
+    }
+}
+
+/// <summary>Explicit presentation ownership invariant across whole-body, regional, and eyeball paths.</summary>
+public static class PlanetarySurfaceCoverage
+{
+    public static bool HasVisibleOwner(in PlanetaryRepresentationBlend wholeBodyBlend,float eyeballWeight)
+    {
+        if(!float.IsFinite(eyeballWeight)||eyeballWeight<0f||eyeballWeight>1f)return false;
+        var regional=wholeBodyBlend.DrawDetailed&&eyeballWeight<1f;
+        var eyeball=wholeBodyBlend.DrawDetailed&&eyeballWeight>0f;
+        return wholeBodyBlend.DrawDistant||regional||eyeball;
     }
 }
