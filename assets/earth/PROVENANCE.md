@@ -53,3 +53,15 @@ wraps and polar rows clamp deterministically. The 260 × 260 physical extent is
 already divisible by the BC 4 × 4 block size, so no geographic padding or page
 identity changes are required. R16 elevation bytes are copied verbatim from the
 validated intermediate.
+
+## Mount St. Helens bounded regional proof
+
+The optional regional proof uses bounded exports from the official USGS NAIP
+and 3DEP ImageServer services. Its complete product names, acquisition and
+service dates, public-domain terms, attribution, export queries, CRS, vertical
+datum, dimensions, byte counts, and SHA-256 values are checked in
+`source/regional/mount_st_helens/source.json`. The source GeoTIFFs total
+30,677,362 bytes. `tools/planetary_data/ingest_region.py` produces the optional
+11,359,360-byte `mount_st_helens_v1.ncvreg` pack; it does not alter the global
+Earth pack or the CPU elevation oracle. See `docs/planetary-data-ingestion.md`
+for the regional format, fallback, budgets, and measured proof limits.

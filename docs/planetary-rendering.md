@@ -152,6 +152,34 @@ The repository-authored offline converter uses pinned NumPy 2.3.5 (BSD-3-Clause)
 
 The v3 pack is 162,781,056 bytes versus 322,722,528 bytes for v2, a 49.56% reduction. The unchanged 67,108,864-byte CPU elevation oracle makes the complete checked Earth runtime payload 229,889,920 bytes versus 389,831,392 bytes, a 41.03% reduction. Compression does not create geographic detail: L4 remains 8192×4096, approximately 4.89 km per equatorial texel. The next data milestone must add lawful regional imagery and elevation targeting roughly 10–30 m/texel where practical rather than spending the savings on indiscriminate global residency.
 
+## Milestone 11B-3B optional bounded regional pages
+
+The first optional regional pack layers 48 sparse Mount St. Helens pages from
+L5 through L12 over the unchanged global-v3 Earth hierarchy. Regional pages
+retain the exact equirectangular body-fixed identity, 256×256 logical interior,
+two-texel gutter, and 260×260 physical extent. Albedo is BC7 sRGB, elevation is
+R16 UNORM over -11,000 to +9,000 metres, and source validity is BC4. At the
+proof latitude L12 represents about 13.23 metres per texel.
+
+The renderer reads `earth_regions.index` once, validates exact size/SHA-256,
+header identity, channel descriptors, and ordered page records, then uses
+three fixed 512-entry per-channel GPU hash tables. Pages stream independently
+in level/Y/X order into reserved slots 80–127 of the existing BC7/R16/BC4
+arrays. Regional lookup searches from
+the requested level through L5; a miss continues through the existing global
+requested/parent/root path. BC4 validity blends the optional data boundary,
+so no absent regional pixel can create a material or geometry hole. The pack
+adds one 24,624-byte storage buffer but no texture array, descriptor scan,
+runtime decode, GeoTIFF parser, or per-frame filesystem work.
+
+The proof pack is 11,359,360 bytes and uploads its 48 pages once as 144 channel
+payloads (11,356,800 bytes). At most two pages/six payloads/473,200 bytes are
+scheduled per frame through the existing 1,081,600-byte staging buffer. The
+active 1 km validation occupied 78 of 128 albedo/elevation/mask layers and 18
+cloud layers with no eviction or queue drop; the three regional channels use
+48 existing slots each. Detailed source and transformation authority is in
+`planetary-data-ingestion.md`.
+
 ## Milestone 11A-4 body-fixed orientation and camera separation
 
 Physical orientation is evaluated once per body and update from the authoritative `SimulationInstant`; it is never accumulated from render time. The simulation layer publishes a normalized body-fixed-to-inertial quaternion for each major body, while the translational celestial hierarchy remains inertial and unchanged. `PlanetaryPresentationSnapshot` copies that quaternion into each immutable proxy. The 160-byte native presentation record transports it to distant, regional, eyeball, environment, and ring paths.

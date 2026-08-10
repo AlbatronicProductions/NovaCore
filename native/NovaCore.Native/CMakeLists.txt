@@ -81,6 +81,6 @@ add_library(NovaCore.Native SHARED NovaCoreNative.cpp NovaCoreNative.h)
 add_dependencies(NovaCore.Native NovaCoreShaders)
 target_compile_features(NovaCore.Native PRIVATE cxx_std_20)
 target_compile_definitions(NovaCore.Native PRIVATE WIN32_LEAN_AND_MEAN NOMINMAX VK_USE_PLATFORM_WIN32_KHR NC_NATIVE_EXPORTS $<$<CONFIG:Debug>:NC_DEBUG_BUILD=1>)
-target_link_libraries(NovaCore.Native PRIVATE Vulkan::Vulkan user32)
+target_link_libraries(NovaCore.Native PRIVATE Vulkan::Vulkan user32 bcrypt)
 add_custom_command(TARGET NovaCore.Native POST_BUILD
   COMMAND ${CMAKE_COMMAND} -E copy_if_different "$<TARGET_FILE:NovaCore.Native>" "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>/NovaCore.Native.dll")
