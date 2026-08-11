@@ -32,6 +32,7 @@ var tests = new (string, Action)[]
     ("Celestial SAS diagnostic indicators", CelestialSasDiagnosticIndicatorsTest),
     ("Camera snapshot allocation", CameraSnapshotAllocationTest),
     ("Planetary presentation pipeline", PlanetaryPresentationPipelineTest),
+    ("Planetary presentation SPIR-V stride", PlanetaryPresentationSpirvStrideTest),
     ("Focus target authority", FocusTargetAuthorityTest),
     ("Planet material presentation", PlanetMaterialPresentationTest),
     ("Planet micro-normal foundation", PlanetMicroNormalFoundationTest),
@@ -404,6 +405,87 @@ static void PlanetMaterialPresentationTest()
     Check(Math.Abs(native.RingOrientationX*native.RingOrientationX+native.RingOrientationY*native.RingOrientationY+native.RingOrientationZ*native.RingOrientationZ+native.RingOrientationW*native.RingOrientationW-1f)<1e-6f,"ring orientation transport normalized");
     Check(native.LocalDetailScaleMeters==PlanetMaterialNativeEncoder.DefaultLocalDetailScaleMeters&&native.LocalDetailMicroScaleMeters==PlanetMaterialNativeEncoder.DefaultLocalDetailMicroScaleMeters&&native.LocalDetailFadeStartMetres==PlanetMaterialNativeEncoder.DefaultLocalDetailFadeStartMetres&&native.LocalDetailFadeEndMetres==PlanetMaterialNativeEncoder.DefaultLocalDetailFadeEndMetres,"material defaults include local detail");
     Check(Marshal.SizeOf<NativePlanetaryPresentation>()==176&&Marshal.OffsetOf<NativePlanetaryPresentation>(nameof(NativePlanetaryPresentation.BodyIdLow)).ToInt32()==48&&Marshal.OffsetOf<NativePlanetaryPresentation>(nameof(NativePlanetaryPresentation.Roughness)).ToInt32()==64&&Marshal.OffsetOf<NativePlanetaryPresentation>(nameof(NativePlanetaryPresentation.ProjectionKind)).ToInt32()==80&&Marshal.OffsetOf<NativePlanetaryPresentation>(nameof(NativePlanetaryPresentation.RingInnerRadiusRatio)).ToInt32()==96&&Marshal.OffsetOf<NativePlanetaryPresentation>(nameof(NativePlanetaryPresentation.RingOrientationX)).ToInt32()==112&&Marshal.OffsetOf<NativePlanetaryPresentation>(nameof(NativePlanetaryPresentation.RingColorR)).ToInt32()==128&&Marshal.OffsetOf<NativePlanetaryPresentation>(nameof(NativePlanetaryPresentation.BodyOrientationX)).ToInt32()==144&&Marshal.OffsetOf<NativePlanetaryPresentation>(nameof(NativePlanetaryPresentation.LocalDetailScaleMeters)).ToInt32()==160,"material, ring, body-orientation, and local-detail ABI layout");
+}
+
+static void PlanetaryPresentationSpirvStrideTest()
+{
+    var shaderSourceDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..", "native", "NovaCore.Native", "shaders"));
+    var shaderBinaryDirectory = Path.GetFullPath(Path.Combine(shaderSourceDirectory, "..", "..", "..", "build", "native-ninja", "shaders"));
+    string[] expectedConsumers =
+    [
+        "distant_planet.vert",
+        "planetary.vert",
+        "planetary_environment.frag",
+        "planetary_eyeball.vert",
+        "planetary_ring.vert",
+        "solar_label.vert",
+        "solar_marker.vert",
+        "solar_orbit.vert",
+        "stellar_glow.vert",
+        "stellar_sun.vert"
+    ];
+
+    var actualConsumers = Directory.GetFiles(shaderSourceDirectory)
+        .Where(path =>
+        {
+            var source = File.ReadAllText(path);
+            return source.Contains("binding=6", StringComparison.Ordinal) && source.Contains("Presentation values[]", StringComparison.Ordinal);
+        })
+        .Select(Path.GetFileName)
+        .Order(StringComparer.Ordinal)
+        .ToArray();
+    Array.Sort(expectedConsumers, StringComparer.Ordinal);
+    Check(actualConsumers.SequenceEqual(expectedConsumers), "binding 6 Presentation runtime-array consumer set");
+
+    foreach (var shader in actualConsumers)
+    {
+        var sourcePath = Path.Combine(shaderSourceDirectory, shader!);
+        Check(File.ReadAllText(sourcePath).Contains("vec4 localDetail;", StringComparison.Ordinal), $"{shader} includes localDetail in Presentation ABI");
+        var binaryPath = Path.Combine(shaderBinaryDirectory, shader + ".spv");
+        Check(File.Exists(binaryPath), $"compiled SPIR-V exists for {shader}");
+        var stride = ReadPresentationArrayStride(binaryPath);
+        Check(stride == 176u, $"{shader} Presentation ArrayStride is 176, actual {stride}");
+        Console.WriteLine($"Presentation ArrayStride {shader}.spv: {stride}");
+    }
+}
+
+static uint ReadPresentationArrayStride(string path)
+{
+    var bytes = File.ReadAllBytes(path);
+    Check(bytes.Length >= 20 && bytes.Length % sizeof(uint) == 0, $"valid SPIR-V byte length: {path}");
+    var words = new uint[bytes.Length / sizeof(uint)];
+    for (var index = 0; index < words.Length; index++) words[index] = BinaryPrimitives.ReadUInt32LittleEndian(bytes.AsSpan(index * sizeof(uint), sizeof(uint)));
+    Check(words[0] == 0x07230203u, $"SPIR-V magic: {path}");
+
+    var names = new Dictionary<uint, string>();
+    var runtimeArrayElementTypes = new Dictionary<uint, uint>();
+    var arrayStrides = new Dictionary<uint, uint>();
+    for (var index = 5; index < words.Length;)
+    {
+        var instruction = words[index];
+        var wordCount = (int)(instruction >> 16);
+        var opcode = (ushort)instruction;
+        Check(wordCount > 0 && index + wordCount <= words.Length, $"valid SPIR-V instruction: {path}");
+        if (opcode == 5 && wordCount >= 3) names[words[index + 1]] = ReadSpirvString(words, index + 2, wordCount - 2);
+        else if (opcode == 29 && wordCount == 3) runtimeArrayElementTypes[words[index + 1]] = words[index + 2];
+        else if (opcode == 71 && wordCount >= 4 && words[index + 2] == 6u) arrayStrides[words[index + 1]] = words[index + 3];
+        index += wordCount;
+    }
+
+    foreach (var (runtimeArrayType, elementType) in runtimeArrayElementTypes)
+    {
+        if (names.TryGetValue(elementType, out var name) && name.StartsWith("Presentation", StringComparison.Ordinal) && arrayStrides.TryGetValue(runtimeArrayType, out var stride)) return stride;
+    }
+    throw new Exception($"Presentation runtime-array ArrayStride not found: {path}");
+}
+
+static string ReadSpirvString(uint[] words, int start, int wordCount)
+{
+    var bytes = new byte[wordCount * sizeof(uint)];
+    for (var index = 0; index < wordCount; index++) BinaryPrimitives.WriteUInt32LittleEndian(bytes.AsSpan(index * sizeof(uint), sizeof(uint)), words[start + index]);
+    var length = Array.IndexOf(bytes, (byte)0);
+    if (length < 0) length = bytes.Length;
+    return System.Text.Encoding.UTF8.GetString(bytes, 0, length);
 }
 
 static void PlanetMicroNormalFoundationTest()
