@@ -140,6 +140,40 @@ public static class SurfaceFocusHandoffPolicy
             throw new ArgumentOutOfRangeException();
         return bodyCenterRoot + (anchorRoot - bodyCenterRoot) * Math.Clamp(surfaceBlend, 0d, 1d);
     }
+
+    public static double SurfaceBlendForCameraOffset(
+        in PlanetRenderProxy body,
+        in Double3 anchorRoot,
+        in Double3 inertialCameraOffset,
+        in PlanetaryTerrainDefinition terrain)
+    {
+        if (!body.IsValid || !anchorRoot.IsFinite || !inertialCameraOffset.IsFinite)
+            throw new ArgumentOutOfRangeException();
+
+        var evaluatedBody = body;
+        var evaluatedAnchorRoot = anchorRoot;
+        var evaluatedCameraOffset = inertialCameraOffset;
+        var evaluatedTerrain = terrain;
+        var low = 0d;
+        var high = 1d;
+        var lowResidual = BlendResidual(low);
+        if (lowResidual <= 0d) return 0d;
+        var highResidual = BlendResidual(high);
+        if (highResidual >= 0d) return 1d;
+        for (var iteration = 0; iteration < 40; iteration++)
+        {
+            var middle = low + (high - low) * .5d;
+            if (BlendResidual(middle) > 0d) low = middle; else high = middle;
+        }
+        return Math.Clamp(low + (high - low) * .5d, 0d, 1d);
+
+        double BlendResidual(double weight)
+        {
+            var focusRoot = BlendedRoot(evaluatedBody.Position.Value, evaluatedAnchorRoot, weight);
+            var altitude = SurfaceAnchorAcquisition.SurfaceAltitude(evaluatedBody, focusRoot + evaluatedCameraOffset, evaluatedTerrain);
+            return SurfaceBlend(altitude) - weight;
+        }
+    }
 }
 
 /// <summary>Presentation-only body-attached scene object used to prove the future vessel focus seam.</summary>

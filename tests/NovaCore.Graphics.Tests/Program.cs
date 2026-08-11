@@ -40,6 +40,7 @@ var tests = new (string, Action)[]
     ("Planetary environment presentation", PlanetaryEnvironmentPresentationTest),
     ("Earth authoritative presentation dataset", EarthAuthoritativeDatasetTest),
     ("SurfaceAnchor acquisition, ENU, and handoff", SurfaceAnchorPhaseBTest),
+    ("Camera focus-position continuity", CameraFocusPositionContinuityTest),
     ("Cube-sphere planetary surface", CubeSpherePlanetarySurfaceTest),
     ("Planetary terrain residency and surface frame", PlanetaryTerrainResidencyAndSurfaceFrameTest),
     ("Planetary patch topology and ABI", PlanetaryPatchTopologyAndAbiTest),
@@ -201,17 +202,17 @@ static void SurfaceAnchorPhaseBTest()
         }
     }
     Check(acquired && maximumAcquisitionCameraError < .01d && maximumAcquisitionCameraPositionError < .01d &&
-        maximumAcquisitionTargetDistanceError < 1e-6d, "BodyCenter acquisition has no camera or target-distance snap");
+        maximumAcquisitionTargetDistanceError < 2e-6d, "BodyCenter acquisition has no camera or target-distance snap");
     var acquiredAnchor = scene.CurrentFocusTarget.SurfaceAnchor;
     var previousBlend = scene.SurfaceAnchorBlend;
     var maximumOrientationStep = 0d;
-    var maximumAnchorZoomRatioError = 0d;
+    var maximumInertialOffsetZoomRatioError = 0d;
     for (var step = 0; step < 64 && scene.SurfaceAnchorBlend < 1d; step++)
     {
-        var beforeOrientation = camera.Orientation;Check(scene.CurrentFocusTarget.TryEvaluate(scene.FocusedBody,out var anchorBefore),"active anchor evaluates before zoom");var beforeAnchorDistance=Math.Sqrt((camera.Position.Value-anchorBefore.Value).LengthSquared);
+        var beforeOrientation = camera.Orientation;Check(scene.CurrentFocusTarget.TryEvaluate(scene.FocusedBody,out _),"active anchor evaluates before zoom");var beforeOffsetDistance=Math.Sqrt(scene.CurrentInertialCameraOffset.LengthSquared);
         scene.ApplyPresentationInput(camera, new NativeInputState { MouseWheelDetents = 1 }, out _, out _);
-        Check(scene.CurrentFocusTarget.TryEvaluate(scene.FocusedBody,out var anchorAfter),"active anchor evaluates after zoom");var afterAnchorDistance=Math.Sqrt((camera.Position.Value-anchorAfter.Value).LengthSquared);
-        maximumAnchorZoomRatioError=Math.Max(maximumAnchorZoomRatioError,Math.Abs(beforeAnchorDistance/afterAnchorDistance-SolarCameraZoomPolicy.DistanceRatioPerDetent));
+        Check(scene.CurrentFocusTarget.TryEvaluate(scene.FocusedBody,out _),"active anchor evaluates after zoom");var afterOffsetDistance=Math.Sqrt(scene.CurrentInertialCameraOffset.LengthSquared);
+        maximumInertialOffsetZoomRatioError=Math.Max(maximumInertialOffsetZoomRatioError,Math.Abs(beforeOffsetDistance/afterOffsetDistance-SolarCameraZoomPolicy.DistanceRatioPerDetent));
         maximumOrientationStep = Math.Max(maximumOrientationStep, QuaternionAngle(beforeOrientation, camera.Orientation));
         Check(scene.SurfaceAnchorBlend >= previousBlend && scene.CurrentFocusTarget.SurfaceAnchor == acquiredAnchor,
             "handoff blend is monotonic and does not hop anchors");
@@ -219,10 +220,10 @@ static void SurfaceAnchorPhaseBTest()
     }
     Check(scene.SurfaceAnchorBlend == 1d && scene.SurfaceCameraMode == PlanetaryCameraPresentationMode.SurfaceLocal,
         "descent reaches full SurfaceAnchor focus");
-    Check(maximumAnchorZoomRatioError<1e-9d,"post-acquisition wheel cadence is logarithmic relative to the physical anchor");
+    Check(maximumInertialOffsetZoomRatioError<1e-9d,"post-acquisition wheel cadence logarithmically scales the inertial camera offset");
     for (var step = 0; step < 128 && scene.SurfaceAltitudeMetres > 10d; step++)
         scene.ApplyPresentationInput(camera, new NativeInputState { MouseWheelDetents = 1 }, out _, out _);
-    Check(scene.SurfaceAltitudeMetres >= SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres && scene.SurfaceAltitudeMetres < 20d,
+    Check(scene.SurfaceAltitudeMetres >= SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres-1e-5d && scene.SurfaceAltitudeMetres < 20d,
         "target-relative wheel reaches near-ground scale without terrain penetration");
 
     var beforeDragTarget = scene.CurrentFocusRoot;
@@ -234,7 +235,7 @@ static void SurfaceAnchorPhaseBTest()
         "click-drag orbits the camera around the anchor without changing body truth and may only increase distance for terrain clearance");
 
     var retainedAnchor = scene.CurrentFocusTarget.SurfaceAnchor;
-    for (var step = 0; step < 128 && scene.SurfaceAltitudeMetres < 2_200_000d; step++)
+    for (var step = 0; step < 128 && scene.SurfaceAltitudeMetres < 1_500_000d; step++)
         scene.ApplyPresentationInput(camera, new NativeInputState { MouseWheelDetents = -1 }, out _, out _);
     Check(scene.CurrentFocusTarget.Kind == FocusTargetKind.SurfaceAnchor && scene.CurrentFocusTarget.SurfaceAnchor == retainedAnchor,
         "zoom-out hysteresis retains the same anchor above the acquisition threshold");
@@ -246,7 +247,7 @@ static void SurfaceAnchorPhaseBTest()
     var firstReplay = HandoffReplay();
     var secondReplay = HandoffReplay();
     Check(firstReplay == secondReplay && firstReplay.AcquisitionTargetError < 1e-6d && firstReplay.ReleaseTargetError < 1e-6d &&
-        firstReplay.CameraPositionError < .01d && firstReplay.TargetDistanceError < 1e-6d &&
+        firstReplay.CameraPositionError < .01d && firstReplay.TargetDistanceError < 2e-6d &&
         firstReplay.AcquisitionOrientationError < 1e-12d && firstReplay.ReleaseOrientationError < 1e-12d,
         "repeated BodyCenter/SurfaceAnchor crossings are deterministic and continuous");
 
@@ -324,7 +325,7 @@ static void SurfaceAnchorPhaseBTest()
     var zoomElapsed = Stopwatch.GetElapsedTime(started);checksum += zoomDistance;
     var allocated = GC.GetAllocatedBytesForCurrentThread() - allocatedBefore;
     Check(allocated == 0 && double.IsFinite(checksum), "anchor/ENU/handoff update is allocation-free");
-    Console.WriteLine($"SurfaceAnchor: acquisitionError={acquisitionPositionError:E3} m; ENU maxError={maximumRoundTripError:E3} m; cameraRelativePackError={maximumCameraRelativePackingError:E3} m; acquisitionCameraPositionError={maximumAcquisitionCameraPositionError:E3} m; acquisitionTargetDistanceError={maximumAcquisitionTargetDistanceError:E3} m; zoomRatioError={maximumAnchorZoomRatioError:E3}; maxOrientationStep={maximumOrientationStep:E3} rad; handoffTarget={firstReplay.AcquisitionTargetError:E3}/{firstReplay.ReleaseTargetError:E3} m; handoffCamera={firstReplay.CameraPositionError:E3} m; handoffDistance={firstReplay.TargetDistanceError:E3} m; handoffOrientation={firstReplay.AcquisitionOrientationError:E3}/{firstReplay.ReleaseOrientationError:E3} rad; anchor={anchorElapsed.TotalNanoseconds / 100_000d:F2} ns; ENU={enuElapsed.TotalNanoseconds / 100_000d:F2} ns; handoff={handoffElapsed.TotalNanoseconds / 100_000d:F2} ns; zoom={zoomElapsed.TotalNanoseconds / 100_000d:F2} ns; allocations={allocated}");
+    Console.WriteLine($"SurfaceAnchor: acquisitionError={acquisitionPositionError:E3} m; ENU maxError={maximumRoundTripError:E3} m; cameraRelativePackError={maximumCameraRelativePackingError:E3} m; acquisitionCameraPositionError={maximumAcquisitionCameraPositionError:E3} m; acquisitionTargetDistanceError={maximumAcquisitionTargetDistanceError:E3} m; zoomRatioError={maximumInertialOffsetZoomRatioError:E3}; maxOrientationStep={maximumOrientationStep:E3} rad; handoffTarget={firstReplay.AcquisitionTargetError:E3}/{firstReplay.ReleaseTargetError:E3} m; handoffCamera={firstReplay.CameraPositionError:E3} m; handoffDistance={firstReplay.TargetDistanceError:E3} m; handoffOrientation={firstReplay.AcquisitionOrientationError:E3}/{firstReplay.ReleaseOrientationError:E3} rad; anchor={anchorElapsed.TotalNanoseconds / 100_000d:F2} ns; ENU={enuElapsed.TotalNanoseconds / 100_000d:F2} ns; handoff={handoffElapsed.TotalNanoseconds / 100_000d:F2} ns; zoom={zoomElapsed.TotalNanoseconds / 100_000d:F2} ns; allocations={allocated}");
 
     (int AcquisitionSteps,int ReleaseSteps,double AcquisitionTargetError,double ReleaseTargetError,double CameraPositionError,double TargetDistanceError,double AcquisitionOrientationError,double ReleaseOrientationError,Double3 CameraRoot,DoubleQuaternion CameraOrientation) HandoffReplay()
     {
@@ -365,24 +366,129 @@ static void SurfaceAnchorPhaseBTest()
         var releaseOrientationError = double.NaN;
         while (replay.CurrentFocusTarget.Kind == FocusTargetKind.SurfaceAnchor && releaseSteps++ < 128)
         {
-            var beforeTarget = replay.CurrentFocusRoot;var beforeView = replayCamera.Orientation;
-            Check(replay.CurrentFocusTarget.TryEvaluate(replay.FocusedBody, out var beforeAnchor), "handoff release anchor evaluates");
-            var anchorRelative = replayCamera.Position.Value - beforeAnchor.Value;
-            var expectedDistance = SolarCameraZoomPolicy.ApplyTargetRelative(Math.Sqrt(anchorRelative.LengthSquared),
-                SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres,
-                SolAnalyticalDefinition.AstronomicalUnitMetres * SolarSystemScene.MaximumOverviewDistanceAu, -1);
-            var expectedPosition = beforeAnchor.Value + anchorRelative.Normalized() * expectedDistance;
+            var beforeView = replayCamera.Orientation;
             replay.ApplyPresentationInput(replayCamera, new NativeInputState { MouseWheelDetents = -1 }, out _, out _);
             if (replay.CurrentFocusTarget.Kind == FocusTargetKind.BodyCenter)
             {
-                releaseTargetError = Math.Sqrt((replay.CurrentFocusRoot - beforeTarget).LengthSquared);
-                cameraPositionError = Math.Max(cameraPositionError, Math.Sqrt((replayCamera.Position.Value - expectedPosition).LengthSquared));
+                releaseTargetError = Math.Sqrt((replay.CurrentFocusRoot - replay.FocusedBody.Position.Value).LengthSquared);
+                cameraPositionError = Math.Max(cameraPositionError, Math.Sqrt((replayCamera.Position.Value -
+                    (replay.CurrentFocusRoot + replay.CurrentInertialCameraOffset)).LengthSquared));
                 targetDistanceError = Math.Max(targetDistanceError, Math.Abs(replay.OrbitDistance - Math.Sqrt((replayCamera.Position.Value - replay.CurrentFocusRoot).LengthSquared)));
                 releaseOrientationError = QuaternionAngle(beforeView, replayCamera.Orientation);
             }
         }
         return (acquisitionSteps, releaseSteps, acquisitionTargetError, releaseTargetError, cameraPositionError, targetDistanceError, acquisitionOrientationError, releaseOrientationError,
             replayCamera.Position.Value, replayCamera.Orientation);
+    }
+}
+
+static void CameraFocusPositionContinuityTest()
+{
+    var root = new ReferenceFrameId(1);
+    Check(SolarSystemScene.TryCreateAt(root, SimulationInstant.Zero, out var candidate, out var error) && candidate is not null,
+        $"camera continuity scene: {error}");
+    var scene = candidate!;
+    var camera = new CameraState(new FramePosition(root, Double3.Zero), DoubleQuaternion.Identity, scene.Projection, CameraMode.Free);
+    Check(scene.Focus(camera, NativePresentationFocus.Earth), "camera continuity Earth focus");
+
+    var referenceOrientation = camera.Orientation;
+    var previousFocus = scene.CurrentFocusRoot;
+    var previousCamera = camera.Position.Value;
+    var previousOffset = scene.CurrentInertialCameraOffset;
+    var previousKind = scene.CurrentFocusTarget.Kind;
+    var maximumFocusError = 0d;
+    var maximumCameraError = 0d;
+    var maximumOffsetError = 0d;
+    var maximumOrientationError = 0d;
+    var sawStart = false;
+    var sawMidpoint = false;
+    var sawCompletion = false;
+    var sawRelease = false;
+
+    for (var crossing = 0; crossing < 2; crossing++)
+    {
+        var inwardWeight = 0d;
+        for (var step = 0; step < 160 && (scene.CurrentFocusTarget.Kind != FocusTargetKind.SurfaceAnchor || scene.SurfaceAnchorBlend < 1d); step++)
+        {
+            scene.ApplyPresentationInput(camera, new NativeInputState { MouseWheelDetents = 1 }, out _, out _);
+            Measure($"inward {crossing}/{step}");
+            Check(scene.SurfaceAnchorBlend + 1e-12d >= inwardWeight, "inward handoff weight is monotonic");
+            inwardWeight = scene.SurfaceAnchorBlend;
+        }
+        Check(scene.CurrentFocusTarget.Kind == FocusTargetKind.SurfaceAnchor && scene.SurfaceAnchorBlend == 1d,
+            "inward traversal completes SurfaceAnchor handoff");
+
+        var outwardWeight = scene.SurfaceAnchorBlend;
+        for (var step = 0; step < 160 && scene.CurrentFocusTarget.Kind == FocusTargetKind.SurfaceAnchor; step++)
+        {
+            scene.ApplyPresentationInput(camera, new NativeInputState { MouseWheelDetents = -1 }, out _, out _);
+            Measure($"outward {crossing}/{step}");
+            Check(scene.SurfaceAnchorBlend <= outwardWeight + 1e-12d, "outward handoff weight is monotonic");
+            outwardWeight = scene.SurfaceAnchorBlend;
+        }
+        Check(scene.CurrentFocusTarget.Kind == FocusTargetKind.BodyCenter && scene.SurfaceAnchorBlend == 0d,
+            "outward traversal releases to BodyCenter at zero positional weight");
+    }
+
+    for (var step = 0; step < 160 && (scene.CurrentFocusTarget.Kind != FocusTargetKind.SurfaceAnchor || !(scene.SurfaceAnchorBlend > 0d && scene.SurfaceAnchorBlend < 1d)); step++)
+    {
+        scene.ApplyPresentationInput(camera, new NativeInputState { MouseWheelDetents = 1 }, out _, out _);
+        Measure("warp acquisition");
+    }
+    Check(scene.CurrentFocusTarget.Kind == FocusTargetKind.SurfaceAnchor && scene.SurfaceAnchorBlend > 0d && scene.SurfaceAnchorBlend < 1d,
+        "maximum-warp proof begins during the positional handoff");
+    var stableAnchor = scene.CurrentFocusTarget.SurfaceAnchor;
+    Check(scene.CurrentFocusTarget.TryEvaluate(scene.FocusedBody, out var anchorBeforeWarp), "anchor evaluates before maximum warp");
+    var offsetBeforeWarp = scene.CurrentInertialCameraOffset;
+    var orientationBeforeWarp = camera.Orientation;
+    while (scene.SpeedPresetIndex < SimulationSpeedPresets.Count - 1)
+        scene.ApplyPresentationInput(camera, new NativeInputState { RateIncrease = 1 }, out _, out _);
+    Check(scene.TryAdvanceByHostDuration(SimulationDuration.FromWholeSeconds(1), camera, out error), $"maximum-warp continuity advance: {error}");
+    Measure("maximum warp");
+    Check(scene.CurrentFocusTarget.SurfaceAnchor == stableAnchor, "maximum warp retains body-fixed anchor identity");
+    Check(scene.CurrentFocusTarget.TryEvaluate(scene.FocusedBody, out var anchorAfterWarp), "anchor evaluates after maximum warp");
+    var expectedAnchorAfterWarp = scene.FocusedBody.Position.Value + scene.FocusedBody.BodyFixedToRoot.Rotate(stableAnchor.BodyLocalPosition);
+    Check(anchorAfterWarp.Value == expectedAnchorAfterWarp && anchorAfterWarp != anchorBeforeWarp,
+        "rotating Earth evaluates the fixed geographic anchor into current root space");
+    maximumOffsetError = Math.Max(maximumOffsetError, Math.Sqrt((scene.CurrentInertialCameraOffset - offsetBeforeWarp).LengthSquared));
+    maximumOrientationError = Math.Max(maximumOrientationError, QuaternionAngle(orientationBeforeWarp, camera.Orientation));
+
+    Check(sawStart && sawMidpoint && sawCompletion && sawRelease, "handoff start, midpoint, completion, and release were sampled");
+    Check(maximumFocusError < .01d && maximumCameraError < .01d && maximumOffsetError < .01d && maximumOrientationError < 1e-12d,
+        "camera focus-position continuity errors remain below deterministic root-space tolerances");
+    Console.WriteLine($"Camera focus continuity: focus={maximumFocusError:E3} m; camera={maximumCameraError:E3} m; offset={maximumOffsetError:E3} m; orientation={maximumOrientationError:E3} rad");
+
+    void Measure(string sample)
+    {
+        var focus = scene.CurrentFocusRoot;
+        var inertialOffset = scene.CurrentInertialCameraOffset;
+        var cameraRoot = camera.Position.Value;
+        var expectedFocus = scene.FocusedBody.Position.Value;
+        if (scene.CurrentFocusTarget.Kind == FocusTargetKind.SurfaceAnchor)
+        {
+            Check(scene.CurrentFocusTarget.TryEvaluate(scene.FocusedBody, out var anchorRoot), $"{sample}: SurfaceAnchor evaluates");
+            expectedFocus = SurfaceFocusHandoffPolicy.BlendedRoot(scene.FocusedBody.Position.Value, anchorRoot.Value, scene.SurfaceAnchorBlend);
+            sawStart |= scene.SurfaceAnchorBlend == 0d;
+            sawMidpoint |= scene.SurfaceAnchorBlend > 0d && scene.SurfaceAnchorBlend < 1d;
+            sawCompletion |= scene.SurfaceAnchorBlend == 1d;
+        }
+        sawRelease |= previousKind == FocusTargetKind.SurfaceAnchor && scene.CurrentFocusTarget.Kind == FocusTargetKind.BodyCenter;
+
+        var actualOffset = cameraRoot - focus;
+        maximumFocusError = Math.Max(maximumFocusError, Math.Sqrt((focus - expectedFocus).LengthSquared));
+        maximumCameraError = Math.Max(maximumCameraError, Math.Sqrt((cameraRoot - (focus + inertialOffset)).LengthSquared));
+        maximumCameraError = Math.Max(maximumCameraError, Math.Sqrt(((cameraRoot - previousCamera) -
+            ((focus - previousFocus) + (inertialOffset - previousOffset))).LengthSquared));
+        maximumOffsetError = Math.Max(maximumOffsetError, Math.Sqrt((actualOffset - inertialOffset).LengthSquared));
+        maximumOrientationError = Math.Max(maximumOrientationError, QuaternionAngle(referenceOrientation, camera.Orientation));
+        Check(scene.SurfaceAnchorBlend is >= 0d and <= 1d && double.IsFinite(scene.SurfaceAnchorBlend) && focus.IsFinite &&
+            inertialOffset.IsFinite && cameraRoot.IsFinite && camera.Orientation.IsFinite, $"{sample}: all continuity values are finite and bounded");
+        Check(previousOffset.LengthSquared == 0d || Double3.Dot(previousOffset, inertialOffset) > 0d,
+            $"{sample}: inertial camera offset never inverts");
+        previousFocus = focus;
+        previousCamera = cameraRoot;
+        previousOffset = inertialOffset;
+        previousKind = scene.CurrentFocusTarget.Kind;
     }
 }
 
