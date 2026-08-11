@@ -443,13 +443,38 @@ static void PlanetaryPresentationSpirvStrideTest()
         Check(File.ReadAllText(sourcePath).Contains("vec4 localDetail;", StringComparison.Ordinal), $"{shader} includes localDetail in Presentation ABI");
         var binaryPath = Path.Combine(shaderBinaryDirectory, shader + ".spv");
         Check(File.Exists(binaryPath), $"compiled SPIR-V exists for {shader}");
-        var stride = ReadPresentationArrayStride(binaryPath);
-        Check(stride == 176u, $"{shader} Presentation ArrayStride is 176, actual {stride}");
-        Console.WriteLine($"Presentation ArrayStride {shader}.spv: {stride}");
+        var presentation = ReadSpirvStructLayout(binaryPath, "Presentation");
+        var expectedOffsets = new Dictionary<string, uint>
+        {
+            ["centerRadius"] = 0, ["colorDistant"] = 16, ["blendMetricState"] = 32, ["identity"] = 48,
+            ["surface"] = 64, ["hooks"] = 80, ["ringGeometry"] = 96, ["ringOrientation"] = 112,
+            ["ringColor"] = 128, ["bodyOrientation"] = 144, ["localDetail"] = 160
+        };
+        Check(presentation.ArrayStride == 176u, $"{shader} Presentation ArrayStride is 176, actual {presentation.ArrayStride}");
+        Check(presentation.MemberOffsets.Count == expectedOffsets.Count && expectedOffsets.All(expected =>
+            presentation.MemberOffsets.TryGetValue(expected.Key, out var actual) && actual == expected.Value),
+            $"{shader} complete Presentation member offsets");
+        Console.WriteLine($"Presentation ABI {shader}.spv: stride={presentation.ArrayStride}; members={presentation.MemberOffsets.Count}");
     }
+
+    var planetaryFragment = Path.Combine(shaderBinaryDirectory, "planetary.frag.spv");
+    Check(File.Exists(planetaryFragment), "compiled SPIR-V exists for planetary.frag");
+    var eyeball = ReadSpirvStructLayout(planetaryFragment, "EyeballDebugInput");
+    var expectedEyeballOffsets = new Dictionary<string, uint>
+    {
+        ["cameraHighRadiusHigh"] = 0, ["cameraLowRadiusLow"] = 16, ["surface"] = 32, ["identity"] = 48,
+        ["viewForwardMargin"] = 64, ["mapping"] = 80, ["topology"] = 96, ["reserved"] = 112
+    };
+    Check(eyeball.Bindings.SequenceEqual(new uint[] { 12 }), "planetary.frag EyeballDebugInput is reflected at binding 12");
+    Check(eyeball.MemberOffsets.Count == expectedEyeballOffsets.Count && expectedEyeballOffsets.All(expected =>
+        eyeball.MemberOffsets.TryGetValue(expected.Key, out var actual) && actual == expected.Value),
+        "planetary.frag complete EyeballDebugInput member offsets");
+    Check(eyeball.MemberOffsets["topology"] == 96u && eyeball.MemberOffsets["reserved"] == 112u &&
+        eyeball.MemberOffsets["reserved"] + 16u == 128u, "binding 12 topology/reserved offsets and 128-byte record size");
+    Console.WriteLine($"Eyeball binding 12 ABI planetary.frag.spv: topology={eyeball.MemberOffsets["topology"]}; reserved={eyeball.MemberOffsets["reserved"]}; size={eyeball.MemberOffsets["reserved"] + 16u}");
 }
 
-static uint ReadPresentationArrayStride(string path)
+static (uint? ArrayStride, Dictionary<string, uint> MemberOffsets, uint[] Bindings) ReadSpirvStructLayout(string path, string structName)
 {
     var bytes = File.ReadAllBytes(path);
     Check(bytes.Length >= 20 && bytes.Length % sizeof(uint) == 0, $"valid SPIR-V byte length: {path}");
@@ -458,8 +483,14 @@ static uint ReadPresentationArrayStride(string path)
     Check(words[0] == 0x07230203u, $"SPIR-V magic: {path}");
 
     var names = new Dictionary<uint, string>();
+    var memberNames = new Dictionary<(uint Type, uint Member), string>();
+    var memberOffsets = new Dictionary<(uint Type, uint Member), uint>();
     var runtimeArrayElementTypes = new Dictionary<uint, uint>();
     var arrayStrides = new Dictionary<uint, uint>();
+    var pointerPointeeTypes = new Dictionary<uint, uint>();
+    var variablePointerTypes = new Dictionary<uint, uint>();
+    var bindings = new Dictionary<uint, uint>();
+    var descriptorSets = new Dictionary<uint, uint>();
     for (var index = 5; index < words.Length;)
     {
         var instruction = words[index];
@@ -467,16 +498,47 @@ static uint ReadPresentationArrayStride(string path)
         var opcode = (ushort)instruction;
         Check(wordCount > 0 && index + wordCount <= words.Length, $"valid SPIR-V instruction: {path}");
         if (opcode == 5 && wordCount >= 3) names[words[index + 1]] = ReadSpirvString(words, index + 2, wordCount - 2);
+        else if (opcode == 6 && wordCount >= 4) memberNames[(words[index + 1], words[index + 2])] = ReadSpirvString(words, index + 3, wordCount - 3);
         else if (opcode == 29 && wordCount == 3) runtimeArrayElementTypes[words[index + 1]] = words[index + 2];
-        else if (opcode == 71 && wordCount >= 4 && words[index + 2] == 6u) arrayStrides[words[index + 1]] = words[index + 3];
+        else if (opcode == 32 && wordCount == 4) pointerPointeeTypes[words[index + 1]] = words[index + 3];
+        else if (opcode == 59 && wordCount >= 4) variablePointerTypes[words[index + 2]] = words[index + 1];
+        else if (opcode == 71 && wordCount >= 4)
+        {
+            if (words[index + 2] == 6u) arrayStrides[words[index + 1]] = words[index + 3];
+            else if (words[index + 2] == 33u) bindings[words[index + 1]] = words[index + 3];
+            else if (words[index + 2] == 34u) descriptorSets[words[index + 1]] = words[index + 3];
+        }
+        else if (opcode == 72 && wordCount >= 5 && words[index + 3] == 35u)
+            memberOffsets[(words[index + 1], words[index + 2])] = words[index + 4];
         index += wordCount;
     }
 
-    foreach (var (runtimeArrayType, elementType) in runtimeArrayElementTypes)
-    {
-        if (names.TryGetValue(elementType, out var name) && name.StartsWith("Presentation", StringComparison.Ordinal) && arrayStrides.TryGetValue(runtimeArrayType, out var stride)) return stride;
-    }
-    throw new Exception($"Presentation runtime-array ArrayStride not found: {path}");
+    var namedStructTypes = names.Where(entry => entry.Value == structName).Select(entry => entry.Key).ToArray();
+    var runtimeArrayStructTypes = runtimeArrayElementTypes
+        .Where(entry => namedStructTypes.Contains(entry.Value) && arrayStrides.ContainsKey(entry.Key))
+        .Select(entry => entry.Value)
+        .Distinct()
+        .ToArray();
+    var boundStructTypes = variablePointerTypes
+        .Where(entry => pointerPointeeTypes.TryGetValue(entry.Value, out var pointee) && namedStructTypes.Contains(pointee) && bindings.ContainsKey(entry.Key))
+        .Select(entry => pointerPointeeTypes[entry.Value])
+        .Distinct()
+        .ToArray();
+    var structType = runtimeArrayStructTypes.Length != 0 ? runtimeArrayStructTypes.Single() : boundStructTypes.Single();
+    var reflectedOffsets = memberNames
+        .Where(entry => entry.Key.Type == structType)
+        .ToDictionary(entry => entry.Value, entry => memberOffsets[entry.Key], StringComparer.Ordinal);
+    uint? arrayStride = runtimeArrayElementTypes
+        .Where(entry => entry.Value == structType && arrayStrides.ContainsKey(entry.Key))
+        .Select(entry => (uint?)arrayStrides[entry.Key])
+        .SingleOrDefault();
+    var reflectedBindings = variablePointerTypes
+        .Where(entry => pointerPointeeTypes.TryGetValue(entry.Value, out var pointee) && pointee == structType &&
+            bindings.ContainsKey(entry.Key) && descriptorSets.GetValueOrDefault(entry.Key) == 0u)
+        .Select(entry => bindings[entry.Key])
+        .Order()
+        .ToArray();
+    return (arrayStride, reflectedOffsets, reflectedBindings);
 }
 
 static string ReadSpirvString(uint[] words, int start, int wordCount)
