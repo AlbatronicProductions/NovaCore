@@ -68,23 +68,102 @@ internal static class SolarCameraZoomPolicy
 {
     internal const double DistanceRatioPerDetent = 1.25d;
 
+    internal static double ApplyAltitude(double altitude, double minimumAltitude, double maximumAltitude, int detents)
+    {
+        if (!double.IsFinite(altitude) || !double.IsFinite(minimumAltitude) || !double.IsFinite(maximumAltitude) ||
+            altitude < 0d || minimumAltitude <= 0d || maximumAltitude < minimumAltitude) throw new ArgumentOutOfRangeException(nameof(altitude));
+        if (detents == 0) return Math.Clamp(altitude, minimumAltitude, maximumAltitude);
+        return Math.Clamp(Math.Max(minimumAltitude, altitude) * Math.Exp(-detents * Math.Log(DistanceRatioPerDetent)), minimumAltitude, maximumAltitude);
+    }
+
     internal static double Apply(double distance, double surfaceRadius, double minimumDistance, double maximumDistance, int detents)
     {
         if (!double.IsFinite(distance) || !double.IsFinite(surfaceRadius) || !double.IsFinite(minimumDistance) ||
             !double.IsFinite(maximumDistance) || surfaceRadius < 0d || minimumDistance <= surfaceRadius || maximumDistance < minimumDistance)
             throw new ArgumentOutOfRangeException(nameof(distance));
         if (detents == 0) return Math.Clamp(distance, minimumDistance, maximumDistance);
-        var altitude = Math.Max(minimumDistance - surfaceRadius, distance - surfaceRadius);
-        var scaledAltitude = altitude * Math.Exp(-detents * Math.Log(DistanceRatioPerDetent));
-        return Math.Clamp(surfaceRadius + scaledAltitude, minimumDistance, maximumDistance);
+        var minimumAltitude = minimumDistance - surfaceRadius;
+        var maximumAltitude = maximumDistance - surfaceRadius;
+        return surfaceRadius + ApplyAltitude(Math.Max(0d, distance - surfaceRadius), minimumAltitude, maximumAltitude, detents);
     }
 
     internal static double ApplyTargetRelative(double distance, double minimumDistance, double maximumDistance, int detents)
     {
         if (!double.IsFinite(distance) || !double.IsFinite(minimumDistance) || !double.IsFinite(maximumDistance) ||
             distance < 0d || minimumDistance <= 0d || maximumDistance < minimumDistance) throw new ArgumentOutOfRangeException(nameof(distance));
-        if (detents == 0) return Math.Clamp(distance, minimumDistance, maximumDistance);
-        return Math.Clamp(distance * Math.Exp(-detents * Math.Log(DistanceRatioPerDetent)), minimumDistance, maximumDistance);
+        return ApplyAltitude(distance, minimumDistance, maximumDistance, detents);
+    }
+
+    internal static double OffsetDistanceForSurfaceAltitude(
+        in PlanetRenderProxy body,
+        in Double3 focusRoot,
+        in Double3 cameraOffsetDirectionRoot,
+        in PlanetaryTerrainDefinition terrain,
+        double desiredAltitude,
+        double maximumDistance)
+    {
+        if (!focusRoot.IsFinite || !cameraOffsetDirectionRoot.IsFinite ||
+            cameraOffsetDirectionRoot.LengthSquared <= 0d || !double.IsFinite(desiredAltitude) || desiredAltitude < 0d ||
+            !double.IsFinite(maximumDistance) || maximumDistance <= 0d) throw new ArgumentOutOfRangeException();
+
+        var direction = cameraOffsetDirectionRoot.Normalized();
+        var maximumAltitude = SurfaceAnchorAcquisition.SurfaceAltitude(body, focusRoot + direction * maximumDistance, terrain);
+        if (!double.IsFinite(maximumAltitude) || maximumAltitude < desiredAltitude)
+            throw new InvalidOperationException("The requested zoom altitude is outside the bounded camera domain.");
+        if (desiredAltitude == maximumAltitude) return maximumDistance;
+
+        var low = 0d;
+        var high = maximumDistance;
+        for (var iteration = 0; iteration < 56; iteration++)
+        {
+            var middle = low + (high - low) * .5d;
+            var altitude = SurfaceAnchorAcquisition.SurfaceAltitude(body, focusRoot + direction * middle, terrain);
+            if (altitude >= desiredAltitude) high = middle; else low = middle;
+        }
+        return low + (high - low) * .5d;
+    }
+}
+
+internal static class SurfaceVisualAimHandoffPolicy
+{
+    internal const double ReleaseStartRadians = .01d;
+    internal const double ReleaseCompleteRadians = .0025d;
+
+    internal static double RetainedWeight(double angularSeparationRadians)
+    {
+        if (!double.IsFinite(angularSeparationRadians) || angularSeparationRadians < 0d)
+            throw new ArgumentOutOfRangeException(nameof(angularSeparationRadians));
+        var amount = Math.Clamp((angularSeparationRadians - ReleaseCompleteRadians) /
+            (ReleaseStartRadians - ReleaseCompleteRadians), 0d, 1d);
+        return amount * amount * (3d - 2d * amount);
+    }
+
+    internal static double AngularSeparation(
+        in PlanetRenderProxy body,
+        in Double3 anchorRoot,
+        in Double3 cameraOffsetDirectionRoot,
+        double surfaceAltitudeMetres)
+    {
+        if (!anchorRoot.IsFinite || !cameraOffsetDirectionRoot.IsFinite || cameraOffsetDirectionRoot.LengthSquared <= 0d ||
+            !double.IsFinite(surfaceAltitudeMetres) || surfaceAltitudeMetres < 0d) throw new ArgumentOutOfRangeException();
+        var cameraRoot = body.Position.Value + cameraOffsetDirectionRoot.Normalized() *
+            (body.RadiusMetres + surfaceAltitudeMetres);
+        var toAnchor = (anchorRoot - cameraRoot).Normalized();
+        var toCenter = (body.Position.Value - cameraRoot).Normalized();
+        return Math.Acos(Math.Clamp(Double3.Dot(toAnchor, toCenter), -1d, 1d));
+    }
+
+    internal static Double3 CameraLineOrigin(
+        in Double3 focusRoot,
+        in Double3 visualAimRoot,
+        in Double3 cameraOffsetDirectionRoot)
+    {
+        if (!focusRoot.IsFinite || !visualAimRoot.IsFinite || !cameraOffsetDirectionRoot.IsFinite ||
+            cameraOffsetDirectionRoot.LengthSquared <= 0d) throw new ArgumentOutOfRangeException();
+        // The positional focus remains the 3D-1 algebraic pivot, but a retained
+        // visual aim owns the complete inertial camera line. This prevents a
+        // rotating body-fixed focus from driving either lateral or radial camera motion.
+        return visualAimRoot;
     }
 }
 
@@ -161,6 +240,9 @@ internal sealed class SolarSystemScene
     private double _orbitYawRadians;
     private double _orbitPitchRadians;
     private double _surfaceAnchorBlend;
+    private SurfaceAnchorFocus? _retainedVisualAimAnchor;
+    private Double3 _retainedVisualAimOffsetRoot;
+    private double _retainedVisualAimWeight;
     private double _surfaceAltitudeMetres=double.PositiveInfinity;
     private PlanetaryCameraPresentationMode _surfaceCameraMode;
     private float _eyeballWeight;
@@ -222,6 +304,7 @@ internal sealed class SolarSystemScene
     internal Double3 CurrentFocusRoot => _focusTarget.Kind==FocusTargetKind.SurfaceAnchor
         ? SurfaceFocusHandoffPolicy.BlendedRoot(FocusedBody.Position.Value,EvaluateSurfaceAnchorRoot(),_surfaceAnchorBlend)
         : FocusedBody.Position.Value;
+    internal Double3 CurrentVisualAimRoot => EvaluateRetainedVisualAimRoot(CurrentFocusRoot);
     internal SimulationInstant CurrentTime => _clock.CurrentTime;
     internal SimulationRate Rate => _clock.Rate;
     internal int SpeedPresetIndex => _rateStepIndex;
@@ -231,8 +314,14 @@ internal sealed class SolarSystemScene
     internal DateTimeOffset? StartupUtc { get; }
     internal bool IsPaused => _clock.IsPaused;
     internal double OrbitDistance => _orbitDistance;
-    internal Double3 CurrentInertialCameraOffset =>
-        -OrbitOrientation().Rotate(new Double3(0d,0d,-1d))*_orbitDistance;
+    internal Double3 CurrentInertialCameraOffset
+    {
+        get
+        {
+            var direction=OrbitOffsetDirection();
+            return SurfaceVisualAimHandoffPolicy.CameraLineOrigin(CurrentFocusRoot,CurrentVisualAimRoot,direction)-CurrentFocusRoot+direction*_orbitDistance;
+        }
+    }
     internal double OrbitYawRadians => _orbitYawRadians;
     internal double OrbitPitchRadians => _orbitPitchRadians;
     internal double MoonOrbitPeriodSeconds => _orbitPeriods[MoonOrbitPathIndex];
@@ -244,6 +333,8 @@ internal sealed class SolarSystemScene
     internal PlanetaryCameraPresentationMode SurfaceCameraMode=>_surfaceCameraMode;
     internal SurfaceAnchorFocus? SurfaceFocus=>_focusTarget.Kind==FocusTargetKind.SurfaceAnchor?_focusTarget.SurfaceAnchor:null;
     internal double SurfaceAnchorBlend=>_surfaceAnchorBlend;
+    internal bool HasRetainedVisualAim=>_retainedVisualAimAnchor.HasValue;
+    internal double RetainedVisualAimWeight=>_retainedVisualAimWeight;
     internal double SurfaceAltitudeMetres=>_surfaceAltitudeMetres;
     internal ReadOnlySpan<ulong> VisibleLabelIds => _visibleLabelIds.AsSpan(0, VisibleLabelCount);
     internal ReadOnlySpan<byte> OrbitOpacityBytes => _orbitOpacityBytes;
@@ -345,7 +436,8 @@ internal sealed class SolarSystemScene
         _focusTarget = FocusTarget.BodyCenter(Presentation.Bodies[index].BodyId);
         _handoff = new PlanetaryRepresentationHandoff(EarthPlanetaryScene.HandoffConfiguration);
         _orbitDistance = FocusFramingDistance(FocusedBody);
-        _surfaceAnchorBlend=0d;_surfaceAltitudeMetres=double.PositiveInfinity;_surfaceCameraMode=PlanetaryCameraPresentationMode.Orbital;
+        _surfaceAnchorBlend=0d;_retainedVisualAimAnchor=null;_retainedVisualAimOffsetRoot=Double3.Zero;_retainedVisualAimWeight=0d;
+        _surfaceAltitudeMetres=double.PositiveInfinity;_surfaceCameraMode=PlanetaryCameraPresentationMode.Orbital;
         CameraPresentationMode = SolarCameraPresentationMode.Free3D;
         ApplyOrbitPose(camera,true);
         return true;
@@ -379,16 +471,23 @@ internal sealed class SolarSystemScene
         var cameraChanged = false;
         if (input.MouseWheelDetents != 0)
         {
+            var terrain=FocusedTerrain;
+            var maximumDistance=SolAnalyticalDefinition.AstronomicalUnitMetres*MaximumOverviewDistanceAu;
+            var rootRadial=OrbitOffsetDirection();
+            var currentAltitude=SurfaceAnchorAcquisition.SurfaceAltitude(FocusedBody,camera.Position.Value,terrain);
+            var maximumAltitude=SurfaceAnchorAcquisition.SurfaceAltitude(FocusedBody,FocusedBody.Position.Value+rootRadial*maximumDistance,terrain);
+            var desiredAltitude=SolarCameraZoomPolicy.ApplyAltitude(Math.Max(0d,currentAltitude),SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres,maximumAltitude,input.MouseWheelDetents);
+            var desiredFocusRoot=FocusedBody.Position.Value;
             if(_focusTarget.Kind==FocusTargetKind.SurfaceAnchor)
             {
-                _orbitDistance=SolarCameraZoomPolicy.ApplyTargetRelative(_orbitDistance,SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres,SolAnalyticalDefinition.AstronomicalUnitMetres*MaximumOverviewDistanceAu,input.MouseWheelDetents);
+                var desiredBlend=SurfaceFocusHandoffPolicy.SurfaceBlend(desiredAltitude);
+                desiredFocusRoot=SurfaceFocusHandoffPolicy.BlendedRoot(FocusedBody.Position.Value,EvaluateSurfaceAnchorRoot(),desiredBlend);
+                RetainActiveSurfaceAim();
             }
-            else
-            {
-                var terrain=FocusedTerrain;var radial=CurrentSurfaceDirection();var surfaceRadius=FocusedBody.RadiusMetres+(terrain.IsValid?terrain.SampleHeight(radial,24):0d);
-                var minimumDistance=surfaceRadius+SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres;
-                _orbitDistance=SolarCameraZoomPolicy.Apply(_orbitDistance,surfaceRadius,minimumDistance,SolAnalyticalDefinition.AstronomicalUnitMetres*MaximumOverviewDistanceAu,input.MouseWheelDetents);
-            }
+            else UpdateRetainedVisualAim(desiredAltitude,rootRadial);
+            var desiredVisualAimRoot=EvaluateRetainedVisualAimRoot(desiredFocusRoot);
+            var cameraLineOrigin=SurfaceVisualAimHandoffPolicy.CameraLineOrigin(desiredFocusRoot,desiredVisualAimRoot,rootRadial);
+            _orbitDistance=SolarCameraZoomPolicy.OffsetDistanceForSurfaceAltitude(FocusedBody,cameraLineOrigin,rootRadial,terrain,desiredAltitude,maximumDistance);
             cameraChanged = true;
         }
         if (input.LookActive != 0 && (input.MouseDeltaX != 0f || input.MouseDeltaY != 0f))
@@ -440,7 +539,8 @@ internal sealed class SolarSystemScene
         _orbitDistance = SolAnalyticalDefinition.AstronomicalUnitMetres * InitialOverviewDistanceAu;
         _orbitYawRadians = 0d;
         _orbitPitchRadians = SolarMapPitchRadians;
-        _surfaceAnchorBlend=0d;_surfaceAltitudeMetres=double.PositiveInfinity;_surfaceCameraMode=PlanetaryCameraPresentationMode.Orbital;
+        _surfaceAnchorBlend=0d;_retainedVisualAimAnchor=null;_retainedVisualAimOffsetRoot=Double3.Zero;_retainedVisualAimWeight=0d;
+        _surfaceAltitudeMetres=double.PositiveInfinity;_surfaceCameraMode=PlanetaryCameraPresentationMode.Orbital;
         CameraPresentationMode = SolarCameraPresentationMode.SolarMap;
         ApplyOrbitPose(camera,true);
     }
@@ -712,20 +812,14 @@ internal sealed class SolarSystemScene
 
     private void ApplyOrbitPose(CameraState camera,bool allowFocusTransition=false)
     {
-        var yaw = DoubleQuaternion.FromAxisAngle(Double3.UnitY, _orbitYawRadians);
-        var pitch = DoubleQuaternion.FromAxisAngle(Double3.UnitX, _orbitPitchRadians);
-        var orientation = (yaw * pitch).Normalized();
-        var inertialCameraOffset=CurrentInertialCameraOffset;
-        var rootRadial=inertialCameraOffset/_orbitDistance;
+        var orientation=OrbitOrientation();
+        var rootRadial=OrbitOffsetDirection();
         var terrain=FocusedTerrain;
         var acquiredNow=false;
-        var targetRoot=EvaluateFocusRoot();
-        if(_focusTarget.Kind==FocusTargetKind.SurfaceAnchor)
-        {
-            var anchorRoot=EvaluateSurfaceAnchorRoot();
-            targetRoot=SurfaceFocusHandoffPolicy.BlendedRoot(FocusedBody.Position.Value,anchorRoot,_surfaceAnchorBlend);
-        }
-        var candidateCamera=targetRoot+rootRadial*_orbitDistance;
+        var targetRoot=CurrentFocusRoot;
+        var visualAimRoot=EvaluateRetainedVisualAimRoot(targetRoot);
+        var cameraLineOrigin=SurfaceVisualAimHandoffPolicy.CameraLineOrigin(targetRoot,visualAimRoot,rootRadial);
+        var candidateCamera=cameraLineOrigin+rootRadial*_orbitDistance;
         _surfaceAltitudeMetres=SurfaceAnchorAcquisition.SurfaceAltitude(FocusedBody,candidateCamera,terrain);
 
         if(allowFocusTransition&&_focusTarget.Kind==FocusTargetKind.BodyCenter&&FocusedBody.BodyId!=SolarSystemBodyIds.Sun.Value&&
@@ -736,31 +830,47 @@ internal sealed class SolarSystemScene
             // Identity changes at zero positional weight; subsequent wheel input
             // advances the deterministic altitude blend without a target snap.
             _surfaceAnchorBlend=0d;
+            _retainedVisualAimAnchor=acquired.Anchor;
+            _retainedVisualAimOffsetRoot=acquired.RootPositionAtAcquisition.Value-FocusedBody.Position.Value;
+            _retainedVisualAimWeight=1d;
             acquiredNow=true;
             targetRoot=SurfaceFocusHandoffPolicy.BlendedRoot(FocusedBody.Position.Value,acquired.RootPositionAtAcquisition.Value,_surfaceAnchorBlend);
+            visualAimRoot=EvaluateRetainedVisualAimRoot(targetRoot);
+            cameraLineOrigin=SurfaceVisualAimHandoffPolicy.CameraLineOrigin(targetRoot,visualAimRoot,rootRadial);
+            _orbitDistance=Double3.Dot(candidateCamera-cameraLineOrigin,rootRadial);
+            candidateCamera=cameraLineOrigin+rootRadial*_orbitDistance;
+            _surfaceAltitudeMetres=SurfaceAnchorAcquisition.SurfaceAltitude(FocusedBody,candidateCamera,terrain);
         }
 
         if(_focusTarget.Kind==FocusTargetKind.SurfaceAnchor)
         {
+            RetainActiveSurfaceAim();
             var anchorRoot=EvaluateSurfaceAnchorRoot();
             if(allowFocusTransition&&!acquiredNow)
             {
-                _surfaceAnchorBlend=SurfaceFocusHandoffPolicy.SurfaceBlendForCameraOffset(FocusedBody,anchorRoot,CurrentInertialCameraOffset,terrain);
+                _surfaceAnchorBlend=SurfaceFocusHandoffPolicy.SurfaceBlend(_surfaceAltitudeMetres);
             }
             targetRoot=SurfaceFocusHandoffPolicy.BlendedRoot(FocusedBody.Position.Value,anchorRoot,_surfaceAnchorBlend);
-            _orbitDistance=SurfaceAnchorAcquisition.EnforceClearanceDistance(FocusedBody,targetRoot,rootRadial,_orbitDistance,terrain,SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres);
-            candidateCamera=targetRoot+rootRadial*_orbitDistance;
+            visualAimRoot=EvaluateRetainedVisualAimRoot(targetRoot);
+            cameraLineOrigin=SurfaceVisualAimHandoffPolicy.CameraLineOrigin(targetRoot,visualAimRoot,rootRadial);
+            _orbitDistance=SurfaceAnchorAcquisition.EnforceClearanceDistance(FocusedBody,cameraLineOrigin,rootRadial,_orbitDistance,terrain,SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres);
+            candidateCamera=cameraLineOrigin+rootRadial*_orbitDistance;
             _surfaceAltitudeMetres=SurfaceAnchorAcquisition.SurfaceAltitude(FocusedBody,candidateCamera,terrain);
             if(allowFocusTransition&&!acquiredNow&&_surfaceAnchorBlend==0d&&SurfaceFocusHandoffPolicy.ShouldRelease(_surfaceAltitudeMetres))
             {
                 _focusTarget=FocusTarget.BodyCenter(FocusedBody.BodyId);targetRoot=FocusedBody.Position.Value;
-                candidateCamera=targetRoot+rootRadial*_orbitDistance;
+                visualAimRoot=EvaluateRetainedVisualAimRoot(targetRoot);
+                cameraLineOrigin=SurfaceVisualAimHandoffPolicy.CameraLineOrigin(targetRoot,visualAimRoot,rootRadial);
+                candidateCamera=cameraLineOrigin+rootRadial*_orbitDistance;
                 _surfaceAltitudeMetres=SurfaceAnchorAcquisition.SurfaceAltitude(FocusedBody,candidateCamera,terrain);
             }
         }
         else
         {
-            targetRoot=FocusedBody.Position.Value;candidateCamera=targetRoot+rootRadial*_orbitDistance;
+            targetRoot=FocusedBody.Position.Value;
+            visualAimRoot=EvaluateRetainedVisualAimRoot(targetRoot);
+            cameraLineOrigin=SurfaceVisualAimHandoffPolicy.CameraLineOrigin(targetRoot,visualAimRoot,rootRadial);
+            candidateCamera=cameraLineOrigin+rootRadial*_orbitDistance;
             _surfaceAltitudeMetres=SurfaceAnchorAcquisition.SurfaceAltitude(FocusedBody,candidateCamera,terrain);
         }
 
@@ -770,7 +880,7 @@ internal sealed class SolarSystemScene
         else if(CameraPresentationMode!=SolarCameraPresentationMode.SolarMap)CameraPresentationMode=SolarCameraPresentationMode.Free3D;
         camera.Orientation=orientation;
         camera.Projection=Projection;
-        camera.Position=camera.Position with{Value=targetRoot+rootRadial*_orbitDistance};
+        camera.Position=camera.Position with{Value=candidateCamera};
         camera.Validate();
         Update(camera);
     }
@@ -779,9 +889,31 @@ internal sealed class SolarSystemScene
     private PlanetaryTerrainDefinition FocusedTerrain=>FocusedBody.BodyId==SolarSystemBodyIds.Earth.Value?EarthPlanetaryScene.Terrain:default;
     private Double3 EvaluateFocusRoot()=>_focusTarget.TryEvaluate(FocusedBody,out var root)?root.Value:throw new InvalidOperationException("The active focus target cannot be evaluated from the current presentation snapshot.");
     private Double3 EvaluateSurfaceAnchorRoot()=>_focusTarget.Kind==FocusTargetKind.SurfaceAnchor?EvaluateFocusRoot():throw new InvalidOperationException("A surface anchor is not active.");
+    private Double3 EvaluateRetainedVisualAimRoot(in Double3 fallbackRoot)=>_retainedVisualAimAnchor.HasValue
+        ?SurfaceFocusHandoffPolicy.BlendedRoot(FocusedBody.Position.Value,FocusedBody.Position.Value+_retainedVisualAimOffsetRoot,_retainedVisualAimWeight)
+        :fallbackRoot;
+    private void RetainActiveSurfaceAim()
+    {
+        if(_focusTarget.Kind!=FocusTargetKind.SurfaceAnchor)return;
+        var activeAnchor=_focusTarget.SurfaceAnchor;
+        if(_retainedVisualAimAnchor is not { } retainedAnchor||retainedAnchor!=activeAnchor)
+        {
+            _retainedVisualAimAnchor=activeAnchor;
+            _retainedVisualAimOffsetRoot=EvaluateSurfaceAnchorRoot()-FocusedBody.Position.Value;
+        }
+        _retainedVisualAimWeight=1d;
+    }
+    private void UpdateRetainedVisualAim(double surfaceAltitudeMetres,in Double3 rootRadial)
+    {
+        if(!_retainedVisualAimAnchor.HasValue)return;
+        var separation=SurfaceVisualAimHandoffPolicy.AngularSeparation(FocusedBody,FocusedBody.Position.Value+_retainedVisualAimOffsetRoot,rootRadial,surfaceAltitudeMetres);
+        _retainedVisualAimWeight=SurfaceVisualAimHandoffPolicy.RetainedWeight(separation);
+        if(_retainedVisualAimWeight==0d){_retainedVisualAimAnchor=null;_retainedVisualAimOffsetRoot=Double3.Zero;}
+    }
     private DoubleQuaternion OrbitOrientation()=>
         (DoubleQuaternion.FromAxisAngle(Double3.UnitY,_orbitYawRadians)*DoubleQuaternion.FromAxisAngle(Double3.UnitX,_orbitPitchRadians)).Normalized();
-    private Double3 CurrentSurfaceDirection(){if(_focusTarget.Kind==FocusTargetKind.SurfaceAnchor)return _focusTarget.SurfaceAnchor.BodyFixedDirection;var rootRadial=-OrbitOrientation().Rotate(new Double3(0d,0d,-1d));return FocusedBody.BodyFixedToRoot.Conjugate().Normalized().Rotate(rootRadial);}
+    private Double3 OrbitOffsetDirection()=>-OrbitOrientation().Rotate(new Double3(0d,0d,-1d));
+    private Double3 CurrentSurfaceDirection(){if(_focusTarget.Kind==FocusTargetKind.SurfaceAnchor)return _focusTarget.SurfaceAnchor.BodyFixedDirection;var rootRadial=OrbitOffsetDirection();return FocusedBody.BodyFixedToRoot.Conjugate().Normalized().Rotate(rootRadial);}
 
     private void UpdateOrbitVertices(CameraState camera)
     {

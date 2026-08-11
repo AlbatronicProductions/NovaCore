@@ -41,6 +41,9 @@ var tests = new (string, Action)[]
     ("Earth authoritative presentation dataset", EarthAuthoritativeDatasetTest),
     ("SurfaceAnchor acquisition, ENU, and handoff", SurfaceAnchorPhaseBTest),
     ("Camera focus-position continuity", CameraFocusPositionContinuityTest),
+    ("Zoom motion-profile continuity", ZoomMotionProfileContinuityTest),
+    ("Surface visual-aim continuity", SurfaceVisualAimContinuityTest),
+    ("Inertial visual-aim authority", InertialVisualAimAuthorityTest),
     ("Cube-sphere planetary surface", CubeSpherePlanetarySurfaceTest),
     ("Planetary terrain residency and surface frame", PlanetaryTerrainResidencyAndSurfaceFrameTest),
     ("Planetary patch topology and ABI", PlanetaryPatchTopologyAndAbiTest),
@@ -206,13 +209,13 @@ static void SurfaceAnchorPhaseBTest()
     var acquiredAnchor = scene.CurrentFocusTarget.SurfaceAnchor;
     var previousBlend = scene.SurfaceAnchorBlend;
     var maximumOrientationStep = 0d;
-    var maximumInertialOffsetZoomRatioError = 0d;
+    var maximumSurfaceAltitudeZoomRatioError = 0d;
     for (var step = 0; step < 64 && scene.SurfaceAnchorBlend < 1d; step++)
     {
-        var beforeOrientation = camera.Orientation;Check(scene.CurrentFocusTarget.TryEvaluate(scene.FocusedBody,out _),"active anchor evaluates before zoom");var beforeOffsetDistance=Math.Sqrt(scene.CurrentInertialCameraOffset.LengthSquared);
+        var beforeOrientation = camera.Orientation;Check(scene.CurrentFocusTarget.TryEvaluate(scene.FocusedBody,out _),"active anchor evaluates before zoom");var beforeAltitude=scene.SurfaceAltitudeMetres;
         scene.ApplyPresentationInput(camera, new NativeInputState { MouseWheelDetents = 1 }, out _, out _);
-        Check(scene.CurrentFocusTarget.TryEvaluate(scene.FocusedBody,out _),"active anchor evaluates after zoom");var afterOffsetDistance=Math.Sqrt(scene.CurrentInertialCameraOffset.LengthSquared);
-        maximumInertialOffsetZoomRatioError=Math.Max(maximumInertialOffsetZoomRatioError,Math.Abs(beforeOffsetDistance/afterOffsetDistance-SolarCameraZoomPolicy.DistanceRatioPerDetent));
+        Check(scene.CurrentFocusTarget.TryEvaluate(scene.FocusedBody,out _),"active anchor evaluates after zoom");var afterAltitude=scene.SurfaceAltitudeMetres;
+        maximumSurfaceAltitudeZoomRatioError=Math.Max(maximumSurfaceAltitudeZoomRatioError,Math.Abs(beforeAltitude/afterAltitude-SolarCameraZoomPolicy.DistanceRatioPerDetent));
         maximumOrientationStep = Math.Max(maximumOrientationStep, QuaternionAngle(beforeOrientation, camera.Orientation));
         Check(scene.SurfaceAnchorBlend >= previousBlend && scene.CurrentFocusTarget.SurfaceAnchor == acquiredAnchor,
             "handoff blend is monotonic and does not hop anchors");
@@ -220,7 +223,7 @@ static void SurfaceAnchorPhaseBTest()
     }
     Check(scene.SurfaceAnchorBlend == 1d && scene.SurfaceCameraMode == PlanetaryCameraPresentationMode.SurfaceLocal,
         "descent reaches full SurfaceAnchor focus");
-    Check(maximumInertialOffsetZoomRatioError<1e-9d,"post-acquisition wheel cadence logarithmically scales the inertial camera offset");
+    Check(maximumSurfaceAltitudeZoomRatioError<1e-9d,"post-acquisition wheel cadence logarithmically scales physical surface altitude");
     for (var step = 0; step < 128 && scene.SurfaceAltitudeMetres > 10d; step++)
         scene.ApplyPresentationInput(camera, new NativeInputState { MouseWheelDetents = 1 }, out _, out _);
     Check(scene.SurfaceAltitudeMetres >= SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres-1e-5d && scene.SurfaceAltitudeMetres < 20d,
@@ -325,7 +328,7 @@ static void SurfaceAnchorPhaseBTest()
     var zoomElapsed = Stopwatch.GetElapsedTime(started);checksum += zoomDistance;
     var allocated = GC.GetAllocatedBytesForCurrentThread() - allocatedBefore;
     Check(allocated == 0 && double.IsFinite(checksum), "anchor/ENU/handoff update is allocation-free");
-    Console.WriteLine($"SurfaceAnchor: acquisitionError={acquisitionPositionError:E3} m; ENU maxError={maximumRoundTripError:E3} m; cameraRelativePackError={maximumCameraRelativePackingError:E3} m; acquisitionCameraPositionError={maximumAcquisitionCameraPositionError:E3} m; acquisitionTargetDistanceError={maximumAcquisitionTargetDistanceError:E3} m; zoomRatioError={maximumInertialOffsetZoomRatioError:E3}; maxOrientationStep={maximumOrientationStep:E3} rad; handoffTarget={firstReplay.AcquisitionTargetError:E3}/{firstReplay.ReleaseTargetError:E3} m; handoffCamera={firstReplay.CameraPositionError:E3} m; handoffDistance={firstReplay.TargetDistanceError:E3} m; handoffOrientation={firstReplay.AcquisitionOrientationError:E3}/{firstReplay.ReleaseOrientationError:E3} rad; anchor={anchorElapsed.TotalNanoseconds / 100_000d:F2} ns; ENU={enuElapsed.TotalNanoseconds / 100_000d:F2} ns; handoff={handoffElapsed.TotalNanoseconds / 100_000d:F2} ns; zoom={zoomElapsed.TotalNanoseconds / 100_000d:F2} ns; allocations={allocated}");
+    Console.WriteLine($"SurfaceAnchor: acquisitionError={acquisitionPositionError:E3} m; ENU maxError={maximumRoundTripError:E3} m; cameraRelativePackError={maximumCameraRelativePackingError:E3} m; acquisitionCameraPositionError={maximumAcquisitionCameraPositionError:E3} m; acquisitionTargetDistanceError={maximumAcquisitionTargetDistanceError:E3} m; zoomRatioError={maximumSurfaceAltitudeZoomRatioError:E3}; maxOrientationStep={maximumOrientationStep:E3} rad; handoffTarget={firstReplay.AcquisitionTargetError:E3}/{firstReplay.ReleaseTargetError:E3} m; handoffCamera={firstReplay.CameraPositionError:E3} m; handoffDistance={firstReplay.TargetDistanceError:E3} m; handoffOrientation={firstReplay.AcquisitionOrientationError:E3}/{firstReplay.ReleaseOrientationError:E3} rad; anchor={anchorElapsed.TotalNanoseconds / 100_000d:F2} ns; ENU={enuElapsed.TotalNanoseconds / 100_000d:F2} ns; handoff={handoffElapsed.TotalNanoseconds / 100_000d:F2} ns; zoom={zoomElapsed.TotalNanoseconds / 100_000d:F2} ns; allocations={allocated}");
 
     (int AcquisitionSteps,int ReleaseSteps,double AcquisitionTargetError,double ReleaseTargetError,double CameraPositionError,double TargetDistanceError,double AcquisitionOrientationError,double ReleaseOrientationError,Double3 CameraRoot,DoubleQuaternion CameraOrientation) HandoffReplay()
     {
@@ -439,7 +442,6 @@ static void CameraFocusPositionContinuityTest()
         "maximum-warp proof begins during the positional handoff");
     var stableAnchor = scene.CurrentFocusTarget.SurfaceAnchor;
     Check(scene.CurrentFocusTarget.TryEvaluate(scene.FocusedBody, out var anchorBeforeWarp), "anchor evaluates before maximum warp");
-    var offsetBeforeWarp = scene.CurrentInertialCameraOffset;
     var orientationBeforeWarp = camera.Orientation;
     while (scene.SpeedPresetIndex < SimulationSpeedPresets.Count - 1)
         scene.ApplyPresentationInput(camera, new NativeInputState { RateIncrease = 1 }, out _, out _);
@@ -450,7 +452,8 @@ static void CameraFocusPositionContinuityTest()
     var expectedAnchorAfterWarp = scene.FocusedBody.Position.Value + scene.FocusedBody.BodyFixedToRoot.Rotate(stableAnchor.BodyLocalPosition);
     Check(anchorAfterWarp.Value == expectedAnchorAfterWarp && anchorAfterWarp != anchorBeforeWarp,
         "rotating Earth evaluates the fixed geographic anchor into current root space");
-    maximumOffsetError = Math.Max(maximumOffsetError, Math.Sqrt((scene.CurrentInertialCameraOffset - offsetBeforeWarp).LengthSquared));
+    maximumOffsetError = Math.Max(maximumOffsetError, Math.Sqrt((camera.Position.Value -
+        (scene.CurrentFocusRoot + scene.CurrentInertialCameraOffset)).LengthSquared));
     maximumOrientationError = Math.Max(maximumOrientationError, QuaternionAngle(orientationBeforeWarp, camera.Orientation));
 
     Check(sawStart && sawMidpoint && sawCompletion && sawRelease, "handoff start, midpoint, completion, and release were sampled");
@@ -489,6 +492,381 @@ static void CameraFocusPositionContinuityTest()
         previousCamera = cameraRoot;
         previousOffset = inertialOffset;
         previousKind = scene.CurrentFocusTarget.Kind;
+    }
+}
+
+static void SurfaceVisualAimContinuityTest()
+{
+    var root=new ReferenceFrameId(1);
+    Check(SolarSystemScene.TryCreateAt(root,SimulationInstant.Zero,out var candidate,out var error)&&candidate is not null,
+        $"surface visual-aim scene: {error}");
+    var scene=candidate!;
+    var camera=new CameraState(new FramePosition(root,Double3.Zero),DoubleQuaternion.Identity,scene.Projection,CameraMode.Free);
+    Check(scene.Focus(camera,NativePresentationFocus.Earth),"surface visual-aim Earth focus");
+    scene.ApplyPresentationInput(camera,new NativeInputState{PauseToggle=1},out _,out _);
+    for(var step=0;step<160&&(scene.CurrentFocusTarget.Kind!=FocusTargetKind.SurfaceAnchor||scene.SurfaceAnchorBlend<1d);step++)
+        scene.ApplyPresentationInput(camera,new NativeInputState{MouseWheelDetents=1},out _,out _);
+    Check(scene.CurrentFocusTarget.Kind==FocusTargetKind.SurfaceAnchor&&scene.SurfaceAnchorBlend==1d,
+        $"surface visual aim begins with full SurfaceAnchor ownership: kind={scene.CurrentFocusTarget.Kind}; blend={scene.SurfaceAnchorBlend:R}; altitude={scene.SurfaceAltitudeMetres:R}; distance={scene.OrbitDistance:R}");
+
+    scene.ApplyPresentationInput(camera,new NativeInputState{LookActive=1,MouseDeltaX=180f,MouseDeltaY=-90f},out _,out _);
+    var retainedAnchor=scene.CurrentFocusTarget.SurfaceAnchor;
+    var referenceYaw=scene.OrbitYawRadians;
+    var referencePitch=scene.OrbitPitchRadians;
+    var referenceOrientation=camera.Orientation;
+    Check(scene.HasRetainedVisualAim&&scene.RetainedVisualAimWeight==1d,"oblique view retains the active SurfaceAnchor as visual aim");
+
+    Check(scene.CurrentFocusTarget.TryEvaluate(scene.FocusedBody,out var outwardAnchorRoot),"visual-aim anchor evaluates before outward traversal");
+
+    var maximumAngularDiscontinuity=0d;
+    var maximumInvariantError=0d;
+    var maximumSymmetryError=0d;
+    var previousAnchorAngle=ViewRayAngle(camera,outwardAnchorRoot.Value);
+    var previousOffset=scene.CurrentInertialCameraOffset;
+    var previousKind=scene.CurrentFocusTarget.Kind;
+    var previousAimOwned=scene.HasRetainedVisualAim;
+    var ownershipReleases=0;
+    var sawPartialPosition=false;
+    var sawZeroPosition=false;
+    var sawFocusRelease=false;
+    var sawAimTransition=false;
+    var sawAimRelease=false;
+    var symmetryMeasured=false;
+
+    for(var step=0;step<160&&!sawAimRelease;step++)
+    {
+        scene.ApplyPresentationInput(camera,new NativeInputState{MouseWheelDetents=-1},out _,out _);
+        Measure($"outward {step}");
+        if(!symmetryMeasured&&scene.RetainedVisualAimWeight is >.15d and <.85d)
+        {
+            var baselineAltitude=scene.SurfaceAltitudeMetres;
+            var baselinePosition=camera.Position.Value;
+            var baselineWeight=scene.RetainedVisualAimWeight;
+            Check(FocusTarget.AtSurface(retainedAnchor).TryEvaluate(scene.FocusedBody,out var symmetryAnchor),"symmetry anchor evaluates");
+            var baselineAngle=ViewRayAngle(camera,symmetryAnchor.Value);
+            scene.ApplyPresentationInput(camera,new NativeInputState{MouseWheelDetents=1},out _,out _);
+            scene.ApplyPresentationInput(camera,new NativeInputState{MouseWheelDetents=-1},out _,out _);
+            Check(FocusTarget.AtSurface(retainedAnchor).TryEvaluate(scene.FocusedBody,out symmetryAnchor),"symmetry anchor re-evaluates");
+            maximumSymmetryError=Math.Max(maximumSymmetryError,Math.Abs(scene.SurfaceAltitudeMetres-baselineAltitude)/Math.Max(1d,baselineAltitude));
+            maximumSymmetryError=Math.Max(maximumSymmetryError,Math.Sqrt((camera.Position.Value-baselinePosition).LengthSquared)/Math.Max(1d,baselineAltitude));
+            maximumSymmetryError=Math.Max(maximumSymmetryError,Math.Abs(scene.RetainedVisualAimWeight-baselineWeight));
+            maximumSymmetryError=Math.Max(maximumSymmetryError,Math.Abs(ViewRayAngle(camera,symmetryAnchor.Value)-baselineAngle));
+            symmetryMeasured=true;
+            previousAnchorAngle=ViewRayAngle(camera,symmetryAnchor.Value);
+            previousOffset=scene.CurrentInertialCameraOffset;
+            previousKind=scene.CurrentFocusTarget.Kind;
+            previousAimOwned=scene.HasRetainedVisualAim;
+        }
+    }
+
+    Check(sawPartialPosition&&sawZeroPosition&&sawFocusRelease&&sawAimTransition&&sawAimRelease,
+        $"outward traversal samples partial position, zero position, focus release, aim transition, and final aim release: {sawPartialPosition}/{sawZeroPosition}/{sawFocusRelease}/{sawAimTransition}/{sawAimRelease}; altitude={scene.SurfaceAltitudeMetres:R}; retained={scene.HasRetainedVisualAim}/{scene.RetainedVisualAimWeight:R}");
+    Check(ownershipReleases==1,"retained visual-aim ownership releases exactly once");
+    for(var crossing=0;crossing<8;crossing++)
+    {
+        scene.ApplyPresentationInput(camera,new NativeInputState{MouseWheelDetents=(crossing&1)==0?1:-1},out _,out _);
+        Check(!scene.HasRetainedVisualAim,"released visual aim does not oscillate near its completed threshold");
+    }
+    Check(symmetryMeasured&&maximumSymmetryError<1e-8d,"inward/outward projected-anchor motion is symmetric");
+    Check(maximumInvariantError<.001d,"3D-1 positional camera invariant remains exact through visual-aim handoff");
+    Check(maximumAngularDiscontinuity<.003d,"retained-anchor view-ray motion remains continuous through aim release");
+    Console.WriteLine($"Surface visual aim: angular={maximumAngularDiscontinuity:E3} rad; invariant={maximumInvariantError:E3} m; symmetry={maximumSymmetryError:E3}; releases={ownershipReleases}");
+
+    void Measure(string sample)
+    {
+        Check(FocusTarget.AtSurface(retainedAnchor).TryEvaluate(scene.FocusedBody,out var anchorRoot),$"{sample}: retained anchor evaluates");
+        var anchorAngle=ViewRayAngle(camera,anchorRoot.Value);
+        maximumAngularDiscontinuity=Math.Max(maximumAngularDiscontinuity,Math.Abs(anchorAngle-previousAnchorAngle));
+        maximumInvariantError=Math.Max(maximumInvariantError,Math.Sqrt((camera.Position.Value-
+            (scene.CurrentFocusRoot+scene.CurrentInertialCameraOffset)).LengthSquared));
+        sawPartialPosition|=scene.CurrentFocusTarget.Kind==FocusTargetKind.SurfaceAnchor&&scene.SurfaceAnchorBlend is >0d and <1d;
+        sawZeroPosition|=scene.SurfaceAnchorBlend==0d;
+        sawFocusRelease|=previousKind==FocusTargetKind.SurfaceAnchor&&scene.CurrentFocusTarget.Kind==FocusTargetKind.BodyCenter;
+        sawAimTransition|=scene.HasRetainedVisualAim&&scene.RetainedVisualAimWeight is >0d and <1d;
+        sawAimRelease|=previousAimOwned&&!scene.HasRetainedVisualAim;
+        if(previousAimOwned&&!scene.HasRetainedVisualAim)ownershipReleases++;
+        Check(scene.OrbitYawRadians==referenceYaw&&scene.OrbitPitchRadians==referencePitch&&camera.Orientation==referenceOrientation,
+            $"{sample}: yaw, pitch, and inertial orientation are unchanged");
+        Check(scene.CurrentFocusRoot.IsFinite&&scene.CurrentVisualAimRoot.IsFinite&&scene.CurrentInertialCameraOffset.IsFinite&&
+            camera.Position.Value.IsFinite&&double.IsFinite(anchorAngle)&&scene.RetainedVisualAimWeight is >=0d and <=1d,
+            $"{sample}: visual-aim state remains finite and bounded");
+        Check(Double3.Dot(previousOffset,scene.CurrentInertialCameraOffset)>0d,$"{sample}: camera offset never inverts");
+        if(scene.HasRetainedVisualAim&&scene.RetainedVisualAimWeight==1d)
+            Check(anchorAngle<5e-8d,$"{sample}: full retained aim remains on the camera forward ray");
+        if(previousKind==FocusTargetKind.SurfaceAnchor&&scene.CurrentFocusTarget.Kind==FocusTargetKind.BodyCenter)
+            Check(Math.Abs(anchorAngle-previousAnchorAngle)<5e-8d,$"{sample}: positional release does not jump visual aim to BodyCenter");
+        previousAnchorAngle=anchorAngle;
+        previousOffset=scene.CurrentInertialCameraOffset;
+        previousKind=scene.CurrentFocusTarget.Kind;
+        previousAimOwned=scene.HasRetainedVisualAim;
+    }
+
+    static double ViewRayAngle(CameraState camera,in Double3 targetRoot)
+    {
+        var forward=camera.Orientation.Rotate(new Double3(0d,0d,-1d));
+        var toTarget=(targetRoot-camera.Position.Value).Normalized();
+        return Math.Acos(Math.Clamp(Double3.Dot(forward,toTarget),-1d,1d));
+    }
+}
+
+static void InertialVisualAimAuthorityTest()
+{
+    var root=new ReferenceFrameId(1);
+    var rates=new[]{new SimulationRate(1,1),new SimulationRate(30,1),new SimulationRate(600,1),
+        new SimulationRate(14_400,1),new SimulationRate(7_776_000,1)};
+    var maximumAnchorMotion=0d;
+    var maximumCameraTranslation=0d;
+    var maximumOrientationDiscontinuity=0d;
+    var maximumVisualRayError=0d;
+    var maximumInvariantError=0d;
+
+    foreach(var rate in rates)
+    {
+        Check(SolarSystemScene.TryCreateAt(root,SimulationInstant.Zero,out var candidate,out var error)&&candidate is not null,
+            $"inertial visual-aim {rate.Numerator}x scene: {error}");
+        var scene=candidate!;
+        var camera=new CameraState(new FramePosition(root,Double3.Zero),DoubleQuaternion.Identity,scene.Projection,CameraMode.Free);
+        Check(scene.Focus(camera,NativePresentationFocus.Earth),$"inertial visual-aim Earth focus at {rate.Numerator}x");
+        for(var step=0;step<160&&(scene.CurrentFocusTarget.Kind!=FocusTargetKind.SurfaceAnchor||scene.SurfaceAnchorBlend<1d);step++)
+            scene.ApplyPresentationInput(camera,new NativeInputState{MouseWheelDetents=1},out _,out _);
+        Check(scene.CurrentFocusTarget.Kind==FocusTargetKind.SurfaceAnchor&&scene.SurfaceAnchorBlend==1d,
+            $"full SurfaceAnchor ownership at {rate.Numerator}x");
+        scene.ApplyPresentationInput(camera,new NativeInputState{LookActive=1,MouseDeltaX=170f,MouseDeltaY=-80f},out _,out _);
+        var anchor=scene.CurrentFocusTarget.SurfaceAnchor;
+        Check(anchor.IsValid&&anchor.LocalTangentBasis.IsValid,$"body-fixed anchor and ENU valid at {rate.Numerator}x");
+        var rateIndex=SimulationSpeedPresets.IndexOf(rate);
+        while(scene.SpeedPresetIndex<rateIndex)scene.ApplyPresentationInput(camera,new NativeInputState{RateIncrease=1},out _,out _);
+        Check(scene.Rate==rate,$"selected {rate.Numerator}x rate");
+
+        MeasureRotation("SurfaceAnchor",scene,camera,anchor,rate,ref error);
+
+        for(var step=0;step<64&&scene.CurrentFocusTarget.Kind==FocusTargetKind.SurfaceAnchor;step++)
+            scene.ApplyPresentationInput(camera,new NativeInputState{MouseWheelDetents=-1},out _,out _);
+        Check(scene.CurrentFocusTarget.Kind==FocusTargetKind.BodyCenter&&scene.HasRetainedVisualAim,
+            $"outward handoff reaches BodyCenter while retaining inertial aim at {rate.Numerator}x");
+        MeasureRotation("BodyCenter retained aim",scene,camera,anchor,rate,ref error);
+    }
+
+    Check(SolarSystemScene.TryCreateAt(root,SimulationInstant.Zero,out var traversalCandidate,out var traversalError)&&traversalCandidate is not null,
+        $"inertial aim round-trip scene: {traversalError}");
+    var traversal=traversalCandidate!;
+    var traversalCamera=new CameraState(new FramePosition(root,Double3.Zero),DoubleQuaternion.Identity,traversal.Projection,CameraMode.Free);
+    Check(traversal.Focus(traversalCamera,NativePresentationFocus.Earth),"inertial aim round-trip Earth focus");
+    traversal.ApplyPresentationInput(traversalCamera,new NativeInputState{PauseToggle=1},out _,out _);
+    for(var step=0;step<160&&(traversal.CurrentFocusTarget.Kind!=FocusTargetKind.SurfaceAnchor||traversal.SurfaceAnchorBlend<1d);step++)
+        traversal.ApplyPresentationInput(traversalCamera,new NativeInputState{MouseWheelDetents=1},out _,out _);
+    traversal.ApplyPresentationInput(traversalCamera,new NativeInputState{LookActive=1,MouseDeltaX=150f,MouseDeltaY=-70f},out _,out _);
+    var roundTripOrientation=traversalCamera.Orientation;
+    var roundTripYaw=traversal.OrbitYawRadians;
+    var roundTripPitch=traversal.OrbitPitchRadians;
+    var maximumRoundTripRayError=0d;
+    for(var step=0;step<64&&traversal.CurrentFocusTarget.Kind==FocusTargetKind.SurfaceAnchor;step++)
+    {
+        traversal.ApplyPresentationInput(traversalCamera,new NativeInputState{MouseWheelDetents=-1},out _,out _);
+        MeasureRoundTrip("outward");
+    }
+    Check(traversal.CurrentFocusTarget.Kind==FocusTargetKind.BodyCenter&&traversal.HasRetainedVisualAim,
+        "round trip reaches BodyCenter without releasing inertial visual aim");
+    for(var step=0;step<160&&(traversal.CurrentFocusTarget.Kind!=FocusTargetKind.SurfaceAnchor||traversal.SurfaceAnchorBlend<1d);step++)
+    {
+        traversal.ApplyPresentationInput(traversalCamera,new NativeInputState{MouseWheelDetents=1},out _,out _);
+        MeasureRoundTrip("inward");
+    }
+    Check(traversal.CurrentFocusTarget.Kind==FocusTargetKind.SurfaceAnchor&&traversal.SurfaceAnchorBlend==1d,
+        "round trip reacquires full body-fixed SurfaceAnchor ownership");
+    Check(maximumRoundTripRayError<5e-8d,"outward and inward handoffs retain the inertial visual ray without recentering");
+    Check(maximumCameraTranslation<.001d&&maximumOrientationDiscontinuity<1e-12d&&maximumVisualRayError<5e-8d&&maximumInvariantError<.001d,
+        "body rotation moves the physical anchor without translating or rotating the inertial camera authority");
+    Console.WriteLine($"Inertial visual aim: anchorMotion={maximumAnchorMotion:E3} m; cameraTranslation={maximumCameraTranslation:E3} m; orientation={maximumOrientationDiscontinuity:E3} rad; ray={maximumVisualRayError:E3} rad; invariant={maximumInvariantError:E3} m; roundTripRay={maximumRoundTripRayError:E3} rad");
+
+    void MeasureRotation(string state,SolarSystemScene scene,CameraState camera,SurfaceAnchorFocus anchor,SimulationRate rate,ref string error)
+    {
+        Check(FocusTarget.AtSurface(anchor).TryEvaluate(scene.FocusedBody,out var anchorBefore),$"{state} anchor evaluates before {rate.Numerator}x");
+        var centerBefore=scene.FocusedBody.Position.Value;
+        var anchorOffsetBefore=anchorBefore.Value-centerBefore;
+        var cameraOffsetBefore=camera.Position.Value-centerBefore;
+        var visualOffsetBefore=scene.CurrentVisualAimRoot-centerBefore;
+        var orientationBefore=camera.Orientation;
+        var yawBefore=scene.OrbitYawRadians;
+        var pitchBefore=scene.OrbitPitchRadians;
+        Check(scene.TryAdvanceByHostDuration(SimulationDuration.FromWholeSeconds(1),camera,out error),$"{state} {rate.Numerator}x advance: {error}");
+        Check(FocusTarget.AtSurface(anchor).TryEvaluate(scene.FocusedBody,out var anchorAfter),$"{state} anchor evaluates after {rate.Numerator}x");
+        var centerAfter=scene.FocusedBody.Position.Value;
+        var anchorOffsetAfter=anchorAfter.Value-centerAfter;
+        var cameraOffsetAfter=camera.Position.Value-centerAfter;
+        var visualOffsetAfter=scene.CurrentVisualAimRoot-centerAfter;
+        var anchorMotion=Math.Sqrt((anchorOffsetAfter-anchorOffsetBefore).LengthSquared);
+        var cameraTranslation=Math.Sqrt((cameraOffsetAfter-cameraOffsetBefore).LengthSquared);
+        maximumAnchorMotion=Math.Max(maximumAnchorMotion,anchorMotion);
+        maximumCameraTranslation=Math.Max(maximumCameraTranslation,cameraTranslation);
+        maximumOrientationDiscontinuity=Math.Max(maximumOrientationDiscontinuity,QuaternionAngle(orientationBefore,camera.Orientation));
+        maximumVisualRayError=Math.Max(maximumVisualRayError,ViewRayAngle(camera,scene.CurrentVisualAimRoot));
+        maximumInvariantError=Math.Max(maximumInvariantError,Math.Sqrt((camera.Position.Value-
+            (scene.CurrentFocusRoot+scene.CurrentInertialCameraOffset)).LengthSquared));
+        Check(scene.CurrentFocusTarget.Kind==FocusTargetKind.BodyCenter||scene.CurrentFocusTarget.SurfaceAnchor==anchor,
+            $"{state} body-fixed anchor identity remains unchanged at {rate.Numerator}x");
+        Check(anchor.LocalTangentBasis.IsValid&&scene.FocusedBody.BodyFixedToRoot.IsFinite&&anchorMotion>0d,
+            $"{state} Earth rotation moves the geographic anchor with valid body-fixed ENU at {rate.Numerator}x");
+        Check(scene.OrbitYawRadians==yawBefore&&scene.OrbitPitchRadians==pitchBefore&&camera.Orientation==orientationBefore,
+            $"{state} yaw, pitch, and camera quaternion remain inertial at {rate.Numerator}x");
+        Check(Math.Sqrt((visualOffsetAfter-visualOffsetBefore).LengthSquared)<.001d&&cameraTranslation<.001d,
+            $"{state} retained visual ray and camera position do not chase anchor rotation at {rate.Numerator}x");
+        Check(anchorMotion>cameraTranslation*1000d&&anchorOffsetAfter.IsFinite&&cameraOffsetAfter.IsFinite&&visualOffsetAfter.IsFinite,
+            $"{state} physical anchor motion is decoupled from finite camera translation at {rate.Numerator}x");
+    }
+
+    void MeasureRoundTrip(string state)
+    {
+        maximumRoundTripRayError=Math.Max(maximumRoundTripRayError,ViewRayAngle(traversalCamera,traversal.CurrentVisualAimRoot));
+        maximumInvariantError=Math.Max(maximumInvariantError,Math.Sqrt((traversalCamera.Position.Value-
+            (traversal.CurrentFocusRoot+traversal.CurrentInertialCameraOffset)).LengthSquared));
+        Check(traversal.OrbitYawRadians==roundTripYaw&&traversal.OrbitPitchRadians==roundTripPitch&&traversalCamera.Orientation==roundTripOrientation,
+            $"{state} round trip preserves inertial yaw, pitch, and quaternion");
+        Check(traversal.CurrentFocusRoot.IsFinite&&traversal.CurrentVisualAimRoot.IsFinite&&traversal.CurrentInertialCameraOffset.IsFinite&&
+            traversalCamera.Position.Value.IsFinite,$"{state} round-trip camera state remains finite");
+    }
+
+    static double ViewRayAngle(CameraState camera,in Double3 targetRoot)
+    {
+        var forward=camera.Orientation.Rotate(new Double3(0d,0d,-1d));
+        var toTarget=(targetRoot-camera.Position.Value).Normalized();
+        return Math.Acos(Math.Clamp(Double3.Dot(forward,toTarget),-1d,1d));
+    }
+}
+
+static void ZoomMotionProfileContinuityTest()
+{
+    var root = new ReferenceFrameId(1);
+    const double minimumAltitude = SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres;
+    var maximumDistance = SolAnalyticalDefinition.AstronomicalUnitMetres * SolarSystemScene.MaximumOverviewDistanceAu;
+    var logarithmicStep = Math.Log(SolarCameraZoomPolicy.DistanceRatioPerDetent);
+    var maximumDistanceDiscontinuity = 0d;
+    var maximumNormalizedVelocityDiscontinuity = 0d;
+    var maximumNormalizedAccelerationDiscontinuity = 0d;
+    var maximumSymmetryError = 0d;
+    var sawAcquisition = false;
+    var sawMidpoint = false;
+    var sawCompletion = false;
+    var sawRelease = false;
+
+    Check(SolarSystemScene.TryCreateAt(root, SimulationInstant.Zero, out var candidate, out var error) && candidate is not null,
+        $"zoom continuity scene: {error}");
+    var scene = candidate!;
+    var camera = new CameraState(new FramePosition(root, Double3.Zero), DoubleQuaternion.Identity, scene.Projection, CameraMode.Free);
+    Check(scene.Focus(camera, NativePresentationFocus.Earth), "zoom continuity Earth focus");
+    scene.ApplyPresentationInput(camera, new NativeInputState { PauseToggle = 1 }, out _, out _);
+    var previousVelocity = double.NaN;
+    var previousKind = scene.CurrentFocusTarget.Kind;
+
+    for (var step = 0; step < 160 && scene.SurfaceAltitudeMetres > minimumAltitude * 1.01d; step++)
+    {
+        MeasureDetent(1, -1d, ref previousVelocity, $"inward {step}");
+        sawAcquisition |= previousKind == FocusTargetKind.BodyCenter && scene.CurrentFocusTarget.Kind == FocusTargetKind.SurfaceAnchor;
+        sawMidpoint |= scene.SurfaceAnchorBlend > 0d && scene.SurfaceAnchorBlend < 1d;
+        sawCompletion |= scene.SurfaceAnchorBlend == 1d;
+        previousKind = scene.CurrentFocusTarget.Kind;
+    }
+    Check(scene.SurfaceAltitudeMetres >= minimumAltitude - 1e-5d && scene.SurfaceAltitudeMetres <= minimumAltitude * 1.01d,
+        "inward zoom reaches but does not penetrate minimum terrain clearance");
+
+    previousVelocity = double.NaN;
+    for (var step = 0; step < 160 && scene.CurrentFocusTarget.Kind == FocusTargetKind.SurfaceAnchor; step++)
+    {
+        var kindBefore = scene.CurrentFocusTarget.Kind;
+        MeasureDetent(-1, 1d, ref previousVelocity, $"outward {step}");
+        sawRelease |= kindBefore == FocusTargetKind.SurfaceAnchor && scene.CurrentFocusTarget.Kind == FocusTargetKind.BodyCenter;
+    }
+    Check(sawAcquisition && sawMidpoint && sawCompletion && sawRelease,
+        "zoom samples acquisition start, partial ownership, full ownership, and release");
+
+    foreach (var target in new[] { "body", "partial", "full" })
+    {
+        Check(SolarSystemScene.TryCreateAt(root, SimulationInstant.Zero, out var symmetryCandidate, out error) && symmetryCandidate is not null,
+            $"zoom symmetry scene {target}: {error}");
+        var symmetryScene = symmetryCandidate!;
+        var symmetryCamera = new CameraState(new FramePosition(root, Double3.Zero), DoubleQuaternion.Identity, symmetryScene.Projection, CameraMode.Free);
+        Check(symmetryScene.Focus(symmetryCamera, NativePresentationFocus.Earth), $"zoom symmetry Earth focus {target}");
+        for (var step = 0; step < 160 && !AtTarget(); step++)
+            symmetryScene.ApplyPresentationInput(symmetryCamera, new NativeInputState { MouseWheelDetents = 1 }, out _, out _);
+        Check(AtTarget(), $"zoom symmetry reached {target} state");
+        var beforeAltitude = symmetryScene.SurfaceAltitudeMetres;
+        var beforePosition = symmetryCamera.Position.Value;
+        var beforeOrientation = symmetryCamera.Orientation;
+        symmetryScene.ApplyPresentationInput(symmetryCamera, new NativeInputState { MouseWheelDetents = 1 }, out _, out _);
+        symmetryScene.ApplyPresentationInput(symmetryCamera, new NativeInputState { MouseWheelDetents = -1 }, out _, out _);
+        maximumSymmetryError = Math.Max(maximumSymmetryError, Math.Abs(symmetryScene.SurfaceAltitudeMetres - beforeAltitude) / Math.Max(1d, beforeAltitude));
+        maximumSymmetryError = Math.Max(maximumSymmetryError, Math.Sqrt((symmetryCamera.Position.Value - beforePosition).LengthSquared) / Math.Max(1d, beforeAltitude));
+        Check(symmetryCamera.Orientation == beforeOrientation && Double3.Dot(symmetryScene.CurrentInertialCameraOffset,
+            beforePosition - symmetryScene.CurrentFocusRoot) > 0d, $"zoom reversal preserves inertial orientation and offset sign at {target}");
+
+        bool AtTarget() => target switch
+        {
+            "body" => symmetryScene.CurrentFocusTarget.Kind == FocusTargetKind.BodyCenter && symmetryScene.SurfaceAltitudeMetres < 2_500_000d,
+            "partial" => symmetryScene.CurrentFocusTarget.Kind == FocusTargetKind.SurfaceAnchor && symmetryScene.SurfaceAnchorBlend > .15d && symmetryScene.SurfaceAnchorBlend < .85d,
+            _ => symmetryScene.CurrentFocusTarget.Kind == FocusTargetKind.SurfaceAnchor && symmetryScene.SurfaceAnchorBlend == 1d && symmetryScene.SurfaceAltitudeMetres > 100_000d,
+        };
+    }
+
+    var frameRateStates = new (float DeltaSeconds, SolarSystemScene Scene, CameraState Camera)[3];
+    var frameDurations = new[] { 1f / 30f, 1f / 60f, 1f / 240f };
+    for (var index = 0; index < frameRateStates.Length; index++)
+    {
+        Check(SolarSystemScene.TryCreateAt(root, SimulationInstant.Zero, out var frameCandidate, out error) && frameCandidate is not null,
+            $"zoom frame-rate scene {index}: {error}");
+        var frameScene = frameCandidate!;
+        var frameCamera = new CameraState(new FramePosition(root, Double3.Zero), DoubleQuaternion.Identity, frameScene.Projection, CameraMode.Free);
+        Check(frameScene.Focus(frameCamera, NativePresentationFocus.Earth), $"zoom frame-rate Earth focus {index}");
+        frameScene.ApplyPresentationInput(frameCamera, new NativeInputState { MouseWheelDetents = 1, DeltaSeconds = frameDurations[index] }, out _, out _);
+        frameRateStates[index] = (frameDurations[index], frameScene, frameCamera);
+    }
+    Check(frameRateStates.All(state => state.Scene.OrbitDistance == frameRateStates[0].Scene.OrbitDistance &&
+        state.Camera.Position.Value == frameRateStates[0].Camera.Position.Value), "wheel response is deterministic across host frame durations");
+
+    Check(SolarSystemScene.TryCreateAt(root, SimulationInstant.Zero, out var warpCandidate, out error) && warpCandidate is not null,
+        $"zoom maximum-warp scene: {error}");
+    var warpScene = warpCandidate!;
+    var warpCamera = new CameraState(new FramePosition(root, Double3.Zero), DoubleQuaternion.Identity, warpScene.Projection, CameraMode.Free);
+    Check(warpScene.Focus(warpCamera, NativePresentationFocus.Earth), "zoom maximum-warp Earth focus");
+    while (warpScene.SpeedPresetIndex < SimulationSpeedPresets.Count - 1)
+        warpScene.ApplyPresentationInput(warpCamera, new NativeInputState { RateIncrease = 1 }, out _, out _);
+    warpScene.ApplyPresentationInput(warpCamera, new NativeInputState { MouseWheelDetents = 1 }, out _, out _);
+    Check(warpScene.OrbitDistance == frameRateStates[0].Scene.OrbitDistance && warpCamera.Position.Value == frameRateStates[0].Camera.Position.Value,
+        "maximum warp does not change zoom response for identical user input");
+
+    var boundedAltitude = SolarCameraZoomPolicy.ApplyAltitude(1d, minimumAltitude, maximumDistance, 1000);
+    var boundedMaximum = SolarCameraZoomPolicy.ApplyAltitude(maximumDistance, minimumAltitude, maximumDistance, -1000);
+    Check(boundedAltitude == minimumAltitude && boundedMaximum == maximumDistance && double.IsFinite(boundedAltitude) && double.IsFinite(boundedMaximum),
+        "continuous distance domain remains positive, finite, and bounded at ground and astronomical scales");
+    Console.WriteLine($"Zoom motion continuity: distance={maximumDistanceDiscontinuity:E3} m; velocity={maximumNormalizedVelocityDiscontinuity:E3}; acceleration={maximumNormalizedAccelerationDiscontinuity:E3}; symmetry={maximumSymmetryError:E3}");
+    Check(maximumDistanceDiscontinuity < .001d && maximumNormalizedVelocityDiscontinuity < 5e-5d &&
+        maximumNormalizedAccelerationDiscontinuity < 5e-5d && maximumSymmetryError < 1e-9d,
+        "zoom motion profile is continuous and symmetric through focus handoff");
+
+    void MeasureDetent(int detents, double expectedNormalizedVelocity, ref double priorVelocity, string sample)
+    {
+        var beforeAltitude = scene.SurfaceAltitudeMetres;
+        var beforeOrientation = camera.Orientation;
+        var beforeOffset = scene.CurrentInertialCameraOffset;
+        var radial = beforeOffset.Normalized();
+        var maximumAltitude = SurfaceAnchorAcquisition.SurfaceAltitude(scene.FocusedBody,
+            scene.FocusedBody.Position.Value + radial * maximumDistance, EarthPlanetaryScene.Terrain);
+        var expectedAltitude = SolarCameraZoomPolicy.ApplyAltitude(beforeAltitude, minimumAltitude, maximumAltitude, detents);
+        scene.ApplyPresentationInput(camera, new NativeInputState { MouseWheelDetents = detents }, out _, out _);
+        var afterAltitude = scene.SurfaceAltitudeMetres;
+        maximumDistanceDiscontinuity = Math.Max(maximumDistanceDiscontinuity, Math.Abs(afterAltitude - expectedAltitude));
+        if (expectedAltitude > minimumAltitude && expectedAltitude < maximumAltitude)
+        {
+            var normalizedVelocity = Math.Log(afterAltitude / beforeAltitude) / logarithmicStep;
+            maximumNormalizedVelocityDiscontinuity = Math.Max(maximumNormalizedVelocityDiscontinuity,
+                Math.Abs(normalizedVelocity - expectedNormalizedVelocity));
+            if (double.IsFinite(priorVelocity))
+                maximumNormalizedAccelerationDiscontinuity = Math.Max(maximumNormalizedAccelerationDiscontinuity,
+                    Math.Abs(normalizedVelocity - priorVelocity));
+            priorVelocity = normalizedVelocity;
+        }
+        Check(afterAltitude > 0d && double.IsFinite(afterAltitude) && scene.OrbitDistance > 0d && double.IsFinite(scene.OrbitDistance) &&
+            camera.Position.Value.IsFinite && camera.Orientation == beforeOrientation && Double3.Dot(beforeOffset, scene.CurrentInertialCameraOffset) > 0d,
+            $"{sample}: zoom is finite, positive, inertial, and does not invert");
     }
 }
 
