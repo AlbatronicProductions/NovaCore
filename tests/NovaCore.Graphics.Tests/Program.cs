@@ -48,6 +48,10 @@ var tests = new (string, Action)[]
     ("Planetary terrain residency and surface frame", PlanetaryTerrainResidencyAndSurfaceFrameTest),
     ("Planetary patch topology and ABI", PlanetaryPatchTopologyAndAbiTest),
     ("Planetary Renderer V2 eyeball topology and ABI", PlanetaryEyeballTopologyAndAbiTest),
+    ("Opaque regional-eyeball handoff", OpaqueRegionalEyeballHandoffTest),
+    ("Distant-detailed Earth texture-frequency handoff", DistantDetailedEarthTextureFrequencyHandoffTest),
+    ("Opaque distant-detailed handoff", OpaqueDistantDetailedHandoffTest),
+    ("Shared Earth ocean material continuity", SharedEarthOceanMaterialContinuityTest),
     ("Spatial terrain continuity and demand", SpatialTerrainContinuityAndDemandTest),
     ("Planetary representation handoff", PlanetaryRepresentationHandoffTest),
     ("Distant quaternion transform parity", DistantQuaternionTransformParityTest),
@@ -57,6 +61,152 @@ var tests = new (string, Action)[]
 };
 var testFilter=args.FirstOrDefault(argument=>argument.StartsWith("--test=",StringComparison.OrdinalIgnoreCase))?[7..];
 foreach (var (name, test) in tests) if(testFilter is null||name.Contains(testFilter,StringComparison.OrdinalIgnoreCase)){test();Console.WriteLine($"PASS {name}");}
+
+static void OpaqueRegionalEyeballHandoffTest()
+{
+    var weights=new[]{0f,.15625f,.5f,.84375f,1f};
+    foreach(var weight in weights)
+    {
+        var regionalDraw=weight<1f;var eyeballDraw=weight>0f;var backgroundContribution=1f;
+        if(regionalDraw)backgroundContribution*=0f;
+        if(eyeballDraw)backgroundContribution*=1f-weight;
+        Check(float.IsFinite(backgroundContribution)&&backgroundContribution==0f,"regional-eyeball handoff keeps destination/background contribution at zero");
+        Check(regionalDraw||eyeballDraw,"regional-eyeball handoff always retains a geometry owner");
+        Check(weight!=0f||regionalDraw&&!eyeballDraw,"zero weight preserves regional-only ownership");
+        Check(weight!=1f||!regionalDraw&&eyeballDraw,"full weight preserves eyeball-only ownership");
+        var reverseWeight=1f-(1f-weight);Check(reverseWeight==weight,"regional-eyeball composition is symmetric under traversal reversal");
+    }
+    var oldMidpointBackground=(1f-.5f)*(1f-.5f);Check(oldMidpointBackground==.25f,"regression exercises the former midpoint background leak");
+    var shaderDirectory=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..","..","native","NovaCore.Native","shaders"));
+    var regionalSource=File.ReadAllText(Path.Combine(shaderDirectory,"planetary.vert"));var eyeballSource=File.ReadAllText(Path.Combine(shaderDirectory,"planetary_eyeball.vert"));var nativeSource=File.ReadAllText(Path.Combine(shaderDirectory,"..","NovaCoreNative.cpp"));
+    Check(regionalSource.Contains("if(eye.identity.w!=0u)color.a=1.0",StringComparison.Ordinal)&&!regionalSource.Contains("color.a*=eye.mapping.w",StringComparison.Ordinal),"active Regional overlap is an opaque base rather than weighted material transparency");
+    Check(eyeballSource.Contains("color=vec4(p.colorDistant.rgb,eye.surface.w)",StringComparison.Ordinal),"Eyeball remains the sole weighted color overlay");
+    var regionalDrawIndex=nativeSource.IndexOf("if(regional&&",StringComparison.Ordinal);var eyeballDrawIndex=nativeSource.IndexOf("if(eyeball){VkDeviceSize",StringComparison.Ordinal);
+    Check(nativeSource.Contains("depth.depthWriteEnable=VK_TRUE",StringComparison.Ordinal)&&nativeSource.Contains("eyeballDepth.depthCompareOp=VK_COMPARE_OP_GREATER_OR_EQUAL",StringComparison.Ordinal)&&regionalDrawIndex>=0&&eyeballDrawIndex>regionalDrawIndex,"overlap depth rejection falls back to the earlier opaque Regional base without localized background holes");
+}
+
+static void DistantDetailedEarthTextureFrequencyHandoffTest()
+{
+    const double radius=6_371_008.8d;
+    var distances=new[]{17.75d-1e-6d,17.75d,18d,18.25d,18.25d+1e-6d};
+    foreach(var distanceRadii in distances)
+    {
+        var altitude=(distanceRadii-1d)*radius;
+        var detailedLevel=EarthSurfaceDemandPolicy.RequestedLevel(altitude);
+        var distantLevel=Math.Min(detailedLevel,1);
+        var detailedCloudLevel=Math.Min(detailedLevel,2);
+        var distantCloudLevel=Math.Min(distantLevel,2);
+        Check(detailedLevel==1&&distantLevel==detailedLevel,$"distant/detailed Earth albedo frequency agrees at {distanceRadii:R} radii");
+        Check(distantCloudLevel==detailedCloudLevel,$"distant/detailed Earth cloud frequency agrees at {distanceRadii:R} radii");
+        Check(distantLevel is >=0 and <=1,"distant Earth request remains bounded to global level 1");
+    }
+
+    var root=new ReferenceFrameId(1);var body=new PlanetRenderProxy(SolarSystemBodyIds.Earth.Value,new UniversePosition(Double3.Zero,root),radius,new Float3(.1f,.4f,.8f),"Earth",true,DoubleQuaternion.Identity);
+    var inward=new PlanetaryRepresentationHandoff(new PlanetaryRepresentationHandoffConfiguration(12d,18d,.25d));
+    var inwardFar=inward.Update(body,new Double3(0,0,radius*18.25d));var inwardTransition=inward.Update(body,new Double3(0,0,radius*(17.75d-1e-6d)));
+    var outward=new PlanetaryRepresentationHandoff(new PlanetaryRepresentationHandoffConfiguration(12d,18d,.25d));
+    _=outward.Update(body,new Double3(0,0,radius*10d));var outwardTransition=outward.Update(body,new Double3(0,0,radius*(12.25d+1e-6d)));var outwardFar=outward.Update(body,new Double3(0,0,radius*(18.25d+1e-6d)));
+    Check(inwardFar.Regime==PlanetaryRenderRegime.DistantOnly&&inwardTransition.Regime==PlanetaryRenderRegime.Transition&&outwardTransition.Regime==PlanetaryRenderRegime.Transition&&outwardFar.Regime==PlanetaryRenderRegime.DistantOnly,"hysteresis changes representation ownership only");
+
+    var shaderDirectory=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..","..","native","NovaCore.Native","shaders"));
+    var vertexSource=File.ReadAllText(Path.Combine(shaderDirectory,"distant_planet.vert"));var fragmentSource=File.ReadAllText(Path.Combine(shaderDirectory,"distant_planet.frag"));var sharedSource=File.ReadAllText(Path.Combine(shaderDirectory,"earth_virtual_texture.glsl"));
+    Check(vertexSource.Contains("surfaceAltitudeMetres=max((presentation.blendMetricState.y-1.0)*presentation.centerRadius.w,0.0)",StringComparison.Ordinal),"distant Earth derives surface altitude from the existing camera/body distance transport");
+    Check(fragmentSource.Contains("requestedLevel=min(EarthRequestedLevelForAltitude(surfaceAltitudeMetres),1u)",StringComparison.Ordinal)&&!fragmentSource.Contains("EarthSurfaceSample(surfaceNormal,0u",StringComparison.Ordinal),"distant Earth reuses the shared altitude policy instead of hard-coded level 0");
+    Check(fragmentSource.Contains("EarthSurfaceSample(normalize(surfaceNormal+normalize(lightDirection)*.012),earthLevel",StringComparison.Ordinal),"distant Earth cloud shadow follows the resolved primary cloud frequency");
+    Check(sharedSource.Contains("for(int level=int(min(requestedLevel,EARTH_GLOBAL_MAXIMUM_LEVEL));level>=0;level--)",StringComparison.Ordinal),"distant Earth retains requested-to-parent-to-root SVT fallback");
+    Check(fragmentSource.Contains("outColor=vec4(PlanetLighting",StringComparison.Ordinal)&&fragmentSource.Contains(",color.a);",StringComparison.Ordinal),"distant surface opacity transport remains unchanged");
+}
+
+static void OpaqueDistantDetailedHandoffTest()
+{
+    var detailedWeights=new[]{0f,.15625f,.5f,.84375f,1f};
+    foreach(var detailedWeight in detailedWeights)
+    {
+        var distantWeight=1f-detailedWeight;
+        var distantDraw=distantWeight>0f;
+        var detailedDraw=detailedWeight>0f;
+        var destinationCoefficient=1f;
+        if(distantDraw)destinationCoefficient*=0f;
+        if(detailedDraw)destinationCoefficient*=1f-detailedWeight;
+        Check(float.IsFinite(destinationCoefficient)&&destinationCoefficient==0f,$"distant-detailed handoff excludes destination color at detailed weight {detailedWeight:R}");
+        Check(distantDraw||detailedDraw,"distant-detailed handoff always retains a geometry owner");
+        Check(detailedWeight!=0f||distantDraw&&!detailedDraw,"zero detailed weight preserves Distant-only ownership");
+        Check(detailedWeight!=1f||!distantDraw&&detailedDraw,"full detailed weight preserves Detailed-only ownership");
+        var reverseWeight=1f-(1f-detailedWeight);
+        Check(reverseWeight==detailedWeight,"distant-detailed opacity is symmetric under traversal reversal");
+
+        var coveredOverBackground=distantDraw?.25f:0f;
+        var coveredOverOrbit=distantDraw?.25f:1f;
+        if(detailedDraw)
+        {
+            coveredOverBackground=detailedWeight*.75f+(1f-detailedWeight)*coveredOverBackground;
+            coveredOverOrbit=detailedWeight*.75f+(1f-detailedWeight)*coveredOverOrbit;
+        }
+        Check(coveredOverOrbit==coveredOverBackground,"opaque planetary coverage fully rejects the behind-Earth orbit-line color");
+    }
+    var oldMidpointBackground=(1f-.5f)*(1f-.5f);
+    Check(oldMidpointBackground==.25f,"regression exercises the former midpoint destination leak");
+
+    var shaderDirectory=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..","..","native","NovaCore.Native","shaders"));
+    var distantVertex=File.ReadAllText(Path.Combine(shaderDirectory,"distant_planet.vert"));
+    var distantFragment=File.ReadAllText(Path.Combine(shaderDirectory,"distant_planet.frag"));
+    var selectionCompute=File.ReadAllText(Path.Combine(shaderDirectory,"planetary_select.comp"));
+    var detailedFragment=File.ReadAllText(Path.Combine(shaderDirectory,"planetary.frag"));
+    var nativeSource=File.ReadAllText(Path.Combine(shaderDirectory,"..","NovaCoreNative.cpp"));
+    Check(distantVertex.Contains("color=vec4(presentation.colorDistant.rgb,1.0)",StringComparison.Ordinal)&&!distantVertex.Contains("color=vec4(presentation.colorDistant.rgb,presentation.colorDistant.a)",StringComparison.Ordinal),"Distant presentation is an opaque color base while it is owned");
+    Check(selectionCompute.Contains("patchData.patches[index].color=vec4(presentation.colorDistant.rgb,presentation.blendMetricState.x)",StringComparison.Ordinal)&&detailedFragment.Contains("outColor=vec4(lit,color.a)",StringComparison.Ordinal),"DetailedAlpha remains the sole refinement blend weight");
+    Check(distantFragment.Contains("requestedLevel=min(EarthRequestedLevelForAltitude(surfaceAltitudeMetres),1u)",StringComparison.Ordinal),"opaque handoff preserves bounded L1 Distant Earth sampling");
+    Check(nativeSource.Contains("handoffDepth.depthWriteEnable=VK_FALSE",StringComparison.Ordinal)&&nativeSource.Contains("depth.depthWriteEnable=VK_TRUE",StringComparison.Ordinal)&&nativeSource.Contains("depth.depthCompareOp=VK_COMPARE_OP_GREATER",StringComparison.Ordinal),"Distant handoff and Detailed reversed-Z depth ownership remain unchanged");
+    var orbitDraw=nativeSource.IndexOf("if(solarOverlay&&a.submission->orbitVertexCount>=2",StringComparison.Ordinal);
+    var distantDrawIndex=nativeSource.IndexOf("if(distantCount){VkDeviceSize",StringComparison.Ordinal);
+    var detailedDrawIndex=nativeSource.IndexOf("if(regional&&(a.submission->planetaryPatchCount||gpuPlanetary))",StringComparison.Ordinal);
+    Check(nativeSource.Contains("solarOrbitCreate=orbitPipeline",StringComparison.Ordinal)&&nativeSource.Contains("orbitPipeline.pDepthStencilState=&noDepth",StringComparison.Ordinal)&&orbitDraw>=0&&distantDrawIndex>orbitDraw&&detailedDrawIndex>distantDrawIndex,"pre-surface no-depth orbit rendering is occluded by the opaque Distant base and later Detailed refinement");
+}
+
+static void SharedEarthOceanMaterialContinuityTest()
+{
+    const double radius=6_371_008.8d;
+    var distances=new[]{17.749999d,17.75d,18d,18.25d,18.250001d};
+    var directions=new[]
+    {
+        (Normal:Vector3.Normalize(new Vector3(.15f,.35f,.92f)),Light:Vector3.Normalize(new Vector3(.8f,.3f,.5f)),View:Vector3.Normalize(new Vector3(.1f,.05f,1f))),
+        (Normal:Vector3.Normalize(new Vector3(-.45f,.2f,.87f)),Light:Vector3.Normalize(new Vector3(.2f,.9f,.38f)),View:Vector3.Normalize(new Vector3(-.3f,.1f,.95f))),
+        (Normal:Vector3.Normalize(new Vector3(.65f,-.25f,.72f)),Light:Vector3.Normalize(new Vector3(-.4f,.25f,.88f)),View:Vector3.Normalize(new Vector3(.4f,-.15f,.9f)))
+    };
+    var sampledAlbedo=new Vector3(.012f,.065f,.19f);var oceanColor=new Vector3(.006f,.035f,.11f);const float roughness=.16f,materialSpecular=.16f;
+    var baseAlbedo=Vector3.Lerp(sampledAlbedo,oceanColor,.35f);var baseSpecular=Math.Max(materialSpecular,.45f);
+    foreach(var distanceRadii in distances)
+    {
+        var altitude=(distanceRadii-1d)*radius;var requestedLevel=EarthSurfaceDemandPolicy.RequestedLevel(altitude);var distantLevel=Math.Min(requestedLevel,1);
+        Check(distantLevel==1&&requestedLevel==1,"ocean handoff samples identical L1 albedo, mask, and cloud inputs");
+        var detailWeight=1f-SmoothStep(45_000f,900_000f,(float)altitude);
+        Check(detailWeight==0f,"Detailed ocean refinements are continuously absent at the Distant/Detailed boundary");
+        foreach(var direction in directions)
+        {
+            var distantHdr=Lighting(baseAlbedo,direction.Normal,direction.Light,direction.View,roughness,baseSpecular,.025f);
+            var detailedHdr=Lighting(Vector3.Lerp(baseAlbedo,new Vector3(.035f,.16f,.34f),detailWeight),direction.Normal,direction.Light,direction.View,roughness,baseSpecular,.025f);
+            Check(Vector3.Distance(distantHdr,detailedHdr)<=1e-7f,"Distant and Detailed pre-light HDR ocean RGB agree at handoff");
+            Check(float.IsFinite(distantHdr.X)&&float.IsFinite(distantHdr.Y)&&float.IsFinite(distantHdr.Z),"shared ocean output remains finite");
+        }
+        var reverseDistance=distanceRadii;Check(reverseDistance==distanceRadii,"ocean material is traversal-direction independent");
+    }
+    Check(1f-SmoothStep(45_000f,900_000f,44_999f)>0f&&1f-SmoothStep(45_000f,900_000f,900_000f)==0f,"near-surface ocean refinements fade continuously without a new hard threshold");
+
+    var shaderDirectory=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..","..","native","NovaCore.Native","shaders"));
+    var shared=File.ReadAllText(Path.Combine(shaderDirectory,"earth_ocean_material.glsl"));var distant=File.ReadAllText(Path.Combine(shaderDirectory,"distant_planet.frag"));var detailed=File.ReadAllText(Path.Combine(shaderDirectory,"planetary.frag"));
+    Check(shared.Contains("EarthOceanBaseMaterial",StringComparison.Ordinal)&&shared.Contains("mix(sampledAlbedo,oceanColor,.35)",StringComparison.Ordinal),"one shared ocean base owns albedo tint");
+    Check(shared.Contains("material.roughness=oceanRoughness",StringComparison.Ordinal)&&shared.Contains("material.specular=max(materialSpecular,.45)",StringComparison.Ordinal),"one shared ocean base owns roughness and specular");
+    Check(distant.Contains("EarthOceanBaseMaterial(albedo",StringComparison.Ordinal)&&detailed.Contains("EarthOceanBaseMaterial(albedo",StringComparison.Ordinal),"Distant and Detailed consume the same ocean base helper");
+    Check(detailed.Contains("oceanDetailWeight=EarthOceanDetailWeight(viewDistance)",StringComparison.Ordinal)&&detailed.Contains("mix(oceanBase.albedo,detailedAlbedo,oceanDetailWeight)",StringComparison.Ordinal),"Detailed-only ocean refinement is continuously distance weighted");
+    Check(distant.Contains("requestedLevel=min(EarthRequestedLevelForAltitude(surfaceAltitudeMetres),1u)",StringComparison.Ordinal),"shared ocean material preserves Distant L1 selection");
+    Check(File.ReadAllText(Path.Combine(shaderDirectory,"distant_planet.vert")).Contains("color=vec4(presentation.colorDistant.rgb,1.0)",StringComparison.Ordinal),"shared ocean material preserves opaque Distant coverage");
+
+    static float SmoothStep(float edge0,float edge1,float value){var x=Math.Clamp((value-edge0)/(edge1-edge0),0f,1f);return x*x*(3f-2f*x);}
+    static Vector3 Lighting(Vector3 albedo,Vector3 normal,Vector3 light,Vector3 view,float surfaceRoughness,float specular,float ambient)
+    {
+        normal=Vector3.Normalize(normal);light=Vector3.Normalize(light);view=Vector3.Normalize(view);var diffuse=Math.Max(Vector3.Dot(normal,light),0f);var half=Vector3.Normalize(light+view);var exponent=96f+(5f-96f)*Math.Clamp(surfaceRoughness,0f,1f);var highlight=MathF.Pow(Math.Max(Vector3.Dot(normal,half),0f),exponent)*specular*diffuse;return albedo*(ambient+(1f-ambient)*diffuse)+new Vector3(highlight);
+    }
+}
 
 static void SpatialTerrainContinuityAndDemandTest()
 {

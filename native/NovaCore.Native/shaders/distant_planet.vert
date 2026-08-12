@@ -13,6 +13,7 @@ layout(location=3) flat out uint stellar;
 layout(location=4) flat out uvec2 material;
 layout(location=5) flat out vec4 response;
 layout(location=6) out vec3 viewDirection;
+layout(location=7) flat out float surfaceAltitudeMetres;
 vec3 RotateQuaternion(vec3 point,vec4 quaternion){return point+2.0*cross(quaternion.xyz,cross(quaternion.xyz,point)+quaternion.w*point);}
 vec3 InverseRotateQuaternion(vec3 point,vec4 quaternion){return RotateQuaternion(point,vec4(-quaternion.xyz,quaternion.w));}
 void main(){
@@ -20,11 +21,12 @@ void main(){
   vec3 bodyLocalPosition=inPosition*presentation.centerRadius.w;
   vec3 position=presentation.centerRadius.xyz+RotateQuaternion(bodyLocalPosition,presentation.bodyOrientation);
   gl_Position=frameData.camera.viewProjection*vec4(position,1);
-  color=vec4(presentation.colorDistant.rgb,presentation.colorDistant.a);
+  color=vec4(presentation.colorDistant.rgb,1.0);
   normal=normalize(inPosition);
   lightDirection=normalize(InverseRotateQuaternion(lighting.sourceCenterExposure.xyz-presentation.centerRadius.xyz,presentation.bodyOrientation));
   stellar=floatBitsToUint(presentation.blendMetricState.w)&0x20000000u;
   material=uvec2(presentation.identity.w,presentation.identity.z);
   response=presentation.surface;
   viewDirection=InverseRotateQuaternion(-position,presentation.bodyOrientation);
+  surfaceAltitudeMetres=max((presentation.blendMetricState.y-1.0)*presentation.centerRadius.w,0.0);
 }

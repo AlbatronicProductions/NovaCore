@@ -1,6 +1,7 @@
 #version 460
 #extension GL_GOOGLE_include_directive : require
 #include "planet_material.glsl"
+#include "earth_ocean_material.glsl"
 layout(location=0) in vec4 color;
 layout(location=1) in vec3 normal;
 layout(location=2) flat in vec3 lightDirection;
@@ -52,19 +53,22 @@ void main()
 
   if(ocean)
   {
+    EarthOceanMaterial oceanBase=EarthOceanBaseMaterial(albedo,environment.oceanColorExposure.rgb,environment.ocean.y,specular);
+    float oceanDetailWeight=EarthOceanDetailWeight(viewDistance);
     float waveFade=1.0-smoothstep(1200.0,45000.0,viewDistance);
     vec3 reference=abs(up.y)<.9?vec3(0,1,0):vec3(1,0,0);
     vec3 east=normalize(cross(reference,up));
     vec3 north=normalize(cross(up,east));
     float waveEast=PlanetTriplanarNoise(PlanetWrappedBodyCoordinate(bodyPosition,up,7.0),up)-.5;
     float waveNorth=PlanetTriplanarNoise(PlanetWrappedBodyCoordinate(bodyPosition,up,13.0)+vec3(23.0),up)-.5;
-    surfaceNormal=normalize(up+(east*waveEast+north*waveNorth)*environment.ocean.w*waveFade);
+    surfaceNormal=normalize(up+(east*waveEast+north*waveNorth)*environment.ocean.w*waveFade*oceanDetailWeight);
     float fresnel=pow(1.0-max(dot(surfaceNormal,normalize(viewDirection)),0.0),5.0);
     float broad=PlanetTriplanarNoise(bodyPosition/1800.0,up);
-    albedo=mix(environment.oceanColorExposure.rgb,vec3(.035,.16,.34),.12+.55*fresnel);
-    albedo*=.90+.16*broad;
-    roughness=mix(environment.ocean.y,.42,1.0-waveFade);
-    specular=max(specular,.48);
+    vec3 detailedAlbedo=mix(environment.oceanColorExposure.rgb,vec3(.035,.16,.34),.12+.55*fresnel);
+    detailedAlbedo*=.90+.16*broad;
+    albedo=mix(oceanBase.albedo,detailedAlbedo,oceanDetailWeight);
+    roughness=mix(oceanBase.roughness,mix(environment.ocean.y,.42,1.0-waveFade),oceanDetailWeight);
+    specular=mix(oceanBase.specular,max(specular,.48),oceanDetailWeight);
   }
   else if(material.x==3u&&terrainHeight>=environment.ocean.x)
   {
