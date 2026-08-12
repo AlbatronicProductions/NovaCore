@@ -47,7 +47,7 @@ public struct NativeDrawBatch { public NativeMeshHandle Mesh; public uint FirstO
     public float CameraBodyLowX,CameraBodyLowY,CameraBodyLowZ,RadiusLow;
     public float SurfaceAltitudeMetres,MaximumTerrainHeightMetres,OceanSeaLevelMetres,BlendAlpha;
     public uint BodyIdLow,BodyIdHigh,TerrainVersion,Enabled;
-    public float ViewForwardX,ViewForwardY,ViewForwardZ,HorizonMarginRadians;
+    public float TangentAnchorX,TangentAnchorY,TangentAnchorZ,MaximumAngleRadians;
     public float RadialWarpExponent,DetailFrequency,NormalStepMetres,RegionalAlpha;
     public uint VertexCount,IndexCount,RadialRingCount,AzimuthSegmentCount;
     public uint Reserved0,Reserved1,Reserved2,Reserved3;

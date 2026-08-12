@@ -42,12 +42,14 @@ var tests = new (string, Action)[]
     ("SurfaceAnchor acquisition, ENU, and handoff", SurfaceAnchorPhaseBTest),
     ("Camera focus-position continuity", CameraFocusPositionContinuityTest),
     ("Zoom motion-profile continuity", ZoomMotionProfileContinuityTest),
+    ("Solar camera bounded-domain crash regression", SolarCameraBoundedDomainCrashRegressionTest),
     ("Surface visual-aim continuity", SurfaceVisualAimContinuityTest),
     ("Inertial visual-aim authority", InertialVisualAimAuthorityTest),
     ("Cube-sphere planetary surface", CubeSpherePlanetarySurfaceTest),
     ("Planetary terrain residency and surface frame", PlanetaryTerrainResidencyAndSurfaceFrameTest),
     ("Planetary patch topology and ABI", PlanetaryPatchTopologyAndAbiTest),
     ("Planetary Renderer V2 eyeball topology and ABI", PlanetaryEyeballTopologyAndAbiTest),
+    ("Fixed tangent-frame Eyeball anchoring", FixedTangentFrameEyeballAnchoringTest),
     ("Opaque regional-eyeball handoff", OpaqueRegionalEyeballHandoffTest),
     ("Distant-detailed Earth texture-frequency handoff", DistantDetailedEarthTextureFrequencyHandoffTest),
     ("Opaque distant-detailed handoff", OpaqueDistantDetailedHandoffTest),
@@ -1020,6 +1022,78 @@ static void ZoomMotionProfileContinuityTest()
     }
 }
 
+static void SolarCameraBoundedDomainCrashRegressionTest()
+{
+    var root=new ReferenceFrameId(1);
+    Check(SolarSystemScene.TryCreateAt(root,SimulationInstant.Zero,out var candidate,out var error)&&candidate is not null,
+        $"bounded camera-domain scene: {error}");
+    var scene=candidate!;var camera=new CameraState(new FramePosition(root,Double3.Zero),DoubleQuaternion.Identity,scene.Projection,CameraMode.Free);
+    Check(scene.Focus(camera,NativePresentationFocus.Earth),"bounded camera-domain Earth focus");
+    scene.ApplyPresentationInput(camera,new NativeInputState{PauseToggle=1},out _,out _);
+    for(var step=0;step<160&&(scene.CurrentFocusTarget.Kind!=FocusTargetKind.SurfaceAnchor||scene.SurfaceAnchorBlend<1d||scene.SurfaceAltitudeMetres>3_000d);step++)
+        scene.ApplyPresentationInput(camera,new NativeInputState{MouseWheelDetents=1},out _,out _);
+    Check(scene.CurrentFocusTarget.Kind==FocusTargetKind.SurfaceAnchor&&scene.SurfaceAnchorBlend==1d&&scene.SurfaceAltitudeMetres is >=10d and <=3_000d,
+        $"bounded camera-domain reaches near-Earth Eyeball state: kind={scene.CurrentFocusTarget.Kind}; blend={scene.SurfaceAnchorBlend:R}; altitude={scene.SurfaceAltitudeMetres:R}");
+    scene.ApplyPresentationInput(camera,new NativeInputState{LookActive=1,MouseDeltaX=(float)(Math.PI/.002d),MouseDeltaY=0f},out _,out _);
+
+    var body=scene.FocusedBody;var terrain=EarthPlanetaryScene.Terrain;var maximumDistance=SolAnalyticalDefinition.AstronomicalUnitMetres*SolarSystemScene.MaximumOverviewDistanceAu;
+    var orientation=(DoubleQuaternion.FromAxisAngle(Double3.UnitY,scene.OrbitYawRadians)*DoubleQuaternion.FromAxisAngle(Double3.UnitX,scene.OrbitPitchRadians)).Normalized();
+    var radial=-orientation.Rotate(new Double3(0d,0d,-1d));
+    var currentAltitude=SurfaceAnchorAcquisition.SurfaceAltitude(body,camera.Position.Value,terrain);
+    var bodyLineMaximum=SurfaceAnchorAcquisition.SurfaceAltitude(body,body.Position.Value+radial*maximumDistance,terrain);
+    var detents=-1000;
+    var formerlyRequestedAltitude=SolarCameraZoomPolicy.ApplyAltitude(Math.Max(0d,currentAltitude),SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres,
+        bodyLineMaximum,detents);
+    Check(scene.CurrentFocusTarget.TryEvaluate(body,out var anchorRoot),"bounded camera-domain evaluates active SurfaceAnchor");
+    var activeLineMaximum=SurfaceAnchorAcquisition.SurfaceAltitude(body,scene.CurrentVisualAimRoot+radial*maximumDistance,terrain);
+    var requestedAltitude=SolarCameraZoomPolicy.ApplyAltitude(Math.Max(0d,currentAltitude),SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres,
+        SolarCameraZoomPolicy.MaximumSurfaceAltitude(body,scene.CurrentVisualAimRoot,radial,terrain,maximumDistance),detents);
+    Console.WriteLine($"Bounded camera-domain reproduction: current={currentAltitude:R} m; detents={detents}; formerRequested={formerlyRequestedAltitude:R} m; activeLineMaximum={activeLineMaximum:R} m; formerExcess={formerlyRequestedAltitude-activeLineMaximum:R} m; correctedRequested={requestedAltitude:R} m; maximumOffset={maximumDistance:R} m");
+
+    Exception? failure=null;
+    try{scene.ApplyPresentationInput(camera,new NativeInputState{MouseWheelDetents=detents},out _,out _);}catch(Exception caught){failure=caught;}
+    Check(failure is null,$"batched outward zoom after near-Earth drag remains inside the legitimate bounded camera domain: {failure}");
+    var expectedAltitude=SolarCameraZoomPolicy.MaximumSurfaceAltitude(body,scene.CurrentVisualAimRoot,radial,terrain,maximumDistance);
+    Check(requestedAltitude<=activeLineMaximum&&Math.Abs(scene.SurfaceAltitudeMetres-expectedAltitude)<.001d&&scene.SurfaceAltitudeMetres>=SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres&&
+        camera.Position.Value.IsFinite&&scene.CurrentInertialCameraOffset.IsFinite&&Double3.Dot(scene.CurrentInertialCameraOffset,radial)>0d,
+        "corrected request stays inside its exact ray domain without terrain penetration or camera-offset inversion");
+
+    var minimumObservedAltitude=scene.SurfaceAltitudeMetres;var maximumDomainExcess=0d;var maximumInvariantError=0d;
+    for(var cycle=0;cycle<24;cycle++)
+    {
+        foreach(var input in new[]{
+            new NativeInputState{MouseWheelDetents=1000},
+            new NativeInputState{LookActive=1,MouseDeltaX=cycle%2==0?237f:-311f,MouseDeltaY=cycle%3==0?71f:-53f},
+            new NativeInputState{MouseWheelDetents=-1000}})
+        {
+            scene.ApplyPresentationInput(camera,input,out _,out _);
+            var stateRadial=scene.CurrentInertialCameraOffset.Normalized();
+            var stateMaximum=SolarCameraZoomPolicy.MaximumSurfaceAltitude(scene.FocusedBody,scene.CurrentVisualAimRoot,stateRadial,terrain,maximumDistance);
+            minimumObservedAltitude=Math.Min(minimumObservedAltitude,scene.SurfaceAltitudeMetres);
+            maximumDomainExcess=Math.Max(maximumDomainExcess,scene.SurfaceAltitudeMetres-stateMaximum);
+            maximumInvariantError=Math.Max(maximumInvariantError,Math.Sqrt((camera.Position.Value-(scene.CurrentFocusRoot+scene.CurrentInertialCameraOffset)).LengthSquared));
+            Check(scene.SurfaceAltitudeMetres>=SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres-.001d&&scene.SurfaceAltitudeMetres<=stateMaximum+.001d&&
+                double.IsFinite(scene.SurfaceAltitudeMetres)&&double.IsFinite(scene.OrbitDistance)&&camera.Position.Value.IsFinite&&scene.CurrentInertialCameraOffset.IsFinite,
+                $"drag/zoom stress cycle {cycle} remains finite, clear, and inside its ray-specific camera domain");
+        }
+    }
+    scene.ApplyPresentationInput(camera,new NativeInputState{MouseWheelDetents=1000},out _,out _);
+    Check(scene.CurrentFocusTarget.Kind==FocusTargetKind.SurfaceAnchor&&scene.HasRetainedVisualAim,"stress returns to near-surface anchor ownership");
+    scene.ApplyPresentationInput(camera,new NativeInputState{LookActive=1,MouseDeltaX=(float)(Math.PI/.002d),MouseDeltaY=0f},out _,out _);
+    for(var outward=0;outward<180;outward++)
+    {
+        scene.ApplyPresentationInput(camera,new NativeInputState{MouseWheelDetents=-2},out _,out _);
+        var stateRadial=scene.CurrentInertialCameraOffset.Normalized();
+        var stateMaximum=SolarCameraZoomPolicy.MaximumSurfaceAltitude(scene.FocusedBody,scene.CurrentVisualAimRoot,stateRadial,terrain,maximumDistance);
+        maximumDomainExcess=Math.Max(maximumDomainExcess,scene.SurfaceAltitudeMetres-stateMaximum);
+        Check(scene.SurfaceAltitudeMetres<=stateMaximum+.001d&&double.IsFinite(scene.SurfaceAltitudeMetres),
+            $"paced outward release frame {outward} remains inside the updated visual-aim ray domain");
+    }
+    Console.WriteLine($"Bounded camera-domain stress: cycles=24; minimumAltitude={minimumObservedAltitude:R} m; maximumDomainExcess={maximumDomainExcess:E3} m; invariant={maximumInvariantError:E3} m");
+    Check(minimumObservedAltitude>=SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres-.001d&&maximumDomainExcess<=.003d&&maximumInvariantError<.003d,
+        "repeated near-Earth drag/zoom cycles preserve clearance and the 3D-1 positional invariant");
+}
+
 static double QuaternionAngle(in DoubleQuaternion first, in DoubleQuaternion second)
 {
     var dot = Math.Abs(first.X * second.X + first.Y * second.Y + first.Z * second.Z + first.W * second.W);
@@ -1097,7 +1171,7 @@ static void PlanetaryPresentationSpirvStrideTest()
     var expectedEyeballOffsets = new Dictionary<string, uint>
     {
         ["cameraHighRadiusHigh"] = 0, ["cameraLowRadiusLow"] = 16, ["surface"] = 32, ["identity"] = 48,
-        ["viewForwardMargin"] = 64, ["mapping"] = 80, ["topology"] = 96, ["reserved"] = 112
+        ["tangentAnchorAngle"] = 64, ["mapping"] = 80, ["topology"] = 96, ["reserved"] = 112
     };
     Check(eyeball.Bindings.SequenceEqual(new uint[] { 12 }), "planetary.frag EyeballDebugInput is reflected at binding 12");
     Check(eyeball.MemberOffsets.Count == expectedEyeballOffsets.Count && expectedEyeballOffsets.All(expected =>
@@ -1421,10 +1495,59 @@ static void PlanetaryEyeballTopologyAndAbiTest()
     Check(topology.Indices[..6].SequenceEqual(new uint[]{0,1,2,0,2,3})&&topology.Indices[^6..].SequenceEqual(new uint[]{32_512,32_768,32_257,32_257,32_768,32_513}),"center fan and final annulus ordering");
     var previous=0d;for(var ring=1;ring<=PlanetaryEyeballTopology.RadialRingCount;ring++){var radius=PlanetaryEyeballTopology.WarpedRadius(ring);Check(radius>previous&&radius is >0 and <=1,"monotonic squared radial warp");previous=radius;}
     var pupil=new Double3(.3,.4,.5).Normalized();var first=PlanetaryEyeballTopology.DirectionAt(pupil,1,0,.25);var repeated=PlanetaryEyeballTopology.DirectionAt(pupil,1,0,.25);var rim=PlanetaryEyeballTopology.DirectionAt(pupil,PlanetaryEyeballTopology.RadialRingCount,255,.25);Check(first==repeated&&Math.Abs(first.LengthSquared-1)<1e-12&&Math.Abs(rim.LengthSquared-1)<1e-12,"body-fixed pupil mapping deterministic and spherical");
-    Check(Marshal.SizeOf<NativePlanetaryEyeball>()==128&&Marshal.OffsetOf<NativePlanetaryEyeball>(nameof(NativePlanetaryEyeball.CameraBodyHighX)).ToInt32()==0&&Marshal.OffsetOf<NativePlanetaryEyeball>(nameof(NativePlanetaryEyeball.CameraBodyLowX)).ToInt32()==16&&Marshal.OffsetOf<NativePlanetaryEyeball>(nameof(NativePlanetaryEyeball.SurfaceAltitudeMetres)).ToInt32()==32&&Marshal.OffsetOf<NativePlanetaryEyeball>(nameof(NativePlanetaryEyeball.BodyIdLow)).ToInt32()==48&&Marshal.OffsetOf<NativePlanetaryEyeball>(nameof(NativePlanetaryEyeball.ViewForwardX)).ToInt32()==64&&Marshal.OffsetOf<NativePlanetaryEyeball>(nameof(NativePlanetaryEyeball.RadialWarpExponent)).ToInt32()==80&&Marshal.OffsetOf<NativePlanetaryEyeball>(nameof(NativePlanetaryEyeball.VertexCount)).ToInt32()==96&&Marshal.OffsetOf<NativePlanetaryEyeball>(nameof(NativePlanetaryEyeball.Reserved0)).ToInt32()==112,"eyeball fixed-width ABI layout");
+    Check(Marshal.SizeOf<NativePlanetaryEyeball>()==128&&Marshal.OffsetOf<NativePlanetaryEyeball>(nameof(NativePlanetaryEyeball.CameraBodyHighX)).ToInt32()==0&&Marshal.OffsetOf<NativePlanetaryEyeball>(nameof(NativePlanetaryEyeball.CameraBodyLowX)).ToInt32()==16&&Marshal.OffsetOf<NativePlanetaryEyeball>(nameof(NativePlanetaryEyeball.SurfaceAltitudeMetres)).ToInt32()==32&&Marshal.OffsetOf<NativePlanetaryEyeball>(nameof(NativePlanetaryEyeball.BodyIdLow)).ToInt32()==48&&Marshal.OffsetOf<NativePlanetaryEyeball>(nameof(NativePlanetaryEyeball.TangentAnchorX)).ToInt32()==64&&Marshal.OffsetOf<NativePlanetaryEyeball>(nameof(NativePlanetaryEyeball.RadialWarpExponent)).ToInt32()==80&&Marshal.OffsetOf<NativePlanetaryEyeball>(nameof(NativePlanetaryEyeball.VertexCount)).ToInt32()==96&&Marshal.OffsetOf<NativePlanetaryEyeball>(nameof(NativePlanetaryEyeball.Reserved0)).ToInt32()==112,"eyeball fixed-width ABI layout");
     Check(PlanetaryEyeballHandoff.EyeballWeight(2_000_000)==0f&&PlanetaryEyeballHandoff.EyeballWeight(1_500_000)==.5f&&PlanetaryEyeballHandoff.EyeballWeight(1_000_000)==1f&&PlanetaryEyeballHandoff.EyeballWeight(2)==1f,"bounded deterministic regional/eyeball handoff");
     var direction=new Double3(.31,-.74,.59).Normalized();var terrain=PlanetaryTerrainDefinition.EarthEyeballV2;var h0=terrain.SampleHeight(direction,0);Check(h0==terrain.SampleHeight(direction,12)&&h0==terrain.SampleHeight(direction,24),"terrain truth independent of regional topology level");
     Console.WriteLine($"Planetary eyeball topology hash: 0x{topology.DeterministicHash:X16}; vertices={PlanetaryEyeballTopology.VertexCount}; indices={PlanetaryEyeballTopology.IndexCount}");
+}
+
+static void FixedTangentFrameEyeballAnchoringTest()
+{
+    var root=new ReferenceFrameId(1);
+    var rates=new[]{new SimulationRate(1,1),new SimulationRate(30,1),new SimulationRate(600,1),new SimulationRate(14_400,1),new SimulationRate(7_776_000,1)};
+    var maximumBodyFixedDrift=0d;var maximumElevationMismatch=0d;var maximumRootMotion=0d;var topologyChanges=0;
+    foreach(var rate in rates)
+    {
+        Check(SolarSystemScene.TryCreateAt(root,SimulationInstant.Zero,out var candidate,out var error)&&candidate is not null,$"fixed Eyeball anchor {rate.Numerator}x scene: {error}");
+        var scene=candidate!;var camera=new CameraState(new FramePosition(root,Double3.Zero),DoubleQuaternion.Identity,scene.Projection,CameraMode.Free);
+        Check(scene.Focus(camera,NativePresentationFocus.Earth),$"fixed Eyeball anchor Earth focus at {rate.Numerator}x");
+        for(var step=0;step<160&&(scene.CurrentFocusTarget.Kind!=FocusTargetKind.SurfaceAnchor||scene.SurfaceAnchorBlend<1d);step++)scene.ApplyPresentationInput(camera,new NativeInputState{MouseWheelDetents=1},out _,out _);
+        Check(scene.CurrentFocusTarget.Kind==FocusTargetKind.SurfaceAnchor&&scene.SurfaceAnchorBlend==1d&&scene.EyeballComputeRequested,$"fixed Eyeball SurfaceAnchor ownership at {rate.Numerator}x");
+        var anchor=scene.CurrentFocusTarget.SurfaceAnchor;var baseline=scene.EyeballConstants(camera);var baselineDirection=AnchorDirection(baseline);var samples=SampleVertices(baselineDirection);
+        Check(BitwiseAnchor(baseline,anchor.BodyFixedDirection)&&baseline.MaximumAngleRadians==(float)PlanetaryEyeballTopology.FixedMaximumAngleRadians,$"binding-12 transports fixed body-frame tangent anchor at {rate.Numerator}x");
+        var baselineHeights=samples.Select(direction=>EarthPlanetaryScene.Terrain.SampleHeight(direction,24)).ToArray();
+        var baselinePosition=camera.Position.Value;var frame=anchor.LocalTangentBasis;
+        foreach(var displacement in new[]{frame.East*2_000d,-frame.East*2_000d,frame.North*2_000d,-frame.North*2_000d})
+        {
+            camera.Position=camera.Position with{Value=baselinePosition+scene.FocusedBody.BodyFixedToRoot.Rotate(displacement)};scene.Update(camera);Measure(scene.EyeballConstants(camera),"camera translation");
+        }
+        camera.Position=camera.Position with{Value=baselinePosition};scene.Update(camera);
+        scene.ApplyPresentationInput(camera,new NativeInputState{LookActive=1,MouseDeltaX=90f,MouseDeltaY=-45f},out _,out _);Measure(scene.EyeballConstants(camera),"camera orbit");
+        scene.ApplyPresentationInput(camera,new NativeInputState{MouseWheelDetents=1},out _,out _);Measure(scene.EyeballConstants(camera),"inward zoom");
+        scene.ApplyPresentationInput(camera,new NativeInputState{MouseWheelDetents=-1},out _,out _);Measure(scene.EyeballConstants(camera),"outward zoom");
+        var rateIndex=SimulationSpeedPresets.IndexOf(rate);while(scene.SpeedPresetIndex<rateIndex)scene.ApplyPresentationInput(camera,new NativeInputState{RateIncrease=1},out _,out _);
+        Check(FocusTarget.AtSurface(anchor).TryEvaluate(scene.FocusedBody,out var beforeRoot),$"fixed Eyeball root before {rate.Numerator}x");var beforeCenter=scene.FocusedBody.Position.Value;
+        Check(scene.TryAdvanceByHostDuration(SimulationDuration.FromWholeSeconds(1),camera,out error),$"fixed Eyeball rotation at {rate.Numerator}x: {error}");
+        Check(FocusTarget.AtSurface(anchor).TryEvaluate(scene.FocusedBody,out var afterRoot),$"fixed Eyeball root after {rate.Numerator}x");
+        var afterCenter=scene.FocusedBody.Position.Value;maximumRootMotion=Math.Max(maximumRootMotion,Math.Sqrt(((afterRoot.Value-afterCenter)-(beforeRoot.Value-beforeCenter)).LengthSquared));Measure(scene.EyeballConstants(camera),"body rotation");
+        Check(scene.CurrentFocusTarget.SurfaceAnchor==anchor&&anchor.LocalTangentBasis.IsValid&&baselineDirection.IsFinite&&samples.All(value=>value.IsFinite),$"fixed geographic and ENU identity at {rate.Numerator}x");
+
+        void Measure(NativePlanetaryEyeball current,string motion)
+        {
+            var currentDirection=AnchorDirection(current);var drift=Math.Sqrt((currentDirection-baselineDirection).LengthSquared)*scene.FocusedBody.RadiusMetres;maximumBodyFixedDrift=Math.Max(maximumBodyFixedDrift,drift);
+            var currentSamples=SampleVertices(currentDirection);for(var index=0;index<samples.Length;index++){var vertexDrift=Math.Sqrt((currentSamples[index]-samples[index]).LengthSquared)*scene.FocusedBody.RadiusMetres;maximumBodyFixedDrift=Math.Max(maximumBodyFixedDrift,vertexDrift);var height=EarthPlanetaryScene.Terrain.SampleHeight(currentSamples[index],24);maximumElevationMismatch=Math.Max(maximumElevationMismatch,Math.Abs(height-baselineHeights[index]));}
+            if(current.VertexCount!=baseline.VertexCount||current.IndexCount!=baseline.IndexCount||current.RadialRingCount!=baseline.RadialRingCount||current.AzimuthSegmentCount!=baseline.AzimuthSegmentCount)topologyChanges++;
+            Check(BitwiseAnchor(current,anchor.BodyFixedDirection)&&currentDirection.IsFinite,$"{motion} preserves body-fixed Eyeball anchor at {rate.Numerator}x");
+        }
+    }
+    var shaderDirectory=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..","..","native","NovaCore.Native","shaders"));var computeSource=File.ReadAllText(Path.Combine(shaderDirectory,"planetary_eyeball_generate.comp"));
+    Check(computeSource.Contains("dvec3 anchor=normalize(dvec3(eye.tangentAnchorAngle.xyz))",StringComparison.Ordinal)&&!computeSource.Contains("ViewPupil(",StringComparison.Ordinal),"GPU Eyeball generation uses the transported tangent anchor rather than a per-frame camera pupil");
+    Check(maximumBodyFixedDrift==0d&&maximumElevationMismatch==0d&&maximumRootMotion>0d&&topologyChanges==0,"fixed tangent-frame Eyeball remains geographic while root rotation and topology ownership evolve independently");
+    Console.WriteLine($"Fixed Eyeball tangent anchor: cameraDrift={maximumBodyFixedDrift:E3} m; elevationMismatch={maximumElevationMismatch:E3} m; rootMotion={maximumRootMotion:E3} m; topologyChanges={topologyChanges}");
+
+    static bool BitwiseAnchor(in NativePlanetaryEyeball eye,in Double3 direction)=>BitConverter.SingleToInt32Bits(eye.TangentAnchorX)==BitConverter.SingleToInt32Bits((float)direction.X)&&BitConverter.SingleToInt32Bits(eye.TangentAnchorY)==BitConverter.SingleToInt32Bits((float)direction.Y)&&BitConverter.SingleToInt32Bits(eye.TangentAnchorZ)==BitConverter.SingleToInt32Bits((float)direction.Z);
+    static Double3 AnchorDirection(in NativePlanetaryEyeball eye)=>new Double3(eye.TangentAnchorX,eye.TangentAnchorY,eye.TangentAnchorZ).Normalized();
+    static Double3[] SampleVertices(in Double3 direction)=>new[]{direction,PlanetaryEyeballTopology.DirectionAt(direction,1,0,PlanetaryEyeballTopology.FixedMaximumAngleRadians),PlanetaryEyeballTopology.DirectionAt(direction,32,73,PlanetaryEyeballTopology.FixedMaximumAngleRadians),PlanetaryEyeballTopology.DirectionAt(direction,96,191,PlanetaryEyeballTopology.FixedMaximumAngleRadians),PlanetaryEyeballTopology.DirectionAt(direction,128,255,PlanetaryEyeballTopology.FixedMaximumAngleRadians)};
 }
 
 static void PlanetaryTerrainResidencyAndSurfaceFrameTest()

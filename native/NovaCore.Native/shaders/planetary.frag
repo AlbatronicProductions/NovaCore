@@ -16,7 +16,7 @@ layout(location=10) flat in vec4 localDetail;
 struct Environment { vec4 centerRadius; uvec4 identity; vec4 atmosphere; vec4 scattering; vec4 clouds; vec4 cloudShape; vec4 ocean; vec4 oceanColorExposure; };
 layout(std430,set=0,binding=2) readonly buffer PlanetaryInput { vec4 cameraHighRadiusHigh; vec4 cameraLowRadiusLow; vec4 thresholds; uvec4 controls; vec4 viewForwardHalfAngle; } planetaryInput;
 layout(std430,set=0,binding=11) readonly buffer Environments { Environment value; } environmentData;
-layout(std430,set=0,binding=12) readonly buffer EyeballDebugInput { vec4 cameraHighRadiusHigh; vec4 cameraLowRadiusLow; vec4 surface; uvec4 identity; vec4 viewForwardMargin; vec4 mapping; uvec4 topology; uvec4 reserved; } eyeDebug;
+layout(std430,set=0,binding=12) readonly buffer EyeballDebugInput { vec4 cameraHighRadiusHigh; vec4 cameraLowRadiusLow; vec4 surface; uvec4 identity; vec4 tangentAnchorAngle; vec4 mapping; uvec4 topology; uvec4 reserved; } eyeDebug;
 layout(push_constant) uniform StellarLighting { vec4 sourceCenterExposure; vec4 sourceColorAmbient; vec4 radianceGlowEnabled; } lighting;
 layout(location=0) out vec4 outColor;
 

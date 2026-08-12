@@ -67,6 +67,7 @@ internal static class SolarOverlayLayout
 internal static class SolarCameraZoomPolicy
 {
     internal const double DistanceRatioPerDetent = 1.25d;
+    internal const double DomainComparisonEpsilonMetres = .01d;
 
     internal static double ApplyAltitude(double altitude, double minimumAltitude, double maximumAltitude, int detents)
     {
@@ -107,10 +108,10 @@ internal static class SolarCameraZoomPolicy
             !double.IsFinite(maximumDistance) || maximumDistance <= 0d) throw new ArgumentOutOfRangeException();
 
         var direction = cameraOffsetDirectionRoot.Normalized();
-        var maximumAltitude = SurfaceAnchorAcquisition.SurfaceAltitude(body, focusRoot + direction * maximumDistance, terrain);
-        if (!double.IsFinite(maximumAltitude) || maximumAltitude < desiredAltitude)
+        var maximumAltitude = MaximumSurfaceAltitude(body, focusRoot, direction, terrain, maximumDistance);
+        if (!double.IsFinite(maximumAltitude) || maximumAltitude + DomainComparisonEpsilonMetres < desiredAltitude)
             throw new InvalidOperationException("The requested zoom altitude is outside the bounded camera domain.");
-        if (desiredAltitude == maximumAltitude) return maximumDistance;
+        if (desiredAltitude >= maximumAltitude) return maximumDistance;
 
         var low = 0d;
         var high = maximumDistance;
@@ -121,6 +122,20 @@ internal static class SolarCameraZoomPolicy
             if (altitude >= desiredAltitude) high = middle; else low = middle;
         }
         return low + (high - low) * .5d;
+    }
+
+    internal static double MaximumSurfaceAltitude(
+        in PlanetRenderProxy body,
+        in Double3 cameraLineOriginRoot,
+        in Double3 cameraOffsetDirectionRoot,
+        in PlanetaryTerrainDefinition terrain,
+        double maximumDistance)
+    {
+        if (!cameraLineOriginRoot.IsFinite || !cameraOffsetDirectionRoot.IsFinite ||
+            cameraOffsetDirectionRoot.LengthSquared <= 0d || !double.IsFinite(maximumDistance) || maximumDistance <= 0d)
+            throw new ArgumentOutOfRangeException();
+        return SurfaceAnchorAcquisition.SurfaceAltitude(body,
+            cameraLineOriginRoot + cameraOffsetDirectionRoot.Normalized() * maximumDistance, terrain);
     }
 }
 
@@ -475,18 +490,35 @@ internal sealed class SolarSystemScene
             var maximumDistance=SolAnalyticalDefinition.AstronomicalUnitMetres*MaximumOverviewDistanceAu;
             var rootRadial=OrbitOffsetDirection();
             var currentAltitude=SurfaceAnchorAcquisition.SurfaceAltitude(FocusedBody,camera.Position.Value,terrain);
-            var maximumAltitude=SurfaceAnchorAcquisition.SurfaceAltitude(FocusedBody,FocusedBody.Position.Value+rootRadial*maximumDistance,terrain);
-            var desiredAltitude=SolarCameraZoomPolicy.ApplyAltitude(Math.Max(0d,currentAltitude),SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres,maximumAltitude,input.MouseWheelDetents);
             var desiredFocusRoot=FocusedBody.Position.Value;
+            double desiredAltitude;
             if(_focusTarget.Kind==FocusTargetKind.SurfaceAnchor)
             {
+                RetainActiveSurfaceAim();
+                var activeVisualAimRoot=EvaluateRetainedVisualAimRoot(desiredFocusRoot);
+                var maximumAltitude=SolarCameraZoomPolicy.MaximumSurfaceAltitude(FocusedBody,activeVisualAimRoot,rootRadial,terrain,maximumDistance);
+                desiredAltitude=SolarCameraZoomPolicy.ApplyAltitude(Math.Max(0d,currentAltitude),SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres,maximumAltitude,input.MouseWheelDetents);
                 var desiredBlend=SurfaceFocusHandoffPolicy.SurfaceBlend(desiredAltitude);
                 desiredFocusRoot=SurfaceFocusHandoffPolicy.BlendedRoot(FocusedBody.Position.Value,EvaluateSurfaceAnchorRoot(),desiredBlend);
-                RetainActiveSurfaceAim();
             }
-            else UpdateRetainedVisualAim(desiredAltitude,rootRadial);
+            else
+            {
+                var activeVisualAimRoot=EvaluateRetainedVisualAimRoot(desiredFocusRoot);
+                var activeLineMaximumAltitude=SolarCameraZoomPolicy.MaximumSurfaceAltitude(FocusedBody,activeVisualAimRoot,rootRadial,terrain,maximumDistance);
+                desiredAltitude=SolarCameraZoomPolicy.ApplyAltitude(Math.Max(0d,currentAltitude),SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres,activeLineMaximumAltitude,input.MouseWheelDetents);
+                UpdateRetainedVisualAim(desiredAltitude,rootRadial);
+                var updatedVisualAimRoot=EvaluateRetainedVisualAimRoot(desiredFocusRoot);
+                if(updatedVisualAimRoot!=activeVisualAimRoot)
+                {
+                    var updatedLineMaximumAltitude=SolarCameraZoomPolicy.MaximumSurfaceAltitude(FocusedBody,updatedVisualAimRoot,rootRadial,terrain,maximumDistance);
+                    desiredAltitude=SolarCameraZoomPolicy.ApplyAltitude(Math.Max(0d,currentAltitude),SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres,updatedLineMaximumAltitude,input.MouseWheelDetents);
+                }
+            }
             var desiredVisualAimRoot=EvaluateRetainedVisualAimRoot(desiredFocusRoot);
             var cameraLineOrigin=SurfaceVisualAimHandoffPolicy.CameraLineOrigin(desiredFocusRoot,desiredVisualAimRoot,rootRadial);
+            var finalLineMaximumAltitude=SolarCameraZoomPolicy.MaximumSurfaceAltitude(FocusedBody,cameraLineOrigin,rootRadial,terrain,maximumDistance);
+            if(desiredAltitude>finalLineMaximumAltitude)
+                desiredAltitude=SolarCameraZoomPolicy.ApplyAltitude(Math.Max(0d,currentAltitude),SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres,finalLineMaximumAltitude,input.MouseWheelDetents);
             _orbitDistance=SolarCameraZoomPolicy.OffsetDistanceForSurfaceAltitude(FocusedBody,cameraLineOrigin,rootRadial,terrain,desiredAltitude,maximumDistance);
             cameraChanged = true;
         }
@@ -589,12 +621,13 @@ internal sealed class SolarSystemScene
     internal NativePlanetaryEyeball EyeballConstants(CameraState camera)
     {
         if (!EyeballComputeRequested || FocusedBody.BodyId != SolarSystemBodyIds.Earth.Value) return default;
+        if (_focusTarget.Kind != FocusTargetKind.SurfaceAnchor) throw new InvalidOperationException("Eyeball rendering requires a body-fixed SurfaceAnchor.");
         var body = FocusedBody;
         var rootToBody=body.BodyFixedToRoot.Conjugate().Normalized();var cameraBody=rootToBody.Rotate(camera.Position.Value-body.Position.Value);
         var encoded = EncodedPosition.Encode(cameraBody);
         var radiusHigh = (float)body.RadiusMetres;
         var radiusLow = (float)(body.RadiusMetres - radiusHigh);
-        var viewForward=rootToBody.Rotate(camera.Orientation.Rotate(new Double3(0d,0d,-1d))).Normalized();
+        var tangentAnchor=_focusTarget.SurfaceAnchor.BodyFixedDirection;
         var distance = Math.Sqrt(cameraBody.LengthSquared);
         var radial = distance > 0d ? cameraBody / distance : Double3.UnitZ;
         var altitude = distance - PlanetaryTerrainQuery.VisibleSurfaceRadius(body.RadiusMetres, radial, EarthPlanetaryScene.Terrain, EarthPlanetaryScene.EnvironmentDefinition);
@@ -604,7 +637,7 @@ internal sealed class SolarSystemScene
             CameraBodyLowX=encoded.LowX,CameraBodyLowY=encoded.LowY,CameraBodyLowZ=encoded.LowZ,RadiusLow=radiusLow,
             SurfaceAltitudeMetres=(float)Math.Max(EarthPlanetaryScene.MinimumTerrainClearanceMetres,altitude),MaximumTerrainHeightMetres=(float)EarthPlanetaryScene.Terrain.MaximumHeightMetres,OceanSeaLevelMetres=(float)EarthPlanetaryScene.EnvironmentDefinition.OceanSeaLevelMetres,BlendAlpha=_eyeballWeight,
             BodyIdLow=(uint)body.BodyId,BodyIdHigh=(uint)(body.BodyId>>32),TerrainVersion=EarthPlanetaryScene.Terrain.Version,Enabled=1,
-            ViewForwardX=(float)viewForward.X,ViewForwardY=(float)viewForward.Y,ViewForwardZ=(float)viewForward.Z,HorizonMarginRadians=(float)PlanetaryEyeballTopology.HorizonMarginRadians,
+            TangentAnchorX=(float)tangentAnchor.X,TangentAnchorY=(float)tangentAnchor.Y,TangentAnchorZ=(float)tangentAnchor.Z,MaximumAngleRadians=(float)PlanetaryEyeballTopology.FixedMaximumAngleRadians,
             RadialWarpExponent=(float)PlanetaryEyeballTopology.RadialWarpExponent,DetailFrequency=1f,NormalStepMetres=2f,RegionalAlpha=1f-_eyeballWeight,
             VertexCount=PlanetaryEyeballTopology.VertexCount,IndexCount=PlanetaryEyeballTopology.IndexCount,RadialRingCount=PlanetaryEyeballTopology.RadialRingCount,AzimuthSegmentCount=PlanetaryEyeballTopology.AzimuthSegmentCount
         };

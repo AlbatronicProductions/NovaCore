@@ -3,8 +3,8 @@ using NovaCore.Core;
 namespace NovaCore.Graphics;
 
 /// <summary>
-/// Deterministic camera-centric spherical-cap topology used by the V2 near-field renderer.
-/// Topology is immutable; only its body-fixed pupil and angular extent change per frame.
+/// Deterministic body-fixed tangent-cap topology used by the V2 near-field renderer.
+/// Topology and geographic anchor are independent of camera motion.
 /// </summary>
 public sealed class PlanetaryEyeballTopology
 {
@@ -12,6 +12,7 @@ public sealed class PlanetaryEyeballTopology
     public const int AzimuthSegmentCount = 256;
     public const double RadialWarpExponent = 2d;
     public const double HorizonMarginRadians = .002d;
+    public const double FixedMaximumAngleRadians = 1.45d;
     public const int VertexCount = 1 + RadialRingCount * AzimuthSegmentCount;
     public const int IndexCount = AzimuthSegmentCount * 3 + (RadialRingCount - 1) * AzimuthSegmentCount * 6;
 

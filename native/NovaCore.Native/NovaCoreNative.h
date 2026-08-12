@@ -29,7 +29,7 @@ struct alignas(16) NcPlanetaryEyeball {
   float cameraBodyLowX, cameraBodyLowY, cameraBodyLowZ, radiusLow;
   float surfaceAltitudeMetres, maximumTerrainHeightMetres, oceanSeaLevelMetres, blendAlpha;
   uint32_t bodyIdLow, bodyIdHigh, terrainVersion, enabled;
-  float viewForwardX, viewForwardY, viewForwardZ, horizonMarginRadians;
+  float tangentAnchorX, tangentAnchorY, tangentAnchorZ, maximumAngleRadians;
   float radialWarpExponent, detailFrequency, normalStepMetres, regionalAlpha;
   uint32_t vertexCount, indexCount, radialRingCount, azimuthSegmentCount;
   uint32_t reserved0, reserved1, reserved2, reserved3;
