@@ -63,10 +63,10 @@ public sealed class PlanetaryTerrainResidencyCache
         if(!definition.IsValid||key.TerrainVersion!=definition.Version||key.SourceId!=definition.SourceId||key.Level is <0 or >24)throw new ArgumentOutOfRangeException();
         var use=checked(++_serial);for(var index=0;index<_entries.Length;index++)if(_entries[index].Tile?.Key==key){_entries[index].LastUse=use;_hits++;return _entries[index].Tile!;}
         _misses++;var selected=-1;var oldest=long.MaxValue;for(var index=0;index<_entries.Length;index++){if(_entries[index].Tile is null){selected=index;break;}if(_entries[index].LastUse<oldest){oldest=_entries[index].LastUse;selected=index;}}
-        if(_entries[selected].Tile is not null)_evictions++;var patch=new PlanetaryPatch(key.Face,key.Level,key.X,key.Y);var bounds=patch.Bounds;var values=new float[PlanetaryTerrainDefinition.GridVertexCount];var cursor=0;
+        if(_entries[selected].Tile is not null)_evictions++;var patch=new PlanetaryPatch(key.Face,key.Level,key.X,key.Y);var values=new float[PlanetaryTerrainDefinition.GridVertexCount];var cursor=0;
         for(var y=0;y<=PlanetaryTerrainDefinition.GridResolution;y++)for(var x=0;x<=PlanetaryTerrainDefinition.GridResolution;x++)
         {
-            var u=bounds.MinX+(bounds.MaxX-bounds.MinX)*x/PlanetaryTerrainDefinition.GridResolution;var v=bounds.MinY+(bounds.MaxY-bounds.MinY)*y/PlanetaryTerrainDefinition.GridResolution;
+            var (u,v)=patch.GridCoordinate(x,y);
             values[cursor++]=(float)definition.SampleHeight(CubeSphereProjection.Project(key.Face,u,v,1d),24);
         }
         var tile=new PlanetaryTerrainTile(key,values);_entries[selected].Tile=tile;_entries[selected].LastUse=use;_generated++;return tile;

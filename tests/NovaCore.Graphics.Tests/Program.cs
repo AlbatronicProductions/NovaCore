@@ -50,6 +50,7 @@ var tests = new (string, Action)[]
     ("Planetary patch topology and ABI", PlanetaryPatchTopologyAndAbiTest),
     ("Planetary Renderer V2 eyeball topology and ABI", PlanetaryEyeballTopologyAndAbiTest),
     ("Fixed tangent-frame Eyeball anchoring", FixedTangentFrameEyeballAnchoringTest),
+    ("Parent-child LOD geographic correspondence", ParentChildLodGeographicCorrespondenceTest),
     ("Opaque regional-eyeball handoff", OpaqueRegionalEyeballHandoffTest),
     ("Distant-detailed Earth texture-frequency handoff", DistantDetailedEarthTextureFrequencyHandoffTest),
     ("Opaque distant-detailed handoff", OpaqueDistantDetailedHandoffTest),
@@ -1548,6 +1549,49 @@ static void FixedTangentFrameEyeballAnchoringTest()
     static bool BitwiseAnchor(in NativePlanetaryEyeball eye,in Double3 direction)=>BitConverter.SingleToInt32Bits(eye.TangentAnchorX)==BitConverter.SingleToInt32Bits((float)direction.X)&&BitConverter.SingleToInt32Bits(eye.TangentAnchorY)==BitConverter.SingleToInt32Bits((float)direction.Y)&&BitConverter.SingleToInt32Bits(eye.TangentAnchorZ)==BitConverter.SingleToInt32Bits((float)direction.Z);
     static Double3 AnchorDirection(in NativePlanetaryEyeball eye)=>new Double3(eye.TangentAnchorX,eye.TangentAnchorY,eye.TangentAnchorZ).Normalized();
     static Double3[] SampleVertices(in Double3 direction)=>new[]{direction,PlanetaryEyeballTopology.DirectionAt(direction,1,0,PlanetaryEyeballTopology.FixedMaximumAngleRadians),PlanetaryEyeballTopology.DirectionAt(direction,32,73,PlanetaryEyeballTopology.FixedMaximumAngleRadians),PlanetaryEyeballTopology.DirectionAt(direction,96,191,PlanetaryEyeballTopology.FixedMaximumAngleRadians),PlanetaryEyeballTopology.DirectionAt(direction,128,255,PlanetaryEyeballTopology.FixedMaximumAngleRadians)};
+}
+
+static void ParentChildLodGeographicCorrespondenceTest()
+{
+    const double radius=6_378_137d;const int grid=PlanetaryTerrainDefinition.GridResolution;
+    var terrain=PlanetaryTerrainDefinition.EarthAuthoritativeV3;var topologyHash=PlanetaryPatchTopology.Shared.DeterministicHash;var eyeballHash=PlanetaryEyeballTopology.Shared.DeterministicHash;
+    var representatives=new[]{new PlanetaryPatch(CubeSphereFace.PositiveX,0,0,0),new PlanetaryPatch(CubeSphereFace.PositiveZ,2,1,2),new PlanetaryPatch(CubeSphereFace.PositiveY,4,7,7),new PlanetaryPatch(CubeSphereFace.NegativeY,5,15,0),new PlanetaryPatch(CubeSphereFace.NegativeZ,6,0,63)};
+    var rotations=new[]{DoubleQuaternion.Identity,new DoubleQuaternion(.17,-.31,.11,.9273618495495703).Normalized()};
+    var cameras=new[]{Double3.Zero,new Double3(1.2e11,-3.4e10,8.7e10)};var maximumDrift=0d;var maximumElevationMismatch=0d;var maximumEdgeError=0d;var maximumRoundTrip=0d;
+    foreach(var parent in representatives)
+    {
+        var parentSamples=new (Double3 Direction,double Height)[grid+1,grid+1];
+        for(var y=0;y<=grid;y++)for(var x=0;x<=grid;x++){var (u,v)=parent.GridCoordinate(x,y);var direction=CubeSphereProjection.Project(parent.Face,u,v,1d);parentSamples[x,y]=(direction,terrain.SampleHeight(direction,24));}
+        for(var childIndex=0;childIndex<4;childIndex++)
+        {
+            var child=parent.Child(childIndex);var bounds=child.Bounds;var expectedMin=parent.GridCoordinate((childIndex&1)*grid/2,(childIndex>>1)*grid/2);var expectedMax=parent.GridCoordinate(((childIndex&1)+1)*grid/2,((childIndex>>1)+1)*grid/2);
+            Check(bounds==(expectedMin.U,expectedMin.V,expectedMax.U,expectedMax.V),"child exactly partitions the parent's dyadic geographic footprint");
+            for(var parentY=0;parentY<=grid;parentY++)for(var parentX=0;parentX<=grid;parentX++)if(PlanetaryPatch.TryMapGridVertexToChild(childIndex,parentX,parentY,out var childX,out var childY))
+            {
+                var parentUv=parent.GridCoordinate(parentX,parentY);var childUv=child.GridCoordinate(childX,childY);Check(BitConverter.DoubleToInt64Bits(parentUv.U)==BitConverter.DoubleToInt64Bits(childUv.U)&&BitConverter.DoubleToInt64Bits(parentUv.V)==BitConverter.DoubleToInt64Bits(childUv.V),"shared parent/child grid coordinates are bit-identical");
+                var childDirection=CubeSphereProjection.Project(child.Face,childUv.U,childUv.V,1d);var bodyDrift=Math.Sqrt((parentSamples[parentX,parentY].Direction-childDirection).LengthSquared)*radius;maximumDrift=Math.Max(maximumDrift,bodyDrift);
+                var childHeight=terrain.SampleHeight(childDirection,24);maximumElevationMismatch=Math.Max(maximumElevationMismatch,Math.Abs(parentSamples[parentX,parentY].Height-childHeight));
+                foreach(var rotation in rotations)foreach(var camera in cameras){var parentRoot=rotation.Rotate(parentSamples[parentX,parentY].Direction*(radius+parentSamples[parentX,parentY].Height))-camera;var childRoot=rotation.Rotate(childDirection*(radius+childHeight))-camera;maximumRoundTrip=Math.Max(maximumRoundTrip,Math.Sqrt((parentRoot-childRoot).LengthSquared));}
+            }
+        }
+        var cache=new PlanetaryTerrainResidencyCache(5);var parentTile=cache.Acquire(new(SolarSystemBodyIds.Earth.Value,parent.Face,parent.Level,parent.X,parent.Y,terrain.Version,terrain.SourceId),terrain);for(var childIndex=0;childIndex<4;childIndex++){var child=parent.Child(childIndex);var childTile=cache.Acquire(new(SolarSystemBodyIds.Earth.Value,child.Face,child.Level,child.X,child.Y,terrain.Version,terrain.SourceId),terrain);for(var py=0;py<=grid;py++)for(var px=0;px<=grid;px++)if(PlanetaryPatch.TryMapGridVertexToChild(childIndex,px,py,out var cx,out var cy))maximumElevationMismatch=Math.Max(maximumElevationMismatch,Math.Abs(parentTile.Heights[py*(grid+1)+px]-childTile.Heights[cy*(grid+1)+cx]));}
+    }
+    foreach(CubeSphereFace face in Enum.GetValues<CubeSphereFace>())foreach(PlanetaryPatchEdge edge in Enum.GetValues<PlanetaryPatchEdge>().Where(value=>value!=PlanetaryPatchEdge.None))
+    {
+        var patch=new PlanetaryPatch(face,3,edge==PlanetaryPatchEdge.PositiveU?7:0,edge==PlanetaryPatchEdge.PositiveV?7:0);var neighbor=CubeSphereAdjacency.NeighborAtSameLevel(patch,edge);var transition=CubeSphereAdjacency.GetTransition(face,edge);
+        for(var step=0;step<=grid;step++){var source=EdgeCoordinate(patch,edge,step);var targetStep=transition.Reversed?grid-step:step;var target=EdgeCoordinate(neighbor,transition.NeighborEdge,targetStep);var a=CubeSphereProjection.Project(face,source.U,source.V,radius);var b=CubeSphereProjection.Project(neighbor.Face,target.U,target.V,radius);maximumEdgeError=Math.Max(maximumEdgeError,Math.Sqrt((a-b).LengthSquared));}
+    }
+    for(var cycle=0;cycle<64;cycle++)foreach(var parent in representatives){var merged=Enumerable.Range(0,4).Select(parent.Child).Select(child=>child.Parent!.Value).Distinct().Single();Check(merged==parent,"repeated deterministic split/merge restores the exact parent identity");}
+    var shaderDirectory=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..","..","native","NovaCore.Native","shaders"));var generator=File.ReadAllText(Path.Combine(shaderDirectory,"planetary_terrain_generate.comp"));var vertex=File.ReadAllText(Path.Combine(shaderDirectory,"planetary.vert"));
+    Check(generator.Contains("uvec2 numerator=address.zw*16u+grid",StringComparison.Ordinal)&&vertex.Contains("uvec2 numerator=address.zw*16u+grid",StringComparison.Ordinal),"CPU and GPU geometry derive shared vertices from the exact dyadic integer lattice");
+    Check(generator.Contains("EarthRequestedLevelForAltitude(inputData.thresholds.z)",StringComparison.Ordinal)&&!generator.Contains("min(address.y,EARTH_MAXIMUM_LEVEL)",StringComparison.Ordinal),"terrain elevation authority is frame-wide and independent of patch hierarchy level");
+    Check(maximumDrift==0d&&maximumElevationMismatch==0d&&maximumEdgeError<1e-8d&&maximumRoundTrip==0d&&topologyHash==PlanetaryPatchTopology.Shared.DeterministicHash&&eyeballHash==PlanetaryEyeballTopology.Shared.DeterministicHash,"parent/child refinement adds samples without moving the represented geographic surface");
+    Console.WriteLine($"Parent/child LOD correspondence: sharedDrift={maximumDrift:E3} m; elevationMismatch={maximumElevationMismatch:E3} m; edgeError={maximumEdgeError:E3} m; splitMerge={maximumRoundTrip:E3} m; patchHash=0x{topologyHash:X16}; eyeballHash=0x{eyeballHash:X16}");
+
+    static (double U,double V) EdgeCoordinate(in PlanetaryPatch patch,PlanetaryPatchEdge edge,int step)
+    {
+        return edge switch{PlanetaryPatchEdge.NegativeU=>patch.GridCoordinate(0,step),PlanetaryPatchEdge.PositiveU=>patch.GridCoordinate(grid,step),PlanetaryPatchEdge.NegativeV=>patch.GridCoordinate(step,0),PlanetaryPatchEdge.PositiveV=>patch.GridCoordinate(step,grid),_=>throw new ArgumentOutOfRangeException(nameof(edge))};
+    }
 }
 
 static void PlanetaryTerrainResidencyAndSurfaceFrameTest()

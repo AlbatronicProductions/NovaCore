@@ -18,6 +18,22 @@ public readonly record struct PlanetaryPatch(CubeSphereFace Face,int Level,int X
     public PlanetaryPatch? Parent=>Level==0?null:new(Face,Level-1,X>>1,Y>>1);
     public PlanetaryPatch Child(int index)=>index is >=0 and <4?new(Face,Level+1,(X<<1)+(index&1),(Y<<1)+(index>>1)):throw new ArgumentOutOfRangeException(nameof(index));
     public (double MinX,double MinY,double MaxX,double MaxY) Bounds{get{var scale=Math.ScaleB(1d,-Level);return(X*scale,Y*scale,(X+1)*scale,(Y+1)*scale);}}
+    /// <summary>Maps a local grid vertex through the patch's exact dyadic integer lattice.</summary>
+    public (double U,double V) GridCoordinate(int gridX,int gridY,int gridResolution=PlanetaryTerrainDefinition.GridResolution)
+    {
+        if(Level is <0 or >24||gridResolution<=0||gridX is <0||gridY is <0||gridX>gridResolution||gridY>gridResolution)throw new ArgumentOutOfRangeException();
+        var denominator=(long)gridResolution<<Level;
+        return(((long)X*gridResolution+gridX)/(double)denominator,((long)Y*gridResolution+gridY)/(double)denominator);
+    }
+    /// <summary>Maps a parent grid vertex to the identical vertex in one selected child quadrant.</summary>
+    public static bool TryMapGridVertexToChild(int childIndex,int parentGridX,int parentGridY,out int childGridX,out int childGridY,int gridResolution=PlanetaryTerrainDefinition.GridResolution)
+    {
+        childGridX=childGridY=0;
+        if(childIndex is <0 or >3||gridResolution<=0||(gridResolution&1)!=0||parentGridX is <0||parentGridY is <0||parentGridX>gridResolution||parentGridY>gridResolution)throw new ArgumentOutOfRangeException();
+        var half=gridResolution/2;var quadrantX=childIndex&1;var quadrantY=childIndex>>1;
+        if(parentGridX<quadrantX*half||parentGridX>(quadrantX+1)*half||parentGridY<quadrantY*half||parentGridY>(quadrantY+1)*half)return false;
+        childGridX=(parentGridX-quadrantX*half)*2;childGridY=(parentGridY-quadrantY*half)*2;return true;
+    }
     public int CompareTo(PlanetaryPatch other){var face=Face.CompareTo(other.Face);if(face!=0)return face;var level=Level.CompareTo(other.Level);if(level!=0)return level;var x=X.CompareTo(other.X);return x!=0?x:Y.CompareTo(other.Y);}
 }
 
