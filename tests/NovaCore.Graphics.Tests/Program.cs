@@ -36,6 +36,7 @@ var tests = new (string, Action)[]
     ("Focus target authority", FocusTargetAuthorityTest),
     ("Planet material presentation", PlanetMaterialPresentationTest),
     ("Planet micro-normal foundation", PlanetMicroNormalFoundationTest),
+    ("Local ENU procedural terrain frequency", LocalEnuProceduralTerrainFrequencyTest),
     ("Planet surface scatter placement", PlanetarySurfaceScatterPlacementTest),
     ("Planetary environment presentation", PlanetaryEnvironmentPresentationTest),
     ("Earth authoritative presentation dataset", EarthAuthoritativeDatasetTest),
@@ -65,6 +66,66 @@ var tests = new (string, Action)[]
 };
 var testFilter=args.FirstOrDefault(argument=>argument.StartsWith("--test=",StringComparison.OrdinalIgnoreCase))?[7..];
 foreach (var (name, test) in tests) if(testFilter is null||name.Contains(testFilter,StringComparison.OrdinalIgnoreCase)){test();Console.WriteLine($"PASS {name}");}
+
+static void LocalEnuProceduralTerrainFrequencyTest()
+{
+    const double radius=6_371_008.8d;
+    var anchor=SurfaceAnchorFocus.AtDirection(SolarSystemBodyIds.Earth.Value,new Double3(.31d,.72d,.62d).Normalized(),radius,123.5d);
+    var basis=anchor.LocalTangentBasis;
+    var localSamples=new[]{new Double3(0,0,0),new Double3(1_250d,-875d,0),new Double3(-23_400d,9_125d,0),new Double3(71_000d,44_000d,0)};
+    var baseline=new double[localSamples.Length];
+    for(var index=0;index<localSamples.Length;index++)
+    {
+        var bodyPoint=basis.ToBodyFixed(localSamples[index],anchor.BodyLocalPosition);
+        var recovered=basis.ToLocal(bodyPoint,anchor.BodyLocalPosition);
+        baseline[index]=ProceduralValue(localSamples[index].X,localSamples[index].Y);
+        Check(Math.Sqrt((recovered-localSamples[index]).LengthSquared)<=1e-9d&&double.IsFinite(baseline[index]),"fixed ENU procedural coordinate is metric and finite");
+    }
+
+    var cameraOffsets=new[]{new Double3(100,0,2500),new Double3(-400,0,1200),new Double3(0,900,800),new Double3(250,-730,4300)};
+    foreach(var cameraOffset in cameraOffsets)
+        for(var index=0;index<localSamples.Length;index++)
+            Check(ProceduralValue(localSamples[index].X,localSamples[index].Y)==baseline[index]&&cameraOffset.IsFinite,"camera translation/orbit/zoom cannot enter the body-fixed procedural sample");
+
+    var rotations=new[]{DoubleQuaternion.Identity,DoubleQuaternion.FromAxisAngle(Double3.UnitY,.73d),DoubleQuaternion.FromAxisAngle(new Double3(.2d,.8d,.4d).Normalized(),2.1d)};
+    var maximumRecoveredDrift=0d;var maximumRotationValueError=0d;
+    foreach(var rotation in rotations)
+        for(var index=0;index<localSamples.Length;index++)
+        {
+            var bodyPoint=basis.ToBodyFixed(localSamples[index],anchor.BodyLocalPosition);
+            var rootPoint=rotation.Rotate(bodyPoint);
+            var recoveredBody=rotation.Conjugate().Normalized().Rotate(rootPoint);
+            var recovered=basis.ToLocal(recoveredBody,anchor.BodyLocalPosition);
+            maximumRecoveredDrift=Math.Max(maximumRecoveredDrift,Math.Sqrt((recovered-localSamples[index]).LengthSquared));
+            maximumRotationValueError=Math.Max(maximumRotationValueError,Math.Abs(ProceduralValue(recovered.X,recovered.Y)-baseline[index]));
+            Check(maximumRecoveredDrift<=1e-8d&&maximumRotationValueError<=1e-9d,"body rotation carries procedural pattern without changing geographic value");
+        }
+
+    var terrain=PlanetaryTerrainDefinition.EarthAuthoritativeV3;var direction=anchor.BodyFixedDirection;var elevation=terrain.SampleHeight(direction,24);var procedural=ProceduralValue(1250d,-875d);
+    Check(terrain.SampleHeight(direction,24)==elevation&&procedural is >=.82d and <=1.18d,"procedural material is bounded and does not enter terrain elevation authority");
+    var distances=new[]{0d,1200d,1200.001d,5000d,17999.999d,18000d,100000d};var previous=1d;var maximumFadeStep=0d;
+    foreach(var distance in distances){var fade=LocalFade(distance,1200d,18000d);Check(fade is >=0d and <=1d&&fade<=previous,"metric distance fade is bounded and monotonic");maximumFadeStep=Math.Max(maximumFadeStep,Math.Abs(fade-LocalFade(distance+1e-3d,1200d,18000d)));previous=fade;}
+    Check(LocalFade(0,1200,18000)==1d&&LocalFade(100000,1200,18000)==0d&&maximumFadeStep<1e-6d,"procedural detail is full at ground scale, absent at orbital scale, and has no hard activation threshold");
+
+    var shaderDirectory=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..","..","native","NovaCore.Native","shaders"));
+    var helper=File.ReadAllText(Path.Combine(shaderDirectory,"earth_land_detail.glsl"));var fragment=File.ReadAllText(Path.Combine(shaderDirectory,"planetary.frag"));
+    Check(helper.Contains("EarthFixedEnuMetres",StringComparison.Ordinal)&&helper.Contains("anchorDirection",StringComparison.Ordinal)&&!helper.Contains("camera",StringComparison.OrdinalIgnoreCase),"procedural coordinates derive only from body-fixed direction and fixed tangent anchor");
+    Check(helper.Contains("lowScale=max(localScale*64.0",StringComparison.Ordinal)&&helper.Contains("mediumScale=max(localScale*6.0",StringComparison.Ordinal)&&helper.Contains("highScale=max(microScale*8.0",StringComparison.Ordinal),"bounded low/medium/high frequency stack");
+    Check(fragment.Contains("EarthFixedEnuMetres(up,eyeDebug.tangentAnchorAngle.xyz",StringComparison.Ordinal)&&fragment.Contains("albedo*=mix(vec3(1),localMaterial.albedoMultiplier,localContribution)",StringComparison.Ordinal),"Earth land modulates authoritative macro albedo in fixed anchor ENU");
+    Check(fragment.IndexOf("if(ocean)",StringComparison.Ordinal)<fragment.IndexOf("else if(earthData)",StringComparison.Ordinal)&&!helper.Contains("earthAlbedoLand",StringComparison.Ordinal)&&!helper.Contains("terrainHeight",StringComparison.Ordinal),"ocean classification and terrain height remain upstream authority rather than procedural outputs");
+    Check(fragment.Contains("eyeDebug.identity.w!=0u?EarthLocalDetailFade",StringComparison.Ordinal),"local detail is continuously distance faded and requires the fixed Eyeball anchor");
+    Console.WriteLine($"Local ENU procedural terrain: cameraDrift=0.000E+000 m; bodyRotationRecovery={maximumRecoveredDrift:E3} m; rotationValueError={maximumRotationValueError:E3}; fadeStep={maximumFadeStep:E3}; modifier={procedural:F6}");
+
+    static double LocalFade(double distance,double start,double end){var t=Math.Clamp((distance-start)/(end-start),0d,1d);var smooth=t*t*(3d-2d*t);return 1d-smooth;}
+    static double ProceduralValue(double east,double north)
+    {
+        var low=Noise(east/(64d*64d)+19d,north/(64d*64d)+47d);var medium=Noise(east/(64d*6d)+71d,north/(64d*6d)+13d);var ridge=1d-Math.Abs(2d*medium-1d);var fineX=Noise(east/(3d*8d)+37d,north/(3d*8d)+83d);var fineY=Noise(east/(3d*8d)+109d,north/(3d*8d)+29d);var fine=.5d*(fineX+fineY);return Math.Clamp(1d+.16d*(low-.5d)+.12d*(ridge-.5d)+.05d*(fine-.5d),.82d,1.18d);
+    }
+    static double Noise(double x,double y){var ix=Math.Floor(x);var iy=Math.Floor(y);var fx=x-ix;var fy=y-iy;fx=fx*fx*(3d-2d*fx);fy=fy*fy*(3d-2d*fy);return Lerp(Lerp(Hash(ix,iy),Hash(ix+1,iy),fx),Lerp(Hash(ix,iy+1),Hash(ix+1,iy+1),fx),fy);}
+    static double Hash(double x,double y){var qx=Fract(x*.1031d);var qy=Fract(y*.1030d);var qz=Fract(x*.0973d);var dot=qx*(qy+33.33d)+qy*(qz+33.33d)+qz*(qx+33.33d);qx+=dot;qy+=dot;qz+=dot;return Fract((qx+qy)*qz);}
+    static double Fract(double value)=>value-Math.Floor(value);
+    static double Lerp(double a,double b,double t)=>a+(b-a)*t;
+}
 
 static void OpaqueRegionalEyeballHandoffTest()
 {

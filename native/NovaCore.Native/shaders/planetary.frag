@@ -2,6 +2,7 @@
 #extension GL_GOOGLE_include_directive : require
 #include "planet_material.glsl"
 #include "earth_ocean_material.glsl"
+#include "earth_land_detail.glsl"
 layout(location=0) in vec4 color;
 layout(location=1) in vec3 normal;
 layout(location=2) flat in vec3 lightDirection;
@@ -26,13 +27,11 @@ void main()
   vec3 up=normalize(bodyDirection);
   vec3 surfaceNormal=normalize(normal);
   float viewDistance=length(viewDirection);
-  float macroFade=clamp(1.0-smoothstep(220000.0,900000.0,viewDistance),0.0,1.0);
   float localScale=max(localDetail.x,1.0);
   float localMicroScale=max(localDetail.y,1.0);
   float localFadeStart=max(localDetail.z,0.0);
   float localFadeEnd=max(localDetail.w,localFadeStart+1.0);
-  float localBlend=clamp(1.0-smoothstep(localFadeStart,localFadeEnd,viewDistance),0.0,1.0);
-  float localContribution=localBlend*macroFade;
+  float localContribution=eyeDebug.identity.w!=0u?EarthLocalDetailFade(viewDistance,localFadeStart,localFadeEnd):0.0;
 
   vec3 albedo=PlanetAlbedo(material.x,up,color.rgb,response.w);
   float roughness=response.x;
@@ -100,16 +99,16 @@ void main()
   else if(earthData)
   {
     float slope=1.0-clamp(dot(surfaceNormal,up),0.0,1.0);
-    float local=PlanetTriplanarNoise(PlanetWrappedBodyCoordinate(bodyPosition,up,localScale),surfaceNormal);
-    float surface=PlanetTriplanarNoise(PlanetWrappedBodyCoordinate(bodyPosition,up,localMicroScale)+vec3(31.0,17.0,7.0),surfaceNormal);
-    vec2 micro=ProjectWorldVectorToBc5Tangent(surfaceNormal,PlanetTangentDetailCoordinate(PlanetWrappedBodyCoordinate(bodyPosition,up,localMicroScale),up,surfaceNormal));
-
-    albedo*=.88+.20*local+.08*surface;
-    albedo=mix(albedo,albedo*(0.94+0.12*(local-.5)),localContribution);
-    albedo=mix(albedo,albedo*.62+vec3(.10,.09,.075),smoothstep(.12,.36,slope)*.28);
-    surfaceNormal=ComposeMicroNormal(surfaceNormal,micro,localContribution,0.24);
-    roughness=clamp(.74+.16*(surface-.5)+0.12*(local-.5)*localContribution,.48,.94);
-    specular=0.035;
+    if(localContribution>0.0)
+    {
+      vec2 localEnu=EarthFixedEnuMetres(up,eyeDebug.tangentAnchorAngle.xyz,environment.centerRadius.w);
+      EarthLandProceduralMaterial localMaterial=EarthLandProceduralSample(localEnu,localScale,localMicroScale);
+      albedo*=mix(vec3(1),localMaterial.albedoMultiplier,localContribution);
+      albedo=mix(albedo,albedo*.72+vec3(.10,.09,.075),smoothstep(.12,.36,slope)*.20*localContribution);
+      surfaceNormal=ComposeMicroNormal(surfaceNormal,localMaterial.encodedMicroNormal,localContribution,0.20);
+      roughness=mix(roughness,clamp(.78+localMaterial.roughnessOffset,.55,.94),localContribution);
+      specular=mix(specular,.035,localContribution);
+    }
   }
 
   if((environment.identity.z&2u)!=0u)
