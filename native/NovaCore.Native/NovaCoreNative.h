@@ -23,6 +23,7 @@ struct alignas(16) NcPlanetaryGpuConstants {
   float refinementThreshold, nearFieldAltitudeRadii, surfaceAltitudeMetres, maximumTerrainHeightMetres;
   uint32_t maximumLevel, outputCapacity, terrainVersion, terrainFrame;
   float viewForwardX, viewForwardY, viewForwardZ, viewHalfAngleRadians;
+  float viewportHeightPixels, verticalTanHalfFov, targetTexelPixels, requestedAlbedoLevel;
 };
 struct alignas(16) NcPlanetaryEyeball {
   float cameraBodyHighX, cameraBodyHighY, cameraBodyHighZ, radiusHigh;

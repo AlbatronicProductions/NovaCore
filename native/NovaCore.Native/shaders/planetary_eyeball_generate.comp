@@ -5,7 +5,7 @@
 #include "earth_virtual_texture.glsl"
 
 struct EyeballVertex { vec4 positionHeight; vec4 normal; vec4 bodyDirection; };
-layout(std430,set=0,binding=2) readonly buffer PlanetaryInput { vec4 cameraHighRadiusHigh; vec4 cameraLowRadiusLow; vec4 thresholds; uvec4 controls; vec4 viewForwardHalfAngle; } planetaryInput;
+layout(std430,set=0,binding=2) readonly buffer PlanetaryInput { vec4 cameraHighRadiusHigh; vec4 cameraLowRadiusLow; vec4 thresholds; uvec4 controls; vec4 viewForwardHalfAngle; vec4 textureDemand; } planetaryInput;
 layout(std430,set=0,binding=12) readonly buffer EyeballInput {
   vec4 cameraHighRadiusHigh; vec4 cameraLowRadiusLow; vec4 surface;
   uvec4 identity; vec4 tangentAnchorAngle; vec4 mapping;
@@ -18,7 +18,7 @@ layout(local_size_x=256,local_size_y=1,local_size_z=1) in;
 dvec3 CameraD(){return dvec3(eye.cameraHighRadiusHigh.xyz)+dvec3(eye.cameraLowRadiusLow.xyz);}
 double RadiusD(){return double(eye.cameraHighRadiusHigh.w)+double(eye.cameraLowRadiusLow.w);}
 dvec3 TangentReference(dvec3 direction){return abs(direction.y)<.95?dvec3(0,1,0):dvec3(1,0,0);}
-uint EarthRequestedLevel(){return EarthRequestedLevelForAltitude(eye.surface.x);}
+uint EarthRequestedLevel(){return uint(planetaryInput.textureDemand.w);}
 double EarthHeight(dvec3 direction){vec4 albedo;float elevation,cloud,blend;uint resident;EarthSurfaceSample(vec3(direction),EarthRequestedLevel(),planetaryInput.controls.w,albedo,elevation,cloud,blend,resident);return double(max(elevation,0.0));}
 double SurfaceHeight(dvec3 direction){double raw=eye.identity.z==3u?EarthHeight(direction):PlanetTerrainHeightD(direction,24u,double(eye.surface.y));return max(raw,double(eye.surface.z));}
 void main(){

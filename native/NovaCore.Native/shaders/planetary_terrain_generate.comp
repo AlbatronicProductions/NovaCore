@@ -6,7 +6,7 @@
 
 struct PlanetaryPatch { uvec4 address; vec4 centerRadius; vec4 color; uvec4 transitions; };
 layout(std430,set=0,binding=1) readonly buffer Patches { PlanetaryPatch patches[]; } patchData;
-layout(std430,set=0,binding=2) readonly buffer Input { vec4 cameraHighRadiusHigh; vec4 cameraLowRadiusLow; vec4 thresholds; uvec4 controls; vec4 viewForwardHalfAngle; } inputData;
+layout(std430,set=0,binding=2) readonly buffer Input { vec4 cameraHighRadiusHigh; vec4 cameraLowRadiusLow; vec4 thresholds; uvec4 controls; vec4 viewForwardHalfAngle; vec4 textureDemand; } inputData;
 layout(std430,set=0,binding=5) readonly buffer Control { uint values[]; } outputData;
 layout(std430,set=0,binding=9) buffer TerrainSamples { vec2 heights[]; } terrainData;
 layout(std430,set=0,binding=10) readonly buffer PatchTerrainSlots { uvec2 values[]; } patchTerrain;
@@ -19,5 +19,5 @@ dvec3 ProjectGridD(uvec4 address,uvec2 grid){uint denominator=16u<<address.y;uve
 void main(){
   uint patchIndex=gl_WorkGroupID.x;if(patchIndex>=outputData.values[1])return;uvec2 mapping=patchTerrain.values[patchIndex];if(mapping.y==0u)return;
   uvec4 address=patchData.patches[patchIndex].address;
-  for(uint vertex=gl_LocalInvocationID.x;vertex<GRID_VERTICES;vertex+=gl_WorkGroupSize.x){uint x=vertex%17u,y=vertex/17u;dvec3 direction=ProjectGridD(address,uvec2(x,y));float height;if(inputData.controls.z==3u){vec4 albedo;float elevation,cloud,blend;uint resident;EarthSurfaceSample(vec3(direction),EarthRequestedLevelForAltitude(inputData.thresholds.z),inputData.controls.w,albedo,elevation,cloud,blend,resident);height=max(elevation,0.0);}else height=float(PlanetTerrainHeightD(direction,24u,double(inputData.thresholds.w)));terrainData.heights[mapping.x*GRID_VERTICES+vertex]=vec2(height);}
+  for(uint vertex=gl_LocalInvocationID.x;vertex<GRID_VERTICES;vertex+=gl_WorkGroupSize.x){uint x=vertex%17u,y=vertex/17u;dvec3 direction=ProjectGridD(address,uvec2(x,y));float height;if(inputData.controls.z==3u){vec4 albedo;float elevation,cloud,blend;uint resident;EarthSurfaceSample(vec3(direction),uint(inputData.textureDemand.w),inputData.controls.w,albedo,elevation,cloud,blend,resident);height=max(elevation,0.0);}else height=float(PlanetTerrainHeightD(direction,24u,double(inputData.thresholds.w)));terrainData.heights[mapping.x*GRID_VERTICES+vertex]=vec2(height);}
 }

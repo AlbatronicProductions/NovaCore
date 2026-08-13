@@ -1,10 +1,11 @@
 {
   "schema": "NovaCore.EarthVirtualTexture/3",
   "pack": "earth_surface_v3.ncvtex",
-  "packBytes": 162781056,
-  "packSha256": "a16aebd834f01bdd430790de499a095d55f895655ce037fe25b6e13106674dc5",
-  "identitySha256": "664ff32c3a57043960f246d5d97397214cedc4b976e48e867e9803c414d796b5",
-  "payloadSha256": "d09a9ddf944242a7d322ae3ce58c1b0b31014feb8d6a330fb9d592e438e9d306",
+  "packBytes": 301225856,
+  "packSha256": "ff8c9dc418edde5a6b989acbbfe1d79be7738b66ea448421560ed0e0c91fa9b9",
+  "identitySha256": "b1688be77ef4c8936b6d87bfb8600f4367ce7c6fe89bd60fb317a91433857e69",
+  "payloadSha256": "6124510039be72edb86b7489685d5795daa3ff4ba8265c1484e742804ff5e726",
+  "projection": "EPSG:4326 equirectangular, north-up, longitude [-180,180)",
   "tile": {
     "logical": 256,
     "gutter": 2,
@@ -16,8 +17,8 @@
       "semantic": "Albedo",
       "format": "BC7_SRGB",
       "colorSpace": "SRGB",
-      "maximumLevel": 4,
-      "tileCount": 682,
+      "maximumLevel": 5,
+      "tileCount": 2730,
       "tileBytes": 67600,
       "sectionOffset": 256
     },
@@ -28,7 +29,7 @@
       "maximumLevel": 4,
       "tileCount": 682,
       "tileBytes": 135200,
-      "sectionOffset": 46103456
+      "sectionOffset": 184548256
     },
     {
       "semantic": "LandMask",
@@ -37,7 +38,7 @@
       "maximumLevel": 4,
       "tileCount": 682,
       "tileBytes": 33800,
-      "sectionOffset": 138309856
+      "sectionOffset": 276754656
     },
     {
       "semantic": "Cloud",
@@ -46,91 +47,53 @@
       "maximumLevel": 2,
       "tileCount": 42,
       "tileBytes": 33800,
-      "sectionOffset": 161361456
+      "sectionOffset": 299806256
     }
   ],
   "quality": {
-    "bc1": {
-      "global": {
-        "rmse": 3.293486836259291,
-        "psnrDb": 37.777684969699735,
-        "samples": 138309600
-      },
-      "coastline": {
-        "rmse": 11.141336839414263,
-        "psnrDb": 27.19205751697401,
-        "samples": 4876704
-      },
-      "high_contrast": {
-        "rmse": 12.058864743289574,
-        "psnrDb": 26.504675129100708,
-        "samples": 6726672
-      },
-      "desert": {
-        "rmse": 4.185554260169578,
-        "psnrDb": 35.695744081593304,
-        "samples": 8158620
-      },
-      "ice_snow": {
-        "rmse": 4.040997803429173,
-        "psnrDb": 36.00103132122604,
-        "samples": 23913336
-      },
-      "ocean": {
-        "rmse": 2.359266034711662,
-        "psnrDb": 40.67526530056507,
-        "samples": 91155690
-      }
-    },
     "bc7": {
       "global": {
-        "rmse": 1.3850784737868962,
-        "psnrDb": 45.30131601406822,
-        "samples": 138309600
-      },
-      "coastline": {
-        "rmse": 5.79587632225087,
-        "psnrDb": 32.868421418234874,
-        "samples": 4876704
-      },
-      "high_contrast": {
-        "rmse": 5.047081177852676,
-        "psnrDb": 34.06999780800204,
-        "samples": 6726672
-      },
-      "desert": {
-        "rmse": 1.7382738015327637,
-        "psnrDb": 43.32843991407492,
-        "samples": 8158620
-      },
-      "ice_snow": {
-        "rmse": 1.181639618866101,
-        "psnrDb": 46.681102730941255,
-        "samples": 23913336
-      },
-      "ocean": {
-        "rmse": 1.3036818924565596,
-        "psnrDb": 45.827370940338824,
-        "samples": 91155690
+        "rmse": 1.3164418210501734,
+        "psnrDb": 45.742770196353675,
+        "samples": 553644000
       }
-    },
-    "coastlineMaskBc4": {
-      "rmse": 0.6588727281985256,
-      "psnrDb": 51.75477297322418
-    },
-    "cloudBc4": {
-      "rmse": 2.5688092561820115,
-      "psnrDb": 39.936166459616004
     }
   },
-  "sourcePack": {
-    "name": "earth_surface_v2.ncvtex",
-    "sha256": "dbcc006dc6a29d88b64b1dd4bca2ef63e7ac32879a30da6685d9db8b1860ae73"
+  "source": {
+    "role": "global albedo",
+    "authority": "NASA Earth Observatory / Visible Earth",
+    "product": "Blue Marble: Next Generation, December 2004, cloud-free true color",
+    "file": "nasa-blue-marble-2004-12-21600x10800.png",
+    "sha256": "4ee45a0a18229e5667b3523088567e11ea4d857ceac8d7a2d7b6130d5376c5a6",
+    "dimensions": [
+      21600,
+      10800
+    ],
+    "canonicalUrl": "https://eoimages.gsfc.nasa.gov/images/imagerecords/74000/74218/world.200412.3x21600x10800.png",
+    "date": "2004-12",
+    "retrieved": "2026-08-12",
+    "status": "NASA U.S. Government media; NASA media usage guidelines apply; no endorsement implied",
+    "attribution": "NASA Earth Observatory, Blue Marble: Next Generation"
+  },
+  "transformation": [
+    "decode source PNG as RGB without geographic reprojection",
+    "deterministic Lanczos resample to each registered 2:1 EPSG:4326 SVT level through 16384x8192",
+    "longitude-wrap and polar-clamp two-texel gutters",
+    "deterministic opaque BC7 mode-6 sRGB encoding"
+  ],
+  "preservedBaseChannels": {
+    "sourcePackName": "earth_surface_v3.ncvtex",
+    "sectionSha256": {
+      "Elevation": "e16390be4dc29f4e6d9e1f6c05da4defbdc137c4fbde04f7be1c91fd9167d1a0",
+      "LandMask": "2a4cf82dbe3d2d369dedb4f259457d75ac42626b438f3d4b9da8c9a059787c12",
+      "Cloud": "69abfe02022214e0f9b9fbc074036af993ec7fc58f499a391d7f1dfa93d03bbe"
+    }
   },
   "encoder": {
-    "name": "NovaCore deterministic NumPy BC1/BC4/BC7-mode6",
+    "name": "NovaCore deterministic NumPy BC7-mode6",
     "version": 1,
     "numpyVersion": "2.3.5",
+    "pillowVersion": "12.2.0",
     "runtimeDependency": false
   }
 }

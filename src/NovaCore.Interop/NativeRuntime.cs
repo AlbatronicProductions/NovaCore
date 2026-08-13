@@ -40,6 +40,7 @@ public struct NativeDrawBatch { public NativeMeshHandle Mesh; public uint FirstO
     public float RefinementThreshold,NearFieldAltitudeRadii,SurfaceAltitudeMetres,MaximumTerrainHeightMetres;
     public uint MaximumLevel,OutputCapacity,TerrainVersion,TerrainFrame;
     public float ViewForwardX,ViewForwardY,ViewForwardZ,ViewHalfAngleRadians;
+    public float ViewportHeightPixels,VerticalTanHalfFov,TargetTexelPixels,RequestedAlbedoLevel;
 }
 [StructLayout(LayoutKind.Sequential)] public struct NativePlanetaryEyeball
 {

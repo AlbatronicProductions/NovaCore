@@ -18,6 +18,10 @@ import struct
 from pathlib import Path
 
 import numpy as np
+import PIL
+from PIL import Image
+
+Image.MAX_IMAGE_PIXELS = None
 
 NUMPY_VERSION = "2.3.5"
 
@@ -31,6 +35,8 @@ GUTTER = 2
 EXTENT = 260
 MAXIMUM_LEVEL = 4
 TILE_COUNT = 682
+ALBEDO_MAXIMUM_LEVEL = 5
+ALBEDO_TILE_COUNT = 2730
 BLOCKS_PER_TILE = (EXTENT // 4) ** 2
 BC1_TILE_BYTES = BLOCKS_PER_TILE * 8
 BC7_TILE_BYTES = BLOCKS_PER_TILE * 16
@@ -204,6 +210,173 @@ def write_header(stream, identity: bytes, payload: bytes, descriptors: list[tupl
     stream.write(header)
 
 
+def guttered(array: np.ndarray, x: int, y: int) -> np.ndarray:
+    height, width = array.shape[:2]
+    x0, y0 = x * TILE_SIZE, y * TILE_SIZE
+    xs = np.mod(np.arange(x0 - GUTTER, x0 + TILE_SIZE + GUTTER), width)
+    ys = np.clip(np.arange(y0 - GUTTER, y0 + TILE_SIZE + GUTTER), 0, height - 1)
+    return array[np.ix_(ys, xs)]
+
+
+def validate_gutters(source: np.ndarray, tile: np.ndarray, x: int, y: int) -> None:
+    height, width = source.shape[:2]
+    x0, y0 = x * TILE_SIZE, y * TILE_SIZE
+    xs = np.mod(np.arange(x0 - GUTTER, x0 + TILE_SIZE + GUTTER), width)
+    ys = np.clip(np.arange(y0 - GUTTER, y0 + TILE_SIZE + GUTTER), 0, height - 1)
+    if tile.shape != (EXTENT, EXTENT, 3) or not np.array_equal(tile, source[np.ix_(ys, xs)]):
+        raise RuntimeError(f"Albedo tile {x},{y} geographic registration failed.")
+
+
+def read_v3_descriptors(path: Path) -> tuple[bytes, list[tuple[int, int, int, int, int, int, int]]]:
+    with path.open("rb") as stream:
+        header = stream.read(V3_HEADER_BYTES)
+    if len(header) != V3_HEADER_BYTES or header[:8] != V3_MAGIC or struct.unpack_from("<I", header, 8)[0] != VERSION:
+        raise ValueError("Base input is not a NovaCore Earth SVT v3 pack.")
+    if struct.unpack_from("<I", header, 12)[0] != V3_HEADER_BYTES or struct.unpack_from("<I", header, 36)[0] != 4:
+        raise ValueError("Base v3 pack header/channel contract is incompatible.")
+    descriptors = [struct.unpack_from("<6IQ", header, 112 + index * 32) for index in range(4)]
+    return header, descriptors
+
+
+def copy_section(source, target, source_offset: int, target_offset: int, byte_count: int) -> str:
+    digest = hashlib.sha256()
+    source.seek(source_offset)
+    target.seek(target_offset)
+    remaining = byte_count
+    while remaining:
+        block = source.read(min(1024 * 1024, remaining))
+        if not block:
+            raise EOFError("Base v3 channel section is truncated.")
+        target.write(block)
+        digest.update(block)
+        remaining -= len(block)
+    return digest.hexdigest()
+
+
+def upgrade_global_albedo(args: argparse.Namespace) -> int:
+    if not args.albedo or not args.albedo.is_file():
+        raise FileNotFoundError(args.albedo)
+    if not args.retrieval_date:
+        raise ValueError("--retrieval-date is required for a global-albedo provenance build.")
+
+    _, base_descriptors = read_v3_descriptors(args.input)
+    expected_preserved = ((2, 2, 0, 4, 682, R16_TILE_BYTES),
+                          (3, 3, 0, 4, 682, BC4_TILE_BYTES),
+                          (4, 3, 0, 2, 42, BC4_TILE_BYTES))
+    for descriptor, expected in zip(base_descriptors[1:], expected_preserved, strict=True):
+        if descriptor[:6] != expected:
+            raise ValueError(f"Base v3 preserved-channel descriptor {descriptor[:6]} != {expected}.")
+
+    descriptors: list[tuple[int, int, int, int, int, int, int]] = []
+    offset = V3_HEADER_BYTES
+    for semantic, fmt, color_space, maximum_lod, count, byte_count in (
+        (1, 4, 1, ALBEDO_MAXIMUM_LEVEL, ALBEDO_TILE_COUNT, BC7_TILE_BYTES),
+        *[(d[0], d[1], d[2], d[3], d[4], d[5]) for d in base_descriptors[1:]],
+    ):
+        descriptors.append((semantic, fmt, color_space, maximum_lod, count, byte_count, offset))
+        offset += count * byte_count
+
+    source_hash = sha256(args.albedo)
+    preserved_hashes: dict[str, str] = {}
+    squared_error = 0
+    sample_count = 0
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    with args.input.open("rb") as base, args.output.open("w+b") as target, Image.open(args.albedo) as source_image:
+        if source_image.size[0] < TILE_SIZE * (1 << (ALBEDO_MAXIMUM_LEVEL + 1)) or source_image.size[1] < TILE_SIZE * (1 << ALBEDO_MAXIMUM_LEVEL):
+            raise ValueError("The albedo source lacks genuine information for the requested L5 hierarchy.")
+        target.truncate(offset)
+        for level in range(ALBEDO_MAXIMUM_LEVEL + 1):
+            width = TILE_SIZE * (1 << (level + 1))
+            height = TILE_SIZE * (1 << level)
+            level_image = source_image.convert("RGB").resize((width, height), Image.Resampling.LANCZOS)
+            level_pixels = np.asarray(level_image, dtype=np.uint8)
+            for y in range(1 << level):
+                for x in range(1 << (level + 1)):
+                    tile = guttered(level_pixels, x, y)
+                    validate_gutters(level_pixels, tile, x, y)
+                    encoded, decoded = encode_bc7_mode6(tile)
+                    index = sum(2 * 4**prior for prior in range(level)) + y * (1 << (level + 1)) + x
+                    target.seek(descriptors[0][6] + index * BC7_TILE_BYTES)
+                    target.write(encoded)
+                    delta = tile.astype(np.int32) - decoded.astype(np.int32)
+                    squared_error += int((delta * delta).sum())
+                    sample_count += delta.size
+            del level_pixels, level_image
+
+        for name, base_descriptor, descriptor in zip(
+            ("Elevation", "LandMask", "Cloud"), base_descriptors[1:], descriptors[1:], strict=True
+        ):
+            byte_count = base_descriptor[4] * base_descriptor[5]
+            preserved_hashes[name] = copy_section(base, target, base_descriptor[6], descriptor[6], byte_count)
+
+        payload = hashlib.sha256()
+        target.seek(V3_HEADER_BYTES)
+        while block := target.read(1024 * 1024):
+            payload.update(block)
+        identity = hashlib.sha256()
+        identity.update(V3_MAGIC)
+        identity.update(struct.pack("<7I", VERSION, TILE_SIZE, GUTTER, ALBEDO_MAXIMUM_LEVEL,
+                                    ALBEDO_TILE_COUNT, EXTENT, len(descriptors)))
+        for descriptor in descriptors:
+            identity.update(struct.pack("<6I", *descriptor[:6]))
+        identity.update(bytes.fromhex(source_hash))
+        for name in ("Elevation", "LandMask", "Cloud"):
+            identity.update(bytes.fromhex(preserved_hashes[name]))
+        header = bytearray(V3_HEADER_BYTES)
+        struct.pack_into("<8s8I2f32s32s", header, 0, V3_MAGIC, VERSION, V3_HEADER_BYTES, TILE_SIZE, GUTTER,
+                         ALBEDO_MAXIMUM_LEVEL, ALBEDO_TILE_COUNT, EXTENT, len(descriptors), -11000.0, 9000.0,
+                         identity.digest(), payload.digest())
+        for index, descriptor in enumerate(descriptors):
+            struct.pack_into("<6IQ", header, 112 + index * 32, *descriptor)
+        target.seek(0)
+        target.write(header)
+
+    rmse = math.sqrt(squared_error / sample_count)
+    manifest = {
+        "schema": "NovaCore.EarthVirtualTexture/3",
+        "pack": args.output.name,
+        "packBytes": args.output.stat().st_size,
+        "packSha256": sha256(args.output),
+        "identitySha256": identity.hexdigest(),
+        "payloadSha256": payload.hexdigest(),
+        "projection": "EPSG:4326 equirectangular, north-up, longitude [-180,180)",
+        "tile": {"logical": TILE_SIZE, "gutter": GUTTER, "physical": EXTENT, "blockAligned": True},
+        "channels": [
+            {"semantic": name, "format": fmt_name, "colorSpace": color, "maximumLevel": descriptor[3],
+             "tileCount": descriptor[4], "tileBytes": descriptor[5], "sectionOffset": descriptor[6]}
+            for name, fmt_name, color, descriptor in zip(
+                ("Albedo", "Elevation", "LandMask", "Cloud"),
+                ("BC7_SRGB", "R16_UNORM", "BC4_UNORM", "BC4_UNORM"),
+                ("SRGB", "Linear", "Linear", "Linear"), descriptors, strict=True)
+        ],
+        "quality": {"bc7": {"global": {"rmse": rmse, "psnrDb": psnr(squared_error, sample_count),
+                                            "samples": sample_count}}},
+        "source": {
+            "role": "global albedo", "authority": "NASA Earth Observatory / Visible Earth",
+            "product": "Blue Marble: Next Generation, December 2004, cloud-free true color",
+            "file": args.albedo.name, "sha256": source_hash, "dimensions": [21600, 10800],
+            "canonicalUrl": "https://eoimages.gsfc.nasa.gov/images/imagerecords/74000/74218/world.200412.3x21600x10800.png",
+            "date": "2004-12", "retrieved": args.retrieval_date,
+            "status": "NASA U.S. Government media; NASA media usage guidelines apply; no endorsement implied",
+            "attribution": "NASA Earth Observatory, Blue Marble: Next Generation"
+        },
+        "transformation": [
+            "decode source PNG as RGB without geographic reprojection",
+            "deterministic Lanczos resample to each registered 2:1 EPSG:4326 SVT level through 16384x8192",
+            "longitude-wrap and polar-clamp two-texel gutters",
+            "deterministic opaque BC7 mode-6 sRGB encoding"
+        ],
+        "preservedBaseChannels": {"sourcePackName": args.input.name,
+                                  "sectionSha256": preserved_hashes},
+        "encoder": {"name": "NovaCore deterministic NumPy BC7-mode6", "version": 1,
+                    "numpyVersion": NUMPY_VERSION, "pillowVersion": PIL.__version__, "runtimeDependency": False},
+    }
+    args.manifest.parent.mkdir(parents=True, exist_ok=True)
+    args.manifest.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps(manifest, indent=2))
+    return 0
+
+
 def main() -> int:
     if np.__version__ != NUMPY_VERSION:
         raise RuntimeError(f"This deterministic converter requires NumPy {NUMPY_VERSION}; found {np.__version__}.")
@@ -211,9 +384,14 @@ def main() -> int:
     parser.add_argument("--input", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--manifest", required=True, type=Path)
+    parser.add_argument("--albedo", type=Path,
+                        help="Replace only global albedo using this authoritative source; input must be v3.")
+    parser.add_argument("--retrieval-date", help="Explicit YYYY-MM-DD provenance value for --albedo builds.")
     args = parser.parse_args()
     if not args.input.is_file():
         raise FileNotFoundError(args.input)
+    if args.albedo:
+        return upgrade_global_albedo(args)
 
     descriptors: list[tuple[int, int, int, int, int, int, int]] = []
     offset = V3_HEADER_BYTES

@@ -614,7 +614,8 @@ internal sealed class SolarSystemScene
             NearFieldAltitudeRadii = (float)EarthPlanetaryScene.RegionalLodConfiguration.NearFieldAltitudeRadii,
             SurfaceAltitudeMetres=(float)(terrain.IsValid?Math.Max(EarthPlanetaryScene.MinimumTerrainClearanceMetres,Math.Sqrt(relative.LengthSquared)-PlanetaryTerrainQuery.SurfaceRadius(body.RadiusMetres,relative.Normalized(),terrain)):Math.Max(0d,Math.Sqrt(relative.LengthSquared)-body.RadiusMetres)),MaximumTerrainHeightMetres=(float)(terrain.IsValid?terrain.MaximumHeightMetres:0d),MaximumLevel = EarthPlanetaryScene.RegionalMaximumLod,
             OutputCapacity = EarthPlanetaryScene.MaximumPatchCapacity,TerrainVersion=terrain.Version,
-            ViewForwardX=(float)viewForward.X,ViewForwardY=(float)viewForward.Y,ViewForwardZ=(float)viewForward.Z,ViewHalfAngleRadians=(float)halfAngle
+            ViewForwardX=(float)viewForward.X,ViewForwardY=(float)viewForward.Y,ViewForwardZ=(float)viewForward.Z,ViewHalfAngleRadians=(float)halfAngle,
+            ViewportHeightPixels=(float)EarthPlanetaryScene.ProofViewportHeightPixels,VerticalTanHalfFov=(float)tanY,TargetTexelPixels=(float)EarthSurfaceDemandPolicy.TargetTexelPixels,RequestedAlbedoLevel=1f
         };
     }
 

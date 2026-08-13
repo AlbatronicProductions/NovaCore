@@ -7,7 +7,7 @@ struct Presentation { vec4 centerRadius; vec4 colorDistant; vec4 blendMetricStat
 struct Environment { vec4 centerRadius; uvec4 identity; vec4 atmosphere; vec4 scattering; vec4 clouds; vec4 cloudShape; vec4 ocean; vec4 oceanColorExposure; };
 layout(std430,set=0,binding=0) readonly buffer Frame { GpuCameraData camera; } frameData;
 layout(std430,set=0,binding=1) readonly buffer Patches { PlanetaryPatch patches[]; } patchData;
-layout(std430,set=0,binding=2) readonly buffer Input { vec4 cameraHighRadiusHigh; vec4 cameraLowRadiusLow; vec4 thresholds; uvec4 controls; vec4 viewForwardHalfAngle; } inputData;
+layout(std430,set=0,binding=2) readonly buffer Input { vec4 cameraHighRadiusHigh; vec4 cameraLowRadiusLow; vec4 thresholds; uvec4 controls; vec4 viewForwardHalfAngle; vec4 textureDemand; } inputData;
 layout(std430,set=0,binding=6) readonly buffer Presentations { Presentation values[]; } presentations;
 layout(std430,set=0,binding=9) readonly buffer TerrainSamples { vec2 heights[]; } terrainData;
 layout(std430,set=0,binding=10) readonly buffer PatchTerrainSlots { uvec2 values[]; } patchTerrain;

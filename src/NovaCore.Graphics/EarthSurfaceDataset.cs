@@ -8,17 +8,20 @@ namespace NovaCore.Graphics;
 public static class EarthSurfaceDatasetContract
 {
     public const string Schema = "NovaCore.EarthVirtualTexture/3";
-    public const string IdentitySha256 = "664ff32c3a57043960f246d5d97397214cedc4b976e48e867e9803c414d796b5";
-    public const string PayloadSha256 = "d09a9ddf944242a7d322ae3ce58c1b0b31014feb8d6a330fb9d592e438e9d306";
-    public const string RuntimePackSha256 = "a16aebd834f01bdd430790de499a095d55f895655ce037fe25b6e13106674dc5";
-    public const string ManifestSha256 = "868769b2499bab96b32c3f5c5ea6b444db5c747294dd0e1e497057bf4e85e19b";
+    public const string IdentitySha256 = "b1688be77ef4c8936b6d87bfb8600f4367ce7c6fe89bd60fb317a91433857e69";
+    public const string PayloadSha256 = "6124510039be72edb86b7489685d5795daa3ff4ba8265c1484e742804ff5e726";
+    public const string RuntimePackSha256 = "ff8c9dc418edde5a6b989acbbfe1d79be7738b66ea448421560ed0e0c91fa9b9";
+    public const string ManifestSha256 = "b609648e69e8dce1fe3227e5ce1c30d17cfd43561d632bcf8ec934b23efb31f8";
     public const string ElevationSha256 = "4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317";
     public const string ElevationPackSectionSha256 = "e16390be4dc29f4e6d9e1f6c05da4defbdc137c4fbde04f7be1c91fd9167d1a0";
     public const int TileSize = 256;
     public const int TileGutter = 2;
     public const int PhysicalTileExtent = 260;
-    public const int MaximumLevel = 4;
-    public const int TileCount = 682;
+    public const int MaximumLevel = 5;
+    public const int TileCount = 2730;
+    public const int AlbedoMaximumLevel = 5;
+    public const int ElevationMaximumLevel = 4;
+    public const int LandMaskMaximumLevel = 4;
     public const int ElevationWidth = 8192;
     public const int ElevationHeight = 4096;
     public const int HeaderBytes = 256;
@@ -31,7 +34,7 @@ public static class EarthSurfaceDatasetContract
     public const int CloudTileCount = 42;
     public const int UploadBudgetChannels = 4;
     public const int StagingBudgetBytes = 1_081_600;
-    public const long RuntimePackBytes = 162_781_056;
+    public const long RuntimePackBytes = 301_225_856;
     public const double MinimumElevationMetres = -11_000d;
     public const double MaximumElevationMetres = 9_000d;
     public const long PhysicalPoolBudgetBytes = 34_611_200;
@@ -59,7 +62,7 @@ public static class PlanetaryTextureFormatPolicy
 {
     private static readonly PlanetaryTextureChannelPolicy[] EarthChannels =
     [
-        new(PlanetaryTextureSemantic.Albedo,PlanetaryGpuTextureFormat.Bc7Srgb,PlanetaryTextureColorSpace.Srgb,4,false),
+        new(PlanetaryTextureSemantic.Albedo,PlanetaryGpuTextureFormat.Bc7Srgb,PlanetaryTextureColorSpace.Srgb,5,false),
         new(PlanetaryTextureSemantic.Elevation,PlanetaryGpuTextureFormat.R16Unorm,PlanetaryTextureColorSpace.Linear,4,true),
         new(PlanetaryTextureSemantic.LandMask,PlanetaryGpuTextureFormat.Bc4Unorm,PlanetaryTextureColorSpace.Linear,4,false),
         new(PlanetaryTextureSemantic.Cloud,PlanetaryGpuTextureFormat.Bc4Unorm,PlanetaryTextureColorSpace.Linear,2,false)
@@ -72,16 +75,26 @@ public static class PlanetaryTextureFormatPolicy
 public static class EarthSurfaceDemandPolicy
 {
     public const int FinestNeighborhoodRadiusTiles=2;
-    public static int RequestedLevel(double surfaceAltitudeMetres)
+    public const double TargetTexelPixels=1.5d;
+    public const double DemotionTexelPixels=.75d;
+    public static double ProjectedTexelPixels(double bodyRadiusMetres,double surfaceDistanceMetres,double viewportHeightPixels,double verticalFieldOfViewRadians,int level)
     {
-        if(!double.IsFinite(surfaceAltitudeMetres)||surfaceAltitudeMetres<0d)throw new ArgumentOutOfRangeException(nameof(surfaceAltitudeMetres));
-        return surfaceAltitudeMetres>1_000_000d?1:surfaceAltitudeMetres>100_000d?2:surfaceAltitudeMetres>10_000d?3:EarthSurfaceDatasetContract.MaximumLevel;
+        if(!double.IsFinite(surfaceDistanceMetres)||surfaceDistanceMetres<=0d||!double.IsFinite(viewportHeightPixels)||viewportHeightPixels<=0d||!double.IsFinite(verticalFieldOfViewRadians)||verticalFieldOfViewRadians<=0d||verticalFieldOfViewRadians>=Math.PI)throw new ArgumentOutOfRangeException();
+        var metresPerPixel=2d*surfaceDistanceMetres*Math.Tan(verticalFieldOfViewRadians*.5d)/viewportHeightPixels;
+        return EquatorialMetresPerTexel(bodyRadiusMetres,level)/metresPerPixel;
     }
-    public static int RequestedLevel(PlanetaryTextureSemantic semantic,double surfaceAltitudeMetres)
+    public static int ProjectedLevel(double bodyRadiusMetres,double surfaceDistanceMetres,double viewportHeightPixels,double verticalFieldOfViewRadians,int previousLevel=-1,int maximumLevel=EarthSurfaceDatasetContract.AlbedoMaximumLevel,int minimumLevel=1)
     {
-        var terrain=RequestedLevel(surfaceAltitudeMetres);
-        var maximum=semantic==PlanetaryTextureSemantic.Cloud?EarthSurfaceDatasetContract.CloudMaximumLevel:EarthSurfaceDatasetContract.MaximumLevel;
-        return Math.Min(terrain,maximum);
+        if(maximumLevel is <0 or >EarthSurfaceDatasetContract.AlbedoMaximumLevel||minimumLevel<0||minimumLevel>maximumLevel)throw new ArgumentOutOfRangeException(nameof(maximumLevel));
+        if(previousLevel<0)
+        {
+            for(var level=minimumLevel;level<maximumLevel;level++)if(ProjectedTexelPixels(bodyRadiusMetres,surfaceDistanceMetres,viewportHeightPixels,verticalFieldOfViewRadians,level)<=TargetTexelPixels)return level;
+            return maximumLevel;
+        }
+        var selected=Math.Clamp(previousLevel,minimumLevel,maximumLevel);
+        while(selected<maximumLevel&&ProjectedTexelPixels(bodyRadiusMetres,surfaceDistanceMetres,viewportHeightPixels,verticalFieldOfViewRadians,selected)>TargetTexelPixels)selected++;
+        while(selected>minimumLevel&&ProjectedTexelPixels(bodyRadiusMetres,surfaceDistanceMetres,viewportHeightPixels,verticalFieldOfViewRadians,selected-1)<DemotionTexelPixels)selected--;
+        return selected;
     }
     public static double EquatorialMetresPerTexel(double bodyRadiusMetres,int level)
     {
