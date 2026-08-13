@@ -37,6 +37,7 @@ var tests = new (string, Action)[]
     ("Planet material presentation", PlanetMaterialPresentationTest),
     ("Planet micro-normal foundation", PlanetMicroNormalFoundationTest),
     ("Local ENU procedural terrain frequency", LocalEnuProceduralTerrainFrequencyTest),
+    ("Earth biome material classification", EarthBiomeMaterialClassificationTest),
     ("Planet surface scatter placement", PlanetarySurfaceScatterPlacementTest),
     ("Planetary environment presentation", PlanetaryEnvironmentPresentationTest),
     ("Earth authoritative presentation dataset", EarthAuthoritativeDatasetTest),
@@ -111,7 +112,7 @@ static void LocalEnuProceduralTerrainFrequencyTest()
     var helper=File.ReadAllText(Path.Combine(shaderDirectory,"earth_land_detail.glsl"));var fragment=File.ReadAllText(Path.Combine(shaderDirectory,"planetary.frag"));
     Check(helper.Contains("EarthFixedEnuMetres",StringComparison.Ordinal)&&helper.Contains("anchorDirection",StringComparison.Ordinal)&&!helper.Contains("camera",StringComparison.OrdinalIgnoreCase),"procedural coordinates derive only from body-fixed direction and fixed tangent anchor");
     Check(helper.Contains("lowScale=max(localScale*64.0",StringComparison.Ordinal)&&helper.Contains("mediumScale=max(localScale*6.0",StringComparison.Ordinal)&&helper.Contains("highScale=max(microScale*8.0",StringComparison.Ordinal),"bounded low/medium/high frequency stack");
-    Check(fragment.Contains("EarthFixedEnuMetres(up,eyeDebug.tangentAnchorAngle.xyz",StringComparison.Ordinal)&&fragment.Contains("albedo*=mix(vec3(1),localMaterial.albedoMultiplier,localContribution)",StringComparison.Ordinal),"Earth land modulates authoritative macro albedo in fixed anchor ENU");
+    Check(fragment.Contains("EarthFixedEnuMetres(up,eyeDebug.tangentAnchorAngle.xyz",StringComparison.Ordinal)&&fragment.Contains("albedo=mix(albedo,localMaterial.albedo,localContribution)",StringComparison.Ordinal),"Earth land preserves authoritative macro albedo as the continuously blended local-material base in fixed anchor ENU");
     Check(fragment.IndexOf("if(ocean)",StringComparison.Ordinal)<fragment.IndexOf("else if(earthData)",StringComparison.Ordinal)&&!helper.Contains("earthAlbedoLand",StringComparison.Ordinal)&&!helper.Contains("terrainHeight",StringComparison.Ordinal),"ocean classification and terrain height remain upstream authority rather than procedural outputs");
     Check(fragment.Contains("eyeDebug.identity.w!=0u?EarthLocalDetailFade",StringComparison.Ordinal),"local detail is continuously distance faded and requires the fixed Eyeball anchor");
     Console.WriteLine($"Local ENU procedural terrain: cameraDrift=0.000E+000 m; bodyRotationRecovery={maximumRecoveredDrift:E3} m; rotationValueError={maximumRotationValueError:E3}; fadeStep={maximumFadeStep:E3}; modifier={procedural:F6}");
@@ -121,6 +122,51 @@ static void LocalEnuProceduralTerrainFrequencyTest()
     {
         var low=Noise(east/(64d*64d)+19d,north/(64d*64d)+47d);var medium=Noise(east/(64d*6d)+71d,north/(64d*6d)+13d);var ridge=1d-Math.Abs(2d*medium-1d);var fineX=Noise(east/(3d*8d)+37d,north/(3d*8d)+83d);var fineY=Noise(east/(3d*8d)+109d,north/(3d*8d)+29d);var fine=.5d*(fineX+fineY);return Math.Clamp(1d+.16d*(low-.5d)+.12d*(ridge-.5d)+.05d*(fine-.5d),.82d,1.18d);
     }
+    static double Noise(double x,double y){var ix=Math.Floor(x);var iy=Math.Floor(y);var fx=x-ix;var fy=y-iy;fx=fx*fx*(3d-2d*fx);fy=fy*fy*(3d-2d*fy);return Lerp(Lerp(Hash(ix,iy),Hash(ix+1,iy),fx),Lerp(Hash(ix,iy+1),Hash(ix+1,iy+1),fx),fy);}
+    static double Hash(double x,double y){var qx=Fract(x*.1031d);var qy=Fract(y*.1030d);var qz=Fract(x*.0973d);var dot=qx*(qy+33.33d)+qy*(qz+33.33d)+qz*(qx+33.33d);qx+=dot;qy+=dot;qz+=dot;return Fract((qx+qy)*qz);}
+    static double Fract(double value)=>value-Math.Floor(value);
+    static double Lerp(double a,double b,double t)=>a+(b-a)*t;
+}
+
+static void EarthBiomeMaterialClassificationTest()
+{
+    var probes=new[]
+    {
+        (Name:"arid",Macro:new Double3(.55,.36,.16),Elevation:250d,Slope:.04d,Latitude:.28d,Enu:new Double3(12_500,31_000,0),Expected:0),
+        (Name:"temperate",Macro:new Double3(.12,.32,.11),Elevation:420d,Slope:.035d,Latitude:.42d,Enu:new Double3(-48_000,8_500,0),Expected:1),
+        (Name:"rock",Macro:new Double3(.34,.33,.31),Elevation:3_600d,Slope:.34d,Latitude:.36d,Enu:new Double3(21_000,-72_000,0),Expected:2),
+        (Name:"snow/ice",Macro:new Double3(.78,.82,.89),Elevation:3_900d,Slope:.08d,Latitude:.84d,Enu:new Double3(9_000,14_000,0),Expected:3),
+        (Name:"fallback",Macro:new Double3(.28,.27,.26),Elevation:220d,Slope:.01d,Latitude:.16d,Enu:new Double3(-6_000,-11_000,0),Expected:4)
+    };
+    var results=new List<string>(probes.Length);var maximumPerturbation=0d;
+    foreach(var probe in probes)
+    {
+        var weights=Classify(probe.Macro,probe.Elevation,probe.Slope,probe.Latitude,probe.Enu.X,probe.Enu.Y);
+        Check(weights.All(double.IsFinite)&&weights.All(value=>value is >=0d and <=1d)&&Math.Abs(weights.Sum()-1d)<1e-12d,$"{probe.Name} weights are finite, bounded, and normalized");
+        var dominant=Array.IndexOf(weights,weights.Max());Check(dominant==probe.Expected,$"{probe.Name} presentation probe selects its intended material family");
+        var repeated=Classify(probe.Macro,probe.Elevation,probe.Slope,probe.Latitude,probe.Enu.X,probe.Enu.Y);Check(weights.SequenceEqual(repeated),$"{probe.Name} classification is deterministic");
+        var perturbed=Classify(probe.Macro+new Double3(1e-5,-1e-5,1e-5),probe.Elevation+.01d,probe.Slope+1e-7d,probe.Latitude+1e-7d,probe.Enu.X+.01d,probe.Enu.Y-.01d);
+        var perturbation=weights.Zip(perturbed,(left,right)=>Math.Abs(left-right)).Max();maximumPerturbation=Math.Max(maximumPerturbation,perturbation);Check(perturbation<1e-3d,$"{probe.Name} weights vary continuously under small signal changes");
+        foreach(var cameraOffset in new[]{Double3.Zero,new Double3(400,-230,900),new Double3(-1200,700,150)})Check(cameraOffset.IsFinite&&weights.SequenceEqual(Classify(probe.Macro,probe.Elevation,probe.Slope,probe.Latitude,probe.Enu.X,probe.Enu.Y)),$"{probe.Name} weights are independent of camera motion");
+        foreach(var rotation in new[]{DoubleQuaternion.Identity,DoubleQuaternion.FromAxisAngle(Double3.UnitY,.63d),DoubleQuaternion.FromAxisAngle(new Double3(.2,.8,.3).Normalized(),2.3d)})Check(rotation.IsFinite&&weights.SequenceEqual(Classify(probe.Macro,probe.Elevation,probe.Slope,probe.Latitude,probe.Enu.X,probe.Enu.Y)),$"{probe.Name} weights remain body-fixed under Earth rotation and maximum warp");
+        results.Add($"{probe.Name}=[{string.Join(',',weights.Select(value=>value.ToString("F3",System.Globalization.CultureInfo.InvariantCulture)))}]");
+    }
+
+    var terrain=PlanetaryTerrainDefinition.EarthAuthoritativeV3;var direction=new Double3(.32,.73,.60).Normalized();var height=terrain.SampleHeight(direction,24);Check(terrain.SampleHeight(direction,24)==height,"classification does not alter elevation authority");
+    var shaderDirectory=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..","..","native","NovaCore.Native","shaders"));
+    var helper=File.ReadAllText(Path.Combine(shaderDirectory,"earth_land_detail.glsl"));var fragment=File.ReadAllText(Path.Combine(shaderDirectory,"planetary.frag"));
+    Check(helper.Contains("EarthLandMaterialWeights",StringComparison.Ordinal)&&helper.Contains("EarthLandClassify",StringComparison.Ordinal)&&helper.Contains("float snowIce",StringComparison.Ordinal)&&helper.Contains("float rock",StringComparison.Ordinal)&&helper.Contains("float arid",StringComparison.Ordinal)&&helper.Contains("float temperate",StringComparison.Ordinal)&&helper.Contains("float fallback",StringComparison.Ordinal),"shared classifier exposes five continuous material families");
+    Check(!helper.Contains("camera",StringComparison.OrdinalIgnoreCase)&&fragment.Contains("EarthLandClassify(albedo,earthElevation,slope,up.y,localEnu)",StringComparison.Ordinal),"classification consumes only macro albedo, authoritative elevation, slope, latitude, and fixed ENU values");
+    Check(fragment.IndexOf("if(ocean)",StringComparison.Ordinal)<fragment.IndexOf("else if(earthData)",StringComparison.Ordinal)&&fragment.Contains("earthAlbedoLand.a<.5",StringComparison.Ordinal),"ocean remains on the unchanged authoritative land-mask path and receives no land material");
+    Check(fragment.Contains("albedo=mix(albedo,localMaterial.albedo,localContribution)",StringComparison.Ordinal)&&fragment.Contains("EarthLocalDetailFade(viewDistance",StringComparison.Ordinal),"classification modifies only the existing continuously faded near-surface material layer");
+    Console.WriteLine($"Earth material families: {string.Join("; ",results)}; maximumContinuousPerturbation={maximumPerturbation:E3}; oceanLandWeight=0.000");
+
+    static double[] Classify(Double3 macro,double elevation,double slope,double latitude,double east,double north)
+    {
+        var maximum=Math.Max(macro.X,Math.Max(macro.Y,macro.Z));var minimum=Math.Min(macro.X,Math.Min(macro.Y,macro.Z));var saturation=(maximum-minimum)/Math.Max(maximum,1e-4d);var brightness=macro.X*.2126d+macro.Y*.7152d+macro.Z*.0722d;var greenness=macro.Y-.5d*(macro.X+macro.Z);var warmth=macro.X-macro.Z;var steep=Smooth(.045d,.30d,Math.Clamp(slope,0d,1d));var highland=Smooth(900d,4800d,elevation);var polar=Smooth(.56d,.90d,Math.Abs(latitude));var neutral=1d-Smooth(.18d,.55d,saturation);var cool=Smooth(-.08d,.08d,macro.Z-macro.X);var climate=Noise(east/240000d+43d,north/240000d+97d);
+        var snowIce=Smooth(.34d,.72d,brightness)*neutral*cool*Smooth(.10d,.62d,Math.Max(polar,highland));var rock=Math.Max(steep,highland*.72d)*Lerp(.55d,1d,neutral)*(1d-snowIce);var arid=Smooth(.015d,.18d,warmth)*(1d-Smooth(0d,.095d,greenness))*(1d-.85d*polar)*(1d-.75d*snowIce)*Lerp(.82d,1.18d,climate);var temperate=Smooth(-.015d,.085d,greenness)*(1d-.68d*steep)*(1d-.72d*highland)*(1d-snowIce);var fallback=.14d+.28d*(1d-Math.Max(Math.Max(arid,temperate),Math.Max(rock,snowIce)));var total=Math.Max(arid+temperate+rock+snowIce+fallback,1e-5d);return [arid/total,temperate/total,rock/total,snowIce/total,fallback/total];
+    }
+    static double Smooth(double a,double b,double value){var t=Math.Clamp((value-a)/(b-a),0d,1d);return t*t*(3d-2d*t);}
     static double Noise(double x,double y){var ix=Math.Floor(x);var iy=Math.Floor(y);var fx=x-ix;var fy=y-iy;fx=fx*fx*(3d-2d*fx);fy=fy*fy*(3d-2d*fy);return Lerp(Lerp(Hash(ix,iy),Hash(ix+1,iy),fx),Lerp(Hash(ix,iy+1),Hash(ix+1,iy+1),fx),fy);}
     static double Hash(double x,double y){var qx=Fract(x*.1031d);var qy=Fract(y*.1030d);var qz=Fract(x*.0973d);var dot=qx*(qy+33.33d)+qy*(qz+33.33d)+qz*(qx+33.33d);qx+=dot;qy+=dot;qz+=dot;return Fract((qx+qy)*qz);}
     static double Fract(double value)=>value-Math.Floor(value);

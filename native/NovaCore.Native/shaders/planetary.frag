@@ -102,12 +102,13 @@ void main()
     if(localContribution>0.0)
     {
       vec2 localEnu=EarthFixedEnuMetres(up,eyeDebug.tangentAnchorAngle.xyz,environment.centerRadius.w);
-      EarthLandProceduralMaterial localMaterial=EarthLandProceduralSample(localEnu,localScale,localMicroScale);
-      albedo*=mix(vec3(1),localMaterial.albedoMultiplier,localContribution);
-      albedo=mix(albedo,albedo*.72+vec3(.10,.09,.075),smoothstep(.12,.36,slope)*.20*localContribution);
-      surfaceNormal=ComposeMicroNormal(surfaceNormal,localMaterial.encodedMicroNormal,localContribution,0.20);
-      roughness=mix(roughness,clamp(.78+localMaterial.roughnessOffset,.55,.94),localContribution);
-      specular=mix(specular,.035,localContribution);
+      EarthLandMaterialWeights materialWeights=EarthLandClassify(albedo,earthElevation,slope,up.y,localEnu);
+      EarthLandProceduralMaterial localMaterial=EarthLandProceduralSample(localEnu,localScale,localMicroScale,albedo,materialWeights);
+      albedo=mix(albedo,localMaterial.albedo,localContribution);
+      surfaceNormal=ComposeMicroNormal(surfaceNormal,localMaterial.encodedMicroNormal,localContribution,localMaterial.microNormalStrength);
+      roughness=mix(roughness,localMaterial.roughness,localContribution);
+      float localSpecular=dot(materialWeights.families,vec4(.025,.030,.035,.12))+materialWeights.fallback*.035;
+      specular=mix(specular,localSpecular,localContribution);
     }
   }
 
