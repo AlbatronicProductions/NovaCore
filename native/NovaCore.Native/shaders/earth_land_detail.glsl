@@ -12,6 +12,8 @@ struct EarthLandMaterialWeights
   float fallback;
 };
 
+layout(set=0,binding=21) uniform sampler2DArray earthMaterialNormals;
+
 vec2 EarthFixedEnuMetres(vec3 bodyDirection,vec3 anchorDirection,float surfaceRadius)
 {
   vec3 anchor=normalize(anchorDirection);
@@ -36,6 +38,22 @@ float EarthFilteredNoise2(vec2 coordinate)
 float EarthLocalDetailFade(float viewDistance,float fadeStart,float fadeEnd)
 {
   return clamp(1.0-smoothstep(max(fadeStart,0.0),max(fadeEnd,fadeStart+1.0),viewDistance),0.0,1.0);
+}
+
+float EarthMaterialMicroNormalFade(float viewDistance)
+{
+  return clamp(1.0-smoothstep(1000.0,3000.0,viewDistance),0.0,1.0);
+}
+
+vec3 EarthLandMicroNormal(vec2 enuMetres,EarthLandMaterialWeights weights)
+{
+  vec3 arid=DecodeBc5Normal(texture(earthMaterialNormals,vec3(enuMetres/3.5,0.0)).rg);
+  vec3 temperate=DecodeBc5Normal(texture(earthMaterialNormals,vec3(enuMetres/3.0,1.0)).rg);
+  vec3 rock=DecodeBc5Normal(texture(earthMaterialNormals,vec3(enuMetres/2.5,2.0)).rg);
+  vec3 snowIce=DecodeBc5Normal(texture(earthMaterialNormals,vec3(enuMetres/4.5,3.0)).rg);
+  vec3 fallback=DecodeBc5Normal(texture(earthMaterialNormals,vec3(enuMetres/4.0,4.0)).rg);
+  vec3 blended=arid*weights.families.x+temperate*weights.families.y+rock*weights.families.z+snowIce*weights.families.w+fallback*weights.fallback;
+  return normalize(blended);
 }
 
 EarthLandMaterialWeights EarthLandClassify(vec3 macroAlbedo,float elevationMetres,float slope,float latitude,vec2 enuMetres)

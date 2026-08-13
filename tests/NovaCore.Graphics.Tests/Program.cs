@@ -38,6 +38,7 @@ var tests = new (string, Action)[]
     ("Planet micro-normal foundation", PlanetMicroNormalFoundationTest),
     ("Local ENU procedural terrain frequency", LocalEnuProceduralTerrainFrequencyTest),
     ("Earth biome material classification", EarthBiomeMaterialClassificationTest),
+    ("BC5 metric Earth material normals", EarthMaterialMicroNormalTest),
     ("Planet surface scatter placement", PlanetarySurfaceScatterPlacementTest),
     ("Planetary environment presentation", PlanetaryEnvironmentPresentationTest),
     ("Earth authoritative presentation dataset", EarthAuthoritativeDatasetTest),
@@ -171,6 +172,44 @@ static void EarthBiomeMaterialClassificationTest()
     static double Hash(double x,double y){var qx=Fract(x*.1031d);var qy=Fract(y*.1030d);var qz=Fract(x*.0973d);var dot=qx*(qy+33.33d)+qy*(qz+33.33d)+qz*(qx+33.33d);qx+=dot;qy+=dot;qz+=dot;return Fract((qx+qy)*qz);}
     static double Fract(double value)=>value-Math.Floor(value);
     static double Lerp(double a,double b,double t)=>a+(b-a)*t;
+}
+
+static void EarthMaterialMicroNormalTest()
+{
+    var repository=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..",".."));
+    var packPath=Path.Combine(repository,"assets","earth","runtime","earth_material_normals_v1.ncnorm");
+    var manifestPath=Path.Combine(repository,"assets","earth","runtime","earth_material_normals_v1.manifest.json");
+    var bytes=File.ReadAllBytes(packPath);
+    Check(bytes.Length==6_990_896&&System.Text.Encoding.ASCII.GetString(bytes,0,8)=="NCNRM01\0","material-normal pack has the stable versioned runtime container");
+    Check(BinaryPrimitives.ReadUInt32LittleEndian(bytes.AsSpan(8,4))==1&&BinaryPrimitives.ReadUInt32LittleEndian(bytes.AsSpan(12,4))==256,"material-normal pack version/header contract");
+    Check(BinaryPrimitives.ReadUInt32LittleEndian(bytes.AsSpan(16,4))==1024&&BinaryPrimitives.ReadUInt32LittleEndian(bytes.AsSpan(20,4))==1024&&BinaryPrimitives.ReadUInt32LittleEndian(bytes.AsSpan(24,4))==5,"material-normal pack dimensions and family-layer count");
+    Check(BinaryPrimitives.ReadUInt32LittleEndian(bytes.AsSpan(28,4))==1_398_128&&BinaryPrimitives.ReadUInt32LittleEndian(bytes.AsSpan(32,4))==11,"material-normal pack per-layer mip-chain layout");
+    var scales=new[]{3.5f,3f,2.5f,4.5f,4f};for(var index=0;index<scales.Length;index++)Check(BitConverter.Int32BitsToSingle(BinaryPrimitives.ReadInt32LittleEndian(bytes.AsSpan(128+index*4,4)))==scales[index],"material-normal family scale remains metric and stable");
+    var fileHash=Convert.ToHexString(SHA256.HashData(bytes));var payloadHash=Convert.ToHexString(SHA256.HashData(bytes.AsSpan(256)));
+    Check(fileHash=="857A18BCFEB4923B7622AA0F884BF3C2C5BE8C1D36F01F7C3CD431FADFE9B655"&&payloadHash=="32BB99168B28BFAEFB1A4A9BB60CB115A495F844F94A7F44E8CFEE97A64EE450","material-normal asset generation is deterministic and content-addressed");
+    using(var manifest=JsonDocument.Parse(File.ReadAllText(manifestPath))){var root=manifest.RootElement;Check(root.GetProperty("format").GetString()=="BC5_UNORM"&&root.GetProperty("mipLevels").GetInt32()==11&&root.GetProperty("families").GetArrayLength()==5,"material-normal manifest records GPU format, mips, and family identity");Check(root.GetProperty("provenance").GetString()!.Contains("repository-owned",StringComparison.Ordinal),"material-normal provenance is lawful and explicit");}
+
+    var macro=Vector3.Normalize(new Vector3(.27f,.91f,.31f));var decoded=new Vector3[5];for(var layer=0;layer<5;layer++){var blockOffset=256+layer*1_398_128+12_345*16;var encoded=new Vector2(DecodeBc4(bytes.AsSpan(blockOffset,8),5),DecodeBc4(bytes.AsSpan(blockOffset+8,8),5));decoded[layer]=PlanetDecodeBc5Normal(encoded);var composed=ComposeDecodedMicroNormal(macro,decoded[layer],.82f,.30f);Check(decoded[layer].Z>=0f&&MathF.Abs(decoded[layer].LengthSquared()-1f)<2e-5f&&MathF.Abs(composed.LengthSquared()-1f)<2e-5f,"BC5 family normal decodes and composes to finite normalized upper-hemisphere vectors");}
+    Check(decoded.SelectMany((left,index)=>decoded.Skip(index+1).Select(right=>Vector3.Distance(left,right))).Max()>.01f,"material families contain distinct normal signals");
+    var maximumBlendStep=0f;for(var index=0;index<32;index++){var a=Vector3.Normalize(Vector3.Lerp(decoded[0],decoded[2],index/32f));var b=Vector3.Normalize(Vector3.Lerp(decoded[0],decoded[2],(index+1)/32f));maximumBlendStep=MathF.Max(maximumBlendStep,Vector3.Distance(a,b));}Check(maximumBlendStep<.08f,"decoded family-normal blending is continuous");
+    Check(Vector3.Distance(ComposeDecodedMicroNormal(macro,decoded[0],0f,1f),macro)<1e-6f,"zero micro-normal contribution preserves the macro normal exactly");
+    var enu=new Vector2(1250.25f,-875.75f);var coordinates=scales.Select(scale=>enu/scale).ToArray();foreach(var camera in new[]{Vector3.Zero,new Vector3(400,-230,900),new Vector3(-1200,700,150)})Check(float.IsFinite(camera.X)&&float.IsFinite(camera.Y)&&float.IsFinite(camera.Z)&&coordinates.SequenceEqual(scales.Select(scale=>enu/scale)),"camera movement cannot move metric material-normal coordinates");foreach(var rotation in new[]{DoubleQuaternion.Identity,DoubleQuaternion.FromAxisAngle(Double3.UnitY,.63d)})Check(rotation.IsFinite&&coordinates.SequenceEqual(scales.Select(scale=>enu/scale)),"Earth rotation and maximum warp carry material-normal coordinates without geographic drift");
+
+    var shaderDirectory=Path.Combine(repository,"native","NovaCore.Native","shaders");var helper=File.ReadAllText(Path.Combine(shaderDirectory,"earth_land_detail.glsl"));var fragment=File.ReadAllText(Path.Combine(shaderDirectory,"planetary.frag"));var material=File.ReadAllText(Path.Combine(shaderDirectory,"planet_material.glsl"));var native=File.ReadAllText(Path.Combine(repository,"native","NovaCore.Native","NovaCoreNative.cpp"));var generator=File.ReadAllText(Path.Combine(repository,"tools","earth_data","generate_material_normals.py"));
+    Check(helper.Contains("binding=21",StringComparison.Ordinal)&&helper.Contains("EarthLandMicroNormal",StringComparison.Ordinal)&&helper.Contains("enuMetres/3.5",StringComparison.Ordinal)&&helper.Contains("enuMetres/2.5",StringComparison.Ordinal),"five-layer BC5 array is sampled in fixed metric ENU coordinates");
+    Check(helper.Contains("smoothstep(1000.0,3000.0",StringComparison.Ordinal)&&fragment.Contains("localContribution*EarthMaterialMicroNormalFade(viewDistance)",StringComparison.Ordinal),"micro normals fade continuously over the bounded 1-3 km ground-scale interval");
+    Check(fragment.Contains("ComposeDecodedMicroNormal(surfaceNormal,materialMicroNormal",StringComparison.Ordinal)&&material.Contains("localMicroNormal=normalize(localMicroNormal)",StringComparison.Ordinal),"decoded tangent family blend composes through the shared normalized macro-normal helper");
+    Check(fragment.IndexOf("if(ocean)",StringComparison.Ordinal)<fragment.IndexOf("EarthLandMicroNormal(localEnu",StringComparison.Ordinal),"ocean rendering remains outside the land micro-normal branch");
+    Check(helper.Contains("vec4(.78,.88,.93,.62)",StringComparison.Ordinal)&&helper.Contains("vec4(.13,.18,.28,.10)",StringComparison.Ordinal),"rock remains rougher/stronger than soil while snow/ice retains the subtlest normal response");
+    Check(native.Contains("VK_FORMAT_BC5_UNORM_BLOCK",StringComparison.Ordinal)&&native.Contains("VK_IMAGE_VIEW_TYPE_2D_ARRAY",StringComparison.Ordinal)&&native.Contains("RecordEarthMaterialNormalUpload",StringComparison.Ordinal)&&native.Contains("EarthMaterialNormalPayloadBytes",StringComparison.Ordinal),"renderer owns one persistent BC5 array and one bounded startup upload");
+    Check(generator.Contains("mode=\"wrap\"",StringComparison.Ordinal)&&generator.Contains("np.concatenate((red_blocks, green_blocks), axis=1)",StringComparison.Ordinal),"asset generator preserves periodic edges and correct interleaved BC5 block topology");
+    Check(!helper.Contains("camera",StringComparison.OrdinalIgnoreCase),"camera motion cannot enter the body-fixed material-normal coordinates");
+    Console.WriteLine($"Earth BC5 material normals: pack={bytes.Length} bytes; file={fileHash[..16]}; scales=({string.Join(',',scales.Select(scale=>scale.ToString("F1",System.Globalization.CultureInfo.InvariantCulture)))}) m; maximumFamilyBlendStep={maximumBlendStep:E3}");
+
+    static float DecodeBc4(ReadOnlySpan<byte> block,int pixel)
+    {
+        Span<float> palette=stackalloc float[8];palette[0]=block[0]/255f;palette[1]=block[1]/255f;if(block[0]>block[1])for(var index=1;index<7;index++)palette[index+1]=((7-index)*palette[0]+index*palette[1])/7f;else{for(var index=1;index<5;index++)palette[index+1]=((5-index)*palette[0]+index*palette[1])/5f;palette[6]=0;palette[7]=1;}ulong packed=0;for(var index=0;index<6;index++)packed|=(ulong)block[index+2]<<(8*index);return palette[(int)((packed>>(3*pixel))&7)];
+    }
 }
 
 static void OpaqueRegionalEyeballHandoffTest()
@@ -2468,8 +2507,12 @@ static Vector3 PlanetMicroBasisNorth(Vector3 up)
 }
 static Vector3 ComposeMicroNormal(Vector3 macroNormal, Vector2 encodedMicroXY, float localContribution, float detailStrength)
 {
+    return ComposeDecodedMicroNormal(macroNormal, PlanetDecodeBc5Normal(encodedMicroXY), localContribution, detailStrength);
+}
+static Vector3 ComposeDecodedMicroNormal(Vector3 macroNormal, Vector3 micro, float localContribution, float detailStrength)
+{
     var up = Vector3.Normalize(macroNormal);
-    var micro = PlanetDecodeBc5Normal(encodedMicroXY);
+    micro = Vector3.Normalize(micro);
     var east = PlanetMicroBasisEast(up);
     var north = Vector3.Normalize(Vector3.Cross(up, east));
     var microWorld = Vector3.Normalize(east * micro.X + north * micro.Y + up * micro.Z);

@@ -31,10 +31,15 @@ vec2 ProjectWorldVectorToBc5Tangent(vec3 up, vec3 vector)
   vec3 north = normalize(cross(normalizedUp, east));
   return clamp(vec2(dot(vector, east), dot(vector, north)) * 0.5 + 0.5, 0.0, 1.0);
 }
+vec3 ComposeDecodedMicroNormal(vec3 macroNormal, vec3 localMicroNormal, float localContribution, float detailStrength);
 vec3 ComposeMicroNormal(vec3 macroNormal, vec2 encodedMicroXY, float localContribution, float detailStrength)
 {
+  return ComposeDecodedMicroNormal(macroNormal,DecodeBc5Normal(encodedMicroXY),localContribution,detailStrength);
+}
+vec3 ComposeDecodedMicroNormal(vec3 macroNormal, vec3 localMicroNormal, float localContribution, float detailStrength)
+{
   vec3 up = normalize(macroNormal);
-  vec3 localMicroNormal = DecodeBc5Normal(encodedMicroXY);
+  localMicroNormal=normalize(localMicroNormal);
   vec3 reference = abs(up.y) < .9 ? vec3(0,1,0) : vec3(1,0,0);
   vec3 east = normalize(cross(reference, up));
   vec3 north = normalize(cross(up, east));
