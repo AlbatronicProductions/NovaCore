@@ -4,12 +4,20 @@ struct EarthLandProceduralMaterial
   float roughness;
   vec2 encodedMicroNormal;
   float microNormalStrength;
+  float specular;
 };
 
 struct EarthLandMaterialWeights
 {
   vec4 families;
   float fallback;
+};
+
+struct EarthLandMaterialSelection
+{
+  uvec3 indices;
+  vec3 contributions;
+  vec3 microHeights;
 };
 
 layout(set=0,binding=21) uniform sampler2DArray earthMaterialNormals;
@@ -45,14 +53,118 @@ float EarthMaterialMicroNormalFade(float viewDistance)
   return clamp(1.0-smoothstep(1000.0,3000.0,viewDistance),0.0,1.0);
 }
 
-vec3 EarthLandMicroNormal(vec2 enuMetres,EarthLandMaterialWeights weights)
+float EarthMaterialWeight(EarthLandMaterialWeights weights,uint index)
 {
-  vec3 arid=DecodeBc5Normal(texture(earthMaterialNormals,vec3(enuMetres/3.5,0.0)).rg);
-  vec3 temperate=DecodeBc5Normal(texture(earthMaterialNormals,vec3(enuMetres/3.0,1.0)).rg);
-  vec3 rock=DecodeBc5Normal(texture(earthMaterialNormals,vec3(enuMetres/2.5,2.0)).rg);
-  vec3 snowIce=DecodeBc5Normal(texture(earthMaterialNormals,vec3(enuMetres/4.5,3.0)).rg);
-  vec3 fallback=DecodeBc5Normal(texture(earthMaterialNormals,vec3(enuMetres/4.0,4.0)).rg);
-  vec3 blended=arid*weights.families.x+temperate*weights.families.y+rock*weights.families.z+snowIce*weights.families.w+fallback*weights.fallback;
+  if(index==0u)return weights.families.x;
+  if(index==1u)return weights.families.y;
+  if(index==2u)return weights.families.z;
+  if(index==3u)return weights.families.w;
+  return weights.fallback;
+}
+
+float EarthMaterialNormalScale(uint index)
+{
+  if(index==0u)return 3.5;
+  if(index==1u)return 3.0;
+  if(index==2u)return 2.5;
+  if(index==3u)return 4.5;
+  return 4.0;
+}
+
+float EarthMaterialHeightStrength(uint index)
+{
+  if(index==0u)return .26;
+  if(index==1u)return .22;
+  if(index==2u)return .34;
+  if(index==3u)return .31;
+  return .12;
+}
+
+float EarthMaterialMicroHeight(uint index,vec2 enuMetres)
+{
+  if(index==0u)
+  {
+    float dune=PlanetNoise2(enuMetres/42.0+vec2(17.0,61.0));
+    float grain=PlanetNoise2(enuMetres/11.0+vec2(83.0,29.0));
+    return clamp((dune*.68+grain*.32)-.5,-.5,.5);
+  }
+  if(index==1u)
+  {
+    float soil=PlanetNoise2(enuMetres/68.0+vec2(31.0,107.0));
+    float clump=PlanetNoise2(enuMetres/23.0+vec2(97.0,13.0));
+    return clamp((soil*.72+clump*.28)-.5,-.5,.5);
+  }
+  if(index==2u)
+  {
+    float ridge=1.0-abs(2.0*PlanetNoise2(enuMetres/36.0+vec2(53.0,7.0))-1.0);
+    float fracture=PlanetNoise2(enuMetres/13.0+vec2(113.0,47.0));
+    return clamp((ridge*.78+fracture*.22)-.5,-.5,.5);
+  }
+  if(index==3u)
+  {
+    float drift=PlanetNoise2(enuMetres/180.0+vec2(11.0,89.0));
+    float broad=PlanetNoise2(enuMetres/520.0+vec2(71.0,37.0));
+    return clamp((drift*.62+broad*.38)-.5,-.5,.5);
+  }
+  float neutral=PlanetNoise2(enuMetres/92.0+vec2(43.0,73.0));
+  return clamp(neutral-.5,-.5,.5);
+}
+
+EarthLandMaterialSelection EarthSelectLandMaterials(EarthLandMaterialWeights weights,float slope,vec2 enuMetres,float heightContribution)
+{
+  uvec3 indices=uvec3(0u);
+  vec3 strongest=vec3(-1.0);
+  float rockSlopeBoost=.30*smoothstep(.04,.32,clamp(slope,0.0,1.0));
+  for(uint index=0u;index<5u;index++)
+  {
+    float score=EarthMaterialWeight(weights,index)+(index==2u?rockSlopeBoost:0.0);
+    if(score>strongest.x||(score==strongest.x&&index<indices.x))
+    {
+      strongest.z=strongest.y;indices.z=indices.y;
+      strongest.y=strongest.x;indices.y=indices.x;
+      strongest.x=score;indices.x=index;
+    }
+    else if(score>strongest.y||(score==strongest.y&&index<indices.y))
+    {
+      strongest.z=strongest.y;indices.z=indices.y;
+      strongest.y=score;indices.y=index;
+    }
+    else if(score>strongest.z||(score==strongest.z&&index<indices.z))
+    {
+      strongest.z=score;indices.z=index;
+    }
+  }
+
+  vec3 heights;
+  vec3 scores;
+  float boundedHeightContribution=clamp(heightContribution,0.0,1.0);
+  for(uint candidate=0u;candidate<3u;candidate++)
+  {
+    uint index=indices[candidate];
+    heights[candidate]=boundedHeightContribution>0.0?EarthMaterialMicroHeight(index,enuMetres):0.0;
+    scores[candidate]=EarthMaterialWeight(weights,index)+(index==2u?rockSlopeBoost:0.0)+EarthMaterialHeightStrength(index)*heights[candidate]*boundedHeightContribution;
+  }
+  float maximum=max(scores.x,max(scores.y,scores.z));
+  vec3 contributions=smoothstep(vec3(maximum-.22),vec3(maximum+.015),scores);
+  contributions/=max(dot(contributions,vec3(1)),1e-5);
+
+  EarthLandMaterialSelection selection;
+  selection.indices=indices;
+  selection.contributions=contributions;
+  selection.microHeights=heights;
+  return selection;
+}
+
+vec3 EarthLandFamilyMicroNormal(vec2 enuMetres,uint index)
+{
+  return DecodeBc5Normal(texture(earthMaterialNormals,vec3(enuMetres/EarthMaterialNormalScale(index),float(index))).rg);
+}
+
+vec3 EarthLandMicroNormal(vec2 enuMetres,EarthLandMaterialSelection selection)
+{
+  vec3 blended=vec3(0);
+  for(uint candidate=0u;candidate<3u;candidate++)
+    blended+=EarthLandFamilyMicroNormal(enuMetres,selection.indices[candidate])*selection.contributions[candidate];
   return normalize(blended);
 }
 
@@ -85,7 +197,36 @@ EarthLandMaterialWeights EarthLandClassify(vec3 macroAlbedo,float elevationMetre
   return weights;
 }
 
-EarthLandProceduralMaterial EarthLandProceduralSample(vec2 enuMetres,float localScale,float microScale,vec3 macroAlbedo,EarthLandMaterialWeights weights)
+vec3 EarthLandFamilyAlbedo(uint index,vec3 generic,float microHeight)
+{
+  if(index==0u)return mix(generic,generic*vec3(1.18,1.04,.72)+vec3(.022,.010,0),.55)*(1.0+.10*microHeight);
+  if(index==1u)return mix(generic,generic*vec3(.78,1.04,.78),.42)*(1.0+.07*microHeight);
+  if(index==2u)
+  {
+    float rockLuma=dot(generic,vec3(.2126,.7152,.0722));
+    return mix(generic,vec3(rockLuma)*vec3(.90,.95,1.00),.52)*(1.0+.13*microHeight);
+  }
+  if(index==3u)return mix(generic,vec3(.82,.87,.94),.68)*(1.0+.04*microHeight);
+  return mix(generic,clamp(generic*vec3(1.01,1.00,.98),vec3(0),vec3(1)),.12)*(1.0+.035*microHeight);
+}
+
+float EarthLandFamilyRoughness(uint index,float fine,float ridge,float microHeight)
+{
+  float base=index==0u?.76:index==1u?.86:index==2u?.94:index==3u?.60:.82;
+  return clamp(base+.06*(fine-.5)+.05*(ridge-.5)+.06*microHeight,.50,.97);
+}
+
+float EarthLandFamilyNormalStrength(uint index)
+{
+  return index==0u?.13:index==1u?.18:index==2u?.30:index==3u?.09:.15;
+}
+
+float EarthLandFamilySpecular(uint index)
+{
+  return index==0u?.025:index==1u?.030:index==2u?.035:index==3u?.12:.035;
+}
+
+EarthLandProceduralMaterial EarthLandProceduralSample(vec2 enuMetres,float localScale,float microScale,vec3 macroAlbedo,EarthLandMaterialSelection selection)
 {
   float lowScale=max(localScale*64.0,1.0);
   float mediumScale=max(localScale*6.0,1.0);
@@ -96,19 +237,30 @@ EarthLandProceduralMaterial EarthLandProceduralSample(vec2 enuMetres,float local
   float fineX=EarthFilteredNoise2(enuMetres/highScale+vec2(37.0,83.0));
   float fineY=EarthFilteredNoise2(enuMetres/highScale+vec2(109.0,29.0));
   float fine=.5*(fineX+fineY);
-  float familyFrequency=dot(weights.families,vec4(.56,.86,1.24,.32))+weights.fallback*.70;
-  float value=1.0+familyFrequency*(.16*(low-.5)+.12*(ridge-.5)+.05*(fine-.5));
-  vec3 chroma=(vec3(.035,-.005,-.025)*(low-.5)+vec3(.018,.010,-.012)*(ridge-.5))*familyFrequency;
+  float value=1.0+.15*(low-.5)+.11*(ridge-.5)+.045*(fine-.5);
+  vec3 chroma=vec3(.035,-.005,-.025)*(low-.5)+vec3(.018,.010,-.012)*(ridge-.5);
   vec3 generic=macroAlbedo*clamp(vec3(value)+chroma,vec3(.82),vec3(1.18));
-  vec3 arid=mix(generic,generic*vec3(1.10,1.02,.84)+vec3(.014,.007,0),.32);
-  vec3 temperate=mix(generic,generic*vec3(.86,1.07,.86),.30);
-  float rockLuma=dot(generic,vec3(.2126,.7152,.0722));
-  vec3 rock=mix(generic,vec3(rockLuma)*vec3(.94,.97,1.00),.34);
-  vec3 snowIce=mix(generic,vec3(.72,.78,.86),.42);
+
+  vec3 selectedAlbedo=vec3(0);
+  float selectedRoughness=0.0;
+  float selectedStrength=0.0;
+  float selectedSpecular=0.0;
+  for(uint candidate=0u;candidate<3u;candidate++)
+  {
+    uint index=selection.indices[candidate];
+    float contribution=selection.contributions[candidate];
+    float microHeight=selection.microHeights[candidate];
+    selectedAlbedo+=EarthLandFamilyAlbedo(index,generic,microHeight)*contribution;
+    selectedRoughness+=EarthLandFamilyRoughness(index,fine,ridge,microHeight)*contribution;
+    selectedStrength+=EarthLandFamilyNormalStrength(index)*contribution;
+    selectedSpecular+=EarthLandFamilySpecular(index)*contribution;
+  }
+
   EarthLandProceduralMaterial material;
-  material.albedo=clamp(arid*weights.families.x+temperate*weights.families.y+rock*weights.families.z+snowIce*weights.families.w+generic*weights.fallback,vec3(0),vec3(1));
-  material.roughness=clamp(dot(weights.families,vec4(.78,.88,.93,.62))+weights.fallback*.82+.08*(fine-.5)+.05*(ridge-.5),.52,.96);
+  material.albedo=clamp(selectedAlbedo,vec3(0),vec3(1));
+  material.roughness=clamp(selectedRoughness,.50,.97);
   material.encodedMicroNormal=clamp(vec2(.5)+vec2(fineX-.5,fineY-.5)*.64,vec2(.08),vec2(.92));
-  material.microNormalStrength=clamp(dot(weights.families,vec4(.13,.18,.28,.10))+weights.fallback*.16,.08,.30);
+  material.microNormalStrength=clamp(selectedStrength,.08,.30);
+  material.specular=clamp(selectedSpecular,.02,.12);
   return material;
 }

@@ -39,6 +39,8 @@ var tests = new (string, Action)[]
     ("Local ENU procedural terrain frequency", LocalEnuProceduralTerrainFrequencyTest),
     ("Earth biome material classification", EarthBiomeMaterialClassificationTest),
     ("BC5 metric Earth material normals", EarthMaterialMicroNormalTest),
+    ("Height-aware Earth material synthesis", EarthHeightAwareMaterialSynthesisTest),
+    ("Top-three Earth material selection", EarthTopThreeMaterialSelectionTest),
     ("Planet surface scatter placement", PlanetarySurfaceScatterPlacementTest),
     ("Planetary environment presentation", PlanetaryEnvironmentPresentationTest),
     ("Earth authoritative presentation dataset", EarthAuthoritativeDatasetTest),
@@ -196,11 +198,11 @@ static void EarthMaterialMicroNormalTest()
     var enu=new Vector2(1250.25f,-875.75f);var coordinates=scales.Select(scale=>enu/scale).ToArray();foreach(var camera in new[]{Vector3.Zero,new Vector3(400,-230,900),new Vector3(-1200,700,150)})Check(float.IsFinite(camera.X)&&float.IsFinite(camera.Y)&&float.IsFinite(camera.Z)&&coordinates.SequenceEqual(scales.Select(scale=>enu/scale)),"camera movement cannot move metric material-normal coordinates");foreach(var rotation in new[]{DoubleQuaternion.Identity,DoubleQuaternion.FromAxisAngle(Double3.UnitY,.63d)})Check(rotation.IsFinite&&coordinates.SequenceEqual(scales.Select(scale=>enu/scale)),"Earth rotation and maximum warp carry material-normal coordinates without geographic drift");
 
     var shaderDirectory=Path.Combine(repository,"native","NovaCore.Native","shaders");var helper=File.ReadAllText(Path.Combine(shaderDirectory,"earth_land_detail.glsl"));var fragment=File.ReadAllText(Path.Combine(shaderDirectory,"planetary.frag"));var material=File.ReadAllText(Path.Combine(shaderDirectory,"planet_material.glsl"));var native=File.ReadAllText(Path.Combine(repository,"native","NovaCore.Native","NovaCoreNative.cpp"));var generator=File.ReadAllText(Path.Combine(repository,"tools","earth_data","generate_material_normals.py"));
-    Check(helper.Contains("binding=21",StringComparison.Ordinal)&&helper.Contains("EarthLandMicroNormal",StringComparison.Ordinal)&&helper.Contains("enuMetres/3.5",StringComparison.Ordinal)&&helper.Contains("enuMetres/2.5",StringComparison.Ordinal),"five-layer BC5 array is sampled in fixed metric ENU coordinates");
+    Check(helper.Contains("binding=21",StringComparison.Ordinal)&&helper.Contains("EarthLandMicroNormal",StringComparison.Ordinal)&&helper.Contains("EarthMaterialNormalScale",StringComparison.Ordinal)&&helper.Contains("return 3.5",StringComparison.Ordinal)&&helper.Contains("return 2.5",StringComparison.Ordinal),"five-layer BC5 array is sampled in fixed metric ENU coordinates");
     Check(helper.Contains("smoothstep(1000.0,3000.0",StringComparison.Ordinal)&&fragment.Contains("localContribution*EarthMaterialMicroNormalFade(viewDistance)",StringComparison.Ordinal),"micro normals fade continuously over the bounded 1-3 km ground-scale interval");
     Check(fragment.Contains("ComposeDecodedMicroNormal(surfaceNormal,materialMicroNormal",StringComparison.Ordinal)&&material.Contains("localMicroNormal=normalize(localMicroNormal)",StringComparison.Ordinal),"decoded tangent family blend composes through the shared normalized macro-normal helper");
     Check(fragment.IndexOf("if(ocean)",StringComparison.Ordinal)<fragment.IndexOf("EarthLandMicroNormal(localEnu",StringComparison.Ordinal),"ocean rendering remains outside the land micro-normal branch");
-    Check(helper.Contains("vec4(.78,.88,.93,.62)",StringComparison.Ordinal)&&helper.Contains("vec4(.13,.18,.28,.10)",StringComparison.Ordinal),"rock remains rougher/stronger than soil while snow/ice retains the subtlest normal response");
+    Check(helper.Contains("index==2u?.94",StringComparison.Ordinal)&&helper.Contains("index==2u?.30",StringComparison.Ordinal)&&helper.Contains("index==3u?.60",StringComparison.Ordinal)&&helper.Contains("index==3u?.09",StringComparison.Ordinal),"rock remains rougher/stronger than soil while snow/ice retains the subtlest normal response");
     Check(native.Contains("VK_FORMAT_BC5_UNORM_BLOCK",StringComparison.Ordinal)&&native.Contains("VK_IMAGE_VIEW_TYPE_2D_ARRAY",StringComparison.Ordinal)&&native.Contains("RecordEarthMaterialNormalUpload",StringComparison.Ordinal)&&native.Contains("EarthMaterialNormalPayloadBytes",StringComparison.Ordinal),"renderer owns one persistent BC5 array and one bounded startup upload");
     Check(generator.Contains("mode=\"wrap\"",StringComparison.Ordinal)&&generator.Contains("np.concatenate((red_blocks, green_blocks), axis=1)",StringComparison.Ordinal),"asset generator preserves periodic edges and correct interleaved BC5 block topology");
     Check(!helper.Contains("camera",StringComparison.OrdinalIgnoreCase),"camera motion cannot enter the body-fixed material-normal coordinates");
@@ -211,6 +213,98 @@ static void EarthMaterialMicroNormalTest()
         Span<float> palette=stackalloc float[8];palette[0]=block[0]/255f;palette[1]=block[1]/255f;if(block[0]>block[1])for(var index=1;index<7;index++)palette[index+1]=((7-index)*palette[0]+index*palette[1])/7f;else{for(var index=1;index<5;index++)palette[index+1]=((5-index)*palette[0]+index*palette[1])/5f;palette[6]=0;palette[7]=1;}ulong packed=0;for(var index=0;index<6;index++)packed|=(ulong)block[index+2]<<(8*index);return palette[(int)((packed>>(3*pixel))&7)];
     }
 }
+
+static void EarthHeightAwareMaterialSynthesisTest()
+{
+    var probes=new[]
+    {
+        (Name:"arid",Macro:new Double3(.55,.36,.16),Weights:new[]{.847,.077,0d,0d,.076},Slope:.04,East:12_500d,North:31_000d,Expected:0),
+        (Name:"temperate",Macro:new Double3(.12,.32,.11),Weights:new[]{0d,.877,0d,0d,.123},Slope:.035,East:-48_000d,North:8_500d,Expected:1),
+        (Name:"rock",Macro:new Double3(.34,.33,.31),Weights:new[]{.022,.012,.847,0d,.119},Slope:.34,East:21_000d,North:-72_000d,Expected:2),
+        (Name:"snow/ice",Macro:new Double3(.78,.82,.89),Weights:new[]{0d,0d,0d,.877,.123},Slope:.08,East:9_000d,North:14_000d,Expected:3),
+        (Name:"fallback",Macro:new Double3(.28,.27,.26),Weights:new[]{.007,.130,0d,0d,.863},Slope:.01,East:-6_000d,North:-11_000d,Expected:4)
+    };
+    var summaries=new List<string>(probes.Length);var maximumDrift=0d;var minimumNormalization=double.MaxValue;
+    foreach(var probe in probes)
+    {
+        var selection=SelectHeightAware(probe.Weights,probe.Slope,probe.East,probe.North);
+        Check(selection.Indices.Length==3&&selection.Indices.Distinct().Count()==3,"height-aware selection has exactly three unique material candidates");
+        Check(selection.Indices[0]==probe.Expected,$"{probe.Name} retains the classifier's dominant family");
+        Check(selection.Contributions.All(double.IsFinite)&&selection.Contributions.All(value=>value is >=0d and <=1d),$"{probe.Name} contributions are finite and bounded");
+        var normalization=selection.Contributions.Sum();minimumNormalization=Math.Min(minimumNormalization,normalization);Check(Math.Abs(normalization-1d)<1e-12d,$"{probe.Name} height-aware contributions normalize exactly");
+        var rgb=HeightAwareAlbedo(probe.Macro,selection);var repeated=HeightAwareAlbedo(probe.Macro,SelectHeightAware(probe.Weights,probe.Slope,probe.East,probe.North));Check(rgb==repeated,$"{probe.Name} material synthesis is deterministic");
+        foreach(var camera in new[]{Double3.Zero,new Double3(400,-230,900),new Double3(-1200,700,150)}){var cameraIndependent=HeightAwareAlbedo(probe.Macro,SelectHeightAware(probe.Weights,probe.Slope,probe.East,probe.North));maximumDrift=Math.Max(maximumDrift,Math.Sqrt((cameraIndependent-rgb).LengthSquared));Check(camera.IsFinite&&cameraIndependent==rgb,$"{probe.Name} material competition is independent of camera motion");}
+        foreach(var rotation in new[]{DoubleQuaternion.Identity,DoubleQuaternion.FromAxisAngle(Double3.UnitY,.63d)})Check(rotation.IsFinite&&HeightAwareAlbedo(probe.Macro,SelectHeightAware(probe.Weights,probe.Slope,probe.East,probe.North))==rgb,$"{probe.Name} material remains registered under body rotation and maximum warp");
+        summaries.Add($"{probe.Name}=({rgb.X:F3},{rgb.Y:F3},{rgb.Z:F3}) top={string.Join('/',selection.Indices)}");
+    }
+
+    var aridRgb=HeightAwareAlbedo(probes[0].Macro,SelectHeightAware(probes[0].Weights,probes[0].Slope,probes[0].East,probes[0].North));Check(aridRgb.X>aridRgb.Y&&aridRgb.Y>aridRgb.Z,"arid response remains warm/mineral rather than olive");
+    var snowRgb=HeightAwareAlbedo(probes[3].Macro,SelectHeightAware(probes[3].Weights,probes[3].Slope,probes[3].East,probes[3].North));Check(Luminance(snowRgb)>.80&&snowRgb.Z>=snowRgb.X,"snow/ice remains bright and cool instead of averaging into brown");
+    var fallbackRgb=HeightAwareAlbedo(probes[4].Macro,SelectHeightAware(probes[4].Weights,probes[4].Slope,probes[4].East,probes[4].North));Check(Math.Sqrt((fallbackRgb-probes[4].Macro).LengthSquared)<.025,"fallback conservatively preserves macro geographic color");
+
+    var transitionWeights=new[]{.34,.29,.22,.04,.11};var transitionMacro=new Double3(.42,.32,.19);var oldRgb=OldWeightedAlbedo(transitionMacro,transitionWeights);var oldRoughness=transitionWeights.Zip(new[]{.78,.88,.93,.62,.82},(weight,roughness)=>weight*roughness).Sum();var transitionSelection=SelectHeightAware(transitionWeights,.18,850d,-420d);var newSamples=Enumerable.Range(0,32).Select(index=>HeightAwareAlbedo(transitionMacro,SelectHeightAware(transitionWeights,.18,850d+index*17d,-420d+index*29d))).ToArray();var newSpan=newSamples.Max(rgb=>Luminance(rgb))-newSamples.Min(rgb=>Luminance(rgb));var familyDistance=newSamples.Max(rgb=>Math.Sqrt((rgb-oldRgb).LengthSquared));Check(newSpan>.005&&familyDistance>.015,"height competition creates spatially distinct patches instead of one ordinary weighted hybrid");
+    var perturbedA=SelectHeightAware(transitionWeights,.18,1234.0,-987.0);var perturbedB=SelectHeightAware(transitionWeights,.1800001,1234.001,-986.999);Check(perturbedA.Indices.SequenceEqual(perturbedB.Indices)&&perturbedA.Contributions.Zip(perturbedB.Contributions,(a,b)=>Math.Abs(a-b)).Max()<1e-3,"height competition is continuous under tiny body-fixed signal changes");
+
+    var terrain=PlanetaryTerrainDefinition.EarthAuthoritativeV3;var direction=new Double3(.32,.73,.60).Normalized();var height=terrain.SampleHeight(direction,24);Check(terrain.SampleHeight(direction,24)==height,"presentation-only micro-height cannot modify authoritative terrain elevation");
+    var repository=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..",".."));var helper=File.ReadAllText(Path.Combine(repository,"native","NovaCore.Native","shaders","earth_land_detail.glsl"));var fragment=File.ReadAllText(Path.Combine(repository,"native","NovaCore.Native","shaders","planetary.frag"));
+    Check(helper.Contains("EarthMaterialMicroHeight",StringComparison.Ordinal)&&helper.Contains("EarthSelectLandMaterials",StringComparison.Ordinal)&&helper.Contains("smoothstep(vec3(maximum-.22)",StringComparison.Ordinal),"bounded continuous micro-height competition is explicit in the shared land-material helper");
+    Check(helper.Contains("enuMetres/42.0",StringComparison.Ordinal)&&helper.Contains("enuMetres/68.0",StringComparison.Ordinal)&&helper.Contains("enuMetres/36.0",StringComparison.Ordinal)&&helper.Contains("enuMetres/180.0",StringComparison.Ordinal),"family micro-height patterns are deterministic, metric, and family-specific");
+    Check(fragment.Contains("EarthSelectLandMaterials(materialWeights,slope,localEnu,EarthMaterialMicroNormalFade(viewDistance))",StringComparison.Ordinal)&&fragment.Contains("albedo=mix(albedo,localMaterial.albedo,localContribution)",StringComparison.Ordinal),"height-aware response uses authoritative slope and preserves the existing local-detail fade");
+    Console.WriteLine($"Earth height-aware synthesis: macro=({transitionMacro.X:F3},{transitionMacro.Y:F3},{transitionMacro.Z:F3}); oldWeights=({string.Join(',',transitionWeights.Select(value=>value.ToString("F3",System.Globalization.CultureInfo.InvariantCulture)))}); oldBlended/preLight=({oldRgb.X:F3},{oldRgb.Y:F3},{oldRgb.Z:F3}); oldRoughness={oldRoughness:F3}; oldBc5Contributions=({string.Join(',',transitionWeights.Select(value=>value.ToString("F3",System.Globalization.CultureInfo.InvariantCulture)))}); selected={string.Join('/',transitionSelection.Indices)} contributions=({string.Join(',',transitionSelection.Contributions.Select(value=>value.ToString("F3",System.Globalization.CultureInfo.InvariantCulture)))}); newLuminanceSpan={newSpan:F4}; maximumFamilyDistance={familyDistance:F4}; cameraDrift={maximumDrift:E3}; probes={string.Join("; ",summaries)}");
+
+    static double Luminance(Double3 value)=>value.X*.2126+value.Y*.7152+value.Z*.0722;
+    static Double3 OldWeightedAlbedo(Double3 macro,double[] weights)
+    {
+        var arid=Lerp(macro,Mul(macro,new Double3(1.10,1.02,.84))+new Double3(.014,.007,0),.32);var temperate=Lerp(macro,Mul(macro,new Double3(.86,1.07,.86)),.30);var luma=Luminance(macro);var rock=Lerp(macro,new Double3(luma*.94,luma*.97,luma),.34);var snow=Lerp(macro,new Double3(.72,.78,.86),.42);return arid*weights[0]+temperate*weights[1]+rock*weights[2]+snow*weights[3]+macro*weights[4];
+    }
+    static Double3 HeightAwareAlbedo(Double3 macro,(int[] Indices,double[] Contributions,double[] Heights) selection)
+    {
+        var result=Double3.Zero;for(var candidate=0;candidate<3;candidate++){var index=selection.Indices[candidate];var height=selection.Heights[candidate];Double3 family;if(index==0)family=Lerp(macro,Mul(macro,new Double3(1.18,1.04,.72))+new Double3(.022,.010,0),.55)*(1d+.10*height);else if(index==1)family=Lerp(macro,Mul(macro,new Double3(.78,1.04,.78)),.42)*(1d+.07*height);else if(index==2){var luma=Luminance(macro);family=Lerp(macro,new Double3(luma*.90,luma*.95,luma),.52)*(1d+.13*height);}else if(index==3)family=Lerp(macro,new Double3(.82,.87,.94),.68)*(1d+.04*height);else family=Lerp(macro,Mul(macro,new Double3(1.01,1,.98)),.12)*(1d+.035*height);result+=family*selection.Contributions[candidate];}return result;
+    }
+    static Double3 Lerp(Double3 a,Double3 b,double t)=>a+(b-a)*t;
+    static Double3 Mul(Double3 a,Double3 b)=>new(a.X*b.X,a.Y*b.Y,a.Z*b.Z);
+}
+
+static void EarthTopThreeMaterialSelectionTest()
+{
+    var representative=new[]{.34,.29,.22,.04,.11};var flat=SelectHeightAware(representative,.01,1234,-987);var steep=SelectHeightAware(representative,.60,1234,-987);
+    Check(flat.Indices.Length==3&&steep.Indices.Length==3&&flat.Indices.Distinct().Count()==3&&steep.Indices.Distinct().Count()==3,"GPU material culling selects exactly three unique candidates");
+    var flatRock=Array.IndexOf(flat.Indices,2) is var flatIndex&&flatIndex>=0?flat.Contributions[flatIndex]:0d;var steepRock=Array.IndexOf(steep.Indices,2) is var steepIndex&&steepIndex>=0?steep.Contributions[steepIndex]:0d;Check(steepRock>flatRock,"smooth authoritative slope weighting continuously increases exposed-rock candidacy");
+    var tied=SelectHeightAware(new[]{.25,.25,.25,.25,0d},0d,0d,0d);Check(tied.Indices.SequenceEqual(new[]{0,1,2}),"exact score ties use stable family-index order");
+    for(var repeat=0;repeat<16;repeat++){var same=SelectHeightAware(representative,.22,42_500,-19_250);Check(same.Indices.SequenceEqual(SelectHeightAware(representative,.22,42_500,-19_250).Indices)&&same.Contributions.SequenceEqual(SelectHeightAware(representative,.22,42_500,-19_250).Contributions),"top-three selection is deterministic");}
+    var repository=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..",".."));var helper=File.ReadAllText(Path.Combine(repository,"native","NovaCore.Native","shaders","earth_land_detail.glsl"));
+    Check(helper.Contains("for(uint index=0u;index<5u;index++)",StringComparison.Ordinal)&&helper.Contains("for(uint candidate=0u;candidate<3u;candidate++)",StringComparison.Ordinal),"shader ranks five cheap classification scores then evaluates only three selected material responses");
+    Check(!helper.Contains("vec3 arid=DecodeBc5Normal",StringComparison.Ordinal)&&helper.Contains("EarthLandFamilyMicroNormal",StringComparison.Ordinal),"BC5 material normals are dynamically sampled only for selected candidates rather than all five families");
+    Check(helper.Contains("rockSlopeBoost=.30*smoothstep(.04,.32",StringComparison.Ordinal),"rock candidacy uses a continuous slope response without a hard threshold");
+    Console.WriteLine($"Earth top-three material selection: flat={string.Join('/',flat.Indices)} rock={flatRock:F4}; steep={string.Join('/',steep.Indices)} rock={steepRock:F4}; evaluatedNormals=3/5; culled=40.0%");
+}
+
+static (int[] Indices,double[] Contributions,double[] Heights) SelectHeightAware(double[] weights,double slope,double east,double north)
+{
+    var indices=new[]{0,0,0};var strongest=new[]{-1d,-1d,-1d};var rockSlopeBoost=.30*SmoothStep(.04,.32,Math.Clamp(slope,0d,1d));
+    for(var index=0;index<5;index++)
+    {
+        var score=weights[index]+(index==2?rockSlopeBoost:0d);
+        if(score>strongest[0]||score==strongest[0]&&index<indices[0]){strongest[2]=strongest[1];indices[2]=indices[1];strongest[1]=strongest[0];indices[1]=indices[0];strongest[0]=score;indices[0]=index;}
+        else if(score>strongest[1]||score==strongest[1]&&index<indices[1]){strongest[2]=strongest[1];indices[2]=indices[1];strongest[1]=score;indices[1]=index;}
+        else if(score>strongest[2]||score==strongest[2]&&index<indices[2]){strongest[2]=score;indices[2]=index;}
+    }
+    var heights=indices.Select(index=>MicroHeight(index,east,north)).ToArray();var scores=indices.Select((index,candidate)=>weights[index]+(index==2?rockSlopeBoost:0d)+new[]{.26,.22,.34,.31,.12}[index]*heights[candidate]).ToArray();var maximum=scores.Max();var contributions=scores.Select(score=>SmoothStep(maximum-.22,maximum+.015,score)).ToArray();var total=Math.Max(contributions.Sum(),1e-5);for(var index=0;index<3;index++)contributions[index]/=total;return(indices,contributions,heights);
+    static double MicroHeight(int index,double east,double north)
+    {
+        if(index==0)return Math.Clamp(Noise(east/42+17,north/42+61)*.68+Noise(east/11+83,north/11+29)*.32-.5,-.5,.5);
+        if(index==1)return Math.Clamp(Noise(east/68+31,north/68+107)*.72+Noise(east/23+97,north/23+13)*.28-.5,-.5,.5);
+        if(index==2){var ridge=1d-Math.Abs(2d*Noise(east/36+53,north/36+7)-1d);return Math.Clamp(ridge*.78+Noise(east/13+113,north/13+47)*.22-.5,-.5,.5);}
+        if(index==3)return Math.Clamp(Noise(east/180+11,north/180+89)*.62+Noise(east/520+71,north/520+37)*.38-.5,-.5,.5);
+        return Math.Clamp(Noise(east/92+43,north/92+73)-.5,-.5,.5);
+    }
+    static double Noise(double x,double y){var ix=Math.Floor(x);var iy=Math.Floor(y);var fx=x-ix;var fy=y-iy;fx=fx*fx*(3d-2d*fx);fy=fy*fy*(3d-2d*fy);return Lerp(Lerp(Hash(ix,iy),Hash(ix+1,iy),fx),Lerp(Hash(ix,iy+1),Hash(ix+1,iy+1),fx),fy);}
+    static double Hash(double x,double y){var qx=Fract(x*.1031);var qy=Fract(y*.1030);var qz=Fract(x*.0973);var dot=qx*(qy+33.33)+qy*(qz+33.33)+qz*(qx+33.33);qx+=dot;qy+=dot;qz+=dot;return Fract((qx+qy)*qz);}
+    static double Fract(double value)=>value-Math.Floor(value);
+    static double Lerp(double a,double b,double t)=>a+(b-a)*t;
+}
+
+static double SmoothStep(double a,double b,double value){var t=Math.Clamp((value-a)/(b-a),0d,1d);return t*t*(3d-2d*t);}
 
 static void OpaqueRegionalEyeballHandoffTest()
 {
