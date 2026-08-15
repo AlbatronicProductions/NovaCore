@@ -103,14 +103,16 @@ void main()
     {
       vec2 localEnu=EarthFixedEnuMetres(up,eyeDebug.tangentAnchorAngle.xyz,environment.centerRadius.w);
       EarthLandMaterialWeights materialWeights=EarthLandClassify(albedo,earthElevation,slope,up.y,localEnu);
-      EarthLandMaterialSelection materialSelection=EarthSelectLandMaterials(materialWeights,slope,localEnu,EarthMaterialMicroNormalFade(viewDistance));
-      EarthLandProceduralMaterial localMaterial=EarthLandProceduralSample(localEnu,localScale,localMicroScale,albedo,materialSelection);
+      EarthMesoMaterialDomain mesoDomain=EarthMesoDomain(localEnu);
+      materialWeights=EarthApplyMesoFamilyBias(materialWeights,mesoDomain);
+      EarthLandMaterialSelection materialSelection=EarthSelectLandMaterials(materialWeights,slope,localEnu,EarthMaterialMicroNormalFade(viewDistance),mesoDomain);
+      EarthLandProceduralMaterial localMaterial=EarthLandProceduralSample(localEnu,localScale,localMicroScale,albedo,materialSelection,mesoDomain);
       float microContribution=localContribution*EarthMaterialMicroNormalFade(viewDistance);
       albedo=mix(albedo,localMaterial.albedo,localContribution);
       roughness=mix(roughness,localMaterial.roughness,localContribution);
       if(microContribution>0.0)
       {
-        vec3 materialMicroNormal=EarthLandMicroNormal(localEnu,materialSelection);
+        vec3 materialMicroNormal=EarthLandMicroNormal(localEnu,materialSelection,mesoDomain);
         surfaceNormal=ComposeDecodedMicroNormal(surfaceNormal,materialMicroNormal,microContribution,localMaterial.microNormalStrength);
         roughness=clamp(roughness+(1.0-materialMicroNormal.z)*.08*microContribution,.52,.96);
       }

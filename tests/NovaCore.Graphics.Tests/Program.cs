@@ -39,6 +39,8 @@ var tests = new (string, Action)[]
     ("Local ENU procedural terrain frequency", LocalEnuProceduralTerrainFrequencyTest),
     ("Earth biome material classification", EarthBiomeMaterialClassificationTest),
     ("BC5 metric Earth material normals", EarthMaterialMicroNormalTest),
+    ("Compact tileable PBR ground materials", EarthMaterialPbrAssetTest),
+    ("Body-fixed Earth meso domains and anti-tiling", EarthMesoMaterialDomainTest),
     ("Height-aware Earth material synthesis", EarthHeightAwareMaterialSynthesisTest),
     ("Top-three Earth material selection", EarthTopThreeMaterialSelectionTest),
     ("Planet surface scatter placement", PlanetarySurfaceScatterPlacementTest),
@@ -214,6 +216,146 @@ static void EarthMaterialMicroNormalTest()
     }
 }
 
+static void EarthMaterialPbrAssetTest()
+{
+    var repository=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..",".."));
+    var packPath=Path.Combine(repository,"assets","earth","runtime","earth_material_pbr_v1.ncpbr");
+    var manifestPath=Path.Combine(repository,"assets","earth","runtime","earth_material_pbr_v1.manifest.json");
+    var bytes=File.ReadAllBytes(packPath);const int headerBytes=256,sectionBytes=6_990_640,layerBytes=1_398_128;
+    Check(bytes.Length==13_981_536&&System.Text.Encoding.ASCII.GetString(bytes,0,8)=="NCPBR01\0","PBR pack has the stable versioned runtime container");
+    Check(BinaryPrimitives.ReadUInt32LittleEndian(bytes.AsSpan(8,4))==1&&BinaryPrimitives.ReadUInt32LittleEndian(bytes.AsSpan(12,4))==headerBytes,"PBR pack version/header contract");
+    Check(BinaryPrimitives.ReadUInt32LittleEndian(bytes.AsSpan(16,4))==1024&&BinaryPrimitives.ReadUInt32LittleEndian(bytes.AsSpan(20,4))==1024&&BinaryPrimitives.ReadUInt32LittleEndian(bytes.AsSpan(24,4))==5&&BinaryPrimitives.ReadUInt32LittleEndian(bytes.AsSpan(28,4))==11,"PBR pack dimensions, families, and complete mip hierarchy");
+    Check(BinaryPrimitives.ReadUInt32LittleEndian(bytes.AsSpan(32,4))==layerBytes&&BinaryPrimitives.ReadUInt32LittleEndian(bytes.AsSpan(36,4))==layerBytes&&BinaryPrimitives.ReadUInt32LittleEndian(bytes.AsSpan(40,4))==sectionBytes&&BinaryPrimitives.ReadUInt32LittleEndian(bytes.AsSpan(44,4))==sectionBytes,"BC7 and BC5 sections use stable layer-major mip layouts");
+    Check(BinaryPrimitives.ReadUInt64LittleEndian(bytes.AsSpan(48,8))==headerBytes&&BinaryPrimitives.ReadUInt64LittleEndian(bytes.AsSpan(56,8))==headerBytes+sectionBytes,"PBR section offsets are explicit and contiguous");
+    var scales=new[]{3.5f,3f,2.5f,4.5f,4f};for(var index=0;index<5;index++){Check(BitConverter.Int32BitsToSingle(BinaryPrimitives.ReadInt32LittleEndian(bytes.AsSpan(160+index*4,4)))==scales[index],"PBR family scale matches registered BC5 metric coordinates");Check(BinaryPrimitives.ReadUInt32LittleEndian(bytes.AsSpan(180+index*4,4))==index,"PBR family identity is stable");}
+    Check(BinaryPrimitives.ReadUInt32LittleEndian(bytes.AsSpan(200,4))==1&&BinaryPrimitives.ReadUInt32LittleEndian(bytes.AsSpan(204,4))==2,"PBR pack explicitly records BC7-sRGB and BC5-linear representations");
+    var fileHash=Convert.ToHexString(SHA256.HashData(bytes));var albedoHash=Convert.ToHexString(SHA256.HashData(bytes.AsSpan(headerBytes,sectionBytes)));var surfaceHash=Convert.ToHexString(SHA256.HashData(bytes.AsSpan(headerBytes+sectionBytes,sectionBytes)));
+    Check(fileHash=="6F7DE900D190E6C4E9535F7C4B01A2ABB68AAEEDFF9671332012B55542FB0E8E"&&albedoHash=="8A3F160C9B4EFD18B910BBAE16E1B609F4DE5D37E34DA6F900D4E6332229B521"&&surfaceHash=="951F913918FBFB05275EB1FA53B2804624F9A4A2C1F1C7091E9FF18C82EB23C2","PBR pack and both payloads are deterministic and content-addressed");
+    using(var manifest=JsonDocument.Parse(File.ReadAllText(manifestPath))){var root=manifest.RootElement;Check(root.GetProperty("schema").GetString()=="NovaCore.EarthMaterialPbr/1"&&root.GetProperty("formats").GetProperty("albedo").GetString()=="BC7_SRGB"&&root.GetProperty("formats").GetProperty("roughnessMicroHeight").GetString()=="BC5_UNORM","manifest records the versioned GPU representations");Check(root.GetProperty("families").GetArrayLength()==5&&root.GetProperty("mipLevels").GetInt32()==11&&root.GetProperty("provenance").GetString()!.Contains("repository-owned",StringComparison.Ordinal),"manifest records family identity, mip policy, and lawful provenance");}
+
+    var familySummaries=new List<string>(5);var familyMeans=new Vector3[5];var roughnessMeans=new float[5];var heightSpans=new float[5];
+    for(var family=0;family<5;family++)
+    {
+        var colors=new List<Vector3>(32);var roughness=new List<float>(32);var heights=new List<float>(32);
+        for(var sample=0;sample<32;sample++)
+        {
+            var block=(sample*2017+family*131)%65536;var pixel=(sample*7+family*3)&15;
+            colors.Add(DecodeBc7Mode6(bytes.AsSpan(headerBytes+family*layerBytes+block*16,16),pixel));
+            var surfaceOffset=headerBytes+sectionBytes+family*layerBytes+block*16;
+            roughness.Add(DecodeBc4(bytes.AsSpan(surfaceOffset,8),pixel));heights.Add(DecodeBc4(bytes.AsSpan(surfaceOffset+8,8),pixel));
+        }
+        familyMeans[family]=colors.Aggregate(Vector3.Zero,(sum,value)=>sum+value)/colors.Count;roughnessMeans[family]=roughness.Average();heightSpans[family]=heights.Max()-heights.Min();
+        var luminanceSpan=colors.Max(value=>Vector3.Dot(value,new Vector3(.2126f,.7152f,.0722f)))-colors.Min(value=>Vector3.Dot(value,new Vector3(.2126f,.7152f,.0722f)));
+        Check(luminanceSpan>.018f&&heightSpans[family]>.08f,$"material family {family} contains visible local color and micro-height structure");
+        Check(roughness.All(value=>float.IsFinite(value)&&value is >=.29f and <=.99f),$"material family {family} roughness remains physical and bounded");
+        familySummaries.Add($"{family}:rgb=({familyMeans[family].X:F3},{familyMeans[family].Y:F3},{familyMeans[family].Z:F3}) rough={roughnessMeans[family]:F3} heightSpan={heightSpans[family]:F3}");
+    }
+    Check(familyMeans[0].X>familyMeans[0].Z*2f&&familyMeans[1].X>familyMeans[1].Z&&familyMeans[2].X/familyMeans[2].Z<1.4f&&familyMeans[3].Z>=familyMeans[3].X,"arid, temperate, rock, and snow families retain recognizable color identities");
+    Check(roughnessMeans.Distinct().Count()>=4&&roughnessMeans[1]>roughnessMeans[3],"per-family roughness is spatially variable and materially distinct");
+
+    var enu=new Vector2(1250.25f,-875.75f);var coordinates=scales.Select(scale=>enu/scale).ToArray();foreach(var camera in new[]{Vector3.Zero,new Vector3(900,-400,1200),new Vector3(-300,210,80)})Check(camera.LengthSquared()>=0&&coordinates.SequenceEqual(scales.Select(scale=>enu/scale)),"camera movement cannot enter PBR material coordinates");foreach(var rotation in new[]{DoubleQuaternion.Identity,DoubleQuaternion.FromAxisAngle(Double3.UnitY,.77)})Check(rotation.IsFinite&&coordinates.SequenceEqual(scales.Select(scale=>enu/scale)),"body rotation carries PBR and BC5 coordinates together without drift");
+    var terrain=PlanetaryTerrainDefinition.EarthAuthoritativeV3;var direction=new Double3(.31,.72,.62).Normalized();var elevation=terrain.SampleHeight(direction,24);Check(terrain.SampleHeight(direction,24)==elevation,"PBR micro-height never modifies authoritative elevation");
+
+    var shader=File.ReadAllText(Path.Combine(repository,"native","NovaCore.Native","shaders","earth_land_detail.glsl"));var fragment=File.ReadAllText(Path.Combine(repository,"native","NovaCore.Native","shaders","planetary.frag"));var native=File.ReadAllText(Path.Combine(repository,"native","NovaCore.Native","NovaCoreNative.cpp"));var generator=File.ReadAllText(Path.Combine(repository,"tools","earth_data","generate_material_pbr.py"));
+    Check(shader.Contains("binding=22",StringComparison.Ordinal)&&shader.Contains("binding=23",StringComparison.Ordinal)&&shader.Contains("EarthLandFamilyPbr",StringComparison.Ordinal),"shader consumes persistent BC7 color and BC5 roughness/micro-height arrays");
+    Check(shader.Contains("for(uint candidate=0u;candidate<3u;candidate++)",StringComparison.Ordinal)&&!shader.Contains("texture(earthMaterialAlbedo,vec3(enuMetres/EarthMaterialNormalScale(0u)",StringComparison.Ordinal),"expensive PBR resources are sampled only for selected top-three family indices");
+    Check(shader.Contains("pbrAlbedo/max(EarthLandFamilyReferenceAlbedo",StringComparison.Ordinal)&&fragment.Contains("albedo=mix(albedo,localMaterial.albedo,localContribution)",StringComparison.Ordinal),"local albedo is bounded macro-relative modulation under the existing continuous distance fade");
+    Check(shader.Contains("pbr.microHeight",StringComparison.Ordinal)&&shader.Contains("EarthMaterialHeightStrength(index)*heights",StringComparison.Ordinal),"asset micro-height drives the preserved bounded 3F-4 competition");
+    Check(native.Contains("VK_FORMAT_BC7_SRGB_BLOCK",StringComparison.Ordinal)&&native.Contains("EarthMaterialPbrPayloadBytes",StringComparison.Ordinal)&&native.Contains("RecordEarthMaterialPbrUpload",StringComparison.Ordinal)&&native.Contains("VK_IMAGE_VIEW_TYPE_2D_ARRAY",StringComparison.Ordinal),"renderer owns two persistent compressed arrays and one bounded startup upload");
+    Check(generator.Contains("mode=\"wrap\"",StringComparison.Ordinal)&&generator.Contains("downsample(albedo)",StringComparison.Ordinal)&&generator.Contains("np.concatenate((red_blocks, green_blocks), axis=1)",StringComparison.Ordinal),"generator preserves tileability, full linear-light mips, and correct BC5 interleaving");
+    Console.WriteLine($"Earth compact PBR materials: pack={bytes.Length} bytes; identity=5B25AD98ABD8EE66; scales=({string.Join(',',scales.Select(value=>value.ToString("F1",System.Globalization.CultureInfo.InvariantCulture)))}) m; {string.Join("; ",familySummaries)}; cameraDrift=0.000E+000 m");
+
+    static Vector3 DecodeBc7Mode6(ReadOnlySpan<byte> block,int pixel)
+    {
+        var low=BinaryPrimitives.ReadUInt64LittleEndian(block);var high=BinaryPrimitives.ReadUInt64LittleEndian(block[8..]);Check((low&0x7f)==0x40,"BC7 local albedo uses deterministic mode 6");var p0=(int)(low>>63);var p1=(int)(high&1);Span<int> a=stackalloc int[3];Span<int> b=stackalloc int[3];for(var component=0;component<3;component++){var shift=7+component*14;a[component]=(((int)(low>>shift)&127)<<1)|p0;b[component]=(((int)(low>>(shift+7))&127)<<1)|p1;}var index=pixel==0?(int)((high>>1)&7):(int)((high>>(4+(pixel-1)*4))&15);ReadOnlySpan<int> weights=[0,4,9,13,17,21,26,30,34,38,43,47,51,55,60,64];var weight=weights[index];return new Vector3(((64-weight)*a[0]+weight*b[0]+32)>>6,((64-weight)*a[1]+weight*b[1]+32)>>6,((64-weight)*a[2]+weight*b[2]+32)>>6)/255f;
+    }
+    static float DecodeBc4(ReadOnlySpan<byte> block,int pixel)
+    {
+        Span<float> palette=stackalloc float[8];palette[0]=block[0]/255f;palette[1]=block[1]/255f;if(block[0]>block[1])for(var index=1;index<7;index++)palette[index+1]=((7-index)*palette[0]+index*palette[1])/7f;else{for(var index=1;index<5;index++)palette[index+1]=((5-index)*palette[0]+index*palette[1])/5f;palette[6]=0;palette[7]=1;}ulong packed=0;for(var index=0;index<6;index++)packed|=(ulong)block[index+2]<<(8*index);return palette[(int)((packed>>(3*pixel))&7)];
+    }
+}
+
+static void EarthMesoMaterialDomainTest()
+{
+    var repository=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..",".."));
+    var helperPath=Path.Combine(repository,"native","NovaCore.Native","shaders","earth_land_detail.glsl");
+    var fragmentPath=Path.Combine(repository,"native","NovaCore.Native","shaders","planetary.frag");
+    var nativePath=Path.Combine(repository,"native","NovaCore.Native","NovaCoreNative.cpp");
+    var helper=File.ReadAllText(helperPath);var fragment=File.ReadAllText(fragmentPath);var native=File.ReadAllText(nativePath);
+    var points=new[]{new Vector2(0,0),new Vector2(1250.25f,-875.75f),new Vector2(-23_400.5f,9_125.25f),new Vector2(71_000.75f,44_000.125f)};
+    var baseline=points.Select(MesoDomain).ToArray();
+    var maximumNeighborStep=0f;var maximumDerivative=0f;var minimumJacobian=double.MaxValue;var minimumAntiRepeat=double.MaxValue;
+
+    for(var pointIndex=0;pointIndex<points.Length;pointIndex++)
+    {
+        var point=points[pointIndex];var domain=baseline[pointIndex];var repeated=MesoDomain(point);
+        Check(domain==repeated&&FiniteDomain(domain),"meso domain is deterministic, finite, and body-fixed");
+        foreach(var camera in new[]{Vector3.Zero,new Vector3(900,-400,1200),new Vector3(-300,210,80)})Check(camera.LengthSquared()>=0&&MesoDomain(point)==domain,"camera translation/orbit cannot enter meso-domain identity");
+        foreach(var rotation in new[]{DoubleQuaternion.Identity,DoubleQuaternion.FromAxisAngle(Double3.UnitY,.77),DoubleQuaternion.FromAxisAngle(new Double3(.2,.8,.3).Normalized(),2.1)})Check(rotation.IsFinite&&MesoDomain(point)==domain,"body rotation and maximum warp preserve meso-domain identity");
+
+        var neighbor=MesoDomain(point+new Vector2(.001f,-.001f));
+        maximumNeighborStep=MathF.Max(maximumNeighborStep,DomainDistance(domain,neighbor));
+        Check(neighbor.SampleBlend is >=.28f and <=.72f&&neighbor.RoughnessOffset is >=-.045f and <=.045f,"neighboring meso domains remain bounded");
+
+        for(var family=0;family<5;family++)
+        {
+            var coordinate=MesoCoordinates(point,family,domain);var epsilon=.01f;
+            var x0=MesoCoordinates(point-new Vector2(epsilon,0),family,MesoDomain(point-new Vector2(epsilon,0)));var x1=MesoCoordinates(point+new Vector2(epsilon,0),family,MesoDomain(point+new Vector2(epsilon,0)));
+            var y0=MesoCoordinates(point-new Vector2(0,epsilon),family,MesoDomain(point-new Vector2(0,epsilon)));var y1=MesoCoordinates(point+new Vector2(0,epsilon),family,MesoDomain(point+new Vector2(0,epsilon)));
+            var dx=(x1.Primary-x0.Primary)/(2*epsilon);var dy=(y1.Primary-y0.Primary)/(2*epsilon);var secondaryDx=(x1.Secondary-x0.Secondary)/(2*epsilon);var secondaryDy=(y1.Secondary-y0.Secondary)/(2*epsilon);
+            maximumDerivative=MathF.Max(maximumDerivative,new[]{dx.Length(),dy.Length(),secondaryDx.Length(),secondaryDy.Length()}.Max());
+            minimumJacobian=Math.Min(minimumJacobian,Math.Abs(dx.X*dy.Y-dx.Y*dy.X));
+            Check(FiniteCoordinates(coordinate)&&Finite2(dx)&&Finite2(dy)&&Finite2(secondaryDx)&&Finite2(secondaryDy),"rotated explicit-gradient coordinates remain finite");
+
+            var period=new[]{3.5f,3f,2.5f,4.5f,4f}[family];var shiftedPoint=point+new Vector2(period,0);var shifted=MesoCoordinates(shiftedPoint,family,MesoDomain(shiftedPoint));
+            var repeatDistance=Math.Min(FractionDistance(coordinate.Primary,shifted.Primary),FractionDistance(coordinate.Secondary,shifted.Secondary));minimumAntiRepeat=Math.Min(minimumAntiRepeat,repeatDistance);
+            Check(repeatDistance>.015,"one legacy tile-period translation no longer reproduces the same transformed material phase");
+        }
+    }
+    Check(maximumNeighborStep<1e-3f&&maximumDerivative<1f&&minimumJacobian>1e-3,"meso fields and transformed texture derivatives are continuous and nonsingular");
+
+    var sourceWeights=new Vector4(.34f,.29f,.22f,.04f);const float sourceFallback=.11f;var biasedA=ApplyFamilyBias(sourceWeights,sourceFallback,MesoDomain(new Vector2(850,-420)));var biasedB=ApplyFamilyBias(sourceWeights,sourceFallback,MesoDomain(new Vector2(1450,-120)));
+    Check(Math.Abs(biasedA.Families.X+biasedA.Families.Y+biasedA.Families.Z+biasedA.Families.W+biasedA.Fallback-1f)<2e-6f&&Math.Abs(biasedB.Families.X+biasedB.Families.Y+biasedB.Families.Z+biasedB.Families.W+biasedB.Fallback-1f)<2e-6f,"meso family bias remains normalized");
+    Check(Vector4.Distance(biasedA.Families,biasedB.Families)>1e-4f&&biasedA.Families.X>biasedA.Families.W,"independent meso domains organize families without overriding macro classification");
+
+    var terrain=PlanetaryTerrainDefinition.EarthAuthoritativeV3;var direction=new Double3(.31,.72,.62).Normalized();var elevation=terrain.SampleHeight(direction,24);Check(terrain.SampleHeight(direction,24)==elevation,"meso presentation never modifies authoritative elevation");
+    Check(helper.Contains("enuMetres/1280.0",StringComparison.Ordinal)&&helper.Contains("enuMetres/384.0",StringComparison.Ordinal)&&helper.Contains("enuMetres/96.0",StringComparison.Ordinal),"bounded meso hierarchy uses only 1.28 km, 384 m, and 96 m bands");
+    Check(helper.Contains("EarthMesoCoordinates",StringComparison.Ordinal)&&helper.Contains("textureGrad(earthMaterialAlbedo",StringComparison.Ordinal)&&helper.Contains("textureGrad(earthMaterialSurface",StringComparison.Ordinal)&&helper.Contains("textureGrad(earthMaterialNormals",StringComparison.Ordinal),"PBR and BC5 anti-tiling uses explicit transformed gradients");
+    Check(helper.Contains("EarthInverseRotateMeso(primaryNormal.xy",StringComparison.Ordinal)&&helper.Contains("period*1.13",StringComparison.Ordinal)&&helper.Contains("sampleBlend=mix(.28,.72",StringComparison.Ordinal),"dual rotated incommensurate samples retain tangent-normal orientation and bounded blending");
+    Check(helper.Contains("EarthApplyMesoFamilyBias",StringComparison.Ordinal)&&helper.Contains("domain.colorModulation",StringComparison.Ordinal)&&helper.Contains("domain.roughnessOffset",StringComparison.Ordinal)&&fragment.Contains("materialWeights=EarthApplyMesoFamilyBias",StringComparison.Ordinal),"family, color, and roughness organization use distinct bounded meso signals");
+    Check(!helper.Contains("camera",StringComparison.OrdinalIgnoreCase)&&fragment.Contains("EarthMesoMaterialDomain mesoDomain=EarthMesoDomain(localEnu)",StringComparison.Ordinal),"meso domains derive exclusively from fixed body-frame ENU");
+    Check(native.Contains("sampler.mipmapMode=VK_SAMPLER_MIPMAP_MODE_LINEAR",StringComparison.Ordinal)&&native.Contains("sampler.anisotropyEnable=VK_TRUE",StringComparison.Ordinal)&&native.Contains("sampler.maxAnisotropy=std::min(8.0f",StringComparison.Ordinal),"existing trilinear anisotropic material sampler remains authoritative");
+    Console.WriteLine($"Earth meso anti-tiling: bands=(1280,384,96) m; neighborStep={maximumNeighborStep:E3}; maximumDerivative={maximumDerivative:E3}; minimumJacobian={minimumJacobian:E3}; minimumLegacyPhaseSeparation={minimumAntiRepeat:E3}; cameraDrift=0.000E+000 m");
+
+    static (Vector4 FamilySignals,Vector2 PrimaryWarp,Vector2 SecondaryWarp,Vector3 Color,float RoughnessOffset,float SampleBlend) MesoDomain(Vector2 enu)
+    {
+        var geologyA=Noise(enu/1280f+new Vector2(17,61));var geologyB=Noise(enu/1280f+new Vector2(113,29));var patchA=Noise(enu/384f+new Vector2(47,101));var patchB=Noise(enu/384f+new Vector2(149,73));var localA=Noise(enu/96f+new Vector2(83,191));var localB=Noise(enu/96f+new Vector2(211,37));
+        var family=new Vector4(geologyA,geologyB,patchA,patchB);var primary=new Vector2(patchA-.5f,geologyB-.5f)*18f+new Vector2(localA-.5f,localB-.5f)*5f;var secondary=new Vector2(geologyA-.5f,patchB-.5f)*-21f+new Vector2(localB-.5f,localA-.5f)*6f;
+        var color=Vector3.Clamp(new Vector3((geologyA-.5f)*.055f+(localB-.5f)*.018f,(patchB-.5f)*.045f+(geologyB-.5f)*.012f,(geologyB-.5f)*.050f+(localA-.5f)*.014f),new Vector3(-.045f),new Vector3(.045f));var roughness=Math.Clamp((patchA-.5f)*.075f+(localB-.5f)*.025f,-.045f,.045f);var blend=.28f+.44f*Smooth(.18f,.82f,localA*.61f+localB*.39f);return(family,primary,secondary,color,roughness,blend);
+    }
+    static (Vector2 Primary,Vector2 Secondary,Vector2 PrimaryRotation,Vector2 SecondaryRotation,float Blend) MesoCoordinates(Vector2 enu,int index,(Vector4 FamilySignals,Vector2 PrimaryWarp,Vector2 SecondaryWarp,Vector3 Color,float RoughnessOffset,float SampleBlend) domain)
+    {
+        var family=(float)index;var primaryRotation=new Vector2(MathF.Cos(.37f+family*.91f),MathF.Sin(.37f+family*.91f));var secondaryRotation=new Vector2(MathF.Cos(-1.11f+family*.73f),MathF.Sin(-1.11f+family*.73f));var period=new[]{3.5f,3f,2.5f,4.5f,4f}[index];var primaryPhase=new Vector2(13.17f+family*19.31f,41.73f+family*7.91f);var secondaryPhase=new Vector2(71.29f+family*11.17f,23.53f+family*17.47f);return(Rotate(enu+domain.PrimaryWarp,primaryRotation)/(period*.97f)+primaryPhase,Rotate(enu+domain.SecondaryWarp,secondaryRotation)/(period*1.13f)+secondaryPhase,primaryRotation,secondaryRotation,domain.SampleBlend);
+    }
+    static (Vector4 Families,float Fallback) ApplyFamilyBias(Vector4 weights,float fallback,(Vector4 FamilySignals,Vector2 PrimaryWarp,Vector2 SecondaryWarp,Vector3 Color,float RoughnessOffset,float SampleBlend) domain)
+    {
+        var s=domain.FamilySignals;var m=Vector4.Clamp(new Vector4(.84f+.30f*(s.X*.62f+s.Z*.38f),.84f+.30f*(s.Y*.55f+s.W*.45f),.86f+.27f*(s.Z*.58f+s.Y*.42f),.88f+.23f*(s.W*.61f+s.X*.39f)),new Vector4(.82f),new Vector4(1.18f));var fallbackMultiplier=Math.Clamp(.88f+.24f*(s.X*.23f+s.Y*.31f+s.Z*.19f+s.W*.27f),.84f,1.16f);var families=weights*m;var nextFallback=fallback*fallbackMultiplier;var total=families.X+families.Y+families.Z+families.W+nextFallback;return(families/total,nextFallback/total);
+    }
+    static float Noise(Vector2 value){var ix=MathF.Floor(value.X);var iy=MathF.Floor(value.Y);var fx=value.X-ix;var fy=value.Y-iy;fx=fx*fx*(3-2*fx);fy=fy*fy*(3-2*fy);return Lerp(Lerp(Hash(ix,iy),Hash(ix+1,iy),fx),Lerp(Hash(ix,iy+1),Hash(ix+1,iy+1),fx),fy);}
+    static float Hash(float x,float y){var qx=Fract(x*.1031f);var qy=Fract(y*.1030f);var qz=Fract(x*.0973f);var dot=qx*(qy+33.33f)+qy*(qz+33.33f)+qz*(qx+33.33f);qx+=dot;qy+=dot;qz+=dot;return Fract((qx+qy)*qz);}
+    static Vector2 Rotate(Vector2 value,Vector2 cs)=>new(cs.X*value.X-cs.Y*value.Y,cs.Y*value.X+cs.X*value.Y);
+    static float FractionDistance(Vector2 a,Vector2 b){var delta=Vector2.Abs(new Vector2(Fract(a.X)-Fract(b.X),Fract(a.Y)-Fract(b.Y)));delta=Vector2.Min(delta,Vector2.One-delta);return delta.Length();}
+    static float DomainDistance((Vector4 FamilySignals,Vector2 PrimaryWarp,Vector2 SecondaryWarp,Vector3 Color,float RoughnessOffset,float SampleBlend) a,(Vector4 FamilySignals,Vector2 PrimaryWarp,Vector2 SecondaryWarp,Vector3 Color,float RoughnessOffset,float SampleBlend) b)=>new[]{Vector4.Distance(a.FamilySignals,b.FamilySignals),Vector2.Distance(a.PrimaryWarp,b.PrimaryWarp),Vector2.Distance(a.SecondaryWarp,b.SecondaryWarp),Vector3.Distance(a.Color,b.Color),MathF.Abs(a.RoughnessOffset-b.RoughnessOffset),MathF.Abs(a.SampleBlend-b.SampleBlend)}.Max();
+    static bool FiniteDomain((Vector4 FamilySignals,Vector2 PrimaryWarp,Vector2 SecondaryWarp,Vector3 Color,float RoughnessOffset,float SampleBlend) value)=>Finite4(value.FamilySignals)&&Finite2(value.PrimaryWarp)&&Finite2(value.SecondaryWarp)&&Finite3(value.Color)&&float.IsFinite(value.RoughnessOffset)&&float.IsFinite(value.SampleBlend);
+    static bool FiniteCoordinates((Vector2 Primary,Vector2 Secondary,Vector2 PrimaryRotation,Vector2 SecondaryRotation,float Blend) value)=>Finite2(value.Primary)&&Finite2(value.Secondary)&&Finite2(value.PrimaryRotation)&&Finite2(value.SecondaryRotation)&&float.IsFinite(value.Blend);
+    static bool Finite2(Vector2 value)=>float.IsFinite(value.X)&&float.IsFinite(value.Y);
+    static bool Finite3(Vector3 value)=>float.IsFinite(value.X)&&float.IsFinite(value.Y)&&float.IsFinite(value.Z);
+    static bool Finite4(Vector4 value)=>float.IsFinite(value.X)&&float.IsFinite(value.Y)&&float.IsFinite(value.Z)&&float.IsFinite(value.W);
+    static float Smooth(float a,float b,float value){var t=Math.Clamp((value-a)/(b-a),0f,1f);return t*t*(3-2*t);}
+    static float Fract(float value)=>value-MathF.Floor(value);
+    static float Lerp(float a,float b,float t)=>a+(b-a)*t;
+}
+
 static void EarthHeightAwareMaterialSynthesisTest()
 {
     var probes=new[]
@@ -249,7 +391,7 @@ static void EarthHeightAwareMaterialSynthesisTest()
     var repository=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..",".."));var helper=File.ReadAllText(Path.Combine(repository,"native","NovaCore.Native","shaders","earth_land_detail.glsl"));var fragment=File.ReadAllText(Path.Combine(repository,"native","NovaCore.Native","shaders","planetary.frag"));
     Check(helper.Contains("EarthMaterialMicroHeight",StringComparison.Ordinal)&&helper.Contains("EarthSelectLandMaterials",StringComparison.Ordinal)&&helper.Contains("smoothstep(vec3(maximum-.22)",StringComparison.Ordinal),"bounded continuous micro-height competition is explicit in the shared land-material helper");
     Check(helper.Contains("enuMetres/42.0",StringComparison.Ordinal)&&helper.Contains("enuMetres/68.0",StringComparison.Ordinal)&&helper.Contains("enuMetres/36.0",StringComparison.Ordinal)&&helper.Contains("enuMetres/180.0",StringComparison.Ordinal),"family micro-height patterns are deterministic, metric, and family-specific");
-    Check(fragment.Contains("EarthSelectLandMaterials(materialWeights,slope,localEnu,EarthMaterialMicroNormalFade(viewDistance))",StringComparison.Ordinal)&&fragment.Contains("albedo=mix(albedo,localMaterial.albedo,localContribution)",StringComparison.Ordinal),"height-aware response uses authoritative slope and preserves the existing local-detail fade");
+    Check(fragment.Contains("EarthSelectLandMaterials(materialWeights,slope,localEnu,EarthMaterialMicroNormalFade(viewDistance),mesoDomain)",StringComparison.Ordinal)&&fragment.Contains("albedo=mix(albedo,localMaterial.albedo,localContribution)",StringComparison.Ordinal),"height-aware response uses authoritative slope and preserves the existing local-detail fade");
     Console.WriteLine($"Earth height-aware synthesis: macro=({transitionMacro.X:F3},{transitionMacro.Y:F3},{transitionMacro.Z:F3}); oldWeights=({string.Join(',',transitionWeights.Select(value=>value.ToString("F3",System.Globalization.CultureInfo.InvariantCulture)))}); oldBlended/preLight=({oldRgb.X:F3},{oldRgb.Y:F3},{oldRgb.Z:F3}); oldRoughness={oldRoughness:F3}; oldBc5Contributions=({string.Join(',',transitionWeights.Select(value=>value.ToString("F3",System.Globalization.CultureInfo.InvariantCulture)))}); selected={string.Join('/',transitionSelection.Indices)} contributions=({string.Join(',',transitionSelection.Contributions.Select(value=>value.ToString("F3",System.Globalization.CultureInfo.InvariantCulture)))}); newLuminanceSpan={newSpan:F4}; maximumFamilyDistance={familyDistance:F4}; cameraDrift={maximumDrift:E3}; probes={string.Join("; ",summaries)}");
 
     static double Luminance(Double3 value)=>value.X*.2126+value.Y*.7152+value.Z*.0722;
