@@ -2,9 +2,36 @@
 
 NovaCore publishes immutable, root-resolved `PlanetaryPresentationSnapshot` data to Graphics. Graphics never owns a body's position, radius, hierarchy, ephemeris, or time.
 
-One permanent sphere cannot scale from solar-system views to a launch site. Far-field rendering therefore uses a shared whole-body proxy with the physical radius applied only in presentation. Near-field rendering uses a normalized cube-sphere: six stable faces are addressed by `(face, level, x, y)`, recursively partitioned in child order 0–3. Cube coordinates are normalized to the unit sphere, avoiding polar singularities, then scaled by the presentation body's physical radius.
+## Current production surface: terrain-v4
 
-The current production policy selects near field when camera altitude divided by radius is at or below a configurable presentation threshold. A GPU selector evaluates a deterministic projected-error quadtree against the current viewport and camera, while the managed CPU implementation remains the validation oracle. This policy is presentation-only and never participates in simulation identity.
+Earth production rendering is one body-fixed terrain-v4 authority. A shallow
+L0–L2 relaxed cube-sphere supplies global/orbital coverage from the checked
+`earth_surface_v4.nccube` pack. Patch identity is
+`body / terrain-version / face / level / x / y`; geometry, elevation, albedo,
+classification, and source-cloud payloads share that identity. The current
+renderer consumes the surface payloads; no atmosphere/cloud presentation pass
+is active. Parents remain opaque
+and authoritative until an entire child quartet is resident, then one coherent
+promotion epoch transfers ownership.
+
+Near-planet density is supplied by four persistent precomputed production
+Eyeball meshes (T0–T3), not per-frame mesh generation. A deterministic snapped
+body-fixed pupil and projected-error hysteresis choose the tier. The production
+Eye samples terrain-v4 cube payloads directly and exchanges sole terrain
+ownership with the shallow globe without an independently visible texture page
+or hidden legacy surface beneath it. Its topology hashes are
+`0x406A2FB30687F0DA`, `0x6A8D7F46E937CAE9`, `0xEA22A4136AFA7884`, and
+`0xA462CD4E25B748FB`.
+
+The old equirectangular SVT page model, 5×5 predictor, per-page fallback/fade,
+deep-global near-ground refinement, and per-frame radial Eyeball compute path
+were retired in 4C. Lawful source rasters and their provenance remain offline
+inputs. The checked R16 elevation oracle remains topology-neutral shared
+infrastructure for CPU clearance and CPU/GPU parity, not a second renderer.
+
+One permanent sphere cannot scale from solar-system views to a launch site. Far-field rendering therefore uses a shared whole-body proxy with the physical radius applied only in presentation. Earth global terrain then uses six stable relaxed cube faces addressed by `(face, level, x, y)` through shallow L2; the persistent production Eyeball tiers take sole close-range terrain ownership without changing that body-fixed geography. Unsupported bodies remain on the inexpensive generic whole-body/detailed path and cannot activate Earth terrain-v4 resources.
+
+The current Earth production policy selects global patch transactions and Eye tier from projected demand, residency completeness, snapped pupil identity, and bounded hysteresis. The managed topology and payload checks remain validation oracles. This policy is presentation-only and never participates in simulation identity.
 
 Astronomical body positions are never converted directly to FP32 model translations. The body center is first subtracted from the root-resolved camera position in doubles; patches are then expressed around this camera-relative center. Deep patches reconstruct their address and final camera-relative position in shader FP64 before rasterization. Terrain displacement remains renderer-owned presentation data and does not change snapshot or patch identity contracts.
 
@@ -78,9 +105,11 @@ The swapchain-dependent render target now includes one persistent `VK_FORMAT_D32
 
 Near-surface camera motion remains presentation-only. The Earth scene clamps requested clearance to two metres above the procedural surface, queries the same deterministic terrain function on the CPU for collision/floor placement, and blends the existing orbital orientation into a body-fixed east/north/up tangent frame between 1,000 km and 100 km. Camera and terrain positions are still subtracted in double precision before high/low GPU transport; neither evaluated Earth center nor physical mean radius changes. Discrete LOD refinement remains stable and stitched during the tested orbit-to-ground descent, but geomorphing is still deferred.
 
-10B-2B adds one immutable, body-associated `PlanetaryEnvironmentPresentation` contract for atmosphere, cloud, and ocean parameters. Earth’s version-1 repository-authored definition uses a 100 km atmosphere, 8 km Rayleigh and 1.2 km Mie scale heights, Mie anisotropy 0.76, a bounded 2–11 km cloud shell, and a 180 m presentation sea level. The fixed-width native environment record is 128 bytes and extends the frame submission to 640 bytes. Its center and physical radius must exactly match the focused presentation record; it carries no celestial position, time, or hierarchy authority.
+## Historical 10B-2B provisional environment (retired in 11B-4)
 
-The atmosphere is a renderer-owned fullscreen HDR layer drawn after the infinite background and before opaque geometry. It reconstructs camera rays, intersects physical planet/atmosphere spheres, and performs ten bounded density samples for Rayleigh/Mie color plus the procedural cloud shell. Existing reversed-Z terrain occludes the layer without a depth sample or another attachment. A deterministic in-atmosphere floor suppresses daytime stars and provides bounded blue sky/haze while fixed exposure and the existing ACES-style tone map remain unchanged. This is a compact presentation approximation, not a production multiple-scattering model.
+10B-2B added one immutable, body-associated `PlanetaryEnvironmentPresentation` contract for atmosphere, cloud, and ocean parameters. Earth’s version-1 repository-authored definition used a 100 km atmosphere, 8 km Rayleigh and 1.2 km Mie scale heights, Mie anisotropy 0.76, a bounded 2–11 km cloud shell, and a presentation sea level. The fixed-width native environment record was 128 bytes. It carried no celestial position, time, or hierarchy authority.
+
+That renderer-owned fullscreen HDR layer reconstructed camera rays, intersected physical planet/atmosphere spheres, and performed bounded density samples plus a procedural cloud shell. It was a compact presentation approximation, not a production multiple-scattering model. Its managed record, frame ABI field, descriptors, pipeline, shader, and draw are removed in 11B-4. No replacement environment effect is installed; evaluated-Sun lighting, HDR scene color, and tone mapping remain.
 
 Cloud density is deterministic body-direction FBM at fixed physical altitudes, so camera translation reveals shell parallax and never camera-attaches the pattern. The same logical density masks distant and detailed body materials, and evaluated-Sun direction controls cloud brightness. A small source-direction offset supplies a bounded matching shadow mask on land and water. Clouds are static presentation data: there is no weather simulation, dynamic storm evolution, wind, or high-frequency close-cloud volume.
 
@@ -90,19 +119,19 @@ Near-surface control is explicit `Orbital`, `Transition`, and `SurfaceLocal` pre
 
 At 3440×1440 on the development RX 6800 XT, validation-enabled end-to-end runs (including descent and cache warm-up) measured 5.653 ms for whole-Earth distant rendering and progressed through 22.581, 23.913, 27.085, 31.612, 35.230, 38.433, and 40.192 ms at successively closer low-orbit/~100 km/~10 km/~1 km/~100 m/~10 m/~2 m targets. The final LOD-22 endpoint retained 7,321 active and 7,905 resident leaves without overflow. Atmosphere, cloud, ocean, and terrain costs are not separately timestamped. The environment adds one persistent 128-byte host-visible storage buffer and one graphics pipeline; it reuses existing HDR/depth targets and creates no per-frame image, mesh, or descriptor. The result improves scale continuity but does not match the supplied KSA references: final geography, dense close cloud structure, vegetation, surface objects, foam, cloud self-shadowing, and production color grading remain future work.
 
-## Milestone 11A fixed-workload near field
+## Historical 11A fixed-workload near field (retired in 4C)
 
 The 10B-2A/2B deep quadtree remains a useful measured regional renderer, but its production surface responsibility is retired. At 3440×1440 the V1 Debug/validation path grew from 2,223 active leaves and 22.581 ms at 1,000 km to 7,321 leaves and 40.192 ms at the two-metre floor. Selection, 2:1 balancing, stitch metadata, cache lookup/generation, and up to 8,192 indirect instances all scaled with descent. The renderer now caps regional refinement at level 12 and uses it only above/through the new handoff.
 
-`PlanetaryEyeballTopology.Shared` is a deterministic camera-centric spherical parameterization, not a second quadtree. Vertex zero is a nonsingular center fan. The remaining vertices are 128 complete concentric rings with 256 azimuth samples each. Ring `r` maps to normalized radius `q = r / 128`, warped angular radius `q²`, and body-local direction `normalize(pupil cos(a) + tangent(azimuth) sin(a))`. The maximum angle is 120% of the physical camera horizon plus a 0.002-radian margin, capped below a hemisphere. Continuous annuli and wraparound indices are preconstructed once; no ring changes connectivity at runtime. Exact counts are 32,769 vertices and 195,840 indices, and the managed topology hash is `0x4A46E29A7D6E90A7`.
+The superseded `PlanetaryEyeballTopology.Shared` used one 32,769-vertex radial cap generated every frame. Its geometry, compute pipeline, constants, and topology hash are retained here only as milestone history; no source, shader, descriptor, or runtime owner remains after 4C.
 
 The pupil is the body-fixed intersection of the current camera view ray with the visible surface; only a ray miss falls back to `normalize(camera - evaluatedBodyCenter)`. The cap includes the view-cone half angle in addition to 120% of the physical horizon and the existing margin. A deterministic east/north tangent basis orients each ring. Camera movement changes only the 128-byte per-frame eye constants; height and material functions receive the resulting body-fixed direction, never a ring, vertex, camera, or screen identity. Consequently the presentation topology can move underneath stationary body-fixed terrain without changing terrain truth. The managed CPU oracle and shader share the version-2 level-independent seven-octave elevation definition; regional compatibility calls retain a level argument but it no longer changes height.
 
-## 11B-2C spatial coverage and demand
+## Historical 11B-2C spatial coverage and SVT demand (retired in 4C)
 
 The disappearance captured in `Our Earth Popping Invisble.mp4` was a projection discontinuity, not an ephemeris, culling, or SVT failure. Solar retained a 1,000 km near plane throughout the 2,000–1,000 km SurfaceAnchor blend, then switched directly to 5 cm. The aimed surface moved behind that near plane for about 1.2 seconds before full SurfaceLocal mode restored it. The new continuous near-plane policy remains smaller than the current surface distance, and Distant/Regional/Eyeball state now has an explicit no-empty-owner invariant.
 
-Regional selection keeps the existing cube-sphere hierarchy and projected patch-diameter/camera-distance metric. It now reports frustum and horizon rejection independently and retains a parent whenever the bounded stack/output budget cannot accept all four children. A previous leaf splits only above 112% of the target span; a previously refined node merges below 88%. Stable camera state therefore produces the same leaves without threshold chatter. The near topology and SVT request center share the view-ray surface hit. SVT demand starts during regional presentation, requests a bounded ancestor chain plus 5×5 finest-level neighborhood, and preserves the two-upload frame budget, 128-slot pool, nearest-parent fallback, gutters, and 30-frame promotion. Missing pages never suppress geometry.
+This milestone established bounded coverage, visibility telemetry, and the view-ray surface footprint. Its equirectangular 5×5 page predictor, independent ancestor fallback, 128-slot page pool, gutters, and per-page promotion were superseded by terrain-v4 patch transactions. The coverage and body-fixed authority invariants survive in the production selector and cache.
 
 The checked Earth pack contains `L0..L4`, 256×256 logical tiles (260×260 with gutters), and logical global widths 512, 1024, 2048, 4096, and 8192. At Earth mean radius these are approximately 78.18, 39.09, 19.55, 9.77, and 4.89 km per equatorial texel. Elevation is also 8192×4096. Metre-scale viewing therefore magnifies kilometre-scale source samples; it cannot reveal truthful local geography. The future body-fixed hierarchy is checked global macro imagery → independently streamed regional pages → local surface material detail → metric procedural/micro-normal detail. No dataset or compression format changes in 11B-2C.
 
@@ -126,7 +155,7 @@ Release/no-validation 3440×1440 stationary measurements after 11A-2 are 6.095, 
 
 The scoped 11A-2 procedural visual gate passes: close terrain has readable multi-scale structure, slope/roughness differentiation, filtered micro-lighting, atmospheric depth, stable ocean response, lateral body-fixed motion, and a stable animated handoff. It still does not match the supplied KSA references or constitute production Earth data. Authored geography/material imagery, coastline-focused capture coverage, true volumetric close clouds, physical ocean/weather, vegetation, rocks, structures, spacecraft, and navigation remain deferred. The next rendering milestone should introduce a lawful authored planetary surface-data/virtual-texture seam and its streaming budget while retaining this fixed near-field topology.
 
-## Milestone 11A-3 Earth data and bounded virtual texturing
+## Historical 11A-3 Earth data and bounded virtual texturing (retired runtime format)
 
 Earth macro presentation is now data-driven. The checked runtime pack combines NASA Blue Marble December 2004 unshaded true-color imagery, NASA Blue Marble cloud coverage, and NOAA ETOPO 2022 60-arc-second surface elevation. `assets/earth/PROVENANCE.md` records the source URLs, source hashes, public-use terms, resolutions, and preprocessing. The deterministic offline builder normalizes every layer to north-up EPSG:4326, constructs five levels (`0` through `4`) containing 682 registered tiles, writes a 256×256 interior with a two-texel geographic gutter on every side (260×260 physical texels), and emits a manifest and SHA-256 identities. Longitude gutters wrap and polar gutters clamp; generation validates the interior and all four gutters for every layer and tile. Albedo is sRGB RGBA8 with an authoritative land/ocean alpha mask, elevation is R16 UNORM mapped over -11,000 to +9,000 metres, and cloud coverage is R8 UNORM. The v2 runtime pack is 322,722,528 bytes; the separate 8192×4096 signed-height CPU oracle is 67,108,864 bytes.
 
@@ -138,7 +167,7 @@ The independent Earth cloud channel drives the existing bounded shell and the la
 
 The normal checked-data path reports 22–28 disk loads/uploads, no evictions or queue drops, 12–16 initial fallback frames, and 24–30 occupied slots in stationary 100 km through 2 m proofs. If the pack is absent or invalid, the renderer explicitly logs `bounded procedural root fallback active`, generates only the two global roots, performs no disk requests, and remains Vulkan-valid without black tiles. This is a labeled development fallback, not a silent return to procedural macro geography.
 
-## Milestone 11B-3A GPU-native Earth texture channels
+## Historical 11B-3A GPU-native Earth texture channels (retired runtime format)
 
 The checked production-v3 pack preserves the v2 geographic tile contract: 256×256 logical interiors, two gutter texels per side, and 260×260 physical tiles. Because 260 is divisible by four, BC storage requires no new padding and does not alter page identity, wrap, polar clamp, or gutter filtering. The pack header is 256 bytes and contains four fixed descriptors with semantic, format, color space, maximum level, tile count, bytes per tile, and section offset. Old `NCVTEAR1`/version-2 data is never interpreted as version 3.
 
@@ -152,41 +181,43 @@ The repository-authored offline converter uses pinned NumPy 2.3.5 (BSD-3-Clause)
 
 The v3 pack is 162,781,056 bytes versus 322,722,528 bytes for v2, a 49.56% reduction. The unchanged 67,108,864-byte CPU elevation oracle makes the complete checked Earth runtime payload 229,889,920 bytes versus 389,831,392 bytes, a 41.03% reduction. Compression does not create geographic detail: L4 remains 8192×4096, approximately 4.89 km per equatorial texel. The next data milestone must add lawful regional imagery and elevation targeting roughly 10–30 m/texel where practical rather than spending the savings on indiscriminate global residency.
 
-## Milestone 11B-3B optional bounded regional pages
+## Historical 11B-3B optional bounded regional pages (retired runtime format)
 
-The first optional regional pack layers 48 sparse Mount St. Helens pages from
+The first optional regional pack layered 48 sparse Mount St. Helens pages from
 L5 through L12 over the unchanged global-v3 Earth hierarchy. Regional pages
-retain the exact equirectangular body-fixed identity, 256×256 logical interior,
+retained the exact equirectangular body-fixed identity, 256×256 logical interior,
 two-texel gutter, and 260×260 physical extent. Albedo is BC7 sRGB, elevation is
 R16 UNORM over -11,000 to +9,000 metres, and source validity is BC4. At the
 proof latitude L12 represents about 13.23 metres per texel.
 
-The renderer reads `earth_regions.index` once, validates exact size/SHA-256,
-header identity, channel descriptors, and ordered page records, then uses
-three fixed 512-entry per-channel GPU hash tables. Pages stream independently
+The retired renderer read `earth_regions.index` once, validated exact size/SHA-256,
+header identity, channel descriptors, and ordered page records, then used
+three fixed 512-entry per-channel GPU hash tables. Pages streamed independently
 in level/Y/X order into reserved slots 80–127 of the existing BC7/R16/BC4
 arrays. Regional lookup searches from
-the requested level through L5; a miss continues through the existing global
-requested/parent/root path. BC4 validity blends the optional data boundary,
-so no absent regional pixel can create a material or geometry hole. The pack
-adds one 24,624-byte storage buffer but no texture array, descriptor scan,
+the requested level through L5; a miss continued through the existing global
+requested/parent/root path. BC4 validity blended the optional data boundary,
+so no absent regional pixel could create a material or geometry hole. The pack
+added one 24,624-byte storage buffer but no texture array, descriptor scan,
 runtime decode, GeoTIFF parser, or per-frame filesystem work.
 
-The proof pack is 11,359,360 bytes and uploads its 48 pages once as 144 channel
+The proof pack was 11,359,360 bytes and uploaded its 48 pages once as 144 channel
 payloads (11,356,800 bytes). At most two pages/six payloads/473,200 bytes are
 scheduled per frame through the existing 1,081,600-byte staging buffer. The
 active 1 km validation occupied 78 of 128 albedo/elevation/mask layers and 18
-cloud layers with no eviction or queue drop; the three regional channels use
+cloud layers with no eviction or queue drop; the three regional channels used
 48 existing slots each. Detailed source and transformation authority is in
 `planetary-data-ingestion.md`.
 
+None of these packs, indices, descriptors, lookup tables, or residency rules is mounted or supported by the current runtime. The source manifest remains only as historical lawful-data provenance.
+
 ## Milestone 11A-4 body-fixed orientation and camera separation
 
-Physical orientation is evaluated once per body and update from the authoritative `SimulationInstant`; it is never accumulated from render time. The simulation layer publishes a normalized body-fixed-to-inertial quaternion for each major body, while the translational celestial hierarchy remains inertial and unchanged. `PlanetaryPresentationSnapshot` copies that quaternion into each immutable proxy. The 160-byte native presentation record transports it to distant, regional, eyeball, environment, and ring paths.
+Physical orientation is evaluated once per body and update from the authoritative `SimulationInstant`; it is never accumulated from render time. The simulation layer publishes a normalized body-fixed-to-inertial quaternion for each major body, while the translational celestial hierarchy remains inertial and unchanged. `PlanetaryPresentationSnapshot` copies that quaternion into each immutable proxy. The 176-byte native presentation record transports it to distant, generic detailed, production globe/Eyeball, and ring paths.
 
-Camera controls operate in presentation space only. Focus-orbit and `SurfaceLocal` camera positions are retained in body coordinates and transformed through the evaluated body quaternion when constructing the root pose. GPU regional and eyeball inputs receive root-to-body camera and view vectors; generated body-local geometry is rotated back into the root camera-relative frame exactly once. Material, Earth SVT, terrain, ocean, cloud, and geographic page directions are body fixed. Moving the camera therefore changes pupil and visibility coordinates but cannot change physical longitude or page identity.
+Camera controls operate in presentation space only. Focus-orbit and `SurfaceLocal` camera positions are retained in body coordinates and transformed through the evaluated body quaternion when constructing the root pose. Production globe/Eyeball inputs receive root-to-body camera and view vectors; generated body-local geometry is rotated back into the root camera-relative frame exactly once. Terrain-v4 patch identity, material directions, pupil coordinates, and surface anchors remain body fixed. Moving the camera changes visibility and tier demand but cannot change physical geography.
 
-Saturn's ring orientation is now relative to the Saturn body-fixed frame, so its plane follows the authoritative equatorial pole while prime-meridian spin leaves the plane unchanged. The old per-material visual longitude offsets are zero and ignored by the shader. Earth SVT retains its existing 256×256 interior, two-texel gutters, 128 slots, nearest-parent fallback, and 30-frame promotion policy.
+Saturn's ring orientation is relative to the Saturn body-fixed frame, so its plane follows the authoritative equatorial pole while prime-meridian spin leaves the plane unchanged. Earth production data now uses 256×256 cube-patch interiors, four-texel canonical spherical gutters, bounded patch payload residency, and transactional quartet promotion.
 
 Milestone 11A-4D removes the distance-dependent convention split in the whole-body shader and the remaining frame leaks found at the handoff. The distant mesh previously formed root-space positions from an unrotated local sphere even though it inverse-rotated normal, material, view, and light directions into body space; regional and eyeball paths instead rotated body-local geometry into root space. The distant path now rotates its body-local position by the exact same immutable quaternion exactly once. The detailed vertex path derives `SunCenter - BodyCenter` from two root-camera-relative values before transforming that vector into body space; it no longer subtracts a body-relative patch center from a root-relative Sun center. The corrected focused camera is body-centered but non-rotating: paused drag changes the inertial orbital offset at fixed distance, while time advancement follows only body translation. Deterministic tests run every non-stellar body through detailed-only, transition, and distant-only states and exercise Earth, Mars, Jupiter, Saturn, and Moon through the full speed catalog while requiring invariant celestial authority and a rotating body-fixed longitude beneath the camera.
 

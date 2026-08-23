@@ -1,4 +1,3 @@
-#include "earth_virtual_texture.glsl"
 float PlanetHash(vec3 p){p=fract(p*0.1031);p+=dot(p,p.yzx+33.33);return fract((p.x+p.y)*p.z);}
 float PlanetNoise(vec3 p){vec3 i=floor(p),f=fract(p);f=f*f*(3.0-2.0*f);return mix(mix(mix(PlanetHash(i),PlanetHash(i+vec3(1,0,0)),f.x),mix(PlanetHash(i+vec3(0,1,0)),PlanetHash(i+vec3(1,1,0)),f.x),f.y),mix(mix(PlanetHash(i+vec3(0,0,1)),PlanetHash(i+vec3(1,0,1)),f.x),mix(PlanetHash(i+vec3(0,1,1)),PlanetHash(i+vec3(1)),f.x),f.y),f.z);}
 float PlanetFbm(vec3 p){float value=0.0,weight=.55;for(int octave=0;octave<5;octave++){value+=weight*PlanetNoise(p);p=p*2.03+vec3(11.7,4.3,7.1);weight*=.5;}return value;}
@@ -50,7 +49,7 @@ vec3 ComposeDecodedMicroNormal(vec3 macroNormal, vec3 localMicroNormal, float lo
 vec3 RotatePlanetY(vec3 direction,float angle){float c=cos(angle),s=sin(angle);return vec3(c*direction.x+s*direction.z,direction.y,-s*direction.x+c*direction.z);}
 vec3 PlanetAlbedo(uint source,vec3 direction,vec3 tint,float rotation){
   vec3 n=normalize(direction);float latitude=abs(n.y);float longitude=atan(n.z,n.x);float broad=PlanetFbm(n*2.4);float detail=PlanetFbm(n*9.0);
-  if(source==10u){vec4 albedoLand;float elevation,cloud,blend;uint level;EarthSurfaceSample(n,0u,0u,albedoLand,elevation,cloud,blend,level);return albedoLand.rgb*tint;}
+  if(source==10u)source=3u;
   if(source==1u||source==4u){float craters=smoothstep(.66,.42,abs(fract(PlanetNoise(floor(n*14.0))*7.0+detail)-.5));float shade=.55+.45*broad-.13*craters;return tint*shade;}
   if(source==2u){float bands=.5+.5*sin(n.y*42.0+PlanetFbm(n*5.0)*7.0+longitude*.8);return mix(tint*.68,vec3(1.0,.76,.43),.35+.45*bands);}
   if(source==3u){

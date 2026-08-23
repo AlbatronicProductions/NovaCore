@@ -15,7 +15,6 @@ layout(location=4) flat out uvec2 material;
 layout(location=5) flat out vec4 response;
 layout(location=6) out vec3 viewDirection;
 layout(location=7) flat out float surfaceAltitudeMetres;
-layout(location=8) flat out uint requestedEarthLevel;
 vec3 RotateQuaternion(vec3 point,vec4 quaternion){return point+2.0*cross(quaternion.xyz,cross(quaternion.xyz,point)+quaternion.w*point);}
 vec3 InverseRotateQuaternion(vec3 point,vec4 quaternion){return RotateQuaternion(point,vec4(-quaternion.xyz,quaternion.w));}
 void main(){
@@ -31,5 +30,4 @@ void main(){
   response=presentation.surface;
   viewDirection=InverseRotateQuaternion(-position,presentation.bodyOrientation);
   surfaceAltitudeMetres=max((presentation.blendMetricState.y-1.0)*presentation.centerRadius.w,0.0);
-  requestedEarthLevel=min(uint(planetaryInput.textureDemand.w),1u);
 }

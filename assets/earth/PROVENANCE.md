@@ -15,12 +15,12 @@ elevation, and cloud channels.
 - NASA makes the collection free and open to use. NASA media guidance applies;
   NovaCore does not imply NASA endorsement.
 
-The runtime albedo is deterministically Lanczos-resampled without geographic
-reprojection to registered 2:1 equirectangular levels through 16384 × 8192.
-Longitude wraps, polar rows clamp, each 256-pixel interior receives a two-texel
-geographic gutter, and the result is encoded as opaque BC7 mode-6 sRGB. The
-superseded 5400 × 2700 JPEG remains checked only as prior-source provenance; it
-is not used by the current runtime pack.
+The production runtime samples this lawful equirectangular source offline into
+the body-fixed relaxed cube-sphere hierarchy. Each 256-pixel patch receives a
+four-texel canonical spherical gutter that crosses cube-face edges through the
+same projection used by runtime geometry. The source raster is not a runtime
+addressing system. The superseded 5400 × 2700 JPEG remains checked only as
+prior-source provenance; it is not used by the current runtime pack.
 
 ## Elevation and land/ocean classification
 
@@ -42,36 +42,28 @@ is not used by the current runtime pack.
 
 ## Reproduction
 
-Run `tools/earth_data/upgrade_earth_pack_v3.py` with the checked v3 pack as its
-preserved-channel base and the authoritative 21600 × 10800 albedo source to
-replace only the global albedo section. The elevation, land-mask, and cloud
-sections are copied byte-for-byte and their section hashes are recorded in the
-manifest. The legacy v2-to-v3 mode remains available for complete historical
-reproduction. The upgrade tool requires NumPy 2.3.5 as pinned in
-`tools/earth_data/requirements.txt`; NumPy is BSD-3-Clause licensed and is an
-offline build dependency only. The repository-authored converter implements
-its own deterministic BC1 quality candidate, BC4, and opaque BC7 mode-6
-encoders. No third-party texture encoder or decoder is shipped or loaded at
-runtime.
+Run `tools/earth_data/build_elevation_oracle.py` to reproduce the checked
+8192 × 4096 signed-elevation CPU oracle, then run
+`tools/earth_data/build_cube_surface_pack.py` with the authoritative albedo,
+elevation, and cloud sources to reproduce `earth_surface_v4.nccube`. NumPy
+2.3.5 and Pillow 11.3.0 are pinned offline build dependencies. The terrain-v4
+manifest records source hashes, patch identity, channel layout, payload hashes,
+and the complete L0–L2 hierarchy. Its 126 records are addressed by
+`body / terrain-version / face / level / x / y`; RGB8 sRGB albedo, R16
+elevation, R8 land mask, and R8 cloud data for one patch are one transaction.
+The pack is 61,484,224 bytes with SHA-256
+`5e92a0676bf8cd64f4c00b5e8d79f4b8186cd9a8a57b395138edbab760f1cb76`.
 
-The checked v3 manifest records source and output SHA-256 values, deterministic
-identity, tile geometry, channel semantic, GPU format, color space, maximum
-useful level, section offset, measured compression quality, and output size.
-Source paths never participate in identity. Production format v3 retains
-256 × 256 interiors with a two-texel geographic gutter on each side; longitude
-wraps and polar rows clamp deterministically. The 260 × 260 physical extent is
-already divisible by the BC 4 × 4 block size, so no geographic padding or page
-identity changes are required. R16 elevation bytes are copied verbatim from the
-validated intermediate.
+## Retired Mount St. Helens bounded regional proof
 
-## Mount St. Helens bounded regional proof
-
-The optional regional proof uses bounded exports from the official USGS NAIP
+The historical regional proof used bounded exports from the official USGS NAIP
 and 3DEP ImageServer services. Its complete product names, acquisition and
 service dates, public-domain terms, attribution, export queries, CRS, vertical
 datum, dimensions, byte counts, and SHA-256 values are checked in
 `source/regional/mount_st_helens/source.json`. The source GeoTIFFs total
-30,677,362 bytes. `tools/planetary_data/ingest_region.py` produces the optional
-11,359,360-byte `mount_st_helens_v1.ncvreg` pack; it does not alter the global
-Earth pack or the CPU elevation oracle. See `docs/planetary-data-ingestion.md`
-for the regional format, fallback, budgets, and measured proof limits.
+30,677,362 bytes. Its equirectangular `.ncvreg` builder and runtime pack were
+retired in 4C because production terrain-v4 no longer admits independently
+visible regional pages. The lawful source files and manifest remain as
+scientific provenance for a future patch-aligned cube-surface ingestion path.
+See `docs/planetary-data-ingestion.md` for the archived proof and retirement
+boundary.

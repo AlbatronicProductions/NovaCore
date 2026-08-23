@@ -4,7 +4,6 @@ using NovaCore.Interop;
 
 internal static class SolarPlanetMaterials
 {
-    internal static readonly PlanetaryEnvironmentCatalog Environments = new([PlanetaryEnvironmentPresentation.EarthDataV2]);
     internal static readonly PlanetMaterialCatalog Catalog = new(
     [
         Material(3, PlanetMaterialKind.Rocky, PlanetAlbedoSource.MercuryProcedural, new(.52f, .50f, .47f), .92f, .03f, 0f),

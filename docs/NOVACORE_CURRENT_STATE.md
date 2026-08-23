@@ -4,7 +4,27 @@
 
 Inspect `git status --short` before editing. Preserve all existing unstaged work unless the active task explicitly changes it. Repository code and tests are authoritative if this document ever becomes stale.
 
-## Current milestones: completed 9A-4F-2, 11A planetary/orientation architecture, and 11B-3B bounded regional ingestion
+## Current milestones: celestial-v3 and NovaCore 11B-4 production spherical surface
+
+Continuous Earth terrain-v4 is the sole production Earth terrain authority.
+The retained global path is a shallow L0–L2 body-fixed relaxed cube-sphere
+backed by the checked 61,484,224-byte `earth_surface_v4.nccube` hierarchy. Its
+126 patch transactions carry albedo, elevation, classification, and cloud data
+under `body / terrain-version / face / level / x / y`. The complete parent
+remains opaque while a complete child quartet prepares. Near-planet density is
+owned by four persistent production Eyeball tiers with deterministic snapped
+body-fixed pupil identity and projected-error hysteresis. T0–T3 hashes are
+`0x406A2FB30687F0DA`, `0x6A8D7F46E937CAE9`, `0xEA22A4136AFA7884`, and
+`0xA462CD4E25B748FB`.
+
+4C/11B-4 remove the superseded equirectangular SVT descriptors,
+request/upload/page cache, independent fallback/fade, sparse regional overlay,
+deep-global close-range ownership, and per-frame radial Eyeball compute
+pipeline. The
+checked 8192×4096 R16 elevation oracle remains topology-neutral shared CPU
+infrastructure. Lawful source imagery, source manifests, and provenance remain
+offline inputs. Non-Earth bodies continue through the bounded generic renderer
+and cannot activate Earth terrain-v4 resources.
 
 NovaCore now has a deterministic, true-distance Solar System presentation built from `SolCompact-DE440Validated-v3`. `--scene=sol` evaluates Sun, Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn, Uranus, and Neptune at the current `SimulationInstant`, root-resolves them through `CelestialSystemEvaluator`, and publishes immutable `PlanetaryPresentationSnapshot` data to Graphics. It is a compact analytical runtime validated offline against DE440, not runtime DE440 playback.
 
@@ -16,13 +36,15 @@ Labels use deterministic NDC collision rejection in focused, direct parent/child
 
 10B-1B adds one immutable presentation-material catalog shared by the distant sphere and detailed cube-sphere paths. Repository-authored direction-space procedural materials now distinguish Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn, Uranus, and Neptune without per-patch data or body-specific pipelines. Saturn uses the first generic ring record and one persistent annulus mesh; ordered far-ring/body/near-ring draws provide correct planet occlusion. Milestone 11A-4 removes the old presentation-rotation approximation: material longitude and Saturn's equatorial ring plane now consume the authoritative body-fixed transform.
 
-10B-2A proves the surface-scale continuation of that same Earth path. The existing quadtree address extends safely through level 24, with production capped at level 22 and 8,192 active patches. GPU selection uses viewport-scaled projected error, horizon and view-cone culling, deterministic sparse traversal, the established 2:1 balancing/stitching policy, and CPU/GPU exact-set validation. A persistent 8,192-slot renderer cache stores 289 double elevations per resident patch and generates only deterministic cache misses from the versioned repository-authored Earth procedural source. Shader FP64 reconstructs deep patch coordinates and preserves the established double camera-relative transport.
+The following 10B/11A/11B entries preserve milestone history. Any equirectangular SVT, deep-global close-range, regional-page, or old radial-Eyeball ownership described there is superseded by terrain-v4 above.
+
+10B-2A historically proved the surface-scale continuation of that same Earth path. The previous quadtree address extended safely through level 24, with production capped at level 22 and 8,192 active patches. GPU selection used viewport-scaled projected error, horizon and view-cone culling, deterministic sparse traversal, the established 2:1 balancing/stitching policy, and CPU/GPU exact-set validation. That deep-global near-ground owner is no longer production architecture.
 
 The renderer now owns a swapchain-dependent D32 depth target and uses direct reversed-Z projections: finite for local scenes and infinite-far for Solar scale. The Earth camera can descend to a ten-metre terrain clearance, queries the same deterministic source for its presentation-only floor, and blends into a body-fixed east/north/up tangent frame below 1,000 km. Authoritative Earth center, radius, celestial time, hierarchy, and Sol v3 identity remain unchanged.
 
 10B-2B makes the camera transition explicit: `Orbital` above 1,000 km, smooth body-fixed tangent blending through 1,000–100 km, and `SurfaceLocal` at or below 100 km. The captured immutable body-local surface focus retains local yaw/pitch and the ten-metre terrain/ocean floor; receding releases it and returns to orbit without changing the evaluated Earth snapshot.
 
-One immutable Earth environment record now drives a bounded 100 km HDR atmosphere, a deterministic 2–11 km body-attached procedural cloud shell, and a 180 m presentation sea level. The fullscreen atmosphere/cloud pass renders between the infinite background and opaque reversed-Z geometry. Distant and detailed planet materials share cloud density/shadow policy and evaluated-Sun lighting. Terrain below sea level clamps to a stable spherical ocean surface with radial normals, roughness/specular response, bounded procedural waves, and Fresnel color. These are repository-authored presentation proofs, not real Earth geography, production atmospheric scattering, dynamic weather, or physical ocean simulation.
+The 10B-2B provisional environment record and fullscreen atmosphere/cloud pass are retired in 11B-4. No replacement atmosphere, cloud shell, fog, or ocean presentation is installed. The numeric sea-level floor remains terrain/material data rather than an environment renderer. Evaluated-Sun lighting, day/night terminators, FP16 HDR scene color, and tone mapping remain production infrastructure.
 
 Milestone 11A retires deep levels 13–22 from the production near-field. From 2,000 to 1,000 km a smooth deterministic overlap hands the regional cube-sphere to one renderer-lifetime concentric spherical topology; at and below 1,000 km no CPU terrain leaves, neighbor balancing, stitch masks, cache lookup, or regional terrain dispatch run. The topology has 128 warped radial rings, 256 azimuth segments, 32,769 vertices, 195,840 indices, and deterministic hash `0x4A46E29A7D6E90A7`. Its squared radial parameter concentrates samples at the body-local camera pupil while a compute pass evaluates the version-2 continuous Earth height field, finite-difference normals, camera-relative vertices, and one indexed-indirect command.
 
@@ -36,7 +58,7 @@ The production-v3 identity is `664ff32c3a57043960f246d5d97397214cedc4b976e48e867
 
 Milestone 11A-4 adds a separate exact-epoch body-fixed authority for Mercury through Neptune. `SimulationInstant.Zero` remains J2000 ET zero; each update evaluates one normalized body-fixed-to-inertial quaternion and angular velocity. Venus and Uranus retain their negative-spin conventions. The final lunar-precision checkpoint uses the official DE440 `MOON_PA_DE440` binary-PCK solution through the `MOON_ME_DE440_ME421` frame chain. A checked 1900–2100, six-hour residual pack contains 292,201 records in 3,506,540 bytes with hash `0x3BCE78D924EA3532`; warmed runtime evaluation is kernel-free and allocation-free. The complete 13-term `IAU_MOON` text-PCK model remains the explicit fallback outside coverage or if pack validation fails. Moon translation and the Sun-rooted/Earth-relative-Moon hierarchy are unchanged.
 
-The immutable planetary snapshot now carries body-fixed orientation beside each evaluated center and physical radius. Camera orbit, zoom, focus, and `SurfaceLocal` motion are converted into or out of that frame but never write it. Earth SVT page identity, terrain, material directions, lighting inputs, eyeball pupil coordinates, and surface anchors remain body fixed while final geometry is rotated into the root inertial frame. The fixed-width planetary presentation ABI is 160 bytes and the frame submission ABI is 784 bytes. Orientation reference hash at ET0 is `0xD5767D2C2BABE9AA`; warmed evaluation of all nine bodies is allocation-free.
+The immutable planetary snapshot carries body-fixed orientation beside each evaluated center and physical radius. Camera orbit, zoom, focus, and `SurfaceLocal` motion are converted into or out of that frame but never write it. Terrain-v4 patch identity, material directions, lighting inputs, production pupil coordinates, and surface anchors remain body fixed while final geometry is rotated into the root inertial frame. The fixed-width planetary presentation ABI is 176 bytes and, after provisional-environment retirement, the frame submission ABI is 688 bytes. Orientation reference hash at ET0 is `0xD5767D2C2BABE9AA`; warmed evaluation of all nine bodies is allocation-free.
 
 Milestone 11A-4D closes the remaining render-path convention split at the distant/detail handoff. Distant, regional, and eyeball geometry now begin in body-fixed space and apply the same immutable body-fixed-to-root quaternion exactly once; material, lighting, terrain, SVT page identity, and surface anchors remain body fixed. The focused orbital camera retains a root-inertial body-center offset: drag changes orbital azimuth/elevation at fixed distance, body translation carries the rig, and axial rotation never rotates the offset or camera orientation. Detailed lighting subtracts the root-camera-relative body center from the root-camera-relative evaluated Sun center before entering body space, matching the distant path. Paused all-body handoff proofs and multi-body 1× through 7,776,000× tests preserve celestial authority while body-fixed longitude evolves beneath the camera. Solar speed feedback uses a dedicated compact 5×7 sans bitmap-glyph HUD pipeline with derivative antialiasing, while ordinary Solar body labels retain the established lightweight overlay path.
 
@@ -44,13 +66,11 @@ Milestone 11B-2A formalizes four independent authorities: FP64 root/inertial sim
 
 Milestone 11B-2B activates the body-fixed focus seam without requiring a vessel. The Solar camera acquires `SurfaceAnchorFocus` only when its actual view ray intersects the focused body's physical/elevation surface; a miss retains the previous valid focus or remains at `BodyCenter`. Earth refinement uses the existing loaded CPU elevation oracle, and other bodies use physical radius. Acquisition begins at 2,000 km, reaches full anchor focus at 1,000 km, and releases only after receding through 3,000 km. Anchor-relative logarithmic zoom, a ten-metre terrain floor, pole-safe right-handed ENU transforms, and tangent translation remain allocation-free presentation behavior. Body translation/orientation reevaluates the fixed local anchor through maximum warp while click-drag and camera orientation remain root-inertial.
 
-Milestone 11B-2C fixes the demonstrated Earth dropout during SurfaceAnchor approach. The cause was the Solar camera retaining a 1,000 km near plane until full SurfaceLocal state, not loss of geometry or texture residency. The reversed-Z near plane is now continuous with altitude. Regional projected-error selection has deterministic ±12% split/merge hysteresis, separate conservative frustum/horizon telemetry, bounded parent fallback, and unchanged 8,192-leaf ownership. Eyeball geometry and bounded Earth SVT demand use the same view-ray surface footprint; SVT begins during regional presentation and always retains nearest-parent texture fallback. Current Earth source truth remains 8192×4096 at the finest level (about 4.89 km/equatorial texel), so close-ground visual fidelity remains data limited.
+Milestone 11B-2C fixed the demonstrated Earth dropout during SurfaceAnchor approach. The cause was the Solar camera retaining a 1,000 km near plane until full SurfaceLocal state, not loss of terrain residency. The reversed-Z near plane remains continuous with altitude. Its camera, view-ray footprint, and no-empty-owner invariants survive; its old SVT demand and deep-global leaf implementation do not.
 
 Milestone 11B-3A adds queried Vulkan format policy and deterministic incompatibility handling. On the development RX 6800 XT, BC1/BC3/BC4/BC5/BC7/R16 all expose sampled-image plus transfer-destination support. The preferred path selects BC7+BC4+R16; a missing, malformed, version-2, or unsupported pack selects an explicitly logged uncompressed procedural-root fallback and never silently changes quality. Measured BC7 albedo is 45.301 dB globally and 32.868 dB on coastline blocks versus BC1 at 37.778 and 27.192 dB, so BC7 is the selected premium format. BC4 mask/cloud measurements are 51.755 and 39.936 dB. The repository-authored offline encoder is versioned, requires pinned NumPy 2.3.5 (BSD-3-Clause), and reproduces byte-identical pack and manifest hashes.
 
-Milestone 11B-3B adds a reusable offline scientific-data pipeline and one optional bounded Mount St. Helens proof without replacing the global dataset. Checked USGS/USDA NAIP 2017 albedo and USGS 3DEP NAVD 88 elevation exports cover 343 km² at an intentional approximately ten-metre source spacing. The deterministic EPSG:4326 builder uses channel-appropriate reprojection, the existing body-fixed SVT identity/gutters, and fixed BC7/R16/BC4 output. The 48-page L5–L12 pack is 11,359,360 bytes with SHA-256 `9f66aa63963ce503fc871eed03d5626b42548dec24c8222221f8c273b6c27b00`; L12 is approximately 13.23 m/texel at the proof latitude.
-
-Native discovery reads one checked index at startup, validates the complete pack and ordered records, and inserts loaded pages into a fixed 512-entry table. The existing texture arrays and staging allocation are reused: slots 80–127 hold the 48 pinned regional albedo/elevation/validity pages while absent source coverage falls through regional parents and the unchanged global v3 hierarchy. Missing and checksum-corrupt pack proofs start normally, upload no invalid regional bytes, preserve the same SurfaceAnchor and geometry coverage, and retain CPU/GPU parity. Source authority, storage guardrails, format details, measured quality, and datum limitations are documented in `planetary-data-ingestion.md`.
+An earlier bounded regional-ingestion experiment proved lawful USGS/USDA NAIP and USGS 3DEP acquisition. Its independent equirectangular pack, index, lookup, descriptors, and residency are retired because they conflict with coherent spherical-patch ownership. Only the lawful source files and exact manifest remain as clearly historical provenance for possible future cube-patch-aligned ingestion. The active runtime mounts no regional packs.
 
 ## Completed rendering foundation
 
@@ -66,15 +86,14 @@ Native discovery reads one checked index at startup, validates the complete pack
 - Shared immutable planet-material identity and response across distant/detail handoff, with deterministic body-local procedural projection.
 - Generic renderer-owned ring presentation and persistent annulus geometry, initially configured for Saturn.
 - One deterministic Solar Map/free-3D camera, extent-aware focus framing, hierarchical path fading, bounded label priority, and marker-to-body transition.
-- Deep projected-error Earth LOD through level 22, deterministic GPU terrain residency, continuous procedural elevation, and cached terrain normals.
+- Shallow L0–L2 relaxed cube-sphere ownership with deterministic transactional patch residency and checked terrain-v4 elevation/material payloads.
 - Persistent reversed-Z D32 depth plus a ten-metre terrain-aware camera floor and body-fixed local tangent orientation.
-- Immutable body-associated atmosphere/cloud/ocean presentation and fixed-width native transport.
-- Bounded HDR atmosphere/cloud-shell rendering, evaluated-Sun cloud lighting/shadows, and stable sea-level ocean classification.
+- Deliberate absence of a provisional atmosphere/cloud owner; future environment work must integrate with terrain-v4 rather than constrain it.
 - Explicit orbital/transition/SurfaceLocal control with deterministic round-trip and a reusable body-local focus contract.
-- Fixed-workload spherical-billboard near-field terrain with GPU displacement, one indirect draw, body-fixed sampling, and deterministic topology/ABI validation.
+- Four persistent spherical-billboard near-field tiers with snapped body-fixed pupil identity, bounded hysteresis, GPU displacement, and deterministic topology/ABI validation.
 - Explicit `FocusTarget` identity and FP64-before-narrowing camera-relative transport across generic and planetary presentation paths.
 - Actual-view-ray surface-anchor acquisition, pole-safe local ENU transforms, anchor-relative zoom, and hysteretic body-center/surface-focus handoff.
-- Direct GPU-native BC7/BC4 Earth streaming with independent per-channel LOD/residency and lossless R16 elevation authority.
+- Patch-aligned terrain-v4 payload residency with complete parent/child transaction ownership and a retained topology-neutral R16 elevation oracle.
 
 ## Milestone 9 pipeline summary
 
@@ -82,9 +101,9 @@ Milestone 9 established immutable generic celestial definitions and a pure evalu
 
 ## Remaining work
 
-- Higher-resolution lawful regional Earth imagery/elevation targeting roughly 10–30 m/texel where practical, plus local material/micro-normal detail, retaining the completed spatial LOD/culling/SVT-demand and GPU-native format foundation without coupling renderer demand to celestial truth.
-- Authored non-Earth image textures, production multiple-scattering atmosphere, close volumetric clouds, production terrain/geography, and physical ocean simulation.
-- Higher-resolution lawful optional Earth packs, a production multiple-scattering atmosphere, and a genuinely close-resolution cloud/ocean/material pass on the existing bounded virtual-texture and fixed 11A geometry architecture.
+- Deeper, higher-frequency lawful patch-aligned terrain-v4 payloads, followed by close-ground material/detail refinement.
+- Production atmosphere/cloud reconstruction, then water/coastline systems, all designed against the retained cube-surface and persistent production-Eyeball architecture.
+- GPU-driven local environmental detail and launch/landing surface gameplay; none is implemented yet.
 - A declared spacecraft-navigation error budget and exceptional higher-fidelity lunar ephemeris if lunar-orbit insertion, close navigation, or precision long-horizon planning requires more than v3. Compact Chebyshev or `SampledHermite` remains the measured fallback, not the default.
 - Richer material layers, ring shadowing/thickness, geomorphing, occlusion refinement, and authored planetary surface features.
 - Automatic exposure, convolution bloom, lens flare, a general font/atlas system, and richer overlay interaction remain optional measured presentation work; 10B-1A uses fixed exposure and an analytic stellar corona, while 11A-4D gives the speed feedback its own antialiased analytic-glyph path without replacing the lightweight body-label overlay renderer.

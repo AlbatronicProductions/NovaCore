@@ -80,7 +80,7 @@ NovaCore currently combines a C# simulation core with a native Vulkan renderer, 
 ### Rendering and presentation
 
 - **Native Vulkan renderer** with double-precision camera-relative subtraction before GPU float transport.
-- **GPU-driven planets** with a deterministic adaptive cube-sphere for global/regional scale and a fixed-workload camera-centric spherical terrain mesh for the near field.
+- **GPU-driven planets** with a shallow relaxed cube-sphere for orbital/global presentation and a persistent, body-fixed spherical-billboard surface for the near field.
 - **Distant/detail handoff** sharing authoritative physical center, radius, material identity, and Solar-light direction.
 - **Correct body-fixed handoff conventions** across detailed, transitional, and distant paths, including a dedicated outward-winding convention for the shared distant sphere.
 - **FP16 HDR scene color** with fixed exposure and ACES-style tone mapping.
@@ -88,7 +88,7 @@ NovaCore currently combines a C# simulation core with a native Vulkan renderer, 
 - **Evaluated-Sun lighting** for coherent planetary day/night terminators.
 - **Generic procedural planet materials** with distinct presentations for Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn, Uranus, and Neptune.
 - **Generic ring presentation**, currently demonstrated by Saturn.
-- **NASA/NOAA Earth surface pack** using 256×256 SVT interiors, two-texel geographic gutters, bounded asynchronous streaming, deterministic ancestor fallback, and CPU/GPU elevation parity.
+- **NASA/NOAA terrain-v4 Earth surface authority** using patch-aligned relaxed cube-sphere `.nccube` records, transactional parent/child residency, persistent production Eyeball tiers, and a checked topology-neutral CPU elevation oracle.
 - **Solar Map and Free 3D camera modes** with deterministic home framing and body focus.
 - **Authoritative orbit visualization** sourced from the same `CelestialSystemEvaluator` used for body motion.
 - **Deterministic label/marker hierarchy** with collision suppression, distance-aware presentation, and focused-body clutter reduction.
@@ -150,25 +150,20 @@ dotnet run --project samples/NovaCore.Triangle/NovaCore.Triangle.csproj -c Debug
 
 Current Solar-scene controls include mouse drag for free orbiting, mouse wheel zoom, number-key body focus, `.` / `,` simulation-rate changes, Space pause/resume, and `R` to return to the deterministic Solar Map home view.
 
-## Current checkpoint — Milestone 11A architecture proof
+## Current checkpoint — NovaCore 11B-4
 
-The current renderer retains the Milestone 10B Solar presentation foundation and adds the Milestone 11A near-field architecture:
+**NovaCore 11B-4 — Production Spherical Billboard Planetary Surface** replaces the former Earth terrain experiments with one production-owned, body-fixed surface architecture:
 
-- HDR scene-color and tone-mapping path
-- procedural deep space
-- dedicated stellar Sun
-- evaluated-Sun planetary lighting
-- generic planet materials
-- Saturn ring presentation
-- Solar Map / Free 3D camera behavior
-- hierarchical orbit, label, and marker presentation
-- a persistent 32,769-vertex / 195,840-index spherical-billboard terrain topology
-- GPU body-fixed displacement and one indirect terrain draw from 1,000 km through the two-metre floor
-- the regional cube-sphere retained only above and through a bounded handoff
-- a checked NASA/NOAA Earth virtual-texture pack with bounded asynchronous residency and parent fallback
-- exact-epoch planetary orientation, including the DE440 lunar orientation pack and explicit IAU fallback
+- a terrain-v4 cube-face `.nccube` pack generated offline from lawful NASA/NOAA sources;
+- a shallow relaxed cube-sphere for stable orbital and global presentation;
+- a persistent KSA-style spherical-billboard / Eyeball renderer for close-range terrain density;
+- four precomputed mesh tiers (T0–T3), selected without rebuilding the surface every frame;
+- a snapped viewer-facing pupil with deterministic hysteresis, so the represented geography remains body fixed as the camera moves;
+- bounded transactional residency, where complete patch dependencies become ready before ownership changes;
+- real-Earth elevation displacement and FP64 camera-relative reconstruction before GPU narrowing;
+- explicit production isolation, keeping unsupported planets on the inexpensive generic path.
 
-All of this remains downstream of the authoritative celestial simulation.
+The old equirectangular virtual-texture ownership model and per-frame radial Eyeball terrain path are retired. Terrain-v4 is deliberately shallow today: its current data proves stable orbital-to-ground ownership and transport, while higher-frequency terrain payloads and close-ground fidelity remain future work. All rendering remains downstream of the authoritative celestial simulation.
 
 ## Accuracy and current scope
 
@@ -176,13 +171,13 @@ All of this remains downstream of the authoritative celestial simulation.
 
 The new high-precision Moon orientation improves pole, prime-meridian, and physical-libration presentation; it does not improve lunar translation. Precision translunar targeting, lunar orbit insertion, close lunar navigation, or other requirements that exceed the compact translational model's measured accuracy will receive a dedicated higher-fidelity ephemeris layer when those requirements exist.
 
-NovaCore now has a compact procedural atmosphere/cloud/ocean presentation proof, but does **not** yet provide production terrain, production multiple-scattering atmosphere, close volumetric clouds, physical ocean simulation, weather, spacecraft simulation, colonies, maneuver planning, or SOI/patched-conic navigation.
+NovaCore now has a production-owned terrain architecture, but its terrain-v4 payload is still shallow. The former provisional atmosphere/cloud renderer has been retired; production atmosphere, clouds, water/coastlines, physical oceans, weather, spacecraft simulation, colonies, maneuver planning, and SOI/patched-conic navigation are not yet implemented.
 
 ## Roadmap
 
 **Next visual frontier**
 
-Refine atmosphere, clouds, ocean, and surface materials on the checked-data, fixed-workload Earth renderer.
+Deeper, higher-frequency terrain payloads → close-ground material/detail refinement → production atmosphere/cloud reconstruction → water and coastline systems → GPU-driven local environmental detail → launch and landing surface gameplay.
 
 **Future flight and navigation**
 

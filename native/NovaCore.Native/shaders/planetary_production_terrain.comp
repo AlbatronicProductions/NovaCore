@@ -1,0 +1,6 @@
+#version 460
+layout(local_size_x=64,local_size_y=1,local_size_z=1) in;
+// Production elevation is decoded and staged as part of the same native patch
+// transaction as albedo and classification.  The dispatch remains in the
+// shared pipeline ABI, but its indirect workgroup count is always zero.
+void main() {}
