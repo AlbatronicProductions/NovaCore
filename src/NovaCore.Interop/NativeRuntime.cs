@@ -79,6 +79,7 @@ public unsafe struct NativeRuntimeAssets
 {
     public uint Size, Version;
     public byte* ProductionTerrainPathUtf8;
+    public byte* LocalTerrainPathUtf8;
 }
 
 [StructLayout(LayoutKind.Sequential)]

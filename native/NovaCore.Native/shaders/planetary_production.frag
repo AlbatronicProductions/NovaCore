@@ -1,7 +1,9 @@
 #version 460
 #extension GL_GOOGLE_include_directive : require
+#define NOVACORE_LOCAL_TERRAIN_FRAGMENT
 #include "planet_material.glsl"
 #include "production_cube_surface.glsl"
+#include "local_terrain.glsl"
 #include "production_cube_filter.glsl"
 #include "production_earth_material.glsl"
 layout(location=0) in vec4 color;
@@ -83,8 +85,11 @@ void main()
   ProductionPayloadGradients(continuousFaceUv,unitDirection,levelCells,gradientX,gradientY);
   float layer=float(resolvedLayer-1u);
   float sampledHeight=textureGrad(productionElevation,vec3(storedUv,layer),gradientX,gradientY).r*20000.0-11000.0;
+  vec3 sampledAlbedo=textureGrad(productionAlbedo,vec3(storedUv,layer),gradientX,gradientY).rgb;
+  LocalTerrainMaterialSample localSample=SampleLocalTerrainMaterial(unitDirection);
+  if(localSample.resident){sampledAlbedo=localSample.albedo;surfaceNormal=ApplyLocalTerrainNormal(unitDirection,localSample.normalXY);}
   ProductionEarthMaterial earth=ProductionEarthSurfaceMaterial(
-    textureGrad(productionAlbedo,vec3(storedUv,layer),gradientX,gradientY).rgb,
+    sampledAlbedo,
     textureGrad(productionLand,vec3(storedUv,layer),gradientX,gradientY).r,
     sampledHeight,
     response);

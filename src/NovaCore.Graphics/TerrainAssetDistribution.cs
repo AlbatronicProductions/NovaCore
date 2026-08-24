@@ -73,12 +73,12 @@ public sealed record TerrainAssetManifest
         Schema == CurrentSchema &&
         IsSafeIdentity(AssetId) &&
         BodyId != 0 && TerrainVersion != 0 &&
-        Format.Equals("nccube", StringComparison.Ordinal) && FormatVersion == PlanetaryCubeSurfacePackContract.Version &&
+        Format.Equals("nccube", StringComparison.Ordinal) && FormatVersion is PlanetaryCubeSurfacePackContract.Version or PlanetaryLocalTerrainPackContract.Version &&
         IsSafeFileName(FileName) && ByteSize > PlanetaryCubeSurfacePackContract.HeaderBytes &&
         Sha256.Length == 64 && Sha256.All(IsLowerHex) &&
         IsSafeIdentity(Hierarchy.Coverage) &&
         Hierarchy.MinimumPayloadLevel >= 0 && Hierarchy.MaximumPayloadLevel >= Hierarchy.MinimumPayloadLevel &&
-        Hierarchy.MaximumPayloadLevel <= PlanetaryCubeSurfacePackContract.MaximumLevel &&
+        Hierarchy.MaximumPayloadLevel <= (FormatVersion == PlanetaryLocalTerrainPackContract.Version ? PlanetaryLocalTerrainPackContract.MaximumSectorLevel : PlanetaryCubeSurfacePackContract.MaximumLevel) &&
         Hierarchy.FaceCount is >= 1 and <= 6 && Hierarchy.RecordCount > 0 &&
         !string.IsNullOrWhiteSpace(Provenance) && !string.IsNullOrWhiteSpace(ContentManifest);
 
@@ -173,6 +173,7 @@ public static class TerrainAssetCache
 {
     public const int VerificationBufferBytes = 1024 * 1024;
     public const string ProductionEarthAssetId = "earth-surface-v4";
+    public const string ProductionEarthLocalAssetId = "earth-local-v1";
 
     public static string ContentPath(string cacheRoot, in TerrainAssetManifest manifest) =>
         Path.Combine(cacheRoot, "sha256", manifest.Sha256[..2], manifest.Sha256 + ".nccube");
@@ -285,6 +286,8 @@ public static class TerrainAssetCache
 
     private static bool TryValidatePackStructure(in TerrainAssetManifest manifest, string path, out string error)
     {
+        if (manifest.FormatVersion == PlanetaryLocalTerrainPackContract.Version)
+            return TryValidateLocalPackStructure(manifest, path, out error);
         using var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, 64 * 1024, FileOptions.RandomAccess);
         Span<byte> headerBytes = stackalloc byte[PlanetaryCubeSurfacePackContract.HeaderBytes];
         if (!TryReadExactly(stream, headerBytes) || !PlanetaryCubeSurfacePackContract.TryReadHeader(headerBytes, out var header) ||
@@ -315,6 +318,46 @@ public static class TerrainAssetCache
         if (stream.Position != stream.Length || ordinals.Count != header.RecordCount)
         {
             error = "Terrain asset .nccube record table does not exactly cover the file.";
+            return false;
+        }
+        error = string.Empty;
+        return true;
+    }
+
+    private static bool TryValidateLocalPackStructure(in TerrainAssetManifest manifest, string path, out string error)
+    {
+        using var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, 64 * 1024, FileOptions.RandomAccess);
+        Span<byte> headerBytes = stackalloc byte[PlanetaryLocalTerrainPackContract.HeaderBytes];
+        if (!TryReadExactly(stream, headerBytes) || !PlanetaryLocalTerrainPackContract.TryReadHeader(headerBytes, out var header) ||
+            header.Version != manifest.FormatVersion || header.TerrainVersion != manifest.TerrainVersion || header.BodyId != manifest.BodyId ||
+            header.MinimumSectorLevel != manifest.Hierarchy.MinimumPayloadLevel || header.MaximumSectorLevel != manifest.Hierarchy.MaximumPayloadLevel ||
+            header.RecordCount != manifest.Hierarchy.RecordCount)
+        {
+            error = "Local terrain .nccube header does not match the tracked manifest.";
+            return false;
+        }
+        var identities = new HashSet<PlanetaryLocalTerrainSectorId>();
+        Span<byte> recordBytes = stackalloc byte[PlanetaryLocalTerrainPackContract.RecordHeaderBytes];
+        for (var index = 0; index < header.RecordCount; index++)
+        {
+            if (!TryReadExactly(stream, recordBytes) || !PlanetaryLocalTerrainPackContract.TryReadRecordHeader(recordBytes, out var record) ||
+                record.Sector.BodyId != manifest.BodyId || record.Sector.TerrainVersion != manifest.TerrainVersion || !identities.Add(record.Sector) ||
+                record.PayloadOffset != (ulong)stream.Position)
+            {
+                error = $"Local terrain .nccube record {index} is invalid, duplicated, or non-sequential.";
+                return false;
+            }
+            var payloadBytes = checked((long)record.StoredAlbedoBytes + record.StoredElevationBytes + record.StoredNormalBytes);
+            if (stream.Position > stream.Length - payloadBytes)
+            {
+                error = $"Local terrain .nccube record {index} payload is truncated.";
+                return false;
+            }
+            stream.Seek(payloadBytes, SeekOrigin.Current);
+        }
+        if (stream.Position != stream.Length || identities.Count != header.RecordCount)
+        {
+            error = "Local terrain .nccube records do not exactly cover the file.";
             return false;
         }
         error = string.Empty;

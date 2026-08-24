@@ -1,0 +1,30 @@
+{
+  "schema": "NovaCore.LocalTerrainContent/1",
+  "records": 63,
+  "sectorLevel": 12,
+  "rawBytes": 30735936,
+  "gpuBytes": 10977120,
+  "storedBytes": 7642283,
+  "supercompressionRatio": 1.4363665935951337,
+  "bc7Bytes": 4390848,
+  "bc4Bytes": 2195424,
+  "bc5Bytes": 4390848,
+  "maximumVerticalErrorMetres": 2.00787353515625,
+  "rmsVerticalErrorMetres": 1.4597663982485807,
+  "maximumSlopeError": 0.2730991542339325,
+  "rmsSlopeError": 0.02199166696407618,
+  "maximumNormalErrorDegrees": 0.3220335841178894,
+  "rmsNormalErrorDegrees": 0.23275037211369018,
+  "worstVerticalSample": {
+    "face": 5,
+    "sectorX": 1301,
+    "sectorY": 1030,
+    "texelX": 0,
+    "texelY": 0,
+    "latitudeDegrees": -20.096616102383003,
+    "longitudeDegrees": -74.7466375595642,
+    "verticalErrorMetres": 2.00787353515625
+  },
+  "albedoRmsByteError": 0.48058267801970067,
+  "sha256": "17344f8a99931083853fe3351a621ddaf0b352702054febf53705c13a17da285"
+}

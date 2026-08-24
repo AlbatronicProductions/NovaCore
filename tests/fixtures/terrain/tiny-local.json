@@ -1,0 +1,27 @@
+{
+  "schema": "NovaCore.TerrainAsset/1",
+  "assetId": "tiny-local",
+  "bodyId": 6,
+  "terrainVersion": 4,
+  "format": "nccube",
+  "formatVersion": 2,
+  "fileName": "tiny-local.nccube",
+  "byteSize": 697539,
+  "sha256": "6fea3a62833e8aa6beffcbd845697baaca2a8db281eab2ed900d53b2657cf053",
+  "hierarchy": {
+    "coverage": "sparse-local-relaxed-cube-sphere",
+    "minimumPayloadLevel": 4,
+    "maximumPayloadLevel": 4,
+    "faceCount": 1,
+    "recordCount": 4
+  },
+  "provenance": "tools/earth_data/build_local_terrain_pack.py",
+  "contentManifest": "tests/fixtures/terrain/tiny-local.content.json",
+  "generator": {
+    "tool": "tools/earth_data/build_local_terrain_pack.py",
+    "version": "NCCUBE2/BC7-BC4-BC5-local-v1",
+    "executable": "python",
+    "arguments": ["--fixture", "--sector-level", "4", "--output", "{output}"]
+  },
+  "artifact": { "url": null }
+}

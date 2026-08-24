@@ -1,0 +1,33 @@
+{
+  "schema": "NovaCore.TerrainAsset/1",
+  "assetId": "earth-local-v1",
+  "bodyId": 6,
+  "terrainVersion": 4,
+  "format": "nccube",
+  "formatVersion": 2,
+  "fileName": "earth_local_v1.nccube",
+  "byteSize": 7650603,
+  "sha256": "17344f8a99931083853fe3351a621ddaf0b352702054febf53705c13a17da285",
+  "hierarchy": {
+    "coverage": "sparse-local-relaxed-cube-sphere",
+    "minimumPayloadLevel": 12,
+    "maximumPayloadLevel": 12,
+    "faceCount": 6,
+    "recordCount": 63
+  },
+  "provenance": "assets/earth/PROVENANCE.md",
+  "contentManifest": "assets/earth/runtime/earth_local_v1.nccube.manifest.json",
+  "generator": {
+    "tool": "tools/earth_data/build_local_terrain_pack.py",
+    "version": "NCCUBE2/BC7-BC4-BC5-local-v1",
+    "executable": "python",
+    "arguments": [
+      "--albedo", "{repository}/assets/earth/source/nasa-blue-marble-2004-12-21600x10800.png",
+      "--elevation", "{repository}/assets/earth/runtime/earth_elevation_8192x4096.r16",
+      "--sector-level", "12",
+      "--output", "{output}",
+      "--content-manifest", "{repository}/assets/earth/runtime/earth_local_v1.nccube.manifest.json"
+    ]
+  },
+  "artifact": { "url": null }
+}

@@ -42,7 +42,7 @@ add_custom_command(OUTPUT "${SPIRV_DIR}/planetary_production.frag.spv" "${SPIRV_
   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary_production.frag" -o "${SPIRV_DIR}/planetary_production.frag.spv"
   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary_production_terrain.comp" -o "${SPIRV_DIR}/planetary_production_terrain.comp.spv"
   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary_production_eyeball.vert" -o "${SPIRV_DIR}/planetary_production_eyeball.vert.spv"
-  DEPENDS "${SHADER_DIR}/planetary_production.frag" "${SHADER_DIR}/planetary_production_terrain.comp" "${SHADER_DIR}/planetary_production_eyeball.vert" "${SHADER_DIR}/production_cube_surface.glsl" "${SHADER_DIR}/production_cube_filter.glsl" "${SHADER_DIR}/production_earth_material.glsl" "${SHADER_DIR}/planet_material.glsl" "${SHADER_DIR}/planet_terrain.glsl")
+  DEPENDS "${SHADER_DIR}/planetary_production.frag" "${SHADER_DIR}/planetary_production_terrain.comp" "${SHADER_DIR}/planetary_production_eyeball.vert" "${SHADER_DIR}/production_cube_surface.glsl" "${SHADER_DIR}/local_terrain.glsl" "${SHADER_DIR}/production_cube_filter.glsl" "${SHADER_DIR}/production_earth_material.glsl" "${SHADER_DIR}/planet_material.glsl" "${SHADER_DIR}/planet_terrain.glsl")
 add_custom_command(OUTPUT "${SPIRV_DIR}/distant_planet.vert.spv" "${SPIRV_DIR}/distant_planet.frag.spv"
   COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
   COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/distant_planet.vert" -o "${SPIRV_DIR}/distant_planet.vert.spv"
@@ -81,7 +81,7 @@ add_custom_target(NovaCoreProductionShaders DEPENDS
   "${SPIRV_DIR}/planetary_production.frag.spv"
   "${SPIRV_DIR}/planetary_production_terrain.comp.spv"
   "${SPIRV_DIR}/planetary_production_eyeball.vert.spv")
-add_library(NovaCore.Native SHARED NovaCoreNative.cpp NovaCoreNative.h ProductionCubeSurface.cpp ProductionCubeSurface.h)
+add_library(NovaCore.Native SHARED NovaCoreNative.cpp NovaCoreNative.h ProductionCubeSurface.cpp ProductionCubeSurface.h LocalTerrainPack.cpp LocalTerrainPack.h)
 add_dependencies(NovaCore.Native NovaCoreShaders NovaCoreProductionShaders)
 target_compile_features(NovaCore.Native PRIVATE cxx_std_20)
 target_compile_definitions(NovaCore.Native PRIVATE WIN32_LEAN_AND_MEAN NOMINMAX VK_USE_PLATFORM_WIN32_KHR NC_NATIVE_EXPORTS $<$<CONFIG:Debug>:NC_DEBUG_BUILD=1>)

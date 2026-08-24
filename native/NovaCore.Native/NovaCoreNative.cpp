@@ -1,5 +1,6 @@
 #include "NovaCoreNative.h"
 #include "ProductionCubeSurface.h"
+#include "LocalTerrainPack.h"
 #include <algorithm>
 #include <array>
 #include <chrono>
@@ -34,6 +35,10 @@ constexpr uint32_t ProductionPayloadSlots=256,ProductionLookupCapacity=512,
                    ProductionElevationLayerBytes=nc::production::ElevationBytes,
                    ProductionLandLayerBytes=nc::production::LandBytes,
                    ProductionStagingBytes=ProductionMaximumPendingUploads*(ProductionAlbedoLayerBytes+ProductionElevationLayerBytes+ProductionLandLayerBytes);
+constexpr uint32_t LocalPayloadSlots=128,LocalLookupCapacity=1024,LocalUploadBudget=2,LocalMaximumPendingUploads=2,
+                   LocalAlbedoLayerBytes=nc::localterrain::Bc7Bytes,LocalElevationLayerBytes=nc::localterrain::Bc4Bytes,
+                   LocalNormalLayerBytes=nc::localterrain::Bc5Bytes,
+                   LocalStagingBytes=LocalMaximumPendingUploads*(LocalAlbedoLayerBytes+LocalElevationLayerBytes+LocalNormalLayerBytes);
 static_assert(sizeof(NcEncodedPosition) == 32);
 static_assert(sizeof(NcCameraData) == 96);
 static_assert(alignof(NcCameraData) == 16);
@@ -88,6 +93,7 @@ static_assert(offsetof(NcFrameSubmission, distantBodyPadding) == 508);
 static_assert(offsetof(NcFrameSubmission, solarLighting) == 512);
 static_assert(offsetof(NcFrameSubmission, planetaryEyeball) == 560);
 static_assert(sizeof(NcOrbitLineVertex) == 12);
+static_assert(sizeof(NcRuntimeAssets) == 24);
 static_assert(sizeof(NcInputState) == 68);
 static_assert(sizeof(NcPresentationFocus) == 4);
 static_assert(offsetof(NcInputState, deltaSeconds) == 0);
@@ -147,6 +153,14 @@ struct ProductionIoState {
   std::array<ProductionRequest,512> requests{}; uint32_t requestHead{},requestTail{},requestCount{};
   std::array<ProductionReady,8> ready{}; const nc::production::Pack *pack{}; uint64_t diskLoads{},queueDrops{},digestFailures{};
 };
+struct LocalRequest{nc::localterrain::SectorId id{};uint64_t demandEpoch{};bool visible{};std::chrono::steady_clock::time_point requestedAt{};};
+struct LocalReady{LocalRequest request{};std::unique_ptr<nc::localterrain::Payload>payload;uint32_t state{};};
+struct LocalIoState{
+  std::thread worker;std::mutex mutex;std::condition_variable wake;bool stop{};
+  std::array<LocalRequest,256>requests{};uint32_t requestHead{},requestTail{},requestCount{};
+  std::array<LocalReady,8>ready{};const nc::localterrain::Pack*pack{};
+  uint64_t diskLoads{},queueDrops{},digestFailures{},bytesRead{},bytesTranscoded{};double transcodeMilliseconds{};
+};
 struct Queues {
   std::optional<uint32_t> graphics, present;
   bool Complete() const { return graphics && present; }
@@ -156,6 +170,7 @@ struct App {
   void *cbData{};
   NcFrameSubmission *submission{};
   std::string productionTerrainPath;
+  std::string localTerrainPath;
   HWND window{};
   VkInstance instance{};
   VkDebugUtilsMessengerEXT debug{};
@@ -191,6 +206,15 @@ struct App {
   std::array<ProductionRequest,ProductionMaximumPendingUploads> productionUploadRequests{};
   uint32_t productionPendingUploads{}; bool productionImagesInitialized{};
   uint64_t productionRequests{},productionUploads{},productionUploadBytes{},productionQueueDrops{},productionEvictions{};
+  std::array<VkImage,3> localImages{};std::array<VkDeviceMemory,3>localImageMemory{};std::array<VkImageView,3>localImageViews{};
+  VkSampler localSampler{};VkBuffer localStagingBuffer{};VkDeviceMemory localStagingMemory{};void*localStagingMapped{};
+  VkBuffer localLookupBuffer{};VkDeviceMemory localLookupMemory{};void*localLookupMapped{};
+  std::unique_ptr<nc::localterrain::Pack>localPack;std::unique_ptr<LocalIoState>localIo;
+  std::array<nc::localterrain::SectorId,LocalPayloadSlots>localLayerSector{};std::array<uint64_t,LocalPayloadSlots>localLayerLastUse{};
+  std::array<uint32_t,LocalPayloadSlots>localLayerGeneration{};std::array<uint8_t,LocalPayloadSlots>localLayerOccupied{},localLayerVisible{},localLayerInFlight{},localLayerPublished{};
+  std::array<uint32_t,LocalMaximumPendingUploads>localUploadLayers{},localUploadGenerations{};std::array<LocalRequest,LocalMaximumPendingUploads>localUploadRequests{};
+  std::array<nc::localterrain::SectorId,64>localVisibleTarget{};uint32_t localVisibleTargetCount{},localPendingUploads{};bool localImagesInitialized{};uint64_t localDemandEpoch{1},localRequests{},localHits{},localMisses{},localEvictions{},localCanceled{},localUploads{},localPromotions{},localUploadBytes{};
+  uint64_t localLastPupilBits[3]{};bool localHasLastPupil{};double localTranscodeMilliseconds{},localUploadLatencyMilliseconds{};
   uint64_t surfaceContextBodyId{},surfaceTransitionEpoch{},surfaceContextInvalidations{},productionDemandHits{},productionDemandMisses{};
   uint32_t surfaceContextTerrainVersion{},surfaceContextMode{},surfaceContextRegime{},surfaceContextRadiusHighBits{},surfaceContextRadiusLowBits{};
   bool surfaceContextValid{},productionFallbackOwner{},productionSurfaceLogged{},productionRootsReadyLogged{};
@@ -828,6 +852,48 @@ void RecordProductionUploads(App &a,VkCommandBuffer command){
   for(uint32_t index=0;index<a.productionPendingUploads;index++){const VkDeviceSize base=index*(ProductionAlbedoLayerBytes+ProductionElevationLayerBytes+ProductionLandLayerBytes);const VkDeviceSize offsets[3]{base,base+ProductionAlbedoLayerBytes,base+ProductionAlbedoLayerBytes+ProductionElevationLayerBytes};for(uint32_t channel=0;channel<3;channel++){VkBufferImageCopy copy{};copy.bufferOffset=offsets[channel];copy.imageSubresource.aspectMask=VK_IMAGE_ASPECT_COLOR_BIT;copy.imageSubresource.baseArrayLayer=a.productionUploadLayers[index];copy.imageSubresource.layerCount=1;copy.imageExtent={nc::production::StoredExtent,nc::production::StoredExtent,1};vkCmdCopyBufferToImage(command,a.productionStagingBuffer,a.productionImages[channel],VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,1,&copy);}}
   VkImageMemoryBarrier after[3]{before[0],before[1],before[2]};for(auto &barrier:after){barrier.srcAccessMask=VK_ACCESS_TRANSFER_WRITE_BIT;barrier.dstAccessMask=VK_ACCESS_SHADER_READ_BIT;barrier.oldLayout=VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;barrier.newLayout=VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;}vkCmdPipelineBarrier(command,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT|VK_PIPELINE_STAGE_VERTEX_SHADER_BIT,0,0,nullptr,0,nullptr,3,after);a.productionImagesInitialized=true;
 }
+void LocalIoWorker(LocalIoState*state){
+  for(;;){LocalRequest request{};{std::unique_lock lock(state->mutex);state->wake.wait(lock,[&]{return state->stop||state->requestCount;});if(state->stop)return;request=state->requests[state->requestHead];state->requestHead=(state->requestHead+1)%state->requests.size();state->requestCount--;}
+    auto payload=std::make_unique<nc::localterrain::Payload>();std::string error;const bool valid=state->pack->Read(request.id,*payload,error);std::unique_lock lock(state->mutex);state->wake.wait(lock,[&]{return state->stop||std::any_of(state->ready.begin(),state->ready.end(),[](const auto&value){return value.state==0;});});if(state->stop)return;auto ready=std::find_if(state->ready.begin(),state->ready.end(),[](const auto&value){return value.state==0;});ready->request=request;ready->payload=valid?std::move(payload):nullptr;ready->state=valid?2u:3u;if(valid){state->diskLoads++;state->bytesRead+=ready->payload->storedBytes;state->bytesTranscoded+=ready->payload->transcodedBytes;state->transcodeMilliseconds+=ready->payload->transcodeMilliseconds;}else state->digestFailures++;state->wake.notify_all();}
+}
+void CreateLocalImage(App&a,VkFormat format,uint32_t bytes,VkImage&image,VkDeviceMemory&memory,VkImageView&view){
+  VkFormatProperties properties{};vkGetPhysicalDeviceFormatProperties(a.physical,format,&properties);if((properties.optimalTilingFeatures&(VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT|VK_FORMAT_FEATURE_TRANSFER_DST_BIT))!=(VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT|VK_FORMAT_FEATURE_TRANSFER_DST_BIT))throw std::runtime_error("required BC local terrain format unsupported");
+  VkImageCreateInfo create{VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO};create.imageType=VK_IMAGE_TYPE_2D;create.format=format;create.extent={nc::localterrain::StoredExtent,nc::localterrain::StoredExtent,1};create.mipLevels=1;create.arrayLayers=LocalPayloadSlots;create.samples=VK_SAMPLE_COUNT_1_BIT;create.tiling=VK_IMAGE_TILING_OPTIMAL;create.usage=VK_IMAGE_USAGE_TRANSFER_DST_BIT|VK_IMAGE_USAGE_SAMPLED_BIT;create.sharingMode=VK_SHARING_MODE_EXCLUSIVE;create.initialLayout=VK_IMAGE_LAYOUT_UNDEFINED;a.Check(vkCreateImage(a.device,&create,nullptr,&image),"local terrain BC image failed");VkMemoryRequirements requirements{};vkGetImageMemoryRequirements(a.device,image,&requirements);VkMemoryAllocateInfo allocation{VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO};allocation.allocationSize=requirements.size;allocation.memoryTypeIndex=Memory(a,requirements.memoryTypeBits,VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);a.Check(vkAllocateMemory(a.device,&allocation,nullptr,&memory),"local terrain BC memory failed");a.Check(vkBindImageMemory(a.device,image,memory,0),"local terrain BC bind failed");VkImageViewCreateInfo viewCreate{VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO};viewCreate.image=image;viewCreate.viewType=VK_IMAGE_VIEW_TYPE_2D_ARRAY;viewCreate.format=format;viewCreate.subresourceRange.aspectMask=VK_IMAGE_ASPECT_COLOR_BIT;viewCreate.subresourceRange.levelCount=1;viewCreate.subresourceRange.layerCount=LocalPayloadSlots;a.Check(vkCreateImageView(a.device,&viewCreate,nullptr,&view),"local terrain BC view failed");(void)bytes;
+}
+void CreateLocalTerrain(App&a){
+  if(!a.localTerrainPath.empty()){a.localPack=std::make_unique<nc::localterrain::Pack>();std::string error;if(!a.localPack->Open(a.localTerrainPath,error)||!a.localPack->IsProductionLayout())throw std::runtime_error("Local terrain pack unavailable: "+(error.empty()?std::string("NCCUBE2 production layout mismatch"):error));}
+  CreateLocalImage(a,VK_FORMAT_BC7_SRGB_BLOCK,LocalAlbedoLayerBytes,a.localImages[0],a.localImageMemory[0],a.localImageViews[0]);CreateLocalImage(a,VK_FORMAT_BC4_UNORM_BLOCK,LocalElevationLayerBytes,a.localImages[1],a.localImageMemory[1],a.localImageViews[1]);CreateLocalImage(a,VK_FORMAT_BC5_UNORM_BLOCK,LocalNormalLayerBytes,a.localImages[2],a.localImageMemory[2],a.localImageViews[2]);VkPhysicalDeviceProperties properties{};vkGetPhysicalDeviceProperties(a.physical,&properties);VkSamplerCreateInfo sampler{VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO};sampler.magFilter=VK_FILTER_LINEAR;sampler.minFilter=VK_FILTER_LINEAR;sampler.mipmapMode=VK_SAMPLER_MIPMAP_MODE_NEAREST;sampler.addressModeU=VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;sampler.addressModeV=VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;sampler.addressModeW=VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;sampler.anisotropyEnable=VK_TRUE;sampler.maxAnisotropy=std::min(8.0f,properties.limits.maxSamplerAnisotropy);sampler.maxLod=0;a.Check(vkCreateSampler(a.device,&sampler,nullptr,&a.localSampler),"local terrain BC sampler failed");CreateHostBuffer(a,LocalStagingBytes,VK_BUFFER_USAGE_TRANSFER_SRC_BIT,a.localStagingBuffer,a.localStagingMemory,a.localStagingMapped,"local terrain staging failed");
+  if(a.localPack){a.localIo=std::make_unique<LocalIoState>();a.localIo->pack=a.localPack.get();a.localIo->worker=std::thread(LocalIoWorker,a.localIo.get());char message[384];const uint64_t vram=uint64_t(LocalPayloadSlots)*(LocalAlbedoLayerBytes+LocalElevationLayerBytes+LocalNormalLayerBytes);std::snprintf(message,sizeof message,"Local terrain NCCUBE2: records=%u; levels=%u-%u; BC7/BC4/BC5; slots=%u; VRAM=%llu; uploadBudget=%u; async=true; deterministicLRU=true",a.localPack->RecordCount(),a.localPack->MinimumLevel(),a.localPack->MaximumLevel(),LocalPayloadSlots,(unsigned long long)vram,LocalUploadBudget);a.Log(NC_LOG_ALWAYS,message);}
+}
+void DestroyLocalTerrain(App&a){
+  if(a.localIo){{std::lock_guard lock(a.localIo->mutex);a.localIo->stop=true;}a.localIo->wake.notify_all();if(a.localIo->worker.joinable())a.localIo->worker.join();a.localIo.reset();}DestroyHostBuffer(a,a.localStagingBuffer,a.localStagingMemory,a.localStagingMapped);if(a.localSampler)vkDestroySampler(a.device,a.localSampler,nullptr);for(uint32_t channel=0;channel<3;channel++){if(a.localImageViews[channel])vkDestroyImageView(a.device,a.localImageViews[channel],nullptr);if(a.localImages[channel])vkDestroyImage(a.device,a.localImages[channel],nullptr);if(a.localImageMemory[channel])vkFreeMemory(a.device,a.localImageMemory[channel],nullptr);}a.localPack.reset();
+}
+std::array<double,3>LocalDirection(uint32_t face,uint32_t level,uint32_t x,uint32_t y){
+  const double size=double(1u<<level),u=(double(x)+.5)/size,v=(double(y)+.5)/size,a=2*u-1,b=2*v-1;double cx{},cy{},cz{};switch(face){case 0:cx=1;cy=b;cz=-a;break;case 1:cx=-1;cy=b;cz=a;break;case 2:cx=a;cy=1;cz=-b;break;case 3:cx=a;cy=-1;cz=b;break;case 4:cx=a;cy=b;cz=1;break;default:cx=-a;cy=b;cz=-1;break;}const double x2=cx*cx,y2=cy*cy,z2=cz*cz;std::array<double,3>d{cx*std::sqrt(std::max(0.0,1-.5*(y2+z2)+y2*z2/3)),cy*std::sqrt(std::max(0.0,1-.5*(z2+x2)+z2*x2/3)),cz*std::sqrt(std::max(0.0,1-.5*(x2+y2)+x2*y2/3))};const double length=std::sqrt(d[0]*d[0]+d[1]*d[1]+d[2]*d[2]);for(double&value:d)value/=length;return d;
+}
+uint32_t LocalHash(const nc::localterrain::SectorId&id){uint32_t h=id.face*73856093u^id.level*19349663u^id.x*83492791u^id.y*2654435761u^id.detailFrequency*2246822519u^id.payloadVersion*3266489917u;h^=h>>16;return h&(LocalLookupCapacity-1u);}
+void RebuildLocalLookup(App&a){
+  if(!a.localLookupMapped)return;auto*words=static_cast<uint32_t*>(a.localLookupMapped);std::memset(words+16,0,sizeof(uint32_t)*8*LocalLookupCapacity);if(!a.localPack){std::memset(words,0,sizeof(uint32_t)*16);return;}words[0]=1;words[1]=a.localPack->MaximumLevel();words[2]=1;words[3]=nc::localterrain::PayloadVersion;const float residualMinimum=a.localPack->ResidualMinimum(),residualMaximum=a.localPack->ResidualMaximum();std::memcpy(words+4,&residualMinimum,sizeof(float));std::memcpy(words+5,&residualMaximum,sizeof(float));words[6]=LocalPayloadSlots;words[7]=LocalLookupCapacity;words[8]=a.localPack->MinimumLevel();
+  for(uint32_t layer=0;layer<LocalPayloadSlots;layer++)if(a.localLayerOccupied[layer]&&!a.localLayerInFlight[layer]&&a.localLayerPublished[layer]){const auto&id=a.localLayerSector[layer];uint32_t slot=LocalHash(id);for(uint32_t probe=0;probe<LocalLookupCapacity;probe++){uint32_t*entry=words+16+slot*8;if(entry[6]==0){entry[0]=id.face;entry[1]=id.level;entry[2]=id.x;entry[3]=id.y;entry[4]=id.detailFrequency;entry[5]=id.payloadVersion;entry[6]=layer+1;entry[7]=a.localLayerGeneration[layer];break;}slot=(slot+1)&(LocalLookupCapacity-1u);}}
+}
+bool TryPromoteLocalVisibleTransaction(App&a){
+  if(!a.localVisibleTargetCount)return false;std::array<uint32_t,64>layers{};for(uint32_t target=0;target<a.localVisibleTargetCount;target++){layers[target]=UINT32_MAX;for(uint32_t layer=0;layer<LocalPayloadSlots;layer++)if(a.localLayerOccupied[layer]&&!a.localLayerInFlight[layer]&&a.localLayerSector[layer]==a.localVisibleTarget[target]){layers[target]=layer;break;}if(layers[target]==UINT32_MAX)return false;}bool changed=false;for(uint32_t layer=0;layer<LocalPayloadSlots;layer++)if(a.localLayerPublished[layer]){bool retained=false;for(uint32_t target=0;target<a.localVisibleTargetCount;target++)retained|=layers[target]==layer;if(!retained){a.localLayerPublished[layer]=0;changed=true;}}for(uint32_t target=0;target<a.localVisibleTargetCount;target++)if(!a.localLayerPublished[layers[target]]){a.localLayerPublished[layers[target]]=1;changed=true;}if(changed){a.localPromotions++;RebuildLocalLookup(a);}return changed;
+}
+bool LocalPending(const App&a,const nc::localterrain::SectorId&id){
+  for(uint32_t layer=0;layer<LocalPayloadSlots;layer++)if(a.localLayerOccupied[layer]&&a.localLayerSector[layer]==id)return true;for(uint32_t index=0;index<a.localPendingUploads;index++)if(a.localUploadRequests[index].id==id)return true;if(!a.localIo)return false;const auto&io=*a.localIo;for(uint32_t index=0,slot=io.requestHead;index<io.requestCount;index++,slot=(slot+1)%io.requests.size())if(io.requests[slot].id==id)return true;for(const auto&ready:io.ready)if(ready.state&&ready.request.id==id)return true;return false;
+}
+void QueueLocalRequests(App&a){
+  if(!a.localPack||!a.localIo||!a.submission||!a.submission->planetaryEyeball.enabled)return;const auto&e=a.submission->planetaryEyeball;const uint64_t body=uint64_t(e.bodyIdLow)|(uint64_t(e.bodyIdHigh)<<32);if(body!=a.localPack->BodyId()||e.terrainVersion!=a.localPack->TerrainVersion()||e.surfaceAltitudeMetres>100000.0f)return;std::array<double,3>pupil{e.tangentAnchorX,e.tangentAnchorY,e.tangentAnchorZ};const double length=std::sqrt(pupil[0]*pupil[0]+pupil[1]*pupil[1]+pupil[2]*pupil[2]);if(!(length>0))return;for(double&value:pupil)value/=length;std::array<double,3>previous=pupil;if(a.localHasLastPupil)for(uint32_t i=0;i<3;i++)std::memcpy(&previous[i],&a.localLastPupilBits[i],8);const double motion=std::acos(std::clamp(previous[0]*pupil[0]+previous[1]*pupil[1]+previous[2]*pupil[2],-1.0,1.0));if(motion>.2)a.localDemandEpoch++;for(uint32_t i=0;i<3;i++)std::memcpy(&a.localLastPupilBits[i],&pupil[i],8);a.localHasLastPupil=true;std::array<double,3>predicted{pupil[0]+8*(pupil[0]-previous[0]),pupil[1]+8*(pupil[1]-previous[1]),pupil[2]+8*(pupil[2]-previous[2])};const double predictedLength=std::sqrt(predicted[0]*predicted[0]+predicted[1]*predicted[1]+predicted[2]*predicted[2]);for(double&value:predicted)value/=predictedLength;const double radius=double(e.radiusHigh)+double(e.radiusLow),horizon=std::acos(std::clamp(radius/(radius+std::max(1.0,double(e.surfaceAltitudeMetres))),0.0,1.0)),footprint=std::min(.45,horizon+.002+motion*8);
+  struct Candidate{const nc::localterrain::Record*record{};double priority{};bool visible{};};std::array<Candidate,64>candidates{};uint32_t count=0;for(auto&flag:a.localLayerVisible)flag=0;for(const auto&record:a.localPack->Records()){const auto center=LocalDirection(record.id.face,record.id.level,record.id.x,record.id.y);const double current=std::acos(std::clamp(center[0]*pupil[0]+center[1]*pupil[1]+center[2]*pupil[2],-1.0,1.0)),future=std::acos(std::clamp(center[0]*predicted[0]+center[1]*predicted[1]+center[2]*predicted[2],-1.0,1.0)),sectorRadius=3.141592653589793/(std::sqrt(3.0)*double(1u<<record.id.level));const bool visible=current<=footprint+sectorRadius,prefetch=future<=footprint+sectorRadius;if(!visible&&!prefetch)continue;Candidate candidate{&record,std::min(current,future+.25*footprint)+(visible?0:footprint),visible};uint32_t insert=count;while(insert>0&&(candidates[insert-1].priority>candidate.priority||(candidates[insert-1].priority==candidate.priority&&candidates[insert-1].record->id>candidate.record->id))){if(insert<candidates.size())candidates[insert]=candidates[insert-1];insert--;}if(insert<candidates.size())candidates[insert]=candidate;if(count<candidates.size())count++;}
+  a.localVisibleTargetCount=0;for(uint32_t index=0;index<count;index++)if(candidates[index].visible)a.localVisibleTarget[a.localVisibleTargetCount++]=candidates[index].record->id;auto&io=*a.localIo;std::lock_guard lock(io.mutex);for(uint32_t index=0;index<count;index++){const auto&id=candidates[index].record->id;bool resident=false;for(uint32_t layer=0;layer<LocalPayloadSlots;layer++)if(a.localLayerOccupied[layer]&&a.localLayerSector[layer]==id){a.localLayerLastUse[layer]=a.frame;a.localLayerVisible[layer]=candidates[index].visible;resident=true;break;}if(resident){a.localHits++;continue;}a.localMisses++;if(LocalPending(a,id))continue;if(io.requestCount==io.requests.size()){io.queueDrops++;break;}io.requests[io.requestTail]={id,a.localDemandEpoch,candidates[index].visible,std::chrono::steady_clock::now()};io.requestTail=(io.requestTail+1)%io.requests.size();io.requestCount++;a.localRequests++;}TryPromoteLocalVisibleTransaction(a);io.wake.notify_all();
+}
+void CompleteLocalUploads(App&a){if(!a.localPendingUploads)return;for(uint32_t index=0;index<a.localPendingUploads;index++){const uint32_t layer=a.localUploadLayers[index];if(a.localLayerOccupied[layer]&&a.localLayerGeneration[layer]==a.localUploadGenerations[index]&&a.localLayerSector[layer]==a.localUploadRequests[index].id){a.localLayerInFlight[layer]=0;a.localLayerLastUse[layer]=a.frame;}}a.localPendingUploads=0;RebuildLocalLookup(a);}
+void PrepareLocalUploads(App&a){
+  CompleteLocalUploads(a);QueueLocalRequests(a);if(!a.localIo||a.localPendingUploads)return;auto&io=*a.localIo;std::lock_guard lock(io.mutex);for(auto&ready:io.ready){if(a.localPendingUploads>=LocalUploadBudget)break;if(ready.state==3){ready={};continue;}if(ready.state!=2||!ready.payload)continue;if(ready.request.demandEpoch!=a.localDemandEpoch&&!ready.request.visible){a.localCanceled++;ready={};continue;}uint32_t layer=UINT32_MAX;for(uint32_t candidate=0;candidate<LocalPayloadSlots;candidate++)if(!a.localLayerOccupied[candidate]){layer=candidate;break;}if(layer==UINT32_MAX){uint64_t oldest=UINT64_MAX;for(uint32_t candidate=0;candidate<LocalPayloadSlots;candidate++)if(!a.localLayerVisible[candidate]&&!a.localLayerInFlight[candidate]&&a.localLayerLastUse[candidate]<oldest){oldest=a.localLayerLastUse[candidate];layer=candidate;}}if(layer==UINT32_MAX)break;if(a.localLayerOccupied[layer])a.localEvictions++;a.localLayerGeneration[layer]++;a.localLayerSector[layer]=ready.request.id;a.localLayerOccupied[layer]=1;a.localLayerVisible[layer]=ready.request.visible;a.localLayerInFlight[layer]=1;a.localLayerPublished[layer]=0;a.localLayerLastUse[layer]=a.frame;const uint32_t batch=a.localPendingUploads,base=batch*(LocalAlbedoLayerBytes+LocalElevationLayerBytes+LocalNormalLayerBytes);auto*destination=static_cast<uint8_t*>(a.localStagingMapped)+base;std::memcpy(destination,ready.payload->albedoBc7.data(),LocalAlbedoLayerBytes);std::memcpy(destination+LocalAlbedoLayerBytes,ready.payload->elevationBc4.data(),LocalElevationLayerBytes);std::memcpy(destination+LocalAlbedoLayerBytes+LocalElevationLayerBytes,ready.payload->normalBc5.data(),LocalNormalLayerBytes);a.localUploadLayers[batch]=layer;a.localUploadGenerations[batch]=a.localLayerGeneration[layer];a.localUploadRequests[batch]=ready.request;a.localPendingUploads++;a.localUploads++;a.localUploadBytes+=LocalAlbedoLayerBytes+LocalElevationLayerBytes+LocalNormalLayerBytes;a.localTranscodeMilliseconds+=ready.payload->transcodeMilliseconds;a.localUploadLatencyMilliseconds+=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-ready.request.requestedAt).count();ready={};RebuildLocalLookup(a);}io.wake.notify_all();
+}
+void RecordLocalUploads(App&a,VkCommandBuffer command){
+  if(!a.localPendingUploads)return;VkImageMemoryBarrier before[3]{};for(uint32_t channel=0;channel<3;channel++){before[channel].sType=VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;before[channel].srcAccessMask=a.localImagesInitialized?VK_ACCESS_SHADER_READ_BIT:0;before[channel].dstAccessMask=VK_ACCESS_TRANSFER_WRITE_BIT;before[channel].oldLayout=a.localImagesInitialized?VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL:VK_IMAGE_LAYOUT_UNDEFINED;before[channel].newLayout=VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;before[channel].image=a.localImages[channel];before[channel].subresourceRange.aspectMask=VK_IMAGE_ASPECT_COLOR_BIT;before[channel].subresourceRange.levelCount=1;before[channel].subresourceRange.layerCount=LocalPayloadSlots;}vkCmdPipelineBarrier(command,a.localImagesInitialized?(VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT|VK_PIPELINE_STAGE_VERTEX_SHADER_BIT):VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT,VK_PIPELINE_STAGE_TRANSFER_BIT,0,0,nullptr,0,nullptr,3,before);for(uint32_t index=0;index<a.localPendingUploads;index++){const VkDeviceSize base=index*(LocalAlbedoLayerBytes+LocalElevationLayerBytes+LocalNormalLayerBytes);const VkDeviceSize offsets[3]{base,base+LocalAlbedoLayerBytes,base+LocalAlbedoLayerBytes+LocalElevationLayerBytes};for(uint32_t channel=0;channel<3;channel++){VkBufferImageCopy copy{};copy.bufferOffset=offsets[channel];copy.imageSubresource.aspectMask=VK_IMAGE_ASPECT_COLOR_BIT;copy.imageSubresource.baseArrayLayer=a.localUploadLayers[index];copy.imageSubresource.layerCount=1;copy.imageExtent={nc::localterrain::StoredExtent,nc::localterrain::StoredExtent,1};vkCmdCopyBufferToImage(command,a.localStagingBuffer,a.localImages[channel],VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,1,&copy);}}VkImageMemoryBarrier after[3]{before[0],before[1],before[2]};for(auto&barrier:after){barrier.srcAccessMask=VK_ACCESS_TRANSFER_WRITE_BIT;barrier.dstAccessMask=VK_ACCESS_SHADER_READ_BIT;barrier.oldLayout=VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;barrier.newLayout=VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;}vkCmdPipelineBarrier(command,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT|VK_PIPELINE_STAGE_VERTEX_SHADER_BIT,0,0,nullptr,0,nullptr,3,after);a.localImagesInitialized=true;
+}
 std::vector<char> Read(const char *n) {
   HMODULE m{};
   GetModuleHandleExA(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS |
@@ -934,16 +1000,18 @@ void Swap(App &a) {
   rp.attachmentCount=3;rp.pAttachments=attachments;rp.subpassCount=2;rp.pSubpasses=subpasses;rp.dependencyCount=3;rp.pDependencies=dependencies;
   a.Check(vkCreateRenderPass(a.device, &rp, nullptr, &a.renderPass),
           "render pass failed");
-  VkDescriptorSetLayoutBinding binds[16]{};
+  VkDescriptorSetLayoutBinding binds[20]{};
   for(uint32_t binding=0;binding<7;binding++){binds[binding].binding=binding;binds[binding].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;binds[binding].descriptorCount=1;binds[binding].stageFlags=binding==0?VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT:(binding==1?VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_COMPUTE_BIT:(binding==2?VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT|VK_SHADER_STAGE_COMPUTE_BIT:(binding==6?VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT|VK_SHADER_STAGE_COMPUTE_BIT:VK_SHADER_STAGE_COMPUTE_BIT)));}
   binds[7].binding=7;binds[7].descriptorType=VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT;binds[7].descriptorCount=1;binds[7].stageFlags=VK_SHADER_STAGE_FRAGMENT_BIT;
   for(uint32_t binding=8;binding<11;binding++){binds[binding].binding=binding;binds[binding].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;binds[binding].descriptorCount=1;binds[binding].stageFlags=binding==8?VK_SHADER_STAGE_COMPUTE_BIT:VK_SHADER_STAGE_COMPUTE_BIT|VK_SHADER_STAGE_VERTEX_BIT;}
   binds[11].binding=12;binds[11].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;binds[11].descriptorCount=1;binds[11].stageFlags=VK_SHADER_STAGE_COMPUTE_BIT|VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT;
   for(uint32_t index=0;index<3;index++){auto &binding=binds[12+index];binding.binding=24+index;binding.descriptorType=VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;binding.descriptorCount=1;binding.stageFlags=VK_SHADER_STAGE_FRAGMENT_BIT|VK_SHADER_STAGE_VERTEX_BIT;}
   binds[15].binding=27;binds[15].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;binds[15].descriptorCount=1;binds[15].stageFlags=VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT;
+  for(uint32_t index=0;index<3;index++){auto &binding=binds[16+index];binding.binding=28+index;binding.descriptorType=VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;binding.descriptorCount=1;binding.stageFlags=VK_SHADER_STAGE_FRAGMENT_BIT|VK_SHADER_STAGE_VERTEX_BIT;}
+  binds[19].binding=31;binds[19].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;binds[19].descriptorCount=1;binds[19].stageFlags=VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT;
   VkDescriptorSetLayoutCreateInfo dl{
       VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO};
-  dl.bindingCount = 16;
+  dl.bindingCount = 20;
   dl.pBindings = binds;
   a.Check(
       vkCreateDescriptorSetLayout(a.device, &dl, nullptr, &a.descriptorLayout),
@@ -1168,6 +1236,7 @@ void DestroySubmission(App &a) {
   DestroyHostBuffer(a,a.planetaryPresentationBuffer,a.planetaryPresentationMemory,a.planetaryPresentationMapped);
   DestroyHostBuffer(a,a.planetaryEyeballInputBuffer,a.planetaryEyeballInputMemory,a.planetaryEyeballInputMapped);
   DestroyHostBuffer(a,a.productionLayerLookupBuffer,a.productionLayerLookupMemory,a.productionLayerLookupMapped);
+  DestroyHostBuffer(a,a.localLookupBuffer,a.localLookupMemory,a.localLookupMapped);
   a.productionEyeballPromotion=0;a.productionEyeballTier=0;a.productionEyeballFace=0;a.productionEyeballX=0;a.productionEyeballY=0;
   a.validationCpuOracle.clear();a.gpuFrameSubmitted=false;a.hasGpuTelemetry=false;a.hasParityResult=false;a.timestampFrameSubmitted=false;a.hasEyeballValidation=false;
   if (a.orbitMapped) vkUnmapMemory(a.device, a.orbitMemory);
@@ -1228,8 +1297,10 @@ void CreateSubmission(App &a) {
   CreateHostBuffer(a,sizeof(NcPlanetaryPresentation)*10,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,a.planetaryPresentationBuffer,a.planetaryPresentationMemory,a.planetaryPresentationMapped,"planetary presentation buffer failed");
   CreateHostBuffer(a,sizeof(NcPlanetaryEyeball),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,a.planetaryEyeballInputBuffer,a.planetaryEyeballInputMemory,a.planetaryEyeballInputMapped,"planetary eyeball input buffer failed");
   CreateHostBuffer(a,sizeof(uint32_t)*ProductionLookupCapacity,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,a.productionLayerLookupBuffer,a.productionLayerLookupMemory,a.productionLayerLookupMapped,"production layer lookup buffer failed");
+  CreateHostBuffer(a,sizeof(uint32_t)*(16+8*LocalLookupCapacity),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,a.localLookupBuffer,a.localLookupMemory,a.localLookupMapped,"local terrain lookup buffer failed");
+  RebuildLocalLookup(a);
   CreateTerrainResidency(a);
-  VkDescriptorPoolSize ps[3]{{VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,12},{VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT,1},{VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,3}};
+  VkDescriptorPoolSize ps[3]{{VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,13},{VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT,1},{VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,6}};
   VkDescriptorPoolCreateInfo pi{VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO};
   pi.maxSets = 1;
   pi.poolSizeCount = 3;
@@ -1247,8 +1318,10 @@ void CreateSubmission(App &a) {
   const uint32_t storageBindings[11]{0,1,2,3,4,5,6,8,9,10,12};VkWriteDescriptorSet writes[11]{};for(uint32_t index=0;index<11;index++){writes[index].sType=VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;writes[index].dstSet=a.descriptor;writes[index].dstBinding=storageBindings[index];writes[index].descriptorCount=1;writes[index].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;writes[index].pBufferInfo=&infos[index];}
   vkUpdateDescriptorSets(a.device,11,writes,0,nullptr);
   VkDescriptorBufferInfo productionLookupInfo{a.productionLayerLookupBuffer,0,sizeof(uint32_t)*ProductionLookupCapacity};VkWriteDescriptorSet productionLookupWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};productionLookupWrite.dstSet=a.descriptor;productionLookupWrite.dstBinding=27;productionLookupWrite.descriptorCount=1;productionLookupWrite.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;productionLookupWrite.pBufferInfo=&productionLookupInfo;vkUpdateDescriptorSets(a.device,1,&productionLookupWrite,0,nullptr);
+  VkDescriptorBufferInfo localLookupInfo{a.localLookupBuffer,0,sizeof(uint32_t)*(16+8*LocalLookupCapacity)};VkWriteDescriptorSet localLookupWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};localLookupWrite.dstSet=a.descriptor;localLookupWrite.dstBinding=31;localLookupWrite.descriptorCount=1;localLookupWrite.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;localLookupWrite.pBufferInfo=&localLookupInfo;vkUpdateDescriptorSets(a.device,1,&localLookupWrite,0,nullptr);
   VkDescriptorImageInfo sceneInput{};sceneInput.imageView=a.sceneColorView;sceneInput.imageLayout=VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;VkWriteDescriptorSet sceneWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};sceneWrite.dstSet=a.descriptor;sceneWrite.dstBinding=7;sceneWrite.descriptorCount=1;sceneWrite.descriptorType=VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT;sceneWrite.pImageInfo=&sceneInput;vkUpdateDescriptorSets(a.device,1,&sceneWrite,0,nullptr);
   if(a.productionPack){VkDescriptorImageInfo productionInfos[3]{};VkWriteDescriptorSet productionWrites[3]{};for(uint32_t index=0;index<3;index++){productionInfos[index]={a.productionSampler,a.productionImageViews[index],VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL};productionWrites[index].sType=VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;productionWrites[index].dstSet=a.descriptor;productionWrites[index].dstBinding=24+index;productionWrites[index].descriptorCount=1;productionWrites[index].descriptorType=VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;productionWrites[index].pImageInfo=&productionInfos[index];}vkUpdateDescriptorSets(a.device,3,productionWrites,0,nullptr);}
+  {VkDescriptorImageInfo localInfos[3]{};VkWriteDescriptorSet localWrites[3]{};for(uint32_t index=0;index<3;index++){localInfos[index]={a.localSampler,a.localImageViews[index],VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL};localWrites[index].sType=VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;localWrites[index].dstSet=a.descriptor;localWrites[index].dstBinding=28+index;localWrites[index].descriptorCount=1;localWrites[index].descriptorType=VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;localWrites[index].pImageInfo=&localInfos[index];}vkUpdateDescriptorSets(a.device,3,localWrites,0,nullptr);}
 }
 void EnsurePatchCapacity(App &a,uint32_t count) {
   const auto required=sizeof(NcPlanetaryPatch)*std::max<uint32_t>(1,count);
@@ -1366,6 +1439,7 @@ void Record(App &a, uint32_t image) {
   VkCommandBufferBeginInfo bi{VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO};
   a.Check(vkBeginCommandBuffer(c, &bi), "command begin failed");
   RecordProductionUploads(a,c);
+  RecordLocalUploads(a,c);
   vkCmdResetQueryPool(c,a.timestampQueries,0,App::TimestampCount);vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT,a.timestampQueries,0);
   const auto &presentation=a.submission->planetaryPresentation;const bool production=a.submission->planetarySurfaceMode==NC_PLANETARY_SURFACE_PRODUCTION_CUBE;const bool handoff=presentation.enabled!=0;const bool detailedPresentation=!handoff||presentation.regime!=NC_PLANETARY_DISTANT_ONLY;const bool productionFallback=production&&a.productionFallbackOwner;const bool distantPresentation=handoff&&(productionFallback||(!production&&presentation.regime!=NC_PLANETARY_DETAILED_ONLY&&presentation.distantAlpha>0));const bool productionEyeball=production&&a.submission->planetaryEyeball.enabled!=0&&a.productionEyeballPromotion>0;const bool regional=production||detailedPresentation;const bool gpuPlanetary=regional&&a.submission->planetaryMode!=NC_PLANETARY_CPU_REFERENCE;
   if(distantPresentation||detailedPresentation||productionEyeball){VkMemoryBarrier hostBarrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};hostBarrier.srcAccessMask=VK_ACCESS_HOST_WRITE_BIT;hostBarrier.dstAccessMask=VK_ACCESS_SHADER_READ_BIT;VkPipelineStageFlags readers=VK_PIPELINE_STAGE_VERTEX_SHADER_BIT|VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT|(gpuPlanetary?VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT:0);vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_HOST_BIT,readers,0,1,&hostBarrier,0,nullptr,0,nullptr);}
@@ -1479,7 +1553,7 @@ void InspectGpuPlanetary(App &a) {
 void InspectGpuTimings(App &a){
   if(!a.timestampFrameSubmitted||!a.timestampQueries)return;std::array<uint64_t,App::TimestampCount> ticks{};const auto result=vkGetQueryPoolResults(a.device,a.timestampQueries,0,App::TimestampCount,sizeof(ticks),ticks.data(),sizeof(uint64_t),VK_QUERY_RESULT_64_BIT);if(result!=VK_SUCCESS)return;
   std::array<double,App::TimestampCount> values{};const double scale=double(a.timestampPeriodNanoseconds)/1e6;const bool eyeball=a.submission&&a.submission->planetarySurfaceMode==NC_PLANETARY_SURFACE_PRODUCTION_CUBE&&a.submission->planetaryEyeball.enabled!=0;values[0]=(ticks[8]-ticks[0])*scale;values[1]=0;values[2]=eyeball?(ticks[6]-ticks[5])*scale:0;values[3]=(ticks[3]-ticks[2])*scale;values[4]=(ticks[4]-ticks[3])*scale;values[5]=(ticks[7]-ticks[0])*scale;values[6]=(ticks[8]-ticks[7])*scale;values[7]=(ticks[1]-ticks[0])*scale;values[8]=(ticks[7]-ticks[4])*scale;for(uint32_t i=0;i<App::TimestampCount;i++)a.timestampAccumulatedMs[i]+=values[i];a.timestampSampleCount++;
-  if(a.timestampSampleCount==1||a.timestampSampleCount%120==0){char message[384];std::snprintf(message,sizeof message,"GPU timings: total=%.3f ms; eyeballCompute=%.3f; eyeballDraw=%.3f; background=%.3f; preSurface=%.3f; scene=%.3f; toneMap=%.3f; regionalCompute=%.3f; materialsOverlays=%.3f",values[0],values[1],values[2],values[3],values[4],values[5],values[6],values[7],values[8]);a.Log(NC_LOG_ALWAYS,message);}
+  if(a.timestampSampleCount==1||a.timestampSampleCount%120==0){char message[384];std::snprintf(message,sizeof message,"GPU timings: total=%.3f ms; eyeballCompute=%.3f; eyeballDraw=%.3f; background=%.3f; preSurface=%.3f; scene=%.3f; toneMap=%.3f; regionalCompute=%.3f; materialsOverlays=%.3f",values[0],values[1],values[2],values[3],values[4],values[5],values[6],values[7],values[8]);a.Log(NC_LOG_ALWAYS,message);if(a.localIo){std::lock_guard lock(a.localIo->mutex);uint32_t resident=0,visible=0,inFlight=0,ready=0,failed=0,published=0;for(uint32_t slot=0;slot<LocalPayloadSlots;slot++){resident+=a.localLayerOccupied[slot]&&!a.localLayerInFlight[slot];visible+=a.localLayerVisible[slot];inFlight+=a.localLayerInFlight[slot];published+=a.localLayerPublished[slot];}for(const auto&value:a.localIo->ready){ready+=value.state==2u;failed+=value.state==3u;}const uint64_t samples=a.localHits+a.localMisses;const double hitRate=samples?100.0*double(a.localHits)/double(samples):0.0;const uint64_t vram=uint64_t(LocalPayloadSlots)*(LocalAlbedoLayerBytes+LocalElevationLayerBytes+LocalNormalLayerBytes);const double uploadLatency=a.localUploads?a.localUploadLatencyMilliseconds/double(a.localUploads):0.0;char local[864];std::snprintf(local,sizeof local,"Local terrain streaming: requested=%llu; hits=%llu; misses=%llu; hitRate=%.2f%%; resident=%u/%u; visible=%u/%u; published=%u; promotions=%llu; inFlight=%u; evictions=%llu; queued=%u; ready=%u; failed=%u; canceled=%llu; queueDrops=%llu; bytesRead=%llu; bytesSupercompressed=%llu; bytesTranscoded=%llu; bytesUploaded=%llu; transcodeMs=%.3f; uploadLatencyAvgMs=%.3f; uploads=%llu; uploadBudget=%u; selectedFrequency=%u; fallbackFrequency=%u; BC7VRAM=%llu; BC4VRAM=%llu; BC5VRAM=%llu; totalVRAM=%llu",(unsigned long long)a.localRequests,(unsigned long long)a.localHits,(unsigned long long)a.localMisses,hitRate,resident,LocalPayloadSlots,visible,a.localVisibleTargetCount,published,(unsigned long long)a.localPromotions,inFlight,(unsigned long long)a.localEvictions,a.localIo->requestCount,ready,failed,(unsigned long long)a.localCanceled,(unsigned long long)a.localIo->queueDrops,(unsigned long long)a.localIo->bytesRead,(unsigned long long)a.localIo->bytesRead,(unsigned long long)a.localIo->bytesTranscoded,(unsigned long long)a.localUploadBytes,a.localIo->transcodeMilliseconds,uploadLatency,(unsigned long long)a.localUploads,LocalUploadBudget,visible?1u:0u,0u,(unsigned long long)(uint64_t(LocalPayloadSlots)*LocalAlbedoLayerBytes),(unsigned long long)(uint64_t(LocalPayloadSlots)*LocalElevationLayerBytes),(unsigned long long)(uint64_t(LocalPayloadSlots)*LocalNormalLayerBytes),(unsigned long long)vram);a.Log(NC_LOG_ALWAYS,local);}}
 }
 void InspectEyeball(App &a){
   if(!a.timestampFrameSubmitted)return;
@@ -1548,6 +1622,7 @@ void Destroy(App &a) {
       vkDestroySemaphore(a.device, a.imageAvailable, nullptr);
     DestroyMesh(a);
     DestroySubmission(a);
+    DestroyLocalTerrain(a);
     DestroyProductionCubeSurface(a);
     DestroyTerrainResidency(a);
     if (a.pool)
@@ -1620,6 +1695,7 @@ void Update(App &a, float dt) {
   Validate(a);
   Upload(a);
   PrepareProductionUploads(a);
+  PrepareLocalUploads(a);
   a.cpuUpdateMs+=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-updateStart).count();
 }
 } // namespace
@@ -1674,13 +1750,13 @@ extern "C" NC_API NcResult __cdecl nc_get_abi_layout(NcAbiLayout *o) {
 }
 static NcResult RunRenderer(NcFrameSubmission *s, NcHostCallback cb, void *data, const NcRuntimeAssets *assets) {
   if (!cb || !s || !s->objects || !s->objectCount || !s->batches ||
-      !s->batchCount || (assets && (assets->size != sizeof(NcRuntimeAssets) || assets->version != 1u || !assets->productionTerrainPathUtf8)))
+      !s->batchCount || (assets && (assets->size != sizeof(NcRuntimeAssets) || assets->version != 2u || !assets->productionTerrainPathUtf8)))
     return NC_INVALID_ARGUMENT;
   App a;
   a.cb = cb;
   a.cbData = data;
   a.submission = s;
-  if(assets)a.productionTerrainPath=assets->productionTerrainPathUtf8;
+  if(assets){a.productionTerrainPath=assets->productionTerrainPathUtf8;if(assets->localTerrainPathUtf8)a.localTerrainPath=assets->localTerrainPathUtf8;}
   try {
     gApp = &a;
     Window(a);
@@ -1690,6 +1766,7 @@ static NcResult RunRenderer(NcFrameSubmission *s, NcHostCallback cb, void *data,
     Device(a);
     CreateMesh(a);
     CreateProductionCubeSurface(a);
+    CreateLocalTerrain(a);
     Validate(a);
     Swap(a);
     CreateSubmission(a);
@@ -1738,8 +1815,9 @@ static NcResult RunRenderer(NcFrameSubmission *s, NcHostCallback cb, void *data,
 }
 extern "C" NC_API NcResult __cdecl nc_validate_terrain_asset(const char *path, uint64_t bodyId, uint32_t terrainVersion, uint32_t expectedRecordCount) {
   if(!path||!*path||!bodyId||!terrainVersion||!expectedRecordCount)return NC_INVALID_ARGUMENT;
-  nc::production::Pack pack;std::string error;if(!pack.Open(path,error)||pack.BodyId()!=bodyId||pack.TerrainVersion()!=terrainVersion||pack.RecordCount()!=expectedRecordCount)return NC_FAILURE;
-  nc::production::Payload payload;const nc::production::PatchId root{bodyId,terrainVersion,0,0,0,0};return pack.Read(root,payload,error)&&payload.digestValid?NC_SUCCESS:NC_FAILURE;
+  std::ifstream input(path,std::ios::binary);char magic[8]{};if(!input.read(magic,sizeof magic))return NC_FAILURE;std::string error;
+  if(std::memcmp(magic,"NCCUBE2\0",8)==0){nc::localterrain::Pack pack;if(!pack.Open(path,error)||pack.BodyId()!=bodyId||pack.TerrainVersion()!=terrainVersion||pack.RecordCount()!=expectedRecordCount||pack.Records().empty())return NC_FAILURE;nc::localterrain::Payload payload;return pack.Read(pack.Records().front().id,payload,error)&&payload.digestValid?NC_SUCCESS:NC_FAILURE;}
+  nc::production::Pack pack;if(!pack.Open(path,error)||pack.BodyId()!=bodyId||pack.TerrainVersion()!=terrainVersion||pack.RecordCount()!=expectedRecordCount)return NC_FAILURE;nc::production::Payload payload;const nc::production::PatchId root{bodyId,terrainVersion,0,0,0,0};return pack.Read(root,payload,error)&&payload.digestValid?NC_SUCCESS:NC_FAILURE;
 }
 extern "C" NC_API NcResult __cdecl nc_run_renderer(NcFrameSubmission *s, NcHostCallback cb, void *data) { return RunRenderer(s,cb,data,nullptr); }
 extern "C" NC_API NcResult __cdecl nc_run_renderer_with_assets(NcFrameSubmission *s, NcHostCallback cb, void *data, const NcRuntimeAssets *assets) { return RunRenderer(s,cb,data,assets); }

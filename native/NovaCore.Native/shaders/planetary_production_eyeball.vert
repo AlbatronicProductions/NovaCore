@@ -2,6 +2,7 @@
 #extension GL_GOOGLE_include_directive : require
 #extension GL_ARB_gpu_shader_fp64 : require
 #include "production_cube_surface.glsl"
+#include "local_terrain.glsl"
 struct EncodedPosition { vec4 high; vec4 low; };
 struct Camera { EncodedPosition position; mat4 viewProjection; };
 struct Presentation { vec4 centerRadius; vec4 colorDistant; vec4 blendMetricState; uvec4 identity; vec4 surface; uvec4 hooks; vec4 ringGeometry; vec4 ringOrientation; vec4 ringColor; vec4 bodyOrientation; vec4 localDetail; };
@@ -50,7 +51,7 @@ float HeightAt(vec3 direction,out uint layer,out vec2 localUv)
 {
   layer=ResolveLayer(direction,localUv);if(layer==0u)return 0.0;
   vec2 stored=(vec2(4)+localUv*256.0)/264.0;
-  return texture(productionElevation,vec3(stored,float(layer-1u))).r*20000.0-11000.0;
+  return texture(productionElevation,vec3(stored,float(layer-1u))).r*20000.0-11000.0+LocalTerrainElevationResidual(direction);
 }
 float HeightAt(vec3 direction){uint layer;vec2 uv;return HeightAt(direction,layer,uv);}
 void main()

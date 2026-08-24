@@ -48,6 +48,7 @@ var tests = new (string, Action)[]
     ("Cube-sphere planetary surface", CubeSpherePlanetarySurfaceTest),
     ("Production relaxed cube-sphere patch hierarchy", ProductionRelaxedCubeSpherePatchHierarchyTest),
     ("Terrain asset distribution boundary", TerrainAssetDistributionBoundaryTest),
+    ("Local terrain streaming and GPU compression", LocalTerrainStreamingAndGpuCompressionTest),
     ("Production cube-sphere GPU residency integration", ProductionCubeSphereGpuResidencyIntegrationTest),
     ("Production KSA-style spherical billboard", ProductionSphericalBillboardTest),
     ("Production surface body eligibility and transition ownership", ProductionSurfaceBodyEligibilityAndTransitionOwnershipTest),
@@ -119,6 +120,117 @@ static void TerrainAssetDistributionBoundaryTest()
     Check(File.ReadAllText(Path.Combine(repositoryRoot,"samples","NovaCore.Triangle","NovaCore.Triangle.csproj")).Contains("earth_surface_v4.nccube",StringComparison.Ordinal)==false,"normal managed builds do not copy production NCCUBE payloads");
     Check(File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","NovaCoreNative.cpp")).Contains("ModuleDirectory()+\"earth-data\\\\earth_surface_v4.nccube\"",StringComparison.Ordinal)==false,"native runtime consumes the explicitly resolved verified path rather than a module-relative copy");
     Console.WriteLine($"Terrain asset boundary: fixture={fixture.ByteSize}B/{fixture.Sha256}; production={productionVerification.Status}; buffer={TerrainAssetCache.VerificationBufferBytes}B; cache={configuredCache}");
+}
+
+static void LocalTerrainStreamingAndGpuCompressionTest()
+{
+    var repositoryRoot=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..",".."));
+    var fixtureRoot=Path.Combine(repositoryRoot,"tests","fixtures","terrain");
+    var fixturePath=Path.Combine(fixtureRoot,"tiny-local.nccube");
+    Check(TerrainAssetManifestFile.TryLoad(Path.Combine(fixtureRoot,"tiny-local.json"),out var manifest,out var manifestError),$"local fixture manifest: {manifestError}");
+    var verification=TerrainAssetCache.Verify(manifest,fixturePath);
+    Check(verification.IsValid&&verification.ActualBytes==697_539&&verification.ActualSha256=="6fea3a62833e8aa6beffcbd845697baaca2a8db281eab2ed900d53b2657cf053","NCCUBE2 fixture manifest, size, and content identity");
+
+    var package=File.ReadAllBytes(fixturePath);
+    Check(PlanetaryLocalTerrainPackContract.TryReadHeader(package,out var header)&&header.RecordCount==4&&header.MinimumSectorLevel==4&&header.MaximumSectorLevel==4,"NCCUBE2 sparse hierarchy header");
+    var sectors=new PlanetaryLocalTerrainSectorId[header.RecordCount];
+    var records=new PlanetaryLocalTerrainRecordHeader[header.RecordCount];
+    var offset=PlanetaryLocalTerrainPackContract.HeaderBytes;
+    for(var index=0;index<records.Length;index++)
+    {
+        Check(PlanetaryLocalTerrainPackContract.TryReadRecordHeader(package.AsSpan(offset,PlanetaryLocalTerrainPackContract.RecordHeaderBytes),out records[index]),$"NCCUBE2 record {index}");
+        sectors[index]=records[index].Sector;
+        Check(records[index].PayloadOffset==(ulong)(offset+PlanetaryLocalTerrainPackContract.RecordHeaderBytes),$"NCCUBE2 sequential payload {index}");
+        Check(records[index].GpuAlbedoBytes==PlanetaryLocalTerrainPackContract.GpuBytes(PlanetaryLocalTerrainGpuFormat.Bc7Srgb,PlanetaryLocalTerrainPackContract.StoredExtent)&&
+              records[index].GpuElevationBytes==PlanetaryLocalTerrainPackContract.GpuBytes(PlanetaryLocalTerrainGpuFormat.Bc4Unorm,PlanetaryLocalTerrainPackContract.StoredExtent)&&
+              records[index].GpuNormalBytes==PlanetaryLocalTerrainPackContract.GpuBytes(PlanetaryLocalTerrainGpuFormat.Bc5Unorm,PlanetaryLocalTerrainPackContract.StoredExtent),$"record {index} uses BC7/BC4/BC5 GPU bytes");
+        offset=checked((int)records[index].PayloadOffset+(int)records[index].StoredAlbedoBytes+(int)records[index].StoredElevationBytes+(int)records[index].StoredNormalBytes);
+    }
+    Check(offset==package.Length&&sectors.Distinct().Count()==sectors.Length&&sectors.SequenceEqual(sectors.Order()),"NCCUBE2 records exactly cover file in deterministic identity order");
+
+    static byte[] DecodeChannel(byte[] package,in PlanetaryLocalTerrainRecordHeader record,int channel)
+    {
+        var storedOffset=checked((int)record.PayloadOffset+(channel==0?0:checked((int)record.StoredAlbedoBytes+(channel==1?0:(int)record.StoredElevationBytes))));
+        var storedBytes=channel switch{0=>(int)record.StoredAlbedoBytes,1=>(int)record.StoredElevationBytes,_=>(int)record.StoredNormalBytes};
+        var gpuBytes=channel switch{0=>(int)record.GpuAlbedoBytes,1=>(int)record.GpuElevationBytes,_=>(int)record.GpuNormalBytes};
+        var codec=channel switch{0=>record.AlbedoCodec,1=>record.ElevationCodec,_=>record.NormalCodec};
+        var result=new byte[gpuBytes];
+        if(codec==PlanetaryLocalTerrainStorageCodec.RawGpuBlocks)package.AsSpan(storedOffset,storedBytes).CopyTo(result);
+        else Check(PlanetaryLocalTerrainTranscode.TryDecodePackBits(package.AsSpan(storedOffset,storedBytes),result,out var written)&&written==gpuBytes,$"PackBits channel {channel} transcode");
+        return result;
+    }
+    var asynchronous=Task.Run(()=>(DecodeChannel(package,records[0],0),DecodeChannel(package,records[0],1),DecodeChannel(package,records[0],2))).GetAwaiter().GetResult();
+    Check(asynchronous.Item1.Length==records[0].GpuAlbedoBytes&&asynchronous.Item2.Length==records[0].GpuElevationBytes&&asynchronous.Item3.Length==records[0].GpuNormalBytes,"bounded asynchronous fixture read produces GPU-native BC blocks");
+    Check(NativeRuntime.ValidateTerrainAsset(fixturePath,manifest.BodyId,manifest.TerrainVersion,(uint)manifest.Hierarchy.RecordCount)==NativeResult.Success,"native NCCUBE2 parser, transcode, and digest path validates fixture");
+    var corruptPath=Path.Combine(Path.GetTempPath(),$"novacore-local-corrupt-{Guid.NewGuid():N}.nccube");
+    try
+    {
+        var corrupt=(byte[])package.Clone();corrupt[checked((int)records[0].PayloadOffset+17)]^=0x5a;File.WriteAllBytes(corruptPath,corrupt);
+        Check(NativeRuntime.ValidateTerrainAsset(corruptPath,manifest.BodyId,manifest.TerrainVersion,(uint)manifest.Hierarchy.RecordCount)==NativeResult.Failure,"native local payload digest rejects corrupt sector data");
+    }
+    finally{if(File.Exists(corruptPath))File.Delete(corruptPath);}
+    var missingSector=new PlanetaryLocalTerrainSectorId(6,4,CubeSphereFace.PositiveZ,4,0,0,1,1);
+    Check(!sectors.Contains(missingSector),"sparse local package reports geographically absent sectors without inventing unrelated fallback");
+
+    var pupil=RelaxedCubeSphereProjection.UnitDirection(sectors[0].Face,(sectors[0].X+.5)/(1<<sectors[0].Level),(sectors[0].Y+.5)/(1<<sectors[0].Level));
+    var orbital=new PlanetaryLocalTerrainDemandInput(6,4,pupil,pupil,pupil,700_000,6_371_008.8,1080,Math.Tan(Math.PI/6));
+    Span<PlanetaryLocalTerrainDemand> demand=stackalloc PlanetaryLocalTerrainDemand[64];
+    Check(PlanetaryLocalTerrainDemandPlanner.Plan(orbital,sectors,demand)==0,"maximum local detail is not requested at orbital altitude");
+    var near=orbital with{SurfaceAltitudeMetres=10_000,PreviousPupilDirection=(pupil+new Double3(.0002,0,0)).Normalized()};
+    var demandCount=PlanetaryLocalTerrainDemandPlanner.Plan(near,sectors,demand);
+    Check(demandCount>0&&demand[..demandCount].ToArray().All(value=>value.Sector.BodyId==6&&value.Sector.TerrainVersion==4),"near-field demand follows visible and predicted body-fixed footprint");
+    var repeated=new PlanetaryLocalTerrainDemand[demand.Length];var repeatedCount=PlanetaryLocalTerrainDemandPlanner.Plan(near,sectors,repeated);
+    Check(repeatedCount==demandCount&&repeated.AsSpan(0,repeatedCount).SequenceEqual(demand[..demandCount]),"local demand ordering is deterministic");
+    Check(PlanetaryLocalTerrainDemandPlanner.Plan(near with{BodyId=5},sectors,demand)==0,"Earth local package remains isolated from unsupported bodies");
+    var opposite=RelaxedCubeSphereProjection.UnitDirection(sectors[^1].Face,(sectors[^1].X+.5)/(1<<sectors[^1].Level),(sectors[^1].Y+.5)/(1<<sectors[^1].Level));
+    var reversed=near with{PupilDirection=opposite,PreviousPupilDirection=pupil,ViewDirection=opposite};
+    Check(PlanetaryLocalTerrainDemandPlanner.Plan(reversed,sectors,demand)>0,"rapid motion and direction reversal immediately demand the new visible/predicted footprint rather than traversed sectors");
+    _=PlanetaryLocalTerrainDemandPlanner.Plan(near,sectors,demand);var allocationStart=GC.GetAllocatedBytesForCurrentThread();
+    for(var iteration=0;iteration<1_000;iteration++)_=PlanetaryLocalTerrainDemandPlanner.Plan(near,sectors,demand);
+    Check(GC.GetAllocatedBytesForCurrentThread()==allocationStart,"local demand planning is allocation-free on the render path");
+
+    var firstCache=new PlanetaryLocalTerrainCache(128);var secondCache=new PlanetaryLocalTerrainCache(128);
+    var firstTokens=new PlanetaryLocalTerrainSlot[128];
+    for(var index=0;index<128;index++)
+    {
+        var id=new PlanetaryLocalTerrainSectorId(6,4,CubeSphereFace.PositiveX,12,index,0,1,1);
+        firstTokens[index]=firstCache.Request(id,false);var mirror=secondCache.Request(id,false);
+        Check(firstCache.TryBeginRead(firstTokens[index])&&secondCache.TryBeginRead(mirror),$"cache read begins {index}");
+        Check(firstCache.TryCompleteRead(firstTokens[index],100,174_240)&&secondCache.TryCompleteRead(mirror,100,174_240),$"cache read completes {index}");
+        Check(firstCache.TryPublish(firstTokens[index],174_240)&&secondCache.TryPublish(mirror,174_240),$"cache publishes {index}");
+    }
+    firstCache.BeginFrame();secondCache.BeginFrame();
+    var replacementId=new PlanetaryLocalTerrainSectorId(6,4,CubeSphereFace.PositiveX,12,128,0,1,1);
+    var replacement=firstCache.Request(replacementId,true);var replacementMirror=secondCache.Request(replacementId,true);
+    Check(replacement.Slot==replacementMirror.Slot&&replacement.Generation==replacementMirror.Generation&&replacement.Slot==0,"deterministic LRU selects the same oldest GPU-safe slot");
+    Check(!firstCache.Owns(firstTokens[0])&&!firstCache.TryPublish(firstTokens[0],1),"generation token prevents stale slot publication");
+    Check(firstCache.Statistics.Capacity==128&&firstCache.Statistics.Evictions==1&&firstCache.Statistics.Resident==127,"fixed-capacity cache remains bounded through eviction");
+    var cancellationCache=new PlanetaryLocalTerrainCache(128);var cancellation=cancellationCache.Request(sectors[0],false);
+    Check(cancellationCache.TryBeginRead(cancellation)&&cancellationCache.Cancel(cancellation)&&!cancellationCache.TryCompleteRead(cancellation,1,1)&&cancellationCache.Statistics.Canceled==1,"stale predictive request cancellation invalidates its generation before publication");
+
+    using var content=JsonDocument.Parse(File.ReadAllText(Path.Combine(fixtureRoot,"tiny-local.content.json")));
+    var contentRoot=content.RootElement;
+    Check(contentRoot.GetProperty("rawBytes").GetInt64()==1_951_488&&contentRoot.GetProperty("gpuBytes").GetInt64()==696_960&&
+          contentRoot.GetProperty("bc7Bytes").GetInt64()==278_784&&contentRoot.GetProperty("bc4Bytes").GetInt64()==139_392&&contentRoot.GetProperty("bc5Bytes").GetInt64()==278_784,"fixture reports naive and GPU-native dataset sizes");
+    Check(contentRoot.GetProperty("maximumVerticalErrorMetres").GetDouble()<6.1&&contentRoot.GetProperty("rmsVerticalErrorMetres").GetDouble()<2.2,"BC4 physical residual error is explicit and bounded");
+    Check(contentRoot.GetProperty("maximumSlopeError").GetDouble()<.0023&&contentRoot.GetProperty("rmsSlopeError").GetDouble()<.00031&&
+          contentRoot.GetProperty("maximumNormalErrorDegrees").GetDouble()<.33&&contentRoot.GetProperty("rmsNormalErrorDegrees").GetDouble()<.23&&
+          contentRoot.GetProperty("worstVerticalSample").GetProperty("verticalErrorMetres").GetDouble()==contentRoot.GetProperty("maximumVerticalErrorMetres").GetDouble(),
+          "BC4 slope/normal error and worst geographic sample are explicit and bounded");
+
+    var nativeSource=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","NovaCoreNative.cpp"));
+    var localSource=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","LocalTerrainPack.cpp"));
+    var shaderSource=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","shaders","local_terrain.glsl"));
+    Check(nativeSource.Contains("VK_FORMAT_BC7_SRGB_BLOCK",StringComparison.Ordinal)&&nativeSource.Contains("VK_FORMAT_BC4_UNORM_BLOCK",StringComparison.Ordinal)&&nativeSource.Contains("VK_FORMAT_BC5_UNORM_BLOCK",StringComparison.Ordinal),"native residency uses required GPU-native BC formats");
+    Check(nativeSource.Contains("LocalPayloadSlots=128",StringComparison.Ordinal)&&nativeSource.Contains("LocalUploadBudget=2",StringComparison.Ordinal)&&nativeSource.Contains("std::thread(LocalIoWorker",StringComparison.Ordinal),"runtime cache, uploads, and asynchronous I/O are fixed and bounded");
+    Check(nativeSource.Contains("TryPromoteLocalVisibleTransaction",StringComparison.Ordinal)&&nativeSource.Contains("localLayerPublished",StringComparison.Ordinal)&&
+          nativeSource.Contains("a.localLayerPublished[layer]=0",StringComparison.Ordinal),"visible local sectors remain behind the coherent terrain-v4 base until the complete footprint transaction is resident");
+    Check(localSource.Contains("local terrain payload digest mismatch",StringComparison.Ordinal)&&shaderSource.Contains("binding=28",StringComparison.Ordinal)&&shaderSource.Contains("binding=31",StringComparison.Ordinal),"fixture exercises production parser while Eyeball shader declares fixed BC arrays and remap metadata");
+    Check(shaderSource.Contains("textureGrad(localTerrainAlbedo",StringComparison.Ordinal)&&shaderSource.Contains("LocalTerrainStoredExtent=264.0",StringComparison.Ordinal)&&
+          shaderSource.Contains("ProductionDirectionAddress",StringComparison.Ordinal),"local sector sampling preserves body-direction addressing, explicit gradients, and four-texel filtering gutters");
+    Check(File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","shaders","planetary_production_eyeball.vert")).Contains("LocalTerrainElevationResidual",StringComparison.Ordinal)&&
+          File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","shaders","planetary_production.frag")).Contains("SampleLocalTerrainMaterial",StringComparison.Ordinal),"actual production Eyeball consumes local displacement, albedo, and normals");
+    Console.WriteLine($"Local terrain fixture: sectors={header.RecordCount}; disk={manifest.ByteSize}B; GPU={contentRoot.GetProperty("gpuBytes").GetInt64()}B; cache=128/256/512 bounded candidates; production=128 slots");
 }
 
 static void ProductionEarthMaterialStateContinuityTest()
