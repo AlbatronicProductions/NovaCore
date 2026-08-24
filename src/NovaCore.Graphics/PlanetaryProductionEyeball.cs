@@ -158,7 +158,10 @@ public readonly record struct PlanetaryProductionPupilCell(
 /// </summary>
 public sealed class PlanetaryProductionPupilOrientation
 {
-    private static readonly int[] TierResolution = [262_144, 524_288, 1_048_576, 2_097_152];
+    // Pupil identity is a body-fixed surface property, not a mesh-tier
+    // property.  A single fine angular grid prevents T0<->T3 replacement from
+    // moving the physical tangent origin merely because tessellation changed.
+    public const int Resolution = 2_097_152;
     private PlanetaryProductionPupilCell? _cell;
     private long _changes;
 
@@ -171,8 +174,8 @@ public sealed class PlanetaryProductionPupilOrientation
         if (!desiredBodyFixedDirection.IsFinite || desiredBodyFixedDirection.LengthSquared <= 0d || tier is < 0 or > PlanetaryProductionEyeballTopology.MaximumTier)
             throw new ArgumentOutOfRangeException();
         var desired = desiredBodyFixedDirection.Normalized();
-        var resolution = TierResolution[tier];
-        if (_cell is { } current && current.Resolution == resolution)
+        var resolution = Resolution;
+        if (_cell is { } current)
         {
             var angularError = Math.Acos(Math.Clamp(Double3.Dot(current.BodyFixedDirection, desired), -1d, 1d));
             var retainAngle = 1.15d * Math.PI / resolution;

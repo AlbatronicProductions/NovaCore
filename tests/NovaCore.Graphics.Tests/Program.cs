@@ -50,6 +50,8 @@ var tests = new (string, Action)[]
     ("Production cube-sphere GPU residency integration", ProductionCubeSphereGpuResidencyIntegrationTest),
     ("Production KSA-style spherical billboard", ProductionSphericalBillboardTest),
     ("Production surface body eligibility and transition ownership", ProductionSurfaceBodyEligibilityAndTransitionOwnershipTest),
+    ("Production Earth material-state continuity", ProductionEarthMaterialStateContinuityTest),
+    ("Production Eyeball seam continuity", ProductionEyeballSeamContinuityTest),
     ("Planetary terrain residency and surface frame", PlanetaryTerrainResidencyAndSurfaceFrameTest),
     ("Planetary patch topology and ABI", PlanetaryPatchTopologyAndAbiTest),
     ("Fixed tangent-frame Eyeball anchoring", FixedTangentFrameEyeballAnchoringTest),
@@ -64,6 +66,112 @@ var tests = new (string, Action)[]
 };
 var testFilter=args.FirstOrDefault(argument=>argument.StartsWith("--test=",StringComparison.OrdinalIgnoreCase))?[7..];
 foreach (var (name, test) in tests) if(testFilter is null||name.Contains(testFilter,StringComparison.OrdinalIgnoreCase)){test();Console.WriteLine($"PASS {name}");}
+
+static void ProductionEarthMaterialStateContinuityTest()
+{
+    var root=new ReferenceFrameId(994);
+    Check(SolarSystemScene.TryCreateAt(root,SimulationInstant.Zero,out var value,out var error)&&value is not null,$"Earth material-state scene: {error}");
+    var scene=value!;var camera=new CameraState(new FramePosition(root,Double3.Zero),DoubleQuaternion.Identity,scene.Projection,CameraMode.Free);
+
+    Check(scene.Focus(camera,NativePresentationFocus.Earth),"initial Earth material-state focus");
+    var earth=scene.FocusedBody;
+    var fixedCameraRoot=earth.Position.Value+earth.BodyFixedToRoot.Rotate(new Double3(.31d,.27d,.911d).Normalized()*earth.RadiusMetres*4d);
+    var fixedOrientation=earth.BodyFixedToRoot;
+    camera.Position=camera.Position with{Value=fixedCameraRoot};camera.Orientation=fixedOrientation;scene.Update(camera);
+    var expected=Fingerprint(scene,camera);
+
+    foreach(var intermediate in new[]{NativePresentationFocus.Venus,NativePresentationFocus.Mars,NativePresentationFocus.Moon})
+    {
+        Check(scene.Focus(camera,intermediate),$"focus {intermediate} between Earth material samples");scene.Update(camera);
+        Check(scene.Focus(camera,NativePresentationFocus.Earth),$"return from {intermediate} to Earth");
+        camera.Position=camera.Position with{Value=fixedCameraRoot};camera.Orientation=fixedOrientation;scene.Update(camera);
+        Check(Fingerprint(scene,camera)==expected,$"Earth material/lighting transport is bit-identical after {intermediate}");
+    }
+    scene.ResetPresentationCamera(camera);scene.Update(camera);
+    Check(scene.Focus(camera,NativePresentationFocus.Earth),"return from Solar overview to Earth");
+    camera.Position=camera.Position with{Value=fixedCameraRoot};camera.Orientation=fixedOrientation;scene.Update(camera);
+    Check(Fingerprint(scene,camera)==expected,"Earth material/lighting transport is bit-identical after Solar overview");
+
+    var repositoryRoot=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..",".."));
+    var shaderRoot=Path.Combine(repositoryRoot,"native","NovaCore.Native","shaders");
+    var shared=File.ReadAllText(Path.Combine(shaderRoot,"production_earth_material.glsl"));
+    var global=File.ReadAllText(Path.Combine(shaderRoot,"planetary_production.frag"));
+    var distant=File.ReadAllText(Path.Combine(shaderRoot,"distant_planet.frag"));
+    var native=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","NovaCoreNative.cpp"));
+    Check(shared.Contains("ProductionEarthSurfaceMaterial",StringComparison.Ordinal)&&shared.Contains("roughness",StringComparison.Ordinal)&&shared.Contains("specular",StringComparison.Ordinal),"terrain-v4 owns one explicit Earth base-material function");
+    Check(global.Contains("#include \"production_earth_material.glsl\"",StringComparison.Ordinal)&&distant.Contains("#include \"production_earth_material.glsl\"",StringComparison.Ordinal)&&global.Contains("PlanetLighting(earth.albedo",StringComparison.Ordinal)&&distant.Contains("PlanetLighting(albedo",StringComparison.Ordinal),"global, Eyeball, and bootstrap sphere share Earth albedo/BRDF authority");
+    Check(distant.Contains("binding=24",StringComparison.Ordinal)&&distant.Contains("binding=25",StringComparison.Ordinal)&&distant.Contains("binding=26",StringComparison.Ordinal)&&global.Contains("binding=24",StringComparison.Ordinal)&&global.Contains("binding=25",StringComparison.Ordinal)&&global.Contains("binding=26",StringComparison.Ordinal),"all Earth owners consume the same albedo/elevation/land payload tuple");
+    Check(native.Contains("Seed them before focus selection",StringComparison.Ordinal)&&native.Contains("QueueProductionRequests(a);if(!a.productionIo",StringComparison.Ordinal)&&native.Contains("Earth terrain-v4 material roots ready: mask=0x3F",StringComparison.Ordinal)&&native.Contains("sharedAlbedoElevationLand=true",StringComparison.Ordinal),"renderer seeds immutable root dependencies independently of focus and logs bounded material-state identity/readiness");
+    Console.WriteLine($"Earth material-state fingerprint: 0x{expected:X16}; switches=Venus/Mars/Moon/Solar; terrain-v4 shared payload=true");
+
+    static ulong Fingerprint(SolarSystemScene scene,CameraState camera)
+    {
+        var presentation=scene.FocusedPresentation(camera);var distant=scene.DistantBodies[0];var light=scene.SolarLighting(camera);var hash=14695981039346656037ul;
+        MixBits(presentation.BodyIdLow);MixBits(presentation.BodyIdHigh);MixBits(presentation.MaterialKind);MixBits(presentation.AlbedoSource);
+        MixFloat(presentation.Roughness);MixFloat(presentation.Specular);MixFloat(presentation.Emissive);MixFloat(presentation.BodyOrientationX);MixFloat(presentation.BodyOrientationY);MixFloat(presentation.BodyOrientationZ);MixFloat(presentation.BodyOrientationW);
+        MixBits(distant.BodyIdLow);MixBits(distant.BodyIdHigh);MixBits(distant.MaterialKind);MixBits(distant.AlbedoSource);MixFloat(distant.Roughness);MixFloat(distant.Specular);MixFloat(distant.Emissive);
+        MixFloat(light.SourceCenterX);MixFloat(light.SourceCenterY);MixFloat(light.SourceCenterZ);MixFloat(light.AmbientFloor);MixFloat(light.SourceRadiance);
+        return hash;
+        void MixBits(uint bits)=>hash=(hash^bits)*1099511628211ul;
+        void MixFloat(float number)=>MixBits((uint)BitConverter.SingleToInt32Bits(number));
+    }
+}
+
+static void ProductionEyeballSeamContinuityTest()
+{
+    const double radius=6_371_008.8d;var maximumDisplacedEdgeMismatch=0d;var maximumTierMismatch=0d;var maximumElevationMismatch=0d;
+    var terrain=EarthPlanetaryScene.Terrain;
+    for(var y=0;y<=PlanetaryPatchTopology.QuadsPerSide;y++)
+    {
+        var left=new PlanetarySurfacePatchId(6,4,CubeSphereFace.PositiveZ,2,1,1);
+        var right=new PlanetarySurfacePatchId(6,4,CubeSphereFace.PositiveZ,2,2,1);
+        Compare(RelaxedCubeSphereProjection.PatchPoint(left,PlanetaryPatchTopology.QuadsPerSide,y),RelaxedCubeSphereProjection.PatchPoint(right,0,y));
+        var t=(double)y/PlanetaryPatchTopology.QuadsPerSide;
+        Compare(RelaxedCubeSphereProjection.UnitDirection(CubeSphereFace.PositiveX,0d,t),RelaxedCubeSphereProjection.UnitDirection(CubeSphereFace.PositiveZ,1d,t));
+    }
+    Check(maximumDisplacedEdgeMismatch==0d&&maximumElevationMismatch==0d,"displaced patch and canonical cube-face edge correspondence is exact");
+
+    var pupil=new Double3(.231d,.707d,.668d).Normalized();
+    for(var tier=0;tier<PlanetaryProductionEyeballTopology.MaximumTier;tier++)
+    {
+        var coarse=PlanetaryProductionEyeballTopology.Tier(tier);
+        for(var ring=0;ring<=coarse.RadialRings;ring++)
+            for(var segment=0;segment<coarse.AzimuthSegments;segment++)
+            {
+                var a=PlanetaryProductionEyeballTopology.DirectionAt(pupil,tier,ring,segment,PlanetaryProductionEyeballTopology.MaximumAngleRadians);
+                var b=PlanetaryProductionEyeballTopology.DirectionAt(pupil,tier+1,ring*2,segment*2,PlanetaryProductionEyeballTopology.MaximumAngleRadians);
+                maximumTierMismatch=Math.Max(maximumTierMismatch,Math.Sqrt((a-b).LengthSquared)*radius);
+                maximumElevationMismatch=Math.Max(maximumElevationMismatch,Math.Abs(terrain.SampleHeight(a,24)-terrain.SampleHeight(b,24)));
+            }
+    }
+    Check(maximumTierMismatch==0d&&maximumElevationMismatch==0d,"T0-T3 shared vertices retain exact direction and displacement in both transition directions");
+
+    var orientation=new PlanetaryProductionPupilOrientation();var first=orientation.Update(pupil,0);
+    for(var tier=1;tier<=PlanetaryProductionEyeballTopology.MaximumTier;tier++)Check(orientation.Update(pupil,tier)==first,$"tier {tier} does not move the body-fixed pupil cell");
+    var frame=PlanetarySurfaceFrame.AtDirection(pupil);var crossed=orientation.Update((pupil+frame.East*(3d*Math.PI/PlanetaryProductionPupilOrientation.Resolution)).Normalized(),3);
+    var pupilTransitionMetres=Math.Sqrt((crossed.BodyFixedDirection-first.BodyFixedDirection).LengthSquared)*radius;
+    Check(crossed!=first&&double.IsFinite(pupilTransitionMetres)&&pupilTransitionMetres<=4d*Math.PI*radius/PlanetaryProductionPupilOrientation.Resolution,"pupil-cell replacement remains finite, bounded, and independent of mesh tier");
+
+    var repositoryRoot=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..",".."));var shaderRoot=Path.Combine(repositoryRoot,"native","NovaCore.Native","shaders");
+    var fragment=File.ReadAllText(Path.Combine(shaderRoot,"planetary_production.frag"));var vertex=File.ReadAllText(Path.Combine(shaderRoot,"planetary_production_eyeball.vert"));
+    var filter=File.ReadAllText(Path.Combine(shaderRoot,"production_cube_filter.glsl"));var distant=File.ReadAllText(Path.Combine(shaderRoot,"distant_planet.frag"));
+    var native=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","NovaCoreNative.cpp"));
+    Check(fragment.Contains("ResolveProductionFragmentLayer(unitDirection",StringComparison.Ordinal)&&fragment.Contains("ProductionDirectionAddress(direction",StringComparison.Ordinal)&&fragment.Contains("productionLayers.values",StringComparison.Ordinal),"global and Eyeball material addresses are resolved from each fragment's physical direction instead of one triangle-provoking payload layer");
+    Check(fragment.Contains("ProductionPayloadGradients",StringComparison.Ordinal)&&fragment.Contains("textureGrad(productionAlbedo",StringComparison.Ordinal)&&fragment.Contains("textureGrad(productionElevation",StringComparison.Ordinal)&&fragment.Contains("textureGrad(productionLand",StringComparison.Ordinal)&&distant.Contains("ProductionPayloadGradients",StringComparison.Ordinal)&&distant.Contains("textureGrad(productionAlbedo",StringComparison.Ordinal),"production global, Eyeball, and distant payload filtering use explicit seam-safe gradients");
+    Check(filter.Contains("dFdx(continuousFaceUv)",StringComparison.Ordinal)&&filter.Contains("dFdx(unitDirection)",StringComparison.Ordinal)&&filter.Contains("maximumX*8.0",StringComparison.Ordinal),"payload gradients preserve ordinary anisotropic footprints while rejecting patch/face address discontinuities");
+    Check(native.Contains("sampler.anisotropyEnable=VK_TRUE",StringComparison.Ordinal)&&native.Contains("std::min(8.0f,properties.limits.maxSamplerAnisotropy)",StringComparison.Ordinal),"production payload sampler retains bounded hardware anisotropy after explicit seam correction");
+    Check(fragment.Contains("ProductionEyeballOwnsDirection",StringComparison.Ordinal)&&fragment.Contains("polygonRadius=tan(eye.tangentAnchorAngle.w)*cos(.5*sector)/cos(localAngle)",StringComparison.Ordinal)&&fragment.Contains("eye.surface.w>=.99999",StringComparison.Ordinal),"full Eyeball ownership replaces the global base against the exact gnomonic outer-ring polygon instead of an incompatible circular cap");
+    Check(!fragment.Contains("cos(eye.tangentAnchorAngle.w))discard",StringComparison.Ordinal),"retired analytic circular cap cannot reintroduce polygon-rim sawteeth");
+    Check(vertex.Contains("HeightAt(vec3(ld))",StringComparison.Ordinal)&&vertex.Contains("HeightAt(vec3(rd))",StringComparison.Ordinal)&&vertex.Contains("HeightAt(vec3(dd))",StringComparison.Ordinal)&&vertex.Contains("HeightAt(vec3(ud))",StringComparison.Ordinal),"normal reconstruction independently resolves body-fixed adjacent displaced samples across payload boundaries");
+    Console.WriteLine($"Production Eyeball seams: displacedEdge={maximumDisplacedEdgeMismatch:R}m; tierSharedVertex={maximumTierMismatch:R}m; elevation={maximumElevationMismatch:R}m; boundedPupilTransition={pupilTransitionMetres:R}m");
+
+    void Compare(Double3 a,Double3 b)
+    {
+        var ah=terrain.SampleHeight(a,24);var bh=terrain.SampleHeight(b,24);
+        maximumElevationMismatch=Math.Max(maximumElevationMismatch,Math.Abs(ah-bh));
+        maximumDisplacedEdgeMismatch=Math.Max(maximumDisplacedEdgeMismatch,Math.Sqrt((a*(radius+ah)-b*(radius+bh)).LengthSquared));
+    }
+}
 
 static void OpaqueDistantDetailedHandoffTest()
 {
@@ -1581,7 +1689,7 @@ static void ProductionCubeSphereGpuResidencyIntegrationTest()
     Check(native.Contains("binding.binding=24+index",StringComparison.Ordinal)&&
         fragment.Contains("binding=24",StringComparison.Ordinal)&&fragment.Contains("binding=26",StringComparison.Ordinal),
         "production material owns dedicated patch-aligned albedo, elevation, and classification descriptors");
-    Check(fragment.Contains("texture(productionAlbedo",StringComparison.Ordinal)&&fragment.Contains("texture(productionLand",StringComparison.Ordinal),"production fragment shading consumes resident NCCUBE payloads rather than procedural placeholders");
+    Check(fragment.Contains("textureGrad(productionAlbedo",StringComparison.Ordinal)&&fragment.Contains("textureGrad(productionLand",StringComparison.Ordinal),"production fragment shading consumes resident NCCUBE payloads through seam-safe explicit gradients rather than procedural placeholders");
     Check(solar.Contains("PlanetaryProductionSurfaceEligibility",StringComparison.Ordinal)&&solar.Contains("ProductionSurfaceEligible",StringComparison.Ordinal)&&solar.Contains("EarthProductionCubeV4",StringComparison.Ordinal)&&program.Contains("sol?.ProductionSurfaceEligible==true",StringComparison.Ordinal),"normal Solar Earth focus requires the explicit terrain-v4 production eligibility contract");
     Check(!solar.Contains("PlanetaryEnvironment",StringComparison.Ordinal)&&!native.Contains("planetaryEnvironment",StringComparison.Ordinal)&&!File.Exists(Path.Combine(shaderRoot,"planetary_environment.frag")),"provisional environment presentation has no managed, native, or shader owner");
 
@@ -1605,7 +1713,7 @@ static void ProductionCubeSphereGpuResidencyIntegrationTest()
         Check(!source.Contains("EarthSurfaceSample",StringComparison.Ordinal)&&!source.Contains("EarthSamplePage",StringComparison.Ordinal),"production shader source does not address legacy pages or fallback owners");
         for(var binding=15;binding<=20;binding++)Check(!source.Contains($"binding={binding}",StringComparison.Ordinal)&&!source.Contains($"binding = {binding}",StringComparison.Ordinal),$"production shader excludes legacy SVT binding {binding}");
     }
-    Check(fragment.Contains("outColor=vec4(lit,eyeball?eye.surface.w:1.0)",StringComparison.Ordinal)&&fragment.Contains("eye.surface.w>=.99999",StringComparison.Ordinal),"production global material remains opaque until coherent Eyeball ownership completes");
+    Check(fragment.Contains("outColor=vec4(lit,eyeball?eye.surface.w:1.0)",StringComparison.Ordinal)&&fragment.Contains("ProductionEyeballOwnsDirection",StringComparison.Ordinal),"production global material remains the opaque base during refinement and yields exact polygonal ownership only after full Eyeball promotion");
 
     var binaryRoot=Path.Combine(root,"build","native-ninja","shaders");
     foreach(var shader in new[]{"planetary_production_terrain.comp.spv","planetary_production_eyeball.vert.spv","planetary_production.frag.spv"})
@@ -1657,12 +1765,12 @@ static void ProductionSphericalBillboardTest()
     var root=new ReferenceFrameId(996);Check(SolarSystemScene.TryCreateAt(root,SimulationInstant.Zero,out var value,out var error)&&value is not null,$"production Eyeball scene: {error}");var scene=value!;var camera=new CameraState(new FramePosition(root,Double3.Zero),DoubleQuaternion.Identity,scene.Projection,CameraMode.Free);Check(scene.Focus(camera,NativePresentationFocus.Earth),"focus Earth for production Eyeball");
     var earth=scene.FocusedBody;camera.Position=camera.Position with{Value=earth.Position.Value+earth.BodyFixedToRoot.Rotate(Double3.UnitZ*(earth.RadiusMetres+100_000d))};camera.Orientation=earth.BodyFixedToRoot;scene.Update(camera);var eye=scene.EyeballConstants(camera);var selectedTier=PlanetaryProductionEyeballTopology.Tier(scene.ProductionEyeballTier);
     Check(scene.ProductionSurfaceEligible&&scene.EyeballComputeRequested&&eye.Enabled==1&&eye.TerrainVersion==4&&eye.VertexCount==selectedTier.VertexCount&&eye.IndexCount==selectedTier.IndexCount&&eye.RadialRingCount==selectedTier.RadialRings&&eye.AzimuthSegmentCount==selectedTier.AzimuthSegments,"near Earth submits the production precomputed tier rather than legacy per-frame generation");
-    var expectedPupilResolution=new[]{262_144,524_288,1_048_576,2_097_152}[selectedTier.Index];
+    var expectedPupilResolution=PlanetaryProductionPupilOrientation.Resolution;
     Check(eye.RegionalAlpha==1f&&eye.BlendAlpha>0&&eye.Reserved0==(uint)selectedTier.Index&&eye.Reserved1<6&&scene.ProductionPupilCell.Resolution==expectedPupilResolution,"global terrain stays opaque until coherent Eyeball promotion and matching tier/body-fixed pupil identity cross the ABI");
 
     var repositoryRoot=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..",".."));var shaderRoot=Path.Combine(repositoryRoot,"native","NovaCore.Native","shaders");var vertex=File.ReadAllText(Path.Combine(shaderRoot,"planetary_production_eyeball.vert"));var fragment=File.ReadAllText(Path.Combine(shaderRoot,"planetary_production.frag"));var native=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","NovaCoreNative.cpp"));
     Check(vertex.Contains("binding=27",StringComparison.Ordinal)&&vertex.Contains("ProductionDirectionAddress",StringComparison.Ordinal)&&vertex.Contains("productionElevation",StringComparison.Ordinal)&&!vertex.Contains("earth_virtual_texture",StringComparison.OrdinalIgnoreCase),"production Eyeball resolves displaced body-fixed directions exclusively through terrain-v4 cube payloads");
-    Check(fragment.Contains("productionLayer&0x80000000u",StringComparison.Ordinal)&&fragment.Contains("eye.surface.w>=.99999",StringComparison.Ordinal),"one material shader preserves global/Eyeball data parity and transfers cap ownership only at full readiness");
+    Check(fragment.Contains("productionLayer&0x80000000u",StringComparison.Ordinal)&&fragment.Contains("ResolveProductionFragmentLayer(unitDirection",StringComparison.Ordinal)&&fragment.Contains("ProductionEyeballOwnsDirection",StringComparison.Ordinal)&&fragment.Contains("eye.surface.w>=.99999",StringComparison.Ordinal)&&!fragment.Contains("cos(eye.tangentAnchorAngle.w))discard",StringComparison.Ordinal),"one physical-direction material path preserves global/Eyeball payload parity and transfers full ownership against the exact gnomonic Eye polygon");
     Check(native.Contains("ProductionPayloadSlots=256",StringComparison.Ordinal)&&native.Contains("productionEyeballTiers",StringComparison.Ordinal)&&native.Contains("productionEyeballPromotion",StringComparison.Ordinal)&&native.Contains("productionLayerLastUse",StringComparison.Ordinal)&&native.Contains("productionLayerGeneration",StringComparison.Ordinal)&&native.Contains("productionEvictions++",StringComparison.Ordinal)&&native.Contains("vkCmdDrawIndexed(c,mesh.indices,1",StringComparison.Ordinal),"native path owns persistent tiers, deterministic bounded LRU/stale-generation protection, readiness promotion, and direct drawing without per-frame mesh generation");
     foreach(var legacy in new[]{"EarthSurfaceSample","EarthSamplePage","EarthVirtual"})Check(!vertex.Contains(legacy,StringComparison.Ordinal),$"production Eyeball excludes legacy sampler symbol {legacy}");
     Console.WriteLine($"Production spherical billboard: tiers=[{string.Join(',',expectedHashes.Select(hash=>$"0x{hash:X16}"))}]; selectedTier={scene.ProductionEyeballTier}; pupil={scene.ProductionPupilCell.Face}/{scene.ProductionPupilCell.X}/{scene.ProductionPupilCell.Y}; cache=16/16; evictions=1; selector100k={timer.Elapsed.TotalMilliseconds:F3}ms; selectorAllocations={selectorAllocations}");
@@ -1712,7 +1820,7 @@ static void ProductionSurfaceBodyEligibilityAndTransitionOwnershipTest()
     var selector=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","shaders","planetary_select.comp"));
     Check(native.Contains("surfaceTransitionEpoch",StringComparison.Ordinal)&&native.Contains("surfaceContextBodyId!=contextBody",StringComparison.Ordinal)&&native.Contains("productionFallbackOwner=productionSurface",StringComparison.Ordinal),"body/mode/dataset transitions invalidate stale selection and immediately establish fallback ownership");
     Check(native.Contains("productionFallback=production&&a.productionFallbackOwner",StringComparison.Ordinal)&&native.Contains("a.productionFallbackOwner=telemetry.active==0",StringComparison.Ordinal),"opaque distant fallback retires only after production reports a nonzero visible owner");
-    Check(native.Contains("a.submission->planetarySurfaceMode!=NC_PLANETARY_SURFACE_PRODUCTION_CUBE)return;QueueProductionRequests",StringComparison.Ordinal)&&native.Contains("!a.productionPendingUploads||!a.submission||a.submission->planetarySurfaceMode!=NC_PLANETARY_SURFACE_PRODUCTION_CUBE",StringComparison.Ordinal),"unsupported bodies cannot plan, stage, or record Earth NCCUBE uploads");
+    Check(native.Contains("Seed them before focus selection",StringComparison.Ordinal)&&native.Contains("CompleteProductionUploads(a);QueueProductionRequests(a)",StringComparison.Ordinal)&&selector.Contains("bool production=terrain&&inputData.controls.z==4u",StringComparison.Ordinal),"only six pinned Earth roots preload globally; active child planning remains gated by the selected production body contract");
     Check(selector.Contains("presentation.identity[index-15u]",StringComparison.Ordinal)&&selector.Contains("cameraHighRadiusHigh.w",StringComparison.Ordinal)&&selector.Contains("cameraLowRadiusLow.w",StringComparison.Ordinal),"GPU demand identity includes selected body and exact transported radius configuration");
 }
 
