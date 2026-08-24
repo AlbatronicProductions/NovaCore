@@ -8,7 +8,10 @@ Inspect `git status --short` before editing. Preserve all existing unstaged work
 
 Continuous Earth terrain-v4 is the sole production Earth terrain authority.
 The retained global path is a shallow L0–L2 body-fixed relaxed cube-sphere
-backed by the checked 61,484,224-byte `earth_surface_v4.nccube` hierarchy. Its
+backed by the checked 61,484,224-byte `earth_surface_v4.nccube` hierarchy. The
+heavy immutable bytes resolve from an ignored content-addressed terrain cache
+through the tracked `earth-surface-v4` manifest; normal Git and build outputs
+retain no production-pack copy. Its
 126 patch transactions carry albedo, elevation, classification, and cloud data
 under `body / terrain-version / face / level / x / y`. The complete parent
 remains opaque while a complete child quartet prepares. Near-planet density is

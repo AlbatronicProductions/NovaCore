@@ -47,6 +47,7 @@ var tests = new (string, Action)[]
     ("Inertial visual-aim authority", InertialVisualAimAuthorityTest),
     ("Cube-sphere planetary surface", CubeSpherePlanetarySurfaceTest),
     ("Production relaxed cube-sphere patch hierarchy", ProductionRelaxedCubeSpherePatchHierarchyTest),
+    ("Terrain asset distribution boundary", TerrainAssetDistributionBoundaryTest),
     ("Production cube-sphere GPU residency integration", ProductionCubeSphereGpuResidencyIntegrationTest),
     ("Production KSA-style spherical billboard", ProductionSphericalBillboardTest),
     ("Production surface body eligibility and transition ownership", ProductionSurfaceBodyEligibilityAndTransitionOwnershipTest),
@@ -66,6 +67,59 @@ var tests = new (string, Action)[]
 };
 var testFilter=args.FirstOrDefault(argument=>argument.StartsWith("--test=",StringComparison.OrdinalIgnoreCase))?[7..];
 foreach (var (name, test) in tests) if(testFilter is null||name.Contains(testFilter,StringComparison.OrdinalIgnoreCase)){test();Console.WriteLine($"PASS {name}");}
+
+static void TerrainAssetDistributionBoundaryTest()
+{
+    var repositoryRoot=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..",".."));
+    var productionManifestPath=TerrainAssetRepository.ManifestPath(repositoryRoot,TerrainAssetCache.ProductionEarthAssetId);
+    Check(TerrainAssetManifestFile.TryLoad(productionManifestPath,out var production,out var productionError),$"production terrain manifest: {productionError}");
+    Check(production.AssetId=="earth-surface-v4"&&production.BodyId==6&&production.TerrainVersion==4&&production.ByteSize==61_484_224&&production.Sha256=="5e92a0676bf8cd64f4c00b5e8d79f4b8186cd9a8a57b395138edbab760f1cb76"&&production.Hierarchy.MinimumPayloadLevel==0&&production.Hierarchy.MaximumPayloadLevel==2,"production distribution manifest preserves canonical terrain-v4 identity and global coverage");
+
+    var fixtureRoot=Path.Combine(repositoryRoot,"tests","fixtures","terrain");
+    Check(TerrainAssetManifestFile.TryLoad(Path.Combine(fixtureRoot,"tiny-global.json"),out var fixture,out var fixtureError),$"fixture terrain manifest: {fixtureError}");
+    var fixtureSource=Path.Combine(fixtureRoot,"tiny-global.nccube");
+    var testRoot=Path.Combine(Path.GetTempPath(),"NovaCore-TerrainAssetTests",Guid.NewGuid().ToString("N"));
+    var cacheRoot=Path.Combine(testRoot,"cache");
+    try
+    {
+        var missingPath=TerrainAssetCache.ContentPath(cacheRoot,fixture);var missing=TerrainAssetCache.Verify(fixture,missingPath);
+        Check(missing.Status==TerrainAssetVerificationStatus.Missing,"empty cache reports fixture missing");
+        Directory.CreateDirectory(Path.GetDirectoryName(missingPath)!);File.WriteAllBytes(missingPath+".incomplete-interrupted",[1,2,3,4]);File.WriteAllBytes(Path.Combine(cacheRoot,"abandoned-download.nccube.incomplete"),[1,2,3,4]);
+        Check(TerrainAssetCache.Verify(fixture,missingPath).Status==TerrainAssetVerificationStatus.Missing,"incomplete acquisition is never exposed as a valid cache entry");
+        Check(TerrainAssetCache.RemoveStaleIncompleteFiles(cacheRoot,TimeSpan.Zero)==2,"explicit stale-incomplete cleanup removes interrupted publication and acquisition files safely");
+        var published=TerrainAssetCache.PublishFromFile(fixture,fixtureSource,cacheRoot);
+        Check(published.IsValid&&published.ActualBytes==5_032&&published.ActualSha256==fixture.Sha256&&published.MaximumBufferBytes==TerrainAssetCache.VerificationBufferBytes,"atomic fixture publication verifies size and streaming SHA-256");
+        Check(!Directory.EnumerateFiles(cacheRoot,"*.incomplete-*",SearchOption.AllDirectories).Any(),"successful atomic publication leaves no incomplete files");
+        Check(NativeRuntime.ValidateTerrainAsset(published.Path,fixture.BodyId,fixture.TerrainVersion,(uint)fixture.Hierarchy.RecordCount)==NativeResult.Success,"native runtime opens and digest-validates a payload through the same resolved fixture path");
+
+        using(var stream=new FileStream(published.Path,FileMode.Open,FileAccess.ReadWrite,FileShare.None)){stream.Position=stream.Length-1;var value=stream.ReadByte();stream.Position=stream.Length-1;stream.WriteByte((byte)(value^1));}
+        Check(!TerrainAssetCache.Verify(fixture,published.Path).IsValid,"invalid cache occupant is never trusted by its filename");
+        Check(TerrainAssetCache.PublishFromFile(fixture,fixtureSource,cacheRoot).IsValid,"atomic publication repairs an invalid content-address occupant with verified identical bytes");
+
+        var corrupt=Path.Combine(testRoot,"corrupt.nccube");File.Copy(fixtureSource,corrupt);using(var stream=new FileStream(corrupt,FileMode.Open,FileAccess.ReadWrite,FileShare.None)){stream.Position=stream.Length-1;var value=stream.ReadByte();stream.Position=stream.Length-1;stream.WriteByte((byte)(value^1));}
+        Check(TerrainAssetCache.Verify(fixture,corrupt).Status==TerrainAssetVerificationStatus.HashMismatch,"byte-corrupt fixture is rejected");
+        var truncated=Path.Combine(testRoot,"truncated.nccube");using(var source=File.OpenRead(fixtureSource))using(var destination=File.Create(truncated)){source.CopyTo(destination);destination.SetLength(destination.Length-1);}
+        Check(TerrainAssetCache.Verify(fixture,truncated).Status==TerrainAssetVerificationStatus.SizeMismatch,"truncated fixture is rejected before publication");
+
+        var productionCorruptRoot=Path.Combine(testRoot,"production-corrupt");var productionCorrupt=TerrainAssetCache.ContentPath(productionCorruptRoot,production);Directory.CreateDirectory(Path.GetDirectoryName(productionCorrupt)!);using(var stream=File.Create(productionCorrupt)){stream.SetLength(production.ByteSize);}
+        Check(!TerrainAssetCache.Verify(production,productionCorrupt).IsValid,"corrupt production-sized asset is rejected without becoming resident");
+
+        Directory.Delete(cacheRoot,true);Check(TerrainAssetCache.Verify(fixture,missingPath).Status==TerrainAssetVerificationStatus.Missing,"cache deletion leaves source manifest valid and reports missing");
+        var recovered=TerrainAssetCache.PublishFromFile(fixture,fixtureSource,cacheRoot);Check(recovered.IsValid,"disposable cache recovers through explicit atomic acquisition");
+        Check(TerrainAssetCache.ContentPath(cacheRoot,fixture).Contains(Path.Combine("sha256",fixture.Sha256[..2],fixture.Sha256+".nccube"),StringComparison.Ordinal),"content address permits identical manifests to share immutable bytes");
+    }
+    finally
+    {
+        if(Directory.Exists(testRoot))Directory.Delete(testRoot,true);
+    }
+
+    var configuredCache=TerrainAssetRepository.CacheRoot(repositoryRoot);
+    var productionPath=TerrainAssetCache.ContentPath(configuredCache,production);var productionVerification=TerrainAssetCache.Verify(production,productionPath);
+    if(productionVerification.IsValid)Check(productionVerification.MaximumBufferBytes==1_048_576&&productionVerification.ActualBytes==61_484_224,"production verification is canonical and bounded to one MiB independently of asset size");
+    Check(File.ReadAllText(Path.Combine(repositoryRoot,"samples","NovaCore.Triangle","NovaCore.Triangle.csproj")).Contains("earth_surface_v4.nccube",StringComparison.Ordinal)==false,"normal managed builds do not copy production NCCUBE payloads");
+    Check(File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","NovaCoreNative.cpp")).Contains("ModuleDirectory()+\"earth-data\\\\earth_surface_v4.nccube\"",StringComparison.Ordinal)==false,"native runtime consumes the explicitly resolved verified path rather than a module-relative copy");
+    Console.WriteLine($"Terrain asset boundary: fixture={fixture.ByteSize}B/{fixture.Sha256}; production={productionVerification.Status}; buffer={TerrainAssetCache.VerificationBufferBytes}B; cache={configuredCache}");
+}
 
 static void ProductionEarthMaterialStateContinuityTest()
 {
@@ -1597,27 +1651,30 @@ static void ProductionRelaxedCubeSpherePatchHierarchyTest()
     var productionSource=File.ReadAllText(Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..","..","src","NovaCore.Graphics","PlanetaryProductionSurface.cs")));
     Check(!productionSource.Contains("equirect",StringComparison.OrdinalIgnoreCase)&&!productionSource.Contains("5x5",StringComparison.OrdinalIgnoreCase)&&!productionSource.Contains("pupil",StringComparison.OrdinalIgnoreCase),"production patch contract contains no legacy UV-page or pupil-neighborhood ownership");
     var repositoryRoot=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..",".."));
-    var packPath=Path.Combine(repositoryRoot,"assets","earth","runtime","earth_surface_v4.nccube");
-    Check(Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(packPath))).Equals("5E92A0676BF8CD64F4C00B5E8D79F4B8186CD9A8A57B395138EDBAB760F1CB76",StringComparison.Ordinal),"production cube pack file identity is deterministic");
-    using(var pack=File.OpenRead(packPath))
+    if(TerrainAssetCache.TryResolveRequired(repositoryRoot,TerrainAssetCache.ProductionEarthAssetId,null,out var productionManifest,out var packPath,out _))
     {
-        Span<byte> packHeader=stackalloc byte[PlanetaryCubeSurfacePackContract.HeaderBytes];pack.ReadExactly(packHeader);
-        Check(PlanetaryCubeSurfacePackContract.TryReadHeader(packHeader,out var parsedPack)&&parsedPack.IsProductionLayout&&parsedPack.MaximumLevel==2&&parsedPack.RecordCount==126&&parsedPack.TerrainVersion==terrainVersion,"shipped cube pack header is the bounded terrain-v4 production hierarchy");
-        var payload=new byte[PlanetaryCubeSurfacePackContract.StoredExtent*PlanetaryCubeSurfacePackContract.StoredExtent*7];
-        var recordBuffer=new byte[PlanetaryCubeSurfacePackContract.RecordHeaderBytes];
-        var shippedOrdinals=new HashSet<ulong>();var digestFailures=0;
-        for(var index=0;index<parsedPack.RecordCount;index++)
+        var verification=TerrainAssetCache.Verify(productionManifest,packPath);
+        Check(verification.IsValid&&verification.ActualSha256=="5e92a0676bf8cd64f4c00b5e8d79f4b8186cd9a8a57b395138edbab760f1cb76","resolved production cube pack identity is deterministic");
+        using(var pack=File.OpenRead(packPath))
         {
-            Span<byte> record=recordBuffer;pack.ReadExactly(record);
-            Check(PlanetaryCubeSurfacePackContract.TryReadRecordHeader(record,out var parsedRecord)&&parsedRecord.Patch.BodyId==bodyId&&parsedRecord.Patch.TerrainVersion==terrainVersion,"shipped record has valid stable patch identity");
-            Check(parsedRecord.AlbedoBytes==209_088&&parsedRecord.ElevationBytes==139_392&&parsedRecord.LandMaskBytes==69_696&&parsedRecord.CloudBytes==69_696,"one record owns the complete fixed-width patch transaction");
-            var payloadBytes=checked((int)(parsedRecord.AlbedoBytes+parsedRecord.ElevationBytes+parsedRecord.LandMaskBytes+parsedRecord.CloudBytes));pack.ReadExactly(payload.AsSpan(0,payloadBytes));
-            using var digest=IncrementalHash.CreateHash(HashAlgorithmName.SHA256);digest.AppendData(record[..24]);digest.AppendData(payload,0,payloadBytes);var actual=digest.GetHashAndReset();
-            Check(actual.AsSpan().SequenceEqual(record[48..80]),"shipped patch transaction digest validates before residency");
-            if(index==0){payload[0]^=1;using var corrupt=IncrementalHash.CreateHash(HashAlgorithmName.SHA256);corrupt.AppendData(record[..24]);corrupt.AppendData(payload,0,payloadBytes);if(corrupt.GetHashAndReset().AsSpan().SequenceEqual(record[48..80]))digestFailures++;payload[0]^=1;}
-            Check(shippedOrdinals.Add(parsedRecord.PatchOrdinal),"shipped cube patch ordinal appears exactly once");
+            Span<byte> packHeader=stackalloc byte[PlanetaryCubeSurfacePackContract.HeaderBytes];pack.ReadExactly(packHeader);
+            Check(PlanetaryCubeSurfacePackContract.TryReadHeader(packHeader,out var parsedPack)&&parsedPack.IsProductionLayout&&parsedPack.MaximumLevel==2&&parsedPack.RecordCount==126&&parsedPack.TerrainVersion==terrainVersion,"cached cube pack header is the bounded terrain-v4 production hierarchy");
+            var payload=new byte[PlanetaryCubeSurfacePackContract.StoredExtent*PlanetaryCubeSurfacePackContract.StoredExtent*7];
+            var recordBuffer=new byte[PlanetaryCubeSurfacePackContract.RecordHeaderBytes];
+            var shippedOrdinals=new HashSet<ulong>();var digestFailures=0;
+            for(var index=0;index<parsedPack.RecordCount;index++)
+            {
+                Span<byte> record=recordBuffer;pack.ReadExactly(record);
+                Check(PlanetaryCubeSurfacePackContract.TryReadRecordHeader(record,out var parsedRecord)&&parsedRecord.Patch.BodyId==bodyId&&parsedRecord.Patch.TerrainVersion==terrainVersion,"cached record has valid stable patch identity");
+                Check(parsedRecord.AlbedoBytes==209_088&&parsedRecord.ElevationBytes==139_392&&parsedRecord.LandMaskBytes==69_696&&parsedRecord.CloudBytes==69_696,"one record owns the complete fixed-width patch transaction");
+                var payloadBytes=checked((int)(parsedRecord.AlbedoBytes+parsedRecord.ElevationBytes+parsedRecord.LandMaskBytes+parsedRecord.CloudBytes));pack.ReadExactly(payload.AsSpan(0,payloadBytes));
+                using var digest=IncrementalHash.CreateHash(HashAlgorithmName.SHA256);digest.AppendData(record[..24]);digest.AppendData(payload,0,payloadBytes);var actual=digest.GetHashAndReset();
+                Check(actual.AsSpan().SequenceEqual(record[48..80]),"cached patch transaction digest validates before residency");
+                if(index==0){payload[0]^=1;using var corrupt=IncrementalHash.CreateHash(HashAlgorithmName.SHA256);corrupt.AppendData(record[..24]);corrupt.AppendData(payload,0,payloadBytes);if(corrupt.GetHashAndReset().AsSpan().SequenceEqual(record[48..80]))digestFailures++;payload[0]^=1;}
+                Check(shippedOrdinals.Add(parsedRecord.PatchOrdinal),"cached cube patch ordinal appears exactly once");
+            }
+            Check(pack.Position==pack.Length&&shippedOrdinals.Count==parsedPack.RecordCount&&digestFailures==0,"cached hierarchy is complete and a corrupted payload is rejected");
         }
-        Check(pack.Position==pack.Length&&shippedOrdinals.Count==parsedPack.RecordCount&&digestFailures==0,"shipped hierarchy is complete and a corrupted payload is rejected");
     }
     Check(PlanetaryProductionPatchTopology.Shared.DeterministicHash==0xF9322A40F857443Eul,"production topology regression hash");
     Check(maximumRadiusError<5e-16&&maximumEdgeError<5e-15&&maximumCornerError<5e-15&&maximumParentChildError==0d,"relaxed cube-sphere is radius-stable, edge/corner continuous, and parent-child exact");
@@ -1705,7 +1762,7 @@ static void ProductionCubeSphereGpuResidencyIntegrationTest()
         Path.Combine(root,"tools","planetary_data","ingest_region.py")};
     Check(retiredPaths.All(path=>!File.Exists(path)),"retired SVT, radial-Eyeball, regional-page, and conversion contracts cannot silently return as production inputs");
     Check(!Directory.Exists(Path.Combine(root,"assets","earth","runtime","regions")),"retired regional runtime-pack directory cannot silently return");
-    Check(File.Exists(Path.Combine(root,"assets","earth","runtime","earth_surface_v4.nccube"))&&File.Exists(Path.Combine(root,"assets","earth","runtime","earth_elevation_8192x4096.r16")),"terrain-v4 cube payload and topology-neutral elevation oracle are the retained Earth runtime authorities");
+    Check(File.Exists(TerrainAssetRepository.ManifestPath(root,TerrainAssetCache.ProductionEarthAssetId))&&File.Exists(Path.Combine(root,"assets","earth","runtime","earth_elevation_8192x4096.r16")),"tracked terrain-v4 identity manifest and topology-neutral elevation oracle are retained while heavy runtime bytes resolve externally");
 
     foreach(var source in new[]{terrain,fragment,projection})
     {

@@ -14,6 +14,13 @@ is active. Parents remain opaque
 and authoritative until an entire child quartet is resident, then one coherent
 promotion epoch transfers ownership.
 
+The production pack is distributed through the tracked terrain manifest and
+ignored content-addressed runtime cache described in
+[`terrain-assets.md`](terrain-assets.md). It is not an ordinary Git blob and is
+not copied into managed/native build outputs. This changes distribution only:
+native residency still performs bounded patch-record reads and the renderer's
+terrain ownership, filtering, pupil, and hierarchy are unchanged.
+
 Near-planet density is supplied by four persistent precomputed production
 Eyeball meshes (T0–T3), not per-frame mesh generation. A deterministic snapped
 body-fixed pupil and projected-error hysteresis choose the tier. The production

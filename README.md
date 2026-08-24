@@ -139,8 +139,18 @@ For exceptional future precision requirements, a bounded sampled or Chebyshev ep
 From the repository root on a configured Windows development environment:
 
 ```powershell
+dotnet run --project tools/NovaCore.AssetTool -- status earth-surface-v4
+# On a fresh clone, explicitly populate the verified runtime cache:
+dotnet run --project tools/NovaCore.AssetTool -- build earth-surface-v4
 dotnet run --project samples/NovaCore.Triangle/NovaCore.Triangle.csproj -c Debug -- --scene=sol
 ```
+
+Heavy generated terrain payloads are not ordinary Git blobs and are not copied
+into each build output. The tracked manifest identifies the required immutable
+bytes; the explicit asset tool verifies, fetches when a remote is configured,
+or deterministically regenerates them into an ignored content-addressed cache.
+Normal runtime never downloads terrain implicitly. See
+[Production terrain assets](docs/terrain-assets.md).
 
 After it has already been built:
 
@@ -204,6 +214,7 @@ See the engineering documentation for the complete scoped build, validation, and
 - [Architecture](docs/architecture.md)
 - [Current engineering state](docs/NOVACORE_CURRENT_STATE.md)
 - [Planetary rendering](docs/planetary-rendering.md)
+- [Production terrain assets](docs/terrain-assets.md)
 - [Celestial simulation](docs/celestial-simulation.md)
 - [Ephemeris dataset format](docs/ephemeris-dataset-format.md)
 - [Ephemeris runtime loader](docs/ephemeris-runtime-loader.md)

@@ -41,16 +41,20 @@ uint64_t Pack::Ordinal(uint32_t face, uint32_t level, uint32_t x, uint32_t y) {
 }
 
 bool Pack::Open(const std::string &path, std::string &error) {
-  path_.clear(); records_.clear(); maximumLevel_ = terrainVersion_ = 0;
+  path_.clear(); records_.clear(); bodyId_ = 0; maximumLevel_ = terrainVersion_ = interior_ = gutter_ = extent_ = 0;
   std::ifstream input(path, std::ios::binary); std::array<uint8_t, HeaderBytes> header{};
   if (!input.read(reinterpret_cast<char *>(header.data()), header.size())) { error = "production cube pack missing or truncated"; return false; }
+  interior_ = Read32(header.data() + 16); gutter_ = Read32(header.data() + 20); extent_ = Read32(header.data() + 24);
   if (std::memcmp(header.data(), "NCCUBE1\0", 8) != 0 || Read32(header.data() + 8) != 1 || Read32(header.data() + 12) != HeaderBytes ||
-      Read32(header.data() + 16) != InteriorTexels || Read32(header.data() + 20) != GutterTexels || Read32(header.data() + 24) != StoredExtent) {
+      !interior_ || interior_ > 4096 || !gutter_ || gutter_ > 64 || extent_ != interior_ + 2 * gutter_) {
     error = "production cube pack header contract mismatch"; return false;
   }
   maximumLevel_ = Read32(header.data() + 28); const uint32_t recordCount = Read32(header.data() + 32); terrainVersion_ = Read32(header.data() + 36);
   uint64_t expected = 0; for (uint32_t level = 0; level <= maximumLevel_; ++level) expected += 6ull << (2 * level);
-  if (maximumLevel_ > 8 || recordCount != expected || terrainVersion_ != 4) { error = "production cube pack hierarchy contract mismatch"; return false; }
+  if (maximumLevel_ > 8 || recordCount != expected || !terrainVersion_) { error = "production cube pack hierarchy contract mismatch"; return false; }
+  const uint64_t texels = uint64_t(extent_) * extent_;
+  if (texels > std::numeric_limits<uint32_t>::max() / 3u) { error = "production cube pack dimensions overflow"; return false; }
+  const std::array<uint32_t,4> expectedBytes{static_cast<uint32_t>(texels*3u),static_cast<uint32_t>(texels*2u),static_cast<uint32_t>(texels),static_cast<uint32_t>(texels)};
   records_.resize(recordCount);
   std::vector<uint8_t> occupied(recordCount);
   for (uint32_t index = 0; index < recordCount; ++index) {
@@ -60,9 +64,10 @@ bool Pack::Open(const std::string &path, std::string &error) {
     record.id.x = Read32(bytes.data() + 16); record.id.y = Read32(bytes.data() + 20); record.ordinal = Read64(bytes.data() + 24); record.offset = offset;
     for (uint32_t channel = 0; channel < 4; ++channel) record.bytes[channel] = Read32(bytes.data() + 32 + channel * 4);
     std::memcpy(record.digest.data(), bytes.data() + 48, record.digest.size());
-    if (record.id.bodyId != EarthBodyId || record.id.terrainVersion != terrainVersion_ || record.id.face >= 6 || record.id.level > maximumLevel_ ||
+    if (index == 0) bodyId_ = record.id.bodyId;
+    if (!bodyId_ || record.id.bodyId != bodyId_ || record.id.terrainVersion != terrainVersion_ || record.id.face >= 6 || record.id.level > maximumLevel_ ||
         record.id.x >= (1u << record.id.level) || record.id.y >= (1u << record.id.level) || record.ordinal != Ordinal(record.id.face, record.id.level, record.id.x, record.id.y) ||
-        record.bytes != std::array<uint32_t, 4>{AlbedoBytes, ElevationBytes, LandBytes, CloudBytes}) { error = "production cube record identity/layout invalid"; return false; }
+        record.bytes != expectedBytes) { error = "production cube record identity/layout invalid"; return false; }
     if (record.ordinal >= records_.size() || occupied[record.ordinal]) { error = "production cube record ordinal duplicated or out of range"; return false; }
     records_[record.ordinal] = record; occupied[record.ordinal] = 1;
     input.seekg(static_cast<std::streamoff>(record.bytes[0]) + record.bytes[1] + record.bytes[2] + record.bytes[3], std::ios::cur);
@@ -73,7 +78,7 @@ bool Pack::Open(const std::string &path, std::string &error) {
 }
 
 const Record *Pack::Find(const PatchId &id) const {
-  if (id.bodyId != EarthBodyId || id.terrainVersion != terrainVersion_ || id.face >= 6 || id.level > maximumLevel_ || id.x >= (1u << id.level) || id.y >= (1u << id.level)) return nullptr;
+  if (id.bodyId != bodyId_ || id.terrainVersion != terrainVersion_ || id.face >= 6 || id.level > maximumLevel_ || id.x >= (1u << id.level) || id.y >= (1u << id.level)) return nullptr;
   const auto ordinal = Ordinal(id.face, id.level, id.x, id.y); return ordinal < records_.size() && records_[ordinal].id == id ? &records_[ordinal] : nullptr;
 }
 bool Pack::Contains(const PatchId &id) const { return Find(id) != nullptr; }
@@ -81,9 +86,9 @@ bool Pack::Contains(const PatchId &id) const { return Find(id) != nullptr; }
 bool Pack::Read(const PatchId &id, Payload &payload, std::string &error) const {
   const auto *record = Find(id); if (!record) { error = "production cube patch is outside the shipped hierarchy"; return false; }
   std::ifstream input(path_, std::ios::binary); input.seekg(record->offset + RecordHeaderBytes);
-  payload = {}; payload.id = id; payload.albedoRgb.resize(AlbedoBytes); payload.elevation.resize(ElevationBytes / 2); payload.land.resize(LandBytes); payload.cloud.resize(CloudBytes);
+  payload = {}; payload.id = id; payload.albedoRgb.resize(record->bytes[0]); payload.elevation.resize(record->bytes[1] / 2); payload.land.resize(record->bytes[2]); payload.cloud.resize(record->bytes[3]);
   if (!input.read(reinterpret_cast<char *>(payload.albedoRgb.data()), payload.albedoRgb.size()) ||
-      !input.read(reinterpret_cast<char *>(payload.elevation.data()), ElevationBytes) || !input.read(reinterpret_cast<char *>(payload.land.data()), payload.land.size()) ||
+      !input.read(reinterpret_cast<char *>(payload.elevation.data()), record->bytes[1]) || !input.read(reinterpret_cast<char *>(payload.land.data()), payload.land.size()) ||
       !input.read(reinterpret_cast<char *>(payload.cloud.data()), payload.cloud.size())) {
     error = "production cube payload read failed"; return false;
   }

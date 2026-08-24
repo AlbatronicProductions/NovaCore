@@ -54,6 +54,12 @@ elevation, R8 land mask, and R8 cloud data for one patch are one transaction.
 The pack is 61,484,224 bytes with SHA-256
 `5e92a0676bf8cd64f4c00b5e8d79f4b8186cd9a8a57b395138edbab760f1cb76`.
 
+The generated production payload is not tracked as an ordinary Git blob. Its
+canonical byte size and SHA-256 are retained in
+`assets/terrain/manifests/earth-surface-v4.json`; explicit asset tooling
+regenerates or installs it atomically into the content-addressed runtime cache.
+This provenance and all lawful source manifests remain tracked.
+
 ## Retired Mount St. Helens bounded regional proof
 
 The historical regional proof used bounded exports from the official USGS NAIP

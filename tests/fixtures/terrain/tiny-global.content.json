@@ -1,0 +1,12 @@
+{
+  "schema": "NovaCore.PlanetaryCubeSurfaceFixture/1",
+  "generator": "tools/terrain_assets/build_test_fixture.py",
+  "bodyId": 6006,
+  "terrainVersion": 44,
+  "interiorTexels": 8,
+  "gutterTexels": 1,
+  "maximumLevel": 0,
+  "recordCount": 6,
+  "bytes": 5032,
+  "sha256": "78fdca1b5378fa2a13c35d283a9c2198a0c4b3a872e5870108700404534bbbda"
+}

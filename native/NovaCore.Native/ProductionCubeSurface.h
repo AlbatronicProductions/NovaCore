@@ -50,6 +50,11 @@ class Pack final {
   uint32_t MaximumLevel() const { return maximumLevel_; }
   uint32_t RecordCount() const { return static_cast<uint32_t>(records_.size()); }
   uint32_t TerrainVersion() const { return terrainVersion_; }
+  uint64_t BodyId() const { return bodyId_; }
+  uint32_t Interior() const { return interior_; }
+  uint32_t Gutter() const { return gutter_; }
+  uint32_t Extent() const { return extent_; }
+  bool IsProductionLayout() const { return bodyId_ == EarthBodyId && terrainVersion_ == 4 && interior_ == InteriorTexels && gutter_ == GutterTexels && extent_ == StoredExtent; }
   const std::string &Path() const { return path_; }
 
   static uint64_t Ordinal(uint32_t face, uint32_t level, uint32_t x, uint32_t y);
@@ -57,7 +62,8 @@ class Pack final {
  private:
   const Record *Find(const PatchId &id) const;
   std::string path_;
-  uint32_t maximumLevel_{}, terrainVersion_{};
+  uint64_t bodyId_{};
+  uint32_t maximumLevel_{}, terrainVersion_{}, interior_{}, gutter_{}, extent_{};
   std::vector<Record> records_;
 };
 

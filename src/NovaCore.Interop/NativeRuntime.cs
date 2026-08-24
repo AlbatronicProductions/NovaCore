@@ -75,6 +75,13 @@ public struct NativeDrawBatch { public NativeMeshHandle Mesh; public uint FirstO
 public unsafe struct NativeFrameSubmission { public NativeCameraData Camera; public NativeRenderObject* Objects; public uint ObjectCount; public NativeDrawBatch* Batches; public uint BatchCount; public NativeOrbitLineVertex* OrbitVertices; public uint OrbitVertexCount; public NativeOrbitLineVertex* PreviousOrbitVertices; public uint PreviousOrbitVertexCount; public NativeOrbitLineVertex* BodyForwardVertices; public uint BodyForwardVertexCount; public NativeOrbitLineVertex* TargetDirectionVertices; public uint TargetDirectionVertexCount; public NativePlanetaryPatch* PlanetaryPatches; public uint PlanetaryPatchCount; public uint PlanetaryGpuAlignmentPadding; public NativePlanetaryGpuConstants PlanetaryGpu; public NativePlanetaryMode PlanetaryMode; public NativePlanetarySurfaceMode PlanetarySurfaceMode; public uint PlanetaryPadding1,PlanetaryPadding2; public NativePlanetaryPresentation PlanetaryPresentation; public NativePlanetaryPresentation* DistantBodies; public uint DistantBodyCount, DistantBodyPadding; public NativeSolarLighting SolarLighting; public NativePlanetaryEyeball PlanetaryEyeball; }
 
 [StructLayout(LayoutKind.Sequential)]
+public unsafe struct NativeRuntimeAssets
+{
+    public uint Size, Version;
+    public byte* ProductionTerrainPathUtf8;
+}
+
+[StructLayout(LayoutKind.Sequential)]
 public struct NativeAbiLayout
 {
     public uint EncodedPositionSize, CameraDataSize, CameraPositionOffset, CameraViewProjectionOffset, RenderTransformSize, RenderObjectSize, RenderObjectPositionOffset, RenderObjectTransformOffset, RenderObjectMeshOffset;
@@ -99,8 +106,14 @@ public static partial class NativeRuntime
     [LibraryImport("NovaCore.Native", EntryPoint = "nc_run_renderer")]
     public static unsafe partial NativeResult RunRenderer(NativeFrameSubmission* submission, HostCallback callback, IntPtr userData);
 
+    [LibraryImport("NovaCore.Native", EntryPoint = "nc_run_renderer_with_assets")]
+    public static unsafe partial NativeResult RunRendererWithAssets(NativeFrameSubmission* submission, HostCallback callback, IntPtr userData, NativeRuntimeAssets* assets);
+
     [LibraryImport("NovaCore.Native", EntryPoint = "nc_get_abi_layout")]
     public static partial NativeResult GetAbiLayout(out NativeAbiLayout layout);
     [LibraryImport("NovaCore.Native", EntryPoint = "nc_validate_planetary_patches")]
     public static unsafe partial NativeResult ValidatePlanetaryPatches(NativePlanetaryPatch* patches, uint count);
+
+    [LibraryImport("NovaCore.Native", EntryPoint = "nc_validate_terrain_asset", StringMarshalling = StringMarshalling.Utf8)]
+    public static partial NativeResult ValidateTerrainAsset(string path, ulong bodyId, uint terrainVersion, uint expectedRecordCount);
 }

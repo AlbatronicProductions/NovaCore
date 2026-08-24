@@ -155,6 +155,7 @@ struct App {
   NcHostCallback cb{};
   void *cbData{};
   NcFrameSubmission *submission{};
+  std::string productionTerrainPath;
   HWND window{};
   VkInstance instance{};
   VkDebugUtilsMessengerEXT debug{};
@@ -774,8 +775,9 @@ void CreateProductionImage(App &a,VkFormat format,VkImage &image,VkDeviceMemory 
   VkImageCreateInfo create{VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO};create.imageType=VK_IMAGE_TYPE_2D;create.format=format;create.extent={nc::production::StoredExtent,nc::production::StoredExtent,1};create.mipLevels=1;create.arrayLayers=ProductionPayloadSlots;create.samples=VK_SAMPLE_COUNT_1_BIT;create.tiling=VK_IMAGE_TILING_OPTIMAL;create.usage=VK_IMAGE_USAGE_TRANSFER_DST_BIT|VK_IMAGE_USAGE_SAMPLED_BIT;create.sharingMode=VK_SHARING_MODE_EXCLUSIVE;create.initialLayout=VK_IMAGE_LAYOUT_UNDEFINED;a.Check(vkCreateImage(a.device,&create,nullptr,&image),"production cube image failed");VkMemoryRequirements requirements{};vkGetImageMemoryRequirements(a.device,image,&requirements);VkMemoryAllocateInfo allocation{VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO};allocation.allocationSize=requirements.size;allocation.memoryTypeIndex=Memory(a,requirements.memoryTypeBits,VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);a.Check(vkAllocateMemory(a.device,&allocation,nullptr,&memory),"production cube image memory failed");a.Check(vkBindImageMemory(a.device,image,memory,0),"production cube image bind failed");VkImageViewCreateInfo viewCreate{VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO};viewCreate.image=image;viewCreate.viewType=VK_IMAGE_VIEW_TYPE_2D_ARRAY;viewCreate.format=format;viewCreate.subresourceRange.aspectMask=VK_IMAGE_ASPECT_COLOR_BIT;viewCreate.subresourceRange.levelCount=1;viewCreate.subresourceRange.layerCount=ProductionPayloadSlots;a.Check(vkCreateImageView(a.device,&viewCreate,nullptr,&view),"production cube image view failed");
 }
 void CreateProductionCubeSurface(App &a){
-  a.productionPack=std::make_unique<nc::production::Pack>();std::string error;const std::string path=ModuleDirectory()+"earth-data\\earth_surface_v4.nccube";if(!a.productionPack->Open(path,error)){a.Log(NC_LOG_ALWAYS,("Production cube pack unavailable: "+error).c_str());a.productionPack.reset();return;}
-CreateProductionImage(a,VK_FORMAT_R8G8B8A8_SRGB,a.productionImages[0],a.productionImageMemory[0],a.productionImageViews[0]);CreateProductionImage(a,VK_FORMAT_R16_UNORM,a.productionImages[1],a.productionImageMemory[1],a.productionImageViews[1]);CreateProductionImage(a,VK_FORMAT_R8_UNORM,a.productionImages[2],a.productionImageMemory[2],a.productionImageViews[2]);VkPhysicalDeviceProperties properties{};vkGetPhysicalDeviceProperties(a.physical,&properties);VkSamplerCreateInfo sampler{VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO};sampler.magFilter=VK_FILTER_LINEAR;sampler.minFilter=VK_FILTER_LINEAR;sampler.mipmapMode=VK_SAMPLER_MIPMAP_MODE_NEAREST;sampler.addressModeU=VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;sampler.addressModeV=VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;sampler.addressModeW=VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;sampler.anisotropyEnable=VK_TRUE;sampler.maxAnisotropy=std::min(8.0f,properties.limits.maxSamplerAnisotropy);sampler.maxLod=0;a.Check(vkCreateSampler(a.device,&sampler,nullptr,&a.productionSampler),"production cube sampler failed");CreateHostBuffer(a,ProductionStagingBytes,VK_BUFFER_USAGE_TRANSFER_SRC_BIT,a.productionStagingBuffer,a.productionStagingMemory,a.productionStagingMapped,"production cube staging failed");a.productionLayerTerrainSlot.fill(UINT32_MAX);a.productionLayerLastUse.fill(0);a.productionLayerGeneration.fill(0);a.productionIo=std::make_unique<ProductionIoState>();a.productionIo->pack=a.productionPack.get();a.productionIo->worker=std::thread(ProductionIoWorker,a.productionIo.get());char message[288];std::snprintf(message,sizeof message,"Production cube pack: terrain-v%u; maxLevel=%u; records=%u; raw transactional payloads; physicalSlots=%u; deterministicLRU=true; pinnedRoots=6; uploadBudget=%u",a.productionPack->TerrainVersion(),a.productionPack->MaximumLevel(),a.productionPack->RecordCount(),ProductionPayloadSlots,ProductionUploadBudget);a.Log(NC_LOG_ALWAYS,message);
+  if(!a.productionTerrainPath.empty()){a.productionPack=std::make_unique<nc::production::Pack>();std::string error;if(!a.productionPack->Open(a.productionTerrainPath,error)||!a.productionPack->IsProductionLayout())throw std::runtime_error("Production cube pack unavailable: "+(error.empty()?std::string("production layout mismatch"):error));}
+CreateProductionImage(a,VK_FORMAT_R8G8B8A8_SRGB,a.productionImages[0],a.productionImageMemory[0],a.productionImageViews[0]);CreateProductionImage(a,VK_FORMAT_R16_UNORM,a.productionImages[1],a.productionImageMemory[1],a.productionImageViews[1]);CreateProductionImage(a,VK_FORMAT_R8_UNORM,a.productionImages[2],a.productionImageMemory[2],a.productionImageViews[2]);VkPhysicalDeviceProperties properties{};vkGetPhysicalDeviceProperties(a.physical,&properties);VkSamplerCreateInfo sampler{VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO};sampler.magFilter=VK_FILTER_LINEAR;sampler.minFilter=VK_FILTER_LINEAR;sampler.mipmapMode=VK_SAMPLER_MIPMAP_MODE_NEAREST;sampler.addressModeU=VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;sampler.addressModeV=VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;sampler.addressModeW=VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;sampler.anisotropyEnable=VK_TRUE;sampler.maxAnisotropy=std::min(8.0f,properties.limits.maxSamplerAnisotropy);sampler.maxLod=0;a.Check(vkCreateSampler(a.device,&sampler,nullptr,&a.productionSampler),"production cube sampler failed");CreateHostBuffer(a,ProductionStagingBytes,VK_BUFFER_USAGE_TRANSFER_SRC_BIT,a.productionStagingBuffer,a.productionStagingMemory,a.productionStagingMapped,"production cube staging failed");a.productionLayerTerrainSlot.fill(UINT32_MAX);a.productionLayerLastUse.fill(0);a.productionLayerGeneration.fill(0);
+  if(a.productionPack){a.productionIo=std::make_unique<ProductionIoState>();a.productionIo->pack=a.productionPack.get();a.productionIo->worker=std::thread(ProductionIoWorker,a.productionIo.get());char message[288];std::snprintf(message,sizeof message,"Production cube pack: terrain-v%u; maxLevel=%u; records=%u; raw transactional payloads; physicalSlots=%u; deterministicLRU=true; pinnedRoots=6; uploadBudget=%u",a.productionPack->TerrainVersion(),a.productionPack->MaximumLevel(),a.productionPack->RecordCount(),ProductionPayloadSlots,ProductionUploadBudget);a.Log(NC_LOG_ALWAYS,message);}
 }
 void DestroyProductionCubeSurface(App &a){
   if(a.productionIo){{std::lock_guard lock(a.productionIo->mutex);a.productionIo->stop=true;}a.productionIo->wake.notify_all();if(a.productionIo->worker.joinable())a.productionIo->worker.join();a.productionIo.reset();}DestroyHostBuffer(a,a.productionStagingBuffer,a.productionStagingMemory,a.productionStagingMapped);if(a.productionSampler)vkDestroySampler(a.device,a.productionSampler,nullptr);for(uint32_t channel=0;channel<3;channel++){if(a.productionImageViews[channel])vkDestroyImageView(a.device,a.productionImageViews[channel],nullptr);if(a.productionImages[channel])vkDestroyImage(a.device,a.productionImages[channel],nullptr);if(a.productionImageMemory[channel])vkFreeMemory(a.device,a.productionImageMemory[channel],nullptr);}a.productionPack.reset();
@@ -1670,15 +1672,15 @@ extern "C" NC_API NcResult __cdecl nc_get_abi_layout(NcAbiLayout *o) {
         (uint32_t)offsetof(NcFrameSubmission, planetaryEyeball)};
   return NC_SUCCESS;
 }
-extern "C" NC_API NcResult __cdecl
-nc_run_renderer(NcFrameSubmission *s, NcHostCallback cb, void *data) {
+static NcResult RunRenderer(NcFrameSubmission *s, NcHostCallback cb, void *data, const NcRuntimeAssets *assets) {
   if (!cb || !s || !s->objects || !s->objectCount || !s->batches ||
-      !s->batchCount)
+      !s->batchCount || (assets && (assets->size != sizeof(NcRuntimeAssets) || assets->version != 1u || !assets->productionTerrainPathUtf8)))
     return NC_INVALID_ARGUMENT;
   App a;
   a.cb = cb;
   a.cbData = data;
   a.submission = s;
+  if(assets)a.productionTerrainPath=assets->productionTerrainPathUtf8;
   try {
     gApp = &a;
     Window(a);
@@ -1734,3 +1736,10 @@ nc_run_renderer(NcFrameSubmission *s, NcHostCallback cb, void *data) {
     return NC_FAILURE;
   }
 }
+extern "C" NC_API NcResult __cdecl nc_validate_terrain_asset(const char *path, uint64_t bodyId, uint32_t terrainVersion, uint32_t expectedRecordCount) {
+  if(!path||!*path||!bodyId||!terrainVersion||!expectedRecordCount)return NC_INVALID_ARGUMENT;
+  nc::production::Pack pack;std::string error;if(!pack.Open(path,error)||pack.BodyId()!=bodyId||pack.TerrainVersion()!=terrainVersion||pack.RecordCount()!=expectedRecordCount)return NC_FAILURE;
+  nc::production::Payload payload;const nc::production::PatchId root{bodyId,terrainVersion,0,0,0,0};return pack.Read(root,payload,error)&&payload.digestValid?NC_SUCCESS:NC_FAILURE;
+}
+extern "C" NC_API NcResult __cdecl nc_run_renderer(NcFrameSubmission *s, NcHostCallback cb, void *data) { return RunRenderer(s,cb,data,nullptr); }
+extern "C" NC_API NcResult __cdecl nc_run_renderer_with_assets(NcFrameSubmission *s, NcHostCallback cb, void *data, const NcRuntimeAssets *assets) { return RunRenderer(s,cb,data,assets); }

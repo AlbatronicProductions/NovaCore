@@ -1,0 +1,29 @@
+{
+  "schema": "NovaCore.TerrainAsset/1",
+  "assetId": "tiny-global",
+  "bodyId": 6006,
+  "terrainVersion": 44,
+  "format": "nccube",
+  "formatVersion": 1,
+  "fileName": "tiny-global.nccube",
+  "byteSize": 5032,
+  "sha256": "78fdca1b5378fa2a13c35d283a9c2198a0c4b3a872e5870108700404534bbbda",
+  "hierarchy": {
+    "coverage": "global-relaxed-cube-sphere",
+    "minimumPayloadLevel": 0,
+    "maximumPayloadLevel": 0,
+    "faceCount": 6,
+    "recordCount": 6
+  },
+  "provenance": "tools/terrain_assets/build_test_fixture.py",
+  "contentManifest": "tests/fixtures/terrain/tiny-global.content.json",
+  "generator": {
+    "tool": "tools/terrain_assets/build_test_fixture.py",
+    "version": "tiny-nccube-fixture-v1",
+    "executable": "python",
+    "arguments": ["--output", "{output}"]
+  },
+  "artifact": {
+    "url": null
+  }
+}

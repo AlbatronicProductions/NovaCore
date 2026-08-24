@@ -7,9 +7,17 @@ Required tools:
 - CMake 4.4 or later
 - LunarG Vulkan SDK, including validation layers and `glslc`
 
+Regenerating the production Earth terrain additionally requires the pinned
+NumPy/Pillow environment documented in `assets/earth/PROVENANCE.md`. Set
+`NOVACORE_PYTHON` when that interpreter is not the default `python` on `PATH`.
+
 Open a Visual Studio x64 Developer PowerShell, then run:
 
 ```powershell
+dotnet run --project tools/NovaCore.AssetTool -- status earth-surface-v4
+# Required once for Earth/Solar production scenes on a fresh cache:
+dotnet run --project tools/NovaCore.AssetTool -- build earth-surface-v4
+
 cmake -S native/NovaCore.Native -B build/native-ninja -G Ninja
 cmake --build build/native-ninja
 dotnet build NovaCore.sln -c Debug
@@ -24,6 +32,13 @@ dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=frames
 ```
 
 The sample copies the native DLL and compiled SPIR-V shaders beside the managed executable. It remains open until the window closes, reports average frame time during shutdown, and releases resources deterministically.
+
+The sample does not copy the heavy terrain-v4 `.nccube` payload. Earth and
+Solar resolve its tracked manifest to the verified content-addressed runtime
+cache and pass that explicit path to native code. Set `NOVACORE_ASSET_CACHE` or
+use the asset tool's `--cache <path>` option to relocate the disposable cache.
+See [terrain-assets.md](terrain-assets.md) for status, verify, fetch, install,
+regenerate, interruption recovery, and fresh-clone behavior.
 
 `--objects=1`, `--objects=100`, `--objects=1000`, and `--objects=10000` select the grid demonstration count. `--scene=grid` is the default; `--scene=frames` resolves ECL, ORB, CCE, CCI, and CCF demonstration markers through a managed reference-frame snapshot.
 
