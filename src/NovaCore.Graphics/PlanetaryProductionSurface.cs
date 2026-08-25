@@ -113,6 +113,40 @@ public static class RelaxedCubeSphereProjection
 
     public static Double3 UnitDirection(CubeSphereFace face, double u, double v) => Project(face, u, v, 1d);
 
+    /// <summary>
+    /// Inverse of the accepted relaxed cube projection. The dominant cube face
+    /// is canonical and Newton refinement recovers the face coordinate used by
+    /// GPU production addressing without introducing longitude/latitude page identity.
+    /// </summary>
+    public static bool TryAddress(in Double3 unitDirection, out CubeSphereFace face, out double u, out double v)
+    {
+        face = default; u = v = 0d;
+        if (!unitDirection.IsFinite || unitDirection.LengthSquared <= 0d) return false;
+        var direction = unitDirection.Normalized(); var absolute = new Double3(Math.Abs(direction.X), Math.Abs(direction.Y), Math.Abs(direction.Z));
+        face = absolute.X >= absolute.Y && absolute.X >= absolute.Z
+            ? direction.X >= 0d ? CubeSphereFace.PositiveX : CubeSphereFace.NegativeX
+            : absolute.Y >= absolute.Z
+                ? direction.Y >= 0d ? CubeSphereFace.PositiveY : CubeSphereFace.NegativeY
+                : direction.Z >= 0d ? CubeSphereFace.PositiveZ : CubeSphereFace.NegativeZ;
+        var target = FaceCoordinates(face, direction); var a = Math.Clamp(target.U, -1d, 1d); var b = Math.Clamp(target.V, -1d, 1d);
+        const double epsilon = 1e-6d;
+        for (var iteration = 0; iteration < 8; iteration++)
+        {
+            var value = FaceCoordinates(face, ProjectCube(CubePoint(face, (a + 1d) * .5d, (b + 1d) * .5d), 1d).Normalized());
+            var valueA = FaceCoordinates(face, ProjectCube(CubePoint(face, (a + epsilon + 1d) * .5d, (b + 1d) * .5d), 1d).Normalized());
+            var valueB = FaceCoordinates(face, ProjectCube(CubePoint(face, (a + 1d) * .5d, (b + epsilon + 1d) * .5d), 1d).Normalized());
+            var duA = (valueA.U - value.U) / epsilon; var dvA = (valueA.V - value.V) / epsilon;
+            var duB = (valueB.U - value.U) / epsilon; var dvB = (valueB.V - value.V) / epsilon;
+            var determinant = duA * dvB - dvA * duB;
+            if (Math.Abs(determinant) < 1e-14d) break;
+            var errorU = value.U - target.U; var errorV = value.V - target.V;
+            a = Math.Clamp(a - (errorU * dvB - errorV * duB) / determinant, -1d, 1d);
+            b = Math.Clamp(b - (duA * errorV - dvA * errorU) / determinant, -1d, 1d);
+        }
+        u = a * .5d + .5d; v = b * .5d + .5d;
+        return double.IsFinite(u) && double.IsFinite(v);
+    }
+
     public static Double3 PatchPoint(in PlanetarySurfacePatchId id, int gridX, int gridY, int gridResolution = PlanetaryPatchTopology.QuadsPerSide)
     {
         if (!id.IsValid) throw new ArgumentOutOfRangeException(nameof(id));
@@ -134,6 +168,17 @@ public static class RelaxedCubeSphereProjection
             _ => throw new ArgumentOutOfRangeException(nameof(face))
         };
     }
+
+    private static (double U, double V) FaceCoordinates(CubeSphereFace face, in Double3 direction) => face switch
+    {
+        CubeSphereFace.PositiveX => (-direction.Z / direction.X, direction.Y / direction.X),
+        CubeSphereFace.NegativeX => (direction.Z / -direction.X, direction.Y / -direction.X),
+        CubeSphereFace.PositiveY => (direction.X / direction.Y, -direction.Z / direction.Y),
+        CubeSphereFace.NegativeY => (direction.X / -direction.Y, direction.Z / -direction.Y),
+        CubeSphereFace.PositiveZ => (direction.X / direction.Z, direction.Y / direction.Z),
+        CubeSphereFace.NegativeZ => (-direction.X / -direction.Z, direction.Y / -direction.Z),
+        _ => throw new ArgumentOutOfRangeException(nameof(face))
+    };
 }
 
 /// <summary>Versioned deterministic geometry contract shared by every production patch.</summary>

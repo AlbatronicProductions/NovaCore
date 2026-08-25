@@ -1,11 +1,13 @@
 #version 460
 #extension GL_GOOGLE_include_directive : require
+#extension GL_ARB_gpu_shader_fp64 : require
 #define NOVACORE_LOCAL_TERRAIN_FRAGMENT
 #include "planet_material.glsl"
 #include "production_cube_surface.glsl"
 #include "local_terrain.glsl"
 #include "production_cube_filter.glsl"
 #include "production_earth_material.glsl"
+#include "production_terrain_material.glsl"
 layout(location=0) in vec4 color;
 layout(location=1) in vec3 normal;
 layout(location=2) flat in vec3 lightDirection;
@@ -14,6 +16,9 @@ layout(location=4) flat in vec4 response;
 layout(location=5) in vec3 viewDirection;
 layout(location=6) in vec3 bodyDirection;
 layout(location=7) in float terrainHeight;
+layout(location=8) flat in vec3 bodyCameraHigh;
+layout(location=9) flat in vec3 bodyCameraLow;
+layout(location=10) flat in vec4 localDetail;
 layout(location=11) flat in uint productionLayer;
 layout(location=12) in vec2 productionUv;
 layout(std430,set=0,binding=2) readonly buffer Input { vec4 cameraHighRadiusHigh; vec4 cameraLowRadiusLow; vec4 thresholds; uvec4 controls; vec4 viewForwardHalfAngle; vec4 textureDemand; } inputData;
@@ -93,7 +98,24 @@ void main()
     textureGrad(productionLand,vec3(storedUv,layer),gradientX,gradientY).r,
     sampledHeight,
     response);
+  float bodyRadius=inputData.cameraHighRadiusHigh.w+inputData.cameraLowRadiusLow.w;
+  float surfaceAltitude=max(length(bodyCameraHigh+bodyCameraLow)-bodyRadius,0.0);
+  dvec3 bodyMetres=dvec3(bodyCameraHigh)+dvec3(bodyCameraLow)-dvec3(viewDirection);
+  vec3 differentialMetres=-viewDirection;
+  ProductionTerrainMaterial terrainMaterial=SynthesizeProductionTerrainMaterial(
+    earth.albedo,
+    textureGrad(productionLand,vec3(storedUv,layer),gradientX,gradientY).r,
+    sampledHeight,
+    unitDirection,
+    surfaceNormal,
+    bodyMetres,
+    differentialMetres,
+    surfaceAltitude);
+  earth.albedo=terrainMaterial.albedo;
+  earth.roughness=mix(earth.roughness,terrainMaterial.roughness,terrainMaterial.detailWeight);
+  earth.specular=mix(earth.specular,.035,terrainMaterial.detailWeight*(1.0-terrainMaterial.metallic));
+  surfaceNormal=terrainMaterial.normal;
   float ambient=max(lighting.sourceColorAmbient.w,.025);
-  vec3 lit=PlanetLighting(earth.albedo,surfaceNormal,lightDirection,viewDirection,earth.roughness,earth.specular,response.z,ambient);
+  vec3 lit=PlanetLighting(earth.albedo,surfaceNormal,lightDirection,viewDirection,earth.roughness,earth.specular,response.z*terrainMaterial.ambientOcclusion,ambient);
   outColor=vec4(lit,eyeball?eye.surface.w:1.0);
 }

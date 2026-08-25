@@ -14,7 +14,8 @@ public readonly record struct PlanetaryTerrainDefinition(uint SourceId,uint Vers
     public double SampleHeight(in Double3 bodyDirection,int patchLevel)
     {
         if(!IsValid||!bodyDirection.IsFinite||bodyDirection.LengthSquared<=0||patchLevel is <0 or >24)throw new ArgumentOutOfRangeException();
-        if(SourceId==EarthProductionCubeV4.SourceId&&Version==EarthProductionCubeV4.Version)return EarthElevationDataset.SampleHeight(bodyDirection);
+        if(SourceId==EarthProductionCubeV4.SourceId&&Version==EarthProductionCubeV4.Version)
+            return Math.Max(0d,EarthElevationDataset.SampleHeight(bodyDirection)+EarthLocalTerrainElevationDataset.SampleResidual(bodyDirection));
         var direction=bodyDirection.Normalized();
         var continental=.46d*Math.Sin(Double3.Dot(direction,new(.8017837257372732,.2672612419124244,.5345224838248488))*3.1d+.7d)
             +.31d*Math.Sin(Double3.Dot(direction,new(-.4082482904638631,.8164965809277261,.4082482904638631))*5.3d-1.2d)

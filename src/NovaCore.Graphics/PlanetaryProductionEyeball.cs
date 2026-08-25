@@ -191,25 +191,13 @@ public sealed class PlanetaryProductionPupilOrientation
 
     private static PlanetaryProductionPupilCell Quantize(in Double3 direction, int resolution)
     {
-        var ax = Math.Abs(direction.X); var ay = Math.Abs(direction.Y); var az = Math.Abs(direction.Z);
-        CubeSphereFace face; double a, b;
-        if (ax >= ay && ax >= az)
-        {
-            if (direction.X >= 0d) { face = CubeSphereFace.PositiveX; a = -direction.Z / ax; b = direction.Y / ax; }
-            else { face = CubeSphereFace.NegativeX; a = direction.Z / ax; b = direction.Y / ax; }
-        }
-        else if (ay >= az)
-        {
-            if (direction.Y >= 0d) { face = CubeSphereFace.PositiveY; a = direction.X / ay; b = -direction.Z / ay; }
-            else { face = CubeSphereFace.NegativeY; a = direction.X / ay; b = direction.Z / ay; }
-        }
-        else
-        {
-            if (direction.Z >= 0d) { face = CubeSphereFace.PositiveZ; a = direction.X / az; b = direction.Y / az; }
-            else { face = CubeSphereFace.NegativeZ; a = -direction.X / az; b = direction.Y / az; }
-        }
-        var x = Math.Clamp((int)Math.Floor((a * .5d + .5d) * resolution), 0, resolution - 1);
-        var y = Math.Clamp((int)Math.Floor((b * .5d + .5d) * resolution), 0, resolution - 1);
+        // Quantization and reconstruction must be an inverse pair.  Using the
+        // ordinary cube-map inverse here and the relaxed cube projection below
+        // displaces an acquired pupil by a macroscopically visible angle.
+        if (!RelaxedCubeSphereProjection.TryAddress(direction, out var face, out var faceU, out var faceV))
+            throw new ArgumentOutOfRangeException(nameof(direction));
+        var x = Math.Clamp((int)Math.Floor(faceU * resolution), 0, resolution - 1);
+        var y = Math.Clamp((int)Math.Floor(faceV * resolution), 0, resolution - 1);
         var center = RelaxedCubeSphereProjection.UnitDirection(face, ((double)x + .5d) / resolution, ((double)y + .5d) / resolution);
         return new(face, resolution, x, y, center);
     }

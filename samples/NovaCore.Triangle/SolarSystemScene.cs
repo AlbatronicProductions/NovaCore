@@ -266,6 +266,20 @@ internal sealed class SolarSystemScene
     private float _eyeballWeight;
     private PlanetaryProductionPupilCell _productionPupilCell;
     private double _moonOrbitEndpointMismatchMetres;
+    private int _cameraClearanceCorrectionCount;
+    private long _cameraClearanceTerrainQueries;
+    private long _cameraClearanceIterationCount;
+    private long _cameraClearanceIterationZeroCount;
+    private long _cameraClearanceIterationOneCount;
+    private long _cameraClearanceIterationTwoCount;
+    private long _cameraClearanceIterationThreeCount;
+    private int _cameraClearanceMaximumIterations;
+    private double _cameraClearanceMaximumCorrectionMetres;
+    private Double3 _publishedCameraRoot;
+    private double _bodyLocalCameraAltitudeDemandMetres=double.NaN;
+    private Double3 _bodyLocalCameraPlacementSeedRoot;
+    private bool _bodyLocalCameraPlacementPending;
+    private bool _bodyLocalCameraPlacementUseOrbitCandidate;
     private FocusTarget _focusTarget = FocusTarget.BodyCenter(BodyOrder[0]);
 
     private SolarSystemScene(
@@ -348,11 +362,7 @@ internal sealed class SolarSystemScene
     internal double OrbitDistance => _orbitDistance;
     internal Double3 CurrentInertialCameraOffset
     {
-        get
-        {
-            var direction=OrbitOffsetDirection();
-            return SurfaceVisualAimHandoffPolicy.CameraLineOrigin(CurrentFocusRoot,CurrentVisualAimRoot,direction)-CurrentFocusRoot+direction*_orbitDistance;
-        }
+        get=>_publishedCameraRoot-CurrentFocusRoot;
     }
     internal double OrbitYawRadians => _orbitYawRadians;
     internal double OrbitPitchRadians => _orbitPitchRadians;
@@ -368,6 +378,13 @@ internal sealed class SolarSystemScene
     internal bool HasRetainedVisualAim=>_retainedVisualAimAnchor.HasValue;
     internal double RetainedVisualAimWeight=>_retainedVisualAimWeight;
     internal double SurfaceAltitudeMetres=>_surfaceAltitudeMetres;
+    internal int CameraClearanceCorrectionCount=>_cameraClearanceCorrectionCount;
+    internal long CameraClearanceTerrainQueries=>_cameraClearanceTerrainQueries;
+    internal long CameraClearanceIterationCount=>_cameraClearanceIterationCount;
+    internal (long Zero,long One,long Two,long Three) CameraClearanceIterationDistribution=>(_cameraClearanceIterationZeroCount,_cameraClearanceIterationOneCount,_cameraClearanceIterationTwoCount,_cameraClearanceIterationThreeCount);
+    internal int CameraClearanceMaximumIterations=>_cameraClearanceMaximumIterations;
+    internal double CameraClearanceMaximumCorrectionMetres=>_cameraClearanceMaximumCorrectionMetres;
+    internal double BodyLocalCameraAltitudeDemandMetres=>_bodyLocalCameraAltitudeDemandMetres;
     internal ReadOnlySpan<ulong> VisibleLabelIds => _visibleLabelIds.AsSpan(0, VisibleLabelCount);
     internal ReadOnlySpan<byte> OrbitOpacityBytes => _orbitOpacityBytes;
     internal int VisibleLabelCount { get; private set; }
@@ -399,6 +416,7 @@ internal sealed class SolarSystemScene
     private static bool TryCreateAt(ReferenceFrameId root, SimulationInstant initialTime, DateTimeOffset? startupUtc, out SolarSystemScene? scene, out string error)
     {
         scene = null;
+        if (!TryLoadEarthElevationOracle(out error)) return false;
         var system = SolAnalyticalDefinition.Instance;
         var traversalIndices = new int[BodyOrder.Length];
         for (var bodyIndex = 0; bodyIndex < BodyOrder.Length; bodyIndex++)
@@ -440,9 +458,13 @@ internal sealed class SolarSystemScene
             var projectedError = PlanetaryProductionEyeballSelection.ProjectedTerrainErrorPixels(
                 altitude, EarthPlanetaryScene.ProofViewportHeightPixels, tanHalfFov, EarthPlanetaryScene.Terrain.MaximumHeightMetres);
             var tier = _productionEyeballSelection.UpdateTier(projectedError);
-            var viewForward = rootToBody.Rotate(camera.Orientation.Rotate(new Double3(0d, 0d, -1d))).Normalized();
-            var desiredPupil = PlanetaryProductionEyeballTopology.TryViewPupil(relative, viewForward, surfaceRadius, out var viewPupil) ? viewPupil : radial;
-            _productionPupilCell = _productionPupilOrientation.Update(desiredPupil, tier);
+            // The persistent spherical billboard is centred on the body-fixed
+            // sub-camera point.  View orientation is observation state only:
+            // letting the forward-ray intersection select the pupil caused a
+            // click-drag to re-triangulate stationary ground and, at the
+            // physical floor, could place the coarse centre fan around the
+            // camera even though the camera origin was terrain-safe.
+            _productionPupilCell = _productionPupilOrientation.Update(radial, tier);
             _eyeballWeight = PlanetaryProductionEyeballSelection.OwnershipWeight(projectedError);
             _eyeballCoversVisibleSurface = PlanetaryProductionEyeballTopology.CoversVisibleSurface(relative, _productionPupilCell.BodyFixedDirection,
                 FocusedBody.RadiusMetres, EarthPlanetaryScene.Terrain.MaximumHeightMetres);
@@ -458,9 +480,10 @@ internal sealed class SolarSystemScene
             {
                 CenterX = (float)center.X, CenterY = (float)center.Y, CenterZ = (float)center.Z, Radius = (float)body.RadiusMetres,
                 ColorR = body.Color.X, ColorG = body.Color.Y, ColorB = body.Color.Z,
-                // The focused distant Earth is the explicit opaque transition
-                // owner until the native production root quartet is drawable.
-                DistantAlpha = focused ? ProductionSurfaceEligible ? 1f : _blend.DistantAlpha : 1f,
+                // Production terrain-v4 roots are synchronously resident before
+                // the first submitted frame. A focused generic Earth sphere is
+                // therefore never a production fallback owner.
+                DistantAlpha = focused ? ProductionSurfaceEligible ? 0f : _blend.DistantAlpha : 1f,
                 DetailedAlpha = focused ? _blend.DetailedAlpha : 0f,
                 DistanceRadii = (float)(Math.Sqrt((camera.Position.Value - body.Position.Value).LengthSquared) / body.RadiusMetres),
                 Regime = focused ? (NativePlanetaryRenderRegime)_blend.Regime : NativePlanetaryRenderRegime.DistantOnly,
@@ -483,7 +506,7 @@ internal sealed class SolarSystemScene
         _handoff = new PlanetaryRepresentationHandoff(EarthPlanetaryScene.HandoffConfiguration);
         _orbitDistance = FocusFramingDistance(FocusedBody);
         _surfaceAnchorBlend=0d;_retainedVisualAimAnchor=null;_retainedVisualAimOffsetRoot=Double3.Zero;_retainedVisualAimWeight=0d;
-        _surfaceAltitudeMetres=double.PositiveInfinity;_surfaceCameraMode=PlanetaryCameraPresentationMode.Orbital;
+        _surfaceAltitudeMetres=double.PositiveInfinity;_surfaceCameraMode=PlanetaryCameraPresentationMode.Orbital;_bodyLocalCameraAltitudeDemandMetres=double.NaN;_bodyLocalCameraPlacementPending=false;_bodyLocalCameraPlacementUseOrbitCandidate=false;
         _productionPupilOrientation.Reset();_productionEyeballSelection.Reset();_productionPupilCell=default;
         CameraPresentationMode = SolarCameraPresentationMode.Free3D;
         ApplyOrbitPose(camera,true);
@@ -551,12 +574,30 @@ internal sealed class SolarSystemScene
             var finalLineMaximumAltitude=SolarCameraZoomPolicy.MaximumSurfaceAltitude(FocusedBody,cameraLineOrigin,rootRadial,terrain,maximumDistance);
             if(desiredAltitude>finalLineMaximumAltitude)
                 desiredAltitude=SolarCameraZoomPolicy.ApplyAltitude(Math.Max(0d,currentAltitude),SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres,finalLineMaximumAltitude,input.MouseWheelDetents);
-            _orbitDistance=SolarCameraZoomPolicy.OffsetDistanceForSurfaceAltitude(FocusedBody,cameraLineOrigin,rootRadial,terrain,desiredAltitude,maximumDistance);
+            var bodyToCamera=camera.Position.Value-FocusedBody.Position.Value;
+            var cameraLineFacesOutward=bodyToCamera.LengthSquared>0d&&Double3.Dot(bodyToCamera.Normalized(),rootRadial)>0d;
+            if(FocusedBodyHasNavigableSolidSurface&&
+               _focusTarget.Kind==FocusTargetKind.SurfaceAnchor&&
+               _surfaceAnchorBlend>=1d&&
+               (!cameraLineFacesOutward||double.IsFinite(_bodyLocalCameraAltitudeDemandMetres))&&
+               desiredAltitude<=PlanetarySurfaceCameraPolicy.SurfaceLocalAltitudeMetres)
+            {
+                _bodyLocalCameraAltitudeDemandMetres=desiredAltitude;
+                _bodyLocalCameraPlacementSeedRoot=camera.Position.Value;
+                _bodyLocalCameraPlacementPending=true;
+            }
+            else
+            {
+                _bodyLocalCameraAltitudeDemandMetres=double.NaN;
+                _bodyLocalCameraPlacementPending=false;
+                _orbitDistance=SolarCameraZoomPolicy.OffsetDistanceForSurfaceAltitude(FocusedBody,cameraLineOrigin,rootRadial,terrain,desiredAltitude,maximumDistance);
+            }
             cameraChanged = true;
         }
         if (input.LookActive != 0 && (input.MouseDeltaX != 0f || input.MouseDeltaY != 0f))
         {
             _orbitYawRadians-=input.MouseDeltaX*OrbitSensitivity;_orbitPitchRadians=Math.Clamp(_orbitPitchRadians-input.MouseDeltaY*OrbitSensitivity,-1.45d,1.45d);
+            _bodyLocalCameraPlacementUseOrbitCandidate=true;
             CameraPresentationMode = SolarCameraPresentationMode.Free3D;
             cameraChanged = true;
         }
@@ -605,6 +646,7 @@ internal sealed class SolarSystemScene
         _orbitPitchRadians = SolarMapPitchRadians;
         _surfaceAnchorBlend=0d;_retainedVisualAimAnchor=null;_retainedVisualAimOffsetRoot=Double3.Zero;_retainedVisualAimWeight=0d;
         _surfaceAltitudeMetres=double.PositiveInfinity;_surfaceCameraMode=PlanetaryCameraPresentationMode.Orbital;
+        _bodyLocalCameraAltitudeDemandMetres=double.NaN;_bodyLocalCameraPlacementPending=false;_bodyLocalCameraPlacementUseOrbitCandidate=false;
         _productionPupilOrientation.Reset();_productionEyeballSelection.Reset();_productionPupilCell=default;
         CameraPresentationMode = SolarCameraPresentationMode.SolarMap;
         ApplyOrbitPose(camera,true);
@@ -646,7 +688,7 @@ internal sealed class SolarSystemScene
             CameraBodyLowX=encoded.LowX,CameraBodyLowY=encoded.LowY,CameraBodyLowZ=encoded.LowZ,RadiusLow=radiusLow,
             RefinementThreshold = (float)EarthPlanetaryScene.RegionalLodConfiguration.MaximumProjectedPatchSpan,
             NearFieldAltitudeRadii = ProductionSurfaceEligible?float.MaxValue:1f,
-            SurfaceAltitudeMetres=(float)(terrain.IsValid?Math.Max(EarthPlanetaryScene.MinimumTerrainClearanceMetres,Math.Sqrt(relative.LengthSquared)-PlanetaryTerrainQuery.SurfaceRadius(body.RadiusMetres,relative.Normalized(),terrain)):Math.Max(0d,Math.Sqrt(relative.LengthSquared)-body.RadiusMetres)),MaximumTerrainHeightMetres=(float)(terrain.IsValid?terrain.MaximumHeightMetres:0d),MaximumLevel = ProductionSurfaceEligible?EarthPlanetaryScene.RegionalMaximumLod:0u,
+            SurfaceAltitudeMetres=(float)(terrain.IsValid?Math.Sqrt(relative.LengthSquared)-PlanetaryTerrainQuery.SurfaceRadius(body.RadiusMetres,relative.Normalized(),terrain):Math.Sqrt(relative.LengthSquared)-body.RadiusMetres),MaximumTerrainHeightMetres=(float)(terrain.IsValid?terrain.MaximumHeightMetres:0d),MaximumLevel = ProductionSurfaceEligible?EarthPlanetaryScene.RegionalMaximumLod:0u,
             OutputCapacity = ProductionSurfaceEligible?EarthPlanetaryScene.MaximumPatchCapacity:6u,TerrainVersion=terrain.Version,
             ViewForwardX=(float)viewForward.X,ViewForwardY=(float)viewForward.Y,ViewForwardZ=(float)viewForward.Z,ViewHalfAngleRadians=(float)halfAngle,
             ViewportHeightPixels=(float)EarthPlanetaryScene.ProofViewportHeightPixels,VerticalTanHalfFov=(float)tanY,TargetTexelPixels=PlanetaryProductionSamplingPolicy.TargetTexelPixels,RequestedAlbedoLevel=1f
@@ -670,7 +712,7 @@ internal sealed class SolarSystemScene
         {
             CameraBodyHighX=encoded.HighX,CameraBodyHighY=encoded.HighY,CameraBodyHighZ=encoded.HighZ,RadiusHigh=radiusHigh,
             CameraBodyLowX=encoded.LowX,CameraBodyLowY=encoded.LowY,CameraBodyLowZ=encoded.LowZ,RadiusLow=radiusLow,
-            SurfaceAltitudeMetres=(float)Math.Max(EarthPlanetaryScene.MinimumTerrainClearanceMetres,altitude),MaximumTerrainHeightMetres=(float)EarthPlanetaryScene.Terrain.MaximumHeightMetres,OceanSeaLevelMetres=(float)EarthPlanetaryScene.EarthSeaLevelMetres,BlendAlpha=_eyeballWeight,
+            SurfaceAltitudeMetres=(float)altitude,MaximumTerrainHeightMetres=(float)EarthPlanetaryScene.Terrain.MaximumHeightMetres,OceanSeaLevelMetres=(float)EarthPlanetaryScene.EarthSeaLevelMetres,BlendAlpha=_eyeballWeight,
             BodyIdLow=(uint)body.BodyId,BodyIdHigh=(uint)(body.BodyId>>32),TerrainVersion=PlanetaryTerrainDefinition.EarthProductionCubeV4.Version,Enabled=1,
             TangentAnchorX=(float)tangentAnchor.X,TangentAnchorY=(float)tangentAnchor.Y,TangentAnchorZ=(float)tangentAnchor.Z,MaximumAngleRadians=(float)PlanetaryProductionEyeballTopology.MaximumAngleRadians,
             RadialWarpExponent=(float)tier.RadialWarpExponent,DetailFrequency=1f,NormalStepMetres=2f,RegionalAlpha=1f,
@@ -916,7 +958,6 @@ internal sealed class SolarSystemScene
             targetRoot=SurfaceFocusHandoffPolicy.BlendedRoot(FocusedBody.Position.Value,anchorRoot,_surfaceAnchorBlend);
             visualAimRoot=EvaluateRetainedVisualAimRoot(targetRoot);
             cameraLineOrigin=SurfaceVisualAimHandoffPolicy.CameraLineOrigin(targetRoot,visualAimRoot,rootRadial);
-            _orbitDistance=SurfaceAnchorAcquisition.EnforceClearanceDistance(FocusedBody,cameraLineOrigin,rootRadial,_orbitDistance,terrain,SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres);
             candidateCamera=cameraLineOrigin+rootRadial*_orbitDistance;
             _surfaceAltitudeMetres=SurfaceAnchorAcquisition.SurfaceAltitude(FocusedBody,candidateCamera,terrain);
             if(allowFocusTransition&&!acquiredNow&&_surfaceAnchorBlend==0d&&SurfaceFocusHandoffPolicy.ShouldRelease(_surfaceAltitudeMetres))
@@ -937,6 +978,47 @@ internal sealed class SolarSystemScene
             _surfaceAltitudeMetres=SurfaceAnchorAcquisition.SurfaceAltitude(FocusedBody,candidateCamera,terrain);
         }
 
+        // Surface exclusion is a final camera-position invariant, not a
+        // SurfaceAnchor privilege. Body-center, handoff, retained-aim, and
+        // released-anchor frames all resolve against the same body-fixed
+        // physical surface before the camera is published.
+        if(FocusedBodyHasNavigableSolidSurface)
+        {
+            if(double.IsFinite(_bodyLocalCameraAltitudeDemandMetres))
+            {
+                if(!_bodyLocalCameraPlacementUseOrbitCandidate)
+                    candidateCamera=_bodyLocalCameraPlacementPending?_bodyLocalCameraPlacementSeedRoot:_publishedCameraRoot;
+                var rootToBody=FocusedBody.BodyFixedToRoot.Conjugate().Normalized();
+                var candidateBody=rootToBody.Rotate(candidateCamera-FocusedBody.Position.Value);
+                var publishedBody=rootToBody.Rotate(_publishedCameraRoot-FocusedBody.Position.Value);
+                if(candidateBody.LengthSquared>0d&&publishedBody.LengthSquared>0d&&
+                   Double3.Dot(candidateBody.Normalized(),publishedBody.Normalized())<=0d)
+                {
+                    // A close visual-aim ray may point through the body. Entering
+                    // body-local altitude authority must retain the last accepted
+                    // hemisphere rather than accepting that opposite-side exit.
+                    candidateCamera=_publishedCameraRoot;
+                }
+                if(!SurfaceAnchorAcquisition.TryPlaceCameraOriginAtSurfaceAltitude(
+                    FocusedBody,candidateCamera,terrain,_bodyLocalCameraAltitudeDemandMetres,
+                    out candidateCamera,out var placementQueries))
+                    ThrowFinalCameraExteriorFailure(FocusedBody.BodyId,candidateCamera);
+                _cameraClearanceTerrainQueries+=placementQueries;
+                _bodyLocalCameraPlacementPending=false;
+                _bodyLocalCameraPlacementUseOrbitCandidate=false;
+            }
+            if(!SurfaceAnchorAcquisition.TryConstrainCameraOrigin(
+                FocusedBody,candidateCamera,terrain,
+                SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres,
+                SurfaceFocusHandoffPolicy.TerrainClearanceCorrectionTargetMetres,
+                out var constrained))
+                ThrowFinalCameraExteriorFailure(FocusedBody.BodyId,candidateCamera);
+            RecordCameraExteriorConstraint(constrained);
+            candidateCamera=constrained.RootPosition;
+            _surfaceAltitudeMetres=constrained.SurfaceAltitudeMetres;
+        }
+
+        if(!double.IsFinite(_bodyLocalCameraAltitudeDemandMetres))_bodyLocalCameraPlacementUseOrbitCandidate=false;
         _surfaceCameraMode=_focusTarget.Kind!=FocusTargetKind.SurfaceAnchor?PlanetaryCameraPresentationMode.Orbital:
             _surfaceAnchorBlend<1d?PlanetaryCameraPresentationMode.Transition:PlanetaryCameraPresentationMode.SurfaceLocal;
         if(_surfaceCameraMode==PlanetaryCameraPresentationMode.SurfaceLocal)CameraPresentationMode=SolarCameraPresentationMode.SurfaceLocal;
@@ -944,11 +1026,74 @@ internal sealed class SolarSystemScene
         camera.Orientation=orientation;
         camera.Projection=Projection;
         camera.Position=camera.Position with{Value=candidateCamera};
+        _publishedCameraRoot=candidateCamera;
         camera.Validate();
         Update(camera);
     }
 
     private PlanetaryTerrainDefinition FocusedTerrain=>FocusedBody.BodyId==SolarSystemBodyIds.Earth.Value?EarthPlanetaryScene.Terrain:default;
+    private bool FocusedBodyHasNavigableSolidSurface=>SolarPlanetMaterials.Catalog.TryGet(FocusedBody.BodyId,out var material)&&
+        material.Kind is PlanetMaterialKind.Rocky or PlanetMaterialKind.Terrestrial;
+
+    internal double EnforceFinalCameraInvariant(CameraState camera)
+    {
+        var terrain=FocusedTerrain;
+        if(FocusedBodyHasNavigableSolidSurface)
+        {
+            if(!SurfaceAnchorAcquisition.TryConstrainCameraOrigin(
+                FocusedBody,camera.Position.Value,terrain,
+                SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres,
+                SurfaceFocusHandoffPolicy.TerrainClearanceCorrectionTargetMetres,
+                out var constrained))
+                ThrowFinalCameraExteriorFailure(FocusedBody.BodyId,camera.Position.Value);
+            RecordCameraExteriorConstraint(constrained);
+            camera.Position=camera.Position with{Value=constrained.RootPosition};
+            _publishedCameraRoot=constrained.RootPosition;
+            _surfaceAltitudeMetres=constrained.SurfaceAltitudeMetres;
+        }
+        var altitude=SurfaceAnchorAcquisition.SurfaceAltitude(FocusedBody,camera.Position.Value,terrain);
+        if(!double.IsFinite(altitude)||(FocusedBodyHasNavigableSolidSurface&&!SurfaceFocusHandoffPolicy.SatisfiesMinimumTerrainClearance(altitude)))
+            ThrowFinalCameraClearanceFailure(FocusedBody.BodyId,altitude);
+        _surfaceAltitudeMetres=altitude;
+        return altitude;
+    }
+
+    private void RecordCameraExteriorConstraint(in CameraExteriorConstraintResult value)
+    {
+        _cameraClearanceTerrainQueries+=value.TerrainQueries;
+        _cameraClearanceIterationCount+=value.Iterations;
+        switch(value.Iterations)
+        {
+            case 0:_cameraClearanceIterationZeroCount++;break;
+            case 1:_cameraClearanceIterationOneCount++;break;
+            case 2:_cameraClearanceIterationTwoCount++;break;
+            case 3:_cameraClearanceIterationThreeCount++;break;
+        }
+        _cameraClearanceMaximumIterations=Math.Max(_cameraClearanceMaximumIterations,value.Iterations);
+        _cameraClearanceMaximumCorrectionMetres=Math.Max(_cameraClearanceMaximumCorrectionMetres,value.CorrectionMetres);
+        if(value.CorrectionMetres>0d)_cameraClearanceCorrectionCount++;
+    }
+
+    internal static void ValidateFinalCameraClearance(ulong bodyId,double altitudeMetres)
+    {
+        if(!SurfaceFocusHandoffPolicy.SatisfiesMinimumTerrainClearance(altitudeMetres))
+            ThrowFinalCameraClearanceFailure(bodyId,altitudeMetres);
+    }
+
+    private static void ThrowFinalCameraClearanceFailure(ulong bodyId,double altitudeMetres) =>
+        throw new InvalidOperationException($"Final camera clearance invariant failed for body {bodyId}: altitude={altitudeMetres:R} m; physicalMinimum={SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres:R} m; tolerance={SurfaceFocusHandoffPolicy.TerrainClearanceInvariantToleranceMetres:R} m.");
+    private static void ThrowFinalCameraExteriorFailure(ulong bodyId,in Double3 proposedCameraRoot) =>
+        throw new InvalidOperationException($"Final body-local camera exterior solver failed for body {bodyId}: proposedRoot={proposedCameraRoot}.");
+
+    private static bool TryLoadEarthElevationOracle(out string error)
+    {
+        if(EarthElevationDataset.IsLoaded){error=string.Empty;return true;}
+        if(EarthElevationDataset.TryLoad(Path.Combine(AppContext.BaseDirectory,"earth-data"),out error))return true;
+        if(TerrainAssetRepository.TryFindRoot(out var repositoryRoot)&&
+            EarthElevationDataset.TryLoad(Path.Combine(repositoryRoot,"assets","earth","runtime"),out error))return true;
+        error=$"Solar terrain-v4 camera authority requires the Earth elevation oracle. {error}";
+        return false;
+    }
     private Double3 EvaluateFocusRoot()=>_focusTarget.TryEvaluate(FocusedBody,out var root)?root.Value:throw new InvalidOperationException("The active focus target cannot be evaluated from the current presentation snapshot.");
     private Double3 EvaluateSurfaceAnchorRoot()=>_focusTarget.Kind==FocusTargetKind.SurfaceAnchor?EvaluateFocusRoot():throw new InvalidOperationException("A surface anchor is not active.");
     private Double3 EvaluateRetainedVisualAimRoot(in Double3 fallbackRoot)=>_retainedVisualAimAnchor.HasValue

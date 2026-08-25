@@ -53,6 +53,9 @@ var tests = new (string, Action)[]
     ("Production KSA-style spherical billboard", ProductionSphericalBillboardTest),
     ("Production surface body eligibility and transition ownership", ProductionSurfaceBodyEligibilityAndTransitionOwnershipTest),
     ("Production Earth material-state continuity", ProductionEarthMaterialStateContinuityTest),
+    ("Planetary camera terrain exclusion", PlanetaryCameraTerrainExclusionTest),
+    ("Close-ground reference-frame diagnostic", CloseGroundReferenceFrameDiagnosticTest),
+    ("Production terrain material synthesis and tessellation study", ProductionTerrainMaterialSynthesisAndTessellationStudyTest),
     ("Production Eyeball seam continuity", ProductionEyeballSeamContinuityTest),
     ("Planetary terrain residency and surface frame", PlanetaryTerrainResidencyAndSurfaceFrameTest),
     ("Planetary patch topology and ABI", PlanetaryPatchTopologyAndAbiTest),
@@ -240,6 +243,18 @@ static void ProductionEarthMaterialStateContinuityTest()
     var scene=value!;var camera=new CameraState(new FramePosition(root,Double3.Zero),DoubleQuaternion.Identity,scene.Projection,CameraMode.Free);
 
     Check(scene.Focus(camera,NativePresentationFocus.Earth),"initial Earth material-state focus");
+    var focusBaseline=FocusFingerprint(scene,camera);
+    foreach(var intermediate in new[]{NativePresentationFocus.Sun,NativePresentationFocus.Venus,NativePresentationFocus.Mars,NativePresentationFocus.Moon})
+    {
+        Check(scene.Focus(camera,intermediate),$"focus {intermediate} before immediate Earth state proof");
+        Check(scene.Focus(camera,NativePresentationFocus.Earth),$"immediate Earth return from {intermediate}");
+        Check(FocusFingerprint(scene,camera)==focusBaseline,$"Earth apparent radius, framing, regime, and production identity are correct on the first authoritative frame after {intermediate}");
+        Check(scene.Focus(camera,intermediate),$"focus {intermediate} before warp-control equivalence");
+        scene.ApplyPresentationInput(camera,new NativeInputState{RateIncrease=1},out _,out _);
+        Check(scene.Focus(camera,NativePresentationFocus.Earth),$"Earth return from {intermediate} after warp control");
+        Check(FocusFingerprint(scene,camera)==focusBaseline,$"touching time-warp control cannot change Earth focus presentation after {intermediate}");
+        scene.ApplyPresentationInput(camera,new NativeInputState{RateDecrease=1},out _,out _);
+    }
     var earth=scene.FocusedBody;
     var fixedCameraRoot=earth.Position.Value+earth.BodyFixedToRoot.Rotate(new Double3(.31d,.27d,.911d).Normalized()*earth.RadiusMetres*4d);
     var fixedOrientation=earth.BodyFixedToRoot;
@@ -267,8 +282,28 @@ static void ProductionEarthMaterialStateContinuityTest()
     Check(shared.Contains("ProductionEarthSurfaceMaterial",StringComparison.Ordinal)&&shared.Contains("roughness",StringComparison.Ordinal)&&shared.Contains("specular",StringComparison.Ordinal),"terrain-v4 owns one explicit Earth base-material function");
     Check(global.Contains("#include \"production_earth_material.glsl\"",StringComparison.Ordinal)&&distant.Contains("#include \"production_earth_material.glsl\"",StringComparison.Ordinal)&&global.Contains("PlanetLighting(earth.albedo",StringComparison.Ordinal)&&distant.Contains("PlanetLighting(albedo",StringComparison.Ordinal),"global, Eyeball, and bootstrap sphere share Earth albedo/BRDF authority");
     Check(distant.Contains("binding=24",StringComparison.Ordinal)&&distant.Contains("binding=25",StringComparison.Ordinal)&&distant.Contains("binding=26",StringComparison.Ordinal)&&global.Contains("binding=24",StringComparison.Ordinal)&&global.Contains("binding=25",StringComparison.Ordinal)&&global.Contains("binding=26",StringComparison.Ordinal),"all Earth owners consume the same albedo/elevation/land payload tuple");
-    Check(native.Contains("Seed them before focus selection",StringComparison.Ordinal)&&native.Contains("QueueProductionRequests(a);if(!a.productionIo",StringComparison.Ordinal)&&native.Contains("Earth terrain-v4 material roots ready: mask=0x3F",StringComparison.Ordinal)&&native.Contains("sharedAlbedoElevationLand=true",StringComparison.Ordinal),"renderer seeds immutable root dependencies independently of focus and logs bounded material-state identity/readiness");
-    Console.WriteLine($"Earth material-state fingerprint: 0x{expected:X16}; switches=Venus/Mars/Moon/Solar; terrain-v4 shared payload=true");
+    Check(native.Contains("Seed them before focus selection",StringComparison.Ordinal)&&native.Contains("BootstrapProductionRoots(a)",StringComparison.Ordinal)&&native.Contains("Earth terrain-v4 startup roots synchronously resident before first submitted presentation frame",StringComparison.Ordinal)&&native.Contains("Earth terrain-v4 material roots ready: mask=0x3F",StringComparison.Ordinal)&&native.Contains("sharedAlbedoElevationLand=true",StringComparison.Ordinal),"renderer synchronously publishes all six immutable root dependencies before the first submitted focus frame");
+    var destroySubmissionSource=native[native.IndexOf("void DestroySubmission",StringComparison.Ordinal)..native.IndexOf("void Submission",StringComparison.Ordinal)];var createSubmissionSource=native[native.IndexOf("void CreateSubmission",StringComparison.Ordinal)..native.IndexOf("void EnsurePatchCapacity",StringComparison.Ordinal)];var createProductionSource=native[native.IndexOf("void CreateProductionCubeSurface",StringComparison.Ordinal)..native.IndexOf("void DestroyProductionCubeSurface",StringComparison.Ordinal)];var destroyProductionSource=native[native.IndexOf("void DestroyProductionCubeSurface",StringComparison.Ordinal)..native.IndexOf("float ProductionElevationMetres",StringComparison.Ordinal)];
+    Check(!destroySubmissionSource.Contains("productionLayerLookupBuffer",StringComparison.Ordinal)&&!createSubmissionSource.Contains("CreateHostBuffer(a,sizeof(uint32_t)*ProductionLookupCapacity",StringComparison.Ordinal)&&createProductionSource.Contains("CreateHostBuffer(a,sizeof(uint32_t)*ProductionLookupCapacity",StringComparison.Ordinal)&&destroyProductionSource.Contains("DestroyHostBuffer(a,a.productionLayerLookupBuffer",StringComparison.Ordinal),"terrain-v4 root lookup and payload ownership survive ordinary swapchain/submission recreation as renderer-lifetime state");
+    Check(native.Contains("id.level==0u&&a.productionLayerLookupMapped&&a.terrainSampleMapped",StringComparison.Ordinal)&&native.Contains("a.productionLayerPatch[layer]==id&&!a.productionElevationCpu[layer].empty()",StringComparison.Ordinal),"GPU terrain-key regeneration reattaches immutable resident roots without duplicate disk loads or material-owner replacement");
+    Check(native.Contains("ProductionRootPayloadsReady",StringComparison.Ordinal)&&native.Contains("production context selected before all six root payloads were resident",StringComparison.Ordinal)&&
+          !native.Contains("productionFallbackOwner",StringComparison.Ordinal)&&!native.Contains("productionFallback",StringComparison.Ordinal),"production focus requires resident roots and has no generic distant-Earth fallback owner");
+    Check(native.Contains("earthTransitionTraceRemaining=contextBody==nc::production::EarthBodyId?120u:0u",StringComparison.Ordinal)&&native.Contains("Earth focus frame: frame=%llu",StringComparison.Ordinal)&&native.Contains("material=terrain-v4-root",StringComparison.Ordinal)&&
+          native.Contains("Earth Vulkan submission: terrainFrame=%llu",StringComparison.Ordinal)&&native.Contains("serializedFence=true; distantDraw=0; productionDraw=1",StringComparison.Ordinal),"the first 120 Earth focus submissions expose bounded frame/owner/radius/material and serialized swapchain submission telemetry for manual correlation");
+    var focused=scene.FocusedPresentation(camera);var focusedDistant=scene.DistantBodies[0];var focusedGpu=scene.GpuConstants(camera);var transportedRadius=(double)focusedGpu.RadiusHigh+focusedGpu.RadiusLow;
+    Check(BitConverter.DoubleToInt64Bits(scene.FocusedBody.RadiusMetres)==BitConverter.DoubleToInt64Bits(earth.RadiusMetres)&&focused.Radius==(float)earth.RadiusMetres&&focusedDistant.Radius==(float)earth.RadiusMetres&&Math.Abs(transportedRadius-earth.RadiusMetres)<1e-6,
+        "distant, production-global, and GPU terrain paths share the authoritative Earth base radius exactly before terrain elevation");
+    Console.WriteLine($"Earth material-state fingerprint: 0x{expected:X16}; focus=0x{focusBaseline:X16}; switches=Sun/Venus/Mars/Moon; no-warp=warp-control-identical; terrain-v4 shared payload=true");
+
+    static ulong FocusFingerprint(SolarSystemScene scene,CameraState camera)
+    {
+        Check(SolarOverlayLayout.TryProjectBody(scene.FocusedBody,camera,out _,out _,out var apparentRadius,out _),"focused Earth projects for apparent-radius proof");
+        var body=scene.FocusedBody;var distant=scene.DistantBodies[0];var gpu=scene.GpuConstants(camera);var actualDistance=Math.Sqrt((camera.Position.Value-body.Position.Value).LengthSquared);var hash=14695981039346656037ul;
+        Mix((ulong)BitConverter.DoubleToInt64Bits(body.RadiusMetres));Mix((ulong)BitConverter.DoubleToInt64Bits(scene.OrbitDistance));Mix((ulong)BitConverter.DoubleToInt64Bits(actualDistance));Mix((ulong)BitConverter.DoubleToInt64Bits(apparentRadius));
+        Mix((uint)BitConverter.SingleToInt32Bits(distant.Radius));Mix((uint)BitConverter.SingleToInt32Bits(distant.DistanceRadii));Mix((uint)distant.Regime);Mix((uint)BitConverter.SingleToInt32Bits(gpu.RadiusHigh));Mix((uint)BitConverter.SingleToInt32Bits(gpu.RadiusLow));Mix(scene.ProductionSurfaceEligible?1u:0u);
+        return hash;
+        void Mix(ulong bits)=>hash=(hash^bits)*1099511628211ul;
+    }
 
     static ulong Fingerprint(SolarSystemScene scene,CameraState camera)
     {
@@ -280,6 +315,399 @@ static void ProductionEarthMaterialStateContinuityTest()
         return hash;
         void MixBits(uint bits)=>hash=(hash^bits)*1099511628211ul;
         void MixFloat(float number)=>MixBits((uint)BitConverter.SingleToInt32Bits(number));
+    }
+}
+
+static void PlanetaryCameraTerrainExclusionTest()
+{
+    var repositoryRoot=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..",".."));
+    Check(TerrainAssetCache.TryResolveRequired(repositoryRoot,TerrainAssetCache.ProductionEarthLocalAssetId,null,out _,out var localTerrainPath,out var localTerrainError),$"production local terrain clearance asset: {localTerrainError}");
+    Check(EarthLocalTerrainElevationDataset.TryLoad(localTerrainPath,out var localElevationError),$"production local terrain clearance oracle: {localElevationError}");
+    var root=new ReferenceFrameId(993);
+    Check(SolarSystemScene.TryCreateAt(root,SimulationInstant.Zero,out var value,out var error)&&value is not null,$"camera exclusion scene: {error}");
+    var scene=value!;var camera=new CameraState(new FramePosition(root,Double3.Zero),DoubleQuaternion.Identity,scene.Projection,CameraMode.Free);
+    Check(scene.Focus(camera,NativePresentationFocus.Earth),"focus Earth for terrain exclusion");
+    var earth=scene.FocusedBody;var terrain=PlanetaryTerrainDefinition.EarthProductionCubeV4;
+    Check(EarthElevationDataset.IsLoaded,"fresh Solar scene requires the checked Earth elevation oracle before camera publication");
+
+    var candidates=new List<(Double3 Direction,double Height)>();
+    foreach(CubeSphereFace face in Enum.GetValues<CubeSphereFace>())for(var y=0;y<=12;y++)for(var x=0;x<=12;x++)
+    {
+        var direction=RelaxedCubeSphereProjection.UnitDirection(face,x/12d,y/12d);
+        candidates.Add((direction,terrain.SampleHeight(direction,24)));
+    }
+    candidates.Sort((left,right)=>left.Height.CompareTo(right.Height));
+    var sites=new[]{candidates[0],candidates[candidates.Count/2],candidates[^1]};
+    var physicalMinimum=SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres;
+    var correctionTarget=SurfaceFocusHandoffPolicy.TerrainClearanceCorrectionTargetMetres;
+    var localPackage=File.ReadAllBytes(localTerrainPath);var localOffset=PlanetaryLocalTerrainPackContract.HeaderBytes;
+    var maximumLocalResidual=double.NegativeInfinity;var maximumLocalDirection=Double3.UnitY;
+    Check(PlanetaryLocalTerrainPackContract.TryReadHeader(localPackage,out var localHeader),"production local terrain header is readable by the clearance oracle test");
+    for(var recordIndex=0;recordIndex<localHeader.RecordCount;recordIndex++)
+    {
+        Check(PlanetaryLocalTerrainPackContract.TryReadRecordHeader(localPackage.AsSpan(localOffset,PlanetaryLocalTerrainPackContract.RecordHeaderBytes),out var record),$"production local terrain record {recordIndex}");
+        var cells=1<<record.Sector.Level;
+        for(var sy=1;sy<=7;sy+=2)for(var sx=1;sx<=7;sx+=2)
+        {
+            var direction=RelaxedCubeSphereProjection.UnitDirection(record.Sector.Face,(record.Sector.X+sx/8d)/cells,(record.Sector.Y+sy/8d)/cells);
+            Check(RelaxedCubeSphereProjection.TryAddress(direction,out var recoveredFace,out var recoveredU,out var recoveredV)&&recoveredFace==record.Sector.Face&&
+                  Math.Abs(recoveredU-(record.Sector.X+sx/8d)/cells)<2e-9d&&Math.Abs(recoveredV-(record.Sector.Y+sy/8d)/cells)<2e-9d,
+                  "CPU local-terrain address round-trips the accepted relaxed-cube projection");
+            var residual=EarthLocalTerrainElevationDataset.SampleResidual(direction);
+            if(residual>maximumLocalResidual){maximumLocalResidual=residual;maximumLocalDirection=direction;}
+        }
+        localOffset=checked((int)record.PayloadOffset+(int)record.StoredAlbedoBytes+(int)record.StoredElevationBytes+(int)record.StoredNormalBytes);
+    }
+    Check(maximumLocalResidual>physicalMinimum,"production NCCUBE2 includes a positive physical residual capable of penetrating the former global-only camera floor");
+    var globalOnlyHeight=EarthElevationDataset.SampleHeight(maximumLocalDirection);
+    var renderedHeight=terrain.SampleHeight(maximumLocalDirection,24);
+    var formerClearance=globalOnlyHeight+correctionTarget-renderedHeight;
+    Check(Math.Abs((renderedHeight-globalOnlyHeight)-maximumLocalResidual)<1e-9d&&formerClearance<0d,
+          "the exact decoded NCCUBE2 residual participates in the authoritative camera terrain height and reproduces the former penetration");
+    var maximumExteriorCorrection=0d;var maximumExteriorIterations=0;var exteriorTerrainQueries=0;
+    foreach(CubeSphereFace face in Enum.GetValues<CubeSphereFace>())for(var edgeSample=0;edgeSample<=32;edgeSample++)
+    {
+        var t=edgeSample/32d;
+        foreach(var direction in new[]{RelaxedCubeSphereProjection.UnitDirection(face,t,0d),RelaxedCubeSphereProjection.UnitDirection(face,t,1d),RelaxedCubeSphereProjection.UnitDirection(face,0d,t),RelaxedCubeSphereProjection.UnitDirection(face,1d,t)})
+        {
+            var height=terrain.SampleHeight(direction,24);
+            var proposedBody=direction*(earth.RadiusMetres+height-100d);
+            var proposedRoot=earth.Position.Value+earth.BodyFixedToRoot.Rotate(proposedBody);
+            Check(SurfaceAnchorAcquisition.TryConstrainCameraOrigin(earth,proposedRoot,terrain,physicalMinimum,correctionTarget,out var constrained),
+                "body-local final exterior solver converges across relaxed-cube face edges and corners");
+            var constrainedDirection=constrained.BodyLocalPosition.Normalized();
+            maximumExteriorCorrection=Math.Max(maximumExteriorCorrection,constrained.CorrectionMetres);
+            maximumExteriorIterations=Math.Max(maximumExteriorIterations,constrained.Iterations);exteriorTerrainQueries+=constrained.TerrainQueries;
+            Check(constrained.SurfaceAltitudeMetres>=physicalMinimum&&constrained.Iterations is >=1 and <=SurfaceAnchorAcquisition.CameraExteriorMaximumIterations&&
+                  Double3.Dot(direction,constrainedDirection)>1d-1e-14d,
+                "exterior correction preserves the proposed body-fixed side/direction while restoring terrain clearance");
+        }
+    }
+    var failureAnchorDirection=maximumLocalDirection.Normalized();
+    var failureAnchorRoot=earth.Position.Value+earth.BodyFixedToRoot.Rotate(failureAnchorDirection*(earth.RadiusMetres+terrain.SampleHeight(failureAnchorDirection,24)));
+    var inwardRootDirection=-earth.BodyFixedToRoot.Rotate(failureAnchorDirection).Normalized();
+    var oppositeExitDistance=SurfaceAnchorAcquisition.EnforceClearanceDistance(earth,failureAnchorRoot,inwardRootDirection,100d,terrain,correctionTarget);
+    var oppositeExitRoot=failureAnchorRoot+inwardRootDirection*oppositeExitDistance;
+    var oppositeExitBody=earth.BodyFixedToRoot.Conjugate().Normalized().Rotate(oppositeExitRoot-earth.Position.Value).Normalized();
+    Check(Double3.Dot(failureAnchorDirection,oppositeExitBody)<0d,
+        "the retired visual-aim-line correction reproduces the wrong-side opposite-surface exit seen in manual playback");
+    var insideNearSide=failureAnchorRoot+inwardRootDirection*100d;
+    Check(SurfaceAnchorAcquisition.TryConstrainCameraOrigin(earth,insideNearSide,terrain,physicalMinimum,correctionTarget,out var nearSideConstraint)&&
+          Double3.Dot(failureAnchorDirection,nearSideConstraint.BodyLocalPosition.Normalized())>0d,
+        "the production body-local correction retains the intended near-side hemisphere instead of traversing Earth");
+    var maximumClearanceError=0d;var maximumRootRecompositionLoss=0d;var maximumHighLowLoss=0d;var maximumFloatTransportLoss=0d;
+    foreach(var (direction,height) in sites)
+    {
+        var rootDirection=earth.BodyFixedToRoot.Rotate(direction).Normalized();
+        var idealRadius=earth.RadiusMetres+height+correctionTarget;
+        var idealRoot=earth.Position.Value+rootDirection*idealRadius;
+        var rootAltitude=SurfaceAnchorAcquisition.SurfaceAltitude(earth,idealRoot,terrain);
+        maximumRootRecompositionLoss=Math.Max(maximumRootRecompositionLoss,correctionTarget-rootAltitude);
+        var distance=SurfaceAnchorAcquisition.EnforceClearanceDistance(earth,earth.Position.Value,rootDirection,0d,terrain,correctionTarget);
+        var correctedRoot=earth.Position.Value+rootDirection*distance;
+        var altitude=SurfaceAnchorAcquisition.SurfaceAltitude(earth,correctedRoot,terrain);
+        var cameraBody=earth.BodyFixedToRoot.Conjugate().Normalized().Rotate(correctedRoot-earth.Position.Value);
+        var encoded=EncodedPosition.Encode(cameraBody);
+        var reconstructed=new Double3((double)encoded.HighX+encoded.LowX,(double)encoded.HighY+encoded.LowY,(double)encoded.HighZ+encoded.LowZ);
+        var reconstructedRadius=Math.Sqrt(reconstructed.LengthSquared);var reconstructedDirection=reconstructed/reconstructedRadius;
+        var reconstructedAltitude=reconstructedRadius-PlanetaryTerrainQuery.SurfaceRadius(earth.RadiusMetres,reconstructedDirection,terrain);
+        maximumHighLowLoss=Math.Max(maximumHighLowLoss,altitude-reconstructedAltitude);
+        maximumFloatTransportLoss=Math.Max(maximumFloatTransportLoss,altitude-(float)altitude);
+        maximumClearanceError=Math.Max(maximumClearanceError,Math.Abs(altitude-correctionTarget));
+        Check(distance>=earth.RadiusMetres+height&&altitude>=physicalMinimum&&double.IsFinite(distance),$"guarded body-fixed terrain floor holds at sampled elevation {height:R} m");
+    }
+
+    // One update attempts to cross the entire remaining altitude. The final
+    // published camera position, rather than the previous-frame position,
+    // owns the terrain exclusion decision.
+    scene.ApplyPresentationInput(camera,new NativeInputState{MouseWheelDetents=10_000},out _,out _);
+    var minimumObserved=SurfaceAnchorAcquisition.SurfaceAltitude(scene.FocusedBody,camera.Position.Value,terrain);
+    Check(minimumObserved>=physicalMinimum,"single-step zoom cannot tunnel through Earth terrain");
+    var closeDirectionBefore=scene.FocusedBody.BodyFixedToRoot.Conjugate().Normalized().Rotate(camera.Position.Value-scene.FocusedBody.Position.Value).Normalized();
+    scene.ApplyPresentationInput(camera,new NativeInputState{LookActive=1,MouseDeltaX=420,MouseDeltaY=-180},out _,out _);
+    var closeOrientationAfterDrag=camera.Orientation;
+    var closeDirectionAfterDrag=scene.FocusedBody.BodyFixedToRoot.Conjugate().Normalized().Rotate(camera.Position.Value-scene.FocusedBody.Position.Value).Normalized();
+    scene.ApplyPresentationInput(camera,new NativeInputState{MouseWheelDetents=-1},out _,out _);
+    var closeDirectionAfterWheel=scene.FocusedBody.BodyFixedToRoot.Conjugate().Normalized().Rotate(camera.Position.Value-scene.FocusedBody.Position.Value).Normalized();
+    Check(Double3.Dot(closeDirectionBefore,closeDirectionAfterDrag)>0d&&Double3.Dot(closeDirectionAfterDrag,closeDirectionAfterWheel)>0d&&
+          camera.Orientation==closeOrientationAfterDrag&&scene.SurfaceAltitudeMetres>=physicalMinimum,
+        "extreme close drag followed by wheel input preserves the near-side hemisphere, inertial orientation, and terrain exterior");
+    var correctionCountBeforeStress=scene.CameraClearanceCorrectionCount;var maximumGuardConsumption=0d;
+    var maximumStressPositionDelta=0d;var maximumStressOrientationDelta=0d;var maximumStressTargetDistance=0d;
+    for(var cycle=0;cycle<1000;cycle++)
+    {
+        var positionBefore=camera.Position.Value;var orientationBefore=camera.Orientation;
+        scene.ApplyPresentationInput(camera,new NativeInputState{LookActive=1,MouseDeltaX=(cycle%7)-3,MouseDeltaY=(cycle%5)-2,MouseWheelDetents=cycle%11==0?-1:1000},out _,out _);
+        if(cycle%200==199)Check(scene.TryAdvanceByHostDuration(SimulationDuration.FromWholeSeconds(1),camera,out var advanceError),$"camera-floor rotation/time advance {cycle}: {advanceError}");
+        var finalAltitude=scene.EnforceFinalCameraInvariant(camera);
+        var altitude=SurfaceAnchorAcquisition.SurfaceAltitude(scene.FocusedBody,camera.Position.Value,terrain);minimumObserved=Math.Min(minimumObserved,altitude);
+        maximumGuardConsumption=Math.Max(maximumGuardConsumption,Math.Max(0d,correctionTarget-finalAltitude));
+        maximumStressPositionDelta=Math.Max(maximumStressPositionDelta,Math.Sqrt((camera.Position.Value-positionBefore).LengthSquared));
+        maximumStressOrientationDelta=Math.Max(maximumStressOrientationDelta,QuaternionAngle(orientationBefore,camera.Orientation));
+        maximumStressTargetDistance=Math.Max(maximumStressTargetDistance,Math.Sqrt((camera.Position.Value-scene.CurrentVisualAimRoot).LengthSquared));
+        Check(altitude>=physicalMinimum&&camera.Position.Value.IsFinite&&scene.CurrentInertialCameraOffset.IsFinite,"aggressive drag/zoom publishes only finite above-terrain camera positions");
+    }
+    var stressCorrectionCount=scene.CameraClearanceCorrectionCount-correctionCountBeforeStress;
+
+    const int timingSamples=4096;var timingTicks=new long[timingSamples];
+    Check(SurfaceAnchorAcquisition.TryConstrainCameraOrigin(earth,failureAnchorRoot,terrain,physicalMinimum,correctionTarget,out _),"warm camera exterior solver");
+    var timingAllocationBefore=GC.GetAllocatedBytesForCurrentThread();var timingTotalTicks=0L;var timingIterations=0L;
+    for(var sample=0;sample<timingSamples;sample++)
+    {
+        var site=candidates[(sample*37)%candidates.Count];var signedOffset=(sample&1)==0?100d:-1d;
+        var proposedRoot=earth.Position.Value+earth.BodyFixedToRoot.Rotate(site.Direction*(earth.RadiusMetres+site.Height+signedOffset));
+        var start=Stopwatch.GetTimestamp();
+        Check(SurfaceAnchorAcquisition.TryConstrainCameraOrigin(earth,proposedRoot,terrain,physicalMinimum,correctionTarget,out var timed),"timed camera exterior solver");
+        var elapsed=Stopwatch.GetTimestamp()-start;timingTicks[sample]=elapsed;timingTotalTicks+=elapsed;timingIterations+=timed.Iterations;
+    }
+    var timingAllocations=GC.GetAllocatedBytesForCurrentThread()-timingAllocationBefore;
+    Array.Sort(timingTicks);var nanosecondsPerTick=1_000_000_000d/Stopwatch.Frequency;
+    var invariantAverageNanoseconds=timingTotalTicks*nanosecondsPerTick/timingSamples;
+    var invariantP95Nanoseconds=timingTicks[(int)(timingSamples*.95d)]*nanosecondsPerTick;
+    var invariantP99Nanoseconds=timingTicks[(int)(timingSamples*.99d)]*nanosecondsPerTick;
+    Check(timingAllocations==0&&timingIterations<=timingSamples&&invariantAverageNanoseconds>0d,"body-local camera exterior solver is bounded and allocation-free");
+
+    var highSite=sites[^1];var highRootDirection=scene.FocusedBody.BodyFixedToRoot.Rotate(highSite.Direction).Normalized();
+    double preflightAltitude=double.NaN;
+    foreach(var penetration in new[]{.01d,1d,100d})
+    {
+        camera.Position=camera.Position with{Value=scene.FocusedBody.Position.Value+highRootDirection*(scene.FocusedBody.RadiusMetres+highSite.Height-penetration)};
+        preflightAltitude=scene.EnforceFinalCameraInvariant(camera);
+        Check(preflightAltitude>=physicalMinimum,$"runtime preflight recovers a deliberate {penetration:R} m camera penetration without terminating player input");
+    }
+    var gpu=scene.GpuConstants(camera);var eye=scene.EyeballConstants(camera);
+    Check(SurfaceAnchorAcquisition.TryMeasureCameraTransport(scene.FocusedBody,camera.Position.Value,terrain,out var transportIdentity),
+        "measure final body-local camera transport");
+    var transportedGpuBody=new Double3((double)gpu.CameraBodyHighX+gpu.CameraBodyLowX,(double)gpu.CameraBodyHighY+gpu.CameraBodyLowY,(double)gpu.CameraBodyHighZ+gpu.CameraBodyLowZ);
+    Console.WriteLine($"Final terrain preflight: altitude={preflightAltitude:R}; gpu={gpu.SurfaceAltitudeMetres:R}; eye={eye.SurfaceAltitudeMetres:R}; eyeEnabled={scene.EyeballComputeRequested}");
+    Check(preflightAltitude>=physicalMinimum&&Math.Abs(gpu.SurfaceAltitudeMetres-preflightAltitude)<.0001d&&
+          (!scene.EyeballComputeRequested||Math.Abs(eye.SurfaceAltitudeMetres-preflightAltitude)<.01d),"the final pre-submit invariant repairs an injected penetration and transports the same physical terrain altitude to both GPU paths");
+    Check(transportIdentity.ValidatedClearanceMetres>=physicalMinimum&&transportIdentity.GpuClearanceMetres>=physicalMinimum&&
+          transportIdentity.GpuBodyLocalPosition==transportedGpuBody&&transportIdentity.PositionErrorMetres<.001d&&
+          (!scene.EyeballComputeRequested||(eye.CameraBodyHighX==gpu.CameraBodyHighX&&eye.CameraBodyHighY==gpu.CameraBodyHighY&&eye.CameraBodyHighZ==gpu.CameraBodyHighZ&&
+            eye.CameraBodyLowX==gpu.CameraBodyLowX&&eye.CameraBodyLowY==gpu.CameraBodyLowY&&eye.CameraBodyLowZ==gpu.CameraBodyLowZ)),
+        "the validated body-local origin and both production shader paths consume one split-FP32 camera identity");
+
+    // With a fixed camera origin, observation orientation must not select a
+    // different production terrain basis. The former view-ray pupil changed
+    // on every close-ground drag and made stationary terrain breathe around
+    // an otherwise valid exterior camera.
+    scene.Update(camera);var stationaryPupil=scene.ProductionPupilCell;var stationaryRoot=camera.Position.Value;
+    var stationaryBody=scene.FocusedBody.BodyFixedToRoot.Conjugate().Normalized().Rotate(stationaryRoot-scene.FocusedBody.Position.Value);
+    var stationaryDirection=stationaryBody.Normalized();var maximumStationaryCameraDrift=0d;var maximumStationaryPupilError=0d;
+    var stationaryCorrectionCount=scene.CameraClearanceCorrectionCount;
+    for(var frame=0;frame<300;frame++)
+    {
+        camera.Orientation=(DoubleQuaternion.FromAxisAngle(Double3.UnitY,frame*.0007d)*DoubleQuaternion.FromAxisAngle(Double3.UnitX,-.4d+frame*.0002d)).Normalized();
+        scene.Update(camera);scene.EnforceFinalCameraInvariant(camera);
+        maximumStationaryCameraDrift=Math.Max(maximumStationaryCameraDrift,Math.Sqrt((camera.Position.Value-stationaryRoot).LengthSquared));
+        maximumStationaryPupilError=Math.Max(maximumStationaryPupilError,
+            Math.Acos(Math.Clamp(Double3.Dot(scene.ProductionPupilCell.BodyFixedDirection,stationaryDirection),-1d,1d))*scene.FocusedBody.RadiusMetres);
+        Check(scene.ProductionPupilCell==stationaryPupil,"orientation-only input retains the sub-camera body-fixed pupil");
+    }
+    Console.WriteLine($"Stationary camera proof: drift={maximumStationaryCameraDrift:E9} m; corrections={scene.CameraClearanceCorrectionCount-stationaryCorrectionCount}; pupilError={maximumStationaryPupilError:E9} m; radial={stationaryDirection}; pupil={stationaryPupil.BodyFixedDirection}");
+    Check(maximumStationaryCameraDrift==0d&&scene.CameraClearanceCorrectionCount==stationaryCorrectionCount&&
+          maximumStationaryPupilError<=4d*Math.PI*scene.FocusedBody.RadiusMetres/PlanetaryProductionPupilOrientation.Resolution,
+        "300 frozen-time frames preserve camera origin, settle correction, and retain a bounded sub-camera pupil");
+    foreach(var penetration in new[]{.01d,1d,100d})
+    {
+        var rejected=false;try{SolarSystemScene.ValidateFinalCameraClearance(earth.BodyId,physicalMinimum-penetration);}catch(InvalidOperationException){rejected=true;}
+        Check(rejected,$"final invariant rejects a deliberate {penetration:R} m penetration beyond tolerance");
+    }
+    Check(SurfaceFocusHandoffPolicy.SatisfiesMinimumTerrainClearance(physicalMinimum-SurfaceFocusHandoffPolicy.TerrainClearanceInvariantToleranceMetres)&&
+          !SurfaceFocusHandoffPolicy.SatisfiesMinimumTerrainClearance(physicalMinimum-SurfaceFocusHandoffPolicy.TerrainClearanceInvariantToleranceMetres*1.01d),
+          "invariant tolerance accepts only its explicit 0.1 mm numerical boundary");
+
+    var source=File.ReadAllText(Path.Combine(repositoryRoot,"samples","NovaCore.Triangle","SolarSystemScene.cs"));
+    var host=File.ReadAllText(Path.Combine(repositoryRoot,"samples","NovaCore.Triangle","Program.cs"));
+    var native=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","NovaCoreNative.cpp"));
+    var finalConstraint=source.IndexOf("if(FocusedBodyHasNavigableSolidSurface)",StringComparison.Ordinal);
+    var bodyCenterBranch=finalConstraint>0?source.LastIndexOf("targetRoot=FocusedBody.Position.Value;",finalConstraint,StringComparison.Ordinal):-1;
+    Check(finalConstraint>bodyCenterBranch&&source.Contains("material.Kind is PlanetMaterialKind.Rocky or PlanetMaterialKind.Terrestrial",StringComparison.Ordinal),"solid-body exclusion is applied after BodyCenter/SurfaceAnchor/release recomposition and is driven by the material catalog rather than an Earth-only branch");
+    Check(source.Contains("TryLoadEarthElevationOracle",StringComparison.Ordinal)&&source.Contains("Final camera clearance invariant failed",StringComparison.Ordinal)&&
+          source.Contains("TerrainClearanceCorrectionTargetMetres",StringComparison.Ordinal)&&
+          !source.Contains("SurfaceAltitudeMetres=(float)(terrain.IsValid?Math.Max",StringComparison.Ordinal)&&host.Contains("s.Sol?.EnforceFinalCameraInvariant(s.Camera)",StringComparison.Ordinal)&&
+          native.Contains("physicalMinimumClearance=10.0f,invariantTolerance=0.0001f",StringComparison.Ordinal),"Solar startup, guarded final managed submission, and native GPU validation enforce one unmasked terrain-v4 clearance authority");
+    var iterationDistribution=scene.CameraClearanceIterationDistribution;
+    Console.WriteLine($"Camera terrain exclusion: sites={sites[0].Height:R}/{sites[1].Height:R}/{sites[2].Height:R} m; localResidualMax={maximumLocalResidual:R} m; formerClearance={formerClearance:R} m; physical={physicalMinimum:R} m; guard={SurfaceFocusHandoffPolicy.TerrainClearanceNumericalGuardBandMetres:R} m; tolerance={SurfaceFocusHandoffPolicy.TerrainClearanceInvariantToleranceMetres:R} m; rootLoss={maximumRootRecompositionLoss:E9} m; highLowLoss={maximumHighLowLoss:E9} m; floatLoss={maximumFloatTransportLoss:E9} m; maximumError={maximumClearanceError:E9}; minimumStress={minimumObserved:R} m; corrections={stressCorrectionCount}; guardConsumed={maximumGuardConsumption:E9} m; exteriorCorrection={maximumExteriorCorrection:R} m; exteriorIterations={maximumExteriorIterations}; exteriorQueries={exteriorTerrainQueries}; runtimeIterations={scene.CameraClearanceIterationCount}; runtimeDistribution={iterationDistribution.Zero}/{iterationDistribution.One}/{iterationDistribution.Two}/{iterationDistribution.Three}; runtimeMaxIterations={scene.CameraClearanceMaximumIterations}; runtimeMaxCorrection={scene.CameraClearanceMaximumCorrectionMetres:R} m; runtimeQueries={scene.CameraClearanceTerrainQueries}; maxPositionDelta={maximumStressPositionDelta:R} m; maxOrientationDelta={maximumStressOrientationDelta:R} rad; maxTargetDistance={maximumStressTargetDistance:R} m; transportError={transportIdentity.PositionErrorMetres:E9} m; gpuClearance={transportIdentity.GpuClearanceMetres:R} m; stationaryDrift={maximumStationaryCameraDrift:E9} m; pupilError={maximumStationaryPupilError:E9} m; invariantAvg/P95/P99={invariantAverageNanoseconds:F1}/{invariantP95Nanoseconds:F1}/{invariantP99Nanoseconds:F1} ns; invariantAllocations={timingAllocations}");
+}
+
+static void CloseGroundReferenceFrameDiagnosticTest()
+{
+    const double hostIntervalSeconds=.1d;
+    var root=new ReferenceFrameId(995);
+    var measurements=new List<(string Warp,double SimulationSeconds,double OrientationRadians,double ExpectedSurfaceSpeed,double CameraBodyDrift,double TerrainRelativeDrift,double CameraBodySpeed,double TerrainRelativeSpeed,double InertialOffsetDrift,double AnchorBodyDrift,double Latitude,double Longitude,double LocalRadius,Double3 CameraRoot,Double3 CameraRelativeInertial,Double3 CameraBody,Double3 AnchorBody,Double3 CameraToAnchor,PlanetaryProductionPupilCell BeforePupil,PlanetaryProductionPupilCell AfterPupil)>();
+    foreach(var (label,rate,paused) in new[]{("Pause / 0x",SimulationRate.One,true),("1x",SimulationRate.One,false),("2x",SimulationRate.Two,false),("10x",SimulationRate.Ten,false),("30x",new SimulationRate(30,1),false)})
+    {
+        Check(SolarSystemScene.TryCreateAt(root,SimulationInstant.Zero,out var value,out var error)&&value is not null,$"reference-frame diagnostic {label} scene: {error}");
+        var scene=value!;var camera=new CameraState(new FramePosition(root,Double3.Zero),DoubleQuaternion.Identity,scene.Projection,CameraMode.Free);
+        Check(scene.Focus(camera,NativePresentationFocus.Earth),$"reference-frame diagnostic {label} Earth focus");
+        for(var step=0;step<192&&(scene.CurrentFocusTarget.Kind!=FocusTargetKind.SurfaceAnchor||scene.SurfaceAnchorBlend<1d||scene.SurfaceAltitudeMetres>SurfaceFocusHandoffPolicy.TerrainClearanceCorrectionTargetMetres+.001d);step++)
+            scene.ApplyPresentationInput(camera,new NativeInputState{MouseWheelDetents=10_000},out _,out _);
+        Check(scene.CurrentFocusTarget.Kind==FocusTargetKind.SurfaceAnchor&&scene.SurfaceAnchorBlend==1d&&scene.SurfaceAltitudeMetres>=SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres&&scene.SurfaceAltitudeMetres<=SurfaceFocusHandoffPolicy.TerrainClearanceCorrectionTargetMetres+.001d,$"reference-frame diagnostic {label} reaches the production 10 m floor");
+        var requestedIndex=SimulationSpeedPresets.IndexOf(rate);while(scene.SpeedPresetIndex<requestedIndex)scene.ApplyPresentationInput(camera,new NativeInputState{RateIncrease=1},out _,out _);while(scene.SpeedPresetIndex>requestedIndex)scene.ApplyPresentationInput(camera,new NativeInputState{RateDecrease=1},out _,out _);
+        Check(scene.Rate==rate,$"reference-frame diagnostic {label} selects exact rate");if(paused)scene.ApplyPresentationInput(camera,new NativeInputState{PauseToggle=1},out _,out _);
+
+        var beforeTime=scene.CurrentTime;var beforeBody=scene.FocusedBody;var beforeCameraRoot=camera.Position.Value;var inverseBefore=beforeBody.BodyFixedToRoot.Conjugate().Normalized();var beforeCameraRelativeInertial=beforeCameraRoot-beforeBody.Position.Value;var beforeCameraBody=inverseBefore.Rotate(beforeCameraRelativeInertial);var direction=beforeCameraBody.Normalized();var terrain=PlanetaryTerrainDefinition.EarthProductionCubeV4;var terrainHeight=terrain.SampleHeight(direction,24);var anchorBody=direction*(beforeBody.RadiusMetres+terrainHeight);var beforeAnchorRoot=beforeBody.Position.Value+beforeBody.BodyFixedToRoot.Rotate(anchorBody);var beforeCameraToAnchor=beforeAnchorRoot-beforeCameraRoot;var beforePupil=scene.ProductionPupilCell;var fixedAnchor=scene.CurrentFocusTarget.SurfaceAnchor;
+        Check(CelestialBodyOrientationEvaluator.TryEvaluate(SolarSystemBodyIds.Earth,beforeTime,out var beforeOrientation),$"reference-frame diagnostic {label} orientation before");
+        var rootSurfaceRadius=beforeBody.BodyFixedToRoot.Rotate(anchorBody);var expectedSurfaceSpeed=Math.Sqrt(Double3.Cross(beforeOrientation.AngularVelocityInInertial,rootSurfaceRadius).LengthSquared);var latitude=Math.Asin(Math.Clamp(direction.Y,-1d,1d));var longitude=Math.Atan2(direction.Z,direction.X);
+
+        Check(scene.TryAdvanceByHostDuration(SimulationDuration.FromSecondsRounded(hostIntervalSeconds),camera,out error),$"reference-frame diagnostic {label} advance: {error}");scene.Update(camera);
+        var afterTime=scene.CurrentTime;var afterBody=scene.FocusedBody;var afterCameraRoot=camera.Position.Value;var inverseAfter=afterBody.BodyFixedToRoot.Conjugate().Normalized();var afterCameraRelativeInertial=afterCameraRoot-afterBody.Position.Value;var afterCameraBody=inverseAfter.Rotate(afterCameraRelativeInertial);var afterAnchorRoot=afterBody.Position.Value+afterBody.BodyFixedToRoot.Rotate(anchorBody);var afterCameraToAnchor=afterAnchorRoot-afterCameraRoot;var afterPupil=scene.ProductionPupilCell;
+        Check(CelestialBodyOrientationEvaluator.TryEvaluate(SolarSystemBodyIds.Earth,afterTime,out var afterOrientation),$"reference-frame diagnostic {label} orientation after");
+        var simulationSeconds=afterTime.SecondsSinceEpoch-beforeTime.SecondsSinceEpoch;var orientationRadians=QuaternionAngle(beforeOrientation.BodyFixedToInertial,afterOrientation.BodyFixedToInertial);var cameraBodyDrift=Math.Sqrt((afterCameraBody-beforeCameraBody).LengthSquared);var terrainRelativeDrift=Math.Sqrt((afterCameraToAnchor-beforeCameraToAnchor).LengthSquared);var inertialOffsetDrift=Math.Sqrt((afterCameraRelativeInertial-beforeCameraRelativeInertial).LengthSquared);var anchorBodyDrift=Math.Sqrt((anchorBody-anchorBody).LengthSquared);var inverseSeconds=simulationSeconds>0d?1d/simulationSeconds:0d;
+        measurements.Add((label,simulationSeconds,orientationRadians,expectedSurfaceSpeed,cameraBodyDrift,terrainRelativeDrift,cameraBodyDrift*inverseSeconds,terrainRelativeDrift*inverseSeconds,inertialOffsetDrift,anchorBodyDrift,latitude,longitude,Math.Sqrt(anchorBody.LengthSquared),afterCameraRoot,afterCameraRelativeInertial,afterCameraBody,anchorBody,afterCameraToAnchor,beforePupil,afterPupil));
+        Check(scene.CurrentFocusTarget.SurfaceAnchor==fixedAnchor,"time advancement retains the exact body-fixed SurfaceAnchor identity");
+        Check(scene.SurfaceAltitudeMetres>=SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres&&camera.Position.Value.IsFinite&&afterCameraBody.IsFinite&&afterCameraToAnchor.IsFinite,"reference-frame diagnostic retains the final terrain-clearance invariant");
+        if(paused)Check(simulationSeconds==0d&&orientationRadians==0d&&cameraBodyDrift==0d&&terrainRelativeDrift==0d&&inertialOffsetDrift==0d&&beforePupil==afterPupil,"pause freezes camera, terrain, orientation, and production pupil with zero input");
+        else Check(simulationSeconds==hostIntervalSeconds*rate.Numerator/rate.Denominator&&orientationRadians>0d&&expectedSurfaceSpeed>0d&&cameraBodyDrift>0d&&terrainRelativeDrift>0d,"active warp produces measurable body-fixed relative motion");
+        Console.WriteLine($"Reference frame {label}: sim={simulationSeconds:R} s; orientation={orientationRadians:R} rad; omega={Math.Sqrt(beforeOrientation.AngularVelocityInInertial.LengthSquared):R} rad/s; lat={latitude:R}; lon={longitude:R}; radius={Math.Sqrt(anchorBody.LengthSquared):R} m; expected={expectedSurfaceSpeed:R} m/s; cameraBodyDrift={cameraBodyDrift:R} m ({cameraBodyDrift*inverseSeconds:R} m/s); terrainRelativeDrift={terrainRelativeDrift:R} m ({terrainRelativeDrift*inverseSeconds:R} m/s); inertialOffsetDrift={inertialOffsetDrift:R} m; anchorBodyDrift={anchorBodyDrift:R} m; cameraRoot={afterCameraRoot}; earthRelativeInertial={afterCameraRelativeInertial}; earthBodyFixed={afterCameraBody}; anchorBody={anchorBody}; cameraToAnchor={afterCameraToAnchor}; pupil={beforePupil}->{afterPupil}");
+    }
+    var pause=measurements[0];var one=measurements[1];
+    Check(pause.CameraBodyDrift==0d&&pause.TerrainRelativeDrift==0d&&pause.AnchorBodyDrift==0d,"pause is the zero-motion control");
+    foreach(var measurement in measurements.Skip(1))
+    {
+        var speedError=Math.Abs(measurement.CameraBodySpeed-measurement.ExpectedSurfaceSpeed)/measurement.ExpectedSurfaceSpeed;var terrainSpeedError=Math.Abs(measurement.TerrainRelativeSpeed-measurement.ExpectedSurfaceSpeed)/measurement.ExpectedSurfaceSpeed;
+        Check(speedError<.002d&&terrainSpeedError<.002d&&measurement.InertialOffsetDrift<.001d,"close-ground camera is Earth-relative inertial while the body-fixed terrain rotates at the authoritative local rigid-body speed");
+    }
+    Console.WriteLine($"Reference frame warp ratios: 2x={measurements[2].CameraBodyDrift/one.CameraBodyDrift:R}; 10x={measurements[3].CameraBodyDrift/one.CameraBodyDrift:R}; 30x={measurements[4].CameraBodyDrift/one.CameraBodyDrift:R}; terrain=({measurements[2].TerrainRelativeDrift/one.TerrainRelativeDrift:R},{measurements[3].TerrainRelativeDrift/one.TerrainRelativeDrift:R},{measurements[4].TerrainRelativeDrift/one.TerrainRelativeDrift:R})");
+    Check(Math.Abs(measurements[2].CameraBodyDrift/one.CameraBodyDrift-2d)<.001d&&Math.Abs(measurements[3].CameraBodyDrift/one.CameraBodyDrift-10d)<.01d&&Math.Abs(measurements[4].CameraBodyDrift/one.CameraBodyDrift-30d)<.05d,"body-fixed camera drift scales linearly with simulation warp");
+}
+
+static void ProductionTerrainMaterialSynthesisAndTessellationStudyTest()
+{
+    var library=PlanetaryTerrainMaterialSynthesis.Materials;
+    Check(library.Length==7&&library.ToArray().All(material=>material.IsFinite&&material.Roughness is >=0f and <=1f&&material.Metallic==0f&&
+          material.AmbientOcclusion is >0f and <=1f&&MathF.Abs(material.VisualDisplacementMetres)<=PlanetaryTerrainMaterialSynthesis.MaximumVisualDisplacementMetres),
+          "compact reusable terrain library has seven bounded dielectric PBR materials");
+
+    var vegetation=PlanetaryTerrainMaterialSynthesis.Classify(1f,220f,.04f,.18f,.9f,.9f);
+    var beach=PlanetaryTerrainMaterialSynthesis.Classify(1f,8f,.02f,.16f,.28f,.88f);
+    var cliff=PlanetaryTerrainMaterialSynthesis.Classify(1f,700f,.94f,.25f,.42f,.7f);
+    var alpine=PlanetaryTerrainMaterialSynthesis.Classify(1f,4_400f,.70f,.35f,.45f,.30f);
+    var desert=PlanetaryTerrainMaterialSynthesis.Classify(1f,600f,.08f,.22f,.02f,.96f);
+    var snow=PlanetaryTerrainMaterialSynthesis.Classify(1f,2_600f,.14f,.94f,.45f,.08f);
+    var proofs=new[]{vegetation,beach,cliff,alpine,desert,snow};
+    Check(proofs.All(weights=>weights.IsFinite&&MathF.Abs(weights.Total-1f)<2e-5f&&Enumerable.Range(0,7).All(index=>weights[(PlanetaryTerrainMaterialKind)index]>=0f)),
+          "classification weights are finite, nonnegative, and normalized");
+    Check(Top(vegetation)==PlanetaryTerrainMaterialKind.VegetatedSoil&&Top(beach)==PlanetaryTerrainMaterialKind.BeachSand&&
+          Top(cliff)==PlanetaryTerrainMaterialKind.RockCliff&&Top(alpine)==PlanetaryTerrainMaterialKind.AlpineRock&&
+          Top(desert)==PlanetaryTerrainMaterialKind.DesertRock&&Top(snow)==PlanetaryTerrainMaterialKind.SnowIce,
+          "body-fixed elevation/slope/latitude/climate inputs select the intended material families");
+
+    var maximumBoundaryDelta=0f;
+    for(var sample=0;sample<512;sample++)
+    {
+        var elevation=-100f+sample*12f;var first=PlanetaryTerrainMaterialSynthesis.Classify(1f,elevation,.38f,.46f,.52f,.55f);
+        var second=PlanetaryTerrainMaterialSynthesis.Classify(1f,elevation+.01f,.38001f,.46001f,.52001f,.55001f);
+        for(var index=0;index<7;index++)maximumBoundaryDelta=Math.Max(maximumBoundaryDelta,MathF.Abs(first[(PlanetaryTerrainMaterialKind)index]-second[(PlanetaryTerrainMaterialKind)index]));
+        var blended=PlanetaryTerrainMaterialSynthesis.Blend(first);
+        Check(blended.IsFinite&&blended.Roughness is >=0f and <=1f&&blended.Metallic==0f&&MathF.Abs(blended.VisualDisplacementMetres)<=.45f,
+              "PBR material blend remains finite and bounded");
+    }
+    Check(maximumBoundaryDelta<.002f,"classification and material transitions remain continuous across nearby geographic inputs");
+    Check(PlanetaryTerrainMaterialSynthesis.DetailWeight(0)==1f&&PlanetaryTerrainMaterialSynthesis.DetailWeight(1_200)==1f&&
+          PlanetaryTerrainMaterialSynthesis.DetailWeight(18_000)==0f&&PlanetaryTerrainMaterialSynthesis.DetailWeight(100_000)==0f&&
+          MathF.Abs(PlanetaryTerrainMaterialSynthesis.DetailWeight(9_600)-.5f)<1e-6f,"near-ground synthesis fades continuously without changing orbital material authority");
+    Check(PlanetaryTerrainMaterialSynthesis.Bc4MaximumPhysicalHeightErrorMetres==2.008f&&PlanetaryTerrainMaterialSynthesis.Bc4RmsPhysicalHeightErrorMetres==1.460f,
+          "BC4 physical-height error stays explicit and separate from bounded visual material displacement");
+
+    var bandScales=new[]{5.5f,96f,410f};
+    foreach(var scale in bandScales)
+    {
+        var previous=1f;
+        for(var sample=0;sample<=128;sample++)
+        {
+            var footprint=scale*sample/64f;var attenuation=PlanetaryTerrainMaterialSynthesis.FrequencyAttenuation(footprint,scale);
+            var normalAttenuation=PlanetaryTerrainMaterialSynthesis.NormalFrequencyAttenuation(footprint,scale);
+            Check(float.IsFinite(attenuation)&&attenuation is >=0f and <=1f&&attenuation<=previous+1e-7f&&
+                  float.IsFinite(normalAttenuation)&&normalAttenuation is >=0f and <=1f&&normalAttenuation<=attenuation+1e-7f,
+                  "procedural color and earlier-fading normal attenuation are finite, bounded, and monotonic");previous=attenuation;
+        }
+    }
+    Check(PlanetaryTerrainMaterialSynthesis.FrequencyAttenuation(0f,5.5f)==1f&&PlanetaryTerrainMaterialSynthesis.FrequencyAttenuation(5.5f,5.5f)==0f&&
+          PlanetaryTerrainMaterialSynthesis.FrequencyAttenuation(5.5f,96f)==1f&&PlanetaryTerrainMaterialSynthesis.FrequencyAttenuation(96f,410f)>0.9f,
+          "unrepresentable micro frequency fades while stable meso/broad frequency remains");
+    var maximumWeightTransition=0f;
+    Span<float> components=stackalloc float[3];
+    foreach(var axes in new[]{(0,1,2),(0,2,1),(1,2,0)})
+    {
+        Vector3? prior=null;
+        for(var sample=-128;sample<=128;sample++)
+        {
+            var delta=sample*1e-5f;components.Clear();components[axes.Item1]=.39f+delta;components[axes.Item2]=.39f-delta;components[axes.Item3]=.835f;
+            var weights=PlanetaryTerrainMaterialSynthesis.BiplanarWeights(new Vector3(components[0],components[1],components[2]));
+            Check(float.IsFinite(weights.X)&&float.IsFinite(weights.Y)&&float.IsFinite(weights.Z)&&weights.X>=0f&&weights.Y>=0f&&weights.Z>=0f&&MathF.Abs(weights.X+weights.Y+weights.Z-1f)<2e-6f,
+                  "adaptive biplanar projection weights remain finite, nonnegative, and normalized");
+            if(prior is { } before)maximumWeightTransition=Math.Max(maximumWeightTransition,(weights-before).Length());prior=weights;
+        }
+    }
+    Check(maximumWeightTransition<.001f,"biplanar axis-pair changes use a smooth ambiguity bridge without a band or weight jump");
+
+    var altitudeNormalStatistics=new List<(double Altitude,float Maximum,float P95)>();
+    foreach(var altitude in new[]{1_000d,100d,10d})
+    {
+        var metresPerPixel=(float)(2d*altitude*Math.Tan(Math.PI/6d)/1440d);var angles=new float[2048];
+        for(var sample=0;sample<angles.Length;sample++)
+        {
+            var normal=Vector3.Normalize(new Vector3(.31f+(sample%17)*.001f,.47f+(sample%23)*.001f,.82f));
+            var point=new Vector3((sample%64)*17.13f,(sample/64)*19.71f,(sample%29)*11.37f);
+            angles[sample]=PlanetaryTerrainMaterialSynthesis.ProceduralNormalAngleDegrees(point,normal,.45f,metresPerPixel*(sample%5==0?16f:1f));
+        }
+        Array.Sort(angles);var maximum=angles[^1];var p95=angles[(int)(angles.Length*.95f)];
+        Check(maximum<=PlanetaryTerrainMaterialSynthesis.MaximumMaterialNormalAngleDegrees&&p95<=maximum&&angles.All(float.IsFinite),$"{altitude:R} m procedural normal distribution is finite and physically bounded at nadir and grazing footprints");
+        altitudeNormalStatistics.Add((altitude,maximum,p95));
+    }
+
+    var repositoryRoot=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..",".."));
+    var shaderRoot=Path.Combine(repositoryRoot,"native","NovaCore.Native","shaders");
+    var synthesis=File.ReadAllText(Path.Combine(shaderRoot,"production_terrain_material.glsl"));
+    var fragment=File.ReadAllText(Path.Combine(shaderRoot,"planetary_production.frag"));
+    var native=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","NovaCoreNative.cpp"));
+    Check(fragment.Contains("#include \"production_terrain_material.glsl\"",StringComparison.Ordinal)&&fragment.Contains("SynthesizeProductionTerrainMaterial",StringComparison.Ordinal)&&
+          fragment.Contains("terrainMaterial.ambientOcclusion",StringComparison.Ordinal),"global and persistent Eyeball share one GPU material-synthesis implementation");
+    Check(synthesis.Contains("TerrainBiplanarWeights",StringComparison.Ordinal)&&synthesis.Contains("selectionConfidence",StringComparison.Ordinal)&&
+          synthesis.Contains("if(weights.x>1e-4)",StringComparison.Ordinal)&&!synthesis.Contains("Triplanar",StringComparison.Ordinal),
+          "adaptive biplanar path retains two-axis sampling away from a narrow smooth axis-change bridge");
+    Check(fragment.Contains("dvec3 bodyMetres=dvec3(bodyCameraHigh)+dvec3(bodyCameraLow)-dvec3(viewDirection)",StringComparison.Ordinal)&&
+          fragment.Contains("vec3 differentialMetres=-viewDirection",StringComparison.Ordinal)&&synthesis.Contains("96.0",StringComparison.Ordinal)&&
+          synthesis.Contains("5.5",StringComparison.Ordinal)&&synthesis.Contains("410.0",StringComparison.Ordinal)&&
+          synthesis.Contains("TerrainBiplanarNoiseRaw",StringComparison.Ordinal)&&synthesis.Contains("dFdx(differentialMetres)",StringComparison.Ordinal)&&
+          !synthesis.Contains("dFdx(bodyMetres)",StringComparison.Ordinal)&&!synthesis.Contains("dFdx(point)",StringComparison.Ordinal)&&
+          synthesis.IndexOf("TerrainWorldFootprintMetres(differentialMetres)",StringComparison.Ordinal)<synthesis.IndexOf("TerrainBiplanarNoiseRaw(bodyMetres",StringComparison.Ordinal),
+          "macro/meso/micro identity uses FP64 body metres while derivatives use one smooth precision-preserving camera-local metre domain before biplanar selection");
+    Check(synthesis.Contains("TerrainFrequencyAttenuation",StringComparison.Ordinal)&&synthesis.Contains(".22,.62",StringComparison.Ordinal)&&
+          synthesis.Contains("TerrainNormalFrequencyAttenuation",StringComparison.Ordinal)&&synthesis.Contains(".12,.38",StringComparison.Ordinal)&&
+          synthesis.Contains("isnan(footprint)||isinf(footprint)",StringComparison.Ordinal),"procedural normal bands fade earlier than color before Nyquist and reject grazing derivative collapse/explosion");
+    Check(synthesis.Contains("ApplyTerrainHeightNormal",StringComparison.Ordinal)&&synthesis.Contains("TerrainMaterialMaximumVisualDisplacement=.45",StringComparison.Ordinal)&&
+          synthesis.Contains("TerrainMaterialMaximumNormalAngleRadians=.1396263402",StringComparison.Ordinal),
+          "height-derived visual normals retain bounded material detail with an 8-degree shading-normal limit");
+
+    foreach(var edgePixels in new[]{0f,12f,48f,96f,384f})
+    {
+        var a=PlanetaryTerrainTessellationStudy.EdgeFactor(edgePixels,48f,1f);
+        var b=PlanetaryTerrainTessellationStudy.EdgeFactor(edgePixels,48f,1f);
+        Check(a==b&&a is >=1 and <=PlanetaryTerrainTessellationStudy.MaximumFactor&&(a&(a-1))==0,"candidate tessellation edge factors are deterministic, power-of-two, symmetric, and bounded");
+        Check(PlanetaryTerrainTessellationStudy.AmplifiedTriangleCount(a)<=PlanetaryTerrainTessellationStudy.MaximumAmplifiedTriangleCount,"candidate triangle amplification is strictly capped");
+    }
+    Check(!PlanetaryTerrainTessellationStudy.AcceptedForProduction&&PlanetaryTerrainTessellationStudy.T3TriangleCount==261_632&&
+          PlanetaryTerrainTessellationStudy.MaximumAmplifiedTriangleCount==16_744_448&&
+          PlanetaryProductionEyeballTopology.Tier(3).IndexCount/3==PlanetaryTerrainTessellationStudy.T3TriangleCount,
+          "T3-only remains production geometry after the bounded tessellation study finds up to 64x amplification without physical-height benefit");
+    Check(native.Contains("productionEyeballPipeline",StringComparison.Ordinal)&&native.Contains("VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST",StringComparison.Ordinal)&&
+          !native.Contains("VK_PRIMITIVE_TOPOLOGY_PATCH_LIST",StringComparison.Ordinal),"rejected study adds no CPU mesh path or production tessellation pipeline");
+
+    _=PlanetaryTerrainMaterialSynthesis.Classify(1f,200f,.2f,.3f,.6f,.7f);var allocatedBefore=GC.GetAllocatedBytesForCurrentThread();
+    for(var iteration=0;iteration<100_000;iteration++)_ = PlanetaryTerrainMaterialSynthesis.Blend(
+        PlanetaryTerrainMaterialSynthesis.Classify(1f,(iteration&4095)-100f,(iteration&255)/255f,.31f,.62f,.74f));
+    Check(GC.GetAllocatedBytesForCurrentThread()==allocatedBefore,"material classification/oracle evaluation is allocation-free");
+    Console.WriteLine($"Terrain material synthesis: library={library.Length}; maxBoundaryDelta={maximumBoundaryDelta:R}; biplanarWeightDelta={maximumWeightTransition:E3}; normalAngles={string.Join(',',altitudeNormalStatistics.Select(value=>$"{value.Altitude:R}m/max{value.Maximum:F3}/p95{value.P95:F3}"))}; visualDisplacement<=0.45m; adaptiveBiplanar=true; T3={PlanetaryTerrainTessellationStudy.T3TriangleCount}; tessellation=rejected/{PlanetaryTerrainTessellationStudy.MaximumAmplifiedTriangleCount}");
+
+    static PlanetaryTerrainMaterialKind Top(in PlanetaryTerrainMaterialWeights weights)
+    {
+        var result=PlanetaryTerrainMaterialKind.VegetatedSoil;var value=weights[result];
+        for(var index=1;index<7;index++){var kind=(PlanetaryTerrainMaterialKind)index;if(weights[kind]>value){result=kind;value=weights[kind];}}
+        return result;
     }
 }
 
@@ -880,8 +1308,12 @@ static void CameraFocusPositionContinuityTest()
         maximumOrientationError = Math.Max(maximumOrientationError, QuaternionAngle(referenceOrientation, camera.Orientation));
         Check(scene.SurfaceAnchorBlend is >= 0d and <= 1d && double.IsFinite(scene.SurfaceAnchorBlend) && focus.IsFinite &&
             inertialOffset.IsFinite && cameraRoot.IsFinite && camera.Orientation.IsFinite, $"{sample}: all continuity values are finite and bounded");
-        Check(previousOffset.LengthSquared == 0d || Double3.Dot(previousOffset, inertialOffset) > 0d,
-            $"{sample}: inertial camera offset never inverts");
+        var offsetDot=Double3.Dot(previousOffset,inertialOffset);
+        var cameraBodyDirection=(cameraRoot-scene.FocusedBody.Position.Value).Normalized();
+        var anchorAlignment=scene.CurrentFocusTarget.Kind==FocusTargetKind.SurfaceAnchor&&scene.CurrentFocusTarget.TryEvaluate(scene.FocusedBody,out var debugAnchor)
+            ?Double3.Dot(cameraBodyDirection,(debugAnchor.Value-scene.FocusedBody.Position.Value).Normalized()):double.NaN;
+        Check(previousOffset.LengthSquared == 0d || offsetDot > 0d,
+            $"{sample}: inertial camera offset never inverts (dot={offsetDot:R}; previous={previousOffset}; current={inertialOffset}; altitude={scene.SurfaceAltitudeMetres:R}; blend={scene.SurfaceAnchorBlend:R}; orbit={scene.OrbitDistance:R}; anchorAlignment={anchorAlignment:R})");
         previousFocus = focus;
         previousCamera = cameraRoot;
         previousOffset = inertialOffset;
@@ -1247,7 +1679,9 @@ static void ZoomMotionProfileContinuityTest()
         var expectedAltitude = SolarCameraZoomPolicy.ApplyAltitude(beforeAltitude, minimumAltitude, maximumAltitude, detents);
         scene.ApplyPresentationInput(camera, new NativeInputState { MouseWheelDetents = detents }, out _, out _);
         var afterAltitude = scene.SurfaceAltitudeMetres;
-        maximumDistanceDiscontinuity = Math.Max(maximumDistanceDiscontinuity, Math.Abs(afterAltitude - expectedAltitude));
+        var expectedPublishedAltitude=expectedAltitude==minimumAltitude
+            ?SurfaceFocusHandoffPolicy.TerrainClearanceCorrectionTargetMetres:expectedAltitude;
+        maximumDistanceDiscontinuity = Math.Max(maximumDistanceDiscontinuity, Math.Abs(afterAltitude - expectedPublishedAltitude));
         if (expectedAltitude > minimumAltitude && expectedAltitude < maximumAltitude)
         {
             var normalizedVelocity = Math.Log(afterAltitude / beforeAltitude) / logarithmicStep;
@@ -1260,7 +1694,7 @@ static void ZoomMotionProfileContinuityTest()
         }
         Check(afterAltitude > 0d && double.IsFinite(afterAltitude) && scene.OrbitDistance > 0d && double.IsFinite(scene.OrbitDistance) &&
             camera.Position.Value.IsFinite && camera.Orientation == beforeOrientation && Double3.Dot(beforeOffset, scene.CurrentInertialCameraOffset) > 0d,
-            $"{sample}: zoom is finite, positive, inertial, and does not invert");
+            $"{sample}: zoom is finite, positive, inertial, and does not invert (beforeAltitude={beforeAltitude:R}; afterAltitude={afterAltitude:R}; beforeOffset={beforeOffset}; afterOffset={scene.CurrentInertialCameraOffset}; blend={scene.SurfaceAnchorBlend:R}; demand={scene.BodyLocalCameraAltitudeDemandMetres:R})");
     }
 }
 
@@ -1981,14 +2415,14 @@ static void ProductionSurfaceBodyEligibilityAndTransitionOwnershipTest()
         Check(scene.Focus(camera,NativePresentationFocus.Earth),$"Earth focus iteration {iteration}");scene.Update(camera);
         var production=scene.FocusedPresentation(camera);var gpu=scene.GpuConstants(camera);
         Check(scene.ProductionSurfaceEligible&&scene.DetailedComputeRequested&&!scene.EyeballComputeRequested&&gpu.TerrainVersion==4&&production.Regime==NativePlanetaryRenderRegime.DetailedOnly&&production.DistantAlpha==0f&&production.DetailedAlpha==1f,$"Earth iteration {iteration} selects production mode 2 only");
-        Check(scene.DistantBodies[0].DistantAlpha==1f,"Earth publishes an opaque root-bootstrap fallback owner while native production roots prepare");
+        Check(scene.DistantBodies[0].DistantAlpha==0f,"Earth never publishes a generic root-bootstrap sphere after synchronous terrain-v4 startup");
     }
 
     var repositoryRoot=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..",".."));
     var native=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","NovaCoreNative.cpp"));
     var selector=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","shaders","planetary_select.comp"));
-    Check(native.Contains("surfaceTransitionEpoch",StringComparison.Ordinal)&&native.Contains("surfaceContextBodyId!=contextBody",StringComparison.Ordinal)&&native.Contains("productionFallbackOwner=productionSurface",StringComparison.Ordinal),"body/mode/dataset transitions invalidate stale selection and immediately establish fallback ownership");
-    Check(native.Contains("productionFallback=production&&a.productionFallbackOwner",StringComparison.Ordinal)&&native.Contains("a.productionFallbackOwner=telemetry.active==0",StringComparison.Ordinal),"opaque distant fallback retires only after production reports a nonzero visible owner");
+    Check(native.Contains("surfaceTransitionEpoch",StringComparison.Ordinal)&&native.Contains("surfaceContextBodyId!=contextBody",StringComparison.Ordinal)&&native.Contains("owner=%s",StringComparison.Ordinal),"body/mode/dataset transitions invalidate stale selection and identify the current production owner");
+    Check(!native.Contains("productionFallbackOwner",StringComparison.Ordinal)&&!native.Contains("productionFallback",StringComparison.Ordinal)&&native.Contains("distantPresentation=handoff&&!production",StringComparison.Ordinal),"production terrain-v4 is sole Earth surface ownership and previous-frame GPU telemetry cannot re-enable a generic sphere");
     Check(native.Contains("Seed them before focus selection",StringComparison.Ordinal)&&native.Contains("CompleteProductionUploads(a);QueueProductionRequests(a)",StringComparison.Ordinal)&&selector.Contains("bool production=terrain&&inputData.controls.z==4u",StringComparison.Ordinal),"only six pinned Earth roots preload globally; active child planning remains gated by the selected production body contract");
     Check(selector.Contains("presentation.identity[index-15u]",StringComparison.Ordinal)&&selector.Contains("cameraHighRadiusHigh.w",StringComparison.Ordinal)&&selector.Contains("cameraLowRadiusLow.w",StringComparison.Ordinal),"GPU demand identity includes selected body and exact transported radius configuration");
 }
@@ -2015,6 +2449,10 @@ static void FixedTangentFrameEyeballAnchoringTest()
             camera.Position=camera.Position with{Value=baselinePosition+scene.FocusedBody.BodyFixedToRoot.Rotate(displacement)};scene.Update(camera);Measure(scene.EyeballConstants(camera),"camera translation");
         }
         camera.Position=camera.Position with{Value=baselinePosition};scene.Update(camera);
+        var orientationOnlyCell=scene.ProductionPupilCell;var orientationOnlyDirection=AnchorDirection(scene.EyeballConstants(camera));
+        camera.Orientation=(DoubleQuaternion.FromAxisAngle(Double3.UnitY,.73d)*DoubleQuaternion.FromAxisAngle(Double3.UnitX,-.31d)).Normalized();scene.Update(camera);
+        Check(scene.ProductionPupilCell==orientationOnlyCell&&AnchorDirection(scene.EyeballConstants(camera))==orientationOnlyDirection,
+            $"orientation-only observation cannot move the body-fixed terrain pupil at {rate.Numerator}x");
         scene.ApplyPresentationInput(camera,new NativeInputState{LookActive=1,MouseDeltaX=90f,MouseDeltaY=-45f},out _,out _);Measure(scene.EyeballConstants(camera),"camera orbit");
         scene.ApplyPresentationInput(camera,new NativeInputState{MouseWheelDetents=1},out _,out _);Measure(scene.EyeballConstants(camera),"inward zoom");
         scene.ApplyPresentationInput(camera,new NativeInputState{MouseWheelDetents=-1},out _,out _);Measure(scene.EyeballConstants(camera),"outward zoom");
@@ -2035,8 +2473,11 @@ static void FixedTangentFrameEyeballAnchoringTest()
             var repeated=scene.EyeballConstants(camera);Check(BitwiseAnchor(repeated,cell.BodyFixedDirection)&&repeated.VertexCount==current.VertexCount&&repeated.IndexCount==current.IndexCount,$"{motion} repeated state is temporally stable at {rate.Numerator}x");
         }
     }
-    var shaderDirectory=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..","..","native","NovaCore.Native","shaders"));var productionSource=File.ReadAllText(Path.Combine(shaderDirectory,"planetary_production_eyeball.vert"));
-    Check(productionSource.Contains("dvec3 anchor=normalize(dvec3(eye.tangentAnchorAngle.xyz))",StringComparison.Ordinal)&&!productionSource.Contains("ViewPupil(",StringComparison.Ordinal),"production GPU Eyeball derives geography from the transported discrete body-fixed cell");
+    var repositoryRoot=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..",".."));var shaderDirectory=Path.Combine(repositoryRoot,"native","NovaCore.Native","shaders");var productionSource=File.ReadAllText(Path.Combine(shaderDirectory,"planetary_production_eyeball.vert"));
+    var sceneSource=File.ReadAllText(Path.Combine(repositoryRoot,"samples","NovaCore.Triangle","SolarSystemScene.cs"));
+    Check(productionSource.Contains("dvec3 anchor=normalize(dvec3(eye.tangentAnchorAngle.xyz))",StringComparison.Ordinal)&&!productionSource.Contains("ViewPupil(",StringComparison.Ordinal)&&
+          sceneSource.Contains("_productionPupilOrientation.Update(radial, tier)",StringComparison.Ordinal)&&!sceneSource.Contains("TryViewPupil(relative",StringComparison.Ordinal),
+        "production GPU Eyeball derives geography from the transported discrete sub-camera body-fixed cell rather than camera aim");
     Check(maximumBodyFixedDrift==0d&&maximumElevationMismatch==0d&&maximumRootMotion>0d,"each persistent production pupil cell remains geographic while camera motion may cross discrete cell and tier boundaries");
     Console.WriteLine($"Body-fixed Eyeball identities: withinCellDrift={maximumBodyFixedDrift:E3} m; elevationMismatch={maximumElevationMismatch:E3} m; rootMotion={maximumRootMotion:E3} m; pupilCellTransitions={pupilCellTransitions}; topologyChanges={topologyChanges}");
 
@@ -2219,7 +2660,7 @@ static void SolarSystemSceneTest()
 
     Check(sol.Focus(camera,NativePresentationFocus.Earth),"Earth focus for overlay hierarchy");var earthOrbitOpacity=sol.OrbitOpacityBytes.ToArray();Check(sol.VisibleOrbitCount==2&&earthOrbitOpacity[2]>0&&earthOrbitOpacity[3]>earthOrbitOpacity[2]&&earthOrbitOpacity.Where((_,index)=>index is not 2 and not 3).All(value=>value==0),"Earth-local view retains only focused and child hierarchy orbits");Check((sol.DistantBodies[0].Enabled&SolarSystemScene.MarkerVisibleBit)==0,"rendered focused Earth suppresses redundant marker");Check(sol.Focus(camera,NativePresentationFocus.Jupiter),"Jupiter focus for overlay hierarchy");Check(sol.VisibleOrbitCount==1&&sol.OrbitOpacityBytes[5]>0,"Jupiter-local view retains only the focused hierarchy orbit");var beforeMapReset=sol.Presentation.Bodies.ToArray();var timeBeforeMapReset=sol.CurrentTime;sol.ResetPresentationCamera(camera);sol.Update(camera);Check(sol.CameraPresentationMode==SolarCameraPresentationMode.SolarMap&&sol.FocusIndex==0&&sol.VisibleOrbitCount==SolarSystemScene.OrbitPathCount&&sol.CurrentTime==timeBeforeMapReset&&beforeMapReset.SequenceEqual(sol.Presentation.Bodies),"Solar Map reset restores overview without changing time or celestial evaluation");
 
-    Check(sol.Focus(camera,3),"Earth focus for promotion");var earth=sol.FocusedBody;camera.Position=camera.Position with{Value=earth.Position.Value+Double3.UnitZ*earth.RadiusMetres*15d};sol.Update(camera);Check(sol.FocusedBlend.Regime==PlanetaryRenderRegime.Transition&&sol.FocusedBlend.DrawDetailed&&sol.FocusedBlend.DrawDistant,"focused transition uses both representations");Check(sol.DistantBodies[0].DetailedAlpha>0&&sol.DistantBodies[0].DistantAlpha>0&&sol.DistantBodies.Skip(1).All(body=>body.Regime==NativePlanetaryRenderRegime.DistantOnly&&body.DetailedAlpha==0&&body.DistantAlpha==1),"only focused body has detailed eligibility");
+    Check(sol.Focus(camera,3),"Earth focus for promotion");var earth=sol.FocusedBody;camera.Position=camera.Position with{Value=earth.Position.Value+Double3.UnitZ*earth.RadiusMetres*15d};sol.Update(camera);Check(sol.FocusedBlend.Regime==PlanetaryRenderRegime.Transition&&sol.FocusedBlend.DrawDetailed&&sol.FocusedBlend.DrawDistant,"focused transition retains the representation-selector state");Check(sol.DistantBodies[0].DetailedAlpha>0&&sol.DistantBodies[0].DistantAlpha==0&&sol.DistantBodies.Skip(1).All(body=>body.Regime==NativePlanetaryRenderRegime.DistantOnly&&body.DetailedAlpha==0&&body.DistantAlpha==1),"production Earth transport suppresses the generic distant owner while other bodies remain distant-only");
     Check(sol.Focus(camera,9),"move detail eligibility to Neptune");Check(sol.FocusedBody.BodyId==SolarSystemBodyIds.Neptune.Value&&sol.DistantBodies.Skip(1).All(body=>body.Regime==NativePlanetaryRenderRegime.DistantOnly&&body.DetailedAlpha==0),"old focus returns to distant batch");Check(sol.Focus(camera,3)&&sol.FocusedBody.Position==earth.Position,"Earth Neptune Earth focus identity");
 
     var moon=bodies.Single(body=>body.BodyId==SolarSystemBodyIds.Moon.Value);var neptune=bodies.Single(body=>body.BodyId==SolarSystemBodyIds.Neptune.Value);var sun=bodies.Single(body=>body.BodyId==SolarSystemBodyIds.Sun.Value);double Distance(PlanetRenderProxy left,PlanetRenderProxy right)=>Math.Sqrt((left.Position.Value-right.Position.Value).LengthSquared);var earthMoon=Distance(earth,moon);var evaluatedEarthMoon=Math.Sqrt((EvaluatedCenter(earth.BodyId)-EvaluatedCenter(moon.BodyId)).LengthSquared);var tolerance=Math.Max(1e-6,evaluatedEarthMoon*1e-15);Check(Math.Abs(earthMoon-evaluatedEarthMoon)<=tolerance,"Earth-Moon snapshot/evaluation separation agreement");var sunEarth=Distance(sun,earth);var earthNeptune=Distance(earth,neptune);Check(sunEarth==Math.Sqrt((EvaluatedCenter(sun.BodyId)-EvaluatedCenter(earth.BodyId)).LengthSquared)&&earthNeptune==Math.Sqrt((EvaluatedCenter(earth.BodyId)-EvaluatedCenter(neptune.BodyId)).LengthSquared),"Sun-Earth and Earth-Neptune evaluated relationships");

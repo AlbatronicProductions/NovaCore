@@ -229,6 +229,114 @@ public static class PlanetaryLocalTerrainResidualAnalysis
     }
 }
 
+/// <summary>
+/// CPU mirror of the resident NCCUBE2 physical elevation-residual channel.
+/// Camera clearance queries use the same relaxed-cube sector identity and the
+/// same decoded BC4 texels as the GPU, so a local refinement can never rise
+/// through an otherwise terrain-safe camera.
+/// </summary>
+public static class EarthLocalTerrainElevationDataset
+{
+    private sealed class Snapshot
+    {
+        internal Snapshot(PlanetaryLocalTerrainPackHeader header, Dictionary<PlanetaryLocalTerrainSectorId, byte[]> residuals)
+        { Header = header; Residuals = residuals; }
+        internal PlanetaryLocalTerrainPackHeader Header { get; }
+        internal Dictionary<PlanetaryLocalTerrainSectorId, byte[]> Residuals { get; }
+    }
+
+    private static readonly object Gate = new();
+    private static Snapshot? _snapshot;
+    public static bool IsLoaded => Volatile.Read(ref _snapshot) is not null;
+
+    public static bool TryLoad(string path, out string error)
+    {
+        if (string.IsNullOrWhiteSpace(path)) { error = "Local terrain path is empty."; return false; }
+        if (IsLoaded) { error = string.Empty; return true; }
+        try
+        {
+            var package = File.ReadAllBytes(path);
+            if (!PlanetaryLocalTerrainPackContract.TryReadHeader(package, out var header))
+            { error = "Local terrain elevation oracle header is invalid."; return false; }
+            var residuals = new Dictionary<PlanetaryLocalTerrainSectorId, byte[]>(checked((int)header.RecordCount));
+            var offset = PlanetaryLocalTerrainPackContract.HeaderBytes;
+            for (var index = 0; index < header.RecordCount; index++)
+            {
+                if (offset + PlanetaryLocalTerrainPackContract.RecordHeaderBytes > package.Length ||
+                    !PlanetaryLocalTerrainPackContract.TryReadRecordHeader(package.AsSpan(offset, PlanetaryLocalTerrainPackContract.RecordHeaderBytes), out var record))
+                { error = $"Local terrain elevation record {index} is invalid."; return false; }
+                var payload = checked((int)record.PayloadOffset); var elevationOffset = checked(payload + (int)record.StoredAlbedoBytes);
+                var elevationEnd = checked(elevationOffset + (int)record.StoredElevationBytes);
+                var recordEnd = checked(elevationEnd + (int)record.StoredNormalBytes);
+                if (payload != offset + PlanetaryLocalTerrainPackContract.RecordHeaderBytes || recordEnd > package.Length ||
+                    record.GpuElevationBytes != PlanetaryLocalTerrainPackContract.GpuBytes(PlanetaryLocalTerrainGpuFormat.Bc4Unorm, PlanetaryLocalTerrainPackContract.StoredExtent))
+                { error = $"Local terrain elevation record {index} payload is invalid."; return false; }
+                var blocks = new byte[checked((int)record.GpuElevationBytes)]; var stored = package.AsSpan(elevationOffset, checked((int)record.StoredElevationBytes));
+                var decoded = record.ElevationCodec == PlanetaryLocalTerrainStorageCodec.RawGpuBlocks
+                    ? TryCopy(stored, blocks)
+                    : PlanetaryLocalTerrainTranscode.TryDecodePackBits(stored, blocks, out var written) && written == blocks.Length;
+                if (!decoded || !residuals.TryAdd(record.Sector, DecodeBc4(blocks)))
+                { error = $"Local terrain elevation record {index} could not be decoded."; return false; }
+                offset = recordEnd;
+            }
+            if (offset != package.Length) { error = "Local terrain elevation package has trailing bytes."; return false; }
+            lock (Gate) _snapshot ??= new Snapshot(header, residuals);
+            error = string.Empty; return true;
+        }
+        catch (Exception exception) when (exception is IOException or UnauthorizedAccessException or OverflowException or OutOfMemoryException)
+        { error = $"Local terrain elevation oracle: {exception.Message}"; return false; }
+    }
+
+    public static double SampleResidual(in Double3 bodyDirection)
+    {
+        if (!bodyDirection.IsFinite || bodyDirection.LengthSquared <= 0d) throw new ArgumentOutOfRangeException(nameof(bodyDirection));
+        var snapshot = Volatile.Read(ref _snapshot);
+        if (snapshot is null || !RelaxedCubeSphereProjection.TryAddress(bodyDirection, out var face, out var faceU, out var faceV)) return 0d;
+        for (var level = (int)snapshot.Header.MaximumSectorLevel; level >= snapshot.Header.MinimumSectorLevel; level--)
+        {
+            var cells = 1 << level; var x = Math.Min((int)Math.Floor(faceU * cells), cells - 1); var y = Math.Min((int)Math.Floor(faceV * cells), cells - 1);
+            var id = new PlanetaryLocalTerrainSectorId(snapshot.Header.BodyId, snapshot.Header.TerrainVersion, face, level, x, y, 1, 1);
+            if (!snapshot.Residuals.TryGetValue(id, out var texels)) continue;
+            var localU = Math.Clamp(faceU * cells - x, 0d, 1d); var localV = Math.Clamp(faceV * cells - y, 0d, 1d);
+            var sampleX = 3.5d + localU * PlanetaryLocalTerrainPackContract.InteriorTexels;
+            var sampleY = 3.5d + localV * PlanetaryLocalTerrainPackContract.InteriorTexels;
+            var x0 = Math.Clamp((int)Math.Floor(sampleX), 0, PlanetaryLocalTerrainPackContract.StoredExtent - 1);
+            var y0 = Math.Clamp((int)Math.Floor(sampleY), 0, PlanetaryLocalTerrainPackContract.StoredExtent - 1);
+            var x1 = Math.Min(x0 + 1, PlanetaryLocalTerrainPackContract.StoredExtent - 1); var y1 = Math.Min(y0 + 1, PlanetaryLocalTerrainPackContract.StoredExtent - 1);
+            var tx = sampleX - Math.Floor(sampleX); var ty = sampleY - Math.Floor(sampleY); var extent = PlanetaryLocalTerrainPackContract.StoredExtent;
+            var a = texels[y0 * extent + x0]; var b = texels[y0 * extent + x1]; var c = texels[y1 * extent + x0]; var d = texels[y1 * extent + x1];
+            var encoded = Lerp(Lerp(a, b, tx), Lerp(c, d, tx), ty) / 255d;
+            return snapshot.Header.ResidualMinimumMetres + encoded * (snapshot.Header.ResidualMaximumMetres - snapshot.Header.ResidualMinimumMetres);
+        }
+        return 0d;
+    }
+
+    private static bool TryCopy(ReadOnlySpan<byte> source, Span<byte> destination)
+    { if (source.Length != destination.Length) return false; source.CopyTo(destination); return true; }
+
+    private static byte[] DecodeBc4(ReadOnlySpan<byte> blocks)
+    {
+        var extent = PlanetaryLocalTerrainPackContract.StoredExtent; var result = new byte[extent * extent]; var blocksPerRow = extent / 4;
+        Span<byte> palette = stackalloc byte[8];
+        for (var block = 0; block < blocks.Length / 8; block++)
+        {
+            var source = blocks.Slice(block * 8, 8); palette[0] = source[0]; palette[1] = source[1];
+            if (palette[0] > palette[1]) for (var index = 1; index < 7; index++) palette[index + 1] = (byte)(((7 - index) * palette[0] + index * palette[1] + 3) / 7);
+            else
+            {
+                for (var index = 1; index < 5; index++) palette[index + 1] = (byte)(((5 - index) * palette[0] + index * palette[1] + 2) / 5);
+                palette[6] = 0; palette[7] = 255;
+            }
+            ulong indices = 0; for (var index = 0; index < 6; index++) indices |= (ulong)source[index + 2] << (8 * index);
+            var blockX = block % blocksPerRow; var blockY = block / blocksPerRow;
+            for (var pixel = 0; pixel < 16; pixel++) result[(blockY * 4 + pixel / 4) * extent + blockX * 4 + pixel % 4] = palette[(int)((indices >> (3 * pixel)) & 7)];
+        }
+        return result;
+    }
+
+    private static double Lerp(double first, double second, double amount) => first + (second - first) * amount;
+}
+
 public readonly record struct PlanetaryLocalTerrainDemandInput(
     ulong BodyId,
     uint TerrainVersion,

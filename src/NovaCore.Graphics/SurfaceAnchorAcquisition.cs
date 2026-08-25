@@ -12,10 +12,45 @@ public readonly record struct SurfaceAnchorAcquisitionResult(
         double.IsFinite(RayDistanceMetres) && RayDistanceMetres >= 0d && SurfaceRefinementCount >= 0;
 }
 
+public readonly record struct CameraExteriorConstraintResult(
+    Double3 RootPosition,
+    Double3 BodyLocalPosition,
+    double SurfaceAltitudeMetres,
+    double CorrectionMetres,
+    int Iterations,
+    int TerrainQueries)
+{
+    public bool IsValid => RootPosition.IsFinite && BodyLocalPosition.IsFinite &&
+        double.IsFinite(SurfaceAltitudeMetres) && double.IsFinite(CorrectionMetres) &&
+        CorrectionMetres >= 0d && Iterations >= 0 && TerrainQueries > 0;
+}
+
+/// <summary>
+/// Exact body-local camera authority compared with the split-FP32 value
+/// consumed by the production GPU shaders.  The physical surface decision is
+/// made before encoding; this record proves that presentation transport does
+/// not substitute a different camera.
+/// </summary>
+public readonly record struct CameraExteriorTransportIdentity(
+    Double3 ValidatedBodyLocalPosition,
+    Double3 GpuBodyLocalPosition,
+    double ValidatedSurfaceRadiusMetres,
+    double GpuSurfaceRadiusMetres,
+    double ValidatedClearanceMetres,
+    double GpuClearanceMetres)
+{
+    public double PositionErrorMetres => Math.Sqrt((GpuBodyLocalPosition - ValidatedBodyLocalPosition).LengthSquared);
+    public bool IsFinite => ValidatedBodyLocalPosition.IsFinite && GpuBodyLocalPosition.IsFinite &&
+        double.IsFinite(ValidatedSurfaceRadiusMetres) && double.IsFinite(GpuSurfaceRadiusMetres) &&
+        double.IsFinite(ValidatedClearanceMetres) && double.IsFinite(GpuClearanceMetres) &&
+        double.IsFinite(PositionErrorMetres);
+}
+
 /// <summary>Deterministic body-fixed ray/surface acquisition. It performs no streaming or filesystem work.</summary>
 public static class SurfaceAnchorAcquisition
 {
     public const int TerrainRefinementCount = 4;
+    public const int CameraExteriorMaximumIterations = 3;
 
     public static bool TryAcquire(
         in PlanetRenderProxy body,
@@ -94,6 +129,118 @@ public static class SurfaceAnchorAcquisition
         return high;
     }
 
+    /// <summary>
+    /// Applies the final camera-origin terrain invariant in body-fixed FP64.
+    /// The proposed origin, rather than its visual-aim line or pivot, owns the
+    /// correction direction. This prevents an inward-facing orbit line from
+    /// finding the opposite-side surface exit while retaining the caller's
+    /// independent aim/orientation authority.
+    /// </summary>
+    public static bool TryConstrainCameraOrigin(
+        in PlanetRenderProxy body,
+        in Double3 proposedCameraRoot,
+        in PlanetaryTerrainDefinition terrain,
+        double minimumClearanceMetres,
+        double correctionTargetMetres,
+        out CameraExteriorConstraintResult result)
+    {
+        result = default;
+        if (!body.IsValid || !proposedCameraRoot.IsFinite ||
+            !double.IsFinite(minimumClearanceMetres) || minimumClearanceMetres < 0d ||
+            !double.IsFinite(correctionTargetMetres) || correctionTargetMetres < minimumClearanceMetres)
+            return false;
+
+        var rootToBody = body.BodyFixedToRoot.Conjugate().Normalized();
+        var bodyToRoot = body.BodyFixedToRoot.Normalized();
+        var bodyLocal = rootToBody.Rotate(proposedCameraRoot - body.Position.Value);
+        var correction = 0d;
+        var iterations = 0;
+        var terrainQueries = 0;
+        var altitude = double.NaN;
+
+        for (var iteration = 0; iteration <= CameraExteriorMaximumIterations; iteration++)
+        {
+            var radius = Math.Sqrt(bodyLocal.LengthSquared);
+            if (!(radius > 0d) || !double.IsFinite(radius)) return false;
+            var direction = bodyLocal / radius;
+            var terrainHeight = terrain.IsValid ? terrain.SampleHeight(direction, 24) : 0d;
+            terrainQueries++;
+            if (!double.IsFinite(terrainHeight)) return false;
+            altitude = radius - (body.RadiusMetres + terrainHeight);
+            if (altitude >= minimumClearanceMetres) break;
+            if (iteration == CameraExteriorMaximumIterations) return false;
+
+            var requiredRadius = body.RadiusMetres + terrainHeight + correctionTargetMetres;
+            correction += Math.Max(0d, requiredRadius - radius);
+            bodyLocal = direction * requiredRadius;
+            iterations++;
+
+            // Recreate the exact root-space transport consumed by presentation,
+            // then recover body-local state before the next bounded verification.
+            // The millimetre correction target absorbs the measured AU-scale
+            // recomposition loss without making root space surface authority.
+            var transportedRoot = body.Position.Value + bodyToRoot.Rotate(bodyLocal);
+            bodyLocal = rootToBody.Rotate(transportedRoot - body.Position.Value);
+        }
+
+        var finalRoot = body.Position.Value + bodyToRoot.Rotate(bodyLocal);
+        result = new(finalRoot, bodyLocal, altitude, correction, iterations, terrainQueries);
+        return result.IsValid && altitude >= minimumClearanceMetres;
+    }
+
+    public static bool TryMeasureCameraTransport(
+        in PlanetRenderProxy body,
+        in Double3 cameraRoot,
+        in PlanetaryTerrainDefinition terrain,
+        out CameraExteriorTransportIdentity identity)
+    {
+        identity = default;
+        if (!body.IsValid || !cameraRoot.IsFinite) return false;
+        var bodyLocal = body.BodyFixedToRoot.Conjugate().Normalized().Rotate(cameraRoot - body.Position.Value);
+        var radius = Math.Sqrt(bodyLocal.LengthSquared);
+        if (!(radius > 0d) || !double.IsFinite(radius)) return false;
+        var direction = bodyLocal / radius;
+        var surfaceRadius = body.RadiusMetres + (terrain.IsValid ? terrain.SampleHeight(direction, 24) : 0d);
+        var encoded = EncodedPosition.Encode(bodyLocal);
+        var gpuBody = new Double3(
+            (double)encoded.HighX + encoded.LowX,
+            (double)encoded.HighY + encoded.LowY,
+            (double)encoded.HighZ + encoded.LowZ);
+        var gpuRadius = Math.Sqrt(gpuBody.LengthSquared);
+        if (!(gpuRadius > 0d) || !double.IsFinite(gpuRadius)) return false;
+        var gpuDirection = gpuBody / gpuRadius;
+        var gpuSurfaceRadius = body.RadiusMetres + (terrain.IsValid ? terrain.SampleHeight(gpuDirection, 24) : 0d);
+        identity = new(bodyLocal, gpuBody, surfaceRadius, gpuSurfaceRadius,
+            radius - surfaceRadius, gpuRadius - gpuSurfaceRadius);
+        return identity.IsFinite;
+    }
+
+    /// <summary>Places a close-surface camera at an explicit physical altitude in its proposed body-fixed direction.</summary>
+    public static bool TryPlaceCameraOriginAtSurfaceAltitude(
+        in PlanetRenderProxy body,
+        in Double3 proposedCameraRoot,
+        in PlanetaryTerrainDefinition terrain,
+        double surfaceAltitudeMetres,
+        out Double3 cameraRoot,
+        out int terrainQueries)
+    {
+        cameraRoot = default;
+        terrainQueries = 0;
+        if (!body.IsValid || !proposedCameraRoot.IsFinite || !double.IsFinite(surfaceAltitudeMetres) || surfaceAltitudeMetres < 0d)
+            return false;
+        var rootToBody = body.BodyFixedToRoot.Conjugate().Normalized();
+        var bodyLocal = rootToBody.Rotate(proposedCameraRoot - body.Position.Value);
+        var radius = Math.Sqrt(bodyLocal.LengthSquared);
+        if (!(radius > 0d) || !double.IsFinite(radius)) return false;
+        var direction = bodyLocal / radius;
+        var terrainHeight = terrain.IsValid ? terrain.SampleHeight(direction, 24) : 0d;
+        terrainQueries = 1;
+        if (!double.IsFinite(terrainHeight)) return false;
+        bodyLocal = direction * (body.RadiusMetres + terrainHeight + surfaceAltitudeMetres);
+        cameraRoot = body.Position.Value + body.BodyFixedToRoot.Normalized().Rotate(bodyLocal);
+        return cameraRoot.IsFinite;
+    }
+
     private static bool TryRaySphere(in Double3 origin, in Double3 direction, double radius, out double distance)
     {
         distance = double.NaN;
@@ -115,9 +262,19 @@ public static class SurfaceFocusHandoffPolicy
     public const double AcquisitionAltitudeMetres = 2_000_000d;
     public const double FullSurfaceAltitudeMetres = 1_000_000d;
     public const double ReleaseAltitudeMetres = 3_000_000d;
-    // Ten metres covers the current elevation sampling footprint and the 5 cm
-    // near plane without allowing the camera to graze through interpolated terrain.
+    // Ten metres is the player-facing physical floor. Camera positions are
+    // reconstructed in root space at astronomical coordinate magnitudes, so a
+    // separate millimetre guard prevents a correction placed exactly on the
+    // floor from losing a few root-space FP64 ulps during recomposition.
     public const double MinimumTerrainClearanceMetres = 10d;
+    public const double TerrainClearanceNumericalGuardBandMetres = .001d;
+    public const double TerrainClearanceInvariantToleranceMetres = .0001d;
+    public const double TerrainClearanceCorrectionTargetMetres =
+        MinimumTerrainClearanceMetres + TerrainClearanceNumericalGuardBandMetres;
+
+    public static bool SatisfiesMinimumTerrainClearance(double altitudeMetres) =>
+        double.IsFinite(altitudeMetres) &&
+        altitudeMetres >= MinimumTerrainClearanceMetres - TerrainClearanceInvariantToleranceMetres;
 
     public static bool ShouldAcquire(double altitudeMetres) =>
         double.IsFinite(altitudeMetres) && altitudeMetres <= AcquisitionAltitudeMetres;
