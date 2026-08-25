@@ -1,8 +1,9 @@
 using NovaCore.Core;
 using NovaCore.Core.ReferenceFrames;
+using NovaCore.Core.Surface;
 using System.Diagnostics;
 
-var tests=new (string,Action)[]{("transform algebra",TransformAlgebra),("hierarchy and conversion",Hierarchy),("reference-frame graph",Graph),("reference-frame paths",PathQueries),("transform resolution",TransformResolution),("static universe fixture",StaticUniverseFixture),("ORB",Orb),("CCI/CCF",CciCcf),("rotating velocity",Velocity),("validation",Validation)};
+var tests=new (string,Action)[]{("transform algebra",TransformAlgebra),("hierarchy and conversion",Hierarchy),("reference-frame graph",Graph),("reference-frame paths",PathQueries),("transform resolution",TransformResolution),("static universe fixture",StaticUniverseFixture),("ORB",Orb),("CCI/CCF",CciCcf),("rotating velocity",Velocity),("surface anchor authority",SurfaceAnchorAuthority),("validation",Validation)};
 foreach(var (name,test) in tests){test();Console.WriteLine($"PASS {name}");}
 Benchmark();
 
@@ -15,6 +16,73 @@ static void StaticUniverseFixture(){var star=new ReferenceFrameId(1);var planet=
 static void Orb(){var q=new OrbitalFrameGeometry(0,0,0).ToEclRotation();Near(q.Rotate(Double3.UnitX),Double3.UnitX);Near(q.Rotate(Double3.UnitZ),Double3.UnitZ);var z=new OrbitalFrameGeometry(Math.PI/2,0,0).ToEclRotation().Rotate(Double3.UnitZ);Near(z,new Double3(0,-1,0));}
 static void CciCcf(){var cci=CelestialFrameFactory.Cci(Double3.Zero,Double3.Zero,Double3.UnitZ,Double3.UnitX);Near(cci.LocalToParent.Rotation.Rotate(Double3.UnitZ),Double3.UnitZ);var ccf=CelestialFrameFactory.Ccf(Math.PI/2,1);Near(ccf.LocalToParent.Rotation.Rotate(Double3.UnitX),Double3.UnitY);try{CelestialFrameFactory.Cci(Double3.Zero,Double3.Zero,Double3.UnitZ,Double3.UnitZ);throw new Exception("degeneracy accepted");}catch(ArgumentException){}}
 static void Velocity(){var root=new ReferenceFrameId(1);var rotating=new ReferenceFrameId(2);var s=new ReferenceFrameSnapshot([(new ReferenceFrameDefinition(root,null,ReferenceFrameKind.Ecl,"ECL"),CelestialFrameFactory.RootEcl()),(new ReferenceFrameDefinition(rotating,root,ReferenceFrameKind.Ccf,"CCF"),CelestialFrameFactory.Ccf(0,2))]);var r=new ReferenceFrameResolver(s);Check(r.TryConvertVelocity(new FramePosition(rotating,new Double3(3,0,0)),new FrameVelocity(rotating,Double3.Zero),root,out var v),"velocity");Near(v.Value,new Double3(0,6,0));}
+static void SurfaceAnchorAuthority()
+{
+    const ulong bodyId=399;const double radius=6_371_008.8d;
+    var version=new TerrainAuthorityVersion(77,4);var terrain=new SyntheticTerrain(bodyId,version);
+    var root=new ReferenceFrameId(100);var ccf=new ReferenceFrameId(101);
+    var rotation=DoubleQuaternion.FromAxisAngle(new Double3(.2,.9,-.3).Normalized(),1.23456789d);
+    var center=new Double3(149_597_870_700d,-23_456_789.25d,71_234_567.5d);
+    var centerVelocity=new Double3(-12_345.25d,29_784.125d,9.5d);var omega=new Double3(1e-8d,7.292115e-5d,-2e-8d);
+    var snapshot=new ReferenceFrameSnapshot([
+        (new ReferenceFrameDefinition(root,null,ReferenceFrameKind.Ecl,"ECL"),CelestialFrameFactory.RootEcl()),
+        (new ReferenceFrameDefinition(ccf,root,ReferenceFrameKind.Ccf,"surface-CCF"),new EvaluatedReferenceFrame(new FrameTransform(center,rotation),centerVelocity,omega,false))]);
+    var frames=new ReferenceFrameResolver(snapshot);var body=new SurfaceBodyReference(bodyId,radius,ccf);
+    var directions=new[]{Double3.UnitX,new Double3(.37,.51,.776).Normalized(),new Double3(-.7,.713,.03).Normalized(),new Double3(1e-10,1,2e-10).Normalized(),new Double3(-1e-10,-1,3e-10).Normalized(),new Double3(1,1,1).Normalized(),new Double3(-1,1,-1).Normalized()};
+    var offsets=new[]{0d,15.25d,-125d,1_000_000d};
+    double maxAngular=0,maxBody=0,maxRoot=0,maxOffset=0,maxVelocity=0,maxStationary=0,maxOrthogonal=0,maxUnit=0;ulong hash=14695981039346656037UL;
+    foreach(var direction in directions)foreach(var offset in offsets)
+    {
+        Check(SurfaceAnchor.TryCreate(bodyId,version,direction,offset,out var anchor)==SurfaceAnchorCreationStatus.Success,"surface anchor create");
+        Check(anchor.IsValid,"surface anchor validity");
+        var copied=anchor;Check(copied==anchor&&copied.GetHashCode()==anchor.GetHashCode(),"surface anchor exact copied equality");
+        Check(SurfaceEnuFrame.TryCreate(anchor,out var enu)&&enu.IsValid,"surface ENU");
+        maxOrthogonal=Math.Max(maxOrthogonal,Math.Max(Math.Abs(Double3.Dot(enu.East,enu.North)),Math.Max(Math.Abs(Double3.Dot(enu.East,enu.Up)),Math.Abs(Double3.Dot(enu.North,enu.Up)))));
+        maxUnit=Math.Max(maxUnit,Math.Max(Math.Abs(enu.East.LengthSquared-1d),Math.Max(Math.Abs(enu.North.LengthSquared-1d),Math.Abs(enu.Up.LengthSquared-1d))));
+        Check(SurfaceAnchorEvaluator.TryEvaluateBodyFixed(anchor,body,terrain,out var bodyFixed,out var height)==SurfaceAnchorEvaluationStatus.Success,"anchor body-fixed");
+        Check(SurfaceAnchorEvaluator.TryEvaluateRootState(anchor,body,terrain,frames,Double3.Zero,out var rootPosition,out var rootVelocity,out var rootHeight)==SurfaceAnchorEvaluationStatus.Success&&height==rootHeight,"anchor root state");
+        Check(SurfaceAnchorEvaluator.TryCreateFromRootState(bodyId,version,rootPosition,rootVelocity,body,terrain,frames,out var roundTrip,out var relativeVelocity,out var inverseHeight)==SurfaceAnchorEvaluationStatus.Success,"anchor root inverse");
+        Check(SurfaceAnchorEvaluator.TryEvaluateBodyFixed(roundTrip,body,terrain,out var inverseBodyFixed,out _)==SurfaceAnchorEvaluationStatus.Success,"inverse body-fixed");
+        Check(SurfaceAnchorEvaluator.TryEvaluateRoot(roundTrip,body,terrain,frames,out var reconstructedRoot,out _)==SurfaceAnchorEvaluationStatus.Success,"inverse root");
+        var dot=Math.Clamp(Double3.Dot(anchor.NormalizedBodyFixedDirection,roundTrip.NormalizedBodyFixedDirection),-1d,1d);maxAngular=Math.Max(maxAngular,Math.Acos(dot));
+        maxBody=Math.Max(maxBody,Math.Sqrt((bodyFixed-inverseBodyFixed).LengthSquared));maxRoot=Math.Max(maxRoot,Math.Sqrt((rootPosition.Value-reconstructedRoot.Value).LengthSquared));
+        maxOffset=Math.Max(maxOffset,Math.Abs(anchor.TerrainRelativeOffsetMetres-roundTrip.TerrainRelativeOffsetMetres));maxStationary=Math.Max(maxStationary,Math.Sqrt(relativeVelocity.LengthSquared));
+        var localVelocity=new Double3(120.25d,-4.5d,2d);
+        Check(SurfaceAnchorEvaluator.TryEvaluateRootState(anchor,body,terrain,frames,localVelocity,out var movingRoot,out var movingVelocity,out _)==SurfaceAnchorEvaluationStatus.Success,"moving surface root state");
+        Check(SurfaceAnchorEvaluator.TryCreateFromRootState(bodyId,version,movingRoot,movingVelocity,body,terrain,frames,out _,out var inverseVelocity,out _)==SurfaceAnchorEvaluationStatus.Success,"moving surface inverse");
+        maxVelocity=Math.Max(maxVelocity,Math.Sqrt((localVelocity-inverseVelocity).LengthSquared));
+        var expectedVelocity=centerVelocity+Double3.Cross(omega,rotation.Rotate(bodyFixed));Check(Math.Sqrt((expectedVelocity-rootVelocity.Value).LengthSquared)<1e-9d,"stationary root velocity includes translation and omega cross r");
+        Check(roundTrip.BodyId==anchor.BodyId&&roundTrip.TerrainAuthorityVersion==anchor.TerrainAuthorityVersion,"round-trip authority identity");hash=MixFrame(hash,anchor.DeterministicHash);
+    }
+    Check(SurfaceAnchor.TryCreate(bodyId,version,new Double3(2,0,0),0,out _)==SurfaceAnchorCreationStatus.NonUnitDirection,"non-unit direction rejected");
+    Check(SurfaceAnchor.TryCreate(0,version,Double3.UnitX,0,out _)==SurfaceAnchorCreationStatus.InvalidBodyId,"unknown body identity rejected at creation");
+    Check(SurfaceAnchor.TryCreate(bodyId,default,Double3.UnitX,0,out _)==SurfaceAnchorCreationStatus.InvalidTerrainAuthorityVersion,"invalid terrain version rejected at creation");
+    Check(SurfaceAnchor.TryCreate(bodyId,version,Double3.Zero,0,out _)==SurfaceAnchorCreationStatus.DegenerateDirection,"zero direction rejected");
+    Check(SurfaceAnchor.TryCreate(bodyId,version,new(double.NaN,0,0),0,out _)==SurfaceAnchorCreationStatus.NonFiniteDirection,"NaN direction rejected");
+    Check(SurfaceAnchor.TryCreate(bodyId,version,Double3.UnitX,double.PositiveInfinity,out _)==SurfaceAnchorCreationStatus.NonFiniteTerrainRelativeOffset,"infinite offset rejected");
+    Check(SurfaceAnchor.TryCreate(bodyId,version,Double3.UnitX,0,out var validAnchor)==SurfaceAnchorCreationStatus.Success,"valid mismatch fixture");
+    Check(SurfaceAnchor.TryCreate(bodyId,version,Double3.UnitX,1,out var changedAnchor)==SurfaceAnchorCreationStatus.Success&&changedAnchor!=validAnchor&&changedAnchor.DeterministicHash!=validAnchor.DeterministicHash,"exact identity distinguishes offset bits");
+    Check(SurfaceAnchor.TryCreate(bodyId,version,new Double3(1,-0d,0d),0,out var signedZeroAnchor)==SurfaceAnchorCreationStatus.Success&&signedZeroAnchor!=validAnchor&&signedZeroAnchor.DeterministicHash!=validAnchor.DeterministicHash,"exact identity and deterministic hash agree on signed FP64 direction bits");
+    Check(SurfaceAnchorEvaluator.TryEvaluateBodyFixed(validAnchor,body,new SyntheticTerrain(bodyId,new(77,5)),out _,out _)==SurfaceAnchorEvaluationStatus.TerrainVersionMismatch,"terrain version mismatch explicit");
+    Check(SurfaceAnchorEvaluator.TryEvaluateBodyFixed(validAnchor,body,new SyntheticTerrain(499,version),out _,out _)==SurfaceAnchorEvaluationStatus.UnsupportedTerrainAuthority,"unsupported terrain authority explicit");
+    Check(SurfaceAnchorEvaluator.TryEvaluateBodyFixed(validAnchor,new SurfaceBodyReference(499,radius,ccf),terrain,out _,out _)==SurfaceAnchorEvaluationStatus.BodyMismatch,"body mismatch explicit");
+    Check(SurfaceAnchorEvaluator.TryCreateFromRoot(bodyId,version,new UniversePosition(new(double.NaN,0,0),root),body,terrain,frames,out _,out _,out _)==SurfaceAnchorEvaluationStatus.NonFiniteInput,"non-finite root input rejected");
+    Check(SurfaceAnchorEvaluator.TryCreateFromRoot(bodyId,version,new UniversePosition(center,new ReferenceFrameId(900)),body,terrain,frames,out _,out _,out _)==SurfaceAnchorEvaluationStatus.InvalidRootFrame,"wrong root frame rejected");
+    Check(SurfaceAnchorEvaluator.TryEvaluateRoot(validAnchor,new SurfaceBodyReference(bodyId,radius,new ReferenceFrameId(901)),terrain,frames,out _,out _)==SurfaceAnchorEvaluationStatus.MissingBodyTransform,"missing body transform explicit");
+    Check(SurfaceAnchorEvaluator.TryCreateFromRoot(bodyId,version,new UniversePosition(center,root),body,terrain,frames,out _,out _,out _)==SurfaceAnchorEvaluationStatus.DegenerateBodyFixedPosition,"body-center inversion rejected");
+    var anchorBits=(validAnchor.BodyId,validAnchor.TerrainAuthorityVersion,validAnchor.NormalizedBodyFixedDirection,BitConverter.DoubleToInt64Bits(validAnchor.TerrainRelativeOffsetMetres),validAnchor.DeterministicHash);
+    foreach(var phase in new[]{0d,.1d,1d,2d,10d,30d,7_776_000d})
+    {
+        var phaseRotation=DoubleQuaternion.FromAxisAngle(Double3.UnitY,phase*.00007292115d);var phaseSnapshot=new ReferenceFrameSnapshot([(new ReferenceFrameDefinition(root,null,ReferenceFrameKind.Ecl,"ECL"),CelestialFrameFactory.RootEcl()),(new ReferenceFrameDefinition(ccf,root,ReferenceFrameKind.Ccf,"phase-CCF"),new EvaluatedReferenceFrame(new FrameTransform(center+centerVelocity*phase,phaseRotation),centerVelocity,omega,false))]);var phaseFrames=new ReferenceFrameResolver(phaseSnapshot);
+        Check(SurfaceAnchorEvaluator.TryEvaluateRootState(validAnchor,body,terrain,phaseFrames,Double3.Zero,out var phasePosition,out var phaseVelocity,out _)==SurfaceAnchorEvaluationStatus.Success&&phasePosition.Value.IsFinite&&phaseVelocity.Value.IsFinite,"warp-equivalent anchor evaluation");
+        Check(anchorBits==(validAnchor.BodyId,validAnchor.TerrainAuthorityVersion,validAnchor.NormalizedBodyFixedDirection,BitConverter.DoubleToInt64Bits(validAnchor.TerrainRelativeOffsetMetres),validAnchor.DeterministicHash),"warp leaves canonical anchor bit-identical");
+        Check(SurfaceAnchorEvaluator.TryCreateFromRootState(bodyId,version,phasePosition,phaseVelocity,body,terrain,phaseFrames,out _,out var phaseRelative,out _)==SurfaceAnchorEvaluationStatus.Success&&Math.Sqrt(phaseRelative.LengthSquared)<1e-8d,"warp stationary surface-relative velocity");
+    }
+    Check(maxAngular<=2e-8d&&maxBody<5e-5d&&maxRoot<5e-5d&&maxOffset<5e-5d&&maxVelocity<1e-8d&&maxStationary<1e-8d&&maxOrthogonal<1e-12d&&maxUnit<1e-12d,"surface precision bounds");
+    Console.WriteLine($"SurfaceAnchor precision: angular={maxAngular:E17} rad; body={maxBody:E17} m; root={maxRoot:E17} m; offset={maxOffset:E17} m; velocity={maxVelocity:E17} m/s; stationary={maxStationary:E17} m/s; enuOrthogonal={maxOrthogonal:E17}; enuUnit={maxUnit:E17}; hash=0x{hash:X16}");
+    var benchmarkAnchor=validAnchor;_ = SurfaceAnchorEvaluator.TryEvaluateRoot(benchmarkAnchor,body,terrain,frames,out _,out _);_ = SurfaceAnchorEvaluator.TryCreateFromRoot(bodyId,version,new UniversePosition(center+rotation.Rotate(Double3.UnitX*(radius+terrain.SampleHeight(bodyId,Double3.UnitX))),root),body,terrain,frames,out _,out _,out _);
+    var watch=new Stopwatch();var before=GC.GetAllocatedBytesForCurrentThread();watch.Start();UniversePosition benchmarkRoot=default;for(var index=0;index<100_000;index++)Check(SurfaceAnchorEvaluator.TryEvaluateRoot(benchmarkAnchor,body,terrain,frames,out benchmarkRoot,out _)==SurfaceAnchorEvaluationStatus.Success,"anchor benchmark forward");watch.Stop();var forwardSeconds=watch.Elapsed.TotalSeconds;watch.Restart();SurfaceAnchor benchmarkInverse=default;for(var index=0;index<100_000;index++)Check(SurfaceAnchorEvaluator.TryCreateFromRoot(bodyId,version,benchmarkRoot,body,terrain,frames,out benchmarkInverse,out _,out _)==SurfaceAnchorEvaluationStatus.Success,"anchor benchmark inverse");watch.Stop();var inverseSeconds=watch.Elapsed.TotalSeconds;var allocated=GC.GetAllocatedBytesForCurrentThread()-before;Check(allocated==0&&benchmarkInverse.IsValid,"surface evaluation allocation");Console.WriteLine($"SurfaceAnchor performance: forward={100_000d/forwardSeconds:F0}/s; inverse={100_000d/inverseSeconds:F0}/s; terrainQueries=200000; allocations={allocated} bytes");
+}
 static void Validation(){var root=new ReferenceFrameId(1);var child=new ReferenceFrameId(2);try{_ = new ReferenceFrameSnapshot([(new ReferenceFrameDefinition(root,child,ReferenceFrameKind.Ecl,"E"),CelestialFrameFactory.RootEcl()),(new ReferenceFrameDefinition(child,root,ReferenceFrameKind.Cce,"C"),CelestialFrameFactory.Cce(Double3.Zero,Double3.Zero))]);throw new Exception("cycle accepted");}catch(ArgumentException){}try{_ = new ReferenceFrameSnapshot([(new ReferenceFrameDefinition(root,null,ReferenceFrameKind.Cce,"bad"),CelestialFrameFactory.RootEcl())]);throw new Exception("bad root accepted");}catch(ArgumentException){}}
 static void Near(Double3 a,Double3 b){if((a-b).LengthSquared>1e-18)throw new Exception($"Expected {b}, got {a}");}
 static void Check(bool value,string text){if(!value)throw new Exception(text);}
@@ -24,3 +92,9 @@ static ulong TransformResolutionHash(){var root=new ReferenceFrameId(50);var chi
 static ulong FixtureHash(ReferenceFrameTransformSet set,ReferenceFrameId star,ReferenceFrameId planet,ReferenceFrameId moon,ReferenceFrameId vessel,Span<ReferenceFrameId> sourcePath,Span<ReferenceFrameId> targetPath,Span<ReferenceFrameId> traversalPath){ulong hash=14695981039346656037;var sources=new[]{star,planet,moon,vessel};var targets=new[]{star,star,star,planet};var positions=new[]{Double3.Zero,Double3.Zero,Double3.UnitX,Double3.Zero};for(var index=0;index<sources.Length;index++){var status=ReferenceFrameTransformResolver.TryResolveTransform(set,sources[index],targets[index],sourcePath,targetPath,traversalPath,out var resolved);Check(status==ReferenceFrameTransformResolutionStatus.Success,"fixture hash resolution");var p=resolved.ConvertPosition(positions[index]);var v=resolved.ConvertVelocity(positions[index],Double3.Zero);var q=resolved.ConvertOrientation(DoubleQuaternion.Identity);hash=MixFrame(hash,(ulong)status);hash=MixFrame(hash,(ulong)sources[index].Value);hash=MixFrame(hash,(ulong)targets[index].Value);hash=MixFrame(hash,(ulong)BitConverter.DoubleToInt64Bits(p.X));hash=MixFrame(hash,(ulong)BitConverter.DoubleToInt64Bits(p.Y));hash=MixFrame(hash,(ulong)BitConverter.DoubleToInt64Bits(p.Z));hash=MixFrame(hash,(ulong)BitConverter.DoubleToInt64Bits(v.X));hash=MixFrame(hash,(ulong)BitConverter.DoubleToInt64Bits(v.Y));hash=MixFrame(hash,(ulong)BitConverter.DoubleToInt64Bits(v.Z));hash=MixFrame(hash,(ulong)BitConverter.DoubleToInt64Bits(q.X));hash=MixFrame(hash,(ulong)BitConverter.DoubleToInt64Bits(q.Y));hash=MixFrame(hash,(ulong)BitConverter.DoubleToInt64Bits(q.Z));hash=MixFrame(hash,(ulong)BitConverter.DoubleToInt64Bits(q.W));hash=MixFrame(hash,(ulong)BitConverter.DoubleToInt64Bits(resolved.SourceAngularVelocityInTarget.X));hash=MixFrame(hash,(ulong)BitConverter.DoubleToInt64Bits(resolved.SourceAngularVelocityInTarget.Y));hash=MixFrame(hash,(ulong)BitConverter.DoubleToInt64Bits(resolved.SourceAngularVelocityInTarget.Z));}return hash;}
 static ulong MixFrame(ulong hash,ulong value)=>(hash^value)*1099511628211;
 static void Benchmark(){var root=new ReferenceFrameId(1);var child=new ReferenceFrameId(2);var s=new ReferenceFrameSnapshot([(new ReferenceFrameDefinition(root,null,ReferenceFrameKind.Ecl,"ECL"),CelestialFrameFactory.RootEcl()),(new ReferenceFrameDefinition(child,root,ReferenceFrameKind.Cce,"CCE"),CelestialFrameFactory.Cce(new Double3(4e12,0,0),Double3.Zero))]);var r=new ReferenceFrameResolver(s);r.TryResolvePosition(new FramePosition(child,Double3.Zero),out _);var watch=new Stopwatch();var before=GC.GetAllocatedBytesForCurrentThread();watch.Start();UniversePosition p=default;for(var i=0;i<10000;i++)r.TryResolvePosition(new FramePosition(child,new Double3(i*.001,0,0)),out p);watch.Stop();var allocated=GC.GetAllocatedBytesForCurrentThread()-before;Console.WriteLine($"Benchmark: 10,000 root resolutions in {watch.Elapsed.TotalMilliseconds:F3} ms; managed allocations={allocated} bytes; final={p.Value.X:R}");Check(allocated==0,"resolver allocated during repeated resolution");}
+readonly record struct SyntheticTerrain(ulong BodyId,TerrainAuthorityVersion AuthorityVersion):IPhysicalTerrainAuthority
+{
+    public bool SupportsBody(ulong bodyId)=>bodyId==BodyId;
+    public bool TrySampleHeight(ulong bodyId,in Double3 direction,out double heightMetres){heightMetres=default;if(!SupportsBody(bodyId)||!direction.IsFinite||Math.Abs(direction.LengthSquared-1d)>SurfaceAnchor.DirectionUnitLengthSquaredTolerance)return false;heightMetres=1200d+350d*direction.X-125d*direction.Y+75d*direction.Z;return true;}
+    public double SampleHeight(ulong bodyId,in Double3 direction){if(!TrySampleHeight(bodyId,direction,out var value))throw new InvalidOperationException("Synthetic terrain sample failed.");return value;}
+}

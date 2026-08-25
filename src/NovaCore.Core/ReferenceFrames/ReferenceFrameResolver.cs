@@ -2,6 +2,8 @@ namespace NovaCore.Core.ReferenceFrames;
 
 public sealed class ReferenceFrameResolver(ReferenceFrameSnapshot snapshot)
 {
+    public ReferenceFrameId RootFrame => snapshot.RootId;
+
     public bool TryResolvePosition(in FramePosition source,out UniversePosition root)
     {
         if(!snapshot.TryGet(source.Frame,out var frame)){root=default;return false;} root=new UniversePosition(ReferenceFrameMath.ResolvePositionToRoot(frame.LocalToRoot,source.Value),snapshot.RootId);return true;

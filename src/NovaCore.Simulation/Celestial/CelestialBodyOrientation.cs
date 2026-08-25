@@ -23,19 +23,6 @@ internal readonly record struct CelestialBodyOrientation(
     internal Double3 InertialDirectionToBodyFixed(in Double3 direction) => BodyFixedToInertial.Conjugate().Normalized().Rotate(direction);
 }
 
-/// <summary>Persistent latitude/longitude/altitude identity in NovaCore's right-handed, +Y-pole body-fixed convention.</summary>
-internal readonly record struct CelestialSurfaceAnchor(CelestialBodyId BodyId, double LatitudeRadians, double LongitudeRadians, double AltitudeMetres)
-{
-    internal bool IsValid => BodyId.IsValid && double.IsFinite(LatitudeRadians) && LatitudeRadians is >= -Math.PI / 2d and <= Math.PI / 2d && double.IsFinite(LongitudeRadians) && double.IsFinite(AltitudeMetres);
-    internal Double3 BodyFixedPosition(double referenceRadiusMetres)
-    {
-        if (!IsValid || !double.IsFinite(referenceRadiusMetres) || referenceRadiusMetres <= 0d || referenceRadiusMetres + AltitudeMetres <= 0d) throw new ArgumentOutOfRangeException(nameof(referenceRadiusMetres));
-        var radius = referenceRadiusMetres + AltitudeMetres;
-        var latitudeCosine = Math.Cos(LatitudeRadians);
-        return new Double3(latitudeCosine * Math.Cos(LongitudeRadians), Math.Sin(LatitudeRadians), latitudeCosine * Math.Sin(LongitudeRadians)) * radius;
-    }
-}
-
 /// <summary>Body-centered CCF evaluation layered beside, never into, the translational CCI hierarchy.</summary>
 internal static class CelestialBodyFixedFrameEvaluator
 {
@@ -47,12 +34,13 @@ internal static class CelestialBodyFixedFrameEvaluator
         return true;
     }
 
-    internal static bool TryTransformAnchor(in CelestialSurfaceAnchor anchor, SimulationInstant time, double referenceRadiusMetres, in Double3 centerInInertial, out Double3 positionInInertial)
+    internal static bool TryTransformBodyFixedPosition(CelestialBodyId bodyId, SimulationInstant time, in Double3 bodyFixedPosition, in Double3 centerInInertial, out Double3 positionInInertial)
     {
         positionInInertial = default;
-        if (!anchor.IsValid || !centerInInertial.IsFinite || !CelestialBodyOrientationEvaluator.TryEvaluate(anchor.BodyId, time, out var orientation)) return false;
-        try { positionInInertial = centerInInertial + orientation.BodyFixedToInertial.Rotate(anchor.BodyFixedPosition(referenceRadiusMetres)); return positionInInertial.IsFinite; }
-        catch (ArgumentOutOfRangeException) { return false; }
+        if (!bodyId.IsValid || !bodyFixedPosition.IsFinite || !centerInInertial.IsFinite ||
+            !CelestialBodyOrientationEvaluator.TryEvaluate(bodyId, time, out var orientation)) return false;
+        positionInInertial = centerInInertial + orientation.BodyFixedToInertial.Rotate(bodyFixedPosition);
+        return positionInInertial.IsFinite;
     }
 }
 
