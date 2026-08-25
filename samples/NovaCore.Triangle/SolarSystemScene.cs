@@ -1008,24 +1008,13 @@ internal sealed class SolarSystemScene
         var changed=false;
         if(input.LookActive!=0&&(input.MouseDeltaX!=0f||input.MouseDeltaY!=0f))
         {
-            var yaw=DoubleQuaternion.FromAxisAngle(enu.Up,-input.MouseDeltaX*OrbitSensitivity);
-            var yawOrientation=(yaw*_surfaceCameraState.BodyFixedOrientation).Normalized();
-            var right=yawOrientation.Rotate(Double3.UnitX).Normalized();
-            var pitch=DoubleQuaternion.FromAxisAngle(right,-input.MouseDeltaY*OrbitSensitivity);
-            var rotation=(pitch*yaw).Normalized();
-            var candidateOrientation=(rotation*_surfaceCameraState.BodyFixedOrientation).Normalized();
-            var forward=candidateOrientation.Rotate(new Double3(0d,0d,-1d)).Normalized();
-            if(Math.Abs(Math.Asin(Math.Clamp(Double3.Dot(forward,enu.Up),-1d,1d)))>1.45d)
-            {
-                rotation=yaw;
-                candidateOrientation=yawOrientation;
-            }
-            var rotatedEye=pose.BodyFixedPivot+rotation.Rotate(pose.BodyFixedEye-pose.BodyFixedPivot);
-            var anchorBody=pose.BodyFixedEye-SurfaceCameraAuthority.FromEnu(_surfaceCameraState.EyeOffsetEnuMetres,enu);
-            if(!SurfaceCameraState.TryCreate(_surfaceCameraState.Anchor,
-                SurfaceCameraAuthority.ToEnu(rotatedEye-anchorBody,enu),_surfaceCameraState.PivotOffsetEnuMetres,
-                candidateOrientation,out _surfaceCameraState))
-                throw new InvalidOperationException("Surface camera orbit input produced an invalid state.");
+            var yaw=SurfaceCameraState.NormalizeYaw(_surfaceCameraState.LocalYawRadians-input.MouseDeltaX*OrbitSensitivity);
+            var pitch=PlanetarySurfaceCameraPolicy.ApplyPitchDelta(_surfaceCameraState.LocalPitchRadians,
+                -input.MouseDeltaY*OrbitSensitivity);
+            if(!SurfaceCameraState.TryCreateFreeLook(_surfaceCameraState.Anchor,
+                _surfaceCameraState.EyeOffsetEnuMetres,_surfaceCameraState.PivotOffsetEnuMetres,
+                yaw,pitch,out _surfaceCameraState))
+                throw new InvalidOperationException("Surface camera free-look input produced an invalid state.");
             changed=true;
         }
         if(input.MouseWheelDetents!=0)
@@ -1053,13 +1042,20 @@ internal sealed class SolarSystemScene
             var rightAxis=(int)input.MoveRight-(int)input.MoveLeft;
             var axisLength=Math.Sqrt(forwardAxis*forwardAxis+rightAxis*rightAxis);
             var seconds=Math.Clamp((double)input.DeltaSeconds,0d,.1d);
-            var travel=PlanetarySurfaceCameraPolicy.TranslationSpeedMetresPerSecond(Math.Max(0d,_surfaceAltitudeMetres))*seconds;
-            var tangent=(enu.North*forwardAxis+enu.East*rightAxis)/axisLength;
-            var direction=(_surfaceCameraState.Anchor.NormalizedBodyFixedDirection+
-                tangent*(travel/FocusedBody.RadiusMetres)).Normalized();
+            var travel=PlanetarySurfaceCameraPolicy.TranslationSpeedMetresPerSecond(
+                Math.Max(0d,_surfaceAltitudeMetres),input.FastModifier!=0,input.SlowModifier!=0)*seconds;
+            var yaw=_surfaceCameraState.LocalYawRadians;
+            var forwardHorizontal=enu.North*Math.Cos(yaw)+enu.East*Math.Sin(yaw);
+            var rightHorizontal=enu.East*Math.Cos(yaw)-enu.North*Math.Sin(yaw);
+            var tangent=(forwardHorizontal*forwardAxis+rightHorizontal*rightAxis)/axisLength;
+            var currentDirection=_surfaceCameraState.Anchor.NormalizedBodyFixedDirection;
+            var rotationAxis=Double3.Cross(currentDirection,tangent).Normalized();
+            var direction=DoubleQuaternion.FromAxisAngle(rotationAxis,travel/FocusedBody.RadiusMetres)
+                .Rotate(currentDirection).Normalized();
             if(SurfaceAnchor.TryCreate(FocusedBody.BodyId,physicalTerrain.AuthorityVersion,direction,0d,out var movedAnchor)!=SurfaceAnchorCreationStatus.Success||
-                !SurfaceCameraState.TryCreate(movedAnchor,_surfaceCameraState.EyeOffsetEnuMetres,
-                    _surfaceCameraState.PivotOffsetEnuMetres,_surfaceCameraState.BodyFixedOrientation,out _surfaceCameraState))
+                !SurfaceCameraState.TryCreateFreeLook(movedAnchor,_surfaceCameraState.EyeOffsetEnuMetres,
+                    _surfaceCameraState.PivotOffsetEnuMetres,_surfaceCameraState.LocalYawRadians,
+                    _surfaceCameraState.LocalPitchRadians,out _surfaceCameraState))
                 throw new InvalidOperationException("Surface camera translation produced an invalid anchor.");
             changed=true;
         }

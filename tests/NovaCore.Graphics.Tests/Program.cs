@@ -2082,7 +2082,11 @@ static void PlanetarySurfaceCameraPresentationTest()
 {
     Check(PlanetarySurfaceCameraPolicy.Mode(1_000_000)==PlanetaryCameraPresentationMode.Orbital&&PlanetarySurfaceCameraPolicy.Mode(500_000)==PlanetaryCameraPresentationMode.Transition&&PlanetarySurfaceCameraPolicy.Mode(100_000)==PlanetaryCameraPresentationMode.SurfaceLocal,"camera mode altitude boundaries");
     Check(PlanetarySurfaceCameraPolicy.SurfaceBlend(1_000_000)==0&&PlanetarySurfaceCameraPolicy.SurfaceBlend(100_000)==1&&PlanetarySurfaceCameraPolicy.ZoomFactor(1_000)<PlanetarySurfaceCameraPolicy.ZoomFactor(1_000_000),"camera transition and fine zoom are deterministic");
-    Check(PlanetarySurfaceCameraPolicy.TranslationSpeedMetresPerSecond(2)==12.04d&&PlanetarySurfaceCameraPolicy.TranslationSpeedMetresPerSecond(100_000)==2_000d,"SurfaceLocal translation speed is bounded and altitude-aware");
+    Check(Math.Abs(PlanetarySurfaceCameraPolicy.TranslationSpeedMetresPerSecond(2)-60.05d)<1e-12d&&
+        PlanetarySurfaceCameraPolicy.TranslationSpeedMetresPerSecond(100_000)==1_000d&&
+        PlanetarySurfaceCameraPolicy.TranslationSpeedMetresPerSecond(2,true)==300.25d&&
+        Math.Abs(PlanetarySurfaceCameraPolicy.TranslationSpeedMetresPerSecond(2,false,true)-12.01d)<1e-12d,
+        "SurfaceLocal translation speed is useful, bounded, altitude-aware, and modifier-scaled");
     var frame=PlanetarySurfaceFrame.AtDirection(Double3.UnitZ);var a=frame.LookOrientation(.25,-.2);var b=frame.LookOrientation(.25,-.2);Check(a==b&&Math.Abs(a.LengthSquared-1)<1e-12,"local tangent camera orientation deterministic");
 }
 
@@ -2328,18 +2332,66 @@ static void SurfaceRelativeCameraAuthorityTest()
     double maximumCanonicalEyeDrift=0d,maximumPivotDrift=0d,maximumRootRoundTripDrift=0d,maximumTerrainRelativeDrift=0d,maximumRootMotion=0d;
     double maximumOrientationDrift=0d,minimumClearance=double.PositiveInfinity;long evaluationAllocations=0;double evaluationNanoseconds=0d;
 
-    SolarSystemScene CreateAtSite(out CameraState camera,Double3? requestedSite=null)
+    SolarSystemScene CreateAtSite(out CameraState camera,Double3? requestedSite=null,bool horizonView=false)
     {
         Check(SolarSystemScene.TryCreateAt(root,SimulationInstant.Zero,out var value,out var error)&&value is not null,$"surface camera scene: {error}");
         var scene=value!;camera=new CameraState(new FramePosition(root,Double3.Zero),DoubleQuaternion.Identity,scene.Projection,CameraMode.Free);
         Check(scene.Focus(camera,NativePresentationFocus.Earth),"surface camera Earth focus");
         var selectedSite=(requestedSite??site).Normalized();var earth=scene.FocusedBody;var height=terrainDefinition.SampleHeight(selectedSite,24);var bodyEye=selectedSite*(earth.RadiusMetres+height+25d);
         camera.Position=camera.Position with{Value=earth.Position.Value+earth.BodyFixedToRoot.Rotate(bodyEye)};
-        var radial=earth.BodyFixedToRoot.Rotate(selectedSite);var yaw=Math.Atan2(radial.X,radial.Z);var pitch=-Math.Asin(Math.Clamp(radial.Y,-1d,1d));
-        camera.Orientation=(DoubleQuaternion.FromAxisAngle(Double3.UnitY,yaw)*DoubleQuaternion.FromAxisAngle(Double3.UnitX,pitch)).Normalized();
+        if(horizonView)
+        {
+            Check(SurfaceAnchor.TryCreate(earth.BodyId,terrain.AuthorityVersion,selectedSite,0d,out var cameraAnchor)==SurfaceAnchorCreationStatus.Success,
+                "surface camera horizon fixture anchor");
+            var cameraEnu=default(SurfaceEnuFrame);Check(SurfaceEnuFrame.TryCreate(cameraAnchor,out cameraEnu),"surface camera horizon fixture ENU");
+            camera.Orientation=(earth.BodyFixedToRoot*SurfaceCameraState.LookOrientation(cameraEnu,0d,0d)).Normalized();
+        }
+        else
+        {
+            var radial=earth.BodyFixedToRoot.Rotate(selectedSite);var yaw=Math.Atan2(radial.X,radial.Z);var pitch=-Math.Asin(Math.Clamp(radial.Y,-1d,1d));
+            camera.Orientation=(DoubleQuaternion.FromAxisAngle(Double3.UnitY,yaw)*DoubleQuaternion.FromAxisAngle(Double3.UnitX,pitch)).Normalized();
+        }
         scene.EnforceFinalCameraInvariant(camera);
         return scene;
     }
+
+    static Double3 GeographicDirection(double latitudeDegrees,double longitudeDegrees)
+    {
+        var latitudeRadians=latitudeDegrees*Math.PI/180d;var longitudeRadians=longitudeDegrees*Math.PI/180d;
+        var latitudeCosine=Math.Cos(latitudeRadians);
+        return new Double3(latitudeCosine*Math.Cos(longitudeRadians),Math.Sin(latitudeRadians),
+            latitudeCosine*Math.Sin(longitudeRadians)).Normalized();
+    }
+
+    var horizonSites=new[]{
+        GeographicDirection(0d,0d),GeographicDirection(42d,-71d),GeographicDirection(82d,34d),
+        GeographicDirection(89.999999d,45d),GeographicDirection(-89.999999d,-30d),
+        new Double3(1d,1d,0d).Normalized(),new Double3(1d,0d,1d).Normalized(),
+        new Double3(1d,1d,1d).Normalized()};
+    double maximumHorizonError=0d,maximumLocalRollError=0d;
+    foreach(var horizonSite in horizonSites)
+    {
+        Check(SurfaceAnchor.TryCreate(SolarSystemBodyIds.Earth.Value,terrain.AuthorityVersion,horizonSite,0d,out var anchor)==SurfaceAnchorCreationStatus.Success,
+            "surface free-look horizon anchor");
+        var enu=default(SurfaceEnuFrame);Check(SurfaceEnuFrame.TryCreate(anchor,out enu),"surface free-look horizon site");
+        foreach(var pitch in new[]{PlanetarySurfaceCameraPolicy.MinimumPitchRadians,0d,PlanetarySurfaceCameraPolicy.MaximumPitchRadians})
+        {
+            var orientation=SurfaceCameraState.LookOrientation(enu,.731d,pitch);
+            var forward=orientation.Rotate(new Double3(0d,0d,-1d)).Normalized();
+            var actualRight=orientation.Rotate(Double3.UnitX).Normalized();
+            var expectedRight=Double3.Cross(forward,enu.Up).Normalized();
+            maximumLocalRollError=Math.Max(maximumLocalRollError,
+                Math.Acos(Math.Clamp(Double3.Dot(actualRight,expectedRight),-1d,1d)));
+            if(pitch==0d)maximumHorizonError=Math.Max(maximumHorizonError,
+                Math.Abs(Math.Asin(Math.Clamp(Double3.Dot(forward,enu.Up),-1d,1d))));
+        }
+    }
+    Check(maximumHorizonError<1e-14d&&maximumLocalRollError<1e-7d,
+        "surface free-look is horizon-exact, pole-safe, cube-boundary-safe, and roll-free");
+    Check(PlanetarySurfaceCameraPolicy.ApplyPitchDelta(0d,100d)==PlanetarySurfaceCameraPolicy.MaximumPitchRadians&&
+        PlanetarySurfaceCameraPolicy.ApplyPitchDelta(0d,-100d)==PlanetarySurfaceCameraPolicy.MinimumPitchRadians&&
+        PlanetarySurfaceCameraPolicy.MinimumPitchRadians==-PlanetarySurfaceCameraPolicy.MaximumPitchRadians,
+        "surface free-look uses symmetric non-inverting pitch limits");
 
     foreach(var (label,rate,paused) in new[]{
         ("Pause",SimulationRate.One,true),("0.1x",new SimulationRate(1,10),false),("1x",SimulationRate.One,false),
@@ -2364,7 +2416,7 @@ static void SurfaceRelativeCameraAuthorityTest()
             anchorIdentity.NormalizedBodyFixedDirection*(beforeBody.RadiusMetres+beforePose.PhysicalTerrainHeightMetres);
         var requested=SimulationSpeedPresets.IndexOf(rate);while(scene.SpeedPresetIndex<requested)scene.ApplyPresentationInput(camera,new NativeInputState{RateIncrease=1},out _,out _);while(scene.SpeedPresetIndex>requested)scene.ApplyPresentationInput(camera,new NativeInputState{RateDecrease=1},out _,out _);
         if(paused)scene.ApplyPresentationInput(camera,new NativeInputState{PauseToggle=1},out _,out _);
-        for(var frame=0;frame<200;frame++)Check(scene.TryAdvanceByHostDuration(SimulationDuration.FromSecondsRounded(.05d),camera,out var error),$"{label} stationary frame {frame}: {error}");
+        for(var frame=0;frame<1_000;frame++)Check(scene.TryAdvanceByHostDuration(SimulationDuration.FromSecondsRounded(.01d),camera,out var error),$"{label} stationary frame {frame}: {error}");
         var afterBody=scene.FocusedBody;var afterState=scene.CurrentSurfaceCameraState;
         Check(SurfaceCameraAuthority.TryEvaluate(afterBody,afterState,terrain,out var afterPose),$"{label} evaluate final surface pose");
         var afterCameraBody=afterBody.BodyFixedToRoot.Conjugate().Normalized().Rotate(camera.Position.Value-afterBody.Position.Value);
@@ -2433,11 +2485,13 @@ static void SurfaceRelativeCameraAuthorityTest()
         explicitToggle.CurrentCameraReferenceAuthority==CameraReferenceAuthority.Inertial,
         "unsupported body remains in bounded inertial authority without altitude-inferred activation");
 
-    var stress=CreateAtSite(out var stressCamera);Check(stress.TryAttachSurfaceCamera(stressCamera),"surface input stress attach");
+    var stress=CreateAtSite(out var stressCamera,horizonView:true);Check(stress.TryAttachSurfaceCamera(stressCamera),"surface input stress attach");
     var fixedAnchor=stress.CurrentSurfaceCameraState.Anchor;var fixedPupil=stress.ProductionPupilCell;
+    var fixedEye=stress.CurrentSurfaceCameraState.EyeOffsetEnuMetres;var fixedPivot=stress.CurrentSurfaceCameraState.PivotOffsetEnuMetres;
     stress.ApplyPresentationInput(stressCamera,new NativeInputState{LookActive=1,MouseDeltaX=90,MouseDeltaY=-45},out _,out _);
-    Check(stress.CurrentSurfaceCameraState.Anchor==fixedAnchor&&stress.ProductionPupilCell==fixedPupil,
-        "rotation-only surface input preserves canonical anchor and pupil geography");
+    Check(stress.CurrentSurfaceCameraState.Anchor==fixedAnchor&&stress.ProductionPupilCell==fixedPupil&&
+        stress.CurrentSurfaceCameraState.EyeOffsetEnuMetres==fixedEye&&stress.CurrentSurfaceCameraState.PivotOffsetEnuMetres==fixedPivot,
+        "rotation-only surface free-look preserves canonical anchor, eye, pivot, and pupil geography");
     stress.ApplyPresentationInput(stressCamera,new NativeInputState{MoveForward=1,MoveRight=1,DeltaSeconds=.1f},out _,out _);
     var pupilAngularError=Math.Acos(Math.Clamp(Double3.Dot(stress.ProductionPupilCell.BodyFixedDirection,
         stress.CurrentSurfaceCameraState.Anchor.NormalizedBodyFixedDirection),-1d,1d));
@@ -2457,13 +2511,6 @@ static void SurfaceRelativeCameraAuthorityTest()
             $"surface transition stress {cycle} remains finite and exterior");
     }
 
-    static Double3 GeographicDirection(double latitudeDegrees,double longitudeDegrees)
-    {
-        var latitudeRadians=latitudeDegrees*Math.PI/180d;var longitudeRadians=longitudeDegrees*Math.PI/180d;
-        var latitudeCosine=Math.Cos(latitudeRadians);
-        return new Double3(latitudeCosine*Math.Cos(longitudeRadians),Math.Sin(latitudeRadians),
-            latitudeCosine*Math.Sin(longitudeRadians)).Normalized();
-    }
     var transitionSites=new[]{
         site,GeographicDirection(0d,0d),GeographicDirection(-34.6d,18.5d),
         GeographicDirection(89.9d,45d),GeographicDirection(27.9881d,86.925d)};
@@ -2497,6 +2544,31 @@ static void SurfaceRelativeCameraAuthorityTest()
         }
         transitionIndex++;
     }
+
+    double MoveAtPitch(double pitchRadians,uint fastModifier,uint slowModifier,out double clearance)
+    {
+        var movementScene=CreateAtSite(out var movementCamera,GeographicDirection(37d,-122d),horizonView:true);
+        Check(movementScene.TryAttachSurfaceCamera(movementCamera),"pitch-independent movement attach");
+        movementScene.ApplyPresentationInput(movementCamera,new NativeInputState{
+            LookActive=1,MouseDeltaY=(float)(-pitchRadians/.002d)},out _,out _);
+        var before=movementScene.CurrentSurfaceCameraState.Anchor.NormalizedBodyFixedDirection;
+        movementScene.ApplyPresentationInput(movementCamera,new NativeInputState{
+            MoveForward=1,DeltaSeconds=.1f,FastModifier=fastModifier,SlowModifier=slowModifier},out _,out _);
+        var after=movementScene.CurrentSurfaceCameraState.Anchor.NormalizedBodyFixedDirection;
+        clearance=movementScene.SurfaceAltitudeMetres;
+        return Math.Sqrt((after-before).LengthSquared)*movementScene.FocusedBody.RadiusMetres/.1d;
+    }
+    var levelSpeed=MoveAtPitch(0d,0,0,out var levelClearance);
+    var upSpeed=MoveAtPitch(80d*Math.PI/180d,0,0,out var upClearance);
+    var downSpeed=MoveAtPitch(-80d*Math.PI/180d,0,0,out var downClearance);
+    var fastSpeed=MoveAtPitch(0d,1,0,out var fastClearance);
+    var slowSpeed=MoveAtPitch(0d,0,1,out var slowClearance);
+    var pitchSpeedError=Math.Max(Math.Abs(upSpeed-levelSpeed),Math.Abs(downSpeed-levelSpeed))/levelSpeed;
+    Console.WriteLine($"Surface free-look controls: horizonError={maximumHorizonError:E9} rad; rollError={maximumLocalRollError:E9} rad; pitch=[{PlanetarySurfaceCameraPolicy.MinimumPitchRadians*180d/Math.PI:R},{PlanetarySurfaceCameraPolicy.MaximumPitchRadians*180d/Math.PI:R}] deg; speeds={slowSpeed:R}/{levelSpeed:R}/{fastSpeed:R} m/s; pitchSpeedError={pitchSpeedError:E9}; ratios={slowSpeed/levelSpeed:R}/{fastSpeed/levelSpeed:R}; clearances={levelClearance:R}/{upClearance:R}/{downClearance:R}/{fastClearance:R}/{slowClearance:R}");
+    Check(pitchSpeedError<1e-8d&&Math.Abs(fastSpeed/levelSpeed-PlanetarySurfaceCameraPolicy.FastSurfaceSpeedMultiplier)<1e-8d&&
+        Math.Abs(slowSpeed/levelSpeed-PlanetarySurfaceCameraPolicy.SlowSurfaceSpeedMultiplier)<1e-8d&&
+        new[]{levelClearance,upClearance,downClearance,fastClearance,slowClearance}.All(value=>value>=SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres),
+        "surface WASD is yaw-only, pitch-independent, modifier-scaled, and terrain-safe");
 
     var benchmarkBody=stress.FocusedBody;var benchmarkState=stress.CurrentSurfaceCameraState;
     Check(SurfaceCameraAuthority.TryEvaluate(benchmarkBody,benchmarkState,terrain,out _),"warm surface-camera evaluator");
@@ -3292,7 +3364,7 @@ static void CelestialSasDiagnosticIndicatorsTest()
 static void MeshHandleTest() { Check(!MeshHandle.Invalid.IsValid, "zero invalid"); Check(MeshHandle.Triangle.IsValid, "triangle valid"); }
 static void LayoutTest()
 {
-    Check(Marshal.SizeOf<NativeEncodedPosition>() == 32, "encoded size"); Check(Marshal.SizeOf<NativeCameraData>() == 96, "native camera size"); Check(Marshal.OffsetOf<NativeCameraData>(nameof(NativeCameraData.Position)).ToInt32() == 0, "native camera position offset"); Check(Marshal.OffsetOf<NativeCameraData>(nameof(NativeCameraData.ViewProjection)).ToInt32() == 32, "native camera matrix offset"); Check(Marshal.SizeOf<GpuCameraData>() == 96, "GPU camera size"); Check(Marshal.OffsetOf<GpuCameraData>(nameof(GpuCameraData.Position)).ToInt32() == 0, "GPU camera position offset"); Check(Marshal.OffsetOf<GpuCameraData>(nameof(GpuCameraData.ViewProjection)).ToInt32() == 32, "GPU camera matrix offset"); Check(Marshal.SizeOf<NativeRenderTransform>() == 32, "transform size"); Check(Marshal.SizeOf<NativeRenderObject>() == 80, "object stride"); Check(Marshal.OffsetOf<NativeRenderObject>(nameof(NativeRenderObject.Position)).ToInt32() == 0, "position offset"); Check(Marshal.OffsetOf<NativeRenderObject>(nameof(NativeRenderObject.Transform)).ToInt32() == 32, "transform offset"); Check(Marshal.OffsetOf<NativeRenderObject>(nameof(NativeRenderObject.Mesh)).ToInt32() == 64, "mesh offset"); Check(Marshal.SizeOf<NativeDrawBatch>() == 16, "batch stride"); Check(Marshal.SizeOf<NativePlanetaryGpuConstants>() == 96 && Marshal.OffsetOf<NativePlanetaryGpuConstants>(nameof(NativePlanetaryGpuConstants.CameraBodyLowX)).ToInt32()==16 && Marshal.OffsetOf<NativePlanetaryGpuConstants>(nameof(NativePlanetaryGpuConstants.RefinementThreshold)).ToInt32()==32 && Marshal.OffsetOf<NativePlanetaryGpuConstants>(nameof(NativePlanetaryGpuConstants.MaximumLevel)).ToInt32()==48 && Marshal.OffsetOf<NativePlanetaryGpuConstants>(nameof(NativePlanetaryGpuConstants.ViewForwardX)).ToInt32()==64 && Marshal.OffsetOf<NativePlanetaryGpuConstants>(nameof(NativePlanetaryGpuConstants.ViewportHeightPixels)).ToInt32()==80 && Marshal.SizeOf<NativePlanetaryPresentation>() == 176 && Marshal.SizeOf<NativeSolarLighting>() == 48 && Marshal.OffsetOf<NativeSolarLighting>(nameof(NativeSolarLighting.SpeedHud)).ToInt32()==44 && Marshal.SizeOf<NativePlanetaryEyeball>()==128 && Marshal.SizeOf<NativeFrameSubmission>() == 688, "planetary terrain, projected texture demand, stellar, orientation, speed-HUD, and eyeball handoff frame ABI sizes"); Check(Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.PlanetaryGpu)).ToInt32() == 208 && Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.PlanetaryMode)).ToInt32() == 304 && Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.PlanetaryPresentation)).ToInt32() == 320 && Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.DistantBodies)).ToInt32() == 496 && Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.DistantBodyCount)).ToInt32() == 504 && Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.DistantBodyPadding)).ToInt32() == 508 && Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.SolarLighting)).ToInt32() == 512 && Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.PlanetaryEyeball)).ToInt32()==560, "stellar, orientation, and eyeball handoff frame ABI offsets"); Check(Marshal.SizeOf<NativeInputState>() == 68 && Marshal.OffsetOf<NativeInputState>(nameof(NativeInputState.SasModeKey)).ToInt32() == 60 && Marshal.OffsetOf<NativeInputState>(nameof(NativeInputState.PresentationFocus)).ToInt32() == 64 && Enum.GetUnderlyingType(typeof(NativePresentationFocus))==typeof(uint), "focus input layout"); Check(NativeRuntime.GetAbiLayout(out var abi) == NativeResult.Success && abi.InputStateSize == 68 && abi.InputSasModeKeyOffset == 60 && abi.InputPresentationFocusOffset == 64 && abi.FrameSubmissionSize == 688 && abi.FramePlanetaryGpuOffset == 208 && abi.FramePlanetaryModeOffset == 304 && abi.FramePlanetaryPresentationOffset == 320 && abi.FrameSolarLightingOffset == 512&&abi.FramePlanetaryEyeballOffset==560, "native frame ABI layout");
+    Check(Marshal.SizeOf<NativeEncodedPosition>() == 32, "encoded size"); Check(Marshal.SizeOf<NativeCameraData>() == 96, "native camera size"); Check(Marshal.OffsetOf<NativeCameraData>(nameof(NativeCameraData.Position)).ToInt32() == 0, "native camera position offset"); Check(Marshal.OffsetOf<NativeCameraData>(nameof(NativeCameraData.ViewProjection)).ToInt32() == 32, "native camera matrix offset"); Check(Marshal.SizeOf<GpuCameraData>() == 96, "GPU camera size"); Check(Marshal.OffsetOf<GpuCameraData>(nameof(GpuCameraData.Position)).ToInt32() == 0, "GPU camera position offset"); Check(Marshal.OffsetOf<GpuCameraData>(nameof(GpuCameraData.ViewProjection)).ToInt32() == 32, "GPU camera matrix offset"); Check(Marshal.SizeOf<NativeRenderTransform>() == 32, "transform size"); Check(Marshal.SizeOf<NativeRenderObject>() == 80, "object stride"); Check(Marshal.OffsetOf<NativeRenderObject>(nameof(NativeRenderObject.Position)).ToInt32() == 0, "position offset"); Check(Marshal.OffsetOf<NativeRenderObject>(nameof(NativeRenderObject.Transform)).ToInt32() == 32, "transform offset"); Check(Marshal.OffsetOf<NativeRenderObject>(nameof(NativeRenderObject.Mesh)).ToInt32() == 64, "mesh offset"); Check(Marshal.SizeOf<NativeDrawBatch>() == 16, "batch stride"); Check(Marshal.SizeOf<NativePlanetaryGpuConstants>() == 96 && Marshal.OffsetOf<NativePlanetaryGpuConstants>(nameof(NativePlanetaryGpuConstants.CameraBodyLowX)).ToInt32()==16 && Marshal.OffsetOf<NativePlanetaryGpuConstants>(nameof(NativePlanetaryGpuConstants.RefinementThreshold)).ToInt32()==32 && Marshal.OffsetOf<NativePlanetaryGpuConstants>(nameof(NativePlanetaryGpuConstants.MaximumLevel)).ToInt32()==48 && Marshal.OffsetOf<NativePlanetaryGpuConstants>(nameof(NativePlanetaryGpuConstants.ViewForwardX)).ToInt32()==64 && Marshal.OffsetOf<NativePlanetaryGpuConstants>(nameof(NativePlanetaryGpuConstants.ViewportHeightPixels)).ToInt32()==80 && Marshal.SizeOf<NativePlanetaryPresentation>() == 176 && Marshal.SizeOf<NativeSolarLighting>() == 48 && Marshal.OffsetOf<NativeSolarLighting>(nameof(NativeSolarLighting.SpeedHud)).ToInt32()==44 && Marshal.SizeOf<NativePlanetaryEyeball>()==128 && Marshal.SizeOf<NativeFrameSubmission>() == 688, "planetary terrain, projected texture demand, stellar, orientation, speed-HUD, and eyeball handoff frame ABI sizes"); Check(Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.PlanetaryGpu)).ToInt32() == 208 && Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.PlanetaryMode)).ToInt32() == 304 && Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.PlanetaryPresentation)).ToInt32() == 320 && Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.DistantBodies)).ToInt32() == 496 && Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.DistantBodyCount)).ToInt32() == 504 && Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.DistantBodyPadding)).ToInt32() == 508 && Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.SolarLighting)).ToInt32() == 512 && Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.PlanetaryEyeball)).ToInt32()==560, "stellar, orientation, and eyeball handoff frame ABI offsets"); Check(Marshal.SizeOf<NativeInputState>() == 76 && Marshal.OffsetOf<NativeInputState>(nameof(NativeInputState.SasModeKey)).ToInt32() == 60 && Marshal.OffsetOf<NativeInputState>(nameof(NativeInputState.FastModifier)).ToInt32() == 64 && Marshal.OffsetOf<NativeInputState>(nameof(NativeInputState.SlowModifier)).ToInt32() == 68 && Marshal.OffsetOf<NativeInputState>(nameof(NativeInputState.PresentationFocus)).ToInt32() == 72 && Enum.GetUnderlyingType(typeof(NativePresentationFocus))==typeof(uint), "focus input layout"); Check(NativeRuntime.GetAbiLayout(out var abi) == NativeResult.Success && abi.InputStateSize == 76 && abi.InputSasModeKeyOffset == 60 && abi.InputFastModifierOffset == 64 && abi.InputSlowModifierOffset == 68 && abi.InputPresentationFocusOffset == 72 && abi.FrameSubmissionSize == 688 && abi.FramePlanetaryGpuOffset == 208 && abi.FramePlanetaryModeOffset == 304 && abi.FramePlanetaryPresentationOffset == 320 && abi.FrameSolarLightingOffset == 512&&abi.FramePlanetaryEyeballOffset==560, "native frame ABI layout");
 }
 static void TransformTest() { var t = RenderTransform.FromAuthoritative(new DoubleQuaternion(0, 0, Math.Sqrt(.5), Math.Sqrt(.5)), new Double3(-1, 2, 3)); Check(t.Rotation.W > .7f && t.Scale.X == -1, "conversion/negative scale policy"); Check(FloatQuaternion.Identity == new FloatQuaternion(0, 0, 0, 1), "identity"); }
 static void OrbitCurveTransportTest()

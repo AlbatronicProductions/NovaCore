@@ -94,7 +94,7 @@ static_assert(offsetof(NcFrameSubmission, solarLighting) == 512);
 static_assert(offsetof(NcFrameSubmission, planetaryEyeball) == 560);
 static_assert(sizeof(NcOrbitLineVertex) == 12);
 static_assert(sizeof(NcRuntimeAssets) == 24);
-static_assert(sizeof(NcInputState) == 68);
+static_assert(sizeof(NcInputState) == 76);
 static_assert(sizeof(NcPresentationFocus) == 4);
 static_assert(offsetof(NcInputState, deltaSeconds) == 0);
 static_assert(offsetof(NcInputState, moveLeft) == 4);
@@ -112,7 +112,9 @@ static_assert(offsetof(NcInputState, pauseToggle) == 48);
 static_assert(offsetof(NcInputState, rateDecrease) == 52);
 static_assert(offsetof(NcInputState, rateIncrease) == 56);
 static_assert(offsetof(NcInputState, sasModeKey) == 60);
-static_assert(offsetof(NcInputState, presentationFocus) == 64);
+static_assert(offsetof(NcInputState, fastModifier) == 64);
+static_assert(offsetof(NcInputState, slowModifier) == 68);
+static_assert(offsetof(NcInputState, presentationFocus) == 72);
 struct Vertex {
   float position[3];
   float color[3];
@@ -1723,7 +1725,10 @@ void Update(App &a, float dt) {
                   wheel,
                   rising(VK_SPACE, a.pauseWasDown),
                   rising(VK_OEM_COMMA, a.rateDecreaseWasDown),
-                  rising(VK_OEM_PERIOD, a.rateIncreaseWasDown), sasModeKey, static_cast<NcPresentationFocus>(presentationFocus)};
+                  rising(VK_OEM_PERIOD, a.rateIncreaseWasDown), sasModeKey,
+                  (GetAsyncKeyState(VK_SHIFT) & 0x8000) != 0,
+                  (GetAsyncKeyState(VK_CONTROL) & 0x8000) != 0,
+                  static_cast<NcPresentationFocus>(presentationFocus)};
   NcHostEvent e{NC_UPDATE_FRAME, NC_LOG_NONE, nullptr, in, a.submission};
   a.cb(&e, a.cbData);
   if(a.submission->planetaryMode==NC_PLANETARY_CPU_REFERENCE)EnsurePatchCapacity(a,a.submission->planetaryPatchCount);
@@ -1775,6 +1780,8 @@ extern "C" NC_API NcResult __cdecl nc_get_abi_layout(NcAbiLayout *o) {
         (uint32_t)offsetof(NcInputState, rateDecrease),
         (uint32_t)offsetof(NcInputState, rateIncrease),
         (uint32_t)offsetof(NcInputState, sasModeKey),
+        (uint32_t)offsetof(NcInputState, fastModifier),
+        (uint32_t)offsetof(NcInputState, slowModifier),
         (uint32_t)offsetof(NcFrameSubmission, planetaryGpu),
         (uint32_t)offsetof(NcFrameSubmission, planetaryMode),
         (uint32_t)offsetof(NcFrameSubmission, planetaryPresentation),
