@@ -41,6 +41,7 @@ var tests = new (string, Action)[]
     ("Planetary surface camera presentation", PlanetarySurfaceCameraPresentationTest),
     ("Earth CPU elevation oracle", EarthElevationOracleTest),
     ("Canonical SurfaceAnchor physical terrain authority", CanonicalSurfaceAnchorPhysicalTerrainAuthorityTest),
+    ("Surface-relative camera authority", SurfaceRelativeCameraAuthorityTest),
     ("SurfaceAnchor acquisition, ENU, and handoff", SurfaceAnchorPhaseBTest),
     ("Camera focus-position continuity", CameraFocusPositionContinuityTest),
     ("Zoom motion-profile continuity", ZoomMotionProfileContinuityTest),
@@ -2314,6 +2315,197 @@ static void CanonicalSurfaceAnchorPhysicalTerrainAuthorityTest()
     watch.Stop();var enuNanoseconds=watch.Elapsed.TotalNanoseconds/100_000d;var allocated=GC.GetAllocatedBytesForCurrentThread()-before;
     Check(maximumAuthorityError==0d&&terrainChecksum>=0d&&enu.IsValid&&allocated==0,"production SurfaceAnchor authority precision and allocation");
     Console.WriteLine($"Canonical SurfaceAnchor terrain: maxAuthorityError={maximumAuthorityError:E17} m; terrainQuery={terrainNanoseconds:F1} ns; ENU={enuNanoseconds:F1} ns; allocations={allocated}; hash=0x{identityHash:X16}");
+}
+
+static void SurfaceRelativeCameraAuthorityTest()
+{
+    var root=new ReferenceFrameId(706);
+    var terrainDefinition=PlanetaryTerrainDefinition.EarthProductionCubeV4;
+    var terrain=new PlanetaryPhysicalTerrainAuthority(SolarSystemBodyIds.Earth.Value,terrainDefinition);
+    var latitude=66.5607d*Math.PI/180d;var longitude=-32d*Math.PI/180d;var cosine=Math.Cos(latitude);
+    var site=new Double3(cosine*Math.Cos(longitude),Math.Sin(latitude),cosine*Math.Sin(longitude)).Normalized();
+    double maximumAttachPosition=0d,maximumAttachPivot=0d,maximumAttachOrientation=0d,maximumDetachPosition=0d,maximumDetachPivot=0d,maximumDetachOrientation=0d;
+    double maximumCanonicalEyeDrift=0d,maximumPivotDrift=0d,maximumRootRoundTripDrift=0d,maximumTerrainRelativeDrift=0d,maximumRootMotion=0d;
+    double maximumOrientationDrift=0d,minimumClearance=double.PositiveInfinity;long evaluationAllocations=0;double evaluationNanoseconds=0d;
+
+    SolarSystemScene CreateAtSite(out CameraState camera,Double3? requestedSite=null)
+    {
+        Check(SolarSystemScene.TryCreateAt(root,SimulationInstant.Zero,out var value,out var error)&&value is not null,$"surface camera scene: {error}");
+        var scene=value!;camera=new CameraState(new FramePosition(root,Double3.Zero),DoubleQuaternion.Identity,scene.Projection,CameraMode.Free);
+        Check(scene.Focus(camera,NativePresentationFocus.Earth),"surface camera Earth focus");
+        var selectedSite=(requestedSite??site).Normalized();var earth=scene.FocusedBody;var height=terrainDefinition.SampleHeight(selectedSite,24);var bodyEye=selectedSite*(earth.RadiusMetres+height+25d);
+        camera.Position=camera.Position with{Value=earth.Position.Value+earth.BodyFixedToRoot.Rotate(bodyEye)};
+        var radial=earth.BodyFixedToRoot.Rotate(selectedSite);var yaw=Math.Atan2(radial.X,radial.Z);var pitch=-Math.Asin(Math.Clamp(radial.Y,-1d,1d));
+        camera.Orientation=(DoubleQuaternion.FromAxisAngle(Double3.UnitY,yaw)*DoubleQuaternion.FromAxisAngle(Double3.UnitX,pitch)).Normalized();
+        scene.EnforceFinalCameraInvariant(camera);
+        return scene;
+    }
+
+    foreach(var (label,rate,paused) in new[]{
+        ("Pause",SimulationRate.One,true),("0.1x",new SimulationRate(1,10),false),("1x",SimulationRate.One,false),
+        ("2x",SimulationRate.Two,false),("10x",SimulationRate.Ten,false),("30x",new SimulationRate(30,1),false),
+        ("600x",new SimulationRate(600,1),false)})
+    {
+        var scene=CreateAtSite(out var camera);
+        Check(scene.CurrentCameraReferenceAuthority==CameraReferenceAuthority.Inertial,
+            $"{label} low altitude remains inertial until explicit attach");
+        var beforeAttachPosition=camera.Position.Value;var beforeAttachOrientation=camera.Orientation;
+        Check(scene.TryAttachSurfaceCamera(camera),$"{label} explicit surface camera attach");
+        var attach=scene.SurfaceCameraLastTransitionMetrics;
+        maximumAttachPosition=Math.Max(maximumAttachPosition,attach.PositionErrorMetres);
+        maximumAttachPivot=Math.Max(maximumAttachPivot,attach.PivotErrorMetres);
+        maximumAttachOrientation=Math.Max(maximumAttachOrientation,attach.OrientationErrorRadians);
+        Check(scene.CurrentCameraReferenceAuthority==CameraReferenceAuthority.SurfaceRelative&&scene.CurrentSurfaceCameraState.IsValid&&
+            Math.Sqrt((camera.Position.Value-beforeAttachPosition).LengthSquared)<1e-4d&&SurfaceCameraAuthority.QuaternionAngularError(camera.Orientation,beforeAttachOrientation)<1e-7d,
+            $"{label} attach is atomic and pose-continuous");
+        var canonical=scene.CurrentSurfaceCameraState;var anchorIdentity=canonical.Anchor;var beforePupil=scene.ProductionPupilCell;var beforeBody=scene.FocusedBody;
+        Check(SurfaceCameraAuthority.TryEvaluate(beforeBody,canonical,terrain,out var beforePose),$"{label} evaluate retained surface pose");
+        var beforeRoot=camera.Position.Value;var beforeCameraToTerrain=beforePose.BodyFixedEye-
+            anchorIdentity.NormalizedBodyFixedDirection*(beforeBody.RadiusMetres+beforePose.PhysicalTerrainHeightMetres);
+        var requested=SimulationSpeedPresets.IndexOf(rate);while(scene.SpeedPresetIndex<requested)scene.ApplyPresentationInput(camera,new NativeInputState{RateIncrease=1},out _,out _);while(scene.SpeedPresetIndex>requested)scene.ApplyPresentationInput(camera,new NativeInputState{RateDecrease=1},out _,out _);
+        if(paused)scene.ApplyPresentationInput(camera,new NativeInputState{PauseToggle=1},out _,out _);
+        for(var frame=0;frame<200;frame++)Check(scene.TryAdvanceByHostDuration(SimulationDuration.FromSecondsRounded(.05d),camera,out var error),$"{label} stationary frame {frame}: {error}");
+        var afterBody=scene.FocusedBody;var afterState=scene.CurrentSurfaceCameraState;
+        Check(SurfaceCameraAuthority.TryEvaluate(afterBody,afterState,terrain,out var afterPose),$"{label} evaluate final surface pose");
+        var afterCameraBody=afterBody.BodyFixedToRoot.Conjugate().Normalized().Rotate(camera.Position.Value-afterBody.Position.Value);
+        var afterCameraToTerrain=afterPose.BodyFixedEye-anchorIdentity.NormalizedBodyFixedDirection*(afterBody.RadiusMetres+afterPose.PhysicalTerrainHeightMetres);
+        var canonicalEyeDrift=Math.Sqrt((afterPose.BodyFixedEye-beforePose.BodyFixedEye).LengthSquared);
+        var pivotDrift=Math.Sqrt((afterPose.BodyFixedPivot-beforePose.BodyFixedPivot).LengthSquared);
+        var rootRoundTripDrift=Math.Sqrt((afterCameraBody-afterPose.BodyFixedEye).LengthSquared);
+        var terrainDrift=Math.Sqrt((afterCameraToTerrain-beforeCameraToTerrain).LengthSquared);
+        var rootMotion=Math.Sqrt((camera.Position.Value-beforeRoot).LengthSquared);
+        var rootOrientationExpected=(afterBody.BodyFixedToRoot*afterState.BodyFixedOrientation).Normalized();
+        var orientationDrift=SurfaceCameraAuthority.QuaternionAngularError(camera.Orientation,rootOrientationExpected);
+        maximumCanonicalEyeDrift=Math.Max(maximumCanonicalEyeDrift,canonicalEyeDrift);
+        maximumPivotDrift=Math.Max(maximumPivotDrift,pivotDrift);
+        maximumRootRoundTripDrift=Math.Max(maximumRootRoundTripDrift,rootRoundTripDrift);
+        maximumTerrainRelativeDrift=Math.Max(maximumTerrainRelativeDrift,terrainDrift);
+        maximumRootMotion=Math.Max(maximumRootMotion,rootMotion);
+        maximumOrientationDrift=Math.Max(maximumOrientationDrift,orientationDrift);
+        minimumClearance=Math.Min(minimumClearance,scene.SurfaceAltitudeMetres);
+        Console.WriteLine($"Surface camera {label}: stateEqual={afterState==canonical}; anchorEqual={afterState.Anchor==anchorIdentity}; eye={canonicalEyeDrift:E9}; pivot={pivotDrift:E9}; terrain={terrainDrift:E9}; rootRoundTrip={rootRoundTripDrift:E9}; orientation={orientationDrift:E9}; pupil={beforePupil==scene.ProductionPupilCell}; altitude={scene.SurfaceAltitudeMetres:R}; rootMotion={rootMotion:R}");
+        Check(afterState.Anchor==anchorIdentity&&afterState==canonical&&canonicalEyeDrift==0d&&pivotDrift==0d&&terrainDrift==0d&&
+            rootRoundTripDrift<1e-3d&&orientationDrift<1e-7d&&scene.ProductionPupilCell==beforePupil&&
+            scene.SurfaceAltitudeMetres>=SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres,
+            $"{label} canonical body-fixed camera and terrain remain stationary");
+        if(paused)Check(rootMotion==0d,"paused surface camera root is stationary");else Check(rootMotion>0d,"active warp re-evaluates root pose through rotating Earth");
+        var beforeDetach=camera.Position.Value;var beforeDetachOrientation=camera.Orientation;
+        var beforeDetachPivot=scene.CurrentVisualAimRoot;
+        Check(scene.DetachSurfaceCamera(camera),$"{label} explicit surface camera detach");
+        maximumDetachPosition=Math.Max(maximumDetachPosition,Math.Sqrt((camera.Position.Value-beforeDetach).LengthSquared));
+        maximumDetachPivot=Math.Max(maximumDetachPivot,Math.Sqrt((scene.CurrentVisualAimRoot-beforeDetachPivot).LengthSquared));
+        maximumDetachOrientation=Math.Max(maximumDetachOrientation,SurfaceCameraAuthority.QuaternionAngularError(camera.Orientation,beforeDetachOrientation));
+        Check(scene.CurrentCameraReferenceAuthority==CameraReferenceAuthority.Inertial&&
+            Math.Sqrt((camera.Position.Value-beforeDetach).LengthSquared)<1e-3d&&SurfaceCameraAuthority.QuaternionAngularError(camera.Orientation,beforeDetachOrientation)<1e-7d,
+            $"{label} detach resolves the exact current pose into inertial authority");
+    }
+
+    var inertial=CreateAtSite(out var inertialCamera);
+    Check(inertial.TryAttachSurfaceCamera(inertialCamera)&&inertial.DetachSurfaceCamera(inertialCamera),
+        "surface authority round trip seeds the exact retained inertial pose");
+    var inertialBeforeBody=inertial.FocusedBody;
+    var inertialBeforeBodyEye=inertialBeforeBody.BodyFixedToRoot.Conjugate().Normalized().Rotate(inertialCamera.Position.Value-inertialBeforeBody.Position.Value);
+    Check(CelestialBodyOrientationEvaluator.TryEvaluate(SolarSystemBodyIds.Earth,inertial.CurrentTime,out var inertialOrientation),
+        "surface authority inertial control orientation");
+    var inertialExpectedSpeed=Math.Sqrt(Double3.Cross(inertialOrientation.AngularVelocityInInertial,
+        inertialBeforeBody.BodyFixedToRoot.Rotate(inertialBeforeBodyEye)).LengthSquared);
+    Check(inertial.TryAdvanceByHostDuration(SimulationDuration.FromSecondsRounded(.1d),inertialCamera,out var inertialError),
+        $"surface authority inertial control advance: {inertialError}");
+    var inertialAfterBody=inertial.FocusedBody;
+    var inertialAfterBodyEye=inertialAfterBody.BodyFixedToRoot.Conjugate().Normalized().Rotate(inertialCamera.Position.Value-inertialAfterBody.Position.Value);
+    var inertialMeasuredSpeed=Math.Sqrt((inertialAfterBodyEye-inertialBeforeBodyEye).LengthSquared)/.1d;
+    Check(Math.Abs(inertialMeasuredSpeed-inertialExpectedSpeed)/inertialExpectedSpeed<.002d,
+        "explicit detach restores Earth-relative inertial drift instead of retaining surface authority");
+    Console.WriteLine($"Surface camera inertial control: expected={inertialExpectedSpeed:R} m/s; measured={inertialMeasuredSpeed:R} m/s; latitude={latitude*180d/Math.PI:R} deg");
+
+    var explicitToggle=CreateAtSite(out var explicitToggleCamera);
+    explicitToggle.ApplyPresentationInput(explicitToggleCamera,new NativeInputState{MoveUp=1},out _,out _);
+    Check(explicitToggle.CurrentCameraReferenceAuthority==CameraReferenceAuthority.SurfaceRelative,
+        "explicit E/MoveUp edge attaches surface-relative authority");
+    explicitToggle.ApplyPresentationInput(explicitToggleCamera,new NativeInputState{MoveUp=1},out _,out _);
+    Check(explicitToggle.CurrentCameraReferenceAuthority==CameraReferenceAuthority.SurfaceRelative,
+        "held surface-authority control does not oscillate ownership");
+    explicitToggle.ApplyPresentationInput(explicitToggleCamera,default,out _,out _);
+    explicitToggle.ApplyPresentationInput(explicitToggleCamera,new NativeInputState{MoveUp=1},out _,out _);
+    Check(explicitToggle.CurrentCameraReferenceAuthority==CameraReferenceAuthority.Inertial,
+        "second explicit E/MoveUp edge detaches surface-relative authority");
+    Check(explicitToggle.Focus(explicitToggleCamera,NativePresentationFocus.Mars)&&!explicitToggle.TryAttachSurfaceCamera(explicitToggleCamera)&&
+        explicitToggle.CurrentCameraReferenceAuthority==CameraReferenceAuthority.Inertial,
+        "unsupported body remains in bounded inertial authority without altitude-inferred activation");
+
+    var stress=CreateAtSite(out var stressCamera);Check(stress.TryAttachSurfaceCamera(stressCamera),"surface input stress attach");
+    var fixedAnchor=stress.CurrentSurfaceCameraState.Anchor;var fixedPupil=stress.ProductionPupilCell;
+    stress.ApplyPresentationInput(stressCamera,new NativeInputState{LookActive=1,MouseDeltaX=90,MouseDeltaY=-45},out _,out _);
+    Check(stress.CurrentSurfaceCameraState.Anchor==fixedAnchor&&stress.ProductionPupilCell==fixedPupil,
+        "rotation-only surface input preserves canonical anchor and pupil geography");
+    stress.ApplyPresentationInput(stressCamera,new NativeInputState{MoveForward=1,MoveRight=1,DeltaSeconds=.1f},out _,out _);
+    var pupilAngularError=Math.Acos(Math.Clamp(Double3.Dot(stress.ProductionPupilCell.BodyFixedDirection,
+        stress.CurrentSurfaceCameraState.Anchor.NormalizedBodyFixedDirection),-1d,1d));
+    Check(stress.CurrentSurfaceCameraState.Anchor!=fixedAnchor&&pupilAngularError<=4d*Math.PI/PlanetaryProductionPupilOrientation.Resolution,
+        "surface translation explicitly moves canonical geography and pupil together");
+    for(var cycle=0;cycle<100;cycle++)
+    {
+        stress.ApplyPresentationInput(stressCamera,new NativeInputState{LookActive=1,MouseDeltaX=(cycle%9)-4,MouseDeltaY=(cycle%7)-3,MouseWheelDetents=(cycle&1)==0?1:-1},out _,out _);
+        stress.EnforceFinalCameraInvariant(stressCamera);minimumClearance=Math.Min(minimumClearance,stress.SurfaceAltitudeMetres);
+        var position=stressCamera.Position.Value;var orientation=stressCamera.Orientation;
+        Check(stress.DetachSurfaceCamera(stressCamera)&&stress.TryAttachSurfaceCamera(stressCamera),$"surface transition stress {cycle}");
+        maximumDetachPosition=Math.Max(maximumDetachPosition,Math.Sqrt((stressCamera.Position.Value-position).LengthSquared));
+        maximumDetachOrientation=Math.Max(maximumDetachOrientation,SurfaceCameraAuthority.QuaternionAngularError(stressCamera.Orientation,orientation));
+        maximumAttachPosition=Math.Max(maximumAttachPosition,stress.SurfaceCameraLastTransitionMetrics.PositionErrorMetres);
+        maximumAttachOrientation=Math.Max(maximumAttachOrientation,stress.SurfaceCameraLastTransitionMetrics.OrientationErrorRadians);
+        Check(stress.SurfaceAltitudeMetres>=SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres&&stress.CurrentSurfaceCameraState.IsValid,
+            $"surface transition stress {cycle} remains finite and exterior");
+    }
+
+    static Double3 GeographicDirection(double latitudeDegrees,double longitudeDegrees)
+    {
+        var latitudeRadians=latitudeDegrees*Math.PI/180d;var longitudeRadians=longitudeDegrees*Math.PI/180d;
+        var latitudeCosine=Math.Cos(latitudeRadians);
+        return new Double3(latitudeCosine*Math.Cos(longitudeRadians),Math.Sin(latitudeRadians),
+            latitudeCosine*Math.Sin(longitudeRadians)).Normalized();
+    }
+    var transitionSites=new[]{
+        site,GeographicDirection(0d,0d),GeographicDirection(-34.6d,18.5d),
+        GeographicDirection(89.9d,45d),GeographicDirection(27.9881d,86.925d)};
+    var transitionIndex=0;
+    foreach(var transitionSite in transitionSites)
+    {
+        var transitionScene=CreateAtSite(out var transitionCamera,transitionSite);
+        Check(transitionScene.TryAttachSurfaceCamera(transitionCamera),$"geographic transition site {transitionIndex} attach");
+        for(var cycle=0;cycle<20;cycle++)
+        {
+            transitionScene.ApplyPresentationInput(transitionCamera,new NativeInputState{
+                LookActive=1,MouseDeltaX=(cycle%5)-2,MouseDeltaY=(cycle%3)-1,
+                MouseWheelDetents=(cycle&1)==0?1:-1},out _,out _);
+            var beforePosition=transitionCamera.Position.Value;var beforePivot=transitionScene.CurrentVisualAimRoot;
+            var beforeOrientation=transitionCamera.Orientation;
+            Check(transitionScene.DetachSurfaceCamera(transitionCamera)&&transitionScene.TryAttachSurfaceCamera(transitionCamera),
+                $"geographic transition site {transitionIndex} cycle {cycle}");
+            var transitionPositionError=Math.Sqrt((transitionCamera.Position.Value-beforePosition).LengthSquared);
+            var transitionPivotError=Math.Sqrt((transitionScene.CurrentVisualAimRoot-beforePivot).LengthSquared);
+            var transitionOrientationError=SurfaceCameraAuthority.QuaternionAngularError(transitionCamera.Orientation,beforeOrientation);
+            maximumDetachPosition=Math.Max(maximumDetachPosition,transitionPositionError);
+            maximumDetachPivot=Math.Max(maximumDetachPivot,transitionPivotError);
+            maximumDetachOrientation=Math.Max(maximumDetachOrientation,transitionOrientationError);
+            maximumAttachPosition=Math.Max(maximumAttachPosition,transitionScene.SurfaceCameraLastTransitionMetrics.PositionErrorMetres);
+            maximumAttachPivot=Math.Max(maximumAttachPivot,transitionScene.SurfaceCameraLastTransitionMetrics.PivotErrorMetres);
+            maximumAttachOrientation=Math.Max(maximumAttachOrientation,transitionScene.SurfaceCameraLastTransitionMetrics.OrientationErrorRadians);
+            minimumClearance=Math.Min(minimumClearance,transitionScene.SurfaceAltitudeMetres);
+            Check(transitionPositionError<1e-3d&&transitionPivotError<1e-3d&&transitionOrientationError<1e-7d&&
+                transitionScene.SurfaceAltitudeMetres>=SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres,
+                $"geographic transition site {transitionIndex} cycle {cycle} is atomic and exterior");
+        }
+        transitionIndex++;
+    }
+
+    var benchmarkBody=stress.FocusedBody;var benchmarkState=stress.CurrentSurfaceCameraState;
+    Check(SurfaceCameraAuthority.TryEvaluate(benchmarkBody,benchmarkState,terrain,out _),"warm surface-camera evaluator");
+    var timer=new Stopwatch();var beforeAllocation=GC.GetAllocatedBytesForCurrentThread();timer.Start();double checksum=0d;
+    for(var index=0;index<100_000;index++){Check(SurfaceCameraAuthority.TryEvaluate(benchmarkBody,benchmarkState,terrain,out var pose),"surface camera benchmark evaluation");checksum+=pose.BodyFixedEye.X;}
+    timer.Stop();evaluationAllocations=GC.GetAllocatedBytesForCurrentThread()-beforeAllocation;evaluationNanoseconds=timer.Elapsed.TotalNanoseconds/100_000d;
+    Check(evaluationAllocations==0&&checksum!=0d,"surface-camera hot evaluation allocates zero bytes");
+
+    Console.WriteLine($"Surface camera authority: attach={maximumAttachPosition:E9} m/{maximumAttachPivot:E9} m/{maximumAttachOrientation:E9} rad; detach={maximumDetachPosition:E9} m/{maximumDetachPivot:E9} m/{maximumDetachOrientation:E9} rad; canonicalEyeDrift={maximumCanonicalEyeDrift:E9} m; pivotDrift={maximumPivotDrift:E9} m; rootRoundTrip={maximumRootRoundTripDrift:E9} m; terrainDrift={maximumTerrainRelativeDrift:E9} m; rootMotion={maximumRootMotion:R} m; orientation={maximumOrientationDrift:E9} rad; minClearance={minimumClearance:R} m; evaluation={evaluationNanoseconds:F1} ns; allocations={evaluationAllocations}");
 }
 
 static void ProductionCubeSphereGpuResidencyIntegrationTest()

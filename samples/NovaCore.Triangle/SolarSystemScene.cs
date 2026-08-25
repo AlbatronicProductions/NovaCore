@@ -1,6 +1,7 @@
 using NovaCore.Core;
 using NovaCore.Core.Camera;
 using NovaCore.Core.ReferenceFrames;
+using NovaCore.Core.Surface;
 using NovaCore.Graphics;
 using NovaCore.Interop;
 using NovaCore.Simulation.Celestial;
@@ -257,6 +258,8 @@ internal sealed class SolarSystemScene
     private double _orbitDistance;
     private double _orbitYawRadians;
     private double _orbitPitchRadians;
+    private DoubleQuaternion? _inertialOrbitOrientationOverride;
+    private Double3? _inertialOrbitOffsetDirectionOverride;
     private double _surfaceAnchorBlend;
     private SurfaceAnchorFocus? _retainedVisualAimAnchor;
     private Double3 _retainedVisualAimOffsetRoot;
@@ -281,6 +284,11 @@ internal sealed class SolarSystemScene
     private bool _bodyLocalCameraPlacementPending;
     private bool _bodyLocalCameraPlacementUseOrbitCandidate;
     private FocusTarget _focusTarget = FocusTarget.BodyCenter(BodyOrder[0]);
+    private CameraReferenceAuthority _cameraReferenceAuthority;
+    private SurfaceCameraState _surfaceCameraState;
+    private Double3 _surfaceCameraPivotRoot;
+    private bool _surfaceCameraToggleWasDown;
+    private SurfaceCameraTransitionMetrics _surfaceCameraLastTransitionMetrics;
 
     private SolarSystemScene(
         CelestialSystemDefinition system,
@@ -347,10 +355,14 @@ internal sealed class SolarSystemScene
     internal long ProductionEyeballTierChanges => _productionEyeballSelection.TierChanges;
     internal PlanetRenderProxy FocusedBody => Presentation.Bodies[FocusIndex];
     internal FocusTarget CurrentFocusTarget => _focusTarget;
-    internal Double3 CurrentFocusRoot => _focusTarget.Kind==FocusTargetKind.SurfaceAnchor
+    internal Double3 CurrentFocusRoot => _cameraReferenceAuthority==CameraReferenceAuthority.SurfaceRelative
+        ? _surfaceCameraPivotRoot
+        : _focusTarget.Kind==FocusTargetKind.SurfaceAnchor
         ? SurfaceFocusHandoffPolicy.BlendedRoot(FocusedBody.Position.Value,EvaluateSurfaceAnchorRoot(),_surfaceAnchorBlend)
         : FocusedBody.Position.Value;
-    internal Double3 CurrentVisualAimRoot => EvaluateRetainedVisualAimRoot(CurrentFocusRoot);
+    internal Double3 CurrentVisualAimRoot => _cameraReferenceAuthority==CameraReferenceAuthority.SurfaceRelative
+        ? _surfaceCameraPivotRoot
+        : EvaluateRetainedVisualAimRoot(CurrentFocusRoot);
     internal SimulationInstant CurrentTime => _clock.CurrentTime;
     internal SimulationRate Rate => _clock.Rate;
     internal int SpeedPresetIndex => _rateStepIndex;
@@ -385,6 +397,9 @@ internal sealed class SolarSystemScene
     internal int CameraClearanceMaximumIterations=>_cameraClearanceMaximumIterations;
     internal double CameraClearanceMaximumCorrectionMetres=>_cameraClearanceMaximumCorrectionMetres;
     internal double BodyLocalCameraAltitudeDemandMetres=>_bodyLocalCameraAltitudeDemandMetres;
+    internal CameraReferenceAuthority CurrentCameraReferenceAuthority=>_cameraReferenceAuthority;
+    internal SurfaceCameraState CurrentSurfaceCameraState=>_surfaceCameraState;
+    internal SurfaceCameraTransitionMetrics SurfaceCameraLastTransitionMetrics=>_surfaceCameraLastTransitionMetrics;
     internal ReadOnlySpan<ulong> VisibleLabelIds => _visibleLabelIds.AsSpan(0, VisibleLabelCount);
     internal ReadOnlySpan<byte> OrbitOpacityBytes => _orbitOpacityBytes;
     internal int VisibleLabelCount { get; private set; }
@@ -502,6 +517,7 @@ internal sealed class SolarSystemScene
     {
         if ((uint)index >= Presentation.Count) return false;
         FocusIndex = index;
+        _cameraReferenceAuthority=CameraReferenceAuthority.Inertial;_surfaceCameraState=default;_surfaceCameraPivotRoot=default;_inertialOrbitOrientationOverride=null;_inertialOrbitOffsetDirectionOverride=null;
         _focusTarget = FocusTarget.BodyCenter(Presentation.Bodies[index].BodyId);
         _handoff = new PlanetaryRepresentationHandoff(EarthPlanetaryScene.HandoffConfiguration);
         _orbitDistance = FocusFramingDistance(FocusedBody);
@@ -536,6 +552,19 @@ internal sealed class SolarSystemScene
         {
             if (_clock.IsPaused) _clock.Resume(); else _clock.Pause();
             pauseChanged = true;
+        }
+
+        var surfaceToggleDown=input.MoveUp!=0;
+        if(surfaceToggleDown&&!_surfaceCameraToggleWasDown)
+        {
+            if(_cameraReferenceAuthority==CameraReferenceAuthority.SurfaceRelative)DetachSurfaceCamera(camera);
+            else TryAttachSurfaceCamera(camera);
+        }
+        _surfaceCameraToggleWasDown=surfaceToggleDown;
+        if(_cameraReferenceAuthority==CameraReferenceAuthority.SurfaceRelative)
+        {
+            ApplySurfaceCameraInput(camera,input);
+            return;
         }
 
         var cameraChanged = false;
@@ -596,7 +625,7 @@ internal sealed class SolarSystemScene
         }
         if (input.LookActive != 0 && (input.MouseDeltaX != 0f || input.MouseDeltaY != 0f))
         {
-            _orbitYawRadians-=input.MouseDeltaX*OrbitSensitivity;_orbitPitchRadians=Math.Clamp(_orbitPitchRadians-input.MouseDeltaY*OrbitSensitivity,-1.45d,1.45d);
+            ApplyInertialLook(input.MouseDeltaX,input.MouseDeltaY);
             _bodyLocalCameraPlacementUseOrbitCandidate=true;
             CameraPresentationMode = SolarCameraPresentationMode.Free3D;
             cameraChanged = true;
@@ -639,6 +668,7 @@ internal sealed class SolarSystemScene
     internal void ResetPresentationCamera(CameraState camera)
     {
         FocusIndex = 0;
+        _cameraReferenceAuthority=CameraReferenceAuthority.Inertial;_surfaceCameraState=default;_surfaceCameraPivotRoot=default;_surfaceCameraToggleWasDown=false;_inertialOrbitOrientationOverride=null;_inertialOrbitOffsetDirectionOverride=null;
         _focusTarget = FocusTarget.BodyCenter(Presentation.Bodies[0].BodyId);
         _handoff = new PlanetaryRepresentationHandoff(EarthPlanetaryScene.HandoffConfiguration);
         _orbitDistance = SolAnalyticalDefinition.AstronomicalUnitMetres * InitialOverviewDistanceAu;
@@ -915,8 +945,193 @@ internal sealed class SolarSystemScene
         return true;
     }
 
+    internal bool TryAttachSurfaceCamera(CameraState camera)
+    {
+        if(_cameraReferenceAuthority==CameraReferenceAuthority.SurfaceRelative)return true;
+        var terrain=FocusedTerrain;
+        var physicalTerrain=new PlanetaryPhysicalTerrainAuthority(FocusedBody.BodyId,terrain);
+        if(!physicalTerrain.IsValid||!physicalTerrain.SupportsBody(FocusedBody.BodyId))return false;
+        var pivotRoot=CurrentVisualAimRoot;
+        if(!SurfaceCameraAuthority.TryAttach(FocusedBody,
+            new UniversePosition(camera.Position.Value,Presentation.RootFrame),
+            new UniversePosition(pivotRoot,Presentation.RootFrame),camera.Orientation,physicalTerrain,
+            out var state,out _,out var metrics))return false;
+        _surfaceCameraState=state;
+        _surfaceCameraLastTransitionMetrics=metrics;
+        _cameraReferenceAuthority=CameraReferenceAuthority.SurfaceRelative;
+        _inertialOrbitOrientationOverride=null;
+        _inertialOrbitOffsetDirectionOverride=null;
+        ApplySurfaceCameraPose(camera);
+        return true;
+    }
+
+    internal bool DetachSurfaceCamera(CameraState camera)
+    {
+        if(_cameraReferenceAuthority!=CameraReferenceAuthority.SurfaceRelative)return true;
+        var terrain=FocusedTerrain;
+        var physicalTerrain=new PlanetaryPhysicalTerrainAuthority(FocusedBody.BodyId,terrain);
+        if(!SurfaceCameraAuthority.TryEvaluate(FocusedBody,_surfaceCameraState,physicalTerrain,out var pose))return false;
+        var offset=pose.RootEye.Value-pose.RootPivot.Value;
+        if(!offset.IsFinite||offset.LengthSquared<=0d)return false;
+        var rootRadial=offset.Normalized();
+        _orbitDistance=Math.Sqrt(offset.LengthSquared);
+        _orbitYawRadians=Math.Atan2(rootRadial.X,rootRadial.Z);
+        _orbitPitchRadians=-Math.Asin(Math.Clamp(rootRadial.Y,-1d,1d));
+        _inertialOrbitOrientationOverride=pose.RootOrientation;
+        _inertialOrbitOffsetDirectionOverride=rootRadial;
+        var anchorFocus=SurfaceAnchorFocus.AtDirection(FocusedBody.BodyId,
+            _surfaceCameraState.Anchor.NormalizedBodyFixedDirection,FocusedBody.RadiusMetres,
+            pose.PhysicalTerrainHeightMetres);
+        _focusTarget=FocusTarget.AtSurface(anchorFocus);
+        _surfaceAnchorBlend=1d;
+        _retainedVisualAimAnchor=anchorFocus;
+        _retainedVisualAimOffsetRoot=pose.RootPivot.Value-FocusedBody.Position.Value;
+        _retainedVisualAimWeight=1d;
+        _cameraReferenceAuthority=CameraReferenceAuthority.Inertial;
+        _surfaceCameraState=default;
+        _surfaceCameraPivotRoot=default;
+        ApplyOrbitPose(camera);
+        _surfaceCameraLastTransitionMetrics=new(
+            Math.Sqrt((camera.Position.Value-pose.RootEye.Value).LengthSquared),0d,
+            SurfaceCameraAuthority.QuaternionAngularError(camera.Orientation,pose.RootOrientation));
+        return _surfaceCameraLastTransitionMetrics.IsFinite;
+    }
+
+    private void ApplySurfaceCameraInput(CameraState camera,in NativeInputState input)
+    {
+        if(_cameraReferenceAuthority!=CameraReferenceAuthority.SurfaceRelative)return;
+        var terrain=FocusedTerrain;
+        var physicalTerrain=new PlanetaryPhysicalTerrainAuthority(FocusedBody.BodyId,terrain);
+        if(!SurfaceCameraAuthority.TryEvaluate(FocusedBody,_surfaceCameraState,physicalTerrain,out var pose)||
+            !SurfaceEnuFrame.TryCreate(_surfaceCameraState.Anchor,out var enu))
+            throw new InvalidOperationException("The retained surface camera state cannot be evaluated.");
+        var changed=false;
+        if(input.LookActive!=0&&(input.MouseDeltaX!=0f||input.MouseDeltaY!=0f))
+        {
+            var yaw=DoubleQuaternion.FromAxisAngle(enu.Up,-input.MouseDeltaX*OrbitSensitivity);
+            var yawOrientation=(yaw*_surfaceCameraState.BodyFixedOrientation).Normalized();
+            var right=yawOrientation.Rotate(Double3.UnitX).Normalized();
+            var pitch=DoubleQuaternion.FromAxisAngle(right,-input.MouseDeltaY*OrbitSensitivity);
+            var rotation=(pitch*yaw).Normalized();
+            var candidateOrientation=(rotation*_surfaceCameraState.BodyFixedOrientation).Normalized();
+            var forward=candidateOrientation.Rotate(new Double3(0d,0d,-1d)).Normalized();
+            if(Math.Abs(Math.Asin(Math.Clamp(Double3.Dot(forward,enu.Up),-1d,1d)))>1.45d)
+            {
+                rotation=yaw;
+                candidateOrientation=yawOrientation;
+            }
+            var rotatedEye=pose.BodyFixedPivot+rotation.Rotate(pose.BodyFixedEye-pose.BodyFixedPivot);
+            var anchorBody=pose.BodyFixedEye-SurfaceCameraAuthority.FromEnu(_surfaceCameraState.EyeOffsetEnuMetres,enu);
+            if(!SurfaceCameraState.TryCreate(_surfaceCameraState.Anchor,
+                SurfaceCameraAuthority.ToEnu(rotatedEye-anchorBody,enu),_surfaceCameraState.PivotOffsetEnuMetres,
+                candidateOrientation,out _surfaceCameraState))
+                throw new InvalidOperationException("Surface camera orbit input produced an invalid state.");
+            changed=true;
+        }
+        if(input.MouseWheelDetents!=0)
+        {
+            if(!SurfaceCameraAuthority.TryEvaluate(FocusedBody,_surfaceCameraState,physicalTerrain,out pose)||
+                !SurfaceEnuFrame.TryCreate(_surfaceCameraState.Anchor,out enu))
+                throw new InvalidOperationException("Surface camera zoom cannot evaluate the retained state.");
+            var eyeFromPivot=pose.BodyFixedEye-pose.BodyFixedPivot;
+            var distance=Math.Sqrt(eyeFromPivot.LengthSquared);
+            if(!double.IsFinite(distance)||distance<=0d)throw new InvalidOperationException("Surface camera eye and pivot are degenerate.");
+            var maximum=SolAnalyticalDefinition.AstronomicalUnitMetres*MaximumOverviewDistanceAu;
+            var nextDistance=Math.Clamp(distance*Math.Exp(-Math.Clamp(input.MouseWheelDetents,-100,100)*.12d),1d,maximum);
+            var nextEye=pose.BodyFixedPivot+eyeFromPivot*(nextDistance/distance);
+            var anchorBody=pose.BodyFixedEye-SurfaceCameraAuthority.FromEnu(_surfaceCameraState.EyeOffsetEnuMetres,enu);
+            if(!SurfaceCameraState.TryCreate(_surfaceCameraState.Anchor,
+                SurfaceCameraAuthority.ToEnu(nextEye-anchorBody,enu),_surfaceCameraState.PivotOffsetEnuMetres,
+                _surfaceCameraState.BodyFixedOrientation,out _surfaceCameraState))
+                throw new InvalidOperationException("Surface camera zoom input produced an invalid state.");
+            changed=true;
+        }
+        if((input.MoveForward!=input.MoveBackward||input.MoveRight!=input.MoveLeft)&&
+            physicalTerrain.SupportsBody(FocusedBody.BodyId))
+        {
+            var forwardAxis=(int)input.MoveForward-(int)input.MoveBackward;
+            var rightAxis=(int)input.MoveRight-(int)input.MoveLeft;
+            var axisLength=Math.Sqrt(forwardAxis*forwardAxis+rightAxis*rightAxis);
+            var seconds=Math.Clamp((double)input.DeltaSeconds,0d,.1d);
+            var travel=PlanetarySurfaceCameraPolicy.TranslationSpeedMetresPerSecond(Math.Max(0d,_surfaceAltitudeMetres))*seconds;
+            var tangent=(enu.North*forwardAxis+enu.East*rightAxis)/axisLength;
+            var direction=(_surfaceCameraState.Anchor.NormalizedBodyFixedDirection+
+                tangent*(travel/FocusedBody.RadiusMetres)).Normalized();
+            if(SurfaceAnchor.TryCreate(FocusedBody.BodyId,physicalTerrain.AuthorityVersion,direction,0d,out var movedAnchor)!=SurfaceAnchorCreationStatus.Success||
+                !SurfaceCameraState.TryCreate(movedAnchor,_surfaceCameraState.EyeOffsetEnuMetres,
+                    _surfaceCameraState.PivotOffsetEnuMetres,_surfaceCameraState.BodyFixedOrientation,out _surfaceCameraState))
+                throw new InvalidOperationException("Surface camera translation produced an invalid anchor.");
+            changed=true;
+        }
+        if(changed)ApplySurfaceCameraPose(camera);
+    }
+
+    private void ApplySurfaceCameraPose(CameraState camera)
+    {
+        var terrain=FocusedTerrain;
+        var physicalTerrain=new PlanetaryPhysicalTerrainAuthority(FocusedBody.BodyId,terrain);
+        if(!SurfaceCameraAuthority.TryEvaluate(FocusedBody,_surfaceCameraState,physicalTerrain,out var pose))
+            throw new InvalidOperationException("The retained surface camera authority cannot be evaluated.");
+        var candidateCamera=pose.RootEye.Value;
+        if(FocusedBodyHasNavigableSolidSurface)
+        {
+            var retainedState=_surfaceCameraState;
+            if(!SurfaceCameraAuthority.TryConstrainBodyFixedEye(FocusedBody,retainedState,physicalTerrain,
+                SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres,
+                SurfaceFocusHandoffPolicy.TerrainClearanceCorrectionTargetMetres,
+                out _surfaceCameraState,out pose,out var constrained))
+                ThrowFinalCameraExteriorFailure(FocusedBody.BodyId,candidateCamera);
+            RecordCameraExteriorConstraint(constrained);
+            candidateCamera=pose.RootEye.Value;
+            _surfaceAltitudeMetres=constrained.SurfaceAltitudeMetres;
+        }
+        else _surfaceAltitudeMetres=SurfaceAnchorAcquisition.SurfaceAltitude(FocusedBody,candidateCamera,terrain);
+        var anchorFocus=SurfaceAnchorFocus.AtDirection(FocusedBody.BodyId,
+            _surfaceCameraState.Anchor.NormalizedBodyFixedDirection,FocusedBody.RadiusMetres,pose.PhysicalTerrainHeightMetres);
+        _focusTarget=FocusTarget.AtSurface(anchorFocus);
+        _surfaceAnchorBlend=1d;
+        _surfaceCameraPivotRoot=pose.RootPivot.Value;
+        _orbitDistance=Math.Sqrt((candidateCamera-_surfaceCameraPivotRoot).LengthSquared);
+        _surfaceCameraMode=PlanetaryCameraPresentationMode.SurfaceLocal;
+        CameraPresentationMode=SolarCameraPresentationMode.SurfaceLocal;
+        camera.Orientation=pose.RootOrientation;
+        camera.Projection=Projection;
+        camera.Position=camera.Position with{Value=candidateCamera};
+        _publishedCameraRoot=candidateCamera;
+        camera.Validate();
+        Update(camera);
+    }
+
+    private void ApplyInertialLook(float mouseDeltaX,float mouseDeltaY)
+    {
+        if(_inertialOrbitOrientationOverride is not { } current)
+        {
+            _orbitYawRadians-=mouseDeltaX*OrbitSensitivity;
+            _orbitPitchRadians=Math.Clamp(_orbitPitchRadians-mouseDeltaY*OrbitSensitivity,-1.45d,1.45d);
+            return;
+        }
+        var yaw=DoubleQuaternion.FromAxisAngle(Double3.UnitY,-mouseDeltaX*OrbitSensitivity);
+        var yawed=(yaw*current).Normalized();
+        var radialBefore=OrbitOffsetDirection();
+        var yawedRadial=yaw.Rotate(radialBefore).Normalized();
+        var right=yawed.Rotate(Double3.UnitX).Normalized();
+        var pitch=DoubleQuaternion.FromAxisAngle(right,-mouseDeltaY*OrbitSensitivity);
+        var candidate=(pitch*yawed).Normalized();
+        var radial=pitch.Rotate(yawedRadial).Normalized();
+        if(Math.Abs(Math.Asin(Math.Clamp(radial.Y,-1d,1d)))>1.45d){candidate=yawed;radial=yawedRadial;}
+        _inertialOrbitOrientationOverride=candidate;
+        _inertialOrbitOffsetDirectionOverride=radial;
+        _orbitYawRadians=Math.Atan2(radial.X,radial.Z);
+        _orbitPitchRadians=-Math.Asin(Math.Clamp(radial.Y,-1d,1d));
+    }
+
     private void ApplyOrbitPose(CameraState camera,bool allowFocusTransition=false)
     {
+        if(_cameraReferenceAuthority==CameraReferenceAuthority.SurfaceRelative)
+        {
+            ApplySurfaceCameraPose(camera);
+            return;
+        }
         var orientation=OrbitOrientation();
         var rootRadial=OrbitOffsetDirection();
         var terrain=FocusedTerrain;
@@ -1038,6 +1253,24 @@ internal sealed class SolarSystemScene
     internal double EnforceFinalCameraInvariant(CameraState camera)
     {
         var terrain=FocusedTerrain;
+        if(_cameraReferenceAuthority==CameraReferenceAuthority.SurfaceRelative)
+        {
+            var physicalTerrain=new PlanetaryPhysicalTerrainAuthority(FocusedBody.BodyId,terrain);
+            var retainedState=_surfaceCameraState;
+            if(!SurfaceCameraAuthority.TryConstrainBodyFixedEye(FocusedBody,retainedState,physicalTerrain,
+                SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres,
+                SurfaceFocusHandoffPolicy.TerrainClearanceCorrectionTargetMetres,
+                out _surfaceCameraState,out var pose,out var surfaceConstraint))
+                ThrowFinalCameraExteriorFailure(FocusedBody.BodyId,camera.Position.Value);
+            RecordCameraExteriorConstraint(surfaceConstraint);
+            camera.Position=camera.Position with{Value=pose.RootEye.Value};
+            camera.Orientation=pose.RootOrientation;
+            _surfaceCameraPivotRoot=pose.RootPivot.Value;
+            _publishedCameraRoot=pose.RootEye.Value;
+            _surfaceAltitudeMetres=surfaceConstraint.SurfaceAltitudeMetres;
+            camera.Validate();
+            return _surfaceAltitudeMetres;
+        }
         if(FocusedBodyHasNavigableSolidSurface)
         {
             if(!SurfaceAnchorAcquisition.TryConstrainCameraOrigin(
@@ -1117,10 +1350,10 @@ internal sealed class SolarSystemScene
         _retainedVisualAimWeight=SurfaceVisualAimHandoffPolicy.RetainedWeight(separation);
         if(_retainedVisualAimWeight==0d){_retainedVisualAimAnchor=null;_retainedVisualAimOffsetRoot=Double3.Zero;}
     }
-    private DoubleQuaternion OrbitOrientation()=>
+    private DoubleQuaternion OrbitOrientation()=>_inertialOrbitOrientationOverride??
         (DoubleQuaternion.FromAxisAngle(Double3.UnitY,_orbitYawRadians)*DoubleQuaternion.FromAxisAngle(Double3.UnitX,_orbitPitchRadians)).Normalized();
-    private Double3 OrbitOffsetDirection()=>-OrbitOrientation().Rotate(new Double3(0d,0d,-1d));
-    private Double3 CurrentSurfaceDirection(){if(_focusTarget.Kind==FocusTargetKind.SurfaceAnchor)return _focusTarget.SurfaceAnchor.BodyFixedDirection;var rootRadial=OrbitOffsetDirection();return FocusedBody.BodyFixedToRoot.Conjugate().Normalized().Rotate(rootRadial);}
+    private Double3 OrbitOffsetDirection()=>_inertialOrbitOffsetDirectionOverride??-OrbitOrientation().Rotate(new Double3(0d,0d,-1d));
+    private Double3 CurrentSurfaceDirection(){if(_cameraReferenceAuthority==CameraReferenceAuthority.SurfaceRelative)return _surfaceCameraState.Anchor.NormalizedBodyFixedDirection;if(_focusTarget.Kind==FocusTargetKind.SurfaceAnchor)return _focusTarget.SurfaceAnchor.BodyFixedDirection;var rootRadial=OrbitOffsetDirection();return FocusedBody.BodyFixedToRoot.Conjugate().Normalized().Rotate(rootRadial);}
 
     private void UpdateOrbitVertices(CameraState camera)
     {
