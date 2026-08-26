@@ -53,6 +53,25 @@ ABI is active yet. 11B-7B may use this contract to begin GPU physical-height
 preparation. Until a later takeover is proved, the terrain-v5 globe and T0–T3
 Eyeball above remain the sole live Earth surface.
 
+### Dormant GPU physical-height preparation (11B-7B)
+
+11B-7B adds a separate bounded validation ABI and Vulkan compute path; it does
+not participate in frame submission or terrain ownership. The query transports
+canonical FP64 body-fixed geography as FP32 high/low anchor components plus a
+small local delta, independently reconstructs the relaxed-cube face/address on
+the GPU, and samples the checked terrain-v5/global and local-v2 payloads. A
+bounded readback compares the result with the canonical CPU physical-terrain
+authority, `PlanetaryPhysicalTerrainAuthority.TrySampleHeight`, including
+Florida ENU offsets and cube edges/corners. Physical source selection follows
+dataset availability rather than transient GPU residency. Host writes,
+compute reads/writes, and host readback have explicit Vulkan barriers. The
+proof creates no live draw, dispatch, descriptor, or steady-state resource.
+
+The live renderer remains the accepted 11B-6C/11B-7A terrain-v5 L0–L2 globe
+plus persistent T0–T3 Eyeball. A later 11B-7C may consume the proven GPU height
+contract to prepare displaced camera-relative mesh vertices and generated
+physical normals; 11B-7B neither renders those vertices nor retires Eyeball.
+
 The old equirectangular SVT page model, 5×5 predictor, per-page fallback/fade,
 deep-global near-ground refinement, and per-frame radial Eyeball compute path
 were retired in 4C. Lawful source rasters and their provenance remain offline

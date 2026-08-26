@@ -62,11 +62,47 @@ enum NcHostEventType : uint32_t { NC_DIAGNOSTIC = 1, NC_UPDATE_FRAME = 2 };
 enum NcLogCategory : uint32_t { NC_LOG_ALWAYS = 0, NC_LOG_NONE = 0, NC_LOG_STARTUP = 1 << 0, NC_LOG_VULKAN = 1 << 1, NC_LOG_PRECISION = 1 << 2, NC_LOG_INPUT = 1 << 3, NC_LOG_RENDERER = 1 << 4, NC_LOG_VALIDATION = 1 << 5, NC_LOG_CAMERA = 1 << 6 };
 struct NcHostEvent { NcHostEventType type; uint32_t logCategory; const char* utf8Message; NcInputState input; NcFrameSubmission* submission; };
 struct NcRuntimeAssets { uint32_t size, version; const char* productionTerrainPathUtf8; const char* localTerrainPathUtf8; };
+// Dormant 11B-7B query ABI.  These records are std430-compatible and are not
+// part of the live frame submission.  Every byte is explicitly initialized by
+// the managed caller or native result writer.
+struct alignas(16) NcPlanetaryHeightQuery {
+  float anchorHigh[4];
+  float anchorLow[4];
+  float localDelta[4];
+  double oracleUv[2]; // CPU-oracle storage address derived from the same body-fixed point
+  uint32_t identity[4]; // body low/high, terrain version, anchored tier
+  uint32_t metadata[4]; // topology version, source policy, reserved, reserved
+};
+struct alignas(16) NcPlanetaryHeightResult {
+  float reconstructedHigh[4];
+  float reconstructedLow[4];
+  double faceUv[2];
+  double oracleAndTerrainV5Height[2];
+  double localAndPhysicalHeight[2];
+  double reconstructedXY[2];
+  double reconstructedZAndLength[2];
+  uint32_t globalIdentity[4]; // face, level, x, y
+  uint32_t localIdentity[4];  // available, level, x, y
+  uint32_t source[4];         // valid, local available, terrain version, reserved
+};
+struct NcPlanetaryHeightQueryAssets {
+  uint32_t size, version;
+  const char* elevationOraclePathUtf8;
+  const char* productionTerrainPathUtf8;
+  const char* localTerrainPathUtf8;
+  const char* computeShaderPathUtf8;
+};
+struct alignas(8) NcPlanetaryHeightQueryMetrics {
+  uint32_t size, version, queryCount, dispatchGroups;
+  uint32_t validationErrors, globalRecordCount, localRecordCount, reserved;
+  double cpuMilliseconds, gpuMilliseconds;
+};
 typedef void(__cdecl* NcHostCallback)(NcHostEvent* hostEvent, void* userData);
 enum NcResult : int32_t { NC_SUCCESS = 0, NC_FAILURE = 1, NC_INVALID_ARGUMENT = 2 };
 NC_API NcResult __cdecl nc_run_renderer(NcFrameSubmission* submission, NcHostCallback callback, void* userData);
 NC_API NcResult __cdecl nc_run_renderer_with_assets(NcFrameSubmission* submission, NcHostCallback callback, void* userData, const NcRuntimeAssets* assets);
 NC_API NcResult __cdecl nc_validate_planetary_patches(const NcPlanetaryPatch* patches, uint32_t count);
 NC_API NcResult __cdecl nc_validate_terrain_asset(const char* pathUtf8, uint64_t bodyId, uint32_t terrainVersion, uint32_t expectedRecordCount);
+NC_API NcResult __cdecl nc_query_planetary_physical_heights(const NcPlanetaryHeightQuery* queries, uint32_t count, NcPlanetaryHeightResult* results, const NcPlanetaryHeightQueryAssets* assets, NcPlanetaryHeightQueryMetrics* metrics);
 NC_API NcResult __cdecl nc_get_abi_layout(NcAbiLayout* layout);
 }

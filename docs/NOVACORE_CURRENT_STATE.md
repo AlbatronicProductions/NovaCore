@@ -51,6 +51,21 @@ not bound to native rendering. The live renderer remains the accepted 11B-6C
 terrain-v5 L0–L2 globe plus persistent T0–T3 Eyeball; no topology, ownership,
 draw, streaming, material, camera, or visible behavior changes in 11B-7A.
 
+11B-7B adds an equally dormant, explicitly invoked GPU physical-height proof.
+A dedicated 96-byte query transports the 11B-7A body-fixed anchor through
+split high/low FP32 plus a bounded local delta; a 160-byte result reports the
+GPU-reconstructed point, canonical relaxed-cube address, global/local source
+identity, and physical height. A temporary bounded Vulkan compute context
+loads the checked CPU elevation oracle and terrain-v5/local-v2 data, dispatches
+only for the requested validation batch, applies explicit host/compute/readback
+barriers, and is destroyed after readback. The CPU authority remains
+`PlanetaryPhysicalTerrainAuthority.TrySampleHeight`; GPU payload residency is
+never physical truth. This path is absent from normal frame submission and
+adds no live draw, dispatch, resource, ownership, camera, material, or visible
+change. The next bounded step is 11B-7C displaced camera-relative vertices and
+generated physical normals; the current globe and Eyeball remain live until a
+later takeover is separately proved.
+
 4C/11B-4 remove the superseded equirectangular SVT descriptors,
 request/upload/page cache, independent fallback/fade, sparse regional overlay,
 deep-global close-range ownership, and per-frame radial Eyeball compute

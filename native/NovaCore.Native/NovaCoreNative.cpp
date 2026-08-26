@@ -1,6 +1,7 @@
 #include "NovaCoreNative.h"
 #include "ProductionCubeSurface.h"
 #include "LocalTerrainPack.h"
+#include "PlanetaryHeightQuery.h"
 #include <algorithm>
 #include <array>
 #include <chrono>
@@ -1932,6 +1933,10 @@ extern "C" NC_API NcResult __cdecl nc_validate_terrain_asset(const char *path, u
   std::ifstream input(path,std::ios::binary);char magic[8]{};if(!input.read(magic,sizeof magic))return NC_FAILURE;std::string error;
   if(std::memcmp(magic,"NCCUBE2\0",8)==0){nc::localterrain::Pack pack;if(!pack.Open(path,error)||pack.BodyId()!=bodyId||pack.TerrainVersion()!=terrainVersion||pack.RecordCount()!=expectedRecordCount||pack.Records().empty())return NC_FAILURE;nc::localterrain::Payload payload;return pack.Read(pack.Records().front().id,payload,error)&&payload.digestValid?NC_SUCCESS:NC_FAILURE;}
   nc::production::Pack pack;if(!pack.Open(path,error)||pack.BodyId()!=bodyId||pack.TerrainVersion()!=terrainVersion||pack.RecordCount()!=expectedRecordCount)return NC_FAILURE;nc::production::Payload payload;const nc::production::PatchId root{bodyId,terrainVersion,0,0,0,0};return pack.Read(root,payload,error)&&payload.digestValid?NC_SUCCESS:NC_FAILURE;
+}
+
+extern "C" NC_API NcResult __cdecl nc_query_planetary_physical_heights(const NcPlanetaryHeightQuery* queries,uint32_t count,NcPlanetaryHeightResult* results,const NcPlanetaryHeightQueryAssets* assets,NcPlanetaryHeightQueryMetrics* metrics){
+  return RunPlanetaryHeightQueries(queries,count,results,assets,metrics);
 }
 extern "C" NC_API NcResult __cdecl nc_run_renderer(NcFrameSubmission *s, NcHostCallback cb, void *data) { return RunRenderer(s,cb,data,nullptr); }
 extern "C" NC_API NcResult __cdecl nc_run_renderer_with_assets(NcFrameSubmission *s, NcHostCallback cb, void *data, const NcRuntimeAssets *assets) { return RunRenderer(s,cb,data,assets); }

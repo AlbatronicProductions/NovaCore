@@ -83,6 +83,50 @@ public unsafe struct NativeRuntimeAssets
 }
 
 [StructLayout(LayoutKind.Sequential)]
+public struct NativePlanetaryHeightQuery
+{
+    public float AnchorHighX,AnchorHighY,AnchorHighZ,AnchorHighPadding;
+    public float AnchorLowX,AnchorLowY,AnchorLowZ,AnchorLowPadding;
+    public float LocalDeltaX,LocalDeltaY,LocalDeltaZ,LocalDeltaPadding;
+    public double OracleU,OracleV;
+    public uint BodyIdLow,BodyIdHigh,TerrainVersion,AnchoredTier;
+    public uint TopologyVersion,SourcePolicy,Reserved0,Reserved1;
+}
+
+[StructLayout(LayoutKind.Sequential)]
+public struct NativePlanetaryHeightResult
+{
+    public float ReconstructedHighX,ReconstructedHighY,ReconstructedHighZ,ReconstructedHighPadding;
+    public float ReconstructedLowX,ReconstructedLowY,ReconstructedLowZ,ReconstructedLowPadding;
+    public double FaceU,FaceV;
+    public double OracleElevationMetres,TerrainV5ElevationMetres;
+    public double LocalResidualMetres,PhysicalHeightMetres;
+    public double ReconstructedX,ReconstructedY;
+    public double ReconstructedZ,ReconstructedLength;
+    public uint GlobalFace,GlobalLevel,GlobalX,GlobalY;
+    public uint LocalAvailable,LocalLevel,LocalX,LocalY;
+    public uint Valid,SourceHasLocal,ResultTerrainVersion,Reserved;
+}
+
+[StructLayout(LayoutKind.Sequential)]
+public unsafe struct NativePlanetaryHeightQueryAssets
+{
+    public uint Size,Version;
+    public byte* ElevationOraclePathUtf8;
+    public byte* ProductionTerrainPathUtf8;
+    public byte* LocalTerrainPathUtf8;
+    public byte* ComputeShaderPathUtf8;
+}
+
+[StructLayout(LayoutKind.Sequential)]
+public struct NativePlanetaryHeightQueryMetrics
+{
+    public uint Size,Version,QueryCount,DispatchGroups;
+    public uint ValidationErrors,GlobalRecordCount,LocalRecordCount,Reserved;
+    public double CpuMilliseconds,GpuMilliseconds;
+}
+
+[StructLayout(LayoutKind.Sequential)]
 public struct NativeAbiLayout
 {
     public uint EncodedPositionSize, CameraDataSize, CameraPositionOffset, CameraViewProjectionOffset, RenderTransformSize, RenderObjectSize, RenderObjectPositionOffset, RenderObjectTransformOffset, RenderObjectMeshOffset;
@@ -117,4 +161,7 @@ public static partial class NativeRuntime
 
     [LibraryImport("NovaCore.Native", EntryPoint = "nc_validate_terrain_asset", StringMarshalling = StringMarshalling.Utf8)]
     public static partial NativeResult ValidateTerrainAsset(string path, ulong bodyId, uint terrainVersion, uint expectedRecordCount);
+
+    [LibraryImport("NovaCore.Native", EntryPoint = "nc_query_planetary_physical_heights")]
+    public static unsafe partial NativeResult QueryPlanetaryPhysicalHeights(NativePlanetaryHeightQuery* queries, uint count, NativePlanetaryHeightResult* results, NativePlanetaryHeightQueryAssets* assets, NativePlanetaryHeightQueryMetrics* metrics);
 }

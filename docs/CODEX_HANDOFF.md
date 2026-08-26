@@ -54,6 +54,18 @@ pipeline, draw, streaming, or live ownership change. The next bounded step is
 11B-7B GPU physical-height preparation; do not describe the Eyeball as retired
 or the external reference renderer as implemented.
 
+11B-7B adds a separate dormant managed/native query ABI and bounded Vulkan
+compute/readback proof for physical height. It reconstructs split high/low
+body-fixed anchors plus local delta, validates canonical relaxed-cube
+addressing, and compares terrain-v5/local-v2 results with
+`PlanetaryPhysicalTerrainAuthority.TrySampleHeight`. The proof is explicitly
+invoked by focused validation only; it is not in `NcFrameSubmission`, creates
+no normal-frame work, and does not change the live terrain-v5/Eyeball renderer.
+Keep CPU physical terrain canonical and keep source/fallback decisions based
+on authoritative dataset availability rather than GPU residency. The next
+bounded milestone is 11B-7C displaced camera-relative vertices and generated
+physical normals, not an implied Eyeball retirement.
+
 11A-4D makes the distant convention match those regional and eyeball contracts: the whole-body mesh is body-local, its geometry is rotated by the authoritative quaternion exactly once, and its normal/material/light directions remain body fixed. A live handoff audit corrected the detailed shader's mixed-frame Sun subtraction and established a non-rotating focused-camera frame. Focused tests drive every non-stellar Solar body through detailed-only, transition, and distant-only states while paused; camera position changes around the center at fixed distance while body position/quaternion remain exact. Earth, Mars, Jupiter, Saturn, and Moon additionally pass 1×, 30×, 120×, 600×, 14,400×, and 7,776,000× translation-follow/rotation-independence proofs.
 
 11B-2A makes the camera/reference-frame boundary explicit. `FocusTarget` separates evaluated target position from root-inertial camera orientation. `CameraRelativeRenderPosition` requires `objectRootDouble - cameraRootDouble` before any narrowing or high/low split. The distant, production globe/Eyeball, stellar, ring, orbit, marker, label, and lighting paths follow that ordering. The generic object/triangle path was corrected from shader-side subtraction of independently encoded absolute roots to CPU-relative encoding without changing celestial authority.
@@ -81,9 +93,10 @@ work.
 
 ## Recommended next milestone
 
-After the dormant 11B-7A contract, 11B-7B may begin GPU physical-height
-preparation against the anchored body-fixed hierarchy without changing live
-ownership until a later takeover is proved. Do not restore independent
+After the dormant 11B-7A identity and 11B-7B GPU physical-height proofs, 11B-7C
+may consume the proven height result to prepare displaced camera-relative mesh
+vertices and generated physical normals without changing live ownership until
+a later takeover is proved. Do not restore independent
 equirectangular pages, sparse regional runtime overlays, or the retired radial
 compute owner. Production atmosphere/cloud rendering is intentionally absent
 and must be reconstructed later against the retained terrain-v5 contract.

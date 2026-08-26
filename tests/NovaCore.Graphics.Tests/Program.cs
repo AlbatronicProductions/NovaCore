@@ -53,6 +53,7 @@ var tests = new (string, Action)[]
     ("Cube-sphere planetary surface", CubeSpherePlanetarySurfaceTest),
     ("Production relaxed cube-sphere patch hierarchy", ProductionRelaxedCubeSpherePatchHierarchyTest),
     ("Anchored spherical mesh-tier contract", AnchoredSphericalMeshTierContractTest),
+    ("Dormant GPU physical-height preparation", GpuPhysicalHeightPreparationTests.Run),
     ("Terrain-v5 seams, mixed-LOD authority, and Florida classification", TerrainV5PayloadSeamAndFloridaClassificationTest),
     ("Terrain asset distribution boundary", TerrainAssetDistributionBoundaryTest),
     ("Local terrain streaming and GPU compression", LocalTerrainStreamingAndGpuCompressionTest),

@@ -68,6 +68,36 @@ vec2 ProductionFaceCoordinates(uint face,vec3 direction)
   if(face==4u)return vec2(direction.x,direction.y)/direction.z;
   return vec2(-direction.x,direction.y)/-direction.z;
 }
+dvec2 ProductionFaceCoordinatesD(uint face,dvec3 direction)
+{
+  if(face==0u)return dvec2(-direction.z,direction.y)/direction.x;
+  if(face==1u)return dvec2(direction.z,direction.y)/-direction.x;
+  if(face==2u)return dvec2(direction.x,-direction.z)/direction.y;
+  if(face==3u)return dvec2(direction.x,direction.z)/-direction.y;
+  if(face==4u)return dvec2(direction.x,direction.y)/direction.z;
+  return dvec2(-direction.x,direction.y)/-direction.z;
+}
+void ProductionDirectionAddressD(dvec3 unitDirection,out uint face,out dvec2 uv)
+{
+  dvec3 direction=normalize(unitDirection),absolute=abs(direction);
+  if(absolute.x>=absolute.y&&absolute.x>=absolute.z)face=direction.x>=0.0?0u:1u;
+  else if(absolute.y>=absolute.z)face=direction.y>=0.0?2u:3u;
+  else face=direction.z>=0.0?4u:5u;
+  dvec2 target=ProductionFaceCoordinatesD(face,direction),coordinates=clamp(target,dvec2(-1),dvec2(1));
+  const double epsilon=1e-6;
+  for(uint iteration=0u;iteration<8u;iteration++)
+  {
+    dvec2 value=ProductionFaceCoordinatesD(face,normalize(ProductionSpherifyD(ProductionCubeD(face,coordinates.x,coordinates.y))));
+    dvec2 dx=(ProductionFaceCoordinatesD(face,normalize(ProductionSpherifyD(ProductionCubeD(face,coordinates.x+epsilon,coordinates.y))))-value)/epsilon;
+    dvec2 dy=(ProductionFaceCoordinatesD(face,normalize(ProductionSpherifyD(ProductionCubeD(face,coordinates.x,coordinates.y+epsilon))))-value)/epsilon;
+    double determinant=dx.x*dy.y-dx.y*dy.x;
+    if(abs(determinant)<1e-14)break;
+    dvec2 error=value-target;
+    coordinates-=dvec2((error.x*dy.y-error.y*dy.x)/determinant,(dx.x*error.y-dx.y*error.x)/determinant);
+    coordinates=clamp(coordinates,dvec2(-1),dvec2(1));
+  }
+  uv=coordinates*.5+.5;
+}
 void ProductionDirectionAddress(vec3 unitDirection,out uint face,out vec2 uv)
 {
   vec3 direction=normalize(unitDirection),absolute=abs(direction);
