@@ -62,9 +62,21 @@ barriers, and is destroyed after readback. The CPU authority remains
 `PlanetaryPhysicalTerrainAuthority.TrySampleHeight`; GPU payload residency is
 never physical truth. This path is absent from normal frame submission and
 adds no live draw, dispatch, resource, ownership, camera, material, or visible
-change. The next bounded step is 11B-7C displaced camera-relative vertices and
-generated physical normals; the current globe and Eyeball remain live until a
-later takeover is separately proved.
+change.
+
+11B-7C adds a dormant persistent GPU mesh-preparation proof beside that live
+renderer. Its deterministic 98-vertex whole-body validation topology uses one
+canonical owner for all relaxed-cube face edges and corners, with topology hash
+`0x7F3262E7C37D781B`. A persistent bounded Vulkan session prepares physically
+displaced split-FP32 body vertices and camera-relative FP32 output, then derives
+outward physical normals from indexed triangle adjacency. Terrain source
+selection remains the 11B-7B global/local CPU-authority contract; explicit
+barriers and readback support parity and lifetime validation. An unavailable
+optional local-v2 pack is a tested oracle-only fallback rather than an
+initialization failure. The proof remains
+outside `NcFrameSubmission`, creates no normal-frame dispatch or draw, and does
+not replace the terrain-v5 L0–L2 globe or T0–T3 Eyeball. A later 11B-7D must
+prove live integration and coherent ownership before any renderer takeover.
 
 4C/11B-4 remove the superseded equirectangular SVT descriptors,
 request/upload/page cache, independent fallback/fade, sparse regional overlay,

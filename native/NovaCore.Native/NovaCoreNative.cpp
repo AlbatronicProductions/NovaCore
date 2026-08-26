@@ -2,6 +2,7 @@
 #include "ProductionCubeSurface.h"
 #include "LocalTerrainPack.h"
 #include "PlanetaryHeightQuery.h"
+#include "PlanetaryMeshPreparation.h"
 #include <algorithm>
 #include <array>
 #include <chrono>
@@ -1938,5 +1939,8 @@ extern "C" NC_API NcResult __cdecl nc_validate_terrain_asset(const char *path, u
 extern "C" NC_API NcResult __cdecl nc_query_planetary_physical_heights(const NcPlanetaryHeightQuery* queries,uint32_t count,NcPlanetaryHeightResult* results,const NcPlanetaryHeightQueryAssets* assets,NcPlanetaryHeightQueryMetrics* metrics){
   return RunPlanetaryHeightQueries(queries,count,results,assets,metrics);
 }
+extern "C" NC_API NcResult __cdecl nc_initialize_planetary_mesh_preparation(const NcPlanetaryMeshPreparationAssets* assets,NcPlanetaryMeshPreparationMetrics* metrics){return InitializePlanetaryMeshPreparation(assets,metrics);}
+extern "C" NC_API NcResult __cdecl nc_prepare_planetary_mesh(const NcPlanetaryHeightQuery* vertices,const uint32_t* indices,const uint32_t* adjacencyWords,const NcPlanetaryMeshPreparationDispatch* dispatch,NcPlanetaryDisplacedVertex* displaced,NcPlanetaryPhysicalNormal* normals,NcPlanetaryMeshPreparationMetrics* metrics){return PreparePlanetaryMesh(vertices,indices,adjacencyWords,dispatch,displaced,normals,metrics);}
+extern "C" NC_API NcResult __cdecl nc_shutdown_planetary_mesh_preparation(){return ShutdownPlanetaryMeshPreparation();}
 extern "C" NC_API NcResult __cdecl nc_run_renderer(NcFrameSubmission *s, NcHostCallback cb, void *data) { return RunRenderer(s,cb,data,nullptr); }
 extern "C" NC_API NcResult __cdecl nc_run_renderer_with_assets(NcFrameSubmission *s, NcHostCallback cb, void *data, const NcRuntimeAssets *assets) { return RunRenderer(s,cb,data,assets); }

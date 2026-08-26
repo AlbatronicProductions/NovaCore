@@ -97,6 +97,42 @@ struct alignas(8) NcPlanetaryHeightQueryMetrics {
   uint32_t validationErrors, globalRecordCount, localRecordCount, reserved;
   double cpuMilliseconds, gpuMilliseconds;
 };
+// Dormant 11B-7C persistent mesh-preparation ABI. Native owns every Vulkan
+// handle; initialize/prepare/shutdown delimit one reusable validation session.
+struct alignas(16) NcPlanetaryDisplacedVertex {
+  float bodyHigh[4];              // xyz physical body-fixed position; w physical height
+  float bodyLow[4];               // xyz low residual; w terrain-v5 reference height
+  float cameraRelative[4];        // xyz final presentation position; w local-v2 residual
+  double faceUv[2];
+  uint32_t globalIdentity[4];     // face, level, x, y
+  uint32_t localIdentity[4];      // available, level, x, y
+  uint32_t source[4];             // valid, local available, terrain version, topology version
+};
+struct alignas(16) NcPlanetaryPhysicalNormal { float x, y, z, validity; };
+struct NcPlanetaryMeshPreparationAssets {
+  uint32_t size, version;
+  const char* elevationOraclePathUtf8;
+  const char* productionTerrainPathUtf8;
+  const char* localTerrainPathUtf8; // optional; null/empty selects oracle-only fallback
+  const char* displacementShaderPathUtf8;
+  const char* normalShaderPathUtf8;
+  uint32_t maximumVertexCount, maximumIndexCount, maximumAdjacencyCount, reserved;
+};
+struct alignas(16) NcPlanetaryMeshPreparationDispatch {
+  uint32_t size, version, vertexCount, indexCount;
+  uint32_t adjacencyCount, topologyVersion, terrainVersion, sourcePolicy;
+  float cameraHigh[4];
+  float cameraLow[4];
+  double bodyRadiusMetres;
+  uint32_t reserved[2];
+};
+struct alignas(8) NcPlanetaryMeshPreparationMetrics {
+  uint32_t size, version, vertexCount, triangleCount;
+  uint32_t adjacencyCount, displacementGroups, normalGroups, validationErrors;
+  uint32_t initializationCount, preparationCount, pipelineCreationCount, shaderModuleCreationCount;
+  uint64_t persistentBufferBytes;
+  double setupMilliseconds, displacementMilliseconds, normalMilliseconds, totalMilliseconds;
+};
 typedef void(__cdecl* NcHostCallback)(NcHostEvent* hostEvent, void* userData);
 enum NcResult : int32_t { NC_SUCCESS = 0, NC_FAILURE = 1, NC_INVALID_ARGUMENT = 2 };
 NC_API NcResult __cdecl nc_run_renderer(NcFrameSubmission* submission, NcHostCallback callback, void* userData);
@@ -104,5 +140,8 @@ NC_API NcResult __cdecl nc_run_renderer_with_assets(NcFrameSubmission* submissio
 NC_API NcResult __cdecl nc_validate_planetary_patches(const NcPlanetaryPatch* patches, uint32_t count);
 NC_API NcResult __cdecl nc_validate_terrain_asset(const char* pathUtf8, uint64_t bodyId, uint32_t terrainVersion, uint32_t expectedRecordCount);
 NC_API NcResult __cdecl nc_query_planetary_physical_heights(const NcPlanetaryHeightQuery* queries, uint32_t count, NcPlanetaryHeightResult* results, const NcPlanetaryHeightQueryAssets* assets, NcPlanetaryHeightQueryMetrics* metrics);
+NC_API NcResult __cdecl nc_initialize_planetary_mesh_preparation(const NcPlanetaryMeshPreparationAssets* assets, NcPlanetaryMeshPreparationMetrics* metrics);
+NC_API NcResult __cdecl nc_prepare_planetary_mesh(const NcPlanetaryHeightQuery* vertices, const uint32_t* indices, const uint32_t* adjacencyWords, const NcPlanetaryMeshPreparationDispatch* dispatch, NcPlanetaryDisplacedVertex* displaced, NcPlanetaryPhysicalNormal* normals, NcPlanetaryMeshPreparationMetrics* metrics);
+NC_API NcResult __cdecl nc_shutdown_planetary_mesh_preparation(void);
 NC_API NcResult __cdecl nc_get_abi_layout(NcAbiLayout* layout);
 }

@@ -127,6 +127,54 @@ public struct NativePlanetaryHeightQueryMetrics
 }
 
 [StructLayout(LayoutKind.Sequential)]
+public struct NativePlanetaryDisplacedVertex
+{
+    public float BodyHighX,BodyHighY,BodyHighZ,PhysicalHeightMetres;
+    public float BodyLowX,BodyLowY,BodyLowZ,TerrainV5HeightMetres;
+    public float CameraRelativeX,CameraRelativeY,CameraRelativeZ,LocalResidualMetres;
+    public double FaceU,FaceV;
+    public uint GlobalFace,GlobalLevel,GlobalX,GlobalY;
+    public uint LocalAvailable,LocalLevel,LocalX,LocalY;
+    public uint Valid,SourceHasLocal,ResultTerrainVersion,TopologyVersion;
+}
+
+[StructLayout(LayoutKind.Sequential)]
+public struct NativePlanetaryPhysicalNormal { public float X,Y,Z,Validity; }
+
+[StructLayout(LayoutKind.Sequential)]
+public unsafe struct NativePlanetaryMeshPreparationAssets
+{
+    public uint Size,Version;
+    public byte* ElevationOraclePathUtf8;
+    public byte* ProductionTerrainPathUtf8;
+    public byte* LocalTerrainPathUtf8;
+    public byte* DisplacementShaderPathUtf8;
+    public byte* NormalShaderPathUtf8;
+    public uint MaximumVertexCount,MaximumIndexCount,MaximumAdjacencyCount,Reserved;
+}
+
+[StructLayout(LayoutKind.Sequential)]
+public struct NativePlanetaryMeshPreparationDispatch
+{
+    public uint Size,Version,VertexCount,IndexCount;
+    public uint AdjacencyCount,TopologyVersion,TerrainVersion,SourcePolicy;
+    public float CameraHighX,CameraHighY,CameraHighZ,CameraHighPadding;
+    public float CameraLowX,CameraLowY,CameraLowZ,CameraLowPadding;
+    public double BodyRadiusMetres;
+    public uint Reserved0,Reserved1;
+}
+
+[StructLayout(LayoutKind.Sequential)]
+public struct NativePlanetaryMeshPreparationMetrics
+{
+    public uint Size,Version,VertexCount,TriangleCount;
+    public uint AdjacencyCount,DisplacementGroups,NormalGroups,ValidationErrors;
+    public uint InitializationCount,PreparationCount,PipelineCreationCount,ShaderModuleCreationCount;
+    public ulong PersistentBufferBytes;
+    public double SetupMilliseconds,DisplacementMilliseconds,NormalMilliseconds,TotalMilliseconds;
+}
+
+[StructLayout(LayoutKind.Sequential)]
 public struct NativeAbiLayout
 {
     public uint EncodedPositionSize, CameraDataSize, CameraPositionOffset, CameraViewProjectionOffset, RenderTransformSize, RenderObjectSize, RenderObjectPositionOffset, RenderObjectTransformOffset, RenderObjectMeshOffset;
@@ -164,4 +212,13 @@ public static partial class NativeRuntime
 
     [LibraryImport("NovaCore.Native", EntryPoint = "nc_query_planetary_physical_heights")]
     public static unsafe partial NativeResult QueryPlanetaryPhysicalHeights(NativePlanetaryHeightQuery* queries, uint count, NativePlanetaryHeightResult* results, NativePlanetaryHeightQueryAssets* assets, NativePlanetaryHeightQueryMetrics* metrics);
+
+    [LibraryImport("NovaCore.Native", EntryPoint = "nc_initialize_planetary_mesh_preparation")]
+    public static unsafe partial NativeResult InitializePlanetaryMeshPreparation(NativePlanetaryMeshPreparationAssets* assets, NativePlanetaryMeshPreparationMetrics* metrics);
+
+    [LibraryImport("NovaCore.Native", EntryPoint = "nc_prepare_planetary_mesh")]
+    public static unsafe partial NativeResult PreparePlanetaryMesh(NativePlanetaryHeightQuery* vertices, uint* indices, uint* adjacencyWords, NativePlanetaryMeshPreparationDispatch* dispatch, NativePlanetaryDisplacedVertex* displaced, NativePlanetaryPhysicalNormal* normals, NativePlanetaryMeshPreparationMetrics* metrics);
+
+    [LibraryImport("NovaCore.Native", EntryPoint = "nc_shutdown_planetary_mesh_preparation")]
+    public static partial NativeResult ShutdownPlanetaryMeshPreparation();
 }

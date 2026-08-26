@@ -1,0 +1,49 @@
+#version 460
+#extension GL_EXT_shader_explicit_arithmetic_types_float64 : require
+#include "production_cube_surface.glsl"
+
+layout(local_size_x=64,local_size_y=1,local_size_z=1)in;
+struct HeightQuery { vec4 anchorHigh; vec4 anchorLow; vec4 localDelta; dvec2 oracleUv; uvec4 identity; uvec4 metadata; };
+struct DisplacedVertex { vec4 bodyHigh; vec4 bodyLow; vec4 cameraRelative; dvec2 faceUv; uvec4 globalIdentity; uvec4 localIdentity; uvec4 source; };
+struct LocalRecord { uvec4 identity; uvec4 payload; };
+layout(std430,binding=0)readonly buffer Vertices { HeightQuery vertices[]; };
+layout(std430,binding=1)writeonly buffer Displaced { DisplacedVertex displaced[]; };
+layout(std430,binding=4)readonly buffer OracleElevation { uint oracleWords[]; };
+layout(std430,binding=5)readonly buffer TerrainV5Elevation { uint globalWords[]; };
+layout(std430,binding=6)readonly buffer LocalRecords { LocalRecord localRecords[]; };
+layout(std430,binding=7)readonly buffer LocalElevation { uint localWords[]; };
+layout(push_constant)uniform MeshConstants {
+  uvec4 dimensions; uvec4 storage; vec4 localRange; vec4 cameraHigh; vec4 cameraLow; dvec2 body;
+} constants;
+
+uint LoadU16Oracle(uint index){uint word=oracleWords[index>>1u];return (index&1u)==0u?word&0xffffu:word>>16u;}
+uint LoadU16Global(uint index){uint word=globalWords[index>>1u];return (index&1u)==0u?word&0xffffu:word>>16u;}
+uint LoadU8Local(uint index){uint word=localWords[index>>2u];return (word>>((index&3u)*8u))&0xffu;}
+double DecodeElevation(uint encoded){return -11000.0+double(encoded)*(20000.0/65535.0);}
+double Mix4(double a,double b,double c,double d,double tx,double ty){return mix(mix(a,b,tx),mix(c,d,tx),ty);}
+double SampleOracle(dvec2 uv){
+  const uint width=8192u,height=4096u;double u=uv.x-floor(uv.x),v=clamp(uv.y,0.0,1.0),px=u*double(width)-.5,py=v*double(height)-.5;
+  int ix=int(floor(px)),iy=clamp(int(floor(py)),0,int(height)-1);uint x0=uint((ix%int(width)+int(width))%int(width)),x1=(x0+1u)%width,y0=uint(iy),y1=min(y0+1u,height-1u);
+  return Mix4(DecodeElevation(LoadU16Oracle(y0*width+x0)),DecodeElevation(LoadU16Oracle(y0*width+x1)),DecodeElevation(LoadU16Oracle(y1*width+x0)),DecodeElevation(LoadU16Oracle(y1*width+x1)),px-floor(px),py-floor(py));
+}
+double SampleTerrainV5(uint face,dvec2 uv,out uvec4 identity){
+  uint level=constants.dimensions.w,cells=1u<<level,x=min(uint(floor(uv.x*double(cells))),cells-1u),y=min(uint(floor(uv.y*double(cells))),cells-1u);
+  dvec2 local=clamp(uv*double(cells)-dvec2(x,y),dvec2(0),dvec2(1)),pixel=dvec2(3.5)+local*256.0;uvec2 p0=uvec2(floor(pixel)),p1=min(p0+uvec2(1),uvec2(263));dvec2 t=pixel-floor(pixel);
+  uint record=face*cells*cells+ProductionMorton(x,y),base=record*constants.storage.x*2u;identity=uvec4(face,level,x,y);
+  return Mix4(DecodeElevation(LoadU16Global(base+p0.y*264u+p0.x)),DecodeElevation(LoadU16Global(base+p0.y*264u+p1.x)),DecodeElevation(LoadU16Global(base+p1.y*264u+p0.x)),DecodeElevation(LoadU16Global(base+p1.y*264u+p1.x)),t.x,t.y);
+}
+double SampleLocal(uint face,dvec2 uv,out uvec4 identity){
+  identity=uvec4(0);uint selected=0xffffffffu;
+  for(uint index=0u;index<constants.storage.z;index++){LocalRecord record=localRecords[index];uint cells=1u<<record.identity.y,x=min(uint(floor(uv.x*double(cells))),cells-1u),y=min(uint(floor(uv.y*double(cells))),cells-1u);if(record.identity.x==face&&record.identity.z==x&&record.identity.w==y){selected=index;identity=uvec4(1u,record.identity.y,x,y);break;}}
+  if(selected==0xffffffffu)return 0.0;LocalRecord record=localRecords[selected];uint cells=1u<<record.identity.y;dvec2 local=clamp(uv*double(cells)-dvec2(record.identity.zw),dvec2(0),dvec2(1)),pixel=dvec2(3.5)+local*256.0;
+  uvec2 p0=uvec2(floor(pixel)),p1=min(p0+uvec2(1),uvec2(263));dvec2 t=pixel-floor(pixel);uint base=record.payload.x*constants.storage.y*4u;
+  double encoded=Mix4(double(LoadU8Local(base+p0.y*264u+p0.x)),double(LoadU8Local(base+p0.y*264u+p1.x)),double(LoadU8Local(base+p1.y*264u+p0.x)),double(LoadU8Local(base+p1.y*264u+p1.x)),t.x,t.y)/255.0;
+  return double(constants.localRange.x)+encoded*double(constants.localRange.y-constants.localRange.x);
+}
+void main(){
+  uint index=gl_GlobalInvocationID.x;if(index>=constants.dimensions.x)return;HeightQuery inputValue=vertices[index];DisplacedVertex result;dvec3 identityPoint=dvec3(inputValue.anchorHigh.xyz)+dvec3(inputValue.anchorLow.xyz)+dvec3(inputValue.localDelta.xyz);
+  bool finiteCoordinate=!any(isnan(identityPoint))&&!any(isinf(identityPoint));bool valid=inputValue.identity.x==6u&&inputValue.identity.y==0u&&inputValue.identity.z==constants.storage.w&&inputValue.metadata.x!=0u&&inputValue.metadata.y==uint(constants.body.y)&&finiteCoordinate&&dot(identityPoint,identityPoint)>0.0;
+  uint face=0u;dvec2 uv=dvec2(0);uvec4 globalIdentity=uvec4(0),localIdentity=uvec4(0);double terrain=0.0,local=0.0,physical=0.0;dvec3 bodyPosition=dvec3(0),camera=dvec3(constants.cameraHigh.xyz)+dvec3(constants.cameraLow.xyz);
+  if(valid){dvec3 direction=normalize(identityPoint);ProductionDirectionAddressD(direction,face,uv);double oracle=SampleOracle(inputValue.oracleUv);terrain=SampleTerrainV5(face,uv,globalIdentity);local=SampleLocal(face,uv,localIdentity);physical=max(0.0,oracle+local);bodyPosition=direction*(constants.body.x+physical);}
+  vec3 high=vec3(bodyPosition);vec3 low=vec3(bodyPosition-dvec3(high));result.bodyHigh=vec4(high,float(physical));result.bodyLow=vec4(low,float(terrain));result.cameraRelative=vec4(vec3(bodyPosition-camera),float(local));result.faceUv=uv;result.globalIdentity=globalIdentity;result.localIdentity=localIdentity;result.source=uvec4(valid?1u:0u,localIdentity.x,constants.storage.w,inputValue.metadata.x);displaced[index]=result;
+}

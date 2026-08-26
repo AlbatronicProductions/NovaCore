@@ -41,6 +41,11 @@ add_custom_command(OUTPUT "${SPIRV_DIR}/planetary_height_query.comp.spv"
   COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary_height_query.comp" -o "${SPIRV_DIR}/planetary_height_query.comp.spv"
   DEPENDS "${SHADER_DIR}/planetary_height_query.comp" "${SHADER_DIR}/production_cube_surface.glsl")
+add_custom_command(OUTPUT "${SPIRV_DIR}/planetary_mesh_displace.comp.spv" "${SPIRV_DIR}/planetary_mesh_normals.comp.spv"
+  COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
+  COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary_mesh_displace.comp" -o "${SPIRV_DIR}/planetary_mesh_displace.comp.spv"
+  COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary_mesh_normals.comp" -o "${SPIRV_DIR}/planetary_mesh_normals.comp.spv"
+  DEPENDS "${SHADER_DIR}/planetary_mesh_displace.comp" "${SHADER_DIR}/planetary_mesh_normals.comp" "${SHADER_DIR}/production_cube_surface.glsl")
 add_custom_command(OUTPUT "${SPIRV_DIR}/planetary_production.frag.spv" "${SPIRV_DIR}/planetary_production_terrain.comp.spv" "${SPIRV_DIR}/planetary_production_eyeball.vert.spv"
   COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary_production.frag" -o "${SPIRV_DIR}/planetary_production.frag.spv"
@@ -85,8 +90,11 @@ add_custom_target(NovaCoreProductionShaders DEPENDS
   "${SPIRV_DIR}/planetary_production.frag.spv"
   "${SPIRV_DIR}/planetary_production_terrain.comp.spv"
   "${SPIRV_DIR}/planetary_production_eyeball.vert.spv")
-add_library(NovaCore.Native SHARED NovaCoreNative.cpp NovaCoreNative.h PlanetaryHeightQuery.cpp PlanetaryHeightQuery.h ProductionCubeSurface.cpp ProductionCubeSurface.h LocalTerrainPack.cpp LocalTerrainPack.h)
-add_dependencies(NovaCore.Native NovaCoreShaders NovaCoreProductionShaders)
+add_custom_target(NovaCoreMeshPreparationShaders DEPENDS
+  "${SPIRV_DIR}/planetary_mesh_displace.comp.spv"
+  "${SPIRV_DIR}/planetary_mesh_normals.comp.spv")
+add_library(NovaCore.Native SHARED NovaCoreNative.cpp NovaCoreNative.h PlanetaryHeightQuery.cpp PlanetaryHeightQuery.h PlanetaryMeshPreparation.cpp PlanetaryMeshPreparation.h ProductionCubeSurface.cpp ProductionCubeSurface.h LocalTerrainPack.cpp LocalTerrainPack.h)
+add_dependencies(NovaCore.Native NovaCoreShaders NovaCoreProductionShaders NovaCoreMeshPreparationShaders)
 target_compile_features(NovaCore.Native PRIVATE cxx_std_20)
 target_compile_definitions(NovaCore.Native PRIVATE WIN32_LEAN_AND_MEAN NOMINMAX VK_USE_PLATFORM_WIN32_KHR NC_NATIVE_EXPORTS $<$<CONFIG:Debug>:NC_DEBUG_BUILD=1>)
 target_link_libraries(NovaCore.Native PRIVATE Vulkan::Vulkan user32 bcrypt)

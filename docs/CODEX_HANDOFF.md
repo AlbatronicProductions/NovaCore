@@ -63,8 +63,21 @@ invoked by focused validation only; it is not in `NcFrameSubmission`, creates
 no normal-frame work, and does not change the live terrain-v5/Eyeball renderer.
 Keep CPU physical terrain canonical and keep source/fallback decisions based
 on authoritative dataset availability rather than GPU residency. The next
-bounded milestone is 11B-7C displaced camera-relative vertices and generated
-physical normals, not an implied Eyeball retirement.
+bounded milestone is implemented by 11B-7C, not an implied Eyeball retirement.
+
+11B-7C adds an explicitly invoked persistent Vulkan mesh-preparation session.
+The dormant whole-body proof topology canonicalizes all cube-face edges and
+corners before indexed adjacency; its deterministic hash is
+`0x7F3262E7C37D781B`. One compute pass produces authoritative-height displaced
+body-fixed split positions plus camera-relative FP32 output, and a synchronized
+second pass produces area-weighted outward physical normals. The test path
+proves source/fallback parity, Florida and local-v2 displacement, winding,
+normal continuity, repeated-dispatch reuse, determinism, and explicit shutdown.
+The optional local-v2 pack may be unavailable; that path is explicitly tested
+as an oracle-only physical-height fallback. It is not referenced by normal
+frame submission and does not draw. Preserve the
+terrain-v5 L0–L2 globe and persistent T0–T3 Eyeball as sole live owners until a
+separate 11B-7D integration and handoff proof succeeds.
 
 11A-4D makes the distant convention match those regional and eyeball contracts: the whole-body mesh is body-local, its geometry is rotated by the authoritative quaternion exactly once, and its normal/material/light directions remain body fixed. A live handoff audit corrected the detailed shader's mixed-frame Sun subtraction and established a non-rotating focused-camera frame. Focused tests drive every non-stellar Solar body through detailed-only, transition, and distant-only states while paused; camera position changes around the center at fixed distance while body position/quaternion remain exact. Earth, Mars, Jupiter, Saturn, and Moon additionally pass 1×, 30×, 120×, 600×, 14,400×, and 7,776,000× translation-follow/rotation-independence proofs.
 
@@ -93,10 +106,10 @@ work.
 
 ## Recommended next milestone
 
-After the dormant 11B-7A identity and 11B-7B GPU physical-height proofs, 11B-7C
-may consume the proven height result to prepare displaced camera-relative mesh
-vertices and generated physical normals without changing live ownership until
-a later takeover is proved. Do not restore independent
+After the dormant 11B-7A identity, 11B-7B GPU physical-height, and 11B-7C
+displaced-vertex/physical-normal proofs, 11B-7D may integrate a bounded live
+mesh tier and prove coherent ownership without retiring current terrain owners
+prematurely. Do not restore independent
 equirectangular pages, sparse regional runtime overlays, or the retired radial
 compute owner. Production atmosphere/cloud rendering is intentionally absent
 and must be reconstructed later against the retained terrain-v5 contract.

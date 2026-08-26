@@ -1,0 +1,15 @@
+#version 460
+#extension GL_EXT_shader_explicit_arithmetic_types_float64 : require
+layout(local_size_x=64,local_size_y=1,local_size_z=1)in;
+struct DisplacedVertex { vec4 bodyHigh; vec4 bodyLow; vec4 cameraRelative; dvec2 faceUv; uvec4 globalIdentity; uvec4 localIdentity; uvec4 source; };
+layout(std430,binding=1)readonly buffer Displaced { DisplacedVertex displaced[]; };
+layout(std430,binding=2)readonly buffer Indices { uint indices[]; };
+layout(std430,binding=3)readonly buffer Adjacency { uint adjacency[]; };
+layout(std430,binding=8)writeonly buffer Normals { vec4 normals[]; };
+layout(push_constant)uniform MeshConstants { uvec4 dimensions; uvec4 storage; vec4 localRange; vec4 cameraHigh; vec4 cameraLow; dvec2 body; } constants;
+dvec3 Position(uint index){return dvec3(displaced[index].bodyHigh.xyz)+dvec3(displaced[index].bodyLow.xyz);}
+void main(){
+  uint vertex=gl_GlobalInvocationID.x;if(vertex>=constants.dimensions.x)return;uint start=adjacency[vertex*2u],count=adjacency[vertex*2u+1u],base=constants.dimensions.x*2u;dvec3 sum=dvec3(0);bool valid=displaced[vertex].source.x==1u;
+  for(uint incidence=0u;incidence<count;incidence++){uint triangle=adjacency[base+start+incidence],offset=triangle*3u;dvec3 p0=Position(indices[offset]),p1=Position(indices[offset+1u]),p2=Position(indices[offset+2u]),n=cross(p1-p0,p2-p0);if(any(isnan(n))||any(isinf(n))||dot(n,n)<=0.0){valid=false;continue;}sum+=n;}
+  dvec3 outward=Position(vertex);if(dot(sum,outward)<0.0)valid=false;double magnitude=length(sum);vec3 normalValue=valid&&magnitude>0.0?vec3(sum/magnitude):vec3(0);normals[vertex]=vec4(normalValue,valid?1.0:0.0);
+}

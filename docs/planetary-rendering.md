@@ -67,10 +67,29 @@ dataset availability rather than transient GPU residency. Host writes,
 compute reads/writes, and host readback have explicit Vulkan barriers. The
 proof creates no live draw, dispatch, descriptor, or steady-state resource.
 
-The live renderer remains the accepted 11B-6C/11B-7A terrain-v5 L0–L2 globe
-plus persistent T0–T3 Eyeball. A later 11B-7C may consume the proven GPU height
-contract to prepare displaced camera-relative mesh vertices and generated
-physical normals; 11B-7B neither renders those vertices nor retires Eyeball.
+### Dormant displaced mesh and physical normals (11B-7C)
+
+11B-7C consumes the 11B-7B height contract in a separate, explicitly invoked
+Vulkan proof. A canonical whole-body relaxed-cube topology deduplicates every
+face edge and three-face corner before adjacency construction. One persistent
+native session owns bounded input, displaced-vertex, index, adjacency, terrain,
+normal, descriptor, pipeline, command, fence, and timestamp resources. Its
+first compute pass reconstructs body-fixed FP64 positions, adds authoritative
+global/local physical height radially, preserves split high/low output, and
+performs camera subtraction before the final FP32 presentation value. The
+second pass accumulates area-weighted triangle adjacency in FP64 and emits an
+outward FP32 physical normal. Explicit host-to-compute, pass-to-pass, and
+compute-to-host barriers define visibility; focused validation measures CPU/GPU
+height, displacement, winding, normal, edge/corner, camera, source/fallback,
+reuse, shutdown, and determinism behavior. The optional local-v2 pack may be
+absent; the same persistent session then deterministically reports no local
+source and uses the checked global elevation oracle without changing topology.
+
+This is still a dormant preparation proof: it is absent from normal frame
+submission and issues no live draw. The live renderer remains the accepted
+terrain-v5 L0–L2 globe plus persistent T0–T3 Eyeball. A later 11B-7D must prove
+bounded live ownership and handoff before either current terrain owner can be
+retired.
 
 The old equirectangular SVT page model, 5×5 predictor, per-page fallback/fade,
 deep-global near-ground refinement, and per-frame radial Eyeball compute path
