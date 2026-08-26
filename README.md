@@ -1,6 +1,6 @@
 # NovaCore
 
-**A space simulation engine built to handle everything from entire solar systems to planetary surfaces.**
+**A precision space-simulation and game-engine project built for continuous planetary scale.**
 
 ![NovaCore Earth against the Milky Way](docs/images/novacore-11a-earth-milky-way.png)
 
@@ -13,11 +13,11 @@
   <img src="docs/images/novacore-11a-solar-warp.png" alt="NovaCore Solar overview at maximum time warp" width="49%">
 </p>
 
-NovaCore is an experimental space simulation and rendering engine built from the ground up for enormous differences in scale.
+NovaCore is an experimental space-simulation and game-engine project built from the ground up for enormous differences in scale. It combines deterministic simulation authority, high-precision reference frames, real planetary data, and a native Vulkan renderer.
 
 The goal is simple to describe, even if it is difficult to build:
 
-> **Create one continuous simulation capable of taking you from the scale of a solar system all the way down to the surface of a world.**
+> **Create one continuous simulation capable of taking you from a planetary surface through launch, atmosphere, orbit, and interplanetary space.**
 
 NovaCore combines astronomical simulation, planetary rendering, large-scale coordinate systems, terrain, real planetary data, and a custom Vulkan renderer into a single engine.
 
@@ -31,20 +31,23 @@ NovaCore can already:
 - Approach planetary surfaces while maintaining numerical precision.
 - Transition between global planetary rendering and near-surface terrain rendering.
 - Stream real NASA/NOAA Earth imagery and elevation data.
+- Retain body-fixed Earth geography through `SurfaceAnchor`, terrain-aware camera, and anchored surface-object foundations.
+- Place and reevaluate a deterministic Florida launch-site proof on the physical Earth terrain authority.
 - Light planets using the simulated position of the Sun, producing coherent day/night boundaries.
 - Render distinct planetary appearances, Saturn's rings, orbital paths, labels, and markers.
 - Explore the Solar System using Solar Map and free 3D camera modes.
+- Evaluate fixed-attitude and rigid-body spacecraft rotation, torque transactions, and a bounded SAS guidance proof without presenting a finished flight game.
 - Reproduce simulation and rendering results deterministically for testing and validation.
 
 ## The goal
 
 NovaCore is being developed toward a simulation where scale does not define the boundaries of the experience:
 
-**Solar System → Planet → Orbit → Atmosphere → Surface**
+**Surface → Launch → Atmosphere → Orbit → Interplanetary space**
 
 Rather than treating these as completely separate environments, NovaCore is being designed so they can exist within the same underlying simulation.
 
-NovaCore is still under active development. Advanced atmospheres, close volumetric clouds, physical oceans, weather, spacecraft simulation, colonies, maneuver planning, and navigation systems remain future work.
+NovaCore is still under active development. Production atmospheres, close volumetric clouds, physical oceans, weather, complete spacecraft flight gameplay, colonies, maneuver planning, and navigation systems remain future work.
 
 ## A simple design rule
 
@@ -88,7 +91,9 @@ NovaCore currently combines a C# simulation core with a native Vulkan renderer, 
 - **Evaluated-Sun lighting** for coherent planetary day/night terminators.
 - **Generic procedural planet materials** with distinct presentations for Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn, Uranus, and Neptune.
 - **Generic ring presentation**, currently demonstrated by Saturn.
-- **NASA/NOAA terrain-v4 Earth surface authority** using patch-aligned relaxed cube-sphere `.nccube` records, transactional parent/child residency, persistent production Eyeball tiers, and a checked topology-neutral CPU elevation oracle.
+- **NASA/NOAA terrain-v5 Earth surface authority** using canonical east-positive, right-handed, patch-aligned relaxed cube-sphere `.nccube` records and a checked topology-neutral CPU elevation oracle.
+- **Persistent global and local terrain residency** using the `earth-surface-v5` L0-L2 hierarchy, optional `earth-local-v2` payload refinement, coherent parent/child ownership, and persistent production spherical-refinement tiers.
+- **Surface-relative foundations** with terrain-aware camera clearance, immutable body-fixed `SurfaceAnchor` identity, anchored surface objects, and a deterministic Florida launch-site proof.
 - **Solar Map and Free 3D camera modes** with deterministic home framing and body focus.
 - **Authoritative orbit visualization** sourced from the same `CelestialSystemEvaluator` used for body motion.
 - **Deterministic label/marker hierarchy** with collision suppression, distance-aware presentation, and focused-body clutter reduction.
@@ -102,6 +107,8 @@ NovaCore treats correctness tooling as part of the engine rather than as present
 - Deterministic celestial and topology hashes.
 - Camera/reference-frame precision tests.
 - Native, managed, Solar-scene, Earth-LOD, resize, and triangle regression coverage.
+
+The recovered Desktop baseline has a 1,025-sample far→near→far continuous-visibility regression spanning 10 m to 100,000 km. Accepted Vulkan runs at 50,000, 30,000, 20,000, 10,000, 3,000, and 700 km retained the six global terrain roots and reported zero validation errors. Focused regressions also verify mixed-LOD geographic/terrain authority and prove that camera drag cannot mutate Earth body orientation or body-fixed geography.
 
 The CPU reference/parity path is a development and regression oracle; the intended production planetary path remains GPU-driven.
 
@@ -139,16 +146,19 @@ For exceptional future precision requirements, a bounded sampled or Chebyshev ep
 From the repository root on a configured Windows development environment:
 
 ```powershell
-dotnet run --project tools/NovaCore.AssetTool -- status earth-surface-v4
+dotnet run --project tools/NovaCore.AssetTool -- status earth-surface-v5
+dotnet run --project tools/NovaCore.AssetTool -- status earth-local-v2
 # On a fresh clone, explicitly populate the verified runtime cache:
-dotnet run --project tools/NovaCore.AssetTool -- build earth-surface-v4
+dotnet run --project tools/NovaCore.AssetTool -- build earth-surface-v5
+dotnet run --project tools/NovaCore.AssetTool -- build earth-local-v2
 dotnet run --project samples/NovaCore.Triangle/NovaCore.Triangle.csproj -c Debug -- --scene=sol
 ```
 
 Heavy generated terrain payloads are not ordinary Git blobs and are not copied
-into each build output. The tracked manifest identifies the required immutable
-bytes; the explicit asset tool verifies, fetches when a remote is configured,
-or deterministically regenerates them into an ignored content-addressed cache.
+into each build output. The tracked manifests identify the required global and
+optional local immutable bytes; the explicit asset tool verifies, fetches when
+a remote is configured, or deterministically regenerates them into an ignored
+content-addressed cache.
 Normal runtime never downloads terrain implicitly. See
 [Production terrain assets](docs/terrain-assets.md).
 
@@ -160,20 +170,19 @@ dotnet run --project samples/NovaCore.Triangle/NovaCore.Triangle.csproj -c Debug
 
 Current Solar-scene controls include mouse drag for free orbiting, mouse wheel zoom, number-key body focus, `.` / `,` simulation-rate changes, Space pause/resume, and `R` to return to the deterministic Solar Map home view.
 
-## Current checkpoint — NovaCore 11B-4
+## Current planetary baseline
 
-**NovaCore 11B-4 — Production Spherical Billboard Planetary Surface** replaces the former Earth terrain experiments with one production-owned, body-fixed surface architecture:
+The current Desktop baseline uses one production-owned Earth surface architecture from Solar overview to the near field:
 
-- a terrain-v4 cube-face `.nccube` pack generated offline from lawful NASA/NOAA sources;
-- a shallow relaxed cube-sphere for stable orbital and global presentation;
-- a persistent KSA-style spherical-billboard / Eyeball renderer for close-range terrain density;
-- four precomputed mesh tiers (T0–T3), selected without rebuilding the surface every frame;
-- a snapped viewer-facing pupil with deterministic hysteresis, so the represented geography remains body fixed as the camera moves;
-- bounded transactional residency, where complete patch dependencies become ready before ownership changes;
-- real-Earth elevation displacement and FP64 camera-relative reconstruction before GPU narrowing;
-- explicit production isolation, keeping unsupported planets on the inexpensive generic path.
+- canonical right-handed body-fixed geography: +Y north, +X at longitude zero, and positive/east longitude toward -Z;
+- deterministic `earth-surface-v5` distribution and optional `earth-local-v2` refinement addressed by `body / terrain-version / face / level / x / y`;
+- conservative opaque global coverage that remains authoritative until a complete refinement transaction is ready, so refinement cannot leave an unowned visible region;
+- coherent global/refinement material addressing, including mixed-payload and cross-face fragments resolved from the represented body-fixed geography;
+- outward production topology with Vulkan front-face state matched to the validated projected winding;
+- explicit host-to-compute publication synchronization and runtime terrain-version identity instead of stale hard-coded assumptions;
+- FP64 camera-relative reconstruction, body-fixed surface anchors, and anchored-object evaluation downstream of unchanged celestial authority.
 
-The old equirectangular virtual-texture ownership model and per-frame radial Eyeball terrain path are retired. Terrain-v4 is deliberately shallow today: its current data proves stable orbital-to-ground ownership and transport, while higher-frequency terrain payloads and close-ground fidelity remain future work. All rendering remains downstream of the authoritative celestial simulation.
+The former equirectangular virtual-texture owner and per-frame radial terrain generator are retired. The current renderer is a stable architectural and reference baseline, not the final visual target: deeper continuous refinement, richer surface materials, and gameplay-scale environmental detail remain active development.
 
 ## Accuracy and current scope
 
@@ -181,17 +190,17 @@ The old equirectangular virtual-texture ownership model and per-frame radial Eye
 
 The new high-precision Moon orientation improves pole, prime-meridian, and physical-libration presentation; it does not improve lunar translation. Precision translunar targeting, lunar orbit insertion, close lunar navigation, or other requirements that exceed the compact translational model's measured accuracy will receive a dedicated higher-fidelity ephemeris layer when those requirements exist.
 
-NovaCore now has a production-owned terrain architecture, but its terrain-v4 payload is still shallow. The former provisional atmosphere/cloud renderer has been retired; production atmosphere, clouds, water/coastlines, physical oceans, weather, spacecraft simulation, colonies, maneuver planning, and SOI/patched-conic navigation are not yet implemented.
+NovaCore now has a production-owned terrain architecture, but its terrain-v5 global payload is still shallow. The former provisional atmosphere/cloud renderer has been retired. Production atmosphere, clouds, water/coastlines, physical oceans, weather, complete spacecraft flight gameplay, colonies, maneuver planning, and SOI/patched-conic navigation are not yet implemented.
 
 ## Roadmap
 
-**Next visual frontier**
+**Next planetary frontier**
 
-Deeper, higher-frequency terrain payloads → close-ground material/detail refinement → production atmosphere/cloud reconstruction → water and coastline systems → GPU-driven local environmental detail → launch and landing surface gameplay.
+Production-quality continuous terrain and seamless refinement → close-ground material/detail quality → atmosphere/cloud reconstruction → water and coastline systems → GPU-driven local environmental detail → surface, launch, and landing gameplay.
 
 **Future flight and navigation**
 
-Local/floating reference-frame transitions → SOI/patched-conic policy → spacecraft force/torque dynamics → maneuver planning and navigation → higher-fidelity ephemerides wherever measured accuracy requires them.
+Extended local/reference-frame transitions → SOI/patched-conic policy → complete spacecraft force/torque and flight integration → maneuver planning and navigation → higher-fidelity ephemerides wherever measured accuracy requires them.
 
 The goal is to add those systems without weakening the existing authority boundary between simulation and presentation.
 

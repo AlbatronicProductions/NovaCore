@@ -21,6 +21,8 @@ layout(location=9) flat in vec3 bodyCameraLow;
 layout(location=10) flat in vec4 localDetail;
 layout(location=11) flat in uint productionLayer;
 layout(location=12) in vec2 productionUv;
+layout(location=13) flat in uvec4 productionAddress;
+layout(location=14) in vec2 productionTransition;
 layout(std430,set=0,binding=2) readonly buffer Input { vec4 cameraHighRadiusHigh; vec4 cameraLowRadiusLow; vec4 thresholds; uvec4 controls; vec4 viewForwardHalfAngle; vec4 textureDemand; } inputData;
 layout(std430,set=0,binding=12) readonly buffer EyeballInput { vec4 cameraHighRadiusHigh; vec4 cameraLowRadiusLow; vec4 surface; uvec4 identity; vec4 tangentAnchorAngle; vec4 mapping; uvec4 topology; uvec4 reserved; } eye;
 layout(set=0,binding=24) uniform sampler2DArray productionAlbedo;
@@ -30,14 +32,66 @@ layout(std430,set=0,binding=27) readonly buffer ProductionLayers { uint values[]
 layout(push_constant) uniform StellarLighting { vec4 sourceCenterExposure; vec4 sourceColorAmbient; vec4 radianceGlowEnabled; } lighting;
 layout(location=0) out vec4 outColor;
 
-uint ResolveProductionFragmentLayer(
-  vec3 direction,
-  out vec2 localUv,
-  out vec2 continuousFaceUv,
-  out float levelCells)
+struct ProductionSurfaceSample
 {
-  uint face;vec2 uv;ProductionDirectionAddress(direction,face,uv);
-  continuousFaceUv=uv;
+  vec3 albedo;
+  float elevation;
+  float land;
+};
+
+ProductionSurfaceSample SampleProductionSurface(
+  uvec4 address,
+  uint layer,
+  vec2 localUv,
+  vec3 unitDirection)
+{
+  ProductionSurfaceSample result;
+  float cells=float(1u<<address.y);
+  vec2 continuousFaceUv=(vec2(address.zw)+localUv)/cells;
+  vec2 storedUv=(vec2(4.0)+clamp(localUv,0.0,1.0)*256.0)/264.0;
+  vec2 gradientX,gradientY;
+  ProductionPayloadGradients(continuousFaceUv,unitDirection,cells,gradientX,gradientY);
+  float payloadLayer=float(layer-1u);
+  result.albedo=textureGrad(productionAlbedo,vec3(storedUv,payloadLayer),gradientX,gradientY).rgb;
+  result.elevation=textureGrad(productionElevation,vec3(storedUv,payloadLayer),gradientX,gradientY).r*20000.0-11000.0;
+  result.land=textureGrad(productionLand,vec3(storedUv,payloadLayer),gradientX,gradientY).r;
+  return result;
+}
+
+float MixedLodEdgeWeight(vec2 localUv,uint stitchMask)
+{
+  const float width=2.0/16.0;
+  float weight=1.0;
+  if((stitchMask&1u)!=0u)weight=min(weight,smoothstep(0.0,width,localUv.x));
+  if((stitchMask&2u)!=0u)weight=min(weight,smoothstep(0.0,width,1.0-localUv.x));
+  if((stitchMask&4u)!=0u)weight=min(weight,smoothstep(0.0,width,localUv.y));
+  if((stitchMask&8u)!=0u)weight=min(weight,smoothstep(0.0,width,1.0-localUv.y));
+  return weight;
+}
+
+bool ProductionEyeballVisibleFromCamera(vec3 unitDirection,float representedHeight)
+{
+  dvec3 direction=normalize(dvec3(unitDirection));
+  dvec3 cameraBody=dvec3(bodyCameraHigh)+dvec3(bodyCameraLow);
+  double bodyRadius=double(inputData.cameraHighRadiusHigh.w)+double(inputData.cameraLowRadiusLow.w);
+  dvec3 surfacePoint=direction*(bodyRadius+double(max(representedHeight,eye.surface.z)));
+  // The persistent Eye intentionally contains a much larger body-fixed cap
+  // than is visible at orbital altitude.  Rasterization is two-sided, so a
+  // geometric visibility test is required before those far-side triangles
+  // can contribute color or depth.  The cube-sphere remains the opaque parent
+  // for every rejected fragment.
+  return dot(cameraBody-surfacePoint,direction)>0.0;
+}
+
+uint ResolveProductionFragmentLayer(vec3 unitDirection,out vec2 localUv,out uvec4 address)
+{
+  // A radial Eye triangle is not confined to one cube payload chart.  Its
+  // vertices can cross an LOD page edge or even a cube-face edge, so a flat
+  // provoking-vertex address paired with interpolated UVs is not a coherent
+  // surface coordinate.  Resolve the chart from the interpolated body-fixed
+  // direction at the fragment; global cube patches retain their transactional
+  // per-instance address below.
+  uint face;vec2 uv;ProductionDirectionAddress(unitDirection,face,uv);
   uint maximumLevel=min(inputData.controls.x,3u);
   for(int signedLevel=int(maximumLevel);signedLevel>=0;signedLevel--)
   {
@@ -46,56 +100,57 @@ uint ResolveProductionFragmentLayer(
     uint layer=productionLayers.values[ProductionPatchOrdinal(face,level,patchCoordinate.x,patchCoordinate.y)];
     if(layer!=0u)
     {
-      levelCells=float(cells);
-      localUv=clamp(uv*levelCells-vec2(patchCoordinate),vec2(0),vec2(1));
+      localUv=clamp(uv*float(cells)-vec2(patchCoordinate),vec2(0),vec2(1));
+      address=uvec4(face,level,patchCoordinate);
       return layer;
     }
   }
-  localUv=uv;levelCells=1.0;return 0u;
-}
-
-bool ProductionEyeballOwnsDirection(vec3 unitDirection)
-{
-  vec3 anchor=normalize(eye.tangentAnchorAngle.xyz);
-  vec3 reference=abs(anchor.y)<.95?vec3(0,1,0):vec3(1,0,0);
-  vec3 east=normalize(cross(reference,anchor)),north=normalize(cross(anchor,east));
-  vec3 direction=normalize(unitDirection);
-  float axial=dot(direction,anchor);
-  if(axial<=0.0)return false;
-  vec2 gnomonic=vec2(dot(direction,east),dot(direction,north))/axial;
-  float segmentCount=float(max(eye.topology.w,3u));
-  float sector=6.2831853071795864769/segmentCount;
-  float localAngle=mod(atan(gnomonic.y,gnomonic.x)+.5*sector,sector)-.5*sector;
-  float polygonRadius=tan(eye.tangentAnchorAngle.w)*cos(.5*sector)/cos(localAngle);
-  // The Eyeball outer ring is a regular polygon in gnomonic space.  Matching
-  // that actual raster boundary (rather than an analytic circular cap) gives
-  // the two meshes one coherent color/depth owner without exposing sawteeth.
-  return length(gnomonic)<polygonRadius*(1.0-2e-6);
+  localUv=uv;address=uvec4(face,0u,0u,0u);return 0u;
 }
 
 void main()
 {
   bool eyeball=(productionLayer&0x80000000u)!=0u;
-  if(!eyeball&&eye.identity.w!=0u&&eye.surface.w>=.99999&&ProductionEyeballOwnsDirection(bodyDirection))discard;
+  // The persistent cube-sphere remains the opaque coverage/depth parent while
+  // the local Eyeball refines it.  Discarding the parent over the Eyeball's
+  // analytic cap is not a valid ownership transaction: portions of the large
+  // radial mesh can be beyond the geometric horizon (or clipped) and therefore
+  // cannot prove pixel coverage for the region being discarded.  Keeping the
+  // parent lets the depth test select only genuinely represented Eyeball
+  // fragments and prevents transient globe openings during approach.
   vec3 unitDirection=normalize(bodyDirection);
-  vec2 resolvedUv,continuousFaceUv;float levelCells;
-  // Resolve both global and Eyeball fragments from the same physical sphere
-  // direction.  A flat vertex layer is valid for ownership, but not for
-  // filtered payload addressing across hierarchical or cube-face boundaries.
-  uint resolvedLayer=ResolveProductionFragmentLayer(unitDirection,resolvedUv,continuousFaceUv,levelCells);
+  if(eyeball&&!ProductionEyeballVisibleFromCamera(unitDirection,terrainHeight))discard;
+  uint resolvedLayer=productionLayer&0x7fffffffu;
+  vec2 resolvedUv=productionUv;
+  uvec4 resolvedAddress=productionAddress;
+  if(eyeball)resolvedLayer=ResolveProductionFragmentLayer(unitDirection,resolvedUv,resolvedAddress);
   if(resolvedLayer==0u)discard;
   vec3 surfaceNormal=normalize(normal);
-  vec2 storedUv=(vec2(4.0)+clamp(resolvedUv,0.0,1.0)*256.0)/264.0;
-  vec2 gradientX,gradientY;
-  ProductionPayloadGradients(continuousFaceUv,unitDirection,levelCells,gradientX,gradientY);
-  float layer=float(resolvedLayer-1u);
-  float sampledHeight=textureGrad(productionElevation,vec3(storedUv,layer),gradientX,gradientY).r*20000.0-11000.0;
-  vec3 sampledAlbedo=textureGrad(productionAlbedo,vec3(storedUv,layer),gradientX,gradientY).rgb;
+  ProductionSurfaceSample visible=SampleProductionSurface(resolvedAddress,resolvedLayer,resolvedUv,unitDirection);
+  if(!eyeball&&productionAddress.y>0u)
+  {
+    float surfaceWeight=productionTransition.x*MixedLodEdgeWeight(productionUv,uint(round(productionTransition.y)));
+    if(surfaceWeight<.999999)
+    {
+      uvec4 parentAddress=uvec4(productionAddress.x,productionAddress.y-1u,productionAddress.z>>1u,productionAddress.w>>1u);
+      uint parentLayer=productionLayers.values[ProductionPatchOrdinal(parentAddress.x,parentAddress.y,parentAddress.z,parentAddress.w)];
+      if(parentLayer==0u)discard;
+      float parentCells=float(1u<<parentAddress.y),childCells=float(1u<<productionAddress.y);
+      vec2 continuousFaceUv=(vec2(productionAddress.zw)+productionUv)/childCells;
+      vec2 parentUv=clamp(continuousFaceUv*parentCells-vec2(parentAddress.zw),vec2(0),vec2(1));
+      ProductionSurfaceSample parent=SampleProductionSurface(parentAddress,parentLayer,parentUv,unitDirection);
+      visible.albedo=mix(parent.albedo,visible.albedo,surfaceWeight);
+      visible.elevation=mix(parent.elevation,visible.elevation,surfaceWeight);
+      visible.land=mix(parent.land,visible.land,surfaceWeight);
+    }
+  }
+  float sampledHeight=visible.elevation;
+  vec3 sampledAlbedo=visible.albedo;
   LocalTerrainMaterialSample localSample=SampleLocalTerrainMaterial(unitDirection);
-  if(localSample.resident){sampledAlbedo=localSample.albedo;surfaceNormal=ApplyLocalTerrainNormal(unitDirection,localSample.normalXY);}
+  if(eyeball&&localSample.resident){sampledAlbedo=mix(sampledAlbedo,localSample.albedo,localSample.weight);surfaceNormal=normalize(mix(surfaceNormal,ApplyLocalTerrainNormal(unitDirection,localSample.normalXY),localSample.weight));}
   ProductionEarthMaterial earth=ProductionEarthSurfaceMaterial(
     sampledAlbedo,
-    textureGrad(productionLand,vec3(storedUv,layer),gradientX,gradientY).r,
+    visible.land,
     sampledHeight,
     response);
   float bodyRadius=inputData.cameraHighRadiusHigh.w+inputData.cameraLowRadiusLow.w;
@@ -104,7 +159,7 @@ void main()
   vec3 differentialMetres=-viewDirection;
   ProductionTerrainMaterial terrainMaterial=SynthesizeProductionTerrainMaterial(
     earth.albedo,
-    textureGrad(productionLand,vec3(storedUv,layer),gradientX,gradientY).r,
+    visible.land,
     sampledHeight,
     unitDirection,
     surfaceNormal,

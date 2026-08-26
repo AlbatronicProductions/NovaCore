@@ -18,15 +18,15 @@ Before editing, read `README.md`, `ENGINEERING_RULES.md`, `docs/NOVACORE_CURRENT
 
 `CelestialSystemDefinition` → `CelestialSystemEvaluator` → immutable `PlanetaryPresentationSnapshot` → managed camera-relative submission → narrow native ABI → Vulkan renderer.
 
-Earth production rendering is the terrain-v4 architecture: a shallow L0–L2 relaxed cube-sphere plus four persistent production spherical-billboard/Eyeball mesh tiers. Both consume patch-aligned `.nccube` data with stable `body / terrain-version / face / level / x / y` identity. A snapped body-fixed pupil and projected-error hysteresis change close-range density without per-frame topology generation; complete parent ownership persists until a complete replacement transaction is resident. Far and unsupported bodies remain on the inexpensive generic whole-body/detailed paths. All representations consume immutable planet material, evaluated-Sun, physical-radius, authoritative body-fixed orientation, and camera-relative presentation authority. Local scenes use finite reversed-Z; Solar uses infinite-far reversed-Z.
+Earth production rendering is the terrain-v5 architecture: a shallow L0–L2 relaxed cube-sphere plus four persistent production spherical-billboard/Eyeball mesh tiers. Both consume patch-aligned `.nccube` data with stable `body / terrain-version / face / level / x / y` identity. A snapped body-fixed pupil and projected-error hysteresis change close-range density without per-frame topology generation; complete parent ownership persists until a complete replacement transaction is resident. Far and unsupported bodies remain on the inexpensive generic whole-body/detailed paths. All representations consume immutable planet material, evaluated-Sun, physical-radius, authoritative body-fixed orientation, and camera-relative presentation authority. Local scenes use finite reversed-Z; Solar uses infinite-far reversed-Z.
 
-## Current milestone
+## Current baseline
 
-NovaCore 11B-4 finalizes the Continuous Earth 4C retirement of the former
-production-v3 equirectangular SVT and old per-frame radial Eyeball after
-terrain-v4 replacement ownership was proven.
+The recovered 11B-6C Desktop baseline retains the Continuous Earth retirement
+of the former production-v3 equirectangular SVT and old per-frame radial
+Eyeball after terrain-v5 replacement ownership was proven.
 The sole production Earth terrain path is now the shallow L0–L2 relaxed
-cube-sphere `earth_surface_v4.nccube` hierarchy plus four persistent production
+cube-sphere `earth_surface_v5.nccube` hierarchy plus four persistent production
 Eyeball tiers. Patch/payload identity is
 `body / terrain-version / face / level / x / y`; parent-to-child promotion is a
 complete quartet transaction. The checked topology-neutral R16 elevation oracle
@@ -38,11 +38,11 @@ The body-orientation evaluator is a separate pure exact-epoch authority. Mercury
 
 The true-distance Solar scene retains focus navigation, moving bodies, deterministic orbit paths/labels/markers, label collision rejection, and extreme-range infinite-far projection correction. Fresh default construction queries UTC exactly once and converts it with the pure pinned-NAIF0012 `SolarUtcTime` boundary; deterministic scenes call the explicit `SimulationInstant` constructor. Thereafter only `SimulationClock.CurrentTime` drives translations, orientations, paths, and rendering. One immutable 15-entry speed catalog spans 0.1×, realtime, and the ordered accelerated presets through 7,776,000×. Native rising-edge comma/period input steps exactly once. Speed feedback remains wall-time driven for two seconds with the final 0.75 seconds fading smoothly, now through a dedicated 210-vertex 5×7 sans bitmap-glyph HUD draw that uses derivative antialiasing, adds no descriptor or per-frame allocation, and leaves ordinary 3×5 body labels unchanged. Orbit paths are sampled from the current simulation instant through the same compact evaluator; this replaces the visibly stale ET0 path policy without a Moon renderer branch. The overview remains capped at 100 AU. Startup and `R` select a deterministic 58 AU Solar Map home pose near the ecliptic normal without changing the current instant; mouse drag orbits in a root-inertial body-centered frame, and time advancement translates that rig without inheriting body spin.
 
-The renderer writes the scene to one persistent FP16 target and tone-maps it in a second subpass using fixed exposure. Solar frames add a deterministic procedural infinite-far background, an evaluated-center/physical-radius stellar Sun with analytic corona, and one generic evaluated-Sun lighting record shared by distant and detailed planets. A 176-byte fixed-width presentation record carries the same material identity and body-fixed-to-root quaternion. The nine non-stellar bodies use repository-authored body-local materials; Saturn's generic annulus is relative to the authoritative equatorial frame. Earth production terrain consumes only terrain-v4 cube payloads; non-Earth bodies remain bounded and never submit Earth production work.
+The renderer writes the scene to one persistent FP16 target and tone-maps it in a second subpass using fixed exposure. Solar frames add a deterministic procedural infinite-far background, an evaluated-center/physical-radius stellar Sun with analytic corona, and one generic evaluated-Sun lighting record shared by distant and detailed planets. A 176-byte fixed-width presentation record carries the same material identity and body-fixed-to-root quaternion. The nine non-stellar bodies use repository-authored body-local materials; Saturn's generic annulus is relative to the authoritative equatorial frame. Earth production terrain consumes only terrain-v5 cube payloads; non-Earth bodies remain bounded and never submit Earth production work.
 
 11B-4 retires the provisional 10B-2B environment record, descriptor, pipeline, shader, and draw because no production terrain owner requires them. No replacement atmosphere, cloud shell, fog, or ocean effect is installed. The numeric terrain sea-level floor remains available to surface/clearance policy. Evaluated-Sun lighting, day/night terminators, HDR scene color, and tone mapping are preserved; the compact frame submission is now 688 bytes.
 
-The Earth camera still exposes `Orbital`, `Transition`, and `SurfaceLocal` modes and preserves the ten-metre CPU/GPU terrain floor. The production Eyeball owns four renderer-lifetime tiers with hashes `0x406A2FB30687F0DA`, `0x6A8D7F46E937CAE9`, `0xEA22A4136AFA7884`, and `0xA462CD4E25B748FB`. Tier topology is precomputed once; runtime changes only snapped body-fixed pupil identity, projected-error tier selection, and bounded terrain-v4 payload residency. There is no per-frame mesh-generation dispatch.
+The Earth camera still exposes `Orbital`, `Transition`, and `SurfaceLocal` modes and preserves the ten-metre CPU/GPU terrain floor. The production Eyeball owns four renderer-lifetime tiers with hashes `0x406A2FB30687F0DA`, `0x6A8D7F46E937CAE9`, `0xEA22A4136AFA7884`, and `0xA462CD4E25B748FB`. Tier topology is precomputed once; runtime changes only snapped body-fixed pupil identity, projected-error tier selection, and bounded terrain-v5 payload residency. There is no per-frame mesh-generation dispatch.
 
 11A-4D makes the distant convention match those regional and eyeball contracts: the whole-body mesh is body-local, its geometry is rotated by the authoritative quaternion exactly once, and its normal/material/light directions remain body fixed. A live handoff audit corrected the detailed shader's mixed-frame Sun subtraction and established a non-rotating focused-camera frame. Focused tests drive every non-stellar Solar body through detailed-only, transition, and distant-only states while paused; camera position changes around the center at fixed distance while body position/quaternion remain exact. Earth, Mars, Jupiter, Saturn, and Moon additionally pass 1×, 30×, 120×, 600×, 14,400×, and 7,776,000× translation-follow/rotation-independence proofs.
 
@@ -52,14 +52,17 @@ The Earth camera still exposes `Orbital`, `Transition`, and `SurfaceLocal` modes
 
 The former 11B-3A/3B packs are retained only as milestone history and source
 provenance. Their runtime files, independent channel/page residency, regional
-overlay, builders, descriptors, and shaders are removed. Terrain-v4 is
-regenerated by `tools/earth_data/build_cube_surface_pack.py`; the CPU elevation
-oracle is regenerated by `build_elevation_oracle.py`.
+overlay, builders, descriptors, and shaders are removed. Terrain-v5 global data
+is regenerated by `tools/earth_data/build_cube_surface_pack.py`, optional
+local-v2 data by `build_local_terrain_pack.py`, and the CPU elevation oracle by
+`build_elevation_oracle.py`.
 
 Pre-11B-5 establishes the production terrain distribution boundary. Heavy
 generated `.nccube` bytes are not ordinary Git blobs or build-output copies.
-`assets/terrain/manifests/earth-surface-v4.json` resolves the canonical
+`assets/terrain/manifests/earth-surface-v5.json` resolves the canonical
 61,484,224-byte payload by SHA-256 into `.novacore/cache/terrain/v1`;
+`assets/terrain/manifests/earth-local-v2.json` independently resolves the
+optional sparse local refinement payload;
 `tools/NovaCore.AssetTool` provides explicit status, verify, fetch, build,
 install, and incomplete-cleanup operations. Solar/Earth verifies once and
 passes the explicit path to native bounded record residency. Normal CI uses the
@@ -68,11 +71,11 @@ work.
 
 ## Recommended next milestone
 
-After 11B-4, deepen or enrich terrain-v4 only through the patch-aligned
-spherical hierarchy. Do not restore independent equirectangular pages, sparse
-regional runtime overlays, or the retired radial compute owner. Production
-atmosphere/cloud rendering is intentionally absent and must be reconstructed
-later against the retained terrain-v4 contract.
+After the recovered 11B-6C baseline, deepen or enrich terrain-v5 only through
+the patch-aligned spherical hierarchy. Do not restore independent
+equirectangular pages, sparse regional runtime overlays, or the retired radial
+compute owner. Production atmosphere/cloud rendering is intentionally absent
+and must be reconstructed later against the retained terrain-v5 contract.
 
 ## Recommended models
 

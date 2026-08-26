@@ -12,7 +12,7 @@ constexpr uint32_t HeaderBytes=256,RecordHeaderBytes=128,InteriorTexels=256,Gutt
 constexpr uint32_t Bc7Bytes=(StoredExtent/4)*(StoredExtent/4)*16;
 constexpr uint32_t Bc4Bytes=(StoredExtent/4)*(StoredExtent/4)*8;
 constexpr uint32_t Bc5Bytes=(StoredExtent/4)*(StoredExtent/4)*16;
-constexpr uint32_t PayloadVersion=1;
+constexpr uint32_t PayloadVersion=2;
 
 enum class Codec:uint8_t{Raw=0,PackBits=1};
 
@@ -36,8 +36,10 @@ class Pack final{
   uint64_t BodyId()const{return bodyId_;}uint32_t TerrainVersion()const{return terrainVersion_;}
   uint32_t MinimumLevel()const{return minimumLevel_;}uint32_t MaximumLevel()const{return maximumLevel_;}
   uint32_t RecordCount()const{return static_cast<uint32_t>(records_.size());}
+  uint32_t DetailFrequency()const{return records_.empty()?0u:records_.front().id.detailFrequency;}
+  uint32_t PayloadVersionValue()const{return records_.empty()?0u:records_.front().id.payloadVersion;}
   float ResidualMinimum()const{return residualMinimum_;}float ResidualMaximum()const{return residualMaximum_;}
-  bool IsProductionLayout()const{return bodyId_==6&&terrainVersion_==4&&interior_==InteriorTexels&&gutter_==GutterTexels&&extent_==StoredExtent;}
+  bool IsProductionLayout()const{return bodyId_==6&&terrainVersion_==5&&interior_==InteriorTexels&&gutter_==GutterTexels&&extent_==StoredExtent&&DetailFrequency()==1&&PayloadVersionValue()==PayloadVersion;}
  private:
   const Record*Find(const SectorId&id)const;
   std::string path_;uint64_t bodyId_{};uint32_t terrainVersion_{},minimumLevel_{},maximumLevel_{},interior_{},gutter_{},extent_{};

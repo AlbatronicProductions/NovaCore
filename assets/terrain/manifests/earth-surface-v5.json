@@ -1,0 +1,39 @@
+{
+  "schema": "NovaCore.TerrainAsset/1",
+  "assetId": "earth-surface-v5",
+  "bodyId": 6,
+  "terrainVersion": 5,
+  "format": "nccube",
+  "formatVersion": 1,
+  "fileName": "earth_surface_v5.nccube",
+  "byteSize": 61484224,
+  "sha256": "38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae",
+  "hierarchy": {
+    "coverage": "global-relaxed-cube-sphere",
+    "minimumPayloadLevel": 0,
+    "maximumPayloadLevel": 2,
+    "faceCount": 6,
+    "recordCount": 126
+  },
+  "provenance": "assets/earth/PROVENANCE.md",
+  "contentManifest": "assets/earth/runtime/earth_surface_v5.nccube.manifest.json",
+  "generator": {
+    "tool": "tools/earth_data/build_cube_surface_pack.py",
+    "version": "NCCUBE1/raw-patch-transaction-v3-canonical-gutters",
+    "executable": "python",
+    "arguments": [
+      "--albedo", "{repository}/assets/earth/source/nasa-blue-marble-2004-12-21600x10800.png",
+      "--elevation", "{repository}/assets/earth/runtime/earth_elevation_8192x4096.r16",
+      "--clouds", "{repository}/assets/earth/source/nasa-blue-marble-clouds-2048.jpg",
+      "--output", "{output}",
+      "--body-id", "6",
+      "--terrain-version", "5",
+      "--maximum-level", "2",
+      "--tile-size", "256",
+      "--gutter", "4"
+    ]
+  },
+  "artifact": {
+    "url": null
+  }
+}

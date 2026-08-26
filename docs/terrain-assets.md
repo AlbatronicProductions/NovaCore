@@ -25,23 +25,37 @@ the asset tool to use a different location. Cache objects use
 `sha256/<first-two-hex>/<full-sha256>.nccube`, so manifests with identical
 content share one immutable object and filenames are not trusted as identity.
 
-The production Earth identity is `earth-surface-v4`: 61,484,224 bytes with
+The production Earth identity is `earth-surface-v5`: 61,484,224 bytes with
 SHA-256
-`5e92a0676bf8cd64f4c00b5e8d79f4b8186cd9a8a57b395138edbab760f1cb76`.
+`38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae`.
 Its tracked distribution manifest is
-`assets/terrain/manifests/earth-surface-v4.json`; the detailed patch-content
+`assets/terrain/manifests/earth-surface-v5.json`; the detailed patch-content
 manifest and lawful-source provenance remain tracked separately.
+
+The optional sparse refinement identity is `earth-local-v2`: 7,652,567 bytes
+with SHA-256
+`60ada8949bfd782dfaea6c04270186bda52654d7263fbc3dbda5eaa4fd2e578a`.
+Its tracked manifest is `assets/terrain/manifests/earth-local-v2.json`; it uses
+terrain version 5, NCCUBE2 payloads, and level-12 body-fixed cube sectors. A
+missing local object is reported explicitly while the coherent global
+terrain-v5 base remains available.
 
 ## Developer commands
 
 Run these from the repository root:
 
 ```powershell
-dotnet run --project tools/NovaCore.AssetTool -- status earth-surface-v4
-dotnet run --project tools/NovaCore.AssetTool -- verify earth-surface-v4
-dotnet run --project tools/NovaCore.AssetTool -- fetch earth-surface-v4
-dotnet run --project tools/NovaCore.AssetTool -- build earth-surface-v4
-dotnet run --project tools/NovaCore.AssetTool -- clean-incomplete earth-surface-v4
+dotnet run --project tools/NovaCore.AssetTool -- status earth-surface-v5
+dotnet run --project tools/NovaCore.AssetTool -- verify earth-surface-v5
+dotnet run --project tools/NovaCore.AssetTool -- fetch earth-surface-v5
+dotnet run --project tools/NovaCore.AssetTool -- build earth-surface-v5
+dotnet run --project tools/NovaCore.AssetTool -- clean-incomplete earth-surface-v5
+
+dotnet run --project tools/NovaCore.AssetTool -- status earth-local-v2
+dotnet run --project tools/NovaCore.AssetTool -- verify earth-local-v2
+dotnet run --project tools/NovaCore.AssetTool -- fetch earth-local-v2
+dotnet run --project tools/NovaCore.AssetTool -- build earth-local-v2
+dotnet run --project tools/NovaCore.AssetTool -- clean-incomplete earth-local-v2
 ```
 
 No remote artifact is configured at this checkpoint, so `fetch` reports that
@@ -52,13 +66,9 @@ size and SHA-256 before publication. A prebuilt file can be installed
 explicitly with:
 
 ```powershell
-dotnet run --project tools/NovaCore.AssetTool -- install earth-surface-v4 --source <path>
+dotnet run --project tools/NovaCore.AssetTool -- install earth-surface-v5 --source <path>
+dotnet run --project tools/NovaCore.AssetTool -- install earth-local-v2 --source <path>
 ```
-
-Regeneration requires the pinned Python dependencies documented by Earth
-provenance. If `python` is not the intended interpreter, set
-`NOVACORE_PYTHON` to its executable path; this changes the local tool process,
-not the tracked manifest or runtime cache identity.
 
 Regeneration requires the pinned Python dependencies documented by Earth
 provenance. If `python` is not the intended interpreter, set
@@ -99,10 +109,12 @@ dedicated asset-enabled run may install and verify production Earth.
 A fresh clone intentionally starts without the heavy payload:
 
 ```powershell
-dotnet run --project tools/NovaCore.AssetTool -- status earth-surface-v4
+dotnet run --project tools/NovaCore.AssetTool -- status earth-surface-v5
 # reports Missing and the exact cache content path
-dotnet run --project tools/NovaCore.AssetTool -- build earth-surface-v4
-dotnet run --project tools/NovaCore.AssetTool -- verify earth-surface-v4
+dotnet run --project tools/NovaCore.AssetTool -- build earth-surface-v5
+dotnet run --project tools/NovaCore.AssetTool -- verify earth-surface-v5
+dotnet run --project tools/NovaCore.AssetTool -- build earth-local-v2
+dotnet run --project tools/NovaCore.AssetTool -- verify earth-local-v2
 dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=sol
 ```
 
@@ -122,10 +134,10 @@ deterministic local regeneration is authoritative. This hybrid manifest plus
 content-addressed cache keeps clones and CI small, preserves reproducibility,
 and avoids rewriting historical Git objects.
 
-The schema is not Earth-specific. Future 11B-5 global and local packages can
-have independent asset IDs, body IDs, terrain versions, hashes, geographic
-coverage metadata, cache lifetimes, and artifact locators while sharing bytes
-when their content hash is identical. Runtime patch residency remains separate
-from distribution: payload packages feed stable
+The schema is not Earth-specific. Future global and local packages can have
+independent asset IDs, body IDs, terrain versions, hashes, geographic coverage
+metadata, cache lifetimes, and artifact locators while sharing bytes when their
+content hash is identical. Runtime patch residency remains separate from
+distribution: payload packages feed stable
 `body / terrain-version / face / level / x / y` ownership and never become
 independent visible owners.

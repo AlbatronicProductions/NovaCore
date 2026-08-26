@@ -11,6 +11,7 @@ layout(std430,set=0,binding=31) readonly buffer LocalTerrainLookup { uint words[
 
 const uint LocalTerrainLookupCapacity=1024u;
 const float LocalTerrainStoredExtent=264.0;
+const float LocalTerrainBoundaryWidth=8.0/256.0;
 
 uint LocalTerrainHash(uint face,uint level,uint x,uint y,uint detailFrequency,uint payloadVersion)
 {
@@ -18,6 +19,43 @@ uint LocalTerrainHash(uint face,uint level,uint x,uint y,uint detailFrequency,ui
     detailFrequency*2246822519u^payloadVersion*3266489917u;
   value^=value>>16u;
   return value&(LocalTerrainLookupCapacity-1u);
+}
+
+bool LookupLocalTerrain(
+  uint face,
+  uint level,
+  uvec2 sector,
+  out uint layer)
+{
+  layer=0u;
+  uint detailFrequency=localTerrain.words[2],payloadVersion=localTerrain.words[3];
+  uint slot=LocalTerrainHash(face,level,sector.x,sector.y,detailFrequency,payloadVersion);
+  for(uint probe=0u;probe<LocalTerrainLookupCapacity;probe++)
+  {
+    uint offset=16u+slot*8u;
+    uint residentLayer=localTerrain.words[offset+6u];
+    if(residentLayer==0u)return false;
+    if(localTerrain.words[offset]==face&&localTerrain.words[offset+1u]==level&&
+       localTerrain.words[offset+2u]==sector.x&&localTerrain.words[offset+3u]==sector.y&&
+       localTerrain.words[offset+4u]==detailFrequency&&localTerrain.words[offset+5u]==payloadVersion)
+    {layer=residentLayer;return true;}
+    slot=(slot+1u)&(LocalTerrainLookupCapacity-1u);
+  }
+  return false;
+}
+
+float LocalTerrainCoverage(uint face,uint level,uvec2 sector,vec2 localUv)
+{
+  uint cells=1u<<level,unusedLayer;float weight=1.0;
+  bool neighbor=sector.x>0u&&LookupLocalTerrain(face,level,uvec2(sector.x-1u,sector.y),unusedLayer);
+  if(!neighbor)weight=min(weight,smoothstep(0.0,LocalTerrainBoundaryWidth,localUv.x));
+  neighbor=sector.x+1u<cells&&LookupLocalTerrain(face,level,uvec2(sector.x+1u,sector.y),unusedLayer);
+  if(!neighbor)weight=min(weight,smoothstep(0.0,LocalTerrainBoundaryWidth,1.0-localUv.x));
+  neighbor=sector.y>0u&&LookupLocalTerrain(face,level,uvec2(sector.x,sector.y-1u),unusedLayer);
+  if(!neighbor)weight=min(weight,smoothstep(0.0,LocalTerrainBoundaryWidth,localUv.y));
+  neighbor=sector.y+1u<cells&&LookupLocalTerrain(face,level,uvec2(sector.x,sector.y+1u),unusedLayer);
+  if(!neighbor)weight=min(weight,smoothstep(0.0,LocalTerrainBoundaryWidth,1.0-localUv.y));
+  return weight;
 }
 
 bool ResolveLocalTerrain(
@@ -32,27 +70,11 @@ bool ResolveLocalTerrain(
   if(localTerrain.words[0]==0u)return false;
   ProductionDirectionAddress(unitDirection,face,faceUv);
   uint maximumLevel=localTerrain.words[1],minimumLevel=localTerrain.words[8];
-  uint detailFrequency=localTerrain.words[2],payloadVersion=localTerrain.words[3];
   for(int signedLevel=int(maximumLevel);signedLevel>=int(minimumLevel);signedLevel--)
   {
     level=uint(signedLevel);uint cells=1u<<level;
     uvec2 sector=min(uvec2(floor(faceUv*float(cells))),uvec2(cells-1u));
-    uint slot=LocalTerrainHash(face,level,sector.x,sector.y,detailFrequency,payloadVersion);
-    for(uint probe=0u;probe<LocalTerrainLookupCapacity;probe++)
-    {
-      uint offset=16u+slot*8u;
-      uint residentLayer=localTerrain.words[offset+6u];
-      if(residentLayer==0u)break;
-      if(localTerrain.words[offset]==face&&localTerrain.words[offset+1u]==level&&
-         localTerrain.words[offset+2u]==sector.x&&localTerrain.words[offset+3u]==sector.y&&
-         localTerrain.words[offset+4u]==detailFrequency&&localTerrain.words[offset+5u]==payloadVersion)
-      {
-        layer=residentLayer;
-        localUv=clamp(faceUv*float(cells)-vec2(sector),vec2(0),vec2(1));
-        return true;
-      }
-      slot=(slot+1u)&(LocalTerrainLookupCapacity-1u);
-    }
+    if(LookupLocalTerrain(face,level,sector,layer)){localUv=clamp(faceUv*float(cells)-vec2(sector),vec2(0),vec2(1));return true;}
   }
   return false;
 }
@@ -64,7 +86,8 @@ float LocalTerrainElevationResidual(vec3 unitDirection)
   uint face,level,layer;vec2 faceUv,localUv;
   if(!ResolveLocalTerrain(unitDirection,face,level,layer,faceUv,localUv))return 0.0;
   float encoded=textureLod(localTerrainResidual,vec3(LocalTerrainStoredUv(localUv),float(layer-1u)),0.0).r;
-  return mix(uintBitsToFloat(localTerrain.words[4]),uintBitsToFloat(localTerrain.words[5]),encoded);
+  uvec2 sector=min(uvec2(floor(faceUv*float(1u<<level))),uvec2((1u<<level)-1u));
+  return mix(uintBitsToFloat(localTerrain.words[4]),uintBitsToFloat(localTerrain.words[5]),encoded)*LocalTerrainCoverage(face,level,sector,localUv);
 }
 
 #ifdef NOVACORE_LOCAL_TERRAIN_FRAGMENT
@@ -73,11 +96,12 @@ struct LocalTerrainMaterialSample
   bool resident;
   vec3 albedo;
   vec2 normalXY;
+  float weight;
 };
 
 LocalTerrainMaterialSample SampleLocalTerrainMaterial(vec3 unitDirection)
 {
-  LocalTerrainMaterialSample result;result.resident=false;result.albedo=vec3(0);result.normalXY=vec2(0);
+  LocalTerrainMaterialSample result;result.resident=false;result.albedo=vec3(0);result.normalXY=vec2(0);result.weight=0.0;
   uint face,level,layer;vec2 faceUv,localUv;
   if(!ResolveLocalTerrain(unitDirection,face,level,layer,faceUv,localUv))return result;
   float cells=float(1u<<level);
@@ -89,6 +113,8 @@ LocalTerrainMaterialSample SampleLocalTerrainMaterial(vec3 unitDirection)
   vec2 gradientY=dFdy(faceUv)*cells*(256.0/LocalTerrainStoredExtent);
   result.albedo=textureGrad(localTerrainAlbedo,vec3(stored,float(layer-1u)),gradientX,gradientY).rgb;
   result.normalXY=textureGrad(localTerrainNormal,vec3(stored,float(layer-1u)),gradientX,gradientY).rg*2.0-1.0;
+  uvec2 sector=min(uvec2(floor(faceUv*cells)),uvec2(uint(cells)-1u));
+  result.weight=LocalTerrainCoverage(face,level,sector,localUv);
   result.resident=true;
   return result;
 }

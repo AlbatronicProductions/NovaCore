@@ -4,7 +4,7 @@ using NovaCore.Core;
 namespace NovaCore.Graphics;
 
 /// <summary>
-/// Stable identity for one geographically local terrain-v4 refinement payload.
+/// Stable identity for one geographically local terrain-v5 refinement payload.
 /// Camera, pupil, mesh tier, residency slot and GPU address are intentionally
 /// absent: none of them changes the represented physical region.
 /// </summary>
@@ -239,9 +239,12 @@ public static class EarthLocalTerrainElevationDataset
 {
     private sealed class Snapshot
     {
-        internal Snapshot(PlanetaryLocalTerrainPackHeader header, Dictionary<PlanetaryLocalTerrainSectorId, byte[]> residuals)
-        { Header = header; Residuals = residuals; }
+        internal Snapshot(PlanetaryLocalTerrainPackHeader header, byte detailFrequency, byte payloadVersion,
+            Dictionary<PlanetaryLocalTerrainSectorId, byte[]> residuals)
+        { Header = header; DetailFrequency = detailFrequency; PayloadVersion = payloadVersion; Residuals = residuals; }
         internal PlanetaryLocalTerrainPackHeader Header { get; }
+        internal byte DetailFrequency { get; }
+        internal byte PayloadVersion { get; }
         internal Dictionary<PlanetaryLocalTerrainSectorId, byte[]> Residuals { get; }
     }
 
@@ -259,7 +262,7 @@ public static class EarthLocalTerrainElevationDataset
             if (!PlanetaryLocalTerrainPackContract.TryReadHeader(package, out var header))
             { error = "Local terrain elevation oracle header is invalid."; return false; }
             var residuals = new Dictionary<PlanetaryLocalTerrainSectorId, byte[]>(checked((int)header.RecordCount));
-            var offset = PlanetaryLocalTerrainPackContract.HeaderBytes;
+            var offset = PlanetaryLocalTerrainPackContract.HeaderBytes; byte detailFrequency = 0, payloadVersion = 0;
             for (var index = 0; index < header.RecordCount; index++)
             {
                 if (offset + PlanetaryLocalTerrainPackContract.RecordHeaderBytes > package.Length ||
@@ -271,6 +274,9 @@ public static class EarthLocalTerrainElevationDataset
                 if (payload != offset + PlanetaryLocalTerrainPackContract.RecordHeaderBytes || recordEnd > package.Length ||
                     record.GpuElevationBytes != PlanetaryLocalTerrainPackContract.GpuBytes(PlanetaryLocalTerrainGpuFormat.Bc4Unorm, PlanetaryLocalTerrainPackContract.StoredExtent))
                 { error = $"Local terrain elevation record {index} payload is invalid."; return false; }
+                if (index == 0) { detailFrequency = record.Sector.DetailFrequency; payloadVersion = record.Sector.PayloadVersion; }
+                else if (record.Sector.DetailFrequency != detailFrequency || record.Sector.PayloadVersion != payloadVersion)
+                { error = $"Local terrain elevation record {index} uses an inconsistent payload identity."; return false; }
                 var blocks = new byte[checked((int)record.GpuElevationBytes)]; var stored = package.AsSpan(elevationOffset, checked((int)record.StoredElevationBytes));
                 var decoded = record.ElevationCodec == PlanetaryLocalTerrainStorageCodec.RawGpuBlocks
                     ? TryCopy(stored, blocks)
@@ -280,7 +286,7 @@ public static class EarthLocalTerrainElevationDataset
                 offset = recordEnd;
             }
             if (offset != package.Length) { error = "Local terrain elevation package has trailing bytes."; return false; }
-            lock (Gate) _snapshot ??= new Snapshot(header, residuals);
+            lock (Gate) _snapshot ??= new Snapshot(header, detailFrequency, payloadVersion, residuals);
             error = string.Empty; return true;
         }
         catch (Exception exception) when (exception is IOException or UnauthorizedAccessException or OverflowException or OutOfMemoryException)
@@ -295,7 +301,8 @@ public static class EarthLocalTerrainElevationDataset
         for (var level = (int)snapshot.Header.MaximumSectorLevel; level >= snapshot.Header.MinimumSectorLevel; level--)
         {
             var cells = 1 << level; var x = Math.Min((int)Math.Floor(faceU * cells), cells - 1); var y = Math.Min((int)Math.Floor(faceV * cells), cells - 1);
-            var id = new PlanetaryLocalTerrainSectorId(snapshot.Header.BodyId, snapshot.Header.TerrainVersion, face, level, x, y, 1, 1);
+            var id = new PlanetaryLocalTerrainSectorId(snapshot.Header.BodyId, snapshot.Header.TerrainVersion, face, level, x, y,
+                snapshot.DetailFrequency, snapshot.PayloadVersion);
             if (!snapshot.Residuals.TryGetValue(id, out var texels)) continue;
             var localU = Math.Clamp(faceU * cells - x, 0d, 1d); var localV = Math.Clamp(faceV * cells - y, 0d, 1d);
             var sampleX = 3.5d + localU * PlanetaryLocalTerrainPackContract.InteriorTexels;

@@ -4,7 +4,7 @@ using NovaCore.Core.Surface;
 namespace NovaCore.Graphics;
 
 /// <summary>
-/// Narrow adapter from the accepted physical terrain-v4/NCCUBE2 CPU oracle to Core surface
+/// Narrow adapter from the accepted physical terrain-v5/NCCUBE2 CPU oracle to Core surface
 /// authority. Rendering residency, pupil, and topology are not consulted.
 /// </summary>
 public readonly record struct PlanetaryPhysicalTerrainAuthority(

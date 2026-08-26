@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build sparse NCCUBE2 local terrain-v4 refinements in GPU-native BC formats."""
+"""Build sparse NCCUBE2 local terrain-v5 refinements in GPU-native BC formats."""
 
 from __future__ import annotations
 
@@ -25,8 +25,8 @@ GUTTER = 4
 EXTENT = INTERIOR + GUTTER * 2
 BLOCK_COUNT = (EXTENT // 4) ** 2
 BODY_ID = 6
-TERRAIN_VERSION = 4
-PAYLOAD_VERSION = 1
+TERRAIN_VERSION = 5
+PAYLOAD_VERSION = 2
 DETAIL_FREQUENCY = 1
 RESIDUAL_MINIMUM = -512.0
 RESIDUAL_MAXIMUM = 512.0
@@ -171,7 +171,7 @@ def sectors(level: int, fixture: bool) -> list[tuple[int, int, int]]:
     result = set(); size = 1 << level
     for latitude, longitude in SITES:
         lat, lon = math.radians(latitude), math.radians(longitude)
-        direction = np.array((math.cos(lat)*math.cos(lon), math.sin(lat), math.cos(lat)*math.sin(lon)))
+        direction = np.array((math.cos(lat)*math.cos(lon), math.sin(lat), -math.cos(lat)*math.sin(lon)))
         face, u, v = face_uv(direction); cx, cy = int(u*size), int(v*size)
         for dy in (-1, 0, 1):
             for dx in (-1, 0, 1):
@@ -185,7 +185,7 @@ def tile_data(face: int, x: int, y: int, level: int, albedo_source: np.ndarray |
     coordinate = (np.arange(EXTENT, dtype=np.float64) - GUTTER + .5) / INTERIOR
     u = (x + coordinate[None, :]) / size; v = (y + coordinate[:, None]) / size
     dx, dy, dz = relaxed_direction(face, u, v)
-    longitude, latitude = np.arctan2(dz, dx), np.arcsin(np.clip(dy, -1.0, 1.0))
+    longitude, latitude = np.arctan2(-dz, dx), np.arcsin(np.clip(dy, -1.0, 1.0))
     if albedo_source is None:
         albedo = np.stack((110+50*np.sin(longitude*9), 120+45*np.sin(latitude*13), 100+35*np.cos((longitude+latitude)*11)), axis=2)
         base_elevation = 250.0 + 150.0*np.sin(longitude*7)*np.cos(latitude*5)

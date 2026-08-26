@@ -8,13 +8,13 @@ public readonly record struct PlanetaryTerrainDefinition(uint SourceId,uint Vers
     public const int GridResolution=16;
     public const int GridVertexCount=(GridResolution+1)*(GridResolution+1);
     public const int MaximumDetailOctaves=7;
-    public static PlanetaryTerrainDefinition EarthProductionCubeV4=>new(2,4,EarthElevationDataset.MaximumElevationMetres);
+    public static PlanetaryTerrainDefinition EarthProductionCubeV5=>new(2,5,EarthElevationDataset.MaximumElevationMetres);
     public bool IsValid=>SourceId!=0&&Version!=0&&double.IsFinite(MaximumHeightMetres)&&MaximumHeightMetres>0;
 
     public double SampleHeight(in Double3 bodyDirection,int patchLevel)
     {
         if(!IsValid||!bodyDirection.IsFinite||bodyDirection.LengthSquared<=0||patchLevel is <0 or >24)throw new ArgumentOutOfRangeException();
-        if(SourceId==EarthProductionCubeV4.SourceId&&Version==EarthProductionCubeV4.Version)
+        if(SourceId==EarthProductionCubeV5.SourceId&&Version==EarthProductionCubeV5.Version)
             return Math.Max(0d,EarthElevationDataset.SampleHeight(bodyDirection)+EarthLocalTerrainElevationDataset.SampleResidual(bodyDirection));
         var direction=bodyDirection.Normalized();
         var continental=.46d*Math.Sin(Double3.Dot(direction,new(.8017837257372732,.2672612419124244,.5345224838248488))*3.1d+.7d)

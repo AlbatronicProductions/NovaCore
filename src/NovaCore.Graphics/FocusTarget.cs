@@ -1,4 +1,5 @@
 using NovaCore.Core;
+using NovaCore.Core.Surface;
 
 namespace NovaCore.Graphics;
 
@@ -46,8 +47,8 @@ public readonly record struct SurfaceAnchorFocus(
     Double3 BodyLocalPosition,
     LocalSurfaceTangentBasis LocalTangentBasis)
 {
-    public double LatitudeRadians => Math.Asin(Math.Clamp(BodyFixedDirection.Y, -1d, 1d));
-    public double LongitudeRadians => Math.Atan2(BodyFixedDirection.Z, BodyFixedDirection.X);
+    public double LatitudeRadians => BodyFixedGeography.LatitudeRadians(BodyFixedDirection);
+    public double LongitudeRadians => BodyFixedGeography.LongitudeRadians(BodyFixedDirection);
 
     public bool IsValid => BodyId != 0 && BodyFixedDirection.IsFinite &&
         Math.Abs(BodyFixedDirection.LengthSquared - 1d) <= 1e-10d &&

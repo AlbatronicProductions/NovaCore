@@ -14,9 +14,12 @@ NumPy/Pillow environment documented in `assets/earth/PROVENANCE.md`. Set
 Open a Visual Studio x64 Developer PowerShell, then run:
 
 ```powershell
-dotnet run --project tools/NovaCore.AssetTool -- status earth-surface-v4
+dotnet run --project tools/NovaCore.AssetTool -- status earth-surface-v5
+dotnet run --project tools/NovaCore.AssetTool -- status earth-local-v2
 # Required once for Earth/Solar production scenes on a fresh cache:
-dotnet run --project tools/NovaCore.AssetTool -- build earth-surface-v4
+dotnet run --project tools/NovaCore.AssetTool -- build earth-surface-v5
+# Optional local terrain-v5 refinement:
+dotnet run --project tools/NovaCore.AssetTool -- build earth-local-v2
 
 cmake -S native/NovaCore.Native -B build/native-ninja -G Ninja
 cmake --build build/native-ninja
@@ -33,9 +36,10 @@ dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=frames
 
 The sample copies the native DLL and compiled SPIR-V shaders beside the managed executable. It remains open until the window closes, reports average frame time during shutdown, and releases resources deterministically.
 
-The sample does not copy the heavy terrain-v4 `.nccube` payload. Earth and
-Solar resolve its tracked manifest to the verified content-addressed runtime
-cache and pass that explicit path to native code. Set `NOVACORE_ASSET_CACHE` or
+The sample does not copy the heavy terrain-v5 `.nccube` payloads. Earth and
+Solar resolve the required global manifest and optional local-v2 manifest to
+verified content-addressed runtime-cache paths and pass those explicit paths to
+native code. Set `NOVACORE_ASSET_CACHE` or
 use the asset tool's `--cache <path>` option to relocate the disposable cache.
 See [terrain-assets.md](terrain-assets.md) for status, verify, fetch, install,
 regenerate, interruption recovery, and fresh-clone behavior.

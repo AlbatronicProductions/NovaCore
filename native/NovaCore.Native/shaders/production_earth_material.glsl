@@ -1,7 +1,7 @@
 #ifndef NOVACORE_PRODUCTION_EARTH_MATERIAL_GLSL
 #define NOVACORE_PRODUCTION_EARTH_MATERIAL_GLSL
 
-// One terrain-v4 material authority shared by the distant bootstrap sphere,
+// One terrain-v5 material authority shared by the distant bootstrap sphere,
 // shallow global cube-sphere, and production Eyeball.  Representation
 // ownership may change; these physical-surface inputs may not.
 struct ProductionEarthMaterial

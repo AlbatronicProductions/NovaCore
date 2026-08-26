@@ -2,17 +2,23 @@
 
 NovaCore publishes immutable, root-resolved `PlanetaryPresentationSnapshot` data to Graphics. Graphics never owns a body's position, radius, hierarchy, ephemeris, or time.
 
-## Current production surface: terrain-v4
+## Current production surface: terrain-v5
 
-Earth production rendering is one body-fixed terrain-v4 authority. A shallow
+Earth production rendering is one body-fixed terrain-v5 authority. A shallow
 L0–L2 relaxed cube-sphere supplies global/orbital coverage from the checked
-`earth_surface_v4.nccube` pack. Patch identity is
+`earth_surface_v5.nccube` pack. Patch identity is
 `body / terrain-version / face / level / x / y`; geometry, elevation, albedo,
 classification, and source-cloud payloads share that identity. The current
 renderer consumes the surface payloads; no atmosphere/cloud presentation pass
 is active. Parents remain opaque
 and authoritative until an entire child quartet is resident, then one coherent
 promotion epoch transfers ownership.
+
+Terrain-v5 also fixes the geographic frame contract at the source boundary:
++Y is north, longitude zero is +X, and increasing/east longitude advances
+toward -Z. Its EPSG:4326 inputs are resampled offline using that convention;
+runtime cube addressing therefore preserves the same right-handed geography as
+SurfaceAnchor and ENU (`East × North = Up`).
 
 The production pack is distributed through the tracked terrain manifest and
 ignored content-addressed runtime cache described in
@@ -24,7 +30,7 @@ terrain ownership, filtering, pupil, and hierarchy are unchanged.
 Near-planet density is supplied by four persistent precomputed production
 Eyeball meshes (T0–T3), not per-frame mesh generation. A deterministic snapped
 body-fixed pupil and projected-error hysteresis choose the tier. The production
-Eye samples terrain-v4 cube payloads directly and exchanges sole terrain
+Eye samples terrain-v5 cube payloads directly and exchanges sole terrain
 ownership with the shallow globe without an independently visible texture page
 or hidden legacy surface beneath it. Its topology hashes are
 `0x406A2FB30687F0DA`, `0x6A8D7F46E937CAE9`, `0xEA22A4136AFA7884`, and
@@ -36,7 +42,7 @@ were retired in 4C. Lawful source rasters and their provenance remain offline
 inputs. The checked R16 elevation oracle remains topology-neutral shared
 infrastructure for CPU clearance and CPU/GPU parity, not a second renderer.
 
-One permanent sphere cannot scale from solar-system views to a launch site. Far-field rendering therefore uses a shared whole-body proxy with the physical radius applied only in presentation. Earth global terrain then uses six stable relaxed cube faces addressed by `(face, level, x, y)` through shallow L2; the persistent production Eyeball tiers take sole close-range terrain ownership without changing that body-fixed geography. Unsupported bodies remain on the inexpensive generic whole-body/detailed path and cannot activate Earth terrain-v4 resources.
+One permanent sphere cannot scale from solar-system views to a launch site. Far-field rendering therefore uses a shared whole-body proxy with the physical radius applied only in presentation. Earth global terrain then uses six stable relaxed cube faces addressed by `(face, level, x, y)` through shallow L2; the persistent production Eyeball tiers take sole close-range terrain ownership without changing that body-fixed geography. Unsupported bodies remain on the inexpensive generic whole-body/detailed path and cannot activate Earth terrain-v5 resources.
 
 The current Earth production policy selects global patch transactions and Eye tier from projected demand, residency completeness, snapped pupil identity, and bounded hysteresis. The managed topology and payload checks remain validation oracles. This policy is presentation-only and never participates in simulation identity.
 
@@ -138,7 +144,7 @@ The pupil is the body-fixed intersection of the current camera view ray with the
 
 The disappearance captured in `Our Earth Popping Invisble.mp4` was a projection discontinuity, not an ephemeris, culling, or SVT failure. Solar retained a 1,000 km near plane throughout the 2,000–1,000 km SurfaceAnchor blend, then switched directly to 5 cm. The aimed surface moved behind that near plane for about 1.2 seconds before full SurfaceLocal mode restored it. The new continuous near-plane policy remains smaller than the current surface distance, and Distant/Regional/Eyeball state now has an explicit no-empty-owner invariant.
 
-This milestone established bounded coverage, visibility telemetry, and the view-ray surface footprint. Its equirectangular 5×5 page predictor, independent ancestor fallback, 128-slot page pool, gutters, and per-page promotion were superseded by terrain-v4 patch transactions. The coverage and body-fixed authority invariants survive in the production selector and cache.
+This milestone established bounded coverage, visibility telemetry, and the view-ray surface footprint. Its equirectangular 5×5 page predictor, independent ancestor fallback, 128-slot page pool, gutters, and per-page promotion were superseded by terrain-v5 patch transactions. The coverage and body-fixed authority invariants survive in the production selector and cache.
 
 The checked Earth pack contains `L0..L4`, 256×256 logical tiles (260×260 with gutters), and logical global widths 512, 1024, 2048, 4096, and 8192. At Earth mean radius these are approximately 78.18, 39.09, 19.55, 9.77, and 4.89 km per equatorial texel. Elevation is also 8192×4096. Metre-scale viewing therefore magnifies kilometre-scale source samples; it cannot reveal truthful local geography. The future body-fixed hierarchy is checked global macro imagery → independently streamed regional pages → local surface material detail → metric procedural/micro-normal detail. No dataset or compression format changes in 11B-2C.
 
@@ -222,7 +228,7 @@ None of these packs, indices, descriptors, lookup tables, or residency rules is 
 
 Physical orientation is evaluated once per body and update from the authoritative `SimulationInstant`; it is never accumulated from render time. The simulation layer publishes a normalized body-fixed-to-inertial quaternion for each major body, while the translational celestial hierarchy remains inertial and unchanged. `PlanetaryPresentationSnapshot` copies that quaternion into each immutable proxy. The 176-byte native presentation record transports it to distant, generic detailed, production globe/Eyeball, and ring paths.
 
-Camera controls operate in presentation space only. Focus-orbit and `SurfaceLocal` camera positions are retained in body coordinates and transformed through the evaluated body quaternion when constructing the root pose. Production globe/Eyeball inputs receive root-to-body camera and view vectors; generated body-local geometry is rotated back into the root camera-relative frame exactly once. Terrain-v4 patch identity, material directions, pupil coordinates, and surface anchors remain body fixed. Moving the camera changes visibility and tier demand but cannot change physical geography.
+Camera controls operate in presentation space only. Focus-orbit and `SurfaceLocal` camera positions are retained in body coordinates and transformed through the evaluated body quaternion when constructing the root pose. Production globe/Eyeball inputs receive root-to-body camera and view vectors; generated body-local geometry is rotated back into the root camera-relative frame exactly once. Terrain-v5 patch identity, material directions, pupil coordinates, and surface anchors remain body fixed. Moving the camera changes visibility and tier demand but cannot change physical geography.
 
 Saturn's ring orientation is relative to the Saturn body-fixed frame, so its plane follows the authoritative equatorial pole while prime-meridian spin leaves the plane unchanged. Earth production data now uses 256×256 cube-patch interiors, four-texel canonical spherical gutters, bounded patch payload residency, and transactional quartet promotion.
 

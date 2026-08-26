@@ -172,8 +172,8 @@ public static class TerrainAssetRepository
 public static class TerrainAssetCache
 {
     public const int VerificationBufferBytes = 1024 * 1024;
-    public const string ProductionEarthAssetId = "earth-surface-v4";
-    public const string ProductionEarthLocalAssetId = "earth-local-v1";
+    public const string ProductionEarthAssetId = "earth-surface-v5";
+    public const string ProductionEarthLocalAssetId = "earth-local-v2";
 
     public static string ContentPath(string cacheRoot, in TerrainAssetManifest manifest) =>
         Path.Combine(cacheRoot, "sha256", manifest.Sha256[..2], manifest.Sha256 + ".nccube");

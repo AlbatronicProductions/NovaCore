@@ -47,6 +47,7 @@ class Pack final {
   bool Open(const std::string &path, std::string &error);
   bool Read(const PatchId &id, Payload &payload, std::string &error) const;
   bool Contains(const PatchId &id) const;
+  bool TryGetId(uint32_t ordinal, PatchId &id) const;
   uint32_t MaximumLevel() const { return maximumLevel_; }
   uint32_t RecordCount() const { return static_cast<uint32_t>(records_.size()); }
   uint32_t TerrainVersion() const { return terrainVersion_; }
@@ -54,7 +55,7 @@ class Pack final {
   uint32_t Interior() const { return interior_; }
   uint32_t Gutter() const { return gutter_; }
   uint32_t Extent() const { return extent_; }
-  bool IsProductionLayout() const { return bodyId_ == EarthBodyId && terrainVersion_ == 4 && interior_ == InteriorTexels && gutter_ == GutterTexels && extent_ == StoredExtent; }
+  bool IsProductionLayout() const { return bodyId_ == EarthBodyId && terrainVersion_ == 5 && interior_ == InteriorTexels && gutter_ == GutterTexels && extent_ == StoredExtent; }
   const std::string &Path() const { return path_; }
 
   static uint64_t Ordinal(uint32_t face, uint32_t level, uint32_t x, uint32_t y);

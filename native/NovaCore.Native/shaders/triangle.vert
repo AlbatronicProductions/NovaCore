@@ -19,7 +19,11 @@ layout(std430, set = 0, binding = 0) readonly buffer GpuFrameData {
 
 layout(location = 0) in vec3 inPosition;
 layout(location = 1) in vec3 inColor;
+layout(location = 2) in vec3 inNormal;
 layout(location = 0) out vec3 color;
+layout(location = 1) out vec3 normal;
+layout(location = 2) out vec3 cameraRelativePosition;
+layout(location = 3) flat out uint mesh;
 
 // Right-handed Hamilton rotation, XYZW quaternion: q * v * conjugate(q).
 vec3 Rotate(vec4 q, vec3 v) {
@@ -31,6 +35,10 @@ void main() {
   // Object transport is already camera relative; FP64 root subtraction occurred on the CPU.
   vec3 relativePosition = object.position.high.xyz + object.position.low.xyz;
   vec3 local = Rotate(object.rotation, inPosition * object.scale.xyz);
-  gl_Position = frameData.camera.viewProjection * vec4(local + relativePosition, 1.0);
+  vec3 presented = local + relativePosition;
+  gl_Position = frameData.camera.viewProjection * vec4(presented, 1.0);
   color = inColor;
+  normal = normalize(Rotate(object.rotation, inNormal));
+  cameraRelativePosition = presented;
+  mesh = object.mesh;
 }

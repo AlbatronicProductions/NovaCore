@@ -289,6 +289,7 @@ internal sealed class SolarSystemScene
     private Double3 _surfaceCameraPivotRoot;
     private bool _surfaceCameraToggleWasDown;
     private SurfaceCameraTransitionMetrics _surfaceCameraLastTransitionMetrics;
+    private FloridaLaunchSite _floridaLaunchSite;
 
     private SolarSystemScene(
         CelestialSystemDefinition system,
@@ -339,11 +340,11 @@ internal sealed class SolarSystemScene
     internal PlanetaryRepresentationBlend FocusedBlend => _blend;
     private static readonly PlanetaryProductionSurfaceEligibility ProductionEarthSurface = new(
         SolarSystemBodyIds.Earth.Value, 6_371_008.8d,
-        PlanetaryTerrainDefinition.EarthProductionCubeV4.SourceId,
-        PlanetaryTerrainDefinition.EarthProductionCubeV4.Version,
-        "earth_surface_v4.nccube");
+        PlanetaryTerrainDefinition.EarthProductionCubeV5.SourceId,
+        PlanetaryTerrainDefinition.EarthProductionCubeV5.Version,
+        "earth_surface_v5.nccube");
     internal bool ProductionSurfaceEligible => ProductionEarthSurface.Supports(
-        FocusedBody.BodyId, FocusedBody.RadiusMetres, PlanetaryTerrainDefinition.EarthProductionCubeV4);
+        FocusedBody.BodyId, FocusedBody.RadiusMetres, PlanetaryTerrainDefinition.EarthProductionCubeV5);
     internal bool ProductionEarthFocused => ProductionSurfaceEligible;
     internal bool DetailedComputeRequested => ProductionSurfaceEligible;
     internal bool EyeballComputeRequested => ProductionSurfaceEligible && _eyeballWeight > 0f && _productionPupilCell.IsValid;
@@ -400,6 +401,7 @@ internal sealed class SolarSystemScene
     internal CameraReferenceAuthority CurrentCameraReferenceAuthority=>_cameraReferenceAuthority;
     internal SurfaceCameraState CurrentSurfaceCameraState=>_surfaceCameraState;
     internal SurfaceCameraTransitionMetrics SurfaceCameraLastTransitionMetrics=>_surfaceCameraLastTransitionMetrics;
+    internal FloridaLaunchSite FloridaLaunchSite=>_floridaLaunchSite;
     internal ReadOnlySpan<ulong> VisibleLabelIds => _visibleLabelIds.AsSpan(0, VisibleLabelCount);
     internal ReadOnlySpan<byte> OrbitOpacityBytes => _orbitOpacityBytes;
     internal int VisibleLabelCount { get; private set; }
@@ -448,6 +450,7 @@ internal sealed class SolarSystemScene
         if (!TryBuildRootOrbitSamples(system, out var rootOrbitSamples, out var orbitTraversalIndices, out var orbitCenterTraversalIndices, out var orbitPeriods, out error)) return false;
         var candidate = new SolarSystemScene(system, root, traversalIndices, rootOrbitSamples, orbitTraversalIndices, orbitCenterTraversalIndices, orbitPeriods, initialTime, startupUtc);
         if (!candidate.TryPublishAt(initialTime, out error)) return false;
+        if (!candidate.TryInitializeFloridaLaunchSite()) { error = "Florida launch-site physical anchor initialization failed."; return false; }
         scene = candidate;
         error = string.Empty;
         return true;
@@ -495,7 +498,7 @@ internal sealed class SolarSystemScene
             {
                 CenterX = (float)center.X, CenterY = (float)center.Y, CenterZ = (float)center.Z, Radius = (float)body.RadiusMetres,
                 ColorR = body.Color.X, ColorG = body.Color.Y, ColorB = body.Color.Z,
-                // Production terrain-v4 roots are synchronously resident before
+                // Production terrain-v5 roots are synchronously resident before
                 // the first submitted frame. A focused generic Earth sphere is
                 // therefore never a production fallback owner.
                 DistantAlpha = focused ? ProductionSurfaceEligible ? 0f : _blend.DistantAlpha : 1f,
@@ -711,7 +714,7 @@ internal sealed class SolarSystemScene
     internal NativePlanetaryGpuConstants GpuConstants(CameraState camera)
     {
         var body = FocusedBody;
-        var rootToBody=body.BodyFixedToRoot.Conjugate().Normalized();var relative=rootToBody.Rotate(camera.Position.Value-body.Position.Value);var encoded=EncodedPosition.Encode(relative);var radiusHigh=(float)body.RadiusMetres;var radiusLow=(float)(body.RadiusMetres-radiusHigh);var terrain=ProductionSurfaceEligible?PlanetaryTerrainDefinition.EarthProductionCubeV4:default;var viewForward=rootToBody.Rotate(camera.Orientation.Rotate(new Double3(0,0,-1))).Normalized();var tanY=Math.Tan(camera.Projection.VerticalFieldOfViewRadians*.5d);var halfAngle=Math.Atan(Math.Sqrt(tanY*tanY+tanY*tanY*camera.Projection.AspectRatio*camera.Projection.AspectRatio));
+        var rootToBody=body.BodyFixedToRoot.Conjugate().Normalized();var relative=rootToBody.Rotate(camera.Position.Value-body.Position.Value);var encoded=EncodedPosition.Encode(relative);var radiusHigh=(float)body.RadiusMetres;var radiusLow=(float)(body.RadiusMetres-radiusHigh);var terrain=ProductionSurfaceEligible?PlanetaryTerrainDefinition.EarthProductionCubeV5:default;var viewForward=rootToBody.Rotate(camera.Orientation.Rotate(new Double3(0,0,-1))).Normalized();var tanY=Math.Tan(camera.Projection.VerticalFieldOfViewRadians*.5d);var halfAngle=Math.Atan(Math.Sqrt(tanY*tanY+tanY*tanY*camera.Projection.AspectRatio*camera.Projection.AspectRatio));
         return new NativePlanetaryGpuConstants
         {
             CameraBodyHighX=encoded.HighX,CameraBodyHighY=encoded.HighY,CameraBodyHighZ=encoded.HighZ,RadiusHigh=radiusHigh,
@@ -743,7 +746,7 @@ internal sealed class SolarSystemScene
             CameraBodyHighX=encoded.HighX,CameraBodyHighY=encoded.HighY,CameraBodyHighZ=encoded.HighZ,RadiusHigh=radiusHigh,
             CameraBodyLowX=encoded.LowX,CameraBodyLowY=encoded.LowY,CameraBodyLowZ=encoded.LowZ,RadiusLow=radiusLow,
             SurfaceAltitudeMetres=(float)altitude,MaximumTerrainHeightMetres=(float)EarthPlanetaryScene.Terrain.MaximumHeightMetres,OceanSeaLevelMetres=(float)EarthPlanetaryScene.EarthSeaLevelMetres,BlendAlpha=_eyeballWeight,
-            BodyIdLow=(uint)body.BodyId,BodyIdHigh=(uint)(body.BodyId>>32),TerrainVersion=PlanetaryTerrainDefinition.EarthProductionCubeV4.Version,Enabled=1,
+            BodyIdLow=(uint)body.BodyId,BodyIdHigh=(uint)(body.BodyId>>32),TerrainVersion=PlanetaryTerrainDefinition.EarthProductionCubeV5.Version,Enabled=1,
             TangentAnchorX=(float)tangentAnchor.X,TangentAnchorY=(float)tangentAnchor.Y,TangentAnchorZ=(float)tangentAnchor.Z,MaximumAngleRadians=(float)PlanetaryProductionEyeballTopology.MaximumAngleRadians,
             RadialWarpExponent=(float)tier.RadialWarpExponent,DetailFrequency=1f,NormalStepMetres=2f,RegionalAlpha=1f,
             VertexCount=(uint)tier.VertexCount,IndexCount=(uint)tier.IndexCount,RadialRingCount=(uint)tier.RadialRings,AzimuthSegmentCount=(uint)tier.AzimuthSegments,
@@ -942,6 +945,54 @@ internal sealed class SolarSystemScene
         _orbitSampleStaging.CopyTo(_rootOrbitSamples, 0);
         Presentation = candidate;
         error = string.Empty;
+        return true;
+    }
+
+    private bool TryInitializeFloridaLaunchSite()
+    {
+        if(!Presentation.TryGetBody(SolarSystemBodyIds.Earth.Value,out var earth))return false;
+        return FloridaLaunchSite.TryCreate(earth.BodyId,earth.RadiusMetres,
+            PlanetaryTerrainDefinition.EarthProductionCubeV5,out _floridaLaunchSite);
+    }
+
+    internal bool TryEvaluateFloridaLaunchSite(out AnchoredSurfaceObjectPose pose)
+    {
+        pose=default;
+        if(!_floridaLaunchSite.IsValid||!Presentation.TryGetBody(_floridaLaunchSite.Object.Anchor.BodyId,out var earth))return false;
+        var terrain=new PlanetaryPhysicalTerrainAuthority(earth.BodyId,PlanetaryTerrainDefinition.EarthProductionCubeV5);
+        var body=new SurfaceBodyReference(earth.BodyId,earth.RadiusMetres,new ReferenceFrameId(checked((long)earth.BodyId)));
+        var bodyToRoot=new FrameTransform(earth.Position.Value,earth.BodyFixedToRoot);
+        return AnchoredSurfaceObjectEvaluator.TryEvaluate(_floridaLaunchSite.Object,body,terrain,bodyToRoot,
+            Presentation.RootFrame,out pose)==SurfaceAnchorEvaluationStatus.Success;
+    }
+
+    internal bool TryGetFloridaLaunchSitePresentation(CameraState camera,out UniversePosition position,out DoubleQuaternion orientation)
+    {
+        position=default;orientation=default;
+        if(!TryEvaluateFloridaLaunchSite(out var pose))return false;
+        var relative=pose.RootPosition.Value-camera.Position.Value;
+        var distanceSquared=relative.LengthSquared;
+        if(!double.IsFinite(distanceSquared)||distanceSquared>FloridaLaunchSite.MaximumRenderDistanceMetres*FloridaLaunchSite.MaximumRenderDistanceMetres)return false;
+        var view=camera.Orientation.Conjugate().Normalized().Rotate(relative);
+        if(-view.Z<camera.Projection.NearClip)return false;
+        var projectedPixels=FloridaLaunchSite.PlatformEastWidthMetres*(-view.Z>0d?1d/-view.Z:0d)*
+            1080d/(2d*Math.Tan(camera.Projection.VerticalFieldOfViewRadians*.5d));
+        if(!double.IsFinite(projectedPixels)||projectedPixels<.75d)return false;
+        position=pose.RootPosition;orientation=pose.RootOrientation;return true;
+    }
+
+    internal bool TryStartAtFloridaLaunchSite(CameraState camera)
+    {
+        var earthIndex=-1;for(var index=0;index<Presentation.Count;index++)if(Presentation.Bodies[index].BodyId==SolarSystemBodyIds.Earth.Value){earthIndex=index;break;}
+        if(earthIndex<0||!Focus(camera,earthIndex)||!_floridaLaunchSite.IsValid||
+            !SurfaceEnuFrame.TryCreate(_floridaLaunchSite.Object.Anchor,out _))return false;
+        var eye=new Double3(115d,-135d,72d);var pivot=new Double3(0d,0d,4d);var view=pivot-eye;
+        var horizontal=Math.Sqrt(view.X*view.X+view.Y*view.Y);
+        var yaw=Math.Atan2(view.X,view.Y);var pitch=Math.Atan2(view.Z,horizontal);
+        if(!SurfaceCameraState.TryCreateFreeLook(_floridaLaunchSite.Object.Anchor,eye,pivot,yaw,pitch,out _surfaceCameraState))return false;
+        _cameraReferenceAuthority=CameraReferenceAuthority.SurfaceRelative;
+        _inertialOrbitOrientationOverride=null;_inertialOrbitOffsetDirectionOverride=null;
+        ApplySurfaceCameraPose(camera);
         return true;
     }
 
@@ -1320,7 +1371,7 @@ internal sealed class SolarSystemScene
         if(EarthElevationDataset.TryLoad(Path.Combine(AppContext.BaseDirectory,"earth-data"),out error))return true;
         if(TerrainAssetRepository.TryFindRoot(out var repositoryRoot)&&
             EarthElevationDataset.TryLoad(Path.Combine(repositoryRoot,"assets","earth","runtime"),out error))return true;
-        error=$"Solar terrain-v4 camera authority requires the Earth elevation oracle. {error}";
+        error=$"Solar terrain-v5 camera authority requires the Earth elevation oracle. {error}";
         return false;
     }
     private Double3 EvaluateFocusRoot()=>_focusTarget.TryEvaluate(FocusedBody,out var root)?root.Value:throw new InvalidOperationException("The active focus target cannot be evaluated from the current presentation snapshot.");

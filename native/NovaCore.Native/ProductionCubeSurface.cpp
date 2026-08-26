@@ -82,6 +82,11 @@ const Record *Pack::Find(const PatchId &id) const {
   const auto ordinal = Ordinal(id.face, id.level, id.x, id.y); return ordinal < records_.size() && records_[ordinal].id == id ? &records_[ordinal] : nullptr;
 }
 bool Pack::Contains(const PatchId &id) const { return Find(id) != nullptr; }
+bool Pack::TryGetId(uint32_t ordinal, PatchId &id) const {
+  if (ordinal >= records_.size()) return false;
+  id = records_[ordinal].id;
+  return true;
+}
 
 bool Pack::Read(const PatchId &id, Payload &payload, std::string &error) const {
   const auto *record = Find(id); if (!record) { error = "production cube patch is outside the shipped hierarchy"; return false; }

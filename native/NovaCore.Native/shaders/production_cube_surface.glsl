@@ -1,6 +1,12 @@
 #ifndef NOVACORE_PRODUCTION_CUBE_SURFACE_GLSL
 #define NOVACORE_PRODUCTION_CUBE_SURFACE_GLSL
 
+// Must match PlanetaryTerrainDefinition.EarthProductionCubeV5.Version and the
+// native NCCUBE production-layout contract.  Production selection is keyed by
+// the active terrain dataset version; terrain-v4 is historical and must never
+// select the current production projection or payload hierarchy.
+const uint NOVACORE_PRODUCTION_TERRAIN_VERSION=5u;
+
 // GLSL mirror of RelaxedCubeSphereProjection.AlgorithmVersion 1.  Extended
 // coordinates cross a canonical face edge before the symmetric spherification,
 // so shared edge and triple-corner vertices are bit-identical in direction.

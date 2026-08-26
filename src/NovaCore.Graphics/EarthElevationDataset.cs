@@ -1,12 +1,13 @@
 using System.Buffers.Binary;
 using System.Security.Cryptography;
 using NovaCore.Core;
+using NovaCore.Core.Surface;
 
 namespace NovaCore.Graphics;
 
 /// <summary>
 /// Topology-neutral CPU elevation oracle used by camera clearance and parity
-/// checks. Runtime terrain-v4 GPU ownership remains in the NCCUBE hierarchy.
+/// checks. Runtime terrain-v5 GPU ownership remains in the NCCUBE hierarchy.
 /// </summary>
 public static class EarthElevationDataset
 {
@@ -54,7 +55,7 @@ public static class EarthElevationDataset
         var values = Volatile.Read(ref _elevation);
         if (values is null) return SampleFallback(bodyDirection);
         var direction = bodyDirection.Normalized();
-        var u = Math.Atan2(direction.Z, direction.X) / Math.Tau + .5d;
+        var u = BodyFixedGeography.LongitudeRadians(direction) / Math.Tau + .5d;
         u -= Math.Floor(u);
         var v = Math.Acos(Math.Clamp(direction.Y, -1d, 1d)) / Math.PI;
         var px = u * Width - .5d; var py = v * Height - .5d;

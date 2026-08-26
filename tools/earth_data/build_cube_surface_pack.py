@@ -86,7 +86,9 @@ def relaxed_directions(face: int, u: np.ndarray, v: np.ndarray) -> np.ndarray:
 
 
 def source_uv(direction: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
-    u = np.mod(np.arctan2(direction[..., 2], direction[..., 0]) / (2.0 * math.pi) + 0.5, 1.0)
+    # NovaCore body-fixed geography is right-handed with +Y north, longitude zero +X,
+    # and positive/east longitude toward -Z. The source is conventional EPSG:4326.
+    u = np.mod(np.arctan2(-direction[..., 2], direction[..., 0]) / (2.0 * math.pi) + 0.5, 1.0)
     v = np.arccos(np.clip(direction[..., 1], -1.0, 1.0)) / math.pi
     return u, v
 
@@ -128,12 +130,168 @@ def encoded_elevation(samples: np.ndarray) -> np.ndarray:
     return np.clip(np.rint(samples[..., 0]), 0, 65535).astype("<u2")
 
 
+def decoded_elevation(samples: np.ndarray) -> np.ndarray:
+    return (samples.astype(np.float64) / 65535.0 *
+            (MAXIMUM_ELEVATION_METRES - MINIMUM_ELEVATION_METRES) + MINIMUM_ELEVATION_METRES)
+
+
+def source_land_mask(albedo: np.ndarray, elevation: np.ndarray) -> np.ndarray:
+    """Build one stable geographic classification source for every cube level.
+
+    ETOPO is the physical elevation authority, but its kilometres-wide coastal
+    cells are not a shoreline classifier.  Blue Marble's chroma restores low,
+    narrow coastal land (including LC-39A) without changing physical height.
+    Every hierarchy level samples this single mask, so residency cannot switch
+    the same location between independently derived land/ocean identities.
+    """
+    height_land = decoded_elevation(elevation) >= 0.0
+    rgb = albedo.astype(np.int16)
+    warm_land = ((rgb[..., 0] + rgb[..., 1] - 2 * rgb[..., 2]) >= 10) & \
+                ((rgb[..., 0] + rgb[..., 1]) >= 18)
+    classified = height_land | warm_land
+    # One source-texel coastal dilation keeps narrow low coastal land from
+    # disappearing when the classification is reconstructed at the bounded
+    # global hierarchy. This is classification only; elevation is untouched.
+    expanded = classified.copy()
+    for dy in (-1, 0, 1):
+        rows = np.clip(np.arange(classified.shape[0]) + dy, 0, classified.shape[0] - 1)
+        for dx in (-1, 0, 1):
+            expanded |= np.roll(classified[rows], dx, axis=1)
+    return np.where(expanded, 255, 0).astype(np.uint8)
+
+
+def cube_coordinates(face: int, u: np.ndarray, v: np.ndarray) -> np.ndarray:
+    a, b, one = 2.0 * u - 1.0, 2.0 * v - 1.0, np.ones_like(u)
+    if face == 0:
+        return np.stack((one, b, -a), axis=-1)
+    if face == 1:
+        return np.stack((-one, b, a), axis=-1)
+    if face == 2:
+        return np.stack((a, one, -b), axis=-1)
+    if face == 3:
+        return np.stack((a, -one, b), axis=-1)
+    if face == 4:
+        return np.stack((a, b, one), axis=-1)
+    return np.stack((-a, b, -one), axis=-1)
+
+
+def face_coordinates(face: int, cube: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+    x, y, z = cube[..., 0], cube[..., 1], cube[..., 2]
+    if face == 0:
+        a, b = -z / x, y / x
+    elif face == 1:
+        a, b = z / -x, y / -x
+    elif face == 2:
+        a, b = x / y, -z / y
+    elif face == 3:
+        a, b = x / -y, z / -y
+    elif face == 4:
+        a, b = x / z, y / z
+    else:
+        a, b = -x / -z, y / -z
+    return (a + 1.0) * 0.5, (b + 1.0) * 0.5
+
+
+def dominant_face(cube: np.ndarray, excluded_face: int) -> int:
+    magnitude = np.abs(cube)
+    candidates = np.argsort(magnitude)[::-1]
+    for axis in candidates:
+        face = (0 if cube[axis] >= 0 else 1) if axis == 0 else \
+               ((2 if cube[axis] >= 0 else 3) if axis == 1 else (4 if cube[axis] >= 0 else 5))
+        if face != excluded_face:
+            return face
+    raise RuntimeError("cube edge has no adjacent face")
+
+
+def edge_mapping(face: int, edge: int, size: int) -> tuple[int, int, bool]:
+    # edge: 0=-U, 1=+U, 2=-V, 3=+V.  Resolve adjacency from the canonical
+    # cube itself so handedness and edge ordering cannot drift independently.
+    if edge < 2:
+        u, v = (-1e-6 if edge == 0 else 1.0 + 1e-6), 0.5
+        boundary_u, boundary_v = (0.0 if edge == 0 else 1.0), 0.25
+    else:
+        u, v = 0.5, (-1e-6 if edge == 2 else 1.0 + 1e-6)
+        boundary_u, boundary_v = 0.25, (0.0 if edge == 2 else 1.0)
+    cube = cube_coordinates(face, np.asarray(u), np.asarray(v))
+    neighbor = dominant_face(cube, face)
+    boundary = cube_coordinates(face, np.asarray(boundary_u), np.asarray(boundary_v))
+    nu, nv = face_coordinates(neighbor, boundary)
+    nu, nv = float(nu), float(nv)
+    epsilon = 1e-8
+    if nu <= epsilon:
+        neighbor_edge, tangent = 0, nv
+    elif nu >= 1.0 - epsilon:
+        neighbor_edge, tangent = 1, nv
+    elif nv <= epsilon:
+        neighbor_edge, tangent = 2, nu
+    elif nv >= 1.0 - epsilon:
+        neighbor_edge, tangent = 3, nu
+    else:
+        raise RuntimeError(f"face {face} edge {edge} did not map to a neighbor edge")
+    return neighbor, neighbor_edge, tangent < 0.5
+
+
+def canonical_cube_gutters(interiors: list[np.ndarray], gutter: int) -> list[np.ndarray]:
+    """Pad six full-face images with exact discrete neighbor-edge samples."""
+    size = interiors[0].shape[0]
+    padded: list[np.ndarray] = []
+    for source in interiors:
+        shape = (size + 2 * gutter, size + 2 * gutter) + source.shape[2:]
+        value = np.empty(shape, dtype=source.dtype)
+        value[gutter:gutter + size, gutter:gutter + size] = source
+        padded.append(value)
+
+    for face in range(6):
+        for edge in range(4):
+            neighbor, neighbor_edge, forward = edge_mapping(face, edge, size)
+            tangent = np.arange(size) if forward else np.arange(size - 1, -1, -1)
+            for depth in range(gutter):
+                if neighbor_edge == 0:
+                    samples = interiors[neighbor][tangent, depth]
+                elif neighbor_edge == 1:
+                    samples = interiors[neighbor][tangent, size - 1 - depth]
+                elif neighbor_edge == 2:
+                    samples = interiors[neighbor][depth, tangent]
+                else:
+                    samples = interiors[neighbor][size - 1 - depth, tangent]
+                if edge == 0:
+                    padded[face][gutter:gutter + size, gutter - 1 - depth] = samples
+                elif edge == 1:
+                    padded[face][gutter:gutter + size, gutter + size + depth] = samples
+                elif edge == 2:
+                    padded[face][gutter - 1 - depth, gutter:gutter + size] = samples
+                else:
+                    padded[face][gutter + size + depth, gutter:gutter + size] = samples
+
+    # Corner gutters have no unique two-face owner.  Sample their one canonical
+    # spherical direction. Edge strips above remain exact neighbor copies.
+    for face in range(6):
+        for row_range, v_sign in ((range(gutter), -1), (range(gutter + size, gutter * 2 + size), 1)):
+            for column_range, u_sign in ((range(gutter), -1), (range(gutter + size, gutter * 2 + size), 1)):
+                corner = relaxed_directions(face, np.asarray(0.0 if u_sign < 0 else 1.0),
+                                             np.asarray(0.0 if v_sign < 0 else 1.0))
+                # Use the mean of the three already sampled face-corner texels.
+                values = []
+                for candidate in range(6):
+                    cu, cv = face_coordinates(candidate, corner)
+                    if -1e-8 <= cu <= 1.0 + 1e-8 and -1e-8 <= cv <= 1.0 + 1e-8:
+                        ix = 0 if float(cu) < .5 else size - 1
+                        iy = 0 if float(cv) < .5 else size - 1
+                        values.append(interiors[candidate][iy, ix].astype(np.float64))
+                corner_value = np.rint(np.mean(values, axis=0)).astype(interiors[face].dtype)
+                for row in row_range:
+                    for column in column_range:
+                        padded[face][row, column] = corner_value
+    return padded
+
+
 def build(args: argparse.Namespace) -> dict:
     if args.maximum_level < 0 or args.maximum_level > 8 or args.tile_size <= 0 or args.gutter < 1:
         raise ValueError("invalid bounded cube-surface build dimensions")
     albedo = load_image(args.albedo, "RGB", args.maximum_level, args.tile_size)
     elevation = load_elevation(args.elevation, args.maximum_level, args.tile_size)
     clouds = load_image(args.clouds, "L", min(args.maximum_level, 3), args.tile_size)
+    land_source = source_land_mask(albedo, elevation)
     extent = args.tile_size + 2 * args.gutter
     record_count = sum(6 << (2 * level) for level in range(args.maximum_level + 1))
     args.output.parent.mkdir(parents=True, exist_ok=True)
@@ -143,19 +301,27 @@ def build(args: argparse.Namespace) -> dict:
         stream.write(bytes(HEADER_BYTES))
         for level in range(args.maximum_level + 1):
             side = 1 << level
-            sample = (np.arange(extent, dtype=np.float64) - args.gutter + 0.5) / args.tile_size
-            local_u, local_v = np.meshgrid(sample, sample)
+            face_size = args.tile_size * side
+            sample = (np.arange(face_size, dtype=np.float64) + 0.5) / face_size
+            face_u, face_v = np.meshgrid(sample, sample)
+            face_channels: list[list[np.ndarray]] = [[], [], [], []]
+            for face in range(6):
+                direction = relaxed_directions(face, face_u, face_v)
+                u, v = source_uv(direction)
+                face_channels[0].append(np.clip(np.rint(bilinear(albedo, u, v)), 0, 255).astype(np.uint8))
+                face_channels[1].append(encoded_elevation(bilinear(elevation, u, v)))
+                face_channels[2].append(np.clip(np.rint(bilinear(land_source, u, v)[..., 0]), 0, 255).astype(np.uint8))
+                face_channels[3].append(np.clip(np.rint(bilinear(clouds, u, v)[..., 0]), 0, 255).astype(np.uint8))
+            padded_channels = [canonical_cube_gutters(channel, args.gutter) for channel in face_channels]
             for face in range(6):
                 for y in range(side):
                     for x in range(side):
-                        face_u, face_v = (x + local_u) / side, (y + local_v) / side
-                        direction = relaxed_directions(face, face_u, face_v)
-                        u, v = source_uv(direction)
-                        rgb = np.clip(np.rint(bilinear(albedo, u, v)), 0, 255).astype(np.uint8)
-                        encoded_height = encoded_elevation(bilinear(elevation, u, v))
-                        land = (encoded_height.astype(np.float64) / 65535.0 *
-                                (MAXIMUM_ELEVATION_METRES - MINIMUM_ELEVATION_METRES) + MINIMUM_ELEVATION_METRES >= 0.0).astype(np.uint8) * 255
-                        cloud = np.clip(np.rint(bilinear(clouds, u, v)[..., 0]), 0, 255).astype(np.uint8)
+                        x0, y0 = x * args.tile_size, y * args.tile_size
+                        slices = np.s_[y0:y0 + extent, x0:x0 + extent]
+                        rgb = padded_channels[0][face][slices]
+                        encoded_height = padded_channels[1][face][slices]
+                        land = padded_channels[2][face][slices]
+                        cloud = padded_channels[3][face][slices]
                         raw_channels = (rgb.tobytes(), encoded_height.tobytes(), land.tobytes(), cloud.tobytes())
                         identity = struct.pack("<QIBB2xII", args.body_id, args.terrain_version, face, level, x, y)
                         digest = hashlib.sha256(identity + b"".join(raw_channels)).digest()
@@ -196,6 +362,8 @@ def build(args: argparse.Namespace) -> dict:
         "recordCount": record_count,
         "channels": ["RGB8_SRGB", "R16_UNORM_ELEVATION", "R8_LAND_MASK", "R8_CLOUD"],
         "channelEncoding": "raw-patch-transaction-v1",
+        "gutterPolicy": "exact canonical neighbor-edge copies with common triple-corner samples",
+        "landMaskPolicy": "stable source classification: nonnegative ETOPO or Blue Marble land chroma, one-source-texel coastal preservation",
         "promotion": "geometry+elevation+material transactional quartet",
         "source": {
             "albedo": {"path": args.albedo.name, "sha256": sha256(args.albedo)},
@@ -217,7 +385,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--clouds", type=Path, default=root / "assets/earth/source/nasa-blue-marble-clouds-2048.jpg")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--body-id", type=int, default=6)
-    parser.add_argument("--terrain-version", type=int, default=4)
+    parser.add_argument("--terrain-version", type=int, default=5)
     parser.add_argument("--maximum-level", type=int, default=5)
     parser.add_argument("--tile-size", type=int, default=DEFAULT_TILE_SIZE)
     parser.add_argument("--gutter", type=int, default=DEFAULT_GUTTER)
