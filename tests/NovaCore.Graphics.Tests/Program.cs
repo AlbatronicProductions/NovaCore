@@ -52,6 +52,7 @@ var tests = new (string, Action)[]
     ("Inertial visual-aim authority", InertialVisualAimAuthorityTest),
     ("Cube-sphere planetary surface", CubeSpherePlanetarySurfaceTest),
     ("Production relaxed cube-sphere patch hierarchy", ProductionRelaxedCubeSpherePatchHierarchyTest),
+    ("Anchored spherical mesh-tier contract", AnchoredSphericalMeshTierContractTest),
     ("Terrain-v5 seams, mixed-LOD authority, and Florida classification", TerrainV5PayloadSeamAndFloridaClassificationTest),
     ("Terrain asset distribution boundary", TerrainAssetDistributionBoundaryTest),
     ("Local terrain streaming and GPU compression", LocalTerrainStreamingAndGpuCompressionTest),
@@ -79,6 +80,139 @@ var tests = new (string, Action)[]
 };
 var testFilter=args.FirstOrDefault(argument=>argument.StartsWith("--test=",StringComparison.OrdinalIgnoreCase))?[7..];
 foreach (var (name, test) in tests) if(testFilter is null||name.Contains(testFilter,StringComparison.OrdinalIgnoreCase)){test();Console.WriteLine($"PASS {name}");}
+
+static void AnchoredSphericalMeshTierContractTest()
+{
+    const ulong earthBodyId=6;
+    var terrainDefinition=PlanetaryTerrainDefinition.EarthProductionCubeV5;
+    var terrainVersion=new TerrainAuthorityVersion(terrainDefinition.SourceId,terrainDefinition.Version);
+    var root=new ReferenceFrameId(0x7A01);
+    Check(SolarSystemScene.TryCreateAt(root,SimulationInstant.Zero,out var sceneValue,out var sceneError)&&sceneValue is not null,$"11B-7A scene: {sceneError}");
+    var scene=sceneValue!;var site=scene.FloridaLaunchSite;var florida=site.Object.Anchor;
+    Check(site.IsValid&&florida.IsValid&&florida.TerrainAuthorityVersion==terrainVersion,"Florida supplies the existing canonical terrain-v5 SurfaceAnchor");
+
+    Check(PlanetaryAnchoredMeshTierId.TryCreate(florida,2,8,out var tierA),"first deterministic Florida tier identity");
+    Check(PlanetaryAnchoredMeshTierId.TryCreate(florida,2,8,out var tierB)&&tierA==tierB&&
+        tierA.DeterministicHash==tierB.DeterministicHash,"same body/terrain/tier/anchor produces one deterministic identity");
+    var anchorRoundTrip=RelaxedCubeSphereProjection.UnitDirection(tierA.Anchor.Face,tierA.Anchor.U,tierA.Anchor.V);
+    var anchorRoundTripError=Math.Sqrt((anchorRoundTrip-florida.NormalizedBodyFixedDirection).LengthSquared);
+    Check(anchorRoundTripError<=PlanetaryAnchoredMeshAnchor.MaximumRoundTripDirectionError,"canonical body-fixed anchor round trip stays within its declared numerical contract");
+
+    var topologyA=PlanetaryAnchoredMeshReferenceTopology.Create(tierA);
+    var topologyB=PlanetaryAnchoredMeshReferenceTopology.Create(tierB);
+    Check(topologyA.Vertices.SequenceEqual(topologyB.Vertices)&&topologyA.Indices.SequenceEqual(topologyB.Indices)&&
+        topologyA.DeterministicHash==topologyB.DeterministicHash&&topologyA.Vertices.Length==25&&topologyA.Indices.Length==96,
+        "bounded reference topology has deterministic vertex/index identity and intentionally non-production 4x4 density");
+    Check(tierA.DeterministicHash==0x55A75314ECE5FB2Bul&&topologyA.DeterministicHash==0x3621FBFD89675DD4ul,
+        "anchored tier and bounded reference topology regression hashes are explicit");
+
+    var splitSamples=new[]{
+        Double3.Zero,
+        new Double3(6_378_137d,0d,0d),
+        florida.NormalizedBodyFixedDirection*site.LocalPhysicalSurfaceRadiusMetres,
+        RelaxedCubeSphereProjection.UnitDirection(CubeSphereFace.PositiveX,0d,.5d)*6_378_137d,
+        florida.NormalizedBodyFixedDirection*(site.LocalPhysicalSurfaceRadiusMetres+10.001d),
+        new Double3(149_597_870_700.12345d,-28_456_789_012.875d,7_500_000.03125d)};
+    var maximumSplitError=0d;
+    foreach(var sample in splitSamples)
+    {
+        var reconstructed=EncodedPosition.Encode(sample).Reconstruct();
+        maximumSplitError=Math.Max(maximumSplitError,Math.Max(Math.Abs(sample.X-reconstructed.X),Math.Max(Math.Abs(sample.Y-reconstructed.Y),Math.Abs(sample.Z-reconstructed.Z))));
+    }
+    var splitAnchor=PlanetaryAnchoredMeshSplitAnchor.Encode(tierA.Anchor,site.LocalPhysicalSurfaceRadiusMetres);
+    maximumSplitError=Math.Max(maximumSplitError,Math.Sqrt((splitAnchor.BodyFixedPosition.Reconstruct()-florida.NormalizedBodyFixedDirection*site.LocalPhysicalSurfaceRadiusMetres).LengthSquared));
+    Check(maximumSplitError<=1e-4d&&splitAnchor.BodyFixedDirection.Reconstruct().IsFinite,"split FP32 high+low transport stays within the declared 0.1 mm absolute envelope through Solar-root scale");
+
+    PlanetaryAnchoredMeshTierId TierForCell(CubeSphereFace face,int level,int x,int y)
+    {
+        var size=1<<level;var direction=RelaxedCubeSphereProjection.UnitDirection(face,(x+.5d)/size,(y+.5d)/size);
+        Check(SurfaceAnchor.TryCreate(earthBodyId,terrainVersion,direction,0d,out var anchor)==SurfaceAnchorCreationStatus.Success,$"anchor for {face}/{level}/{x}/{y}");
+        Check(PlanetaryAnchoredMeshTierId.TryCreate(anchor,level,level,out var identity)&&identity.AnchorCell.Face==face&&identity.AnchorCell.Level==level&&identity.AnchorCell.X==x&&identity.AnchorCell.Y==y,$"tier cell for {face}/{level}/{x}/{y}");
+        return identity;
+    }
+
+    var sameFaceLeft=PlanetaryAnchoredMeshReferenceTopology.Create(TierForCell(CubeSphereFace.PositiveZ,2,1,1));
+    var sameFaceRight=PlanetaryAnchoredMeshReferenceTopology.Create(TierForCell(CubeSphereFace.PositiveZ,2,2,1));
+    var maximumSharedDirectionError=0d;
+    for(var sample=0;sample<=PlanetaryAnchoredMeshReferenceTopology.ProofQuadsPerSide;sample++)
+    {
+        var left=sameFaceLeft.EdgeVertex(PlanetaryPatchEdge.PositiveU,sample);var right=sameFaceRight.EdgeVertex(PlanetaryPatchEdge.NegativeU,sample);
+        Check(left==right,"same-face neighbors derive bit-identical canonical edge samples");
+        maximumSharedDirectionError=Math.Max(maximumSharedDirectionError,Math.Sqrt((left.BodyFixedDirection-right.BodyFixedDirection).LengthSquared));
+    }
+    Check(sameFaceLeft.EdgeIdentity(PlanetaryPatchEdge.PositiveU)==sameFaceRight.EdgeIdentity(PlanetaryPatchEdge.NegativeU),"same-face neighbors derive one canonical ordered edge identity");
+
+    var rootTopologies=new List<PlanetaryAnchoredMeshReferenceTopology>(6);
+    foreach(CubeSphereFace face in Enum.GetValues<CubeSphereFace>()) rootTopologies.Add(PlanetaryAnchoredMeshReferenceTopology.Create(TierForCell(face,0,0,0)));
+    var edgeGroups=new Dictionary<PlanetaryAnchoredMeshEdgeId,List<PlanetaryAnchoredMeshVertexId[]>>();
+    foreach(var topology in rootTopologies)
+        foreach(PlanetaryPatchEdge edge in Enum.GetValues<PlanetaryPatchEdge>().Where(edge=>edge!=PlanetaryPatchEdge.None))
+        {
+            var id=topology.EdgeIdentity(edge);var samples=new PlanetaryAnchoredMeshVertexId[PlanetaryAnchoredMeshReferenceTopology.ProofQuadsPerSide+1];
+            for(var sample=0;sample<samples.Length;sample++)samples[sample]=topology.EdgeVertex(edge,sample);
+            if(samples[0]!=id.First)Array.Reverse(samples);
+            if(!edgeGroups.TryGetValue(id,out var incidences)){incidences=[];edgeGroups.Add(id,incidences);}incidences.Add(samples);
+        }
+    Check(edgeGroups.Count==12&&edgeGroups.Values.All(incidences=>incidences.Count==2&&incidences[0].SequenceEqual(incidences[1])),
+        "all twelve physical cube edges have exactly two faces with bit-identical canonically ordered sampling coordinates");
+    foreach(var incidences in edgeGroups.Values)for(var sample=0;sample<incidences[0].Length;sample++)
+        maximumSharedDirectionError=Math.Max(maximumSharedDirectionError,Math.Sqrt((incidences[0][sample].BodyFixedDirection-incidences[1][sample].BodyFixedDirection).LengthSquared));
+
+    var cornerGroups=new Dictionary<PlanetaryAnchoredMeshVertexId,int>();
+    foreach(var topology in rootTopologies)
+    {
+        var resolution=PlanetaryAnchoredMeshReferenceTopology.ProofQuadsPerSide;
+        foreach(var index in new[]{0,resolution,resolution*(resolution+1),resolution*(resolution+1)+resolution})
+        {
+            var id=topology.Vertices[index].Identity;cornerGroups.TryGetValue(id,out var count);cornerGroups[id]=count+1;
+            Check(id.Denominator==1&&Math.Abs(id.X)==1&&Math.Abs(id.Y)==1&&Math.Abs(id.Z)==1,"cube corner reduces to one exact rational canonical coordinate");
+        }
+    }
+    Check(cornerGroups.Count==8&&cornerGroups.Values.All(count=>count==3),"all eight cube corners are independently shared by exactly three faces");
+    foreach(var topology in rootTopologies)foreach(ref readonly var vertex in topology.Vertices)
+        Check(vertex.Identity.TryCanonicalAddress(out _,out var canonicalU,out var canonicalV)&&canonicalU is >=0d and <=1d&&canonicalV is >=0d and <=1d&&
+            vertex.Identity.BodyFixedDirection==RelaxedCubeSphereProjection.UnitDirectionFromCubeSurfacePoint(vertex.Identity.CanonicalCubePoint),
+            "each reference vertex has one canonical cube address and face-independent relaxed-cube direction");
+
+    var parent=PlanetaryAnchoredMeshReferenceTopology.Create(TierForCell(CubeSphereFace.NegativeY,0,0,0));
+    var child=PlanetaryAnchoredMeshReferenceTopology.Create(TierForCell(CubeSphereFace.NegativeY,1,0,0));
+    for(var y=0;y<=2;y++)for(var x=0;x<=2;x++)
+        Check(parent.Vertices[y*5+x].Identity==child.Vertices[(y*2)*5+x*2].Identity,"parent/child tier-local shared samples retain exact rational identity");
+
+    var camera=new CameraState(new FramePosition(root,Double3.Zero),DoubleQuaternion.Identity,scene.Projection,CameraMode.Free);
+    var geographicHash=tierA.DeterministicHash;var topologyHash=topologyA.DeterministicHash;var anchorBefore=tierA.Anchor;
+    foreach(var focus in new[]{NativePresentationFocus.Sun,NativePresentationFocus.Venus,NativePresentationFocus.Mars,NativePresentationFocus.Moon,NativePresentationFocus.Earth})
+    {
+        Check(scene.Focus(camera,focus),$"camera-independence focus {focus}");
+        var orbitScale=1d+(int)focus*.125d;
+        camera.Position=new FramePosition(root,camera.Position.Value+new Double3(123_456.75d*orbitScale,-87_654.5d,12_345.25d/orbitScale));
+        camera.Orientation=(DoubleQuaternion.FromAxisAngle(Double3.UnitY,.173d*(int)focus)*
+            DoubleQuaternion.FromAxisAngle(Double3.UnitX,-.097d*(int)focus)).Normalized();
+        camera.Validate();
+        Check(PlanetaryAnchoredMeshTierId.TryCreate(florida,2,8,out var replay)&&replay.DeterministicHash==geographicHash&&
+            PlanetaryAnchoredMeshReferenceTopology.Create(replay).DeterministicHash==topologyHash&&replay.Anchor==anchorBefore,
+            $"camera orbit/distance/free-look/focus state is absent from anchored geography for {focus}");
+    }
+
+    Check(SurfaceEnuFrame.TryCreate(florida,out var enuBefore)&&SurfaceEnuFrame.TryCreate(tierA.Anchor.SurfaceAnchor,out var enuAfter)&&enuBefore==enuAfter,"new mesh anchor preserves the exact existing Florida ENU authority");
+    var physicalTerrain=new PlanetaryPhysicalTerrainAuthority(earthBodyId,terrainDefinition);
+    Check(physicalTerrain.TrySampleHeight(earthBodyId,florida.NormalizedBodyFixedDirection,out var heightBefore)&&
+        physicalTerrain.TrySampleHeight(earthBodyId,tierA.Anchor.BodyFixedDirection,out var heightAfter)&&
+        BitConverter.DoubleToInt64Bits(heightBefore)==BitConverter.DoubleToInt64Bits(heightAfter),"new tier correspondence leaves Florida physical terrain query authority bit-identical");
+    var floridaMetres=anchorRoundTripError*site.LocalPhysicalSurfaceRadiusMetres;
+    Check(floridaMetres<2e-5d,"Florida SurfaceAnchor and mesh-anchor geography agree within the measured relaxed-cube inverse tolerance");
+
+    var sharedEdge=sameFaceLeft.EdgeIdentity(PlanetaryPatchEdge.PositiveU);
+    var subdivisionA=PlanetaryAnchoredMeshSubdivisionDemand.FromPixels(sharedEdge,73.125d,12d,64);
+    var subdivisionB=PlanetaryAnchoredMeshSubdivisionDemand.FromPixels(sameFaceRight.EdgeIdentity(PlanetaryPatchEdge.NegativeU),73.125d,12d,64);
+    Check(subdivisionA==subdivisionB&&subdivisionA.BoundedFactor==7,"backend-neutral quantized projected demand resolves one bounded shared-edge factor");
+
+    Check(PlanetaryPatchTopology.Shared.DeterministicHash==0x98792D7EBC45FF6Dul&&
+        PlanetaryProductionPatchTopology.Shared.DeterministicHash==0x61C28B0A3B4F21FFul,
+        "11B-6C live grid and production relaxed-cube topology hashes remain unchanged");
+    Check(topologyA.DeterministicHash==topologyB.DeterministicHash,"anchored proof topology hash is repeatable");
+    Console.WriteLine($"Anchored mesh tier: identity=0x{tierA.DeterministicHash:X16}; topology=0x{topologyA.DeterministicHash:X16}; anchorRoundTrip={anchorRoundTripError:E17}; florida={floridaMetres:E17} m; splitMax={maximumSplitError:E17} m; sharedDirection={maximumSharedDirectionError:E17}; cubeEdges={edgeGroups.Count}; cubeCorners={cornerGroups.Count}; subdivision={subdivisionA.BoundedFactor}; nativeAbi=unchanged; liveRenderer=unchanged");
+}
 
 static void TerrainAssetDistributionBoundaryTest()
 {

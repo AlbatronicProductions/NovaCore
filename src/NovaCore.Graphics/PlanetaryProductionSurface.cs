@@ -114,6 +114,35 @@ public static class RelaxedCubeSphereProjection
     public static Double3 UnitDirection(CubeSphereFace face, double u, double v) => Project(face, u, v, 1d);
 
     /// <summary>
+    /// Projects a finite point on the surface of the canonical cube through the
+    /// same relaxed-cube equation used by production patches. This is the
+    /// face-independent seam used by dormant anchored mesh topology: a shared
+    /// rational cube point is projected once, regardless of which incident face
+    /// derived it.
+    /// </summary>
+    public static Double3 UnitDirectionFromCubeSurfacePoint(in Double3 cubeSurfacePoint)
+    {
+        if (!cubeSurfacePoint.IsFinite) throw new ArgumentOutOfRangeException(nameof(cubeSurfacePoint));
+        var scale = Math.Max(Math.Abs(cubeSurfacePoint.X), Math.Max(Math.Abs(cubeSurfacePoint.Y), Math.Abs(cubeSurfacePoint.Z)));
+        if (!(scale > 0d) || !double.IsFinite(scale)) throw new ArgumentOutOfRangeException(nameof(cubeSurfacePoint));
+        return ProjectCube(cubeSurfacePoint / scale, 1d);
+    }
+
+    /// <summary>Canonical face/UV address of a cube-surface point before relaxed projection.</summary>
+    public static bool TryCubeSurfaceAddress(in Double3 cubeSurfacePoint, out CubeSphereFace face, out double u, out double v)
+    {
+        face = default; u = v = 0d;
+        if (!cubeSurfacePoint.IsFinite) return false;
+        var scale = Math.Max(Math.Abs(cubeSurfacePoint.X), Math.Max(Math.Abs(cubeSurfacePoint.Y), Math.Abs(cubeSurfacePoint.Z)));
+        if (!(scale > 0d) || !double.IsFinite(scale)) return false;
+        var cube = cubeSurfacePoint / scale;
+        face = DominantFace(cube);
+        var coordinate = FaceCoordinates(face, cube);
+        u = coordinate.U * .5d + .5d; v = coordinate.V * .5d + .5d;
+        return double.IsFinite(u) && double.IsFinite(v) && u is >= 0d and <= 1d && v is >= 0d and <= 1d;
+    }
+
+    /// <summary>
     /// Inverse of the accepted relaxed cube projection. The dominant cube face
     /// is canonical and Newton refinement recovers the face coordinate used by
     /// GPU production addressing without introducing longitude/latitude page identity.
@@ -123,11 +152,7 @@ public static class RelaxedCubeSphereProjection
         face = default; u = v = 0d;
         if (!unitDirection.IsFinite || unitDirection.LengthSquared <= 0d) return false;
         var direction = unitDirection.Normalized(); var absolute = new Double3(Math.Abs(direction.X), Math.Abs(direction.Y), Math.Abs(direction.Z));
-        face = absolute.X >= absolute.Y && absolute.X >= absolute.Z
-            ? direction.X >= 0d ? CubeSphereFace.PositiveX : CubeSphereFace.NegativeX
-            : absolute.Y >= absolute.Z
-                ? direction.Y >= 0d ? CubeSphereFace.PositiveY : CubeSphereFace.NegativeY
-                : direction.Z >= 0d ? CubeSphereFace.PositiveZ : CubeSphereFace.NegativeZ;
+        face = DominantFace(direction);
         var target = FaceCoordinates(face, direction); var a = Math.Clamp(target.U, -1d, 1d); var b = Math.Clamp(target.V, -1d, 1d);
         const double epsilon = 1e-6d;
         for (var iteration = 0; iteration < 8; iteration++)
@@ -179,6 +204,16 @@ public static class RelaxedCubeSphereProjection
         CubeSphereFace.NegativeZ => (-direction.X / -direction.Z, direction.Y / -direction.Z),
         _ => throw new ArgumentOutOfRangeException(nameof(face))
     };
+
+    private static CubeSphereFace DominantFace(in Double3 value)
+    {
+        var absolute = new Double3(Math.Abs(value.X), Math.Abs(value.Y), Math.Abs(value.Z));
+        return absolute.X >= absolute.Y && absolute.X >= absolute.Z
+            ? value.X >= 0d ? CubeSphereFace.PositiveX : CubeSphereFace.NegativeX
+            : absolute.Y >= absolute.Z
+                ? value.Y >= 0d ? CubeSphereFace.PositiveY : CubeSphereFace.NegativeY
+                : value.Z >= 0d ? CubeSphereFace.PositiveZ : CubeSphereFace.NegativeZ;
+    }
 }
 
 /// <summary>Versioned deterministic geometry contract shared by every production patch.</summary>

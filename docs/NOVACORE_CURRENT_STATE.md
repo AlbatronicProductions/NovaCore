@@ -37,6 +37,20 @@ and 700 km retained the six-root `0x3F` mask and reported zero validation
 errors. Camera-drag isolation, mixed-LOD geography, and terrain-authority
 regressions pass.
 
+11B-7A adds a dormant host-side contract for future anchored spherical mesh
+tiers. Its geographic key is the existing canonical terrain-v5
+`SurfaceAnchor` plus tier, containing relaxed-cube cell, and topology version;
+camera state, focus state, residency, frame, GPU address, and subdivision
+backend are deliberately absent. Exact reduced rational cube-surface vertex
+keys canonicalize shared parent/child vertices, all twelve cube edges, and all
+eight three-face corners before relaxed projection. Existing split-FP32
+transport is explicitly measured for body-fixed anchors, and a quantized
+backend-neutral shared-edge subdivision demand is defined without selecting or
+activating tessellation, compute subdivision, or mesh shaders. This contract is
+not bound to native rendering. The live renderer remains the accepted 11B-6C
+terrain-v5 L0–L2 globe plus persistent T0–T3 Eyeball; no topology, ownership,
+draw, streaming, material, camera, or visible behavior changes in 11B-7A.
+
 4C/11B-4 remove the superseded equirectangular SVT descriptors,
 request/upload/page cache, independent fallback/fade, sparse regional overlay,
 deep-global close-range ownership, and per-frame radial Eyeball compute

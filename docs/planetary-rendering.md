@@ -36,6 +36,23 @@ or hidden legacy surface beneath it. Its topology hashes are
 `0x406A2FB30687F0DA`, `0x6A8D7F46E937CAE9`, `0xEA22A4136AFA7884`, and
 `0xA462CD4E25B748FB`.
 
+### Dormant anchored spherical tier contract (11B-7A)
+
+11B-7A does not add a renderer. It defines the body-fixed identity and bounded
+CPU reference topology for a future replacement near-surface mesh tier. The
+identity composes the existing `SurfaceAnchor` with tier, canonical relaxed-cube
+cell, and topology version. Camera position/orientation, focus mode, residency,
+frame number, GPU address, and backend never participate in geographic
+identity. A reduced rational canonical cube coordinate gives independently
+generated same-face, cross-face, parent/child, and three-face-corner vertices
+one exact key before the established relaxed-cube projection. Body-fixed anchor
+values can use the existing FP32 high/low transport while FP64 remains CPU
+authority. A quantized shared-edge demand/factor record is backend-neutral; no
+tessellation, compute subdivision, mesh shader, draw, asset request, or native
+ABI is active yet. 11B-7B may use this contract to begin GPU physical-height
+preparation. Until a later takeover is proved, the terrain-v5 globe and T0–T3
+Eyeball above remain the sole live Earth surface.
+
 The old equirectangular SVT page model, 5×5 predictor, per-page fallback/fade,
 deep-global near-ground refinement, and per-frame radial Eyeball compute path
 were retired in 4C. Lawful source rasters and their provenance remain offline
