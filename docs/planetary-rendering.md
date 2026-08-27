@@ -116,8 +116,37 @@ spherical density/seam visualization. It reuses the bounded shared-grid draw
 and never activates in `earth` or `sol`; physical-height and normal acceptance
 remain the compute/readback proof rather than this simple diagnostic material.
 The live terrain-v5 globe and T0–T3 Eyeball remain the only normal Earth owners.
-11B-7E may use the retained demand contract when it introduces anchored tiers,
-snapping, and transactional promotion.
+That retained demand contract is the sole refinement-demand input to the
+11B-7E hierarchy below.
+
+### Dormant anchored billboard hierarchy (11B-7E)
+
+11B-7E introduces a localized body-fixed T0/T1/T2 ownership proof, not a new
+production Earth owner. Its identity is derived from body, terrain version,
+canonical SurfaceAnchor/cell, topology version, tier, and the sorted geographic
+footprint. Camera, frame, allocation, residency slot, GPU address, and draw
+order are excluded. Every tier refines the same represented footprint by exact
+four-child relaxed-cube replacement; rational cube vertex identities
+canonicalize same-face, cross-face, and three-face-corner boundaries.
+
+The 11B-7D projected-edge demand selects a desired tier, while a separate state
+machine tracks `Dormant`, `Demanded`, `Preparing`, `Ready`, `Promoting`,
+`Authoritative`, `Retiring`, and `Failed`. A child tier cannot own geography
+until its complete structural replacement and all topology, physical-height,
+displacement, physical-normal, adjacency, bounds, GPU-buffer, and synchronization
+dependencies are ready. Before that transaction the complete parent remains
+authoritative. Coarsening likewise restores a complete parent before retiring
+children. The proof deliberately treats late visibility/cull failure as an
+incomplete child, so it cannot create a hole.
+
+`--scene=planetary-anchored-billboard-diagnostic` is an isolated Florida-based
+ownership visualization. Orange T0, green T1, and blue T2 patch sets change
+only at complete promotion boundaries and return atomically to T0. It reuses
+the existing bounded patch draw solely to expose ownership; it is never
+constructed by `earth` or `sol`. Production remains terrain-v5 L0–L2 plus the
+legacy radial T0–T3 Eyeball. 11B-7F is the next vertical-slice milestone and
+must prove bounded continuous orbital-to-local participation before production
+ownership can change.
 
 The old equirectangular SVT page model, 5×5 predictor, per-page fallback/fade,
 deep-global near-ground refinement, and per-frame radial Eyeball compute path

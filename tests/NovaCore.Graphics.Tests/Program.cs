@@ -57,6 +57,7 @@ var tests = new (string, Action)[]
     ("Dormant GPU physical-height preparation", GpuPhysicalHeightPreparationTests.Run),
     ("Dormant displaced mesh and physical normals", GpuDisplacedMeshPreparationTests.Run),
     ("Dormant screen-space subdivision proof", PlanetaryScreenSpaceSubdivisionTests.Run),
+    ("Dormant anchored billboard hierarchy and transactional promotion", PlanetaryAnchoredBillboardHierarchyTests.Run),
     ("Terrain-v5 seams, mixed-LOD authority, and Florida classification", TerrainV5PayloadSeamAndFloridaClassificationTest),
     ("Terrain asset distribution boundary", TerrainAssetDistributionBoundaryTest),
     ("Local terrain streaming and GPU compression", LocalTerrainStreamingAndGpuCompressionTest),

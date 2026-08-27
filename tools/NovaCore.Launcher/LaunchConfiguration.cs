@@ -8,7 +8,8 @@ public enum NovaCoreScenarioPreset
     FloridaSurface,
     FloridaLaunchSite,
     PlanetaryDiagnostic,
-    SubdivisionDiagnostic
+    SubdivisionDiagnostic,
+    AnchoredBillboardDiagnostic
 }
 
 public enum NovaCoreScene
@@ -16,7 +17,8 @@ public enum NovaCoreScene
     Solar,
     Earth,
     PlanetaryDiagnostic,
-    SubdivisionDiagnostic
+    SubdivisionDiagnostic,
+    AnchoredBillboardDiagnostic
 }
 
 public enum NovaCoreStartingBody

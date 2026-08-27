@@ -27,7 +27,11 @@ public static class ScenarioCatalog
             NovaCoreStartingBody.None, null, null, true, null),
         new(NovaCoreScenarioPreset.SubdivisionDiagnostic, "Subdivision Diagnostic",
             "11B-7D screen-space subdivision diagnostic scene.", NovaCoreScene.SubdivisionDiagnostic,
-            NovaCoreStartingBody.None, null, null, true, null)
+            NovaCoreStartingBody.None, null, null, true, null),
+        new(NovaCoreScenarioPreset.AnchoredBillboardDiagnostic, "Anchored Billboard Tiers",
+            "11B-7E dormant Florida-anchored T0/T1/T2 transactional ownership diagnostic.",
+            NovaCoreScene.AnchoredBillboardDiagnostic, NovaCoreStartingBody.None,
+            null, null, true, null)
     ];
 
     public static NovaCoreScenarioDefinition Default => Get(NovaCoreScenarioPreset.SolarSystemOverview);

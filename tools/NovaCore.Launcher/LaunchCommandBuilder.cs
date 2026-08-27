@@ -50,6 +50,7 @@ public static class LaunchCommandBuilder
         NovaCoreScene.Earth => "earth",
         NovaCoreScene.PlanetaryDiagnostic => "planetary-diagnostic",
         NovaCoreScene.SubdivisionDiagnostic => "planetary-subdivision-diagnostic",
+        NovaCoreScene.AnchoredBillboardDiagnostic => "planetary-anchored-billboard-diagnostic",
         _ => throw new ArgumentOutOfRangeException(nameof(scene), scene, null)
     };
 }

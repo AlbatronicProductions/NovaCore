@@ -89,7 +89,22 @@ development RX 6800 XT reports tessellation and `VK_EXT_mesh_shader` support,
 but neither is installed as a renderer backend. The explicit
 `planetary-subdivision-diagnostic` mode visualizes bounded spherical density
 only; normal `earth` and `sol` frames contain no 11B-7D work. Production
-terrain-v5 L0–L2 plus T0–T3 Eyeball ownership is unchanged pending 11B-7E.
+terrain-v5 L0–L2 plus T0–T3 Eyeball ownership remains unchanged.
+
+11B-7E assembles those dormant contracts into a bounded, backend-neutral
+anchored spherical-billboard hierarchy. A canonical body-fixed footprint owns
+deterministic T0/T1/T2 identities and exact relaxed-cube parent/child patch
+sets. The retained 11B-7D projected-edge demand can request a finer tier, but
+demand, complete resource readiness, and geographic ownership are separate
+states. The parent remains the sole complete owner until every required child
+topology, height, displaced-vertex, physical-normal, adjacency, bounds, GPU
+buffer, and synchronization dependency is ready; promotion and coarsening then
+change the single owner atomically. Missing, failed, culled, or unsynchronized
+children retain parent coverage. Florida, cross-face edges, and three-face
+corners have deterministic coverage proofs. The explicit
+`planetary-anchored-billboard-diagnostic` visualizes ownership only; normal
+`earth` and `sol` frames still use terrain-v5 L0–L2 plus the legacy radial
+T0–T3 Eyeball and contain no 11B-7E preparation or draw.
 
 4C/11B-4 remove the superseded equirectangular SVT descriptors,
 request/upload/page cache, independent fallback/fade, sparse regional overlay,

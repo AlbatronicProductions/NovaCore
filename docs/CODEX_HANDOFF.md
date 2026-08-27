@@ -122,8 +122,15 @@ work.
 
 After the dormant 11B-7A identity, 11B-7B GPU physical-height, 11B-7C
 displaced-vertex/physical-normal, and 11B-7D projected-subdivision proofs,
-11B-7E may introduce anchored mesh tiers, snapping, and transactional promotion
-without retiring current terrain owners prematurely. Do not restore independent
+11B-7E now provides a dormant T0/T1/T2 anchored spherical-billboard hierarchy
+with explicit demand/preparation/readiness/ownership states and atomic
+parent/child promotion and retirement. Its Florida, cube-edge, cube-corner,
+failure-fallback, memory, and stable-allocation proofs do not enter normal frame
+submission. The launcher preset maps only to
+`--scene=planetary-anchored-billboard-diagnostic`; it is not renderer authority.
+11B-7F should prove a continuous physically useful orbital-to-Florida vertical
+slice with bounded visible participation before any production-owner change.
+Do not restore independent
 equirectangular pages, sparse regional runtime overlays, or the retired radial
 compute owner. Production atmosphere/cloud rendering is intentionally absent
 and must be reconstructed later against the retained terrain-v5 contract.
