@@ -168,6 +168,20 @@ After it has already been built:
 dotnet run --project samples/NovaCore.Triangle/NovaCore.Triangle.csproj -c Debug --no-build -- --scene=sol
 ```
 
+### Launch NovaCore
+
+For a point-and-click development workflow, build the lightweight Windows launcher once:
+
+```powershell
+dotnet build tools/NovaCore.Launcher/NovaCore.Launcher.csproj -c Debug
+```
+
+Then double-click `tools/NovaCore.Launcher/bin/Debug/net8.0-windows/NovaCore.Launcher.exe`.
+The launcher provides supported Solar, Earth, Florida launch-site, planetary-diagnostic,
+and subdivision-diagnostic presets, shows the exact generated command, and starts the
+existing NovaCore sample. The command-line workflow remains authoritative and available
+for advanced development and testing.
+
 Current Solar-scene controls include mouse drag for free orbiting, mouse wheel zoom, number-key body focus, `.` / `,` simulation-rate changes, Space pause/resume, and `R` to return to the deterministic Solar Map home view.
 
 ## Current planetary baseline

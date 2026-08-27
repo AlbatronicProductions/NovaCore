@@ -38,6 +38,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NovaCore.NaifEphemerisAdapt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NovaCore.AssetTool", "tools\NovaCore.AssetTool\NovaCore.AssetTool.csproj", "{C4DE1E21-71F9-4D24-B7C1-2394BB184A37}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NovaCore.Launcher", "tools\NovaCore.Launcher\NovaCore.Launcher.csproj", "{7C0F7627-A95D-4718-89FD-7A43D37C33DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NovaCore.Launcher.Tests", "tests\NovaCore.Launcher.Tests\NovaCore.Launcher.Tests.csproj", "{13CF69DD-BFC5-49E8-85DA-0326C8AE2FC1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -80,5 +84,9 @@ Global
 		{E1E4F6C9-6A97-4A4E-88A1-11E6A5E4B9D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4DE1E21-71F9-4D24-B7C1-2394BB184A37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C4DE1E21-71F9-4D24-B7C1-2394BB184A37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C0F7627-A95D-4718-89FD-7A43D37C33DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C0F7627-A95D-4718-89FD-7A43D37C33DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13CF69DD-BFC5-49E8-85DA-0326C8AE2FC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13CF69DD-BFC5-49E8-85DA-0326C8AE2FC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 EndGlobal
