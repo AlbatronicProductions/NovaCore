@@ -1204,15 +1204,25 @@ internal sealed class SolarSystemScene
         var bodyFixedOrientation=(rootToBody*camera.Orientation).Normalized();
         if(!SurfaceCameraState.TryExtractLocalLook(bodyFixedOrientation,enu,out var yaw,out var pitch))return false;
 
-        // Freeze the existing position authority before the view orientation changes. This
-        // keeps the normal inertial camera and its SurfaceAnchor positional contract intact;
-        // only the view ray receives local tangent-frame yaw/pitch input.
-        _inertialOrbitOffsetDirectionOverride=OrbitOffsetDirection();
+        // A surface-local look changes orientation only on this frame, but its inertial
+        // orbit representation must remain self-consistent for the later outward handoff.
+        // Retain the point already under the new view ray and make the orbit radial its
+        // exact opposite.  The current camera therefore does not move, while subsequent
+        // zoom samples can continuously blend that visual aim back to BodyCenter and end
+        // with the ordinary centered-orbit relationship restored.
         yaw=SurfaceCameraState.NormalizeYaw(yaw-mouseDeltaX*OrbitSensitivity);
         pitch=PlanetarySurfaceCameraPolicy.ApplyPitchDelta(pitch,-mouseDeltaY*OrbitSensitivity);
         var nextBodyFixed=SurfaceCameraState.LookOrientation(enu,yaw,pitch);
         var nextRoot=(FocusedBody.BodyFixedToRoot*nextBodyFixed).Normalized();
+        var nextForward=nextRoot.Rotate(new Double3(0d,0d,-1d)).Normalized();
+        var nextRadial=-nextForward;
         _inertialOrbitOrientationOverride=nextRoot;
+        _inertialOrbitOffsetDirectionOverride=nextRadial;
+        _orbitYawRadians=Math.Atan2(nextRadial.X,nextRadial.Z);
+        _orbitPitchRadians=-Math.Asin(Math.Clamp(nextRadial.Y,-1d,1d));
+        _retainedVisualAimAnchor=_focusTarget.SurfaceAnchor;
+        _retainedVisualAimOffsetRoot=camera.Position.Value-nextRadial*_orbitDistance-FocusedBody.Position.Value;
+        _retainedVisualAimWeight=1d;
         _bodyLocalCameraPlacementUseOrbitCandidate=false;
         camera.Orientation=nextRoot;
         return true;

@@ -1555,14 +1555,20 @@ static void SurfaceVisualAimContinuityTest()
     var referenceYaw=scene.OrbitYawRadians;
     var referencePitch=scene.OrbitPitchRadians;
     var referenceOrientation=camera.Orientation;
-    Check(scene.HasRetainedVisualAim&&scene.RetainedVisualAimWeight==1d,"oblique view retains the active SurfaceAnchor as visual aim");
+    Check(scene.HasRetainedVisualAim&&scene.RetainedVisualAimWeight==1d&&
+        ViewRayAngle(camera,scene.CurrentVisualAimRoot)<5e-8d,
+        "oblique surface free-look retains its inertial view ray without moving the active SurfaceAnchor");
 
     Check(scene.CurrentFocusTarget.TryEvaluate(scene.FocusedBody,out var outwardAnchorRoot),"visual-aim anchor evaluates before outward traversal");
 
     var maximumAngularDiscontinuity=0d;
+    var maximumVisualAimError=0d;
+    var maximumOrbitLineError=0d;
+    var maximumPivotReleaseError=0d;
     var maximumInvariantError=0d;
     var maximumSymmetryError=0d;
     var previousAnchorAngle=ViewRayAngle(camera,outwardAnchorRoot.Value);
+    var previousVisualAimRoot=scene.CurrentVisualAimRoot;
     var previousOffset=scene.CurrentInertialCameraOffset;
     var previousKind=scene.CurrentFocusTarget.Kind;
     var previousAimOwned=scene.HasRetainedVisualAim;
@@ -1594,6 +1600,7 @@ static void SurfaceVisualAimContinuityTest()
             maximumSymmetryError=Math.Max(maximumSymmetryError,Math.Abs(ViewRayAngle(camera,symmetryAnchor.Value)-baselineAngle));
             symmetryMeasured=true;
             previousAnchorAngle=ViewRayAngle(camera,symmetryAnchor.Value);
+            previousVisualAimRoot=scene.CurrentVisualAimRoot;
             previousOffset=scene.CurrentInertialCameraOffset;
             previousKind=scene.CurrentFocusTarget.Kind;
             previousAimOwned=scene.HasRetainedVisualAim;
@@ -1608,16 +1615,67 @@ static void SurfaceVisualAimContinuityTest()
         scene.ApplyPresentationInput(camera,new NativeInputState{MouseWheelDetents=(crossing&1)==0?1:-1},out _,out _);
         Check(!scene.HasRetainedVisualAim,"released visual aim does not oscillate near its completed threshold");
     }
+    var bodyOrientation=scene.FocusedBody.BodyFixedToRoot;
+    var maximumCenteredRayError=ViewRayAngle(camera,scene.FocusedBody.Position.Value);
+    var centeredDistance=Math.Sqrt((camera.Position.Value-scene.FocusedBody.Position.Value).LengthSquared);
+    for(var drag=0;drag<12;drag++)
+    {
+        scene.ApplyPresentationInput(camera,new NativeInputState{
+            LookActive=1,MouseDeltaX=(drag%5)-2,MouseDeltaY=(drag%3)-1},out _,out _);
+        maximumCenteredRayError=Math.Max(maximumCenteredRayError,ViewRayAngle(camera,scene.FocusedBody.Position.Value));
+        var distance=Math.Sqrt((camera.Position.Value-scene.FocusedBody.Position.Value).LengthSquared);
+        Check(scene.CurrentFocusTarget.Kind==FocusTargetKind.BodyCenter&&!scene.HasRetainedVisualAim&&
+            scene.SurfaceCameraMode==PlanetaryCameraPresentationMode.Orbital&&
+            Math.Abs(distance-centeredDistance)<1e-4d&&scene.FocusedBody.BodyFixedToRoot==bodyOrientation,
+            $"far centered drag {drag} uses ordinary planet-centered orbit authority");
+    }
+    Check(maximumCenteredRayError<5e-8d,
+        $"far click-drag keeps Earth centered after surface detach: {maximumCenteredRayError:R} rad");
+
+    var repeatedCycleAnchor=default(SurfaceAnchorFocus);
+    for(var cycle=0;cycle<2;cycle++)
+    {
+        for(var step=0;step<160&&(scene.CurrentFocusTarget.Kind!=FocusTargetKind.SurfaceAnchor||scene.SurfaceAnchorBlend<1d);step++)
+            scene.ApplyPresentationInput(camera,new NativeInputState{MouseWheelDetents=1},out _,out _);
+        Check(scene.CurrentFocusTarget.Kind==FocusTargetKind.SurfaceAnchor&&scene.SurfaceAnchorBlend==1d&&
+            scene.CurrentCameraReferenceAuthority==CameraReferenceAuthority.Inertial&&
+            scene.SurfaceAltitudeMetres>=SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres,
+            $"repeat cycle {cycle} reaches terrain-safe SurfaceAnchor ownership");
+        repeatedCycleAnchor=scene.CurrentFocusTarget.SurfaceAnchor;
+        scene.ApplyPresentationInput(camera,new NativeInputState{LookActive=1,MouseDeltaX=75f,MouseDeltaY=-45f},out _,out _);
+        Check(scene.CurrentFocusTarget.SurfaceAnchor==repeatedCycleAnchor&&
+            ViewRayAngle(camera,scene.CurrentVisualAimRoot)<5e-8d,
+            $"repeat cycle {cycle} free-look preserves SurfaceAnchor geography and seeds the outward visual ray");
+        for(var step=0;step<160&&scene.HasRetainedVisualAim;step++)
+        {
+            if(scene.CurrentFocusTarget.Kind==FocusTargetKind.SurfaceAnchor)
+                Check(scene.CurrentFocusTarget.SurfaceAnchor==repeatedCycleAnchor,
+                    $"repeat cycle {cycle} keeps SurfaceAnchor authority unchanged while attached");
+            scene.ApplyPresentationInput(camera,new NativeInputState{MouseWheelDetents=-1},out _,out _);
+        }
+        Check(scene.CurrentFocusTarget.Kind==FocusTargetKind.BodyCenter&&!scene.HasRetainedVisualAim&&
+            scene.SurfaceCameraMode==PlanetaryCameraPresentationMode.Orbital&&
+            ViewRayAngle(camera,scene.FocusedBody.Position.Value)<5e-8d&&
+            scene.FocusedBody.BodyFixedToRoot==bodyOrientation,
+            $"repeat cycle {cycle} cleanly restores centered inertial orbit authority");
+    }
     Check(symmetryMeasured&&maximumSymmetryError<1e-8d,"inward/outward projected-anchor motion is symmetric");
     Check(maximumInvariantError<.001d,"3D-1 positional camera invariant remains exact through visual-aim handoff");
-    Check(maximumAngularDiscontinuity<.003d,"retained-anchor view-ray motion remains continuous through aim release");
-    Console.WriteLine($"Surface visual aim: angular={maximumAngularDiscontinuity:E3} rad; invariant={maximumInvariantError:E3} m; symmetry={maximumSymmetryError:E3}; releases={ownershipReleases}");
+    Check(maximumAngularDiscontinuity<.05d,$"retained geographic anchor remains bounded on screen while the free-look aim transfers: {maximumAngularDiscontinuity:R} rad/detent");
+    Check(maximumVisualAimError<5e-8d&&ViewRayAngle(camera,scene.FocusedBody.Position.Value)<5e-8d,
+        "outward handoff finishes with the ordinary BodyCenter target on the inertial forward ray");
+    Console.WriteLine($"Surface visual aim: angular={maximumAngularDiscontinuity:E3} rad; visualAim={maximumVisualAimError:E3} rad; centered={maximumCenteredRayError:E3} rad; pivotRelease={maximumPivotReleaseError:E3} m; orbitLine={maximumOrbitLineError:E3} m; invariant={maximumInvariantError:E3} m; symmetry={maximumSymmetryError:E3}; releases={ownershipReleases}; cycles=2");
 
     void Measure(string sample)
     {
         Check(FocusTarget.AtSurface(retainedAnchor).TryEvaluate(scene.FocusedBody,out var anchorRoot),$"{sample}: retained anchor evaluates");
         var anchorAngle=ViewRayAngle(camera,anchorRoot.Value);
+        var visualAimAngle=ViewRayAngle(camera,scene.CurrentVisualAimRoot);
+        var forward=camera.Orientation.Rotate(new Double3(0d,0d,-1d)).Normalized();
+        var expectedCamera=scene.CurrentVisualAimRoot-forward*scene.OrbitDistance;
         maximumAngularDiscontinuity=Math.Max(maximumAngularDiscontinuity,Math.Abs(anchorAngle-previousAnchorAngle));
+        maximumVisualAimError=Math.Max(maximumVisualAimError,visualAimAngle);
+        maximumOrbitLineError=Math.Max(maximumOrbitLineError,Math.Sqrt((camera.Position.Value-expectedCamera).LengthSquared));
         maximumInvariantError=Math.Max(maximumInvariantError,Math.Sqrt((camera.Position.Value-
             (scene.CurrentFocusRoot+scene.CurrentInertialCameraOffset)).LengthSquared));
         sawPartialPosition|=scene.CurrentFocusTarget.Kind==FocusTargetKind.SurfaceAnchor&&scene.SurfaceAnchorBlend is >0d and <1d;
@@ -1632,11 +1690,17 @@ static void SurfaceVisualAimContinuityTest()
             camera.Position.Value.IsFinite&&double.IsFinite(anchorAngle)&&scene.RetainedVisualAimWeight is >=0d and <=1d,
             $"{sample}: visual-aim state remains finite and bounded");
         Check(Double3.Dot(previousOffset,scene.CurrentInertialCameraOffset)>0d,$"{sample}: camera offset never inverts");
-        if(scene.HasRetainedVisualAim&&scene.RetainedVisualAimWeight==1d)
-            Check(anchorAngle<5e-8d,$"{sample}: full retained aim remains on the camera forward ray");
+        if(scene.HasRetainedVisualAim)
+            Check(visualAimAngle<5e-8d,$"{sample}: retained visual aim remains on the camera forward ray");
         if(previousKind==FocusTargetKind.SurfaceAnchor&&scene.CurrentFocusTarget.Kind==FocusTargetKind.BodyCenter)
-            Check(Math.Abs(anchorAngle-previousAnchorAngle)<5e-8d,$"{sample}: positional release does not jump visual aim to BodyCenter");
+        {
+            maximumPivotReleaseError=Math.Max(maximumPivotReleaseError,
+                Math.Sqrt((scene.CurrentVisualAimRoot-previousVisualAimRoot).LengthSquared));
+            Check(maximumPivotReleaseError<1e-4d&&maximumOrbitLineError<1e-3d,
+                $"{sample}: positional release preserves the retained visual pivot");
+        }
         previousAnchorAngle=anchorAngle;
+        previousVisualAimRoot=scene.CurrentVisualAimRoot;
         previousOffset=scene.CurrentInertialCameraOffset;
         previousKind=scene.CurrentFocusTarget.Kind;
         previousAimOwned=scene.HasRetainedVisualAim;
