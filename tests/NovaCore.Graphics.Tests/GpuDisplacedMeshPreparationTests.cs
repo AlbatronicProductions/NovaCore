@@ -65,7 +65,7 @@ internal static unsafe class GpuDisplacedMeshPreparationTests
         var displaceShader = Path.Combine(root, "build", "native-ninja", "shaders", "planetary_mesh_displace.comp.spv");
         var normalShader = Path.Combine(root, "build", "native-ninja", "shaders", "planetary_mesh_normals.comp.spv");
         var initialization = Initialize(oraclePath, terrainPath, localPath, displaceShader, normalShader,
-            256, 2048, 2048); Require(initialization.InitializationCount == 1 && initialization.PipelineCreationCount == 2 &&
+            2048, 10000, 10000); Require(initialization.InitializationCount == 1 && initialization.PipelineCreationCount == 2 &&
             initialization.ShaderModuleCreationCount == 2 && initialization.PersistentBufferBytes > 0 && initialization.ValidationErrors == 0,
             "persistent native session creates two pipelines/modules once and is validation-clean");
         try
@@ -131,6 +131,30 @@ internal static unsafe class GpuDisplacedMeshPreparationTests
             Require(maxNormalError <= 5e-7d, $"GPU adjacency normal parity: {maxNormalError:R} rad");
             Require(maxCameraError <= 1d, $"camera-relative FP32 finalization remains bounded: {maxCameraError:R} m");
             Require(firstMetrics.ValidationErrors == 0 && movedMetrics.ValidationErrors == 0, "explicit synchronized dispatch has zero validation errors");
+
+            foreach (var factor in new[] { 1, 2, 4 })
+            {
+                var subdivision = PlanetaryDormantDisplacedMesh.Create(factor);
+                var input = Build(subdivision.Vertices, subdivision.Indices, subdivision.AdjacencyWords);
+                var output = Prepare(input, cameraA, out var subdivisionMetrics);
+                var maximumPhysicalError = 0d;
+                for (var index = 0; index < input.Directions.Length; index++)
+                {
+                    Require(terrain.TrySampleHeight(EarthBodyId, input.Directions[index], out var height),
+                        $"factor {factor} CPU height {index}");
+                    maximumPhysicalError = Math.Max(maximumPhysicalError,
+                        Math.Abs(output.Vertices[index].PhysicalHeightMetres - height));
+                }
+                Require(maximumPhysicalError <= 1e-3d && subdivisionMetrics.ValidationErrors == 0,
+                    $"factor {factor} compute-prepared subdivision preserves physical height");
+                var (interpolatedMaximum, interpolatedAverage) = factor == 1
+                    ? (0d, 0d)
+                    : InterpolatedNormalError(topology, first.Normals, subdivision, output.Normals);
+                Console.WriteLine($"11B-7D compute backend: factor={factor}; vertices={input.Queries.Length}; indices={input.Indices.Length}; " +
+                    $"bytes={input.Queries.Length * 112L + input.Indices.Length * 4L + input.Adjacency.Length * 4L}; " +
+                    $"displacement={subdivisionMetrics.DisplacementMilliseconds:F6}ms; normals={subdivisionMetrics.NormalMilliseconds:F6}ms; total={subdivisionMetrics.TotalMilliseconds:F3}ms; heightMax={maximumPhysicalError:E17}m; " +
+                    $"coarseInterpolatedNormalMax={interpolatedMaximum:E17}rad; coarseInterpolatedNormalAvg={interpolatedAverage:E17}rad");
+            }
 
             const int floridaCenter = 4;
             var floridaVertexDirection = floridaMesh.Directions[floridaCenter];
@@ -270,6 +294,36 @@ internal static unsafe class GpuDisplacedMeshPreparationTests
         var result = new Double3[positions.Length]; var baseOffset = positions.Length * 2;
         for (var vertex = 0; vertex < result.Length; vertex++) { var sum = Double3.Zero; var start = adjacency[vertex * 2]; var count = adjacency[vertex * 2 + 1]; for (var incidence = 0; incidence < count; incidence++) { var triangle = adjacency[baseOffset + start + incidence] * 3; sum += Double3.Cross(positions[indices[triangle + 1]] - positions[indices[triangle]], positions[indices[triangle + 2]] - positions[indices[triangle]]); } result[vertex] = sum.Normalized(); }
         return result;
+    }
+
+    private static (double Maximum, double Average) InterpolatedNormalError(
+        PlanetaryDormantDisplacedMesh coarse, NativePlanetaryPhysicalNormal[] coarseNormals,
+        PlanetaryDormantDisplacedMesh refined, NativePlanetaryPhysicalNormal[] refinedNormals)
+    {
+        var maximum = 0d; var sum = 0d;
+        for (var index = 0; index < refined.Vertices.Length; index++)
+        {
+            Require(refined.Vertices[index].TryCanonicalAddress(out var face, out var u, out var v),
+                $"refined canonical address {index}");
+            var gridU = u * coarse.QuadsPerFaceSide; var gridV = v * coarse.QuadsPerFaceSide;
+            var x0 = Math.Clamp((int)Math.Floor(gridU), 0, coarse.QuadsPerFaceSide - 1);
+            var y0 = Math.Clamp((int)Math.Floor(gridV), 0, coarse.QuadsPerFaceSide - 1);
+            var tx = Math.Clamp(gridU - x0, 0d, 1d); var ty = Math.Clamp(gridV - y0, 0d, 1d);
+            var n00 = Normal(coarseNormals[coarse.FaceVertex(face, x0, y0)]);
+            var n10 = Normal(coarseNormals[coarse.FaceVertex(face, x0 + 1, y0)]);
+            var n01 = Normal(coarseNormals[coarse.FaceVertex(face, x0, y0 + 1)]);
+            var n11 = Normal(coarseNormals[coarse.FaceVertex(face, x0 + 1, y0 + 1)]);
+            var interpolated = (n00 * ((1d - tx) * (1d - ty)) + n10 * (tx * (1d - ty)) +
+                n01 * ((1d - tx) * ty) + n11 * (tx * ty)).Normalized();
+            var generated = Normal(refinedNormals[index]);
+            var angle = Math.Acos(Math.Clamp(Double3.Dot(interpolated, generated), -1d, 1d));
+            Require(double.IsFinite(angle), $"finite interpolated normal comparison {index}");
+            maximum = Math.Max(maximum, angle); sum += angle;
+        }
+        return (maximum, sum / refined.Vertices.Length);
+
+        static Double3 Normal(in NativePlanetaryPhysicalNormal value) =>
+            new Double3(value.X, value.Y, value.Z).Normalized();
     }
 
     private static bool OutputsEqual(MeshOutput a, MeshOutput b) => MemoryMarshal.AsBytes(a.Vertices.AsSpan()).SequenceEqual(MemoryMarshal.AsBytes(b.Vertices.AsSpan())) && MemoryMarshal.AsBytes(a.Normals.AsSpan()).SequenceEqual(MemoryMarshal.AsBytes(b.Normals.AsSpan()));

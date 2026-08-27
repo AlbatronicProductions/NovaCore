@@ -79,6 +79,20 @@ frame submission and does not draw. Preserve the
 terrain-v5 L0–L2 globe and persistent T0–T3 Eyeball as sole live owners until a
 separate 11B-7D integration and handoff proof succeeds.
 
+11B-7D retains the dormant boundary and formalizes projected subdivision
+demand. Always derive demand from the canonical shared physical edge endpoints,
+current camera/projection, target pixel length, and bounded factor; never put
+camera or backend state into geographic identity. The reference proof supports
+deterministic factor 1/2/4 topologies and runs them through the persistent
+11B-7C Vulkan displacement/geometry-normal compute session. A 12.5% local
+factor hysteresis is the only stability policy. Tessellation and mesh shaders
+are supported on the development RX 6800 XT but remain capability-only; no
+pipeline or normal-frame work was added. The explicit
+`--scene=planetary-subdivision-diagnostic` path is a simple spherical
+density/seam visualization, not physical terrain ownership. Preserve the live
+terrain-v5 L0–L2 globe and T0–T3 Eyeball until 11B-7E proves anchored-tier
+snapping and transactional promotion.
+
 11A-4D makes the distant convention match those regional and eyeball contracts: the whole-body mesh is body-local, its geometry is rotated by the authoritative quaternion exactly once, and its normal/material/light directions remain body fixed. A live handoff audit corrected the detailed shader's mixed-frame Sun subtraction and established a non-rotating focused-camera frame. Focused tests drive every non-stellar Solar body through detailed-only, transition, and distant-only states while paused; camera position changes around the center at fixed distance while body position/quaternion remain exact. Earth, Mars, Jupiter, Saturn, and Moon additionally pass 1×, 30×, 120×, 600×, 14,400×, and 7,776,000× translation-follow/rotation-independence proofs.
 
 11B-2A makes the camera/reference-frame boundary explicit. `FocusTarget` separates evaluated target position from root-inertial camera orientation. `CameraRelativeRenderPosition` requires `objectRootDouble - cameraRootDouble` before any narrowing or high/low split. The distant, production globe/Eyeball, stellar, ring, orbit, marker, label, and lighting paths follow that ordering. The generic object/triangle path was corrected from shader-side subtraction of independently encoded absolute roots to CPU-relative encoding without changing celestial authority.
@@ -106,10 +120,10 @@ work.
 
 ## Recommended next milestone
 
-After the dormant 11B-7A identity, 11B-7B GPU physical-height, and 11B-7C
-displaced-vertex/physical-normal proofs, 11B-7D may integrate a bounded live
-mesh tier and prove coherent ownership without retiring current terrain owners
-prematurely. Do not restore independent
+After the dormant 11B-7A identity, 11B-7B GPU physical-height, 11B-7C
+displaced-vertex/physical-normal, and 11B-7D projected-subdivision proofs,
+11B-7E may introduce anchored mesh tiers, snapping, and transactional promotion
+without retiring current terrain owners prematurely. Do not restore independent
 equirectangular pages, sparse regional runtime overlays, or the retired radial
 compute owner. Production atmosphere/cloud rendering is intentionally absent
 and must be reconstructed later against the retained terrain-v5 contract.

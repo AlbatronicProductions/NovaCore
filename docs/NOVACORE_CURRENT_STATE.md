@@ -78,6 +78,19 @@ outside `NcFrameSubmission`, creates no normal-frame dispatch or draw, and does
 not replace the terrain-v5 L0–L2 globe or T0–T3 Eyeball. A later 11B-7D must
 prove live integration and coherent ownership before any renderer takeover.
 
+11B-7D adds a dormant backend-neutral projected-edge demand and stability
+contract. Canonical body-fixed endpoints produce fixed-point screen lengths,
+bounded quantized factors, and a 12.5% factor hysteresis; independently
+evaluated cube-edge owners have zero factor mismatch. Deterministic factor
+1/2/4 reference meshes contain 98/386/1,538 vertices and 576/2,304/9,216
+indices. They pass through the persistent 11B-7C Vulkan compute displacement
+and geometry-normal session without changing physical-height authority. The
+development RX 6800 XT reports tessellation and `VK_EXT_mesh_shader` support,
+but neither is installed as a renderer backend. The explicit
+`planetary-subdivision-diagnostic` mode visualizes bounded spherical density
+only; normal `earth` and `sol` frames contain no 11B-7D work. Production
+terrain-v5 L0–L2 plus T0–T3 Eyeball ownership is unchanged pending 11B-7E.
+
 4C/11B-4 remove the superseded equirectangular SVT descriptors,
 request/upload/page cache, independent fallback/fade, sparse regional overlay,
 deep-global close-range ownership, and per-frame radial Eyeball compute

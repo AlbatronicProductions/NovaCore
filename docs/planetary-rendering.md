@@ -91,6 +91,34 @@ terrain-v5 L0–L2 globe plus persistent T0–T3 Eyeball. A later 11B-7D must pr
 bounded live ownership and handoff before either current terrain owner can be
 retired.
 
+### Dormant screen-space subdivision proof (11B-7D)
+
+11B-7D keeps that ownership boundary. A backend-neutral demand function
+projects the two canonically ordered body-fixed endpoints of a physical edge,
+measures their fixed-point screen length, divides by a configurable 32/16/8/4
+pixel target, and clamps the deterministically quantized factor. Both incident
+owners therefore evaluate the same inputs; all twelve cube edges measure zero
+factor mismatch. A bounded 12.5% factor hysteresis suppresses threshold chatter
+without entering geographic identity or the future tier-promotion contract.
+
+The dormant reference topology can now materialize deterministic factors 1,
+2, and 4 while retaining the 11B-7C factor-1 hash. The existing persistent
+Vulkan compute preparation path measures authoritative displacement and
+geometry-derived physical normals for each density. Coarse-normal interpolation
+is measured for comparison, but geometry-derived adjacency normals are retained
+because they follow the newly sampled physical positions and share canonical
+edge/corner vertices. The development RX 6800 XT exposes Vulkan tessellation
+and `VK_EXT_mesh_shader`; those are capability results, not active backends.
+No tessellation or mesh-shader pipeline enters frame submission in 11B-7D.
+
+`--scene=planetary-subdivision-diagnostic` is an explicit validation-only
+spherical density/seam visualization. It reuses the bounded shared-grid draw
+and never activates in `earth` or `sol`; physical-height and normal acceptance
+remain the compute/readback proof rather than this simple diagnostic material.
+The live terrain-v5 globe and T0–T3 Eyeball remain the only normal Earth owners.
+11B-7E may use the retained demand contract when it introduces anchored tiers,
+snapping, and transactional promotion.
+
 The old equirectangular SVT page model, 5×5 predictor, per-page fallback/fade,
 deep-global near-ground refinement, and per-frame radial Eyeball compute path
 were retired in 4C. Lawful source rasters and their provenance remain offline

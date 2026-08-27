@@ -571,6 +571,8 @@ internal sealed class SolarSystemScene
         }
 
         var cameraChanged = false;
+        var cameraPositionChanged = false;
+        var inertialSurfaceFreeLook = false;
         if (input.MouseWheelDetents != 0)
         {
             var terrain=FocusedTerrain;
@@ -625,21 +627,40 @@ internal sealed class SolarSystemScene
                 _orbitDistance=SolarCameraZoomPolicy.OffsetDistanceForSurfaceAltitude(FocusedBody,cameraLineOrigin,rootRadial,terrain,desiredAltitude,maximumDistance);
             }
             cameraChanged = true;
+            cameraPositionChanged = true;
         }
         if (input.LookActive != 0 && (input.MouseDeltaX != 0f || input.MouseDeltaY != 0f))
         {
-            ApplyInertialLook(input.MouseDeltaX,input.MouseDeltaY);
-            _bodyLocalCameraPlacementUseOrbitCandidate=true;
-            CameraPresentationMode = SolarCameraPresentationMode.Free3D;
+            inertialSurfaceFreeLook=TryApplyInertialSurfaceFreeLook(camera,input.MouseDeltaX,input.MouseDeltaY);
+            if(!inertialSurfaceFreeLook)
+            {
+                ApplyInertialLook(input.MouseDeltaX,input.MouseDeltaY);
+                _bodyLocalCameraPlacementUseOrbitCandidate=true;
+                CameraPresentationMode=SolarCameraPresentationMode.Free3D;
+                cameraPositionChanged=true;
+            }
+            else CameraPresentationMode=SolarCameraPresentationMode.SurfaceLocal;
             cameraChanged = true;
         }
         if(_surfaceCameraMode==PlanetaryCameraPresentationMode.SurfaceLocal&&_focusTarget.Kind==FocusTargetKind.SurfaceAnchor&&ProductionSurfaceEligible&&
             (input.MoveForward!=input.MoveBackward||input.MoveRight!=input.MoveLeft))
         {
             var anchor=_focusTarget.SurfaceAnchor;var frame=anchor.LocalTangentBasis;var forwardAxis=(int)input.MoveForward-(int)input.MoveBackward;var rightAxis=(int)input.MoveRight-(int)input.MoveLeft;var length=Math.Sqrt(forwardAxis*forwardAxis+rightAxis*rightAxis);
-            var seconds=Math.Clamp((double)input.DeltaSeconds,0d,.1d);var travel=PlanetarySurfaceCameraPolicy.TranslationSpeedMetresPerSecond(Math.Max(0d,_surfaceAltitudeMetres))*seconds;var tangent=(frame.North*forwardAxis+frame.East*rightAxis)/length;var direction=(anchor.BodyFixedDirection+tangent*(travel/Math.Sqrt(anchor.BodyLocalPosition.LengthSquared))).Normalized();var terrain=FocusedTerrain;var elevation=terrain.IsValid?terrain.SampleHeight(direction,24):0d;_focusTarget=FocusTarget.AtSurface(SurfaceAnchorFocus.AtDirection(FocusedBody.BodyId,direction,FocusedBody.RadiusMetres,elevation));cameraChanged=true;
+            var seconds=Math.Clamp((double)input.DeltaSeconds,0d,.1d);var travel=PlanetarySurfaceCameraPolicy.TranslationSpeedMetresPerSecond(Math.Max(0d,_surfaceAltitudeMetres))*seconds;var tangent=(frame.North*forwardAxis+frame.East*rightAxis)/length;var direction=(anchor.BodyFixedDirection+tangent*(travel/Math.Sqrt(anchor.BodyLocalPosition.LengthSquared))).Normalized();var terrain=FocusedTerrain;var elevation=terrain.IsValid?terrain.SampleHeight(direction,24):0d;_focusTarget=FocusTarget.AtSurface(SurfaceAnchorFocus.AtDirection(FocusedBody.BodyId,direction,FocusedBody.RadiusMetres,elevation));cameraChanged=true;cameraPositionChanged=true;
         }
-        if (cameraChanged) ApplyOrbitPose(camera,true);
+        if(cameraChanged)
+        {
+            // A pure low-altitude look is orientation-only. Rebuilding the camera around the
+            // retained surface aim here would turn free-look back into a ground-facing orbit.
+            if(inertialSurfaceFreeLook&&!cameraPositionChanged)
+            {
+                camera.Projection=Projection;
+                camera.Validate();
+                _publishedCameraRoot=camera.Position.Value;
+                Update(camera);
+            }
+            else ApplyOrbitPose(camera,true);
+        }
     }
 
     internal bool TryAdvanceByHostDuration(SimulationDuration hostDuration, CameraState camera, out string error)
@@ -1170,6 +1191,31 @@ internal sealed class SolarSystemScene
         _inertialOrbitOffsetDirectionOverride=radial;
         _orbitYawRadians=Math.Atan2(radial.X,radial.Z);
         _orbitPitchRadians=-Math.Asin(Math.Clamp(radial.Y,-1d,1d));
+    }
+
+    private bool TryApplyInertialSurfaceFreeLook(CameraState camera,float mouseDeltaX,float mouseDeltaY)
+    {
+        if(_surfaceCameraMode!=PlanetaryCameraPresentationMode.SurfaceLocal||
+           _focusTarget.Kind!=FocusTargetKind.SurfaceAnchor||
+           !FocusedBodyHasNavigableSolidSurface)return false;
+        var tangent=_focusTarget.SurfaceAnchor.LocalTangentBasis;
+        var enu=new SurfaceEnuFrame(tangent.East,tangent.North,tangent.Up);
+        var rootToBody=FocusedBody.BodyFixedToRoot.Conjugate().Normalized();
+        var bodyFixedOrientation=(rootToBody*camera.Orientation).Normalized();
+        if(!SurfaceCameraState.TryExtractLocalLook(bodyFixedOrientation,enu,out var yaw,out var pitch))return false;
+
+        // Freeze the existing position authority before the view orientation changes. This
+        // keeps the normal inertial camera and its SurfaceAnchor positional contract intact;
+        // only the view ray receives local tangent-frame yaw/pitch input.
+        _inertialOrbitOffsetDirectionOverride=OrbitOffsetDirection();
+        yaw=SurfaceCameraState.NormalizeYaw(yaw-mouseDeltaX*OrbitSensitivity);
+        pitch=PlanetarySurfaceCameraPolicy.ApplyPitchDelta(pitch,-mouseDeltaY*OrbitSensitivity);
+        var nextBodyFixed=SurfaceCameraState.LookOrientation(enu,yaw,pitch);
+        var nextRoot=(FocusedBody.BodyFixedToRoot*nextBodyFixed).Normalized();
+        _inertialOrbitOrientationOverride=nextRoot;
+        _bodyLocalCameraPlacementUseOrbitCandidate=false;
+        camera.Orientation=nextRoot;
+        return true;
     }
 
     private void ApplyOrbitPose(CameraState camera,bool allowFocusTransition=false)

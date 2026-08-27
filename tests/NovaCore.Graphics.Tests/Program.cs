@@ -44,6 +44,7 @@ var tests = new (string, Action)[]
     ("Canonical SurfaceAnchor physical terrain authority", CanonicalSurfaceAnchorPhysicalTerrainAuthorityTest),
     ("Anchored Florida launch site", AnchoredFloridaLaunchSiteTest),
     ("Surface-relative camera authority", SurfaceRelativeCameraAuthorityTest),
+    ("Near-surface inertial free-look", NearSurfaceInertialFreeLookRegressionTest),
     ("SurfaceAnchor acquisition, ENU, and handoff", SurfaceAnchorPhaseBTest),
     ("Camera focus-position continuity", CameraFocusPositionContinuityTest),
     ("Zoom motion-profile continuity", ZoomMotionProfileContinuityTest),
@@ -55,6 +56,7 @@ var tests = new (string, Action)[]
     ("Anchored spherical mesh-tier contract", AnchoredSphericalMeshTierContractTest),
     ("Dormant GPU physical-height preparation", GpuPhysicalHeightPreparationTests.Run),
     ("Dormant displaced mesh and physical normals", GpuDisplacedMeshPreparationTests.Run),
+    ("Dormant screen-space subdivision proof", PlanetaryScreenSpaceSubdivisionTests.Run),
     ("Terrain-v5 seams, mixed-LOD authority, and Florida classification", TerrainV5PayloadSeamAndFloridaClassificationTest),
     ("Terrain asset distribution boundary", TerrainAssetDistributionBoundaryTest),
     ("Local terrain streaming and GPU compression", LocalTerrainStreamingAndGpuCompressionTest),
@@ -3125,6 +3127,72 @@ static void SurfaceRelativeCameraAuthorityTest()
     Check(evaluationAllocations==0&&checksum!=0d,"surface-camera hot evaluation allocates zero bytes");
 
     Console.WriteLine($"Surface camera authority: attach={maximumAttachPosition:E9} m/{maximumAttachPivot:E9} m/{maximumAttachOrientation:E9} rad; detach={maximumDetachPosition:E9} m/{maximumDetachPivot:E9} m/{maximumDetachOrientation:E9} rad; canonicalEyeDrift={maximumCanonicalEyeDrift:E9} m; pivotDrift={maximumPivotDrift:E9} m; rootRoundTrip={maximumRootRoundTripDrift:E9} m; terrainDrift={maximumTerrainRelativeDrift:E9} m; rootMotion={maximumRootMotion:R} m; orientation={maximumOrientationDrift:E9} rad; minClearance={minimumClearance:R} m; evaluation={evaluationNanoseconds:F1} ns; allocations={evaluationAllocations}");
+}
+
+static void NearSurfaceInertialFreeLookRegressionTest()
+{
+    var root=new ReferenceFrameId(0x77D1);
+    Check(SolarSystemScene.TryCreateAt(root,SimulationInstant.Zero,out var sceneValue,out var error)&&sceneValue is not null,
+        $"near-surface free-look scene: {error}");
+    var scene=sceneValue!;
+    var camera=new CameraState(new FramePosition(root,Double3.Zero),DoubleQuaternion.Identity,scene.Projection,CameraMode.Free);
+    Check(scene.Focus(camera,NativePresentationFocus.Earth),"near-surface free-look focuses Earth");
+    for(var step=0;step<192&&(scene.CurrentFocusTarget.Kind!=FocusTargetKind.SurfaceAnchor||
+        scene.SurfaceAnchorBlend<1d||scene.SurfaceCameraMode!=PlanetaryCameraPresentationMode.SurfaceLocal);step++)
+        scene.ApplyPresentationInput(camera,new NativeInputState{MouseWheelDetents=10_000},out _,out _);
+
+    Check(scene.CurrentCameraReferenceAuthority==CameraReferenceAuthority.Inertial&&
+        scene.CurrentFocusTarget.Kind==FocusTargetKind.SurfaceAnchor&&scene.SurfaceAnchorBlend==1d&&
+        scene.SurfaceCameraMode==PlanetaryCameraPresentationMode.SurfaceLocal,
+        $"normal Solar descent reaches inertial SurfaceLocal authority: authority={scene.CurrentCameraReferenceAuthority}; target={scene.CurrentFocusTarget.Kind}; blend={scene.SurfaceAnchorBlend:R}; altitude={scene.SurfaceAltitudeMetres:R}");
+
+    var body=scene.FocusedBody;
+    var anchor=scene.CurrentFocusTarget.SurfaceAnchor;
+    var tangent=anchor.LocalTangentBasis;
+    var pupil=scene.ProductionPupilCell;
+    var truth=scene.Presentation.Bodies.ToArray();
+    var initialPosition=camera.Position.Value;
+    var initialOffset=scene.CurrentInertialCameraOffset;
+    var enu=new SurfaceEnuFrame(tangent.East,tangent.North,tangent.Up);
+    var initialBodyOrientation=(body.BodyFixedToRoot.Conjugate().Normalized()*camera.Orientation).Normalized();
+    Check(SurfaceCameraState.TryExtractLocalLook(initialBodyOrientation,enu,out _,out var initialPitch),
+        "initial inertial SurfaceLocal view resolves in the retained tangent frame");
+
+    var previousPitch=initialPitch;
+    var crossedHorizon=false;
+    var continuedAboveHorizon=false;
+    var maximumPositionDrift=0d;
+    var minimumClearance=double.PositiveInfinity;
+    for(var step=0;step<12;step++)
+    {
+        var beforePosition=camera.Position.Value;
+        scene.ApplyPresentationInput(camera,new NativeInputState{LookActive=1,MouseDeltaY=-120f},out _,out _);
+        var positionDrift=Math.Sqrt((camera.Position.Value-beforePosition).LengthSquared);
+        maximumPositionDrift=Math.Max(maximumPositionDrift,positionDrift);
+        var currentBody=scene.FocusedBody;
+        var bodyFixedOrientation=(currentBody.BodyFixedToRoot.Conjugate().Normalized()*camera.Orientation).Normalized();
+        Check(SurfaceCameraState.TryExtractLocalLook(bodyFixedOrientation,enu,out _,out var pitch),
+            $"upward free-look sample {step} resolves in local ENU");
+        if(pitch>0d)
+        {
+            if(crossedHorizon&&pitch>previousPitch+.05d)continuedAboveHorizon=true;
+            crossedHorizon=true;
+        }
+        previousPitch=pitch;
+        var clearance=SurfaceAnchorAcquisition.SurfaceAltitude(currentBody,camera.Position.Value,PlanetaryTerrainDefinition.EarthProductionCubeV5);
+        minimumClearance=Math.Min(minimumClearance,clearance);
+        Check(positionDrift==0d&&scene.CurrentFocusTarget.SurfaceAnchor==anchor&&
+            scene.CurrentFocusTarget.SurfaceAnchor.LocalTangentBasis==tangent&&scene.ProductionPupilCell==pupil&&
+            currentBody.Position==body.Position&&currentBody.BodyFixedToRoot==body.BodyFixedToRoot&&
+            scene.Presentation.Bodies.SequenceEqual(truth)&&clearance>=SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres,
+            $"upward free-look sample {step} changes orientation only and remains terrain-safe");
+    }
+
+    Check(crossedHorizon&&continuedAboveHorizon&&previousPitch>.5d&&
+        camera.Position.Value==initialPosition&&scene.CurrentInertialCameraOffset==initialOffset&&
+        scene.CurrentCameraReferenceAuthority==CameraReferenceAuthority.Inertial,
+        $"repeated upward input crosses and continues above the geometric horizon: initial={initialPitch:R}; final={previousPitch:R}");
+    Console.WriteLine($"Near-surface inertial free-look: pitch={initialPitch:R}->{previousPitch:R} rad; horizonCrossed={crossedHorizon}; aboveHorizonContinued={continuedAboveHorizon}; positionDrift={maximumPositionDrift:E9} m; minimumClearance={minimumClearance:R} m; anchorStable={scene.CurrentFocusTarget.SurfaceAnchor==anchor}; pupilStable={scene.ProductionPupilCell==pupil}");
 }
 
 static void ProductionCubeSphereGpuResidencyIntegrationTest()

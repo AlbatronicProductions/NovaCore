@@ -12,36 +12,43 @@ public sealed class PlanetaryDormantDisplacedMesh
 {
     public const int ProofQuadsPerFaceSide = 4;
     public const uint TopologyVersion = 2;
+    public const int MaximumProofSubdivisionFactor = 4;
     private readonly PlanetaryAnchoredMeshVertexId[] _vertices;
     private readonly uint[] _indices;
     private readonly uint[] _adjacencyWords;
     private readonly uint[] _faceGridIndices;
 
     private PlanetaryDormantDisplacedMesh(PlanetaryAnchoredMeshVertexId[] vertices, uint[] indices,
-        uint[] adjacencyWords, uint[] faceGridIndices, ulong deterministicHash)
+        uint[] adjacencyWords, uint[] faceGridIndices, int quadsPerFaceSide, ulong deterministicHash)
     {
         _vertices = vertices; _indices = indices; _adjacencyWords = adjacencyWords;
-        _faceGridIndices = faceGridIndices; DeterministicHash = deterministicHash;
+        _faceGridIndices = faceGridIndices; QuadsPerFaceSide = quadsPerFaceSide;
+        DeterministicHash = deterministicHash;
     }
 
     public ReadOnlySpan<PlanetaryAnchoredMeshVertexId> Vertices => _vertices;
     public ReadOnlySpan<uint> Indices => _indices;
     public ReadOnlySpan<uint> AdjacencyWords => _adjacencyWords;
     public int AdjacencyCount => _adjacencyWords.Length - _vertices.Length * 2;
+    public int QuadsPerFaceSide { get; }
+    public int SubdivisionFactor => QuadsPerFaceSide / ProofQuadsPerFaceSide;
     public ulong DeterministicHash { get; }
 
     public uint FaceVertex(CubeSphereFace face, int x, int y)
     {
-        var row = ProofQuadsPerFaceSide + 1;
-        if ((uint)face >= 6 || x is < 0 or > ProofQuadsPerFaceSide || y is < 0 or > ProofQuadsPerFaceSide)
+        var row = QuadsPerFaceSide + 1;
+        if ((uint)face >= 6 || x is < 0 || x > QuadsPerFaceSide || y is < 0 || y > QuadsPerFaceSide)
             throw new ArgumentOutOfRangeException();
         return _faceGridIndices[(int)face * row * row + y * row + x];
     }
 
-    public static PlanetaryDormantDisplacedMesh Create()
+    public static PlanetaryDormantDisplacedMesh Create(int subdivisionFactor = 1)
     {
-        const int resolution = ProofQuadsPerFaceSide; var row = resolution + 1;
-        var vertices = new List<PlanetaryAnchoredMeshVertexId>(98);
+        if (subdivisionFactor is < 1 or > MaximumProofSubdivisionFactor ||
+            (subdivisionFactor & (subdivisionFactor - 1)) != 0)
+            throw new ArgumentOutOfRangeException(nameof(subdivisionFactor));
+        var resolution = checked(ProofQuadsPerFaceSide * subdivisionFactor); var row = resolution + 1;
+        var vertices = new List<PlanetaryAnchoredMeshVertexId>(6 * resolution * resolution + 2);
         var lookup = new Dictionary<PlanetaryAnchoredMeshVertexId, uint>();
         var faceGrid = new uint[6 * row * row];
         foreach (CubeSphereFace face in Enum.GetValues<CubeSphereFace>())
@@ -75,7 +82,8 @@ public sealed class PlanetaryDormantDisplacedMesh
             adjacency[vertex * 2] = (uint)start; adjacency[vertex * 2 + 1] = (uint)incidence[vertex].Count;
             foreach (var triangle in incidence[vertex]) adjacency[vertices.Count * 2 + start++] = triangle;
         }
-        return new(vertices.ToArray(), indices, adjacency, faceGrid, Hash(vertices, indices, adjacency));
+        return new(vertices.ToArray(), indices, adjacency, faceGrid, resolution,
+            Hash(vertices, indices, adjacency));
 
         void AddOutward(uint a, uint b, uint c)
         {
