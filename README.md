@@ -176,7 +176,7 @@ For a point-and-click development workflow, build the lightweight Windows launch
 dotnet build tools/NovaCore.Launcher/NovaCore.Launcher.csproj -c Debug
 ```
 
-Then double-click `tools/NovaCore.Launcher/bin/Debug/net8.0-windows/NovaCore.Launcher.exe`.
+Then double-click `tools/NovaCore.Launcher/bin/Debug/net10.0-windows/NovaCore.Launcher.exe`.
 The launcher provides supported Solar, Earth, Florida launch-site, planetary-diagnostic,
 and subdivision-diagnostic presets, shows the exact generated command, and starts the
 existing NovaCore sample. The command-line workflow remains authoritative and available
