@@ -144,9 +144,28 @@ ownership visualization. Orange T0, green T1, and blue T2 patch sets change
 only at complete promotion boundaries and return atomically to T0. It reuses
 the existing bounded patch draw solely to expose ownership; it is never
 constructed by `earth` or `sol`. Production remains terrain-v5 L0–L2 plus the
-legacy radial T0–T3 Eyeball. 11B-7F is the next vertical-slice milestone and
-must prove bounded continuous orbital-to-local participation before production
-ownership can change.
+legacy radial T0–T3 Eyeball.
+
+### Visible Florida vertical slice (11B-7F)
+
+`--scene=florida-vertical-slice` is the first bounded visible participation of
+the anchored hierarchy. It starts over the canonical Florida SurfaceAnchor at
+3,000 km. Normal `earth` and `sol` are unchanged: their live path remains the
+terrain-v5 L0–L2 globe plus the persistent radial T0–T3 Eyeball.
+
+The complete production surface remains a conservative depth owner while the
+Florida replacement prepares. A complete opaque T0 becomes eligible at 700 km;
+T1 and T2 prepare one geographic patch dependency per update and promote only
+after their full 4- or 16-patch replacement set is ready. Retreat restores the
+complete parent before retiring a child tier and returns to fallback-only above
+800 km. The overlay uses the accepted counter-clockwise, back-face-culled,
+reversed-Z depth-write contract with no depth bias. Its current material is a
+diagnostic but geographically derived ocean/land/alpine classification, not the
+final production terrain material.
+
+This is not whole-Earth takeover and does not retire the radial Eyeball. Wider
+ownership must wait for physical acceptance of the Florida orbit-to-ground-to-
+orbit path.
 
 The old equirectangular SVT page model, 5×5 predictor, per-page fallback/fade,
 deep-global near-ground refinement, and per-frame radial Eyeball compute path

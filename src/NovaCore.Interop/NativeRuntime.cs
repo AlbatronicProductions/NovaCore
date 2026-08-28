@@ -34,6 +34,13 @@ public struct NativeRenderObject { public NativeEncodedPosition Position; public
 public struct NativeDrawBatch { public NativeMeshHandle Mesh; public uint FirstObject, ObjectCount, Padding; }
 /// <summary>64-byte presentation-only planetary patch record; face numbering and edge-mask bits equal Graphics contracts.</summary>
 [StructLayout(LayoutKind.Sequential)] public struct NativePlanetaryPatch { public uint Face,Level,X,Y; public float CenterX,CenterY,CenterZ,Radius; public float ColorR,ColorG,ColorB,ColorA; public uint StitchMask,Reserved0,Reserved1,Reserved2; }
+[StructLayout(LayoutKind.Sequential)]
+public struct NativeAnchoredTerrainVertex
+{
+    public NativeEncodedPosition BodyPosition;
+    public float NormalX,NormalY,NormalZ,NormalPadding;
+    public float ColorR,ColorG,ColorB,ColorA;
+}
 [StructLayout(LayoutKind.Sequential)] public struct NativePlanetaryGpuConstants
 {
     public float CameraBodyHighX,CameraBodyHighY,CameraBodyHighZ,RadiusHigh;
@@ -53,6 +60,7 @@ public struct NativeDrawBatch { public NativeMeshHandle Mesh; public uint FirstO
     public float RadialWarpExponent,DetailFrequency,NormalStepMetres,RegionalAlpha;
     public uint VertexCount,IndexCount,RadialRingCount,AzimuthSegmentCount;
     public uint Reserved0,Reserved1,Reserved2,Reserved3;
+    public uint AnchoredFace,AnchoredLevel,AnchoredX,AnchoredYEnabled;
 }
 [StructLayout(LayoutKind.Sequential)] public struct NativePlanetaryPresentation
 {
@@ -72,7 +80,7 @@ public struct NativeDrawBatch { public NativeMeshHandle Mesh; public uint FirstO
  [StructLayout(LayoutKind.Sequential)] public struct NativeOrbitLineVertex { public float X, Y, Z; }
 
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct NativeFrameSubmission { public NativeCameraData Camera; public NativeRenderObject* Objects; public uint ObjectCount; public NativeDrawBatch* Batches; public uint BatchCount; public NativeOrbitLineVertex* OrbitVertices; public uint OrbitVertexCount; public NativeOrbitLineVertex* PreviousOrbitVertices; public uint PreviousOrbitVertexCount; public NativeOrbitLineVertex* BodyForwardVertices; public uint BodyForwardVertexCount; public NativeOrbitLineVertex* TargetDirectionVertices; public uint TargetDirectionVertexCount; public NativePlanetaryPatch* PlanetaryPatches; public uint PlanetaryPatchCount; public uint PlanetaryGpuAlignmentPadding; public NativePlanetaryGpuConstants PlanetaryGpu; public NativePlanetaryMode PlanetaryMode; public NativePlanetarySurfaceMode PlanetarySurfaceMode; public uint PlanetaryPadding1,PlanetaryPadding2; public NativePlanetaryPresentation PlanetaryPresentation; public NativePlanetaryPresentation* DistantBodies; public uint DistantBodyCount, DistantBodyPadding; public NativeSolarLighting SolarLighting; public NativePlanetaryEyeball PlanetaryEyeball; }
+public unsafe struct NativeFrameSubmission { public NativeCameraData Camera; public NativeRenderObject* Objects; public uint ObjectCount; public NativeDrawBatch* Batches; public uint BatchCount; public NativeOrbitLineVertex* OrbitVertices; public uint OrbitVertexCount; public NativeOrbitLineVertex* PreviousOrbitVertices; public uint PreviousOrbitVertexCount; public NativeOrbitLineVertex* BodyForwardVertices; public uint BodyForwardVertexCount; public NativeOrbitLineVertex* TargetDirectionVertices; public uint TargetDirectionVertexCount; public NativePlanetaryPatch* PlanetaryPatches; public uint PlanetaryPatchCount; public uint PlanetaryGpuAlignmentPadding; public NativePlanetaryGpuConstants PlanetaryGpu; public NativePlanetaryMode PlanetaryMode; public NativePlanetarySurfaceMode PlanetarySurfaceMode; public uint PlanetaryPadding1,PlanetaryPadding2; public NativePlanetaryPresentation PlanetaryPresentation; public NativePlanetaryPresentation* DistantBodies; public uint DistantBodyCount, DistantBodyPadding; public NativeSolarLighting SolarLighting; public NativePlanetaryEyeball PlanetaryEyeball; public NativeAnchoredTerrainVertex* AnchoredTerrainVertices; public uint AnchoredTerrainVertexCount, AnchoredTerrainTier, AnchoredTerrainFlags; public uint AnchoredTerrainPadding0,AnchoredTerrainPadding1,AnchoredTerrainPadding2; }
 
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct NativeRuntimeAssets

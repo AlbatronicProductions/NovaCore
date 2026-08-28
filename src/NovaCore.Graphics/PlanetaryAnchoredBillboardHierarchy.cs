@@ -38,7 +38,10 @@ public enum PlanetaryAnchoredBillboardFailure : byte
     PhysicalHeight,
     PhysicalNormals,
     Visibility,
-    Synchronization
+    Synchronization,
+    UnavailableLocalPayload,
+    IncompleteBounds,
+    Preparation
 }
 
 /// <summary>

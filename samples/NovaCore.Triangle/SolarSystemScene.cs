@@ -769,7 +769,8 @@ internal sealed class SolarSystemScene
             SurfaceAltitudeMetres=(float)altitude,MaximumTerrainHeightMetres=(float)EarthPlanetaryScene.Terrain.MaximumHeightMetres,OceanSeaLevelMetres=(float)EarthPlanetaryScene.EarthSeaLevelMetres,BlendAlpha=_eyeballWeight,
             BodyIdLow=(uint)body.BodyId,BodyIdHigh=(uint)(body.BodyId>>32),TerrainVersion=PlanetaryTerrainDefinition.EarthProductionCubeV5.Version,Enabled=1,
             TangentAnchorX=(float)tangentAnchor.X,TangentAnchorY=(float)tangentAnchor.Y,TangentAnchorZ=(float)tangentAnchor.Z,MaximumAngleRadians=(float)PlanetaryProductionEyeballTopology.MaximumAngleRadians,
-            RadialWarpExponent=(float)tier.RadialWarpExponent,DetailFrequency=1f,NormalStepMetres=2f,RegionalAlpha=1f,
+            RadialWarpExponent=(float)tier.RadialWarpExponent,DetailFrequency=1f,NormalStepMetres=2f,
+            RegionalAlpha=_eyeballWeight<1f||!_eyeballCoversVisibleSurface?1f:0f,
             VertexCount=(uint)tier.VertexCount,IndexCount=(uint)tier.IndexCount,RadialRingCount=(uint)tier.RadialRings,AzimuthSegmentCount=(uint)tier.AzimuthSegments,
             Reserved0=(uint)tier.Index,Reserved1=(uint)_productionPupilCell.Face,Reserved2=(uint)_productionPupilCell.X,Reserved3=(uint)_productionPupilCell.Y
         };
@@ -1015,6 +1016,42 @@ internal sealed class SolarSystemScene
         _inertialOrbitOrientationOverride=null;_inertialOrbitOffsetDirectionOverride=null;
         ApplySurfaceCameraPose(camera);
         return true;
+    }
+
+    internal bool TryStartAtFloridaValidationAltitude(CameraState camera,double altitudeMetres)
+    {
+        if(!double.IsFinite(altitudeMetres)||altitudeMetres<SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres||
+           !_floridaLaunchSite.IsValid)return false;
+        var earthIndex=-1;
+        for(var index=0;index<Presentation.Count;index++)
+            if(Presentation.Bodies[index].BodyId==SolarSystemBodyIds.Earth.Value){earthIndex=index;break;}
+        if(earthIndex<0||!Focus(camera,earthIndex))return false;
+
+        var anchor=_floridaLaunchSite.Object.Anchor;
+        var terrain=new PlanetaryPhysicalTerrainAuthority(FocusedBody.BodyId,FocusedTerrain);
+        if(!terrain.TrySampleHeight(FocusedBody.BodyId,anchor.NormalizedBodyFixedDirection,out var heightMetres))return false;
+        var anchorFocus=SurfaceAnchorFocus.AtDirection(FocusedBody.BodyId,
+            anchor.NormalizedBodyFixedDirection,FocusedBody.RadiusMetres,heightMetres);
+        if(!FocusTarget.AtSurface(anchorFocus).TryEvaluate(FocusedBody,out var anchorRoot))return false;
+
+        var rootRadial=FocusedBody.BodyFixedToRoot.Rotate(anchor.NormalizedBodyFixedDirection).Normalized();
+        _focusTarget=FocusTarget.AtSurface(anchorFocus);
+        _surfaceAnchorBlend=SurfaceFocusHandoffPolicy.SurfaceBlend(altitudeMetres);
+        _retainedVisualAimAnchor=anchorFocus;
+        _retainedVisualAimOffsetRoot=anchorRoot.Value-FocusedBody.Position.Value;
+        _retainedVisualAimWeight=1d;
+        _orbitDistance=altitudeMetres;
+        _orbitYawRadians=Math.Atan2(rootRadial.X,rootRadial.Z);
+        _orbitPitchRadians=-Math.Asin(Math.Clamp(rootRadial.Y,-1d,1d));
+        _inertialOrbitOrientationOverride=null;
+        _inertialOrbitOffsetDirectionOverride=null;
+        _surfaceAltitudeMetres=altitudeMetres;
+        _bodyLocalCameraAltitudeDemandMetres=double.NaN;
+        _bodyLocalCameraPlacementPending=false;
+        _bodyLocalCameraPlacementUseOrbitCandidate=false;
+        ApplyOrbitPose(camera,true);
+        return double.IsFinite(_surfaceAltitudeMetres)&&
+            _surfaceAltitudeMetres>=SurfaceFocusHandoffPolicy.MinimumTerrainClearanceMetres;
     }
 
     internal bool TryAttachSurfaceCamera(CameraState camera)

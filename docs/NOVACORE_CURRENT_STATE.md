@@ -106,6 +106,15 @@ corners have deterministic coverage proofs. The explicit
 `earth` and `sol` frames still use terrain-v5 L0–L2 plus the legacy radial
 T0–T3 Eyeball and contain no 11B-7E preparation or draw.
 
+11B-7F adds the opt-in `florida-vertical-slice` scene. It is the first bounded
+visible anchored-tier integration: production terrain-v5 remains complete,
+Florida T0 becomes visible only when complete, and T1/T2 replace it atomically
+at 100 km/10 km after all child dependencies are ready. Retirement restores a
+complete parent before child removal. The scene uses a diagnostic geographic
+ocean/land/alpine material and does not claim final material parity, global
+ownership, or radial-Eyeball retirement. Normal `earth` and `sol` construct no
+11B-7F state or draw submission.
+
 4C/11B-4 remove the superseded equirectangular SVT descriptors,
 request/upload/page cache, independent fallback/fade, sparse regional overlay,
 deep-global close-range ownership, and per-frame radial Eyeball compute

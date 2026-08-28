@@ -9,6 +9,7 @@ var tests = new (string Name, Action Test)[]
     ("invariant altitude formatting", InvariantAltitudeFormatting),
     ("subdivision diagnostic mapping", SubdivisionMapping),
     ("anchored billboard diagnostic mapping", AnchoredBillboardMapping),
+    ("Florida vertical slice mapping", FloridaVerticalSliceMapping),
     ("Florida launch mapping", FloridaLaunchMapping),
     ("unsupported Florida surface", UnsupportedFloridaSurface),
     ("invalid configuration rejection", InvalidConfiguration),
@@ -32,8 +33,8 @@ static void DefaultSelection()
 
 static void ScenarioCatalogMappings()
 {
-    Equal(8, ScenarioCatalog.All.Count);
-    Equal(7, ScenarioCatalog.All.Count(definition => definition.IsSupported));
+    Equal(9, ScenarioCatalog.All.Count);
+    Equal(8, ScenarioCatalog.All.Count(definition => definition.IsSupported));
     True(ScenarioCatalog.All.Select(definition => definition.Preset).Distinct().Count() == ScenarioCatalog.All.Count,
         "Scenario presets must be unique.");
 }
@@ -81,6 +82,13 @@ static void AnchoredBillboardMapping()
     var configuration = Create(NovaCoreScenarioPreset.AnchoredBillboardDiagnostic);
     SequenceEqual(
         ["--scene=planetary-anchored-billboard-diagnostic"],
+        LaunchCommandBuilder.BuildArguments(configuration));
+}
+
+static void FloridaVerticalSliceMapping()
+{
+    var configuration = Create(NovaCoreScenarioPreset.FloridaVerticalSlice);
+    SequenceEqual(["--scene=florida-vertical-slice"],
         LaunchCommandBuilder.BuildArguments(configuration));
 }
 

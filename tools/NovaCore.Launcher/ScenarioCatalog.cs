@@ -31,6 +31,10 @@ public static class ScenarioCatalog
         new(NovaCoreScenarioPreset.AnchoredBillboardDiagnostic, "Anchored Billboard Tiers",
             "11B-7E dormant Florida-anchored T0/T1/T2 transactional ownership diagnostic.",
             NovaCoreScene.AnchoredBillboardDiagnostic, NovaCoreStartingBody.None,
+            null, null, true, null),
+        new(NovaCoreScenarioPreset.FloridaVerticalSlice, "Florida Vertical Slice",
+            "11B-7F bounded visible terrain-v5 to anchored T0/T1/T2 Florida descent.",
+            NovaCoreScene.FloridaVerticalSlice, NovaCoreStartingBody.Earth,
             null, null, true, null)
     ];
 

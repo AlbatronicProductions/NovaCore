@@ -29,6 +29,7 @@ internal static class PlanetaryAnchoredBillboardHierarchyTests
         VerifyCameraAndFloridaStability(scene, site, footprint, hierarchy);
         VerifyStableAllocation(hierarchy);
         VerifyPriorContracts(site);
+        VerifyVisibleFloridaVerticalSlice(site);
 
         var tier0 = hierarchy.Topology(0); var tier1 = hierarchy.Topology(1);
         var tier2 = hierarchy.Topology(2);
@@ -253,6 +254,132 @@ internal static class PlanetaryAnchoredBillboardHierarchyTests
         Require(PlanetaryPatchTopology.Shared.DeterministicHash == 0x98792D7EBC45FF6Dul &&
             PlanetaryProductionPatchTopology.Shared.DeterministicHash == 0x61C28B0A3B4F21FFul,
             "production topology hashes remain unchanged");
+    }
+
+    private static void VerifyVisibleFloridaVerticalSlice(in FloridaLaunchSite site)
+    {
+        var terrain = PlanetaryTerrainDefinition.EarthProductionCubeV5;
+        Require(FloridaAnchoredVerticalSlice.TryCreate(6, EarthRadiusMetres, terrain,
+            out var sliceValue, out var error) && sliceValue is not null,
+            $"11B-7F slice creation: {error}");
+        var slice = sliceValue!;
+        var expectedFootprint = PlanetaryAnchoredBillboardFootprint.AroundAnchor(site.Object.Anchor, 8);
+        Require(slice.Anchor == site.Object.Anchor &&
+            slice.Hierarchy.Footprint.DeterministicHash == expectedFootprint.DeterministicHash,
+            "11B-7F uses the unchanged canonical Florida SurfaceAnchor and 7E footprint");
+
+        foreach (var altitude in new[] { 20_000_000d, 3_000_000d })
+        {
+            slice.Update(altitude); var telemetry = slice.Telemetry;
+            Require(!slice.Visible && telemetry.VisibleOwner == FloridaVerticalSliceVisibleOwner.ProductionFallback &&
+                telemetry.FallbackActive && telemetry.CoverageComplete && slice.ActiveVertexCount == 0,
+                $"fallback is sole visible owner at {altitude:R} metres");
+        }
+        slice.Update(700_000d);
+        Require(slice.Visible && slice.Telemetry.VisibleOwner == FloridaVerticalSliceVisibleOwner.AnchoredT0 &&
+            slice.Telemetry.FallbackActive && slice.ActiveVertexCount > 0,
+            "complete T0 becomes visible without removing the production fallback");
+        var ownership = new NativePlanetaryEyeball(); slice.ApplyOwnership(ref ownership);
+        var ownershipRoot = slice.Hierarchy.Footprint.Roots[0];
+        Require(ownership.AnchoredFace == (uint)ownershipRoot.Face &&
+            ownership.AnchoredLevel == (uint)ownershipRoot.Level &&
+            ownership.AnchoredX == (uint)ownershipRoot.X &&
+            ownership.AnchoredYEnabled == ((uint)ownershipRoot.Y | 0x80000000u),
+            "published anchored ownership carries the exact canonical Florida root patch identity");
+        VerifyPublishedGeometry(slice, EarthRadiusMetres, terrain);
+
+        var t0Vertices = slice.ActiveVertexCount;
+        slice.Update(100_000d);
+        Require(slice.Hierarchy.ActiveOwnerTier == 0 && slice.ActiveVertexCount == t0Vertices,
+            "T0 remains published while T1 is incomplete");
+        for (var frame = 0; frame < 8; frame++) slice.Update(100_000d);
+        Require(slice.Hierarchy.ActiveOwnerTier == 1 &&
+            slice.Telemetry.VisibleOwner == FloridaVerticalSliceVisibleOwner.AnchoredT1 &&
+            slice.Telemetry.CoverageComplete, "T1 promotes atomically after complete readiness");
+        var t1Vertices = slice.ActiveVertexCount;
+        for (var frame = 0; frame < 24; frame++) slice.Update(10_000d);
+        Require(slice.Hierarchy.ActiveOwnerTier == 2 && slice.ActiveVertexCount > t1Vertices &&
+            slice.Telemetry.VisibleOwner == FloridaVerticalSliceVisibleOwner.AnchoredT2,
+            "T2 localized density promotes atomically");
+        VerifyPublishedGeometry(slice, EarthRadiusMetres, terrain);
+
+        slice.Update(20_000d);
+        Require(slice.Hierarchy.ActiveOwnerTier == 1 && slice.Telemetry.CoverageComplete,
+            "T2 retirement restores complete T1 in one update");
+        slice.Update(200_000d);
+        Require(slice.Hierarchy.ActiveOwnerTier == 0 && slice.Telemetry.CoverageComplete,
+            "T1 retirement restores complete T0 in one update");
+        slice.Update(900_000d);
+        Require(!slice.Visible && slice.Telemetry.VisibleOwner ==
+            FloridaVerticalSliceVisibleOwner.ProductionFallback && slice.ActiveVertexCount == 0,
+            "retreat restores fallback-only visibility");
+        ownership = default; slice.ApplyOwnership(ref ownership);
+        Require(ownership.AnchoredYEnabled == 0u,
+            "retirement removes anchored pixel ownership in the same update");
+
+        foreach (var failure in new[] { PlanetaryAnchoredBillboardFailure.MissingChild,
+                     PlanetaryAnchoredBillboardFailure.PhysicalHeight,
+                     PlanetaryAnchoredBillboardFailure.PhysicalNormals,
+                     PlanetaryAnchoredBillboardFailure.Visibility,
+                     PlanetaryAnchoredBillboardFailure.Synchronization,
+                     PlanetaryAnchoredBillboardFailure.UnavailableLocalPayload,
+                     PlanetaryAnchoredBillboardFailure.IncompleteBounds,
+                     PlanetaryAnchoredBillboardFailure.Preparation })
+        {
+            Require(FloridaAnchoredVerticalSlice.TryCreate(6, EarthRadiusMetres, terrain,
+                out var failedValue, out _) && failedValue is not null, $"failure slice {failure}");
+            var failed = failedValue!; failed.Update(700_000d);
+            Require(failed.InjectPreparationFailure(failure) && failed.Hierarchy.ActiveOwnerTier == 0 &&
+                failed.Telemetry.FallbackActive && failed.Telemetry.CoverageComplete &&
+                failed.Telemetry.PreparationFailures == 1,
+                $"{failure} cannot expose incomplete anchored ownership");
+        }
+
+        var stressAltitudes = new[]
+        {
+            20_000_000d, 3_000_000d, 700_000d, 100_000d, 10_000d,
+            EarthPlanetaryScene.MinimumTerrainClearanceMetres,
+            10_000d, 100_000d, 700_000d, 3_000_000d, 20_000_000d
+        };
+        for (var cycle = 0; cycle < 64; cycle++)
+            foreach (var altitude in stressAltitudes)
+            {
+                slice.Update(altitude);
+                Require(slice.Telemetry.FallbackActive && slice.Telemetry.CoverageComplete &&
+                    (slice.ActiveVertexCount == 0 || slice.ActiveVertexCount % 3 == 0),
+                    "rapid in/out traversal retains complete fallback or a complete anchored tier");
+            }
+        Require(!slice.Visible && slice.Hierarchy.ActiveOwnerTier == 0,
+            "rapid retreat deterministically restores fallback-only ownership");
+
+        var stable = slice.NativeVertices;
+        var before = GC.GetAllocatedBytesForCurrentThread();
+        for (var frame = 0; frame < 1_000; frame++) slice.Update(3_000_000d);
+        Require(ReferenceEquals(stable, slice.NativeVertices) &&
+            GC.GetAllocatedBytesForCurrentThread() == before,
+            "7F stable updates preserve one bounded buffer with no managed allocation");
+
+        Console.WriteLine($"11B-7F Florida slice: viewpoints=20000km/3000km/700km/100km/10km/near; " +
+            $"tiers=0/1/2; patches=1/4/16; triangles=32/128/512; " +
+            $"positionError={slice.Telemetry.MaximumPositionDisagreementMetres:R} m; " +
+            $"persistentVertexBytes={slice.NativeVertices.LongLength * 64L}; fallback=terrain-v5");
+    }
+
+    private static void VerifyPublishedGeometry(FloridaAnchoredVerticalSlice slice,
+        double radius, in PlanetaryTerrainDefinition terrain)
+    {
+        Require(slice.ActiveVertexCount > 0 && slice.ActiveVertexCount % 3 == 0,
+            "visible slice publishes complete triangles");
+        foreach (ref readonly var vertex in slice.ActiveVertices)
+        {
+            var encoded = new EncodedPosition(vertex.BodyPosition.HighX, vertex.BodyPosition.HighY,
+                vertex.BodyPosition.HighZ, vertex.BodyPosition.LowX, vertex.BodyPosition.LowY,
+                vertex.BodyPosition.LowZ);
+            var body = encoded.Reconstruct(); var direction = body.Normalized();
+            Require(vertex.ColorA == 1f && body.IsFinite &&
+                Math.Abs(Math.Sqrt(body.LengthSquared) - (radius + terrain.SampleHeight(direction, 24))) < 2e-3d,
+                "published 7F vertex is opaque and matches physical terrain authority");
+        }
     }
 
     private static void Promote(PlanetaryAnchoredBillboardHierarchy hierarchy, int tier)

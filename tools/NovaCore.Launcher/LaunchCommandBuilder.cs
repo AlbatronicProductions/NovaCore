@@ -51,6 +51,7 @@ public static class LaunchCommandBuilder
         NovaCoreScene.PlanetaryDiagnostic => "planetary-diagnostic",
         NovaCoreScene.SubdivisionDiagnostic => "planetary-subdivision-diagnostic",
         NovaCoreScene.AnchoredBillboardDiagnostic => "planetary-anchored-billboard-diagnostic",
+        NovaCoreScene.FloridaVerticalSlice => "florida-vertical-slice",
         _ => throw new ArgumentOutOfRangeException(nameof(scene), scene, null)
     };
 }

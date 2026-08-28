@@ -75,6 +75,8 @@ internal sealed class EarthPlanetaryScene
     internal NativePlanetaryPatch[] Patches { get; }
     internal PlanetRenderProxy Earth => _earth;
     internal double OrbitDistance => _orbitDistance;
+    internal double OrbitYawRadians => _orbitYawRadians;
+    internal double OrbitPitchRadians => _orbitPitchRadians;
     internal PlanetaryCameraPresentationMode CameraPresentationMode => _cameraPresentationMode;
     internal float EyeballWeight => _eyeballWeight;
     internal PlanetarySurfaceFocus? SurfaceFocus => _surfaceFocus;
@@ -201,7 +203,7 @@ internal sealed class EarthPlanetaryScene
     internal void SetValidationAltitude(CameraState camera,double altitudeMetres,string surfaceSite="land")
     {
         if(!double.IsFinite(altitudeMetres)||altitudeMetres<MinimumTerrainClearanceMetres)throw new ArgumentOutOfRangeException(nameof(altitudeMetres));
-        var direction=surfaceSite switch{"land"=>AtLatitudeLongitude(-45d,-70d),"ocean"=>AtLatitudeLongitude(-30d,-90d),"slope"=>AtLatitudeLongitude(-25d,-70d),"arid"=>AtLatitudeLongitude(24.0d,12.0d),"temperate"=>AtLatitudeLongitude(48.0d,12.0d),"rock"=>AtLatitudeLongitude(-25d,-70d),"snow"=>AtLatitudeLongitude(77.0d,-42.0d),"fallback"=>AtLatitudeLongitude(-27.0d,133.0d),_=>throw new ArgumentOutOfRangeException(nameof(surfaceSite))};_orbitYawRadians=Math.Atan2(direction.X,direction.Z);_orbitPitchRadians=-Math.Asin(direction.Y);_surfaceFocus=null;_localYawRadians=0d;_localPitchRadians=-Math.PI/12d;_cameraPresentationMode=PlanetaryCameraPresentationMode.Orbital;var surfaceRadius=PlanetaryTerrainQuery.VisibleSurfaceRadius(_earth.RadiusMetres,direction,Terrain,EarthSeaLevelMetres);_orbitDistance=surfaceRadius+altitudeMetres;ApplyOrbitPose(camera);
+        var direction=surfaceSite switch{"land"=>AtLatitudeLongitude(-45d,-70d),"ocean"=>AtLatitudeLongitude(-30d,-90d),"slope"=>AtLatitudeLongitude(-25d,-70d),"arid"=>AtLatitudeLongitude(24.0d,12.0d),"temperate"=>AtLatitudeLongitude(48.0d,12.0d),"rock"=>AtLatitudeLongitude(-25d,-70d),"snow"=>AtLatitudeLongitude(77.0d,-42.0d),"fallback"=>AtLatitudeLongitude(-27.0d,133.0d),"florida"=>AtLatitudeLongitude(FloridaLaunchSite.Latitude,FloridaLaunchSite.Longitude),_=>throw new ArgumentOutOfRangeException(nameof(surfaceSite))};_orbitYawRadians=Math.Atan2(direction.X,direction.Z);_orbitPitchRadians=-Math.Asin(direction.Y);_surfaceFocus=null;_localYawRadians=0d;_localPitchRadians=-Math.PI/12d;_cameraPresentationMode=PlanetaryCameraPresentationMode.Orbital;var surfaceRadius=PlanetaryTerrainQuery.VisibleSurfaceRadius(_earth.RadiusMetres,direction,Terrain,EarthSeaLevelMetres);_orbitDistance=surfaceRadius+altitudeMetres;ApplyOrbitPose(camera);
         static Double3 AtLatitudeLongitude(double latitudeDegrees,double longitudeDegrees)=>BodyFixedGeography.DirectionFromLatitudeLongitude(latitudeDegrees*Math.PI/180d,longitudeDegrees*Math.PI/180d);
     }
 
@@ -228,7 +230,8 @@ internal sealed class EarthPlanetaryScene
     {
         if (!EyeballComputeRequested) return default;
         var rootToBody=_earth.BodyFixedToRoot.Conjugate().Normalized();var cameraBody=rootToBody.Rotate(camera.Position.Value-_earth.Position.Value);var encoded=EncodedPosition.Encode(cameraBody);var radiusHigh=(float)_earth.RadiusMetres;var radiusLow=(float)(_earth.RadiusMetres-radiusHigh);var tangentAnchor=_productionPupilCell.BodyFixedDirection;var tier=PlanetaryProductionEyeballTopology.Tier(_productionEyeballSelection.Tier);
-        return new NativePlanetaryEyeball{CameraBodyHighX=encoded.HighX,CameraBodyHighY=encoded.HighY,CameraBodyHighZ=encoded.HighZ,RadiusHigh=radiusHigh,CameraBodyLowX=encoded.LowX,CameraBodyLowY=encoded.LowY,CameraBodyLowZ=encoded.LowZ,RadiusLow=radiusLow,SurfaceAltitudeMetres=(float)Math.Max(MinimumTerrainClearanceMetres,_altitudeMetres),MaximumTerrainHeightMetres=(float)Terrain.MaximumHeightMetres,OceanSeaLevelMetres=(float)EarthSeaLevelMetres,BlendAlpha=_eyeballWeight,BodyIdLow=(uint)_earth.BodyId,BodyIdHigh=(uint)(_earth.BodyId>>32),TerrainVersion=PlanetaryTerrainDefinition.EarthProductionCubeV5.Version,Enabled=1,TangentAnchorX=(float)tangentAnchor.X,TangentAnchorY=(float)tangentAnchor.Y,TangentAnchorZ=(float)tangentAnchor.Z,MaximumAngleRadians=(float)PlanetaryProductionEyeballTopology.MaximumAngleRadians,RadialWarpExponent=(float)tier.RadialWarpExponent,DetailFrequency=1f,NormalStepMetres=2f,RegionalAlpha=1f,VertexCount=(uint)tier.VertexCount,IndexCount=(uint)tier.IndexCount,RadialRingCount=(uint)tier.RadialRings,AzimuthSegmentCount=(uint)tier.AzimuthSegments,Reserved0=(uint)tier.Index,Reserved1=(uint)_productionPupilCell.Face,Reserved2=(uint)_productionPupilCell.X,Reserved3=(uint)_productionPupilCell.Y};
+        var globalCoverageRequired=_eyeballWeight<1f||!_eyeballCoversVisibleSurface;
+        return new NativePlanetaryEyeball{CameraBodyHighX=encoded.HighX,CameraBodyHighY=encoded.HighY,CameraBodyHighZ=encoded.HighZ,RadiusHigh=radiusHigh,CameraBodyLowX=encoded.LowX,CameraBodyLowY=encoded.LowY,CameraBodyLowZ=encoded.LowZ,RadiusLow=radiusLow,SurfaceAltitudeMetres=(float)Math.Max(MinimumTerrainClearanceMetres,_altitudeMetres),MaximumTerrainHeightMetres=(float)Terrain.MaximumHeightMetres,OceanSeaLevelMetres=(float)EarthSeaLevelMetres,BlendAlpha=_eyeballWeight,BodyIdLow=(uint)_earth.BodyId,BodyIdHigh=(uint)(_earth.BodyId>>32),TerrainVersion=PlanetaryTerrainDefinition.EarthProductionCubeV5.Version,Enabled=1,TangentAnchorX=(float)tangentAnchor.X,TangentAnchorY=(float)tangentAnchor.Y,TangentAnchorZ=(float)tangentAnchor.Z,MaximumAngleRadians=(float)PlanetaryProductionEyeballTopology.MaximumAngleRadians,RadialWarpExponent=(float)tier.RadialWarpExponent,DetailFrequency=1f,NormalStepMetres=2f,RegionalAlpha=globalCoverageRequired?1f:0f,VertexCount=(uint)tier.VertexCount,IndexCount=(uint)tier.IndexCount,RadialRingCount=(uint)tier.RadialRings,AzimuthSegmentCount=(uint)tier.AzimuthSegments,Reserved0=(uint)tier.Index,Reserved1=(uint)_productionPupilCell.Face,Reserved2=(uint)_productionPupilCell.X,Reserved3=(uint)_productionPupilCell.Y};
     }
 
     internal NativePlanetaryPresentation NativePresentation(CameraState camera)
@@ -290,12 +293,20 @@ internal sealed class EarthPlanetaryScene
 
     private void ApplyOrbitPose(CameraState camera)
     {
-        var yaw = DoubleQuaternion.FromAxisAngle(Double3.UnitY, _orbitYawRadians);
-        var pitch = DoubleQuaternion.FromAxisAngle(Double3.UnitX, _orbitPitchRadians);
-        var orbitalOrientation = (yaw * pitch).Normalized();
+        var orbitalOrientation=OrbitOrientation();
         var radial=_surfaceFocus?.TangentFrame.Direction??-orbitalOrientation.Rotate(new Double3(0d,0d,-1d));var surfaceRadius=PlanetaryTerrainQuery.VisibleSurfaceRadius(_earth.RadiusMetres,radial,Terrain,EarthSeaLevelMetres);_orbitDistance=Math.Max(_orbitDistance,surfaceRadius+MinimumTerrainClearanceMetres);var altitude=_orbitDistance-surfaceRadius;
-        _cameraPresentationMode=PlanetarySurfaceCameraPolicy.Mode(altitude);if(_cameraPresentationMode!=PlanetaryCameraPresentationMode.Orbital&&_surfaceFocus is null)_surfaceFocus=PlanetarySurfaceFocus.AtDirection(_earth.BodyId,radial,surfaceRadius,altitude);if(_cameraPresentationMode==PlanetaryCameraPresentationMode.Orbital)_surfaceFocus=null;
-        radial=_surfaceFocus?.TangentFrame.Direction??radial;surfaceRadius=PlanetaryTerrainQuery.VisibleSurfaceRadius(_earth.RadiusMetres,radial,Terrain,EarthSeaLevelMetres);_orbitDistance=surfaceRadius+altitude;
+        _cameraPresentationMode=PlanetarySurfaceCameraPolicy.Mode(altitude);if(_cameraPresentationMode!=PlanetaryCameraPresentationMode.Orbital&&_surfaceFocus is null)_surfaceFocus=PlanetarySurfaceFocus.AtDirection(_earth.BodyId,radial,surfaceRadius,altitude);
+        if(_surfaceFocus is { } retainedFocus)
+        {
+            // Transfer the retained body-fixed radial into the ordinary orbit state before
+            // release.  The detach frame and the next input therefore derive the same
+            // camera position/pivot instead of resurrecting the pre-attachment angles.
+            radial=retainedFocus.TangentFrame.Direction;
+            SetOrbitRadial(radial);
+            orbitalOrientation=OrbitOrientation();
+        }
+        if(_cameraPresentationMode==PlanetaryCameraPresentationMode.Orbital)_surfaceFocus=null;
+        surfaceRadius=PlanetaryTerrainQuery.VisibleSurfaceRadius(_earth.RadiusMetres,radial,Terrain,EarthSeaLevelMetres);_orbitDistance=surfaceRadius+altitude;
         _surfaceFrameBlend=PlanetarySurfaceCameraPolicy.SurfaceBlend(altitude);var surfaceOrientation=PlanetarySurfaceFrame.AtDirection(radial).LookOrientation(_localYawRadians,_localPitchRadians);camera.Orientation=(_earth.BodyFixedToRoot*Nlerp(orbitalOrientation,surfaceOrientation,_surfaceFrameBlend)).Normalized();
         camera.Position=camera.Position with{Value=_earth.Position.Value+_earth.BodyFixedToRoot.Rotate(radial*_orbitDistance)};
         camera.Validate();
@@ -303,6 +314,14 @@ internal sealed class EarthPlanetaryScene
     }
 
     private Double3 CurrentSurfaceDirection(){if(_surfaceFocus is { } focus)return focus.TangentFrame.Direction;var yaw=DoubleQuaternion.FromAxisAngle(Double3.UnitY,_orbitYawRadians);var pitch=DoubleQuaternion.FromAxisAngle(Double3.UnitX,_orbitPitchRadians);return -(yaw*pitch).Normalized().Rotate(new Double3(0d,0d,-1d));}
+    private DoubleQuaternion OrbitOrientation()=>
+        (DoubleQuaternion.FromAxisAngle(Double3.UnitY,_orbitYawRadians)*DoubleQuaternion.FromAxisAngle(Double3.UnitX,_orbitPitchRadians)).Normalized();
+    private void SetOrbitRadial(in Double3 radial)
+    {
+        var direction=radial.Normalized();
+        _orbitYawRadians=Math.Atan2(direction.X,direction.Z);
+        _orbitPitchRadians=-Math.Asin(Math.Clamp(direction.Y,-1d,1d));
+    }
     private void SetDaySideOrbit(){var sun=_earth.BodyFixedToRoot.Conjugate().Normalized().Rotate(_solarLighting.SourceCenter.Value-_earth.Position.Value).Normalized();var radial=new Double3(sun.X,sun.Y*.35d,sun.Z).Normalized();_orbitYawRadians=Math.Atan2(radial.X,radial.Z);_orbitPitchRadians=-Math.Asin(Math.Clamp(radial.Y,-1d,1d));}
     private static DoubleQuaternion Nlerp(in DoubleQuaternion from,in DoubleQuaternion to,double amount){var target=from.X*to.X+from.Y*to.Y+from.Z*to.Z+from.W*to.W<0?new DoubleQuaternion(-to.X,-to.Y,-to.Z,-to.W):to;return new DoubleQuaternion(from.X+(target.X-from.X)*amount,from.Y+(target.Y-from.Y)*amount,from.Z+(target.Z-from.Z)*amount,from.W+(target.W-from.W)*amount).Normalized();}
 }

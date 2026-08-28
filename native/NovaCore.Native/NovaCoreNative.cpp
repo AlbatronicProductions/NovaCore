@@ -41,6 +41,11 @@ constexpr uint32_t LocalPayloadSlots=128,LocalLookupCapacity=1024,LocalUploadBud
                    LocalAlbedoLayerBytes=nc::localterrain::Bc7Bytes,LocalElevationLayerBytes=nc::localterrain::Bc4Bytes,
                    LocalNormalLayerBytes=nc::localterrain::Bc5Bytes,
                    LocalStagingBytes=LocalMaximumPendingUploads*(LocalAlbedoLayerBytes+LocalElevationLayerBytes+LocalNormalLayerBytes);
+constexpr uint32_t SurfaceDiagnosticDisableGlobal=1u<<0,SurfaceDiagnosticDisableEyeball=1u<<1,
+                   SurfaceDiagnosticDisableAnchored=1u<<2,SurfaceDiagnosticUnlit=1u<<3,
+                   SurfaceDiagnosticNormals=1u<<4,SurfaceDiagnosticOwners=1u<<5,
+                   SurfaceDiagnosticBoundaries=1u<<6,SurfaceDiagnosticDepth=1u<<7,
+                   SurfaceDiagnosticAddresses=1u<<8,SurfaceDiagnosticDiffuseOnly=1u<<9;
 static_assert(sizeof(NcEncodedPosition) == 32);
 static_assert(sizeof(NcCameraData) == 96);
 static_assert(alignof(NcCameraData) == 16);
@@ -53,6 +58,7 @@ static_assert(offsetof(NcRenderObject, position) == 0 &&
               offsetof(NcRenderObject, mesh) == 64);
 static_assert(sizeof(NcDrawBatch) == 16);
 static_assert(sizeof(NcPlanetaryPatch) == 64);
+static_assert(sizeof(NcAnchoredTerrainVertex) == 64);
 static_assert(sizeof(NcPlanetaryGpuConstants) == 96);
 static_assert(alignof(NcPlanetaryGpuConstants) == 16);
 static_assert(offsetof(NcPlanetaryGpuConstants, cameraBodyLowX) == 16 &&
@@ -60,7 +66,7 @@ static_assert(offsetof(NcPlanetaryGpuConstants, cameraBodyLowX) == 16 &&
               offsetof(NcPlanetaryGpuConstants, maximumLevel) == 48 &&
               offsetof(NcPlanetaryGpuConstants, viewForwardX) == 64 &&
               offsetof(NcPlanetaryGpuConstants, viewportHeightPixels) == 80);
-static_assert(sizeof(NcPlanetaryEyeball) == 128);
+static_assert(sizeof(NcPlanetaryEyeball) == 144);
 static_assert(alignof(NcPlanetaryEyeball) == 16);
 static_assert(offsetof(NcPlanetaryEyeball, cameraBodyLowX) == 16);
 static_assert(offsetof(NcPlanetaryEyeball, surfaceAltitudeMetres) == 32);
@@ -85,7 +91,7 @@ static_assert(alignof(NcSolarLighting) == 16);
 static_assert(offsetof(NcSolarLighting, photosphereR) == 16);
 static_assert(offsetof(NcSolarLighting, sourceRadiance) == 32);
 static_assert(offsetof(NcSolarLighting, speedHud) == 44);
-static_assert(sizeof(NcFrameSubmission) == 688);
+static_assert(sizeof(NcFrameSubmission) == 736);
 static_assert(offsetof(NcFrameSubmission, planetaryGpu) == 208);
 static_assert(offsetof(NcFrameSubmission, planetaryMode) == 304);
 static_assert(offsetof(NcFrameSubmission, planetaryPresentation) == 320);
@@ -94,6 +100,8 @@ static_assert(offsetof(NcFrameSubmission, distantBodyCount) == 504);
 static_assert(offsetof(NcFrameSubmission, distantBodyPadding) == 508);
 static_assert(offsetof(NcFrameSubmission, solarLighting) == 512);
 static_assert(offsetof(NcFrameSubmission, planetaryEyeball) == 560);
+static_assert(offsetof(NcFrameSubmission, anchoredTerrainVertices) == 704);
+static_assert(offsetof(NcFrameSubmission, anchoredTerrainVertexCount) == 712);
 static_assert(sizeof(NcOrbitLineVertex) == 12);
 static_assert(sizeof(NcRuntimeAssets) == 24);
 static_assert(sizeof(NcInputState) == 76);
@@ -232,6 +240,7 @@ struct App {
   VkPipeline planetaryPipeline{};
   VkPipeline productionPlanetaryPipeline{};
   VkPipeline productionEyeballPipeline{};
+  VkPipeline anchoredTerrainPipeline{};
   VkPipeline planetaryComputePipeline{};
   VkPipeline planetaryTerrainPipeline{};
   VkPipeline productionPlanetaryTerrainPipeline{};
@@ -266,6 +275,8 @@ struct App {
   VkDeviceMemory patchMemory{};
   void *patchMapped{};
   VkDeviceSize patchSize{};
+  VkBuffer anchoredTerrainBuffer{}; VkDeviceMemory anchoredTerrainMemory{};
+  void *anchoredTerrainMapped{}; VkDeviceSize anchoredTerrainSize{};
   VkBuffer gpuInputBuffer{}, gpuWorkBuffer{}, gpuNodeBuffer{}, gpuControlBuffer{};
   VkDeviceMemory gpuInputMemory{}, gpuWorkMemory{}, gpuNodeMemory{}, gpuControlMemory{};
   void *gpuInputMapped{}, *gpuWorkMapped{}, *gpuNodeMapped{}, *gpuControlMapped{};
@@ -326,6 +337,7 @@ struct App {
   std::array<bool, 8> sasModeWasDown{};
   std::array<bool, 10> presentationFocusWasDown{};
   bool resetWasDown{};
+  uint32_t surfaceDiagnostic{};
   void Log(uint32_t cat, const char *msg) const {
     if (cb) {
       NcHostEvent e{NC_DIAGNOSTIC, cat, msg, {}, {}};
@@ -339,6 +351,23 @@ struct App {
     }
   }
 };
+uint32_t SurfaceDiagnosticFromEnvironment() {
+  const char *value=std::getenv("NOVACORE_SURFACE_DIAGNOSTIC");
+  if(!value||!*value||std::strcmp(value,"normal")==0)return 0;
+  if(std::strcmp(value,"cube")==0)return SurfaceDiagnosticDisableEyeball|SurfaceDiagnosticDisableAnchored;
+  if(std::strcmp(value,"eye")==0)return SurfaceDiagnosticDisableGlobal|SurfaceDiagnosticDisableAnchored;
+  if(std::strcmp(value,"cube-eye")==0)return SurfaceDiagnosticDisableAnchored;
+  if(std::strcmp(value,"anchored")==0)return SurfaceDiagnosticDisableGlobal|SurfaceDiagnosticDisableEyeball;
+  if(std::strcmp(value,"cube-anchored")==0)return SurfaceDiagnosticDisableEyeball;
+  if(std::strcmp(value,"unlit")==0)return SurfaceDiagnosticUnlit;
+  if(std::strcmp(value,"normals")==0)return SurfaceDiagnosticNormals;
+  if(std::strcmp(value,"owners")==0)return SurfaceDiagnosticOwners;
+  if(std::strcmp(value,"boundaries")==0)return SurfaceDiagnosticBoundaries;
+  if(std::strcmp(value,"depth")==0)return SurfaceDiagnosticDepth;
+  if(std::strcmp(value,"addresses")==0)return SurfaceDiagnosticAddresses;
+  if(std::strcmp(value,"diffuse")==0)return SurfaceDiagnosticDiffuseOnly;
+  throw std::runtime_error("NOVACORE_SURFACE_DIAGNOSTIC is invalid");
+}
 void SeedProductionTerrainCacheHighWater(App &a) {
   if(!a.gpuControlMapped||!a.productionPack)return;
   auto *control=static_cast<GpuPlanetaryControl*>(a.gpuControlMapped);
@@ -600,6 +629,11 @@ void Validate(App &a) {
   if(presentation.enabled>1)throw std::runtime_error("invalid planetary presentation enable");
   if(hasPresentation){const bool validWeights=std::abs(presentation.distantAlpha+presentation.detailedAlpha-1)<=1e-5f;if(presentation.regime>NC_PLANETARY_DETAILED_ONLY||!std::isfinite(presentation.centerX)||!std::isfinite(presentation.centerY)||!std::isfinite(presentation.centerZ)||!std::isfinite(presentation.radius)||presentation.radius<=0||!std::isfinite(presentation.colorR)||!std::isfinite(presentation.colorG)||!std::isfinite(presentation.colorB)||!std::isfinite(presentation.distantAlpha)||!std::isfinite(presentation.detailedAlpha)||!std::isfinite(presentation.distanceRadii)||presentation.distanceRadii<1||presentation.distantAlpha<0||presentation.distantAlpha>1||presentation.detailedAlpha<0||presentation.detailedAlpha>1||!validWeights||!validMaterial(presentation))throw std::runtime_error("invalid planetary presentation");if(presentation.regime==NC_PLANETARY_DISTANT_ONLY&&(presentation.distantAlpha!=1||presentation.detailedAlpha!=0||s->planetaryPatchCount))throw std::runtime_error("invalid distant-only planetary submission");if(presentation.regime==NC_PLANETARY_DETAILED_ONLY&&(presentation.distantAlpha!=0||presentation.detailedAlpha!=1))throw std::runtime_error("invalid detailed-only planetary submission");}
   if(s->planetaryMode!=NC_PLANETARY_CPU_REFERENCE||hasPresentation){const auto &g=s->planetaryGpu;const double cameraX=static_cast<double>(g.cameraBodyHighX)+g.cameraBodyLowX;const double cameraY=static_cast<double>(g.cameraBodyHighY)+g.cameraBodyLowY;const double cameraZ=static_cast<double>(g.cameraBodyHighZ)+g.cameraBodyLowZ;const double cameraRadius=std::sqrt(cameraX*cameraX+cameraY*cameraY+cameraZ*cameraZ);const double physicalSurfaceRadius=cameraRadius-double(g.surfaceAltitudeMetres);const double radius=static_cast<double>(g.radiusHigh)+g.radiusLow;const bool finite=std::isfinite(g.cameraBodyHighX)&&std::isfinite(g.cameraBodyHighY)&&std::isfinite(g.cameraBodyHighZ)&&std::isfinite(g.radiusHigh)&&std::isfinite(g.cameraBodyLowX)&&std::isfinite(g.cameraBodyLowY)&&std::isfinite(g.cameraBodyLowZ)&&std::isfinite(g.radiusLow)&&std::isfinite(g.refinementThreshold)&&std::isfinite(g.nearFieldAltitudeRadii)&&std::isfinite(g.surfaceAltitudeMetres)&&std::isfinite(g.maximumTerrainHeightMetres)&&std::isfinite(g.viewForwardX)&&std::isfinite(g.viewForwardY)&&std::isfinite(g.viewForwardZ)&&std::isfinite(g.viewHalfAngleRadians)&&std::isfinite(g.viewportHeightPixels)&&std::isfinite(g.verticalTanHalfFov)&&std::isfinite(g.targetTexelPixels)&&std::isfinite(g.requestedAlbedoLevel)&&std::isfinite(cameraRadius)&&std::isfinite(physicalSurfaceRadius);const float viewLength=g.viewForwardX*g.viewForwardX+g.viewForwardY*g.viewForwardY+g.viewForwardZ*g.viewForwardZ;const bool production=s->planetarySurfaceMode==NC_PLANETARY_SURFACE_PRODUCTION_CUBE;constexpr float physicalMinimumClearance=10.0f,invariantTolerance=0.0001f;if(!finite||radius<=0||g.refinementThreshold<=0||g.nearFieldAltitudeRadii<=0||g.surfaceAltitudeMetres<0||g.maximumTerrainHeightMetres<0||g.maximumLevel>24||!g.outputCapacity||g.outputCapacity>GpuPatchCapacity||g.terrainFrame||std::abs(viewLength-1)>1e-4f||g.viewHalfAngleRadians<=0||g.viewHalfAngleRadians>=1.5707964f||g.viewportHeightPixels<=0||g.verticalTanHalfFov<=0||g.targetTexelPixels<=0)throw std::runtime_error("invalid planetary GPU constants");if(production&&g.surfaceAltitudeMetres<physicalMinimumClearance-invariantTolerance){char message[320];std::snprintf(message,sizeof message,"production camera clearance escape: r=%.17g; surface=%.17g; clearance=%.17g; required=%.17g",cameraRadius,physicalSurfaceRadius,double(g.surfaceAltitudeMetres),double(physicalMinimumClearance));a.Log(NC_LOG_ALWAYS,message);throw std::runtime_error("production camera clearance invariant failed at final GPU submission");}if((g.terrainVersion==0)!=(g.maximumTerrainHeightMetres==0))throw std::runtime_error("inconsistent planetary terrain constants");if(production&&(s->planetaryMode==NC_PLANETARY_CPU_REFERENCE||g.terrainVersion!=5))throw std::runtime_error("invalid production cube-sphere authority");if(hasPresentation&&(!bodyCenterMatches(cameraX,cameraY,cameraZ)||presentation.radius!=g.radiusHigh))throw std::runtime_error("inconsistent planetary presentation authority");if(s->planetaryMode==NC_PLANETARY_GPU_PRODUCTION&&s->planetaryPatchCount)throw std::runtime_error("GPU planetary mode received CPU leaves");}
+  const bool anchoredOwnership=(s->planetaryEyeball.anchoredYEnabled&0x80000000u)!=0u;const uint32_t anchoredLevel=s->planetaryEyeball.anchoredLevel,anchoredCells=anchoredLevel<31u?1u<<anchoredLevel:0u;
+  if(s->anchoredTerrainPadding[0]||s->anchoredTerrainPadding[1]||s->anchoredTerrainPadding[2]||s->anchoredTerrainFlags>1u||s->anchoredTerrainTier>2u||s->anchoredTerrainVertexCount>65536u||(s->anchoredTerrainVertexCount%3u)!=0u||(s->anchoredTerrainVertexCount&&!s->anchoredTerrainVertices)||(!s->anchoredTerrainVertexCount&&s->anchoredTerrainFlags)||anchoredOwnership!=(s->anchoredTerrainFlags!=0)||
+    (anchoredOwnership&&(s->planetaryEyeball.anchoredFace>=6u||anchoredLevel>24u||!anchoredCells||s->planetaryEyeball.anchoredX>=anchoredCells||(s->planetaryEyeball.anchoredYEnabled&0x7fffffffu)>=anchoredCells)))throw std::runtime_error("invalid anchored terrain submission");
+  if(s->anchoredTerrainVertexCount&&(s->planetarySurfaceMode!=NC_PLANETARY_SURFACE_PRODUCTION_CUBE||s->planetaryPresentation.bodyIdLow!=6u||s->planetaryPresentation.bodyIdHigh!=0u))throw std::runtime_error("anchored terrain requires production Earth authority");
+  for(uint32_t index=0;index<s->anchoredTerrainVertexCount;index++){const auto &v=s->anchoredTerrainVertices[index];const float values[]{v.bodyPosition.high[0],v.bodyPosition.high[1],v.bodyPosition.high[2],v.bodyPosition.low[0],v.bodyPosition.low[1],v.bodyPosition.low[2],v.normal[0],v.normal[1],v.normal[2],v.color[0],v.color[1],v.color[2],v.color[3]};for(float value:values)if(!std::isfinite(value))throw std::runtime_error("non-finite anchored terrain vertex");if(v.color[3]!=1.0f)throw std::runtime_error("anchored terrain must be opaque");}
   const auto &lighting=s->solarLighting;const uint32_t hudPreset=lighting.speedHud&255u,hudAlpha=(lighting.speedHud>>8)&255u;if(lighting.enabled>1||(lighting.speedHud&0xffff0000u)||(hudPreset==0)!=(hudAlpha==0)||hudPreset>15)throw std::runtime_error("invalid Solar lighting flags");if(lighting.enabled&&(!std::isfinite(lighting.sourceCenterX)||!std::isfinite(lighting.sourceCenterY)||!std::isfinite(lighting.sourceCenterZ)||!std::isfinite(lighting.exposure)||lighting.exposure<=0||!std::isfinite(lighting.photosphereR)||lighting.photosphereR<0||!std::isfinite(lighting.photosphereG)||lighting.photosphereG<0||!std::isfinite(lighting.photosphereB)||lighting.photosphereB<0||!std::isfinite(lighting.ambientFloor)||lighting.ambientFloor<0||lighting.ambientFloor>1||!std::isfinite(lighting.sourceRadiance)||lighting.sourceRadiance<=1||!std::isfinite(lighting.glowStrength)||lighting.glowStrength<0||lighting.glowStrength>4))throw std::runtime_error("invalid Solar lighting presentation");
   const auto &eye=s->planetaryEyeball;if(eye.enabled>1)throw std::runtime_error("invalid eyeball enable");if(eye.enabled){const auto &g=s->planetaryGpu;const bool finite=std::isfinite(eye.cameraBodyHighX)&&std::isfinite(eye.cameraBodyHighY)&&std::isfinite(eye.cameraBodyHighZ)&&std::isfinite(eye.radiusHigh)&&std::isfinite(eye.cameraBodyLowX)&&std::isfinite(eye.cameraBodyLowY)&&std::isfinite(eye.cameraBodyLowZ)&&std::isfinite(eye.radiusLow)&&std::isfinite(eye.surfaceAltitudeMetres)&&std::isfinite(eye.maximumTerrainHeightMetres)&&std::isfinite(eye.oceanSeaLevelMetres)&&std::isfinite(eye.blendAlpha)&&std::isfinite(eye.tangentAnchorX)&&std::isfinite(eye.tangentAnchorY)&&std::isfinite(eye.tangentAnchorZ)&&std::isfinite(eye.maximumAngleRadians)&&std::isfinite(eye.radialWarpExponent)&&std::isfinite(eye.detailFrequency)&&std::isfinite(eye.normalStepMetres)&&std::isfinite(eye.regionalAlpha);const double cameraX=double(eye.cameraBodyHighX)+eye.cameraBodyLowX,cameraY=double(eye.cameraBodyHighY)+eye.cameraBodyLowY,cameraZ=double(eye.cameraBodyHighZ)+eye.cameraBodyLowZ;const float anchorLength=eye.tangentAnchorX*eye.tangentAnchorX+eye.tangentAnchorY*eye.tangentAnchorY+eye.tangentAnchorZ*eye.tangentAnchorZ;const bool partialHandoff=eye.blendAlpha<1.0f-1e-5f;const bool production=s->planetarySurfaceMode==NC_PLANETARY_SURFACE_PRODUCTION_CUBE;constexpr uint32_t rings[4]{32,64,128,256},segments[4]{64,128,256,512};const uint32_t tier=production?eye.reserved0:0u,safeTier=std::min(tier,3u),expectedVertices=1u+rings[safeTier]*segments[safeTier],expectedIndices=segments[safeTier]*3u+(rings[safeTier]-1u)*segments[safeTier]*6u;const bool invalidReserved=!production||tier>=4||eye.reserved1>=6u;const bool exactCameraTransport=eye.cameraBodyHighX==g.cameraBodyHighX&&eye.cameraBodyHighY==g.cameraBodyHighY&&eye.cameraBodyHighZ==g.cameraBodyHighZ&&eye.cameraBodyLowX==g.cameraBodyLowX&&eye.cameraBodyLowY==g.cameraBodyLowY&&eye.cameraBodyLowZ==g.cameraBodyLowZ&&eye.radiusHigh==g.radiusHigh&&eye.radiusLow==g.radiusLow;if(!finite||!hasPresentation||(!eye.bodyIdLow&&!eye.bodyIdHigh)||!eye.terrainVersion||eye.radiusHigh<=0||eye.surfaceAltitudeMetres<0||eye.maximumTerrainHeightMetres<=eye.oceanSeaLevelMetres||eye.blendAlpha<=0||eye.blendAlpha>1||eye.regionalAlpha<0||eye.regionalAlpha>1||std::abs(anchorLength-1)>1e-4f||eye.maximumAngleRadians<=0||eye.maximumAngleRadians>=1.5707964f||eye.radialWarpExponent<1||eye.detailFrequency<=0||eye.normalStepMetres<=0||eye.vertexCount!=expectedVertices||eye.indexCount!=expectedIndices||eye.radialRingCount!=rings[safeTier]||eye.azimuthSegmentCount!=segments[safeTier]||invalidReserved)throw std::runtime_error("invalid planetary eyeball");if(eye.bodyIdLow!=presentation.bodyIdLow||eye.bodyIdHigh!=presentation.bodyIdHigh||eye.radiusHigh!=presentation.radius||!bodyCenterMatches(cameraX,cameraY,cameraZ)||!exactCameraTransport)throw std::runtime_error("inconsistent planetary eyeball authority");}
 }
@@ -750,6 +784,8 @@ void DestroySwap(App &a) {
     vkDestroyPipeline(a.device,a.productionPlanetaryPipeline,nullptr);
   if (a.productionEyeballPipeline)
     vkDestroyPipeline(a.device,a.productionEyeballPipeline,nullptr);
+  if (a.anchoredTerrainPipeline)
+    vkDestroyPipeline(a.device,a.anchoredTerrainPipeline,nullptr);
   if (a.planetaryComputePipeline)
     vkDestroyPipeline(a.device,a.planetaryComputePipeline,nullptr);
   if (a.planetaryTerrainPipeline)
@@ -786,6 +822,7 @@ void DestroySwap(App &a) {
   a.planetaryPipeline = {};
   a.productionPlanetaryPipeline = {};
   a.productionEyeballPipeline = {};
+  a.anchoredTerrainPipeline = {};
   a.planetaryComputePipeline = {};
   a.planetaryTerrainPipeline = {};
   a.distantPlanetaryPipeline = {};
@@ -1196,6 +1233,7 @@ void Swap(App &a) {
   VkPipeline planetaryPipeline{};VkResult planetaryResult=vkCreateGraphicsPipelines(a.device,{},1,&planetaryCreate,nullptr,&planetaryPipeline);vkDestroyShaderModule(a.device,planetaryVs,nullptr);vkDestroyShaderModule(a.device,planetaryFs,nullptr);if(planetaryResult!=VK_SUCCESS&&planetaryPipeline)vkDestroyPipeline(a.device,planetaryPipeline,nullptr);a.Check(planetaryResult,"planetary pipeline failed");a.planetaryPipeline=planetaryPipeline;
   {VkShaderModule productionVs=Shader(a,"shaders/planetary.vert.spv"),productionFs{};try{productionFs=Shader(a,"shaders/planetary_production.frag.spv");}catch(...){vkDestroyShaderModule(a.device,productionVs,nullptr);throw;}VkPipelineShaderStageCreateInfo productionStages[2]{{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_VERTEX_BIT,productionVs,"main"},{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_FRAGMENT_BIT,productionFs,"main"}};VkGraphicsPipelineCreateInfo productionCreate=planetaryCreate;productionCreate.pStages=productionStages;productionCreate.pColorBlendState=&cb;VkResult result=vkCreateGraphicsPipelines(a.device,{},1,&productionCreate,nullptr,&a.productionPlanetaryPipeline);vkDestroyShaderModule(a.device,productionVs,nullptr);vkDestroyShaderModule(a.device,productionFs,nullptr);a.Check(result,"production cube-sphere pipeline failed");}
   {VkShaderModule eyeVs=Shader(a,"shaders/planetary_production_eyeball.vert.spv"),eyeFs{};try{eyeFs=Shader(a,"shaders/planetary_production.frag.spv");}catch(...){vkDestroyShaderModule(a.device,eyeVs,nullptr);throw;}VkPipelineShaderStageCreateInfo stages[2]{{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_VERTEX_BIT,eyeVs,"main"},{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_FRAGMENT_BIT,eyeFs,"main"}};VkVertexInputBindingDescription binding{0,sizeof(ProductionEyeballParameter),VK_VERTEX_INPUT_RATE_VERTEX};VkVertexInputAttributeDescription attribute{0,0,VK_FORMAT_R32G32_SFLOAT,0};VkPipelineVertexInputStateCreateInfo input{VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO};input.vertexBindingDescriptionCount=1;input.pVertexBindingDescriptions=&binding;input.vertexAttributeDescriptionCount=1;input.pVertexAttributeDescriptions=&attribute;VkPipelineRasterizationStateCreateInfo raster=planetaryRaster;raster.cullMode=VK_CULL_MODE_NONE;VkPipelineDepthStencilStateCreateInfo eyeDepth=depth;eyeDepth.depthCompareOp=VK_COMPARE_OP_GREATER_OR_EQUAL;VkGraphicsPipelineCreateInfo create=planetaryCreate;create.pStages=stages;create.pVertexInputState=&input;create.pRasterizationState=&raster;create.pDepthStencilState=&eyeDepth;create.pColorBlendState=&planetaryBlend;VkResult result=vkCreateGraphicsPipelines(a.device,{},1,&create,nullptr,&a.productionEyeballPipeline);vkDestroyShaderModule(a.device,eyeVs,nullptr);vkDestroyShaderModule(a.device,eyeFs,nullptr);a.Check(result,"production spherical-billboard pipeline failed");}
+  {VkShaderModule anchoredVs=Shader(a,"shaders/anchored_terrain.vert.spv"),anchoredFs{};try{anchoredFs=Shader(a,"shaders/anchored_terrain.frag.spv");}catch(...){vkDestroyShaderModule(a.device,anchoredVs,nullptr);throw;}VkPipelineShaderStageCreateInfo stages[2]{{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_VERTEX_BIT,anchoredVs,"main"},{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_FRAGMENT_BIT,anchoredFs,"main"}};VkVertexInputBindingDescription binding{0,sizeof(NcAnchoredTerrainVertex),VK_VERTEX_INPUT_RATE_VERTEX};VkVertexInputAttributeDescription attributes[4]{{0,0,VK_FORMAT_R32G32B32A32_SFLOAT,0},{1,0,VK_FORMAT_R32G32B32A32_SFLOAT,16},{2,0,VK_FORMAT_R32G32B32A32_SFLOAT,32},{3,0,VK_FORMAT_R32G32B32A32_SFLOAT,48}};VkPipelineVertexInputStateCreateInfo input{VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO};input.vertexBindingDescriptionCount=1;input.pVertexBindingDescriptions=&binding;input.vertexAttributeDescriptionCount=4;input.pVertexAttributeDescriptions=attributes;VkPipelineDepthStencilStateCreateInfo overlayDepth=depth;overlayDepth.depthCompareOp=VK_COMPARE_OP_GREATER_OR_EQUAL;VkGraphicsPipelineCreateInfo create=planetaryCreate;create.pStages=stages;create.pVertexInputState=&input;create.pDepthStencilState=&overlayDepth;create.pColorBlendState=&cb;VkResult result=vkCreateGraphicsPipelines(a.device,{},1,&create,nullptr,&a.anchoredTerrainPipeline);vkDestroyShaderModule(a.device,anchoredVs,nullptr);vkDestroyShaderModule(a.device,anchoredFs,nullptr);a.Check(result,"anchored terrain overlay pipeline failed");}
   VkShaderModule distantVs{},distantFs{};try{distantVs=Shader(a,"shaders/distant_planet.vert.spv");distantFs=Shader(a,"shaders/distant_planet.frag.spv");}catch(...){if(distantVs)vkDestroyShaderModule(a.device,distantVs,nullptr);throw;}VkPipelineShaderStageCreateInfo distantStages[2]{{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_VERTEX_BIT,distantVs,"main"},{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_FRAGMENT_BIT,distantFs,"main"}};VkVertexInputBindingDescription distantBinding{0,sizeof(DistantVertex),VK_VERTEX_INPUT_RATE_VERTEX};VkVertexInputAttributeDescription distantAttribute{0,0,VK_FORMAT_R32G32B32_SFLOAT,0};VkPipelineVertexInputStateCreateInfo distantInput{VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO};distantInput.vertexBindingDescriptionCount=1;distantInput.pVertexBindingDescriptions=&distantBinding;distantInput.vertexAttributeDescriptionCount=1;distantInput.pVertexAttributeDescriptions=&distantAttribute;VkPipelineRasterizationStateCreateInfo distantRaster=rs;distantRaster.cullMode=VK_CULL_MODE_BACK_BIT;distantRaster.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE;VkGraphicsPipelineCreateInfo distantCreate=gp;distantCreate.pStages=distantStages;distantCreate.pVertexInputState=&distantInput;distantCreate.pRasterizationState=&distantRaster;distantCreate.pColorBlendState=&planetaryBlend;VkResult distantResult=vkCreateGraphicsPipelines(a.device,{},1,&distantCreate,nullptr,&a.distantPlanetaryPipeline);VkPipelineDepthStencilStateCreateInfo handoffDepth=depth;handoffDepth.depthWriteEnable=VK_FALSE;distantCreate.pDepthStencilState=&handoffDepth;VkResult handoffResult=distantResult==VK_SUCCESS?vkCreateGraphicsPipelines(a.device,{},1,&distantCreate,nullptr,&a.distantPlanetaryHandoffPipeline):distantResult;vkDestroyShaderModule(a.device,distantVs,nullptr);vkDestroyShaderModule(a.device,distantFs,nullptr);a.Check(distantResult,"distant planetary pipeline failed");a.Check(handoffResult,"distant planetary handoff pipeline failed");
   VkShaderModule ringVs=Shader(a,"shaders/planetary_ring.vert.spv"),ringFarFs{},ringNearFs{};try{ringFarFs=Shader(a,"shaders/planetary_ring_far.frag.spv");ringNearFs=Shader(a,"shaders/planetary_ring_near.frag.spv");}catch(...){vkDestroyShaderModule(a.device,ringVs,nullptr);if(ringFarFs)vkDestroyShaderModule(a.device,ringFarFs,nullptr);throw;}VkPipelineShaderStageCreateInfo ringStages[2]{{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_VERTEX_BIT,ringVs,"main"},{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_FRAGMENT_BIT,ringFarFs,"main"}};VkPipelineRasterizationStateCreateInfo ringRaster=rs;ringRaster.cullMode=VK_CULL_MODE_NONE;VkGraphicsPipelineCreateInfo ringCreate=gp;ringCreate.pStages=ringStages;ringCreate.pVertexInputState=&distantInput;ringCreate.pRasterizationState=&ringRaster;ringCreate.pColorBlendState=&planetaryBlend;a.Check(vkCreateGraphicsPipelines(a.device,{},1,&ringCreate,nullptr,&a.planetaryRingFarPipeline),"far planetary ring pipeline failed");ringStages[1].module=ringNearFs;a.Check(vkCreateGraphicsPipelines(a.device,{},1,&ringCreate,nullptr,&a.planetaryRingNearPipeline),"near planetary ring pipeline failed");vkDestroyShaderModule(a.device,ringVs,nullptr);vkDestroyShaderModule(a.device,ringFarFs,nullptr);vkDestroyShaderModule(a.device,ringNearFs,nullptr);
   VkShaderModule stellarVs=Shader(a,"shaders/stellar_sun.vert.spv"),stellarFs{};try{stellarFs=Shader(a,"shaders/stellar_sun.frag.spv");}catch(...){vkDestroyShaderModule(a.device,stellarVs,nullptr);throw;}VkPipelineShaderStageCreateInfo stellarStages[2]{{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_VERTEX_BIT,stellarVs,"main"},{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_FRAGMENT_BIT,stellarFs,"main"}};VkGraphicsPipelineCreateInfo stellarCreate=distantCreate;stellarCreate.pStages=stellarStages;stellarCreate.pColorBlendState=&cb;VkResult stellarResult=vkCreateGraphicsPipelines(a.device,{},1,&stellarCreate,nullptr,&a.stellarSunPipeline);vkDestroyShaderModule(a.device,stellarVs,nullptr);vkDestroyShaderModule(a.device,stellarFs,nullptr);a.Check(stellarResult,"stellar Sun pipeline failed");
@@ -1318,6 +1356,8 @@ void DestroySubmission(App &a) {
   a.submissionBuffer = {};
   a.submissionMemory = {};
   DestroyPatchBuffer(a);
+  DestroyHostBuffer(a,a.anchoredTerrainBuffer,a.anchoredTerrainMemory,a.anchoredTerrainMapped);
+  a.anchoredTerrainSize=0;
   DestroyHostBuffer(a,a.gpuInputBuffer,a.gpuInputMemory,a.gpuInputMapped);
   DestroyHostBuffer(a,a.gpuWorkBuffer,a.gpuWorkMemory,a.gpuWorkMapped);
   DestroyHostBuffer(a,a.gpuNodeBuffer,a.gpuNodeMemory,a.gpuNodeMapped);
@@ -1420,6 +1460,15 @@ void EnsurePatchCapacity(App &a,uint32_t count) {
   VkWriteDescriptorSet write{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};write.dstSet=a.descriptor;write.dstBinding=1;write.descriptorCount=1;write.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;write.pBufferInfo=&info;
   vkUpdateDescriptorSets(a.device,1,&write,0,nullptr);
 }
+void EnsureAnchoredTerrainCapacity(App &a,uint32_t count) {
+  const auto required=sizeof(NcAnchoredTerrainVertex)*std::max<uint32_t>(1,count);
+  if(required<=a.anchoredTerrainSize)return;
+  vkDeviceWaitIdle(a.device);
+  DestroyHostBuffer(a,a.anchoredTerrainBuffer,a.anchoredTerrainMemory,a.anchoredTerrainMapped);
+  CreateHostBuffer(a,required,VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,a.anchoredTerrainBuffer,
+    a.anchoredTerrainMemory,a.anchoredTerrainMapped,"anchored terrain vertex buffer failed");
+  a.anchoredTerrainSize=required;
+}
 bool ProductionRootPayloadsReady(const App &a) {
   const auto *lookup=static_cast<const uint32_t*>(a.productionLayerLookupMapped);
   if(!lookup)return false;
@@ -1460,6 +1509,7 @@ void Upload(App &a) {
   // geometry at all.  Unsupported bodies retain the bounded-sphere reset.
   if(!productionSurface&&a.submission->planetaryPresentation.enabled&&a.submission->planetaryPresentation.regime==NC_PLANETARY_DISTANT_ONLY)std::memset(a.gpuControlMapped,0,sizeof(GpuPlanetaryControl));
   if(a.submission->planetaryMode==NC_PLANETARY_CPU_REFERENCE&&a.submission->planetaryPatchCount)std::memcpy(a.patchMapped,a.submission->planetaryPatches,sizeof(NcPlanetaryPatch)*a.submission->planetaryPatchCount);
+  if(a.submission->anchoredTerrainVertexCount){EnsureAnchoredTerrainCapacity(a,a.submission->anchoredTerrainVertexCount);std::memcpy(a.anchoredTerrainMapped,a.submission->anchoredTerrainVertices,sizeof(NcAnchoredTerrainVertex)*a.submission->anchoredTerrainVertexCount);}
   if (a.submission->orbitVertexCount) {
     auto needed = sizeof(NcOrbitLineVertex) * a.submission->orbitVertexCount;
     if (needed != a.orbitSize) {
@@ -1540,12 +1590,12 @@ void Record(App &a, uint32_t image) {
   RecordProductionUploads(a,c);
   RecordLocalUploads(a,c);
   vkCmdResetQueryPool(c,a.timestampQueries,0,App::TimestampCount);vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT,a.timestampQueries,0);
-  const auto &presentation=a.submission->planetaryPresentation;const bool production=a.submission->planetarySurfaceMode==NC_PLANETARY_SURFACE_PRODUCTION_CUBE;const bool handoff=presentation.enabled!=0;const bool detailedPresentation=!handoff||presentation.regime!=NC_PLANETARY_DISTANT_ONLY;const bool distantPresentation=handoff&&!production&&presentation.regime!=NC_PLANETARY_DETAILED_ONLY&&presentation.distantAlpha>0;const bool productionEyeball=production&&a.submission->planetaryEyeball.enabled!=0&&a.productionEyeballPromotion>0;const bool regional=production||detailedPresentation;const bool gpuPlanetary=regional&&a.submission->planetaryMode!=NC_PLANETARY_CPU_REFERENCE;
-  if(distantPresentation||detailedPresentation||productionEyeball||gpuPlanetary){VkMemoryBarrier hostBarrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};hostBarrier.srcAccessMask=VK_ACCESS_HOST_WRITE_BIT;hostBarrier.dstAccessMask=VK_ACCESS_SHADER_READ_BIT;VkPipelineStageFlags readers=VK_PIPELINE_STAGE_VERTEX_SHADER_BIT|VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT|(gpuPlanetary?VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT:0);vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_HOST_BIT,readers,0,1,&hostBarrier,0,nullptr,0,nullptr);}
+  const auto &presentation=a.submission->planetaryPresentation;const bool production=a.submission->planetarySurfaceMode==NC_PLANETARY_SURFACE_PRODUCTION_CUBE;const bool handoff=presentation.enabled!=0;const bool detailedPresentation=!handoff||presentation.regime!=NC_PLANETARY_DISTANT_ONLY;const bool distantPresentation=handoff&&!production&&presentation.regime!=NC_PLANETARY_DETAILED_ONLY&&presentation.distantAlpha>0;const bool diagnosticGlobal=(a.surfaceDiagnostic&SurfaceDiagnosticDisableGlobal)==0;const bool diagnosticEye=(a.surfaceDiagnostic&SurfaceDiagnosticDisableEyeball)==0;const bool diagnosticAnchored=(a.surfaceDiagnostic&SurfaceDiagnosticDisableAnchored)==0;const bool productionEyeball=diagnosticEye&&production&&a.submission->planetaryEyeball.enabled!=0&&a.submission->planetaryEyeball.blendAlpha>=.999999f&&a.productionEyeballPromotion>=.999999f;const bool regional=production||detailedPresentation;const bool gpuPlanetary=regional&&a.submission->planetaryMode!=NC_PLANETARY_CPU_REFERENCE;
+  if(distantPresentation||detailedPresentation||productionEyeball||gpuPlanetary||a.submission->anchoredTerrainVertexCount){VkMemoryBarrier hostBarrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};hostBarrier.srcAccessMask=VK_ACCESS_HOST_WRITE_BIT;hostBarrier.dstAccessMask=VK_ACCESS_SHADER_READ_BIT|(a.submission->anchoredTerrainVertexCount?VK_ACCESS_VERTEX_ATTRIBUTE_READ_BIT:0);VkPipelineStageFlags readers=VK_PIPELINE_STAGE_VERTEX_SHADER_BIT|VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT|(gpuPlanetary?VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT:0)|(a.submission->anchoredTerrainVertexCount?VK_PIPELINE_STAGE_VERTEX_INPUT_BIT:0);vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_HOST_BIT,readers,0,1,&hostBarrier,0,nullptr,0,nullptr);}
   if(gpuPlanetary){vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_COMPUTE,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_COMPUTE,a.planetaryComputePipeline);vkCmdDispatch(c,1,1,1);VkMemoryBarrier selectionBarrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};selectionBarrier.srcAccessMask=VK_ACCESS_SHADER_WRITE_BIT;selectionBarrier.dstAccessMask=VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT|VK_ACCESS_INDIRECT_COMMAND_READ_BIT;vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT|VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT,0,1,&selectionBarrier,0,nullptr,0,nullptr);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_COMPUTE,production?a.productionPlanetaryTerrainPipeline:a.planetaryTerrainPipeline);vkCmdDispatchIndirect(c,a.gpuControlBuffer,offsetof(GpuPlanetaryControl,terrainDispatch));VkMemoryBarrier computeBarrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};computeBarrier.srcAccessMask=VK_ACCESS_SHADER_WRITE_BIT;computeBarrier.dstAccessMask=VK_ACCESS_INDIRECT_COMMAND_READ_BIT|VK_ACCESS_SHADER_READ_BIT;VkPipelineStageFlags consumers=VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT|VK_PIPELINE_STAGE_VERTEX_SHADER_BIT;if(a.submission->planetaryMode==NC_PLANETARY_CPU_GPU_VALIDATION){computeBarrier.dstAccessMask|=VK_ACCESS_HOST_READ_BIT;consumers|=VK_PIPELINE_STAGE_HOST_BIT;}vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,consumers,0,1,&computeBarrier,0,nullptr,0,nullptr);}
   vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,a.timestampQueries,1);
   vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,a.timestampQueries,2);
-  NcSolarLighting lighting=a.submission->solarLighting;if(!lighting.enabled){lighting.exposure=1;lighting.ambientFloor=.025f;lighting.photosphereR=1;lighting.photosphereG=.91f;lighting.photosphereB=.68f;lighting.sourceRadiance=32;}
+  NcSolarLighting lighting=a.submission->solarLighting;if(!lighting.enabled){lighting.exposure=1;lighting.ambientFloor=.025f;lighting.photosphereR=1;lighting.photosphereG=.91f;lighting.photosphereB=.68f;lighting.sourceRadiance=32;}lighting.speedHud|=a.surfaceDiagnostic<<16;
   vkCmdPushConstants(c,a.pipelineLayout,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,0,sizeof(lighting),&lighting);
   VkClearValue clears[3]{};clears[0].color={{0,0,0,1}};clears[1].color={{0,0,0,1}};clears[2].depthStencil={0,0};
   VkRenderPassBeginInfo rp{VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO};
@@ -1575,9 +1625,10 @@ void Record(App &a, uint32_t image) {
   if(solarOverlay&&a.submission->orbitVertexCount>=2&&a.orbitBuffer){VkDeviceSize offset=0;vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.solarOrbitPipeline);vkCmdBindVertexBuffers(c,0,1,&a.orbitBuffer,&offset);vkCmdDraw(c,a.submission->orbitVertexCount,1,0,0);}
   if(solarOverlay){vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.stellarGlowPipeline);vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);vkCmdDraw(c,6,distantCount,0,0);VkDeviceSize offset=0;vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.planetaryRingFarPipeline);vkCmdBindVertexBuffers(c,0,1,&a.planetaryRing.vb,&offset);vkCmdBindIndexBuffer(c,a.planetaryRing.ib,0,VK_INDEX_TYPE_UINT32);vkCmdDrawIndexed(c,a.planetaryRing.indices,distantCount,0,0,0);}
   if(distantCount){VkDeviceSize offset=0;vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);const uint32_t firstUnfocused=handoff?1u:0u;if(distantCount>firstUnfocused){vkCmdBindVertexBuffers(c,0,1,&a.distantPlanetary.vb,&offset);vkCmdBindIndexBuffer(c,a.distantPlanetary.ib,0,VK_INDEX_TYPE_UINT32);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.distantPlanetaryPipeline);vkCmdDrawIndexed(c,a.distantPlanetary.indices,distantCount-firstUnfocused,0,0,firstUnfocused);}if(handoff&&distantPresentation){vkCmdBindVertexBuffers(c,0,1,&a.distantPlanetary.vb,&offset);vkCmdBindIndexBuffer(c,a.distantPlanetary.ib,0,VK_INDEX_TYPE_UINT32);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,!detailedPresentation?a.distantPlanetaryPipeline:a.distantPlanetaryHandoffPipeline);vkCmdDrawIndexed(c,a.distantPlanetary.indices,1,0,0,0);}}
-  if(regional&&(a.submission->planetaryPatchCount||gpuPlanetary)){VkDeviceSize offset=0;vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,production?a.productionPlanetaryPipeline:a.planetaryPipeline);vkCmdBindVertexBuffers(c,0,1,&a.planetaryPatch.vb,&offset);vkCmdBindIndexBuffer(c,a.planetaryPatch.ib,0,VK_INDEX_TYPE_UINT32);if(gpuPlanetary)vkCmdDrawIndexedIndirect(c,a.gpuControlBuffer,0,1,sizeof(VkDrawIndexedIndirectCommand));else vkCmdDrawIndexed(c,a.planetaryPatch.indices,a.submission->planetaryPatchCount,0,0,0);}
+  if(diagnosticGlobal&&regional&&(a.submission->planetaryPatchCount||gpuPlanetary)){VkDeviceSize offset=0;vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,production?a.productionPlanetaryPipeline:a.planetaryPipeline);vkCmdBindVertexBuffers(c,0,1,&a.planetaryPatch.vb,&offset);vkCmdBindIndexBuffer(c,a.planetaryPatch.ib,0,VK_INDEX_TYPE_UINT32);if(gpuPlanetary)vkCmdDrawIndexedIndirect(c,a.gpuControlBuffer,0,1,sizeof(VkDrawIndexedIndirectCommand));else vkCmdDrawIndexed(c,a.planetaryPatch.indices,a.submission->planetaryPatchCount,0,0,0);}
   vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_VERTEX_INPUT_BIT,a.timestampQueries,5);
   if(productionEyeball){const uint32_t tier=std::min<uint32_t>(a.submission->planetaryEyeball.reserved0,ProductionEyeballTierCount-1u);auto &mesh=a.productionEyeballTiers[tier];VkDeviceSize offset=0;vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.productionEyeballPipeline);vkCmdBindVertexBuffers(c,0,1,&mesh.vb,&offset);vkCmdBindIndexBuffer(c,mesh.ib,0,VK_INDEX_TYPE_UINT32);vkCmdDrawIndexed(c,mesh.indices,1,0,0,0);}
+  if(diagnosticAnchored&&a.submission->anchoredTerrainVertexCount){VkDeviceSize offset=0;vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.anchoredTerrainPipeline);vkCmdBindVertexBuffers(c,0,1,&a.anchoredTerrainBuffer,&offset);vkCmdDraw(c,a.submission->anchoredTerrainVertexCount,1,0,0);}
   vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,a.timestampQueries,6);
   if(solarOverlay){VkDeviceSize offset=0;vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.planetaryRingNearPipeline);vkCmdBindVertexBuffers(c,0,1,&a.planetaryRing.vb,&offset);vkCmdBindIndexBuffer(c,a.planetaryRing.ib,0,VK_INDEX_TYPE_UINT32);vkCmdDrawIndexed(c,a.planetaryRing.indices,distantCount,0,0,0);}
   if (!solarOverlay && a.submission->orbitVertexCount >= 2 && a.orbitBuffer) { VkDeviceSize offset = 0; vkCmdBindPipeline(c, VK_PIPELINE_BIND_POINT_GRAPHICS, a.orbitPipeline); vkCmdBindVertexBuffers(c, 0, 1, &a.orbitBuffer, &offset); vkCmdDraw(c, a.submission->orbitVertexCount, 1, 0, 0); }
@@ -1873,6 +1924,8 @@ static NcResult RunRenderer(NcFrameSubmission *s, NcHostCallback cb, void *data,
   if(assets){a.productionTerrainPath=assets->productionTerrainPathUtf8;if(assets->localTerrainPathUtf8)a.localTerrainPath=assets->localTerrainPathUtf8;}
   try {
     gApp = &a;
+    a.surfaceDiagnostic=SurfaceDiagnosticFromEnvironment();
+    if(a.surfaceDiagnostic){char message[128];std::snprintf(message,sizeof message,"Surface diagnostic isolation flags: 0x%02X",a.surfaceDiagnostic);a.Log(NC_LOG_ALWAYS,message);}
     LogLoadedRuntimePaths(a);
     Window(a);
     Instance(a);

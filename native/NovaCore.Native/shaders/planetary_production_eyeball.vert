@@ -9,7 +9,7 @@ struct Presentation { vec4 centerRadius; vec4 colorDistant; vec4 blendMetricStat
 layout(std430,set=0,binding=0) readonly buffer Frame { Camera camera; } frameData;
 layout(std430,set=0,binding=2) readonly buffer Input { vec4 cameraHighRadiusHigh; vec4 cameraLowRadiusLow; vec4 thresholds; uvec4 controls; vec4 viewForwardHalfAngle; vec4 textureDemand; } inputData;
 layout(std430,set=0,binding=6) readonly buffer Presentations { Presentation values[]; } presentations;
-layout(std430,set=0,binding=12) readonly buffer EyeballInput { vec4 cameraHighRadiusHigh; vec4 cameraLowRadiusLow; vec4 surface; uvec4 identity; vec4 tangentAnchorAngle; vec4 mapping; uvec4 topology; uvec4 reserved; } eye;
+layout(std430,set=0,binding=12) readonly buffer EyeballInput { vec4 cameraHighRadiusHigh; vec4 cameraLowRadiusLow; vec4 surface; uvec4 identity; vec4 tangentAnchorAngle; vec4 mapping; uvec4 topology; uvec4 reserved; uvec4 anchoredAddress; } eye;
 layout(std430,set=0,binding=27) readonly buffer ProductionLayers { uint values[]; } productionLayers;
 layout(set=0,binding=24) uniform sampler2DArray productionAlbedo;
 layout(set=0,binding=25) uniform sampler2DArray productionElevation;
@@ -31,6 +31,7 @@ layout(location=11) flat out uint productionLayer;
 layout(location=12) out vec2 productionUv;
 layout(location=13) flat out uvec4 productionAddress;
 layout(location=14) flat out vec2 productionTransition;
+layout(location=15) out vec2 topologyCoordinate;
 
 vec3 RotateQuaternion(vec3 point,vec4 quaternion){return point+2.0*cross(quaternion.xyz,cross(quaternion.xyz,point)+quaternion.w*point);}
 dvec3 TangentReference(dvec3 direction){return abs(direction.y)<.95?dvec3(0,1,0):dvec3(1,0,0);}
@@ -78,5 +79,5 @@ void main()
   gl_Position=frameData.camera.viewProjection*vec4(position,1);color=vec4(p.colorDistant.rgb,eye.surface.w);normal=vec3(surfaceNormal);bodyDirection=vec3(direction);terrainHeight=rawHeight;
   lightDirection=normalize(RotateQuaternion(lighting.sourceCenterExposure.xyz-p.centerRadius.xyz,vec4(-p.bodyOrientation.xyz,p.bodyOrientation.w)));
   material=uvec2(p.identity.w,p.identity.z);response=p.surface;viewDirection=-localPosition;localDetail=p.localDetail;bodyCameraHigh=eye.cameraHighRadiusHigh.xyz;bodyCameraLow=eye.cameraLowRadiusLow.xyz;
-  productionLayer=layer|0x80000000u;productionUv=localUv;productionAddress=resolvedAddress;productionTransition=vec2(1.0,0.0);
+  productionLayer=layer|0x80000000u;productionUv=localUv;productionAddress=resolvedAddress;productionTransition=vec2(1.0,0.0);topologyCoordinate=inParameter;
 }
