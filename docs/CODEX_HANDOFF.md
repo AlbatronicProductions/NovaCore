@@ -128,8 +128,15 @@ parent/child promotion and retirement. Its Florida, cube-edge, cube-corner,
 failure-fallback, memory, and stable-allocation proofs do not enter normal frame
 submission. The launcher preset maps only to
 `--scene=planetary-anchored-billboard-diagnostic`; it is not renderer authority.
-11B-7F should prove a continuous physically useful orbital-to-Florida vertical
-slice with bounded visible participation before any production-owner change.
+11B-7F proved a continuous physically useful orbital-to-Florida vertical slice.
+11B-7G promotes the exact footprint into a bounded production-capable owner:
+versioned 8/16/32-quad T0/T1/T2 tiers are uploaded once into persistent
+device-local buffers, use the shared terrain-v5/local-v2 production material
+path, and transfer geographic ownership only after complete readiness. The
+`florida-vertical-slice` preset is its explicit acceptance route; normal Solar
+may activate it only inside the canonical Florida footprint. Global terrain-v5
+and the legacy radial Eyeball remain live elsewhere, so 11B-7H must wait for
+physical 11B-7G acceptance before evaluating any broader replacement.
 Do not restore independent
 equirectangular pages, sparse regional runtime overlays, or the retired radial
 compute owner. Production atmosphere/cloud rendering is intentionally absent

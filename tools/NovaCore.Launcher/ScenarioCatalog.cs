@@ -33,7 +33,7 @@ public static class ScenarioCatalog
             NovaCoreScene.AnchoredBillboardDiagnostic, NovaCoreStartingBody.None,
             null, null, true, null),
         new(NovaCoreScenarioPreset.FloridaVerticalSlice, "Florida Vertical Slice",
-            "11B-7F bounded visible terrain-v5 to anchored T0/T1/T2 Florida descent.",
+            "11B-7G production Florida surface with persistent T0/T1/T2 residency and transactional ownership.",
             NovaCoreScene.FloridaVerticalSlice, NovaCoreStartingBody.Earth,
             null, null, true, null)
     ];

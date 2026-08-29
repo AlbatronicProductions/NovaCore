@@ -30,6 +30,7 @@ internal static class PlanetaryAnchoredBillboardHierarchyTests
         VerifyStableAllocation(hierarchy);
         VerifyPriorContracts(site);
         VerifyVisibleFloridaVerticalSlice(site);
+        VerifyProductionFloridaSurface(site);
 
         var tier0 = hierarchy.Topology(0); var tier1 = hierarchy.Topology(1);
         var tier2 = hierarchy.Topology(2);
@@ -324,7 +325,9 @@ internal static class PlanetaryAnchoredBillboardHierarchyTests
                      PlanetaryAnchoredBillboardFailure.Synchronization,
                      PlanetaryAnchoredBillboardFailure.UnavailableLocalPayload,
                      PlanetaryAnchoredBillboardFailure.IncompleteBounds,
-                     PlanetaryAnchoredBillboardFailure.Preparation })
+                     PlanetaryAnchoredBillboardFailure.Preparation,
+                     PlanetaryAnchoredBillboardFailure.MaterialPayload,
+                     PlanetaryAnchoredBillboardFailure.GpuAllocation })
         {
             Require(FloridaAnchoredVerticalSlice.TryCreate(6, EarthRadiusMetres, terrain,
                 out var failedValue, out _) && failedValue is not null, $"failure slice {failure}");
@@ -380,6 +383,105 @@ internal static class PlanetaryAnchoredBillboardHierarchyTests
                 Math.Abs(Math.Sqrt(body.LengthSquared) - (radius + terrain.SampleHeight(direction, 24))) < 2e-3d,
                 "published 7F vertex is opaque and matches physical terrain authority");
         }
+    }
+
+    private static void VerifyProductionFloridaSurface(in FloridaLaunchSite site)
+    {
+        var terrain = PlanetaryTerrainDefinition.EarthProductionCubeV5;
+        Require(FloridaAnchoredVerticalSlice.TryCreateProduction(6, EarthRadiusMetres, terrain,
+            true, out var value, out var error) && value is not null,
+            $"11B-7G production surface creation: {error}");
+        var surface = value!;
+        Require(surface.IsProduction && surface.MaterialSourcesReady &&
+            surface.Hierarchy.Footprint.DeterministicHash ==
+                PlanetaryAnchoredBillboardFootprint.AroundAnchor(site.Object.Anchor, 8).DeterministicHash,
+            "production surface retains the exact 7F geographic footprint");
+        var expectedQuads = FloridaAnchoredVerticalSlice.ProductionQuadsPerTier;
+        var expectedVertices = new[] { 384, 6_144, 98_304 };
+        var expectedTriangles = new[] { 128, 2_048, 32_768 };
+        var totalVertices = 0;
+        for (var tier = 0; tier < 3; tier++)
+        {
+            Require(surface.Hierarchy.Identity(tier).TopologyVersion ==
+                    PlanetaryAnchoredBillboardTierId.ProductionTopologyVersion &&
+                surface.Hierarchy.Topology(tier).QuadsPerPatchSide == expectedQuads[tier] &&
+                surface.TierVertexCount(tier) == expectedVertices[tier] &&
+                surface.Hierarchy.Topology(tier).Indices.Length / 3 == expectedTriangles[tier],
+                $"production tier {tier} uses its versioned density");
+            Require(surface.TierVertexOffset(tier) == totalVertices,
+                $"production tier {tier} has deterministic packed residency offset");
+            totalVertices += expectedVertices[tier];
+            VerifyOutwardWinding(surface.Hierarchy.Topology(tier));
+        }
+        Require(ReferenceEquals(surface.PersistentVertices, surface.PersistentVertices) &&
+            surface.PersistentVertices.Length == totalVertices && totalVertices * 64L == 6_709_248L,
+            "three production tiers have one bounded immutable 6.4 MiB host publication");
+
+        var anchorDirection = site.Object.Anchor.NormalizedBodyFixedDirection;
+        Require(surface.ContainsDirection(anchorDirection) &&
+            !surface.ContainsDirection(-anchorDirection),
+            "normal Solar participation is gated by the exact body-fixed Florida footprint");
+        surface.UpdateProduction(3_000_000d, true, 1_440d, Math.Tan(Math.PI / 6d));
+        Require(!surface.Visible && surface.ActiveVertexCount == 0,
+            "orbital view retains terrain-v5 fallback without anchored ownership");
+        surface.UpdateProduction(700_000d, true, 1_440d, Math.Tan(Math.PI / 6d));
+        Require(surface.Visible && surface.Hierarchy.ActiveOwnerTier == 0 &&
+            surface.ActiveVertexCount == expectedVertices[0],
+            "700 km selects production T0 from screen-space demand");
+        for (var frame = 0; frame < 8; frame++)
+            surface.UpdateProduction(100_000d, true, 1_440d, Math.Tan(Math.PI / 6d));
+        Require(surface.Hierarchy.ActiveOwnerTier == 1 &&
+            surface.ActiveVertexCount == expectedVertices[1],
+            "100 km transactionally promotes production T1");
+        for (var frame = 0; frame < 24; frame++)
+            surface.UpdateProduction(10_000d, true, 1_440d, Math.Tan(Math.PI / 6d));
+        Require(surface.Hierarchy.ActiveOwnerTier == 2 &&
+            surface.ActiveVertexCount == expectedVertices[2],
+            "10 km transactionally promotes production T2");
+        VerifyPublishedGeometry(surface, EarthRadiusMetres, terrain);
+
+        var packed = surface.PersistentVertices;
+        var before = GC.GetAllocatedBytesForCurrentThread();
+        for (var frame = 0; frame < 1_000; frame++)
+            surface.UpdateProduction(10_000d, true, 1_440d, Math.Tan(Math.PI / 6d));
+        Require(ReferenceEquals(packed, surface.PersistentVertices) &&
+            GC.GetAllocatedBytesForCurrentThread() == before,
+            "steady production ownership performs no allocation or tier repacking");
+        surface.UpdateProduction(3_000_000d, true, 1_440d, Math.Tan(Math.PI / 6d));
+        Require(!surface.Visible && surface.Hierarchy.ActiveOwnerTier == 0 &&
+            surface.Telemetry.CoverageComplete,
+            "retreat atomically restores complete terrain-v5 ownership");
+        var transactionBefore = surface.Hierarchy.Telemetry;
+        before = GC.GetAllocatedBytesForCurrentThread();
+        var traversalStart = Stopwatch.GetTimestamp();
+        const int traversalCycles = 64;
+        for (var cycle = 0; cycle < traversalCycles; cycle++)
+        {
+            surface.UpdateProduction(700_000d, true, 1_440d, Math.Tan(Math.PI / 6d));
+            surface.UpdateProduction(100_000d, true, 1_440d, Math.Tan(Math.PI / 6d));
+            surface.UpdateProduction(10_000d, true, 1_440d, Math.Tan(Math.PI / 6d));
+            Require(surface.Visible && surface.Hierarchy.ActiveOwnerTier == 2 &&
+                surface.Telemetry.CoverageComplete, "production traversal reaches complete T2");
+            surface.UpdateProduction(3_000_000d, true, 1_440d, Math.Tan(Math.PI / 6d));
+            Require(!surface.Visible && surface.Hierarchy.ActiveOwnerTier == 0 &&
+                surface.Telemetry.CoverageComplete, "production traversal restores fallback");
+        }
+        var traversalElapsed = Stopwatch.GetElapsedTime(traversalStart);
+        var transactionAfter = surface.Hierarchy.Telemetry;
+        Require(GC.GetAllocatedBytesForCurrentThread() == before &&
+            transactionAfter.PromotionCount - transactionBefore.PromotionCount == traversalCycles * 2 &&
+            transactionAfter.RetirementCount - transactionBefore.RetirementCount == traversalCycles * 2,
+            "repeated far/700 km/100 km/10 km/far traversal reuses ready tiers without allocation or ownership chatter");
+        surface.UpdateProduction(10_000d, false, 1_440d, Math.Tan(Math.PI / 6d));
+        Require(!surface.Visible, "leaving the geographic footprint cannot publish anchored ownership");
+        Require(!FloridaAnchoredVerticalSlice.TryCreateProduction(6, EarthRadiusMetres, terrain,
+            false, out var unavailable, out _) && unavailable is null,
+            "missing local material payload fails closed to the production terrain-v5 fallback");
+
+        Console.WriteLine("11B-7G production Florida: topologyVersion=2; quads=8/16/32; " +
+            "triangles=128/2048/32768; packedDeviceLocalBytes=6709248; " +
+            $"demand=screen-space; material=planetary_production; fallback=terrain-v5; " +
+            $"traversalCycles={traversalCycles}; traversalUs={traversalElapsed.TotalMicroseconds:F3}; allocationPerFrame=0");
     }
 
     private static void Promote(PlanetaryAnchoredBillboardHierarchy hierarchy, int tier)

@@ -167,6 +167,34 @@ This is not whole-Earth takeover and does not retire the radial Eyeball. Wider
 ownership must wait for physical acceptance of the Florida orbit-to-ground-to-
 orbit path.
 
+### Production Florida anchored surface (11B-7G)
+
+11B-7G retains the exact accepted 11B-7F body-fixed footprint and promotes it
+from proof presentation to a bounded production-capable owner. Versioned
+production tiers use 8/16/32 quads per patch, or 128/2,048/32,768 triangles for
+T0/T1/T2. All three expanded triangle streams are uploaded once through a
+staging transaction into 6,709,248 bytes of renderer-owned device-local memory.
+Normal frames select an already-resident tier; they do not rebuild, repack,
+read back, or upload its vertices.
+
+The production vertex path feeds the same `planetary_production.frag` material
+contract as terrain-v5. Albedo, land/ocean classification, elevation, physical
+normal, lighting response, and optional local-v2 refinement are resolved from
+interpolated body-fixed direction, so the former diagnostic colors are not a
+production material owner. Once a complete anchored tier is published, the
+global and radial-Eyeball paths discard only its exact canonical relaxed-cube
+footprint; the anchored draw owns that region opaquely. Until then, terrain-v5
+coverage remains complete. Retirement restores the complete fallback before
+anchored ownership is removed, while immutable tier buffers remain cached for
+immediate reuse.
+
+The `florida-vertical-slice` launcher preset is the explicit acceptance path.
+Normal Solar also constructs the immutable resources and may activate them only
+when production Earth is focused and the camera's body-fixed radial direction
+lies in the exact Florida footprint. Other bodies and all other Earth geography
+remain on their existing bounded owners. This milestone does not retire or
+globally replace the legacy radial Eyeball.
+
 The old equirectangular SVT page model, 5×5 predictor, per-page fallback/fade,
 deep-global near-ground refinement, and per-frame radial Eyeball compute path
 were retired in 4C. Lawful source rasters and their provenance remain offline

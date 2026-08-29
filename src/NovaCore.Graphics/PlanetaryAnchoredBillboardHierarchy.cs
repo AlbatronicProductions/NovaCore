@@ -41,7 +41,9 @@ public enum PlanetaryAnchoredBillboardFailure : byte
     Synchronization,
     UnavailableLocalPayload,
     IncompleteBounds,
-    Preparation
+    Preparation,
+    MaterialPayload,
+    GpuAllocation
 }
 
 /// <summary>
@@ -132,6 +134,7 @@ public readonly record struct PlanetaryAnchoredBillboardTierId(
     uint TopologyVersion)
 {
     public const uint CurrentTopologyVersion = 1;
+    public const uint ProductionTopologyVersion = 2;
     public bool IsValid => Anchor.IsValid && Tier is >= 0 and <= 8 && RootLevel is >= 0 and <= 24 &&
         RootLevel + Tier <= 24 && FootprintHash != 0 && TopologyVersion != 0;
     public ulong DeterministicHash
@@ -158,44 +161,47 @@ public sealed class PlanetaryAnchoredBillboardTopology
     private readonly uint[] _indices;
 
     private PlanetaryAnchoredBillboardTopology(PlanetaryAnchoredMeshVertexId[] vertices,
-        uint[] indices, ulong hash)
+        uint[] indices, int quadsPerPatchSide, ulong hash)
     {
-        _vertices = vertices; _indices = indices; DeterministicHash = hash;
+        _vertices = vertices; _indices = indices; QuadsPerPatchSide = quadsPerPatchSide;
+        DeterministicHash = hash;
     }
 
     public ReadOnlySpan<PlanetaryAnchoredMeshVertexId> Vertices => _vertices;
     public ReadOnlySpan<uint> Indices => _indices;
+    public int QuadsPerPatchSide { get; }
     public ulong DeterministicHash { get; }
     public long PersistentBytes => (long)_vertices.Length * 32L + (long)_indices.Length * sizeof(uint);
 
     public static PlanetaryAnchoredBillboardTopology Create(
-        in PlanetaryAnchoredBillboardTierId identity, ReadOnlySpan<PlanetarySurfacePatchId> patches)
+        in PlanetaryAnchoredBillboardTierId identity, ReadOnlySpan<PlanetarySurfacePatchId> patches,
+        int quadsPerPatchSide = ProofQuadsPerPatchSide)
     {
-        if (!identity.IsValid || patches.IsEmpty) throw new ArgumentOutOfRangeException();
+        if (!identity.IsValid || patches.IsEmpty || quadsPerPatchSide is < 1 or > 64)
+            throw new ArgumentOutOfRangeException();
         var vertices = new List<PlanetaryAnchoredMeshVertexId>();
         var lookup = new Dictionary<PlanetaryAnchoredMeshVertexId, uint>();
-        var indices = new uint[checked(patches.Length * ProofQuadsPerPatchSide *
-            ProofQuadsPerPatchSide * 6)];
-        Span<uint> grid = stackalloc uint[(ProofQuadsPerPatchSide + 1) *
-            (ProofQuadsPerPatchSide + 1)];
+        var indices = new uint[checked(patches.Length * quadsPerPatchSide *
+            quadsPerPatchSide * 6)];
+        var grid = new uint[checked((quadsPerPatchSide + 1) * (quadsPerPatchSide + 1))];
         var cursor = 0;
         foreach (ref readonly var patch in patches)
         {
-            for (var y = 0; y <= ProofQuadsPerPatchSide; y++)
-                for (var x = 0; x <= ProofQuadsPerPatchSide; x++)
+            for (var y = 0; y <= quadsPerPatchSide; y++)
+                for (var x = 0; x <= quadsPerPatchSide; x++)
                 {
                     var vertex = PlanetaryAnchoredMeshVertexId.FromPatchGrid(patch, x, y,
-                        ProofQuadsPerPatchSide);
+                        quadsPerPatchSide);
                     if (!lookup.TryGetValue(vertex, out var index))
                     {
                         index = (uint)vertices.Count; vertices.Add(vertex); lookup.Add(vertex, index);
                     }
-                    grid[y * (ProofQuadsPerPatchSide + 1) + x] = index;
+                    grid[y * (quadsPerPatchSide + 1) + x] = index;
                 }
-            for (var y = 0; y < ProofQuadsPerPatchSide; y++)
-                for (var x = 0; x < ProofQuadsPerPatchSide; x++)
+            for (var y = 0; y < quadsPerPatchSide; y++)
+                for (var x = 0; x < quadsPerPatchSide; x++)
                 {
-                    var row = ProofQuadsPerPatchSide + 1;
+                    var row = quadsPerPatchSide + 1;
                     Add(grid[y * row + x], grid[(y + 1) * row + x + 1], grid[y * row + x + 1]);
                     Add(grid[y * row + x], grid[(y + 1) * row + x], grid[(y + 1) * row + x + 1]);
                 }
@@ -209,7 +215,7 @@ public sealed class PlanetaryAnchoredBillboardTopology
             hash = AnchoredMeshHash.Mix(hash, (ulong)vertex.Denominator);
         }
         foreach (var index in indices) hash = AnchoredMeshHash.Mix(hash, index);
-        return new(vertices.ToArray(), indices, hash);
+        return new(vertices.ToArray(), indices, quadsPerPatchSide, hash);
 
         void Add(uint a, uint b, uint c)
         {
@@ -248,20 +254,26 @@ public sealed class PlanetaryAnchoredBillboardHierarchy
     private int _retirements;
 
     public PlanetaryAnchoredBillboardHierarchy(PlanetaryAnchoredBillboardFootprint footprint,
-        int tierCount = 3)
+        int tierCount = 3, int[]? quadsPerTier = null,
+        uint topologyVersion = PlanetaryAnchoredBillboardTierId.CurrentTopologyVersion)
     {
         ArgumentNullException.ThrowIfNull(footprint);
         if (tierCount is < 2 or > 5 || footprint.RootLevel + tierCount - 1 > 24)
             throw new ArgumentOutOfRangeException(nameof(tierCount));
+        if (quadsPerTier is not null && (quadsPerTier.Length != tierCount ||
+            quadsPerTier.Any(value => value is < 1 or > 64)))
+            throw new ArgumentOutOfRangeException(nameof(quadsPerTier));
+        if (topologyVersion == 0) throw new ArgumentOutOfRangeException(nameof(topologyVersion));
         Footprint = footprint; _tiers = new Tier[tierCount];
         var patches = footprint.Roots.ToArray();
         for (var tier = 0; tier < tierCount; tier++)
         {
             var identity = new PlanetaryAnchoredBillboardTierId(footprint.Anchor, tier,
                 footprint.RootLevel, footprint.DeterministicHash,
-                PlanetaryAnchoredBillboardTierId.CurrentTopologyVersion);
+                topologyVersion);
+            var quads = quadsPerTier?[tier] ?? PlanetaryAnchoredBillboardTopology.ProofQuadsPerPatchSide;
             _tiers[tier] = new Tier(identity, patches,
-                PlanetaryAnchoredBillboardTopology.Create(identity, patches));
+                PlanetaryAnchoredBillboardTopology.Create(identity, patches, quads));
             if (tier + 1 < tierCount) patches = Refine(patches);
         }
         _tiers[0].PrepareAll(); _tiers[0].State = PlanetaryAnchoredBillboardTierState.Authoritative;

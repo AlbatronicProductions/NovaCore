@@ -178,9 +178,10 @@ dotnet build tools/NovaCore.Launcher/NovaCore.Launcher.csproj -c Debug
 
 Then double-click `tools/NovaCore.Launcher/bin/Debug/net10.0-windows/NovaCore.Launcher.exe`.
 The launcher provides supported Solar, Earth, Florida launch-site, planetary-diagnostic,
-subdivision-diagnostic, anchored-tier, and opt-in Florida Vertical Slice presets. The
-Florida Vertical Slice is a bounded 11B-7F diagnostic; normal Solar remains on the
-terrain-v5 plus production radial-Eyeball path. The launcher shows the exact generated
+subdivision-diagnostic, anchored-tier, and Florida Vertical Slice presets. The Florida
+Vertical Slice exercises the bounded 11B-7G production surface, and normal Solar enables
+that same path only inside its exact body-fixed Florida footprint. Outside it, terrain-v5
+plus the production radial-Eyeball path remains authoritative. The launcher shows the exact generated
 command and starts the existing NovaCore sample. The command-line workflow remains
 authoritative and available for advanced development and testing.
 

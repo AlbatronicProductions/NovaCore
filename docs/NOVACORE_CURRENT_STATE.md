@@ -115,6 +115,22 @@ ocean/land/alpine material and does not claim final material parity, global
 ownership, or radial-Eyeball retirement. Normal `earth` and `sol` construct no
 11B-7F state or draw submission.
 
+11B-7G promotes that accepted footprint into a production-capable bounded
+surface path. Its explicitly versioned T0/T1/T2 geometry uses 8/16/32 quads per
+patch and lives in three immutable device-local buffers (6,709,248 bytes total)
+uploaded once at renderer startup. Promotion still transfers exact geographic
+ownership only after a complete tier is ready; fallback is restored before
+retirement, and the ready resources remain cached. Anchored fragments use the
+same terrain-v5 plus local-v2 material, classification, physical-normal, and
+lighting path as the surrounding production surface rather than the 7F
+diagnostic colors.
+
+`florida-vertical-slice` now exercises this production path. Normal `sol` also
+keeps the resources resident and may activate them only for focused production
+Earth inside the canonical body-fixed Florida footprint. Outside that footprint
+the terrain-v5/global and legacy radial-Eyeball owners remain unchanged. 11B-7G
+is deliberately not global Eyeball retirement.
+
 4C/11B-4 remove the superseded equirectangular SVT descriptors,
 request/upload/page cache, independent fallback/fade, sparse regional overlay,
 deep-global close-range ownership, and per-frame radial Eyeball compute
