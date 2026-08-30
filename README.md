@@ -177,13 +177,12 @@ dotnet build tools/NovaCore.Launcher/NovaCore.Launcher.csproj -c Debug
 ```
 
 Then double-click `tools/NovaCore.Launcher/bin/Debug/net10.0-windows/NovaCore.Launcher.exe`.
-The launcher provides supported Solar, Earth, Florida launch-site, planetary-diagnostic,
-subdivision-diagnostic, anchored-tier, and Florida Vertical Slice presets. The Florida
-Vertical Slice exercises the bounded 11B-7G production surface, and normal Solar enables
-that same path only inside its exact body-fixed Florida footprint. Outside it, terrain-v5
-plus the production radial-Eyeball path remains authoritative. The launcher shows the exact generated
-command and starts the existing NovaCore sample. The command-line workflow remains
-authoritative and available for advanced development and testing.
+The launcher provides Solar overview, Earth orbital, Earth 700 km, Earth —
+Fullscreen Native, Florida launch-site, and one screen-space subdivision
+diagnostic workflow. Window mode, native or explicit client resolution, and
+normal/performance/Vulkan diagnostics are selected independently. The launcher
+shows the resolved client dimensions and starts the existing NovaCore sample;
+no shell environment setup is required.
 
 Current Solar-scene controls include mouse drag for free orbiting, mouse wheel zoom, number-key body focus, `.` / `,` simulation-rate changes, Space pause/resume, and `R` to return to the deterministic Solar Map home view.
 
@@ -199,7 +198,7 @@ The current Desktop baseline uses one production-owned Earth surface architectur
 - explicit host-to-compute publication synchronization and runtime terrain-version identity instead of stale hard-coded assumptions;
 - FP64 camera-relative reconstruction, body-fixed surface anchors, and anchored-object evaluation downstream of unchanged celestial authority.
 
-The former equirectangular virtual-texture owner and per-frame radial terrain generator are retired. The current renderer is a stable architectural and reference baseline, not the final visual target: deeper continuous refinement, richer surface materials, and gameplay-scale environmental detail remain active development.
+The current renderer is a stable architectural and reference baseline, not the final visual target: deeper continuous refinement, richer surface materials, and gameplay-scale environmental detail remain active development.
 
 ## Accuracy and current scope
 
@@ -207,7 +206,7 @@ The former equirectangular virtual-texture owner and per-frame radial terrain ge
 
 The new high-precision Moon orientation improves pole, prime-meridian, and physical-libration presentation; it does not improve lunar translation. Precision translunar targeting, lunar orbit insertion, close lunar navigation, or other requirements that exceed the compact translational model's measured accuracy will receive a dedicated higher-fidelity ephemeris layer when those requirements exist.
 
-NovaCore now has a production-owned terrain architecture, but its terrain-v5 global payload is still shallow. The former provisional atmosphere/cloud renderer has been retired. Production atmosphere, clouds, water/coastlines, physical oceans, weather, complete spacecraft flight gameplay, colonies, maneuver planning, and SOI/patched-conic navigation are not yet implemented.
+NovaCore now has a production-owned terrain architecture, but its terrain-v5 global payload is still shallow. Production atmosphere, clouds, water/coastlines, physical oceans, weather, complete spacecraft flight gameplay, colonies, maneuver planning, and SOI/patched-conic navigation are not yet implemented.
 
 ## Roadmap
 

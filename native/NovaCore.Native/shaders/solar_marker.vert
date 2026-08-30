@@ -2,11 +2,11 @@
 struct EncodedPosition { vec4 high; vec4 low; };
 struct GpuCameraData { EncodedPosition position; mat4 viewProjection; };
 layout(std430,set=0,binding=0) readonly buffer Frame { GpuCameraData camera; } frameData;
-struct Presentation { vec4 centerRadius; vec4 colorDistant; vec4 blendMetricState; uvec4 identity; vec4 surface; uvec4 hooks; vec4 ringGeometry; vec4 ringOrientation; vec4 ringColor; vec4 bodyOrientation; vec4 localDetail; };
+struct Presentation { vec4 centerRadius; vec4 colorDistant; vec4 blendMetricState; uvec4 identity; vec4 surface; uvec4 hooks; vec4 ringGeometry; vec4 ringOrientation; vec4 ringColor; vec4 bodyOrientation; vec4 localDetail; vec4 centerLow; };
 layout(std430,set=0,binding=6) readonly buffer Presentations { Presentation values[]; } presentations;
 layout(location=0) out vec4 color;
 void main(){
-  Presentation p=presentations.values[gl_InstanceIndex];vec4 clip=frameData.camera.viewProjection*vec4(p.centerRadius.xyz,1.0);
+  Presentation p=presentations.values[gl_InstanceIndex];vec4 clip=frameData.camera.viewProjection*vec4(p.centerRadius.xyz,1.0)+frameData.camera.viewProjection*vec4(p.centerLow.xyz,0.0);
   uint enabled=floatBitsToUint(p.blendMetricState.w);
   if(clip.w<=0.0||(enabled&0x10000000u)==0u){gl_Position=vec4(2.0,2.0,2.0,1.0);return;}
   const vec2 corners[6]=vec2[](vec2(0,0),vec2(1,0),vec2(1,1),vec2(0,0),vec2(1,1),vec2(0,1));

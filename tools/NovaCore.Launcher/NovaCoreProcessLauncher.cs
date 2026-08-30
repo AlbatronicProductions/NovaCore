@@ -6,7 +6,7 @@ public sealed record NovaCoreLaunchPlan(
     string FileName,
     IReadOnlyList<string> Arguments,
     string WorkingDirectory,
-    bool EnableVulkanValidation)
+    IReadOnlyDictionary<string, string> EnvironmentVariables)
 {
     public string DisplayCommand => string.Join(' ',
         new[] { Quote(FileName) }.Concat(Arguments.Select(Quote)));
@@ -33,10 +33,11 @@ public static class NovaCoreProcessLauncher
         }
 
         var sceneArguments = LaunchCommandBuilder.BuildArguments(configuration);
+        var environment = LaunchCommandBuilder.BuildEnvironment(configuration);
         var builtExecutable = Path.Combine(root, "samples", "NovaCore.Triangle", "bin", "Debug", "net10.0", "NovaCore.Triangle.exe");
         if (File.Exists(builtExecutable))
         {
-            return new NovaCoreLaunchPlan(builtExecutable, sceneArguments, root, configuration.EnableVulkanValidation);
+            return new NovaCoreLaunchPlan(builtExecutable, sceneArguments, root, environment);
         }
 
         var arguments = new List<string>(8 + sceneArguments.Count)
@@ -49,7 +50,7 @@ public static class NovaCoreProcessLauncher
             "--"
         };
         arguments.AddRange(sceneArguments);
-        return new NovaCoreLaunchPlan("dotnet", arguments, root, configuration.EnableVulkanValidation);
+        return new NovaCoreLaunchPlan("dotnet", arguments, root, environment);
     }
 
     public static Process Launch(NovaCoreLaunchPlan plan)
@@ -67,9 +68,13 @@ public static class NovaCoreProcessLauncher
             startInfo.ArgumentList.Add(argument);
         }
 
-        if (plan.EnableVulkanValidation)
+        // Diagnostics are authoritative launcher state. Do not let a Vulkan
+        // validation layer inherited from the launcher process turn Normal or
+        // Performance-only launches into validation runs.
+        startInfo.Environment.Remove("VK_INSTANCE_LAYERS");
+        foreach (var (name, value) in plan.EnvironmentVariables)
         {
-            startInfo.Environment["VK_INSTANCE_LAYERS"] = "VK_LAYER_KHRONOS_validation";
+            startInfo.Environment[name] = value;
         }
 
         return Process.Start(startInfo) ??

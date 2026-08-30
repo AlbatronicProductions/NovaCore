@@ -2,7 +2,7 @@
 struct EncodedPosition { vec4 high; vec4 low; };
 struct GpuCameraData { EncodedPosition position; mat4 viewProjection; };
 layout(std430,set=0,binding=0) readonly buffer Frame { GpuCameraData camera; } frameData;
-struct Presentation { vec4 centerRadius; vec4 colorDistant; vec4 blendMetricState; uvec4 identity; vec4 surface; uvec4 hooks; vec4 ringGeometry; vec4 ringOrientation; vec4 ringColor; vec4 bodyOrientation; vec4 localDetail; };
+struct Presentation { vec4 centerRadius; vec4 colorDistant; vec4 blendMetricState; uvec4 identity; vec4 surface; uvec4 hooks; vec4 ringGeometry; vec4 ringOrientation; vec4 ringColor; vec4 bodyOrientation; vec4 localDetail; vec4 centerLow; };
 layout(std430,set=0,binding=6) readonly buffer Presentations { Presentation values[]; } presentations;
 layout(location=0) out vec2 glyphUv;
 layout(location=1) flat out int characterCode;
@@ -20,7 +20,7 @@ int LabelCharacter(int id,int index){
 
 void main(){
   int character=int(gl_VertexIndex/6);int corner=int(gl_VertexIndex%6);glyphUv=Corners[corner];characterCode=0;labelColor=vec4(0);
-  Presentation p=presentations.values[gl_InstanceIndex];uint enabled=floatBitsToUint(p.blendMetricState.w);vec4 clip=frameData.camera.viewProjection*vec4(p.centerRadius.xyz,1.0);int id=int(enabled&255u);
+  Presentation p=presentations.values[gl_InstanceIndex];uint enabled=floatBitsToUint(p.blendMetricState.w);vec4 clip=frameData.camera.viewProjection*vec4(p.centerRadius.xyz,1.0)+frameData.camera.viewProjection*vec4(p.centerLow.xyz,0.0);int id=int(enabled&255u);
   if((enabled&0x40000000u)==0u||clip.w<=0.0||character>=LabelLength(id)){gl_Position=vec4(2,2,2,1);return;}
   bool focused=(enabled&0x80000000u)!=0u;vec2 anchor=clip.xy/clip.w;float yBase=focused?.013:.009;
   vec2 offset=vec2(.009+float(character)*.0103,yBase)+Corners[corner]*vec2(.009,.021);

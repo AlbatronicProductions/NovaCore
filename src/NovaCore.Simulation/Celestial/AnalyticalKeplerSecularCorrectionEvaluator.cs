@@ -6,6 +6,57 @@ namespace NovaCore.Simulation.Celestial;
 /// <summary>Pure deterministic secular rotation and mean-anomaly-rate correction around a universal-variable state.</summary>
 internal static class AnalyticalKeplerSecularCorrectionEvaluator
 {
+    /// <summary>
+    /// Applies the non-Keplerian orientation, phase, and radial terms at one authoritative instant to
+    /// a position on the immutable parent-local two-body orbit. Every point in a displayed orbit uses
+    /// the same requested instant; sample phase is carried only by <paramref name="uncorrectedPosition"/>.
+    /// </summary>
+    internal static bool TryApplyPositionAtAuthorityTime(
+        in Double3 uncorrectedPosition,
+        in CartesianState seed,
+        SimulationInstant epoch,
+        SimulationInstant requested,
+        in AnalyticalKeplerSecularCorrection correction,
+        AnalyticalKeplerPeriodicCorrection periodic,
+        out Double3 correctedPosition)
+    {
+        correctedPosition = default;
+        if (!uncorrectedPosition.IsFinite || !seed.IsFinite || !correction.IsValid || periodic is null || !periodic.IsValid)
+            return false;
+        if (correction.IsIdentity && periodic.IsIdentity)
+        {
+            correctedPosition = uncorrectedPosition;
+            return true;
+        }
+
+        double seconds;
+        try { seconds = (requested - epoch).Ticks / (double)SimulationInstant.TicksPerSecond; }
+        catch (OverflowException) { return false; }
+        var normal = Double3.Cross(seed.Position, seed.Velocity);
+        var normalLength = Math.Sqrt(normal.LengthSquared);
+        if (!double.IsFinite(normalLength) || normalLength <= 0d) return false;
+        normal /= normalLength;
+
+        EvaluatePeriodicPositionTerms(periodic, seconds, out var radialOffset, out var phaseOffset);
+        var position = Rotate(uncorrectedPosition, normal,
+            correction.PeriapsisRateRadiansPerSecond * seconds + phaseOffset);
+        var planeRate = Math.Sqrt(correction.ReferencePlaneAngularVelocity.LengthSquared);
+        if (planeRate > 0d)
+        {
+            var planeAxis = correction.ReferencePlaneAngularVelocity / planeRate;
+            position = Rotate(position, planeAxis, planeRate * seconds);
+        }
+        if (radialOffset != 0d)
+        {
+            var radius = Math.Sqrt(position.LengthSquared);
+            if (!double.IsFinite(radius) || radius <= 0d || !double.IsFinite(radius + radialOffset) || radius + radialOffset <= 0d)
+                return false;
+            position *= (radius + radialOffset) / radius;
+        }
+        correctedPosition = position;
+        return correctedPosition.IsFinite;
+    }
+
     internal static bool TryScaleTime(SimulationInstant epoch, SimulationInstant requested, in AnalyticalKeplerSecularCorrection correction, out SimulationInstant scaled)
     {
         scaled = default;
@@ -74,6 +125,22 @@ internal static class AnalyticalKeplerSecularCorrectionEvaluator
         }
         corrected = new(position, velocity);
         return corrected.IsFinite;
+    }
+
+    private static void EvaluatePeriodicPositionTerms(AnalyticalKeplerPeriodicCorrection periodic, double seconds,
+        out double radialOffset, out double phaseOffset)
+    {
+        radialOffset = 0d;
+        phaseOffset = 0d;
+        for (var index = 0; index < periodic.Count; index++)
+        {
+            var term = periodic.GetTerm(index);
+            var angle = term.AngularFrequencyRadiansPerSecond * seconds;
+            var sine = Math.Sin(angle);
+            var cosine = Math.Cos(angle);
+            radialOffset += term.RadialSineAmplitudeMetres * sine + term.RadialCosineAmplitudeMetres * (cosine - 1d);
+            phaseOffset += term.PhaseSineAmplitudeRadians * sine + term.PhaseCosineAmplitudeRadians * (cosine - 1d);
+        }
     }
 
     private static Double3 Rotate(Double3 value, Double3 axis, double angle)

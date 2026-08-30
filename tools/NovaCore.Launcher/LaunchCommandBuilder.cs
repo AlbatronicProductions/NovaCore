@@ -41,17 +41,43 @@ public static class LaunchCommandBuilder
             arguments.Add("--log=validation");
         }
 
+        if (configuration.EnablePerformanceTelemetry)
+        {
+            arguments.Add("--log=vulkan");
+        }
+
         return arguments;
+    }
+
+    public static IReadOnlyDictionary<string, string> BuildEnvironment(
+        NovaCoreLaunchConfiguration configuration)
+    {
+        ArgumentNullException.ThrowIfNull(configuration);
+        if (configuration.ClientResolution.Width is < 320 or > 8192 ||
+            configuration.ClientResolution.Height is < 320 or > 8192)
+        {
+            throw new ArgumentOutOfRangeException(nameof(configuration), "Resolved client dimensions are outside the native window domain.");
+        }
+
+        var environment = new Dictionary<string, string>(StringComparer.Ordinal)
+        {
+            ["NOVACORE_WINDOW_CLIENT_WIDTH"] = configuration.ClientResolution.Width.ToString(CultureInfo.InvariantCulture),
+            ["NOVACORE_WINDOW_CLIENT_HEIGHT"] = configuration.ClientResolution.Height.ToString(CultureInfo.InvariantCulture),
+            ["NOVACORE_WINDOW_BORDERLESS"] = configuration.WindowMode == NovaCoreWindowMode.BorderlessFullscreen ? "1" : "0"
+        };
+        if (configuration.EnableVulkanValidation)
+        {
+            environment["VK_INSTANCE_LAYERS"] = "VK_LAYER_KHRONOS_validation";
+        }
+
+        return environment;
     }
 
     private static string SceneArgument(NovaCoreScene scene) => scene switch
     {
         NovaCoreScene.Solar => "sol",
         NovaCoreScene.Earth => "earth",
-        NovaCoreScene.PlanetaryDiagnostic => "planetary-diagnostic",
         NovaCoreScene.SubdivisionDiagnostic => "planetary-subdivision-diagnostic",
-        NovaCoreScene.AnchoredBillboardDiagnostic => "planetary-anchored-billboard-diagnostic",
-        NovaCoreScene.FloridaVerticalSlice => "florida-vertical-slice",
         _ => throw new ArgumentOutOfRangeException(nameof(scene), scene, null)
     };
 }

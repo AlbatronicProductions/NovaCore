@@ -19,7 +19,7 @@
   "contentManifest": "tests/fixtures/terrain/tiny-local.content.json",
   "generator": {
     "tool": "tools/earth_data/build_local_terrain_pack.py",
-    "version": "NCCUBE2/BC7-BC4-BC5-local-v1",
+    "version": "NCCUBE2/BC7-BC4-BC5-local-v2-east-positive",
     "executable": "python",
     "arguments": ["--fixture", "--sector-level", "4", "--output", "{output}"]
   },

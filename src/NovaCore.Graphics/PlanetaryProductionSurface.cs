@@ -116,7 +116,7 @@ public static class RelaxedCubeSphereProjection
     /// <summary>
     /// Projects a finite point on the surface of the canonical cube through the
     /// same relaxed-cube equation used by production patches. This is the
-    /// face-independent seam used by dormant anchored mesh topology: a shared
+    /// face-independent seam used by anchored mesh topology: a shared
     /// rational cube point is projected once, regardless of which incident face
     /// derived it.
     /// </summary>

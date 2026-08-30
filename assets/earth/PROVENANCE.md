@@ -1,88 +1,72 @@
-# NovaCore Earth presentation data provenance
+# NovaCore Earth data provenance
 
-NovaCore's Earth runtime dataset is a deterministic derivative of public U.S.
-government scientific data. The original rasters remain logically separate in
-the preprocessor and the runtime pack preserves separate albedo, land-mask,
-elevation, and cloud channels.
+NovaCore's current Earth payloads are deterministic derivatives of public U.S.
+government scientific data. Source channels remain logically separate during
+offline processing.
 
 ## True-color albedo
 
 - NASA Earth Observatory / Visible Earth, *Blue Marble: Next Generation*,
-  December 2004, cloud-free true color, 21600 × 10800, EPSG:4326.
-- Source file: `world.200412.3x21600x10800.png`, retrieved 2026-08-12.
-- Source: <https://eoimages.gsfc.nasa.gov/images/imagerecords/74000/74218/world.200412.3x21600x10800.png>
-- SHA-256: `4ee45a0a18229e5667b3523088567e11ea4d857ceac8d7a2d7b6130d5376c5a6`.
-- NASA makes the collection free and open to use. NASA media guidance applies;
-  NovaCore does not imply NASA endorsement.
+  December 2004, cloud-free true color, 21,600 × 10,800, EPSG:4326.
+- Repository source: `source/nasa-blue-marble-2004-12-21600x10800.png`.
+- Original URL:
+  <https://eoimages.gsfc.nasa.gov/images/imagerecords/74000/74218/world.200412.3x21600x10800.png>
+- SHA-256:
+  `4ee45a0a18229e5667b3523088567e11ea4d857ceac8d7a2d7b6130d5376c5a6`.
+- NASA media guidance applies; NovaCore does not imply NASA endorsement.
 
-The production runtime samples this lawful equirectangular source offline into
-the body-fixed relaxed cube-sphere hierarchy. Each 256-pixel patch receives a
-four-texel canonical spherical gutter that crosses cube-face edges through the
-same projection used by runtime geometry. The source raster is not a runtime
-addressing system. The superseded 5400 × 2700 JPEG remains checked only as
-prior-source provenance; it is not used by the current runtime pack.
-
-## Elevation and land/ocean classification
+## Elevation and land classification
 
 - NOAA National Centers for Environmental Information, *ETOPO 2022 15
   Arc-Second Global Relief Model*, ice-surface variant distributed at 60
   arc-seconds, EPSG:4326.
-- DOI: <https://doi.org/10.25921/fd45-gt74>
-- Source file: `ETOPO_2022_v1_60s_N90W180_surface.tif`.
-- The dataset metadata states that it is not subject to U.S. copyright
-  protection. It is not suitable for navigation. NovaCore derives its binary
-  land/ocean mask from the zero-metre elevation contour.
+- DOI: <https://doi.org/10.25921/fd45-gt74>.
+- Source filename: `ETOPO_2022_v1_60s_N90W180_surface.tif`.
+- Dataset metadata states that it is not subject to U.S. copyright protection
+  and is not suitable for navigation.
+- NovaCore derives the land/ocean classification from the zero-metre contour.
+
+The source TIFF is not a tracked runtime blob. The current checked CPU oracle is
+`runtime/earth_elevation_8192x4096.r16` and is reproduced by
+`tools/earth_data/build_elevation_oracle.py`.
 
 ## Clouds
 
-- NASA Visible Earth, *Blue Marble: Clouds*, global 2048 × 1024 cloud layer.
-- Source file: `cloud_combined_2048.jpg`.
-- Source: <https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57747/cloud_combined_2048.jpg>
+- NASA Visible Earth, *Blue Marble: Clouds*, 2,048 × 1,024.
+- Repository source: `source/nasa-blue-marble-clouds-2048.jpg`.
+- Original URL:
+  <https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57747/cloud_combined_2048.jpg>.
 - NASA media guidance applies; NovaCore does not imply NASA endorsement.
 
-## Reproduction
+## Current payloads
 
-Run `tools/earth_data/build_elevation_oracle.py` to reproduce the checked
-8192 × 4096 signed-elevation CPU oracle, then run
-`tools/earth_data/build_cube_surface_pack.py` with the authoritative albedo,
-elevation, and cloud sources to reproduce `earth_surface_v5.nccube`. NumPy
-2.3.5 and Pillow 11.3.0 are pinned offline build dependencies. The terrain-v5
-manifest records source hashes, patch identity, channel layout, payload hashes,
-and the complete L0–L2 hierarchy. Its 126 records are addressed by
-`body / terrain-version / face / level / x / y`; RGB8 sRGB albedo, R16
-elevation, R8 land mask, and R8 cloud data for one patch are one transaction.
-The pack is 61,484,224 bytes with SHA-256
-`38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae`.
+`tools/earth_data/build_cube_surface_pack.py` builds `earth_surface_v5.nccube`
+from the current albedo, elevation oracle, and cloud sources. Its tracked asset
+identity is `assets/terrain/manifests/earth-surface-v5.json`:
 
-Terrain-v5 formalizes NovaCore's right-handed geographic convention: +Y is
-north, longitude zero is +X, and positive/east longitude advances toward -Z.
-The conventional EPSG:4326 source U axis is sampled through that mapping. This
-corrects the mirrored-longitude semantics of the superseded terrain-v4/global
-and local-v1 products without changing or concealing their historical hashes.
-The sparse local companion is `earth_local_v2.nccube`, terrain version 5,
-payload version 2, 7,652,567 bytes, SHA-256
-`60ada8949bfd782dfaea6c04270186bda52654d7263fbc3dbda5eaa4fd2e578a`.
-Its canonical distribution identity is tracked in
-`assets/terrain/manifests/earth-local-v2.json`; the local pack is generated by
-`tools/earth_data/build_local_terrain_pack.py` from the same lawful albedo and
-elevation authority.
+- body ID 6, terrain version 5;
+- complete relaxed cube-sphere L0-L2 hierarchy;
+- 126 patch-aligned records;
+- RGB8 sRGB albedo, R16 elevation, R8 land classification, R8 clouds;
+- byte size 61,484,224;
+- SHA-256
+  `38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae`.
 
-The generated production payload is not tracked as an ordinary Git blob. Its
-canonical byte size and SHA-256 are retained in
-`assets/terrain/manifests/earth-surface-v5.json`; explicit asset tooling
-regenerates or installs it atomically into the content-addressed runtime cache.
-This provenance and all lawful source manifests remain tracked.
+`tools/earth_data/build_local_terrain_pack.py` builds the optional
+`earth_local_v2.nccube` from the same lawful albedo and elevation authority. Its
+tracked identity is `assets/terrain/manifests/earth-local-v2.json`:
 
-## Retired Mount St. Helens bounded regional proof
+- terrain version 5, payload format version 2;
+- sparse level-12 relaxed cube-sphere records;
+- BC7 albedo, BC4 height, BC5 normal payloads;
+- byte size 7,652,567;
+- SHA-256
+  `60ada8949bfd782dfaea6c04270186bda52654d7263fbc3dbda5eaa4fd2e578a`.
 
-The historical regional proof used bounded exports from the official USGS NAIP
-and 3DEP ImageServer services. Its complete product names, acquisition and
-service dates, public-domain terms, attribution, export queries, CRS, vertical
-datum, dimensions, byte counts, and SHA-256 values are checked in
-`source/regional/mount_st_helens/source.json`. The source GeoTIFFs total
-30,677,362 bytes. Its equirectangular `.ncvreg` builder and runtime pack were
-retired in 4C because production terrain-v5 no longer admits independently
-visible regional pages. The lawful source files and manifest remain as
-scientific provenance for a future patch-aligned cube-surface ingestion path.
-See `docs/planetary-data-ingestion.md` for the archived proof and retirement
-boundary.
+The geographic convention is right-handed: +Y north, +X at longitude zero,
+and east-positive longitude toward -Z. Offline source sampling converts the
+EPSG:4326 raster into canonical face-aligned records and cross-face gutters.
+
+Generated payloads are installed through `NovaCore.AssetTool` into the ignored
+content-addressed runtime cache. Normal runtime performs no implicit download.
+NumPy 2.3.5 and Pillow 11.3.0 are the pinned offline Python dependencies.

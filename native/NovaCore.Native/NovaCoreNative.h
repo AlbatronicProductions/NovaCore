@@ -17,7 +17,20 @@ struct NcRenderTransform { float rotation[4]; float scale[4]; };
 struct alignas(16) NcRenderObject { NcEncodedPosition position; NcRenderTransform transform; NcMeshHandle mesh; uint32_t padding[3]; };
 struct NcDrawBatch { NcMeshHandle mesh; uint32_t firstObject; uint32_t objectCount; uint32_t padding; };
 struct NcPlanetaryPatch { uint32_t face, level, x, y; float centerX, centerY, centerZ, radius; float colorR, colorG, colorB, colorA; uint32_t stitchMask, reserved0, reserved1, reserved2; };
-struct NcAnchoredTerrainVertex { NcEncodedPosition bodyPosition; float normal[4]; float color[4]; };
+struct NcAnchoredSurfacePatch {
+  uint32_t bodyIdLow, bodyIdHigh, terrainVersion, physicalSurfaceGeneration;
+  uint32_t face, level, x, y;
+  uint32_t cacheSlot, cacheGeneration, stitchMask, flags;
+  uint32_t materialLevel, materialX, materialY, materialGeneration;
+  float boundsX, boundsY, boundsZ, boundsRadius;
+};
+struct alignas(16) NcAnchoredSurfacePresentation {
+  NcEncodedPosition origin;
+  NcEncodedPosition east;
+  NcEncodedPosition north;
+  NcEncodedPosition up;
+  uint32_t bodyIdLow, bodyIdHigh, snapIdentity, presentationGeneration;
+};
 struct alignas(16) NcPlanetaryGpuConstants {
   float cameraBodyHighX, cameraBodyHighY, cameraBodyHighZ, radiusHigh;
   float cameraBodyLowX, cameraBodyLowY, cameraBodyLowZ, radiusLow;
@@ -25,17 +38,6 @@ struct alignas(16) NcPlanetaryGpuConstants {
   uint32_t maximumLevel, outputCapacity, terrainVersion, terrainFrame;
   float viewForwardX, viewForwardY, viewForwardZ, viewHalfAngleRadians;
   float viewportHeightPixels, verticalTanHalfFov, targetTexelPixels, requestedAlbedoLevel;
-};
-struct alignas(16) NcPlanetaryEyeball {
-  float cameraBodyHighX, cameraBodyHighY, cameraBodyHighZ, radiusHigh;
-  float cameraBodyLowX, cameraBodyLowY, cameraBodyLowZ, radiusLow;
-  float surfaceAltitudeMetres, maximumTerrainHeightMetres, oceanSeaLevelMetres, blendAlpha;
-  uint32_t bodyIdLow, bodyIdHigh, terrainVersion, enabled;
-  float tangentAnchorX, tangentAnchorY, tangentAnchorZ, maximumAngleRadians;
-  float radialWarpExponent, detailFrequency, normalStepMetres, regionalAlpha;
-  uint32_t vertexCount, indexCount, radialRingCount, azimuthSegmentCount;
-  uint32_t reserved0, reserved1, reserved2, reserved3;
-  uint32_t anchoredFace, anchoredLevel, anchoredX, anchoredYEnabled;
 };
 enum NcPlanetaryMode : uint32_t { NC_PLANETARY_CPU_REFERENCE = 0, NC_PLANETARY_GPU_PRODUCTION = 1, NC_PLANETARY_CPU_GPU_VALIDATION = 2 };
 enum NcPlanetarySurfaceMode : uint32_t { NC_PLANETARY_SURFACE_BOUNDED = 0, NC_PLANETARY_SURFACE_PRODUCTION_CUBE = 2 };
@@ -53,18 +55,24 @@ struct alignas(16) NcPlanetaryPresentation {
   float ringColorR, ringColorG, ringColorB, ringColorA;
   float bodyOrientationX, bodyOrientationY, bodyOrientationZ, bodyOrientationW;
   float localDetailScaleMeters, localDetailMicroScaleMeters, localDetailFadeStartMetres, localDetailFadeEndMetres;
+  float centerLowX, centerLowY, centerLowZ, centerLowPadding;
 };
 struct alignas(16) NcSolarLighting { float sourceCenterX, sourceCenterY, sourceCenterZ, exposure; float photosphereR, photosphereG, photosphereB, ambientFloor; float sourceRadiance, glowStrength; uint32_t enabled, speedHud; };
-struct NcOrbitLineVertex { float position[3]; };
-struct NcFrameSubmission { NcCameraData camera; NcRenderObject* objects; uint32_t objectCount; NcDrawBatch* batches; uint32_t batchCount; NcOrbitLineVertex* orbitVertices; uint32_t orbitVertexCount; NcOrbitLineVertex* previousOrbitVertices; uint32_t previousOrbitVertexCount; NcOrbitLineVertex* bodyForwardVertices; uint32_t bodyForwardVertexCount; NcOrbitLineVertex* targetDirectionVertices; uint32_t targetDirectionVertexCount; NcPlanetaryPatch* planetaryPatches; uint32_t planetaryPatchCount; uint32_t planetaryGpuAlignmentPadding; NcPlanetaryGpuConstants planetaryGpu; NcPlanetaryMode planetaryMode; NcPlanetarySurfaceMode planetarySurfaceMode; uint32_t planetaryPadding[2]; NcPlanetaryPresentation planetaryPresentation; NcPlanetaryPresentation* distantBodies; uint32_t distantBodyCount, distantBodyPadding; NcSolarLighting solarLighting; NcPlanetaryEyeball planetaryEyeball; NcAnchoredTerrainVertex* anchoredTerrainVertices; uint32_t anchoredTerrainVertexCount, anchoredTerrainTier, anchoredTerrainFlags; uint32_t anchoredTerrainTierVertexCount[3]; };
-struct NcAbiLayout { uint32_t encodedPositionSize, cameraDataSize, cameraPositionOffset, cameraViewProjectionOffset, renderTransformSize, renderObjectSize, renderObjectPositionOffset, renderObjectTransformOffset, renderObjectMeshOffset; uint32_t drawBatchSize, orbitLineVertexSize, frameSubmissionSize, frameObjectsOffset, frameBatchesOffset, frameOrbitVerticesOffset, frameOrbitVertexCountOffset; uint32_t inputStateSize, inputDeltaSecondsOffset, inputMoveLeftOffset, inputMoveRightOffset, inputMoveForwardOffset, inputMoveBackwardOffset, inputMoveDownOffset, inputMoveUpOffset, inputResetOffset, inputLookActiveOffset, inputMouseDeltaXOffset, inputMouseDeltaYOffset, inputMouseWheelDetentsOffset, inputPauseToggleOffset, inputRateDecreaseOffset, inputRateIncreaseOffset, inputSasModeKeyOffset, inputFastModifierOffset, inputSlowModifierOffset; uint32_t framePlanetaryGpuOffset, framePlanetaryModeOffset, framePlanetaryPresentationOffset, inputPresentationFocusOffset, frameSolarLightingOffset, framePlanetaryEyeballOffset; };
+struct NcOrbitLineVertex { float positionHigh[3]; float positionLow[3]; };
+struct NcFrameSubmission { NcCameraData camera; NcRenderObject* objects; uint32_t objectCount; NcDrawBatch* batches; uint32_t batchCount; NcOrbitLineVertex* orbitVertices; uint32_t orbitVertexCount; NcOrbitLineVertex* previousOrbitVertices; uint32_t previousOrbitVertexCount; NcOrbitLineVertex* bodyForwardVertices; uint32_t bodyForwardVertexCount; NcOrbitLineVertex* targetDirectionVertices; uint32_t targetDirectionVertexCount; NcPlanetaryPatch* planetaryPatches; uint32_t planetaryPatchCount; uint32_t planetaryGpuAlignmentPadding; NcPlanetaryGpuConstants planetaryGpu; NcPlanetaryMode planetaryMode; NcPlanetarySurfaceMode planetarySurfaceMode; uint32_t planetaryPadding[2]; NcPlanetaryPresentation planetaryPresentation; NcPlanetaryPresentation* distantBodies; uint32_t distantBodyCount, distantBodyPadding; NcSolarLighting solarLighting; NcAnchoredSurfacePatch* anchoredSurfacePatches; uint32_t anchoredSurfacePatchCount, anchoredSurfaceCacheSlotCount, anchoredSurfaceActiveGeneration, anchoredSurfaceFlags, anchoredSurfaceGpuReadyGeneration, anchoredSurfacePadding[5]; NcAnchoredSurfacePresentation anchoredSurfacePresentation; };
+struct NcAbiLayout { uint32_t encodedPositionSize, cameraDataSize, cameraPositionOffset, cameraViewProjectionOffset, renderTransformSize, renderObjectSize, renderObjectPositionOffset, renderObjectTransformOffset, renderObjectMeshOffset; uint32_t drawBatchSize, orbitLineVertexSize, frameSubmissionSize, frameObjectsOffset, frameBatchesOffset, frameOrbitVerticesOffset, frameOrbitVertexCountOffset; uint32_t inputStateSize, inputDeltaSecondsOffset, inputMoveLeftOffset, inputMoveRightOffset, inputMoveForwardOffset, inputMoveBackwardOffset, inputMoveDownOffset, inputMoveUpOffset, inputResetOffset, inputLookActiveOffset, inputMouseDeltaXOffset, inputMouseDeltaYOffset, inputMouseWheelDetentsOffset, inputPauseToggleOffset, inputRateDecreaseOffset, inputRateIncreaseOffset, inputSasModeKeyOffset, inputFastModifierOffset, inputSlowModifierOffset; uint32_t framePlanetaryGpuOffset, framePlanetaryModeOffset, framePlanetaryPresentationOffset, inputPresentationFocusOffset, frameSolarLightingOffset, inputViewportWidthOffset, inputViewportHeightOffset; };
 // mouseWheelDetents is signed Win32 WHEEL_DELTA-normalized detents, consumed once per callback.
-struct NcInputState { float deltaSeconds; uint32_t moveLeft, moveRight, moveForward, moveBackward, moveDown, moveUp, reset, lookActive; float mouseDeltaX, mouseDeltaY; int32_t mouseWheelDetents; uint32_t pauseToggle, rateDecrease, rateIncrease, sasModeKey, fastModifier, slowModifier; NcPresentationFocus presentationFocus; };
+struct NcInputState { float deltaSeconds; uint32_t moveLeft, moveRight, moveForward, moveBackward, moveDown, moveUp, reset, lookActive; float mouseDeltaX, mouseDeltaY; int32_t mouseWheelDetents; uint32_t pauseToggle, rateDecrease, rateIncrease, sasModeKey, fastModifier, slowModifier; NcPresentationFocus presentationFocus; uint32_t viewportWidthPixels, viewportHeightPixels; };
 enum NcHostEventType : uint32_t { NC_DIAGNOSTIC = 1, NC_UPDATE_FRAME = 2 };
 enum NcLogCategory : uint32_t { NC_LOG_ALWAYS = 0, NC_LOG_NONE = 0, NC_LOG_STARTUP = 1 << 0, NC_LOG_VULKAN = 1 << 1, NC_LOG_PRECISION = 1 << 2, NC_LOG_INPUT = 1 << 3, NC_LOG_RENDERER = 1 << 4, NC_LOG_VALIDATION = 1 << 5, NC_LOG_CAMERA = 1 << 6 };
 struct NcHostEvent { NcHostEventType type; uint32_t logCategory; const char* utf8Message; NcInputState input; NcFrameSubmission* submission; };
-struct NcRuntimeAssets { uint32_t size, version; const char* productionTerrainPathUtf8; const char* localTerrainPathUtf8; };
-// Dormant 11B-7B query ABI.  These records are std430-compatible and are not
+struct NcRuntimeAssets {
+  uint32_t size, version;
+  const char* productionTerrainPathUtf8;
+  const char* localTerrainPathUtf8;
+  const char* elevationOraclePathUtf8;
+};
+// Physical-height query ABI. These records are std430-compatible and are not
 // part of the live frame submission.  Every byte is explicitly initialized by
 // the managed caller or native result writer.
 struct alignas(16) NcPlanetaryHeightQuery {
@@ -81,6 +89,10 @@ struct alignas(16) NcPlanetaryHeightResult {
   double faceUv[2];
   double oracleAndTerrainV5Height[2];
   double localAndPhysicalHeight[2];
+  double baseAndModifierHeight[2];
+  double modifierHeights[2];
+  double finalGradient[2];
+  float physicalNormalAndWeight[4];
   double reconstructedXY[2];
   double reconstructedZAndLength[2];
   uint32_t globalIdentity[4]; // face, level, x, y
@@ -99,7 +111,7 @@ struct alignas(8) NcPlanetaryHeightQueryMetrics {
   uint32_t validationErrors, globalRecordCount, localRecordCount, reserved;
   double cpuMilliseconds, gpuMilliseconds;
 };
-// Dormant 11B-7C persistent mesh-preparation ABI. Native owns every Vulkan
+// Persistent mesh-preparation ABI. Native owns every Vulkan
 // handle; initialize/prepare/shutdown delimit one reusable validation session.
 struct alignas(16) NcPlanetaryDisplacedVertex {
   float bodyHigh[4];              // xyz physical body-fixed position; w physical height

@@ -9,16 +9,16 @@ internal static class PlanetaryScreenSpaceSubdivisionTests
 
     public static void Run()
     {
-        var baseMesh = PlanetaryDormantDisplacedMesh.Create();
+        var baseMesh = PlanetaryReferenceDisplacedMesh.Create();
         Require(baseMesh.DeterministicHash == 0x7F3262E7C37D781Bul,
-            "11B-7C topology hash remains unchanged");
+            "reference topology hash remains deterministic");
         var expected = new[] { (Factor: 1, Vertices: 98, Indices: 576),
             (Factor: 2, Vertices: 386, Indices: 2304),
             (Factor: 4, Vertices: 1538, Indices: 9216) };
         foreach (var value in expected)
         {
-            var mesh = PlanetaryDormantDisplacedMesh.Create(value.Factor);
-            var replay = PlanetaryDormantDisplacedMesh.Create(value.Factor);
+            var mesh = PlanetaryReferenceDisplacedMesh.Create(value.Factor);
+            var replay = PlanetaryReferenceDisplacedMesh.Create(value.Factor);
             Require(mesh.Vertices.Length == value.Vertices && mesh.Indices.Length == value.Indices &&
                 mesh.AdjacencyCount == value.Indices, $"factor {value.Factor} bounded topology counts");
             Require(mesh.DeterministicHash == replay.DeterministicHash,
@@ -28,7 +28,7 @@ internal static class PlanetaryScreenSpaceSubdivisionTests
 
         var first = baseMesh.Vertices[(int)baseMesh.FaceVertex(CubeSphereFace.PositiveZ, 0, 0)];
         var second = baseMesh.Vertices[(int)baseMesh.FaceVertex(CubeSphereFace.PositiveZ,
-            PlanetaryDormantDisplacedMesh.ProofQuadsPerFaceSide, 0)];
+            PlanetaryReferenceDisplacedMesh.ProofQuadsPerFaceSide, 0)];
         var edgeForward = PlanetaryAnchoredMeshEdgeId.Create(first, second);
         var edgeReverse = PlanetaryAnchoredMeshEdgeId.Create(second, first);
         var projection = new CameraProjection(Math.PI / 3d, 16d / 9d, 0.1d, 1e12d);
@@ -57,17 +57,17 @@ internal static class PlanetaryScreenSpaceSubdivisionTests
         var root = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", ".."));
         var sample = File.ReadAllText(Path.Combine(root, "samples", "NovaCore.Triangle", "Program.cs"));
         var vertex = File.ReadAllText(Path.Combine(root, "native", "NovaCore.Native", "shaders", "planetary.vert"));
-        Require(sample.Contains("relaxedSubdivision?-1:1", StringComparison.Ordinal) &&
+        Require(sample.Contains("ColorA=-1", StringComparison.Ordinal) &&
             sample.Contains("options.Scene==\"planetary-subdivision-diagnostic\"", StringComparison.Ordinal) &&
             vertex.Contains("bool subdivisionDebug=p.color.a<0.0", StringComparison.Ordinal) &&
             vertex.Contains("subdivisionDebug?ProductionProjectGridD", StringComparison.Ordinal),
-            "relaxed-cube density projection is reachable only through the explicit 11B-7D debug scene");
+            "relaxed-cube density projection is reachable only through the explicit subdivision diagnostic");
         Require(!sample.Contains("earth?.Patches??CreateDiagnosticPatches(true)", StringComparison.Ordinal) &&
             !sample.Contains("sol?.DistantBodies??CreateDiagnosticPatches(true)", StringComparison.Ordinal),
-            "normal Earth and Solar submission never enable the 11B-7D debug marker");
+            "normal Earth and Solar submission never enable the subdivision diagnostic marker");
     }
 
-    private static void VerifyAllCubeEdges(PlanetaryDormantDisplacedMesh mesh,
+    private static void VerifyAllCubeEdges(PlanetaryReferenceDisplacedMesh mesh,
         in CameraProjection projection)
     {
         var groups = new Dictionary<PlanetaryAnchoredMeshEdgeId, List<(Double3 A, Double3 B)>>();
@@ -144,7 +144,7 @@ internal static class PlanetaryScreenSpaceSubdivisionTests
             "Florida anchored identity/topology is deterministic without camera input");
     }
 
-    private static void PrintDistanceMatrix(PlanetaryDormantDisplacedMesh mesh,
+    private static void PrintDistanceMatrix(PlanetaryReferenceDisplacedMesh mesh,
         in CameraProjection projection)
     {
         var edges = new Dictionary<PlanetaryAnchoredMeshEdgeId, (Double3 First, Double3 Second)>();
@@ -173,14 +173,14 @@ internal static class PlanetaryScreenSpaceSubdivisionTests
                     minimum = Math.Min(minimum, factor); maximum = Math.Max(maximum, factor); sum += factor;
                 }
                 var materialized = maximum <= 1 ? 1 : maximum <= 2 ? 2 : 4;
-                Console.WriteLine($"11B-7D demand: altitude={altitude:R}m; target={policies[policy]:R}px; " +
+                Console.WriteLine($"Subdivision demand: altitude={altitude:R}m; target={policies[policy]:R}px; " +
                     $"edges={edges.Count}; min={minimum}; max={maximum}; avg={sum / (double)edges.Count:F3}; " +
                     $"boundedProofFactor={materialized}; boundedProofTriangles={192 * materialized * materialized}");
             }
         }
     }
 
-    private static void VerifyWinding(PlanetaryDormantDisplacedMesh mesh)
+    private static void VerifyWinding(PlanetaryReferenceDisplacedMesh mesh)
     {
         for (var index = 0; index < mesh.Indices.Length; index += 3)
         {
@@ -192,7 +192,7 @@ internal static class PlanetaryScreenSpaceSubdivisionTests
         }
     }
 
-    private static void VerifyCanonicalSharing(PlanetaryDormantDisplacedMesh mesh)
+    private static void VerifyCanonicalSharing(PlanetaryReferenceDisplacedMesh mesh)
     {
         var occurrences = new int[mesh.Vertices.Length];
         foreach (CubeSphereFace face in Enum.GetValues<CubeSphereFace>())

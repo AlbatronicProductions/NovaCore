@@ -3,8 +3,7 @@
 
 // Must match PlanetaryTerrainDefinition.EarthProductionCubeV5.Version and the
 // native NCCUBE production-layout contract.  Production selection is keyed by
-// the active terrain dataset version; terrain-v4 is historical and must never
-// select the current production projection or payload hierarchy.
+// the active terrain dataset version and must never be inferred here.
 const uint NOVACORE_PRODUCTION_TERRAIN_VERSION=5u;
 
 // GLSL mirror of RelaxedCubeSphereProjection.AlgorithmVersion 1.  Extended

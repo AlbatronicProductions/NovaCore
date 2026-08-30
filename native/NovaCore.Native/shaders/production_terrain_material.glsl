@@ -160,9 +160,15 @@ ProductionTerrainMaterial SynthesizeProductionTerrainMaterial(
   float normalMeso=mix(.5,mesoRaw,TerrainNormalFrequencyAttenuation(footprintMetres,96.0));
   float normalMicro=mix(.5,microRaw,TerrainNormalFrequencyAttenuation(footprintMetres,5.5));
   float variation=(meso-.5)*.18+(micro-.5)*.055+(broad-.5)*.12;
-  vec3 synthesized=max(materialColor*(1.0+variation),vec3(0));
+  // Terrain-v5/local payload albedo is geographic material authority. The
+  // former close-range blend replaced 62% of that identity with seven constant
+  // palette colors, producing the observed green-to-uniform-tan altitude
+  // crossfade even though geometry and ownership remained valid. Procedural
+  // synthesis contributes band-limited metre-scale variation and response;
+  // it must not replace the macro geographic signal.
+  vec3 detailedGeographic=max(geographicAlbedo*(1.0+variation),vec3(0));
   float landDetail=result.detailWeight*smoothstep(.45,.55,landMask);
-  result.albedo=mix(geographicAlbedo,mix(geographicAlbedo,synthesized,.62),landDetail);
+  result.albedo=mix(geographicAlbedo,detailedGeographic,landDetail);
   result.roughness=mix(.8,clamp(materialRoughness+(micro-.5)*.08,.04,1.0),landDetail);
   result.metallic=mix(0.0,materialMetallic,landDetail);
   result.ambientOcclusion=mix(1.0,clamp(materialAo-(meso-.5)*.08,.65,1.0),landDetail);

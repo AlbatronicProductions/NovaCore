@@ -53,11 +53,6 @@ internal sealed class EarthPlanetaryScene
     private double _localYawRadians;
     private double _localPitchRadians=-Math.PI/12d;
     private PlanetaryCameraPresentationMode _cameraPresentationMode;
-    private float _eyeballWeight;
-    private bool _eyeballCoversVisibleSurface = true;
-    private readonly PlanetaryProductionPupilOrientation _productionPupilOrientation = new();
-    private readonly PlanetaryProductionEyeballSelection _productionEyeballSelection = new();
-    private PlanetaryProductionPupilCell _productionPupilCell;
 
     private EarthPlanetaryScene(PlanetaryPresentationSnapshot presentation, in PlanetRenderProxy earth, in SolarLightingPresentation solarLighting, NativePlanetaryPatch[] patches,NativePlanetaryMode mode,uint gpuOutputCapacity,PlanetarySurfaceRendererMode surfaceRendererMode)
     {
@@ -78,7 +73,6 @@ internal sealed class EarthPlanetaryScene
     internal double OrbitYawRadians => _orbitYawRadians;
     internal double OrbitPitchRadians => _orbitPitchRadians;
     internal PlanetaryCameraPresentationMode CameraPresentationMode => _cameraPresentationMode;
-    internal float EyeballWeight => _eyeballWeight;
     internal PlanetarySurfaceFocus? SurfaceFocus => _surfaceFocus;
     internal int ActivePatchCount => _activePatchCount;
     internal int MinimumActiveLod => _minimumActiveLod;
@@ -100,10 +94,6 @@ internal sealed class EarthPlanetaryScene
     internal bool ProductionSurfaceRequested => true;
     internal PlanetaryRepresentationBlend RepresentationBlend => _blend;
     internal bool DetailedComputeRequested => _mode is not NativePlanetaryMode.CpuReference;
-    internal bool EyeballComputeRequested => _eyeballWeight>0f&&_productionPupilCell.IsValid;
-    internal bool EyeballCoversVisibleSurface => _eyeballCoversVisibleSurface;
-    internal int ProductionEyeballTier => _productionEyeballSelection.Tier;
-    internal PlanetaryProductionPupilCell ProductionPupilCell => _productionPupilCell;
     internal int DistantDrawCount => _blend.DrawDistant ? 1 : 0;
     internal CameraProjection Projection => new(Math.PI / 3d, 16d / 9d, .05d, _earth.RadiusMetres * 100d);
 
@@ -159,7 +149,7 @@ internal sealed class EarthPlanetaryScene
     internal bool TryFocus(CameraState camera)
     {
         if (!PlanetaryCameraFocus.TryFocus(camera, Presentation, _earth.BodyId, _orbitDistance)) return false;
-        SetDaySideOrbit();_productionPupilOrientation.Reset();_productionEyeballSelection.Reset();_productionPupilCell=default;
+        SetDaySideOrbit();
         _surfaceFocus=null;_localYawRadians=0d;_localPitchRadians=-Math.PI/12d;_cameraPresentationMode=PlanetaryCameraPresentationMode.Orbital;
         ApplyOrbitPose(camera);
         return true;
@@ -203,41 +193,35 @@ internal sealed class EarthPlanetaryScene
     internal void SetValidationAltitude(CameraState camera,double altitudeMetres,string surfaceSite="land")
     {
         if(!double.IsFinite(altitudeMetres)||altitudeMetres<MinimumTerrainClearanceMetres)throw new ArgumentOutOfRangeException(nameof(altitudeMetres));
-        var direction=surfaceSite switch{"land"=>AtLatitudeLongitude(-45d,-70d),"ocean"=>AtLatitudeLongitude(-30d,-90d),"slope"=>AtLatitudeLongitude(-25d,-70d),"arid"=>AtLatitudeLongitude(24.0d,12.0d),"temperate"=>AtLatitudeLongitude(48.0d,12.0d),"rock"=>AtLatitudeLongitude(-25d,-70d),"snow"=>AtLatitudeLongitude(77.0d,-42.0d),"fallback"=>AtLatitudeLongitude(-27.0d,133.0d),"florida"=>AtLatitudeLongitude(FloridaLaunchSite.Latitude,FloridaLaunchSite.Longitude),_=>throw new ArgumentOutOfRangeException(nameof(surfaceSite))};_orbitYawRadians=Math.Atan2(direction.X,direction.Z);_orbitPitchRadians=-Math.Asin(direction.Y);_surfaceFocus=null;_localYawRadians=0d;_localPitchRadians=-Math.PI/12d;_cameraPresentationMode=PlanetaryCameraPresentationMode.Orbital;var surfaceRadius=PlanetaryTerrainQuery.VisibleSurfaceRadius(_earth.RadiusMetres,direction,Terrain,EarthSeaLevelMetres);_orbitDistance=surfaceRadius+altitudeMetres;ApplyOrbitPose(camera);
+        var direction=surfaceSite switch{"land"=>AtLatitudeLongitude(-45d,-70d),"ocean"=>AtLatitudeLongitude(-30d,-90d),"slope"=>AtLatitudeLongitude(-25d,-70d),"local-payload"=>RelaxedCubeSphereProjection.UnitDirection(CubeSphereFace.PositiveZ,2047.5d/4096d,864.5d/4096d),"arid"=>AtLatitudeLongitude(24.0d,12.0d),"temperate"=>AtLatitudeLongitude(48.0d,12.0d),"rock"=>AtLatitudeLongitude(-25d,-70d),"snow"=>AtLatitudeLongitude(77.0d,-42.0d),"fallback"=>AtLatitudeLongitude(-27.0d,133.0d),"florida"=>AtLatitudeLongitude(FloridaLaunchSite.Latitude,FloridaLaunchSite.Longitude),_=>throw new ArgumentOutOfRangeException(nameof(surfaceSite))};_orbitYawRadians=Math.Atan2(direction.X,direction.Z);_orbitPitchRadians=-Math.Asin(direction.Y);_surfaceFocus=null;_localYawRadians=0d;_localPitchRadians=surfaceSite=="local-payload"?-Math.PI*89d/180d:-Math.PI/12d;_cameraPresentationMode=PlanetaryCameraPresentationMode.Orbital;var surfaceRadius=PlanetaryTerrainQuery.VisibleSurfaceRadius(_earth.RadiusMetres,direction,Terrain,EarthSeaLevelMetres);_orbitDistance=surfaceRadius+altitudeMetres;ApplyOrbitPose(camera);
         static Double3 AtLatitudeLongitude(double latitudeDegrees,double longitudeDegrees)=>BodyFixedGeography.DirectionFromLatitudeLongitude(latitudeDegrees*Math.PI/180d,longitudeDegrees*Math.PI/180d);
     }
 
     internal void UpdatePatches(CameraState camera)
     {
         var rootToBody=_earth.BodyFixedToRoot.Conjugate().Normalized();var bodyOffset=rootToBody.Rotate(camera.Position.Value-_earth.Position.Value);var distance=Math.Sqrt(bodyOffset.LengthSquared);var radial=distance>0?bodyOffset/distance:Double3.UnitZ;var surfaceRadius=PlanetaryTerrainQuery.VisibleSurfaceRadius(_earth.RadiusMetres,radial,Terrain,EarthSeaLevelMetres);_altitudeMetres=distance-surfaceRadius;_altitudeRadii=(distance-_earth.RadiusMetres)/_earth.RadiusMetres;
-        var projectedError=PlanetaryProductionEyeballSelection.ProjectedTerrainErrorPixels(Math.Max(MinimumTerrainClearanceMetres,_altitudeMetres),ProofViewportHeightPixels,Math.Tan(camera.Projection.VerticalFieldOfViewRadians*.5d),Terrain.MaximumHeightMetres);var tier=_productionEyeballSelection.UpdateTier(projectedError);_productionPupilCell=_productionPupilOrientation.Update(radial,tier);_eyeballWeight=PlanetaryProductionEyeballSelection.OwnershipWeight(projectedError);_eyeballCoversVisibleSurface=PlanetaryProductionEyeballTopology.CoversVisibleSurface(bodyOffset,_productionPupilCell.BodyFixedDirection,_earth.RadiusMetres,Terrain.MaximumHeightMetres);
         _blend = _handoff.Update(_earth, camera.Position.Value);
         _representation = _blend.DrawDetailed ? PlanetaryRepresentation.NearFieldSurface : PlanetaryRepresentation.FarFieldBody;
-        if((_eyeballWeight>=1f&&_eyeballCoversVisibleSurface)||_mode==NativePlanetaryMode.GpuProduction){_activeLeaves=[];_activePatchCount=0;_minimumActiveLod=0;_maximumActiveLod=0;_refinementCount=0;_balancedRefinementCount=0;_culledPatchCount=0;_frustumCulledPatchCount=0;_horizonCulledPatchCount=0;_splitPatchCount=0;_mergedPatchCount=0;return;}
+        if(_mode==NativePlanetaryMode.GpuProduction){_activeLeaves=[];_activePatchCount=0;_minimumActiveLod=0;_maximumActiveLod=0;_refinementCount=0;_balancedRefinementCount=0;_culledPatchCount=0;_frustumCulledPatchCount=0;_horizonCulledPatchCount=0;_splitPatchCount=0;_mergedPatchCount=0;return;}
         var previousLeaves=_activeLeaves;var viewForward=rootToBody.Rotate(camera.Orientation.Rotate(new Double3(0,0,-1)));var localBody=_earth with{Position=new UniversePosition(Double3.Zero,Presentation.RootFrame),BodyFixedToRoot=DoubleQuaternion.Identity};UpdatePatchRecords(PlanetaryRepresentationSelector.SelectPatches(localBody,bodyOffset,RegionalLodConfiguration,viewForward,camera.Projection.VerticalFieldOfViewRadians,camera.Projection.AspectRatio,Math.Max(MinimumTerrainClearanceMetres,_altitudeMetres),previousLeaves),camera.Position.Value);
     }
 
-    internal NativePlanetaryGpuConstants GpuConstants(CameraState camera)
+    internal NativePlanetaryGpuConstants GpuConstants(CameraState camera,double viewportHeightPixels=ProofViewportHeightPixels)
     {
+        if(!double.IsFinite(viewportHeightPixels)||viewportHeightPixels<=0d)throw new ArgumentOutOfRangeException(nameof(viewportHeightPixels));
         var rootToBody=_earth.BodyFixedToRoot.Conjugate().Normalized();var cameraBody=rootToBody.Rotate(camera.Position.Value-_earth.Position.Value);var encoded=EncodedPosition.Encode(cameraBody);var radiusHigh=(float)_earth.RadiusMetres;var radiusLow=(float)(_earth.RadiusMetres-radiusHigh);
         var viewForward=rootToBody.Rotate(camera.Orientation.Rotate(new Double3(0,0,-1))).Normalized();var tanY=Math.Tan(camera.Projection.VerticalFieldOfViewRadians*.5d);var halfAngle=Math.Atan(Math.Sqrt(tanY*tanY+tanY*tanY*camera.Projection.AspectRatio*camera.Projection.AspectRatio));
         var radial=cameraBody.Normalized();var surfaceAltitude=Math.Sqrt(cameraBody.LengthSquared)-PlanetaryTerrainQuery.VisibleSurfaceRadius(_earth.RadiusMetres,radial,Terrain,EarthSeaLevelMetres);
-        var refinementThreshold=RegionalLodConfiguration.MaximumProjectedPatchSpan*(ProductionSurfaceRequested?ProductionTargetPatchPixels/TargetPatchPixels:1d);
-        return new(){CameraBodyHighX=encoded.HighX,CameraBodyHighY=encoded.HighY,CameraBodyHighZ=encoded.HighZ,RadiusHigh=radiusHigh,CameraBodyLowX=encoded.LowX,CameraBodyLowY=encoded.LowY,CameraBodyLowZ=encoded.LowZ,RadiusLow=radiusLow,RefinementThreshold=(float)refinementThreshold,NearFieldAltitudeRadii=ProductionSurfaceRequested?float.MaxValue:(float)RegionalLodConfiguration.NearFieldAltitudeRadii,SurfaceAltitudeMetres=(float)Math.Max(MinimumTerrainClearanceMetres,surfaceAltitude),MaximumTerrainHeightMetres=(float)Terrain.MaximumHeightMetres,MaximumLevel=RegionalMaximumLod,OutputCapacity=_gpuOutputCapacity,TerrainVersion=ProductionSurfaceRequested?PlanetaryTerrainDefinition.EarthProductionCubeV5.Version:Terrain.Version,ViewForwardX=(float)viewForward.X,ViewForwardY=(float)viewForward.Y,ViewForwardZ=(float)viewForward.Z,ViewHalfAngleRadians=(float)halfAngle,ViewportHeightPixels=(float)ProofViewportHeightPixels,VerticalTanHalfFov=(float)tanY,TargetTexelPixels=PlanetaryProductionSamplingPolicy.TargetTexelPixels,RequestedAlbedoLevel=1f};
-    }
-
-    internal NativePlanetaryEyeball EyeballConstants(CameraState camera)
-    {
-        if (!EyeballComputeRequested) return default;
-        var rootToBody=_earth.BodyFixedToRoot.Conjugate().Normalized();var cameraBody=rootToBody.Rotate(camera.Position.Value-_earth.Position.Value);var encoded=EncodedPosition.Encode(cameraBody);var radiusHigh=(float)_earth.RadiusMetres;var radiusLow=(float)(_earth.RadiusMetres-radiusHigh);var tangentAnchor=_productionPupilCell.BodyFixedDirection;var tier=PlanetaryProductionEyeballTopology.Tier(_productionEyeballSelection.Tier);
-        var globalCoverageRequired=_eyeballWeight<1f||!_eyeballCoversVisibleSurface;
-        return new NativePlanetaryEyeball{CameraBodyHighX=encoded.HighX,CameraBodyHighY=encoded.HighY,CameraBodyHighZ=encoded.HighZ,RadiusHigh=radiusHigh,CameraBodyLowX=encoded.LowX,CameraBodyLowY=encoded.LowY,CameraBodyLowZ=encoded.LowZ,RadiusLow=radiusLow,SurfaceAltitudeMetres=(float)Math.Max(MinimumTerrainClearanceMetres,_altitudeMetres),MaximumTerrainHeightMetres=(float)Terrain.MaximumHeightMetres,OceanSeaLevelMetres=(float)EarthSeaLevelMetres,BlendAlpha=_eyeballWeight,BodyIdLow=(uint)_earth.BodyId,BodyIdHigh=(uint)(_earth.BodyId>>32),TerrainVersion=PlanetaryTerrainDefinition.EarthProductionCubeV5.Version,Enabled=1,TangentAnchorX=(float)tangentAnchor.X,TangentAnchorY=(float)tangentAnchor.Y,TangentAnchorZ=(float)tangentAnchor.Z,MaximumAngleRadians=(float)PlanetaryProductionEyeballTopology.MaximumAngleRadians,RadialWarpExponent=(float)tier.RadialWarpExponent,DetailFrequency=1f,NormalStepMetres=2f,RegionalAlpha=globalCoverageRequired?1f:0f,VertexCount=(uint)tier.VertexCount,IndexCount=(uint)tier.IndexCount,RadialRingCount=(uint)tier.RadialRings,AzimuthSegmentCount=(uint)tier.AzimuthSegments,Reserved0=(uint)tier.Index,Reserved1=(uint)_productionPupilCell.Face,Reserved2=(uint)_productionPupilCell.X,Reserved3=(uint)_productionPupilCell.Y};
+        var targetPixels=ProductionSurfaceRequested?ProductionTargetPatchPixels:TargetPatchPixels;
+        var refinementThreshold=2d*targetPixels*tanY/viewportHeightPixels;
+        return new(){CameraBodyHighX=encoded.HighX,CameraBodyHighY=encoded.HighY,CameraBodyHighZ=encoded.HighZ,RadiusHigh=radiusHigh,CameraBodyLowX=encoded.LowX,CameraBodyLowY=encoded.LowY,CameraBodyLowZ=encoded.LowZ,RadiusLow=radiusLow,RefinementThreshold=(float)refinementThreshold,NearFieldAltitudeRadii=ProductionSurfaceRequested?float.MaxValue:(float)RegionalLodConfiguration.NearFieldAltitudeRadii,SurfaceAltitudeMetres=(float)Math.Max(MinimumTerrainClearanceMetres,surfaceAltitude),MaximumTerrainHeightMetres=(float)Terrain.MaximumHeightMetres,MaximumLevel=RegionalMaximumLod,OutputCapacity=_gpuOutputCapacity,TerrainVersion=ProductionSurfaceRequested?PlanetaryTerrainDefinition.EarthProductionCubeV5.Version:Terrain.Version,ViewForwardX=(float)viewForward.X,ViewForwardY=(float)viewForward.Y,ViewForwardZ=(float)viewForward.Z,ViewHalfAngleRadians=(float)halfAngle,ViewportHeightPixels=(float)viewportHeightPixels,VerticalTanHalfFov=(float)tanY,TargetTexelPixels=PlanetaryProductionSamplingPolicy.TargetTexelPixels,RequestedAlbedoLevel=1f};
     }
 
     internal NativePlanetaryPresentation NativePresentation(CameraState camera)
     {
         var center=CubeSphereProjection.CameraRelativeCenter(_earth,new UniversePosition(camera.Position.Value,Presentation.RootFrame));
-        var native = new NativePlanetaryPresentation{CenterX=(float)center.X,CenterY=(float)center.Y,CenterZ=(float)center.Z,Radius=(float)_earth.RadiusMetres,ColorR=_earth.Color.X,ColorG=_earth.Color.Y,ColorB=_earth.Color.Z,DistantAlpha=0f,DetailedAlpha=1f,DistanceRadii=(float)_blend.DistanceRadii,Regime=NativePlanetaryRenderRegime.DetailedOnly,Enabled=1};
+        var encodedCenter=EncodedPosition.Encode(center);
+        var native = new NativePlanetaryPresentation{CenterX=encodedCenter.HighX,CenterY=encodedCenter.HighY,CenterZ=encodedCenter.HighZ,Radius=(float)_earth.RadiusMetres,CenterLowX=encodedCenter.LowX,CenterLowY=encodedCenter.LowY,CenterLowZ=encodedCenter.LowZ,ColorR=_earth.Color.X,ColorG=_earth.Color.Y,ColorB=_earth.Color.Z,DistantAlpha=0f,DetailedAlpha=1f,DistanceRadii=(float)_blend.DistanceRadii,Regime=NativePlanetaryRenderRegime.DetailedOnly,Enabled=1};
         SolarPlanetMaterials.TryApply(ref native, _earth.BodyId);
         SolarPlanetMaterials.ApplyBodyOrientation(ref native,_earth.BodyFixedToRoot);
         return native;

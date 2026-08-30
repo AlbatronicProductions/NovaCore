@@ -11,9 +11,9 @@ public readonly record struct PlanetaryTerrainDefinition(uint SourceId,uint Vers
     public static PlanetaryTerrainDefinition EarthProductionCubeV5=>new(2,5,EarthElevationDataset.MaximumElevationMetres);
     public bool IsValid=>SourceId!=0&&Version!=0&&double.IsFinite(MaximumHeightMetres)&&MaximumHeightMetres>0;
 
-    public double SampleHeight(in Double3 bodyDirection,int patchLevel)
+    public double SampleBaseHeight(in Double3 bodyDirection)
     {
-        if(!IsValid||!bodyDirection.IsFinite||bodyDirection.LengthSquared<=0||patchLevel is <0 or >24)throw new ArgumentOutOfRangeException();
+        if(!IsValid||!bodyDirection.IsFinite||bodyDirection.LengthSquared<=0)throw new ArgumentOutOfRangeException();
         if(SourceId==EarthProductionCubeV5.SourceId&&Version==EarthProductionCubeV5.Version)
             return Math.Max(0d,EarthElevationDataset.SampleHeight(bodyDirection)+EarthLocalTerrainElevationDataset.SampleResidual(bodyDirection));
         var direction=bodyDirection.Normalized();
@@ -32,6 +32,17 @@ public readonly record struct PlanetaryTerrainDefinition(uint SourceId,uint Vers
             var detail=.5d+.3d*waveA+.2d*waveB;height+=detail*amplitude*(.2d+.8d*land);
         }
         return Math.Clamp(height,0d,MaximumHeightMetres);
+    }
+
+    public PlanetaryPhysicalSurfaceSample SamplePhysicalSurface(in Double3 bodyDirection) =>
+        PlanetaryPhysicalSurface.Evaluate(this, bodyDirection);
+
+    public double SampleHeight(in Double3 bodyDirection,int patchLevel)
+    {
+        if(patchLevel is <0 or >24)throw new ArgumentOutOfRangeException(nameof(patchLevel));
+        return SourceId==EarthProductionCubeV5.SourceId&&Version==EarthProductionCubeV5.Version
+            ? SamplePhysicalSurface(bodyDirection).FinalHeightMetres
+            : SampleBaseHeight(bodyDirection);
     }
 }
 

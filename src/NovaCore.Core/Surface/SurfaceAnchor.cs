@@ -4,7 +4,7 @@ namespace NovaCore.Core.Surface;
 
 /// <summary>
 /// Exact identity of the physical terrain semantics against which a surface-relative offset is
-/// defined. A mismatch is an error; 11B-6A provides no implicit terrain migration.
+/// defined. A mismatch is an error; there is no implicit terrain-version remap.
 /// </summary>
 public readonly record struct TerrainAuthorityVersion(uint SourceId, uint Version)
 {

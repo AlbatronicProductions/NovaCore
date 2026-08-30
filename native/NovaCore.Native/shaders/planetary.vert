@@ -2,17 +2,18 @@
 #extension GL_GOOGLE_include_directive : require
 #extension GL_ARB_gpu_shader_fp64 : require
 #include "production_cube_surface.glsl"
+#include "local_terrain.glsl"
+#include "physical_surface.glsl"
 struct EncodedPosition { vec4 high; vec4 low; };
 struct GpuCameraData { EncodedPosition position; mat4 viewProjection; };
 struct PlanetaryPatch { uvec4 address; vec4 centerRadius; vec4 color; uvec4 transitions; };
-struct Presentation { vec4 centerRadius; vec4 colorDistant; vec4 blendMetricState; uvec4 identity; vec4 surface; uvec4 hooks; vec4 ringGeometry; vec4 ringOrientation; vec4 ringColor; vec4 bodyOrientation; vec4 localDetail; };
+struct Presentation { vec4 centerRadius; vec4 colorDistant; vec4 blendMetricState; uvec4 identity; vec4 surface; uvec4 hooks; vec4 ringGeometry; vec4 ringOrientation; vec4 ringColor; vec4 bodyOrientation; vec4 localDetail; vec4 centerLow; };
 layout(std430,set=0,binding=0) readonly buffer Frame { GpuCameraData camera; } frameData;
 layout(std430,set=0,binding=1) readonly buffer Patches { PlanetaryPatch patches[]; } patchData;
 layout(std430,set=0,binding=2) readonly buffer Input { vec4 cameraHighRadiusHigh; vec4 cameraLowRadiusLow; vec4 thresholds; uvec4 controls; vec4 viewForwardHalfAngle; vec4 textureDemand; } inputData;
 layout(std430,set=0,binding=6) readonly buffer Presentations { Presentation values[]; } presentations;
 layout(std430,set=0,binding=9) readonly buffer TerrainSamples { vec2 heights[]; } terrainData;
 layout(std430,set=0,binding=10) readonly buffer PatchTerrainSlots { uvec2 values[]; } patchTerrain;
-layout(std430,set=0,binding=12) readonly buffer EyeballInput { vec4 cameraHighRadiusHigh; vec4 cameraLowRadiusLow; vec4 surface; uvec4 identity; vec4 tangentAnchorAngle; vec4 mapping; uvec4 topology; uvec4 reserved; uvec4 anchoredAddress; } eye;
 layout(set=0,binding=25) uniform sampler2DArray productionElevation;
 layout(push_constant) uniform StellarLighting { vec4 sourceCenterExposure; vec4 sourceColorAmbient; vec4 radianceGlowEnabled; } lighting;
 layout(location=0) in vec2 inUv;
@@ -45,11 +46,17 @@ double HeightAt(uint slot,uint x,uint y,float morph,uvec4 address)
   {
     vec2 localUv=vec2(x,y)/16.0;
     uint currentLayer=ProductionPatchOrdinal(address.x,address.y,address.z,address.w);
-    if(address.y==0u)return ProductionHeight(currentLayer,localUv);
-    uvec4 parent=uvec4(address.x,address.y-1u,address.z>>1u,address.w>>1u);
-    uint parentLayer=ProductionPatchOrdinal(parent.x,parent.y,parent.z,parent.w);
-    vec2 parentUv=(vec2(address.z&1u,address.w&1u)+localUv)*0.5;
-    return mix(ProductionHeight(parentLayer,parentUv),ProductionHeight(currentLayer,localUv),double(morph));
+    double globalHeight=ProductionHeight(currentLayer,localUv);
+    if(address.y>0u)
+    {
+      uvec4 parent=uvec4(address.x,address.y-1u,address.z>>1u,address.w>>1u);
+      uint parentLayer=ProductionPatchOrdinal(parent.x,parent.y,parent.z,parent.w);
+      vec2 parentUv=(vec2(address.z&1u,address.w&1u)+localUv)*0.5;
+      globalHeight=mix(ProductionHeight(parentLayer,parentUv),globalHeight,double(morph));
+    }
+    dvec3 direction=ProductionProjectGridD(address,uvec2(x,y));
+    double baseHeight=max(0.0,globalHeight+double(LocalTerrainElevationResidual(vec3(direction))));
+    return max(0.0,baseHeight+TerrainModifierHeightD(direction));
   }
   vec2 values=terrainData.heights[slot*GRID_VERTICES+y*17u+x];return double(mix(values.x,values.y,morph));
 }
@@ -79,5 +86,5 @@ void main(){
   float surfaceMorph=1.0;
   if(terrain){uint x=gridCoordinate.x,y=gridCoordinate.y;uint slot=patchTerrain.values[gl_InstanceIndex].x;float temporalMorph=p.transitions.y==0u?1.0:clamp(float(inputData.controls.w-p.transitions.y)/30.0,0.0,1.0);surfaceMorph=temporalMorph;float vertexMorph=ConstrainedMorph(mask,p.transitions.w,p.transitions.z,x,y,surfaceMorph);double radius=RadiusD();double rawHeight=HeightAt(slot,x,y,vertexMorph,p.address);terrainHeight=float(rawHeight);double height=rawHeight;dvec3 absolutePosition=direction*(radius+height);relativePosition=absolutePosition-CameraD();uint xl=x==0u?0u:x-1u,xr=x==16u?16u:x+1u,yd=y==0u?0u:y-1u,yu=y==16u?16u:y+1u;bool coordinatedEdge=abs(vertexMorph-surfaceMorph)>1e-6;float leftMorph=coordinatedEdge?vertexMorph:ConstrainedMorph(mask,p.transitions.w,p.transitions.z,xl,y,surfaceMorph),rightMorph=coordinatedEdge?vertexMorph:ConstrainedMorph(mask,p.transitions.w,p.transitions.z,xr,y,surfaceMorph),downMorph=coordinatedEdge?vertexMorph:ConstrainedMorph(mask,p.transitions.w,p.transitions.z,x,yd,surfaceMorph),upMorph=coordinatedEdge?vertexMorph:ConstrainedMorph(mask,p.transitions.w,p.transitions.z,x,yu,surfaceMorph);dvec3 left=ProjectGridD(p.address,uvec2(xl,y))*(radius+HeightAt(slot,xl,y,leftMorph,p.address));dvec3 right=ProjectGridD(p.address,uvec2(xr,y))*(radius+HeightAt(slot,xr,y,rightMorph,p.address));dvec3 down=ProjectGridD(p.address,uvec2(x,yd))*(radius+HeightAt(slot,x,yd,downMorph,p.address));dvec3 up=ProjectGridD(p.address,uvec2(x,yu))*(radius+HeightAt(slot,x,yu,upMorph,p.address));surfaceNormal=normalize(cross(right-left,up-down));if(dot(surfaceNormal,direction)<0.0)surfaceNormal=-surfaceNormal;surfaceMorph=vertexMorph;}
   else{double cells=double(1u<<p.address.y);dvec2 uv=(dvec2(p.address.zw)+dvec2(stitched))/cells;direction=subdivisionDebug?ProductionProjectGridD(p.address,gridCoordinate):normalize(CubeD(p.address.x,2.0*uv.x-1.0,2.0*uv.y-1.0));surfaceNormal=direction;relativePosition=dvec3(p.centerRadius.xyz)+direction*double(p.centerRadius.w);}
-	  vec3 localPosition=vec3(relativePosition);vec3 position=RotateQuaternion(localPosition,presentation.bodyOrientation);gl_Position=frameData.camera.viewProjection*vec4(position,1);color=vec4(p.color.rgb,subdivisionDebug?1.0:p.color.a);if(eye.identity.w!=0u)color.a=1.0;normal=vec3(surfaceNormal);bodyDirection=vec3(direction);lightDirection=normalize(RotateQuaternion(lighting.sourceCenterExposure.xyz-presentation.centerRadius.xyz,vec4(-presentation.bodyOrientation.xyz,presentation.bodyOrientation.w)));material=uvec2(presentation.identity.w,presentation.identity.z);response=presentation.surface;viewDirection=-localPosition;localDetail=presentation.localDetail;bodyCameraHigh=inputData.cameraHighRadiusHigh.xyz;bodyCameraLow=inputData.cameraLowRadiusLow.xyz;productionLayer=patchTerrain.values[gl_InstanceIndex].y;productionUv=stitched;productionAddress=p.address;productionTransition=vec2(surfaceMorph,float(mask));topologyCoordinate=stitched;
+	  vec3 localPosition=vec3(relativePosition);vec3 position=RotateQuaternion(localPosition,presentation.bodyOrientation);gl_Position=frameData.camera.viewProjection*vec4(position,1);color=vec4(p.color.rgb,subdivisionDebug?1.0:p.color.a);normal=vec3(surfaceNormal);bodyDirection=vec3(direction);lightDirection=normalize(RotateQuaternion(lighting.sourceCenterExposure.xyz-presentation.centerRadius.xyz,vec4(-presentation.bodyOrientation.xyz,presentation.bodyOrientation.w)));material=uvec2(presentation.identity.w,presentation.identity.z);response=presentation.surface;viewDirection=-localPosition;localDetail=presentation.localDetail;bodyCameraHigh=inputData.cameraHighRadiusHigh.xyz;bodyCameraLow=inputData.cameraLowRadiusLow.xyz;productionLayer=patchTerrain.values[gl_InstanceIndex].y;productionUv=stitched;productionAddress=p.address;productionTransition=vec2(surfaceMorph,float(mask));topologyCoordinate=stitched;
 	}

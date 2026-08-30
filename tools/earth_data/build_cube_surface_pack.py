@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build NovaCore's patch-aligned relaxed cube-sphere Earth surface pack.
 
-This is an offline migration tool.  It reads lawful EPSG:4326 source rasters,
+This offline asset builder reads lawful EPSG:4326 source rasters,
 samples one continuous spherical function into deterministic
 face/level/x/y patch records, and generates gutters by crossing canonical cube
 face boundaries.  No equirectangular page identity, independent page fallback,

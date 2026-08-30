@@ -56,8 +56,9 @@ public sealed class RenderFrameSubmission
         if (curve.Count > destination.Length || curve.RootFrame != camera.Frame) return false;
         for (var index = 0; index < curve.Count; index++)
         {
-            if (!CameraRelativeRenderPosition.TryCreate(curve.Positions[index], camera, out var relative) || !relative.TryNarrow(out var narrowed)) return false;
-            destination[index] = new OrbitLineVertex { X = narrowed.X, Y = narrowed.Y, Z = narrowed.Z };
+            if (!CameraRelativeRenderPosition.TryCreate(curve.Positions[index], camera, out var relative)) return false;
+            var encoded=relative.Encode();
+            destination[index] = new OrbitLineVertex { X=encoded.HighX,Y=encoded.HighY,Z=encoded.HighZ,LowX=encoded.LowX,LowY=encoded.LowY,LowZ=encoded.LowZ };
         }
         if (previous) PreviousOrbitVertexCount = curve.Count; else OrbitVertexCount = curve.Count;
         return true;
@@ -67,11 +68,11 @@ public sealed class RenderFrameSubmission
     {
         if (!indicator.IsValid(camera.Frame)) return false;
         if (!CameraRelativeRenderPosition.TryCreate(indicator.Start, camera, out var start) ||
-            !CameraRelativeRenderPosition.TryCreate(indicator.End, camera, out var end) ||
-            !start.TryNarrow(out var narrowedStart) || !end.TryNarrow(out var narrowedEnd)) return false;
+            !CameraRelativeRenderPosition.TryCreate(indicator.End, camera, out var end)) return false;
+        var encodedStart=start.Encode();var encodedEnd=end.Encode();
         var destination = target ? _targetDirectionVertices : _bodyForwardVertices;
-        destination[0] = new OrbitLineVertex { X = narrowedStart.X, Y = narrowedStart.Y, Z = narrowedStart.Z };
-        destination[1] = new OrbitLineVertex { X = narrowedEnd.X, Y = narrowedEnd.Y, Z = narrowedEnd.Z };
+        destination[0] = new OrbitLineVertex { X=encodedStart.HighX,Y=encodedStart.HighY,Z=encodedStart.HighZ,LowX=encodedStart.LowX,LowY=encodedStart.LowY,LowZ=encodedStart.LowZ };
+        destination[1] = new OrbitLineVertex { X=encodedEnd.HighX,Y=encodedEnd.HighY,Z=encodedEnd.HighZ,LowX=encodedEnd.LowX,LowY=encodedEnd.LowY,LowZ=encodedEnd.LowZ };
         if (target) TargetDirectionVertexCount = 2; else BodyForwardVertexCount = 2;
         return true;
     }

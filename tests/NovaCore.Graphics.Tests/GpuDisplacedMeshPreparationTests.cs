@@ -21,15 +21,15 @@ internal static unsafe class GpuDisplacedMeshPreparationTests
         var runtime = Path.Combine(root, "assets", "earth", "runtime");
         Require(EarthElevationDataset.TryLoad(runtime, out var oracleError), $"elevation oracle: {oracleError}");
         Require(EarthLocalTerrainElevationDataset.TryLoad(localPath, out var localLoadError), $"local-v2 oracle: {localLoadError}");
-        var topology = PlanetaryDormantDisplacedMesh.Create(); var replayTopology = PlanetaryDormantDisplacedMesh.Create();
+        var topology = PlanetaryReferenceDisplacedMesh.Create(); var replayTopology = PlanetaryReferenceDisplacedMesh.Create();
         Require(topology.Vertices.Length == 98 && topology.Indices.Length == 576 && topology.AdjacencyCount == 576,
             "bounded whole-body topology is 98 vertices / 192 triangles / 576 incidences");
         Require(topology.DeterministicHash == ExpectedTopologyHash && topology.DeterministicHash == replayTopology.DeterministicHash,
             $"whole-body topology hash is stable: 0x{ExpectedTopologyHash:X16}");
         var faceOccurrences = new int[topology.Vertices.Length];
         for (var face = 0; face < 6; face++)
-            for (var y = 0; y <= PlanetaryDormantDisplacedMesh.ProofQuadsPerFaceSide; y++)
-                for (var x = 0; x <= PlanetaryDormantDisplacedMesh.ProofQuadsPerFaceSide; x++)
+            for (var y = 0; y <= PlanetaryReferenceDisplacedMesh.ProofQuadsPerFaceSide; y++)
+                for (var x = 0; x <= PlanetaryReferenceDisplacedMesh.ProofQuadsPerFaceSide; x++)
                     faceOccurrences[topology.FaceVertex((CubeSphereFace)face, x, y)]++;
         Require(faceOccurrences.Count(value => value == 3) == 8 && faceOccurrences.Count(value => value == 2) == 36 &&
             faceOccurrences.Count(value => value == 1) == 54 && faceOccurrences.All(value => value is >= 1 and <= 3),
@@ -134,7 +134,7 @@ internal static unsafe class GpuDisplacedMeshPreparationTests
 
             foreach (var factor in new[] { 1, 2, 4 })
             {
-                var subdivision = PlanetaryDormantDisplacedMesh.Create(factor);
+                var subdivision = PlanetaryReferenceDisplacedMesh.Create(factor);
                 var input = Build(subdivision.Vertices, subdivision.Indices, subdivision.AdjacencyWords);
                 var output = Prepare(input, cameraA, out var subdivisionMetrics);
                 var maximumPhysicalError = 0d;
@@ -150,7 +150,7 @@ internal static unsafe class GpuDisplacedMeshPreparationTests
                 var (interpolatedMaximum, interpolatedAverage) = factor == 1
                     ? (0d, 0d)
                     : InterpolatedNormalError(topology, first.Normals, subdivision, output.Normals);
-                Console.WriteLine($"11B-7D compute backend: factor={factor}; vertices={input.Queries.Length}; indices={input.Indices.Length}; " +
+                Console.WriteLine($"Subdivision compute backend: factor={factor}; vertices={input.Queries.Length}; indices={input.Indices.Length}; " +
                     $"bytes={input.Queries.Length * 112L + input.Indices.Length * 4L + input.Adjacency.Length * 4L}; " +
                     $"displacement={subdivisionMetrics.DisplacementMilliseconds:F6}ms; normals={subdivisionMetrics.NormalMilliseconds:F6}ms; total={subdivisionMetrics.TotalMilliseconds:F3}ms; heightMax={maximumPhysicalError:E17}m; " +
                     $"coarseInterpolatedNormalMax={interpolatedMaximum:E17}rad; coarseInterpolatedNormalAvg={interpolatedAverage:E17}rad");
@@ -183,13 +183,14 @@ internal static unsafe class GpuDisplacedMeshPreparationTests
             var fallbackResult = Prepare(localMesh, Double3.Zero, out var fallbackMetrics);
             var fallbackVertex = fallbackResult.Vertices[4];
             var fallbackRadial = Math.Sqrt(Body(fallbackVertex).LengthSquared) - EarthRadiusMetres;
-            var fallbackHeight = EarthElevationDataset.SampleHeight(localMesh.Directions[4]);
+            var fallbackHeight = Math.Max(0d, EarthElevationDataset.SampleHeight(localMesh.Directions[4]) +
+                PlanetaryPhysicalSurface.EvaluateModifiers(localMesh.Directions[4]).HeightMetres);
             Require(fallbackInitialization.ValidationErrors == 0 && fallbackMetrics.ValidationErrors == 0,
                 "local-v2-unavailable fallback is validation-clean");
             Require(fallbackVertex.SourceHasLocal == 0 && fallbackVertex.LocalResidualMetres == 0f,
-                "local-v2-unavailable dispatch reports oracle-only source ownership");
+                "local-v2-unavailable dispatch reports global-only source ownership");
             Require(Math.Abs(fallbackRadial - fallbackHeight) <= 2e-6d,
-                $"local-v2-unavailable physical displacement falls back to oracle: radial={fallbackRadial:R}; oracle={fallbackHeight:R}");
+                $"local-v2-unavailable physical displacement retains global physical authority: radial={fallbackRadial:R}; global={fallbackHeight:R}");
         }
         finally { Require(NativeRuntime.ShutdownPlanetaryMeshPreparation() == NativeResult.Success, "fallback mesh preparation shutdown"); }
         var unavailableMetrics = new NativePlanetaryMeshPreparationMetrics { Size = (uint)Marshal.SizeOf<NativePlanetaryMeshPreparationMetrics>(), Version = 1 };
@@ -209,7 +210,8 @@ internal static unsafe class GpuDisplacedMeshPreparationTests
 
     private static MeshInput BuildFlorida(in SurfaceAnchor anchor, ulong retainedReferenceHash)
     {
-        Require(retainedReferenceHash == 0x3621FBFD89675DD4ul, "11B-7A Florida reference topology hash retained");
+        Require(retainedReferenceHash == 0x6DA61E1449285C64ul,
+            $"7H physical-surface Florida reference topology hash retained: 0x{retainedReferenceHash:X16}");
         return BuildNeighborhood(anchor);
     }
 
@@ -284,7 +286,7 @@ internal static unsafe class GpuDisplacedMeshPreparationTests
     {
         var encoded = EncodedPosition.Encode(camera); return new() { Size = (uint)Marshal.SizeOf<NativePlanetaryMeshPreparationDispatch>(), Version = 1,
             VertexCount = (uint)input.Queries.Length, IndexCount = (uint)input.Indices.Length, AdjacencyCount = (uint)(input.Adjacency.Length - input.Queries.Length * 2),
-            TopologyVersion = PlanetaryDormantDisplacedMesh.TopologyVersion, TerrainVersion = 5, SourcePolicy = 1,
+            TopologyVersion = PlanetaryReferenceDisplacedMesh.TopologyVersion, TerrainVersion = 5, SourcePolicy = 1,
             CameraHighX = encoded.HighX, CameraHighY = encoded.HighY, CameraHighZ = encoded.HighZ,
             CameraLowX = encoded.LowX, CameraLowY = encoded.LowY, CameraLowZ = encoded.LowZ, BodyRadiusMetres = EarthRadiusMetres };
     }
@@ -297,8 +299,8 @@ internal static unsafe class GpuDisplacedMeshPreparationTests
     }
 
     private static (double Maximum, double Average) InterpolatedNormalError(
-        PlanetaryDormantDisplacedMesh coarse, NativePlanetaryPhysicalNormal[] coarseNormals,
-        PlanetaryDormantDisplacedMesh refined, NativePlanetaryPhysicalNormal[] refinedNormals)
+        PlanetaryReferenceDisplacedMesh coarse, NativePlanetaryPhysicalNormal[] coarseNormals,
+        PlanetaryReferenceDisplacedMesh refined, NativePlanetaryPhysicalNormal[] refinedNormals)
     {
         var maximum = 0d; var sum = 0d;
         for (var index = 0; index < refined.Vertices.Length; index++)

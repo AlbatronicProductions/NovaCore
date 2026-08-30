@@ -114,9 +114,8 @@ public readonly record struct PlanetaryAnchoredMeshTierId(
 }
 
 /// <summary>
-/// Dormant split-FP32 transport for an authoritative body-fixed anchor. It is
-/// not geographic authority and has no native ABI or live renderer binding in
-/// 11B-7A.
+/// Split-FP32 reference transport for an authoritative body-fixed anchor. It
+/// is not geographic authority and has no native renderer binding.
 /// </summary>
 public readonly record struct PlanetaryAnchoredMeshSplitAnchor(
     EncodedPosition BodyFixedPosition,
@@ -217,7 +216,7 @@ public readonly record struct PlanetaryAnchoredMeshReferenceVertex(
     Double3 AnchorRelativeUnitChord);
 
 /// <summary>
-/// Small bounded CPU reference mesh used only to prove the 11B-7A contract.
+/// Small bounded CPU reference mesh used to prove the anchored mesh contract.
 /// Its density is deliberately not a production backend decision.
 /// </summary>
 public sealed class PlanetaryAnchoredMeshReferenceTopology

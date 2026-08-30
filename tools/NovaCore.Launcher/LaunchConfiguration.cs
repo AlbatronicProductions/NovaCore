@@ -5,22 +5,16 @@ public enum NovaCoreScenarioPreset
     SolarSystemOverview,
     EarthFarOrbital,
     Earth700Km,
-    FloridaSurface,
     FloridaLaunchSite,
-    PlanetaryDiagnostic,
     SubdivisionDiagnostic,
-    AnchoredBillboardDiagnostic,
-    FloridaVerticalSlice
+    EarthFullscreenNative
 }
 
 public enum NovaCoreScene
 {
     Solar,
     Earth,
-    PlanetaryDiagnostic,
-    SubdivisionDiagnostic,
-    AnchoredBillboardDiagnostic,
-    FloridaVerticalSlice
+    SubdivisionDiagnostic
 }
 
 public enum NovaCoreStartingBody
@@ -29,13 +23,52 @@ public enum NovaCoreStartingBody
     Earth
 }
 
+public enum NovaCoreWindowMode
+{
+    Windowed,
+    BorderlessFullscreen
+}
+
+public enum NovaCoreResolutionPreset
+{
+    NativeDesktop,
+    Resolution3440x1440,
+    Resolution2560x1440,
+    Resolution1920x1080,
+    Resolution1280x720,
+    Resolution960x540
+}
+
+public enum NovaCoreDiagnosticsMode
+{
+    Normal,
+    PerformanceTelemetry,
+    VulkanValidation,
+    VulkanValidationAndPerformance
+}
+
+public readonly record struct NovaCoreClientResolution(int Width, int Height)
+{
+    public override string ToString() => $"{Width}×{Height}";
+}
+
 public sealed record NovaCoreLaunchConfiguration(
     NovaCoreScenarioPreset Preset,
     NovaCoreScene Scene,
     NovaCoreStartingBody StartingBody,
     double? AltitudeMetres,
     string? SurfaceSite,
-    bool EnableVulkanValidation);
+    NovaCoreWindowMode WindowMode,
+    NovaCoreResolutionPreset ResolutionPreset,
+    NovaCoreClientResolution ClientResolution,
+    NovaCoreDiagnosticsMode Diagnostics)
+{
+    public bool EnableVulkanValidation => Diagnostics is
+        NovaCoreDiagnosticsMode.VulkanValidation or NovaCoreDiagnosticsMode.VulkanValidationAndPerformance;
+
+    public bool EnablePerformanceTelemetry => Diagnostics is
+        NovaCoreDiagnosticsMode.PerformanceTelemetry or NovaCoreDiagnosticsMode.VulkanValidationAndPerformance;
+}
 
 public sealed record NovaCoreScenarioDefinition(
     NovaCoreScenarioPreset Preset,
@@ -45,6 +78,9 @@ public sealed record NovaCoreScenarioDefinition(
     NovaCoreStartingBody StartingBody,
     double? DefaultAltitudeMetres,
     string? SurfaceSite,
+    NovaCoreWindowMode DefaultWindowMode,
+    NovaCoreResolutionPreset DefaultResolution,
+    NovaCoreDiagnosticsMode DefaultDiagnostics,
     bool IsSupported,
     string? UnsupportedReason)
 {

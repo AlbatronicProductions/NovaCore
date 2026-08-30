@@ -1,10 +1,15 @@
 #version 460
 #extension GL_GOOGLE_include_directive : require
 #extension GL_ARB_gpu_shader_fp64 : require
+// Published anchored geometry is payload-complete. Run depth/stencil before
+// this shared material shader so terrain-v5 fill pixels already owned by the
+// anchored raster never execute the expensive fallback material path.
+layout(early_fragment_tests) in;
 #define NOVACORE_LOCAL_TERRAIN_FRAGMENT
 #include "planet_material.glsl"
 #include "production_cube_surface.glsl"
 #include "local_terrain.glsl"
+#include "physical_surface.glsl"
 #include "production_cube_filter.glsl"
 #include "production_earth_material.glsl"
 #include "production_terrain_material.glsl"
@@ -25,11 +30,11 @@ layout(location=13) flat in uvec4 productionAddress;
 layout(location=14) in vec2 productionTransition;
 layout(location=15) in vec2 topologyCoordinate;
 layout(std430,set=0,binding=2) readonly buffer Input { vec4 cameraHighRadiusHigh; vec4 cameraLowRadiusLow; vec4 thresholds; uvec4 controls; vec4 viewForwardHalfAngle; vec4 textureDemand; } inputData;
-layout(std430,set=0,binding=12) readonly buffer EyeballInput { vec4 cameraHighRadiusHigh; vec4 cameraLowRadiusLow; vec4 surface; uvec4 identity; vec4 tangentAnchorAngle; vec4 mapping; uvec4 topology; uvec4 reserved; uvec4 anchoredAddress; } eye;
 layout(set=0,binding=24) uniform sampler2DArray productionAlbedo;
 layout(set=0,binding=25) uniform sampler2DArray productionElevation;
 layout(set=0,binding=26) uniform sampler2DArray productionLand;
 layout(std430,set=0,binding=27) readonly buffer ProductionLayers { uint values[]; } productionLayers;
+layout(std430,set=0,binding=32) readonly buffer AnchoredCoverage { uvec4 control; uvec4 entries[]; } anchoredCoverage;
 layout(push_constant) uniform StellarLighting { vec4 sourceCenterExposure; vec4 sourceColorAmbient; vec4 radianceGlowEnabled; } lighting;
 layout(location=0) out vec4 outColor;
 
@@ -92,7 +97,7 @@ vec3 ProductionPhysicalNormal(vec3 unitDirection,float elevationMetres,float rad
   return dot(candidate,radial)<0.0?-candidate:candidate;
 }
 
-vec3 ProductionRaySphereDirection(vec3 fallbackDirection,float representedHeight,float radiusMetres)
+dvec3 ProductionRaySpherePosition(vec3 fallbackDirection,float representedHeight,double radiusMetres)
 {
   // Perspective-correct interpolation gives the fragment view ray even when
   // the rasterized owner is a coarse planar triangle. Intersect that ray with
@@ -100,76 +105,48 @@ vec3 ProductionRaySphereDirection(vec3 fallbackDirection,float representedHeight
   // sphere direction for the diagnostic comparison.
   dvec3 camera=dvec3(bodyCameraHigh)+dvec3(bodyCameraLow);
   dvec3 ray=normalize(-dvec3(viewDirection));
-  double shell=double(radiusMetres+representedHeight);
+  double shell=radiusMetres+double(representedHeight);
   double b=dot(camera,ray),c=dot(camera,camera)-shell*shell;
   double discriminant=b*b-c;
-  if(discriminant<0.0||isnan(discriminant)||isinf(discriminant))return normalize(fallbackDirection);
+  if(discriminant<0.0||isnan(discriminant)||isinf(discriminant))
+    return dvec3(normalize(fallbackDirection))*shell;
   double root=sqrt(discriminant),distance=-b-root;
   if(distance<=0.0)distance=-b+root;
   dvec3 point=camera+ray*distance;
-  if(distance<=0.0||any(isnan(point))||any(isinf(point)))return normalize(fallbackDirection);
-  return normalize(vec3(point));
+  if(distance<=0.0||any(isnan(point))||any(isinf(point)))
+    return dvec3(normalize(fallbackDirection))*shell;
+  return point;
 }
 
-bool ProductionEyeballVisibleFromCamera(vec3 unitDirection,float representedHeight)
+vec3 ProductionRaySphereDirection(vec3 fallbackDirection,float representedHeight,double radiusMetres)
 {
-  dvec3 direction=normalize(dvec3(unitDirection));
-  dvec3 cameraBody=dvec3(bodyCameraHigh)+dvec3(bodyCameraLow);
-  double bodyRadius=double(inputData.cameraHighRadiusHigh.w)+double(inputData.cameraLowRadiusLow.w);
-  dvec3 surfacePoint=direction*(bodyRadius+double(max(representedHeight,eye.surface.z)));
-  // The persistent Eye intentionally contains a much larger body-fixed cap
-  // than is visible at orbital altitude.  Rasterization is two-sided, so a
-  // geometric visibility test is required before those far-side triangles
-  // can contribute color or depth.  The cube-sphere remains the opaque parent
-  // for every rejected fragment.
-  return dot(cameraBody-surfacePoint,direction)>0.0;
-}
-
-bool ProductionEyeballOwnsVisibleDirection(vec3 unitDirection,float representedHeight)
-{
-  if(eye.identity.w==0u||eye.surface.w<.999999)return false;
-  vec3 direction=normalize(unitDirection),anchor=normalize(eye.tangentAnchorAngle.xyz);
-  vec3 reference=abs(anchor.y)<.95?vec3(0,1,0):vec3(1,0,0);
-  vec3 east=normalize(cross(reference,anchor)),north=normalize(cross(anchor,east));
-  float turns=atan(dot(direction,north),dot(direction,east))/6.2831853071795864769;
-  turns=turns-floor(turns);
-  uint segments=max(eye.topology.z,3u);
-  uint segment=min(uint(floor(turns*float(segments))),segments-1u);
-  float azimuth0=6.2831853071795864769*float(segment)/float(segments);
-  float azimuth1=6.2831853071795864769*float((segment+1u)%segments)/float(segments);
-  float capAngle=eye.tangentAnchorAngle.w;
-  vec3 edge0=normalize(anchor*cos(capAngle)+(east*cos(azimuth0)+north*sin(azimuth0))*sin(capAngle));
-  vec3 edge1=normalize(anchor*cos(capAngle)+(east*cos(azimuth1)+north*sin(azimuth1))*sin(capAngle));
-  vec3 edgePlane=cross(edge0,edge1);
-  // The outer Eye ring is a spherical polygon, not the analytic small circle
-  // implied by maximumAngleRadians.  Classifying against the exact outer
-  // topology makes every fully promoted pixel exclusive: the Eye owns the
-  // inside (including its edge), and the cube remains authoritative outside.
-  bool insidePolygon=dot(edgePlane,direction)*dot(edgePlane,anchor)>=0.0;
-  return insidePolygon&&ProductionEyeballVisibleFromCamera(direction,representedHeight);
+  return normalize(vec3(ProductionRaySpherePosition(fallbackDirection,representedHeight,radiusMetres)));
 }
 
 bool ProductionAnchoredOwnsDirection(vec3 unitDirection)
 {
-  if((eye.anchoredAddress.w&0x80000000u)==0u)return false;
-  uvec4 address=uvec4(eye.anchoredAddress.xyz,eye.anchoredAddress.w&0x7fffffffu);
-  address=uvec4(address.x,address.y,address.z,address.w);
-  vec3 direction=normalize(unitDirection),center=ProductionProjectF(address,vec2(.5));
-  for(uint side=0u;side<4u;side++)for(uint segment=0u;segment<4u;segment++)
+  if(anchoredCoverage.control.x==0u||anchoredCoverage.control.w==0u)return false;
+  uint face;vec2 uv;ProductionDirectionAddress(normalize(unitDirection),face,uv);
+  for(int signedLevel=int(anchoredCoverage.control.y);signedLevel>=0;signedLevel--)
   {
-    float a=float(segment)*.25,b=float(segment+1u)*.25;
-    vec2 local0=side==0u?vec2(a,0):side==1u?vec2(1,a):side==2u?vec2(1-a,1):vec2(0,1-a);
-    vec2 local1=side==0u?vec2(b,0):side==1u?vec2(1,b):side==2u?vec2(1-b,1):vec2(0,1-b);
-    vec3 edge0=ProductionProjectF(address,local0),edge1=ProductionProjectF(address,local1),plane=cross(edge0,edge1);
-    if(dot(plane,direction)*dot(plane,center)<0.0)return false;
+    uint level=uint(signedLevel),cells=1u<<level;
+    uvec2 coordinate=min(uvec2(floor(uv*float(cells))),uvec2(cells-1u));
+    uint key=0x80000000u|face|(level<<3u),slot=(key*0x9e3779b9u^coordinate.x*0x85ebca6bu^coordinate.y*0xc2b2ae35u);
+    slot^=slot>>16u;slot&=anchoredCoverage.control.w-1u;
+    for(uint probe=0u;probe<anchoredCoverage.control.w;probe++,slot=(slot+1u)&(anchoredCoverage.control.w-1u))
+    {
+      uvec4 entry=anchoredCoverage.entries[slot];
+      if(entry.x==0u)break;
+      if(entry.x==key&&entry.y==coordinate.x&&entry.z==coordinate.y&&entry.w==anchoredCoverage.control.z)return true;
+    }
   }
-  return true;
+  return false;
 }
 
 uint ResolveProductionFragmentLayerAtOrBelow(vec3 unitDirection,uint requestedLevel,out vec2 localUv,out uvec4 address)
 {
-  // A rendered triangle is not physical addressing authority. Eye and
-  // anchored triangles can cross payload charts, while even a global relaxed-
+  // A rendered triangle is not physical addressing authority. Anchored
+  // triangles can cross payload charts, while even a global relaxed-
   // cube triangle only linearly interpolates its patch-local coordinates.
   // Resolve the chart from the analytic body-fixed fragment direction. The
   // requested-level bound below still preserves the global patch's current
@@ -202,7 +179,9 @@ float ProductionFixedElevation(vec3 direction)
   uint layer=ResolveProductionFragmentLayer(normalize(direction),localUv,address);
   if(layer==0u)return 0.0;
   vec2 storedUv=(vec2(4.0)+clamp(localUv,0.0,1.0)*256.0)/264.0;
-  return textureLod(productionElevation,vec3(storedUv,float(layer-1u)),0.0).r*20000.0-11000.0;
+  double base=max(0.0,double(textureLod(productionElevation,vec3(storedUv,float(layer-1u)),0.0).r*20000.0-11000.0+
+    LocalTerrainElevationResidual(direction)));
+  return float(max(0.0,base+TerrainModifierHeightD(dvec3(direction))));
 }
 
 vec3 ProductionFixedPhysicalNormal(vec3 unitDirection,float radiusMetres)
@@ -243,18 +222,30 @@ vec3 ProductionFixedPhysicalNormal(vec3 unitDirection,float radiusMetres)
 
 void main()
 {
-  bool eyeball=(productionLayer&0x80000000u)!=0u;
   bool anchored=(productionLayer&0x40000000u)!=0u;
-  // The persistent cube-sphere remains the opaque coverage/depth parent until
-  // native promotion and CPU visible-footprint proof are both complete.  Only
-  // then does the Eye exclusively own front-visible pixels inside its analytic
-  // cap, avoiding both transient holes and depth competition between the two
-  // distinct triangulations.
+  // Published patch identities remain the transactional geographic authority,
+  // but pixel ownership is resolved by the rasterizer.  The anchored pass
+  // writes stencil for the samples it actually covers and the complete
+  // terrain-v5 parent subsequently fills stencil zero.  Discarding the parent
+  // from an independently reconstructed direction created grazing-angle teeth
+  // wherever that analytic boundary differed from the piecewise-linear mesh.
   vec3 unitDirection=normalize(bodyDirection);
-  if(!anchored&&ProductionAnchoredOwnsDirection(unitDirection))discard;
-  if(eyeball&&!ProductionEyeballVisibleFromCamera(unitDirection,terrainHeight))discard;
-  if(!eyeball&&!anchored&&ProductionEyeballOwnsVisibleDirection(unitDirection,terrainHeight))discard;
-  float bodyRadius=inputData.cameraHighRadiusHigh.w+inputData.cameraLowRadiusLow.w;
+  uint diagnostic=floatBitsToUint(lighting.radianceGlowEnabled.w)>>16;
+  // Ownership visualization is purely topological. Keep it ahead of physical
+  // payload and material evaluation so this diagnostic also isolates geometry
+  // submission/raster cost at production resolution.
+  if((diagnostic&32u)!=0u)
+  {
+    uint hash=productionAddress.x*0x9e3779b9u^productionAddress.y*0x85ebca6bu^
+      productionAddress.z*0xc2b2ae35u^productionAddress.w*0x27d4eb2fu;
+    hash^=hash>>16u;
+    float identity=.55+.45*float(hash&255u)/255.0;
+    float lod=.35+.65*clamp(float(productionAddress.y)/20.0,0.0,1.0);
+    outColor=vec4(anchored?vec3(.04,.20+.25*lod,.68*identity+.30):vec3(.68*identity+.30,.04,.04+.08*lod),1.0);
+    return;
+  }
+  double bodyRadiusMetres=double(inputData.cameraHighRadiusHigh.w)+double(inputData.cameraLowRadiusLow.w);
+  float bodyRadius=float(bodyRadiusMetres);
   // The global mesh's patch-local UV is a topology coordinate, not physical
   // surface authority.  Perspective interpolation across a planar relaxed-
   // cube triangle does not equal the body-fixed direction hit by the fragment
@@ -263,15 +254,22 @@ void main()
   // direction while retaining the global patch's active level.  This removes
   // a one-pixel material/filter discontinuity without changing geometry,
   // promotion, residency, or ownership.
-  vec3 samplingDirection=ProductionRaySphereDirection(unitDirection,terrainHeight,bodyRadius);
+  // Address every payload from one representation-independent camera ray.
+  // Using the owner's interpolated terrainHeight here made the global chord
+  // and dynamic mesh intersect different radial shells before either had
+  // resolved the authoritative payload. Sea level is only an addressing
+  // shell; the final physical point is reconstructed below from the resolved
+  // height transaction.
+  vec3 samplingDirection=ProductionRaySphereDirection(unitDirection,0.0,bodyRadius);
   vec2 resolvedUv;uvec4 resolvedAddress;
-  uint resolvedLayer=(eyeball||anchored)
+  uint resolvedLayer=anchored
     ?ResolveProductionFragmentLayer(samplingDirection,resolvedUv,resolvedAddress)
     :ResolveProductionFragmentLayerAtOrBelow(samplingDirection,productionAddress.y,resolvedUv,resolvedAddress);
   if(resolvedLayer==0u)discard;
   vec3 surfaceNormal=normalize(normal);
   ProductionSurfaceSample visible=SampleProductionSurface(resolvedAddress,resolvedLayer,resolvedUv,samplingDirection);
-  if(!eyeball&&!anchored&&resolvedAddress.y>0u)
+  if((diagnostic&8u)!=0u){outColor=vec4(visible.albedo,1.0);return;}
+  if(!anchored&&resolvedAddress.y>0u)
   {
     float surfaceWeight=productionTransition.x*MixedLodEdgeWeight(productionUv,uint(round(productionTransition.y)));
     if(surfaceWeight<.999999)
@@ -288,33 +286,65 @@ void main()
       visible.land=mix(parent.land,visible.land,surfaceWeight);
     }
   }
+  PhysicalModifierEvaluationD modifierEvaluation=EvaluateTerrainModifiersD(dvec3(samplingDirection));
+  float baseHeight=max(0.0,visible.elevation+LocalTerrainElevationResidual(samplingDirection));
+  visible.elevation=max(0.0,baseHeight+float(modifierEvaluation.tiledHeight+modifierEvaluation.erosionHeight));
   float sampledHeight=visible.elevation;
   vec3 sampledAlbedo=visible.albedo;
-  uint diagnostic=floatBitsToUint(lighting.radianceGlowEnabled.w)>>16;
+  if((diagnostic&32768u)!=0u)
+  {
+    uint mode=(diagnostic>>8u)&7u;
+    if(mode==0u){float value=clamp((baseHeight+1000.0)/5000.0,0.0,1.0);outColor=vec4(vec3(value),1.0);return;}
+    if(mode==1u){float value=clamp(.5+float(modifierEvaluation.tiledHeight+modifierEvaluation.erosionHeight)/32.0,0.0,1.0);outColor=vec4(value,.2,1.0-value,1.0);return;}
+    if(mode==2u){float value=clamp((visible.elevation+1000.0)/5000.0,0.0,1.0);outColor=vec4(vec3(value),1.0);return;}
+    if(mode==3u){outColor=vec4(ProductionFixedPhysicalNormal(samplingDirection,bodyRadius)*.5+.5,1.0);return;}
+    float identity=modifierEvaluation.dominantId==2u?1.0:.25;
+    outColor=vec4(float(modifierEvaluation.geographicWeight),identity,0.0,1.0);return;
+  }
   // Geometry producers may provide a useful construction normal, but it is
   // never lighting authority. Reconstruct the same physical differential
-  // after the rendered elevation transaction for global, Eye and anchored
+  // after the rendered elevation transaction for global and anchored
   // ownership alike so mesh-tier changes cannot expose interpolated facets.
   float landWeight=smoothstep(.45,.55,visible.land);
-  float representedHeight=mix(eye.surface.z,visible.elevation,landWeight);
-  vec3 analyticSphere=ProductionRaySphereDirection(samplingDirection,representedHeight,bodyRadius);
-  vec3 screenDerivativePhysical=ProductionPhysicalNormal(analyticSphere,visible.elevation,bodyRadius);
-  vec3 physical=ProductionFixedPhysicalNormal(analyticSphere,bodyRadius);
+  float representedHeight=mix(0.0,visible.elevation,landWeight);
+  // Resolve one final-pixel body-fixed surface point for every geometry owner.
+  // The former material coordinate used each owner's interpolated mesh point:
+  // coarse global chord positions and fine dynamic positions therefore sampled
+  // different procedural fields at the same canonical pixel.  The represented
+  // radial shell is already the payload/height authority, so retain its FP64
+  // ray intersection and derive both material identity and smooth derivatives
+  // from that shared point instead of from renderer topology.
+  dvec3 bodyMetres=ProductionRaySpherePosition(samplingDirection,representedHeight,bodyRadiusMetres);
+  vec3 analyticSphere=normalize(vec3(bodyMetres));
+  // Published hierarchy vertices already carry the canonical CPU physical
+  // normal for their exact body-fixed identity. Interpolate that authority
+  // across the 16x16 patch instead of reconstructing four FP64 height probes
+  // per fragment. The global fallback retains its topology-independent fixed
+  // reconstruction because its L0-L2 mesh is intentionally coarse.
+  vec3 physical=anchored?normalize(normal):ProductionFixedPhysicalNormal(analyticSphere,bodyRadius);
+  if((diagnostic&8192u)!=0u){outColor=vec4(normalize(mix(unitDirection,physical,smoothstep(.45,.55,visible.land)))*.5+.5,1.0);return;}
   // The terrain payload contains bathymetry, not an implemented water
   // displacement surface. Keep current ocean shading on the analytic sea
   // level normal and blend continuously through the land mask so quantized
   // sub-sea elevation cannot become high-frequency specular noise.
   surfaceNormal=normalize(mix(analyticSphere,physical,landWeight));
-  LocalTerrainMaterialSample localSample=SampleLocalTerrainMaterial(unitDirection);
-  if((eyeball||anchored)&&localSample.resident){sampledAlbedo=mix(sampledAlbedo,localSample.albedo,localSample.weight);surfaceNormal=normalize(mix(surfaceNormal,ApplyLocalTerrainNormal(unitDirection,localSample.normalXY),localSample.weight));}
+  LocalTerrainMaterialSample localSample=SampleLocalTerrainMaterial(samplingDirection);
+  if(localSample.resident){sampledAlbedo=mix(sampledAlbedo,localSample.albedo,localSample.weight);surfaceNormal=normalize(mix(surfaceNormal,ApplyLocalTerrainNormal(samplingDirection,localSample.normalXY),localSample.weight));}
   ProductionEarthMaterial earth=ProductionEarthSurfaceMaterial(
     sampledAlbedo,
     visible.land,
     sampledHeight,
     response);
   float surfaceAltitude=max(length(bodyCameraHigh+bodyCameraLow)-bodyRadius,0.0);
-  dvec3 bodyMetres=dvec3(bodyCameraHigh)+dvec3(bodyCameraLow)-dvec3(viewDirection);
-  vec3 differentialMetres=-viewDirection;
+  dvec3 cameraBodyMetres=dvec3(bodyCameraHigh)+dvec3(bodyCameraLow);
+  vec3 differentialMetres=vec3(bodyMetres-cameraBodyMetres);
+  if((diagnostic&130u)==130u)
+  {
+    float footprint=TerrainWorldFootprintMetres(differentialMetres);
+    float encoded=clamp(log2(max(footprint,1e-5))/24.0+.5,0.0,1.0);
+    outColor=vec4(encoded,1.0-abs(encoded-.5)*2.0,1.0-encoded,1.0);
+    return;
+  }
   ProductionTerrainMaterial terrainMaterial=SynthesizeProductionTerrainMaterial(
     earth.albedo,
     visible.land,
@@ -330,37 +360,26 @@ void main()
   surfaceNormal=terrainMaterial.normal;
   if((diagnostic&2048u)!=0u)surfaceNormal=unitDirection;
   if((diagnostic&4096u)!=0u)surfaceNormal=analyticSphere;
-  if((diagnostic&16384u)!=0u)surfaceNormal=normalize(mix(analyticSphere,screenDerivativePhysical,smoothstep(.45,.55,visible.land)));
-  if((diagnostic&32u)!=0u){outColor=vec4(anchored?vec3(0.08,0.35,1.0):eyeball?vec3(0.05,0.9,0.2):vec3(0.9,0.08,0.05),1.0);return;}
-  if((diagnostic&8192u)!=0u){outColor=vec4(normalize(mix(unitDirection,physical,smoothstep(.45,.55,visible.land)))*.5+.5,1.0);return;}
+  if((diagnostic&16384u)!=0u){vec3 screenDerivativePhysical=ProductionPhysicalNormal(analyticSphere,visible.elevation,bodyRadius);surfaceNormal=normalize(mix(analyticSphere,screenDerivativePhysical,smoothstep(.45,.55,visible.land)));}
   if((diagnostic&16u)!=0u){outColor=vec4(surfaceNormal*.5+.5,1.0);return;}
   if((diagnostic&8u)!=0u){outColor=vec4(earth.albedo,1.0);return;}
   if((diagnostic&64u)!=0u)
   {
     float boundary;
-    if(eyeball)
-    {
-      float ringDistance=abs(fract(topologyCoordinate.x*float(max(eye.topology.y,1u)))-.5);
-      float spokeDistance=abs(fract(topologyCoordinate.y*float(max(eye.topology.z,1u)))-.5);
-      boundary=1.0-smoothstep(.46,.495,max(ringDistance,spokeDistance));
-    }
-    else
-    {
-      vec2 edgeDistance=min(topologyCoordinate,1.0-topologyCoordinate);
-      float patchDistance=min(edgeDistance.x,edgeDistance.y);
-      float pixelWidth=max(fwidth(topologyCoordinate.x),fwidth(topologyCoordinate.y));
-      boundary=1.0-smoothstep(0.0,pixelWidth*1.5,patchDistance);
-      uint cells=1u<<productionAddress.y;
-      bool faceEdge=(productionAddress.z==0u&&topologyCoordinate.x<pixelWidth*1.5)||(productionAddress.z+1u==cells&&1.0-topologyCoordinate.x<pixelWidth*1.5)||(productionAddress.w==0u&&topologyCoordinate.y<pixelWidth*1.5)||(productionAddress.w+1u==cells&&1.0-topologyCoordinate.y<pixelWidth*1.5);
-      if(faceEdge){outColor=vec4(0.0,1.0,1.0,1.0);return;}
-    }
-    outColor=vec4(mix(earth.albedo,eyeball?vec3(0.1,1.0,0.2):vec3(1.0,.15,.05),boundary),1.0);return;
+    vec2 edgeDistance=min(topologyCoordinate,1.0-topologyCoordinate);
+    float patchDistance=min(edgeDistance.x,edgeDistance.y);
+    float pixelWidth=max(fwidth(topologyCoordinate.x),fwidth(topologyCoordinate.y));
+    boundary=1.0-smoothstep(0.0,pixelWidth*1.5,patchDistance);
+    uint cells=1u<<productionAddress.y;
+    bool faceEdge=(productionAddress.z==0u&&topologyCoordinate.x<pixelWidth*1.5)||(productionAddress.z+1u==cells&&1.0-topologyCoordinate.x<pixelWidth*1.5)||(productionAddress.w==0u&&topologyCoordinate.y<pixelWidth*1.5)||(productionAddress.w+1u==cells&&1.0-topologyCoordinate.y<pixelWidth*1.5);
+    if(faceEdge){outColor=vec4(0.0,1.0,1.0,1.0);return;}
+    outColor=vec4(mix(earth.albedo,vec3(1.0,.15,.05),boundary),1.0);return;
   }
   if((diagnostic&128u)!=0u){float depth=clamp(-log2(max(gl_FragCoord.z,1e-20))/64.0,0.0,1.0);outColor=vec4(vec3(depth),1.0);return;}
-  if((diagnostic&256u)!=0u){vec3 faces[6]=vec3[6](vec3(1,.1,.1),vec3(.1,1,.1),vec3(.1,.3,1),vec3(1,1,.1),vec3(1,.1,1),vec3(.1,1,1));float parity=float((resolvedAddress.z^resolvedAddress.w)&1u)*.22;outColor=vec4(faces[resolvedAddress.x]*(.62+.1*float(resolvedAddress.y)+parity),1.0);return;}
+  if((diagnostic&256u)!=0u){uvec4 address=resolvedAddress;uint hash=address.x*0x9e3779b9u^address.y*0x85ebca6bu^address.z*0xc2b2ae35u^address.w*0x27d4eb2fu;hash^=hash>>16u;vec3 identityColor=vec3(float((hash>>0u)&255u),float((hash>>8u)&255u),float((hash>>16u)&255u))/255.0;outColor=vec4(.2+.8*identityColor,1.0);return;}
   float ambient=max(lighting.sourceColorAmbient.w,.025);
   if((diagnostic&512u)!=0u){float diffuse=max(dot(normalize(surfaceNormal),normalize(lightDirection)),0.0);outColor=vec4(earth.albedo*mix(ambient,1.0,diffuse),1.0);return;}
   if((diagnostic&1024u)!=0u)earth.specular=0.0;
   vec3 lit=PlanetLighting(earth.albedo,surfaceNormal,lightDirection,viewDirection,earth.roughness,earth.specular,response.z*terrainMaterial.ambientOcclusion,ambient);
-  outColor=vec4(lit,eyeball?eye.surface.w:1.0);
+  outColor=vec4(lit,1.0);
 }

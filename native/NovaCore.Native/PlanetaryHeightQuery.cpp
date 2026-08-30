@@ -20,15 +20,19 @@ static_assert(offsetof(NcPlanetaryHeightQuery,localDelta)==32);
 static_assert(offsetof(NcPlanetaryHeightQuery,oracleUv)==48);
 static_assert(offsetof(NcPlanetaryHeightQuery,identity)==64);
 static_assert(offsetof(NcPlanetaryHeightQuery,metadata)==80);
-static_assert(sizeof(NcPlanetaryHeightResult)==160);
+static_assert(sizeof(NcPlanetaryHeightResult)==224);
 static_assert(offsetof(NcPlanetaryHeightResult,faceUv)==32);
 static_assert(offsetof(NcPlanetaryHeightResult,oracleAndTerrainV5Height)==48);
 static_assert(offsetof(NcPlanetaryHeightResult,localAndPhysicalHeight)==64);
-static_assert(offsetof(NcPlanetaryHeightResult,reconstructedXY)==80);
-static_assert(offsetof(NcPlanetaryHeightResult,reconstructedZAndLength)==96);
-static_assert(offsetof(NcPlanetaryHeightResult,globalIdentity)==112);
-static_assert(offsetof(NcPlanetaryHeightResult,localIdentity)==128);
-static_assert(offsetof(NcPlanetaryHeightResult,source)==144);
+static_assert(offsetof(NcPlanetaryHeightResult,baseAndModifierHeight)==80);
+static_assert(offsetof(NcPlanetaryHeightResult,modifierHeights)==96);
+static_assert(offsetof(NcPlanetaryHeightResult,finalGradient)==112);
+static_assert(offsetof(NcPlanetaryHeightResult,physicalNormalAndWeight)==128);
+static_assert(offsetof(NcPlanetaryHeightResult,reconstructedXY)==144);
+static_assert(offsetof(NcPlanetaryHeightResult,reconstructedZAndLength)==160);
+static_assert(offsetof(NcPlanetaryHeightResult,globalIdentity)==176);
+static_assert(offsetof(NcPlanetaryHeightResult,localIdentity)==192);
+static_assert(offsetof(NcPlanetaryHeightResult,source)==208);
 
 namespace {
 constexpr uint32_t OracleWidth=8192,OracleHeight=4096,StoredExtent=264;
@@ -88,7 +92,7 @@ void CreateBuffer(Context& c,Buffer& value,VkDeviceSize bytes){
 bool HasLayer(const char* name){uint32_t count=0;vkEnumerateInstanceLayerProperties(&count,nullptr);std::vector<VkLayerProperties> values(count);vkEnumerateInstanceLayerProperties(&count,values.data());return std::any_of(values.begin(),values.end(),[&](const auto& value){return std::strcmp(value.layerName,name)==0;});}
 void CreateContext(Context& c){
   const bool validation=HasLayer("VK_LAYER_KHRONOS_validation");const char* layer="VK_LAYER_KHRONOS_validation";const char* extension=VK_EXT_DEBUG_UTILS_EXTENSION_NAME;
-  VkApplicationInfo app{VK_STRUCTURE_TYPE_APPLICATION_INFO};app.pApplicationName="NovaCore 11B-7B dormant height query";app.apiVersion=VK_API_VERSION_1_2;
+  VkApplicationInfo app{VK_STRUCTURE_TYPE_APPLICATION_INFO};app.pApplicationName="NovaCore physical height query";app.apiVersion=VK_API_VERSION_1_2;
   VkInstanceCreateInfo instance{VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO};instance.pApplicationInfo=&app;if(validation){instance.enabledLayerCount=1;instance.ppEnabledLayerNames=&layer;instance.enabledExtensionCount=1;instance.ppEnabledExtensionNames=&extension;}Check(vkCreateInstance(&instance,nullptr,&c.instance),"height query Vulkan instance failed");
   if(validation){VkDebugUtilsMessengerCreateInfoEXT debug{VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT};debug.messageSeverity=VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;debug.messageType=VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT|VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT|VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;debug.pfnUserCallback=DebugCallback;debug.pUserData=&c.validationErrors;auto create=reinterpret_cast<PFN_vkCreateDebugUtilsMessengerEXT>(vkGetInstanceProcAddr(c.instance,"vkCreateDebugUtilsMessengerEXT"));if(create)Check(create(c.instance,&debug,nullptr,&c.messenger),"height query validation messenger failed");}
   uint32_t physicalCount=0;Check(vkEnumeratePhysicalDevices(c.instance,&physicalCount,nullptr),"height query physical enumeration failed");if(!physicalCount)throw std::runtime_error("height query physical device missing");std::vector<VkPhysicalDevice> devices(physicalCount);Check(vkEnumeratePhysicalDevices(c.instance,&physicalCount,devices.data()),"height query physical enumeration failed");

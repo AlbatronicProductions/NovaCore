@@ -2,7 +2,7 @@
 struct EncodedPosition { vec4 high; vec4 low; };
 struct GpuCameraData { EncodedPosition position; mat4 viewProjection; };
 layout(std430,set=0,binding=0) readonly buffer Frame { GpuCameraData camera; } frameData;
-struct Presentation { vec4 centerRadius; vec4 colorDistant; vec4 blendMetricState; uvec4 identity; vec4 surface; uvec4 hooks; vec4 ringGeometry; vec4 ringOrientation; vec4 ringColor; vec4 bodyOrientation; vec4 localDetail; };
+struct Presentation { vec4 centerRadius; vec4 colorDistant; vec4 blendMetricState; uvec4 identity; vec4 surface; uvec4 hooks; vec4 ringGeometry; vec4 ringOrientation; vec4 ringColor; vec4 bodyOrientation; vec4 localDetail; vec4 centerLow; };
 layout(std430,set=0,binding=6) readonly buffer Presentations { Presentation values[]; } presentations;
 layout(std430,set=0,binding=2) readonly buffer PlanetaryInput { vec4 cameraHighRadiusHigh; vec4 cameraLowRadiusLow; vec4 thresholds; uvec4 controls; vec4 viewForwardHalfAngle; vec4 textureDemand; } planetaryInput;
 layout(push_constant) uniform StellarLighting { vec4 sourceCenterExposure; vec4 sourceColorAmbient; vec4 radianceGlowEnabled; } lighting;
@@ -20,11 +20,13 @@ vec3 InverseRotateQuaternion(vec3 point,vec4 quaternion){return RotateQuaternion
 void main(){
   Presentation presentation=presentations.values[gl_InstanceIndex];
   vec3 bodyLocalPosition=inPosition*presentation.centerRadius.w;
-  vec3 position=presentation.centerRadius.xyz+RotateQuaternion(bodyLocalPosition,presentation.bodyOrientation);
-  gl_Position=frameData.camera.viewProjection*vec4(position,1);
+  vec3 local=RotateQuaternion(bodyLocalPosition,presentation.bodyOrientation);
+  gl_Position=frameData.camera.viewProjection*vec4(presentation.centerRadius.xyz,1.0)+
+    frameData.camera.viewProjection*vec4(presentation.centerLow.xyz+local,0.0);
+  vec3 position=presentation.centerRadius.xyz+(presentation.centerLow.xyz+local);
   color=vec4(presentation.colorDistant.rgb,1.0);
   normal=normalize(inPosition);
-  lightDirection=normalize(InverseRotateQuaternion(lighting.sourceCenterExposure.xyz-presentation.centerRadius.xyz,presentation.bodyOrientation));
+  lightDirection=normalize(InverseRotateQuaternion((lighting.sourceCenterExposure.xyz-presentation.centerRadius.xyz)-presentation.centerLow.xyz,presentation.bodyOrientation));
   stellar=floatBitsToUint(presentation.blendMetricState.w)&0x20000000u;
   material=uvec2(presentation.identity.w,presentation.identity.z);
   response=presentation.surface;

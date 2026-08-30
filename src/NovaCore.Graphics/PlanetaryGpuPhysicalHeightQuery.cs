@@ -5,8 +5,8 @@ using NovaCore.Interop;
 namespace NovaCore.Graphics;
 
 /// <summary>
-/// Deterministic dormant 11B-7B transport from body-fixed FP64 authority to the
-/// isolated GPU physical-height verifier. It is not part of live presentation.
+/// Deterministic transport from body-fixed FP64 authority to the isolated GPU
+/// physical-height verifier used by the current parity suite.
 /// </summary>
 public static class PlanetaryGpuPhysicalHeightQuery
 {

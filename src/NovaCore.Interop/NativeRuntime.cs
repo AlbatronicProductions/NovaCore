@@ -35,11 +35,22 @@ public struct NativeDrawBatch { public NativeMeshHandle Mesh; public uint FirstO
 /// <summary>64-byte presentation-only planetary patch record; face numbering and edge-mask bits equal Graphics contracts.</summary>
 [StructLayout(LayoutKind.Sequential)] public struct NativePlanetaryPatch { public uint Face,Level,X,Y; public float CenterX,CenterY,CenterZ,Radius; public float ColorR,ColorG,ColorB,ColorA; public uint StitchMask,Reserved0,Reserved1,Reserved2; }
 [StructLayout(LayoutKind.Sequential)]
-public struct NativeAnchoredTerrainVertex
+public struct NativeAnchoredSurfacePatch
 {
-    public NativeEncodedPosition BodyPosition;
-    public float NormalX,NormalY,NormalZ,NormalPadding;
-    public float ColorR,ColorG,ColorB,ColorA;
+    public uint BodyIdLow,BodyIdHigh,TerrainVersion,PhysicalSurfaceGeneration;
+    public uint Face,Level,X,Y;
+    public uint CacheSlot,CacheGeneration,StitchMask,Flags;
+    public uint MaterialLevel,MaterialX,MaterialY,MaterialGeneration;
+    public float BoundsX,BoundsY,BoundsZ,BoundsRadius;
+}
+[StructLayout(LayoutKind.Sequential)]
+public struct NativeAnchoredSurfacePresentation
+{
+    public NativeEncodedPosition Origin;
+    public NativeEncodedPosition East;
+    public NativeEncodedPosition North;
+    public NativeEncodedPosition Up;
+    public uint BodyIdLow, BodyIdHigh, SnapIdentity, PresentationGeneration;
 }
 [StructLayout(LayoutKind.Sequential)] public struct NativePlanetaryGpuConstants
 {
@@ -49,18 +60,6 @@ public struct NativeAnchoredTerrainVertex
     public uint MaximumLevel,OutputCapacity,TerrainVersion,TerrainFrame;
     public float ViewForwardX,ViewForwardY,ViewForwardZ,ViewHalfAngleRadians;
     public float ViewportHeightPixels,VerticalTanHalfFov,TargetTexelPixels,RequestedAlbedoLevel;
-}
-[StructLayout(LayoutKind.Sequential)] public struct NativePlanetaryEyeball
-{
-    public float CameraBodyHighX,CameraBodyHighY,CameraBodyHighZ,RadiusHigh;
-    public float CameraBodyLowX,CameraBodyLowY,CameraBodyLowZ,RadiusLow;
-    public float SurfaceAltitudeMetres,MaximumTerrainHeightMetres,OceanSeaLevelMetres,BlendAlpha;
-    public uint BodyIdLow,BodyIdHigh,TerrainVersion,Enabled;
-    public float TangentAnchorX,TangentAnchorY,TangentAnchorZ,MaximumAngleRadians;
-    public float RadialWarpExponent,DetailFrequency,NormalStepMetres,RegionalAlpha;
-    public uint VertexCount,IndexCount,RadialRingCount,AzimuthSegmentCount;
-    public uint Reserved0,Reserved1,Reserved2,Reserved3;
-    public uint AnchoredFace,AnchoredLevel,AnchoredX,AnchoredYEnabled;
 }
 [StructLayout(LayoutKind.Sequential)] public struct NativePlanetaryPresentation
 {
@@ -75,12 +74,13 @@ public struct NativeAnchoredTerrainVertex
     public float RingColorR,RingColorG,RingColorB,RingColorA;
     public float BodyOrientationX,BodyOrientationY,BodyOrientationZ,BodyOrientationW;
     public float LocalDetailScaleMeters,LocalDetailMicroScaleMeters,LocalDetailFadeStartMetres,LocalDetailFadeEndMetres;
+    public float CenterLowX,CenterLowY,CenterLowZ,CenterLowPadding;
 }
 [StructLayout(LayoutKind.Sequential)] public struct NativeSolarLighting { public float SourceCenterX,SourceCenterY,SourceCenterZ,Exposure; public float PhotosphereR,PhotosphereG,PhotosphereB,AmbientFloor; public float SourceRadiance,GlowStrength; public uint Enabled,SpeedHud; }
- [StructLayout(LayoutKind.Sequential)] public struct NativeOrbitLineVertex { public float X, Y, Z; }
+ [StructLayout(LayoutKind.Sequential)] public struct NativeOrbitLineVertex { public float X, Y, Z, LowX, LowY, LowZ; }
 
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct NativeFrameSubmission { public NativeCameraData Camera; public NativeRenderObject* Objects; public uint ObjectCount; public NativeDrawBatch* Batches; public uint BatchCount; public NativeOrbitLineVertex* OrbitVertices; public uint OrbitVertexCount; public NativeOrbitLineVertex* PreviousOrbitVertices; public uint PreviousOrbitVertexCount; public NativeOrbitLineVertex* BodyForwardVertices; public uint BodyForwardVertexCount; public NativeOrbitLineVertex* TargetDirectionVertices; public uint TargetDirectionVertexCount; public NativePlanetaryPatch* PlanetaryPatches; public uint PlanetaryPatchCount; public uint PlanetaryGpuAlignmentPadding; public NativePlanetaryGpuConstants PlanetaryGpu; public NativePlanetaryMode PlanetaryMode; public NativePlanetarySurfaceMode PlanetarySurfaceMode; public uint PlanetaryPadding1,PlanetaryPadding2; public NativePlanetaryPresentation PlanetaryPresentation; public NativePlanetaryPresentation* DistantBodies; public uint DistantBodyCount, DistantBodyPadding; public NativeSolarLighting SolarLighting; public NativePlanetaryEyeball PlanetaryEyeball; public NativeAnchoredTerrainVertex* AnchoredTerrainVertices; public uint AnchoredTerrainVertexCount, AnchoredTerrainTier, AnchoredTerrainFlags; public uint AnchoredTerrainTier0VertexCount,AnchoredTerrainTier1VertexCount,AnchoredTerrainTier2VertexCount; }
+public unsafe struct NativeFrameSubmission { public NativeCameraData Camera; public NativeRenderObject* Objects; public uint ObjectCount; public NativeDrawBatch* Batches; public uint BatchCount; public NativeOrbitLineVertex* OrbitVertices; public uint OrbitVertexCount; public NativeOrbitLineVertex* PreviousOrbitVertices; public uint PreviousOrbitVertexCount; public NativeOrbitLineVertex* BodyForwardVertices; public uint BodyForwardVertexCount; public NativeOrbitLineVertex* TargetDirectionVertices; public uint TargetDirectionVertexCount; public NativePlanetaryPatch* PlanetaryPatches; public uint PlanetaryPatchCount; public uint PlanetaryGpuAlignmentPadding; public NativePlanetaryGpuConstants PlanetaryGpu; public NativePlanetaryMode PlanetaryMode; public NativePlanetarySurfaceMode PlanetarySurfaceMode; public uint PlanetaryPadding1,PlanetaryPadding2; public NativePlanetaryPresentation PlanetaryPresentation; public NativePlanetaryPresentation* DistantBodies; public uint DistantBodyCount, DistantBodyPadding; public NativeSolarLighting SolarLighting; public NativeAnchoredSurfacePatch* AnchoredSurfacePatches; public uint AnchoredSurfacePatchCount,AnchoredSurfaceCacheSlotCount,AnchoredSurfaceActiveGeneration,AnchoredSurfaceFlags,AnchoredSurfaceGpuReadyGeneration,AnchoredSurfacePadding1,AnchoredSurfacePadding2,AnchoredSurfacePadding3,AnchoredSurfacePadding4,AnchoredSurfacePadding5; public NativeAnchoredSurfacePresentation AnchoredSurfacePresentation; }
 
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct NativeRuntimeAssets
@@ -88,6 +88,7 @@ public unsafe struct NativeRuntimeAssets
     public uint Size, Version;
     public byte* ProductionTerrainPathUtf8;
     public byte* LocalTerrainPathUtf8;
+    public byte* ElevationOraclePathUtf8;
 }
 
 [StructLayout(LayoutKind.Sequential)]
@@ -109,6 +110,10 @@ public struct NativePlanetaryHeightResult
     public double FaceU,FaceV;
     public double OracleElevationMetres,TerrainV5ElevationMetres;
     public double LocalResidualMetres,PhysicalHeightMetres;
+    public double BaseHeightMetres,ModifierHeightMetres;
+    public double TiledModifierHeightMetres,ErosionModifierHeightMetres;
+    public double EastGradient,NorthGradient;
+    public float PhysicalNormalX,PhysicalNormalY,PhysicalNormalZ,ModifierWeight;
     public double ReconstructedX,ReconstructedY;
     public double ReconstructedZ,ReconstructedLength;
     public uint GlobalFace,GlobalLevel,GlobalX,GlobalY;
@@ -188,11 +193,11 @@ public struct NativeAbiLayout
     public uint EncodedPositionSize, CameraDataSize, CameraPositionOffset, CameraViewProjectionOffset, RenderTransformSize, RenderObjectSize, RenderObjectPositionOffset, RenderObjectTransformOffset, RenderObjectMeshOffset;
     public uint DrawBatchSize, OrbitLineVertexSize, FrameSubmissionSize, FrameObjectsOffset, FrameBatchesOffset, FrameOrbitVerticesOffset, FrameOrbitVertexCountOffset;
     public uint InputStateSize, InputDeltaSecondsOffset, InputMoveLeftOffset, InputMoveRightOffset, InputMoveForwardOffset, InputMoveBackwardOffset, InputMoveDownOffset, InputMoveUpOffset, InputResetOffset, InputLookActiveOffset, InputMouseDeltaXOffset, InputMouseDeltaYOffset, InputMouseWheelDetentsOffset, InputPauseToggleOffset, InputRateDecreaseOffset, InputRateIncreaseOffset, InputSasModeKeyOffset, InputFastModifierOffset, InputSlowModifierOffset;
-    public uint FramePlanetaryGpuOffset, FramePlanetaryModeOffset, FramePlanetaryPresentationOffset, InputPresentationFocusOffset, FrameSolarLightingOffset, FramePlanetaryEyeballOffset;
+    public uint FramePlanetaryGpuOffset, FramePlanetaryModeOffset, FramePlanetaryPresentationOffset, InputPresentationFocusOffset, FrameSolarLightingOffset, InputViewportWidthOffset, InputViewportHeightOffset;
 }
 
 [StructLayout(LayoutKind.Sequential)]
-public struct NativeInputState { public float DeltaSeconds; public uint MoveLeft, MoveRight, MoveForward, MoveBackward, MoveDown, MoveUp, Reset, LookActive; public float MouseDeltaX, MouseDeltaY; public int MouseWheelDetents; public uint PauseToggle, RateDecrease, RateIncrease, SasModeKey, FastModifier, SlowModifier; public NativePresentationFocus PresentationFocus; }
+public struct NativeInputState { public float DeltaSeconds; public uint MoveLeft, MoveRight, MoveForward, MoveBackward, MoveDown, MoveUp, Reset, LookActive; public float MouseDeltaX, MouseDeltaY; public int MouseWheelDetents; public uint PauseToggle, RateDecrease, RateIncrease, SasModeKey, FastModifier, SlowModifier; public NativePresentationFocus PresentationFocus; public uint ViewportWidthPixels, ViewportHeightPixels; }
 
 public enum NativeHostEventType : uint { Diagnostic = 1, UpdateFrame = 2 }
 

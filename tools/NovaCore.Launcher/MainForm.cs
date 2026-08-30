@@ -13,7 +13,10 @@ public sealed class MainForm : Form
     private readonly Label _bodyValue = new();
     private readonly Label _locationValue = new();
     private readonly NumericUpDown _altitude = new();
-    private readonly CheckBox _validation = new();
+    private readonly ComboBox _windowMode = new();
+    private readonly ComboBox _resolution = new();
+    private readonly ComboBox _diagnostics = new();
+    private readonly Label _resolvedClient = new();
     private readonly Label _productionAsset = new();
     private readonly Label _localAsset = new();
     private readonly TextBox _commandPreview = new();
@@ -27,15 +30,17 @@ public sealed class MainForm : Form
         _repositoryRoot = Path.GetFullPath(repositoryRoot);
         Text = "NovaCore — Startup Configuration";
         StartPosition = FormStartPosition.CenterScreen;
-        MinimumSize = new Size(700, 720);
-        ClientSize = new Size(760, 760);
+        MinimumSize = new Size(700, 780);
+        ClientSize = new Size(760, 820);
         BackColor = Color.FromArgb(15, 20, 28);
         ForeColor = Color.FromArgb(226, 232, 240);
         Font = new Font("Segoe UI", 10.0f, FontStyle.Regular, GraphicsUnit.Point);
 
+        _loading = true;
         BuildInterface();
         AcceptButton = _launch;
         LoadSettings();
+        LocationChanged += (_, _) => SelectionChanged();
         Shown += async (_, _) => await RefreshAssetStatusAsync();
     }
 
@@ -115,11 +120,37 @@ public sealed class MainForm : Form
         root.Controls.Add(situationGroup);
 
         var rendererGroup = Group("RENDERER / DEVELOPMENT");
-        _validation.AutoSize = true;
-        _validation.Text = "Enable Vulkan validation logging";
-        _validation.Margin = new Padding(12);
-        _validation.CheckedChanged += (_, _) => SelectionChanged();
-        rendererGroup.Controls.Add(_validation);
+        var rendererLayout = TwoColumnLayout();
+        rendererGroup.Controls.Add(rendererLayout);
+        rendererLayout.Controls.Add(FieldLabel("Window mode"), 0, 0);
+        ConfigureOptions<NovaCoreWindowMode>(_windowMode,
+        [
+            new(NovaCoreWindowMode.Windowed, "Windowed"),
+            new(NovaCoreWindowMode.BorderlessFullscreen, "Borderless Fullscreen")
+        ]);
+        rendererLayout.Controls.Add(_windowMode, 1, 0);
+        rendererLayout.Controls.Add(FieldLabel("Resolution"), 0, 1);
+        ConfigureOptions<NovaCoreResolutionPreset>(_resolution,
+        [
+            new(NovaCoreResolutionPreset.NativeDesktop, "Native / Desktop"),
+            new(NovaCoreResolutionPreset.Resolution3440x1440, "3440 × 1440"),
+            new(NovaCoreResolutionPreset.Resolution2560x1440, "2560 × 1440"),
+            new(NovaCoreResolutionPreset.Resolution1920x1080, "1920 × 1080"),
+            new(NovaCoreResolutionPreset.Resolution1280x720, "1280 × 720"),
+            new(NovaCoreResolutionPreset.Resolution960x540, "960 × 540")
+        ]);
+        rendererLayout.Controls.Add(_resolution, 1, 1);
+        rendererLayout.Controls.Add(FieldLabel("Resolved client"), 0, 2);
+        rendererLayout.Controls.Add(_resolvedClient, 1, 2);
+        rendererLayout.Controls.Add(FieldLabel("Diagnostics"), 0, 3);
+        ConfigureOptions<NovaCoreDiagnosticsMode>(_diagnostics,
+        [
+            new(NovaCoreDiagnosticsMode.Normal, "Normal"),
+            new(NovaCoreDiagnosticsMode.PerformanceTelemetry, "Performance Telemetry"),
+            new(NovaCoreDiagnosticsMode.VulkanValidation, "Vulkan Validation"),
+            new(NovaCoreDiagnosticsMode.VulkanValidationAndPerformance, "Vulkan Validation + Performance")
+        ]);
+        rendererLayout.Controls.Add(_diagnostics, 1, 3);
         root.Controls.Add(rendererGroup);
 
         var assetsGroup = Group("ASSETS");
@@ -170,7 +201,9 @@ public sealed class MainForm : Form
         var settings = LauncherSettingsStore.LoadOrDefault();
         var definition = ScenarioCatalog.Get(settings.Preset);
         _scenario.SelectedItem = definition;
-        _validation.Checked = settings.EnableVulkanValidation;
+        SelectOption(_windowMode, settings.WindowMode);
+        SelectOption(_resolution, settings.Resolution);
+        SelectOption(_diagnostics, settings.Diagnostics);
         if (definition.DefaultAltitudeMetres.HasValue)
         {
             var altitude = settings.AltitudeMetres ?? definition.DefaultAltitudeMetres.Value;
@@ -207,17 +240,27 @@ public sealed class MainForm : Form
         {
             _altitude.Value = Math.Clamp((decimal)definition.DefaultAltitudeMetres.Value, _altitude.Minimum, _altitude.Maximum);
         }
+        if (presetChanged)
+        {
+            SelectOption(_windowMode, definition.DefaultWindowMode);
+            SelectOption(_resolution, definition.DefaultResolution);
+            SelectOption(_diagnostics, definition.DefaultDiagnostics);
+        }
 
         if (TryCurrentConfiguration(out var configuration, out var error))
         {
             var plan = NovaCoreProcessLauncher.CreatePlan(_repositoryRoot, configuration!);
             _commandPreview.Text = plan.DisplayCommand;
+            _resolvedClient.Text = $"{configuration!.ClientResolution} — {WindowModeLabel(configuration.WindowMode)}";
+            _resolvedClient.ForeColor = Color.FromArgb(74, 222, 128);
             _launch.Enabled = true;
-            _status.Text = "Ready.";
+            _status.Text = $"Ready — {configuration.ClientResolution} {WindowModeLabel(configuration.WindowMode)}.";
         }
         else
         {
             _commandPreview.Text = error;
+            _resolvedClient.Text = "Unavailable";
+            _resolvedClient.ForeColor = Color.FromArgb(248, 113, 113);
             _launch.Enabled = false;
             _status.Text = error;
         }
@@ -235,10 +278,15 @@ public sealed class MainForm : Form
         }
 
         double? altitude = definition.DefaultAltitudeMetres.HasValue ? decimal.ToDouble(_altitude.Value) : null;
+        var bounds = Screen.FromControl(this).Bounds;
         return ScenarioCatalog.TryCreateConfiguration(
             definition.Preset,
             altitude,
-            _validation.Checked,
+            SelectedOption<NovaCoreWindowMode>(_windowMode),
+            SelectedOption<NovaCoreResolutionPreset>(_resolution),
+            SelectedOption<NovaCoreDiagnosticsMode>(_diagnostics),
+            bounds.Width,
+            bounds.Height,
             out configuration,
             out error);
     }
@@ -258,7 +306,8 @@ public sealed class MainForm : Form
             process.EnableRaisingEvents = true;
             process.Exited += (_, _) => ReportProcessExit(process);
             LauncherSettingsStore.TrySave(
-                new(configuration!.Preset, configuration.AltitudeMetres, configuration.EnableVulkanValidation),
+                new(configuration!.Preset, configuration.AltitudeMetres, configuration.WindowMode,
+                    configuration.ResolutionPreset, configuration.Diagnostics),
                 out var settingsError);
             _status.Text = settingsError is null
                 ? $"NovaCore started (process {process.Id.ToString(CultureInfo.InvariantCulture)})."
@@ -379,5 +428,42 @@ public sealed class MainForm : Form
         ForeColor = Color.FromArgb(203, 213, 225),
         BackColor = Color.FromArgb(30, 41, 59),
         Margin = new Padding(0, 8, 0, 0)
+    };
+
+    private sealed record Option<T>(T Value, string Label)
+    {
+        public override string ToString() => Label;
+    }
+
+    private void ConfigureOptions<T>(ComboBox comboBox, IReadOnlyList<Option<T>> options)
+    {
+        comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+        comboBox.Dock = DockStyle.Fill;
+        comboBox.DataSource = options.ToList();
+        comboBox.SelectedIndexChanged += (_, _) => SelectionChanged();
+    }
+
+    private static T SelectedOption<T>(ComboBox comboBox) =>
+        comboBox.SelectedItem is Option<T> option
+            ? option.Value
+            : throw new InvalidOperationException("A launcher option has not been selected.");
+
+    private static void SelectOption<T>(ComboBox comboBox, T value)
+    {
+        for (var index = 0; index < comboBox.Items.Count; index++)
+        {
+            if (comboBox.Items[index] is Option<T> option && EqualityComparer<T>.Default.Equals(option.Value, value))
+            {
+                comboBox.SelectedIndex = index;
+                return;
+            }
+        }
+    }
+
+    private static string WindowModeLabel(NovaCoreWindowMode mode) => mode switch
+    {
+        NovaCoreWindowMode.Windowed => "Windowed",
+        NovaCoreWindowMode.BorderlessFullscreen => "Borderless",
+        _ => mode.ToString()
     };
 }

@@ -318,6 +318,30 @@ public static class EarthLocalTerrainElevationDataset
         return 0d;
     }
 
+    public static bool Intersects(CubeSphereFace face, int level, int x, int y)
+    {
+        if (face is < CubeSphereFace.PositiveX or > CubeSphereFace.NegativeZ ||
+            level is < 0 or > PlanetaryLocalTerrainPackContract.MaximumSectorLevel ||
+            x < 0 || y < 0 || x >= 1 << level || y >= 1 << level)
+            throw new ArgumentOutOfRangeException();
+        var snapshot = Volatile.Read(ref _snapshot); if (snapshot is null) return false;
+        foreach (var sector in snapshot.Residuals.Keys)
+        {
+            if (sector.Face != face) continue;
+            if (level <= sector.Level)
+            {
+                var shift = sector.Level - level;
+                if (sector.X >> shift == x && sector.Y >> shift == y) return true;
+            }
+            else
+            {
+                var shift = level - sector.Level;
+                if (x >> shift == sector.X && y >> shift == sector.Y) return true;
+            }
+        }
+        return false;
+    }
+
     private static bool TryCopy(ReadOnlySpan<byte> source, Span<byte> destination)
     { if (source.Length != destination.Length) return false; source.CopyTo(destination); return true; }
 

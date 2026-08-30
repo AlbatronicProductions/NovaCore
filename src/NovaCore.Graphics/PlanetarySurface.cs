@@ -41,23 +41,24 @@ public readonly record struct PlanetaryLodConfiguration
 {
     public PlanetaryLodConfiguration(double nearFieldAltitudeRadii,int maximumLevel):this(nearFieldAltitudeRadii,maximumLevel,.11d) { }
     public PlanetaryLodConfiguration(double nearFieldAltitudeRadii,int maximumLevel,double maximumProjectedPatchSpan)
-        :this(nearFieldAltitudeRadii,maximumLevel,maximumProjectedPatchSpan,0d,0d,0d) { }
-    private PlanetaryLodConfiguration(double nearFieldAltitudeRadii,int maximumLevel,double maximumProjectedPatchSpan,double maximumTerrainHeightMetres,double targetPatchPixels,double viewportHeightPixels)
-    { NearFieldAltitudeRadii=nearFieldAltitudeRadii;MaximumLevel=maximumLevel;MaximumProjectedPatchSpan=maximumProjectedPatchSpan;MaximumTerrainHeightMetres=maximumTerrainHeightMetres;TargetPatchPixels=targetPatchPixels;ViewportHeightPixels=viewportHeightPixels; }
+        :this(nearFieldAltitudeRadii,maximumLevel,maximumProjectedPatchSpan,0d,0d,0d,false) { }
+    private PlanetaryLodConfiguration(double nearFieldAltitudeRadii,int maximumLevel,double maximumProjectedPatchSpan,double maximumTerrainHeightMetres,double targetPatchPixels,double viewportHeightPixels,bool relaxedCubeProjection)
+    { NearFieldAltitudeRadii=nearFieldAltitudeRadii;MaximumLevel=maximumLevel;MaximumProjectedPatchSpan=maximumProjectedPatchSpan;MaximumTerrainHeightMetres=maximumTerrainHeightMetres;TargetPatchPixels=targetPatchPixels;ViewportHeightPixels=viewportHeightPixels;RelaxedCubeProjection=relaxedCubeProjection; }
     public double NearFieldAltitudeRadii { get; }
     public int MaximumLevel { get; }
     public double MaximumProjectedPatchSpan { get; }
     public double MaximumTerrainHeightMetres { get; }
     public double TargetPatchPixels { get; }
     public double ViewportHeightPixels { get; }
+    public bool RelaxedCubeProjection { get; }
     public bool IsValid=>double.IsFinite(NearFieldAltitudeRadii)&&NearFieldAltitudeRadii>0&&MaximumLevel is >=0 and <=24&&double.IsFinite(MaximumProjectedPatchSpan)&&MaximumProjectedPatchSpan>0&&double.IsFinite(MaximumTerrainHeightMetres)&&MaximumTerrainHeightMetres>=0;
 
     /// <summary>Converts a patch pixel budget into the selector's conservative angular-span metric.</summary>
-    public static PlanetaryLodConfiguration ForViewport(double nearFieldAltitudeRadii,int maximumLevel,double targetPatchPixels,double viewportHeightPixels,double verticalFieldOfViewRadians,double maximumTerrainHeightMetres=0d)
+    public static PlanetaryLodConfiguration ForViewport(double nearFieldAltitudeRadii,int maximumLevel,double targetPatchPixels,double viewportHeightPixels,double verticalFieldOfViewRadians,double maximumTerrainHeightMetres=0d,bool relaxedCubeProjection=false)
     {
         if(!double.IsFinite(targetPatchPixels)||targetPatchPixels<=0||!double.IsFinite(viewportHeightPixels)||viewportHeightPixels<=0||!double.IsFinite(verticalFieldOfViewRadians)||verticalFieldOfViewRadians<=0||verticalFieldOfViewRadians>=Math.PI)throw new ArgumentOutOfRangeException();
         var span=2d*targetPatchPixels*Math.Tan(verticalFieldOfViewRadians*.5d)/viewportHeightPixels;
-        return new(nearFieldAltitudeRadii,maximumLevel,span,maximumTerrainHeightMetres,targetPatchPixels,viewportHeightPixels);
+        return new(nearFieldAltitudeRadii,maximumLevel,span,maximumTerrainHeightMetres,targetPatchPixels,viewportHeightPixels,relaxedCubeProjection);
     }
 }
 
@@ -75,6 +76,42 @@ public readonly record struct PlanetaryLodSelection(
     int MergedPatchCount,
     int ParentFallbackCount,
     int PendingChildCount);
+
+/// <summary>
+/// Conservative body-fixed sphere for one curved patch over the complete
+/// physical-height envelope.  Selection and native submission share this
+/// bound so a patch cannot be culled with weaker geometry than is consumed by
+/// the renderer.
+/// </summary>
+public readonly record struct PlanetaryPatchConservativeBounds(Double3 Center,double Radius)
+{
+    public bool IsValid=>Center.IsFinite&&double.IsFinite(Radius)&&Radius>=0d;
+    public double DistanceTo(in Double3 point)=>Math.Sqrt((point-Center).LengthSquared);
+    public bool IntersectsSphere(in Double3 center,double radius)
+    {
+        if(!double.IsFinite(radius)||radius<0d)throw new ArgumentOutOfRangeException(nameof(radius));
+        var sum=Radius+radius;return(center-Center).LengthSquared<=sum*sum;
+    }
+}
+
+/// <summary>
+/// Conservative swept bound for the complete radial displacement interval.
+/// Keeping the inner and outer curved bounds separate avoids turning a tall,
+/// tiny patch into a many-kilometre center sphere during near-eye selection.
+/// </summary>
+public readonly record struct PlanetaryPatchDisplacedBounds(
+    PlanetaryPatchConservativeBounds Inner,PlanetaryPatchConservativeBounds Outer)
+{
+    public bool IsValid=>Inner.IsValid&&Outer.IsValid;
+    public bool IntersectsSphere(in Double3 center,double radius)
+    {
+        if(!double.IsFinite(radius)||radius<0d)throw new ArgumentOutOfRangeException(nameof(radius));
+        var axis=Outer.Center-Inner.Center;var lengthSquared=axis.LengthSquared;
+        var amount=lengthSquared<=1e-24d?0d:Math.Clamp(Double3.Dot(center-Inner.Center,axis)/lengthSquared,0d,1d);
+        var closest=Inner.Center+axis*amount;var envelopeRadius=Math.Max(Inner.Radius,Outer.Radius)+radius;
+        return(center-closest).LengthSquared<=envelopeRadius*envelopeRadius;
+    }
+}
 
 /// <summary>Integer-only adjacency for the normalized cube projection, including oriented cross-face edges.</summary>
 public static class CubeSphereAdjacency
@@ -149,15 +186,51 @@ public static class PlanetaryRepresentationSelector
         =>SelectPatches(body,cameraRootPosition,configuration,viewForward,verticalFieldOfViewRadians,aspectRatio,surfaceAltitudeMetres,ReadOnlySpan<PlanetaryPatch>.Empty);
 
     public static PlanetaryLodSelection SelectPatches(in PlanetRenderProxy body,in Double3 cameraRootPosition,in PlanetaryLodConfiguration configuration,in Double3 viewForward,double verticalFieldOfViewRadians,double aspectRatio,double surfaceAltitudeMetres,ReadOnlySpan<PlanetaryPatch> previousLeaves)
+        =>SelectPatches(body,cameraRootPosition,configuration,viewForward,verticalFieldOfViewRadians,
+            aspectRatio,surfaceAltitudeMetres,.05d,previousLeaves);
+
+    public static PlanetaryLodSelection SelectPatches(in PlanetRenderProxy body,in Double3 cameraRootPosition,in PlanetaryLodConfiguration configuration,in Double3 viewForward,double verticalFieldOfViewRadians,double aspectRatio,double surfaceAltitudeMetres,double nearClipMetres,ReadOnlySpan<PlanetaryPatch> previousLeaves)
+        =>SelectPatchesCore(body,cameraRootPosition,configuration,viewForward,verticalFieldOfViewRadians,
+            aspectRatio,surfaceAltitudeMetres,nearClipMetres,double.PositiveInfinity,previousLeaves);
+
+    /// <summary>
+    /// Selects one orientation-independent, body-fixed neighborhood around the
+    /// viewer.  The global hierarchy remains the coarse owner outside this
+    /// bounded region; GPU culling decides which retained primitives are visible.
+    /// </summary>
+    public static PlanetaryLodSelection SelectRetainedNeighborhood(in PlanetRenderProxy body,
+        in Double3 cameraRootPosition,in PlanetaryLodConfiguration configuration,
+        double surfaceAltitudeMetres,double nearClipMetres,double neighborhoodRadiusMetres,
+        ReadOnlySpan<PlanetaryPatch> previousLeaves)
     {
-        if(!double.IsFinite(surfaceAltitudeMetres)||surfaceAltitudeMetres<0)throw new ArgumentOutOfRangeException(nameof(surfaceAltitudeMetres));
+        if(!double.IsFinite(neighborhoodRadiusMetres)||neighborhoodRadiusMetres<=nearClipMetres)
+            throw new ArgumentOutOfRangeException(nameof(neighborhoodRadiusMetres));
+        return SelectPatchesCore(body,cameraRootPosition,configuration,Double3.Zero,0d,0d,
+            surfaceAltitudeMetres,nearClipMetres,neighborhoodRadiusMetres,previousLeaves);
+    }
+
+    private static PlanetaryLodSelection SelectPatchesCore(in PlanetRenderProxy body,in Double3 cameraRootPosition,in PlanetaryLodConfiguration configuration,in Double3 viewForward,double verticalFieldOfViewRadians,double aspectRatio,double surfaceAltitudeMetres,double nearClipMetres,double retainedNeighborhoodRadiusMetres,ReadOnlySpan<PlanetaryPatch> previousLeaves)
+    {
+        if(!double.IsFinite(surfaceAltitudeMetres)||surfaceAltitudeMetres<0||!double.IsFinite(nearClipMetres)||nearClipMetres<=0)throw new ArgumentOutOfRangeException();
         var useFrustum=viewForward.IsFinite&&viewForward.LengthSquared>0&&double.IsFinite(verticalFieldOfViewRadians)&&verticalFieldOfViewRadians>0&&verticalFieldOfViewRadians<Math.PI&&double.IsFinite(aspectRatio)&&aspectRatio>0;var normalizedForward=useFrustum?viewForward.Normalized():Double3.Zero;var halfViewAngle=useFrustum?Math.Atan(Math.Sqrt(Math.Pow(Math.Tan(verticalFieldOfViewRadians*.5d)*aspectRatio,2d)+Math.Pow(Math.Tan(verticalFieldOfViewRadians*.5d),2d))):0d;
         var representation=Select(body,cameraRootPosition,configuration);if(representation==PlanetaryRepresentation.FarFieldBody)return new(representation,0,[],[],0,0,0,0,0,0,0,0,0);
         var previousExact=previousLeaves.IsEmpty?null:new HashSet<PlanetaryPatch>(previousLeaves.Length);var previousRefined=previousLeaves.IsEmpty?null:new HashSet<PlanetaryPatch>();
         if(previousExact is not null&&previousRefined is not null)foreach(ref readonly var leaf in previousLeaves){previousExact.Add(leaf);var parent=leaf.Parent;while(parent is { } value){previousRefined.Add(value);parent=value.Parent;}}
         var cameraRelative=cameraRootPosition-body.Position.Value;var selectionSurfaceRadius=configuration.MaximumTerrainHeightMetres>0?Math.Sqrt(cameraRelative.LengthSquared)-surfaceAltitudeMetres:body.RadiusMetres;var active=new HashSet<PlanetaryPatch>();var refined=0;var frustumCulled=0;var horizonCulled=0;var splits=0;var merges=0;
-        foreach(CubeSphereFace face in Enum.GetValues<CubeSphereFace>())Traverse(new(face,0,0,0),cameraRelative,body.RadiusMetres,selectionSurfaceRadius,surfaceAltitudeMetres,configuration,normalizedForward,halfViewAngle,useFrustum,previousExact,previousRefined,active,ref refined,ref frustumCulled,ref horizonCulled,ref splits,ref merges);
-        var balanced=Balance(active,configuration.MaximumLevel);var ordered=Order(active);var masks=new PlanetaryPatchEdge[ordered.Length];
+        if(!RelaxedCubeSphereProjection.TryAddress(cameraRelative,out var nadirFace,out var nadirU,out var nadirV))throw new InvalidOperationException("Planetary nadir address is unavailable.");
+        foreach(CubeSphereFace face in Enum.GetValues<CubeSphereFace>())Traverse(new(face,0,0,0),cameraRelative,body.RadiusMetres,selectionSurfaceRadius,surfaceAltitudeMetres,nearClipMetres,retainedNeighborhoodRadiusMetres,configuration,normalizedForward,halfViewAngle,useFrustum,nadirFace,nadirU,nadirV,previousExact,previousRefined,active,ref refined,ref frustumCulled,ref horizonCulled,ref splits,ref merges);
+        var balanced=Balance(active,configuration.MaximumLevel);var ordered=Order(active);var masks=ComputeStitchMasks(ordered,active);
+        var maximum=ordered.Length==0?0:ordered.Max(patch=>patch.Level);return new(representation,maximum,ordered,masks,refined,balanced,frustumCulled+horizonCulled,frustumCulled,horizonCulled,splits,merges,0,0);
+    }
+
+    /// <summary>
+    /// Computes the production stitch template for an already balanced canonical
+    /// leaf set.  The fine patch owns stitching in its own local edge frame;
+    /// cube-face rotation is used only to locate the covering coarse neighbor.
+    /// </summary>
+    public static PlanetaryPatchEdge[] ComputeStitchMasks(ReadOnlySpan<PlanetaryPatch> ordered,IReadOnlySet<PlanetaryPatch> active)
+    {
+        ArgumentNullException.ThrowIfNull(active);var masks=new PlanetaryPatchEdge[ordered.Length];
         for(var index=0;index<ordered.Length;index++)
         {
             foreach(var edge in Edges)
@@ -167,7 +240,7 @@ public static class PlanetaryRepresentationSelector
                 else if(neighbor is { } invalid&&invalid.Level+1<ordered[index].Level)throw new InvalidOperationException("Unbalanced planetary patch selection.");
             }
         }
-        var maximum=ordered.Length==0?0:ordered.Max(patch=>patch.Level);return new(representation,maximum,ordered,masks,refined,balanced,frustumCulled+horizonCulled,frustumCulled,horizonCulled,splits,merges,0,0);
+        return masks;
     }
 
     public static PlanetaryPatch? FindCoveringNeighbor(in PlanetaryPatch patch,PlanetaryPatchEdge edge,IReadOnlySet<PlanetaryPatch> active)
@@ -184,43 +257,123 @@ public static class PlanetaryRepresentationSelector
         refinementCount=Balance(active,maximumLevel);return Order(active);
     }
 
-    private static void Traverse(PlanetaryPatch patch,in Double3 cameraRelative,double radius,double selectionSurfaceRadius,double surfaceAltitudeMetres,in PlanetaryLodConfiguration configuration,in Double3 viewForward,double halfViewAngle,bool useFrustum,HashSet<PlanetaryPatch>? previousExact,HashSet<PlanetaryPatch>? previousRefined,HashSet<PlanetaryPatch> active,ref int refined,ref int frustumCulled,ref int horizonCulled,ref int splits,ref int merges)
+    private static void Traverse(PlanetaryPatch patch,in Double3 cameraRelative,double radius,double selectionSurfaceRadius,double surfaceAltitudeMetres,double nearClipMetres,double retainedNeighborhoodRadiusMetres,in PlanetaryLodConfiguration configuration,in Double3 viewForward,double halfViewAngle,bool useFrustum,CubeSphereFace nadirFace,double nadirU,double nadirV,HashSet<PlanetaryPatch>? previousExact,HashSet<PlanetaryPatch>? previousRefined,HashSet<PlanetaryPatch> active,ref int refined,ref int frustumCulled,ref int horizonCulled,ref int splits,ref int merges)
     {
-        if(patch.Level>0&&IsHorizonCulled(patch,cameraRelative,radius,configuration.MaximumTerrainHeightMetres)){horizonCulled++;return;}
-        if(patch.Level>0&&useFrustum&&IsViewCulled(patch,cameraRelative,selectionSurfaceRadius,viewForward,halfViewAngle)){frustumCulled++;return;}
-        var wasLeaf=previousExact?.Contains(patch)==true;var wasRefined=previousRefined?.Contains(patch)==true;var threshold=configuration.MaximumProjectedPatchSpan*(wasLeaf ? 1.12d : wasRefined ? .88d : 1d);var projectedSpan=ProjectedSpan(patch,cameraRelative,configuration.MaximumTerrainHeightMetres>0?selectionSurfaceRadius:radius);
-        if(patch.Level==configuration.MaximumLevel||projectedSpan<=threshold){active.Add(patch);if(wasRefined)merges++;return;}
-        refined++;if(wasLeaf)splits++;for(var child=0;child<4;child++)Traverse(patch.Child(child),cameraRelative,radius,selectionSurfaceRadius,surfaceAltitudeMetres,configuration,viewForward,halfViewAngle,useFrustum,previousExact,previousRefined,active,ref refined,ref frustumCulled,ref horizonCulled,ref splits,ref merges);
+        var containsNadir=ContainsAddress(patch,nadirFace,nadirU,nadirV);
+        var conservative=DisplacedBounds(patch,radius,
+            configuration.MaximumTerrainHeightMetres,configuration.RelaxedCubeProjection);
+        // A curved patch whose complete physical envelope reaches the eye/near
+        // sphere is never an off-screen owner.  It must refine before culling;
+        // otherwise one coarse triangle can straddle the camera plane and be
+        // magnified into a screen-filling planar sheet.
+        // The canonical column containing the camera radial is the only patch
+        // that can surround the eye while being entirely outside the forward
+        // frustum.  Refine that column deterministically; do not interpret the
+        // planet-wide height envelope as a request to refine a many-kilometre
+        // disk around the camera.
+        var eyeRelevant=containsNadir||conservative.IntersectsSphere(cameraRelative,nearClipMetres);
+        if(patch.Level>0&&!containsNadir&&double.IsFinite(retainedNeighborhoodRadiusMetres)&&
+            !conservative.IntersectsSphere(cameraRelative,retainedNeighborhoodRadiusMetres))
+        {
+            frustumCulled++;
+            return;
+        }
+        if(patch.Level>0&&!containsNadir&&!eyeRelevant&&IsHorizonCulled(conservative,cameraRelative,radius,
+            configuration.MaximumTerrainHeightMetres)){horizonCulled++;return;}
+        if(patch.Level>0&&useFrustum&&!eyeRelevant&&IsViewCulled(conservative,cameraRelative,viewForward,halfViewAngle,nearClipMetres))
+        {
+            frustumCulled++;
+            return;
+        }
+        var wasLeaf=previousExact?.Contains(patch)==true;var wasRefined=previousRefined?.Contains(patch)==true;var threshold=configuration.MaximumProjectedPatchSpan*(wasLeaf ? 1.12d : wasRefined ? .88d : 1d);var projectedSpan=ProjectedSpan(patch,cameraRelative,configuration.MaximumTerrainHeightMetres>0?selectionSurfaceRadius:radius,configuration.RelaxedCubeProjection);
+        if(patch.Level==configuration.MaximumLevel||(!eyeRelevant&&projectedSpan<=threshold)){active.Add(patch);if(wasRefined)merges++;return;}
+        refined++;if(wasLeaf)splits++;for(var child=0;child<4;child++)Traverse(patch.Child(child),cameraRelative,radius,selectionSurfaceRadius,surfaceAltitudeMetres,nearClipMetres,retainedNeighborhoodRadiusMetres,configuration,viewForward,halfViewAngle,useFrustum,nadirFace,nadirU,nadirV,previousExact,previousRefined,active,ref refined,ref frustumCulled,ref horizonCulled,ref splits,ref merges);
     }
 
-    private static double ProjectedSpan(in PlanetaryPatch patch,in Double3 cameraRelative,double radius)
+    public static PlanetaryPatchConservativeBounds ConservativeBounds(in PlanetaryPatch patch,
+        double bodyRadius,double maximumTerrainHeightMetres,bool relaxed=true)
     {
-        var bounds=patch.Bounds;var center=CubeSphereProjection.Project(patch.Face,(bounds.MinX+bounds.MaxX)*.5d,(bounds.MinY+bounds.MaxY)*.5d,radius);var halfSpan=0d;
-        halfSpan=Math.Max(halfSpan,Distance(center,CubeSphereProjection.Project(patch.Face,bounds.MinX,bounds.MinY,radius)));
-        halfSpan=Math.Max(halfSpan,Distance(center,CubeSphereProjection.Project(patch.Face,bounds.MaxX,bounds.MinY,radius)));
-        halfSpan=Math.Max(halfSpan,Distance(center,CubeSphereProjection.Project(patch.Face,bounds.MinX,bounds.MaxY,radius)));
-        halfSpan=Math.Max(halfSpan,Distance(center,CubeSphereProjection.Project(patch.Face,bounds.MaxX,bounds.MaxY,radius)));
+        if(!double.IsFinite(bodyRadius)||bodyRadius<=0d||!double.IsFinite(maximumTerrainHeightMetres)||maximumTerrainHeightMetres<0d)throw new ArgumentOutOfRangeException();
+        var b=patch.Bounds;var face=patch.Face;var middleRadius=bodyRadius+maximumTerrainHeightMetres*.5d;
+        var outerRadius=bodyRadius+maximumTerrainHeightMetres;
+        var centerDirection=Project(face,(b.MinX+b.MaxX)*.5d,(b.MinY+b.MaxY)*.5d,1d,relaxed);
+        var center=centerDirection*middleRadius;var radius=maximumTerrainHeightMetres*.5d;
+        // Corners plus edge midpoints capture the chart's directional extrema.
+        // The O(cell^2) curvature guard bounds the unsampled smooth arc between
+        // those points and deliberately becomes conservative at coarse levels.
+        Expand(b.MinX,b.MinY);Expand(b.MaxX,b.MinY);Expand(b.MinX,b.MaxY);Expand(b.MaxX,b.MaxY);
+        var middleU=(b.MinX+b.MaxX)*.5d;var middleV=(b.MinY+b.MaxY)*.5d;
+        Expand(middleU,b.MinY);Expand(middleU,b.MaxY);Expand(b.MinX,middleV);Expand(b.MaxX,middleV);
+        var cellSpan=Math.ScaleB(1d,-patch.Level);
+        radius+=outerRadius*8d*cellSpan*cellSpan;
+        var result=new PlanetaryPatchConservativeBounds(center,radius);
+        if(!result.IsValid)throw new InvalidOperationException("Invalid conservative planetary patch bound.");
+        return result;
+
+        void Expand(double u,double v)
+        {
+            var point=Project(face,u,v,outerRadius,relaxed);
+            radius=Math.Max(radius,Math.Sqrt((point-center).LengthSquared));
+        }
+    }
+
+    public static PlanetaryPatchDisplacedBounds DisplacedBounds(in PlanetaryPatch patch,
+        double bodyRadius,double maximumTerrainHeightMetres,bool relaxed=true)
+    {
+        if(!double.IsFinite(bodyRadius)||bodyRadius<=0d||!double.IsFinite(maximumTerrainHeightMetres)||maximumTerrainHeightMetres<0d)
+            throw new ArgumentOutOfRangeException();
+        var result=new PlanetaryPatchDisplacedBounds(
+            ConservativeBounds(patch,bodyRadius,0d,relaxed),
+            ConservativeBounds(patch,bodyRadius+maximumTerrainHeightMetres,0d,relaxed));
+        if(!result.IsValid)throw new InvalidOperationException("Invalid displaced planetary patch bound.");
+        return result;
+    }
+
+    private static bool ContainsAddress(in PlanetaryPatch patch,CubeSphereFace face,double u,double v)
+    {
+        if(patch.Face!=face)return false;
+        var cells=1<<patch.Level;
+        var x=Math.Min((int)Math.Floor(u*cells),cells-1);
+        var y=Math.Min((int)Math.Floor(v*cells),cells-1);
+        return patch.X==x&&patch.Y==y;
+    }
+
+    private static double ProjectedSpan(in PlanetaryPatch patch,in Double3 cameraRelative,double radius,bool relaxed)
+    {
+        var bounds=patch.Bounds;var center=Project(patch.Face,(bounds.MinX+bounds.MaxX)*.5d,(bounds.MinY+bounds.MaxY)*.5d,radius,relaxed);var halfSpan=0d;
+        halfSpan=Math.Max(halfSpan,Distance(center,Project(patch.Face,bounds.MinX,bounds.MinY,radius,relaxed)));
+        halfSpan=Math.Max(halfSpan,Distance(center,Project(patch.Face,bounds.MaxX,bounds.MinY,radius,relaxed)));
+        halfSpan=Math.Max(halfSpan,Distance(center,Project(patch.Face,bounds.MinX,bounds.MaxY,radius,relaxed)));
+        halfSpan=Math.Max(halfSpan,Distance(center,Project(patch.Face,bounds.MaxX,bounds.MaxY,radius,relaxed)));
         var distanceToPatch=Math.Max(Distance(cameraRelative,center),radius*1e-12d);return 2d*halfSpan/distanceToPatch;
     }
 
-    private static bool IsHorizonCulled(in PlanetaryPatch patch,in Double3 cameraRelative,double radius,double maximumTerrainHeightMetres)
+    private static bool IsHorizonCulled(in PlanetaryPatchDisplacedBounds displaced,in Double3 cameraRelative,double radius,double maximumTerrainHeightMetres)
     {
-        var cameraDistance=Math.Sqrt(cameraRelative.LengthSquared);if(cameraDistance<=radius)return false;var view=cameraRelative/cameraDistance;var bounds=patch.Bounds;var center=CubeSphereProjection.Project(patch.Face,(bounds.MinX+bounds.MaxX)*.5d,(bounds.MinY+bounds.MaxY)*.5d,1d);var angularRadius=0d;
-        angularRadius=Math.Max(angularRadius,Angle(center,CubeSphereProjection.Project(patch.Face,bounds.MinX,bounds.MinY,1d)));
-        angularRadius=Math.Max(angularRadius,Angle(center,CubeSphereProjection.Project(patch.Face,bounds.MaxX,bounds.MinY,1d)));
-        angularRadius=Math.Max(angularRadius,Angle(center,CubeSphereProjection.Project(patch.Face,bounds.MinX,bounds.MaxY,1d)));
-        angularRadius=Math.Max(angularRadius,Angle(center,CubeSphereProjection.Project(patch.Face,bounds.MaxX,bounds.MaxY,1d)));
-        angularRadius+=Math.Asin(Math.Clamp(maximumTerrainHeightMetres/radius,0d,.5d));var centerAngle=Angle(center,view);var horizon=Math.Acos(Math.Clamp(radius/cameraDistance,-1d,1d));return centerAngle-angularRadius>horizon;
+        var bounds=displaced.Outer;
+        var cameraDistance=Math.Sqrt(cameraRelative.LengthSquared);if(cameraDistance<=radius)return false;
+        var centerDistance=Math.Sqrt(bounds.Center.LengthSquared);if(centerDistance<=bounds.Radius)return false;
+        var angularRadius=Math.Asin(Math.Clamp(bounds.Radius/centerDistance,0d,1d));
+        var centerAngle=Angle(bounds.Center,cameraRelative);var horizon=Math.Acos(Math.Clamp(radius/cameraDistance,-1d,1d));
+        return centerAngle-angularRadius>horizon;
     }
 
-    private static bool IsViewCulled(in PlanetaryPatch patch,in Double3 cameraRelative,double surfaceRadius,in Double3 viewForward,double halfViewAngle)
+    private static bool IsViewCulled(in PlanetaryPatchDisplacedBounds bounds,in Double3 cameraRelative,in Double3 viewForward,double halfViewAngle,double nearClipMetres)
     {
-        var bounds=patch.Bounds;var center=CubeSphereProjection.Project(patch.Face,(bounds.MinX+bounds.MaxX)*.5d,(bounds.MinY+bounds.MaxY)*.5d,surfaceRadius)-cameraRelative;if(center.LengthSquared<=surfaceRadius*surfaceRadius*1e-24d)return false;var angularRadius=0d;
-        angularRadius=Math.Max(angularRadius,Angle(center,CubeSphereProjection.Project(patch.Face,bounds.MinX,bounds.MinY,surfaceRadius)-cameraRelative));
-        angularRadius=Math.Max(angularRadius,Angle(center,CubeSphereProjection.Project(patch.Face,bounds.MaxX,bounds.MinY,surfaceRadius)-cameraRelative));
-        angularRadius=Math.Max(angularRadius,Angle(center,CubeSphereProjection.Project(patch.Face,bounds.MinX,bounds.MaxY,surfaceRadius)-cameraRelative));
-        angularRadius=Math.Max(angularRadius,Angle(center,CubeSphereProjection.Project(patch.Face,bounds.MaxX,bounds.MaxY,surfaceRadius)-cameraRelative));
-        return Angle(center,viewForward)-angularRadius>halfViewAngle;
+        var a=bounds.Inner.Center-cameraRelative;var b=bounds.Outer.Center-cameraRelative;var axis=b-a;
+        var axisLengthSquared=axis.LengthSquared;var closestAmount=axisLengthSquared<=1e-24d?0d:
+            Math.Clamp(-Double3.Dot(a,axis)/axisLengthSquared,0d,1d);
+        var minimumDistance=Math.Sqrt((a+axis*closestAmount).LengthSquared);
+        var clipAwareRadius=Math.Max(bounds.Inner.Radius,bounds.Outer.Radius)+nearClipMetres;
+        if(minimumDistance<=clipAwareRadius)return false;
+        var q=a.LengthSquared;var r=Double3.Dot(a,axis);var s=axisLengthSquared;
+        var c=Double3.Dot(a,viewForward);var d=Double3.Dot(axis,viewForward);
+        var denominator=d*r-c*s;var alignmentAmount=Math.Abs(denominator)<=1e-24d?0d:
+            Math.Clamp((c*r-d*q)/denominator,0d,1d);
+        var minimumCenterAngle=Math.Min(Angle(a,viewForward),Math.Min(Angle(b,viewForward),
+            Angle(a+axis*alignmentAmount,viewForward)));
+        var angularRadius=Math.Asin(Math.Clamp(clipAwareRadius/minimumDistance,0d,1d));
+        return minimumCenterAngle-angularRadius>halfViewAngle;
     }
 
     private static int Balance(HashSet<PlanetaryPatch> active,int maximumLevel)
@@ -266,6 +419,7 @@ public static class PlanetaryRepresentationSelector
     }
 
     private static double Distance(in Double3 a,in Double3 b)=>Math.Sqrt((a-b).LengthSquared);
+    private static Double3 Project(CubeSphereFace face,double u,double v,double radius,bool relaxed)=>relaxed?RelaxedCubeSphereProjection.Project(face,u,v,radius):CubeSphereProjection.Project(face,u,v,radius);
     private static double Angle(in Double3 a,in Double3 b){var denominator=Math.Sqrt(a.LengthSquared*b.LengthSquared);if(denominator<=0)return 0d;return Math.Acos(Math.Clamp((a.X*b.X+a.Y*b.Y+a.Z*b.Z)/denominator,-1d,1d));}
 }
 

@@ -4,7 +4,7 @@ using NovaCore.Core.Camera;
 namespace NovaCore.Graphics;
 
 /// <summary>
-/// Backend-neutral 11B-7D screen-space demand authority. Both incident owners
+/// Backend-neutral screen-space demand authority. Both incident owners
 /// project the same canonically ordered physical endpoints, then quantize the
 /// same fixed-point length. No face-local chart or camera value enters identity.
 /// </summary>
@@ -12,6 +12,26 @@ public static class PlanetaryScreenSpaceSubdivision
 {
     public const uint FixedPointScale = 65536;
     public const double DefaultHysteresisFraction = 0.125d;
+
+    /// <summary>
+    /// Production tessellation-stage policy. The factor is a power of two so
+    /// incident edges with the same projected endpoints refine identically.
+    /// It is independent of CPU patch level and bounded by device policy.
+    /// </summary>
+    public static uint QuantizedGpuFactor(double projectedLengthPixels,
+        double targetLengthPixels = PlanetaryDynamicAnchoredSurface.GpuTargetEdgePixels,
+        uint maximumFactor = PlanetaryDynamicAnchoredSurface.GpuMaximumTessellationFactor)
+    {
+        if (double.IsNaN(projectedLengthPixels) || projectedLengthPixels < 0d ||
+            !double.IsFinite(targetLengthPixels) || targetLengthPixels <= 0d ||
+            maximumFactor == 0 || (maximumFactor & (maximumFactor - 1u)) != 0u)
+            throw new ArgumentOutOfRangeException();
+        if (double.IsPositiveInfinity(projectedLengthPixels)) return maximumFactor;
+        var required = Math.Max(1d, projectedLengthPixels / targetLengthPixels);
+        var factor = 1u;
+        while (factor < maximumFactor && factor < required) factor <<= 1;
+        return Math.Min(factor, maximumFactor);
+    }
 
     public static PlanetaryAnchoredMeshSubdivisionDemand Project(
         in PlanetaryAnchoredMeshEdgeId edge,

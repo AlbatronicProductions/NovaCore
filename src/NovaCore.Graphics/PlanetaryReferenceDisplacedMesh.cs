@@ -3,12 +3,12 @@ using NovaCore.Core;
 namespace NovaCore.Graphics;
 
 /// <summary>
-/// Bounded dormant 11B-7C whole-body mesh. Canonical cube-surface vertex keys
+/// Bounded reference whole-body mesh. Canonical cube-surface vertex keys
 /// deduplicate all face edges and corners before adjacency is built, so physical
 /// normal neighborhoods are face-independent. This is validation topology,
 /// not live terrain ownership or a production density decision.
 /// </summary>
-public sealed class PlanetaryDormantDisplacedMesh
+public sealed class PlanetaryReferenceDisplacedMesh
 {
     public const int ProofQuadsPerFaceSide = 4;
     public const uint TopologyVersion = 2;
@@ -18,7 +18,7 @@ public sealed class PlanetaryDormantDisplacedMesh
     private readonly uint[] _adjacencyWords;
     private readonly uint[] _faceGridIndices;
 
-    private PlanetaryDormantDisplacedMesh(PlanetaryAnchoredMeshVertexId[] vertices, uint[] indices,
+    private PlanetaryReferenceDisplacedMesh(PlanetaryAnchoredMeshVertexId[] vertices, uint[] indices,
         uint[] adjacencyWords, uint[] faceGridIndices, int quadsPerFaceSide, ulong deterministicHash)
     {
         _vertices = vertices; _indices = indices; _adjacencyWords = adjacencyWords;
@@ -42,7 +42,7 @@ public sealed class PlanetaryDormantDisplacedMesh
         return _faceGridIndices[(int)face * row * row + y * row + x];
     }
 
-    public static PlanetaryDormantDisplacedMesh Create(int subdivisionFactor = 1)
+    public static PlanetaryReferenceDisplacedMesh Create(int subdivisionFactor = 1)
     {
         if (subdivisionFactor is < 1 or > MaximumProofSubdivisionFactor ||
             (subdivisionFactor & (subdivisionFactor - 1)) != 0)

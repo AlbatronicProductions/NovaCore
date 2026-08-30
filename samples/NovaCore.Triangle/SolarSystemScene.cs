@@ -197,6 +197,23 @@ internal readonly record struct SolarScreenRect(double MinX, double MinY, double
 
 internal sealed class SolarSystemScene
 {
+    internal readonly record struct OrbitPresentationCacheKey(
+        ulong SystemDefinitionHash, ulong OrbiterBodyId, ulong ParentBodyId,
+        int TrajectoryPayloadIndex, int SegmentCount);
+    private readonly record struct OrbitLocalShapeAuthority(
+        TwoBodyTrajectory Trajectory,
+        double CentralGravitationalParameter,
+        AnalyticalKeplerSecularCorrection Secular,
+        AnalyticalKeplerPeriodicCorrection Periodic,
+        Double3 PeriapsisAxis,
+        Double3 TransverseAxis,
+        double SemiMajorAxis,
+        double Eccentricity,
+        double SemiMinorFactor);
+    private static readonly double[] OrbitSampleCosines = Enumerable.Range(0, OrbitSampleCount)
+        .Select(sample => Math.Cos(2d * Math.PI * sample / OrbitSegmentCount)).ToArray();
+    private static readonly double[] OrbitSampleSines = Enumerable.Range(0, OrbitSampleCount)
+        .Select(sample => Math.Sin(2d * Math.PI * sample / OrbitSegmentCount)).ToArray();
     internal static readonly ulong[] BodyOrder = [2, 3, 4, 6, 7, 8, 9, 10, 11, 12];
     internal const int OrbitPathCount = 9;
     internal const int OrbitSegmentCount = 128;
@@ -231,16 +248,24 @@ internal sealed class SolarSystemScene
     private readonly FrameTransform[] _roots;
     private readonly ReferenceFrameEvaluation[] _staging;
     private readonly FrameTransform[] _stagingRoots;
+    private readonly ReferenceFrameEvaluation[] _independentReferenceEvaluations;
+    private readonly FrameTransform[] _independentReferenceRoots;
+    private readonly ReferenceFrameEvaluation[] _independentReferenceStaging;
+    private readonly FrameTransform[] _independentReferenceStagingRoots;
     private readonly EvaluatedPlanetaryBody[] _bodyStaging;
+    private readonly Double3[] _parentLocalOrbitSamples;
+    private readonly Double3[] _presentationLocalOrbitSamples;
     private readonly Double3[] _rootOrbitSamples;
-    private readonly Double3[] _orbitSampleStaging;
     private readonly Double3[] _moonOrbitControlSamples;
     private readonly Double3[] _moonOrbitPeriodicControls;
     private readonly Double3[] _moonOrbitDenseSamples;
     private readonly double[] _moonOrbitCumulativeLengths;
-    private readonly int[] _orbitTraversalIndices;
     private readonly int[] _orbitCenterTraversalIndices;
     private readonly double[] _orbitPeriods;
+    private readonly OrbitPresentationCacheKey[] _orbitCacheKeys;
+    private readonly OrbitLocalShapeAuthority[] _orbitAuthorities;
+    private readonly int[] _orbitCurrentSampleIndices;
+    private readonly double[] _orbitCurrentSampleErrors;
     private readonly SimulationClock _clock;
     private readonly bool[] _visibleLabels = new bool[BodyOrder.Length];
     private readonly bool[] _visibleMarkers = new bool[BodyOrder.Length];
@@ -248,14 +273,13 @@ internal sealed class SolarSystemScene
     private readonly bool[] _labelBoundsValid = new bool[BodyOrder.Length];
     private readonly SolarScreenRect[] _labelBounds = new SolarScreenRect[BodyOrder.Length];
     private readonly ulong[] _visibleLabelIds = new ulong[BodyOrder.Length];
-    private readonly PlanetaryProductionPupilOrientation _productionPupilOrientation = new();
-    private readonly PlanetaryProductionEyeballSelection _productionEyeballSelection = new();
     private PlanetaryRepresentationHandoff _handoff = new(EarthPlanetaryScene.HandoffConfiguration);
-    private bool _eyeballCoversVisibleSurface = true;
     private PlanetaryRepresentationBlend _blend;
     private int _rateStepIndex = 1;
     private double _speedHudSecondsRemaining;
     private double _orbitDistance;
+    private long _orbitCurveBuildCount = 1, _orbitCurveReuseCount;
+    private SimulationInstant _orbitAuthorityTime;
     private double _orbitYawRadians;
     private double _orbitPitchRadians;
     private DoubleQuaternion? _inertialOrbitOrientationOverride;
@@ -266,8 +290,6 @@ internal sealed class SolarSystemScene
     private double _retainedVisualAimWeight;
     private double _surfaceAltitudeMetres=double.PositiveInfinity;
     private PlanetaryCameraPresentationMode _surfaceCameraMode;
-    private float _eyeballWeight;
-    private PlanetaryProductionPupilCell _productionPupilCell;
     private double _moonOrbitEndpointMismatchMetres;
     private int _cameraClearanceCorrectionCount;
     private long _cameraClearanceTerrainQueries;
@@ -279,6 +301,9 @@ internal sealed class SolarSystemScene
     private int _cameraClearanceMaximumIterations;
     private double _cameraClearanceMaximumCorrectionMetres;
     private Double3 _publishedCameraRoot;
+    private Double3 _lastOrbitCameraRoot;
+    private DoubleQuaternion _lastOrbitCameraOrientation = DoubleQuaternion.Identity;
+    private CameraProjection _lastOrbitCameraProjection;
     private double _bodyLocalCameraAltitudeDemandMetres=double.NaN;
     private Double3 _bodyLocalCameraPlacementSeedRoot;
     private bool _bodyLocalCameraPlacementPending;
@@ -295,30 +320,39 @@ internal sealed class SolarSystemScene
         CelestialSystemDefinition system,
         ReferenceFrameId root,
         int[] traversalIndices,
-        Double3[] rootOrbitSamples,
-        int[] orbitTraversalIndices,
+        Double3[] parentLocalOrbitSamples,
         int[] orbitCenterTraversalIndices,
         double[] orbitPeriods,
+        OrbitPresentationCacheKey[] orbitCacheKeys,
+        OrbitLocalShapeAuthority[] orbitAuthorities,
         SimulationInstant initialTime,
         DateTimeOffset? startupUtc)
     {
         _system = system;
         _root = root;
         _traversalIndices = traversalIndices;
-        _rootOrbitSamples = rootOrbitSamples;
-        _orbitSampleStaging = new Double3[rootOrbitSamples.Length];
+        _parentLocalOrbitSamples = parentLocalOrbitSamples;
+        _presentationLocalOrbitSamples = new Double3[parentLocalOrbitSamples.Length];
+        _rootOrbitSamples = new Double3[parentLocalOrbitSamples.Length];
         _moonOrbitControlSamples = new Double3[OrbitSegmentCount];
         _moonOrbitPeriodicControls = new Double3[OrbitSegmentCount];
         _moonOrbitDenseSamples = new Double3[MoonPeriodicDenseSampleCount + 1];
         _moonOrbitCumulativeLengths = new double[MoonPeriodicDenseSampleCount + 1];
-        BuildPeriodicMoonOrbit(_rootOrbitSamples);
-        _orbitTraversalIndices = orbitTraversalIndices;
+        BuildPeriodicMoonOrbitDiagnostics(_parentLocalOrbitSamples);
         _orbitCenterTraversalIndices = orbitCenterTraversalIndices;
         _orbitPeriods = orbitPeriods;
+        _orbitCacheKeys = orbitCacheKeys;
+        _orbitAuthorities = orbitAuthorities;
+        _orbitCurrentSampleIndices = new int[OrbitPathCount];
+        _orbitCurrentSampleErrors = new double[OrbitPathCount];
         _evaluations = new ReferenceFrameEvaluation[system.Count];
         _roots = new FrameTransform[system.Count];
         _staging = new ReferenceFrameEvaluation[system.Count];
         _stagingRoots = new FrameTransform[system.Count];
+        _independentReferenceEvaluations = new ReferenceFrameEvaluation[system.Count];
+        _independentReferenceRoots = new FrameTransform[system.Count];
+        _independentReferenceStaging = new ReferenceFrameEvaluation[system.Count];
+        _independentReferenceStagingRoots = new FrameTransform[system.Count];
         _bodyStaging = new EvaluatedPlanetaryBody[BodyOrder.Length];
         _clock = new SimulationClock(initialTime, new SimulationTimeline(), SimulationSpeedPresets.Get(_rateStepIndex).Rate);
         DistantBodies = new NativePlanetaryPresentation[BodyOrder.Length];
@@ -333,6 +367,14 @@ internal sealed class SolarSystemScene
     internal NativePlanetaryPresentation[] DistantBodies { get; }
     internal NativeOrbitLineVertex[] OrbitVertices { get; }
     internal ReadOnlySpan<Double3> OrbitRootSamples => _rootOrbitSamples;
+    internal ReadOnlySpan<Double3> OrbitParentLocalSamples => _parentLocalOrbitSamples;
+    internal ReadOnlySpan<Double3> OrbitPresentationLocalSamples => _presentationLocalOrbitSamples;
+    internal ReadOnlySpan<OrbitPresentationCacheKey> OrbitCacheKeys => _orbitCacheKeys;
+    internal ReadOnlySpan<int> OrbitCurrentSampleIndices => _orbitCurrentSampleIndices;
+    internal ReadOnlySpan<double> OrbitCurrentSampleErrors => _orbitCurrentSampleErrors;
+    internal SimulationInstant OrbitAuthorityTime => _orbitAuthorityTime;
+    internal long OrbitCurveBuildCount => _orbitCurveBuildCount;
+    internal long OrbitCurveReuseCount => _orbitCurveReuseCount;
     internal ReadOnlySpan<Double3> MoonOrbitControlSamples => _moonOrbitControlSamples;
     internal ReadOnlySpan<Double3> MoonOrbitPeriodicControlSamples => _moonOrbitPeriodicControls;
     internal int FocusIndex { get; private set; }
@@ -347,13 +389,6 @@ internal sealed class SolarSystemScene
         FocusedBody.BodyId, FocusedBody.RadiusMetres, PlanetaryTerrainDefinition.EarthProductionCubeV5);
     internal bool ProductionEarthFocused => ProductionSurfaceEligible;
     internal bool DetailedComputeRequested => ProductionSurfaceEligible;
-    internal bool EyeballComputeRequested => ProductionSurfaceEligible && _eyeballWeight > 0f && _productionPupilCell.IsValid;
-    internal float EyeballWeight => _eyeballWeight;
-    internal bool EyeballCoversVisibleSurface => _eyeballCoversVisibleSurface;
-    internal int ProductionEyeballTier => _productionEyeballSelection.Tier;
-    internal PlanetaryProductionPupilCell ProductionPupilCell => _productionPupilCell;
-    internal long ProductionPupilOrientationChanges => _productionPupilOrientation.Changes;
-    internal long ProductionEyeballTierChanges => _productionEyeballSelection.TierChanges;
     internal PlanetRenderProxy FocusedBody => Presentation.Bodies[FocusIndex];
     internal FocusTarget CurrentFocusTarget => _focusTarget;
     internal Double3 CurrentFocusRoot => _cameraReferenceAuthority==CameraReferenceAuthority.SurfaceRelative
@@ -365,6 +400,27 @@ internal sealed class SolarSystemScene
         ? _surfaceCameraPivotRoot
         : EvaluateRetainedVisualAimRoot(CurrentFocusRoot);
     internal SimulationInstant CurrentTime => _clock.CurrentTime;
+    internal Double3 LastOrbitCameraRoot => _lastOrbitCameraRoot;
+    internal DoubleQuaternion LastOrbitCameraOrientation => _lastOrbitCameraOrientation;
+    internal CameraProjection LastOrbitCameraProjection => _lastOrbitCameraProjection;
+
+    /// <summary>Diagnostic oracle: recomputes the body root directly from the
+    /// analytical system at the requested authority time. It deliberately
+    /// bypasses Presentation, orbit caches, rendered orbit vertices, and their
+    /// camera-relative conversion.</summary>
+    internal bool TryEvaluateIndependentBodyRoot(ulong bodyId, SimulationInstant time,
+        out Double3 root)
+    {
+        root = default;
+        var result = CelestialSystemEvaluator.TryEvaluateSystem(_system, time,
+            _independentReferenceEvaluations, _independentReferenceRoots,
+            _independentReferenceStaging, _independentReferenceStagingRoots);
+        if (!result.Succeeded) return false;
+        var traversal = FindTraversalIndex(_system, new CelestialBodyId(bodyId));
+        if (traversal < 0) return false;
+        root = _independentReferenceRoots[traversal].Translation;
+        return root.IsFinite;
+    }
     internal SimulationRate Rate => _clock.Rate;
     internal int SpeedPresetIndex => _rateStepIndex;
     internal string SpeedHudLabel => SimulationSpeedPresets.Get(_rateStepIndex).Label;
@@ -447,8 +503,11 @@ internal sealed class SolarSystemScene
             }
         }
 
-        if (!TryBuildRootOrbitSamples(system, out var rootOrbitSamples, out var orbitTraversalIndices, out var orbitCenterTraversalIndices, out var orbitPeriods, out error)) return false;
-        var candidate = new SolarSystemScene(system, root, traversalIndices, rootOrbitSamples, orbitTraversalIndices, orbitCenterTraversalIndices, orbitPeriods, initialTime, startupUtc);
+        if (!TryBuildParentLocalOrbitSamples(system, out var parentLocalOrbitSamples,
+                out var orbitCenterTraversalIndices, out var orbitPeriods, out var orbitCacheKeys,
+                out var orbitAuthorities, out error)) return false;
+        var candidate = new SolarSystemScene(system, root, traversalIndices, parentLocalOrbitSamples,
+            orbitCenterTraversalIndices, orbitPeriods, orbitCacheKeys, orbitAuthorities, initialTime, startupUtc);
         if (!candidate.TryPublishAt(initialTime, out error)) return false;
         if (!candidate.TryInitializeFloridaLaunchSite()) { error = "Florida launch-site physical anchor initialization failed."; return false; }
         scene = candidate;
@@ -462,41 +521,18 @@ internal sealed class SolarSystemScene
         _blend = FocusIndex == 0 || !ProductionSurfaceEligible
             ? new PlanetaryRepresentationBlend(PlanetaryRenderRegime.DistantOnly, selectedBlend.DistanceRadii, 1f, 0f)
             : selectedBlend;
-        _eyeballWeight = 0f;
-        _eyeballCoversVisibleSurface = true;
-        if (ProductionSurfaceEligible)
-        {
-            var rootToBody = FocusedBody.BodyFixedToRoot.Conjugate().Normalized();
-            var relative = rootToBody.Rotate(camera.Position.Value - FocusedBody.Position.Value);
-            var distance = Math.Sqrt(relative.LengthSquared);
-            var radial = distance > 0d ? relative / distance : Double3.UnitZ;
-            var surfaceRadius = PlanetaryTerrainQuery.VisibleSurfaceRadius(FocusedBody.RadiusMetres, radial, EarthPlanetaryScene.Terrain, EarthPlanetaryScene.EarthSeaLevelMetres);
-            var altitude = Math.Max(EarthPlanetaryScene.MinimumTerrainClearanceMetres, distance - surfaceRadius);
-            var tanHalfFov = Math.Tan(camera.Projection.VerticalFieldOfViewRadians * .5d);
-            var projectedError = PlanetaryProductionEyeballSelection.ProjectedTerrainErrorPixels(
-                altitude, EarthPlanetaryScene.ProofViewportHeightPixels, tanHalfFov, EarthPlanetaryScene.Terrain.MaximumHeightMetres);
-            var tier = _productionEyeballSelection.UpdateTier(projectedError);
-            // The persistent spherical billboard is centred on the body-fixed
-            // sub-camera point.  View orientation is observation state only:
-            // letting the forward-ray intersection select the pupil caused a
-            // click-drag to re-triangulate stationary ground and, at the
-            // physical floor, could place the coarse centre fan around the
-            // camera even though the camera origin was terrain-safe.
-            _productionPupilCell = _productionPupilOrientation.Update(radial, tier);
-            _eyeballWeight = PlanetaryProductionEyeballSelection.OwnershipWeight(projectedError);
-            _eyeballCoversVisibleSurface = PlanetaryProductionEyeballTopology.CoversVisibleSurface(relative, _productionPupilCell.BodyFixedDirection,
-                FocusedBody.RadiusMetres, EarthPlanetaryScene.Terrain.MaximumHeightMetres);
-        }
         SelectOverlayPresentation(camera);
         for (var output = 0; output < Presentation.Count; output++)
         {
             var index = output == 0 ? FocusIndex : output <= FocusIndex ? output - 1 : output;
             var body = Presentation.Bodies[index];
-            var center = CubeSphereProjection.CameraRelativeCenter(body, new UniversePosition(camera.Position.Value, Presentation.RootFrame));
+            var center = BodyCameraRelative(index, body.Position.Value, camera.Position.Value);
+            var encodedCenter = EncodedPosition.Encode(center);
             var focused = index == FocusIndex;
             DistantBodies[output] = new NativePlanetaryPresentation
             {
-                CenterX = (float)center.X, CenterY = (float)center.Y, CenterZ = (float)center.Z, Radius = (float)body.RadiusMetres,
+                CenterX = encodedCenter.HighX, CenterY = encodedCenter.HighY, CenterZ = encodedCenter.HighZ, Radius = (float)body.RadiusMetres,
+                CenterLowX = encodedCenter.LowX, CenterLowY = encodedCenter.LowY, CenterLowZ = encodedCenter.LowZ,
                 ColorR = body.Color.X, ColorG = body.Color.Y, ColorB = body.Color.Z,
                 // Production terrain-v5 roots are synchronously resident before
                 // the first submitted frame. A focused generic Earth sphere is
@@ -526,7 +562,6 @@ internal sealed class SolarSystemScene
         _orbitDistance = FocusFramingDistance(FocusedBody);
         _surfaceAnchorBlend=0d;_retainedVisualAimAnchor=null;_retainedVisualAimOffsetRoot=Double3.Zero;_retainedVisualAimWeight=0d;
         _surfaceAltitudeMetres=double.PositiveInfinity;_surfaceCameraMode=PlanetaryCameraPresentationMode.Orbital;_bodyLocalCameraAltitudeDemandMetres=double.NaN;_bodyLocalCameraPlacementPending=false;_bodyLocalCameraPlacementUseOrbitCandidate=false;
-        _productionPupilOrientation.Reset();_productionEyeballSelection.Reset();_productionPupilCell=default;
         CameraPresentationMode = SolarCameraPresentationMode.Free3D;
         ApplyOrbitPose(camera,true);
         return true;
@@ -701,7 +736,6 @@ internal sealed class SolarSystemScene
         _surfaceAnchorBlend=0d;_retainedVisualAimAnchor=null;_retainedVisualAimOffsetRoot=Double3.Zero;_retainedVisualAimWeight=0d;
         _surfaceAltitudeMetres=double.PositiveInfinity;_surfaceCameraMode=PlanetaryCameraPresentationMode.Orbital;
         _bodyLocalCameraAltitudeDemandMetres=double.NaN;_bodyLocalCameraPlacementPending=false;_bodyLocalCameraPlacementUseOrbitCandidate=false;
-        _productionPupilOrientation.Reset();_productionEyeballSelection.Reset();_productionPupilCell=default;
         CameraPresentationMode = SolarCameraPresentationMode.SolarMap;
         ApplyOrbitPose(camera,true);
     }
@@ -719,9 +753,11 @@ internal sealed class SolarSystemScene
     {
         var body = FocusedBody;
         var center = CubeSphereProjection.CameraRelativeCenter(body, new UniversePosition(camera.Position.Value, Presentation.RootFrame));
+        var encodedCenter = EncodedPosition.Encode(center);
         var native = new NativePlanetaryPresentation
         {
-            CenterX = (float)center.X, CenterY = (float)center.Y, CenterZ = (float)center.Z, Radius = (float)body.RadiusMetres,
+            CenterX = encodedCenter.HighX, CenterY = encodedCenter.HighY, CenterZ = encodedCenter.HighZ, Radius = (float)body.RadiusMetres,
+            CenterLowX = encodedCenter.LowX, CenterLowY = encodedCenter.LowY, CenterLowZ = encodedCenter.LowZ,
             ColorR = body.Color.X, ColorG = body.Color.Y, ColorB = body.Color.Z,
             DistantAlpha = _blend.DistantAlpha, DetailedAlpha = _blend.DetailedAlpha, DistanceRadii = (float)_blend.DistanceRadii,
             Regime = (NativePlanetaryRenderRegime)_blend.Regime, Enabled = 1
@@ -732,47 +768,21 @@ internal sealed class SolarSystemScene
         return native;
     }
 
-    internal NativePlanetaryGpuConstants GpuConstants(CameraState camera)
+    internal NativePlanetaryGpuConstants GpuConstants(CameraState camera,double viewportHeightPixels=EarthPlanetaryScene.ProofViewportHeightPixels)
     {
+        if(!double.IsFinite(viewportHeightPixels)||viewportHeightPixels<=0d)throw new ArgumentOutOfRangeException(nameof(viewportHeightPixels));
         var body = FocusedBody;
         var rootToBody=body.BodyFixedToRoot.Conjugate().Normalized();var relative=rootToBody.Rotate(camera.Position.Value-body.Position.Value);var encoded=EncodedPosition.Encode(relative);var radiusHigh=(float)body.RadiusMetres;var radiusLow=(float)(body.RadiusMetres-radiusHigh);var terrain=ProductionSurfaceEligible?PlanetaryTerrainDefinition.EarthProductionCubeV5:default;var viewForward=rootToBody.Rotate(camera.Orientation.Rotate(new Double3(0,0,-1))).Normalized();var tanY=Math.Tan(camera.Projection.VerticalFieldOfViewRadians*.5d);var halfAngle=Math.Atan(Math.Sqrt(tanY*tanY+tanY*tanY*camera.Projection.AspectRatio*camera.Projection.AspectRatio));
         return new NativePlanetaryGpuConstants
         {
             CameraBodyHighX=encoded.HighX,CameraBodyHighY=encoded.HighY,CameraBodyHighZ=encoded.HighZ,RadiusHigh=radiusHigh,
             CameraBodyLowX=encoded.LowX,CameraBodyLowY=encoded.LowY,CameraBodyLowZ=encoded.LowZ,RadiusLow=radiusLow,
-            RefinementThreshold = (float)EarthPlanetaryScene.RegionalLodConfiguration.MaximumProjectedPatchSpan,
+            RefinementThreshold = (float)(2d*EarthPlanetaryScene.TargetPatchPixels*tanY/viewportHeightPixels),
             NearFieldAltitudeRadii = ProductionSurfaceEligible?float.MaxValue:1f,
             SurfaceAltitudeMetres=(float)(terrain.IsValid?Math.Sqrt(relative.LengthSquared)-PlanetaryTerrainQuery.SurfaceRadius(body.RadiusMetres,relative.Normalized(),terrain):Math.Sqrt(relative.LengthSquared)-body.RadiusMetres),MaximumTerrainHeightMetres=(float)(terrain.IsValid?terrain.MaximumHeightMetres:0d),MaximumLevel = ProductionSurfaceEligible?EarthPlanetaryScene.RegionalMaximumLod:0u,
             OutputCapacity = ProductionSurfaceEligible?EarthPlanetaryScene.MaximumPatchCapacity:6u,TerrainVersion=terrain.Version,
             ViewForwardX=(float)viewForward.X,ViewForwardY=(float)viewForward.Y,ViewForwardZ=(float)viewForward.Z,ViewHalfAngleRadians=(float)halfAngle,
-            ViewportHeightPixels=(float)EarthPlanetaryScene.ProofViewportHeightPixels,VerticalTanHalfFov=(float)tanY,TargetTexelPixels=PlanetaryProductionSamplingPolicy.TargetTexelPixels,RequestedAlbedoLevel=1f
-        };
-    }
-
-    internal NativePlanetaryEyeball EyeballConstants(CameraState camera)
-    {
-        if (!EyeballComputeRequested || FocusedBody.BodyId != SolarSystemBodyIds.Earth.Value) return default;
-        var body = FocusedBody;
-        var rootToBody=body.BodyFixedToRoot.Conjugate().Normalized();var cameraBody=rootToBody.Rotate(camera.Position.Value-body.Position.Value);
-        var encoded = EncodedPosition.Encode(cameraBody);
-        var radiusHigh = (float)body.RadiusMetres;
-        var radiusLow = (float)(body.RadiusMetres - radiusHigh);
-        var tangentAnchor=_productionPupilCell.BodyFixedDirection;
-        var distance = Math.Sqrt(cameraBody.LengthSquared);
-        var radial = distance > 0d ? cameraBody / distance : Double3.UnitZ;
-        var altitude = distance - PlanetaryTerrainQuery.VisibleSurfaceRadius(body.RadiusMetres, radial, EarthPlanetaryScene.Terrain, EarthPlanetaryScene.EarthSeaLevelMetres);
-        var tier=PlanetaryProductionEyeballTopology.Tier(_productionEyeballSelection.Tier);
-        return new NativePlanetaryEyeball
-        {
-            CameraBodyHighX=encoded.HighX,CameraBodyHighY=encoded.HighY,CameraBodyHighZ=encoded.HighZ,RadiusHigh=radiusHigh,
-            CameraBodyLowX=encoded.LowX,CameraBodyLowY=encoded.LowY,CameraBodyLowZ=encoded.LowZ,RadiusLow=radiusLow,
-            SurfaceAltitudeMetres=(float)altitude,MaximumTerrainHeightMetres=(float)EarthPlanetaryScene.Terrain.MaximumHeightMetres,OceanSeaLevelMetres=(float)EarthPlanetaryScene.EarthSeaLevelMetres,BlendAlpha=_eyeballWeight,
-            BodyIdLow=(uint)body.BodyId,BodyIdHigh=(uint)(body.BodyId>>32),TerrainVersion=PlanetaryTerrainDefinition.EarthProductionCubeV5.Version,Enabled=1,
-            TangentAnchorX=(float)tangentAnchor.X,TangentAnchorY=(float)tangentAnchor.Y,TangentAnchorZ=(float)tangentAnchor.Z,MaximumAngleRadians=(float)PlanetaryProductionEyeballTopology.MaximumAngleRadians,
-            RadialWarpExponent=(float)tier.RadialWarpExponent,DetailFrequency=1f,NormalStepMetres=2f,
-            RegionalAlpha=_eyeballWeight<1f||!_eyeballCoversVisibleSurface?1f:0f,
-            VertexCount=(uint)tier.VertexCount,IndexCount=(uint)tier.IndexCount,RadialRingCount=(uint)tier.RadialRings,AzimuthSegmentCount=(uint)tier.AzimuthSegments,
-            Reserved0=(uint)tier.Index,Reserved1=(uint)_productionPupilCell.Face,Reserved2=(uint)_productionPupilCell.X,Reserved3=(uint)_productionPupilCell.Y
+            ViewportHeightPixels=(float)viewportHeightPixels,VerticalTanHalfFov=(float)tanY,TargetTexelPixels=PlanetaryProductionSamplingPolicy.TargetTexelPixels,RequestedAlbedoLevel=1f
         };
     }
 
@@ -958,14 +968,90 @@ internal sealed class SolarSystemScene
                 id.Value, new UniversePosition(_roots[_traversalIndices[index]].Translation, _root),
                 catalog.PhysicalProperties.MeanRadius, Colors[index], catalog.Identity.DisplayName, true,orientation);
         }
-        if (!TrySampleRootOrbits(time, _orbitSampleStaging, out error)) return false;
+        if (!ComposeOrbitPresentation(time, out error)) return false;
+        _orbitCurveReuseCount++;
         if (!PlanetaryBodyPresentationProvider.TryCreateSnapshot(_bodyStaging, out var candidate) || candidate is null)
         {
             error = "Solar presentation publication failed.";
             return false;
         }
-        _orbitSampleStaging.CopyTo(_rootOrbitSamples, 0);
         Presentation = candidate;
+        error = string.Empty;
+        return true;
+    }
+
+    private bool ComposeOrbitPresentation(SimulationInstant time, out string error)
+    {
+        _orbitAuthorityTime = time;
+        for (var path = 0; path < OrbitPathCount; path++)
+        {
+            var currentCenter = _roots[_orbitCenterTraversalIndices[path]].Translation;
+            var bodyRoot = _roots[_traversalIndices[path + 1]].Translation;
+            var currentBodyLocal = bodyRoot - currentCenter;
+            var offset = path * OrbitSampleCount;
+            var authority = _orbitAuthorities[path];
+            var uncorrectedCurrent = currentBodyLocal;
+            if (!authority.Secular.IsIdentity || !authority.Periodic.IsIdentity)
+            {
+                if (!AnalyticalKeplerSecularCorrectionEvaluator.TryScaleTime(
+                        authority.Trajectory.Epoch, time, authority.Secular, out var propagationTime))
+                {
+                    error = $"Orbit {path} authority time could not be scaled.";
+                    return false;
+                }
+                var propagation = UniversalVariableTwoBodyPropagator.TryEvaluate(
+                    authority.Trajectory.StateAtEpoch, authority.Trajectory.Epoch,
+                    propagationTime, authority.CentralGravitationalParameter);
+                if (!propagation.Succeeded)
+                {
+                    error = $"Orbit {path} current anomaly lookup failed: {propagation.Status}.";
+                    return false;
+                }
+                uncorrectedCurrent = propagation.State.Position;
+            }
+            var currentCosine = Double3.Dot(uncorrectedCurrent, authority.PeriapsisAxis) /
+                                authority.SemiMajorAxis + authority.Eccentricity;
+            var currentSine = Double3.Dot(uncorrectedCurrent, authority.TransverseAxis) /
+                              (authority.SemiMajorAxis * authority.SemiMinorFactor);
+            var phaseLength = Math.Sqrt(currentCosine * currentCosine + currentSine * currentSine);
+            if (!double.IsFinite(phaseLength) || phaseLength <= 0d)
+            {
+                error = $"Orbit {path} current anomaly is non-finite.";
+                return false;
+            }
+            currentCosine /= phaseLength;
+            currentSine /= phaseLength;
+            for (var sample = 0; sample < OrbitSampleCount; sample++)
+            {
+                var cosine = currentCosine * OrbitSampleCosines[sample] - currentSine * OrbitSampleSines[sample];
+                var sine = currentSine * OrbitSampleCosines[sample] + currentCosine * OrbitSampleSines[sample];
+                var uncorrected = authority.PeriapsisAxis *
+                                  (authority.SemiMajorAxis * (cosine - authority.Eccentricity)) +
+                                  authority.TransverseAxis *
+                                  (authority.SemiMajorAxis * authority.SemiMinorFactor * sine);
+                if (!AnalyticalKeplerSecularCorrectionEvaluator.TryApplyPositionAtAuthorityTime(
+                        uncorrected,
+                        authority.Trajectory.StateAtEpoch,
+                        authority.Trajectory.Epoch,
+                        time,
+                        authority.Secular,
+                        authority.Periodic,
+                        out var local))
+                {
+                    error = $"Orbit {path} could not be expressed at authority time {time.Ticks}.";
+                    return false;
+                }
+                _presentationLocalOrbitSamples[offset + sample] = local;
+            }
+            _orbitCurrentSampleIndices[path] = 0;
+            _orbitCurrentSampleErrors[path] = Math.Sqrt(
+                (_presentationLocalOrbitSamples[offset] - currentBodyLocal).LengthSquared);
+            _presentationLocalOrbitSamples[offset] = currentBodyLocal;
+            _presentationLocalOrbitSamples[offset + OrbitSegmentCount] = currentBodyLocal;
+
+            for (var sample = 0; sample < OrbitSampleCount; sample++)
+                _rootOrbitSamples[offset + sample] = currentCenter + _presentationLocalOrbitSamples[offset + sample];
+        }
         error = string.Empty;
         return true;
     }
@@ -1495,26 +1581,56 @@ internal sealed class SolarSystemScene
     private Double3 OrbitOffsetDirection()=>_inertialOrbitOffsetDirectionOverride??-OrbitOrientation().Rotate(new Double3(0d,0d,-1d));
     private Double3 CurrentSurfaceDirection(){if(_cameraReferenceAuthority==CameraReferenceAuthority.SurfaceRelative)return _surfaceCameraState.Anchor.NormalizedBodyFixedDirection;if(_focusTarget.Kind==FocusTargetKind.SurfaceAnchor)return _focusTarget.SurfaceAnchor.BodyFixedDirection;var rootRadial=OrbitOffsetDirection();return FocusedBody.BodyFixedToRoot.Conjugate().Normalized().Rotate(rootRadial);}
 
+    private Double3 BodyCameraRelative(int bodyIndex, in Double3 bodyRoot, in Double3 cameraRoot)
+    {
+        if (bodyIndex == 0) return bodyRoot - cameraRoot;
+        var path = bodyIndex - 1;
+        var parentRoot = _roots[_orbitCenterTraversalIndices[path]].Translation;
+        return ParentLocalToCamera(parentRoot, bodyRoot - parentRoot, cameraRoot);
+    }
+
+    internal static Double3 ParentLocalToCamera(in Double3 parentRoot, in Double3 parentLocal, in Double3 cameraRoot)
+        => (parentRoot - cameraRoot) + parentLocal;
+
     private void UpdateOrbitVertices(CameraState camera)
     {
+        _lastOrbitCameraRoot = camera.Position.Value;
+        _lastOrbitCameraOrientation = camera.Orientation;
+        _lastOrbitCameraProjection = camera.Projection;
         var output = 0;
         for (var path = 0; path < OrbitPathCount; path++)
+        {
+        var parentRoot = _roots[_orbitCenterTraversalIndices[path]].Translation;
+        var offset = path * OrbitSampleCount;
         for (var segment = 0; segment < OrbitSegmentCount; segment++)
         {
-            var first = CameraRelativeRenderPosition.Create(_rootOrbitSamples[path * OrbitSampleCount + segment], camera.Position.Value).Value;
+            var first = ParentLocalToCamera(parentRoot, _presentationLocalOrbitSamples[offset + segment], camera.Position.Value);
             var secondSample = path == MoonOrbitPathIndex && segment == OrbitSegmentCount - 1 ? 0 : segment + 1;
-            var second = CameraRelativeRenderPosition.Create(_rootOrbitSamples[path * OrbitSampleCount + secondSample], camera.Position.Value).Value;
-            OrbitVertices[output++] = new NativeOrbitLineVertex { X = (float)first.X, Y = (float)first.Y, Z = (float)first.Z };
-            OrbitVertices[output++] = new NativeOrbitLineVertex { X = (float)second.X, Y = (float)second.Y, Z = (float)second.Z };
+            var second = ParentLocalToCamera(parentRoot, _presentationLocalOrbitSamples[offset + secondSample], camera.Position.Value);
+            OrbitVertices[output++] = EncodeOrbitVertex(first);
+            OrbitVertices[output++] = EncodeOrbitVertex(second);
+        }
         }
     }
 
-    private static bool TryBuildRootOrbitSamples(CelestialSystemDefinition system, out Double3[] samples, out int[] traversal, out int[] centers, out double[] periods, out string error)
+    private static NativeOrbitLineVertex EncodeOrbitVertex(in Double3 position)
+    {
+        var encoded=EncodedPosition.Encode(position);
+        return new NativeOrbitLineVertex{X=encoded.HighX,Y=encoded.HighY,Z=encoded.HighZ,
+            LowX=encoded.LowX,LowY=encoded.LowY,LowZ=encoded.LowZ};
+    }
+
+    private static bool TryBuildParentLocalOrbitSamples(CelestialSystemDefinition system,
+        out Double3[] samples, out int[] centers, out double[] periods,
+        out OrbitPresentationCacheKey[] cacheKeys, out OrbitLocalShapeAuthority[] authorities,
+        out string error)
     {
         samples = new Double3[OrbitPathCount * OrbitSampleCount];
-        traversal = new int[OrbitPathCount];
         centers = new int[OrbitPathCount];
         periods = new double[OrbitPathCount];
+        cacheKeys = new OrbitPresentationCacheKey[OrbitPathCount];
+        authorities = new OrbitLocalShapeAuthority[OrbitPathCount];
+        var systemHash = CelestialSystemDefinitionHash.Compute(system);
         var sunTraversal = FindTraversalIndex(system, SolarSystemBodyIds.Sun);
         if (sunTraversal < 0) { error = "Solar orbit center is missing from the hierarchy."; return false; }
         for (var path = 0; path < OrbitPathCount; path++)
@@ -1531,14 +1647,15 @@ internal sealed class SolarSystemScene
                 !system.TryGetAnalyticalKepler(node.Ephemeris.PayloadIndex, out var trajectory) ||
                 !system.TryGetBody(trajectory.CentralBody, out var central) ||
                 !system.TryGetAnalyticalCorrection(node.Ephemeris.PayloadIndex, out var correction) ||
+                !system.TryGetAnalyticalPeriodicCorrection(node.Ephemeris.PayloadIndex, out var periodic) ||
                 !correction.IsValid ||
-                !TryGetPeriodSeconds(trajectory, central.PhysicalProperties.GravitationalParameter, out periods[path]))
+                !periodic.IsValid ||
+                !TryGetPeriodSeconds(trajectory, central.PhysicalProperties.GravitationalParameter, out var basePeriod))
             {
                 error = "Solar orbit trajectory authority is unavailable.";
                 return false;
             }
-            periods[path] /= correction.TimeScale;
-            traversal[path] = nodeIndex;
+            periods[path] = basePeriod / correction.TimeScale;
             if (!system.TryGetBody(bodyId, out var catalog)) { error = "Solar orbit catalog body is missing."; return false; }
             var centerId = catalog.Identity.Classification == CelestialBodyClassification.Moon
                 ? catalog.Identity.ParentBody
@@ -1548,101 +1665,84 @@ internal sealed class SolarSystemScene
                 error = "Solar orbit presentation center is unavailable.";
                 return false;
             }
-        }
+            cacheKeys[path] = new OrbitPresentationCacheKey(systemHash, bodyId.Value,
+                resolvedCenter.Value, node.Ephemeris.PayloadIndex, OrbitSegmentCount);
 
-        var evaluations = new ReferenceFrameEvaluation[system.Count];
-        var roots = new FrameTransform[system.Count];
-        var staging = new ReferenceFrameEvaluation[system.Count];
-        var stagingRoots = new FrameTransform[system.Count];
-        var initial = CelestialSystemEvaluator.TryEvaluateSystem(system, SimulationInstant.Zero, evaluations, roots, staging, stagingRoots);
-        if (!initial.Succeeded) { error = $"Solar orbit center evaluation failed: {initial.Status}"; return false; }
-        Span<Double3> currentCenters = stackalloc Double3[OrbitPathCount];
-        for (var path = 0; path < OrbitPathCount; path++) currentCenters[path] = roots[centers[path]].Translation;
-        for (var sample = 0; sample < OrbitSampleCount; sample++)
-        for (var path = 0; path < OrbitPathCount; path++)
-        {
-            SimulationInstant time;
-            try { time = SimulationInstant.FromSecondsRounded(periods[path] * sample / OrbitSegmentCount); }
-            catch (OverflowException) { error = "Solar orbit sample time overflow."; return false; }
-            var result = CelestialSystemEvaluator.TryEvaluateSystem(system, time, evaluations, roots, staging, stagingRoots);
-            if (!result.Succeeded) { error = $"Solar orbit evaluation failed: {result.Status}"; return false; }
-            samples[path * OrbitSampleCount + sample] = sample == 0
-                ? roots[traversal[path]].Translation
-                : currentCenters[path] + roots[traversal[path]].Translation - roots[centers[path]].Translation;
+            if (!TrySampleInvariantLocalOrbit(trajectory,
+                    central.PhysicalProperties.GravitationalParameter,
+                    samples.AsSpan(path * OrbitSampleCount, OrbitSampleCount),
+                    out var periapsisAxis, out var transverseAxis, out var semiMajorAxis,
+                    out var eccentricity, out var semiMinorFactor))
+            {
+                error = "Solar invariant local orbit geometry could not be derived from its Cartesian authority.";
+                return false;
+            }
+            authorities[path] = new OrbitLocalShapeAuthority(trajectory,
+                central.PhysicalProperties.GravitationalParameter, correction, periodic,
+                periapsisAxis, transverseAxis, semiMajorAxis, eccentricity, semiMinorFactor);
+            samples[path * OrbitSampleCount + OrbitSegmentCount] = samples[path * OrbitSampleCount];
         }
         error = string.Empty;
         return true;
     }
 
-    private bool TrySampleRootOrbits(SimulationInstant start, Span<Double3> destination, out string error)
+    private static bool TrySampleInvariantLocalOrbit(in TwoBodyTrajectory trajectory, double mu,
+        Span<Double3> destination, out Double3 periapsis, out Double3 transverse,
+        out double semiMajor, out double eccentricity, out double semiMinorFactor)
     {
-        if (destination.Length < OrbitPathCount * OrbitSampleCount) { error = "Solar orbit sample destination is too small."; return false; }
-        Span<Double3> currentCenters = stackalloc Double3[OrbitPathCount];
-        for (var path = 0; path < OrbitPathCount; path++) currentCenters[path] = _roots[_orbitCenterTraversalIndices[path]].Translation;
-        for (var sample = 0; sample < OrbitSampleCount; sample++)
-        for (var path = 0; path < OrbitPathCount; path++)
+        periapsis = transverse = default;
+        semiMajor = eccentricity = semiMinorFactor = double.NaN;
+        if (destination.Length < OrbitSampleCount || !trajectory.StateAtEpoch.IsFinite ||
+            !double.IsFinite(mu) || mu <= 0d) return false;
+        var position = trajectory.StateAtEpoch.Position;
+        var velocity = trajectory.StateAtEpoch.Velocity;
+        var radius = Math.Sqrt(position.LengthSquared);
+        var angularMomentum = Double3.Cross(position, velocity);
+        var angularMomentumLength = Math.Sqrt(angularMomentum.LengthSquared);
+        if (!double.IsFinite(radius) || radius <= 0d || !double.IsFinite(angularMomentumLength) || angularMomentumLength <= 0d)
+            return false;
+        var normal = angularMomentum / angularMomentumLength;
+        var eccentricityVector = Double3.Cross(velocity, angularMomentum) / mu - position / radius;
+        eccentricity = Math.Sqrt(eccentricityVector.LengthSquared);
+        var alpha = 2d / radius - velocity.LengthSquared / mu;
+        if (!double.IsFinite(eccentricity) || eccentricity >= 1d || !double.IsFinite(alpha) || alpha <= 0d)
+            return false;
+        semiMajor = 1d / alpha;
+        periapsis = eccentricity > 1e-14d ? eccentricityVector / eccentricity : position / radius;
+        transverse = Double3.Cross(normal, periapsis).Normalized();
+        semiMinorFactor = Math.Sqrt(1d - eccentricity * eccentricity);
+        if (!double.IsFinite(semiMajor) || !transverse.IsFinite || !double.IsFinite(semiMinorFactor)) return false;
+        for (var sample = 0; sample < OrbitSegmentCount; sample++)
         {
-            SimulationInstant time;
-            try { time = start + SimulationDuration.FromSecondsRounded(_orbitPeriods[path] * sample / OrbitSegmentCount); }
-            catch (OverflowException) { error = "Solar orbit sample time overflow."; return false; }
-            var result = CelestialSystemEvaluator.TryEvaluateSystem(_system, time, _evaluations, _roots, _staging, _stagingRoots);
-            if (!result.Succeeded) { error = $"Solar orbit evaluation failed: {result.Status}"; return false; }
-            destination[path * OrbitSampleCount + sample] = sample == 0
-                ? _roots[_orbitTraversalIndices[path]].Translation
-                : currentCenters[path] + _roots[_orbitTraversalIndices[path]].Translation - _roots[_orbitCenterTraversalIndices[path]].Translation;
+            var anomaly = 2d * Math.PI * sample / OrbitSegmentCount;
+            destination[sample] = periapsis * (semiMajor * (Math.Cos(anomaly) - eccentricity)) +
+                                  transverse * (semiMajor * semiMinorFactor * Math.Sin(anomaly));
+            if (!destination[sample].IsFinite) return false;
         }
-        BuildPeriodicMoonOrbit(destination);
-        error = string.Empty;
+        destination[OrbitSegmentCount] = destination[0];
         return true;
     }
 
-    private void BuildPeriodicMoonOrbit(Span<Double3> destination)
+    private void BuildPeriodicMoonOrbitDiagnostics(ReadOnlySpan<Double3> source)
     {
         var pathOffset = MoonOrbitPathIndex * OrbitSampleCount;
         for (var sample = 0; sample < OrbitSegmentCount; sample++)
-            _moonOrbitControlSamples[sample] = destination[pathOffset + sample];
-
-        var endpoint = destination[pathOffset + OrbitSegmentCount];
-        var startDerivative =
-            (_moonOrbitControlSamples[0] * -3d + _moonOrbitControlSamples[1] * 4d - _moonOrbitControlSamples[2]) *
-            (OrbitSegmentCount * .5d);
-        var endDerivative =
-            (endpoint * 3d - _moonOrbitControlSamples[OrbitSegmentCount - 1] * 4d +
-             _moonOrbitControlSamples[OrbitSegmentCount - 2]) * (OrbitSegmentCount * .5d);
-        var positionClosure = endpoint - _moonOrbitControlSamples[0];
-        var derivativeClosure = endDerivative - startDerivative;
-        _moonOrbitEndpointMismatchMetres = Math.Sqrt(positionClosure.LengthSquared);
-        var oppositeSample = OrbitSegmentCount / 2;
-        for (var sample = 0; sample < OrbitSegmentCount; sample++)
         {
-            if (sample <= oppositeSample)
-            {
-                _moonOrbitPeriodicControls[sample] = _moonOrbitControlSamples[sample];
-                continue;
-            }
-            var phase = (sample - oppositeSample) / (double)oppositeSample;
-            var squared = phase * phase;
-            var cubed = squared * phase;
-            var positionWeight = -2d * cubed + 3d * squared;
-            var derivativeWeight = cubed - squared;
-            _moonOrbitPeriodicControls[sample] = _moonOrbitControlSamples[sample] -
-                positionClosure * positionWeight - derivativeClosure * (.5d * derivativeWeight);
+            var point = source[pathOffset + sample];
+            _moonOrbitControlSamples[sample] = point;
+            _moonOrbitPeriodicControls[sample] = point;
         }
-        _moonOrbitPeriodicControls[0] = _moonOrbitControlSamples[0];
-
+        _moonOrbitEndpointMismatchMetres = Math.Sqrt(
+            (source[pathOffset + OrbitSegmentCount] - source[pathOffset]).LengthSquared);
         var denseIndex = 0;
         for (var segment = 0; segment < OrbitSegmentCount; segment++)
         {
-            var previous = _moonOrbitPeriodicControls[(segment + OrbitSegmentCount - 1) % OrbitSegmentCount];
             var first = _moonOrbitPeriodicControls[segment];
             var second = _moonOrbitPeriodicControls[(segment + 1) % OrbitSegmentCount];
-            var following = _moonOrbitPeriodicControls[(segment + 2) % OrbitSegmentCount];
-            var firstTangent = (second - previous) * .5d;
-            var secondTangent = (following - first) * .5d;
             for (var subdivision = 0; subdivision < MoonPeriodicSubdivisionsPerControlSegment; subdivision++)
             {
                 var amount = subdivision / (double)MoonPeriodicSubdivisionsPerControlSegment;
-                _moonOrbitDenseSamples[denseIndex++] = CubicHermite(first, firstTangent, second, secondTangent, amount);
+                _moonOrbitDenseSamples[denseIndex++] = first + (second - first) * amount;
             }
         }
         _moonOrbitDenseSamples[MoonPeriodicDenseSampleCount] = _moonOrbitDenseSamples[0];
@@ -1651,43 +1751,6 @@ internal sealed class SolarSystemScene
             _moonOrbitCumulativeLengths[sample] = _moonOrbitCumulativeLengths[sample - 1] +
                 Math.Sqrt((_moonOrbitDenseSamples[sample] - _moonOrbitDenseSamples[sample - 1]).LengthSquared);
 
-        var totalLength = _moonOrbitCumulativeLengths[MoonPeriodicDenseSampleCount];
-        if (!double.IsFinite(totalLength) || totalLength <= 0d)
-        {
-            destination[pathOffset + OrbitSegmentCount] = destination[pathOffset];
-            return;
-        }
-
-        var denseCursor = 0;
-        var oppositeDenseSample = MoonPeriodicDenseSampleCount / 2;
-        var oppositeLength = _moonOrbitCumulativeLengths[oppositeDenseSample];
-        for (var sample = 0; sample < OrbitSegmentCount; sample++)
-        {
-            var targetLength = sample < OrbitSegmentCount / 2
-                ? oppositeLength * sample / (OrbitSegmentCount / 2)
-                : oppositeLength + (totalLength - oppositeLength) *
-                    (sample - OrbitSegmentCount / 2) / (OrbitSegmentCount / 2);
-            while (denseCursor + 1 < MoonPeriodicDenseSampleCount &&
-                   _moonOrbitCumulativeLengths[denseCursor + 1] < targetLength)
-                denseCursor++;
-            var intervalLength = _moonOrbitCumulativeLengths[denseCursor + 1] - _moonOrbitCumulativeLengths[denseCursor];
-            var amount = intervalLength > 0d
-                ? (targetLength - _moonOrbitCumulativeLengths[denseCursor]) / intervalLength
-                : 0d;
-            destination[pathOffset + sample] = _moonOrbitDenseSamples[denseCursor] +
-                (_moonOrbitDenseSamples[denseCursor + 1] - _moonOrbitDenseSamples[denseCursor]) * amount;
-        }
-        destination[pathOffset + OrbitSegmentCount] = destination[pathOffset];
-    }
-
-    private static Double3 CubicHermite(in Double3 first, in Double3 firstTangent, in Double3 second, in Double3 secondTangent, double amount)
-    {
-        var squared = amount * amount;
-        var cubed = squared * amount;
-        return first * (2d * cubed - 3d * squared + 1d) +
-               firstTangent * (cubed - 2d * squared + amount) +
-               second * (-2d * cubed + 3d * squared) +
-               secondTangent * (cubed - squared);
     }
 
     private static int FindTraversalIndex(CelestialSystemDefinition system, CelestialBodyId id)

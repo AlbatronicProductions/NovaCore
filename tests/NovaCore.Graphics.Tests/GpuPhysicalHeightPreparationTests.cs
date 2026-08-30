@@ -166,7 +166,7 @@ internal static unsafe class GpuPhysicalHeightPreparationTests
                 LocalTerrainPathUtf8 = localPointer, ComputeShaderPathUtf8 = shaderPointer,
             };
             Require(NativeRuntime.QueryPlanetaryPhysicalHeights(queryPointer, (uint)queries.Length, resultPointer, &assets, &metricValue) == NativeResult.Success,
-                "dormant native Vulkan height query succeeds");
+                "native Vulkan height query succeeds");
         }
         metrics = metricValue;
         return results;
@@ -187,11 +187,11 @@ internal static unsafe class GpuPhysicalHeightPreparationTests
             Marshal.OffsetOf<NativePlanetaryHeightQuery>(nameof(NativePlanetaryHeightQuery.BodyIdLow)).ToInt32() == 64 &&
             Marshal.OffsetOf<NativePlanetaryHeightQuery>(nameof(NativePlanetaryHeightQuery.TopologyVersion)).ToInt32() == 80,
             "height query ABI offsets 48/64/80");
-        Require(Marshal.SizeOf<NativePlanetaryHeightResult>() == 160 &&
+        Require(Marshal.SizeOf<NativePlanetaryHeightResult>() == 224 &&
             Marshal.OffsetOf<NativePlanetaryHeightResult>(nameof(NativePlanetaryHeightResult.FaceU)).ToInt32() == 32 &&
-            Marshal.OffsetOf<NativePlanetaryHeightResult>(nameof(NativePlanetaryHeightResult.GlobalFace)).ToInt32() == 112 &&
-            Marshal.OffsetOf<NativePlanetaryHeightResult>(nameof(NativePlanetaryHeightResult.Valid)).ToInt32() == 144,
-            "height result ABI size/offsets 160/32/112/144");
+            Marshal.OffsetOf<NativePlanetaryHeightResult>(nameof(NativePlanetaryHeightResult.GlobalFace)).ToInt32() == 176 &&
+            Marshal.OffsetOf<NativePlanetaryHeightResult>(nameof(NativePlanetaryHeightResult.Valid)).ToInt32() == 208,
+            "height result ABI size/offsets 224/32/176/208");
         Require(Marshal.SizeOf<NativePlanetaryHeightQueryAssets>() == 40 && Marshal.SizeOf<NativePlanetaryHeightQueryMetrics>() == 48,
             "height query assets/metrics ABI sizes 40/48");
     }

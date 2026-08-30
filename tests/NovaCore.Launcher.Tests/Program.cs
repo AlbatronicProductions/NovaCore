@@ -5,15 +5,15 @@ var tests = new (string Name, Action Test)[]
 {
     ("default selection", DefaultSelection),
     ("scenario catalog", ScenarioCatalogMappings),
+    ("Earth fullscreen native preset", EarthFullscreenNativePreset),
+    ("structured launch environment", StructuredLaunchEnvironment),
     ("Earth orbital arguments", EarthOrbitalArguments),
     ("invariant altitude formatting", InvariantAltitudeFormatting),
     ("subdivision diagnostic mapping", SubdivisionMapping),
-    ("anchored billboard diagnostic mapping", AnchoredBillboardMapping),
-    ("Florida vertical slice mapping", FloridaVerticalSliceMapping),
     ("Florida launch mapping", FloridaLaunchMapping),
-    ("unsupported Florida surface", UnsupportedFloridaSurface),
     ("invalid configuration rejection", InvalidConfiguration),
-    ("validation argument", ValidationArgument)
+    ("diagnostics arguments", DiagnosticsArguments),
+    ("existing production scenarios", ExistingProductionScenarios)
 };
 
 foreach (var (name, test) in tests)
@@ -33,10 +33,40 @@ static void DefaultSelection()
 
 static void ScenarioCatalogMappings()
 {
-    Equal(9, ScenarioCatalog.All.Count);
-    Equal(8, ScenarioCatalog.All.Count(definition => definition.IsSupported));
+    Equal(6, ScenarioCatalog.All.Count);
+    Equal(6, ScenarioCatalog.All.Count(definition => definition.IsSupported));
     True(ScenarioCatalog.All.Select(definition => definition.Preset).Distinct().Count() == ScenarioCatalog.All.Count,
         "Scenario presets must be unique.");
+}
+
+static void EarthFullscreenNativePreset()
+{
+    var definition = ScenarioCatalog.Get(NovaCoreScenarioPreset.EarthFullscreenNative);
+    Equal("Earth — Fullscreen Native", definition.DisplayName);
+    var configuration = Create(NovaCoreScenarioPreset.EarthFullscreenNative);
+    Equal(NovaCoreWindowMode.BorderlessFullscreen, configuration.WindowMode);
+    Equal(NovaCoreResolutionPreset.NativeDesktop, configuration.ResolutionPreset);
+    Equal(new NovaCoreClientResolution(3440, 1440), configuration.ClientResolution);
+    Equal(NovaCoreDiagnosticsMode.VulkanValidationAndPerformance, configuration.Diagnostics);
+    SequenceEqual(
+        ["--scene=earth", "--altitude=700000", "--surface-site=land", "--log=validation", "--log=vulkan"],
+        LaunchCommandBuilder.BuildArguments(configuration));
+}
+
+static void StructuredLaunchEnvironment()
+{
+    var configuration = Create(NovaCoreScenarioPreset.EarthFullscreenNative);
+    var environment = LaunchCommandBuilder.BuildEnvironment(configuration);
+    Equal("3440", environment["NOVACORE_WINDOW_CLIENT_WIDTH"]);
+    Equal("1440", environment["NOVACORE_WINDOW_CLIENT_HEIGHT"]);
+    Equal("1", environment["NOVACORE_WINDOW_BORDERLESS"]);
+    Equal("VK_LAYER_KHRONOS_validation", environment["VK_INSTANCE_LAYERS"]);
+
+    var repositoryRoot = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", ".."));
+    var plan = NovaCoreProcessLauncher.CreatePlan(repositoryRoot, configuration);
+    Equal("3440", plan.EnvironmentVariables["NOVACORE_WINDOW_CLIENT_WIDTH"]);
+    Equal("1", plan.EnvironmentVariables["NOVACORE_WINDOW_BORDERLESS"]);
+    True(plan.Arguments.Contains("--scene=earth", StringComparer.Ordinal), "Earth scene was not encoded structurally.");
 }
 
 static void EarthOrbitalArguments()
@@ -77,21 +107,6 @@ static void SubdivisionMapping()
         LaunchCommandBuilder.BuildArguments(configuration));
 }
 
-static void AnchoredBillboardMapping()
-{
-    var configuration = Create(NovaCoreScenarioPreset.AnchoredBillboardDiagnostic);
-    SequenceEqual(
-        ["--scene=planetary-anchored-billboard-diagnostic"],
-        LaunchCommandBuilder.BuildArguments(configuration));
-}
-
-static void FloridaVerticalSliceMapping()
-{
-    var configuration = Create(NovaCoreScenarioPreset.FloridaVerticalSlice);
-    SequenceEqual(["--scene=florida-vertical-slice"],
-        LaunchCommandBuilder.BuildArguments(configuration));
-}
-
 static void FloridaLaunchMapping()
 {
     var configuration = Create(NovaCoreScenarioPreset.FloridaLaunchSite);
@@ -100,24 +115,16 @@ static void FloridaLaunchMapping()
         LaunchCommandBuilder.BuildArguments(configuration));
 }
 
-static void UnsupportedFloridaSurface()
-{
-    False(ScenarioCatalog.TryCreateConfiguration(
-        NovaCoreScenarioPreset.FloridaSurface,
-        null,
-        false,
-        out var configuration,
-        out var error), "Florida Surface must not invent an unsupported CLI mapping.");
-    True(configuration is null, "Unsupported preset unexpectedly created a configuration.");
-    True(!string.IsNullOrWhiteSpace(error), "Unsupported preset must provide an explanation.");
-}
-
 static void InvalidConfiguration()
 {
     False(ScenarioCatalog.TryCreateConfiguration(
         NovaCoreScenarioPreset.Earth700Km,
         9.0,
-        false,
+        NovaCoreWindowMode.Windowed,
+        NovaCoreResolutionPreset.Resolution960x540,
+        NovaCoreDiagnosticsMode.Normal,
+        3440,
+        1440,
         out _,
         out _), "Below-clearance altitude was accepted.");
 
@@ -127,22 +134,57 @@ static void InvalidConfiguration()
         NovaCoreStartingBody.None,
         null,
         null,
-        false);
+        NovaCoreWindowMode.Windowed,
+        NovaCoreResolutionPreset.Resolution960x540,
+        new(960, 540),
+        NovaCoreDiagnosticsMode.Normal);
     Throws<ArgumentException>(() => LaunchCommandBuilder.BuildArguments(invalid));
 }
 
-static void ValidationArgument()
+static void DiagnosticsArguments()
 {
-    var configuration = Create(NovaCoreScenarioPreset.SolarSystemOverview, validation: true);
-    SequenceEqual(["--scene=sol", "--log=validation"], LaunchCommandBuilder.BuildArguments(configuration));
+    var normal = Create(NovaCoreScenarioPreset.SolarSystemOverview, diagnostics: NovaCoreDiagnosticsMode.Normal);
+    SequenceEqual(["--scene=sol"], LaunchCommandBuilder.BuildArguments(normal));
+    var normalEnvironment = LaunchCommandBuilder.BuildEnvironment(normal);
+    Equal("0", normalEnvironment["NOVACORE_WINDOW_BORDERLESS"]);
+    False(normalEnvironment.ContainsKey("VK_INSTANCE_LAYERS"),
+        "Normal diagnostics unexpectedly enabled Vulkan validation.");
+    SequenceEqual(["--scene=sol", "--log=vulkan"], LaunchCommandBuilder.BuildArguments(
+        Create(NovaCoreScenarioPreset.SolarSystemOverview, diagnostics: NovaCoreDiagnosticsMode.PerformanceTelemetry)));
+    SequenceEqual(["--scene=sol", "--log=validation"], LaunchCommandBuilder.BuildArguments(
+        Create(NovaCoreScenarioPreset.SolarSystemOverview, diagnostics: NovaCoreDiagnosticsMode.VulkanValidation)));
+    SequenceEqual(["--scene=sol", "--log=validation", "--log=vulkan"], LaunchCommandBuilder.BuildArguments(
+        Create(NovaCoreScenarioPreset.SolarSystemOverview, diagnostics: NovaCoreDiagnosticsMode.VulkanValidationAndPerformance)));
+}
+
+static void ExistingProductionScenarios()
+{
+    foreach (var definition in ScenarioCatalog.All.Where(definition =>
+                 definition.Preset != NovaCoreScenarioPreset.EarthFullscreenNative))
+    {
+        var configuration = Create(definition.Preset);
+        True(LaunchCommandBuilder.BuildArguments(configuration).Count > 0,
+            $"Existing scenario {definition.DisplayName} produced no arguments.");
+    }
 }
 
 static NovaCoreLaunchConfiguration Create(
     NovaCoreScenarioPreset preset,
     double? altitude = null,
-    bool validation = false)
+    NovaCoreWindowMode? windowMode = null,
+    NovaCoreResolutionPreset? resolution = null,
+    NovaCoreDiagnosticsMode? diagnostics = null,
+    int desktopWidth = 3440,
+    int desktopHeight = 1440)
 {
-    True(ScenarioCatalog.TryCreateConfiguration(preset, altitude, validation, out var configuration, out var error),
+    var definition = ScenarioCatalog.Get(preset);
+    True(ScenarioCatalog.TryCreateConfiguration(preset, altitude,
+            windowMode ?? definition.DefaultWindowMode,
+            resolution ?? definition.DefaultResolution,
+            diagnostics ?? definition.DefaultDiagnostics,
+            desktopWidth,
+            desktopHeight,
+            out var configuration, out var error),
         error ?? $"Could not create {preset}.");
     return configuration!;
 }
