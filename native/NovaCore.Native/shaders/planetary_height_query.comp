@@ -46,7 +46,7 @@ layout(push_constant)uniform HeightConstants {
 
 uint LoadU16Oracle(uint index){uint word=oracleWords[index>>1u];return (index&1u)==0u?word&0xffffu:word>>16u;}
 uint LoadU16Global(uint index){uint word=globalWords[index>>1u];return (index&1u)==0u?word&0xffffu:word>>16u;}
-uint LoadU8Local(uint index){uint word=localWords[index>>2u];return (word>>((index&3u)*8u))&0xffu;}
+uint LoadU16Local(uint index){uint word=localWords[index>>1u];return (index&1u)==0u?word&0xffffu:word>>16u;}
 double DecodeElevation(uint encoded){return -11000.0+double(encoded)*(20000.0/65535.0);}
 double Mix4(double a,double b,double c,double d,double tx,double ty){return mix(mix(a,b,tx),mix(c,d,tx),ty);}
 
@@ -78,29 +78,39 @@ double SampleTerrainV5(uint face,dvec2 uv,out uvec4 identity)
 
 double SampleLocal(uint face,dvec2 uv,out uvec4 identity)
 {
-  identity=uvec4(0);uint selected=0xffffffffu;
+  identity=uvec4(0);uint selected=0xffffffffu,selectedLevel=0u;
   for(uint index=0u;index<constants.storage.z;index++)
   {
     LocalRecord record=localRecords[index];uint cells=1u<<record.identity.y;
     uint x=min(uint(floor(uv.x*double(cells))),cells-1u),y=min(uint(floor(uv.y*double(cells))),cells-1u);
-    if(record.identity.x==face&&record.identity.z==x&&record.identity.w==y){selected=index;identity=uvec4(1u,record.identity.y,x,y);break;}
+    if(record.identity.x==face&&record.identity.z==x&&record.identity.w==y&&(selected==0xffffffffu||record.identity.y>selectedLevel))
+    {selected=index;selectedLevel=record.identity.y;identity=uvec4(1u,record.identity.y,x,y);}
   }
   if(selected==0xffffffffu)return 0.0;
   LocalRecord record=localRecords[selected];uint cells=1u<<record.identity.y;
   dvec2 local=clamp(uv*double(cells)-dvec2(record.identity.zw),dvec2(0),dvec2(1));
   dvec2 pixel=dvec2(3.5)+local*256.0;uvec2 p0=uvec2(floor(pixel)),p1=min(p0+uvec2(1),uvec2(263));dvec2 t=pixel-floor(pixel);
-  uint base=record.payload.x*constants.storage.y*4u;
-  double encoded=Mix4(double(LoadU8Local(base+p0.y*264u+p0.x)),double(LoadU8Local(base+p0.y*264u+p1.x)),
-    double(LoadU8Local(base+p1.y*264u+p0.x)),double(LoadU8Local(base+p1.y*264u+p1.x)),t.x,t.y)/255.0;
-  return double(constants.localRange.x)+encoded*double(constants.localRange.y-constants.localRange.x);
+  // storage.y is the packed uint-word count; R16 stores two samples/word.
+  uint base=record.payload.x*constants.storage.y*2u;
+  double encoded=Mix4(double(LoadU16Local(base+p0.y*264u+p0.x)),double(LoadU16Local(base+p0.y*264u+p1.x)),
+    double(LoadU16Local(base+p1.y*264u+p0.x)),double(LoadU16Local(base+p1.y*264u+p1.x)),t.x,t.y)/65535.0;
+  double coverage=1.0;uint sx=record.identity.z,sy=record.identity.w;
+  for(uint edge=0u;edge<4u;edge++)
+  {
+    bool exists=false;ivec2 neighbor=ivec2(sx,sy)+ivec2(edge==0u?-1:edge==1u?1:0,edge==2u?-1:edge==3u?1:0);
+    if(neighbor.x>=0&&neighbor.y>=0&&neighbor.x<int(cells)&&neighbor.y<int(cells))for(uint index=0u;index<constants.storage.z;index++)
+    {LocalRecord candidate=localRecords[index];exists=exists||(candidate.identity.x==face&&candidate.identity.y==record.identity.y&&candidate.identity.z==uint(neighbor.x)&&candidate.identity.w==uint(neighbor.y));}
+    if(!exists){double distance=edge==0u?local.x:edge==1u?1.0-local.x:edge==2u?local.y:1.0-local.y;coverage=min(coverage,smoothstep(0.0,8.0/256.0,distance));}
+  }
+  return (double(constants.localRange.x)+encoded*double(constants.localRange.y-constants.localRange.x))*coverage;
 }
 
-double EvaluateFinalHeightD(dvec3 direction,dvec2 oracleUv)
+double EvaluateBaseHeightD(dvec3 direction,dvec2 oracleUv)
 {
   direction=normalize(direction);uint face;dvec2 uv;uvec4 identity;
   ProductionDirectionAddressD(direction,face,uv);
   double base=max(0.0,SampleOracle(oracleUv)+SampleLocal(face,uv,identity));
-  return max(0.0,base+TerrainModifierHeightD(direction));
+  return max(0.0,base+TerrainBaseModifierHeightD(direction,base));
 }
 
 void main()
@@ -123,9 +133,9 @@ void main()
     dvec3 direction=normalize(reconstructed);ProductionDirectionAddressD(direction,face,uv);
     oracle=SampleOracle(query.oracleUv);terrain=SampleTerrainV5(face,uv,globalIdentity);
     local=SampleLocal(face,uv,localIdentity);base=max(0.0,oracle+local);
-    PhysicalModifierEvaluationD modifiers=EvaluateTerrainModifiersD(direction);
+    PhysicalModifierEvaluationD modifiers=EvaluateTerrainModifiersD(direction,base);
     modifierHeights=dvec2(modifiers.tiledHeight,modifiers.erosionHeight);
-    modifierHeight=modifiers.tiledHeight+modifiers.erosionHeight;physical=max(0.0,base+modifierHeight);
+    modifierHeight=modifiers.tiledHeight+modifiers.erosionHeight+modifiers.mesoHeight+modifiers.nearHeight;physical=max(0.0,base+modifierHeight);
     dvec3 east=PhysicalEastD(direction),north=normalize(cross(direction,east));
     double angle=NOVACORE_NORMAL_SAMPLE_RADIUS/NOVACORE_EARTH_REFERENCE_RADIUS;
     dvec3 ld=normalize(direction-east*angle),rd=normalize(direction+east*angle);
@@ -133,14 +143,18 @@ void main()
     double eastAngularStep=angle/max(sqrt(direction.x*direction.x+direction.z*direction.z),1e-12);
     double eastUvStep=eastAngularStep/6.283185307179586476925286766559;
     double northUvStep=angle/3.1415926535897932384626433832795;
-    double lh=EvaluateFinalHeightD(ld,query.oracleUv-dvec2(eastUvStep,0.0));
-    double rh=EvaluateFinalHeightD(rd,query.oracleUv+dvec2(eastUvStep,0.0));
-    double dh=EvaluateFinalHeightD(dd,query.oracleUv+dvec2(0.0,northUvStep));
-    double uh=EvaluateFinalHeightD(ud,query.oracleUv-dvec2(0.0,northUvStep));
-    gradient=dvec2((rh-lh)/(2.0*NOVACORE_NORMAL_SAMPLE_RADIUS),(uh-dh)/(2.0*NOVACORE_NORMAL_SAMPLE_RADIUS));
+    double lh=EvaluateBaseHeightD(ld,query.oracleUv-dvec2(eastUvStep,0.0));
+    double rh=EvaluateBaseHeightD(rd,query.oracleUv+dvec2(eastUvStep,0.0));
+    double dh=EvaluateBaseHeightD(dd,query.oracleUv+dvec2(0.0,northUvStep));
+    double uh=EvaluateBaseHeightD(ud,query.oracleUv-dvec2(0.0,northUvStep));
+    gradient=dvec2((rh-lh)/(2.0*NOVACORE_NORMAL_SAMPLE_RADIUS)+modifiers.nearEastGradient,
+      (uh-dh)/(2.0*NOVACORE_NORMAL_SAMPLE_RADIUS)+modifiers.nearNorthGradient);
     dvec3 left=ld*(NOVACORE_EARTH_REFERENCE_RADIUS+lh),right=rd*(NOVACORE_EARTH_REFERENCE_RADIUS+rh);
     dvec3 down=dd*(NOVACORE_EARTH_REFERENCE_RADIUS+dh),up=ud*(NOVACORE_EARTH_REFERENCE_RADIUS+uh);
-    dvec3 normal=normalize(cross(right-left,up-down));if(dot(normal,direction)<0.0)normal=-normal;
+    dvec3 baseNormal=normalize(cross(right-left,up-down));if(dot(baseNormal,direction)<0.0)baseNormal=-baseNormal;
+    double radialComponent=max(dot(baseNormal,direction),1e-9);
+    double baseEastSlope=-dot(baseNormal,east)/radialComponent,baseNorthSlope=-dot(baseNormal,north)/radialComponent;
+    dvec3 normal=normalize(direction-east*(baseEastSlope+modifiers.nearEastGradient)-north*(baseNorthSlope+modifiers.nearNorthGradient));
     physicalNormalAndWeight=vec4(vec3(normal),float(modifiers.geographicWeight));
   }
   result.faceUv=uv;result.oracleAndTerrainV5Height=dvec2(oracle,terrain);result.localAndPhysicalHeight=dvec2(local,physical);

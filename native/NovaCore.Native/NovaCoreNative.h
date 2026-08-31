@@ -116,7 +116,7 @@ struct alignas(8) NcPlanetaryHeightQueryMetrics {
 struct alignas(16) NcPlanetaryDisplacedVertex {
   float bodyHigh[4];              // xyz physical body-fixed position; w physical height
   float bodyLow[4];               // xyz low residual; w terrain-v5 reference height
-  float cameraRelative[4];        // xyz final presentation position; w local-v2 residual
+  float cameraRelative[4];        // xyz final presentation position; w regional residual
   double faceUv[2];
   uint32_t globalIdentity[4];     // face, level, x, y
   uint32_t localIdentity[4];      // available, level, x, y

@@ -92,7 +92,7 @@ NovaCore currently combines a C# simulation core with a native Vulkan renderer, 
 - **Generic procedural planet materials** with distinct presentations for Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn, Uranus, and Neptune.
 - **Generic ring presentation**, currently demonstrated by Saturn.
 - **NASA/NOAA terrain-v5 Earth surface authority** using canonical east-positive, right-handed, patch-aligned relaxed cube-sphere `.nccube` records and a checked topology-neutral CPU elevation oracle.
-- **Persistent global and local terrain residency** using the `earth-surface-v5` L0-L2 hierarchy, optional `earth-local-v2` payload refinement, coherent parent/child ownership, and persistent production spherical-refinement tiers.
+- **Persistent global and regional terrain residency** using the `earth-surface-v5` L0-L2 hierarchy, the USGS-derived `earth-florida-m12` L8-L11 regional refinement, coherent parent/child ownership, and persistent production spherical-refinement tiers.
 - **Surface-relative foundations** with terrain-aware camera clearance, immutable body-fixed `SurfaceAnchor` identity, anchored surface objects, and a deterministic Florida launch-site proof.
 - **Solar Map and Free 3D camera modes** with deterministic home framing and body focus.
 - **Authoritative orbit visualization** sourced from the same `CelestialSystemEvaluator` used for body motion.
@@ -147,10 +147,11 @@ From the repository root on a configured Windows development environment:
 
 ```powershell
 dotnet run --project tools/NovaCore.AssetTool -- status earth-surface-v5
-dotnet run --project tools/NovaCore.AssetTool -- status earth-local-v2
+dotnet run --project tools/NovaCore.AssetTool -- status earth-florida-m12
 # On a fresh clone, explicitly populate the verified runtime cache:
 dotnet run --project tools/NovaCore.AssetTool -- build earth-surface-v5
-dotnet run --project tools/NovaCore.AssetTool -- build earth-local-v2
+pwsh tools/earth_data/acquire_florida_m12.ps1
+dotnet run --project tools/NovaCore.AssetTool -- build earth-florida-m12
 dotnet run --project samples/NovaCore.Triangle/NovaCore.Triangle.csproj -c Debug -- --scene=sol
 ```
 
@@ -191,7 +192,7 @@ Current Solar-scene controls include mouse drag for free orbiting, mouse wheel z
 The current Desktop baseline uses one production-owned Earth surface architecture from Solar overview to the near field:
 
 - canonical right-handed body-fixed geography: +Y north, +X at longitude zero, and positive/east longitude toward -Z;
-- deterministic `earth-surface-v5` distribution and optional `earth-local-v2` refinement addressed by `body / terrain-version / face / level / x / y`;
+- deterministic `earth-surface-v5` distribution and `earth-florida-m12` regional refinement addressed by `body / terrain-version / face / level / x / y`;
 - conservative opaque global coverage that remains authoritative until a complete refinement transaction is ready, so refinement cannot leave an unowned visible region;
 - coherent global/refinement material addressing, including mixed-payload and cross-face fragments resolved from the represented body-fixed geography;
 - outward production topology with Vulkan front-face state matched to the validated projected winding;

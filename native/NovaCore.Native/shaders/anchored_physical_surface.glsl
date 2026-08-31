@@ -42,36 +42,58 @@ double AnchoredOracleElevation(dvec3 direction)
 // evaluates this at the reusable base vertices; tessellation then refines the
 // already-physical surface instead of repeating the complete height and normal
 // oracle for every generated TES invocation.
-double AnchoredPhysicalHeight(dvec3 direction)
+double AnchoredGeographicHeight(dvec3 direction)
 {
   vec3 unitDirection=normalize(vec3(direction));
   // SurfaceAnchor, camera clearance, the independent GPU height query, and
   // mesh-preparation validation all use this checked 8192x4096 FP64 authority.
   // terrain-v5 remains the complete visual/material fallback, but its bounded
   // L2 payload must not replace physical geometry authority at low altitude.
-  double base=max(0.0,AnchoredOracleElevation(direction)+double(LocalTerrainElevationResidual(unitDirection)));
-  return max(0.0,base+TerrainModifierHeightD(normalize(direction)));
+  return max(0.0,AnchoredOracleElevation(direction)+double(LocalTerrainElevationResidual(unitDirection)));
 }
 
-dvec3 AnchoredPhysicalPoint(dvec3 direction,double radius)
+double AnchoredBasePhysicalHeight(dvec3 direction)
+{
+  double geographic=AnchoredGeographicHeight(direction);
+  return max(0.0,geographic+TerrainBaseModifierHeightD(normalize(direction),geographic));
+}
+
+double AnchoredPhysicalHeight(dvec3 direction)
+{
+  double geographic=AnchoredGeographicHeight(direction);
+  return max(0.0,geographic+TerrainModifierHeightD(normalize(direction),geographic));
+}
+
+dvec3 AnchoredBasePhysicalPoint(dvec3 direction,double radius)
 {
   direction=normalize(direction);
-  return direction*(radius+AnchoredPhysicalHeight(direction));
+  return direction*(radius+AnchoredBasePhysicalHeight(direction));
 }
 
-vec3 AnchoredPhysicalNormal(dvec3 direction,double radius)
+vec3 AnchoredBasePhysicalNormal(dvec3 direction,double radius)
 {
   direction=normalize(direction);dvec3 east=PhysicalEastD(direction),north=normalize(cross(direction,east));
   // This is the canonical terrain-v5 source differential, not a camera- or
   // tessellation-dependent derivative.
   double angle=40.0/radius;
-  dvec3 left=AnchoredPhysicalPoint(direction-east*angle,radius);
-  dvec3 right=AnchoredPhysicalPoint(direction+east*angle,radius);
-  dvec3 down=AnchoredPhysicalPoint(direction-north*angle,radius);
-  dvec3 up=AnchoredPhysicalPoint(direction+north*angle,radius);
+  dvec3 left=AnchoredBasePhysicalPoint(direction-east*angle,radius);
+  dvec3 right=AnchoredBasePhysicalPoint(direction+east*angle,radius);
+  dvec3 down=AnchoredBasePhysicalPoint(direction-north*angle,radius);
+  dvec3 up=AnchoredBasePhysicalPoint(direction+north*angle,radius);
   vec3 candidate=normalize(vec3(cross(right-left,up-down))),radial=vec3(direction);
   if(any(isnan(candidate))||any(isinf(candidate)))return radial;
   return dot(candidate,radial)<0.0?-candidate:candidate;
+}
+
+vec3 AnchoredPhysicalNormal(dvec3 direction,double radius)
+{
+  direction=normalize(direction);vec3 radial=vec3(direction),base=AnchoredBasePhysicalNormal(direction,radius);
+  dvec3 eastD=PhysicalEastD(direction),northD=normalize(cross(direction,eastD));
+  NearPhysicalEvaluationD nearValue=EvaluateNearPhysicalD(direction,AnchoredGeographicHeight(direction));
+  double radialComponent=max(double(dot(base,radial)),1e-9);
+  double eastSlope=-double(dot(base,vec3(eastD)))/radialComponent+nearValue.eastGradient;
+  double northSlope=-double(dot(base,vec3(northD)))/radialComponent+nearValue.northGradient;
+  return normalize(radial-vec3(eastD)*float(eastSlope)-vec3(northD)*float(northSlope));
 }
 
 #endif

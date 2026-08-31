@@ -1,0 +1,36 @@
+{
+  "schema": "NovaCore.TerrainAsset/1",
+  "assetId": "earth-florida-m12",
+  "bodyId": 6,
+  "terrainVersion": 5,
+  "format": "nccube",
+  "formatVersion": 3,
+  "fileName": "earth_florida_m12.nccube",
+  "byteSize": 210307596,
+  "sha256": "c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe",
+  "hierarchy": {
+    "coverage": "regional-relaxed-cube-sphere",
+    "minimumPayloadLevel": 8,
+    "maximumPayloadLevel": 11,
+    "faceCount": 1,
+    "recordCount": 859
+  },
+  "provenance": "assets/earth/PROVENANCE.md",
+  "contentManifest": "assets/earth/runtime/earth_florida_m12.nccube.manifest.json",
+  "generator": {
+    "tool": "tools/earth_data/build_local_terrain_pack.py",
+    "version": "NCCUBE2-v3-BC7-R16-BC5-R8-regional-east-positive",
+    "executable": "python",
+    "arguments": [
+      "--albedo", "{repository}/assets/earth/source/nasa-blue-marble-2004-12-21600x10800.png",
+      "--elevation", "{repository}/assets/earth/runtime/earth_elevation_8192x4096.r16",
+      "--regional-elevation", "{repository}/.novacore/cache/sources/usgs-3dep/USGS_13_n29w081_20221103.tif",
+      "--regional-elevation-sha256", "532AB3A4ADE336D9A7D266E6745A12F043DB928BA8BF28A4576886DE421A74CD",
+      "--minimum-sector-level", "8",
+      "--sector-level", "11",
+      "--output", "{output}",
+      "--content-manifest", "{repository}/assets/earth/runtime/earth_florida_m12.nccube.manifest.json"
+    ]
+  },
+  "artifact": { "url": null }
+}

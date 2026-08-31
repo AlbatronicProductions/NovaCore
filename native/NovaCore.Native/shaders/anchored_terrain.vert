@@ -34,6 +34,7 @@ layout(location=13) flat out uvec4 productionAddress;
 layout(location=14) out vec2 productionTransition;
 layout(location=15) out vec2 topologyCoordinate;
 layout(location=17) out vec3 conservativeTrianglePosition;
+layout(location=18) out float geographicHeight;
 layout(push_constant) uniform StellarLighting { vec4 sourceCenterExposure; vec4 sourceColorAmbient; vec4 radianceGlowEnabled; } lighting;
 
 const uint AnchoredFrameOffset=16384u;
@@ -72,12 +73,13 @@ void main()
   uvec4 address=anchoredFrame.entries[descriptor+1u];
   dvec3 direction=normalize(ProductionProjectD(address,dvec2(baseUv)));
   double radius=double(inputData.cameraHighRadiusHigh.w)+double(inputData.cameraLowRadiusLow.w);
-  double height=AnchoredPhysicalHeight(direction);
+  double geographic=AnchoredGeographicHeight(direction);
+  double height=max(0.0,geographic+TerrainBaseModifierHeightD(direction,geographic));
   dvec3 body=direction*(radius+height);
   dvec3 origin,east,north,up;DecodeBillboardFrame(origin,east,north,up);
   vec3 relative=BillboardRelative(body,origin,east,north,up,p.bodyOrientation);
 
-  color=vec4(1.0);normal=AnchoredPhysicalNormal(direction,radius);
+  color=vec4(1.0);normal=AnchoredBasePhysicalNormal(direction,radius);
   lightDirection=normalize(RotateQuaternion(lighting.sourceCenterExposure.xyz-p.centerRadius.xyz,
     vec4(-p.bodyOrientation.xyz,p.bodyOrientation.w)));
   material=uvec2(p.identity.w,p.identity.z);response=p.surface;
@@ -87,5 +89,6 @@ void main()
   localDetail=p.localDetail;productionLayer=0x40000000u;productionUv=baseUv;
   productionAddress=address;productionTransition=vec2(1.0,0.0);topologyCoordinate=baseUv;
   conservativeTrianglePosition=relative;
+  geographicHeight=float(geographic);
   gl_Position=frameData.camera.viewProjection*vec4(relative,1.0);
 }

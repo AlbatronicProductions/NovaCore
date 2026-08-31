@@ -52,16 +52,43 @@ identity is `assets/terrain/manifests/earth-surface-v5.json`:
 - SHA-256
   `38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae`.
 
-`tools/earth_data/build_local_terrain_pack.py` builds the optional
-`earth_local_v2.nccube` from the same lawful albedo and elevation authority. Its
-tracked identity is `assets/terrain/manifests/earth-local-v2.json`:
+## Florida M12 regional physical elevation
 
-- terrain version 5, payload format version 2;
-- sparse level-12 relaxed cube-sphere records;
-- BC7 albedo, BC4 height, BC5 normal payloads;
-- byte size 7,652,567;
+- U.S. Geological Survey 3D Elevation Program, historical 1/3 arc-second DEM,
+  product `USGS 1/3 Arc Second n29w081 20221103`.
+- Original URL:
+  <https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/historical/n29w081/USGS_13_n29w081_20221103.tif>
+- Source filename: `USGS_13_n29w081_20221103.tif`; 10,812 x 10,812
+  Float32 samples; 1/3 arc-second horizontal spacing; elevation in metres.
+- CRS: EPSG:4269 (NAD83 geographic). The package builder samples longitude and
+  latitude into NovaCore's canonical east-positive relaxed cube-sphere frame;
+  no projected-coordinate approximation is used.
+- Geographic bounds: 27.9994444437 to 29.0005555559 degrees north and
+  -81.0005555561 to -79.9994444439 degrees east longitude (about 98 x 111 km
+  at the launch-site latitude).
+- SHA-256:
+  `532ab3a4ade336d9a7d266e6745a12f043db928ba8bf28a4576886de421a74cd`.
+- USGS-authored data are public-domain U.S. Government data. They are not a
+  navigation product and use does not imply USGS endorsement.
+
+`tools/earth_data/acquire_florida_m12.ps1` acquires and verifies the ignored
+source TIFF. `tools/earth_data/build_local_terrain_pack.py` then builds
+`earth_florida_m12.nccube`; its tracked identity is
+`assets/terrain/manifests/earth-florida-m12.json`:
+
+- terrain version 5, regional payload format version 3;
+- one contiguous relaxed cube-sphere L8-L11 hierarchy, 859 records;
+- BC7 geographic albedo, R16_UNORM physical residual, BC5 diagnostic regional
+  normal, and R8 categorical control;
+- global-to-regional residual feather over the outer 4 km source boundary;
+- byte size 210,307,596;
 - SHA-256
-  `60ada8949bfd782dfaea6c04270186bda52654d7263fbc3dbda5eaa4fd2e578a`.
+  `c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe`;
+- maximum measured R16 quantization error 0.001961 m, RMS 0.000672 m.
+
+The control map is independently generated from the lawful USGS elevation,
+coastal/geographic rules, and NovaCore deterministic classification. It is not
+KSA data and is not claimed to be a surveyed land-cover product.
 
 The geographic convention is right-handed: +Y north, +X at longitude zero,
 and east-positive longitude toward -Z. Offline source sampling converts the
@@ -69,4 +96,6 @@ EPSG:4326 raster into canonical face-aligned records and cross-face gutters.
 
 Generated payloads are installed through `NovaCore.AssetTool` into the ignored
 content-addressed runtime cache. Normal runtime performs no implicit download.
-NumPy 2.3.5 and Pillow 11.3.0 are the pinned offline Python dependencies.
+NumPy 2.3.5, Pillow 11.3.0, Rasterio, and PyProj are the offline Python
+dependencies for the regional build. Generated packages and the source TIFF
+remain in ignored content-addressed/source caches, not ordinary Git history.

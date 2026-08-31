@@ -1,7 +1,7 @@
 # Planetary data ingestion
 
 NovaCore's current Earth pipeline produces patch-aligned relaxed cube-sphere
-payloads for the terrain-v5 global surface and optional local refinement.
+payloads for the terrain-v5 global surface and regional physical refinement.
 
 ## Inputs
 
@@ -9,6 +9,7 @@ payloads for the terrain-v5 global surface and optional local refinement.
 - NOAA ETOPO 2022 elevation, converted to the checked 8,192 × 4,096 signed R16
   CPU oracle.
 - NASA Blue Marble cloud layer.
+- USGS 3DEP 1/3 arc-second `n29w081` elevation for the M12 Florida region.
 
 See `assets/earth/PROVENANCE.md` for source URLs, hashes, licensing statements,
 and current payload identities.
@@ -34,14 +35,18 @@ result contains all six faces through L2. Every record is one transaction of
 albedo, elevation, land classification, and clouds with canonical spherical
 gutters.
 
-## Build the local payload
+## Build the Florida regional payload
 
 ```powershell
-dotnet run --project tools/NovaCore.AssetTool -- build earth-local-v2
+pwsh tools/earth_data/acquire_florida_m12.ps1
+dotnet run --project tools/NovaCore.AssetTool -- build earth-florida-m12
 ```
 
-`tools/earth_data/build_local_terrain_pack.py` emits current NCCUBE2 BC7/BC4/BC5
-level-12 records using the same body-fixed address and source authority.
+The acquisition step verifies the public USGS source into the ignored source
+cache. `tools/earth_data/build_local_terrain_pack.py` emits NCCUBE2-v3
+BC7/R16/BC5/R8 L8-L11 records using the same body-fixed address. Regional R16
+stores `USGS elevation - signed global elevation`; the outer 4 km converges to
+zero so global and regional physical authority meet continuously.
 
 ## Distribution
 
@@ -60,3 +65,5 @@ never performs network acquisition.
 - Child records cannot become visible until their complete data dependency is
   resident and acknowledged.
 - Current generators must reproduce the tracked payload digest exactly.
+- Categorical control sampling is nearest/texel-exact; it is not linearly
+  blended into fractional class identities.

@@ -15,7 +15,11 @@ public readonly record struct PlanetaryTerrainDefinition(uint SourceId,uint Vers
     {
         if(!IsValid||!bodyDirection.IsFinite||bodyDirection.LengthSquared<=0)throw new ArgumentOutOfRangeException();
         if(SourceId==EarthProductionCubeV5.SourceId&&Version==EarthProductionCubeV5.Version)
-            return Math.Max(0d,EarthElevationDataset.SampleHeight(bodyDirection)+EarthLocalTerrainElevationDataset.SampleResidual(bodyDirection));
+            // Regional residuals are authored against the signed global
+            // elevation field.  Clamp only after recomposition; clipping
+            // bathymetry before adding the residual changes Florida land
+            // heights by the magnitude of the global sub-sea sample.
+            return Math.Max(0d,EarthElevationDataset.SampleElevation(bodyDirection)+EarthLocalTerrainElevationDataset.SampleResidual(bodyDirection));
         var direction=bodyDirection.Normalized();
         var continental=.46d*Math.Sin(Double3.Dot(direction,new(.8017837257372732,.2672612419124244,.5345224838248488))*3.1d+.7d)
             +.31d*Math.Sin(Double3.Dot(direction,new(-.4082482904638631,.8164965809277261,.4082482904638631))*5.3d-1.2d)

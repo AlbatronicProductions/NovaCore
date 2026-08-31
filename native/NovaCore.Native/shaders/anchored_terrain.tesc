@@ -23,6 +23,7 @@ layout(location=13) flat in uvec4 inProductionAddress[]; layout(location=13) fla
 layout(location=14) in vec2 inProductionTransition[]; layout(location=14) out vec2 outProductionTransition[];
 layout(location=15) in vec2 inTopologyCoordinate[]; layout(location=15) out vec2 outTopologyCoordinate[];
 layout(location=17) in vec3 inConservativeTrianglePosition[];
+layout(location=18) in float inGeographicHeight[]; layout(location=18) out float outGeographicHeight[];
 
 float ProjectedLengthPixels(vec4 a,vec4 b)
 {
@@ -124,6 +125,7 @@ void main()
   outLocalDetail[gl_InvocationID]=inLocalDetail[i];outProductionLayer[gl_InvocationID]=inProductionLayer[i];
   outProductionUv[gl_InvocationID]=inProductionUv[i];outProductionAddress[gl_InvocationID]=inProductionAddress[i];
   outProductionTransition[gl_InvocationID]=inProductionTransition[i];outTopologyCoordinate[gl_InvocationID]=inTopologyCoordinate[i];
+  outGeographicHeight[gl_InvocationID]=inGeographicHeight[i];
   barrier();
   if(i==0u)
   {

@@ -12,7 +12,9 @@ constexpr uint32_t HeaderBytes=256,RecordHeaderBytes=128,InteriorTexels=256,Gutt
 constexpr uint32_t Bc7Bytes=(StoredExtent/4)*(StoredExtent/4)*16;
 constexpr uint32_t Bc4Bytes=(StoredExtent/4)*(StoredExtent/4)*8;
 constexpr uint32_t Bc5Bytes=(StoredExtent/4)*(StoredExtent/4)*16;
-constexpr uint32_t PayloadVersion=2;
+constexpr uint32_t R8Bytes=StoredExtent*StoredExtent;
+constexpr uint32_t R16Bytes=StoredExtent*StoredExtent*2;
+constexpr uint32_t PayloadVersion=3;
 
 enum class Codec:uint8_t{Raw=0,PackBits=1};
 
@@ -21,10 +23,10 @@ struct SectorId{
   auto operator<=>(const SectorId&)const=default;
 };
 struct Record{
-  SectorId id{};uint64_t payloadOffset{};std::array<uint32_t,3> storedBytes{},gpuBytes{};std::array<Codec,3> codecs{};std::array<uint8_t,32> digest{};
+  SectorId id{};uint64_t payloadOffset{};std::array<uint32_t,4> storedBytes{},gpuBytes{};std::array<Codec,4> codecs{};std::array<uint8_t,32> digest{};float residualMinimum{},residualMaximum{};
 };
 struct Payload{
-  SectorId id{};std::vector<uint8_t> albedoBc7,elevationBc4,normalBc5;uint64_t storedBytes{},transcodedBytes{};double transcodeMilliseconds{};bool digestValid{};
+  SectorId id{};std::vector<uint8_t> albedoBc7,elevationBc4,normalBc5,controlR8;float residualMinimum{},residualMaximum{};uint64_t storedBytes{},transcodedBytes{};double transcodeMilliseconds{};bool digestValid{};
 };
 
 class Pack final{
@@ -42,7 +44,7 @@ class Pack final{
   bool IsProductionLayout()const{return bodyId_==6&&terrainVersion_==5&&interior_==InteriorTexels&&gutter_==GutterTexels&&extent_==StoredExtent&&DetailFrequency()==1&&PayloadVersionValue()==PayloadVersion;}
  private:
   const Record*Find(const SectorId&id)const;
-  std::string path_;uint64_t bodyId_{};uint32_t terrainVersion_{},minimumLevel_{},maximumLevel_{},interior_{},gutter_{},extent_{};
+  std::string path_;uint64_t bodyId_{};uint32_t version_{},terrainVersion_{},minimumLevel_{},maximumLevel_{},interior_{},gutter_{},extent_{};
   float residualMinimum_{},residualMaximum_{};std::vector<Record>records_;
 };
 

@@ -105,6 +105,22 @@ ProductionTerrainWeights ClassifyProductionTerrain(
   return ProductionTerrainWeights(primary/total,secondary/total);
 }
 
+ProductionTerrainWeights ProductionWeightsFromBiome(BiomeBlendD biome,float landMask)
+{
+  float land=smoothstep(.45,.55,landMask);
+  float grass=float(BiomeWeightD(biome,NOVACORE_BIOME_GRASS));
+  float scrub=float(BiomeWeightD(biome,NOVACORE_BIOME_SCRUB));
+  float wet=float(BiomeWeightD(biome,NOVACORE_BIOME_WETLAND));
+  float developed=float(BiomeWeightD(biome,NOVACORE_BIOME_DEVELOPED));
+  vec4 primary=vec4(grass+.28*scrub,wet+.55*scrub+.65*developed,
+    float(BiomeWeightD(biome,NOVACORE_BIOME_BEACH)),float(BiomeWeightD(biome,NOVACORE_BIOME_ROCKY))+.35*developed)*land;
+  vec3 secondary=vec3(float(BiomeWeightD(biome,NOVACORE_BIOME_ALPINE)),
+    float(BiomeWeightD(biome,NOVACORE_BIOME_DESERT)),float(BiomeWeightD(biome,NOVACORE_BIOME_SNOW)))*land;
+  float total=dot(primary,vec4(1))+dot(secondary,vec3(1));
+  if(total<=1e-7)return ProductionTerrainWeights(vec4(0,1,0,0),vec3(0));
+  return ProductionTerrainWeights(primary/total,secondary/total);
+}
+
 void BlendProductionTerrainLibrary(
   ProductionTerrainWeights weights,out vec3 color,out float roughness,out float metallic,out float ao,out float displacement)
 {
@@ -134,7 +150,7 @@ vec3 ApplyTerrainHeightNormal(vec3 geometricNormal,vec3 differentialMetres,float
 
 ProductionTerrainMaterial SynthesizeProductionTerrainMaterial(
   vec3 geographicAlbedo,float landMask,float elevationMetres,vec3 bodyDirection,vec3 geometricNormal,
-  dvec3 bodyMetres,vec3 differentialMetres,float altitudeMetres)
+  dvec3 bodyMetres,vec3 differentialMetres,float altitudeMetres,float regionalControlClass,BiomeBlendD biome)
 {
   ProductionTerrainMaterial result;
   result.detailWeight=TerrainDetailWeight(altitudeMetres);
@@ -142,7 +158,7 @@ ProductionTerrainMaterial SynthesizeProductionTerrainMaterial(
   float latitude=abs(bodyDirection.y);
   float moisture=TerrainSaturate(1.35*geographicAlbedo.g-.45*geographicAlbedo.r+.22);
   float temperature=TerrainSaturate(1.0-latitude*.78-max(elevationMetres,0.0)/9000.0);
-  ProductionTerrainWeights weights=ClassifyProductionTerrain(landMask,elevationMetres,slope,latitude,moisture,temperature);
+  ProductionTerrainWeights weights=ProductionWeightsFromBiome(biome,landMask);
   vec3 materialColor;float materialRoughness,materialMetallic,materialAo,materialDisplacement;
   BlendProductionTerrainLibrary(weights,materialColor,materialRoughness,materialMetallic,materialAo,materialDisplacement);
 
@@ -174,6 +190,23 @@ ProductionTerrainMaterial SynthesizeProductionTerrainMaterial(
   result.ambientOcclusion=mix(1.0,clamp(materialAo-(meso-.5)*.08,.65,1.0),landDetail);
   result.visualDisplacement=materialDisplacement*((normalMeso-.5)*.72+(normalMicro-.5)*.28)*landDetail;
   result.normal=landDetail>0.0?ApplyTerrainHeightNormal(normalize(geometricNormal),differentialMetres,result.visualDisplacement):normalize(geometricNormal);
+  // M12 regional control is categorical physical geography, not a replacement
+  // color map. It selects restrained NovaCore material response while the
+  // independently sourced macro albedo remains recognizable and continuous.
+  if(regionalControlClass>=0.0&&landDetail>0.0)
+  {
+    int control=int(round(regionalControlClass));vec3 responseColor=vec3(1);float responseRoughness=result.roughness;
+    if(control==1){responseColor=vec3(.93,1.03,1.02);responseRoughness=.78;}
+    else if(control==2){responseColor=vec3(1.10,1.04,.84);responseRoughness=.86;}
+    else if(control==3){responseColor=vec3(.78,.94,.80);responseRoughness=.94;}
+    else if(control==4){responseColor=vec3(.86,1.08,.80);responseRoughness=.91;}
+    else if(control==5){responseColor=vec3(.94,1.03,.83);responseRoughness=.90;}
+    else if(control==6){responseColor=vec3(.72,.96,.70);responseRoughness=.93;}
+    else if(control==7){responseColor=vec3(.94,.93,.91);responseRoughness=.72;}
+    else if(control==8){responseColor=vec3(.96,.95,.91);responseRoughness=.68;}
+    result.albedo*=mix(vec3(1),responseColor,.22*landDetail);
+    result.roughness=mix(result.roughness,responseRoughness,.28*landDetail);
+  }
   return result;
 }
 

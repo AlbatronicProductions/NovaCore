@@ -46,13 +46,14 @@ internal static class PlanetaryDynamicAnchoredSurfaceTests
             control.Contains("planeIndex<4u", StringComparison.Ordinal) &&
             control.Contains("gl_TessLevelOuter", StringComparison.Ordinal),
             "tessellation control performs conservative bound rejection and raster-proximate screen refinement");
-        Assert(vertex.Contains("AnchoredPhysicalHeight", StringComparison.Ordinal) &&
-            vertex.Contains("AnchoredPhysicalNormal", StringComparison.Ordinal) &&
+        Assert(vertex.Contains("AnchoredGeographicHeight", StringComparison.Ordinal) &&
+            vertex.Contains("TerrainBaseModifierHeightD", StringComparison.Ordinal) &&
+            vertex.Contains("AnchoredBasePhysicalNormal", StringComparison.Ordinal) &&
             evaluation.Contains("ProductionProjectD", StringComparison.Ordinal) &&
             evaluation.Contains("layout(triangles,equal_spacing,cw)", StringComparison.Ordinal) &&
-            !evaluation.Contains("AnchoredPhysicalHeight", StringComparison.Ordinal) &&
-            !evaluation.Contains("AnchoredPhysicalNormal", StringComparison.Ordinal),
-            "physical displacement/normals are evaluated once on the prepared base surface and TES preserves the proven outward raster parity");
+            evaluation.Contains("EvaluateNearPhysicalD", StringComparison.Ordinal) &&
+            evaluation.Contains("nearValue.eastGradient", StringComparison.Ordinal),
+            "geographic/meso displacement is prepared on the reusable base while TES adds the bounded canonical near field and its physical gradient");
         Assert(physical.Contains("binding=33", StringComparison.Ordinal) &&
             physical.Contains("AnchoredOracleElevation(direction)", StringComparison.Ordinal) &&
             physical.Contains("const uint width=8192u,height=4096u", StringComparison.Ordinal) &&

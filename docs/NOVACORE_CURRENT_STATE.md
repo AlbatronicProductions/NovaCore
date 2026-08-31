@@ -23,7 +23,8 @@ scales:
 - `PlanetaryDynamicAnchoredSurface` selects finer body-fixed patches from
   projected error inside a retained camera-centered physical neighborhood.
   Camera orientation affects GPU visibility, not CPU residency authority.
-- `earth-local-v2` supplies optional NCCUBE2 BC7/BC4/BC5 local payloads.
+- `earth-florida-m12` supplies NCCUBE2-v3 BC7/R16/BC5/R8 regional payloads from
+  a provenance-tracked USGS 3DEP source in a complete L8-L11 hierarchy.
 - Patch identity is
   `body / terrain-version / physical-surface-generation / face / level / x / y`.
 - A published generation owns complete geometry, elevation, material data,
@@ -34,8 +35,8 @@ scales:
   default target is 256 pixels per patch with 700 km acquire and 800 km release
   hysteresis. The retained body-local neighborhood is 32-64 km with a bounded
   128-1,000 m recenter threshold.
-- Physical height is evaluated from the terrain-v5 global source plus any
-  applicable local NCCUBE2 residual. Visual material detail does not change
+- Physical height is `max(0, signed global elevation + regional residual +
+  deterministic physical modifier)`. Visual material detail does not change
   collision or geographic identity.
 - CPU work ends at canonical patch selection, residency, compact descriptor
   preparation, and transactional publication. A bounded generation coordinator
@@ -101,13 +102,45 @@ refined vertex invocations, and raster-emitted primitives.
 The 11B-7H1 manual 3440x1440 Desktop recording is the accepted stable GPU
 terrain baseline.
 
-## Current limitations
+## M12 regional foundation
 
-- Florida currently has no regional NCCUBE2 physical coverage. Its broad,
-  low-frequency ground appearance is an accepted global physical-data fidelity
-  limit, not a renderer ownership or residency failure.
-- KSA-class close-ground detail requires higher-resolution regional physical
-  terrain plus associated biome/modifier authority.
+- Florida now has about 98 x 111 km of 1/3 arc-second source coverage, packaged
+  as 859 L8-L11 regional records. The control ABI includes ocean, coastal,
+  beach, wetland, grass, scrub, forest, developed, and launch-site reservation
+  classes; these are deterministic NovaCore classifications, not surveyed
+  land-cover truth.
+- The stored regional BC5 channel is diagnostic. Production normals come from
+  the final composed displaced geometry, so mip/tier changes cannot replace
+  physical-normal authority.
+- Native regional demand is retained by authoritative anchored generation.
+  A stationary or rotating footprint does not rescan every regional record
+  against every anchored patch; pending uploads can still promote atomically.
+- The bounded native 3440x1440 Florida proof selected 55 records once, reached
+  55/55 published residency with no eviction or queue failure, and measured
+  25.596 ms CPU frame average / 59.878 ms p95 and 17.902 ms GPU average in the
+  Debug validation-capable executable. Startup preparation is included.
+- Manual native 3440x1440 M12 visual and performance acceptance remains open.
+
+## M12B planet-wide physical synthesis
+
+- A deterministic FP64 body-fixed biome/control authority now selects and
+  normalizes the four strongest contributors from ocean/coastal, beach,
+  wetland, grass, scrub, desert, rocky, alpine, snow/glacial, and developed/
+  reserved classes. Patch identity, camera state, LOD, residency, and time are
+  not inputs.
+- Five terrain modifier families cover rolling, rocky, dune, coastal/wetland,
+  and glacial landforms across explicit macro/meso bands. A bounded 32 m to
+  1.4 m near field is evaluated after GPU tessellation; sub-metre material
+  response remains presentation-only.
+- The same control blend drives the seven production PBR families:
+  grass/soil, wet ground, beach sand, rock/cliff, alpine rock, desert sand,
+  and snow/ice. CPU and GPU height/gradient/normal oracles share this contract.
+- Florida regional R16 residual and reservation data remains an optional truth
+  enhancement over the complete planet-wide result. Crossing its boundary
+  changes source fidelity, not surface ownership or biome identity.
+- M12B adds biome ID/blend, modifier-family, and near-physical diagnostics.
+  Planet-wide visual character, anti-repetition, transitions, and native
+  performance still require manual 3440x1440 acceptance.
 - Close-ground material and environmental fidelity are not final.
 - Fragment material and physical-normal cost remains a future measured
   optimization target.
@@ -123,8 +156,8 @@ terrain baseline.
 
 ## Next work
 
-The next surface-development priority is a provenance-tracked,
-higher-resolution Florida/regional physical terrain payload and its associated
-modifier/biome authority. The bounded distant-representation study and measured
-fragment/normal/selector optimizations remain later work; do not reopen the
-accepted renderer architecture without a demonstrated regression.
+Physically replay M12B from orbit through 1 km, 100 m, and 10 m, including a
+360-degree rotation, lateral traversal, boundary crossing, retreat, and
+re-approach. Include Florida, Appalachians, rocky/alpine terrain, desert/dunes,
+snow/glacial terrain, grassland, and a no-regional-data region. The bounded distant-representation study and measured fragment/normal/
+selector optimizations remain later work.

@@ -62,6 +62,7 @@ var tests = new (string, Action)[]
     ("Terrain-v5 seams, mixed-LOD authority, and Florida classification", TerrainV5PayloadSeamAndFloridaClassificationTest),
     ("Terrain asset distribution boundary", TerrainAssetDistributionBoundaryTest),
     ("Local terrain streaming and GPU compression", LocalTerrainStreamingAndGpuCompressionTest),
+    ("M12 Florida regional physical surface", M12FloridaRegionalPhysicalSurfaceTest),
     ("Production cube-sphere GPU residency integration", ProductionCubeSphereGpuResidencyIntegrationTest),
     ("Production physical-normal tangent continuity", ProductionPhysicalNormalTangentContinuityTest),
     ("Production surface body eligibility and transition ownership", ProductionSurfaceBodyEligibilityAndTransitionOwnershipTest),
@@ -106,8 +107,8 @@ static void AnchoredSphericalMeshTierContractTest()
     Check(topologyA.Vertices.SequenceEqual(topologyB.Vertices)&&topologyA.Indices.SequenceEqual(topologyB.Indices)&&
         topologyA.DeterministicHash==topologyB.DeterministicHash&&topologyA.Vertices.Length==25&&topologyA.Indices.Length==96,
         "bounded reference topology has deterministic vertex/index identity and intentionally non-production 4x4 density");
-    Check(tierA.DeterministicHash==0x72DD1138C6517D0Cul&&topologyA.DeterministicHash==0xCEA923A12C68A20Aul,
-        "anchored tier and bounded reference topology regression hashes include the canonical 7H physical-surface generation");
+    Check(tierA.DeterministicHash==0x55A75314ECE5FB2Bul&&topologyA.DeterministicHash==0x3621FBFD89675DD4ul,
+        $"anchored tier and bounded reference topology regression hashes bind M12 physical height without changing topology: tier=0x{tierA.DeterministicHash:X16}; topology=0x{topologyA.DeterministicHash:X16}");
 
     var splitSamples=new[]{
         Double3.Zero,
@@ -369,16 +370,71 @@ static void LocalTerrainStreamingAndGpuCompressionTest()
     var nativeSource=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","NovaCoreNative.cpp"));
     var localSource=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","LocalTerrainPack.cpp"));
     var shaderSource=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","shaders","local_terrain.glsl"));
-    Check(nativeSource.Contains("VK_FORMAT_BC7_SRGB_BLOCK",StringComparison.Ordinal)&&nativeSource.Contains("VK_FORMAT_BC4_UNORM_BLOCK",StringComparison.Ordinal)&&nativeSource.Contains("VK_FORMAT_BC5_UNORM_BLOCK",StringComparison.Ordinal),"native residency uses required GPU-native BC formats");
-    Check(nativeSource.Contains("LocalPayloadSlots=128",StringComparison.Ordinal)&&nativeSource.Contains("LocalUploadBudget=2",StringComparison.Ordinal)&&nativeSource.Contains("std::thread(LocalIoWorker",StringComparison.Ordinal),"runtime cache, uploads, and asynchronous I/O are fixed and bounded");
+    Check(nativeSource.Contains("VK_FORMAT_BC7_SRGB_BLOCK",StringComparison.Ordinal)&&nativeSource.Contains("VK_FORMAT_R16_UNORM",StringComparison.Ordinal)&&nativeSource.Contains("VK_FORMAT_BC5_UNORM_BLOCK",StringComparison.Ordinal)&&nativeSource.Contains("VK_FORMAT_R8_UNORM",StringComparison.Ordinal),"native residency uses BC7/R16/BC5/R8 regional channels");
+    Check(nativeSource.Contains("LocalPayloadSlots=256",StringComparison.Ordinal)&&nativeSource.Contains("LocalUploadBudget=2",StringComparison.Ordinal)&&nativeSource.Contains("std::thread(LocalIoWorker",StringComparison.Ordinal),"runtime cache, uploads, and asynchronous I/O are fixed and bounded");
     Check(nativeSource.Contains("TryPromoteLocalVisibleTransaction",StringComparison.Ordinal)&&nativeSource.Contains("localLayerPublished",StringComparison.Ordinal)&&
           nativeSource.Contains("a.localLayerPublished[layer]=0",StringComparison.Ordinal),"visible local sectors remain behind the coherent terrain-v5 base until the complete footprint transaction is resident");
     Check(localSource.Contains("local terrain payload digest mismatch",StringComparison.Ordinal)&&shaderSource.Contains("binding=28",StringComparison.Ordinal)&&shaderSource.Contains("binding=31",StringComparison.Ordinal),"fixture exercises the production parser while the shared local-terrain shader declares fixed BC arrays and remap metadata");
     Check(shaderSource.Contains("textureGrad(localTerrainAlbedo",StringComparison.Ordinal)&&shaderSource.Contains("LocalTerrainStoredExtent=264.0",StringComparison.Ordinal)&&
           shaderSource.Contains("ProductionDirectionAddress",StringComparison.Ordinal),"local sector sampling preserves body-direction addressing, explicit gradients, and four-texel filtering gutters");
     var productionFragment=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","shaders","planetary_production.frag"));
-    Check(productionFragment.Contains("LocalTerrainElevationResidual",StringComparison.Ordinal)&&productionFragment.Contains("SampleLocalTerrainMaterial",StringComparison.Ordinal),"the dynamic anchored production path consumes local displacement, albedo, and normals");
-    Console.WriteLine($"Local terrain fixture: sectors={header.RecordCount}; disk={manifest.ByteSize}B; GPU={contentRoot.GetProperty("gpuBytes").GetInt64()}B; cache=128/256/512 bounded candidates; production=128 slots");
+    Check(productionFragment.Contains("LocalTerrainElevationResidual",StringComparison.Ordinal)&&productionFragment.Contains("SampleLocalTerrainMaterial",StringComparison.Ordinal)&&
+          !productionFragment.Contains("surfaceNormal=normalize(mix(surfaceNormal,ApplyLocalTerrainNormal",StringComparison.Ordinal),
+          "the dynamic anchored production path consumes regional height/albedo/control while final displaced geometry remains normal authority");
+    Console.WriteLine($"Local terrain fixture: sectors={header.RecordCount}; disk={manifest.ByteSize}B; GPU={contentRoot.GetProperty("gpuBytes").GetInt64()}B; cache=128/256/512 bounded candidates; production=256 slots");
+}
+
+static void M12FloridaRegionalPhysicalSurfaceTest()
+{
+    var repositoryRoot=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..",".."));
+    Check(TerrainAssetCache.TryResolveRequired(repositoryRoot,TerrainAssetCache.ProductionEarthLocalAssetId,null,
+        out var manifest,out var path,out var error),$"M12 regional asset: {error}");
+    Check(manifest.AssetId=="earth-florida-m12"&&manifest.FormatVersion==3&&manifest.Hierarchy.MinimumPayloadLevel==8&&
+          manifest.Hierarchy.MaximumPayloadLevel==11&&manifest.Hierarchy.RecordCount==859,"M12 manifest identifies one contiguous L8-L11 Florida hierarchy");
+    var package=File.ReadAllBytes(path);
+    Check(PlanetaryLocalTerrainPackContract.TryReadHeader(package,out var header)&&header.Version==3&&header.RecordCount==859,
+        "NCCUBE2-v3 production header");
+    Check(NativeRuntime.ValidateTerrainAsset(path,manifest.BodyId,manifest.TerrainVersion,(uint)manifest.Hierarchy.RecordCount)==NativeResult.Success,
+        "native NCCUBE2-v3 parser, R16/control transcode, and record digests");
+    var offset=PlanetaryLocalTerrainPackContract.HeaderBytes;var levels=new HashSet<int>();
+    var minimumRange=double.PositiveInfinity;var maximumRange=double.NegativeInfinity;
+    for(var index=0;index<header.RecordCount;index++)
+    {
+        Check(PlanetaryLocalTerrainPackContract.TryReadRecordHeader(package.AsSpan(offset,PlanetaryLocalTerrainPackContract.RecordHeaderBytes),out var record),$"M12 record {index}");
+        Check(record.Sector.PayloadVersion==3&&record.HasControl&&record.HasPerRecordResidualRange&&
+              record.GpuElevationBytes==PlanetaryLocalTerrainPackContract.GpuBytes(PlanetaryLocalTerrainGpuFormat.R16Unorm,PlanetaryLocalTerrainPackContract.StoredExtent)&&
+              record.GpuControlBytes==PlanetaryLocalTerrainPackContract.GpuBytes(PlanetaryLocalTerrainGpuFormat.R8Unorm,PlanetaryLocalTerrainPackContract.StoredExtent),
+              $"M12 R16/control ABI {index}");
+        levels.Add(record.Sector.Level);minimumRange=Math.Min(minimumRange,record.ResidualMinimumMetres);maximumRange=Math.Max(maximumRange,record.ResidualMaximumMetres);
+        offset=checked((int)record.PayloadOffset+(int)record.StoredAlbedoBytes+(int)record.StoredElevationBytes+(int)record.StoredNormalBytes+(int)record.StoredControlBytes);
+    }
+    Check(offset==package.Length&&levels.SetEquals([8,9,10,11])&&minimumRange==-128d&&maximumRange==127.99609375d,
+        "M12 records are ordered, exhaustive, and use the versioned physical residual range");
+    Check(EarthLocalTerrainElevationDataset.TryLoad(path,out var loadError),$"M12 CPU oracle: {loadError}");
+    var launch=BodyFixedGeography.DirectionFromLatitudeLongitude(FloridaLaunchSite.Latitude*Math.PI/180d,FloridaLaunchSite.Longitude*Math.PI/180d);
+    var launchResidual=EarthLocalTerrainElevationDataset.SampleResidual(launch);
+    Check(launchResidual is >10d and <30d&&EarthLocalTerrainElevationDataset.SampleControl(launch)==PlanetarySurfaceControlClass.LaunchSiteReservation,
+        $"M12 launch-site physical residual/control: {launchResidual:R} m");
+    var launchModifier=PlanetaryPhysicalSurface.EvaluateModifiers(launch);
+    Check(launchModifier.ErosionHeightMetres==0d&&PlanetaryPhysicalSurface.LaunchReservationRadiusMetres==275d,
+        "the authored launch-site control reservation excludes the bounded sub-source physical modifier");
+    var westBoundary=BodyFixedGeography.DirectionFromLatitudeLongitude(FloridaLaunchSite.Latitude*Math.PI/180d,-81.00055555609339d*Math.PI/180d);
+    var outside=BodyFixedGeography.DirectionFromLatitudeLongitude(FloridaLaunchSite.Latitude*Math.PI/180d,-81.01d*Math.PI/180d);
+    var boundaryResidual=EarthLocalTerrainElevationDataset.SampleResidual(westBoundary);var outsideResidual=EarthLocalTerrainElevationDataset.SampleResidual(outside);
+    Check(Math.Abs(boundaryResidual)<.01d&&outsideResidual==0d,
+        $"M12 residual converges to canonical global height at and beyond the regional boundary: boundary={boundaryResidual:R}; outside={outsideResidual:R}");
+    using var content=JsonDocument.Parse(File.ReadAllText(Path.Combine(repositoryRoot,manifest.ContentManifest.Replace('/',Path.DirectorySeparatorChar))));
+    var root=content.RootElement;var classes=root.GetProperty("controlClassTexels");
+    Check(root.GetProperty("maximumVerticalErrorMetres").GetDouble()<.0021d&&root.GetProperty("rmsVerticalErrorMetres").GetDouble()<.0018d&&
+          classes.GetProperty("ocean").GetInt64()>0&&classes.GetProperty("wetland").GetInt64()>0&&classes.GetProperty("developed").GetInt64()>0&&classes.GetProperty("launchSiteReservation").GetInt64()>0,
+          "M12 source quantization is millimetre-class and every foundational Florida control family is represented");
+    var nativeSource=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","NovaCoreNative.cpp"));
+    var fragment=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","shaders","planetary_production.frag"));
+    foreach(var diagnostic in new[]{"global-height","regional-height","residual","final-height","physical-modifier","biome-id","biome-blend","modifier-family","near-physical","regional-control","material-id","regional-mip","regional-residency","regional-boundary"})
+        Check(nativeSource.Contains($"\"{diagnostic}\"",StringComparison.Ordinal),$"M12 diagnostic {diagnostic}");
+    Check(fragment.Contains("stored regional BC5 field is a payload/diagnostic channel",StringComparison.Ordinal),
+        "production normal is generated from final composed physical geometry rather than reapplied regional BC5");
+    Console.WriteLine($"M12 Florida: records={header.RecordCount}; levels={string.Join('/',levels.Order())}; launchResidual={launchResidual:F3}m; maxQuantization={root.GetProperty("maximumVerticalErrorMetres").GetDouble():F6}m; bytes={package.Length}");
 }
 
 static void ProductionEarthMaterialStateContinuityTest()
@@ -491,7 +547,9 @@ static void PlanetaryCameraTerrainExclusionTest()
     for(var recordIndex=0;recordIndex<localHeader.RecordCount;recordIndex++)
     {
         Check(PlanetaryLocalTerrainPackContract.TryReadRecordHeader(localPackage.AsSpan(localOffset,PlanetaryLocalTerrainPackContract.RecordHeaderBytes),out var record)&&
-            record.Sector.TerrainVersion==5&&record.Sector.PayloadVersion==2,$"production local terrain-v5 payload-v2 record {recordIndex}");
+            record.Sector.TerrainVersion==5&&record.Sector.PayloadVersion==3&&record.HasControl&&record.HasPerRecordResidualRange&&
+            record.GpuElevationBytes==PlanetaryLocalTerrainPackContract.GpuBytes(PlanetaryLocalTerrainGpuFormat.R16Unorm,PlanetaryLocalTerrainPackContract.StoredExtent),
+            $"production Florida NCCUBE2-v3 R16/control record {recordIndex}");
         var cells=1<<record.Sector.Level;
         for(var sy=1;sy<=7;sy+=2)for(var sx=1;sx<=7;sx+=2)
         {
@@ -502,7 +560,7 @@ static void PlanetaryCameraTerrainExclusionTest()
             var residual=EarthLocalTerrainElevationDataset.SampleResidual(direction);
             if(residual>maximumLocalResidual){maximumLocalResidual=residual;maximumLocalDirection=direction;}
         }
-        localOffset=checked((int)record.PayloadOffset+(int)record.StoredAlbedoBytes+(int)record.StoredElevationBytes+(int)record.StoredNormalBytes);
+        localOffset=checked((int)record.PayloadOffset+(int)record.StoredAlbedoBytes+(int)record.StoredElevationBytes+(int)record.StoredNormalBytes+(int)record.StoredControlBytes);
     }
     Check(maximumLocalResidual>physicalMinimum,"production NCCUBE2 includes a positive physical residual capable of penetrating the former global-only camera floor");
     var globalOnlyHeight=EarthElevationDataset.SampleHeight(maximumLocalDirection);
@@ -736,7 +794,7 @@ static void ProductionTerrainMaterialSynthesisAndTessellationStudyTest()
           "classification weights are finite, nonnegative, and normalized");
     Check(Top(vegetation)==PlanetaryTerrainMaterialKind.VegetatedSoil&&Top(beach)==PlanetaryTerrainMaterialKind.BeachSand&&
           Top(cliff)==PlanetaryTerrainMaterialKind.RockCliff&&Top(alpine)==PlanetaryTerrainMaterialKind.AlpineRock&&
-          Top(desert)==PlanetaryTerrainMaterialKind.DesertRock&&Top(snow)==PlanetaryTerrainMaterialKind.SnowIce,
+          Top(desert)==PlanetaryTerrainMaterialKind.DesertSand&&Top(snow)==PlanetaryTerrainMaterialKind.SnowIce,
           "body-fixed elevation/slope/latitude/climate inputs select the intended material families");
 
     var maximumBoundaryDelta=0f;
@@ -2834,8 +2892,8 @@ static void AnchoredFloridaLaunchSiteTest()
         DoubleQuaternion.Identity,scene.Projection,CameraMode.Free);
     Check(!scene.TryGetFloridaLaunchSitePresentation(farCamera,out _,out _),"human-scale geometry is culled at distance");
     Check(MeshHandle.FloridaLaunchPad.Value==3,"stable native launchpad mesh identity");
-    Check(site.Object.DeterministicHash==objectHash&&objectHash==0xF9600C3D22A085F2UL,
-        $"site deterministic fingerprint is a stable regression contract: 0x{objectHash:X16}");
+    Check(site.Object.DeterministicHash==objectHash&&objectHash==0xD60A3F5FA91ECFC3UL,
+        $"M12 site fingerprint binds the same geographic reservation to the regional physical height: 0x{objectHash:X16}");
 
     Check(SolarSystemScene.TryCreateAt(root,SimulationInstant.Zero,out var sliceCameraScene,out error)&&sliceCameraScene is not null,
         $"Florida vertical-slice production camera scene: {error}");

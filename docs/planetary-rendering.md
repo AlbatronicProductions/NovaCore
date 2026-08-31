@@ -15,9 +15,18 @@ selection never changes geographic identity.
 ## Physical surface
 
 `PlanetaryPhysicalSurface` is the shared CPU/GPU contract for canonical relaxed
-cube-sphere address, terrain-v5 global elevation, optional NCCUBE2 local
-residual, final physical height and gradient, physical lighting normal, and
+cube-sphere address, signed terrain-v5 global elevation, NCCUBE2-v3 regional
+residual, deterministic modifier, final physical height and gradient, physical lighting normal, and
 material classification inputs.
+
+The exact Earth formula is `max(0, signedGlobal + regionalResidual +
+physicalModifier)`. The clamp occurs after residual recomposition. M12B's
+physical modifier is selected by a deterministic planet-wide body-fixed biome
+blend with at most four normalized contributors. It combines rolling, rocky,
+dune, coastal/wetland, and glacial families; a bounded near field is evaluated
+at tessellated vertices. Florida M12
+uses a 4 km source-edge feather plus the common missing-neighbor record feather;
+neither depends on camera state or GPU residency identity.
 
 The surface generation is part of patch identity. Visual normal/material
 detail is frequency-filtered presentation and cannot affect collision height.
@@ -79,8 +88,10 @@ bytes resolve through tracked manifests into the content-addressed runtime cache
 Shader sampling resolves material address from the represented body-fixed
 direction. Canonical gutters cross cube-face boundaries using the same relaxed
 cube mapping as geometry. Parent/child edges coordinate morph age and neighbor
-constraints. Physical normals use a canonical body-space tangent frame and
-fixed physical sampling semantics, independent of screen-space mesh density.
+constraints. Physical normals use the final composed displaced surface in a
+canonical body-space tangent frame with fixed physical sampling semantics,
+independent of screen-space mesh density. The regional BC5 field is diagnostic
+and is not reapplied over the generated production normal.
 
 Required continuity includes exact shared geography, bounded physical height,
 outward winding, coherent material address, normal continuity, balanced mixed
@@ -120,21 +131,26 @@ pipeline creation are not per-frame work.
 Current validation covers canonical face-edge/corner identity and outward
 winding, parent/child geographic correspondence, CPU/GPU physical height and
 normal parity, projected-error selection and hysteresis, cache bounds,
-transactional publication, local-payload dependency, camera continuity, and
+transactional publication, regional-payload dependency, camera continuity, and
 Solar/Earth Vulkan traversal with `VK_LAYER_KHRONOS_validation`.
+
+M12 adds opt-in `NOVACORE_SURFACE_DIAGNOSTIC` values `global-height`,
+`regional-height`, `residual`, `final-height`, `physical-modifier`,
+`regional-control`, `material-id`, `regional-mip`, `regional-residency`, and
+`regional-boundary`. M12B adds `biome-id`, `biome-blend`, `modifier-family`,
+and `near-physical`. They add no production work when disabled.
 
 The subdivision diagnostic is the single launcher-exposed developer terrain
 view. Normal Earth and Solar scenes use production ownership.
 
 ## Current limits and next study
 
-The global payload is shallow and local payload coverage is sparse. Florida has
-no regional NCCUBE2 physical coverage; its accepted broad ground appearance is
-a global physical-data fidelity limit, not a renderer transition failure.
-KSA-class close-ground detail requires provenance-tracked regional physical
-terrain plus biome/modifier authority. Fragment/material/normal optimization,
-compute triangle compaction, and movement-time selector tuning remain measured
-future work.
+The global payload remains shallow outside regional coverage. Florida M12 is
+the first approximately 10 m-class source region; its deterministic control
+classes are a foundation rather than a surveyed global biome product.
+Additional regional tiles and independent land-cover data remain future data
+work. Fragment/material/normal optimization, compute triangle compaction, and
+movement-time selector tuning remain measured future work.
 
 The current global path remains a specialized distant representation until
 measurement shows whether the dynamic hierarchy can efficiently extend through

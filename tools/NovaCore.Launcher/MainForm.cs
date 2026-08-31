@@ -158,7 +158,7 @@ public sealed class MainForm : Form
         assetsGroup.Controls.Add(assetsLayout);
         assetsLayout.Controls.Add(FieldLabel("earth-surface-v5"), 0, 0);
         assetsLayout.Controls.Add(_productionAsset, 1, 0);
-        assetsLayout.Controls.Add(FieldLabel("earth-local-v2"), 0, 1);
+        assetsLayout.Controls.Add(FieldLabel("earth-florida-m12"), 0, 1);
         assetsLayout.Controls.Add(_localAsset, 1, 1);
         var refresh = SecondaryButton("Refresh status");
         refresh.Click += async (_, _) => await RefreshAssetStatusAsync();
@@ -349,7 +349,7 @@ public sealed class MainForm : Form
         try
         {
             var productionTask = AssetStatusService.QueryAsync(_repositoryRoot, "earth-surface-v5", _lifetime.Token);
-            var localTask = AssetStatusService.QueryAsync(_repositoryRoot, "earth-local-v2", _lifetime.Token);
+            var localTask = AssetStatusService.QueryAsync(_repositoryRoot, "earth-florida-m12", _lifetime.Token);
             var statuses = await Task.WhenAll(productionTask, localTask);
             ApplyAssetStatus(_productionAsset, statuses[0], optional: false);
             ApplyAssetStatus(_localAsset, statuses[1], optional: true);

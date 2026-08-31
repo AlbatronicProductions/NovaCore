@@ -2,6 +2,7 @@
 #extension GL_GOOGLE_include_directive : require
 #extension GL_ARB_gpu_shader_fp64 : require
 #include "production_cube_surface.glsl"
+#include "physical_surface.glsl"
 
 struct EncodedPosition { vec4 high; vec4 low; };
 struct GpuCameraData { EncodedPosition position; mat4 viewProjection; };
@@ -33,6 +34,7 @@ layout(location=12) in vec2 inProductionUv[]; layout(location=12) out vec2 produ
 layout(location=13) flat in uvec4 inProductionAddress[]; layout(location=13) flat out uvec4 productionAddress;
 layout(location=14) in vec2 inProductionTransition[]; layout(location=14) out vec2 productionTransition;
 layout(location=15) in vec2 inTopologyCoordinate[]; layout(location=15) out vec2 topologyCoordinate;
+layout(location=18) in float inGeographicHeight[];
 
 vec3 RotateQuaternion(vec3 point,vec4 quaternion){return point+2.0*cross(quaternion.xyz,cross(quaternion.xyz,point)+quaternion.w*point);}
 vec3 BillboardRelative(dvec3 body)
@@ -54,11 +56,18 @@ void main()
   vec2 uv=inProductionUv[0]*barycentric.x+inProductionUv[1]*barycentric.y+inProductionUv[2]*barycentric.z;
   uvec4 address=inProductionAddress[0];dvec3 direction=normalize(ProductionProjectD(address,dvec2(uv)));
   double radius=double(inputData.cameraHighRadiusHigh.w)+double(inputData.cameraLowRadiusLow.w);
-  float height=inTerrainHeight[0]*barycentric.x+inTerrainHeight[1]*barycentric.y+inTerrainHeight[2]*barycentric.z;
+  double geographic=double(inGeographicHeight[0]*barycentric.x+inGeographicHeight[1]*barycentric.y+inGeographicHeight[2]*barycentric.z);
+  float baseHeight=inTerrainHeight[0]*barycentric.x+inTerrainHeight[1]*barycentric.y+inTerrainHeight[2]*barycentric.z;
+  NearPhysicalEvaluationD nearValue=EvaluateNearPhysicalD(direction,geographic);
+  float height=baseHeight+float(nearValue.height);
   dvec3 body=direction*(radius+double(height));
   vec3 relativeBody=BillboardRelative(body);Presentation p=presentations.values[0];
   vec3 relative=RotateQuaternion(relativeBody,p.bodyOrientation);
-  color=inColor[0];normal=normalize(inNormal[0]*barycentric.x+inNormal[1]*barycentric.y+inNormal[2]*barycentric.z);lightDirection=inLightDirection[0];
+  color=inColor[0];vec3 radial=vec3(direction),baseNormal=normalize(inNormal[0]*barycentric.x+inNormal[1]*barycentric.y+inNormal[2]*barycentric.z);
+  dvec3 eastD=PhysicalEastD(direction),northD=normalize(cross(direction,eastD));double radialComponent=max(double(dot(baseNormal,radial)),1e-9);
+  double eastSlope=-double(dot(baseNormal,vec3(eastD)))/radialComponent+nearValue.eastGradient;
+  double northSlope=-double(dot(baseNormal,vec3(northD)))/radialComponent+nearValue.northGradient;
+  normal=normalize(radial-vec3(eastD)*float(eastSlope)-vec3(northD)*float(northSlope));lightDirection=inLightDirection[0];
   material=inMaterial[0];response=inResponse[0];viewDirection=-relativeBody;bodyDirection=vec3(direction);
   terrainHeight=height;bodyCameraHigh=inBodyCameraHigh[0];bodyCameraLow=inBodyCameraLow[0];
   localDetail=inLocalDetail[0];productionLayer=inProductionLayer[0];productionUv=uv;

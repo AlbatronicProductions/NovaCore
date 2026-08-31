@@ -21,9 +21,12 @@ affects GPU visibility rather than physical residency. The global owner remains
 visible while a demanded generation prepares; a generation becomes visible
 only after every required patch and its GPU acknowledgement are complete.
 
-`earth-local-v2` is the current optional local payload. Global and local height
-feed the same `PlanetaryPhysicalSurface` evaluator. Material-only detail cannot
-change geographic identity, camera clearance, or physical collision height.
+`earth-florida-m12` is the current regional payload: USGS 3DEP-derived R16
+physical residuals plus BC7 albedo, BC5 diagnostic normals, and R8 control in a
+complete L8-L11 NCCUBE2-v3 hierarchy. Signed global elevation and regional
+residual compose before the non-negative physical-height clamp; the same
+`PlanetaryPhysicalSurface` evaluator owns camera and geometry height.
+Material-only detail cannot change geographic identity, clearance, or contact.
 
 The dynamic hierarchy receives camera position and SurfaceAnchor state only as
 physical-availability inputs. Patch identity remains body fixed. The current
@@ -77,13 +80,25 @@ Florida launch site, and one screen-space subdivision diagnostic are supported.
 The fullscreen preset resolves the active desktop and owns its native-window
 and validation/performance environment without requiring shell setup.
 
-## Accepted limitations and next priority
+## M12 physical-data checkpoint
 
-The 11B-7H1 manual Desktop recording is accepted. Florida currently lacks
-regional NCCUBE2 physical coverage, so its broad ground appearance is a known
-global-data fidelity limit rather than a renderer failure. The next surface
-priority is provenance-tracked high-resolution Florida/regional physical data
-and biome/modifier authority. Fragment/material/normal optimization, compute
-triangle compaction, movement-time selector tuning, and the bounded distant-
-representation study remain measured future work; do not reopen this terrain
-architecture without a genuine regression.
+The 11B-7H1 renderer baseline remains banked. M12 adds a provenance-tracked
+roughly 98 x 111 km Florida physical region, categorical control, a 275 m
+launch-site reservation, millimetre-class residual quantization, retained
+streaming, and final-surface normal authority. Manual 3440x1440 M12 acceptance
+is still required. Fragment optimization, compute triangle compaction,
+movement-time selector tuning, and the bounded distant-representation study
+remain measured future work; do not reopen the renderer architecture without a
+genuine regression.
+
+## M12B planet-wide synthesis checkpoint
+
+M12B adds one body-fixed FP64 biome/control authority with up to four blended
+contributors, five deterministic terrain modifier families, tessellation-stage
+near physical relief, and seven shared material families. The result is
+complete without regional data; Florida remains a higher-fidelity residual and
+reservation overlay. CPU/GPU height and physical-normal parity is retained.
+Manual native 3440x1440 acceptance remains required across Florida,
+Appalachians, mountain/alpine, desert/dune, snow/glacial, grassland, and a
+no-regional-data region. Use **Earth — Fullscreen Native**; no shell setup is
+required.

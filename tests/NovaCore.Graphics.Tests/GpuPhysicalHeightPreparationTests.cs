@@ -40,6 +40,8 @@ internal static unsafe class GpuPhysicalHeightPreparationTests
 
         var terrain = new PlanetaryPhysicalTerrainAuthority(EarthBodyId, PlanetaryTerrainDefinition.EarthProductionCubeV5);
         var maximumTransportError = 0d; var maximumCoordinateError = 0d; var maximumUvError = 0d; var maximumHeightError = 0d;
+        var maximumGradientError = 0d; var maximumNormalError = 0d;
+        var maximumHeightSample = string.Empty; var maximumHeightCpu = 0d; var maximumHeightGpu = 0d; var maximumHeightDetail = string.Empty;
         var localSamples = 0; var globalOnlySamples = 0;
         for (var index = 0; index < samples.Count; index++)
         {
@@ -54,7 +56,15 @@ internal static unsafe class GpuPhysicalHeightPreparationTests
             Require(result.GlobalFace == (uint)face, $"canonical face parity {samples[index].Name}: CPU={face}; GPU={result.GlobalFace}");
             maximumUvError = Math.Max(maximumUvError, Math.Max(Math.Abs(result.FaceU - u), Math.Abs(result.FaceV - v)));
             Require(terrain.TrySampleHeight(EarthBodyId, direction, out var cpuHeight), $"CPU physical height {samples[index].Name}");
-            maximumHeightError = Math.Max(maximumHeightError, Math.Abs(result.PhysicalHeightMetres - cpuHeight));
+            var cpuSurface = PlanetaryTerrainDefinition.EarthProductionCubeV5.SamplePhysicalSurface(direction);
+            var heightError=Math.Abs(result.PhysicalHeightMetres-cpuHeight);
+            if(heightError>maximumHeightError){maximumHeightError=heightError;maximumHeightSample=samples[index].Name;maximumHeightCpu=cpuHeight;maximumHeightGpu=result.PhysicalHeightMetres;maximumHeightDetail=$"oracle={result.OracleElevationMetres:R}; terrain={result.TerrainV5ElevationMetres:R}; local={result.LocalResidualMetres:R}; base={result.BaseHeightMetres:R}; modifier={result.ModifierHeightMetres:R}; localLevel={result.LocalLevel}";}
+            maximumGradientError = Math.Max(maximumGradientError, Math.Max(
+                Math.Abs(result.EastGradient - cpuSurface.EastGradient),
+                Math.Abs(result.NorthGradient - cpuSurface.NorthGradient)));
+            var gpuNormal = new Double3(result.PhysicalNormalX, result.PhysicalNormalY, result.PhysicalNormalZ).Normalized();
+            maximumNormalError = Math.Max(maximumNormalError,
+                Math.Acos(Math.Clamp(Double3.Dot(gpuNormal, cpuSurface.PhysicalNormal), -1d, 1d)));
             Require(result.LocalAvailable == result.SourceHasLocal, $"local source identity {samples[index].Name}");
             if (result.LocalAvailable == 1) localSamples++; else globalOnlySamples++;
             Require(ResultBitsEqual(result, repeat) && ResultBitsEqual(result, reordered), $"bit-stable repeat/order independence {samples[index].Name}");
@@ -63,7 +73,12 @@ internal static unsafe class GpuPhysicalHeightPreparationTests
         Require(maximumTransportError <= 1e-3d, $"authority-to-split transport remains sub-millimetre: {maximumTransportError:R}");
         Require(maximumCoordinateError == 0d, $"split high/low GPU reconstruction is exact after explicit FP32 local delta: {maximumCoordinateError:R}");
         Require(maximumUvError <= 2e-12d, $"CPU/GPU relaxed-cube UV agreement: {maximumUvError:R}");
-        Require(maximumHeightError <= 2e-6d, $"CPU/GPU physical-height agreement: {maximumHeightError:R} m");
+        Require(maximumHeightError <= 2e-6d, $"CPU/GPU physical-height agreement: {maximumHeightError:R} m at {maximumHeightSample}; CPU={maximumHeightCpu:R}; GPU={maximumHeightGpu:R}; {maximumHeightDetail}");
+        // The compute oracle advances latitude/longitude UV explicitly while
+        // the CPU oracle reprojects the offset direction. Their worst-case
+        // polar/cube-edge slope delta remains below 5e-5 (sub-0.003 degrees).
+        Require(maximumGradientError <= 5e-5d, $"CPU/GPU physical-gradient agreement: {maximumGradientError:R}");
+        Require(maximumNormalError <= 5e-5d, $"CPU/GPU physical-normal agreement: {maximumNormalError:R} rad");
         Require(localSamples > 0 && globalOnlySamples > 0, "local-v2 present and absent fallback policies are both exercised");
         Require(firstMetrics.QueryCount == samples.Count && firstMetrics.DispatchGroups == (samples.Count + 63) / 64 &&
             firstMetrics.GlobalRecordCount == 96 && firstMetrics.LocalRecordCount > 0 && firstMetrics.ValidationErrors == 0,
@@ -87,7 +102,7 @@ internal static unsafe class GpuPhysicalHeightPreparationTests
             "live 11B-6C topology hashes remain unchanged");
         Console.WriteLine($"GPU physical height: samples={samples.Count}; local={localSamples}; globalOnly={globalOnlySamples}; " +
             $"transportMax={maximumTransportError:E17}m; gpuReconstructionMax={maximumCoordinateError:E17}m; " +
-            $"uvMax={maximumUvError:E17}; heightMax={maximumHeightError:E17}m; " +
+            $"uvMax={maximumUvError:E17}; heightMax={maximumHeightError:E17}m; gradientMax={maximumGradientError:E17}; normalMax={maximumNormalError:E17}rad; " +
             $"groups={firstMetrics.DispatchGroups}; gpu={firstMetrics.GpuMilliseconds:F6}ms; boundedCpu={firstMetrics.CpuMilliseconds:F3}ms; validation=0");
     }
 
@@ -110,6 +125,13 @@ internal static unsafe class GpuPhysicalHeightPreparationTests
         }
         samples.Add(Direction("Everest", BodyFixedGeography.DirectionFromLatitudeLongitude(27.9881d * Math.PI / 180d, 86.925d * Math.PI / 180d)));
         samples.Add(Direction("Pacific ocean", BodyFixedGeography.DirectionFromLatitudeLongitude(0d, -140d * Math.PI / 180d)));
+        samples.Add(Direction("Everglades wetland", BodyFixedGeography.DirectionFromLatitudeLongitude(25.45d * Math.PI / 180d, -80.75d * Math.PI / 180d)));
+        samples.Add(Direction("Great Plains grassland", BodyFixedGeography.DirectionFromLatitudeLongitude(46d * Math.PI / 180d, -101d * Math.PI / 180d)));
+        samples.Add(Direction("Australian scrub", BodyFixedGeography.DirectionFromLatitudeLongitude(-31d * Math.PI / 180d, 134d * Math.PI / 180d)));
+        samples.Add(Direction("Sahara desert", BodyFixedGeography.DirectionFromLatitudeLongitude(24d * Math.PI / 180d, 13d * Math.PI / 180d)));
+        samples.Add(Direction("Rocky mountain", BodyFixedGeography.DirectionFromLatitudeLongitude(39.1d * Math.PI / 180d, -106.8d * Math.PI / 180d)));
+        samples.Add(Direction("Himalayan alpine", BodyFixedGeography.DirectionFromLatitudeLongitude(30d * Math.PI / 180d, 82d * Math.PI / 180d)));
+        samples.Add(Direction("Greenland snow", BodyFixedGeography.DirectionFromLatitudeLongitude(72d * Math.PI / 180d, -40d * Math.PI / 180d)));
         var localPackage = File.ReadAllBytes(localPath);
         Require(PlanetaryLocalTerrainPackContract.TryReadHeader(localPackage, out _), "local-v2 sample header");
         Require(PlanetaryLocalTerrainPackContract.TryReadRecordHeader(

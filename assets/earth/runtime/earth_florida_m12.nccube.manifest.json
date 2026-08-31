@@ -1,0 +1,67 @@
+{
+  "schema": "NovaCore.LocalTerrainContent/3",
+  "formatVersion": 3,
+  "payloadVersion": 3,
+  "channels": {
+    "albedo": "BC7 sRGB",
+    "heightResidual": "R16 UNORM with per-record metre range",
+    "normal": "BC5 UNORM",
+    "control": "R8 UNORM class ID"
+  },
+  "records": 859,
+  "minimumSectorLevel": 8,
+  "maximumSectorLevel": 11,
+  "recordsByLevel": {
+    "8": 16,
+    "9": 49,
+    "10": 169,
+    "11": 625
+  },
+  "coverage": {
+    "kind": "USGS-3DEP-geographic-source",
+    "boundsDegrees": [
+      -81.00055555609339,
+      27.999444443706977,
+      -79.9994444439053,
+      29.000555555895062
+    ],
+    "launchSiteDegrees": [
+      28.6084,
+      -80.6042
+    ],
+    "boundaryFeatherMetres": 4000.0
+  },
+  "source": {
+    "path": "USGS_13_n29w081_20221103.tif",
+    "sha256": "532ab3a4ade336d9a7d266e6745a12f043db928ba8bf28a4576886de421a74cd",
+    "horizontalArcSeconds": 0.333333333691926,
+    "dimensions": [
+      10812,
+      10812
+    ],
+    "crs": "EPSG:4269 (NAD83 geographic)",
+    "verticalUnits": "metres"
+  },
+  "rawBytes": 478950912,
+  "gpuBytes": 299344320,
+  "storedBytes": 210197388,
+  "supercompressionRatio": 1.4241105603081994,
+  "maximumVerticalErrorMetres": 0.00196075439453125,
+  "rmsVerticalErrorMetres": 0.0006720486373071388,
+  "minimumRegionalElevationMetres": -13.006820678710938,
+  "maximumRegionalElevationMetres": 61.112342834472656,
+  "minimumResidualMetres": -13.412800788879395,
+  "maximumResidualMetres": 54.99739074707031,
+  "controlClassTexels": {
+    "ocean": 38559979,
+    "coastalIntertidal": 6904196,
+    "beachSand": 2667189,
+    "wetland": 3499287,
+    "grass": 6614375,
+    "scrub": 809022,
+    "forest": 591267,
+    "developed": 222532,
+    "launchSiteReservation": 1017
+  },
+  "sha256": "c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe"
+}

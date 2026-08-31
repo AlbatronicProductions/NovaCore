@@ -56,7 +56,7 @@ double HeightAt(uint slot,uint x,uint y,float morph,uvec4 address)
     }
     dvec3 direction=ProductionProjectGridD(address,uvec2(x,y));
     double baseHeight=max(0.0,globalHeight+double(LocalTerrainElevationResidual(vec3(direction))));
-    return max(0.0,baseHeight+TerrainModifierHeightD(direction));
+    return max(0.0,baseHeight+TerrainModifierHeightD(direction,baseHeight));
   }
   vec2 values=terrainData.heights[slot*GRID_VERTICES+y*17u+x];return double(mix(values.x,values.y,morph));
 }

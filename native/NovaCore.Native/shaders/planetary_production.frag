@@ -181,7 +181,7 @@ float ProductionFixedElevation(vec3 direction)
   vec2 storedUv=(vec2(4.0)+clamp(localUv,0.0,1.0)*256.0)/264.0;
   double base=max(0.0,double(textureLod(productionElevation,vec3(storedUv,float(layer-1u)),0.0).r*20000.0-11000.0+
     LocalTerrainElevationResidual(direction)));
-  return float(max(0.0,base+TerrainModifierHeightD(dvec3(direction))));
+  return float(max(0.0,base+TerrainModifierHeightD(dvec3(direction),base)));
 }
 
 vec3 ProductionFixedPhysicalNormal(vec3 unitDirection,float radiusMetres)
@@ -286,20 +286,65 @@ void main()
       visible.land=mix(parent.land,visible.land,surfaceWeight);
     }
   }
-  PhysicalModifierEvaluationD modifierEvaluation=EvaluateTerrainModifiersD(dvec3(samplingDirection));
+  float globalHeight=max(0.0,visible.elevation);
   float baseHeight=max(0.0,visible.elevation+LocalTerrainElevationResidual(samplingDirection));
-  visible.elevation=max(0.0,baseHeight+float(modifierEvaluation.tiledHeight+modifierEvaluation.erosionHeight));
+  PhysicalModifierEvaluationD modifierEvaluation=EvaluateTerrainModifiersD(dvec3(samplingDirection),double(baseHeight));
+  visible.elevation=max(0.0,baseHeight+float(modifierEvaluation.tiledHeight+modifierEvaluation.erosionHeight+modifierEvaluation.mesoHeight+modifierEvaluation.nearHeight));
   float sampledHeight=visible.elevation;
   vec3 sampledAlbedo=visible.albedo;
+  LocalTerrainMaterialSample localSample=SampleLocalTerrainMaterial(samplingDirection);
+  if(diagnostic==32770u)
+  {
+    float value=clamp((baseHeight+100.0)/200.0,0.0,1.0);
+    outColor=vec4(vec3(value),1.0);return;
+  }
+  if(diagnostic==32784u)
+  {
+    float residual=LocalTerrainElevationResidual(samplingDirection);
+    float value=clamp(.5+residual/128.0,0.0,1.0);
+    outColor=vec4(value,.25,1.0-value,1.0);return;
+  }
+  if(diagnostic==32800u||diagnostic==33040u)
+  {
+    float control=localSample.resident?localSample.controlClass:0.0;
+    vec3 color=control==0.0?vec3(0,.12,.3):
+      control==1.0?vec3(.1,.65,.8):control==2.0?vec3(.85,.72,.35):
+      control==3.0?vec3(.2,.5,.3):control==4.0?vec3(.2,.72,.16):
+      control==5.0?vec3(.55,.72,.24):control==6.0?vec3(.08,.36,.08):
+      control==7.0?vec3(.55,.55,.58):vec3(1.0,.55,.08);
+    if(diagnostic==33040u)color=mix(color,vec3(localSample.controlClass/8.0),.35);
+    outColor=vec4(color,1.0);return;
+  }
+  if(diagnostic==33296u)
+  {
+    float levelValue=localSample.resident?float(localSample.level-8u)/3.0:0.0;
+    outColor=localSample.resident?vec4(levelValue,localSample.weight,1.0-levelValue,1.0):vec4(.5,0,.5,1);return;
+  }
+  if(diagnostic==32832u)
+  {
+    outColor=vec4(1.0-localSample.weight,localSample.weight,0.0,1.0);return;
+  }
+  if(diagnostic==32896u)
+  {
+    float boundary=localSample.resident?1.0-localSample.weight:1.0;
+    outColor=vec4(boundary,localSample.weight,0.0,1.0);return;
+  }
   if((diagnostic&32768u)!=0u)
   {
     uint mode=(diagnostic>>8u)&7u;
-    if(mode==0u){float value=clamp((baseHeight+1000.0)/5000.0,0.0,1.0);outColor=vec4(vec3(value),1.0);return;}
-    if(mode==1u){float value=clamp(.5+float(modifierEvaluation.tiledHeight+modifierEvaluation.erosionHeight)/32.0,0.0,1.0);outColor=vec4(value,.2,1.0-value,1.0);return;}
+    if(mode==0u){float value=clamp((globalHeight+1000.0)/5000.0,0.0,1.0);outColor=vec4(vec3(value),1.0);return;}
+    if(mode==1u){float value=clamp(.5+float(modifierEvaluation.tiledHeight+modifierEvaluation.erosionHeight+modifierEvaluation.mesoHeight)/96.0,0.0,1.0);outColor=vec4(value,.2,1.0-value,1.0);return;}
     if(mode==2u){float value=clamp((visible.elevation+1000.0)/5000.0,0.0,1.0);outColor=vec4(vec3(value),1.0);return;}
     if(mode==3u){outColor=vec4(ProductionFixedPhysicalNormal(samplingDirection,bodyRadius)*.5+.5,1.0);return;}
-    float identity=modifierEvaluation.dominantId==2u?1.0:.25;
-    outColor=vec4(float(modifierEvaluation.geographicWeight),identity,0.0,1.0);return;
+    if(mode==4u)
+    {
+      const vec3 colors[10]=vec3[10](vec3(0,.14,.35),vec3(.82,.68,.34),vec3(.15,.34,.25),vec3(.18,.48,.10),vec3(.48,.42,.20),vec3(.72,.45,.16),vec3(.34,.32,.30),vec3(.48,.48,.46),vec3(.82,.88,.94),vec3(.54,.56,.58));
+      outColor=vec4(colors[modifierEvaluation.biomes.ids.x],1);return;
+    }
+    if(mode==5u){outColor=vec4(vec3(modifierEvaluation.biomes.weights.xyz),1);return;}
+    if(mode==6u){float id=float(modifierEvaluation.dominantId)/9.0;outColor=vec4(id,1.0-id,.2,1);return;}
+    float nearValue=clamp(.5+float(modifierEvaluation.nearHeight)/(2.0*float(NOVACORE_NEAR_AMPLITUDE)),0.0,1.0);
+    outColor=vec4(nearValue,.2,1.0-nearValue,1);return;
   }
   // Geometry producers may provide a useful construction normal, but it is
   // never lighting authority. Reconstruct the same physical differential
@@ -328,8 +373,10 @@ void main()
   // level normal and blend continuously through the land mask so quantized
   // sub-sea elevation cannot become high-frequency specular noise.
   surfaceNormal=normalize(mix(analyticSphere,physical,landWeight));
-  LocalTerrainMaterialSample localSample=SampleLocalTerrainMaterial(samplingDirection);
-  if(localSample.resident){sampledAlbedo=mix(sampledAlbedo,localSample.albedo,localSample.weight);surfaceNormal=normalize(mix(surfaceNormal,ApplyLocalTerrainNormal(samplingDirection,localSample.normalXY),localSample.weight));}
+  if(localSample.resident)sampledAlbedo=mix(sampledAlbedo,localSample.albedo,localSample.weight);
+  // The stored regional BC5 field is a payload/diagnostic channel.  Lighting
+  // authority is the normal generated from the final composed displaced
+  // surface above; applying BC5 here would count the regional slope twice.
   ProductionEarthMaterial earth=ProductionEarthSurfaceMaterial(
     sampledAlbedo,
     visible.land,
@@ -353,7 +400,9 @@ void main()
     surfaceNormal,
     bodyMetres,
     differentialMetres,
-    surfaceAltitude);
+    surfaceAltitude,
+    localSample.resident?localSample.controlClass:-1.0,
+    modifierEvaluation.biomes);
   earth.albedo=terrainMaterial.albedo;
   earth.roughness=mix(earth.roughness,terrainMaterial.roughness,terrainMaterial.detailWeight);
   earth.specular=mix(earth.specular,.035,terrainMaterial.detailWeight*(1.0-terrainMaterial.metallic));

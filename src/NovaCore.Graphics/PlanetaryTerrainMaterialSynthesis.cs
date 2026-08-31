@@ -6,35 +6,35 @@ namespace NovaCore.Graphics;
 public enum PlanetaryTerrainMaterialKind : byte
 {
     VegetatedSoil,
-    BareSoil,
+    WetGround,
     BeachSand,
     RockCliff,
     AlpineRock,
-    DesertRock,
+    DesertSand,
     SnowIce
 }
 
 /// <summary>Normalized, deterministic Earth presentation weights derived from body-fixed geographic inputs.</summary>
 public readonly record struct PlanetaryTerrainMaterialWeights(
     float VegetatedSoil,
-    float BareSoil,
+    float WetGround,
     float BeachSand,
     float RockCliff,
     float AlpineRock,
-    float DesertRock,
+    float DesertSand,
     float SnowIce)
 {
-    public float Total => VegetatedSoil + BareSoil + BeachSand + RockCliff + AlpineRock + DesertRock + SnowIce;
-    public bool IsFinite => float.IsFinite(VegetatedSoil) && float.IsFinite(BareSoil) && float.IsFinite(BeachSand) &&
-        float.IsFinite(RockCliff) && float.IsFinite(AlpineRock) && float.IsFinite(DesertRock) && float.IsFinite(SnowIce);
+    public float Total => VegetatedSoil + WetGround + BeachSand + RockCliff + AlpineRock + DesertSand + SnowIce;
+    public bool IsFinite => float.IsFinite(VegetatedSoil) && float.IsFinite(WetGround) && float.IsFinite(BeachSand) &&
+        float.IsFinite(RockCliff) && float.IsFinite(AlpineRock) && float.IsFinite(DesertSand) && float.IsFinite(SnowIce);
     public float this[PlanetaryTerrainMaterialKind kind] => kind switch
     {
         PlanetaryTerrainMaterialKind.VegetatedSoil => VegetatedSoil,
-        PlanetaryTerrainMaterialKind.BareSoil => BareSoil,
+        PlanetaryTerrainMaterialKind.WetGround => WetGround,
         PlanetaryTerrainMaterialKind.BeachSand => BeachSand,
         PlanetaryTerrainMaterialKind.RockCliff => RockCliff,
         PlanetaryTerrainMaterialKind.AlpineRock => AlpineRock,
-        PlanetaryTerrainMaterialKind.DesertRock => DesertRock,
+        PlanetaryTerrainMaterialKind.DesertSand => DesertSand,
         PlanetaryTerrainMaterialKind.SnowIce => SnowIce,
         _ => throw new ArgumentOutOfRangeException(nameof(kind))
     };
@@ -114,6 +114,28 @@ public static class PlanetaryTerrainMaterialSynthesis
         if (!(total > 1e-7f)) return new(0f, 1f, 0f, 0f, 0f, 0f, 0f);
         var inverse = 1f / total;
         return new(vegetation * inverse, soil * inverse, beach * inverse, rock * inverse, alpine * inverse, desert * inverse, snow * inverse);
+    }
+
+    public static PlanetaryTerrainMaterialWeights Classify(in PlanetaryBiomeBlend biomes, float landMask)
+    {
+        if (!biomes.IsFinite || !float.IsFinite(landMask)) throw new ArgumentOutOfRangeException();
+        var land = SmoothStep(.45f, .55f, Math.Clamp(landMask, 0f, 1f));
+        var grass = (float)biomes.Weight(PlanetarySurfaceBiome.GrassRolling);
+        var scrub = (float)biomes.Weight(PlanetarySurfaceBiome.ScrubDry);
+        var wet = (float)biomes.Weight(PlanetarySurfaceBiome.Wetland);
+        var developed = (float)biomes.Weight(PlanetarySurfaceBiome.DevelopedReserved);
+        var vegetation = (grass + .28f * scrub) * land;
+        var wetGround = (wet + .55f * scrub + .65f * developed) * land;
+        var beach = (float)biomes.Weight(PlanetarySurfaceBiome.BeachSand) * land;
+        var rock = ((float)biomes.Weight(PlanetarySurfaceBiome.RockyMountain) + .35f * developed) * land;
+        var alpine = (float)biomes.Weight(PlanetarySurfaceBiome.Alpine) * land;
+        var desert = (float)biomes.Weight(PlanetarySurfaceBiome.Desert) * land;
+        var snow = (float)biomes.Weight(PlanetarySurfaceBiome.SnowGlacial) * land;
+        var total = vegetation + wetGround + beach + rock + alpine + desert + snow;
+        if (!(total > 1e-7f)) return new(0f, 1f, 0f, 0f, 0f, 0f, 0f);
+        var inverse = 1f / total;
+        return new(vegetation * inverse, wetGround * inverse, beach * inverse, rock * inverse,
+            alpine * inverse, desert * inverse, snow * inverse);
     }
 
     public static PlanetaryTerrainPbrMaterial Blend(in PlanetaryTerrainMaterialWeights weights)

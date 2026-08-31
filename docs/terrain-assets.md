@@ -32,13 +32,17 @@ Its tracked distribution manifest is
 `assets/terrain/manifests/earth-surface-v5.json`; the detailed patch-content
 manifest and lawful-source provenance remain tracked separately.
 
-The optional sparse refinement identity is `earth-local-v2`: 7,652,567 bytes
+The production regional identity is `earth-florida-m12`: 210,307,596 bytes
 with SHA-256
-`60ada8949bfd782dfaea6c04270186bda52654d7263fbc3dbda5eaa4fd2e578a`.
-Its tracked manifest is `assets/terrain/manifests/earth-local-v2.json`; it uses
-terrain version 5, NCCUBE2 payloads, and level-12 body-fixed cube sectors. A
-missing local object is reported explicitly while the coherent global
-terrain-v5 base remains available.
+`c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe`.
+Its tracked manifest is `assets/terrain/manifests/earth-florida-m12.json`; it
+uses terrain version 5 and the backward-readable NCCUBE2-v3 ABI with a complete
+Florida L8-L11 record hierarchy. A missing regional object is reported
+explicitly while the coherent global terrain-v5 base remains available.
+Runtime residency is bounded to 256 channel-complete records (BC7/R16/BC5/R8,
+89,210,880 bytes). Demand is recomputed only when the authoritative anchored
+generation changes; camera rotation retains the existing geographic
+neighborhood and pending records publish as one complete visible transaction.
 
 ## Developer commands
 
@@ -51,11 +55,12 @@ dotnet run --project tools/NovaCore.AssetTool -- fetch earth-surface-v5
 dotnet run --project tools/NovaCore.AssetTool -- build earth-surface-v5
 dotnet run --project tools/NovaCore.AssetTool -- clean-incomplete earth-surface-v5
 
-dotnet run --project tools/NovaCore.AssetTool -- status earth-local-v2
-dotnet run --project tools/NovaCore.AssetTool -- verify earth-local-v2
-dotnet run --project tools/NovaCore.AssetTool -- fetch earth-local-v2
-dotnet run --project tools/NovaCore.AssetTool -- build earth-local-v2
-dotnet run --project tools/NovaCore.AssetTool -- clean-incomplete earth-local-v2
+pwsh tools/earth_data/acquire_florida_m12.ps1
+dotnet run --project tools/NovaCore.AssetTool -- status earth-florida-m12
+dotnet run --project tools/NovaCore.AssetTool -- verify earth-florida-m12
+dotnet run --project tools/NovaCore.AssetTool -- fetch earth-florida-m12
+dotnet run --project tools/NovaCore.AssetTool -- build earth-florida-m12
+dotnet run --project tools/NovaCore.AssetTool -- clean-incomplete earth-florida-m12
 ```
 
 No remote artifact is configured at this checkpoint, so `fetch` reports that
@@ -67,7 +72,7 @@ explicitly with:
 
 ```powershell
 dotnet run --project tools/NovaCore.AssetTool -- install earth-surface-v5 --source <path>
-dotnet run --project tools/NovaCore.AssetTool -- install earth-local-v2 --source <path>
+dotnet run --project tools/NovaCore.AssetTool -- install earth-florida-m12 --source <path>
 ```
 
 Regeneration requires the pinned Python dependencies documented by Earth
@@ -113,8 +118,9 @@ dotnet run --project tools/NovaCore.AssetTool -- status earth-surface-v5
 # reports Missing and the exact cache content path
 dotnet run --project tools/NovaCore.AssetTool -- build earth-surface-v5
 dotnet run --project tools/NovaCore.AssetTool -- verify earth-surface-v5
-dotnet run --project tools/NovaCore.AssetTool -- build earth-local-v2
-dotnet run --project tools/NovaCore.AssetTool -- verify earth-local-v2
+pwsh tools/earth_data/acquire_florida_m12.ps1
+dotnet run --project tools/NovaCore.AssetTool -- build earth-florida-m12
+dotnet run --project tools/NovaCore.AssetTool -- verify earth-florida-m12
 dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=sol
 ```
 

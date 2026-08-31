@@ -73,12 +73,12 @@ public sealed record TerrainAssetManifest
         Schema == CurrentSchema &&
         IsSafeIdentity(AssetId) &&
         BodyId != 0 && TerrainVersion != 0 &&
-        Format.Equals("nccube", StringComparison.Ordinal) && FormatVersion is PlanetaryCubeSurfacePackContract.Version or PlanetaryLocalTerrainPackContract.Version &&
+        Format.Equals("nccube", StringComparison.Ordinal) && FormatVersion is PlanetaryCubeSurfacePackContract.Version or PlanetaryLocalTerrainPackContract.LegacyVersion or PlanetaryLocalTerrainPackContract.Version &&
         IsSafeFileName(FileName) && ByteSize > PlanetaryCubeSurfacePackContract.HeaderBytes &&
         Sha256.Length == 64 && Sha256.All(IsLowerHex) &&
         IsSafeIdentity(Hierarchy.Coverage) &&
         Hierarchy.MinimumPayloadLevel >= 0 && Hierarchy.MaximumPayloadLevel >= Hierarchy.MinimumPayloadLevel &&
-        Hierarchy.MaximumPayloadLevel <= (FormatVersion == PlanetaryLocalTerrainPackContract.Version ? PlanetaryLocalTerrainPackContract.MaximumSectorLevel : PlanetaryCubeSurfacePackContract.MaximumLevel) &&
+        Hierarchy.MaximumPayloadLevel <= (FormatVersion is PlanetaryLocalTerrainPackContract.LegacyVersion or PlanetaryLocalTerrainPackContract.Version ? PlanetaryLocalTerrainPackContract.MaximumSectorLevel : PlanetaryCubeSurfacePackContract.MaximumLevel) &&
         Hierarchy.FaceCount is >= 1 and <= 6 && Hierarchy.RecordCount > 0 &&
         !string.IsNullOrWhiteSpace(Provenance) && !string.IsNullOrWhiteSpace(ContentManifest);
 
@@ -173,7 +173,7 @@ public static class TerrainAssetCache
 {
     public const int VerificationBufferBytes = 1024 * 1024;
     public const string ProductionEarthAssetId = "earth-surface-v5";
-    public const string ProductionEarthLocalAssetId = "earth-local-v2";
+    public const string ProductionEarthLocalAssetId = "earth-florida-m12";
 
     public static string ContentPath(string cacheRoot, in TerrainAssetManifest manifest) =>
         Path.Combine(cacheRoot, "sha256", manifest.Sha256[..2], manifest.Sha256 + ".nccube");
@@ -286,7 +286,7 @@ public static class TerrainAssetCache
 
     private static bool TryValidatePackStructure(in TerrainAssetManifest manifest, string path, out string error)
     {
-        if (manifest.FormatVersion == PlanetaryLocalTerrainPackContract.Version)
+        if (manifest.FormatVersion is PlanetaryLocalTerrainPackContract.LegacyVersion or PlanetaryLocalTerrainPackContract.Version)
             return TryValidateLocalPackStructure(manifest, path, out error);
         using var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, 64 * 1024, FileOptions.RandomAccess);
         Span<byte> headerBytes = stackalloc byte[PlanetaryCubeSurfacePackContract.HeaderBytes];
@@ -347,7 +347,7 @@ public static class TerrainAssetCache
                 error = $"Local terrain .nccube record {index} is invalid, duplicated, or non-sequential.";
                 return false;
             }
-            var payloadBytes = checked((long)record.StoredAlbedoBytes + record.StoredElevationBytes + record.StoredNormalBytes);
+            var payloadBytes = checked((long)record.StoredAlbedoBytes + record.StoredElevationBytes + record.StoredNormalBytes + record.StoredControlBytes);
             if (stream.Position > stream.Length - payloadBytes)
             {
                 error = $"Local terrain .nccube record {index} payload is truncated.";
