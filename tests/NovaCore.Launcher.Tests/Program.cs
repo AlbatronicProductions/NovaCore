@@ -7,6 +7,7 @@ var tests = new (string Name, Action Test)[]
     ("scenario catalog", ScenarioCatalogMappings),
     ("Earth fullscreen native preset", EarthFullscreenNativePreset),
     ("M12D natural terrain candidate preset", M12DNaturalTerrainCandidatePreset),
+    ("M12D spherical billboard GPU proof preset", M12DSphericalBillboardGpuProofPreset),
     ("Earth fullscreen Solar camera path", EarthFullscreenSolarCameraPath),
     ("structured launch environment", StructuredLaunchEnvironment),
     ("Earth orbital arguments", EarthOrbitalArguments),
@@ -35,8 +36,8 @@ static void DefaultSelection()
 
 static void ScenarioCatalogMappings()
 {
-    Equal(7, ScenarioCatalog.All.Count);
-    Equal(7, ScenarioCatalog.All.Count(definition => definition.IsSupported));
+    Equal(8, ScenarioCatalog.All.Count);
+    Equal(8, ScenarioCatalog.All.Count(definition => definition.IsSupported));
     True(ScenarioCatalog.All.Select(definition => definition.Preset).Distinct().Count() == ScenarioCatalog.All.Count,
         "Scenario presets must be unique.");
 }
@@ -58,6 +59,17 @@ static void M12DNaturalTerrainCandidatePreset()
     SequenceEqual(
         ["--scene=sol", "--focus=earth", "--altitude=700000", "--surface-site=land", "--log=validation", "--log=vulkan", "--physical-surface=m12d-natural-candidate"],
         LaunchCommandBuilder.BuildArguments(candidate));
+}
+
+static void M12DSphericalBillboardGpuProofPreset()
+{
+    var definition=ScenarioCatalog.Get(NovaCoreScenarioPreset.M12DSphericalBillboardGpuProof);
+    Equal("M12D Spherical Billboard GPU Proof",definition.DisplayName);
+    var configuration=Create(NovaCoreScenarioPreset.M12DSphericalBillboardGpuProof);
+    Equal(NovaCoreScene.SphericalBillboardGpuProof,configuration.Scene);
+    Equal(NovaCoreDiagnosticsMode.VulkanValidationAndPerformance,configuration.Diagnostics);
+    Equal(NovaCorePhysicalSurface.Generation3,configuration.PhysicalSurface);
+    SequenceEqual(["--scene=m12d-spherical-billboard-gpu-proof","--log=validation","--log=vulkan"],LaunchCommandBuilder.BuildArguments(configuration));
 }
 
 static void EarthFullscreenNativePreset()

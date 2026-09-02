@@ -1,0 +1,25 @@
+#version 450
+layout(local_size_x=64) in;
+layout(set=0,binding=1,std430) readonly buffer TriangleIndices { uint values[]; } indices;
+layout(set=0,binding=4,std430) readonly buffer PreparedPositions { vec4 values[]; } positions;
+layout(set=0,binding=8,std430) buffer Counters { uint values[]; } counters;
+layout(set=0,binding=9,std430) writeonly buffer Visibility { uint values[]; } visibility;
+layout(push_constant) uniform Constants {
+  uint baseVertexCount; uint baseTriangleCount; uint workVertexCount; uint workTriangleCount;
+  float bodyRadius; float cameraDistance; float tanHalfFov; float aspect;
+  uint topologyLevel; uint frameIndex; uint outputIndexCapacity; uint reserved;
+} pc;
+bool finite3(vec3 v){return !any(isnan(v))&&!any(isinf(v));}
+void main(){
+  uint id=gl_GlobalInvocationID.x; if(id>=pc.workTriangleCount)return;
+  uint sourceTriangle=id%pc.baseTriangleCount; uint availableBatches=max(1u,pc.workVertexCount/pc.baseVertexCount);
+  uint base=(id/pc.baseTriangleCount%availableBatches)*pc.baseVertexCount;
+  uint i0=base+indices.values[sourceTriangle*3u+0u]; uint i1=base+indices.values[sourceTriangle*3u+1u]; uint i2=base+indices.values[sourceTriangle*3u+2u];
+  vec3 p0=positions.values[i0].xyz, p1=positions.values[i1].xyz, p2=positions.values[i2].xyz;
+  if(!finite3(p0)||!finite3(p1)||!finite3(p2)){visibility.values[id]=0u;atomicAdd(counters.values[4],1u);return;}
+  vec3 center=(p0+p1+p2)/3.0; float radius=max(length(p0-center),max(length(p1-center),length(p2-center)))+pc.bodyRadius*1e-6;
+  vec3 n=cross(p1-p0,p2-p0); if(dot(n,-center)<=-radius*length(n)/max(pc.bodyRadius,1.0)){visibility.values[id]=0u;atomicAdd(counters.values[1],1u);return;}
+  float forward=-center.z; bool outside=forward+radius<=0.0 || abs(center.x)>forward*pc.tanHalfFov*pc.aspect+radius || abs(center.y)>forward*pc.tanHalfFov+radius;
+  if(outside){visibility.values[id]=0u;atomicAdd(counters.values[2],1u);return;}
+  visibility.values[id]=1u;atomicAdd(counters.values[0],1u);
+}

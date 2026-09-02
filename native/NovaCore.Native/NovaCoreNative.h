@@ -147,6 +147,54 @@ struct alignas(8) NcPlanetaryMeshPreparationMetrics {
   uint64_t persistentBufferBytes;
   double setupMilliseconds, displacementMilliseconds, normalMilliseconds, totalMilliseconds;
 };
+// P2S3-only isolated spherical-billboard Vulkan proof ABI. It deliberately
+// carries topology identity, not production patch identity.
+struct alignas(16) NcSphericalBillboardProofVertex { float direction[4]; };
+struct NcSphericalBillboardProofAssets {
+  uint32_t size, version;
+  const char* resetShaderPathUtf8;
+  const char* prepareShaderPathUtf8;
+  const char* normalShaderPathUtf8;
+  const char* cullShaderPathUtf8;
+  const char* compactShaderPathUtf8;
+  const char* vertexShaderPathUtf8;
+  const char* fragmentShaderPathUtf8;
+  uint32_t maximumVertexWorkItems, maximumTriangleWorkItems, frameResourceCount, renderExtent;
+};
+struct NcSphericalBillboardProofTopology {
+  uint32_t size, version, formatVersion, generatorVersion;
+  uint32_t level, vertexCount, indexCount, neighborOffsetCount;
+  uint32_t neighborCount, reserved0, reserved1, reserved2;
+  uint64_t topologyHash;
+  const NcSphericalBillboardProofVertex* vertices;
+  const uint32_t* indices;
+  const uint32_t* neighborOffsets;
+  const uint32_t* neighbors;
+};
+struct NcSphericalBillboardProofFrame {
+  uint32_t size, version, frameIndex, renderEnabled;
+  uint32_t workVertexCount, workTriangleCount, reserved0, reserved1;
+  uint64_t expectedTopologyHash;
+  double bodyRadiusMetres, cameraDistanceMetres;
+  float verticalTanHalfFov, aspectRatio;
+  uint32_t reserved2, reserved3;
+};
+struct alignas(8) NcSphericalBillboardProofMetrics {
+  uint32_t size, version, activeLevel, readiness;
+  uint32_t baseVertexCount, baseTriangleCount, workVertexCount, workTriangleCount;
+  uint32_t preparedVertices, visibleTriangles, backfaceRejected, frustumRejected;
+  uint32_t invalidRejected, overflowCount, indirectIndexCount, indirectDrawCount;
+  uint32_t invalidCommands, validationErrors, frameSlot, frameWaitCount;
+  uint32_t topologyUploadCount, frameOutputWriteCount, cullingDispatchCount, indirectSubmissionCount;
+  uint32_t topologyReplacementCount, runtimeTopologyGenerationCount, pipelineCreationCount, shaderModuleCreationCount;
+  uint64_t topologyHash, topologyBytesUploaded, activeTopologyBytes, pixelChecksum;
+  uint64_t immutableVertexBytes, immutableIndexBytes, immutableAdjacencyBytes;
+  uint64_t framePositionBytes, frameNormalBytes, frameVisibilityBytes, frameCompactedIndexBytes;
+  uint64_t frameIndirectBytes, frameCounterBytes, temporaryScratchBytes, totalAllocatedBytes;
+  double setupMilliseconds, topologyUploadMilliseconds, cpuFrameMilliseconds;
+  double preparationMilliseconds, normalMilliseconds, cullingMilliseconds, compactionMilliseconds;
+  double drawMilliseconds, gpuTotalMilliseconds;
+};
 typedef void(__cdecl* NcHostCallback)(NcHostEvent* hostEvent, void* userData);
 enum NcResult : int32_t { NC_SUCCESS = 0, NC_FAILURE = 1, NC_INVALID_ARGUMENT = 2 };
 NC_API NcResult __cdecl nc_run_renderer(NcFrameSubmission* submission, NcHostCallback callback, void* userData);
@@ -157,5 +205,9 @@ NC_API NcResult __cdecl nc_query_planetary_physical_heights(const NcPlanetaryHei
 NC_API NcResult __cdecl nc_initialize_planetary_mesh_preparation(const NcPlanetaryMeshPreparationAssets* assets, NcPlanetaryMeshPreparationMetrics* metrics);
 NC_API NcResult __cdecl nc_prepare_planetary_mesh(const NcPlanetaryHeightQuery* vertices, const uint32_t* indices, const uint32_t* adjacencyWords, const NcPlanetaryMeshPreparationDispatch* dispatch, NcPlanetaryDisplacedVertex* displaced, NcPlanetaryPhysicalNormal* normals, NcPlanetaryMeshPreparationMetrics* metrics);
 NC_API NcResult __cdecl nc_shutdown_planetary_mesh_preparation(void);
+NC_API NcResult __cdecl nc_initialize_spherical_billboard_gpu_proof(const NcSphericalBillboardProofAssets* assets, NcSphericalBillboardProofMetrics* metrics);
+NC_API NcResult __cdecl nc_upload_spherical_billboard_gpu_proof_topology(const NcSphericalBillboardProofTopology* topology, NcSphericalBillboardProofMetrics* metrics);
+NC_API NcResult __cdecl nc_run_spherical_billboard_gpu_proof_frame(const NcSphericalBillboardProofFrame* frame, NcSphericalBillboardProofMetrics* metrics);
+NC_API NcResult __cdecl nc_shutdown_spherical_billboard_gpu_proof(void);
 NC_API NcResult __cdecl nc_get_abi_layout(NcAbiLayout* layout);
 }

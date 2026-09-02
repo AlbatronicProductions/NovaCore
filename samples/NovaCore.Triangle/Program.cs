@@ -1,6 +1,32 @@
 using System.Diagnostics;using System.Reflection;using System.Runtime.InteropServices;using System.Security.Cryptography;using System.Text;
 using NovaCore.Core;using NovaCore.Core.Camera;using NovaCore.Core.ReferenceFrames;using NovaCore.Core.Surface;using NovaCore.Graphics;using NovaCore.Interop;using NovaCore.Platform;using NovaCore.Simulation.Time;using NovaCore.Simulation.Celestial;
+if(args.Contains("--scene=m12d-spherical-billboard-gpu-proof",StringComparer.OrdinalIgnoreCase))return RunSphericalBillboardGpuProof();
 if(!SampleOptions.TryParse(args,out var options,out var error)){Console.Error.WriteLine(error);return 2;}if(!LogOptions.TryParse(options.LogArguments,out var log,out var logError)){Console.Error.WriteLine(logError);return 2;}return Run(options,log);
+static int RunSphericalBillboardGpuProof()
+{
+    try
+    {
+        var root=PlanetarySphericalBillboardGpuProof.FindRepositoryRoot(Environment.CurrentDirectory);
+        Console.WriteLine("Active planetary representation: M12D Spherical Billboard GPU Proof (isolated, opt-in, sphere-only physical route, production patch renderer inactive).");
+        var report=PlanetarySphericalBillboardGpuProof.Run(root,includeScaling:true);
+        Console.WriteLine($"P2S3 topology library: artifacts=3; loadValidateSelectMs={report.TopologyLoadMilliseconds:F6}");
+        foreach(var result in report.Levels)
+        {
+            var m=result.Frame;var upload=result.Upload;
+            Console.WriteLine($"P2S3 proof: level={result.Level}; hash=0x{m.TopologyHash:X16}; vertices={m.BaseVertexCount}; triangles={m.BaseTriangleCount}; visible={m.VisibleTriangles}; backface={m.BackfaceRejected}; frustum={m.FrustumRejected}; invalid={m.InvalidRejected}; topologyUploads={m.TopologyUploadCount}; uploadBytes={upload.ActiveTopologyBytes}; uploadMs={upload.TopologyUploadMilliseconds:F6}; prepared={m.PreparedVertices}; cpuMs={m.CpuFrameMilliseconds:F6}; prepareMs={m.PreparationMilliseconds:F6}; normalMs={m.NormalMilliseconds:F6}; cullMs={m.CullingMilliseconds:F6}; compactMs={m.CompactionMilliseconds:F6}; compactedIndices={m.IndirectIndexCount}; indirectDraws={m.IndirectDrawCount}; drawMs={m.DrawMilliseconds:F6}; readiness={m.Readiness}; frameSlot={m.FrameSlot}; validation={m.ValidationErrors}; pixelChecksum=0x{m.PixelChecksum:X16}");
+        }
+        foreach(var result in report.Scaling)
+        {
+            var m=result.Metrics;
+            Console.WriteLine($"P2S3 scaling: vertices={result.Vertices}; triangles={result.Triangles}; cpuMs={m.CpuFrameMilliseconds:F6}; preparationMs={m.PreparationMilliseconds:F6}; normalMs={m.NormalMilliseconds:F6}; cullingMs={m.CullingMilliseconds:F6}; compactionMs={m.CompactionMilliseconds:F6}; gpuTotalMs={m.GpuTotalMilliseconds:F6}; measured=true");
+        }
+        var final=report.FinalMetrics;
+        Console.WriteLine($"P2S3 allocation: immutableVertices={final.ImmutableVertexBytes}; immutableIndices={final.ImmutableIndexBytes}; immutableAdjacency={final.ImmutableAdjacencyBytes}; framePositions={final.FramePositionBytes}; frameNormals={final.FrameNormalBytes}; frameVisibility={final.FrameVisibilityBytes}; frameCompactedIndices={final.FrameCompactedIndexBytes}; frameIndirect={final.FrameIndirectBytes}; frameCounters={final.FrameCounterBytes}; scratch={final.TemporaryScratchBytes}; total={final.TotalAllocatedBytes}");
+        Console.WriteLine($"P2S3 lifecycle: topologyUploads={final.TopologyUploadCount}; topologyBytesUploaded={final.TopologyBytesUploaded}; frameOutputWrites={final.FrameOutputWriteCount}; cullingDispatches={final.CullingDispatchCount}; indirectSubmissions={final.IndirectSubmissionCount}; allocatedBytes={final.TotalAllocatedBytes}; runtimeTopologyGenerations={final.RuntimeTopologyGenerationCount}; validationErrors={final.ValidationErrors}.");
+        return 0;
+    }
+    catch(Exception exception){Console.Error.WriteLine($"P2S3 spherical billboard GPU proof failed: {exception.Message}");return 1;}
+}
 static unsafe int Run(SampleOptions options,LogOptions log)
 {
     PlanetaryPhysicalSurface.ConfigureRuntimeGeneration(options.PhysicalSurfaceGeneration);

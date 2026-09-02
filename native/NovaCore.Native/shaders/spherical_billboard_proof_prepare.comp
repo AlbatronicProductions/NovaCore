@@ -1,0 +1,15 @@
+#version 450
+layout(local_size_x=64) in;
+layout(set=0,binding=0,std430) readonly buffer LocalVertices { vec4 values[]; } localVertices;
+layout(set=0,binding=4,std430) writeonly buffer PreparedPositions { vec4 values[]; } positions;
+layout(push_constant) uniform Constants {
+  uint baseVertexCount; uint baseTriangleCount; uint workVertexCount; uint workTriangleCount;
+  float bodyRadius; float cameraDistance; float tanHalfFov; float aspect;
+  uint topologyLevel; uint frameIndex; uint outputIndexCapacity; uint reserved;
+} pc;
+void main(){
+  uint id=gl_GlobalInvocationID.x; if(id>=pc.workVertexCount)return;
+  vec3 direction=normalize(localVertices.values[id%pc.baseVertexCount].xyz);
+  // P2S3 proof-only surface: zero-height sphere. P2S4 binds canonical H(bodyDirection).
+  positions.values[id]=vec4(direction*pc.bodyRadius-vec3(0.0,0.0,pc.cameraDistance),1.0);
+}

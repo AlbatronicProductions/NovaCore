@@ -90,6 +90,7 @@ public static class LaunchCommandBuilder
         NovaCoreScene.Solar => "sol",
         NovaCoreScene.Earth => "earth",
         NovaCoreScene.SubdivisionDiagnostic => "planetary-subdivision-diagnostic",
+        NovaCoreScene.SphericalBillboardGpuProof => "m12d-spherical-billboard-gpu-proof",
         _ => throw new ArgumentOutOfRangeException(nameof(scene), scene, null)
     };
 }

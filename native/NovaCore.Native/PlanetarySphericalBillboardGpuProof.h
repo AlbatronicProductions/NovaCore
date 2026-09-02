@@ -1,0 +1,7 @@
+#pragma once
+#include "NovaCoreNative.h"
+
+NcResult InitializeSphericalBillboardGpuProof(const NcSphericalBillboardProofAssets* assets,NcSphericalBillboardProofMetrics* metrics);
+NcResult UploadSphericalBillboardGpuProofTopology(const NcSphericalBillboardProofTopology* topology,NcSphericalBillboardProofMetrics* metrics);
+NcResult RunSphericalBillboardGpuProofFrame(const NcSphericalBillboardProofFrame* frame,NcSphericalBillboardProofMetrics* metrics);
+NcResult ShutdownSphericalBillboardGpuProof();

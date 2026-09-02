@@ -3,6 +3,7 @@
 #include "LocalTerrainPack.h"
 #include "PlanetaryHeightQuery.h"
 #include "PlanetaryMeshPreparation.h"
+#include "PlanetarySphericalBillboardGpuProof.h"
 #include <algorithm>
 #include <array>
 #include <chrono>
@@ -2394,5 +2395,9 @@ extern "C" NC_API NcResult __cdecl nc_query_planetary_physical_heights(const NcP
 extern "C" NC_API NcResult __cdecl nc_initialize_planetary_mesh_preparation(const NcPlanetaryMeshPreparationAssets* assets,NcPlanetaryMeshPreparationMetrics* metrics){return InitializePlanetaryMeshPreparation(assets,metrics);}
 extern "C" NC_API NcResult __cdecl nc_prepare_planetary_mesh(const NcPlanetaryHeightQuery* vertices,const uint32_t* indices,const uint32_t* adjacencyWords,const NcPlanetaryMeshPreparationDispatch* dispatch,NcPlanetaryDisplacedVertex* displaced,NcPlanetaryPhysicalNormal* normals,NcPlanetaryMeshPreparationMetrics* metrics){return PreparePlanetaryMesh(vertices,indices,adjacencyWords,dispatch,displaced,normals,metrics);}
 extern "C" NC_API NcResult __cdecl nc_shutdown_planetary_mesh_preparation(){return ShutdownPlanetaryMeshPreparation();}
+extern "C" NC_API NcResult __cdecl nc_initialize_spherical_billboard_gpu_proof(const NcSphericalBillboardProofAssets* assets,NcSphericalBillboardProofMetrics* metrics){return InitializeSphericalBillboardGpuProof(assets,metrics);}
+extern "C" NC_API NcResult __cdecl nc_upload_spherical_billboard_gpu_proof_topology(const NcSphericalBillboardProofTopology* topology,NcSphericalBillboardProofMetrics* metrics){return UploadSphericalBillboardGpuProofTopology(topology,metrics);}
+extern "C" NC_API NcResult __cdecl nc_run_spherical_billboard_gpu_proof_frame(const NcSphericalBillboardProofFrame* frame,NcSphericalBillboardProofMetrics* metrics){return RunSphericalBillboardGpuProofFrame(frame,metrics);}
+extern "C" NC_API NcResult __cdecl nc_shutdown_spherical_billboard_gpu_proof(){return ShutdownSphericalBillboardGpuProof();}
 extern "C" NC_API NcResult __cdecl nc_run_renderer(NcFrameSubmission *s, NcHostCallback cb, void *data) { return RunRenderer(s,cb,data,nullptr); }
 extern "C" NC_API NcResult __cdecl nc_run_renderer_with_assets(NcFrameSubmission *s, NcHostCallback cb, void *data, const NcRuntimeAssets *assets) { return RunRenderer(s,cb,data,assets); }

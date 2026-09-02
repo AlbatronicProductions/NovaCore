@@ -8,14 +8,16 @@ public enum NovaCoreScenarioPreset
     FloridaLaunchSite,
     SubdivisionDiagnostic,
     EarthFullscreenNative,
-    M12DNaturalTerrainCandidate
+    M12DNaturalTerrainCandidate,
+    M12DSphericalBillboardGpuProof
 }
 
 public enum NovaCoreScene
 {
     Solar,
     Earth,
-    SubdivisionDiagnostic
+    SubdivisionDiagnostic,
+    SphericalBillboardGpuProof
 }
 
 public enum NovaCoreStartingBody

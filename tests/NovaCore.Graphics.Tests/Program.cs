@@ -57,6 +57,7 @@ var tests = new (string, Action)[]
     ("Production relaxed cube-sphere patch hierarchy", ProductionRelaxedCubeSpherePatchHierarchyTest),
     ("Anchored spherical mesh-tier contract", AnchoredSphericalMeshTierContractTest),
     ("M12D-P2S2 spherical billboard topology proof", PlanetarySphericalBillboardTopologyTests.Run),
+    ("M12D-P2S3 spherical billboard GPU runtime proof", PlanetarySphericalBillboardGpuRuntimeTests.Run),
     ("GPU physical-height preparation", GpuPhysicalHeightPreparationTests.Run),
     ("Multiscale physical terrain modifier foundation", PlanetaryPhysicalSurfaceModifierTests.Run),
     ("Single canonical physical surface authority", PlanetaryCanonicalPhysicalSurfaceAuthorityTests.Run),

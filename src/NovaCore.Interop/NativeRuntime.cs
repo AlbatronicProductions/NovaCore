@@ -188,6 +188,60 @@ public struct NativePlanetaryMeshPreparationMetrics
 }
 
 [StructLayout(LayoutKind.Sequential)]
+public struct NativeSphericalBillboardProofVertex { public float X,Y,Z,W; }
+
+[StructLayout(LayoutKind.Sequential)]
+public unsafe struct NativeSphericalBillboardProofAssets
+{
+    public uint Size,Version;
+    public byte* ResetShaderPathUtf8,PrepareShaderPathUtf8,NormalShaderPathUtf8,CullShaderPathUtf8,CompactShaderPathUtf8,VertexShaderPathUtf8,FragmentShaderPathUtf8;
+    public uint MaximumVertexWorkItems,MaximumTriangleWorkItems,FrameResourceCount,RenderExtent;
+}
+
+[StructLayout(LayoutKind.Sequential)]
+public unsafe struct NativeSphericalBillboardProofTopology
+{
+    public uint Size,Version,FormatVersion,GeneratorVersion;
+    public uint Level,VertexCount,IndexCount,NeighborOffsetCount;
+    public uint NeighborCount,Reserved0,Reserved1,Reserved2;
+    public ulong TopologyHash;
+    public NativeSphericalBillboardProofVertex* Vertices;
+    public uint* Indices;
+    public uint* NeighborOffsets;
+    public uint* Neighbors;
+}
+
+[StructLayout(LayoutKind.Sequential)]
+public struct NativeSphericalBillboardProofFrame
+{
+    public uint Size,Version,FrameIndex,RenderEnabled;
+    public uint WorkVertexCount,WorkTriangleCount,Reserved0,Reserved1;
+    public ulong ExpectedTopologyHash;
+    public double BodyRadiusMetres,CameraDistanceMetres;
+    public float VerticalTanHalfFov,AspectRatio;
+    public uint Reserved2,Reserved3;
+}
+
+[StructLayout(LayoutKind.Sequential)]
+public struct NativeSphericalBillboardProofMetrics
+{
+    public uint Size,Version,ActiveLevel,Readiness;
+    public uint BaseVertexCount,BaseTriangleCount,WorkVertexCount,WorkTriangleCount;
+    public uint PreparedVertices,VisibleTriangles,BackfaceRejected,FrustumRejected;
+    public uint InvalidRejected,OverflowCount,IndirectIndexCount,IndirectDrawCount;
+    public uint InvalidCommands,ValidationErrors,FrameSlot,FrameWaitCount;
+    public uint TopologyUploadCount,FrameOutputWriteCount,CullingDispatchCount,IndirectSubmissionCount;
+    public uint TopologyReplacementCount,RuntimeTopologyGenerationCount,PipelineCreationCount,ShaderModuleCreationCount;
+    public ulong TopologyHash,TopologyBytesUploaded,ActiveTopologyBytes,PixelChecksum;
+    public ulong ImmutableVertexBytes,ImmutableIndexBytes,ImmutableAdjacencyBytes;
+    public ulong FramePositionBytes,FrameNormalBytes,FrameVisibilityBytes,FrameCompactedIndexBytes;
+    public ulong FrameIndirectBytes,FrameCounterBytes,TemporaryScratchBytes,TotalAllocatedBytes;
+    public double SetupMilliseconds,TopologyUploadMilliseconds,CpuFrameMilliseconds;
+    public double PreparationMilliseconds,NormalMilliseconds,CullingMilliseconds,CompactionMilliseconds;
+    public double DrawMilliseconds,GpuTotalMilliseconds;
+}
+
+[StructLayout(LayoutKind.Sequential)]
 public struct NativeAbiLayout
 {
     public uint EncodedPositionSize, CameraDataSize, CameraPositionOffset, CameraViewProjectionOffset, RenderTransformSize, RenderObjectSize, RenderObjectPositionOffset, RenderObjectTransformOffset, RenderObjectMeshOffset;
@@ -234,4 +288,16 @@ public static partial class NativeRuntime
 
     [LibraryImport("NovaCore.Native", EntryPoint = "nc_shutdown_planetary_mesh_preparation")]
     public static partial NativeResult ShutdownPlanetaryMeshPreparation();
+
+    [LibraryImport("NovaCore.Native", EntryPoint = "nc_initialize_spherical_billboard_gpu_proof")]
+    public static unsafe partial NativeResult InitializeSphericalBillboardGpuProof(NativeSphericalBillboardProofAssets* assets, NativeSphericalBillboardProofMetrics* metrics);
+
+    [LibraryImport("NovaCore.Native", EntryPoint = "nc_upload_spherical_billboard_gpu_proof_topology")]
+    public static unsafe partial NativeResult UploadSphericalBillboardGpuProofTopology(NativeSphericalBillboardProofTopology* topology, NativeSphericalBillboardProofMetrics* metrics);
+
+    [LibraryImport("NovaCore.Native", EntryPoint = "nc_run_spherical_billboard_gpu_proof_frame")]
+    public static unsafe partial NativeResult RunSphericalBillboardGpuProofFrame(NativeSphericalBillboardProofFrame* frame, NativeSphericalBillboardProofMetrics* metrics);
+
+    [LibraryImport("NovaCore.Native", EntryPoint = "nc_shutdown_spherical_billboard_gpu_proof")]
+    public static partial NativeResult ShutdownSphericalBillboardGpuProof();
 }

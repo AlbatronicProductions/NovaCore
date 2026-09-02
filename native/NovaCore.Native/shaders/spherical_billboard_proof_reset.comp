@@ -1,0 +1,8 @@
+#version 450
+layout(local_size_x=1) in;
+layout(set=0,binding=7,std430) buffer DrawArgs { uint args[]; } drawArgs;
+layout(set=0,binding=8,std430) buffer Counters { uint values[]; } counters;
+void main(){
+  drawArgs.args[0]=0u; drawArgs.args[1]=1u; drawArgs.args[2]=0u; drawArgs.args[3]=0u; drawArgs.args[4]=0u;
+  for(uint i=0u;i<8u;i++) counters.values[i]=0u;
+}
