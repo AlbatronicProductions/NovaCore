@@ -59,6 +59,7 @@ var tests = new (string, Action)[]
     ("M12D-P2S2 spherical billboard topology proof", PlanetarySphericalBillboardTopologyTests.Run),
     ("M12D-P2S3 spherical billboard GPU runtime proof", PlanetarySphericalBillboardGpuRuntimeTests.Run),
     ("M12D-P2S4 canonical natural terrain billboard binding", PlanetarySphericalBillboardNaturalTerrainTests.Run),
+    ("M12D-P2S5B production spherical billboard topology library", PlanetaryProductionSphericalBillboardTopologyTests.Run),
     ("GPU physical-height preparation", GpuPhysicalHeightPreparationTests.Run),
     ("Multiscale physical terrain modifier foundation", PlanetaryPhysicalSurfaceModifierTests.Run),
     ("Single canonical physical surface authority", PlanetaryCanonicalPhysicalSurfaceAuthorityTests.Run),

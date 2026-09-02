@@ -1,0 +1,135 @@
+{
+  "format": "NovaCoreProductionSphericalBillboardTopology",
+  "formatVersion": 2,
+  "generatorVersion": 1,
+  "coordinateEncoding": "SignedCubeLatticeInt32",
+  "levelCount": 18,
+  "levels": [
+    {
+      "level": 0,
+      "file": "production-00.nctop2",
+      "bytes": 169228,
+      "topologyHash": "0xF0788006615C9665",
+      "parentMappingHash": "0x141CFC9842C4B0E3"
+    },
+    {
+      "level": 1,
+      "file": "production-01.nctop2",
+      "bytes": 610052,
+      "topologyHash": "0xF19A534B746248DE",
+      "parentMappingHash": "0xB345D1EFD3566D9F"
+    },
+    {
+      "level": 2,
+      "file": "production-02.nctop2",
+      "bytes": 1035268,
+      "topologyHash": "0x19CE1D01255D82DC",
+      "parentMappingHash": "0x15269F5DD12A72AA"
+    },
+    {
+      "level": 3,
+      "file": "production-03.nctop2",
+      "bytes": 1704548,
+      "topologyHash": "0xB0D103DF89C9151B",
+      "parentMappingHash": "0x05BF3A0136634815"
+    },
+    {
+      "level": 4,
+      "file": "production-04.nctop2",
+      "bytes": 2707892,
+      "topologyHash": "0xB7388814AB66033F",
+      "parentMappingHash": "0x0233A6180674D476"
+    },
+    {
+      "level": 5,
+      "file": "production-05.nctop2",
+      "bytes": 4103492,
+      "topologyHash": "0x0B88597718CCA3C5",
+      "parentMappingHash": "0xB30106FF42C2557F"
+    },
+    {
+      "level": 6,
+      "file": "production-06.nctop2",
+      "bytes": 5866500,
+      "topologyHash": "0x3CEB30A7B76DEB78",
+      "parentMappingHash": "0xAACA93D2BB2AA419"
+    },
+    {
+      "level": 7,
+      "file": "production-07.nctop2",
+      "bytes": 7910132,
+      "topologyHash": "0xDAB1109356510A89",
+      "parentMappingHash": "0x67A5A4E0B3F22323"
+    },
+    {
+      "level": 8,
+      "file": "production-08.nctop2",
+      "bytes": 10155668,
+      "topologyHash": "0x2A12C500AA09E634",
+      "parentMappingHash": "0x030EF3FACEAA4210"
+    },
+    {
+      "level": 9,
+      "file": "production-09.nctop2",
+      "bytes": 12513636,
+      "topologyHash": "0x7EB1114EEAFEC76A",
+      "parentMappingHash": "0xE40E9E490EC6B008"
+    },
+    {
+      "level": 10,
+      "file": "production-10.nctop2",
+      "bytes": 14934692,
+      "topologyHash": "0x9F24B160FFD220BB",
+      "parentMappingHash": "0x75014A0DB46BADA6"
+    },
+    {
+      "level": 11,
+      "file": "production-11.nctop2",
+      "bytes": 17388484,
+      "topologyHash": "0x47984C51EB0667B3",
+      "parentMappingHash": "0x7A351A5FAD8AB4D6"
+    },
+    {
+      "level": 12,
+      "file": "production-12.nctop2",
+      "bytes": 19867124,
+      "topologyHash": "0xD5A860EA57373C84",
+      "parentMappingHash": "0xC5E6830433F526B0"
+    },
+    {
+      "level": 13,
+      "file": "production-13.nctop2",
+      "bytes": 22350388,
+      "topologyHash": "0x1FADAFF7949AA73D",
+      "parentMappingHash": "0xFCB1B03B2AB6CDB1"
+    },
+    {
+      "level": 14,
+      "file": "production-14.nctop2",
+      "bytes": 24837108,
+      "topologyHash": "0x03FD44358540D951",
+      "parentMappingHash": "0xB6B5EE54C9EAD765"
+    },
+    {
+      "level": 15,
+      "file": "production-15.nctop2",
+      "bytes": 27330548,
+      "topologyHash": "0xE2D652EE643A59E5",
+      "parentMappingHash": "0x2ED96056324378B1"
+    },
+    {
+      "level": 16,
+      "file": "production-16.nctop2",
+      "bytes": 29824372,
+      "topologyHash": "0x7D6E2E4117BE64AE",
+      "parentMappingHash": "0x58558F51C1A8C536"
+    },
+    {
+      "level": 17,
+      "file": "production-17.nctop2",
+      "bytes": 32318196,
+      "topologyHash": "0xE7D3421EF8CC59AB",
+      "parentMappingHash": "0x1B5F683B064DA4EA"
+    }
+  ]
+}
