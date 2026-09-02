@@ -4,6 +4,7 @@
 #include "production_cube_surface.glsl"
 #include "local_terrain.glsl"
 #include "physical_surface.glsl"
+#include "planetary_natural_terrain_surface.glsl"
 
 struct EncodedPosition { vec4 high; vec4 low; };
 struct GpuCameraData { EncodedPosition position; mat4 viewProjection; };
@@ -14,6 +15,8 @@ layout(std430,set=0,binding=6) readonly buffer Presentations { Presentation valu
 layout(set=0,binding=25) uniform sampler2DArray productionElevation;
 layout(std430,set=0,binding=27) readonly buffer ProductionLayers { uint values[]; } productionLayers;
 layout(std430,set=0,binding=32) readonly buffer AnchoredFrame { uvec4 control; uvec4 entries[]; } anchoredFrame;
+layout(std430,set=0,binding=35) readonly buffer NaturalGlobalPrepared { uvec4 naturalControl; dvec4 naturalGlobalValues[]; } naturalGlobal;
+layout(std430,set=0,binding=36) readonly buffer NaturalAnchoredPrepared { dvec4 naturalAnchoredValues[]; } naturalAnchored;
 #include "anchored_physical_surface.glsl"
 layout(location=0) in vec2 baseUv;
 
@@ -66,23 +69,44 @@ vec3 BillboardRelative(dvec3 body,dvec3 origin,dvec3 east,dvec3 north,dvec3 up,v
   return RotateQuaternion(vec3(east*tangent.x+north*tangent.y+up*tangent.z),orientation);
 }
 
+vec3 NaturalPreparedBaseNormal(dvec3 direction,double radius,dvec3 preparedGradient)
+{
+  dvec3 east=PhysicalEastD(direction),north=normalize(cross(direction,east));
+  double angle=40.0/radius;
+  dvec3 leftDirection=normalize(direction-east*angle),rightDirection=normalize(direction+east*angle);
+  dvec3 downDirection=normalize(direction-north*angle),upDirection=normalize(direction+north*angle);
+  dvec3 left=leftDirection*(radius+CanonicalGeographicHeight(leftDirection));
+  dvec3 right=rightDirection*(radius+CanonicalGeographicHeight(rightDirection));
+  dvec3 down=downDirection*(radius+CanonicalGeographicHeight(downDirection));
+  dvec3 up=upDirection*(radius+CanonicalGeographicHeight(upDirection));
+  vec3 geographicNormal=normalize(vec3(cross(right-left,up-down))),radial=vec3(direction);
+  if(dot(geographicNormal,radial)<0.0)geographicNormal=-geographicNormal;
+  double radialComponent=max(double(dot(geographicNormal,radial)),1e-9);
+  double eastSlope=-double(dot(geographicNormal,vec3(east)))/radialComponent+dot(preparedGradient,east);
+  double northSlope=-double(dot(geographicNormal,vec3(north)))/radialComponent+dot(preparedGradient,north);
+  return normalize(radial-vec3(east)*float(eastSlope)-vec3(north)*float(northSlope));
+}
+
 void main()
 {
   Presentation p=presentations.values[0];
   uint descriptor=AnchoredPatchOffset+uint(gl_InstanceIndex)*5u;
   uvec4 address=anchoredFrame.entries[descriptor+1u];
+  uvec4 cache=anchoredFrame.entries[descriptor+2u];
   dvec3 direction=normalize(ProductionProjectD(address,dvec2(baseUv)));
   double radius=double(inputData.cameraHighRadiusHigh.w)+double(inputData.cameraLowRadiusLow.w);
   double geographic=AnchoredGeographicHeight(direction);
   // The reusable topology samples the canonical full base field.  Frequency
   // context remains presentation metadata for bounded filtering/diagnostics;
   // it is not allowed to define another geometric surface.
-  double height=CanonicalBasePhysicalHeight(direction);
+  bool natural=naturalGlobal.naturalControl.x==NOVACORE_PHYSICAL_GENERATION_M12D;
+  dvec4 prepared=natural?naturalAnchored.naturalAnchoredValues[cache.x*25u+uint(gl_VertexIndex)]:dvec4(0.0);
+  double height=natural?max(0.0,geographic+prepared.x):CanonicalBasePhysicalHeight(direction);
   dvec3 body=direction*(radius+height);
   dvec3 origin,east,north,up;DecodeBillboardFrame(origin,east,north,up);
   vec3 relative=BillboardRelative(body,origin,east,north,up,p.bodyOrientation);
 
-  color=vec4(1.0);normal=AnchoredBasePhysicalNormal(direction,radius);
+  color=vec4(1.0);normal=natural?NaturalPreparedBaseNormal(direction,radius,prepared.yzw):AnchoredBasePhysicalNormal(direction,radius);
   lightDirection=normalize(RotateQuaternion(lighting.sourceCenterExposure.xyz-p.centerRadius.xyz,
     vec4(-p.bodyOrientation.xyz,p.bodyOrientation.w)));
   material=uvec2(p.identity.w,p.identity.z);response=p.surface;

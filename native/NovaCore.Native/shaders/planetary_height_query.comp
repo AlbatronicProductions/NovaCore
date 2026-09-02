@@ -2,6 +2,7 @@
 #extension GL_EXT_shader_explicit_arithmetic_types_float64 : require
 #include "production_cube_surface.glsl"
 #include "physical_surface.glsl"
+#include "planetary_natural_terrain_surface.glsl"
 
 layout(local_size_x=64,local_size_y=1,local_size_z=1)in;
 
@@ -113,6 +114,15 @@ double EvaluateBaseHeightD(dvec3 direction,dvec2 oracleUv)
   return max(0.0,base+TerrainBaseModifierHeightD(direction,base));
 }
 
+double EvaluateNaturalBaseHeightD(dvec3 direction,dvec2 oracleUv)
+{
+  direction=normalize(direction);uint face;dvec2 uv;uvec4 identity;
+  ProductionDirectionAddressD(direction,face,uv);
+  double geographic=max(0.0,SampleOracle(oracleUv)+SampleLocal(face,uv,identity));
+  NaturalTerrainCompositionSampleD natural=EvaluateNaturalCandidateD(direction);
+  return max(0.0,geographic+natural.macro.height+natural.meso.height);
+}
+
 void main()
 {
   uint index=gl_GlobalInvocationID.x;if(index>=constants.dimensions.x)return;
@@ -123,7 +133,8 @@ void main()
   result.reconstructedXY=reconstructed.xy;result.reconstructedZAndLength=dvec2(reconstructed.z,length(reconstructed));
   bool finiteCoordinate=!any(isnan(reconstructed))&&!any(isinf(reconstructed));
   bool valid=query.identity.x==6u&&query.identity.y==0u&&query.identity.z==constants.storage.w&&
-    query.identity.w<=3u&&query.metadata.x==1u&&query.metadata.y==1u&&finiteCoordinate&&
+    query.identity.w<=3u&&query.metadata.x==1u&&query.metadata.y==1u&&
+    (query.metadata.z==0u||query.metadata.z==NOVACORE_PHYSICAL_GENERATION_M12D)&&finiteCoordinate&&
     dot(reconstructed,reconstructed)>0.0;
   uint face=0u;dvec2 uv=dvec2(0);uvec4 globalIdentity=uvec4(0),localIdentity=uvec4(0);
   double oracle=0.0,terrain=0.0,local=0.0,base=0.0,modifierHeight=0.0,physical=0.0;
@@ -133,11 +144,25 @@ void main()
     dvec3 direction=normalize(reconstructed);ProductionDirectionAddressD(direction,face,uv);
     oracle=SampleOracle(query.oracleUv);terrain=SampleTerrainV5(face,uv,globalIdentity);
     local=SampleLocal(face,uv,localIdentity);base=max(0.0,oracle+local);
-    PhysicalModifierEvaluationD modifiers=EvaluateTerrainModifiersD(direction,base);
-    modifierHeights=dvec2(modifiers.tiledHeight,modifiers.erosionHeight);
-    double baseModifierHeight=modifiers.tiledHeight+modifiers.erosionHeight+modifiers.mesoHeight;
-    modifierHeight=baseModifierHeight+modifiers.nearHeight;
-    physical=max(0.0,max(0.0,base+baseModifierHeight)+modifiers.nearHeight);
+    bool naturalCandidate=query.metadata.z==NOVACORE_PHYSICAL_GENERATION_M12D;
+    PhysicalModifierEvaluationD modifiers;
+    NaturalTerrainCompositionSampleD natural;
+    double nearHeight,nearEastGradient,nearNorthGradient,baseModifierHeight;
+    if(naturalCandidate)
+    {
+      natural=EvaluateNaturalCandidateD(direction);baseModifierHeight=natural.macro.height+natural.meso.height;
+      nearHeight=natural.nearField.height;dvec3 east0=PhysicalEastD(direction),north0=normalize(cross(direction,east0));
+      nearEastGradient=dot(natural.nearField.bodyGradient,east0);nearNorthGradient=dot(natural.nearField.bodyGradient,north0);
+      modifierHeights=dvec2(natural.macro.height,natural.meso.height);
+    }
+    else
+    {
+      modifiers=EvaluateTerrainModifiersD(direction,base);baseModifierHeight=modifiers.tiledHeight+modifiers.erosionHeight+modifiers.mesoHeight;
+      nearHeight=modifiers.nearHeight;nearEastGradient=modifiers.nearEastGradient;nearNorthGradient=modifiers.nearNorthGradient;
+      modifierHeights=dvec2(modifiers.tiledHeight,modifiers.erosionHeight);
+    }
+    modifierHeight=baseModifierHeight+nearHeight;
+    physical=max(0.0,max(0.0,base+baseModifierHeight)+nearHeight);
     dvec3 east=PhysicalEastD(direction),north=normalize(cross(direction,east));
     double angle=NOVACORE_NORMAL_SAMPLE_RADIUS/NOVACORE_EARTH_REFERENCE_RADIUS;
     dvec3 ld=normalize(direction-east*angle),rd=normalize(direction+east*angle);
@@ -145,19 +170,19 @@ void main()
     double eastAngularStep=angle/max(sqrt(direction.x*direction.x+direction.z*direction.z),1e-12);
     double eastUvStep=eastAngularStep/6.283185307179586476925286766559;
     double northUvStep=angle/3.1415926535897932384626433832795;
-    double lh=EvaluateBaseHeightD(ld,query.oracleUv-dvec2(eastUvStep,0.0));
-    double rh=EvaluateBaseHeightD(rd,query.oracleUv+dvec2(eastUvStep,0.0));
-    double dh=EvaluateBaseHeightD(dd,query.oracleUv+dvec2(0.0,northUvStep));
-    double uh=EvaluateBaseHeightD(ud,query.oracleUv-dvec2(0.0,northUvStep));
-    gradient=dvec2((rh-lh)/(2.0*NOVACORE_NORMAL_SAMPLE_RADIUS)+modifiers.nearEastGradient,
-      (uh-dh)/(2.0*NOVACORE_NORMAL_SAMPLE_RADIUS)+modifiers.nearNorthGradient);
+    double lh=naturalCandidate?EvaluateNaturalBaseHeightD(ld,query.oracleUv-dvec2(eastUvStep,0.0)):EvaluateBaseHeightD(ld,query.oracleUv-dvec2(eastUvStep,0.0));
+    double rh=naturalCandidate?EvaluateNaturalBaseHeightD(rd,query.oracleUv+dvec2(eastUvStep,0.0)):EvaluateBaseHeightD(rd,query.oracleUv+dvec2(eastUvStep,0.0));
+    double dh=naturalCandidate?EvaluateNaturalBaseHeightD(dd,query.oracleUv+dvec2(0.0,northUvStep)):EvaluateBaseHeightD(dd,query.oracleUv+dvec2(0.0,northUvStep));
+    double uh=naturalCandidate?EvaluateNaturalBaseHeightD(ud,query.oracleUv-dvec2(0.0,northUvStep)):EvaluateBaseHeightD(ud,query.oracleUv-dvec2(0.0,northUvStep));
+    gradient=dvec2((rh-lh)/(2.0*NOVACORE_NORMAL_SAMPLE_RADIUS)+nearEastGradient,
+      (uh-dh)/(2.0*NOVACORE_NORMAL_SAMPLE_RADIUS)+nearNorthGradient);
     dvec3 left=ld*(NOVACORE_EARTH_REFERENCE_RADIUS+lh),right=rd*(NOVACORE_EARTH_REFERENCE_RADIUS+rh);
     dvec3 down=dd*(NOVACORE_EARTH_REFERENCE_RADIUS+dh),up=ud*(NOVACORE_EARTH_REFERENCE_RADIUS+uh);
     dvec3 baseNormal=normalize(cross(right-left,up-down));if(dot(baseNormal,direction)<0.0)baseNormal=-baseNormal;
     double radialComponent=max(dot(baseNormal,direction),1e-9);
     double baseEastSlope=-dot(baseNormal,east)/radialComponent,baseNorthSlope=-dot(baseNormal,north)/radialComponent;
-    dvec3 normal=normalize(direction-east*(baseEastSlope+modifiers.nearEastGradient)-north*(baseNorthSlope+modifiers.nearNorthGradient));
-    physicalNormalAndWeight=vec4(vec3(normal),float(modifiers.geographicWeight));
+    dvec3 normal=normalize(direction-east*(baseEastSlope+nearEastGradient)-north*(baseNorthSlope+nearNorthGradient));
+    physicalNormalAndWeight=vec4(vec3(normal),naturalCandidate?1.0:float(modifiers.geographicWeight));
   }
   result.faceUv=uv;result.oracleAndTerrainV5Height=dvec2(oracle,terrain);result.localAndPhysicalHeight=dvec2(local,physical);
   result.baseAndModifierHeight=dvec2(base,modifierHeight);result.modifierHeights=modifierHeights;

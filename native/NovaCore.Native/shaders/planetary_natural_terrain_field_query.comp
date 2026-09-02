@@ -1,0 +1,46 @@
+#version 460
+#extension GL_EXT_shader_explicit_arithmetic_types_float64 : require
+#include "planetary_natural_terrain_field.glsl"
+
+// Proof-only wrapper which deliberately reuses the isolated physical-height
+// query executor. It is never included by a production rendering stage.
+layout(local_size_x=64,local_size_y=1,local_size_z=1)in;
+struct HeightQuery { vec4 anchorHigh; vec4 anchorLow; vec4 localDelta; dvec2 oracleUv; uvec4 identity; uvec4 metadata; };
+struct HeightResult {
+  vec4 reconstructedHigh;vec4 reconstructedLow;dvec2 faceUv;dvec2 oracleAndTerrainV5Height;
+  dvec2 localAndPhysicalHeight;dvec2 baseAndModifierHeight;dvec2 modifierHeights;dvec2 finalGradient;
+  vec4 physicalNormalAndWeight;dvec2 reconstructedXY;dvec2 reconstructedZAndLength;
+  uvec4 globalIdentity;uvec4 localIdentity;uvec4 source;
+};
+struct LocalRecord { uvec4 identity;uvec4 payload; };
+layout(std430,binding=0)readonly buffer Queries { HeightQuery queries[]; };
+layout(std430,binding=1)writeonly buffer Results { HeightResult results[]; };
+layout(std430,binding=2)readonly buffer UnusedOracle { uint unusedOracleWords[]; };
+layout(std430,binding=3)readonly buffer UnusedGlobal { uint unusedGlobalWords[]; };
+layout(std430,binding=4)readonly buffer UnusedLocalRecords { LocalRecord unusedLocalRecords[]; };
+layout(std430,binding=5)readonly buffer UnusedLocal { uint unusedLocalWords[]; };
+layout(push_constant)uniform HeightConstants { uvec4 dimensions;uvec4 storage;vec4 localRange; } constants;
+
+void main()
+{
+  uint index=gl_GlobalInvocationID.x;if(index>=constants.dimensions.x)return;
+  HeightQuery query=queries[index];
+  dvec3 point=dvec3(query.anchorHigh.xyz)+dvec3(query.anchorLow.xyz)+dvec3(query.localDelta.xyz);
+  NaturalTerrainFieldIdentityD identity=NaturalTerrainFieldIdentityD(query.identity.xy,query.identity.zw,
+    query.metadata.x,query.metadata.y,query.metadata.z);
+  NaturalTerrainDomainD domain=NaturalTerrainReduceBodyPoint(point,query.oracleUv.x);
+  uint hash=NaturalTerrainHashCell(identity,domain.cell);dvec3 selected=NaturalTerrainSelectGradient(hash);
+  NaturalTerrainFieldSampleD fieldSample=EvaluateNaturalTerrainFieldD(point,query.oracleUv.x,query.oracleUv.y,identity);
+  HeightResult result;
+  result.reconstructedHigh=vec4(0);result.reconstructedLow=vec4(0);
+  result.faceUv=dvec2(fieldSample.height,double(hash));
+  result.oracleAndTerrainV5Height=fieldSample.bodyGradient.xy;
+  result.localAndPhysicalHeight=dvec2(fieldSample.bodyGradient.z,domain.fraction.x);
+  result.baseAndModifierHeight=selected.xy;result.modifierHeights=dvec2(selected.z,domain.fraction.y);
+  result.finalGradient=dvec2(domain.fraction.z,0.0);result.physicalNormalAndWeight=vec4(0);
+  result.reconstructedXY=point.xy;result.reconstructedZAndLength=dvec2(point.z,length(point));
+  result.globalIdentity=uvec4(domain.cell.x,domain.cell.y);
+  result.localIdentity=uvec4(domain.cell.z,identity.familyId,identity.octaveId);
+  result.source=uvec4(1u,identity.seed,NOVACORE_NATURAL_FIELD_HASH_VERSION,hash);
+  results[index]=result;
+}

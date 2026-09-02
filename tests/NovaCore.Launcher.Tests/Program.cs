@@ -6,6 +6,7 @@ var tests = new (string Name, Action Test)[]
     ("default selection", DefaultSelection),
     ("scenario catalog", ScenarioCatalogMappings),
     ("Earth fullscreen native preset", EarthFullscreenNativePreset),
+    ("M12D natural terrain candidate preset", M12DNaturalTerrainCandidatePreset),
     ("Earth fullscreen Solar camera path", EarthFullscreenSolarCameraPath),
     ("structured launch environment", StructuredLaunchEnvironment),
     ("Earth orbital arguments", EarthOrbitalArguments),
@@ -34,10 +35,29 @@ static void DefaultSelection()
 
 static void ScenarioCatalogMappings()
 {
-    Equal(6, ScenarioCatalog.All.Count);
-    Equal(6, ScenarioCatalog.All.Count(definition => definition.IsSupported));
+    Equal(7, ScenarioCatalog.All.Count);
+    Equal(7, ScenarioCatalog.All.Count(definition => definition.IsSupported));
     True(ScenarioCatalog.All.Select(definition => definition.Preset).Distinct().Count() == ScenarioCatalog.All.Count,
         "Scenario presets must be unique.");
+}
+
+static void M12DNaturalTerrainCandidatePreset()
+{
+    var stable = Create(NovaCoreScenarioPreset.EarthFullscreenNative);
+    Equal(NovaCorePhysicalSurface.Generation3, stable.PhysicalSurface);
+    False(LaunchCommandBuilder.BuildArguments(stable).Any(argument =>
+        argument.StartsWith("--physical-surface=", StringComparison.Ordinal)),
+        "Stable Earth unexpectedly opted into a candidate physical surface.");
+
+    var definition = ScenarioCatalog.Get(NovaCoreScenarioPreset.M12DNaturalTerrainCandidate);
+    Equal("M12D Natural Terrain Candidate", definition.DisplayName);
+    var candidate = Create(NovaCoreScenarioPreset.M12DNaturalTerrainCandidate);
+    Equal(NovaCorePhysicalSurface.M12DNaturalTerrainCandidate, candidate.PhysicalSurface);
+    Equal(NovaCoreWindowMode.BorderlessFullscreen, candidate.WindowMode);
+    Equal(new NovaCoreClientResolution(3440, 1440), candidate.ClientResolution);
+    SequenceEqual(
+        ["--scene=sol", "--focus=earth", "--altitude=700000", "--surface-site=land", "--log=validation", "--log=vulkan", "--physical-surface=m12d-natural-candidate"],
+        LaunchCommandBuilder.BuildArguments(candidate));
 }
 
 static void EarthFullscreenNativePreset()
@@ -174,9 +194,11 @@ static void DiagnosticsArguments()
 static void ExistingProductionScenarios()
 {
     foreach (var definition in ScenarioCatalog.All.Where(definition =>
-                 definition.Preset != NovaCoreScenarioPreset.EarthFullscreenNative))
+                 definition.Preset is not (NovaCoreScenarioPreset.EarthFullscreenNative or
+                     NovaCoreScenarioPreset.M12DNaturalTerrainCandidate)))
     {
         var configuration = Create(definition.Preset);
+        Equal(NovaCorePhysicalSurface.Generation3, configuration.PhysicalSurface);
         True(LaunchCommandBuilder.BuildArguments(configuration).Count > 0,
             $"Existing scenario {definition.DisplayName} produced no arguments.");
     }

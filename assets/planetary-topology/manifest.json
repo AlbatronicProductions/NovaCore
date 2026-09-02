@@ -1,0 +1,10 @@
+{
+  "format": "NovaCoreSphericalBillboardTopology",
+  "formatVersion": 1,
+  "generatorVersion": 1,
+  "levels": [
+    { "level": "Orbital", "file": "orbital.nctop", "bytes": 11764, "topologyHash": "0x46714C6571D73AE6" },
+    { "level": "IntermediateApproach", "file": "intermediate-approach.nctop", "bytes": 46972, "topologyHash": "0xAAC90882FE7F656E" },
+    { "level": "SurfacePupil", "file": "surface-pupil.nctop", "bytes": 187132, "topologyHash": "0xBBBACB117D88439D" }
+  ]
+}

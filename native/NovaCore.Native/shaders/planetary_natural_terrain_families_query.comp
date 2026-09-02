@@ -1,0 +1,55 @@
+#version 460
+#extension GL_EXT_shader_explicit_arithmetic_types_float64 : require
+#include "planetary_natural_terrain_families.glsl"
+
+// Proof-only wrapper reusing the isolated physical-height query executor ABI.
+layout(local_size_x=64,local_size_y=1,local_size_z=1)in;
+struct HeightQuery { vec4 anchorHigh;vec4 anchorLow;vec4 localDelta;dvec2 oracleUv;uvec4 identity;uvec4 metadata; };
+struct HeightResult {
+  vec4 reconstructedHigh;vec4 reconstructedLow;dvec2 faceUv;dvec2 oracleAndTerrainV5Height;
+  dvec2 localAndPhysicalHeight;dvec2 baseAndModifierHeight;dvec2 modifierHeights;dvec2 finalGradient;
+  vec4 physicalNormalAndWeight;dvec2 reconstructedXY;dvec2 reconstructedZAndLength;
+  uvec4 globalIdentity;uvec4 localIdentity;uvec4 source;
+};
+struct LocalRecord { uvec4 identity;uvec4 payload; };
+layout(std430,binding=0)readonly buffer Queries { HeightQuery queries[]; };
+layout(std430,binding=1)writeonly buffer Results { HeightResult results[]; };
+layout(std430,binding=2)readonly buffer UnusedOracle { uint unusedOracleWords[]; };
+layout(std430,binding=3)readonly buffer UnusedGlobal { uint unusedGlobalWords[]; };
+layout(std430,binding=4)readonly buffer UnusedLocalRecords { LocalRecord unusedLocalRecords[]; };
+layout(std430,binding=5)readonly buffer UnusedLocal { uint unusedLocalWords[]; };
+layout(push_constant)uniform HeightConstants { uvec4 dimensions;uvec4 storage;vec4 localRange; } constants;
+
+void main()
+{
+  uint index=gl_GlobalInvocationID.x;if(index>=constants.dimensions.x)return;
+  HeightQuery query=queries[index];dvec3 point=dvec3(query.anchorHigh.xyz)+dvec3(query.anchorLow.xyz)+dvec3(query.localDelta.xyz);
+  NaturalTerrainFamilyIdentityD identity=NaturalTerrainFamilyIdentityD(query.identity.xy,query.identity.zw,query.metadata.z);
+  HeightResult result;
+  result.reconstructedHigh=vec4(0);result.reconstructedLow=vec4(0);result.physicalNormalAndWeight=vec4(0);
+  result.reconstructedXY=dvec2(0);result.reconstructedZAndLength=dvec2(0);result.globalIdentity=uvec4(0);
+  result.localIdentity=uvec4(0);result.source=uvec4(1u,query.metadata.z,NOVACORE_NATURAL_FAMILY_COMPOSITION_VERSION,query.metadata.y);
+  if(query.metadata.y==0u)
+  {
+    NaturalTerrainCompositionSampleD evaluated=EvaluateNaturalTerrainCompositionD(point,identity);
+    result.faceUv=dvec2(evaluated.total.height,evaluated.macro.height);
+    result.oracleAndTerrainV5Height=evaluated.total.bodyGradient.xy;
+    result.localAndPhysicalHeight=dvec2(evaluated.total.bodyGradient.z,evaluated.meso.height);
+    result.baseAndModifierHeight=dvec2(evaluated.nearField.height,evaluated.secondWeight);
+    result.modifierHeights=evaluated.secondWeightGradient.xy;
+    result.finalGradient=dvec2(evaluated.secondWeightGradient.z,0.0);
+    result.globalIdentity=uvec4(evaluated.firstFamily,evaluated.secondFamily,0u,0u);
+  }
+  else
+  {
+    NaturalTerrainFamilySampleD evaluated=EvaluateNaturalTerrainFamilyD(point,query.metadata.x,identity);
+    result.faceUv=dvec2(evaluated.total.height,evaluated.macro.height);
+    result.oracleAndTerrainV5Height=evaluated.total.bodyGradient.xy;
+    result.localAndPhysicalHeight=dvec2(evaluated.total.bodyGradient.z,evaluated.meso.height);
+    result.baseAndModifierHeight=dvec2(evaluated.nearField.height,evaluated.orientation.x);
+    result.modifierHeights=evaluated.orientation.yz;
+    result.finalGradient=dvec2(0.0,0.0);
+    result.globalIdentity=uvec4(evaluated.family,query.metadata.x,0u,0u);
+  }
+  results[index]=result;
+}

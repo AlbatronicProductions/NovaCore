@@ -3,6 +3,7 @@
 #extension GL_ARB_gpu_shader_fp64 : require
 #include "production_cube_surface.glsl"
 #include "physical_surface.glsl"
+#include "planetary_natural_terrain_surface.glsl"
 
 struct EncodedPosition { vec4 high; vec4 low; };
 struct GpuCameraData { EncodedPosition position; mat4 viewProjection; };
@@ -11,6 +12,7 @@ layout(std430,set=0,binding=0) readonly buffer Frame { GpuCameraData camera; } f
 layout(std430,set=0,binding=2) readonly buffer Input { vec4 cameraHighRadiusHigh; vec4 cameraLowRadiusLow; vec4 thresholds; uvec4 controls; vec4 viewForwardHalfAngle; vec4 textureDemand; } inputData;
 layout(std430,set=0,binding=6) readonly buffer Presentations { Presentation values[]; } presentations;
 layout(std430,set=0,binding=32) readonly buffer AnchoredFrame { uvec4 control; uvec4 entries[]; } anchoredFrame;
+layout(std430,set=0,binding=35) readonly buffer NaturalGlobalPrepared { uvec4 naturalControl; dvec4 naturalGlobalValues[]; } naturalGlobal;
 
 // The reusable base templates are outward in canonical model space.  Vulkan's
 // tessellator emits the barycentric subdivision with the opposite screen-space
@@ -58,15 +60,26 @@ void main()
   double radius=double(inputData.cameraHighRadiusHigh.w)+double(inputData.cameraLowRadiusLow.w);
   double geographic=double(inGeographicHeight[0]*barycentric.x+inGeographicHeight[1]*barycentric.y+inGeographicHeight[2]*barycentric.z);
   float baseHeight=inTerrainHeight[0]*barycentric.x+inTerrainHeight[1]*barycentric.y+inTerrainHeight[2]*barycentric.z;
-  NearPhysicalEvaluationD nearValue=EvaluateNearPhysicalD(direction,EvaluateBiomeBlendD(direction,geographic));
-  float height=baseHeight+float(nearValue.height);
+  bool natural=naturalGlobal.naturalControl.x==NOVACORE_PHYSICAL_GENERATION_M12D;
+  NearPhysicalEvaluationD nearValue;
+  dvec3 naturalNearGradient=dvec3(0.0);
+  if(natural)
+  {
+    NaturalTerrainFieldSampleD candidateNear=EvaluateNaturalCandidateNearD(direction);
+    nearValue=NearPhysicalEvaluationD(candidateNear.height,0.0,0.0);
+    naturalNearGradient=candidateNear.bodyGradient;
+  }
+  else nearValue=EvaluateNearPhysicalD(direction,EvaluateBiomeBlendD(direction,geographic));
+  float height=float(max(0.0,double(baseHeight)+nearValue.height));
   dvec3 body=direction*(radius+double(height));
   vec3 relativeBody=BillboardRelative(body);Presentation p=presentations.values[0];
   vec3 relative=RotateQuaternion(relativeBody,p.bodyOrientation);
   color=inColor[0];vec3 radial=vec3(direction),baseNormal=normalize(inNormal[0]*barycentric.x+inNormal[1]*barycentric.y+inNormal[2]*barycentric.z);
   dvec3 eastD=PhysicalEastD(direction),northD=normalize(cross(direction,eastD));double radialComponent=max(double(dot(baseNormal,radial)),1e-9);
-  double eastSlope=-double(dot(baseNormal,vec3(eastD)))/radialComponent+nearValue.eastGradient;
-  double northSlope=-double(dot(baseNormal,vec3(northD)))/radialComponent+nearValue.northGradient;
+  double eastSlope=-double(dot(baseNormal,vec3(eastD)))/radialComponent+
+    (natural?dot(naturalNearGradient,eastD):nearValue.eastGradient);
+  double northSlope=-double(dot(baseNormal,vec3(northD)))/radialComponent+
+    (natural?dot(naturalNearGradient,northD):nearValue.northGradient);
   normal=normalize(radial-vec3(eastD)*float(eastSlope)-vec3(northD)*float(northSlope));lightDirection=inLightDirection[0];
   material=inMaterial[0];response=inResponse[0];viewDirection=-relativeBody;bodyDirection=vec3(direction);
   terrainHeight=height;bodyCameraHigh=inBodyCameraHigh[0];bodyCameraLow=inBodyCameraLow[0];

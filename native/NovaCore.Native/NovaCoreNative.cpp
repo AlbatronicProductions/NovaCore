@@ -57,6 +57,7 @@ constexpr uint32_t AnchoredSurfaceBaseGridResolution=4,AnchoredSurfaceBaseVertic
                    AnchoredSurfaceMaximumCacheSlots=16384,AnchoredSurfaceCoverageCapacity=16384,
                    AnchoredSurfacePresentationVectorCount=9,AnchoredSurfacePatchVectorCount=5,
                    AnchoredSurfacePatchVectorOffset=AnchoredSurfaceCoverageCapacity+AnchoredSurfacePresentationVectorCount,
+                   NaturalGlobalPatchCount=126,NaturalGlobalVerticesPerPatch=289,NaturalAnchoredVerticesPerPatch=25,
                    AnchoredSurfaceFrameResourceCount=3;
 constexpr uint32_t AnchoredSurfaceReady=1u<<0,AnchoredSurfaceAuthoritative=1u<<1,
                    AnchoredSurfaceGeometryComplete=1u<<2,AnchoredSurfacePhysicalComplete=1u<<3,
@@ -247,7 +248,7 @@ struct App {
   std::array<nc::localterrain::SectorId,LocalPayloadSlots>localVisibleTarget{};uint32_t localVisibleTargetCount{},localPendingUploads{},localAnchoredGeneration{UINT32_MAX};bool localImagesInitialized{};uint64_t localDemandEpoch{1},localRequests{},localHits{},localMisses{},localEvictions{},localCanceled{},localUploads{},localPromotions{},localUploadBytes{};
   uint64_t localLastPupilBits[3]{};bool localHasLastPupil{};double localTranscodeMilliseconds{},localUploadLatencyMilliseconds{};
   uint64_t surfaceContextBodyId{},surfaceTransitionEpoch{},surfaceContextInvalidations{},productionDemandHits{},productionDemandMisses{};
-  uint32_t surfaceContextTerrainVersion{},surfaceContextMode{},surfaceContextRegime{},surfaceContextRadiusHighBits{},surfaceContextRadiusLowBits{};
+  uint32_t surfaceContextTerrainVersion{},surfaceContextPhysicalGeneration{},surfaceContextMode{},surfaceContextRegime{},surfaceContextRadiusHighBits{},surfaceContextRadiusLowBits{};
   bool surfaceContextValid{},productionSurfaceLogged{},productionRootsReadyLogged{},productionGeometryTraceLogged{};uint32_t earthTransitionTraceRemaining{},earthSubmissionTraceRemaining{};uint64_t recordSerial{},submitSerial{},presentSerial{};
   VkPipelineLayout pipelineLayout{};
   VkPipeline pipeline{};
@@ -259,6 +260,7 @@ struct App {
   VkPipeline productionPlanetaryPipeline{};
   VkPipeline productionPlanetaryFillPipeline{};
   VkPipeline anchoredTerrainPipeline{};
+  VkPipeline naturalGlobalPreparePipeline{},naturalAnchoredPreparePipeline{};
   VkPipeline planetaryComputePipeline{};
   VkPipeline planetaryTerrainPipeline{};
   VkPipeline productionPlanetaryTerrainPipeline{};
@@ -306,6 +308,13 @@ struct App {
   uint32_t anchoredSurfaceActivePatchCount{},anchoredSurfaceActiveGeneration{},anchoredSurfacePublicationLogGeneration{};
   uint64_t anchoredSurfaceUploadBytes{},anchoredSurfaceUploads{},anchoredSurfaceCapacityRejects{};
   bool anchoredSurfaceResourcesReady{},anchoredSurfaceActive{},anchoredSurfacePublicationRequested{},anchoredGroundTruthEnabled{};
+  VkBuffer naturalGlobalPreparedBuffer{},naturalAnchoredPreparedBuffer{};
+  VkDeviceMemory naturalGlobalPreparedMemory{},naturalAnchoredPreparedMemory{};
+  void *naturalGlobalPreparedMapped{},*naturalAnchoredPreparedMapped{};
+  bool naturalGlobalPreparationPending{},naturalGlobalPrepared{},naturalAnchoredPreparationPending{};
+  uint32_t naturalAnchoredPreparationGeneration{},naturalAnchoredSubmittedGeneration{},naturalAnchoredPreparedGeneration{};
+  uint32_t naturalAnchoredPreparationPatchCount{};
+  uint64_t naturalGlobalPreparationDispatches{},naturalAnchoredPreparationDispatches{};
   VkBuffer gpuInputBuffer{}, gpuWorkBuffer{}, gpuNodeBuffer{}, gpuControlBuffer{};
   VkDeviceMemory gpuInputMemory{}, gpuWorkMemory{}, gpuNodeMemory{}, gpuControlMemory{};
   void *gpuInputMapped{}, *gpuWorkMapped{}, *gpuNodeMapped{}, *gpuControlMapped{};
@@ -669,7 +678,9 @@ void Validate(App &a) {
     const float q=body.ringOrientationX*body.ringOrientationX+body.ringOrientationY*body.ringOrientationY+body.ringOrientationZ*body.ringOrientationZ+body.ringOrientationW*body.ringOrientationW;
     return std::abs(q-1)<1e-4f;
   };
-  if(s->planetaryGpuAlignmentPadding||(s->planetarySurfaceMode!=NC_PLANETARY_SURFACE_BOUNDED&&s->planetarySurfaceMode!=NC_PLANETARY_SURFACE_PRODUCTION_CUBE)||s->planetaryPadding[0]||s->planetaryPadding[1])throw std::runtime_error("invalid planetary surface mode or frame padding");
+  if(s->planetaryGpuAlignmentPadding||(s->planetarySurfaceMode!=NC_PLANETARY_SURFACE_BOUNDED&&s->planetarySurfaceMode!=NC_PLANETARY_SURFACE_PRODUCTION_CUBE)||
+     (s->physicalSurfaceGeneration!=3u&&s->physicalSurfaceGeneration!=4u)||s->planetaryPadding)
+    throw std::runtime_error("invalid planetary surface generation, mode, or frame padding");
   if(s->planetaryMode>NC_PLANETARY_CPU_GPU_VALIDATION)throw std::runtime_error("invalid planetary mode");
   const auto &presentation=s->planetaryPresentation;const bool hasPresentation=presentation.enabled!=0;
   const auto bodyCenterMatches=[&presentation](double cameraX,double cameraY,double cameraZ){const double vx=-cameraX,vy=-cameraY,vz=-cameraZ,qx=presentation.bodyOrientationX,qy=presentation.bodyOrientationY,qz=presentation.bodyOrientationZ,qw=presentation.bodyOrientationW;const double cx=qy*vz-qz*vy,cy=qz*vx-qx*vz,cz=qx*vy-qy*vx;const double ux=cx+qw*vx,uy=cy+qw*vy,uz=cz+qw*vz;const double rx=vx+2*(qy*uz-qz*uy),ry=vy+2*(qz*ux-qx*uz),rz=vz+2*(qx*uy-qy*ux);const double scale=std::max({1.0,std::abs(rx),std::abs(ry),std::abs(rz)}),tolerance=std::max(32.0,scale*1e-6);return std::abs((double(presentation.centerX)+presentation.centerLowX)-rx)<=tolerance&&std::abs((double(presentation.centerY)+presentation.centerLowY)-ry)<=tolerance&&std::abs((double(presentation.centerZ)+presentation.centerLowZ)-rz)<=tolerance;};
@@ -863,6 +874,8 @@ void DestroySwap(App &a) {
     vkDestroyPipeline(a.device,a.planetaryTerrainPipeline,nullptr);
   if (a.productionPlanetaryTerrainPipeline)
     vkDestroyPipeline(a.device,a.productionPlanetaryTerrainPipeline,nullptr);
+  if(a.naturalGlobalPreparePipeline)vkDestroyPipeline(a.device,a.naturalGlobalPreparePipeline,nullptr);
+  if(a.naturalAnchoredPreparePipeline)vkDestroyPipeline(a.device,a.naturalAnchoredPreparePipeline,nullptr);
   if (a.distantPlanetaryPipeline)
     vkDestroyPipeline(a.device,a.distantPlanetaryPipeline,nullptr);
   if (a.distantPlanetaryHandoffPipeline)
@@ -896,6 +909,9 @@ void DestroySwap(App &a) {
   a.anchoredTerrainPipeline = {};
   a.planetaryComputePipeline = {};
   a.planetaryTerrainPipeline = {};
+  a.productionPlanetaryTerrainPipeline={};
+  a.naturalGlobalPreparePipeline={};
+  a.naturalAnchoredPreparePipeline={};
   a.distantPlanetaryPipeline = {};
   a.distantPlanetaryHandoffPipeline = {};
   a.planetaryRingFarPipeline={};
@@ -1226,7 +1242,7 @@ void Swap(App &a) {
   rp.attachmentCount=3;rp.pAttachments=attachments;rp.subpassCount=2;rp.pSubpasses=subpasses;rp.dependencyCount=3;rp.pDependencies=dependencies;
   a.Check(vkCreateRenderPass(a.device, &rp, nullptr, &a.renderPass),
           "render pass failed");
-  VkDescriptorSetLayoutBinding binds[22]{};
+  VkDescriptorSetLayoutBinding binds[25]{};
   const VkShaderStageFlags terrainStages=VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT|VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT|VK_SHADER_STAGE_FRAGMENT_BIT;
   for(uint32_t binding=0;binding<7;binding++){binds[binding].binding=binding;binds[binding].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;binds[binding].descriptorCount=1;binds[binding].stageFlags=binding==0?terrainStages:(binding==1?VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_COMPUTE_BIT:(binding==2?terrainStages|VK_SHADER_STAGE_COMPUTE_BIT:(binding==6?terrainStages|VK_SHADER_STAGE_COMPUTE_BIT:VK_SHADER_STAGE_COMPUTE_BIT)));}
   binds[7].binding=7;binds[7].descriptorType=VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT;binds[7].descriptorCount=1;binds[7].stageFlags=VK_SHADER_STAGE_FRAGMENT_BIT;
@@ -1235,12 +1251,15 @@ void Swap(App &a) {
   binds[14].binding=27;binds[14].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;binds[14].descriptorCount=1;binds[14].stageFlags=terrainStages;
   for(uint32_t index=0;index<3;index++){auto &binding=binds[15+index];binding.binding=28+index;binding.descriptorType=VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;binding.descriptorCount=1;binding.stageFlags=terrainStages;}
   binds[18].binding=31;binds[18].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;binds[18].descriptorCount=1;binds[18].stageFlags=terrainStages;
-  binds[19].binding=32;binds[19].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;binds[19].descriptorCount=1;binds[19].stageFlags=terrainStages;
+  binds[19].binding=32;binds[19].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;binds[19].descriptorCount=1;binds[19].stageFlags=terrainStages|VK_SHADER_STAGE_COMPUTE_BIT;
   binds[20].binding=33;binds[20].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;binds[20].descriptorCount=1;binds[20].stageFlags=VK_SHADER_STAGE_VERTEX_BIT;
   binds[21].binding=34;binds[21].descriptorType=VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;binds[21].descriptorCount=1;binds[21].stageFlags=terrainStages;
+  binds[22].binding=35;binds[22].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;binds[22].descriptorCount=1;binds[22].stageFlags=VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT|VK_SHADER_STAGE_COMPUTE_BIT;
+  binds[23].binding=36;binds[23].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;binds[23].descriptorCount=1;binds[23].stageFlags=VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_COMPUTE_BIT;
+  binds[24].binding=37;binds[24].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;binds[24].descriptorCount=1;binds[24].stageFlags=VK_SHADER_STAGE_COMPUTE_BIT;
   VkDescriptorSetLayoutCreateInfo dl{
       VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO};
-  dl.bindingCount = 22;
+  dl.bindingCount = 25;
   dl.pBindings = binds;
   a.Check(
       vkCreateDescriptorSetLayout(a.device, &dl, nullptr, &a.descriptorLayout),
@@ -1366,6 +1385,8 @@ void Swap(App &a) {
   VkShaderModule planetaryCompute=Shader(a,"shaders/planetary_select.comp.spv");VkPipelineShaderStageCreateInfo planetaryComputeStage{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_COMPUTE_BIT,planetaryCompute,"main"};VkComputePipelineCreateInfo planetaryComputeCreate{VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO};planetaryComputeCreate.stage=planetaryComputeStage;planetaryComputeCreate.layout=a.pipelineLayout;VkResult planetaryComputeResult=vkCreateComputePipelines(a.device,{},1,&planetaryComputeCreate,nullptr,&a.planetaryComputePipeline);vkDestroyShaderModule(a.device,planetaryCompute,nullptr);a.Check(planetaryComputeResult,"planetary compute pipeline failed");
   VkShaderModule terrainCompute=Shader(a,"shaders/planetary_terrain_generate.comp.spv");VkPipelineShaderStageCreateInfo terrainComputeStage{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_COMPUTE_BIT,terrainCompute,"main"};VkComputePipelineCreateInfo terrainComputeCreate{VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO};terrainComputeCreate.stage=terrainComputeStage;terrainComputeCreate.layout=a.pipelineLayout;VkResult terrainComputeResult=vkCreateComputePipelines(a.device,{},1,&terrainComputeCreate,nullptr,&a.planetaryTerrainPipeline);vkDestroyShaderModule(a.device,terrainCompute,nullptr);a.Check(terrainComputeResult,"planetary terrain compute pipeline failed");
   VkShaderModule productionTerrain=Shader(a,"shaders/planetary_production_terrain.comp.spv");VkPipelineShaderStageCreateInfo productionTerrainStage{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_COMPUTE_BIT,productionTerrain,"main"};VkComputePipelineCreateInfo productionTerrainCreate{VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO};productionTerrainCreate.stage=productionTerrainStage;productionTerrainCreate.layout=a.pipelineLayout;VkResult productionTerrainResult=vkCreateComputePipelines(a.device,{},1,&productionTerrainCreate,nullptr,&a.productionPlanetaryTerrainPipeline);vkDestroyShaderModule(a.device,productionTerrain,nullptr);a.Check(productionTerrainResult,"production cube-sphere terrain pipeline failed");
+  {VkShaderModule globalPrepare=Shader(a,"shaders/planetary_natural_terrain_global_prepare.comp.spv");VkPipelineShaderStageCreateInfo stage{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_COMPUTE_BIT,globalPrepare,"main"};VkComputePipelineCreateInfo create{VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO};create.stage=stage;create.layout=a.pipelineLayout;VkResult result=vkCreateComputePipelines(a.device,{},1,&create,nullptr,&a.naturalGlobalPreparePipeline);vkDestroyShaderModule(a.device,globalPrepare,nullptr);a.Check(result,"natural terrain global preparation pipeline failed");}
+  {VkShaderModule anchoredPrepare=Shader(a,"shaders/planetary_natural_terrain_anchored_prepare.comp.spv");VkPipelineShaderStageCreateInfo stage{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_COMPUTE_BIT,anchoredPrepare,"main"};VkComputePipelineCreateInfo create{VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO};create.stage=stage;create.layout=a.pipelineLayout;VkResult result=vkCreateComputePipelines(a.device,{},1,&create,nullptr,&a.naturalAnchoredPreparePipeline);vkDestroyShaderModule(a.device,anchoredPrepare,nullptr);a.Check(result,"natural terrain anchored preparation pipeline failed");}
   VkShaderModule orbitVs{}, orbitFs{};
   try { orbitVs = Shader(a, "shaders/orbit.vert.spv"); orbitFs = Shader(a, "shaders/orbit.frag.spv"); }
   catch (...) { if (orbitVs) vkDestroyShaderModule(a.device, orbitVs, nullptr); throw; }
@@ -1464,9 +1485,14 @@ void DestroyDynamicAnchoredSurface(App &a){
   }
   DestroyHostBuffer(a,a.anchoredSurfaceVertexBuffer,a.anchoredSurfaceVertexMemory,a.anchoredSurfaceVertexMapped);
   DestroyHostBuffer(a,a.anchoredSurfaceIndexBuffer,a.anchoredSurfaceIndexMemory,a.anchoredSurfaceIndexMapped);
+  DestroyHostBuffer(a,a.naturalGlobalPreparedBuffer,a.naturalGlobalPreparedMemory,a.naturalGlobalPreparedMapped);
+  DestroyHostBuffer(a,a.naturalAnchoredPreparedBuffer,a.naturalAnchoredPreparedMemory,a.naturalAnchoredPreparedMapped);
   a.anchoredSurfaceSlotGenerations.clear();a.anchoredSurfaceActivePatches.clear();a.anchoredSurfaceActivePatchCount=0;a.anchoredSurfaceActiveGeneration=0;a.anchoredSurfacePublicationLogGeneration=0;
   a.anchoredSurfaceResourceGenerations.fill(0u);a.anchoredSurfaceResourceIndex=0;
   a.anchoredSurfaceResourcesReady=false;a.anchoredSurfaceActive=false;a.anchoredSurfacePublicationRequested=false;
+  a.naturalGlobalPreparationPending=false;a.naturalGlobalPrepared=false;a.naturalAnchoredPreparationPending=false;
+  a.naturalAnchoredPreparationGeneration=0;a.naturalAnchoredSubmittedGeneration=0;a.naturalAnchoredPreparedGeneration=0;
+  a.naturalAnchoredPreparationPatchCount=0;
 }
 uint32_t AnchoredRemapIndex(uint32_t x,uint32_t y,uint32_t stitchMask){
   if(x==0u&&(stitchMask&1u)&&((y&1u)!=0u))y--;
@@ -1516,6 +1542,13 @@ void CreateDynamicAnchoredSurface(App &a){
     indices[write++]=q0;indices[write++]=q1;indices[write++]=q2;indices[write++]=q1;indices[write++]=q3;indices[write++]=q2;
   }
   ValidateAnchoredStitchTemplates(indices);
+  // std430 aligns the dvec4 array following the uvec4 header to 32 bytes.
+  CreateHostBuffer(a,32u+VkDeviceSize(NaturalGlobalPatchCount)*NaturalGlobalVerticesPerPatch*sizeof(double)*4u,
+    VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,a.naturalGlobalPreparedBuffer,a.naturalGlobalPreparedMemory,
+    a.naturalGlobalPreparedMapped,"natural terrain global prepared buffer failed");
+  CreateHostBuffer(a,VkDeviceSize(slots)*NaturalAnchoredVerticesPerPatch*sizeof(double)*4u,
+    VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,a.naturalAnchoredPreparedBuffer,a.naturalAnchoredPreparedMemory,
+    a.naturalAnchoredPreparedMapped,"natural terrain anchored prepared buffer failed");
   for(uint32_t index=0;index<AnchoredSurfaceFrameResourceCount;index++){
     CreateHostBuffer(a,sizeof(uint32_t)*4u*(1u+AnchoredSurfacePatchVectorOffset+AnchoredSurfaceMaximumPatches*AnchoredSurfacePatchVectorCount),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,
       a.anchoredSurfaceCoverageBuffers[index],a.anchoredSurfaceCoverageMemories[index],a.anchoredSurfaceCoverageMapped[index],"dynamic anchored coverage buffer failed");
@@ -1552,6 +1585,13 @@ void BindDynamicAnchoredResource(App&a,uint32_t resourceIndex){
   write.descriptorCount=1;write.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;write.pBufferInfo=&info;
   vkUpdateDescriptorSets(a.device,1,&write,0,nullptr);
 }
+void BindNaturalAnchoredPreparationResource(App&a,uint32_t resourceIndex){
+  VkDescriptorBufferInfo info{a.anchoredSurfaceCoverageBuffers[resourceIndex],0,
+    sizeof(uint32_t)*4u*(1u+AnchoredSurfacePatchVectorOffset+AnchoredSurfaceMaximumPatches*AnchoredSurfacePatchVectorCount)};
+  VkWriteDescriptorSet write{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};write.dstSet=a.descriptor;write.dstBinding=37;
+  write.descriptorCount=1;write.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;write.pBufferInfo=&info;
+  vkUpdateDescriptorSets(a.device,1,&write,0,nullptr);
+}
 void UpdateDynamicAnchoredSurface(App &a){
   auto *coverage=static_cast<uint32_t*>(a.anchoredSurfaceCoverageMapped[a.anchoredSurfaceResourceIndex]);
   const auto count=a.submission->anchoredSurfacePatchCount;
@@ -1573,7 +1613,7 @@ void UpdateDynamicAnchoredSurface(App &a){
   for(uint32_t index=0;index<count;index++){
     const auto &patch=a.submission->anchoredSurfacePatches[index];const uint64_t body=uint64_t(patch.bodyIdLow)|(uint64_t(patch.bodyIdHigh)<<32u);
     const uint32_t cells=patch.level<31u?1u<<patch.level:0u;
-    if(body!=6u||patch.terrainVersion!=5u||!patch.physicalSurfaceGeneration||patch.face>=6u||patch.level>24u||!cells||patch.x>=cells||patch.y>=cells||
+    if(body!=6u||patch.terrainVersion!=5u||patch.physicalSurfaceGeneration!=a.submission->physicalSurfaceGeneration||patch.face>=6u||patch.level>24u||!cells||patch.x>=cells||patch.y>=cells||
        patch.cacheSlot>=a.anchoredSurfaceSlotGenerations.size()||patch.stitchMask>15u){complete=false;continue;}
     const bool cpuComplete=(patch.flags&(AnchoredSurfaceReady|AnchoredSurfaceGeometryComplete|AnchoredSurfacePhysicalComplete|AnchoredSurfaceMaterialComplete))==(AnchoredSurfaceReady|AnchoredSurfaceGeometryComplete|AnchoredSurfacePhysicalComplete|AnchoredSurfaceMaterialComplete);
     if(!cpuComplete||!AnchoredPatchLocalPayloadsReady(a,patch)){complete=false;continue;}
@@ -1582,6 +1622,30 @@ void UpdateDynamicAnchoredSurface(App &a){
     maximumLevel=std::max(maximumLevel,patch.level);
   }
   if(!complete)return;
+  if(a.submission->physicalSurfaceGeneration==4u&&newPublication&&
+     a.naturalAnchoredPreparedGeneration!=a.submission->anchoredSurfaceActiveGeneration){
+    // Preparation was submitted in the previous frame. The frame fence was
+    // completed before this update, so this is the first point at which the
+    // GPU-complete generation may be acknowledged to managed publication.
+    if(a.naturalAnchoredSubmittedGeneration==a.submission->anchoredSurfaceActiveGeneration){
+      a.naturalAnchoredPreparedGeneration=a.naturalAnchoredSubmittedGeneration;
+      a.naturalAnchoredSubmittedGeneration=0u;
+      a.submission->anchoredSurfaceGpuReadyGeneration=a.naturalAnchoredPreparedGeneration;
+      return;
+    }
+    if(!a.naturalAnchoredPreparationPending||a.naturalAnchoredPreparationGeneration!=a.submission->anchoredSurfaceActiveGeneration){
+      const uint32_t preparationResource=(a.anchoredSurfaceResourceIndex+1u)%AnchoredSurfaceFrameResourceCount;
+      auto *preparation=static_cast<uint32_t*>(a.anchoredSurfaceCoverageMapped[preparationResource]);
+      std::memset(preparation,0,sizeof(uint32_t)*4u*(1u+AnchoredSurfaceCoverageCapacity));
+      preparation[0]=count;preparation[2]=a.submission->anchoredSurfaceActiveGeneration;
+      std::memcpy(preparation+4u*(1u+AnchoredSurfacePatchVectorOffset),a.submission->anchoredSurfacePatches,size_t(count)*sizeof(NcAnchoredSurfacePatch));
+      BindNaturalAnchoredPreparationResource(a,preparationResource);
+      a.naturalAnchoredPreparationGeneration=a.submission->anchoredSurfaceActiveGeneration;
+      a.naturalAnchoredPreparationPatchCount=count;
+      a.naturalAnchoredPreparationPending=true;
+    }
+    return;
+  }
   a.submission->anchoredSurfaceGpuReadyGeneration=a.submission->anchoredSurfaceActiveGeneration;
   if(!authoritative||!managedAcknowledged)return;
   // The frame fence was completed before this update. Build the replacement
@@ -1723,7 +1787,7 @@ void CreateSubmission(App &a) {
   CreateHostBuffer(a,sizeof(uint32_t)*(16+LocalLookupEntryWords*LocalLookupCapacity),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,a.localLookupBuffer,a.localLookupMemory,a.localLookupMapped,"local terrain lookup buffer failed");
   RebuildLocalLookup(a);
   CreateTerrainResidency(a);
-  VkDescriptorPoolSize ps[3]{{VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,15},{VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT,1},{VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,7}};
+  VkDescriptorPoolSize ps[3]{{VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,18},{VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT,1},{VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,7}};
   VkDescriptorPoolCreateInfo pi{VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO};
   pi.maxSets = 1;
   pi.poolSizeCount = 3;
@@ -1744,6 +1808,9 @@ void CreateSubmission(App &a) {
   VkDescriptorBufferInfo localLookupInfo{a.localLookupBuffer,0,sizeof(uint32_t)*(16+LocalLookupEntryWords*LocalLookupCapacity)};VkWriteDescriptorSet localLookupWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};localLookupWrite.dstSet=a.descriptor;localLookupWrite.dstBinding=31;localLookupWrite.descriptorCount=1;localLookupWrite.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;localLookupWrite.pBufferInfo=&localLookupInfo;vkUpdateDescriptorSets(a.device,1,&localLookupWrite,0,nullptr);
   VkDescriptorBufferInfo anchoredCoverageInfo{a.anchoredSurfaceCoverageBuffers[a.anchoredSurfaceResourceIndex],0,sizeof(uint32_t)*4u*(1u+AnchoredSurfacePatchVectorOffset+AnchoredSurfaceMaximumPatches*AnchoredSurfacePatchVectorCount)};VkWriteDescriptorSet anchoredCoverageWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};anchoredCoverageWrite.dstSet=a.descriptor;anchoredCoverageWrite.dstBinding=32;anchoredCoverageWrite.descriptorCount=1;anchoredCoverageWrite.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;anchoredCoverageWrite.pBufferInfo=&anchoredCoverageInfo;vkUpdateDescriptorSets(a.device,1,&anchoredCoverageWrite,0,nullptr);
   VkDescriptorBufferInfo physicalOracleInfo{a.physicalOracleBuffer,0,PhysicalOracleBytes};VkWriteDescriptorSet physicalOracleWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};physicalOracleWrite.dstSet=a.descriptor;physicalOracleWrite.dstBinding=33;physicalOracleWrite.descriptorCount=1;physicalOracleWrite.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;physicalOracleWrite.pBufferInfo=&physicalOracleInfo;vkUpdateDescriptorSets(a.device,1,&physicalOracleWrite,0,nullptr);
+  VkDescriptorBufferInfo naturalGlobalInfo{a.naturalGlobalPreparedBuffer,0,32u+VkDeviceSize(NaturalGlobalPatchCount)*NaturalGlobalVerticesPerPatch*sizeof(double)*4u};VkWriteDescriptorSet naturalGlobalWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};naturalGlobalWrite.dstSet=a.descriptor;naturalGlobalWrite.dstBinding=35;naturalGlobalWrite.descriptorCount=1;naturalGlobalWrite.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;naturalGlobalWrite.pBufferInfo=&naturalGlobalInfo;vkUpdateDescriptorSets(a.device,1,&naturalGlobalWrite,0,nullptr);
+  VkDescriptorBufferInfo naturalAnchoredInfo{a.naturalAnchoredPreparedBuffer,0,VkDeviceSize(std::max(1u,a.submission->anchoredSurfaceCacheSlotCount))*NaturalAnchoredVerticesPerPatch*sizeof(double)*4u};VkWriteDescriptorSet naturalAnchoredWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};naturalAnchoredWrite.dstSet=a.descriptor;naturalAnchoredWrite.dstBinding=36;naturalAnchoredWrite.descriptorCount=1;naturalAnchoredWrite.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;naturalAnchoredWrite.pBufferInfo=&naturalAnchoredInfo;vkUpdateDescriptorSets(a.device,1,&naturalAnchoredWrite,0,nullptr);
+  VkDescriptorBufferInfo naturalAnchoredInputInfo{a.anchoredSurfaceCoverageBuffers[a.anchoredSurfaceResourceIndex],0,sizeof(uint32_t)*4u*(1u+AnchoredSurfacePatchVectorOffset+AnchoredSurfaceMaximumPatches*AnchoredSurfacePatchVectorCount)};VkWriteDescriptorSet naturalAnchoredInputWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};naturalAnchoredInputWrite.dstSet=a.descriptor;naturalAnchoredInputWrite.dstBinding=37;naturalAnchoredInputWrite.descriptorCount=1;naturalAnchoredInputWrite.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;naturalAnchoredInputWrite.pBufferInfo=&naturalAnchoredInputInfo;vkUpdateDescriptorSets(a.device,1,&naturalAnchoredInputWrite,0,nullptr);
   VkDescriptorImageInfo sceneInput{};sceneInput.imageView=a.sceneColorView;sceneInput.imageLayout=VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;VkWriteDescriptorSet sceneWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};sceneWrite.dstSet=a.descriptor;sceneWrite.dstBinding=7;sceneWrite.descriptorCount=1;sceneWrite.descriptorType=VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT;sceneWrite.pImageInfo=&sceneInput;vkUpdateDescriptorSets(a.device,1,&sceneWrite,0,nullptr);
   if(a.productionPack){VkDescriptorImageInfo productionInfos[3]{};VkWriteDescriptorSet productionWrites[3]{};for(uint32_t index=0;index<3;index++){productionInfos[index]={a.productionSampler,a.productionImageViews[index],VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL};productionWrites[index].sType=VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;productionWrites[index].dstSet=a.descriptor;productionWrites[index].dstBinding=24+index;productionWrites[index].descriptorCount=1;productionWrites[index].descriptorType=VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;productionWrites[index].pImageInfo=&productionInfos[index];}vkUpdateDescriptorSets(a.device,3,productionWrites,0,nullptr);}
   {VkDescriptorImageInfo localInfos[4]{};VkWriteDescriptorSet localWrites[4]{};for(uint32_t index=0;index<4;index++){localInfos[index]={a.localSampler,a.localImageViews[index],VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL};localWrites[index].sType=VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;localWrites[index].dstSet=a.descriptor;localWrites[index].dstBinding=index<3?28+index:34;localWrites[index].descriptorCount=1;localWrites[index].descriptorType=VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;localWrites[index].pImageInfo=&localInfos[index];}vkUpdateDescriptorSets(a.device,4,localWrites,0,nullptr);}
@@ -1775,11 +1842,12 @@ void Upload(App &a) {
   uint32_t radiusHighBits{},radiusLowBits{};
   std::memcpy(&radiusHighBits,&gpuInput.radiusHigh,4);std::memcpy(&radiusLowBits,&gpuInput.radiusLow,4);
   const uint32_t contextMode=static_cast<uint32_t>(a.submission->planetarySurfaceMode),contextRegime=static_cast<uint32_t>(contextPresentation.regime);
-  const bool contextChanged=!a.surfaceContextValid||a.surfaceContextBodyId!=contextBody||a.surfaceContextTerrainVersion!=gpuInput.terrainVersion||a.surfaceContextMode!=contextMode||a.surfaceContextRegime!=contextRegime||a.surfaceContextRadiusHighBits!=radiusHighBits||a.surfaceContextRadiusLowBits!=radiusLowBits;
+  const bool contextChanged=!a.surfaceContextValid||a.surfaceContextBodyId!=contextBody||a.surfaceContextTerrainVersion!=gpuInput.terrainVersion||a.surfaceContextPhysicalGeneration!=a.submission->physicalSurfaceGeneration||a.surfaceContextMode!=contextMode||a.surfaceContextRegime!=contextRegime||a.surfaceContextRadiusHighBits!=radiusHighBits||a.surfaceContextRadiusLowBits!=radiusLowBits;
   if(contextChanged){
     if(productionSurface&&!ProductionHierarchyPayloadsReady(a))throw std::runtime_error("production context selected before the complete immutable L0-L2 hierarchy was resident");
-    a.surfaceContextValid=true;a.surfaceContextBodyId=contextBody;a.surfaceContextTerrainVersion=gpuInput.terrainVersion;a.surfaceContextMode=contextMode;a.surfaceContextRegime=contextRegime;a.surfaceContextRadiusHighBits=radiusHighBits;a.surfaceContextRadiusLowBits=radiusLowBits;a.surfaceTransitionEpoch++;a.surfaceContextInvalidations++;a.earthTransitionTraceRemaining=contextBody==nc::production::EarthBodyId?180u:0u;a.earthSubmissionTraceRemaining=a.earthTransitionTraceRemaining;a.productionGeometryTraceLogged=false;std::memset(a.gpuControlMapped,0,sizeof(GpuPlanetaryControl));if(productionSurface)SeedProductionTerrainCacheHighWater(a);a.hasGpuTelemetry=false;
-    char transition[320];std::snprintf(transition,sizeof transition,"Planetary context transition: epoch=%llu; body=%llu; surfaceMode=%u; terrainVersion=%u; regime=%u; productionEligible=%s; owner=%s",(unsigned long long)a.surfaceTransitionEpoch,(unsigned long long)contextBody,contextMode,gpuInput.terrainVersion,contextRegime,productionSurface?"true":"false",productionSurface?"terrain-v5":"bounded-sphere");a.Log(NC_LOG_ALWAYS,transition);
+    a.surfaceContextValid=true;a.surfaceContextBodyId=contextBody;a.surfaceContextTerrainVersion=gpuInput.terrainVersion;a.surfaceContextPhysicalGeneration=a.submission->physicalSurfaceGeneration;a.surfaceContextMode=contextMode;a.surfaceContextRegime=contextRegime;a.surfaceContextRadiusHighBits=radiusHighBits;a.surfaceContextRadiusLowBits=radiusLowBits;a.surfaceTransitionEpoch++;a.surfaceContextInvalidations++;a.earthTransitionTraceRemaining=contextBody==nc::production::EarthBodyId?180u:0u;a.earthSubmissionTraceRemaining=a.earthTransitionTraceRemaining;a.productionGeometryTraceLogged=false;std::memset(a.gpuControlMapped,0,sizeof(GpuPlanetaryControl));if(productionSurface)SeedProductionTerrainCacheHighWater(a);a.hasGpuTelemetry=false;
+    auto *naturalControl=static_cast<uint32_t*>(a.naturalGlobalPreparedMapped);if(a.submission->physicalSurfaceGeneration==4u){naturalControl[0]=0u;a.naturalGlobalPreparationPending=true;a.naturalGlobalPrepared=false;}else{naturalControl[0]=3u;a.naturalGlobalPreparationPending=false;a.naturalGlobalPrepared=false;a.naturalAnchoredPreparationPending=false;a.naturalAnchoredPreparationGeneration=0u;a.naturalAnchoredSubmittedGeneration=0u;a.naturalAnchoredPreparedGeneration=0u;}
+    char transition[352];std::snprintf(transition,sizeof transition,"Planetary context transition: epoch=%llu; body=%llu; surfaceMode=%u; terrainVersion=%u; physicalGeneration=%u; regime=%u; productionEligible=%s; owner=%s",(unsigned long long)a.surfaceTransitionEpoch,(unsigned long long)contextBody,contextMode,gpuInput.terrainVersion,a.submission->physicalSurfaceGeneration,contextRegime,productionSurface?"true":"false",productionSurface?"terrain-v5":"bounded-sphere");a.Log(NC_LOG_ALWAYS,transition);
     if(contextBody==6u){
       uint32_t rootMask=0u;auto *lookup=static_cast<uint32_t*>(a.productionLayerLookupMapped);for(uint32_t face=0;face<6&&lookup;face++)if(lookup[nc::production::Pack::Ordinal(face,0,0,0)]!=0u)rootMask|=1u<<face;
       const float lx=a.submission->solarLighting.sourceCenterX-contextPresentation.centerX,ly=a.submission->solarLighting.sourceCenterY-contextPresentation.centerY,lz=a.submission->solarLighting.sourceCenterZ-contextPresentation.centerZ;
@@ -1792,7 +1860,7 @@ void Upload(App &a) {
   if(a.anchoredSurfaceActive){
     if(a.anchoredSurfacePublicationLogGeneration!=a.anchoredSurfaceActiveGeneration){
       a.anchoredSurfacePublicationLogGeneration=a.anchoredSurfaceActiveGeneration;char message[384];
-      std::snprintf(message,sizeof message,"Dynamic hierarchy publication: generation=%u; patches=%u; coverageEntries=%u; indirectCommands=%u; complete=true; invalidDraws=0; zeroOwner=0; ownershipOverlap=0; globalFill=true",a.anchoredSurfaceActiveGeneration,a.anchoredSurfaceActivePatchCount,a.anchoredSurfaceActivePatchCount,a.anchoredSurfaceActivePatchCount);
+      std::snprintf(message,sizeof message,"Dynamic hierarchy publication: generation=%u; physicalGeneration=%u; patches=%u; coverageEntries=%u; indirectCommands=%u; naturalPrepared=%s; complete=true; invalidDraws=0; zeroOwner=0; ownershipOverlap=0; globalFill=true",a.anchoredSurfaceActiveGeneration,a.submission->physicalSurfaceGeneration,a.anchoredSurfaceActivePatchCount,a.anchoredSurfaceActivePatchCount,a.anchoredSurfaceActivePatchCount,a.submission->physicalSurfaceGeneration==4u&&a.naturalAnchoredPreparedGeneration==a.anchoredSurfaceActiveGeneration?"true":"false");
       a.Log(NC_LOG_ALWAYS,message);
     }
   }
@@ -1893,6 +1961,7 @@ void Record(App &a, uint32_t image) {
   vkCmdResetQueryPool(c,a.anchoredPipelineStatistics,0,1);
   const auto &presentation=a.submission->planetaryPresentation;const bool production=a.submission->planetarySurfaceMode==NC_PLANETARY_SURFACE_PRODUCTION_CUBE;const bool handoff=presentation.enabled!=0;const bool detailedPresentation=!handoff||presentation.regime!=NC_PLANETARY_DISTANT_ONLY;const bool distantPresentation=handoff&&!production&&presentation.regime!=NC_PLANETARY_DETAILED_ONLY&&presentation.distantAlpha>0;const bool diagnosticGlobal=(a.surfaceDiagnostic&SurfaceDiagnosticDisableGlobal)==0;const bool diagnosticAnchored=(a.surfaceDiagnostic&SurfaceDiagnosticDisableAnchored)==0;const bool regional=production||detailedPresentation;const bool gpuPlanetary=regional&&a.submission->planetaryMode!=NC_PLANETARY_CPU_REFERENCE;
   if(distantPresentation||detailedPresentation||gpuPlanetary){VkMemoryBarrier hostBarrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};hostBarrier.srcAccessMask=VK_ACCESS_HOST_WRITE_BIT;hostBarrier.dstAccessMask=VK_ACCESS_SHADER_READ_BIT|(a.anchoredSurfaceActive?VK_ACCESS_INDIRECT_COMMAND_READ_BIT:0);VkPipelineStageFlags readers=VK_PIPELINE_STAGE_VERTEX_SHADER_BIT|VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT|(gpuPlanetary?VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT:0)|(a.anchoredSurfaceActive?(VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT|VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT|VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT):0);vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_HOST_BIT,readers,0,1,&hostBarrier,0,nullptr,0,nullptr);}
+  if(a.naturalGlobalPreparationPending||a.naturalAnchoredPreparationPending){vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_COMPUTE,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);if(a.naturalGlobalPreparationPending){vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_COMPUTE,a.naturalGlobalPreparePipeline);vkCmdDispatch(c,(NaturalGlobalPatchCount*NaturalGlobalVerticesPerPatch+63u)/64u,1,1);a.naturalGlobalPreparationPending=false;a.naturalGlobalPrepared=true;a.naturalGlobalPreparationDispatches++;}if(a.naturalAnchoredPreparationPending){vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_COMPUTE,a.naturalAnchoredPreparePipeline);vkCmdDispatch(c,(a.naturalAnchoredPreparationPatchCount*NaturalAnchoredVerticesPerPatch+63u)/64u,1,1);a.naturalAnchoredPreparationPending=false;a.naturalAnchoredSubmittedGeneration=a.naturalAnchoredPreparationGeneration;a.naturalAnchoredPreparationDispatches++;}VkMemoryBarrier naturalBarrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};naturalBarrier.srcAccessMask=VK_ACCESS_SHADER_WRITE_BIT;naturalBarrier.dstAccessMask=VK_ACCESS_SHADER_READ_BIT;vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_VERTEX_SHADER_BIT|VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT,0,1,&naturalBarrier,0,nullptr,0,nullptr);}
   if(gpuPlanetary){vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_COMPUTE,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_COMPUTE,a.planetaryComputePipeline);vkCmdDispatch(c,1,1,1);VkMemoryBarrier selectionBarrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};selectionBarrier.srcAccessMask=VK_ACCESS_SHADER_WRITE_BIT;selectionBarrier.dstAccessMask=VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT|VK_ACCESS_INDIRECT_COMMAND_READ_BIT;vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT|VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT,0,1,&selectionBarrier,0,nullptr,0,nullptr);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_COMPUTE,production?a.productionPlanetaryTerrainPipeline:a.planetaryTerrainPipeline);vkCmdDispatchIndirect(c,a.gpuControlBuffer,offsetof(GpuPlanetaryControl,terrainDispatch));VkMemoryBarrier computeBarrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};computeBarrier.srcAccessMask=VK_ACCESS_SHADER_WRITE_BIT;computeBarrier.dstAccessMask=VK_ACCESS_INDIRECT_COMMAND_READ_BIT|VK_ACCESS_SHADER_READ_BIT;VkPipelineStageFlags consumers=VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT|VK_PIPELINE_STAGE_VERTEX_SHADER_BIT;if(a.submission->planetaryMode==NC_PLANETARY_CPU_GPU_VALIDATION){computeBarrier.dstAccessMask|=VK_ACCESS_HOST_READ_BIT;consumers|=VK_PIPELINE_STAGE_HOST_BIT;}vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,consumers,0,1,&computeBarrier,0,nullptr,0,nullptr);}
   vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,a.timestampQueries,1);
   vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,a.timestampQueries,2);
@@ -2299,7 +2368,9 @@ static NcResult RunRenderer(NcFrameSubmission *s, NcHostCallback cb, void *data,
     if(a.frameTimeCount){std::vector<double> sorted(a.frameTimesMs.begin(),a.frameTimesMs.begin()+a.frameTimeCount);std::sort(sorted.begin(),sorted.end());auto percentile=[&](double p){return sorted[std::min(sorted.size()-1,size_t(std::ceil(p*sorted.size()))-1)];};std::snprintf(text,sizeof text,"Frame pacing: p50=%.3f ms; p95=%.3f ms; p99=%.3f ms; max=%.3f ms; samples=%zu",percentile(.50),percentile(.95),percentile(.99),sorted.back(),sorted.size());a.Log(NC_LOG_ALWAYS,text);}
     if(a.cpuTimingSamples){const double n=double(a.cpuTimingSamples);std::snprintf(text,sizeof text,"CPU timings: update=%.3f ms; fence=%.3f; inspection=%.3f; hostCallback=%.3f; validationUpload=%.3f; record=%.3f; submit=%.3f; present=%.3f",a.cpuUpdateMs/n,a.cpuFenceWaitMs/n,a.cpuInspectionMs/n,a.cpuHostCallbackMs/n,a.cpuUploadMs/n,a.cpuRecordMs/n,a.cpuSubmitMs/n,a.cpuPresentMs/n);a.Log(NC_LOG_ALWAYS,text);}
     if(a.canonicalBenchmark){auto report=[&](const char*name,std::vector<double> values){if(values.empty())return;const double average=std::accumulate(values.begin(),values.end(),0.0)/double(values.size());std::sort(values.begin(),values.end());const double p95=values[std::min(values.size()-1,size_t(std::ceil(.95*values.size()))-1)];std::snprintf(text,sizeof text,"M12 canonical timing: %s average=%.3f ms; p95=%.3f ms; samples=%zu",name,average,p95,values.size());a.Log(NC_LOG_ALWAYS,text);};report("cpuUpdate",a.canonicalCpuUpdateMs);report("fenceWait",a.canonicalCpuFenceMs);report("gpuTotal",a.canonicalGpuTotalMs);report("materialsOverlays",a.canonicalGpuMaterialMs);report("anchoredTerrain",a.canonicalGpuAnchoredMs);report("globalFallback",a.canonicalGpuGlobalFillMs);report("overlays",a.canonicalGpuOverlayMs);}
-    std::snprintf(text,sizeof text,"GPU terrain descriptor totals: publications=%llu; bytes=%llu; reusableBaseVertices=%u; reusableTopologyTemplates=16; tessellationTargetPixels=16; tessellationMaximum=16; tessellationRangeMetres=50; basePhysicalEvaluation=vertex; nearPhysicalEvaluation=TES; biomeContributors=4; capacityRejects=%llu",static_cast<unsigned long long>(a.anchoredSurfaceUploads),static_cast<unsigned long long>(a.anchoredSurfaceUploadBytes),AnchoredSurfaceBaseVerticesPerPatch,static_cast<unsigned long long>(a.anchoredSurfaceCapacityRejects));a.Log(NC_LOG_ALWAYS,text);
+    const uint64_t naturalGlobalBytes=32ull+uint64_t(NaturalGlobalPatchCount)*NaturalGlobalVerticesPerPatch*sizeof(double)*4ull;
+    const uint64_t naturalAnchoredBytes=uint64_t(std::max(1u,a.submission?a.submission->anchoredSurfaceCacheSlotCount:0u))*NaturalAnchoredVerticesPerPatch*sizeof(double)*4ull;
+    std::snprintf(text,sizeof text,"GPU terrain descriptor totals: physicalGeneration=%u; publications=%llu; bytes=%llu; reusableBaseVertices=%u; reusableTopologyTemplates=16; tessellationTargetPixels=16; tessellationMaximum=16; tessellationRangeMetres=50; basePhysicalEvaluation=preparedVertex; nearPhysicalEvaluation=TES; naturalGlobalPrepareDispatches=%llu; naturalAnchoredPrepareDispatches=%llu; naturalPreparedBytes=%llu; capacityRejects=%llu",a.submission?a.submission->physicalSurfaceGeneration:0u,static_cast<unsigned long long>(a.anchoredSurfaceUploads),static_cast<unsigned long long>(a.anchoredSurfaceUploadBytes),AnchoredSurfaceBaseVerticesPerPatch,static_cast<unsigned long long>(a.naturalGlobalPreparationDispatches),static_cast<unsigned long long>(a.naturalAnchoredPreparationDispatches),static_cast<unsigned long long>(naturalGlobalBytes+naturalAnchoredBytes),static_cast<unsigned long long>(a.anchoredSurfaceCapacityRejects));a.Log(NC_LOG_ALWAYS,text);
     if(a.anchoredPipelineStatisticsSamples){const double n=double(a.anchoredPipelineStatisticsSamples);std::snprintf(text,sizeof text,"GPU anchored refinement averages: tcsPatches=%.1f; refinedVertices=%.1f; rasterPrimitives=%.1f; samples=%llu; CPUFinalRaster=false",double(a.anchoredTessellationControlPatches)/n,double(a.anchoredTessellationEvaluationInvocations)/n,double(a.anchoredClippingPrimitives)/n,(unsigned long long)a.anchoredPipelineStatisticsSamples);a.Log(NC_LOG_ALWAYS,text);}
     if(a.timestampSampleCount){const double n=double(a.timestampSampleCount);std::snprintf(text,sizeof text,"GPU timing averages: total=%.3f ms; anchoredCompute=%.3f; anchoredDraw=%.3f; background=%.3f; preSurface=%.3f; toneMap=%.3f",a.timestampAccumulatedMs[0]/n,a.timestampAccumulatedMs[1]/n,a.timestampAccumulatedMs[2]/n,a.timestampAccumulatedMs[3]/n,a.timestampAccumulatedMs[4]/n,a.timestampAccumulatedMs[6]/n);a.Log(NC_LOG_ALWAYS,text);}
     Destroy(a);

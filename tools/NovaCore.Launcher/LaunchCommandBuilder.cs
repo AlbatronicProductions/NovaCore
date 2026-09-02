@@ -10,6 +10,7 @@ public static class LaunchCommandBuilder
         var definition = ScenarioCatalog.Get(configuration.Preset);
         if (!definition.IsSupported || definition.Scene != configuration.Scene ||
             definition.StartingBody != configuration.StartingBody ||
+            definition.PhysicalSurface != configuration.PhysicalSurface ||
             !string.Equals(definition.SurfaceSite, configuration.SurfaceSite, StringComparison.Ordinal))
         {
             throw new ArgumentException("Launch configuration does not match the authoritative scenario catalog.", nameof(configuration));
@@ -50,6 +51,11 @@ public static class LaunchCommandBuilder
         if (configuration.EnablePerformanceTelemetry)
         {
             arguments.Add("--log=vulkan");
+        }
+
+        if (configuration.PhysicalSurface == NovaCorePhysicalSurface.M12DNaturalTerrainCandidate)
+        {
+            arguments.Add("--physical-surface=m12d-natural-candidate");
         }
 
         return arguments;

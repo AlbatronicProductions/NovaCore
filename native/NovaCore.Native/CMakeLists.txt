@@ -31,13 +31,13 @@ add_custom_command(OUTPUT "${SPIRV_DIR}/planetary.vert.spv" "${SPIRV_DIR}/planet
   COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary.vert" -o "${SPIRV_DIR}/planetary.vert.spv"
   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary.frag" -o "${SPIRV_DIR}/planetary.frag.spv"
-  DEPENDS "${SHADER_DIR}/planetary.vert" "${SHADER_DIR}/planetary.frag" "${SHADER_DIR}/production_cube_surface.glsl" "${SHADER_DIR}/local_terrain.glsl" "${SHADER_DIR}/physical_surface.glsl" "${SHADER_DIR}/planetary_physical_authority.glsl" "${SHADER_DIR}/planet_material.glsl" "${SHADER_DIR}/planet_terrain.glsl")
+  DEPENDS "${SHADER_DIR}/planetary.vert" "${SHADER_DIR}/planetary.frag" "${SHADER_DIR}/production_cube_surface.glsl" "${SHADER_DIR}/local_terrain.glsl" "${SHADER_DIR}/physical_surface.glsl" "${SHADER_DIR}/planetary_physical_authority.glsl" "${SHADER_DIR}/planet_material.glsl" "${SHADER_DIR}/planet_terrain.glsl" "${SHADER_DIR}/planetary_natural_terrain_surface.glsl" "${SHADER_DIR}/planetary_natural_terrain_families.glsl" "${SHADER_DIR}/planetary_natural_terrain_field.glsl")
 add_custom_command(OUTPUT "${SPIRV_DIR}/anchored_terrain.vert.spv" "${SPIRV_DIR}/anchored_terrain.tesc.spv" "${SPIRV_DIR}/anchored_terrain.tese.spv"
   COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/anchored_terrain.vert" -o "${SPIRV_DIR}/anchored_terrain.vert.spv"
   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/anchored_terrain.tesc" -o "${SPIRV_DIR}/anchored_terrain.tesc.spv"
   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/anchored_terrain.tese" -o "${SPIRV_DIR}/anchored_terrain.tese.spv"
-  DEPENDS "${SHADER_DIR}/anchored_terrain.vert" "${SHADER_DIR}/anchored_terrain.tesc" "${SHADER_DIR}/anchored_terrain.tese" "${SHADER_DIR}/production_cube_surface.glsl" "${SHADER_DIR}/local_terrain.glsl" "${SHADER_DIR}/physical_surface.glsl" "${SHADER_DIR}/planetary_physical_authority.glsl" "${SHADER_DIR}/anchored_physical_surface.glsl")
+  DEPENDS "${SHADER_DIR}/anchored_terrain.vert" "${SHADER_DIR}/anchored_terrain.tesc" "${SHADER_DIR}/anchored_terrain.tese" "${SHADER_DIR}/production_cube_surface.glsl" "${SHADER_DIR}/local_terrain.glsl" "${SHADER_DIR}/physical_surface.glsl" "${SHADER_DIR}/planetary_physical_authority.glsl" "${SHADER_DIR}/anchored_physical_surface.glsl" "${SHADER_DIR}/planetary_natural_terrain_surface.glsl" "${SHADER_DIR}/planetary_natural_terrain_families.glsl" "${SHADER_DIR}/planetary_natural_terrain_field.glsl")
 add_custom_command(OUTPUT "${SPIRV_DIR}/planetary_select.comp.spv" "${SPIRV_DIR}/planetary_terrain_generate.comp.spv"
   COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary_select.comp" -o "${SPIRV_DIR}/planetary_select.comp.spv"
@@ -46,12 +46,29 @@ add_custom_command(OUTPUT "${SPIRV_DIR}/planetary_select.comp.spv" "${SPIRV_DIR}
 add_custom_command(OUTPUT "${SPIRV_DIR}/planetary_height_query.comp.spv"
   COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary_height_query.comp" -o "${SPIRV_DIR}/planetary_height_query.comp.spv"
-  DEPENDS "${SHADER_DIR}/planetary_height_query.comp" "${SHADER_DIR}/production_cube_surface.glsl" "${SHADER_DIR}/physical_surface.glsl")
+  DEPENDS "${SHADER_DIR}/planetary_height_query.comp" "${SHADER_DIR}/production_cube_surface.glsl" "${SHADER_DIR}/physical_surface.glsl" "${SHADER_DIR}/planetary_natural_terrain_surface.glsl" "${SHADER_DIR}/planetary_natural_terrain_families.glsl" "${SHADER_DIR}/planetary_natural_terrain_field.glsl")
+add_custom_command(OUTPUT "${SPIRV_DIR}/planetary_natural_terrain_field_query.comp.spv"
+  COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
+  COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary_natural_terrain_field_query.comp" -o "${SPIRV_DIR}/planetary_natural_terrain_field_query.comp.spv"
+  DEPENDS "${SHADER_DIR}/planetary_natural_terrain_field_query.comp" "${SHADER_DIR}/planetary_natural_terrain_field.glsl")
+add_custom_command(OUTPUT "${SPIRV_DIR}/planetary_natural_terrain_families_query.comp.spv"
+  COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
+  COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary_natural_terrain_families_query.comp" -o "${SPIRV_DIR}/planetary_natural_terrain_families_query.comp.spv"
+  DEPENDS "${SHADER_DIR}/planetary_natural_terrain_families_query.comp" "${SHADER_DIR}/planetary_natural_terrain_families.glsl" "${SHADER_DIR}/planetary_natural_terrain_field.glsl")
+add_custom_command(OUTPUT "${SPIRV_DIR}/planetary_natural_terrain_prepare.comp.spv"
+  COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
+  COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary_natural_terrain_prepare.comp" -o "${SPIRV_DIR}/planetary_natural_terrain_prepare.comp.spv"
+  DEPENDS "${SHADER_DIR}/planetary_natural_terrain_prepare.comp" "${SHADER_DIR}/planetary_natural_terrain_families.glsl" "${SHADER_DIR}/planetary_natural_terrain_field.glsl")
+add_custom_command(OUTPUT "${SPIRV_DIR}/planetary_natural_terrain_global_prepare.comp.spv" "${SPIRV_DIR}/planetary_natural_terrain_anchored_prepare.comp.spv"
+  COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
+  COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary_natural_terrain_global_prepare.comp" -o "${SPIRV_DIR}/planetary_natural_terrain_global_prepare.comp.spv"
+  COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary_natural_terrain_anchored_prepare.comp" -o "${SPIRV_DIR}/planetary_natural_terrain_anchored_prepare.comp.spv"
+  DEPENDS "${SHADER_DIR}/planetary_natural_terrain_global_prepare.comp" "${SHADER_DIR}/planetary_natural_terrain_anchored_prepare.comp" "${SHADER_DIR}/planetary_natural_terrain_surface.glsl" "${SHADER_DIR}/planetary_natural_terrain_families.glsl" "${SHADER_DIR}/planetary_natural_terrain_field.glsl" "${SHADER_DIR}/production_cube_surface.glsl")
 add_custom_command(OUTPUT "${SPIRV_DIR}/planetary_mesh_displace.comp.spv" "${SPIRV_DIR}/planetary_mesh_normals.comp.spv"
   COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary_mesh_displace.comp" -o "${SPIRV_DIR}/planetary_mesh_displace.comp.spv"
   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary_mesh_normals.comp" -o "${SPIRV_DIR}/planetary_mesh_normals.comp.spv"
-  DEPENDS "${SHADER_DIR}/planetary_mesh_displace.comp" "${SHADER_DIR}/planetary_mesh_normals.comp" "${SHADER_DIR}/production_cube_surface.glsl" "${SHADER_DIR}/physical_surface.glsl")
+  DEPENDS "${SHADER_DIR}/planetary_mesh_displace.comp" "${SHADER_DIR}/planetary_mesh_normals.comp" "${SHADER_DIR}/production_cube_surface.glsl" "${SHADER_DIR}/physical_surface.glsl" "${SHADER_DIR}/planetary_natural_terrain_surface.glsl" "${SHADER_DIR}/planetary_natural_terrain_families.glsl" "${SHADER_DIR}/planetary_natural_terrain_field.glsl")
 add_custom_command(OUTPUT "${SPIRV_DIR}/planetary_production.frag.spv" "${SPIRV_DIR}/planetary_production_terrain.comp.spv"
   COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary_production.frag" -o "${SPIRV_DIR}/planetary_production.frag.spv"
@@ -89,7 +106,7 @@ add_custom_command(OUTPUT "${SPIRV_DIR}/fullscreen.vert.spv" "${SPIRV_DIR}/space
   COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/stellar_glow.vert" -o "${SPIRV_DIR}/stellar_glow.vert.spv"
   COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/stellar_glow.frag" -o "${SPIRV_DIR}/stellar_glow.frag.spv"
   DEPENDS "${SHADER_DIR}/fullscreen.vert" "${SHADER_DIR}/space_background.frag" "${SHADER_DIR}/tone_map.frag" "${SHADER_DIR}/stellar_sun.vert" "${SHADER_DIR}/stellar_sun.frag" "${SHADER_DIR}/stellar_glow.vert" "${SHADER_DIR}/stellar_glow.frag")
-add_custom_target(NovaCoreShaders DEPENDS "${SPIRV_DIR}/triangle.vert.spv" "${SPIRV_DIR}/triangle.frag.spv" "${SPIRV_DIR}/orbit.vert.spv" "${SPIRV_DIR}/orbit.frag.spv" "${SPIRV_DIR}/orbit_previous.frag.spv" "${SPIRV_DIR}/body_forward.frag.spv" "${SPIRV_DIR}/sas_target.frag.spv" "${SPIRV_DIR}/planetary.vert.spv" "${SPIRV_DIR}/planetary.frag.spv" "${SPIRV_DIR}/anchored_terrain.vert.spv" "${SPIRV_DIR}/anchored_terrain.tesc.spv" "${SPIRV_DIR}/anchored_terrain.tese.spv" "${SPIRV_DIR}/planetary_select.comp.spv" "${SPIRV_DIR}/planetary_terrain_generate.comp.spv" "${SPIRV_DIR}/planetary_height_query.comp.spv" "${SPIRV_DIR}/distant_planet.vert.spv" "${SPIRV_DIR}/distant_planet.frag.spv" "${SPIRV_DIR}/planetary_ring.vert.spv" "${SPIRV_DIR}/planetary_ring_far.frag.spv" "${SPIRV_DIR}/planetary_ring_near.frag.spv" "${SPIRV_DIR}/solar_orbit.vert.spv" "${SPIRV_DIR}/solar_orbit.frag.spv" "${SPIRV_DIR}/solar_marker.vert.spv" "${SPIRV_DIR}/solar_marker.frag.spv" "${SPIRV_DIR}/solar_label.vert.spv" "${SPIRV_DIR}/solar_label.frag.spv" "${SPIRV_DIR}/solar_speed_hud.vert.spv" "${SPIRV_DIR}/solar_speed_hud.frag.spv" "${SPIRV_DIR}/fullscreen.vert.spv" "${SPIRV_DIR}/space_background.frag.spv" "${SPIRV_DIR}/tone_map.frag.spv" "${SPIRV_DIR}/stellar_sun.vert.spv" "${SPIRV_DIR}/stellar_sun.frag.spv" "${SPIRV_DIR}/stellar_glow.vert.spv" "${SPIRV_DIR}/stellar_glow.frag.spv")
+add_custom_target(NovaCoreShaders DEPENDS "${SPIRV_DIR}/triangle.vert.spv" "${SPIRV_DIR}/triangle.frag.spv" "${SPIRV_DIR}/orbit.vert.spv" "${SPIRV_DIR}/orbit.frag.spv" "${SPIRV_DIR}/orbit_previous.frag.spv" "${SPIRV_DIR}/body_forward.frag.spv" "${SPIRV_DIR}/sas_target.frag.spv" "${SPIRV_DIR}/planetary.vert.spv" "${SPIRV_DIR}/planetary.frag.spv" "${SPIRV_DIR}/anchored_terrain.vert.spv" "${SPIRV_DIR}/anchored_terrain.tesc.spv" "${SPIRV_DIR}/anchored_terrain.tese.spv" "${SPIRV_DIR}/planetary_select.comp.spv" "${SPIRV_DIR}/planetary_terrain_generate.comp.spv" "${SPIRV_DIR}/planetary_height_query.comp.spv" "${SPIRV_DIR}/planetary_natural_terrain_field_query.comp.spv" "${SPIRV_DIR}/planetary_natural_terrain_families_query.comp.spv" "${SPIRV_DIR}/planetary_natural_terrain_prepare.comp.spv" "${SPIRV_DIR}/planetary_natural_terrain_global_prepare.comp.spv" "${SPIRV_DIR}/planetary_natural_terrain_anchored_prepare.comp.spv" "${SPIRV_DIR}/distant_planet.vert.spv" "${SPIRV_DIR}/distant_planet.frag.spv" "${SPIRV_DIR}/planetary_ring.vert.spv" "${SPIRV_DIR}/planetary_ring_far.frag.spv" "${SPIRV_DIR}/planetary_ring_near.frag.spv" "${SPIRV_DIR}/solar_orbit.vert.spv" "${SPIRV_DIR}/solar_orbit.frag.spv" "${SPIRV_DIR}/solar_marker.vert.spv" "${SPIRV_DIR}/solar_marker.frag.spv" "${SPIRV_DIR}/solar_label.vert.spv" "${SPIRV_DIR}/solar_label.frag.spv" "${SPIRV_DIR}/solar_speed_hud.vert.spv" "${SPIRV_DIR}/solar_speed_hud.frag.spv" "${SPIRV_DIR}/fullscreen.vert.spv" "${SPIRV_DIR}/space_background.frag.spv" "${SPIRV_DIR}/tone_map.frag.spv" "${SPIRV_DIR}/stellar_sun.vert.spv" "${SPIRV_DIR}/stellar_sun.frag.spv" "${SPIRV_DIR}/stellar_glow.vert.spv" "${SPIRV_DIR}/stellar_glow.frag.spv")
 
 add_custom_target(NovaCoreProductionShaders DEPENDS
   "${SPIRV_DIR}/planetary_production.frag.spv"

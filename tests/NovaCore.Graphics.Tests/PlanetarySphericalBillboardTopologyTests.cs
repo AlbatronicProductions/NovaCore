@@ -1,0 +1,37 @@
+using System.Numerics;
+using NovaCore.Graphics;
+
+internal static class PlanetarySphericalBillboardTopologyTests
+{
+    public static void Run()
+    {
+        var library=PlanetarySphericalBillboardTopologyGenerator.GenerateProofLibrary();
+        Require(library.Count==3,"three immutable proof levels");
+        var artifactDirectory=Environment.GetEnvironmentVariable("NOVACORE_P2S2_ARTIFACT_OUTPUT");
+        if(!string.IsNullOrWhiteSpace(artifactDirectory))PlanetarySphericalBillboardTopologyGenerator.WriteProofLibrary(artifactDirectory);
+        long totalBytes=0;
+        for(var level=0;level<library.Count;level++)
+        {
+            var topology=library[level];var replay=PlanetarySphericalBillboardTopologyGenerator.Generate((PlanetarySphericalBillboardTopologyGenerator.ProofLevel)level);
+            var bytes=PlanetarySphericalBillboardTopology.Serialize(topology);var replayBytes=PlanetarySphericalBillboardTopology.Serialize(replay);
+            Require(bytes.SequenceEqual(replayBytes)&&topology.TopologyHash==replay.TopologyHash,"byte-identical deterministic regeneration");
+            var loaded=PlanetarySphericalBillboardTopology.Load(bytes);Require(loaded.TopologyHash==topology.TopologyHash&&loaded.Indices.SequenceEqual(topology.Indices)&&loaded.Neighbors.SequenceEqual(topology.Neighbors)&&loaded.Vertices is IList<PlanetarySphericalBillboardTopology.Vertex>{IsReadOnly:true}&&loaded.Indices is IList<uint>{IsReadOnly:true},"loader returns immutable authored topology only and cannot expose mutation");
+            CorruptionMustFail(bytes);var quality=ProveManifoldAndQuality(topology);var density=ProveDensity(topology);var snap=PlanetarySphericalBillboardTopologyGenerator.ProveTangentStep(topology);
+            if(!string.IsNullOrWhiteSpace(artifactDirectory))Require(File.ReadAllBytes(Path.Combine(artifactDirectory,PlanetarySphericalBillboardTopologyGenerator.ArtifactFileName((PlanetarySphericalBillboardTopologyGenerator.ProofLevel)level))).SequenceEqual(bytes),"offline materialized artifact is byte-identical");
+            Require(snap.Coverage==1d&&snap.EnteringVertices==0&&snap.LeavingVertices==0,"one snapped pupil lattice step preserves all immutable topology IDs");
+            if(level>0){var previous=library[level-1];Require(topology.PreviousLevelVertexMap.Count==previous.Vertices.Count&&topology.PreviousLevelVertexMap.Distinct().Count()==previous.Vertices.Count,"complete one-to-one coarse-to-fine nesting");for(var i=0;i<previous.Vertices.Count;i++)Require(topology.Vertices[topology.PreviousLevelVertexMap[i]].Position==previous.Vertices[i].Position,"nested vertex has exact compact identity");}
+            totalBytes+=bytes.Length;Console.WriteLine($"P2S2 {topology.Level}: vertices={topology.Vertices.Count}; triangles={topology.Indices.Count/3}; bytes={bytes.Length}; hash=0x{topology.TopologyHash:X16}; aspect={quality.Aspect:F4}; minAngle={quality.MinAngleDegrees:F4}; spacingMin={density.Minimum:E5}; spacingMedian={density.Median:E5}; spacingMax={density.Maximum:E5}; pupil={density.Pupil:E5}; antipode={density.Antipode:E5}; densityRatio={density.Ratio:F3}; tangentCoverage={snap.Coverage:P1}");
+            foreach(var r in topology.Regions)Console.WriteLine($"P2S2 region={r.Region}; vertices={r.VertexCount}; triangles={r.TriangleCount}; representative={r.RepresentativeAngularSpacingRadians:E5}; maximum={r.MaximumAngularEdgeRadians:E5}");
+        }
+        Require(library[2].Regions[0].RepresentativeAngularSpacingRadians<library[2].Regions[3].RepresentativeAngularSpacingRadians*.35f,"surface pupil has materially denser +Z spacing");
+        var surface=library[2];foreach(var altitude in new[]{35_786_000d,10_000d,1_000d,100d,10d})Console.WriteLine($"P2S2 projected: altitude={altitude:F0}m; pupilPixels={PlanetarySphericalBillboardTopologyGenerator.ProjectedPixelSpacing(6_371_008.8d,altitude,Math.PI/3d,1440,surface.Regions[0].ConservativeAngularSpacingRadians):F3}; antipodeRegionPixels={PlanetarySphericalBillboardTopologyGenerator.ProjectedPixelSpacing(6_371_008.8d,altitude,Math.PI/3d,1440,surface.Regions[3].ConservativeAngularSpacingRadians):F3}");
+        Console.WriteLine($"P2S2 proof library bytes={totalBytes}");
+    }
+    private static (double Aspect,double MinAngleDegrees) ProveManifoldAndQuality(PlanetarySphericalBillboardTopology topology)
+    { var edges=new Dictionary<(int,int),List<(int,int)>>();var triangles=new HashSet<(int,int,int)>();var maxAspect=0d;var minAngle=180d;for(var i=0;i<topology.Indices.Count;i+=3){var a=(int)topology.Indices[i];var b=(int)topology.Indices[i+1];var c=(int)topology.Indices[i+2];Require(a!=b&&b!=c&&c!=a,"no degenerate index triangle");var sorted=new[]{a,b,c};Array.Sort(sorted);Require(triangles.Add((sorted[0],sorted[1],sorted[2])),"no duplicate triangles");var va=topology.Vertices[a].Position;var vb=topology.Vertices[b].Position;var vc=topology.Vertices[c].Position;Require(Vector3.Dot(Vector3.Cross(vb-va,vc-va),va+vb+vc)>0f,"outward winding");var lengths=new[]{Vector3.Distance(va,vb),Vector3.Distance(vb,vc),Vector3.Distance(vc,va)};maxAspect=Math.Max(maxAspect,lengths.Max()/lengths.Min());for(var k=0;k<3;k++){double x=lengths[k];double y=lengths[(k+1)%3];double z=lengths[(k+2)%3];minAngle=Math.Min(minAngle,Math.Acos(Math.Clamp((y*y+z*z-x*x)/(2*y*z),-1d,1d))*180d/Math.PI);}Add(a,b);Add(b,c);Add(c,a);}foreach(var edge in edges)Require(edge.Value.Count==2&&edge.Value[0].Item1==edge.Value[1].Item2&&edge.Value[0].Item2==edge.Value[1].Item1,"every edge has two opposite-oriented incidents");Require(maxAspect<8d&&minAngle>8d,"bounded triangle quality");for(var i=0;i<topology.Vertices.Count;i++){var start=topology.NeighborOffsets[i];var end=topology.NeighborOffsets[i+1];Require(end-start is 5 or 6&&topology.Neighbors.Skip(start).Take(end-start).SequenceEqual(topology.Neighbors.Skip(start).Take(end-start).Order()),"stable five/six-valence sorted adjacency");}return(maxAspect,minAngle);void Add(int x,int y){var key=x<y?(x,y):(y,x);if(!edges.TryGetValue(key,out var list)){list=[];edges.Add(key,list);}list.Add((x,y));}}
+    private static (double Minimum,double Median,double Maximum,double Pupil,double Antipode,double Ratio) ProveDensity(PlanetarySphericalBillboardTopology topology)
+    { var all=topology.Vertices.Select(v=>(double)v.AverageAngularSpacingRadians).OrderBy(x=>x).ToArray();var pupil=topology.Vertices.Where(v=>v.Position.Z>.9f).Select(v=>(double)v.AverageAngularSpacingRadians).OrderBy(x=>x).ToArray();var anti=topology.Vertices.Where(v=>v.Position.Z<-.9f).Select(v=>(double)v.AverageAngularSpacingRadians).OrderBy(x=>x).ToArray();Require(pupil.Length>0&&anti.Length>0,"pupil and antipode samples exist");var p=pupil[pupil.Length/2];var a=anti[anti.Length/2];Require(a/p>3d,"pupil density is concentrated relative to antipode");return(all[0],all[all.Length/2],all[^1],p,a,a/p);}
+    private static void CorruptionMustFail(byte[] bytes){var truncated=bytes[..^1];var altered=bytes.ToArray();altered[^1]^=0x40;Require(Fails(()=>PlanetarySphericalBillboardTopology.Load(truncated))&&Fails(()=>PlanetarySphericalBillboardTopology.Load(altered)),"loader rejects truncated and hash-corrupt artifacts");}
+    private static bool Fails(Action action){try{action();return false;}catch(InvalidDataException){return true;}}
+    private static void Require(bool condition,string message){if(!condition)throw new InvalidOperationException("P2S2: "+message);}
+}

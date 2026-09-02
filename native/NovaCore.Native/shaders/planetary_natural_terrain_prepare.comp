@@ -1,0 +1,70 @@
+#version 460
+#extension GL_EXT_shader_explicit_arithmetic_types_float64 : require
+#include "planetary_natural_terrain_families.glsl"
+
+// Isolated P2C1 changed-slot preparation kernel. It writes the existing proof
+// transport ABI and has no production renderer consumer.
+layout(local_size_x=64,local_size_y=1,local_size_z=1)in;
+struct HeightQuery { vec4 anchorHigh;vec4 anchorLow;vec4 localDelta;dvec2 oracleUv;uvec4 identity;uvec4 metadata; };
+struct HeightResult {
+  vec4 reconstructedHigh;vec4 reconstructedLow;dvec2 faceUv;dvec2 oracleAndTerrainV5Height;
+  dvec2 localAndPhysicalHeight;dvec2 baseAndModifierHeight;dvec2 modifierHeights;dvec2 finalGradient;
+  vec4 physicalNormalAndWeight;dvec2 reconstructedXY;dvec2 reconstructedZAndLength;
+  uvec4 globalIdentity;uvec4 localIdentity;uvec4 source;
+};
+struct LocalRecord { uvec4 identity;uvec4 payload; };
+layout(std430,binding=0)readonly buffer Queries { HeightQuery queries[]; };
+layout(std430,binding=1)writeonly buffer Results { HeightResult results[]; };
+layout(std430,binding=2)readonly buffer UnusedOracle { uint unusedOracleWords[]; };
+layout(std430,binding=3)readonly buffer UnusedGlobal { uint unusedGlobalWords[]; };
+layout(std430,binding=4)readonly buffer UnusedLocalRecords { LocalRecord unusedLocalRecords[]; };
+layout(std430,binding=5)readonly buffer UnusedLocal { uint unusedLocalWords[]; };
+layout(push_constant)uniform HeightConstants { uvec4 dimensions;uvec4 storage;vec4 localRange; } constants;
+
+void main()
+{
+  uint index=gl_GlobalInvocationID.x;if(index>=constants.dimensions.x)return;
+  HeightQuery query=queries[index];dvec3 point=dvec3(query.anchorHigh.xyz)+dvec3(query.anchorLow.xyz)+dvec3(query.localDelta.xyz);
+  NaturalTerrainFamilyIdentityD identity=NaturalTerrainFamilyIdentityD(query.identity.xy,query.identity.zw,query.metadata.z);
+  NaturalTerrainFamilyVectorD controls=NaturalTerrainFamilyControls(point,identity);
+  NaturalTerrainFamilyVectorD orientation=NaturalTerrainFamilyOrientation(controls);
+  NaturalTerrainDomainD domain=NaturalTerrainReduceBodyPoint(point,NOVACORE_NATURAL_FAMILY_WARP_CELL);
+  NaturalTerrainFieldIdentityD controlXIdentity=NaturalTerrainFamilyFieldIdentity(identity,NOVACORE_NATURAL_FAMILY_WARP_CONTROL_ID,0x100u);
+  NaturalTerrainFieldIdentityD controlYIdentity=NaturalTerrainFamilyFieldIdentity(identity,NOVACORE_NATURAL_FAMILY_WARP_CONTROL_ID,0x101u);
+  uint controlHashX=NaturalTerrainHashCell(controlXIdentity,domain.cell),controlHashY=NaturalTerrainHashCell(controlYIdentity,domain.cell);
+  uint firstFamily,secondFamily;double secondWeight;dvec3 weightGradient;
+  NaturalTerrainFieldSampleD macro,meso;dvec2 bounds;
+  if(query.metadata.y==0u)
+  {
+    NaturalTerrainFamilyBlendD blend=NaturalTerrainFamilyBiomeBlend(controls.x);
+    NaturalTerrainFamilySampleD first=EvaluateNaturalTerrainFamilyWithControlsD(point,blend.firstFamily,controls,orientation,identity);
+    NaturalTerrainFamilySampleD second=EvaluateNaturalTerrainFamilyWithControlsD(point,blend.secondFamily,controls,orientation,identity);
+    firstFamily=blend.firstFamily;secondFamily=blend.secondFamily;secondWeight=blend.weight;weightGradient=blend.gradient;
+    macro=NaturalTerrainFamilyBlendSample(first.macro,second.macro,blend.weight,blend.gradient);
+    meso=NaturalTerrainFamilyBlendSample(first.meso,second.meso,blend.weight,blend.gradient);
+    bounds=NaturalTerrainCompositionBoundsD();
+  }
+  else
+  {
+    NaturalTerrainFamilySampleD family=EvaluateNaturalTerrainFamilyWithControlsD(point,query.metadata.x,controls,orientation,identity);
+    firstFamily=query.metadata.x;secondFamily=query.metadata.x;secondWeight=0.0;weightGradient=dvec3(0.0);
+    macro=family.macro;meso=family.meso;bounds=NaturalTerrainFamilyBoundsD(query.metadata.x);
+  }
+  NaturalTerrainFieldSampleD prepared=NaturalTerrainFamilyAdd(macro,meso);dvec3 orientationValue=NaturalTerrainFamilyVectorValue(orientation);
+  HeightResult result;
+  result.reconstructedHigh=uintBitsToFloat(uvec4(query.identity.zw,query.metadata.w,query.metadata.z));
+  result.reconstructedLow=uintBitsToFloat(uvec4(NOVACORE_NATURAL_FIELD_HASH_VERSION,
+    NOVACORE_NATURAL_FAMILY_COMPOSITION_VERSION,query.metadata.x,query.metadata.y));
+  result.faceUv=dvec2(macro.height,meso.height);
+  result.oracleAndTerrainV5Height=dvec2(prepared.height,prepared.bodyGradient.x);
+  result.localAndPhysicalHeight=prepared.bodyGradient.yz;
+  result.baseAndModifierHeight=dvec2(secondWeight,orientationValue.x);
+  result.modifierHeights=orientationValue.yz;
+  result.finalGradient=bounds;
+  result.physicalNormalAndWeight=vec4(0);
+  result.reconstructedXY=weightGradient.xy;result.reconstructedZAndLength=dvec2(weightGradient.z,0.0);
+  result.globalIdentity=uvec4(domain.cell.x,domain.cell.y);
+  result.localIdentity=uvec4(domain.cell.z,firstFamily,secondFamily);
+  result.source=uvec4(1u,controlHashX,controlHashY,NOVACORE_NATURAL_FAMILY_COMPOSITION_VERSION);
+  results[index]=result;
+}

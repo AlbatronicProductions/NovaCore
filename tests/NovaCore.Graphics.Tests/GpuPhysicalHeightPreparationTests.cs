@@ -97,6 +97,8 @@ internal static unsafe class GpuPhysicalHeightPreparationTests
             collapsedResult.ReconstructedZ) - reconstructed[0]).LengthSquared);
         Require(collapsedError > 1e-4d, "single-FP32 Earth-scale coordinate collapse is detectable and outside the split contract");
 
+        VerifyNaturalCandidate(samples, oraclePath, terrainPath, localPath, shaderPath);
+
         Require(PlanetaryPatchTopology.Shared.DeterministicHash == 0x98792D7EBC45FF6Dul &&
             PlanetaryProductionPatchTopology.Shared.DeterministicHash == 0x61C28B0A3B4F21FFul,
             "live 11B-6C topology hashes remain unchanged");
@@ -104,6 +106,61 @@ internal static unsafe class GpuPhysicalHeightPreparationTests
             $"transportMax={maximumTransportError:E17}m; gpuReconstructionMax={maximumCoordinateError:E17}m; " +
             $"uvMax={maximumUvError:E17}; heightMax={maximumHeightError:E17}m; gradientMax={maximumGradientError:E17}; normalMax={maximumNormalError:E17}rad; " +
             $"groups={firstMetrics.DispatchGroups}; gpu={firstMetrics.GpuMilliseconds:F6}ms; boundedCpu={firstMetrics.CpuMilliseconds:F3}ms; validation=0");
+    }
+
+    private static void VerifyNaturalCandidate(IReadOnlyList<Sample> samples, string oraclePath,
+        string terrainPath, string localPath, string shaderPath)
+    {
+        var previous = PlanetaryPhysicalSurface.RuntimeGeneration;
+        try
+        {
+            PlanetaryPhysicalSurface.ConfigureRuntimeGeneration(
+                PlanetaryPhysicalSurfaceGeneration.M12DNaturalTerrainCandidate);
+            var queries = new NativePlanetaryHeightQuery[samples.Count];
+            var reconstructed = new Double3[samples.Count];
+            for (var index = 0; index < samples.Count; index++)
+            {
+                Require(PlanetaryGpuPhysicalHeightQuery.TryCreate(EarthBodyId, 5, samples[index].Tier,
+                    samples[index].Anchor, samples[index].Delta, out queries[index], out reconstructed[index]),
+                    $"candidate query creation {samples[index].Name}");
+                Require(queries[index].Reserved0 == PlanetaryPhysicalSurface.NaturalTerrainCandidateGenerationId,
+                    "candidate query carries explicit generation identity");
+            }
+
+            var results = Invoke(queries, oraclePath, terrainPath, localPath, shaderPath, out var metrics);
+            var maximumHeightError = 0d; var maximumGradientError = 0d; var maximumNormalError = 0d;
+            for (var index = 0; index < samples.Count; index++)
+            {
+                var result = results[index]; var direction = reconstructed[index].Normalized();
+                var cpu = PlanetaryTerrainDefinition.EarthProductionCubeV5.SamplePhysicalSurface(direction,
+                    PlanetaryPhysicalSurfaceGeneration.M12DNaturalTerrainCandidate);
+                maximumHeightError = Math.Max(maximumHeightError,
+                    Math.Abs(result.PhysicalHeightMetres - cpu.FinalHeightMetres));
+                maximumGradientError = Math.Max(maximumGradientError, Math.Max(
+                    Math.Abs(result.EastGradient - cpu.EastGradient),
+                    Math.Abs(result.NorthGradient - cpu.NorthGradient)));
+                var gpuNormal = new Double3(result.PhysicalNormalX, result.PhysicalNormalY,
+                    result.PhysicalNormalZ).Normalized();
+                maximumNormalError = Math.Max(maximumNormalError, Math.Acos(Math.Clamp(
+                    Double3.Dot(gpuNormal, cpu.PhysicalNormal), -1d, 1d)));
+                Require(result.Valid == 1 && result.ResultTerrainVersion == 5,
+                    $"candidate GPU result valid {samples[index].Name}");
+            }
+            Require(maximumHeightError <= 2e-6d,
+                $"candidate CPU/GPU physical-height agreement: {maximumHeightError:R} m");
+            Require(maximumGradientError <= 5e-5d,
+                $"candidate CPU/GPU physical-gradient agreement: {maximumGradientError:R}");
+            Require(maximumNormalError <= 5e-5d,
+                $"candidate CPU/GPU physical-normal agreement: {maximumNormalError:R} rad");
+            Require(metrics.ValidationErrors == 0, "candidate GPU query has zero Vulkan validation errors");
+            Console.WriteLine($"M12D candidate GPU physical height: samples={samples.Count}; " +
+                $"heightMax={maximumHeightError:E17}m; gradientMax={maximumGradientError:E17}; " +
+                $"normalMax={maximumNormalError:E17}rad; gpu={metrics.GpuMilliseconds:F6}ms; validation=0");
+        }
+        finally
+        {
+            PlanetaryPhysicalSurface.ConfigureRuntimeGeneration(previous);
+        }
     }
 
     private static List<Sample> BuildSamples(string localPath)

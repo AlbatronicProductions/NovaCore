@@ -45,7 +45,10 @@ public static class PlanetaryGpuPhysicalHeightQuery
             BodyIdLow = (uint)bodyId, BodyIdHigh = (uint)(bodyId >> 32),
             TerrainVersion = terrainVersion, AnchoredTier = anchoredTier,
             TopologyVersion = TopologyVersion, SourcePolicy = PhysicalSourcePolicy,
-            Reserved0 = 0, Reserved1 = 0,
+            Reserved0 = PlanetaryPhysicalSurface.RuntimeGeneration ==
+                PlanetaryPhysicalSurfaceGeneration.M12DNaturalTerrainCandidate
+                    ? PlanetaryPhysicalSurface.NaturalTerrainCandidateGenerationId : 0u,
+            Reserved1 = 0,
         };
         return true;
     }

@@ -22,17 +22,29 @@ struct ProductionTerrainMaterial
 };
 
 float TerrainSaturate(float value){return clamp(value,0.0,1.0);}
-float TerrainHash21(dvec2 point)
+float TerrainHash21Prepared(dvec3 value)
 {
-  dvec3 value=fract(dvec3(point.xyx)*dvec3(.1031,.1030,.0973));
   value+=dot(value,value.yzx+33.33);
   return float(fract((value.x+value.y)*value.z));
+}
+vec4 TerrainHash21Corners(dvec2 cell)
+{
+  // Four value-noise corners contain only two distinct x coordinates and two
+  // distinct y coordinates. Prepare those six hash-prefix components once;
+  // each corner still executes the accepted scalar hash suffix unchanged.
+  dvec2 x=cell.xx+dvec2(0,1),y=cell.yy+dvec2(0,1);
+  dvec2 hashX=fract(x*.1031),hashY=fract(y*.1030),hashZ=fract(x*.0973);
+  return vec4(
+    TerrainHash21Prepared(dvec3(hashX.x,hashY.x,hashZ.x)),
+    TerrainHash21Prepared(dvec3(hashX.y,hashY.x,hashZ.y)),
+    TerrainHash21Prepared(dvec3(hashX.x,hashY.y,hashZ.x)),
+    TerrainHash21Prepared(dvec3(hashX.y,hashY.y,hashZ.y)));
 }
 float TerrainNoise2(dvec2 point)
 {
   dvec2 cell=floor(point);vec2 fraction=vec2(fract(point));fraction=fraction*fraction*(3.0-2.0*fraction);
-  float a=TerrainHash21(cell),b=TerrainHash21(cell+dvec2(1,0)),c=TerrainHash21(cell+dvec2(0,1)),d=TerrainHash21(cell+dvec2(1));
-  return mix(mix(a,b,fraction.x),mix(c,d,fraction.x),fraction.y);
+  vec4 corners=TerrainHash21Corners(cell);
+  return mix(mix(corners.x,corners.y,fraction.x),mix(corners.z,corners.w,fraction.x),fraction.y);
 }
 float TerrainWorldFootprintMetres(vec3 differentialMetres)
 {

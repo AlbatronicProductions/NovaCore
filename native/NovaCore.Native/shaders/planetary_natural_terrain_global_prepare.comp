@@ -1,0 +1,44 @@
+#version 460
+#extension GL_GOOGLE_include_directive : require
+#extension GL_ARB_gpu_shader_fp64 : require
+#include "production_cube_surface.glsl"
+#include "planetary_natural_terrain_surface.glsl"
+
+layout(local_size_x=64,local_size_y=1,local_size_z=1)in;
+layout(std430,set=0,binding=35)buffer NaturalGlobalPrepared
+{
+  uvec4 control;
+  dvec4 values[];
+} naturalGlobal;
+
+const uint GlobalPatchCount=126u;
+const uint GlobalVerticesPerPatch=289u;
+
+uvec4 AddressFromOrdinal(uint ordinal)
+{
+  uint cursor=0u;
+  for(uint level=0u;level<=2u;level++)
+  {
+    uint cells=1u<<level,perFace=cells*cells,levelCount=6u*perFace;
+    if(ordinal<cursor+levelCount)
+    {
+      uint local=ordinal-cursor,face=local/perFace,cell=local-face*perFace;
+      return uvec4(face,level,cell%cells,cell/cells);
+    }
+    cursor+=levelCount;
+  }
+  return uvec4(0u);
+}
+
+void main()
+{
+  uint index=gl_GlobalInvocationID.x,total=GlobalPatchCount*GlobalVerticesPerPatch;
+  if(index>=total)return;
+  uint ordinal=index/GlobalVerticesPerPatch,vertex=index%GlobalVerticesPerPatch;
+  uvec2 grid=uvec2(vertex%17u,vertex/17u);
+  dvec3 direction=ProductionProjectGridD(AddressFromOrdinal(ordinal),grid);
+  NaturalTerrainFieldSampleD prepared=EvaluateNaturalCandidatePreparedD(direction);
+  naturalGlobal.values[index]=dvec4(prepared.height,prepared.bodyGradient);
+  if(index==0u)naturalGlobal.control=uvec4(NOVACORE_PHYSICAL_GENERATION_M12D,
+    NOVACORE_NATURAL_FAMILY_COMPOSITION_VERSION,NOVACORE_NATURAL_FIELD_HASH_VERSION,total);
+}

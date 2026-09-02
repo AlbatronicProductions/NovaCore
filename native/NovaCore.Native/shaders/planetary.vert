@@ -5,6 +5,7 @@
 #include "local_terrain.glsl"
 #include "physical_surface.glsl"
 #include "planetary_physical_authority.glsl"
+#include "planetary_natural_terrain_surface.glsl"
 struct EncodedPosition { vec4 high; vec4 low; };
 struct GpuCameraData { EncodedPosition position; mat4 viewProjection; };
 struct PlanetaryPatch { uvec4 address; vec4 centerRadius; vec4 color; uvec4 transitions; };
@@ -15,6 +16,7 @@ layout(std430,set=0,binding=2) readonly buffer Input { vec4 cameraHighRadiusHigh
 layout(std430,set=0,binding=6) readonly buffer Presentations { Presentation values[]; } presentations;
 layout(std430,set=0,binding=9) readonly buffer TerrainSamples { vec2 heights[]; } terrainData;
 layout(std430,set=0,binding=10) readonly buffer PatchTerrainSlots { uvec2 values[]; } patchTerrain;
+layout(std430,set=0,binding=35) readonly buffer NaturalGlobalPrepared { uvec4 naturalControl; dvec4 naturalValues[]; } naturalGlobal;
 layout(push_constant) uniform StellarLighting { vec4 sourceCenterExposure; vec4 sourceColorAmbient; vec4 radianceGlowEnabled; } lighting;
 layout(location=0) in vec2 inUv;
 layout(location=0) out vec4 color;
@@ -47,6 +49,14 @@ double HeightAt(uint slot,uint x,uint y,float morph,uvec4 address,uint transitio
     // LOD controls where H is sampled and how those samples are connected; it
     // never selects a different physical field.  Shared parent/child directions
     // therefore resolve bit-identical final heights independent of morph state.
+    if(naturalGlobal.naturalControl.x==NOVACORE_PHYSICAL_GENERATION_M12D)
+    {
+      uint ordinal=ProductionPatchOrdinal(address.x,address.y,address.z,address.w);
+      dvec4 prepared=naturalGlobal.naturalValues[ordinal*GRID_VERTICES+y*17u+x];
+      double geographic=CanonicalGeographicHeight(direction);
+      double base=max(0.0,geographic+prepared.x);
+      return max(0.0,base+EvaluateNaturalCandidateNearD(direction).height);
+    }
     return CanonicalPhysicalHeight(direction);
   }
   vec2 values=terrainData.heights[slot*GRID_VERTICES+y*17u+x];return double(mix(values.x,values.y,morph));

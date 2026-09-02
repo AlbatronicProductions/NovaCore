@@ -168,6 +168,7 @@ internal static unsafe class GpuDisplacedMeshPreparationTests
                 "local-v2 physical displacement matches CPU authority");
             Require(first.Vertices.Any(value => value.SourceHasLocal == 0) && localResult.Vertices.Any(value => value.SourceHasLocal == 1),
                 "global-only and local-v2 source paths both participate");
+            VerifyNaturalCandidateMesh(topology, cameraA);
             Require(PlanetaryPatchTopology.Shared.DeterministicHash == 0x98792D7EBC45FF6Dul &&
                 PlanetaryProductionPatchTopology.Shared.DeterministicHash == 0x61C28B0A3B4F21FFul,
                 "live topology hashes remain unchanged");
@@ -197,6 +198,52 @@ internal static unsafe class GpuDisplacedMeshPreparationTests
         fixed (NativePlanetaryHeightQuery* q = global.Queries) fixed (uint* i = global.Indices) fixed (uint* a = global.Adjacency)
         fixed (NativePlanetaryDisplacedVertex* v = new NativePlanetaryDisplacedVertex[global.Queries.Length]) fixed (NativePlanetaryPhysicalNormal* n = new NativePlanetaryPhysicalNormal[global.Queries.Length])
         { var dispatch = Dispatch(global, Double3.Zero); Require(NativeRuntime.PreparePlanetaryMesh(q, i, a, &dispatch, v, n, &unavailableMetrics) == NativeResult.InvalidArgument, "use-after-shutdown is rejected"); }
+    }
+
+    private static void VerifyNaturalCandidateMesh(PlanetaryReferenceDisplacedMesh topology, in Double3 camera)
+    {
+        var previous = PlanetaryPhysicalSurface.RuntimeGeneration;
+        try
+        {
+            PlanetaryPhysicalSurface.ConfigureRuntimeGeneration(
+                PlanetaryPhysicalSurfaceGeneration.M12DNaturalTerrainCandidate);
+            var input = Build(topology.Vertices, topology.Indices, topology.AdjacencyWords);
+            Require(input.Queries.All(query => query.Reserved0 ==
+                PlanetaryPhysicalSurface.NaturalTerrainCandidateGenerationId),
+                "candidate mesh vertices carry one explicit physical generation");
+            var output = Prepare(input, camera, out var metrics);
+            var maximumHeightError = 0d; var positions = new Double3[output.Vertices.Length];
+            for (var index = 0; index < output.Vertices.Length; index++)
+            {
+                var cpu = PlanetaryTerrainDefinition.EarthProductionCubeV5.SamplePhysicalSurface(
+                    input.Directions[index], PlanetaryPhysicalSurfaceGeneration.M12DNaturalTerrainCandidate);
+                maximumHeightError = Math.Max(maximumHeightError,
+                    Math.Abs(output.Vertices[index].PhysicalHeightMetres - cpu.FinalHeightMetres));
+                positions[index] = Body(output.Vertices[index]);
+                Require(output.Vertices[index].Valid == 1 && output.Normals[index].Validity == 1f,
+                    $"candidate mesh output valid {index}");
+            }
+            var cpuNormals = CpuNormals(positions, input.Indices, input.Adjacency);
+            var maximumNormalError = 0d;
+            for (var index = 0; index < cpuNormals.Length; index++)
+            {
+                var gpu = new Double3(output.Normals[index].X, output.Normals[index].Y,
+                    output.Normals[index].Z).Normalized();
+                maximumNormalError = Math.Max(maximumNormalError, Math.Acos(Math.Clamp(
+                    Double3.Dot(gpu, cpuNormals[index]), -1d, 1d)));
+            }
+            Require(maximumHeightError <= 1e-3d,
+                $"candidate CPU/GPU mesh displacement parity: {maximumHeightError:R} m");
+            Require(maximumNormalError <= 5e-7d,
+                $"candidate displaced-mesh normal parity: {maximumNormalError:R} rad");
+            Require(metrics.ValidationErrors == 0, "candidate displaced mesh has zero Vulkan validation errors");
+            Console.WriteLine($"M12D candidate displaced mesh: vertices={output.Vertices.Length}; " +
+                $"heightMax={maximumHeightError:E17}m; normalMax={maximumNormalError:E17}rad; validation=0");
+        }
+        finally
+        {
+            PlanetaryPhysicalSurface.ConfigureRuntimeGeneration(previous);
+        }
     }
 
     private static MeshInput Build(ReadOnlySpan<PlanetaryAnchoredMeshVertexId> ids, ReadOnlySpan<uint> indices, ReadOnlySpan<uint> adjacency,

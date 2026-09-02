@@ -7,7 +7,8 @@ public enum NovaCoreScenarioPreset
     Earth700Km,
     FloridaLaunchSite,
     SubdivisionDiagnostic,
-    EarthFullscreenNative
+    EarthFullscreenNative,
+    M12DNaturalTerrainCandidate
 }
 
 public enum NovaCoreScene
@@ -47,6 +48,12 @@ public enum NovaCoreDiagnosticsMode
     VulkanValidationAndPerformance
 }
 
+public enum NovaCorePhysicalSurface
+{
+    Generation3,
+    M12DNaturalTerrainCandidate
+}
+
 public readonly record struct NovaCoreClientResolution(int Width, int Height)
 {
     public override string ToString() => $"{Width}×{Height}";
@@ -61,7 +68,8 @@ public sealed record NovaCoreLaunchConfiguration(
     NovaCoreWindowMode WindowMode,
     NovaCoreResolutionPreset ResolutionPreset,
     NovaCoreClientResolution ClientResolution,
-    NovaCoreDiagnosticsMode Diagnostics)
+    NovaCoreDiagnosticsMode Diagnostics,
+    NovaCorePhysicalSurface PhysicalSurface = NovaCorePhysicalSurface.Generation3)
 {
     public bool EnableVulkanValidation => Diagnostics is
         NovaCoreDiagnosticsMode.VulkanValidation or NovaCoreDiagnosticsMode.VulkanValidationAndPerformance;
@@ -81,6 +89,7 @@ public sealed record NovaCoreScenarioDefinition(
     NovaCoreWindowMode DefaultWindowMode,
     NovaCoreResolutionPreset DefaultResolution,
     NovaCoreDiagnosticsMode DefaultDiagnostics,
+    NovaCorePhysicalSurface PhysicalSurface,
     bool IsSupported,
     string? UnsupportedReason)
 {

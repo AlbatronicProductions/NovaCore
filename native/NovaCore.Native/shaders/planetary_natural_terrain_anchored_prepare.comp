@@ -1,0 +1,25 @@
+#version 460
+#extension GL_GOOGLE_include_directive : require
+#extension GL_ARB_gpu_shader_fp64 : require
+#include "production_cube_surface.glsl"
+#include "planetary_natural_terrain_surface.glsl"
+
+layout(local_size_x=64,local_size_y=1,local_size_z=1)in;
+layout(std430,set=0,binding=37)readonly buffer AnchoredPreparationFrame { uvec4 control;uvec4 entries[]; } anchoredFrame;
+layout(std430,set=0,binding=36)buffer NaturalAnchoredPrepared { dvec4 values[]; } naturalAnchored;
+
+const uint AnchoredPatchOffset=16393u;
+const uint VerticesPerPatch=25u;
+
+void main()
+{
+  uint index=gl_GlobalInvocationID.x,patchIndex=index/VerticesPerPatch;
+  if(patchIndex>=anchoredFrame.control.x)return;
+  uint vertex=index%VerticesPerPatch,descriptor=AnchoredPatchOffset+patchIndex*5u;
+  uvec4 address=anchoredFrame.entries[descriptor+1u];
+  uvec4 cache=anchoredFrame.entries[descriptor+2u];
+  dvec2 uv=dvec2(vertex%5u,vertex/5u)/4.0;
+  dvec3 direction=ProductionProjectD(address,uv);
+  NaturalTerrainFieldSampleD prepared=EvaluateNaturalCandidatePreparedD(direction);
+  naturalAnchored.values[cache.x*VerticesPerPatch+vertex]=dvec4(prepared.height,prepared.bodyGradient);
+}

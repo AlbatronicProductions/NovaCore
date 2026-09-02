@@ -13,9 +13,11 @@ and performs FP64 camera-relative subtraction before GPU transport.
 
 ## Accepted foundation
 
-The M12C closeout candidate extends the banked M12B/11B-7H1 GPU terrain
-foundation with the manually accepted moving-reference-frame correction and the
-accepted camera behavior:
+The previous banked renderer recovery point is M12C Phase 1B at commit
+`dccb101af1053b9e44f9e12d5738ca064488efe5`, tagged
+`m12c-phase1b-stable`. The accepted M12D foundation extends that renderer with
+topology-independent physical-content work and a structural proof of the
+selected long-term geometry architecture:
 
 - FP64 body-fixed physical authority and deterministic geography;
 - transactional terrain ownership and complete fallback coverage;
@@ -30,6 +32,20 @@ accepted camera behavior:
   `earth-florida-m12` NCCUBE2-v3 regional data;
 - bounded dynamic selection, cache residency, background preparation, and
   generation publication.
+
+M12D milestone status is:
+
+- P2A canonical hashed-cell natural terrain field: **PASS**;
+- P2B multiscale natural terrain families: **PASS**;
+- P2C physical/preparation foundation: **accepted**;
+- P2C2 opt-in renderer and material-performance investigation: correctness,
+  parity, generation propagation, and value-preserving material-noise work are
+  accepted; the candidate remains opt-in and does not replace generation 3;
+- P2C3 prepared/MIP material architecture: **paused** until the spherical
+  billboard migration has stable physical and workload evidence;
+- P2S1 spherical-billboard architecture decision: **PROCEED**;
+- P2S2 immutable spherical-billboard topology proof: **PASS**;
+- P2S3 runtime/GPU integration: **not begun**.
 
 The shallow global representation remains the conservative migration fallback.
 It is not permission for global and refined owners to define different physical
@@ -77,6 +93,47 @@ BC7 albedo, BC5 diagnostic normal, and R8 control records over roughly
 98 x 111 km in a complete L8-L11 hierarchy. Regional data increases fidelity;
 it is an input to the canonical surface rather than a separate visible owner.
 
+This patch renderer is transitional migration architecture. It remains the
+production and recovery renderer until the spherical-billboard path passes its
+GPU, physical-continuity, performance, and Desktop acceptance gates. Do not
+optimize the patch renderer merely to extend its lifetime, and do not retire it
+before its accepted replacement is complete.
+
+## Selected spherical-billboard architecture
+
+The selected long-term planetary geometry representation is:
+
+```text
+pre-generated nested spherical-billboard topology
+-> camera-facing tangent-snapped pupil
+-> canonical H(bodyDirection)
+-> GPU physical preparation
+-> GPU conservative triangle culling/compaction
+-> bounded near-camera tessellation
+-> body-fixed material presentation
+```
+
+P2S2 supplies three deterministic structural-proof artifacts:
+
+| Level | Vertices | Triangles | Topology hash |
+| --- | ---: | ---: | --- |
+| Orbital | 162 | 320 | `0x46714C6571D73AE6` |
+| Intermediate approach | 642 | 1,280 | `0xAAC90882FE7F656E` |
+| Surface pupil | 2,562 | 5,120 | `0xBBBACB117D88439D` |
+
+The approximately 245,868-byte proof library is immutable at runtime,
+deterministic, closed, watertight, outward wound, adjacency-authored, exactly
+nested coarse-to-fine, and stitch-free. These three meshes prove structure
+only. Their projected near-surface spacing is not production density and must
+not be documented or tuned as the final density policy.
+
+P2S3 is the next authorized phase: an isolated spherical-billboard GPU
+runtime/draw proof. It has not begun. The existing dynamic patch quadtree,
+mixed-LOD balancing, stitch templates, translated patch cache, per-patch
+indirect submission, parent/child promotion, and global/anchored ownership stay
+intact through migration and are scheduled for retirement only after P2S6
+acceptance.
+
 ## Candidate D and focused benchmark status
 
 Candidate D is accepted as a presentation-only optimization. It
@@ -91,6 +148,14 @@ diagnostic infrastructure. A benchmark comparison is invalid when owner count,
 TCS patches, refined vertices, raster primitives, material/terrain generation,
 or relevant descriptor/resource generation differs beyond its declared
 tolerance.
+
+The P2C2 material investigation also retained a bit-identical optimization of
+the existing `TerrainNoise2` corner-hash prefix. It does not alter band
+activation, classification, albedo, visual normals, physical authority, or
+material identity. Temporary material bypasses and profiling branches are not
+part of the accepted foundation. The old triangle-dependent material footprint
+may remain only inside the transitional renderer until P2C3 establishes the
+topology-independent prepared/MIP replacement.
 
 ## M12C-4B decision
 
@@ -194,7 +259,7 @@ frame pacing, and Vulkan validation at the target 3440x1440 configuration.
 A microbenchmark pass never implies physical acceptance. Manual physical
 Desktop testing is an authoritative rendering-milestone gate.
 
-## Current M12C closeout candidate
+## Banked M12D foundation candidate
 
 The automated Phase 1 candidate routes complete global geometry and refined
 anchored geometry through the same required 8192x4096 oracle plus NCCUBE2
@@ -214,13 +279,16 @@ removed. The latter compared the retired adaptive CPU global hierarchy with the
 current shallow global fallback plus anchored owner and no longer represented a
 production invariant.
 
-After this baseline is reviewed and banked, Phase 2 may begin. Its bounded work
-is:
+The natural-terrain field, multiscale families, GPU preparation contracts, and
+topology artifacts are now the accepted foundation for the spherical-billboard
+migration. The opt-in P2C renderer exists to preserve and verify generation,
+parity, bounds, and publication behavior during migration; it is not a second
+permanent production terrain renderer.
 
-1. replace the fixed-axis carrier synthesis with locally decorrelated fields;
-2. prepare and reuse immutable simulation/orbit presentation;
-3. measure conservative triangle compaction and TES-range changes before
-   adopting them.
+After this foundation is banked, the next bounded work is P2S3 only: load the
+immutable P2S2 topology through an isolated runtime/GPU draw proof without
+changing production ownership. P2C3 remains paused until the billboard path is
+physically stable.
 
 Do not restore the retired Eye or CPU final-raster grids, add another terrain
 representation, or hide continuity failures with skirts, depth bias, material
@@ -231,6 +299,7 @@ masking, or fallback geometry.
 Production atmosphere, volumetric clouds, physical oceans, weather,
 vegetation, and surface gameplay are not implemented. Global physical source
 fidelity remains shallow outside regional data. The dynamic hierarchy has not
-yet been measured as a complete replacement for the specialized distant
-representation. The sample remains a single-window, single-foreground-thread
-host.
+yet been replaced by the selected spherical-billboard representation. P2S2
+proof meshes are far below production near-surface density, P2S3 has not begun,
+and stable 60 FPS remains open. The sample remains a single-window,
+single-foreground-thread host.

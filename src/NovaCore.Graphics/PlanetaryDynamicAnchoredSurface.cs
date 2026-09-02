@@ -377,7 +377,8 @@ public sealed class PlanetaryDynamicAnchoredSurface
 
         BeginFrameTelemetry();
         var radial = cameraBody.Normalized();
-        var surface = _terrain.SamplePhysicalSurface(radial);
+        var surface = _terrain.SamplePhysicalSurface(radial,
+            (PlanetaryPhysicalSurfaceGeneration)_physicalSurfaceGeneration);
         var altitude = Math.Sqrt(cameraBody.LengthSquared) - (_bodyRadius + surface.FinalHeightMetres);
         var horizonDistance=Math.Sqrt(Math.Max(0d,altitude*(2d*_bodyRadius+altitude)));
         var retainedRadius=Math.Clamp(16_000d+horizonDistance,

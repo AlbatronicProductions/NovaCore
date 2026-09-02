@@ -30,7 +30,9 @@ GPU LOD, culling, label selection, and representation handoff are presentation-o
 - Do not broaden scope after a failed test. If implementation exposes an architectural conflict, stop and request explicit review rather than silently redesigning.
 - High-risk architecture and authority changes belong to the designated architecture owner (currently Sol). Terra may implement bounded work whose design and invariants are already fully specified.
 - Rejected production architectures are removed after their accepted replacement is ready. Do not accumulate hidden compatibility modes, dormant renderers, or runtime bridges merely because tests reference them.
+- Do not optimize systems already scheduled for architectural retirement unless the work is required for migration correctness or safety. Preserve them as recovery paths until their accepted replacement passes its retirement gate.
 - Do not stage or commit a rendering milestone before its required physical Desktop acceptance unless the user explicitly changes that gate.
+- Main-branch NovaCore milestone commits follow `NovaCore <milestone>: <description>` unless a specific non-milestone maintenance operation justifies otherwise. Do not rewrite already-pushed history solely to rename an older commit.
 
 ## KSA reference policy
 

@@ -3,6 +3,12 @@ using NovaCore.Core.Surface;
 
 namespace NovaCore.Graphics;
 
+public enum PlanetaryPhysicalSurfaceGeneration : uint
+{
+    Generation3 = 3,
+    M12DNaturalTerrainCandidate = 4
+}
+
 public enum PlanetaryTerrainModifierType : uint
 {
     TiledDetail = 1,
@@ -297,6 +303,8 @@ public static class PlanetaryPhysicalSurface
     public const ulong EarthBodyId = 6;
     public const uint ModifierSchemaVersion = 2;
     public const ulong ModifierGenerationId = 3;
+    public const uint NaturalTerrainCandidateGenerationId = 4;
+    public const uint NaturalTerrainCandidateSeed = 0x4D12D2B1u;
     public const double EarthReferenceRadiusMetres = 6_371_008.8d;
     public const double PhysicalNormalSampleRadiusMetres = 9_774.0d;
     public const double TiledAmplitudeMetres = 8d;
@@ -381,8 +389,27 @@ public static class PlanetaryPhysicalSurface
     public static PlanetaryTerrainModifierGeneration EarthGeneration { get; } =
         new(ModifierGenerationId, EarthBodyId, 5, ModifierSchemaVersion, EarthDefinitions);
 
+    private static uint _runtimeGeneration = (uint)PlanetaryPhysicalSurfaceGeneration.Generation3;
+
+    public static PlanetaryPhysicalSurfaceGeneration RuntimeGeneration =>
+        (PlanetaryPhysicalSurfaceGeneration)Volatile.Read(ref _runtimeGeneration);
+
+    /// <summary>
+    /// Selects one process-wide physical Earth authority before a scene is created.
+    /// Normal launches retain generation 3; the M12D candidate is explicit opt-in.
+    /// </summary>
+    public static void ConfigureRuntimeGeneration(PlanetaryPhysicalSurfaceGeneration generation)
+    {
+        if (!Enum.IsDefined(generation)) throw new ArgumentOutOfRangeException(nameof(generation));
+        Volatile.Write(ref _runtimeGeneration, (uint)generation);
+    }
+
     public static PlanetaryPhysicalSurfaceSample Evaluate(in PlanetaryTerrainDefinition terrain,
         in Double3 bodyFixedDirection)
+        => Evaluate(terrain, bodyFixedDirection, RuntimeGeneration);
+
+    public static PlanetaryPhysicalSurfaceSample Evaluate(in PlanetaryTerrainDefinition terrain,
+        in Double3 bodyFixedDirection, PlanetaryPhysicalSurfaceGeneration generation)
     {
         if (!terrain.IsValid || !bodyFixedDirection.IsFinite || bodyFixedDirection.LengthSquared <= 0d)
             throw new ArgumentOutOfRangeException();
@@ -391,6 +418,11 @@ public static class PlanetaryPhysicalSurface
         if (terrain.SourceId != PlanetaryTerrainDefinition.EarthProductionCubeV5.SourceId ||
             terrain.Version != PlanetaryTerrainDefinition.EarthProductionCubeV5.Version)
             return new(baseHeight, default, baseHeight, 0d, 0d, direction);
+
+        if (generation == PlanetaryPhysicalSurfaceGeneration.M12DNaturalTerrainCandidate)
+            return EvaluateNaturalCandidate(terrain, direction, baseHeight);
+        if (generation != PlanetaryPhysicalSurfaceGeneration.Generation3)
+            throw new ArgumentOutOfRangeException(nameof(generation));
 
         var modifiers = EvaluateModifiers(direction, baseHeight);
         var finalHeight = Math.Max(0d,
@@ -551,8 +583,19 @@ public static class PlanetaryPhysicalSurface
 
     public static double EvaluateFinalHeightNoGradient(in PlanetaryTerrainDefinition terrain,
         in Double3 bodyFixedDirection)
+        => EvaluateFinalHeightNoGradient(terrain, bodyFixedDirection, RuntimeGeneration);
+
+    public static double EvaluateFinalHeightNoGradient(in PlanetaryTerrainDefinition terrain,
+        in Double3 bodyFixedDirection, PlanetaryPhysicalSurfaceGeneration generation)
     {
         var baseHeight = terrain.SampleBaseHeight(bodyFixedDirection);
+        if (generation == PlanetaryPhysicalSurfaceGeneration.M12DNaturalTerrainCandidate)
+        {
+            var natural = EvaluateNaturalComposition(bodyFixedDirection);
+            return Math.Max(0d, Math.Max(0d, baseHeight + natural.Macro.Height + natural.Meso.Height) + natural.Near.Height);
+        }
+        if (generation != PlanetaryPhysicalSurfaceGeneration.Generation3)
+            throw new ArgumentOutOfRangeException(nameof(generation));
         var modifiers = EvaluateModifiers(bodyFixedDirection, baseHeight);
         return Math.Max(0d,
             Math.Max(0d, baseHeight + modifiers.BaseHeightMetres) + modifiers.NearHeightMetres);
@@ -560,9 +603,76 @@ public static class PlanetaryPhysicalSurface
 
     public static double EvaluateBaseHeightNoGradient(in PlanetaryTerrainDefinition terrain,
         in Double3 bodyFixedDirection)
+        => EvaluateBaseHeightNoGradient(terrain, bodyFixedDirection, RuntimeGeneration);
+
+    public static double EvaluateBaseHeightNoGradient(in PlanetaryTerrainDefinition terrain,
+        in Double3 bodyFixedDirection, PlanetaryPhysicalSurfaceGeneration generation)
     {
         var baseHeight = terrain.SampleBaseHeight(bodyFixedDirection);
+        if (generation == PlanetaryPhysicalSurfaceGeneration.M12DNaturalTerrainCandidate)
+        {
+            var natural = EvaluateNaturalComposition(bodyFixedDirection);
+            return Math.Max(0d, baseHeight + natural.Macro.Height + natural.Meso.Height);
+        }
+        if (generation != PlanetaryPhysicalSurfaceGeneration.Generation3)
+            throw new ArgumentOutOfRangeException(nameof(generation));
         return Math.Max(0d, baseHeight + EvaluateModifiers(bodyFixedDirection, baseHeight).BaseHeightMetres);
+    }
+
+    private static PlanetaryNaturalTerrainCompositionSample EvaluateNaturalComposition(in Double3 bodyFixedDirection)
+    {
+        var identity = new PlanetaryNaturalTerrainFamilyIdentity(EarthBodyId,
+            PlanetaryNaturalTerrainFamilies.ProofGeneration, NaturalTerrainCandidateSeed);
+        return PlanetaryNaturalTerrainFamilies.EvaluateComposed(bodyFixedDirection.Normalized() *
+            EarthReferenceRadiusMetres, identity);
+    }
+
+    private static PlanetaryPhysicalSurfaceSample EvaluateNaturalCandidate(in PlanetaryTerrainDefinition terrain,
+        in Double3 direction, double geographicHeight)
+    {
+        var natural = EvaluateNaturalComposition(direction);
+        var baseModifier = natural.Macro.Height + natural.Meso.Height;
+        var finalHeight = Math.Max(0d, Math.Max(0d, geographicHeight + baseModifier) + natural.Near.Height);
+        var frame = PlanetarySurfaceFrame.AtDirection(direction);
+        var angle = PhysicalNormalSampleRadiusMetres / EarthReferenceRadiusMetres;
+        var leftDirection = (direction - frame.East * angle).Normalized();
+        var rightDirection = (direction + frame.East * angle).Normalized();
+        var downDirection = (direction - frame.North * angle).Normalized();
+        var upDirection = (direction + frame.North * angle).Normalized();
+        var leftHeight = EvaluateBaseHeightNoGradient(terrain, leftDirection,
+            PlanetaryPhysicalSurfaceGeneration.M12DNaturalTerrainCandidate);
+        var rightHeight = EvaluateBaseHeightNoGradient(terrain, rightDirection,
+            PlanetaryPhysicalSurfaceGeneration.M12DNaturalTerrainCandidate);
+        var downHeight = EvaluateBaseHeightNoGradient(terrain, downDirection,
+            PlanetaryPhysicalSurfaceGeneration.M12DNaturalTerrainCandidate);
+        var upHeight = EvaluateBaseHeightNoGradient(terrain, upDirection,
+            PlanetaryPhysicalSurfaceGeneration.M12DNaturalTerrainCandidate);
+        var nearEast = Double3.Dot(natural.Near.BodyGradient, frame.East);
+        var nearNorth = Double3.Dot(natural.Near.BodyGradient, frame.North);
+        var eastGradient = (rightHeight - leftHeight) / (2d * PhysicalNormalSampleRadiusMetres) + nearEast;
+        var northGradient = (upHeight - downHeight) / (2d * PhysicalNormalSampleRadiusMetres) + nearNorth;
+        var left = leftDirection * (EarthReferenceRadiusMetres + leftHeight);
+        var right = rightDirection * (EarthReferenceRadiusMetres + rightHeight);
+        var down = downDirection * (EarthReferenceRadiusMetres + downHeight);
+        var up = upDirection * (EarthReferenceRadiusMetres + upHeight);
+        var baseNormal = Double3.Cross(right - left, up - down).Normalized();
+        if (Double3.Dot(baseNormal, direction) < 0d) baseNormal = -baseNormal;
+        var radialComponent = Math.Max(Double3.Dot(baseNormal, direction), 1e-9d);
+        var baseEastSlope = -Double3.Dot(baseNormal, frame.East) / radialComponent;
+        var baseNorthSlope = -Double3.Dot(baseNormal, frame.North) / radialComponent;
+        var normal = (direction - frame.East * (baseEastSlope + nearEast) -
+            frame.North * (baseNorthSlope + nearNorth)).Normalized();
+        var biomes = PlanetaryBiomeControlAuthority.Sample(direction, geographicHeight);
+        var dominant = Math.Abs(natural.Near.Height) > Math.Abs(baseModifier)
+            ? PlanetaryTerrainModifierType.NearMaterial
+            : PlanetaryTerrainModifierType.TiledDetail;
+        var modifiers = new PlanetaryTerrainModifierSample(natural.Macro.Height, 0d, natural.Meso.Height,
+            natural.Near.Height, eastGradient, northGradient, 1d, dominant, biomes)
+        {
+            NearEastGradient = nearEast,
+            NearNorthGradient = nearNorth
+        };
+        return new(geographicHeight, modifiers, finalHeight, eastGradient, northGradient, normal);
     }
 
     private static double Band(in Double3 point, in Double3 axis, double wavelength, double phase,

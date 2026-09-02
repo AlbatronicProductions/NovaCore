@@ -49,6 +49,10 @@ public readonly record struct PlanetaryTerrainDefinition(uint SourceId,uint Vers
     public PlanetaryPhysicalSurfaceSample SamplePhysicalSurface(in Double3 bodyDirection) =>
         PlanetaryPhysicalSurface.Evaluate(this, bodyDirection);
 
+    public PlanetaryPhysicalSurfaceSample SamplePhysicalSurface(in Double3 bodyDirection,
+        PlanetaryPhysicalSurfaceGeneration generation) =>
+        PlanetaryPhysicalSurface.Evaluate(this, bodyDirection, generation);
+
     public double SampleHeight(in Double3 bodyDirection,int patchLevel)
     {
         if(patchLevel is <0 or >24)throw new ArgumentOutOfRangeException(nameof(patchLevel));

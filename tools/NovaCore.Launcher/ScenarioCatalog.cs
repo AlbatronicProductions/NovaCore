@@ -9,27 +9,32 @@ public static class ScenarioCatalog
         new(NovaCoreScenarioPreset.SolarSystemOverview, "Solar System Overview",
             "Interactive Solar map using the normal production scene.", NovaCoreScene.Solar,
             NovaCoreStartingBody.None, null, null, NovaCoreWindowMode.Windowed,
-            NovaCoreResolutionPreset.Resolution960x540, NovaCoreDiagnosticsMode.Normal, true, null),
+            NovaCoreResolutionPreset.Resolution960x540, NovaCoreDiagnosticsMode.Normal, NovaCorePhysicalSurface.Generation3, true, null),
         new(NovaCoreScenarioPreset.EarthFarOrbital, "Earth Far / Orbital View",
             "Earth production renderer from a 3,000 km orbital starting altitude.", NovaCoreScene.Earth,
             NovaCoreStartingBody.Earth, 3_000_000.0, "land", NovaCoreWindowMode.Windowed,
-            NovaCoreResolutionPreset.Resolution960x540, NovaCoreDiagnosticsMode.Normal, true, null),
+            NovaCoreResolutionPreset.Resolution960x540, NovaCoreDiagnosticsMode.Normal, NovaCorePhysicalSurface.Generation3, true, null),
         new(NovaCoreScenarioPreset.Earth700Km, "Earth 700 km",
             "Earth production renderer from 700 km altitude.", NovaCoreScene.Earth,
             NovaCoreStartingBody.Earth, 700_000.0, "land", NovaCoreWindowMode.Windowed,
-            NovaCoreResolutionPreset.Resolution960x540, NovaCoreDiagnosticsMode.Normal, true, null),
+            NovaCoreResolutionPreset.Resolution960x540, NovaCoreDiagnosticsMode.Normal, NovaCorePhysicalSurface.Generation3, true, null),
         new(NovaCoreScenarioPreset.EarthFullscreenNative, "Earth — Fullscreen Native",
             "Solar production scene pre-focused on Earth at native desktop resolution with acceptance telemetry.", NovaCoreScene.Solar,
             NovaCoreStartingBody.Earth, 700_000.0, "land", NovaCoreWindowMode.BorderlessFullscreen,
-            NovaCoreResolutionPreset.NativeDesktop, NovaCoreDiagnosticsMode.VulkanValidationAndPerformance, true, null),
+            NovaCoreResolutionPreset.NativeDesktop, NovaCoreDiagnosticsMode.VulkanValidationAndPerformance, NovaCorePhysicalSurface.Generation3, true, null),
+        new(NovaCoreScenarioPreset.M12DNaturalTerrainCandidate, "M12D Natural Terrain Candidate",
+            "Opt-in Earth renderer candidate using the prepared M12D natural physical surface.", NovaCoreScene.Solar,
+            NovaCoreStartingBody.Earth, 700_000.0, "land", NovaCoreWindowMode.BorderlessFullscreen,
+            NovaCoreResolutionPreset.NativeDesktop, NovaCoreDiagnosticsMode.VulkanValidationAndPerformance,
+            NovaCorePhysicalSurface.M12DNaturalTerrainCandidate, true, null),
         new(NovaCoreScenarioPreset.FloridaLaunchSite, "Florida Launch Site",
             "Solar scene focused on the existing anchored Florida launch site.", NovaCoreScene.Solar,
             NovaCoreStartingBody.Earth, null, "florida-launch", NovaCoreWindowMode.Windowed,
-            NovaCoreResolutionPreset.Resolution960x540, NovaCoreDiagnosticsMode.Normal, true, null),
+            NovaCoreResolutionPreset.Resolution960x540, NovaCoreDiagnosticsMode.Normal, NovaCorePhysicalSurface.Generation3, true, null),
         new(NovaCoreScenarioPreset.SubdivisionDiagnostic, "Subdivision Diagnostic",
             "Screen-space terrain subdivision diagnostic.", NovaCoreScene.SubdivisionDiagnostic,
             NovaCoreStartingBody.None, null, null, NovaCoreWindowMode.Windowed,
-            NovaCoreResolutionPreset.Resolution960x540, NovaCoreDiagnosticsMode.Normal, true, null)
+            NovaCoreResolutionPreset.Resolution960x540, NovaCoreDiagnosticsMode.Normal, NovaCorePhysicalSurface.Generation3, true, null)
     ];
 
     public static NovaCoreScenarioDefinition Default => Get(NovaCoreScenarioPreset.SolarSystemOverview);
@@ -90,7 +95,8 @@ public static class ScenarioCatalog
             windowMode,
             resolutionPreset,
             resolution,
-            diagnostics);
+            diagnostics,
+            definition.PhysicalSurface);
         error = null;
         return true;
     }
