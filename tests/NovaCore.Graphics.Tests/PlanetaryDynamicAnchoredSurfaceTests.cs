@@ -1,4 +1,5 @@
 using NovaCore.Core;
+using NovaCore.Core.Surface;
 using NovaCore.Graphics;
 
 internal static class PlanetaryDynamicAnchoredSurfaceTests
@@ -18,6 +19,8 @@ internal static class PlanetaryDynamicAnchoredSurfaceTests
         TransactionalDescriptorPublication();
         CanonicalPhysicalAndMaterialAuthority();
         MovingFootprintSchedulerAndCapacity();
+        MovingReferenceFrameReusesPersistentTopology();
+        FrameSynchronizedA1A5Telemetry();
         StationaryRotationRetainsPhysicalNeighborhood();
         SolarScaleDeactivationIsIdle();
         FailureRetainsPreviousOwner();
@@ -28,6 +31,7 @@ internal static class PlanetaryDynamicAnchoredSurfaceTests
         var root = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", ".."));
         var vertex = File.ReadAllText(Path.Combine(root, "native", "NovaCore.Native", "shaders", "anchored_terrain.vert"));
         var physical = File.ReadAllText(Path.Combine(root, "native", "NovaCore.Native", "shaders", "anchored_physical_surface.glsl"));
+        var canonical = File.ReadAllText(Path.Combine(root, "native", "NovaCore.Native", "shaders", "planetary_physical_authority.glsl"));
         var control = File.ReadAllText(Path.Combine(root, "native", "NovaCore.Native", "shaders", "anchored_terrain.tesc"));
         var evaluation = File.ReadAllText(Path.Combine(root, "native", "NovaCore.Native", "shaders", "anchored_terrain.tese"));
         var header = File.ReadAllText(Path.Combine(root, "native", "NovaCore.Native", "NovaCoreNative.h"));
@@ -37,7 +41,7 @@ internal static class PlanetaryDynamicAnchoredSurfaceTests
             vertex.Contains("AnchoredPatchOffset=16393u", StringComparison.Ordinal) &&
             evaluation.Contains("frameOffset=16384u", StringComparison.Ordinal) &&
             native.Contains("AnchoredSurfaceMaximumPatches=6144", StringComparison.Ordinal) &&
-            native.Contains("AnchoredSurfaceMaximumCacheSlots=8192", StringComparison.Ordinal) &&
+            native.Contains("AnchoredSurfaceMaximumCacheSlots=16384", StringComparison.Ordinal) &&
             native.Contains("AnchoredSurfaceCoverageCapacity=16384", StringComparison.Ordinal),
             "production vertex input is one reusable base topology plus patch descriptors");
         Assert(control.Contains("ConservativelyOutside", StringComparison.Ordinal) &&
@@ -47,22 +51,23 @@ internal static class PlanetaryDynamicAnchoredSurfaceTests
             control.Contains("gl_TessLevelOuter", StringComparison.Ordinal),
             "tessellation control performs conservative bound rejection and raster-proximate screen refinement");
         Assert(vertex.Contains("AnchoredGeographicHeight", StringComparison.Ordinal) &&
-            vertex.Contains("TerrainBaseModifierHeightD", StringComparison.Ordinal) &&
+            vertex.Contains("CanonicalBasePhysicalHeight(direction)", StringComparison.Ordinal) &&
             vertex.Contains("AnchoredBasePhysicalNormal", StringComparison.Ordinal) &&
             evaluation.Contains("ProductionProjectD", StringComparison.Ordinal) &&
             evaluation.Contains("layout(triangles,equal_spacing,cw)", StringComparison.Ordinal) &&
-            evaluation.Contains("EvaluateNearPhysicalD", StringComparison.Ordinal) &&
+            evaluation.Contains("EvaluateNearPhysicalD(direction,EvaluateBiomeBlendD(direction,geographic))", StringComparison.Ordinal) &&
             evaluation.Contains("nearValue.eastGradient", StringComparison.Ordinal),
             "geographic/meso displacement is prepared on the reusable base while TES adds the bounded canonical near field and its physical gradient");
-        Assert(physical.Contains("binding=33", StringComparison.Ordinal) &&
-            physical.Contains("AnchoredOracleElevation(direction)", StringComparison.Ordinal) &&
-            physical.Contains("const uint width=8192u,height=4096u", StringComparison.Ordinal) &&
-            physical.Contains("atan(-lookupDirection.z,lookupDirection.x)", StringComparison.Ordinal) &&
+        Assert(physical.Contains("planetary_physical_authority.glsl", StringComparison.Ordinal) &&
+            physical.Contains("CanonicalGeographicHeight(direction)", StringComparison.Ordinal) &&
+            canonical.Contains("binding=33", StringComparison.Ordinal) &&
+            canonical.Contains("const uint width=8192u,height=4096u", StringComparison.Ordinal) &&
+            canonical.Contains("atan(-lookupDirection.z,lookupDirection.x)", StringComparison.Ordinal) &&
             !physical.Contains("AnchoredGlobalHeight", StringComparison.Ordinal) &&
             native.Contains("physical elevation oracle path is required", StringComparison.Ordinal) &&
             native.Contains("binds[20].binding=33", StringComparison.Ordinal) &&
             header.Contains("elevationOraclePathUtf8", StringComparison.Ordinal),
-            "anchored production geometry consumes the canonical 8192x4096 physical oracle through the required runtime ABI, never the terrain-v5 visual payload");
+            "anchored production geometry consumes the shared canonical 8192x4096 physical oracle through the required runtime ABI, never the terrain-v5 visual payload");
         Assert(!header.Contains("NcAnchoredTerrainVertex", StringComparison.Ordinal) &&
             !header.Contains("anchoredSurfaceVertexPool", StringComparison.Ordinal),
             "the frame ABI has no CPU final-raster vertex pool");
@@ -289,6 +294,51 @@ internal static class PlanetaryDynamicAnchoredSurfaceTests
             $"generations=1; selections=0; misses=0; preparations=0");
     }
 
+    private static void MovingReferenceFrameReusesPersistentTopology()
+    {
+        var hierarchy = Create();
+        var direction = new Double3(.31d, .72d, .62d).Normalized();
+        Publish(hierarchy, direction, 10.004d);
+        var generation = hierarchy.AuthoritativeGeneration;
+        var before = hierarchy.AuthoritativePatches.Take(hierarchy.AuthoritativePatchCount)
+            .Select(value => ((int)value.Level, (PlanetaryPatchEdge)value.StitchMask))
+            .OrderBy(value => value.Item1).ThenBy(value => value.Item2).ToArray();
+        var frame = PlanetarySurfaceFrame.AtDirection(direction);
+        var moved = (direction + frame.East * (18_000d / Radius)).Normalized();
+        var bodyMotion = Math.Sqrt((CameraAt(moved,10.004d)-CameraAt(direction,10.004d)).LengthSquared);
+        var firstBefore = hierarchy.AuthoritativePatches[0];
+
+        var started = System.Diagnostics.Stopwatch.GetTimestamp();
+        Update(hierarchy, moved, 10.004d);
+        var callbackMilliseconds = System.Diagnostics.Stopwatch.GetElapsedTime(started).TotalMilliseconds;
+        Assert(hierarchy.AuthoritativeGeneration == generation && hierarchy.Visible &&
+            hierarchy.Telemetry.SelectionPending && !hierarchy.HasPendingGeneration &&
+            hierarchy.Telemetry.MainThreadTerrainMilliseconds == 0d,
+            "ordinary moving-reference input retains the immutable owner and queues topology translation off the render callback");
+
+        PublishCurrent(hierarchy, moved, 10.004d);
+        var after = hierarchy.AuthoritativePatches.Take(hierarchy.AuthoritativePatchCount)
+            .Select(value => ((int)value.Level, (PlanetaryPatchEdge)value.StitchMask))
+            .OrderBy(value => value.Item1).ThenBy(value => value.Item2).ToArray();
+        var firstAfter = hierarchy.AuthoritativePatches[0];
+        Console.WriteLine($"Moving reference candidate: generation={generation}->{hierarchy.AuthoritativeGeneration}; " +
+            $"before={before.Length}; after={after.Length}; topologyEqual={before.SequenceEqual(after)}; " +
+            $"translations={hierarchy.PersistentTopologyTranslationCount}; delta={hierarchy.Telemetry.DescriptorDeltaCount}; " +
+            $"overlap={hierarchy.Telemetry.DemandOverlapPercent:R}%; motion={bodyMotion:R}m; " +
+            $"first={firstBefore.Face}/{firstBefore.Level}/{firstBefore.X}/{firstBefore.Y}->" +
+            $"{firstAfter.Face}/{firstAfter.Level}/{firstAfter.X}/{firstAfter.Y}");
+        Assert(hierarchy.AuthoritativeGeneration != generation && before.SequenceEqual(after) &&
+            hierarchy.PersistentTopologyTranslationCount > 0 &&
+            hierarchy.Telemetry.DescriptorDeltaCount > 0 &&
+            hierarchy.Telemetry.DescriptorDeltaCount < hierarchy.AuthoritativePatchCount * 2 &&
+            hierarchy.Telemetry.DemandOverlapPercent > 0d,
+            "the replacement remaps one persistent LOD/stitch topology and prepares only entering/leaving canonical descriptor deltas");
+        Console.WriteLine($"Moving reference topology: callback={callbackMilliseconds:R}ms; " +
+            $"patches={hierarchy.AuthoritativePatchCount}; delta={hierarchy.Telemetry.DescriptorDeltaCount}; " +
+            $"overlap={hierarchy.Telemetry.DemandOverlapPercent:R}%; translations={hierarchy.PersistentTopologyTranslationCount}; " +
+            $"queueLatency={hierarchy.Telemetry.LastSelectionQueueLatencyMilliseconds:R}ms");
+    }
+
     private static void FailureRetainsPreviousOwner()
     {
         var direction = new Double3(.31d, .72d, .62d).Normalized();
@@ -298,11 +348,100 @@ internal static class PlanetaryDynamicAnchoredSurfaceTests
         var east = new Double3(-direction.Z, 0d, direction.X).Normalized();
         var moved = (direction + east * .08d).Normalized();
         Update(hierarchy, moved, 100_000d);
+        for (var frame = 0; frame < 10_000 && hierarchy.Telemetry.SelectionPending; frame++)
+        {
+            Thread.Sleep(1);
+            Update(hierarchy, moved, 100_000d);
+        }
         Assert(hierarchy.AuthoritativeGeneration == generation && hierarchy.Visible &&
             hierarchy.RequiresGlobalFallback && !hierarchy.HasPendingGeneration &&
             hierarchy.Telemetry.RejectedGenerationReason ==
                 PlanetaryDynamicGenerationRejectReason.InjectedFailure,
             "incomplete replacement never suppresses the previous/global owner");
+    }
+
+    private static void FrameSynchronizedA1A5Telemetry()
+    {
+        const int frames = 180;
+        var start = BodyFixedGeography.DirectionFromLatitudeLongitude(
+            28.5721d * Math.PI / 180d, -80.648d * Math.PI / 180d);
+        var terrain = PlanetaryTerrainDefinition.EarthProductionCubeV5;
+        Assert(SurfaceAnchor.TryCreate(EarthBodyId,
+            new TerrainAuthorityVersion(terrain.SourceId, terrain.Version), start, 0d,
+            out var anchor) == SurfaceAnchorCreationStatus.Success,
+            "A1-A5 telemetry anchor is canonical");
+
+        RunPhase("A1 anchored stationary 1x", 0d, rotateView: false, activeAnchor: anchor);
+        RunPhase("A2 anchored time warp", 0d, rotateView: true, activeAnchor: anchor);
+        RunPhase("A3 unanchored moving frame", 100d, rotateView: false, null);
+        RunPhase("A4 unanchored lateral", 200d, rotateView: false, null);
+        RunPhase("A5 unanchored time warp", 400d, rotateView: false, null);
+
+        void RunPhase(string name, double metresPerFrame, bool rotateView, SurfaceAnchor? activeAnchor)
+        {
+            var hierarchy = Create();
+            hierarchy.Update(CameraAt(start, 10.004d), -start, Fov, Aspect, 1440d,
+                activeAnchor, .05d);
+            for (var settle = 0; settle < 10_000 &&
+                 (!hierarchy.Visible || hierarchy.HasPendingGeneration || hierarchy.Telemetry.SelectionPending); settle++)
+            {
+                hierarchy.AcknowledgeGpuGeneration(hierarchy.ActiveGeneration);
+                hierarchy.Update(CameraAt(start, 10.004d), -start, Fov, Aspect, 1440d,
+                    activeAnchor, .05d);
+                if (!hierarchy.Visible || hierarchy.HasPendingGeneration || hierarchy.Telemetry.SelectionPending)
+                    Thread.Sleep(1);
+            }
+            Assert(hierarchy.Visible && !hierarchy.HasPendingGeneration,
+                $"{name} initial immutable generation settles");
+            var callbacks = new double[frames];
+            var generations = 0; var descriptorDeltas = 0; var selectionFrames = 0;
+            var mainThreadMaximum = 0d; var previousGeneration = hierarchy.AuthoritativeGeneration;
+            var selectionMaximum = 0d; var preparationMaximum = 0d;
+            for (var frameIndex = 0; frameIndex < frames; frameIndex++)
+            {
+                var surfaceFrame = PlanetarySurfaceFrame.AtDirection(start);
+                var distance = metresPerFrame * frameIndex;
+                var direction = (start + surfaceFrame.East * (distance / Radius)).Normalized();
+                var forward = rotateView
+                    ? (-direction * Math.Cos(frameIndex * Math.PI / frames) +
+                       surfaceFrame.East * Math.Sin(frameIndex * Math.PI / frames)).Normalized()
+                    : -direction;
+                var started = System.Diagnostics.Stopwatch.GetTimestamp();
+                hierarchy.Update(CameraAt(direction, 10.004d), forward, Fov, Aspect, 1440d,
+                    activeAnchor, .05d);
+                callbacks[frameIndex] = System.Diagnostics.Stopwatch.GetElapsedTime(started).TotalMilliseconds;
+                hierarchy.AcknowledgeGpuGeneration(hierarchy.ActiveGeneration);
+                if (hierarchy.Telemetry.SelectionPending)
+                {
+                    selectionFrames++;
+                    Thread.Sleep(1);
+                }
+                mainThreadMaximum = Math.Max(mainThreadMaximum,
+                    hierarchy.Telemetry.MainThreadTerrainMilliseconds);
+                selectionMaximum = Math.Max(selectionMaximum, hierarchy.Telemetry.LastSelectionMilliseconds);
+                preparationMaximum = Math.Max(preparationMaximum,
+                    hierarchy.Telemetry.LastBackgroundPreparationMilliseconds);
+                if (hierarchy.AuthoritativeGeneration != previousGeneration)
+                {
+                    generations++;
+                    previousGeneration = hierarchy.AuthoritativeGeneration;
+                    descriptorDeltas = Math.Max(descriptorDeltas,
+                        hierarchy.Telemetry.DescriptorDeltaCount);
+                }
+            }
+            var sorted = callbacks.Order().ToArray();
+            double Percentile(double value) => sorted[Math.Min(sorted.Length - 1,
+                Math.Max(0, (int)Math.Ceiling(value * sorted.Length) - 1))];
+            Console.WriteLine($"Phase 1B {name}: callback median={Percentile(.5):R}ms; " +
+                $"p95={Percentile(.95):R}ms; p99={Percentile(.99):R}ms; max={callbacks.Max():R}ms; " +
+                $"generationChanges={generations}; descriptorDeltaMax={descriptorDeltas}; " +
+                $"selectionFrames={selectionFrames}; mainThreadTerrainMax={mainThreadMaximum:R}ms; " +
+                $"selectionMax={selectionMaximum:R}ms; preparationMax={preparationMaximum:R}ms; " +
+                $"topologyReuse={hierarchy.PersistentTopologyReuseCount}; " +
+                $"topologyTranslations={hierarchy.PersistentTopologyTranslationCount}");
+            Assert(mainThreadMaximum < 16.67d && callbacks.Max() < 16.67d,
+                $"{name} keeps ordinary terrain work off the render callback budget");
+        }
     }
 
     private static void SolarScaleDeactivationIsIdle()
@@ -349,13 +488,15 @@ internal static class PlanetaryDynamicAnchoredSurfaceTests
     private static void PublishCurrent(PlanetaryDynamicAnchoredSurface hierarchy, in Double3 direction,
         double altitude)
     {
-        for (var frame = 0; frame < 10_000 && (!hierarchy.Visible || hierarchy.HasPendingGeneration); frame++)
+        for (var frame = 0; frame < 10_000 &&
+             (!hierarchy.Visible || hierarchy.HasPendingGeneration || hierarchy.Telemetry.SelectionPending); frame++)
         {
             hierarchy.AcknowledgeGpuGeneration(hierarchy.ActiveGeneration);
             Update(hierarchy, direction, altitude);
-            if (!hierarchy.Visible || hierarchy.HasPendingGeneration) Thread.Sleep(1);
+            if (!hierarchy.Visible || hierarchy.HasPendingGeneration || hierarchy.Telemetry.SelectionPending)
+                Thread.Sleep(1);
         }
-        Assert(hierarchy.Visible && !hierarchy.HasPendingGeneration,
+        Assert(hierarchy.Visible && !hierarchy.HasPendingGeneration && !hierarchy.Telemetry.SelectionPending,
             "bounded descriptor generation publishes in the test deadline");
     }
 

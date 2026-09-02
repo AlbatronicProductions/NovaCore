@@ -135,7 +135,9 @@ void main()
     local=SampleLocal(face,uv,localIdentity);base=max(0.0,oracle+local);
     PhysicalModifierEvaluationD modifiers=EvaluateTerrainModifiersD(direction,base);
     modifierHeights=dvec2(modifiers.tiledHeight,modifiers.erosionHeight);
-    modifierHeight=modifiers.tiledHeight+modifiers.erosionHeight+modifiers.mesoHeight+modifiers.nearHeight;physical=max(0.0,base+modifierHeight);
+    double baseModifierHeight=modifiers.tiledHeight+modifiers.erosionHeight+modifiers.mesoHeight;
+    modifierHeight=baseModifierHeight+modifiers.nearHeight;
+    physical=max(0.0,max(0.0,base+baseModifierHeight)+modifiers.nearHeight);
     dvec3 east=PhysicalEastD(direction),north=normalize(cross(direction,east));
     double angle=NOVACORE_NORMAL_SAMPLE_RADIUS/NOVACORE_EARTH_REFERENCE_RADIUS;
     dvec3 ld=normalize(direction-east*angle),rd=normalize(direction+east*angle);

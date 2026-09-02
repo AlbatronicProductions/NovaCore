@@ -1,10 +1,10 @@
 #ifndef NOVACORE_PHYSICAL_SURFACE_GLSL
 #define NOVACORE_PHYSICAL_SURFACE_GLSL
 
-// NovaCore M12B schema 2 / generation 2. This FP64 control and modifier bank
+// NovaCore M12C schema 2 / generation 3. This FP64 control and modifier bank
 // mirrors PlanetaryBiomeControlAuthority and PlanetaryPhysicalSurface.
 const uint NOVACORE_MODIFIER_SCHEMA_VERSION=2u;
-const uint NOVACORE_MODIFIER_GENERATION=2u;
+const uint NOVACORE_MODIFIER_GENERATION=3u;
 const double NOVACORE_EARTH_REFERENCE_RADIUS=6371008.8;
 const double NOVACORE_NORMAL_SAMPLE_RADIUS=9774.0;
 const double NOVACORE_TILED_AMPLITUDE=8.0,NOVACORE_TILED_WAVELENGTH=2500000.0;
@@ -21,6 +21,7 @@ const uint NOVACORE_BIOME_ROCKY=6u,NOVACORE_BIOME_ALPINE=7u,NOVACORE_BIOME_SNOW=
 
 struct BiomeBlendD{uvec4 ids;dvec4 weights;dvec4 eligibility;double glacialEligibility;double materialEligibility;};
 struct NearPhysicalEvaluationD{double height;double eastGradient;double northGradient;};
+struct PhysicalFrequencyContextD{double samplingSpacing;double boundarySamplingSpacing;double transitionDistance;};
 struct PhysicalModifierEvaluationD
 {
   double tiledHeight;double erosionHeight;double mesoHeight;double nearHeight;
@@ -40,6 +41,18 @@ double PhysicalSinD(double value)
 double PhysicalCosD(double value){return PhysicalSinD(value+1.5707963267948966192313216916398);}
 double PhysicalSaturateD(double value){return clamp(value,0.0,1.0);}
 double PhysicalSmoothStepD(double startValue,double endValue,double value){double t=PhysicalSaturateD((value-startValue)/(endValue-startValue));return t*t*(3.0-2.0*t);}
+PhysicalFrequencyContextD PhysicalFullFrequencyD(){return PhysicalFrequencyContextD(0.0,0.0,1e300);}
+double PhysicalFrequencyRepresentabilityD(double wavelength,double spacing)
+{return spacing<=0.0?1.0:PhysicalSmoothStepD(4.0*spacing,8.0*spacing,wavelength);}
+double PhysicalFrequencyWeightD(double wavelength,PhysicalFrequencyContextD context)
+{
+  if(context.samplingSpacing<=0.0)return 1.0;
+  double fine=PhysicalFrequencyRepresentabilityD(wavelength,context.samplingSpacing);
+  double coarse=PhysicalFrequencyRepresentabilityD(wavelength,context.boundarySamplingSpacing);
+  if(context.transitionDistance>=1e299||abs(fine-coarse)<=1e-15)return fine;
+  double guard=PhysicalSmoothStepD(0.0,max(wavelength,4.0*context.samplingSpacing),context.transitionDistance);
+  return mix(coarse,fine,guard);
+}
 double PhysicalWrappedPhaseD(double coordinate,double wavelength,double phase){double cell=floor(coordinate/wavelength),local=coordinate-cell*wavelength;return local*(6.283185307179586476925286766559/wavelength)+phase;}
 double PhysicalWrappedSinD(dvec3 point,dvec3 axis,double wavelength,double phase){return PhysicalSinD(PhysicalWrappedPhaseD(dot(point,axis),wavelength,phase));}
 dvec3 PhysicalEastD(dvec3 direction){direction=normalize(direction);double horizontalSquared=direction.x*direction.x+direction.z*direction.z;return horizontalSquared>1e-24?dvec3(direction.z,0.0,-direction.x)/sqrt(horizontalSquared):dvec3(1.0,0.0,0.0);}
@@ -80,47 +93,103 @@ BiomeBlendD EvaluateBiomeBlendD(dvec3 bodyFixedDirection,double geographicHeight
   blend.glacialEligibility=PhysicalSaturateD(BiomeWeightD(blend,NOVACORE_BIOME_SNOW)+.35*BiomeWeightD(blend,NOVACORE_BIOME_ALPINE));blend.materialEligibility=land;return blend;
 }
 
+NearPhysicalEvaluationD EvaluateNearPhysicalD(dvec3 direction,BiomeBlendD biome);
+NearPhysicalEvaluationD EvaluateNearPhysicalD(dvec3 direction,BiomeBlendD biome,PhysicalFrequencyContextD frequency);
 double PhysicalBandD(dvec3 point,dvec3 axis,double wavelength,double phase,double amplitude,out dvec3 gradient)
 {double angle=PhysicalWrappedPhaseD(dot(point,axis),wavelength,phase);gradient=axis*(amplitude*(6.283185307179586476925286766559/wavelength)*PhysicalCosD(angle));return amplitude*PhysicalSinD(angle);}
+double PhysicalLimitedBandD(dvec3 point,dvec3 axis,double wavelength,double phase,double amplitude,
+  PhysicalFrequencyContextD frequency,out dvec3 gradient)
+{
+  double weight=PhysicalFrequencyWeightD(wavelength,frequency);
+  if(weight==0.0){gradient=dvec3(0.0);return 0.0;}
+  double value=PhysicalBandD(point,axis,wavelength,phase,amplitude,gradient);gradient*=weight;return value*weight;
+}
+double PhysicalBandValueD(dvec3 point,dvec3 axis,double wavelength,double phase,double amplitude)
+{return amplitude*PhysicalSinD(PhysicalWrappedPhaseD(dot(point,axis),wavelength,phase));}
+double PhysicalWarpedBandValueD(dvec3 point,dvec3 carrierAxis,double wavelength,double phase,double amplitude,
+  dvec3 warpAxisA,double warpWavelengthA,double warpStrengthA,double warpPhaseA,
+  dvec3 warpAxisB,double warpWavelengthB,double warpStrengthB,double warpPhaseB)
+{
+  double carrier=PhysicalWrappedPhaseD(dot(point,carrierAxis),wavelength,phase);
+  double warpA=PhysicalWrappedPhaseD(dot(point,warpAxisA),warpWavelengthA,warpPhaseA);
+  double warpB=PhysicalWrappedPhaseD(dot(point,warpAxisB),warpWavelengthB,warpPhaseB);
+  return amplitude*PhysicalSinD(carrier+warpStrengthA*PhysicalSinD(warpA)+warpStrengthB*PhysicalSinD(warpB));
+}
+double PhysicalWarpedBandD(dvec3 point,dvec3 carrierAxis,double wavelength,double phase,double amplitude,
+  dvec3 warpAxisA,double warpWavelengthA,double warpStrengthA,double warpPhaseA,
+  dvec3 warpAxisB,double warpWavelengthB,double warpStrengthB,double warpPhaseB,out dvec3 gradient)
+{
+  double carrier=PhysicalWrappedPhaseD(dot(point,carrierAxis),wavelength,phase);
+  double warpA=PhysicalWrappedPhaseD(dot(point,warpAxisA),warpWavelengthA,warpPhaseA);
+  double warpB=PhysicalWrappedPhaseD(dot(point,warpAxisB),warpWavelengthB,warpPhaseB);
+  double angle=carrier+warpStrengthA*PhysicalSinD(warpA)+warpStrengthB*PhysicalSinD(warpB);
+  dvec3 phaseGradient=carrierAxis*(6.283185307179586476925286766559/wavelength)+
+    warpAxisA*(warpStrengthA*(6.283185307179586476925286766559/warpWavelengthA)*PhysicalCosD(warpA))+
+    warpAxisB*(warpStrengthB*(6.283185307179586476925286766559/warpWavelengthB)*PhysicalCosD(warpB));
+  gradient=phaseGradient*(amplitude*PhysicalCosD(angle));return amplitude*PhysicalSinD(angle);
+}
+double PhysicalLimitedWarpedBandD(dvec3 point,dvec3 carrierAxis,double wavelength,double phase,double amplitude,
+  PhysicalFrequencyContextD frequency,
+  dvec3 warpAxisA,double warpWavelengthA,double warpStrengthA,double warpPhaseA,
+  dvec3 warpAxisB,double warpWavelengthB,double warpStrengthB,double warpPhaseB,out dvec3 gradient)
+{
+  double weight=PhysicalFrequencyWeightD(wavelength,frequency);
+  if(weight==0.0){gradient=dvec3(0.0);return 0.0;}
+  double value=PhysicalWarpedBandD(point,carrierAxis,wavelength,phase,amplitude,
+    warpAxisA,warpWavelengthA,warpStrengthA,warpPhaseA,warpAxisB,warpWavelengthB,warpStrengthB,warpPhaseB,gradient);
+  gradient*=weight;return value*weight;
+}
 
 NearPhysicalEvaluationD EvaluateNearPhysicalD(dvec3 bodyFixedDirection,double geographicHeight)
 {
   dvec3 direction=normalize(bodyFixedDirection),point=direction*NOVACORE_EARTH_REFERENCE_RADIUS,east=PhysicalEastD(direction),north=normalize(cross(direction,east));
   const dvec3 axisA=dvec3(.7715167498104595,-.1543033499620919,.6172133998483676),axisB=dvec3(-.3244428422615251,.8111071056538127,.4866642633922876),axisC=dvec3(.1690308509457033,.8451542547285166,-.50709255283711);
   BiomeBlendD biome=EvaluateBiomeBlendD(direction,geographicHeight);
+  return EvaluateNearPhysicalD(direction,biome,PhysicalFullFrequencyD());
+}
+NearPhysicalEvaluationD EvaluateNearPhysicalD(dvec3 direction,BiomeBlendD biome)
+{return EvaluateNearPhysicalD(direction,biome,PhysicalFullFrequencyD());}
+NearPhysicalEvaluationD EvaluateNearPhysicalD(dvec3 direction,BiomeBlendD biome,PhysicalFrequencyContextD frequency)
+{
+  direction=normalize(direction);dvec3 point=direction*NOVACORE_EARTH_REFERENCE_RADIUS,east=PhysicalEastD(direction),north=normalize(cross(direction,east));
+  const dvec3 axisA=dvec3(.7715167498104595,-.1543033499620919,.6172133998483676),axisB=dvec3(-.3244428422615251,.8111071056538127,.4866642633922876),axisC=dvec3(.1690308509457033,.8451542547285166,-.50709255283711);
+  const dvec3 tiledA=dvec3(.8728715609439696,.4364357804719848,-.2182178902359924),tiledC=dvec3(.3903600291794133,-.6506000486323555,.6506000486323555);
   double amplitude=NOVACORE_NEAR_AMPLITUDE*biome.materialEligibility*clamp(.17*BiomeWeightD(biome,NOVACORE_BIOME_GRASS)+.10*BiomeWeightD(biome,NOVACORE_BIOME_WETLAND)+.12*BiomeWeightD(biome,NOVACORE_BIOME_BEACH)+.62*BiomeWeightD(biome,NOVACORE_BIOME_DESERT)+.92*BiomeWeightD(biome,NOVACORE_BIOME_ROCKY)+.74*BiomeWeightD(biome,NOVACORE_BIOME_ALPINE)+.28*BiomeWeightD(biome,NOVACORE_BIOME_SNOW)+.14*BiomeWeightD(biome,NOVACORE_BIOME_SCRUB),0.0,1.0);
-  dvec3 gradient,next;double height=PhysicalBandD(point,axisC,32.0,.53,amplitude*.62,gradient)+PhysicalBandD(point,axisA,7.0,-1.13,amplitude*.27,next);gradient+=next;height+=PhysicalBandD(point,axisB,1.4,2.31,amplitude*.11,next);gradient+=next;
+  dvec3 gradient,next;double height=PhysicalLimitedWarpedBandD(point,axisC,32.0,.53,amplitude*.62,frequency,tiledA,210.0,.83,1.71,axisB,73.0,.31,-.37,gradient)+PhysicalLimitedWarpedBandD(point,axisA,7.0,-1.13,amplitude*.27,frequency,axisB,53.0,.67,-.19,tiledC,19.0,.24,2.03,next);gradient+=next;height+=PhysicalLimitedWarpedBandD(point,axisB,1.4,2.31,amplitude*.11,frequency,axisC,17.0,.49,.61,axisA,5.0,.19,-2.27,next);gradient+=next;
   NearPhysicalEvaluationD result;result.height=height;result.eastGradient=dot(gradient,east);result.northGradient=dot(gradient,north);return result;
 }
 
-PhysicalModifierEvaluationD EvaluateTerrainModifiersD(dvec3 bodyFixedDirection,double geographicHeight)
+PhysicalModifierEvaluationD EvaluateTerrainModifiersD(dvec3 bodyFixedDirection,double geographicHeight,PhysicalFrequencyContextD frequency)
 {
   dvec3 direction=normalize(bodyFixedDirection),eastFrame=PhysicalEastD(direction),northFrame=normalize(cross(direction,eastFrame)),point=direction*NOVACORE_EARTH_REFERENCE_RADIUS;
   const dvec3 axisA=dvec3(.8728715609439696,.4364357804719848,-.2182178902359924),axisB=dvec3(-.1690308509457033,.50709255283711,.8451542547285166),axisC=dvec3(.3903600291794133,-.6506000486323555,.6506000486323555);
   const dvec3 detailA=dvec3(.7715167498104595,-.1543033499620919,.6172133998483676),detailB=dvec3(-.3244428422615251,.8111071056538127,.4866642633922876),detailC=dvec3(.1690308509457033,.8451542547285166,-.50709255283711);
   BiomeBlendD biome=EvaluateBiomeBlendD(direction,geographicHeight);dvec3 gradient,next;
-  double tiled=PhysicalBandD(point,axisA,NOVACORE_TILED_WAVELENGTH,.713,NOVACORE_TILED_AMPLITUDE*.5,gradient)+PhysicalBandD(point,axisB,NOVACORE_TILED_WAVELENGTH*.73,2.113,NOVACORE_TILED_AMPLITUDE*.3,next);gradient+=next;tiled+=PhysicalBandD(point,axisC,NOVACORE_TILED_WAVELENGTH*.41,-1.271,NOVACORE_TILED_AMPLITUDE*.2,next);gradient+=next;dvec3 fullGradient=gradient;
-  double rolling=PhysicalBandD(point,detailA,18000.0,.31,NOVACORE_ROLLING_AMPLITUDE*.58,gradient)+PhysicalBandD(point,detailB,2700.0,1.73,NOVACORE_ROLLING_AMPLITUDE*.29,next);gradient+=next;rolling+=PhysicalBandD(point,detailC,360.0,-.61,NOVACORE_ROLLING_AMPLITUDE*.13,next);gradient=(gradient+next)*biome.eligibility.x;rolling*=biome.eligibility.x;fullGradient+=gradient;
-  double rocky=PhysicalBandD(point,detailC,12000.0,1.17,NOVACORE_ROCKY_AMPLITUDE*.52,gradient)+PhysicalBandD(point,axisA,1850.0,-2.03,NOVACORE_ROCKY_AMPLITUDE*.31,next);gradient+=next;rocky+=PhysicalBandD(point,detailB,190.0,.44,NOVACORE_ROCKY_AMPLITUDE*.17,next);gradient=(gradient+next)*biome.eligibility.y;rocky*=biome.eligibility.y;fullGradient+=gradient;
-  double desert=PhysicalBandD(point,detailB,1400.0,2.41,NOVACORE_DESERT_AMPLITUDE*.62,gradient)+PhysicalBandD(point,detailA,310.0,-.37,NOVACORE_DESERT_AMPLITUDE*.26,next);gradient+=next;desert+=PhysicalBandD(point,axisC,64.0,1.61,NOVACORE_DESERT_AMPLITUDE*.12,next);gradient=(gradient+next)*biome.eligibility.z;desert*=biome.eligibility.z;fullGradient+=gradient;
-  double coastal=PhysicalBandD(point,axisB,2800.0,-.83,NOVACORE_COASTAL_AMPLITUDE*.68,gradient)+PhysicalBandD(point,detailC,260.0,2.63,NOVACORE_COASTAL_AMPLITUDE*.32,next);gradient=(gradient+next)*biome.eligibility.w;coastal*=biome.eligibility.w;fullGradient+=gradient;
-  double glacial=PhysicalBandD(point,detailA,7000.0,.67,NOVACORE_GLACIAL_AMPLITUDE*.64,gradient)+PhysicalBandD(point,axisC,840.0,-1.91,NOVACORE_GLACIAL_AMPLITUDE*.25,next);gradient+=next;glacial+=PhysicalBandD(point,detailB,120.0,2.87,NOVACORE_GLACIAL_AMPLITUDE*.11,next);gradient=(gradient+next)*biome.glacialEligibility;glacial*=biome.glacialEligibility;fullGradient+=gradient;double meso=rolling+rocky+desert+coastal+glacial;
+  double tiled=PhysicalLimitedBandD(point,axisA,NOVACORE_TILED_WAVELENGTH,.713,NOVACORE_TILED_AMPLITUDE*.5,frequency,gradient)+PhysicalLimitedBandD(point,axisB,NOVACORE_TILED_WAVELENGTH*.73,2.113,NOVACORE_TILED_AMPLITUDE*.3,frequency,next);gradient+=next;tiled+=PhysicalLimitedBandD(point,axisC,NOVACORE_TILED_WAVELENGTH*.41,-1.271,NOVACORE_TILED_AMPLITUDE*.2,frequency,next);gradient+=next;dvec3 fullGradient=gradient;
+  double rolling=PhysicalLimitedBandD(point,detailA,18000.0,.31,NOVACORE_ROLLING_AMPLITUDE*.58,frequency,gradient)+PhysicalLimitedBandD(point,detailB,2700.0,1.73,NOVACORE_ROLLING_AMPLITUDE*.29,frequency,next);gradient+=next;rolling+=PhysicalLimitedBandD(point,detailC,360.0,-.61,NOVACORE_ROLLING_AMPLITUDE*.13,frequency,next);gradient=(gradient+next)*biome.eligibility.x;rolling*=biome.eligibility.x;fullGradient+=gradient;
+  double rocky=PhysicalLimitedBandD(point,detailC,12000.0,1.17,NOVACORE_ROCKY_AMPLITUDE*.52,frequency,gradient)+PhysicalLimitedBandD(point,axisA,1850.0,-2.03,NOVACORE_ROCKY_AMPLITUDE*.31,frequency,next);gradient+=next;rocky+=PhysicalLimitedBandD(point,detailB,190.0,.44,NOVACORE_ROCKY_AMPLITUDE*.17,frequency,next);gradient=(gradient+next)*biome.eligibility.y;rocky*=biome.eligibility.y;fullGradient+=gradient;
+  double desert=PhysicalLimitedBandD(point,detailB,1400.0,2.41,NOVACORE_DESERT_AMPLITUDE*.62,frequency,gradient)+PhysicalLimitedBandD(point,detailA,310.0,-.37,NOVACORE_DESERT_AMPLITUDE*.26,frequency,next);gradient+=next;desert+=PhysicalLimitedBandD(point,axisC,64.0,1.61,NOVACORE_DESERT_AMPLITUDE*.12,frequency,next);gradient=(gradient+next)*biome.eligibility.z;desert*=biome.eligibility.z;fullGradient+=gradient;
+  double coastal=PhysicalLimitedBandD(point,axisB,2800.0,-.83,NOVACORE_COASTAL_AMPLITUDE*.68,frequency,gradient)+PhysicalLimitedBandD(point,detailC,260.0,2.63,NOVACORE_COASTAL_AMPLITUDE*.32,frequency,next);gradient=(gradient+next)*biome.eligibility.w;coastal*=biome.eligibility.w;fullGradient+=gradient;
+  double glacial=PhysicalLimitedBandD(point,detailA,7000.0,.67,NOVACORE_GLACIAL_AMPLITUDE*.64,frequency,gradient)+PhysicalLimitedBandD(point,axisC,840.0,-1.91,NOVACORE_GLACIAL_AMPLITUDE*.25,frequency,next);gradient+=next;glacial+=PhysicalLimitedBandD(point,detailB,120.0,2.87,NOVACORE_GLACIAL_AMPLITUDE*.11,frequency,next);gradient=(gradient+next)*biome.glacialEligibility;glacial*=biome.glacialEligibility;fullGradient+=gradient;double meso=rolling+rocky+desert+coastal+glacial;
   const dvec3 florida=dvec3(.1433224599406355,.4788205718227514,.8661348234979923);dvec3 floridaEast=PhysicalEastD(florida),floridaNorth=normalize(cross(florida,floridaEast));dvec3 delta=point-florida*NOVACORE_EARTH_REFERENCE_RADIUS;
   double localEast=dot(delta,floridaEast),localNorth=dot(delta,floridaNorth),radius=sqrt(localEast*localEast+localNorth*localNorth),weight=0.0,dWeightDr=0.0;
   if(radius<NOVACORE_EROSION_RADIUS){double q=1.0-radius/NOVACORE_EROSION_RADIUS;weight=q*q*q*(q*(q*6.0-15.0)+10.0);double derivativeQ=30.0*q*q*(q-1.0)*(q-1.0);dWeightDr=-derivativeQ/NOVACORE_EROSION_RADIUS;}
   double reservation=1.0,dReservationDr=0.0;if(radius<=NOVACORE_LAUNCH_RESERVATION_RADIUS)reservation=0.0;else if(radius<NOVACORE_LAUNCH_RESERVATION_RADIUS+NOVACORE_LAUNCH_RESERVATION_TRANSITION){double t=(radius-NOVACORE_LAUNCH_RESERVATION_RADIUS)/NOVACORE_LAUNCH_RESERVATION_TRANSITION;reservation=t*t*(3.0-2.0*t);dReservationDr=6.0*t*(1.0-t)/NOVACORE_LAUNCH_RESERVATION_TRANSITION;}
   double erosionWave=6.283185307179586476925286766559/NOVACORE_EROSION_WAVELENGTH,phase1=erosionWave*(.78*localEast+.6257795138864807*localNorth)+1.137,phase2=erosionWave*(-.35*localEast+.9367496997597597*localNorth)-.443;
   double carrier=.65*PhysicalSinD(phase1)+.35*PhysicalSinD(phase2)*PhysicalSinD(phase1*.5),carrierEast=.65*PhysicalCosD(phase1)*erosionWave*.78+.35*(PhysicalCosD(phase2)*erosionWave*-.35*PhysicalSinD(phase1*.5)+PhysicalSinD(phase2)*PhysicalCosD(phase1*.5)*erosionWave*.39),carrierNorth=.65*PhysicalCosD(phase1)*erosionWave*.6257795138864807+.35*(PhysicalCosD(phase2)*erosionWave*.9367496997597597*PhysicalSinD(phase1*.5)+PhysicalSinD(phase2)*PhysicalCosD(phase1*.5)*erosionWave*.31288975694324035);
-  double radialEast=radius>1e-9?localEast/radius:0.0,radialNorth=radius>1e-9?localNorth/radius:0.0,erosion=NOVACORE_EROSION_AMPLITUDE*weight*reservation*carrier,radialDerivative=dWeightDr*reservation+weight*dReservationDr;
-  double erosionEast=NOVACORE_EROSION_AMPLITUDE*(weight*reservation*carrierEast+carrier*radialDerivative*radialEast),erosionNorth=NOVACORE_EROSION_AMPLITUDE*(weight*reservation*carrierNorth+carrier*radialDerivative*radialNorth);fullGradient+=floridaEast*erosionEast+floridaNorth*erosionNorth;
-  NearPhysicalEvaluationD nearValue=EvaluateNearPhysicalD(direction,geographicHeight);fullGradient+=eastFrame*nearValue.eastGradient+northFrame*nearValue.northGradient;
+  double erosionFrequencyWeight=PhysicalFrequencyWeightD(NOVACORE_EROSION_WAVELENGTH,frequency),radialEast=radius>1e-9?localEast/radius:0.0,radialNorth=radius>1e-9?localNorth/radius:0.0,erosion=NOVACORE_EROSION_AMPLITUDE*weight*reservation*carrier*erosionFrequencyWeight,radialDerivative=dWeightDr*reservation+weight*dReservationDr;
+  double erosionEast=NOVACORE_EROSION_AMPLITUDE*(weight*reservation*carrierEast+carrier*radialDerivative*radialEast)*erosionFrequencyWeight,erosionNorth=NOVACORE_EROSION_AMPLITUDE*(weight*reservation*carrierNorth+carrier*radialDerivative*radialNorth)*erosionFrequencyWeight;fullGradient+=floridaEast*erosionEast+floridaNorth*erosionNorth;
+  NearPhysicalEvaluationD nearValue=EvaluateNearPhysicalD(direction,biome,frequency);fullGradient+=eastFrame*nearValue.eastGradient+northFrame*nearValue.northGradient;
   uint dominant=1u;double magnitude=abs(tiled);if(abs(rolling)>magnitude){dominant=4u;magnitude=abs(rolling);}if(abs(rocky)>magnitude){dominant=5u;magnitude=abs(rocky);}if(abs(desert)>magnitude){dominant=6u;magnitude=abs(desert);}if(abs(coastal)>magnitude){dominant=7u;magnitude=abs(coastal);}if(abs(glacial)>magnitude){dominant=8u;magnitude=abs(glacial);}if(abs(erosion)>magnitude){dominant=2u;magnitude=abs(erosion);}if(abs(nearValue.height)>magnitude)dominant=9u;
   PhysicalModifierEvaluationD result;result.tiledHeight=tiled;result.erosionHeight=erosion;result.mesoHeight=meso;result.nearHeight=nearValue.height;result.eastGradient=dot(fullGradient,eastFrame);result.northGradient=dot(fullGradient,northFrame);result.nearEastGradient=nearValue.eastGradient;result.nearNorthGradient=nearValue.northGradient;result.geographicWeight=weight;result.dominantId=dominant;result.biomes=biome;return result;
 }
 
-PhysicalModifierEvaluationD EvaluateTerrainModifiersD(dvec3 direction){return EvaluateTerrainModifiersD(direction,0.0);}
+PhysicalModifierEvaluationD EvaluateTerrainModifiersD(dvec3 direction,double geographicHeight){return EvaluateTerrainModifiersD(direction,geographicHeight,PhysicalFullFrequencyD());}
+PhysicalModifierEvaluationD EvaluateTerrainModifiersD(dvec3 direction){return EvaluateTerrainModifiersD(direction,0.0,PhysicalFullFrequencyD());}
 double TerrainBaseModifierHeightD(dvec3 direction,double geographicHeight){PhysicalModifierEvaluationD value=EvaluateTerrainModifiersD(direction,geographicHeight);return value.tiledHeight+value.erosionHeight+value.mesoHeight;}
+double TerrainBaseModifierHeightD(dvec3 direction,double geographicHeight,PhysicalFrequencyContextD frequency){PhysicalModifierEvaluationD value=EvaluateTerrainModifiersD(direction,geographicHeight,frequency);return value.tiledHeight+value.erosionHeight+value.mesoHeight;}
 double TerrainModifierHeightD(dvec3 direction,double geographicHeight){PhysicalModifierEvaluationD value=EvaluateTerrainModifiersD(direction,geographicHeight);return value.tiledHeight+value.erosionHeight+value.mesoHeight+value.nearHeight;}
+double TerrainModifierHeightD(dvec3 direction,double geographicHeight,PhysicalFrequencyContextD frequency){PhysicalModifierEvaluationD value=EvaluateTerrainModifiersD(direction,geographicHeight,frequency);return value.tiledHeight+value.erosionHeight+value.mesoHeight+value.nearHeight;}
 double TerrainModifierHeightD(dvec3 direction){return TerrainModifierHeightD(direction,0.0);}
 
 #endif

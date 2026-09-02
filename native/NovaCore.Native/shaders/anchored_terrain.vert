@@ -74,7 +74,10 @@ void main()
   dvec3 direction=normalize(ProductionProjectD(address,dvec2(baseUv)));
   double radius=double(inputData.cameraHighRadiusHigh.w)+double(inputData.cameraLowRadiusLow.w);
   double geographic=AnchoredGeographicHeight(direction);
-  double height=max(0.0,geographic+TerrainBaseModifierHeightD(direction,geographic));
+  // The reusable topology samples the canonical full base field.  Frequency
+  // context remains presentation metadata for bounded filtering/diagnostics;
+  // it is not allowed to define another geometric surface.
+  double height=CanonicalBasePhysicalHeight(direction);
   dvec3 body=direction*(radius+height);
   dvec3 origin,east,north,up;DecodeBillboardFrame(origin,east,north,up);
   vec3 relative=BillboardRelative(body,origin,east,north,up,p.bodyOrientation);

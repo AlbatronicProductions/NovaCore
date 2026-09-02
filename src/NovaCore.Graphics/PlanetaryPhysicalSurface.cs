@@ -117,6 +117,68 @@ public readonly record struct PlanetaryPhysicalSurfaceSample(
         double.IsFinite(NorthGradient) && PhysicalNormal.IsFinite;
 }
 
+/// <summary>One bounded physical-displacement frequency in the canonical M12 surface.</summary>
+public readonly record struct PlanetaryPhysicalFrequencyBand(
+    PlanetaryTerrainModifierType Type,
+    double WavelengthMetres,
+    double MaximumAmplitudeMetres);
+
+/// <summary>
+/// Resolution authority supplied by a concrete geometry representation.  The
+/// underlying body-fixed modifier field remains canonical; this context only
+/// decides which frequencies that geometry can sample without aliasing.
+/// TransitionDistanceMetres is measured inward from a shared coarse/fine edge.
+/// </summary>
+public readonly record struct PlanetaryPhysicalFrequencyContext(
+    double SamplingSpacingMetres,
+    double BoundarySamplingSpacingMetres,
+    double TransitionDistanceMetres)
+{
+    public static PlanetaryPhysicalFrequencyContext FullResolution => new(0d, 0d, double.PositiveInfinity);
+    public bool IsValid => double.IsFinite(SamplingSpacingMetres) && SamplingSpacingMetres >= 0d &&
+        double.IsFinite(BoundarySamplingSpacingMetres) && BoundarySamplingSpacingMetres >= 0d &&
+        !double.IsNaN(TransitionDistanceMetres) && TransitionDistanceMetres >= 0d;
+
+    public double Weight(double wavelengthMetres)
+    {
+        if (!IsValid || !double.IsFinite(wavelengthMetres) || wavelengthMetres <= 0d)
+            throw new ArgumentOutOfRangeException();
+        if (SamplingSpacingMetres == 0d) return 1d;
+        var fine = Representability(wavelengthMetres, SamplingSpacingMetres);
+        var coarse = Representability(wavelengthMetres, BoundarySamplingSpacingMetres);
+        if (TransitionDistanceMetres == double.PositiveInfinity || Math.Abs(fine - coarse) <= 1e-15d)
+            return fine;
+        var guardWidth = Math.Max(wavelengthMetres, 4d * SamplingSpacingMetres);
+        var guard = SmoothStep(0d, guardWidth, TransitionDistanceMetres);
+        return coarse + (fine - coarse) * guard;
+    }
+
+    public static double Representability(double wavelengthMetres, double samplingSpacingMetres)
+    {
+        if (samplingSpacingMetres <= 0d) return 1d;
+        return SmoothStep(4d * samplingSpacingMetres, 8d * samplingSpacingMetres, wavelengthMetres);
+    }
+
+    public static double PatchExtentMetres(int level, double bodyRadiusMetres)
+    {
+        if (level is < 0 or > 24 || !double.IsFinite(bodyRadiusMetres) || bodyRadiusMetres <= 0d)
+            throw new ArgumentOutOfRangeException();
+        return bodyRadiusMetres * (Math.PI * .5d) / (1L << level);
+    }
+
+    public static double PatchSpacingMetres(int level, int edgeSegments, double bodyRadiusMetres)
+    {
+        if (edgeSegments <= 0) throw new ArgumentOutOfRangeException(nameof(edgeSegments));
+        return PatchExtentMetres(level, bodyRadiusMetres) / edgeSegments;
+    }
+
+    private static double SmoothStep(double start, double end, double value)
+    {
+        var t = Math.Clamp((value - start) / (end - start), 0d, 1d);
+        return t * t * (3d - 2d * t);
+    }
+}
+
 public enum PlanetaryTerrainModifierGenerationState : byte
 {
     Preparing,
@@ -234,7 +296,7 @@ public static class PlanetaryPhysicalSurface
 {
     public const ulong EarthBodyId = 6;
     public const uint ModifierSchemaVersion = 2;
-    public const ulong ModifierGenerationId = 2;
+    public const ulong ModifierGenerationId = 3;
     public const double EarthReferenceRadiusMetres = 6_371_008.8d;
     public const double PhysicalNormalSampleRadiusMetres = 9_774.0d;
     public const double TiledAmplitudeMetres = 8d;
@@ -252,6 +314,32 @@ public static class PlanetaryPhysicalSurface
     public const double LaunchReservationRadiusMetres = 275d;
     public const double LaunchReservationTransitionMetres = 125d;
     public const uint ErosionSeed = 0xE20510u;
+
+    public static ReadOnlySpan<PlanetaryPhysicalFrequencyBand> FrequencyBands => PhysicalFrequencyBands;
+    private static readonly PlanetaryPhysicalFrequencyBand[] PhysicalFrequencyBands =
+    [
+        new(PlanetaryTerrainModifierType.TiledDetail, 2_500_000d, 4d),
+        new(PlanetaryTerrainModifierType.TiledDetail, 1_825_000d, 2.4d),
+        new(PlanetaryTerrainModifierType.TiledDetail, 1_025_000d, 1.6d),
+        new(PlanetaryTerrainModifierType.RollingGrassland, 18_000d, 10.44d),
+        new(PlanetaryTerrainModifierType.RollingGrassland, 2_700d, 5.22d),
+        new(PlanetaryTerrainModifierType.RollingGrassland, 360d, 2.34d),
+        new(PlanetaryTerrainModifierType.RockyMountain, 12_000d, 33.8d),
+        new(PlanetaryTerrainModifierType.RockyMountain, 1_850d, 20.15d),
+        new(PlanetaryTerrainModifierType.RockyMountain, 190d, 11.05d),
+        new(PlanetaryTerrainModifierType.DesertDunes, 1_400d, 4.34d),
+        new(PlanetaryTerrainModifierType.DesertDunes, 310d, 1.82d),
+        new(PlanetaryTerrainModifierType.DesertDunes, 64d, .84d),
+        new(PlanetaryTerrainModifierType.CoastalWetland, 2_800d, 1.36d),
+        new(PlanetaryTerrainModifierType.CoastalWetland, 260d, .64d),
+        new(PlanetaryTerrainModifierType.SnowGlacial, 7_000d, 8.96d),
+        new(PlanetaryTerrainModifierType.SnowGlacial, 840d, 3.5d),
+        new(PlanetaryTerrainModifierType.SnowGlacial, 120d, 1.54d),
+        new(PlanetaryTerrainModifierType.ErosionLike, 1_200d, 1.5d),
+        new(PlanetaryTerrainModifierType.NearMaterial, 32d, .558d),
+        new(PlanetaryTerrainModifierType.NearMaterial, 7d, .243d),
+        new(PlanetaryTerrainModifierType.NearMaterial, 1.4d, .099d)
+    ];
 
     private static readonly Double3 TiledAxisA = new(.8728715609439696d, .4364357804719848d, -.2182178902359924d);
     private static readonly Double3 TiledAxisB = new(-.1690308509457033d, .50709255283711d, .8451542547285166d);
@@ -305,7 +393,8 @@ public static class PlanetaryPhysicalSurface
             return new(baseHeight, default, baseHeight, 0d, 0d, direction);
 
         var modifiers = EvaluateModifiers(direction, baseHeight);
-        var finalHeight = Math.Max(0d, baseHeight + modifiers.HeightMetres);
+        var finalHeight = Math.Max(0d,
+            Math.Max(0d, baseHeight + modifiers.BaseHeightMetres) + modifiers.NearHeightMetres);
         var frame = PlanetarySurfaceFrame.AtDirection(direction);
         var angle = PhysicalNormalSampleRadiusMetres / EarthReferenceRadiusMetres;
         var leftDirection = (direction - frame.East * angle).Normalized();
@@ -339,38 +428,44 @@ public static class PlanetaryPhysicalSurface
     }
 
     public static PlanetaryTerrainModifierSample EvaluateModifiers(in Double3 bodyFixedDirection, double geographicHeightMetres)
+        => EvaluateModifiers(bodyFixedDirection, geographicHeightMetres,
+            PlanetaryPhysicalFrequencyContext.FullResolution);
+
+    public static PlanetaryTerrainModifierSample EvaluateModifiers(in Double3 bodyFixedDirection,
+        double geographicHeightMetres, in PlanetaryPhysicalFrequencyContext frequency)
     {
+        if (!frequency.IsValid) throw new ArgumentOutOfRangeException(nameof(frequency));
         var direction = bodyFixedDirection.Normalized(); var frame = PlanetarySurfaceFrame.AtDirection(direction);
         var point = direction * EarthReferenceRadiusMetres;
         var biomes = PlanetaryBiomeControlAuthority.Sample(direction, geographicHeightMetres);
-        var tiledHeight = Band(point, TiledAxisA, TiledWavelengthMetres, .713d, TiledAmplitudeMetres * .5d, out var tiledGradient) +
-            Band(point, TiledAxisB, TiledWavelengthMetres * .73d, 2.113d, TiledAmplitudeMetres * .3d, out var gradient) +
-            Band(point, TiledAxisC, TiledWavelengthMetres * .41d, -1.271d, TiledAmplitudeMetres * .2d, out var nextGradient);
+        var tiledHeight = LimitedBand(point, TiledAxisA, TiledWavelengthMetres, .713d, TiledAmplitudeMetres * .5d, frequency, out var tiledGradient) +
+            LimitedBand(point, TiledAxisB, TiledWavelengthMetres * .73d, 2.113d, TiledAmplitudeMetres * .3d, frequency, out var gradient) +
+            LimitedBand(point, TiledAxisC, TiledWavelengthMetres * .41d, -1.271d, TiledAmplitudeMetres * .2d, frequency, out var nextGradient);
         tiledGradient += gradient + nextGradient;
 
         var rolling = biomes.RollingEligibility * (
-            Band(point, DetailAxisA, 18_000d, .31d, RollingMaximumAmplitudeMetres * .58d, out var rollingGradient) +
-            Band(point, DetailAxisB, 2_700d, 1.73d, RollingMaximumAmplitudeMetres * .29d, out gradient) +
-            Band(point, DetailAxisC, 360d, -.61d, RollingMaximumAmplitudeMetres * .13d, out nextGradient));
+            LimitedBand(point, DetailAxisA, 18_000d, .31d, RollingMaximumAmplitudeMetres * .58d, frequency, out var rollingGradient) +
+            LimitedBand(point, DetailAxisB, 2_700d, 1.73d, RollingMaximumAmplitudeMetres * .29d, frequency, out gradient) +
+            LimitedBand(point, DetailAxisC, 360d, -.61d, RollingMaximumAmplitudeMetres * .13d, frequency, out nextGradient));
         rollingGradient = (rollingGradient + gradient + nextGradient) * biomes.RollingEligibility;
         var rocky = biomes.RockyEligibility * (
-            Band(point, DetailAxisC, 12_000d, 1.17d, RockyMaximumAmplitudeMetres * .52d, out var rockyGradient) +
-            Band(point, TiledAxisA, 1_850d, -2.03d, RockyMaximumAmplitudeMetres * .31d, out gradient) +
-            Band(point, DetailAxisB, 190d, .44d, RockyMaximumAmplitudeMetres * .17d, out nextGradient));
+            LimitedBand(point, DetailAxisC, 12_000d, 1.17d, RockyMaximumAmplitudeMetres * .52d, frequency, out var rockyGradient) +
+            LimitedBand(point, TiledAxisA, 1_850d, -2.03d, RockyMaximumAmplitudeMetres * .31d, frequency, out gradient) +
+            LimitedBand(point, DetailAxisB, 190d, .44d, RockyMaximumAmplitudeMetres * .17d, frequency, out nextGradient));
         rockyGradient = (rockyGradient + gradient + nextGradient) * biomes.RockyEligibility;
         var desert = biomes.DesertEligibility * (
-            Band(point, DetailAxisB, 1_400d, 2.41d, DesertMaximumAmplitudeMetres * .62d, out var desertGradient) +
-            Band(point, DetailAxisA, 310d, -.37d, DesertMaximumAmplitudeMetres * .26d, out gradient) +
-            Band(point, TiledAxisC, 64d, 1.61d, DesertMaximumAmplitudeMetres * .12d, out nextGradient));
+            LimitedBand(point, DetailAxisB, 1_400d, 2.41d, DesertMaximumAmplitudeMetres * .62d, frequency, out var desertGradient) +
+            LimitedBand(point, DetailAxisA, 310d, -.37d, DesertMaximumAmplitudeMetres * .26d, frequency, out gradient) +
+            LimitedBand(point, TiledAxisC, 64d, 1.61d, DesertMaximumAmplitudeMetres * .12d, frequency, out nextGradient));
         desertGradient = (desertGradient + gradient + nextGradient) * biomes.DesertEligibility;
         var coastal = biomes.CoastalEligibility * (
-            Band(point, TiledAxisB, 2_800d, -.83d, CoastalMaximumAmplitudeMetres * .68d, out var coastalGradient) +
-            Band(point, DetailAxisC, 260d, 2.63d, CoastalMaximumAmplitudeMetres * .32d, out gradient));
+            LimitedBand(point, TiledAxisB, 2_800d, -.83d, CoastalMaximumAmplitudeMetres * .68d, frequency, out var coastalGradient) +
+            LimitedBand(point, DetailAxisC, 260d, 2.63d, CoastalMaximumAmplitudeMetres * .32d, frequency, out gradient));
         coastalGradient = (coastalGradient + gradient) * biomes.CoastalEligibility;
         var glacial = biomes.GlacialEligibility * (
-            Band(point, DetailAxisA, 7_000d, .67d, GlacialMaximumAmplitudeMetres * .64d, out var glacialGradient) +
-            Band(point, TiledAxisC, 840d, -1.91d, GlacialMaximumAmplitudeMetres * .25d, out gradient) +
-            Band(point, DetailAxisB, 120d, 2.87d, GlacialMaximumAmplitudeMetres * .11d, out nextGradient));
+            LimitedBand(point, DetailAxisA, 7_000d, .67d, GlacialMaximumAmplitudeMetres * .64d, frequency, out var glacialGradient) +
+            LimitedBand(point, TiledAxisC, 840d, -1.91d, GlacialMaximumAmplitudeMetres * .25d, frequency, out gradient) +
+            LimitedBand(point, DetailAxisB, 120d, 2.87d, GlacialMaximumAmplitudeMetres * .11d, frequency, out nextGradient));
         glacialGradient = (glacialGradient + gradient + nextGradient) * biomes.GlacialEligibility;
         var mesoHeight = rolling + rocky + desert + coastal + glacial;
         var mesoGradient = rollingGradient + rockyGradient + desertGradient + coastalGradient + glacialGradient;
@@ -384,9 +479,18 @@ public static class PlanetaryPhysicalSurface
             .74d * biomes.Weight(PlanetarySurfaceBiome.Alpine) +
             .28d * biomes.Weight(PlanetarySurfaceBiome.SnowGlacial) +
             .14d * biomes.Weight(PlanetarySurfaceBiome.ScrubDry), 0d, 1d);
-        var nearHeight = Band(point, DetailAxisC, 32d, .53d, nearAmplitude * .62d, out var nearGradient) +
-            Band(point, DetailAxisA, 7d, -1.13d, nearAmplitude * .27d, out gradient) +
-            Band(point, DetailAxisB, 1.4d, 2.31d, nearAmplitude * .11d, out nextGradient);
+        // These formerly used globally coherent one-dimensional sine bands.  Their
+        // fixed 32 m carrier direction produced the visible close-range ribs, with
+        // the 7 m carrier making a crossing grid.  Keep the same bounded amplitude
+        // budget, but warp each carrier in body-fixed metres using two slower,
+        // decorrelated directions so neither material nor physical relief acquires
+        // a planet-spanning straight ridge.
+        var nearHeight = LimitedWarpedBand(point, DetailAxisC, 32d, .53d, nearAmplitude * .62d, frequency,
+            TiledAxisA, 210d, .83d, 1.71d, DetailAxisB, 73d, .31d, -.37d, out var nearGradient) +
+            LimitedWarpedBand(point, DetailAxisA, 7d, -1.13d, nearAmplitude * .27d, frequency,
+                DetailAxisB, 53d, .67d, -.19d, TiledAxisC, 19d, .24d, 2.03d, out gradient) +
+            LimitedWarpedBand(point, DetailAxisB, 1.4d, 2.31d, nearAmplitude * .11d, frequency,
+                DetailAxisC, 17d, .49d, .61d, DetailAxisA, 5d, .19d, -2.27d, out nextGradient);
         nearGradient += gradient + nextGradient;
 
         var delta = point - FloridaDirection * EarthReferenceRadiusMetres;
@@ -419,10 +523,11 @@ public static class PlanetaryPhysicalSurface
                 PlanetaryProceduralMath.Sin(phase2) * PlanetaryProceduralMath.Cos(phase1 * .5d) * erosionWave * .31288975694324035d);
         var radialEast = radius > 1e-9d ? east / radius : 0d;
         var radialNorth = radius > 1e-9d ? north / radius : 0d;
-        var erosionHeight = ErosionAmplitudeMetres * weight * reservation * carrier;
+        var erosionFrequencyWeight = frequency.Weight(ErosionWavelengthMetres);
+        var erosionHeight = ErosionAmplitudeMetres * weight * reservation * carrier * erosionFrequencyWeight;
         var radialDerivative = dWeightDr * reservation + weight * dReservationDr;
-        var erosionEast = ErosionAmplitudeMetres * (weight * reservation * dCarrierEast + carrier * radialDerivative * radialEast);
-        var erosionNorth = ErosionAmplitudeMetres * (weight * reservation * dCarrierNorth + carrier * radialDerivative * radialNorth);
+        var erosionEast = ErosionAmplitudeMetres * (weight * reservation * dCarrierEast + carrier * radialDerivative * radialEast) * erosionFrequencyWeight;
+        var erosionNorth = ErosionAmplitudeMetres * (weight * reservation * dCarrierNorth + carrier * radialDerivative * radialNorth) * erosionFrequencyWeight;
         // The bounded modifier is defined in the fixed Florida ENU frame.  Its
         // analytic derivatives must be projected into the sample's local ENU
         // frame before they are combined with the global contribution.
@@ -448,7 +553,9 @@ public static class PlanetaryPhysicalSurface
         in Double3 bodyFixedDirection)
     {
         var baseHeight = terrain.SampleBaseHeight(bodyFixedDirection);
-        return Math.Max(0d, baseHeight + EvaluateModifiers(bodyFixedDirection, baseHeight).HeightMetres);
+        var modifiers = EvaluateModifiers(bodyFixedDirection, baseHeight);
+        return Math.Max(0d,
+            Math.Max(0d, baseHeight + modifiers.BaseHeightMetres) + modifiers.NearHeightMetres);
     }
 
     public static double EvaluateBaseHeightNoGradient(in PlanetaryTerrainDefinition terrain,
@@ -464,6 +571,40 @@ public static class PlanetaryPhysicalSurface
         var angle = PlanetaryProceduralMath.WrappedPhase(Double3.Dot(point, axis), wavelength, phase);
         gradient = axis * (amplitude * (Math.Tau / wavelength) * PlanetaryProceduralMath.Cos(angle));
         return amplitude * PlanetaryProceduralMath.Sin(angle);
+    }
+
+    private static double LimitedBand(in Double3 point, in Double3 axis, double wavelength, double phase,
+        double amplitude, in PlanetaryPhysicalFrequencyContext frequency, out Double3 gradient)
+    {
+        var value = Band(point, axis, wavelength, phase, amplitude, out gradient);
+        var weight = frequency.Weight(wavelength); gradient *= weight; return value * weight;
+    }
+
+    private static double WarpedBand(in Double3 point, in Double3 carrierAxis, double wavelength, double phase,
+        double amplitude, in Double3 warpAxisA, double warpWavelengthA, double warpStrengthA, double warpPhaseA,
+        in Double3 warpAxisB, double warpWavelengthB, double warpStrengthB, double warpPhaseB, out Double3 gradient)
+    {
+        var carrier = PlanetaryProceduralMath.WrappedPhase(Double3.Dot(point, carrierAxis), wavelength, phase);
+        var warpA = PlanetaryProceduralMath.WrappedPhase(Double3.Dot(point, warpAxisA), warpWavelengthA, warpPhaseA);
+        var warpB = PlanetaryProceduralMath.WrappedPhase(Double3.Dot(point, warpAxisB), warpWavelengthB, warpPhaseB);
+        var angle = carrier + warpStrengthA * PlanetaryProceduralMath.Sin(warpA) +
+            warpStrengthB * PlanetaryProceduralMath.Sin(warpB);
+        var phaseGradient = carrierAxis * (Math.Tau / wavelength) +
+            warpAxisA * (warpStrengthA * (Math.Tau / warpWavelengthA) * PlanetaryProceduralMath.Cos(warpA)) +
+            warpAxisB * (warpStrengthB * (Math.Tau / warpWavelengthB) * PlanetaryProceduralMath.Cos(warpB));
+        gradient = phaseGradient * (amplitude * PlanetaryProceduralMath.Cos(angle));
+        return amplitude * PlanetaryProceduralMath.Sin(angle);
+    }
+
+    private static double LimitedWarpedBand(in Double3 point, in Double3 carrierAxis, double wavelength, double phase,
+        double amplitude, in PlanetaryPhysicalFrequencyContext frequency,
+        in Double3 warpAxisA, double warpWavelengthA, double warpStrengthA, double warpPhaseA,
+        in Double3 warpAxisB, double warpWavelengthB, double warpStrengthB, double warpPhaseB, out Double3 gradient)
+    {
+        var value = WarpedBand(point, carrierAxis, wavelength, phase, amplitude,
+            warpAxisA, warpWavelengthA, warpStrengthA, warpPhaseA,
+            warpAxisB, warpWavelengthB, warpStrengthB, warpPhaseB, out gradient);
+        var weight = frequency.Weight(wavelength); gradient *= weight; return value * weight;
     }
 
     private static void SelectDominant(PlanetaryTerrainModifierType type, double height,

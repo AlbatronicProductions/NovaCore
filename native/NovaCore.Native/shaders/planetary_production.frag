@@ -59,9 +59,9 @@ ProductionSurfaceSample SampleProductionSurface(
   ProductionPayloadGradients(continuousFaceUv,unitDirection,cells,gradientX,gradientY);
   float payloadLayer=float(layer-1u);
   result.albedo=textureGrad(productionAlbedo,vec3(storedUv,payloadLayer),gradientX,gradientY).rgb;
-  // Elevation is physical authority, not a presentation-frequency channel.
-  // The production array has one mip; explicit LOD0 preserves its bilinear
-  // body-fixed field without anisotropic, screen-footprint-dependent taps.
+  // The terrain-v5 elevation channel remains presentation/classification data.
+  // Physical geometry and physical normals are prepared upstream from the
+  // canonical oracle. Explicit LOD0 keeps this legacy material input stable.
   result.elevation=textureLod(productionElevation,vec3(storedUv,payloadLayer),0.0).r*20000.0-11000.0;
   result.land=textureGrad(productionLand,vec3(storedUv,payloadLayer),gradientX,gradientY).r;
   return result;
@@ -173,53 +173,6 @@ uint ResolveProductionFragmentLayer(vec3 unitDirection,out vec2 localUv,out uvec
   return ResolveProductionFragmentLayerAtOrBelow(unitDirection,inputData.controls.x,localUv,address);
 }
 
-float ProductionFixedElevation(vec3 direction)
-{
-  vec2 localUv;uvec4 address;
-  uint layer=ResolveProductionFragmentLayer(normalize(direction),localUv,address);
-  if(layer==0u)return 0.0;
-  vec2 storedUv=(vec2(4.0)+clamp(localUv,0.0,1.0)*256.0)/264.0;
-  double base=max(0.0,double(textureLod(productionElevation,vec3(storedUv,float(layer-1u)),0.0).r*20000.0-11000.0+
-    LocalTerrainElevationResidual(direction)));
-  return float(max(0.0,base+TerrainModifierHeightD(dvec3(direction),base)));
-}
-
-vec3 ProductionFixedPhysicalNormal(vec3 unitDirection,float radiusMetres)
-{
-  // Resolve the authoritative global payload level at this body-fixed point
-  // and differentiate at its physical source spacing. The resulting normal
-  // is invariant under camera distance, projected pixel footprint and mesh
-  // tier; local NCCUBE2 normal refinement is still applied afterwards.
-  dvec3 radial=normalize(dvec3(unitDirection));
-  vec2 centerUv;uvec4 centerAddress;
-  uint centerLayer=ResolveProductionFragmentLayer(vec3(radial),centerUv,centerAddress);
-  if(centerLayer==0u)return vec3(radial);
-  double sourceTexels=256.0*double(1u<<centerAddress.y);
-  double sampleRadiusMetres=double(radiusMetres)*1.57079632679489661923/sourceTexels;
-  // Use the canonical body-fixed geographic frame.  The former arbitrary
-  // reference-axis switch at abs(Y)=0.95 rotated this finite-difference
-  // stencil by roughly ninety degrees along a body-fixed latitude ring.  A
-  // coarse but continuous elevation field then produced a visible lighting
-  // facet at that ring.  Longitude is singular only at the mathematical pole;
-  // keep that unavoidable fallback there instead of introducing a mid-latitude
-  // frame discontinuity.
-  double horizontalSquared=radial.x*radial.x+radial.z*radial.z;
-  dvec3 east=horizontalSquared>1e-24
-    ?dvec3(radial.z,0.0,-radial.x)/sqrt(horizontalSquared)
-    :dvec3(1.0,0.0,0.0);
-  dvec3 north=normalize(cross(radial,east));
-  double angle=sampleRadiusMetres/double(radiusMetres);
-  dvec3 leftDirection=normalize(radial-east*angle),rightDirection=normalize(radial+east*angle);
-  dvec3 downDirection=normalize(radial-north*angle),upDirection=normalize(radial+north*angle);
-  dvec3 left=leftDirection*(double(radiusMetres)+double(ProductionFixedElevation(vec3(leftDirection))));
-  dvec3 right=rightDirection*(double(radiusMetres)+double(ProductionFixedElevation(vec3(rightDirection))));
-  dvec3 down=downDirection*(double(radiusMetres)+double(ProductionFixedElevation(vec3(downDirection))));
-  dvec3 up=upDirection*(double(radiusMetres)+double(ProductionFixedElevation(vec3(upDirection))));
-  vec3 candidate=normalize(vec3(cross(right-left,up-down)));
-  if(any(isnan(candidate))||any(isinf(candidate)))return vec3(radial);
-  return dot(candidate,vec3(radial))<0.0?-candidate:candidate;
-}
-
 void main()
 {
   bool anchored=(productionLayer&0x40000000u)!=0u;
@@ -288,11 +241,14 @@ void main()
   }
   float globalHeight=max(0.0,visible.elevation);
   float baseHeight=max(0.0,visible.elevation+LocalTerrainElevationResidual(samplingDirection));
-  PhysicalModifierEvaluationD modifierEvaluation=EvaluateTerrainModifiersD(dvec3(samplingDirection),double(baseHeight));
-  visible.elevation=max(0.0,baseHeight+float(modifierEvaluation.tiledHeight+modifierEvaluation.erosionHeight+modifierEvaluation.mesoHeight+modifierEvaluation.nearHeight));
-  float sampledHeight=visible.elevation;
+  // Geometry/TES has already produced physical height and position. Fragment
+  // presentation must not reconstruct modifiers; it consumes the geographic
+  // base height only for its independent FP32 material classification.
+  ProductionTerrainWeights presentationWeights=EvaluatePresentationBiomeWeightsF(samplingDirection,baseHeight,visible.land);
+  float sampledHeight=max(0.0,terrainHeight);
   vec3 sampledAlbedo=visible.albedo;
-  LocalTerrainMaterialSample localSample=SampleLocalTerrainMaterial(samplingDirection);
+  LocalTerrainMaterialSample localSample;
+  localSample=SampleLocalTerrainMaterial(samplingDirection);
   if(diagnostic==32770u)
   {
     float value=clamp((baseHeight+100.0)/200.0,0.0,1.0);
@@ -331,11 +287,14 @@ void main()
   }
   if((diagnostic&32768u)!=0u)
   {
+    // Physical diagnostics retain the complete FP64 evaluator, outside the
+    // production material path.
+    PhysicalModifierEvaluationD modifierEvaluation=EvaluateTerrainModifiersD(dvec3(samplingDirection),double(baseHeight));
     uint mode=(diagnostic>>8u)&7u;
     if(mode==0u){float value=clamp((globalHeight+1000.0)/5000.0,0.0,1.0);outColor=vec4(vec3(value),1.0);return;}
     if(mode==1u){float value=clamp(.5+float(modifierEvaluation.tiledHeight+modifierEvaluation.erosionHeight+modifierEvaluation.mesoHeight)/96.0,0.0,1.0);outColor=vec4(value,.2,1.0-value,1.0);return;}
     if(mode==2u){float value=clamp((visible.elevation+1000.0)/5000.0,0.0,1.0);outColor=vec4(vec3(value),1.0);return;}
-    if(mode==3u){outColor=vec4(ProductionFixedPhysicalNormal(samplingDirection,bodyRadius)*.5+.5,1.0);return;}
+    if(mode==3u){outColor=vec4(normalize(normal)*.5+.5,1.0);return;}
     if(mode==4u)
     {
       const vec3 colors[10]=vec3[10](vec3(0,.14,.35),vec3(.82,.68,.34),vec3(.15,.34,.25),vec3(.18,.48,.10),vec3(.48,.42,.20),vec3(.72,.45,.16),vec3(.34,.32,.30),vec3(.48,.48,.46),vec3(.82,.88,.94),vec3(.54,.56,.58));
@@ -361,12 +320,12 @@ void main()
   // from that shared point instead of from renderer topology.
   dvec3 bodyMetres=ProductionRaySpherePosition(samplingDirection,representedHeight,bodyRadiusMetres);
   vec3 analyticSphere=normalize(vec3(bodyMetres));
-  // Published hierarchy vertices already carry the canonical CPU physical
-  // normal for their exact body-fixed identity. Interpolate that authority
-  // across the 16x16 patch instead of reconstructing four FP64 height probes
-  // per fragment. The global fallback retains its topology-independent fixed
-  // reconstruction because its L0-L2 mesh is intentionally coarse.
-  vec3 physical=anchored?normalize(normal):ProductionFixedPhysicalNormal(analyticSphere,bodyRadius);
+  // Both complete global and refined anchored vertices now derive from the
+  // same canonical prepared height field.  Their construction normals may be
+  // sampled at different geometry densities, as in the reference preparation
+  // model, but no fragment path reconstructs a second terrain-v5 physical
+  // surface or normal authority.
+  vec3 physical=normalize(normal);
   if((diagnostic&8192u)!=0u){outColor=vec4(normalize(mix(unitDirection,physical,smoothstep(.45,.55,visible.land)))*.5+.5,1.0);return;}
   // The terrain payload contains bathymetry, not an implemented water
   // displacement surface. Keep current ocean shading on the analytic sea
@@ -402,7 +361,7 @@ void main()
     differentialMetres,
     surfaceAltitude,
     localSample.resident?localSample.controlClass:-1.0,
-    modifierEvaluation.biomes);
+    presentationWeights);
   earth.albedo=terrainMaterial.albedo;
   earth.roughness=mix(earth.roughness,terrainMaterial.roughness,terrainMaterial.detailWeight);
   earth.specular=mix(earth.specular,.035,terrainMaterial.detailWeight*(1.0-terrainMaterial.metallic));

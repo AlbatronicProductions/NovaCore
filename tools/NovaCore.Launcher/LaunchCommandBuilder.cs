@@ -15,9 +15,11 @@ public static class LaunchCommandBuilder
             throw new ArgumentException("Launch configuration does not match the authoritative scenario catalog.", nameof(configuration));
         }
 
+        var supportsEarthAltitude = configuration.Scene == NovaCoreScene.Earth ||
+                                    configuration is { Scene: NovaCoreScene.Solar, StartingBody: NovaCoreStartingBody.Earth };
         if (configuration.AltitudeMetres is { } altitude &&
             (!double.IsFinite(altitude) || altitude < ScenarioCatalog.MinimumTerrainSafeAltitudeMetres ||
-             configuration.Scene != NovaCoreScene.Earth))
+             !supportsEarthAltitude))
         {
             throw new ArgumentOutOfRangeException(nameof(configuration), "Altitude is invalid for this scene.");
         }
@@ -26,6 +28,10 @@ public static class LaunchCommandBuilder
         {
             $"--scene={SceneArgument(configuration.Scene)}"
         };
+        if (configuration is { Scene: NovaCoreScene.Solar, StartingBody: NovaCoreStartingBody.Earth })
+        {
+            arguments.Add("--focus=earth");
+        }
         if (configuration.AltitudeMetres is { } altitudeMetres)
         {
             arguments.Add($"--altitude={altitudeMetres.ToString("0.################", CultureInfo.InvariantCulture)}");

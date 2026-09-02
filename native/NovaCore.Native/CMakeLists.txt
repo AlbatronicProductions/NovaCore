@@ -31,13 +31,13 @@ add_custom_command(OUTPUT "${SPIRV_DIR}/planetary.vert.spv" "${SPIRV_DIR}/planet
   COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary.vert" -o "${SPIRV_DIR}/planetary.vert.spv"
   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary.frag" -o "${SPIRV_DIR}/planetary.frag.spv"
-  DEPENDS "${SHADER_DIR}/planetary.vert" "${SHADER_DIR}/planetary.frag" "${SHADER_DIR}/production_cube_surface.glsl" "${SHADER_DIR}/local_terrain.glsl" "${SHADER_DIR}/physical_surface.glsl" "${SHADER_DIR}/planet_material.glsl" "${SHADER_DIR}/planet_terrain.glsl")
+  DEPENDS "${SHADER_DIR}/planetary.vert" "${SHADER_DIR}/planetary.frag" "${SHADER_DIR}/production_cube_surface.glsl" "${SHADER_DIR}/local_terrain.glsl" "${SHADER_DIR}/physical_surface.glsl" "${SHADER_DIR}/planetary_physical_authority.glsl" "${SHADER_DIR}/planet_material.glsl" "${SHADER_DIR}/planet_terrain.glsl")
 add_custom_command(OUTPUT "${SPIRV_DIR}/anchored_terrain.vert.spv" "${SPIRV_DIR}/anchored_terrain.tesc.spv" "${SPIRV_DIR}/anchored_terrain.tese.spv"
   COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/anchored_terrain.vert" -o "${SPIRV_DIR}/anchored_terrain.vert.spv"
   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/anchored_terrain.tesc" -o "${SPIRV_DIR}/anchored_terrain.tesc.spv"
   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/anchored_terrain.tese" -o "${SPIRV_DIR}/anchored_terrain.tese.spv"
-  DEPENDS "${SHADER_DIR}/anchored_terrain.vert" "${SHADER_DIR}/anchored_terrain.tesc" "${SHADER_DIR}/anchored_terrain.tese" "${SHADER_DIR}/production_cube_surface.glsl" "${SHADER_DIR}/local_terrain.glsl" "${SHADER_DIR}/physical_surface.glsl" "${SHADER_DIR}/anchored_physical_surface.glsl")
+  DEPENDS "${SHADER_DIR}/anchored_terrain.vert" "${SHADER_DIR}/anchored_terrain.tesc" "${SHADER_DIR}/anchored_terrain.tese" "${SHADER_DIR}/production_cube_surface.glsl" "${SHADER_DIR}/local_terrain.glsl" "${SHADER_DIR}/physical_surface.glsl" "${SHADER_DIR}/planetary_physical_authority.glsl" "${SHADER_DIR}/anchored_physical_surface.glsl")
 add_custom_command(OUTPUT "${SPIRV_DIR}/planetary_select.comp.spv" "${SPIRV_DIR}/planetary_terrain_generate.comp.spv"
   COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary_select.comp" -o "${SPIRV_DIR}/planetary_select.comp.spv"

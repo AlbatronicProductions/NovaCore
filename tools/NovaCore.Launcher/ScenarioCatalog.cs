@@ -19,7 +19,7 @@ public static class ScenarioCatalog
             NovaCoreStartingBody.Earth, 700_000.0, "land", NovaCoreWindowMode.Windowed,
             NovaCoreResolutionPreset.Resolution960x540, NovaCoreDiagnosticsMode.Normal, true, null),
         new(NovaCoreScenarioPreset.EarthFullscreenNative, "Earth — Fullscreen Native",
-            "Earth production renderer at native desktop resolution with acceptance telemetry.", NovaCoreScene.Earth,
+            "Solar production scene pre-focused on Earth at native desktop resolution with acceptance telemetry.", NovaCoreScene.Solar,
             NovaCoreStartingBody.Earth, 700_000.0, "land", NovaCoreWindowMode.BorderlessFullscreen,
             NovaCoreResolutionPreset.NativeDesktop, NovaCoreDiagnosticsMode.VulkanValidationAndPerformance, true, null),
         new(NovaCoreScenarioPreset.FloridaLaunchSite, "Florida Launch Site",

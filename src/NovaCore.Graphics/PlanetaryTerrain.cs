@@ -11,7 +11,12 @@ public readonly record struct PlanetaryTerrainDefinition(uint SourceId,uint Vers
     public static PlanetaryTerrainDefinition EarthProductionCubeV5=>new(2,5,EarthElevationDataset.MaximumElevationMetres);
     public bool IsValid=>SourceId!=0&&Version!=0&&double.IsFinite(MaximumHeightMetres)&&MaximumHeightMetres>0;
 
-    public double SampleBaseHeight(in Double3 bodyDirection)
+    /// <summary>
+    /// Canonical signed-global-plus-regional geographic height used by every
+    /// physical query and production geometry density. Presentation payloads
+    /// are not physical height authority.
+    /// </summary>
+    public double SampleCanonicalGeographicHeight(in Double3 bodyDirection)
     {
         if(!IsValid||!bodyDirection.IsFinite||bodyDirection.LengthSquared<=0)throw new ArgumentOutOfRangeException();
         if(SourceId==EarthProductionCubeV5.SourceId&&Version==EarthProductionCubeV5.Version)
@@ -37,6 +42,9 @@ public readonly record struct PlanetaryTerrainDefinition(uint SourceId,uint Vers
         }
         return Math.Clamp(height,0d,MaximumHeightMetres);
     }
+
+    public double SampleBaseHeight(in Double3 bodyDirection) =>
+        SampleCanonicalGeographicHeight(bodyDirection);
 
     public PlanetaryPhysicalSurfaceSample SamplePhysicalSurface(in Double3 bodyDirection) =>
         PlanetaryPhysicalSurface.Evaluate(this, bodyDirection);

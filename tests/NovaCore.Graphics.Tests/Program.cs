@@ -47,6 +47,8 @@ var tests = new (string, Action)[]
     ("Near-surface inertial free-look", NearSurfaceInertialFreeLookRegressionTest),
     ("SurfaceAnchor acquisition, ENU, and handoff", SurfaceAnchorPhaseBTest),
     ("Camera focus-position continuity", CameraFocusPositionContinuityTest),
+    ("Camera SurfaceAnchor handoff monotonicity", CameraSurfaceAnchorHandoffMonotonicityTest),
+    ("Solar preset camera-path convergence", SolarPresetCameraPathConvergenceTest),
     ("Zoom motion-profile continuity", ZoomMotionProfileContinuityTest),
     ("Solar camera bounded-domain crash regression", SolarCameraBoundedDomainCrashRegressionTest),
     ("Surface visual-aim continuity", SurfaceVisualAimContinuityTest),
@@ -56,6 +58,8 @@ var tests = new (string, Action)[]
     ("Anchored spherical mesh-tier contract", AnchoredSphericalMeshTierContractTest),
     ("GPU physical-height preparation", GpuPhysicalHeightPreparationTests.Run),
     ("Multiscale physical terrain modifier foundation", PlanetaryPhysicalSurfaceModifierTests.Run),
+    ("Single canonical physical surface authority", PlanetaryCanonicalPhysicalSurfaceAuthorityTests.Run),
+    ("Global/anchored physical frequency continuity", PlanetaryPhysicalFrequencyContinuityTests.Run),
     ("Dynamic anchored production hierarchy", PlanetaryDynamicAnchoredSurfaceTests.Run),
     ("Displaced mesh and physical normals", GpuDisplacedMeshPreparationTests.Run),
     ("Screen-space subdivision", PlanetaryScreenSpaceSubdivisionTests.Run),
@@ -107,7 +111,7 @@ static void AnchoredSphericalMeshTierContractTest()
     Check(topologyA.Vertices.SequenceEqual(topologyB.Vertices)&&topologyA.Indices.SequenceEqual(topologyB.Indices)&&
         topologyA.DeterministicHash==topologyB.DeterministicHash&&topologyA.Vertices.Length==25&&topologyA.Indices.Length==96,
         "bounded reference topology has deterministic vertex/index identity and intentionally non-production 4x4 density");
-    Check(tierA.DeterministicHash==0x55A75314ECE5FB2Bul&&topologyA.DeterministicHash==0x3621FBFD89675DD4ul,
+    Check(tierA.DeterministicHash==0x11D71BDA21DAECC1ul&&topologyA.DeterministicHash==0x620D695AB3D18F5Dul,
         $"anchored tier and bounded reference topology regression hashes bind M12 physical height without changing topology: tier=0x{tierA.DeterministicHash:X16}; topology=0x{topologyA.DeterministicHash:X16}");
 
     var splitSamples=new[]{
@@ -1737,6 +1741,174 @@ static void InertialVisualAimAuthorityTest()
     }
 }
 
+static void CameraSurfaceAnchorHandoffMonotonicityTest()
+{
+    var root=new ReferenceFrameId(1);
+    var slow=CreateScene("slow single-detent");
+    var slowBodyOrientation=slow.Scene.FocusedBody.BodyFixedToRoot;
+    var slowInward=Traverse(slow.Scene,slow.Camera,1,true,700_000d,"slow inward");
+    Check(slowInward.StartAltitude>3_000_000d&&slowInward.EndAltitude<=700_000d&&slowInward.SawAnchor&&slowInward.SawPartialBlend,
+        $"slow single-detent descent traverses 3,000 to 700 km through partial SurfaceAnchor ownership: start={slowInward.StartAltitude:R}; end={slowInward.EndAltitude:R}; anchor={slowInward.SawAnchor}; partial={slowInward.SawPartialBlend}");
+
+    var rapid=CreateScene("rapid multi-detent");
+    var rapidInward=Traverse(rapid.Scene,rapid.Camera,4,true,700_000d,"rapid inward");
+    Check(rapidInward.StartAltitude>3_000_000d&&rapidInward.EndAltitude<=700_000d&&rapidInward.SawAnchor,
+        $"rapid multi-detent descent traverses the handoff monotonically: start={rapidInward.StartAltitude:R}; end={rapidInward.EndAltitude:R}; anchor={rapidInward.SawAnchor}");
+
+    var slowOutward=Traverse(slow.Scene,slow.Camera,-1,false,3_100_000d,"slow outward");
+    Check(slowOutward.EndAltitude>=3_000_000d&&slow.Scene.CurrentFocusTarget.Kind==FocusTargetKind.BodyCenter,
+        $"outward handoff releases stably to BodyCenter: end={slowOutward.EndAltitude:R}; kind={slow.Scene.CurrentFocusTarget.Kind}");
+    Check(slow.Scene.FocusedBody.BodyFixedToRoot==slowBodyOrientation,
+        "camera handoff does not change Earth/body orientation or body-fixed geography");
+
+    Console.WriteLine(
+        $"Camera handoff monotonicity: slowFrames={slowInward.Frames}; slowAltitudeReverse={slowInward.MaximumAltitudeReversal:E3}m; slowBlendReverse={slowInward.MaximumBlendReversal:E3}; slowPivotReverse={slowInward.MaximumPivotReversal:E3}m; slowScreenReverse={slowInward.MaximumScreenReversal:E3}rad; rapidFrames={rapidInward.Frames}; rapidAltitudeReverse={rapidInward.MaximumAltitudeReversal:E3}m; rapidBlendReverse={rapidInward.MaximumBlendReversal:E3}; rapidPivotReverse={rapidInward.MaximumPivotReversal:E3}m; outwardFrames={slowOutward.Frames}; outwardAltitudeReverse={slowOutward.MaximumAltitudeReversal:E3}m; outwardBlendReverse={slowOutward.MaximumBlendReversal:E3}; outwardPivotReverse={slowOutward.MaximumPivotReversal:E3}m; orientation={Math.Max(Math.Max(slowInward.MaximumOrientationStep,rapidInward.MaximumOrientationStep),slowOutward.MaximumOrientationStep):E3}rad");
+
+    (SolarSystemScene Scene,CameraState Camera) CreateScene(string sample)
+    {
+        Check(SolarSystemScene.TryCreateAt(root,SimulationInstant.Zero,out var candidate,out var error)&&candidate is not null,
+            $"{sample} scene: {error}");
+        var scene=candidate!;
+        var camera=new CameraState(new FramePosition(root,Double3.Zero),DoubleQuaternion.Identity,scene.Projection,CameraMode.Free);
+        Check(scene.Focus(camera,NativePresentationFocus.Earth),$"{sample} Earth focus");
+        scene.ApplyPresentationInput(camera,new NativeInputState{PauseToggle=1},out _,out _);
+        return(scene,camera);
+    }
+
+    (double StartAltitude,double EndAltitude,int Frames,bool SawAnchor,bool SawPartialBlend,double MaximumAltitudeReversal,
+        double MaximumBlendReversal,double MaximumPivotReversal,double MaximumScreenReversal,double MaximumOrientationStep)
+        Traverse(SolarSystemScene scene,CameraState camera,int detents,bool inward,double targetAltitude,string sample)
+    {
+        var startAltitude=scene.SurfaceAltitudeMetres;
+        var frames=0;
+        var sawAnchor=scene.CurrentFocusTarget.Kind==FocusTargetKind.SurfaceAnchor;
+        var sawPartial=scene.SurfaceAnchorBlend is >0d and <1d;
+        var maximumAltitudeReversal=0d;
+        var maximumBlendReversal=0d;
+        var maximumPivotReversal=0d;
+        var maximumScreenReversal=0d;
+        var maximumOrientationStep=0d;
+        while(frames<96&&(inward?scene.SurfaceAltitudeMetres>targetAltitude:scene.SurfaceAltitudeMetres<targetAltitude||scene.CurrentFocusTarget.Kind==FocusTargetKind.SurfaceAnchor))
+        {
+            var beforeAltitude=scene.SurfaceAltitudeMetres;
+            var beforeBlend=scene.SurfaceAnchorBlend;
+            var beforePivot=PivotDistance(scene);
+            var beforeScreen=AngularRadius(scene,camera);
+            var beforeOrientation=camera.Orientation;
+            scene.ApplyPresentationInput(camera,new NativeInputState{MouseWheelDetents=detents},out _,out _);
+            var altitudeDelta=scene.SurfaceAltitudeMetres-beforeAltitude;
+            var blendDelta=scene.SurfaceAnchorBlend-beforeBlend;
+            var pivotDelta=PivotDistance(scene)-beforePivot;
+            var screenDelta=AngularRadius(scene,camera)-beforeScreen;
+            maximumAltitudeReversal=Math.Max(maximumAltitudeReversal,inward?Math.Max(0d,altitudeDelta):Math.Max(0d,-altitudeDelta));
+            maximumBlendReversal=Math.Max(maximumBlendReversal,inward?Math.Max(0d,-blendDelta):Math.Max(0d,blendDelta));
+            maximumPivotReversal=Math.Max(maximumPivotReversal,inward?Math.Max(0d,-pivotDelta):Math.Max(0d,pivotDelta));
+            maximumScreenReversal=Math.Max(maximumScreenReversal,inward?Math.Max(0d,-screenDelta):Math.Max(0d,screenDelta));
+            maximumOrientationStep=Math.Max(maximumOrientationStep,QuaternionAngle(beforeOrientation,camera.Orientation));
+            sawAnchor|=scene.CurrentFocusTarget.Kind==FocusTargetKind.SurfaceAnchor;
+            sawPartial|=scene.SurfaceAnchorBlend is >0d and <1d;
+            frames++;
+        }
+        Check(maximumAltitudeReversal<=.001d&&maximumBlendReversal<=1e-12d&&maximumPivotReversal<=.001d&&
+            maximumScreenReversal<=1e-12d&&maximumOrientationStep<=1e-12d,
+            $"{sample} has no altitude/blend/pivot/screen close-far reversal and preserves orientation (altitude={maximumAltitudeReversal:E3}; blend={maximumBlendReversal:E3}; pivot={maximumPivotReversal:E3}; screen={maximumScreenReversal:E3}; orientation={maximumOrientationStep:E3})");
+        return(startAltitude,scene.SurfaceAltitudeMetres,frames,sawAnchor,sawPartial,maximumAltitudeReversal,
+            maximumBlendReversal,maximumPivotReversal,maximumScreenReversal,maximumOrientationStep);
+    }
+
+    static double PivotDistance(SolarSystemScene scene) =>
+        Math.Sqrt((scene.CurrentFocusRoot-scene.FocusedBody.Position.Value).LengthSquared);
+
+    static double AngularRadius(SolarSystemScene scene,CameraState camera)
+    {
+        var centerDistance=Math.Sqrt((camera.Position.Value-scene.FocusedBody.Position.Value).LengthSquared);
+        return Math.Asin(Math.Clamp(scene.FocusedBody.RadiusMetres/centerDistance,0d,1d));
+    }
+}
+
+static void SolarPresetCameraPathConvergenceTest()
+{
+    var root=new ReferenceFrameId(1);
+    var overview=Create("Solar Overview");
+    var fullscreen=Create("Earth Fullscreen");
+    Check(overview.Scene.Focus(overview.Camera,NativePresentationFocus.Earth),"Solar Overview focuses Earth through normal focus routing");
+    Check(overview.Scene.TryStartAtEarthValidationAltitude(overview.Camera,700_000d,"land")&&
+        fullscreen.Scene.TryStartAtEarthValidationAltitude(fullscreen.Camera,700_000d,"land"),
+        "both presets can establish the same initial Earth pose through SolarSystemScene setup");
+    var expectedDirection=EarthPlanetaryScene.ValidationSurfaceDirection("land");
+    Check(fullscreen.Scene.CurrentFocusTarget.Kind==FocusTargetKind.SurfaceAnchor&&
+        Math.Sqrt((fullscreen.Scene.CurrentFocusTarget.SurfaceAnchor.BodyFixedDirection-expectedDirection).LengthSquared)<1e-12d,
+        "Earth fullscreen preserves its intended body-fixed land starting location");
+    AssertEquivalent("initial aligned pose");
+
+    var maximumWheelOrientationStep=0d;
+    var outwardFrames=0;
+    while(outwardFrames++<64&&(overview.Scene.CurrentFocusTarget.Kind==FocusTargetKind.SurfaceAnchor||overview.Scene.SurfaceAltitudeMetres<3_100_000d))
+        ApplyBoth(new NativeInputState{MouseWheelDetents=-1},$"outward {outwardFrames}",true);
+    Check(overview.Scene.CurrentFocusTarget.Kind==FocusTargetKind.BodyCenter&&fullscreen.Scene.CurrentFocusTarget.Kind==FocusTargetKind.BodyCenter,
+        "both presets release SurfaceAnchor to BodyCenter on the same outward frame");
+
+    ApplyBoth(new NativeInputState{LookActive=1,MouseDeltaX=61f,MouseDeltaY=-23f},"far orbit drag",false);
+    var inwardFrames=0;
+    while(inwardFrames++<64&&overview.Scene.SurfaceAltitudeMetres>700_000d)
+        ApplyBoth(new NativeInputState{MouseWheelDetents=1},$"inward {inwardFrames}",true);
+    Check(overview.Scene.CurrentFocusTarget.Kind==FocusTargetKind.SurfaceAnchor&&fullscreen.Scene.CurrentFocusTarget.Kind==FocusTargetKind.SurfaceAnchor&&
+        overview.Scene.SurfaceAnchorBlend==1d&&fullscreen.Scene.SurfaceAnchorBlend==1d,
+        "both presets reacquire the same full SurfaceAnchor state");
+    ApplyBoth(new NativeInputState{LookActive=1,MouseDeltaX=-37f,MouseDeltaY=19f},"near-surface look",false);
+
+    Check(overview.Scene.Focus(overview.Camera,NativePresentationFocus.Mars)&&fullscreen.Scene.Focus(fullscreen.Camera,NativePresentationFocus.Mars),
+        "both presets share Solar focus routing away from Earth");
+    AssertEquivalent("Mars focus");
+    Check(overview.Scene.Focus(overview.Camera,NativePresentationFocus.Earth)&&fullscreen.Scene.Focus(fullscreen.Camera,NativePresentationFocus.Earth),
+        "both presets share Solar focus routing back to Earth");
+    AssertEquivalent("Earth refocus");
+    Console.WriteLine($"Solar preset camera convergence: outwardFrames={outwardFrames-1}; inwardFrames={inwardFrames-1}; wheelOrientationMax={maximumWheelOrientationStep:E3}rad; finalAltitude={overview.Scene.SurfaceAltitudeMetres:R}m; path=SolarSystemScene");
+    Check(maximumWheelOrientationStep<=1e-12d,"shared wheel path preserves continuous orientation");
+
+    (SolarSystemScene Scene,CameraState Camera) Create(string label)
+    {
+        Check(SolarSystemScene.TryCreateAt(root,SimulationInstant.Zero,out var sceneValue,out var error)&&sceneValue is not null,
+            $"{label} scene: {error}");
+        var scene=sceneValue!;
+        var camera=new CameraState(new FramePosition(root,Double3.Zero),DoubleQuaternion.Identity,scene.Projection,CameraMode.Free);
+        scene.ResetPresentationCamera(camera);
+        scene.ApplyPresentationInput(camera,new NativeInputState{PauseToggle=1},out _,out _);
+        return(scene,camera);
+    }
+
+    void ApplyBoth(in NativeInputState input,string label,bool wheel)
+    {
+        var overviewOrientation=overview.Camera.Orientation;
+        var fullscreenOrientation=fullscreen.Camera.Orientation;
+        overview.Scene.ApplyPresentationInput(overview.Camera,input,out _,out _);
+        fullscreen.Scene.ApplyPresentationInput(fullscreen.Camera,input,out _,out _);
+        if(wheel)
+        {
+            maximumWheelOrientationStep=Math.Max(maximumWheelOrientationStep,QuaternionAngle(overviewOrientation,overview.Camera.Orientation));
+            maximumWheelOrientationStep=Math.Max(maximumWheelOrientationStep,QuaternionAngle(fullscreenOrientation,fullscreen.Camera.Orientation));
+        }
+        AssertEquivalent(label);
+    }
+
+    void AssertEquivalent(string label)
+    {
+        var overviewPivot=Math.Sqrt((overview.Scene.CurrentFocusRoot-overview.Scene.FocusedBody.Position.Value).LengthSquared);
+        var fullscreenPivot=Math.Sqrt((fullscreen.Scene.CurrentFocusRoot-fullscreen.Scene.FocusedBody.Position.Value).LengthSquared);
+        Check(overview.Scene.CurrentFocusTarget==fullscreen.Scene.CurrentFocusTarget&&
+            overview.Scene.CurrentCameraReferenceAuthority==fullscreen.Scene.CurrentCameraReferenceAuthority&&
+            overview.Scene.SurfaceCameraMode==fullscreen.Scene.SurfaceCameraMode&&
+            overview.Scene.SurfaceAnchorBlend==fullscreen.Scene.SurfaceAnchorBlend&&
+            overview.Scene.SurfaceAltitudeMetres==fullscreen.Scene.SurfaceAltitudeMetres&&
+            overview.Scene.OrbitDistance==fullscreen.Scene.OrbitDistance&&
+            overview.Scene.OrbitYawRadians==fullscreen.Scene.OrbitYawRadians&&
+            overview.Scene.OrbitPitchRadians==fullscreen.Scene.OrbitPitchRadians&&
+            overviewPivot==fullscreenPivot&&overview.Scene.CurrentVisualAimRoot==fullscreen.Scene.CurrentVisualAimRoot&&
+            overview.Camera.Position.Value==fullscreen.Camera.Position.Value&&overview.Camera.Orientation==fullscreen.Camera.Orientation,
+            $"{label}: Solar Overview and Earth Fullscreen camera state remains identical");
+    }
+}
+
 static void ZoomMotionProfileContinuityTest()
 {
     var root = new ReferenceFrameId(1);
@@ -2442,14 +2614,14 @@ static void TerrainV5PayloadSeamAndFloridaClassificationTest()
     Check(maximumActualEdgePositionGapMetres<1e-8d&&maximumOneSidedNormalAngleRadians>1e-5d&&maximumGutterNormalAngleRadians<1e-5d,"real terrain-v5 shared positions are closed while one-sided edge normals are measurably discontinuous and canonical gutter normals agree");
     Check(double.IsFinite(minimumPayloadElevationMetres)&&double.IsFinite(maximumPayloadElevationMetres)&&minimumPayloadElevationMetres>=-11_000d&&maximumPayloadElevationMetres<=9_000d,"all real terrain-v5 payload elevations remain inside the signed production geometry envelope");
 
-    var shaderRoot=Path.Combine(repositoryRoot,"native","NovaCore.Native","shaders");var selectorSource=File.ReadAllText(Path.Combine(shaderRoot,"planetary_select.comp"));var vertexSource=File.ReadAllText(Path.Combine(shaderRoot,"planetary.vert"));var fragmentSource=File.ReadAllText(Path.Combine(shaderRoot,"planetary_production.frag"));var localSource=File.ReadAllText(Path.Combine(shaderRoot,"local_terrain.glsl"));var nativeSource=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","NovaCoreNative.cpp"));
+    var shaderRoot=Path.Combine(repositoryRoot,"native","NovaCore.Native","shaders");var selectorSource=File.ReadAllText(Path.Combine(shaderRoot,"planetary_select.comp"));var vertexSource=File.ReadAllText(Path.Combine(shaderRoot,"planetary.vert"));var fragmentSource=File.ReadAllText(Path.Combine(shaderRoot,"planetary_production.frag"));var authoritySource=File.ReadAllText(Path.Combine(shaderRoot,"planetary_physical_authority.glsl"));var localSource=File.ReadAllText(Path.Combine(shaderRoot,"local_terrain.glsl"));var nativeSource=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","NovaCoreNative.cpp"));
     Check(vertexSource.Contains("surfaceMorph=temporalMorph",StringComparison.Ordinal)&&!vertexSource.Contains("DemandMorph",StringComparison.Ordinal)&&vertexSource.Contains("ConstrainedMorph(mask,p.transitions.w,p.transitions.z",StringComparison.Ordinal)&&vertexSource.Contains("return 0.0",StringComparison.Ordinal)&&vertexSource.Contains("return 1.0",StringComparison.Ordinal),"temporal morph ownership uses retained-parent fine edges and current-coarse reverse edges instead of spatially divergent per-patch demand morphing");
     Check(selectorSource.Contains("TransitionAge",StringComparison.Ordinal)&&selectorSource.Contains("packedAges",StringComparison.Ordinal)&&selectorSource.Contains("FinerOutputNeighbor",StringComparison.Ordinal)&&selectorSource.Contains("transitionsSettled",StringComparison.Ordinal)&&selectorSource.Contains("ProductionPatchBindingCurrent",StringComparison.Ordinal)&&selectorSource.Contains("payloadBindingsCurrent",StringComparison.Ordinal)&&selectorSource.Contains("patchData.patches[index].transitions.w=finerNeighborMask",StringComparison.Ordinal),"selector publishes exact shared edge ages and reverse coarse/fine ownership and cannot fast-reuse an in-progress transition or a stale zero payload-layer binding");
     Check(vertexSource.Contains("struct PlanetaryPatch { uvec4 address; vec4 centerRadius; vec4 color; uvec4 transitions; };",StringComparison.Ordinal)&&selectorSource.Contains("struct PlanetaryPatch { uvec4 address; vec4 centerRadius; vec4 color; uvec4 transitions; };",StringComparison.Ordinal)&&vertexSource.Contains("p.transitions.z",StringComparison.Ordinal)&&vertexSource.Contains("p.transitions.w",StringComparison.Ordinal),"native/shader patch ABI remains four 16-byte records (64 bytes), with packed edge ages and reverse-edge mask contained in the existing transition record");
     Check(fragmentSource.Contains("surfaceWeight=productionTransition.x*MixedLodEdgeWeight",StringComparison.Ordinal)&&fragmentSource.Contains("visible.albedo=mix(parent.albedo,visible.albedo,surfaceWeight)",StringComparison.Ordinal)&&fragmentSource.Contains("visible.elevation=mix(parent.elevation,visible.elevation,surfaceWeight)",StringComparison.Ordinal)&&fragmentSource.Contains("visible.land=mix(parent.land,visible.land,surfaceWeight)",StringComparison.Ordinal),"global macro material, classification, and elevation share the geometry promotion state rather than independently selecting resident LOD");
-    Check(fragmentSource.Contains("ProductionFixedPhysicalNormal(analyticSphere,bodyRadius)",StringComparison.Ordinal)&&fragmentSource.Contains("sourceTexels=256.0*double(1u<<centerAddress.y)",StringComparison.Ordinal)&&fragmentSource.Contains("mix(analyticSphere,physical,landWeight)",StringComparison.Ordinal),"every production owner uses one topology- and screen-footprint-independent body-fixed physical normal at the authoritative payload spacing, with a continuous analytic sea-level normal");
+    Check(authoritySource.Contains("CanonicalPhysicalHeight",StringComparison.Ordinal)&&vertexSource.Contains("CanonicalPhysicalHeight(direction)",StringComparison.Ordinal)&&fragmentSource.Contains("vec3 physical=normalize(normal)",StringComparison.Ordinal)&&!fragmentSource.Contains("materialBenchmark",StringComparison.Ordinal)&&!fragmentSource.Contains("ProductionFixedPhysicalNormal",StringComparison.Ordinal)&&fragmentSource.Contains("mix(analyticSphere,physical,landWeight)",StringComparison.Ordinal),"every production geometry owner uses one body-fixed physical height authority and fragment lighting consumes its prepared normal with a continuous analytic sea-level blend and no profiling bypass");
     Check(nativeSource.Contains("terrain[sample]=ProductionSampleElevation(a.productionElevationCpu[parentLayer]",StringComparison.Ordinal)&&nativeSource.Contains("terrain[sample+1]=ProductionSampleElevation(payload.elevation",StringComparison.Ordinal)&&nativeSource.Contains("ProductionHierarchyPayloadsReady",StringComparison.Ordinal)&&vertexSource.Contains("binding=9) readonly buffer TerrainSamples { vec2 heights[]; }",StringComparison.Ordinal)&&vertexSource.Contains("binding=10) readonly buffer PatchTerrainSlots { uvec2 values[]; }",StringComparison.Ordinal),"native two-float parent/current endpoint transport remains byte-compatible for non-immutable terrain users");
-    Check(selectorSource.Contains("uint slot=ProductionPatchOrdinal(keyB.x,keyB.y,keyB.z,keyB.w)",StringComparison.Ordinal)&&selectorSource.Contains("patchTerrain.values[index]=uvec2(slot,slot+1u)",StringComparison.Ordinal)&&selectorSource.Contains("production?cacheHighWater:0u",StringComparison.Ordinal)&&vertexSource.Contains("layout(set=0,binding=25) uniform sampler2DArray productionElevation",StringComparison.Ordinal)&&vertexSource.Contains("ProductionHeight(parentLayer,parentUv)",StringComparison.Ordinal)&&nativeSource.Contains("terrainBindings=%u",StringComparison.Ordinal)&&nativeSource.Contains("NOVACORE_PRODUCTION_BOOTSTRAP_DELAY_MS",StringComparison.Ordinal),"the complete immutable terrain-v5 hierarchy binds canonical ordinal geometry/material layers on the first selector frame and displaces from the synchronously uploaded device-local elevation payload; bounded delayed-bootstrap injection cannot expose partial plates because bootstrap precedes the render loop");
+    Check(selectorSource.Contains("uint slot=ProductionPatchOrdinal(keyB.x,keyB.y,keyB.z,keyB.w)",StringComparison.Ordinal)&&selectorSource.Contains("patchTerrain.values[index]=uvec2(slot,slot+1u)",StringComparison.Ordinal)&&selectorSource.Contains("production?cacheHighWater:0u",StringComparison.Ordinal)&&!vertexSource.Contains("productionElevation",StringComparison.Ordinal)&&vertexSource.Contains("planetary_physical_authority.glsl",StringComparison.Ordinal)&&fragmentSource.Contains("layout(set=0,binding=25) uniform sampler2DArray productionElevation",StringComparison.Ordinal)&&nativeSource.Contains("terrainBindings=%u",StringComparison.Ordinal)&&nativeSource.Contains("NOVACORE_PRODUCTION_BOOTSTRAP_DELAY_MS",StringComparison.Ordinal),"the complete global owner publishes synchronously before rendering, uses the canonical oracle for geometry, and retains terrain-v5 only as its presentation payload");
     Check(fragmentSource.Contains("SampleLocalTerrainMaterial(samplingDirection)",StringComparison.Ordinal)&&
           fragmentSource.Contains("if(localSample.resident)",StringComparison.Ordinal)&&
           !fragmentSource.Contains("if(anchored&&localSample.resident)",StringComparison.Ordinal)&&
@@ -2892,7 +3064,7 @@ static void AnchoredFloridaLaunchSiteTest()
         DoubleQuaternion.Identity,scene.Projection,CameraMode.Free);
     Check(!scene.TryGetFloridaLaunchSitePresentation(farCamera,out _,out _),"human-scale geometry is culled at distance");
     Check(MeshHandle.FloridaLaunchPad.Value==3,"stable native launchpad mesh identity");
-    Check(site.Object.DeterministicHash==objectHash&&objectHash==0xD60A3F5FA91ECFC3UL,
+    Check(site.Object.DeterministicHash==objectHash&&objectHash==0x5B21D11ADAC71C6FUL,
         $"M12 site fingerprint binds the same geographic reservation to the regional physical height: 0x{objectHash:X16}");
 
     Check(SolarSystemScene.TryCreateAt(root,SimulationInstant.Zero,out var sliceCameraScene,out error)&&sliceCameraScene is not null,
@@ -3411,11 +3583,16 @@ static void ProductionPhysicalNormalTangentContinuityTest()
     Check(polarMaximum<2e-6d&&minimumHandedness>1d-1e-12d&&poleEast.IsFinite&&poleNorth.IsFinite,"South-pole neighborhood stays finite, right-handed, and continuous until the mathematical coordinate singularity");
 
     var repositoryRoot=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..",".."));
-    var shader=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","shaders","planetary_production.frag"));
-    Check(shader.Contains("horizontalSquared=radial.x*radial.x+radial.z*radial.z",StringComparison.Ordinal)&&
-          shader.Contains("dvec3(radial.z,0.0,-radial.x)/sqrt(horizontalSquared)",StringComparison.Ordinal)&&
-          !shader.Contains("abs(radial.y)<.95",StringComparison.Ordinal),
-        "production normal uses the continuous canonical body-fixed geographic tangent frame with no mid-latitude reference switch");
+    var shaderRoot=Path.Combine(repositoryRoot,"native","NovaCore.Native","shaders");
+    var physicalShader=File.ReadAllText(Path.Combine(shaderRoot,"physical_surface.glsl"));
+    var authorityShader=File.ReadAllText(Path.Combine(shaderRoot,"planetary_physical_authority.glsl"));
+    var fragmentShader=File.ReadAllText(Path.Combine(shaderRoot,"planetary_production.frag"));
+    Check(physicalShader.Contains("horizontalSquared=direction.x*direction.x+direction.z*direction.z",StringComparison.Ordinal)&&
+          physicalShader.Contains("dvec3(direction.z,0.0,-direction.x)/sqrt(horizontalSquared)",StringComparison.Ordinal)&&
+          authorityShader.Contains("PhysicalEastD(direction)",StringComparison.Ordinal)&&
+          !physicalShader.Contains("abs(direction.y)<.95",StringComparison.Ordinal)&&
+          !fragmentShader.Contains("ProductionFixedPhysicalNormal",StringComparison.Ordinal),
+        "the one prepared production normal authority uses the continuous canonical body-fixed tangent frame with no fragment-stage or mid-latitude alternate");
     Console.WriteLine($"Physical-normal frame: boundaryLatitude={boundaryLatitude*180d/Math.PI:R}deg; longitude=-42deg; discontinuousReferenceJump={discontinuousJump:R}rad; canonicalEastJump={canonicalJump:R}rad; canonicalNorthJump={canonicalNorthJump:R}rad; longitudeWrap={wrapMaximum:R}rad; polarStep={polarMaximum:R}rad; minimumHandedness={minimumHandedness:R}; south={Address(south)}; north={Address(north)}");
 }
 

@@ -86,7 +86,13 @@ public readonly record struct PlanetaryDynamicAnchoredTelemetry(
     int PreparationQueueDepth,
     double LastPublicationLatencyMilliseconds,
     double MainThreadTerrainMilliseconds,
-    PlanetaryDynamicGenerationRejectReason RejectedGenerationReason);
+    PlanetaryDynamicGenerationRejectReason RejectedGenerationReason,
+    long PersistentTopologyReuseCount,
+    long PersistentTopologyTranslationCount,
+    int DescriptorDeltaCount,
+    double LastSelectionQueueLatencyMilliseconds,
+    bool SelectionPending,
+    uint PresentationGeneration);
 
 public readonly record struct PlanetaryDynamicAnchoredConfiguration(
     double TargetPatchPixels,
@@ -122,7 +128,7 @@ public sealed class PlanetaryDynamicAnchoredSurface
     // neighborhood at the native 3440x1440 acceptance density.  Geometry is
     // reusable; this bounded increase is descriptor/cache identity capacity,
     // not another per-patch final-raster mesh allocation.
-    public const int DefaultCacheCapacity = 8192;
+    public const int DefaultCacheCapacity = 12288;
     public const int DefaultActiveCapacity = 6144;
     public const int TransactionHeadroom = DefaultCacheCapacity - DefaultActiveCapacity;
     public const int MaximumBackgroundPreparationWorkers = 8;
@@ -133,9 +139,13 @@ public sealed class PlanetaryDynamicAnchoredSurface
     public const double PresentationMorphDurationSeconds = 0.5d;
     public const double MinimumRetainedNeighborhoodRadiusMetres = 32_000d;
     public const double MaximumRetainedNeighborhoodRadiusMetres = 64_000d;
-    public const double MinimumResidencyRecenterMetres = 128d;
-    public const double MaximumResidencyRecenterMetres = 1_000d;
-    public const double ResidencyRecenterRadiusFraction = 1d / 64d;
+    // The retained neighborhood is persistent presentation topology.  Ordinary
+    // reference-frame motion may translate its canonical addresses only after
+    // half of the retained radius has been consumed; the old 1/64 threshold
+    // converted Earth's normal rotation into a full CPU selection every second.
+    public const double MinimumResidencyRecenterMetres = 4_000d;
+    public const double MaximumResidencyRecenterMetres = 32_000d;
+    public const double ResidencyRecenterRadiusFraction = .5d;
     public const uint SubmissionReady = 1u << 0;
     public const uint SubmissionAuthoritative = 1u << 1;
     public const uint SubmissionGeometryComplete = 1u << 2;
@@ -164,6 +174,21 @@ public sealed class PlanetaryDynamicAnchoredSurface
         internal long LastUse;
     }
 
+    private readonly record struct PreparedTopologyTranslation(
+        long RequestId,
+        PlanetaryLodSelection Selection,
+        Double3 CameraBody,
+        Double3 ForwardBody,
+        double FieldOfView,
+        double Aspect,
+        double ViewportHeight,
+        double NeighborhoodRadius,
+        double SelectionMilliseconds,
+        PlanetaryPatchConservativeBounds[] PreparedBounds,
+        double MaximumProjectedErrorPixels,
+        bool ReusedPersistentTopology,
+        long StartedTimestamp);
+
     private readonly ulong _bodyId;
     private readonly double _bodyRadius;
     private readonly PlanetaryTerrainDefinition _terrain;
@@ -176,6 +201,9 @@ public sealed class PlanetaryDynamicAnchoredSurface
     private readonly HashSet<PlanetaryPatch> _previousLeafSet;
     private readonly HashSet<PlanetaryPatch> _morphToParentSet;
     private readonly Dictionary<PlanetaryAnchoredPatchKey, int> _slotByKey;
+    private readonly Stack<int> _freeSlots;
+    private readonly PriorityQueue<int, long> _cachedLru;
+    private readonly List<(int Slot, long Priority)> _deferredLru;
     private readonly int[] _slots;
     private readonly int[] _preparationIndices;
     private readonly int[] _preparationWorkerThreadIds;
@@ -196,6 +224,7 @@ public sealed class PlanetaryDynamicAnchoredSurface
     private int _authoritativePatchCount;
     private uint _authoritativeGeneration;
     private int _preparedPendingPatchCount;
+    private int _pendingPreparationCount;
     private double _pendingMaximumProjectedError;
     private int _retainedDemandedPatchCount, _newDemandedPatchCount, _releasedDemandedPatchCount;
     private double _demandOverlapPercent, _lastSelectionMilliseconds;
@@ -212,6 +241,10 @@ public sealed class PlanetaryDynamicAnchoredSurface
     private PlanetaryDynamicAnchoredTelemetry _telemetry;
     private PlanetaryDynamicSurfaceFailure _injectedFailure;
     private Thread? _preparationWorker;
+    private Thread? _selectionWorker;
+    private readonly object _selectionGate = new();
+    private PreparedTopologyTranslation? _preparedTopologyTranslation;
+    private long _selectionRequestSerial;
     private uint _backgroundCompleteGeneration;
     private int _lastReportedPreparedPendingPatchCount;
     private int _lastPreparationWorkerCount;
@@ -223,6 +256,14 @@ public sealed class PlanetaryDynamicAnchoredSurface
     private double _retainedNeighborhoodRadiusMetres;
     private double _cameraToResidencyCenterMetres;
     private long _rotationReuseCount;
+    private long _persistentTopologyReuseCount;
+    private long _persistentTopologyTranslationCount;
+    private int _lastDescriptorDeltaCount;
+    private bool _pendingReusesPersistentTopology;
+    private double _lastSelectionQueueLatencyMilliseconds;
+    private bool _lastSelectionAsynchronous;
+    private uint _transportGeneration;
+    private int _transportPatchCount;
 
     public PlanetaryDynamicAnchoredSurface(ulong bodyId, double bodyRadius,
         in PlanetaryTerrainDefinition terrain, uint physicalSurfaceGeneration,
@@ -243,13 +284,17 @@ public sealed class PlanetaryDynamicAnchoredSurface
         _previousLeafSet = new HashSet<PlanetaryPatch>(activeCapacity);
         _morphToParentSet = new HashSet<PlanetaryPatch>(activeCapacity);
         _slotByKey = new Dictionary<PlanetaryAnchoredPatchKey, int>(cacheCapacity);
+        _freeSlots = new Stack<int>(cacheCapacity);
+        for (var slot = cacheCapacity - 1; slot >= 0; slot--) _freeSlots.Push(slot);
+        _cachedLru = new PriorityQueue<int, long>(cacheCapacity);
+        _deferredLru = new List<(int Slot, long Priority)>(cacheCapacity);
         _slots = new int[activeCapacity];
         _preparationIndices = new int[activeCapacity];
         _preparationWorkerThreadIds = new int[ConfiguredWorkerCount];
         _telemetry = new(0, 0, 0, 0, 0, cacheCapacity, 0, 0, 0, 0, 0, true, true,
             0d, 0d, 0d, 0d, 0, 0, 0, 100d, 0, 0, 0, 0, 0, 0, 0, false,
             ConfiguredWorkerCount, 0, 0d, 0, 0, 0d, 0d,
-            PlanetaryDynamicGenerationRejectReason.None);
+            PlanetaryDynamicGenerationRejectReason.None, 0, 0, 0, 0d, false, 0u);
     }
 
     public NativeAnchoredSurfacePatch[] SubmissionPatches => _submission;
@@ -275,6 +320,8 @@ public sealed class PlanetaryDynamicAnchoredSurface
         _lastSelectionNeighborhoodRadius * ResidencyRecenterRadiusFraction,
         MinimumResidencyRecenterMetres, MaximumResidencyRecenterMetres);
     public long RotationReuseCount => _rotationReuseCount;
+    public long PersistentTopologyReuseCount => _persistentTopologyReuseCount;
+    public long PersistentTopologyTranslationCount => _persistentTopologyTranslationCount;
     public static int ConfiguredWorkerCount => Math.Clamp(Environment.ProcessorCount - 2,
         1, MaximumBackgroundPreparationWorkers);
     public NativeAnchoredSurfacePresentation NativePresentation =>
@@ -416,6 +463,30 @@ public sealed class PlanetaryDynamicAnchoredSurface
         }
 
         var normalizedForward = viewForwardBody.Normalized();
+        if (TryTakePreparedTopologyTranslation(out var prepared))
+        {
+            _lastSelectionMilliseconds = prepared.SelectionMilliseconds;
+            _lastSelectionAsynchronous = true;
+            _lastSelectionQueueLatencyMilliseconds =
+                System.Diagnostics.Stopwatch.GetElapsedTime(prepared.StartedTimestamp).TotalMilliseconds;
+            if (prepared.ReusedPersistentTopology) _persistentTopologyTranslationCount++;
+            ApplySelection(prepared.Selection, prepared.CameraBody, prepared.ForwardBody,
+                prepared.FieldOfView, prepared.Aspect, prepared.ViewportHeight,
+                prepared.NeighborhoodRadius, nearClipMetres,
+                allowCoarseningTransition: false,
+                reusePersistentTopology: prepared.ReusedPersistentTopology,
+                preparedBounds: prepared.PreparedBounds,
+                preparedMaximumProjectedError: prepared.MaximumProjectedErrorPixels);
+            return;
+        }
+        if (_selectionWorker is { IsAlive: true })
+        {
+            _persistentTopologyReuseCount++;
+            PublishAuthoritativeTransport();
+            _telemetry = BuildTelemetry(_lastSelection, _authoritativeVisible, 0d,
+                _pendingMaximumProjectedError);
+            return;
+        }
         if (_authoritativeVisible && _hasLastSelection &&
             SameResidencyObservation(_lastSelectionCamera, cameraBody,
                 _lastSelectionNeighborhoodRadius, retainedRadius,
@@ -423,6 +494,21 @@ public sealed class PlanetaryDynamicAnchoredSurface
                 _lastSelectionAspect, aspectRatio, _lastSelectionViewportHeight, viewportHeightPixels))
         {
             if(Double3.Dot(_lastSelectionForward,normalizedForward)<1d-5e-15d)_rotationReuseCount++;
+            _persistentTopologyReuseCount++;
+            PublishAuthoritativeTransport();
+            _telemetry = BuildTelemetry(_lastSelection, true, 0d, _pendingMaximumProjectedError);
+            return;
+        }
+
+        if (_authoritativeVisible && _hasLastSelection &&
+            SameTopologyScale(_lastSelectionNeighborhoodRadius, retainedRadius,
+                _lastSelectionFieldOfView, verticalFieldOfViewRadians,
+                _lastSelectionAspect, aspectRatio, _lastSelectionViewportHeight, viewportHeightPixels))
+        {
+            StartTopologyTranslation(cameraBody, normalizedForward, verticalFieldOfViewRadians,
+                aspectRatio, viewportHeightPixels, retainedRadius, Math.Max(0d, altitude),
+                nearClipMetres);
+            _persistentTopologyReuseCount++;
             PublishAuthoritativeTransport();
             _telemetry = BuildTelemetry(_lastSelection, true, 0d, _pendingMaximumProjectedError);
             return;
@@ -445,6 +531,21 @@ public sealed class PlanetaryDynamicAnchoredSurface
         var selection = PlanetaryRepresentationSelector.SelectRetainedNeighborhood(body, cameraBody,
             configuration, Math.Max(0d, altitude), nearClipMetres, retainedRadius, _previousLeaves);
         _lastSelectionMilliseconds = System.Diagnostics.Stopwatch.GetElapsedTime(selectionStarted).TotalMilliseconds;
+        _lastSelectionAsynchronous = false;
+        ApplySelection(selection, cameraBody, normalizedForward, verticalFieldOfViewRadians,
+            aspectRatio, viewportHeightPixels, retainedRadius, nearClipMetres);
+    }
+
+    private void ApplySelection(in PlanetaryLodSelection selection, in Double3 cameraBody,
+        in Double3 normalizedForward, double verticalFieldOfViewRadians, double aspectRatio,
+        double viewportHeightPixels, double retainedRadius, double nearClipMetres,
+        bool allowCoarseningTransition = true,
+        bool reusePersistentTopology = false,
+        PlanetaryPatchConservativeBounds[]? preparedBounds = null,
+        double? preparedMaximumProjectedError = null)
+    {
+        _ = nearClipMetres;
+        var radial = cameraBody.Normalized();
         CaptureObservation(selection, cameraBody, normalizedForward, verticalFieldOfViewRadians,
             aspectRatio, viewportHeightPixels, retainedRadius);
         if (selection.Patches.Length == 0 || selection.Patches.Length > _submission.Length)
@@ -459,13 +560,15 @@ public sealed class PlanetaryDynamicAnchoredSurface
         if (_authoritativeVisible && SamePatches(selection.Patches, _previousLeaves))
         {
             _lastSelection = selection;
-            _pendingMaximumProjectedError = MaximumProjectedError(selection, cameraBody,
-                viewportHeightPixels, verticalFieldOfViewRadians);
+            _pendingMaximumProjectedError = preparedMaximumProjectedError ??
+                MaximumProjectedError(selection, cameraBody, viewportHeightPixels,
+                    verticalFieldOfViewRadians);
             PublishAuthoritativeTransport();
             _telemetry = BuildTelemetry(selection, true, 0d, _pendingMaximumProjectedError);
             return;
         }
-        if (TryCreateCoarseningTransition(selection, out var transitionSelection, out var morphingChildren))
+        if (allowCoarseningTransition &&
+            TryCreateCoarseningTransition(selection, out var transitionSelection, out var morphingChildren))
         {
             if (StartPending(transitionSelection, cameraBody, radial, viewportHeightPixels,
                     verticalFieldOfViewRadians, morphingChildren))
@@ -482,7 +585,9 @@ public sealed class PlanetaryDynamicAnchoredSurface
             return;
         }
         if (!StartPending(selection, cameraBody, radial, viewportHeightPixels,
-                verticalFieldOfViewRadians))
+                verticalFieldOfViewRadians, reusePersistentTopology: reusePersistentTopology,
+                preparedBounds: preparedBounds,
+                preparedMaximumProjectedError: preparedMaximumProjectedError))
         {
             PublishAuthoritativeTransport();
             _telemetry = BuildTelemetry(selection, false, 0d,
@@ -515,6 +620,7 @@ public sealed class PlanetaryDynamicAnchoredSurface
         _frameHitsStart = _hits; _frameMissesStart = _misses;
         _frameEvictionsStart = _evictions;
         _framePreparations = 0; _lastSelectionMilliseconds = 0d;
+        _lastSelectionAsynchronous = false;
         _rejectedGenerationReason = PlanetaryDynamicGenerationRejectReason.None;
     }
 
@@ -530,9 +636,158 @@ public sealed class PlanetaryDynamicAnchoredSurface
         _hasLastSelection = true;
     }
 
+    private void StartTopologyTranslation(in Double3 cameraBody, in Double3 normalizedForward,
+        double fieldOfView, double aspect, double viewportHeight, double neighborhoodRadius,
+        double surfaceAltitude, double nearClipMetres)
+    {
+        if (_selectionWorker is { IsAlive: true }) return;
+        var requestId = Interlocked.Increment(ref _selectionRequestSerial);
+        var previousSelection = _lastSelection with
+        {
+            Patches = _lastSelection.Patches.ToArray(),
+            StitchMasks = _lastSelection.StitchMasks.ToArray()
+        };
+        var previousCamera = _lastSelectionCamera;
+        var requestedCamera = cameraBody;
+        var requestedForward = normalizedForward;
+        var previousLeaves = _previousLeaves.ToArray();
+        var started = System.Diagnostics.Stopwatch.GetTimestamp();
+        lock (_selectionGate) _preparedTopologyTranslation = null;
+        _selectionWorker = new Thread(() =>
+        {
+            var selectionStarted = System.Diagnostics.Stopwatch.GetTimestamp();
+            var reused = TryTranslatePersistentTopology(previousSelection,
+                previousCamera.Normalized(), requestedCamera.Normalized(), out var selection);
+            if (!reused)
+            {
+                var body = new PlanetRenderProxy(_bodyId,
+                    new UniversePosition(Double3.Zero, new ReferenceFrameId(1)), _bodyRadius,
+                    new Float3(1f, 1f, 1f), "Anchored", true, DoubleQuaternion.Identity);
+                var configuration = PlanetaryLodConfiguration.ForViewport(19d,
+                    _configuration.MaximumLevel, _configuration.TargetPatchPixels,
+                    viewportHeight, fieldOfView, _terrain.MaximumHeightMetres, true);
+                selection = PlanetaryRepresentationSelector.SelectRetainedNeighborhood(body,
+                    requestedCamera, configuration, surfaceAltitude, nearClipMetres,
+                    neighborhoodRadius, previousLeaves);
+            }
+            var preparedBounds = new PlanetaryPatchConservativeBounds[selection.Patches.Length];
+            for (var index = 0; index < selection.Patches.Length; index++)
+                preparedBounds[index] = PlanetaryRepresentationSelector.ConservativeBounds(
+                    selection.Patches[index], _bodyRadius, _terrain.MaximumHeightMetres, true);
+            var maximumProjectedError = MaximumProjectedError(selection, requestedCamera,
+                viewportHeight, fieldOfView);
+            var elapsed = System.Diagnostics.Stopwatch.GetElapsedTime(selectionStarted).TotalMilliseconds;
+            var result = new PreparedTopologyTranslation(requestId, selection, requestedCamera,
+                requestedForward, fieldOfView, aspect, viewportHeight, neighborhoodRadius,
+                elapsed, preparedBounds, maximumProjectedError, reused, started);
+            lock (_selectionGate)
+            {
+                if (requestId == Volatile.Read(ref _selectionRequestSerial))
+                    _preparedTopologyTranslation = result;
+            }
+        })
+        {
+            IsBackground = true,
+            Name = "NovaCore persistent topology translation",
+            Priority = ThreadPriority.BelowNormal
+        };
+        _selectionWorker.Start();
+    }
+
+    private bool TryTakePreparedTopologyTranslation(out PreparedTopologyTranslation result)
+    {
+        lock (_selectionGate)
+        {
+            if (_preparedTopologyTranslation is not { } prepared)
+            {
+                result = default;
+                return false;
+            }
+            _preparedTopologyTranslation = null;
+            _selectionWorker = null;
+            result = prepared;
+            return true;
+        }
+    }
+
+    private static bool TryTranslatePersistentTopology(in PlanetaryLodSelection source,
+        in Double3 previousDirection, in Double3 requestedDirection,
+        out PlanetaryLodSelection translated)
+    {
+        translated = default;
+        if (source.Patches.Length == 0 ||
+            !RelaxedCubeSphereProjection.TryAddress(previousDirection, out var previousFace,
+                out var previousU, out var previousV) ||
+            !RelaxedCubeSphereProjection.TryAddress(requestedDirection, out var requestedFace,
+                out var requestedU, out var requestedV) || previousFace != requestedFace)
+            return false;
+
+        var referencePatches = source.Patches.Where(patch => patch.Face == previousFace).ToArray();
+        if (referencePatches.Length == 0) return false;
+        var minimumLevel = referencePatches.Min(patch => patch.Level);
+        if (minimumLevel is < 0 or > MaximumLevel) return false;
+        var referenceCells = 1 << minimumLevel;
+        var previousReferenceX = Math.Min((int)Math.Floor(previousU * referenceCells), referenceCells - 1);
+        var previousReferenceY = Math.Min((int)Math.Floor(previousV * referenceCells), referenceCells - 1);
+        var requestedReferenceX = Math.Min((int)Math.Floor(requestedU * referenceCells), referenceCells - 1);
+        var requestedReferenceY = Math.Min((int)Math.Floor(requestedV * referenceCells), referenceCells - 1);
+        var referenceDeltaX = requestedReferenceX - previousReferenceX;
+        var referenceDeltaY = requestedReferenceY - previousReferenceY;
+        if (referenceDeltaX == 0 && referenceDeltaY == 0)
+        {
+            translated = source;
+            return true;
+        }
+
+        var patches = new PlanetaryPatch[source.Patches.Length];
+        var active = new HashSet<PlanetaryPatch>(source.Patches.Length);
+        for (var index = 0; index < source.Patches.Length; index++)
+        {
+            var patch = source.Patches[index];
+            if (patch.Level is < 0 or > MaximumLevel) return false;
+            // The retained selection also contains coarse complete-coverage
+            // patches on non-reference faces. They are persistent global
+            // topology and do not move when the local billboard pivot shifts.
+            if (patch.Face != previousFace)
+            {
+                if (!active.Add(patch)) return false;
+                patches[index] = patch;
+                continue;
+            }
+            var cells = 1 << patch.Level;
+            var scale = 1 << (patch.Level - minimumLevel);
+            var x = patch.X + referenceDeltaX * scale;
+            var y = patch.Y + referenceDeltaY * scale;
+            if (x < 0 || y < 0 || x >= cells || y >= cells) return false;
+            if ((patch.X == 0 || patch.Y == 0 || patch.X == cells - 1 || patch.Y == cells - 1 ||
+                 x == 0 || y == 0 || x == cells - 1 || y == cells - 1) &&
+                (referenceDeltaX != 0 || referenceDeltaY != 0)) return false;
+            var value = new PlanetaryPatch(requestedFace, patch.Level, x, y);
+            if (!active.Add(value)) return false;
+            patches[index] = value;
+        }
+
+        translated = source with
+        {
+            Patches = patches,
+            // One integer translation in the coarsest active lattice is scaled
+            // exactly through every finer level. Parent/child alignment and
+            // therefore the complete mixed-LOD stitch topology are invariant.
+            StitchMasks = source.StitchMasks.ToArray(),
+            SplitPatchCount = 0,
+            MergedPatchCount = 0,
+            ParentFallbackCount = 0,
+            PendingChildCount = 0
+        };
+        return true;
+    }
+
     private bool StartPending(in PlanetaryLodSelection selection, in Double3 cameraBody,
         in Double3 nadir, double viewportHeight, double fieldOfView,
-        HashSet<PlanetaryPatch>? morphToParent = null)
+        HashSet<PlanetaryPatch>? morphToParent = null,
+        bool reusePersistentTopology = false,
+        PlanetaryPatchConservativeBounds[]? preparedBounds = null,
+        double? preparedMaximumProjectedError = null)
     {
         _requested.Clear();
         for (var index = 0; index < selection.Patches.Length; index++)
@@ -548,11 +803,14 @@ public sealed class PlanetaryDynamicAnchoredSurface
         if (missing > available)
         {
             _rejectedGenerationReason = PlanetaryDynamicGenerationRejectReason.Capacity;
-            if (_authoritativeVisible) RetireAll();
+            // Transaction capacity failure can delay a geographic replacement;
+            // it can never suppress the previous complete owner or force a
+            // synchronous bootstrap on the following render callback.
             return false;
         }
 
         _retainedDemandedPatchCount = 0;
+        _pendingPreparationCount = 0;
         for (var index = 0; index < selection.Patches.Length; index++)
         {
             var patch = selection.Patches[index];
@@ -562,10 +820,12 @@ public sealed class PlanetaryDynamicAnchoredSurface
                 _entries[retained].State != PlanetaryAnchoredPatchCacheState.Absent)
                 _retainedDemandedPatchCount++;
             _slots[index] = Acquire(key, _requested);
-            _preparationIndices[index] = index;
+            if (_entries[_slots[index]].State == PlanetaryAnchoredPatchCacheState.Requested)
+                _preparationIndices[_pendingPreparationCount++] = index;
         }
         _newDemandedPatchCount = selection.Patches.Length - _retainedDemandedPatchCount;
         _releasedDemandedPatchCount = Math.Max(0, _previousLeaves.Length - _retainedDemandedPatchCount);
+        _lastDescriptorDeltaCount = _newDemandedPatchCount + _releasedDemandedPatchCount;
         _demandOverlapPercent = selection.Patches.Length == 0 ? 100d :
             100d * _retainedDemandedPatchCount / selection.Patches.Length;
         PrioritizeNadir(selection.Patches, nadir);
@@ -574,11 +834,12 @@ public sealed class PlanetaryDynamicAnchoredSurface
         _lastReportedPreparedPendingPatchCount = 0;
         _activeGeneration = _activeGeneration == uint.MaxValue ? 1u : _activeGeneration + 1u;
         _gpuReadyGeneration = 0u;
-        _pendingMaximumProjectedError = MaximumProjectedError(selection, cameraBody,
-            viewportHeight, fieldOfView);
+        _pendingMaximumProjectedError = preparedMaximumProjectedError ??
+            MaximumProjectedError(selection, cameraBody, viewportHeight, fieldOfView);
         _morphToParentSet.Clear();
         if (morphToParent is not null) _morphToParentSet.UnionWith(morphToParent);
-        InitializePendingSubmission();
+        _pendingReusesPersistentTopology = reusePersistentTopology;
+        InitializePendingSubmission(preparedBounds);
         _morphToParentSet.Clear();
         return true;
     }
@@ -655,7 +916,7 @@ public sealed class PlanetaryDynamicAnchoredSurface
         if (_preparationWorker is { IsAlive: true })
             throw new InvalidOperationException("A bounded dynamic-surface preparation worker is already active.");
         var generation = _activeGeneration;
-        var workCount = _pendingSelection.Patches.Length;
+        var workCount = _pendingPreparationCount;
         _lastPreparationBatchSize = workCount;
         Volatile.Write(ref _lastPreparationWorkerCount, 0);
         Array.Clear(_preparationWorkerThreadIds);
@@ -673,12 +934,20 @@ public sealed class PlanetaryDynamicAnchoredSurface
                 if (entry.State != PlanetaryAnchoredPatchCacheState.Requested) return;
                 Prepare(slot, _pendingSelection.Patches[index], entry.Key, entry.Generation);
             }
-            if (workCount > 0) PrepareOrder(0);
-            if (workCount > 1)
-                Parallel.For(1, workCount, new ParallelOptions
+            if (workCount > 0)
+            {
+                var workerCount = Math.Min(ConfiguredWorkerCount, workCount);
+                Parallel.For(0, workerCount, new ParallelOptions
                 {
-                    MaxDegreeOfParallelism = ConfiguredWorkerCount
-                }, PrepareOrder);
+                    MaxDegreeOfParallelism = workerCount
+                }, workerIndex =>
+                {
+                    // Coarse deterministic partitions avoid creating one tiny
+                    // scheduler item per geographic descriptor.
+                    for (var order = workerIndex; order < workCount; order += workerCount)
+                        PrepareOrder(order);
+                });
+            }
             var workers = 0;
             for (var index = 0; index < _preparationWorkerThreadIds.Length; index++)
                 if (Volatile.Read(ref _preparationWorkerThreadIds[index]) != 0) workers++;
@@ -707,12 +976,17 @@ public sealed class PlanetaryDynamicAnchoredSurface
         }
     }
 
-    private void InitializePendingSubmission()
+    private void InitializePendingSubmission(PlanetaryPatchConservativeBounds[]? preparedBounds = null)
     {
+        _transportGeneration = 0u;
+        _transportPatchCount = 0;
         for (var index = 0; index < _pendingSelection.Patches.Length; index++)
         {
             var patch = _pendingSelection.Patches[index]; var slot = _slots[index];
-            var entry = _entries[slot]; var bounds = Bounds(patch);
+            var entry = _entries[slot];
+            var bounds = preparedBounds is not null && index < preparedBounds.Length
+                ? (preparedBounds[index].Center, preparedBounds[index].Radius)
+                : Bounds(patch);
             var localRequired = RequiresLocalPayload(patch);
             var morphFromParent = patch.Parent is { } parent && _previousLeafSet.Contains(parent);
             var morphToParent = _morphToParentSet.Contains(patch);
@@ -754,6 +1028,8 @@ public sealed class PlanetaryDynamicAnchoredSurface
         foreach (var patch in _previousLeaves) _previousLeafSet.Add(patch);
         _lastSelection = _pendingSelection;
         _authoritativeVisible = true; _pending = false;
+        _transportGeneration = _authoritativeGeneration;
+        _transportPatchCount = _authoritativePatchCount;
         _lastPublicationLatencyMilliseconds = _pendingStartedTimestamp == 0 ? 0d :
             System.Diagnostics.Stopwatch.GetElapsedTime(_pendingStartedTimestamp).TotalMilliseconds;
         if (_authoritativeSubmission.Take(_authoritativePatchCount)
@@ -771,7 +1047,13 @@ public sealed class PlanetaryDynamicAnchoredSurface
             _activePatchCount = 0;
             return;
         }
-        Array.Copy(_authoritativeSubmission, _submission, _authoritativePatchCount);
+        if (_transportGeneration != _authoritativeGeneration ||
+            _transportPatchCount != _authoritativePatchCount)
+        {
+            Array.Copy(_authoritativeSubmission, _submission, _authoritativePatchCount);
+            _transportGeneration = _authoritativeGeneration;
+            _transportPatchCount = _authoritativePatchCount;
+        }
         _activePatchCount = _authoritativePatchCount;
         _activeGeneration = _authoritativeGeneration;
     }
@@ -791,6 +1073,17 @@ public sealed class PlanetaryDynamicAnchoredSurface
             Math.Abs(previousViewport - viewport) <= .25d;
     }
 
+    private static bool SameTopologyScale(double previousNeighborhoodRadius,double neighborhoodRadius,
+        double previousFov,double fov,double previousAspect,double aspect,
+        double previousViewport,double viewport)
+    {
+        var retainedTolerance=Math.Clamp(previousNeighborhoodRadius*ResidencyRecenterRadiusFraction,
+            MinimumResidencyRecenterMetres,MaximumResidencyRecenterMetres);
+        return Math.Abs(previousNeighborhoodRadius-neighborhoodRadius)<=retainedTolerance&&
+            Math.Abs(previousFov-fov)<=1e-12d&&Math.Abs(previousAspect-aspect)<=1e-12d&&
+            Math.Abs(previousViewport-viewport)<=.25d;
+    }
+
     private static bool Same(double left, double right) =>
         BitConverter.DoubleToInt64Bits(left) == BitConverter.DoubleToInt64Bits(right);
 
@@ -804,23 +1097,32 @@ public sealed class PlanetaryDynamicAnchoredSurface
             _entries[cached].State != PlanetaryAnchoredPatchCacheState.Absent)
         {
             _entries[cached].LastUse = _serial; _hits++;
+            _cachedLru.Enqueue(cached, _serial);
             if (_entries[cached].State == PlanetaryAnchoredPatchCacheState.Failed)
                 _entries[cached].State = PlanetaryAnchoredPatchCacheState.Requested;
             return cached;
         }
         _misses++;
-        var selected = -1;
-        for (var index = 0; index < _entries.Length; index++)
-            if (_entries[index].State == PlanetaryAnchoredPatchCacheState.Absent) { selected = index; break; }
+        var selected = _freeSlots.Count == 0 ? -1 : _freeSlots.Pop();
         if (selected < 0)
         {
-            long oldest = long.MaxValue;
-            for (var index = 0; index < _entries.Length; index++)
+            _deferredLru.Clear();
+            while (_cachedLru.TryDequeue(out var candidate, out var priority))
             {
-                var entry = _entries[index];
-                if (requested.Contains(entry.Key) || entry.State == PlanetaryAnchoredPatchCacheState.Authoritative) continue;
-                if (entry.LastUse < oldest) { oldest = entry.LastUse; selected = index; }
+                var entry = _entries[candidate];
+                if (entry.State == PlanetaryAnchoredPatchCacheState.Absent || entry.LastUse != priority)
+                    continue;
+                if (requested.Contains(entry.Key) ||
+                    entry.State == PlanetaryAnchoredPatchCacheState.Authoritative)
+                {
+                    _deferredLru.Add((candidate, priority));
+                    continue;
+                }
+                selected = candidate;
+                break;
             }
+            foreach (var deferred in _deferredLru)
+                _cachedLru.Enqueue(deferred.Slot, deferred.Priority);
         }
         if (selected < 0) return 0;
         if (_entries[selected].State != PlanetaryAnchoredPatchCacheState.Absent)
@@ -832,6 +1134,7 @@ public sealed class PlanetaryDynamicAnchoredSurface
         _entries[selected].Key = key; _entries[selected].Generation = generation;
         _entries[selected].LastUse = _serial; _entries[selected].State = PlanetaryAnchoredPatchCacheState.Requested;
         _slotByKey.Add(key, selected);
+        _cachedLru.Enqueue(selected, _serial);
         return selected;
     }
 
@@ -839,25 +1142,18 @@ public sealed class PlanetaryDynamicAnchoredSurface
         in PlanetaryAnchoredPatchKey expectedKey, uint expectedGeneration)
     {
         var entry = _entries[slot]; entry.State = PlanetaryAnchoredPatchCacheState.Preparing;
-        // Preparation establishes that the patch's canonical physical inputs are
-        // available and finite. It deliberately does not build a CPU raster grid:
-        // reusable base topology is refined, displaced, and normaled on the GPU.
-        var bounds = patch.Bounds;
-        Span<(double U, double V)> samples = stackalloc (double, double)[5]
+        // The elevation oracle, modifier generation, and NCCUBE2 lookup are
+        // persistent physical authorities validated independently at runtime.
+        // An entering patch prepares only immutable geographic descriptor
+        // identity; it must not re-evaluate H at five CPU points merely because
+        // the camera-relative footprint moved.
+        var cells = patch.Level is >= 0 and <= MaximumLevel ? 1 << patch.Level : 0;
+        if (cells == 0 || patch.X < 0 || patch.Y < 0 || patch.X >= cells || patch.Y >= cells ||
+            expectedKey.Face != patch.Face || expectedKey.Level != patch.Level ||
+            expectedKey.X != patch.X || expectedKey.Y != patch.Y)
         {
-            (bounds.MinX, bounds.MinY), (bounds.MaxX, bounds.MinY),
-            (bounds.MinX, bounds.MaxY), (bounds.MaxX, bounds.MaxY),
-            ((bounds.MinX + bounds.MaxX) * .5d, (bounds.MinY + bounds.MaxY) * .5d)
-        };
-        foreach (var coordinate in samples)
-        {
-            var direction = RelaxedCubeSphereProjection.UnitDirection(
-                patch.Face, coordinate.U, coordinate.V);
-            if (!_terrain.SamplePhysicalSurface(direction).IsFinite)
-            {
-                entry.State = PlanetaryAnchoredPatchCacheState.Failed;
-                return;
-            }
+            entry.State = PlanetaryAnchoredPatchCacheState.Failed;
+            return;
         }
         if (entry.Generation == expectedGeneration && entry.Key == expectedKey &&
             entry.State == PlanetaryAnchoredPatchCacheState.Preparing)
@@ -870,12 +1166,15 @@ public sealed class PlanetaryDynamicAnchoredSurface
 
     private void RetireAll()
     {
+        Interlocked.Increment(ref _selectionRequestSerial);
+        lock (_selectionGate) _preparedTopologyTranslation = null;
         for (var index = 0; index < _entries.Length; index++)
             if (_entries[index].State == PlanetaryAnchoredPatchCacheState.Authoritative)
                 _entries[index].State = PlanetaryAnchoredPatchCacheState.Cached;
         _activePatchCount = 0; _authoritativePatchCount = 0;
         _visible = false; _authoritativeVisible = false; _pending = false; _coarseningActive = false;
         _authoritativeGeneration = 0u; _hasLastSelection = false; _previousLeaves = [];
+        _transportGeneration = 0u; _transportPatchCount = 0;
         _previousLeafSet.Clear();
     }
 
@@ -910,7 +1209,11 @@ public sealed class PlanetaryDynamicAnchoredSurface
             NadirCovered = false,
             PreparationQueueDepth = 0,
             MainThreadTerrainMilliseconds = 0d,
-            RejectedGenerationReason = PlanetaryDynamicGenerationRejectReason.None
+            RejectedGenerationReason = PlanetaryDynamicGenerationRejectReason.None,
+            DescriptorDeltaCount = 0,
+            LastSelectionQueueLatencyMilliseconds = 0d,
+            SelectionPending = false,
+            PresentationGeneration = _presentationFrame.PresentationGeneration
         };
     }
 
@@ -925,6 +1228,7 @@ public sealed class PlanetaryDynamicAnchoredSurface
         var uploadBytes = Interlocked.Read(ref _uploadBytes);
         var frameUploadBytes = uploadBytes - _frameUploadBytesStart;
         _frameUploadBytesStart = uploadBytes;
+        var selectionPending = SelectionWorkPending();
         return new(selection.Patches.Length, _authoritativeVisible ? _authoritativePatchCount : 0, resident,
             minimum, maximum, _entries.Length, _hits, _misses, _evictions, uploadBytes,
             _authoritativeGeneration, complete, true, maximumProjectedError,
@@ -937,10 +1241,22 @@ public sealed class PlanetaryDynamicAnchoredSurface
             _pending ? _preparedPendingPatchCount : 0, CoversDirection(_lastSelectionCamera),
             ConfiguredWorkerCount, Volatile.Read(ref _lastPreparationWorkerCount),
             100d * Volatile.Read(ref _lastPreparationWorkerCount) / ConfiguredWorkerCount,
-            _lastPreparationBatchSize, _pending ? 1 : 0,
+            _lastPreparationBatchSize, (_pending ? 1 : 0) + (selectionPending ? 1 : 0),
             _lastPublicationLatencyMilliseconds,
-            preparationMilliseconds + _lastSelectionMilliseconds,
-            _rejectedGenerationReason);
+            preparationMilliseconds + (_lastSelectionAsynchronous ? 0d : _lastSelectionMilliseconds),
+            _rejectedGenerationReason,
+            _persistentTopologyReuseCount,
+            _persistentTopologyTranslationCount,
+            _lastDescriptorDeltaCount,
+            _lastSelectionQueueLatencyMilliseconds,
+            selectionPending,
+            _presentationFrame.PresentationGeneration);
+    }
+
+    private bool SelectionWorkPending()
+    {
+        if (_selectionWorker is { IsAlive: true }) return true;
+        lock (_selectionGate) return _preparedTopologyTranslation.HasValue;
     }
 
     private double MaximumProjectedError(in PlanetaryLodSelection selection,

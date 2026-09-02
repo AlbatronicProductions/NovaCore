@@ -17,6 +17,7 @@
 #include <memory>
 #include <mutex>
 #include <optional>
+#include <numeric>
 #include <stdexcept>
 #include <string>
 #include <thread>
@@ -53,9 +54,10 @@ constexpr uint32_t SurfaceDiagnosticDisableGlobal=1u<<0,SurfaceDiagnosticPayload
                    SurfaceDiagnosticScreenDerivative=1u<<14;
 constexpr uint32_t AnchoredSurfaceBaseGridResolution=4,AnchoredSurfaceBaseVerticesPerPatch=25,
                    AnchoredSurfaceBaseIndicesPerPatch=96,AnchoredSurfaceMaximumPatches=6144,
-                   AnchoredSurfaceMaximumCacheSlots=8192,AnchoredSurfaceCoverageCapacity=16384,
+                   AnchoredSurfaceMaximumCacheSlots=16384,AnchoredSurfaceCoverageCapacity=16384,
                    AnchoredSurfacePresentationVectorCount=9,AnchoredSurfacePatchVectorCount=5,
-                   AnchoredSurfacePatchVectorOffset=AnchoredSurfaceCoverageCapacity+AnchoredSurfacePresentationVectorCount;
+                   AnchoredSurfacePatchVectorOffset=AnchoredSurfaceCoverageCapacity+AnchoredSurfacePresentationVectorCount,
+                   AnchoredSurfaceFrameResourceCount=3;
 constexpr uint32_t AnchoredSurfaceReady=1u<<0,AnchoredSurfaceAuthoritative=1u<<1,
                    AnchoredSurfaceGeometryComplete=1u<<2,AnchoredSurfacePhysicalComplete=1u<<3,
                    AnchoredSurfaceMaterialComplete=1u<<4,AnchoredSurfaceSynchronizationComplete=1u<<5,
@@ -167,10 +169,6 @@ struct GpuPlanetaryControl {
   uint32_t productionDemandSignature[20]{};
 };
 static_assert(sizeof(GpuPlanetaryControl) == 204 && offsetof(GpuPlanetaryControl, terrainDispatch) == 112 && offsetof(GpuPlanetaryControl, productionDemandSignature) == 124);
-struct PatchIdentity {
-  uint32_t face{}, level{}, x{}, y{}, stitchMask{};
-  auto operator<=>(const PatchIdentity &) const = default;
-};
 struct ProductionRequest { nc::production::PatchId id{}; uint32_t terrainSlot{}; };
 struct ProductionReady { ProductionRequest request{}; std::unique_ptr<nc::production::Payload> payload; uint32_t state{}; };
 struct ProductionIoState {
@@ -295,9 +293,14 @@ struct App {
   VkDeviceMemory patchMemory{};
   void *patchMapped{};
   VkDeviceSize patchSize{};
-  VkBuffer anchoredSurfaceVertexBuffer{},anchoredSurfaceIndexBuffer{},anchoredSurfaceCoverageBuffer{},anchoredSurfaceIndirectBuffer{};
-  VkDeviceMemory anchoredSurfaceVertexMemory{},anchoredSurfaceIndexMemory{},anchoredSurfaceCoverageMemory{},anchoredSurfaceIndirectMemory{};
-  void *anchoredSurfaceVertexMapped{},*anchoredSurfaceIndexMapped{},*anchoredSurfaceCoverageMapped{},*anchoredSurfaceIndirectMapped{};
+  VkBuffer anchoredSurfaceVertexBuffer{},anchoredSurfaceIndexBuffer{};
+  VkDeviceMemory anchoredSurfaceVertexMemory{},anchoredSurfaceIndexMemory{};
+  void *anchoredSurfaceVertexMapped{},*anchoredSurfaceIndexMapped{};
+  std::array<VkBuffer,AnchoredSurfaceFrameResourceCount> anchoredSurfaceCoverageBuffers{},anchoredSurfaceIndirectBuffers{};
+  std::array<VkDeviceMemory,AnchoredSurfaceFrameResourceCount> anchoredSurfaceCoverageMemories{},anchoredSurfaceIndirectMemories{};
+  std::array<void*,AnchoredSurfaceFrameResourceCount> anchoredSurfaceCoverageMapped{},anchoredSurfaceIndirectMapped{};
+  std::array<uint32_t,AnchoredSurfaceFrameResourceCount> anchoredSurfaceResourceGenerations{};
+  uint32_t anchoredSurfaceResourceIndex{};
   std::vector<uint32_t> anchoredSurfaceSlotGenerations;
   std::vector<NcAnchoredSurfacePatch> anchoredSurfaceActivePatches;
   uint32_t anchoredSurfaceActivePatchCount{},anchoredSurfaceActiveGeneration{},anchoredSurfacePublicationLogGeneration{};
@@ -313,10 +316,8 @@ struct App {
   VkDeviceMemory planetaryPresentationMemory{};
   void *planetaryPresentationMapped{};
   VkBuffer productionLayerLookupBuffer{}; VkDeviceMemory productionLayerLookupMemory{}; void *productionLayerLookupMapped{};
-  std::vector<NcPlanetaryPatch> validationCpuOracle;
-  bool gpuFrameSubmitted{}, hasGpuTelemetry{}, hasParityResult{};
+  bool gpuFrameSubmitted{}, hasGpuTelemetry{};
   GpuPlanetaryControl lastGpuTelemetry{};
-  uint64_t lastCpuHash{}, lastGpuHash{};
   VkBuffer orbitBuffer{};
   VkDeviceMemory orbitMemory{};
   void *orbitMapped{};
@@ -343,7 +344,7 @@ struct App {
   VkQueryPool anchoredPipelineStatistics{};
   float timestampPeriodNanoseconds{};
   bool timestampFrameSubmitted{};
-  static constexpr uint32_t TimestampCount=9;
+  static constexpr uint32_t TimestampCount=11;
   std::array<double,TimestampCount> timestampAccumulatedMs{};
   uint64_t timestampSampleCount{};
   uint64_t anchoredPipelineStatisticsSamples{},anchoredTessellationControlPatches{};
@@ -352,6 +353,12 @@ struct App {
   double cpuUpdateMs{},cpuFenceWaitMs{},cpuInspectionMs{},cpuHostCallbackMs{},cpuUploadMs{};
   double cpuRecordMs{},cpuSubmitMs{},cpuPresentMs{};
   uint64_t cpuTimingSamples{};
+  // Opt-in benchmark telemetry. It records only the settled measurement window
+  // selected by the managed canonical M12 harness; normal production telemetry
+  // and scheduling are unchanged.
+  bool canonicalBenchmark{};
+  std::vector<double> canonicalCpuUpdateMs,canonicalCpuFenceMs,canonicalGpuTotalMs,canonicalGpuMaterialMs,
+                      canonicalGpuAnchoredMs,canonicalGpuGlobalFillMs,canonicalGpuOverlayMs;
   std::array<double, 8192> frameTimesMs{};
   size_t frameTimeCount{}, frameTimeCursor{};
   LONG rawMouseX{}, rawMouseY{};
@@ -1451,11 +1458,14 @@ void DestroyHostBuffer(App &a,VkBuffer &buffer,VkDeviceMemory &memory,void *&map
   if(mapped)vkUnmapMemory(a.device,memory);if(buffer)vkDestroyBuffer(a.device,buffer,nullptr);if(memory)vkFreeMemory(a.device,memory,nullptr);mapped=nullptr;buffer={};memory={};
 }
 void DestroyDynamicAnchoredSurface(App &a){
-  DestroyHostBuffer(a,a.anchoredSurfaceIndirectBuffer,a.anchoredSurfaceIndirectMemory,a.anchoredSurfaceIndirectMapped);
+  for(uint32_t index=0;index<AnchoredSurfaceFrameResourceCount;index++){
+    DestroyHostBuffer(a,a.anchoredSurfaceIndirectBuffers[index],a.anchoredSurfaceIndirectMemories[index],a.anchoredSurfaceIndirectMapped[index]);
+    DestroyHostBuffer(a,a.anchoredSurfaceCoverageBuffers[index],a.anchoredSurfaceCoverageMemories[index],a.anchoredSurfaceCoverageMapped[index]);
+  }
   DestroyHostBuffer(a,a.anchoredSurfaceVertexBuffer,a.anchoredSurfaceVertexMemory,a.anchoredSurfaceVertexMapped);
   DestroyHostBuffer(a,a.anchoredSurfaceIndexBuffer,a.anchoredSurfaceIndexMemory,a.anchoredSurfaceIndexMapped);
-  DestroyHostBuffer(a,a.anchoredSurfaceCoverageBuffer,a.anchoredSurfaceCoverageMemory,a.anchoredSurfaceCoverageMapped);
   a.anchoredSurfaceSlotGenerations.clear();a.anchoredSurfaceActivePatches.clear();a.anchoredSurfaceActivePatchCount=0;a.anchoredSurfaceActiveGeneration=0;a.anchoredSurfacePublicationLogGeneration=0;
+  a.anchoredSurfaceResourceGenerations.fill(0u);a.anchoredSurfaceResourceIndex=0;
   a.anchoredSurfaceResourcesReady=false;a.anchoredSurfaceActive=false;a.anchoredSurfacePublicationRequested=false;
 }
 uint32_t AnchoredRemapIndex(uint32_t x,uint32_t y,uint32_t stitchMask){
@@ -1506,19 +1516,21 @@ void CreateDynamicAnchoredSurface(App &a){
     indices[write++]=q0;indices[write++]=q1;indices[write++]=q2;indices[write++]=q1;indices[write++]=q3;indices[write++]=q2;
   }
   ValidateAnchoredStitchTemplates(indices);
-  CreateHostBuffer(a,sizeof(uint32_t)*4u*(1u+AnchoredSurfacePatchVectorOffset+AnchoredSurfaceMaximumPatches*AnchoredSurfacePatchVectorCount),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,
-    a.anchoredSurfaceCoverageBuffer,a.anchoredSurfaceCoverageMemory,a.anchoredSurfaceCoverageMapped,"dynamic anchored coverage buffer failed");
-  CreateHostBuffer(a,VkDeviceSize(AnchoredSurfaceMaximumPatches)*sizeof(VkDrawIndexedIndirectCommand),VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT,
-    a.anchoredSurfaceIndirectBuffer,a.anchoredSurfaceIndirectMemory,a.anchoredSurfaceIndirectMapped,"dynamic anchored indirect buffer failed");
+  for(uint32_t index=0;index<AnchoredSurfaceFrameResourceCount;index++){
+    CreateHostBuffer(a,sizeof(uint32_t)*4u*(1u+AnchoredSurfacePatchVectorOffset+AnchoredSurfaceMaximumPatches*AnchoredSurfacePatchVectorCount),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,
+      a.anchoredSurfaceCoverageBuffers[index],a.anchoredSurfaceCoverageMemories[index],a.anchoredSurfaceCoverageMapped[index],"dynamic anchored coverage buffer failed");
+    CreateHostBuffer(a,VkDeviceSize(AnchoredSurfaceMaximumPatches)*sizeof(VkDrawIndexedIndirectCommand),VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT,
+      a.anchoredSurfaceIndirectBuffers[index],a.anchoredSurfaceIndirectMemories[index],a.anchoredSurfaceIndirectMapped[index],"dynamic anchored indirect buffer failed");
+  }
   a.anchoredSurfaceSlotGenerations.assign(slots,0u);a.anchoredSurfaceResourcesReady=requestedSlots!=0u;
 }
 uint32_t AnchoredCoverageHash(uint32_t key,uint32_t x,uint32_t y){
   uint32_t value=key*0x9e3779b9u;value^=x*0x85ebca6bu;value^=y*0xc2b2ae35u;value^=value>>16u;return value&(AnchoredSurfaceCoverageCapacity-1u);
 }
-void AuditDynamicAnchoredGroundTruth(App&a,uint32_t count){
+void AuditDynamicAnchoredGroundTruth(App&a,uint32_t count,uint32_t resourceIndex){
   if(!a.anchoredGroundTruthEnabled||!count)return;
-  const auto *draws=static_cast<const VkDrawIndexedIndirectCommand*>(a.anchoredSurfaceIndirectMapped);
-  const auto *coverage=static_cast<const uint32_t*>(a.anchoredSurfaceCoverageMapped);
+  const auto *draws=static_cast<const VkDrawIndexedIndirectCommand*>(a.anchoredSurfaceIndirectMapped[resourceIndex]);
+  const auto *coverage=static_cast<const uint32_t*>(a.anchoredSurfaceCoverageMapped[resourceIndex]);
   const auto &frame=a.submission->anchoredSurfacePresentation;
   uint64_t descriptorMismatches=0,drawMismatches=0,nonFiniteBounds=0;
   descriptorMismatches+=std::memcmp(a.anchoredSurfaceActivePatches.data(),a.submission->anchoredSurfacePatches,size_t(count)*sizeof(NcAnchoredSurfacePatch))!=0;
@@ -1533,8 +1545,15 @@ void AuditDynamicAnchoredGroundTruth(App&a,uint32_t count){
   char message[512];std::snprintf(message,sizeof message,"GPU refinement ground truth: generation=%u; patches=%u; reusableBaseVertices=%u; baseTriangles=%u; descriptorMismatches=%llu; drawMismatches=%llu; nonFiniteBounds=%llu; CPUFinalRaster=false; refinementTargetPixels=16; maximumTessFactor=16",a.submission->anchoredSurfaceActiveGeneration,count,AnchoredSurfaceBaseVerticesPerPatch,AnchoredSurfaceBaseIndicesPerPatch/3u,(unsigned long long)descriptorMismatches,(unsigned long long)drawMismatches,(unsigned long long)nonFiniteBounds);a.Log(NC_LOG_ALWAYS,message);
   if(descriptorMismatches||drawMismatches||nonFiniteBounds)throw std::runtime_error("dynamic anchored GPU descriptor/indirect invariant failed");
 }
+void BindDynamicAnchoredResource(App&a,uint32_t resourceIndex){
+  VkDescriptorBufferInfo info{a.anchoredSurfaceCoverageBuffers[resourceIndex],0,
+    sizeof(uint32_t)*4u*(1u+AnchoredSurfacePatchVectorOffset+AnchoredSurfaceMaximumPatches*AnchoredSurfacePatchVectorCount)};
+  VkWriteDescriptorSet write{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};write.dstSet=a.descriptor;write.dstBinding=32;
+  write.descriptorCount=1;write.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;write.pBufferInfo=&info;
+  vkUpdateDescriptorSets(a.device,1,&write,0,nullptr);
+}
 void UpdateDynamicAnchoredSurface(App &a){
-  auto *coverage=static_cast<uint32_t*>(a.anchoredSurfaceCoverageMapped);
+  auto *coverage=static_cast<uint32_t*>(a.anchoredSurfaceCoverageMapped[a.anchoredSurfaceResourceIndex]);
   const auto count=a.submission->anchoredSurfacePatchCount;
   if(coverage)std::memcpy(coverage+4u*(1u+AnchoredSurfaceCoverageCapacity),
     &a.submission->anchoredSurfacePresentation,sizeof(NcAnchoredSurfacePresentation));
@@ -1565,6 +1584,14 @@ void UpdateDynamicAnchoredSurface(App &a){
   if(!complete)return;
   a.submission->anchoredSurfaceGpuReadyGeneration=a.submission->anchoredSurfaceActiveGeneration;
   if(!authoritative||!managedAcknowledged)return;
+  // The frame fence was completed before this update. Build the replacement
+  // coverage table and indirect stream in a retired slot, then bind it as one
+  // immutable generation. The currently bound complete slot remains untouched
+  // until this point and a slot is never reused while GPU work can reference it.
+  const uint32_t resourceIndex=(a.anchoredSurfaceResourceIndex+1u)%AnchoredSurfaceFrameResourceCount;
+  coverage=static_cast<uint32_t*>(a.anchoredSurfaceCoverageMapped[resourceIndex]);
+  std::memcpy(coverage+4u*(1u+AnchoredSurfaceCoverageCapacity),
+    &a.submission->anchoredSurfacePresentation,sizeof(NcAnchoredSurfacePresentation));
   if(coverage)std::memset(coverage,0,sizeof(uint32_t)*4u*(1u+AnchoredSurfaceCoverageCapacity));
   for(uint32_t index=0;index<count;index++){
     const auto &patch=a.submission->anchoredSurfacePatches[index];const uint32_t key=0x80000000u|patch.face|(patch.level<<3u);uint32_t slot=AnchoredCoverageHash(key,patch.x,patch.y);
@@ -1580,7 +1607,7 @@ void UpdateDynamicAnchoredSurface(App &a){
   const size_t descriptorBytes=size_t(count)*sizeof(NcAnchoredSurfacePatch);
   a.anchoredSurfaceUploadBytes+=descriptorBytes;a.anchoredSurfaceUploads++;
   a.anchoredSurfaceActivePatches.assign(a.submission->anchoredSurfacePatches,a.submission->anchoredSurfacePatches+count);
-  auto *draws=static_cast<VkDrawIndexedIndirectCommand*>(a.anchoredSurfaceIndirectMapped);
+  auto *draws=static_cast<VkDrawIndexedIndirectCommand*>(a.anchoredSurfaceIndirectMapped[resourceIndex]);
   for(uint32_t index=0;index<count;index++){
     const auto &patch=a.anchoredSurfaceActivePatches[index];
     const uint32_t firstIndex=patch.stitchMask*AnchoredSurfaceBaseIndicesPerPatch;
@@ -1588,7 +1615,9 @@ void UpdateDynamicAnchoredSurface(App &a){
     draws[index]={AnchoredSurfaceBaseIndicesPerPatch,1u,firstIndex,0,index};
   }
   if(!complete)return;
-  if(newPublication)AuditDynamicAnchoredGroundTruth(a,count);
+  if(newPublication)AuditDynamicAnchoredGroundTruth(a,count,resourceIndex);
+  a.anchoredSurfaceResourceGenerations[resourceIndex]=a.submission->anchoredSurfaceActiveGeneration;
+  a.anchoredSurfaceResourceIndex=resourceIndex;BindDynamicAnchoredResource(a,resourceIndex);
   a.anchoredSurfaceActivePatchCount=count;a.anchoredSurfaceActiveGeneration=a.submission->anchoredSurfaceActiveGeneration;
   a.anchoredSurfaceActive=true;
 }
@@ -1630,7 +1659,7 @@ void DestroySubmission(App &a) {
   DestroyDynamicAnchoredSurface(a);
   DestroyHostBuffer(a,a.physicalOracleBuffer,a.physicalOracleMemory,a.physicalOracleMapped);
   DestroyHostBuffer(a,a.localLookupBuffer,a.localLookupMemory,a.localLookupMapped);
-  a.validationCpuOracle.clear();a.gpuFrameSubmitted=false;a.hasGpuTelemetry=false;a.hasParityResult=false;a.timestampFrameSubmitted=false;
+  a.gpuFrameSubmitted=false;a.hasGpuTelemetry=false;a.timestampFrameSubmitted=false;
   if (a.orbitMapped) vkUnmapMemory(a.device, a.orbitMemory);
   if (a.orbitBuffer) vkDestroyBuffer(a.device, a.orbitBuffer, nullptr);
   if (a.orbitMemory) vkFreeMemory(a.device, a.orbitMemory, nullptr);
@@ -1713,7 +1742,7 @@ void CreateSubmission(App &a) {
   vkUpdateDescriptorSets(a.device,10,writes,0,nullptr);
   VkDescriptorBufferInfo productionLookupInfo{a.productionLayerLookupBuffer,0,sizeof(uint32_t)*ProductionLookupCapacity};VkWriteDescriptorSet productionLookupWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};productionLookupWrite.dstSet=a.descriptor;productionLookupWrite.dstBinding=27;productionLookupWrite.descriptorCount=1;productionLookupWrite.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;productionLookupWrite.pBufferInfo=&productionLookupInfo;vkUpdateDescriptorSets(a.device,1,&productionLookupWrite,0,nullptr);
   VkDescriptorBufferInfo localLookupInfo{a.localLookupBuffer,0,sizeof(uint32_t)*(16+LocalLookupEntryWords*LocalLookupCapacity)};VkWriteDescriptorSet localLookupWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};localLookupWrite.dstSet=a.descriptor;localLookupWrite.dstBinding=31;localLookupWrite.descriptorCount=1;localLookupWrite.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;localLookupWrite.pBufferInfo=&localLookupInfo;vkUpdateDescriptorSets(a.device,1,&localLookupWrite,0,nullptr);
-  VkDescriptorBufferInfo anchoredCoverageInfo{a.anchoredSurfaceCoverageBuffer,0,sizeof(uint32_t)*4u*(1u+AnchoredSurfacePatchVectorOffset+AnchoredSurfaceMaximumPatches*AnchoredSurfacePatchVectorCount)};VkWriteDescriptorSet anchoredCoverageWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};anchoredCoverageWrite.dstSet=a.descriptor;anchoredCoverageWrite.dstBinding=32;anchoredCoverageWrite.descriptorCount=1;anchoredCoverageWrite.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;anchoredCoverageWrite.pBufferInfo=&anchoredCoverageInfo;vkUpdateDescriptorSets(a.device,1,&anchoredCoverageWrite,0,nullptr);
+  VkDescriptorBufferInfo anchoredCoverageInfo{a.anchoredSurfaceCoverageBuffers[a.anchoredSurfaceResourceIndex],0,sizeof(uint32_t)*4u*(1u+AnchoredSurfacePatchVectorOffset+AnchoredSurfaceMaximumPatches*AnchoredSurfacePatchVectorCount)};VkWriteDescriptorSet anchoredCoverageWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};anchoredCoverageWrite.dstSet=a.descriptor;anchoredCoverageWrite.dstBinding=32;anchoredCoverageWrite.descriptorCount=1;anchoredCoverageWrite.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;anchoredCoverageWrite.pBufferInfo=&anchoredCoverageInfo;vkUpdateDescriptorSets(a.device,1,&anchoredCoverageWrite,0,nullptr);
   VkDescriptorBufferInfo physicalOracleInfo{a.physicalOracleBuffer,0,PhysicalOracleBytes};VkWriteDescriptorSet physicalOracleWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};physicalOracleWrite.dstSet=a.descriptor;physicalOracleWrite.dstBinding=33;physicalOracleWrite.descriptorCount=1;physicalOracleWrite.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;physicalOracleWrite.pBufferInfo=&physicalOracleInfo;vkUpdateDescriptorSets(a.device,1,&physicalOracleWrite,0,nullptr);
   VkDescriptorImageInfo sceneInput{};sceneInput.imageView=a.sceneColorView;sceneInput.imageLayout=VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;VkWriteDescriptorSet sceneWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};sceneWrite.dstSet=a.descriptor;sceneWrite.dstBinding=7;sceneWrite.descriptorCount=1;sceneWrite.descriptorType=VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT;sceneWrite.pImageInfo=&sceneInput;vkUpdateDescriptorSets(a.device,1,&sceneWrite,0,nullptr);
   if(a.productionPack){VkDescriptorImageInfo productionInfos[3]{};VkWriteDescriptorSet productionWrites[3]{};for(uint32_t index=0;index<3;index++){productionInfos[index]={a.productionSampler,a.productionImageViews[index],VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL};productionWrites[index].sType=VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;productionWrites[index].dstSet=a.descriptor;productionWrites[index].dstBinding=24+index;productionWrites[index].descriptorCount=1;productionWrites[index].descriptorType=VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;productionWrites[index].pImageInfo=&productionInfos[index];}vkUpdateDescriptorSets(a.device,3,productionWrites,0,nullptr);}
@@ -1903,8 +1932,10 @@ void Record(App &a, uint32_t image) {
   // disagreement, redundant visible overlap, depth bias, or skirts.
   vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_VERTEX_INPUT_BIT,a.timestampQueries,5);
   a.anchoredPipelineStatisticsFrameSubmitted=diagnosticAnchored&&a.anchoredSurfaceActive;
-  if(a.anchoredPipelineStatisticsFrameSubmitted){VkDeviceSize offset=0;vkCmdBeginQuery(c,a.anchoredPipelineStatistics,0,0);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.anchoredTerrainPipeline);vkCmdBindVertexBuffers(c,0,1,&a.anchoredSurfaceVertexBuffer,&offset);vkCmdBindIndexBuffer(c,a.anchoredSurfaceIndexBuffer,0,VK_INDEX_TYPE_UINT32);vkCmdDrawIndexedIndirect(c,a.anchoredSurfaceIndirectBuffer,0,a.anchoredSurfaceActivePatchCount,sizeof(VkDrawIndexedIndirectCommand));vkCmdEndQuery(c,a.anchoredPipelineStatistics,0);}
+  if(a.anchoredPipelineStatisticsFrameSubmitted){VkDeviceSize offset=0;vkCmdBeginQuery(c,a.anchoredPipelineStatistics,0,0);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.anchoredTerrainPipeline);vkCmdBindVertexBuffers(c,0,1,&a.anchoredSurfaceVertexBuffer,&offset);vkCmdBindIndexBuffer(c,a.anchoredSurfaceIndexBuffer,0,VK_INDEX_TYPE_UINT32);vkCmdDrawIndexedIndirect(c,a.anchoredSurfaceIndirectBuffers[a.anchoredSurfaceResourceIndex],0,a.anchoredSurfaceActivePatchCount,sizeof(VkDrawIndexedIndirectCommand));vkCmdEndQuery(c,a.anchoredPipelineStatistics,0);}
+  vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,a.timestampQueries,9);
   if(diagnosticGlobal&&regional&&(a.submission->planetaryPatchCount||gpuPlanetary)){VkDeviceSize offset=0;const bool exactRasterFill=production&&diagnosticAnchored&&a.anchoredSurfaceActive;vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,production?(exactRasterFill?a.productionPlanetaryFillPipeline:a.productionPlanetaryPipeline):a.planetaryPipeline);vkCmdBindVertexBuffers(c,0,1,&a.planetaryPatch.vb,&offset);vkCmdBindIndexBuffer(c,a.planetaryPatch.ib,0,VK_INDEX_TYPE_UINT32);if(gpuPlanetary)vkCmdDrawIndexedIndirect(c,a.gpuControlBuffer,0,1,sizeof(VkDrawIndexedIndirectCommand));else vkCmdDrawIndexed(c,a.planetaryPatch.indices,a.submission->planetaryPatchCount,0,0,0);}
+  vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,a.timestampQueries,10);
   vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,a.timestampQueries,6);
   if(solarOverlay){VkDeviceSize offset=0;vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.planetaryRingNearPipeline);vkCmdBindVertexBuffers(c,0,1,&a.planetaryRing.vb,&offset);vkCmdBindIndexBuffer(c,a.planetaryRing.ib,0,VK_INDEX_TYPE_UINT32);vkCmdDrawIndexed(c,a.planetaryRing.indices,distantCount,0,0,0);}
   if (!solarOverlay && a.submission->orbitVertexCount >= 2 && a.orbitBuffer) { VkDeviceSize offset = 0; vkCmdBindPipeline(c, VK_PIPELINE_BIND_POINT_GRAPHICS, a.orbitPipeline); vkCmdBindVertexBuffers(c, 0, 1, &a.orbitBuffer, &offset); vkCmdDraw(c, a.submission->orbitVertexCount, 1, 0, 0); }
@@ -1962,12 +1993,6 @@ void Recreate(App &a) {
   a.resized = false;
   a.Log(NC_LOG_ALWAYS, "Swapchain recreated after resize");
 }
-std::vector<PatchIdentity> CanonicalPatches(const NcPlanetaryPatch *patches,uint32_t count) {
-  std::vector<PatchIdentity> result;result.reserve(count);for(uint32_t index=0;index<count;index++){const auto &patch=patches[index];result.push_back({patch.face,patch.level,patch.x,patch.y,patch.stitchMask});}std::sort(result.begin(),result.end());return result;
-}
-uint64_t PatchHash(const std::vector<PatchIdentity> &patches) {
-  uint64_t hash=14695981039346656037ull;auto mix=[&](uint32_t value){hash=(hash^value)*1099511628211ull;};for(const auto &patch:patches){mix(patch.face);mix(patch.level);mix(patch.x);mix(patch.y);mix(patch.stitchMask);}return hash;
-}
 void InspectGpuPlanetary(App &a) {
   if(!a.gpuFrameSubmitted||!a.gpuControlMapped)return;GpuPlanetaryControl telemetry;std::memcpy(&telemetry,a.gpuControlMapped,sizeof(telemetry));
   if(!a.hasGpuTelemetry||std::memcmp(&telemetry,&a.lastGpuTelemetry,sizeof(telemetry))!=0){char message[544];std::snprintf(message,sizeof message,"GPU planetary: roots=%u; candidates=%u; refined=%u; culled=%u; frustum=%u; horizon=%u; active=%u; splits=%u; merges=%u; balanced=%u; parentFallbacks=%u; pendingChildren=%u; min=%u; max=%u; overflow=%u; indirectInstances=%u; terrainHits=%u; terrainMisses=%u; terrainGenerated=%u; terrainEvictions=%u; terrainResident=%u/%u; residentBeforeDemand=%u",telemetry.roots,telemetry.candidates,telemetry.refined,telemetry.culled,telemetry.frustumCulled,telemetry.horizonCulled,telemetry.active,telemetry.splits,telemetry.merges,telemetry.balanced,telemetry.parentFallbacks,telemetry.pendingChildren,telemetry.minimumLevel,telemetry.maximumLevel,telemetry.overflow,telemetry.draw.instanceCount,telemetry.cacheHits,telemetry.cacheMisses,telemetry.cacheGenerated,telemetry.cacheEvictions,telemetry.cacheResident,telemetry.cacheCapacity,telemetry.padding[1]);a.Log(NC_LOG_ALWAYS,message);if(a.productionIo&&a.submission->planetarySurfaceMode==NC_PLANETARY_SURFACE_PRODUCTION_CUBE){std::lock_guard lock(a.productionIo->mutex);uint32_t ready=0,failed=0;for(const auto &value:a.productionIo->ready){ready+=value.state==2u;failed+=value.state==3u;}char residency[384];std::snprintf(residency,sizeof residency,"Production residency: requests=%llu; diskLoads=%llu; ready=%u; failed=%u; queued=%u; pendingUploads=%u; uploads=%llu; uploadBytes=%llu; queueDrops=%llu; digestFailures=%llu",(unsigned long long)a.productionRequests,(unsigned long long)a.productionIo->diskLoads,ready,failed,a.productionIo->requestCount,a.productionPendingUploads,(unsigned long long)a.productionUploads,(unsigned long long)a.productionUploadBytes,(unsigned long long)(a.productionQueueDrops+a.productionIo->queueDrops),(unsigned long long)a.productionIo->digestFailures);a.Log(NC_LOG_ALWAYS,residency);}a.lastGpuTelemetry=telemetry;a.hasGpuTelemetry=true;}
@@ -1980,13 +2005,10 @@ void InspectGpuPlanetary(App &a) {
     const uint32_t count=std::min<uint32_t>(telemetry.active,6u);for(uint32_t index=0;index<count;index++){const auto &patch=patches[index];const uint32_t terrainSlot=slots[index*2],layer=slots[index*2+1];const double cells=double(1u<<patch.level),u=(double(patch.x)+.5)/cells,v=(double(patch.y)+.5)/cells;std::array<double,3> raw{},direction{};cube(patch.face,2*u-1,2*v-1,raw);direction=spherify(raw);const uint32_t sample=(terrainSlot*TerrainGridVertexCount+8u*17u+8u)*2u;const double height=terrain[sample];std::array<double,3> relative{direction[0]*(radius+height)-camera[0],direction[1]*(radius+height)-camera[1],direction[2]*(radius+height)-camera[2]};const auto position=rotate(relative);double clip[4]{};for(uint32_t row=0;row<4;row++)clip[row]=double(matrix[row])*position[0]+double(matrix[4+row])*position[1]+double(matrix[8+row])*position[2]+double(matrix[12+row]);char trace[512];std::snprintf(trace,sizeof trace,"Production shader input: patch=%u face=%u level=%u x=%u y=%u terrainSlot=%u layer=%u height=%.6f bodyDirection=(%.9f,%.9f,%.9f) clip=(%.9g,%.9g,%.9g,%.9g) ndc=(%.9g,%.9g,%.9g)",index,patch.face,patch.level,patch.x,patch.y,terrainSlot,layer,height,direction[0],direction[1],direction[2],clip[0],clip[1],clip[2],clip[3],clip[3]!=0?clip[0]/clip[3]:0,clip[3]!=0?clip[1]/clip[3]:0,clip[3]!=0?clip[2]/clip[3]:0);a.Log(NC_LOG_ALWAYS,trace);}
     a.productionGeometryTraceLogged=true;
   }
-  if(a.submission->planetaryMode!=NC_PLANETARY_CPU_GPU_VALIDATION||a.validationCpuOracle.empty())return;
-  const auto gpuCount=std::min<uint32_t>(telemetry.active,GpuPatchCapacity);auto cpu=CanonicalPatches(a.validationCpuOracle.data(),(uint32_t)a.validationCpuOracle.size());auto gpu=CanonicalPatches(static_cast<const NcPlanetaryPatch *>(a.patchMapped),gpuCount);const auto cpuHash=PatchHash(cpu),gpuHash=PatchHash(gpu);uint32_t cpuMinimum=0,cpuMaximum=0;if(!cpu.empty()){cpuMinimum=cpuMaximum=cpu.front().level;for(const auto &patch:cpu){cpuMinimum=std::min(cpuMinimum,patch.level);cpuMaximum=std::max(cpuMaximum,patch.level);}}const bool match=telemetry.roots==6&&telemetry.overflow==0&&telemetry.draw.instanceCount==telemetry.active&&telemetry.minimumLevel==cpuMinimum&&telemetry.maximumLevel==cpuMaximum&&cpu==gpu;
-  if(!a.hasParityResult||!match||cpuHash!=a.lastCpuHash||gpuHash!=a.lastGpuHash){char message[256];std::snprintf(message,sizeof message,"CPU/GPU planetary parity: match=%s; cpu=%zu; gpu=%zu; cpuHash=0x%016llX; gpuHash=0x%016llX",match?"true":"false",cpu.size(),gpu.size(),(unsigned long long)cpuHash,(unsigned long long)gpuHash);a.Log(match?NC_LOG_ALWAYS:NC_LOG_VALIDATION,message);a.lastCpuHash=cpuHash;a.lastGpuHash=gpuHash;a.hasParityResult=true;}
 }
 void InspectGpuTimings(App &a){
   if(!a.timestampFrameSubmitted||!a.timestampQueries)return;std::array<uint64_t,App::TimestampCount> ticks{};const auto result=vkGetQueryPoolResults(a.device,a.timestampQueries,0,App::TimestampCount,sizeof(ticks),ticks.data(),sizeof(uint64_t),VK_QUERY_RESULT_64_BIT);if(result!=VK_SUCCESS)return;
-  std::array<double,App::TimestampCount> values{};const double scale=double(a.timestampPeriodNanoseconds)/1e6;values[0]=(ticks[8]-ticks[0])*scale;values[1]=0;values[2]=a.anchoredSurfaceActive?(ticks[6]-ticks[5])*scale:0;values[3]=(ticks[3]-ticks[2])*scale;values[4]=(ticks[4]-ticks[3])*scale;values[5]=(ticks[7]-ticks[0])*scale;values[6]=(ticks[8]-ticks[7])*scale;values[7]=(ticks[1]-ticks[0])*scale;values[8]=(ticks[7]-ticks[4])*scale;for(uint32_t i=0;i<App::TimestampCount;i++)a.timestampAccumulatedMs[i]+=values[i];a.timestampSampleCount++;
+  std::array<double,App::TimestampCount> values{};const double scale=double(a.timestampPeriodNanoseconds)/1e6;values[0]=(ticks[8]-ticks[0])*scale;values[1]=0;values[2]=a.anchoredSurfaceActive?(ticks[6]-ticks[5])*scale:0;values[3]=(ticks[3]-ticks[2])*scale;values[4]=(ticks[4]-ticks[3])*scale;values[5]=(ticks[7]-ticks[0])*scale;values[6]=(ticks[8]-ticks[7])*scale;values[7]=(ticks[1]-ticks[0])*scale;values[8]=(ticks[7]-ticks[4])*scale;values[9]=a.anchoredSurfaceActive?(ticks[9]-ticks[5])*scale:0;values[10]=(ticks[10]-ticks[9])*scale;for(uint32_t i=0;i<App::TimestampCount;i++)a.timestampAccumulatedMs[i]+=values[i];a.timestampSampleCount++;if(a.canonicalBenchmark&&a.frame>120u&&a.canonicalGpuTotalMs.size()<480u){a.canonicalGpuTotalMs.push_back(values[0]);a.canonicalGpuMaterialMs.push_back(values[8]);a.canonicalGpuAnchoredMs.push_back(values[9]);a.canonicalGpuGlobalFillMs.push_back(values[10]);a.canonicalGpuOverlayMs.push_back((ticks[7]-ticks[6])*scale);}
   if(a.timestampSampleCount==1||a.timestampSampleCount%120==0){char message[384];std::snprintf(message,sizeof message,"GPU timings: total=%.3f ms; anchoredCompute=%.3f; anchoredDraw=%.3f; background=%.3f; preSurface=%.3f; scene=%.3f; toneMap=%.3f; regionalCompute=%.3f; materialsOverlays=%.3f",values[0],values[1],values[2],values[3],values[4],values[5],values[6],values[7],values[8]);a.Log(NC_LOG_ALWAYS,message);if(a.localIo){std::lock_guard lock(a.localIo->mutex);uint32_t resident=0,visible=0,inFlight=0,ready=0,failed=0,published=0;for(uint32_t slot=0;slot<LocalPayloadSlots;slot++){resident+=a.localLayerOccupied[slot]&&!a.localLayerInFlight[slot];visible+=a.localLayerVisible[slot];inFlight+=a.localLayerInFlight[slot];published+=a.localLayerPublished[slot];}for(const auto&value:a.localIo->ready){ready+=value.state==2u;failed+=value.state==3u;}const uint64_t samples=a.localHits+a.localMisses;const double hitRate=samples?100.0*double(a.localHits)/double(samples):0.0;const uint64_t vram=uint64_t(LocalPayloadSlots)*(LocalAlbedoLayerBytes+LocalElevationLayerBytes+LocalNormalLayerBytes+LocalControlLayerBytes);const double uploadLatency=a.localUploads?a.localUploadLatencyMilliseconds/double(a.localUploads):0.0;char local[928];std::snprintf(local,sizeof local,"Regional terrain streaming: requested=%llu; hits=%llu; misses=%llu; hitRate=%.2f%%; resident=%u/%u; visible=%u/%u; published=%u; promotions=%llu; inFlight=%u; evictions=%llu; queued=%u; ready=%u; failed=%u; canceled=%llu; queueDrops=%llu; bytesRead=%llu; bytesSupercompressed=%llu; bytesTranscoded=%llu; bytesUploaded=%llu; transcodeMs=%.3f; uploadLatencyAvgMs=%.3f; uploads=%llu; uploadBudget=%u; selectedFrequency=%u; fallbackFrequency=%u; BC7VRAM=%llu; R16VRAM=%llu; BC5VRAM=%llu; R8VRAM=%llu; totalVRAM=%llu",(unsigned long long)a.localRequests,(unsigned long long)a.localHits,(unsigned long long)a.localMisses,hitRate,resident,LocalPayloadSlots,visible,a.localVisibleTargetCount,published,(unsigned long long)a.localPromotions,inFlight,(unsigned long long)a.localEvictions,a.localIo->requestCount,ready,failed,(unsigned long long)a.localCanceled,(unsigned long long)a.localIo->queueDrops,(unsigned long long)a.localIo->bytesRead,(unsigned long long)a.localIo->bytesRead,(unsigned long long)a.localIo->bytesTranscoded,(unsigned long long)a.localUploadBytes,a.localIo->transcodeMilliseconds,uploadLatency,(unsigned long long)a.localUploads,LocalUploadBudget,visible?1u:0u,0u,(unsigned long long)(uint64_t(LocalPayloadSlots)*LocalAlbedoLayerBytes),(unsigned long long)(uint64_t(LocalPayloadSlots)*LocalElevationLayerBytes),(unsigned long long)(uint64_t(LocalPayloadSlots)*LocalNormalLayerBytes),(unsigned long long)(uint64_t(LocalPayloadSlots)*LocalControlLayerBytes),(unsigned long long)vram);a.Log(NC_LOG_ALWAYS,local);}}
 }
 void InspectAnchoredPipelineStatistics(App &a){
@@ -2028,11 +2050,6 @@ void Draw(App &a) {
   const bool regionalPresentation = detailedPresentation;
   const bool gpuFrameSubmitted = regionalPresentation &&
       a.submission->planetaryMode != NC_PLANETARY_CPU_REFERENCE;
-  if (a.submission->planetaryMode == NC_PLANETARY_CPU_GPU_VALIDATION && gpuFrameSubmitted)
-    a.validationCpuOracle.assign(a.submission->planetaryPatches,
-                                 a.submission->planetaryPatches + a.submission->planetaryPatchCount);
-  else
-    a.validationCpuOracle.clear();
   a.gpuFrameSubmitted = gpuFrameSubmitted;
   VkPipelineStageFlags stage = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
   VkSubmitInfo si{VK_STRUCTURE_TYPE_SUBMIT_INFO};
@@ -2161,6 +2178,7 @@ void Update(App &a, float dt) {
   a.cpuInspectionMs+=std::chrono::duration<double,std::milli>(inspectionEnd-fenceEnd).count();
   a.cpuHostCallbackMs+=std::chrono::duration<double,std::milli>(callbackEnd-inspectionEnd).count();
   a.cpuUploadMs+=std::chrono::duration<double,std::milli>(updateEnd-callbackEnd).count();
+  if(a.canonicalBenchmark&&a.frame>=120u&&a.canonicalCpuUpdateMs.size()<480u){a.canonicalCpuUpdateMs.push_back(std::chrono::duration<double,std::milli>(updateEnd-updateStart).count());a.canonicalCpuFenceMs.push_back(std::chrono::duration<double,std::milli>(fenceEnd-updateStart).count());}
 }
 } // namespace
 extern "C" NC_API NcResult __cdecl nc_validate_planetary_patches(const NcPlanetaryPatch *patches, uint32_t count) {
@@ -2223,12 +2241,14 @@ static NcResult RunRenderer(NcFrameSubmission *s, NcHostCallback cb, void *data,
   a.cb = cb;
   a.cbData = data;
   a.submission = s;
+  a.canonicalBenchmark=std::getenv("NOVACORE_M12_CANONICAL_BENCHMARK")&&std::strcmp(std::getenv("NOVACORE_M12_CANONICAL_BENCHMARK"),"1")==0;
   if(assets){a.productionTerrainPath=assets->productionTerrainPathUtf8;if(assets->localTerrainPathUtf8)a.localTerrainPath=assets->localTerrainPathUtf8;a.elevationOraclePath=assets->elevationOraclePathUtf8;}
   try {
     gApp = &a;
     if(const char*groundTruth=std::getenv("NOVACORE_GPU_GROUND_TRUTH"))
       a.anchoredGroundTruthEnabled=std::strcmp(groundTruth,"1")==0;
     if(a.anchoredGroundTruthEnabled)a.Log(NC_LOG_ALWAYS,"GPU ground-truth instrumentation enabled");
+    if(a.canonicalBenchmark)a.Log(NC_LOG_ALWAYS,"M12 canonical benchmark telemetry: warmup=120; measured=480; fixed pose required by host");
     a.surfaceDiagnostic=SurfaceDiagnosticFromEnvironment();
     if(a.surfaceDiagnostic){char message[128];std::snprintf(message,sizeof message,"Surface diagnostic isolation flags: 0x%02X",a.surfaceDiagnostic);a.Log(NC_LOG_ALWAYS,message);}
     LogLoadedRuntimePaths(a);
@@ -2278,6 +2298,7 @@ static NcResult RunRenderer(NcFrameSubmission *s, NcHostCallback cb, void *data,
     a.Log(NC_LOG_ALWAYS, text);
     if(a.frameTimeCount){std::vector<double> sorted(a.frameTimesMs.begin(),a.frameTimesMs.begin()+a.frameTimeCount);std::sort(sorted.begin(),sorted.end());auto percentile=[&](double p){return sorted[std::min(sorted.size()-1,size_t(std::ceil(p*sorted.size()))-1)];};std::snprintf(text,sizeof text,"Frame pacing: p50=%.3f ms; p95=%.3f ms; p99=%.3f ms; max=%.3f ms; samples=%zu",percentile(.50),percentile(.95),percentile(.99),sorted.back(),sorted.size());a.Log(NC_LOG_ALWAYS,text);}
     if(a.cpuTimingSamples){const double n=double(a.cpuTimingSamples);std::snprintf(text,sizeof text,"CPU timings: update=%.3f ms; fence=%.3f; inspection=%.3f; hostCallback=%.3f; validationUpload=%.3f; record=%.3f; submit=%.3f; present=%.3f",a.cpuUpdateMs/n,a.cpuFenceWaitMs/n,a.cpuInspectionMs/n,a.cpuHostCallbackMs/n,a.cpuUploadMs/n,a.cpuRecordMs/n,a.cpuSubmitMs/n,a.cpuPresentMs/n);a.Log(NC_LOG_ALWAYS,text);}
+    if(a.canonicalBenchmark){auto report=[&](const char*name,std::vector<double> values){if(values.empty())return;const double average=std::accumulate(values.begin(),values.end(),0.0)/double(values.size());std::sort(values.begin(),values.end());const double p95=values[std::min(values.size()-1,size_t(std::ceil(.95*values.size()))-1)];std::snprintf(text,sizeof text,"M12 canonical timing: %s average=%.3f ms; p95=%.3f ms; samples=%zu",name,average,p95,values.size());a.Log(NC_LOG_ALWAYS,text);};report("cpuUpdate",a.canonicalCpuUpdateMs);report("fenceWait",a.canonicalCpuFenceMs);report("gpuTotal",a.canonicalGpuTotalMs);report("materialsOverlays",a.canonicalGpuMaterialMs);report("anchoredTerrain",a.canonicalGpuAnchoredMs);report("globalFallback",a.canonicalGpuGlobalFillMs);report("overlays",a.canonicalGpuOverlayMs);}
     std::snprintf(text,sizeof text,"GPU terrain descriptor totals: publications=%llu; bytes=%llu; reusableBaseVertices=%u; reusableTopologyTemplates=16; tessellationTargetPixels=16; tessellationMaximum=16; tessellationRangeMetres=50; basePhysicalEvaluation=vertex; nearPhysicalEvaluation=TES; biomeContributors=4; capacityRejects=%llu",static_cast<unsigned long long>(a.anchoredSurfaceUploads),static_cast<unsigned long long>(a.anchoredSurfaceUploadBytes),AnchoredSurfaceBaseVerticesPerPatch,static_cast<unsigned long long>(a.anchoredSurfaceCapacityRejects));a.Log(NC_LOG_ALWAYS,text);
     if(a.anchoredPipelineStatisticsSamples){const double n=double(a.anchoredPipelineStatisticsSamples);std::snprintf(text,sizeof text,"GPU anchored refinement averages: tcsPatches=%.1f; refinedVertices=%.1f; rasterPrimitives=%.1f; samples=%llu; CPUFinalRaster=false",double(a.anchoredTessellationControlPatches)/n,double(a.anchoredTessellationEvaluationInvocations)/n,double(a.anchoredClippingPrimitives)/n,(unsigned long long)a.anchoredPipelineStatisticsSamples);a.Log(NC_LOG_ALWAYS,text);}
     if(a.timestampSampleCount){const double n=double(a.timestampSampleCount);std::snprintf(text,sizeof text,"GPU timing averages: total=%.3f ms; anchoredCompute=%.3f; anchoredDraw=%.3f; background=%.3f; preSurface=%.3f; toneMap=%.3f",a.timestampAccumulatedMs[0]/n,a.timestampAccumulatedMs[1]/n,a.timestampAccumulatedMs[2]/n,a.timestampAccumulatedMs[3]/n,a.timestampAccumulatedMs[4]/n,a.timestampAccumulatedMs[6]/n);a.Log(NC_LOG_ALWAYS,text);}

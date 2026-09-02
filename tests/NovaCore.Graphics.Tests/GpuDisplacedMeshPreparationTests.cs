@@ -210,7 +210,7 @@ internal static unsafe class GpuDisplacedMeshPreparationTests
 
     private static MeshInput BuildFlorida(in SurfaceAnchor anchor, ulong retainedReferenceHash)
     {
-        Require(retainedReferenceHash == 0x2908BC0E23096DF5ul,
+        Require(retainedReferenceHash == 0x9C929A91ECE4A902ul,
             $"M12B Florida physical-surface reference hash includes regional R16, reservation, biome meso, and near physical authority: 0x{retainedReferenceHash:X16}");
         return BuildNeighborhood(anchor);
     }

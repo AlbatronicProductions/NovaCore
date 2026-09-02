@@ -6,6 +6,7 @@ var tests = new (string Name, Action Test)[]
     ("default selection", DefaultSelection),
     ("scenario catalog", ScenarioCatalogMappings),
     ("Earth fullscreen native preset", EarthFullscreenNativePreset),
+    ("Earth fullscreen Solar camera path", EarthFullscreenSolarCameraPath),
     ("structured launch environment", StructuredLaunchEnvironment),
     ("Earth orbital arguments", EarthOrbitalArguments),
     ("invariant altitude formatting", InvariantAltitudeFormatting),
@@ -49,8 +50,20 @@ static void EarthFullscreenNativePreset()
     Equal(new NovaCoreClientResolution(3440, 1440), configuration.ClientResolution);
     Equal(NovaCoreDiagnosticsMode.VulkanValidationAndPerformance, configuration.Diagnostics);
     SequenceEqual(
-        ["--scene=earth", "--altitude=700000", "--surface-site=land", "--log=validation", "--log=vulkan"],
+        ["--scene=sol", "--focus=earth", "--altitude=700000", "--surface-site=land", "--log=validation", "--log=vulkan"],
         LaunchCommandBuilder.BuildArguments(configuration));
+}
+
+static void EarthFullscreenSolarCameraPath()
+{
+    var overview = Create(NovaCoreScenarioPreset.SolarSystemOverview);
+    var fullscreen = Create(NovaCoreScenarioPreset.EarthFullscreenNative);
+    Equal(NovaCoreScene.Solar, overview.Scene);
+    Equal(overview.Scene, fullscreen.Scene);
+    Equal(NovaCoreStartingBody.Earth, fullscreen.StartingBody);
+    var arguments=LaunchCommandBuilder.BuildArguments(fullscreen);
+    True(arguments.Contains("--focus=earth",StringComparer.Ordinal),"Earth fullscreen does not pre-focus Earth.");
+    False(arguments.Contains("--scene=earth",StringComparer.Ordinal),"Earth fullscreen still selects the legacy Earth-only camera scene.");
 }
 
 static void StructuredLaunchEnvironment()
@@ -66,7 +79,8 @@ static void StructuredLaunchEnvironment()
     var plan = NovaCoreProcessLauncher.CreatePlan(repositoryRoot, configuration);
     Equal("3440", plan.EnvironmentVariables["NOVACORE_WINDOW_CLIENT_WIDTH"]);
     Equal("1", plan.EnvironmentVariables["NOVACORE_WINDOW_BORDERLESS"]);
-    True(plan.Arguments.Contains("--scene=earth", StringComparer.Ordinal), "Earth scene was not encoded structurally.");
+    True(plan.Arguments.Contains("--scene=sol", StringComparer.Ordinal), "Solar camera scene was not encoded structurally.");
+    True(plan.Arguments.Contains("--focus=earth", StringComparer.Ordinal), "Earth startup focus was not encoded structurally.");
 }
 
 static void EarthOrbitalArguments()
@@ -111,7 +125,7 @@ static void FloridaLaunchMapping()
 {
     var configuration = Create(NovaCoreScenarioPreset.FloridaLaunchSite);
     SequenceEqual(
-        ["--scene=sol", "--surface-site=florida-launch"],
+        ["--scene=sol", "--focus=earth", "--surface-site=florida-launch"],
         LaunchCommandBuilder.BuildArguments(configuration));
 }
 

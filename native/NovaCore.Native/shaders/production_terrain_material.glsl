@@ -71,9 +71,9 @@ vec3 TerrainBiplanarWeights(vec3 surfaceNormal)
   vec3 weights=mix(base,selected,selectionConfidence);
   return weights/max(weights.x+weights.y+weights.z,1e-6);
 }
-float TerrainBiplanarNoiseRaw(dvec3 bodyMetres,vec3 surfaceNormal,double scaleMetres,dvec3 offset)
+float TerrainBiplanarNoiseRaw(dvec3 bodyMetres,double scaleMetres,dvec3 offset,vec3 weights)
 {
-  dvec3 point=(bodyMetres+offset)/scaleMetres;vec3 weights=TerrainBiplanarWeights(surfaceNormal);
+  dvec3 point=(bodyMetres+offset)/scaleMetres;
   float value=0.0;
   if(weights.x>1e-4)value+=weights.x*TerrainNoise2(point.yz);
   if(weights.y>1e-4)value+=weights.y*TerrainNoise2(point.zx+dvec2(19.19,7.73));
@@ -121,6 +121,49 @@ ProductionTerrainWeights ProductionWeightsFromBiome(BiomeBlendD biome,float land
   return ProductionTerrainWeights(primary/total,secondary/total);
 }
 
+// Candidate D: presentation-only FP32 mirror of the canonical biome semantics.
+// It intentionally emits the seven material-library weights directly: no FP64
+// modifier evaluation, analytic slope, or physical-height reconstruction is
+// required by this fragment path.
+ProductionTerrainWeights EvaluatePresentationBiomeWeightsF(vec3 bodyFixedDirection,float geographicBaseHeight,float landMask)
+{
+  vec3 direction=normalize(bodyFixedDirection);
+  vec3 point=direction*6371008.8;
+  const vec3 climateA=vec3(.7427813527082074,.5570860145311556,-.3713906763541037);
+  const vec3 climateB=vec3(-.4364357804719848,.2182178902359924,.8728715609439696);
+  const vec3 climateC=vec3(.2672612419124244,-.8017837257372732,.5345224838248488);
+  float latitude=abs(direction.y),temperature=TerrainSaturate(1.0-latitude*.82-max(geographicBaseHeight,0.0)/8500.0);
+  float climateValueA=.5+.5*sin(dot(point,climateA)*(6.28318530718/1850000.0)+.37);
+  float climateValueB=.5+.5*sin(dot(point,climateB)*(6.28318530718/620000.0)+2.11);
+  float climateValueC=.5+.5*sin(dot(point,climateC)*(6.28318530718/210000.0)-1.43);
+  float moisture=TerrainSaturate(.18+.46*climateValueA+.24*climateValueB+.12*climateValueC-.18*temperature);
+  float aridity=TerrainSaturate((1.0-moisture)*(.55+.45*temperature));
+  float coast=1.0-smoothstep(18.0,420.0,abs(geographicBaseHeight)),land=smoothstep(-2.0,8.0,geographicBaseHeight);
+  float highland=smoothstep(420.0,2400.0,geographicBaseHeight),alpineGate=smoothstep(1400.0,3600.0,geographicBaseHeight);
+  float cold=TerrainSaturate(latitude*.9+max(geographicBaseHeight,0.0)/7500.0+(1.0-temperature)*.25),snowGate=smoothstep(.72,.94,cold);
+  float wet=smoothstep(.58,.86,moisture)*(1.0-smoothstep(130.0,900.0,geographicBaseHeight));
+  float raw[10];
+  raw[0]=1.0-land+land*coast*.18;raw[1]=land*coast*(1.0-.55*wet)*(1.0-snowGate);raw[2]=land*wet*(1.0-.6*highland);
+  raw[3]=land*moisture*temperature*(1.0-coast)*(1.0-highland)*(1.0-snowGate);
+  raw[4]=land*(1.0-abs(moisture-.38)*1.8)*temperature*(1.0-.7*highland)*(1.0-coast);
+  raw[5]=land*smoothstep(.48,.82,aridity)*(1.0-highland)*(1.0-coast)*(1.0-snowGate);
+  raw[6]=land*highland*(1.0-.55*snowGate);raw[7]=land*alpineGate*(1.0-snowGate);raw[8]=land*snowGate*(.35+.65*highland);
+  raw[9]=land*(1.0-highland)*smoothstep(.78,.94,.5+.5*sin(dot(point,climateB)*(6.28318530718/145000.0)+.91))*.18;
+  for(int index=0;index<10;index++)raw[index]=max(raw[index],0.0);
+  bool selected[10];for(int index=0;index<10;index++)selected[index]=false;
+  float weights[10];for(int index=0;index<10;index++)weights[index]=0.0;
+  float total=0.0;
+  for(int slot=0;slot<4;slot++){int best=0;float value=-1.0;for(int index=0;index<10;index++)if(!selected[index]&&raw[index]>value){best=index;value=raw[index];}selected[best]=true;weights[best]=value;total+=value;}
+  if(!(total>1e-7)){weights[4]=1.0;total=1.0;}
+  for(int index=0;index<10;index++)weights[index]/=total;
+  float materialLand=smoothstep(.45,.55,landMask);
+  vec4 primary=vec4(weights[3]+.28*weights[4],weights[2]+.55*weights[4]+.65*weights[9],weights[1],weights[6]+.35*weights[9])*materialLand;
+  vec3 secondary=vec3(weights[7],weights[5],weights[8])*materialLand;
+  float materialTotal=dot(primary,vec4(1.0))+dot(secondary,vec3(1.0));
+  if(!(materialTotal>1e-7))return ProductionTerrainWeights(vec4(0,1,0,0),vec3(0));
+  return ProductionTerrainWeights(primary/materialTotal,secondary/materialTotal);
+}
+
 void BlendProductionTerrainLibrary(
   ProductionTerrainWeights weights,out vec3 color,out float roughness,out float metallic,out float ao,out float displacement)
 {
@@ -150,7 +193,7 @@ vec3 ApplyTerrainHeightNormal(vec3 geometricNormal,vec3 differentialMetres,float
 
 ProductionTerrainMaterial SynthesizeProductionTerrainMaterial(
   vec3 geographicAlbedo,float landMask,float elevationMetres,vec3 bodyDirection,vec3 geometricNormal,
-  dvec3 bodyMetres,vec3 differentialMetres,float altitudeMetres,float regionalControlClass,BiomeBlendD biome)
+  dvec3 bodyMetres,vec3 differentialMetres,float altitudeMetres,float regionalControlClass,ProductionTerrainWeights weights)
 {
   ProductionTerrainMaterial result;
   result.detailWeight=TerrainDetailWeight(altitudeMetres);
@@ -158,7 +201,6 @@ ProductionTerrainMaterial SynthesizeProductionTerrainMaterial(
   float latitude=abs(bodyDirection.y);
   float moisture=TerrainSaturate(1.35*geographicAlbedo.g-.45*geographicAlbedo.r+.22);
   float temperature=TerrainSaturate(1.0-latitude*.78-max(elevationMetres,0.0)/9000.0);
-  ProductionTerrainWeights weights=ProductionWeightsFromBiome(biome,landMask);
   vec3 materialColor;float materialRoughness,materialMetallic,materialAo,materialDisplacement;
   BlendProductionTerrainLibrary(weights,materialColor,materialRoughness,materialMetallic,materialAo,materialDisplacement);
 
@@ -167,14 +209,23 @@ ProductionTerrainMaterial SynthesizeProductionTerrainMaterial(
   // independently band-limited from the same smooth pre-projection metre footprint. FP64
   // preserves metre identity at Earth radius; derivatives stay in the smooth camera-local
   // differential domain where translation cannot destroy their precision.
-  float mesoRaw=TerrainBiplanarNoiseRaw(bodyMetres,geometricNormal,96.0,dvec3(137,271,419));
-  float microRaw=TerrainBiplanarNoiseRaw(bodyMetres,geometricNormal,5.5,dvec3(613,89,347));
-  float broadRaw=TerrainBiplanarNoiseRaw(bodyMetres,geometricNormal,410.0,dvec3(43,719,181));
-  float meso=mix(.5,mesoRaw,TerrainFrequencyAttenuation(footprintMetres,96.0));
-  float micro=mix(.5,microRaw,TerrainFrequencyAttenuation(footprintMetres,5.5));
-  float broad=mix(.5,broadRaw,TerrainFrequencyAttenuation(footprintMetres,410.0));
-  float normalMeso=mix(.5,mesoRaw,TerrainNormalFrequencyAttenuation(footprintMetres,96.0));
-  float normalMicro=mix(.5,microRaw,TerrainNormalFrequencyAttenuation(footprintMetres,5.5));
+  float mesoAttenuation=TerrainFrequencyAttenuation(footprintMetres,96.0);
+  float microAttenuation=TerrainFrequencyAttenuation(footprintMetres,5.5);
+  float broadAttenuation=TerrainFrequencyAttenuation(footprintMetres,410.0);
+  float normalMesoAttenuation=TerrainNormalFrequencyAttenuation(footprintMetres,96.0);
+  float normalMicroAttenuation=TerrainNormalFrequencyAttenuation(footprintMetres,5.5);
+  // The body-fixed projection weights are common to all material frequencies.
+  // Do not evaluate a decorrelated noise field once both its material and normal
+  // contributions are fully band-limited at this pixel.
+  vec3 biplanarWeights=TerrainBiplanarWeights(geometricNormal);
+  float mesoRaw=(mesoAttenuation>0.0||normalMesoAttenuation>0.0)?TerrainBiplanarNoiseRaw(bodyMetres,96.0,dvec3(137,271,419),biplanarWeights):.5;
+  float microRaw=(microAttenuation>0.0||normalMicroAttenuation>0.0)?TerrainBiplanarNoiseRaw(bodyMetres,5.5,dvec3(613,89,347),biplanarWeights):.5;
+  float broadRaw=broadAttenuation>0.0?TerrainBiplanarNoiseRaw(bodyMetres,410.0,dvec3(43,719,181),biplanarWeights):.5;
+  float meso=mix(.5,mesoRaw,mesoAttenuation);
+  float micro=mix(.5,microRaw,microAttenuation);
+  float broad=mix(.5,broadRaw,broadAttenuation);
+  float normalMeso=mix(.5,mesoRaw,normalMesoAttenuation);
+  float normalMicro=mix(.5,microRaw,normalMicroAttenuation);
   float variation=(meso-.5)*.18+(micro-.5)*.055+(broad-.5)*.12;
   // Terrain-v5/local payload albedo is geographic material authority. The
   // former close-range blend replaced 62% of that identity with seven constant
@@ -189,7 +240,7 @@ ProductionTerrainMaterial SynthesizeProductionTerrainMaterial(
   result.metallic=mix(0.0,materialMetallic,landDetail);
   result.ambientOcclusion=mix(1.0,clamp(materialAo-(meso-.5)*.08,.65,1.0),landDetail);
   result.visualDisplacement=materialDisplacement*((normalMeso-.5)*.72+(normalMicro-.5)*.28)*landDetail;
-  result.normal=landDetail>0.0?ApplyTerrainHeightNormal(normalize(geometricNormal),differentialMetres,result.visualDisplacement):normalize(geometricNormal);
+  result.normal=landDetail<=0.0?normalize(geometricNormal):ApplyTerrainHeightNormal(normalize(geometricNormal),differentialMetres,result.visualDisplacement);
   // M12 regional control is categorical physical geography, not a replacement
   // color map. It selects restrained NovaCore material response while the
   // independently sourced macro albedo remains recognizable and continuous.

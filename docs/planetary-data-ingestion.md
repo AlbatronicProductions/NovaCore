@@ -35,6 +35,11 @@ result contains all six faces through L2. Every record is one transaction of
 albedo, elevation, land classification, and clouds with canonical spherical
 gutters.
 
+The package is a distribution and sampling-density product, not an independent
+physical-surface authority. Global/fallback and anchored/refined geometry must
+derive shared geography from the same canonical physical-height result even
+when they consume different prepared levels or payload channels.
+
 ## Build the Florida regional payload
 
 ```powershell
@@ -64,6 +69,8 @@ never performs network acquisition.
 - Cube-face edge and corner samples canonicalize to the same spherical point.
 - Child records cannot become visible until their complete data dependency is
   resident and acknowledged.
+- Coarse and refined representations of the same geography cannot define
+  independent physical heights.
 - Current generators must reproduce the tracked payload digest exactly.
 - Categorical control sampling is nearest/texel-exact; it is not linearly
   blended into fractional class identities.

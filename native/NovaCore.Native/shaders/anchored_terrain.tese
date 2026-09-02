@@ -58,7 +58,7 @@ void main()
   double radius=double(inputData.cameraHighRadiusHigh.w)+double(inputData.cameraLowRadiusLow.w);
   double geographic=double(inGeographicHeight[0]*barycentric.x+inGeographicHeight[1]*barycentric.y+inGeographicHeight[2]*barycentric.z);
   float baseHeight=inTerrainHeight[0]*barycentric.x+inTerrainHeight[1]*barycentric.y+inTerrainHeight[2]*barycentric.z;
-  NearPhysicalEvaluationD nearValue=EvaluateNearPhysicalD(direction,geographic);
+  NearPhysicalEvaluationD nearValue=EvaluateNearPhysicalD(direction,EvaluateBiomeBlendD(direction,geographic));
   float height=baseHeight+float(nearValue.height);
   dvec3 body=direction*(radius+double(height));
   vec3 relativeBody=BillboardRelative(body);Presentation p=presentations.values[0];

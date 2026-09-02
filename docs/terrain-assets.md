@@ -146,4 +146,6 @@ metadata, cache lifetimes, and artifact locators while sharing bytes when their
 content hash is identical. Runtime patch residency remains separate from
 distribution: payload packages feed stable
 `body / terrain-version / face / level / x / y` ownership and never become
-independent visible owners.
+independent visible or physical-surface owners. Different packages may improve
+sampling fidelity, but geometry for shared geography must be prepared from one
+canonical physical-height authority.

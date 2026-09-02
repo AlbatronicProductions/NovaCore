@@ -189,17 +189,18 @@ Current Solar-scene controls include mouse drag for free orbiting, mouse wheel z
 
 ## Current planetary baseline
 
-The current Desktop baseline uses one production-owned Earth surface architecture from Solar overview to the near field:
+The banked Desktop baseline is M12B on the accepted 11B-7H1 GPU terrain foundation. The active architecture migration requires one canonical physical-height authority across its global/fallback and anchored/refined representations:
 
 - canonical right-handed body-fixed geography: +Y north, +X at longitude zero, and positive/east longitude toward -Z;
 - deterministic `earth-surface-v5` distribution and `earth-florida-m12` regional refinement addressed by `body / terrain-version / face / level / x / y`;
 - conservative opaque global coverage that remains authoritative until a complete refinement transaction is ready, so refinement cannot leave an unowned visible region;
+- one canonical geographic/physical-height result for shared geography, even when representations use different sampling density or presentation;
 - coherent global/refinement material addressing, including mixed-payload and cross-face fragments resolved from the represented body-fixed geography;
 - outward production topology with Vulkan front-face state matched to the validated projected winding;
 - explicit host-to-compute publication synchronization and runtime terrain-version identity instead of stale hard-coded assumptions;
 - FP64 camera-relative reconstruction, body-fixed surface anchors, and anchored-object evaluation downstream of unchanged celestial authority.
 
-The current renderer is a stable architectural and reference baseline, not the final visual target: deeper continuous refinement, richer surface materials, and gameplay-scale environmental detail remain active development.
+The current renderer is a stable banked foundation, not the final visual target. The rejected M12C runtime bridge and procedural-carrier experiments are documented in the [current engineering state](docs/NOVACORE_CURRENT_STATE.md); deeper continuous refinement, coherent prepared physical data, richer surface materials, and gameplay-scale environmental detail remain active development.
 
 ## Accuracy and current scope
 
@@ -237,8 +238,10 @@ See the engineering documentation for the complete scoped build, validation, and
 
 ## Documentation
 
+- [Engineering rules](ENGINEERING_RULES.md)
 - [Architecture](docs/architecture.md)
 - [Current engineering state](docs/NOVACORE_CURRENT_STATE.md)
+- [Engineering handoff](docs/CODEX_HANDOFF.md)
 - [Planetary rendering](docs/planetary-rendering.md)
 - [Production terrain assets](docs/terrain-assets.md)
 - [Celestial simulation](docs/celestial-simulation.md)
