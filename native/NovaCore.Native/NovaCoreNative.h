@@ -171,6 +171,18 @@ struct NcSphericalBillboardProofTopology {
   const uint32_t* neighborOffsets;
   const uint32_t* neighbors;
 };
+// P2S4 publication payload.  These are canonical physical results prepared by
+// the shared GPU physical-surface path; topology consumes but does not own them.
+struct alignas(16) NcSphericalBillboardPhysicalVertex {
+  double bodyFixed[4]; // xyz final displaced point; w canonical height
+  float normal[4];     // xyz canonical final-surface normal; w validity
+};
+struct NcSphericalBillboardPhysicalSurface {
+  uint32_t size, version, vertexCount, physicalGeneration;
+  uint32_t terrainDataGeneration, reserved0, reserved1, reserved2;
+  uint64_t expectedTopologyHash;
+  const NcSphericalBillboardPhysicalVertex* vertices;
+};
 struct NcSphericalBillboardProofFrame {
   uint32_t size, version, frameIndex, renderEnabled;
   uint32_t workVertexCount, workTriangleCount, reserved0, reserved1;
@@ -194,6 +206,9 @@ struct alignas(8) NcSphericalBillboardProofMetrics {
   double setupMilliseconds, topologyUploadMilliseconds, cpuFrameMilliseconds;
   double preparationMilliseconds, normalMilliseconds, cullingMilliseconds, compactionMilliseconds;
   double drawMilliseconds, gpuTotalMilliseconds;
+  uint32_t physicalGeneration, terrainDataGeneration, preparedPhysicalSamples, physicalPreparationDispatchCount;
+  uint32_t physicalReuseCount, staleGenerationRejections, nonFinitePhysicalOutputs, reservedPhysical;
+  uint64_t immutablePhysicalBytes;
 };
 typedef void(__cdecl* NcHostCallback)(NcHostEvent* hostEvent, void* userData);
 enum NcResult : int32_t { NC_SUCCESS = 0, NC_FAILURE = 1, NC_INVALID_ARGUMENT = 2 };
@@ -207,6 +222,7 @@ NC_API NcResult __cdecl nc_prepare_planetary_mesh(const NcPlanetaryHeightQuery* 
 NC_API NcResult __cdecl nc_shutdown_planetary_mesh_preparation(void);
 NC_API NcResult __cdecl nc_initialize_spherical_billboard_gpu_proof(const NcSphericalBillboardProofAssets* assets, NcSphericalBillboardProofMetrics* metrics);
 NC_API NcResult __cdecl nc_upload_spherical_billboard_gpu_proof_topology(const NcSphericalBillboardProofTopology* topology, NcSphericalBillboardProofMetrics* metrics);
+NC_API NcResult __cdecl nc_publish_spherical_billboard_physical_surface(const NcSphericalBillboardPhysicalSurface* surface, NcSphericalBillboardProofMetrics* metrics);
 NC_API NcResult __cdecl nc_run_spherical_billboard_gpu_proof_frame(const NcSphericalBillboardProofFrame* frame, NcSphericalBillboardProofMetrics* metrics);
 NC_API NcResult __cdecl nc_shutdown_spherical_billboard_gpu_proof(void);
 NC_API NcResult __cdecl nc_get_abi_layout(NcAbiLayout* layout);

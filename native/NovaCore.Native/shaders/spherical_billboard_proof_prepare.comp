@@ -2,6 +2,7 @@
 layout(local_size_x=64) in;
 layout(set=0,binding=0,std430) readonly buffer LocalVertices { vec4 values[]; } localVertices;
 layout(set=0,binding=4,std430) writeonly buffer PreparedPositions { vec4 values[]; } positions;
+layout(set=0,binding=10,std430) readonly buffer PhysicalPositions { dvec4 values[]; } physicalPositions;
 layout(push_constant) uniform Constants {
   uint baseVertexCount; uint baseTriangleCount; uint workVertexCount; uint workTriangleCount;
   float bodyRadius; float cameraDistance; float tanHalfFov; float aspect;
@@ -9,7 +10,10 @@ layout(push_constant) uniform Constants {
 } pc;
 void main(){
   uint id=gl_GlobalInvocationID.x; if(id>=pc.workVertexCount)return;
-  vec3 direction=normalize(localVertices.values[id%pc.baseVertexCount].xyz);
-  // P2S3 proof-only surface: zero-height sphere. P2S4 binds canonical H(bodyDirection).
-  positions.values[id]=vec4(direction*pc.bodyRadius-vec3(0.0,0.0,pc.cameraDistance),1.0);
+  uint local=id%pc.baseVertexCount;
+  vec3 direction=normalize(localVertices.values[local].xyz);
+  // reserved==0 retains the banked P2S3 zero-height proof.  P2S4 consumes an
+  // immutable canonical body-fixed publication prepared by the shared GPU path.
+  dvec3 body=pc.reserved==0u?dvec3(direction)*double(pc.bodyRadius):physicalPositions.values[local].xyz;
+  positions.values[id]=vec4(vec3(body-dvec3(0.0,0.0,double(pc.cameraDistance))),1.0);
 }

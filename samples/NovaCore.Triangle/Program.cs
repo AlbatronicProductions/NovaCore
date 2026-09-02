@@ -23,6 +23,14 @@ static int RunSphericalBillboardGpuProof()
         var final=report.FinalMetrics;
         Console.WriteLine($"P2S3 allocation: immutableVertices={final.ImmutableVertexBytes}; immutableIndices={final.ImmutableIndexBytes}; immutableAdjacency={final.ImmutableAdjacencyBytes}; framePositions={final.FramePositionBytes}; frameNormals={final.FrameNormalBytes}; frameVisibility={final.FrameVisibilityBytes}; frameCompactedIndices={final.FrameCompactedIndexBytes}; frameIndirect={final.FrameIndirectBytes}; frameCounters={final.FrameCounterBytes}; scratch={final.TemporaryScratchBytes}; total={final.TotalAllocatedBytes}");
         Console.WriteLine($"P2S3 lifecycle: topologyUploads={final.TopologyUploadCount}; topologyBytesUploaded={final.TopologyBytesUploaded}; frameOutputWrites={final.FrameOutputWriteCount}; cullingDispatches={final.CullingDispatchCount}; indirectSubmissions={final.IndirectSubmissionCount}; allocatedBytes={final.TotalAllocatedBytes}; runtimeTopologyGenerations={final.RuntimeTopologyGenerationCount}; validationErrors={final.ValidationErrors}.");
+        Console.WriteLine("Active planetary representation: M12D Spherical Billboard Natural Terrain Proof (isolated, opt-in, canonical M12D physical generation 4, production patch renderer inactive).");
+        var natural=PlanetarySphericalBillboardNaturalTerrainProof.Run(root);
+        foreach(var level in natural.Levels)
+        {
+            var m=level.Frame;
+            Console.WriteLine($"P2S4 proof: level={level.Level}; representation=spherical-billboard; physicalGeneration={m.PhysicalGeneration}; terrainDataGeneration={m.TerrainDataGeneration}; canonicalAuthority=PlanetaryPhysicalSurface.M12DNaturalTerrainCandidate; vertices={m.BaseVertexCount}; triangles={m.BaseTriangleCount}; physicalSamples={m.PreparedPhysicalSamples}; dispatchedCanonicalSamples={level.PreparedCanonicalSamples}; canonicalReuse={level.ReusedCanonicalSamples}; heightMax={level.MaximumCpuHeightErrorMetres:E17}m; normalMax={level.MaximumCpuNormalErrorRadians:E17}rad; visible={m.VisibleTriangles}; compactedIndices={m.IndirectIndexCount}; physicalPrepareMs={level.PhysicalPreparation.GpuMilliseconds:F6}; normalPublishMs={m.NormalMilliseconds:F6}; finalizeMs={m.PreparationMilliseconds:F6}; cullMs={m.CullingMilliseconds:F6}; compactMs={m.CompactionMilliseconds:F6}; drawMs={m.DrawMilliseconds:F6}; readiness={m.Readiness}; validation={m.ValidationErrors}");
+        }
+        Console.WriteLine($"P2S4 identity: uniqueCanonicalSamples={natural.UniqueCanonicalSamples}; crossLevelReusedSamples={natural.ReusedCanonicalSamples}; sharedHeightDelta={natural.MaximumSharedLevelHeightDeltaMetres:E17}m; sharedNormalDelta={natural.MaximumSharedLevelNormalDeltaRadians:E17}rad; patchIdentity=false; cameraIdentity=false; topologyOwnsPhysicalTruth=false.");
         return 0;
     }
     catch(Exception exception){Console.Error.WriteLine($"P2S3 spherical billboard GPU proof failed: {exception.Message}");return 1;}

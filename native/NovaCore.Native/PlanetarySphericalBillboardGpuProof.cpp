@@ -14,7 +14,7 @@
 #include <vulkan/vulkan.h>
 
 namespace {
-constexpr uint32_t BindingCount = 10, TimestampCount = 6, MaximumFrames = 3;
+constexpr uint32_t BindingCount = 12, TimestampCount = 6, MaximumFrames = 3;
 struct Buffer {
   VkBuffer buffer{};
   VkDeviceMemory memory{};
@@ -57,7 +57,8 @@ struct Context {
   VkDeviceSize imageAllocationBytes{};
   VkImageView imageView{};
   VkFramebuffer framebuffer{};
-  Buffer localVertices, indices, neighborOffsets, neighbors;
+  Buffer localVertices, indices, neighborOffsets, neighbors, physicalPositions,
+      physicalNormals;
   std::array<FrameResources, MaximumFrames> frames{};
   uint32_t maximumVertices{}, maximumTriangles{}, frameCount{}, extent{},
       validationErrors{}, activeLevel{}, baseVertices{}, baseTriangles{},
@@ -65,6 +66,10 @@ struct Context {
   uint64_t topologyHash{}, topologyUploads{}, topologyBytesUploaded{},
       activeTopologyBytes{}, frameWrites{}, cullingDispatches{},
       indirectSubmissions{}, replacements{}, frameWaits{};
+  uint32_t physicalGeneration{}, terrainDataGeneration{},
+      preparedPhysicalSamples{}, physicalPreparationDispatches{},
+      physicalReuseCount{}, staleGenerationRejections{},
+      nonFinitePhysicalOutputs{};
   double setupMilliseconds{}, uploadMilliseconds{};
   uint32_t readiness{};
   ~Context();
@@ -189,7 +194,8 @@ void UpdateDescriptors(Context &c) {
     std::array<Buffer *, BindingCount> buffers{
         &c.localVertices, &c.indices,   &c.neighborOffsets, &c.neighbors,
         &f.positions,     &f.normals,   &f.visibleIndices,  &f.indirect,
-        &f.counters,      &f.visibility};
+        &f.counters,      &f.visibility, &c.physicalPositions,
+        &c.physicalNormals};
     std::array<VkDescriptorBufferInfo, BindingCount> infos{};
     std::array<VkWriteDescriptorSet, BindingCount> writes{};
     for (uint32_t i = 0; i < BindingCount; i++) {
@@ -254,6 +260,9 @@ void CreateVulkan(Context &c) {
   Check(vkEnumeratePhysicalDevices(c.instance, &count, devices.data()),
         "billboard proof physical enumeration failed");
   for (auto device : devices) {
+    VkPhysicalDeviceFeatures features{};
+    vkGetPhysicalDeviceFeatures(device, &features);
+    if (!features.shaderFloat64) continue;
     uint32_t familyCount = 0;
     vkGetPhysicalDeviceQueueFamilyProperties(device, &familyCount, nullptr);
     std::vector<VkQueueFamilyProperties> families(familyCount);
@@ -286,6 +295,9 @@ void CreateVulkan(Context &c) {
   VkDeviceCreateInfo device{VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO};
   device.queueCreateInfoCount = 1;
   device.pQueueCreateInfos = &queue;
+  VkPhysicalDeviceFeatures features{};
+  features.shaderFloat64 = VK_TRUE;
+  device.pEnabledFeatures = &features;
   Check(vkCreateDevice(c.physical, &device, nullptr, &c.device),
         "billboard proof device failed");
   vkGetDeviceQueue(c.device, c.queueFamily, 0, &c.queue);
@@ -468,6 +480,16 @@ void FillMetrics(const Context &c, NcSphericalBillboardProofMetrics &m) {
                           m.frameNormalBytes + m.frameVisibilityBytes +
                           m.frameCompactedIndexBytes + m.frameIndirectBytes +
                           m.frameCounterBytes + m.temporaryScratchBytes;
+  m.physicalGeneration = c.physicalGeneration;
+  m.terrainDataGeneration = c.terrainDataGeneration;
+  m.preparedPhysicalSamples = c.preparedPhysicalSamples;
+  m.physicalPreparationDispatchCount = c.physicalPreparationDispatches;
+  m.physicalReuseCount = c.physicalReuseCount;
+  m.staleGenerationRejections = c.staleGenerationRejections;
+  m.nonFinitePhysicalOutputs = c.nonFinitePhysicalOutputs;
+  m.immutablePhysicalBytes = c.physicalPositions.allocationBytes +
+                             c.physicalNormals.allocationBytes;
+  m.totalAllocatedBytes += m.immutablePhysicalBytes;
   m.setupMilliseconds = c.setupMilliseconds;
   m.topologyUploadMilliseconds = c.uploadMilliseconds;
 }
@@ -491,6 +513,8 @@ Context::~Context() {
   DestroyBuffer(device, indices);
   DestroyBuffer(device, neighborOffsets);
   DestroyBuffer(device, neighbors);
+  DestroyBuffer(device, physicalPositions);
+  DestroyBuffer(device, physicalNormals);
   if (graphicsPipeline)
     vkDestroyPipeline(device, graphicsPipeline, nullptr);
   if (compactPipeline)
@@ -608,6 +632,10 @@ NcResult InitializeSphericalBillboardGpuProof(
                      VK_BUFFER_USAGE_INDEX_BUFFER_BIT);
     CreateBuffer(*c, c->neighborOffsets, 4, VK_BUFFER_USAGE_TRANSFER_DST_BIT);
     CreateBuffer(*c, c->neighbors, 4, VK_BUFFER_USAGE_TRANSFER_DST_BIT);
+    CreateBuffer(*c, c->physicalPositions, 32,
+                 VK_BUFFER_USAGE_TRANSFER_DST_BIT);
+    CreateBuffer(*c, c->physicalNormals, 16,
+                 VK_BUFFER_USAGE_TRANSFER_DST_BIT);
     for (uint32_t i = 0; i < c->frameCount; i++) {
       auto &f = c->frames[i];
       f.descriptor = sets[i];
@@ -754,6 +782,9 @@ NcResult UploadSphericalBillboardGpuProofTopology(
                             c.neighborOffsets.bytes + c.neighbors.bytes;
     c.topologyBytesUploaded += c.activeTopologyBytes;
     c.topologyUploads++;
+    c.physicalGeneration = 0;
+    c.terrainDataGeneration = 0;
+    c.preparedPhysicalSamples = 0;
     c.readiness = 1;
     c.uploadMilliseconds = std::chrono::duration<double, std::milli>(
                                std::chrono::steady_clock::now() - started)
@@ -761,6 +792,80 @@ NcResult UploadSphericalBillboardGpuProofTopology(
     FillMetrics(c, *metrics);
     return c.validationErrors ? NC_FAILURE : NC_SUCCESS;
   } catch (...) {
+    return NC_FAILURE;
+  }
+}
+
+NcResult PublishSphericalBillboardPhysicalSurface(
+    const NcSphericalBillboardPhysicalSurface *surface,
+    NcSphericalBillboardProofMetrics *metrics) {
+  if (!surface || surface->size != sizeof(*surface) || surface->version != 1 ||
+      !surface->vertices || !surface->vertexCount ||
+      !surface->physicalGeneration || !surface->terrainDataGeneration ||
+      !surface->expectedTopologyHash || !metrics ||
+      metrics->size != sizeof(*metrics))
+    return NC_INVALID_ARGUMENT;
+  std::lock_guard lock(Guard);
+  if (!Current) return NC_INVALID_ARGUMENT;
+  auto &c = *Current;
+  if (!(c.readiness & 1) || surface->expectedTopologyHash != c.topologyHash ||
+      surface->vertexCount != c.baseVertices) {
+    c.staleGenerationRejections++;
+    FillMetrics(c, *metrics);
+    return NC_INVALID_ARGUMENT;
+  }
+  if (c.physicalGeneration == surface->physicalGeneration &&
+      c.terrainDataGeneration == surface->terrainDataGeneration &&
+      c.preparedPhysicalSamples == surface->vertexCount) {
+    c.physicalReuseCount += surface->vertexCount;
+    FillMetrics(c, *metrics);
+    return NC_SUCCESS;
+  }
+  for (uint32_t i = 0; i < surface->vertexCount; i++) {
+    const auto &v = surface->vertices[i];
+    if (!std::isfinite(v.bodyFixed[0]) || !std::isfinite(v.bodyFixed[1]) ||
+        !std::isfinite(v.bodyFixed[2]) || !std::isfinite(v.bodyFixed[3]) ||
+        !std::isfinite(v.normal[0]) || !std::isfinite(v.normal[1]) ||
+        !std::isfinite(v.normal[2]) || v.normal[3] != 1.0f) {
+      c.nonFinitePhysicalOutputs++;
+      FillMetrics(c, *metrics);
+      return NC_INVALID_ARGUMENT;
+    }
+  }
+  Buffer nextPhysicalPositions{};
+  Buffer nextPhysicalNormals{};
+  try {
+    CreateBuffer(c, nextPhysicalPositions,
+                 VkDeviceSize(surface->vertexCount) * 32,
+                 VK_BUFFER_USAGE_TRANSFER_DST_BIT);
+    CreateBuffer(c, nextPhysicalNormals,
+                 VkDeviceSize(surface->vertexCount) * 16,
+                 VK_BUFFER_USAGE_TRANSFER_DST_BIT);
+    auto *positions = static_cast<double *>(nextPhysicalPositions.mapped);
+    auto *normals = static_cast<float *>(nextPhysicalNormals.mapped);
+    for (uint32_t i = 0; i < surface->vertexCount; i++) {
+      std::memcpy(positions + i * 4, surface->vertices[i].bodyFixed, 32);
+      std::memcpy(normals + i * 4, surface->vertices[i].normal, 16);
+    }
+    Check(vkDeviceWaitIdle(c.device),
+          "billboard physical publication wait failed");
+    DestroyBuffer(c.device, c.physicalPositions);
+    DestroyBuffer(c.device, c.physicalNormals);
+    c.physicalPositions = nextPhysicalPositions;
+    c.physicalNormals = nextPhysicalNormals;
+    nextPhysicalPositions = {};
+    nextPhysicalNormals = {};
+    UpdateDescriptors(c);
+    c.physicalGeneration = surface->physicalGeneration;
+    c.terrainDataGeneration = surface->terrainDataGeneration;
+    c.preparedPhysicalSamples = surface->vertexCount;
+    c.physicalPreparationDispatches++;
+    c.readiness = 3;
+    FillMetrics(c, *metrics);
+    return c.validationErrors ? NC_FAILURE : NC_SUCCESS;
+  } catch (...) {
+    DestroyBuffer(c.device, nextPhysicalPositions);
+    DestroyBuffer(c.device, nextPhysicalNormals);
     return NC_FAILURE;
   }
 }
@@ -782,6 +887,12 @@ RunSphericalBillboardGpuProofFrame(const NcSphericalBillboardProofFrame *frame,
   if (!Current)
     return NC_INVALID_ARGUMENT;
   auto &c = *Current;
+  if ((frame->reserved0 && (frame->reserved0 != c.physicalGeneration ||
+                            frame->reserved1 != c.terrainDataGeneration))) {
+    c.staleGenerationRejections++;
+    FillMetrics(c, *metrics);
+    return NC_INVALID_ARGUMENT;
+  }
   if (!(c.readiness & 1) || frame->expectedTopologyHash != c.topologyHash ||
       frame->workVertexCount > c.maximumVertices ||
       frame->workTriangleCount > c.maximumTriangles ||
@@ -811,7 +922,7 @@ RunSphericalBillboardGpuProofFrame(const NcSphericalBillboardProofFrame *frame,
                      c.activeLevel,
                      frame->frameIndex,
                      c.maximumTriangles * 3,
-                     0};
+                     c.physicalGeneration};
     VkCommandBufferBeginInfo begin{VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO};
     begin.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
     Check(vkBeginCommandBuffer(f.command, &begin),
@@ -953,7 +1064,7 @@ RunSphericalBillboardGpuProofFrame(const NcSphericalBillboardProofFrame *frame,
       checksum = 0;
     c.frameWrites++;
     c.cullingDispatches++;
-    c.readiness = 7;
+    c.readiness = c.physicalGeneration ? 63u : 7u;
     FillMetrics(c, *metrics);
     metrics->workVertexCount = frame->workVertexCount;
     metrics->workTriangleCount = frame->workTriangleCount;

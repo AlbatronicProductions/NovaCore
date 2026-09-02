@@ -3,5 +3,6 @@
 
 NcResult InitializeSphericalBillboardGpuProof(const NcSphericalBillboardProofAssets* assets,NcSphericalBillboardProofMetrics* metrics);
 NcResult UploadSphericalBillboardGpuProofTopology(const NcSphericalBillboardProofTopology* topology,NcSphericalBillboardProofMetrics* metrics);
+NcResult PublishSphericalBillboardPhysicalSurface(const NcSphericalBillboardPhysicalSurface* surface,NcSphericalBillboardProofMetrics* metrics);
 NcResult RunSphericalBillboardGpuProofFrame(const NcSphericalBillboardProofFrame* frame,NcSphericalBillboardProofMetrics* metrics);
 NcResult ShutdownSphericalBillboardGpuProof();

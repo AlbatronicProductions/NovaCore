@@ -156,16 +156,18 @@ public sealed unsafe class PlanetarySphericalBillboardGpuProofSession : IDisposa
     }
 
     public NativeSphericalBillboardProofMetrics RunFrame(PlanetarySphericalBillboardGpuRuntimeDescription description,
-        uint frameIndex, uint? workVertices = null, uint? workTriangles = null, bool render = true, double cameraDistanceRadii = 2.5)
+        uint frameIndex, uint? workVertices = null, uint? workTriangles = null, bool render = true, double cameraDistanceRadii = 2.5,
+        uint physicalGeneration = 0, uint terrainDataGeneration = 0, double bodyRadiusMetres = 6_371_008.8)
     {
         ObjectDisposedException.ThrowIf(_disposed, this);
-        const double radius = 6_371_008.8;
+        var radius = bodyRadiusMetres;
         var frame = new NativeSphericalBillboardProofFrame
         {
             Size = (uint)Marshal.SizeOf<NativeSphericalBillboardProofFrame>(), Version = 1, FrameIndex = frameIndex,
             RenderEnabled = render ? 1u : 0u,
             WorkVertexCount = workVertices ?? (uint)description.Topology.Vertices.Count,
             WorkTriangleCount = workTriangles ?? (uint)(description.Topology.Indices.Count / 3),
+            Reserved0 = physicalGeneration, Reserved1 = terrainDataGeneration,
             ExpectedTopologyHash = description.Topology.TopologyHash, BodyRadiusMetres = radius,
             CameraDistanceMetres = radius * cameraDistanceRadii, VerticalTanHalfFov = (float)Math.Tan(Math.PI / 6d),
             AspectRatio = 1f,
@@ -174,6 +176,31 @@ public sealed unsafe class PlanetarySphericalBillboardGpuProofSession : IDisposa
         if (NativeRuntime.RunSphericalBillboardGpuProofFrame(&frame, &metrics) != NativeResult.Success)
             throw new InvalidOperationException($"P2S3 frame failed for {description.Level}: validation={metrics.ValidationErrors}; invalid={metrics.InvalidCommands}; overflow={metrics.OverflowCount}; visible={metrics.VisibleTriangles}.");
         return metrics;
+    }
+
+    public NativeSphericalBillboardProofMetrics PublishPhysicalSurface(
+        PlanetarySphericalBillboardGpuRuntimeDescription description,
+        ReadOnlySpan<NativeSphericalBillboardPhysicalVertex> vertices,
+        uint physicalGeneration, uint terrainDataGeneration)
+    {
+        ObjectDisposedException.ThrowIf(_disposed, this);
+        if (vertices.Length != description.Topology.Vertices.Count)
+            throw new ArgumentException("Physical publication must match the active topology vertex count.", nameof(vertices));
+        var values = vertices.ToArray();
+        fixed (NativeSphericalBillboardPhysicalVertex* pointer = values)
+        {
+            var surface = new NativeSphericalBillboardPhysicalSurface
+            {
+                Size = (uint)Marshal.SizeOf<NativeSphericalBillboardPhysicalSurface>(), Version = 1,
+                VertexCount = (uint)values.Length, PhysicalGeneration = physicalGeneration,
+                TerrainDataGeneration = terrainDataGeneration,
+                ExpectedTopologyHash = description.Topology.TopologyHash, Vertices = pointer,
+            };
+            var metrics = EmptyMetrics();
+            if (NativeRuntime.PublishSphericalBillboardPhysicalSurface(&surface, &metrics) != NativeResult.Success)
+                throw new InvalidOperationException("P2S4 canonical physical publication failed.");
+            return metrics;
+        }
     }
 
     public NativeResult TryRunWithoutTopology()
@@ -199,6 +226,24 @@ public sealed unsafe class PlanetarySphericalBillboardGpuProofSession : IDisposa
             VerticalTanHalfFov = (float)Math.Tan(Math.PI / 6d), AspectRatio = 1,
         };
         var metrics = EmptyMetrics(); return NativeRuntime.RunSphericalBillboardGpuProofFrame(&frame, &metrics);
+    }
+
+    public NativeResult TryRunWithStalePhysicalGeneration(
+        PlanetarySphericalBillboardGpuRuntimeDescription description,
+        uint physicalGeneration, uint terrainDataGeneration)
+    {
+        var frame = new NativeSphericalBillboardProofFrame
+        {
+            Size = (uint)Marshal.SizeOf<NativeSphericalBillboardProofFrame>(), Version = 1,
+            WorkVertexCount = (uint)description.Topology.Vertices.Count,
+            WorkTriangleCount = (uint)(description.Topology.Indices.Count / 3),
+            ExpectedTopologyHash = description.Topology.TopologyHash,
+            BodyRadiusMetres = 6_378_137d, CameraDistanceMetres = 15_945_342.5,
+            VerticalTanHalfFov = (float)Math.Tan(Math.PI / 6d), AspectRatio = 1,
+            Reserved0 = physicalGeneration ^ 1u, Reserved1 = terrainDataGeneration,
+        };
+        var metrics = EmptyMetrics();
+        return NativeRuntime.RunSphericalBillboardGpuProofFrame(&frame, &metrics);
     }
 
     public void Dispose()

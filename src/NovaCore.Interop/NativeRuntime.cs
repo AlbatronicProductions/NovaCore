@@ -212,6 +212,22 @@ public unsafe struct NativeSphericalBillboardProofTopology
 }
 
 [StructLayout(LayoutKind.Sequential)]
+public struct NativeSphericalBillboardPhysicalVertex
+{
+    public double BodyX,BodyY,BodyZ,PhysicalHeightMetres;
+    public float NormalX,NormalY,NormalZ,NormalValidity;
+}
+
+[StructLayout(LayoutKind.Sequential)]
+public unsafe struct NativeSphericalBillboardPhysicalSurface
+{
+    public uint Size,Version,VertexCount,PhysicalGeneration;
+    public uint TerrainDataGeneration,Reserved0,Reserved1,Reserved2;
+    public ulong ExpectedTopologyHash;
+    public NativeSphericalBillboardPhysicalVertex* Vertices;
+}
+
+[StructLayout(LayoutKind.Sequential)]
 public struct NativeSphericalBillboardProofFrame
 {
     public uint Size,Version,FrameIndex,RenderEnabled;
@@ -239,6 +255,9 @@ public struct NativeSphericalBillboardProofMetrics
     public double SetupMilliseconds,TopologyUploadMilliseconds,CpuFrameMilliseconds;
     public double PreparationMilliseconds,NormalMilliseconds,CullingMilliseconds,CompactionMilliseconds;
     public double DrawMilliseconds,GpuTotalMilliseconds;
+    public uint PhysicalGeneration,TerrainDataGeneration,PreparedPhysicalSamples,PhysicalPreparationDispatchCount;
+    public uint PhysicalReuseCount,StaleGenerationRejections,NonFinitePhysicalOutputs,ReservedPhysical;
+    public ulong ImmutablePhysicalBytes;
 }
 
 [StructLayout(LayoutKind.Sequential)]
@@ -294,6 +313,9 @@ public static partial class NativeRuntime
 
     [LibraryImport("NovaCore.Native", EntryPoint = "nc_upload_spherical_billboard_gpu_proof_topology")]
     public static unsafe partial NativeResult UploadSphericalBillboardGpuProofTopology(NativeSphericalBillboardProofTopology* topology, NativeSphericalBillboardProofMetrics* metrics);
+
+    [LibraryImport("NovaCore.Native", EntryPoint = "nc_publish_spherical_billboard_physical_surface")]
+    public static unsafe partial NativeResult PublishSphericalBillboardPhysicalSurface(NativeSphericalBillboardPhysicalSurface* surface, NativeSphericalBillboardProofMetrics* metrics);
 
     [LibraryImport("NovaCore.Native", EntryPoint = "nc_run_spherical_billboard_gpu_proof_frame")]
     public static unsafe partial NativeResult RunSphericalBillboardGpuProofFrame(NativeSphericalBillboardProofFrame* frame, NativeSphericalBillboardProofMetrics* metrics);

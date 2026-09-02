@@ -2397,6 +2397,7 @@ extern "C" NC_API NcResult __cdecl nc_prepare_planetary_mesh(const NcPlanetaryHe
 extern "C" NC_API NcResult __cdecl nc_shutdown_planetary_mesh_preparation(){return ShutdownPlanetaryMeshPreparation();}
 extern "C" NC_API NcResult __cdecl nc_initialize_spherical_billboard_gpu_proof(const NcSphericalBillboardProofAssets* assets,NcSphericalBillboardProofMetrics* metrics){return InitializeSphericalBillboardGpuProof(assets,metrics);}
 extern "C" NC_API NcResult __cdecl nc_upload_spherical_billboard_gpu_proof_topology(const NcSphericalBillboardProofTopology* topology,NcSphericalBillboardProofMetrics* metrics){return UploadSphericalBillboardGpuProofTopology(topology,metrics);}
+extern "C" NC_API NcResult __cdecl nc_publish_spherical_billboard_physical_surface(const NcSphericalBillboardPhysicalSurface* surface,NcSphericalBillboardProofMetrics* metrics){return PublishSphericalBillboardPhysicalSurface(surface,metrics);}
 extern "C" NC_API NcResult __cdecl nc_run_spherical_billboard_gpu_proof_frame(const NcSphericalBillboardProofFrame* frame,NcSphericalBillboardProofMetrics* metrics){return RunSphericalBillboardGpuProofFrame(frame,metrics);}
 extern "C" NC_API NcResult __cdecl nc_shutdown_spherical_billboard_gpu_proof(){return ShutdownSphericalBillboardGpuProof();}
 extern "C" NC_API NcResult __cdecl nc_run_renderer(NcFrameSubmission *s, NcHostCallback cb, void *data) { return RunRenderer(s,cb,data,nullptr); }

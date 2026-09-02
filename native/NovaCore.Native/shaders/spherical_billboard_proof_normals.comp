@@ -4,6 +4,7 @@ layout(set=0,binding=0,std430) readonly buffer LocalVertices { vec4 values[]; } 
 layout(set=0,binding=2,std430) readonly buffer NeighborOffsets { uint values[]; } offsets;
 layout(set=0,binding=3,std430) readonly buffer Neighbors { uint values[]; } neighbors;
 layout(set=0,binding=5,std430) writeonly buffer PreparedNormals { vec4 values[]; } normals;
+layout(set=0,binding=11,std430) readonly buffer PhysicalNormals { vec4 values[]; } physicalNormals;
 layout(push_constant) uniform Constants {
   uint baseVertexCount; uint baseTriangleCount; uint workVertexCount; uint workTriangleCount;
   float bodyRadius; float cameraDistance; float tanHalfFov; float aspect;
@@ -12,6 +13,7 @@ layout(push_constant) uniform Constants {
 void main(){
   uint id=gl_GlobalInvocationID.x; if(id>=pc.workVertexCount)return;
   uint local=id%pc.baseVertexCount; uint begin=offsets.values[local]; uint end=offsets.values[local+1u];
+  if(pc.reserved!=0u){normals.values[id]=physicalNormals.values[local];return;}
   vec3 center=normalize(localVertices.values[local].xyz); vec3 curvature=vec3(0.0);
   for(uint i=begin;i<end;i++) curvature+=center-normalize(localVertices.values[uint(neighbors.values[i])].xyz);
   vec3 normal=dot(curvature,curvature)>1e-18?normalize(curvature):center;
