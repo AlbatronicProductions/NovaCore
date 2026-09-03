@@ -29,7 +29,7 @@ NovaCore can already:
 - Start from the current real-world time and accelerate simulation time from 0.1× to 7,776,000×.
 - Render planets and moons across astronomical distances.
 - Approach planetary surfaces while maintaining numerical precision.
-- Transition between global planetary rendering and near-surface terrain rendering.
+- Traverse from orbit to the near surface through one production spherical-billboard terrain runtime.
 - Stream real NASA/NOAA Earth imagery and elevation data.
 - Retain body-fixed Earth geography through `SurfaceAnchor`, terrain-aware camera, and anchored surface-object foundations.
 - Place and reevaluate a deterministic Florida launch-site proof on the physical Earth terrain authority.
@@ -83,16 +83,20 @@ NovaCore currently combines a C# simulation core with a native Vulkan renderer, 
 ### Rendering and presentation
 
 - **Native Vulkan renderer** with double-precision camera-relative subtraction before GPU float transport.
-- **GPU-driven planets** with a shallow relaxed cube-sphere for orbital/global presentation and a persistent, body-fixed spherical-billboard surface for the near field.
-- **Distant/detail handoff** sharing authoritative physical center, radius, material identity, and Solar-light direction.
+- **Production spherical-billboard Earth** with 18 immutable topology levels spanning orbital to near-surface representation.
+- **One canonical physical surface** — body-fixed `H(bodyDirection)` defines Earth height independently of camera, topology density, pupil placement, and GPU residency.
+- **Moving snapped pupil** — a camera-facing spherical representation retains exact lattice identity, reuses samples across movement, and changes scale through projected-error selection with hysteresis.
+- **Transactional GPU generations** — one current and at most one incoming generation prepare asynchronously; fence-confirmed atomic publication preserves exactly one visible Earth owner.
+- **Conservative GPU visibility** — curved-patch planet occlusion and screen/frustum rejection feed compacted indexed-indirect work without removing required base coverage.
+- **Bounded near-field refinement** — TCS/TES refinement is limited to 50 metres around the camera while the production base remains depth-owning outside that range.
+- **FP64 physical/world authority** with camera-relative GPU presentation for stable rendering across planetary and astronomical scales.
 - **Correct body-fixed handoff conventions** across detailed, transitional, and distant paths, including a dedicated outward-winding convention for the shared distant sphere.
 - **FP16 HDR scene color** with fixed exposure and ACES-style tone mapping.
 - **Procedural deep-space background** and dedicated stellar-Sun presentation with controlled HDR corona/glow.
 - **Evaluated-Sun lighting** for coherent planetary day/night terminators.
 - **Generic procedural planet materials** with distinct presentations for Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn, Uranus, and Neptune.
 - **Generic ring presentation**, currently demonstrated by Saturn.
-- **NASA/NOAA terrain-v5 Earth surface authority** using canonical east-positive, right-handed, patch-aligned relaxed cube-sphere `.nccube` records and a checked topology-neutral CPU elevation oracle.
-- **Persistent global and regional terrain residency** using the `earth-surface-v5` L0-L2 hierarchy, the USGS-derived `earth-florida-m12` L8-L11 regional refinement, coherent parent/child ownership, and persistent production spherical-refinement tiers.
+- **NASA/NOAA Earth data pipeline** using canonical east-positive, right-handed `.nccube` records, a checked topology-neutral elevation oracle, and optional USGS-derived Florida refinement. These packages improve sampling and material fidelity; they do not create a second physical surface.
 - **Surface-relative foundations** with terrain-aware camera clearance, immutable body-fixed `SurfaceAnchor` identity, anchored surface objects, and a deterministic Florida launch-site proof.
 - **Solar Map and Free 3D camera modes** with deterministic home framing and body focus.
 - **Authoritative orbit visualization** sourced from the same `CelestialSystemEvaluator` used for body motion.
@@ -108,7 +112,7 @@ NovaCore treats correctness tooling as part of the engine rather than as present
 - Camera/reference-frame precision tests.
 - Native, managed, Solar-scene, Earth-LOD, resize, and triangle regression coverage.
 
-The recovered Desktop baseline has a 1,025-sample far→near→far continuous-visibility regression spanning 10 m to 100,000 km. Accepted Vulkan runs at 50,000, 30,000, 20,000, 10,000, 3,000, and 700 km retained the six global terrain roots and reported zero validation errors. Focused regressions also verify mixed-LOD geographic/terrain authority and prove that camera drag cannot mutate Earth body orientation or body-fixed geography.
+The banked M12D-P2S5C3 baseline has completed automated and physical orbit-to-near-surface traversal at a native 3440×1440 client extent. Focused regressions cover all 18 topology levels, moving-pupil identity and reuse, atomic publication, one-owner coverage, body-fixed height and normal parity, conservative horizon coverage beyond the TES range, and Vulkan validation. Camera motion cannot mutate Earth orientation, body-fixed geography, or canonical physical height.
 
 The CPU reference/parity path is a development and regression oracle; the intended production planetary path remains GPU-driven.
 
@@ -171,36 +175,65 @@ dotnet run --project samples/NovaCore.Triangle/NovaCore.Triangle.csproj -c Debug
 
 ### Launch NovaCore
 
-For a point-and-click development workflow, build the lightweight Windows launcher once:
+For a point-and-click development workflow, build the lightweight Windows launcher in the configuration you intend to run:
 
 ```powershell
-dotnet build tools/NovaCore.Launcher/NovaCore.Launcher.csproj -c Debug
+dotnet build tools/NovaCore.Launcher/NovaCore.Launcher.csproj -c Release
 ```
 
-Then double-click `tools/NovaCore.Launcher/bin/Debug/net10.0-windows/NovaCore.Launcher.exe`.
+Then double-click `tools/NovaCore.Launcher/bin/Release/net10.0-windows/NovaCore.Launcher.exe`.
 The launcher provides Solar overview, Earth orbital, Earth 700 km, Earth —
 Fullscreen Native, Florida launch-site, and one screen-space subdivision
 diagnostic workflow. Window mode, native or explicit client resolution, and
 normal/performance/Vulkan diagnostics are selected independently. The launcher
-shows the resolved client dimensions and starts the existing NovaCore sample;
-no shell environment setup is required.
+shows the resolved client dimensions and starts the matching Triangle runtime:
+a Release launcher uses Release and a Debug launcher uses Debug. No shell
+environment setup is required.
 
 Current Solar-scene controls include mouse drag for free orbiting, mouse wheel zoom, number-key body focus, `.` / `,` simulation-rate changes, Space pause/resume, and `R` to return to the deterministic Solar Map home view.
 
 ## Current planetary baseline
 
-The banked Desktop baseline is M12B on the accepted 11B-7H1 GPU terrain foundation. The active architecture migration requires one canonical physical-height authority across its global/fallback and anchored/refined representations:
+The banked baseline is **M12D-P2S5C3** at tag
+`m12d-p2s5c3-production-billboard-stabilization`. Earth production follows one
+coherent responsibility chain:
 
-- canonical right-handed body-fixed geography: +Y north, +X at longitude zero, and positive/east longitude toward -Z;
-- deterministic `earth-surface-v5` distribution and `earth-florida-m12` regional refinement addressed by `body / terrain-version / face / level / x / y`;
-- conservative opaque global coverage that remains authoritative until a complete refinement transaction is ready, so refinement cannot leave an unowned visible region;
-- one canonical geographic/physical-height result for shared geography, even when representations use different sampling density or presentation;
-- coherent global/refinement material addressing, including mixed-payload and cross-face fragments resolved from the represented body-fixed geography;
-- outward production topology with Vulkan front-face state matched to the validated projected winding;
-- explicit host-to-compute publication synchronization and runtime terrain-version identity instead of stale hard-coded assumptions;
-- FP64 camera-relative reconstruction, body-fixed surface anchors, and anchored-object evaluation downstream of unchanged celestial authority.
+```text
+canonical body-fixed physical terrain
+→ immutable production topology level
+→ retained and snapped pupil representation
+→ physical position and normal preparation
+→ conservative curved-patch planet occlusion
+→ conservative screen visibility
+→ compacted GPU workload
+→ bounded TCS/TES refinement
+→ indexed indirect raster
+→ fence-complete atomic publication
+```
 
-The current renderer is a stable banked foundation, not the final visual target. The rejected M12C runtime bridge and procedural-carrier experiments are documented in the [current engineering state](docs/NOVACORE_CURRENT_STATE.md); deeper continuous refinement, coherent prepared physical data, richer surface materials, and gameplay-scale environmental detail remain active development.
+Topology density controls representation, not physical truth. The pupil may
+change level or snap to a new lattice origin without changing
+`H(bodyDirection)` or the corresponding FP64 body-fixed point. The 50 m
+contract bounds near-camera TES refinement only; the base spherical-billboard
+geometry continues to own planetary depth outside that range.
+
+Implemented and stable today are the 18-level topology library, projected-error
+selection and hysteresis, moving-pupil identity and reuse, asynchronous current
+plus one-incoming GPU lifecycle, conservative visibility and compaction,
+bounded TES, and exactly-one-owner publication.
+
+This is a production architecture milestone, not a claim of finished visuals.
+Terrain materials and presentation quality, atmosphere/cloud/environment
+rebuilding, finer pupil and re-triangulation morph quality, spacecraft and
+surface gameplay, and later renderer retirement or promotion work where still
+applicable remain in development.
+
+One known presentation limitation is documented rather than hidden: a rare
+full pupil rebase can change the coarse factor-1 triangulated approximation by
+up to approximately 2.595 m even though canonical `H(bodyDirection)` and FP64
+body-fixed positions remain invariant. The measured adjacent L14→L15
+representation difference is approximately 2.8 mm. These are presentation/LOD
+continuity effects, not moving physical terrain or loss of depth ownership.
 
 ## Accuracy and current scope
 
@@ -208,13 +241,13 @@ The current renderer is a stable banked foundation, not the final visual target.
 
 The new high-precision Moon orientation improves pole, prime-meridian, and physical-libration presentation; it does not improve lunar translation. Precision translunar targeting, lunar orbit insertion, close lunar navigation, or other requirements that exceed the compact translational model's measured accuracy will receive a dedicated higher-fidelity ephemeris layer when those requirements exist.
 
-NovaCore now has a production-owned terrain architecture, but its terrain-v5 global payload is still shallow. Production atmosphere, clouds, water/coastlines, physical oceans, weather, complete spacecraft flight gameplay, colonies, maneuver planning, and SOI/patched-conic navigation are not yet implemented.
+NovaCore now has a production spherical-billboard terrain architecture, but global source fidelity remains shallow outside installed regional data. Production atmosphere, clouds, water/coastlines, physical oceans, weather, complete spacecraft flight gameplay, colonies, maneuver planning, and SOI/patched-conic navigation are not yet implemented.
 
 ## Roadmap
 
 **Next planetary frontier**
 
-Production-quality continuous terrain and seamless refinement → close-ground material/detail quality → atmosphere/cloud reconstruction → water and coastline systems → GPU-driven local environmental detail → surface, launch, and landing gameplay.
+Finer pupil/re-triangulation continuity → close-ground material/detail quality → atmosphere/cloud reconstruction → water and coastline systems → GPU-driven local environmental detail → surface, launch, and landing gameplay.
 
 **Future flight and navigation**
 

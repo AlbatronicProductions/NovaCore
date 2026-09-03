@@ -21,22 +21,23 @@ terrain narrative here.
 
 ## Current planetary checkpoint
 
-The M12C closeout candidate extends the banked M12B/11B-7H1 GPU terrain baseline.
-Candidate D and the canonical fixed-pose benchmark are retained.
-M12C-4B's declarative frequency/representability invariants survive, but its
-runtime guard/edge bridge between unrelated height authorities is rejected.
-The fixed-axis generation-3 carrier family is also rejected as the long-term
-near-field primitive.
+Start from the banked and physically accepted M12D-P2S5C3 baseline:
 
-The Phase 1 automated candidate now makes global/fallback and anchored/refined
-geometry consume one canonical oracle-plus-regional physical-height authority;
-terrain-v5 remains presentation data only. Complete transactional coverage and
-stencil global fill are unchanged. Manual physical replay accepted the primary
-Phase 1B moving-reference-frame hitch correction. The rejected runtime
-guard/edge bridge, material-cost profiling bypasses, and obsolete CPU/global-
-selector parity oracle are removed. Canonical production GPU p95 remains about
-19.94-20.00 ms at 3440x1440, so the stable 60 FPS target remains open. See the
-primary current-state document for the exact validation and hash decisions.
+- main commit `e9b35e4c9f475adffb38f22ac705835d8d5f4181`;
+- tag `m12d-p2s5c3-production-billboard-stabilization`;
+- commit title `NovaCore M12D-P2S5C3: stabilize production billboard coverage and terrain continuity`.
+
+Earth's production owner is the 18-level spherical-billboard runtime. It uses
+projected-error selection and hysteresis, an exact-lattice moving/snapped pupil,
+canonical `H(bodyDirection)` physical preparation, conservative curved-patch
+planet occlusion, conservative screen visibility, GPU compaction, bounded 50 m
+TCS/TES refinement, indexed indirect draw, and fence-confirmed atomic
+current/incoming generation publication.
+
+The orbit-to-near-surface native 3440×1440 trajectory is accepted. The recovered
+missing-Earth band and device-loss workload did not reproduce, and production
+ownership remained exactly one Earth owner with zero overlap or stale
+generations.
 
 ## Physical and presentation boundary
 
@@ -46,7 +47,28 @@ primary current-state document for the exact validation and hash decisions.
 - No material, fallback, LOD, cache, or renderer path may become a second
   physical authority.
 - A complete outgoing representation remains authoritative until the incoming
-  prepared geometry and draw payload are complete and GPU-ready.
+  prepared geometry and draw payload are complete, GPU-ready, and
+  fence-confirmed.
+- Topology density and pupil triangulation describe presentation, not physical
+  truth. `H(bodyDirection)` and the FP64 body-fixed point remain authoritative.
+- A rare full pupil rebase may change the coarse factor-1 triangulated
+  approximation by up to approximately 2.595 m; the adjacent L14→L15 difference
+  is approximately 2.8 mm. Treat these as deferred presentation/morph behavior,
+  not moving physical terrain or lost ownership.
+
+## Next authorized work boundary
+
+- Preserve the banked production spherical-billboard owner and C3
+  coverage/culling architecture.
+- Do not regenerate `.nctop2` assets without explicit authorization.
+- Do not restore the radial Eye, adaptive CPU final-raster grids, dynamic
+  patch/stitch ownership, or any other retired terrain system.
+- Do not increase the 50 m TES range, weaken conservative culling, or reopen C3
+  coverage based on visual impression alone; require measured causal evidence.
+- Keep terrain presentation/material quality and finer pupil/re-triangulation
+  morphing distinct from physical terrain and depth ownership.
+- Atmosphere, clouds, environmental rebuilding, and spacecraft/surface gameplay
+  remain separate future work.
 
 ## KSA reference workflow
 
@@ -79,7 +101,7 @@ A fixed-pose benchmark pass does not imply player-facing acceptance.
 dotnet build NovaCore.sln -c Debug
 dotnet run --project tests/NovaCore.Graphics.Tests -c Debug
 dotnet run --project tests/NovaCore.Launcher.Tests -c Debug
-dotnet run --project samples/NovaCore.Triangle/NovaCore.Triangle.csproj -c Debug -- --scene=earth --dynamic-traversal --log=validation
+dotnet run --project samples/NovaCore.Triangle/NovaCore.Triangle.csproj -c Debug -- --scene=sol --focus=earth --p2s5c3-traversal --log=validation
 dotnet run --project samples/NovaCore.Triangle/NovaCore.Triangle.csproj -c Debug -- --scene=sol --log=validation
 git diff --check
 git status --short
@@ -89,4 +111,5 @@ Configure and build native code from an x64 Visual Studio developer environment
 using `build/native-ninja`. Resolve production assets with
 `NovaCore.AssetTool`; runtime performs no implicit network acquisition. For
 point-and-click physical acceptance, use **Earth — Fullscreen Native** in the
-launcher.
+launcher. A launcher built in Release starts the Release Triangle runtime; a
+launcher built in Debug starts Debug.

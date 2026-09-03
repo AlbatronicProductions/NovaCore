@@ -1,8 +1,8 @@
 # Planetary rendering
 
-The accepted milestone and current migration decision are summarized in
+The accepted milestone and current work boundary are summarized in
 [NOVACORE_CURRENT_STATE.md](NOVACORE_CURRENT_STATE.md). This document defines
-the detailed planetary-rendering responsibilities and invariants.
+the production planetary-rendering responsibilities and invariants.
 
 ## Authority boundary
 
@@ -12,205 +12,163 @@ in the right-handed convention +Y north, +X at longitude zero, and
 east-positive longitude toward -Z.
 
 Surface-critical values are evaluated in body-relative FP64. Root-relative
-camera subtraction occurs before float transport. A patch render position is
-derived from canonical body-fixed geography and physical height; screen-space
-selection, residency, and representation never change geographic identity.
+camera subtraction occurs before float transport. Screen-space selection,
+topology density, pupil movement, residency, and publication may change the
+representation, but never canonical geographic identity.
 
 ## One physical surface
 
-Every representation of a geographic point must consume one canonical
-geographic/physical-height authority. The canonical composition includes signed
-global elevation, optional regional residual, deterministic accepted physical
-modifier, and the final non-negative clamp. Regional data changes fidelity, not
-ownership or identity.
+Every rendered or queried geographic point consumes the same canonical
+physical-height authority, `H(bodyDirection)`. The composition includes signed
+global elevation, optional regional residual, accepted deterministic physical
+modifiers, and the final non-negative clamp. It owns:
 
-Global/coarse and anchored/refined geometry may evaluate different sample
-densities or prepared levels, but they may not independently produce different
-underlying heights for shared geography. Physical authority owns:
-
-- FP64 geometry and deterministic displacement;
+- FP64 body-fixed geometry and deterministic displacement;
 - physical gradients and normals where physical truth is required;
 - collision, camera clearance, and physical queries;
-- body-fixed identity independent of camera, LOD, cache, and time.
+- identity independent of camera, topology level, pupil, cache, generation,
+  and time.
 
 Material presentation may consume cheaper deterministic derived classification
-and filtering. Candidate D demonstrates that fragments need not reconstruct the
-entire FP64 physical field. No presentation value may feed back into physical
-height or become a second authority.
+and filtering. No presentation value may feed back into height, physical
+normals, collision, or ownership.
 
-## Accepted migration representations
+`earth-surface-v5` and `earth-florida-m12` are distribution and sampling inputs.
+The global package supplies macro material/classification data and the regional
+package improves physical and presentation fidelity where installed. Neither is
+an independent visible terrain owner.
 
-`earth-surface-v5` is complete six-face L0-L2 relaxed cube-sphere coverage. Its
-roots are renderer-lifetime resident and it remains the conservative distant
-and migration fallback.
+## Production spherical-billboard representation
 
-`PlanetaryDynamicAnchoredSurface` selects canonical finer patches from
-projected size and physical error inside a retained camera-centered body-local
-neighborhood. Its identity is
-`body / terrain-version / physical-surface-generation / face / level / x / y`.
-Its API is not restricted to Florida or permanently to near-surface use.
+Earth production uses 18 immutable `.nctop2` topology levels, L0 through L17.
+Each level is a closed outward-wound spherical topology with stable lattice,
+index, adjacency, parent-mapping, and hash identity. Runtime does not regenerate
+or mutate those assets.
 
-Current limits are 6,144 visible/demanded patches, a 12,288-slot managed cache,
-and 16,384 native slots, with
-256 target pixels per patch, maximum level 20, acquisition below 700 km, and
-release above 800 km. The retained 32-64 km neighborhood uses a bounded
-4-32 km recenter threshold. Camera direction affects final GPU visibility,
-not body-fixed residency identity.
+Projected geometric error selects the active level. Hysteresis prevents
+unstable adjacent-level oscillation. A camera-facing pupil resolves an exact
+signed cube-lattice origin, retains its generation below movement thresholds,
+snaps deterministically when required, and reuses matching samples across
+same-level movement and adjacent-level transitions.
 
-This two-representation arrangement is migration architecture, not permission
-for two physical surfaces and not a predetermined permanent renderer split.
-
-## Transactional ownership
-
-Patch state advances through requested, preparing, resident, ready,
-authoritative, cached, retiring, or failed. The previous complete
-representation remains authoritative while the incoming generation prepares.
-Replacement is atomic only after every required patch has complete geometry,
-physical and material data, cache residency, draw payload, synchronization, and
-GPU acknowledgement.
-
-Exactly one representation owns each visible surface pixel. An incomplete
-incoming generation may not suppress its predecessor. Retirement restores
-complete ownership atomically. Skirts, depth bias, overlapping opaque copies,
-material masking, and fallback flat geometry are not substitutes for this
-contract.
-
-The cache and queues are fixed-capacity. Current, incoming, predicted, and
-required-parent entries are protected; deterministic LRU may evict only cold
-unprotected entries. One bounded coordinator uses at most eight workers and
-publishes an immutable generation to the render thread. Selection and settled
-updates perform no file I/O or managed allocation.
-
-## GPU terrain responsibility
-
-The accepted 11B-7H1/M12B foundation keeps CPU work at canonical selection,
-residency, bounded preparation, compact descriptors, and publication. CPU does
-not build final-raster density.
-
-Native Vulkan owns reusable base topology, stitch/index templates, descriptor
-and indirect buffers, screen-space refinement, physical displacement, final
-physical normals, visibility, synchronization, HDR, reversed-Z depth, and tone
-mapping. Descriptor and pipeline construction is not per-frame work.
-
-The target coherent flow is:
+The production chain is:
 
 ```text
-select representation
--> prepare canonical height and modifiers
--> displace
--> generate final normals
--> cull/compact conservatively
--> apply bounded screen refinement
--> draw
+canonical body-fixed physical terrain
+→ immutable production topology level
+→ retained/snapped pupil
+→ physical position and normal preparation
+→ conservative curved-patch planet occlusion
+→ conservative screen/frustum rejection
+→ compacted visible indices
+→ bounded TCS/TES refinement
+→ indexed indirect raster
+→ fence-complete atomic publication
 ```
 
-Preparation results should be published and reused rather than recomputed in
-vertex, TES, and fragment stages without measured justification. Conservative
-triangle compaction and TES-range changes remain measurement-gated; KSA use is
-not sufficient evidence by itself.
+Topology density controls the piecewise-linear approximation presented to the
+GPU. It does not own or redefine `H(bodyDirection)`.
 
-## Frequency continuity decision
+## Visibility, compaction, and TES
 
-Representation-independent physical-frequency metadata is retained. A
-representation must reject or smoothly attenuate frequencies it cannot sample.
-The retained contract includes wavelength-versus-spacing representability, C2
-attenuation, deterministic body-fixed evaluation, CPU/GLSL parity, zero shared
-boundary height and position delta, and bounded normal continuity.
+Pre-TES planet occlusion encloses each displaced curved patch conservatively;
+it does not infer visibility from a planar triangle-facing test. Screen and
+frustum rejection likewise remove only work proven unable to contribute. The
+surviving triangle stream is compacted into an indexed-indirect draw payload.
 
-M12C-4B's runtime bridge is rejected and removed. Edge/guard masks, raster-ABI frequency
-transport, repeated per-edge contextual physical evaluation, and
-`PhysicalFrequencyBoundaryMask` must not be used to reconcile unrelated base
-height authorities. The surviving frequency context is a representation-
-independent representability/C2 contract, not ownership transport.
+TCS/TES provides bounded near-camera raster refinement. The configured physical
+range is 50 m and tessellation factors remain bounded. That range is not a
+terrain or ownership radius: factor-1 base geometry remains present and
+depth-owning everywhere outside the refined footprint, including across the
+local horizon.
 
-## Procedural physical detail
+The P2S5C3 stabilization restored the 50 m contract after an accidental
+50,000 m value and replaced the old planar pre-TES facing assumption with the
+curved conservative bound. It also aligned physical preparation with the
+canonical Earth radius. The accepted traversal no longer reproduces the broad
+missing-Earth band or device-loss workload associated with those defects.
 
-The generation-3 fixed-axis carrier family is not the long-term near-field
-primitive. Phase-warped projected sine carriers retain planet-wide periodic
-identity and can still form ribs and crossing grids.
+## Transactional GPU ownership
 
-Future NovaCore-native detail should use precision-preserving body-fixed local
-domains, deterministic hashed cells, decorrelated local frames, continuous
-neighbor blending, multidirectional and multiscale structure,
-derivative-aware fields, erosion/domain warping, and modifier-specific
-composition. Algorithms, constants, art direction, and data remain original to
-NovaCore.
+The runtime has one current generation and at most one incoming generation.
+The current generation remains the sole Earth owner while bounded asynchronous
+work prepares the replacement. Publication requires complete:
 
-## Material and normal continuity
+- topology and pupil identity;
+- physical positions and normals;
+- conservative cull and compact results;
+- compacted indices and valid indirect command;
+- GPU visibility of all required data;
+- fence completion.
 
-Material address derives from represented body-fixed direction. Canonical
-gutters cross cube-face boundaries with the geometry mapping. Parent/child edges
-coordinate morph and neighbor constraints. Production physical normals derive
-from the accepted final displaced surface with stable body-space sampling; the
-regional BC5 field remains diagnostic.
+Publication is atomic at a frame boundary. Superseded resources retire only
+after their use is safe. An incomplete incoming generation cannot suppress the
+current surface. Production diagnostics require one owner, zero overlap, zero
+unowned frames, and zero stale-generation draws.
 
-Candidate D is retained as an accepted presentation optimization. Its
-workload-equivalent fixed-pose result reduced GPU time from 37.492 ms to
-20.845 ms. It does not own geometry, displacement, physical normals, collision,
-or material/biome authority.
+This current/incoming relationship is a lifecycle for one production
+spherical-billboard renderer. It is not the retired global-versus-anchored patch
+ownership split.
+
+## Physical preparation and normals
+
+CPU code owns FP64 canonical selection and physical evaluation, bounded
+preparation scheduling, residency identity, and immutable publication. Native
+Vulkan owns reusable generation resources, conservative culling and compaction,
+bounded refinement, indirect rasterization, reversed-Z depth, and presentation.
+
+Physical positions derive from canonical direction, canonical Earth radius,
+and `H(bodyDirection)`. Physical normals derive from the same displaced surface.
+Material lookup derives from the same body-fixed direction. The preparation and
+shader paths retain CPU/GPU parity tests for height, gradient, normal, address,
+and generation identity.
+
+## Presentation continuity
+
+Camera translation, retained pupil movement, pupil replacement, and level
+selection cannot change canonical height or the FP64 position of a tracked
+body-fixed sample. The current factor-1 triangulated approximation can still
+change slightly when a new lattice triangulates that physical field.
+
+The accepted measured bounds are approximately 2.595 m for a rare/full pupil
+rebase and approximately 2.8 mm across an adjacent L14→L15 representation
+change. This is deferred representation/morph quality. It is not moving
+physical terrain, duplicate geometry, translucency, or missing depth ownership.
+Future morph work must preserve canonical identity and the one-owner contract.
 
 ## Camera and SurfaceAnchor
 
 The managed camera owns navigation. `SurfaceAnchor` stores immutable body-fixed
-identity and reevaluates through the authoritative body orientation. Near the
-surface, ENU navigation and free look use the anchor; outward navigation hands
-off to ordinary body-center orbit without changing the physical camera path.
-
-The accepted M12C-4A/4A2 behavior is retained. Earth Fullscreen Native uses the
-same production Solar navigation path after preset initialization. Terrain
-architecture must not compensate for camera behavior.
-
-## KSA reference responsibility
-
-For analogous planetary work, inspect the current installed KSA subsystem and
-record the problem, pipeline stage, prepared data, CPU/GPU boundary, cadence,
-reuse, synchronization, continuity rule, and cost bound. Classify the
-NovaCore-native choice as adopt responsibility, adapt responsibility, or
-intentionally differ with measured evidence.
-
-KSA is architectural evidence only. NovaCore does not copy KSA source, shaders,
-assets, constants, or proprietary data and has no runtime dependency on its
-installation.
+identity and reevaluates through authoritative body orientation. Near-surface
+ENU navigation and free look use the anchor; outward navigation hands off to
+ordinary body-center orbit without changing physical terrain. Earth —
+Fullscreen Native shares the Solar production navigation path after preset
+initialization.
 
 ## Diagnostics and acceptance
 
-Focused diagnostics cover canonical geography, winding, height and normal
-parity, owner identity, depth/stencil, publication generation, cache state,
-refinement workload, and CPU/GPU timing. Diagnostic modes must not alter
-production authority when disabled.
+Focused diagnostics cover canonical geography, winding, radius, height and
+normal parity, pupil identity/reuse, owner state, publication generation,
+curved-patch visibility, compacted indices, indirect draw validity, TES range,
+and CPU/GPU timing. Diagnostic modes must not alter production authority when
+disabled.
 
-Two acceptance classes are mandatory:
+P2S5C3 physical acceptance exercised native 3440×1440 orbit-to-near-surface
+descent, all 18 representative levels, low-altitude horizon rotation, sustained
+L17 pupil snaps, repeated L16/L17 reversals, retreat, and re-approach. Manual
+Desktop acceptance remains required for future rendering milestones; a static
+benchmark alone is not player-facing acceptance.
 
-- **Microbenchmark:** deterministic fixed pose, workload fingerprint, CPU/GPU
-  timing, and physical/parity invariants.
-- **Physical player:** orbital approach, representation activation, low
-  altitude, grazing horizon, lateral movement, 360-degree rotation, retreat,
-  re-approach, and relevant 1x/moderate/high permitted warp at 3440x1440.
+## Current development boundary
 
-A microbenchmark pass is not player-facing acceptance. Manual physical Desktop
-testing remains an authoritative rendering milestone gate.
+The production topology/runtime, moving pupil, canonical physical authority,
+GPU lifecycle, culling/coverage, bounded TES, and atomic ownership are stable.
+Terrain presentation and material quality, finer pupil/re-triangulation morph
+quality, atmosphere/cloud/environment rebuilding, richer data coverage,
+spacecraft/surface gameplay, and later specialized-renderer retirement or
+promotion remain in development.
 
-## Phase 1 automated candidate
-
-Global/fallback and anchored/refined geometry now consume the same required
-body-fixed elevation oracle, regional residual, and canonical modifier
-authority. Terrain-v5 remains the complete global owner's macro material and
-classification payload, but it no longer displaces global production geometry
-or reconstructs a separate global physical normal in the fragment stage.
-Normals are prepared from each density's canonical displaced geometry.
-
-The complete global owner remains visible while an anchored generation is
-prepared, resident, indexed, covered, GPU-ready, and acknowledged; the existing
-anchored-first/stencil-zero global fill still provides one raster owner per
-pixel. Automated authority and canonical-workload validation use the intentional
-generation-3 operation-order hash. Manual physical replay accepted the primary
-Phase 1B moving-reference hitch correction. The rejected runtime guard/edge
-bridge and temporary material profiling bypasses are absent from the closeout
-candidate. Stable 60 FPS remains open at approximately 19.94-20.00 ms canonical
-production GPU p95.
-
-Later work replaces fixed-axis procedural synthesis, prepares/reuses immutable
-simulation and orbit presentation, and measures triangle compaction and
-tessellation-range changes. The current shallow global source and regional data
-coverage remain fidelity limits, not reasons to create another physical
-authority.
+Do not restore the retired radial Eye, adaptive CPU final-raster grids, dynamic
+patch/stitch ownership, or a second physical surface. Do not regenerate
+`.nctop2` assets, expand the TES range, or weaken conservative culling without
+explicit authorization and measured evidence.

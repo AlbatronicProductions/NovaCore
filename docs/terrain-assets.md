@@ -38,11 +38,11 @@ with SHA-256
 Its tracked manifest is `assets/terrain/manifests/earth-florida-m12.json`; it
 uses terrain version 5 and the backward-readable NCCUBE2-v3 ABI with a complete
 Florida L8-L11 record hierarchy. A missing regional object is reported
-explicitly while the coherent global terrain-v5 base remains available.
-Runtime residency is bounded to 256 channel-complete records (BC7/R16/BC5/R8,
-89,210,880 bytes). Demand is recomputed only when the authoritative anchored
-generation changes; camera rotation retains the existing geographic
-neighborhood and pending records publish as one complete visible transaction.
+explicitly while the coherent global terrain-v5 sampling source remains
+available. Runtime residency is bounded to 256 channel-complete records
+(BC7/R16/BC5/R8, 89,210,880 bytes). These records feed canonical physical and
+presentation preparation for the production spherical billboard; they do not
+publish a separate visible terrain owner.
 
 ## Developer commands
 

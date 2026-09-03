@@ -1,7 +1,9 @@
 # Planetary data ingestion
 
-NovaCore's current Earth pipeline produces patch-aligned relaxed cube-sphere
-payloads for the terrain-v5 global surface and regional physical refinement.
+NovaCore's current Earth data pipeline produces patch-aligned relaxed
+cube-sphere payloads for global sampling and regional physical refinement. The
+production spherical-billboard renderer consumes these as canonical preparation
+inputs; the payload topology is not the visible Earth geometry owner.
 
 ## Inputs
 
@@ -20,8 +22,9 @@ and current payload identities.
 python tools/earth_data/build_elevation_oracle.py --help
 ```
 
-The oracle is topology-neutral and remains the CPU authority for deterministic
-height queries and camera clearance.
+The oracle is topology-neutral and remains an input to canonical
+`H(bodyDirection)` for deterministic height queries, physical preparation, and
+camera clearance.
 
 ## Build the global terrain payload
 
@@ -36,9 +39,9 @@ albedo, elevation, land classification, and clouds with canonical spherical
 gutters.
 
 The package is a distribution and sampling-density product, not an independent
-physical-surface authority. Global/fallback and anchored/refined geometry must
-derive shared geography from the same canonical physical-height result even
-when they consume different prepared levels or payload channels.
+physical-surface authority. Every production topology level and pupil
+generation derives shared geography from the same canonical physical-height
+result even when it consumes different prepared levels or payload channels.
 
 ## Build the Florida regional payload
 

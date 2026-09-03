@@ -22,8 +22,8 @@ The camera renders from `(0, 0, 0)` and authoritative world state is never shift
 
 When a relative value still benefits from a split, each component encodes as `high = (float)relative` and `low = (float)(relative - (double)high)`. The generic object shader reconstructs `high + low`; specialized planetary compute paths likewise receive body-local or camera-relative doubles split only after root subtraction. The legacy camera-position field stays zero solely to retain the fixed GPU/native ABI; authoritative camera root position never crosses that boundary. At a four-trillion-metre root, tests retain represented separations from one kilometre through approximately one millimetre (the FP64 value is `0.0009765625 m`) with zero observed transport error for the large-root cases, while the single-float control collapses the millimetre delta to zero. The limiting quantization is therefore the upstream FP64 root representation, not premature FP32 astronomical subtraction.
 
-All GPU-visible translation paths were audited in 11B-2A. Distant bodies,
-detailed/global and dynamic anchored terrain, stellar Sun, rings, markers,
+All GPU-visible translation paths were audited in 11B-2A. Distant bodies, the
+production spherical-billboard terrain path, stellar Sun, rings, markers,
 labels, Solar lighting, and orbit lines subtract in managed doubles before
 native float transport. The generic triangle/object path was the sole
 demonstrated violation: it encoded absolute root values separately and
