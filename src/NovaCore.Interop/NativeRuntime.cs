@@ -80,7 +80,22 @@ public struct NativeAnchoredSurfacePresentation
  [StructLayout(LayoutKind.Sequential)] public struct NativeOrbitLineVertex { public float X, Y, Z, LowX, LowY, LowZ; }
 
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct NativeFrameSubmission { public NativeCameraData Camera; public NativeRenderObject* Objects; public uint ObjectCount; public NativeDrawBatch* Batches; public uint BatchCount; public NativeOrbitLineVertex* OrbitVertices; public uint OrbitVertexCount; public NativeOrbitLineVertex* PreviousOrbitVertices; public uint PreviousOrbitVertexCount; public NativeOrbitLineVertex* BodyForwardVertices; public uint BodyForwardVertexCount; public NativeOrbitLineVertex* TargetDirectionVertices; public uint TargetDirectionVertexCount; public NativePlanetaryPatch* PlanetaryPatches; public uint PlanetaryPatchCount; public uint PlanetaryGpuAlignmentPadding; public NativePlanetaryGpuConstants PlanetaryGpu; public NativePlanetaryMode PlanetaryMode; public NativePlanetarySurfaceMode PlanetarySurfaceMode; public uint PhysicalSurfaceGeneration,PlanetaryPadding2; public NativePlanetaryPresentation PlanetaryPresentation; public NativePlanetaryPresentation* DistantBodies; public uint DistantBodyCount, DistantBodyPadding; public NativeSolarLighting SolarLighting; public NativeAnchoredSurfacePatch* AnchoredSurfacePatches; public uint AnchoredSurfacePatchCount,AnchoredSurfaceCacheSlotCount,AnchoredSurfaceActiveGeneration,AnchoredSurfaceFlags,AnchoredSurfaceGpuReadyGeneration,AnchoredSurfacePadding1,AnchoredSurfacePadding2,AnchoredSurfacePadding3,AnchoredSurfacePadding4,AnchoredSurfacePadding5; public NativeAnchoredSurfacePresentation AnchoredSurfacePresentation; }
+public struct NativeProductionBillboardLatticeVertex { public int CubeX,CubeY,CubeZ; public uint Metadata; }
+
+[StructLayout(LayoutKind.Sequential)]
+public unsafe struct NativeProductionSphericalBillboardSubmission
+{
+    public uint Size,Version,Enabled,Level;
+    public uint VertexCount,IndexCount,LatticeScale,PhysicalGeneration;
+    public uint TerrainDataGeneration,PupilGeneration,Reserved0,Reserved1;
+    public ulong TopologyHash,PublicationGeneration;
+    public NativeProductionBillboardLatticeVertex* LatticeVertices;
+    public uint* Indices;
+    public NativeSphericalBillboardPhysicalVertex* PhysicalVertices;
+}
+
+[StructLayout(LayoutKind.Sequential)]
+public unsafe struct NativeFrameSubmission { public NativeCameraData Camera; public NativeRenderObject* Objects; public uint ObjectCount; public NativeDrawBatch* Batches; public uint BatchCount; public NativeOrbitLineVertex* OrbitVertices; public uint OrbitVertexCount; public NativeOrbitLineVertex* PreviousOrbitVertices; public uint PreviousOrbitVertexCount; public NativeOrbitLineVertex* BodyForwardVertices; public uint BodyForwardVertexCount; public NativeOrbitLineVertex* TargetDirectionVertices; public uint TargetDirectionVertexCount; public NativePlanetaryPatch* PlanetaryPatches; public uint PlanetaryPatchCount; public uint PlanetaryGpuAlignmentPadding; public NativePlanetaryGpuConstants PlanetaryGpu; public NativePlanetaryMode PlanetaryMode; public NativePlanetarySurfaceMode PlanetarySurfaceMode; public uint PhysicalSurfaceGeneration,PlanetaryPadding2; public NativePlanetaryPresentation PlanetaryPresentation; public NativePlanetaryPresentation* DistantBodies; public uint DistantBodyCount, DistantBodyPadding; public NativeSolarLighting SolarLighting; public NativeAnchoredSurfacePatch* AnchoredSurfacePatches; public uint AnchoredSurfacePatchCount,AnchoredSurfaceCacheSlotCount,AnchoredSurfaceActiveGeneration,AnchoredSurfaceFlags,AnchoredSurfaceGpuReadyGeneration,AnchoredSurfacePadding1,AnchoredSurfacePadding2,AnchoredSurfacePadding3,AnchoredSurfacePadding4,AnchoredSurfacePadding5; public NativeAnchoredSurfacePresentation AnchoredSurfacePresentation; public NativeProductionSphericalBillboardSubmission* ProductionBillboard; public uint ProductionBillboardFlags,ProductionBillboardPadding; }
 
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct NativeRuntimeAssets
@@ -191,6 +206,13 @@ public struct NativePlanetaryMeshPreparationMetrics
 public struct NativeSphericalBillboardProofVertex { public float X,Y,Z,W; }
 
 [StructLayout(LayoutKind.Sequential)]
+public struct NativeSphericalBillboardProofLatticeVertex
+{
+    public int CubeX,CubeY,CubeZ;
+    public uint Metadata;
+}
+
+[StructLayout(LayoutKind.Sequential)]
 public unsafe struct NativeSphericalBillboardProofAssets
 {
     public uint Size,Version;
@@ -216,6 +238,7 @@ public struct NativeSphericalBillboardPhysicalVertex
 {
     public double BodyX,BodyY,BodyZ,PhysicalHeightMetres;
     public float NormalX,NormalY,NormalZ,NormalValidity;
+    public float Reserved0,Reserved1,Reserved2,Reserved3;
 }
 
 [StructLayout(LayoutKind.Sequential)]
@@ -258,6 +281,10 @@ public struct NativeSphericalBillboardProofMetrics
     public uint PhysicalGeneration,TerrainDataGeneration,PreparedPhysicalSamples,PhysicalPreparationDispatchCount;
     public uint PhysicalReuseCount,StaleGenerationRejections,NonFinitePhysicalOutputs,ReservedPhysical;
     public ulong ImmutablePhysicalBytes;
+    public double DirectionDecodeMaximumErrorRadians;
+    public uint IncomingLevel,IncomingReadiness,PublicationCount,DeferredRetirementCount;
+    public ulong IncomingTopologyHash,IncomingTopologyBytes,SelectedIncomingBytes;
+    public uint ZeroOwnerFrames,OverlapOwnerFrames,StaleGenerationDraws,ReservedProduction;
 }
 
 [StructLayout(LayoutKind.Sequential)]

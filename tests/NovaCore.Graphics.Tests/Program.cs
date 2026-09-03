@@ -59,6 +59,7 @@ var tests = new (string, Action)[]
     ("M12D-P2S2 spherical billboard topology proof", PlanetarySphericalBillboardTopologyTests.Run),
     ("M12D-P2S3 spherical billboard GPU runtime proof", PlanetarySphericalBillboardGpuRuntimeTests.Run),
     ("M12D-P2S4 canonical natural terrain billboard binding", PlanetarySphericalBillboardNaturalTerrainTests.Run),
+    ("M12D-P2S5C production spherical billboard runtime", PlanetaryProductionSphericalBillboardRuntimeTests.Run),
     ("M12D-P2S5B production spherical billboard topology library", PlanetaryProductionSphericalBillboardTopologyTests.Run),
     ("GPU physical-height preparation", GpuPhysicalHeightPreparationTests.Run),
     ("Multiscale physical terrain modifier foundation", PlanetaryPhysicalSurfaceModifierTests.Run),
@@ -502,8 +503,8 @@ static void ProductionEarthMaterialStateContinuityTest()
     Check(native.Contains("id.level==0u&&a.productionLayerLookupMapped&&a.terrainSampleMapped",StringComparison.Ordinal)&&native.Contains("a.productionLayerPatch[layer]==id&&!a.productionElevationCpu[layer].empty()",StringComparison.Ordinal),"GPU terrain-key regeneration reattaches immutable resident roots without duplicate disk loads or material-owner replacement");
     Check(native.Contains("ProductionHierarchyPayloadsReady",StringComparison.Ordinal)&&native.Contains("production context selected before the complete immutable L0-L2 hierarchy was resident",StringComparison.Ordinal)&&
           !native.Contains("productionFallbackOwner",StringComparison.Ordinal)&&!native.Contains("productionFallback",StringComparison.Ordinal),"production focus requires the complete immutable hierarchy and has no generic distant-Earth fallback owner");
-    Check(native.Contains("earthTransitionTraceRemaining=contextBody==nc::production::EarthBodyId?180u:0u",StringComparison.Ordinal)&&native.Contains("Earth focus frame: frame=%llu",StringComparison.Ordinal)&&native.Contains("material=terrain-v5-root",StringComparison.Ordinal)&&
-          native.Contains("Earth Vulkan submission: terrainFrame=%llu",StringComparison.Ordinal)&&native.Contains("serializedFence=true; globalDraw=1; dynamicHierarchyDraw=%u",StringComparison.Ordinal),"the first 180 Earth focus submissions expose bounded frame/owner/radius/material and serialized swapchain submission telemetry for manual correlation");
+    Check(native.Contains("earthTransitionTraceRemaining=contextBody==nc::production::EarthBodyId?180u:0u",StringComparison.Ordinal)&&native.Contains("Earth focus frame: frame=%llu",StringComparison.Ordinal)&&native.Contains("material=%s",StringComparison.Ordinal)&&native.Contains("candidateOwner?\"production-billboard\":\"terrain-v5-root\"",StringComparison.Ordinal)&&
+          native.Contains("Earth Vulkan submission: terrainFrame=%llu",StringComparison.Ordinal)&&native.Contains("serializedFence=true; globalDraw=%u; dynamicHierarchyDraw=%u; candidateIndirectDraw=%u; visibleEarthOwners=1",StringComparison.Ordinal),"the first 180 Earth focus submissions expose bounded frame/owner/radius/material and serialized swapchain submission telemetry for manual correlation");
     var focused=scene.FocusedPresentation(camera);var focusedDistant=scene.DistantBodies[0];var focusedGpu=scene.GpuConstants(camera);var transportedRadius=(double)focusedGpu.RadiusHigh+focusedGpu.RadiusLow;
     Check(BitConverter.DoubleToInt64Bits(scene.FocusedBody.RadiusMetres)==BitConverter.DoubleToInt64Bits(earth.RadiusMetres)&&focused.Radius==(float)earth.RadiusMetres&&focusedDistant.Radius==(float)earth.RadiusMetres&&Math.Abs(transportedRadius-earth.RadiusMetres)<1e-6,
         "distant, production-global, and GPU terrain paths share the authoritative Earth base radius exactly before terrain elevation");
@@ -1007,9 +1008,10 @@ static void OpaqueDistantDetailedHandoffTest()
     Check(nativeSource.Contains("handoffDepth.depthWriteEnable=VK_FALSE",StringComparison.Ordinal)&&nativeSource.Contains("depth.depthWriteEnable=VK_TRUE",StringComparison.Ordinal)&&nativeSource.Contains("depth.depthCompareOp=VK_COMPARE_OP_GREATER",StringComparison.Ordinal),"Distant handoff and Detailed reversed-Z depth ownership remain unchanged");
     var orbitDraw=nativeSource.IndexOf("if(solarOverlay&&a.submission->orbitVertexCount>=2",StringComparison.Ordinal);
     var distantDrawIndex=nativeSource.IndexOf("if(distantCount){VkDeviceSize",StringComparison.Ordinal);
-    var detailedDrawIndex=nativeSource.IndexOf("if(diagnosticGlobal&&regional&&(a.submission->planetaryPatchCount||gpuPlanetary)",StringComparison.Ordinal);
+    var candidateOrAnchoredDrawIndex=nativeSource.IndexOf("if(a.anchoredPipelineStatisticsFrameSubmitted){vkCmdBeginQuery",StringComparison.Ordinal);
+    var detailedDrawIndex=nativeSource.IndexOf("if(!candidate&&diagnosticGlobal&&regional&&(a.submission->planetaryPatchCount||gpuPlanetary)",StringComparison.Ordinal);
     var focusedOrbitDraw=nativeSource.IndexOf("if (!solarOverlay && a.submission->orbitVertexCount",StringComparison.Ordinal);
-    Check(nativeSource.Contains("solarOrbitCreate=orbitPipeline",StringComparison.Ordinal)&&nativeSource.Contains("orbitDepth.depthWriteEnable=VK_FALSE",StringComparison.Ordinal)&&nativeSource.Contains("orbitDepth.depthCompareOp=VK_COMPARE_OP_GREATER_OR_EQUAL",StringComparison.Ordinal)&&nativeSource.Contains("orbitPipeline.pDepthStencilState=&orbitDepth",StringComparison.Ordinal)&&orbitDraw>=0&&distantDrawIndex>orbitDraw&&detailedDrawIndex>distantDrawIndex&&focusedOrbitDraw>detailedDrawIndex,"scene-space orbit lines use read-only reversed-Z occlusion: Solar overview remains pre-surface while focused far-side segments cannot draw through terrain");
+    Check(nativeSource.Contains("solarOrbitCreate=orbitPipeline",StringComparison.Ordinal)&&nativeSource.Contains("orbitDepth.depthWriteEnable=VK_FALSE",StringComparison.Ordinal)&&nativeSource.Contains("orbitDepth.depthCompareOp=VK_COMPARE_OP_GREATER_OR_EQUAL",StringComparison.Ordinal)&&nativeSource.Contains("orbitPipeline.pDepthStencilState=&orbitDepth",StringComparison.Ordinal)&&orbitDraw>=0&&distantDrawIndex>orbitDraw&&candidateOrAnchoredDrawIndex>distantDrawIndex&&detailedDrawIndex>candidateOrAnchoredDrawIndex&&focusedOrbitDraw>detailedDrawIndex,"scene-space orbit lines use read-only reversed-Z occlusion: Solar overview remains pre-surface while focused far-side segments cannot draw through terrain");
 }
 
 static void PlanetaryPresentationPipelineTest()
@@ -2160,6 +2162,8 @@ static void PlanetaryPresentationSpirvStrideTest()
         "distant_planet.vert",
         "planetary.vert",
         "planetary_ring.vert",
+        "production_spherical_billboard.tese",
+        "production_spherical_billboard.vert",
         "solar_label.vert",
         "solar_marker.vert",
         "solar_orbit.vert",
@@ -3648,7 +3652,7 @@ static void ProductionSurfaceBodyEligibilityAndTransitionOwnershipTest()
     var native=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","NovaCoreNative.cpp"));
     var selector=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","shaders","planetary_select.comp"));
     Check(native.Contains("surfaceTransitionEpoch",StringComparison.Ordinal)&&native.Contains("surfaceContextBodyId!=contextBody",StringComparison.Ordinal)&&native.Contains("owner=%s",StringComparison.Ordinal),"body/mode/dataset transitions invalidate stale selection and identify the current production owner");
-    Check(!native.Contains("productionFallbackOwner",StringComparison.Ordinal)&&!native.Contains("productionFallback",StringComparison.Ordinal)&&native.Contains("distantPresentation=handoff&&!production",StringComparison.Ordinal),"production terrain-v5 is sole Earth surface ownership and previous-frame GPU telemetry cannot re-enable a generic sphere");
+    Check(!native.Contains("productionFallbackOwner",StringComparison.Ordinal)&&!native.Contains("productionFallback",StringComparison.Ordinal)&&native.Contains("const bool candidate=a.productionBillboardAuthoritative",StringComparison.Ordinal)&&native.Contains("distantPresentation=!candidate&&handoff&&!production",StringComparison.Ordinal)&&native.Contains("if(!candidate&&diagnosticGlobal&&regional",StringComparison.Ordinal),"terrain-v5 remains the sole default Earth owner while the explicit production billboard candidate atomically suppresses both generic and terrain-v5 owners only after full readiness");
     var productionProjection=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","shaders","production_cube_surface.glsl"));
     var productionVertex=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","shaders","planetary.vert"));
     Check(native.Contains("BootstrapProductionHierarchy(a)",StringComparison.Ordinal)&&native.Contains("ProductionHierarchyPayloadsReady(a)",StringComparison.Ordinal)&&native.Contains("complete L0-L2 hierarchy synchronously resident before first submitted presentation frame",StringComparison.Ordinal)&&productionProjection.Contains("NOVACORE_PRODUCTION_TERRAIN_VERSION=5u",StringComparison.Ordinal)&&selector.Contains("bool production=terrain&&inputData.controls.z==NOVACORE_PRODUCTION_TERRAIN_VERSION",StringComparison.Ordinal)&&productionVertex.Contains("inputData.controls.z==NOVACORE_PRODUCTION_TERRAIN_VERSION",StringComparison.Ordinal)&&!selector.Contains("inputData.controls.z==4u",StringComparison.Ordinal)&&!productionVertex.Contains("inputData.controls.z==4u",StringComparison.Ordinal),"the complete immutable Earth L0-L2 hierarchy preloads before presentation and terrain-v5 consistently selects the production projection, payload keys, and transactional ownership path");
@@ -4373,7 +4377,7 @@ static void LayoutTest()
     Check(Marshal.SizeOf<NativePlanetaryGpuConstants>()==96&&Marshal.SizeOf<NativePlanetaryPresentation>()==192&&Marshal.SizeOf<NativeSolarLighting>()==48,"planetary presentation layout");
     Check(Marshal.SizeOf<NativeAnchoredSurfacePatch>()==80&&
         Marshal.SizeOf<NativeAnchoredSurfacePresentation>()==144,"dynamic hierarchy descriptor and shared-frame ABI");
-    Check(Marshal.SizeOf<NativeFrameSubmission>()==768&&
+    Check(Marshal.SizeOf<NativeFrameSubmission>()==784&&
         Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.PlanetaryGpu)).ToInt32()==208&&
         Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.PlanetaryMode)).ToInt32()==304&&
         Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.PlanetaryPresentation)).ToInt32()==320&&
@@ -4381,12 +4385,13 @@ static void LayoutTest()
         Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.SolarLighting)).ToInt32()==528&&
         Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.AnchoredSurfacePatches)).ToInt32()==576&&
         Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.AnchoredSurfacePatchCount)).ToInt32()==584&&
-        Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.AnchoredSurfacePresentation)).ToInt32()==624,
+        Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.AnchoredSurfacePresentation)).ToInt32()==624&&
+        Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.ProductionBillboard)).ToInt32()==768,
         "native frame ABI and dynamic hierarchy offsets");
     Check(Marshal.SizeOf<NativeInputState>()==84&&Marshal.OffsetOf<NativeInputState>(nameof(NativeInputState.PresentationFocus)).ToInt32()==72&&
         Marshal.OffsetOf<NativeInputState>(nameof(NativeInputState.ViewportWidthPixels)).ToInt32()==76&&
         Marshal.OffsetOf<NativeInputState>(nameof(NativeInputState.ViewportHeightPixels)).ToInt32()==80,"input layout");
-    Check(NativeRuntime.GetAbiLayout(out var abi)==NativeResult.Success&&abi.InputStateSize==84&&abi.FrameSubmissionSize==768&&
+    Check(NativeRuntime.GetAbiLayout(out var abi)==NativeResult.Success&&abi.InputStateSize==84&&abi.FrameSubmissionSize==784&&
         abi.FramePlanetaryGpuOffset==208&&abi.FramePlanetaryModeOffset==304&&abi.FramePlanetaryPresentationOffset==320&&abi.FrameSolarLightingOffset==528&&
         abi.InputViewportWidthOffset==76&&abi.InputViewportHeightOffset==80,
         "native frame ABI layout");

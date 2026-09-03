@@ -9,6 +9,7 @@ layout(push_constant) uniform Constants {
   uint baseVertexCount; uint baseTriangleCount; uint workVertexCount; uint workTriangleCount;
   float bodyRadius; float cameraDistance; float tanHalfFov; float aspect;
   uint topologyLevel; uint frameIndex; uint outputIndexCapacity; uint reserved;
+  uint coordinateEncoding; uint latticeScale;
 } pc;
 void main(){
   uint id=gl_GlobalInvocationID.x; if(id>=pc.workTriangleCount||visibility.values[id]==0u)return;

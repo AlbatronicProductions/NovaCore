@@ -1,17 +1,23 @@
 #version 450
 layout(local_size_x=64) in;
-layout(set=0,binding=0,std430) readonly buffer LocalVertices { vec4 values[]; } localVertices;
+layout(set=0,binding=0,std430) readonly buffer LocalVertices { uvec4 values[]; } localVertices;
 layout(set=0,binding=4,std430) writeonly buffer PreparedPositions { vec4 values[]; } positions;
 layout(set=0,binding=10,std430) readonly buffer PhysicalPositions { dvec4 values[]; } physicalPositions;
 layout(push_constant) uniform Constants {
   uint baseVertexCount; uint baseTriangleCount; uint workVertexCount; uint workTriangleCount;
   float bodyRadius; float cameraDistance; float tanHalfFov; float aspect;
   uint topologyLevel; uint frameIndex; uint outputIndexCapacity; uint reserved;
+  uint coordinateEncoding; uint latticeScale;
 } pc;
+vec3 DecodeDirection(uint id){
+  uvec3 raw=localVertices.values[id].xyz;
+  if(pc.coordinateEncoding==1u)return normalize(vec3(ivec3(raw))/float(pc.latticeScale));
+  return normalize(uintBitsToFloat(raw));
+}
 void main(){
   uint id=gl_GlobalInvocationID.x; if(id>=pc.workVertexCount)return;
   uint local=id%pc.baseVertexCount;
-  vec3 direction=normalize(localVertices.values[local].xyz);
+  vec3 direction=DecodeDirection(local);
   // reserved==0 retains the banked P2S3 zero-height proof.  P2S4 consumes an
   // immutable canonical body-fixed publication prepared by the shared GPU path.
   dvec3 body=pc.reserved==0u?dvec3(direction)*double(pc.bodyRadius):physicalPositions.values[local].xyz;

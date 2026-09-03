@@ -17,6 +17,7 @@ public static class LaunchCommandBuilder
         }
 
         var supportsEarthAltitude = configuration.Scene == NovaCoreScene.Earth ||
+                                    configuration.Scene == NovaCoreScene.ProductionSphericalBillboard ||
                                     configuration is { Scene: NovaCoreScene.Solar, StartingBody: NovaCoreStartingBody.Earth };
         if (configuration.AltitudeMetres is { } altitude &&
             (!double.IsFinite(altitude) || altitude < ScenarioCatalog.MinimumTerrainSafeAltitudeMetres ||
@@ -91,6 +92,7 @@ public static class LaunchCommandBuilder
         NovaCoreScene.Earth => "earth",
         NovaCoreScene.SubdivisionDiagnostic => "planetary-subdivision-diagnostic",
         NovaCoreScene.SphericalBillboardGpuProof => "m12d-spherical-billboard-gpu-proof",
+        NovaCoreScene.ProductionSphericalBillboard => "m12d-production-spherical-billboard",
         _ => throw new ArgumentOutOfRangeException(nameof(scene), scene, null)
     };
 }

@@ -36,6 +36,7 @@ struct PushConstants {
       workTriangleCount;
   float bodyRadius, cameraDistance, tanHalfFov, aspect;
   uint32_t topologyLevel, frameIndex, outputIndexCapacity, reserved;
+  uint32_t coordinateEncoding, latticeScale;
 };
 struct Context {
   VkInstance instance{};
@@ -59,10 +60,18 @@ struct Context {
   VkFramebuffer framebuffer{};
   Buffer localVertices, indices, neighborOffsets, neighbors, physicalPositions,
       physicalNormals;
+  Buffer incomingVertices, incomingIndices, incomingNeighborOffsets,
+      incomingNeighbors;
   std::array<FrameResources, MaximumFrames> frames{};
   uint32_t maximumVertices{}, maximumTriangles{}, frameCount{}, extent{},
       validationErrors{}, activeLevel{}, baseVertices{}, baseTriangles{},
-      neighborOffsetCount{}, neighborCount{};
+      neighborOffsetCount{}, neighborCount{}, coordinateEncoding{}, latticeScale{};
+  uint32_t incomingLevel{}, incomingVerticesCount{}, incomingTriangles{},
+      incomingNeighborOffsetCount{}, incomingNeighborCount{},
+      incomingCoordinateEncoding{}, incomingLatticeScale{}, incomingReadiness{},
+      publications{}, deferredRetirements{}, zeroOwnerFrames{},
+      overlapOwnerFrames{}, staleGenerationDraws{};
+  uint64_t incomingTopologyHash{}, incomingTopologyBytes{};
   uint64_t topologyHash{}, topologyUploads{}, topologyBytesUploaded{},
       activeTopologyBytes{}, frameWrites{}, cullingDispatches{},
       indirectSubmissions{}, replacements{}, frameWaits{};
@@ -71,6 +80,7 @@ struct Context {
       physicalReuseCount{}, staleGenerationRejections{},
       nonFinitePhysicalOutputs{};
   double setupMilliseconds{}, uploadMilliseconds{};
+  double directionDecodeMaximumErrorRadians{};
   uint32_t readiness{};
   ~Context();
 };
@@ -489,6 +499,17 @@ void FillMetrics(const Context &c, NcSphericalBillboardProofMetrics &m) {
   m.nonFinitePhysicalOutputs = c.nonFinitePhysicalOutputs;
   m.immutablePhysicalBytes = c.physicalPositions.allocationBytes +
                              c.physicalNormals.allocationBytes;
+  m.directionDecodeMaximumErrorRadians = c.directionDecodeMaximumErrorRadians;
+  m.incomingLevel = c.incomingLevel;
+  m.incomingReadiness = c.incomingReadiness;
+  m.publicationCount = c.publications;
+  m.deferredRetirementCount = c.deferredRetirements;
+  m.incomingTopologyHash = c.incomingTopologyHash;
+  m.incomingTopologyBytes = c.incomingTopologyBytes;
+  m.selectedIncomingBytes = c.activeTopologyBytes + c.incomingTopologyBytes;
+  m.zeroOwnerFrames = c.zeroOwnerFrames;
+  m.overlapOwnerFrames = c.overlapOwnerFrames;
+  m.staleGenerationDraws = c.staleGenerationDraws;
   m.totalAllocatedBytes += m.immutablePhysicalBytes;
   m.setupMilliseconds = c.setupMilliseconds;
   m.topologyUploadMilliseconds = c.uploadMilliseconds;
@@ -515,6 +536,10 @@ Context::~Context() {
   DestroyBuffer(device, neighbors);
   DestroyBuffer(device, physicalPositions);
   DestroyBuffer(device, physicalNormals);
+  DestroyBuffer(device, incomingVertices);
+  DestroyBuffer(device, incomingIndices);
+  DestroyBuffer(device, incomingNeighborOffsets);
+  DestroyBuffer(device, incomingNeighbors);
   if (graphicsPipeline)
     vkDestroyPipeline(device, graphicsPipeline, nullptr);
   if (compactPipeline)
@@ -707,13 +732,19 @@ NcResult UploadSphericalBillboardGpuProofTopology(
     const NcSphericalBillboardProofTopology *topology,
     NcSphericalBillboardProofMetrics *metrics) {
   if (!topology || topology->size != sizeof(*topology) ||
-      topology->version != 1 || topology->formatVersion != 1 ||
+      topology->version != 1 ||
+      (topology->formatVersion != 1 && topology->formatVersion != 2) ||
       topology->generatorVersion != 1 || !topology->vertices ||
       !topology->indices || !topology->neighborOffsets ||
       !topology->neighbors || !topology->vertexCount || !topology->indexCount ||
       topology->indexCount % 3 ||
       topology->neighborOffsetCount != topology->vertexCount + 1 ||
-      !topology->topologyHash || !metrics || metrics->size != sizeof(*metrics))
+      !topology->topologyHash || topology->reserved2 > 1 || !metrics ||
+      metrics->size != sizeof(*metrics))
+    return NC_INVALID_ARGUMENT;
+  if ((topology->formatVersion == 1 && topology->reserved0 != 0) ||
+      (topology->formatVersion == 2 &&
+       (topology->reserved0 != 1 || topology->reserved1 == 0)))
     return NC_INVALID_ARGUMENT;
   std::lock_guard lock(Guard);
   if (!Current)
@@ -743,6 +774,43 @@ NcResult UploadSphericalBillboardGpuProofTopology(
   }
   const auto started = std::chrono::steady_clock::now();
   try {
+    if (topology->reserved2 == 1) {
+      if (!c.topologyHash || c.incomingTopologyHash)
+        return NC_INVALID_ARGUMENT;
+      CreateBuffer(c, c.incomingVertices,
+                   VkDeviceSize(topology->vertexCount) * sizeof(NcSphericalBillboardProofVertex),
+                   VK_BUFFER_USAGE_TRANSFER_DST_BIT);
+      CreateBuffer(c, c.incomingIndices, VkDeviceSize(topology->indexCount) * 4,
+                   VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_INDEX_BUFFER_BIT);
+      CreateBuffer(c, c.incomingNeighborOffsets,
+                   VkDeviceSize(topology->neighborOffsetCount) * 4,
+                   VK_BUFFER_USAGE_TRANSFER_DST_BIT);
+      CreateBuffer(c, c.incomingNeighbors, VkDeviceSize(topology->neighborCount) * 4,
+                   VK_BUFFER_USAGE_TRANSFER_DST_BIT);
+      std::memcpy(c.incomingVertices.mapped, topology->vertices,
+                  topology->vertexCount * sizeof(NcSphericalBillboardProofVertex));
+      std::memcpy(c.incomingIndices.mapped, topology->indices, topology->indexCount * 4);
+      std::memcpy(c.incomingNeighborOffsets.mapped, topology->neighborOffsets,
+                  topology->neighborOffsetCount * 4);
+      std::memcpy(c.incomingNeighbors.mapped, topology->neighbors, topology->neighborCount * 4);
+      c.incomingLevel = topology->level;
+      c.incomingVerticesCount = topology->vertexCount;
+      c.incomingTriangles = topology->indexCount / 3;
+      c.incomingNeighborOffsetCount = topology->neighborOffsetCount;
+      c.incomingNeighborCount = topology->neighborCount;
+      c.incomingCoordinateEncoding = topology->reserved0;
+      c.incomingLatticeScale = topology->reserved1;
+      c.incomingTopologyHash = topology->topologyHash;
+      c.incomingTopologyBytes = c.incomingVertices.bytes + c.incomingIndices.bytes +
+                                c.incomingNeighborOffsets.bytes + c.incomingNeighbors.bytes;
+      c.topologyBytesUploaded += c.incomingTopologyBytes;
+      c.topologyUploads++;
+      c.incomingReadiness = 1;
+      c.uploadMilliseconds = std::chrono::duration<double, std::milli>(
+                                 std::chrono::steady_clock::now() - started).count();
+      FillMetrics(c, *metrics);
+      return c.validationErrors ? NC_FAILURE : NC_SUCCESS;
+    }
     Check(vkDeviceWaitIdle(c.device),
           "billboard proof replacement wait failed");
     if (c.topologyHash)
@@ -773,6 +841,8 @@ NcResult UploadSphericalBillboardGpuProofTopology(
                 topology->neighborCount * 4);
     UpdateDescriptors(c);
     c.activeLevel = topology->level;
+    c.coordinateEncoding = topology->reserved0;
+    c.latticeScale = topology->reserved1;
     c.baseVertices = topology->vertexCount;
     c.baseTriangles = topology->indexCount / 3;
     c.neighborOffsetCount = topology->neighborOffsetCount;
@@ -887,6 +957,52 @@ RunSphericalBillboardGpuProofFrame(const NcSphericalBillboardProofFrame *frame,
   if (!Current)
     return NC_INVALID_ARGUMENT;
   auto &c = *Current;
+  if (frame->reserved2 == 1) {
+    if (!c.incomingTopologyHash || frame->expectedTopologyHash != c.incomingTopologyHash ||
+        c.incomingReadiness != 1) {
+      c.staleGenerationDraws++;
+      FillMetrics(c, *metrics);
+      return NC_INVALID_ARGUMENT;
+    }
+    try {
+      for (auto &pending : c.frames)
+        if (pending.submitted)
+          Check(vkWaitForFences(c.device, 1, &pending.fence, VK_TRUE, 10'000'000'000ull),
+                "billboard incoming publication fence wait failed");
+      DestroyBuffer(c.device, c.localVertices);
+      DestroyBuffer(c.device, c.indices);
+      DestroyBuffer(c.device, c.neighborOffsets);
+      DestroyBuffer(c.device, c.neighbors);
+      c.localVertices = c.incomingVertices; c.incomingVertices = {};
+      c.indices = c.incomingIndices; c.incomingIndices = {};
+      c.neighborOffsets = c.incomingNeighborOffsets; c.incomingNeighborOffsets = {};
+      c.neighbors = c.incomingNeighbors; c.incomingNeighbors = {};
+      c.activeLevel = c.incomingLevel;
+      c.baseVertices = c.incomingVerticesCount;
+      c.baseTriangles = c.incomingTriangles;
+      c.neighborOffsetCount = c.incomingNeighborOffsetCount;
+      c.neighborCount = c.incomingNeighborCount;
+      c.coordinateEncoding = c.incomingCoordinateEncoding;
+      c.latticeScale = c.incomingLatticeScale;
+      c.topologyHash = c.incomingTopologyHash;
+      c.activeTopologyBytes = c.incomingTopologyBytes;
+      c.incomingLevel = c.incomingVerticesCount = c.incomingTriangles = 0;
+      c.incomingNeighborOffsetCount = c.incomingNeighborCount = 0;
+      c.incomingCoordinateEncoding = c.incomingLatticeScale = 0;
+      c.incomingTopologyHash = c.incomingTopologyBytes = 0;
+      c.incomingReadiness = 0;
+      c.publications++;
+      c.deferredRetirements++;
+      c.physicalGeneration = 0;
+      c.terrainDataGeneration = 0;
+      c.preparedPhysicalSamples = 0;
+      c.readiness = 1;
+      UpdateDescriptors(c);
+    } catch (...) {
+      c.zeroOwnerFrames++;
+      return NC_FAILURE;
+    }
+  }
   if ((frame->reserved0 && (frame->reserved0 != c.physicalGeneration ||
                             frame->reserved1 != c.terrainDataGeneration))) {
     c.staleGenerationRejections++;
@@ -922,7 +1038,9 @@ RunSphericalBillboardGpuProofFrame(const NcSphericalBillboardProofFrame *frame,
                      c.activeLevel,
                      frame->frameIndex,
                      c.maximumTriangles * 3,
-                     c.physicalGeneration};
+                     c.physicalGeneration,
+                     c.coordinateEncoding,
+                     c.latticeScale};
     VkCommandBufferBeginInfo begin{VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO};
     begin.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
     Check(vkBeginCommandBuffer(f.command, &begin),
@@ -1084,6 +1202,27 @@ RunSphericalBillboardGpuProofFrame(const NcSphericalBillboardProofFrame *frame,
     metrics->frameSlot = frame->frameIndex % c.frameCount;
     metrics->frameWaitCount = static_cast<uint32_t>(c.frameWaits);
     metrics->pixelChecksum = checksum;
+    if (c.coordinateEncoding == 1 && !c.physicalGeneration) {
+      const auto *lattice = static_cast<const int32_t *>(c.localVertices.mapped);
+      const auto *prepared = static_cast<const float *>(f.positions.mapped);
+      double maximum = 0.0;
+      for (uint32_t i = 0; i < c.baseVertices; ++i) {
+        const double ex = double(lattice[i * 4 + 0]) / double(c.latticeScale);
+        const double ey = double(lattice[i * 4 + 1]) / double(c.latticeScale);
+        const double ez = double(lattice[i * 4 + 2]) / double(c.latticeScale);
+        const double el = std::sqrt(ex * ex + ey * ey + ez * ez);
+        double ax = prepared[i * 4 + 0];
+        double ay = prepared[i * 4 + 1];
+        double az = prepared[i * 4 + 2] + frame->cameraDistanceMetres;
+        const double al = std::sqrt(ax * ax + ay * ay + az * az);
+        if (el > 0.0 && al > 0.0) {
+          const double dot = std::clamp((ex * ax + ey * ay + ez * az) / (el * al), -1.0, 1.0);
+          maximum = std::max(maximum, std::acos(dot));
+        }
+      }
+      c.directionDecodeMaximumErrorRadians = std::max(c.directionDecodeMaximumErrorRadians, maximum);
+      metrics->directionDecodeMaximumErrorRadians = c.directionDecodeMaximumErrorRadians;
+    }
     const auto milliseconds = [&](uint32_t a, uint32_t b) {
       return double(ticks[b] - ticks[a]) * c.timestampPeriod / 1'000'000.0;
     };

@@ -59,7 +59,17 @@ struct alignas(16) NcPlanetaryPresentation {
 };
 struct alignas(16) NcSolarLighting { float sourceCenterX, sourceCenterY, sourceCenterZ, exposure; float photosphereR, photosphereG, photosphereB, ambientFloor; float sourceRadiance, glowStrength; uint32_t enabled, speedHud; };
 struct NcOrbitLineVertex { float positionHigh[3]; float positionLow[3]; };
-struct NcFrameSubmission { NcCameraData camera; NcRenderObject* objects; uint32_t objectCount; NcDrawBatch* batches; uint32_t batchCount; NcOrbitLineVertex* orbitVertices; uint32_t orbitVertexCount; NcOrbitLineVertex* previousOrbitVertices; uint32_t previousOrbitVertexCount; NcOrbitLineVertex* bodyForwardVertices; uint32_t bodyForwardVertexCount; NcOrbitLineVertex* targetDirectionVertices; uint32_t targetDirectionVertexCount; NcPlanetaryPatch* planetaryPatches; uint32_t planetaryPatchCount; uint32_t planetaryGpuAlignmentPadding; NcPlanetaryGpuConstants planetaryGpu; NcPlanetaryMode planetaryMode; NcPlanetarySurfaceMode planetarySurfaceMode; uint32_t physicalSurfaceGeneration, planetaryPadding; NcPlanetaryPresentation planetaryPresentation; NcPlanetaryPresentation* distantBodies; uint32_t distantBodyCount, distantBodyPadding; NcSolarLighting solarLighting; NcAnchoredSurfacePatch* anchoredSurfacePatches; uint32_t anchoredSurfacePatchCount, anchoredSurfaceCacheSlotCount, anchoredSurfaceActiveGeneration, anchoredSurfaceFlags, anchoredSurfaceGpuReadyGeneration, anchoredSurfacePadding[5]; NcAnchoredSurfacePresentation anchoredSurfacePresentation; };
+struct alignas(16) NcProductionBillboardLatticeVertex { int32_t cube[3]; uint32_t metadata; };
+struct NcProductionSphericalBillboardSubmission {
+  uint32_t size, version, enabled, level;
+  uint32_t vertexCount, indexCount, latticeScale, physicalGeneration;
+  uint32_t terrainDataGeneration, pupilGeneration, reserved0, reserved1;
+  uint64_t topologyHash, publicationGeneration;
+  const NcProductionBillboardLatticeVertex* latticeVertices;
+  const uint32_t* indices;
+  const struct NcSphericalBillboardPhysicalVertex* physicalVertices;
+};
+struct NcFrameSubmission { NcCameraData camera; NcRenderObject* objects; uint32_t objectCount; NcDrawBatch* batches; uint32_t batchCount; NcOrbitLineVertex* orbitVertices; uint32_t orbitVertexCount; NcOrbitLineVertex* previousOrbitVertices; uint32_t previousOrbitVertexCount; NcOrbitLineVertex* bodyForwardVertices; uint32_t bodyForwardVertexCount; NcOrbitLineVertex* targetDirectionVertices; uint32_t targetDirectionVertexCount; NcPlanetaryPatch* planetaryPatches; uint32_t planetaryPatchCount; uint32_t planetaryGpuAlignmentPadding; NcPlanetaryGpuConstants planetaryGpu; NcPlanetaryMode planetaryMode; NcPlanetarySurfaceMode planetarySurfaceMode; uint32_t physicalSurfaceGeneration, planetaryPadding; NcPlanetaryPresentation planetaryPresentation; NcPlanetaryPresentation* distantBodies; uint32_t distantBodyCount, distantBodyPadding; NcSolarLighting solarLighting; NcAnchoredSurfacePatch* anchoredSurfacePatches; uint32_t anchoredSurfacePatchCount, anchoredSurfaceCacheSlotCount, anchoredSurfaceActiveGeneration, anchoredSurfaceFlags, anchoredSurfaceGpuReadyGeneration, anchoredSurfacePadding[5]; NcAnchoredSurfacePresentation anchoredSurfacePresentation; NcProductionSphericalBillboardSubmission* productionBillboard; uint32_t productionBillboardFlags, productionBillboardPadding; };
 struct NcAbiLayout { uint32_t encodedPositionSize, cameraDataSize, cameraPositionOffset, cameraViewProjectionOffset, renderTransformSize, renderObjectSize, renderObjectPositionOffset, renderObjectTransformOffset, renderObjectMeshOffset; uint32_t drawBatchSize, orbitLineVertexSize, frameSubmissionSize, frameObjectsOffset, frameBatchesOffset, frameOrbitVerticesOffset, frameOrbitVertexCountOffset; uint32_t inputStateSize, inputDeltaSecondsOffset, inputMoveLeftOffset, inputMoveRightOffset, inputMoveForwardOffset, inputMoveBackwardOffset, inputMoveDownOffset, inputMoveUpOffset, inputResetOffset, inputLookActiveOffset, inputMouseDeltaXOffset, inputMouseDeltaYOffset, inputMouseWheelDetentsOffset, inputPauseToggleOffset, inputRateDecreaseOffset, inputRateIncreaseOffset, inputSasModeKeyOffset, inputFastModifierOffset, inputSlowModifierOffset; uint32_t framePlanetaryGpuOffset, framePlanetaryModeOffset, framePlanetaryPresentationOffset, inputPresentationFocusOffset, frameSolarLightingOffset, inputViewportWidthOffset, inputViewportHeightOffset; };
 // mouseWheelDetents is signed Win32 WHEEL_DELTA-normalized detents, consumed once per callback.
 struct NcInputState { float deltaSeconds; uint32_t moveLeft, moveRight, moveForward, moveBackward, moveDown, moveUp, reset, lookActive; float mouseDeltaX, mouseDeltaY; int32_t mouseWheelDetents; uint32_t pauseToggle, rateDecrease, rateIncrease, sasModeKey, fastModifier, slowModifier; NcPresentationFocus presentationFocus; uint32_t viewportWidthPixels, viewportHeightPixels; };
@@ -176,7 +186,10 @@ struct NcSphericalBillboardProofTopology {
 struct alignas(16) NcSphericalBillboardPhysicalVertex {
   double bodyFixed[4]; // xyz final displaced point; w canonical height
   float normal[4];     // xyz canonical final-surface normal; w validity
+  float reserved[4];   // std430 dvec4 struct-array stride padding
 };
+static_assert(sizeof(NcSphericalBillboardPhysicalVertex) == 64,
+              "physical billboard vertex must match std430 array stride");
 struct NcSphericalBillboardPhysicalSurface {
   uint32_t size, version, vertexCount, physicalGeneration;
   uint32_t terrainDataGeneration, reserved0, reserved1, reserved2;
@@ -209,6 +222,10 @@ struct alignas(8) NcSphericalBillboardProofMetrics {
   uint32_t physicalGeneration, terrainDataGeneration, preparedPhysicalSamples, physicalPreparationDispatchCount;
   uint32_t physicalReuseCount, staleGenerationRejections, nonFinitePhysicalOutputs, reservedPhysical;
   uint64_t immutablePhysicalBytes;
+  double directionDecodeMaximumErrorRadians;
+  uint32_t incomingLevel, incomingReadiness, publicationCount, deferredRetirementCount;
+  uint64_t incomingTopologyHash, incomingTopologyBytes, selectedIncomingBytes;
+  uint32_t zeroOwnerFrames, overlapOwnerFrames, staleGenerationDraws, reservedProduction;
 };
 typedef void(__cdecl* NcHostCallback)(NcHostEvent* hostEvent, void* userData);
 enum NcResult : int32_t { NC_SUCCESS = 0, NC_FAILURE = 1, NC_INVALID_ARGUMENT = 2 };

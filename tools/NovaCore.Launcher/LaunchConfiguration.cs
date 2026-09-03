@@ -9,7 +9,8 @@ public enum NovaCoreScenarioPreset
     SubdivisionDiagnostic,
     EarthFullscreenNative,
     M12DNaturalTerrainCandidate,
-    M12DSphericalBillboardGpuProof
+    M12DSphericalBillboardGpuProof,
+    M12DProductionSphericalBillboard
 }
 
 public enum NovaCoreScene
@@ -17,7 +18,8 @@ public enum NovaCoreScene
     Solar,
     Earth,
     SubdivisionDiagnostic,
-    SphericalBillboardGpuProof
+    SphericalBillboardGpuProof,
+    ProductionSphericalBillboard
 }
 
 public enum NovaCoreStartingBody

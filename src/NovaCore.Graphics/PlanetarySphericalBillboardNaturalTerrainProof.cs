@@ -22,6 +22,12 @@ public sealed record PlanetarySphericalBillboardNaturalTerrainReport(
     double MaximumSharedLevelNormalDeltaRadians,
     double MaximumPhysicalHeightMetres);
 
+public sealed record PlanetaryProductionBillboardPhysicalPreparation(
+    NativeSphericalBillboardPhysicalVertex[] Vertices,
+    NativePlanetaryHeightQueryMetrics Metrics,
+    double MaximumCpuHeightErrorMetres,
+    double MaximumCpuNormalErrorRadians);
+
 /// <summary>
 /// Isolated P2S4 binding. The shared topology-neutral GPU physical query owns
 /// H(direction) and its analytic physical normal. Billboard levels consume an
@@ -33,6 +39,57 @@ public static unsafe class PlanetarySphericalBillboardNaturalTerrainProof
     public const uint TerrainDataGeneration = 5;
     public const double EarthRadiusMetres = 6_378_137d;
     private readonly record struct PreparedSample(double Height, Double3 Normal);
+
+    /// <summary>Prepares the immutable production-v2 directions with the same
+    /// topology-neutral GPU H(direction) authority used by P2S4.</summary>
+    public static PlanetaryProductionBillboardPhysicalPreparation PrepareProduction(
+        string repositoryRoot,
+        PlanetaryProductionSphericalBillboardTopology topology,
+        in PlanetaryProductionBillboardPupil pupil)
+    {
+        ArgumentNullException.ThrowIfNull(topology);
+        if (!pupil.IsValid) throw new ArgumentOutOfRangeException(nameof(pupil));
+        ResolveAssets(repositoryRoot, out var oracle, out var terrain, out var local);
+        var queryShader = Path.Combine(repositoryRoot, "build", "native-ninja", "shaders",
+            "planetary_height_query.comp.spv");
+        var resolvedPupil = pupil;
+        var directions = topology.Vertices.Select(vertex =>
+            resolvedPupil.RotateCanonical(vertex.Direction(topology.LatticeScale))).ToArray();
+        var queries = new NativePlanetaryHeightQuery[directions.Length];
+        // The shared physical-query ABI has three anchored density tiers plus its
+        // global tier. Production topology levels are selection identities, not
+        // new physical authorities, so they consume the finest existing physical
+        // preparation tier once level 3 is reached.
+        var physicalPreparationTier = Math.Min((uint)topology.Level, 3u);
+        for (var i = 0; i < directions.Length; i++)
+            if (!PlanetaryGpuPhysicalHeightQuery.TryCreate(6, TerrainDataGeneration,
+                physicalPreparationTier, directions[i] * EarthRadiusMetres, Double3.Zero,
+                out queries[i], out _))
+                throw new InvalidOperationException("Production billboard canonical query encoding failed.");
+        var metrics = Query(queries, oracle, terrain, local, queryShader, out var queried);
+        var vertices = new NativeSphericalBillboardPhysicalVertex[directions.Length];
+        var maximumHeightError = 0d; var maximumNormalError = 0d;
+        for (var i = 0; i < directions.Length; i++)
+        {
+            var value = queried[i];
+            if (value.Valid != 1 || value.ResultTerrainVersion != TerrainDataGeneration)
+                throw new InvalidOperationException("Production billboard GPU physical sample was invalid.");
+            var normal = new Double3(value.PhysicalNormalX, value.PhysicalNormalY,
+                value.PhysicalNormalZ).Normalized();
+            var cpu = PlanetaryTerrainDefinition.EarthProductionCubeV5.SamplePhysicalSurface(
+                directions[i], PlanetaryPhysicalSurfaceGeneration.M12DNaturalTerrainCandidate);
+            maximumHeightError = Math.Max(maximumHeightError,
+                Math.Abs(value.PhysicalHeightMetres - cpu.FinalHeightMetres));
+            maximumNormalError = Math.Max(maximumNormalError, Math.Acos(Math.Clamp(
+                Double3.Dot(normal, cpu.PhysicalNormal), -1d, 1d)));
+            var body = directions[i] * (EarthRadiusMetres + value.PhysicalHeightMetres);
+            vertices[i] = new() { BodyX = body.X, BodyY = body.Y, BodyZ = body.Z,
+                PhysicalHeightMetres = value.PhysicalHeightMetres,
+                NormalX = (float)normal.X, NormalY = (float)normal.Y,
+                NormalZ = (float)normal.Z, NormalValidity = 1f };
+        }
+        return new(vertices, metrics, maximumHeightError, maximumNormalError);
+    }
 
     public static PlanetarySphericalBillboardNaturalTerrainReport Run(string repositoryRoot)
     {

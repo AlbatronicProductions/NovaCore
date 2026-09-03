@@ -98,6 +98,21 @@ add_custom_command(OUTPUT "${SPIRV_DIR}/planetary_production.frag.spv" "${SPIRV_
   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary_production.frag" -o "${SPIRV_DIR}/planetary_production.frag.spv"
   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary_production_terrain.comp" -o "${SPIRV_DIR}/planetary_production_terrain.comp.spv"
   DEPENDS "${SHADER_DIR}/planetary_production.frag" "${SHADER_DIR}/planetary_production_terrain.comp" "${SHADER_DIR}/production_cube_surface.glsl" "${SHADER_DIR}/local_terrain.glsl" "${SHADER_DIR}/physical_surface.glsl" "${SHADER_DIR}/production_cube_filter.glsl" "${SHADER_DIR}/production_earth_material.glsl" "${SHADER_DIR}/production_terrain_material.glsl" "${SHADER_DIR}/planet_material.glsl" "${SHADER_DIR}/planet_terrain.glsl")
+add_custom_command(OUTPUT
+  "${SPIRV_DIR}/production_spherical_billboard_reset.comp.spv"
+  "${SPIRV_DIR}/production_spherical_billboard_cull.comp.spv"
+  "${SPIRV_DIR}/production_spherical_billboard_compact.comp.spv"
+  "${SPIRV_DIR}/production_spherical_billboard.vert.spv"
+  "${SPIRV_DIR}/production_spherical_billboard.tesc.spv"
+  "${SPIRV_DIR}/production_spherical_billboard.tese.spv"
+  COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
+  COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/production_spherical_billboard_reset.comp" -o "${SPIRV_DIR}/production_spherical_billboard_reset.comp.spv"
+  COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/production_spherical_billboard_cull.comp" -o "${SPIRV_DIR}/production_spherical_billboard_cull.comp.spv"
+  COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/production_spherical_billboard_compact.comp" -o "${SPIRV_DIR}/production_spherical_billboard_compact.comp.spv"
+  COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/production_spherical_billboard.vert" -o "${SPIRV_DIR}/production_spherical_billboard.vert.spv"
+  COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/production_spherical_billboard.tesc" -o "${SPIRV_DIR}/production_spherical_billboard.tesc.spv"
+  COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/production_spherical_billboard.tese" -o "${SPIRV_DIR}/production_spherical_billboard.tese.spv"
+  DEPENDS "${SHADER_DIR}/production_spherical_billboard_reset.comp" "${SHADER_DIR}/production_spherical_billboard_cull.comp" "${SHADER_DIR}/production_spherical_billboard_compact.comp" "${SHADER_DIR}/production_spherical_billboard.vert" "${SHADER_DIR}/production_spherical_billboard.tesc" "${SHADER_DIR}/production_spherical_billboard.tese" "${SHADER_DIR}/production_cube_surface.glsl")
 add_custom_command(OUTPUT "${SPIRV_DIR}/distant_planet.vert.spv" "${SPIRV_DIR}/distant_planet.frag.spv"
   COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
   COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/distant_planet.vert" -o "${SPIRV_DIR}/distant_planet.vert.spv"
@@ -134,7 +149,13 @@ add_custom_target(NovaCoreShaders DEPENDS "${SPIRV_DIR}/triangle.vert.spv" "${SP
 
 add_custom_target(NovaCoreProductionShaders DEPENDS
   "${SPIRV_DIR}/planetary_production.frag.spv"
-  "${SPIRV_DIR}/planetary_production_terrain.comp.spv")
+  "${SPIRV_DIR}/planetary_production_terrain.comp.spv"
+  "${SPIRV_DIR}/production_spherical_billboard_reset.comp.spv"
+  "${SPIRV_DIR}/production_spherical_billboard_cull.comp.spv"
+  "${SPIRV_DIR}/production_spherical_billboard_compact.comp.spv"
+  "${SPIRV_DIR}/production_spherical_billboard.vert.spv"
+  "${SPIRV_DIR}/production_spherical_billboard.tesc.spv"
+  "${SPIRV_DIR}/production_spherical_billboard.tese.spv")
 add_custom_target(NovaCoreMeshPreparationShaders DEPENDS
   "${SPIRV_DIR}/planetary_mesh_displace.comp.spv"
   "${SPIRV_DIR}/planetary_mesh_normals.comp.spv")

@@ -8,6 +8,7 @@ var tests = new (string Name, Action Test)[]
     ("Earth fullscreen native preset", EarthFullscreenNativePreset),
     ("M12D natural terrain candidate preset", M12DNaturalTerrainCandidatePreset),
     ("M12D spherical billboard GPU proof preset", M12DSphericalBillboardGpuProofPreset),
+    ("M12D production spherical billboard preset", M12DProductionSphericalBillboardPreset),
     ("Earth fullscreen Solar camera path", EarthFullscreenSolarCameraPath),
     ("structured launch environment", StructuredLaunchEnvironment),
     ("Earth orbital arguments", EarthOrbitalArguments),
@@ -36,8 +37,8 @@ static void DefaultSelection()
 
 static void ScenarioCatalogMappings()
 {
-    Equal(8, ScenarioCatalog.All.Count);
-    Equal(8, ScenarioCatalog.All.Count(definition => definition.IsSupported));
+    Equal(9, ScenarioCatalog.All.Count);
+    Equal(9, ScenarioCatalog.All.Count(definition => definition.IsSupported));
     True(ScenarioCatalog.All.Select(definition => definition.Preset).Distinct().Count() == ScenarioCatalog.All.Count,
         "Scenario presets must be unique.");
 }
@@ -70,6 +71,20 @@ static void M12DSphericalBillboardGpuProofPreset()
     Equal(NovaCoreDiagnosticsMode.VulkanValidationAndPerformance,configuration.Diagnostics);
     Equal(NovaCorePhysicalSurface.Generation3,configuration.PhysicalSurface);
     SequenceEqual(["--scene=m12d-spherical-billboard-gpu-proof","--log=validation","--log=vulkan"],LaunchCommandBuilder.BuildArguments(configuration));
+}
+
+static void M12DProductionSphericalBillboardPreset()
+{
+    var definition=ScenarioCatalog.Get(NovaCoreScenarioPreset.M12DProductionSphericalBillboard);
+    Equal("M12D Production Spherical Billboard",definition.DisplayName);
+    True(definition.Description.Contains("production v2",StringComparison.OrdinalIgnoreCase),
+        "Candidate does not identify the production v2 topology.");
+    True(definition.IsSupported,"Interactive production candidate is not launcher-accessible.");
+    True(definition.UnsupportedReason is null,"Interactive production candidate retained a stale blocker.");
+    True(ScenarioCatalog.TryCreateConfiguration(definition.Preset,null,definition.DefaultWindowMode,
+        definition.DefaultResolution,definition.DefaultDiagnostics,3440,1440,out var configuration,out var error),
+        error??"Interactive candidate did not produce a launch configuration.");
+    SequenceEqual(["--scene=m12d-production-spherical-billboard","--altitude=700000","--surface-site=land","--log=validation","--log=vulkan","--physical-surface=m12d-natural-candidate"],LaunchCommandBuilder.BuildArguments(configuration!));
 }
 
 static void EarthFullscreenNativePreset()
@@ -207,7 +222,8 @@ static void ExistingProductionScenarios()
 {
     foreach (var definition in ScenarioCatalog.All.Where(definition =>
                  definition.Preset is not (NovaCoreScenarioPreset.EarthFullscreenNative or
-                     NovaCoreScenarioPreset.M12DNaturalTerrainCandidate)))
+                     NovaCoreScenarioPreset.M12DNaturalTerrainCandidate or
+                     NovaCoreScenarioPreset.M12DProductionSphericalBillboard)))
     {
         var configuration = Create(definition.Preset);
         Equal(NovaCorePhysicalSurface.Generation3, configuration.PhysicalSurface);

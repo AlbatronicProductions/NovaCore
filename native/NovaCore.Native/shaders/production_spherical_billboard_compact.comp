@@ -1,0 +1,9 @@
+#version 460
+layout(local_size_x=64) in;
+layout(set=0,binding=2,std430) readonly buffer Input { vec4 a;vec4 b;vec4 c;uvec4 controls;vec4 d;vec4 e;} inputData;
+layout(set=0,binding=39,std430) readonly buffer Indices { uint values[]; } indices;
+layout(set=0,binding=40,std430) readonly buffer Visibility { uint values[]; } visibility;
+layout(set=0,binding=41,std430) writeonly buffer Compacted { uint values[]; } compacted;
+layout(set=0,binding=42,std430) buffer DrawArgs { uint values[]; } drawArgs;
+layout(set=0,binding=43,std430) buffer Counters { uint values[]; } counters;
+void main(){uint triangle=gl_GlobalInvocationID.x,total=counters.values[5];if(triangle>=total||visibility.values[triangle]==0u)return;uint destination=atomicAdd(drawArgs.values[0],3u);if(destination+2u>=total*3u){atomicAdd(counters.values[2],1u);return;}compacted.values[destination]=indices.values[triangle*3u];compacted.values[destination+1u]=indices.values[triangle*3u+1u];compacted.values[destination+2u]=indices.values[triangle*3u+2u];atomicAdd(counters.values[4],3u);}

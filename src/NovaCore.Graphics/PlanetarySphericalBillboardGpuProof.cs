@@ -155,6 +155,73 @@ public sealed unsafe class PlanetarySphericalBillboardGpuProofSession : IDisposa
         }
     }
 
+    public NativeSphericalBillboardProofMetrics UploadProduction(
+        PlanetaryProductionSphericalBillboardTopology topology,
+        bool stageAsIncoming = false)
+    {
+        ObjectDisposedException.ThrowIf(_disposed, this);
+        ArgumentNullException.ThrowIfNull(topology);
+        var vertices = topology.Vertices.Select(value => new NativeSphericalBillboardProofLatticeVertex
+        {
+            CubeX = value.CubeX,
+            CubeY = value.CubeY,
+            CubeZ = value.CubeZ,
+            Metadata = (uint)value.DensityRegion | (uint)value.RefinementDepth << 8
+        }).ToArray();
+        var indices = topology.Indices.ToArray();
+        var offsets = topology.NeighborOffsets.Select(value => checked((uint)value)).ToArray();
+        var neighbors = topology.Neighbors.Select(value => checked((uint)value)).ToArray();
+        fixed (NativeSphericalBillboardProofLatticeVertex* latticePointer = vertices)
+        fixed (uint* indexPointer = indices)
+        fixed (uint* offsetPointer = offsets)
+        fixed (uint* neighborPointer = neighbors)
+        {
+            var native = new NativeSphericalBillboardProofTopology
+            {
+                Size = (uint)Marshal.SizeOf<NativeSphericalBillboardProofTopology>(), Version = 1,
+                FormatVersion = PlanetaryProductionSphericalBillboardTopology.FormatVersion,
+                GeneratorVersion = PlanetaryProductionSphericalBillboardTopology.GeneratorVersion,
+                Level = (uint)topology.Level, VertexCount = (uint)vertices.Length,
+                IndexCount = (uint)indices.Length, NeighborOffsetCount = (uint)offsets.Length,
+                NeighborCount = (uint)neighbors.Length, Reserved0 = 1,
+                Reserved1 = (uint)topology.LatticeScale, TopologyHash = topology.TopologyHash,
+                Reserved2 = stageAsIncoming ? 1u : 0u,
+                Vertices = (NativeSphericalBillboardProofVertex*)latticePointer,
+                Indices = indexPointer, NeighborOffsets = offsetPointer, Neighbors = neighborPointer,
+            };
+            var metrics = EmptyMetrics();
+            if (NativeRuntime.UploadSphericalBillboardGpuProofTopology(&native, &metrics) != NativeResult.Success)
+                throw new InvalidOperationException($"Production v2 topology upload failed for L{topology.Level:D2}.");
+            return metrics;
+        }
+    }
+
+    public NativeSphericalBillboardProofMetrics RunProductionFrame(
+        PlanetaryProductionSphericalBillboardTopology topology,
+        uint frameIndex,
+        bool render = true,
+        double cameraDistanceRadii = 2.5,
+        bool publishIncoming = false)
+    {
+        ObjectDisposedException.ThrowIf(_disposed, this);
+        var radius = PlanetaryProductionSphericalBillboardTopologyGenerator.EarthRadiusMetres;
+        var frame = new NativeSphericalBillboardProofFrame
+        {
+            Size = (uint)Marshal.SizeOf<NativeSphericalBillboardProofFrame>(), Version = 1,
+            FrameIndex = frameIndex, RenderEnabled = render ? 1u : 0u,
+            WorkVertexCount = (uint)topology.Vertices.Count,
+            WorkTriangleCount = (uint)topology.TriangleCount,
+            ExpectedTopologyHash = topology.TopologyHash,
+            BodyRadiusMetres = radius, CameraDistanceMetres = radius * cameraDistanceRadii,
+            VerticalTanHalfFov = (float)Math.Tan(Math.PI / 6d), AspectRatio = 1f,
+            Reserved2 = publishIncoming ? 1u : 0u,
+        };
+        var metrics = EmptyMetrics();
+        if (NativeRuntime.RunSphericalBillboardGpuProofFrame(&frame, &metrics) != NativeResult.Success)
+            throw new InvalidOperationException($"Production v2 frame failed for L{topology.Level:D2}.");
+        return metrics;
+    }
+
     public NativeSphericalBillboardProofMetrics RunFrame(PlanetarySphericalBillboardGpuRuntimeDescription description,
         uint frameIndex, uint? workVertices = null, uint? workTriangles = null, bool render = true, double cameraDistanceRadii = 2.5,
         uint physicalGeneration = 0, uint terrainDataGeneration = 0, double bodyRadiusMetres = 6_371_008.8)

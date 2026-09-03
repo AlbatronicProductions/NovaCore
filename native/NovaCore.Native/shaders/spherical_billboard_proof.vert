@@ -5,6 +5,7 @@ layout(push_constant) uniform Constants {
   uint baseVertexCount; uint baseTriangleCount; uint workVertexCount; uint workTriangleCount;
   float bodyRadius; float cameraDistance; float tanHalfFov; float aspect;
   uint topologyLevel; uint frameIndex; uint outputIndexCapacity; uint reserved;
+  uint coordinateEncoding; uint latticeScale;
 } pc;
 layout(location=0) out vec3 outNormal;
 void main(){
