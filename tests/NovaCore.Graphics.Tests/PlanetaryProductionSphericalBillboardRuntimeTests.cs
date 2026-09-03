@@ -1,6 +1,7 @@
 using NovaCore.Core;
 using NovaCore.Graphics;
 using NovaCore.Interop;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 internal static class PlanetaryProductionSphericalBillboardRuntimeTests
@@ -18,6 +19,10 @@ internal static class PlanetaryProductionSphericalBillboardRuntimeTests
         ProveSelector(levels);
         ProvePupilAndSnap(levels);
         ProveReuse(levels);
+        ProveActualIncrementalReuse(levels);
+        ProveActualPhysicalSnapPreparation(root, levels);
+        ProveMovingCoordinator(levels);
+        ProveMovementCampaign(levels);
         ProvePublication(levels);
         ProveTes(levels[^1]);
         ProveIsolation(root);
@@ -167,6 +172,321 @@ internal static class PlanetaryProductionSphericalBillboardRuntimeTests
             $"new={cross.NewSamples}; reuse={cross.ReusePercent:F3}%; snapNew={shifted.NewSamples}");
     }
 
+    private static void ProveActualIncrementalReuse(
+        IReadOnlyList<PlanetaryProductionSphericalBillboardTopology> levels)
+    {
+        var cache = new PlanetaryProductionBillboardPhysicalCache();
+        var pupil = PlanetaryProductionBillboardPupil.Resolve(default, Double3.UnitZ, levels[16]);
+        var parent = PrepareSynthetic(levels[16], pupil, cache);
+        var child = PrepareSynthetic(levels[17], pupil, cache);
+        Require(child.Vertices.Length == 450_778 && child.ReusedSamples == 416_142 &&
+            child.PreparedSamples == 34_636,
+            "actual canonical cache realizes the authored L16 to L17 reuse mapping");
+        cache.RetainOnly(child.Identities);
+        var target = (pupil.PivotDirection + pupil.Tangent.East *
+            (levels[17].Snap.PupilCellRadians * (levels[17].Snap.CandidateShiftMultiple + 1))).Normalized();
+        var snapped = PlanetaryProductionBillboardPupil.Resolve(pupil, target, levels[17]);
+        var moved = PrepareSynthetic(levels[17], snapped, cache);
+        Require(snapped.Generation == pupil.Generation + 1 && moved.ReusedSamples > 0 &&
+            moved.PreparedSamples > 0 && moved.PreparedSamples < moved.Vertices.Length,
+            "actual snapped generation preserves canonical identities and prepares only entering samples");
+        var inner = levels[17].Snap.OverlapFootprintCells *
+            levels[17].Snap.PupilCellRadians * Math.Sqrt(2d);
+        var outer = inner + 4d * levels[17].Snap.CandidateShiftMultiple *
+            levels[17].Snap.PupilCellRadians;
+        for (var i = 0; i < levels[17].Vertices.Count; i++)
+        {
+            var vertex = levels[17].Vertices[i];
+            var radius = vertex.CubeZ == levels[17].LatticeScale
+                ? Math.Sqrt((double)vertex.CubeX * vertex.CubeX +
+                    (double)vertex.CubeY * vertex.CubeY) / levels[17].LatticeScale
+                : double.PositiveInfinity;
+            if (radius >= outer)
+                Require(child.Identities[i] == moved.Identities[i],
+                    "snap demand is confined to the pupil and its conforming transition annulus");
+        }
+        Require(moved.PreparedSamples < moved.Vertices.Length / 20,
+            "ordinary finest-level snap reuses more than 95% of actual canonical samples");
+        ProveSnappedGeometry(levels[17], snapped);
+        var retained = child.Identities.Intersect(moved.Identities).First();
+        var oldVertex = child.Vertices[child.Identities.ToList().IndexOf(retained)];
+        var newVertex = moved.Vertices[moved.Identities.ToList().IndexOf(retained)];
+        Require(oldVertex.BodyX == newVertex.BodyX && oldVertex.BodyY == newVertex.BodyY &&
+            oldVertex.BodyZ == newVertex.BodyZ && oldVertex.PhysicalHeightMetres == newVertex.PhysicalHeightMetres &&
+            oldVertex.NormalX == newVertex.NormalX && oldVertex.NormalY == newVertex.NormalY &&
+            oldVertex.NormalZ == newVertex.NormalZ,
+            "retained H(bodyDirection) samples remain bit-identical across integer snap");
+        Console.WriteLine($"P2S5C2 actual reuse: L16-L17={child.ReusedSamples}/{child.Vertices.Length} " +
+            $"({100d * child.ReusedSamples / child.Vertices.Length:F3}%); snap={moved.ReusedSamples}/{moved.Vertices.Length} " +
+            $"({100d * moved.ReusedSamples / moved.Vertices.Length:F3}%); entering={moved.PreparedSamples}");
+        GC.KeepAlive(parent);
+    }
+
+    private static void ProveSnappedGeometry(
+        PlanetaryProductionSphericalBillboardTopology topology,
+        PlanetaryProductionBillboardPupil pupil)
+    {
+        var directions = topology.Vertices.Select(vertex =>
+            pupil.ResolveCanonicalDirection(vertex, topology)).ToArray();
+        var minimumOutward = double.PositiveInfinity;
+        var minimumEdge = double.PositiveInfinity;
+        var nonOutward = 0;
+        for (var index = 0; index < topology.Indices.Count; index += 3)
+        {
+            var a = directions[topology.Indices[index]];
+            var b = directions[topology.Indices[index + 1]];
+            var c = directions[topology.Indices[index + 2]];
+            var normal = Double3.Cross(b - a, c - a);
+            var outward = Double3.Dot(normal, (a + b + c).Normalized());
+            if (outward <= 0d) nonOutward++;
+            minimumOutward = Math.Min(minimumOutward, outward);
+            minimumEdge = Math.Min(minimumEdge, Math.Min((b - a).LengthSquared,
+                Math.Min((c - b).LengthSquared, (a - c).LengthSquared)));
+        }
+        Console.WriteLine($"P2S5C2 snapped geometry: minOutward={minimumOutward:E9}; " +
+            $"minEdgeSquared={minimumEdge:E9}; nonOutward={nonOutward}; triangles={topology.TriangleCount}");
+        Require(minimumOutward > 0d && minimumEdge > 0d,
+            "snapped pupil keeps every production triangle finite, nondegenerate, and outward");
+    }
+
+    private static void ProveActualPhysicalSnapPreparation(string root,
+        IReadOnlyList<PlanetaryProductionSphericalBillboardTopology> levels)
+    {
+        var previous = PlanetaryPhysicalSurface.RuntimeGeneration;
+        try
+        {
+            PlanetaryPhysicalSurface.ConfigureRuntimeGeneration(
+                PlanetaryPhysicalSurfaceGeneration.M12DNaturalTerrainCandidate);
+            ProveActualPhysicalSnapPreparationCore(root, levels);
+        }
+        finally { PlanetaryPhysicalSurface.ConfigureRuntimeGeneration(previous); }
+    }
+
+    private static void ProveActualPhysicalSnapPreparationCore(string root,
+        IReadOnlyList<PlanetaryProductionSphericalBillboardTopology> levels)
+    {
+        var topology = levels[8];
+        var cache = new PlanetaryProductionBillboardPhysicalCache();
+        var pupil = PlanetaryProductionBillboardPupil.Resolve(default, Double3.UnitZ, topology);
+        var initialStart = Stopwatch.GetTimestamp();
+        var initial = PlanetarySphericalBillboardNaturalTerrainProof.PrepareProductionIncremental(
+            root, topology, pupil, cache, maximumParitySamples: 64);
+        var initialCpu = Stopwatch.GetElapsedTime(initialStart).TotalMilliseconds;
+        cache.RetainOnly(initial.Identities);
+        var snapAngle = topology.Snap.PupilCellRadians *
+            (topology.Snap.CandidateShiftMultiple + 1);
+        var target = pupil.PivotDirection * Math.Cos(snapAngle) +
+            pupil.Tangent.East * Math.Sin(snapAngle);
+        var snapped = PlanetaryProductionBillboardPupil.Resolve(pupil, target, topology);
+        var snapStart = Stopwatch.GetTimestamp();
+        var moved = PlanetarySphericalBillboardNaturalTerrainProof.PrepareProductionIncremental(
+            root, topology, snapped, cache, maximumParitySamples: 64);
+        var snapCpu = Stopwatch.GetElapsedTime(snapStart).TotalMilliseconds;
+        Console.WriteLine($"P2S5C2 physical snap L8: active={moved.Vertices.Length}; " +
+            $"reused={moved.ReusedSamples}; new={moved.PreparedSamples}; " +
+            $"reuse={100d * moved.ReusedSamples / moved.Vertices.Length:F3}%; " +
+            $"initialCpu={initialCpu:F3}ms; initialGpu={initial.Metrics.GpuMilliseconds:F6}ms; " +
+            $"snapCpu={snapCpu:F3}ms; snapGpu={moved.Metrics.GpuMilliseconds:F6}ms; " +
+            $"heightParity={moved.MaximumCpuHeightErrorMetres:E9}m; " +
+            $"normalParity={moved.MaximumCpuNormalErrorRadians:E9}rad; topologyUploads=0");
+        Require(initial.Metrics.ValidationErrors == 0 && moved.Metrics.ValidationErrors == 0 &&
+            moved.ReusedSamples > 0 && moved.PreparedSamples > 0 &&
+            moved.PreparedSamples < moved.Vertices.Length &&
+            moved.MaximumCpuHeightErrorMetres < 1e-5 &&
+            moved.MaximumCpuNormalErrorRadians < 5e-3,
+            "real physical preparation reuses the snapped sample set with CPU/GPU parity");
+    }
+
+    private static void ProveMovingCoordinator(
+        IReadOnlyList<PlanetaryProductionSphericalBillboardTopology> levels)
+    {
+        var runtime = new PlanetaryProductionSphericalBillboardMovingRuntime(levels, PrepareSynthetic);
+        ulong frame = 0;
+        var target = Double3.UnitZ;
+        var altitude = FindRepresentativeAltitude(levels, 8);
+        var telemetry = runtime.Update(View(altitude, frame++), 0);
+        var initial = AwaitPrepared(runtime);
+        telemetry = runtime.Update(new(altitude, target, 3440, 1440, Math.PI / 3d, frame++),
+            unchecked((uint)initial.PublicationGeneration));
+        Require(runtime.Current?.Topology.Level == 8 && telemetry.Publications == 1 &&
+            telemetry.ZeroOwnerFrames == 0 && telemetry.OverlapOwnerFrames == 0,
+            "initial candidate atomically replaces the complete global fallback with one owner");
+
+        var stable = runtime.Current!.Pupil;
+        var small = (stable.PivotDirection + stable.Tangent.East *
+            (levels[8].Snap.PupilCellRadians * (levels[8].Snap.CandidateShiftMultiple - 1))).Normalized();
+        telemetry = runtime.Update(new(altitude, small, 3440, 1440, Math.PI / 3d, frame++), 0);
+        Require(!runtime.ReplacementInFlight && telemetry.TopologyUploads == 1,
+            "sub-threshold movement updates live camera demand without topology or physical replacement");
+
+        var snapAngle = levels[8].Snap.PupilCellRadians * (levels[8].Snap.CandidateShiftMultiple + 1);
+        target = stable.PivotDirection * Math.Cos(snapAngle) + stable.Tangent.East * Math.Sin(snapAngle);
+        runtime.Update(new(altitude, target, 3440, 1440, Math.PI / 3d, frame++), 0);
+        var snapped = AwaitPrepared(runtime);
+        Require(!snapped.TopologyUploadRequired && snapped.Physical.PreparedSamples > 0 &&
+            snapped.Physical.ReusedSamples > 0,
+            "snap retains immutable topology and incrementally prepares the entering physical set");
+        var stagedTelemetry = runtime.Update(
+            new(altitude, target, 3440, 1440, Math.PI / 3d, frame++), 0);
+        telemetry = runtime.Update(new(altitude, target, 3440, 1440, Math.PI / 3d, frame++),
+            unchecked((uint)snapped.PublicationGeneration));
+        Require(runtime.Current?.Pupil.Generation == snapped.Pupil.Generation &&
+            telemetry.TopologyUploads == 1 && telemetry.Publications == 2 &&
+            telemetry.ZeroOwnerFrames == 0 && telemetry.OverlapOwnerFrames == 0 &&
+            telemetry.StaleGenerationDraws == 0 &&
+            stagedTelemetry.ResidentGpuBytes > telemetry.ResidentGpuBytes &&
+            telemetry.PeakResidentGpuBytes == stagedTelemetry.ResidentGpuBytes,
+            "snap publication changes the actual current generation with zero topology upload or ownership fault");
+        var timing = runtime.TimingSummary;
+        Require(timing.Callback.Samples > 0 && timing.Selector.Samples > 0 &&
+            timing.PupilAndSnap.Samples > 0 && timing.PhysicalPreparation.Samples == 2 &&
+            timing.Publication.Samples == 2,
+            "bounded runtime records callback, selector, pupil/snap, preparation, and publication timing");
+        Console.WriteLine($"P2S5C2 moving runtime: publications={telemetry.Publications}; topologyUploads={telemetry.TopologyUploads}; " +
+            $"current=L{telemetry.CurrentLevel}; pupilError={telemetry.PupilAngularErrorRadians:E9}rad; " +
+            $"resident={telemetry.ResidentGpuBytes}; peak={telemetry.PeakResidentGpuBytes}; " +
+            $"callback={timing.Callback.AverageMilliseconds:F6}/{timing.Callback.P95Milliseconds:F6}/{timing.Callback.MaximumMilliseconds:F6}ms");
+        Console.WriteLine($"P2S5C2 moving timings avg/p95/max ms: " +
+            $"selector={Format(timing.Selector)}; pupilSnap={Format(timing.PupilAndSnap)}; " +
+            $"scheduling={Format(timing.DemandScheduling)}; physical={Format(timing.PhysicalPreparation)}; " +
+            $"gpuPrepare={Format(timing.GpuPreparation)}; publication={Format(timing.Publication)}");
+    }
+
+    private static void ProveMovementCampaign(
+        IReadOnlyList<PlanetaryProductionSphericalBillboardTopology> levels)
+    {
+        var selector = new PlanetaryProductionSphericalBillboardSelector(levels);
+        var representative = new double[levels.Count];
+        var found = new bool[levels.Count];
+        var logarithmicRange = Math.Log(80_000_000d / 10d);
+        for (var sample = 0; sample <= 20_000; sample++)
+        {
+            var altitude = 80_000_000d / Math.Exp(logarithmicRange * sample / 20_000d);
+            selector.CancelInitialSelectionForTests();
+            var level = selector.Evaluate(View(altitude, (ulong)sample), false).Level;
+            if (!found[level]) { found[level] = true; representative[level] = altitude; }
+        }
+        Require(found.All(value => value), "the deterministic orbit-to-10m campaign exercises all 18 authored levels");
+
+        selector.CancelInitialSelectionForTests();
+        var first = selector.Evaluate(View(representative[0], 0), false);
+        selector.CommitPublication(first.Level);
+        ulong frame = 1;
+        for (var level = 1; level < levels.Count; level++)
+        {
+            var firstDwell = selector.Evaluate(View(representative[level], frame++), false);
+            var secondDwell = selector.Evaluate(View(representative[level], frame++), false);
+            var selected = firstDwell.Urgent ? firstDwell : secondDwell;
+            Require(selected.Level == level && selector.InFlightLevel == level,
+                $"inward scale transition enters adjacent L{level:D2} after urgent or two-frame dwell");
+            var noisyReverse = selector.Evaluate(View(representative[0], frame++), true);
+            Require(noisyReverse.Level == level,
+                "one noisy reverse sample cannot reverse an in-flight generation");
+            selector.CommitPublication(level);
+        }
+        for (var level = levels.Count - 2; level >= 0; level--)
+        {
+            var outwardAltitude = representative[Math.Max(0, level - 1)];
+            _ = selector.Evaluate(View(outwardAltitude, frame++), false);
+            var selected = selector.Evaluate(View(outwardAltitude, frame++), false);
+            Require(selected.Level == level && selector.InFlightLevel == level,
+                $"outward scale transition enters adjacent L{level:D2} after two-frame dwell");
+            selector.CommitPublication(level);
+        }
+
+        var pupil = PlanetaryProductionBillboardPupil.Resolve(default, Double3.UnitZ, levels[8]);
+        var directions = new[]
+        {
+            new Double3(1,0,0), new Double3(-1,0,0), new Double3(0,0,1), new Double3(0,0,-1),
+            new Double3(1,1,1).Normalized(), new Double3(-1,1,-1).Normalized(),
+            new Double3(1e-10,1,1e-10).Normalized(), new Double3(-1e-10,-1,-1e-10).Normalized()
+        };
+        var maximumAngularError = 0d;
+        foreach (var direction in directions)
+        {
+            for (var step = 0; step < 8; step++)
+            {
+                var amount = (step + 1d) / 8d;
+                var next = (pupil.PivotDirection * (1d - amount) + direction * amount).Normalized();
+                pupil = PlanetaryProductionBillboardPupil.Resolve(pupil, next, levels[8]);
+                Require(pupil.IsValid && pupil.Tangent.IsValid,
+                    "cardinal, diagonal, wrap, and polar transport remains finite");
+                maximumAngularError = Math.Max(maximumAngularError, Math.Acos(Math.Clamp(
+                    Double3.Dot(pupil.PivotDirection, next), -1d, 1d)));
+            }
+        }
+        Console.WriteLine($"P2S5C2 pupil campaign error: max={maximumAngularError:E9}rad; " +
+            $"authoredAxisThreshold={levels[8].Snap.PupilCellRadians * levels[8].Snap.CandidateShiftMultiple:E9}rad");
+        Require(maximumAngularError <= levels[8].Snap.PupilCellRadians *
+            levels[8].Snap.CandidateShiftMultiple * 3d,
+            "retained pupil error stays inside the authored snap neighborhood");
+        Console.WriteLine($"P2S5C2 campaign: levels=18; descent=18; ascent=18; frames={frame}; " +
+            $"cardinalDiagonalWrapPoles={directions.Length}; maxPupilError={maximumAngularError:E9}rad; " +
+            "timeWarp=body-fixed input invariant; unanchored=body-fixed input invariant");
+    }
+
+    private static PlanetaryProductionBillboardPreparedGeneration AwaitPrepared(
+        PlanetaryProductionSphericalBillboardMovingRuntime runtime)
+    {
+        var timeout = System.Diagnostics.Stopwatch.StartNew();
+        while (timeout.Elapsed < TimeSpan.FromSeconds(10))
+        {
+            if (runtime.TrySubmitPrepared(out var generation)) return generation;
+            Thread.Yield();
+        }
+        throw new InvalidOperationException("P2S5C: bounded background preparation did not complete.");
+    }
+
+    private static double FindRepresentativeAltitude(
+        IReadOnlyList<PlanetaryProductionSphericalBillboardTopology> levels, int requestedLevel)
+    {
+        var selector = new PlanetaryProductionSphericalBillboardSelector(levels);
+        var logarithmicRange = Math.Log(80_000_000d / 10d);
+        for (var sample = 0; sample <= 20_000; sample++)
+        {
+            var altitude = 80_000_000d / Math.Exp(logarithmicRange * sample / 20_000d);
+            selector.CancelInitialSelectionForTests();
+            if (selector.Evaluate(View(altitude, (ulong)sample), false).Level == requestedLevel)
+                return altitude;
+        }
+        throw new InvalidOperationException($"P2S5C: no representative altitude selected L{requestedLevel:D2}.");
+    }
+
+    private static PlanetaryProductionBillboardPhysicalPreparation PrepareSynthetic(
+        PlanetaryProductionSphericalBillboardTopology topology,
+        PlanetaryProductionBillboardPupil pupil,
+        PlanetaryProductionBillboardPhysicalCache cache)
+    {
+        var vertices = new NativeSphericalBillboardPhysicalVertex[topology.Vertices.Count];
+        var identities = new PlanetaryCanonicalPhysicalSampleIdentity[topology.Vertices.Count];
+        var prepared = 0;
+        for (var i = 0; i < topology.Vertices.Count; i++)
+        {
+            var direction = pupil.ResolveCanonicalDirection(topology.Vertices[i], topology);
+            var identity = PlanetaryCanonicalPhysicalSampleIdentity.Create(direction,
+                PlanetarySphericalBillboardNaturalTerrainProof.PhysicalGeneration,
+                PlanetarySphericalBillboardNaturalTerrainProof.TerrainDataGeneration);
+            identities[i] = identity;
+            if (!cache.TryGet(identity, out var value))
+            {
+                var height = direction.X * 17d + direction.Y * 11d + direction.Z * 5d;
+                var body = direction * (PlanetarySphericalBillboardNaturalTerrainProof.EarthRadiusMetres + height);
+                value = new NativeSphericalBillboardPhysicalVertex
+                {
+                    BodyX = body.X, BodyY = body.Y, BodyZ = body.Z,
+                    PhysicalHeightMetres = height,
+                    NormalX = (float)direction.X, NormalY = (float)direction.Y,
+                    NormalZ = (float)direction.Z, NormalValidity = 1f
+                };
+                cache.Store(identity, value);
+                prepared++;
+            }
+            vertices[i] = value;
+        }
+        return new(vertices, default, 0d, 0d, prepared, vertices.Length - prepared,
+            Array.AsReadOnly(identities));
+    }
+
     private static void ProvePublication(IReadOnlyList<PlanetaryProductionSphericalBillboardTopology> levels)
     {
         var publication = new PlanetaryProductionSphericalBillboardPublication();
@@ -239,4 +559,7 @@ internal static class PlanetaryProductionSphericalBillboardRuntimeTests
     {
         if (!condition) throw new InvalidOperationException("P2S5C: " + message);
     }
+
+    private static string Format(PlanetaryProductionBillboardTiming value) =>
+        $"{value.AverageMilliseconds:F6}/{value.P95Milliseconds:F6}/{value.MaximumMilliseconds:F6}";
 }

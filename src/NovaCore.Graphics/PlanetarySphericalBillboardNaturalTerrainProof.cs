@@ -26,7 +26,32 @@ public sealed record PlanetaryProductionBillboardPhysicalPreparation(
     NativeSphericalBillboardPhysicalVertex[] Vertices,
     NativePlanetaryHeightQueryMetrics Metrics,
     double MaximumCpuHeightErrorMetres,
-    double MaximumCpuNormalErrorRadians);
+    double MaximumCpuNormalErrorRadians,
+    int PreparedSamples,
+    int ReusedSamples,
+    IReadOnlyList<PlanetaryCanonicalPhysicalSampleIdentity> Identities);
+
+public sealed class PlanetaryProductionBillboardPhysicalCache
+{
+    private readonly Dictionary<PlanetaryCanonicalPhysicalSampleIdentity,
+        NativeSphericalBillboardPhysicalVertex> _values = new();
+
+    internal bool TryGet(PlanetaryCanonicalPhysicalSampleIdentity identity,
+        out NativeSphericalBillboardPhysicalVertex value) => _values.TryGetValue(identity, out value);
+
+    internal void Store(PlanetaryCanonicalPhysicalSampleIdentity identity,
+        in NativeSphericalBillboardPhysicalVertex value) => _values[identity] = value;
+
+    public int Count => _values.Count;
+
+    public void RetainOnly(IEnumerable<PlanetaryCanonicalPhysicalSampleIdentity> identities)
+    {
+        ArgumentNullException.ThrowIfNull(identities);
+        var retained = identities.ToHashSet();
+        foreach (var identity in _values.Keys.Where(identity => !retained.Contains(identity)).ToArray())
+            _values.Remove(identity);
+    }
+}
 
 /// <summary>
 /// Isolated P2S4 binding. The shared topology-neutral GPU physical query owns
@@ -46,49 +71,84 @@ public static unsafe class PlanetarySphericalBillboardNaturalTerrainProof
         string repositoryRoot,
         PlanetaryProductionSphericalBillboardTopology topology,
         in PlanetaryProductionBillboardPupil pupil)
+        => PrepareProductionIncremental(repositoryRoot, topology, pupil,
+            new PlanetaryProductionBillboardPhysicalCache());
+
+    public static PlanetaryProductionBillboardPhysicalPreparation PrepareProductionIncremental(
+        string repositoryRoot,
+        PlanetaryProductionSphericalBillboardTopology topology,
+        in PlanetaryProductionBillboardPupil pupil,
+        PlanetaryProductionBillboardPhysicalCache cache,
+        int maximumParitySamples = int.MaxValue)
     {
         ArgumentNullException.ThrowIfNull(topology);
+        ArgumentNullException.ThrowIfNull(cache);
         if (!pupil.IsValid) throw new ArgumentOutOfRangeException(nameof(pupil));
         ResolveAssets(repositoryRoot, out var oracle, out var terrain, out var local);
         var queryShader = Path.Combine(repositoryRoot, "build", "native-ninja", "shaders",
             "planetary_height_query.comp.spv");
         var resolvedPupil = pupil;
         var directions = topology.Vertices.Select(vertex =>
-            resolvedPupil.RotateCanonical(vertex.Direction(topology.LatticeScale))).ToArray();
-        var queries = new NativePlanetaryHeightQuery[directions.Length];
+            resolvedPupil.ResolveCanonicalDirection(vertex, topology)).ToArray();
+        var identities = directions.Select(direction => PlanetaryCanonicalPhysicalSampleIdentity.Create(
+            direction, PhysicalGeneration, TerrainDataGeneration)).ToArray();
+        var missing = identities.Select((identity, index) => (identity, index))
+            .Where(value => !cache.TryGet(value.identity, out _)).ToArray();
+        var queries = new NativePlanetaryHeightQuery[missing.Length];
         // The shared physical-query ABI has three anchored density tiers plus its
         // global tier. Production topology levels are selection identities, not
         // new physical authorities, so they consume the finest existing physical
         // preparation tier once level 3 is reached.
         var physicalPreparationTier = Math.Min((uint)topology.Level, 3u);
-        for (var i = 0; i < directions.Length; i++)
+        for (var i = 0; i < missing.Length; i++)
             if (!PlanetaryGpuPhysicalHeightQuery.TryCreate(6, TerrainDataGeneration,
-                physicalPreparationTier, directions[i] * EarthRadiusMetres, Double3.Zero,
+                physicalPreparationTier, directions[missing[i].index] * EarthRadiusMetres, Double3.Zero,
                 out queries[i], out _))
                 throw new InvalidOperationException("Production billboard canonical query encoding failed.");
         var metrics = Query(queries, oracle, terrain, local, queryShader, out var queried);
-        var vertices = new NativeSphericalBillboardPhysicalVertex[directions.Length];
-        var maximumHeightError = 0d; var maximumNormalError = 0d;
-        for (var i = 0; i < directions.Length; i++)
+        for (var i = 0; i < missing.Length; i++)
         {
             var value = queried[i];
             if (value.Valid != 1 || value.ResultTerrainVersion != TerrainDataGeneration)
                 throw new InvalidOperationException("Production billboard GPU physical sample was invalid.");
             var normal = new Double3(value.PhysicalNormalX, value.PhysicalNormalY,
                 value.PhysicalNormalZ).Normalized();
+            var direction = directions[missing[i].index];
+            var body = direction * (EarthRadiusMetres + value.PhysicalHeightMetres);
+            var prepared = new NativeSphericalBillboardPhysicalVertex
+            {
+                BodyX = body.X, BodyY = body.Y, BodyZ = body.Z,
+                PhysicalHeightMetres = value.PhysicalHeightMetres,
+                NormalX = (float)normal.X, NormalY = (float)normal.Y,
+                NormalZ = (float)normal.Z, NormalValidity = 1f
+            };
+            cache.Store(missing[i].identity, prepared);
+        }
+        if (maximumParitySamples < 0) throw new ArgumentOutOfRangeException(nameof(maximumParitySamples));
+        var vertices = new NativeSphericalBillboardPhysicalVertex[directions.Length];
+        for (var i = 0; i < directions.Length; i++)
+        {
+            if (!cache.TryGet(identities[i], out var prepared))
+                throw new InvalidOperationException("Production billboard physical cache publication was incomplete.");
+            vertices[i] = prepared;
+        }
+        var maximumHeightError = 0d; var maximumNormalError = 0d;
+        var paritySamples = Math.Min(directions.Length, maximumParitySamples);
+        for (var sample = 0; sample < paritySamples; sample++)
+        {
+            var i = paritySamples == 1 ? 0 :
+                (int)((long)sample * (directions.Length - 1) / (paritySamples - 1));
+            var prepared = vertices[i];
+            var normal = new Double3(prepared.NormalX, prepared.NormalY, prepared.NormalZ).Normalized();
             var cpu = PlanetaryTerrainDefinition.EarthProductionCubeV5.SamplePhysicalSurface(
                 directions[i], PlanetaryPhysicalSurfaceGeneration.M12DNaturalTerrainCandidate);
             maximumHeightError = Math.Max(maximumHeightError,
-                Math.Abs(value.PhysicalHeightMetres - cpu.FinalHeightMetres));
+                Math.Abs(prepared.PhysicalHeightMetres - cpu.FinalHeightMetres));
             maximumNormalError = Math.Max(maximumNormalError, Math.Acos(Math.Clamp(
                 Double3.Dot(normal, cpu.PhysicalNormal), -1d, 1d)));
-            var body = directions[i] * (EarthRadiusMetres + value.PhysicalHeightMetres);
-            vertices[i] = new() { BodyX = body.X, BodyY = body.Y, BodyZ = body.Z,
-                PhysicalHeightMetres = value.PhysicalHeightMetres,
-                NormalX = (float)normal.X, NormalY = (float)normal.Y,
-                NormalZ = (float)normal.Z, NormalValidity = 1f };
         }
-        return new(vertices, metrics, maximumHeightError, maximumNormalError);
+        return new(vertices, metrics, maximumHeightError, maximumNormalError,
+            missing.Length, directions.Length - missing.Length, Array.AsReadOnly(identities));
     }
 
     public static PlanetarySphericalBillboardNaturalTerrainReport Run(string repositoryRoot)

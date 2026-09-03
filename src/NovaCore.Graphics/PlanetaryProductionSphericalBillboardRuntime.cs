@@ -1,5 +1,6 @@
 using NovaCore.Core;
 using NovaCore.Core.Surface;
+using System.Numerics;
 
 namespace NovaCore.Graphics;
 
@@ -72,8 +73,12 @@ public sealed class PlanetaryProductionSphericalBillboardSelector
             return Describe(CurrentLevel, view);
         }
 
+        // Replacement is deliberately adjacent.  A discontinuous camera move
+        // can demand a distant target level, but current+one-incoming residency
+        // must never turn that into an unbounded density jump.
+        var adjacent = Math.Clamp(desired, CurrentLevel - 1, CurrentLevel + 1);
         var currentError = ProjectedError(_levels[CurrentLevel], view);
-        var crossesSchmittBoundary = desired > CurrentLevel
+        var crossesSchmittBoundary = adjacent > CurrentLevel
             ? currentError > _levels[CurrentLevel].Error.EntryPixels
             : currentError < _levels[CurrentLevel].Error.ReturnPixels;
         if (!crossesSchmittBoundary)
@@ -82,18 +87,18 @@ public sealed class PlanetaryProductionSphericalBillboardSelector
             return Describe(CurrentLevel, view);
         }
 
-        var isUrgent = desired > CurrentLevel && currentError > _levels[CurrentLevel].Error.UrgentPixels;
-        if (_candidate != desired)
+        var isUrgent = adjacent > CurrentLevel && currentError > _levels[CurrentLevel].Error.UrgentPixels;
+        if (_candidate != adjacent)
         {
-            _candidate = desired;
+            _candidate = adjacent;
             _candidateFirstFrame = view.CompletedFrame;
         }
         var persisted = view.CompletedFrame >= _candidateFirstFrame + 1;
         if (isUrgent || persisted)
         {
-            InFlightLevel = desired;
+            InFlightLevel = adjacent;
             ResetCandidate();
-            return Describe(desired, view) with { Urgent = isUrgent };
+            return Describe(adjacent, view) with { Urgent = isUrgent };
         }
         return Describe(CurrentLevel, view);
     }
@@ -172,12 +177,16 @@ public sealed class PlanetaryProductionSphericalBillboardSelector
 public readonly record struct PlanetaryProductionBillboardPupil(
     Double3 PivotDirection,
     SurfaceEnuFrame Tangent,
+    SurfaceEnuFrame LatticeFrame,
     long SnapEastCells,
     long SnapNorthCells,
-    uint Generation)
+    long LatticeEastOffset,
+    long LatticeNorthOffset,
+    uint Generation,
+    bool Rebased)
 {
     public bool IsValid => PivotDirection.IsFinite && Math.Abs(PivotDirection.LengthSquared - 1d) <= 1e-12d &&
-        Tangent.IsValid && Generation != 0;
+        Tangent.IsValid && LatticeFrame.IsValid && Generation != 0;
 
     public static PlanetaryProductionBillboardPupil Resolve(
         in PlanetaryProductionBillboardPupil previous,
@@ -191,7 +200,7 @@ public readonly record struct PlanetaryProductionBillboardPupil(
         if (!previous.IsValid)
         {
             var tangent = BuildFrame(requested);
-            return new(requested, tangent, 0, 0, 1);
+            return new(requested, tangent, tangent, 0, 0, 0, 0, 1, false);
         }
 
         var cell = topology.Snap.PupilCellRadians;
@@ -203,12 +212,53 @@ public readonly record struct PlanetaryProductionBillboardPupil(
 
         var eastShift = checked((long)Math.Round(eastCells / threshold, MidpointRounding.AwayFromZero) * threshold);
         var northShift = checked((long)Math.Round(northCells / threshold, MidpointRounding.AwayFromZero) * threshold);
-        var pivot = (previous.PivotDirection + previous.Tangent.East * (eastShift * cell) +
-            previous.Tangent.North * (northShift * cell)).Normalized();
+        var latticeStep = LatticeStep(topology);
+        var latticeEast = checked(previous.LatticeEastOffset + eastShift * latticeStep);
+        var latticeNorth = checked(previous.LatticeNorthOffset + northShift * latticeStep);
+        // A translated cube surrounding the origin is still a closed spherical
+        // parameterization.  Integer translation gives overlapping vertices an
+        // identical body-fixed lattice key across a snap instead of rotating
+        // every sample and invalidating the physical cache.
+        var maximumTranslation = topology.LatticeScale / 4L;
+        var rebase = Math.Abs(latticeEast) > maximumTranslation ||
+            Math.Abs(latticeNorth) > maximumTranslation;
+        if (rebase)
+            return Rebase(previous, requested);
+        var pivot = ResolveTranslated(previous.LatticeFrame, 0, 0, topology.LatticeScale,
+            latticeEast, latticeNorth);
+        var maximumRetainedError = cell * threshold * Math.Sqrt(2d) * 1.1d;
+        if (Math.Acos(Math.Clamp(Double3.Dot(pivot, requested), -1d, 1d)) > maximumRetainedError)
+            return Rebase(previous, requested);
         var tangentTransported = Transport(previous.Tangent, pivot);
         var generation = previous.Generation == uint.MaxValue ? 1u : previous.Generation + 1u;
-        return new(pivot, tangentTransported, previous.SnapEastCells + eastShift,
-            previous.SnapNorthCells + northShift, generation);
+        return new(pivot, tangentTransported, previous.LatticeFrame, eastShift,
+            northShift, latticeEast, latticeNorth, generation, false);
+    }
+
+    private static PlanetaryProductionBillboardPupil Rebase(
+        in PlanetaryProductionBillboardPupil previous, in Double3 requested)
+    {
+        var rebased = Transport(previous.Tangent, requested);
+        var generation = previous.Generation == uint.MaxValue ? 1u : previous.Generation + 1u;
+        return new(requested, rebased, rebased, 0, 0, 0, 0, generation, true);
+    }
+
+    public Double3 ResolveCanonicalDirection(
+        in PlanetaryProductionSphericalBillboardTopology.Vertex vertex,
+        PlanetaryProductionSphericalBillboardTopology topology)
+    {
+        if (!IsValid) throw new InvalidOperationException("Cannot resolve a canonical direction from an invalid pupil frame.");
+        ArgumentNullException.ThrowIfNull(topology);
+        // P2S5B is a nested closed sphere. The exact integer pupil shift fades
+        // through its authored density domains so the closed transition stays
+        // conforming; the finest pupil and stationary outer domain retain
+        // exact identities, while only the bounded transition annuli need new
+        // samples.
+        var weight = TransitionWeight(vertex, topology);
+        var east = LatticeEastOffset * weight;
+        var north = LatticeNorthOffset * weight;
+        return ResolveTranslated(LatticeFrame, vertex.CubeX, vertex.CubeY, vertex.CubeZ,
+            east, north);
     }
 
     public Double3 RotateCanonical(in Double3 localDirection)
@@ -228,14 +278,60 @@ public readonly record struct PlanetaryProductionBillboardPupil(
 
     private static SurfaceEnuFrame Transport(in SurfaceEnuFrame old, in Double3 newUp)
     {
-        // Minimal parallel transport: project the retained east into the new
-        // tangent plane. Only the antipodal singularity falls back to a frame.
-        var eastProjected = old.East - newUp * Double3.Dot(old.East, newUp);
+        // Shortest-arc transport retains roll deterministically. Only the
+        // antipodal singularity has no unique minimal rotation.
+        var cosine = Math.Clamp(Double3.Dot(old.Up, newUp), -1d, 1d);
+        if (cosine <= -1d + 1e-14d) return BuildFrame(newUp);
+        var cross = Double3.Cross(old.Up, newUp);
+        var inverse = 1d / Math.Sqrt(2d * (1d + cosine));
+        var vector = cross * inverse;
+        var scalar = .5d / inverse;
+        var rotatedEast = old.East + Double3.Cross(vector,
+            Double3.Cross(vector, old.East) + old.East * scalar) * 2d;
+        var eastProjected = rotatedEast - newUp * Double3.Dot(rotatedEast, newUp);
         if (eastProjected.LengthSquared <= 1e-24d) return BuildFrame(newUp);
         var east = eastProjected.Normalized();
         var north = Double3.Cross(newUp, east).Normalized();
-        if (Double3.Dot(north, old.North) < 0d) { east = -east; north = -north; }
         return new(east, north, newUp);
+    }
+
+    private static long LatticeStep(PlanetaryProductionSphericalBillboardTopology topology)
+    {
+        // Authored vertices live on the common power-of-two cube lattice.  The
+        // spherical angular spacing is descriptive and can round below that
+        // exact quantum, so snap in the containing lattice quantum.
+        var approximate = Math.Max(1u, checked((uint)Math.Round(
+            topology.Snap.PupilCellRadians * topology.LatticeScale,
+            MidpointRounding.AwayFromZero)));
+        return BitOperations.RoundUpToPowerOf2(approximate);
+    }
+
+    private static double TransitionWeight(
+        in PlanetaryProductionSphericalBillboardTopology.Vertex vertex,
+        PlanetaryProductionSphericalBillboardTopology topology)
+    {
+        if (vertex.CubeZ != topology.LatticeScale) return 0d;
+        var radius = Math.Sqrt((double)vertex.CubeX * vertex.CubeX +
+            (double)vertex.CubeY * vertex.CubeY) / topology.LatticeScale;
+        var inner = topology.Snap.OverlapFootprintCells *
+            topology.Snap.PupilCellRadians * Math.Sqrt(2d);
+        var outer = inner + 4d * topology.Snap.CandidateShiftMultiple *
+            topology.Snap.PupilCellRadians;
+        if (radius <= inner) return 1d;
+        if (radius >= outer) return 0d;
+        var t = (radius - inner) / (outer - inner);
+        var smooth = t * t * (3d - 2d * t);
+        return 1d - smooth;
+    }
+
+    private static Double3 ResolveTranslated(in SurfaceEnuFrame latticeFrame,
+        long cubeX, long cubeY, long cubeZ, double latticeEast, double latticeNorth)
+    {
+        var x = checked(cubeX + latticeEast);
+        var y = checked(cubeY + latticeNorth);
+        var local = new Double3(x, y, cubeZ).Normalized();
+        return (latticeFrame.East * local.X + latticeFrame.North * local.Y +
+            latticeFrame.Up * local.Z).Normalized();
     }
 }
 
