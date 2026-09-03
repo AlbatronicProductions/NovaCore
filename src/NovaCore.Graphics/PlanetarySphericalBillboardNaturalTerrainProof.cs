@@ -62,7 +62,7 @@ public static unsafe class PlanetarySphericalBillboardNaturalTerrainProof
 {
     public const uint PhysicalGeneration = PlanetaryPhysicalSurface.NaturalTerrainCandidateGenerationId;
     public const uint TerrainDataGeneration = 5;
-    public const double EarthRadiusMetres = 6_378_137d;
+    public const double EarthRadiusMetres = PlanetaryPhysicalSurface.EarthReferenceRadiusMetres;
     private readonly record struct PreparedSample(double Height, Double3 Normal);
 
     /// <summary>Prepares the immutable production-v2 directions with the same

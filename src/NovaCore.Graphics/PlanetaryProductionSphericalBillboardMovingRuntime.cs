@@ -38,7 +38,8 @@ public readonly record struct PlanetaryProductionBillboardMovingTelemetry(
     double LastPublicationMilliseconds);
 
 public readonly record struct PlanetaryProductionBillboardTiming(double AverageMilliseconds,
-    double P95Milliseconds, double MaximumMilliseconds, int Samples);
+    double P50Milliseconds, double P95Milliseconds, double P99Milliseconds,
+    double MaximumMilliseconds, int Samples);
 
 public readonly record struct PlanetaryProductionBillboardTimingSummary(
     PlanetaryProductionBillboardTiming Callback,
@@ -252,8 +253,11 @@ public sealed class PlanetaryProductionSphericalBillboardMovingRuntime
             var values = new double[_count];
             Array.Copy(_values, values, _count);
             Array.Sort(values);
-            return new(values.Average(), values[(int)Math.Ceiling(values.Length * .95d) - 1],
-                values[^1], values.Length);
+            double Percentile(double percentile) =>
+                values[Math.Min(values.Length - 1,
+                    Math.Max(0, (int)Math.Ceiling(values.Length * percentile) - 1))];
+            return new(values.Average(), Percentile(.50d), Percentile(.95d),
+                Percentile(.99d), values[^1], values.Length);
         }
     }
 }

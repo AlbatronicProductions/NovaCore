@@ -12,6 +12,9 @@ internal static class PlanetaryProductionSphericalBillboardRuntimeTests
         var levels = PlanetaryProductionSphericalBillboardTopologyLibrary.Load(
             Path.Combine(root, "assets", "planetary-production-topology"));
         Require(levels.Count == 18, "complete production topology library loaded");
+        Require(PlanetarySphericalBillboardNaturalTerrainProof.EarthRadiusMetres ==
+                PlanetaryPhysicalSurface.EarthReferenceRadiusMetres,
+            "production billboard preparation uses the canonical physical Earth radius");
         Require(Marshal.SizeOf<NativeSphericalBillboardPhysicalVertex>() == 64,
             "physical billboard vertex matches the std430 dvec4 array stride");
         ProveV2Gpu(root, levels);
@@ -25,6 +28,8 @@ internal static class PlanetaryProductionSphericalBillboardRuntimeTests
         ProveMovementCampaign(levels);
         ProvePublication(levels);
         ProveTes(levels[^1]);
+        ProveConservativeNearSurfaceHorizonCoverage(levels[14]);
+        DiagnoseBodyFixedLateralContinuity(levels);
         ProveIsolation(root);
     }
 
@@ -170,6 +175,11 @@ internal static class PlanetaryProductionSphericalBillboardRuntimeTests
             "integer recenter prepares an entering strip rather than the full topology");
         Console.WriteLine($"P2S5C reuse: L16-L17 active={cross.ActiveSamples}; reused={cross.ReusedSamples}; " +
             $"new={cross.NewSamples}; reuse={cross.ReusePercent:F3}%; snapNew={shifted.NewSamples}");
+        foreach (var topology in levels)
+        {
+            var pupil = PlanetaryProductionBillboardPupil.Resolve(default, Double3.UnitZ, topology);
+            ProveSnappedGeometry(topology, pupil);
+        }
     }
 
     private static void ProveActualIncrementalReuse(
@@ -525,14 +535,17 @@ internal static class PlanetaryProductionSphericalBillboardRuntimeTests
         var a = new Double3(-20, 0, -100);
         var b = new Double3(20, 0, -101);
         var first = PlanetaryProductionSphericalBillboardTes.SharedEdgeFactor(a, b, 1440,
-            Math.PI / 3d, 50_000d, finest.Error.MinimumRepresentablePhysicalWavelengthMetres);
+            Math.PI / 3d, PlanetaryProductionSphericalBillboardTes.RefinementRangeMetres,
+            finest.Error.MinimumRepresentablePhysicalWavelengthMetres);
         var reversed = PlanetaryProductionSphericalBillboardTes.SharedEdgeFactor(b, a, 1440,
-            Math.PI / 3d, 50_000d, finest.Error.MinimumRepresentablePhysicalWavelengthMetres);
+            Math.PI / 3d, PlanetaryProductionSphericalBillboardTes.RefinementRangeMetres,
+            finest.Error.MinimumRepresentablePhysicalWavelengthMetres);
         Require(first == reversed && first is >= 1 and <= 64,
             "TES edge factors are shared-edge deterministic and bounded 1-64");
         var skew = PlanetaryProductionSphericalBillboardTes.SharedEdgeFactor(
             new Double3(0, 0, -10), new Double3(1, 0, -1000), 1440,
-            Math.PI / 3d, 50_000d, finest.Error.MinimumRepresentablePhysicalWavelengthMetres);
+            Math.PI / 3d, PlanetaryProductionSphericalBillboardTes.RefinementRangeMetres,
+            finest.Error.MinimumRepresentablePhysicalWavelengthMetres);
         Require(skew >= 1 && skew <= 64, "perspective-skew path remains bounded");
         const double exactHorizonBasePixels = 1344.683;
         var residual = exactHorizonBasePixels / 64d;
@@ -540,6 +553,274 @@ internal static class PlanetaryProductionSphericalBillboardRuntimeTests
             "known L17 exact-horizon residual is measured honestly and is not hidden by raising the cap");
         Console.WriteLine($"P2S5C exact horizon: base={exactHorizonBasePixels:F3}px; TES64={residual:F6}px; " +
             "transitionCurvature=0.459px; silhouette=1.312px; requiresManualSignificanceCheck=true");
+    }
+
+    private static void ProveConservativeNearSurfaceHorizonCoverage(
+        PlanetaryProductionSphericalBillboardTopology topology)
+    {
+        var radius = PlanetarySphericalBillboardNaturalTerrainProof.EarthRadiusMetres;
+        var maximumTerrain = PlanetaryTerrainDefinition.EarthProductionCubeV5.MaximumHeightMetres;
+        // Captured C3 native 3440x1440 failure pose. The initial generation's
+        // pupil is deliberately stale here: current remains authoritative while
+        // a moved pupil prepares, so its base must still cover the planet.
+        var cameraDirection = new Double3(-1036.8296487848155, -2603347.813620877,
+            5814848.209969225).Normalized();
+        var camera = cameraDirection * (radius + 10.004d);
+        var stalePupil = PlanetaryProductionBillboardPupil.Resolve(default, Double3.UnitZ, topology);
+        var directions = topology.Vertices.Select(vertex =>
+            stalePupil.ResolveCanonicalDirection(vertex, topology)).ToArray();
+        var bodies = directions.Select(direction => direction * radius).ToArray();
+
+        var reference = Math.Abs(cameraDirection.Y) < .9d ? Double3.UnitY : Double3.UnitX;
+        var east = Double3.Cross(reference, cameraDirection).Normalized();
+        var north = Double3.Cross(cameraDirection, east).Normalized();
+        var sampleDistances = new[] { 100d, 1_000d, 5_000d, 10_000d };
+        var retainedSamples = 0;
+        for (var bearing = 0; bearing < 8; bearing++)
+        {
+            var azimuth = bearing * Math.Tau / 8d;
+            var tangent = east * Math.Cos(azimuth) + north * Math.Sin(azimuth);
+            foreach (var distance in sampleDistances)
+            {
+                Require(distance > PlanetaryProductionSphericalBillboardTes.RefinementRangeMetres,
+                    "coverage sample lies outside the 50 m TES refinement range");
+                var angle = distance / radius;
+                var target = (cameraDirection * Math.Cos(angle) + tangent * Math.Sin(angle)).Normalized();
+                var triangle = FindContainingSphericalTriangle(topology, directions, target);
+                Require(triangle >= 0, $"closed base contains the {distance:F0} m horizon sample");
+                var first = bodies[topology.Indices[triangle * 3]];
+                var second = bodies[topology.Indices[triangle * 3 + 1]];
+                var third = bodies[topology.Indices[triangle * 3 + 2]];
+                var bound = PlanetaryProductionSphericalBillboardCulling.EncloseCurvedPatch(
+                    first, second, third, radius, maximumTerrain);
+                Require(!PlanetaryProductionSphericalBillboardCulling.IsOccludedByPlanet(
+                        camera, bound, radius - .02d),
+                    $"curved base retains depth ownership at {distance:F0} m beyond TES range");
+                retainedSamples++;
+            }
+        }
+        Console.WriteLine($"P2S5C3 near-surface coverage: level=L{topology.Level}; " +
+            $"altitude=10.004m; samples={string.Join(',', sampleDistances.Select(v => $"{v:F0}m"))}; " +
+            $"bearings=8; outsideTesRange={retainedSamples}; retained=all");
+    }
+
+    private static int FindContainingSphericalTriangle(
+        PlanetaryProductionSphericalBillboardTopology topology,
+        IReadOnlyList<Double3> directions, in Double3 target)
+    {
+        for (var triangle = 0; triangle < topology.TriangleCount; triangle++)
+        {
+            var first = directions[(int)topology.Indices[triangle * 3]];
+            var second = directions[(int)topology.Indices[triangle * 3 + 1]];
+            var third = directions[(int)topology.Indices[triangle * 3 + 2]];
+            if (SameSphericalSide(first, second, third, target) &&
+                SameSphericalSide(second, third, first, target) &&
+                SameSphericalSide(third, first, second, target)) return triangle;
+        }
+        return -1;
+    }
+
+    private static void DiagnoseBodyFixedLateralContinuity(
+        IReadOnlyList<PlanetaryProductionSphericalBillboardTopology> levels)
+    {
+        var previousGeneration = PlanetaryPhysicalSurface.RuntimeGeneration;
+        try
+        {
+            PlanetaryPhysicalSurface.ConfigureRuntimeGeneration(
+                PlanetaryPhysicalSurfaceGeneration.M12DNaturalTerrainCandidate);
+            var level14 = levels[14];
+            var level15 = levels[15];
+            var cameraDirection = new Double3(-1036.8296487848155, -2603347.813620877,
+                5814848.209969225).Normalized();
+            var pupil = PlanetaryProductionBillboardPupil.Resolve(default, cameraDirection, level14);
+            var frame = pupil.Tangent;
+            var subThreshold = level14.Snap.PupilCellRadians *
+                (level14.Snap.CandidateShiftMultiple - 1d);
+            var snapAngle = level14.Snap.PupilCellRadians *
+                (level14.Snap.CandidateShiftMultiple + 1d);
+            var forward = PlanetaryProductionBillboardPupil.Resolve(pupil,
+                (cameraDirection * Math.Cos(subThreshold) + frame.North * Math.Sin(subThreshold)).Normalized(),
+                level14);
+            var backward = PlanetaryProductionBillboardPupil.Resolve(forward, cameraDirection, level14);
+            var lateral = PlanetaryProductionBillboardPupil.Resolve(pupil,
+                (cameraDirection * Math.Cos(subThreshold) + frame.East * Math.Sin(subThreshold)).Normalized(),
+                level14);
+            var snapped = PlanetaryProductionBillboardPupil.Resolve(pupil,
+                (cameraDirection * Math.Cos(snapAngle) + frame.East * Math.Sin(snapAngle)).Normalized(),
+                level14);
+            var rebased = PlanetaryProductionBillboardPupil.Resolve(snapped,
+                (cameraDirection * Math.Cos(.01d) + frame.East * Math.Sin(.01d)).Normalized(), level14);
+            var adjacent = PlanetaryProductionBillboardPupil.Resolve(snapped,
+                snapped.PivotDirection, level15);
+            ProveSnappedGeometry(level14, rebased);
+            var states = new[]
+            {
+                new TrackedPupilState("stationary", level14, pupil),
+                new TrackedPupilState("forward", level14, forward),
+                new TrackedPupilState("backward", level14, backward),
+                new TrackedPupilState("lateral", level14, lateral),
+                new TrackedPupilState("same-level-snap", level14, snapped),
+                new TrackedPupilState("same-level-rebase", level14, rebased),
+                new TrackedPupilState("adjacent-L15", level15, adjacent)
+            };
+            var bearings = new[] { 0d, Math.PI / 4d, Math.PI / 2d };
+            var distances = new[] { 1_000d, 5_000d, 10_000d, 25_000d };
+            var tracked = bearings.SelectMany(bearing => distances.Select(distance =>
+            {
+                var tangent = frame.North * Math.Cos(bearing) + frame.East * Math.Sin(bearing);
+                var angle = distance / PlanetarySphericalBillboardNaturalTerrainProof.EarthRadiusMetres;
+                return (label: $"{distance:F0}m/{bearing * 180d / Math.PI:F0}deg",
+                    distance,
+                    direction: (cameraDirection * Math.Cos(angle) + tangent * Math.Sin(angle)).Normalized());
+            })).ToArray();
+            var canonical = tracked.Select(sample =>
+            {
+                var height = PlanetaryPhysicalSurface.EvaluateFinalHeightNoGradient(
+                    PlanetaryTerrainDefinition.EarthProductionCubeV5, sample.direction,
+                    PlanetaryPhysicalSurfaceGeneration.M12DNaturalTerrainCandidate);
+                return (sample.label, sample.direction, height,
+                    position: sample.direction *
+                        (PlanetarySphericalBillboardNaturalTerrainProof.EarthRadiusMetres + height));
+            }).ToArray();
+            var baseline = EvaluateRenderedBase(states[0], canonical);
+            var baseIdentities = ResolveIdentities(states[0]).ToHashSet();
+            var maximumCanonicalHeightDelta = 0d;
+            var maximumCanonicalPositionDelta = 0d;
+            foreach (var state in states)
+            {
+                var rendered = EvaluateRenderedBase(state, canonical);
+                var maximumRenderedHeightDelta = 0d;
+                var maximumOuterCoverageHeightDelta = 0d;
+                for (var i = 0; i < canonical.Length; i++)
+                {
+                    var repeatedHeight = PlanetaryPhysicalSurface.EvaluateFinalHeightNoGradient(
+                        PlanetaryTerrainDefinition.EarthProductionCubeV5, canonical[i].direction,
+                        PlanetaryPhysicalSurfaceGeneration.M12DNaturalTerrainCandidate);
+                    maximumCanonicalHeightDelta = Math.Max(maximumCanonicalHeightDelta,
+                        Math.Abs(repeatedHeight - canonical[i].height));
+                    var repeatedPosition = canonical[i].direction *
+                        (PlanetarySphericalBillboardNaturalTerrainProof.EarthRadiusMetres + repeatedHeight);
+                    maximumCanonicalPositionDelta = Math.Max(maximumCanonicalPositionDelta,
+                        Math.Sqrt((repeatedPosition - canonical[i].position).LengthSquared));
+                    maximumRenderedHeightDelta = Math.Max(maximumRenderedHeightDelta,
+                        Math.Abs(rendered[i] - baseline[i]));
+                    if (tracked[i].distance >= 5_000d)
+                        maximumOuterCoverageHeightDelta = Math.Max(maximumOuterCoverageHeightDelta,
+                            Math.Abs(rendered[i] - baseline[i]));
+                }
+                var identities = ResolveIdentities(state);
+                var reused = identities.Count(identity => baseIdentities.Contains(identity));
+                Console.WriteLine($"P2S5C3 lateral continuity: state={state.Name}; level=L{state.Topology.Level}; " +
+                    $"pupil={state.Pupil.Generation}; rebase={state.Pupil.Rebased}; " +
+                    $"reuse={reused}/{identities.Length}; canonicalHeightDelta={maximumCanonicalHeightDelta:E9}m; " +
+                    $"canonicalPositionDelta={maximumCanonicalPositionDelta:E9}m; " +
+                    $"renderedBaseHeightDelta={maximumRenderedHeightDelta:E9}m; " +
+                    $"outerCoverageHeightDelta={maximumOuterCoverageHeightDelta:E9}m");
+            }
+            Require(forward == pupil && backward == pupil && lateral == pupil,
+                "stationary and sub-threshold forward/back/lateral motion retain the exact pupil generation");
+            Require(maximumCanonicalHeightDelta == 0d && maximumCanonicalPositionDelta == 0d,
+                "tracked body-fixed H(direction) and FP64 positions are invariant across camera/pupil states");
+        }
+        finally
+        {
+            PlanetaryPhysicalSurface.ConfigureRuntimeGeneration(previousGeneration);
+        }
+    }
+
+    private static double[] EvaluateRenderedBase(TrackedPupilState state,
+        IReadOnlyList<(string label, Double3 direction, double height, Double3 position)> samples)
+    {
+        var directions = state.Topology.Vertices.Select(vertex =>
+            state.Pupil.ResolveCanonicalDirection(vertex, state.Topology)).ToArray();
+        var triangles = FindContainingSphericalTriangles(state.Topology, directions,
+            samples.Select(sample => sample.direction).ToArray());
+        var values = new double[samples.Count];
+        var radius = PlanetarySphericalBillboardNaturalTerrainProof.EarthRadiusMetres;
+        for (var sample = 0; sample < samples.Count; sample++)
+        {
+            var triangle = triangles[sample];
+            Require(triangle >= 0, $"{state.Name} contains tracked sample {samples[sample].label}");
+            var positions = new Double3[3];
+            for (var corner = 0; corner < 3; corner++)
+            {
+                var direction = directions[state.Topology.Indices[triangle * 3 + corner]];
+                var height = PlanetaryPhysicalSurface.EvaluateFinalHeightNoGradient(
+                    PlanetaryTerrainDefinition.EarthProductionCubeV5, direction,
+                    PlanetaryPhysicalSurfaceGeneration.M12DNaturalTerrainCandidate);
+                positions[corner] = direction * (radius + height);
+            }
+            var normal = Double3.Cross(positions[1] - positions[0], positions[2] - positions[0]);
+            var denominator = Double3.Dot(normal, samples[sample].direction);
+            Require(Math.Abs(denominator) > 1e-12d, $"{state.Name} tracked triangle intersects its body ray");
+            values[sample] = Double3.Dot(normal, positions[0]) / denominator - radius;
+        }
+        return values;
+    }
+
+    private static int[] FindContainingSphericalTriangles(
+        PlanetaryProductionSphericalBillboardTopology topology,
+        IReadOnlyList<Double3> directions,
+        IReadOnlyList<Double3> targets)
+    {
+        var nearestVertices = new int[targets.Count];
+        var nearestDots = Enumerable.Repeat(double.NegativeInfinity, targets.Count).ToArray();
+        for (var vertex = 0; vertex < directions.Count; vertex++)
+        {
+            for (var target = 0; target < targets.Count; target++)
+            {
+                var dot = Double3.Dot(directions[vertex], targets[target]);
+                if (dot <= nearestDots[target]) continue;
+                nearestDots[target] = dot;
+                nearestVertices[target] = vertex;
+            }
+        }
+
+        var results = Enumerable.Repeat(-1, targets.Count).ToArray();
+        for (var triangle = 0; triangle < topology.TriangleCount; triangle++)
+        {
+            var firstIndex = (int)topology.Indices[triangle * 3];
+            var secondIndex = (int)topology.Indices[triangle * 3 + 1];
+            var thirdIndex = (int)topology.Indices[triangle * 3 + 2];
+            for (var target = 0; target < targets.Count; target++)
+            {
+                if (results[target] >= 0) continue;
+                var nearest = nearestVertices[target];
+                if (firstIndex != nearest && secondIndex != nearest && thirdIndex != nearest) continue;
+                var first = directions[firstIndex];
+                var second = directions[secondIndex];
+                var third = directions[thirdIndex];
+                if (SameSphericalSide(first, second, third, targets[target]) &&
+                    SameSphericalSide(second, third, first, targets[target]) &&
+                    SameSphericalSide(third, first, second, targets[target]))
+                    results[target] = triangle;
+            }
+        }
+
+        // The generated topology is locally regular, so the containing triangle
+        // normally owns the nearest vertex. Retain an exhaustive diagnostic fallback
+        // rather than making that acceleration assumption part of production code.
+        for (var target = 0; target < targets.Count; target++)
+            if (results[target] < 0)
+                results[target] = FindContainingSphericalTriangle(topology, directions, targets[target]);
+        return results;
+    }
+
+    private static PlanetaryCanonicalPhysicalSampleIdentity[] ResolveIdentities(TrackedPupilState state) =>
+        state.Topology.Vertices.Select(vertex => PlanetaryCanonicalPhysicalSampleIdentity.Create(
+            state.Pupil.ResolveCanonicalDirection(vertex, state.Topology),
+            PlanetarySphericalBillboardNaturalTerrainProof.PhysicalGeneration,
+            PlanetarySphericalBillboardNaturalTerrainProof.TerrainDataGeneration)).ToArray();
+
+    private readonly record struct TrackedPupilState(string Name,
+        PlanetaryProductionSphericalBillboardTopology Topology,
+        PlanetaryProductionBillboardPupil Pupil);
+
+    private static bool SameSphericalSide(in Double3 first, in Double3 second,
+        in Double3 interior, in Double3 target)
+    {
+        var edge = Double3.Cross(first, second);
+        return Double3.Dot(edge, interior) * Double3.Dot(edge, target) >= -1e-15d;
     }
 
     private static void ProveIsolation(string root)

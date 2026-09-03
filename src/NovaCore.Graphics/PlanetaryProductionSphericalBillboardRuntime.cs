@@ -454,6 +454,8 @@ public sealed class PlanetaryProductionSphericalBillboardPublication
 
 public static class PlanetaryProductionSphericalBillboardTes
 {
+    public const double RefinementRangeMetres = PlanetaryDynamicAnchoredSurface.GpuTessellationRangeMetres;
+
     public static uint SharedEdgeFactor(
         in Double3 firstCameraRelative,
         in Double3 secondCameraRelative,
@@ -491,5 +493,86 @@ public static class PlanetaryProductionSphericalBillboardTes
         var screenFactor = Math.Ceiling(screen * distanceFade / targetPixels);
         var physicalFactor = Math.Max(1d, Math.Ceiling(edgeLength / minimumPhysicalWavelengthMetres));
         return (uint)Math.Clamp(Math.Min(screenFactor, physicalFactor), 1d, 64d);
+    }
+}
+
+public readonly record struct PlanetaryProductionBillboardCullingSphere(
+    Double3 Center, double Radius)
+{
+    public bool IsValid => Center.IsFinite && double.IsFinite(Radius) && Radius >= 0d;
+}
+
+/// <summary>
+/// Conservative body-fixed visibility for a coarse billboard triangle whose
+/// normalized interior is evaluated later by TES. A sphere around only the
+/// three input positions does not enclose that curved interior.
+/// </summary>
+public static class PlanetaryProductionSphericalBillboardCulling
+{
+    private const double BoundToleranceMetres = .02d;
+
+    public static PlanetaryProductionBillboardCullingSphere EncloseCurvedPatch(
+        in Double3 first, in Double3 second, in Double3 third,
+        double bodyRadiusMetres, double maximumTerrainHeightMetres)
+    {
+        if (!first.IsFinite || !second.IsFinite || !third.IsFinite ||
+            first.LengthSquared <= 0d || second.LengthSquared <= 0d || third.LengthSquared <= 0d ||
+            !double.IsFinite(bodyRadiusMetres) || bodyRadiusMetres <= 0d ||
+            !double.IsFinite(maximumTerrainHeightMetres) || maximumTerrainHeightMetres < 0d)
+            throw new ArgumentOutOfRangeException();
+
+        var firstDirection = first.Normalized();
+        var secondDirection = second.Normalized();
+        var thirdDirection = third.Normalized();
+        var directionSum = firstDirection + secondDirection + thirdDirection;
+        if (directionSum.LengthSquared <= 1e-24d)
+            return new(Double3.Zero, bodyRadiusMetres + maximumTerrainHeightMetres);
+
+        var capDirection = directionSum.Normalized();
+        var capCosine = Math.Min(Double3.Dot(capDirection, firstDirection),
+            Math.Min(Double3.Dot(capDirection, secondDirection),
+                Double3.Dot(capDirection, thirdDirection)));
+        capCosine = Math.Clamp(capCosine, -1d, 1d);
+        // A hemisphere-sized triangle is not expected in the authored library.
+        // Retaining it is the only conservative fallback if malformed input ever
+        // reaches this presentation-stage classifier.
+        if (capCosine <= 0d)
+            return new(Double3.Zero, bodyRadiusMetres + maximumTerrainHeightMetres);
+
+        var minimumRadius = bodyRadiusMetres;
+        var maximumRadius = bodyRadiusMetres + maximumTerrainHeightMetres;
+        var centerDistance = .5d * (minimumRadius + maximumRadius) * capCosine;
+        var minimumDelta = minimumRadius * minimumRadius + centerDistance * centerDistance -
+            2d * minimumRadius * centerDistance * capCosine;
+        var maximumDelta = maximumRadius * maximumRadius + centerDistance * centerDistance -
+            2d * maximumRadius * centerDistance * capCosine;
+        var radius = Math.Sqrt(Math.Max(0d, Math.Max(minimumDelta, maximumDelta))) +
+            BoundToleranceMetres;
+        return new(capDirection * centerDistance, radius);
+    }
+
+    public static bool IsOccludedByPlanet(in Double3 cameraBody,
+        in PlanetaryProductionBillboardCullingSphere patch,
+        double occludingRadiusMetres)
+    {
+        if (!cameraBody.IsFinite || cameraBody.LengthSquared <= 0d || !patch.IsValid ||
+            !double.IsFinite(occludingRadiusMetres) || occludingRadiusMetres <= 0d)
+            throw new ArgumentOutOfRangeException();
+
+        var toPlanet = cameraBody * -1d;
+        var toSphere = patch.Center - cameraBody;
+        var planetDistanceSquared = toPlanet.LengthSquared;
+        var sphereDistanceSquared = toSphere.LengthSquared;
+        var dotPlanetSphere = Double3.Dot(toPlanet, toSphere);
+        var planetRadiusSquared = occludingRadiusMetres * occludingRadiusMetres;
+        var patchRadiusSquared = patch.Radius * patch.Radius;
+        var discriminant = dotPlanetSphere * dotPlanetSphere +
+            planetRadiusSquared * sphereDistanceSquared +
+            patchRadiusSquared * planetDistanceSquared -
+            planetDistanceSquared * sphereDistanceSquared;
+        var crossTerm = 2d * dotPlanetSphere * occludingRadiusMetres * patch.Radius;
+        return sphereDistanceSquared - patchRadiusSquared >=
+               planetDistanceSquared - planetRadiusSquared &&
+               discriminant >= Math.Abs(crossTerm);
     }
 }

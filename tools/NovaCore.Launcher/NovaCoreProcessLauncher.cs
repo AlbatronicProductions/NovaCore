@@ -6,7 +6,8 @@ public sealed record NovaCoreLaunchPlan(
     string FileName,
     IReadOnlyList<string> Arguments,
     string WorkingDirectory,
-    IReadOnlyDictionary<string, string> EnvironmentVariables)
+    IReadOnlyDictionary<string, string> EnvironmentVariables,
+    string BuildConfiguration)
 {
     public string DisplayCommand => string.Join(' ',
         new[] { Quote(FileName) }.Concat(Arguments.Select(Quote)));
@@ -20,9 +21,22 @@ public static class NovaCoreProcessLauncher
     private static readonly string SampleProjectRelativePath = Path.Combine(
         "samples", "NovaCore.Triangle", "NovaCore.Triangle.csproj");
 
+    public static string DefaultBuildConfiguration
+    {
+        get
+        {
+#if DEBUG
+            return "Debug";
+#else
+            return "Release";
+#endif
+        }
+    }
+
     public static NovaCoreLaunchPlan CreatePlan(
         string repositoryRoot,
-        NovaCoreLaunchConfiguration configuration)
+        NovaCoreLaunchConfiguration configuration,
+        string? buildConfiguration = null)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(repositoryRoot);
         var root = Path.GetFullPath(repositoryRoot);
@@ -34,10 +48,15 @@ public static class NovaCoreProcessLauncher
 
         var sceneArguments = LaunchCommandBuilder.BuildArguments(configuration);
         var environment = LaunchCommandBuilder.BuildEnvironment(configuration);
-        var builtExecutable = Path.Combine(root, "samples", "NovaCore.Triangle", "bin", "Debug", "net10.0", "NovaCore.Triangle.exe");
+        var resolvedBuildConfiguration = buildConfiguration ?? DefaultBuildConfiguration;
+        if (resolvedBuildConfiguration is not ("Debug" or "Release"))
+            throw new ArgumentOutOfRangeException(nameof(buildConfiguration));
+        var builtExecutable = Path.Combine(root, "samples", "NovaCore.Triangle", "bin",
+            resolvedBuildConfiguration, "net10.0", "NovaCore.Triangle.exe");
         if (File.Exists(builtExecutable))
         {
-            return new NovaCoreLaunchPlan(builtExecutable, sceneArguments, root, environment);
+            return new NovaCoreLaunchPlan(builtExecutable, sceneArguments, root, environment,
+                resolvedBuildConfiguration);
         }
 
         var arguments = new List<string>(8 + sceneArguments.Count)
@@ -46,11 +65,12 @@ public static class NovaCoreProcessLauncher
             "--project",
             sampleProject,
             "-c",
-            "Debug",
+            resolvedBuildConfiguration,
             "--"
         };
         arguments.AddRange(sceneArguments);
-        return new NovaCoreLaunchPlan("dotnet", arguments, root, environment);
+        return new NovaCoreLaunchPlan("dotnet", arguments, root, environment,
+            resolvedBuildConfiguration);
     }
 
     public static Process Launch(NovaCoreLaunchPlan plan)

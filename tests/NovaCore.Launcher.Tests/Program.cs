@@ -11,6 +11,7 @@ var tests = new (string Name, Action Test)[]
     ("M12D production spherical billboard preset", M12DProductionSphericalBillboardPreset),
     ("Earth fullscreen Solar camera path", EarthFullscreenSolarCameraPath),
     ("structured launch environment", StructuredLaunchEnvironment),
+    ("launcher build configuration", LauncherBuildConfiguration),
     ("Earth orbital arguments", EarthOrbitalArguments),
     ("invariant altitude formatting", InvariantAltitudeFormatting),
     ("subdivision diagnostic mapping", SubdivisionMapping),
@@ -128,6 +129,33 @@ static void StructuredLaunchEnvironment()
     Equal("1", plan.EnvironmentVariables["NOVACORE_WINDOW_BORDERLESS"]);
     True(plan.Arguments.Contains("--scene=sol", StringComparer.Ordinal), "Solar camera scene was not encoded structurally.");
     True(plan.Arguments.Contains("--focus=earth", StringComparer.Ordinal), "Earth startup focus was not encoded structurally.");
+}
+
+static void LauncherBuildConfiguration()
+{
+#if DEBUG
+    Equal("Debug", NovaCoreProcessLauncher.DefaultBuildConfiguration);
+#else
+    Equal("Release", NovaCoreProcessLauncher.DefaultBuildConfiguration);
+#endif
+    var repositoryRoot = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,
+        "..", "..", "..", "..", ".."));
+    var configuration = Create(NovaCoreScenarioPreset.EarthFullscreenNative);
+    var release = NovaCoreProcessLauncher.CreatePlan(repositoryRoot, configuration, "Release");
+    Equal("Release", release.BuildConfiguration);
+    if (Path.GetFileName(release.FileName).Equals("dotnet", StringComparison.OrdinalIgnoreCase))
+    {
+        var configurationIndex = release.Arguments.ToList().IndexOf("-c");
+        True(configurationIndex >= 0 && release.Arguments[configurationIndex + 1] == "Release",
+            "Release fallback did not preserve the launcher build configuration.");
+    }
+    else
+    {
+        True(release.FileName.Contains($"{Path.DirectorySeparatorChar}Release{Path.DirectorySeparatorChar}",
+            StringComparison.Ordinal), "Release launcher selected a non-Release Triangle executable.");
+    }
+    Throws<ArgumentOutOfRangeException>(() =>
+        NovaCoreProcessLauncher.CreatePlan(repositoryRoot, configuration, "Profile"));
 }
 
 static void EarthOrbitalArguments()
