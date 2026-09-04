@@ -396,7 +396,8 @@ public static class PlanetaryPhysicalSurface
 
     /// <summary>
     /// Selects one process-wide physical Earth authority before a scene is created.
-    /// Normal launches retain generation 3; the M12D candidate is explicit opt-in.
+    /// The accepted New Earth preset selects generation 4 through the retained candidate-named option.
+    /// Older Earth/Solar/Florida presets retain generation 3 pending the route-ownership decision.
     /// </summary>
     public static void ConfigureRuntimeGeneration(PlanetaryPhysicalSurfaceGeneration generation)
     {

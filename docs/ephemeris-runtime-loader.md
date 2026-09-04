@@ -14,4 +14,6 @@ stored expected definition hash
 
 Loading allocates immutable arrays by design. After loading, existing body/source/payload lookup, sampled interpolation, full system evaluation, and definition hashing remain allocation-free on warmed paths.
 
-The repository contains only a synthetic dataset fixture. There is no JPL/SPICE adapter, real ephemeris dataset, runtime registry, discovery, hot reload, or file-based loading API.
+The loader milestone originally used only a synthetic dataset fixture; that remains its focused reconstruction fixture. The repository now also includes the separate [offline NAIF/CSPICE adapter](naif-source-adapter.md), a [DE440-validated compact Solar definition](sol-analytical.md), and an offline-generated lunar orientation pack. These do not turn the NCPE loader into a kernel reader or runtime astronomical source adapter. Normal Solar evaluation uses the authored compact definition; NCPE v2 does not encode its analytical-Kepler payload.
+
+The NCPE loader remains byte-only, with no runtime registry, discovery, hot reload, or file-based loading API. Runtime assemblies do not depend on CSPICE or NAIF kernels.

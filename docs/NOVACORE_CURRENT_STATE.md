@@ -13,13 +13,13 @@ and performs FP64 camera-relative subtraction before GPU transport.
 
 ## Banked baseline
 
-The current production-accepted planetary baseline is M12D-P2S5F, the **New
-Earth Renderer**:
+The current banked, production-accepted planetary baseline is **M12D-P2S5G —
+Surface Workload Efficiency**, on **NCSM1 / New Earth Renderer**:
 
-- production milestone commit `f9ff1bdead850492b5e0a98f1ce518be582238f3`;
-- annotated tag `m12d-p2s5f-new-earth-renderer` after consolidation validation;
-- commit title `NovaCore M12D-P2S5F: establish production New Earth Renderer`;
-- automated and physical Desktop acceptance completed at native 3440×1440.
+- authoritative production commit `7bb03b0e635fa3444a4243bbad82758a1770ea60`;
+- annotated tag `m12d-p2s5g-surface-workload-efficiency`;
+- commit title `NovaCore M12D-P2S5G: bank surface workload efficiency`;
+- automated validation and physical/manual Desktop acceptance PASS at native 3440×1440.
 
 The milestone sequence from P2S2 through C3 moved spherical billboarding from
 an isolated structural proof into the production Earth path:
@@ -40,25 +40,35 @@ an isolated structural proof into the production Earth path:
 Spherical billboarding is therefore current production architecture, not a
 future design or proof-only path.
 
-### Unbanked P2S5G surface-workload candidate
+### Accepted P2S5G surface-workload architecture
 
-The working tree reduces redundant VS/TCS transport: TCS user outputs fall from
-45 to 13 scalars per control point. TES reads the same frame/body constants
+The banked P2S5G implementation reduces redundant VS/TCS transport: TCS user
+outputs fall from 45 to 13 scalars per control point. TES reads the same frame/body constants
 directly and keeps its existing anchored address and physical calculations.
 The fragment interface, triangle stream, edge factors, and 50 m range are
 unchanged. Compiled-interface regression coverage enforces the reduced payload
 and complete fragment inputs. Fixed-pose diagnostics can pause simulation through
 `NOVACORE_P2S5G_FIXED_DIAGNOSTIC_TIME=1`; full physical traversal cannot use it.
 
-This is not a banked milestone. User/manual Desktop acceptance at native
-3440×1440 is PASS. Closeout recommends READY TO BANK, with classification C
-disclosed: deterministic TES invocation accounting changes, while all measured
-outer/inner tessellation factors remain bit-identical. No closeout production
-code change was needed. Measured results, validation limits, and the remaining
-explicit banking authorization are recorded in
-[the P2S5G investigation](M12D-P2S5G-workload-investigation.md). P2S5F remains the
-accepted baseline; finer pupil continuity and material/environment work have
-not begun.
+P2S5G is banked and production-accepted. Its deterministic +89 TES invocation
+difference is accepted as classification C: a bounded invocation-accounting
+consequence, not increased refinement or changed tessellation semantics. All
+measured outer/inner tessellation factors remain bit-identical. No closeout
+production code change was needed. Original measurements, validation limits,
+and the historical pre-banking closeout are preserved in
+[the P2S5G investigation](M12D-P2S5G-workload-investigation.md).
+
+### Existing routes and pending ownership decision
+
+The accepted production Earth entry is **New Earth Renderer**
+(`--scene=m12d-production-spherical-billboard`, generation 4 by default). Older
+Earth/Solar/Florida routes still retain anchored/global Earth rendering and
+generally select generation 3. Their divergence requires a compatibility and
+ownership decision; it does not establish another accepted production Earth
+authority. This normalization changes no route or retirement status.
+
+Their ownership/convergence is the next major architectural decision; this
+documentation does not authorize route changes or renderer retirement.
 
 ## Production planetary responsibility chain
 
@@ -245,15 +255,17 @@ visually finished.
 - The broad Graphics suite retains an unrelated opaque distant/detailed
   handoff orbit-line assertion. Focused New Earth Renderer coverage is green.
 
-## Next authorized work boundary
+## Next architectural decision and work boundary
 
-Begin from the accepted P2S5F New Earth Renderer path. Do not regenerate NCSM1
+Begin from the banked P2S5G New Earth Renderer path. Do not regenerate NCSM1
 artifacts, restore retired terrain systems, or reopen recovered coverage/culling
 decisions without explicit authorization and measured evidence. Keep
 `H(bodyDirection)` authoritative and classify any future visual change first as
 physical geometry, depth/ownership, or presentation/LOD behavior.
 
-The next renderer work should be a bounded surface-workload efficiency milestone
-against the accepted production owner, followed by finer pupil/re-triangulation
-continuity and terrain material/detail quality. Atmosphere, clouds, environment,
+The next major architectural responsibility is Earth-route ownership/convergence:
+decide how the retained Earth/Solar/Florida entry points should relate to the
+accepted NCSM1 owner before authorizing implementation or renderer retirement.
+Further P2S5G optimization is not the next objective. Finer pupil/re-triangulation
+continuity, terrain material/detail quality, atmosphere, clouds, environment,
 and gameplay remain separate future milestones.

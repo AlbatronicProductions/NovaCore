@@ -3,7 +3,7 @@ using System.Buffers.Binary;
 
 namespace NovaCore.Graphics;
 
-/// <summary>The sole authoritative Earth terrain renderer.</summary>
+/// <summary>Surface data-mode selection shared by accepted NCSM1 and retained compatibility renderer paths; it does not select geometry ownership.</summary>
 public enum PlanetarySurfaceRendererMode : uint
 {
     ProductionCubeSphere = 2

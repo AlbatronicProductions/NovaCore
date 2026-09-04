@@ -112,7 +112,7 @@ NovaCore treats correctness tooling as part of the engine rather than as present
 - Camera/reference-frame precision tests.
 - Native, managed, Solar-scene, Earth-LOD, resize, and triangle regression coverage.
 
-The M12D-P2S5F New Earth Renderer baseline has completed automated and physical orbit-to-near-surface traversal at a native 3440×1440 client extent. Focused regressions cover all 18 NCSM1 levels, persistent level reuse, moving-pupil identity, atomic and zero-visible publication, one-owner coverage, body authority, body-fixed height and normal parity, topology-family winding, KSA-parity tessellation responsibility, conservative horizon coverage beyond the TES range, and Vulkan validation. Camera motion cannot mutate Earth orientation, body-fixed geography, or canonical physical height.
+The banked M12D-P2S5G Surface Workload Efficiency baseline has completed automated validation and passed manual native 3440×1440 acceptance on the NCSM1 New Earth Renderer. It retains the accepted orbit-to-near-surface coverage established by P2S5F. Focused regressions cover all 18 NCSM1 levels, persistent level reuse, moving-pupil identity, atomic and zero-visible publication, one-owner coverage, body authority, body-fixed height and normal parity, topology-family winding, KSA-parity tessellation responsibility, conservative horizon coverage beyond the TES range, and Vulkan validation. Camera motion cannot mutate Earth orientation, body-fixed geography, or canonical physical height.
 
 The CPU reference/parity path is a development and regression oracle; the intended production planetary path remains GPU-driven.
 
@@ -190,13 +190,21 @@ shows the resolved client dimensions and starts the matching Triangle runtime:
 a Release launcher uses Release and a Debug launcher uses Debug. No shell
 environment setup is required.
 
+The accepted production Earth entry is **New Earth Renderer**
+(`--scene=m12d-production-spherical-billboard`, generation 4 by default). Older
+Earth/Solar/Florida routes still retain anchored/global Earth rendering and
+generally select generation 3. Their divergence requires a compatibility and
+ownership decision; it does not establish another accepted production Earth
+authority. This normalization changes no route or retirement status.
+
 Current Solar-scene controls include mouse drag for free orbiting, mouse wheel zoom, number-key body focus, `.` / `,` simulation-rate changes, Space pause/resume, and `R` to return to the deterministic Solar Map home view.
 
 ## Current planetary baseline
 
-The accepted planetary baseline is **M12D-P2S5F New Earth Renderer** at tag
-`m12d-p2s5f-new-earth-renderer`. Earth production follows one
-coherent responsibility chain:
+The banked, production-accepted planetary baseline is **M12D-P2S5G — Surface
+Workload Efficiency**, commit `7bb03b0e635fa3444a4243bbad82758a1770ea60`, at
+annotated tag `m12d-p2s5g-surface-workload-efficiency`. **NCSM1 / New Earth
+Renderer** is the accepted production Earth renderer. Its responsibility chain is:
 
 ```text
 canonical body-fixed physical terrain
@@ -222,13 +230,21 @@ projected-error selection and hysteresis, moving-pupil identity, persistent
 scale reuse, asynchronous current plus one-incoming GPU lifecycle, conservative
 visibility and compaction, KSA-parity bounded TES, zero-visible publication and
 re-entry, body-specific presentation authority, and exactly-one-owner
-publication.
+publication. P2S5G tessellation interface compaction is accepted production
+architecture: the TCS user payload is 13 scalars per control point instead of
+45, with physical calculations, the fragment interface, edge factors, and 50 m
+refinement semantics preserved. The deterministic +89 TES invocation difference
+is an accepted bounded invocation-accounting consequence, not increased
+refinement or changed tessellation semantics. See the
+[P2S5G investigation and historical closeout](docs/M12D-P2S5G-workload-investigation.md).
 
 This is a production architecture milestone, not a claim of finished visuals.
 Terrain materials and presentation quality, atmosphere/cloud/environment
 rebuilding, finer pupil and re-triangulation morph quality, spacecraft and
-surface gameplay, and further surface-workload optimization remain in
-development.
+surface gameplay, and possible later surface-workload optimization remain
+separate future work. The next major architectural responsibility is the
+Earth-route ownership/convergence decision, not further P2S5G optimization.
+Implementation requires a separately authorized ticket.
 
 One known presentation limitation is documented rather than hidden: a rare
 full pupil rebase can change the coarse factor-1 triangulated approximation by

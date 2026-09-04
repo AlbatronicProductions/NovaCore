@@ -4,6 +4,20 @@ The accepted milestone and current work boundary are summarized in
 [NOVACORE_CURRENT_STATE.md](NOVACORE_CURRENT_STATE.md). This document defines
 the production planetary-rendering responsibilities and invariants.
 
+The banked, production-accepted baseline is **M12D-P2S5G — Surface Workload
+Efficiency**, commit `7bb03b0e635fa3444a4243bbad82758a1770ea60`, annotated tag
+`m12d-p2s5g-surface-workload-efficiency`. NCSM1 / New Earth Renderer is the
+accepted production Earth renderer; manual native 3440×1440 acceptance passed.
+
+The accepted Earth contracts below apply to the New Earth route.
+
+The accepted production Earth entry is **New Earth Renderer**
+(`--scene=m12d-production-spherical-billboard`, generation 4 by default). Older
+Earth/Solar/Florida routes still retain anchored/global Earth rendering and
+generally select generation 3. Their divergence requires a compatibility and
+ownership decision; it does not establish another accepted production Earth
+authority. This normalization changes no route or retirement status.
+
 ## Authority boundary
 
 Celestial simulation publishes immutable body center, radius, orientation, and
@@ -77,18 +91,18 @@ it does not infer visibility from a planar triangle-facing test. Screen and
 frustum rejection likewise remove only work proven unable to contribute. The
 surviving triangle stream is compacted into an indexed-indirect draw payload.
 
-The unbanked P2S5G candidate bounds the TCS user output interface to 13 scalars
-per control point, down from 45. It carries only physical normal, lighting
+The accepted P2S5G tessellation interface compaction bounds the TCS user output
+to 13 scalars per control point, down from 45. It carries only physical normal, lighting
 direction, view vector, physical direction, and height into TES. Frame/body
 constants are read from the same existing immutable buffers in TES, and unused
 vertex-stage addresses are no longer calculated or forwarded. This removes
 redundant per-patch transport without changing physical evaluation, edge factors,
 the fragment interface, culling, resource lifetime, or draw responsibility.
-See [the measured candidate record](M12D-P2S5G-workload-investigation.md) for
-validation and final closeout. User/manual 3440×1440 acceptance is PASS; banking
-authorization is pending. The small TES invocation delta is a deterministic
-pipeline-accounting change with bit-identical measured outer/inner factors,
-not an increased refinement footprint.
+See [the measurement and historical closeout record](M12D-P2S5G-workload-investigation.md)
+for validation and its limits. The deterministic +89 TES invocation difference
+is an accepted bounded invocation-accounting consequence (classification C),
+with bit-identical measured outer/inner factors. It is not increased refinement
+or changed tessellation semantics.
 
 TCS/TES provides bounded near-camera raster refinement. The configured physical
 range is 50 m, the evaluation shader exits before displacement work outside the
@@ -166,8 +180,8 @@ The managed camera owns navigation. `SurfaceAnchor` stores immutable body-fixed
 identity and reevaluates through authoritative body orientation. Near-surface
 ENU navigation and free look use the anchor; outward navigation hands off to
 ordinary body-center orbit without changing physical terrain. Earth —
-Fullscreen Native shares the Solar production navigation path after preset
-initialization.
+Fullscreen Native shares the Solar navigation path after preset initialization;
+that older preset does not select the accepted NCSM1 renderer.
 
 ## Diagnostics and acceptance
 
@@ -185,6 +199,10 @@ benchmark alone is not player-facing acceptance.
 
 ## Current development boundary
 
+The next major architectural responsibility is Earth-route ownership/convergence,
+not further P2S5G optimization. Decide the retained routes' compatibility and
+ownership before separately authorizing implementation or renderer retirement.
+
 The NCSM1 production topology/runtime, moving pupil, canonical physical
 authority, persistent GPU scale lifecycle, culling/coverage, KSA-parity bounded
 TES, zero-visible re-entry, body authority, and atomic ownership are stable.
@@ -193,7 +211,8 @@ quality, atmosphere/cloud/environment rebuilding, richer data coverage,
 spacecraft/surface gameplay, and later specialized-renderer retirement or
 promotion remain in development.
 
-Do not restore the retired radial Eye, adaptive CPU final-raster grids, dynamic
-patch/stitch ownership, or a second physical surface. Do not regenerate NCSM1
-assets, expand the TES range, or weaken conservative culling without
+Do not reintroduce radial Eye, adaptive CPU final-raster grids, dynamic
+patch/stitch ownership, or a second physical surface into the accepted NCSM1
+path. Existing compatibility implementations remain pending a separate decision.
+Do not regenerate NCSM1 assets, expand the TES range, or weaken conservative culling without
 explicit authorization and measured evidence.

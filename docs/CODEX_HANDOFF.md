@@ -21,11 +21,13 @@ terrain narrative here.
 
 ## Current planetary checkpoint
 
-Start from the physically accepted M12D-P2S5F **New Earth Renderer** baseline:
+Start from the banked, production-accepted **M12D-P2S5G — Surface Workload
+Efficiency** baseline on **NCSM1 / New Earth Renderer**:
 
-- production milestone commit `f9ff1bdead850492b5e0a98f1ce518be582238f3`;
-- annotated tag `m12d-p2s5f-new-earth-renderer`;
-- commit title `NovaCore M12D-P2S5F: establish production New Earth Renderer`.
+- authoritative production commit `7bb03b0e635fa3444a4243bbad82758a1770ea60`;
+- annotated tag `m12d-p2s5g-surface-workload-efficiency`;
+- commit title `NovaCore M12D-P2S5G: bank surface workload efficiency`;
+- physical/manual Desktop acceptance PASS at native 3440×1440.
 
 Earth's accepted production owner is the 18-level NCSM1 New Earth Renderer. It
 uses projected-error selection and hysteresis, an exact-lattice moving/snapped
@@ -58,22 +60,33 @@ generations.
   is approximately 2.8 mm. Treat these as deferred presentation/morph behavior,
   not moving physical terrain or lost ownership.
 
-## Next authorized work boundary
+## Next architectural decision and work boundary
 
-The working tree contains an unbanked P2S5G candidate reducing the VS/TCS user
-payload while preserving TES physics and the fragment interface. Read
-[its measurement and validation record](M12D-P2S5G-workload-investigation.md)
-before further work. User/manual 3440×1440 Desktop acceptance is PASS. Closeout
-recommends READY TO BANK, explicitly disclosing classification C: the TES query
-count changes deterministically but measured refinement factors do not. No
-production code changed during closeout. Explicit banking authorization is still
-required. P2S5F remains the banked production baseline; do not begin the next objective.
+P2S5G tessellation interface compaction is accepted production architecture:
+the TCS user payload is reduced from 45 to 13 scalars while TES physics and
+the fragment interface are preserved. The deterministic +89 TES invocation
+difference is an accepted bounded invocation-accounting consequence
+(classification C), not increased refinement or changed tessellation semantics.
+Read [the preserved measurement and closeout record](M12D-P2S5G-workload-investigation.md)
+for the evidence and its limits.
+
+The accepted production Earth entry is **New Earth Renderer**
+(`--scene=m12d-production-spherical-billboard`, generation 4 by default). Older
+Earth/Solar/Florida routes still retain anchored/global Earth rendering and
+generally select generation 3. Their divergence requires a compatibility and
+ownership decision; it does not establish another accepted production Earth
+authority. This normalization changes no route or retirement status.
+
+Earth-route ownership/convergence is the next major architectural responsibility,
+not further P2S5G optimization. A separate ticket must authorize any route
+change, compatibility retirement, or renderer implementation work.
 
 - Preserve the accepted NCSM1 production spherical-billboard owner and C3/P2S5F
   coverage/culling architecture.
 - Do not regenerate NCSM1 assets without explicit authorization.
-- Do not restore the radial Eye, adaptive CPU final-raster grids, dynamic
-  patch/stitch ownership, or any other retired terrain system.
+- Do not reintroduce radial Eye, adaptive CPU final-raster grids, or dynamic
+  patch/stitch ownership into the accepted NCSM1 path. Existing compatibility
+  implementations remain until a separate retirement decision.
 - Do not increase the 50 m TES range, weaken conservative culling, or reopen C3
   coverage based on visual impression alone; require measured causal evidence.
 - Keep remaining surface workload optimization, terrain presentation/material

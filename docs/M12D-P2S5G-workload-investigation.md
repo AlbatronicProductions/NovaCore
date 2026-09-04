@@ -1,4 +1,34 @@
-# M12D-P2S5G — bounded surface-workload candidate
+# M12D-P2S5G — Surface Workload Efficiency
+
+## Current banked status
+
+**Banked and production-accepted.** The authoritative production commit is
+`7bb03b0e635fa3444a4243bbad82758a1770ea60`, with annotated tag
+`m12d-p2s5g-surface-workload-efficiency`. NCSM1 / New Earth Renderer and the
+P2S5G tessellation interface compaction are accepted production architecture.
+Physical/manual Desktop acceptance passed at native 3440×1440.
+
+The deterministic +89 TES invocation difference is an accepted bounded
+invocation-accounting consequence (classification C), not increased refinement
+or changed tessellation semantics. The measured factors, performance results,
+and implementation-specific limits below remain unchanged.
+
+Older Earth/Solar/Florida routes still retain the anchored/global Earth path.
+Their divergence is a pending compatibility/ownership decision, not current
+production Earth authority. Earth-route ownership/convergence is the next major
+architectural responsibility, not further P2S5G optimization; no route change
+or renderer retirement is authorized by this record.
+
+## Historical investigation and pre-banking closeout
+
+Everything below this heading is the preserved investigation and closeout
+record from before banking. References to an unbanked candidate, P2S5F as the
+banked baseline, pending banking authorization, READY TO BANK, or dirty Git
+status describe that historical point in time. They are not current status or
+new work instructions. In the A/B evidence, "banked" denotes the P2S5F reference
+used at the time. Original measurements, exclusions, decisions, and provenance
+are retained verbatim below; the current status above supersedes only their
+pre-banking status statements.
 
 Date: 2026-09-04. **Implemented and unbanked. Manual Desktop acceptance: PASS.
 Closeout recommends READY TO BANK; explicit banking authorization remains pending.**

@@ -58,6 +58,17 @@ NCPE v2 remains the deterministic artifact contract for fixed and sampled celest
 
 `PlanetaryPresentationSnapshot` is the parallel immutable renderer input for evaluated celestial bodies. `PlanetaryBodyPresentationProvider` copies stable identity, root-resolved center, physical radius, color, and presentation label data from evaluated authority; graphics cannot mutate its celestial source. A separate immutable `PlanetMaterialCatalog` maps those stable identities to presentation-only material and optional ring records. Earth production uses the 18-level immutable NCSM1 New Earth Renderer scale-mesh library. Projected error and hysteresis select one persistent topology resource, while a camera-facing pupil snaps to exact lattice identity and reuses matching physical samples across movement. Every level and pupil evaluates the same canonical body-fixed `H(bodyDirection)`; topology density changes representation, never physical truth. One current and at most one incoming GPU generation exist. The incoming generation publishes atomically only after complete physical preparation, conservative visibility/compaction, indirect payload creation, GPU execution, and fence confirmation; a complete zero-visible generation is a valid sole owner and regenerates visible work on re-entry. Earth presentation authority is selected from body focus and eligibility, never inferred from resident Earth resources. Distant-body presentation, cheaper derived material classification, rings, labels, markers, and orbit paths remain presentation only. See [Current Engineering State](NOVACORE_CURRENT_STATE.md) for the accepted baseline and next work boundary.
 
+The banked P2S5G production Earth contract above applies to the New Earth route.
+The accepted production Earth entry is **New Earth Renderer**
+(`--scene=m12d-production-spherical-billboard`, generation 4 by default). Older
+Earth/Solar/Florida routes still retain anchored/global Earth rendering and
+generally select generation 3. Their divergence requires a compatibility and
+ownership decision; it does not establish another accepted production Earth
+authority. This normalization changes no route or retirement status.
+
+Earth-route ownership/convergence is the next major architectural responsibility,
+not further P2S5G optimization.
+
 NovaCore spatial frames are right-handed. Canonical Earth body-fixed geography
 uses +Y at the north pole, +X at longitude zero, and -Z at +90 degrees east.
 At a surface point the local presentation/object basis is +X East, +Y North,
