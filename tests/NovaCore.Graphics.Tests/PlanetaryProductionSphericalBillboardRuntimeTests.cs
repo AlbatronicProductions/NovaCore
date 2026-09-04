@@ -11,7 +11,7 @@ internal static class PlanetaryProductionSphericalBillboardRuntimeTests
         var root = PlanetarySphericalBillboardGpuProof.FindRepositoryRoot(AppContext.BaseDirectory);
         var levels = PlanetaryProductionSphericalBillboardTopologyLibrary.Load(
             Path.Combine(root, "assets", "planetary-production-topology"));
-        Require(levels.Count == 18, "complete production topology library loaded");
+        Require(levels.Count == 18, "complete production topology regression library loaded");
         Require(PlanetarySphericalBillboardNaturalTerrainProof.EarthRadiusMetres ==
                 PlanetaryPhysicalSurface.EarthReferenceRadiusMetres,
             "production billboard preparation uses the canonical physical Earth radius");

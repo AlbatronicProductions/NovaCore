@@ -4,6 +4,7 @@ build/
 .vs/
 *.user
 /external/naif/
+artifacts/
 /.novacore/cache/
 *.nccube
 !tests/fixtures/**/*.nccube

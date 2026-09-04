@@ -14,9 +14,12 @@ and performs FP64 camera-relative subtraction before GPU transport.
 ## Banked baseline
 
 The current production-accepted planetary baseline is M12D-P2S5F, the **New
-Earth Renderer**. Its milestone commit and annotated tag are banked only after
-the cleanup validation in this closeout; automated and physical Desktop
-acceptance are complete at native 3440×1440.
+Earth Renderer**:
+
+- production milestone commit `f9ff1bdead850492b5e0a98f1ce518be582238f3`;
+- annotated tag `m12d-p2s5f-new-earth-renderer` after consolidation validation;
+- commit title `NovaCore M12D-P2S5F: establish production New Earth Renderer`;
+- automated and physical Desktop acceptance completed at native 3440×1440.
 
 The milestone sequence from P2S2 through C3 moved spherical billboarding from
 an isolated structural proof into the production Earth path:
@@ -211,6 +214,16 @@ Still in development:
 
 The current renderer is production-owned and physically accepted, but it is not
 visually finished.
+
+## Known debt
+
+- Surface-level GPU cost still varies with some viewing directions. The accepted
+  path no longer exhibits the catastrophic geometry spikes, but further bounded
+  workload-efficiency work remains.
+- Vulkan validation still reports the existing D3D11 KMT external-memory
+  `memoryTypeIndex-00645` interoperability VUID on the development machine.
+- The broad Graphics suite retains an unrelated opaque distant/detailed
+  handoff orbit-line assertion. Focused New Earth Renderer coverage is green.
 
 ## Next authorized work boundary
 

@@ -194,7 +194,8 @@ Current Solar-scene controls include mouse drag for free orbiting, mouse wheel z
 
 ## Current planetary baseline
 
-The accepted planetary baseline is **M12D-P2S5F New Earth Renderer**. Earth production follows one
+The accepted planetary baseline is **M12D-P2S5F New Earth Renderer** at tag
+`m12d-p2s5f-new-earth-renderer`. Earth production follows one
 coherent responsibility chain:
 
 ```text

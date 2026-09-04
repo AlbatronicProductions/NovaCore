@@ -6,9 +6,7 @@ var tests = new (string Name, Action Test)[]
     ("default selection", DefaultSelection),
     ("scenario catalog", ScenarioCatalogMappings),
     ("Earth fullscreen native preset", EarthFullscreenNativePreset),
-    ("M12D natural terrain candidate preset", M12DNaturalTerrainCandidatePreset),
     ("M12D spherical billboard GPU proof preset", M12DSphericalBillboardGpuProofPreset),
-    ("M12D production spherical billboard preset", M12DProductionSphericalBillboardPreset),
     ("new Earth renderer preset", NewEarthRendererPreset),
     ("Earth fullscreen Solar camera path", EarthFullscreenSolarCameraPath),
     ("structured launch environment", StructuredLaunchEnvironment),
@@ -39,35 +37,16 @@ static void DefaultSelection()
 
 static void ScenarioCatalogMappings()
 {
-    Equal(10, ScenarioCatalog.All.Count);
-    Equal(10, ScenarioCatalog.All.Count(definition => definition.IsSupported));
+    Equal(8, ScenarioCatalog.All.Count);
+    Equal(8, ScenarioCatalog.All.Count(definition => definition.IsSupported));
     True(ScenarioCatalog.All.Select(definition => definition.Preset).Distinct().Count() == ScenarioCatalog.All.Count,
         "Scenario presets must be unique.");
-}
-
-static void M12DNaturalTerrainCandidatePreset()
-{
-    var stable = Create(NovaCoreScenarioPreset.EarthFullscreenNative);
-    Equal(NovaCorePhysicalSurface.Generation3, stable.PhysicalSurface);
-    False(LaunchCommandBuilder.BuildArguments(stable).Any(argument =>
-        argument.StartsWith("--physical-surface=", StringComparison.Ordinal)),
-        "Stable Earth unexpectedly opted into a candidate physical surface.");
-
-    var definition = ScenarioCatalog.Get(NovaCoreScenarioPreset.M12DNaturalTerrainCandidate);
-    Equal("M12D Natural Terrain Candidate", definition.DisplayName);
-    var candidate = Create(NovaCoreScenarioPreset.M12DNaturalTerrainCandidate);
-    Equal(NovaCorePhysicalSurface.M12DNaturalTerrainCandidate, candidate.PhysicalSurface);
-    Equal(NovaCoreWindowMode.BorderlessFullscreen, candidate.WindowMode);
-    Equal(new NovaCoreClientResolution(3440, 1440), candidate.ClientResolution);
-    SequenceEqual(
-        ["--scene=sol", "--focus=earth", "--altitude=700000", "--surface-site=land", "--log=validation", "--log=vulkan", "--physical-surface=m12d-natural-candidate"],
-        LaunchCommandBuilder.BuildArguments(candidate));
 }
 
 static void M12DSphericalBillboardGpuProofPreset()
 {
     var definition=ScenarioCatalog.Get(NovaCoreScenarioPreset.M12DSphericalBillboardGpuProof);
-    Equal("M12D Spherical Billboard GPU Proof",definition.DisplayName);
+    Equal("Development — Spherical Terrain GPU Proof",definition.DisplayName);
     var configuration=Create(NovaCoreScenarioPreset.M12DSphericalBillboardGpuProof);
     Equal(NovaCoreScene.SphericalBillboardGpuProof,configuration.Scene);
     Equal(NovaCoreDiagnosticsMode.VulkanValidationAndPerformance,configuration.Diagnostics);
@@ -75,39 +54,24 @@ static void M12DSphericalBillboardGpuProofPreset()
     SequenceEqual(["--scene=m12d-spherical-billboard-gpu-proof","--log=validation","--log=vulkan"],LaunchCommandBuilder.BuildArguments(configuration));
 }
 
-static void M12DProductionSphericalBillboardPreset()
-{
-    var definition=ScenarioCatalog.Get(NovaCoreScenarioPreset.M12DProductionSphericalBillboard);
-    Equal("M12D Production Spherical Billboard",definition.DisplayName);
-    True(definition.Description.Contains("production v2",StringComparison.OrdinalIgnoreCase),
-        "Candidate does not identify the production v2 topology.");
-    True(definition.IsSupported,"Interactive production candidate is not launcher-accessible.");
-    True(definition.UnsupportedReason is null,"Interactive production candidate retained a stale blocker.");
-    True(ScenarioCatalog.TryCreateConfiguration(definition.Preset,null,definition.DefaultWindowMode,
-        definition.DefaultResolution,definition.DefaultDiagnostics,3440,1440,out var configuration,out var error),
-        error??"Interactive candidate did not produce a launch configuration.");
-    SequenceEqual(["--scene=m12d-production-spherical-billboard","--altitude=700000","--surface-site=land","--log=validation","--log=vulkan","--physical-surface=m12d-natural-candidate"],LaunchCommandBuilder.BuildArguments(configuration!));
-}
-
 static void NewEarthRendererPreset()
 {
-    var definition = ScenarioCatalog.Get(NovaCoreScenarioPreset.P2S5FScaleMeshCandidate);
+    var definition = ScenarioCatalog.Get(NovaCoreScenarioPreset.NewEarthRenderer);
     Equal("New Earth Renderer", definition.DisplayName);
-    Equal("New KSA-style spherical terrain architecture for physical testing.", definition.Description);
+    Equal("Production spherical terrain renderer for Earth exploration.", definition.Description);
     Equal(NovaCoreScene.ProductionSphericalBillboard, definition.Scene!.Value);
     Equal(NovaCoreStartingBody.Earth, definition.StartingBody);
     Equal(700_000.0, definition.DefaultAltitudeMetres!.Value);
     Equal(NovaCoreWindowMode.BorderlessFullscreen, definition.DefaultWindowMode);
     Equal(NovaCoreResolutionPreset.NativeDesktop, definition.DefaultResolution);
     Equal(NovaCoreDiagnosticsMode.PerformanceTelemetry, definition.DefaultDiagnostics);
-    True(definition.EnableP2S5FScaleMesh, "New Earth Renderer did not opt into the scale-mesh candidate.");
 
-    var configuration = Create(NovaCoreScenarioPreset.P2S5FScaleMeshCandidate);
+    var configuration = Create(NovaCoreScenarioPreset.NewEarthRenderer);
     Equal(new NovaCoreClientResolution(3440, 1440), configuration.ClientResolution);
     True(configuration.EnablePerformanceTelemetry, "Performance telemetry was not enabled.");
     False(configuration.EnableVulkanValidation, "Performance-only diagnostics unexpectedly enabled validation.");
     SequenceEqual(
-        ["--scene=m12d-production-spherical-billboard", "--altitude=700000", "--surface-site=land", "--log=vulkan", "--physical-surface=m12d-natural-candidate", "--p2s5f-scale-mesh"],
+        ["--scene=m12d-production-spherical-billboard", "--altitude=700000", "--surface-site=land", "--log=vulkan", "--physical-surface=m12d-natural-candidate"],
         LaunchCommandBuilder.BuildArguments(configuration));
 
     var environment = LaunchCommandBuilder.BuildEnvironment(configuration);
@@ -119,8 +83,8 @@ static void NewEarthRendererPreset()
         "..", "..", "..", "..", ".."));
     var releasePlan = NovaCoreProcessLauncher.CreatePlan(repositoryRoot, configuration, "Release");
     Equal("Release", releasePlan.BuildConfiguration);
-    True(releasePlan.Arguments.Contains("--p2s5f-scale-mesh", StringComparer.Ordinal),
-        "Release launch plan omitted the scale-mesh candidate flag.");
+    False(releasePlan.Arguments.Contains("--p2s5f-scale-mesh", StringComparer.Ordinal),
+        "Release launch plan retained the retired migration flag.");
 }
 
 static void EarthFullscreenNativePreset()
@@ -285,9 +249,7 @@ static void ExistingProductionScenarios()
 {
     foreach (var definition in ScenarioCatalog.All.Where(definition =>
                  definition.Preset is not (NovaCoreScenarioPreset.EarthFullscreenNative or
-                     NovaCoreScenarioPreset.M12DNaturalTerrainCandidate or
-                     NovaCoreScenarioPreset.M12DProductionSphericalBillboard or
-                     NovaCoreScenarioPreset.P2S5FScaleMeshCandidate)))
+                     NovaCoreScenarioPreset.NewEarthRenderer)))
     {
         var configuration = Create(definition.Preset);
         Equal(NovaCorePhysicalSurface.Generation3, configuration.PhysicalSurface);

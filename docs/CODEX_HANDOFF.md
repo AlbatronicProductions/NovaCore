@@ -21,9 +21,11 @@ terrain narrative here.
 
 ## Current planetary checkpoint
 
-Start from the physically accepted M12D-P2S5F **New Earth Renderer** baseline.
-Its milestone commit and tag are finalized by the P2S5F bank-and-consolidate
-closeout after clean validation.
+Start from the physically accepted M12D-P2S5F **New Earth Renderer** baseline:
+
+- production milestone commit `f9ff1bdead850492b5e0a98f1ce518be582238f3`;
+- annotated tag `m12d-p2s5f-new-earth-renderer`;
+- commit title `NovaCore M12D-P2S5F: establish production New Earth Renderer`.
 
 Earth's accepted production owner is the 18-level NCSM1 New Earth Renderer. It
 uses projected-error selection and hysteresis, an exact-lattice moving/snapped
@@ -70,6 +72,12 @@ generations.
   morphing distinct from physical terrain and depth ownership.
 - Atmosphere, clouds, environmental rebuilding, and spacecraft/surface gameplay
   remain separate future work.
+
+Known non-blocking debt is the remaining orientation-sensitive surface GPU
+variability, the existing D3D11 KMT external-memory validation VUID, and the
+unrelated opaque distant/detailed handoff orbit-line assertion in the broad
+Graphics suite. Do not hide these, but do not reopen accepted ownership,
+topology, tessellation, or physical-authority contracts to address them.
 
 ## KSA reference workflow
 

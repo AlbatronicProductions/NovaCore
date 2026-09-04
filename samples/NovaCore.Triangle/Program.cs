@@ -2,18 +2,17 @@ using System.Diagnostics;using System.Reflection;using System.Runtime.InteropSer
 using NovaCore.Core;using NovaCore.Core.Camera;using NovaCore.Core.ReferenceFrames;using NovaCore.Core.Surface;using NovaCore.Graphics;using NovaCore.Interop;using NovaCore.Platform;using NovaCore.Simulation.Time;using NovaCore.Simulation.Celestial;
 if(args.Contains("--scene=m12d-spherical-billboard-gpu-proof",StringComparer.OrdinalIgnoreCase))return RunSphericalBillboardGpuProof();
 var productionBillboardCandidate=args.Contains("--scene=m12d-production-spherical-billboard",StringComparer.OrdinalIgnoreCase);
-var nestedScaleMeshCandidate=args.Contains("--p2s5f-scale-mesh",StringComparer.OrdinalIgnoreCase);
 if(productionBillboardCandidate)
 {
-    var mapped=args.Where(value=>!value.StartsWith("--scene=",StringComparison.OrdinalIgnoreCase)&&!value.Equals("--p2s5f-scale-mesh",StringComparison.OrdinalIgnoreCase)).ToList();
+    var mapped=args.Where(value=>!value.StartsWith("--scene=",StringComparison.OrdinalIgnoreCase)).ToList();
     mapped.Add("--scene=sol");
     if(!mapped.Any(value=>value.StartsWith("--focus=",StringComparison.OrdinalIgnoreCase)))mapped.Add("--focus=earth");
     if(!mapped.Any(value=>value.StartsWith("--altitude=",StringComparison.OrdinalIgnoreCase)))mapped.Add("--altitude=700000");
     if(!mapped.Any(value=>value.StartsWith("--physical-surface=",StringComparison.OrdinalIgnoreCase)))mapped.Add("--physical-surface=m12d-natural-candidate");
     args=mapped.ToArray();
 }
-if(nestedScaleMeshCandidate&&!productionBillboardCandidate){Console.Error.WriteLine("--p2s5f-scale-mesh requires --scene=m12d-production-spherical-billboard.");return 2;}
-if(!SampleOptions.TryParse(args,out var options,out var error)){Console.Error.WriteLine(error);return 2;}if(!LogOptions.TryParse(options.LogArguments,out var log,out var logError)){Console.Error.WriteLine(logError);return 2;}return Run(options,log,productionBillboardCandidate,nestedScaleMeshCandidate);
+if(args.Contains("--p2s5f-scale-mesh",StringComparer.OrdinalIgnoreCase)){Console.Error.WriteLine("--p2s5f-scale-mesh is retired; select --scene=m12d-production-spherical-billboard.");return 2;}
+if(!SampleOptions.TryParse(args,out var options,out var error)){Console.Error.WriteLine(error);return 2;}if(!LogOptions.TryParse(options.LogArguments,out var log,out var logError)){Console.Error.WriteLine(logError);return 2;}return Run(options,log,productionBillboardCandidate);
 static int RunSphericalBillboardGpuProof()
 {
     try
@@ -47,7 +46,7 @@ static int RunSphericalBillboardGpuProof()
     }
     catch(Exception exception){Console.Error.WriteLine($"P2S3 spherical billboard GPU proof failed: {exception.Message}");return 1;}
 }
-static unsafe int Run(SampleOptions options,LogOptions log,bool productionBillboardCandidate,bool nestedScaleMeshCandidate)
+static unsafe int Run(SampleOptions options,LogOptions log,bool productionBillboardCandidate)
 {
     PlanetaryPhysicalSurface.ConfigureRuntimeGeneration(options.PhysicalSurfaceGeneration);
     Console.WriteLine($"Physical surface authority: generation={(uint)options.PhysicalSurfaceGeneration}; mode={options.PhysicalSurfaceGeneration}.");
@@ -139,21 +138,12 @@ static unsafe int Run(SampleOptions options,LogOptions log,bool productionBillbo
     if(productionBillboardCandidate)
     {
         var repositoryRoot=PlanetarySphericalBillboardGpuProof.FindRepositoryRoot(Environment.CurrentDirectory);
-        IReadOnlyList<PlanetaryProductionSphericalBillboardTopology> levels;
-        if(nestedScaleMeshCandidate)
-        {
-            var candidateDirectory=Path.Combine(repositoryRoot,"assets","planetary-nested-scale-mesh");
-            var nested=PlanetaryNestedScaleMeshTopologyLibrary.Load(candidateDirectory);
-            var adapted=PlanetaryNestedScaleMeshRuntimeAdapter.Adapt(nested);
-            levels=adapted.Levels;
-            state.ProductionBillboardRuntime=new PlanetaryProductionSphericalBillboardMovingRuntime(repositoryRoot,levels,adapted.CullContracts);
-            Console.WriteLine($"New Earth Renderer topology route: opt-in=true; format=NCSM1; directory={candidateDirectory}; displacedTriangleCull=true; defaultRoutingChanged=false.");
-        }
-        else
-        {
-            levels=PlanetaryProductionSphericalBillboardTopologyLibrary.Load(Path.Combine(repositoryRoot,"assets","planetary-production-topology"));
-            state.ProductionBillboardRuntime=new PlanetaryProductionSphericalBillboardMovingRuntime(repositoryRoot,levels);
-        }
+        var topologyDirectory=Path.Combine(repositoryRoot,"assets","planetary-nested-scale-mesh");
+        var nested=PlanetaryNestedScaleMeshTopologyLibrary.Load(topologyDirectory);
+        var adapted=PlanetaryNestedScaleMeshRuntimeAdapter.Adapt(nested);
+        IReadOnlyList<PlanetaryProductionSphericalBillboardTopology> levels=adapted.Levels;
+        state.ProductionBillboardRuntime=new PlanetaryProductionSphericalBillboardMovingRuntime(repositoryRoot,levels,adapted.CullContracts);
+        Console.WriteLine($"New Earth Renderer topology route: production=true; format=NCSM1; directory={topologyDirectory}; persistentScaleResources=true; displacedTriangleCull=true.");
         if(options.ProductionBillboardDesktopTraversal)
         {
             state.ProductionBillboardDesktopTraversal=new(levels);
