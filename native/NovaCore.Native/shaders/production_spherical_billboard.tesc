@@ -1,9 +1,11 @@
 #version 460
 struct EncodedPosition{vec4 high;vec4 low;};struct GpuCameraData{EncodedPosition position;mat4 viewProjection;};layout(set=0,binding=0,std430)readonly buffer Frame{GpuCameraData camera;}frameData;layout(set=0,binding=2,std430)readonly buffer Input{vec4 a;vec4 b;vec4 c;uvec4 controls;vec4 d;vec4 textureDemand;}inputData;
 layout(vertices=3) out;
+// The user output payload is 13 scalars per control point. Body-wide constants
+// and TES-recomputed addresses must not grow this per-patch transport again.
 layout(set=0,binding=40,std430) buffer TessellationFactors { uint values[]; } tessellationFactors;
 layout(set=0,binding=43,std430) buffer Counters { uint values[]; } counters;
-layout(location=0) in vec4 i0[];layout(location=0) out vec4 o0[];layout(location=1) in vec3 i1[];layout(location=1) out vec3 o1[];layout(location=2) flat in vec3 i2[];layout(location=2) flat out vec3 o2[];layout(location=3) flat in uvec2 i3[];layout(location=3) flat out uvec2 o3[];layout(location=4) flat in vec4 i4[];layout(location=4) flat out vec4 o4[];layout(location=5) in vec3 i5[];layout(location=5) out vec3 o5[];layout(location=6) in vec3 i6[];layout(location=6) out vec3 o6[];layout(location=7) in float i7[];layout(location=7) out float o7[];layout(location=8) flat in vec3 i8[];layout(location=8) flat out vec3 o8[];layout(location=9) flat in vec3 i9[];layout(location=9) flat out vec3 o9[];layout(location=10) flat in vec4 i10[];layout(location=10) flat out vec4 o10[];layout(location=11) flat in uint i11[];layout(location=11) flat out uint o11[];layout(location=12) in vec2 i12[];layout(location=12) out vec2 o12[];layout(location=13) flat in uvec4 i13[];layout(location=13) flat out uvec4 o13[];layout(location=14) in vec2 i14[];layout(location=14) out vec2 o14[];layout(location=15) in vec2 i15[];layout(location=15) out vec2 o15[];layout(location=17) in vec3 ip[];layout(location=18) in float i18[];layout(location=18) out float o18[];
+layout(location=1) in vec3 i1[];layout(location=1) out vec3 o1[];layout(location=2) flat in vec3 i2[];layout(location=2) flat out vec3 o2[];layout(location=5) in vec3 i5[];layout(location=5) out vec3 o5[];layout(location=6) in vec3 i6[];layout(location=6) out vec3 o6[];layout(location=7) in float i7[];layout(location=7) out float o7[];layout(location=17) in vec3 ip[];
 bool forceTesOne(){return inputData.textureDemand.z < -1000.5 && inputData.textureDemand.z > -1001.5;}
 vec2 screenSize(){
   float h=inputData.textureDemand.x;
@@ -36,15 +38,10 @@ float edgeFactor(uint a,uint b){
 void main(){
   uint i=gl_InvocationID;
   gl_out[gl_InvocationID].gl_Position=gl_in[gl_InvocationID].gl_Position;
-  o0[gl_InvocationID]=i0[gl_InvocationID];o1[gl_InvocationID]=i1[gl_InvocationID];
-  o2[gl_InvocationID]=i2[gl_InvocationID];o3[gl_InvocationID]=i3[gl_InvocationID];
-  o4[gl_InvocationID]=i4[gl_InvocationID];o5[gl_InvocationID]=i5[gl_InvocationID];
+  o1[gl_InvocationID]=i1[gl_InvocationID];
+  o2[gl_InvocationID]=i2[gl_InvocationID];
+  o5[gl_InvocationID]=i5[gl_InvocationID];
   o6[gl_InvocationID]=i6[gl_InvocationID];o7[gl_InvocationID]=i7[gl_InvocationID];
-  o8[gl_InvocationID]=i8[gl_InvocationID];o9[gl_InvocationID]=i9[gl_InvocationID];
-  o10[gl_InvocationID]=i10[gl_InvocationID];o11[gl_InvocationID]=i11[gl_InvocationID];
-  o12[gl_InvocationID]=i12[gl_InvocationID];o13[gl_InvocationID]=i13[gl_InvocationID];
-  o14[gl_InvocationID]=i14[gl_InvocationID];o15[gl_InvocationID]=i15[gl_InvocationID];
-  o18[gl_InvocationID]=i18[gl_InvocationID];
   barrier();
   if(i==0u){
     float a=edgeFactor(1,2),b=edgeFactor(2,0),c=edgeFactor(0,1),inner=(a+b+c)*.3333;

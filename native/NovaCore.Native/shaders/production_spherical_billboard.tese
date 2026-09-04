@@ -16,23 +16,22 @@ layout(set=0,binding=2,std430)readonly buffer Input{vec4 cameraHighRadiusHigh;ve
 layout(set=0,binding=6,std430)readonly buffer Presentations{Presentation values[];}presentations;
 
 layout(triangles,fractional_odd_spacing,cw) in;
-layout(location=0) in vec4 i0[];layout(location=0) out vec4 color;
+layout(location=0) out vec4 color;
 layout(location=1) in vec3 i1[];layout(location=1) out vec3 normal;
 layout(location=2) flat in vec3 i2[];layout(location=2) flat out vec3 lightDirection;
-layout(location=3) flat in uvec2 i3[];layout(location=3) flat out uvec2 material;
-layout(location=4) flat in vec4 i4[];layout(location=4) flat out vec4 response;
+layout(location=3) flat out uvec2 material;
+layout(location=4) flat out vec4 response;
 layout(location=5) in vec3 i5[];layout(location=5) out vec3 viewDirection;
 layout(location=6) in vec3 i6[];layout(location=6) out vec3 bodyDirection;
 layout(location=7) in float i7[];layout(location=7) out float terrainHeight;
-layout(location=8) flat in vec3 i8[];layout(location=8) flat out vec3 bodyCameraHigh;
-layout(location=9) flat in vec3 i9[];layout(location=9) flat out vec3 bodyCameraLow;
-layout(location=10) flat in vec4 i10[];layout(location=10) flat out vec4 localDetail;
-layout(location=11) flat in uint i11[];layout(location=11) flat out uint productionLayer;
-layout(location=12) in vec2 i12[];layout(location=12) out vec2 productionUv;
-layout(location=13) flat in uvec4 i13[];layout(location=13) flat out uvec4 productionAddress;
-layout(location=14) in vec2 i14[];layout(location=14) out vec2 productionTransition;
-layout(location=15) in vec2 i15[];layout(location=15) out vec2 topologyCoordinate;
-layout(location=18) in float i18[];
+layout(location=8) flat out vec3 bodyCameraHigh;
+layout(location=9) flat out vec3 bodyCameraLow;
+layout(location=10) flat out vec4 localDetail;
+layout(location=11) flat out uint productionLayer;
+layout(location=12) out vec2 productionUv;
+layout(location=13) flat out uvec4 productionAddress;
+layout(location=14) out vec2 productionTransition;
+layout(location=15) out vec2 topologyCoordinate;
 
 vec3 RotateQuaternion(vec3 point,vec4 quaternion){return point+2.0*cross(quaternion.xyz,cross(quaternion.xyz,point)+quaternion.w*point);}
 
@@ -81,5 +80,7 @@ void main()
   vec4 baseClip=gl_in[0].gl_Position*barycentric.x+
     gl_in[1].gl_Position*barycentric.y+gl_in[2].gl_Position*barycentric.z;
   gl_Position=baseClip+frameData.camera.viewProjection*vec4(localRelative,0.0);
-  color=i0[0];normal=surfaceNormal;lightDirection=i2[0];material=i3[0];response=i4[0];viewDirection=-relativeBody;bodyDirection=vec3(direction);terrainHeight=float(height);bodyCameraHigh=i8[0];bodyCameraLow=i9[0];localDetail=i10[0];productionLayer=i11[0];productionUv=local;productionAddress=uvec4(face,level,cell);productionTransition=i14[0];topologyCoordinate=local;
+  // Same frame/body values previously repeated at every VS/TCS control point.
+  // The fragment interface and all physical/interpolated outputs are unchanged.
+  color=vec4(1);normal=surfaceNormal;lightDirection=i2[0];material=uvec2(p.identity.w,p.identity.z);response=p.surface;viewDirection=-relativeBody;bodyDirection=vec3(direction);terrainHeight=float(height);bodyCameraHigh=inputData.cameraHighRadiusHigh.xyz;bodyCameraLow=inputData.cameraLowRadiusLow.xyz;localDetail=p.localDetail;productionLayer=0x40000000u;productionUv=local;productionAddress=uvec4(face,level,cell);productionTransition=vec2(1,0);topologyCoordinate=local;
 }

@@ -60,6 +60,15 @@ generations.
 
 ## Next authorized work boundary
 
+The working tree contains an unbanked P2S5G candidate reducing the VS/TCS user
+payload while preserving TES physics and the fragment interface. Read
+[its measurement and validation record](M12D-P2S5G-workload-investigation.md)
+before further work. User/manual 3440×1440 Desktop acceptance is PASS. Closeout
+recommends READY TO BANK, explicitly disclosing classification C: the TES query
+count changes deterministically but measured refinement factors do not. No
+production code changed during closeout. Explicit banking authorization is still
+required. P2S5F remains the banked production baseline; do not begin the next objective.
+
 - Preserve the accepted NCSM1 production spherical-billboard owner and C3/P2S5F
   coverage/culling architecture.
 - Do not regenerate NCSM1 assets without explicit authorization.
@@ -110,7 +119,7 @@ A fixed-pose benchmark pass does not imply player-facing acceptance.
 dotnet build NovaCore.sln -c Debug
 dotnet run --project tests/NovaCore.Graphics.Tests -c Debug
 dotnet run --project tests/NovaCore.Launcher.Tests -c Debug
-dotnet run --project samples/NovaCore.Triangle/NovaCore.Triangle.csproj -c Debug -- --scene=sol --focus=earth --p2s5c3-traversal --log=validation
+dotnet run --project samples/NovaCore.Triangle/NovaCore.Triangle.csproj -c Debug -- --scene=m12d-production-spherical-billboard --altitude=10.004 --p2s5c3-traversal --log=validation
 dotnet run --project samples/NovaCore.Triangle/NovaCore.Triangle.csproj -c Debug -- --scene=sol --log=validation
 git diff --check
 git status --short

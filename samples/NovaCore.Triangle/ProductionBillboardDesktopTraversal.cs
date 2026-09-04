@@ -69,6 +69,7 @@ internal sealed class ProductionBillboardDesktopTraversal
     private readonly bool _directionalDiagnosticOnly;
     private readonly bool _directionalSphereOnly;
     private readonly bool _directionalGrid;
+    private readonly bool _fixedDiagnosticTime;
     private readonly int _directionalLevel;
     private readonly double? _directionalYawRadians;
     private readonly double _directionalPitchRadians;
@@ -201,6 +202,13 @@ internal sealed class ProductionBillboardDesktopTraversal
         if (_warpDiagnosticOnly) _phase = Phase.WarpDiagnosticOne;
         if (_zeroVisibleDiagnosticOnly) _phase = Phase.ZeroVisibleNearSurface;
         if (_directionalDiagnosticOnly) _phase = Phase.DirectionalVisibility;
+        _fixedDiagnosticTime = Environment.GetEnvironmentVariable(
+            "NOVACORE_P2S5G_FIXED_DIAGNOSTIC_TIME") == "1";
+        if (_fixedDiagnosticTime && !(_directionalDiagnosticOnly || _horizonDiagnosticOnly))
+            throw new InvalidOperationException(
+                "NOVACORE_P2S5G_FIXED_DIAGNOSTIC_TIME requires a directional or horizon diagnostic.");
+        if (_fixedDiagnosticTime)
+            Console.WriteLine("P2S5G fixed diagnostic time: pause before first simulation advance; physical traversal unchanged.");
     }
 
     internal bool Failed { get; private set; }
@@ -231,6 +239,7 @@ internal sealed class ProductionBillboardDesktopTraversal
             ViewportWidthPixels = real.ViewportWidthPixels,
             ViewportHeightPixels = real.ViewportHeightPixels
         };
+        if (_fixedDiagnosticTime && !scene.IsPaused) input.PauseToggle = 1;
         if ((_phase is Phase.AnchoredWarpUp or Phase.UnanchoredWarpUp or
                 Phase.WarpDiagnosticHighUp) &&
             scene.SpeedPresetIndex < SimulationSpeedPresets.Count - 1)
@@ -564,7 +573,9 @@ internal sealed class ProductionBillboardDesktopTraversal
         Phase.Retreat => _currentLevel <= 1
             ? _representativeAltitude[0] * 2d
             : _representativeAltitude[_currentLevel - 2],
-        Phase.ScaleOut => _representativeAltitude[15],
+        // This phase waits for settled L16; requesting L15 can pass through L16
+        // before its settle counter completes and leave the driver waiting.
+        Phase.ScaleOut => _representativeAltitude[16],
         Phase.Descent or Phase.Reapproach => _descentTargets[_descentTargetIndex].Metres,
         Phase.ScaleIn => _representativeAltitude[17],
         _ => 10.004d

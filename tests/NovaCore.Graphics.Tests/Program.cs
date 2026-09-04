@@ -62,6 +62,7 @@ var tests = new (string, Action)[]
     ("M12D-P2S5C production spherical billboard runtime", PlanetaryProductionSphericalBillboardRuntimeTests.Run),
     ("M12D-P2S5B production spherical billboard topology library", PlanetaryProductionSphericalBillboardTopologyTests.Run),
     ("M12D-P2S5F nested production scale-mesh topology", PlanetaryNestedScaleMeshTopologyTests.Run),
+    ("M12D-P2S5G bounded spherical billboard surface interface", PlanetaryBillboardSurfaceWorkloadTests.Run),
     ("GPU physical-height preparation", GpuPhysicalHeightPreparationTests.Run),
     ("Multiscale physical terrain modifier foundation", PlanetaryPhysicalSurfaceModifierTests.Run),
     ("Single canonical physical surface authority", PlanetaryCanonicalPhysicalSurfaceAuthorityTests.Run),

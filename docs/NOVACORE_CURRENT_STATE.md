@@ -40,6 +40,26 @@ an isolated structural proof into the production Earth path:
 Spherical billboarding is therefore current production architecture, not a
 future design or proof-only path.
 
+### Unbanked P2S5G surface-workload candidate
+
+The working tree reduces redundant VS/TCS transport: TCS user outputs fall from
+45 to 13 scalars per control point. TES reads the same frame/body constants
+directly and keeps its existing anchored address and physical calculations.
+The fragment interface, triangle stream, edge factors, and 50 m range are
+unchanged. Compiled-interface regression coverage enforces the reduced payload
+and complete fragment inputs. Fixed-pose diagnostics can pause simulation through
+`NOVACORE_P2S5G_FIXED_DIAGNOSTIC_TIME=1`; full physical traversal cannot use it.
+
+This is not a banked milestone. User/manual Desktop acceptance at native
+3440×1440 is PASS. Closeout recommends READY TO BANK, with classification C
+disclosed: deterministic TES invocation accounting changes, while all measured
+outer/inner tessellation factors remain bit-identical. No closeout production
+code change was needed. Measured results, validation limits, and the remaining
+explicit banking authorization are recorded in
+[the P2S5G investigation](M12D-P2S5G-workload-investigation.md). P2S5F remains the
+accepted baseline; finer pupil continuity and material/environment work have
+not begun.
+
 ## Production planetary responsibility chain
 
 ```text

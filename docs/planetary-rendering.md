@@ -77,6 +77,19 @@ it does not infer visibility from a planar triangle-facing test. Screen and
 frustum rejection likewise remove only work proven unable to contribute. The
 surviving triangle stream is compacted into an indexed-indirect draw payload.
 
+The unbanked P2S5G candidate bounds the TCS user output interface to 13 scalars
+per control point, down from 45. It carries only physical normal, lighting
+direction, view vector, physical direction, and height into TES. Frame/body
+constants are read from the same existing immutable buffers in TES, and unused
+vertex-stage addresses are no longer calculated or forwarded. This removes
+redundant per-patch transport without changing physical evaluation, edge factors,
+the fragment interface, culling, resource lifetime, or draw responsibility.
+See [the measured candidate record](M12D-P2S5G-workload-investigation.md) for
+validation and final closeout. User/manual 3440×1440 acceptance is PASS; banking
+authorization is pending. The small TES invocation delta is a deterministic
+pipeline-accounting change with bit-identical measured outer/inner factors,
+not an increased refinement footprint.
+
 TCS/TES provides bounded near-camera raster refinement. The configured physical
 range is 50 m, the evaluation shader exits before displacement work outside the
 range, and exact per-edge tessellation factors derive the interior factor. That range is not a
