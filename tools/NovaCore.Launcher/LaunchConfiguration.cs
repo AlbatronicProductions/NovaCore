@@ -10,7 +10,8 @@ public enum NovaCoreScenarioPreset
     EarthFullscreenNative,
     M12DNaturalTerrainCandidate,
     M12DSphericalBillboardGpuProof,
-    M12DProductionSphericalBillboard
+    M12DProductionSphericalBillboard,
+    P2S5FScaleMeshCandidate
 }
 
 public enum NovaCoreScene
@@ -73,7 +74,8 @@ public sealed record NovaCoreLaunchConfiguration(
     NovaCoreResolutionPreset ResolutionPreset,
     NovaCoreClientResolution ClientResolution,
     NovaCoreDiagnosticsMode Diagnostics,
-    NovaCorePhysicalSurface PhysicalSurface = NovaCorePhysicalSurface.Generation3)
+    NovaCorePhysicalSurface PhysicalSurface = NovaCorePhysicalSurface.Generation3,
+    bool EnableP2S5FScaleMesh = false)
 {
     public bool EnableVulkanValidation => Diagnostics is
         NovaCoreDiagnosticsMode.VulkanValidation or NovaCoreDiagnosticsMode.VulkanValidationAndPerformance;
@@ -95,7 +97,8 @@ public sealed record NovaCoreScenarioDefinition(
     NovaCoreDiagnosticsMode DefaultDiagnostics,
     NovaCorePhysicalSurface PhysicalSurface,
     bool IsSupported,
-    string? UnsupportedReason)
+    string? UnsupportedReason,
+    bool EnableP2S5FScaleMesh = false)
 {
     public override string ToString() => DisplayName;
 }

@@ -61,6 +61,7 @@ var tests = new (string, Action)[]
     ("M12D-P2S4 canonical natural terrain billboard binding", PlanetarySphericalBillboardNaturalTerrainTests.Run),
     ("M12D-P2S5C production spherical billboard runtime", PlanetaryProductionSphericalBillboardRuntimeTests.Run),
     ("M12D-P2S5B production spherical billboard topology library", PlanetaryProductionSphericalBillboardTopologyTests.Run),
+    ("M12D-P2S5F nested production scale-mesh topology", PlanetaryNestedScaleMeshTopologyTests.Run),
     ("GPU physical-height preparation", GpuPhysicalHeightPreparationTests.Run),
     ("Multiscale physical terrain modifier foundation", PlanetaryPhysicalSurfaceModifierTests.Run),
     ("Single canonical physical surface authority", PlanetaryCanonicalPhysicalSurfaceAuthorityTests.Run),
@@ -2162,6 +2163,8 @@ static void PlanetaryPresentationSpirvStrideTest()
         "distant_planet.vert",
         "planetary.vert",
         "planetary_ring.vert",
+        "production_nested_scale_mesh_cull.comp",
+        "production_nested_scale_mesh_incoming_cull.comp",
         "production_spherical_billboard.tese",
         "production_spherical_billboard.vert",
         "solar_label.vert",
@@ -3652,7 +3655,20 @@ static void ProductionSurfaceBodyEligibilityAndTransitionOwnershipTest()
     var native=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","NovaCoreNative.cpp"));
     var selector=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","shaders","planetary_select.comp"));
     Check(native.Contains("surfaceTransitionEpoch",StringComparison.Ordinal)&&native.Contains("surfaceContextBodyId!=contextBody",StringComparison.Ordinal)&&native.Contains("owner=%s",StringComparison.Ordinal),"body/mode/dataset transitions invalidate stale selection and identify the current production owner");
-    Check(!native.Contains("productionFallbackOwner",StringComparison.Ordinal)&&!native.Contains("productionFallback",StringComparison.Ordinal)&&native.Contains("const bool candidate=a.productionBillboardAuthoritative",StringComparison.Ordinal)&&native.Contains("distantPresentation=!candidate&&handoff&&!production",StringComparison.Ordinal)&&native.Contains("if(!candidate&&diagnosticGlobal&&regional",StringComparison.Ordinal),"terrain-v5 remains the sole default Earth owner while the explicit production billboard candidate atomically suppresses both generic and terrain-v5 owners only after full readiness");
+    Check(!native.Contains("productionFallbackOwner",StringComparison.Ordinal)&&
+          !native.Contains("productionFallback",StringComparison.Ordinal)&&
+          native.Contains("ProductionBillboardPresentationEnabled(a.productionBillboardAuthoritative,a.submission->productionBillboardFlags)",StringComparison.Ordinal)&&
+          native.Contains("const bool candidateRequested=(a.submission->productionBillboardFlags&1u)!=0u",StringComparison.Ordinal)&&
+          native.Contains("distantPresentation=!candidate&&handoff&&!production",StringComparison.Ordinal)&&
+          native.Contains("if(!candidate&&diagnosticGlobal&&regional",StringComparison.Ordinal),
+        "resident production-billboard resources become the Earth presentation owner only through the explicit per-frame presentation authority bit");
+    var sample=File.ReadAllText(Path.Combine(repositoryRoot,"samples","NovaCore.Triangle","Program.cs"));
+    Check(sample.Contains("ProductionBillboardPresentationEligible(state)",StringComparison.Ordinal)&&
+          sample.Contains("submission->ProductionBillboard=null",StringComparison.Ordinal)&&
+          sample.Contains("submission->ProductionBillboardFlags=0",StringComparison.Ordinal)&&
+          sample.Contains("submission->ProductionBillboardFrame=null",StringComparison.Ordinal)&&
+          native.Contains("static_assert(!ProductionBillboardPresentationEnabled(true,0u))",StringComparison.Ordinal),
+        "switching away from Earth disables candidate submission without evicting its reusable topology or physical resources");
     var productionProjection=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","shaders","production_cube_surface.glsl"));
     var productionVertex=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","shaders","planetary.vert"));
     Check(native.Contains("BootstrapProductionHierarchy(a)",StringComparison.Ordinal)&&native.Contains("ProductionHierarchyPayloadsReady(a)",StringComparison.Ordinal)&&native.Contains("complete L0-L2 hierarchy synchronously resident before first submitted presentation frame",StringComparison.Ordinal)&&productionProjection.Contains("NOVACORE_PRODUCTION_TERRAIN_VERSION=5u",StringComparison.Ordinal)&&selector.Contains("bool production=terrain&&inputData.controls.z==NOVACORE_PRODUCTION_TERRAIN_VERSION",StringComparison.Ordinal)&&productionVertex.Contains("inputData.controls.z==NOVACORE_PRODUCTION_TERRAIN_VERSION",StringComparison.Ordinal)&&!selector.Contains("inputData.controls.z==4u",StringComparison.Ordinal)&&!productionVertex.Contains("inputData.controls.z==4u",StringComparison.Ordinal),"the complete immutable Earth L0-L2 hierarchy preloads before presentation and terrain-v5 consistently selects the production projection, payload keys, and transactional ownership path");
@@ -4377,7 +4393,9 @@ static void LayoutTest()
     Check(Marshal.SizeOf<NativePlanetaryGpuConstants>()==96&&Marshal.SizeOf<NativePlanetaryPresentation>()==192&&Marshal.SizeOf<NativeSolarLighting>()==48,"planetary presentation layout");
     Check(Marshal.SizeOf<NativeAnchoredSurfacePatch>()==80&&
         Marshal.SizeOf<NativeAnchoredSurfacePresentation>()==144,"dynamic hierarchy descriptor and shared-frame ABI");
-    Check(Marshal.SizeOf<NativeFrameSubmission>()==784&&
+    Check(Marshal.SizeOf<NativeProductionBillboardPupilFrame>()==160&&
+        Marshal.SizeOf<NativeProductionBillboardFrame>()==480&&
+        Marshal.SizeOf<NativeFrameSubmission>()==800&&
         Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.PlanetaryGpu)).ToInt32()==208&&
         Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.PlanetaryMode)).ToInt32()==304&&
         Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.PlanetaryPresentation)).ToInt32()==320&&
@@ -4391,7 +4409,7 @@ static void LayoutTest()
     Check(Marshal.SizeOf<NativeInputState>()==84&&Marshal.OffsetOf<NativeInputState>(nameof(NativeInputState.PresentationFocus)).ToInt32()==72&&
         Marshal.OffsetOf<NativeInputState>(nameof(NativeInputState.ViewportWidthPixels)).ToInt32()==76&&
         Marshal.OffsetOf<NativeInputState>(nameof(NativeInputState.ViewportHeightPixels)).ToInt32()==80,"input layout");
-    Check(NativeRuntime.GetAbiLayout(out var abi)==NativeResult.Success&&abi.InputStateSize==84&&abi.FrameSubmissionSize==784&&
+    Check(NativeRuntime.GetAbiLayout(out var abi)==NativeResult.Success&&abi.InputStateSize==84&&abi.FrameSubmissionSize==800&&
         abi.FramePlanetaryGpuOffset==208&&abi.FramePlanetaryModeOffset==304&&abi.FramePlanetaryPresentationOffset==320&&abi.FrameSolarLightingOffset==528&&
         abi.InputViewportWidthOffset==76&&abi.InputViewportHeightOffset==80,
         "native frame ABI layout");

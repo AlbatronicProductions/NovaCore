@@ -38,6 +38,12 @@ public static class ScenarioCatalog
             NovaCoreWindowMode.BorderlessFullscreen, NovaCoreResolutionPreset.NativeDesktop,
             NovaCoreDiagnosticsMode.VulkanValidationAndPerformance,
             NovaCorePhysicalSurface.M12DNaturalTerrainCandidate, true, null),
+        new(NovaCoreScenarioPreset.P2S5FScaleMeshCandidate, "New Earth Renderer",
+            "New KSA-style spherical terrain architecture for physical testing.",
+            NovaCoreScene.ProductionSphericalBillboard, NovaCoreStartingBody.Earth, 700_000.0, "land",
+            NovaCoreWindowMode.BorderlessFullscreen, NovaCoreResolutionPreset.NativeDesktop,
+            NovaCoreDiagnosticsMode.PerformanceTelemetry,
+            NovaCorePhysicalSurface.M12DNaturalTerrainCandidate, true, null, true),
         new(NovaCoreScenarioPreset.FloridaLaunchSite, "Florida Launch Site",
             "Solar scene focused on the existing anchored Florida launch site.", NovaCoreScene.Solar,
             NovaCoreStartingBody.Earth, null, "florida-launch", NovaCoreWindowMode.Windowed,
@@ -107,7 +113,8 @@ public static class ScenarioCatalog
             resolutionPreset,
             resolution,
             diagnostics,
-            definition.PhysicalSurface);
+            definition.PhysicalSurface,
+            definition.EnableP2S5FScaleMesh);
         error = null;
         return true;
     }

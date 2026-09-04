@@ -17,6 +17,8 @@ internal static class PlanetaryProductionSphericalBillboardRuntimeTests
             "production billboard preparation uses the canonical physical Earth radius");
         Require(Marshal.SizeOf<NativeSphericalBillboardPhysicalVertex>() == 64,
             "physical billboard vertex matches the std430 dvec4 array stride");
+        Require(Marshal.SizeOf<NativeProductionSphericalBillboardSubmission>() == 96,
+            "production billboard submission carries the explicit topology family through the native ABI");
         ProveV2Gpu(root, levels);
         ProveNativeSelectedIncomingResidency(root, levels);
         ProveSelector(levels);
@@ -25,12 +27,283 @@ internal static class PlanetaryProductionSphericalBillboardRuntimeTests
         ProveActualIncrementalReuse(levels);
         ProveActualPhysicalSnapPreparation(root, levels);
         ProveMovingCoordinator(levels);
+        ProveCurrentPupilMovesDuringCrossLevelPreparation(levels);
         ProveMovementCampaign(levels);
         ProvePublication(levels);
         ProveTes(levels[^1]);
-        ProveConservativeNearSurfaceHorizonCoverage(levels[14]);
+        ProveKsaParityPhysicalResponsibilitySplit(root);
+        ProveZeroVisiblePublicationContract(root);
+        ProvePersistentScaleResourceContract(root);
+        ProveBodyPresentationRoutingContract(root);
+        ProveDirectionalVisibilityContract(root);
+        ProveConservativeNearSurfaceHorizonCoverage(levels);
         DiagnoseBodyFixedLateralContinuity(levels);
         ProveIsolation(root);
+    }
+
+    private static void ProveBodyPresentationRoutingContract(string root)
+    {
+        var sample=File.ReadAllText(Path.Combine(root,"samples","NovaCore.Triangle","Program.cs"));
+        var native=File.ReadAllText(Path.Combine(root,"native","NovaCore.Native","NovaCoreNative.cpp"));
+        Require(sample.Contains("ProductionBillboardPresentationEligible(state)",StringComparison.Ordinal)&&
+            sample.Contains("productionBillboardPresentation?1u:0u",StringComparison.Ordinal)&&
+            sample.Contains("submission->ProductionBillboard=null",StringComparison.Ordinal)&&
+            sample.Contains("submission->ProductionBillboardFlags=0",StringComparison.Ordinal)&&
+            sample.Contains("submission->ProductionBillboardFrame=null",StringComparison.Ordinal),
+            "managed focus routing withdraws the Earth candidate from presentation while keeping its resident runtime alive");
+        Require(native.Contains("ProductionBillboardPresentationEnabled(bool resident,uint32_t flags)",StringComparison.Ordinal)&&
+            native.Contains("static_assert(ProductionBillboardPresentationEnabled(true,1u))",StringComparison.Ordinal)&&
+            native.Contains("static_assert(!ProductionBillboardPresentationEnabled(true,0u))",StringComparison.Ordinal)&&
+            native.Contains("if(candidateRequested){RecordProductionBillboardWork",StringComparison.Ordinal),
+            "native draw submission requires both resident authority and explicit per-frame Earth presentation authority");
+        Console.WriteLine("P2S5F body routing: resident Earth resources are reusable state, not cross-body presentation authority");
+    }
+
+    private static void ProveDirectionalVisibilityContract(string root)
+    {
+        var shaderRoot=Path.Combine(root,"native","NovaCore.Native","shaders");
+        var current=File.ReadAllText(Path.Combine(shaderRoot,
+            "production_nested_scale_mesh_cull.comp"));
+        var incoming=File.ReadAllText(Path.Combine(shaderRoot,
+            "production_nested_scale_mesh_incoming_cull.comp"));
+        var native=File.ReadAllText(Path.Combine(root,"native","NovaCore.Native",
+            "NovaCoreNative.cpp"));
+        var tessellationControl=File.ReadAllText(Path.Combine(shaderRoot,
+            "production_spherical_billboard.tesc"));
+        var harness=File.ReadAllText(Path.Combine(root,"samples","NovaCore.Triangle",
+            "ProductionBillboardDesktopTraversal.cs"));
+
+        foreach (var shader in new[] { current, incoming })
+        {
+            Require(shader.Contains("triangleDistanceSquared(camera,p0,p1,p2)<=2500.000001",
+                    StringComparison.Ordinal) &&
+                shader.Contains("double horizonRadius=baseRadius+tesEnvelope+0.02",
+                    StringComparison.Ordinal) &&
+                shader.Contains("double screenTesSupport=tesActive?tesEnvelope:0.0",
+                    StringComparison.Ordinal),
+                "the accepted horizon envelope remains unchanged while screen support follows the actual 50 m TES footprint");
+            Require(shader.Contains("d0 < -support&&d1 < -support&&d2 < -support",
+                    StringComparison.Ordinal) &&
+                shader.Contains("if(!useNarrow){narrowTested=false;return 0;}",
+                    StringComparison.Ordinal),
+                "the diagnostic sphere path and production plane-wise narrow phase remain independently selectable");
+        }
+
+        static double Distance(Double3 point, Double3 normal, double offset) =>
+            point.X*normal.X+point.Y*normal.Y+point.Z*normal.Z+offset;
+        static bool Outside(Double3 a, Double3 b, Double3 c, Double3 normal,
+            double offset, double support) =>
+            Distance(a,normal,offset)<-support && Distance(b,normal,offset)<-support &&
+            Distance(c,normal,offset)<-support;
+
+        var leftNormal=new Double3(1,0,0);
+        Require(Outside(new(-2,0,0),new(-2,1,0),new(-2,0,1),leftNormal,1,0),
+            "a triangle wholly beyond one frustum plane is rejected");
+        Require(!Outside(new(-2,0,0),new(0,1,0),new(-2,0,1),leftNormal,1,0),
+            "a triangle intersecting a frustum plane remains conservative");
+        Require(!Outside(new(-1.5,0,0),new(-1.5,1,0),new(-1.5,0,1),leftNormal,1,1),
+            "bounded displacement support retains a triangle that can enter the frustum");
+        var nearNormal=new Double3(0,0,1);
+        Require(Outside(new(0,0,-1),new(1,0,-1),new(0,1,-1),nearNormal,0,0) &&
+            !Outside(new(0,0,-1),new(1,0,1),new(0,1,-1),nearNormal,0,0),
+            "homogeneous near-plane rejection removes only provably outside triangles and retains intersections");
+        Require(native.Contains("broadAccepts=%u; broadRejects=%u; narrowTests=%u",
+                StringComparison.Ordinal) &&
+            native.Contains("productionBillboardFlags&16384u)!=0u)gpuInput.targetTexelPixels=-1005.0f",
+                StringComparison.Ordinal) &&
+            native.Contains("productionBillboardFlags&32768u)!=0u)gpuInput.targetTexelPixels=-1006.0f",
+                StringComparison.Ordinal) &&
+            harness.Contains("NOVACORE_P2S5F_DIRECTIONAL_YAW_RADIANS",
+                StringComparison.Ordinal) &&
+            harness.Contains("NOVACORE_P2S5F_DIRECTIONAL_GRID",
+                StringComparison.Ordinal) &&
+            harness.Contains("NOVACORE_P2S5F_DIRECTIONAL_LEVEL",
+                StringComparison.Ordinal) &&
+            harness.Contains("NOVACORE_P2S5F_DIRECTIONAL_VISIBILITY",
+                StringComparison.Ordinal),
+            "diagnostic output preserves exact directional poses and broad/narrow workload attribution");
+        var outerReduction=tessellationControl.IndexOf(
+            "atomicMax(counters.values[23]",StringComparison.Ordinal);
+        var diagnosticBranch=tessellationControl.IndexOf(
+            "if(inputData.textureDemand.z<0)",StringComparison.Ordinal);
+        Require(outerReduction>=0&&diagnosticBranch>outerReduction&&
+            tessellationControl.Contains("atomicMax(counters.values[24]",StringComparison.Ordinal)&&
+            native.Contains("frameMaximumOuterTesFactor",StringComparison.Ordinal)&&
+            native.Contains("frameMaximumInnerTesFactor",StringComparison.Ordinal),
+            "maximum outer and inner factors are reduced for production telemetry, not only diagnostic factor dumps");
+        Console.WriteLine("P2S5F directional visibility: sphere broad phase; " +
+            "prepared-triangle plane narrow phase; TES support active within 50m; index order unchanged");
+    }
+
+    private static void ProvePersistentScaleResourceContract(string root)
+    {
+        var native=File.ReadAllText(Path.Combine(root,"native","NovaCore.Native",
+            "NovaCoreNative.cpp"));
+        var incomingPrepare=File.ReadAllText(Path.Combine(root,"native","NovaCore.Native",
+            "shaders","production_spherical_billboard_incoming_prepare.comp"));
+        var moving=File.ReadAllText(Path.Combine(root,"src","NovaCore.Graphics",
+            "PlanetaryProductionSphericalBillboardMovingRuntime.cs"));
+        Require(native.Contains("AcquireProductionBillboardTopology",StringComparison.Ordinal)&&
+            native.Contains("ProductionBillboardTopologyResourceCapacity=18u",StringComparison.Ordinal)&&
+            native.Contains("productionBillboardTopologyReuseHits++",StringComparison.Ordinal)&&
+            native.Contains("RetainCurrentProductionBillboardWorkAsSpare",StringComparison.Ordinal)&&
+            native.Contains("productionBillboardWorkReuses++",StringComparison.Ordinal),
+            "native runtime retains a bounded immutable scale-topology library and recycles fence-retired current/incoming work buffers");
+        Require(incomingPrepare.Contains("PupilFrame frame=pupilFrames.incoming",StringComparison.Ordinal)&&
+            incomingPrepare.Contains("CandidateBaseHeightD(direction)",StringComparison.Ordinal)&&
+            native.Contains("productionBillboardIncomingPreparePipeline",StringComparison.Ordinal)&&
+            moving.Contains("_nativeGpuPhysicalPreparation",StringComparison.Ordinal),
+            "cross-level NCSM1 publication prepares pupil-dependent physical positions on the GPU instead of rebuilding them in a managed query context");
+        Require(moving.Contains("_submittedTopologyPayloads.Add",StringComparison.Ordinal)&&
+            moving.Contains("topology.NativeLattice, topology.NativeIndices",StringComparison.Ordinal),
+            "managed immutable upload payloads are materialized with each topology, never copied during selection, and reused on revisits");
+        Console.WriteLine("P2S5F persistent resources: topologyCapacity=18; topologyKey=family/hash/count; " +
+            "workSlots=current+incoming/spare; crossLevelPhysical=GPU; publication=fence-atomic");
+    }
+
+    private static void ProveZeroVisiblePublicationContract(string root)
+    {
+        var native = File.ReadAllText(Path.Combine(root, "native", "NovaCore.Native",
+            "NovaCoreNative.cpp"));
+        var incomingReset = File.ReadAllText(Path.Combine(root, "native", "NovaCore.Native",
+            "shaders", "production_spherical_billboard_incoming_reset.comp"));
+
+        Require(native.Contains("ProductionBillboardZeroVisiblePublicationRegression()",
+                StringComparison.Ordinal) &&
+            native.Contains("ProductionBillboardMalformedZeroWorkRegression()",
+                StringComparison.Ordinal),
+            "native compilation permanently proves valid zero-visible publication and rejects malformed zero-work states");
+        Require(native.Contains(
+                "uint64_t(indirectIndexCount)==uint64_t(visibleTriangles)*3u",
+                StringComparison.Ordinal) &&
+            native.Contains("recordedInputTriangles==inputTriangles",
+                StringComparison.Ordinal) &&
+            native.Contains("InputAccountedFor()", StringComparison.Ordinal) &&
+            native.Contains("generationCoherent", StringComparison.Ordinal),
+            "publication readiness accounts for every triangle and binds compacted work to one coherent generation");
+        Require(!native.Contains("draw->indexCount>0", StringComparison.Ordinal) &&
+            native.Contains("zeroVisible=%u; noOpIndirect=%u", StringComparison.Ordinal) &&
+            incomingReset.Contains("drawArgs.values[0]=0u", StringComparison.Ordinal) &&
+            incomingReset.Contains("drawArgs.values[1]=1u", StringComparison.Ordinal),
+            "zero compacted indices remain a valid one-instance no-op indirect submission rather than a forced draw");
+        Console.WriteLine("P2S5F zero-visible publication contract: complete-zero=publish; " +
+            "same-generation-reentry=visible; malformed-zero=reject; owners=1");
+    }
+
+    private static void ProveKsaParityPhysicalResponsibilitySplit(string root)
+    {
+        var shaderRoot = Path.Combine(root, "native", "NovaCore.Native", "shaders");
+        var physical = File.ReadAllText(Path.Combine(shaderRoot,
+            "production_spherical_billboard_physical.glsl"));
+        var preparation = File.ReadAllText(Path.Combine(shaderRoot,
+            "production_spherical_billboard_prepare.comp"));
+        var evaluation = File.ReadAllText(Path.Combine(shaderRoot,
+            "production_spherical_billboard.tese"));
+        var fragment = File.ReadAllText(Path.Combine(shaderRoot,
+            "planetary_production.frag"));
+        var native = File.ReadAllText(Path.Combine(root, "native", "NovaCore.Native",
+            "NovaCoreNative.cpp"));
+        var cull = File.ReadAllText(Path.Combine(shaderRoot,
+            "production_spherical_billboard_cull.comp"));
+        var incomingCull = File.ReadAllText(Path.Combine(shaderRoot,
+            "production_spherical_billboard_incoming_cull.comp"));
+        var compact = File.ReadAllText(Path.Combine(shaderRoot,
+            "production_spherical_billboard_compact.comp"));
+        var sample = File.ReadAllText(Path.Combine(root, "samples", "NovaCore.Triangle",
+            "Program.cs"));
+
+        Require(physical.Contains("vec3 CandidateBaseNormalD", StringComparison.Ordinal) &&
+            preparation.Contains("CandidateBaseHeightD(direction)", StringComparison.Ordinal) &&
+            preparation.Contains("CandidateBaseNormalD(direction,radius)", StringComparison.Ordinal) &&
+            !preparation.Contains("CandidatePhysicalHeightD(direction)", StringComparison.Ordinal) &&
+            !preparation.Contains("CandidatePhysicalNormalD(direction,radius)", StringComparison.Ordinal),
+            "persistent production billboard preparation owns only geographic plus macro/meso displacement and its normal");
+        Require(evaluation.Contains("EvaluateNaturalCandidateNearD(direction)", StringComparison.Ordinal) &&
+            evaluation.Contains("baseHeight+nearHeight*localWeight", StringComparison.Ordinal) &&
+            evaluation.Contains("nearValue.bodyGradient", StringComparison.Ordinal) &&
+            evaluation.Contains("dvec3 preparedBody=camera-dvec3(interpolatedView)", StringComparison.Ordinal) &&
+            evaluation.Contains("gl_Position=baseClip+frameData.camera.viewProjection*vec4(localRelative,0.0)",
+                StringComparison.Ordinal) &&
+            !evaluation.Contains("direction*(radius+height)", StringComparison.Ordinal) &&
+            !evaluation.Contains("bool refined", StringComparison.Ordinal) &&
+            !evaluation.Contains("CandidatePhysicalHeightD(direction)", StringComparison.Ordinal) &&
+            !evaluation.Contains("CandidatePhysicalNormalD(direction", StringComparison.Ordinal),
+            "TES retains the prepared base position, derives one anchored body direction, and adds only the bounded canonical near field rather than rebuilding a second radial surface");
+        var nearWeight = evaluation.IndexOf("if(localWeight>0.0)", StringComparison.Ordinal);
+        var nearEvaluation = evaluation.IndexOf("EvaluateNaturalCandidateNearD(direction)", StringComparison.Ordinal);
+        Require(nearWeight >= 0 && nearEvaluation > nearWeight &&
+                evaluation.Contains("double nearHeight=0.0", StringComparison.Ordinal) &&
+                evaluation.Contains("dvec3 nearGradient=dvec3(0.0)", StringComparison.Ordinal),
+            "TES evaluates detailed physical displacement only inside the bounded 50 m refinement footprint");
+        Require(cull.Contains("curvedPatchOccluded", StringComparison.Ordinal) &&
+            incomingCull.Contains("curvedPatchOccluded", StringComparison.Ordinal) &&
+            cull.Contains("uintBitsToFloat(counters.values[9])", StringComparison.Ordinal) &&
+            cull.Contains("maximumRadius=bodyRadius+double(uintBitsToFloat(counters.values[9]))",
+                StringComparison.Ordinal) &&
+            sample.Contains("nested?generation.CullContract.MaximumTesDisplacementMetres:generation.Topology.Error.DisplacementEnvelopeMetres",
+                StringComparison.Ordinal) && native.Contains("candidate->version!=4", StringComparison.Ordinal),
+            "pre-TES culling preserves the accepted full radial presentation envelope required by NovaCore's coarse chordal base through the version-4 persistent-resource native ABI");
+
+        var directions = new[]
+        {
+            new Double3(-1036.8296487848155, -2603347.813620877, 5814848.209969225).Normalized(),
+            new Double3(.12989743991318992, .4771587602596084, .8691640654166006).Normalized(),
+            new Double3(.6778969229646378, .7253743710122875, -.11953151765791344).Normalized()
+        };
+        var maximumIdentityError = 0d;
+        foreach (var direction in directions)
+        {
+            var composition = PlanetaryNaturalTerrainFamilies.EvaluateComposed(direction *
+                PlanetarySphericalBillboardNaturalTerrainProof.EarthRadiusMetres,
+                new PlanetaryNaturalTerrainFamilyIdentity(6,
+                    PlanetaryNaturalTerrainFamilies.ProofGeneration, 0x4D12D2B1u));
+            var geographic = PlanetaryTerrainDefinition.EarthProductionCubeV5
+                .SampleCanonicalGeographicHeight(direction);
+            var prepared = Math.Max(0d, geographic + composition.Macro.Height + composition.Meso.Height);
+            var split = Math.Max(0d, prepared + composition.Near.Height);
+            var canonical = PlanetaryPhysicalSurface.EvaluateFinalHeightNoGradient(
+                PlanetaryTerrainDefinition.EarthProductionCubeV5, direction,
+                PlanetaryPhysicalSurfaceGeneration.M12DNaturalTerrainCandidate);
+            maximumIdentityError = Math.Max(maximumIdentityError, Math.Abs(split - canonical));
+        }
+        Require(maximumIdentityError <= 1e-9,
+            "base plus TES near responsibility split preserves canonical H(bodyDirection)");
+        Require(sample.Contains(
+                "new NativeProductionBillboardFrame{Previous=_current,Current=_current,Incoming=_current}",
+                StringComparison.Ordinal),
+            "the already prepared initial generation does not trigger a redundant frame-local GPU preparation");
+        Require(native.Contains(
+                "candidateRaster.frontFace=VK_FRONT_FACE_CLOCKWISE", StringComparison.Ordinal) &&
+            native.Contains(
+                "candidateRaster.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE", StringComparison.Ordinal) &&
+            native.Contains(
+                "a.productionBillboardTopologyFamily==NC_PLANETARY_PRODUCTION_TOPOLOGY_NESTED_SCALE_MESH_NCSM1?a.productionBillboardOppositeFacePipeline:a.productionBillboardPipeline",
+                StringComparison.Ordinal) &&
+            native.Contains("candidate->topologyFamily==NC_PLANETARY_PRODUCTION_TOPOLOGY_RADIAL_NCTOP2",
+                StringComparison.Ordinal) &&
+            native.Contains("candidate->topologyFamily==NC_PLANETARY_PRODUCTION_TOPOLOGY_NESTED_SCALE_MESH_NCSM1",
+                StringComparison.Ordinal) &&
+            sample.Contains("TopologyFamily=(uint)generation.CullContract.Family",
+                StringComparison.Ordinal) &&
+            native.Contains("candidateCreate.pRasterizationState=&candidateRaster",
+                StringComparison.Ordinal),
+            "each bound topology family reaches native submission and selects its independently proven raster face contract");
+        Require(compact.Contains(
+                "compacted.values[destination]=indices.values[triangle*3u]", StringComparison.Ordinal) &&
+            compact.Contains(
+                "compacted.values[destination+1u]=indices.values[triangle*3u+1u]", StringComparison.Ordinal) &&
+            compact.Contains(
+                "compacted.values[destination+2u]=indices.values[triangle*3u+2u]", StringComparison.Ordinal),
+            "GPU compaction preserves each source index triplet's original order");
+        Require(fragment.Contains("vec3 samplingDirection=anchored", StringComparison.Ordinal) &&
+            fragment.Contains("?unitDirection", StringComparison.Ordinal) &&
+            fragment.Contains(":ProductionRaySphereDirection(unitDirection,0.0,bodyRadius)",
+                StringComparison.Ordinal),
+            "the single-owner billboard shades from its prepared/TES body direction while the non-anchored legacy material path retains its analytic addressing shell");
+        Console.WriteLine($"P2S5E physical responsibility split: samples={directions.Length}; " +
+            $"canonicalHeightMax={maximumIdentityError:E9}m; factorDependentFullSurface=false; " +
+            $"initialBasePreparation=complete; tesCullEnvelope={PlanetaryNaturalTerrainFamilies.ComposedBounds().NearHeight:F6}m; " +
+            $"radialFrontFace=clockwise; nestedScaleMeshFrontFace=counter-clockwise");
     }
 
     private static void ProveNativeSelectedIncomingResidency(string root,
@@ -331,26 +604,24 @@ internal static class PlanetaryProductionSphericalBillboardRuntimeTests
 
         var snapAngle = levels[8].Snap.PupilCellRadians * (levels[8].Snap.CandidateShiftMultiple + 1);
         target = stable.PivotDirection * Math.Cos(snapAngle) + stable.Tangent.East * Math.Sin(snapAngle);
-        runtime.Update(new(altitude, target, 3440, 1440, Math.PI / 3d, frame++), 0);
-        var snapped = AwaitPrepared(runtime);
-        Require(!snapped.TopologyUploadRequired && snapped.Physical.PreparedSamples > 0 &&
-            snapped.Physical.ReusedSamples > 0,
-            "snap retains immutable topology and incrementally prepares the entering physical set");
-        var stagedTelemetry = runtime.Update(
-            new(altitude, target, 3440, 1440, Math.PI / 3d, frame++), 0);
-        telemetry = runtime.Update(new(altitude, target, 3440, 1440, Math.PI / 3d, frame++),
-            unchecked((uint)snapped.PublicationGeneration));
-        Require(runtime.Current?.Pupil.Generation == snapped.Pupil.Generation &&
-            telemetry.TopologyUploads == 1 && telemetry.Publications == 2 &&
+        var previousFrameIdentity = runtime.Current.PupilFrameIdentity;
+        telemetry = runtime.Update(new(altitude, target, 3440, 1440, Math.PI / 3d, frame++), 0);
+        Require(runtime.Current?.Pupil.Generation != stable.Generation &&
+            runtime.Current?.PupilFrameIdentity != previousFrameIdentity &&
+            !runtime.ReplacementInFlight &&
+            telemetry.TopologyUploads == 1 && telemetry.Publications == 1 &&
             telemetry.ZeroOwnerFrames == 0 && telemetry.OverlapOwnerFrames == 0 &&
-            telemetry.StaleGenerationDraws == 0 &&
-            stagedTelemetry.ResidentGpuBytes > telemetry.ResidentGpuBytes &&
-            telemetry.PeakResidentGpuBytes == stagedTelemetry.ResidentGpuBytes,
-            "snap publication changes the actual current generation with zero topology upload or ownership fault");
+            telemetry.StaleGenerationDraws == 0,
+            "same-level snap updates one frame-local pupil immediately without topology upload, owner generation, or publication wait");
+        var snappedFrameIdentity = runtime.Current!.PupilFrameIdentity;
+        telemetry = runtime.Update(new(altitude, target, 3440, 1440, Math.PI / 3d, frame++), 0);
+        Require(runtime.Current.PupilFrameIdentity == snappedFrameIdentity &&
+            telemetry.PupilFrameIdentity == snappedFrameIdentity,
+            "stationary pupil reuses the exact frame-local physical presentation");
         var timing = runtime.TimingSummary;
         Require(timing.Callback.Samples > 0 && timing.Selector.Samples > 0 &&
-            timing.PupilAndSnap.Samples > 0 && timing.PhysicalPreparation.Samples == 2 &&
-            timing.Publication.Samples == 2,
+            timing.PupilAndSnap.Samples > 0 && timing.PhysicalPreparation.Samples == 1 &&
+            timing.Publication.Samples == 1,
             "bounded runtime records callback, selector, pupil/snap, preparation, and publication timing");
         Console.WriteLine($"P2S5C2 moving runtime: publications={telemetry.Publications}; topologyUploads={telemetry.TopologyUploads}; " +
             $"current=L{telemetry.CurrentLevel}; pupilError={telemetry.PupilAngularErrorRadians:E9}rad; " +
@@ -360,6 +631,79 @@ internal static class PlanetaryProductionSphericalBillboardRuntimeTests
             $"selector={Format(timing.Selector)}; pupilSnap={Format(timing.PupilAndSnap)}; " +
             $"scheduling={Format(timing.DemandScheduling)}; physical={Format(timing.PhysicalPreparation)}; " +
             $"gpuPrepare={Format(timing.GpuPreparation)}; publication={Format(timing.Publication)}");
+    }
+
+    private static void ProveCurrentPupilMovesDuringCrossLevelPreparation(
+        IReadOnlyList<PlanetaryProductionSphericalBillboardTopology> levels)
+    {
+        using var preparationEntered = new ManualResetEventSlim(false);
+        using var allowPreparation = new ManualResetEventSlim(false);
+        PlanetaryProductionBillboardPhysicalPreparation Prepare(
+            PlanetaryProductionSphericalBillboardTopology topology,
+            PlanetaryProductionBillboardPupil pupil,
+            PlanetaryProductionBillboardPhysicalCache cache)
+        {
+            if (topology.Level == 9)
+            {
+                preparationEntered.Set();
+                Require(allowPreparation.Wait(TimeSpan.FromSeconds(10)),
+                    "cross-level preparation remains bounded");
+            }
+            return PrepareSynthetic(topology, pupil, cache);
+        }
+
+        var runtime = new PlanetaryProductionSphericalBillboardMovingRuntime(levels, Prepare);
+        ulong frame = 0;
+        var level8Altitude = FindRepresentativeAltitude(levels, 8);
+        var direction = Double3.UnitZ;
+        _ = runtime.Update(new(level8Altitude, direction, 3440, 1440, Math.PI / 3d, frame++), 0);
+        var initial = AwaitPrepared(runtime);
+        _ = runtime.Update(new(level8Altitude, direction, 3440, 1440, Math.PI / 3d, frame++),
+            unchecked((uint)initial.PublicationGeneration));
+        Require(runtime.Current?.Topology.Level == 8, "cross-level movement proof begins with L8 current");
+
+        try
+        {
+            var level9Altitude = FindRepresentativeAltitude(levels, 9);
+            _ = runtime.Update(new(level9Altitude, direction, 3440, 1440, Math.PI / 3d, frame++), 0);
+            if (!runtime.ReplacementInFlight)
+                _ = runtime.Update(new(level9Altitude, direction, 3440, 1440, Math.PI / 3d, frame++), 0);
+            Require(preparationEntered.Wait(TimeSpan.FromSeconds(10)) && runtime.ReplacementInFlight,
+                "adjacent L9 replacement is prepared invisibly while L8 remains current");
+
+            var before = runtime.Current!;
+            var snapAngle = levels[8].Snap.PupilCellRadians *
+                (levels[8].Snap.CandidateShiftMultiple + 1);
+            var movedDirection = (before.Pupil.PivotDirection * Math.Cos(snapAngle) +
+                before.Pupil.Tangent.East * Math.Sin(snapAngle)).Normalized();
+            var moving = runtime.Update(new(level9Altitude, movedDirection, 3440, 1440,
+                Math.PI / 3d, frame++), 0);
+            Require(runtime.Current?.Topology.Level == 8 &&
+                runtime.Current.Pupil.Generation != before.Pupil.Generation &&
+                runtime.Current.PupilFrameIdentity != before.PupilFrameIdentity &&
+                moving.Publications == 1 && moving.ZeroOwnerFrames == 0 &&
+                moving.OverlapOwnerFrames == 0 && moving.StaleGenerationDraws == 0,
+                "current L8 pupil keeps moving frame-locally while the L9 candidate prepares");
+
+            allowPreparation.Set();
+            var incoming = AwaitPrepared(runtime);
+            Require(incoming.Topology.Level == 9 && runtime.Current?.Topology.Level == 8,
+                "ready L9 candidate remains invisible until native fence acknowledgement");
+            var published = runtime.Update(new(level9Altitude, movedDirection, 3440, 1440,
+                Math.PI / 3d, frame++), unchecked((uint)incoming.PublicationGeneration));
+            Require(runtime.Current?.Topology.Level == 9 && published.Publications == 2 &&
+                published.ZeroOwnerFrames == 0 && published.OverlapOwnerFrames == 0 &&
+                published.StaleGenerationDraws == 0,
+                "fence acknowledgement atomically replaces moving L8 with L9 as the sole owner");
+            Console.WriteLine($"P2S5D cross-level movement: currentFrame={before.PupilFrameIdentity}->" +
+                $"{moving.PupilFrameIdentity}; L8MovesDuringL9Prepare=true; publications={published.Publications}; " +
+                $"owners=1; zero={published.ZeroOwnerFrames}; overlap={published.OverlapOwnerFrames}; " +
+                $"stale={published.StaleGenerationDraws}");
+        }
+        finally
+        {
+            allowPreparation.Set();
+        }
     }
 
     private static void ProveMovementCampaign(
@@ -535,18 +879,28 @@ internal static class PlanetaryProductionSphericalBillboardRuntimeTests
         var a = new Double3(-20, 0, -100);
         var b = new Double3(20, 0, -101);
         var first = PlanetaryProductionSphericalBillboardTes.SharedEdgeFactor(a, b, 1440,
-            Math.PI / 3d, PlanetaryProductionSphericalBillboardTes.RefinementRangeMetres,
-            finest.Error.MinimumRepresentablePhysicalWavelengthMetres);
+            Math.PI / 3d, PlanetaryProductionSphericalBillboardTes.RefinementRangeMetres);
         var reversed = PlanetaryProductionSphericalBillboardTes.SharedEdgeFactor(b, a, 1440,
-            Math.PI / 3d, PlanetaryProductionSphericalBillboardTes.RefinementRangeMetres,
-            finest.Error.MinimumRepresentablePhysicalWavelengthMetres);
-        Require(first == reversed && first is >= 1 and <= 64,
+            Math.PI / 3d, PlanetaryProductionSphericalBillboardTes.RefinementRangeMetres);
+        Require(Math.Abs(first-reversed)<1e-12 && first is >= 1 and <= 64,
             "TES edge factors are shared-edge deterministic and bounded 1-64");
         var skew = PlanetaryProductionSphericalBillboardTes.SharedEdgeFactor(
             new Double3(0, 0, -10), new Double3(1, 0, -1000), 1440,
-            Math.PI / 3d, PlanetaryProductionSphericalBillboardTes.RefinementRangeMetres,
-            finest.Error.MinimumRepresentablePhysicalWavelengthMetres);
+            Math.PI / 3d, PlanetaryProductionSphericalBillboardTes.RefinementRangeMetres);
         Require(skew >= 1 && skew <= 64, "perspective-skew path remains bounded");
+        Require(Math.Abs(PlanetaryProductionSphericalBillboardTes.InnerFactor(64,1,1)-21.9978d)<1e-12,
+            "KSA-compatible interior tessellation uses the arithmetic mean rather than promoting one edge across the patch");
+        var root=PlanetarySphericalBillboardGpuProof.FindRepositoryRoot(AppContext.BaseDirectory);
+        var control=File.ReadAllText(Path.Combine(root,"native","NovaCore.Native","shaders",
+            "production_spherical_billboard.tesc"));
+        var evaluation=File.ReadAllText(Path.Combine(root,"native","NovaCore.Native","shaders",
+            "production_spherical_billboard.tese"));
+        Require(control.Contains("inner=(a+b+c)*.3333",StringComparison.Ordinal)&&
+                control.Contains("return clamp(pixels/3*fade,1,64)",StringComparison.Ordinal)&&
+                !control.Contains("exp2(ceil(log2(required)))",StringComparison.Ordinal)&&
+                !control.Contains("inner=max(a,max(b,c))",StringComparison.Ordinal)&&
+                evaluation.Contains("layout(triangles,fractional_odd_spacing,cw)",StringComparison.Ordinal),
+            "production shaders use the KSA edge/interior/partitioning responsibility without the inherited power-of-two policy");
         const double exactHorizonBasePixels = 1344.683;
         var residual = exactHorizonBasePixels / 64d;
         Require(Math.Abs(residual - 21.010671875d) < 1e-9 && residual > finest.Error.TesTargetMaximumPixels,
@@ -556,52 +910,123 @@ internal static class PlanetaryProductionSphericalBillboardRuntimeTests
     }
 
     private static void ProveConservativeNearSurfaceHorizonCoverage(
-        PlanetaryProductionSphericalBillboardTopology topology)
+        IReadOnlyList<PlanetaryProductionSphericalBillboardTopology> levels)
     {
         var radius = PlanetarySphericalBillboardNaturalTerrainProof.EarthRadiusMetres;
-        var maximumTerrain = PlanetaryTerrainDefinition.EarthProductionCubeV5.MaximumHeightMetres;
-        // Captured C3 native 3440x1440 failure pose. The initial generation's
-        // pupil is deliberately stale here: current remains authoritative while
-        // a moved pupil prepares, so its base must still cover the planet.
-        var cameraDirection = new Double3(-1036.8296487848155, -2603347.813620877,
+        var envelope = levels.Max(level => level.Error.DisplacementEnvelopeMetres);
+        var tessellationEnvelope = PlanetaryNaturalTerrainFamilies.ComposedBounds().NearHeight;
+        Require(levels.All(level => level.Error.DisplacementEnvelopeMetres == envelope) &&
+                envelope >= PlanetaryTerrainDefinition.EarthProductionCubeV5.MaximumHeightMetres +
+                PlanetaryLocalTerrainPackContract.DefaultResidualMaximumMetres,
+            "all production levels carry the complete canonical displacement envelope");
+        var terrain = PlanetaryTerrainDefinition.EarthProductionCubeV5;
+        var capturedDirection = new Double3(-1036.8296487848155, -2603347.813620877,
             5814848.209969225).Normalized();
-        var camera = cameraDirection * (radius + 10.004d);
-        var stalePupil = PlanetaryProductionBillboardPupil.Resolve(default, Double3.UnitZ, topology);
-        var directions = topology.Vertices.Select(vertex =>
-            stalePupil.ResolveCanonicalDirection(vertex, topology)).ToArray();
-        var bodies = directions.Select(direction => direction * radius).ToArray();
+        var altitudes = new[] { 10.004d, 25d, 50d, 100d, 1_000d, 5_000d, 10_000d };
+        var directionCache = new Dictionary<(int Level, PlanetaryProductionBillboardPupil Pupil), Double3[]>();
+        var retained = 0;
 
-        var reference = Math.Abs(cameraDirection.Y) < .9d ? Double3.UnitY : Double3.UnitX;
-        var east = Double3.Cross(reference, cameraDirection).Normalized();
-        var north = Double3.Cross(cameraDirection, east).Normalized();
-        var sampleDistances = new[] { 100d, 1_000d, 5_000d, 10_000d };
-        var retainedSamples = 0;
-        for (var bearing = 0; bearing < 8; bearing++)
-        {
-            var azimuth = bearing * Math.Tau / 8d;
-            var tangent = east * Math.Cos(azimuth) + north * Math.Sin(azimuth);
-            foreach (var distance in sampleDistances)
+        // Exact captured low-altitude family: four grazing bearings at every
+        // required altitude. The prepared displaced triangle is now the raster
+        // surface; only its bounded near field remains a TES excursion.
+        var finest = levels[17];
+        var capturedPupil = PlanetaryProductionBillboardPupil.Resolve(default,
+            capturedDirection, finest);
+        foreach (var altitude in altitudes)
+            for (var bearing = 0; bearing < 4; bearing++)
             {
-                Require(distance > PlanetaryProductionSphericalBillboardTes.RefinementRangeMetres,
-                    "coverage sample lies outside the 50 m TES refinement range");
-                var angle = distance / radius;
-                var target = (cameraDirection * Math.Cos(angle) + tangent * Math.Sin(angle)).Normalized();
-                var triangle = FindContainingSphericalTriangle(topology, directions, target);
-                Require(triangle >= 0, $"closed base contains the {distance:F0} m horizon sample");
-                var first = bodies[topology.Indices[triangle * 3]];
-                var second = bodies[topology.Indices[triangle * 3 + 1]];
-                var third = bodies[topology.Indices[triangle * 3 + 2]];
-                var bound = PlanetaryProductionSphericalBillboardCulling.EncloseCurvedPatch(
-                    first, second, third, radius, maximumTerrain);
-                Require(!PlanetaryProductionSphericalBillboardCulling.IsOccludedByPlanet(
-                        camera, bound, radius - .02d),
-                    $"curved base retains depth ownership at {distance:F0} m beyond TES range");
-                retainedSamples++;
+                VerifyGrazing(finest, capturedPupil, capturedDirection, altitude,
+                    bearing * Math.Tau / 4d, $"captured {altitude:F0}m");
             }
+
+        // The same test crosses every production transition implicated in the
+        // physical replay without changing physical H(direction).
+        for (var level = 14; level <= 17; level++)
+        {
+            var topology = levels[level];
+            var pupil = PlanetaryProductionBillboardPupil.Resolve(default,
+                capturedDirection, topology);
+            VerifyGrazing(topology, pupil, capturedDirection, 10d, .37d,
+                $"L{level} transition");
         }
-        Console.WriteLine($"P2S5C3 near-surface coverage: level=L{topology.Level}; " +
-            $"altitude=10.004m; samples={string.Join(',', sampleDistances.Select(v => $"{v:F0}m"))}; " +
-            $"bearings=8; outsideTesRange={retainedSamples}; retained=all");
+
+        // Same-level snap, a cube-face diagonal, and a pole-sensitive frame all
+        // exercise different pupil bases while retaining one mathematical test.
+        var tangentFrame = capturedPupil.Tangent;
+        var snapAngle = finest.Snap.PupilCellRadians *
+            (finest.Snap.CandidateShiftMultiple + 1d);
+        var movedDirection = (capturedDirection * Math.Cos(snapAngle) +
+            tangentFrame.East * Math.Sin(snapAngle)).Normalized();
+        var snapped = PlanetaryProductionBillboardPupil.Resolve(capturedPupil,
+            movedDirection, finest);
+        VerifyGrazing(finest, capturedPupil, capturedDirection, 10d, 1.13d,
+            "same-level outgoing pupil");
+        VerifyGrazing(finest, snapped, movedDirection, 10d, 1.13d,
+            "same-level replacement pupil");
+        foreach (var special in new[]
+                 {
+                     new Double3(1d, 1d, .001d).Normalized(),
+                     new Double3(1e-7d, 1d, -1e-7d).Normalized()
+                 })
+        {
+            var topology = levels[14];
+            var pupil = PlanetaryProductionBillboardPupil.Resolve(default, special, topology);
+            for (var bearing = 0; bearing < 4; bearing++)
+                VerifyGrazing(topology, pupil, special, 10d, bearing * Math.Tau / 4d,
+                    "cube-wrap/pole");
+        }
+
+        Console.WriteLine($"P2S5D conservative displaced horizon: altitudes=" +
+            $"{string.Join(',', altitudes.Select(value => $"{value:F0}m"))}; bearings=4; " +
+            $"levels=L14-L17; snap/cube/pole=true; baseEnvelope={envelope:F6}m; " +
+            $"tesEnvelope={tessellationEnvelope:F6}m; retained={retained}");
+
+        void VerifyGrazing(PlanetaryProductionSphericalBillboardTopology topology,
+            in PlanetaryProductionBillboardPupil pupil, in Double3 cameraDirection,
+            double altitude, double azimuth, string label)
+        {
+            var key = (topology.Level, pupil);
+            if (!directionCache.TryGetValue(key, out var directions))
+            {
+                var pupilValue = pupil;
+                directions = topology.Vertices.Select(vertex =>
+                    pupilValue.ResolveCanonicalDirection(vertex, topology)).ToArray();
+                directionCache.Add(key, directions);
+            }
+            var reference = Math.Abs(cameraDirection.Y) < .9d ? Double3.UnitY : Double3.UnitX;
+            var east = Double3.Cross(reference, cameraDirection).Normalized();
+            var north = Double3.Cross(cameraDirection, east).Normalized();
+            var tangent = east * Math.Cos(azimuth) + north * Math.Sin(azimuth);
+            var cameraRadius = radius + altitude;
+            var cameraHorizon = Math.Acos(Math.Clamp((radius - .02d) / cameraRadius, -1d, 1d));
+            var targetAngle = cameraHorizon * .98d;
+            var target = (cameraDirection * Math.Cos(targetAngle) +
+                tangent * Math.Sin(targetAngle)).Normalized();
+            var camera = cameraDirection * cameraRadius;
+            var triangle = FindContainingSphericalTriangle(topology, directions, target);
+            Require(triangle >= 0, $"{label}: closed base contains grazing target");
+            var indices = new[]
+            {
+                (int)topology.Indices[triangle * 3],
+                (int)topology.Indices[triangle * 3 + 1],
+                (int)topology.Indices[triangle * 3 + 2]
+            };
+            var bodies = indices.Select(index =>
+            {
+                var direction = directions[index];
+                var composition = PlanetaryNaturalTerrainFamilies.EvaluateComposed(direction * radius,
+                    new PlanetaryNaturalTerrainFamilyIdentity(6,
+                        PlanetaryNaturalTerrainFamilies.ProofGeneration, 0x4D12D2B1u));
+                var geographic = terrain.SampleCanonicalGeographicHeight(direction);
+                var height = Math.Max(0d, geographic + composition.Macro.Height +
+                    composition.Meso.Height);
+                return direction * (radius + height);
+            }).ToArray();
+            Require(!PlanetaryProductionSphericalBillboardCulling.IsCurvedPatchOccluded(
+                    camera, bodies[0], bodies[1], bodies[2], radius, envelope),
+                $"{label}: full radial physical presentation envelope survives pre-TES planet occlusion");
+            retained++;
+        }
     }
 
     private static int FindContainingSphericalTriangle(

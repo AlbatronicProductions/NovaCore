@@ -13,12 +13,10 @@ and performs FP64 camera-relative subtraction before GPU transport.
 
 ## Banked baseline
 
-The current main-branch planetary baseline is M12D-P2S5C3:
-
-- commit `e9b35e4c9f475adffb38f22ac705835d8d5f4181`;
-- annotated tag `m12d-p2s5c3-production-billboard-stabilization`;
-- commit title `NovaCore M12D-P2S5C3: stabilize production billboard coverage and terrain continuity`;
-- automated and physical Desktop acceptance completed at native 3440×1440.
+The current production-accepted planetary baseline is M12D-P2S5F, the **New
+Earth Renderer**. Its milestone commit and annotated tag are banked only after
+the cleanup validation in this closeout; automated and physical Desktop
+acceptance are complete at native 3440×1440.
 
 The milestone sequence from P2S2 through C3 moved spherical billboarding from
 an isolated structural proof into the production Earth path:
@@ -26,11 +24,15 @@ an isolated structural proof into the production Earth path:
 - P2S2 proved immutable nested topology and artifact validation;
 - P2S3 established isolated GPU runtime and draw responsibility;
 - P2S4 bound canonical natural terrain to billboard geometry;
-- P2S5B produced the 18-level production `.nctop2` library;
+- P2S5B produced the first 18-level production topology library;
 - P2S5C1 integrated the production renderer;
 - P2S5C2 added live pupil movement, snapping, scale transition, and sample reuse;
 - P2S5C3 stabilized physical coverage, culling, TES bounds, publication, and the
-  physical Desktop traversal.
+  physical Desktop traversal;
+- P2S5F replaced the radial migration topology with the denser NCSM1 production
+  scale mesh, established its explicit raster winding contract, added valid
+  zero-visible publication/re-entry, persistent scale residency, body-specific
+  presentation authority, and KSA-parity tessellation responsibility.
 
 Spherical billboarding is therefore current production architecture, not a
 future design or proof-only path.
@@ -39,18 +41,18 @@ future design or proof-only path.
 
 ```text
 canonical body-fixed physical terrain H(bodyDirection)
-→ immutable production topology level
+→ immutable persistent NCSM1 scale resource
 → retained and snapped pupil representation
 → physical position and normal preparation
 → conservative curved-patch planet occlusion
 → conservative screen/frustum visibility
 → compacted GPU workload
-→ bounded TCS/TES refinement
+→ KSA-parity per-edge TCS factors and bounded TES refinement
 → indexed indirect raster
 → fence-complete atomic publication
 ```
 
-The production topology library contains 18 immutable levels, L0 through L17.
+The accepted NCSM1 topology library contains 18 immutable levels, L0 through L17.
 Projected geometric error selects a level, and hysteresis prevents unstable
 scale toggling. The camera-facing pupil retains an exact signed cube-lattice
 identity, snaps on deterministic thresholds, and reuses matching samples when
@@ -58,9 +60,9 @@ the pupil moves or changes level.
 
 CPU responsibility is canonical FP64 identity, physical evaluation, selection,
 bounded asynchronous preparation, residency, and immutable publication. Native
-Vulkan owns the reusable GPU resources, conservative visibility work,
-compaction, bounded tessellation, indexed indirect draw, synchronization, HDR,
-reversed-Z depth, and presentation.
+Vulkan owns persistent per-scale topology resources, reusable working buffers,
+conservative visibility work, compaction, bounded tessellation, indexed indirect
+draw, synchronization, HDR, reversed-Z depth, and presentation.
 
 ## Physical authority and representation
 
@@ -111,7 +113,10 @@ generation cannot publish until topology, physical positions, normals,
 visibility/compaction state, indirect draw payload, and required GPU work are
 complete and fence-confirmed.
 
-Publication occurs atomically at a frame boundary. The new current generation
+Publication occurs atomically at a frame boundary. A completely prepared
+generation with zero visible triangles is valid and may publish as the sole
+owner; per-frame culling regenerates visible work from that same generation when
+Earth re-enters the frustum. The new current generation
 then owns Earth and the superseded GPU resources retire only after their use is
 safe. Production telemetry and regressions require:
 
@@ -121,7 +126,7 @@ safe. Production telemetry and regressions require:
 - valid compacted indices and one indexed-indirect billboard draw;
 - no partial incoming generation suppressing the current surface.
 
-## C3 stabilization
+## C3 and P2S5F stabilization
 
 P2S5C3 corrected four related production facts:
 
@@ -141,6 +146,15 @@ overlap or stale generations.
 The Windows launcher also preserves build-configuration identity: a Release
 launcher starts the Release Triangle runtime, and a Debug launcher starts the
 Debug runtime. Runtime fallback builds retain the launcher's configuration.
+
+P2S5F then established NCSM1 as the accepted New Earth Renderer topology. It
+keeps immutable scale resources resident in a bounded current/incoming pool,
+selects raster face convention from explicit topology-family identity, preserves
+original compacted index triplets, accepts complete zero-visible generations,
+keeps Earth presentation authority separate from resource residency, and uses
+the audited KSA-equivalent per-edge tessellation-factor responsibility with a
+TES range early-out. The remaining orientation-sensitive surface GPU variability
+is performance debt, not an ownership or physical-authority exception.
 
 ## Known presentation continuity limit
 
@@ -174,12 +188,14 @@ orientation or physical terrain.
 
 Implemented and stable:
 
-- the 18-level production spherical-billboard topology/runtime;
+- the 18-level NCSM1 New Earth Renderer topology/runtime;
 - canonical body-fixed terrain authority and physical preparation;
 - moving/snapped pupil identity, reuse, scale selection, and hysteresis;
 - asynchronous current/incoming GPU lifecycle and fence-complete publication;
 - conservative curved-patch occlusion and screen/frustum rejection;
-- GPU cull/compact, bounded 50 m TES refinement, and indexed indirect raster;
+- persistent topology residency and reusable current/incoming GPU working resources;
+- GPU cull/compact, KSA-parity bounded 50 m TES refinement, and indexed indirect raster;
+- zero-visible publication/re-entry and body-specific presentation authority;
 - one-owner Earth coverage through the accepted orbit-to-surface trajectory;
 - FP64 world/physical authority with camera-relative GPU transport.
 
@@ -190,8 +206,7 @@ Still in development:
 - atmosphere, clouds, water, weather, and environmental rebuilding;
 - richer regional/global source fidelity;
 - spacecraft flight and surface gameplay;
-- later retirement or promotion of remaining specialized renderer paths where
-  measured architecture work still requires it;
+- remaining non-catastrophic orientation-sensitive surface workload optimization;
 - general immutable simulation snapshots and broader host concurrency.
 
 The current renderer is production-owned and physically accepted, but it is not
@@ -199,13 +214,13 @@ visually finished.
 
 ## Next authorized work boundary
 
-Begin from the banked P2S5C3 production path. Do not regenerate `.nctop2`
+Begin from the accepted P2S5F New Earth Renderer path. Do not regenerate NCSM1
 artifacts, restore retired terrain systems, or reopen recovered coverage/culling
 decisions without explicit authorization and measured evidence. Keep
 `H(bodyDirection)` authoritative and classify any future visual change first as
 physical geometry, depth/ownership, or presentation/LOD behavior.
 
-The likely next planetary work is bounded presentation quality: finer
-pupil/re-triangulation continuity and terrain material/detail work against the
-accepted production owner. Atmosphere, clouds, environment, and gameplay remain
-separate future milestones.
+The next renderer work should be a bounded surface-workload efficiency milestone
+against the accepted production owner, followed by finer pupil/re-triangulation
+continuity and terrain material/detail quality. Atmosphere, clouds, environment,
+and gameplay remain separate future milestones.

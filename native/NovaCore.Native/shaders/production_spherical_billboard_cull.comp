@@ -15,29 +15,30 @@ bool outsideConservativeViewCone(dvec3 camera,dvec3 center,double radius){
   if(coneAngle>=3.1415927)return false;
   return dot(toCenter/distance,dvec3(inputData.viewForwardHalfAngle.xyz))<double(cos(coneAngle));
 }
-bool bypassScreenReject(){return inputData.textureDemand.z < -1001.5 && inputData.textureDemand.z > -1002.5;}
+bool diagnosticMode(float value){return inputData.textureDemand.z<value+.5&&inputData.textureDemand.z>value-.5;}
+bool bypassHorizonReject(){return diagnosticMode(-1003.0)||diagnosticMode(-1004.0);}
+bool bypassScreenReject(){return diagnosticMode(-1002.0)||diagnosticMode(-1004.0);}
 bool curvedPatchOccluded(dvec3 camera,dvec3 p0,dvec3 p1,dvec3 p2){
   dvec3 d0=normalize(p0),d1=normalize(p1),d2=normalize(p2),sum=d0+d1+d2;
   double bodyRadius=double(inputData.cameraHighRadiusHigh.w)+double(inputData.cameraLowRadiusLow.w);
-  double maximumRadius=bodyRadius+double(inputData.thresholds.w);
-  if(dot(sum,sum)<=1e-24)return false;
+  double maximumRadius=bodyRadius+double(uintBitsToFloat(counters.values[9]));
+  double cameraRadius=length(camera);
+  if(cameraRadius<=bodyRadius||maximumRadius<bodyRadius||dot(sum,sum)<=1e-24)return false;
   dvec3 capDirection=normalize(sum);
   double capCosine=clamp(min(dot(capDirection,d0),min(dot(capDirection,d1),dot(capDirection,d2))),-1.0,1.0);
   if(capCosine<=0.0)return false;
-  double centerDistance=0.5*(bodyRadius+maximumRadius)*capCosine;
-  double minimumDelta=bodyRadius*bodyRadius+centerDistance*centerDistance-2.0*bodyRadius*centerDistance*capCosine;
-  double maximumDelta=maximumRadius*maximumRadius+centerDistance*centerDistance-2.0*maximumRadius*centerDistance*capCosine;
-  double patchRadius=sqrt(max(0.0,max(minimumDelta,maximumDelta)))+0.02;
-  dvec3 patchCenter=capDirection*centerDistance,toPlanet=-camera,toSphere=patchCenter-camera;
+  double centerCosine=clamp(dot(capDirection,camera/cameraRadius),-1.0,1.0);
+  if(centerCosine>=capCosine)return false;
+  double capSine=sqrt(max(0.0,1.0-capCosine*capCosine));
+  double centerSine=sqrt(max(0.0,1.0-centerCosine*centerCosine));
+  double nearestPatchCosine=centerCosine*capCosine+centerSine*capSine;
   double occludingRadius=max(bodyRadius-0.02,1.0);
-  double planetDistanceSquared=dot(toPlanet,toPlanet),sphereDistanceSquared=dot(toSphere,toSphere);
-  double dotPlanetSphere=dot(toPlanet,toSphere),planetRadiusSquared=occludingRadius*occludingRadius;
-  double patchRadiusSquared=patchRadius*patchRadius;
-  double discriminant=dotPlanetSphere*dotPlanetSphere+planetRadiusSquared*sphereDistanceSquared+
-    patchRadiusSquared*planetDistanceSquared-planetDistanceSquared*sphereDistanceSquared;
-  double crossTerm=2.0*dotPlanetSphere*occludingRadius*patchRadius;
-  return sphereDistanceSquared-patchRadiusSquared>=planetDistanceSquared-planetRadiusSquared&&
-    discriminant>=abs(crossTerm);
+  double cameraTangentCosine=clamp(occludingRadius/cameraRadius,0.0,1.0);
+  double displacedTangentCosine=clamp(occludingRadius/maximumRadius,0.0,1.0);
+  double visibleLimitCosine=cameraTangentCosine*displacedTangentCosine-
+    sqrt(max(0.0,1.0-cameraTangentCosine*cameraTangentCosine))*
+    sqrt(max(0.0,1.0-displacedTangentCosine*displacedTangentCosine));
+  return nearestPatchCosine<visibleLimitCosine;
 }
 void main(){
   uint triangle=gl_GlobalInvocationID.x,total=counters.values[5];if(triangle>=total)return;
@@ -49,9 +50,7 @@ void main(){
   if(!finite3(p0)||!finite3(p1)||!finite3(p2)||!normalsReady){visibility.values[triangle]=0u;atomicAdd(counters.values[3],1u);return;}
   dvec3 center=(p0+p1+p2)/3.0,camera=dvec3(inputData.cameraHighRadiusHigh.xyz)+dvec3(inputData.cameraLowRadiusLow.xyz);
   double radius=max(length(p0-center),max(length(p1-center),length(p2-center)))+0.02;
-  // TES evaluates the normalized spherical interior, so a sphere around only
-  // the three input positions is not a conservative planet-occlusion bound.
-  if(curvedPatchOccluded(camera,p0,p1,p2)){visibility.values[triangle]=0u;atomicAdd(counters.values[1],1u);return;}
+  if(!bypassHorizonReject()&&curvedPatchOccluded(camera,p0,p1,p2)){visibility.values[triangle]=0u;atomicAdd(counters.values[1],1u);return;}
   if(!bypassScreenReject()&&outsideConservativeViewCone(camera,center,radius)){visibility.values[triangle]=0u;atomicAdd(counters.values[8],1u);return;}
   visibility.values[triangle]=1u;atomicAdd(counters.values[0],1u);
 }

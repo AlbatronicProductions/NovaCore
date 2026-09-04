@@ -83,12 +83,12 @@ NovaCore currently combines a C# simulation core with a native Vulkan renderer, 
 ### Rendering and presentation
 
 - **Native Vulkan renderer** with double-precision camera-relative subtraction before GPU float transport.
-- **Production spherical-billboard Earth** with 18 immutable topology levels spanning orbital to near-surface representation.
+- **New Earth Renderer** with 18 immutable NCSM1 scale-mesh levels spanning orbital to near-surface representation.
 - **One canonical physical surface** — body-fixed `H(bodyDirection)` defines Earth height independently of camera, topology density, pupil placement, and GPU residency.
 - **Moving snapped pupil** — a camera-facing spherical representation retains exact lattice identity, reuses samples across movement, and changes scale through projected-error selection with hysteresis.
-- **Transactional GPU generations** — one current and at most one incoming generation prepare asynchronously; fence-confirmed atomic publication preserves exactly one visible Earth owner.
+- **Persistent scale resources and transactional GPU generations** — immutable topology is reused when a level is revisited; one current and at most one incoming generation prepare asynchronously, and fence-confirmed atomic publication preserves exactly one Earth presentation owner, including valid zero-visible views.
 - **Conservative GPU visibility** — curved-patch planet occlusion and screen/frustum rejection feed compacted indexed-indirect work without removing required base coverage.
-- **Bounded near-field refinement** — TCS/TES refinement is limited to 50 metres around the camera while the production base remains depth-owning outside that range.
+- **KSA-parity bounded refinement responsibility** — exact per-edge TCS factors and TES displacement are limited to 50 metres around the camera while the production base remains depth-owning outside that range.
 - **FP64 physical/world authority** with camera-relative GPU presentation for stable rendering across planetary and astronomical scales.
 - **Correct body-fixed handoff conventions** across detailed, transitional, and distant paths, including a dedicated outward-winding convention for the shared distant sphere.
 - **FP16 HDR scene color** with fixed exposure and ACES-style tone mapping.
@@ -112,7 +112,7 @@ NovaCore treats correctness tooling as part of the engine rather than as present
 - Camera/reference-frame precision tests.
 - Native, managed, Solar-scene, Earth-LOD, resize, and triangle regression coverage.
 
-The banked M12D-P2S5C3 baseline has completed automated and physical orbit-to-near-surface traversal at a native 3440×1440 client extent. Focused regressions cover all 18 topology levels, moving-pupil identity and reuse, atomic publication, one-owner coverage, body-fixed height and normal parity, conservative horizon coverage beyond the TES range, and Vulkan validation. Camera motion cannot mutate Earth orientation, body-fixed geography, or canonical physical height.
+The M12D-P2S5F New Earth Renderer baseline has completed automated and physical orbit-to-near-surface traversal at a native 3440×1440 client extent. Focused regressions cover all 18 NCSM1 levels, persistent level reuse, moving-pupil identity, atomic and zero-visible publication, one-owner coverage, body authority, body-fixed height and normal parity, topology-family winding, KSA-parity tessellation responsibility, conservative horizon coverage beyond the TES range, and Vulkan validation. Camera motion cannot mutate Earth orientation, body-fixed geography, or canonical physical height.
 
 The CPU reference/parity path is a development and regression oracle; the intended production planetary path remains GPU-driven.
 
@@ -184,7 +184,7 @@ dotnet build tools/NovaCore.Launcher/NovaCore.Launcher.csproj -c Release
 Then double-click `tools/NovaCore.Launcher/bin/Release/net10.0-windows/NovaCore.Launcher.exe`.
 The launcher provides Solar overview, Earth orbital, Earth 700 km, Earth —
 Fullscreen Native, Florida launch-site, and one screen-space subdivision
-diagnostic workflow. Window mode, native or explicit client resolution, and
+  diagnostic workflow, plus the accepted **New Earth Renderer**. Window mode, native or explicit client resolution, and
 normal/performance/Vulkan diagnostics are selected independently. The launcher
 shows the resolved client dimensions and starts the matching Triangle runtime:
 a Release launcher uses Release and a Debug launcher uses Debug. No shell
@@ -194,19 +194,18 @@ Current Solar-scene controls include mouse drag for free orbiting, mouse wheel z
 
 ## Current planetary baseline
 
-The banked baseline is **M12D-P2S5C3** at tag
-`m12d-p2s5c3-production-billboard-stabilization`. Earth production follows one
+The accepted planetary baseline is **M12D-P2S5F New Earth Renderer**. Earth production follows one
 coherent responsibility chain:
 
 ```text
 canonical body-fixed physical terrain
-→ immutable production topology level
+→ immutable persistent NCSM1 scale resource
 → retained and snapped pupil representation
 → physical position and normal preparation
 → conservative curved-patch planet occlusion
-→ conservative screen visibility
+→ conservative screen visibility and compacted original index triplets
 → compacted GPU workload
-→ bounded TCS/TES refinement
+→ KSA-parity per-edge TCS factors and bounded TES refinement
 → indexed indirect raster
 → fence-complete atomic publication
 ```
@@ -217,16 +216,18 @@ change level or snap to a new lattice origin without changing
 contract bounds near-camera TES refinement only; the base spherical-billboard
 geometry continues to own planetary depth outside that range.
 
-Implemented and stable today are the 18-level topology library, projected-error
-selection and hysteresis, moving-pupil identity and reuse, asynchronous current
-plus one-incoming GPU lifecycle, conservative visibility and compaction,
-bounded TES, and exactly-one-owner publication.
+Implemented and stable today are the 18-level NCSM1 topology library,
+projected-error selection and hysteresis, moving-pupil identity, persistent
+scale reuse, asynchronous current plus one-incoming GPU lifecycle, conservative
+visibility and compaction, KSA-parity bounded TES, zero-visible publication and
+re-entry, body-specific presentation authority, and exactly-one-owner
+publication.
 
 This is a production architecture milestone, not a claim of finished visuals.
 Terrain materials and presentation quality, atmosphere/cloud/environment
 rebuilding, finer pupil and re-triangulation morph quality, spacecraft and
-surface gameplay, and later renderer retirement or promotion work where still
-applicable remain in development.
+surface gameplay, and further surface-workload optimization remain in
+development.
 
 One known presentation limitation is documented rather than hidden: a rare
 full pupil rebase can change the coarse factor-1 triangulated approximation by

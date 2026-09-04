@@ -87,15 +87,56 @@ public unsafe struct NativeProductionSphericalBillboardSubmission
 {
     public uint Size,Version,Enabled,Level;
     public uint VertexCount,IndexCount,LatticeScale,PhysicalGeneration;
-    public uint TerrainDataGeneration,PupilGeneration,Reserved0,Reserved1;
+    public uint TerrainDataGeneration,PupilGeneration;
+    public float DisplacementEnvelopeMetres;
+    public float PlanetOcclusionSupportRadiusMetres;
+    public uint TopologyFamily;
+    public uint PhysicalPreparationMode;
     public ulong TopologyHash,PublicationGeneration;
     public NativeProductionBillboardLatticeVertex* LatticeVertices;
     public uint* Indices;
     public NativeSphericalBillboardPhysicalVertex* PhysicalVertices;
 }
 
+[StructLayout(LayoutKind.Explicit, Size = 160)]
+public struct NativeProductionBillboardPupilFrame
+{
+    [FieldOffset(0)] public double EastX;
+    [FieldOffset(8)] public double EastY;
+    [FieldOffset(16)] public double EastZ;
+    [FieldOffset(24)] public double LatticeEastOffset;
+    [FieldOffset(32)] public double NorthX;
+    [FieldOffset(40)] public double NorthY;
+    [FieldOffset(48)] public double NorthZ;
+    [FieldOffset(56)] public double LatticeNorthOffset;
+    [FieldOffset(64)] public double UpX;
+    [FieldOffset(72)] public double UpY;
+    [FieldOffset(80)] public double UpZ;
+    [FieldOffset(88)] public double TransitionInner;
+    [FieldOffset(96)] public double TransitionOuter;
+    [FieldOffset(104)] public double BodyRadiusMetres;
+    [FieldOffset(112)] public double ReservedDouble0;
+    [FieldOffset(120)] public double ReservedDouble1;
+    [FieldOffset(128)] public uint FrameIdentity;
+    [FieldOffset(132)] public uint PupilGeneration;
+    [FieldOffset(136)] public uint Level;
+    [FieldOffset(140)] public uint LatticeScale;
+    [FieldOffset(144)] public uint Enabled;
+    [FieldOffset(148)] public uint Rebased;
+    [FieldOffset(152)] public uint Reserved0;
+    [FieldOffset(156)] public uint Reserved1;
+}
+
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct NativeFrameSubmission { public NativeCameraData Camera; public NativeRenderObject* Objects; public uint ObjectCount; public NativeDrawBatch* Batches; public uint BatchCount; public NativeOrbitLineVertex* OrbitVertices; public uint OrbitVertexCount; public NativeOrbitLineVertex* PreviousOrbitVertices; public uint PreviousOrbitVertexCount; public NativeOrbitLineVertex* BodyForwardVertices; public uint BodyForwardVertexCount; public NativeOrbitLineVertex* TargetDirectionVertices; public uint TargetDirectionVertexCount; public NativePlanetaryPatch* PlanetaryPatches; public uint PlanetaryPatchCount; public uint PlanetaryGpuAlignmentPadding; public NativePlanetaryGpuConstants PlanetaryGpu; public NativePlanetaryMode PlanetaryMode; public NativePlanetarySurfaceMode PlanetarySurfaceMode; public uint PhysicalSurfaceGeneration,PlanetaryPadding2; public NativePlanetaryPresentation PlanetaryPresentation; public NativePlanetaryPresentation* DistantBodies; public uint DistantBodyCount, DistantBodyPadding; public NativeSolarLighting SolarLighting; public NativeAnchoredSurfacePatch* AnchoredSurfacePatches; public uint AnchoredSurfacePatchCount,AnchoredSurfaceCacheSlotCount,AnchoredSurfaceActiveGeneration,AnchoredSurfaceFlags,AnchoredSurfaceGpuReadyGeneration,AnchoredSurfacePadding1,AnchoredSurfacePadding2,AnchoredSurfacePadding3,AnchoredSurfacePadding4,AnchoredSurfacePadding5; public NativeAnchoredSurfacePresentation AnchoredSurfacePresentation; public NativeProductionSphericalBillboardSubmission* ProductionBillboard; public uint ProductionBillboardFlags,ProductionBillboardPadding; }
+public struct NativeProductionBillboardFrame
+{
+    public NativeProductionBillboardPupilFrame Previous;
+    public NativeProductionBillboardPupilFrame Current;
+    public NativeProductionBillboardPupilFrame Incoming;
+}
+
+[StructLayout(LayoutKind.Sequential)]
+public unsafe struct NativeFrameSubmission { public NativeCameraData Camera; public NativeRenderObject* Objects; public uint ObjectCount; public NativeDrawBatch* Batches; public uint BatchCount; public NativeOrbitLineVertex* OrbitVertices; public uint OrbitVertexCount; public NativeOrbitLineVertex* PreviousOrbitVertices; public uint PreviousOrbitVertexCount; public NativeOrbitLineVertex* BodyForwardVertices; public uint BodyForwardVertexCount; public NativeOrbitLineVertex* TargetDirectionVertices; public uint TargetDirectionVertexCount; public NativePlanetaryPatch* PlanetaryPatches; public uint PlanetaryPatchCount; public uint PlanetaryGpuAlignmentPadding; public NativePlanetaryGpuConstants PlanetaryGpu; public NativePlanetaryMode PlanetaryMode; public NativePlanetarySurfaceMode PlanetarySurfaceMode; public uint PhysicalSurfaceGeneration,PlanetaryPadding2; public NativePlanetaryPresentation PlanetaryPresentation; public NativePlanetaryPresentation* DistantBodies; public uint DistantBodyCount, DistantBodyPadding; public NativeSolarLighting SolarLighting; public NativeAnchoredSurfacePatch* AnchoredSurfacePatches; public uint AnchoredSurfacePatchCount,AnchoredSurfaceCacheSlotCount,AnchoredSurfaceActiveGeneration,AnchoredSurfaceFlags,AnchoredSurfaceGpuReadyGeneration,AnchoredSurfacePadding1,AnchoredSurfacePadding2,AnchoredSurfacePadding3,AnchoredSurfacePadding4,AnchoredSurfacePadding5; public NativeAnchoredSurfacePresentation AnchoredSurfacePresentation; public NativeProductionSphericalBillboardSubmission* ProductionBillboard; public uint ProductionBillboardFlags,ProductionBillboardPadding; public NativeProductionBillboardFrame* ProductionBillboardFrame; public ulong ProductionBillboardFramePadding; }
 
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct NativeRuntimeAssets

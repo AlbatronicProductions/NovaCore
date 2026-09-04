@@ -10,16 +10,20 @@ public sealed record PlanetaryProductionBillboardPreparedGeneration(
     PlanetaryProductionBillboardPhysicalPreparation Physical,
     NativeProductionBillboardLatticeVertex[] Lattice,
     uint[] Indices,
+    uint PupilFrameIdentity,
     ulong PublicationGeneration,
     PlanetaryProductionBillboardReuse Reuse,
     double PreparationMilliseconds,
-    bool TopologyUploadRequired);
+    bool TopologyUploadRequired,
+    PlanetaryProductionCullContract CullContract = default,
+    bool NativeGpuPhysicalPreparation = false);
 
 public readonly record struct PlanetaryProductionBillboardMovingTelemetry(
     ulong CompletedFrames,
     int CurrentLevel,
     int IncomingLevel,
     uint PupilGeneration,
+    uint PupilFrameIdentity,
     double PupilAngularErrorRadians,
     int ActiveSamples,
     int ReusedSamples,
@@ -63,11 +67,16 @@ public sealed class PlanetaryProductionSphericalBillboardMovingRuntime
     private readonly Func<PlanetaryProductionSphericalBillboardTopology,
         PlanetaryProductionBillboardPupil, PlanetaryProductionBillboardPhysicalCache,
         PlanetaryProductionBillboardPhysicalPreparation> _prepare;
+    private readonly Func<PlanetaryProductionSphericalBillboardTopology,
+        PlanetaryProductionCullContract> _cullContract;
+    private readonly bool _nativeGpuPhysicalPreparation;
+    private readonly HashSet<ulong> _submittedTopologyPayloads = new();
     private Task<PlanetaryProductionBillboardPreparedGeneration>? _preparing;
     private PlanetaryProductionBillboardPreparedGeneration? _ready;
     private PlanetaryProductionBillboardPreparedGeneration? _submitted;
     private PlanetaryProductionBillboardPreparedGeneration? _current;
     private ulong _nextGeneration;
+    private uint _nextPupilFrameIdentity;
     private ulong _topologyUploads;
     private ulong _publications;
     private ulong _staleGenerationDraws;
@@ -85,19 +94,34 @@ public sealed class PlanetaryProductionSphericalBillboardMovingRuntime
         IReadOnlyList<PlanetaryProductionSphericalBillboardTopology> levels)
         : this(levels, (topology, pupil, cache) =>
             PlanetarySphericalBillboardNaturalTerrainProof.PrepareProductionIncremental(
-                repositoryRoot, topology, pupil, cache, maximumParitySamples: 64)) { }
+                repositoryRoot, topology, pupil, cache, maximumParitySamples: 64), null) { }
+
+    public PlanetaryProductionSphericalBillboardMovingRuntime(string repositoryRoot,
+        IReadOnlyList<PlanetaryProductionSphericalBillboardTopology> levels,
+        IReadOnlyDictionary<ulong, PlanetaryProductionCullContract> cullContracts)
+        : this(levels, (topology, pupil, cache) =>
+            PlanetarySphericalBillboardNaturalTerrainProof.PrepareProductionIncremental(
+                repositoryRoot, topology, pupil, cache, maximumParitySamples: 64),
+            topology => cullContracts.TryGetValue(topology.TopologyHash, out var contract)
+                ? contract
+                : throw new InvalidOperationException("Missing topology-specific culling contract."), true) { }
 
     public PlanetaryProductionSphericalBillboardMovingRuntime(
         IReadOnlyList<PlanetaryProductionSphericalBillboardTopology> levels,
         Func<PlanetaryProductionSphericalBillboardTopology,
             PlanetaryProductionBillboardPupil, PlanetaryProductionBillboardPhysicalCache,
-            PlanetaryProductionBillboardPhysicalPreparation> prepare)
+            PlanetaryProductionBillboardPhysicalPreparation> prepare,
+        Func<PlanetaryProductionSphericalBillboardTopology,
+            PlanetaryProductionCullContract>? cullContract = null,
+        bool nativeGpuPhysicalPreparation = false)
     {
         ArgumentNullException.ThrowIfNull(levels);
         ArgumentNullException.ThrowIfNull(prepare);
         _levels = levels;
         _selector = new(levels);
         _prepare = prepare;
+        _cullContract = cullContract ?? (_ => PlanetaryProductionCullContract.Radial);
+        _nativeGpuPhysicalPreparation = nativeGpuPhysicalPreparation;
     }
 
     public PlanetaryProductionBillboardPreparedGeneration? Current => _current;
@@ -122,16 +146,35 @@ public sealed class PlanetaryProductionSphericalBillboardMovingRuntime
         _selectorTiming.Add(_selectorMs);
 
         var pupilStart = Stopwatch.GetTimestamp();
-        var basis = _current?.Pupil ?? default;
-        var desiredPupil = PlanetaryProductionBillboardPupil.Resolve(basis,
-            view.CameraBodyDirection, _levels[selection.Level]);
+        PlanetaryProductionBillboardPupil desiredPupil;
+        if (_current is not null)
+        {
+            desiredPupil = PlanetaryProductionBillboardPupil.Resolve(_current.Pupil,
+                view.CameraBodyDirection, _current.Topology);
+            if (desiredPupil.Generation != _current.Pupil.Generation)
+                _current = _current with
+                {
+                    Pupil = desiredPupil,
+                    PupilFrameIdentity = NextPupilFrameIdentity()
+                };
+        }
+        else
+        {
+            desiredPupil = PlanetaryProductionBillboardPupil.Resolve(default,
+                view.CameraBodyDirection, _levels[selection.Level]);
+        }
         _pupilMs = Stopwatch.GetElapsedTime(pupilStart).TotalMilliseconds;
         _pupilTiming.Add(_pupilMs);
 
         if (!ReplacementInFlight && (_current is null ||
-            _current.Topology.Level != selection.Level ||
-            _current.Pupil.Generation != desiredPupil.Generation))
-            Schedule(_levels[selection.Level], desiredPupil);
+            _current.Topology.Level != selection.Level))
+        {
+            var incomingPupil = _current is null
+                ? desiredPupil
+                : PlanetaryProductionBillboardPupil.Resolve(_current.Pupil,
+                    view.CameraBodyDirection, _levels[selection.Level]);
+            Schedule(_levels[selection.Level], incomingPupil);
+        }
 
         // Until the first candidate publication, terrain-v5 remains the sole
         // owner. Thereafter the current candidate remains the sole owner while
@@ -151,7 +194,8 @@ public sealed class PlanetaryProductionSphericalBillboardMovingRuntime
         var active = _submitted ?? _ready ?? (_preparing is null ? _current : null);
         return new(view.CompletedFrame, _current?.Topology.Level ?? -1,
             _submitted?.Topology.Level ?? _ready?.Topology.Level ?? -1,
-            desiredPupil.Generation, angular, active?.Reuse.ActiveSamples ?? 0,
+            desiredPupil.Generation, _current?.PupilFrameIdentity ?? 0u,
+            angular, active?.Reuse.ActiveSamples ?? 0,
             active?.Reuse.ReusedSamples ?? 0, active?.Reuse.NewSamples ?? 0,
             _topologyUploads, _publications, 0, 0,
             _staleGenerationDraws, residentBytes, _peakResidentGpuBytes,
@@ -177,27 +221,45 @@ public sealed class PlanetaryProductionSphericalBillboardMovingRuntime
         PlanetaryProductionBillboardPupil pupil)
     {
         var generation = ++_nextGeneration;
+        var pupilFrameIdentity = NextPupilFrameIdentity();
         var previous = _current;
-        var topologyUpload = previous is null || previous.Topology.TopologyHash != topology.TopologyHash;
         var scheduled = Stopwatch.GetTimestamp();
         _preparing = Task.Run(() =>
         {
             var begin = Stopwatch.GetTimestamp();
-            if (previous is not null) _cache.RetainOnly(previous.Physical.Identities);
-            var physical = _prepare(topology, pupil, _cache);
-            var lattice = topology.Vertices.Select(vertex => new NativeProductionBillboardLatticeVertex
+            PlanetaryProductionBillboardPhysicalPreparation physical;
+            if (_nativeGpuPhysicalPreparation)
             {
-                CubeX = vertex.CubeX, CubeY = vertex.CubeY, CubeZ = vertex.CubeZ,
-                Metadata = (uint)vertex.DensityRegion | ((uint)vertex.RefinementDepth << 8)
-            }).ToArray();
+                physical = new(Array.Empty<NativeSphericalBillboardPhysicalVertex>(), default,
+                    0d, 0d, 0, 0,
+                    Array.Empty<PlanetaryCanonicalPhysicalSampleIdentity>());
+            }
+            else
+            {
+                if (previous is not null) _cache.RetainOnly(previous.Physical.Identities);
+                physical = _prepare(topology, pupil, _cache);
+            }
+            bool topologyUpload;
+            lock (_submittedTopologyPayloads)
+                topologyUpload = _submittedTopologyPayloads.Add(topology.TopologyHash);
             var reuse = new PlanetaryProductionBillboardReuse(topology.Vertices.Count,
-                physical.ReusedSamples, physical.PreparedSamples);
+                physical.ReusedSamples,
+                _nativeGpuPhysicalPreparation ? topology.Vertices.Count : physical.PreparedSamples);
             return new PlanetaryProductionBillboardPreparedGeneration(topology, pupil, physical,
-                lattice, topology.Indices.ToArray(), generation, reuse,
-                Stopwatch.GetElapsedTime(begin).TotalMilliseconds, topologyUpload);
+                topology.NativeLattice, topology.NativeIndices, pupilFrameIdentity, generation, reuse,
+                Stopwatch.GetElapsedTime(begin).TotalMilliseconds, topologyUpload,
+                _cullContract(topology), _nativeGpuPhysicalPreparation);
         });
         _schedulingMs = Stopwatch.GetElapsedTime(scheduled).TotalMilliseconds;
         _schedulingTiming.Add(_schedulingMs);
+    }
+
+    private uint NextPupilFrameIdentity()
+    {
+        _nextPupilFrameIdentity = _nextPupilFrameIdentity == uint.MaxValue
+            ? 1u
+            : _nextPupilFrameIdentity + 1u;
+        return _nextPupilFrameIdentity;
     }
 
     private void CompleteBackgroundPreparation()
@@ -207,7 +269,8 @@ public sealed class PlanetaryProductionSphericalBillboardMovingRuntime
         _preparing = null;
         _preparationMs = _ready.PreparationMilliseconds;
         _preparationTiming.Add(_preparationMs);
-        _gpuPreparationTiming.Add(_ready.Physical.Metrics.GpuMilliseconds);
+        if (!_ready.NativeGpuPhysicalPreparation)
+            _gpuPreparationTiming.Add(_ready.Physical.Metrics.GpuMilliseconds);
         if (_ready.TopologyUploadRequired) _topologyUploads++;
     }
 

@@ -2,16 +2,18 @@ using System.Diagnostics;using System.Reflection;using System.Runtime.InteropSer
 using NovaCore.Core;using NovaCore.Core.Camera;using NovaCore.Core.ReferenceFrames;using NovaCore.Core.Surface;using NovaCore.Graphics;using NovaCore.Interop;using NovaCore.Platform;using NovaCore.Simulation.Time;using NovaCore.Simulation.Celestial;
 if(args.Contains("--scene=m12d-spherical-billboard-gpu-proof",StringComparer.OrdinalIgnoreCase))return RunSphericalBillboardGpuProof();
 var productionBillboardCandidate=args.Contains("--scene=m12d-production-spherical-billboard",StringComparer.OrdinalIgnoreCase);
+var nestedScaleMeshCandidate=args.Contains("--p2s5f-scale-mesh",StringComparer.OrdinalIgnoreCase);
 if(productionBillboardCandidate)
 {
-    var mapped=args.Where(value=>!value.StartsWith("--scene=",StringComparison.OrdinalIgnoreCase)).ToList();
+    var mapped=args.Where(value=>!value.StartsWith("--scene=",StringComparison.OrdinalIgnoreCase)&&!value.Equals("--p2s5f-scale-mesh",StringComparison.OrdinalIgnoreCase)).ToList();
     mapped.Add("--scene=sol");
     if(!mapped.Any(value=>value.StartsWith("--focus=",StringComparison.OrdinalIgnoreCase)))mapped.Add("--focus=earth");
     if(!mapped.Any(value=>value.StartsWith("--altitude=",StringComparison.OrdinalIgnoreCase)))mapped.Add("--altitude=700000");
     if(!mapped.Any(value=>value.StartsWith("--physical-surface=",StringComparison.OrdinalIgnoreCase)))mapped.Add("--physical-surface=m12d-natural-candidate");
     args=mapped.ToArray();
 }
-if(!SampleOptions.TryParse(args,out var options,out var error)){Console.Error.WriteLine(error);return 2;}if(!LogOptions.TryParse(options.LogArguments,out var log,out var logError)){Console.Error.WriteLine(logError);return 2;}return Run(options,log,productionBillboardCandidate);
+if(nestedScaleMeshCandidate&&!productionBillboardCandidate){Console.Error.WriteLine("--p2s5f-scale-mesh requires --scene=m12d-production-spherical-billboard.");return 2;}
+if(!SampleOptions.TryParse(args,out var options,out var error)){Console.Error.WriteLine(error);return 2;}if(!LogOptions.TryParse(options.LogArguments,out var log,out var logError)){Console.Error.WriteLine(logError);return 2;}return Run(options,log,productionBillboardCandidate,nestedScaleMeshCandidate);
 static int RunSphericalBillboardGpuProof()
 {
     try
@@ -45,7 +47,7 @@ static int RunSphericalBillboardGpuProof()
     }
     catch(Exception exception){Console.Error.WriteLine($"P2S3 spherical billboard GPU proof failed: {exception.Message}");return 1;}
 }
-static unsafe int Run(SampleOptions options,LogOptions log,bool productionBillboardCandidate)
+static unsafe int Run(SampleOptions options,LogOptions log,bool productionBillboardCandidate,bool nestedScaleMeshCandidate)
 {
     PlanetaryPhysicalSurface.ConfigureRuntimeGeneration(options.PhysicalSurfaceGeneration);
     Console.WriteLine($"Physical surface authority: generation={(uint)options.PhysicalSurfaceGeneration}; mode={options.PhysicalSurfaceGeneration}.");
@@ -137,8 +139,21 @@ static unsafe int Run(SampleOptions options,LogOptions log,bool productionBillbo
     if(productionBillboardCandidate)
     {
         var repositoryRoot=PlanetarySphericalBillboardGpuProof.FindRepositoryRoot(Environment.CurrentDirectory);
-        var levels=PlanetaryProductionSphericalBillboardTopologyLibrary.Load(Path.Combine(repositoryRoot,"assets","planetary-production-topology"));
-        state.ProductionBillboardRuntime=new PlanetaryProductionSphericalBillboardMovingRuntime(repositoryRoot,levels);
+        IReadOnlyList<PlanetaryProductionSphericalBillboardTopology> levels;
+        if(nestedScaleMeshCandidate)
+        {
+            var candidateDirectory=Path.Combine(repositoryRoot,"assets","planetary-nested-scale-mesh");
+            var nested=PlanetaryNestedScaleMeshTopologyLibrary.Load(candidateDirectory);
+            var adapted=PlanetaryNestedScaleMeshRuntimeAdapter.Adapt(nested);
+            levels=adapted.Levels;
+            state.ProductionBillboardRuntime=new PlanetaryProductionSphericalBillboardMovingRuntime(repositoryRoot,levels,adapted.CullContracts);
+            Console.WriteLine($"New Earth Renderer topology route: opt-in=true; format=NCSM1; directory={candidateDirectory}; displacedTriangleCull=true; defaultRoutingChanged=false.");
+        }
+        else
+        {
+            levels=PlanetaryProductionSphericalBillboardTopologyLibrary.Load(Path.Combine(repositoryRoot,"assets","planetary-production-topology"));
+            state.ProductionBillboardRuntime=new PlanetaryProductionSphericalBillboardMovingRuntime(repositoryRoot,levels);
+        }
         if(options.ProductionBillboardDesktopTraversal)
         {
             state.ProductionBillboardDesktopTraversal=new(levels);
@@ -154,20 +169,22 @@ static unsafe int Run(SampleOptions options,LogOptions log,bool productionBillbo
         PlanetaryProductionBillboardPreparedGeneration initial;
         while(!state.ProductionBillboardRuntime.TrySubmitPrepared(out initial))Thread.Sleep(1);
         state.ProductionBillboardLease=new ProductionBillboardNativeLease(initial);
+        state.ProductionBillboardFrameLease=new ProductionBillboardFrameNativeLease(initial);
         Console.WriteLine($"P2S5C2 candidate prepared: interactive=true; level={initial.Topology.Level}; hash=0x{initial.Topology.TopologyHash:X16}; vertices={initial.Topology.Vertices.Count}; triangles={initial.Topology.TriangleCount}; prepared={initial.Physical.PreparedSamples}; reused={initial.Physical.ReusedSamples}; physicalGpuMs={initial.Physical.Metrics.GpuMilliseconds:F6}; heightParity={initial.Physical.MaximumCpuHeightErrorMetres:E9}m; normalParity={initial.Physical.MaximumCpuNormalErrorRadians:E9}rad; runtimeTopologyGeneration=0");
     }
     var objects=new NativeRenderObject[objectCapacity];var batches=new NativeDrawBatch[objectCapacity];var orbit=sol?.OrbitVertices??new NativeOrbitLineVertex[snapshot.OrbitCurve?.Count??0];var previousOrbit=new NativeOrbitLineVertex[snapshot.OrbitCurve?.Count??0];var bodyForward=new NativeOrbitLineVertex[2];var targetDirection=new NativeOrbitLineVertex[2];var anchoredSurfacePatches=dynamicAnchored?.SubmissionPatches??[];var h=GCHandle.Alloc(state);
     CopyObjects(state.Submission,objects,batches,orbit,previousOrbit,bodyForward,targetDirection,out var batchCount);
     var terrainPathUtf8=terrainAssetPath is null?null:Encoding.UTF8.GetBytes(terrainAssetPath+'\0');var localTerrainPathUtf8=localTerrainAssetPath is null?null:Encoding.UTF8.GetBytes(localTerrainAssetPath+'\0');var elevationOraclePathUtf8=elevationOraclePath is null?null:Encoding.UTF8.GetBytes(elevationOraclePath+'\0');
-    fixed(NativeRenderObject* po=objects)fixed(NativeDrawBatch* pb=batches)fixed(NativeOrbitLineVertex* pl=orbit)fixed(NativeOrbitLineVertex* pp=previousOrbit)fixed(NativeOrbitLineVertex* pf=bodyForward)fixed(NativeOrbitLineVertex* pt=targetDirection)fixed(NativePlanetaryPatch* px=planetaryPatches)fixed(NativePlanetaryPresentation* pd=distantBodies)fixed(NativeAnchoredSurfacePatch* pas=anchoredSurfacePatches)fixed(byte* terrainPath=terrainPathUtf8)fixed(byte* localTerrainPath=localTerrainPathUtf8)fixed(byte* oraclePath=elevationOraclePathUtf8){NativeFrameSubmission n=new(){Camera=NativeCamera(state.Submission.Camera),Objects=po,ObjectCount=(uint)state.Submission.ObjectCount,Batches=pb,BatchCount=(uint)batchCount,OrbitVertices=pl,OrbitVertexCount=(uint)(sol?.OrbitVertices.Length??state.Submission.OrbitVertexCount),PreviousOrbitVertices=pp,PreviousOrbitVertexCount=(uint)state.Submission.PreviousOrbitVertexCount,BodyForwardVertices=pf,BodyForwardVertexCount=(uint)state.Submission.BodyForwardVertexCount,TargetDirectionVertices=pt,TargetDirectionVertexCount=(uint)state.Submission.TargetDirectionVertexCount,PlanetaryPatches=px,PlanetaryPatchCount=ActivePlanetaryPatchCount(state),PlanetaryGpu=earth?.GpuConstants(camera)??sol?.GpuConstants(camera)??default,PlanetaryMode=earth?.Mode??(sol is null?NativePlanetaryMode.CpuReference:NativePlanetaryMode.GpuProduction),PlanetarySurfaceMode=NativeSurfaceMode(earth,sol),PhysicalSurfaceGeneration=(uint)options.PhysicalSurfaceGeneration,PlanetaryPresentation=earth?.NativePresentation(camera)??sol?.FocusedPresentation(camera)??default,DistantBodies=pd,DistantBodyCount=(uint)(sol?.DistantBodyCount??0),SolarLighting=earth?.SolarLighting(camera)??sol?.SolarLighting(camera)??default,AnchoredSurfacePatches=pas,AnchoredSurfacePatchCount=(uint)(dynamicAnchored?.ActivePatchCount??0),AnchoredSurfaceCacheSlotCount=(uint)(dynamicAnchored?.CacheCapacity??0),AnchoredSurfaceActiveGeneration=dynamicAnchored?.ActiveGeneration??0u,AnchoredSurfaceFlags=dynamicAnchored?.Visible==true?1u|(dynamicAnchored.RequiresGlobalFallback?2u:0u):0u,AnchoredSurfacePresentation=dynamicAnchored?.NativePresentation??default,ProductionBillboard=state.ProductionBillboardLease?.Pointer,ProductionBillboardFlags=productionBillboardCandidate?1u:0u};var runtimeAssets=new NativeRuntimeAssets{Size=(uint)sizeof(NativeRuntimeAssets),Version=3,ProductionTerrainPathUtf8=terrainPath,LocalTerrainPathUtf8=localTerrainPath,ElevationOraclePathUtf8=oraclePath};try{return terrainPath is null?NativeRuntime.RunRenderer(&n,Callback,GCHandle.ToIntPtr(h))==NativeResult.Success?0:1:NativeRuntime.RunRendererWithAssets(&n,Callback,GCHandle.ToIntPtr(h),&runtimeAssets)==NativeResult.Success?0:1;}finally{state.DisposeProductionBillboardLeases();h.Free();}}
+    fixed(NativeRenderObject* po=objects)fixed(NativeDrawBatch* pb=batches)fixed(NativeOrbitLineVertex* pl=orbit)fixed(NativeOrbitLineVertex* pp=previousOrbit)fixed(NativeOrbitLineVertex* pf=bodyForward)fixed(NativeOrbitLineVertex* pt=targetDirection)fixed(NativePlanetaryPatch* px=planetaryPatches)fixed(NativePlanetaryPresentation* pd=distantBodies)fixed(NativeAnchoredSurfacePatch* pas=anchoredSurfacePatches)fixed(byte* terrainPath=terrainPathUtf8)fixed(byte* localTerrainPath=localTerrainPathUtf8)fixed(byte* oraclePath=elevationOraclePathUtf8){var productionBillboardPresentation=productionBillboardCandidate&&ProductionBillboardPresentationEligible(state);NativeFrameSubmission n=new(){Camera=NativeCamera(state.Submission.Camera),Objects=po,ObjectCount=(uint)state.Submission.ObjectCount,Batches=pb,BatchCount=(uint)batchCount,OrbitVertices=pl,OrbitVertexCount=(uint)(sol?.OrbitVertices.Length??state.Submission.OrbitVertexCount),PreviousOrbitVertices=pp,PreviousOrbitVertexCount=(uint)state.Submission.PreviousOrbitVertexCount,BodyForwardVertices=pf,BodyForwardVertexCount=(uint)state.Submission.BodyForwardVertexCount,TargetDirectionVertices=pt,TargetDirectionVertexCount=(uint)state.Submission.TargetDirectionVertexCount,PlanetaryPatches=px,PlanetaryPatchCount=ActivePlanetaryPatchCount(state),PlanetaryGpu=earth?.GpuConstants(camera)??sol?.GpuConstants(camera)??default,PlanetaryMode=earth?.Mode??(sol is null?NativePlanetaryMode.CpuReference:NativePlanetaryMode.GpuProduction),PlanetarySurfaceMode=NativeSurfaceMode(earth,sol),PhysicalSurfaceGeneration=(uint)options.PhysicalSurfaceGeneration,PlanetaryPresentation=earth?.NativePresentation(camera)??sol?.FocusedPresentation(camera)??default,DistantBodies=pd,DistantBodyCount=(uint)(sol?.DistantBodyCount??0),SolarLighting=earth?.SolarLighting(camera)??sol?.SolarLighting(camera)??default,AnchoredSurfacePatches=pas,AnchoredSurfacePatchCount=(uint)(dynamicAnchored?.ActivePatchCount??0),AnchoredSurfaceCacheSlotCount=(uint)(dynamicAnchored?.CacheCapacity??0),AnchoredSurfaceActiveGeneration=dynamicAnchored?.ActiveGeneration??0u,AnchoredSurfaceFlags=dynamicAnchored?.Visible==true?1u|(dynamicAnchored.RequiresGlobalFallback?2u:0u):0u,AnchoredSurfacePresentation=dynamicAnchored?.NativePresentation??default,ProductionBillboard=productionBillboardPresentation?state.ProductionBillboardLease?.Pointer:null,ProductionBillboardFlags=productionBillboardPresentation?1u:0u,ProductionBillboardFrame=productionBillboardPresentation?state.ProductionBillboardFrameLease?.Pointer:null};var runtimeAssets=new NativeRuntimeAssets{Size=(uint)sizeof(NativeRuntimeAssets),Version=3,ProductionTerrainPathUtf8=terrainPath,LocalTerrainPathUtf8=localTerrainPath,ElevationOraclePathUtf8=oraclePath};try{return terrainPath is null?NativeRuntime.RunRenderer(&n,Callback,GCHandle.ToIntPtr(h))==NativeResult.Success?0:1:NativeRuntime.RunRendererWithAssets(&n,Callback,GCHandle.ToIntPtr(h),&runtimeAssets)==NativeResult.Success?0:1;}finally{state.DisposeProductionBillboardLeases();h.Free();}}
 }
 static void PrintRuntimeFingerprint(string? terrainPath,string? terrainSha,string? localPath,string? localSha,string? oraclePath)
 {
     var managed=Assembly.GetExecutingAssembly().Location;var native=Path.Combine(AppContext.BaseDirectory,"NovaCore.Native.dll");
-    var productionShader=Path.Combine(AppContext.BaseDirectory,"shaders","planetary_production.frag.spv");var distantShader=Path.Combine(AppContext.BaseDirectory,"shaders","distant_planet.frag.spv");
+    var productionShader=RuntimeShader("planetary_production.frag.spv");var tessControlShader=RuntimeShader("production_spherical_billboard.tesc.spv");var tessEvaluationShader=RuntimeShader("production_spherical_billboard.tese.spv");var distantShader=RuntimeShader("distant_planet.frag.spv");
     Console.WriteLine($"Runtime fingerprint: cwd={Environment.CurrentDirectory}; process={Environment.ProcessPath}; base={AppContext.BaseDirectory}");
-    Print("managed",managed);Print("native-resolved",native);Print("production-fragment",productionShader);Print("distant-fragment",distantShader);
+    Print("managed",managed);Print("native-resolved",native);Print("production-fragment",productionShader);Print("production-tess-control",tessControlShader);Print("production-tess-evaluation",tessEvaluationShader);Print("distant-fragment",distantShader);
     Console.WriteLine($"Runtime terrain-v5: global={Path.GetFullPath(terrainPath!)}; sha256={terrainSha}; local={(localPath is null?"unavailable":Path.GetFullPath(localPath))}; localSha256={localSha??"unavailable"}; elevationOracle={(oraclePath is null?"unavailable":Path.GetFullPath(oraclePath))}; elevationOracleLoaded={EarthElevationDataset.IsLoaded}; elevationSha256={EarthElevationDataset.Sha256}");
+    static string RuntimeShader(string name){var working=Path.Combine(Environment.CurrentDirectory,"shaders",name);return File.Exists(working)?working:Path.Combine(AppContext.BaseDirectory,"shaders",name);}
     static void Print(string identity,string path){using var stream=File.OpenRead(path);Console.WriteLine($"Runtime {identity}: path={Path.GetFullPath(path)}; bytes={stream.Length}; sha256={Convert.ToHexStringLower(SHA256.HashData(stream))}");}
 }
 static bool TryCreateSnapshot(SampleRenderableState[] source,out ResolvedRenderSnapshot? snapshot,out ResolvedRenderSnapshotStatus status)
@@ -177,6 +194,11 @@ static bool TryCreateSnapshot(SampleRenderableState[] source,out ResolvedRenderS
 static void UpdateDynamicAnchoredSurface(HostState state)
 {
     var hierarchy=state.DynamicAnchored;if(hierarchy is null)return;
+    if(state.ProductionBillboardRuntime is not null)
+    {
+        hierarchy.Deactivate();
+        return;
+    }
     var production=state.Earth is not null||state.Sol?.ProductionSurfaceEligible==true;
     if(!production){hierarchy.Deactivate();return;}
     var gpu=state.Earth?.GpuConstants(state.Camera,state.ViewportHeightPixels)??state.Sol!.GpuConstants(state.Camera,state.ViewportHeightPixels);
@@ -270,17 +292,34 @@ static unsafe void Callback(NativeHostEvent* e,IntPtr data)
 static unsafe void UpdateProductionBillboard(HostState state,NativeFrameSubmission* submission)
 {
     var runtime=state.ProductionBillboardRuntime;if(runtime is null)return;
+    if(state.ProductionBillboardLease is { } acknowledged&&submission->ProductionBillboardPadding==unchecked((uint)acknowledged.Generation)){acknowledged.Dispose();state.ProductionBillboardLease=null;}
+    if(!ProductionBillboardPresentationEligible(state))
+    {
+        submission->ProductionBillboard=null;
+        submission->ProductionBillboardFrame=null;
+        submission->ProductionBillboardFlags=0u;
+        return;
+    }
     var gpu=submission->PlanetaryGpu;var cameraBody=new Double3((double)gpu.CameraBodyHighX+gpu.CameraBodyLowX,(double)gpu.CameraBodyHighY+gpu.CameraBodyLowY,(double)gpu.CameraBodyHighZ+gpu.CameraBodyLowZ);
     if(!cameraBody.IsFinite||cameraBody.LengthSquared<=0d)return;
     var altitude=Math.Max(10d,Math.Sqrt(cameraBody.LengthSquared)-PlanetarySphericalBillboardNaturalTerrainProof.EarthRadiusMetres);
     var telemetry=runtime.Update(new(altitude,cameraBody.Normalized(),(int)state.ViewportWidthPixels,(int)state.ViewportHeightPixels,state.Camera.Projection.VerticalFieldOfViewRadians,state.ProductionBillboardFrame++),submission->ProductionBillboardPadding);
-    if(state.ProductionBillboardLease is { } acknowledged&&submission->ProductionBillboardPadding==unchecked((uint)acknowledged.Generation)){acknowledged.Dispose();state.ProductionBillboardLease=null;}
+    PlanetaryProductionBillboardPreparedGeneration? newlyPrepared=null;
     if(state.ProductionBillboardLease is null&&runtime.TrySubmitPrepared(out var prepared))
     {
         state.ProductionBillboardLease=new(prepared);
+        newlyPrepared=prepared;
         Console.WriteLine($"P2S5C2 replacement: generation={prepared.PublicationGeneration}; level={prepared.Topology.Level}; pupil={prepared.Pupil.Generation}; active={prepared.Reuse.ActiveSamples}; reused={prepared.Reuse.ReusedSamples}; new={prepared.Reuse.NewSamples}; reuse={prepared.Reuse.ReusePercent:F3}%; prepareMs={prepared.PreparationMilliseconds:F6}; topologyUpload={(prepared.TopologyUploadRequired?1:0)}");
     }
+    var frameGeneration=runtime.Current??newlyPrepared;
+    if(frameGeneration is not null)
+    {
+        state.ProductionBillboardFrameLease??=new(frameGeneration);
+        state.ProductionBillboardFrameLease.Update(frameGeneration);
+        if(newlyPrepared is not null)state.ProductionBillboardFrameLease.StageIncoming(newlyPrepared);
+    }
     submission->ProductionBillboard=state.ProductionBillboardLease?.Pointer;
+    submission->ProductionBillboardFrame=state.ProductionBillboardFrameLease?.Pointer;
     submission->ProductionBillboardFlags=state.ProductionBillboardDesktopTraversal?.NativeFlags??1u;
     if(state.LastProductionBillboardPublication!=telemetry.Publications){state.LastProductionBillboardPublication=telemetry.Publications;Console.WriteLine($"P2S5C2 publication: count={telemetry.Publications}; current=L{telemetry.CurrentLevel}; pupilError={telemetry.PupilAngularErrorRadians:E9}rad; topologyUploads={telemetry.TopologyUploads}; owners=1; zeroOwner={telemetry.ZeroOwnerFrames}; overlap={telemetry.OverlapOwnerFrames}; stale={telemetry.StaleGenerationDraws}");}
     if(state.ProductionBillboardDesktopTraversal is { } traversal&&state.Sol is { } solar&&
@@ -290,6 +329,8 @@ static unsafe void UpdateProductionBillboard(HostState state,NativeFrameSubmissi
         PostQuitMessage(traversal.Failed?1:0);
     }
 }
+static bool ProductionBillboardPresentationEligible(HostState state) =>
+    state.Earth is not null || state.Sol?.ProductionSurfaceEligible == true;
 static void PrintFixtureDiagnostics(in FixtureSceneDiagnostics fixture,LogOptions log)
 {
     Console.WriteLine("Scene: fixture");Console.WriteLine("Static hierarchy: ECL Star -> CCE Planet -> CCI Moon -> CCF TestVessel");Console.WriteLine($"Resolved roots: Star={fixture.Star.Value}; Planet={fixture.Planet.Value}; Moon={fixture.Moon.Value}; TestVessel={fixture.Vessel.Value}");Console.WriteLine("Objects: 4; batches: 1");Console.WriteLine($"Fixture render setup hash: 0x{fixture.SetupHash:X16}");Console.WriteLine("Static reference-frame render fixture; no propagation or orbital simulation.");
@@ -347,17 +388,66 @@ static void LogEarthLodDiagnostics(HostState state,EarthPlanetaryScene? earth)
     Console.WriteLine($"Earth LOD: patches={earth.ActivePatchCount}; min={earth.MinimumActiveLod}; max={earth.MaximumActiveLod}; refined={earth.RefinementCount}; splits={earth.SplitPatchCount}; merges={earth.MergedPatchCount}; balanced={earth.BalancedRefinementCount}; culled={earth.CulledPatchCount}; frustum={earth.FrustumCulledPatchCount}; horizon={earth.HorizonCulledPatchCount}; parentFallbacks=0; pendingChildren=0; representation={earth.Representation}; altitude/radius={earth.AltitudeRadii:R}; surfaceAltitude={earth.AltitudeMetres:R} m; surfaceFrameBlend={earth.SurfaceFrameBlend:R}");
     var presentation=earth.NativePresentation(state.Camera);var lighting=earth.SolarLighting(state.Camera);var radial=(state.Camera.Position.Value-earth.Earth.Position.Value).Normalized();var light=new Double3(lighting.SourceCenterX-presentation.CenterX,lighting.SourceCenterY-presentation.CenterY,lighting.SourceCenterZ-presentation.CenterZ).Normalized();Console.WriteLine($"Earth presentation: radial/light={Double3.Dot(radial,light):R}; elevationLoaded={EarthElevationDataset.IsLoaded}; terrainSource={EarthPlanetaryScene.Terrain.SourceId}/{EarthPlanetaryScene.Terrain.Version}");
 }
-file sealed class HostState(CameraState camera,ReferenceFrameSnapshot frames,ReferenceFrameResolver resolver,ResolvedRenderSnapshot snapshot,RenderFrameSubmission submission,LogOptions log,double movementSpeed,DynamicReferenceFrameFixtureScene? dynamic,CelestialAnalyticalScene? celestial,EarthPlanetaryScene? earth,NativePlanetaryPatch[] planetaryPatches,SolarSystemScene? sol,PlanetaryDynamicAnchoredSurface? dynamicAnchored,int benchmarkFrames,bool dynamicTraversal,bool solarWarpTraversal,bool fixedNearSurfacePose,bool fixedNearSurfaceMotion,double? fixedNearSurfaceAltitude){public CameraState Camera=camera;public CameraState Default=new(new FramePosition(camera.Position.Frame,camera.Position.Value),camera.Orientation,camera.Projection,camera.Mode);public ReferenceFrameSnapshot Frames=frames;public ReferenceFrameResolver Resolver=resolver;public ResolvedRenderSnapshot Snapshot=snapshot;public RenderFrameSubmission Submission=submission;public LogOptions Log=log;public FreeCameraController Controller=new(movementSpeed,.002,Math.PI*89/180);public DynamicReferenceFrameFixtureScene? Dynamic=dynamic;public CelestialAnalyticalScene? Celestial=celestial;public EarthPlanetaryScene? Earth=earth;public SolarSystemScene? Sol=sol;public PlanetaryDynamicAnchoredSurface? DynamicAnchored=dynamicAnchored;public DynamicAnchoredVulkanTraversal? DynamicTraversal=dynamicTraversal?new():null;public FixedNearSurfaceVulkanBenchmark? FixedNearSurface=fixedNearSurfacePose?new(camera,earth!.Earth,fixedNearSurfaceAltitude!.Value,fixedNearSurfaceMotion):null;public SolarWarpVulkanTraversal? SolarWarpTraversal=solarWarpTraversal?new():null;public NativePlanetaryPatch[] PlanetaryPatches=planetaryPatches;public int BenchmarkFramesRemaining=benchmarkFrames;public bool DynamicFailureLogged;public bool CelestialFailureLogged;public bool SolarFailureLogged;public bool HasSasIndicatorDiagnostic;public bool LastSasTargetValid;public long NextSasIndicatorDiagnosticTimestamp;public long NextSolarDiagnosticTimestamp;public bool HasEarthLodDiagnostic;public int LastEarthPatchCount;public int LastEarthMinimumLod;public int LastEarthMaximumLod;public PlanetaryRepresentation LastEarthRepresentation;public PlanetaryRenderRegime LastEarthRegime;public uint LastDynamicAnchoredGeneration=uint.MaxValue;public int LastDynamicAnchoredDemand=-1;public bool LastDynamicAnchoredVisible;public bool DynamicAnchoredProbeLogged;public uint ViewportWidthPixels=(uint)Math.Round(camera.Projection.AspectRatio*EarthPlanetaryScene.ProofViewportHeightPixels);public uint ViewportHeightPixels=(uint)EarthPlanetaryScene.ProofViewportHeightPixels;public PlanetaryProductionSphericalBillboardMovingRuntime? ProductionBillboardRuntime;public ProductionBillboardDesktopTraversal? ProductionBillboardDesktopTraversal;public ProductionBillboardNativeLease? ProductionBillboardLease;public ulong ProductionBillboardFrame;public ulong LastProductionBillboardPublication;public void DisposeProductionBillboardLeases(){ProductionBillboardLease?.Dispose();ProductionBillboardLease=null;}}
+file sealed class HostState(CameraState camera,ReferenceFrameSnapshot frames,ReferenceFrameResolver resolver,ResolvedRenderSnapshot snapshot,RenderFrameSubmission submission,LogOptions log,double movementSpeed,DynamicReferenceFrameFixtureScene? dynamic,CelestialAnalyticalScene? celestial,EarthPlanetaryScene? earth,NativePlanetaryPatch[] planetaryPatches,SolarSystemScene? sol,PlanetaryDynamicAnchoredSurface? dynamicAnchored,int benchmarkFrames,bool dynamicTraversal,bool solarWarpTraversal,bool fixedNearSurfacePose,bool fixedNearSurfaceMotion,double? fixedNearSurfaceAltitude){public CameraState Camera=camera;public CameraState Default=new(new FramePosition(camera.Position.Frame,camera.Position.Value),camera.Orientation,camera.Projection,camera.Mode);public ReferenceFrameSnapshot Frames=frames;public ReferenceFrameResolver Resolver=resolver;public ResolvedRenderSnapshot Snapshot=snapshot;public RenderFrameSubmission Submission=submission;public LogOptions Log=log;public FreeCameraController Controller=new(movementSpeed,.002,Math.PI*89/180);public DynamicReferenceFrameFixtureScene? Dynamic=dynamic;public CelestialAnalyticalScene? Celestial=celestial;public EarthPlanetaryScene? Earth=earth;public SolarSystemScene? Sol=sol;public PlanetaryDynamicAnchoredSurface? DynamicAnchored=dynamicAnchored;public DynamicAnchoredVulkanTraversal? DynamicTraversal=dynamicTraversal?new():null;public FixedNearSurfaceVulkanBenchmark? FixedNearSurface=fixedNearSurfacePose?new(camera,earth!.Earth,fixedNearSurfaceAltitude!.Value,fixedNearSurfaceMotion):null;public SolarWarpVulkanTraversal? SolarWarpTraversal=solarWarpTraversal?new():null;public NativePlanetaryPatch[] PlanetaryPatches=planetaryPatches;public int BenchmarkFramesRemaining=benchmarkFrames;public bool DynamicFailureLogged;public bool CelestialFailureLogged;public bool SolarFailureLogged;public bool HasSasIndicatorDiagnostic;public bool LastSasTargetValid;public long NextSasIndicatorDiagnosticTimestamp;public long NextSolarDiagnosticTimestamp;public bool HasEarthLodDiagnostic;public int LastEarthPatchCount;public int LastEarthMinimumLod;public int LastEarthMaximumLod;public PlanetaryRepresentation LastEarthRepresentation;public PlanetaryRenderRegime LastEarthRegime;public uint LastDynamicAnchoredGeneration=uint.MaxValue;public int LastDynamicAnchoredDemand=-1;public bool LastDynamicAnchoredVisible;public bool DynamicAnchoredProbeLogged;public uint ViewportWidthPixels=(uint)Math.Round(camera.Projection.AspectRatio*EarthPlanetaryScene.ProofViewportHeightPixels);public uint ViewportHeightPixels=(uint)EarthPlanetaryScene.ProofViewportHeightPixels;public PlanetaryProductionSphericalBillboardMovingRuntime? ProductionBillboardRuntime;public ProductionBillboardDesktopTraversal? ProductionBillboardDesktopTraversal;public ProductionBillboardNativeLease? ProductionBillboardLease;public ProductionBillboardFrameNativeLease? ProductionBillboardFrameLease;public ulong ProductionBillboardFrame;public ulong LastProductionBillboardPublication;public void DisposeProductionBillboardLeases(){ProductionBillboardLease?.Dispose();ProductionBillboardLease=null;ProductionBillboardFrameLease?.Dispose();ProductionBillboardFrameLease=null;}}
 file sealed unsafe class ProductionBillboardNativeLease:IDisposable
 {
     private GCHandle _lattice,_indices,_physical;private IntPtr _submission;public ulong Generation{get;}
     public NativeProductionSphericalBillboardSubmission* Pointer=>(NativeProductionSphericalBillboardSubmission*)_submission;
     public ProductionBillboardNativeLease(PlanetaryProductionBillboardPreparedGeneration generation)
     {
-        Generation=generation.PublicationGeneration;_lattice=GCHandle.Alloc(generation.Lattice,GCHandleType.Pinned);_indices=GCHandle.Alloc(generation.Indices,GCHandleType.Pinned);_physical=GCHandle.Alloc(generation.Physical.Vertices,GCHandleType.Pinned);
-        var value=new NativeProductionSphericalBillboardSubmission{Size=(uint)sizeof(NativeProductionSphericalBillboardSubmission),Version=1,Enabled=1,Level=(uint)generation.Topology.Level,VertexCount=(uint)generation.Lattice.Length,IndexCount=(uint)generation.Indices.Length,LatticeScale=(uint)generation.Topology.LatticeScale,PhysicalGeneration=PlanetarySphericalBillboardNaturalTerrainProof.PhysicalGeneration,TerrainDataGeneration=PlanetarySphericalBillboardNaturalTerrainProof.TerrainDataGeneration,PupilGeneration=generation.Pupil.Generation,Reserved0=generation.TopologyUploadRequired?1u:0u,TopologyHash=generation.Topology.TopologyHash,PublicationGeneration=generation.PublicationGeneration,LatticeVertices=(NativeProductionBillboardLatticeVertex*)_lattice.AddrOfPinnedObject(),Indices=(uint*)_indices.AddrOfPinnedObject(),PhysicalVertices=(NativeSphericalBillboardPhysicalVertex*)_physical.AddrOfPinnedObject()};
+        Generation=generation.PublicationGeneration;_lattice=GCHandle.Alloc(generation.Lattice,GCHandleType.Pinned);_indices=GCHandle.Alloc(generation.Indices,GCHandleType.Pinned);if(!generation.NativeGpuPhysicalPreparation)_physical=GCHandle.Alloc(generation.Physical.Vertices,GCHandleType.Pinned);
+        var nested=generation.CullContract.Family==PlanetaryProductionTopologyFamily.NestedScaleMeshNcsm1;
+        var value=new NativeProductionSphericalBillboardSubmission{Size=(uint)sizeof(NativeProductionSphericalBillboardSubmission),Version=4,Enabled=1,Level=(uint)generation.Topology.Level,VertexCount=(uint)generation.Lattice.Length,IndexCount=(uint)generation.Indices.Length,LatticeScale=(uint)generation.Topology.LatticeScale,PhysicalGeneration=PlanetarySphericalBillboardNaturalTerrainProof.PhysicalGeneration,TerrainDataGeneration=PlanetarySphericalBillboardNaturalTerrainProof.TerrainDataGeneration,PupilGeneration=generation.Pupil.Generation,DisplacementEnvelopeMetres=(float)(nested?generation.CullContract.MaximumTesDisplacementMetres:generation.Topology.Error.DisplacementEnvelopeMetres),PlanetOcclusionSupportRadiusMetres=(float)(nested?generation.CullContract.PlanetOcclusionSupportRadiusMetres:0d),TopologyFamily=(uint)generation.CullContract.Family,PhysicalPreparationMode=generation.NativeGpuPhysicalPreparation?1u:0u,TopologyHash=generation.Topology.TopologyHash,PublicationGeneration=generation.PublicationGeneration,LatticeVertices=(NativeProductionBillboardLatticeVertex*)_lattice.AddrOfPinnedObject(),Indices=(uint*)_indices.AddrOfPinnedObject(),PhysicalVertices=generation.NativeGpuPhysicalPreparation?null:(NativeSphericalBillboardPhysicalVertex*)_physical.AddrOfPinnedObject()};
         _submission=Marshal.AllocHGlobal(sizeof(NativeProductionSphericalBillboardSubmission));Marshal.StructureToPtr(value,_submission,false);
     }
     public void Dispose(){if(_submission!=IntPtr.Zero){Marshal.FreeHGlobal(_submission);_submission=IntPtr.Zero;}if(_lattice.IsAllocated)_lattice.Free();if(_indices.IsAllocated)_indices.Free();if(_physical.IsAllocated)_physical.Free();}
+}
+file sealed unsafe class ProductionBillboardFrameNativeLease:IDisposable
+{
+    private IntPtr _frame;
+    private NativeProductionBillboardPupilFrame _current;
+    private NativeProductionBillboardPupilFrame _incoming;
+    public NativeProductionBillboardFrame* Pointer=>(NativeProductionBillboardFrame*)_frame;
+
+    public ProductionBillboardFrameNativeLease(PlanetaryProductionBillboardPreparedGeneration generation)
+    {
+        _frame=Marshal.AllocHGlobal(sizeof(NativeProductionBillboardFrame));
+        _current=Encode(generation);
+        // Cross-level publications already contain the prepared geographic +
+        // macro/meso base. An equal frame prevents redundant full-GPU preparation;
+        // only later same-level pupil movement prepares changed body directions.
+        Marshal.StructureToPtr(new NativeProductionBillboardFrame{Previous=_current,Current=_current,Incoming=_current},_frame,false);
+    }
+
+    public void Update(PlanetaryProductionBillboardPreparedGeneration generation)
+    {
+        var next=Encode(generation);
+        if(next.FrameIdentity==_current.FrameIdentity)return;
+        var previous=next.Level==_current.Level?_current:next;
+        _current=next;
+        Write(previous);
+    }
+
+    public void StageIncoming(PlanetaryProductionBillboardPreparedGeneration generation)
+    {
+        _incoming=Encode(generation);
+        Write(_current);
+    }
+
+    private void Write(NativeProductionBillboardPupilFrame previous)
+    {
+        var incoming=_incoming.Enabled!=0u?_incoming:_current;
+        Marshal.StructureToPtr(new NativeProductionBillboardFrame{Previous=previous,Current=_current,Incoming=incoming},_frame,false);
+    }
+
+    private static NativeProductionBillboardPupilFrame Encode(PlanetaryProductionBillboardPreparedGeneration generation)
+    {
+        var topology=generation.Topology;var pupil=generation.Pupil;
+        var inner=topology.Snap.OverlapFootprintCells*topology.Snap.PupilCellRadians*Math.Sqrt(2d);
+        var outer=inner+4d*topology.Snap.CandidateShiftMultiple*topology.Snap.PupilCellRadians;
+        return new(){EastX=pupil.LatticeFrame.East.X,EastY=pupil.LatticeFrame.East.Y,EastZ=pupil.LatticeFrame.East.Z,LatticeEastOffset=pupil.LatticeEastOffset,NorthX=pupil.LatticeFrame.North.X,NorthY=pupil.LatticeFrame.North.Y,NorthZ=pupil.LatticeFrame.North.Z,LatticeNorthOffset=pupil.LatticeNorthOffset,UpX=pupil.LatticeFrame.Up.X,UpY=pupil.LatticeFrame.Up.Y,UpZ=pupil.LatticeFrame.Up.Z,TransitionInner=inner,TransitionOuter=outer,BodyRadiusMetres=PlanetarySphericalBillboardNaturalTerrainProof.EarthRadiusMetres,FrameIdentity=generation.PupilFrameIdentity,PupilGeneration=pupil.Generation,Level=(uint)topology.Level,LatticeScale=(uint)topology.LatticeScale,Enabled=1,Rebased=pupil.Rebased?1u:0u,Reserved0=(uint)topology.Vertices.Count};
+    }
+
+    public void Dispose(){if(_frame!=IntPtr.Zero){Marshal.FreeHGlobal(_frame);_frame=IntPtr.Zero;}}
 }
 file readonly record struct SampleOptions(int ObjectCount,string Scene,NativePlanetaryMode PlanetaryMode,uint GpuCapacity,double? AltitudeMetres,int BenchmarkFrames,string SurfaceSite,NativePresentationFocus InitialFocus,bool SolarJ2000,PlanetarySurfaceRendererMode PlanetSurfaceMode,PlanetaryPhysicalSurfaceGeneration PhysicalSurfaceGeneration,bool DynamicTraversal,bool SolarWarpTraversal,bool FixedNearSurfacePose,bool FixedNearSurfaceMotion,bool ProductionBillboardDesktopTraversal,string[] LogArguments){public static bool TryParse(string[] a,out SampleOptions v,out string? e){var n=100;var scene="grid";var mode=NativePlanetaryMode.GpuProduction;var surfaceMode=PlanetarySurfaceRendererMode.ProductionCubeSphere;var physicalGeneration=PlanetaryPhysicalSurfaceGeneration.Generation3;uint capacity=EarthPlanetaryScene.MaximumPatchCapacity;double? altitude=null;var benchmarkFrames=0;var surfaceSite="land";var initialFocus=NativePresentationFocus.None;var solarJ2000=false;var dynamicTraversal=false;var solarWarpTraversal=false;var fixedNearSurfacePose=false;var fixedNearSurfaceMotion=false;var productionBillboardDesktopTraversal=false;var logs=new List<string>();foreach(var x in a){if(x.StartsWith("--objects=")&&(!int.TryParse(x[10..],out n)||n is not(1 or 100 or 1000 or 10000))){v=default;e="Usage: --objects=1|100|1000|10000";return false;}if(x.StartsWith("--scene="))scene=x[8..];else if(x.StartsWith("--planetary-mode=")){mode=x[17..] switch{"cpu"=>NativePlanetaryMode.CpuReference,"gpu"=>NativePlanetaryMode.GpuProduction,"validate"=>NativePlanetaryMode.CpuGpuValidation,_=>(NativePlanetaryMode)uint.MaxValue};}else if(x.StartsWith("--planet-surface=")){surfaceMode=x[17..] switch{"production"=>PlanetarySurfaceRendererMode.ProductionCubeSphere,_=>(PlanetarySurfaceRendererMode)uint.MaxValue};}else if(x.StartsWith("--physical-surface=")){physicalGeneration=x[19..] switch{"generation-3"=>PlanetaryPhysicalSurfaceGeneration.Generation3,"m12d-natural-candidate"=>PlanetaryPhysicalSurfaceGeneration.M12DNaturalTerrainCandidate,_=>(PlanetaryPhysicalSurfaceGeneration)uint.MaxValue};}else if(x.StartsWith("--gpu-capacity=")&&!uint.TryParse(x[15..],out capacity)){v=default;e="GPU capacity must be an integer.";return false;}else if(x.StartsWith("--altitude=")&&(!double.TryParse(x[11..],System.Globalization.NumberStyles.Float,System.Globalization.CultureInfo.InvariantCulture,out var parsedAltitude)||parsedAltitude<EarthPlanetaryScene.MinimumTerrainClearanceMetres)){v=default;e="Altitude must be at least the terrain-safe floor.";return false;}else if(x.StartsWith("--altitude="))altitude=double.Parse(x[11..],System.Globalization.CultureInfo.InvariantCulture);else if(x.StartsWith("--surface-site="))surfaceSite=x[15..];else if(x=="--focus=earth")initialFocus=NativePresentationFocus.Earth;else if(x.StartsWith("--focus=")){v=default;e="Focus must be earth for the current Solar startup contract.";return false;}else if(x=="--solar-epoch=j2000")solarJ2000=true;else if(x.StartsWith("--solar-epoch=")){v=default;e="Solar epoch must be current or j2000.";return false;}else if(x=="--dynamic-traversal")dynamicTraversal=true;else if(x=="--solar-warp-traversal")solarWarpTraversal=true;else if(x=="--m12c-fixed-pose")fixedNearSurfacePose=true;else if(x=="--m12c-fixed-pose-motion")fixedNearSurfaceMotion=true;else if(x=="--p2s5c3-traversal")productionBillboardDesktopTraversal=true;else if(x.StartsWith("--benchmark-frames=")&&(!int.TryParse(x[19..],out benchmarkFrames)||benchmarkFrames<2)){v=default;e="Benchmark frames must be at least 2.";return false;}else logs.Add(x);}var earthSite=surfaceSite is "land"or"ocean"or"slope"or"local-payload"or"arid"or"temperate"or"rock"or"snow"or"fallback"or"florida";var floridaSite=surfaceSite=="florida-launch"&&scene=="sol";if(scene is not("grid"or"frames"or"fixture"or"fixture-dynamic"or"celestial"or"planetary-subdivision-diagnostic"or"earth"or"sol")||mode>NativePlanetaryMode.CpuGpuValidation||surfaceMode!=PlanetarySurfaceRendererMode.ProductionCubeSphere||!Enum.IsDefined(physicalGeneration)||capacity is 0 or >EarthPlanetaryScene.MaximumPatchCapacity||altitude.HasValue&&scene!="earth"&&(scene!="sol"||initialFocus!=NativePresentationFocus.Earth)||initialFocus!=NativePresentationFocus.None&&scene!="sol"||dynamicTraversal&&scene!="earth"||solarWarpTraversal&&scene!="sol"||productionBillboardDesktopTraversal&&(scene!="sol"||initialFocus!=NativePresentationFocus.Earth)||fixedNearSurfacePose&&(scene!="earth"||!altitude.HasValue||benchmarkFrames==0)||fixedNearSurfaceMotion&&!fixedNearSurfacePose||!earthSite&&!floridaSite){v=default;e="Usage: --scene=earth [--physical-surface=generation-3|m12d-natural-candidate] --altitude=metres [--benchmark-frames=count]";return false;}v=new(n,scene,mode,capacity,altitude,benchmarkFrames,surfaceSite,initialFocus,solarJ2000,surfaceMode,physicalGeneration,dynamicTraversal,solarWarpTraversal,fixedNearSurfacePose,fixedNearSurfaceMotion,productionBillboardDesktopTraversal,logs.ToArray());e=null;return true;}}

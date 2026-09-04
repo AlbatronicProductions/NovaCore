@@ -1,0 +1,153 @@
+#version 460
+#extension GL_ARB_gpu_shader_fp64 : require
+layout(local_size_x=64) in;
+struct EncodedPosition{vec4 high;vec4 low;};struct GpuCameraData{EncodedPosition position;mat4 viewProjection;};
+struct Presentation { vec4 centerRadius; vec4 colorDistant; vec4 blendMetricState; uvec4 identity; vec4 surface; uvec4 hooks; vec4 ringGeometry; vec4 ringOrientation; vec4 ringColor; vec4 bodyOrientation; vec4 localDetail; vec4 centerLow; };
+layout(set=0,binding=0,std430) readonly buffer Frame{GpuCameraData camera;}frameData;
+layout(set=0,binding=2,std430) readonly buffer Input { vec4 cameraHighRadiusHigh; vec4 cameraLowRadiusLow; vec4 thresholds; uvec4 controls; vec4 viewForwardHalfAngle; vec4 textureDemand; } inputData;
+layout(set=0,binding=6,std430) readonly buffer Presentations{Presentation values[];}presentations;
+struct PhysicalVertex{dvec4 body;vec4 normal;vec4 reserved;};layout(set=0,binding=38,std430) readonly buffer Physical { PhysicalVertex values[]; } physical;
+layout(set=0,binding=39,std430) readonly buffer Indices { uint values[]; } indices;
+layout(set=0,binding=40,std430) writeonly buffer Visibility { uint values[]; } visibility;
+layout(set=0,binding=43,std430) buffer Counters { uint values[]; } counters;
+bool finite3(dvec3 value){return !any(isnan(value))&&!any(isinf(value));}
+bool diagnosticMode(float value){return inputData.textureDemand.z<value+.5&&inputData.textureDemand.z>value-.5;}
+bool bypassHorizonReject(){return diagnosticMode(-1003.0)||diagnosticMode(-1004.0);}
+bool bypassScreenReject(){return diagnosticMode(-1002.0)||diagnosticMode(-1004.0);}
+bool sphereOnlyScreenDiagnostic(){return diagnosticMode(-1005.0);}
+bool directionalScreenDiagnostic(){return sphereOnlyScreenDiagnostic()||diagnosticMode(-1006.0);}
+vec3 rotateQ(vec3 p,vec4 q){return p+2.0*cross(q.xyz,cross(q.xyz,p)+q.w*p);}
+bool outsideConservativeViewCone(dvec3 camera,dvec3 center,double radius){
+  dvec3 toCenter=center-camera;double distance=length(toCenter);
+  if(distance<=radius||distance<=1e-9)return false;
+  float angularRadius=asin(clamp(float(radius/distance),0.0,1.0));
+  float coneAngle=inputData.viewForwardHalfAngle.w+angularRadius+1e-4;
+  if(coneAngle>=3.1415927)return false;
+  return dot(toCenter/distance,dvec3(inputData.viewForwardHalfAngle.xyz))<double(cos(coneAngle));
+}
+void frustumPlanes(out vec4 planes[6]){
+  mat4 m=frameData.camera.viewProjection;
+  vec4 r0=vec4(m[0][0],m[1][0],m[2][0],m[3][0]);
+  vec4 r1=vec4(m[0][1],m[1][1],m[2][1],m[3][1]);
+  vec4 r2=vec4(m[0][2],m[1][2],m[2][2],m[3][2]);
+  vec4 r3=vec4(m[0][3],m[1][3],m[2][3],m[3][3]);
+  planes=vec4[6](r3+r0,r3-r0,r3+r1,r3-r1,r2,r3-r2);
+}
+double segmentDistanceSquared(dvec3 point,dvec3 a,dvec3 b){
+  dvec3 edge=b-a;double lengthSquared=dot(edge,edge);
+  double t=lengthSquared>1e-24?clamp(dot(point-a,edge)/lengthSquared,0.0,1.0):0.0;
+  dvec3 delta=point-(a+edge*t);return dot(delta,delta);
+}
+double triangleDistanceSquared(dvec3 point,dvec3 a,dvec3 b,dvec3 c){
+  dvec3 ab=b-a,ac=c-a,normal=cross(ab,ac);double normalSquared=dot(normal,normal);
+  if(normalSquared<=1e-24)return min(segmentDistanceSquared(point,a,b),
+    min(segmentDistanceSquared(point,b,c),segmentDistanceSquared(point,c,a)));
+  double planeDistance=dot(point-a,normal)/normalSquared;
+  dvec3 projected=point-normal*planeDistance;
+  dvec3 ap=projected-a,bp=projected-b,cp=projected-c;
+  double e0=dot(cross(ab,ap),normal),e1=dot(cross(c-b,bp),normal),e2=dot(cross(a-c,cp),normal);
+  if((e0>=0.0&&e1>=0.0&&e2>=0.0)||(e0<=0.0&&e1<=0.0&&e2<=0.0)){
+    dvec3 delta=point-projected;return dot(delta,delta);
+  }
+  return min(segmentDistanceSquared(point,a,b),
+    min(segmentDistanceSquared(point,b,c),segmentDistanceSquared(point,c,a)));
+}
+// The existing enclosing-sphere/cone test remains the inexpensive first broad
+// phase.  This second sphere test classifies exact frustum-plane separation and
+// intersection.  Only an intersecting sphere reaches the plane-wise triangle
+// support test.  Since each clip half-space is linear, three outside vertices
+// prove the entire prepared triangle is outside; the radial TES support keeps
+// the proof conservative for the emitted surface.
+int conservativeFrustumResult(dvec3 camera,dvec3 p0,dvec3 p1,dvec3 p2,
+  dvec3 center,double baseRadius,double tesSupport,bool useNarrow,out bool narrowTested,
+  out int rejectedPlane,out bool nearPlaneIntersection){
+  vec4 planes[6];frustumPlanes(planes);
+  vec3 q0=rotateQ(vec3(p0-camera),presentations.values[0].bodyOrientation);
+  vec3 q1=rotateQ(vec3(p1-camera),presentations.values[0].bodyOrientation);
+  vec3 q2=rotateQ(vec3(p2-camera),presentations.values[0].bodyOrientation);
+  vec3 relativeCenter=rotateQ(vec3(center-camera),presentations.values[0].bodyOrientation);
+  double radius=baseRadius+tesSupport+0.02;bool intersects=false;
+  for(int plane=0;plane<6;plane++){
+    float normalLength=length(planes[plane].xyz);
+    float centerDistance=dot(planes[plane],vec4(relativeCenter,1.0));
+    float sphereSupport=float(radius)*normalLength;
+    if(centerDistance < -sphereSupport){narrowTested=false;rejectedPlane=plane;nearPlaneIntersection=false;return 1;}
+    intersects=intersects||centerDistance < sphereSupport;
+  }
+  narrowTested=intersects;rejectedPlane=-1;
+  float nearSupport=float(tesSupport+0.02)*length(planes[4].xyz);
+  float near0=dot(planes[4],vec4(q0,1.0));
+  float near1=dot(planes[4],vec4(q1,1.0));
+  float near2=dot(planes[4],vec4(q2,1.0));
+  nearPlaneIntersection=min(near0,min(near1,near2))<=nearSupport&&
+    max(near0,max(near1,near2))>=-nearSupport;
+  if(!useNarrow){narrowTested=false;return 0;}
+  if(!intersects)return 0;
+  for(int plane=0;plane<6;plane++){
+    float support=float(tesSupport+0.02)*length(planes[plane].xyz);
+    float d0=dot(planes[plane],vec4(q0,1.0));
+    float d1=dot(planes[plane],vec4(q1,1.0));
+    float d2=dot(planes[plane],vec4(q2,1.0));
+    if(d0 < -support&&d1 < -support&&d2 < -support){rejectedPlane=plane;return 2;}
+  }
+  return 0;
+}
+// Conservative sphere-vs-support-sphere occlusion in the same body-relative
+// coordinate frame consumed by TES. The first predicate prevents the terrain
+// sphere itself from being mistaken for the occluder.
+bool sphereOccludedBySupport(dvec3 camera,dvec3 center,double radius,double supportRadius){
+  if(length(camera)<=supportRadius)return false;
+  dvec3 toPlanet=-camera;
+  dvec3 toSphere=center-camera;
+  double planetDistanceSquared=dot(toPlanet,toPlanet);
+  double sphereDistanceSquared=dot(toSphere,toSphere);
+  double dotPlanetSphere=dot(toPlanet,toSphere);
+  double planetRadiusSquared=supportRadius*supportRadius;
+  double radiusSquared=radius*radius;
+  double discriminant=dotPlanetSphere*dotPlanetSphere+
+    planetRadiusSquared*sphereDistanceSquared+
+    radiusSquared*planetDistanceSquared-
+    planetDistanceSquared*sphereDistanceSquared;
+  double crossTerm=2.0*dotPlanetSphere*supportRadius*radius;
+  return sphereDistanceSquared-radiusSquared>=planetDistanceSquared-planetRadiusSquared&&
+    discriminant>=abs(crossTerm);
+}
+void main(){
+  uint triangle=gl_GlobalInvocationID.x,total=counters.values[5];if(triangle>=total)return;
+  uint i0=indices.values[triangle*3u],i1=indices.values[triangle*3u+1u],i2=indices.values[triangle*3u+2u];
+  uint vertexCount=counters.values[6];if(i0>=vertexCount||i1>=vertexCount||i2>=vertexCount){visibility.values[triangle]=0u;atomicAdd(counters.values[3],1u);return;}
+  dvec3 p0=physical.values[i0].body.xyz,p1=physical.values[i1].body.xyz,p2=physical.values[i2].body.xyz;
+  vec4 n0=physical.values[i0].normal,n1=physical.values[i1].normal,n2=physical.values[i2].normal;
+  bool normalsReady=n0.w==1.0&&n1.w==1.0&&n2.w==1.0&&!any(isnan(n0.xyz))&&!any(isinf(n0.xyz))&&!any(isnan(n1.xyz))&&!any(isinf(n1.xyz))&&!any(isnan(n2.xyz))&&!any(isinf(n2.xyz));
+  if(!finite3(p0)||!finite3(p1)||!finite3(p2)||!normalsReady){visibility.values[triangle]=0u;atomicAdd(counters.values[3],1u);return;}
+  dvec3 center=(p0+p1+p2)/3.0,camera=dvec3(inputData.cameraHighRadiusHigh.xyz)+dvec3(inputData.cameraLowRadiusLow.xyz);
+  double tesEnvelope=double(uintBitsToFloat(counters.values[9]));
+  double supportRadius=double(uintBitsToFloat(counters.values[10]));
+  double baseRadius=max(length(p0-center),max(length(p1-center),length(p2-center)));
+  double horizonRadius=baseRadius+tesEnvelope+0.02;
+  if(!bypassHorizonReject()&&sphereOccludedBySupport(camera,center,horizonRadius,supportRadius)){visibility.values[triangle]=0u;atomicAdd(counters.values[1],1u);return;}
+  bool tesActive=triangleDistanceSquared(camera,p0,p1,p2)<=2500.000001;
+  double screenTesSupport=tesActive?tesEnvelope:0.0;
+  bool narrowTested=false,nearPlaneIntersection=false;int rejectedPlane=-1;
+  int screenResult=0;
+  if(!bypassScreenReject()){
+    if(sphereOnlyScreenDiagnostic()){
+      screenResult=outsideConservativeViewCone(camera,center,
+        baseRadius+tesEnvelope+0.02)?1:0;
+    }else{
+      if(outsideConservativeViewCone(camera,center,
+          baseRadius+screenTesSupport+0.02))screenResult=1;
+      else screenResult=conservativeFrustumResult(camera,p0,p1,p2,center,baseRadius,
+        screenTesSupport,true,narrowTested,rejectedPlane,nearPlaneIntersection);
+    }
+  }
+  if(directionalScreenDiagnostic()){
+    atomicAdd(counters.values[screenResult==1?12:11],1u);
+    if(narrowTested)atomicAdd(counters.values[13],1u);
+    if(screenResult==2&&rejectedPlane>=0)atomicAdd(counters.values[14+rejectedPlane],1u);
+    if(nearPlaneIntersection)atomicAdd(counters.values[20],1u);
+    atomicAdd(counters.values[tesActive?21:22],1u);
+  }
+  if(screenResult!=0){visibility.values[triangle]=0u;atomicAdd(counters.values[8],1u);return;}
+  visibility.values[triangle]=1u;atomicAdd(counters.values[0],1u);
+}

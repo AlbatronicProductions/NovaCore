@@ -1,0 +1,57 @@
+#version 460
+#extension GL_GOOGLE_include_directive : require
+#extension GL_ARB_gpu_shader_fp64 : require
+#include "production_cube_surface.glsl"
+#include "local_terrain.glsl"
+#include "physical_surface.glsl"
+#include "planetary_physical_authority.glsl"
+#include "planetary_natural_terrain_surface.glsl"
+#include "production_spherical_billboard_physical.glsl"
+
+layout(local_size_x=64) in;
+struct PupilFrame{dvec4 east;dvec4 north;dvec4 up;dvec4 transition;uvec4 identity;uvec4 metadata;};
+layout(set=0,binding=52,std430) readonly buffer PupilFrames{PupilFrame previous;PupilFrame current;} pupilFrames;
+layout(set=0,binding=44,std430) readonly buffer Lattice{ivec4 values[];} lattice;
+struct PhysicalVertex{dvec4 body;vec4 normal;vec4 reserved;};
+layout(set=0,binding=38,std430) buffer Physical{PhysicalVertex values[];} physical;
+
+double transitionWeight(ivec3 value,PupilFrame frame)
+{
+  if(value.z!=int(frame.identity.w))return 0.0;
+  double radius=length(dvec2(value.xy))/double(frame.identity.w);
+  if(radius<=frame.up.w)return 1.0;
+  if(radius>=frame.transition.x)return 0.0;
+  double t=(radius-frame.up.w)/(frame.transition.x-frame.up.w);
+  double eased=t*t*(3.0-2.0*t);
+  return 1.0-eased;
+}
+
+dvec3 canonicalDirection(ivec3 value,PupilFrame frame)
+{
+  double weight=transitionWeight(value,frame);
+  dvec3 local=normalize(dvec3(double(value.x)+frame.east.w*weight,
+    double(value.y)+frame.north.w*weight,double(value.z)));
+  return normalize(frame.east.xyz*local.x+frame.north.xyz*local.y+frame.up.xyz*local.z);
+}
+
+void main()
+{
+  uint vertex=gl_GlobalInvocationID.x;
+  if(pupilFrames.current.metadata.x==0u||vertex>=pupilFrames.current.metadata.z)return;
+  ivec3 value=lattice.values[vertex].xyz;
+  dvec3 direction=canonicalDirection(value,pupilFrames.current);
+  if(pupilFrames.previous.metadata.x!=0u&&pupilFrames.previous.identity.z==pupilFrames.current.identity.z&&
+     pupilFrames.previous.identity.w==pupilFrames.current.identity.w)
+  {
+    dvec3 prior=canonicalDirection(value,pupilFrames.previous);
+    if(all(equal(prior,direction)))return;
+  }
+  double radius=pupilFrames.current.transition.y;
+  // KSA-parity responsibility split: the persistent reusable base owns the
+  // geographic + macro/meso displacement.  TES adds only the canonical near
+  // field, so tessellation density can never select a second full surface.
+  double height=CandidateBaseHeightD(direction);
+  physical.values[vertex].body=dvec4(direction*(radius+height),height);
+  physical.values[vertex].normal=vec4(CandidateBaseNormalD(direction,radius),1.0);
+  physical.values[vertex].reserved=vec4(0.0);
+}

@@ -213,7 +213,15 @@ void main()
   // resolved the authoritative payload. Sea level is only an addressing
   // shell; the final physical point is reconstructed below from the resolved
   // height transaction.
-  vec3 samplingDirection=ProductionRaySphereDirection(unitDirection,0.0,bodyRadius);
+  // The production spherical billboard is already one body-fixed physical
+  // owner. Its prepared/TES direction is therefore the material-coordinate
+  // authority too. Re-intersecting the fragment ray with a sea-level sphere
+  // can select a different chart at grazing angles and turn valid geometry
+  // into a payload miss. Retain the analytic addressing shell only for the
+  // legacy non-anchored material path.
+  vec3 samplingDirection=anchored
+    ?unitDirection
+    :ProductionRaySphereDirection(unitDirection,0.0,bodyRadius);
   vec2 resolvedUv;uvec4 resolvedAddress;
   uint resolvedLayer=anchored
     ?ResolveProductionFragmentLayer(samplingDirection,resolvedUv,resolvedAddress)

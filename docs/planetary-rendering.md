@@ -40,28 +40,29 @@ an independent visible terrain owner.
 
 ## Production spherical-billboard representation
 
-Earth production uses 18 immutable `.nctop2` topology levels, L0 through L17.
-Each level is a closed outward-wound spherical topology with stable lattice,
-index, adjacency, parent-mapping, and hash identity. Runtime does not regenerate
-or mutate those assets.
+Earth production uses 18 immutable NCSM1 scale-mesh levels, L0 through L17.
+Each level has stable lattice, region, index, adjacency, scale, and hash
+identity. Runtime validates the production manifest, retains a bounded set of
+scale resources, and does not regenerate, copy, or re-upload immutable topology
+when a resident level is revisited.
 
 Projected geometric error selects the active level. Hysteresis prevents
 unstable adjacent-level oscillation. A camera-facing pupil resolves an exact
 signed cube-lattice origin, retains its generation below movement thresholds,
-snaps deterministically when required, and reuses matching samples across
-same-level movement and adjacent-level transitions.
+snaps deterministically when required, and reuses matching physical samples
+across same-level movement and adjacent-level transitions.
 
 The production chain is:
 
 ```text
 canonical body-fixed physical terrain
-→ immutable production topology level
+→ immutable persistent NCSM1 scale resource
 → retained/snapped pupil
 → physical position and normal preparation
 → conservative curved-patch planet occlusion
 → conservative screen/frustum rejection
-→ compacted visible indices
-→ bounded TCS/TES refinement
+→ compacted original index triplets
+→ KSA-parity per-edge TCS factors and bounded TES refinement
 → indexed indirect raster
 → fence-complete atomic publication
 ```
@@ -77,7 +78,8 @@ frustum rejection likewise remove only work proven unable to contribute. The
 surviving triangle stream is compacted into an indexed-indirect draw payload.
 
 TCS/TES provides bounded near-camera raster refinement. The configured physical
-range is 50 m and tessellation factors remain bounded. That range is not a
+range is 50 m, the evaluation shader exits before displacement work outside the
+range, and exact per-edge tessellation factors derive the interior factor. That range is not a
 terrain or ownership radius: factor-1 base geometry remains present and
 depth-owning everywhere outside the refined footprint, including across the
 local horizon.
@@ -88,8 +90,11 @@ curved conservative bound. It also aligned physical preparation with the
 canonical Earth radius. The accepted traversal no longer reproduces the broad
 missing-Earth band or device-loss workload associated with those defects.
 
-## Transactional GPU ownership
+## Persistent scale resources and transactional GPU ownership
 
+The runtime keeps immutable NCSM1 topology resources resident in a bounded
+current/incoming pool and reuses working buffers by capacity. A level revisit
+selects the existing resource rather than rebuilding or uploading topology.
 The runtime has one current generation and at most one incoming generation.
 The current generation remains the sole Earth owner while bounded asynchronous
 work prepares the replacement. Publication requires complete:
@@ -101,12 +106,18 @@ work prepares the replacement. Publication requires complete:
 - GPU visibility of all required data;
 - fence completion.
 
-Publication is atomic at a frame boundary. Superseded resources retire only
+Publication is atomic at a frame boundary. A fully prepared zero-visible
+generation with consistent counters and a valid no-op indirect command may
+publish as the sole owner; later per-frame culling creates normal visible work
+from that generation when Earth re-enters view. Superseded resources retire only
 after their use is safe. An incomplete incoming generation cannot suppress the
 current surface. Production diagnostics require one owner, zero overlap, zero
 unowned frames, and zero stale-generation draws.
 
-This current/incoming relationship is a lifecycle for one production
+Earth presentation authority is decided from current body focus and production
+eligibility, not from whether Earth resources remain resident. This prevents
+other bodies from inheriting Earth geometry or material state. The
+current/incoming relationship is a lifecycle for one production
 spherical-billboard renderer. It is not the retired global-versus-anchored patch
 ownership split.
 
@@ -153,7 +164,7 @@ curved-patch visibility, compacted indices, indirect draw validity, TES range,
 and CPU/GPU timing. Diagnostic modes must not alter production authority when
 disabled.
 
-P2S5C3 physical acceptance exercised native 3440×1440 orbit-to-near-surface
+P2S5F physical acceptance exercised native 3440×1440 orbit-to-near-surface
 descent, all 18 representative levels, low-altitude horizon rotation, sustained
 L17 pupil snaps, repeated L16/L17 reversals, retreat, and re-approach. Manual
 Desktop acceptance remains required for future rendering milestones; a static
@@ -161,14 +172,15 @@ benchmark alone is not player-facing acceptance.
 
 ## Current development boundary
 
-The production topology/runtime, moving pupil, canonical physical authority,
-GPU lifecycle, culling/coverage, bounded TES, and atomic ownership are stable.
+The NCSM1 production topology/runtime, moving pupil, canonical physical
+authority, persistent GPU scale lifecycle, culling/coverage, KSA-parity bounded
+TES, zero-visible re-entry, body authority, and atomic ownership are stable.
 Terrain presentation and material quality, finer pupil/re-triangulation morph
 quality, atmosphere/cloud/environment rebuilding, richer data coverage,
 spacecraft/surface gameplay, and later specialized-renderer retirement or
 promotion remain in development.
 
 Do not restore the retired radial Eye, adaptive CPU final-raster grids, dynamic
-patch/stitch ownership, or a second physical surface. Do not regenerate
-`.nctop2` assets, expand the TES range, or weaken conservative culling without
+patch/stitch ownership, or a second physical surface. Do not regenerate NCSM1
+assets, expand the TES range, or weaken conservative culling without
 explicit authorization and measured evidence.

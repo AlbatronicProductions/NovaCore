@@ -2,6 +2,7 @@ using System.Buffers.Binary;
 using System.Security.Cryptography;
 using System.Text.Json;
 using NovaCore.Core;
+using NovaCore.Interop;
 
 namespace NovaCore.Graphics;
 
@@ -26,6 +27,8 @@ public sealed class PlanetaryProductionSphericalBillboardTopology
     public const uint FormatVersion = 2;
     public const uint GeneratorVersion = 1;
     private const int HeaderBytes = 208, VertexBytes = 16, RegionBytes = 32;
+    private readonly NativeProductionBillboardLatticeVertex[] _nativeLattice;
+    private readonly uint[] _nativeIndices;
 
     public readonly record struct Vertex(int CubeX, int CubeY, int CubeZ, byte DensityRegion, byte RefinementDepth)
     {
@@ -49,8 +52,15 @@ public sealed class PlanetaryProductionSphericalBillboardTopology
         uint[] indices, int[] neighborOffsets, int[] neighbors, DensityRegion[] regions, int[] parentVertexMap,
         SnapMetadata snap, ErrorMetadata error, ulong topologyHash, ulong parentMappingHash)
     {
-        Level = level; LatticeScale = latticeScale; Vertices = Array.AsReadOnly(vertices.ToArray());
-        Indices = Array.AsReadOnly(indices.ToArray()); NeighborOffsets = Array.AsReadOnly(neighborOffsets.ToArray());
+        var immutableVertices=vertices.ToArray();
+        _nativeIndices=indices.ToArray();
+        _nativeLattice=immutableVertices.Select(vertex=>new NativeProductionBillboardLatticeVertex
+        {
+            CubeX=vertex.CubeX,CubeY=vertex.CubeY,CubeZ=vertex.CubeZ,
+            Metadata=(uint)vertex.DensityRegion|((uint)vertex.RefinementDepth<<8)
+        }).ToArray();
+        Level = level; LatticeScale = latticeScale; Vertices = Array.AsReadOnly(immutableVertices);
+        Indices = Array.AsReadOnly(_nativeIndices); NeighborOffsets = Array.AsReadOnly(neighborOffsets.ToArray());
         Neighbors = Array.AsReadOnly(neighbors.ToArray()); Regions = Array.AsReadOnly(regions.ToArray());
         ParentVertexMap = Array.AsReadOnly(parentVertexMap.ToArray()); Snap = snap; Error = error;
         TopologyHash = topologyHash; ParentMappingHash = parentMappingHash;
@@ -69,6 +79,8 @@ public sealed class PlanetaryProductionSphericalBillboardTopology
     public ulong TopologyHash { get; }
     public ulong ParentMappingHash { get; }
     public int TriangleCount => Indices.Count / 3;
+    internal NativeProductionBillboardLatticeVertex[] NativeLattice => _nativeLattice;
+    internal uint[] NativeIndices => _nativeIndices;
     public ulong ImmutableGpuBytes => checked((ulong)Vertices.Count * 16ul + (ulong)Indices.Count * 4ul +
         (ulong)(NeighborOffsets.Count + Neighbors.Count) * 4ul);
 

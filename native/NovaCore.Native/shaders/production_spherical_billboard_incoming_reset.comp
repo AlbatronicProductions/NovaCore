@@ -2,4 +2,4 @@
 layout(local_size_x=1) in;
 layout(set=0,binding=49,std430) buffer DrawArgs { uint values[]; } drawArgs;
 layout(set=0,binding=50,std430) buffer Counters { uint values[]; } counters;
-void main(){drawArgs.values[0]=0u;drawArgs.values[1]=1u;drawArgs.values[2]=0u;drawArgs.values[3]=0u;drawArgs.values[4]=0u;for(uint i=0u;i<5u;i++)counters.values[i]=0u;counters.values[8]=0u;}
+void main(){drawArgs.values[0]=0u;drawArgs.values[1]=1u;drawArgs.values[2]=0u;drawArgs.values[3]=0u;drawArgs.values[4]=0u;for(uint i=0u;i<5u;i++)counters.values[i]=0u;counters.values[8]=0u;for(uint i=11u;i<42u;i++)counters.values[i]=0u;}

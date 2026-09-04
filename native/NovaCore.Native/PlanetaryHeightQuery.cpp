@@ -109,10 +109,11 @@ void CreateContext(Context& c){
 }
 
 NcResult RunPlanetaryHeightQueries(const NcPlanetaryHeightQuery* queries,uint32_t count,NcPlanetaryHeightResult* results,const NcPlanetaryHeightQueryAssets* assets,NcPlanetaryHeightQueryMetrics* metrics){
-  // Production spherical-billboard L17 has 450,778 immutable canonical
-  // directions. Preparation is a publication transaction, so keep it in one
-  // query dispatch instead of repeatedly reloading the same physical assets.
-  constexpr uint32_t MaximumProductionBillboardQueries=500'000u;
+  // Production preparation is a publication transaction, so retain one
+  // bounded dispatch instead of repeatedly reloading the same physical assets.
+  // The NCSM1 offline generator independently rejects more than 1.1M leaves;
+  // its current finest artifact has 712,106 immutable canonical directions.
+  constexpr uint32_t MaximumProductionBillboardQueries=1'100'000u;
   if(!queries||!count||count>MaximumProductionBillboardQueries||!results||!assets||assets->size!=sizeof(NcPlanetaryHeightQueryAssets)||assets->version!=1||!metrics||metrics->size!=sizeof(NcPlanetaryHeightQueryMetrics))return NC_INVALID_ARGUMENT;
   const auto started=std::chrono::steady_clock::now();try{
     if(!assets->elevationOraclePathUtf8||!assets->productionTerrainPathUtf8||!assets->localTerrainPathUtf8||!assets->computeShaderPathUtf8)return NC_INVALID_ARGUMENT;

@@ -21,18 +21,18 @@ terrain narrative here.
 
 ## Current planetary checkpoint
 
-Start from the banked and physically accepted M12D-P2S5C3 baseline:
+Start from the physically accepted M12D-P2S5F **New Earth Renderer** baseline.
+Its milestone commit and tag are finalized by the P2S5F bank-and-consolidate
+closeout after clean validation.
 
-- main commit `e9b35e4c9f475adffb38f22ac705835d8d5f4181`;
-- tag `m12d-p2s5c3-production-billboard-stabilization`;
-- commit title `NovaCore M12D-P2S5C3: stabilize production billboard coverage and terrain continuity`.
-
-Earth's production owner is the 18-level spherical-billboard runtime. It uses
-projected-error selection and hysteresis, an exact-lattice moving/snapped pupil,
-canonical `H(bodyDirection)` physical preparation, conservative curved-patch
-planet occlusion, conservative screen visibility, GPU compaction, bounded 50 m
-TCS/TES refinement, indexed indirect draw, and fence-confirmed atomic
-current/incoming generation publication.
+Earth's accepted production owner is the 18-level NCSM1 New Earth Renderer. It
+uses projected-error selection and hysteresis, an exact-lattice moving/snapped
+pupil, persistent scale resources, canonical `H(bodyDirection)` physical
+preparation, conservative curved-patch planet occlusion, conservative screen
+visibility, GPU compaction of original index triplets, KSA-parity per-edge TCS
+factors, bounded 50 m TES refinement, indexed indirect draw, valid zero-visible
+publication/re-entry, body-specific presentation authority, and fence-confirmed
+atomic current/incoming generation publication.
 
 The orbit-to-near-surface native 3440×1440 trajectory is accepted. The recovered
 missing-Earth band and device-loss workload did not reproduce, and production
@@ -58,14 +58,15 @@ generations.
 
 ## Next authorized work boundary
 
-- Preserve the banked production spherical-billboard owner and C3
+- Preserve the accepted NCSM1 production spherical-billboard owner and C3/P2S5F
   coverage/culling architecture.
-- Do not regenerate `.nctop2` assets without explicit authorization.
+- Do not regenerate NCSM1 assets without explicit authorization.
 - Do not restore the radial Eye, adaptive CPU final-raster grids, dynamic
   patch/stitch ownership, or any other retired terrain system.
 - Do not increase the 50 m TES range, weaken conservative culling, or reopen C3
   coverage based on visual impression alone; require measured causal evidence.
-- Keep terrain presentation/material quality and finer pupil/re-triangulation
+- Keep remaining surface workload optimization, terrain presentation/material
+  quality, and finer pupil/re-triangulation
   morphing distinct from physical terrain and depth ownership.
 - Atmosphere, clouds, environmental rebuilding, and spacecraft/surface gameplay
   remain separate future work.
@@ -110,6 +111,6 @@ git status --short
 Configure and build native code from an x64 Visual Studio developer environment
 using `build/native-ninja`. Resolve production assets with
 `NovaCore.AssetTool`; runtime performs no implicit network acquisition. For
-point-and-click physical acceptance, use **Earth — Fullscreen Native** in the
+point-and-click physical acceptance, use **New Earth Renderer** in the
 launcher. A launcher built in Release starts the Release Triangle runtime; a
 launcher built in Debug starts Debug.

@@ -6,6 +6,7 @@
 #include "physical_surface.glsl"
 #include "planetary_physical_authority.glsl"
 #include "planetary_natural_terrain_surface.glsl"
+#include "production_spherical_billboard_physical.glsl"
 
 struct EncodedPosition{vec4 high;vec4 low;};
 struct GpuCameraData{EncodedPosition position;mat4 viewProjection;};
@@ -14,7 +15,7 @@ layout(set=0,binding=0,std430)readonly buffer Frame{GpuCameraData camera;}frameD
 layout(set=0,binding=2,std430)readonly buffer Input{vec4 cameraHighRadiusHigh;vec4 cameraLowRadiusLow;vec4 thresholds;uvec4 controls;vec4 viewForwardHalfAngle;vec4 textureDemand;}inputData;
 layout(set=0,binding=6,std430)readonly buffer Presentations{Presentation values[];}presentations;
 
-layout(triangles,equal_spacing,cw) in;
+layout(triangles,fractional_odd_spacing,cw) in;
 layout(location=0) in vec4 i0[];layout(location=0) out vec4 color;
 layout(location=1) in vec3 i1[];layout(location=1) out vec3 normal;
 layout(location=2) flat in vec3 i2[];layout(location=2) flat out vec3 lightDirection;
@@ -35,50 +36,50 @@ layout(location=18) in float i18[];
 
 vec3 RotateQuaternion(vec3 point,vec4 quaternion){return point+2.0*cross(quaternion.xyz,cross(quaternion.xyz,point)+quaternion.w*point);}
 
-double CandidateBaseHeightD(dvec3 direction)
-{
-  double geographic=CanonicalGeographicHeight(direction);
-  NaturalTerrainCompositionSampleD value=EvaluateNaturalCandidateD(direction);
-  return max(0.0,geographic+value.macro.height+value.meso.height);
-}
-
-double CandidatePhysicalHeightD(dvec3 direction)
-{
-  NaturalTerrainCompositionSampleD value=EvaluateNaturalCandidateD(direction);
-  return max(0.0,CandidateBaseHeightD(direction)+value.nearField.height);
-}
-
-vec3 CandidatePhysicalNormalD(dvec3 direction,double radius)
-{
-  direction=normalize(direction);
-  dvec3 east=PhysicalEastD(direction),north=normalize(cross(direction,east));
-  double angle=NOVACORE_NORMAL_SAMPLE_RADIUS/radius;
-  dvec3 leftDirection=normalize(direction-east*angle),rightDirection=normalize(direction+east*angle);
-  dvec3 downDirection=normalize(direction-north*angle),upDirection=normalize(direction+north*angle);
-  double leftHeight=CandidateBaseHeightD(leftDirection),rightHeight=CandidateBaseHeightD(rightDirection);
-  double downHeight=CandidateBaseHeightD(downDirection),upHeight=CandidateBaseHeightD(upDirection);
-  dvec3 left=leftDirection*(radius+leftHeight),right=rightDirection*(radius+rightHeight);
-  dvec3 down=downDirection*(radius+downHeight),up=upDirection*(radius+upHeight);
-  dvec3 baseNormal=normalize(cross(right-left,up-down));if(dot(baseNormal,direction)<0.0)baseNormal=-baseNormal;
-  NaturalTerrainFieldSampleD nearValue=EvaluateNaturalCandidateNearD(direction);
-  double radial=max(dot(baseNormal,direction),1e-9);
-  double eastSlope=-dot(baseNormal,east)/radial+dot(nearValue.bodyGradient,east);
-  double northSlope=-dot(baseNormal,north)/radial+dot(nearValue.bodyGradient,north);
-  return normalize(vec3(direction-east*eastSlope-north*northSlope));
-}
-
 void main()
 {
   vec3 barycentric=gl_TessCoord;
-  dvec3 direction=normalize(dvec3(i6[0])*double(barycentric.x)+dvec3(i6[1])*double(barycentric.y)+dvec3(i6[2])*double(barycentric.z));
-  double radius=double(inputData.cameraHighRadiusHigh.w)+double(inputData.cameraLowRadiusLow.w);
-  bool refined=max(gl_TessLevelInner[0],max(gl_TessLevelOuter[0],max(gl_TessLevelOuter[1],gl_TessLevelOuter[2])))>1.0;
-  double height=refined?CandidatePhysicalHeightD(direction):double(i7[0]*barycentric.x+i7[1]*barycentric.y+i7[2]*barycentric.z);
-  vec3 surfaceNormal=refined?CandidatePhysicalNormalD(direction,radius):normalize(i1[0]*barycentric.x+i1[1]*barycentric.y+i1[2]*barycentric.z);
   dvec3 camera=dvec3(inputData.cameraHighRadiusHigh.xyz)+dvec3(inputData.cameraLowRadiusLow.xyz);
-  dvec3 body=direction*(radius+height);vec3 relativeBody=vec3(body-camera);Presentation p=presentations.values[0];
-  vec3 relative=RotateQuaternion(relativeBody,p.bodyOrientation);
+  vec3 interpolatedView=i5[0]*barycentric.x+i5[1]*barycentric.y+i5[2]*barycentric.z;
+  // The prepared vertices are already the displaced physical base. Interpolate
+  // that small camera-relative quantity and recover its body-fixed anchor for
+  // height/material addressing. Normalizing interpolated corner directions and
+  // rebuilding a planet-radius point changes the coarse spherical triangle and
+  // lets presentation geography slide when its pupil/topology changes.
+  dvec3 preparedBody=camera-dvec3(interpolatedView);
+  double preparedRadiusSquared=dot(preparedBody,preparedBody);
+  dvec3 direction=preparedRadiusSquared>1e-18?
+    preparedBody*inversesqrt(preparedRadiusSquared):normalize(dvec3(i6[0]));
+  double baseHeight=double(i7[0]*barycentric.x+i7[1]*barycentric.y+i7[2]*barycentric.z);
+  vec3 baseNormal=normalize(i1[0]*barycentric.x+i1[1]*barycentric.y+i1[2]*barycentric.z);
+  double localWeight=preparedRadiusSquared>1e-18?
+    1.0-smoothstep(40.0,50.0,double(length(interpolatedView))):0.0;
+  // Match the production scale-mesh responsibility: the prepared base is the
+  // complete terrain outside the bounded refinement footprint.  Do not run
+  // the expensive near-field authority and discard it by multiplying by zero.
+  // KSA's TES takes the same early-out boundary before detailed displacement;
+  // NovaCore keeps evaluating the common outputs below because its fragment ABI
+  // still consumes the anchored body direction and prepared base normal.
+  double nearHeight=0.0;
+  dvec3 nearGradient=dvec3(0.0);
+  if(localWeight>0.0){
+    NaturalTerrainFieldSampleD nearValue=EvaluateNaturalCandidateNearD(direction);
+    nearHeight=nearValue.height;
+    nearGradient=nearValue.bodyGradient;
+  }
+  double height=max(0.0,baseHeight+nearHeight*localWeight);
+  dvec3 east=PhysicalEastD(direction),north=normalize(cross(direction,east));
+  double radial=max(dot(dvec3(baseNormal),direction),1e-9);
+  double eastSlope=-dot(dvec3(baseNormal),east)/radial+dot(nearGradient,east)*localWeight;
+  double northSlope=-dot(dvec3(baseNormal),north)/radial+dot(nearGradient,north)*localWeight;
+  vec3 surfaceNormal=normalize(vec3(direction-east*eastSlope-north*northSlope));
+  double localDisplacement=height-baseHeight;
+  vec3 relativeBody=-interpolatedView+vec3(direction*localDisplacement);Presentation p=presentations.values[0];
+  vec3 localRelative=preparedRadiusSquared>1e-18?
+    RotateQuaternion(vec3(direction*localDisplacement),p.bodyOrientation):vec3(0.0);
   uint face;dvec2 faceUv;ProductionDirectionAddressD(direction,face,faceUv);uint level=min(uint(max(inputData.textureDemand.w,0.0)),2u),cells=1u<<level;uvec2 cell=min(uvec2(faceUv*double(cells)),uvec2(cells-1u));vec2 local=vec2(faceUv*double(cells)-dvec2(cell));
-  gl_Position=frameData.camera.viewProjection*vec4(relative,1.0);
+  vec4 baseClip=gl_in[0].gl_Position*barycentric.x+
+    gl_in[1].gl_Position*barycentric.y+gl_in[2].gl_Position*barycentric.z;
+  gl_Position=baseClip+frameData.camera.viewProjection*vec4(localRelative,0.0);
   color=i0[0];normal=surfaceNormal;lightDirection=i2[0];material=i3[0];response=i4[0];viewDirection=-relativeBody;bodyDirection=vec3(direction);terrainHeight=float(height);bodyCameraHigh=i8[0];bodyCameraLow=i9[0];localDetail=i10[0];productionLayer=i11[0];productionUv=local;productionAddress=uvec4(face,level,cell);productionTransition=i14[0];topologyCoordinate=local;
 }

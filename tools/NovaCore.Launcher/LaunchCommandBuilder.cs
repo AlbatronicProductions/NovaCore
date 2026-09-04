@@ -11,6 +11,7 @@ public static class LaunchCommandBuilder
         if (!definition.IsSupported || definition.Scene != configuration.Scene ||
             definition.StartingBody != configuration.StartingBody ||
             definition.PhysicalSurface != configuration.PhysicalSurface ||
+            definition.EnableP2S5FScaleMesh != configuration.EnableP2S5FScaleMesh ||
             !string.Equals(definition.SurfaceSite, configuration.SurfaceSite, StringComparison.Ordinal))
         {
             throw new ArgumentException("Launch configuration does not match the authoritative scenario catalog.", nameof(configuration));
@@ -57,6 +58,11 @@ public static class LaunchCommandBuilder
         if (configuration.PhysicalSurface == NovaCorePhysicalSurface.M12DNaturalTerrainCandidate)
         {
             arguments.Add("--physical-surface=m12d-natural-candidate");
+        }
+
+        if (configuration.EnableP2S5FScaleMesh)
+        {
+            arguments.Add("--p2s5f-scale-mesh");
         }
 
         return arguments;
