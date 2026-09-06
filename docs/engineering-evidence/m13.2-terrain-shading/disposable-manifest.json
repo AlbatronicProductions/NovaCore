@@ -1,0 +1,1302 @@
+[
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\baseline-fragment.spv",
+    "bytes": 151668,
+    "sha256": "3c75d16a441d456c7c80279250388cb75b21712e31a17b3e75b6c1902a927241"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\baseline-native.dll",
+    "bytes": 360960,
+    "sha256": "0885524d31b01d19288b5ab861ceecd3d9506a9881b48aa1cf236a3a78a882b0"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\bootstrap-baseline-stage-1.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\bootstrap-baseline-stage-16.isa",
+    "bytes": 500902,
+    "sha256": "9b16d6a002cea7f4b6b5db6c1e5a0df9653b470ec2e364cdf13ab9ee7d34ab00"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\bootstrap-baseline-stage-2.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\bootstrap-baseline-stage-4.isa",
+    "bytes": 282019,
+    "sha256": "b7fc92fbe468071362dcb3fe1380029e1b9b90ce661d4a65cf9a03dbd4af5acd"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\bootstrap-baseline.json",
+    "bytes": 21760,
+    "sha256": "45d29fb63444b53c1e1fdfa1b293da631ecbc300ea867e6e0cfbdba2b3ef10fc"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\bootstrap-baseline.log",
+    "bytes": 557736,
+    "sha256": "8bd4b5fa38342293539e81496ad599b60d22d572f4cbffc844269a99207e012e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\bootstrap-candidate-stage-1.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\bootstrap-candidate-stage-16.isa",
+    "bytes": 173761,
+    "sha256": "edf0a3e38af3f00e66c4e2209b7365b1628a00ed4d89ec7aa39a5434ca5c785a"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\bootstrap-candidate-stage-2.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\bootstrap-candidate-stage-4.isa",
+    "bytes": 281497,
+    "sha256": "ba2b03f2734046ea4f525369faa1dd3aa5b01fdadb02d10cf7db7014ecab852d"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\bootstrap-candidate.json",
+    "bytes": 22326,
+    "sha256": "13d6e828c4854d47f4688164deff508dcba29c7a0b6098d8fbf0314bfadecc6c"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\bootstrap-candidate.log",
+    "bytes": 557878,
+    "sha256": "4889ea1e25c66b2085af77ebfa6fa8fd1211491229773f71f2322f1bb120e23d"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\candidate-instrumented.cpp",
+    "bytes": 302327,
+    "sha256": "e9280756ab7e750416f10acc41dcd4aa721d10b9964b34d938bf259dd18071c8"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\diagnostic-boundaries-baseline-stage-1.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\diagnostic-boundaries-baseline-stage-16.isa",
+    "bytes": 500934,
+    "sha256": "9287fbafddac78d5faa44d20d1c5535417dcddb3bdd75d7f807214a50acd12e3"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\diagnostic-boundaries-baseline-stage-2.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\diagnostic-boundaries-baseline-stage-4.isa",
+    "bytes": 383710,
+    "sha256": "a315ed05ae99e50c6ed68331bf760e43ecccf5102d81da8b24c159d750e3632f"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\diagnostic-boundaries-baseline.json",
+    "bytes": 22306,
+    "sha256": "1db5e4caf6de50a77174313b637e6f5298378038a11237b6233947639a314b31"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\diagnostic-boundaries-baseline.log",
+    "bytes": 531680,
+    "sha256": "a19613aec06fb51483a94d2d689f85c39f21455ca259a7c598098deaebc02e3c"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\diagnostic-boundaries-candidate-stage-1.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\diagnostic-boundaries-candidate-stage-16.isa",
+    "bytes": 500934,
+    "sha256": "9287fbafddac78d5faa44d20d1c5535417dcddb3bdd75d7f807214a50acd12e3"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\diagnostic-boundaries-candidate-stage-2.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\diagnostic-boundaries-candidate-stage-4.isa",
+    "bytes": 383710,
+    "sha256": "a315ed05ae99e50c6ed68331bf760e43ecccf5102d81da8b24c159d750e3632f"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\diagnostic-boundaries-candidate.json",
+    "bytes": 22910,
+    "sha256": "41edbab321cfb5e1d0bc10837ae11131cf41d1cd761a3c847fad303272f259d0"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\diagnostic-boundaries-candidate.log",
+    "bytes": 531860,
+    "sha256": "bc699c2874bab3c4ce2a82d28078d563f8e6c1b12aa31512b90998fa6181ddb5"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\diagnostic-boundaries-negative-stage-1.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\diagnostic-boundaries-negative-stage-16.isa",
+    "bytes": 173761,
+    "sha256": "edf0a3e38af3f00e66c4e2209b7365b1628a00ed4d89ec7aa39a5434ca5c785a"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\diagnostic-boundaries-negative-stage-2.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\diagnostic-boundaries-negative-stage-4.isa",
+    "bytes": 281497,
+    "sha256": "8542c357363ffa50aa2a2f3d23e4e1b94ea4362b9628f0ac05b2d4825a38962d"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\diagnostic-boundaries-negative.json",
+    "bytes": 23100,
+    "sha256": "8f46725150e203711e4b47f3aa5c9423a1f59995133cd330fae8039cebaaaa67"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\diagnostic-boundaries-negative.log",
+    "bytes": 531838,
+    "sha256": "deb3f8e3c96aac44fdcee956abc932e2d239e603610e7d72dce12ca5e57109f3"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\diagnostic-owners-baseline-stage-1.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\diagnostic-owners-baseline-stage-16.isa",
+    "bytes": 500934,
+    "sha256": "9287fbafddac78d5faa44d20d1c5535417dcddb3bdd75d7f807214a50acd12e3"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\diagnostic-owners-baseline-stage-2.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\diagnostic-owners-baseline-stage-4.isa",
+    "bytes": 383710,
+    "sha256": "a315ed05ae99e50c6ed68331bf760e43ecccf5102d81da8b24c159d750e3632f"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\diagnostic-owners-baseline.json",
+    "bytes": 22298,
+    "sha256": "60e81c864975190ab8dd517342475d1cadf7143b10b72c3d6ad4318d0fe5904d"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\diagnostic-owners-baseline.log",
+    "bytes": 531652,
+    "sha256": "a961ae1e396883a4ce5627c982ef1bb98223711f004eaaa60e9b4293596deea2"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\diagnostic-owners-candidate-stage-1.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\diagnostic-owners-candidate-stage-16.isa",
+    "bytes": 500934,
+    "sha256": "9287fbafddac78d5faa44d20d1c5535417dcddb3bdd75d7f807214a50acd12e3"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\diagnostic-owners-candidate-stage-2.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\diagnostic-owners-candidate-stage-4.isa",
+    "bytes": 383710,
+    "sha256": "a315ed05ae99e50c6ed68331bf760e43ecccf5102d81da8b24c159d750e3632f"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\diagnostic-owners-candidate.json",
+    "bytes": 22892,
+    "sha256": "412501d21241228b68ee5cc345d32aefa311b8d85fefa4a546189c4d0c21927b"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\diagnostic-owners-candidate.log",
+    "bytes": 531843,
+    "sha256": "2d8dab46ceb7195a058bbd858c5366210d134e9c8904109f4c6046b9263fdf47"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\diagnostic-owners-negative-stage-1.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\diagnostic-owners-negative-stage-16.isa",
+    "bytes": 173761,
+    "sha256": "edf0a3e38af3f00e66c4e2209b7365b1628a00ed4d89ec7aa39a5434ca5c785a"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\diagnostic-owners-negative-stage-2.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\diagnostic-owners-negative-stage-4.isa",
+    "bytes": 281497,
+    "sha256": "8542c357363ffa50aa2a2f3d23e4e1b94ea4362b9628f0ac05b2d4825a38962d"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\diagnostic-owners-negative.json",
+    "bytes": 23093,
+    "sha256": "6fdd158737be0ee9b6b30ad59474b9bf2349277ab2e6cd93991a11e04ca39860"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\diagnostic-owners-negative.log",
+    "bytes": 531833,
+    "sha256": "468469b868a53b62853f56a1cb294018eceeff8fa88de0be32d67338c1e0cd79"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\final-validation.json",
+    "bytes": 89225,
+    "sha256": "0df98ed44f1b8812f3f9c204cbc052de6f461fc5a4bc053419b0253ae487002d"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\florida-smoke.err",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\florida-smoke.log",
+    "bytes": 265255,
+    "sha256": "68fb618f22c03217b3009e321edd8610021130b9a3a7534556c8ef714e342bc0"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\launcher-route-probe.json",
+    "bytes": 3327,
+    "sha256": "c75bc90d6369564ee86171499f7700099f9017f1ca73da1ff02fe52c7c6e66fb"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\ordinary-check.spv",
+    "bytes": 134236,
+    "sha256": "4dd9bb82d58e2b624b4fb3ca2714e20fe61c64a8b56c8c90cab4bbc2e7ffc44b"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\ordinary-check.txt",
+    "bytes": 404082,
+    "sha256": "0cffa707129070ee9c9cd7374e42cf309a99aced4d6199740273241179c56d2b"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\ordinary-full.spv",
+    "bytes": 56016,
+    "sha256": "0cb12c0a27484d377b01096725f9cf030388bb9d5be6d2bc62fdfc4f4089362e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\ordinary-full.txt",
+    "bytes": 146645,
+    "sha256": "5c5643d6b4b9f7c65a5f9e00198b01b90fbf43483e08885fd2567464b2d435ee"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-A-baseline-stage-1.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-A-baseline-stage-16.isa",
+    "bytes": 500902,
+    "sha256": "9b16d6a002cea7f4b6b5db6c1e5a0df9653b470ec2e364cdf13ab9ee7d34ab00"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-A-baseline-stage-2.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-A-baseline-stage-4.isa",
+    "bytes": 282019,
+    "sha256": "b7fc92fbe468071362dcb3fe1380029e1b9b90ce661d4a65cf9a03dbd4af5acd"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-A-baseline.json",
+    "bytes": 22456,
+    "sha256": "f84174ade3bb49e6c7297315085edbaa6bde17c823f436f5e08891f5960441c4"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-A-baseline.log",
+    "bytes": 557906,
+    "sha256": "597e226db145c1201afee8d962204239b44e5510e1762fba23d5c86fffeb4e72"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-A-candidate-stage-1.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-A-candidate-stage-16.isa",
+    "bytes": 173761,
+    "sha256": "edf0a3e38af3f00e66c4e2209b7365b1628a00ed4d89ec7aa39a5434ca5c785a"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-A-candidate-stage-2.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-A-candidate-stage-4.isa",
+    "bytes": 281497,
+    "sha256": "ba2b03f2734046ea4f525369faa1dd3aa5b01fdadb02d10cf7db7014ecab852d"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-A-candidate.json",
+    "bytes": 23023,
+    "sha256": "0aa1620bcfc220fabc76ec631db757fce34fe634e68915366d9f15335f5758e0"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-A-candidate.log",
+    "bytes": 557865,
+    "sha256": "0d667b653b231b2026fa4186dfe9e3c9eb8ebbc4392359164071f3111c375891"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-B-baseline-stage-1.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-B-baseline-stage-16.isa",
+    "bytes": 500902,
+    "sha256": "9b16d6a002cea7f4b6b5db6c1e5a0df9653b470ec2e364cdf13ab9ee7d34ab00"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-B-baseline-stage-2.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-B-baseline-stage-4.isa",
+    "bytes": 282019,
+    "sha256": "b7fc92fbe468071362dcb3fe1380029e1b9b90ce661d4a65cf9a03dbd4af5acd"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-B-baseline.json",
+    "bytes": 22519,
+    "sha256": "406806afeb21f58e696484cc2bd01a318e2a5bef2b4b5da20bf897f8acfa9acd"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-B-baseline.log",
+    "bytes": 559704,
+    "sha256": "05d16265d039d0d17a6b08340a665cbb8a3703edeec993025e048250127a1cb5"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-B-candidate-stage-1.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-B-candidate-stage-16.isa",
+    "bytes": 173761,
+    "sha256": "edf0a3e38af3f00e66c4e2209b7365b1628a00ed4d89ec7aa39a5434ca5c785a"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-B-candidate-stage-2.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-B-candidate-stage-4.isa",
+    "bytes": 281497,
+    "sha256": "ba2b03f2734046ea4f525369faa1dd3aa5b01fdadb02d10cf7db7014ecab852d"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-B-candidate.json",
+    "bytes": 23090,
+    "sha256": "5400d35ef84f1e80a3e49d00fb1fb2947cf8a4a472bea0580c8c76b0b02af60d"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-B-candidate.log",
+    "bytes": 559803,
+    "sha256": "f9f2072b9acc721b342e633ef54e60cac1578d5b7840f8afe959a0523099f3f5"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-C-baseline-stage-1.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-C-baseline-stage-16.isa",
+    "bytes": 500902,
+    "sha256": "9b16d6a002cea7f4b6b5db6c1e5a0df9653b470ec2e364cdf13ab9ee7d34ab00"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-C-baseline-stage-2.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-C-baseline-stage-4.isa",
+    "bytes": 282019,
+    "sha256": "b7fc92fbe468071362dcb3fe1380029e1b9b90ce661d4a65cf9a03dbd4af5acd"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-C-baseline.json",
+    "bytes": 22678,
+    "sha256": "b19d73b32d3c6700f4a8f3e7e655c6870d6f0a05c8c1d21af5a066d57e2a6c3c"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-C-baseline.log",
+    "bytes": 564154,
+    "sha256": "594bf98d258e90b183a8f539373b67ae5179dc51ce86f3e21c4421c1dfa71fee"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-C-candidate-stage-1.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-C-candidate-stage-16.isa",
+    "bytes": 173761,
+    "sha256": "edf0a3e38af3f00e66c4e2209b7365b1628a00ed4d89ec7aa39a5434ca5c785a"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-C-candidate-stage-2.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-C-candidate-stage-4.isa",
+    "bytes": 281497,
+    "sha256": "ba2b03f2734046ea4f525369faa1dd3aa5b01fdadb02d10cf7db7014ecab852d"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-C-candidate.json",
+    "bytes": 23269,
+    "sha256": "3fc5d5224a3d96a708736ac8f4c41a66cff51a579301c55a5eeea9a82283c745"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-C-candidate.log",
+    "bytes": 564316,
+    "sha256": "6fc4acce641bff7fb6ddfbc6d0c171ab63ae8de685b393d7da135ae41ffc8998"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-D-baseline-stage-1.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-D-baseline-stage-16.isa",
+    "bytes": 500902,
+    "sha256": "9b16d6a002cea7f4b6b5db6c1e5a0df9653b470ec2e364cdf13ab9ee7d34ab00"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-D-baseline-stage-2.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-D-baseline-stage-4.isa",
+    "bytes": 282019,
+    "sha256": "b7fc92fbe468071362dcb3fe1380029e1b9b90ce661d4a65cf9a03dbd4af5acd"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-D-baseline.json",
+    "bytes": 22756,
+    "sha256": "1204ab505ea48eccb9374210a6a439ab0642d3ad20f992f84e4744fa63ee3593"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-D-baseline.log",
+    "bytes": 579915,
+    "sha256": "3c367515e6092ea6b5f3de9535c6e7dd21b040a6077bcfde281e55b083c459a5"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-D-candidate-stage-1.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-D-candidate-stage-16.isa",
+    "bytes": 173761,
+    "sha256": "edf0a3e38af3f00e66c4e2209b7365b1628a00ed4d89ec7aa39a5434ca5c785a"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-D-candidate-stage-2.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-D-candidate-stage-4.isa",
+    "bytes": 281497,
+    "sha256": "ba2b03f2734046ea4f525369faa1dd3aa5b01fdadb02d10cf7db7014ecab852d"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-D-candidate.json",
+    "bytes": 23338,
+    "sha256": "613a011d35c321024788c4c3d4cb0364dfbdf5f7abf9e53ab1f1dddbff9cd474"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-D-candidate.log",
+    "bytes": 580091,
+    "sha256": "ce770be5b2ffbc917a16df9185c4cdf79031e628da43f7dc6433482b80b15f68"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-E-baseline-stage-1.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-E-baseline-stage-16.isa",
+    "bytes": 500902,
+    "sha256": "9b16d6a002cea7f4b6b5db6c1e5a0df9653b470ec2e364cdf13ab9ee7d34ab00"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-E-baseline-stage-2.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-E-baseline-stage-4.isa",
+    "bytes": 282019,
+    "sha256": "b7fc92fbe468071362dcb3fe1380029e1b9b90ce661d4a65cf9a03dbd4af5acd"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-E-baseline.json",
+    "bytes": 22277,
+    "sha256": "2e5614dd0922bdabd0ff69b423f68114d6dd81a0ea4c4cbfbddd6d011f4157fa"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-E-baseline.log",
+    "bytes": 531656,
+    "sha256": "d39967daf5b518cc9451fe380a4469e714724f50e2ac5069669fe17d6eb608e4"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-E-candidate-stage-1.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-E-candidate-stage-16.isa",
+    "bytes": 173761,
+    "sha256": "edf0a3e38af3f00e66c4e2209b7365b1628a00ed4d89ec7aa39a5434ca5c785a"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-E-candidate-stage-2.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-E-candidate-stage-4.isa",
+    "bytes": 281497,
+    "sha256": "ba2b03f2734046ea4f525369faa1dd3aa5b01fdadb02d10cf7db7014ecab852d"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-E-candidate.json",
+    "bytes": 22851,
+    "sha256": "1ce2530ea783f2ff738c15411a68adca2f7876360d8a7fb1a5a56de1b08d9630"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\parity-E-candidate.log",
+    "bytes": 531790,
+    "sha256": "8bf8f36906375c10f405494d390f3ca9411a5e9787baa7328a174aced79e52e5"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\physical-modifier-baseline-stage-1.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\physical-modifier-baseline-stage-16.isa",
+    "bytes": 500902,
+    "sha256": "9b16d6a002cea7f4b6b5db6c1e5a0df9653b470ec2e364cdf13ab9ee7d34ab00"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\physical-modifier-baseline-stage-2.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\physical-modifier-baseline-stage-4.isa",
+    "bytes": 282019,
+    "sha256": "b7fc92fbe468071362dcb3fe1380029e1b9b90ce661d4a65cf9a03dbd4af5acd"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\physical-modifier-baseline.json",
+    "bytes": 22553,
+    "sha256": "52e86c65f39bd6b1f5f7a9e7f341a14b15e8237e885fd00caab124de9b733f49"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\physical-modifier-baseline.log",
+    "bytes": 558720,
+    "sha256": "3b544b123c76d59c6f885e70c825baa3ea11bb5e4692b827a16ebc573afe576a"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\physical-modifier-candidate-stage-1.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\physical-modifier-candidate-stage-16.isa",
+    "bytes": 500902,
+    "sha256": "9b16d6a002cea7f4b6b5db6c1e5a0df9653b470ec2e364cdf13ab9ee7d34ab00"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\physical-modifier-candidate-stage-2.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\physical-modifier-candidate-stage-4.isa",
+    "bytes": 282019,
+    "sha256": "b7fc92fbe468071362dcb3fe1380029e1b9b90ce661d4a65cf9a03dbd4af5acd"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\physical-modifier-candidate.json",
+    "bytes": 23144,
+    "sha256": "4f77b00e009978f9c35ce2b436bef2d921e3d35922a27343513930c365d95063"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\physical-modifier-candidate.log",
+    "bytes": 558907,
+    "sha256": "d9dcf9e69746664ce246006807449870b7fc475d8476b6cc459fbfa0c0143371"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\production-block.txt",
+    "bytes": 782,
+    "sha256": "b2a12be4c9ba0213deab75db38be08a40509e26822c824c8a4ca2b11c0deb0d8"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\smoke-result.json",
+    "bytes": 171,
+    "sha256": "19cdbaa5e4db78eadb235ee4c112bc595b15ea80d3639c435292ad565dcc2844"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-A-baseline-repeat2-stage-1.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-A-baseline-repeat2-stage-16.isa",
+    "bytes": 500957,
+    "sha256": "563762f432b481a36a18d981e0544c17031a3cd83b52c82bcf7bde60d38a80c9"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-A-baseline-repeat2-stage-2.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-A-baseline-repeat2-stage-4.isa",
+    "bytes": 487458,
+    "sha256": "d6db758b4e309bfc04bc51a3259e9e8fa0f33d3ec7c07c2155a4aa9e42a69c56"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-A-baseline-repeat2.json",
+    "bytes": 20784,
+    "sha256": "9ad852c60d1154437f75bb00324151277c5047a85d0d4029c12a8e19d23b5a48"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-A-baseline-repeat2.log",
+    "bytes": 553909,
+    "sha256": "e09b284783274f988b29e2436c5b1c89e3a66fbd57bf56a17cffd425ef975ca7"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-A-baseline-repeat3-stage-1.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-A-baseline-repeat3-stage-16.isa",
+    "bytes": 500957,
+    "sha256": "563762f432b481a36a18d981e0544c17031a3cd83b52c82bcf7bde60d38a80c9"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-A-baseline-repeat3-stage-2.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-A-baseline-repeat3-stage-4.isa",
+    "bytes": 487458,
+    "sha256": "d6db758b4e309bfc04bc51a3259e9e8fa0f33d3ec7c07c2155a4aa9e42a69c56"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-A-baseline-repeat3.json",
+    "bytes": 20790,
+    "sha256": "1951990a7ba2e2403b2f08123e837e370f3836b64f4e3864d7fe25436254cd9a"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-A-baseline-repeat3.log",
+    "bytes": 553906,
+    "sha256": "9fbc3a8ed3ceb95243abda5401323010cece4ab4aca171b43e47ed32b59ecaa1"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-A-baseline-stage-1.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-A-baseline-stage-16.isa",
+    "bytes": 500957,
+    "sha256": "563762f432b481a36a18d981e0544c17031a3cd83b52c82bcf7bde60d38a80c9"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-A-baseline-stage-2.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-A-baseline-stage-4.isa",
+    "bytes": 487458,
+    "sha256": "d6db758b4e309bfc04bc51a3259e9e8fa0f33d3ec7c07c2155a4aa9e42a69c56"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-A-baseline.json",
+    "bytes": 20209,
+    "sha256": "6bf8a2fa9a95734d27d90c17e71c5b8a50d2d17704abb610b46e92b9b1e35b27"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-A-baseline.log",
+    "bytes": 553902,
+    "sha256": "42ba430f217b89c5b4486d0f89a6e49f77127c090d006bcce7c53cc6f2d46a3a"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-A-candidate-repeat2-stage-1.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-A-candidate-repeat2-stage-16.isa",
+    "bytes": 173789,
+    "sha256": "24808b90a08d718a676c9e0cd3a21094125d1733d92f1777849c6df3da67f320"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-A-candidate-repeat2-stage-2.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-A-candidate-repeat2-stage-4.isa",
+    "bytes": 486936,
+    "sha256": "5458bb37bc54ee428dd4bd53c93fd549d620b4a5ab5ebd17e88e40c28d45cc60"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-A-candidate-repeat2.json",
+    "bytes": 20957,
+    "sha256": "05560d34b52992bdb3e560cc10241659a115b226855250f6a3d7e0ea037201c7"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-A-candidate-repeat2.log",
+    "bytes": 553995,
+    "sha256": "09adda5c1d76d2c6ca60b17a6660beb85e292f335b2a8f4bff5b73d75e56384e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-A-candidate-repeat3-stage-1.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-A-candidate-repeat3-stage-16.isa",
+    "bytes": 173789,
+    "sha256": "24808b90a08d718a676c9e0cd3a21094125d1733d92f1777849c6df3da67f320"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-A-candidate-repeat3-stage-2.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-A-candidate-repeat3-stage-4.isa",
+    "bytes": 486936,
+    "sha256": "5458bb37bc54ee428dd4bd53c93fd549d620b4a5ab5ebd17e88e40c28d45cc60"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-A-candidate-repeat3.json",
+    "bytes": 20962,
+    "sha256": "d63a43582321dff2d2646ed6282e4b767886b0f0dfc6ecdd7a2ae6ac634111bf"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-A-candidate-repeat3.log",
+    "bytes": 554003,
+    "sha256": "e0a0b0f93d7f56d8c974c1520676e3988949d4de2f2e345f70ffa8cac4ca120a"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-A-candidate-stage-1.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-A-candidate-stage-16.isa",
+    "bytes": 173789,
+    "sha256": "24808b90a08d718a676c9e0cd3a21094125d1733d92f1777849c6df3da67f320"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-A-candidate-stage-2.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-A-candidate-stage-4.isa",
+    "bytes": 486936,
+    "sha256": "5458bb37bc54ee428dd4bd53c93fd549d620b4a5ab5ebd17e88e40c28d45cc60"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-A-candidate.json",
+    "bytes": 20393,
+    "sha256": "d8ec970a12ae14c2061fe1b56f96a306bd004a7143726784b831ddf24f8a4831"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-A-candidate.log",
+    "bytes": 554341,
+    "sha256": "d88555013d4733151e214c1e248cc80416edcef9d542bb9df3aecdf3b56b1ba3"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-B-baseline-repeat2-stage-1.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-B-baseline-repeat2-stage-16.isa",
+    "bytes": 500957,
+    "sha256": "563762f432b481a36a18d981e0544c17031a3cd83b52c82bcf7bde60d38a80c9"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-B-baseline-repeat2-stage-2.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-B-baseline-repeat2-stage-4.isa",
+    "bytes": 487458,
+    "sha256": "d6db758b4e309bfc04bc51a3259e9e8fa0f33d3ec7c07c2155a4aa9e42a69c56"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-B-baseline-repeat2.json",
+    "bytes": 20829,
+    "sha256": "6b7cf780452f92983781a875b6bc0a6cd7d85444ed15339653f936fba1627afe"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-B-baseline-repeat2.log",
+    "bytes": 555582,
+    "sha256": "432d570e31677ac0343d66b11365c65ac25ce376c9c539fdfc7495c6f4daa2fd"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-B-baseline-stage-1.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-B-baseline-stage-16.isa",
+    "bytes": 500957,
+    "sha256": "563762f432b481a36a18d981e0544c17031a3cd83b52c82bcf7bde60d38a80c9"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-B-baseline-stage-2.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-B-baseline-stage-4.isa",
+    "bytes": 487458,
+    "sha256": "d6db758b4e309bfc04bc51a3259e9e8fa0f33d3ec7c07c2155a4aa9e42a69c56"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-B-baseline.json",
+    "bytes": 20254,
+    "sha256": "3249d6c4311c5eb066cc72b27184b8856e5bd41b39dbb63a51105373502992dc"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-B-baseline.log",
+    "bytes": 555617,
+    "sha256": "8fb65678921091c3b24382e09d666116e5bdeaecd08e27a334e0e6b9e2dc0367"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-B-candidate-repeat2-stage-1.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-B-candidate-repeat2-stage-16.isa",
+    "bytes": 173789,
+    "sha256": "24808b90a08d718a676c9e0cd3a21094125d1733d92f1777849c6df3da67f320"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-B-candidate-repeat2-stage-2.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-B-candidate-repeat2-stage-4.isa",
+    "bytes": 486936,
+    "sha256": "5458bb37bc54ee428dd4bd53c93fd549d620b4a5ab5ebd17e88e40c28d45cc60"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-B-candidate-repeat2.json",
+    "bytes": 21010,
+    "sha256": "48b319e5f370f9bf827e328c3d2d08472ec28b7bc59cb3774dab84d1710bda35"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-B-candidate-repeat2.log",
+    "bytes": 555773,
+    "sha256": "6eaa7574a8262fccd40192ac90b5d5b0a28035ae4a6d70264042be87b97f6be9"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-B-candidate-stage-1.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-B-candidate-stage-16.isa",
+    "bytes": 173789,
+    "sha256": "24808b90a08d718a676c9e0cd3a21094125d1733d92f1777849c6df3da67f320"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-B-candidate-stage-2.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-B-candidate-stage-4.isa",
+    "bytes": 486936,
+    "sha256": "5458bb37bc54ee428dd4bd53c93fd549d620b4a5ab5ebd17e88e40c28d45cc60"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-B-candidate.json",
+    "bytes": 20428,
+    "sha256": "10c15bbbc51a9420221ab3540a182de5e84ea844e9b56b2e6d3a1d82f3e0d647"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-B-candidate.log",
+    "bytes": 555754,
+    "sha256": "e429eb500f47c8269a075510240d6088bfd6ff86457fa2e8970a0027c572bc68"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-C-baseline-stage-1.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-C-baseline-stage-16.isa",
+    "bytes": 500957,
+    "sha256": "563762f432b481a36a18d981e0544c17031a3cd83b52c82bcf7bde60d38a80c9"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-C-baseline-stage-2.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-C-baseline-stage-4.isa",
+    "bytes": 487458,
+    "sha256": "d6db758b4e309bfc04bc51a3259e9e8fa0f33d3ec7c07c2155a4aa9e42a69c56"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-C-baseline.json",
+    "bytes": 20413,
+    "sha256": "9b5a0c28dc94d9df29ba6898bdecc42424040114b7de6a5865ed0f1ae4ccee61"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-C-baseline.log",
+    "bytes": 560097,
+    "sha256": "e30f3a68e56fac589d2454cf1667242fcf4a21ce46b56c0e7d207329d4ffd13a"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-C-candidate-stage-1.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-C-candidate-stage-16.isa",
+    "bytes": 173789,
+    "sha256": "24808b90a08d718a676c9e0cd3a21094125d1733d92f1777849c6df3da67f320"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-C-candidate-stage-2.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-C-candidate-stage-4.isa",
+    "bytes": 486936,
+    "sha256": "5458bb37bc54ee428dd4bd53c93fd549d620b4a5ab5ebd17e88e40c28d45cc60"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-C-candidate.json",
+    "bytes": 20597,
+    "sha256": "0184cd9027bd2d5670ca8d54d0f7c30d0dfc42d012b42aa3d8e3fd65ee9cd16b"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-C-candidate.log",
+    "bytes": 560260,
+    "sha256": "ca6605ae31b3d8bf6f7b2a60dd982a0f2aaa0901b923ad4956e4715ff0a770ea"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-D-baseline-stage-1.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-D-baseline-stage-16.isa",
+    "bytes": 500957,
+    "sha256": "563762f432b481a36a18d981e0544c17031a3cd83b52c82bcf7bde60d38a80c9"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-D-baseline-stage-2.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-D-baseline-stage-4.isa",
+    "bytes": 487458,
+    "sha256": "d6db758b4e309bfc04bc51a3259e9e8fa0f33d3ec7c07c2155a4aa9e42a69c56"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-D-baseline.json",
+    "bytes": 20525,
+    "sha256": "10cf9995363b693b92c04f38fae19a17e697d2ce4e63880b16c0ea23641769a8"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-D-baseline.log",
+    "bytes": 576016,
+    "sha256": "d9a74d38fffbe399cbfd7ad800b6ced4e8ee33027de86aff05bdc049aacfe395"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-D-candidate-stage-1.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-D-candidate-stage-16.isa",
+    "bytes": 173789,
+    "sha256": "24808b90a08d718a676c9e0cd3a21094125d1733d92f1777849c6df3da67f320"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-D-candidate-stage-2.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-D-candidate-stage-4.isa",
+    "bytes": 486936,
+    "sha256": "5458bb37bc54ee428dd4bd53c93fd549d620b4a5ab5ebd17e88e40c28d45cc60"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-D-candidate.json",
+    "bytes": 20700,
+    "sha256": "0b0002ccf14ada4f04f71ff5fe5df115a6a6a9f949b6b0b1ff713f2d40c86308"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-D-candidate.log",
+    "bytes": 576176,
+    "sha256": "65ca1cd73fd26367e10ee24f269df47cdcfe331c093ae1de00f58bd2bdbcc5fe"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-E-baseline-stage-1.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-E-baseline-stage-16.isa",
+    "bytes": 500957,
+    "sha256": "563762f432b481a36a18d981e0544c17031a3cd83b52c82bcf7bde60d38a80c9"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-E-baseline-stage-2.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-E-baseline-stage-4.isa",
+    "bytes": 487458,
+    "sha256": "d6db758b4e309bfc04bc51a3259e9e8fa0f33d3ec7c07c2155a4aa9e42a69c56"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-E-baseline.json",
+    "bytes": 20069,
+    "sha256": "7cae7757b7695be1e6d6d311e2dd23e8dbaf42b740c35e57761147f52f0f4e79"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-E-baseline.log",
+    "bytes": 527807,
+    "sha256": "56811011dc663e0c86f280d008c9f1a3d2a379464d562258f62558f017a51f9f"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-E-candidate-stage-1.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-E-candidate-stage-16.isa",
+    "bytes": 173789,
+    "sha256": "24808b90a08d718a676c9e0cd3a21094125d1733d92f1777849c6df3da67f320"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-E-candidate-stage-2.isa",
+    "bytes": 50672,
+    "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-E-candidate-stage-4.isa",
+    "bytes": 486936,
+    "sha256": "5458bb37bc54ee428dd4bd53c93fd549d620b4a5ab5ebd17e88e40c28d45cc60"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-E-candidate.json",
+    "bytes": 20237,
+    "sha256": "c193d886daec74fb921ebae1ea0cc63d22b8dc6be02eb5e5c92617a4ca640182"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\timing-E-candidate.log",
+    "bytes": 527928,
+    "sha256": "671d570209841aff8f257a6855c6599fc5eaa2ea4f29d5fa2d0beeeb24b01190"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\route\\Program.cs",
+    "bytes": 5006,
+    "sha256": "d0224319d3804cdfca0b9c1ec4dc38040eecb44d72fcd60b0cc1dc0e08899447"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\route\\route.csproj",
+    "bytes": 407,
+    "sha256": "ed000e6d5f50e4ad1c97aeb3c037371c57a9ce524236282dd3bc58a48457b120"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\route\\bin\\Release\\net10.0-windows\\NovaCore.Launcher.dll",
+    "bytes": 59904,
+    "sha256": "40ae87e8adc20bf558d46263ba5f437ac98c6d61fde37fdf35a665bb8ec7f3a5"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\route\\bin\\Release\\net10.0-windows\\NovaCore.Launcher.pdb",
+    "bytes": 22420,
+    "sha256": "fe493155037703a3eefa36a350cfaec17b14475db1aeb96a26b2337d59110e4e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\route\\bin\\Release\\net10.0-windows\\route.deps.json",
+    "bytes": 824,
+    "sha256": "86863cbd50107f4f27b309061f4ba1388244a6a2ce34b32cf9f2fe7525793b65"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\route\\bin\\Release\\net10.0-windows\\route.dll",
+    "bytes": 17920,
+    "sha256": "bfe6b0fa1f41ae12d8ef5e3ed65bdc54143e50a21b63147e9fce2200c44d6802"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\route\\bin\\Release\\net10.0-windows\\route.exe",
+    "bytes": 162304,
+    "sha256": "caef77327f37d6822d7c48e3df1c0834b908e004e498cf0d344bc43ead9588da"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\route\\bin\\Release\\net10.0-windows\\route.pdb",
+    "bytes": 16452,
+    "sha256": "d4a963423b8f3e3e3f524879a2eb7fa9dc37f153870d2358f20332689dd40e08"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\route\\bin\\Release\\net10.0-windows\\route.runtimeconfig.json",
+    "bytes": 519,
+    "sha256": "96bc2946dff8790400d652ec7f8de7bb043e954980d59470c112788b68a1fbd3"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\route\\obj\\project.assets.json",
+    "bytes": 21990,
+    "sha256": "2e9d8684316946862dc75fe7bf951d1b1fd327751ff3a2aa67772e747b83ba57"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\route\\obj\\project.nuget.cache",
+    "bytes": 208,
+    "sha256": "51c606647c1f1fcd10295c2a4fcd04f98bed4d4e647969dd59ba041681790ec5"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\route\\obj\\route.csproj.nuget.dgspec.json",
+    "bytes": 22659,
+    "sha256": "00436293b2efcdcdd85a5cc983eb2e618ceecb55e52e3ed095b1b435b7833b38"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\route\\obj\\route.csproj.nuget.g.props",
+    "bytes": 1135,
+    "sha256": "1e51d59a0a61bbe5b26b92eb01307b6f7909cd9d6f3577f96af5da8201057d69"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\route\\obj\\route.csproj.nuget.g.targets",
+    "bytes": 150,
+    "sha256": "971cc9b535384849b5c661d776cd7a80833a416265e32e8968e06c367368b8b5"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\route\\obj\\Release\\net10.0-windows\\.NETCoreApp,Version=v10.0.AssemblyAttributes.cs",
+    "bytes": 200,
+    "sha256": "93d67476196ebfc80d1d7d8844b91146cfd678d105f5ce635eb900ca40610c9b"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\route\\obj\\Release\\net10.0-windows\\apphost.exe",
+    "bytes": 162304,
+    "sha256": "caef77327f37d6822d7c48e3df1c0834b908e004e498cf0d344bc43ead9588da"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\route\\obj\\Release\\net10.0-windows\\route.AssemblyInfo.cs",
+    "bytes": 1150,
+    "sha256": "7eaa13ce443de354d3aa3bfc3f5fe113d7a673c1246a6191add4d4f9716f1ad6"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\route\\obj\\Release\\net10.0-windows\\route.AssemblyInfoInputs.cache",
+    "bytes": 66,
+    "sha256": "150020456f27096bda1820e68de98060cd30266b845bf26cae4a7374d14a697a"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\route\\obj\\Release\\net10.0-windows\\route.assets.cache",
+    "bytes": 152,
+    "sha256": "3d504a316cad8a04080e999d7d46bf8d612bede1cfa774824ae938b1eb86d106"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\route\\obj\\Release\\net10.0-windows\\route.csproj.AssemblyReference.cache",
+    "bytes": 1271,
+    "sha256": "d6c21167e783c8d25971da4d53e7b2d68760441fac6df16b7cd3d535f58a3a0f"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\route\\obj\\Release\\net10.0-windows\\route.csproj.CoreCompileInputs.cache",
+    "bytes": 66,
+    "sha256": "a9c085c1737338900ae36ee2eecdebb198923249e983523742e390671179929e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\route\\obj\\Release\\net10.0-windows\\route.csproj.FileListAbsolute.txt",
+    "bytes": 1838,
+    "sha256": "2d65ad4fff69123895a0721932cd43a894df149d1989a5c374ef2c288f42814d"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\route\\obj\\Release\\net10.0-windows\\route.csproj.Up2Date",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\route\\obj\\Release\\net10.0-windows\\route.dll",
+    "bytes": 17920,
+    "sha256": "bfe6b0fa1f41ae12d8ef5e3ed65bdc54143e50a21b63147e9fce2200c44d6802"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\route\\obj\\Release\\net10.0-windows\\route.GeneratedMSBuildEditorConfig.editorconfig",
+    "bytes": 1151,
+    "sha256": "7ab689363d3c1a9559efa8d95601c54119e8074ed1657559787436701b91d212"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\route\\obj\\Release\\net10.0-windows\\route.genruntimeconfig.cache",
+    "bytes": 66,
+    "sha256": "96efbf51d0ddafb335959667446dd3fef8691f40c556cb63b26c00c95bbd8233"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\route\\obj\\Release\\net10.0-windows\\route.GlobalUsings.g.cs",
+    "bytes": 305,
+    "sha256": "c95ea51a9e8c77e5367f652ede0c8871e7d6413090add59e1b8dd6805ac37e70"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\route\\obj\\Release\\net10.0-windows\\route.pdb",
+    "bytes": 16452,
+    "sha256": "d4a963423b8f3e3e3f524879a2eb7fa9dc37f153870d2358f20332689dd40e08"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\route\\obj\\Release\\net10.0-windows\\route.sourcelink.json",
+    "bytes": 143,
+    "sha256": "8fb7a19bf63fceb168c774a260decfb3b775fadc13c77da188d175e9e4b8f2f8"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\route\\obj\\Release\\net10.0-windows\\ref\\route.dll",
+    "bytes": 5632,
+    "sha256": "694603d50e9ec40a1cc1619377f0256f61d2630c699e0e265650305b5bd8d47e"
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.2-terrain-shading\\route\\obj\\Release\\net10.0-windows\\refint\\route.dll",
+    "bytes": 5632,
+    "sha256": "694603d50e9ec40a1cc1619377f0256f61d2630c699e0e265650305b5bd8d47e"
+  }
+]

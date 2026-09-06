@@ -1,0 +1,18 @@
+{
+  "Content/Core/Shaders/Planet/PlanetTessEvaluation.tese": {
+    "bytes": 6914,
+    "sha256": "80c3168561c468d3b255d635b31c1e0163ed8331c21e1340b8d490525bc93b27"
+  },
+  "Content/Core/Shaders/Planet/Culling/PlanetFrustumCulling.comp": {
+    "bytes": 2973,
+    "sha256": "4a1617f6ce1660aa78a373d79f4c97022c325525a4f694e100e22aad7c2f23e5"
+  },
+  "Content/Core/Shaders/Planet/TessellationFuncs.glsl": {
+    "bytes": 5125,
+    "sha256": "308ee11e81ec65757c4514e485dfc6ffbf7cb2fb76e6467ca267e6980eb4172e"
+  },
+  "Content/Core/Shaders/Common/Planet.glsl": {
+    "bytes": 33189,
+    "sha256": "c4c5f1cbf5277fb0642997fd9f5da0fd8565588beba0d9f7bfe40636539a94ad"
+  }
+}

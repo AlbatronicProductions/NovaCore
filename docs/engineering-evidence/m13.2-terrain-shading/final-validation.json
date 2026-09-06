@@ -1,0 +1,739 @@
+[
+  {
+    "label": "native-build-Debug",
+    "arguments": [
+      "pwsh",
+      "-NoProfile",
+      "-Command",
+      "& 'C:/Program Files/Microsoft Visual Studio/18/Community/Common7/Tools/Launch-VsDevShell.ps1' -Arch amd64 -HostArch amd64 -SkipAutomaticLocation\ncmake --build build/native-ninja\nexit $LASTEXITCODE"
+    ],
+    "exitCode": 0,
+    "stdoutUtf8Bytes": 472,
+    "logSha256": "0858cb915c63534d1111e71b1321c55ec813d7f6acf6dc3c4f554eac2742018b",
+    "validationMessages": [],
+    "summary": []
+  },
+  {
+    "label": "managed-build-Debug",
+    "arguments": [
+      "dotnet",
+      "build",
+      "NovaCore.sln",
+      "-c",
+      "Debug",
+      "--no-restore",
+      "-v",
+      "quiet"
+    ],
+    "exitCode": 0,
+    "stdoutUtf8Bytes": 76,
+    "logSha256": "827fff9cffce5d8224bdbce6a4a74a4ef0f07d9f666458ef49c5499a4d291890",
+    "validationMessages": [],
+    "summary": [
+      "Build succeeded.",
+      "    0 Warning(s)",
+      "    0 Error(s)"
+    ]
+  },
+  {
+    "label": "native-build-Release",
+    "arguments": [
+      "pwsh",
+      "-NoProfile",
+      "-Command",
+      "& 'C:/Program Files/Microsoft Visual Studio/18/Community/Common7/Tools/Launch-VsDevShell.ps1' -Arch amd64 -HostArch amd64 -SkipAutomaticLocation\ncmake --build build/native-ninja-release\nexit $LASTEXITCODE"
+    ],
+    "exitCode": 0,
+    "stdoutUtf8Bytes": 370,
+    "logSha256": "678d615efccc8f844ce37e6cc2d9c50d8437cef1e4ac7a84e2ef6e52c70aebc8",
+    "validationMessages": [],
+    "summary": []
+  },
+  {
+    "label": "managed-build-Release",
+    "arguments": [
+      "dotnet",
+      "build",
+      "NovaCore.sln",
+      "-c",
+      "Release",
+      "--no-restore",
+      "-v",
+      "quiet"
+    ],
+    "exitCode": 0,
+    "stdoutUtf8Bytes": 76,
+    "logSha256": "818e8230cc93bbb3c96bcba757084c579c9a92e1149f8cb575437efd9c2e8f71",
+    "validationMessages": [],
+    "summary": [
+      "Build succeeded.",
+      "    0 Warning(s)",
+      "    0 Error(s)"
+    ]
+  },
+  {
+    "label": "graphics-Debug-gpu",
+    "arguments": [
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Graphics.Tests.exe",
+      "--category=gpu"
+    ],
+    "exitCode": 0,
+    "stdoutUtf8Bytes": 20797,
+    "logSha256": "87e70babf2d7fdfa3b721571bc42e061ab5393a6f8f7c628af9f519059ab5ed9",
+    "validationMessages": [],
+    "summary": [
+      "Native identity: configuration=Debug; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Native.dll; sha256=88B761D0A53B4D8681CAB7FBD8CF1923BEFDD17E4AB2ADA8464ED69C21C1591D; source=E:\\NovaCore\\build\\native-ninja\\NovaCore.Native.dll",
+      "PASS [gpu] M12D-P2S3 spherical billboard GPU runtime proof",
+      "PASS [gpu] M12D-P2S4 canonical natural terrain billboard binding",
+      "PASS [gpu] M12D-P2S5C production spherical billboard runtime",
+      "PASS [gpu] GPU physical-height preparation",
+      "PASS [gpu] M12D-P2A canonical hashed cell field proof",
+      "PASS [gpu] M12D-P2B multiscale natural terrain family proof",
+      "PASS [gpu] M12D-P2C1 prepared natural terrain",
+      "PASS [gpu] Displaced mesh and physical normals",
+      "Graphics Debug: selected=8; pass=8; fail=0; skip=0; excluded=83"
+    ]
+  },
+  {
+    "label": "focused-Debug-M12D-P2S5G",
+    "arguments": [
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Graphics.Tests.exe",
+      "--test=M12D-P2S5G"
+    ],
+    "exitCode": 0,
+    "stdoutUtf8Bytes": 1106,
+    "logSha256": "7691ad10447163723accae958985e1f99e11cacbd758d38590ded1a39410a9d5",
+    "validationMessages": [],
+    "summary": [
+      "Native identity: configuration=Debug; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Native.dll; sha256=88B761D0A53B4D8681CAB7FBD8CF1923BEFDD17E4AB2ADA8464ED69C21C1591D; source=E:\\NovaCore\\build\\native-ninja\\NovaCore.Native.dll",
+      "TES geographic specialization PASS: default=false; ordinary inverse absent; diagnostic inverse retained",
+      "M13.2 fragment specialization PASS: default=full; ordinary diagnostic read absent; five nonordinary inputs removed; full interface retained; SPIR-V valid",
+      "PASS [headless] M12D-P2S5G bounded spherical billboard surface interface",
+      "Graphics Debug: selected=1; pass=1; fail=0; skip=0; excluded=90"
+    ]
+  },
+  {
+    "label": "focused-Debug-Florida-facility-support",
+    "arguments": [
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Graphics.Tests.exe",
+      "--test=Florida facility support"
+    ],
+    "exitCode": 0,
+    "stdoutUtf8Bytes": 794,
+    "logSha256": "4379c37b3abb2eee59ef1562fdf9f93c9deb657cfdb37a7645436bfdcc51ddfd",
+    "validationMessages": [],
+    "summary": [
+      "Native identity: configuration=Debug; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Native.dll; sha256=88B761D0A53B4D8681CAB7FBD8CF1923BEFDD17E4AB2ADA8464ED69C21C1591D; source=E:\\NovaCore\\build\\native-ninja\\NovaCore.Native.dll",
+      "PASS [headless] Florida facility support",
+      "Graphics Debug: selected=1; pass=1; fail=0; skip=0; excluded=90"
+    ]
+  },
+  {
+    "label": "focused-Debug-Single-canonical-physical",
+    "arguments": [
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Graphics.Tests.exe",
+      "--test=Single canonical physical"
+    ],
+    "exitCode": 0,
+    "stdoutUtf8Bytes": 917,
+    "logSha256": "82712f1c5499d93f9311806f101a97f34b8def8ebb08b213f898a6d1dfac1f53",
+    "validationMessages": [],
+    "summary": [
+      "Native identity: configuration=Debug; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Native.dll; sha256=88B761D0A53B4D8681CAB7FBD8CF1923BEFDD17E4AB2ADA8464ED69C21C1591D; source=E:\\NovaCore\\build\\native-ninja\\NovaCore.Native.dll",
+      "PASS [headless] Single canonical physical surface authority",
+      "Graphics Debug: selected=1; pass=1; fail=0; skip=0; excluded=90"
+    ]
+  },
+  {
+    "label": "focused-Debug-Generation-4-physical-renderer",
+    "arguments": [
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Graphics.Tests.exe",
+      "--test=Generation-4 physical renderer"
+    ],
+    "exitCode": 0,
+    "stdoutUtf8Bytes": 874,
+    "logSha256": "cb26bfb908838e5c7a256f6d8ab7224c07c2a165bb1ff4d4f34df14cac793768",
+    "validationMessages": [],
+    "summary": [
+      "Native identity: configuration=Debug; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Native.dll; sha256=88B761D0A53B4D8681CAB7FBD8CF1923BEFDD17E4AB2ADA8464ED69C21C1591D; source=E:\\NovaCore\\build\\native-ninja\\NovaCore.Native.dll",
+      "PASS [headless] Generation-4 physical renderer integration",
+      "Graphics Debug: selected=1; pass=1; fail=0; skip=0; excluded=90"
+    ]
+  },
+  {
+    "label": "focused-Debug-Earth-route-convergence",
+    "arguments": [
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Graphics.Tests.exe",
+      "--test=Earth route convergence"
+    ],
+    "exitCode": 0,
+    "stdoutUtf8Bytes": 836,
+    "logSha256": "1664e0ac95df5b153b3d02a028e2ad5ac1d6f80e5e6b6c624c4222197c65fa6d",
+    "validationMessages": [],
+    "summary": [
+      "Native identity: configuration=Debug; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Native.dll; sha256=88B761D0A53B4D8681CAB7FBD8CF1923BEFDD17E4AB2ADA8464ED69C21C1591D; source=E:\\NovaCore\\build\\native-ninja\\NovaCore.Native.dll",
+      "PASS [headless] Earth route convergence",
+      "Graphics Debug: selected=1; pass=1; fail=0; skip=0; excluded=90"
+    ]
+  },
+  {
+    "label": "focused-Debug-Production-material-noise-value-preservation",
+    "arguments": [
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Graphics.Tests.exe",
+      "--test=Production material noise value preservation"
+    ],
+    "exitCode": 0,
+    "stdoutUtf8Bytes": 865,
+    "logSha256": "e37762f6ebf1ccc70d67bc8e269a161465bd9d1deb0e80d9dcb21b9f6f329c31",
+    "validationMessages": [],
+    "summary": [
+      "Native identity: configuration=Debug; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Native.dll; sha256=88B761D0A53B4D8681CAB7FBD8CF1923BEFDD17E4AB2ADA8464ED69C21C1591D; source=E:\\NovaCore\\build\\native-ninja\\NovaCore.Native.dll",
+      "PASS [headless] Production material noise value preservation",
+      "Graphics Debug: selected=1; pass=1; fail=0; skip=0; excluded=90"
+    ]
+  },
+  {
+    "label": "focused-Debug-Production-window-lifecycle",
+    "arguments": [
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Graphics.Tests.exe",
+      "--test=Production window lifecycle"
+    ],
+    "exitCode": 0,
+    "stdoutUtf8Bytes": 33082,
+    "logSha256": "2241f51a0bdcdf427fe185d9c90fcc25ee4f0ddf82e5bbced4cd1c527121037c",
+    "validationMessages": [
+      "[native] Vulkan validation [warning][WARNING-Shader-OutputNotConsumed]: vkCreateGraphicsPipelines(): pCreateInfos[0] (SPIR-V Interface) [VK_SHADER_STAGE_VERTEX_BIT] has an Output value declared at Location 11 Component 0, but there is no corresponding Input declared in [VK_SHADER_STAGE_FRAGMENT_BIT]."
+    ],
+    "summary": [
+      "Native identity: configuration=Debug; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Native.dll; sha256=88B761D0A53B4D8681CAB7FBD8CF1923BEFDD17E4AB2ADA8464ED69C21C1591D; source=E:\\NovaCore\\build\\native-ninja\\NovaCore.Native.dll",
+      "[native] NCSM1 fragment shading: ordinary specialization; startup=shared default",
+      "PASS [window] Production window lifecycle",
+      "Graphics Debug: selected=1; pass=1; fail=0; skip=0; excluded=90"
+    ]
+  },
+  {
+    "label": "regional-window-Debug",
+    "arguments": [
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Graphics.Tests.exe",
+      "--test=Live NCSM1 regional physical residency"
+    ],
+    "exitCode": 0,
+    "stdoutUtf8Bytes": 1515,
+    "logSha256": "e04b748b7e9be75ae34c9b5dae596fe7fa5ced53ed17f1a7698d366abf4af1c7",
+    "validationMessages": [],
+    "summary": [
+      "Native identity: configuration=Debug; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Native.dll; sha256=88B761D0A53B4D8681CAB7FBD8CF1923BEFDD17E4AB2ADA8464ED69C21C1591D; source=E:\\NovaCore\\build\\native-ninja\\NovaCore.Native.dll",
+      "PASS [window] Live NCSM1 regional physical residency",
+      "Graphics Debug: selected=1; pass=1; fail=0; skip=0; excluded=90"
+    ]
+  },
+  {
+    "label": "native-gpu-Debug",
+    "arguments": [
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Graphics.Tests.exe",
+      "--native-gpu"
+    ],
+    "exitCode": 0,
+    "stdoutUtf8Bytes": 12144,
+    "logSha256": "3b944a568c3c827092949f79c9888d15dc46562f01f18bbdd48311941cb52cd2",
+    "validationMessages": [],
+    "summary": [
+      "PASS [native-gpu] NovaCoreFacilityVisibilityTests",
+      "PASS [native-gpu] NovaCoreSurfaceMaterialCoordinatesTests",
+      "Native GPU Debug: pass=2; fail=0; skip=0"
+    ]
+  },
+  {
+    "label": "graphics-Release-gpu",
+    "arguments": [
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.exe",
+      "--category=gpu"
+    ],
+    "exitCode": 0,
+    "stdoutUtf8Bytes": 20880,
+    "logSha256": "0fcd1b4fa3793e00ce7c4917537c03e9afe2564c294cf211412c37d42bfe8920",
+    "validationMessages": [],
+    "summary": [
+      "Native identity: configuration=Release; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Native.dll; sha256=E5C106C3F822F8B9F666A0161694D8BE53E46E53803E6FD1660123C43F5F60B8; source=E:\\NovaCore\\build\\native-ninja-release\\NovaCore.Native.dll",
+      "PASS [gpu] M12D-P2S3 spherical billboard GPU runtime proof",
+      "PASS [gpu] M12D-P2S4 canonical natural terrain billboard binding",
+      "PASS [gpu] M12D-P2S5C production spherical billboard runtime",
+      "PASS [gpu] GPU physical-height preparation",
+      "PASS [gpu] M12D-P2A canonical hashed cell field proof",
+      "PASS [gpu] M12D-P2B multiscale natural terrain family proof",
+      "PASS [gpu] M12D-P2C1 prepared natural terrain",
+      "PASS [gpu] Displaced mesh and physical normals",
+      "Graphics Release: selected=8; pass=8; fail=0; skip=0; excluded=83"
+    ]
+  },
+  {
+    "label": "focused-Release-M12D-P2S5G",
+    "arguments": [
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.exe",
+      "--test=M12D-P2S5G"
+    ],
+    "exitCode": 0,
+    "stdoutUtf8Bytes": 1120,
+    "logSha256": "391afa6c2214de6859a105a7ac8a6b0e909c2989e046f333b1f51c3755d1042d",
+    "validationMessages": [],
+    "summary": [
+      "Native identity: configuration=Release; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Native.dll; sha256=E5C106C3F822F8B9F666A0161694D8BE53E46E53803E6FD1660123C43F5F60B8; source=E:\\NovaCore\\build\\native-ninja-release\\NovaCore.Native.dll",
+      "TES geographic specialization PASS: default=false; ordinary inverse absent; diagnostic inverse retained",
+      "M13.2 fragment specialization PASS: default=full; ordinary diagnostic read absent; five nonordinary inputs removed; full interface retained; SPIR-V valid",
+      "PASS [headless] M12D-P2S5G bounded spherical billboard surface interface",
+      "Graphics Release: selected=1; pass=1; fail=0; skip=0; excluded=90"
+    ]
+  },
+  {
+    "label": "focused-Release-Florida-facility-support",
+    "arguments": [
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.exe",
+      "--test=Florida facility support"
+    ],
+    "exitCode": 0,
+    "stdoutUtf8Bytes": 807,
+    "logSha256": "6620649183bff0324af8e0f13acfcf37d2586884008ce524812920646f7dc7e2",
+    "validationMessages": [],
+    "summary": [
+      "Native identity: configuration=Release; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Native.dll; sha256=E5C106C3F822F8B9F666A0161694D8BE53E46E53803E6FD1660123C43F5F60B8; source=E:\\NovaCore\\build\\native-ninja-release\\NovaCore.Native.dll",
+      "PASS [headless] Florida facility support",
+      "Graphics Release: selected=1; pass=1; fail=0; skip=0; excluded=90"
+    ]
+  },
+  {
+    "label": "focused-Release-Single-canonical-physical",
+    "arguments": [
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.exe",
+      "--test=Single canonical physical"
+    ],
+    "exitCode": 0,
+    "stdoutUtf8Bytes": 931,
+    "logSha256": "606ebb3d638093a0c4e39aa6759a5972dfc83b8e27e11663756c1385146b4f62",
+    "validationMessages": [],
+    "summary": [
+      "Native identity: configuration=Release; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Native.dll; sha256=E5C106C3F822F8B9F666A0161694D8BE53E46E53803E6FD1660123C43F5F60B8; source=E:\\NovaCore\\build\\native-ninja-release\\NovaCore.Native.dll",
+      "PASS [headless] Single canonical physical surface authority",
+      "Graphics Release: selected=1; pass=1; fail=0; skip=0; excluded=90"
+    ]
+  },
+  {
+    "label": "focused-Release-Generation-4-physical-renderer",
+    "arguments": [
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.exe",
+      "--test=Generation-4 physical renderer"
+    ],
+    "exitCode": 0,
+    "stdoutUtf8Bytes": 888,
+    "logSha256": "a2aa7b9e908b0c4d427add94c06eca659081795c51ad4bb24f776683dbdf0a6f",
+    "validationMessages": [],
+    "summary": [
+      "Native identity: configuration=Release; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Native.dll; sha256=E5C106C3F822F8B9F666A0161694D8BE53E46E53803E6FD1660123C43F5F60B8; source=E:\\NovaCore\\build\\native-ninja-release\\NovaCore.Native.dll",
+      "PASS [headless] Generation-4 physical renderer integration",
+      "Graphics Release: selected=1; pass=1; fail=0; skip=0; excluded=90"
+    ]
+  },
+  {
+    "label": "focused-Release-Earth-route-convergence",
+    "arguments": [
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.exe",
+      "--test=Earth route convergence"
+    ],
+    "exitCode": 0,
+    "stdoutUtf8Bytes": 850,
+    "logSha256": "6523eb55afd72d901f561ccf9b76171b5df0cd10c3ffbd1bc2ff3ba20169d1b0",
+    "validationMessages": [],
+    "summary": [
+      "Native identity: configuration=Release; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Native.dll; sha256=E5C106C3F822F8B9F666A0161694D8BE53E46E53803E6FD1660123C43F5F60B8; source=E:\\NovaCore\\build\\native-ninja-release\\NovaCore.Native.dll",
+      "PASS [headless] Earth route convergence",
+      "Graphics Release: selected=1; pass=1; fail=0; skip=0; excluded=90"
+    ]
+  },
+  {
+    "label": "focused-Release-Production-material-noise-value-preservation",
+    "arguments": [
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.exe",
+      "--test=Production material noise value preservation"
+    ],
+    "exitCode": 0,
+    "stdoutUtf8Bytes": 879,
+    "logSha256": "7e4145e88618db70247df70f452f53ecb548dc6e49f04655555444a1804c7066",
+    "validationMessages": [],
+    "summary": [
+      "Native identity: configuration=Release; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Native.dll; sha256=E5C106C3F822F8B9F666A0161694D8BE53E46E53803E6FD1660123C43F5F60B8; source=E:\\NovaCore\\build\\native-ninja-release\\NovaCore.Native.dll",
+      "PASS [headless] Production material noise value preservation",
+      "Graphics Release: selected=1; pass=1; fail=0; skip=0; excluded=90"
+    ]
+  },
+  {
+    "label": "focused-Release-Production-window-lifecycle",
+    "arguments": [
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.exe",
+      "--test=Production window lifecycle"
+    ],
+    "exitCode": 0,
+    "stdoutUtf8Bytes": 32867,
+    "logSha256": "7a553ab95953f41436aa79a64886d8fe7d895427d927b5d1b701e1e5a7b994f4",
+    "validationMessages": [
+      "[native] Vulkan validation [warning][WARNING-Shader-OutputNotConsumed]: vkCreateGraphicsPipelines(): pCreateInfos[0] (SPIR-V Interface) [VK_SHADER_STAGE_VERTEX_BIT] has an Output value declared at Location 11 Component 0, but there is no corresponding Input declared in [VK_SHADER_STAGE_FRAGMENT_BIT]."
+    ],
+    "summary": [
+      "Native identity: configuration=Release; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Native.dll; sha256=E5C106C3F822F8B9F666A0161694D8BE53E46E53803E6FD1660123C43F5F60B8; source=E:\\NovaCore\\build\\native-ninja-release\\NovaCore.Native.dll",
+      "[native] NCSM1 fragment shading: ordinary specialization; startup=shared default",
+      "PASS [window] Production window lifecycle",
+      "Graphics Release: selected=1; pass=1; fail=0; skip=0; excluded=90"
+    ]
+  },
+  {
+    "label": "regional-window-Release",
+    "arguments": [
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.exe",
+      "--test=Live NCSM1 regional physical residency"
+    ],
+    "exitCode": 0,
+    "stdoutUtf8Bytes": 1530,
+    "logSha256": "b237a202dad635170deb5504cada52863c8b8830fae0be0a1460aee57a12515e",
+    "validationMessages": [],
+    "summary": [
+      "Native identity: configuration=Release; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Native.dll; sha256=E5C106C3F822F8B9F666A0161694D8BE53E46E53803E6FD1660123C43F5F60B8; source=E:\\NovaCore\\build\\native-ninja-release\\NovaCore.Native.dll",
+      "PASS [window] Live NCSM1 regional physical residency",
+      "Graphics Release: selected=1; pass=1; fail=0; skip=0; excluded=90"
+    ]
+  },
+  {
+    "label": "native-gpu-Release",
+    "arguments": [
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.exe",
+      "--native-gpu"
+    ],
+    "exitCode": 0,
+    "stdoutUtf8Bytes": 12146,
+    "logSha256": "54adfc839444848ea3edc23b45f0b812a744d887ec054149693e38aa85b43876",
+    "validationMessages": [],
+    "summary": [
+      "PASS [native-gpu] NovaCoreFacilityVisibilityTests",
+      "PASS [native-gpu] NovaCoreSurfaceMaterialCoordinatesTests",
+      "Native GPU Release: pass=2; fail=0; skip=0"
+    ]
+  },
+  {
+    "label": "launcher-Release",
+    "arguments": [
+      "E:\\NovaCore\\tests\\NovaCore.Launcher.Tests\\bin\\Release\\net10.0-windows\\NovaCore.Launcher.Tests.exe"
+    ],
+    "exitCode": 0,
+    "stdoutUtf8Bytes": 530,
+    "logSha256": "4142420cd4169a6d4847213a549a73ede208d9663c6f83071ad04ee96a54223c",
+    "validationMessages": [],
+    "summary": [
+      "PASS default selection",
+      "PASS scenario catalog",
+      "PASS Earth fullscreen native preset",
+      "PASS M12D spherical billboard GPU proof preset",
+      "PASS new Earth renderer preset",
+      "PASS Earth fullscreen Solar camera path",
+      "PASS structured launch environment",
+      "PASS launcher build configuration",
+      "PASS Earth orbital arguments",
+      "PASS invariant altitude formatting",
+      "PASS subdivision diagnostic mapping",
+      "PASS Florida launch mapping",
+      "PASS invalid configuration rejection",
+      "PASS diagnostics arguments",
+      "PASS existing production scenarios",
+      "NovaCore launcher tests passed: 15"
+    ]
+  },
+  {
+    "label": "asset-earth-surface-v5",
+    "arguments": [
+      "E:\\NovaCore\\tools\\NovaCore.AssetTool\\bin\\Release\\net10.0\\NovaCore.AssetTool.exe",
+      "verify",
+      "earth-surface-v5"
+    ],
+    "exitCode": 0,
+    "stdoutUtf8Bytes": 374,
+    "logSha256": "458279d3eaaf3686928d3f949bd2cd7ea441d98dc417e6f32163acf037af8d68",
+    "validationMessages": [],
+    "summary": [
+      "Asset: earth-surface-v5",
+      "Version: terrain-v5; NCCUBE1",
+      "Cache: E:\\NovaCore\\.novacore\\cache\\terrain\\v1",
+      "Path: E:\\NovaCore\\.novacore\\cache\\terrain\\v1\\sha256\\38\\38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae.nccube",
+      "Status: Valid",
+      "Bytes: 61484224/61484224",
+      "SHA-256: 38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae"
+    ]
+  },
+  {
+    "label": "asset-earth-florida-m12",
+    "arguments": [
+      "E:\\NovaCore\\tools\\NovaCore.AssetTool\\bin\\Release\\net10.0\\NovaCore.AssetTool.exe",
+      "verify",
+      "earth-florida-m12"
+    ],
+    "exitCode": 0,
+    "stdoutUtf8Bytes": 377,
+    "logSha256": "0e85399513500a393285c2bdffca0ddaafdcceb9d1afc255ecb3fa370465330c",
+    "validationMessages": [],
+    "summary": [
+      "Asset: earth-florida-m12",
+      "Version: terrain-v5; NCCUBE3",
+      "Cache: E:\\NovaCore\\.novacore\\cache\\terrain\\v1",
+      "Path: E:\\NovaCore\\.novacore\\cache\\terrain\\v1\\sha256\\c4\\c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe.nccube",
+      "Status: Valid",
+      "Bytes: 210307596/210307596",
+      "SHA-256: c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe"
+    ]
+  },
+  {
+    "label": "route-probe-build",
+    "arguments": [
+      "dotnet",
+      "build",
+      "E:\\NovaCore\\build\\m13.2-terrain-shading\\route\\route.csproj",
+      "-c",
+      "Release",
+      "-v",
+      "quiet"
+    ],
+    "exitCode": 0,
+    "stdoutUtf8Bytes": 76,
+    "logSha256": "83681687793acd582371ad686acdbd7ee43c7c01a12991e07a5833d7e5a332b9",
+    "validationMessages": [],
+    "summary": [
+      "Build succeeded.",
+      "    0 Warning(s)",
+      "    0 Error(s)"
+    ]
+  },
+  {
+    "label": "six-routes-Florida-smoke",
+    "arguments": [
+      "E:\\NovaCore\\build\\m13.2-terrain-shading\\route\\bin\\Release\\net10.0-windows\\route.exe",
+      "--smoke"
+    ],
+    "exitCode": 0,
+    "stdoutUtf8Bytes": 236,
+    "logSha256": "e6ba9579f9fae14eab5aaf5799b461d370fd26098edfac7b395e50f183a117d5",
+    "validationMessages": [],
+    "summary": [
+      "Launcher route probe PASS: six supported presets, current Release executable; exact Florida arguments"
+    ]
+  },
+  {
+    "label": "full-orbital-surface-transitions",
+    "arguments": [
+      "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Triangle.exe",
+      "--scene=sol",
+      "--focus=earth",
+      "--physical-surface=m12d-natural-candidate",
+      "--solar-epoch=j2000",
+      "--p2s5c3-traversal",
+      "--benchmark-frames=10000",
+      "--log=startup,validation,vulkan"
+    ],
+    "exitCode": 0,
+    "stdoutUtf8Bytes": 438688,
+    "logSha256": "ab8fa8a9a25741122e00f2f80a2b96ec85c1a8e9914ff9b78263e62b2266a917",
+    "validationMessages": [
+      "[native] Vulkan validation [warning][WARNING-Shader-OutputNotConsumed]: vkCreateGraphicsPipelines(): pCreateInfos[0] (SPIR-V Interface) [VK_SHADER_STAGE_VERTEX_BIT] has an Output value declared at Location 11 Component 0, but there is no corresponding Input declared in [VK_SHADER_STAGE_FRAGMENT_BIT]."
+    ],
+    "summary": [
+      "[native] NCSM1 fragment shading: ordinary specialization; startup=shared default",
+      "[native] NCSM1 regional ready: incoming=1; pupil=1; dependencyDelayMs=208.035; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=1; level=0; topologyFamily=1; hash=0x118D7D350CB66136; topologyResident=true; topologyReused=0; topologyUploads=1; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=27648; postHorizonTriangles=15376; horizonRejected=12272; postScreenConeTriangles=15376; screenConeRejected=0; compactedIndices=46128; visibleTriangles=15376; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=1; deferredRetirements=0",
+      "[native] NCSM1 regional ready: incoming=0; pupil=1; dependencyDelayMs=23.621; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "P2S5C3 phase: completed=deep-orbit; next=Descent",
+      "[native] NCSM1 regional ready: incoming=1; pupil=2; dependencyDelayMs=5.302; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=2; level=1; topologyFamily=1; hash=0xCF2AF9997149E418; topologyResident=true; topologyReused=0; topologyUploads=2; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=37408; postHorizonTriangles=21420; horizonRejected=15988; postScreenConeTriangles=21420; screenConeRejected=0; compactedIndices=64260; visibleTriangles=21420; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=2; deferredRetirements=1",
+      "[native] NCSM1 regional ready: incoming=0; pupil=2; dependencyDelayMs=5.335; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=3; dependencyDelayMs=5.776; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=3; level=2; topologyFamily=1; hash=0xF2F37B98BDE248B3; topologyResident=true; topologyReused=0; topologyUploads=3; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=59248; postHorizonTriangles=41224; horizonRejected=18024; postScreenConeTriangles=38064; screenConeRejected=3160; compactedIndices=114192; visibleTriangles=38064; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=3; deferredRetirements=2",
+      "[native] NCSM1 regional ready: incoming=0; pupil=3; dependencyDelayMs=6.253; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=4; dependencyDelayMs=12.817; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=4; level=3; topologyFamily=1; hash=0xDCF463780EF4E7C1; topologyResident=true; topologyReused=0; topologyUploads=4; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=108208; postHorizonTriangles=87496; horizonRejected=20712; postScreenConeTriangles=50869; screenConeRejected=36627; compactedIndices=152607; visibleTriangles=50869; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=4; deferredRetirements=3",
+      "[native] NCSM1 regional ready: incoming=0; pupil=4; dependencyDelayMs=13.747; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=5; dependencyDelayMs=27.263; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=5; level=4; topologyFamily=1; hash=0x626F04C2587A9589; topologyResident=true; topologyReused=0; topologyUploads=5; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=207024; postHorizonTriangles=182178; horizonRejected=24846; postScreenConeTriangles=64698; screenConeRejected=117480; compactedIndices=194094; visibleTriangles=64698; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=5; deferredRetirements=4",
+      "[native] NCSM1 regional ready: incoming=0; pupil=5; dependencyDelayMs=30.890; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=6; dependencyDelayMs=27.783; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=6; level=5; topologyFamily=1; hash=0x92538E1161BE12BB; topologyResident=true; topologyReused=0; topologyUploads=6; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=305840; postHorizonTriangles=269687; horizonRejected=36153; postScreenConeTriangles=0; screenConeRejected=269687; compactedIndices=0; visibleTriangles=0; zeroVisible=1; noOpIndirect=1; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=6; deferredRetirements=5",
+      "[native] NCSM1 regional ready: incoming=0; pupil=6; dependencyDelayMs=36.037; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=7; dependencyDelayMs=42.133; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=7; level=6; topologyFamily=1; hash=0x87A3877A754ED82E; topologyResident=true; topologyReused=0; topologyUploads=7; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=404656; postHorizonTriangles=342207; horizonRejected=62449; postScreenConeTriangles=0; screenConeRejected=342207; compactedIndices=0; visibleTriangles=0; zeroVisible=1; noOpIndirect=1; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=7; deferredRetirements=6",
+      "[native] NCSM1 regional ready: incoming=0; pupil=7; dependencyDelayMs=52.191; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=8; dependencyDelayMs=55.552; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=8; level=7; topologyFamily=1; hash=0x34679CE6A107E3CF; topologyResident=true; topologyReused=0; topologyUploads=8; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=503472; postHorizonTriangles=399006; horizonRejected=104466; postScreenConeTriangles=0; screenConeRejected=399006; compactedIndices=0; visibleTriangles=0; zeroVisible=1; noOpIndirect=1; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=8; deferredRetirements=7",
+      "[native] NCSM1 regional ready: incoming=0; pupil=8; dependencyDelayMs=59.719; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=9; dependencyDelayMs=64.279; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=9; level=8; topologyFamily=1; hash=0xA707B386EC02AB80; topologyResident=true; topologyReused=0; topologyUploads=9; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=602288; postHorizonTriangles=466262; horizonRejected=136026; postScreenConeTriangles=14553; screenConeRejected=451709; compactedIndices=43659; visibleTriangles=14553; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=9; deferredRetirements=8",
+      "[native] NCSM1 regional ready: incoming=0; pupil=9; dependencyDelayMs=72.264; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=10; dependencyDelayMs=70.998; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=10; level=9; topologyFamily=1; hash=0x8F6B13684734EB1E; topologyResident=true; topologyReused=0; topologyUploads=10; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=701104; postHorizonTriangles=533171; horizonRejected=167933; postScreenConeTriangles=5830; screenConeRejected=527341; compactedIndices=17490; visibleTriangles=5830; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=10; deferredRetirements=9",
+      "[native] NCSM1 regional ready: incoming=0; pupil=10; dependencyDelayMs=85.243; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=11; dependencyDelayMs=89.712; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=11; level=10; topologyFamily=1; hash=0x94FC3260597D77E0; topologyResident=true; topologyReused=0; topologyUploads=11; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=799920; postHorizonTriangles=607921; horizonRejected=191999; postScreenConeTriangles=2094; screenConeRejected=605827; compactedIndices=6282; visibleTriangles=2094; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=11; deferredRetirements=10",
+      "[native] NCSM1 regional ready: incoming=0; pupil=11; dependencyDelayMs=106.292; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=12; dependencyDelayMs=105.034; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=12; level=11; topologyFamily=1; hash=0x29745C559AE6222F; topologyResident=true; topologyReused=0; topologyUploads=12; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=898736; postHorizonTriangles=683950; horizonRejected=214786; postScreenConeTriangles=39; screenConeRejected=683911; compactedIndices=117; visibleTriangles=39; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=12; deferredRetirements=11",
+      "[native] NCSM1 regional ready: incoming=0; pupil=12; dependencyDelayMs=111.942; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=13; dependencyDelayMs=115.968; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=13; level=12; topologyFamily=1; hash=0xE79EBA567AF0F876; topologyResident=true; topologyReused=0; topologyUploads=13; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=997552; postHorizonTriangles=770440; horizonRejected=227112; postScreenConeTriangles=0; screenConeRejected=770440; compactedIndices=0; visibleTriangles=0; zeroVisible=1; noOpIndirect=1; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=13; deferredRetirements=12",
+      "[native] NCSM1 regional ready: incoming=0; pupil=13; dependencyDelayMs=134.159; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=14; dependencyDelayMs=131.626; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=14; level=13; topologyFamily=1; hash=0x72F194C57A876360; topologyResident=true; topologyReused=0; topologyUploads=14; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1096368; postHorizonTriangles=862750; horizonRejected=233618; postScreenConeTriangles=0; screenConeRejected=862750; compactedIndices=0; visibleTriangles=0; zeroVisible=1; noOpIndirect=1; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=14; deferredRetirements=13",
+      "[native] NCSM1 regional ready: incoming=0; pupil=14; dependencyDelayMs=146.896; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=15; dependencyDelayMs=150.378; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=15; level=14; topologyFamily=1; hash=0x8999DD8A034A9AB1; topologyResident=true; topologyReused=0; topologyUploads=15; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1195184; postHorizonTriangles=957400; horizonRejected=237784; postScreenConeTriangles=0; screenConeRejected=957400; compactedIndices=0; visibleTriangles=0; zeroVisible=1; noOpIndirect=1; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=15; deferredRetirements=14",
+      "[native] NCSM1 regional ready: incoming=0; pupil=15; dependencyDelayMs=171.282; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=16; dependencyDelayMs=168.142; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=16; level=15; topologyFamily=1; hash=0x967DCF11C4ABC256; topologyResident=true; topologyReused=0; topologyUploads=16; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1294000; postHorizonTriangles=1056216; horizonRejected=237784; postScreenConeTriangles=0; screenConeRejected=1056216; compactedIndices=0; visibleTriangles=0; zeroVisible=1; noOpIndirect=1; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=16; deferredRetirements=15",
+      "[native] NCSM1 regional ready: incoming=0; pupil=16; dependencyDelayMs=180.569; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=17; dependencyDelayMs=185.033; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=17; level=16; topologyFamily=1; hash=0x32840D29EDE00769; topologyResident=true; topologyReused=0; topologyUploads=17; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1392816; postHorizonTriangles=1153056; horizonRejected=239760; postScreenConeTriangles=0; screenConeRejected=1153056; compactedIndices=0; visibleTriangles=0; zeroVisible=1; noOpIndirect=1; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=17; deferredRetirements=16",
+      "[native] NCSM1 regional ready: incoming=0; pupil=17; dependencyDelayMs=207.547; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=18; dependencyDelayMs=196.630; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=18; level=17; topologyFamily=1; hash=0xBCE444AFFB2D713B; topologyResident=true; topologyReused=0; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1424208; postHorizonTriangles=1184448; horizonRejected=239760; postScreenConeTriangles=0; screenConeRejected=1184448; compactedIndices=0; visibleTriangles=0; zeroVisible=1; noOpIndirect=1; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=18; deferredRetirements=17",
+      "P2S5C3 phase: completed=all-level continuous descent; next=HorizonRotation",
+      "[native] NCSM1 regional ready: incoming=0; pupil=18; dependencyDelayMs=183.612; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "P2S5C3 phase: completed=10m-horizon-rotation; next=FinestSnaps",
+      "P2S5C3 phase: completed=sustained-L17-snaps; next=ScaleOut",
+      "[native] NCSM1 regional ready: incoming=1; pupil=29; dependencyDelayMs=201.011; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=19; level=16; topologyFamily=1; hash=0x32840D29EDE00769; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1392816; postHorizonTriangles=1159198; horizonRejected=233618; postScreenConeTriangles=0; screenConeRejected=1159198; compactedIndices=0; visibleTriangles=0; zeroVisible=1; noOpIndirect=1; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=19; deferredRetirements=18",
+      "P2S5C3 phase: completed=scale-reversal-1-out; next=ScaleIn",
+      "[native] NCSM1 regional ready: incoming=0; pupil=29; dependencyDelayMs=196.101; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=30; dependencyDelayMs=194.851; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=20; level=17; topologyFamily=1; hash=0xBCE444AFFB2D713B; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1424208; postHorizonTriangles=1184155; horizonRejected=240053; postScreenConeTriangles=0; screenConeRejected=1184155; compactedIndices=0; visibleTriangles=0; zeroVisible=1; noOpIndirect=1; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=20; deferredRetirements=19",
+      "P2S5C3 phase: completed=scale-reversal-1-in; next=ScaleOut",
+      "[native] NCSM1 regional ready: incoming=0; pupil=30; dependencyDelayMs=194.578; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=31; dependencyDelayMs=193.369; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=21; level=16; topologyFamily=1; hash=0x32840D29EDE00769; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1392816; postHorizonTriangles=1159198; horizonRejected=233618; postScreenConeTriangles=0; screenConeRejected=1159198; compactedIndices=0; visibleTriangles=0; zeroVisible=1; noOpIndirect=1; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=21; deferredRetirements=20",
+      "P2S5C3 phase: completed=scale-reversal-2-out; next=ScaleIn",
+      "[native] NCSM1 regional ready: incoming=0; pupil=31; dependencyDelayMs=195.806; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=32; dependencyDelayMs=195.478; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=22; level=17; topologyFamily=1; hash=0xBCE444AFFB2D713B; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1424208; postHorizonTriangles=1184155; horizonRejected=240053; postScreenConeTriangles=0; screenConeRejected=1184155; compactedIndices=0; visibleTriangles=0; zeroVisible=1; noOpIndirect=1; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=22; deferredRetirements=21",
+      "P2S5C3 phase: completed=scale-reversal-2-in; next=ScaleOut",
+      "[native] NCSM1 regional ready: incoming=0; pupil=32; dependencyDelayMs=195.519; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=33; dependencyDelayMs=194.138; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=23; level=16; topologyFamily=1; hash=0x32840D29EDE00769; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1392816; postHorizonTriangles=1159198; horizonRejected=233618; postScreenConeTriangles=0; screenConeRejected=1159198; compactedIndices=0; visibleTriangles=0; zeroVisible=1; noOpIndirect=1; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=23; deferredRetirements=22",
+      "P2S5C3 phase: completed=scale-reversal-3-out; next=ScaleIn",
+      "[native] NCSM1 regional ready: incoming=0; pupil=33; dependencyDelayMs=197.036; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=34; dependencyDelayMs=195.964; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=24; level=17; topologyFamily=1; hash=0xBCE444AFFB2D713B; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1424208; postHorizonTriangles=1184155; horizonRejected=240053; postScreenConeTriangles=0; screenConeRejected=1184155; compactedIndices=0; visibleTriangles=0; zeroVisible=1; noOpIndirect=1; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=24; deferredRetirements=23",
+      "P2S5C3 phase: completed=scale-reversals-complete; next=AnchoredWarpUp",
+      "P2S5C3 phase: completed=anchored-warp-maximum; next=AnchoredWarpHold",
+      "[native] NCSM1 regional ready: incoming=0; pupil=34; dependencyDelayMs=175.292; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "P2S5C3 phase: completed=anchored-warp-hold; next=AnchoredWarpDown",
+      "P2S5C3 phase: completed=anchored-warp-complete; next=UnanchoredWarpUp",
+      "P2S5C3 phase: completed=unanchored-warp-maximum; next=UnanchoredWarpHold",
+      "P2S5C3 phase: completed=unanchored-warp-hold; next=UnanchoredWarpDown",
+      "P2S5C3 phase: completed=unanchored-warp-complete; next=Retreat",
+      "[native] NCSM1 regional ready: incoming=0; pupil=76; dependencyDelayMs=212.980; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=77; dependencyDelayMs=211.822; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=25; level=16; topologyFamily=1; hash=0x32840D29EDE00769; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1392816; postHorizonTriangles=1165703; horizonRejected=227113; postScreenConeTriangles=0; screenConeRejected=1165703; compactedIndices=0; visibleTriangles=0; zeroVisible=1; noOpIndirect=1; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=25; deferredRetirements=24",
+      "[native] NCSM1 regional ready: incoming=0; pupil=77; dependencyDelayMs=199.187; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=78; dependencyDelayMs=182.931; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=26; level=15; topologyFamily=1; hash=0x967DCF11C4ABC256; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1294000; postHorizonTriangles=1079209; horizonRejected=214791; postScreenConeTriangles=8; screenConeRejected=1079201; compactedIndices=24; visibleTriangles=8; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=26; deferredRetirements=25",
+      "[native] NCSM1 regional ready: incoming=0; pupil=78; dependencyDelayMs=180.308; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=79; dependencyDelayMs=171.249; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=27; level=14; topologyFamily=1; hash=0x8999DD8A034A9AB1; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1195184; postHorizonTriangles=1003184; horizonRejected=192000; postScreenConeTriangles=2252; screenConeRejected=1000932; compactedIndices=6756; visibleTriangles=2252; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=27; deferredRetirements=26",
+      "[native] NCSM1 regional ready: incoming=0; pupil=79; dependencyDelayMs=163.968; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=80; dependencyDelayMs=148.682; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=28; level=13; topologyFamily=1; hash=0x72F194C57A876360; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1096368; postHorizonTriangles=928433; horizonRejected=167935; postScreenConeTriangles=7384; screenConeRejected=921049; compactedIndices=22152; visibleTriangles=7384; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=28; deferredRetirements=27",
+      "[native] NCSM1 regional ready: incoming=0; pupil=80; dependencyDelayMs=144.803; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=81; dependencyDelayMs=136.379; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=29; level=12; topologyFamily=1; hash=0xE79EBA567AF0F876; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=997552; postHorizonTriangles=854284; horizonRejected=143268; postScreenConeTriangles=13975; screenConeRejected=840309; compactedIndices=41925; visibleTriangles=13975; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=29; deferredRetirements=28",
+      "[native] NCSM1 regional ready: incoming=0; pupil=81; dependencyDelayMs=130.186; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=82; dependencyDelayMs=116.022; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=30; level=11; topologyFamily=1; hash=0x29745C559AE6222F; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=898736; postHorizonTriangles=794234; horizonRejected=104502; postScreenConeTriangles=0; screenConeRejected=794234; compactedIndices=0; visibleTriangles=0; zeroVisible=1; noOpIndirect=1; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=30; deferredRetirements=29",
+      "[native] NCSM1 regional ready: incoming=0; pupil=82; dependencyDelayMs=112.499; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=83; dependencyDelayMs=104.258; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=31; level=10; topologyFamily=1; hash=0x94FC3260597D77E0; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=799920; postHorizonTriangles=737570; horizonRejected=62350; postScreenConeTriangles=0; screenConeRejected=737570; compactedIndices=0; visibleTriangles=0; zeroVisible=1; noOpIndirect=1; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=31; deferredRetirements=30",
+      "[native] NCSM1 regional ready: incoming=0; pupil=83; dependencyDelayMs=98.271; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=84; dependencyDelayMs=85.250; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=32; level=9; topologyFamily=1; hash=0x8F6B13684734EB1E; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=701104; postHorizonTriangles=664950; horizonRejected=36154; postScreenConeTriangles=0; screenConeRejected=664950; compactedIndices=0; visibleTriangles=0; zeroVisible=1; noOpIndirect=1; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=32; deferredRetirements=31",
+      "[native] NCSM1 regional ready: incoming=0; pupil=84; dependencyDelayMs=125.701; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=85; dependencyDelayMs=117.901; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=33; level=8; topologyFamily=1; hash=0xA707B386EC02AB80; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=602288; postHorizonTriangles=577443; horizonRejected=24845; postScreenConeTriangles=448118; screenConeRejected=129325; compactedIndices=1344354; visibleTriangles=448118; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=33; deferredRetirements=32",
+      "[native] NCSM1 regional ready: incoming=0; pupil=85; dependencyDelayMs=109.654; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=86; dependencyDelayMs=89.263; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=34; level=7; topologyFamily=1; hash=0x34679CE6A107E3CF; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=503472; postHorizonTriangles=482760; horizonRejected=20712; postScreenConeTriangles=432169; screenConeRejected=50591; compactedIndices=1296507; visibleTriangles=432169; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=34; deferredRetirements=33",
+      "[native] NCSM1 regional ready: incoming=0; pupil=86; dependencyDelayMs=80.742; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=87; dependencyDelayMs=69.831; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=35; level=6; topologyFamily=1; hash=0x87A3877A754ED82E; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=404656; postHorizonTriangles=386642; horizonRejected=18014; postScreenConeTriangles=380694; screenConeRejected=5948; compactedIndices=1142082; visibleTriangles=380694; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=35; deferredRetirements=34",
+      "[native] NCSM1 regional ready: incoming=0; pupil=87; dependencyDelayMs=62.722; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=88; dependencyDelayMs=46.257; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=36; level=5; topologyFamily=1; hash=0x92538E1161BE12BB; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=305840; postHorizonTriangles=289857; horizonRejected=15983; postScreenConeTriangles=289857; screenConeRejected=0; compactedIndices=869571; visibleTriangles=289857; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=36; deferredRetirements=35",
+      "[native] NCSM1 regional ready: incoming=0; pupil=88; dependencyDelayMs=39.625; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=89; dependencyDelayMs=30.974; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=37; level=4; topologyFamily=1; hash=0x626F04C2587A9589; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=207024; postHorizonTriangles=192569; horizonRejected=14455; postScreenConeTriangles=192569; screenConeRejected=0; compactedIndices=577707; visibleTriangles=192569; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=37; deferredRetirements=36",
+      "[native] NCSM1 regional ready: incoming=0; pupil=89; dependencyDelayMs=27.021; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=90; dependencyDelayMs=13.557; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=38; level=3; topologyFamily=1; hash=0xDCF463780EF4E7C1; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=108208; postHorizonTriangles=94777; horizonRejected=13431; postScreenConeTriangles=94777; screenConeRejected=0; compactedIndices=284331; visibleTriangles=94777; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=38; deferredRetirements=37",
+      "[native] NCSM1 regional ready: incoming=0; pupil=90; dependencyDelayMs=11.165; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=91; dependencyDelayMs=5.460; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=39; level=2; topologyFamily=1; hash=0xF2F37B98BDE248B3; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=59248; postHorizonTriangles=46576; horizonRejected=12672; postScreenConeTriangles=46576; screenConeRejected=0; compactedIndices=139728; visibleTriangles=46576; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=39; deferredRetirements=38",
+      "[native] NCSM1 regional ready: incoming=0; pupil=91; dependencyDelayMs=5.013; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=92; dependencyDelayMs=4.430; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=40; level=1; topologyFamily=1; hash=0xCF2AF9997149E418; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=37408; postHorizonTriangles=25137; horizonRejected=12271; postScreenConeTriangles=25137; screenConeRejected=0; compactedIndices=75411; visibleTriangles=25137; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=40; deferredRetirements=39",
+      "[native] NCSM1 regional ready: incoming=0; pupil=92; dependencyDelayMs=4.237; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=93; dependencyDelayMs=4.167; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=41; level=0; topologyFamily=1; hash=0x118D7D350CB66136; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=27648; postHorizonTriangles=15820; horizonRejected=11828; postScreenConeTriangles=15820; screenConeRejected=0; compactedIndices=47460; visibleTriangles=15820; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=41; deferredRetirements=40",
+      "[native] NCSM1 regional ready: incoming=0; pupil=93; dependencyDelayMs=4.397; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "P2S5C3 phase: completed=retreat-to-orbit; next=Reapproach",
+      "[native] NCSM1 regional ready: incoming=1; pupil=94; dependencyDelayMs=6.195; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=42; level=1; topologyFamily=1; hash=0xCF2AF9997149E418; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=37408; postHorizonTriangles=21425; horizonRejected=15983; postScreenConeTriangles=21425; screenConeRejected=0; compactedIndices=64275; visibleTriangles=21425; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=42; deferredRetirements=41",
+      "[native] NCSM1 regional ready: incoming=0; pupil=94; dependencyDelayMs=4.798; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=95; dependencyDelayMs=6.640; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=43; level=2; topologyFamily=1; hash=0xF2F37B98BDE248B3; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=59248; postHorizonTriangles=41234; horizonRejected=18014; postScreenConeTriangles=35338; screenConeRejected=5896; compactedIndices=106014; visibleTriangles=35338; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=43; deferredRetirements=42",
+      "[native] NCSM1 regional ready: incoming=0; pupil=95; dependencyDelayMs=5.556; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=96; dependencyDelayMs=12.905; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=44; level=3; topologyFamily=1; hash=0xDCF463780EF4E7C1; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=108208; postHorizonTriangles=87496; horizonRejected=20712; postScreenConeTriangles=54320; screenConeRejected=33176; compactedIndices=162960; visibleTriangles=54320; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=44; deferredRetirements=43",
+      "[native] NCSM1 regional ready: incoming=0; pupil=96; dependencyDelayMs=12.184; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=97; dependencyDelayMs=25.217; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=45; level=4; topologyFamily=1; hash=0x626F04C2587A9589; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=207024; postHorizonTriangles=182179; horizonRejected=24845; postScreenConeTriangles=73278; screenConeRejected=108901; compactedIndices=219834; visibleTriangles=73278; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=45; deferredRetirements=44",
+      "[native] NCSM1 regional ready: incoming=0; pupil=97; dependencyDelayMs=26.031; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=98; dependencyDelayMs=26.435; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=46; level=5; topologyFamily=1; hash=0x92538E1161BE12BB; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=305840; postHorizonTriangles=269686; horizonRejected=36154; postScreenConeTriangles=0; screenConeRejected=269686; compactedIndices=0; visibleTriangles=0; zeroVisible=1; noOpIndirect=1; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=46; deferredRetirements=45",
+      "[native] NCSM1 regional ready: incoming=0; pupil=98; dependencyDelayMs=28.595; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=99; dependencyDelayMs=38.111; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=47; level=6; topologyFamily=1; hash=0x87A3877A754ED82E; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=404656; postHorizonTriangles=342306; horizonRejected=62350; postScreenConeTriangles=0; screenConeRejected=342306; compactedIndices=0; visibleTriangles=0; zeroVisible=1; noOpIndirect=1; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=47; deferredRetirements=46",
+      "[native] NCSM1 regional ready: incoming=0; pupil=99; dependencyDelayMs=46.134; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=100; dependencyDelayMs=53.267; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=48; level=7; topologyFamily=1; hash=0x34679CE6A107E3CF; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=503472; postHorizonTriangles=398970; horizonRejected=104502; postScreenConeTriangles=0; screenConeRejected=398970; compactedIndices=0; visibleTriangles=0; zeroVisible=1; noOpIndirect=1; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=48; deferredRetirements=47",
+      "[native] NCSM1 regional ready: incoming=0; pupil=100; dependencyDelayMs=54.753; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=101; dependencyDelayMs=65.312; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=49; level=8; topologyFamily=1; hash=0xA707B386EC02AB80; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=602288; postHorizonTriangles=466261; horizonRejected=136027; postScreenConeTriangles=16190; screenConeRejected=450071; compactedIndices=48570; visibleTriangles=16190; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=49; deferredRetirements=48",
+      "[native] NCSM1 regional ready: incoming=0; pupil=101; dependencyDelayMs=66.742; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=102; dependencyDelayMs=71.436; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=50; level=9; topologyFamily=1; hash=0x8F6B13684734EB1E; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=701104; postHorizonTriangles=533169; horizonRejected=167935; postScreenConeTriangles=7384; screenConeRejected=525785; compactedIndices=22152; visibleTriangles=7384; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=50; deferredRetirements=49",
+      "[native] NCSM1 regional ready: incoming=0; pupil=102; dependencyDelayMs=80.821; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=103; dependencyDelayMs=92.476; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=51; level=10; topologyFamily=1; hash=0x94FC3260597D77E0; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=799920; postHorizonTriangles=607920; horizonRejected=192000; postScreenConeTriangles=2252; screenConeRejected=605668; compactedIndices=6756; visibleTriangles=2252; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=51; deferredRetirements=50",
+      "[native] NCSM1 regional ready: incoming=0; pupil=103; dependencyDelayMs=97.939; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=104; dependencyDelayMs=104.002; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=52; level=11; topologyFamily=1; hash=0x29745C559AE6222F; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=898736; postHorizonTriangles=683945; horizonRejected=214791; postScreenConeTriangles=8; screenConeRejected=683937; compactedIndices=24; visibleTriangles=8; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=52; deferredRetirements=51",
+      "[native] NCSM1 regional ready: incoming=0; pupil=104; dependencyDelayMs=106.097; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=105; dependencyDelayMs=119.452; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=53; level=12; topologyFamily=1; hash=0xE79EBA567AF0F876; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=997552; postHorizonTriangles=770439; horizonRejected=227113; postScreenConeTriangles=0; screenConeRejected=770439; compactedIndices=0; visibleTriangles=0; zeroVisible=1; noOpIndirect=1; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=53; deferredRetirements=52",
+      "[native] NCSM1 regional ready: incoming=0; pupil=105; dependencyDelayMs=127.860; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=106; dependencyDelayMs=133.654; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=54; level=13; topologyFamily=1; hash=0x72F194C57A876360; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1096368; postHorizonTriangles=862747; horizonRejected=233621; postScreenConeTriangles=0; screenConeRejected=862747; compactedIndices=0; visibleTriangles=0; zeroVisible=1; noOpIndirect=1; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=54; deferredRetirements=53",
+      "[native] NCSM1 regional ready: incoming=0; pupil=106; dependencyDelayMs=142.412; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=107; dependencyDelayMs=155.647; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=55; level=14; topologyFamily=1; hash=0x8999DD8A034A9AB1; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1195184; postHorizonTriangles=957402; horizonRejected=237782; postScreenConeTriangles=0; screenConeRejected=957402; compactedIndices=0; visibleTriangles=0; zeroVisible=1; noOpIndirect=1; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=55; deferredRetirements=54",
+      "[native] NCSM1 regional ready: incoming=0; pupil=107; dependencyDelayMs=163.203; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=108; dependencyDelayMs=169.788; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=56; level=15; topologyFamily=1; hash=0x967DCF11C4ABC256; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1294000; postHorizonTriangles=1056218; horizonRejected=237782; postScreenConeTriangles=0; screenConeRejected=1056218; compactedIndices=0; visibleTriangles=0; zeroVisible=1; noOpIndirect=1; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=56; deferredRetirements=55",
+      "[native] NCSM1 regional ready: incoming=0; pupil=108; dependencyDelayMs=175.114; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=109; dependencyDelayMs=189.041; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=57; level=16; topologyFamily=1; hash=0x32840D29EDE00769; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1392816; postHorizonTriangles=1153057; horizonRejected=239759; postScreenConeTriangles=0; screenConeRejected=1153057; compactedIndices=0; visibleTriangles=0; zeroVisible=1; noOpIndirect=1; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=57; deferredRetirements=56",
+      "[native] NCSM1 regional ready: incoming=0; pupil=109; dependencyDelayMs=198.535; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] NCSM1 regional ready: incoming=1; pupil=110; dependencyDelayMs=197.518; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=58; level=17; topologyFamily=1; hash=0xBCE444AFFB2D713B; topologyResident=true; topologyReused=1; topologyUploads=18; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1424208; postHorizonTriangles=1184449; horizonRejected=239759; postScreenConeTriangles=0; screenConeRejected=1184449; compactedIndices=0; visibleTriangles=0; zeroVisible=1; noOpIndirect=1; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=58; deferredRetirements=57",
+      "P2S5C3 phase: completed=continuous reapproach; next=FinalSettle",
+      "[native] NCSM1 regional ready: incoming=0; pupil=110; dependencyDelayMs=173.574; requests=5; resident=5; uploadedBytes=696960; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "P2S5C3 Desktop traversal PASS: frames=1701; elapsedMs=14256.3981; levels=L0,L1,L2,L3,L4,L5,L6,L7,L8,L9,L10,L11,L12,L13,L14,L15,L16,L17; missing=; snaps=10; reversals=3; publications=58; pupilErrorMax=3.210984146E-006rad; heightParityMax=0.000000000E+000m; normalParityMax=0.000000000E+000rad; zeroOwner=0; overlap=0; stale=0; residentMax=191558056; peakResident=191558056; callback=0.004217/0.001500/0.007600/0.020200/1.627300ms(1702); selector=0.001434/0.001000/0.002700/0.004900/0.117300ms(1702); pupilSnap=0.000848/0.000100/0.001200/0.002400/0.485800ms(1702); scheduling=0.026612/0.011900/0.065300/0.793800/0.793800ms(58); physical=0.009178/0.004800/0.011000/0.218200/0.218200ms(58); gpuPrepare=0.000000/0.000000/0.000000/0.000000/0.000000ms(0); publication=0.003160/0.001800/0.007800/0.071000/0.071000ms(58)"
+    ]
+  }
+]

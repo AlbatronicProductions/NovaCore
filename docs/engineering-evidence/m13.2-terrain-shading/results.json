@@ -1,0 +1,1084 @@
+{
+  "performance": [
+    {
+      "pose": "A",
+      "baselineTerrain": {
+        "n": 100,
+        "median": 7.0192,
+        "p95": 7.09588,
+        "minimum": 6.91964,
+        "maximum": 10.03856
+      },
+      "candidateTerrain": {
+        "n": 100,
+        "median": 6.55116,
+        "p95": 6.96896,
+        "minimum": 6.48068,
+        "maximum": 8.38268
+      },
+      "improvementMs": 0.46803999999999935,
+      "improvementPercent": 6.667996352860715,
+      "baselineTotalGpu": {
+        "n": 100,
+        "median": 9.9107,
+        "p95": 10.03948,
+        "minimum": 9.6706,
+        "maximum": 13.04491
+      },
+      "candidateTotalGpu": {
+        "n": 100,
+        "median": 10.43715,
+        "p95": 11.88108,
+        "minimum": 9.44,
+        "maximum": 16.82052
+      }
+    },
+    {
+      "pose": "B",
+      "baselineTerrain": {
+        "n": 100,
+        "median": 25.98032,
+        "p95": 26.11352,
+        "minimum": 25.71572,
+        "maximum": 26.2088
+      },
+      "candidateTerrain": {
+        "n": 100,
+        "median": 23.83824,
+        "p95": 23.94108,
+        "minimum": 23.6958,
+        "maximum": 23.9936
+      },
+      "improvementMs": 2.14208,
+      "improvementPercent": 8.245010069160042,
+      "baselineTotalGpu": {
+        "n": 100,
+        "median": 29.56071,
+        "p95": 29.9058,
+        "minimum": 29.02696,
+        "maximum": 30.2725
+      },
+      "candidateTotalGpu": {
+        "n": 100,
+        "median": 26.68684,
+        "p95": 28.56453,
+        "minimum": 26.40956,
+        "maximum": 28.69908
+      }
+    },
+    {
+      "pose": "C",
+      "baselineTerrain": {
+        "n": 100,
+        "median": 15.51556,
+        "p95": 15.64468,
+        "minimum": 15.3544,
+        "maximum": 20.78672
+      },
+      "candidateTerrain": {
+        "n": 100,
+        "median": 13.95076,
+        "p95": 14.15412,
+        "minimum": 13.80136,
+        "maximum": 18.87784
+      },
+      "improvementMs": 1.5648,
+      "improvementPercent": 10.085359471395167,
+      "baselineTotalGpu": {
+        "n": 100,
+        "median": 18.55319,
+        "p95": 18.8162,
+        "minimum": 18.2074,
+        "maximum": 23.82331
+      },
+      "candidateTotalGpu": {
+        "n": 100,
+        "median": 16.97796,
+        "p95": 17.42432,
+        "minimum": 16.72296,
+        "maximum": 21.98804
+      }
+    },
+    {
+      "pose": "D",
+      "baselineTerrain": {
+        "n": 100,
+        "median": 8.87484,
+        "p95": 8.97932,
+        "minimum": 8.78536,
+        "maximum": 9.01676
+      },
+      "candidateTerrain": {
+        "n": 100,
+        "median": 8.38616,
+        "p95": 8.7382,
+        "minimum": 8.27992,
+        "maximum": 8.78392
+      },
+      "improvementMs": 0.48868000000000045,
+      "improvementPercent": 5.506352790585525,
+      "baselineTotalGpu": {
+        "n": 100,
+        "median": 11.76636,
+        "p95": 11.91291,
+        "minimum": 11.5128,
+        "maximum": 13.16924
+      },
+      "candidateTotalGpu": {
+        "n": 100,
+        "median": 11.2876,
+        "p95": 13.09324,
+        "minimum": 11.02152,
+        "maximum": 13.51152
+      }
+    },
+    {
+      "pose": "E",
+      "baselineTerrain": {
+        "n": 100,
+        "median": 0.8468,
+        "p95": 0.85816,
+        "minimum": 0.83444,
+        "maximum": 1.04727
+      },
+      "candidateTerrain": {
+        "n": 100,
+        "median": 0.82812,
+        "p95": 0.8396,
+        "minimum": 0.81608,
+        "maximum": 0.8458
+      },
+      "improvementMs": 0.01868000000000003,
+      "improvementPercent": 2.2059518186112457,
+      "baselineTotalGpu": {
+        "n": 100,
+        "median": 1.00452,
+        "p95": 1.21357,
+        "minimum": 0.99172,
+        "maximum": 1.36655
+      },
+      "candidateTotalGpu": {
+        "n": 100,
+        "median": 0.98392,
+        "p95": 1.07484,
+        "minimum": 0.97076,
+        "maximum": 1.15029
+      }
+    }
+  ],
+  "parity": [
+    {
+      "pose": "A",
+      "baselineExecutedRecords": 1082850,
+      "candidateExecutedRecords": 1082850,
+      "uniquePhysicalDirections": 181640,
+      "physicalSetSha256": "00368136950d58e754c46dcca6ea9ab42a6f5fbb2a7f00f84a4f69136f4a2e5e",
+      "preparedData": {
+        "bytes": 45574784,
+        "sha256": "a91980749129a657701b11b5aa6c316b587ca09e1ea2ef5329b31bfba2379d04"
+      },
+      "comparison": {
+        "depth": {
+          "exact": true,
+          "unequalBytes": 0,
+          "changedPixels": 0,
+          "maxAbsolute": 0.0
+        },
+        "hdr": {
+          "exact": true,
+          "unequalBytes": 0
+        },
+        "image": {
+          "exact": true,
+          "unequalBytes": 0
+        },
+        "physicalRecordSetExact": true,
+        "tesRecordSetExact": false
+      },
+      "depthValues": 4953600,
+      "hdrHalfValues": 19814400,
+      "finalImageByteValues": 19814400
+    },
+    {
+      "pose": "B",
+      "baselineExecutedRecords": 2779244,
+      "candidateExecutedRecords": 2779283,
+      "uniquePhysicalDirections": 1913891,
+      "physicalSetSha256": "cca7b21e2e9a7772fe825b70ea05f75152735b895853e25109efbf6ac98f48c3",
+      "preparedData": {
+        "bytes": 45574784,
+        "sha256": "900b054585a758f03d04670e53ff83b615b0b7611e359fe9e59e02364526ff87"
+      },
+      "comparison": {
+        "depth": {
+          "exact": true,
+          "unequalBytes": 0,
+          "changedPixels": 0,
+          "maxAbsolute": 0.0
+        },
+        "hdr": {
+          "exact": true,
+          "unequalBytes": 0
+        },
+        "image": {
+          "exact": true,
+          "unequalBytes": 0
+        },
+        "physicalRecordSetExact": true,
+        "tesRecordSetExact": false
+      },
+      "depthValues": 4953600,
+      "hdrHalfValues": 19814400,
+      "finalImageByteValues": 19814400
+    },
+    {
+      "pose": "C",
+      "baselineExecutedRecords": 3470039,
+      "candidateExecutedRecords": 3470035,
+      "uniquePhysicalDirections": 1801715,
+      "physicalSetSha256": "d3aab6dee859518abe2e6e9591b70efd73ef5e00635271d11ddce77d46bb811d",
+      "preparedData": {
+        "bytes": 45574784,
+        "sha256": "900b054585a758f03d04670e53ff83b615b0b7611e359fe9e59e02364526ff87"
+      },
+      "comparison": {
+        "depth": {
+          "exact": true,
+          "unequalBytes": 0,
+          "changedPixels": 0,
+          "maxAbsolute": 0.0
+        },
+        "hdr": {
+          "exact": true,
+          "unequalBytes": 0
+        },
+        "image": {
+          "exact": true,
+          "unequalBytes": 0
+        },
+        "physicalRecordSetExact": true,
+        "tesRecordSetExact": false
+      },
+      "depthValues": 4953600,
+      "hdrHalfValues": 19814400,
+      "finalImageByteValues": 19814400
+    },
+    {
+      "pose": "D",
+      "baselineExecutedRecords": 884244,
+      "candidateExecutedRecords": 884244,
+      "uniquePhysicalDirections": 148371,
+      "physicalSetSha256": "eefd5e1c496797f5e5fb9cb1bfdbf48cbb82947a155950abe4356f40edc32318",
+      "preparedData": {
+        "bytes": 45574784,
+        "sha256": "cafd839e4d3f1c23ace1bd287a49c0d8832658938b4767a275b8bd2842b2c976"
+      },
+      "comparison": {
+        "depth": {
+          "exact": true,
+          "unequalBytes": 0,
+          "changedPixels": 0,
+          "maxAbsolute": 0.0
+        },
+        "hdr": {
+          "exact": true,
+          "unequalBytes": 0
+        },
+        "image": {
+          "exact": true,
+          "unequalBytes": 0
+        },
+        "physicalRecordSetExact": true,
+        "tesRecordSetExact": false
+      },
+      "depthValues": 4953600,
+      "hdrHalfValues": 19814400,
+      "finalImageByteValues": 19814400
+    },
+    {
+      "pose": "E",
+      "baselineExecutedRecords": 46128,
+      "candidateExecutedRecords": 46128,
+      "uniquePhysicalDirections": 7793,
+      "physicalSetSha256": "7b9fb6135da4c5a7bcfed4195342dd3cfb031319c621e08ac8b3d5d3b03c2b98",
+      "preparedData": {
+        "bytes": 884864,
+        "sha256": "5cd7c2317d7cb6eeb776eda5ab11956c6bb1f1a59a7c2364d4c699cf4460372f"
+      },
+      "comparison": {
+        "depth": {
+          "exact": true,
+          "unequalBytes": 0,
+          "changedPixels": 0,
+          "maxAbsolute": 0.0
+        },
+        "hdr": {
+          "exact": true,
+          "unequalBytes": 0
+        },
+        "image": {
+          "exact": true,
+          "unequalBytes": 0
+        },
+        "physicalRecordSetExact": true,
+        "tesRecordSetExact": false
+      },
+      "depthValues": 4953600,
+      "hdrHalfValues": 19814400,
+      "finalImageByteValues": 19814400
+    }
+  ],
+  "workload": [
+    {
+      "pose": "A",
+      "baseline": {
+        "compactedTriangles": {
+          "n": 100,
+          "median": 360950,
+          "p95": 360950,
+          "minimum": 360950,
+          "maximum": 360950
+        },
+        "tcsPatches": {
+          "n": 100,
+          "median": 360950,
+          "p95": 360950,
+          "minimum": 360950,
+          "maximum": 360950
+        },
+        "refinedVertices": {
+          "n": 100,
+          "median": 1082850,
+          "p95": 1082850,
+          "minimum": 1082850,
+          "maximum": 1082850
+        },
+        "clippingInputPrimitives": {
+          "n": 100,
+          "median": 142660,
+          "p95": 142712,
+          "minimum": 142567,
+          "maximum": 142734
+        },
+        "clippingOutputPrimitives": {
+          "n": 100,
+          "median": 142660,
+          "p95": 142712,
+          "minimum": 142567,
+          "maximum": 142734
+        },
+        "fragmentInvocations": {
+          "n": 100,
+          "median": 2591686,
+          "p95": 2591692,
+          "minimum": 2591676,
+          "maximum": 2591695
+        },
+        "tesEnvelopeActive": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "tesEnvelopeInactive": {
+          "n": 100,
+          "median": 1184156,
+          "p95": 1184156,
+          "minimum": 1184156,
+          "maximum": 1184156
+        },
+        "maximumOuterTesFactor": {
+          "n": 100,
+          "median": 1.0,
+          "p95": 1.0,
+          "minimum": 1.0,
+          "maximum": 1.0
+        },
+        "maximumInnerTesFactor": {
+          "n": 100,
+          "median": 0.9999,
+          "p95": 0.9999,
+          "minimum": 0.9999,
+          "maximum": 0.9999
+        }
+      },
+      "candidate": {
+        "compactedTriangles": {
+          "n": 100,
+          "median": 360950,
+          "p95": 360950,
+          "minimum": 360950,
+          "maximum": 360950
+        },
+        "tcsPatches": {
+          "n": 100,
+          "median": 360950,
+          "p95": 360950,
+          "minimum": 360950,
+          "maximum": 360950
+        },
+        "refinedVertices": {
+          "n": 100,
+          "median": 1082850,
+          "p95": 1082850,
+          "minimum": 1082850,
+          "maximum": 1082850
+        },
+        "clippingInputPrimitives": {
+          "n": 100,
+          "median": 142662,
+          "p95": 142707,
+          "minimum": 142580,
+          "maximum": 142734
+        },
+        "clippingOutputPrimitives": {
+          "n": 100,
+          "median": 142662,
+          "p95": 142707,
+          "minimum": 142580,
+          "maximum": 142734
+        },
+        "fragmentInvocations": {
+          "n": 100,
+          "median": 2591685,
+          "p95": 2591692,
+          "minimum": 2591674,
+          "maximum": 2591697
+        },
+        "tesEnvelopeActive": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "tesEnvelopeInactive": {
+          "n": 100,
+          "median": 1184156,
+          "p95": 1184156,
+          "minimum": 1184156,
+          "maximum": 1184156
+        },
+        "maximumOuterTesFactor": {
+          "n": 100,
+          "median": 1.0,
+          "p95": 1.0,
+          "minimum": 1.0,
+          "maximum": 1.0
+        },
+        "maximumInnerTesFactor": {
+          "n": 100,
+          "median": 0.9999,
+          "p95": 0.9999,
+          "minimum": 0.9999,
+          "maximum": 0.9999
+        }
+      },
+      "factorBins": [
+        "(360950,0,0,0,0,0,0)"
+      ]
+    },
+    {
+      "pose": "B",
+      "baseline": {
+        "compactedTriangles": {
+          "n": 100,
+          "median": 2060,
+          "p95": 2060,
+          "minimum": 2060,
+          "maximum": 2060
+        },
+        "tcsPatches": {
+          "n": 100,
+          "median": 2060,
+          "p95": 2060,
+          "minimum": 2060,
+          "maximum": 2060
+        },
+        "refinedVertices": {
+          "n": 100,
+          "median": 2779257,
+          "p95": 2779295,
+          "minimum": 2779160,
+          "maximum": 2779353
+        },
+        "clippingInputPrimitives": {
+          "n": 100,
+          "median": 953915,
+          "p95": 953974,
+          "minimum": 953838,
+          "maximum": 953994
+        },
+        "clippingOutputPrimitives": {
+          "n": 100,
+          "median": 946137,
+          "p95": 946146,
+          "minimum": 946137,
+          "maximum": 946161
+        },
+        "fragmentInvocations": {
+          "n": 100,
+          "median": 4953599,
+          "p95": 4953599,
+          "minimum": 4953599,
+          "maximum": 4953599
+        },
+        "tesEnvelopeActive": {
+          "n": 100,
+          "median": 3874,
+          "p95": 3874,
+          "minimum": 3874,
+          "maximum": 3874
+        },
+        "tesEnvelopeInactive": {
+          "n": 100,
+          "median": 1179981,
+          "p95": 1179981,
+          "minimum": 1179981,
+          "maximum": 1179981
+        },
+        "maximumOuterTesFactor": {
+          "n": 100,
+          "median": 64.0,
+          "p95": 64.0,
+          "minimum": 64.0,
+          "maximum": 64.0
+        },
+        "maximumInnerTesFactor": {
+          "n": 100,
+          "median": 63.993599,
+          "p95": 63.993599,
+          "minimum": 63.993599,
+          "maximum": 63.993599
+        }
+      },
+      "candidate": {
+        "compactedTriangles": {
+          "n": 100,
+          "median": 2060,
+          "p95": 2060,
+          "minimum": 2060,
+          "maximum": 2060
+        },
+        "tcsPatches": {
+          "n": 100,
+          "median": 2060,
+          "p95": 2060,
+          "minimum": 2060,
+          "maximum": 2060
+        },
+        "refinedVertices": {
+          "n": 100,
+          "median": 2779262,
+          "p95": 2779296,
+          "minimum": 2779196,
+          "maximum": 2779318
+        },
+        "clippingInputPrimitives": {
+          "n": 100,
+          "median": 953913,
+          "p95": 953984,
+          "minimum": 953851,
+          "maximum": 954008
+        },
+        "clippingOutputPrimitives": {
+          "n": 100,
+          "median": 946137,
+          "p95": 946151,
+          "minimum": 946137,
+          "maximum": 946154
+        },
+        "fragmentInvocations": {
+          "n": 100,
+          "median": 4953599,
+          "p95": 4953599,
+          "minimum": 4953599,
+          "maximum": 4953599
+        },
+        "tesEnvelopeActive": {
+          "n": 100,
+          "median": 3874,
+          "p95": 3874,
+          "minimum": 3874,
+          "maximum": 3874
+        },
+        "tesEnvelopeInactive": {
+          "n": 100,
+          "median": 1179981,
+          "p95": 1179981,
+          "minimum": 1179981,
+          "maximum": 1179981
+        },
+        "maximumOuterTesFactor": {
+          "n": 100,
+          "median": 64.0,
+          "p95": 64.0,
+          "minimum": 64.0,
+          "maximum": 64.0
+        },
+        "maximumInnerTesFactor": {
+          "n": 100,
+          "median": 63.993599,
+          "p95": 63.993599,
+          "minimum": 63.993599,
+          "maximum": 63.993599
+        }
+      },
+      "factorBins": [
+        "(97,120,157,255,344,372,715)"
+      ]
+    },
+    {
+      "pose": "C",
+      "baseline": {
+        "compactedTriangles": {
+          "n": 100,
+          "median": 378919,
+          "p95": 378919,
+          "minimum": 378919,
+          "maximum": 378919
+        },
+        "tcsPatches": {
+          "n": 100,
+          "median": 378919,
+          "p95": 378919,
+          "minimum": 378919,
+          "maximum": 378919
+        },
+        "refinedVertices": {
+          "n": 100,
+          "median": 3470007,
+          "p95": 3470046,
+          "minimum": 3469931,
+          "maximum": 3470068
+        },
+        "clippingInputPrimitives": {
+          "n": 100,
+          "median": 245744,
+          "p95": 245804,
+          "minimum": 245669,
+          "maximum": 245825
+        },
+        "clippingOutputPrimitives": {
+          "n": 100,
+          "median": 235574,
+          "p95": 235622,
+          "minimum": 235495,
+          "maximum": 235642
+        },
+        "fragmentInvocations": {
+          "n": 100,
+          "median": 2472101,
+          "p95": 2472108,
+          "minimum": 2472068,
+          "maximum": 2472109
+        },
+        "tesEnvelopeActive": {
+          "n": 100,
+          "median": 3874,
+          "p95": 3874,
+          "minimum": 3874,
+          "maximum": 3874
+        },
+        "tesEnvelopeInactive": {
+          "n": 100,
+          "median": 1179981,
+          "p95": 1179981,
+          "minimum": 1179981,
+          "maximum": 1179981
+        },
+        "maximumOuterTesFactor": {
+          "n": 100,
+          "median": 64.0,
+          "p95": 64.0,
+          "minimum": 64.0,
+          "maximum": 64.0
+        },
+        "maximumInnerTesFactor": {
+          "n": 100,
+          "median": 63.993599,
+          "p95": 63.993599,
+          "minimum": 63.993599,
+          "maximum": 63.993599
+        }
+      },
+      "candidate": {
+        "compactedTriangles": {
+          "n": 100,
+          "median": 378919,
+          "p95": 378919,
+          "minimum": 378919,
+          "maximum": 378919
+        },
+        "tcsPatches": {
+          "n": 100,
+          "median": 378919,
+          "p95": 378919,
+          "minimum": 378919,
+          "maximum": 378919
+        },
+        "refinedVertices": {
+          "n": 100,
+          "median": 3470000,
+          "p95": 3470050,
+          "minimum": 3469941,
+          "maximum": 3470070
+        },
+        "clippingInputPrimitives": {
+          "n": 100,
+          "median": 245745,
+          "p95": 245836,
+          "minimum": 245631,
+          "maximum": 245873
+        },
+        "clippingOutputPrimitives": {
+          "n": 100,
+          "median": 235572,
+          "p95": 235632,
+          "minimum": 235493,
+          "maximum": 235660
+        },
+        "fragmentInvocations": {
+          "n": 100,
+          "median": 2472102,
+          "p95": 2472107,
+          "minimum": 2472072,
+          "maximum": 2472108
+        },
+        "tesEnvelopeActive": {
+          "n": 100,
+          "median": 3874,
+          "p95": 3874,
+          "minimum": 3874,
+          "maximum": 3874
+        },
+        "tesEnvelopeInactive": {
+          "n": 100,
+          "median": 1179981,
+          "p95": 1179981,
+          "minimum": 1179981,
+          "maximum": 1179981
+        },
+        "maximumOuterTesFactor": {
+          "n": 100,
+          "median": 64.0,
+          "p95": 64.0,
+          "minimum": 64.0,
+          "maximum": 64.0
+        },
+        "maximumInnerTesFactor": {
+          "n": 100,
+          "median": 63.993599,
+          "p95": 63.993599,
+          "minimum": 63.993599,
+          "maximum": 63.993599
+        }
+      },
+      "factorBins": [
+        "(377285,138,165,234,270,240,587)"
+      ]
+    },
+    {
+      "pose": "D",
+      "baseline": {
+        "compactedTriangles": {
+          "n": 100,
+          "median": 294748,
+          "p95": 294748,
+          "minimum": 294748,
+          "maximum": 294748
+        },
+        "tcsPatches": {
+          "n": 100,
+          "median": 294748,
+          "p95": 294748,
+          "minimum": 294748,
+          "maximum": 294748
+        },
+        "refinedVertices": {
+          "n": 100,
+          "median": 884244,
+          "p95": 884244,
+          "minimum": 884244,
+          "maximum": 884244
+        },
+        "clippingInputPrimitives": {
+          "n": 100,
+          "median": 119649,
+          "p95": 119685,
+          "minimum": 119562,
+          "maximum": 119730
+        },
+        "clippingOutputPrimitives": {
+          "n": 100,
+          "median": 119645,
+          "p95": 119681,
+          "minimum": 119558,
+          "maximum": 119726
+        },
+        "fragmentInvocations": {
+          "n": 100,
+          "median": 3984341,
+          "p95": 3984488,
+          "minimum": 3984051,
+          "maximum": 3984554
+        },
+        "tesEnvelopeActive": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "tesEnvelopeInactive": {
+          "n": 100,
+          "median": 1184192,
+          "p95": 1184192,
+          "minimum": 1184192,
+          "maximum": 1184192
+        },
+        "maximumOuterTesFactor": {
+          "n": 100,
+          "median": 1.0,
+          "p95": 1.0,
+          "minimum": 1.0,
+          "maximum": 1.0
+        },
+        "maximumInnerTesFactor": {
+          "n": 100,
+          "median": 0.9999,
+          "p95": 0.9999,
+          "minimum": 0.9999,
+          "maximum": 0.9999
+        }
+      },
+      "candidate": {
+        "compactedTriangles": {
+          "n": 100,
+          "median": 294748,
+          "p95": 294748,
+          "minimum": 294748,
+          "maximum": 294748
+        },
+        "tcsPatches": {
+          "n": 100,
+          "median": 294748,
+          "p95": 294748,
+          "minimum": 294748,
+          "maximum": 294748
+        },
+        "refinedVertices": {
+          "n": 100,
+          "median": 884244,
+          "p95": 884244,
+          "minimum": 884244,
+          "maximum": 884244
+        },
+        "clippingInputPrimitives": {
+          "n": 100,
+          "median": 119641,
+          "p95": 119704,
+          "minimum": 119545,
+          "maximum": 119728
+        },
+        "clippingOutputPrimitives": {
+          "n": 100,
+          "median": 119637,
+          "p95": 119700,
+          "minimum": 119541,
+          "maximum": 119724
+        },
+        "fragmentInvocations": {
+          "n": 100,
+          "median": 3984351,
+          "p95": 3984536,
+          "minimum": 3984113,
+          "maximum": 3984585
+        },
+        "tesEnvelopeActive": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "tesEnvelopeInactive": {
+          "n": 100,
+          "median": 1184192,
+          "p95": 1184192,
+          "minimum": 1184192,
+          "maximum": 1184192
+        },
+        "maximumOuterTesFactor": {
+          "n": 100,
+          "median": 1.0,
+          "p95": 1.0,
+          "minimum": 1.0,
+          "maximum": 1.0
+        },
+        "maximumInnerTesFactor": {
+          "n": 100,
+          "median": 0.9999,
+          "p95": 0.9999,
+          "minimum": 0.9999,
+          "maximum": 0.9999
+        }
+      },
+      "factorBins": [
+        "(294748,0,0,0,0,0,0)"
+      ]
+    },
+    {
+      "pose": "E",
+      "baseline": {
+        "compactedTriangles": {
+          "n": 100,
+          "median": 15376,
+          "p95": 15376,
+          "minimum": 15376,
+          "maximum": 15376
+        },
+        "tcsPatches": {
+          "n": 100,
+          "median": 15376,
+          "p95": 15376,
+          "minimum": 15376,
+          "maximum": 15376
+        },
+        "refinedVertices": {
+          "n": 100,
+          "median": 46128,
+          "p95": 46128,
+          "minimum": 46128,
+          "maximum": 46128
+        },
+        "clippingInputPrimitives": {
+          "n": 100,
+          "median": 12893,
+          "p95": 12912,
+          "minimum": 12868,
+          "maximum": 12919
+        },
+        "clippingOutputPrimitives": {
+          "n": 100,
+          "median": 12893,
+          "p95": 12912,
+          "minimum": 12868,
+          "maximum": 12919
+        },
+        "fragmentInvocations": {
+          "n": 100,
+          "median": 35913,
+          "p95": 35913,
+          "minimum": 35913,
+          "maximum": 35913
+        },
+        "tesEnvelopeActive": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "tesEnvelopeInactive": {
+          "n": 100,
+          "median": 15376,
+          "p95": 15376,
+          "minimum": 15376,
+          "maximum": 15376
+        },
+        "maximumOuterTesFactor": {
+          "n": 100,
+          "median": 1.0,
+          "p95": 1.0,
+          "minimum": 1.0,
+          "maximum": 1.0
+        },
+        "maximumInnerTesFactor": {
+          "n": 100,
+          "median": 0.9999,
+          "p95": 0.9999,
+          "minimum": 0.9999,
+          "maximum": 0.9999
+        }
+      },
+      "candidate": {
+        "compactedTriangles": {
+          "n": 100,
+          "median": 15376,
+          "p95": 15376,
+          "minimum": 15376,
+          "maximum": 15376
+        },
+        "tcsPatches": {
+          "n": 100,
+          "median": 15376,
+          "p95": 15376,
+          "minimum": 15376,
+          "maximum": 15376
+        },
+        "refinedVertices": {
+          "n": 100,
+          "median": 46128,
+          "p95": 46128,
+          "minimum": 46128,
+          "maximum": 46128
+        },
+        "clippingInputPrimitives": {
+          "n": 100,
+          "median": 12894,
+          "p95": 12913,
+          "minimum": 12868,
+          "maximum": 12924
+        },
+        "clippingOutputPrimitives": {
+          "n": 100,
+          "median": 12894,
+          "p95": 12913,
+          "minimum": 12868,
+          "maximum": 12924
+        },
+        "fragmentInvocations": {
+          "n": 100,
+          "median": 35913,
+          "p95": 35913,
+          "minimum": 35913,
+          "maximum": 35913
+        },
+        "tesEnvelopeActive": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "tesEnvelopeInactive": {
+          "n": 100,
+          "median": 15376,
+          "p95": 15376,
+          "minimum": 15376,
+          "maximum": 15376
+        },
+        "maximumOuterTesFactor": {
+          "n": 100,
+          "median": 1.0,
+          "p95": 1.0,
+          "minimum": 1.0,
+          "maximum": 1.0
+        },
+        "maximumInnerTesFactor": {
+          "n": 100,
+          "median": 0.9999,
+          "p95": 0.9999,
+          "minimum": 0.9999,
+          "maximum": 0.9999
+        }
+      },
+      "factorBins": [
+        "(15376,0,0,0,0,0,0)"
+      ]
+    }
+  ],
+  "rawBytesCreatedAndRemoved": 4475821056
+}

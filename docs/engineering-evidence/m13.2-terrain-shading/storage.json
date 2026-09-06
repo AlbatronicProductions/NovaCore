@@ -1,0 +1,15 @@
+{
+  "accounting": "Logical diagnostic payload ledger; excludes routine build/deployment copies and unmetered self-cleaned regional regression probes",
+  "rawCaptureRuns": 20,
+  "rawCaptureBytesCreated": 4475821056,
+  "disposableOutputRemovedBytes": 4475821056,
+  "disposableOutputRemainingFiles": 260,
+  "disposableOutputRemainingBytes": 53416461,
+  "permanentEvidenceBudgetBytes": 3000000,
+  "cleanup": "BLOCKED BY AUTOMATIC APPROVAL REVIEW; no alternate deletion attempted",
+  "retainedScratchManifest": "disposable-manifest.json",
+  "productionDeploymentPreserved": true,
+  "incomingEvidencePreserved": true,
+  "permanentEvidenceRetainedBytes": 1218858,
+  "diagnosticOutputCreatedMeteredBytes": 4530456375
+}

@@ -4,11 +4,11 @@ The accepted milestone and current work boundary are summarized in
 [NOVACORE_CURRENT_STATE.md](NOVACORE_CURRENT_STATE.md). This document defines
 the production planetary-rendering responsibilities and invariants.
 
-The banked, production-accepted baseline is **M12D-P2S5H — Earth Route
-Convergence**, commit `32ffac50ab5c06518ede24edfb5c531976d4ec99`, annotated tag
-`m12d-p2s5h-earth-route-convergence`. It preserves P2S5G surface workload
-efficiency and the accepted Florida result. The later `c78b582` commit retires
-tracked diagnostic video evidence; it does not move the production tag.
+The current banked baseline is **M13.1 — NCSM1 TES hot-path removal**, commit
+`fade1384c1c7df93d954e7223b1cc8f17db17f98`, annotated tag
+`m13.1-ncsm1-tes-hotpath`. It preserves the accepted **M12D-P2S5H — Earth Route
+Convergence** architecture and Florida result. M13.2 ordinary terrain shading
+specialization is an unbanked candidate pending Project Control review.
 
 The accepted Earth contracts below apply to every supported Earth route.
 
@@ -20,8 +20,7 @@ The superseded dynamic anchored owner, stitch/coverage draw, local texture-deman
 transport and its investigation drivers have been retired. Generation-3 numerical
 oracles and independent development scenes remain outside production Earth routing.
 Terrain-v5 global bootstrap remains only until complete NCSM1 publication;
-non-Earth presentation remains independent. P2S5H is banked; subsequent debt
-retirement remains separately reviewed and unbanked.
+non-Earth presentation remains independent. M13.1 retains these ownership contracts.
 
 See [production consolidation](production-consolidation.md) for reachability, retained responsibilities and validation.
 
@@ -111,15 +110,33 @@ is an accepted bounded invocation-accounting consequence (classification C),
 with bit-identical measured outer/inner factors. It is not increased refinement
 or changed tessellation semantics.
 
-The current TES address-removal candidate specializes inverse geographic-address
+Banked M13.1 specializes inverse geographic-address
 reconstruction at native context creation. Ordinary NCSM1 rendering uses the
 default-false specialization; `owners` and `boundaries` diagnostics select the
 same shader with that specialization enabled. The immutable context diagnostic
 mode drives all four existing raster-state pipelines. This keeps one physical
 algorithm and one deployed TES binary, with no per-frame diagnostic branch.
 Ordinary material coordinates still come from the final physical receiver.
-See the [candidate parity and performance evidence](engineering-evidence/tes-address-removal/README.md)
-for validation and the manual-acceptance boundary; P2S5H remains the banked milestone.
+See the [parity and performance evidence](engineering-evidence/tes-address-removal/README.md)
+for the implementation measurements; M13.1 remains authoritative.
+
+The unbanked M13.2 candidate also specializes ordinary NCSM1 fragment shading.
+The shared fragment module defaults to its full bootstrap/diagnostic contract.
+Only an NCSM1 context with no surface diagnostic enables `ordinaryNcsm1`, making
+the already-known owner and disabled-diagnostic selector compile-time constants.
+The separate startup terrain pipeline retains the default; every nonzero surface
+diagnostic retains the full NCSM1 fragment path. Owner/seam diagnostics also retain
+M13.1's enabled TES geographic-address specialization.
+
+Diagnostic mode is immutable for a native context. Changing it requires context
+recreation; focus changes and physical/pupil publications select existing owner
+pipelines and update data without changing that contract. All four NCSM1 raster
+states receive the same fragment specialization. Declared inter-stage interfaces
+and descriptor layouts remain complete and unchanged; the compiler may eliminate
+five unused ordinary inputs/exports while retained variants still consume them.
+Physical H, 50 m refinement, material synthesis, lighting and facility visibility
+are unchanged. See [M13.2 candidate evidence](engineering-evidence/m13.2-terrain-shading/README.md)
+for exact parity, pipeline/transition gates and the Project Control review boundary.
 
 TCS/TES provides bounded near-camera raster refinement. The configured physical
 range is 50 m, the evaluation shader exits before displacement work outside the

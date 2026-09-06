@@ -1,0 +1,15 @@
+{
+  "E:\\Kitten Space Agency\\KSA.dll": "a8a5164204eed962df9d9025e99f523d9a23ee2ce6e802b18216a9da35506d2f",
+  "E:\\Kitten Space Agency\\Planet.Render.Core.dll": "6b9b3c3bd709bf198c6ab3ec6daaef7e468f593fb110187869a1d44272b92e3c",
+  "E:\\Kitten Space Agency\\Planet.Core.dll": "2823b299051b91252453acb4f1fff5543b1f5473bc6f42c8d51d4958d3159ece",
+  "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\Planet\\PlanetTessEvaluation.tese": "80c3168561c468d3b255d635b31c1e0163ed8331c21e1340b8d490525bc93b27",
+  "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\Planet\\TessellationFuncs.glsl": "308ee11e81ec65757c4514e485dfc6ffbf7cb2fb76e6467ca267e6980eb4172e",
+  "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\Planet\\TerrainMesh\\PrepareModifiers.comp": "d3ea1e2cfc3d090c0602a9df0f9b6ec46337ab0a48cc6dea2ecc2d4d921b61b4",
+  "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\Planet\\TerrainMesh\\FinalizeModifiers.comp": "8ab510ac2547520bdc6284244fe46d583891afa8470f0b3a03694907047c89c6",
+  "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\Planet\\TerrainMesh\\GenerateMeshNormals.comp": "af645f0557632e4c8fad6c22228eebfc8fa0a4e27f40b1bf86a4bceded8f81dd",
+  "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\Planet\\Culling\\PlanetFrustumCulling.comp": "4a1617f6ce1660aa78a373d79f4c97022c325525a4f694e100e22aad7c2f23e5",
+  "E:\\NovaCore\\build\\ksa-residency-reference\\source\\KSA.PlanetRenderer.cs": "5ce37c334045f9b5cba9a450a6accc454444e8d20327b9778b98740cf7a64a50",
+  "E:\\NovaCore\\build\\ksa-residency-reference\\source\\KSA.Program.cs": "d11020c5280417d1a02ef35c5d13bad01607ddd5a21a3302e52db136a872557e",
+  "E:\\NovaCore\\build\\ksa-residency-reference\\source\\KSA.PlanetMeshCollection.cs": "b41f4ecef5361e5365d814f76e6dcaa5fab6b6563ede91b2a91f78974b076bb5",
+  "E:\\NovaCore\\build\\ksa-residency-reference\\source\\KSA.Rendering.CelestialTextureStreamer.cs": "433574981d77a48b354baddbadab6a354411e53a67535696a6bb4b8b33ff3ec7"
+}

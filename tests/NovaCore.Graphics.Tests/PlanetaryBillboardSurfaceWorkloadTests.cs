@@ -16,7 +16,8 @@ internal static class PlanetaryBillboardSurfaceWorkloadTests
         var evaluationIn = Interface(Path.Combine(compiled, "production_spherical_billboard.tese.spv"), 1);
         var evaluationOut = Interface(Path.Combine(compiled, "production_spherical_billboard.tese.spv"), 3);
         var fragmentIn = Interface(Path.Combine(compiled, "planetary_production.frag.spv"), 1);
-        VerifyAddressSpecialization(Path.Combine(compiled, "production_spherical_billboard.tese.spv"));
+        VerifyShaderSpecializations(Path.Combine(compiled, "production_spherical_billboard.tese.spv"),
+            Path.Combine(compiled, "planetary_production.frag.spv"), evaluationOut);
 
         Match(vertex, controlIn, "vertex/control");
         Match(controlOut, evaluationIn, "control/evaluation");
@@ -70,7 +71,8 @@ internal static class PlanetaryBillboardSurfaceWorkloadTests
             "32 redundant TCS scalars removed; fragment inputs=16; frame/body provenance preserved");
     }
 
-    private static void VerifyAddressSpecialization(string shader)
+    private static void VerifyShaderSpecializations(string shader, string fragment,
+        Dictionary<uint, Field> evaluationOutputs)
     {
         // Exercise the compiled specialization, including its negative boundary:
         // ordinary code must lose the inverse function; diagnostics must retain it.
@@ -113,6 +115,36 @@ internal static class PlanetaryBillboardSurfaceWorkloadTests
                     "inverse geographic solve survives specialization only for owner/seam diagnostics");
             }
             Console.WriteLine("TES geographic specialization PASS: default=false; ordinary inverse absent; diagnostic inverse retained");
+
+            var fragmentAssembly = Disassemble(fragment, "fragment-original");
+            var fragmentIdentity = Regex.Match(fragmentAssembly, @"OpDecorate\s+(%\S+)\s+SpecId\s+0\b");
+            Require(fragmentIdentity.Success && Regex.IsMatch(fragmentAssembly,
+                Regex.Escape(fragmentIdentity.Groups[1].Value) + @"\s*=\s*OpSpecConstantFalse\b"),
+                "shared fragment defaults to full bootstrap/diagnostic behavior");
+            foreach (var ordinary in new[] { false, true })
+            {
+                var label = ordinary ? "fragment-ordinary" : "fragment-full";
+                var path = Path.Combine(temporary, label + ".spv");
+                RunTool("spirv-opt.exe", fragment, "--set-spec-const-default-value", ordinary ? "0:true" : "0:false",
+                    "--freeze-spec-const", "--fold-spec-const-op-composite", "-O", "-o", path);
+                RunTool("spirv-val.exe", path);
+                var assembly = Disassemble(path, label);
+                // radianceGlowEnabled is the third push-constant member; only
+                // the full variant may read the packed surface-diagnostic selector.
+                Require(Regex.IsMatch(assembly, @"OpAccessChain\s+%\S+\s+%lighting\s+%int_2\b") == !ordinary,
+                    "ordinary fragment has no dynamic diagnostic selector; full variant retains it");
+                var inputs = Interface(path, 1);
+                Require(inputs.All(pair => evaluationOutputs.TryGetValue(pair.Key, out var field) && field == pair.Value),
+                    "each specialized fragment input has an exact TES producer; unused producer outputs are legal");
+                if (ordinary)
+                    Require(!inputs.Keys.Intersect(new uint[] { 11, 12, 13, 14, 15 }).Any(),
+                        "ordinary shading does not consume owner/UV/address/transition/topology diagnostic exports");
+                else
+                    Require(new uint[] { 11, 12, 13, 14, 15 }.All(inputs.ContainsKey),
+                        "bootstrap and diagnostic paths retain their required geographic and ownership inputs");
+            }
+            Console.WriteLine("M13.2 fragment specialization PASS: default=full; ordinary diagnostic read absent; " +
+                "five nonordinary inputs removed; full interface retained; SPIR-V valid");
         }
         finally
         {

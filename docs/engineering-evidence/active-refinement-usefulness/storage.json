@@ -1,0 +1,14 @@
+{
+  "diagnosticOutputCreatedBytes": 14067148004,
+  "permanentEvidenceRetainedBytes": 2330469,
+  "disposableOutputRemovedBytes": 14064817535,
+  "disposableOutputRemainingBytes": 0,
+  "manifestedRawRemovedBytes": 12414426928,
+  "reconstructedUnmanifestedRawRemovedBytes": 1593544112,
+  "reconstructedReason": "Empty primitive reset attempt: logged TES count and deterministic serialized layout; no raw hash retained. Original overflow attempt wrote no raw files.",
+  "verifiedBuildFilesRemoved": 242,
+  "verifiedBuildDiagnosticBytesRemoved": 56846495,
+  "scope": "Logical diagnostic bytes only; excludes normal build outputs and transient isolated deployment copies. No whole-workspace or allocated-size claim.",
+  "budgetBytes": 3000000,
+  "retentionReason": "Reports, exact provenance/parity and timing summaries, source/patch for reproduction, three bounded driver ISA listings for compiler review, and validation. No raw attachments retained."
+}

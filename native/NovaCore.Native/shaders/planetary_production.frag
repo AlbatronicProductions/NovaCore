@@ -150,12 +150,16 @@ uint ResolveProductionFragmentLayer(vec3 unitDirection,out vec2 localUv,out uvec
   return ResolveProductionFragmentLayerAtOrBelow(unitDirection,inputData.controls.x,localUv,address);
 }
 
+// The shared module defaults to the complete bootstrap/diagnostic contract.
+// Only the ordinary NCSM1 pipeline opts into its immutable owner and mode.
+layout(constant_id=0) const bool ordinaryNcsm1=false;
+
 void main()
 {
-  bool anchored=(productionLayer&0x40000000u)!=0u;
+  bool anchored=ordinaryNcsm1||(productionLayer&0x40000000u)!=0u;
   // NCSM1 and startup terrain-v5 are mutually exclusive publication owners.
   vec3 unitDirection=normalize(bodyDirection);
-  uint diagnostic=floatBitsToUint(lighting.radianceGlowEnabled.w)>>16;
+  uint diagnostic=ordinaryNcsm1?0u:floatBitsToUint(lighting.radianceGlowEnabled.w)>>16;
   // Ownership visualization is purely topological. Keep it ahead of physical
   // payload and material evaluation so this diagnostic also isolates geometry
   // submission/raster cost at production resolution.

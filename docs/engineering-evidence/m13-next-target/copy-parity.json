@@ -1,0 +1,37 @@
+{
+  "depth": {
+    "bytes": 19814400,
+    "exact": false,
+    "sha256Baseline": "66be572cd7b56bf81f348cb80bbb0d2643ad423e38dd6cf1ef888fce08d3a2b0",
+    "sha256Probe": "5b12a6795dbb073f6c6d25466f6e7788ad158e2e656294054b6fab54b306ca0c",
+    "unequalBytes": 4
+  },
+  "hdr": {
+    "bytes": 39628800,
+    "exact": false,
+    "sha256Baseline": "a06ace89477432cee115cd9d164361c433717c9b62713ff5774a9c1b3e91ba07",
+    "sha256Probe": "c4193586adeb14c6c5aa491842ba8e14bc6582e2b29132f347b54e1f498fea2f",
+    "unequalBytes": 6
+  },
+  "image": {
+    "bytes": 19814400,
+    "exact": false,
+    "sha256Baseline": "78daafd9129288101db44419ca5a0cf2fe92d9814df3bcfd0cad6f13d603fe4f",
+    "sha256Probe": "56e7231936028fd27a1084a9a44691e562ad0a9f0b8b44b3bac261d59a4b5f43",
+    "unequalBytes": 3
+  },
+  "prepared": {
+    "bytes": 45574784,
+    "exact": true,
+    "sha256Baseline": "e01108c9aacb35bdc5e76f6a9803e9e318823ff5d348cf4c970ba205c9542f33",
+    "sha256Probe": "e01108c9aacb35bdc5e76f6a9803e9e318823ff5d348cf4c970ba205c9542f33",
+    "unequalBytes": 0
+  },
+  "baselineIdentity": [
+    "[native] TES parity capture: frame=250; width=3440; height=1440; samples=0; prepared=712106; generation=1; pupil=3; physicalGeneration=4; diagnostic=0"
+  ],
+  "probeIdentity": [
+    "[native] TES parity capture: frame=250; width=3440; height=1440; samples=0; prepared=712106; generation=1; pupil=3; physicalGeneration=4; diagnostic=0"
+  ],
+  "rawBytesCreated": 249664768
+}

@@ -1,0 +1,101 @@
+[
+  {
+    "preset": "Solar System Overview",
+    "FileName": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Triangle.exe",
+    "Arguments": [
+      "--scene=sol",
+      "--physical-surface=m12d-natural-candidate"
+    ],
+    "WorkingDirectory": "E:\\NovaCore",
+    "EnvironmentVariables": {
+      "NOVACORE_WINDOW_CLIENT_WIDTH": "960",
+      "NOVACORE_WINDOW_CLIENT_HEIGHT": "540",
+      "NOVACORE_WINDOW_BORDERLESS": "0"
+    }
+  },
+  {
+    "preset": "Earth Far / Orbital View",
+    "FileName": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Triangle.exe",
+    "Arguments": [
+      "--scene=earth",
+      "--altitude=3000000",
+      "--surface-site=land",
+      "--physical-surface=m12d-natural-candidate"
+    ],
+    "WorkingDirectory": "E:\\NovaCore",
+    "EnvironmentVariables": {
+      "NOVACORE_WINDOW_CLIENT_WIDTH": "960",
+      "NOVACORE_WINDOW_CLIENT_HEIGHT": "540",
+      "NOVACORE_WINDOW_BORDERLESS": "0"
+    }
+  },
+  {
+    "preset": "Earth 700 km",
+    "FileName": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Triangle.exe",
+    "Arguments": [
+      "--scene=earth",
+      "--altitude=700000",
+      "--surface-site=land",
+      "--physical-surface=m12d-natural-candidate"
+    ],
+    "WorkingDirectory": "E:\\NovaCore",
+    "EnvironmentVariables": {
+      "NOVACORE_WINDOW_CLIENT_WIDTH": "960",
+      "NOVACORE_WINDOW_CLIENT_HEIGHT": "540",
+      "NOVACORE_WINDOW_BORDERLESS": "0"
+    }
+  },
+  {
+    "preset": "Earth \u2014 Fullscreen Native",
+    "FileName": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Triangle.exe",
+    "Arguments": [
+      "--scene=sol",
+      "--focus=earth",
+      "--altitude=700000",
+      "--surface-site=land",
+      "--log=validation",
+      "--log=vulkan",
+      "--physical-surface=m12d-natural-candidate"
+    ],
+    "WorkingDirectory": "E:\\NovaCore",
+    "EnvironmentVariables": {
+      "NOVACORE_WINDOW_CLIENT_WIDTH": "3440",
+      "NOVACORE_WINDOW_CLIENT_HEIGHT": "1440",
+      "NOVACORE_WINDOW_BORDERLESS": "1",
+      "VK_INSTANCE_LAYERS": "VK_LAYER_KHRONOS_validation"
+    }
+  },
+  {
+    "preset": "Florida Launch Site",
+    "FileName": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Triangle.exe",
+    "Arguments": [
+      "--scene=sol",
+      "--focus=earth",
+      "--surface-site=florida-launch",
+      "--physical-surface=m12d-natural-candidate"
+    ],
+    "WorkingDirectory": "E:\\NovaCore",
+    "EnvironmentVariables": {
+      "NOVACORE_WINDOW_CLIENT_WIDTH": "960",
+      "NOVACORE_WINDOW_CLIENT_HEIGHT": "540",
+      "NOVACORE_WINDOW_BORDERLESS": "0"
+    }
+  },
+  {
+    "preset": "New Earth Renderer",
+    "FileName": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Triangle.exe",
+    "Arguments": [
+      "--scene=m12d-production-spherical-billboard",
+      "--altitude=700000",
+      "--surface-site=land",
+      "--log=vulkan",
+      "--physical-surface=m12d-natural-candidate"
+    ],
+    "WorkingDirectory": "E:\\NovaCore",
+    "EnvironmentVariables": {
+      "NOVACORE_WINDOW_CLIENT_WIDTH": "3440",
+      "NOVACORE_WINDOW_CLIENT_HEIGHT": "1440",
+      "NOVACORE_WINDOW_BORDERLESS": "1"
+    }
+  }
+]

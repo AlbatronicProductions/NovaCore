@@ -1,0 +1,17 @@
+{
+  "scope": "Accounted diagnostic payload bytes, not cumulative filesystem write traffic. Excludes routine rebuild products, isolated executable copies and discarded in-memory output from timed-out attempts; does not claim whole-workspace accounting.",
+  "rawCaptureBytesCreatedAndRemoved": 249664768,
+  "emptyTesCaptureHeadersCreatedAndRemoved": 32,
+  "verboseAndIntermediateFilesRemoved": {
+    "count": 93,
+    "bytes": 31600584
+  },
+  "generatedPythonCacheRemovedBytes": 8854,
+  "redundantPatchComposerRemovedBytes": 7407,
+  "permanentEvidenceRetainedBytes": 1243672,
+  "accountedDiagnosticBytesCreated": 282525317,
+  "disposableOutputRemovedBytes": 281281645,
+  "disposableOutputRemainingBytes": 0,
+  "bulkCaptureRetainedBytes": 0,
+  "cleanupBoundary": "Only build/m13-next-target files in disposable-manifest.json, this task generated analyze.pyc and redundant capture_host.py. Existing build/dependency/runtime/assets untouched."
+}

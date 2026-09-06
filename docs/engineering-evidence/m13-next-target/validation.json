@@ -1,0 +1,48 @@
+{
+  "refs": {
+    "HEAD": "fade1384c1c7df93d954e7223b1cc8f17db17f98",
+    "origin/main": "fade1384c1c7df93d954e7223b1cc8f17db17f98",
+    "m13.1-ncsm1-tes-hotpath^{commit}": "fade1384c1c7df93d954e7223b1cc8f17db17f98"
+  },
+  "branch": "main",
+  "productionDiff": "empty",
+  "stagedDiff": "empty",
+  "diffCheck": "PASS",
+  "releaseBuilds": [
+    "native PASS",
+    "Triangle PASS: 0 warnings, 0 errors",
+    "Graphics PASS: 0 warnings, 0 errors"
+  ],
+  "focusedHeadless": {
+    "passCount": 4,
+    "fail": 0,
+    "skip": 0
+  },
+  "gpu": {
+    "passCount": 8,
+    "fail": 0,
+    "skip": 0
+  },
+  "additionalPupilRuntimeRepeat": "PASS",
+  "strictVulkan": "PASS for completed runs; canonical Khronos validation; no VUID suppression",
+  "shaders": {
+    "count": 49,
+    "allBaselineExact": true
+  },
+  "nativeIdentities": {
+    "build\\native-ninja-release\\NovaCore.Native.dll": "9ee371825f4025f6c45acfe963340c6d94f8e38ca54bd20ae7d261f068a647af",
+    "samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Native.dll": "9ee371825f4025f6c45acfe963340c6d94f8e38ca54bd20ae7d261f068a647af",
+    "tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Native.dll": "9ee371825f4025f6c45acfe963340c6d94f8e38ca54bd20ae7d261f068a647af"
+  },
+  "managedIdentity": {
+    "samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Triangle.dll": "ac55ec1904c57c482d69bce6972b899bfde241800f4efd65c835051779df22a0"
+  },
+  "manualAcceptance": "not rerun",
+  "finalStatusShort": "?? docs/engineering-evidence/m13-next-target/",
+  "reproductionChecks": [
+    "Python AST parse PASS",
+    "JSON parse PASS",
+    "diagnostic patch applicability PASS",
+    "documentation/script whitespace PASS"
+  ]
+}

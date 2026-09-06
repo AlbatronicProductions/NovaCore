@@ -1,0 +1,168 @@
+[1/2] Building CXX object CMakeFiles\NovaCore.Native.dir\NovaCoreNative.cpp.obj
+[2/2] Linking CXX shared library NovaCore.Native.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.92
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.63
+Vulkan profile: CANONICAL (Khronos validation only)
+Canonical layer: manifest=C:\VulkanSDK\1.4.357.0\Bin\VkLayer_khronos_validation.json; binary=C:\VulkanSDK\1.4.357.0\Bin\VkLayer_khronos_validation.dll; sha256=9725CE7A9225F42F8961C433DACAE4CC8FAE3A16E95EF1D0A7C7E8BC09132C40; strict=true
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=4E653C3B20602DE384097D33A5DB62C78CA0E0D0E1DDA73C0B2EBEBF9CF40BBA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+TES geographic specialization PASS: default=false; ordinary inverse absent; diagnostic inverse retained
+P2S5G compiled surface interface: VS=16 scalars; TCS=13 scalars/control point; 32 redundant TCS scalars removed; fragment inputs=16; frame/body provenance preserved
+PASS [headless] M12D-P2S5G bounded spherical billboard surface interface
+Graphics Release: selected=1; pass=1; fail=0; skip=0; excluded=90
+Vulkan profile: CANONICAL (Khronos validation only)
+Canonical layer: manifest=C:\VulkanSDK\1.4.357.0\Bin\VkLayer_khronos_validation.json; binary=C:\VulkanSDK\1.4.357.0\Bin\VkLayer_khronos_validation.dll; sha256=9725CE7A9225F42F8961C433DACAE4CC8FAE3A16E95EF1D0A7C7E8BC09132C40; strict=true
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=4E653C3B20602DE384097D33A5DB62C78CA0E0D0E1DDA73C0B2EBEBF9CF40BBA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Facility support CPU PASS: maxSlope=0.13058577407507954; boundaryJump=2.7174163168552923E-06; queryNs=10041.51; root/depth/geography=unchanged
+PASS [headless] Florida facility support
+Graphics Release: selected=1; pass=1; fail=0; skip=0; excluded=90
+Vulkan profile: CANONICAL (Khronos validation only)
+Canonical layer: manifest=C:\VulkanSDK\1.4.357.0\Bin\VkLayer_khronos_validation.json; binary=C:\VulkanSDK\1.4.357.0\Bin\VkLayer_khronos_validation.dll; sha256=9725CE7A9225F42F8961C433DACAE4CC8FAE3A16E95EF1D0A7C7E8BC09132C40; strict=true
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=4E653C3B20602DE384097D33A5DB62C78CA0E0D0E1DDA73C0B2EBEBF9CF40BBA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Canonical physical authority: directions=10; heightDelta=0.000000000E+000m; splitHeightDelta=0.000000000E+000m; positionDelta=0.000000000E+000m; normalDelta=0.000000000E+000rad; boundaryHeight=0.000000000E+000m; boundaryNormal=0.000000000E+000rad
+PASS [headless] Single canonical physical surface authority
+Graphics Release: selected=1; pass=1; fail=0; skip=0; excluded=90
+Vulkan profile: CANONICAL (Khronos validation only)
+Canonical layer: manifest=C:\VulkanSDK\1.4.357.0\Bin\VkLayer_khronos_validation.json; binary=C:\VulkanSDK\1.4.357.0\Bin\VkLayer_khronos_validation.dll; sha256=9725CE7A9225F42F8961C433DACAE4CC8FAE3A16E95EF1D0A7C7E8BC09132C40; strict=true
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=4E653C3B20602DE384097D33A5DB62C78CA0E0D0E1DDA73C0B2EBEBF9CF40BBA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+M12D candidate renderer integration: samples=24; heightMax=9.09494701772928238E-013m; normalMax=2.10734242554470173E-008rad; sharedBoundaryMax=0.00000000000000000E+000m; production=4; numericalReference=3
+PASS [headless] Generation-4 physical renderer integration
+Graphics Release: selected=1; pass=1; fail=0; skip=0; excluded=90
+Vulkan profile: CANONICAL (Khronos validation only)
+Canonical layer: manifest=C:\VulkanSDK\1.4.357.0\Bin\VkLayer_khronos_validation.json; binary=C:\VulkanSDK\1.4.357.0\Bin\VkLayer_khronos_validation.dll; sha256=9725CE7A9225F42F8961C433DACAE4CC8FAE3A16E95EF1D0A7C7E8BC09132C40; strict=true
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=4E653C3B20602DE384097D33A5DB62C78CA0E0D0E1DDA73C0B2EBEBF9CF40BBA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Loader-visible layers: VK_LAYER_KHRONOS_validation
+GPU prerequisite: VK_LAYER_KHRONOS_validation available; query/proof contexts enable it in both configurations.
+P2S3 upload: level=Orbital; readiness=1; uploads=1; expectedUploads=1; hash=0x46714C6571D73AE6
+P2S3 upload: level=IntermediateApproach; readiness=1; uploads=2; expectedUploads=2; hash=0xAAC90882FE7F656E
+P2S3 upload: level=SurfacePupil; readiness=1; uploads=3; expectedUploads=3; hash=0xBBBACB117D88439D
+P2S3 scaling: vertices=100000; triangles=200000; prepareMs=0.019680; normalMs=0.105560; cullMs=0.149400; compactMs=0.079360; gpuMs=0.411680
+P2S3 scaling: vertices=250000; triangles=500000; prepareMs=0.081040; normalMs=0.197040; cullMs=0.253040; compactMs=0.161840; gpuMs=0.760280
+P2S3 scaling: vertices=500000; triangles=1000000; prepareMs=0.226560; normalMs=0.346680; cullMs=0.435920; compactMs=0.325600; gpuMs=1.393200
+P2S3 runtime: uploads=3; replacements=2; frameWrites=9; cullDispatches=9; indirectSubmissions=6; bytes=96436472; validation=0
+PASS [gpu] M12D-P2S3 spherical billboard GPU runtime proof
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=4E653C3B20602DE384097D33A5DB62C78CA0E0D0E1DDA73C0B2EBEBF9CF40BBA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Loader-visible layers: VK_LAYER_KHRONOS_validation
+GPU prerequisite: VK_LAYER_KHRONOS_validation available; query/proof contexts enable it in both configurations.
+P2S4 Orbital: vertices=162; triangles=320; physicalSamples=162; dispatched=162; sharedReuse=0; heightMax=2.77850631391629577E-010m; normalMax=3.48888470565095988E-005rad; visible=198; physicalPrepare=4.618240ms; billboardFinalize=0.011680ms; normalPublish=0.012400ms; cull=0.012960ms; compact=0.010840ms; draw=0.027920ms; validation=0
+P2S4 IntermediateApproach: vertices=642; triangles=1280; physicalSamples=642; dispatched=480; sharedReuse=162; heightMax=3.53338691638782620E-010m; normalMax=6.93154450124111539E-005rad; visible=812; physicalPrepare=4.535200ms; billboardFinalize=0.014040ms; normalPublish=0.012360ms; cull=0.012440ms; compact=0.010400ms; draw=0.029320ms; validation=0
+P2S4 SurfacePupil: vertices=2562; triangles=5120; physicalSamples=2562; dispatched=1920; sharedReuse=642; heightMax=3.53338691638782620E-010m; normalMax=3.65032808294747375E-004rad; visible=3272; physicalPrepare=4.500640ms; billboardFinalize=0.013640ms; normalPublish=0.013440ms; cull=0.015280ms; compact=0.011880ms; draw=0.035880ms; validation=0
+PASS [gpu] M12D-P2S4 canonical natural terrain billboard binding
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=4E653C3B20602DE384097D33A5DB62C78CA0E0D0E1DDA73C0B2EBEBF9CF40BBA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Loader-visible layers: VK_LAYER_KHRONOS_validation
+GPU prerequisite: VK_LAYER_KHRONOS_validation available; query/proof contexts enable it in both configurations.
+P2S5C v2 GPU L00: hash=0xF0788006615C9665; vertices=2486; triangles=4968; visible=3672; directionMax=1.534168443E-007rad; uploadMs=2.637500; gpuMs=0.094440
+P2S5C v2 GPU L16: hash=0x7D6E2E4117BE64AE; vertices=416142; triangles=832280; visible=827096; directionMax=1.534168443E-007rad; uploadMs=7.464900; gpuMs=6.701480
+P2S5C v2 GPU L17: hash=0xE7D3421EF8CC59AB; vertices=450778; triangles=901552; visible=896368; directionMax=1.534168443E-007rad; uploadMs=8.392400; gpuMs=6.834160
+P2S5C native residency: current=L16; incoming=L17; overlapBytes=58950376; publications=1; deferredRetirements=1; owners=1
+P2S5C selector probe: 80000000m=L0;35786000m=L0;3000000m=L2;700000m=L4;100000m=L7;10000m=L10;1000m=L13;250m=L15;100m=L16;10m=L17
+P2S5C selector: altitudes=[80000000,35786000,3000000,700000,100000,10000,1000,250,100,10]; levels=[0,0,2,4,7,10,13,15,16,17]; monotonic=true
+P2S5C reuse: L16-L17 active=450778; reused=416142; new=34636; reuse=92.316%; snapNew=768
+P2S5C2 snapped geometry: minOutward=4.883996022E-004; minEdgeSquared=3.286500721E-004; nonOutward=0; triangles=4968
+P2S5C2 snapped geometry: minOutward=1.934023352E-004; minEdgeSquared=1.602798541E-004; nonOutward=0; triangles=17640
+P2S5C2 snapped geometry: minOutward=6.900794383E-005; minEdgeSquared=6.272674066E-005; nonOutward=0; triangles=29400
+P2S5C2 snapped geometry: minOutward=2.088927651E-005; minEdgeSquared=1.997148328E-005; nonOutward=0; triangles=48392
+P2S5C2 snapped geometry: minOutward=5.706028604E-006; minEdgeSquared=5.608086454E-006; nonOutward=0; triangles=76784
+P2S5C2 snapped geometry: minOutward=1.478493491E-006; minEdgeSquared=1.469407618E-006; nonOutward=0; triangles=116160
+P2S5C2 snapped geometry: minOutward=3.744940448E-007; minEdgeSquared=3.737350961E-007; nonOutward=0; triangles=165696
+P2S5C2 snapped geometry: minOutward=9.402629650E-008; minEdgeSquared=9.397480279E-008; nonOutward=0; triangles=222888
+P2S5C2 snapped geometry: minOutward=2.353628387E-008; minEdgeSquared=2.353264712E-008; nonOutward=0; triangles=285568
+P2S5C2 snapped geometry: minOutward=5.886142796E-009; minEdgeSquared=5.885910459E-009; nonOutward=0; triangles=351232
+P2S5C2 snapped geometry: minOutward=1.471672491E-009; minEdgeSquared=1.471657210E-009; nonOutward=0; triangles=418576
+P2S5C2 snapped geometry: minOutward=3.679269147E-010; minEdgeSquared=3.679259087E-010; nonOutward=0; triangles=486784
+P2S5C2 snapped geometry: minOutward=9.198228826E-011; minEdgeSquared=9.198222586E-011; nonOutward=0; triangles=555672
+P2S5C2 snapped geometry: minOutward=2.299560735E-011; minEdgeSquared=2.299560346E-011; nonOutward=0; triangles=624656
+P2S5C2 snapped geometry: minOutward=5.748904043E-012; minEdgeSquared=5.748903802E-012; nonOutward=0; triangles=693736
+P2S5C2 snapped geometry: minOutward=1.437226149E-012; minEdgeSquared=1.437226134E-012; nonOutward=0; triangles=763008
+P2S5C2 snapped geometry: minOutward=3.593065460E-013; minEdgeSquared=3.593065450E-013; nonOutward=0; triangles=832280
+P2S5C2 snapped geometry: minOutward=8.982663703E-014; minEdgeSquared=8.982663697E-014; nonOutward=0; triangles=901552
+P2S5C2 snapped geometry: minOutward=8.982663700E-014; minEdgeSquared=8.982663694E-014; nonOutward=0; triangles=901552
+P2S5C2 actual reuse: L16-L17=416142/450778 (92.316%); snap=437574/450778 (97.071%); entering=13204
+P2S5C2 physical snap L8: active=142786; reused=125566; new=17220; reuse=87.940%; initialCpu=1264.340ms; initialGpu=26.988080ms; snapCpu=839.742ms; snapGpu=10.229920ms; heightParity=9.021050573E-011m; normalParity=7.943870387E-007rad; topologyUploads=0
+P2S5C2 moving runtime: publications=1; topologyUploads=1; current=L8; pupilError=1.963069314E-004rad; resident=19418836; peak=19418836; callback=0.368980/1.605700/1.605700ms
+P2S5C2 moving timings avg/p95/max ms: selector=0.009840/0.032400/0.032400; pupilSnap=0.035560/0.145400/0.145400; scheduling=1.038700/1.038700/1.038700; physical=18.026500/18.026500/18.026500; gpuPrepare=0.000000/0.000000/0.000000; publication=0.016400/0.016400/0.016400
+P2S5D cross-level movement: currentFrame=1->3; L8MovesDuringL9Prepare=true; publications=2; owners=1; zero=0; overlap=0; stale=0
+P2S5C2 pupil campaign error: max=2.323803751E-003rad; authoredAxisThreshold=2.222634321E-003rad
+P2S5C2 campaign: levels=18; descent=18; ascent=18; frames=86; cardinalDiagonalWrapPoles=8; maxPupilError=2.323803751E-003rad; timeWarp=body-fixed input invariant; unanchored=body-fixed input invariant
+P2S5C exact horizon: base=1344.683px; TES64=21.010672px; transitionCurvature=0.459px; silhouette=1.312px; requiresManualSignificanceCheck=true
+P2S5E physical responsibility split: samples=3; canonicalHeightMax=0.000000000E+000m; factorDependentFullSurface=false; initialBasePreparation=complete; tesCullEnvelope=11.812587m; radialFrontFace=clockwise; nestedScaleMeshFrontFace=counter-clockwise
+P2S5F zero-visible publication contract: complete-zero=publish; same-generation-reentry=visible; malformed-zero=reject; owners=1
+P2S5F persistent resources: topologyCapacity=18; topologyKey=family/hash/count; workSlots=current+incoming/spare; crossLevelPhysical=GPU; publication=fence-atomic
+P2S5F body routing: resident Earth resources are reusable state, not cross-body presentation authority
+P2S5F directional visibility: sphere broad phase; prepared-triangle plane narrow phase; TES support active within 50m; index order unchanged
+P2S5D conservative displaced horizon: altitudes=10m,25m,50m,100m,1000m,5000m,10000m; bearings=4; levels=L14-L17; snap/cube/pole=true; baseEnvelope=9596.697284m; tesEnvelope=11.812587m; retained=42
+P2S5C2 snapped geometry: minOutward=5.748904042E-012; minEdgeSquared=5.748903802E-012; nonOutward=0; triangles=693736
+P2S5C3 lateral continuity: state=stationary; level=L14; pupil=1; rebase=False; reuse=346870/346870; canonicalHeightDelta=0.000000000E+000m; canonicalPositionDelta=0.000000000E+000m; renderedBaseHeightDelta=0.000000000E+000m; outerCoverageHeightDelta=0.000000000E+000m
+P2S5C3 lateral continuity: state=forward; level=L14; pupil=1; rebase=False; reuse=346870/346870; canonicalHeightDelta=0.000000000E+000m; canonicalPositionDelta=0.000000000E+000m; renderedBaseHeightDelta=0.000000000E+000m; outerCoverageHeightDelta=0.000000000E+000m
+P2S5C3 lateral continuity: state=backward; level=L14; pupil=1; rebase=False; reuse=346870/346870; canonicalHeightDelta=0.000000000E+000m; canonicalPositionDelta=0.000000000E+000m; renderedBaseHeightDelta=0.000000000E+000m; outerCoverageHeightDelta=0.000000000E+000m
+P2S5C3 lateral continuity: state=lateral; level=L14; pupil=1; rebase=False; reuse=346870/346870; canonicalHeightDelta=0.000000000E+000m; canonicalPositionDelta=0.000000000E+000m; renderedBaseHeightDelta=0.000000000E+000m; outerCoverageHeightDelta=0.000000000E+000m
+P2S5C3 lateral continuity: state=same-level-snap; level=L14; pupil=2; rebase=False; reuse=327426/346870; canonicalHeightDelta=0.000000000E+000m; canonicalPositionDelta=0.000000000E+000m; renderedBaseHeightDelta=0.000000000E+000m; outerCoverageHeightDelta=0.000000000E+000m
+P2S5C3 lateral continuity: state=same-level-rebase; level=L14; pupil=3; rebase=True; reuse=0/346870; canonicalHeightDelta=0.000000000E+000m; canonicalPositionDelta=0.000000000E+000m; renderedBaseHeightDelta=2.594971238E+000m; outerCoverageHeightDelta=1.704336860E+000m
+P2S5C3 lateral continuity: state=adjacent-L15; level=L15; pupil=2; rebase=False; reuse=335702/381506; canonicalHeightDelta=0.000000000E+000m; canonicalPositionDelta=0.000000000E+000m; renderedBaseHeightDelta=2.811481245E-003m; outerCoverageHeightDelta=0.000000000E+000m
+PASS [gpu] M12D-P2S5C production spherical billboard runtime
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=4E653C3B20602DE384097D33A5DB62C78CA0E0D0E1DDA73C0B2EBEBF9CF40BBA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Loader-visible layers: VK_LAYER_KHRONOS_validation
+GPU prerequisite: VK_LAYER_KHRONOS_validation available; query/proof contexts enable it in both configurations.
+M12D candidate GPU physical height: samples=94; heightMax=9.31322574615478516E-010m; gradientMax=3.01796837455150374E-005; normalMax=3.01758816048377012E-005rad; gpu=8.721760ms; validation=0
+GPU physical height: samples=94; local=19; globalOnly=75; transportMax=2.53439981842340345E-005m; gpuReconstructionMax=0.00000000000000000E+000m; uvMax=2.22044604925031308E-016; heightMax=2.34011032773651095E-010m; gradientMax=3.00819001600935443E-005; normalMax=2.97136066660473252E-005rad; groups=2; gpu=8.701200ms; boundedCpu=687.780ms; validation=0
+PASS [gpu] GPU physical-height preparation
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=4E653C3B20602DE384097D33A5DB62C78CA0E0D0E1DDA73C0B2EBEBF9CF40BBA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Loader-visible layers: VK_LAYER_KHRONOS_validation
+GPU prerequisite: VK_LAYER_KHRONOS_validation available; query/proof contexts enable it in both configurations.
+P2A continuity: valueMax=8.52961323100887253E-007; gradientMax=1.40355688347765773E-006; secondDerivativeResidualMax=5.38152750664822044E-003; probes=35
+P2A planetary: valueLipschitzRatioMax=7.46191538750844707E-002; gradientDeltaMax=6.78443485092024857E-006; probes=25; cube/longitude/poles/antipodes=covered
+P2A bounds: sampledValue=1.46163299655574908E+000/4.76313972081441239E+000; sampledGradient=1.56791337541058007E-001/1.05273437500000000E+000; analytic=sqrt(3),12.25/cell
+P2A structure: directional=0.117213/0.761195; crossGrid=0.129676/0.399839; autocorrelation=-0.202239/0.642900; repeated=0.204352/0.835381; seeds=4; domains=4
+P2A CPU: p2a=25.338 ns/query; generation3=103.328 ns/query; ratio=0.2452; allocations=0 bytes/query-path; checksum=-10566.842338462291
+P2A CPU/GLSL: samples=37; cellMismatch=0; hashMismatch=0; gradientSelectionMax=0.00000000000000000E+000; valueMax=1.83880688453541552E-015; bodyGradientMax=1.94289029309402395E-016; validation=0; gpu=0.028560 ms
+PASS [gpu] M12D-P2A canonical hashed cell field proof
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=4E653C3B20602DE384097D33A5DB62C78CA0E0D0E1DDA73C0B2EBEBF9CF40BBA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Loader-visible layers: VK_LAYER_KHRONOS_validation
+GPU prerequisite: VK_LAYER_KHRONOS_validation available; query/proof contexts enable it in both configurations.
+P2B derivative: familyMax=8.32009993804163734E-007; composedMax=4.44535637230908577E-007; domainWarpChain=analytic; biomeWeightDerivative=analytic
+P2B continuity: valueMax=5.14042142185644479E-011; gradientMax=1.46203986417888004E-011; secondDerivativeResidualMax=2.70941045692348580E-007; probes=349; cell/family/biome/warp=covered
+P2B planetary: valueMax=6.44252705619408061E-005; gradientMax=4.22139482136847510E-007; probes=23; cube/longitude/poles/remote=covered
+P2B bounds: macro=36.511631; meso=36.373067; near=11.812587; total=84.697284; gradient=0.733111206; sampledHeight=13.134562; sampledGradient=0.037343773
+P2B structure Grassland: directional=0.203004; axisPersistence=0.476139; crossGrid4=0.049194; autocorrelation=0.284486; repeatedStamp=0.287591; gen3=0.686227/0.397887/0.142762/0.800021/0.883288
+P2B structure ScrubDry: directional=0.254675; axisPersistence=0.184057; crossGrid4=0.004686; autocorrelation=0.167571; repeatedStamp=0.241123; gen3=0.686227/0.397887/0.142762/0.800021/0.883288
+P2B structure RockyMountain: directional=0.485401; axisPersistence=0.186774; crossGrid4=0.183531; autocorrelation=0.447363; repeatedStamp=0.424021; gen3=0.686227/0.397887/0.142762/0.800021/0.883288
+P2B structure Alpine: directional=0.360236; axisPersistence=0.240743; crossGrid4=0.132803; autocorrelation=0.297640; repeatedStamp=0.256602; gen3=0.686227/0.397887/0.142762/0.800021/0.883288
+P2B structure DesertDunes: directional=0.142103; axisPersistence=0.570421; crossGrid4=0.006118; autocorrelation=0.314161; repeatedStamp=0.270739; gen3=0.686227/0.397887/0.142762/0.800021/0.883288
+P2B structure CoastWetland: directional=0.233293; axisPersistence=0.431537; crossGrid4=0.077389; autocorrelation=0.265005; repeatedStamp=0.186022; gen3=0.686227/0.397887/0.142762/0.800021/0.883288
+P2B structure SnowGlacial: directional=0.370799; axisPersistence=0.332272; crossGrid4=0.078178; autocorrelation=0.170599; repeatedStamp=0.210978; gen3=0.686227/0.397887/0.142762/0.800021/0.883288
+P2B structure GenericRemote: directional=0.201337; axisPersistence=0.262398; crossGrid4=0.058484; autocorrelation=0.199027; repeatedStamp=0.281244; gen3=0.686227/0.397887/0.142762/0.800021/0.883288
+P2B family Grassland: rmsHeight=0.928515; rmsGradient=0.006258423; ridgeDensity=0.204762; anisotropy=0.049834; correlationLength=133.200m; slopeP90=0.009302578
+P2B family ScrubDry: rmsHeight=1.215718; rmsGradient=0.005232054; ridgeDensity=0.226190; anisotropy=0.039421; correlationLength=177.600m; slopeP90=0.007805916
+P2B family RockyMountain: rmsHeight=7.187572; rmsGradient=0.015191691; ridgeDensity=0.215476; anisotropy=0.106683; correlationLength=192.400m; slopeP90=0.022462644
+P2B family Alpine: rmsHeight=3.078236; rmsGradient=0.013910998; ridgeDensity=0.216667; anisotropy=0.024750; correlationLength=236.800m; slopeP90=0.020758911
+P2B family DesertDunes: rmsHeight=0.590143; rmsGradient=0.004710864; ridgeDensity=0.215476; anisotropy=0.006314; correlationLength=355.200m; slopeP90=0.006871044
+P2B family CoastWetland: rmsHeight=0.199068; rmsGradient=0.001000807; ridgeDensity=0.204762; anisotropy=0.071398; correlationLength=133.200m; slopeP90=0.001459340
+P2B family SnowGlacial: rmsHeight=3.066038; rmsGradient=0.006705174; ridgeDensity=0.221429; anisotropy=0.046082; correlationLength=192.400m; slopeP90=0.009964772
+P2B family GenericRemote: rmsHeight=1.675004; rmsGradient=0.003772556; ridgeDensity=0.233333; anisotropy=0.041667; correlationLength=162.800m; slopeP90=0.005746449
+P2B CPU/GLSL: samples=54; familySelectionMismatch=0; octaveIdentity=frozen; valueMax=1.73194791841524420E-014; gradientMax=3.16200644375593419E-017; weightMax=1.77635683940025046E-015; orientationMax=5.79553433516819021E-016; validation=0; gpu=0.206440 ms
+P2B CPU (Release acceptance): composed=479.233 ns/query; generation3Full=548.598 ns/query; ratio=0.8736; allocations=0 bytes; perFamily=Grassland=241.91ns,ScrubDry=201.60ns,RockyMountain=264.48ns,Alpine=264.80ns,DesertDunes=265.16ns,CoastWetland=202.96ns,SnowGlacial=263.99ns,GenericRemote=203.14ns; checksum=1278228.553804121
+PASS [gpu] M12D-P2B multiscale natural terrain family proof
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=4E653C3B20602DE384097D33A5DB62C78CA0E0D0E1DDA73C0B2EBEBF9CF40BBA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Loader-visible layers: VK_LAYER_KHRONOS_validation
+GPU prerequisite: VK_LAYER_KHRONOS_validation available; query/proof contexts enable it in both configurations.
+Natural terrain CPU/direct-GLSL/prepared-GPU: samples=81; preparedMax=2.84217094304040074E-014; gradientMax=6.13995474139275882E-017
+PASS [gpu] M12D-P2C1 prepared natural terrain
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=4E653C3B20602DE384097D33A5DB62C78CA0E0D0E1DDA73C0B2EBEBF9CF40BBA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Loader-visible layers: VK_LAYER_KHRONOS_validation
+GPU prerequisite: VK_LAYER_KHRONOS_validation available; query/proof contexts enable it in both configurations.
+Subdivision compute backend: factor=1; vertices=98; indices=576; bytes=16368; displacement=1.078320ms; normals=0.032280ms; total=1.458ms; heightMax=1.34429743411601521E-004m; coarseInterpolatedNormalMax=0.00000000000000000E+000rad; coarseInterpolatedNormalAvg=0.00000000000000000E+000rad
+Subdivision compute backend: factor=2; vertices=386; indices=2304; bytes=64752; displacement=1.066240ms; normals=0.032400ms; total=1.578ms; heightMax=1.87117442692397162E-004m; coarseInterpolatedNormalMax=5.86553334246705318E-002rad; coarseInterpolatedNormalAvg=2.14625794648820312E-002rad
+Subdivision compute backend: factor=4; vertices=1538; indices=9216; bytes=258288; displacement=1.081320ms; normals=0.032360ms; total=2.123ms; heightMax=2.22650857722328510E-004m; coarseInterpolatedNormalMax=7.96480221007049155E-002rad; coarseInterpolatedNormalAvg=2.70313187792665562E-002rad
+M12D candidate displaced mesh: vertices=98; heightMax=2.11334107916627545E-004m; normalMax=3.94247667650072383E-008rad; validation=0
+GPU displaced mesh: hash=0x7F3262E7C37D781B; vertices=98; triangles=192; adjacency=576; heightMax=1.34429743411601521E-004m; radialMax=1.02445483207702637E-008m; cameraMax=5.10232634532984952E-001m; normalAngleMax=3.65002414998885740E-008rad; adjacentNormalMax=5.29797930176704179E-001rad; sharedPositionGap=0m; sharedNormalGap=0rad; windingMin=3.64620079668126318E+012; persistentBytes=200810848; setup=684.848ms; displacement=1.077040ms; normals=0.032840ms; total=3.293ms; validation=0
+PASS [gpu] Displaced mesh and physical normals
+Graphics Release: selected=8; pass=8; fail=0; skip=0; excluded=83

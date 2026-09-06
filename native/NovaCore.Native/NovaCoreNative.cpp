@@ -1428,6 +1428,14 @@ void Swap(App &a) {
     const VkSpecializationMapEntry addressEntry{0,0,sizeof diagnosticAddress};
     const VkSpecializationInfo addressSpecialization{1,&addressEntry,sizeof diagnosticAddress,&diagnosticAddress};
     candidateStages[2].pSpecializationInfo=&addressSpecialization;
+    // Context diagnostics are immutable. Focus, pupil and physical-generation
+    // publication change draw ownership/data, not this pipeline's shader contract.
+    // The separate startup pipeline keeps the shared fragment module's default.
+    const VkBool32 ordinaryShading=a.surfaceDiagnostic==0?VK_TRUE:VK_FALSE;
+    const VkSpecializationMapEntry shadingEntry{0,0,sizeof(ordinaryShading)};
+    const VkSpecializationInfo shadingSpecialization{1,&shadingEntry,sizeof(ordinaryShading),&ordinaryShading};
+    candidateStages[3].pSpecializationInfo=&shadingSpecialization;
+    a.Log(NC_LOG_VULKAN,ordinaryShading?"NCSM1 fragment shading: ordinary specialization; startup=shared default":"NCSM1 fragment shading: full diagnostic specialization; startup=shared default");
     a.Log(NC_LOG_VULKAN,diagnosticAddress?"NCSM1 TES geographic address: owner/seam specialization":"NCSM1 TES geographic address: ordinary specialization (inverse disabled)");
     VkPipelineVertexInputStateCreateInfo candidateInput{VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO};VkPipelineInputAssemblyStateCreateInfo candidateAssembly=ia;candidateAssembly.topology=VK_PRIMITIVE_TOPOLOGY_PATCH_LIST;VkPipelineTessellationStateCreateInfo candidateTessellation{VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO};candidateTessellation.patchControlPoints=3;
     // .nctop2 candidate triangles remain clockwise after Vulkan's authored
