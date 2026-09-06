@@ -84,11 +84,25 @@ switch (command)
     }
     case "clean-incomplete":
     {
-        Console.WriteLine($"Removed stale incomplete files: {TerrainAssetCache.RemoveStaleIncompleteFiles(cacheRoot, TimeSpan.FromHours(24))}");
-        return 0;
+        var report = TerrainCacheCleanup.Inspect(cacheRoot, TimeSpan.FromHours(24));
+        Console.WriteLine($"Cache cleanup report: {cacheRoot}; candidates={report.Candidates.Count}; reclaimableBytes={report.ReclaimableBytes}");
+        foreach (var candidate in report.Candidates)
+            Console.WriteLine($"Candidate: {candidate.Path}; bytes={candidate.Bytes}; temporarySha256={candidate.Sha256}; reason=abandoned publication temporary with verified complete recovery object; finalObjectRetained={candidate.FinalPath}; contentIdentity={candidate.ContentSha256}; currentSelectedManifest={candidate.ContentSha256 == manifest.Sha256}");
+        foreach (var retained in report.Retained) Console.WriteLine($"Retained: {retained}");
+        Console.WriteLine("Final objects, source caches and download/generator staging are never selected.");
+        if (!args.Contains("--apply", StringComparer.OrdinalIgnoreCase))
+        { Console.WriteLine("Dry run only. Add --apply to remove only the reported candidates after revalidation."); return 0; }
+        var removed = 0; long removedBytes = 0; var skipped = 0;
+        foreach (var candidate in report.Candidates)
+        {
+            if (TerrainCacheCleanup.TryRemove(cacheRoot, candidate, out var reason)) { removed++; removedBytes += candidate.Bytes; }
+            else { skipped++; Console.WriteLine($"Skipped: {candidate.Path}; {reason}"); }
+        }
+        Console.WriteLine($"Removed abandoned publication temporaries: {removed}; reclaimedBytes={removedBytes}; skipped={skipped}");
+        return skipped == 0 ? 0 : 1;
     }
     default:
-        Console.Error.WriteLine("Usage: NovaCore.AssetTool [status|verify|fetch|build|install|clean-incomplete] [asset-id] [--cache path] [--source path]");
+        Console.Error.WriteLine("Usage: NovaCore.AssetTool [status|verify|fetch|build|install|clean-incomplete] [asset-id] [--cache path] [--source path] [--apply for clean-incomplete]");
         return 2;
 }
 

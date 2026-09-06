@@ -272,16 +272,8 @@ public static class TerrainAssetCache
 
     public static int RemoveStaleIncompleteFiles(string cacheRoot, TimeSpan minimumAge)
     {
-        if (!Directory.Exists(cacheRoot)) return 0;
-        var threshold = DateTime.UtcNow - minimumAge;
-        var removed = 0;
-        foreach (var path in Directory.EnumerateFiles(cacheRoot, "*.incomplete*", SearchOption.AllDirectories))
-        {
-            if (File.GetLastWriteTimeUtc(path) > threshold) continue;
-            File.Delete(path);
-            removed++;
-        }
-        return removed;
+        var report = TerrainCacheCleanup.Inspect(cacheRoot, minimumAge);
+        return report.Candidates.Count(candidate => TerrainCacheCleanup.TryRemove(cacheRoot, candidate, out _));
     }
 
     private static bool TryValidatePackStructure(in TerrainAssetManifest manifest, string path, out string error)

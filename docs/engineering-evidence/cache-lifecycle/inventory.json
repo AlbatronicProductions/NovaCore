@@ -1,0 +1,123 @@
+{
+  ".novacore/cache": {
+    "files": [
+      {
+        "path": ".novacore/cache/m12-level9-test.json",
+        "bytes": 1630,
+        "allocated": 4096,
+        "sha256": "3b41aea5e0babe0645aba8dd1ec1dbdd97ef00944a61f3f99da189dd6ff3f1cd"
+      },
+      {
+        "path": ".novacore/cache/m12-level9-test.nccube",
+        "bytes": 6537834,
+        "allocated": 6541312,
+        "sha256": "2ba7db1de96c35f23fde3b84adadb4077e065ceb7931c0609bfeb2eb803e4f73"
+      },
+      {
+        "path": ".novacore/cache/sources/usgs-3dep/USGS_13_n29w081_20221103.tif",
+        "bytes": 174745033,
+        "allocated": 174747648,
+        "sha256": "532ab3a4ade336d9a7d266e6745a12f043db928ba8bf28a4576886de421a74cd"
+      },
+      {
+        "path": ".novacore/cache/terrain/v1/.generation/earth_local_v2.nccube.manifest.json",
+        "bytes": 964,
+        "allocated": 4096,
+        "sha256": "3532e50008e9c7bae811747c13ab4445e92da617d8804450e27ecb289325c077"
+      },
+      {
+        "path": ".novacore/cache/terrain/v1/.generation/earth_surface_v5.nccube.manifest.json",
+        "bytes": 42961,
+        "allocated": 45056,
+        "sha256": "2da63796092582fc3bfbc444907a1dcaca8042f0055f144caf50a725e41148f9"
+      },
+      {
+        "path": ".novacore/cache/terrain/v1/sha256/17/17344f8a99931083853fe3351a621ddaf0b352702054febf53705c13a17da285.nccube",
+        "bytes": 7650603,
+        "allocated": 7651328,
+        "sha256": "17344f8a99931083853fe3351a621ddaf0b352702054febf53705c13a17da285"
+      },
+      {
+        "path": ".novacore/cache/terrain/v1/sha256/28/288f56e129717ceb83ad133490d424fd1d49836601d0a768bb5dab525cf4bf08.nccube",
+        "bytes": 61484224,
+        "allocated": 61485056,
+        "sha256": "288f56e129717ceb83ad133490d424fd1d49836601d0a768bb5dab525cf4bf08"
+      },
+      {
+        "path": ".novacore/cache/terrain/v1/sha256/38/38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae.nccube",
+        "bytes": 61484224,
+        "allocated": 61485056,
+        "sha256": "38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae"
+      },
+      {
+        "path": ".novacore/cache/terrain/v1/sha256/5e/5e92a0676bf8cd64f4c00b5e8d79f4b8186cd9a8a57b395138edbab760f1cb76.nccube",
+        "bytes": 61484224,
+        "allocated": 61485056,
+        "sha256": "5e92a0676bf8cd64f4c00b5e8d79f4b8186cd9a8a57b395138edbab760f1cb76"
+      },
+      {
+        "path": ".novacore/cache/terrain/v1/sha256/60/60ada8949bfd782dfaea6c04270186bda52654d7263fbc3dbda5eaa4fd2e578a.nccube",
+        "bytes": 7652567,
+        "allocated": 7655424,
+        "sha256": "60ada8949bfd782dfaea6c04270186bda52654d7263fbc3dbda5eaa4fd2e578a"
+      },
+      {
+        "path": ".novacore/cache/terrain/v1/sha256/6f/6f10ebcd19def6a116d2804fc6fc7d67bbe655e129151beae35a91c0e317be8f.nccube",
+        "bytes": 210307596,
+        "allocated": 210309120,
+        "sha256": "6f10ebcd19def6a116d2804fc6fc7d67bbe655e129151beae35a91c0e317be8f"
+      },
+      {
+        "path": ".novacore/cache/terrain/v1/sha256/b8/b8ba51985b6869d41f4bb4b81eeb03c4dc61d9560ce4099768dc041a27b6fa98.nccube",
+        "bytes": 210307363,
+        "allocated": 210309120,
+        "sha256": "b8ba51985b6869d41f4bb4b81eeb03c4dc61d9560ce4099768dc041a27b6fa98"
+      },
+      {
+        "path": ".novacore/cache/terrain/v1/sha256/c4/c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe.nccube",
+        "bytes": 210307596,
+        "allocated": 210309120,
+        "sha256": "c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe"
+      }
+    ],
+    "links": [],
+    "bytes": 1012006819,
+    "allocated": 1012031488,
+    "count": 13
+  },
+  ".novacore/baseline-cache": {
+    "files": [],
+    "links": [],
+    "bytes": 0,
+    "allocated": 0,
+    "count": 0
+  },
+  ".novacore/staging": {
+    "files": [],
+    "links": [],
+    "bytes": 0,
+    "allocated": 0,
+    "count": 0
+  },
+  "build": {
+    "links": [
+      "E:\\NovaCore\\build\\facility-light-occlusion\\perf-after\\runtime\\earth-data",
+      "E:\\NovaCore\\build\\facility-light-occlusion\\perf-before\\runtime\\earth-data",
+      "E:\\NovaCore\\build\\facility-light-occlusion\\runtime\\earth-data",
+      "E:\\NovaCore\\build\\ksa-terrain-presentation\\perf-after\\runtime\\earth-data",
+      "E:\\NovaCore\\build\\ksa-terrain-presentation\\perf-before\\runtime\\earth-data",
+      "E:\\NovaCore\\build\\ksa-terrain-presentation\\runtime\\earth-data"
+    ],
+    "bytes": 60511365,
+    "allocated": 63024168,
+    "count": 1765
+  },
+  "baseline": {
+    "head": "d3ecaba8d7cf716580fdaf7c8e069b7c2559a8d4",
+    "originMain": "d3ecaba8d7cf716580fdaf7c8e069b7c2559a8d4",
+    "branch": "main",
+    "startingStatus": "clean",
+    "p2s5h": "32ffac50ab5c06518ede24edfb5c531976d4ec99"
+  },
+  "measurement": "Logical size and Windows FileStandardInfo.AllocationSize; reparse directories excluded, listed separately; file SHA-256 read in this audit."
+}

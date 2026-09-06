@@ -80,6 +80,7 @@ var tests = new (string, Action)[]
     ("Screen-space subdivision", PlanetaryScreenSpaceSubdivisionTests.Run),
     ("Terrain-v5 seams, mixed-LOD authority, and Florida classification", TerrainV5PayloadSeamAndFloridaClassificationTest),
     ("Terrain asset distribution boundary", TerrainAssetDistributionBoundaryTest),
+    ("Cache lifecycle cleanup", CacheLifecycleTests.Run),
     ("Local terrain format and GPU compression", LocalTerrainStreamingAndGpuCompressionTest),
     ("M12 Florida regional physical surface", M12FloridaRegionalPhysicalSurfaceTest),
     ("Production cube-sphere GPU residency integration", ProductionCubeSphereGpuResidencyIntegrationTest),
@@ -256,10 +257,10 @@ static void TerrainAssetDistributionBoundaryTest()
         Check(missing.Status==TerrainAssetVerificationStatus.Missing,"empty cache reports fixture missing");
         Directory.CreateDirectory(Path.GetDirectoryName(missingPath)!);File.WriteAllBytes(missingPath+".incomplete-interrupted",[1,2,3,4]);File.WriteAllBytes(Path.Combine(cacheRoot,"abandoned-download.nccube.incomplete"),[1,2,3,4]);
         Check(TerrainAssetCache.Verify(fixture,missingPath).Status==TerrainAssetVerificationStatus.Missing,"incomplete acquisition is never exposed as a valid cache entry");
-        Check(TerrainAssetCache.RemoveStaleIncompleteFiles(cacheRoot,TimeSpan.Zero)==2,"explicit stale-incomplete cleanup removes interrupted publication and acquisition files safely");
+        Check(TerrainAssetCache.RemoveStaleIncompleteFiles(cacheRoot,TimeSpan.Zero)==0,"unknown-owner incomplete files are retained even when old enough");
         var published=TerrainAssetCache.PublishFromFile(fixture,fixtureSource,cacheRoot);
         Check(published.IsValid&&published.ActualBytes==5_032&&published.ActualSha256==fixture.Sha256&&published.MaximumBufferBytes==TerrainAssetCache.VerificationBufferBytes,"atomic fixture publication verifies size and streaming SHA-256");
-        Check(!Directory.EnumerateFiles(cacheRoot,"*.incomplete-*",SearchOption.AllDirectories).Any(),"successful atomic publication leaves no incomplete files");
+        Check(Directory.EnumerateFiles(cacheRoot,"*.incomplete-*",SearchOption.AllDirectories).Single()==missingPath+".incomplete-interrupted","successful publication leaves no new incomplete files and preserves unidentified prior output");
         Check(NativeRuntime.ValidateTerrainAsset(published.Path,fixture.BodyId,fixture.TerrainVersion,(uint)fixture.Hierarchy.RecordCount)==NativeResult.Success,"native runtime opens and digest-validates a payload through the same resolved fixture path");
 
         using(var stream=new FileStream(published.Path,FileMode.Open,FileAccess.ReadWrite,FileShare.None)){stream.Position=stream.Length-1;var value=stream.ReadByte();stream.Position=stream.Length-1;stream.WriteByte((byte)(value^1));}
@@ -271,8 +272,9 @@ static void TerrainAssetDistributionBoundaryTest()
         var truncated=Path.Combine(testRoot,"truncated.nccube");using(var source=File.OpenRead(fixtureSource))using(var destination=File.Create(truncated)){source.CopyTo(destination);destination.SetLength(destination.Length-1);}
         Check(TerrainAssetCache.Verify(fixture,truncated).Status==TerrainAssetVerificationStatus.SizeMismatch,"truncated fixture is rejected before publication");
 
-        var productionCorruptRoot=Path.Combine(testRoot,"production-corrupt");var productionCorrupt=TerrainAssetCache.ContentPath(productionCorruptRoot,production);Directory.CreateDirectory(Path.GetDirectoryName(productionCorrupt)!);using(var stream=File.Create(productionCorrupt)){stream.SetLength(production.ByteSize);}
-        Check(!TerrainAssetCache.Verify(production,productionCorrupt).IsValid,"corrupt production-sized asset is rejected without becoming resident");
+        var corruptManifest=fixture with { Sha256=new string('0',64) };
+        var boundedCorrupt=TerrainAssetCache.ContentPath(cacheRoot,corruptManifest);Directory.CreateDirectory(Path.GetDirectoryName(boundedCorrupt)!);using(var stream=File.Create(boundedCorrupt)){stream.SetLength(fixture.ByteSize);}
+        Check(!TerrainAssetCache.Verify(corruptManifest,boundedCorrupt).IsValid,"bounded corrupt cached asset is rejected without becoming resident");
 
         Directory.Delete(cacheRoot,true);Check(TerrainAssetCache.Verify(fixture,missingPath).Status==TerrainAssetVerificationStatus.Missing,"cache deletion leaves source manifest valid and reports missing");
         var recovered=TerrainAssetCache.PublishFromFile(fixture,fixtureSource,cacheRoot);Check(recovered.IsValid,"disposable cache recovers through explicit atomic acquisition");

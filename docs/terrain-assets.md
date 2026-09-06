@@ -19,7 +19,7 @@ asset ID
 ```
 
 The default cache is `.novacore/cache/terrain/v1` in the repository. It is
-ignored, stable across builds, disposable, and normally remains on the same
+ignored, stable across builds, regenerable from retained authorities, and normally remains on the same
 drive as the checkout. Set `NOVACORE_ASSET_CACHE` or pass `--cache <path>` to
 the asset tool to use a different location. Cache objects use
 `sha256/<first-two-hex>/<full-sha256>.nccube`, so manifests with identical
@@ -54,6 +54,8 @@ dotnet run --project tools/NovaCore.AssetTool -- verify earth-surface-v5
 dotnet run --project tools/NovaCore.AssetTool -- fetch earth-surface-v5
 dotnet run --project tools/NovaCore.AssetTool -- build earth-surface-v5
 dotnet run --project tools/NovaCore.AssetTool -- clean-incomplete earth-surface-v5
+# Inspect first; --apply revalidates and removes only reported publication temporaries:
+dotnet run --project tools/NovaCore.AssetTool -- clean-incomplete earth-surface-v5 --apply
 
 pwsh tools/earth_data/acquire_florida_m12.ps1
 dotnet run --project tools/NovaCore.AssetTool -- status earth-florida-m12
@@ -99,7 +101,8 @@ bounded record reads and record-digest validation.
 Acquisition and generation write unique `.incomplete-*` files. Only after
 structure, size, and SHA-256 verification does an atomic same-volume rename
 publish the object at its content address. Interrupted files are never valid
-cache entries. `clean-incomplete` removes stale incomplete objects explicitly.
+cache entries. `clean-incomplete` reports abandoned publication temporaries by
+default; `--apply` removes only the reported candidates after revalidation.
 The final content address is never silently overwritten with different bytes.
 
 ## CI and fresh clones
@@ -124,10 +127,52 @@ dotnet run --project tools/NovaCore.AssetTool -- verify earth-florida-m12
 dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=sol
 ```
 
-Deleting `.novacore/cache/terrain/v1` does not damage source control. Status
-returns to `Missing`, and explicit build/install/fetch restores the immutable
-object. Normal builds do not copy it into `bin`, `obj`, native build, Debug, or
-Release directories.
+Removing a required object makes its status `Missing`; restore it through explicit
+build/install (or fetch when a verified artifact URL exists). Do not remove active
+production objects or assume that every old object has a recoverable recipe.
+Normal builds do not copy terrain packages into `bin`, `obj`, native build,
+Debug, or Release directories.
+
+## Cache lifecycle and maintenance
+
+Current manifests, provenance, source rasters and generators are the authority.
+Retain every currently referenced final object for deployment. In particular,
+`.novacore/cache/sources` contains the required local USGS input for regeneration;
+its location under `cache` is not authorization to evict it. Source acquisition is
+separate from `NOVACORE_ASSET_CACHE` and uses the path in the generator manifest.
+
+There is no automatic final-object eviction, LRU disk purge or startup cleanup.
+Old hashes can coexist after manifest changes; being unreferenced or old does not
+prove reproducibility. Preserve unknown generations until a bounded review proves
+their recovery source and lack of consumers. In-memory CPU/GPU residency has its
+own session lifetime and is unaffected by disk maintenance.
+
+Run `clean-incomplete <asset-id> [--cache <root>]` to inspect, then add `--apply`
+when ready. The asset argument selects the manifest shown in the report; cleanup
+is restricted to recognized publication temporaries beneath that cache root's
+`sha256/<two-hex>` directories. It never selects any final `.nccube` object,
+including objects referenced by other manifests. A candidate must have the exact
+hash/PID/GUID publication name, be at least 24 hours old, have a demonstrably dead
+owner and have a complete final copy whose SHA-256 verifies. Age alone is not enough.
+
+Apply rechecks identity, file metadata, content hashes and owner status. On
+Windows it opens the temporary exclusively and deletes the verified file by
+handle while holding the complete recovery object open without delete sharing.
+Active, changed, read-only, inaccessible, linked/reparse, unidentified and
+missing-recovery files are retained. Interrupted cleanup leaves unprocessed
+candidates intact; rerunning reports the remaining set. It never publishes a
+partial final asset. Use maintenance outside runtime/acquisition sessions.
+
+`--cache` takes precedence over `NOVACORE_ASSET_CACHE`; the existing full-path
+resolution is unchanged. A relative override is relative to the working directory.
+The override is the cache root itself, not a parent to be recursively cleaned.
+Cleanup does not create a missing root, does not follow reparse paths, and never
+traverses `.downloads`, `.generation`, `sources` or arbitrary subdirectories.
+Unknown-owner historical download/generator staging requires separate quiescent
+review; it is not deleted merely because its name contains `incomplete`.
+
+See the [cache lifecycle review](cache-lifecycle-policy.md) for measured current
+storage, excluded historical objects, ownership limits and validation evidence.
 
 ## Why this model
 
