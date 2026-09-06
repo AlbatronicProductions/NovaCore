@@ -392,13 +392,13 @@ internal static unsafe class PlanetaryNaturalTerrainFieldTests
 
     private static GpuParityResult VerifyGpuGlslParity()
     {
-        var root = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", ".."));
+        var root = GraphicsTestHarness.RepositoryPath();
         Require(TerrainAssetCache.TryResolveRequired(root, TerrainAssetCache.ProductionEarthAssetId, null,
             out _, out var terrainPath, out var terrainError), $"P2A parity terrain-v5 asset: {terrainError}");
         Require(TerrainAssetCache.TryResolveRequired(root, TerrainAssetCache.ProductionEarthLocalAssetId, null,
             out _, out var localPath, out var localError), $"P2A parity local-v2 asset: {localError}");
         var oraclePath = Path.Combine(root, "assets", "earth", "runtime", "earth_elevation_8192x4096.r16");
-        var shaderPath = Path.Combine(root, "build", "native-ninja", "shaders", "planetary_natural_terrain_field_query.comp.spv");
+        var shaderPath = Path.Combine(root, "build", GraphicsTestHarness.NativeDirectory, "shaders", "planetary_natural_terrain_field_query.comp.spv");
         Require(File.Exists(oraclePath) && File.Exists(shaderPath), "P2A proof compute shader and executor assets exist");
         var cases = new List<(Double3 Point, double Cell, double Amplitude, PlanetaryNaturalTerrainFieldIdentity Identity)>();
         var points = new[]
@@ -479,7 +479,7 @@ internal static unsafe class PlanetaryNaturalTerrainFieldTests
 
     private static void VerifyIsolation()
     {
-        var root = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", ".."));
+        var root = GraphicsTestHarness.RepositoryPath();
         var shaderRoot = Path.Combine(root,"native","NovaCore.Native","shaders");
         var includes = Directory.EnumerateFiles(shaderRoot,"*",SearchOption.TopDirectoryOnly)
             .Where(path => !path.EndsWith("planetary_natural_terrain_field.glsl",StringComparison.OrdinalIgnoreCase) &&

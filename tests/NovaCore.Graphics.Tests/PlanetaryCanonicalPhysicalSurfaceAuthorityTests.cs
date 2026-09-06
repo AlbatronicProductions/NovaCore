@@ -104,7 +104,7 @@ internal static class PlanetaryCanonicalPhysicalSurfaceAuthorityTests
 
     private static void VerifyShaderAndPublicationContract()
     {
-        var root=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..",".."));
+        var root=GraphicsTestHarness.RepositoryPath();
         var shaders=Path.Combine(root,"native","NovaCore.Native","shaders");
         var authority=File.ReadAllText(Path.Combine(shaders,"planetary_physical_authority.glsl"));
         var global=File.ReadAllText(Path.Combine(shaders,"planetary.vert"));

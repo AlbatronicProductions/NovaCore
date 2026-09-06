@@ -12,7 +12,7 @@ internal static class PlanetarySphericalBillboardGpuRuntimeTests
         Require(typeof(PlanetarySphericalBillboardGpuRuntimeDescription).GetProperties().All(property=>!property.Name.Contains("Patch",StringComparison.OrdinalIgnoreCase))&&
             typeof(PlanetarySphericalBillboardGpuProofSession).GetMethods().All(method=>!method.Name.Contains("Patch",StringComparison.OrdinalIgnoreCase)),"public P2S3 runtime ABI has no patch-shaped dependency");
 
-        using var session=new PlanetarySphericalBillboardGpuProofSession(Path.Combine(root,"build","native-ninja","shaders"));
+        using var session=new PlanetarySphericalBillboardGpuProofSession(Path.Combine(root,"build",GraphicsTestHarness.NativeDirectory,"shaders"));
         Require(session.TryRunWithoutTopology()==NativeResult.InvalidArgument,"draw publication rejects missing topology/output readiness");
         var uploadCount=0u;var replacementCount=0u;var frameIndex=0u;NativeSphericalBillboardProofMetrics last=default;
         foreach(var description in library)

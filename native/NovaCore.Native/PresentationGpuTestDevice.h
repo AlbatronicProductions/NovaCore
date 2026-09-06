@@ -4,16 +4,27 @@
 #include <vector>
 #include <fstream>
 #include <cstring>
+#include <cstdio>
 #include <stdexcept>
 inline void Require(bool ok,const char* message){if(!ok)throw std::runtime_error(message);}
 inline void Vk(VkResult r){Require(r==VK_SUCCESS,"Vulkan presentation test operation failed");}
 struct Device {
+ inline static uint32_t validationErrors{};
+ VkDebugUtilsMessengerEXT messenger{};
+ static VKAPI_ATTR VkBool32 VKAPI_CALL Validation(VkDebugUtilsMessageSeverityFlagBitsEXT severity,VkDebugUtilsMessageTypeFlagsEXT,const VkDebugUtilsMessengerCallbackDataEXT* data,void*) {
+  if(severity&VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT)++validationErrors;
+  std::fprintf(stderr,"Presentation test Vulkan [%s]: %s\n",data->pMessageIdName?data->pMessageIdName:"unnamed",data->pMessage);
+  return VK_FALSE;
+ }
  VkInstance instance{};VkPhysicalDevice physical{};VkDevice device{};VkQueue queue{};uint32_t family{};
  VkDescriptorSetLayout layout{};VkDescriptorPool descriptors{};VkPipelineLayout pipelineLayout{};VkPipeline pipeline{};VkCommandPool pool{};
  struct Buffer{VkBuffer buffer{};VkDeviceMemory memory{};void* mapped{};};std::vector<Buffer> buffers;
  Device(){
   VkApplicationInfo app{VK_STRUCTURE_TYPE_APPLICATION_INFO};app.apiVersion=VK_API_VERSION_1_1;
-  VkInstanceCreateInfo ci{VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO};ci.pApplicationInfo=&app;Vk(vkCreateInstance(&ci,nullptr,&instance));
+  const char* layer="VK_LAYER_KHRONOS_validation";const char* extension=VK_EXT_DEBUG_UTILS_EXTENSION_NAME;
+  VkDebugUtilsMessengerCreateInfoEXT debug{VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT};debug.messageSeverity=VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT|VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT;debug.messageType=VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT|VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT|VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;debug.pfnUserCallback=Validation;
+  VkInstanceCreateInfo ci{VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO};ci.pApplicationInfo=&app;ci.pNext=&debug;ci.enabledLayerCount=1;ci.ppEnabledLayerNames=&layer;ci.enabledExtensionCount=1;ci.ppEnabledExtensionNames=&extension;Vk(vkCreateInstance(&ci,nullptr,&instance));
+  auto createDebug=reinterpret_cast<PFN_vkCreateDebugUtilsMessengerEXT>(vkGetInstanceProcAddr(instance,"vkCreateDebugUtilsMessengerEXT"));Require(createDebug,"debug messenger unavailable");Vk(createDebug(instance,&debug,nullptr,&messenger));
   uint32_t count;Vk(vkEnumeratePhysicalDevices(instance,&count,nullptr));std::vector<VkPhysicalDevice> devices(count);Vk(vkEnumeratePhysicalDevices(instance,&count,devices.data()));
   for(auto p:devices){VkPhysicalDeviceFeatures f;vkGetPhysicalDeviceFeatures(p,&f);if(!f.shaderFloat64)continue;uint32_t n;vkGetPhysicalDeviceQueueFamilyProperties(p,&n,nullptr);std::vector<VkQueueFamilyProperties> qs(n);vkGetPhysicalDeviceQueueFamilyProperties(p,&n,qs.data());for(uint32_t i=0;i<n;i++)if(qs[i].queueFlags&VK_QUEUE_COMPUTE_BIT){physical=p;family=i;break;}if(physical)break;}
   Require(physical,"FP64 Vulkan device unavailable");float priority=1;VkDeviceQueueCreateInfo qi{VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO};qi.queueFamilyIndex=family;qi.queueCount=1;qi.pQueuePriorities=&priority;VkPhysicalDeviceFeatures f{};f.shaderFloat64=VK_TRUE;VkDeviceCreateInfo di{VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO};di.queueCreateInfoCount=1;di.pQueueCreateInfos=&qi;di.pEnabledFeatures=&f;Vk(vkCreateDevice(physical,&di,nullptr,&device));vkGetDeviceQueue(device,family,0,&queue);
@@ -21,7 +32,7 @@ struct Device {
  Buffer Create(VkDeviceSize size,const void* input){
   Buffer b;VkBufferCreateInfo ci{VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO};ci.size=size;ci.usage=VK_BUFFER_USAGE_STORAGE_BUFFER_BIT;Vk(vkCreateBuffer(device,&ci,nullptr,&b.buffer));VkMemoryRequirements rq;vkGetBufferMemoryRequirements(device,b.buffer,&rq);VkPhysicalDeviceMemoryProperties mp;vkGetPhysicalDeviceMemoryProperties(physical,&mp);uint32_t type=~0u;for(uint32_t i=0;i<mp.memoryTypeCount;i++)if((rq.memoryTypeBits&(1u<<i))&&(mp.memoryTypes[i].propertyFlags&(VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT|VK_MEMORY_PROPERTY_HOST_COHERENT_BIT))==(VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT|VK_MEMORY_PROPERTY_HOST_COHERENT_BIT)){type=i;break;}Require(type!=~0u,"coherent test buffer unavailable");VkMemoryAllocateInfo ai{VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO};ai.allocationSize=rq.size;ai.memoryTypeIndex=type;Vk(vkAllocateMemory(device,&ai,nullptr,&b.memory));Vk(vkBindBufferMemory(device,b.buffer,b.memory,0));Vk(vkMapMemory(device,b.memory,0,size,0,&b.mapped));if(input)std::memcpy(b.mapped,input,size);else std::memset(b.mapped,0,size);buffers.push_back(b);return b;
  }
- ~Device(){if(device){vkDeviceWaitIdle(device);if(pool)vkDestroyCommandPool(device,pool,nullptr);if(pipeline)vkDestroyPipeline(device,pipeline,nullptr);if(pipelineLayout)vkDestroyPipelineLayout(device,pipelineLayout,nullptr);if(descriptors)vkDestroyDescriptorPool(device,descriptors,nullptr);if(layout)vkDestroyDescriptorSetLayout(device,layout,nullptr);for(auto b:buffers){vkUnmapMemory(device,b.memory);vkDestroyBuffer(device,b.buffer,nullptr);vkFreeMemory(device,b.memory,nullptr);}vkDestroyDevice(device,nullptr);}if(instance)vkDestroyInstance(instance,nullptr);}
+ ~Device(){if(device){vkDeviceWaitIdle(device);if(pool)vkDestroyCommandPool(device,pool,nullptr);if(pipeline)vkDestroyPipeline(device,pipeline,nullptr);if(pipelineLayout)vkDestroyPipelineLayout(device,pipelineLayout,nullptr);if(descriptors)vkDestroyDescriptorPool(device,descriptors,nullptr);if(layout)vkDestroyDescriptorSetLayout(device,layout,nullptr);for(auto b:buffers){vkUnmapMemory(device,b.memory);vkDestroyBuffer(device,b.buffer,nullptr);vkFreeMemory(device,b.memory,nullptr);}vkDestroyDevice(device,nullptr);}if(messenger){auto destroy=reinterpret_cast<PFN_vkDestroyDebugUtilsMessengerEXT>(vkGetInstanceProcAddr(instance,"vkDestroyDebugUtilsMessengerEXT"));destroy(instance,messenger,nullptr);}if(instance)vkDestroyInstance(instance,nullptr);}
  template<typename Context,typename Sample>
  std::vector<std::array<float,4>> Run(const Context&g,const std::vector<Sample>&samples,const char* shader){
   auto input=Create(samples.size()*sizeof(Sample),samples.data()),output=Create(samples.size()*32,nullptr),caster=Create(sizeof(g),&g);

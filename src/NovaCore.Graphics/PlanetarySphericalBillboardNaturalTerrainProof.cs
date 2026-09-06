@@ -79,13 +79,13 @@ public static unsafe class PlanetarySphericalBillboardNaturalTerrainProof
         PlanetaryProductionSphericalBillboardTopology topology,
         in PlanetaryProductionBillboardPupil pupil,
         PlanetaryProductionBillboardPhysicalCache cache,
-        int maximumParitySamples = int.MaxValue)
+        int maximumParitySamples = int.MaxValue, string? queryShader = null)
     {
         ArgumentNullException.ThrowIfNull(topology);
         ArgumentNullException.ThrowIfNull(cache);
         if (!pupil.IsValid) throw new ArgumentOutOfRangeException(nameof(pupil));
         ResolveAssets(repositoryRoot, out var oracle, out var terrain, out var local);
-        var queryShader = Path.Combine(repositoryRoot, "build", "native-ninja", "shaders",
+        queryShader ??= Path.Combine(repositoryRoot, "build", "native-ninja", "shaders",
             "planetary_height_query.comp.spv");
         var resolvedPupil = pupil;
         var directions = topology.Vertices.Select(vertex =>
@@ -167,12 +167,12 @@ public static unsafe class PlanetarySphericalBillboardNaturalTerrainProof
             missing.Length, directions.Length - missing.Length, Array.AsReadOnly(identities));
     }
 
-    public static PlanetarySphericalBillboardNaturalTerrainReport Run(string repositoryRoot)
+    public static PlanetarySphericalBillboardNaturalTerrainReport Run(string repositoryRoot, string? shaderDirectory = null)
     {
         var descriptions = PlanetarySphericalBillboardGpuProofLibrary.Load(
             Path.Combine(repositoryRoot, "assets", "planetary-topology"));
         ResolveAssets(repositoryRoot, out var oracle, out var terrain, out var local);
-        var shaderDirectory = Path.Combine(repositoryRoot, "build", "native-ninja", "shaders");
+        shaderDirectory ??= Path.Combine(repositoryRoot, "build", "native-ninja", "shaders");
         var queryShader = Path.Combine(shaderDirectory, "planetary_height_query.comp.spv");
         var previous = PlanetaryPhysicalSurface.RuntimeGeneration;
         var prepared = new Dictionary<PlanetaryCanonicalPhysicalSampleIdentity, PreparedSample>();

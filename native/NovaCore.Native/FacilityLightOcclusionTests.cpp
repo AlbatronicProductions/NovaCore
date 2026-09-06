@@ -62,5 +62,6 @@ int main(int argc,char**argv){try{
   }
  }
  {auto inactive=g;inactive.control[0]=0;Device device;std::vector<Sample> samples{{{-40,0,-6,0},{1,0,0,0}}};auto result=device.Run(inactive,samples,argv[1]);Require(result[0][0]==1&&result[0][1]==0&&result[0][2]==0,"inactive caster must bypass all visibility work");}
+ Require(Device::validationErrors==0,"Vulkan presentation validation errors");
  std::cout<<"Facility visibility PASS: "<<compared<<" GPU/CPU cases; parallel/grazing/boundary/multiple-caster/Sun/camera/orientation/range/lighting; inactive and invalid-definition gates\n";return 0;
 }catch(const std::exception&e){std::cerr<<e.what()<<'\n';return 1;}}

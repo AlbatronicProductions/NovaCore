@@ -54,7 +54,7 @@ internal static class PlanetaryScreenSpaceSubdivisionTests
 
     private static void VerifyDebugIsolation()
     {
-        var root = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", ".."));
+        var root = GraphicsTestHarness.RepositoryPath();
         var sample = File.ReadAllText(Path.Combine(root, "samples", "NovaCore.Triangle", "Program.cs"));
         var vertex = File.ReadAllText(Path.Combine(root, "native", "NovaCore.Native", "shaders", "planetary.vert"));
         Require(sample.Contains("ColorA=-1", StringComparison.Ordinal) &&

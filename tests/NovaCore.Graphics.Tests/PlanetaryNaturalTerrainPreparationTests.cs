@@ -170,8 +170,8 @@ internal static unsafe class PlanetaryNaturalTerrainPreparationTests
         Require(TerrainAssetCache.TryResolveRequired(root, TerrainAssetCache.ProductionEarthLocalAssetId, null,
             out _, out var local, out var localError), $"P2C1 local-v2 asset: {localError}");
         var paths = new GpuPaths(Path.Combine(root, "assets", "earth", "runtime", "earth_elevation_8192x4096.r16"),
-            terrain, local, Path.Combine(root, "build", "native-ninja", "shaders", "planetary_natural_terrain_families_query.comp.spv"),
-            Path.Combine(root, "build", "native-ninja", "shaders", "planetary_natural_terrain_prepare.comp.spv"));
+            terrain, local, Path.Combine(root, "build", GraphicsTestHarness.NativeDirectory, "shaders", "planetary_natural_terrain_families_query.comp.spv"),
+            Path.Combine(root, "build", GraphicsTestHarness.NativeDirectory, "shaders", "planetary_natural_terrain_prepare.comp.spv"));
         Require(File.Exists(paths.Oracle) && File.Exists(paths.DirectShader) && File.Exists(paths.PreparedShader),
             "P2C1 direct and prepared proof assets exist");
         return paths;
@@ -184,7 +184,7 @@ internal static unsafe class PlanetaryNaturalTerrainPreparationTests
     private static double Length(in Double3 value) => Math.Sqrt(value.LengthSquared);
     private static double Maximum(double first, params double[] rest) { foreach (var value in rest) first = Math.Max(first, value); return first; }
     private static double Percentile95(double[] values) { var ordered = values.OrderBy(value => value).ToArray(); return ordered[(int)Math.Ceiling(ordered.Length * .95) - 1]; }
-    private static string RepositoryRoot() => Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", ".."));
+    private static string RepositoryRoot() => GraphicsTestHarness.RepositoryPath();
     private static void Require(bool condition, string message) { if (!condition) throw new Exception(message); }
 
     private readonly record struct GpuCase(Double3 Point, uint Family, uint Mode, PlanetaryNaturalTerrainFamilyIdentity Identity);

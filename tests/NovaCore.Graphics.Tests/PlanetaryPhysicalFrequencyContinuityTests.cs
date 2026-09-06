@@ -84,7 +84,7 @@ internal static class PlanetaryPhysicalFrequencyContinuityTests
 
     private static void VerifyShaderEarlyRejectionContract()
     {
-        var root=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..",".."));
+        var root=GraphicsTestHarness.RepositoryPath();
         var shader=File.ReadAllText(Path.Combine(root,"native","NovaCore.Native","shaders","physical_surface.glsl"));
         Require(shader.Contains("double weight=PhysicalFrequencyWeightD(wavelength,frequency);\n  if(weight==0.0){gradient=dvec3(0.0);return 0.0;}\n  double value=PhysicalBandD",StringComparison.Ordinal) &&
             shader.Contains("double weight=PhysicalFrequencyWeightD(wavelength,frequency);\n  if(weight==0.0){gradient=dvec3(0.0);return 0.0;}\n  double value=PhysicalWarpedBandD",StringComparison.Ordinal),

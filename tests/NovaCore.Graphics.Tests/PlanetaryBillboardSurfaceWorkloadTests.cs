@@ -8,7 +8,7 @@ internal static class PlanetaryBillboardSurfaceWorkloadTests
     public static void Run()
     {
         var root = PlanetarySphericalBillboardGpuProof.FindRepositoryRoot(AppContext.BaseDirectory);
-        var compiled = Path.Combine(root, "build", "native-ninja", "shaders");
+        var compiled = Path.Combine(root, "build", GraphicsTestHarness.NativeDirectory, "shaders");
         var source = Path.Combine(root, "native", "NovaCore.Native", "shaders");
         var vertex = Interface(Path.Combine(compiled, "production_spherical_billboard.vert.spv"), 3);
         var controlIn = Interface(Path.Combine(compiled, "production_spherical_billboard.tesc.spv"), 1);

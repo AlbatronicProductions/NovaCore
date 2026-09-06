@@ -12,8 +12,7 @@ internal static class RegionalPhysicalResidencyTests
         VerifyPreparationScheduling(root);
         var output=Path.Combine(root,"build","regional-live-tests",Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(output);
-        var sample=Path.Combine(root,"samples","NovaCore.Triangle","bin","Debug","net10.0","NovaCore.Triangle.exe");
-        Require(File.Exists(sample),"Build the Debug Triangle sample before the live regional Graphics regression.");
+        var sample=WindowLifecycleTests.VerifyDeployment(root);
         // Leave a bounded drain interval after frame-660 reentry for every
         // complete staged generation; readiness is asserted from publication.
         var log=RunSample(sample,root,output,"--scene=sol --focus=earth --surface-site=florida-launch --solar-epoch=j2000 --benchmark-frames=1000 --log=vulkan --log=validation","regional");
@@ -25,8 +24,7 @@ internal static class RegionalPhysicalResidencyTests
         Require(log.Contains("requests=670;")&&log.Contains("loaded=670;")&&log.Contains("uploadedBytes=93392640;"),"physical requests/uploads changed; remeasure workload");
         Require(log.Contains("body=8; earthEligible=False")&&log.Contains("body=10; earthEligible=False"),"missing non-Earth focus coverage");
         Require(!log.Contains("zeroOwner=1")&&!log.Contains("overlapOwner=1")&&!log.Contains("staleGenerationDraws=1")&&!log.Contains("device lost",StringComparison.OrdinalIgnoreCase),"ownership/device regression");
-        foreach(var line in log.Split('\n').Where(l=>l.Contains("VUID-")))
-            Require(line.Contains("VUID-VkMemoryAllocateInfo-memoryTypeIndex-00645"),"new Vulkan validation error: "+line);
+        WindowLifecycleTests.VerifyValidation(log);
         Analyze(root,output);
         var outside=Path.Combine(output,"outside-earth");Directory.CreateDirectory(outside);
         var outsideLog=RunSample(sample,root,outside,"--scene=sol --focus=earth --surface-site=land --altitude=3000000 --solar-epoch=j2000 --benchmark-frames=120 --log=validation",null);
@@ -34,7 +32,12 @@ internal static class RegionalPhysicalResidencyTests
         var isolated=Path.Combine(output,"non-earth");Directory.CreateDirectory(isolated);
         var away=RunSample(sample,root,isolated,"--scene=sol --solar-epoch=j2000 --benchmark-frames=60 --log=validation","regional-isolation");
         Require(away.Contains("NCSM1 regional physical totals: requests=0;"),"non-Earth body requested Florida physical data");
-        Console.WriteLine("Live regional residency evidence: "+output);
+        // This GUID directory is created by this test and contains only its readbacks.
+        // Successful numerical summaries are already in stdout; failures retain inputs.
+        Require(Path.GetFullPath(output).StartsWith(Path.GetFullPath(Path.Combine(root,"build","regional-live-tests"))+Path.DirectorySeparatorChar,StringComparison.OrdinalIgnoreCase),"capture cleanup boundary");
+        Require(!Directory.EnumerateFileSystemEntries(output,"*",SearchOption.AllDirectories).Any(p=>(File.GetAttributes(p)&FileAttributes.ReparsePoint)!=0),"capture cleanup cannot traverse reparse points");
+        Directory.Delete(output,recursive:true);
+        Console.WriteLine("Live regional evidence summarized in stdout; disposable readbacks removed: "+output);
     }
     private static string RunSample(string sample,string root,string output,string arguments,string? mode)
     {
@@ -45,7 +48,8 @@ internal static class RegionalPhysicalResidencyTests
         using var process=Process.Start(start)!;var stdout=process.StandardOutput.ReadToEndAsync();var stderr=process.StandardError.ReadToEndAsync();
         if(!process.WaitForExit(600000)){process.Kill(entireProcessTree:true);throw new InvalidOperationException("live regional scenario timed out");}
         var log=stdout.GetAwaiter().GetResult()+stderr.GetAwaiter().GetResult();File.WriteAllText(Path.Combine(output,"runtime.log"),log);
-        Require(process.ExitCode==0,"native regional scenario failed: "+output);return log;
+        Require(process.ExitCode==0,"native regional scenario failed: "+output);
+        WindowLifecycleTests.VerifyValidation(log);return log;
     }
     internal static void Analyze(string root,string output)
     {

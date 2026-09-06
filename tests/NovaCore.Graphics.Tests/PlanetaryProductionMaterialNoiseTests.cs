@@ -90,7 +90,7 @@ internal static class PlanetaryProductionMaterialNoiseTests
 
     private static void VerifyShaderContract()
     {
-        var root = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", ".."));
+        var root = GraphicsTestHarness.RepositoryPath();
         var shader = File.ReadAllText(Path.Combine(root, "native", "NovaCore.Native", "shaders", "production_terrain_material.glsl"));
         Require(shader.Contains("vec4 TerrainHash21Corners(dvec2 cell)", StringComparison.Ordinal) &&
             shader.Contains("dvec2 hashX=fract(x*.1031),hashY=fract(y*.1030),hashZ=fract(x*.0973)", StringComparison.Ordinal) &&

@@ -31,6 +31,7 @@ int main(int argc,char**argv){try{
    checked++;
   }
  }
+ Require(Device::validationErrors==0,"Vulkan presentation validation errors");
  std::cout<<"Surface material coordinates PASS: "<<checked<<" GPU coordinate components; 3 orientations, 3 body radii, 4 camera distances; maxPhysicalErrorMetres="<<maximumError<<"; FP64 body identity / FP32 local differential; no shell input\n";
  return 0;
 }catch(const std::exception&e){std::cerr<<e.what()<<'\n';return 1;}}

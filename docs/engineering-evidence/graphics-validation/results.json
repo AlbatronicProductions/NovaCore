@@ -1,0 +1,2904 @@
+{
+  "baseline": {
+    "head": "e9e993964dd79995c605db424d6aec9faf30bc30",
+    "originMain": "e9e993964dd79995c605db424d6aec9faf30bc30",
+    "branch": "main",
+    "initialStatus": [],
+    "p2s5h": "32ffac50ab5c06518ede24edfb5c531976d4ec99"
+  },
+  "initialNativeIdentities": [
+    {
+      "Algorithm": "SHA256",
+      "Hash": "7E91C7CC4E08384B8545C39CEAA60F2F54FE109190075CE3B42C86DD39EDC013",
+      "Path": "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Native.dll"
+    },
+    {
+      "Algorithm": "SHA256",
+      "Hash": "48A6D48DEF689E76687A4DCC2F77398DC7CBEAC356739C3BAC345FA25C606B65",
+      "Path": "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Native.dll"
+    },
+    {
+      "Algorithm": "SHA256",
+      "Hash": "9725CE7A9225F42F8961C433DACAE4CC8FAE3A16E95EF1D0A7C7E8BC09132C40",
+      "Path": "C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_khronos_validation.dll"
+    }
+  ],
+  "initialAsIs": {
+    "Debug": {
+      "pass": 27,
+      "fail": 1,
+      "skip": 0,
+      "notRun": 58
+    },
+    "Release": {
+      "pass": 27,
+      "fail": 1,
+      "skip": 0,
+      "notRun": 58
+    }
+  },
+  "initialIsolatedDebug": {
+    "pass": 85,
+    "fail": 1,
+    "count": 86
+  },
+  "defaultTopologyRegeneration": {
+    "scales": 18,
+    "serializedBytesInMemory": 554579640,
+    "finestVertices": 712106,
+    "finestTriangles": 1424208,
+    "finestHash": "BCE444AFFB2D713B",
+    "artifactsWritten": false
+  },
+  "inventory": [
+    {
+      "name": "Facility lighting authority",
+      "entryPoint": "FacilityLightingTests.Run",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "MeshHandle",
+      "entryPoint": "MeshHandleTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Transport layout",
+      "entryPoint": "LayoutTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Transform conversion",
+      "entryPoint": "TransformTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Camera relative",
+      "entryPoint": "RelativeTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Batches and capacity",
+      "entryPoint": "BatchTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Resolved render transport",
+      "entryPoint": "ResolvedTransportTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Orbit curve transport",
+      "entryPoint": "OrbitCurveTransportTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Static reference-frame fixture transport",
+      "entryPoint": "StaticReferenceFrameFixtureTransportTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Dynamic reference-frame fixture publication",
+      "entryPoint": "DynamicReferenceFrameFixturePublicationTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Celestial analytical fixture publication",
+      "entryPoint": "CelestialAnalyticalFixturePublicationTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Celestial player torque controls",
+      "entryPoint": "CelestialPlayerTorqueControlsTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Celestial SAS mode selection",
+      "entryPoint": "CelestialSasModeSelectionTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Celestial SAS control cadence",
+      "entryPoint": "CelestialSasControlCadenceTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Celestial SAS convergence",
+      "entryPoint": "CelestialSasConvergenceTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Celestial SAS diagnostic indicators",
+      "entryPoint": "CelestialSasDiagnosticIndicatorsTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Camera snapshot allocation",
+      "entryPoint": "CameraSnapshotAllocationTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Planetary presentation pipeline",
+      "entryPoint": "PlanetaryPresentationPipelineTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Planetary presentation SPIR-V stride",
+      "entryPoint": "PlanetaryPresentationSpirvStrideTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Focus target authority",
+      "entryPoint": "FocusTargetAuthorityTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Planet material presentation",
+      "entryPoint": "PlanetMaterialPresentationTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Planet micro-normal foundation",
+      "entryPoint": "PlanetMicroNormalFoundationTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Planet surface scatter placement",
+      "entryPoint": "PlanetarySurfaceScatterPlacementTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Planetary surface camera presentation",
+      "entryPoint": "PlanetarySurfaceCameraPresentationTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Earth CPU elevation oracle",
+      "entryPoint": "EarthElevationOracleTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Canonical body-fixed geographic handedness",
+      "entryPoint": "CanonicalBodyFixedGeographicHandednessTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Canonical SurfaceAnchor physical terrain authority",
+      "entryPoint": "CanonicalSurfaceAnchorPhysicalTerrainAuthorityTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Anchored Florida launch site",
+      "entryPoint": "AnchoredFloridaLaunchSiteTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Earth route convergence",
+      "entryPoint": "EarthRouteConvergenceTests.Run",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Live NCSM1 regional physical residency",
+      "entryPoint": "RegionalPhysicalResidencyTests.Run",
+      "category": "window",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "FAIL",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Production window lifecycle",
+      "entryPoint": "WindowLifecycleTests.Run",
+      "category": "window",
+      "initialIsolatedDebug": "NEW",
+      "finalDebug": "FAIL",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Window validation message policy",
+      "entryPoint": "WindowLifecycleTests.ValidationPolicyTest",
+      "category": "headless",
+      "initialIsolatedDebug": "NEW",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Regional diagnostic wheel isolation",
+      "entryPoint": "WindowLifecycleTests.RunInputBoundary",
+      "category": "window",
+      "initialIsolatedDebug": "NEW",
+      "finalDebug": "FAIL",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Florida facility support",
+      "entryPoint": "FacilitySupportTests.Run",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Surface-relative camera authority",
+      "entryPoint": "SurfaceRelativeCameraAuthorityTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Near-surface inertial free-look",
+      "entryPoint": "NearSurfaceInertialFreeLookRegressionTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "SurfaceAnchor acquisition, ENU, and handoff",
+      "entryPoint": "SurfaceAnchorPhaseBTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Camera focus-position continuity",
+      "entryPoint": "CameraFocusPositionContinuityTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Camera SurfaceAnchor handoff monotonicity",
+      "entryPoint": "CameraSurfaceAnchorHandoffMonotonicityTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Solar preset camera-path convergence",
+      "entryPoint": "SolarPresetCameraPathConvergenceTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Zoom motion-profile continuity",
+      "entryPoint": "ZoomMotionProfileContinuityTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Solar camera bounded-domain crash regression",
+      "entryPoint": "SolarCameraBoundedDomainCrashRegressionTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Surface visual-aim continuity",
+      "entryPoint": "SurfaceVisualAimContinuityTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Inertial visual-aim authority",
+      "entryPoint": "InertialVisualAimAuthorityTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Cube-sphere planetary surface",
+      "entryPoint": "CubeSpherePlanetarySurfaceTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Production relaxed cube-sphere patch hierarchy",
+      "entryPoint": "ProductionRelaxedCubeSpherePatchHierarchyTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Anchored spherical mesh-tier contract",
+      "entryPoint": "AnchoredSphericalMeshTierContractTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "M12D-P2S2 spherical billboard topology proof",
+      "entryPoint": "PlanetarySphericalBillboardTopologyTests.Run",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "M12D-P2S3 spherical billboard GPU runtime proof",
+      "entryPoint": "PlanetarySphericalBillboardGpuRuntimeTests.Run",
+      "category": "gpu",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "M12D-P2S4 canonical natural terrain billboard binding",
+      "entryPoint": "PlanetarySphericalBillboardNaturalTerrainTests.Run",
+      "category": "gpu",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "M12D-P2S5C production spherical billboard runtime",
+      "entryPoint": "PlanetaryProductionSphericalBillboardRuntimeTests.Run",
+      "category": "gpu",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "M12D-P2S5B production spherical billboard topology library",
+      "entryPoint": "PlanetaryProductionSphericalBillboardTopologyTests.Run",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "M12D-P2S5F nested production scale-mesh topology",
+      "entryPoint": "PlanetaryNestedScaleMeshTopologyTests.Run",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "M12D-P2S5G bounded spherical billboard surface interface",
+      "entryPoint": "PlanetaryBillboardSurfaceWorkloadTests.Run",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "GPU physical-height preparation",
+      "entryPoint": "GpuPhysicalHeightPreparationTests.Run",
+      "category": "gpu",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Multiscale physical terrain modifier foundation",
+      "entryPoint": "PlanetaryPhysicalSurfaceModifierTests.Run",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Single canonical physical surface authority",
+      "entryPoint": "PlanetaryCanonicalPhysicalSurfaceAuthorityTests.Run",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Global/anchored physical frequency continuity",
+      "entryPoint": "PlanetaryPhysicalFrequencyContinuityTests.Run",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "M12D-P2A canonical hashed cell field proof",
+      "entryPoint": "PlanetaryNaturalTerrainFieldTests.Run",
+      "category": "gpu",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "M12D-P2B multiscale natural terrain family proof",
+      "entryPoint": "PlanetaryNaturalTerrainFamiliesTests.Run",
+      "category": "gpu",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "M12D-P2C1 prepared natural terrain",
+      "entryPoint": "PlanetaryNaturalTerrainPreparationTests.Run",
+      "category": "gpu",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Generation-4 physical renderer integration",
+      "entryPoint": "PlanetaryNaturalTerrainRendererIntegrationTests.Run",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Production material noise value preservation",
+      "entryPoint": "PlanetaryProductionMaterialNoiseTests.Run",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Displaced mesh and physical normals",
+      "entryPoint": "GpuDisplacedMeshPreparationTests.Run",
+      "category": "gpu",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Screen-space subdivision",
+      "entryPoint": "PlanetaryScreenSpaceSubdivisionTests.Run",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Terrain-v5 seams, mixed-LOD authority, and Florida classification",
+      "entryPoint": "TerrainV5PayloadSeamAndFloridaClassificationTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Terrain asset distribution boundary",
+      "entryPoint": "TerrainAssetDistributionBoundaryTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Cache lifecycle cleanup",
+      "entryPoint": "CacheLifecycleTests.Run",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Local terrain format and GPU compression",
+      "entryPoint": "LocalTerrainStreamingAndGpuCompressionTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "M12 Florida regional physical surface",
+      "entryPoint": "M12FloridaRegionalPhysicalSurfaceTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Production cube-sphere GPU residency integration",
+      "entryPoint": "ProductionCubeSphereGpuResidencyIntegrationTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Production physical-normal tangent continuity",
+      "entryPoint": "ProductionPhysicalNormalTangentContinuityTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Production surface body eligibility and transition ownership",
+      "entryPoint": "ProductionSurfaceBodyEligibilityAndTransitionOwnershipTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Production Earth material-state continuity",
+      "entryPoint": "ProductionEarthMaterialStateContinuityTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Planetary camera terrain exclusion",
+      "entryPoint": "PlanetaryCameraTerrainExclusionTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Close-ground reference-frame diagnostic",
+      "entryPoint": "CloseGroundReferenceFrameDiagnosticTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Production terrain material synthesis",
+      "entryPoint": "ProductionTerrainMaterialSynthesisTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Planetary terrain residency and surface frame",
+      "entryPoint": "PlanetaryTerrainResidencyAndSurfaceFrameTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Planetary patch topology and ABI",
+      "entryPoint": "PlanetaryPatchTopologyAndAbiTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Parent-child LOD geographic correspondence",
+      "entryPoint": "ParentChildLodGeographicCorrespondenceTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Opaque distant-detailed handoff",
+      "entryPoint": "OpaqueDistantDetailedHandoffTest",
+      "category": "headless",
+      "initialIsolatedDebug": "FAIL",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Planetary representation handoff",
+      "entryPoint": "PlanetaryRepresentationHandoffTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Distant quaternion transform parity",
+      "entryPoint": "DistantQuaternionTransformParityTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Distant visible hemisphere winding",
+      "entryPoint": "DistantVisibleHemisphereWindingTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Continuous Earth distance visibility",
+      "entryPoint": "ContinuousEarthDistanceVisibilityTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Camera drag isolation",
+      "entryPoint": "CameraDragIsolationTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Sol system presentation and focus",
+      "entryPoint": "SolarSystemSceneTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "SolAnalytical Earth planetary scene",
+      "entryPoint": "EarthPlanetarySceneTest",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    },
+    {
+      "name": "Florida foundation seating",
+      "entryPoint": "FloridaFoundationSeatingTests.Run",
+      "category": "headless",
+      "initialIsolatedDebug": "PASS",
+      "finalDebug": "PASS",
+      "finalRelease": "PASS"
+    }
+  ],
+  "debug": {
+    "log": "graphics-validation-final-debug.log",
+    "sha256": "7a40a8095b08f90a456cdced4c40d0669869a76d455cd8cf1174751fea86bb06",
+    "summary": [
+      "Graphics Debug: selected=89; pass=86; fail=3; skip=0; excluded=0"
+    ],
+    "cases": [
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Facility lighting authority"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "MeshHandle"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Transport layout"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Transform conversion"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Camera relative"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Batches and capacity"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Resolved render transport"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Orbit curve transport"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Static reference-frame fixture transport"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Dynamic reference-frame fixture publication"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Celestial analytical fixture publication"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Celestial player torque controls"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Celestial SAS mode selection"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Celestial SAS control cadence"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Celestial SAS convergence"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Celestial SAS diagnostic indicators"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Camera snapshot allocation"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Planetary presentation pipeline"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Planetary presentation SPIR-V stride"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Focus target authority"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Planet material presentation"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Planet micro-normal foundation"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Planet surface scatter placement"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Planetary surface camera presentation"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Earth CPU elevation oracle"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Canonical body-fixed geographic handedness"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Canonical SurfaceAnchor physical terrain authority"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Anchored Florida launch site"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Earth route convergence"
+      },
+      {
+        "state": "FAIL",
+        "category": "window",
+        "name": "Live NCSM1 regional physical residency"
+      },
+      {
+        "state": "FAIL",
+        "category": "window",
+        "name": "Production window lifecycle"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Window validation message policy"
+      },
+      {
+        "state": "FAIL",
+        "category": "window",
+        "name": "Regional diagnostic wheel isolation"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Florida facility support"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Surface-relative camera authority"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Near-surface inertial free-look"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "SurfaceAnchor acquisition, ENU, and handoff"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Camera focus-position continuity"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Camera SurfaceAnchor handoff monotonicity"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Solar preset camera-path convergence"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Zoom motion-profile continuity"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Solar camera bounded-domain crash regression"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Surface visual-aim continuity"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Inertial visual-aim authority"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Cube-sphere planetary surface"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Production relaxed cube-sphere patch hierarchy"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Anchored spherical mesh-tier contract"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "M12D-P2S2 spherical billboard topology proof"
+      },
+      {
+        "state": "PASS",
+        "category": "gpu",
+        "name": "M12D-P2S3 spherical billboard GPU runtime proof"
+      },
+      {
+        "state": "PASS",
+        "category": "gpu",
+        "name": "M12D-P2S4 canonical natural terrain billboard binding"
+      },
+      {
+        "state": "PASS",
+        "category": "gpu",
+        "name": "M12D-P2S5C production spherical billboard runtime"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "M12D-P2S5B production spherical billboard topology library"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "M12D-P2S5F nested production scale-mesh topology"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "M12D-P2S5G bounded spherical billboard surface interface"
+      },
+      {
+        "state": "PASS",
+        "category": "gpu",
+        "name": "GPU physical-height preparation"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Multiscale physical terrain modifier foundation"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Single canonical physical surface authority"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Global/anchored physical frequency continuity"
+      },
+      {
+        "state": "PASS",
+        "category": "gpu",
+        "name": "M12D-P2A canonical hashed cell field proof"
+      },
+      {
+        "state": "PASS",
+        "category": "gpu",
+        "name": "M12D-P2B multiscale natural terrain family proof"
+      },
+      {
+        "state": "PASS",
+        "category": "gpu",
+        "name": "M12D-P2C1 prepared natural terrain"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Generation-4 physical renderer integration"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Production material noise value preservation"
+      },
+      {
+        "state": "PASS",
+        "category": "gpu",
+        "name": "Displaced mesh and physical normals"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Screen-space subdivision"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Terrain-v5 seams, mixed-LOD authority, and Florida classification"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Terrain asset distribution boundary"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Cache lifecycle cleanup"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Local terrain format and GPU compression"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "M12 Florida regional physical surface"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Production cube-sphere GPU residency integration"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Production physical-normal tangent continuity"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Production surface body eligibility and transition ownership"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Production Earth material-state continuity"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Planetary camera terrain exclusion"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Close-ground reference-frame diagnostic"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Production terrain material synthesis"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Planetary terrain residency and surface frame"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Planetary patch topology and ABI"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Parent-child LOD geographic correspondence"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Opaque distant-detailed handoff"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Planetary representation handoff"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Distant quaternion transform parity"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Distant visible hemisphere winding"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Continuous Earth distance visibility"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Camera drag isolation"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Sol system presentation and focus"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "SolAnalytical Earth planetary scene"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Florida foundation seating"
+      }
+    ]
+  },
+  "releaseInitialFull": {
+    "log": "graphics-validation-final-release.log",
+    "sha256": "7c86ef46f2bd14d04d8e75ff7a294bc72ea0feb46eab02167c309259cf0010d8",
+    "summary": [
+      "Graphics Release: selected=88; pass=87; fail=1; skip=0; excluded=0"
+    ],
+    "cases": [
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Facility lighting authority"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "MeshHandle"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Transport layout"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Transform conversion"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Camera relative"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Batches and capacity"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Resolved render transport"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Orbit curve transport"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Static reference-frame fixture transport"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Dynamic reference-frame fixture publication"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Celestial analytical fixture publication"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Celestial player torque controls"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Celestial SAS mode selection"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Celestial SAS control cadence"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Celestial SAS convergence"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Celestial SAS diagnostic indicators"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Camera snapshot allocation"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Planetary presentation pipeline"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Planetary presentation SPIR-V stride"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Focus target authority"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Planet material presentation"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Planet micro-normal foundation"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Planet surface scatter placement"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Planetary surface camera presentation"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Earth CPU elevation oracle"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Canonical body-fixed geographic handedness"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Canonical SurfaceAnchor physical terrain authority"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Anchored Florida launch site"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Earth route convergence"
+      },
+      {
+        "state": "FAIL",
+        "category": "window",
+        "name": "Live NCSM1 regional physical residency"
+      },
+      {
+        "state": "PASS",
+        "category": "window",
+        "name": "Production window lifecycle"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Window validation message policy"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Florida facility support"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Surface-relative camera authority"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Near-surface inertial free-look"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "SurfaceAnchor acquisition, ENU, and handoff"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Camera focus-position continuity"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Camera SurfaceAnchor handoff monotonicity"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Solar preset camera-path convergence"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Zoom motion-profile continuity"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Solar camera bounded-domain crash regression"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Surface visual-aim continuity"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Inertial visual-aim authority"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Cube-sphere planetary surface"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Production relaxed cube-sphere patch hierarchy"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Anchored spherical mesh-tier contract"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "M12D-P2S2 spherical billboard topology proof"
+      },
+      {
+        "state": "PASS",
+        "category": "gpu",
+        "name": "M12D-P2S3 spherical billboard GPU runtime proof"
+      },
+      {
+        "state": "PASS",
+        "category": "gpu",
+        "name": "M12D-P2S4 canonical natural terrain billboard binding"
+      },
+      {
+        "state": "PASS",
+        "category": "gpu",
+        "name": "M12D-P2S5C production spherical billboard runtime"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "M12D-P2S5B production spherical billboard topology library"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "M12D-P2S5F nested production scale-mesh topology"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "M12D-P2S5G bounded spherical billboard surface interface"
+      },
+      {
+        "state": "PASS",
+        "category": "gpu",
+        "name": "GPU physical-height preparation"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Multiscale physical terrain modifier foundation"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Single canonical physical surface authority"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Global/anchored physical frequency continuity"
+      },
+      {
+        "state": "PASS",
+        "category": "gpu",
+        "name": "M12D-P2A canonical hashed cell field proof"
+      },
+      {
+        "state": "PASS",
+        "category": "gpu",
+        "name": "M12D-P2B multiscale natural terrain family proof"
+      },
+      {
+        "state": "PASS",
+        "category": "gpu",
+        "name": "M12D-P2C1 prepared natural terrain"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Generation-4 physical renderer integration"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Production material noise value preservation"
+      },
+      {
+        "state": "PASS",
+        "category": "gpu",
+        "name": "Displaced mesh and physical normals"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Screen-space subdivision"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Terrain-v5 seams, mixed-LOD authority, and Florida classification"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Terrain asset distribution boundary"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Cache lifecycle cleanup"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Local terrain format and GPU compression"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "M12 Florida regional physical surface"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Production cube-sphere GPU residency integration"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Production physical-normal tangent continuity"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Production surface body eligibility and transition ownership"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Production Earth material-state continuity"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Planetary camera terrain exclusion"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Close-ground reference-frame diagnostic"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Production terrain material synthesis"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Planetary terrain residency and surface frame"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Planetary patch topology and ABI"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Parent-child LOD geographic correspondence"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Opaque distant-detailed handoff"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Planetary representation handoff"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Distant quaternion transform parity"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Distant visible hemisphere winding"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Continuous Earth distance visibility"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Camera drag isolation"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Sol system presentation and focus"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "SolAnalytical Earth planetary scene"
+      },
+      {
+        "state": "PASS",
+        "category": "headless",
+        "name": "Florida foundation seating"
+      }
+    ]
+  },
+  "releaseCorrectedWindows": {
+    "log": "graphics-validation-final-window-release.log",
+    "sha256": "fd996c2a63c7fbfb57013d755e9c65c3cdff4137f91b063b46b2254ede633a96",
+    "summary": [
+      "Graphics Release: selected=3; pass=3; fail=0; skip=0; excluded=86"
+    ],
+    "cases": [
+      {
+        "state": "PASS",
+        "category": "window",
+        "name": "Live NCSM1 regional physical residency"
+      },
+      {
+        "state": "PASS",
+        "category": "window",
+        "name": "Production window lifecycle"
+      },
+      {
+        "state": "PASS",
+        "category": "window",
+        "name": "Regional diagnostic wheel isolation"
+      }
+    ]
+  },
+  "nativeTests": [
+    {
+      "configuration": "native-ninja",
+      "test": "regional",
+      "profile": "default",
+      "pass": true,
+      "VUIDs": [],
+      "summary": [
+        "Regional physical identity/readiness/cache: PASS; asynchronous source; no anchored owner required"
+      ],
+      "logSha256": "839dd99a8e2a0d00caefe2511179f126049acb1f79d0c46b7af4d495d38c533d"
+    },
+    {
+      "configuration": "native-ninja",
+      "test": "facility",
+      "profile": "default",
+      "pass": false,
+      "VUIDs": [],
+      "summary": [
+        "Vulkan presentation validation errors"
+      ],
+      "logSha256": "ff713255b89a36630d7cfb9283da5b8a80e8d57623add1a4b82564c812402640"
+    },
+    {
+      "configuration": "native-ninja",
+      "test": "facility",
+      "profile": "clean-implicit",
+      "pass": true,
+      "VUIDs": [],
+      "summary": [
+        "Facility visibility PASS: 102 GPU/CPU cases; parallel/grazing/boundary/multiple-caster/Sun/camera/orientation/range/lighting; inactive and invalid-definition gates"
+      ],
+      "logSha256": "e3f33e8f3dcdb47e40db56c3cc9b72586aa52b1b8fec6414cf25f4abef237f7d"
+    },
+    {
+      "configuration": "native-ninja",
+      "test": "material",
+      "profile": "default",
+      "pass": false,
+      "VUIDs": [],
+      "summary": [
+        "Vulkan presentation validation errors"
+      ],
+      "logSha256": "3ef1a4f191d0456530f5a145ec3493495b928f160bee74fe4849a0120c00b6fc"
+    },
+    {
+      "configuration": "native-ninja",
+      "test": "material",
+      "profile": "clean-implicit",
+      "pass": true,
+      "VUIDs": [],
+      "summary": [
+        "Surface material coordinates PASS: 540 GPU coordinate components; 3 orientations, 3 body radii, 4 camera distances; maxPhysicalErrorMetres=0.000183627; FP64 body identity / FP32 local differential; no shell input"
+      ],
+      "logSha256": "25af99fd05d5a6951f02ff82f2dd4402c3c802819843e264015e17eb5a028523"
+    },
+    {
+      "configuration": "native-ninja-release",
+      "test": "regional",
+      "profile": "default",
+      "pass": true,
+      "VUIDs": [],
+      "summary": [
+        "Regional physical identity/readiness/cache: PASS; asynchronous source; no anchored owner required"
+      ],
+      "logSha256": "839dd99a8e2a0d00caefe2511179f126049acb1f79d0c46b7af4d495d38c533d"
+    },
+    {
+      "configuration": "native-ninja-release",
+      "test": "facility",
+      "profile": "default",
+      "pass": false,
+      "VUIDs": [],
+      "summary": [
+        "Vulkan presentation validation errors"
+      ],
+      "logSha256": "ff713255b89a36630d7cfb9283da5b8a80e8d57623add1a4b82564c812402640"
+    },
+    {
+      "configuration": "native-ninja-release",
+      "test": "facility",
+      "profile": "clean-implicit",
+      "pass": true,
+      "VUIDs": [],
+      "summary": [
+        "Facility visibility PASS: 102 GPU/CPU cases; parallel/grazing/boundary/multiple-caster/Sun/camera/orientation/range/lighting; inactive and invalid-definition gates"
+      ],
+      "logSha256": "e3f33e8f3dcdb47e40db56c3cc9b72586aa52b1b8fec6414cf25f4abef237f7d"
+    },
+    {
+      "configuration": "native-ninja-release",
+      "test": "material",
+      "profile": "default",
+      "pass": false,
+      "VUIDs": [],
+      "summary": [
+        "Vulkan presentation validation errors"
+      ],
+      "logSha256": "3ef1a4f191d0456530f5a145ec3493495b928f160bee74fe4849a0120c00b6fc"
+    },
+    {
+      "configuration": "native-ninja-release",
+      "test": "material",
+      "profile": "clean-implicit",
+      "pass": true,
+      "VUIDs": [],
+      "summary": [
+        "Surface material coordinates PASS: 540 GPU coordinate components; 3 orientations, 3 body radii, 4 camera distances; maxPhysicalErrorMetres=0.000183627; FP64 body identity / FP32 local differential; no shell input"
+      ],
+      "logSha256": "25af99fd05d5a6951f02ff82f2dd4402c3c802819843e264015e17eb5a028523"
+    }
+  ],
+  "deployment": [
+    {
+      "configuration": "Debug",
+      "dlls": [
+        {
+          "path": "E:\\NovaCore\\build\\native-ninja\\NovaCore.Native.dll",
+          "sha256": "b2e9a6a6de4ff93a8c6383985b690fc8e2b0e1115ddb9782fc276f6bb3c3fc05"
+        },
+        {
+          "path": "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Native.dll",
+          "sha256": "b2e9a6a6de4ff93a8c6383985b690fc8e2b0e1115ddb9782fc276f6bb3c3fc05"
+        },
+        {
+          "path": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\NovaCore.Native.dll",
+          "sha256": "b2e9a6a6de4ff93a8c6383985b690fc8e2b0e1115ddb9782fc276f6bb3c3fc05"
+        }
+      ],
+      "deployedShaderCount": 49,
+      "shaders": [
+        {
+          "name": "triangle.vert.spv",
+          "sha256": "87c254e6166b18954b8c0fbd533af2e83f4cf7f09842d752a0a76ae68e8f1aef"
+        },
+        {
+          "name": "triangle.frag.spv",
+          "sha256": "36e2c4762d87eddd045909f600217f3ea7d48b023d08887abbf958d3bfaa5ddf"
+        },
+        {
+          "name": "orbit.vert.spv",
+          "sha256": "b4b9dd635f32156654e30d843c29eb864feb09751d7b3027cf99a5d741b6a45b"
+        },
+        {
+          "name": "orbit.frag.spv",
+          "sha256": "b06f50708727144e8d0f08d35cd2e64d8b1cef501ed20b10fea4a34196026267"
+        },
+        {
+          "name": "orbit_previous.frag.spv",
+          "sha256": "c4935060e07e01742d59d8a5834241e2963dcc80ed8e35baeac5b08288761e61"
+        },
+        {
+          "name": "body_forward.frag.spv",
+          "sha256": "fa706803f042fb5a9f7a3c9965a3e2de3e8838e075d67876b78df9bdc132ce0e"
+        },
+        {
+          "name": "sas_target.frag.spv",
+          "sha256": "4e99fda06f571590f950e91d93025cafa83e4a454e68e3583ce59d869f0a3ef2"
+        },
+        {
+          "name": "planetary.vert.spv",
+          "sha256": "ddb84030e2621df8f05489e339989d66de60d73435f490b4ec0af4251d7a0338"
+        },
+        {
+          "name": "planetary.frag.spv",
+          "sha256": "417f17b236834f0ac94fa3bbfdae52ad164599ff14051e9b396809beea75cda1"
+        },
+        {
+          "name": "planetary_select.comp.spv",
+          "sha256": "8189bbd2a85fe23033f12c558d8b221b62b8969c17ba9ffcf07b7c8501fe8adf"
+        },
+        {
+          "name": "planetary_terrain_generate.comp.spv",
+          "sha256": "1fc8c24ea6b4a55e83997fadf80b4901f692b8bc2de84a5cf6ac043e4da531d1"
+        },
+        {
+          "name": "planetary_production_terrain.comp.spv",
+          "sha256": "405e6e6daab609ca383297ba8be706bfa96859c65dc2d9f42476a32cddd85df7"
+        },
+        {
+          "name": "planetary_production.frag.spv",
+          "sha256": "3c75d16a441d456c7c80279250388cb75b21712e31a17b3e75b6c1902a927241"
+        },
+        {
+          "name": "regional_physical_demand.comp.spv",
+          "sha256": "7d80dbd70be13cc55f00ef836cd8da9d3783064411320697777f6b5c848d8f67"
+        },
+        {
+          "name": "regional_physical_incoming_demand.comp.spv",
+          "sha256": "a56b62b5432206b8ab5eded734b13a0ddf9f0c726a4b444f8d24139bdcc17a60"
+        },
+        {
+          "name": "production_spherical_billboard_prepare.comp.spv",
+          "sha256": "cd6b8feeaa382281c4d8891af64d54e45354491dbd93af6b90621a3658e9492c"
+        },
+        {
+          "name": "production_spherical_billboard_incoming_prepare.comp.spv",
+          "sha256": "9f32e3fcf9ffe534a10107ab0b1ef2b1ecdb3c6a9bb44d2c5d3d38b15ed47613"
+        },
+        {
+          "name": "production_spherical_billboard_reset.comp.spv",
+          "sha256": "cf583d16e14c8a8ec63b393d8752541648d932cf0165231cc48f6076e28fc027"
+        },
+        {
+          "name": "production_spherical_billboard_cull.comp.spv",
+          "sha256": "2827b58dcd7029695e0b33272018e54d19d6113b8d7ab9ac591c343b3d994398"
+        },
+        {
+          "name": "production_spherical_billboard_compact.comp.spv",
+          "sha256": "2aabd7633b333f86df8a6eae6b76ed2d13a7129443dcd9201531de047b12f4d9"
+        },
+        {
+          "name": "production_spherical_billboard_incoming_reset.comp.spv",
+          "sha256": "5d750f929dcab4f9f3138b4cdfa869ab26e3051d4b28485c02ee483f89e14d6e"
+        },
+        {
+          "name": "production_spherical_billboard_incoming_cull.comp.spv",
+          "sha256": "8c677f08ae051cf525108a436066983d41961ce70757ca29a86df165d2663cfb"
+        },
+        {
+          "name": "production_nested_scale_mesh_cull.comp.spv",
+          "sha256": "497d88225a914b9601ad6c0f44733e834794a952854e71b26be426ead8780d94"
+        },
+        {
+          "name": "production_nested_scale_mesh_incoming_cull.comp.spv",
+          "sha256": "23bd1b04d0291e6271138041433eee07e57503482e8e5cf845e4b72c75967336"
+        },
+        {
+          "name": "production_spherical_billboard_incoming_compact.comp.spv",
+          "sha256": "6b0238138222112ddf1f945f5e6a31867d5dd11f57169481ece9c05337f43e4e"
+        },
+        {
+          "name": "production_spherical_billboard.vert.spv",
+          "sha256": "1baa9043db7a8b71dcf5931f4cb415fa84ce6341b07d850ea9beb8baa02d2b6a"
+        },
+        {
+          "name": "production_spherical_billboard.tesc.spv",
+          "sha256": "0163498278f9523fd442434f05f056be28252d16c2f2ba44b8d91642b33e4439"
+        },
+        {
+          "name": "production_spherical_billboard.tese.spv",
+          "sha256": "a25990457cc76476e37cbe045e0853af8901ff87b192e917c24470287ce8fa3e"
+        },
+        {
+          "name": "planetary_natural_terrain_global_prepare.comp.spv",
+          "sha256": "5a5450321873f5ff8bed7dd9e4f06c342625724d629da2232521fbace01c7a85"
+        },
+        {
+          "name": "distant_planet.vert.spv",
+          "sha256": "cf28fe0a7c0797bd7d72076437ba78c4e0d97bb1a0ae3c065baf3bfc5db62cb8"
+        },
+        {
+          "name": "distant_planet.frag.spv",
+          "sha256": "04137afb1c632dfb7074480377d9f93136ab3127d382baeef07d52b09409eba8"
+        },
+        {
+          "name": "planetary_ring.vert.spv",
+          "sha256": "cccede52d3c64db872360912db9eb29e60cb892c648ed53ce1c178f8623d0cfb"
+        },
+        {
+          "name": "planetary_ring_far.frag.spv",
+          "sha256": "343db81bccc310b21c600ab6ee6722438151694683bb0cf7ba01d54a9b68ade6"
+        },
+        {
+          "name": "planetary_ring_near.frag.spv",
+          "sha256": "48b8ef4e56b6be9380cfbaca7daa790035e704541b6b8a550b3cc7bed540244c"
+        },
+        {
+          "name": "solar_orbit.vert.spv",
+          "sha256": "d71520615e2533a06208c3cec752d2689f524a30fb6a11bd2ca4ae00e2cc027f"
+        },
+        {
+          "name": "solar_orbit.frag.spv",
+          "sha256": "23b511270c196c2186f7935699ca7fdedf3c92c629da67c10e8ae7615286181f"
+        },
+        {
+          "name": "solar_marker.vert.spv",
+          "sha256": "50d948741d3ca6b59577a82d3346ab3cac51edcb9ab80047247ac61c345b6db6"
+        },
+        {
+          "name": "solar_marker.frag.spv",
+          "sha256": "d428743c08f96f4e508eab131cfb54981c2628eecc7acd3d2df220b19103275b"
+        },
+        {
+          "name": "solar_label.vert.spv",
+          "sha256": "a13a7a8acb3ae2da2cac129a203caffd86b5a7f434701d99b59284fdd01f1844"
+        },
+        {
+          "name": "solar_label.frag.spv",
+          "sha256": "673c5dc0cc1e199d497c7c927f282a02da444fa258860b6cb94b6fd1ed12c90a"
+        },
+        {
+          "name": "solar_speed_hud.vert.spv",
+          "sha256": "a777a4dfece073339efcd97c7292d970f8c26d21f221ebd62ce244970f0a5fb4"
+        },
+        {
+          "name": "solar_speed_hud.frag.spv",
+          "sha256": "e073b0ab31c69a3516d695146ade0dbd618d3dede5a10699f390f10da52c3586"
+        },
+        {
+          "name": "fullscreen.vert.spv",
+          "sha256": "a18f9b5e0b4a4e7a077b1017bad7b1c5c40313b3f70113f1e0771cd202433130"
+        },
+        {
+          "name": "space_background.frag.spv",
+          "sha256": "0c98ee3df0ba8ad8f313cc352a02032528e6b0e36b2dfa8cc2be1a6755b71cfc"
+        },
+        {
+          "name": "tone_map.frag.spv",
+          "sha256": "d617345e95589ecb087ed40c20f4d04a427251a2b5249d8181cc63c421ee3979"
+        },
+        {
+          "name": "stellar_sun.vert.spv",
+          "sha256": "3e124d5babcb1d219499aa2de1482f90fc7c9008e92b054f7ca0d268336346b6"
+        },
+        {
+          "name": "stellar_sun.frag.spv",
+          "sha256": "5c448c0da4cadeb08bf2c85c74448d3b690fd3d6bccab1fc2c49da7a0bf54769"
+        },
+        {
+          "name": "stellar_glow.vert.spv",
+          "sha256": "30a9ed63e3d92581852afef62a242f2160a10c6cdb276a3b1aa0360a476183e8"
+        },
+        {
+          "name": "stellar_glow.frag.spv",
+          "sha256": "e83a5e7458ec4be4b835384c88ec3ea958ae13569ee9ac823a4e2b2db17facee"
+        }
+      ],
+      "sampleManagedSha256": "86857a4071b7ec855ce74e985e3664eb3bfd0bc1cee1fd839f1d85c8d7425da0"
+    },
+    {
+      "configuration": "Release",
+      "dlls": [
+        {
+          "path": "E:\\NovaCore\\build\\native-ninja-release\\NovaCore.Native.dll",
+          "sha256": "120b4a2c27a9193c9acd9e7b70a2a07e52bc0f70ec8514a086c2a42bfa7ee5de"
+        },
+        {
+          "path": "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Native.dll",
+          "sha256": "120b4a2c27a9193c9acd9e7b70a2a07e52bc0f70ec8514a086c2a42bfa7ee5de"
+        },
+        {
+          "path": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Native.dll",
+          "sha256": "120b4a2c27a9193c9acd9e7b70a2a07e52bc0f70ec8514a086c2a42bfa7ee5de"
+        }
+      ],
+      "deployedShaderCount": 49,
+      "shaders": [
+        {
+          "name": "triangle.vert.spv",
+          "sha256": "87c254e6166b18954b8c0fbd533af2e83f4cf7f09842d752a0a76ae68e8f1aef"
+        },
+        {
+          "name": "triangle.frag.spv",
+          "sha256": "36e2c4762d87eddd045909f600217f3ea7d48b023d08887abbf958d3bfaa5ddf"
+        },
+        {
+          "name": "orbit.vert.spv",
+          "sha256": "b4b9dd635f32156654e30d843c29eb864feb09751d7b3027cf99a5d741b6a45b"
+        },
+        {
+          "name": "orbit.frag.spv",
+          "sha256": "b06f50708727144e8d0f08d35cd2e64d8b1cef501ed20b10fea4a34196026267"
+        },
+        {
+          "name": "orbit_previous.frag.spv",
+          "sha256": "c4935060e07e01742d59d8a5834241e2963dcc80ed8e35baeac5b08288761e61"
+        },
+        {
+          "name": "body_forward.frag.spv",
+          "sha256": "fa706803f042fb5a9f7a3c9965a3e2de3e8838e075d67876b78df9bdc132ce0e"
+        },
+        {
+          "name": "sas_target.frag.spv",
+          "sha256": "4e99fda06f571590f950e91d93025cafa83e4a454e68e3583ce59d869f0a3ef2"
+        },
+        {
+          "name": "planetary.vert.spv",
+          "sha256": "ddb84030e2621df8f05489e339989d66de60d73435f490b4ec0af4251d7a0338"
+        },
+        {
+          "name": "planetary.frag.spv",
+          "sha256": "417f17b236834f0ac94fa3bbfdae52ad164599ff14051e9b396809beea75cda1"
+        },
+        {
+          "name": "planetary_select.comp.spv",
+          "sha256": "8189bbd2a85fe23033f12c558d8b221b62b8969c17ba9ffcf07b7c8501fe8adf"
+        },
+        {
+          "name": "planetary_terrain_generate.comp.spv",
+          "sha256": "1fc8c24ea6b4a55e83997fadf80b4901f692b8bc2de84a5cf6ac043e4da531d1"
+        },
+        {
+          "name": "planetary_production_terrain.comp.spv",
+          "sha256": "405e6e6daab609ca383297ba8be706bfa96859c65dc2d9f42476a32cddd85df7"
+        },
+        {
+          "name": "planetary_production.frag.spv",
+          "sha256": "3c75d16a441d456c7c80279250388cb75b21712e31a17b3e75b6c1902a927241"
+        },
+        {
+          "name": "regional_physical_demand.comp.spv",
+          "sha256": "7d80dbd70be13cc55f00ef836cd8da9d3783064411320697777f6b5c848d8f67"
+        },
+        {
+          "name": "regional_physical_incoming_demand.comp.spv",
+          "sha256": "a56b62b5432206b8ab5eded734b13a0ddf9f0c726a4b444f8d24139bdcc17a60"
+        },
+        {
+          "name": "production_spherical_billboard_prepare.comp.spv",
+          "sha256": "cd6b8feeaa382281c4d8891af64d54e45354491dbd93af6b90621a3658e9492c"
+        },
+        {
+          "name": "production_spherical_billboard_incoming_prepare.comp.spv",
+          "sha256": "9f32e3fcf9ffe534a10107ab0b1ef2b1ecdb3c6a9bb44d2c5d3d38b15ed47613"
+        },
+        {
+          "name": "production_spherical_billboard_reset.comp.spv",
+          "sha256": "cf583d16e14c8a8ec63b393d8752541648d932cf0165231cc48f6076e28fc027"
+        },
+        {
+          "name": "production_spherical_billboard_cull.comp.spv",
+          "sha256": "2827b58dcd7029695e0b33272018e54d19d6113b8d7ab9ac591c343b3d994398"
+        },
+        {
+          "name": "production_spherical_billboard_compact.comp.spv",
+          "sha256": "2aabd7633b333f86df8a6eae6b76ed2d13a7129443dcd9201531de047b12f4d9"
+        },
+        {
+          "name": "production_spherical_billboard_incoming_reset.comp.spv",
+          "sha256": "5d750f929dcab4f9f3138b4cdfa869ab26e3051d4b28485c02ee483f89e14d6e"
+        },
+        {
+          "name": "production_spherical_billboard_incoming_cull.comp.spv",
+          "sha256": "8c677f08ae051cf525108a436066983d41961ce70757ca29a86df165d2663cfb"
+        },
+        {
+          "name": "production_nested_scale_mesh_cull.comp.spv",
+          "sha256": "497d88225a914b9601ad6c0f44733e834794a952854e71b26be426ead8780d94"
+        },
+        {
+          "name": "production_nested_scale_mesh_incoming_cull.comp.spv",
+          "sha256": "23bd1b04d0291e6271138041433eee07e57503482e8e5cf845e4b72c75967336"
+        },
+        {
+          "name": "production_spherical_billboard_incoming_compact.comp.spv",
+          "sha256": "6b0238138222112ddf1f945f5e6a31867d5dd11f57169481ece9c05337f43e4e"
+        },
+        {
+          "name": "production_spherical_billboard.vert.spv",
+          "sha256": "1baa9043db7a8b71dcf5931f4cb415fa84ce6341b07d850ea9beb8baa02d2b6a"
+        },
+        {
+          "name": "production_spherical_billboard.tesc.spv",
+          "sha256": "0163498278f9523fd442434f05f056be28252d16c2f2ba44b8d91642b33e4439"
+        },
+        {
+          "name": "production_spherical_billboard.tese.spv",
+          "sha256": "a25990457cc76476e37cbe045e0853af8901ff87b192e917c24470287ce8fa3e"
+        },
+        {
+          "name": "planetary_natural_terrain_global_prepare.comp.spv",
+          "sha256": "5a5450321873f5ff8bed7dd9e4f06c342625724d629da2232521fbace01c7a85"
+        },
+        {
+          "name": "distant_planet.vert.spv",
+          "sha256": "cf28fe0a7c0797bd7d72076437ba78c4e0d97bb1a0ae3c065baf3bfc5db62cb8"
+        },
+        {
+          "name": "distant_planet.frag.spv",
+          "sha256": "04137afb1c632dfb7074480377d9f93136ab3127d382baeef07d52b09409eba8"
+        },
+        {
+          "name": "planetary_ring.vert.spv",
+          "sha256": "cccede52d3c64db872360912db9eb29e60cb892c648ed53ce1c178f8623d0cfb"
+        },
+        {
+          "name": "planetary_ring_far.frag.spv",
+          "sha256": "343db81bccc310b21c600ab6ee6722438151694683bb0cf7ba01d54a9b68ade6"
+        },
+        {
+          "name": "planetary_ring_near.frag.spv",
+          "sha256": "48b8ef4e56b6be9380cfbaca7daa790035e704541b6b8a550b3cc7bed540244c"
+        },
+        {
+          "name": "solar_orbit.vert.spv",
+          "sha256": "d71520615e2533a06208c3cec752d2689f524a30fb6a11bd2ca4ae00e2cc027f"
+        },
+        {
+          "name": "solar_orbit.frag.spv",
+          "sha256": "23b511270c196c2186f7935699ca7fdedf3c92c629da67c10e8ae7615286181f"
+        },
+        {
+          "name": "solar_marker.vert.spv",
+          "sha256": "50d948741d3ca6b59577a82d3346ab3cac51edcb9ab80047247ac61c345b6db6"
+        },
+        {
+          "name": "solar_marker.frag.spv",
+          "sha256": "d428743c08f96f4e508eab131cfb54981c2628eecc7acd3d2df220b19103275b"
+        },
+        {
+          "name": "solar_label.vert.spv",
+          "sha256": "a13a7a8acb3ae2da2cac129a203caffd86b5a7f434701d99b59284fdd01f1844"
+        },
+        {
+          "name": "solar_label.frag.spv",
+          "sha256": "673c5dc0cc1e199d497c7c927f282a02da444fa258860b6cb94b6fd1ed12c90a"
+        },
+        {
+          "name": "solar_speed_hud.vert.spv",
+          "sha256": "a777a4dfece073339efcd97c7292d970f8c26d21f221ebd62ce244970f0a5fb4"
+        },
+        {
+          "name": "solar_speed_hud.frag.spv",
+          "sha256": "e073b0ab31c69a3516d695146ade0dbd618d3dede5a10699f390f10da52c3586"
+        },
+        {
+          "name": "fullscreen.vert.spv",
+          "sha256": "a18f9b5e0b4a4e7a077b1017bad7b1c5c40313b3f70113f1e0771cd202433130"
+        },
+        {
+          "name": "space_background.frag.spv",
+          "sha256": "0c98ee3df0ba8ad8f313cc352a02032528e6b0e36b2dfa8cc2be1a6755b71cfc"
+        },
+        {
+          "name": "tone_map.frag.spv",
+          "sha256": "d617345e95589ecb087ed40c20f4d04a427251a2b5249d8181cc63c421ee3979"
+        },
+        {
+          "name": "stellar_sun.vert.spv",
+          "sha256": "3e124d5babcb1d219499aa2de1482f90fc7c9008e92b054f7ca0d268336346b6"
+        },
+        {
+          "name": "stellar_sun.frag.spv",
+          "sha256": "5c448c0da4cadeb08bf2c85c74448d3b690fd3d6bccab1fc2c49da7a0bf54769"
+        },
+        {
+          "name": "stellar_glow.vert.spv",
+          "sha256": "30a9ed63e3d92581852afef62a242f2160a10c6cdb276a3b1aa0360a476183e8"
+        },
+        {
+          "name": "stellar_glow.frag.spv",
+          "sha256": "e83a5e7458ec4be4b835384c88ec3ea958ae13569ee9ac823a4e2b2db17facee"
+        }
+      ],
+      "sampleManagedSha256": "46b24f94df3e7999388a7317af999073183db1b1de52a434c7379822a5b725af"
+    }
+  ],
+  "changedSourceHashes": [
+    {
+      "path": "native/NovaCore.Native/FacilityLightOcclusionTests.cpp",
+      "sha256": "bbc26e66ba55329988f8c95aaae24f8fecf969ea8202bada44ed86ad54ada44b"
+    },
+    {
+      "path": "native/NovaCore.Native/NovaCoreNative.cpp",
+      "sha256": "701cdaac20151603c8243988e195c8ff147ef2e5ad5e69d8a43edadb5db7ee1c"
+    },
+    {
+      "path": "native/NovaCore.Native/PresentationGpuTestDevice.h",
+      "sha256": "ee0f71cf5f035f091db1aa75fa211876dee709fe554305429139231ff7b3c80c"
+    },
+    {
+      "path": "native/NovaCore.Native/SurfaceMaterialCoordinatesTests.cpp",
+      "sha256": "bc84268d48105179c45c3f0a5795eada5f86e786354a18d91cb7ea2b32865f7a"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetarySphericalBillboardNaturalTerrainProof.cs",
+      "sha256": "74fa9cf3f429a250a1a88a5d0a44140d24291d53b7b45403b887c20d2281ce1a"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/CacheLifecycleTests.cs",
+      "sha256": "b0a71f656665174a8c3476cacbd2e1c033ef7cd139c2d6f35d8b38df7e32da22"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/GpuDisplacedMeshPreparationTests.cs",
+      "sha256": "e01592658d60cb49667718505d5d83e556d33b6603ec212766a25879d1fe3c3b"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/GpuPhysicalHeightPreparationTests.cs",
+      "sha256": "950d5e1976f394bd0a8c1547b9cc35f14aa3282abe3b1d1fd2241a156a91696c"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryBillboardSurfaceWorkloadTests.cs",
+      "sha256": "1f7030f53d878a4a3886e04ad0954d6c777edd82cd9ee57a38d1a304f9d97f4d"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryCanonicalPhysicalSurfaceAuthorityTests.cs",
+      "sha256": "021daf5868ab7b23f28100180a0aa2c5914e655bd7b34fde352d6f6a863857b7"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryNaturalTerrainFamiliesTests.cs",
+      "sha256": "9e028a69e2c092911bc3a5731073ea5fe5fb19f612ed3df1c76bd42b2cdebc65"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryNaturalTerrainFieldTests.cs",
+      "sha256": "1845580e95a8f8ff752c82d84467dc23244a2617dc5678564beb92d50e40bccd"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryNaturalTerrainPreparationTests.cs",
+      "sha256": "49c9c46235fb163e0228907b51cb63ff53ef3a91ddc340d5d5eec7d663441d52"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryNaturalTerrainRendererIntegrationTests.cs",
+      "sha256": "1604804452431b67dfb645a7f9bc5b8f42c8930129fb530f7d3a922694204512"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryPhysicalFrequencyContinuityTests.cs",
+      "sha256": "355f08f8410b2e3d7986e061bcad99b2f335b61fefe8699b56b5f42720d2d15a"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryPhysicalSurfaceModifierTests.cs",
+      "sha256": "f49839c22c07f1282921074045bc3a5098fd5386b3e9d3068b9783419e1c2f87"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryProductionMaterialNoiseTests.cs",
+      "sha256": "5a51b9c3a7cef181df699d98be26b2dccd55d7644a473c2d94ab3dc9f210db6f"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryProductionSphericalBillboardRuntimeTests.cs",
+      "sha256": "ea15ba19cbd3ba25dcad50f6dcd08a0c38a646d0f56ca7d58586e9627cc9ff56"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryScreenSpaceSubdivisionTests.cs",
+      "sha256": "c165c7dabd1d79e648884215c90bfb87b454e51100cf835fe3c34002c6429f52"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetarySphericalBillboardGpuRuntimeTests.cs",
+      "sha256": "cb18144d4e3e8d3d3715f247f700a1192c3c87dee9688ec5bcde105312375184"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetarySphericalBillboardNaturalTerrainTests.cs",
+      "sha256": "5d242bca10532c1a53ff3e72dabd6dfe04ed4b2a8fa1b95a1513df29f84d361c"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/Program.cs",
+      "sha256": "5e16470511eb6c03d1ebf4d92b0c8f604611e8db96e5f18810efa103dec9ccef"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/RegionalPhysicalResidencyTests.cs",
+      "sha256": "2ba14646764d755b1c7abcbbee86d03a640f7002763caec131d2706a3cf29304"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/GraphicsTestHarness.cs",
+      "sha256": "0d2588a720f52b4dfcf8df5ad1bab89a450c484660f9a04e2aa1652141fcdece"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/WindowLifecycleTests.cs",
+      "sha256": "513a55072bfcbef8a8d500e6bcac8ba1f7dd07b3ae2abcda14e76a57671fcb09"
+    }
+  ],
+  "failureEvidence": [
+    {
+      "log": "graphics-validation-initial-debug.log",
+      "messages": [
+        "Unhandled exception. System.Exception: M12 site fingerprint binds the same geographic reservation to the regional physical height: 0x9B0B082987CE3221"
+      ]
+    },
+    {
+      "log": "graphics-validation-initial-release.log",
+      "messages": [
+        "Unhandled exception. System.Exception: M12 site fingerprint binds the same geographic reservation to the regional physical height: 0x9B0B082987CE3221"
+      ]
+    },
+    {
+      "log": "graphics-validation-window-debug.log",
+      "messages": [
+        "[native] Vulkan validation [error][VUID-VkMemoryAllocateInfo-memoryTypeIndex-00645]: vkAllocateMemory(): pAllocateInfo->memoryTypeIndex is 0 but VkMemoryWin32HandlePropertiesKHR::memoryTypeBits is 0x0 with handleType VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT.",
+        "The Vulkan spec states: If the parameters define an import operation and the external handle is an NT handle or a global share handle created outside of the Vulkan API, the value of memoryTypeIndex must be one of those returned by vkGetMemoryWin32HandlePropertiesKHR (https://docs.vulkan.org/spec/latest/chapters/memory.html#VUID-VkMemoryAllocateInfo-memoryTypeIndex-00645)",
+        "System.InvalidOperationException: Vulkan validation failure: [native] Vulkan validation [error][VUID-VkMemoryAllocateInfo-memoryTypeIndex-00645]: vkAllocateMemory(): pAllocateInfo->memoryTypeIndex is 0 but VkMemoryWin32HandlePropertiesKHR::memoryTypeBits is 0x0 with handleType VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT."
+      ]
+    },
+    {
+      "log": "graphics-validation-wheel-before.log",
+      "messages": [
+        "[native] WM_MOUSEWHEEL wParam=0x780000 delta=120 accumulatedRaw=120",
+        "Solar orbit distance=6941480340480 m",
+        "System.InvalidOperationException: Diagnostic wheel isolation must preserve ordinary wheel input and suppress probe input."
+      ]
+    },
+    {
+      "log": "graphics-validation-final-release.log",
+      "messages": [
+        "System.InvalidOperationException: missing adjacent-level/pupil/reentry physical coverage"
+      ]
+    },
+    {
+      "log": "graphics-validation-native-ninja-facility.log",
+      "messages": [
+        "Presentation test Vulkan [Loader Message]: loader_get_json: Failed to open JSON file C:\\Program Files (x86)\\Epic Games\\Epic Online Services\\managedArtifacts\\98bc04bc842e4906993fd6d6644ffb8d\\EOSOverlayVkLayer-Win64.json",
+        "Presentation test Vulkan [Loader Message]: loader_get_json: Failed to open JSON file E:\\Epic Games\\Launcher\\Portal\\Extras\\Overlay\\EOSOverlayVkLayer-Win32.json",
+        "Presentation test Vulkan [Loader Message]: loader_get_json: Failed to open JSON file E:\\Epic Games\\Launcher\\Portal\\Extras\\Overlay\\EOSOverlayVkLayer-Win64.json"
+      ]
+    },
+    {
+      "log": "graphics-validation-native-ninja-material.log",
+      "messages": [
+        "Presentation test Vulkan [Loader Message]: loader_get_json: Failed to open JSON file C:\\Program Files (x86)\\Epic Games\\Epic Online Services\\managedArtifacts\\98bc04bc842e4906993fd6d6644ffb8d\\EOSOverlayVkLayer-Win64.json",
+        "Presentation test Vulkan [Loader Message]: loader_get_json: Failed to open JSON file E:\\Epic Games\\Launcher\\Portal\\Extras\\Overlay\\EOSOverlayVkLayer-Win32.json",
+        "Presentation test Vulkan [Loader Message]: loader_get_json: Failed to open JSON file E:\\Epic Games\\Launcher\\Portal\\Extras\\Overlay\\EOSOverlayVkLayer-Win64.json"
+      ]
+    },
+    {
+      "log": "graphics-validation-final-debug.log",
+      "messages": [
+        "System.InvalidOperationException: Vulkan validation failure: [native] Vulkan validation [error][VUID-VkMemoryAllocateInfo-memoryTypeIndex-00645]: vkAllocateMemory(): pAllocateInfo->memoryTypeIndex is 0 but VkMemoryWin32HandlePropertiesKHR::memoryTypeBits is 0x0 with handleType VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT.",
+        "[native] Vulkan validation [error][VUID-VkMemoryAllocateInfo-memoryTypeIndex-00645]: vkAllocateMemory(): pAllocateInfo->memoryTypeIndex is 0 but VkMemoryWin32HandlePropertiesKHR::memoryTypeBits is 0x0 with handleType VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT.",
+        "The Vulkan spec states: If the parameters define an import operation and the external handle is an NT handle or a global share handle created outside of the Vulkan API, the value of memoryTypeIndex must be one of those returned by vkGetMemoryWin32HandlePropertiesKHR (https://docs.vulkan.org/spec/latest/chapters/memory.html#VUID-VkMemoryAllocateInfo-memoryTypeIndex-00645)",
+        "System.AggregateException: Production window lifecycle failures (Vulkan validation failure: [native] Vulkan validation [error][VUID-VkMemoryAllocateInfo-memoryTypeIndex-00645]: vkAllocateMemory(): pAllocateInfo->memoryTypeIndex is 0 but VkMemoryWin32HandlePropertiesKHR::memoryTypeBits is 0x0 with handleType VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT.) (Vulkan validation failure: [native] Vulkan validation [error][VUID-VkMemoryAllocateInfo-memoryTypeIndex-00645]: vkAllocateMemory(): pAllocateInfo->memoryTypeIndex is 0 but VkMemoryWin32HandlePropertiesKHR::memoryTypeBits is 0x0 with handleType VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT.) (Vulkan validation failure: [native] Vulkan validation [error][VUID-VkMemoryAllocateInfo-memoryTypeIndex-00645]: vkAllocateMemory(): pAllocateInfo->memoryTypeIndex is 0 but VkMemoryWin32HandlePropertiesKHR::memoryTypeBits is 0x0 with handleType VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT.) (Vulkan validation failure: [native] Vulkan validation [error][VUID-VkMemoryAllocateInfo-memoryTypeIndex-00645]: vkAllocateMemory(): pAllocateInfo->memoryTypeIndex is 0 but VkMemoryWin32HandlePropertiesKHR::memoryTypeBits is 0x0 with handleType VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT.)",
+        " ---> System.InvalidOperationException: Vulkan validation failure: [native] Vulkan validation [error][VUID-VkMemoryAllocateInfo-memoryTypeIndex-00645]: vkAllocateMemory(): pAllocateInfo->memoryTypeIndex is 0 but VkMemoryWin32HandlePropertiesKHR::memoryTypeBits is 0x0 with handleType VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT.",
+        " ---> (Inner Exception #1) System.InvalidOperationException: Vulkan validation failure: [native] Vulkan validation [error][VUID-VkMemoryAllocateInfo-memoryTypeIndex-00645]: vkAllocateMemory(): pAllocateInfo->memoryTypeIndex is 0 but VkMemoryWin32HandlePropertiesKHR::memoryTypeBits is 0x0 with handleType VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT.",
+        " ---> (Inner Exception #2) System.InvalidOperationException: Vulkan validation failure: [native] Vulkan validation [error][VUID-VkMemoryAllocateInfo-memoryTypeIndex-00645]: vkAllocateMemory(): pAllocateInfo->memoryTypeIndex is 0 but VkMemoryWin32HandlePropertiesKHR::memoryTypeBits is 0x0 with handleType VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT.",
+        " ---> (Inner Exception #3) System.InvalidOperationException: Vulkan validation failure: [native] Vulkan validation [error][VUID-VkMemoryAllocateInfo-memoryTypeIndex-00645]: vkAllocateMemory(): pAllocateInfo->memoryTypeIndex is 0 but VkMemoryWin32HandlePropertiesKHR::memoryTypeBits is 0x0 with handleType VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT.",
+        "[native] WM_MOUSEWHEEL wParam=0x780000 delta=120 accumulatedRaw=120",
+        "Solar orbit distance=6941480340480 m"
+      ]
+    }
+  ],
+  "debugWithoutObsHook": {
+    "log": "graphics-validation-debug-window-without-obs.log",
+    "sha256": "887800080f58601da8e76665945d01f72136c0b74145041035db375d2d74c090",
+    "summary": [
+      "Graphics Debug: selected=3; pass=3; fail=0; skip=0; excluded=86"
+    ],
+    "cases": [
+      {
+        "state": "PASS",
+        "category": "window",
+        "name": "Live NCSM1 regional physical residency"
+      },
+      {
+        "state": "PASS",
+        "category": "window",
+        "name": "Production window lifecycle"
+      },
+      {
+        "state": "PASS",
+        "category": "window",
+        "name": "Regional diagnostic wheel isolation"
+      }
+    ]
+  },
+  "obsComparison": {
+    "override": "VK_LOADER_LAYERS_DISABLE=VK_LAYER_OBS_HOOK",
+    "scope": "test processes only; not a production setting",
+    "version": "32.2.2",
+    "hookSha256": "49c0ddeac72b130d4f8ae90510219949022c1f992adb48d81a4972f2cd6c2585",
+    "loadedModules": [
+      {
+        "ModuleName": "NovaCore.Native.dll",
+        "FileName": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\NovaCore.Native.dll"
+      },
+      {
+        "ModuleName": "amdvlk64.dll",
+        "FileName": "C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\u0203303.inf_amd64_e5876a26758f154c\\B026363\\amdvlk64.dll"
+      },
+      {
+        "ModuleName": "VkLayer_khronos_validation.dll",
+        "FileName": "C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_khronos_validation.dll"
+      },
+      {
+        "ModuleName": "graphics-hook64.dll",
+        "FileName": "C:\\ProgramData\\obs-studio-hook\\graphics-hook64.dll"
+      }
+    ]
+  },
+  "builds": {
+    "managed-debug": [
+      "",
+      "Build succeeded.",
+      "    0 Warning(s)",
+      "    0 Error(s)",
+      "",
+      "Time Elapsed 00:00:03.21"
+    ],
+    "managed-release": [
+      "",
+      "Build succeeded.",
+      "    0 Warning(s)",
+      "    0 Error(s)",
+      "",
+      "Time Elapsed 00:00:01.53"
+    ],
+    "native-debug-final": [
+      "[1/2] Building CXX object CMakeFiles\\NovaCore.Native.dir\\NovaCoreNative.cpp.obj",
+      "[2/2] Linking CXX shared library NovaCore.Native.dll"
+    ],
+    "native-release-final": [
+      "[1/2] Building CXX object CMakeFiles\\NovaCore.Native.dir\\NovaCoreNative.cpp.obj",
+      "[2/2] Linking CXX shared library NovaCore.Native.dll"
+    ]
+  },
+  "failedRegionalCoverage": [
+    {
+      "frame": 103,
+      "level": 17,
+      "pupilFrameIdentity": 1,
+      "maxOuter": 1
+    },
+    {
+      "frame": 150,
+      "level": 17,
+      "pupilFrameIdentity": 5,
+      "maxOuter": 1
+    },
+    {
+      "frame": 165,
+      "level": 17,
+      "pupilFrameIdentity": 8,
+      "maxOuter": 1
+    },
+    {
+      "frame": 175,
+      "level": 17,
+      "pupilFrameIdentity": 9,
+      "maxOuter": 1
+    },
+    {
+      "frame": 193,
+      "level": 16,
+      "pupilFrameIdentity": 11,
+      "maxOuter": 1
+    },
+    {
+      "frame": 205,
+      "level": 15,
+      "pupilFrameIdentity": 24,
+      "maxOuter": 1
+    },
+    {
+      "frame": 217,
+      "level": 14,
+      "pupilFrameIdentity": 32,
+      "maxOuter": 1
+    },
+    {
+      "frame": 228,
+      "level": 13,
+      "pupilFrameIdentity": 38,
+      "maxOuter": 1
+    },
+    {
+      "frame": 238,
+      "level": 12,
+      "pupilFrameIdentity": 41,
+      "maxOuter": 1
+    },
+    {
+      "frame": 247,
+      "level": 11,
+      "pupilFrameIdentity": 42,
+      "maxOuter": 1
+    },
+    {
+      "frame": 256,
+      "level": 10,
+      "pupilFrameIdentity": 43,
+      "maxOuter": 1
+    },
+    {
+      "frame": 264,
+      "level": 9,
+      "pupilFrameIdentity": 44,
+      "maxOuter": 1
+    },
+    {
+      "frame": 271,
+      "level": 8,
+      "pupilFrameIdentity": 45,
+      "maxOuter": 1
+    },
+    {
+      "frame": 287,
+      "level": 9,
+      "pupilFrameIdentity": 46,
+      "maxOuter": 1
+    },
+    {
+      "frame": 295,
+      "level": 10,
+      "pupilFrameIdentity": 47,
+      "maxOuter": 1
+    },
+    {
+      "frame": 300,
+      "level": 10,
+      "pupilFrameIdentity": 47,
+      "maxOuter": 1
+    },
+    {
+      "frame": 303,
+      "level": 11,
+      "pupilFrameIdentity": 48,
+      "maxOuter": 1
+    },
+    {
+      "frame": 312,
+      "level": 12,
+      "pupilFrameIdentity": 50,
+      "maxOuter": 1
+    },
+    {
+      "frame": 321,
+      "level": 13,
+      "pupilFrameIdentity": 51,
+      "maxOuter": 1
+    },
+    {
+      "frame": 332,
+      "level": 14,
+      "pupilFrameIdentity": 52,
+      "maxOuter": 1
+    },
+    {
+      "frame": 343,
+      "level": 15,
+      "pupilFrameIdentity": 53,
+      "maxOuter": 1
+    },
+    {
+      "frame": 355,
+      "level": 16,
+      "pupilFrameIdentity": 54,
+      "maxOuter": 1
+    },
+    {
+      "frame": 367,
+      "level": 17,
+      "pupilFrameIdentity": 55,
+      "maxOuter": 1
+    },
+    {
+      "frame": 406,
+      "level": 16,
+      "pupilFrameIdentity": 77,
+      "maxOuter": 1
+    },
+    {
+      "frame": 418,
+      "level": 15,
+      "pupilFrameIdentity": 87,
+      "maxOuter": 1
+    },
+    {
+      "frame": 430,
+      "level": 14,
+      "pupilFrameIdentity": 89,
+      "maxOuter": 1
+    },
+    {
+      "frame": 441,
+      "level": 15,
+      "pupilFrameIdentity": 93,
+      "maxOuter": 1
+    },
+    {
+      "frame": 461,
+      "level": 14,
+      "pupilFrameIdentity": 97,
+      "maxOuter": 1
+    },
+    {
+      "frame": 472,
+      "level": 13,
+      "pupilFrameIdentity": 102,
+      "maxOuter": 1
+    },
+    {
+      "frame": 482,
+      "level": 12,
+      "pupilFrameIdentity": 104,
+      "maxOuter": 1
+    },
+    {
+      "frame": 491,
+      "level": 11,
+      "pupilFrameIdentity": 106,
+      "maxOuter": 1
+    },
+    {
+      "frame": 660,
+      "level": 10,
+      "pupilFrameIdentity": 108,
+      "maxOuter": 1
+    },
+    {
+      "frame": 668,
+      "level": 11,
+      "pupilFrameIdentity": 110,
+      "maxOuter": 1
+    },
+    {
+      "frame": 677,
+      "level": 12,
+      "pupilFrameIdentity": 113,
+      "maxOuter": 1
+    },
+    {
+      "frame": 688,
+      "level": 11,
+      "pupilFrameIdentity": 125,
+      "maxOuter": 1
+    },
+    {
+      "frame": 697,
+      "level": 10,
+      "pupilFrameIdentity": 130,
+      "maxOuter": 1
+    },
+    {
+      "frame": 705,
+      "level": 9,
+      "pupilFrameIdentity": 131,
+      "maxOuter": 1
+    },
+    {
+      "frame": 712,
+      "level": 8,
+      "pupilFrameIdentity": 132,
+      "maxOuter": 1
+    },
+    {
+      "frame": 718,
+      "level": 7,
+      "pupilFrameIdentity": 133,
+      "maxOuter": 1
+    },
+    {
+      "frame": 724,
+      "level": 6,
+      "pupilFrameIdentity": 139,
+      "maxOuter": 1
+    },
+    {
+      "frame": 730,
+      "level": 7,
+      "pupilFrameIdentity": 144,
+      "maxOuter": 1
+    },
+    {
+      "frame": 736,
+      "level": 8,
+      "pupilFrameIdentity": 147,
+      "maxOuter": 1
+    },
+    {
+      "frame": 740,
+      "level": 8,
+      "pupilFrameIdentity": 147,
+      "maxOuter": 1
+    },
+    {
+      "frame": 743,
+      "level": 9,
+      "pupilFrameIdentity": 149,
+      "maxOuter": 1
+    },
+    {
+      "frame": 751,
+      "level": 10,
+      "pupilFrameIdentity": 150,
+      "maxOuter": 1
+    },
+    {
+      "frame": 759,
+      "level": 11,
+      "pupilFrameIdentity": 151,
+      "maxOuter": 1
+    },
+    {
+      "frame": 768,
+      "level": 12,
+      "pupilFrameIdentity": 152,
+      "maxOuter": 1
+    },
+    {
+      "frame": 779,
+      "level": 13,
+      "pupilFrameIdentity": 156,
+      "maxOuter": 1
+    },
+    {
+      "frame": 789,
+      "level": 12,
+      "pupilFrameIdentity": 165,
+      "maxOuter": 1
+    },
+    {
+      "frame": 798,
+      "level": 11,
+      "pupilFrameIdentity": 172,
+      "maxOuter": 1
+    },
+    {
+      "frame": 807,
+      "level": 10,
+      "pupilFrameIdentity": 178,
+      "maxOuter": 1
+    },
+    {
+      "frame": 815,
+      "level": 9,
+      "pupilFrameIdentity": 181,
+      "maxOuter": 1
+    },
+    {
+      "frame": 822,
+      "level": 8,
+      "pupilFrameIdentity": 183,
+      "maxOuter": 1
+    },
+    {
+      "frame": 831,
+      "level": 9,
+      "pupilFrameIdentity": 189,
+      "maxOuter": 1
+    },
+    {
+      "frame": 839,
+      "level": 10,
+      "pupilFrameIdentity": 190,
+      "maxOuter": 3.4535253047943115
+    },
+    {
+      "frame": 847,
+      "level": 11,
+      "pupilFrameIdentity": 191,
+      "maxOuter": 64
+    },
+    {
+      "frame": 856,
+      "level": 12,
+      "pupilFrameIdentity": 192,
+      "maxOuter": 64
+    },
+    {
+      "frame": 866,
+      "level": 13,
+      "pupilFrameIdentity": 193,
+      "maxOuter": 1
+    },
+    {
+      "frame": 877,
+      "level": 14,
+      "pupilFrameIdentity": 196,
+      "maxOuter": 1
+    }
+  ],
+  "missingOverlayManifests": [
+    {
+      "Path": "C:\\Program Files (x86)\\Epic Games\\Epic Online Services\\managedArtifacts\\98bc04bc842e4906993fd6d6644ffb8d\\EOSOverlayVkLayer-Win64.json",
+      "Exists": false
+    },
+    {
+      "Path": "E:\\Epic Games\\Launcher\\Portal\\Extras\\Overlay\\EOSOverlayVkLayer-Win32.json",
+      "Exists": false
+    },
+    {
+      "Path": "E:\\Epic Games\\Launcher\\Portal\\Extras\\Overlay\\EOSOverlayVkLayer-Win64.json",
+      "Exists": false
+    }
+  ],
+  "vulkanEnvironment": "ERROR: [Loader Message] Code 0 : loader_get_json: Failed to open JSON file C:\\Program Files (x86)\\Epic Games\\Epic Online Services\\managedArtifacts\\98bc04bc842e4906993fd6d6644ffb8d\\EOSOverlayVkLayer-Win64.json\nERROR: [Loader Message] Code 0 : loader_get_json: Failed to open JSON file E:\\Epic Games\\Launcher\\Portal\\Extras\\Overlay\\EOSOverlayVkLayer-Win32.json\nERROR: [Loader Message] Code 0 : loader_get_json: Failed to open JSON file E:\\Epic Games\\Launcher\\Portal\\Extras\\Overlay\\EOSOverlayVkLayer-Win64.json\nWARNING: [Loader Message] Code 0 : Layer VK_LAYER_OBS_HOOK uses API version 1.3 which is older than the application specified API version of 1.4. May cause issues.\n==========\nVULKANINFO\n==========\n\nVulkan Instance Version: 1.4.309\n\n\nInstance Extensions: count = 13\n-------------------------------\nVK_EXT_debug_report                    : extension revision 10\nVK_EXT_debug_utils                     : extension revision 2\nVK_EXT_swapchain_colorspace            : extension revision 5\nVK_KHR_device_group_creation           : extension revision 1\nVK_KHR_external_fence_capabilities     : extension revision 1\nVK_KHR_external_memory_capabilities    : extension revision 1\nVK_KHR_external_semaphore_capabilities : extension revision 1\nVK_KHR_get_physical_device_properties2 : extension revision 2\nVK_KHR_get_surface_capabilities2       : extension revision 1\nVK_KHR_portability_enumeration         : extension revision 1\nVK_KHR_surface                         : extension revision 25\nVK_KHR_win32_surface                   : extension revision 6\nVK_LUNARG_direct_driver_loading        : extension revision 1\n\nInstance Layers: count = 13\n---------------------------\nVK_LAYER_AMD_switchable_graphics  AMD switchable graphics layer                                                                                     1.4.315  version 1\nVK_LAYER_KHRONOS_profiles         Khronos Profiles layer                                                                                            1.4.357  version 1\nVK_LAYER_KHRONOS_shader_object    Khronos Shader object layer                                                                                       1.4.357  version 1\nVK_LAYER_KHRONOS_synchronization2 Khronos Synchronization2 layer                                                                                    1.4.357  version 1\nVK_LAYER_KHRONOS_validation       Khronos Validation Layer                                                                                          1.4.357  version 1\nVK_LAYER_LUNARG_api_dump          LunarG API dump layer                                                                                             1.4.357  version 2\nVK_LAYER_LUNARG_crash_diagnostic  Crash Diagnostic Layer is a crash/hang debugging tool that helps determines GPU progress in a Vulkan application. 1.4.357  version 1\nVK_LAYER_LUNARG_gfxreconstruct    GFXReconstruct Capture Layer Version 1.0.5                                                                        1.4.357  version 4194309\nVK_LAYER_LUNARG_monitor           Execution Monitoring Layer                                                                                        1.4.357  version 1\nVK_LAYER_LUNARG_screenshot        LunarG image capture layer                                                                                        1.4.357  version 1\nVK_LAYER_OBS_HOOK                 Open Broadcaster Software hook                                                                                    1.3.216  version 1\nVK_LAYER_VALVE_steam_fossilize    Steam Pipeline Caching Layer                                                                                      1.4.303  version 1\nVK_LAYER_VALVE_steam_overlay      Steam Overlay Layer                                                                                               1.3.207  version 1\n\nDevices:\n========\nGPU0:\n\tapiVersion         = 1.4.315\n\tdriverVersion      = 2.0.353\n\tvendorID           = 0x1002\n\tdeviceID           = 0x73bf\n\tdeviceType         = PHYSICAL_DEVICE_TYPE_DISCRETE_GPU\n\tdeviceName         = AMD Radeon RX 6800 XT\n\tdriverID           = DRIVER_ID_AMD_PROPRIETARY\n\tdriverName         = AMD proprietary driver\n\tdriverInfo         = 26.8.1 (AMD proprietary shader compiler)\n\tconformanceVersion = 1.4.0.0\n\tdeviceUUID         = 00000000-0300-0000-0000-000000000000\n\tdriverUUID         = 414d442d-5749-4e2d-4452-560000000000\nGPU1:\n\tapiVersion         = 1.4.315\n\tdriverVersion      = 2.0.353\n\tvendorID           = 0x1002\n\tdeviceID           = 0x13c0\n\tdeviceType         = PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU\n\tdeviceName         = AMD Radeon(TM) Graphics\n\tdriverID           = DRIVER_ID_AMD_PROPRIETARY\n\tdriverName         = AMD proprietary driver\n\tdriverInfo         = 26.8.1 (AMD proprietary shader compiler)\n\tconformanceVersion = 1.4.0.0\n\tdeviceUUID         = 00000000-7b00-0000-0000-000000000000\n\tdriverUUID         = 414d442d-5749-4e2d-4452-560000000000\n",
+  "windowModules": [],
+  "ksa": {
+    "version": "2026.9.7.5402",
+    "revision": "487c3f340de24c6a81037120b6d1129c045c5400",
+    "dllSha256": "a8a5164204eed962df9d9025e99f523d9a23ee2ce6e802b18216a9da35506d2f"
+  },
+  "permanentEvidenceBudgetBytes": 262144,
+  "storage": {
+    "removedGroups": [
+      {
+        "group": "resolved terrain readbacks from original and failed runs",
+        "files": 152,
+        "logicalBytes": 3692248
+      },
+      {
+        "group": "temporary alternate test deployment",
+        "files": 21,
+        "logicalBytes": 8194635
+      },
+      {
+        "group": "temporary logs and review scripts",
+        "files": 132,
+        "logicalBytes": 823275
+      }
+    ],
+    "removedLogicalBytes": 12710158,
+    "unresolvedInteropEvidence": "exact errors, profiles, hashes and reproduction retained in this compact file; terrain readbacks do not identify external-memory callers",
+    "generatedSourceOrAssetRemoved": false
+  },
+  "postCleanupSmoke": {
+    "exit": 0,
+    "arguments": "--scene=sol --focus=earth --surface-site=florida-launch --physical-surface=m12d-natural-candidate --solar-epoch=j2000 --benchmark-frames=120 --log=startup,vulkan,validation",
+    "sample": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Triangle.exe",
+    "shaderHashesVerified": 49,
+    "launcherExists": true,
+    "summary": [
+      "Earth route policy: scene=sol; owner=NCSM1; physicalGeneration=4; focus=Earth; altitude=; site=florida-launch; anchoredInstantiated=false; manualAcceptance=passed.\r",
+      "Runtime native-resolved: path=E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Native.dll; bytes=346112; sha256=120b4a2c27a9193c9acd9e7b70a2a07e52bc0f70ec8514a086c2a42bfa7ee5de\r",
+      "[native] GPU: AMD Radeon RX 6800 XT | Vulkan 1.4\r",
+      "[native] NCSM1 regional ready: incoming=1; pupil=1; dependencyDelayMs=603.894; requests=670; resident=670; uploadedBytes=93392640; complete=true; gpuVisibility=hostBarrierBeforePrepare\r",
+      "[native] Average frame time: 8.602 ms (120 frames)\r",
+      "[native] Earth Vulkan submission: terrainFrame=1; swapchainImage=0; recordSerial=1; submitSerial=1; presentSerial=1; serializedFence=true; globalDraw=1; dynamicHierarchyDraw=0; candidateIndirectDraw=0; visibleEarthOwners=1\r",
+      "[native] Earth Vulkan submission: terrainFrame=103; swapchainImage=2; recordSerial=103; submitSerial=103; presentSerial=103; serializedFence=true; globalDraw=0; dynamicHierarchyDraw=0; candidateIndirectDraw=1; visibleEarthOwners=1\r",
+      "[native] Earth Vulkan submission: terrainFrame=120; swapchainImage=1; recordSerial=120; submitSerial=120; presentSerial=120; serializedFence=true; globalDraw=0; dynamicHierarchyDraw=0; candidateIndirectDraw=1; visibleEarthOwners=1\r"
+    ],
+    "submittedFramesObserved": 120,
+    "soleOwnerEveryObservedFrame": true
+  }
+}

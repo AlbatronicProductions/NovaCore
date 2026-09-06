@@ -46,6 +46,9 @@ var tests = new (string, Action)[]
     ("Anchored Florida launch site", AnchoredFloridaLaunchSiteTest),
     ("Earth route convergence", EarthRouteConvergenceTests.Run),
     ("Live NCSM1 regional physical residency", RegionalPhysicalResidencyTests.Run),
+    ("Production window lifecycle", WindowLifecycleTests.Run),
+    ("Window validation message policy", WindowLifecycleTests.ValidationPolicyTest),
+    ("Regional diagnostic wheel isolation", WindowLifecycleTests.RunInputBoundary),
     ("Florida facility support", FacilitySupportTests.Run),
     ("Surface-relative camera authority", SurfaceRelativeCameraAuthorityTest),
     ("Near-surface inertial free-look", NearSurfaceInertialFreeLookRegressionTest),
@@ -103,8 +106,7 @@ var tests = new (string, Action)[]
     ("SolAnalytical Earth planetary scene", EarthPlanetarySceneTest),
     ("Florida foundation seating", FloridaFoundationSeatingTests.Run),
 };
-var testFilter=args.FirstOrDefault(argument=>argument.StartsWith("--test=",StringComparison.OrdinalIgnoreCase))?[7..];
-foreach (var (name, test) in tests) if(testFilter is null||name.Contains(testFilter,StringComparison.OrdinalIgnoreCase)){test();Console.WriteLine($"PASS {name}");}
+return GraphicsTestHarness.Run(args, tests);
 
 static void AnchoredSphericalMeshTierContractTest()
 {
@@ -241,7 +243,7 @@ static void AnchoredSphericalMeshTierContractTest()
 
 static void TerrainAssetDistributionBoundaryTest()
 {
-    var repositoryRoot=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..",".."));
+    var repositoryRoot=GraphicsTestHarness.RepositoryPath();
     var productionManifestPath=TerrainAssetRepository.ManifestPath(repositoryRoot,TerrainAssetCache.ProductionEarthAssetId);
     Check(TerrainAssetManifestFile.TryLoad(productionManifestPath,out var production,out var productionError),$"production terrain manifest: {productionError}");
     Check(production.AssetId=="earth-surface-v5"&&production.BodyId==6&&production.TerrainVersion==5&&production.ByteSize==61_484_224&&production.Sha256=="38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae"&&production.Hierarchy.MinimumPayloadLevel==0&&production.Hierarchy.MaximumPayloadLevel==2,"production distribution manifest preserves canonical terrain-v5 identity and global coverage");
@@ -295,7 +297,7 @@ static void TerrainAssetDistributionBoundaryTest()
 
 static void LocalTerrainStreamingAndGpuCompressionTest()
 {
-    var repositoryRoot=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..",".."));
+    var repositoryRoot=GraphicsTestHarness.RepositoryPath();
     var fixtureRoot=Path.Combine(repositoryRoot,"tests","fixtures","terrain");
     var fixturePath=Path.Combine(fixtureRoot,"tiny-local.nccube");
     Check(TerrainAssetManifestFile.TryLoad(Path.Combine(fixtureRoot,"tiny-local.json"),out var manifest,out var manifestError),$"local fixture manifest: {manifestError}");
@@ -405,7 +407,7 @@ static void LocalTerrainStreamingAndGpuCompressionTest()
 
 static void M12FloridaRegionalPhysicalSurfaceTest()
 {
-    var repositoryRoot=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..",".."));
+    var repositoryRoot=GraphicsTestHarness.RepositoryPath();
     Check(TerrainAssetCache.TryResolveRequired(repositoryRoot,TerrainAssetCache.ProductionEarthLocalAssetId,null,
         out var manifest,out var path,out var error),$"M12 regional asset: {error}");
     Check(manifest.AssetId=="earth-florida-m12"&&manifest.FormatVersion==3&&manifest.Hierarchy.MinimumPayloadLevel==8&&
@@ -493,7 +495,7 @@ static void ProductionEarthMaterialStateContinuityTest()
     camera.Position=camera.Position with{Value=fixedCameraRoot};camera.Orientation=fixedOrientation;scene.Update(camera);
     Check(Fingerprint(scene,camera)==expected,"Earth material/lighting transport is bit-identical after Solar overview");
 
-    var repositoryRoot=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..",".."));
+    var repositoryRoot=GraphicsTestHarness.RepositoryPath();
     var shaderRoot=Path.Combine(repositoryRoot,"native","NovaCore.Native","shaders");
     var shared=File.ReadAllText(Path.Combine(shaderRoot,"production_earth_material.glsl"));
     var global=File.ReadAllText(Path.Combine(shaderRoot,"planetary_production.frag"));
@@ -540,7 +542,7 @@ static void ProductionEarthMaterialStateContinuityTest()
 
 static void PlanetaryCameraTerrainExclusionTest()
 {
-    var repositoryRoot=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..",".."));
+    var repositoryRoot=GraphicsTestHarness.RepositoryPath();
     Check(TerrainAssetCache.TryResolveRequired(repositoryRoot,TerrainAssetCache.ProductionEarthLocalAssetId,null,out _,out var localTerrainPath,out var localTerrainError),$"production local terrain clearance asset: {localTerrainError}");
     Check(EarthLocalTerrainElevationDataset.TryLoad(localTerrainPath,out var localElevationError),$"production local terrain clearance oracle: {localElevationError}");
     var root=new ReferenceFrameId(993);
@@ -880,7 +882,7 @@ static void ProductionTerrainMaterialSynthesisTest()
         altitudeNormalStatistics.Add((altitude,maximum,p95));
     }
 
-    var repositoryRoot=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..",".."));
+    var repositoryRoot=GraphicsTestHarness.RepositoryPath();
     var shaderRoot=Path.Combine(repositoryRoot,"native","NovaCore.Native","shaders");
     var synthesis=File.ReadAllText(Path.Combine(shaderRoot,"production_terrain_material.glsl"));
     var fragment=File.ReadAllText(Path.Combine(shaderRoot,"planetary_production.frag"));
@@ -970,7 +972,7 @@ static void OpaqueDistantDetailedHandoffTest()
     var oldMidpointBackground=(1f-.5f)*(1f-.5f);
     Check(oldMidpointBackground==.25f,"regression exercises the former midpoint destination leak");
 
-    var shaderDirectory=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..","..","native","NovaCore.Native","shaders"));
+    var shaderDirectory=GraphicsTestHarness.RepositoryPath("native","NovaCore.Native","shaders");
     var distantVertex=File.ReadAllText(Path.Combine(shaderDirectory,"distant_planet.vert"));
     var distantFragment=File.ReadAllText(Path.Combine(shaderDirectory,"distant_planet.frag"));
     var selectionCompute=File.ReadAllText(Path.Combine(shaderDirectory,"planetary_select.comp"));
@@ -985,7 +987,7 @@ static void OpaqueDistantDetailedHandoffTest()
     Check(nativeSource.Contains("handoffDepth.depthWriteEnable=VK_FALSE",StringComparison.Ordinal)&&nativeSource.Contains("depth.depthWriteEnable=VK_TRUE",StringComparison.Ordinal)&&nativeSource.Contains("depth.depthCompareOp=VK_COMPARE_OP_GREATER",StringComparison.Ordinal),"Distant handoff and Detailed reversed-Z depth ownership remain unchanged");
     var orbitDraw=nativeSource.IndexOf("if(solarOverlay&&a.submission->orbitVertexCount>=2",StringComparison.Ordinal);
     var distantDrawIndex=nativeSource.IndexOf("if(distantCount){VkDeviceSize",StringComparison.Ordinal);
-    var candidateOrAnchoredDrawIndex=nativeSource.IndexOf("if(a.anchoredPipelineStatisticsFrameSubmitted){vkCmdBeginQuery",StringComparison.Ordinal);
+    var candidateOrAnchoredDrawIndex=nativeSource.IndexOf("vkCmdDrawIndexedIndirect(c,a.productionBillboardIndirectBuffer",StringComparison.Ordinal);
     var detailedDrawIndex=nativeSource.IndexOf("if(!candidate&&diagnosticGlobal&&regional&&(a.submission->planetaryPatchCount||gpuPlanetary)",StringComparison.Ordinal);
     var focusedOrbitDraw=nativeSource.IndexOf("if (!solarOverlay && a.submission->orbitVertexCount",StringComparison.Ordinal);
     Check(nativeSource.Contains("solarOrbitCreate=orbitPipeline",StringComparison.Ordinal)&&nativeSource.Contains("orbitDepth.depthWriteEnable=VK_FALSE",StringComparison.Ordinal)&&nativeSource.Contains("orbitDepth.depthCompareOp=VK_COMPARE_OP_GREATER_OR_EQUAL",StringComparison.Ordinal)&&nativeSource.Contains("orbitPipeline.pDepthStencilState=&orbitDepth",StringComparison.Ordinal)&&orbitDraw>=0&&distantDrawIndex>orbitDraw&&candidateOrAnchoredDrawIndex>distantDrawIndex&&detailedDrawIndex>candidateOrAnchoredDrawIndex&&focusedOrbitDraw>detailedDrawIndex,"scene-space orbit lines use read-only reversed-Z occlusion: Solar overview remains pre-surface while focused far-side segments cannot draw through terrain");
@@ -2130,8 +2132,8 @@ static void PlanetMaterialPresentationTest()
 
 static void PlanetaryPresentationSpirvStrideTest()
 {
-    var shaderSourceDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..", "native", "NovaCore.Native", "shaders"));
-    var shaderBinaryDirectory = Path.GetFullPath(Path.Combine(shaderSourceDirectory, "..", "..", "..", "build", "native-ninja", "shaders"));
+    var shaderSourceDirectory = GraphicsTestHarness.RepositoryPath("native", "NovaCore.Native", "shaders");
+    var shaderBinaryDirectory = Path.GetFullPath(Path.Combine(shaderSourceDirectory, "..", "..", "..", "build", GraphicsTestHarness.NativeDirectory, "shaders"));
     string[] expectedConsumers =
     [
         "distant_planet.vert",
@@ -2444,7 +2446,7 @@ static unsafe void PlanetaryPatchTopologyAndAbiTest()
 
 static void TerrainV5PayloadSeamAndFloridaClassificationTest()
 {
-    var repositoryRoot=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..",".."));
+    var repositoryRoot=GraphicsTestHarness.RepositoryPath();
     Check(TerrainAssetCache.TryResolveRequired(repositoryRoot,TerrainAssetCache.ProductionEarthAssetId,null,out var manifest,out var packPath,out var resolveError),$"terrain-v5 continuity asset: {resolveError}");
     Check(manifest.Sha256=="38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae","terrain-v5 canonical-gutter content identity");
     var payloads=new Dictionary<PlanetarySurfacePatchId,(byte[] Albedo,ushort[] Elevation,byte[] Land)>();
@@ -2796,8 +2798,8 @@ static void ProductionRelaxedCubeSpherePatchHierarchyTest()
     Check(visible.All(id=>demandArray.Any(demand=>demand.Patch==id&&demand.Priority==0&&demand.Payload==PlanetarySurfacePatchPayload.ProductionRequired)),"every actually visible patch has highest coherent payload priority");
     Check(demandArray.Any(demand=>demand.Patch.Face!=visible[0].Face),"residency demand crosses canonical cube-face edges rather than using an anchor-centered UV rectangle");
 
-    var productionSource=File.ReadAllText(Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..","..","src","NovaCore.Graphics","PlanetaryProductionSurface.cs")));
-    var repositoryRoot=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..",".."));
+    var productionSource=File.ReadAllText(GraphicsTestHarness.RepositoryPath("src","NovaCore.Graphics","PlanetaryProductionSurface.cs"));
+    var repositoryRoot=GraphicsTestHarness.RepositoryPath();
     if(TerrainAssetCache.TryResolveRequired(repositoryRoot,TerrainAssetCache.ProductionEarthAssetId,null,out var productionManifest,out var packPath,out _))
     {
         var verification=TerrainAssetCache.Verify(productionManifest,packPath);
@@ -2973,6 +2975,9 @@ static void CanonicalSurfaceAnchorPhysicalTerrainAuthorityTest()
 
 static void AnchoredFloridaLaunchSiteTest()
 {
+    // This transport fixture intentionally uses the deterministic unloaded oracle.
+    // FacilitySupportTests and the live regional test own production-data contact.
+    Check(!EarthElevationDataset.IsLoaded, "transport fixture requires its own process before any oracle load");
     var root=new ReferenceFrameId(1);
     Check(SolarSystemScene.TryCreateAt(root,SimulationInstant.Zero,out var scene,out var error)&&scene is not null,$"Florida site scene: {error}");
     var site=scene!.FloridaLaunchSite;
@@ -3451,7 +3456,7 @@ static void NearSurfaceInertialFreeLookRegressionTest()
 
 static void ProductionCubeSphereGpuResidencyIntegrationTest()
 {
-    var root=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..",".."));
+    var root=GraphicsTestHarness.RepositoryPath();
     var shaderRoot=Path.Combine(root,"native","NovaCore.Native","shaders");
     var selector=File.ReadAllText(Path.Combine(shaderRoot,"planetary_select.comp"));
     var terrain=File.ReadAllText(Path.Combine(shaderRoot,"planetary_production_terrain.comp"));
@@ -3493,7 +3498,7 @@ static void ProductionCubeSphereGpuResidencyIntegrationTest()
           !native.Contains("productionPlanetaryFillPipeline",StringComparison.Ordinal),
           "physical NCSM1 shading has no alternate anchored draw or stencil-fill owner");
 
-    var binaryRoot=Path.Combine(root,"build","native-ninja","shaders");
+    var binaryRoot=Path.Combine(root,"build",GraphicsTestHarness.NativeDirectory,"shaders");
     foreach(var shader in new[]{"planetary_production_terrain.comp.spv","production_spherical_billboard.vert.spv","planetary_production.frag.spv"})
     {
         var path=Path.Combine(binaryRoot,shader);Check(File.Exists(path),$"compiled production SPIR-V exists: {shader}");
@@ -3561,7 +3566,7 @@ static void ProductionPhysicalNormalTangentContinuityTest()
     Check(wrapMaximum<1e-7d,"canonical tangent frame is continuous across longitude plus/minus pi");
     Check(polarMaximum<2e-6d&&minimumHandedness>1d-1e-12d&&poleEast.IsFinite&&poleNorth.IsFinite,"South-pole neighborhood stays finite, right-handed, and continuous until the mathematical coordinate singularity");
 
-    var repositoryRoot=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..",".."));
+    var repositoryRoot=GraphicsTestHarness.RepositoryPath();
     var shaderRoot=Path.Combine(repositoryRoot,"native","NovaCore.Native","shaders");
     var physicalShader=File.ReadAllText(Path.Combine(shaderRoot,"physical_surface.glsl"));
     var authorityShader=File.ReadAllText(Path.Combine(shaderRoot,"planetary_physical_authority.glsl"));
@@ -3614,7 +3619,7 @@ static void ProductionSurfaceBodyEligibilityAndTransitionOwnershipTest()
         Check(scene.DistantBodies[0].DistantAlpha==0f,"Earth never publishes a generic root-bootstrap sphere after synchronous terrain-v5 startup");
     }
 
-    var repositoryRoot=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..",".."));
+    var repositoryRoot=GraphicsTestHarness.RepositoryPath();
     var native=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","NovaCoreNative.cpp"));
     var selector=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","shaders","planetary_select.comp"));
     Check(native.Contains("surfaceTransitionEpoch",StringComparison.Ordinal)&&native.Contains("surfaceContextBodyId!=contextBody",StringComparison.Ordinal)&&native.Contains("owner=%s",StringComparison.Ordinal),"body/mode/dataset transitions invalidate stale selection and identify the current production owner");
@@ -3670,7 +3675,7 @@ static void ParentChildLodGeographicCorrespondenceTest()
         for(var step=0;step<=grid;step++){var source=EdgeCoordinate(patch,edge,step);var targetStep=transition.Reversed?grid-step:step;var target=EdgeCoordinate(neighbor,transition.NeighborEdge,targetStep);var a=CubeSphereProjection.Project(face,source.U,source.V,radius);var b=CubeSphereProjection.Project(neighbor.Face,target.U,target.V,radius);maximumEdgeError=Math.Max(maximumEdgeError,Math.Sqrt((a-b).LengthSquared));}
     }
     for(var cycle=0;cycle<64;cycle++)foreach(var parent in representatives){var merged=Enumerable.Range(0,4).Select(parent.Child).Select(child=>child.Parent!.Value).Distinct().Single();Check(merged==parent,"repeated deterministic split/merge restores the exact parent identity");}
-    var shaderDirectory=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..","..","native","NovaCore.Native","shaders"));var productionProjection=File.ReadAllText(Path.Combine(shaderDirectory,"production_cube_surface.glsl"));var vertex=File.ReadAllText(Path.Combine(shaderDirectory,"planetary.vert"));var productionUpload=File.ReadAllText(Path.Combine(shaderDirectory,"planetary_production_terrain.comp"));
+    var shaderDirectory=GraphicsTestHarness.RepositoryPath("native","NovaCore.Native","shaders");var productionProjection=File.ReadAllText(Path.Combine(shaderDirectory,"production_cube_surface.glsl"));var vertex=File.ReadAllText(Path.Combine(shaderDirectory,"planetary.vert"));var productionUpload=File.ReadAllText(Path.Combine(shaderDirectory,"planetary_production_terrain.comp"));
     Check(productionProjection.Contains("ProductionProjectGridD",StringComparison.Ordinal)&&vertex.Contains("ProductionProjectGridD(address,grid)",StringComparison.Ordinal),"production GPU geometry derives shared vertices from one exact patch-aligned relaxed-cube lattice");
     Check(vertex.Contains("productionLayer=patchTerrain.values[gl_InstanceIndex].y",StringComparison.Ordinal)&&!productionUpload.Contains("textureDemand",StringComparison.Ordinal),"production elevation authority follows the resident spherical patch transaction rather than an independent texture-demand hierarchy");
     Check(maximumDrift==0d&&maximumElevationMismatch==0d&&maximumEdgeError<1e-8d&&maximumRoundTrip==0d&&topologyHash==PlanetaryPatchTopology.Shared.DeterministicHash,"parent/child refinement adds samples without moving the represented geographic surface");
@@ -3811,7 +3816,7 @@ static void DistantVisibleHemisphereWindingTest()
             }
     }
 
-    var nativePath=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..","..","native","NovaCore.Native","NovaCoreNative.cpp"));
+    var nativePath=GraphicsTestHarness.RepositoryPath("native","NovaCore.Native","NovaCoreNative.cpp");
     var nativeSource=File.ReadAllText(nativePath);
     var productionCounterClockwise=nativeSource.Contains("planetaryRaster.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE",StringComparison.Ordinal);
     var nativeOutwardGrid=nativeSource.Contains("pi[index++]=q;pi[index++]=q+1;pi[index++]=q+side;pi[index++]=q+1;pi[index++]=q+side+1;pi[index++]=q+side;",StringComparison.Ordinal);
@@ -3864,7 +3869,7 @@ static void ContinuousEarthDistanceVisibilityTest()
     const int steps=512;const double farAltitude=100_000_000d,nearAltitude=10d;
     for(var step=0;step<=steps;step++)Sample(Math.Exp(Math.Log(farAltitude)+(Math.Log(nearAltitude)-Math.Log(farAltitude))*step/steps));
     for(var step=1;step<=steps;step++)Sample(Math.Exp(Math.Log(nearAltitude)+(Math.Log(farAltitude)-Math.Log(nearAltitude))*step/steps));
-    var nativePath=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..","..","native","NovaCore.Native","NovaCoreNative.cpp"));
+    var nativePath=GraphicsTestHarness.RepositoryPath("native","NovaCore.Native","NovaCoreNative.cpp");
     var nativeSource=File.ReadAllText(nativePath);
     Check(nativeSource.Contains("planetaryRaster.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE",StringComparison.Ordinal)&&
           !nativeSource.Contains("planetaryRaster.frontFace=VK_FRONT_FACE_CLOCKWISE",StringComparison.Ordinal),
@@ -3985,7 +3990,7 @@ static void SolarSystemSceneTest()
     static Double3 DistantCameraRelativePoint(in PlanetRenderProxy body,in Double3 cameraRoot,in Double3 bodyDirection)=>body.Position.Value-cameraRoot+body.BodyFixedToRoot.Rotate(bodyDirection*body.RadiusMetres);
     static Double3 DetailedCameraRelativePoint(in PlanetRenderProxy body,in Double3 cameraRoot,in Double3 bodyDirection)=>body.BodyFixedToRoot.Rotate(bodyDirection*body.RadiusMetres-body.BodyFixedToRoot.Conjugate().Normalized().Rotate(cameraRoot-body.Position.Value));
     static (long X,long Y,long Z) RootPointBits(in Double3 point)=>(BitConverter.DoubleToInt64Bits(point.X),BitConverter.DoubleToInt64Bits(point.Y),BitConverter.DoubleToInt64Bits(point.Z));
-    var planetaryVertexPath=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..","..","native","NovaCore.Native","shaders","planetary.vert"));var planetaryVertexSource=File.ReadAllText(planetaryVertexPath);var distantVertexSource=File.ReadAllText(Path.Combine(Path.GetDirectoryName(planetaryVertexPath)!,"distant_planet.vert"));var nativeRendererSource=File.ReadAllText(Path.Combine(Path.GetDirectoryName(planetaryVertexPath)!,"..","NovaCoreNative.cpp"));Check(planetaryVertexSource.Contains("lighting.sourceCenterExposure.xyz-presentation.centerRadius.xyz",StringComparison.Ordinal)&&!planetaryVertexSource.Contains("lighting.sourceCenterExposure.xyz-p.centerRadius.xyz",StringComparison.Ordinal),"detailed shader derives body-local Sun direction from root-camera-relative presentation center only");Check(planetaryVertexSource.Contains("RotateQuaternion(localPosition,presentation.bodyOrientation)",StringComparison.Ordinal)&&distantVertexSource.Contains("vec3 local=RotateQuaternion(bodyLocalPosition,presentation.bodyOrientation)",StringComparison.Ordinal)&&distantVertexSource.Contains("presentation.centerLow.xyz+local",StringComparison.Ordinal),"detailed and distant vertices apply only the immutable body quaternion before compensated shared view/projection");Check(!planetaryVertexSource.Contains("rootOrbit",StringComparison.OrdinalIgnoreCase)&&!distantVertexSource.Contains("rootOrbit",StringComparison.OrdinalIgnoreCase)&&!planetaryVertexSource.Contains("cameraOrientation",StringComparison.OrdinalIgnoreCase)&&!distantVertexSource.Contains("cameraOrientation",StringComparison.OrdinalIgnoreCase),"planet model shaders do not consume camera-orbit orientation state");Check(nativeRendererSource.Contains("handoffDepth.depthWriteEnable=VK_FALSE",StringComparison.Ordinal)&&nativeRendererSource.Contains("const uint32_t firstUnfocused=handoff?1u:0u",StringComparison.Ordinal),"focused handoff sphere cannot invisibly write depth or fight detailed geometry");
+    var planetaryVertexPath=GraphicsTestHarness.RepositoryPath("native","NovaCore.Native","shaders","planetary.vert");var planetaryVertexSource=File.ReadAllText(planetaryVertexPath);var distantVertexSource=File.ReadAllText(Path.Combine(Path.GetDirectoryName(planetaryVertexPath)!,"distant_planet.vert"));var nativeRendererSource=File.ReadAllText(Path.Combine(Path.GetDirectoryName(planetaryVertexPath)!,"..","NovaCoreNative.cpp"));Check(planetaryVertexSource.Contains("lighting.sourceCenterExposure.xyz-presentation.centerRadius.xyz",StringComparison.Ordinal)&&!planetaryVertexSource.Contains("lighting.sourceCenterExposure.xyz-p.centerRadius.xyz",StringComparison.Ordinal),"detailed shader derives body-local Sun direction from root-camera-relative presentation center only");Check(planetaryVertexSource.Contains("RotateQuaternion(localPosition,presentation.bodyOrientation)",StringComparison.Ordinal)&&distantVertexSource.Contains("vec3 local=RotateQuaternion(bodyLocalPosition,presentation.bodyOrientation)",StringComparison.Ordinal)&&distantVertexSource.Contains("presentation.centerLow.xyz+local",StringComparison.Ordinal),"detailed and distant vertices apply only the immutable body quaternion before compensated shared view/projection");Check(!planetaryVertexSource.Contains("rootOrbit",StringComparison.OrdinalIgnoreCase)&&!distantVertexSource.Contains("rootOrbit",StringComparison.OrdinalIgnoreCase)&&!planetaryVertexSource.Contains("cameraOrientation",StringComparison.OrdinalIgnoreCase)&&!distantVertexSource.Contains("cameraOrientation",StringComparison.OrdinalIgnoreCase),"planet model shaders do not consume camera-orbit orientation state");Check(nativeRendererSource.Contains("handoffDepth.depthWriteEnable=VK_FALSE",StringComparison.Ordinal)&&nativeRendererSource.Contains("const uint32_t firstUnfocused=handoff?1u:0u",StringComparison.Ordinal),"focused handoff sphere cannot invisibly write depth or fight detailed geometry");
     var labelVertexSource=File.ReadAllText(Path.Combine(Path.GetDirectoryName(planetaryVertexPath)!,"solar_label.vert"));var labelFragmentSource=File.ReadAllText(Path.Combine(Path.GetDirectoryName(planetaryVertexPath)!,"solar_label.frag"));var hudFragmentSource=File.ReadAllText(Path.Combine(Path.GetDirectoryName(planetaryVertexPath)!,"solar_speed_hud.frag"));var sharedSansSource=File.ReadAllText(Path.Combine(Path.GetDirectoryName(planetaryVertexPath)!,"solar_sans_sdf.glsl"));Check(labelVertexSource.Contains("gl_VertexIndex/6",StringComparison.Ordinal)&&!labelVertexSource.Contains("glyphMask",StringComparison.Ordinal)&&nativeRendererSource.Contains("vkCmdDraw(c,42,10",StringComparison.Ordinal),"professional labels draw one analytic SDF quad per character instead of pixel-art cell quads");Check(labelFragmentSource.Contains("solar_sans_sdf.glsl",StringComparison.Ordinal)&&hudFragmentSource.Contains("solar_sans_sdf.glsl",StringComparison.Ordinal),"celestial labels and simulation-speed HUD share the same renderer-owned sans-serif visual language");Check(sharedSansSource.Contains("vec2(glyphUv.x,1.0-glyphUv.y)",StringComparison.Ordinal),"shared sans renderer accounts for the positive Vulkan viewport and keeps labels/HUD upright");
     var warpFocuses=new[]{NativePresentationFocus.Earth,NativePresentationFocus.Mars,NativePresentationFocus.Jupiter,NativePresentationFocus.Saturn,NativePresentationFocus.Moon};var warpRates=new[]{new SimulationRate(1,1),new SimulationRate(30,1),new SimulationRate(120,1),new SimulationRate(600,1),new SimulationRate(14_400,1),new SimulationRate(7_776_000,1)};
     foreach(var warpFocus in warpFocuses)

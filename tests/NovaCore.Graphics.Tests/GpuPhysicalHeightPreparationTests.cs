@@ -13,7 +13,7 @@ internal static unsafe class GpuPhysicalHeightPreparationTests
     public static void Run()
     {
         VerifyAbi();
-        var root = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", ".."));
+        var root = GraphicsTestHarness.RepositoryPath();
         Require(TerrainAssetCache.TryResolveRequired(root, TerrainAssetCache.ProductionEarthAssetId, null,
             out _, out var terrainPath, out var terrainError), $"terrain-v5 asset: {terrainError}");
         Require(TerrainAssetCache.TryResolveRequired(root, TerrainAssetCache.ProductionEarthLocalAssetId, null,
@@ -30,7 +30,7 @@ internal static unsafe class GpuPhysicalHeightPreparationTests
                 samples[index].Anchor, samples[index].Delta, out queries[index], out reconstructed[index]),
                 $"query creation {samples[index].Name}");
 
-        var shaderPath = Path.Combine(root, "build", "native-ninja", "shaders", "planetary_height_query.comp.spv");
+        var shaderPath = Path.Combine(root, "build", GraphicsTestHarness.NativeDirectory, "shaders", "planetary_height_query.comp.spv");
         var oraclePath = Path.Combine(oracleDirectory, "earth_elevation_8192x4096.r16");
         Require(File.Exists(shaderPath) && File.Exists(oraclePath), "height-query shader and CPU oracle are available");
         var first = Invoke(queries, oraclePath, terrainPath, localPath, shaderPath, out var firstMetrics);

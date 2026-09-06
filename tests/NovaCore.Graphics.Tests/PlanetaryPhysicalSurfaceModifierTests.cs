@@ -172,7 +172,7 @@ internal static class PlanetaryPhysicalSurfaceModifierTests
                 "shared physical normal is finite and unit length");
         }
 
-        var root = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..",".."));
+        var root = GraphicsTestHarness.RepositoryPath();
         var globalShader = File.ReadAllText(Path.Combine(root,"native","NovaCore.Native","shaders","planetary.vert"));
         var anchoredShader = File.ReadAllText(Path.Combine(root,"native","NovaCore.Native","shaders","production_spherical_billboard_prepare.comp"));
         var canonicalShader = File.ReadAllText(Path.Combine(root,"native","NovaCore.Native","shaders","planetary_physical_authority.glsl"));
@@ -248,7 +248,7 @@ internal static class PlanetaryPhysicalSurfaceModifierTests
         Require(PlanetaryPhysicalSurface.EarthGeneration.DeterministicHash==0xC6CDFF4A0E5468E2ul,
             "Candidate D preserves the frozen M12C physical generation hash");
 
-        var root = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..",".."));
+        var root = GraphicsTestHarness.RepositoryPath();
         var physical = File.ReadAllText(Path.Combine(root,"native","NovaCore.Native","shaders","physical_surface.glsl"));
         var fragment = File.ReadAllText(Path.Combine(root,"native","NovaCore.Native","shaders","planetary_production.frag"));
         var material = File.ReadAllText(Path.Combine(root,"native","NovaCore.Native","shaders","production_terrain_material.glsl"));

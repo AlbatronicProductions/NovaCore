@@ -601,9 +601,12 @@ LRESULT CALLBACK Proc(HWND h, UINT m, WPARAM w, LPARAM l) {
   return DefWindowProc(h, m, w, l);
 }
 VKAPI_ATTR VkBool32 VKAPI_CALL
-Debug(VkDebugUtilsMessageSeverityFlagBitsEXT, VkDebugUtilsMessageTypeFlagsEXT,
+Debug(VkDebugUtilsMessageSeverityFlagBitsEXT severity, VkDebugUtilsMessageTypeFlagsEXT,
       const VkDebugUtilsMessengerCallbackDataEXT *d, void *u) {
-  static_cast<App *>(u)->Log(NC_LOG_VALIDATION, d->pMessage);
+  const std::string message = std::string("Vulkan validation [") +
+      ((severity & VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT) ? "error" : "warning") +
+      "][" + (d->pMessageIdName ? d->pMessageIdName : "unnamed") + "]: " + d->pMessage;
+  static_cast<App *>(u)->Log(NC_LOG_VALIDATION, message.c_str());
   return VK_FALSE;
 }
 Queues FindQueues(VkPhysicalDevice d, VkSurfaceKHR s) {
@@ -2302,6 +2305,9 @@ void Update(App &a, float dt) {
   // Preserve high-resolution-wheel remainder until it forms a whole Win32 detent.
   auto wheel = static_cast<int32_t>(a.wheelDeltaRaw / WHEEL_DELTA);
   a.wheelDeltaRaw %= WHEEL_DELTA;
+  // The regional acceptance driver already isolates keys/look; wheel messages
+  // must not move its scripted camera when the desktop user scrolls elsewhere.
+  if (std::getenv("NOVACORE_REGIONAL_PHYSICAL_PROBE")) wheel = 0;
   a.rawMouseX = 0;
   a.rawMouseY = 0;
   auto rising = [](int key, bool &wasDown) {

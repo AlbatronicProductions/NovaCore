@@ -5,7 +5,8 @@ internal static class PlanetarySphericalBillboardNaturalTerrainTests
     public static void Run()
     {
         var root = PlanetarySphericalBillboardGpuProof.FindRepositoryRoot(AppContext.BaseDirectory);
-        var report = PlanetarySphericalBillboardNaturalTerrainProof.Run(root);
+        var report = PlanetarySphericalBillboardNaturalTerrainProof.Run(root,
+            Path.Combine(root, "build", GraphicsTestHarness.NativeDirectory, "shaders"));
         Require(report.Levels.Count == 3, "all three banked P2S2 levels consume canonical terrain");
         Require(report.ReusedCanonicalSamples > 0 && report.UniqueCanonicalSamples > 0,
             "shared level directions reuse topology-independent canonical sample identity");

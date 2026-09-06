@@ -13,7 +13,7 @@ internal static unsafe class GpuDisplacedMeshPreparationTests
 
     public static void Run()
     {
-        VerifyAbi(); var root = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", ".."));
+        VerifyAbi(); var root = GraphicsTestHarness.RepositoryPath();
         Require(TerrainAssetCache.TryResolveRequired(root, TerrainAssetCache.ProductionEarthAssetId, null,
             out _, out var terrainPath, out var terrainError), $"terrain-v5 asset: {terrainError}");
         Require(TerrainAssetCache.TryResolveRequired(root, TerrainAssetCache.ProductionEarthLocalAssetId, null,
@@ -62,8 +62,8 @@ internal static unsafe class GpuDisplacedMeshPreparationTests
         var localMesh = BuildNeighborhood(localAnchor);
 
         var oraclePath = Path.Combine(runtime, "earth_elevation_8192x4096.r16");
-        var displaceShader = Path.Combine(root, "build", "native-ninja", "shaders", "planetary_mesh_displace.comp.spv");
-        var normalShader = Path.Combine(root, "build", "native-ninja", "shaders", "planetary_mesh_normals.comp.spv");
+        var displaceShader = Path.Combine(root, "build", GraphicsTestHarness.NativeDirectory, "shaders", "planetary_mesh_displace.comp.spv");
+        var normalShader = Path.Combine(root, "build", GraphicsTestHarness.NativeDirectory, "shaders", "planetary_mesh_normals.comp.spv");
         var initialization = Initialize(oraclePath, terrainPath, localPath, displaceShader, normalShader,
             2048, 10000, 10000); Require(initialization.InitializationCount == 1 && initialization.PipelineCreationCount == 2 &&
             initialization.ShaderModuleCreationCount == 2 && initialization.PersistentBufferBytes > 0 && initialization.ValidationErrors == 0,

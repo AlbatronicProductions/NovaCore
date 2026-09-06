@@ -217,8 +217,7 @@ internal static class PlanetaryNaturalTerrainRendererIntegrationTests
         BodyFixedGeography.DirectionFromLatitudeLongitude(latitudeDegrees * Math.PI / 180d,
             longitudeDegrees * Math.PI / 180d);
 
-    private static string RepositoryRoot() => Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,
-        "..", "..", "..", "..", ".."));
+    private static string RepositoryRoot() => GraphicsTestHarness.RepositoryPath();
     private static void Require(bool condition, string message)
     {
         if (!condition) throw new InvalidOperationException(message);

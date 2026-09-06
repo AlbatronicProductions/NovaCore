@@ -4,7 +4,7 @@ internal static class CacheLifecycleTests
 {
     internal static void Run()
     {
-        var repository = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..",".."));
+        var repository = GraphicsTestHarness.RepositoryPath();
         var fixtureRoot = Path.Combine(repository,"tests","fixtures","terrain");
         Check(TerrainAssetManifestFile.TryLoad(Path.Combine(fixtureRoot,"tiny-global.json"),out var manifest,out _),"manifest");
         var source = Path.Combine(fixtureRoot,"tiny-global.nccube");

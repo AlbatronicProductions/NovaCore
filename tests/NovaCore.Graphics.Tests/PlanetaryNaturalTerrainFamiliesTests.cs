@@ -338,13 +338,13 @@ internal static unsafe class PlanetaryNaturalTerrainFamiliesTests
 
     private static GpuParityResult VerifyGpuGlslParity()
     {
-        var root = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", ".."));
+        var root = GraphicsTestHarness.RepositoryPath();
         Require(TerrainAssetCache.TryResolveRequired(root, TerrainAssetCache.ProductionEarthAssetId, null,
             out _, out var terrainPath, out var terrainError), $"P2B parity terrain-v5 asset: {terrainError}");
         Require(TerrainAssetCache.TryResolveRequired(root, TerrainAssetCache.ProductionEarthLocalAssetId, null,
             out _, out var localPath, out var localError), $"P2B parity local-v2 asset: {localError}");
         var oraclePath = Path.Combine(root, "assets", "earth", "runtime", "earth_elevation_8192x4096.r16");
-        var shaderPath = Path.Combine(root, "build", "native-ninja", "shaders", "planetary_natural_terrain_families_query.comp.spv");
+        var shaderPath = Path.Combine(root, "build", GraphicsTestHarness.NativeDirectory, "shaders", "planetary_natural_terrain_families_query.comp.spv");
         Require(File.Exists(oraclePath) && File.Exists(shaderPath), "P2B proof compute shader and executor assets exist");
         var points = new[] { Origins[0], Origins[1], Origins[2], Origins[3],
             new Double3(-32.000001d, 63.999999d, 128.5d),
@@ -499,7 +499,7 @@ internal static unsafe class PlanetaryNaturalTerrainFamiliesTests
 
     private static void VerifyIsolation()
     {
-        var root=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..",".."));
+        var root=GraphicsTestHarness.RepositoryPath();
         var shaderRoot=Path.Combine(root,"native","NovaCore.Native","shaders");
         var authorizedCandidateConsumers=new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {

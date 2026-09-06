@@ -64,3 +64,86 @@ regenerate, interruption recovery, and fresh-clone behavior.
 `--objects=1`, `--objects=100`, `--objects=1000`, and `--objects=10000` select the grid demonstration count. `--scene=grid` is the default; `--scene=frames` resolves ECL, ORB, CCE, CCI, and CCF demonstration markers through a managed reference-frame snapshot.
 
 Logging uses repeated or comma-separated `--log=` values, for example `--log=input,precision` or `--log=vulkan --log=renderer`. Valid categories are `startup`, `vulkan`, `precision`, `input`, `renderer`, `validation`, `camera`, and `all`. `--verbose-input` remains a temporary compatibility alias for `--log=input`.
+
+## Graphics validation contract
+
+Run from the repository root. Build native and managed code in the same
+configuration first, including the Triangle sample for window tests. The Graphics
+runner starts a fresh process for each case: published elevation datasets and
+native contexts must not leak between fixtures. It continues after a failure,
+returns a nonzero exit code, and reports passes, failures, skips and excluded cases.
+An unknown filter is an error. `--list` lists every permanent case and category.
+
+```powershell
+dotnet run --project tests/NovaCore.Graphics.Tests -c Debug -- --list
+dotnet run --project tests/NovaCore.Graphics.Tests -c Debug -- --category=headless
+dotnet run --project tests/NovaCore.Graphics.Tests -c Debug -- --category=gpu
+dotnet run --project tests/NovaCore.Graphics.Tests -c Debug -- --category=window
+# Omit the category to run all cases; repeat with -c Release.
+```
+
+| Category | Prerequisites and meaning |
+|---|---|
+| HEADLESS (`headless`) | Windows x64, matching native DLL and its Vulkan loader dependency, source/shaders and required fixtures/assets. No GPU operations or visible window. Includes CPU numerical, ABI, source-contract and SPIR-V checks; a test name containing GPU does not imply a GPU dispatch. Suitable for provisioned Windows headless CI. |
+| GPU-NO-WINDOW (`gpu`) | Vulkan device with required FP64/compute/raster features, compiled shaders and Khronos validation layer. Proofs render into existing offscreen attachments; no Win32 surface. Suitable for GPU CI. |
+| VISIBLE-WINDOW AUTOMATED (`window`) | Interactive Windows desktop, compatible Vulkan GPU, matching sample deployment, global/Florida assets. Uses the production Win32/surface/swapchain path. This is not hidden/headless execution. Avoid interacting with these windows during a run. |
+| MANUAL | Visual quality and player-facing continuous Florida approach remain physical acceptance responsibilities. API lifecycle tests cannot replace that gate. A validation-only change does not automatically reopen the accepted P2S5H gate. |
+
+Debug tests resolve the Debug native DLL; Release tests resolve Release. Before
+running a case, the harness compares the deployed SHA-256 with the selected native
+build, loads that exact path, and checks the actual loaded module. No native PATH
+fallback is accepted. Test shader paths use the same configuration. Window tests
+also verify the sample DLL and all 49 deployed shader hashes against that build.
+
+Full automated validation means all 89 managed cases, plus the three native cases
+below, pass in both configurations with their stated prerequisites. Category
+exclusions are not passes or skips. There are no unconditional skipped cases.
+Missing GPU/layer/assets are actionable failures, not silent environment skips.
+Headless-only success must be reported as headless-only.
+
+Native cases are explicit CMake targets excluded from the default build:
+
+```powershell
+cmake --build build/native-ninja --target NovaCoreRegionalPhysicalTests NovaCoreFacilityVisibilityTests NovaCoreSurfaceMaterialCoordinatesTests
+build/native-ninja/NovaCoreRegionalPhysicalTests.exe <verified-Florida-nccube-path>
+build/native-ninja/NovaCoreFacilityVisibilityTests.exe build/native-ninja/shaders/facility_visibility_test.comp.spv
+build/native-ninja/NovaCoreSurfaceMaterialCoordinatesTests.exe build/native-ninja/shaders/surface_material_coordinates_test.comp.spv
+# Repeat using build/native-ninja-release.
+```
+
+The regional native case is CPU-only. The two presentation cases require Vulkan
+FP64 and Khronos validation in **both** configurations, including instance creation
+and device teardown. Their errors fail the executable. The runtime window enables
+validation in Debug and disables it in Release; a Release presentation pass alone
+is not validation-layer proof. Managed GPU proof/query contexts enable the layer
+when available; their test preflight requires it and rejects disable-filter overrides.
+
+The sole accepted window warning is the exact SDK message
+`WARNING-Shader-OutputNotConsumed` for vertex output Location 11 Component 0,
+with no matching fragment input. The shared vertex shader emits a uint terrain
+layer for the production fragment shader; the generic fragment pair may legally
+discard it. The warning remains logged. Other IDs, locations or severities fail.
+In particular, `memoryTypeIndex-00645` is **not** allowlisted. The observed KMT
+import error remains an intermittent host/interop investigation, not a proven
+benign warning. See the [measured validation review](graphics-window-validation.md).
+
+The window lifecycle test checks windowed and borderless startup twice each,
+actual module identity, client/swapchain extents, resize, minimized zero extent,
+restore, submitted frames and normal close/teardown. Checkpoints have a 60-second
+failure deadline, not retries for a passing result. The production application has
+no exclusive-fullscreen or live window-mode transition API; no such capability is
+invented for tests. The regional regression exercises 1,000 scripted frames plus
+outside-region and non-Earth isolation and removes its disposable readbacks on
+success. Failures retain their bounded GUID directory for investigation.
+The wheel-isolation regression delivers a real Win32 wheel message in ordinary
+and regional-probe modes: ordinary scrolling must still zoom, while the probe
+must consume no desktop wheel input, matching its existing key/look isolation.
+
+`NOVACORE_P2S5F_ARTIFACT_INPUT=assets/planetary-nested-scale-mesh` (prefer an
+absolute path) uses the existing checked-in 18-scale library for topology
+validation. Without it the test regenerates all 18 scales in memory and is much
+slower. `NOVACORE_P2S5F_EXHAUSTIVE_DETERMINISM=1` additionally compares regenerated
+bytes. State which mode ran; reading fixtures does not prove regeneration.
+`NOVACORE_P2S2_ARTIFACT_OUTPUT`, `NOVACORE_P2S5B_ARTIFACT_OUTPUT` and
+`NOVACORE_P2S5F_ARTIFACT_OUTPUT` opt into diagnostic artifacts and are not normal
+validation prerequisites. Apply the [diagnostic output policy](diagnostic-output-policy.md).

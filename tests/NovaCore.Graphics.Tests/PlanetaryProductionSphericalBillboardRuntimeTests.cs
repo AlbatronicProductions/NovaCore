@@ -311,7 +311,7 @@ internal static class PlanetaryProductionSphericalBillboardRuntimeTests
         IReadOnlyList<PlanetaryProductionSphericalBillboardTopology> levels)
     {
         using var session = new PlanetarySphericalBillboardGpuProofSession(
-            Path.Combine(root, "build", "native-ninja", "shaders"));
+            Path.Combine(root, "build", GraphicsTestHarness.NativeDirectory, "shaders"));
         var current = levels[16];
         var incoming = levels[17];
         var currentUpload = session.UploadProduction(current);
@@ -349,7 +349,7 @@ internal static class PlanetaryProductionSphericalBillboardRuntimeTests
         IReadOnlyList<PlanetaryProductionSphericalBillboardTopology> levels)
     {
         using var session = new PlanetarySphericalBillboardGpuProofSession(
-            Path.Combine(root, "build", "native-ninja", "shaders"));
+            Path.Combine(root, "build", GraphicsTestHarness.NativeDirectory, "shaders"));
         uint frame = 0;
         foreach (var topology in new[] { levels[0], levels[16], levels[17] })
         {
@@ -554,7 +554,8 @@ internal static class PlanetaryProductionSphericalBillboardRuntimeTests
         var pupil = PlanetaryProductionBillboardPupil.Resolve(default, Double3.UnitZ, topology);
         var initialStart = Stopwatch.GetTimestamp();
         var initial = PlanetarySphericalBillboardNaturalTerrainProof.PrepareProductionIncremental(
-            root, topology, pupil, cache, maximumParitySamples: 64);
+            root, topology, pupil, cache, maximumParitySamples: 64,
+            queryShader: Path.Combine(root, "build", GraphicsTestHarness.NativeDirectory, "shaders", "planetary_height_query.comp.spv"));
         var initialCpu = Stopwatch.GetElapsedTime(initialStart).TotalMilliseconds;
         cache.RetainOnly(initial.Identities);
         var snapAngle = topology.Snap.PupilCellRadians *
@@ -564,7 +565,8 @@ internal static class PlanetaryProductionSphericalBillboardRuntimeTests
         var snapped = PlanetaryProductionBillboardPupil.Resolve(pupil, target, topology);
         var snapStart = Stopwatch.GetTimestamp();
         var moved = PlanetarySphericalBillboardNaturalTerrainProof.PrepareProductionIncremental(
-            root, topology, snapped, cache, maximumParitySamples: 64);
+            root, topology, snapped, cache, maximumParitySamples: 64,
+            queryShader: Path.Combine(root, "build", GraphicsTestHarness.NativeDirectory, "shaders", "planetary_height_query.comp.spv"));
         var snapCpu = Stopwatch.GetElapsedTime(snapStart).TotalMilliseconds;
         Console.WriteLine($"P2S5C2 physical snap L8: active={moved.Vertices.Length}; " +
             $"reused={moved.ReusedSamples}; new={moved.PreparedSamples}; " +
