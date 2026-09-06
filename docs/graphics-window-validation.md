@@ -1,5 +1,9 @@
 # Graphics / window validation review
 
+Historical Package 1 evidence, banked as `e963e8cf9ed5841f76a5f954b0db37162d3a93df`.
+The original observations below are preserved. Current layer isolation and generic
+startup follow-up are documented in [Package 2](graphics-validation-package-2.md).
+
 Unbanked Graphics-validation package, 2026-09-05. Operational commands and the
 definition of a full automated pass live in [build-windows.md](build-windows.md#graphics-validation-contract).
 This report does not reopen Earth rendering, performance, compatibility or cache policy.

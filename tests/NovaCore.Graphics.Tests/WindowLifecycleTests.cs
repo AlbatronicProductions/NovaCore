@@ -73,11 +73,19 @@ internal static class WindowLifecycleTests
         RunWindow(sample, root, false, true);
     }
 
-    private static void RunWindow(string sample, string root, bool borderless, bool? isolateInput = null)
+    internal static void RunGenericStartup()
+    {
+        Require(TerrainAssetRepository.TryFindRoot(out var root), "Repository root.");
+        var sample = VerifyDeployment(root);
+        foreach (var scene in new[] { "grid", "frames" }) RunWindow(sample, root, false, scene: scene);
+    }
+
+    private static void RunWindow(string sample, string root, bool borderless, bool? isolateInput = null, string scene = "sol")
     {
         var lines = new ConcurrentQueue<string>(); using var changed = new AutoResetEvent(false);
         var start = new ProcessStartInfo(sample) { WorkingDirectory = root, UseShellExecute = false, RedirectStandardOutput = true, RedirectStandardError = true };
-        start.ArgumentList.Add("--scene=sol"); start.ArgumentList.Add("--solar-epoch=j2000"); start.ArgumentList.Add("--log=startup,vulkan,validation,camera,input");
+        start.ArgumentList.Add("--scene=" + scene); start.ArgumentList.Add("--solar-epoch=j2000"); start.ArgumentList.Add("--log=startup,vulkan,validation,camera,input");
+        if (scene != "sol") start.ArgumentList.Add("--physical-surface=m12d-natural-candidate");
         start.Environment["NOVACORE_WINDOW_CLIENT_WIDTH"] = "640";
         start.Environment["NOVACORE_WINDOW_CLIENT_HEIGHT"] = "480";
         start.Environment["NOVACORE_WINDOW_BORDERLESS"] = borderless ? "1" : "0";
@@ -95,6 +103,7 @@ internal static class WindowLifecycleTests
             var loaded = process.Modules.Cast<ProcessModule>().Single(m => m.ModuleName.Equals("NovaCore.Native.dll", StringComparison.OrdinalIgnoreCase)).FileName;
             Require(string.Equals(loaded, Path.Combine(Path.GetDirectoryName(sample)!, "NovaCore.Native.dll"), StringComparison.OrdinalIgnoreCase), "Unexpected sample native module.");
             Console.WriteLine($"Window loaded module: {loaded}; sha256={GraphicsTestHarness.Hash(loaded)}; borderless={borderless}; visible=true");
+            VulkanValidationEnvironment.VerifyLoaded(process);
             Require(GetClientRect(window, out var rect) && rect.Right == 640 && rect.Bottom == 480, "Requested client extent.");
             var style = GetWindowLongW(window, -16);
             Require(((style & 0x80000000u) != 0) == borderless, "Requested window style.");

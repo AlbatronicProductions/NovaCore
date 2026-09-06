@@ -263,10 +263,14 @@ visually finished.
 - Surface-level GPU cost still varies with some viewing directions. The accepted
   path no longer exhibits the catastrophic geometry spikes, but further bounded
   workload-efficiency work remains.
-- Vulkan validation still reports the existing D3D11 KMT external-memory
-  `memoryTypeIndex-00645` interoperability VUID on the development machine.
-- The broad Graphics suite retains an unrelated opaque distant/detailed
-  handoff orbit-line assertion. Focused New Earth Renderer coverage is green.
+- Ambient OBS Vulkan capture can report D3D11 KMT import
+  `memoryTypeIndex-00645`; the measured caller is the OBS hook. Stale Epic
+  registrations separately cause loader errors. The unbanked
+  [Graphics Package 2](graphics-validation-package-2.md) isolates canonical
+  automated validation while retaining strict ambient diagnostics.
+- The opaque distant/detailed source assertion was corrected in banked Graphics
+  Package 1. Package 2 validates generic grid/frames startup without Earth assets;
+  other shared generic/planetary allocations remain separate resource-ownership debt.
 
 ## Next architectural decision and work boundary
 

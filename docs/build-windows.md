@@ -80,6 +80,11 @@ dotnet run --project tests/NovaCore.Graphics.Tests -c Debug -- --category=headle
 dotnet run --project tests/NovaCore.Graphics.Tests -c Debug -- --category=gpu
 dotnet run --project tests/NovaCore.Graphics.Tests -c Debug -- --category=window
 # Omit the category to run all cases; repeat with -c Release.
+# Same controlled child-process environment for both native GPU executables:
+dotnet run --project tests/NovaCore.Graphics.Tests -c Debug -- --native-gpu
+# Separate ambient compatibility diagnostic (nonzero remains a failure):
+dotnet run --project tests/NovaCore.Graphics.Tests -c Debug -- --ambient --native-gpu
+dotnet run --project tests/NovaCore.Graphics.Tests -c Debug -- --ambient --test="Production window lifecycle"
 ```
 
 | Category | Prerequisites and meaning |
@@ -95,7 +100,7 @@ build, loads that exact path, and checks the actual loaded module. No native PAT
 fallback is accepted. Test shader paths use the same configuration. Window tests
 also verify the sample DLL and all 49 deployed shader hashes against that build.
 
-Full automated validation means all 89 managed cases, plus the three native cases
+Full automated validation means all 90 managed cases, plus the three native cases
 below, pass in both configurations with their stated prerequisites. Category
 exclusions are not passes or skips. There are no unconditional skipped cases.
 Missing GPU/layer/assets are actionable failures, not silent environment skips.
@@ -111,12 +116,33 @@ build/native-ninja/NovaCoreSurfaceMaterialCoordinatesTests.exe build/native-ninj
 # Repeat using build/native-ninja-release.
 ```
 
+Canonical GPU/window validation runs **unelevated**, with process-local Vulkan
+loader discovery: an empty implicit manifest directory and a single explicit SDK
+Khronos validation manifest pointing to the installed DLL. `VULKAN_SDK` (or
+`VK_SDK_PATH`) selects the SDK. Inherited layer activation and validation-disable
+settings are cleared in the test process; `VK_INSTANCE_LAYERS` requests Khronos in
+both Debug and Release. A loader-visible foreign layer or missing validation is a
+failure. No registry state, driver selection, production launcher environment or
+global application setting is changed. Temporary manifests are removed at teardown.
+HEADLESS-only runs do not establish a Vulkan environment.
+
+`--ambient` preserves actual layer discovery and activation, reports registry and
+manifest/binary existence (presence is not proof of loading), and runs the same
+strict checks. Window tests record loaded modules. For loader call-chain evidence,
+set `VK_LOADER_DEBUG=error,warn,layer` in the diagnostic shell; for error caller and
+object evidence set `NOVACORE_VULKAN_CALLSTACK=1`. Remove those diagnostic overrides
+after use. An ambient failure is reported independently of canonical regression
+status; it is never converted into a pass. See [Package 2](graphics-validation-package-2.md).
+
 The regional native case is CPU-only. The two presentation cases require Vulkan
 FP64 and Khronos validation in **both** configurations, including instance creation
-and device teardown. Their errors fail the executable. The runtime window enables
-validation in Debug and disables it in Release; a Release presentation pass alone
-is not validation-layer proof. Managed GPU proof/query contexts enable the layer
-when available; their test preflight requires it and rejects disable-filter overrides.
+and device teardown. Their errors fail the executable. Ordinary runtime code
+requests validation in Debug; canonical tests also enable it in Release through
+the loader environment and check the loaded module. The runtime's Release message
+describes its compiled request policy, not the loader's forced layer chain.
+Managed GPU proof/query contexts enable the layer when available; preflight
+requires it. Direct native commands above inherit ambient discovery; use the
+Graphics runner's `--native-gpu` entry for canonical regression status.
 
 The sole accepted window warning is the exact SDK message
 `WARNING-Shader-OutputNotConsumed` for vertex output Location 11 Component 0,
@@ -124,8 +150,11 @@ with no matching fragment input. The shared vertex shader emits a uint terrain
 layer for the production fragment shader; the generic fragment pair may legally
 discard it. The warning remains logged. Other IDs, locations or severities fail.
 In particular, `memoryTypeIndex-00645` is **not** allowlisted. The observed KMT
-import error remains an intermittent host/interop investigation, not a proven
-benign warning. See the [measured validation review](graphics-window-validation.md).
+import error is a measured OBS capture-layer interference: its invalid allocation
+is called by `graphics-hook64.dll`, and disappears when that Vulkan layer is
+disabled. Stale Epic manifests separately produce loader discovery errors.
+Neither error is allowlisted. Package 1 observations remain in the
+[historical validation review](graphics-window-validation.md).
 
 The window lifecycle test checks windowed and borderless startup twice each,
 actual module identity, client/swapchain extents, resize, minimized zero extent,
@@ -138,6 +167,13 @@ success. Failures retain their bounded GUID directory for investigation.
 The wheel-isolation regression delivers a real Win32 wheel message in ordinary
 and regional-probe modes: ordinary scrolling must still zoom, while the probe
 must consume no desktop wheel input, matching its existing key/look isolation.
+
+The grid/frames startup regression exercises the same lifecycle with an explicit
+generation-4 option and no Earth asset contract. Native physical-oracle allocation,
+descriptor publication and preparation dispatch require the production terrain
+owner. Generic submissions leave that unused descriptor unbound; no fake Earth
+asset or fallback height is supplied. Other shared resource allocations remain
+outside this bounded ownership correction.
 
 `NOVACORE_P2S5F_ARTIFACT_INPUT=assets/planetary-nested-scale-mesh` (prefer an
 absolute path) uses the existing checked-in 18-scale library for topology

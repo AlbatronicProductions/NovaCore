@@ -607,6 +607,19 @@ Debug(VkDebugUtilsMessageSeverityFlagBitsEXT severity, VkDebugUtilsMessageTypeFl
       ((severity & VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT) ? "error" : "warning") +
       "][" + (d->pMessageIdName ? d->pMessageIdName : "unnamed") + "]: " + d->pMessage;
   static_cast<App *>(u)->Log(NC_LOG_VALIDATION, message.c_str());
+  // Opt-in causal evidence for external interception; never changes severity or result.
+  if ((severity & VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT) && std::getenv("NOVACORE_VULKAN_CALLSTACK")) {
+    for (uint32_t i=0;i<d->objectCount;++i) {
+      char object[192];std::snprintf(object,sizeof object,"Vulkan error object: type=%u; handle=0x%llx; name=%s",d->pObjects[i].objectType,(unsigned long long)d->pObjects[i].objectHandle,d->pObjects[i].pObjectName?d->pObjects[i].pObjectName:"");static_cast<App*>(u)->Log(NC_LOG_VALIDATION,object);
+    }
+    void* frames[32]{};const auto count=CaptureStackBackTrace(0,32,frames,nullptr);
+    for (USHORT i=0;i<count;++i) {
+      HMODULE module{};char path[MAX_PATH]{};
+      GetModuleHandleExA(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS|GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,reinterpret_cast<LPCSTR>(frames[i]),&module);
+      if(module)GetModuleFileNameA(module,path,MAX_PATH);
+      char entry[MAX_PATH+96];std::snprintf(entry,sizeof entry,"Vulkan error stack: %u; module=%s; offset=0x%llx",i,path,(unsigned long long)(reinterpret_cast<uintptr_t>(frames[i])-reinterpret_cast<uintptr_t>(module)));static_cast<App*>(u)->Log(NC_LOG_VALIDATION,entry);
+    }
+  }
   return VK_FALSE;
 }
 Queues FindQueues(VkPhysicalDevice d, VkSurfaceKHR s) {
@@ -1690,9 +1703,13 @@ void CreateSubmission(App &a) {
   CreateHostBuffer(a,sizeof(NcProductionBillboardFrame),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,a.productionBillboardFrameBuffer,a.productionBillboardFrameMemory,a.productionBillboardFrameMapped,"production billboard pupil-frame buffer failed");
   CreateHostBuffer(a,sizeof(nc::facility::GpuVisibility),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,a.facilityVisibilityBuffer,a.facilityVisibilityMemory,a.facilityVisibilityMapped,"facility visibility buffer failed");
   CreateGlobalTerrainPreparation(a);
+  // The production terrain asset contract owns the physical oracle. Generic
+  // grid/frame submissions never dispatch Earth physical preparation.
+  if(a.productionPack){
   if(a.elevationOraclePath.empty())throw std::runtime_error("production physical elevation oracle path is required");
   CreateHostBuffer(a,PhysicalOracleBytes,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,a.physicalOracleBuffer,a.physicalOracleMemory,a.physicalOracleMapped,"physical elevation oracle buffer failed");
   {std::ifstream input(a.elevationOraclePath,std::ios::binary|std::ios::ate);if(!input||VkDeviceSize(input.tellg())!=PhysicalOracleBytes)throw std::runtime_error("physical elevation oracle dimensions mismatch");input.seekg(0);if(!input.read(static_cast<char*>(a.physicalOracleMapped),static_cast<std::streamsize>(PhysicalOracleBytes)))throw std::runtime_error("physical elevation oracle read failed");}
+  }
   CreateTerrainResidency(a);
   CreateProductionBillboard(a);
   VkDescriptorPoolSize ps[3]{{VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,39},{VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT,1},{VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,7}};
@@ -1717,7 +1734,7 @@ void CreateSubmission(App &a) {
   VkDescriptorBufferInfo pupilFrameInfo{a.productionBillboardFrameBuffer,0,sizeof(NcProductionBillboardFrame)};VkWriteDescriptorSet pupilFrameWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};pupilFrameWrite.dstSet=a.descriptor;pupilFrameWrite.dstBinding=52;pupilFrameWrite.descriptorCount=1;pupilFrameWrite.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;pupilFrameWrite.pBufferInfo=&pupilFrameInfo;vkUpdateDescriptorSets(a.device,1,&pupilFrameWrite,0,nullptr);
   if(a.productionBillboardAuthoritative)UpdateProductionBillboardDescriptors(a,false);if(a.productionBillboardIncomingEnabled)UpdateProductionBillboardDescriptors(a,true);
   VkDescriptorBufferInfo productionLookupInfo{a.productionLayerLookupBuffer,0,sizeof(uint32_t)*ProductionLookupCapacity};VkWriteDescriptorSet productionLookupWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};productionLookupWrite.dstSet=a.descriptor;productionLookupWrite.dstBinding=27;productionLookupWrite.descriptorCount=1;productionLookupWrite.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;productionLookupWrite.pBufferInfo=&productionLookupInfo;vkUpdateDescriptorSets(a.device,1,&productionLookupWrite,0,nullptr);
-  VkDescriptorBufferInfo physicalOracleInfo{a.physicalOracleBuffer,0,PhysicalOracleBytes};VkWriteDescriptorSet physicalOracleWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};physicalOracleWrite.dstSet=a.descriptor;physicalOracleWrite.dstBinding=33;physicalOracleWrite.descriptorCount=1;physicalOracleWrite.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;physicalOracleWrite.pBufferInfo=&physicalOracleInfo;vkUpdateDescriptorSets(a.device,1,&physicalOracleWrite,0,nullptr);
+  if(a.productionPack){VkDescriptorBufferInfo physicalOracleInfo{a.physicalOracleBuffer,0,PhysicalOracleBytes};VkWriteDescriptorSet physicalOracleWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};physicalOracleWrite.dstSet=a.descriptor;physicalOracleWrite.dstBinding=33;physicalOracleWrite.descriptorCount=1;physicalOracleWrite.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;physicalOracleWrite.pBufferInfo=&physicalOracleInfo;vkUpdateDescriptorSets(a.device,1,&physicalOracleWrite,0,nullptr);}
   VkDescriptorBufferInfo naturalGlobalInfo{a.naturalGlobalPreparedBuffer,0,32u+VkDeviceSize(NaturalGlobalPatchCount)*NaturalGlobalVerticesPerPatch*sizeof(double)*4u};VkWriteDescriptorSet naturalGlobalWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};naturalGlobalWrite.dstSet=a.descriptor;naturalGlobalWrite.dstBinding=35;naturalGlobalWrite.descriptorCount=1;naturalGlobalWrite.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;naturalGlobalWrite.pBufferInfo=&naturalGlobalInfo;vkUpdateDescriptorSets(a.device,1,&naturalGlobalWrite,0,nullptr);
   VkDescriptorImageInfo sceneInput{};sceneInput.imageView=a.sceneColorView;sceneInput.imageLayout=VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;VkWriteDescriptorSet sceneWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};sceneWrite.dstSet=a.descriptor;sceneWrite.dstBinding=7;sceneWrite.descriptorCount=1;sceneWrite.descriptorType=VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT;sceneWrite.pImageInfo=&sceneInput;vkUpdateDescriptorSets(a.device,1,&sceneWrite,0,nullptr);
   if(a.productionPack){VkDescriptorImageInfo productionInfos[3]{};VkWriteDescriptorSet productionWrites[3]{};for(uint32_t index=0;index<3;index++){productionInfos[index]={a.productionSampler,a.productionImageViews[index],VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL};productionWrites[index].sType=VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;productionWrites[index].dstSet=a.descriptor;productionWrites[index].dstBinding=24+index;productionWrites[index].descriptorCount=1;productionWrites[index].descriptorType=VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;productionWrites[index].pImageInfo=&productionInfos[index];}vkUpdateDescriptorSets(a.device,3,productionWrites,0,nullptr);}
@@ -1771,7 +1788,7 @@ void Upload(App &a) {
   if(contextChanged){
     if(productionSurface&&!ProductionHierarchyPayloadsReady(a))throw std::runtime_error("production context selected before the complete immutable L0-L2 hierarchy was resident");
     a.surfaceContextValid=true;a.surfaceContextBodyId=contextBody;a.surfaceContextTerrainVersion=gpuInput.terrainVersion;a.surfaceContextPhysicalGeneration=a.submission->physicalSurfaceGeneration;a.surfaceContextMode=contextMode;a.surfaceContextRegime=contextRegime;a.surfaceContextRadiusHighBits=radiusHighBits;a.surfaceContextRadiusLowBits=radiusLowBits;a.surfaceTransitionEpoch++;a.surfaceContextInvalidations++;a.earthTransitionTraceRemaining=contextBody==nc::production::EarthBodyId?180u:0u;a.earthSubmissionTraceRemaining=a.earthTransitionTraceRemaining;a.productionGeometryTraceLogged=false;std::memset(a.gpuControlMapped,0,sizeof(GpuPlanetaryControl));if(productionSurface)SeedProductionTerrainCacheHighWater(a);a.hasGpuTelemetry=false;
-    auto *naturalControl=static_cast<uint32_t*>(a.naturalGlobalPreparedMapped);if(a.submission->physicalSurfaceGeneration==4u){naturalControl[0]=0u;a.naturalGlobalPreparationPending=true;a.naturalGlobalPrepared=false;}else{naturalControl[0]=3u;a.naturalGlobalPreparationPending=false;a.naturalGlobalPrepared=false;}
+    auto *naturalControl=static_cast<uint32_t*>(a.naturalGlobalPreparedMapped);if(a.productionPack&&a.submission->physicalSurfaceGeneration==4u){naturalControl[0]=0u;a.naturalGlobalPreparationPending=true;a.naturalGlobalPrepared=false;}else{naturalControl[0]=3u;a.naturalGlobalPreparationPending=false;a.naturalGlobalPrepared=false;}
     char transition[352];std::snprintf(transition,sizeof transition,"Planetary context transition: epoch=%llu; body=%llu; surfaceMode=%u; terrainVersion=%u; physicalGeneration=%u; regime=%u; productionEligible=%s; owner=%s",(unsigned long long)a.surfaceTransitionEpoch,(unsigned long long)contextBody,contextMode,gpuInput.terrainVersion,a.submission->physicalSurfaceGeneration,contextRegime,productionSurface?"true":"false",productionSurface?"terrain-v5":"bounded-sphere");a.Log(NC_LOG_ALWAYS,transition);
     if(contextBody==6u){
       uint32_t rootMask=0u;auto *lookup=static_cast<uint32_t*>(a.productionLayerLookupMapped);for(uint32_t face=0;face<6&&lookup;face++)if(lookup[nc::production::Pack::Ordinal(face,0,0,0)]!=0u)rootMask|=1u<<face;

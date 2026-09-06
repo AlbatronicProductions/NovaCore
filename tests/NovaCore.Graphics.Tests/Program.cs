@@ -16,6 +16,7 @@ using NovaCore.Simulation.Time;
 
 var tests = new (string, Action)[]
 {
+    ("Generic grid and frames startup", WindowLifecycleTests.RunGenericStartup),
     ("Facility lighting authority", FacilityLightingTests.Run),
     ("MeshHandle", MeshHandleTest),
     ("Transport layout", LayoutTest),

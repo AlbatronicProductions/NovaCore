@@ -1,0 +1,3022 @@
+{
+  "baseline": {
+    "head": "e963e8cf9ed5841f76a5f954b0db37162d3a93df",
+    "originMain": "e963e8cf9ed5841f76a5f954b0db37162d3a93df",
+    "p2s5h": "32ffac50ab5c06518ede24edfb5c531976d4ec99",
+    "branch": "main",
+    "initialStatus": "clean"
+  },
+  "date": "2026-09-06",
+  "classification": "READY TO BANK GRAPHICS VALIDATION PACKAGE",
+  "managed": {
+    "Debug": {
+      "cases": [
+        {
+          "status": "PASS",
+          "category": "window",
+          "name": "Generic grid and frames startup"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Facility lighting authority"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "MeshHandle"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Transport layout"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Transform conversion"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Camera relative"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Batches and capacity"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Resolved render transport"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Orbit curve transport"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Static reference-frame fixture transport"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Dynamic reference-frame fixture publication"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Celestial analytical fixture publication"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Celestial player torque controls"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Celestial SAS mode selection"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Celestial SAS control cadence"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Celestial SAS convergence"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Celestial SAS diagnostic indicators"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Camera snapshot allocation"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Planetary presentation pipeline"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Planetary presentation SPIR-V stride"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Focus target authority"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Planet material presentation"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Planet micro-normal foundation"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Planet surface scatter placement"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Planetary surface camera presentation"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Earth CPU elevation oracle"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Canonical body-fixed geographic handedness"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Canonical SurfaceAnchor physical terrain authority"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Anchored Florida launch site"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Earth route convergence"
+        },
+        {
+          "status": "PASS",
+          "category": "window",
+          "name": "Live NCSM1 regional physical residency"
+        },
+        {
+          "status": "PASS",
+          "category": "window",
+          "name": "Production window lifecycle"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Window validation message policy"
+        },
+        {
+          "status": "PASS",
+          "category": "window",
+          "name": "Regional diagnostic wheel isolation"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Florida facility support"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Surface-relative camera authority"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Near-surface inertial free-look"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "SurfaceAnchor acquisition, ENU, and handoff"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Camera focus-position continuity"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Camera SurfaceAnchor handoff monotonicity"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Solar preset camera-path convergence"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Zoom motion-profile continuity"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Solar camera bounded-domain crash regression"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Surface visual-aim continuity"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Inertial visual-aim authority"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Cube-sphere planetary surface"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Production relaxed cube-sphere patch hierarchy"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Anchored spherical mesh-tier contract"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "M12D-P2S2 spherical billboard topology proof"
+        },
+        {
+          "status": "PASS",
+          "category": "gpu",
+          "name": "M12D-P2S3 spherical billboard GPU runtime proof"
+        },
+        {
+          "status": "PASS",
+          "category": "gpu",
+          "name": "M12D-P2S4 canonical natural terrain billboard binding"
+        },
+        {
+          "status": "PASS",
+          "category": "gpu",
+          "name": "M12D-P2S5C production spherical billboard runtime"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "M12D-P2S5B production spherical billboard topology library"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "M12D-P2S5F nested production scale-mesh topology"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "M12D-P2S5G bounded spherical billboard surface interface"
+        },
+        {
+          "status": "PASS",
+          "category": "gpu",
+          "name": "GPU physical-height preparation"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Multiscale physical terrain modifier foundation"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Single canonical physical surface authority"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Global/anchored physical frequency continuity"
+        },
+        {
+          "status": "PASS",
+          "category": "gpu",
+          "name": "M12D-P2A canonical hashed cell field proof"
+        },
+        {
+          "status": "PASS",
+          "category": "gpu",
+          "name": "M12D-P2B multiscale natural terrain family proof"
+        },
+        {
+          "status": "PASS",
+          "category": "gpu",
+          "name": "M12D-P2C1 prepared natural terrain"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Generation-4 physical renderer integration"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Production material noise value preservation"
+        },
+        {
+          "status": "PASS",
+          "category": "gpu",
+          "name": "Displaced mesh and physical normals"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Screen-space subdivision"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Terrain-v5 seams, mixed-LOD authority, and Florida classification"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Terrain asset distribution boundary"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Cache lifecycle cleanup"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Local terrain format and GPU compression"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "M12 Florida regional physical surface"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Production cube-sphere GPU residency integration"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Production physical-normal tangent continuity"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Production surface body eligibility and transition ownership"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Production Earth material-state continuity"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Planetary camera terrain exclusion"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Close-ground reference-frame diagnostic"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Production terrain material synthesis"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Planetary terrain residency and surface frame"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Planetary patch topology and ABI"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Parent-child LOD geographic correspondence"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Opaque distant-detailed handoff"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Planetary representation handoff"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Distant quaternion transform parity"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Distant visible hemisphere winding"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Continuous Earth distance visibility"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Camera drag isolation"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Sol system presentation and focus"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "SolAnalytical Earth planetary scene"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Florida foundation seating"
+        }
+      ],
+      "counts": {
+        "headless": {
+          "passed": 78,
+          "failed": 0,
+          "skipped": 0
+        },
+        "gpu": {
+          "passed": 8,
+          "failed": 0,
+          "skipped": 0
+        },
+        "window": {
+          "passed": 4,
+          "failed": 0,
+          "skipped": 0
+        }
+      },
+      "regionalSummary": [
+        "Live facility support PASS: contact=9; transition=4; outside=1; maxContactGap=3.100372850894928E-06; maxPreparedBaseError=0.0009933606762437819",
+        "Live regional CPU/GPU parity PASS: captures=43; checkedVertices=1596; levels=8,9,10,11,12,13,14,15,16,17; pupils=40",
+        "Live regional evidence summarized in stdout; disposable readbacks removed: E:\\NovaCore\\build\\regional-live-tests\\896dd225bd88401c956de16caef72359"
+      ],
+      "topologyMode": "checked-in 18-scale library; no regeneration"
+    },
+    "Release": {
+      "cases": [
+        {
+          "status": "PASS",
+          "category": "window",
+          "name": "Generic grid and frames startup"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Facility lighting authority"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "MeshHandle"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Transport layout"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Transform conversion"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Camera relative"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Batches and capacity"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Resolved render transport"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Orbit curve transport"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Static reference-frame fixture transport"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Dynamic reference-frame fixture publication"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Celestial analytical fixture publication"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Celestial player torque controls"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Celestial SAS mode selection"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Celestial SAS control cadence"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Celestial SAS convergence"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Celestial SAS diagnostic indicators"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Camera snapshot allocation"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Planetary presentation pipeline"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Planetary presentation SPIR-V stride"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Focus target authority"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Planet material presentation"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Planet micro-normal foundation"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Planet surface scatter placement"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Planetary surface camera presentation"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Earth CPU elevation oracle"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Canonical body-fixed geographic handedness"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Canonical SurfaceAnchor physical terrain authority"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Anchored Florida launch site"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Earth route convergence"
+        },
+        {
+          "status": "PASS",
+          "category": "window",
+          "name": "Live NCSM1 regional physical residency"
+        },
+        {
+          "status": "PASS",
+          "category": "window",
+          "name": "Production window lifecycle"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Window validation message policy"
+        },
+        {
+          "status": "PASS",
+          "category": "window",
+          "name": "Regional diagnostic wheel isolation"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Florida facility support"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Surface-relative camera authority"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Near-surface inertial free-look"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "SurfaceAnchor acquisition, ENU, and handoff"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Camera focus-position continuity"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Camera SurfaceAnchor handoff monotonicity"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Solar preset camera-path convergence"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Zoom motion-profile continuity"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Solar camera bounded-domain crash regression"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Surface visual-aim continuity"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Inertial visual-aim authority"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Cube-sphere planetary surface"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Production relaxed cube-sphere patch hierarchy"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Anchored spherical mesh-tier contract"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "M12D-P2S2 spherical billboard topology proof"
+        },
+        {
+          "status": "PASS",
+          "category": "gpu",
+          "name": "M12D-P2S3 spherical billboard GPU runtime proof"
+        },
+        {
+          "status": "PASS",
+          "category": "gpu",
+          "name": "M12D-P2S4 canonical natural terrain billboard binding"
+        },
+        {
+          "status": "PASS",
+          "category": "gpu",
+          "name": "M12D-P2S5C production spherical billboard runtime"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "M12D-P2S5B production spherical billboard topology library"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "M12D-P2S5F nested production scale-mesh topology"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "M12D-P2S5G bounded spherical billboard surface interface"
+        },
+        {
+          "status": "PASS",
+          "category": "gpu",
+          "name": "GPU physical-height preparation"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Multiscale physical terrain modifier foundation"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Single canonical physical surface authority"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Global/anchored physical frequency continuity"
+        },
+        {
+          "status": "PASS",
+          "category": "gpu",
+          "name": "M12D-P2A canonical hashed cell field proof"
+        },
+        {
+          "status": "PASS",
+          "category": "gpu",
+          "name": "M12D-P2B multiscale natural terrain family proof"
+        },
+        {
+          "status": "PASS",
+          "category": "gpu",
+          "name": "M12D-P2C1 prepared natural terrain"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Generation-4 physical renderer integration"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Production material noise value preservation"
+        },
+        {
+          "status": "PASS",
+          "category": "gpu",
+          "name": "Displaced mesh and physical normals"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Screen-space subdivision"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Terrain-v5 seams, mixed-LOD authority, and Florida classification"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Terrain asset distribution boundary"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Cache lifecycle cleanup"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Local terrain format and GPU compression"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "M12 Florida regional physical surface"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Production cube-sphere GPU residency integration"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Production physical-normal tangent continuity"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Production surface body eligibility and transition ownership"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Production Earth material-state continuity"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Planetary camera terrain exclusion"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Close-ground reference-frame diagnostic"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Production terrain material synthesis"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Planetary terrain residency and surface frame"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Planetary patch topology and ABI"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Parent-child LOD geographic correspondence"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Opaque distant-detailed handoff"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Planetary representation handoff"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Distant quaternion transform parity"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Distant visible hemisphere winding"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Continuous Earth distance visibility"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Camera drag isolation"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Sol system presentation and focus"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "SolAnalytical Earth planetary scene"
+        },
+        {
+          "status": "PASS",
+          "category": "headless",
+          "name": "Florida foundation seating"
+        }
+      ],
+      "counts": {
+        "headless": {
+          "passed": 78,
+          "failed": 0,
+          "skipped": 0
+        },
+        "gpu": {
+          "passed": 8,
+          "failed": 0,
+          "skipped": 0
+        },
+        "window": {
+          "passed": 4,
+          "failed": 0,
+          "skipped": 0
+        }
+      },
+      "regionalSummary": [
+        "Live facility support PASS: contact=9; transition=4; outside=1; maxContactGap=4.624016582965851E-06; maxPreparedBaseError=0.0009974745016858577",
+        "Live regional CPU/GPU parity PASS: captures=43; checkedVertices=1587; levels=8,9,10,11,12,13,14,15,16,17; pupils=40",
+        "Live regional evidence summarized in stdout; disposable readbacks removed: E:\\NovaCore\\build\\regional-live-tests\\00545446190a43199da200cc3462c99d"
+      ],
+      "topologyMode": "checked-in 18-scale library; no regeneration"
+    }
+  },
+  "comparisons": [
+    {
+      "profile": "ambient",
+      "configuration": "Debug",
+      "kind": "native",
+      "exit": 1,
+      "log": "comparison-ambient-Debug-native.log",
+      "summary": [
+        "FAIL [native-gpu] NovaCoreFacilityVisibilityTests",
+        "FAIL [native-gpu] NovaCoreSurfaceMaterialCoordinatesTests",
+        "Native GPU Debug: pass=0; fail=2; skip=0"
+      ],
+      "layerInsertions": [
+        "[Vulkan Loader] INFO | LAYER:   Insert instance layer \"VK_LAYER_KHRONOS_validation\" (C:\\VulkanSDK\\1.4.357.0\\Bin\\.\\VkLayer_khronos_validation.dll)",
+        "[Vulkan Loader] INFO | LAYER:   Insert instance layer \"VK_LAYER_OBS_HOOK\" (C:\\ProgramData\\obs-studio-hook\\.\\graphics-hook64.dll)",
+        "[Vulkan Loader] INFO | LAYER:   Insert instance layer \"VK_LAYER_AMD_switchable_graphics\" (C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\u0203303.inf_amd64_e5876a26758f154c\\B026363\\.\\amdvlk64.dll)",
+        "[Vulkan Loader] INFO | LAYER:   Inserted device layer \"VK_LAYER_KHRONOS_validation\" (C:\\VulkanSDK\\1.4.357.0\\Bin\\.\\VkLayer_khronos_validation.dll)",
+        "[Vulkan Loader] INFO | LAYER:   Inserted device layer \"VK_LAYER_OBS_HOOK\" (C:\\ProgramData\\obs-studio-hook\\.\\graphics-hook64.dll)"
+      ],
+      "loadedModules": [],
+      "kmtCallbackCount": 0,
+      "errors": [
+        "[Vulkan Loader] ERROR:          loader_get_json: Failed to open JSON file C:\\Program Files (x86)\\Epic Games\\Epic Online Services\\managedArtifacts\\98bc04bc842e4906993fd6d6644ffb8d\\EOSOverlayVkLayer-Win64.json",
+        "[Vulkan Loader] ERROR:          loader_get_json: Failed to open JSON file E:\\Epic Games\\Launcher\\Portal\\Extras\\Overlay\\EOSOverlayVkLayer-Win32.json",
+        "[Vulkan Loader] ERROR:          loader_get_json: Failed to open JSON file E:\\Epic Games\\Launcher\\Portal\\Extras\\Overlay\\EOSOverlayVkLayer-Win64.json",
+        "Presentation test Vulkan [Loader Message]: loader_get_json: Failed to open JSON file C:\\Program Files (x86)\\Epic Games\\Epic Online Services\\managedArtifacts\\98bc04bc842e4906993fd6d6644ffb8d\\EOSOverlayVkLayer-Win64.json",
+        "Presentation test Vulkan [Loader Message]: loader_get_json: Failed to open JSON file E:\\Epic Games\\Launcher\\Portal\\Extras\\Overlay\\EOSOverlayVkLayer-Win32.json",
+        "Presentation test Vulkan [Loader Message]: loader_get_json: Failed to open JSON file E:\\Epic Games\\Launcher\\Portal\\Extras\\Overlay\\EOSOverlayVkLayer-Win64.json"
+      ],
+      "logSha256": "31bd330ade1721dbe0f9117a54616d2c6b5302466294128a321c413218ed009d"
+    },
+    {
+      "profile": "ambient",
+      "configuration": "Debug",
+      "kind": "window",
+      "exit": 1,
+      "log": "comparison-ambient-Debug-window.log",
+      "summary": [
+        "FAIL [window] Production window lifecycle",
+        "Graphics Debug: selected=1; pass=0; fail=1; skip=0; excluded=89"
+      ],
+      "layerInsertions": [
+        "[Vulkan Loader] INFO | LAYER:   Insert instance layer \"VK_LAYER_KHRONOS_validation\" (C:\\VulkanSDK\\1.4.357.0\\Bin\\.\\VkLayer_khronos_validation.dll)",
+        "[Vulkan Loader] INFO | LAYER:   Insert instance layer \"VK_LAYER_OBS_HOOK\" (C:\\ProgramData\\obs-studio-hook\\.\\graphics-hook64.dll)",
+        "[Vulkan Loader] INFO | LAYER:   Insert instance layer \"VK_LAYER_AMD_switchable_graphics\" (C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\u0203303.inf_amd64_e5876a26758f154c\\B026363\\.\\amdvlk64.dll)",
+        "[Vulkan Loader] INFO | LAYER:   Inserted device layer \"VK_LAYER_KHRONOS_validation\" (C:\\VulkanSDK\\1.4.357.0\\Bin\\.\\VkLayer_khronos_validation.dll)",
+        "[Vulkan Loader] INFO | LAYER:   Inserted device layer \"VK_LAYER_OBS_HOOK\" (C:\\ProgramData\\obs-studio-hook\\.\\graphics-hook64.dll)"
+      ],
+      "loadedModules": [
+        "Window loaded module: E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\NovaCore.Native.dll; sha256=1BCBD28C20F70C2A284DCE82CA14E8F279D9D7A2BE998835528A2BCA292724C5; borderless=False; visible=true",
+        "Vulkan module: C:\\WINDOWS\\SYSTEM32\\vulkan-1.dll; sha256=ED08AC7805CDDF02D4D5B8C1431E7DF79D9864650FD72EFAD1A0F073236C9233",
+        "Vulkan module: C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_khronos_validation.dll; sha256=9725CE7A9225F42F8961C433DACAE4CC8FAE3A16E95EF1D0A7C7E8BC09132C40",
+        "Vulkan module: C:\\ProgramData\\obs-studio-hook\\graphics-hook64.dll; sha256=49C0DDEAC72B130D4F8AE90510219949022C1F992ADB48D81A4972F2CD6C2585",
+        "Window loaded module: E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\NovaCore.Native.dll; sha256=1BCBD28C20F70C2A284DCE82CA14E8F279D9D7A2BE998835528A2BCA292724C5; borderless=True; visible=true"
+      ],
+      "kmtCallbackCount": 2,
+      "errors": [
+        "[Vulkan Loader] ERROR:          loader_get_json: Failed to open JSON file C:\\Program Files (x86)\\Epic Games\\Epic Online Services\\managedArtifacts\\98bc04bc842e4906993fd6d6644ffb8d\\EOSOverlayVkLayer-Win64.json",
+        "[Vulkan Loader] ERROR:          loader_get_json: Failed to open JSON file E:\\Epic Games\\Launcher\\Portal\\Extras\\Overlay\\EOSOverlayVkLayer-Win32.json",
+        "[Vulkan Loader] ERROR:          loader_get_json: Failed to open JSON file E:\\Epic Games\\Launcher\\Portal\\Extras\\Overlay\\EOSOverlayVkLayer-Win64.json",
+        "[native] Vulkan validation [error][VUID-VkMemoryAllocateInfo-memoryTypeIndex-00645]: vkAllocateMemory(): pAllocateInfo->memoryTypeIndex is 0 but VkMemoryWin32HandlePropertiesKHR::memoryTypeBits is 0x0 with handleType VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT.",
+        "System.InvalidOperationException: Vulkan validation failure: [native] Vulkan validation [error][VUID-VkMemoryAllocateInfo-memoryTypeIndex-00645]: vkAllocateMemory(): pAllocateInfo->memoryTypeIndex is 0 but VkMemoryWin32HandlePropertiesKHR::memoryTypeBits is 0x0 with handleType VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT.",
+        "System.AggregateException: Production window lifecycle failures (Vulkan validation failure: [native] Vulkan validation [error][VUID-VkMemoryAllocateInfo-memoryTypeIndex-00645]: vkAllocateMemory(): pAllocateInfo->memoryTypeIndex is 0 but VkMemoryWin32HandlePropertiesKHR::memoryTypeBits is 0x0 with handleType VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT.)",
+        " ---> System.InvalidOperationException: Vulkan validation failure: [native] Vulkan validation [error][VUID-VkMemoryAllocateInfo-memoryTypeIndex-00645]: vkAllocateMemory(): pAllocateInfo->memoryTypeIndex is 0 but VkMemoryWin32HandlePropertiesKHR::memoryTypeBits is 0x0 with handleType VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT."
+      ],
+      "logSha256": "23a75cbcf95b58beba0e32c250b96e2de093ed6371a3cf11295e03797940aaae"
+    },
+    {
+      "profile": "ambient",
+      "configuration": "Release",
+      "kind": "native",
+      "exit": 1,
+      "log": "comparison-ambient-Release-native.log",
+      "summary": [
+        "FAIL [native-gpu] NovaCoreFacilityVisibilityTests",
+        "FAIL [native-gpu] NovaCoreSurfaceMaterialCoordinatesTests",
+        "Native GPU Release: pass=0; fail=2; skip=0"
+      ],
+      "layerInsertions": [
+        "[Vulkan Loader] INFO | LAYER:   Insert instance layer \"VK_LAYER_KHRONOS_validation\" (C:\\VulkanSDK\\1.4.357.0\\Bin\\.\\VkLayer_khronos_validation.dll)",
+        "[Vulkan Loader] INFO | LAYER:   Insert instance layer \"VK_LAYER_OBS_HOOK\" (C:\\ProgramData\\obs-studio-hook\\.\\graphics-hook64.dll)",
+        "[Vulkan Loader] INFO | LAYER:   Insert instance layer \"VK_LAYER_AMD_switchable_graphics\" (C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\u0203303.inf_amd64_e5876a26758f154c\\B026363\\.\\amdvlk64.dll)",
+        "[Vulkan Loader] INFO | LAYER:   Inserted device layer \"VK_LAYER_KHRONOS_validation\" (C:\\VulkanSDK\\1.4.357.0\\Bin\\.\\VkLayer_khronos_validation.dll)",
+        "[Vulkan Loader] INFO | LAYER:   Inserted device layer \"VK_LAYER_OBS_HOOK\" (C:\\ProgramData\\obs-studio-hook\\.\\graphics-hook64.dll)"
+      ],
+      "loadedModules": [],
+      "kmtCallbackCount": 0,
+      "errors": [
+        "[Vulkan Loader] ERROR:          loader_get_json: Failed to open JSON file C:\\Program Files (x86)\\Epic Games\\Epic Online Services\\managedArtifacts\\98bc04bc842e4906993fd6d6644ffb8d\\EOSOverlayVkLayer-Win64.json",
+        "[Vulkan Loader] ERROR:          loader_get_json: Failed to open JSON file E:\\Epic Games\\Launcher\\Portal\\Extras\\Overlay\\EOSOverlayVkLayer-Win32.json",
+        "[Vulkan Loader] ERROR:          loader_get_json: Failed to open JSON file E:\\Epic Games\\Launcher\\Portal\\Extras\\Overlay\\EOSOverlayVkLayer-Win64.json",
+        "Presentation test Vulkan [Loader Message]: loader_get_json: Failed to open JSON file C:\\Program Files (x86)\\Epic Games\\Epic Online Services\\managedArtifacts\\98bc04bc842e4906993fd6d6644ffb8d\\EOSOverlayVkLayer-Win64.json",
+        "Presentation test Vulkan [Loader Message]: loader_get_json: Failed to open JSON file E:\\Epic Games\\Launcher\\Portal\\Extras\\Overlay\\EOSOverlayVkLayer-Win32.json",
+        "Presentation test Vulkan [Loader Message]: loader_get_json: Failed to open JSON file E:\\Epic Games\\Launcher\\Portal\\Extras\\Overlay\\EOSOverlayVkLayer-Win64.json"
+      ],
+      "logSha256": "d9c3780cf86b89c94a5dbf71a6f77a0dbd30bc3697434236b9a5d22e8dfa275c"
+    },
+    {
+      "profile": "obs-disabled",
+      "configuration": "Debug",
+      "kind": "native",
+      "exit": 1,
+      "log": "comparison-obs-disabled-Debug-native.log",
+      "summary": [
+        "FAIL [native-gpu] NovaCoreFacilityVisibilityTests",
+        "FAIL [native-gpu] NovaCoreSurfaceMaterialCoordinatesTests",
+        "Native GPU Debug: pass=0; fail=2; skip=0"
+      ],
+      "layerInsertions": [
+        "[Vulkan Loader] INFO | LAYER:   Insert instance layer \"VK_LAYER_KHRONOS_validation\" (C:\\VulkanSDK\\1.4.357.0\\Bin\\.\\VkLayer_khronos_validation.dll)",
+        "[Vulkan Loader] INFO | LAYER:   Insert instance layer \"VK_LAYER_AMD_switchable_graphics\" (C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\u0203303.inf_amd64_e5876a26758f154c\\B026363\\.\\amdvlk64.dll)",
+        "[Vulkan Loader] INFO | LAYER:   Inserted device layer \"VK_LAYER_KHRONOS_validation\" (C:\\VulkanSDK\\1.4.357.0\\Bin\\.\\VkLayer_khronos_validation.dll)"
+      ],
+      "loadedModules": [],
+      "kmtCallbackCount": 0,
+      "errors": [
+        "[Vulkan Loader] ERROR:          loader_get_json: Failed to open JSON file C:\\Program Files (x86)\\Epic Games\\Epic Online Services\\managedArtifacts\\98bc04bc842e4906993fd6d6644ffb8d\\EOSOverlayVkLayer-Win64.json",
+        "[Vulkan Loader] ERROR:          loader_get_json: Failed to open JSON file E:\\Epic Games\\Launcher\\Portal\\Extras\\Overlay\\EOSOverlayVkLayer-Win32.json",
+        "[Vulkan Loader] ERROR:          loader_get_json: Failed to open JSON file E:\\Epic Games\\Launcher\\Portal\\Extras\\Overlay\\EOSOverlayVkLayer-Win64.json",
+        "Presentation test Vulkan [Loader Message]: loader_get_json: Failed to open JSON file C:\\Program Files (x86)\\Epic Games\\Epic Online Services\\managedArtifacts\\98bc04bc842e4906993fd6d6644ffb8d\\EOSOverlayVkLayer-Win64.json",
+        "Presentation test Vulkan [Loader Message]: loader_get_json: Failed to open JSON file E:\\Epic Games\\Launcher\\Portal\\Extras\\Overlay\\EOSOverlayVkLayer-Win32.json",
+        "Presentation test Vulkan [Loader Message]: loader_get_json: Failed to open JSON file E:\\Epic Games\\Launcher\\Portal\\Extras\\Overlay\\EOSOverlayVkLayer-Win64.json"
+      ],
+      "logSha256": "80c3eb5adcce2cf7434272afff1b5f55bca247a6a5cb4d8198676085bd00ae48"
+    },
+    {
+      "profile": "obs-disabled",
+      "configuration": "Debug",
+      "kind": "window",
+      "exit": 0,
+      "log": "comparison-obs-disabled-Debug-window.log",
+      "summary": [
+        "PASS [window] Production window lifecycle",
+        "Graphics Debug: selected=1; pass=1; fail=0; skip=0; excluded=89"
+      ],
+      "layerInsertions": [
+        "[Vulkan Loader] INFO | LAYER:   Insert instance layer \"VK_LAYER_KHRONOS_validation\" (C:\\VulkanSDK\\1.4.357.0\\Bin\\.\\VkLayer_khronos_validation.dll)",
+        "[Vulkan Loader] INFO | LAYER:   Insert instance layer \"VK_LAYER_AMD_switchable_graphics\" (C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\u0203303.inf_amd64_e5876a26758f154c\\B026363\\.\\amdvlk64.dll)",
+        "[Vulkan Loader] INFO | LAYER:   Inserted device layer \"VK_LAYER_KHRONOS_validation\" (C:\\VulkanSDK\\1.4.357.0\\Bin\\.\\VkLayer_khronos_validation.dll)"
+      ],
+      "loadedModules": [
+        "Window loaded module: E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\NovaCore.Native.dll; sha256=1BCBD28C20F70C2A284DCE82CA14E8F279D9D7A2BE998835528A2BCA292724C5; borderless=False; visible=true",
+        "Vulkan module: C:\\WINDOWS\\SYSTEM32\\vulkan-1.dll; sha256=ED08AC7805CDDF02D4D5B8C1431E7DF79D9864650FD72EFAD1A0F073236C9233",
+        "Vulkan module: C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_khronos_validation.dll; sha256=9725CE7A9225F42F8961C433DACAE4CC8FAE3A16E95EF1D0A7C7E8BC09132C40",
+        "Window loaded module: E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\NovaCore.Native.dll; sha256=1BCBD28C20F70C2A284DCE82CA14E8F279D9D7A2BE998835528A2BCA292724C5; borderless=True; visible=true"
+      ],
+      "kmtCallbackCount": 0,
+      "errors": [
+        "[Vulkan Loader] ERROR:          loader_get_json: Failed to open JSON file C:\\Program Files (x86)\\Epic Games\\Epic Online Services\\managedArtifacts\\98bc04bc842e4906993fd6d6644ffb8d\\EOSOverlayVkLayer-Win64.json",
+        "[Vulkan Loader] ERROR:          loader_get_json: Failed to open JSON file E:\\Epic Games\\Launcher\\Portal\\Extras\\Overlay\\EOSOverlayVkLayer-Win32.json",
+        "[Vulkan Loader] ERROR:          loader_get_json: Failed to open JSON file E:\\Epic Games\\Launcher\\Portal\\Extras\\Overlay\\EOSOverlayVkLayer-Win64.json"
+      ],
+      "logSha256": "883158ecd486347b5b5bfb6d1a2c1580b7158e1b01338c4bc46e34f762453f8d"
+    },
+    {
+      "profile": "obs-disabled",
+      "configuration": "Release",
+      "kind": "native",
+      "exit": 1,
+      "log": "comparison-obs-disabled-Release-native.log",
+      "summary": [
+        "FAIL [native-gpu] NovaCoreFacilityVisibilityTests",
+        "FAIL [native-gpu] NovaCoreSurfaceMaterialCoordinatesTests",
+        "Native GPU Release: pass=0; fail=2; skip=0"
+      ],
+      "layerInsertions": [
+        "[Vulkan Loader] INFO | LAYER:   Insert instance layer \"VK_LAYER_KHRONOS_validation\" (C:\\VulkanSDK\\1.4.357.0\\Bin\\.\\VkLayer_khronos_validation.dll)",
+        "[Vulkan Loader] INFO | LAYER:   Insert instance layer \"VK_LAYER_AMD_switchable_graphics\" (C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\u0203303.inf_amd64_e5876a26758f154c\\B026363\\.\\amdvlk64.dll)",
+        "[Vulkan Loader] INFO | LAYER:   Inserted device layer \"VK_LAYER_KHRONOS_validation\" (C:\\VulkanSDK\\1.4.357.0\\Bin\\.\\VkLayer_khronos_validation.dll)"
+      ],
+      "loadedModules": [],
+      "kmtCallbackCount": 0,
+      "errors": [
+        "[Vulkan Loader] ERROR:          loader_get_json: Failed to open JSON file C:\\Program Files (x86)\\Epic Games\\Epic Online Services\\managedArtifacts\\98bc04bc842e4906993fd6d6644ffb8d\\EOSOverlayVkLayer-Win64.json",
+        "[Vulkan Loader] ERROR:          loader_get_json: Failed to open JSON file E:\\Epic Games\\Launcher\\Portal\\Extras\\Overlay\\EOSOverlayVkLayer-Win32.json",
+        "[Vulkan Loader] ERROR:          loader_get_json: Failed to open JSON file E:\\Epic Games\\Launcher\\Portal\\Extras\\Overlay\\EOSOverlayVkLayer-Win64.json",
+        "Presentation test Vulkan [Loader Message]: loader_get_json: Failed to open JSON file C:\\Program Files (x86)\\Epic Games\\Epic Online Services\\managedArtifacts\\98bc04bc842e4906993fd6d6644ffb8d\\EOSOverlayVkLayer-Win64.json",
+        "Presentation test Vulkan [Loader Message]: loader_get_json: Failed to open JSON file E:\\Epic Games\\Launcher\\Portal\\Extras\\Overlay\\EOSOverlayVkLayer-Win32.json",
+        "Presentation test Vulkan [Loader Message]: loader_get_json: Failed to open JSON file E:\\Epic Games\\Launcher\\Portal\\Extras\\Overlay\\EOSOverlayVkLayer-Win64.json"
+      ],
+      "logSha256": "deff101191be48045122d75f5d0d97977e221dc455226415b5d4c3534944522f"
+    },
+    {
+      "profile": "epic-clean",
+      "configuration": "Debug",
+      "kind": "native",
+      "exit": 0,
+      "log": "comparison-epic-clean-Debug-native.log",
+      "summary": [
+        "PASS [native-gpu] NovaCoreFacilityVisibilityTests",
+        "PASS [native-gpu] NovaCoreSurfaceMaterialCoordinatesTests",
+        "Native GPU Debug: pass=2; fail=0; skip=0"
+      ],
+      "layerInsertions": [
+        "[Vulkan Loader] INFO | LAYER:   Insert instance layer \"VK_LAYER_KHRONOS_validation\" (C:\\VulkanSDK\\1.4.357.0\\Bin\\.\\VkLayer_khronos_validation.dll)",
+        "[Vulkan Loader] INFO | LAYER:   Insert instance layer \"VK_LAYER_AMD_switchable_graphics\" (C:\\Windows\\System32\\DriverStore\\FileRepository\\u0203303.inf_amd64_e5876a26758f154c\\B026363\\amdvlk64.dll)",
+        "[Vulkan Loader] INFO | LAYER:   Insert instance layer \"VK_LAYER_OBS_HOOK\" (C:\\ProgramData\\obs-studio-hook\\graphics-hook64.dll)",
+        "[Vulkan Loader] INFO | LAYER:   Inserted device layer \"VK_LAYER_KHRONOS_validation\" (C:\\VulkanSDK\\1.4.357.0\\Bin\\.\\VkLayer_khronos_validation.dll)",
+        "[Vulkan Loader] INFO | LAYER:   Inserted device layer \"VK_LAYER_OBS_HOOK\" (C:\\ProgramData\\obs-studio-hook\\graphics-hook64.dll)"
+      ],
+      "loadedModules": [],
+      "kmtCallbackCount": 0,
+      "errors": [],
+      "logSha256": "07e81a6b9a168674d9f579bf814e2c88be334b03d4fc7f0c00a79f4ff952406e"
+    },
+    {
+      "profile": "epic-clean",
+      "configuration": "Debug",
+      "kind": "window",
+      "exit": 0,
+      "log": "comparison-epic-clean-Debug-window.log",
+      "summary": [
+        "PASS [window] Production window lifecycle",
+        "Graphics Debug: selected=1; pass=1; fail=0; skip=0; excluded=89"
+      ],
+      "layerInsertions": [
+        "[Vulkan Loader] INFO | LAYER:   Insert instance layer \"VK_LAYER_KHRONOS_validation\" (C:\\VulkanSDK\\1.4.357.0\\Bin\\.\\VkLayer_khronos_validation.dll)",
+        "[Vulkan Loader] INFO | LAYER:   Insert instance layer \"VK_LAYER_AMD_switchable_graphics\" (C:\\Windows\\System32\\DriverStore\\FileRepository\\u0203303.inf_amd64_e5876a26758f154c\\B026363\\amdvlk64.dll)",
+        "[Vulkan Loader] INFO | LAYER:   Insert instance layer \"VK_LAYER_OBS_HOOK\" (C:\\ProgramData\\obs-studio-hook\\graphics-hook64.dll)",
+        "[Vulkan Loader] INFO | LAYER:   Inserted device layer \"VK_LAYER_KHRONOS_validation\" (C:\\VulkanSDK\\1.4.357.0\\Bin\\.\\VkLayer_khronos_validation.dll)",
+        "[Vulkan Loader] INFO | LAYER:   Inserted device layer \"VK_LAYER_OBS_HOOK\" (C:\\ProgramData\\obs-studio-hook\\graphics-hook64.dll)"
+      ],
+      "loadedModules": [
+        "Window loaded module: E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\NovaCore.Native.dll; sha256=1BCBD28C20F70C2A284DCE82CA14E8F279D9D7A2BE998835528A2BCA292724C5; borderless=False; visible=true",
+        "Vulkan module: C:\\WINDOWS\\SYSTEM32\\vulkan-1.dll; sha256=ED08AC7805CDDF02D4D5B8C1431E7DF79D9864650FD72EFAD1A0F073236C9233",
+        "Vulkan module: C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_khronos_validation.dll; sha256=9725CE7A9225F42F8961C433DACAE4CC8FAE3A16E95EF1D0A7C7E8BC09132C40",
+        "Vulkan module: C:\\ProgramData\\obs-studio-hook\\graphics-hook64.dll; sha256=49C0DDEAC72B130D4F8AE90510219949022C1F992ADB48D81A4972F2CD6C2585",
+        "Window loaded module: E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\NovaCore.Native.dll; sha256=1BCBD28C20F70C2A284DCE82CA14E8F279D9D7A2BE998835528A2BCA292724C5; borderless=True; visible=true"
+      ],
+      "kmtCallbackCount": 0,
+      "errors": [],
+      "logSha256": "387e5e4d2c2b9b687d67439997317a7ac2fd435ecc08c6dd2c504328ebf36af7"
+    },
+    {
+      "profile": "epic-clean",
+      "configuration": "Release",
+      "kind": "native",
+      "exit": 0,
+      "log": "comparison-epic-clean-Release-native.log",
+      "summary": [
+        "PASS [native-gpu] NovaCoreFacilityVisibilityTests",
+        "PASS [native-gpu] NovaCoreSurfaceMaterialCoordinatesTests",
+        "Native GPU Release: pass=2; fail=0; skip=0"
+      ],
+      "layerInsertions": [
+        "[Vulkan Loader] INFO | LAYER:   Insert instance layer \"VK_LAYER_KHRONOS_validation\" (C:\\VulkanSDK\\1.4.357.0\\Bin\\.\\VkLayer_khronos_validation.dll)",
+        "[Vulkan Loader] INFO | LAYER:   Insert instance layer \"VK_LAYER_AMD_switchable_graphics\" (C:\\Windows\\System32\\DriverStore\\FileRepository\\u0203303.inf_amd64_e5876a26758f154c\\B026363\\amdvlk64.dll)",
+        "[Vulkan Loader] INFO | LAYER:   Insert instance layer \"VK_LAYER_OBS_HOOK\" (C:\\ProgramData\\obs-studio-hook\\graphics-hook64.dll)",
+        "[Vulkan Loader] INFO | LAYER:   Inserted device layer \"VK_LAYER_KHRONOS_validation\" (C:\\VulkanSDK\\1.4.357.0\\Bin\\.\\VkLayer_khronos_validation.dll)",
+        "[Vulkan Loader] INFO | LAYER:   Inserted device layer \"VK_LAYER_OBS_HOOK\" (C:\\ProgramData\\obs-studio-hook\\graphics-hook64.dll)"
+      ],
+      "loadedModules": [],
+      "kmtCallbackCount": 0,
+      "errors": [],
+      "logSha256": "e9f80a7f67de7a1de997608d40420c3e1fbcdc8f40985e5f45ae3a454022497e"
+    },
+    {
+      "profile": "canonical",
+      "configuration": "Debug",
+      "kind": "native",
+      "exit": 0,
+      "log": "comparison-canonical-Debug-native.log",
+      "summary": [
+        "PASS [native-gpu] NovaCoreFacilityVisibilityTests",
+        "PASS [native-gpu] NovaCoreSurfaceMaterialCoordinatesTests",
+        "Native GPU Debug: pass=2; fail=0; skip=0"
+      ],
+      "layerInsertions": [
+        "[Vulkan Loader] INFO | LAYER:   Insert instance layer \"VK_LAYER_KHRONOS_validation\" (C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_khronos_validation.dll)",
+        "[Vulkan Loader] INFO | LAYER:   Inserted device layer \"VK_LAYER_KHRONOS_validation\" (C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_khronos_validation.dll)"
+      ],
+      "loadedModules": [],
+      "kmtCallbackCount": 0,
+      "errors": [],
+      "logSha256": "211be3f23150c54360d4527d4ed105efa1bbc8a3f4af9f932c739454891fbd42"
+    },
+    {
+      "profile": "canonical",
+      "configuration": "Debug",
+      "kind": "window",
+      "exit": 0,
+      "log": "comparison-canonical-Debug-window.log",
+      "summary": [
+        "PASS [window] Production window lifecycle",
+        "Graphics Debug: selected=1; pass=1; fail=0; skip=0; excluded=89"
+      ],
+      "layerInsertions": [
+        "[Vulkan Loader] INFO | LAYER:   Insert instance layer \"VK_LAYER_KHRONOS_validation\" (C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_khronos_validation.dll)",
+        "[Vulkan Loader] INFO | LAYER:   Inserted device layer \"VK_LAYER_KHRONOS_validation\" (C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_khronos_validation.dll)"
+      ],
+      "loadedModules": [
+        "Window loaded module: E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\NovaCore.Native.dll; sha256=1BCBD28C20F70C2A284DCE82CA14E8F279D9D7A2BE998835528A2BCA292724C5; borderless=False; visible=true",
+        "Vulkan module: C:\\WINDOWS\\SYSTEM32\\vulkan-1.dll; sha256=ED08AC7805CDDF02D4D5B8C1431E7DF79D9864650FD72EFAD1A0F073236C9233",
+        "Vulkan module: C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_khronos_validation.dll; sha256=9725CE7A9225F42F8961C433DACAE4CC8FAE3A16E95EF1D0A7C7E8BC09132C40",
+        "Window loaded module: E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\NovaCore.Native.dll; sha256=1BCBD28C20F70C2A284DCE82CA14E8F279D9D7A2BE998835528A2BCA292724C5; borderless=True; visible=true"
+      ],
+      "kmtCallbackCount": 0,
+      "errors": [],
+      "logSha256": "a10a1e13661f923cf48c065ecad2fca98b2710dde42a21ec52d3b7adc3f28bc2"
+    },
+    {
+      "profile": "canonical",
+      "configuration": "Release",
+      "kind": "native",
+      "exit": 0,
+      "log": "comparison-canonical-Release-native.log",
+      "summary": [
+        "PASS [native-gpu] NovaCoreFacilityVisibilityTests",
+        "PASS [native-gpu] NovaCoreSurfaceMaterialCoordinatesTests",
+        "Native GPU Release: pass=2; fail=0; skip=0"
+      ],
+      "layerInsertions": [
+        "[Vulkan Loader] INFO | LAYER:   Insert instance layer \"VK_LAYER_KHRONOS_validation\" (C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_khronos_validation.dll)",
+        "[Vulkan Loader] INFO | LAYER:   Inserted device layer \"VK_LAYER_KHRONOS_validation\" (C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_khronos_validation.dll)"
+      ],
+      "loadedModules": [],
+      "kmtCallbackCount": 0,
+      "errors": [],
+      "logSha256": "3d569f8b227575a8a531309310c3a5f59fdd6e79565ae1facc85ea5f07a808aa"
+    },
+    {
+      "profile": "canonical",
+      "configuration": "Release",
+      "kind": "window",
+      "exit": 0,
+      "log": "comparison-canonical-Release-window.log",
+      "summary": [
+        "PASS [window] Production window lifecycle",
+        "Graphics Release: selected=1; pass=1; fail=0; skip=0; excluded=89"
+      ],
+      "layerInsertions": [
+        "[Vulkan Loader] INFO | LAYER:   Insert instance layer \"VK_LAYER_KHRONOS_validation\" (C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_khronos_validation.dll)",
+        "[Vulkan Loader] INFO | LAYER:   Inserted device layer \"VK_LAYER_KHRONOS_validation\" (C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_khronos_validation.dll)"
+      ],
+      "loadedModules": [
+        "Window loaded module: E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Native.dll; sha256=3A9F6FBED66169DC4200CA86BB6B501233B900A77082B3D0B72151B043606CD5; borderless=False; visible=true",
+        "Vulkan module: C:\\WINDOWS\\SYSTEM32\\vulkan-1.dll; sha256=ED08AC7805CDDF02D4D5B8C1431E7DF79D9864650FD72EFAD1A0F073236C9233",
+        "Vulkan module: C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_khronos_validation.dll; sha256=9725CE7A9225F42F8961C433DACAE4CC8FAE3A16E95EF1D0A7C7E8BC09132C40",
+        "Window loaded module: E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Native.dll; sha256=3A9F6FBED66169DC4200CA86BB6B501233B900A77082B3D0B72151B043606CD5; borderless=True; visible=true"
+      ],
+      "kmtCallbackCount": 0,
+      "errors": [],
+      "logSha256": "778c31748588d14a25324dd2dcabf73f3a815c06242fe0f1e9953acc60daf6a2"
+    }
+  ],
+  "layerInventory": [
+    {
+      "Registry": "HKLM:\\SOFTWARE\\Khronos\\Vulkan\\ImplicitLayers",
+      "Manifest": "C:\\ProgramData\\obs-studio-hook\\obs-vulkan64.json",
+      "Value": 0,
+      "Exists": true,
+      "name": "VK_LAYER_OBS_HOOK",
+      "manifestSha256": "7b6b0813fb58b276847a8583eb5c3f94aee7d7ad0ae3a1ef6133d5d8771f20f4",
+      "binary": "C:\\ProgramData\\obs-studio-hook\\graphics-hook64.dll",
+      "binaryExists": true,
+      "enableEnvironment": null,
+      "disableEnvironment": {
+        "DISABLE_VULKAN_OBS_CAPTURE": "1"
+      },
+      "conditionEnvironment": {
+        "DISABLE_VULKAN_OBS_CAPTURE": null
+      },
+      "binarySha256": "49c0ddeac72b130d4f8ae90510219949022c1f992adb48d81a4972f2cd6c2585"
+    },
+    {
+      "Registry": "HKLM:\\SOFTWARE\\Khronos\\Vulkan\\ImplicitLayers",
+      "Manifest": "C:\\Program Files (x86)\\Epic Games\\Epic Online Services\\managedArtifacts\\98bc04bc842e4906993fd6d6644ffb8d\\EOSOverlayVkLayer-Win64.json",
+      "Value": 0,
+      "Exists": false
+    },
+    {
+      "Registry": "HKLM:\\SOFTWARE\\Khronos\\Vulkan\\ImplicitLayers",
+      "Manifest": "C:\\Program Files (x86)\\Steam\\SteamOverlayVulkanLayer64.json",
+      "Value": 0,
+      "Exists": true,
+      "name": "VK_LAYER_VALVE_steam_overlay",
+      "manifestSha256": "7464f21e03bf934615672c6458cfdc52805471802c98771e8072db43fa4f7859",
+      "binary": "C:\\Program Files (x86)\\Steam\\SteamOverlayVulkanLayer64.dll",
+      "binaryExists": true,
+      "enableEnvironment": {
+        "ENABLE_VK_LAYER_VALVE_steam_overlay_1": "1"
+      },
+      "disableEnvironment": {
+        "DISABLE_VK_LAYER_VALVE_steam_overlay_1": "1"
+      },
+      "conditionEnvironment": {
+        "ENABLE_VK_LAYER_VALVE_steam_overlay_1": null,
+        "DISABLE_VK_LAYER_VALVE_steam_overlay_1": null
+      },
+      "binarySha256": "7183627c025fdcfb0392f9042d1468eb7d2948d33dc2201bc31385fb577dee32"
+    },
+    {
+      "Registry": "HKLM:\\SOFTWARE\\Khronos\\Vulkan\\ImplicitLayers",
+      "Manifest": "C:\\Program Files (x86)\\Steam\\SteamFossilizeVulkanLayer64.json",
+      "Value": 0,
+      "Exists": true,
+      "name": "VK_LAYER_VALVE_steam_fossilize",
+      "manifestSha256": "a63936d56d8c0323ad43c1c124f0094f67e6f988853cfbf8a8f34802b5a6cfab",
+      "binary": "C:\\Program Files (x86)\\Steam\\VkLayer_steam_fossilize64.dll",
+      "binaryExists": true,
+      "enableEnvironment": {
+        "ENABLE_VK_LAYER_VALVE_steam_fossilize_1": "1"
+      },
+      "disableEnvironment": {
+        "DISABLE_VK_LAYER_VALVE_steam_fossilize_1": "1"
+      },
+      "conditionEnvironment": {
+        "ENABLE_VK_LAYER_VALVE_steam_fossilize_1": null,
+        "DISABLE_VK_LAYER_VALVE_steam_fossilize_1": null
+      },
+      "binarySha256": "cfac483e8933d423541641ad8f73bf8ccde9cc21ed91796ca29b48368c79bb01"
+    },
+    {
+      "Registry": "HKLM:\\SOFTWARE\\Khronos\\Vulkan\\ExplicitLayers",
+      "Manifest": "C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_api_dump.json",
+      "Value": 0,
+      "Exists": true,
+      "name": "VK_LAYER_LUNARG_api_dump",
+      "manifestSha256": "b42764d7d94e837b0e1345fa6175937f69f02fe5b3e7e33d5947e7a49d4f8ead",
+      "binary": "C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_api_dump.dll",
+      "binaryExists": true,
+      "enableEnvironment": null,
+      "disableEnvironment": null,
+      "conditionEnvironment": {},
+      "binarySha256": "3f8e7655d171daf0829a064bc2107267821a69f04f5baa63acf9e0df74f432c7"
+    },
+    {
+      "Registry": "HKLM:\\SOFTWARE\\Khronos\\Vulkan\\ExplicitLayers",
+      "Manifest": "C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_gfxreconstruct.json",
+      "Value": 0,
+      "Exists": true,
+      "name": "VK_LAYER_LUNARG_gfxreconstruct",
+      "manifestSha256": "a3848e0042e9a699008858e6de9c643b48a8d287751f25a8320a67d3b0af5353",
+      "binary": "C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_gfxreconstruct.dll",
+      "binaryExists": true,
+      "enableEnvironment": null,
+      "disableEnvironment": {
+        "GFXRECON_DISABLE": ""
+      },
+      "conditionEnvironment": {
+        "GFXRECON_DISABLE": null
+      },
+      "binarySha256": "9e9fcdaeb42b74375d16d052d900b1b616e326a9a608c48a360c4a07e64bfe1e"
+    },
+    {
+      "Registry": "HKLM:\\SOFTWARE\\Khronos\\Vulkan\\ExplicitLayers",
+      "Manifest": "C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_khronos_synchronization2.json",
+      "Value": 0,
+      "Exists": true,
+      "name": "VK_LAYER_KHRONOS_synchronization2",
+      "manifestSha256": "aeb25a7631751d91bfa05b27ecbd40ad5d89ffbe6f141668682f5486dab34864",
+      "binary": "C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_khronos_synchronization2.dll",
+      "binaryExists": true,
+      "enableEnvironment": null,
+      "disableEnvironment": null,
+      "conditionEnvironment": {},
+      "binarySha256": "c312726181bc32cf35112f4e0476d3b939103b596ccd8fbddce03fcba2b6a823"
+    },
+    {
+      "Registry": "HKLM:\\SOFTWARE\\Khronos\\Vulkan\\ExplicitLayers",
+      "Manifest": "C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_khronos_validation.json",
+      "Value": 0,
+      "Exists": true,
+      "name": "VK_LAYER_KHRONOS_validation",
+      "manifestSha256": "20d3ef44fe96aa41fceefab2308892f9d4b346d23eebfe8b5e1690715f23f472",
+      "binary": "C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_khronos_validation.dll",
+      "binaryExists": true,
+      "enableEnvironment": null,
+      "disableEnvironment": null,
+      "conditionEnvironment": {},
+      "binarySha256": "9725ce7a9225f42f8961c433dacae4cc8fae3a16e95ef1d0a7c7e8bc09132c40"
+    },
+    {
+      "Registry": "HKLM:\\SOFTWARE\\Khronos\\Vulkan\\ExplicitLayers",
+      "Manifest": "C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_monitor.json",
+      "Value": 0,
+      "Exists": true,
+      "name": "VK_LAYER_LUNARG_monitor",
+      "manifestSha256": "13cf12145c2cfb3cedd61fae4bdb8e8b392278d077dc214278eb08cac71be065",
+      "binary": "C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_monitor.dll",
+      "binaryExists": true,
+      "enableEnvironment": null,
+      "disableEnvironment": null,
+      "conditionEnvironment": {},
+      "binarySha256": "bcc75463568c9b0efefec7a1eb04c29d8d1f36be5f4f0d36fe264c2ec27f95ad"
+    },
+    {
+      "Registry": "HKLM:\\SOFTWARE\\Khronos\\Vulkan\\ExplicitLayers",
+      "Manifest": "C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_screenshot.json",
+      "Value": 0,
+      "Exists": true,
+      "name": "VK_LAYER_LUNARG_screenshot",
+      "manifestSha256": "110b45aa945e7b2e084a19c730973751761d1acd99ca41359e3e48d1e9b62da8",
+      "binary": "C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_screenshot.dll",
+      "binaryExists": true,
+      "enableEnvironment": null,
+      "disableEnvironment": null,
+      "conditionEnvironment": {},
+      "binarySha256": "fc8b988efe7398ab57b411da5b15e213f3109cc94e2b3ff0e9079260a620487c"
+    },
+    {
+      "Registry": "HKLM:\\SOFTWARE\\Khronos\\Vulkan\\ExplicitLayers",
+      "Manifest": "C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_khronos_profiles.json",
+      "Value": 0,
+      "Exists": true,
+      "name": "VK_LAYER_KHRONOS_profiles",
+      "manifestSha256": "9b8320d1b29fe17c84053fc479f38b6b2a5455dfa63d5f1eba4bdf531bd32ab1",
+      "binary": "C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_khronos_profiles.dll",
+      "binaryExists": true,
+      "enableEnvironment": null,
+      "disableEnvironment": null,
+      "conditionEnvironment": {},
+      "binarySha256": "45a441cc988675a85136fdf7e959e95e9120369534add86e17f8a1f788b14e54"
+    },
+    {
+      "Registry": "HKLM:\\SOFTWARE\\Khronos\\Vulkan\\ExplicitLayers",
+      "Manifest": "C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_khronos_shader_object.json",
+      "Value": 0,
+      "Exists": true,
+      "name": "VK_LAYER_KHRONOS_shader_object",
+      "manifestSha256": "dbc871f374e0305fdb9bc1e3ae58d56bb52e5a034899d10dceb36517c6c4be0d",
+      "binary": "C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_khronos_shader_object.dll",
+      "binaryExists": true,
+      "enableEnvironment": null,
+      "disableEnvironment": null,
+      "conditionEnvironment": {},
+      "binarySha256": "f1f62690426d521134287ed7566ea88171134be0f878322c5493dbbf26e421f7"
+    },
+    {
+      "Registry": "HKLM:\\SOFTWARE\\Khronos\\Vulkan\\ExplicitLayers",
+      "Manifest": "C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_crash_diagnostic.json",
+      "Value": 0,
+      "Exists": true,
+      "name": "VK_LAYER_LUNARG_crash_diagnostic",
+      "manifestSha256": "1437abbe261a15e65411606327504665d0127aedac7eed9db280c0582ca68860",
+      "binary": "C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_crash_diagnostic.dll",
+      "binaryExists": true,
+      "enableEnvironment": {
+        "VK_CRASH_DIAGNOSTIC_ENABLE": "1"
+      },
+      "disableEnvironment": {
+        "VK_CRASH_DIAGNOSTIC_DISABLE": "1"
+      },
+      "conditionEnvironment": {
+        "VK_CRASH_DIAGNOSTIC_ENABLE": null,
+        "VK_CRASH_DIAGNOSTIC_DISABLE": null
+      },
+      "binarySha256": "ca058a8c18584267b897515b967cd59bfcfaa2db2ca01266ab7e266e71193685"
+    },
+    {
+      "Registry": "HKLM:\\SOFTWARE\\WOW6432Node\\Khronos\\Vulkan\\ImplicitLayers",
+      "Manifest": "C:\\ProgramData\\obs-studio-hook\\obs-vulkan32.json",
+      "Value": 0,
+      "Exists": true,
+      "name": "VK_LAYER_OBS_HOOK",
+      "manifestSha256": "c16e0707ae66ad71e8a0720aeb6e6997a1017f19762333452aef692115a9ab41",
+      "binary": "C:\\ProgramData\\obs-studio-hook\\graphics-hook32.dll",
+      "binaryExists": true,
+      "enableEnvironment": null,
+      "disableEnvironment": {
+        "DISABLE_VULKAN_OBS_CAPTURE": "1"
+      },
+      "conditionEnvironment": {
+        "DISABLE_VULKAN_OBS_CAPTURE": null
+      },
+      "binarySha256": "566b095dd1de495a3f0233cb08d75ab3e7d7b184c80e2fc23f23f22ca8558632"
+    },
+    {
+      "Registry": "HKLM:\\SOFTWARE\\WOW6432Node\\Khronos\\Vulkan\\ImplicitLayers",
+      "Manifest": "C:\\Program Files (x86)\\Epic Games\\Epic Online Services\\managedArtifacts\\98bc04bc842e4906993fd6d6644ffb8d\\EOSOverlayVkLayer-Win32.json",
+      "Value": 0,
+      "Exists": false
+    },
+    {
+      "Registry": "HKLM:\\SOFTWARE\\WOW6432Node\\Khronos\\Vulkan\\ImplicitLayers",
+      "Manifest": "C:\\Program Files (x86)\\Steam\\SteamOverlayVulkanLayer.json",
+      "Value": 0,
+      "Exists": true,
+      "name": "VK_LAYER_VALVE_steam_overlay",
+      "manifestSha256": "3d839cbea3a66a21bedcbc8544cbb78dcd36ea2260ef593b5a5b15035207ca03",
+      "binary": "C:\\Program Files (x86)\\Steam\\SteamOverlayVulkanLayer.dll",
+      "binaryExists": true,
+      "enableEnvironment": {
+        "ENABLE_VK_LAYER_VALVE_steam_overlay_1": "1"
+      },
+      "disableEnvironment": {
+        "DISABLE_VK_LAYER_VALVE_steam_overlay_1": "1"
+      },
+      "conditionEnvironment": {
+        "ENABLE_VK_LAYER_VALVE_steam_overlay_1": null,
+        "DISABLE_VK_LAYER_VALVE_steam_overlay_1": null
+      },
+      "binarySha256": "3a3fda8f22f1b277059d885bf504345344e51f39f8c3e6676b6a9c881dad2d26"
+    },
+    {
+      "Registry": "HKLM:\\SOFTWARE\\WOW6432Node\\Khronos\\Vulkan\\ImplicitLayers",
+      "Manifest": "C:\\Program Files (x86)\\Steam\\SteamFossilizeVulkanLayer.json",
+      "Value": 0,
+      "Exists": true,
+      "name": "VK_LAYER_VALVE_steam_fossilize",
+      "manifestSha256": "9e2d1dc73d517cba519d8c43c6af94cb71d8e23b67bc55bb622f5772719a5bb8",
+      "binary": "C:\\Program Files (x86)\\Steam\\VkLayer_steam_fossilize.dll",
+      "binaryExists": true,
+      "enableEnvironment": {
+        "ENABLE_VK_LAYER_VALVE_steam_fossilize_1": "1"
+      },
+      "disableEnvironment": {
+        "DISABLE_VK_LAYER_VALVE_steam_fossilize_1": "1"
+      },
+      "conditionEnvironment": {
+        "ENABLE_VK_LAYER_VALVE_steam_fossilize_1": null,
+        "DISABLE_VK_LAYER_VALVE_steam_fossilize_1": null
+      },
+      "binarySha256": "f9cd250f458908e27ab56880a1f0ce4e0682b69367899a3dbae77eb26044ae60"
+    },
+    {
+      "Registry": "HKCU:\\SOFTWARE\\Khronos\\Vulkan\\ImplicitLayers",
+      "Manifest": "E:\\Epic Games\\Launcher\\Portal\\Extras\\Overlay\\EOSOverlayVkLayer-Win32.json",
+      "Value": 0,
+      "Exists": false
+    },
+    {
+      "Registry": "HKCU:\\SOFTWARE\\Khronos\\Vulkan\\ImplicitLayers",
+      "Manifest": "E:\\Epic Games\\Launcher\\Portal\\Extras\\Overlay\\EOSOverlayVkLayer-Win64.json",
+      "Value": 0,
+      "Exists": false
+    },
+    {
+      "Registry": "HKLM:SYSTEM/CurrentControlSet/Control/Class/{4d36e968-e325-11ce-bfc1-08002be10318}/0002,0003/VulkanImplicitLayers ImplicitLayers",
+      "Manifest": "C:/Windows/System32/DriverStore/FileRepository/u0203303.inf_amd64_e5876a26758f154c/B026363/amd-vulkan64.json",
+      "Value": 0,
+      "Exists": true,
+      "driverView": 64,
+      "name": "VK_LAYER_AMD_switchable_graphics",
+      "manifestSha256": "679c7810205b86a301931addca47ccf77c687f11897120a78a561e72bc2bf15e",
+      "binary": "C:\\Windows\\System32\\DriverStore\\FileRepository\\u0203303.inf_amd64_e5876a26758f154c\\B026363\\amdvlk64.dll",
+      "binaryExists": true,
+      "enableEnvironment": null,
+      "disableEnvironment": {
+        "DISABLE_LAYER_AMD_SWITCHABLE_GRAPHICS_1": "1"
+      },
+      "conditionEnvironment": {
+        "DISABLE_LAYER_AMD_SWITCHABLE_GRAPHICS_1": null
+      },
+      "binarySha256": "d4a9e509e02d7b262abd2facef122f4b949b063166217297daf4637ae5df8010"
+    },
+    {
+      "Registry": "HKLM:SYSTEM/CurrentControlSet/Control/Class/{4d36e968-e325-11ce-bfc1-08002be10318}/0002,0003/VulkanImplicitLayersWow ImplicitLayers",
+      "Manifest": "C:/Windows/System32/DriverStore/FileRepository/u0203303.inf_amd64_e5876a26758f154c/B026363/amd-vulkan32.json",
+      "Value": 0,
+      "Exists": true,
+      "driverView": 32,
+      "name": "VK_LAYER_AMD_switchable_graphics",
+      "manifestSha256": "30241a2bded36010d0f1ed8f46a6cd2cd5f11f20c9be2a0c4f8121c43b541c5c",
+      "binary": "C:\\Windows\\System32\\DriverStore\\FileRepository\\u0203303.inf_amd64_e5876a26758f154c\\B026363\\amdvlk32.dll",
+      "binaryExists": true,
+      "enableEnvironment": null,
+      "disableEnvironment": {
+        "DISABLE_LAYER_AMD_SWITCHABLE_GRAPHICS_1": "1"
+      },
+      "conditionEnvironment": {
+        "DISABLE_LAYER_AMD_SWITCHABLE_GRAPHICS_1": null
+      },
+      "binarySha256": "0674835ad99b96c5cfa2bd1f8f4993699b0ff5076a4eed610c4114b194039b7f"
+    }
+  ],
+  "comparisonProfileOverrides": {
+    "ambient": {},
+    "obs-disabled": {
+      "VK_LOADER_LAYERS_DISABLE": "VK_LAYER_OBS_HOOK"
+    },
+    "epic-clean": {
+      "VK_IMPLICIT_LAYER_PATH": "E:\\NovaCore\\build\\graphics-validation-p2\\valid-implicit"
+    },
+    "canonical": {
+      "VK_IMPLICIT_LAYER_PATH": "E:\\NovaCore\\build\\graphics-validation-p2\\empty-implicit",
+      "VK_LAYER_PATH": "E:\\NovaCore\\build\\graphics-validation-p2\\validation-explicit",
+      "VK_INSTANCE_LAYERS": "VK_LAYER_KHRONOS_validation",
+      "VK_LAYER_SETTINGS_PATH": "E:\\NovaCore\\build\\graphics-validation-p2\\empty-implicit"
+    }
+  },
+  "comparisonLimit": "Epic-clean retains all valid implicit layers but directory discovery reverses OBS/AMD instance insertion order; its window PASS is not a KMT causal isolation.",
+  "kmt": {
+    "classification": "B - third-party implicit-layer interference",
+    "vuid": "VUID-VkMemoryAllocateInfo-memoryTypeIndex-00645",
+    "memoryTypeIndex": 0,
+    "externalHandleMemoryTypeBits": 0,
+    "handleType": "VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT",
+    "module": {
+      "path": "C:\\ProgramData\\obs-studio-hook\\graphics-hook64.dll",
+      "bytes": 311144,
+      "sha256": "49c0ddeac72b130d4f8ae90510219949022c1f992adb48d81a4972f2cd6c2585"
+    },
+    "stack": [
+      "[native] Vulkan error stack: 0; module=E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\NovaCore.Native.dll; offset=0xeb17",
+      "[native] Vulkan error stack: 1; module=C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_khronos_validation.dll; offset=0x8c69fc",
+      "[native] Vulkan error stack: 2; module=C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_khronos_validation.dll; offset=0x8a104",
+      "[native] Vulkan error stack: 3; module=C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_khronos_validation.dll; offset=0x1413a2",
+      "[native] Vulkan error stack: 4; module=C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_khronos_validation.dll; offset=0x340a57",
+      "[native] Vulkan error stack: 5; module=C:\\ProgramData\\obs-studio-hook\\graphics-hook64.dll; offset=0xb16b",
+      "[native] Vulkan error stack: 6; module=E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\NovaCore.Native.dll; offset=0x39e74",
+      "[native] Vulkan error stack: 7; module=E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\NovaCore.Native.dll; offset=0x3d046",
+      "[native] Vulkan error stack: 8; module=E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\NovaCore.Native.dll; offset=0x9d42",
+      "[native] Vulkan error stack: 9; module=; offset=0x7ff8166fe060"
+    ],
+    "callbackObjects": "No object/handle entries supplied; resource kind is OBS shared capture texture, corroborated by binary/source.",
+    "disassembly": "Microsoft (R) COFF/PE Dumper Version 14.51.36252.0\nCopyright (C) Microsoft Corporation.  All rights reserved.\n\n\nDump of file C:\\ProgramData\\obs-studio-hook\\graphics-hook64.dll\n\nFile Type: DLL\n\n  000000018000B120: E0 48              loopne      000000018000B16A\n  000000018000B122: 89 85 88 00 00 00  mov         dword ptr [rbp+0000000000000088h],eax\n  000000018000B128: 48 8B 8D 40 01 00  mov         rcx,qword ptr [rbp+0000000000000140h]\n                    00\n  000000018000B12F: 45 32 E4           xor         r12b,r12b\n  000000018000B132: 85 C9              test        ecx,ecx\n  000000018000B134: 0F 84 81 00 00 00  je          000000018000B1BB\n  000000018000B13A: 8B DA              mov         ebx,edx\n  000000018000B13C: 49 8D 7E 38        lea         rdi,[r14+38h]\n  000000018000B140: 8B 85 E0 00 00 00  mov         eax,dword ptr [rbp+00000000000000E0h]\n  000000018000B146: 0F A3 D8           bt          eax,ebx\n  000000018000B149: 73 51              jae         000000018000B19C\n  000000018000B14B: 8B C3              mov         eax,ebx\n  000000018000B14D: F6 84 C5 44 01 00  test        byte ptr [rbp+rax*8+0000000000000144h],1\n                    00 01\n  000000018000B155: 74 45              je          000000018000B19C\n  000000018000B157: 4C 8B CF           mov         r9,rdi\n  000000018000B15A: 89 5D C0           mov         dword ptr [rbp-40h],ebx\n  000000018000B15D: 45 33 C0           xor         r8d,r8d\n  000000018000B160: 48 8D 55 A8        lea         rdx,[rbp-58h]\n  000000018000B164: 49 8B CF           mov         rcx,r15\n  000000018000B167: 41 FF 55 48        call        qword ptr [r13+48h]\n  000000018000B16B: 85 C0              test        eax,eax\n  000000018000B16D: 44 8B C8           mov         r9d,eax\n  000000018000B170: 41 0F 94 C4        sete        r12b\n  000000018000B174: 85 C0              test        eax,eax\n  000000018000B176: 74 2C              je          000000018000B1A4\n  000000018000B178: 8B C8              mov         ecx,eax\n  000000018000B17A: E8 E1 E5 FF FF     call        0000000180009760\n  000000018000B17F: 4C 8B C0           mov         r8,rax\n  000000018000B182: 48 8D 15 17 1A 03  lea         rdx,[000000018003CBA0h]\n                    00\n  000000018000B189: 48 8D 0D 50 1A 03  lea         rcx,[000000018003CBE0h]\n                    00\n  000000018000B190: E8\n\n  Summary\n\n       2E000 .text\n",
+    "upstreamLimit": "Reason the external handle query returns zero memory-type bits is unproven; no NovaCore import path exists."
+  },
+  "deployments": {
+    "Debug": {
+      "native": [
+        {
+          "path": "E:\\NovaCore\\build\\native-ninja\\NovaCore.Native.dll",
+          "bytes": 1751552,
+          "sha256": "1bcbd28c20f70c2a284dce82ca14e8f279d9d7a2be998835528a2bca292724c5"
+        },
+        {
+          "path": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\NovaCore.Native.dll",
+          "bytes": 1751552,
+          "sha256": "1bcbd28c20f70c2a284dce82ca14e8f279d9d7a2be998835528a2bca292724c5"
+        },
+        {
+          "path": "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Native.dll",
+          "bytes": 1751552,
+          "sha256": "1bcbd28c20f70c2a284dce82ca14e8f279d9d7a2be998835528a2bca292724c5"
+        }
+      ],
+      "sample": [
+        {
+          "path": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\NovaCore.Triangle.exe",
+          "bytes": 162304,
+          "sha256": "c8c25596e1a40cb54200cc1090854eab8276a0491c18a4b1a9df70b0e36ee74d"
+        },
+        {
+          "path": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\NovaCore.Triangle.dll",
+          "bytes": 250880,
+          "sha256": "791e6da0d550cec8fb6d81dfc5071fc3fd724d727fb35f90a157c67c25750cad"
+        }
+      ],
+      "test": {
+        "path": "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Graphics.Tests.dll",
+        "bytes": 1018880,
+        "sha256": "926bede07924862ad49c3fcbadd885407cd6cd731b5aa58d6adf05e8a890e009"
+      },
+      "shaders": [
+        {
+          "name": "triangle.vert.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\triangle.vert.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\triangle.vert.spv",
+          "sha256": "87c254e6166b18954b8c0fbd533af2e83f4cf7f09842d752a0a76ae68e8f1aef"
+        },
+        {
+          "name": "triangle.frag.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\triangle.frag.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\triangle.frag.spv",
+          "sha256": "36e2c4762d87eddd045909f600217f3ea7d48b023d08887abbf958d3bfaa5ddf"
+        },
+        {
+          "name": "orbit.vert.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\orbit.vert.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\orbit.vert.spv",
+          "sha256": "b4b9dd635f32156654e30d843c29eb864feb09751d7b3027cf99a5d741b6a45b"
+        },
+        {
+          "name": "orbit.frag.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\orbit.frag.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\orbit.frag.spv",
+          "sha256": "b06f50708727144e8d0f08d35cd2e64d8b1cef501ed20b10fea4a34196026267"
+        },
+        {
+          "name": "orbit_previous.frag.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\orbit_previous.frag.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\orbit_previous.frag.spv",
+          "sha256": "c4935060e07e01742d59d8a5834241e2963dcc80ed8e35baeac5b08288761e61"
+        },
+        {
+          "name": "body_forward.frag.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\body_forward.frag.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\body_forward.frag.spv",
+          "sha256": "fa706803f042fb5a9f7a3c9965a3e2de3e8838e075d67876b78df9bdc132ce0e"
+        },
+        {
+          "name": "sas_target.frag.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\sas_target.frag.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\sas_target.frag.spv",
+          "sha256": "4e99fda06f571590f950e91d93025cafa83e4a454e68e3583ce59d869f0a3ef2"
+        },
+        {
+          "name": "planetary.vert.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\planetary.vert.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\planetary.vert.spv",
+          "sha256": "ddb84030e2621df8f05489e339989d66de60d73435f490b4ec0af4251d7a0338"
+        },
+        {
+          "name": "planetary.frag.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\planetary.frag.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\planetary.frag.spv",
+          "sha256": "417f17b236834f0ac94fa3bbfdae52ad164599ff14051e9b396809beea75cda1"
+        },
+        {
+          "name": "planetary_select.comp.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\planetary_select.comp.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\planetary_select.comp.spv",
+          "sha256": "8189bbd2a85fe23033f12c558d8b221b62b8969c17ba9ffcf07b7c8501fe8adf"
+        },
+        {
+          "name": "planetary_terrain_generate.comp.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\planetary_terrain_generate.comp.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\planetary_terrain_generate.comp.spv",
+          "sha256": "1fc8c24ea6b4a55e83997fadf80b4901f692b8bc2de84a5cf6ac043e4da531d1"
+        },
+        {
+          "name": "planetary_production_terrain.comp.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\planetary_production_terrain.comp.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\planetary_production_terrain.comp.spv",
+          "sha256": "405e6e6daab609ca383297ba8be706bfa96859c65dc2d9f42476a32cddd85df7"
+        },
+        {
+          "name": "planetary_production.frag.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\planetary_production.frag.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\planetary_production.frag.spv",
+          "sha256": "3c75d16a441d456c7c80279250388cb75b21712e31a17b3e75b6c1902a927241"
+        },
+        {
+          "name": "regional_physical_demand.comp.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\regional_physical_demand.comp.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\regional_physical_demand.comp.spv",
+          "sha256": "7d80dbd70be13cc55f00ef836cd8da9d3783064411320697777f6b5c848d8f67"
+        },
+        {
+          "name": "regional_physical_incoming_demand.comp.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\regional_physical_incoming_demand.comp.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\regional_physical_incoming_demand.comp.spv",
+          "sha256": "a56b62b5432206b8ab5eded734b13a0ddf9f0c726a4b444f8d24139bdcc17a60"
+        },
+        {
+          "name": "production_spherical_billboard_prepare.comp.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\production_spherical_billboard_prepare.comp.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\production_spherical_billboard_prepare.comp.spv",
+          "sha256": "cd6b8feeaa382281c4d8891af64d54e45354491dbd93af6b90621a3658e9492c"
+        },
+        {
+          "name": "production_spherical_billboard_incoming_prepare.comp.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\production_spherical_billboard_incoming_prepare.comp.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\production_spherical_billboard_incoming_prepare.comp.spv",
+          "sha256": "9f32e3fcf9ffe534a10107ab0b1ef2b1ecdb3c6a9bb44d2c5d3d38b15ed47613"
+        },
+        {
+          "name": "production_spherical_billboard_reset.comp.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\production_spherical_billboard_reset.comp.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\production_spherical_billboard_reset.comp.spv",
+          "sha256": "cf583d16e14c8a8ec63b393d8752541648d932cf0165231cc48f6076e28fc027"
+        },
+        {
+          "name": "production_spherical_billboard_cull.comp.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\production_spherical_billboard_cull.comp.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\production_spherical_billboard_cull.comp.spv",
+          "sha256": "2827b58dcd7029695e0b33272018e54d19d6113b8d7ab9ac591c343b3d994398"
+        },
+        {
+          "name": "production_spherical_billboard_compact.comp.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\production_spherical_billboard_compact.comp.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\production_spherical_billboard_compact.comp.spv",
+          "sha256": "2aabd7633b333f86df8a6eae6b76ed2d13a7129443dcd9201531de047b12f4d9"
+        },
+        {
+          "name": "production_spherical_billboard_incoming_reset.comp.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\production_spherical_billboard_incoming_reset.comp.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\production_spherical_billboard_incoming_reset.comp.spv",
+          "sha256": "5d750f929dcab4f9f3138b4cdfa869ab26e3051d4b28485c02ee483f89e14d6e"
+        },
+        {
+          "name": "production_spherical_billboard_incoming_cull.comp.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\production_spherical_billboard_incoming_cull.comp.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\production_spherical_billboard_incoming_cull.comp.spv",
+          "sha256": "8c677f08ae051cf525108a436066983d41961ce70757ca29a86df165d2663cfb"
+        },
+        {
+          "name": "production_nested_scale_mesh_cull.comp.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\production_nested_scale_mesh_cull.comp.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\production_nested_scale_mesh_cull.comp.spv",
+          "sha256": "497d88225a914b9601ad6c0f44733e834794a952854e71b26be426ead8780d94"
+        },
+        {
+          "name": "production_nested_scale_mesh_incoming_cull.comp.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\production_nested_scale_mesh_incoming_cull.comp.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\production_nested_scale_mesh_incoming_cull.comp.spv",
+          "sha256": "23bd1b04d0291e6271138041433eee07e57503482e8e5cf845e4b72c75967336"
+        },
+        {
+          "name": "production_spherical_billboard_incoming_compact.comp.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\production_spherical_billboard_incoming_compact.comp.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\production_spherical_billboard_incoming_compact.comp.spv",
+          "sha256": "6b0238138222112ddf1f945f5e6a31867d5dd11f57169481ece9c05337f43e4e"
+        },
+        {
+          "name": "production_spherical_billboard.vert.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\production_spherical_billboard.vert.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\production_spherical_billboard.vert.spv",
+          "sha256": "1baa9043db7a8b71dcf5931f4cb415fa84ce6341b07d850ea9beb8baa02d2b6a"
+        },
+        {
+          "name": "production_spherical_billboard.tesc.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\production_spherical_billboard.tesc.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\production_spherical_billboard.tesc.spv",
+          "sha256": "0163498278f9523fd442434f05f056be28252d16c2f2ba44b8d91642b33e4439"
+        },
+        {
+          "name": "production_spherical_billboard.tese.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\production_spherical_billboard.tese.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\production_spherical_billboard.tese.spv",
+          "sha256": "a25990457cc76476e37cbe045e0853af8901ff87b192e917c24470287ce8fa3e"
+        },
+        {
+          "name": "planetary_natural_terrain_global_prepare.comp.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\planetary_natural_terrain_global_prepare.comp.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\planetary_natural_terrain_global_prepare.comp.spv",
+          "sha256": "5a5450321873f5ff8bed7dd9e4f06c342625724d629da2232521fbace01c7a85"
+        },
+        {
+          "name": "distant_planet.vert.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\distant_planet.vert.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\distant_planet.vert.spv",
+          "sha256": "cf28fe0a7c0797bd7d72076437ba78c4e0d97bb1a0ae3c065baf3bfc5db62cb8"
+        },
+        {
+          "name": "distant_planet.frag.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\distant_planet.frag.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\distant_planet.frag.spv",
+          "sha256": "04137afb1c632dfb7074480377d9f93136ab3127d382baeef07d52b09409eba8"
+        },
+        {
+          "name": "planetary_ring.vert.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\planetary_ring.vert.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\planetary_ring.vert.spv",
+          "sha256": "cccede52d3c64db872360912db9eb29e60cb892c648ed53ce1c178f8623d0cfb"
+        },
+        {
+          "name": "planetary_ring_far.frag.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\planetary_ring_far.frag.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\planetary_ring_far.frag.spv",
+          "sha256": "343db81bccc310b21c600ab6ee6722438151694683bb0cf7ba01d54a9b68ade6"
+        },
+        {
+          "name": "planetary_ring_near.frag.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\planetary_ring_near.frag.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\planetary_ring_near.frag.spv",
+          "sha256": "48b8ef4e56b6be9380cfbaca7daa790035e704541b6b8a550b3cc7bed540244c"
+        },
+        {
+          "name": "solar_orbit.vert.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\solar_orbit.vert.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\solar_orbit.vert.spv",
+          "sha256": "d71520615e2533a06208c3cec752d2689f524a30fb6a11bd2ca4ae00e2cc027f"
+        },
+        {
+          "name": "solar_orbit.frag.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\solar_orbit.frag.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\solar_orbit.frag.spv",
+          "sha256": "23b511270c196c2186f7935699ca7fdedf3c92c629da67c10e8ae7615286181f"
+        },
+        {
+          "name": "solar_marker.vert.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\solar_marker.vert.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\solar_marker.vert.spv",
+          "sha256": "50d948741d3ca6b59577a82d3346ab3cac51edcb9ab80047247ac61c345b6db6"
+        },
+        {
+          "name": "solar_marker.frag.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\solar_marker.frag.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\solar_marker.frag.spv",
+          "sha256": "d428743c08f96f4e508eab131cfb54981c2628eecc7acd3d2df220b19103275b"
+        },
+        {
+          "name": "solar_label.vert.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\solar_label.vert.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\solar_label.vert.spv",
+          "sha256": "a13a7a8acb3ae2da2cac129a203caffd86b5a7f434701d99b59284fdd01f1844"
+        },
+        {
+          "name": "solar_label.frag.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\solar_label.frag.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\solar_label.frag.spv",
+          "sha256": "673c5dc0cc1e199d497c7c927f282a02da444fa258860b6cb94b6fd1ed12c90a"
+        },
+        {
+          "name": "solar_speed_hud.vert.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\solar_speed_hud.vert.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\solar_speed_hud.vert.spv",
+          "sha256": "a777a4dfece073339efcd97c7292d970f8c26d21f221ebd62ce244970f0a5fb4"
+        },
+        {
+          "name": "solar_speed_hud.frag.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\solar_speed_hud.frag.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\solar_speed_hud.frag.spv",
+          "sha256": "e073b0ab31c69a3516d695146ade0dbd618d3dede5a10699f390f10da52c3586"
+        },
+        {
+          "name": "fullscreen.vert.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\fullscreen.vert.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\fullscreen.vert.spv",
+          "sha256": "a18f9b5e0b4a4e7a077b1017bad7b1c5c40313b3f70113f1e0771cd202433130"
+        },
+        {
+          "name": "space_background.frag.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\space_background.frag.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\space_background.frag.spv",
+          "sha256": "0c98ee3df0ba8ad8f313cc352a02032528e6b0e36b2dfa8cc2be1a6755b71cfc"
+        },
+        {
+          "name": "tone_map.frag.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\tone_map.frag.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\tone_map.frag.spv",
+          "sha256": "d617345e95589ecb087ed40c20f4d04a427251a2b5249d8181cc63c421ee3979"
+        },
+        {
+          "name": "stellar_sun.vert.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\stellar_sun.vert.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\stellar_sun.vert.spv",
+          "sha256": "3e124d5babcb1d219499aa2de1482f90fc7c9008e92b054f7ca0d268336346b6"
+        },
+        {
+          "name": "stellar_sun.frag.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\stellar_sun.frag.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\stellar_sun.frag.spv",
+          "sha256": "5c448c0da4cadeb08bf2c85c74448d3b690fd3d6bccab1fc2c49da7a0bf54769"
+        },
+        {
+          "name": "stellar_glow.vert.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\stellar_glow.vert.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\stellar_glow.vert.spv",
+          "sha256": "30a9ed63e3d92581852afef62a242f2160a10c6cdb276a3b1aa0360a476183e8"
+        },
+        {
+          "name": "stellar_glow.frag.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja\\shaders\\stellar_glow.frag.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders\\stellar_glow.frag.spv",
+          "sha256": "e83a5e7458ec4be4b835384c88ec3ea958ae13569ee9ac823a4e2b2db17facee"
+        }
+      ]
+    },
+    "Release": {
+      "native": [
+        {
+          "path": "E:\\NovaCore\\build\\native-ninja-release\\NovaCore.Native.dll",
+          "bytes": 346624,
+          "sha256": "3a9f6fbed66169dc4200ca86bb6b501233b900a77082b3d0b72151b043606cd5"
+        },
+        {
+          "path": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Native.dll",
+          "bytes": 346624,
+          "sha256": "3a9f6fbed66169dc4200ca86bb6b501233b900a77082b3d0b72151b043606cd5"
+        },
+        {
+          "path": "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Native.dll",
+          "bytes": 346624,
+          "sha256": "3a9f6fbed66169dc4200ca86bb6b501233b900a77082b3d0b72151b043606cd5"
+        }
+      ],
+      "sample": [
+        {
+          "path": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Triangle.exe",
+          "bytes": 162304,
+          "sha256": "c8c25596e1a40cb54200cc1090854eab8276a0491c18a4b1a9df70b0e36ee74d"
+        },
+        {
+          "path": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Triangle.dll",
+          "bytes": 240640,
+          "sha256": "a240ad4e1195df30e565b7e8c0c23470865bd81dacf22b484c35234e5f168a26"
+        }
+      ],
+      "test": {
+        "path": "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.dll",
+        "bytes": 992768,
+        "sha256": "277a53350a7e409817ad32569a1c617a4ce7da21856103dd4e04d242fd679c3d"
+      },
+      "shaders": [
+        {
+          "name": "triangle.vert.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\triangle.vert.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\triangle.vert.spv",
+          "sha256": "87c254e6166b18954b8c0fbd533af2e83f4cf7f09842d752a0a76ae68e8f1aef"
+        },
+        {
+          "name": "triangle.frag.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\triangle.frag.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\triangle.frag.spv",
+          "sha256": "36e2c4762d87eddd045909f600217f3ea7d48b023d08887abbf958d3bfaa5ddf"
+        },
+        {
+          "name": "orbit.vert.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\orbit.vert.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\orbit.vert.spv",
+          "sha256": "b4b9dd635f32156654e30d843c29eb864feb09751d7b3027cf99a5d741b6a45b"
+        },
+        {
+          "name": "orbit.frag.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\orbit.frag.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\orbit.frag.spv",
+          "sha256": "b06f50708727144e8d0f08d35cd2e64d8b1cef501ed20b10fea4a34196026267"
+        },
+        {
+          "name": "orbit_previous.frag.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\orbit_previous.frag.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\orbit_previous.frag.spv",
+          "sha256": "c4935060e07e01742d59d8a5834241e2963dcc80ed8e35baeac5b08288761e61"
+        },
+        {
+          "name": "body_forward.frag.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\body_forward.frag.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\body_forward.frag.spv",
+          "sha256": "fa706803f042fb5a9f7a3c9965a3e2de3e8838e075d67876b78df9bdc132ce0e"
+        },
+        {
+          "name": "sas_target.frag.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\sas_target.frag.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\sas_target.frag.spv",
+          "sha256": "4e99fda06f571590f950e91d93025cafa83e4a454e68e3583ce59d869f0a3ef2"
+        },
+        {
+          "name": "planetary.vert.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\planetary.vert.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\planetary.vert.spv",
+          "sha256": "ddb84030e2621df8f05489e339989d66de60d73435f490b4ec0af4251d7a0338"
+        },
+        {
+          "name": "planetary.frag.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\planetary.frag.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\planetary.frag.spv",
+          "sha256": "417f17b236834f0ac94fa3bbfdae52ad164599ff14051e9b396809beea75cda1"
+        },
+        {
+          "name": "planetary_select.comp.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\planetary_select.comp.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\planetary_select.comp.spv",
+          "sha256": "8189bbd2a85fe23033f12c558d8b221b62b8969c17ba9ffcf07b7c8501fe8adf"
+        },
+        {
+          "name": "planetary_terrain_generate.comp.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\planetary_terrain_generate.comp.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\planetary_terrain_generate.comp.spv",
+          "sha256": "1fc8c24ea6b4a55e83997fadf80b4901f692b8bc2de84a5cf6ac043e4da531d1"
+        },
+        {
+          "name": "planetary_production_terrain.comp.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\planetary_production_terrain.comp.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\planetary_production_terrain.comp.spv",
+          "sha256": "405e6e6daab609ca383297ba8be706bfa96859c65dc2d9f42476a32cddd85df7"
+        },
+        {
+          "name": "planetary_production.frag.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\planetary_production.frag.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\planetary_production.frag.spv",
+          "sha256": "3c75d16a441d456c7c80279250388cb75b21712e31a17b3e75b6c1902a927241"
+        },
+        {
+          "name": "regional_physical_demand.comp.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\regional_physical_demand.comp.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\regional_physical_demand.comp.spv",
+          "sha256": "7d80dbd70be13cc55f00ef836cd8da9d3783064411320697777f6b5c848d8f67"
+        },
+        {
+          "name": "regional_physical_incoming_demand.comp.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\regional_physical_incoming_demand.comp.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\regional_physical_incoming_demand.comp.spv",
+          "sha256": "a56b62b5432206b8ab5eded734b13a0ddf9f0c726a4b444f8d24139bdcc17a60"
+        },
+        {
+          "name": "production_spherical_billboard_prepare.comp.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\production_spherical_billboard_prepare.comp.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\production_spherical_billboard_prepare.comp.spv",
+          "sha256": "cd6b8feeaa382281c4d8891af64d54e45354491dbd93af6b90621a3658e9492c"
+        },
+        {
+          "name": "production_spherical_billboard_incoming_prepare.comp.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\production_spherical_billboard_incoming_prepare.comp.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\production_spherical_billboard_incoming_prepare.comp.spv",
+          "sha256": "9f32e3fcf9ffe534a10107ab0b1ef2b1ecdb3c6a9bb44d2c5d3d38b15ed47613"
+        },
+        {
+          "name": "production_spherical_billboard_reset.comp.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\production_spherical_billboard_reset.comp.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\production_spherical_billboard_reset.comp.spv",
+          "sha256": "cf583d16e14c8a8ec63b393d8752541648d932cf0165231cc48f6076e28fc027"
+        },
+        {
+          "name": "production_spherical_billboard_cull.comp.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\production_spherical_billboard_cull.comp.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\production_spherical_billboard_cull.comp.spv",
+          "sha256": "2827b58dcd7029695e0b33272018e54d19d6113b8d7ab9ac591c343b3d994398"
+        },
+        {
+          "name": "production_spherical_billboard_compact.comp.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\production_spherical_billboard_compact.comp.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\production_spherical_billboard_compact.comp.spv",
+          "sha256": "2aabd7633b333f86df8a6eae6b76ed2d13a7129443dcd9201531de047b12f4d9"
+        },
+        {
+          "name": "production_spherical_billboard_incoming_reset.comp.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\production_spherical_billboard_incoming_reset.comp.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\production_spherical_billboard_incoming_reset.comp.spv",
+          "sha256": "5d750f929dcab4f9f3138b4cdfa869ab26e3051d4b28485c02ee483f89e14d6e"
+        },
+        {
+          "name": "production_spherical_billboard_incoming_cull.comp.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\production_spherical_billboard_incoming_cull.comp.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\production_spherical_billboard_incoming_cull.comp.spv",
+          "sha256": "8c677f08ae051cf525108a436066983d41961ce70757ca29a86df165d2663cfb"
+        },
+        {
+          "name": "production_nested_scale_mesh_cull.comp.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\production_nested_scale_mesh_cull.comp.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\production_nested_scale_mesh_cull.comp.spv",
+          "sha256": "497d88225a914b9601ad6c0f44733e834794a952854e71b26be426ead8780d94"
+        },
+        {
+          "name": "production_nested_scale_mesh_incoming_cull.comp.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\production_nested_scale_mesh_incoming_cull.comp.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\production_nested_scale_mesh_incoming_cull.comp.spv",
+          "sha256": "23bd1b04d0291e6271138041433eee07e57503482e8e5cf845e4b72c75967336"
+        },
+        {
+          "name": "production_spherical_billboard_incoming_compact.comp.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\production_spherical_billboard_incoming_compact.comp.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\production_spherical_billboard_incoming_compact.comp.spv",
+          "sha256": "6b0238138222112ddf1f945f5e6a31867d5dd11f57169481ece9c05337f43e4e"
+        },
+        {
+          "name": "production_spherical_billboard.vert.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\production_spherical_billboard.vert.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\production_spherical_billboard.vert.spv",
+          "sha256": "1baa9043db7a8b71dcf5931f4cb415fa84ce6341b07d850ea9beb8baa02d2b6a"
+        },
+        {
+          "name": "production_spherical_billboard.tesc.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\production_spherical_billboard.tesc.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\production_spherical_billboard.tesc.spv",
+          "sha256": "0163498278f9523fd442434f05f056be28252d16c2f2ba44b8d91642b33e4439"
+        },
+        {
+          "name": "production_spherical_billboard.tese.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\production_spherical_billboard.tese.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\production_spherical_billboard.tese.spv",
+          "sha256": "a25990457cc76476e37cbe045e0853af8901ff87b192e917c24470287ce8fa3e"
+        },
+        {
+          "name": "planetary_natural_terrain_global_prepare.comp.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\planetary_natural_terrain_global_prepare.comp.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\planetary_natural_terrain_global_prepare.comp.spv",
+          "sha256": "5a5450321873f5ff8bed7dd9e4f06c342625724d629da2232521fbace01c7a85"
+        },
+        {
+          "name": "distant_planet.vert.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\distant_planet.vert.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\distant_planet.vert.spv",
+          "sha256": "cf28fe0a7c0797bd7d72076437ba78c4e0d97bb1a0ae3c065baf3bfc5db62cb8"
+        },
+        {
+          "name": "distant_planet.frag.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\distant_planet.frag.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\distant_planet.frag.spv",
+          "sha256": "04137afb1c632dfb7074480377d9f93136ab3127d382baeef07d52b09409eba8"
+        },
+        {
+          "name": "planetary_ring.vert.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\planetary_ring.vert.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\planetary_ring.vert.spv",
+          "sha256": "cccede52d3c64db872360912db9eb29e60cb892c648ed53ce1c178f8623d0cfb"
+        },
+        {
+          "name": "planetary_ring_far.frag.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\planetary_ring_far.frag.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\planetary_ring_far.frag.spv",
+          "sha256": "343db81bccc310b21c600ab6ee6722438151694683bb0cf7ba01d54a9b68ade6"
+        },
+        {
+          "name": "planetary_ring_near.frag.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\planetary_ring_near.frag.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\planetary_ring_near.frag.spv",
+          "sha256": "48b8ef4e56b6be9380cfbaca7daa790035e704541b6b8a550b3cc7bed540244c"
+        },
+        {
+          "name": "solar_orbit.vert.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\solar_orbit.vert.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\solar_orbit.vert.spv",
+          "sha256": "d71520615e2533a06208c3cec752d2689f524a30fb6a11bd2ca4ae00e2cc027f"
+        },
+        {
+          "name": "solar_orbit.frag.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\solar_orbit.frag.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\solar_orbit.frag.spv",
+          "sha256": "23b511270c196c2186f7935699ca7fdedf3c92c629da67c10e8ae7615286181f"
+        },
+        {
+          "name": "solar_marker.vert.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\solar_marker.vert.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\solar_marker.vert.spv",
+          "sha256": "50d948741d3ca6b59577a82d3346ab3cac51edcb9ab80047247ac61c345b6db6"
+        },
+        {
+          "name": "solar_marker.frag.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\solar_marker.frag.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\solar_marker.frag.spv",
+          "sha256": "d428743c08f96f4e508eab131cfb54981c2628eecc7acd3d2df220b19103275b"
+        },
+        {
+          "name": "solar_label.vert.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\solar_label.vert.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\solar_label.vert.spv",
+          "sha256": "a13a7a8acb3ae2da2cac129a203caffd86b5a7f434701d99b59284fdd01f1844"
+        },
+        {
+          "name": "solar_label.frag.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\solar_label.frag.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\solar_label.frag.spv",
+          "sha256": "673c5dc0cc1e199d497c7c927f282a02da444fa258860b6cb94b6fd1ed12c90a"
+        },
+        {
+          "name": "solar_speed_hud.vert.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\solar_speed_hud.vert.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\solar_speed_hud.vert.spv",
+          "sha256": "a777a4dfece073339efcd97c7292d970f8c26d21f221ebd62ce244970f0a5fb4"
+        },
+        {
+          "name": "solar_speed_hud.frag.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\solar_speed_hud.frag.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\solar_speed_hud.frag.spv",
+          "sha256": "e073b0ab31c69a3516d695146ade0dbd618d3dede5a10699f390f10da52c3586"
+        },
+        {
+          "name": "fullscreen.vert.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\fullscreen.vert.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\fullscreen.vert.spv",
+          "sha256": "a18f9b5e0b4a4e7a077b1017bad7b1c5c40313b3f70113f1e0771cd202433130"
+        },
+        {
+          "name": "space_background.frag.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\space_background.frag.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\space_background.frag.spv",
+          "sha256": "0c98ee3df0ba8ad8f313cc352a02032528e6b0e36b2dfa8cc2be1a6755b71cfc"
+        },
+        {
+          "name": "tone_map.frag.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\tone_map.frag.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\tone_map.frag.spv",
+          "sha256": "d617345e95589ecb087ed40c20f4d04a427251a2b5249d8181cc63c421ee3979"
+        },
+        {
+          "name": "stellar_sun.vert.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\stellar_sun.vert.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\stellar_sun.vert.spv",
+          "sha256": "3e124d5babcb1d219499aa2de1482f90fc7c9008e92b054f7ca0d268336346b6"
+        },
+        {
+          "name": "stellar_sun.frag.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\stellar_sun.frag.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\stellar_sun.frag.spv",
+          "sha256": "5c448c0da4cadeb08bf2c85c74448d3b690fd3d6bccab1fc2c49da7a0bf54769"
+        },
+        {
+          "name": "stellar_glow.vert.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\stellar_glow.vert.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\stellar_glow.vert.spv",
+          "sha256": "30a9ed63e3d92581852afef62a242f2160a10c6cdb276a3b1aa0360a476183e8"
+        },
+        {
+          "name": "stellar_glow.frag.spv",
+          "source": "E:\\NovaCore\\build\\native-ninja-release\\shaders\\stellar_glow.frag.spv",
+          "deployed": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders\\stellar_glow.frag.spv",
+          "sha256": "e83a5e7458ec4be4b835384c88ec3ea958ae13569ee9ac823a4e2b2db17facee"
+        }
+      ]
+    }
+  },
+  "builds": {
+    "debug-managed-final.log": [
+      "Build succeeded.",
+      "    0 Warning(s)",
+      "    0 Error(s)"
+    ],
+    "release-managed-final.log": [
+      "Build succeeded.",
+      "    0 Warning(s)",
+      "    0 Error(s)"
+    ],
+    "debug-native-final.log": [
+      "[1/2] Building CXX object CMakeFiles\\NovaCore.Native.dir\\NovaCoreNative.cpp.obj",
+      "[2/2] Linking CXX shared library NovaCore.Native.dll"
+    ],
+    "release-native-final.log": [
+      "[1/2] Building CXX object CMakeFiles\\NovaCore.Native.dir\\NovaCoreNative.cpp.obj",
+      "[2/2] Linking CXX shared library NovaCore.Native.dll"
+    ],
+    "debug-native-tests-build.log": [
+      "ninja: no work to do."
+    ],
+    "release-native-tests-build.log": [
+      "ninja: no work to do."
+    ]
+  },
+  "nativeCpu": {
+    "native-ninja": "Regional physical identity/readiness/cache: PASS; asynchronous source; no anchored owner required",
+    "native-ninja-release": "Regional physical identity/readiness/cache: PASS; asynchronous source; no anchored owner required"
+  },
+  "launcherTests": "PASS default selection\nPASS scenario catalog\nPASS Earth fullscreen native preset\nPASS M12D spherical billboard GPU proof preset\nPASS new Earth renderer preset\nPASS Earth fullscreen Solar camera path\nPASS structured launch environment\nPASS launcher build configuration\nPASS Earth orbital arguments\nPASS invariant altitude formatting\nPASS subdivision diagnostic mapping\nPASS Florida launch mapping\nPASS invalid configuration rejection\nPASS diagnostics arguments\nPASS existing production scenarios\nNovaCore launcher tests passed: 15",
+  "launcherRoutes": [
+    {
+      "preset": "Solar System Overview",
+      "FileName": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Triangle.exe",
+      "Arguments": [
+        "--scene=sol",
+        "--physical-surface=m12d-natural-candidate"
+      ],
+      "WorkingDirectory": "E:\\NovaCore",
+      "EnvironmentVariables": {
+        "NOVACORE_WINDOW_CLIENT_WIDTH": "960",
+        "NOVACORE_WINDOW_CLIENT_HEIGHT": "540",
+        "NOVACORE_WINDOW_BORDERLESS": "0"
+      }
+    },
+    {
+      "preset": "Earth Far / Orbital View",
+      "FileName": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Triangle.exe",
+      "Arguments": [
+        "--scene=earth",
+        "--altitude=3000000",
+        "--surface-site=land",
+        "--physical-surface=m12d-natural-candidate"
+      ],
+      "WorkingDirectory": "E:\\NovaCore",
+      "EnvironmentVariables": {
+        "NOVACORE_WINDOW_CLIENT_WIDTH": "960",
+        "NOVACORE_WINDOW_CLIENT_HEIGHT": "540",
+        "NOVACORE_WINDOW_BORDERLESS": "0"
+      }
+    },
+    {
+      "preset": "Earth 700 km",
+      "FileName": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Triangle.exe",
+      "Arguments": [
+        "--scene=earth",
+        "--altitude=700000",
+        "--surface-site=land",
+        "--physical-surface=m12d-natural-candidate"
+      ],
+      "WorkingDirectory": "E:\\NovaCore",
+      "EnvironmentVariables": {
+        "NOVACORE_WINDOW_CLIENT_WIDTH": "960",
+        "NOVACORE_WINDOW_CLIENT_HEIGHT": "540",
+        "NOVACORE_WINDOW_BORDERLESS": "0"
+      }
+    },
+    {
+      "preset": "Earth \u2014 Fullscreen Native",
+      "FileName": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Triangle.exe",
+      "Arguments": [
+        "--scene=sol",
+        "--focus=earth",
+        "--altitude=700000",
+        "--surface-site=land",
+        "--log=validation",
+        "--log=vulkan",
+        "--physical-surface=m12d-natural-candidate"
+      ],
+      "WorkingDirectory": "E:\\NovaCore",
+      "EnvironmentVariables": {
+        "NOVACORE_WINDOW_CLIENT_WIDTH": "3440",
+        "NOVACORE_WINDOW_CLIENT_HEIGHT": "1440",
+        "NOVACORE_WINDOW_BORDERLESS": "1",
+        "VK_INSTANCE_LAYERS": "VK_LAYER_KHRONOS_validation"
+      }
+    },
+    {
+      "preset": "Florida Launch Site",
+      "FileName": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Triangle.exe",
+      "Arguments": [
+        "--scene=sol",
+        "--focus=earth",
+        "--surface-site=florida-launch",
+        "--physical-surface=m12d-natural-candidate"
+      ],
+      "WorkingDirectory": "E:\\NovaCore",
+      "EnvironmentVariables": {
+        "NOVACORE_WINDOW_CLIENT_WIDTH": "960",
+        "NOVACORE_WINDOW_CLIENT_HEIGHT": "540",
+        "NOVACORE_WINDOW_BORDERLESS": "0"
+      }
+    },
+    {
+      "preset": "New Earth Renderer",
+      "FileName": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Triangle.exe",
+      "Arguments": [
+        "--scene=m12d-production-spherical-billboard",
+        "--altitude=700000",
+        "--surface-site=land",
+        "--log=vulkan",
+        "--physical-surface=m12d-natural-candidate"
+      ],
+      "WorkingDirectory": "E:\\NovaCore",
+      "EnvironmentVariables": {
+        "NOVACORE_WINDOW_CLIENT_WIDTH": "3440",
+        "NOVACORE_WINDOW_CLIENT_HEIGHT": "1440",
+        "NOVACORE_WINDOW_BORDERLESS": "1"
+      }
+    }
+  ],
+  "floridaSmoke": {
+    "pass": true,
+    "frames": 500,
+    "exitCode": 0,
+    "physicalProbeEnabled": false,
+    "bulkCaptureEnabled": false,
+    "vuidLines": 0,
+    "manualAcceptance": false,
+    "summary": [
+      "Runtime fingerprint: cwd=E:\\NovaCore; process=E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Triangle.exe; base=E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\",
+      "[native] NCSM1 regional ready: incoming=1; pupil=1; dependencyDelayMs=548.631; requests=670; resident=670; uploadedBytes=93392640; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "Florida seating stability: frame=440; depth=6.835569277405739; bodyFixedStable=true; foundationSubmittedWithPad=True; H=15.134892258793116",
+      "Earth route scenario validation: PASS; automated scenario evidence only."
+    ]
+  },
+  "focusedFinalHarnessChecks": {
+    "final-grid-Debug.log": [
+      "Loader-visible layers: VK_LAYER_KHRONOS_validation",
+      "PASS [window] Generic grid and frames startup",
+      "Graphics Debug: selected=1; pass=1; fail=0; skip=0; excluded=89"
+    ],
+    "final-grid-Release.log": [
+      "Loader-visible layers: VK_LAYER_KHRONOS_validation",
+      "PASS [window] Generic grid and frames startup",
+      "Graphics Release: selected=1; pass=1; fail=0; skip=0; excluded=89"
+    ],
+    "strict-policy-final.log": [
+      "PASS [headless] Window validation message policy",
+      "Graphics Debug: selected=1; pass=1; fail=0; skip=0; excluded=89"
+    ],
+    "inherited-disable-isolation.log": [
+      "Loader-visible layers: VK_LAYER_KHRONOS_validation",
+      "PASS [native-gpu] NovaCoreFacilityVisibilityTests",
+      "PASS [native-gpu] NovaCoreSurfaceMaterialCoordinatesTests",
+      "Native GPU Debug: pass=2; fail=0; skip=0"
+    ],
+    "final-gpu-preflight-Debug.log": [
+      "Loader-visible layers: VK_LAYER_KHRONOS_validation",
+      "PASS [gpu] GPU physical-height preparation",
+      "Graphics Debug: selected=1; pass=1; fail=0; skip=0; excluded=89"
+    ],
+    "final-gpu-preflight-Release.log": [
+      "Loader-visible layers: VK_LAYER_KHRONOS_validation",
+      "PASS [gpu] GPU physical-height preparation",
+      "Graphics Release: selected=1; pass=1; fail=0; skip=0; excluded=89"
+    ]
+  },
+  "finalHarnessCheckNote": "Complete 90-case suites used the same final production native runtime/shaders. Subsequent harness-only registry reporting and stricter preflight/override normalization were checked by native GPU, GPU query, grid/frames, repeated production lifecycle, strict-message and deliberately conflicting inherited-setting runs.",
+  "productionAssets": [
+    {
+      "path": "E:\\NovaCore\\assets\\earth\\runtime\\earth_elevation_8192x4096.r16",
+      "bytes": 67108864,
+      "sha256": "4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317"
+    },
+    {
+      "path": "E:\\NovaCore\\.novacore\\cache\\terrain\\v1\\sha256\\38\\38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae.nccube",
+      "bytes": 61484224,
+      "sha256": "38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae"
+    },
+    {
+      "path": "E:\\NovaCore\\.novacore\\cache\\terrain\\v1\\sha256\\c4\\c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe.nccube",
+      "bytes": 210307596,
+      "sha256": "c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe"
+    }
+  ],
+  "ksa": {
+    "binary": {
+      "path": "E:\\Kitten Space Agency\\KSA.dll",
+      "bytes": 4798552,
+      "sha256": "a8a5164204eed962df9d9025e99f523d9a23ee2ce6e802b18216a9da35506d2f"
+    },
+    "reference": "build/ksa-residency-reference/assembly-source/KSA/Program.cs:773-798",
+    "decision": "Adapt generic window/device ownership separately from Earth physical data; no KSA source copied or dependency added."
+  },
+  "reproduction": {
+    "commands": [
+      "dotnet build NovaCore.sln -c Debug",
+      "dotnet build NovaCore.sln -c Release",
+      "Set NOVACORE_P2S5F_ARTIFACT_INPUT to the existing assets/planetary-nested-scale-mesh absolute path",
+      "Run Graphics executable in each configuration without arguments for all 90 cases",
+      "Use --native-gpu for canonical native GPU; --ambient --native-gpu and --ambient --test=\"Production window lifecycle\" for actual machine compatibility",
+      "Set VK_LOADER_DEBUG=error,warn,layer for call-chain evidence and NOVACORE_VULKAN_CALLSTACK=1 for error objects/stack; remove after diagnostics"
+    ],
+    "profileRecipe": "import pathlib,json,os,subprocess,hashlib\nroot=pathlib.Path(__file__).resolve().parent\nrecords=json.loads((root/'registry.json').read_text(encoding='utf-8-sig'))\ndef digest(p): return hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest()\nvalid=[]\nfor row in records:\n    p=pathlib.Path(row['Manifest'])\n    if not p.is_file(): continue\n    doc=json.loads(p.read_text(encoding='utf-8-sig')); layer=doc.get('layer',{})\n    lib=layer.get('library_path'); binary=(p.parent/lib).resolve() if lib else None\n    row.update(name=layer.get('name'),manifestSha256=digest(p),binary=str(binary),binaryExists=binary.is_file() if binary else False,enableEnvironment=layer.get('enable_environment'),disableEnvironment=layer.get('disable_environment'))\n    row['conditionEnvironment']={key:os.environ.get(key) for field in ('enable_environment','disable_environment') for key in layer.get(field,{})}\n    if binary and binary.is_file(): row['binarySha256']=digest(binary)\n    if row['Value']==0 and 'WOW6432Node' not in row['Registry'] and row.get('driverView',64)==64 and row['Registry'].endswith('ImplicitLayers'):\n        valid.append((row,doc))\n(root/'layer-inventory.json').write_text(json.dumps(records,indent=2))\nimplicit=root/'valid-implicit'; implicit.mkdir(exist_ok=True)\nfor i,(row,doc) in enumerate(valid):\n    doc['layer']['library_path']=row['binary']\n    (implicit/f'{i}.json').write_text(json.dumps(doc))\nempty=root/'empty-implicit';empty.mkdir(exist_ok=True)\nexplicit=root/'validation-explicit';explicit.mkdir(exist_ok=True)\nsdk=pathlib.Path(os.environ.get('VULKAN_SDK',os.environ['VK_SDK_PATH']))\ndoc=json.loads((sdk/'Bin/VkLayer_khronos_validation.json').read_text())\ndoc['layer']['library_path']=str(sdk/'Bin/VkLayer_khronos_validation.dll')\n(explicit/'validation.json').write_text(json.dumps(doc))\nprofiles={\n 'ambient':{},\n 'obs-disabled':{'VK_LOADER_LAYERS_DISABLE':'VK_LAYER_OBS_HOOK'},\n 'epic-clean':{'VK_IMPLICIT_LAYER_PATH':str(implicit)},\n 'canonical':{'VK_IMPLICIT_LAYER_PATH':str(empty),'VK_LAYER_PATH':str(explicit),'VK_INSTANCE_LAYERS':'VK_LAYER_KHRONOS_validation','VK_LAYER_SETTINGS_PATH':str(empty)}\n}\n(root/'profiles.json').write_text(json.dumps(profiles,indent=2))\nif __name__=='__main__':\n    results=[]\n    for name,overrides in profiles.items():\n        env=os.environ.copy();env.update(overrides);env['VK_LOADER_DEBUG']='error,warn,layer'\n        with (root/f'loader-{name}.log').open('w') as log:\n            p=subprocess.run([str(sdk/'Bin/vulkaninfoSDK.exe'),'--summary'],env=env,stdout=log,stderr=subprocess.STDOUT,timeout=60)\n        results.append({'profile':name,'exit':p.returncode,'overrides':overrides})\n    (root/'loader-results.json').write_text(json.dumps(results,indent=2))\n    print(json.dumps(results))\n",
+    "profileInput": "Use layerInventory as registry.json in a new temporary directory; do not reuse deleted captured absolute profile directories.",
+    "comparisonRecipe": "import pathlib,json,os,subprocess\nroot=pathlib.Path(__file__).resolve().parent;repo=root.parent.parent\nprofiles=json.loads((root/'profiles.json').read_text()); results=[]\nfor name,overrides in profiles.items():\n    env=os.environ.copy();env.update(overrides);env['NOVACORE_VULKAN_CALLSTACK']='1';env['VK_LOADER_DEBUG']='error,warn,layer'\n    ambient=[] if name=='canonical' else ['--ambient']\n    for config in ('Debug','Release'):\n        exe=repo/f'tests/NovaCore.Graphics.Tests/bin/{config}/net10.0/NovaCore.Graphics.Tests.exe'\n        commands=[('native',['--native-gpu'])]\n        if config=='Debug' or name=='canonical': commands.append(('window',['--test=Production window lifecycle']))\n        for kind,args in commands:\n            path=root/f'comparison-{name}-{config}-{kind}.log'\n            with path.open('w') as log:\n                p=subprocess.run([str(exe),*ambient,*args],cwd=repo,env=env,stdout=log,stderr=subprocess.STDOUT,timeout=300)\n            result=dict(profile=name,configuration=config,kind=kind,exit=p.returncode,log=path.name)\n            results.append(result);print(json.dumps(result),flush=True)\n            (root/'comparison-results.json').write_text(json.dumps(results,indent=2))\n",
+    "routeSmokeRecipe": "using NovaCore.Launcher;\nusing System.Diagnostics;\nusing System.Text.Json;\n\nconst string root = \"E:/NovaCore\";\nvar output = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,\"../../../../\"));\nNovaCoreLaunchPlan? florida = null;\nvar records = new List<object>();\nforeach (var preset in new[] { NovaCoreScenarioPreset.SolarSystemOverview, NovaCoreScenarioPreset.EarthFarOrbital, NovaCoreScenarioPreset.Earth700Km, NovaCoreScenarioPreset.EarthFullscreenNative, NovaCoreScenarioPreset.FloridaLaunchSite, NovaCoreScenarioPreset.NewEarthRenderer })\n{\n    var definition = ScenarioCatalog.Get(preset);\n    if (!ScenarioCatalog.TryCreateConfiguration(preset,definition.DefaultAltitudeMetres,definition.DefaultWindowMode,definition.DefaultResolution,definition.DefaultDiagnostics,3440,1440,out var config,out var error)) throw new Exception(error);\n    var plan = NovaCoreProcessLauncher.CreatePlan(root,config!,\"Release\");\n    if (!Path.GetFullPath(plan.FileName).Equals(Path.GetFullPath(Path.Combine(root,\"samples/NovaCore.Triangle/bin/Release/net10.0/NovaCore.Triangle.exe\")),StringComparison.OrdinalIgnoreCase)) throw new Exception(\"Launcher did not resolve current Release runtime\");\n    if (!File.Exists(plan.FileName)) throw new Exception(\"Missing deployed runtime\");\n    if (preset == NovaCoreScenarioPreset.FloridaLaunchSite)\n    {\n        florida = plan;\n        string[] expected = [\"--scene=sol\",\"--focus=earth\",\"--surface-site=florida-launch\",\"--physical-surface=m12d-natural-candidate\"];\n        if (!plan.Arguments.SequenceEqual(expected)) throw new Exception(\"Florida scenario differs from accepted launcher configuration\");\n    }\n    records.Add(new { preset=definition.DisplayName,plan.FileName,plan.Arguments,plan.WorkingDirectory,plan.EnvironmentVariables });\n}\nFile.WriteAllText(Path.Combine(output,\"launcher-route-probe.json\"),JsonSerializer.Serialize(records,new JsonSerializerOptions { WriteIndented=true }));\nConsole.WriteLine(\"Launcher route probe PASS: six supported presets, current Release executable; exact Florida arguments\");\nif (!args.Contains(\"--smoke\")) return 0;\nvar start = new ProcessStartInfo(florida!.FileName) { WorkingDirectory=florida.WorkingDirectory, UseShellExecute=false, RedirectStandardOutput=true, RedirectStandardError=true, CreateNoWindow=true, WindowStyle=ProcessWindowStyle.Hidden };\nforeach (var key in start.Environment.Keys.Where(k=>k.StartsWith(\"NOVACORE_\")&&(k.Contains(\"CAPTURE\")||k.Contains(\"PROBE\"))).ToArray()) start.Environment.Remove(key);\nforeach (var item in florida.EnvironmentVariables) start.Environment[item.Key]=item.Value;\nstart.Environment[\"NOVACORE_EARTH_ROUTE_VALIDATION\"]=\"florida\";\nstart.Environment[\"VK_INSTANCE_LAYERS\"]=\"VK_LAYER_KHRONOS_validation\";\nforeach (var argument in florida.Arguments) start.ArgumentList.Add(argument);\nforeach (var argument in new[] { \"--benchmark-frames=500\",\"--log=vulkan\",\"--log=validation\" }) start.ArgumentList.Add(argument);\nusing var process=Process.Start(start) ?? throw new Exception(\"Runtime did not start\");\nvar stdout=process.StandardOutput.ReadToEndAsync();var stderr=process.StandardError.ReadToEndAsync();\nusing var deadline=new CancellationTokenSource(TimeSpan.FromSeconds(110));\ntry { await process.WaitForExitAsync(deadline.Token); }\ncatch(OperationCanceledException) { process.Kill(entireProcessTree:true);await process.WaitForExitAsync();throw new Exception(\"Bounded Florida smoke timed out\"); }\nvar log=await stdout;var err=await stderr;\nFile.WriteAllText(Path.Combine(output,\"florida-smoke.log\"),log);File.WriteAllText(Path.Combine(output,\"florida-smoke.err\"),err);\nif(process.ExitCode!=0)throw new Exception(\"Runtime exit \"+process.ExitCode);\nif(!log.Contains(\"Earth route scenario validation: PASS\"))throw new Exception(\"Scenario acceptance driver did not complete\");\nif(!log.Contains(\"NCSM1 regional ready:\")||!log.Contains(\"Production spherical billboard publication:\"))throw new Exception(\"NCSM1 did not publish ready physical terrain\");\nif(!log.Contains(\"Florida seating stability: frame=440\")||!log.Contains(\"bodyFixedStable=true\"))throw new Exception(\"Florida seating check did not complete\");\nif(log.Contains(\"zeroOwner=1\")||log.Contains(\"overlapOwner=1\")||log.Contains(\"staleGenerationDraws=1\")||(log+err).Contains(\"device lost\",StringComparison.OrdinalIgnoreCase))throw new Exception(\"Ownership/device failure\");\nvar vuids=(log+err).Split('\\n').Where(line=>line.Contains(\"VUID-\")).ToArray();\nif(vuids.Length!=0)throw new Exception(\"New Vulkan validation message\");\nFile.WriteAllText(Path.Combine(output,\"smoke-result.json\"),JsonSerializer.Serialize(new { pass=true,frames=500,exitCode=process.ExitCode,physicalProbeEnabled=false,bulkCaptureEnabled=false,vuidLines=vuids.Length,manualAcceptance=false },new JsonSerializerOptions { WriteIndented=true }));\nConsole.WriteLine(\"Florida bounded smoke PASS: 500 frames, ready publication, stable seating, no new Vulkan/ownership/device regression; no bulk capture\");\nreturn 0;\n",
+    "routeProject": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0-windows</TargetFramework><UseWindowsForms>true</UseWindowsForms><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable></PropertyGroup>\n  <ItemGroup><Reference Include=\"NovaCore.Launcher\"><HintPath>E:/NovaCore/tools/NovaCore.Launcher/bin/Release/net10.0-windows/NovaCore.Launcher.dll</HintPath></Reference></ItemGroup>\n</Project>\n"
+  },
+  "candidateSourceHashes": [
+    {
+      "path": "E:\\NovaCore\\docs\\NOVACORE_CURRENT_STATE.md",
+      "bytes": 15345,
+      "sha256": "bd27c6b04935edd6a8c17431e4deb15da568d4178700ccd8afe1bf9b8d792752"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\build-windows.md",
+      "bytes": 12227,
+      "sha256": "3133bd0992589dd64433d1c0f10747981ce4f756fdc0efbc848997eb5ff85fa0"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\graphics-window-validation.md",
+      "bytes": 27742,
+      "sha256": "85f2b11e14252aa8f1de6b5089068cd9ea6285b9d34be8af47434023fd6691f9"
+    },
+    {
+      "path": "E:\\NovaCore\\native\\NovaCore.Native\\NovaCoreNative.cpp",
+      "bytes": 282797,
+      "sha256": "790fe71f51a6b3be01199b06f1eb03a7e1774feb078ae0b05cd1255c957b7937"
+    },
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\GraphicsTestHarness.cs",
+      "bytes": 9794,
+      "sha256": "93f3e07e99dcd078265fb541db6d311dfc519a2b6e685d4aeeb91beac0a5933a"
+    },
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\Program.cs",
+      "bytes": 565350,
+      "sha256": "d1cafd7e1e5be748452ed0fd79d1f38e8dfe6e797fbbb984d4fd69c67dd26a55"
+    },
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\WindowLifecycleTests.cs",
+      "bytes": 12134,
+      "sha256": "750813aa4f21a0df63df2ca23aedf97826753f8993dd87a6f89c7a3dcd39e8f4"
+    },
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\VulkanValidationEnvironment.cs",
+      "bytes": 6860,
+      "sha256": "9969db56dd22394190ffc61240d5c9f8a7510f7589df793a1773d6f18d1c61c5"
+    }
+  ],
+  "storage": {
+    "permanentBudgetBytes": 262144,
+    "temporaryScope": "E:\\NovaCore\\build\\graphics-validation-p2",
+    "note": "Logical file sizes. Successful regional fixture readbacks and temporary per-process layer manifests auto-delete; their cumulative transient bytes were not metered. Rebuildable active native/managed deployment is excluded from diagnostic-output deletion.",
+    "cleanupReviewed": {
+      "root": "E:\\NovaCore\\build\\graphics-validation-p2",
+      "files": 96,
+      "logicalBytes": 5405027.0,
+      "entries": [
+        {
+          "path": "build/graphics-validation-p2/ambient-callstack.log",
+          "bytes": 154308
+        },
+        {
+          "path": "build/graphics-validation-p2/comparison-ambient-Debug-native.log",
+          "bytes": 524345
+        },
+        {
+          "path": "build/graphics-validation-p2/comparison-ambient-Debug-window.log",
+          "bytes": 104973
+        },
+        {
+          "path": "build/graphics-validation-p2/comparison-ambient-Release-native.log",
+          "bytes": 524347
+        },
+        {
+          "path": "build/graphics-validation-p2/comparison-canonical-Debug-native.log",
+          "bytes": 160974
+        },
+        {
+          "path": "build/graphics-validation-p2/comparison-canonical-Debug-window.log",
+          "bytes": 47510
+        },
+        {
+          "path": "build/graphics-validation-p2/comparison-canonical-Release-native.log",
+          "bytes": 160976
+        },
+        {
+          "path": "build/graphics-validation-p2/comparison-canonical-Release-window.log",
+          "bytes": 47621
+        },
+        {
+          "path": "build/graphics-validation-p2/comparison-epic-clean-Debug-native.log",
+          "bytes": 445428
+        },
+        {
+          "path": "build/graphics-validation-p2/comparison-epic-clean-Debug-window.log",
+          "bytes": 89941
+        },
+        {
+          "path": "build/graphics-validation-p2/comparison-epic-clean-Release-native.log",
+          "bytes": 445430
+        },
+        {
+          "path": "build/graphics-validation-p2/comparison-obs-disabled-Debug-native.log",
+          "bytes": 471747
+        },
+        {
+          "path": "build/graphics-validation-p2/comparison-obs-disabled-Debug-window.log",
+          "bytes": 93826
+        },
+        {
+          "path": "build/graphics-validation-p2/comparison-obs-disabled-Release-native.log",
+          "bytes": 471749
+        },
+        {
+          "path": "build/graphics-validation-p2/comparison-results.json",
+          "bytes": 2141
+        },
+        {
+          "path": "build/graphics-validation-p2/comparison-run.log",
+          "bytes": 1709
+        },
+        {
+          "path": "build/graphics-validation-p2/consolidate.py",
+          "bytes": 8629
+        },
+        {
+          "path": "build/graphics-validation-p2/cpu-native-ninja-release.log",
+          "bytes": 99
+        },
+        {
+          "path": "build/graphics-validation-p2/cpu-native-ninja.log",
+          "bytes": 99
+        },
+        {
+          "path": "build/graphics-validation-p2/debug-harness-final-build.log",
+          "bytes": 702
+        },
+        {
+          "path": "build/graphics-validation-p2/debug-managed-final.log",
+          "bytes": 2432
+        },
+        {
+          "path": "build/graphics-validation-p2/debug-managed.log",
+          "bytes": 2432
+        },
+        {
+          "path": "build/graphics-validation-p2/debug-native-final.log",
+          "bytes": 135
+        },
+        {
+          "path": "build/graphics-validation-p2/debug-native-tests-build.log",
+          "bytes": 23
+        },
+        {
+          "path": "build/graphics-validation-p2/debug-native.log",
+          "bytes": 135
+        },
+        {
+          "path": "build/graphics-validation-p2/debug-sample.log",
+          "bytes": 784
+        },
+        {
+          "path": "build/graphics-validation-p2/final-gpu-preflight-Debug.log",
+          "bytes": 1370
+        },
+        {
+          "path": "build/graphics-validation-p2/final-gpu-preflight-Release.log",
+          "bytes": 1383
+        },
+        {
+          "path": "build/graphics-validation-p2/final-grid-Debug.log",
+          "bytes": 8652
+        },
+        {
+          "path": "build/graphics-validation-p2/final-grid-Release.log",
+          "bytes": 8686
+        },
+        {
+          "path": "build/graphics-validation-p2/florida-smoke.err",
+          "bytes": 0
+        },
+        {
+          "path": "build/graphics-validation-p2/florida-smoke.log",
+          "bytes": 261914
+        },
+        {
+          "path": "build/graphics-validation-p2/grid-debug.log",
+          "bytes": 8600
+        },
+        {
+          "path": "build/graphics-validation-p2/inherited-disable-isolation.log",
+          "bytes": 12241
+        },
+        {
+          "path": "build/graphics-validation-p2/launcher-route-probe.json",
+          "bytes": 3327
+        },
+        {
+          "path": "build/graphics-validation-p2/launcher-tests.log",
+          "bytes": 546
+        },
+        {
+          "path": "build/graphics-validation-p2/layer_profiles.py",
+          "bytes": 2745
+        },
+        {
+          "path": "build/graphics-validation-p2/layer-inventory.json",
+          "bytes": 13649
+        },
+        {
+          "path": "build/graphics-validation-p2/loader-ambient.log",
+          "bytes": 131042
+        },
+        {
+          "path": "build/graphics-validation-p2/loader-canonical.log",
+          "bytes": 9641
+        },
+        {
+          "path": "build/graphics-validation-p2/loader-epic-clean.log",
+          "bytes": 93476
+        },
+        {
+          "path": "build/graphics-validation-p2/loader-obs-disabled.log",
+          "bytes": 125124
+        },
+        {
+          "path": "build/graphics-validation-p2/loader-results.json",
+          "bytes": 824
+        },
+        {
+          "path": "build/graphics-validation-p2/managed-Debug.log",
+          "bytes": 152078
+        },
+        {
+          "path": "build/graphics-validation-p2/managed-Release.log",
+          "bytes": 154290
+        },
+        {
+          "path": "build/graphics-validation-p2/native-gpu-debug.log",
+          "bytes": 12076
+        },
+        {
+          "path": "build/graphics-validation-p2/native-gpu-Release.log",
+          "bytes": 12078
+        },
+        {
+          "path": "build/graphics-validation-p2/obs-import-disassembly.txt",
+          "bytes": 2405
+        },
+        {
+          "path": "build/graphics-validation-p2/profile-inventory-run.log",
+          "bytes": 668
+        },
+        {
+          "path": "build/graphics-validation-p2/profiles.json",
+          "bytes": 578
+        },
+        {
+          "path": "build/graphics-validation-p2/registry.json",
+          "bytes": 4698
+        },
+        {
+          "path": "build/graphics-validation-p2/release-managed-final.log",
+          "bytes": 2472
+        },
+        {
+          "path": "build/graphics-validation-p2/release-managed.log",
+          "bytes": 2472
+        },
+        {
+          "path": "build/graphics-validation-p2/release-native-final.log",
+          "bytes": 135
+        },
+        {
+          "path": "build/graphics-validation-p2/release-native-tests-build.log",
+          "bytes": 23
+        },
+        {
+          "path": "build/graphics-validation-p2/route-probe.log",
+          "bytes": 103
+        },
+        {
+          "path": "build/graphics-validation-p2/route-smoke.log",
+          "bytes": 238
+        },
+        {
+          "path": "build/graphics-validation-p2/run_comparisons.py",
+          "bytes": 1216
+        },
+        {
+          "path": "build/graphics-validation-p2/smoke-result.json",
+          "bytes": 171
+        },
+        {
+          "path": "build/graphics-validation-p2/strict-policy-final.log",
+          "bytes": 373
+        },
+        {
+          "path": "build/graphics-validation-p2/route-probe/Program.cs",
+          "bytes": 5006
+        },
+        {
+          "path": "build/graphics-validation-p2/route-probe/Validation.csproj",
+          "bytes": 445
+        },
+        {
+          "path": "build/graphics-validation-p2/route-probe/bin/Release/net10.0-windows/NovaCore.Launcher.dll",
+          "bytes": 59904
+        },
+        {
+          "path": "build/graphics-validation-p2/route-probe/bin/Release/net10.0-windows/NovaCore.Launcher.pdb",
+          "bytes": 22420
+        },
+        {
+          "path": "build/graphics-validation-p2/route-probe/bin/Release/net10.0-windows/Validation.deps.json",
+          "bytes": 839
+        },
+        {
+          "path": "build/graphics-validation-p2/route-probe/bin/Release/net10.0-windows/Validation.dll",
+          "bytes": 18944
+        },
+        {
+          "path": "build/graphics-validation-p2/route-probe/bin/Release/net10.0-windows/Validation.exe",
+          "bytes": 162304
+        },
+        {
+          "path": "build/graphics-validation-p2/route-probe/bin/Release/net10.0-windows/Validation.pdb",
+          "bytes": 16472
+        },
+        {
+          "path": "build/graphics-validation-p2/route-probe/bin/Release/net10.0-windows/Validation.runtimeconfig.json",
+          "bytes": 519
+        },
+        {
+          "path": "build/graphics-validation-p2/route-probe/obj/project.assets.json",
+          "bytes": 22026
+        },
+        {
+          "path": "build/graphics-validation-p2/route-probe/obj/project.nuget.cache",
+          "bytes": 220
+        },
+        {
+          "path": "build/graphics-validation-p2/route-probe/obj/Validation.csproj.nuget.dgspec.json",
+          "bytes": 22719
+        },
+        {
+          "path": "build/graphics-validation-p2/route-probe/obj/Validation.csproj.nuget.g.props",
+          "bytes": 1135
+        },
+        {
+          "path": "build/graphics-validation-p2/route-probe/obj/Validation.csproj.nuget.g.targets",
+          "bytes": 150
+        },
+        {
+          "path": "build/graphics-validation-p2/route-probe/obj/Release/net10.0-windows/.NETCoreApp,Version=v10.0.AssemblyAttributes.cs",
+          "bytes": 200
+        },
+        {
+          "path": "build/graphics-validation-p2/route-probe/obj/Release/net10.0-windows/apphost.exe",
+          "bytes": 162304
+        },
+        {
+          "path": "build/graphics-validation-p2/route-probe/obj/Release/net10.0-windows/Validation.AssemblyInfo.cs",
+          "bytes": 1165
+        },
+        {
+          "path": "build/graphics-validation-p2/route-probe/obj/Release/net10.0-windows/Validation.AssemblyInfoInputs.cache",
+          "bytes": 66
+        },
+        {
+          "path": "build/graphics-validation-p2/route-probe/obj/Release/net10.0-windows/Validation.assets.cache",
+          "bytes": 152
+        },
+        {
+          "path": "build/graphics-validation-p2/route-probe/obj/Release/net10.0-windows/Validation.csproj.AssemblyReference.cache",
+          "bytes": 1271
+        },
+        {
+          "path": "build/graphics-validation-p2/route-probe/obj/Release/net10.0-windows/Validation.csproj.CoreCompileInputs.cache",
+          "bytes": 66
+        },
+        {
+          "path": "build/graphics-validation-p2/route-probe/obj/Release/net10.0-windows/Validation.csproj.FileListAbsolute.txt",
+          "bytes": 2056
+        },
+        {
+          "path": "build/graphics-validation-p2/route-probe/obj/Release/net10.0-windows/Validation.csproj.Up2Date",
+          "bytes": 0
+        },
+        {
+          "path": "build/graphics-validation-p2/route-probe/obj/Release/net10.0-windows/Validation.dll",
+          "bytes": 18944
+        },
+        {
+          "path": "build/graphics-validation-p2/route-probe/obj/Release/net10.0-windows/Validation.GeneratedMSBuildEditorConfig.editorconfig",
+          "bytes": 1163
+        },
+        {
+          "path": "build/graphics-validation-p2/route-probe/obj/Release/net10.0-windows/Validation.genruntimeconfig.cache",
+          "bytes": 66
+        },
+        {
+          "path": "build/graphics-validation-p2/route-probe/obj/Release/net10.0-windows/Validation.GlobalUsings.g.cs",
+          "bytes": 305
+        },
+        {
+          "path": "build/graphics-validation-p2/route-probe/obj/Release/net10.0-windows/Validation.pdb",
+          "bytes": 16472
+        },
+        {
+          "path": "build/graphics-validation-p2/route-probe/obj/Release/net10.0-windows/Validation.sourcelink.json",
+          "bytes": 143
+        },
+        {
+          "path": "build/graphics-validation-p2/route-probe/obj/Release/net10.0-windows/ref/Validation.dll",
+          "bytes": 6656
+        },
+        {
+          "path": "build/graphics-validation-p2/route-probe/obj/Release/net10.0-windows/refint/Validation.dll",
+          "bytes": 6656
+        },
+        {
+          "path": "build/graphics-validation-p2/valid-implicit/0.json",
+          "bytes": 403
+        },
+        {
+          "path": "build/graphics-validation-p2/valid-implicit/1.json",
+          "bytes": 419
+        },
+        {
+          "path": "build/graphics-validation-p2/valid-implicit/2.json",
+          "bytes": 579
+        },
+        {
+          "path": "build/graphics-validation-p2/valid-implicit/3.json",
+          "bytes": 606
+        },
+        {
+          "path": "build/graphics-validation-p2/validation-explicit/validation.json",
+          "bytes": 60443
+        }
+      ]
+    },
+    "cleanupResult": "PASS: all 96 reviewed temporary files removed; exact root empty and removed",
+    "diagnosticOutputCreatedLogicalBytesMeasured": 5405027,
+    "temporaryFilesRemoved": 96,
+    "temporaryLogicalBytesRemoved": 5405027,
+    "remainingOwnedTemporaryFiles": 0,
+    "permanentEvidenceRetainedBytes": 166876
+  },
+  "gitDiffCheck": "PASS",
+  "postCleanupSmoke": {
+    "pass": true,
+    "frames": 120,
+    "exitCode": 0,
+    "vuidCount": 0,
+    "shaderHashes": 98,
+    "productionAssetsVerified": 3,
+    "summary": [
+      "Runtime fingerprint: cwd=E:\\NovaCore; process=E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Triangle.exe; base=E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\\r",
+      "[native] NCSM1 regional ready: incoming=1; pupil=1; dependencyDelayMs=584.125; requests=670; resident=670; uploadedBytes=93392640; complete=true; gpuVisibility=hostBarrierBeforePrepare\r",
+      "[native] Production spherical billboard publication: generation=1; level=17; topologyFamily=1; hash=0xBCE444AFFB2D713B; topologyResident=true; topologyReused=0; topologyUploads=1; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1424208; postHorizonTriangles=1184192; horizonRejected=240016; postScreenConeTriangles=294748; screenConeRejected=889444; compactedIndices=884244; visibleTriangles=294748; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=1; deferredRetirements=0\r",
+      "[native] Average frame time: 8.380 ms (120 frames)\r"
+    ]
+  }
+}
