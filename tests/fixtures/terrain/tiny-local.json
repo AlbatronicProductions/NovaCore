@@ -2,12 +2,12 @@
   "schema": "NovaCore.TerrainAsset/1",
   "assetId": "tiny-local",
   "bodyId": 6,
-  "terrainVersion": 4,
+  "terrainVersion": 5,
   "format": "nccube",
-  "formatVersion": 2,
+  "formatVersion": 3,
   "fileName": "tiny-local.nccube",
-  "byteSize": 697539,
-  "sha256": "6fea3a62833e8aa6beffcbd845697baaca2a8db281eab2ed900d53b2657cf053",
+  "byteSize": 1117669,
+  "sha256": "f91d5922c8cd22d1aa200b3800a7bf87aa4fa8ae9f9b18e04008e735289a6f3d",
   "hierarchy": {
     "coverage": "sparse-local-relaxed-cube-sphere",
     "minimumPayloadLevel": 4,
@@ -19,9 +19,17 @@
   "contentManifest": "tests/fixtures/terrain/tiny-local.content.json",
   "generator": {
     "tool": "tools/earth_data/build_local_terrain_pack.py",
-    "version": "NCCUBE2/BC7-BC4-BC5-local-v2-east-positive",
+    "version": "NCCUBE2/schema3-payload3-terrain5-tiny-local-r16-control-v1",
     "executable": "python",
-    "arguments": ["--fixture", "--sector-level", "4", "--output", "{output}"]
+    "arguments": [
+      "--fixture",
+      "--sector-level",
+      "4",
+      "--output",
+      "{output}"
+    ]
   },
-  "artifact": { "url": null }
+  "artifact": {
+    "url": null
+  }
 }

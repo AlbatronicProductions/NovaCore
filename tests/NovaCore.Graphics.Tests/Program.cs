@@ -298,10 +298,10 @@ static void LocalTerrainStreamingAndGpuCompressionTest()
     var fixturePath=Path.Combine(fixtureRoot,"tiny-local.nccube");
     Check(TerrainAssetManifestFile.TryLoad(Path.Combine(fixtureRoot,"tiny-local.json"),out var manifest,out var manifestError),$"local fixture manifest: {manifestError}");
     var verification=TerrainAssetCache.Verify(manifest,fixturePath);
-    Check(verification.IsValid&&verification.ActualBytes==697_539&&verification.ActualSha256=="6fea3a62833e8aa6beffcbd845697baaca2a8db281eab2ed900d53b2657cf053","NCCUBE2 fixture manifest, size, and content identity");
+    Check(verification.IsValid&&verification.ActualBytes==1_117_669&&verification.ActualSha256=="f91d5922c8cd22d1aa200b3800a7bf87aa4fa8ae9f9b18e04008e735289a6f3d","NCCUBE2 fixture manifest, size, and content identity");
 
     var package=File.ReadAllBytes(fixturePath);
-    Check(PlanetaryLocalTerrainPackContract.TryReadHeader(package,out var header)&&header.RecordCount==4&&header.MinimumSectorLevel==4&&header.MaximumSectorLevel==4,"NCCUBE2 sparse hierarchy header");
+    Check(PlanetaryLocalTerrainPackContract.TryReadHeader(package,out var header)&&header.Version==3&&header.TerrainVersion==5&&header.RecordCount==4&&header.MinimumSectorLevel==4&&header.MaximumSectorLevel==4,"NCCUBE2 sparse hierarchy header");
     var sectors=new PlanetaryLocalTerrainSectorId[header.RecordCount];
     var records=new PlanetaryLocalTerrainRecordHeader[header.RecordCount];
     var offset=PlanetaryLocalTerrainPackContract.HeaderBytes;
@@ -311,21 +311,23 @@ static void LocalTerrainStreamingAndGpuCompressionTest()
         sectors[index]=records[index].Sector;
         Check(records[index].PayloadOffset==(ulong)(offset+PlanetaryLocalTerrainPackContract.RecordHeaderBytes),$"NCCUBE2 sequential payload {index}");
         Check(records[index].GpuAlbedoBytes==PlanetaryLocalTerrainPackContract.GpuBytes(PlanetaryLocalTerrainGpuFormat.Bc7Srgb,PlanetaryLocalTerrainPackContract.StoredExtent)&&
-              records[index].GpuElevationBytes==PlanetaryLocalTerrainPackContract.GpuBytes(PlanetaryLocalTerrainGpuFormat.Bc4Unorm,PlanetaryLocalTerrainPackContract.StoredExtent)&&
-              records[index].GpuNormalBytes==PlanetaryLocalTerrainPackContract.GpuBytes(PlanetaryLocalTerrainGpuFormat.Bc5Unorm,PlanetaryLocalTerrainPackContract.StoredExtent),$"record {index} uses BC7/BC4/BC5 GPU bytes");
-        offset=checked((int)records[index].PayloadOffset+(int)records[index].StoredAlbedoBytes+(int)records[index].StoredElevationBytes+(int)records[index].StoredNormalBytes);
+              records[index].GpuElevationBytes==PlanetaryLocalTerrainPackContract.GpuBytes(PlanetaryLocalTerrainGpuFormat.R16Unorm,PlanetaryLocalTerrainPackContract.StoredExtent)&&
+              records[index].GpuNormalBytes==PlanetaryLocalTerrainPackContract.GpuBytes(PlanetaryLocalTerrainGpuFormat.Bc5Unorm,PlanetaryLocalTerrainPackContract.StoredExtent),$"record {index} uses BC7/R16/BC5 GPU bytes");
+        Check(records[index].Sector.PayloadVersion==3&&records[index].HasControl&&records[index].HasPerRecordResidualRange&&
+              records[index].ResidualMinimumMetres==-128f&&records[index].ResidualMaximumMetres==127.99609375f&&records[index].GpuControlBytes==264*264,$"record {index} has current physical range and R8 control");
+        offset=checked((int)records[index].PayloadOffset+(int)records[index].StoredAlbedoBytes+(int)records[index].StoredElevationBytes+(int)records[index].StoredNormalBytes+(int)records[index].StoredControlBytes);
     }
     Check(offset==package.Length&&sectors.Distinct().Count()==sectors.Length&&sectors.SequenceEqual(sectors.Order()),"NCCUBE2 records exactly cover file in deterministic identity order");
 
     static byte[] DecodeChannel(byte[] package,in PlanetaryLocalTerrainRecordHeader record,int channel)
     {
-        var storedOffset=checked((int)record.PayloadOffset+(channel==0?0:checked((int)record.StoredAlbedoBytes+(channel==1?0:(int)record.StoredElevationBytes))));
-        var storedBytes=channel switch{0=>(int)record.StoredAlbedoBytes,1=>(int)record.StoredElevationBytes,_=>(int)record.StoredNormalBytes};
-        var gpuBytes=channel switch{0=>(int)record.GpuAlbedoBytes,1=>(int)record.GpuElevationBytes,_=>(int)record.GpuNormalBytes};
-        var codec=channel switch{0=>record.AlbedoCodec,1=>record.ElevationCodec,_=>record.NormalCodec};
-        var result=new byte[gpuBytes];
-        if(codec==PlanetaryLocalTerrainStorageCodec.RawGpuBlocks)package.AsSpan(storedOffset,storedBytes).CopyTo(result);
-        else Check(PlanetaryLocalTerrainTranscode.TryDecodePackBits(package.AsSpan(storedOffset,storedBytes),result,out var written)&&written==gpuBytes,$"PackBits channel {channel} transcode");
+        int[] lengths = [(int)record.StoredAlbedoBytes,(int)record.StoredElevationBytes,(int)record.StoredNormalBytes,(int)record.StoredControlBytes];
+        int[] gpuLengths = [(int)record.GpuAlbedoBytes,(int)record.GpuElevationBytes,(int)record.GpuNormalBytes,(int)record.GpuControlBytes];
+        PlanetaryLocalTerrainStorageCodec[] codecs = [record.AlbedoCodec,record.ElevationCodec,record.NormalCodec,record.ControlCodec];
+        var storedOffset=checked((int)record.PayloadOffset+lengths.Take(channel).Sum());
+        var result=new byte[gpuLengths[channel]];
+        if(codecs[channel]==PlanetaryLocalTerrainStorageCodec.RawGpuBlocks)package.AsSpan(storedOffset,lengths[channel]).CopyTo(result);
+        else Check(PlanetaryLocalTerrainTranscode.TryDecodePackBits(package.AsSpan(storedOffset,lengths[channel]),result,out var written)&&written==result.Length,$"PackBits channel {channel} transcode");
         return result;
     }
     var asynchronous=Task.Run(()=>(DecodeChannel(package,records[0],0),DecodeChannel(package,records[0],1),DecodeChannel(package,records[0],2))).GetAwaiter().GetResult();
@@ -334,22 +336,64 @@ static void LocalTerrainStreamingAndGpuCompressionTest()
     var corruptPath=Path.Combine(Path.GetTempPath(),$"novacore-local-corrupt-{Guid.NewGuid():N}.nccube");
     try
     {
-        var corrupt=(byte[])package.Clone();corrupt[checked((int)records[0].PayloadOffset+17)]^=0x5a;File.WriteAllBytes(corruptPath,corrupt);
-        Check(NativeRuntime.ValidateTerrainAsset(corruptPath,manifest.BodyId,manifest.TerrainVersion,(uint)manifest.Hierarchy.RecordCount)==NativeResult.Failure,"native local payload digest rejects corrupt sector data");
+        // Every channel, digest-bound physical range, truncation, and unsupported schema must fail closed.
+        int[] corruptOffsets = [(int)records[0].PayloadOffset+17,
+            (int)(records[0].PayloadOffset+records[0].StoredAlbedoBytes)+17,
+            (int)(records[0].PayloadOffset+records[0].StoredAlbedoBytes+records[0].StoredElevationBytes)+17,
+            (int)(records[0].PayloadOffset+records[0].StoredAlbedoBytes+records[0].StoredElevationBytes+records[0].StoredNormalBytes),
+            PlanetaryLocalTerrainPackContract.HeaderBytes+104, 8];
+        foreach(var corruptOffset in corruptOffsets)
+        {
+            var corrupt=(byte[])package.Clone();corrupt[corruptOffset]^=0x5a;File.WriteAllBytes(corruptPath,corrupt);
+            Check(NativeRuntime.ValidateTerrainAsset(corruptPath,manifest.BodyId,manifest.TerrainVersion,(uint)manifest.Hierarchy.RecordCount)==NativeResult.Failure,$"native local parser/digest rejects corruption at {corruptOffset}");
+        }
+        File.WriteAllBytes(corruptPath,package.AsSpan(0,package.Length-1).ToArray());
+        Check(TerrainAssetCache.Verify(manifest,corruptPath).Status==TerrainAssetVerificationStatus.SizeMismatch,"manifest boundary rejects truncated current payload before native publication");
     }
     finally{if(File.Exists(corruptPath))File.Delete(corruptPath);}
-    var missingSector=new PlanetaryLocalTerrainSectorId(6,4,CubeSphereFace.PositiveZ,4,0,0,1,1);
+    var missingSector=new PlanetaryLocalTerrainSectorId(6,5,CubeSphereFace.PositiveZ,4,0,0,1,3);
     Check(!sectors.Contains(missingSector),"sparse local package reports geographically absent sectors without inventing unrelated fallback");
 
     using var content=JsonDocument.Parse(File.ReadAllText(Path.Combine(fixtureRoot,"tiny-local.content.json")));
     var contentRoot=content.RootElement;
-    Check(contentRoot.GetProperty("rawBytes").GetInt64()==1_951_488&&contentRoot.GetProperty("gpuBytes").GetInt64()==696_960&&
-          contentRoot.GetProperty("bc7Bytes").GetInt64()==278_784&&contentRoot.GetProperty("bc4Bytes").GetInt64()==139_392&&contentRoot.GetProperty("bc5Bytes").GetInt64()==278_784,"fixture reports naive and GPU-native dataset sizes");
-    Check(contentRoot.GetProperty("maximumVerticalErrorMetres").GetDouble()<6.1&&contentRoot.GetProperty("rmsVerticalErrorMetres").GetDouble()<2.2,"BC4 physical residual error is explicit and bounded");
-    Check(contentRoot.GetProperty("maximumSlopeError").GetDouble()<.0023&&contentRoot.GetProperty("rmsSlopeError").GetDouble()<.00031&&
-          contentRoot.GetProperty("maximumNormalErrorDegrees").GetDouble()<.33&&contentRoot.GetProperty("rmsNormalErrorDegrees").GetDouble()<.23&&
-          contentRoot.GetProperty("worstVerticalSample").GetProperty("verticalErrorMetres").GetDouble()==contentRoot.GetProperty("maximumVerticalErrorMetres").GetDouble(),
-          "BC4 slope/normal error and worst geographic sample are explicit and bounded");
+    Check(contentRoot.GetProperty("rawBytes").GetInt64()==2_230_272&&contentRoot.GetProperty("gpuBytes").GetInt64()==1_393_920&&contentRoot.GetProperty("sha256").GetString()==manifest.Sha256,"current fixture byte accounting and manifest agree");
+    Check(contentRoot.GetProperty("maximumVerticalErrorMetres").GetDouble()<.002&&contentRoot.GetProperty("rmsVerticalErrorMetres").GetDouble()<.0012,"R16 physical residual error is explicit and bounded");
+    var maximumError=0d;var maximumSlopeError=0d;var maximumNormalError=0d;
+    var sampleCount=0;var squaredError=0d;var mirroredDisagreement=0d;
+    foreach(var record in records)
+    {
+        var heights=DecodeChannel(package,record,1);var controls=DecodeChannel(package,record,3);
+        var decoded=new double[264*264];var expected=new double[decoded.Length];
+        for(var y=0;y<264;y++)for(var x=0;x<264;x++)
+        {
+            var id=record.Sector;
+            var direction=RelaxedCubeSphereProjection.UnitDirection(id.Face,(id.X+(x-4+.5d)/256d)/(1<<id.Level),(id.Y+(y-4+.5d)/256d)/(1<<id.Level));
+            var longitude=BodyFixedGeography.LongitudeRadians(direction);var latitude=BodyFixedGeography.LatitudeRadians(direction);
+            var roundTrip=BodyFixedGeography.DirectionFromLatitudeLongitude(latitude,longitude);
+            Check((roundTrip-direction).LengthSquared<1e-24&&longitude<0d,"positive-Z fixture is geographically west under canonical body-fixed convention");
+            static double Residual(double lon,double lat) => 18d*Math.Sin(lon*1800d+lat*1300d)+7d*Math.Sin(lon*5100d-lat*3900d);
+            var index=y*264+x;expected[index]=Residual(longitude,latitude);
+            decoded[index]=record.ResidualMinimumMetres+BinaryPrimitives.ReadUInt16LittleEndian(heights.AsSpan(index*2))/256d;
+            var error=Math.Abs(decoded[index]-expected[index]);maximumError=Math.Max(maximumError,error);squaredError+=error*error;sampleCount++;
+            mirroredDisagreement=Math.Max(mirroredDisagreement,Math.Abs(decoded[index]-Residual(-longitude,latitude)));
+            Check(controls[index]==1+(int)Math.Floor((longitude+Math.PI)*32d/Math.PI)%8,"decoded control follows canonical longitude");
+        }
+        var step=6371008.8*Math.PI/((1<<record.Sector.Level)*256d);
+        for(var y=1;y<263;y++)for(var x=1;x<263;x++)
+        {
+            var index=y*264+x;
+            var dx=(decoded[index+1]-decoded[index-1])/(2d*step);var dy=(decoded[index+264]-decoded[index-264])/(2d*step);
+            var ex=(expected[index+1]-expected[index-1])/(2d*step);var ey=(expected[index+264]-expected[index-264])/(2d*step);
+            maximumSlopeError=Math.Max(maximumSlopeError,Math.Max(Math.Abs(dx-ex),Math.Abs(dy-ey)));
+            var normal=new Double3(-dx,-dy,1d).Normalized();var oracle=new Double3(-ex,-ey,1d).Normalized();
+            maximumNormalError=Math.Max(maximumNormalError,Math.Sqrt((normal-oracle).LengthSquared));
+        }
+    }
+    Check(maximumError<.002&&Math.Sqrt(squaredError/sampleCount)<.0012&&mirroredDisagreement>40d,"actual decoded R16 texels agree with current geography; mirrored longitude decisively fails");
+    Check(maximumSlopeError<5e-7&&maximumNormalError<7e-7,"decoded physical slope and normal error remain bounded");
+    Check(records.Any(r=>r.AlbedoCodec==PlanetaryLocalTerrainStorageCodec.RawGpuBlocks)&&records.Any(r=>r.ControlCodec==PlanetaryLocalTerrainStorageCodec.PackBits),"fixture exercises raw and PackBits storage");
+    byte[] invalidPackBits=[0x80];Check(!PlanetaryLocalTerrainTranscode.TryDecodePackBits(invalidPackBits,new byte[3],out _),"truncated PackBits run is rejected");
+    Console.WriteLine($"Current local physical oracle: samples={sampleCount}; max={maximumError:R}m; RMS={Math.Sqrt(squaredError/sampleCount):R}m; slope={maximumSlopeError:R}; normal={maximumNormalError:R}; mirrored={mirroredDisagreement:R}m");
 
     var localSource=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","LocalTerrainPack.cpp"));
     Check(localSource.Contains("local terrain payload digest mismatch",StringComparison.Ordinal),

@@ -1,5 +1,10 @@
 # Compatibility contract resolution — after banked Package 1
 
+Historical audit snapshot: the subsequently authorized
+[tiny-local/internal-authoring migration](tiny-local-internal-authoring-migration.md)
+implements the bounded internal follow-up. The measurements and matrix below
+remain the original pre-migration evidence; public compatibility decisions remain open.
+
 **PARTIAL RESOLUTION — PROJECT CONTROL DECISION REQUIRED.**
 
 The primary result is the [complete 25-row contract matrix](engineering-evidence/compatibility-contract-resolution/contract-matrix.csv).

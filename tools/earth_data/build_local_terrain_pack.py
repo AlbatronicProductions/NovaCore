@@ -382,11 +382,39 @@ def build_florida(args) -> int:
     regional_source = RegionalGeoTiff(args.regional_elevation)
     selected = sorted(regional_sectors(range(args.minimum_sector_level,args.sector_level+1),regional_source),
                       key=lambda value:(value[0],value[1],value[2],value[3]))
+    return write_regional_pack(args, selected,
+        lambda face,level,x,y: regional_tile_data(face,x,y,level,albedo_source,elevation_source,regional_source),
+        {"kind":"USGS-3DEP-geographic-source","boundsDegrees":regional_source.bounds,
+            "launchSiteDegrees":[FLORIDA_LAUNCH_LATITUDE,FLORIDA_LAUNCH_LONGITUDE],"boundaryFeatherMetres":FLORIDA_BOUNDARY_FEATHER_METRES},
+        {"path":args.regional_elevation.name,"sha256":source_sha,"horizontalArcSeconds":regional_source.scale_x*3600.0,
+            "dimensions":[regional_source.width,regional_source.height],"crs":"EPSG:4269 (NAD83 geographic)","verticalUnits":"metres"})
+
+
+def build_fixture(args) -> int:
+    """Four synthetic L4 sectors through the production R16/control writer."""
+    if args.sector_level != 4 or args.minimum_sector_level not in (None, 4):
+        raise ValueError("The bounded tiny-local fixture requires --sector-level 4.")
+    if args.albedo or args.elevation or args.regional_elevation:
+        raise ValueError("Synthetic fixture inputs cannot be mixed with production sources.")
+    args.minimum_sector_level = 4
+
+    def synthetic_tile(face, level, x, y):
+        albedo,residual,_,normal_x,normal_y,longitude,latitude = tile_data(face,x,y,level,None,None)
+        # Deterministic geographic classes; no claim of real Florida land use.
+        control = (1 + np.floor((longitude + np.pi)*32/np.pi).astype(np.int64) % 8).astype(np.uint8)
+        return albedo,residual,normal_x,normal_y,control,longitude,latitude,residual,np.ones_like(residual)
+
+    return write_regional_pack(args, [(face,4,x,y) for face,x,y in sectors(4,True)], synthetic_tile,
+        {"kind":"synthetic-sparse-regression","longitudeConvention":"east-positive-toward-negative-Z"},
+        {"recipe":"tiny-local-r16-control-v1","numpyVersion":np.__version__,"verticalUnits":"metres"})
+
+
+def write_regional_pack(args, selected, tile_provider, coverage_description, source_description) -> int:
+    """One encoder, digest layout and publication format for production and fixtures."""
     records=[];metrics=[];raw_bytes=stored_bytes=gpu_bytes=0;control_histogram=np.zeros(9,dtype=np.uint64)
     package_minimum=math.inf;package_maximum=-math.inf
     for face,level,x,y in selected:
-        albedo,residual,normal_x,normal_y,control,longitude,latitude,regional_height,coverage=regional_tile_data(
-            face,x,y,level,albedo_source,elevation_source,regional_source)
+        albedo,residual,normal_x,normal_y,control,longitude,latitude,regional_height,coverage=tile_provider(face,level,x,y)
         record_minimum=FLORIDA_RESIDUAL_MINIMUM_METRES
         record_maximum=FLORIDA_RESIDUAL_MAXIMUM_METRES
         if float(np.min(residual))<record_minimum or float(np.max(residual))>record_maximum:
@@ -437,10 +465,7 @@ def build_florida(args) -> int:
         "schema":"NovaCore.LocalTerrainContent/3","formatVersion":VERSION,"payloadVersion":PAYLOAD_VERSION,
         "channels":{"albedo":"BC7 sRGB","heightResidual":"R16 UNORM with per-record metre range","normal":"BC5 UNORM","control":"R8 UNORM class ID"},
         "records":len(records),"minimumSectorLevel":args.minimum_sector_level,"maximumSectorLevel":args.sector_level,
-        "recordsByLevel":by_level,"coverage":{"kind":"USGS-3DEP-geographic-source","boundsDegrees":regional_source.bounds,
-            "launchSiteDegrees":[FLORIDA_LAUNCH_LATITUDE,FLORIDA_LAUNCH_LONGITUDE],"boundaryFeatherMetres":FLORIDA_BOUNDARY_FEATHER_METRES},
-        "source":{"path":args.regional_elevation.name,"sha256":source_sha,"horizontalArcSeconds":regional_source.scale_x*3600.0,
-            "dimensions":[regional_source.width,regional_source.height],"crs":"EPSG:4269 (NAD83 geographic)","verticalUnits":"metres"},
+        "recordsByLevel":by_level,"coverage":coverage_description,"source":source_description,
         "rawBytes":raw_bytes,"gpuBytes":gpu_bytes,"storedBytes":stored_bytes,"supercompressionRatio":gpu_bytes/stored_bytes,
         "maximumVerticalErrorMetres":max(value["maximumVerticalErrorMetres"] for value in metrics),
         "rmsVerticalErrorMetres":math.sqrt(sum(value["rmsVerticalErrorMetres"]**2 for value in metrics)/len(metrics)),
@@ -468,6 +493,8 @@ def main() -> int:
     parser.add_argument("--regional-elevation-sha256")
     parser.add_argument("--fixture", action="store_true")
     args = parser.parse_args()
+    if args.fixture:
+        return build_fixture(args)
     if args.regional_elevation:
         if not args.albedo or not args.elevation: raise ValueError("M12 regional builds require global albedo and elevation authorities.")
         if args.minimum_sector_level is None: args.minimum_sector_level=args.sector_level

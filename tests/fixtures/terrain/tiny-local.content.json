@@ -1,30 +1,48 @@
 {
-  "schema": "NovaCore.LocalTerrainContent/1",
-  "records": 4,
-  "sectorLevel": 4,
-  "rawBytes": 1951488,
-  "gpuBytes": 696960,
-  "storedBytes": 696771,
-  "supercompressionRatio": 1.0002712512432348,
-  "bc7Bytes": 278784,
-  "bc4Bytes": 139392,
-  "bc5Bytes": 278784,
-  "maximumVerticalErrorMetres": 6.023490905761719,
-  "rmsVerticalErrorMetres": 2.143428934302063,
-  "maximumSlopeError": 0.0021931789815425873,
-  "rmsSlopeError": 0.00030037846109700917,
-  "maximumNormalErrorDegrees": 0.31775182485580444,
-  "rmsNormalErrorDegrees": 0.21945029396953147,
-  "worstVerticalSample": {
-    "face": 4,
-    "sectorX": 6,
-    "sectorY": 7,
-    "texelX": 195,
-    "texelY": 126,
-    "latitudeDegrees": -2.631065391395481,
-    "longitudeDegrees": 96.35545957022077,
-    "verticalErrorMetres": 6.023490905761719
+  "schema": "NovaCore.LocalTerrainContent/3",
+  "formatVersion": 3,
+  "payloadVersion": 3,
+  "channels": {
+    "albedo": "BC7 sRGB",
+    "heightResidual": "R16 UNORM with per-record metre range",
+    "normal": "BC5 UNORM",
+    "control": "R8 UNORM class ID"
   },
-  "albedoRmsByteError": 0.4876259513296748,
-  "sha256": "6fea3a62833e8aa6beffcbd845697baaca2a8db281eab2ed900d53b2657cf053"
+  "records": 4,
+  "minimumSectorLevel": 4,
+  "maximumSectorLevel": 4,
+  "recordsByLevel": {
+    "4": 4
+  },
+  "coverage": {
+    "kind": "synthetic-sparse-regression",
+    "longitudeConvention": "east-positive-toward-negative-Z"
+  },
+  "source": {
+    "recipe": "tiny-local-r16-control-v1",
+    "numpyVersion": "2.3.5",
+    "verticalUnits": "metres"
+  },
+  "rawBytes": 2230272,
+  "gpuBytes": 1393920,
+  "storedBytes": 1116901,
+  "supercompressionRatio": 1.2480246682561837,
+  "maximumVerticalErrorMetres": 0.00196075439453125,
+  "rmsVerticalErrorMetres": 0.0011270408908355906,
+  "minimumRegionalElevationMetres": -24.99982261657715,
+  "maximumRegionalElevationMetres": 24.99962615966797,
+  "minimumResidualMetres": -24.99982261657715,
+  "maximumResidualMetres": 24.99962615966797,
+  "controlClassTexels": {
+    "ocean": 0,
+    "coastalIntertidal": 0,
+    "beachSand": 0,
+    "wetland": 0,
+    "grass": 0,
+    "scrub": 0,
+    "forest": 109751,
+    "developed": 152410,
+    "launchSiteReservation": 16623
+  },
+  "sha256": "f91d5922c8cd22d1aa200b3800a7bf87aa4fa8ae9f9b18e04008e735289a6f3d"
 }
