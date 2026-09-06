@@ -10,3 +10,10 @@ artifacts/
 !tests/fixtures/**/*.nccube
 *.nccube.incomplete*
 *.nccube.tmp*
+
+# Temporary AI/manual acceptance videos
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
