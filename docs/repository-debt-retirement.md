@@ -1,5 +1,11 @@
 # Repository debt retirement — post-P2S5H review
 
+Historical retirement snapshot. Subsequent fixture, cache and Graphics packages
+are banked; the debt front remains open. Current placement decisions and the
+resolved root-transcript finding are recorded in the
+[structure audit](engineering-evidence/repository-structure/README.md).
+The original observations/retention boundaries below remain chronological evidence.
+
 **PARTIAL RETIREMENT — FOLLOW-UP REQUIRED.** This is the unbanked safe subset of
 the debt front. Proven dead responsibilities were removed. Compatibility/API,
 fixture-migration and storage decisions remain explicit follow-ups, not permanent

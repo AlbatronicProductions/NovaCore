@@ -7,6 +7,12 @@ acceptance, KSA-reference, and authority rules are in
 [ENGINEERING_RULES.md](../ENGINEERING_RULES.md). Do not reproduce their full
 terrain narrative here.
 
+Start with the [repository ownership map](repository-structure.md) for placement,
+project dependencies, fixtures and generated state. Repository-local `.codex/` is
+ignored scratch, not session authority. Investigation archives are indexed under
+[engineering history](engineering-evidence/README.md); consult them for provenance,
+not as an onboarding requirement.
+
 ## Repository rules
 
 - Work in `E:\NovaCore` and inspect `git status --short` before editing.

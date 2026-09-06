@@ -1,5 +1,9 @@
 # Architecture
 
+Directory placement and source/cache/history boundaries have one owner:
+[repository structure](repository-structure.md). This document owns subsystem
+relationships; [current state](NOVACORE_CURRENT_STATE.md) owns the production checkpoint.
+
 NovaCore is a small managed/native foundation, not a complete game engine. Its current architecture keeps authoritative spatial mathematics in managed C# and Vulkan resource ownership in native C++20.
 
 ```text

@@ -265,9 +265,10 @@ visually finished.
   workload-efficiency work remains.
 - Ambient OBS Vulkan capture can report D3D11 KMT import
   `memoryTypeIndex-00645`; the measured caller is the OBS hook. Stale Epic
-  registrations separately cause loader errors. The unbanked
-  [Graphics Package 2](graphics-validation-package-2.md) isolates canonical
-  automated validation while retaining strict ambient diagnostics.
+  registrations separately cause loader errors. Graphics Package 2, banked at
+  `9409fec36e72f34f26cd4ab5fe47082e7dcafb20`,
+  [isolates canonical validation](graphics-validation-package-2.md) while retaining
+  strict ambient diagnostics.
 - The opaque distant/detailed source assertion was corrected in banked Graphics
   Package 1. Package 2 validates generic grid/frames startup without Earth assets;
   other shared generic/planetary allocations remain separate resource-ownership debt.

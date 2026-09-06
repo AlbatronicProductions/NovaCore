@@ -63,6 +63,12 @@ Keeping those responsibilities separate allows visual systems to become more sop
 
 # Technical overview
 
+Developer orientation: [engineering rules](ENGINEERING_RULES.md) →
+[current state](docs/NOVACORE_CURRENT_STATE.md) → [architecture](docs/architecture.md)
+→ [repository ownership map](docs/repository-structure.md) → the relevant subsystem
+guide. [Engineering history](docs/engineering-evidence/README.md) supplies provenance;
+it is not prerequisite onboarding or a competing current specification.
+
 The rest of this README goes deeper into NovaCore's current engineering state, architecture, renderer, planetary systems, validation, and limitations.
 
 NovaCore currently combines a C# simulation core with a native Vulkan renderer, compact DE440-validated Solar propagation, camera-relative high-precision transport, GPU-driven planetary rendering, HDR presentation, procedural planetary materials, Saturn rings, and an interactive Solar map.
