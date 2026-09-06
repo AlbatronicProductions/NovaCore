@@ -1,5 +1,9 @@
 # Repository-debt retirement evidence
 
+The [final closure audit](final-closure.md) records the later banked-package
+verification and resolution of the final terrain-contract blocker. The package
+observations below remain historical evidence.
+
 **PARTIAL RETIREMENT — FOLLOW-UP REQUIRED.** Read the
 [responsibility-island report](../../repository-debt-retirement.md) for the
 retired packages, supported consumers, KSA comparison and exact follow-ups.

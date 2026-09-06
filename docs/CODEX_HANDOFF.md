@@ -115,11 +115,13 @@ objective. Do not reopen P2S5H or move its tag.
 - Atmosphere, clouds, environmental rebuilding, and spacecraft/surface gameplay
   remain separate future work.
 
-Known non-blocking debt is the remaining orientation-sensitive surface GPU
-variability, the existing D3D11 KMT external-memory validation VUID, and the
-unrelated opaque distant/detailed handoff orbit-line assertion in the broad
-Graphics suite. Do not hide these, but do not reopen accepted ownership,
-topology, tessellation, or physical-authority contracts to address them.
+Known non-blocking debt includes orientation-sensitive surface GPU variability
+and ambient OBS KMT/Epic interoperability. Banked Graphics Package 2 isolates
+canonical validation while keeping ambient failures observable. The opaque
+distant/detailed handoff assertion was fixed in banked Package 1; it is no longer
+an outstanding suite failure. See [current known debt](NOVACORE_CURRENT_STATE.md#known-debt).
+Do not reopen accepted ownership, topology, tessellation or physical authority
+to address the remaining independent responsibilities.
 
 ## KSA reference workflow
 

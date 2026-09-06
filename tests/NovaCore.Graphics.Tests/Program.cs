@@ -86,6 +86,7 @@ var tests = new (string, Action)[]
     ("Terrain asset distribution boundary", TerrainAssetDistributionBoundaryTest),
     ("Cache lifecycle cleanup", CacheLifecycleTests.Run),
     ("Local terrain format and GPU compression", LocalTerrainStreamingAndGpuCompressionTest),
+    ("Local terrain payload-2 authoring contract", LocalTerrainPayload2Tests.Run),
     ("M12 Florida regional physical surface", M12FloridaRegionalPhysicalSurfaceTest),
     ("Production cube-sphere GPU residency integration", ProductionCubeSphereGpuResidencyIntegrationTest),
     ("Production physical-normal tangent continuity", ProductionPhysicalNormalTangentContinuityTest),

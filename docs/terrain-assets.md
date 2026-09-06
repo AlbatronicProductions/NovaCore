@@ -36,13 +36,35 @@ The production regional identity is `earth-florida-m12`: 210,307,596 bytes
 with SHA-256
 `c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe`.
 Its tracked manifest is `assets/terrain/manifests/earth-florida-m12.json`; it
-uses terrain version 5 and the backward-readable NCCUBE2-v3 ABI with a complete
+uses terrain version 5, NCCUBE2 schema 3 / payload 3, with a complete
 Florida L8-L11 record hierarchy. A missing regional object is reported
 explicitly while the coherent global terrain-v5 sampling source remains
 available. Runtime residency is bounded to 256 channel-complete records
 (BC7/R16/BC5/R8, 89,210,880 bytes). These records feed canonical physical and
 presentation preparation for the production spherical billboard; they do not
 publish a separate visible terrain owner.
+
+## NCCUBE support contract
+
+| Container / schema / payload | Current responsibility |
+|---|---|
+| NCCUBE1 / 1 | Global production and bounded global fixtures; terrain-v5 identity above |
+| NCCUBE2 / 3 / 3 | Regional production and tiny-local fixture; BC7/R16/BC5/R8 with per-record residual ranges |
+| NCCUBE2 / 2 / 2 | Active non-regional real-input authoring and reading; BC7/BC4/BC5 with header-wide residual range |
+
+`build_local_terrain_pack.py --albedo ... --elevation ...` without
+`--regional-elevation` or `--fixture` writes schema 2 / payload 2 / terrain 5.
+Regional and fixture modes write schema 3 / payload 3 / terrain 5. All current
+geographic authoring uses +Y north, +X at longitude zero and east toward -Z.
+`PlanetaryLocalTerrainPackContract.LegacyVersion` names the active schema-2
+container constant; it is not a blanket compatibility policy.
+
+These tuples define the supported workflows; structural parser capability alone
+is not a support promise. Production NCSM1 requires its exact current manifest
+and native production-layout gate. Generic schema-2 authoring does not replace
+regional R16/control physical authority. See the bounded
+[fixture contracts](../tests/fixtures/terrain/README.md) for producer/reader and
+invalid-input regression coverage.
 
 ## Developer commands
 

@@ -190,7 +190,7 @@ public readonly record struct PlanetaryLocalTerrainRecordHeader(
 {
     public bool HasControl => StoredControlBytes != 0 || GpuControlBytes != 0;
     public bool HasPerRecordResidualRange => (Flags & PlanetaryLocalTerrainPackContract.PerRecordResidualRangeFlag) != 0;
-    public bool IsValid => Sector.IsValid && PayloadOffset >= PlanetaryLocalTerrainPackContract.HeaderBytes &&
+    public bool IsValid => Sector.IsValid && Sector.PayloadVersion is 2 or 3 && PayloadOffset >= PlanetaryLocalTerrainPackContract.HeaderBytes &&
         StoredAlbedoBytes > 0 && StoredElevationBytes > 0 && StoredNormalBytes > 0 &&
         GpuAlbedoBytes > 0 && GpuElevationBytes > 0 && GpuNormalBytes > 0 &&
         AlbedoCodec <= PlanetaryLocalTerrainStorageCodec.PackBits && ElevationCodec <= PlanetaryLocalTerrainStorageCodec.PackBits &&
