@@ -1,0 +1,373 @@
+{
+  "baseline": {
+    "head": "742cd8953045343310c809bec4067baf6586f2fa",
+    "originMain": "742cd8953045343310c809bec4067baf6586f2fa",
+    "branch": "main",
+    "status": "",
+    "tagType": "tag",
+    "tagTarget": "32ffac50ab5c06518ede24edfb5c531976d4ec99"
+  },
+  "trackedFiles": 540,
+  "artifacts": [
+    {
+      "path": ".novacore/cache/m12-level9-test.nccube",
+      "bytes": 6537834,
+      "tracked": false,
+      "magic": "NCCUBE2",
+      "schema": 3,
+      "records": 49,
+      "terrainVersion": 5,
+      "payloadVersions": [
+        3
+      ],
+      "levels": [
+        9
+      ]
+    },
+    {
+      "path": ".novacore/cache/terrain/v1/sha256/17/17344f8a99931083853fe3351a621ddaf0b352702054febf53705c13a17da285.nccube",
+      "bytes": 7650603,
+      "tracked": false,
+      "magic": "NCCUBE2",
+      "schema": 2,
+      "records": 63,
+      "terrainVersion": 4,
+      "payloadVersions": [
+        1
+      ],
+      "levels": [
+        12
+      ]
+    },
+    {
+      "path": ".novacore/cache/terrain/v1/sha256/28/288f56e129717ceb83ad133490d424fd1d49836601d0a768bb5dab525cf4bf08.nccube",
+      "bytes": 61484224,
+      "tracked": false,
+      "magic": "NCCUBE1",
+      "schema": 1,
+      "records": 126,
+      "terrainVersion": 5
+    },
+    {
+      "path": ".novacore/cache/terrain/v1/sha256/38/38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae.nccube",
+      "bytes": 61484224,
+      "tracked": false,
+      "magic": "NCCUBE1",
+      "schema": 1,
+      "records": 126,
+      "terrainVersion": 5
+    },
+    {
+      "path": ".novacore/cache/terrain/v1/sha256/5e/5e92a0676bf8cd64f4c00b5e8d79f4b8186cd9a8a57b395138edbab760f1cb76.nccube",
+      "bytes": 61484224,
+      "tracked": false,
+      "magic": "NCCUBE1",
+      "schema": 1,
+      "records": 126,
+      "terrainVersion": 4
+    },
+    {
+      "path": ".novacore/cache/terrain/v1/sha256/60/60ada8949bfd782dfaea6c04270186bda52654d7263fbc3dbda5eaa4fd2e578a.nccube",
+      "bytes": 7652567,
+      "tracked": false,
+      "magic": "NCCUBE2",
+      "schema": 2,
+      "records": 63,
+      "terrainVersion": 5,
+      "payloadVersions": [
+        2
+      ],
+      "levels": [
+        12
+      ]
+    },
+    {
+      "path": ".novacore/cache/terrain/v1/sha256/6f/6f10ebcd19def6a116d2804fc6fc7d67bbe655e129151beae35a91c0e317be8f.nccube",
+      "bytes": 210307596,
+      "tracked": false,
+      "magic": "NCCUBE2",
+      "schema": 3,
+      "records": 859,
+      "terrainVersion": 5,
+      "payloadVersions": [
+        3
+      ],
+      "levels": [
+        8,
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "path": ".novacore/cache/terrain/v1/sha256/b8/b8ba51985b6869d41f4bb4b81eeb03c4dc61d9560ce4099768dc041a27b6fa98.nccube",
+      "bytes": 210307363,
+      "tracked": false,
+      "magic": "NCCUBE2",
+      "schema": 3,
+      "records": 859,
+      "terrainVersion": 5,
+      "payloadVersions": [
+        3
+      ],
+      "levels": [
+        8,
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "path": ".novacore/cache/terrain/v1/sha256/c4/c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe.nccube",
+      "bytes": 210307596,
+      "tracked": false,
+      "magic": "NCCUBE2",
+      "schema": 3,
+      "records": 859,
+      "terrainVersion": 5,
+      "payloadVersions": [
+        3
+      ],
+      "levels": [
+        8,
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "path": "tests/fixtures/terrain/tiny-global.nccube",
+      "bytes": 5032,
+      "tracked": true,
+      "magic": "NCCUBE1",
+      "schema": 1,
+      "records": 6,
+      "terrainVersion": 44
+    },
+    {
+      "path": "tests/fixtures/terrain/tiny-local.nccube",
+      "bytes": 697539,
+      "tracked": true,
+      "magic": "NCCUBE2",
+      "schema": 2,
+      "records": 4,
+      "terrainVersion": 4,
+      "payloadVersions": [
+        1
+      ],
+      "levels": [
+        4
+      ]
+    }
+  ],
+  "excludedJunctions": [
+    "build\\facility-light-occlusion\\perf-after\\runtime\\earth-data",
+    "build\\facility-light-occlusion\\perf-before\\runtime\\earth-data",
+    "build\\facility-light-occlusion\\runtime\\earth-data",
+    "build\\ksa-terrain-presentation\\perf-after\\runtime\\earth-data",
+    "build\\ksa-terrain-presentation\\perf-before\\runtime\\earth-data",
+    "build\\ksa-terrain-presentation\\runtime\\earth-data"
+  ],
+  "productionAssets": [
+    {
+      "manifest": "assets/terrain/manifests/earth-florida-m12.json",
+      "assetId": "earth-florida-m12",
+      "schema": 3,
+      "sha256": "c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe",
+      "bytes": 210307596,
+      "path": ".novacore/cache/terrain/v1/sha256/c4/c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe.nccube"
+    },
+    {
+      "manifest": "assets/terrain/manifests/earth-surface-v5.json",
+      "assetId": "earth-surface-v5",
+      "schema": 1,
+      "sha256": "38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae",
+      "bytes": 61484224,
+      "path": ".novacore/cache/terrain/v1/sha256/38/38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae.nccube"
+    }
+  ],
+  "nugetExactIds": [
+    {
+      "id": "novacore.core",
+      "url": "https://api.nuget.org/v3-flatcontainer/novacore.core/index.json",
+      "status": 404
+    },
+    {
+      "id": "novacore.simulation",
+      "url": "https://api.nuget.org/v3-flatcontainer/novacore.simulation/index.json",
+      "status": 404
+    },
+    {
+      "id": "novacore.graphics",
+      "url": "https://api.nuget.org/v3-flatcontainer/novacore.graphics/index.json",
+      "status": 404
+    },
+    {
+      "id": "novacore.ephemerisformat",
+      "url": "https://api.nuget.org/v3-flatcontainer/novacore.ephemerisformat/index.json",
+      "status": 404
+    }
+  ],
+  "ksaSha256": "a8a5164204eed962df9d9025e99f523d9a23ee2ce6e802b18216a9da35506d2f",
+  "noArtifactOutsideWorkspaceAbsenceClaim": true,
+  "publication": {
+    "full_name": "AlbatronicProductions/NovaCore",
+    "visibility": "public",
+    "forks": 0,
+    "default_branch": "main",
+    "release_count": 0,
+    "releases": []
+  },
+  "authoringCallSites": [
+    {
+      "path": "src/NovaCore.Simulation/Celestial/CelestialSystemFixtures.cs",
+      "line": 37,
+      "argumentCount": 11
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/CelestialSystemFixtures.cs",
+      "line": 62,
+      "argumentCount": 13
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/NcpeCelestialSystemLoader.cs",
+      "line": 27,
+      "argumentCount": 13
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/SolAnalyticalDefinition.cs",
+      "line": 74,
+      "argumentCount": 13
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "line": 478,
+      "argumentCount": 6
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "line": 480,
+      "argumentCount": 6
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "line": 498,
+      "argumentCount": 6
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "line": 612,
+      "argumentCount": 6
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "line": 614,
+      "argumentCount": 6
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "line": 615,
+      "argumentCount": 6
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "line": 616,
+      "argumentCount": 6
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "line": 617,
+      "argumentCount": 6
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "line": 618,
+      "argumentCount": 6
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "line": 632,
+      "argumentCount": 10
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "line": 633,
+      "argumentCount": 10
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "line": 636,
+      "argumentCount": 10
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "line": 637,
+      "argumentCount": 10
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "line": 638,
+      "argumentCount": 10
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "line": 639,
+      "argumentCount": 10
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "line": 640,
+      "argumentCount": 10
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "line": 641,
+      "argumentCount": 10
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "line": 642,
+      "argumentCount": 10
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "line": 643,
+      "argumentCount": 10
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "line": 644,
+      "argumentCount": 10
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "line": 645,
+      "argumentCount": 10
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "line": 668,
+      "argumentCount": 6
+    }
+  ],
+  "ksaHistory": [
+    {
+      "revision": "4885",
+      "date": "2026-07-10",
+      "url": "https://discord.com/channels/1260011486735241329/1260112103134724146/1525038373109235767",
+      "finding": "Explicit saved-game/vehicle break, replacement examples, reaction model and removal of dead tank field"
+    },
+    {
+      "version": "2026.7.8.4980",
+      "date": "2026-07-22",
+      "url": "https://discord.com/channels/1260011486735241329/1406840455093682258/1529404426106699921",
+      "finding": "Complete PartTree serialization, explicit derived-data owner, physical TerrainHeight category"
+    },
+    {
+      "version": "2026.7.10.5056",
+      "date": "2026-07-28",
+      "url": "https://discord.com/channels/1260011486735241329/1406840455093682258/1531539522112716962",
+      "finding": "Authoring conversion tool moved alongside current serializers to prevent asset-format drift"
+    }
+  ]
+}
