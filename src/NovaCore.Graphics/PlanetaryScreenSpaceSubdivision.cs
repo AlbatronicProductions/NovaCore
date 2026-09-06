@@ -19,8 +19,8 @@ public static class PlanetaryScreenSpaceSubdivision
     /// It is independent of CPU patch level and bounded by device policy.
     /// </summary>
     public static uint QuantizedGpuFactor(double projectedLengthPixels,
-        double targetLengthPixels = PlanetaryDynamicAnchoredSurface.GpuTargetEdgePixels,
-        uint maximumFactor = PlanetaryDynamicAnchoredSurface.GpuMaximumTessellationFactor)
+        double targetLengthPixels = 16d,
+        uint maximumFactor = 16u)
     {
         if (double.IsNaN(projectedLengthPixels) || projectedLengthPixels < 0d ||
             !double.IsFinite(targetLengthPixels) || targetLengthPixels <= 0d ||

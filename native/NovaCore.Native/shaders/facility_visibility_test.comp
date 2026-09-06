@@ -1,0 +1,14 @@
+#version 460
+#extension GL_GOOGLE_include_directive : require
+#extension GL_ARB_gpu_shader_fp64 : require
+#include "facility_light_occlusion.glsl"
+layout(local_size_x=64) in;
+struct Sample { vec4 position; vec4 light; };
+layout(std430,set=0,binding=0) readonly buffer Samples { Sample samples[]; };
+layout(std430,set=0,binding=1) buffer Results { vec4 results[]; };
+void main(){
+  uint i=gl_GlobalInvocationID.x;if(i>=samples.length())return;
+  uint tests;bool entered;float visibility=AuthoredFacilitySunVisibility(samples[i].position.xyz,samples[i].light.xyz,tests,entered);
+  vec3 lit=FacilityVisibleLighting(vec3(.7,.8,.9),vec3(.2,.3,.4),.025,.01,visibility);
+  results[i*2]=vec4(visibility,float(tests),entered?1:0,0);results[i*2+1]=vec4(lit,1);
+}

@@ -190,12 +190,18 @@ shows the resolved client dimensions and starts the matching Triangle runtime:
 a Release launcher uses Release and a Debug launcher uses Debug. No shell
 environment setup is required.
 
-The accepted production Earth entry is **New Earth Renderer**
-(`--scene=m12d-production-spherical-billboard`, generation 4 by default). Older
-Earth/Solar/Florida routes still retain anchored/global Earth rendering and
-generally select generation 3. Their divergence requires a compatibility and
-ownership decision; it does not establish another accepted production Earth
-authority. This normalization changes no route or retirement status.
+The **unbanked consolidated candidate** uses NCSM1 and generation 4 for all six
+supported Earth/Solar/Florida launcher routes, including **New Earth Renderer**.
+Scene, focus, altitude, camera and Florida initialization remain route-specific.
+Florida launcher-based manual acceptance **PASSED** before consolidation.
+The superseded dynamic anchored owner, stitch/coverage draw, local texture-demand
+transport and its investigation drivers have been retired. Generation-3 numerical
+oracles and independent development scenes remain outside production Earth routing.
+Terrain-v5 global bootstrap remains only until complete NCSM1 publication;
+non-Earth presentation remains independent. No banking is authorized by this work.
+
+See [production consolidation](docs/production-consolidation.md) for reachability, retained responsibilities and validation.
+
 
 Current Solar-scene controls include mouse drag for free orbiting, mouse wheel zoom, number-key body focus, `.` / `,` simulation-rate changes, Space pause/resume, and `R` to return to the deterministic Solar Map home view.
 
@@ -242,9 +248,8 @@ This is a production architecture milestone, not a claim of finished visuals.
 Terrain materials and presentation quality, atmosphere/cloud/environment
 rebuilding, finer pupil and re-triangulation morph quality, spacecraft and
 surface gameplay, and possible later surface-workload optimization remain
-separate future work. The next major architectural responsibility is the
-Earth-route ownership/convergence decision, not further P2S5G optimization.
-Implementation requires a separately authorized ticket.
+separate future work. The current checkpoint is validation of the unbanked
+production consolidation, followed by website review. Performance work comes later.
 
 One known presentation limitation is documented rather than hidden: a rare
 full pupil rebase can change the coarse factor-1 triangulated approximation by
@@ -304,3 +309,5 @@ See the engineering documentation for the complete scoped build, validation, and
 ---
 
 **NovaCore is a work in progress.** The repository documents implemented systems and measured limitations explicitly; roadmap items are not presented as completed features.
+
+Unrelated retirement findings are tracked in [the subsequent debt ledger](docs/repository-debt-retirement.md). Deferral is not permanent acceptance.

@@ -34,24 +34,6 @@ public struct NativeRenderObject { public NativeEncodedPosition Position; public
 public struct NativeDrawBatch { public NativeMeshHandle Mesh; public uint FirstObject, ObjectCount, Padding; }
 /// <summary>64-byte presentation-only planetary patch record; face numbering and edge-mask bits equal Graphics contracts.</summary>
 [StructLayout(LayoutKind.Sequential)] public struct NativePlanetaryPatch { public uint Face,Level,X,Y; public float CenterX,CenterY,CenterZ,Radius; public float ColorR,ColorG,ColorB,ColorA; public uint StitchMask,Reserved0,Reserved1,Reserved2; }
-[StructLayout(LayoutKind.Sequential)]
-public struct NativeAnchoredSurfacePatch
-{
-    public uint BodyIdLow,BodyIdHigh,TerrainVersion,PhysicalSurfaceGeneration;
-    public uint Face,Level,X,Y;
-    public uint CacheSlot,CacheGeneration,StitchMask,Flags;
-    public uint MaterialLevel,MaterialX,MaterialY,MaterialGeneration;
-    public float BoundsX,BoundsY,BoundsZ,BoundsRadius;
-}
-[StructLayout(LayoutKind.Sequential)]
-public struct NativeAnchoredSurfacePresentation
-{
-    public NativeEncodedPosition Origin;
-    public NativeEncodedPosition East;
-    public NativeEncodedPosition North;
-    public NativeEncodedPosition Up;
-    public uint BodyIdLow, BodyIdHigh, SnapIdentity, PresentationGeneration;
-}
 [StructLayout(LayoutKind.Sequential)] public struct NativePlanetaryGpuConstants
 {
     public float CameraBodyHighX,CameraBodyHighY,CameraBodyHighZ,RadiusHigh;
@@ -135,8 +117,18 @@ public struct NativeProductionBillboardFrame
     public NativeProductionBillboardPupilFrame Incoming;
 }
 
+/// <summary>Immutable authored caster, FP64 body-fixed frame. Versioned separately from physical H.</summary>
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct NativeFrameSubmission { public NativeCameraData Camera; public NativeRenderObject* Objects; public uint ObjectCount; public NativeDrawBatch* Batches; public uint BatchCount; public NativeOrbitLineVertex* OrbitVertices; public uint OrbitVertexCount; public NativeOrbitLineVertex* PreviousOrbitVertices; public uint PreviousOrbitVertexCount; public NativeOrbitLineVertex* BodyForwardVertices; public uint BodyForwardVertexCount; public NativeOrbitLineVertex* TargetDirectionVertices; public uint TargetDirectionVertexCount; public NativePlanetaryPatch* PlanetaryPatches; public uint PlanetaryPatchCount; public uint PlanetaryGpuAlignmentPadding; public NativePlanetaryGpuConstants PlanetaryGpu; public NativePlanetaryMode PlanetaryMode; public NativePlanetarySurfaceMode PlanetarySurfaceMode; public uint PhysicalSurfaceGeneration,PlanetaryPadding2; public NativePlanetaryPresentation PlanetaryPresentation; public NativePlanetaryPresentation* DistantBodies; public uint DistantBodyCount, DistantBodyPadding; public NativeSolarLighting SolarLighting; public NativeAnchoredSurfacePatch* AnchoredSurfacePatches; public uint AnchoredSurfacePatchCount,AnchoredSurfaceCacheSlotCount,AnchoredSurfaceActiveGeneration,AnchoredSurfaceFlags,AnchoredSurfaceGpuReadyGeneration,AnchoredSurfacePadding1,AnchoredSurfacePadding2,AnchoredSurfacePadding3,AnchoredSurfacePadding4,AnchoredSurfacePadding5; public NativeAnchoredSurfacePresentation AnchoredSurfacePresentation; public NativeProductionSphericalBillboardSubmission* ProductionBillboard; public uint ProductionBillboardFlags,ProductionBillboardPadding; public NativeProductionBillboardFrame* ProductionBillboardFrame; public ulong ProductionBillboardFramePadding; }
+public struct NativeFacilityCasterDefinition
+{
+    public ulong BodyId, FacilityId, ObjectId;
+    public uint Version, GeometrySet;
+    public double OriginX,OriginY,OriginZ,EastX,EastY,EastZ,NorthX,NorthY,NorthZ,UpX,UpY,UpZ;
+    public double FoundationScaleX,FoundationScaleY,FoundationScaleZ,MaximumRayDistance;
+}
+
+[StructLayout(LayoutKind.Sequential)]
+public unsafe struct NativeFrameSubmission { public NativeCameraData Camera; public NativeRenderObject* Objects; public uint ObjectCount; public NativeDrawBatch* Batches; public uint BatchCount; public NativeOrbitLineVertex* OrbitVertices; public uint OrbitVertexCount; public NativeOrbitLineVertex* PreviousOrbitVertices; public uint PreviousOrbitVertexCount; public NativeOrbitLineVertex* BodyForwardVertices; public uint BodyForwardVertexCount; public NativeOrbitLineVertex* TargetDirectionVertices; public uint TargetDirectionVertexCount; public NativePlanetaryPatch* PlanetaryPatches; public uint PlanetaryPatchCount; public uint PlanetaryGpuAlignmentPadding; public NativePlanetaryGpuConstants PlanetaryGpu; public NativePlanetaryMode PlanetaryMode; public NativePlanetarySurfaceMode PlanetarySurfaceMode; public uint PhysicalSurfaceGeneration,PlanetaryPadding2; public NativePlanetaryPresentation PlanetaryPresentation; public NativePlanetaryPresentation* DistantBodies; public uint DistantBodyCount, DistantBodyPadding; public NativeSolarLighting SolarLighting; public fixed ulong ReservedSurface[24]; public NativeProductionSphericalBillboardSubmission* ProductionBillboard; public uint ProductionBillboardFlags,ProductionBillboardPadding; public NativeProductionBillboardFrame* ProductionBillboardFrame; public NativeFacilityCasterDefinition* FacilityCaster; }
 
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct NativeRuntimeAssets

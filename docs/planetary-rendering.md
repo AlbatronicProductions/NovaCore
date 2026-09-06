@@ -9,14 +9,19 @@ Efficiency**, commit `7bb03b0e635fa3444a4243bbad82758a1770ea60`, annotated tag
 `m12d-p2s5g-surface-workload-efficiency`. NCSM1 / New Earth Renderer is the
 accepted production Earth renderer; manual native 3440×1440 acceptance passed.
 
-The accepted Earth contracts below apply to the New Earth route.
+The accepted Earth contracts below apply to every supported Earth route.
 
-The accepted production Earth entry is **New Earth Renderer**
-(`--scene=m12d-production-spherical-billboard`, generation 4 by default). Older
-Earth/Solar/Florida routes still retain anchored/global Earth rendering and
-generally select generation 3. Their divergence requires a compatibility and
-ownership decision; it does not establish another accepted production Earth
-authority. This normalization changes no route or retirement status.
+The **unbanked consolidated candidate** uses NCSM1 and generation 4 for all six
+supported Earth/Solar/Florida launcher routes, including **New Earth Renderer**.
+Scene, focus, altitude, camera and Florida initialization remain route-specific.
+Florida launcher-based manual acceptance **PASSED** before consolidation.
+The superseded dynamic anchored owner, stitch/coverage draw, local texture-demand
+transport and its investigation drivers have been retired. Generation-3 numerical
+oracles and independent development scenes remain outside production Earth routing.
+Terrain-v5 global bootstrap remains only until complete NCSM1 publication;
+non-Earth presentation remains independent. No banking is authorized by this work.
+
+See [production consolidation](production-consolidation.md) for reachability, retained responsibilities and validation.
 
 ## Authority boundary
 
@@ -34,7 +39,7 @@ representation, but never canonical geographic identity.
 
 Every rendered or queried geographic point consumes the same canonical
 physical-height authority, `H(bodyDirection)`. The composition includes signed
-global elevation, optional regional residual, accepted deterministic physical
+global elevation, regional residual wherever the authoritative catalog contributes, accepted deterministic physical
 modifiers, and the final non-negative clamp. It owns:
 
 - FP64 body-fixed geometry and deterministic displacement;
@@ -180,8 +185,8 @@ The managed camera owns navigation. `SurfaceAnchor` stores immutable body-fixed
 identity and reevaluates through authoritative body orientation. Near-surface
 ENU navigation and free look use the anchor; outward navigation hands off to
 ordinary body-center orbit without changing physical terrain. Earth —
-Fullscreen Native shares the Solar navigation path after preset initialization;
-that older preset does not select the accepted NCSM1 renderer.
+Fullscreen Native shares the Solar navigation path after preset initialization
+and now selects NCSM1 in the unbanked route-convergence candidate.
 
 ## Diagnostics and acceptance
 
@@ -199,9 +204,7 @@ benchmark alone is not player-facing acceptance.
 
 ## Current development boundary
 
-The next major architectural responsibility is Earth-route ownership/convergence,
-not further P2S5G optimization. Decide the retained routes' compatibility and
-ownership before separately authorizing implementation or renderer retirement.
+The route-convergence candidate passed manual acceptance and is undergoing production consolidation. All ordinary routes select the accepted owner. Do not begin the next performance objective here.
 
 The NCSM1 production topology/runtime, moving pupil, canonical physical
 authority, persistent GPU scale lifecycle, culling/coverage, KSA-parity bounded
@@ -213,6 +216,8 @@ promotion remain in development.
 
 Do not reintroduce radial Eye, adaptive CPU final-raster grids, dynamic
 patch/stitch ownership, or a second physical surface into the accepted NCSM1
-path. Existing compatibility implementations remain pending a separate decision.
+path.
 Do not regenerate NCSM1 assets, expand the TES range, or weaken conservative culling without
 explicit authorization and measured evidence.
+
+Unrelated retirement findings are tracked in [the subsequent debt ledger](repository-debt-retirement.md). Deferral is not permanent acceptance.

@@ -2,6 +2,7 @@
 #define NOVACORE_PLANETARY_NATURAL_TERRAIN_SURFACE_GLSL
 
 #include "planetary_natural_terrain_families.glsl"
+#include "facility_support.glsl"
 
 const uint NOVACORE_PHYSICAL_GENERATION_3=3u;
 const uint NOVACORE_PHYSICAL_GENERATION_M12D=4u;
@@ -28,8 +29,11 @@ NaturalTerrainFieldSampleD EvaluateNaturalCandidatePreparedD(dvec3 direction)
 
 NaturalTerrainFieldSampleD EvaluateNaturalCandidateNearD(dvec3 direction)
 {
-  return EvaluateNaturalTerrainNearD(normalize(direction)*NOVACORE_NATURAL_EARTH_REFERENCE_RADIUS,
+  NaturalTerrainFieldSampleD value=EvaluateNaturalTerrainNearD(normalize(direction)*NOVACORE_NATURAL_EARTH_REFERENCE_RADIUS,
     NaturalCandidateIdentityD());
+  FacilitySample support=FacilitySupport(direction);
+  value.bodyGradient=value.bodyGradient*(1.0-support.weight)-support.gradient*value.height;
+  value.height*=1.0-support.weight;return value;
 }
 
 #endif

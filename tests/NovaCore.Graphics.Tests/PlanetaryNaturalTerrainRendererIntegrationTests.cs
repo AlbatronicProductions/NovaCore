@@ -13,14 +13,14 @@ internal static class PlanetaryNaturalTerrainRendererIntegrationTests
     public static void Run()
     {
         LoadTerrainAuthorities();
-        VerifyOptInRouting();
+        VerifyPhysicalAuthoritySelection();
         var (samples, heightMaximum, normalMaximum) = VerifyCanonicalEquality();
         var boundaryMaximum = VerifySharedBoundaryEquality();
         VerifyShaderConsumers();
         VerifyTransactionalPreparationRouting();
         Console.WriteLine($"M12D candidate renderer integration: samples={samples}; " +
             $"heightMax={heightMaximum:E17}m; normalMax={normalMaximum:E17}rad; " +
-            $"sharedBoundaryMax={boundaryMaximum:E17}m; generation=4; default=3");
+            $"sharedBoundaryMax={boundaryMaximum:E17}m; production=4; numericalReference=3");
     }
 
     private static void LoadTerrainAuthorities()
@@ -34,14 +34,14 @@ internal static class PlanetaryNaturalTerrainRendererIntegrationTests
             $"candidate CPU local-v2 oracle: {localLoadError}");
     }
 
-    private static void VerifyOptInRouting()
+    private static void VerifyPhysicalAuthoritySelection()
     {
         var previous = PlanetaryPhysicalSurface.RuntimeGeneration;
         try
         {
             PlanetaryPhysicalSurface.ConfigureRuntimeGeneration(PlanetaryPhysicalSurfaceGeneration.Generation3);
             Require(PlanetaryPhysicalSurface.RuntimeGeneration == PlanetaryPhysicalSurfaceGeneration.Generation3,
-                "generation 3 remains the explicit default authority");
+                "generation 3 remains an explicitly selected numerical reference");
             var direction = Direction(28.6084d, -80.6042d);
             var stable = Terrain.SamplePhysicalSurface(direction);
             var candidate = Terrain.SamplePhysicalSurface(direction,
@@ -90,11 +90,17 @@ internal static class PlanetaryNaturalTerrainRendererIntegrationTests
                 direction * PlanetaryPhysicalSurface.EarthReferenceRadiusMetres, Identity);
             var geographic = Terrain.SampleBaseHeight(direction);
             var preparedBase = Math.Max(0d, geographic + natural.Macro.Height + natural.Meso.Height);
-            var composed = Math.Max(0d, preparedBase + natural.Near.Height);
+            var support = FloridaFacilitySupport.Region.Sample(direction);
+            var composed = Math.Max(0d, FloridaFacilitySupport.Region.AdaptBase(direction,preparedBase) + (1d-support.Weight)*natural.Near.Height);
             maximumHeight = Math.Max(maximumHeight, Math.Abs(candidate.FinalHeightMetres - composed));
             Require(candidate.PhysicalNormal.IsFinite &&
                 Double3.Dot(candidate.PhysicalNormal, direction) > 0d, $"candidate outward finite normal {name}");
-            if (Math.Abs(direction.Y) < .999999d)
+            if (support.Weight == 1d)
+                Require(Double3.Dot(candidate.PhysicalNormal,FloridaFacilitySupport.Region.Up) > 1d-1e-12d,
+                    "fully supported footprint has the authored plane normal");
+            // Natural-family finite differences apply outside grading; the
+            // compact support/transition gradients have their own GPU parity suite.
+            if (support.Weight == 0d && Math.Abs(direction.Y) < .999999d)
             {
                 var numerical = NumericalNormal(direction);
                 var normalError = Math.Acos(Math.Clamp(Double3.Dot(candidate.PhysicalNormal, numerical), -1d, 1d));
@@ -145,16 +151,15 @@ internal static class PlanetaryNaturalTerrainRendererIntegrationTests
     {
         var shader = Path.Combine(RepositoryRoot(), "native", "NovaCore.Native", "shaders");
         var global = File.ReadAllText(Path.Combine(shader, "planetary.vert"));
-        var anchored = File.ReadAllText(Path.Combine(shader, "anchored_terrain.vert"));
-        var tes = File.ReadAllText(Path.Combine(shader, "anchored_terrain.tese"));
+        var prepared = File.ReadAllText(Path.Combine(shader, "production_spherical_billboard_prepare.comp"));
+        var tes = File.ReadAllText(Path.Combine(shader, "production_spherical_billboard.tese"));
         var query = File.ReadAllText(Path.Combine(shader, "planetary_height_query.comp"));
         var mesh = File.ReadAllText(Path.Combine(shader, "planetary_mesh_displace.comp"));
         Require(global.Contains("naturalGlobal.naturalValues", StringComparison.Ordinal) &&
             global.Contains("EvaluateNaturalCandidateNearD", StringComparison.Ordinal),
             "global candidate consumes prepared macro/meso plus canonical near detail");
-        Require(anchored.Contains("naturalAnchored.naturalAnchoredValues", StringComparison.Ordinal) &&
-            anchored.Contains("NaturalPreparedBaseNormal", StringComparison.Ordinal),
-            "anchored candidate consumes prepared macro/meso value+gradient");
+        Require(prepared.Contains("CandidateBaseHeightD") && prepared.Contains("CandidateBaseNormalD"),
+            "NCSM1 prepares canonical base position and normal once per publication");
         Require(tes.Contains("EvaluateNaturalCandidateNearD", StringComparison.Ordinal) &&
             !tes.Contains("EvaluateNaturalCandidatePreparedD", StringComparison.Ordinal),
             "TES evaluates only bounded near-family detail and never macro/meso");
@@ -166,22 +171,14 @@ internal static class PlanetaryNaturalTerrainRendererIntegrationTests
     private static void VerifyTransactionalPreparationRouting()
     {
         var root = RepositoryRoot();
-        var native = File.ReadAllText(Path.Combine(root, "native", "NovaCore.Native", "NovaCoreNative.cpp"));
-        var preparation = File.ReadAllText(Path.Combine(root, "native", "NovaCore.Native", "shaders",
-            "planetary_natural_terrain_anchored_prepare.comp"));
-        var submitted = native.IndexOf("naturalAnchoredSubmittedGeneration==", StringComparison.Ordinal);
-        var acknowledged = native.IndexOf("anchoredSurfaceGpuReadyGeneration=a.naturalAnchoredPreparedGeneration",
-            StringComparison.Ordinal);
-        var published = native.IndexOf("BindDynamicAnchoredResource(a,resourceIndex)", acknowledged,
-            StringComparison.Ordinal);
-        Require(submitted >= 0 && acknowledged > submitted && published > acknowledged,
-            "candidate publication is ordered GPU submitted/fenced -> acknowledged -> atomic owner bind");
-        Require(preparation.Contains("binding=37", StringComparison.Ordinal) &&
-            native.Contains("BindNaturalAnchoredPreparationResource", StringComparison.Ordinal),
-            "incoming candidate preparation uses a retired descriptor resource, not the live owner table");
-        Require(native.Contains("naturalAnchoredPreparedGeneration==a.anchoredSurfaceActiveGeneration",
-                StringComparison.Ordinal),
-            "candidate publication diagnostics prove the matching prepared generation");
+        var preparation = File.ReadAllText(Path.Combine(root,"native","NovaCore.Native","RegionalPhysicalPreparation.inl"));
+        Require(preparation.Contains("if(!job.active||!a.regionalReady[slot])return false;") &&
+            preparation.Contains("std::min(RegionalPreparationVertexBudget,total-job.cursor)") &&
+            preparation.Contains("job.fencePending=job.cursor==total"),
+            "only resident regional data advances bounded preparation; only its final slice arms publication");
+        Require(preparation.Contains("frames.previous=a.regionalPublishedPupil;frames.current=a.regionalPublishedPupil;") &&
+            preparation.Contains("std::swap(a.productionBillboardPhysicalBuffer,a.regionalScratchBuffer)"),
+            "incoming preparation cannot partially overwrite the authoritative outgoing physical owner");
     }
 
     private static Double3 NumericalNormal(in Double3 direction)
@@ -204,8 +201,10 @@ internal static class PlanetaryNaturalTerrainRendererIntegrationTests
         var radial = Math.Max(Double3.Dot(baseNormal, direction), 1e-9d);
         var eastGradient = -Double3.Dot(baseNormal, frame.East) / radial;
         var northGradient = -Double3.Dot(baseNormal, frame.North) / radial;
-        var near = PlanetaryNaturalTerrainFamilies.EvaluateComposed(direction *
-            PlanetaryPhysicalSurface.EarthReferenceRadiusMetres, Identity).Near.BodyGradient;
+        var nearValue = PlanetaryNaturalTerrainFamilies.EvaluateComposed(direction *
+            PlanetaryPhysicalSurface.EarthReferenceRadiusMetres, Identity).Near;
+        var support = FloridaFacilitySupport.Region.Sample(direction);
+        var near = nearValue.BodyGradient*(1d-support.Weight)-support.WeightGradient*nearValue.Height;
         eastGradient += Double3.Dot(near, frame.East);
         northGradient += Double3.Dot(near, frame.North);
         return (direction - frame.East * eastGradient - frame.North * northGradient).Normalized();

@@ -117,8 +117,9 @@ public readonly record struct PlanetaryPhysicalSurfaceSample(
     double NorthGradient,
     Double3 PhysicalNormal)
 {
-    public double ModifierHeightMetres => Modifiers.HeightMetres;
-    public bool IsFinite => double.IsFinite(BaseHeightMetres) && Modifiers.IsFinite &&
+    public double FacilitySupportHeightMetres { get; init; }
+    public double ModifierHeightMetres => Modifiers.HeightMetres+FacilitySupportHeightMetres;
+    public bool IsFinite => double.IsFinite(BaseHeightMetres) && double.IsFinite(FacilitySupportHeightMetres) && Modifiers.IsFinite &&
         double.IsFinite(FinalHeightMetres) && double.IsFinite(EastGradient) &&
         double.IsFinite(NorthGradient) && PhysicalNormal.IsFinite;
 }
@@ -397,7 +398,7 @@ public static class PlanetaryPhysicalSurface
     /// <summary>
     /// Selects one process-wide physical Earth authority before a scene is created.
     /// The accepted New Earth preset selects generation 4 through the retained candidate-named option.
-    /// Older Earth/Solar/Florida presets retain generation 3 pending the route-ownership decision.
+    /// All supported Earth/Solar/Florida routes select generation 4; generation 3 remains an explicit numerical reference.
     /// </summary>
     public static void ConfigureRuntimeGeneration(PlanetaryPhysicalSurfaceGeneration generation)
     {
@@ -593,7 +594,9 @@ public static class PlanetaryPhysicalSurface
         if (generation == PlanetaryPhysicalSurfaceGeneration.M12DNaturalTerrainCandidate)
         {
             var natural = EvaluateNaturalComposition(bodyFixedDirection);
-            return Math.Max(0d, Math.Max(0d, baseHeight + natural.Macro.Height + natural.Meso.Height) + natural.Near.Height);
+            var naturalBase=Math.Max(0d,baseHeight+natural.Macro.Height+natural.Meso.Height);
+            var support=FloridaFacilitySupport.Region.Sample(bodyFixedDirection);
+            return Math.Max(0d,FloridaFacilitySupport.Region.AdaptBase(bodyFixedDirection,naturalBase)+(1d-support.Weight)*natural.Near.Height);
         }
         if (generation != PlanetaryPhysicalSurfaceGeneration.Generation3)
             throw new ArgumentOutOfRangeException(nameof(generation));
@@ -613,11 +616,19 @@ public static class PlanetaryPhysicalSurface
         if (generation == PlanetaryPhysicalSurfaceGeneration.M12DNaturalTerrainCandidate)
         {
             var natural = EvaluateNaturalComposition(bodyFixedDirection);
-            return Math.Max(0d, baseHeight + natural.Macro.Height + natural.Meso.Height);
+            return FloridaFacilitySupport.Region.AdaptBase(bodyFixedDirection,Math.Max(0d, baseHeight + natural.Macro.Height + natural.Meso.Height));
         }
         if (generation != PlanetaryPhysicalSurfaceGeneration.Generation3)
             throw new ArgumentOutOfRangeException(nameof(generation));
         return Math.Max(0d, baseHeight + EvaluateModifiers(bodyFixedDirection, baseHeight).BaseHeightMetres);
+    }
+
+    /// <summary>Unadapted generation-4 reference for authored surveys and provenance, never a second collision authority.</summary>
+    public static double EvaluateNaturalHeightNoGradient(in PlanetaryTerrainDefinition terrain,in Double3 direction,bool includeNear=true)
+    {
+        var natural=EvaluateNaturalComposition(direction);
+        var baseHeight=Math.Max(0d,terrain.SampleBaseHeight(direction)+natural.Macro.Height+natural.Meso.Height);
+        return includeNear?Math.Max(0d,baseHeight+natural.Near.Height):baseHeight;
     }
 
     private static PlanetaryNaturalTerrainCompositionSample EvaluateNaturalComposition(in Double3 bodyFixedDirection)
@@ -633,23 +644,22 @@ public static class PlanetaryPhysicalSurface
     {
         var natural = EvaluateNaturalComposition(direction);
         var baseModifier = natural.Macro.Height + natural.Meso.Height;
-        var finalHeight = Math.Max(0d, Math.Max(0d, geographicHeight + baseModifier) + natural.Near.Height);
+        var naturalBase=Math.Max(0d,geographicHeight+baseModifier);
+        var support=FloridaFacilitySupport.Region.Sample(direction);
+        var finalHeight=Math.Max(0d,FloridaFacilitySupport.Region.AdaptBase(direction,naturalBase)+(1d-support.Weight)*natural.Near.Height);
         var frame = PlanetarySurfaceFrame.AtDirection(direction);
         var angle = PhysicalNormalSampleRadiusMetres / EarthReferenceRadiusMetres;
         var leftDirection = (direction - frame.East * angle).Normalized();
         var rightDirection = (direction + frame.East * angle).Normalized();
         var downDirection = (direction - frame.North * angle).Normalized();
         var upDirection = (direction + frame.North * angle).Normalized();
-        var leftHeight = EvaluateBaseHeightNoGradient(terrain, leftDirection,
-            PlanetaryPhysicalSurfaceGeneration.M12DNaturalTerrainCandidate);
-        var rightHeight = EvaluateBaseHeightNoGradient(terrain, rightDirection,
-            PlanetaryPhysicalSurfaceGeneration.M12DNaturalTerrainCandidate);
-        var downHeight = EvaluateBaseHeightNoGradient(terrain, downDirection,
-            PlanetaryPhysicalSurfaceGeneration.M12DNaturalTerrainCandidate);
-        var upHeight = EvaluateBaseHeightNoGradient(terrain, upDirection,
-            PlanetaryPhysicalSurfaceGeneration.M12DNaturalTerrainCandidate);
-        var nearEast = Double3.Dot(natural.Near.BodyGradient, frame.East);
-        var nearNorth = Double3.Dot(natural.Near.BodyGradient, frame.North);
+        var leftHeight = EvaluateNaturalHeightNoGradient(terrain,leftDirection,false);
+        var rightHeight = EvaluateNaturalHeightNoGradient(terrain,rightDirection,false);
+        var downHeight = EvaluateNaturalHeightNoGradient(terrain,downDirection,false);
+        var upHeight = EvaluateNaturalHeightNoGradient(terrain,upDirection,false);
+        var nearGradient=natural.Near.BodyGradient*(1d-support.Weight)-support.WeightGradient*natural.Near.Height;
+        var nearEast = Double3.Dot(nearGradient, frame.East);
+        var nearNorth = Double3.Dot(nearGradient, frame.North);
         var eastGradient = (rightHeight - leftHeight) / (2d * PhysicalNormalSampleRadiusMetres) + nearEast;
         var northGradient = (upHeight - downHeight) / (2d * PhysicalNormalSampleRadiusMetres) + nearNorth;
         var left = leftDirection * (EarthReferenceRadiusMetres + leftHeight);
@@ -658,9 +668,11 @@ public static class PlanetaryPhysicalSurface
         var up = upDirection * (EarthReferenceRadiusMetres + upHeight);
         var baseNormal = Double3.Cross(right - left, up - down).Normalized();
         if (Double3.Dot(baseNormal, direction) < 0d) baseNormal = -baseNormal;
+        baseNormal=FloridaFacilitySupport.Region.AdaptBaseNormal(direction,naturalBase,baseNormal);
         var radialComponent = Math.Max(Double3.Dot(baseNormal, direction), 1e-9d);
         var baseEastSlope = -Double3.Dot(baseNormal, frame.East) / radialComponent;
         var baseNorthSlope = -Double3.Dot(baseNormal, frame.North) / radialComponent;
+        eastGradient=baseEastSlope+nearEast;northGradient=baseNorthSlope+nearNorth;
         var normal = (direction - frame.East * (baseEastSlope + nearEast) -
             frame.North * (baseNorthSlope + nearNorth)).Normalized();
         var biomes = PlanetaryBiomeControlAuthority.Sample(direction, geographicHeight);
@@ -673,7 +685,8 @@ public static class PlanetaryPhysicalSurface
             NearEastGradient = nearEast,
             NearNorthGradient = nearNorth
         };
-        return new(geographicHeight, modifiers, finalHeight, eastGradient, northGradient, normal);
+        return new(geographicHeight, modifiers, finalHeight, eastGradient, northGradient, normal)
+        { FacilitySupportHeightMetres=finalHeight-Math.Max(0d,naturalBase+natural.Near.Height) };
     }
 
     private static double Band(in Double3 point, in Double3 axis, double wavelength, double phase,

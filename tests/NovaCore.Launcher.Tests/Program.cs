@@ -32,7 +32,7 @@ static void DefaultSelection()
 {
     Equal(NovaCoreScenarioPreset.SolarSystemOverview, ScenarioCatalog.Default.Preset);
     var configuration = Create(ScenarioCatalog.Default.Preset);
-    SequenceEqual(["--scene=sol"], LaunchCommandBuilder.BuildArguments(configuration));
+    SequenceEqual(["--scene=sol", "--physical-surface=m12d-natural-candidate"], LaunchCommandBuilder.BuildArguments(configuration));
 }
 
 static void ScenarioCatalogMappings()
@@ -97,7 +97,7 @@ static void EarthFullscreenNativePreset()
     Equal(new NovaCoreClientResolution(3440, 1440), configuration.ClientResolution);
     Equal(NovaCoreDiagnosticsMode.VulkanValidationAndPerformance, configuration.Diagnostics);
     SequenceEqual(
-        ["--scene=sol", "--focus=earth", "--altitude=700000", "--surface-site=land", "--log=validation", "--log=vulkan"],
+        ["--scene=sol", "--focus=earth", "--altitude=700000", "--surface-site=land", "--log=validation", "--log=vulkan", "--physical-surface=m12d-natural-candidate"],
         LaunchCommandBuilder.BuildArguments(configuration));
 }
 
@@ -161,12 +161,12 @@ static void EarthOrbitalArguments()
 {
     var configuration = Create(NovaCoreScenarioPreset.EarthFarOrbital, 3_000_000.0);
     SequenceEqual(
-        ["--scene=earth", "--altitude=3000000", "--surface-site=land"],
+        ["--scene=earth", "--altitude=3000000", "--surface-site=land", "--physical-surface=m12d-natural-candidate"],
         LaunchCommandBuilder.BuildArguments(configuration));
 
     var at700Km = Create(NovaCoreScenarioPreset.Earth700Km, 700_000.0);
     SequenceEqual(
-        ["--scene=earth", "--altitude=700000", "--surface-site=land"],
+        ["--scene=earth", "--altitude=700000", "--surface-site=land", "--physical-surface=m12d-natural-candidate"],
         LaunchCommandBuilder.BuildArguments(at700Km));
 }
 
@@ -178,7 +178,7 @@ static void InvariantAltitudeFormatting()
         CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("fr-FR");
         var configuration = Create(NovaCoreScenarioPreset.Earth700Km, 700_000.25);
         SequenceEqual(
-            ["--scene=earth", "--altitude=700000.25", "--surface-site=land"],
+            ["--scene=earth", "--altitude=700000.25", "--surface-site=land", "--physical-surface=m12d-natural-candidate"],
             LaunchCommandBuilder.BuildArguments(configuration));
     }
     finally
@@ -199,7 +199,7 @@ static void FloridaLaunchMapping()
 {
     var configuration = Create(NovaCoreScenarioPreset.FloridaLaunchSite);
     SequenceEqual(
-        ["--scene=sol", "--focus=earth", "--surface-site=florida-launch"],
+        ["--scene=sol", "--focus=earth", "--surface-site=florida-launch", "--physical-surface=m12d-natural-candidate"],
         LaunchCommandBuilder.BuildArguments(configuration));
 }
 
@@ -232,16 +232,16 @@ static void InvalidConfiguration()
 static void DiagnosticsArguments()
 {
     var normal = Create(NovaCoreScenarioPreset.SolarSystemOverview, diagnostics: NovaCoreDiagnosticsMode.Normal);
-    SequenceEqual(["--scene=sol"], LaunchCommandBuilder.BuildArguments(normal));
+    SequenceEqual(["--scene=sol", "--physical-surface=m12d-natural-candidate"], LaunchCommandBuilder.BuildArguments(normal));
     var normalEnvironment = LaunchCommandBuilder.BuildEnvironment(normal);
     Equal("0", normalEnvironment["NOVACORE_WINDOW_BORDERLESS"]);
     False(normalEnvironment.ContainsKey("VK_INSTANCE_LAYERS"),
         "Normal diagnostics unexpectedly enabled Vulkan validation.");
-    SequenceEqual(["--scene=sol", "--log=vulkan"], LaunchCommandBuilder.BuildArguments(
+    SequenceEqual(["--scene=sol", "--log=vulkan", "--physical-surface=m12d-natural-candidate"], LaunchCommandBuilder.BuildArguments(
         Create(NovaCoreScenarioPreset.SolarSystemOverview, diagnostics: NovaCoreDiagnosticsMode.PerformanceTelemetry)));
-    SequenceEqual(["--scene=sol", "--log=validation"], LaunchCommandBuilder.BuildArguments(
+    SequenceEqual(["--scene=sol", "--log=validation", "--physical-surface=m12d-natural-candidate"], LaunchCommandBuilder.BuildArguments(
         Create(NovaCoreScenarioPreset.SolarSystemOverview, diagnostics: NovaCoreDiagnosticsMode.VulkanValidation)));
-    SequenceEqual(["--scene=sol", "--log=validation", "--log=vulkan"], LaunchCommandBuilder.BuildArguments(
+    SequenceEqual(["--scene=sol", "--log=validation", "--log=vulkan", "--physical-surface=m12d-natural-candidate"], LaunchCommandBuilder.BuildArguments(
         Create(NovaCoreScenarioPreset.SolarSystemOverview, diagnostics: NovaCoreDiagnosticsMode.VulkanValidationAndPerformance)));
 }
 
@@ -252,7 +252,8 @@ static void ExistingProductionScenarios()
                      NovaCoreScenarioPreset.NewEarthRenderer)))
     {
         var configuration = Create(definition.Preset);
-        Equal(NovaCorePhysicalSurface.Generation3, configuration.PhysicalSurface);
+        Equal(definition.Scene is NovaCoreScene.Solar or NovaCoreScene.Earth
+            ? NovaCorePhysicalSurface.M12DNaturalTerrainCandidate : NovaCorePhysicalSurface.Generation3, configuration.PhysicalSurface);
         True(LaunchCommandBuilder.BuildArguments(configuration).Count > 0,
             $"Existing scenario {definition.DisplayName} produced no arguments.");
     }

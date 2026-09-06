@@ -174,16 +174,16 @@ internal static class PlanetaryPhysicalSurfaceModifierTests
 
         var root = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..",".."));
         var globalShader = File.ReadAllText(Path.Combine(root,"native","NovaCore.Native","shaders","planetary.vert"));
-        var anchoredShader = File.ReadAllText(Path.Combine(root,"native","NovaCore.Native","shaders","anchored_physical_surface.glsl"));
+        var anchoredShader = File.ReadAllText(Path.Combine(root,"native","NovaCore.Native","shaders","production_spherical_billboard_prepare.comp"));
         var canonicalShader = File.ReadAllText(Path.Combine(root,"native","NovaCore.Native","shaders","planetary_physical_authority.glsl"));
         var fragment = File.ReadAllText(Path.Combine(root,"native","NovaCore.Native","shaders","planetary_production.frag"));
-        var hierarchy = File.ReadAllText(Path.Combine(root,"src","NovaCore.Graphics","PlanetaryDynamicAnchoredSurface.cs"));
+        var hierarchy = File.ReadAllText(Path.Combine(root,"src","NovaCore.Graphics","PlanetaryPhysicalSurface.cs"));
         Require(globalShader.Contains("planetary_physical_authority.glsl",StringComparison.Ordinal) &&
             anchoredShader.Contains("planetary_physical_authority.glsl",StringComparison.Ordinal) &&
             canonicalShader.Contains("CanonicalGeographicHeight",StringComparison.Ordinal) &&
             fragment.Contains("physical_surface.glsl",StringComparison.Ordinal) &&
-            hierarchy.Contains(".SamplePhysicalSurface(",StringComparison.Ordinal),
-            "global GPU geometry, anchored GPU geometry, dynamic CPU selection, and fragment presentation route through one canonical physical-surface contract");
+            hierarchy.Contains("EvaluateBaseHeightNoGradient(",StringComparison.Ordinal),
+            "global bootstrap, NCSM1 preparation, CPU physical sampling, and fragment presentation route through one canonical physical-surface contract");
     }
 
     private static void VerifyTransactionalPublication()
@@ -297,13 +297,9 @@ internal static class PlanetaryPhysicalSurfaceModifierTests
     {
         var globalL0Spacing = EarthRadius*Math.PI*.5d/(PlanetaryTerrainDefinition.GridResolution);
         var globalL2Spacing = globalL0Spacing/4d;
-        var anchoredFinestSpacing = EarthRadius*Math.PI*.5d/(1 << PlanetaryDynamicAnchoredSurface.MaximumLevel) /
-            (PlanetaryDynamicAnchoredSurface.GpuBaseGridResolution *
-             PlanetaryDynamicAnchoredSurface.GpuMaximumTessellationFactor);
         Require(PlanetaryPhysicalSurface.TiledWavelengthMetres/globalL0Spacing >= 3.9d &&
-            PlanetaryPhysicalSurface.TiledWavelengthMetres/globalL2Spacing >= 15d &&
-            PlanetaryPhysicalSurface.ErosionWavelengthMetres/anchoredFinestSpacing >= 4d,
-            "global shaping is representable by L0-L2 while sub-source detail is representable by the bounded GPU-refined hierarchy");
+            PlanetaryPhysicalSurface.TiledWavelengthMetres/globalL2Spacing >= 15d,
+            "global bootstrap shaping is representable by L0-L2");
 
         var direction = BodyFixedGeography.DirectionFromLatitudeLongitude(FloridaLaunchSite.Latitude*Math.PI/180d,
             FloridaLaunchSite.Longitude*Math.PI/180d);

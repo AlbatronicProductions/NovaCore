@@ -16,6 +16,9 @@ terrain narrative here.
   acceptance unless the user explicitly changes that gate.
 - Generated terrain payloads belong in the manifest-managed cache, not ordinary
   Git history or build output.
+- Follow the authoritative [diagnostic evidence lifecycle](../ENGINEERING_RULES.md#diagnostic-evidence-lifecycle):
+  keep reproducibility, consolidate accepted evidence before banking, retire
+  reviewed bulk output, and report storage totals for capture-heavy tickets.
 - Use bounded tickets. If implementation exposes an authority conflict or needs
   a broader architecture change, stop and report it.
 
@@ -70,23 +73,26 @@ difference is an accepted bounded invocation-accounting consequence
 Read [the preserved measurement and closeout record](M12D-P2S5G-workload-investigation.md)
 for the evidence and its limits.
 
-The accepted production Earth entry is **New Earth Renderer**
-(`--scene=m12d-production-spherical-billboard`, generation 4 by default). Older
-Earth/Solar/Florida routes still retain anchored/global Earth rendering and
-generally select generation 3. Their divergence requires a compatibility and
-ownership decision; it does not establish another accepted production Earth
-authority. This normalization changes no route or retirement status.
+The **unbanked consolidated candidate** uses NCSM1 and generation 4 for all six
+supported Earth/Solar/Florida launcher routes, including **New Earth Renderer**.
+Scene, focus, altitude, camera and Florida initialization remain route-specific.
+Florida launcher-based manual acceptance **PASSED** before consolidation.
+The superseded dynamic anchored owner, stitch/coverage draw, local texture-demand
+transport and its investigation drivers have been retired. Generation-3 numerical
+oracles and independent development scenes remain outside production Earth routing.
+Terrain-v5 global bootstrap remains only until complete NCSM1 publication;
+non-Earth presentation remains independent. No banking is authorized by this work.
 
-Earth-route ownership/convergence is the next major architectural responsibility,
-not further P2S5G optimization. A separate ticket must authorize any route
-change, compatibility retirement, or renderer implementation work.
+See [production consolidation](production-consolidation.md) for reachability, retained responsibilities and validation.
+
+
+Finish consolidation validation and website review before banking. Do not begin the next performance objective in this ticket.
 
 - Preserve the accepted NCSM1 production spherical-billboard owner and C3/P2S5F
   coverage/culling architecture.
 - Do not regenerate NCSM1 assets without explicit authorization.
 - Do not reintroduce radial Eye, adaptive CPU final-raster grids, or dynamic
-  patch/stitch ownership into the accepted NCSM1 path. Existing compatibility
-  implementations remain until a separate retirement decision.
+  patch/stitch ownership into the accepted NCSM1 path.
 - Do not increase the 50 m TES range, weaken conservative culling, or reopen C3
   coverage based on visual impression alone; require measured causal evidence.
 - Keep remaining surface workload optimization, terrain presentation/material
@@ -144,3 +150,5 @@ using `build/native-ninja`. Resolve production assets with
 point-and-click physical acceptance, use **New Earth Renderer** in the
 launcher. A launcher built in Release starts the Release Triangle runtime; a
 launcher built in Debug starts Debug.
+
+Unrelated retirement findings are tracked in [the subsequent debt ledger](repository-debt-retirement.md). Deferral is not permanent acceptance.

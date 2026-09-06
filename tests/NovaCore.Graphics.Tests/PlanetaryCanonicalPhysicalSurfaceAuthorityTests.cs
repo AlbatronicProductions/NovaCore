@@ -108,37 +108,25 @@ internal static class PlanetaryCanonicalPhysicalSurfaceAuthorityTests
         var shaders=Path.Combine(root,"native","NovaCore.Native","shaders");
         var authority=File.ReadAllText(Path.Combine(shaders,"planetary_physical_authority.glsl"));
         var global=File.ReadAllText(Path.Combine(shaders,"planetary.vert"));
-        var anchoredVertex=File.ReadAllText(Path.Combine(shaders,"anchored_terrain.vert"));
-        var anchoredEvaluation=File.ReadAllText(Path.Combine(shaders,"anchored_terrain.tese"));
-        var anchored=File.ReadAllText(Path.Combine(shaders,"anchored_physical_surface.glsl"));
+        var prepare=File.ReadAllText(Path.Combine(shaders,"production_spherical_billboard_prepare.comp"));
+        var tes=File.ReadAllText(Path.Combine(shaders,"production_spherical_billboard.tese"));
         var fragment=File.ReadAllText(Path.Combine(shaders,"planetary_production.frag"));
-        var native=File.ReadAllText(Path.Combine(root,"native","NovaCore.Native","NovaCoreNative.cpp"));
-
-        Require(authority.Contains("binding=33",StringComparison.Ordinal)&&
-            authority.Contains("CanonicalElevationOracleMetres",StringComparison.Ordinal)&&
-            authority.Contains("LocalTerrainElevationResidual",StringComparison.Ordinal)&&
-            global.Contains("planetary_physical_authority.glsl",StringComparison.Ordinal)&&
-            anchored.Contains("planetary_physical_authority.glsl",StringComparison.Ordinal),
-            "global and anchored geometry include one oracle-plus-regional canonical authority");
-        Require(global.Contains("return CanonicalPhysicalHeight(direction);",StringComparison.Ordinal)&&
-            anchoredVertex.Contains("CanonicalBasePhysicalHeight(direction)",StringComparison.Ordinal)&&
-            anchoredEvaluation.Contains("EvaluateNearPhysicalD(direction,EvaluateBiomeBlendD(direction,geographic))",StringComparison.Ordinal)&&
-            !global.Contains("TerrainModifierHeightD(direction,geographicHeight,frequency)",StringComparison.Ordinal),
-            "global vertices and anchored base/TES vertices sample one representation-independent H(bodyDirection)");
-        Require(!global.Contains("productionElevation",StringComparison.Ordinal)&&
-            !fragment.Contains("ProductionFixedPhysicalNormal",StringComparison.Ordinal)&&
-            fragment.Contains("vec3 physical=normalize(normal)",StringComparison.Ordinal)&&
-            !fragment.Contains("materialBenchmark",StringComparison.Ordinal),
-            "terrain-v5 cannot re-enter global physical geometry or reconstruct a second lighting normal");
-        Require(fragment.Contains("EvaluatePresentationBiomeWeightsF",StringComparison.Ordinal)&&
-            fragment.Contains("Geometry/TES has already produced physical height",StringComparison.Ordinal),
-            "Candidate D remains presentation-only and does not replace physical height authority");
-        Require(native.Contains("managedAcknowledged=a.submission->anchoredSurfaceGpuReadyGeneration==a.submission->anchoredSurfaceActiveGeneration",StringComparison.Ordinal)&&
-            native.Contains("coverage[2]=a.submission->anchoredSurfaceActiveGeneration",StringComparison.Ordinal)&&
-            native.Contains("AnchoredSurfaceFrameResourceCount=3",StringComparison.Ordinal)&&
-            native.Contains("BindDynamicAnchoredResource(a,resourceIndex)",StringComparison.Ordinal)&&
-            native.Contains("a.anchoredSurfaceActiveGeneration=a.submission->anchoredSurfaceActiveGeneration",StringComparison.Ordinal),
-            "refined ownership becomes draw-visible only as one GPU-ready acknowledged frame-indexed coverage generation");
+        var publication=File.ReadAllText(Path.Combine(root,"native","NovaCore.Native","RegionalPhysicalPreparation.inl"));
+        Require(authority.Contains("binding=33") && authority.Contains("CanonicalElevationOracleMetres") &&
+            authority.Contains("RegionalPhysicalResidual") && global.Contains("planetary_physical_authority.glsl") &&
+            prepare.Contains("planetary_physical_authority.glsl"),
+            "bootstrap oracle and NCSM1 regional preparation share canonical physical authority");
+        Require(tes.Contains("EvaluateNaturalCandidateNearD(direction)") &&
+            tes.Contains("gl_Position=baseClip+") && !tes.Contains("EvaluateNaturalCandidatePreparedD"),
+            "TES preserves prepared base geometry and adds only bounded near detail");
+        Require(!global.Contains("productionElevation") && !fragment.Contains("ProductionFixedPhysicalNormal") &&
+            fragment.Contains("vec3 physical=normalize(normal)"),
+            "terrain presentation consumes the final geometry normal without a second physical surface");
+        Require(publication.Contains("if(!job.fencePending)return;") &&
+            publication.Contains("job.cursor!=a.productionBillboardVertexCount") &&
+            publication.Contains("std::swap(a.productionBillboardPhysicalBuffer,a.regionalScratchBuffer)") &&
+            publication.Contains("frames.current=a.regionalPublishedPupil"),
+            "complete fenced physical publication swaps atomically and retains the outgoing pupil");
     }
 
     private static double Angle(in Double3 a,in Double3 b) =>

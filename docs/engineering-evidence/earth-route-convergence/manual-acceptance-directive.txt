@@ -1,0 +1,529 @@
+# NovaCore — Post-Convergence Production Consolidation and Architectural Retirement
+
+Florida manual acceptance has PASSED.
+
+The latest launcher-based physical test confirms that the previously rejected
+Florida failure is resolved:
+
+- the Earth reads as one stable opaque physical terrain surface;
+- the launch facility reads as attached to the terrain throughout movement;
+- the former apparent transparent/sliding material layer is no longer observed;
+- the former bright terrain beneath the facility/contact illusion is resolved;
+- the former black/grainy presentation instability was not observed in the
+  accepted manual route.
+
+Website architectural decision:
+
+FLORIDA MANUAL ACCEPTANCE: PASS.
+
+The convergence architecture is now sufficiently proven to proceed to the
+planned production consolidation and architectural-retirement phase.
+
+DO NOT begin the next performance objective yet.
+
+DO NOT bank/tag the current workspace yet.
+
+This ticket exists to turn the accumulated convergence candidate into a clean,
+coherent production baseline before banking.
+
+---
+
+## PRIMARY OBJECTIVE
+
+Perform a repository-wide production consolidation and architectural-retirement
+pass around the now-accepted Earth / NCSM1 / Florida production architecture.
+
+This is NOT a cosmetic cleanup.
+
+This is the point at which obsolete architectures, superseded compatibility
+paths, temporary convergence scaffolding, diagnostics and investigation debris
+that were deliberately retained while physical acceptance was unresolved may
+now be removed.
+
+The resulting repository should represent the architecture NovaCore actually
+intends to carry forward.
+
+Prefer:
+
+one production responsibility
+over
+old path + new path + compatibility path + diagnostic path.
+
+Do not preserve obsolete architecture merely because substantial work went into
+it.
+
+---
+
+# 1. ESTABLISH CURRENT REPOSITORY TRUTH FIRST
+
+Before deleting anything:
+
+- inspect the complete current Git status;
+- inspect all modified and untracked files;
+- inspect current production routing;
+- inspect current launcher routing;
+- inspect current shaders and deployment;
+- inspect current terrain asset/manifests/cache responsibilities;
+- inspect permanent regression tests;
+- inspect documentation;
+- identify temporary build/capture/investigation outputs;
+- identify code retained specifically because convergence had not yet received
+  manual acceptance.
+
+Use current repository truth rather than older milestone assumptions.
+
+Preserve all unrelated incoming work.
+
+Do not overwrite or accidentally absorb unrelated modifications.
+
+---
+
+# 2. DEFINE THE ACCEPTED TARGET ARCHITECTURE
+
+Use the now-accepted runtime as the consolidation target.
+
+The accepted architecture includes, where current repository inspection confirms
+it:
+
+- NCSM1 / generation-4 physical Earth authority;
+- the current production New Earth Renderer;
+- terrain-v5 responsibilities;
+- final physical post-TES terrain receiver ownership for terrain presentation;
+- the accepted regional physical terrain path;
+- Florida canonical-height seating/grading/support responsibility;
+- accepted authored facility-to-terrain lighting visibility;
+- current production material evaluation on the actual rendered physical
+  surface;
+- atomic production ownership/publication behavior;
+- current launcher Florida route;
+- established precision, deterministic and physical-authority contracts.
+
+Do not weaken these responsibilities during cleanup.
+
+Do not redesign them merely because cleanup exposes opportunities for future
+improvement.
+
+---
+
+# 3. PERFORM A REPOSITORY-WIDE RETIREMENT AUDIT
+
+Search the entire relevant repository for architecture that has become obsolete
+because the accepted production path now owns its responsibility.
+
+Do not limit the audit to files touched by the most recent correction.
+
+Classify findings as:
+
+A. ACTIVE PRODUCTION — KEEP
+
+B. PERMANENT REGRESSION / ACCEPTANCE INFRASTRUCTURE — KEEP
+
+C. SOURCE / GENERATOR / PROVENANCE REQUIRED TO REPRODUCE PRODUCTION — KEEP
+
+D. SUPERSEDED PRODUCTION ARCHITECTURE — RETIRE
+
+E. TEMPORARY CONVERGENCE SCAFFOLDING — RETIRE
+
+F. TEMPORARY DIAGNOSTIC / CAPTURE / INVESTIGATION ARTIFACT — RETIRE
+
+G. DEAD COMPATIBILITY / FALLBACK PATH — RETIRE
+
+H. STALE DOCUMENTATION — UPDATE OR RETIRE
+
+I. UNRELATED EXISTING WORK — PRESERVE UNCHANGED
+
+J. UNCERTAIN / STILL REFERENCED — PROVE OWNERSHIP BEFORE REMOVAL
+
+Produce the classification before making broad destructive changes.
+
+---
+
+# 4. RETIRE SUPERSEDED RUNTIME RESPONSIBILITIES
+
+Inspect specifically for obsolete alternatives to responsibilities now owned by
+the accepted architecture.
+
+Examples include, but are not limited to:
+
+- superseded Earth surface renderer routes;
+- obsolete terrain ownership paths;
+- obsolete global/local compatibility paths;
+- old candidate-vs-production switching retained only for convergence;
+- obsolete material-coordinate reconstruction;
+- camera-dependent radial/proxy material shells;
+- old terrain presentation coordinate paths;
+- superseded facility-contact presentation workarounds;
+- temporary foundation/contact corrections that were later replaced by the
+  accepted architecture;
+- obsolete lighting exceptions;
+- redundant facility lighting paths;
+- obsolete shadow/contact experiments;
+- stale physical-surface compatibility code;
+- unnecessary fallback ownership that can no longer legitimately execute;
+- obsolete shader branches;
+- obsolete shader binaries;
+- dead runtime flags;
+- dead environment/configuration switches;
+- duplicate terrain responsibilities;
+- obsolete asset lookup paths;
+- temporary deployment compatibility logic.
+
+Do not assume these exist.
+
+Find them from repository truth.
+
+When an obsolete path is proven superseded, remove it completely rather than
+leaving a permanently dormant branch.
+
+---
+
+# 5. RETIRE CONVERGENCE-SPECIFIC DIAGNOSTICS
+
+The recent investigation created extensive diagnostic capability.
+
+Separate permanent regression value from temporary investigation instrumentation.
+
+Remove temporary production/runtime dependencies such as:
+
+- pixel provenance capture paths;
+- temporary depth-owner recording;
+- same-frame diagnostic color reconstruction;
+- temporary contact-edge probes;
+- shadow-isolation instrumentation;
+- material-coordinate separation probes;
+- diagnostic receiver/caster experiments;
+- temporary frame capture systems;
+- temporary workload counters created solely for this investigation;
+- reconstruction-only instrumentation;
+- temporary command-line flags;
+- temporary diagnostic shaders;
+- temporary diagnostic deployment logic.
+
+KEEP a diagnostic only when it has clear long-term regression or development
+value.
+
+If retained, move/structure it clearly as test/diagnostic infrastructure rather
+than allowing it to remain an implicit production dependency.
+
+Production runtime must not depend on investigation instrumentation.
+
+---
+
+# 6. CLEAN INVESTIGATION ARTIFACTS
+
+Review build/output/investigation directories produced during the convergence
+work, including the recent Florida investigations.
+
+Examples may include directories such as:
+
+- florida-near-contact
+- florida-foundation-lighting
+- florida-support-transition
+- florida-pixel-provenance
+- facility-light-occlusion
+- ksa-terrain-presentation
+
+and any other equivalent temporary capture/report directories discovered from
+current repository truth.
+
+Determine whether each is:
+
+- ignored temporary evidence;
+- tracked permanent evidence;
+- required regression fixture;
+- reproducibility source;
+- disposable generated output.
+
+Remove disposable generated debris.
+
+Do NOT delete useful development history merely for disk cleanliness.
+
+Do NOT remove source assets, generators, manifests or permanent regression
+fixtures required to reproduce accepted behavior.
+
+---
+
+# 7. CONSOLIDATE SHADERS
+
+Audit all shader sources and deployed shader responsibilities.
+
+For each shader/branch:
+
+- identify its production owner;
+- identify whether it is still reachable;
+- identify whether another shader now owns the same responsibility;
+- remove obsolete variants and branches;
+- remove temporary diagnostic shader paths;
+- preserve shaders required by legitimate non-Earth or distant rendering.
+
+After consolidation:
+
+- rebuild shader deployment from source;
+- verify deployed binaries correspond exactly to retained sources;
+- ensure no stale SPIR-V artifact can be selected.
+
+Do not reduce rendering quality as part of cleanup.
+
+---
+
+# 8. CONSOLIDATE MANAGED / NATIVE ROUTING
+
+Inspect managed and native routing for accumulated convergence-era branching.
+
+Prefer a direct production route where architecture is now established.
+
+Remove conditions whose only purpose was choosing between:
+
+- superseded Earth renderer and accepted Earth renderer;
+- old and new material coordinate paths;
+- diagnostic and production ownership;
+- rejected facility presentation approaches;
+- obsolete compatibility modes.
+
+Preserve intentional responsibilities such as:
+
+- distant/non-Earth presentation;
+- required startup fallback while production data becomes legitimately ready;
+- deterministic publication;
+- physical authority;
+- recovery from genuine unavailable assets.
+
+Do not confuse legitimate lifecycle states with obsolete architecture.
+
+---
+
+# 9. CONSOLIDATE TESTS
+
+Audit tests added throughout convergence.
+
+KEEP tests that protect permanent contracts, including as applicable:
+
+- sole terrain ownership;
+- physical authority;
+- terrain height/normal parity;
+- regional residency;
+- deterministic publication;
+- pupil transitions;
+- facility support/seating;
+- final-surface material coordinates;
+- facility light visibility;
+- launcher routing;
+- shader deployment integrity;
+- no stale-generation draw;
+- no zero/overlap owner conditions.
+
+REMOVE or rewrite tests that exist only to preserve behavior of architectures
+being retired.
+
+A permanent test suite should describe the architecture we intend to keep, not
+the sequence of failed architectures used to reach it.
+
+---
+
+# 10. KSA REFERENCE USE
+
+Use BOTH:
+
+1. the local current Kitten Space Agency production source; and
+2. the user's authenticated KSA Discord engineering history through the
+   available read-only browser access,
+
+as strong architectural references during this consolidation.
+
+Relevant Discord sources include:
+
+- live-changelog
+- version-history
+- dev-updates where applicable.
+
+Use them proactively where they help determine whether NovaCore is carrying a
+responsibility that KSA already learned to eliminate, consolidate or replace.
+
+Search historical KSA revisions when useful to identify:
+
+- retired terrain architectures;
+- obsolete compatibility paths;
+- renderer consolidation;
+- material-coordinate changes;
+- tessellation architecture;
+- terrain ownership;
+- shadow architecture;
+- precision architecture;
+- performance-related architectural replacement.
+
+Treat official KSA developer history as serious engineering evidence.
+
+Current KSA production source remains authoritative for what KSA carries today.
+
+Do not blindly copy source.
+
+Preserve NovaCore precision, deterministic simulation, physical authority and
+intentional coordinate conventions.
+
+---
+
+# 11. DO NOT OPTIMIZE YET
+
+The accepted manual run exposes substantial near-surface GPU cost.
+
+That is real and will become the next bounded production objective.
+
+DO NOT solve it in this ticket.
+
+Do not:
+
+- reduce tessellation;
+- reduce material quality;
+- change refinement thresholds;
+- introduce clamps;
+- change terrain fidelity;
+- change physical geometry;
+- alter residency policy merely for speed;
+- perform speculative GPU optimization.
+
+Cleanup may naturally remove measurable obsolete overhead, but optimization is
+not an acceptance requirement here.
+
+Record remaining performance observations for the next objective.
+
+---
+
+# 12. DOCUMENT THE FINAL PRODUCTION ARCHITECTURE
+
+After retirement/consolidation, update repository documentation to describe what
+actually exists.
+
+Remove stale descriptions of retired paths.
+
+Document clearly:
+
+- current Earth physical authority;
+- current production terrain renderer;
+- terrain-v5;
+- regional physical terrain;
+- material ownership;
+- facility seating/support;
+- facility lighting visibility;
+- production ownership/publication;
+- launcher route;
+- retained permanent regression responsibilities;
+- intentionally retained fallback responsibilities.
+
+Do not preserve historical implementation clutter in current-state
+documentation.
+
+Where historical context is valuable, keep it clearly historical.
+
+---
+
+# 13. VALIDATION AFTER RETIREMENT
+
+Perform full relevant validation from the consolidated repository.
+
+At minimum:
+
+- Debug build;
+- Release build;
+- shader compilation/deployment verification;
+- launcher regression;
+- NCSM1 physical authority tests;
+- regional terrain tests;
+- material-coordinate tests;
+- facility support tests;
+- facility lighting visibility tests;
+- ownership/publication tests;
+- pupil-transition tests;
+- P2S5G/current accepted interface tests;
+- deterministic tests;
+- Vulkan validation run;
+- git diff --check.
+
+Run the normal Florida launcher route from the freshly rebuilt/deployed
+consolidated candidate.
+
+Confirm:
+
+- Earth remains visible;
+- sole ownership remains correct;
+- facility remains seated;
+- terrain remains opaque/stable;
+- material does not slide with camera movement;
+- facility shadow/contact presentation remains correct;
+- no retired path is required at runtime.
+
+If cleanup changes anything player-visible, STOP for another manual acceptance.
+
+Do not silently bank a visually changed result.
+
+---
+
+# 14. FINAL REPORT BEFORE BANKING
+
+Return a precise consolidation report containing:
+
+1. accepted production architecture;
+2. every major retired responsibility;
+3. deleted source files;
+4. deleted shaders;
+5. deleted assets/generated debris;
+6. removed runtime branches/flags;
+7. retained fallbacks and why they remain legitimate;
+8. retained permanent diagnostics/tests and why;
+9. KSA source/history findings that influenced retirement;
+10. documentation changes;
+11. build/test results;
+12. Vulkan result;
+13. launcher result;
+14. post-cleanup performance observations WITHOUT optimizing them;
+15. complete Git status;
+16. diff summary;
+17. any remaining known debt.
+
+Explicitly state whether the resulting repository is:
+
+READY TO BANK
+
+or
+
+BLOCKED.
+
+---
+
+# 15. GIT BOUNDARY
+
+Do NOT stage, commit, push or tag yet.
+
+This ticket ends with a fully consolidated, validated candidate and a banking
+recommendation.
+
+Website review will make the final banking decision.
+
+Preserve unrelated incoming work exactly.
+
+---
+
+## SUCCESS CONDITION
+
+The objective is NOT merely:
+
+"tests still pass after deleting some files."
+
+Success means:
+
+NovaCore has one coherent production architecture for the responsibilities that
+have now converged.
+
+Obsolete architectures are actually gone.
+
+Temporary investigation infrastructure is no longer contaminating production.
+
+Permanent regression protection remains.
+
+Current documentation describes current reality.
+
+The accepted Florida behavior survives consolidation.
+
+The repository is understandable as a production engine rather than a history
+of every experiment that led to it.
+
+Only then should this convergence milestone be banked.

@@ -2,7 +2,6 @@
 #extension GL_GOOGLE_include_directive : require
 #extension GL_ARB_gpu_shader_fp64 : require
 #include "production_cube_surface.glsl"
-#include "local_terrain.glsl"
 #include "physical_surface.glsl"
 #include "planetary_physical_authority.glsl"
 #include "planetary_natural_terrain_surface.glsl"

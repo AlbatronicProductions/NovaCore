@@ -2,7 +2,8 @@
 #extension GL_GOOGLE_include_directive : require
 #extension GL_ARB_gpu_shader_fp64 : require
 #include "production_cube_surface.glsl"
-#include "local_terrain.glsl"
+#define NOVACORE_REGIONAL_PHYSICAL
+#include "regional_physical.glsl"
 #include "physical_surface.glsl"
 #include "planetary_physical_authority.glsl"
 #include "planetary_natural_terrain_surface.glsl"
@@ -10,10 +11,18 @@
 
 layout(local_size_x=64) in;
 struct PupilFrame{dvec4 east;dvec4 north;dvec4 up;dvec4 transition;uvec4 identity;uvec4 metadata;};
+layout(set=0,binding=56,std430) readonly buffer PreparationControl{
+  PupilFrame previous;PupilFrame current;PupilFrame incoming;uvec4 ranges[2];
+} preparation;
 layout(set=0,binding=52,std430) readonly buffer PupilFrames{PupilFrame previous;PupilFrame current;} pupilFrames;
 layout(set=0,binding=44,std430) readonly buffer Lattice{ivec4 values[];} lattice;
 struct PhysicalVertex{dvec4 body;vec4 normal;vec4 reserved;};
 layout(set=0,binding=38,std430) buffer Physical{PhysicalVertex values[];} physical;
+layout(set=0,binding=57,std430) buffer StagedPhysical{PhysicalVertex values[];} stagedPhysical;
+void storePhysical(uint vertex,PhysicalVertex value){
+  if(preparation.ranges[0].z!=0u)stagedPhysical.values[vertex]=value;
+  else physical.values[vertex]=value;
+}
 
 double transitionWeight(ivec3 value,PupilFrame frame)
 {
@@ -36,22 +45,41 @@ dvec3 canonicalDirection(ivec3 value,PupilFrame frame)
 
 void main()
 {
-  uint vertex=gl_GlobalInvocationID.x;
-  if(pupilFrames.current.metadata.x==0u||vertex>=pupilFrames.current.metadata.z)return;
+  uint vertex=gl_GlobalInvocationID.x+preparation.ranges[0].x;
+  PupilFrame current=preparation.ranges[0].z!=0u?preparation.current:pupilFrames.current;
+  PupilFrame previous=preparation.ranges[0].z!=0u?preparation.previous:pupilFrames.previous;
+  if(current.metadata.x==0u||vertex>=current.metadata.z)return;
   ivec3 value=lattice.values[vertex].xyz;
-  dvec3 direction=canonicalDirection(value,pupilFrames.current);
-  if(pupilFrames.previous.metadata.x!=0u&&pupilFrames.previous.identity.z==pupilFrames.current.identity.z&&
-     pupilFrames.previous.identity.w==pupilFrames.current.identity.w)
+  dvec3 direction=canonicalDirection(value,current);
+  if(previous.metadata.x!=0u&&previous.identity.z==current.identity.z&&
+     previous.identity.w==current.identity.w)
   {
-    dvec3 prior=canonicalDirection(value,pupilFrames.previous);
-    if(all(equal(prior,direction)))return;
+    dvec3 prior=canonicalDirection(value,previous);
+    if(all(equal(prior,direction))){if(preparation.ranges[0].z!=0u)stagedPhysical.values[vertex]=physical.values[vertex];return;}
   }
-  double radius=pupilFrames.current.transition.y;
+  double radius=current.transition.y;
   // KSA-parity responsibility split: the persistent reusable base owns the
   // geographic + macro/meso displacement.  TES adds only the canonical near
   // field, so tessellation density can never select a second full surface.
+  PhysicalVertex result;
   double height=CandidateBaseHeightD(direction);
-  physical.values[vertex].body=dvec4(direction*(radius+height),height);
-  physical.values[vertex].normal=vec4(CandidateBaseNormalD(direction,radius),1.0);
-  physical.values[vertex].reserved=vec4(0.0);
+  result.body=dvec4(direction*(radius+height),height);
+  result.normal=vec4(CandidateBaseNormalD(direction,radius),1.0);
+  result.reserved=vec4(0.0);
+  // Test-only catalog queries use the same function as real geographic demand.
+  if(vertex==3u&&regionalCatalog.entries[0].storage.w!=0u){
+    dvec2 ignored;
+    result.reserved=vec4(float(RegionalRecord(dvec3(1,0,0),ignored)),
+      float(RegionalRecord(dvec3(0,1,0),ignored)),float(RegionalRecord(dvec3(0,0,1),ignored)),
+      float(RegionalRecord(dvec3(0,0,-1),ignored)));
+  }
+  if(vertex<3u&&regionalCatalog.entries[0].storage.w!=0u){
+    dvec3 anchor=dvec3(0.1433224599406355LF,0.4788205718227514LF,0.8661348234979923LF);
+    double a,b;
+    if(vertex==0u){a=CanonicalElevationOracleMetres(anchor);b=RegionalPhysicalResidual(anchor);}
+    else if(vertex==1u){a=CandidateBaseHeightD(anchor);b=EvaluateNaturalCandidateD(anchor).nearField.height;}
+    else{a=CanonicalGeographicHeight(anchor);b=CandidatePhysicalHeightD(anchor);}
+    result.reserved=uintBitsToFloat(uvec4(unpackDouble2x32(a),unpackDouble2x32(b)));
+  }
+  storePhysical(vertex,result);
 }

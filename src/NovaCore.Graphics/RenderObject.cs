@@ -9,6 +9,8 @@ public readonly record struct MeshHandle(uint Value)
     public static MeshHandle Sphere { get; } = new(2);
     /// <summary>Persistent original NovaCore Florida launchpad proof geometry.</summary>
     public static MeshHandle FloridaLaunchPad { get; } = new(3);
+    /// <summary>Unit Florida footing: X/Y=-0.5..0.5, Z=-1..0; scaled from the canonical footprint survey.</summary>
+    public static MeshHandle FloridaLaunchFoundation { get; } = new(4);
     public bool IsValid => Value != 0;
 }
 

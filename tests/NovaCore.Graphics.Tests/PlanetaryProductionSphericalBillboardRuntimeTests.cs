@@ -149,11 +149,12 @@ internal static class PlanetaryProductionSphericalBillboardRuntimeTests
             native.Contains("RetainCurrentProductionBillboardWorkAsSpare",StringComparison.Ordinal)&&
             native.Contains("productionBillboardWorkReuses++",StringComparison.Ordinal),
             "native runtime retains a bounded immutable scale-topology library and recycles fence-retired current/incoming work buffers");
-        Require(incomingPrepare.Contains("PupilFrame frame=pupilFrames.incoming",StringComparison.Ordinal)&&
+        Require(incomingPrepare.Contains("PupilFrame frame=preparation.ranges[1].z!=0u?preparation.incoming:pupilFrames.incoming",StringComparison.Ordinal)&&
             incomingPrepare.Contains("CandidateBaseHeightD(direction)",StringComparison.Ordinal)&&
             native.Contains("productionBillboardIncomingPreparePipeline",StringComparison.Ordinal)&&
             moving.Contains("_nativeGpuPhysicalPreparation",StringComparison.Ordinal),
             "cross-level NCSM1 publication prepares pupil-dependent physical positions on the GPU instead of rebuilding them in a managed query context");
+        RegionalPhysicalResidencyTests.VerifyPreparationScheduling(root);
         Require(moving.Contains("_submittedTopologyPayloads.Add",StringComparison.Ordinal)&&
             moving.Contains("topology.NativeLattice, topology.NativeIndices",StringComparison.Ordinal),
             "managed immutable upload payloads are materialized with each topology, never copied during selection, and reused on revisits");

@@ -2,8 +2,8 @@
 #define NOVACORE_PLANETARY_PHYSICAL_AUTHORITY_GLSL
 
 // One body-fixed geographic-height source for every production geometry
-// density.  The complete global mesh and the transactionally published
-// anchored hierarchy may sample this field at different densities, but neither
+// density. The global bootstrap and transactionally published NCSM1 geometry
+// sample the oracle through this shared contract; neither
 // may substitute its presentation payload for physical surface authority.
 layout(std430,set=0,binding=33) readonly buffer CanonicalElevationOracle
 {
@@ -41,12 +41,15 @@ double CanonicalElevationOracleMetres(dvec3 direction)
 
 double CanonicalGeographicHeight(dvec3 direction)
 {
-  vec3 unitDirection=normalize(vec3(direction));
   // Regional NCCUBE2 data is a residual against the signed global oracle.
-  // Clamp only after recomposition so CPU queries, clearance, complete global
-  // geometry, and refined geometry resolve the same physical geography.
-  return max(0.0,CanonicalElevationOracleMetres(direction)+
-    double(LocalTerrainElevationResidual(unitDirection)));
+  // Clamp only after recomposition so CPU queries, clearance and complete
+  // regional NCSM1 preparation resolve the same physical geography.
+#ifdef NOVACORE_REGIONAL_PHYSICAL
+  if(regionalCatalog.identity.w==4u)
+    return max(0.0,CanonicalElevationOracleMetres(direction)+RegionalPhysicalResidual(direction));
+#endif
+  // Bootstrap geometry uses the global oracle until complete regional physical publication.
+  return max(0.0,CanonicalElevationOracleMetres(direction));
 }
 
 double CanonicalBasePhysicalHeight(dvec3 direction)

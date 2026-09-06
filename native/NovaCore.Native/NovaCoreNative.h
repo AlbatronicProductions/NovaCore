@@ -1,4 +1,5 @@
 #pragma once
+#include "FacilityLightOcclusion.h"
 #include <stdint.h>
 
 #ifdef _WIN32
@@ -17,20 +18,6 @@ struct NcRenderTransform { float rotation[4]; float scale[4]; };
 struct alignas(16) NcRenderObject { NcEncodedPosition position; NcRenderTransform transform; NcMeshHandle mesh; uint32_t padding[3]; };
 struct NcDrawBatch { NcMeshHandle mesh; uint32_t firstObject; uint32_t objectCount; uint32_t padding; };
 struct NcPlanetaryPatch { uint32_t face, level, x, y; float centerX, centerY, centerZ, radius; float colorR, colorG, colorB, colorA; uint32_t stitchMask, reserved0, reserved1, reserved2; };
-struct NcAnchoredSurfacePatch {
-  uint32_t bodyIdLow, bodyIdHigh, terrainVersion, physicalSurfaceGeneration;
-  uint32_t face, level, x, y;
-  uint32_t cacheSlot, cacheGeneration, stitchMask, flags;
-  uint32_t materialLevel, materialX, materialY, materialGeneration;
-  float boundsX, boundsY, boundsZ, boundsRadius;
-};
-struct alignas(16) NcAnchoredSurfacePresentation {
-  NcEncodedPosition origin;
-  NcEncodedPosition east;
-  NcEncodedPosition north;
-  NcEncodedPosition up;
-  uint32_t bodyIdLow, bodyIdHigh, snapIdentity, presentationGeneration;
-};
 struct alignas(16) NcPlanetaryGpuConstants {
   float cameraBodyHighX, cameraBodyHighY, cameraBodyHighZ, radiusHigh;
   float cameraBodyLowX, cameraBodyLowY, cameraBodyLowZ, radiusLow;
@@ -96,7 +83,7 @@ struct alignas(32) NcProductionBillboardFrame {
 };
 static_assert(sizeof(NcProductionBillboardFrame) == 480,
               "production billboard frame must match std430 layout");
-struct NcFrameSubmission { NcCameraData camera; NcRenderObject* objects; uint32_t objectCount; NcDrawBatch* batches; uint32_t batchCount; NcOrbitLineVertex* orbitVertices; uint32_t orbitVertexCount; NcOrbitLineVertex* previousOrbitVertices; uint32_t previousOrbitVertexCount; NcOrbitLineVertex* bodyForwardVertices; uint32_t bodyForwardVertexCount; NcOrbitLineVertex* targetDirectionVertices; uint32_t targetDirectionVertexCount; NcPlanetaryPatch* planetaryPatches; uint32_t planetaryPatchCount; uint32_t planetaryGpuAlignmentPadding; NcPlanetaryGpuConstants planetaryGpu; NcPlanetaryMode planetaryMode; NcPlanetarySurfaceMode planetarySurfaceMode; uint32_t physicalSurfaceGeneration, planetaryPadding; NcPlanetaryPresentation planetaryPresentation; NcPlanetaryPresentation* distantBodies; uint32_t distantBodyCount, distantBodyPadding; NcSolarLighting solarLighting; NcAnchoredSurfacePatch* anchoredSurfacePatches; uint32_t anchoredSurfacePatchCount, anchoredSurfaceCacheSlotCount, anchoredSurfaceActiveGeneration, anchoredSurfaceFlags, anchoredSurfaceGpuReadyGeneration, anchoredSurfacePadding[5]; NcAnchoredSurfacePresentation anchoredSurfacePresentation; NcProductionSphericalBillboardSubmission* productionBillboard; uint32_t productionBillboardFlags, productionBillboardPadding; NcProductionBillboardFrame* productionBillboardFrame; };
+struct NcFrameSubmission { NcCameraData camera; NcRenderObject* objects; uint32_t objectCount; NcDrawBatch* batches; uint32_t batchCount; NcOrbitLineVertex* orbitVertices; uint32_t orbitVertexCount; NcOrbitLineVertex* previousOrbitVertices; uint32_t previousOrbitVertexCount; NcOrbitLineVertex* bodyForwardVertices; uint32_t bodyForwardVertexCount; NcOrbitLineVertex* targetDirectionVertices; uint32_t targetDirectionVertexCount; NcPlanetaryPatch* planetaryPatches; uint32_t planetaryPatchCount; uint32_t planetaryGpuAlignmentPadding; NcPlanetaryGpuConstants planetaryGpu; NcPlanetaryMode planetaryMode; NcPlanetarySurfaceMode planetarySurfaceMode; uint32_t physicalSurfaceGeneration, planetaryPadding; NcPlanetaryPresentation planetaryPresentation; NcPlanetaryPresentation* distantBodies; uint32_t distantBodyCount, distantBodyPadding; NcSolarLighting solarLighting; uint64_t reservedSurface[24]; NcProductionSphericalBillboardSubmission* productionBillboard; uint32_t productionBillboardFlags, productionBillboardPadding; NcProductionBillboardFrame* productionBillboardFrame; const NcFacilityCasterDefinition* facilityCaster; };
 struct NcAbiLayout { uint32_t encodedPositionSize, cameraDataSize, cameraPositionOffset, cameraViewProjectionOffset, renderTransformSize, renderObjectSize, renderObjectPositionOffset, renderObjectTransformOffset, renderObjectMeshOffset; uint32_t drawBatchSize, orbitLineVertexSize, frameSubmissionSize, frameObjectsOffset, frameBatchesOffset, frameOrbitVerticesOffset, frameOrbitVertexCountOffset; uint32_t inputStateSize, inputDeltaSecondsOffset, inputMoveLeftOffset, inputMoveRightOffset, inputMoveForwardOffset, inputMoveBackwardOffset, inputMoveDownOffset, inputMoveUpOffset, inputResetOffset, inputLookActiveOffset, inputMouseDeltaXOffset, inputMouseDeltaYOffset, inputMouseWheelDetentsOffset, inputPauseToggleOffset, inputRateDecreaseOffset, inputRateIncreaseOffset, inputSasModeKeyOffset, inputFastModifierOffset, inputSlowModifierOffset; uint32_t framePlanetaryGpuOffset, framePlanetaryModeOffset, framePlanetaryPresentationOffset, inputPresentationFocusOffset, frameSolarLightingOffset, inputViewportWidthOffset, inputViewportHeightOffset; };
 // mouseWheelDetents is signed Win32 WHEEL_DELTA-normalized detents, consumed once per callback.
 struct NcInputState { float deltaSeconds; uint32_t moveLeft, moveRight, moveForward, moveBackward, moveDown, moveUp, reset, lookActive; float mouseDeltaX, mouseDeltaY; int32_t mouseWheelDetents; uint32_t pauseToggle, rateDecrease, rateIncrease, sasModeKey, fastModifier, slowModifier; NcPresentationFocus presentationFocus; uint32_t viewportWidthPixels, viewportHeightPixels; };

@@ -13,11 +13,12 @@ invocation-accounting consequence (classification C), not increased refinement
 or changed tessellation semantics. The measured factors, performance results,
 and implementation-specific limits below remain unchanged.
 
-Older Earth/Solar/Florida routes still retain the anchored/global Earth path.
-Their divergence is a pending compatibility/ownership decision, not current
-production Earth authority. Earth-route ownership/convergence is the next major
-architectural responsibility, not further P2S5G optimization; no route change
-or renderer retirement is authorized by this record.
+P2S5G remains the banked rendering baseline. The subsequent, unbanked
+[Earth-route convergence candidate](earth-route-convergence.md) routes ordinary
+Earth/Solar/Florida scenarios into that accepted owner. Florida manual acceptance
+subsequently PASSED; [production consolidation](production-consolidation.md)
+retires the superseded anchored owner while preserving P2S5G geometry/TES.
+The historical investigation below remains unchanged.
 
 ## Historical investigation and pre-banking closeout
 

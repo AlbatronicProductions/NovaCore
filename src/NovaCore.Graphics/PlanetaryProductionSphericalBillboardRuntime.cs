@@ -454,7 +454,7 @@ public sealed class PlanetaryProductionSphericalBillboardPublication
 
 public static class PlanetaryProductionSphericalBillboardTes
 {
-    public const double RefinementRangeMetres = PlanetaryDynamicAnchoredSurface.GpuTessellationRangeMetres;
+    public const double RefinementRangeMetres = 50d;
 
     public static double SharedEdgeFactor(
         in Double3 firstCameraRelative,

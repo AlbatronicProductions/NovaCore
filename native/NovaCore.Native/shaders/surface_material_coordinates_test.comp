@@ -1,0 +1,15 @@
+#version 460
+#extension GL_GOOGLE_include_directive : require
+#extension GL_ARB_gpu_shader_fp64 : require
+#include "surface_material_coordinates.glsl"
+layout(local_size_x=64) in;
+struct Sample { vec4 relativeBody; vec4 unused; };
+layout(std430,binding=0) readonly buffer Input { Sample values[]; } inputs;
+layout(std430,binding=1) writeonly buffer Output { vec4 values[]; } outputs;
+layout(std430,binding=58) readonly buffer Context { vec4 cameraHigh; vec4 cameraLow; } context;
+void main(){
+  uint i=gl_GlobalInvocationID.x;if(i>=inputs.values.length())return;
+  dvec3 body=SurfaceMaterialBodyPosition(context.cameraHigh.xyz,context.cameraLow.xyz,inputs.values[i].relativeBody.xyz);
+  vec3 high=vec3(body);outputs.values[i*2]=vec4(high,0);
+  outputs.values[i*2+1]=vec4(vec3(body-dvec3(high)),0);
+}

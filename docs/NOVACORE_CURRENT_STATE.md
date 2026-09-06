@@ -58,17 +58,22 @@ production code change was needed. Original measurements, validation limits,
 and the historical pre-banking closeout are preserved in
 [the P2S5G investigation](M12D-P2S5G-workload-investigation.md).
 
-### Existing routes and pending ownership decision
+### Accepted route ownership and consolidation
 
-The accepted production Earth entry is **New Earth Renderer**
-(`--scene=m12d-production-spherical-billboard`, generation 4 by default). Older
-Earth/Solar/Florida routes still retain anchored/global Earth rendering and
-generally select generation 3. Their divergence requires a compatibility and
-ownership decision; it does not establish another accepted production Earth
-authority. This normalization changes no route or retirement status.
+The **unbanked consolidated candidate** uses NCSM1 and generation 4 for all six
+supported Earth/Solar/Florida launcher routes, including **New Earth Renderer**.
+Scene, focus, altitude, camera and Florida initialization remain route-specific.
+Florida launcher-based manual acceptance **PASSED** before consolidation.
+The superseded dynamic anchored owner, stitch/coverage draw, local texture-demand
+transport and its investigation drivers have been retired. Generation-3 numerical
+oracles and independent development scenes remain outside production Earth routing.
+Terrain-v5 global bootstrap remains only until complete NCSM1 publication;
+non-Earth presentation remains independent. No banking is authorized by this work.
 
-Their ownership/convergence is the next major architectural decision; this
-documentation does not authorize route changes or renderer retirement.
+See [production consolidation](production-consolidation.md) for reachability, retained responsibilities and validation.
+
+
+The consolidated candidate remains unbanked pending validation and website review.
 
 ## Production planetary responsibility chain
 
@@ -101,7 +106,7 @@ draw, synchronization, HDR, reversed-Z depth, and presentation.
 
 Every representation of a geographic point derives from one body-fixed
 physical-height function, `H(bodyDirection)`. The canonical composition includes
-the checked global elevation oracle, optional regional residual, accepted
+the checked global elevation oracle, regional residual wherever the authoritative catalog contributes, accepted
 deterministic physical modifiers, and the final non-negative clamp. It owns:
 
 - FP64 body-fixed geometry and deterministic displacement;
@@ -263,9 +268,10 @@ decisions without explicit authorization and measured evidence. Keep
 `H(bodyDirection)` authoritative and classify any future visual change first as
 physical geometry, depth/ownership, or presentation/LOD behavior.
 
-The next major architectural responsibility is Earth-route ownership/convergence:
-decide how the retained Earth/Solar/Florida entry points should relate to the
-accepted NCSM1 owner before authorizing implementation or renderer retirement.
+The current checkpoint is validation and website review of the unbanked consolidation.
+All six supported launcher routes select NCSM1; the superseded anchored owner is retired.
 Further P2S5G optimization is not the next objective. Finer pupil/re-triangulation
 continuity, terrain material/detail quality, atmosphere, clouds, environment,
 and gameplay remain separate future milestones.
+
+Unrelated retirement findings are tracked in [the subsequent debt ledger](repository-debt-retirement.md). Deferral is not permanent acceptance.

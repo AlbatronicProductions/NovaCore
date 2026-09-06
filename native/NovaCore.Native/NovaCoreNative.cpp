@@ -1,6 +1,8 @@
 #include "NovaCoreNative.h"
 #include "ProductionCubeSurface.h"
 #include "LocalTerrainPack.h"
+#include "RegionalPhysicalResidency.h"
+#include <bit>
 #include "PlanetaryHeightQuery.h"
 #include "PlanetaryMeshPreparation.h"
 #include "PlanetarySphericalBillboardGpuProof.h"
@@ -28,6 +30,8 @@
 #include <windows.h>
 
 namespace {
+SHORT RegionalValidationKeyState(int key){return std::getenv("NOVACORE_REGIONAL_PHYSICAL_PROBE")?0:GetAsyncKeyState(key);}
+
 constexpr uint32_t Width = 960, Height = 540;
 constexpr uint32_t PhysicalOracleWidth=8192,PhysicalOracleHeight=4096;
 constexpr VkDeviceSize PhysicalOracleBytes=VkDeviceSize(PhysicalOracleWidth)*PhysicalOracleHeight*sizeof(uint16_t);
@@ -42,32 +46,15 @@ constexpr uint32_t ProductionPayloadSlots=256,ProductionLookupCapacity=512,
                    ProductionElevationLayerBytes=nc::production::ElevationBytes,
                    ProductionLandLayerBytes=nc::production::LandBytes,
                    ProductionStagingBytes=ProductionMaximumPendingUploads*(ProductionAlbedoLayerBytes+ProductionElevationLayerBytes+ProductionLandLayerBytes);
-constexpr uint32_t LocalPayloadSlots=256,LocalLookupCapacity=2048,LocalLookupEntryWords=12,LocalUploadBudget=2,LocalMaximumPendingUploads=2,
-                   LocalAlbedoLayerBytes=nc::localterrain::Bc7Bytes,LocalElevationLayerBytes=nc::localterrain::R16Bytes,
-                   LocalNormalLayerBytes=nc::localterrain::Bc5Bytes,LocalControlLayerBytes=nc::localterrain::R8Bytes,
-                   LocalStagingBytes=LocalMaximumPendingUploads*(LocalAlbedoLayerBytes+LocalElevationLayerBytes+LocalNormalLayerBytes+LocalControlLayerBytes);
 constexpr uint32_t SurfaceDiagnosticDisableGlobal=1u<<0,SurfaceDiagnosticPayload=1u<<1,
-                   SurfaceDiagnosticDisableAnchored=1u<<2,SurfaceDiagnosticUnlit=1u<<3,
+                   SurfaceDiagnosticUnlit=1u<<3,
                    SurfaceDiagnosticNormals=1u<<4,SurfaceDiagnosticOwners=1u<<5,
                    SurfaceDiagnosticBoundaries=1u<<6,SurfaceDiagnosticDepth=1u<<7,
                    SurfaceDiagnosticAddresses=1u<<8,SurfaceDiagnosticDiffuseOnly=1u<<9,
                    SurfaceDiagnosticSpecularDisabled=1u<<10,SurfaceDiagnosticRadial=1u<<11,
                    SurfaceDiagnosticConstantSphere=1u<<12,SurfaceDiagnosticPhysicalNormals=1u<<13,
                    SurfaceDiagnosticScreenDerivative=1u<<14;
-constexpr uint32_t AnchoredSurfaceBaseGridResolution=4,AnchoredSurfaceBaseVerticesPerPatch=25,
-                   AnchoredSurfaceBaseIndicesPerPatch=96,AnchoredSurfaceMaximumPatches=6144,
-                   AnchoredSurfaceMaximumCacheSlots=16384,AnchoredSurfaceCoverageCapacity=16384,
-                   AnchoredSurfacePresentationVectorCount=9,AnchoredSurfacePatchVectorCount=5,
-                   AnchoredSurfacePatchVectorOffset=AnchoredSurfaceCoverageCapacity+AnchoredSurfacePresentationVectorCount,
-                   NaturalGlobalPatchCount=126,NaturalGlobalVerticesPerPatch=289,NaturalAnchoredVerticesPerPatch=25,
-                   AnchoredSurfaceFrameResourceCount=3;
-constexpr uint32_t AnchoredSurfaceReady=1u<<0,AnchoredSurfaceAuthoritative=1u<<1,
-                   AnchoredSurfaceGeometryComplete=1u<<2,AnchoredSurfacePhysicalComplete=1u<<3,
-                   AnchoredSurfaceMaterialComplete=1u<<4,AnchoredSurfaceSynchronizationComplete=1u<<5,
-                   AnchoredSurfaceLocalRequired=1u<<6,
-                   AnchoredSurfaceRequired=AnchoredSurfaceReady|AnchoredSurfaceAuthoritative|
-                     AnchoredSurfaceGeometryComplete|AnchoredSurfacePhysicalComplete|
-                     AnchoredSurfaceMaterialComplete|AnchoredSurfaceSynchronizationComplete;
+constexpr uint32_t NaturalGlobalPatchCount=126,NaturalGlobalVerticesPerPatch=289;
 // Counters 23..41 are diagnostic-only TCS observations. Keeping the reduction
 // in the existing per-generation counter allocation avoids perturbing topology,
 // visibility, compaction, or draw submission while making the emitted factors
@@ -85,9 +72,6 @@ static_assert(offsetof(NcRenderObject, position) == 0 &&
               offsetof(NcRenderObject, mesh) == 64);
 static_assert(sizeof(NcDrawBatch) == 16);
 static_assert(sizeof(NcPlanetaryPatch) == 64);
-static_assert(sizeof(NcAnchoredSurfacePatch) == 80);
-static_assert(sizeof(NcAnchoredSurfacePresentation) == 144);
-static_assert(alignof(NcAnchoredSurfacePresentation) == 16);
 static_assert(sizeof(NcPlanetaryGpuConstants) == 96);
 static_assert(alignof(NcPlanetaryGpuConstants) == 16);
 static_assert(offsetof(NcPlanetaryGpuConstants, cameraBodyLowX) == 16 &&
@@ -121,11 +105,9 @@ static_assert(offsetof(NcFrameSubmission, distantBodies) == 512);
 static_assert(offsetof(NcFrameSubmission, distantBodyCount) == 520);
 static_assert(offsetof(NcFrameSubmission, distantBodyPadding) == 524);
 static_assert(offsetof(NcFrameSubmission, solarLighting) == 528);
-static_assert(offsetof(NcFrameSubmission, anchoredSurfacePatches) == 576);
-static_assert(offsetof(NcFrameSubmission, anchoredSurfacePatchCount) == 584);
-static_assert(offsetof(NcFrameSubmission, anchoredSurfacePresentation) == 624);
 static_assert(offsetof(NcFrameSubmission, productionBillboard) == 768);
 static_assert(offsetof(NcFrameSubmission, productionBillboardFrame) == 784);
+static_assert(offsetof(NcFrameSubmission, facilityCaster) == 792);
 static_assert(sizeof(NcOrbitLineVertex) == 24);
 static_assert(sizeof(NcRuntimeAssets) == 32);
 static_assert(sizeof(NcInputState) == 84);
@@ -265,14 +247,6 @@ struct ProductionIoState {
   std::array<ProductionRequest,512> requests{}; uint32_t requestHead{},requestTail{},requestCount{};
   std::array<ProductionReady,8> ready{}; const nc::production::Pack *pack{}; uint64_t diskLoads{},queueDrops{},digestFailures{};
 };
-struct LocalRequest{nc::localterrain::SectorId id{};uint64_t demandEpoch{};bool visible{};std::chrono::steady_clock::time_point requestedAt{};};
-struct LocalReady{LocalRequest request{};std::unique_ptr<nc::localterrain::Payload>payload;uint32_t state{};};
-struct LocalIoState{
-  std::thread worker;std::mutex mutex;std::condition_variable wake;bool stop{};
-  std::array<LocalRequest,256>requests{};uint32_t requestHead{},requestTail{},requestCount{};
-  std::array<LocalReady,8>ready{};const nc::localterrain::Pack*pack{};
-  uint64_t diskLoads{},queueDrops{},digestFailures{},bytesRead{},bytesTranscoded{};double transcodeMilliseconds{};
-};
 struct Queues {
   std::optional<uint32_t> graphics, present;
   bool Complete() const { return graphics && present; }
@@ -285,6 +259,33 @@ struct ProductionBillboardTopologyResource {
   uint64_t hash{},bytes{};
 };
 constexpr uint32_t ProductionBillboardTopologyResourceCapacity=18u;
+struct RegionalDemandBuffer {
+  NcProductionBillboardPupilFrame frames[2];
+  std::array<std::array<uint32_t,nc::regionalphysical::MaskWords>,2> masks;
+  uint32_t offsets[2]{};
+};
+static_assert(offsetof(RegionalDemandBuffer,masks)==320);
+static_assert(offsetof(RegionalDemandBuffer,offsets)==544);
+static_assert(sizeof(RegionalDemandBuffer)==576);
+struct RegionalDependencyJob {
+  NcProductionBillboardPupilFrame frame{};
+  std::array<uint32_t,nc::regionalphysical::MaskWords> mask{};
+  uint64_t generation{},topology{};uint32_t phase{},cursor{};bool logged{};
+  std::chrono::steady_clock::time_point started{};
+};
+// Compute-only scheduling data; no change to the production tessellation ABI.
+constexpr uint32_t RegionalPreparationVertexBudget=65536u;
+constexpr uint32_t RegionalDemandVertexBudget=32768u;
+struct RegionalPreparationControl {
+  NcProductionBillboardPupilFrame previous{},current{},incoming{};
+  uint32_t ranges[2][4]{}; // first, count, staged, reserved
+};
+static_assert(sizeof(RegionalPreparationControl)==512);
+static_assert(offsetof(RegionalPreparationControl,ranges)==480);
+struct RegionalPreparationJob {
+  uint64_t generation{};uint32_t cursor{};bool active{},fencePending{};
+  std::chrono::steady_clock::time_point started{};
+};
 struct App {
   NcHostCallback cb{};
   void *cbData{};
@@ -333,16 +334,22 @@ struct App {
   std::array<ProductionRequest,ProductionMaximumPendingUploads> productionUploadRequests{};
   uint32_t productionPendingUploads{}; bool productionImagesInitialized{};
   uint64_t productionRequests{},productionUploads{},productionUploadBytes{},productionQueueDrops{},productionEvictions{};
-  std::array<VkImage,4> localImages{};std::array<VkDeviceMemory,4>localImageMemory{};std::array<VkImageView,4>localImageViews{};
-  VkSampler localSampler{};VkBuffer localStagingBuffer{};VkDeviceMemory localStagingMemory{};void*localStagingMapped{};
-  VkBuffer localLookupBuffer{};VkDeviceMemory localLookupMemory{};void*localLookupMapped{};
-  std::unique_ptr<nc::localterrain::Pack>localPack;std::unique_ptr<LocalIoState>localIo;
-  std::array<nc::localterrain::SectorId,LocalPayloadSlots>localLayerSector{};std::array<uint64_t,LocalPayloadSlots>localLayerLastUse{};
-  std::array<uint32_t,LocalPayloadSlots>localLayerGeneration{};std::array<uint8_t,LocalPayloadSlots>localLayerOccupied{},localLayerVisible{},localLayerInFlight{},localLayerPublished{};
-  std::array<float,LocalPayloadSlots>localLayerResidualMinimum{},localLayerResidualMaximum{};
-  std::array<uint32_t,LocalMaximumPendingUploads>localUploadLayers{},localUploadGenerations{};std::array<LocalRequest,LocalMaximumPendingUploads>localUploadRequests{};
-  std::array<nc::localterrain::SectorId,LocalPayloadSlots>localVisibleTarget{};uint32_t localVisibleTargetCount{},localPendingUploads{},localAnchoredGeneration{UINT32_MAX};bool localImagesInitialized{};uint64_t localDemandEpoch{1},localRequests{},localHits{},localMisses{},localEvictions{},localCanceled{},localUploads{},localPromotions{},localUploadBytes{};
-  uint64_t localLastPupilBits[3]{};bool localHasLastPupil{};double localTranscodeMilliseconds{},localUploadLatencyMilliseconds{};
+  std::unique_ptr<nc::regionalphysical::Residency> regionalPhysical;
+  VkBuffer regionalCatalogBuffer{},regionalPayloadBuffer{},regionalDemandBuffer{};
+  VkDeviceMemory regionalCatalogMemory{},regionalPayloadMemory{},regionalDemandMemory{};
+  void *regionalCatalogMapped{},*regionalPayloadMapped{},*regionalDemandMapped{};
+  VkDeviceSize regionalPayloadBytes{4};
+  VkPipeline regionalDemandPipeline{},regionalIncomingDemandPipeline{};
+  RegionalDependencyJob regionalJobs[2]{};bool regionalReady[2]{};
+  NcProductionBillboardPupilFrame regionalPublishedPupil{};
+  VkBuffer regionalPreparationBuffer{},regionalScratchBuffer{};
+  VkDeviceMemory regionalPreparationMemory{},regionalScratchMemory{};
+  void *regionalPreparationMapped{},*regionalScratchMapped{};
+  uint32_t regionalScratchCapacity{};
+  RegionalPreparationJob regionalPreparation[2]{};
+  VkQueryPool regionalTimingQueries{};bool regionalTimingRecorded[3]{};
+  uint64_t regionalDemandDispatches{};double regionalDependencyDelayMs{};
+  std::unique_ptr<nc::localterrain::Pack>localPack;
   uint64_t surfaceContextBodyId{},surfaceTransitionEpoch{},surfaceContextInvalidations{},productionDemandHits{},productionDemandMisses{};
   uint32_t surfaceContextTerrainVersion{},surfaceContextPhysicalGeneration{},surfaceContextMode{},surfaceContextRegime{},surfaceContextRadiusHighBits{},surfaceContextRadiusLowBits{};
   bool surfaceContextValid{},productionSurfaceLogged{},productionRootsReadyLogged{},productionGeometryTraceLogged{};uint32_t earthTransitionTraceRemaining{},earthSubmissionTraceRemaining{};uint64_t recordSerial{},submitSerial{},presentSerial{};
@@ -354,12 +361,10 @@ struct App {
   VkPipeline stellarGlowPipeline{};
   VkPipeline planetaryPipeline{};
   VkPipeline productionPlanetaryPipeline{};
-  VkPipeline productionPlanetaryFillPipeline{};
-  VkPipeline anchoredTerrainPipeline{};
   VkPipeline productionBillboardPipeline{},productionBillboardNoFaceCullPipeline{},productionBillboardOppositeFacePipeline{},productionBillboardNoDepthPipeline{},productionBillboardPreparePipeline{},productionBillboardResetPipeline{},productionBillboardCullPipeline{},productionBillboardCompactPipeline{};
   VkPipeline productionBillboardIncomingPreparePipeline{},productionBillboardIncomingResetPipeline{},productionBillboardIncomingCullPipeline{},productionBillboardIncomingCompactPipeline{};
   VkPipeline productionNestedScaleMeshCullPipeline{},productionNestedScaleMeshIncomingCullPipeline{};
-  VkPipeline naturalGlobalPreparePipeline{},naturalAnchoredPreparePipeline{};
+  VkPipeline naturalGlobalPreparePipeline{};
   VkPipeline planetaryComputePipeline{};
   VkPipeline planetaryTerrainPipeline{};
   VkPipeline productionPlanetaryTerrainPipeline{};
@@ -394,26 +399,15 @@ struct App {
   VkDeviceMemory patchMemory{};
   void *patchMapped{};
   VkDeviceSize patchSize{};
-  VkBuffer anchoredSurfaceVertexBuffer{},anchoredSurfaceIndexBuffer{};
-  VkDeviceMemory anchoredSurfaceVertexMemory{},anchoredSurfaceIndexMemory{};
-  void *anchoredSurfaceVertexMapped{},*anchoredSurfaceIndexMapped{};
-  std::array<VkBuffer,AnchoredSurfaceFrameResourceCount> anchoredSurfaceCoverageBuffers{},anchoredSurfaceIndirectBuffers{};
-  std::array<VkDeviceMemory,AnchoredSurfaceFrameResourceCount> anchoredSurfaceCoverageMemories{},anchoredSurfaceIndirectMemories{};
-  std::array<void*,AnchoredSurfaceFrameResourceCount> anchoredSurfaceCoverageMapped{},anchoredSurfaceIndirectMapped{};
-  std::array<uint32_t,AnchoredSurfaceFrameResourceCount> anchoredSurfaceResourceGenerations{};
-  uint32_t anchoredSurfaceResourceIndex{};
-  std::vector<uint32_t> anchoredSurfaceSlotGenerations;
-  std::vector<NcAnchoredSurfacePatch> anchoredSurfaceActivePatches;
-  uint32_t anchoredSurfaceActivePatchCount{},anchoredSurfaceActiveGeneration{},anchoredSurfacePublicationLogGeneration{};
-  uint64_t anchoredSurfaceUploadBytes{},anchoredSurfaceUploads{},anchoredSurfaceCapacityRejects{};
-  bool anchoredSurfaceResourcesReady{},anchoredSurfaceActive{},anchoredSurfacePublicationRequested{},anchoredGroundTruthEnabled{};
-  VkBuffer naturalGlobalPreparedBuffer{},naturalAnchoredPreparedBuffer{};
-  VkDeviceMemory naturalGlobalPreparedMemory{},naturalAnchoredPreparedMemory{};
-  void *naturalGlobalPreparedMapped{},*naturalAnchoredPreparedMapped{};
-  bool naturalGlobalPreparationPending{},naturalGlobalPrepared{},naturalAnchoredPreparationPending{};
-  uint32_t naturalAnchoredPreparationGeneration{},naturalAnchoredSubmittedGeneration{},naturalAnchoredPreparedGeneration{};
-  uint32_t naturalAnchoredPreparationPatchCount{};
-  uint64_t naturalGlobalPreparationDispatches{},naturalAnchoredPreparationDispatches{};
+  VkBuffer naturalGlobalPreparedBuffer{};
+  VkDeviceMemory naturalGlobalPreparedMemory{};
+  void *naturalGlobalPreparedMapped{};
+  bool naturalGlobalPreparationPending{},naturalGlobalPrepared{};
+  uint64_t naturalGlobalPreparationDispatches{};
+
+  VkBuffer facilityVisibilityBuffer{};VkDeviceMemory facilityVisibilityMemory{};void* facilityVisibilityMapped{};
+  NcFacilityCasterDefinition facilityDefinition{};nc::facility::GpuVisibility facilityPrepared{};bool facilityPreparedValid{};
+  uint64_t facilityGeometryBuilds{};
   VkBuffer productionBillboardLatticeBuffer{},productionBillboardPhysicalBuffer{},productionBillboardIndexBuffer{},productionBillboardVisibilityBuffer{},productionBillboardCompactedBuffer{},productionBillboardIndirectBuffer{},productionBillboardCounterBuffer{};
   VkDeviceMemory productionBillboardLatticeMemory{},productionBillboardPhysicalMemory{},productionBillboardIndexMemory{},productionBillboardVisibilityMemory{},productionBillboardCompactedMemory{},productionBillboardIndirectMemory{},productionBillboardCounterMemory{};
   void *productionBillboardLatticeMapped{},*productionBillboardPhysicalMapped{},*productionBillboardIndexMapped{},*productionBillboardVisibilityMapped{},*productionBillboardCompactedMapped{},*productionBillboardIndirectMapped{},*productionBillboardCounterMapped{};
@@ -465,6 +459,7 @@ struct App {
   VkDeviceSize targetDirectionSize{};
   Mesh triangle{};
   Mesh floridaLaunchPad{};
+  Mesh floridaLaunchFoundation{};
   Mesh planetaryPatch{};
   Mesh distantPlanetary{};
   Mesh stellarSun{};
@@ -487,12 +482,6 @@ struct App {
   double cpuUpdateMs{},cpuFenceWaitMs{},cpuInspectionMs{},cpuHostCallbackMs{},cpuUploadMs{};
   double cpuRecordMs{},cpuSubmitMs{},cpuPresentMs{};
   uint64_t cpuTimingSamples{};
-  // Opt-in benchmark telemetry. It records only the settled measurement window
-  // selected by the managed canonical M12 harness; normal production telemetry
-  // and scheduling are unchanged.
-  bool canonicalBenchmark{};
-  std::vector<double> canonicalCpuUpdateMs,canonicalCpuFenceMs,canonicalGpuTotalMs,canonicalGpuMaterialMs,
-                      canonicalGpuAnchoredMs,canonicalGpuGlobalFillMs,canonicalGpuOverlayMs;
   std::array<std::vector<double>,8> c3CpuMs;
   std::array<std::vector<double>,TimestampCount> c3GpuMs;
   std::array<std::vector<uint64_t>,4> c3PipelineValues;
@@ -528,11 +517,6 @@ struct App {
 uint32_t SurfaceDiagnosticFromEnvironment() {
   const char *value=std::getenv("NOVACORE_SURFACE_DIAGNOSTIC");
   if(!value||!*value||std::strcmp(value,"normal")==0)return 0;
-  if(std::strcmp(value,"cube")==0)return SurfaceDiagnosticDisableAnchored;
-  if(std::strcmp(value,"eye")==0)return SurfaceDiagnosticDisableGlobal|SurfaceDiagnosticDisableAnchored;
-  if(std::strcmp(value,"cube-eye")==0)return SurfaceDiagnosticDisableAnchored;
-  if(std::strcmp(value,"anchored")==0)return SurfaceDiagnosticDisableGlobal;
-  if(std::strcmp(value,"cube-anchored")==0)return 0;
   if(std::strcmp(value,"unlit")==0)return SurfaceDiagnosticUnlit;
   if(std::strcmp(value,"normals")==0)return SurfaceDiagnosticNormals;
   if(std::strcmp(value,"owners")==0)return SurfaceDiagnosticOwners;
@@ -553,25 +537,7 @@ uint32_t SurfaceDiagnosticFromEnvironment() {
   if(std::strcmp(value,"biome-blend")==0)return (1u<<15)|(5u<<8);
   if(std::strcmp(value,"modifier-family")==0)return (1u<<15)|(6u<<8);
   if(std::strcmp(value,"near-physical")==0)return (1u<<15)|(7u<<8);
-  if(std::strcmp(value,"regional-height")==0)return (1u<<15)|SurfaceDiagnosticPayload;
-  if(std::strcmp(value,"residual")==0)return (1u<<15)|SurfaceDiagnosticNormals;
-  if(std::strcmp(value,"regional-control")==0)return (1u<<15)|SurfaceDiagnosticOwners;
-  if(std::strcmp(value,"regional-residency")==0)return (1u<<15)|SurfaceDiagnosticBoundaries;
-  if(std::strcmp(value,"regional-boundary")==0)return (1u<<15)|SurfaceDiagnosticDepth;
   if(std::strcmp(value,"material-id")==0)return (1u<<15)|SurfaceDiagnosticAddresses|SurfaceDiagnosticNormals;
-  if(std::strcmp(value,"regional-mip")==0)return (1u<<15)|SurfaceDiagnosticDiffuseOnly|SurfaceDiagnosticNormals;
-  if(std::strcmp(value,"anchored-unlit")==0)return SurfaceDiagnosticDisableGlobal|SurfaceDiagnosticUnlit;
-  if(std::strcmp(value,"cube-unlit")==0)return SurfaceDiagnosticDisableAnchored|SurfaceDiagnosticUnlit;
-  if(std::strcmp(value,"anchored-physical-normals")==0)return SurfaceDiagnosticDisableGlobal|SurfaceDiagnosticPhysicalNormals;
-  if(std::strcmp(value,"cube-physical-normals")==0)return SurfaceDiagnosticDisableAnchored|SurfaceDiagnosticPhysicalNormals;
-  if(std::strcmp(value,"anchored-addresses")==0)return SurfaceDiagnosticDisableGlobal|SurfaceDiagnosticAddresses;
-  if(std::strcmp(value,"cube-addresses")==0)return SurfaceDiagnosticDisableAnchored|SurfaceDiagnosticAddresses;
-  if(std::strcmp(value,"anchored-depth")==0)return SurfaceDiagnosticDisableGlobal|SurfaceDiagnosticDepth;
-  if(std::strcmp(value,"cube-depth")==0)return SurfaceDiagnosticDisableAnchored|SurfaceDiagnosticDepth;
-  if(std::strcmp(value,"anchored-payload")==0)return SurfaceDiagnosticDisableGlobal|SurfaceDiagnosticPayload;
-  if(std::strcmp(value,"cube-payload")==0)return SurfaceDiagnosticDisableAnchored|SurfaceDiagnosticPayload;
-  if(std::strcmp(value,"anchored-footprint")==0)return SurfaceDiagnosticDisableGlobal|SurfaceDiagnosticPayload|SurfaceDiagnosticDepth;
-  if(std::strcmp(value,"cube-footprint")==0)return SurfaceDiagnosticDisableAnchored|SurfaceDiagnosticPayload|SurfaceDiagnosticDepth;
   throw std::runtime_error("NOVACORE_SURFACE_DIAGNOSTIC is invalid");
 }
 void SeedProductionTerrainCacheHighWater(App &a) {
@@ -704,10 +670,7 @@ void CreateMesh(App &a) {
     for(uint32_t face=0;face<6;face++){const uint32_t base=(uint32_t)padVertices.size();for(uint32_t corner:q[face])padVertices.push_back({{p[corner][0],p[corner][1],p[corner][2]},{color[0],color[1],color[2]},{n[face][0],n[face][1],n[face][2]}});padIndices.insert(padIndices.end(),{base,base+1,base+2,base,base+2,base+3});}
   };
   // Local axes are canonical East (+X), North (+Y), Up (+Z).
-  box(-32,-24,0,32,24,1.5f,{.34f,.37f,.40f});
-  box(-7,-7,1.5f,7,7,8.5f,{.48f,.50f,.52f});
-  box(28,-5,1.5f,50,5,3.0f,{.82f,.33f,.10f}); // unmistakable east extension
-  box(-2,18,1.5f,2,38,2.6f,{.18f,.55f,.86f}); // north marker
+  for(const auto& authored:nc::facility::LaunchPadBoxes)box(authored.minimum[0],authored.minimum[1],authored.minimum[2],authored.maximum[0],authored.maximum[1],authored.maximum[2],authored.color);
   Buffer(a,sizeof(Vertex)*padVertices.size(),VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,a.floridaLaunchPad.vb,a.floridaLaunchPad.vm,padVertices.data());
   Buffer(a,sizeof(uint32_t)*padIndices.size(),VK_BUFFER_USAGE_INDEX_BUFFER_BIT,a.floridaLaunchPad.ib,a.floridaLaunchPad.im,padIndices.data());
   a.floridaLaunchPad.indices=(uint32_t)padIndices.size();
@@ -733,6 +696,13 @@ void CreateMesh(App &a) {
   {char message[192];std::snprintf(message,sizeof message,
     "Created persistent generic meshes: triangleIndices=%u; floridaLaunchPadVertices=%zu; floridaLaunchPadIndices=%u",
     a.triangle.indices,padVertices.size(),a.floridaLaunchPad.indices);a.Log(NC_LOG_VULKAN,message);}
+  // Separate unit footing keeps the authored deck and camera anchor unchanged.
+  // Managed canonical terrain survey supplies width/length/depth through the ordinary object scale.
+  padVertices.clear();padIndices.clear();
+  {const auto& authored=nc::facility::FoundationUnit;box(authored.minimum[0],authored.minimum[1],authored.minimum[2],authored.maximum[0],authored.maximum[1],authored.maximum[2],authored.color);}
+  Buffer(a,sizeof(Vertex)*padVertices.size(),VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,a.floridaLaunchFoundation.vb,a.floridaLaunchFoundation.vm,padVertices.data());
+  Buffer(a,sizeof(uint32_t)*padIndices.size(),VK_BUFFER_USAGE_INDEX_BUFFER_BIT,a.floridaLaunchFoundation.ib,a.floridaLaunchFoundation.im,padIndices.data());
+  a.floridaLaunchFoundation.indices=(uint32_t)padIndices.size();
 }
 void DestroyMesh(App &a) {
   if (a.triangle.vb)
@@ -749,6 +719,11 @@ void DestroyMesh(App &a) {
   if(a.floridaLaunchPad.ib)vkDestroyBuffer(a.device,a.floridaLaunchPad.ib,nullptr);
   if(a.floridaLaunchPad.im)vkFreeMemory(a.device,a.floridaLaunchPad.im,nullptr);
   a.floridaLaunchPad={};
+  if(a.floridaLaunchFoundation.vb)vkDestroyBuffer(a.device,a.floridaLaunchFoundation.vb,nullptr);
+  if(a.floridaLaunchFoundation.vm)vkFreeMemory(a.device,a.floridaLaunchFoundation.vm,nullptr);
+  if(a.floridaLaunchFoundation.ib)vkDestroyBuffer(a.device,a.floridaLaunchFoundation.ib,nullptr);
+  if(a.floridaLaunchFoundation.im)vkFreeMemory(a.device,a.floridaLaunchFoundation.im,nullptr);
+  a.floridaLaunchFoundation={};
   if(a.planetaryPatch.vb)vkDestroyBuffer(a.device,a.planetaryPatch.vb,nullptr);
   if(a.planetaryPatch.vm)vkFreeMemory(a.device,a.planetaryPatch.vm,nullptr);
   if(a.planetaryPatch.ib)vkDestroyBuffer(a.device,a.planetaryPatch.ib,nullptr);
@@ -771,7 +746,7 @@ void DestroyMesh(App &a) {
   a.planetaryRing={};
 }
 Mesh *MeshFor(App &a, NcMeshHandle h) {
-  return h.value == 1 ? &a.triangle : h.value == 3 ? &a.floridaLaunchPad : nullptr;
+  return h.value == 1 ? &a.triangle : h.value == 3 ? &a.floridaLaunchPad : h.value == 4 ? &a.floridaLaunchFoundation : nullptr;
 }
 void Validate(App &a) {
   auto *s = a.submission;
@@ -823,26 +798,9 @@ void Validate(App &a) {
   if(presentation.enabled>1)throw std::runtime_error("invalid planetary presentation enable");
   if(hasPresentation){const bool validWeights=std::abs(presentation.distantAlpha+presentation.detailedAlpha-1)<=1e-5f;if(presentation.regime>NC_PLANETARY_DETAILED_ONLY||!std::isfinite(presentation.centerX)||!std::isfinite(presentation.centerY)||!std::isfinite(presentation.centerZ)||!std::isfinite(presentation.centerLowX)||!std::isfinite(presentation.centerLowY)||!std::isfinite(presentation.centerLowZ)||presentation.centerLowPadding!=0||!std::isfinite(presentation.radius)||presentation.radius<=0||!std::isfinite(presentation.colorR)||!std::isfinite(presentation.colorG)||!std::isfinite(presentation.colorB)||!std::isfinite(presentation.distantAlpha)||!std::isfinite(presentation.detailedAlpha)||!std::isfinite(presentation.distanceRadii)||presentation.distanceRadii<1||presentation.distantAlpha<0||presentation.distantAlpha>1||presentation.detailedAlpha<0||presentation.detailedAlpha>1||!validWeights||!validMaterial(presentation))throw std::runtime_error("invalid planetary presentation");if(presentation.regime==NC_PLANETARY_DISTANT_ONLY&&(presentation.distantAlpha!=1||presentation.detailedAlpha!=0||s->planetaryPatchCount))throw std::runtime_error("invalid distant-only planetary submission");if(presentation.regime==NC_PLANETARY_DETAILED_ONLY&&(presentation.distantAlpha!=0||presentation.detailedAlpha!=1))throw std::runtime_error("invalid detailed-only planetary submission");}
   if(s->planetaryMode!=NC_PLANETARY_CPU_REFERENCE||hasPresentation){const auto &g=s->planetaryGpu;const double cameraX=static_cast<double>(g.cameraBodyHighX)+g.cameraBodyLowX;const double cameraY=static_cast<double>(g.cameraBodyHighY)+g.cameraBodyLowY;const double cameraZ=static_cast<double>(g.cameraBodyHighZ)+g.cameraBodyLowZ;const double cameraRadius=std::sqrt(cameraX*cameraX+cameraY*cameraY+cameraZ*cameraZ);const double physicalSurfaceRadius=cameraRadius-double(g.surfaceAltitudeMetres);const double radius=static_cast<double>(g.radiusHigh)+g.radiusLow;const bool finite=std::isfinite(g.cameraBodyHighX)&&std::isfinite(g.cameraBodyHighY)&&std::isfinite(g.cameraBodyHighZ)&&std::isfinite(g.radiusHigh)&&std::isfinite(g.cameraBodyLowX)&&std::isfinite(g.cameraBodyLowY)&&std::isfinite(g.cameraBodyLowZ)&&std::isfinite(g.radiusLow)&&std::isfinite(g.refinementThreshold)&&std::isfinite(g.nearFieldAltitudeRadii)&&std::isfinite(g.surfaceAltitudeMetres)&&std::isfinite(g.maximumTerrainHeightMetres)&&std::isfinite(g.viewForwardX)&&std::isfinite(g.viewForwardY)&&std::isfinite(g.viewForwardZ)&&std::isfinite(g.viewHalfAngleRadians)&&std::isfinite(g.viewportHeightPixels)&&std::isfinite(g.verticalTanHalfFov)&&std::isfinite(g.targetTexelPixels)&&std::isfinite(g.requestedAlbedoLevel)&&std::isfinite(cameraRadius)&&std::isfinite(physicalSurfaceRadius);const float viewLength=g.viewForwardX*g.viewForwardX+g.viewForwardY*g.viewForwardY+g.viewForwardZ*g.viewForwardZ;const bool production=s->planetarySurfaceMode==NC_PLANETARY_SURFACE_PRODUCTION_CUBE;constexpr float physicalMinimumClearance=10.0f,invariantTolerance=0.0001f;if(!finite||radius<=0||g.refinementThreshold<=0||g.nearFieldAltitudeRadii<=0||g.surfaceAltitudeMetres<0||g.maximumTerrainHeightMetres<0||g.maximumLevel>24||!g.outputCapacity||g.outputCapacity>GpuPatchCapacity||g.terrainFrame||std::abs(viewLength-1)>1e-4f||g.viewHalfAngleRadians<=0||g.viewHalfAngleRadians>=1.5707964f||g.viewportHeightPixels<=0||g.verticalTanHalfFov<=0||g.targetTexelPixels<=0)throw std::runtime_error("invalid planetary GPU constants");if(production&&g.surfaceAltitudeMetres<physicalMinimumClearance-invariantTolerance){char message[320];std::snprintf(message,sizeof message,"production camera clearance escape: r=%.17g; surface=%.17g; clearance=%.17g; required=%.17g",cameraRadius,physicalSurfaceRadius,double(g.surfaceAltitudeMetres),double(physicalMinimumClearance));a.Log(NC_LOG_ALWAYS,message);throw std::runtime_error("production camera clearance invariant failed at final GPU submission");}if((g.terrainVersion==0)!=(g.maximumTerrainHeightMetres==0))throw std::runtime_error("inconsistent planetary terrain constants");if(production&&(s->planetaryMode==NC_PLANETARY_CPU_REFERENCE||g.terrainVersion!=5))throw std::runtime_error("invalid production cube-sphere authority");if(hasPresentation&&(!bodyCenterMatches(cameraX,cameraY,cameraZ)||presentation.radius!=g.radiusHigh))throw std::runtime_error("inconsistent planetary presentation authority");if(s->planetaryMode==NC_PLANETARY_GPU_PRODUCTION&&s->planetaryPatchCount)throw std::runtime_error("GPU planetary mode received CPU leaves");}
-  const bool dynamicPointers=s->anchoredSurfacePatches!=nullptr;
-  if(std::any_of(std::begin(s->anchoredSurfacePadding),std::end(s->anchoredSurfacePadding),[](uint32_t value){return value!=0u;})||s->anchoredSurfaceFlags>3u||s->anchoredSurfaceCacheSlotCount>AnchoredSurfaceMaximumCacheSlots||
-     (s->anchoredSurfacePatchCount&&!dynamicPointers)||(!s->anchoredSurfacePatchCount&&s->anchoredSurfaceFlags)||
-     (s->anchoredSurfaceFlags&&!(s->anchoredSurfaceFlags&1u))||
-     (s->anchoredSurfaceCacheSlotCount!=0u)!=(s->anchoredSurfacePatches!=nullptr))throw std::runtime_error("invalid dynamic anchored surface submission");
-  if(s->anchoredSurfacePatchCount){const auto &f=s->anchoredSurfacePresentation;const float values[]{
-    f.origin.high[0],f.origin.high[1],f.origin.high[2],f.origin.low[0],f.origin.low[1],f.origin.low[2],
-    f.east.high[0],f.east.high[1],f.east.high[2],f.east.low[0],f.east.low[1],f.east.low[2],
-    f.north.high[0],f.north.high[1],f.north.high[2],f.north.low[0],f.north.low[1],f.north.low[2],
-    f.up.high[0],f.up.high[1],f.up.high[2],f.up.low[0],f.up.low[1],f.up.low[2]};
-    for(float value:values)if(!std::isfinite(value))throw std::runtime_error("invalid anchored spherical-billboard frame");
-    const double ex=double(f.east.high[0])+f.east.low[0],ey=double(f.east.high[1])+f.east.low[1],ez=double(f.east.high[2])+f.east.low[2];
-    const double nx=double(f.north.high[0])+f.north.low[0],ny=double(f.north.high[1])+f.north.low[1],nz=double(f.north.high[2])+f.north.low[2];
-    const double ux=double(f.up.high[0])+f.up.low[0],uy=double(f.up.high[1])+f.up.low[1],uz=double(f.up.high[2])+f.up.low[2];
-    const auto length=[](double x,double y,double z){return x*x+y*y+z*z;};
-    const uint64_t body=uint64_t(f.bodyIdLow)|(uint64_t(f.bodyIdHigh)<<32u);
-    if(body!=6u||!f.presentationGeneration||((f.snapIdentity>>3u)&31u)>24u||
-       std::abs(length(ex,ey,ez)-1)>1e-10||std::abs(length(nx,ny,nz)-1)>1e-10||std::abs(length(ux,uy,uz)-1)>1e-10||
-       std::abs(ex*nx+ey*ny+ez*nz)>1e-10||std::abs(ex*ux+ey*uy+ez*uz)>1e-10||std::abs(nx*ux+ny*uy+nz*uz)>1e-10)
-      throw std::runtime_error("invalid anchored spherical-billboard authority");}
+  if(std::any_of(std::begin(s->reservedSurface),std::end(s->reservedSurface),[](uint64_t value){return value!=0u;}))
+    throw std::runtime_error("reserved surface submission must be zero");
+
   const auto &lighting=s->solarLighting;const uint32_t hudPreset=lighting.speedHud&255u,hudAlpha=(lighting.speedHud>>8)&255u;if(lighting.enabled>1||(lighting.speedHud&0xffff0000u)||(hudPreset==0)!=(hudAlpha==0)||hudPreset>15)throw std::runtime_error("invalid Solar lighting flags");if(lighting.enabled&&(!std::isfinite(lighting.sourceCenterX)||!std::isfinite(lighting.sourceCenterY)||!std::isfinite(lighting.sourceCenterZ)||!std::isfinite(lighting.exposure)||lighting.exposure<=0||!std::isfinite(lighting.photosphereR)||lighting.photosphereR<0||!std::isfinite(lighting.photosphereG)||lighting.photosphereG<0||!std::isfinite(lighting.photosphereB)||lighting.photosphereB<0||!std::isfinite(lighting.ambientFloor)||lighting.ambientFloor<0||lighting.ambientFloor>1||!std::isfinite(lighting.sourceRadiance)||lighting.sourceRadiance<=1||!std::isfinite(lighting.glowStrength)||lighting.glowStrength<0||lighting.glowStrength>4))throw std::runtime_error("invalid Solar lighting presentation");
 }
 void Window(App &a) {
@@ -999,14 +957,13 @@ void DestroySwap(App &a) {
     vkDestroyPipeline(a.device,a.planetaryPipeline,nullptr);
   if (a.productionPlanetaryPipeline)
     vkDestroyPipeline(a.device,a.productionPlanetaryPipeline,nullptr);
-  if (a.productionPlanetaryFillPipeline)
-    vkDestroyPipeline(a.device,a.productionPlanetaryFillPipeline,nullptr);
-  if (a.anchoredTerrainPipeline)
-    vkDestroyPipeline(a.device,a.anchoredTerrainPipeline,nullptr);
   if(a.productionBillboardPipeline)vkDestroyPipeline(a.device,a.productionBillboardPipeline,nullptr);
   if(a.productionBillboardNoFaceCullPipeline)vkDestroyPipeline(a.device,a.productionBillboardNoFaceCullPipeline,nullptr);
   if(a.productionBillboardOppositeFacePipeline)vkDestroyPipeline(a.device,a.productionBillboardOppositeFacePipeline,nullptr);
   if(a.productionBillboardNoDepthPipeline)vkDestroyPipeline(a.device,a.productionBillboardNoDepthPipeline,nullptr);
+  if(a.regionalDemandPipeline)vkDestroyPipeline(a.device,a.regionalDemandPipeline,nullptr);
+  if(a.regionalIncomingDemandPipeline)vkDestroyPipeline(a.device,a.regionalIncomingDemandPipeline,nullptr);
+  a.regionalDemandPipeline={};a.regionalIncomingDemandPipeline={};
   if(a.productionBillboardPreparePipeline)vkDestroyPipeline(a.device,a.productionBillboardPreparePipeline,nullptr);
   if(a.productionBillboardResetPipeline)vkDestroyPipeline(a.device,a.productionBillboardResetPipeline,nullptr);
   if(a.productionBillboardCullPipeline)vkDestroyPipeline(a.device,a.productionBillboardCullPipeline,nullptr);
@@ -1024,7 +981,6 @@ void DestroySwap(App &a) {
   if (a.productionPlanetaryTerrainPipeline)
     vkDestroyPipeline(a.device,a.productionPlanetaryTerrainPipeline,nullptr);
   if(a.naturalGlobalPreparePipeline)vkDestroyPipeline(a.device,a.naturalGlobalPreparePipeline,nullptr);
-  if(a.naturalAnchoredPreparePipeline)vkDestroyPipeline(a.device,a.naturalAnchoredPreparePipeline,nullptr);
   if (a.distantPlanetaryPipeline)
     vkDestroyPipeline(a.device,a.distantPlanetaryPipeline,nullptr);
   if (a.distantPlanetaryHandoffPipeline)
@@ -1054,14 +1010,11 @@ void DestroySwap(App &a) {
   a.stellarGlowPipeline={};
   a.planetaryPipeline = {};
   a.productionPlanetaryPipeline = {};
-  a.productionPlanetaryFillPipeline = {};
-  a.anchoredTerrainPipeline = {};
   a.productionBillboardPipeline={};a.productionBillboardNoFaceCullPipeline={};a.productionBillboardOppositeFacePipeline={};a.productionBillboardNoDepthPipeline={};a.productionBillboardPreparePipeline={};a.productionBillboardResetPipeline={};a.productionBillboardCullPipeline={};a.productionBillboardCompactPipeline={};a.productionBillboardIncomingPreparePipeline={};a.productionBillboardIncomingResetPipeline={};a.productionBillboardIncomingCullPipeline={};a.productionBillboardIncomingCompactPipeline={};a.productionNestedScaleMeshCullPipeline={};a.productionNestedScaleMeshIncomingCullPipeline={};
   a.planetaryComputePipeline = {};
   a.planetaryTerrainPipeline = {};
   a.productionPlanetaryTerrainPipeline={};
   a.naturalGlobalPreparePipeline={};
-  a.naturalAnchoredPreparePipeline={};
   a.distantPlanetaryPipeline = {};
   a.distantPlanetaryHandoffPipeline = {};
   a.planetaryRingFarPipeline={};
@@ -1108,8 +1061,9 @@ void LogLoadedRuntimePaths(App &a) {
   if(!GetModuleHandleExA(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS|GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,reinterpret_cast<LPCSTR>(&LogLoadedRuntimePaths),&module)||
      !GetModuleFileNameA(module,modulePath,MAX_PATH))std::strcpy(modulePath,"unavailable");
   if(!GetCurrentDirectoryA(MAX_PATH,workingDirectory))std::strcpy(workingDirectory,"unavailable");
-  if(!GetFullPathNameA("shaders/planetary_production.frag.spv",MAX_PATH,productionShader,nullptr))std::strcpy(productionShader,"unavailable");
-  if(!GetFullPathNameA("shaders/distant_planet.frag.spv",MAX_PATH,distantShader,nullptr))std::strcpy(distantShader,"unavailable");
+  std::string shaderDirectory(modulePath);shaderDirectory.resize(shaderDirectory.find_last_of("\\/")+1);
+  std::snprintf(productionShader,MAX_PATH,"%sshaders/planetary_production.frag.spv",shaderDirectory.c_str());
+  std::snprintf(distantShader,MAX_PATH,"%sshaders/distant_planet.frag.spv",shaderDirectory.c_str());
   char message[MAX_PATH*4];std::snprintf(message,sizeof message,"Loaded runtime paths: module=%s; cwd=%s; productionFragment=%s; distantFragment=%s",modulePath,workingDirectory,productionShader,distantShader);a.Log(NC_LOG_ALWAYS,message);
 }
 void CreateProductionImage(App &a,VkFormat format,VkImage &image,VkDeviceMemory &memory,VkImageView &view){
@@ -1213,81 +1167,14 @@ void BootstrapProductionHierarchy(App &a){
   }
   vkFreeCommandBuffers(a.device,a.pool,1,&command);if(!ProductionRootPayloadsReady(a)||!ProductionHierarchyPayloadsReady(a))throw std::runtime_error("production hierarchy bootstrap did not publish the complete L0-L2 surface");uint32_t publishedTerrainKeys=0u;for(uint32_t ordinal=0;ordinal<a.productionPack->RecordCount();ordinal++){const uint32_t *key=words+ordinal*12u;publishedTerrainKeys+=key[3]!=0u&&key[10]!=0u;}if(publishedTerrainKeys!=a.productionPack->RecordCount())throw std::runtime_error("production hierarchy bootstrap did not publish terrain-cache bindings");SeedProductionTerrainCacheHighWater(a);const double bootstrapMilliseconds=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-bootstrapStart).count();char message[288];std::snprintf(message,sizeof message,"Earth terrain-v5 complete L0-L2 hierarchy synchronously resident before first submitted presentation frame: records=%u; terrainBindings=%u; injectedBatchDelayMs=%u; milliseconds=%.3f",a.productionPack->RecordCount(),publishedTerrainKeys,injectedBatchDelayMilliseconds,bootstrapMilliseconds);a.Log(NC_LOG_ALWAYS,message);
 }
-void LocalIoWorker(LocalIoState*state){
-  for(;;){LocalRequest request{};{std::unique_lock lock(state->mutex);state->wake.wait(lock,[&]{return state->stop||state->requestCount;});if(state->stop)return;request=state->requests[state->requestHead];state->requestHead=(state->requestHead+1)%state->requests.size();state->requestCount--;}
-    auto payload=std::make_unique<nc::localterrain::Payload>();std::string error;const bool valid=state->pack->Read(request.id,*payload,error);std::unique_lock lock(state->mutex);state->wake.wait(lock,[&]{return state->stop||std::any_of(state->ready.begin(),state->ready.end(),[](const auto&value){return value.state==0;});});if(state->stop)return;auto ready=std::find_if(state->ready.begin(),state->ready.end(),[](const auto&value){return value.state==0;});ready->request=request;ready->payload=valid?std::move(payload):nullptr;ready->state=valid?2u:3u;if(valid){state->diskLoads++;state->bytesRead+=ready->payload->storedBytes;state->bytesTranscoded+=ready->payload->transcodedBytes;state->transcodeMilliseconds+=ready->payload->transcodeMilliseconds;}else state->digestFailures++;state->wake.notify_all();}
-}
-void CreateLocalImage(App&a,VkFormat format,uint32_t bytes,VkImage&image,VkDeviceMemory&memory,VkImageView&view){
-  VkFormatProperties properties{};vkGetPhysicalDeviceFormatProperties(a.physical,format,&properties);if((properties.optimalTilingFeatures&(VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT|VK_FORMAT_FEATURE_TRANSFER_DST_BIT))!=(VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT|VK_FORMAT_FEATURE_TRANSFER_DST_BIT))throw std::runtime_error("required BC local terrain format unsupported");
-  VkImageCreateInfo create{VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO};create.imageType=VK_IMAGE_TYPE_2D;create.format=format;create.extent={nc::localterrain::StoredExtent,nc::localterrain::StoredExtent,1};create.mipLevels=1;create.arrayLayers=LocalPayloadSlots;create.samples=VK_SAMPLE_COUNT_1_BIT;create.tiling=VK_IMAGE_TILING_OPTIMAL;create.usage=VK_IMAGE_USAGE_TRANSFER_DST_BIT|VK_IMAGE_USAGE_SAMPLED_BIT;create.sharingMode=VK_SHARING_MODE_EXCLUSIVE;create.initialLayout=VK_IMAGE_LAYOUT_UNDEFINED;a.Check(vkCreateImage(a.device,&create,nullptr,&image),"local terrain BC image failed");VkMemoryRequirements requirements{};vkGetImageMemoryRequirements(a.device,image,&requirements);VkMemoryAllocateInfo allocation{VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO};allocation.allocationSize=requirements.size;allocation.memoryTypeIndex=Memory(a,requirements.memoryTypeBits,VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);a.Check(vkAllocateMemory(a.device,&allocation,nullptr,&memory),"local terrain BC memory failed");a.Check(vkBindImageMemory(a.device,image,memory,0),"local terrain BC bind failed");VkImageViewCreateInfo viewCreate{VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO};viewCreate.image=image;viewCreate.viewType=VK_IMAGE_VIEW_TYPE_2D_ARRAY;viewCreate.format=format;viewCreate.subresourceRange.aspectMask=VK_IMAGE_ASPECT_COLOR_BIT;viewCreate.subresourceRange.levelCount=1;viewCreate.subresourceRange.layerCount=LocalPayloadSlots;a.Check(vkCreateImageView(a.device,&viewCreate,nullptr,&view),"local terrain BC view failed");(void)bytes;
-}
 void CreateLocalTerrain(App&a){
-  if(!a.localTerrainPath.empty()){a.localPack=std::make_unique<nc::localterrain::Pack>();std::string error;if(!a.localPack->Open(a.localTerrainPath,error)||!a.localPack->IsProductionLayout())throw std::runtime_error("Local terrain pack unavailable: "+(error.empty()?std::string("NCCUBE2 production layout mismatch"):error));}
-  CreateLocalImage(a,VK_FORMAT_BC7_SRGB_BLOCK,LocalAlbedoLayerBytes,a.localImages[0],a.localImageMemory[0],a.localImageViews[0]);CreateLocalImage(a,VK_FORMAT_R16_UNORM,LocalElevationLayerBytes,a.localImages[1],a.localImageMemory[1],a.localImageViews[1]);CreateLocalImage(a,VK_FORMAT_BC5_UNORM_BLOCK,LocalNormalLayerBytes,a.localImages[2],a.localImageMemory[2],a.localImageViews[2]);CreateLocalImage(a,VK_FORMAT_R8_UNORM,LocalControlLayerBytes,a.localImages[3],a.localImageMemory[3],a.localImageViews[3]);VkPhysicalDeviceProperties properties{};vkGetPhysicalDeviceProperties(a.physical,&properties);VkSamplerCreateInfo sampler{VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO};sampler.magFilter=VK_FILTER_LINEAR;sampler.minFilter=VK_FILTER_LINEAR;sampler.mipmapMode=VK_SAMPLER_MIPMAP_MODE_NEAREST;sampler.addressModeU=VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;sampler.addressModeV=VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;sampler.addressModeW=VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;sampler.anisotropyEnable=VK_TRUE;sampler.maxAnisotropy=std::min(8.0f,properties.limits.maxSamplerAnisotropy);sampler.maxLod=0;a.Check(vkCreateSampler(a.device,&sampler,nullptr,&a.localSampler),"local terrain sampler failed");CreateHostBuffer(a,LocalStagingBytes,VK_BUFFER_USAGE_TRANSFER_SRC_BIT,a.localStagingBuffer,a.localStagingMemory,a.localStagingMapped,"local terrain staging failed");
-  if(a.localPack){a.localIo=std::make_unique<LocalIoState>();a.localIo->pack=a.localPack.get();a.localIo->worker=std::thread(LocalIoWorker,a.localIo.get());char message[384];const uint64_t vram=uint64_t(LocalPayloadSlots)*(LocalAlbedoLayerBytes+LocalElevationLayerBytes+LocalNormalLayerBytes+LocalControlLayerBytes);std::snprintf(message,sizeof message,"Local terrain NCCUBE2 v3: records=%u; levels=%u-%u; BC7/R16/BC5/R8; slots=%u; VRAM=%llu; uploadBudget=%u; async=true; deterministicLRU=true",a.localPack->RecordCount(),a.localPack->MinimumLevel(),a.localPack->MaximumLevel(),LocalPayloadSlots,(unsigned long long)vram,LocalUploadBudget);a.Log(NC_LOG_ALWAYS,message);}
-}
-void DestroyLocalTerrain(App&a){
-  if(a.localIo){{std::lock_guard lock(a.localIo->mutex);a.localIo->stop=true;}a.localIo->wake.notify_all();if(a.localIo->worker.joinable())a.localIo->worker.join();a.localIo.reset();}DestroyHostBuffer(a,a.localStagingBuffer,a.localStagingMemory,a.localStagingMapped);if(a.localSampler)vkDestroySampler(a.device,a.localSampler,nullptr);for(uint32_t channel=0;channel<4;channel++){if(a.localImageViews[channel])vkDestroyImageView(a.device,a.localImageViews[channel],nullptr);if(a.localImages[channel])vkDestroyImage(a.device,a.localImages[channel],nullptr);if(a.localImageMemory[channel])vkFreeMemory(a.device,a.localImageMemory[channel],nullptr);}a.localPack.reset();
-}
-std::array<double,3>LocalDirection(uint32_t face,uint32_t level,uint32_t x,uint32_t y){
-  const double size=double(1u<<level),u=(double(x)+.5)/size,v=(double(y)+.5)/size,a=2*u-1,b=2*v-1;double cx{},cy{},cz{};switch(face){case 0:cx=1;cy=b;cz=-a;break;case 1:cx=-1;cy=b;cz=a;break;case 2:cx=a;cy=1;cz=-b;break;case 3:cx=a;cy=-1;cz=b;break;case 4:cx=a;cy=b;cz=1;break;default:cx=-a;cy=b;cz=-1;break;}const double x2=cx*cx,y2=cy*cy,z2=cz*cz;std::array<double,3>d{cx*std::sqrt(std::max(0.0,1-.5*(y2+z2)+y2*z2/3)),cy*std::sqrt(std::max(0.0,1-.5*(z2+x2)+z2*x2/3)),cz*std::sqrt(std::max(0.0,1-.5*(x2+y2)+x2*y2/3))};const double length=std::sqrt(d[0]*d[0]+d[1]*d[1]+d[2]*d[2]);for(double&value:d)value/=length;return d;
-}
-uint32_t LocalHash(const nc::localterrain::SectorId&id){uint32_t h=id.face*73856093u^id.level*19349663u^id.x*83492791u^id.y*2654435761u^id.detailFrequency*2246822519u^id.payloadVersion*3266489917u;h^=h>>16;return h&(LocalLookupCapacity-1u);}
-void RebuildLocalLookup(App&a){
-  if(!a.localLookupMapped)return;auto*words=static_cast<uint32_t*>(a.localLookupMapped);std::memset(words+16,0,sizeof(uint32_t)*LocalLookupEntryWords*LocalLookupCapacity);if(!a.localPack){std::memset(words,0,sizeof(uint32_t)*16);return;}words[0]=1;words[1]=a.localPack->MaximumLevel();words[2]=a.localPack->DetailFrequency();words[3]=a.localPack->PayloadVersionValue();const float residualMinimum=a.localPack->ResidualMinimum(),residualMaximum=a.localPack->ResidualMaximum();std::memcpy(words+4,&residualMinimum,sizeof(float));std::memcpy(words+5,&residualMaximum,sizeof(float));words[6]=LocalPayloadSlots;words[7]=LocalLookupCapacity;words[8]=a.localPack->MinimumLevel();words[9]=LocalLookupEntryWords;
-  for(uint32_t layer=0;layer<LocalPayloadSlots;layer++)if(a.localLayerOccupied[layer]&&!a.localLayerInFlight[layer]&&a.localLayerPublished[layer]){const auto&id=a.localLayerSector[layer];uint32_t slot=LocalHash(id);for(uint32_t probe=0;probe<LocalLookupCapacity;probe++){uint32_t*entry=words+16+slot*LocalLookupEntryWords;if(entry[6]==0){entry[0]=id.face;entry[1]=id.level;entry[2]=id.x;entry[3]=id.y;entry[4]=id.detailFrequency;entry[5]=id.payloadVersion;entry[6]=layer+1;entry[7]=a.localLayerGeneration[layer];std::memcpy(entry+8,&a.localLayerResidualMinimum[layer],sizeof(float));std::memcpy(entry+9,&a.localLayerResidualMaximum[layer],sizeof(float));break;}slot=(slot+1)&(LocalLookupCapacity-1u);}}
-}
-bool TryPromoteLocalVisibleTransaction(App&a){
-  if(!a.localVisibleTargetCount)return false;std::array<uint32_t,LocalPayloadSlots>layers{};for(uint32_t target=0;target<a.localVisibleTargetCount;target++){layers[target]=UINT32_MAX;for(uint32_t layer=0;layer<LocalPayloadSlots;layer++)if(a.localLayerOccupied[layer]&&!a.localLayerInFlight[layer]&&a.localLayerSector[layer]==a.localVisibleTarget[target]){layers[target]=layer;break;}if(layers[target]==UINT32_MAX)return false;}bool changed=false;for(uint32_t layer=0;layer<LocalPayloadSlots;layer++)if(a.localLayerPublished[layer]){bool retained=false;for(uint32_t target=0;target<a.localVisibleTargetCount;target++)retained|=layers[target]==layer;if(!retained){a.localLayerPublished[layer]=0;changed=true;}}for(uint32_t target=0;target<a.localVisibleTargetCount;target++)if(!a.localLayerPublished[layers[target]]){a.localLayerPublished[layers[target]]=1;changed=true;}if(changed){a.localPromotions++;RebuildLocalLookup(a);}return changed;
-}
-bool LocalPending(const App&a,const nc::localterrain::SectorId&id){
-  for(uint32_t layer=0;layer<LocalPayloadSlots;layer++)if(a.localLayerOccupied[layer]&&a.localLayerSector[layer]==id)return true;for(uint32_t index=0;index<a.localPendingUploads;index++)if(a.localUploadRequests[index].id==id)return true;if(!a.localIo)return false;const auto&io=*a.localIo;for(uint32_t index=0,slot=io.requestHead;index<io.requestCount;index++,slot=(slot+1)%io.requests.size())if(io.requests[slot].id==id)return true;for(const auto&ready:io.ready)if(ready.state&&ready.request.id==id)return true;return false;
-}
-bool LocalSectorIntersectsAnchoredPatch(const nc::localterrain::SectorId&id,const NcAnchoredSurfacePatch&patch){
-  if(id.face!=patch.face)return false;
-  if(patch.level<=id.level){const uint32_t shift=id.level-patch.level;return (id.x>>shift)==patch.x&&(id.y>>shift)==patch.y;}
-  const uint32_t shift=patch.level-id.level;return (patch.x>>shift)==id.x&&(patch.y>>shift)==id.y;
-}
-bool LocalSectorRequiredForAnchoredPatch(const App&a,const nc::localterrain::SectorId&id,const NcAnchoredSurfacePatch&patch){
-  if((patch.flags&AnchoredSurfaceLocalRequired)==0u||!a.localPack)return false;
-  const uint32_t selectedLevel=std::clamp(patch.level,a.localPack->MinimumLevel(),a.localPack->MaximumLevel());
-  return id.level==selectedLevel&&LocalSectorIntersectsAnchoredPatch(id,patch);
-}
-bool LocalSectorPublished(const App&a,const nc::localterrain::SectorId&id){
-  for(uint32_t layer=0;layer<LocalPayloadSlots;layer++)if(a.localLayerOccupied[layer]&&!a.localLayerInFlight[layer]&&a.localLayerPublished[layer]&&a.localLayerSector[layer]==id)return true;
-  return false;
-}
-bool AnchoredPatchLocalPayloadsReady(const App&a,const NcAnchoredSurfacePatch&patch){
-  if((patch.flags&AnchoredSurfaceLocalRequired)==0u)return true;
-  if(!a.localPack||!a.localImagesInitialized)return false;bool intersects=false;
-  for(const auto&record:a.localPack->Records())if(LocalSectorRequiredForAnchoredPatch(a,record.id,patch)){intersects=true;if(!LocalSectorPublished(a,record.id))return false;}
-  return intersects;
-}
-bool QueueAnchoredLocalRequests(App&a){
-  if(!a.localPack||!a.localIo||!a.submission||!a.submission->anchoredSurfacePatchCount||!a.submission->anchoredSurfacePatches)return false;
-  if(a.localAnchoredGeneration==a.submission->anchoredSurfaceActiveGeneration){TryPromoteLocalVisibleTransaction(a);return false;}
-  a.localAnchoredGeneration=a.submission->anchoredSurfaceActiveGeneration;a.localDemandEpoch++;
-  for(auto&flag:a.localLayerVisible)flag=0;a.localVisibleTargetCount=0;
-  for(const auto&record:a.localPack->Records()){
-    bool visible=false;for(uint32_t index=0;index<a.submission->anchoredSurfacePatchCount;index++){const auto&patch=a.submission->anchoredSurfacePatches[index];if(LocalSectorRequiredForAnchoredPatch(a,record.id,patch)){visible=true;break;}}
-    if(visible&&a.localVisibleTargetCount<a.localVisibleTarget.size())a.localVisibleTarget[a.localVisibleTargetCount++]=record.id;
+  if(!a.localTerrainPath.empty()){
+    a.localPack=std::make_unique<nc::localterrain::Pack>();std::string error;
+    if(!a.localPack->Open(a.localTerrainPath,error)||!a.localPack->IsProductionLayout())
+      throw std::runtime_error("Regional physical terrain pack unavailable: "+error);
   }
-  auto&io=*a.localIo;std::lock_guard lock(io.mutex);
-  for(uint32_t index=0;index<a.localVisibleTargetCount;index++){const auto&id=a.localVisibleTarget[index];bool resident=false;for(uint32_t layer=0;layer<LocalPayloadSlots;layer++)if(a.localLayerOccupied[layer]&&a.localLayerSector[layer]==id){a.localLayerLastUse[layer]=a.frame;a.localLayerVisible[layer]=1;resident=true;break;}if(resident){a.localHits++;continue;}a.localMisses++;if(LocalPending(a,id))continue;if(io.requestCount==io.requests.size()){io.queueDrops++;break;}io.requests[io.requestTail]={id,a.localDemandEpoch,true,std::chrono::steady_clock::now()};io.requestTail=(io.requestTail+1)%io.requests.size();io.requestCount++;a.localRequests++;}
-  TryPromoteLocalVisibleTransaction(a);io.wake.notify_all();return true;
 }
-void QueueLocalRequests(App&a){
-  QueueAnchoredLocalRequests(a);
-}
-void CompleteLocalUploads(App&a){if(!a.localPendingUploads)return;for(uint32_t index=0;index<a.localPendingUploads;index++){const uint32_t layer=a.localUploadLayers[index];if(a.localLayerOccupied[layer]&&a.localLayerGeneration[layer]==a.localUploadGenerations[index]&&a.localLayerSector[layer]==a.localUploadRequests[index].id){a.localLayerInFlight[layer]=0;a.localLayerLastUse[layer]=a.frame;}}a.localPendingUploads=0;RebuildLocalLookup(a);}
-void PrepareLocalUploads(App&a){
-  CompleteLocalUploads(a);QueueLocalRequests(a);if(!a.localIo||a.localPendingUploads)return;auto&io=*a.localIo;std::lock_guard lock(io.mutex);for(auto&ready:io.ready){if(a.localPendingUploads>=LocalUploadBudget)break;if(ready.state==3){ready={};continue;}if(ready.state!=2||!ready.payload)continue;if(ready.request.demandEpoch!=a.localDemandEpoch&&!ready.request.visible){a.localCanceled++;ready={};continue;}uint32_t layer=UINT32_MAX;for(uint32_t candidate=0;candidate<LocalPayloadSlots;candidate++)if(!a.localLayerOccupied[candidate]){layer=candidate;break;}if(layer==UINT32_MAX){uint64_t oldest=UINT64_MAX;for(uint32_t candidate=0;candidate<LocalPayloadSlots;candidate++)if(!a.localLayerVisible[candidate]&&!a.localLayerInFlight[candidate]&&a.localLayerLastUse[candidate]<oldest){oldest=a.localLayerLastUse[candidate];layer=candidate;}}if(layer==UINT32_MAX)break;if(a.localLayerOccupied[layer])a.localEvictions++;a.localLayerGeneration[layer]++;a.localLayerSector[layer]=ready.request.id;a.localLayerResidualMinimum[layer]=ready.payload->residualMinimum;a.localLayerResidualMaximum[layer]=ready.payload->residualMaximum;a.localLayerOccupied[layer]=1;a.localLayerVisible[layer]=ready.request.visible;a.localLayerInFlight[layer]=1;a.localLayerPublished[layer]=0;a.localLayerLastUse[layer]=a.frame;const uint32_t batch=a.localPendingUploads,base=batch*(LocalAlbedoLayerBytes+LocalElevationLayerBytes+LocalNormalLayerBytes+LocalControlLayerBytes);auto*destination=static_cast<uint8_t*>(a.localStagingMapped)+base;std::memcpy(destination,ready.payload->albedoBc7.data(),LocalAlbedoLayerBytes);std::memcpy(destination+LocalAlbedoLayerBytes,ready.payload->elevationBc4.data(),LocalElevationLayerBytes);std::memcpy(destination+LocalAlbedoLayerBytes+LocalElevationLayerBytes,ready.payload->normalBc5.data(),LocalNormalLayerBytes);std::memcpy(destination+LocalAlbedoLayerBytes+LocalElevationLayerBytes+LocalNormalLayerBytes,ready.payload->controlR8.data(),LocalControlLayerBytes);a.localUploadLayers[batch]=layer;a.localUploadGenerations[batch]=a.localLayerGeneration[layer];a.localUploadRequests[batch]=ready.request;a.localPendingUploads++;a.localUploads++;a.localUploadBytes+=LocalAlbedoLayerBytes+LocalElevationLayerBytes+LocalNormalLayerBytes+LocalControlLayerBytes;a.localTranscodeMilliseconds+=ready.payload->transcodeMilliseconds;a.localUploadLatencyMilliseconds+=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-ready.request.requestedAt).count();ready={};RebuildLocalLookup(a);}io.wake.notify_all();
-}
-void RecordLocalUploads(App&a,VkCommandBuffer command){
-  constexpr VkPipelineStageFlags shaderStages=VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT|VK_PIPELINE_STAGE_VERTEX_SHADER_BIT|VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT|VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;
-  if(!a.localPendingUploads){if(a.localImagesInitialized)return;VkImageMemoryBarrier readable[4]{};for(uint32_t channel=0;channel<4;channel++){readable[channel].sType=VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;readable[channel].srcAccessMask=0;readable[channel].dstAccessMask=VK_ACCESS_SHADER_READ_BIT;readable[channel].oldLayout=VK_IMAGE_LAYOUT_UNDEFINED;readable[channel].newLayout=VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;readable[channel].image=a.localImages[channel];readable[channel].subresourceRange.aspectMask=VK_IMAGE_ASPECT_COLOR_BIT;readable[channel].subresourceRange.levelCount=1;readable[channel].subresourceRange.layerCount=LocalPayloadSlots;}vkCmdPipelineBarrier(command,VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT,shaderStages,0,0,nullptr,0,nullptr,4,readable);a.localImagesInitialized=true;return;}
-  VkImageMemoryBarrier before[4]{};for(uint32_t channel=0;channel<4;channel++){before[channel].sType=VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;before[channel].srcAccessMask=a.localImagesInitialized?VK_ACCESS_SHADER_READ_BIT:0;before[channel].dstAccessMask=VK_ACCESS_TRANSFER_WRITE_BIT;before[channel].oldLayout=a.localImagesInitialized?VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL:VK_IMAGE_LAYOUT_UNDEFINED;before[channel].newLayout=VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;before[channel].image=a.localImages[channel];before[channel].subresourceRange.aspectMask=VK_IMAGE_ASPECT_COLOR_BIT;before[channel].subresourceRange.levelCount=1;before[channel].subresourceRange.layerCount=LocalPayloadSlots;}vkCmdPipelineBarrier(command,a.localImagesInitialized?shaderStages:VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT,VK_PIPELINE_STAGE_TRANSFER_BIT,0,0,nullptr,0,nullptr,4,before);for(uint32_t index=0;index<a.localPendingUploads;index++){const VkDeviceSize base=index*(LocalAlbedoLayerBytes+LocalElevationLayerBytes+LocalNormalLayerBytes+LocalControlLayerBytes);const VkDeviceSize offsets[4]{base,base+LocalAlbedoLayerBytes,base+LocalAlbedoLayerBytes+LocalElevationLayerBytes,base+LocalAlbedoLayerBytes+LocalElevationLayerBytes+LocalNormalLayerBytes};for(uint32_t channel=0;channel<4;channel++){VkBufferImageCopy copy{};copy.bufferOffset=offsets[channel];copy.imageSubresource.aspectMask=VK_IMAGE_ASPECT_COLOR_BIT;copy.imageSubresource.baseArrayLayer=a.localUploadLayers[index];copy.imageSubresource.layerCount=1;copy.imageExtent={nc::localterrain::StoredExtent,nc::localterrain::StoredExtent,1};vkCmdCopyBufferToImage(command,a.localStagingBuffer,a.localImages[channel],VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,1,&copy);}}VkImageMemoryBarrier after[4]{before[0],before[1],before[2],before[3]};for(auto&barrier:after){barrier.srcAccessMask=VK_ACCESS_TRANSFER_WRITE_BIT;barrier.dstAccessMask=VK_ACCESS_SHADER_READ_BIT;barrier.oldLayout=VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;barrier.newLayout=VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;}vkCmdPipelineBarrier(command,VK_PIPELINE_STAGE_TRANSFER_BIT,shaderStages,0,0,nullptr,0,nullptr,4,after);a.localImagesInitialized=true;
-}
+void DestroyLocalTerrain(App&a){a.localPack.reset();}
 std::vector<char> Read(const char *n) {
   HMODULE m{};
   GetModuleHandleExA(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS |
@@ -1394,28 +1281,25 @@ void Swap(App &a) {
   rp.attachmentCount=3;rp.pAttachments=attachments;rp.subpassCount=2;rp.pSubpasses=subpasses;rp.dependencyCount=3;rp.pDependencies=dependencies;
   a.Check(vkCreateRenderPass(a.device, &rp, nullptr, &a.renderPass),
           "render pass failed");
-  VkDescriptorSetLayoutBinding binds[40]{};
+  VkDescriptorSetLayoutBinding binds[46]{};
   const VkShaderStageFlags terrainStages=VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT|VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT|VK_SHADER_STAGE_FRAGMENT_BIT;
   for(uint32_t binding=0;binding<7;binding++){binds[binding].binding=binding;binds[binding].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;binds[binding].descriptorCount=1;binds[binding].stageFlags=binding==0?terrainStages|VK_SHADER_STAGE_COMPUTE_BIT:(binding==1?VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_COMPUTE_BIT:(binding==2?terrainStages|VK_SHADER_STAGE_COMPUTE_BIT:(binding==6?terrainStages|VK_SHADER_STAGE_COMPUTE_BIT:VK_SHADER_STAGE_COMPUTE_BIT)));}
   binds[7].binding=7;binds[7].descriptorType=VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT;binds[7].descriptorCount=1;binds[7].stageFlags=VK_SHADER_STAGE_FRAGMENT_BIT;
   for(uint32_t binding=8;binding<11;binding++){binds[binding].binding=binding;binds[binding].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;binds[binding].descriptorCount=1;binds[binding].stageFlags=binding==8?VK_SHADER_STAGE_COMPUTE_BIT:VK_SHADER_STAGE_COMPUTE_BIT|VK_SHADER_STAGE_VERTEX_BIT;}
   for(uint32_t index=0;index<3;index++){auto &binding=binds[11+index];binding.binding=24+index;binding.descriptorType=VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;binding.descriptorCount=1;binding.stageFlags=terrainStages;}
   binds[14].binding=27;binds[14].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;binds[14].descriptorCount=1;binds[14].stageFlags=terrainStages;
-  for(uint32_t index=0;index<3;index++){auto &binding=binds[15+index];binding.binding=28+index;binding.descriptorType=VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;binding.descriptorCount=1;binding.stageFlags=terrainStages|VK_SHADER_STAGE_COMPUTE_BIT;}
-  binds[18].binding=31;binds[18].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;binds[18].descriptorCount=1;binds[18].stageFlags=terrainStages|VK_SHADER_STAGE_COMPUTE_BIT;
-  binds[19].binding=32;binds[19].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;binds[19].descriptorCount=1;binds[19].stageFlags=terrainStages|VK_SHADER_STAGE_COMPUTE_BIT;
   binds[20].binding=33;binds[20].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;binds[20].descriptorCount=1;binds[20].stageFlags=VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT|VK_SHADER_STAGE_COMPUTE_BIT;
-  binds[21].binding=34;binds[21].descriptorType=VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;binds[21].descriptorCount=1;binds[21].stageFlags=terrainStages|VK_SHADER_STAGE_COMPUTE_BIT;
   binds[22].binding=35;binds[22].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;binds[22].descriptorCount=1;binds[22].stageFlags=VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT|VK_SHADER_STAGE_COMPUTE_BIT;
-  binds[23].binding=36;binds[23].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;binds[23].descriptorCount=1;binds[23].stageFlags=VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_COMPUTE_BIT;
-  binds[24].binding=37;binds[24].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;binds[24].descriptorCount=1;binds[24].stageFlags=VK_SHADER_STAGE_COMPUTE_BIT;
   for(uint32_t index=0;index<7;index++){auto &binding=binds[25+index];binding.binding=38+index;binding.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;binding.descriptorCount=1;binding.stageFlags=VK_SHADER_STAGE_COMPUTE_BIT|VK_SHADER_STAGE_VERTEX_BIT|((index==2||index==5)?VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT:0);}
   for(uint32_t index=0;index<7;index++){auto &binding=binds[32+index];binding.binding=45+index;binding.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;binding.descriptorCount=1;binding.stageFlags=VK_SHADER_STAGE_COMPUTE_BIT;}
   binds[39].binding=52;binds[39].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;binds[39].descriptorCount=1;binds[39].stageFlags=VK_SHADER_STAGE_COMPUTE_BIT;
   VkDescriptorSetLayoutCreateInfo dl{
       VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO};
-  dl.bindingCount = 40;
-  dl.pBindings = binds;
+  for(uint32_t i=40;i<45;++i){binds[i].binding=53+i-40;binds[i].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;binds[i].descriptorCount=1;binds[i].stageFlags=VK_SHADER_STAGE_COMPUTE_BIT;}
+  binds[45]={58,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT,nullptr};
+  std::vector<VkDescriptorSetLayoutBinding> activeBindings; for(const auto &binding:binds)if(binding.descriptorCount)activeBindings.push_back(binding);
+  dl.bindingCount = uint32_t(activeBindings.size());
+  dl.pBindings = activeBindings.data();
   a.Check(
       vkCreateDescriptorSetLayout(a.device, &dl, nullptr, &a.descriptorLayout),
       "descriptor layout failed");
@@ -1513,26 +1397,8 @@ void Swap(App &a) {
   VkPipelineColorBlendAttachmentState planetaryBlendAttachment=ca;planetaryBlendAttachment.blendEnable=VK_TRUE;planetaryBlendAttachment.srcColorBlendFactor=VK_BLEND_FACTOR_SRC_ALPHA;planetaryBlendAttachment.dstColorBlendFactor=VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;planetaryBlendAttachment.colorBlendOp=VK_BLEND_OP_ADD;planetaryBlendAttachment.srcAlphaBlendFactor=VK_BLEND_FACTOR_ONE;planetaryBlendAttachment.dstAlphaBlendFactor=VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;planetaryBlendAttachment.alphaBlendOp=VK_BLEND_OP_ADD;VkPipelineColorBlendStateCreateInfo planetaryBlend=cb;planetaryBlend.pAttachments=&planetaryBlendAttachment;
   VkGraphicsPipelineCreateInfo planetaryCreate=gp;planetaryCreate.pStages=planetaryStages;planetaryCreate.pVertexInputState=&planetaryInput;planetaryCreate.pRasterizationState=&planetaryRaster;planetaryCreate.pColorBlendState=&planetaryBlend;
   VkPipeline planetaryPipeline{};VkResult planetaryResult=vkCreateGraphicsPipelines(a.device,{},1,&planetaryCreate,nullptr,&planetaryPipeline);vkDestroyShaderModule(a.device,planetaryVs,nullptr);vkDestroyShaderModule(a.device,planetaryFs,nullptr);if(planetaryResult!=VK_SUCCESS&&planetaryPipeline)vkDestroyPipeline(a.device,planetaryPipeline,nullptr);a.Check(planetaryResult,"planetary pipeline failed");a.planetaryPipeline=planetaryPipeline;
-  {VkShaderModule productionVs=Shader(a,"shaders/planetary.vert.spv"),productionFs{};try{productionFs=Shader(a,"shaders/planetary_production.frag.spv");}catch(...){vkDestroyShaderModule(a.device,productionVs,nullptr);throw;}VkPipelineShaderStageCreateInfo productionStages[2]{{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_VERTEX_BIT,productionVs,"main"},{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_FRAGMENT_BIT,productionFs,"main"}};VkGraphicsPipelineCreateInfo productionCreate=planetaryCreate;productionCreate.pStages=productionStages;productionCreate.pColorBlendState=&cb;VkResult result=vkCreateGraphicsPipelines(a.device,{},1,&productionCreate,nullptr,&a.productionPlanetaryPipeline);if(result==VK_SUCCESS){VkPipelineDepthStencilStateCreateInfo fillDepth=depth;fillDepth.stencilTestEnable=VK_TRUE;fillDepth.front.compareOp=VK_COMPARE_OP_EQUAL;fillDepth.front.failOp=VK_STENCIL_OP_KEEP;fillDepth.front.passOp=VK_STENCIL_OP_KEEP;fillDepth.front.depthFailOp=VK_STENCIL_OP_KEEP;fillDepth.front.compareMask=0xffu;fillDepth.front.writeMask=0u;fillDepth.front.reference=0u;fillDepth.back=fillDepth.front;productionCreate.pDepthStencilState=&fillDepth;result=vkCreateGraphicsPipelines(a.device,{},1,&productionCreate,nullptr,&a.productionPlanetaryFillPipeline);}vkDestroyShaderModule(a.device,productionVs,nullptr);vkDestroyShaderModule(a.device,productionFs,nullptr);a.Check(result,"production cube-sphere pipeline failed");}
-  {
-    VkShaderModule anchoredVs=Shader(a,"shaders/anchored_terrain.vert.spv"),anchoredTcs{},anchoredTes{},anchoredFs{};
-    try{anchoredTcs=Shader(a,"shaders/anchored_terrain.tesc.spv");anchoredTes=Shader(a,"shaders/anchored_terrain.tese.spv");anchoredFs=Shader(a,"shaders/planetary_production.frag.spv");}
-    catch(...){vkDestroyShaderModule(a.device,anchoredVs,nullptr);if(anchoredTcs)vkDestroyShaderModule(a.device,anchoredTcs,nullptr);if(anchoredTes)vkDestroyShaderModule(a.device,anchoredTes,nullptr);throw;}
-    VkPipelineShaderStageCreateInfo stages[4]{
-      {VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_VERTEX_BIT,anchoredVs,"main"},
-      {VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT,anchoredTcs,"main"},
-      {VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT,anchoredTes,"main"},
-      {VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_FRAGMENT_BIT,anchoredFs,"main"}};
-    VkVertexInputBindingDescription binding{0,sizeof(PatchVertex),VK_VERTEX_INPUT_RATE_VERTEX};
-    VkVertexInputAttributeDescription attribute{0,0,VK_FORMAT_R32G32_SFLOAT,0};
-    VkPipelineVertexInputStateCreateInfo input{VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO};input.vertexBindingDescriptionCount=1;input.pVertexBindingDescriptions=&binding;input.vertexAttributeDescriptionCount=1;input.pVertexAttributeDescriptions=&attribute;
-    VkPipelineInputAssemblyStateCreateInfo patchAssembly=ia;patchAssembly.topology=VK_PRIMITIVE_TOPOLOGY_PATCH_LIST;
-    VkPipelineTessellationStateCreateInfo tessellation{VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO};tessellation.patchControlPoints=3;
-    VkPipelineDepthStencilStateCreateInfo anchoredDepth=depth;anchoredDepth.depthCompareOp=VK_COMPARE_OP_GREATER_OR_EQUAL;anchoredDepth.stencilTestEnable=VK_TRUE;anchoredDepth.front.compareOp=VK_COMPARE_OP_ALWAYS;anchoredDepth.front.failOp=VK_STENCIL_OP_KEEP;anchoredDepth.front.passOp=VK_STENCIL_OP_REPLACE;anchoredDepth.front.depthFailOp=VK_STENCIL_OP_KEEP;anchoredDepth.front.compareMask=0xffu;anchoredDepth.front.writeMask=0xffu;anchoredDepth.front.reference=1u;anchoredDepth.back=anchoredDepth.front;
-    VkGraphicsPipelineCreateInfo create=planetaryCreate;create.stageCount=4;create.pStages=stages;create.pVertexInputState=&input;create.pInputAssemblyState=&patchAssembly;create.pTessellationState=&tessellation;create.pDepthStencilState=&anchoredDepth;create.pColorBlendState=&cb;
-    VkResult result=vkCreateGraphicsPipelines(a.device,{},1,&create,nullptr,&a.anchoredTerrainPipeline);
-    vkDestroyShaderModule(a.device,anchoredVs,nullptr);vkDestroyShaderModule(a.device,anchoredTcs,nullptr);vkDestroyShaderModule(a.device,anchoredTes,nullptr);vkDestroyShaderModule(a.device,anchoredFs,nullptr);a.Check(result,"GPU-refined anchored surface pipeline failed");
-  }
+  {VkShaderModule productionVs=Shader(a,"shaders/planetary.vert.spv"),productionFs{};try{productionFs=Shader(a,"shaders/planetary_production.frag.spv");}catch(...){vkDestroyShaderModule(a.device,productionVs,nullptr);throw;}VkPipelineShaderStageCreateInfo productionStages[2]{{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_VERTEX_BIT,productionVs,"main"},{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_FRAGMENT_BIT,productionFs,"main"}};VkGraphicsPipelineCreateInfo productionCreate=planetaryCreate;productionCreate.pStages=productionStages;productionCreate.pColorBlendState=&cb;VkResult result=vkCreateGraphicsPipelines(a.device,{},1,&productionCreate,nullptr,&a.productionPlanetaryPipeline);vkDestroyShaderModule(a.device,productionVs,nullptr);vkDestroyShaderModule(a.device,productionFs,nullptr);a.Check(result,"production cube-sphere pipeline failed");}
+
   {
     VkShaderModule candidateVs=Shader(a,"shaders/production_spherical_billboard.vert.spv"),candidateTcs{},candidateTes{},candidateFs{};
     try{candidateTcs=Shader(a,"shaders/production_spherical_billboard.tesc.spv");candidateTes=Shader(a,"shaders/production_spherical_billboard.tese.spv");candidateFs=Shader(a,"shaders/planetary_production.frag.spv");}
@@ -1558,8 +1424,9 @@ void Swap(App &a) {
   VkShaderModule terrainCompute=Shader(a,"shaders/planetary_terrain_generate.comp.spv");VkPipelineShaderStageCreateInfo terrainComputeStage{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_COMPUTE_BIT,terrainCompute,"main"};VkComputePipelineCreateInfo terrainComputeCreate{VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO};terrainComputeCreate.stage=terrainComputeStage;terrainComputeCreate.layout=a.pipelineLayout;VkResult terrainComputeResult=vkCreateComputePipelines(a.device,{},1,&terrainComputeCreate,nullptr,&a.planetaryTerrainPipeline);vkDestroyShaderModule(a.device,terrainCompute,nullptr);a.Check(terrainComputeResult,"planetary terrain compute pipeline failed");
   VkShaderModule productionTerrain=Shader(a,"shaders/planetary_production_terrain.comp.spv");VkPipelineShaderStageCreateInfo productionTerrainStage{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_COMPUTE_BIT,productionTerrain,"main"};VkComputePipelineCreateInfo productionTerrainCreate{VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO};productionTerrainCreate.stage=productionTerrainStage;productionTerrainCreate.layout=a.pipelineLayout;VkResult productionTerrainResult=vkCreateComputePipelines(a.device,{},1,&productionTerrainCreate,nullptr,&a.productionPlanetaryTerrainPipeline);vkDestroyShaderModule(a.device,productionTerrain,nullptr);a.Check(productionTerrainResult,"production cube-sphere terrain pipeline failed");
   {VkShaderModule globalPrepare=Shader(a,"shaders/planetary_natural_terrain_global_prepare.comp.spv");VkPipelineShaderStageCreateInfo stage{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_COMPUTE_BIT,globalPrepare,"main"};VkComputePipelineCreateInfo create{VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO};create.stage=stage;create.layout=a.pipelineLayout;VkResult result=vkCreateComputePipelines(a.device,{},1,&create,nullptr,&a.naturalGlobalPreparePipeline);vkDestroyShaderModule(a.device,globalPrepare,nullptr);a.Check(result,"natural terrain global preparation pipeline failed");}
-  {VkShaderModule anchoredPrepare=Shader(a,"shaders/planetary_natural_terrain_anchored_prepare.comp.spv");VkPipelineShaderStageCreateInfo stage{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_COMPUTE_BIT,anchoredPrepare,"main"};VkComputePipelineCreateInfo create{VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO};create.stage=stage;create.layout=a.pipelineLayout;VkResult result=vkCreateComputePipelines(a.device,{},1,&create,nullptr,&a.naturalAnchoredPreparePipeline);vkDestroyShaderModule(a.device,anchoredPrepare,nullptr);a.Check(result,"natural terrain anchored preparation pipeline failed");}
-  auto createCandidateCompute=[&](const char *path,VkPipeline &pipeline,const char *failure){VkShaderModule module=Shader(a,path);VkPipelineShaderStageCreateInfo stage{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_COMPUTE_BIT,module,"main"};VkComputePipelineCreateInfo create{VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO};create.stage=stage;create.layout=a.pipelineLayout;VkResult result=vkCreateComputePipelines(a.device,{},1,&create,nullptr,&pipeline);vkDestroyShaderModule(a.device,module,nullptr);a.Check(result,failure);};
+  auto createCandidateCompute=[&](const char *path,VkPipeline &pipeline,const char *failure){if(std::getenv("NOVACORE_REGIONAL_PHYSICAL_PROBE"))a.Log(NC_LOG_ALWAYS,path);VkShaderModule module=Shader(a,path);VkPipelineShaderStageCreateInfo stage{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_COMPUTE_BIT,module,"main"};VkComputePipelineCreateInfo create{VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO};create.stage=stage;create.layout=a.pipelineLayout;VkResult result=vkCreateComputePipelines(a.device,{},1,&create,nullptr,&pipeline);vkDestroyShaderModule(a.device,module,nullptr);a.Check(result,failure);};
+  createCandidateCompute("shaders/regional_physical_demand.comp.spv",a.regionalDemandPipeline,"regional physical demand pipeline failed");
+  createCandidateCompute("shaders/regional_physical_incoming_demand.comp.spv",a.regionalIncomingDemandPipeline,"regional physical incoming demand pipeline failed");
   createCandidateCompute("shaders/production_spherical_billboard_prepare.comp.spv",a.productionBillboardPreparePipeline,"production billboard frame preparation pipeline failed");createCandidateCompute("shaders/production_spherical_billboard_reset.comp.spv",a.productionBillboardResetPipeline,"production billboard reset pipeline failed");createCandidateCompute("shaders/production_spherical_billboard_cull.comp.spv",a.productionBillboardCullPipeline,"production billboard cull pipeline failed");createCandidateCompute("shaders/production_spherical_billboard_compact.comp.spv",a.productionBillboardCompactPipeline,"production billboard compact pipeline failed");
   createCandidateCompute("shaders/production_spherical_billboard_incoming_prepare.comp.spv",a.productionBillboardIncomingPreparePipeline,"incoming production billboard frame preparation pipeline failed");createCandidateCompute("shaders/production_spherical_billboard_incoming_reset.comp.spv",a.productionBillboardIncomingResetPipeline,"incoming production billboard reset pipeline failed");createCandidateCompute("shaders/production_spherical_billboard_incoming_cull.comp.spv",a.productionBillboardIncomingCullPipeline,"incoming production billboard cull pipeline failed");createCandidateCompute("shaders/production_spherical_billboard_incoming_compact.comp.spv",a.productionBillboardIncomingCompactPipeline,"incoming production billboard compact pipeline failed");
   createCandidateCompute("shaders/production_nested_scale_mesh_cull.comp.spv",a.productionNestedScaleMeshCullPipeline,"nested scale-mesh cull pipeline failed");createCandidateCompute("shaders/production_nested_scale_mesh_incoming_cull.comp.spv",a.productionNestedScaleMeshIncomingCullPipeline,"incoming nested scale-mesh cull pipeline failed");
@@ -1654,212 +1521,15 @@ void CreateHostBuffer(App &a,VkDeviceSize size,VkBufferUsageFlags usage,VkBuffer
 void DestroyHostBuffer(App &a,VkBuffer &buffer,VkDeviceMemory &memory,void *&mapped) {
   if(mapped)vkUnmapMemory(a.device,memory);if(buffer)vkDestroyBuffer(a.device,buffer,nullptr);if(memory)vkFreeMemory(a.device,memory,nullptr);mapped=nullptr;buffer={};memory={};
 }
-void DestroyDynamicAnchoredSurface(App &a){
-  for(uint32_t index=0;index<AnchoredSurfaceFrameResourceCount;index++){
-    DestroyHostBuffer(a,a.anchoredSurfaceIndirectBuffers[index],a.anchoredSurfaceIndirectMemories[index],a.anchoredSurfaceIndirectMapped[index]);
-    DestroyHostBuffer(a,a.anchoredSurfaceCoverageBuffers[index],a.anchoredSurfaceCoverageMemories[index],a.anchoredSurfaceCoverageMapped[index]);
-  }
-  DestroyHostBuffer(a,a.anchoredSurfaceVertexBuffer,a.anchoredSurfaceVertexMemory,a.anchoredSurfaceVertexMapped);
-  DestroyHostBuffer(a,a.anchoredSurfaceIndexBuffer,a.anchoredSurfaceIndexMemory,a.anchoredSurfaceIndexMapped);
+void DestroyGlobalTerrainPreparation(App &a){
   DestroyHostBuffer(a,a.naturalGlobalPreparedBuffer,a.naturalGlobalPreparedMemory,a.naturalGlobalPreparedMapped);
-  DestroyHostBuffer(a,a.naturalAnchoredPreparedBuffer,a.naturalAnchoredPreparedMemory,a.naturalAnchoredPreparedMapped);
-  a.anchoredSurfaceSlotGenerations.clear();a.anchoredSurfaceActivePatches.clear();a.anchoredSurfaceActivePatchCount=0;a.anchoredSurfaceActiveGeneration=0;a.anchoredSurfacePublicationLogGeneration=0;
-  a.anchoredSurfaceResourceGenerations.fill(0u);a.anchoredSurfaceResourceIndex=0;
-  a.anchoredSurfaceResourcesReady=false;a.anchoredSurfaceActive=false;a.anchoredSurfacePublicationRequested=false;
-  a.naturalGlobalPreparationPending=false;a.naturalGlobalPrepared=false;a.naturalAnchoredPreparationPending=false;
-  a.naturalAnchoredPreparationGeneration=0;a.naturalAnchoredSubmittedGeneration=0;a.naturalAnchoredPreparedGeneration=0;
-  a.naturalAnchoredPreparationPatchCount=0;
+  a.naturalGlobalPreparationPending=false;a.naturalGlobalPrepared=false;
 }
-uint32_t AnchoredRemapIndex(uint32_t x,uint32_t y,uint32_t stitchMask){
-  if(x==0u&&(stitchMask&1u)&&((y&1u)!=0u))y--;
-  if(x==AnchoredSurfaceBaseGridResolution&&(stitchMask&2u)&&((y&1u)!=0u))y--;
-  if(y==0u&&(stitchMask&4u)&&((x&1u)!=0u))x--;
-  if(y==AnchoredSurfaceBaseGridResolution&&(stitchMask&8u)&&((x&1u)!=0u))x--;
-  return y*(AnchoredSurfaceBaseGridResolution+1u)+x;
-}
-void ValidateAnchoredStitchTemplates(const uint32_t *indices){
-  const int64_t expectedDoubleArea=int64_t(AnchoredSurfaceBaseGridResolution)*AnchoredSurfaceBaseGridResolution*2;
-  for(uint32_t mask=0;mask<16u;mask++){
-    int64_t doubleArea=0;const uint32_t first=mask*AnchoredSurfaceBaseIndicesPerPatch;
-    for(uint32_t triangle=0;triangle<AnchoredSurfaceBaseIndicesPerPatch;triangle+=3u){
-      const uint32_t i0=indices[first+triangle],i1=indices[first+triangle+1u],i2=indices[first+triangle+2u];
-      if(i0>=AnchoredSurfaceBaseVerticesPerPatch||i1>=AnchoredSurfaceBaseVerticesPerPatch||i2>=AnchoredSurfaceBaseVerticesPerPatch)
-        throw std::runtime_error("dynamic anchored stitch template index is out of range");
-      const int64_t x0=i0%(AnchoredSurfaceBaseGridResolution+1u),y0=i0/(AnchoredSurfaceBaseGridResolution+1u);
-      const int64_t x1=i1%(AnchoredSurfaceBaseGridResolution+1u),y1=i1/(AnchoredSurfaceBaseGridResolution+1u);
-      const int64_t x2=i2%(AnchoredSurfaceBaseGridResolution+1u),y2=i2/(AnchoredSurfaceBaseGridResolution+1u);
-      const int64_t area=(x1-x0)*(y2-y0)-(y1-y0)*(x2-x0);
-      if(area<0)throw std::runtime_error("dynamic anchored stitch template winding is inconsistent");
-      doubleArea+=area;
-      const uint32_t values[]{i0,i1,i2};
-      for(uint32_t value:values){const uint32_t x=value%(AnchoredSurfaceBaseGridResolution+1u),y=value/(AnchoredSurfaceBaseGridResolution+1u);
-        if(((mask&1u)&&x==0u&&(y&1u))||((mask&2u)&&x==AnchoredSurfaceBaseGridResolution&&(y&1u))||
-           ((mask&4u)&&y==0u&&(x&1u))||((mask&8u)&&y==AnchoredSurfaceBaseGridResolution&&(x&1u)))
-          throw std::runtime_error("dynamic anchored stitch template retained an unmatched fine-edge vertex");
-      }
-    }
-    if(doubleArea!=expectedDoubleArea)throw std::runtime_error("dynamic anchored stitch template does not cover exactly one patch");
-  }
-}
-void CreateDynamicAnchoredSurface(App &a){
-  const uint32_t requestedSlots=a.submission->anchoredSurfaceCacheSlotCount,slots=std::max(1u,requestedSlots);
-  if(requestedSlots&&(requestedSlots>AnchoredSurfaceMaximumCacheSlots||!a.submission->anchoredSurfacePatches))
-    throw std::runtime_error("invalid anchored surface cache allocation");
-  CreateHostBuffer(a,VkDeviceSize(AnchoredSurfaceBaseVerticesPerPatch)*sizeof(PatchVertex),VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
-    a.anchoredSurfaceVertexBuffer,a.anchoredSurfaceVertexMemory,a.anchoredSurfaceVertexMapped,"dynamic anchored vertex pool failed");
-  auto *vertices=static_cast<PatchVertex*>(a.anchoredSurfaceVertexMapped);
-  for(uint32_t y=0;y<=AnchoredSurfaceBaseGridResolution;y++)for(uint32_t x=0;x<=AnchoredSurfaceBaseGridResolution;x++)
-    vertices[y*(AnchoredSurfaceBaseGridResolution+1u)+x]={{float(x)/AnchoredSurfaceBaseGridResolution,float(y)/AnchoredSurfaceBaseGridResolution}};
-  CreateHostBuffer(a,VkDeviceSize(16u)*AnchoredSurfaceBaseIndicesPerPatch*sizeof(uint32_t),VK_BUFFER_USAGE_INDEX_BUFFER_BIT,
-    a.anchoredSurfaceIndexBuffer,a.anchoredSurfaceIndexMemory,a.anchoredSurfaceIndexMapped,"dynamic anchored stitch index pool failed");
-  auto *indices=static_cast<uint32_t*>(a.anchoredSurfaceIndexMapped);uint32_t write=0;
-  for(uint32_t mask=0;mask<16u;mask++)for(uint32_t y=0;y<AnchoredSurfaceBaseGridResolution;y++)for(uint32_t x=0;x<AnchoredSurfaceBaseGridResolution;x++){
-    const uint32_t q0=AnchoredRemapIndex(x,y,mask),q1=AnchoredRemapIndex(x+1u,y,mask),q2=AnchoredRemapIndex(x,y+1u,mask),q3=AnchoredRemapIndex(x+1u,y+1u,mask);
-    indices[write++]=q0;indices[write++]=q1;indices[write++]=q2;indices[write++]=q1;indices[write++]=q3;indices[write++]=q2;
-  }
-  ValidateAnchoredStitchTemplates(indices);
+void CreateGlobalTerrainPreparation(App &a){
   // std430 aligns the dvec4 array following the uvec4 header to 32 bytes.
   CreateHostBuffer(a,32u+VkDeviceSize(NaturalGlobalPatchCount)*NaturalGlobalVerticesPerPatch*sizeof(double)*4u,
     VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,a.naturalGlobalPreparedBuffer,a.naturalGlobalPreparedMemory,
     a.naturalGlobalPreparedMapped,"natural terrain global prepared buffer failed");
-  CreateHostBuffer(a,VkDeviceSize(slots)*NaturalAnchoredVerticesPerPatch*sizeof(double)*4u,
-    VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,a.naturalAnchoredPreparedBuffer,a.naturalAnchoredPreparedMemory,
-    a.naturalAnchoredPreparedMapped,"natural terrain anchored prepared buffer failed");
-  for(uint32_t index=0;index<AnchoredSurfaceFrameResourceCount;index++){
-    CreateHostBuffer(a,sizeof(uint32_t)*4u*(1u+AnchoredSurfacePatchVectorOffset+AnchoredSurfaceMaximumPatches*AnchoredSurfacePatchVectorCount),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,
-      a.anchoredSurfaceCoverageBuffers[index],a.anchoredSurfaceCoverageMemories[index],a.anchoredSurfaceCoverageMapped[index],"dynamic anchored coverage buffer failed");
-    CreateHostBuffer(a,VkDeviceSize(AnchoredSurfaceMaximumPatches)*sizeof(VkDrawIndexedIndirectCommand),VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT,
-      a.anchoredSurfaceIndirectBuffers[index],a.anchoredSurfaceIndirectMemories[index],a.anchoredSurfaceIndirectMapped[index],"dynamic anchored indirect buffer failed");
-  }
-  a.anchoredSurfaceSlotGenerations.assign(slots,0u);a.anchoredSurfaceResourcesReady=requestedSlots!=0u;
-}
-uint32_t AnchoredCoverageHash(uint32_t key,uint32_t x,uint32_t y){
-  uint32_t value=key*0x9e3779b9u;value^=x*0x85ebca6bu;value^=y*0xc2b2ae35u;value^=value>>16u;return value&(AnchoredSurfaceCoverageCapacity-1u);
-}
-void AuditDynamicAnchoredGroundTruth(App&a,uint32_t count,uint32_t resourceIndex){
-  if(!a.anchoredGroundTruthEnabled||!count)return;
-  const auto *draws=static_cast<const VkDrawIndexedIndirectCommand*>(a.anchoredSurfaceIndirectMapped[resourceIndex]);
-  const auto *coverage=static_cast<const uint32_t*>(a.anchoredSurfaceCoverageMapped[resourceIndex]);
-  const auto &frame=a.submission->anchoredSurfacePresentation;
-  uint64_t descriptorMismatches=0,drawMismatches=0,nonFiniteBounds=0;
-  descriptorMismatches+=std::memcmp(a.anchoredSurfaceActivePatches.data(),a.submission->anchoredSurfacePatches,size_t(count)*sizeof(NcAnchoredSurfacePatch))!=0;
-  descriptorMismatches+=std::memcmp(coverage+4u*(1u+AnchoredSurfaceCoverageCapacity),&frame,sizeof frame)!=0;
-  descriptorMismatches+=std::memcmp(coverage+4u*(1u+AnchoredSurfacePatchVectorOffset),a.submission->anchoredSurfacePatches,size_t(count)*sizeof(NcAnchoredSurfacePatch))!=0;
-  for(uint32_t draw=0;draw<count;draw++){
-    const auto &patch=a.submission->anchoredSurfacePatches[draw];const auto &command=draws[draw];
-    drawMismatches+=command.indexCount!=AnchoredSurfaceBaseIndicesPerPatch||command.instanceCount!=1u||
-      command.firstIndex!=patch.stitchMask*AnchoredSurfaceBaseIndicesPerPatch||command.vertexOffset!=0||command.firstInstance!=draw;
-    nonFiniteBounds+=!std::isfinite(patch.boundsX)||!std::isfinite(patch.boundsY)||!std::isfinite(patch.boundsZ)||!std::isfinite(patch.boundsRadius)||patch.boundsRadius<=0;
-  }
-  char message[512];std::snprintf(message,sizeof message,"GPU refinement ground truth: generation=%u; patches=%u; reusableBaseVertices=%u; baseTriangles=%u; descriptorMismatches=%llu; drawMismatches=%llu; nonFiniteBounds=%llu; CPUFinalRaster=false; refinementTargetPixels=16; maximumTessFactor=16",a.submission->anchoredSurfaceActiveGeneration,count,AnchoredSurfaceBaseVerticesPerPatch,AnchoredSurfaceBaseIndicesPerPatch/3u,(unsigned long long)descriptorMismatches,(unsigned long long)drawMismatches,(unsigned long long)nonFiniteBounds);a.Log(NC_LOG_ALWAYS,message);
-  if(descriptorMismatches||drawMismatches||nonFiniteBounds)throw std::runtime_error("dynamic anchored GPU descriptor/indirect invariant failed");
-}
-void BindDynamicAnchoredResource(App&a,uint32_t resourceIndex){
-  VkDescriptorBufferInfo info{a.anchoredSurfaceCoverageBuffers[resourceIndex],0,
-    sizeof(uint32_t)*4u*(1u+AnchoredSurfacePatchVectorOffset+AnchoredSurfaceMaximumPatches*AnchoredSurfacePatchVectorCount)};
-  VkWriteDescriptorSet write{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};write.dstSet=a.descriptor;write.dstBinding=32;
-  write.descriptorCount=1;write.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;write.pBufferInfo=&info;
-  vkUpdateDescriptorSets(a.device,1,&write,0,nullptr);
-}
-void BindNaturalAnchoredPreparationResource(App&a,uint32_t resourceIndex){
-  VkDescriptorBufferInfo info{a.anchoredSurfaceCoverageBuffers[resourceIndex],0,
-    sizeof(uint32_t)*4u*(1u+AnchoredSurfacePatchVectorOffset+AnchoredSurfaceMaximumPatches*AnchoredSurfacePatchVectorCount)};
-  VkWriteDescriptorSet write{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};write.dstSet=a.descriptor;write.dstBinding=37;
-  write.descriptorCount=1;write.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;write.pBufferInfo=&info;
-  vkUpdateDescriptorSets(a.device,1,&write,0,nullptr);
-}
-void UpdateDynamicAnchoredSurface(App &a){
-  auto *coverage=static_cast<uint32_t*>(a.anchoredSurfaceCoverageMapped[a.anchoredSurfaceResourceIndex]);
-  const auto count=a.submission->anchoredSurfacePatchCount;
-  if(coverage)std::memcpy(coverage+4u*(1u+AnchoredSurfaceCoverageCapacity),
-    &a.submission->anchoredSurfacePresentation,sizeof(NcAnchoredSurfacePresentation));
-  a.anchoredSurfacePublicationRequested=count!=0u&&(a.submission->anchoredSurfaceFlags&1u)!=0u;
-  if(!count){a.anchoredSurfaceActive=false;a.anchoredSurfaceActivePatchCount=0;a.anchoredSurfaceActivePatches.clear();if(coverage)std::memset(coverage,0,sizeof(uint32_t)*4u*(1u+AnchoredSurfaceCoverageCapacity));return;}
-  if(count>AnchoredSurfaceMaximumPatches){a.anchoredSurfaceCapacityRejects++;if((a.anchoredSurfaceCapacityRejects&(a.anchoredSurfaceCapacityRejects-1u))==0u){char message[256];std::snprintf(message,sizeof message,"GPU terrain capacity preserved previous owner: requested=%u; capacity=%u; rejects=%llu",count,AnchoredSurfaceMaximumPatches,(unsigned long long)a.anchoredSurfaceCapacityRejects);a.Log(NC_LOG_ALWAYS,message);}return;}
-  if(!a.anchoredSurfaceResourcesReady||!a.submission->anchoredSurfacePatches||
-     (a.submission->anchoredSurfaceFlags&1u)==0u)return;
-  const bool managedAcknowledged=a.submission->anchoredSurfaceGpuReadyGeneration==a.submission->anchoredSurfaceActiveGeneration;
-  const bool newPublication=a.anchoredSurfaceActiveGeneration!=a.submission->anchoredSurfaceActiveGeneration;
-  // Camera orientation changes update the frame data used by GPU visibility,
-  // not the immutable retained descriptor generation.  Rebuilding the complete
-  // hash table and indirect payload for an unchanged generation made a pure
-  // look direction upload hundreds of megabytes of identical descriptors.
-  if(!newPublication&&a.anchoredSurfaceActive&&count==a.anchoredSurfaceActivePatchCount)return;
-  bool complete=true,authoritative=true;uint32_t maximumLevel=0;
-  for(uint32_t index=0;index<count;index++){
-    const auto &patch=a.submission->anchoredSurfacePatches[index];const uint64_t body=uint64_t(patch.bodyIdLow)|(uint64_t(patch.bodyIdHigh)<<32u);
-    const uint32_t cells=patch.level<31u?1u<<patch.level:0u;
-    if(body!=6u||patch.terrainVersion!=5u||patch.physicalSurfaceGeneration!=a.submission->physicalSurfaceGeneration||patch.face>=6u||patch.level>24u||!cells||patch.x>=cells||patch.y>=cells||
-       patch.cacheSlot>=a.anchoredSurfaceSlotGenerations.size()||patch.stitchMask>15u){complete=false;continue;}
-    const bool cpuComplete=(patch.flags&(AnchoredSurfaceReady|AnchoredSurfaceGeometryComplete|AnchoredSurfacePhysicalComplete|AnchoredSurfaceMaterialComplete))==(AnchoredSurfaceReady|AnchoredSurfaceGeometryComplete|AnchoredSurfacePhysicalComplete|AnchoredSurfaceMaterialComplete);
-    if(!cpuComplete||!AnchoredPatchLocalPayloadsReady(a,patch)){complete=false;continue;}
-    authoritative&=(patch.flags&AnchoredSurfaceRequired)==AnchoredSurfaceRequired;
-    a.anchoredSurfaceSlotGenerations[patch.cacheSlot]=patch.cacheGeneration;
-    maximumLevel=std::max(maximumLevel,patch.level);
-  }
-  if(!complete)return;
-  if(a.submission->physicalSurfaceGeneration==4u&&newPublication&&
-     a.naturalAnchoredPreparedGeneration!=a.submission->anchoredSurfaceActiveGeneration){
-    // Preparation was submitted in the previous frame. The frame fence was
-    // completed before this update, so this is the first point at which the
-    // GPU-complete generation may be acknowledged to managed publication.
-    if(a.naturalAnchoredSubmittedGeneration==a.submission->anchoredSurfaceActiveGeneration){
-      a.naturalAnchoredPreparedGeneration=a.naturalAnchoredSubmittedGeneration;
-      a.naturalAnchoredSubmittedGeneration=0u;
-      a.submission->anchoredSurfaceGpuReadyGeneration=a.naturalAnchoredPreparedGeneration;
-      return;
-    }
-    if(!a.naturalAnchoredPreparationPending||a.naturalAnchoredPreparationGeneration!=a.submission->anchoredSurfaceActiveGeneration){
-      const uint32_t preparationResource=(a.anchoredSurfaceResourceIndex+1u)%AnchoredSurfaceFrameResourceCount;
-      auto *preparation=static_cast<uint32_t*>(a.anchoredSurfaceCoverageMapped[preparationResource]);
-      std::memset(preparation,0,sizeof(uint32_t)*4u*(1u+AnchoredSurfaceCoverageCapacity));
-      preparation[0]=count;preparation[2]=a.submission->anchoredSurfaceActiveGeneration;
-      std::memcpy(preparation+4u*(1u+AnchoredSurfacePatchVectorOffset),a.submission->anchoredSurfacePatches,size_t(count)*sizeof(NcAnchoredSurfacePatch));
-      BindNaturalAnchoredPreparationResource(a,preparationResource);
-      a.naturalAnchoredPreparationGeneration=a.submission->anchoredSurfaceActiveGeneration;
-      a.naturalAnchoredPreparationPatchCount=count;
-      a.naturalAnchoredPreparationPending=true;
-    }
-    return;
-  }
-  a.submission->anchoredSurfaceGpuReadyGeneration=a.submission->anchoredSurfaceActiveGeneration;
-  if(!authoritative||!managedAcknowledged)return;
-  // The frame fence was completed before this update. Build the replacement
-  // coverage table and indirect stream in a retired slot, then bind it as one
-  // immutable generation. The currently bound complete slot remains untouched
-  // until this point and a slot is never reused while GPU work can reference it.
-  const uint32_t resourceIndex=(a.anchoredSurfaceResourceIndex+1u)%AnchoredSurfaceFrameResourceCount;
-  coverage=static_cast<uint32_t*>(a.anchoredSurfaceCoverageMapped[resourceIndex]);
-  std::memcpy(coverage+4u*(1u+AnchoredSurfaceCoverageCapacity),
-    &a.submission->anchoredSurfacePresentation,sizeof(NcAnchoredSurfacePresentation));
-  if(coverage)std::memset(coverage,0,sizeof(uint32_t)*4u*(1u+AnchoredSurfaceCoverageCapacity));
-  for(uint32_t index=0;index<count;index++){
-    const auto &patch=a.submission->anchoredSurfacePatches[index];const uint32_t key=0x80000000u|patch.face|(patch.level<<3u);uint32_t slot=AnchoredCoverageHash(key,patch.x,patch.y);
-    for(uint32_t probe=0;probe<AnchoredSurfaceCoverageCapacity;probe++,slot=(slot+1u)&(AnchoredSurfaceCoverageCapacity-1u)){
-      uint32_t *entry=coverage+4u*(1u+slot);if(entry[0]==0u){entry[0]=key;entry[1]=patch.x;entry[2]=patch.y;entry[3]=a.submission->anchoredSurfaceActiveGeneration;break;}
-      if(probe+1u==AnchoredSurfaceCoverageCapacity){complete=false;break;}
-    }
-    if(!complete)break;
-  }
-  if(!complete){std::memset(coverage,0,sizeof(uint32_t)*4u*(1u+AnchoredSurfaceCoverageCapacity));return;}
-  coverage[0]=count;coverage[1]=maximumLevel;coverage[2]=a.submission->anchoredSurfaceActiveGeneration;coverage[3]=AnchoredSurfaceCoverageCapacity;
-  std::memcpy(coverage+4u*(1u+AnchoredSurfacePatchVectorOffset),a.submission->anchoredSurfacePatches,size_t(count)*sizeof(NcAnchoredSurfacePatch));
-  const size_t descriptorBytes=size_t(count)*sizeof(NcAnchoredSurfacePatch);
-  a.anchoredSurfaceUploadBytes+=descriptorBytes;a.anchoredSurfaceUploads++;
-  a.anchoredSurfaceActivePatches.assign(a.submission->anchoredSurfacePatches,a.submission->anchoredSurfacePatches+count);
-  auto *draws=static_cast<VkDrawIndexedIndirectCommand*>(a.anchoredSurfaceIndirectMapped[resourceIndex]);
-  for(uint32_t index=0;index<count;index++){
-    const auto &patch=a.anchoredSurfaceActivePatches[index];
-    const uint32_t firstIndex=patch.stitchMask*AnchoredSurfaceBaseIndicesPerPatch;
-    if(firstIndex+AnchoredSurfaceBaseIndicesPerPatch>16u*AnchoredSurfaceBaseIndicesPerPatch){complete=false;break;}
-    draws[index]={AnchoredSurfaceBaseIndicesPerPatch,1u,firstIndex,0,index};
-  }
-  if(!complete)return;
-  if(newPublication)AuditDynamicAnchoredGroundTruth(a,count,resourceIndex);
-  a.anchoredSurfaceResourceGenerations[resourceIndex]=a.submission->anchoredSurfaceActiveGeneration;
-  a.anchoredSurfaceResourceIndex=resourceIndex;BindDynamicAnchoredResource(a,resourceIndex);
-  a.anchoredSurfaceActivePatchCount=count;a.anchoredSurfaceActiveGeneration=a.submission->anchoredSurfaceActiveGeneration;
-  a.anchoredSurfaceActive=true;
 }
 void CreateTerrainResidency(App &a) {
   if(a.terrainKeyBuffer)return;
@@ -1918,6 +1588,7 @@ void DestroyProductionBillboardIncoming(App &a){
 void DestroyProductionBillboard(App &a){
   DestroyProductionBillboardIncoming(a);DestroyHostBuffer(a,a.productionBillboardPhysicalBuffer,a.productionBillboardPhysicalMemory,a.productionBillboardPhysicalMapped);DestroyHostBuffer(a,a.productionBillboardVisibilityBuffer,a.productionBillboardVisibilityMemory,a.productionBillboardVisibilityMapped);DestroyHostBuffer(a,a.productionBillboardCompactedBuffer,a.productionBillboardCompactedMemory,a.productionBillboardCompactedMapped);DestroyHostBuffer(a,a.productionBillboardIndirectBuffer,a.productionBillboardIndirectMemory,a.productionBillboardIndirectMapped);DestroyHostBuffer(a,a.productionBillboardCounterBuffer,a.productionBillboardCounterMemory,a.productionBillboardCounterMapped);DestroyProductionBillboardSpare(a);DestroyProductionBillboardTopologyResources(a);a.productionBillboardLatticeBuffer={};a.productionBillboardLatticeMemory={};a.productionBillboardLatticeMapped=nullptr;a.productionBillboardIndexBuffer={};a.productionBillboardIndexMemory={};a.productionBillboardIndexMapped=nullptr;a.productionBillboardEnabled=false;a.productionBillboardWorkRecorded=false;a.productionBillboardFencePending=false;a.productionBillboardAuthoritative=false;a.productionBillboardVertexCount=0;a.productionBillboardTriangleCount=0;a.productionBillboardVertexCapacity=0;a.productionBillboardTriangleCapacity=0;a.productionBillboardTopologyFamily=NC_PLANETARY_PRODUCTION_TOPOLOGY_RADIAL_NCTOP2;a.productionBillboardDisplacementEnvelopeMetres=0;a.productionBillboardOcclusionSupportRadiusMetres=0;a.productionBillboardTopologyHash=0;a.productionBillboardGeneration=0;a.productionBillboardPreparedFrameIdentity=0;a.productionBillboardCullFrameIdentity=0;a.productionBillboardRasterFrameIdentity=0;a.productionBillboardLoggedFrameIdentity=0;
 }
+#include "RegionalPhysicalResidency.inl"
 void CreateProductionBillboard(App &a){
   const auto *candidate=a.submission->productionBillboard;if(!candidate||!candidate->enabled||candidate->publicationGeneration==a.productionBillboardGeneration||candidate->publicationGeneration==a.productionBillboardIncomingGeneration)return;if(a.productionBillboardIncomingEnabled)return;
   const bool knownFamily=candidate->topologyFamily==NC_PLANETARY_PRODUCTION_TOPOLOGY_RADIAL_NCTOP2||candidate->topologyFamily==NC_PLANETARY_PRODUCTION_TOPOLOGY_NESTED_SCALE_MESH_NCSM1;
@@ -1951,11 +1622,11 @@ void DestroySubmission(App &a,bool destroyProductionBillboard=true) {
   DestroyHostBuffer(a,a.gpuNodeBuffer,a.gpuNodeMemory,a.gpuNodeMapped);
   DestroyHostBuffer(a,a.gpuControlBuffer,a.gpuControlMemory,a.gpuControlMapped);
   DestroyHostBuffer(a,a.planetaryPresentationBuffer,a.planetaryPresentationMemory,a.planetaryPresentationMapped);
+  DestroyHostBuffer(a,a.facilityVisibilityBuffer,a.facilityVisibilityMemory,a.facilityVisibilityMapped);
   DestroyHostBuffer(a,a.productionBillboardFrameBuffer,a.productionBillboardFrameMemory,a.productionBillboardFrameMapped);
   if(destroyProductionBillboard)DestroyProductionBillboard(a);
-  DestroyDynamicAnchoredSurface(a);
+  DestroyGlobalTerrainPreparation(a);
   DestroyHostBuffer(a,a.physicalOracleBuffer,a.physicalOracleMemory,a.physicalOracleMapped);
-  DestroyHostBuffer(a,a.localLookupBuffer,a.localLookupMemory,a.localLookupMapped);
   a.gpuFrameSubmitted=false;a.hasGpuTelemetry=false;a.timestampFrameSubmitted=false;
   if (a.orbitMapped) vkUnmapMemory(a.device, a.orbitMemory);
   if (a.orbitBuffer) vkDestroyBuffer(a.device, a.orbitBuffer, nullptr);
@@ -2014,15 +1685,14 @@ void CreateSubmission(App &a) {
   CreateHostBuffer(a,sizeof(GpuPlanetaryControl),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT|VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT,a.gpuControlBuffer,a.gpuControlMemory,a.gpuControlMapped,"planetary GPU control buffer failed");
   CreateHostBuffer(a,sizeof(NcPlanetaryPresentation)*10,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,a.planetaryPresentationBuffer,a.planetaryPresentationMemory,a.planetaryPresentationMapped,"planetary presentation buffer failed");
   CreateHostBuffer(a,sizeof(NcProductionBillboardFrame),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,a.productionBillboardFrameBuffer,a.productionBillboardFrameMemory,a.productionBillboardFrameMapped,"production billboard pupil-frame buffer failed");
-  CreateDynamicAnchoredSurface(a);
+  CreateHostBuffer(a,sizeof(nc::facility::GpuVisibility),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,a.facilityVisibilityBuffer,a.facilityVisibilityMemory,a.facilityVisibilityMapped,"facility visibility buffer failed");
+  CreateGlobalTerrainPreparation(a);
   if(a.elevationOraclePath.empty())throw std::runtime_error("production physical elevation oracle path is required");
   CreateHostBuffer(a,PhysicalOracleBytes,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,a.physicalOracleBuffer,a.physicalOracleMemory,a.physicalOracleMapped,"physical elevation oracle buffer failed");
   {std::ifstream input(a.elevationOraclePath,std::ios::binary|std::ios::ate);if(!input||VkDeviceSize(input.tellg())!=PhysicalOracleBytes)throw std::runtime_error("physical elevation oracle dimensions mismatch");input.seekg(0);if(!input.read(static_cast<char*>(a.physicalOracleMapped),static_cast<std::streamsize>(PhysicalOracleBytes)))throw std::runtime_error("physical elevation oracle read failed");}
-  CreateHostBuffer(a,sizeof(uint32_t)*(16+LocalLookupEntryWords*LocalLookupCapacity),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,a.localLookupBuffer,a.localLookupMemory,a.localLookupMapped,"local terrain lookup buffer failed");
-  RebuildLocalLookup(a);
   CreateTerrainResidency(a);
   CreateProductionBillboard(a);
-  VkDescriptorPoolSize ps[3]{{VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,33},{VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT,1},{VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,7}};
+  VkDescriptorPoolSize ps[3]{{VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,39},{VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT,1},{VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,7}};
   VkDescriptorPoolCreateInfo pi{VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO};
   pi.maxSets = 1;
   pi.poolSizeCount = 3;
@@ -2039,18 +1709,15 @@ void CreateSubmission(App &a) {
   VkDescriptorBufferInfo infos[10]{{a.submissionBuffer,0,a.submissionSize},{a.patchBuffer,0,a.patchSize},{a.gpuInputBuffer,0,sizeof(NcPlanetaryGpuConstants)},{a.gpuWorkBuffer,0,sizeof(uint32_t)*4*GpuPatchCapacity*2},{a.gpuNodeBuffer,0,sizeof(uint32_t)*4*GpuNodeEntryCapacity},{a.gpuControlBuffer,0,sizeof(GpuPlanetaryControl)},{a.planetaryPresentationBuffer,0,sizeof(NcPlanetaryPresentation)*10},{a.terrainKeyBuffer,0,sizeof(uint32_t)*4*3*TerrainCacheCapacity},{a.terrainSampleBuffer,0,sizeof(float)*2*TerrainGridVertexCount*TerrainCacheCapacity},{a.terrainPatchSlotBuffer,0,sizeof(uint32_t)*2*GpuPatchCapacity}};
   const uint32_t storageBindings[10]{0,1,2,3,4,5,6,8,9,10};VkWriteDescriptorSet writes[10]{};for(uint32_t index=0;index<10;index++){writes[index].sType=VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;writes[index].dstSet=a.descriptor;writes[index].dstBinding=storageBindings[index];writes[index].descriptorCount=1;writes[index].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;writes[index].pBufferInfo=&infos[index];}
   vkUpdateDescriptorSets(a.device,10,writes,0,nullptr);
+  CreateRegionalPhysical(a);
+  VkDescriptorBufferInfo facilityInfo{a.facilityVisibilityBuffer,0,sizeof(nc::facility::GpuVisibility)};VkWriteDescriptorSet facilityWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};facilityWrite.dstSet=a.descriptor;facilityWrite.dstBinding=58;facilityWrite.descriptorCount=1;facilityWrite.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;facilityWrite.pBufferInfo=&facilityInfo;vkUpdateDescriptorSets(a.device,1,&facilityWrite,0,nullptr);
   VkDescriptorBufferInfo pupilFrameInfo{a.productionBillboardFrameBuffer,0,sizeof(NcProductionBillboardFrame)};VkWriteDescriptorSet pupilFrameWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};pupilFrameWrite.dstSet=a.descriptor;pupilFrameWrite.dstBinding=52;pupilFrameWrite.descriptorCount=1;pupilFrameWrite.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;pupilFrameWrite.pBufferInfo=&pupilFrameInfo;vkUpdateDescriptorSets(a.device,1,&pupilFrameWrite,0,nullptr);
   if(a.productionBillboardAuthoritative)UpdateProductionBillboardDescriptors(a,false);if(a.productionBillboardIncomingEnabled)UpdateProductionBillboardDescriptors(a,true);
   VkDescriptorBufferInfo productionLookupInfo{a.productionLayerLookupBuffer,0,sizeof(uint32_t)*ProductionLookupCapacity};VkWriteDescriptorSet productionLookupWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};productionLookupWrite.dstSet=a.descriptor;productionLookupWrite.dstBinding=27;productionLookupWrite.descriptorCount=1;productionLookupWrite.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;productionLookupWrite.pBufferInfo=&productionLookupInfo;vkUpdateDescriptorSets(a.device,1,&productionLookupWrite,0,nullptr);
-  VkDescriptorBufferInfo localLookupInfo{a.localLookupBuffer,0,sizeof(uint32_t)*(16+LocalLookupEntryWords*LocalLookupCapacity)};VkWriteDescriptorSet localLookupWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};localLookupWrite.dstSet=a.descriptor;localLookupWrite.dstBinding=31;localLookupWrite.descriptorCount=1;localLookupWrite.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;localLookupWrite.pBufferInfo=&localLookupInfo;vkUpdateDescriptorSets(a.device,1,&localLookupWrite,0,nullptr);
-  VkDescriptorBufferInfo anchoredCoverageInfo{a.anchoredSurfaceCoverageBuffers[a.anchoredSurfaceResourceIndex],0,sizeof(uint32_t)*4u*(1u+AnchoredSurfacePatchVectorOffset+AnchoredSurfaceMaximumPatches*AnchoredSurfacePatchVectorCount)};VkWriteDescriptorSet anchoredCoverageWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};anchoredCoverageWrite.dstSet=a.descriptor;anchoredCoverageWrite.dstBinding=32;anchoredCoverageWrite.descriptorCount=1;anchoredCoverageWrite.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;anchoredCoverageWrite.pBufferInfo=&anchoredCoverageInfo;vkUpdateDescriptorSets(a.device,1,&anchoredCoverageWrite,0,nullptr);
   VkDescriptorBufferInfo physicalOracleInfo{a.physicalOracleBuffer,0,PhysicalOracleBytes};VkWriteDescriptorSet physicalOracleWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};physicalOracleWrite.dstSet=a.descriptor;physicalOracleWrite.dstBinding=33;physicalOracleWrite.descriptorCount=1;physicalOracleWrite.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;physicalOracleWrite.pBufferInfo=&physicalOracleInfo;vkUpdateDescriptorSets(a.device,1,&physicalOracleWrite,0,nullptr);
   VkDescriptorBufferInfo naturalGlobalInfo{a.naturalGlobalPreparedBuffer,0,32u+VkDeviceSize(NaturalGlobalPatchCount)*NaturalGlobalVerticesPerPatch*sizeof(double)*4u};VkWriteDescriptorSet naturalGlobalWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};naturalGlobalWrite.dstSet=a.descriptor;naturalGlobalWrite.dstBinding=35;naturalGlobalWrite.descriptorCount=1;naturalGlobalWrite.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;naturalGlobalWrite.pBufferInfo=&naturalGlobalInfo;vkUpdateDescriptorSets(a.device,1,&naturalGlobalWrite,0,nullptr);
-  VkDescriptorBufferInfo naturalAnchoredInfo{a.naturalAnchoredPreparedBuffer,0,VkDeviceSize(std::max(1u,a.submission->anchoredSurfaceCacheSlotCount))*NaturalAnchoredVerticesPerPatch*sizeof(double)*4u};VkWriteDescriptorSet naturalAnchoredWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};naturalAnchoredWrite.dstSet=a.descriptor;naturalAnchoredWrite.dstBinding=36;naturalAnchoredWrite.descriptorCount=1;naturalAnchoredWrite.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;naturalAnchoredWrite.pBufferInfo=&naturalAnchoredInfo;vkUpdateDescriptorSets(a.device,1,&naturalAnchoredWrite,0,nullptr);
-  VkDescriptorBufferInfo naturalAnchoredInputInfo{a.anchoredSurfaceCoverageBuffers[a.anchoredSurfaceResourceIndex],0,sizeof(uint32_t)*4u*(1u+AnchoredSurfacePatchVectorOffset+AnchoredSurfaceMaximumPatches*AnchoredSurfacePatchVectorCount)};VkWriteDescriptorSet naturalAnchoredInputWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};naturalAnchoredInputWrite.dstSet=a.descriptor;naturalAnchoredInputWrite.dstBinding=37;naturalAnchoredInputWrite.descriptorCount=1;naturalAnchoredInputWrite.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;naturalAnchoredInputWrite.pBufferInfo=&naturalAnchoredInputInfo;vkUpdateDescriptorSets(a.device,1,&naturalAnchoredInputWrite,0,nullptr);
   VkDescriptorImageInfo sceneInput{};sceneInput.imageView=a.sceneColorView;sceneInput.imageLayout=VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;VkWriteDescriptorSet sceneWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};sceneWrite.dstSet=a.descriptor;sceneWrite.dstBinding=7;sceneWrite.descriptorCount=1;sceneWrite.descriptorType=VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT;sceneWrite.pImageInfo=&sceneInput;vkUpdateDescriptorSets(a.device,1,&sceneWrite,0,nullptr);
   if(a.productionPack){VkDescriptorImageInfo productionInfos[3]{};VkWriteDescriptorSet productionWrites[3]{};for(uint32_t index=0;index<3;index++){productionInfos[index]={a.productionSampler,a.productionImageViews[index],VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL};productionWrites[index].sType=VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;productionWrites[index].dstSet=a.descriptor;productionWrites[index].dstBinding=24+index;productionWrites[index].descriptorCount=1;productionWrites[index].descriptorType=VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;productionWrites[index].pImageInfo=&productionInfos[index];}vkUpdateDescriptorSets(a.device,3,productionWrites,0,nullptr);}
-  {VkDescriptorImageInfo localInfos[4]{};VkWriteDescriptorSet localWrites[4]{};for(uint32_t index=0;index<4;index++){localInfos[index]={a.localSampler,a.localImageViews[index],VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL};localWrites[index].sType=VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;localWrites[index].dstSet=a.descriptor;localWrites[index].dstBinding=index<3?28+index:34;localWrites[index].descriptorCount=1;localWrites[index].descriptorType=VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;localWrites[index].pImageInfo=&localInfos[index];}vkUpdateDescriptorSets(a.device,4,localWrites,0,nullptr);}
 }
 void EnsurePatchCapacity(App &a,uint32_t count) {
   const auto required=sizeof(NcPlanetaryPatch)*std::max<uint32_t>(1,count);
@@ -2068,7 +1735,25 @@ bool ProductionRootPayloadsReady(const App &a) {
   for(uint32_t face=0;face<6;face++)if(lookup[nc::production::Pack::Ordinal(face,0,0,0)]==0u)return false;
   return true;
 }
+void UploadFacilityVisibility(App& a) {
+  nc::facility::GpuVisibility value{};
+  const auto* d=a.submission->facilityCaster;const auto& p=a.submission->planetaryPresentation;
+  const uint64_t body=uint64_t(p.bodyIdLow)|(uint64_t(p.bodyIdHigh)<<32);
+  if(d&&d->bodyId==body&&a.productionBillboardAuthoritative&&a.productionBillboardTopologyFamily==NC_PLANETARY_PRODUCTION_TOPOLOGY_NESTED_SCALE_MESH_NCSM1&&a.submission->planetarySurfaceMode==NC_PLANETARY_SURFACE_PRODUCTION_CUBE){
+    if(!a.facilityPreparedValid||std::memcmp(d,&a.facilityDefinition,sizeof(*d))!=0){
+      a.facilityPrepared=nc::facility::Prepare(*d);a.facilityDefinition=*d;a.facilityPreparedValid=true;++a.facilityGeometryBuilds;
+      a.Log(NC_LOG_ALWAYS,"Authored facility light occlusion: casters=5; geometryVersion=1; maximumRayMetres=2048; physicalAuthority=unchanged");
+    }
+    value=a.facilityPrepared;
+    const auto& g=a.submission->planetaryGpu;
+    const double delta[]{(double(g.cameraBodyHighX)+g.cameraBodyLowX)-d->origin[0],(double(g.cameraBodyHighY)+g.cameraBodyLowY)-d->origin[1],(double(g.cameraBodyHighZ)+g.cameraBodyLowZ)-d->origin[2]};
+    value.cameraLocal[0]=nc::facility::Dot(delta,d->east);value.cameraLocal[1]=nc::facility::Dot(delta,d->north);value.cameraLocal[2]=nc::facility::Dot(delta,d->up);
+    nc::facility::LocalizeReceiverBounds(value);
+  }
+  std::memcpy(a.facilityVisibilityMapped,&value,sizeof(value));
+}
 void Upload(App &a) {
+  UploadFacilityVisibility(a);
   std::memcpy(a.mapped, &a.submission->camera, sizeof(NcCameraData));
   std::memcpy((char *)a.mapped + sizeof(NcCameraData),
               a.submission->objects,
@@ -2083,7 +1768,7 @@ void Upload(App &a) {
   if(contextChanged){
     if(productionSurface&&!ProductionHierarchyPayloadsReady(a))throw std::runtime_error("production context selected before the complete immutable L0-L2 hierarchy was resident");
     a.surfaceContextValid=true;a.surfaceContextBodyId=contextBody;a.surfaceContextTerrainVersion=gpuInput.terrainVersion;a.surfaceContextPhysicalGeneration=a.submission->physicalSurfaceGeneration;a.surfaceContextMode=contextMode;a.surfaceContextRegime=contextRegime;a.surfaceContextRadiusHighBits=radiusHighBits;a.surfaceContextRadiusLowBits=radiusLowBits;a.surfaceTransitionEpoch++;a.surfaceContextInvalidations++;a.earthTransitionTraceRemaining=contextBody==nc::production::EarthBodyId?180u:0u;a.earthSubmissionTraceRemaining=a.earthTransitionTraceRemaining;a.productionGeometryTraceLogged=false;std::memset(a.gpuControlMapped,0,sizeof(GpuPlanetaryControl));if(productionSurface)SeedProductionTerrainCacheHighWater(a);a.hasGpuTelemetry=false;
-    auto *naturalControl=static_cast<uint32_t*>(a.naturalGlobalPreparedMapped);if(a.submission->physicalSurfaceGeneration==4u){naturalControl[0]=0u;a.naturalGlobalPreparationPending=true;a.naturalGlobalPrepared=false;}else{naturalControl[0]=3u;a.naturalGlobalPreparationPending=false;a.naturalGlobalPrepared=false;a.naturalAnchoredPreparationPending=false;a.naturalAnchoredPreparationGeneration=0u;a.naturalAnchoredSubmittedGeneration=0u;a.naturalAnchoredPreparedGeneration=0u;}
+    auto *naturalControl=static_cast<uint32_t*>(a.naturalGlobalPreparedMapped);if(a.submission->physicalSurfaceGeneration==4u){naturalControl[0]=0u;a.naturalGlobalPreparationPending=true;a.naturalGlobalPrepared=false;}else{naturalControl[0]=3u;a.naturalGlobalPreparationPending=false;a.naturalGlobalPrepared=false;}
     char transition[352];std::snprintf(transition,sizeof transition,"Planetary context transition: epoch=%llu; body=%llu; surfaceMode=%u; terrainVersion=%u; physicalGeneration=%u; regime=%u; productionEligible=%s; owner=%s",(unsigned long long)a.surfaceTransitionEpoch,(unsigned long long)contextBody,contextMode,gpuInput.terrainVersion,a.submission->physicalSurfaceGeneration,contextRegime,productionSurface?"true":"false",productionSurface?"terrain-v5":"bounded-sphere");a.Log(NC_LOG_ALWAYS,transition);
     if(contextBody==6u){
       uint32_t rootMask=0u;auto *lookup=static_cast<uint32_t*>(a.productionLayerLookupMapped);for(uint32_t face=0;face<6&&lookup;face++)if(lookup[nc::production::Pack::Ordinal(face,0,0,0)]!=0u)rootMask|=1u<<face;
@@ -2094,15 +1779,7 @@ void Upload(App &a) {
   if(productionSurface&&!a.productionSurfaceLogged){a.Log(NC_LOG_ALWAYS,"Production surface: terrain-v5 body-fixed relaxed cube-sphere; real NCCUBE payloads; dynamic hierarchy enabled");a.productionSurfaceLogged=true;}std::memcpy(a.gpuInputMapped,&gpuInput,sizeof(gpuInput));
   if(a.submission->productionBillboardFrame)std::memcpy(a.productionBillboardFrameMapped,a.submission->productionBillboardFrame,sizeof(NcProductionBillboardFrame));else std::memset(a.productionBillboardFrameMapped,0,sizeof(NcProductionBillboardFrame));
   if(a.submission->distantBodyCount)std::memcpy(a.planetaryPresentationMapped,a.submission->distantBodies,sizeof(NcPlanetaryPresentation)*a.submission->distantBodyCount);else std::memcpy(a.planetaryPresentationMapped,&a.submission->planetaryPresentation,sizeof(NcPlanetaryPresentation));
-  if(!a.productionBillboardAuthoritative)UpdateDynamicAnchoredSurface(a);
-  if(a.anchoredSurfaceActive){
-    if(a.anchoredSurfacePublicationLogGeneration!=a.anchoredSurfaceActiveGeneration){
-      a.anchoredSurfacePublicationLogGeneration=a.anchoredSurfaceActiveGeneration;char message[384];
-      std::snprintf(message,sizeof message,"Dynamic hierarchy publication: generation=%u; physicalGeneration=%u; patches=%u; coverageEntries=%u; indirectCommands=%u; naturalPrepared=%s; complete=true; invalidDraws=0; zeroOwner=0; ownershipOverlap=0; globalFill=true",a.anchoredSurfaceActiveGeneration,a.submission->physicalSurfaceGeneration,a.anchoredSurfaceActivePatchCount,a.anchoredSurfaceActivePatchCount,a.anchoredSurfaceActivePatchCount,a.submission->physicalSurfaceGeneration==4u&&a.naturalAnchoredPreparedGeneration==a.anchoredSurfaceActiveGeneration?"true":"false");
-      a.Log(NC_LOG_ALWAYS,message);
-    }
-  }
-  if(a.earthTransitionTraceRemaining){uint32_t rootMask=0u;const auto *lookup=static_cast<const uint32_t*>(a.productionLayerLookupMapped);for(uint32_t face=0;face<6&&lookup;face++)if(lookup[nc::production::Pack::Ordinal(face,0,0,0)]!=0u)rootMask|=1u<<face;const double cameraX=double(gpuInput.cameraBodyHighX)+gpuInput.cameraBodyLowX,cameraY=double(gpuInput.cameraBodyHighY)+gpuInput.cameraBodyLowY,cameraZ=double(gpuInput.cameraBodyHighZ)+gpuInput.cameraBodyLowZ,radius=double(gpuInput.radiusHigh)+gpuInput.radiusLow,distance=std::sqrt(cameraX*cameraX+cameraY*cameraY+cameraZ*cameraZ);const bool candidateOwner=a.productionBillboardAuthoritative,distantOwner=false,globalOwner=productionSurface&&!candidateOwner,dynamicOwner=!candidateOwner&&a.anchoredSurfaceActive;char trace[832];std::snprintf(trace,sizeof trace,"Earth focus frame: frame=%llu; epoch=%llu; focusedBody=%llu; cameraTargetBody=%llu; radius=%.9f; distance=%.9f; altitude=%.9f; surfaceMode=%u; terrainVersion=%u; regime=%u; roots=0x%02X; activePatches=%u; distantOwner=%u; globalOwner=%u; dynamicOwner=%u; candidateOwner=%u; material=%s; fingerprint=%u/%.6f/%.6f/%.6f; center=(%.9g,%.9g,%.9g); orientation=(%.9g,%.9g,%.9g,%.9g); presentationRadius=%.9f; draws=%u/%u/%u/%u",(unsigned long long)a.frame,(unsigned long long)a.surfaceTransitionEpoch,(unsigned long long)contextBody,(unsigned long long)contextBody,radius,distance,double(gpuInput.surfaceAltitudeMetres),contextMode,gpuInput.terrainVersion,contextRegime,rootMask,a.hasGpuTelemetry?a.lastGpuTelemetry.active:0u,distantOwner?1u:0u,globalOwner?1u:0u,dynamicOwner?1u:0u,candidateOwner?1u:0u,candidateOwner?"production-billboard":"terrain-v5-root",contextPresentation.albedoSource,contextPresentation.roughness,contextPresentation.specular,contextPresentation.emissive,contextPresentation.centerX,contextPresentation.centerY,contextPresentation.centerZ,contextPresentation.bodyOrientationX,contextPresentation.bodyOrientationY,contextPresentation.bodyOrientationZ,contextPresentation.bodyOrientationW,double(contextPresentation.radius),distantOwner?1u:0u,globalOwner?1u:0u,dynamicOwner?1u:0u,candidateOwner?1u:0u);a.Log(NC_LOG_ALWAYS,trace);a.earthTransitionTraceRemaining--;}
+  if(a.earthTransitionTraceRemaining){uint32_t rootMask=0u;const auto *lookup=static_cast<const uint32_t*>(a.productionLayerLookupMapped);for(uint32_t face=0;face<6&&lookup;face++)if(lookup[nc::production::Pack::Ordinal(face,0,0,0)]!=0u)rootMask|=1u<<face;const double cameraX=double(gpuInput.cameraBodyHighX)+gpuInput.cameraBodyLowX,cameraY=double(gpuInput.cameraBodyHighY)+gpuInput.cameraBodyLowY,cameraZ=double(gpuInput.cameraBodyHighZ)+gpuInput.cameraBodyLowZ,radius=double(gpuInput.radiusHigh)+gpuInput.radiusLow,distance=std::sqrt(cameraX*cameraX+cameraY*cameraY+cameraZ*cameraZ);const bool candidateOwner=a.productionBillboardAuthoritative,distantOwner=false,globalOwner=productionSurface&&!candidateOwner,dynamicOwner=false;char trace[832];std::snprintf(trace,sizeof trace,"Earth focus frame: frame=%llu; epoch=%llu; focusedBody=%llu; cameraTargetBody=%llu; radius=%.9f; distance=%.9f; altitude=%.9f; surfaceMode=%u; terrainVersion=%u; regime=%u; roots=0x%02X; activePatches=%u; distantOwner=%u; globalOwner=%u; dynamicOwner=%u; candidateOwner=%u; material=%s; fingerprint=%u/%.6f/%.6f/%.6f; center=(%.9g,%.9g,%.9g); orientation=(%.9g,%.9g,%.9g,%.9g); presentationRadius=%.9f; draws=%u/%u/%u/%u",(unsigned long long)a.frame,(unsigned long long)a.surfaceTransitionEpoch,(unsigned long long)contextBody,(unsigned long long)contextBody,radius,distance,double(gpuInput.surfaceAltitudeMetres),contextMode,gpuInput.terrainVersion,contextRegime,rootMask,a.hasGpuTelemetry?a.lastGpuTelemetry.active:0u,distantOwner?1u:0u,globalOwner?1u:0u,dynamicOwner?1u:0u,candidateOwner?1u:0u,candidateOwner?"production-billboard":"terrain-v5-root",contextPresentation.albedoSource,contextPresentation.roughness,contextPresentation.specular,contextPresentation.emissive,contextPresentation.centerX,contextPresentation.centerY,contextPresentation.centerZ,contextPresentation.bodyOrientationX,contextPresentation.bodyOrientationY,contextPresentation.bodyOrientationZ,contextPresentation.bodyOrientationW,double(contextPresentation.radius),distantOwner?1u:0u,globalOwner?1u:0u,dynamicOwner?1u:0u,candidateOwner?1u:0u);a.Log(NC_LOG_ALWAYS,trace);a.earthTransitionTraceRemaining--;}
   // A production Earth has no generic distant fallback: its six immutable
   // terrain-v5 roots remain the visible owner at every planetary distance.
   // Clearing the selector here would leave the DistantOnly regime with no
@@ -2179,7 +1856,7 @@ void Commands(App &a) {
   VkFenceCreateInfo fi{VK_STRUCTURE_TYPE_FENCE_CREATE_INFO};
   fi.flags = VK_FENCE_CREATE_SIGNALED_BIT;
   a.Check(vkCreateFence(a.device, &fi, nullptr, &a.fence), "fence failed");
-  VkQueryPoolCreateInfo qi{VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO};qi.queryType=VK_QUERY_TYPE_TIMESTAMP;qi.queryCount=App::TimestampCount;a.Check(vkCreateQueryPool(a.device,&qi,nullptr,&a.timestampQueries),"timestamp query pool failed");
+  VkQueryPoolCreateInfo qi{VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO};qi.queryType=VK_QUERY_TYPE_TIMESTAMP;qi.queryCount=App::TimestampCount;a.Check(vkCreateQueryPool(a.device,&qi,nullptr,&a.timestampQueries),"timestamp query pool failed");qi.queryCount=6;a.Check(vkCreateQueryPool(a.device,&qi,nullptr,&a.regionalTimingQueries),"regional timestamp pool failed");
   VkQueryPoolCreateInfo pipelineStatistics{VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO};
   pipelineStatistics.queryType=VK_QUERY_TYPE_PIPELINE_STATISTICS;pipelineStatistics.queryCount=1;
   pipelineStatistics.pipelineStatistics=VK_QUERY_PIPELINE_STATISTIC_CLIPPING_PRIMITIVES_BIT|
@@ -2190,9 +1867,12 @@ void Commands(App &a) {
     "anchored pipeline statistics query pool failed");
 }
 void RecordProductionBillboardWork(App &a,VkCommandBuffer c,bool incoming){
+  if(incoming&&RegionalPhysicalEnabled(a)&&!a.regionalReady[1])return;
   const bool enabled=incoming?a.productionBillboardIncomingEnabled:a.productionBillboardAuthoritative;if(!enabled)return;if(incoming&&a.productionBillboardIncomingWorkRecorded)return;const uint32_t triangles=incoming?a.productionBillboardIncomingTriangleCount:a.productionBillboardTriangleCount;
-  if(!incoming){const auto*frame=static_cast<const NcProductionBillboardFrame*>(a.productionBillboardFrameMapped);const auto&current=frame->current;const uint32_t frameIdentity=current.identity[0];if(current.metadata[0]&&frameIdentity!=a.productionBillboardPreparedFrameIdentity){if(current.identity[2]>=18u||current.identity[3]==0u||current.metadata[2]!=a.productionBillboardVertexCount)throw std::runtime_error("production billboard pupil frame does not match authoritative topology");vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_COMPUTE,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_COMPUTE,a.productionBillboardPreparePipeline);vkCmdDispatch(c,(a.productionBillboardVertexCount+63u)/64u,1,1);VkMemoryBarrier prepareBarrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};prepareBarrier.srcAccessMask=VK_ACCESS_SHADER_WRITE_BIT;prepareBarrier.dstAccessMask=VK_ACCESS_SHADER_READ_BIT;vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT|VK_PIPELINE_STAGE_VERTEX_SHADER_BIT|VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT,0,1,&prepareBarrier,0,nullptr,0,nullptr);a.productionBillboardPreparedFrameIdentity=frameIdentity;}a.productionBillboardCullFrameIdentity=frameIdentity;}
-  if(incoming&&a.productionBillboardIncomingGpuPreparation){const auto*frame=static_cast<const NcProductionBillboardFrame*>(a.productionBillboardFrameMapped);const auto&candidateFrame=frame->incoming;if(candidateFrame.metadata[0]==0u||candidateFrame.identity[2]>=18u||candidateFrame.identity[3]==0u||candidateFrame.metadata[2]!=a.productionBillboardIncomingVertexCount)throw std::runtime_error("incoming production billboard pupil frame does not match topology");vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_COMPUTE,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_COMPUTE,a.productionBillboardIncomingPreparePipeline);vkCmdDispatch(c,(a.productionBillboardIncomingVertexCount+63u)/64u,1,1);VkMemoryBarrier prepareBarrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};prepareBarrier.srcAccessMask=VK_ACCESS_SHADER_WRITE_BIT;prepareBarrier.dstAccessMask=VK_ACCESS_SHADER_READ_BIT;vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT|VK_PIPELINE_STAGE_VERTEX_SHADER_BIT|VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT,0,1,&prepareBarrier,0,nullptr,0,nullptr);}
+  if(!incoming&&RegionalPhysicalEnabled(a))RecordRegionalPreparation(a,c,false);
+  if(!incoming){const auto*frame=static_cast<const NcProductionBillboardFrame*>(a.productionBillboardFrameMapped);const auto&current=frame->current;const uint32_t frameIdentity=current.identity[0];if(current.metadata[0]&&frameIdentity!=a.productionBillboardPreparedFrameIdentity){if(current.identity[2]>=18u||current.identity[3]==0u||current.metadata[2]!=a.productionBillboardVertexCount)throw std::runtime_error("production billboard pupil frame does not match authoritative topology");vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_COMPUTE,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,a.regionalTimingQueries,2);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_COMPUTE,a.productionBillboardPreparePipeline);vkCmdDispatch(c,(a.productionBillboardVertexCount+63u)/64u,1,1);vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,a.regionalTimingQueries,3);a.regionalTimingRecorded[1]=true;VkMemoryBarrier prepareBarrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};prepareBarrier.srcAccessMask=VK_ACCESS_SHADER_WRITE_BIT;prepareBarrier.dstAccessMask=VK_ACCESS_SHADER_READ_BIT;vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT|VK_PIPELINE_STAGE_VERTEX_SHADER_BIT|VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT,0,1,&prepareBarrier,0,nullptr,0,nullptr);a.productionBillboardPreparedFrameIdentity=frameIdentity;}a.productionBillboardCullFrameIdentity=frameIdentity;if(RegionalPhysicalEnabled(a))a.regionalPublishedPupil=current;}
+  if(incoming&&RegionalPhysicalEnabled(a)&&!RecordRegionalPreparation(a,c,true))return;
+  if(incoming&&a.productionBillboardIncomingGpuPreparation&&!RegionalPhysicalEnabled(a)){const auto*frame=static_cast<const NcProductionBillboardFrame*>(a.productionBillboardFrameMapped);const auto&candidateFrame=frame->incoming;if(candidateFrame.metadata[0]==0u||candidateFrame.identity[2]>=18u||candidateFrame.identity[3]==0u||candidateFrame.metadata[2]!=a.productionBillboardIncomingVertexCount)throw std::runtime_error("incoming production billboard pupil frame does not match topology");vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_COMPUTE,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,a.regionalTimingQueries,4);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_COMPUTE,a.productionBillboardIncomingPreparePipeline);vkCmdDispatch(c,(a.productionBillboardIncomingVertexCount+63u)/64u,1,1);vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,a.regionalTimingQueries,5);a.regionalTimingRecorded[2]=true;VkMemoryBarrier prepareBarrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};prepareBarrier.srcAccessMask=VK_ACCESS_SHADER_WRITE_BIT;prepareBarrier.dstAccessMask=VK_ACCESS_SHADER_READ_BIT;vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT|VK_PIPELINE_STAGE_VERTEX_SHADER_BIT|VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT,0,1,&prepareBarrier,0,nullptr,0,nullptr);}
   vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_COMPUTE,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_COMPUTE,incoming?a.productionBillboardIncomingResetPipeline:a.productionBillboardResetPipeline);vkCmdDispatch(c,1,1,1);VkMemoryBarrier resetBarrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};resetBarrier.srcAccessMask=VK_ACCESS_SHADER_WRITE_BIT;resetBarrier.dstAccessMask=VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT;vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,0,1,&resetBarrier,0,nullptr,0,nullptr);const uint32_t topologyFamily=incoming?a.productionBillboardIncomingTopologyFamily:a.productionBillboardTopologyFamily;const bool nestedScaleMesh=topologyFamily==NC_PLANETARY_PRODUCTION_TOPOLOGY_NESTED_SCALE_MESH_NCSM1;VkPipeline cullPipeline=nestedScaleMesh?(incoming?a.productionNestedScaleMeshIncomingCullPipeline:a.productionNestedScaleMeshCullPipeline):(incoming?a.productionBillboardIncomingCullPipeline:a.productionBillboardCullPipeline);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_COMPUTE,cullPipeline);vkCmdDispatch(c,(triangles+63u)/64u,1,1);VkMemoryBarrier cullBarrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};cullBarrier.srcAccessMask=VK_ACCESS_SHADER_WRITE_BIT;cullBarrier.dstAccessMask=VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT;vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,0,1,&cullBarrier,0,nullptr,0,nullptr);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_COMPUTE,incoming?a.productionBillboardIncomingCompactPipeline:a.productionBillboardCompactPipeline);vkCmdDispatch(c,(triangles+63u)/64u,1,1);VkMemoryBarrier compactBarrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};compactBarrier.srcAccessMask=VK_ACCESS_SHADER_WRITE_BIT;cullBarrier.dstAccessMask=VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT;compactBarrier.dstAccessMask=VK_ACCESS_HOST_READ_BIT|VK_ACCESS_INDIRECT_COMMAND_READ_BIT|VK_ACCESS_INDEX_READ_BIT;vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_HOST_BIT|VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT|VK_PIPELINE_STAGE_VERTEX_INPUT_BIT,0,1,&compactBarrier,0,nullptr,0,nullptr);if(incoming)a.productionBillboardIncomingWorkRecorded=true;else a.productionBillboardWorkRecorded=true;
 }
 constexpr bool ProductionBillboardPresentationEnabled(bool resident,uint32_t flags){return resident&&(flags&1u)!=0u;}
@@ -2205,13 +1885,15 @@ void Record(App &a, uint32_t image) {
   VkCommandBufferBeginInfo bi{VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO};
   a.Check(vkBeginCommandBuffer(c, &bi), "command begin failed");
   RecordProductionUploads(a,c);
-  RecordLocalUploads(a,c);
+
+  vkCmdResetQueryPool(c,a.regionalTimingQueries,0,6);
   vkCmdResetQueryPool(c,a.timestampQueries,0,App::TimestampCount);vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT,a.timestampQueries,0);
   vkCmdResetQueryPool(c,a.anchoredPipelineStatistics,0,1);
-  const auto &presentation=a.submission->planetaryPresentation;const bool candidateRequested=(a.submission->productionBillboardFlags&1u)!=0u;const bool candidate=ProductionBillboardPresentationEnabled(a.productionBillboardAuthoritative,a.submission->productionBillboardFlags);const bool production=a.submission->planetarySurfaceMode==NC_PLANETARY_SURFACE_PRODUCTION_CUBE;const bool handoff=presentation.enabled!=0;const bool detailedPresentation=!handoff||presentation.regime!=NC_PLANETARY_DISTANT_ONLY;const bool distantPresentation=!candidate&&handoff&&!production&&presentation.regime!=NC_PLANETARY_DETAILED_ONLY&&presentation.distantAlpha>0;const bool diagnosticGlobal=(a.surfaceDiagnostic&SurfaceDiagnosticDisableGlobal)==0;const bool diagnosticAnchored=(a.surfaceDiagnostic&SurfaceDiagnosticDisableAnchored)==0;const bool regional=production||detailedPresentation;const bool gpuPlanetary=!candidate&&regional&&a.submission->planetaryMode!=NC_PLANETARY_CPU_REFERENCE;
+  const auto &presentation=a.submission->planetaryPresentation;const bool candidateRequested=(a.submission->productionBillboardFlags&1u)!=0u;const bool candidate=ProductionBillboardPresentationEnabled(a.productionBillboardAuthoritative,a.submission->productionBillboardFlags);const bool production=a.submission->planetarySurfaceMode==NC_PLANETARY_SURFACE_PRODUCTION_CUBE;const bool handoff=presentation.enabled!=0;const bool detailedPresentation=!handoff||presentation.regime!=NC_PLANETARY_DISTANT_ONLY;const bool distantPresentation=!candidate&&handoff&&!production&&presentation.regime!=NC_PLANETARY_DETAILED_ONLY&&presentation.distantAlpha>0;const bool diagnosticGlobal=(a.surfaceDiagnostic&SurfaceDiagnosticDisableGlobal)==0;const bool regional=production||detailedPresentation;const bool gpuPlanetary=!candidate&&regional&&a.submission->planetaryMode!=NC_PLANETARY_CPU_REFERENCE;
   const bool productionBillboardCompute=candidateRequested&&(a.productionBillboardAuthoritative||a.productionBillboardIncomingEnabled);
-  if(distantPresentation||detailedPresentation||gpuPlanetary||productionBillboardCompute){VkMemoryBarrier hostBarrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};hostBarrier.srcAccessMask=VK_ACCESS_HOST_WRITE_BIT;hostBarrier.dstAccessMask=VK_ACCESS_SHADER_READ_BIT|((a.anchoredSurfaceActive||productionBillboardCompute)?(VK_ACCESS_INDIRECT_COMMAND_READ_BIT|VK_ACCESS_INDEX_READ_BIT):0);VkPipelineStageFlags readers=VK_PIPELINE_STAGE_VERTEX_SHADER_BIT|VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT|((gpuPlanetary||productionBillboardCompute)?VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT:0)|((a.anchoredSurfaceActive||productionBillboardCompute)?(VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT|VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT|VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT|VK_PIPELINE_STAGE_VERTEX_INPUT_BIT):0);vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_HOST_BIT,readers,0,1,&hostBarrier,0,nullptr,0,nullptr);}
-  if(a.naturalGlobalPreparationPending||a.naturalAnchoredPreparationPending){vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_COMPUTE,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);if(a.naturalGlobalPreparationPending){vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_COMPUTE,a.naturalGlobalPreparePipeline);vkCmdDispatch(c,(NaturalGlobalPatchCount*NaturalGlobalVerticesPerPatch+63u)/64u,1,1);a.naturalGlobalPreparationPending=false;a.naturalGlobalPrepared=true;a.naturalGlobalPreparationDispatches++;}if(a.naturalAnchoredPreparationPending){vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_COMPUTE,a.naturalAnchoredPreparePipeline);vkCmdDispatch(c,(a.naturalAnchoredPreparationPatchCount*NaturalAnchoredVerticesPerPatch+63u)/64u,1,1);a.naturalAnchoredPreparationPending=false;a.naturalAnchoredSubmittedGeneration=a.naturalAnchoredPreparationGeneration;a.naturalAnchoredPreparationDispatches++;}VkMemoryBarrier naturalBarrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};naturalBarrier.srcAccessMask=VK_ACCESS_SHADER_WRITE_BIT;naturalBarrier.dstAccessMask=VK_ACCESS_SHADER_READ_BIT;vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_VERTEX_SHADER_BIT|VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT,0,1,&naturalBarrier,0,nullptr,0,nullptr);}
+  if(distantPresentation||detailedPresentation||gpuPlanetary||productionBillboardCompute){VkMemoryBarrier hostBarrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};hostBarrier.srcAccessMask=VK_ACCESS_HOST_WRITE_BIT;hostBarrier.dstAccessMask=VK_ACCESS_SHADER_READ_BIT|((productionBillboardCompute)?(VK_ACCESS_INDIRECT_COMMAND_READ_BIT|VK_ACCESS_INDEX_READ_BIT):0);VkPipelineStageFlags readers=VK_PIPELINE_STAGE_VERTEX_SHADER_BIT|VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT|((gpuPlanetary||productionBillboardCompute)?VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT:0)|((productionBillboardCompute)?(VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT|VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT|VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT|VK_PIPELINE_STAGE_VERTEX_INPUT_BIT):0);vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_HOST_BIT,readers,0,1,&hostBarrier,0,nullptr,0,nullptr);}
+  if(a.naturalGlobalPreparationPending){vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_COMPUTE,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);if(a.naturalGlobalPreparationPending){vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_COMPUTE,a.naturalGlobalPreparePipeline);vkCmdDispatch(c,(NaturalGlobalPatchCount*NaturalGlobalVerticesPerPatch+63u)/64u,1,1);a.naturalGlobalPreparationPending=false;a.naturalGlobalPrepared=true;a.naturalGlobalPreparationDispatches++;}VkMemoryBarrier naturalBarrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};naturalBarrier.srcAccessMask=VK_ACCESS_SHADER_WRITE_BIT;naturalBarrier.dstAccessMask=VK_ACCESS_SHADER_READ_BIT;vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_VERTEX_SHADER_BIT|VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT,0,1,&naturalBarrier,0,nullptr,0,nullptr);}
+  RecordRegionalPhysicalDemand(a,c);
   if(candidateRequested){RecordProductionBillboardWork(a,c,false);RecordProductionBillboardWork(a,c,true);}
   if(gpuPlanetary){vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_COMPUTE,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_COMPUTE,a.planetaryComputePipeline);vkCmdDispatch(c,1,1,1);VkMemoryBarrier selectionBarrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};selectionBarrier.srcAccessMask=VK_ACCESS_SHADER_WRITE_BIT;selectionBarrier.dstAccessMask=VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT|VK_ACCESS_INDIRECT_COMMAND_READ_BIT;vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT|VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT,0,1,&selectionBarrier,0,nullptr,0,nullptr);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_COMPUTE,production?a.productionPlanetaryTerrainPipeline:a.planetaryTerrainPipeline);vkCmdDispatchIndirect(c,a.gpuControlBuffer,offsetof(GpuPlanetaryControl,terrainDispatch));VkMemoryBarrier computeBarrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};computeBarrier.srcAccessMask=VK_ACCESS_SHADER_WRITE_BIT;computeBarrier.dstAccessMask=VK_ACCESS_INDIRECT_COMMAND_READ_BIT|VK_ACCESS_SHADER_READ_BIT;VkPipelineStageFlags consumers=VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT|VK_PIPELINE_STAGE_VERTEX_SHADER_BIT;if(a.submission->planetaryMode==NC_PLANETARY_CPU_GPU_VALIDATION){computeBarrier.dstAccessMask|=VK_ACCESS_HOST_READ_BIT;consumers|=VK_PIPELINE_STAGE_HOST_BIT;}vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,consumers,0,1,&computeBarrier,0,nullptr,0,nullptr);}
   vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,a.timestampQueries,1);
@@ -2251,7 +1933,7 @@ void Record(App &a, uint32_t image) {
   // zero. This preserves a complete parent without analytic/raster boundary
   // disagreement, redundant visible overlap, depth bias, or skirts.
   vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_VERTEX_INPUT_BIT,a.timestampQueries,5);
-  a.anchoredPipelineStatisticsFrameSubmitted=candidate||diagnosticAnchored&&a.anchoredSurfaceActive;
+  a.anchoredPipelineStatisticsFrameSubmitted=candidate;
   if(a.anchoredPipelineStatisticsFrameSubmitted){
     a.anchoredPipelineStatisticsTerrainFrame=a.frame;
     a.anchoredPipelineStatisticsGeneration=a.productionBillboardGeneration;
@@ -2270,11 +1952,11 @@ void Record(App &a, uint32_t image) {
       else if((a.submission->productionBillboardFlags&4096u)!=0u)rasterPipeline=a.productionBillboardNoDepthPipeline;
       vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,rasterPipeline);
       vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);vkCmdBindIndexBuffer(c,a.productionBillboardCompactedBuffer,0,VK_INDEX_TYPE_UINT32);vkCmdDrawIndexedIndirect(c,a.productionBillboardIndirectBuffer,0,1,sizeof(VkDrawIndexedIndirectCommand));
-    }else{VkDeviceSize offset=0;vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.anchoredTerrainPipeline);vkCmdBindVertexBuffers(c,0,1,&a.anchoredSurfaceVertexBuffer,&offset);vkCmdBindIndexBuffer(c,a.anchoredSurfaceIndexBuffer,0,VK_INDEX_TYPE_UINT32);vkCmdDrawIndexedIndirect(c,a.anchoredSurfaceIndirectBuffers[a.anchoredSurfaceResourceIndex],0,a.anchoredSurfaceActivePatchCount,sizeof(VkDrawIndexedIndirectCommand));}
+    }
     vkCmdEndQuery(c,a.anchoredPipelineStatistics,0);
   }
   vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,a.timestampQueries,9);
-  if(!candidate&&diagnosticGlobal&&regional&&(a.submission->planetaryPatchCount||gpuPlanetary)){VkDeviceSize offset=0;const bool exactRasterFill=production&&diagnosticAnchored&&a.anchoredSurfaceActive;vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,production?(exactRasterFill?a.productionPlanetaryFillPipeline:a.productionPlanetaryPipeline):a.planetaryPipeline);vkCmdBindVertexBuffers(c,0,1,&a.planetaryPatch.vb,&offset);vkCmdBindIndexBuffer(c,a.planetaryPatch.ib,0,VK_INDEX_TYPE_UINT32);if(gpuPlanetary)vkCmdDrawIndexedIndirect(c,a.gpuControlBuffer,0,1,sizeof(VkDrawIndexedIndirectCommand));else vkCmdDrawIndexed(c,a.planetaryPatch.indices,a.submission->planetaryPatchCount,0,0,0);}
+  if(!candidate&&diagnosticGlobal&&regional&&(a.submission->planetaryPatchCount||gpuPlanetary)){VkDeviceSize offset=0;vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,production?a.productionPlanetaryPipeline:a.planetaryPipeline);vkCmdBindVertexBuffers(c,0,1,&a.planetaryPatch.vb,&offset);vkCmdBindIndexBuffer(c,a.planetaryPatch.ib,0,VK_INDEX_TYPE_UINT32);if(gpuPlanetary)vkCmdDrawIndexedIndirect(c,a.gpuControlBuffer,0,1,sizeof(VkDrawIndexedIndirectCommand));else vkCmdDrawIndexed(c,a.planetaryPatch.indices,a.submission->planetaryPatchCount,0,0,0);}
   vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,a.timestampQueries,10);
   vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,a.timestampQueries,6);
   if(solarOverlay){VkDeviceSize offset=0;vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.planetaryRingNearPipeline);vkCmdBindVertexBuffers(c,0,1,&a.planetaryRing.vb,&offset);vkCmdBindIndexBuffer(c,a.planetaryRing.ib,0,VK_INDEX_TYPE_UINT32);vkCmdDrawIndexed(c,a.planetaryRing.indices,distantCount,0,0,0);}
@@ -2348,11 +2030,13 @@ void InspectGpuPlanetary(App &a) {
 }
 void InspectGpuTimings(App &a){
   if(!a.timestampFrameSubmitted||!a.timestampQueries)return;std::array<uint64_t,App::TimestampCount> ticks{};const auto result=vkGetQueryPoolResults(a.device,a.timestampQueries,0,App::TimestampCount,sizeof(ticks),ticks.data(),sizeof(uint64_t),VK_QUERY_RESULT_64_BIT);if(result!=VK_SUCCESS)return;
-  std::array<double,App::TimestampCount> values{};const double scale=double(a.timestampPeriodNanoseconds)/1e6;const bool detailedOwner=a.anchoredSurfaceActive||ProductionBillboardPresentationEnabled(a.productionBillboardAuthoritative,a.submission->productionBillboardFlags);values[0]=(ticks[8]-ticks[0])*scale;values[1]=0;values[2]=detailedOwner?(ticks[6]-ticks[5])*scale:0;values[3]=(ticks[3]-ticks[2])*scale;values[4]=(ticks[4]-ticks[3])*scale;values[5]=(ticks[7]-ticks[0])*scale;values[6]=(ticks[8]-ticks[7])*scale;values[7]=(ticks[1]-ticks[0])*scale;values[8]=(ticks[7]-ticks[4])*scale;values[9]=detailedOwner?(ticks[9]-ticks[5])*scale:0;values[10]=(ticks[10]-ticks[9])*scale;a.lastGpuTimingMs=values;a.lastGpuTimingFrame=a.anchoredPipelineStatisticsTerrainFrame;for(uint32_t i=0;i<App::TimestampCount;i++)a.timestampAccumulatedMs[i]+=values[i];a.timestampSampleCount++;if(a.canonicalBenchmark&&a.frame>120u&&a.canonicalGpuTotalMs.size()<480u){a.canonicalGpuTotalMs.push_back(values[0]);a.canonicalGpuMaterialMs.push_back(values[8]);a.canonicalGpuAnchoredMs.push_back(values[9]);a.canonicalGpuGlobalFillMs.push_back(values[10]);a.canonicalGpuOverlayMs.push_back((ticks[7]-ticks[6])*scale);}
+  std::array<double,App::TimestampCount> values{};const double scale=double(a.timestampPeriodNanoseconds)/1e6;const bool detailedOwner=ProductionBillboardPresentationEnabled(a.productionBillboardAuthoritative,a.submission->productionBillboardFlags);values[0]=(ticks[8]-ticks[0])*scale;values[1]=0;values[2]=detailedOwner?(ticks[6]-ticks[5])*scale:0;values[3]=(ticks[3]-ticks[2])*scale;values[4]=(ticks[4]-ticks[3])*scale;values[5]=(ticks[7]-ticks[0])*scale;values[6]=(ticks[8]-ticks[7])*scale;values[7]=(ticks[1]-ticks[0])*scale;values[8]=(ticks[7]-ticks[4])*scale;values[9]=detailedOwner?(ticks[9]-ticks[5])*scale:0;values[10]=(ticks[10]-ticks[9])*scale;a.lastGpuTimingMs=values;a.lastGpuTimingFrame=a.anchoredPipelineStatisticsTerrainFrame;for(uint32_t i=0;i<App::TimestampCount;i++)a.timestampAccumulatedMs[i]+=values[i];a.timestampSampleCount++;
   if((a.submission->productionBillboardFlags&2u)!=0u)
     for(uint32_t i=0;i<App::TimestampCount;i++)a.c3GpuMs[i].push_back(values[i]);
-  if(a.timestampSampleCount==1||a.timestampSampleCount%120==0){char message[384];std::snprintf(message,sizeof message,"GPU timings: total=%.3f ms; anchoredCompute=%.3f; anchoredDraw=%.3f; background=%.3f; preSurface=%.3f; scene=%.3f; toneMap=%.3f; regionalCompute=%.3f; materialsOverlays=%.3f",values[0],values[1],values[2],values[3],values[4],values[5],values[6],values[7],values[8]);a.Log(NC_LOG_ALWAYS,message);if(a.localIo){std::lock_guard lock(a.localIo->mutex);uint32_t resident=0,visible=0,inFlight=0,ready=0,failed=0,published=0;for(uint32_t slot=0;slot<LocalPayloadSlots;slot++){resident+=a.localLayerOccupied[slot]&&!a.localLayerInFlight[slot];visible+=a.localLayerVisible[slot];inFlight+=a.localLayerInFlight[slot];published+=a.localLayerPublished[slot];}for(const auto&value:a.localIo->ready){ready+=value.state==2u;failed+=value.state==3u;}const uint64_t samples=a.localHits+a.localMisses;const double hitRate=samples?100.0*double(a.localHits)/double(samples):0.0;const uint64_t vram=uint64_t(LocalPayloadSlots)*(LocalAlbedoLayerBytes+LocalElevationLayerBytes+LocalNormalLayerBytes+LocalControlLayerBytes);const double uploadLatency=a.localUploads?a.localUploadLatencyMilliseconds/double(a.localUploads):0.0;char local[928];std::snprintf(local,sizeof local,"Regional terrain streaming: requested=%llu; hits=%llu; misses=%llu; hitRate=%.2f%%; resident=%u/%u; visible=%u/%u; published=%u; promotions=%llu; inFlight=%u; evictions=%llu; queued=%u; ready=%u; failed=%u; canceled=%llu; queueDrops=%llu; bytesRead=%llu; bytesSupercompressed=%llu; bytesTranscoded=%llu; bytesUploaded=%llu; transcodeMs=%.3f; uploadLatencyAvgMs=%.3f; uploads=%llu; uploadBudget=%u; selectedFrequency=%u; fallbackFrequency=%u; BC7VRAM=%llu; R16VRAM=%llu; BC5VRAM=%llu; R8VRAM=%llu; totalVRAM=%llu",(unsigned long long)a.localRequests,(unsigned long long)a.localHits,(unsigned long long)a.localMisses,hitRate,resident,LocalPayloadSlots,visible,a.localVisibleTargetCount,published,(unsigned long long)a.localPromotions,inFlight,(unsigned long long)a.localEvictions,a.localIo->requestCount,ready,failed,(unsigned long long)a.localCanceled,(unsigned long long)a.localIo->queueDrops,(unsigned long long)a.localIo->bytesRead,(unsigned long long)a.localIo->bytesRead,(unsigned long long)a.localIo->bytesTranscoded,(unsigned long long)a.localUploadBytes,a.localIo->transcodeMilliseconds,uploadLatency,(unsigned long long)a.localUploads,LocalUploadBudget,visible?1u:0u,0u,(unsigned long long)(uint64_t(LocalPayloadSlots)*LocalAlbedoLayerBytes),(unsigned long long)(uint64_t(LocalPayloadSlots)*LocalElevationLayerBytes),(unsigned long long)(uint64_t(LocalPayloadSlots)*LocalNormalLayerBytes),(unsigned long long)(uint64_t(LocalPayloadSlots)*LocalControlLayerBytes),(unsigned long long)vram);a.Log(NC_LOG_ALWAYS,local);}}
+  if(a.timestampSampleCount==1||a.timestampSampleCount%120==0){char message[384];std::snprintf(message,sizeof message,"GPU timings: total=%.3f ms; anchoredCompute=%.3f; anchoredDraw=%.3f; background=%.3f; preSurface=%.3f; scene=%.3f; toneMap=%.3f; regionalCompute=%.3f; materialsOverlays=%.3f",values[0],values[1],values[2],values[3],values[4],values[5],values[6],values[7],values[8]);a.Log(NC_LOG_ALWAYS,message);}
 }
+bool RegionalPhysicalEnabled(const App& a);
+#include "RegionalPhysicalProbe.inl"
 void InspectAnchoredPipelineStatistics(App &a){
   if(!a.anchoredPipelineStatisticsFrameSubmitted||!a.anchoredPipelineStatistics)return;
   // Results are returned in ascending VkQueryPipelineStatisticFlagBits order:
@@ -2510,7 +2194,7 @@ void Draw(App &a) {
   pi.pSwapchains = &a.swapchain;
   pi.pImageIndices = &image;
   const auto presentStart=std::chrono::steady_clock::now();VkResult pr = vkQueuePresentKHR(a.presentQueue, &pi);a.presentSerial++;const auto presentEnd=std::chrono::steady_clock::now();
-  if(a.earthSubmissionTraceRemaining&&a.submission->planetarySurfaceMode==NC_PLANETARY_SURFACE_PRODUCTION_CUBE){const bool candidate=a.productionBillboardAuthoritative;char trace[448];std::snprintf(trace,sizeof trace,"Earth Vulkan submission: terrainFrame=%llu; swapchainImage=%u; recordSerial=%llu; submitSerial=%llu; presentSerial=%llu; serializedFence=true; globalDraw=%u; dynamicHierarchyDraw=%u; candidateIndirectDraw=%u; visibleEarthOwners=1",(unsigned long long)a.frame,image,(unsigned long long)a.recordSerial,(unsigned long long)a.submitSerial,(unsigned long long)a.presentSerial,candidate?0u:1u,!candidate&&a.anchoredSurfaceActive?1u:0u,candidate?1u:0u);a.Log(NC_LOG_ALWAYS,trace);a.earthSubmissionTraceRemaining--;}
+  if(a.earthSubmissionTraceRemaining&&a.submission->planetarySurfaceMode==NC_PLANETARY_SURFACE_PRODUCTION_CUBE){const bool candidate=a.productionBillboardAuthoritative;char trace[448];std::snprintf(trace,sizeof trace,"Earth Vulkan submission: terrainFrame=%llu; swapchainImage=%u; recordSerial=%llu; submitSerial=%llu; presentSerial=%llu; serializedFence=true; globalDraw=%u; dynamicHierarchyDraw=%u; candidateIndirectDraw=%u; visibleEarthOwners=1",(unsigned long long)a.frame,image,(unsigned long long)a.recordSerial,(unsigned long long)a.submitSerial,(unsigned long long)a.presentSerial,candidate?0u:1u,0u,candidate?1u:0u);a.Log(NC_LOG_ALWAYS,trace);a.earthSubmissionTraceRemaining--;}
   const double recordMs=std::chrono::duration<double,std::milli>(recordEnd-recordStart).count(),submitMs=std::chrono::duration<double,std::milli>(submitEnd-submitStart).count(),presentMs=std::chrono::duration<double,std::milli>(presentEnd-presentStart).count();a.cpuRecordMs+=recordMs;a.cpuSubmitMs+=submitMs;a.cpuPresentMs+=presentMs;a.cpuTimingSamples++;if((a.submission->productionBillboardFlags&2u)!=0u){a.c3CpuMs[5].push_back(recordMs);a.c3CpuMs[6].push_back(submitMs);a.c3CpuMs[7].push_back(presentMs);}a.timestampFrameSubmitted=true;
   if (pr == VK_ERROR_OUT_OF_DATE_KHR || pr == VK_SUBOPTIMAL_KHR || recreate) {
     Recreate(a);
@@ -2525,6 +2209,7 @@ void Destroy(App &a) {
     if (a.fence)
       vkDestroyFence(a.device, a.fence, nullptr);
     if(a.timestampQueries)vkDestroyQueryPool(a.device,a.timestampQueries,nullptr);
+    if(a.regionalTimingQueries)vkDestroyQueryPool(a.device,a.regionalTimingQueries,nullptr);
     if(a.anchoredPipelineStatistics)vkDestroyQueryPool(a.device,a.anchoredPipelineStatistics,nullptr);
     for (auto s : a.renderFinished)
       vkDestroySemaphore(a.device, s, nullptr);
@@ -2532,6 +2217,7 @@ void Destroy(App &a) {
       vkDestroySemaphore(a.device, a.imageAvailable, nullptr);
     DestroyMesh(a);
     DestroySubmission(a);
+    DestroyRegionalPhysical(a);
     DestroyLocalTerrain(a);
     DestroyProductionCubeSurface(a);
     DestroyTerrainResidency(a);
@@ -2565,7 +2251,8 @@ void InspectProductionBillboardPublication(App &a){
   const bool topologyReady=a.productionBillboardIncomingLatticeMapped&&
     a.productionBillboardIncomingIndexMapped&&a.productionBillboardIncomingVertexCount>0u&&
     a.productionBillboardIncomingTriangleCount>0u&&a.productionBillboardIncomingTopologyHash!=0u;
-  const bool physicalReady=counters&&a.productionBillboardIncomingPhysicalMapped&&
+  const bool regionalReady=!RegionalPhysicalEnabled(a)||a.regionalReady[1];
+  const bool physicalReady=regionalReady&&(!RegionalPhysicalEnabled(a)||a.regionalPreparation[1].fencePending)&&counters&&a.productionBillboardIncomingPhysicalMapped&&
     a.productionBillboardIncomingVertexCount==counters[6];
   const bool generationCoherent=counters&&candidate&&candidate->enabled==1u&&
     a.productionBillboardIncomingEnabled&&a.productionBillboardIncomingWorkRecorded&&
@@ -2587,21 +2274,23 @@ void InspectProductionBillboardPublication(App &a){
   const uint32_t visible=readiness.visibleTriangles,compacted=readiness.indirectIndexCount;const bool topologyReused=!a.productionBillboardIncomingOwnsTopology;
   RetainCurrentProductionBillboardWorkAsSpare(a);a.productionBillboardLatticeBuffer=a.productionBillboardIncomingLatticeBuffer;a.productionBillboardLatticeMemory=a.productionBillboardIncomingLatticeMemory;a.productionBillboardLatticeMapped=a.productionBillboardIncomingLatticeMapped;a.productionBillboardIndexBuffer=a.productionBillboardIncomingIndexBuffer;a.productionBillboardIndexMemory=a.productionBillboardIncomingIndexMemory;a.productionBillboardIndexMapped=a.productionBillboardIncomingIndexMapped;
   a.productionBillboardPhysicalBuffer=a.productionBillboardIncomingPhysicalBuffer;a.productionBillboardPhysicalMemory=a.productionBillboardIncomingPhysicalMemory;a.productionBillboardPhysicalMapped=a.productionBillboardIncomingPhysicalMapped;a.productionBillboardVisibilityBuffer=a.productionBillboardIncomingVisibilityBuffer;a.productionBillboardVisibilityMemory=a.productionBillboardIncomingVisibilityMemory;a.productionBillboardVisibilityMapped=a.productionBillboardIncomingVisibilityMapped;a.productionBillboardCompactedBuffer=a.productionBillboardIncomingCompactedBuffer;a.productionBillboardCompactedMemory=a.productionBillboardIncomingCompactedMemory;a.productionBillboardCompactedMapped=a.productionBillboardIncomingCompactedMapped;a.productionBillboardIndirectBuffer=a.productionBillboardIncomingIndirectBuffer;a.productionBillboardIndirectMemory=a.productionBillboardIncomingIndirectMemory;a.productionBillboardIndirectMapped=a.productionBillboardIncomingIndirectMapped;a.productionBillboardCounterBuffer=a.productionBillboardIncomingCounterBuffer;a.productionBillboardCounterMemory=a.productionBillboardIncomingCounterMemory;a.productionBillboardCounterMapped=a.productionBillboardIncomingCounterMapped;a.productionBillboardVertexCount=a.productionBillboardIncomingVertexCount;a.productionBillboardTriangleCount=a.productionBillboardIncomingTriangleCount;a.productionBillboardVertexCapacity=a.productionBillboardIncomingVertexCapacity;a.productionBillboardTriangleCapacity=a.productionBillboardIncomingTriangleCapacity;a.productionBillboardTopologyFamily=a.productionBillboardIncomingTopologyFamily;a.productionBillboardDisplacementEnvelopeMetres=a.productionBillboardIncomingDisplacementEnvelopeMetres;a.productionBillboardOcclusionSupportRadiusMetres=a.productionBillboardIncomingOcclusionSupportRadiusMetres;a.productionBillboardTopologyHash=a.productionBillboardIncomingTopologyHash;a.productionBillboardGeneration=a.productionBillboardIncomingGeneration;
-  const auto*publishedFrame=static_cast<const NcProductionBillboardFrame*>(a.productionBillboardFrameMapped);a.productionBillboardPreparedFrameIdentity=publishedFrame?publishedFrame->incoming.identity[0]:0u;a.productionBillboardCullFrameIdentity=a.productionBillboardPreparedFrameIdentity;
+  const auto*publishedFrame=static_cast<const NcProductionBillboardFrame*>(a.productionBillboardFrameMapped);a.productionBillboardPreparedFrameIdentity=publishedFrame?publishedFrame->incoming.identity[0]:0u;a.productionBillboardCullFrameIdentity=a.productionBillboardPreparedFrameIdentity;if(RegionalPhysicalEnabled(a)&&publishedFrame)a.regionalPublishedPupil=publishedFrame->incoming;
   a.productionBillboardWorkingBytes=ProductionBillboardWorkBytes(a.productionBillboardVertexCapacity,a.productionBillboardTriangleCapacity)+ProductionBillboardWorkBytes(a.productionBillboardSpareVertexCapacity,a.productionBillboardSpareTriangleCapacity);a.productionBillboardPeakWorkingBytes=std::max(a.productionBillboardPeakWorkingBytes,a.productionBillboardWorkingBytes);char residency[512];std::snprintf(residency,sizeof residency,"Production billboard resource residency: generation=%llu; level=%u; topologyFamily=%u; topologyUpload=%u; topologyReused=%u; topologyUploads=%llu; topologyReuseHits=%llu; residentTopologyLevels=%zu; residentTopologyBytes=%llu; peakTopologyBytes=%llu; workAllocations=%llu; workReuses=%llu; workingBytes=%llu; peakWorkingBytes=%llu; currentIncomingSlots=1+0; spareSlots=%u",(unsigned long long)a.productionBillboardGeneration,a.submission->productionBillboard?a.submission->productionBillboard->level:0u,a.productionBillboardTopologyFamily,topologyReused?0u:1u,topologyReused?1u:0u,(unsigned long long)a.productionBillboardTopologyUploads,(unsigned long long)a.productionBillboardTopologyReuseHits,a.productionBillboardTopologyResources.size(),(unsigned long long)a.productionBillboardTopologyResidentBytes,(unsigned long long)a.productionBillboardTopologyPeakResidentBytes,(unsigned long long)a.productionBillboardWorkAllocations,(unsigned long long)a.productionBillboardWorkReuses,(unsigned long long)a.productionBillboardWorkingBytes,(unsigned long long)a.productionBillboardPeakWorkingBytes,a.productionBillboardSparePhysicalBuffer?1u:0u);a.Log(NC_LOG_ALWAYS,residency);
   a.productionBillboardIncomingLatticeBuffer={};a.productionBillboardIncomingLatticeMemory={};a.productionBillboardIncomingLatticeMapped=nullptr;a.productionBillboardIncomingIndexBuffer={};a.productionBillboardIncomingIndexMemory={};a.productionBillboardIncomingIndexMapped=nullptr;a.productionBillboardIncomingPhysicalBuffer={};a.productionBillboardIncomingPhysicalMemory={};a.productionBillboardIncomingPhysicalMapped=nullptr;a.productionBillboardIncomingVisibilityBuffer={};a.productionBillboardIncomingVisibilityMemory={};a.productionBillboardIncomingVisibilityMapped=nullptr;a.productionBillboardIncomingCompactedBuffer={};a.productionBillboardIncomingCompactedMemory={};a.productionBillboardIncomingCompactedMapped=nullptr;a.productionBillboardIncomingIndirectBuffer={};a.productionBillboardIncomingIndirectMemory={};a.productionBillboardIncomingIndirectMapped=nullptr;a.productionBillboardIncomingCounterBuffer={};a.productionBillboardIncomingCounterMemory={};a.productionBillboardIncomingCounterMapped=nullptr;a.productionBillboardIncomingEnabled=false;a.productionBillboardIncomingWorkRecorded=false;a.productionBillboardIncomingFencePending=false;a.productionBillboardIncomingOwnsTopology=false;a.productionBillboardIncomingGpuPreparation=false;a.productionBillboardIncomingVertexCount=0;a.productionBillboardIncomingTriangleCount=0;a.productionBillboardIncomingVertexCapacity=0;a.productionBillboardIncomingTriangleCapacity=0;a.productionBillboardIncomingTopologyFamily=NC_PLANETARY_PRODUCTION_TOPOLOGY_RADIAL_NCTOP2;a.productionBillboardIncomingDisplacementEnvelopeMetres=0;a.productionBillboardIncomingOcclusionSupportRadiusMetres=0;a.productionBillboardIncomingTopologyHash=0;a.productionBillboardIncomingGeneration=0;
-  a.productionBillboardFencePending=false;a.productionBillboardAuthoritative=true;a.productionBillboardWorkRecorded=false;a.anchoredSurfaceActive=false;a.anchoredSurfaceActivePatchCount=0;a.productionBillboardPublications++;a.productionBillboardDeferredRetirements+=a.productionBillboardPublications>1?1u:0u;a.submission->productionBillboardPadding=static_cast<uint32_t>(a.productionBillboardGeneration);UpdateProductionBillboardDescriptors(a,false);char message[1024];std::snprintf(message,sizeof message,"Production spherical billboard publication: generation=%llu; level=%u; topologyFamily=%u; hash=0x%016llX; topologyResident=true; topologyReused=%u; topologyUploads=%llu; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=%u; postHorizonTriangles=%u; horizonRejected=%u; postScreenConeTriangles=%u; screenConeRejected=%u; compactedIndices=%u; visibleTriangles=%u; zeroVisible=%u; noOpIndirect=%u; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=%llu; deferredRetirements=%llu",(unsigned long long)a.productionBillboardGeneration,a.submission->productionBillboard?a.submission->productionBillboard->level:0u,a.productionBillboardTopologyFamily,(unsigned long long)a.productionBillboardTopologyHash,topologyReused?1u:0u,(unsigned long long)a.productionBillboardTopologyUploads,a.productionBillboardTriangleCount,a.productionBillboardTriangleCount-counters[1]-counters[3],counters[1],visible,counters[8],compacted,visible,visible==0u?1u:0u,compacted==0u?1u:0u,(unsigned long long)a.productionBillboardPublications,(unsigned long long)a.productionBillboardDeferredRetirements);a.Log(NC_LOG_ALWAYS,message);
+  a.productionBillboardFencePending=false;a.productionBillboardAuthoritative=true;a.productionBillboardWorkRecorded=false;a.productionBillboardPublications++;a.productionBillboardDeferredRetirements+=a.productionBillboardPublications>1?1u:0u;a.submission->productionBillboardPadding=static_cast<uint32_t>(a.productionBillboardGeneration);UpdateProductionBillboardDescriptors(a,false);char message[1024];std::snprintf(message,sizeof message,"Production spherical billboard publication: generation=%llu; level=%u; topologyFamily=%u; hash=0x%016llX; topologyResident=true; topologyReused=%u; topologyUploads=%llu; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=%u; postHorizonTriangles=%u; horizonRejected=%u; postScreenConeTriangles=%u; screenConeRejected=%u; compactedIndices=%u; visibleTriangles=%u; zeroVisible=%u; noOpIndirect=%u; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=%llu; deferredRetirements=%llu",(unsigned long long)a.productionBillboardGeneration,a.submission->productionBillboard?a.submission->productionBillboard->level:0u,a.productionBillboardTopologyFamily,(unsigned long long)a.productionBillboardTopologyHash,topologyReused?1u:0u,(unsigned long long)a.productionBillboardTopologyUploads,a.productionBillboardTriangleCount,a.productionBillboardTriangleCount-counters[1]-counters[3],counters[1],visible,counters[8],compacted,visible,visible==0u?1u:0u,compacted==0u?1u:0u,(unsigned long long)a.productionBillboardPublications,(unsigned long long)a.productionBillboardDeferredRetirements);a.Log(NC_LOG_ALWAYS,message);
 }
 void Update(App &a, float dt) {
   const auto updateStart=std::chrono::steady_clock::now();
   a.Check(vkWaitForFences(a.device, 1, &a.fence, VK_TRUE, UINT64_MAX), "frame fence wait failed");
   const auto fenceEnd=std::chrono::steady_clock::now();
+  InspectRegionalPhysical(a);
   InspectProductionBillboardPublication(a);
   InspectGpuTimings(a);
   InspectAnchoredPipelineStatistics(a);
+  RegionalPhysicalProbe::Capture(a);
   InspectGpuPlanetary(a);
   const auto inspectionEnd=std::chrono::steady_clock::now();
-  bool active = (GetAsyncKeyState(VK_LBUTTON) & 0x8000) != 0 || (GetAsyncKeyState(VK_RBUTTON) & 0x8000) != 0;
+  bool active = (RegionalValidationKeyState(VK_LBUTTON) & 0x8000) != 0 || (RegionalValidationKeyState(VK_RBUTTON) & 0x8000) != 0;
   if (active && !a.lookActive) {
     a.lookActive = true;
     a.rawMouseX = 0;
@@ -2616,7 +2305,7 @@ void Update(App &a, float dt) {
   a.rawMouseX = 0;
   a.rawMouseY = 0;
   auto rising = [](int key, bool &wasDown) {
-    const bool down = (GetAsyncKeyState(key) & 0x8000) != 0;
+    const bool down = (RegionalValidationKeyState(key) & 0x8000) != 0;
     const bool result = down && !wasDown;
     wasDown = down;
     return result;
@@ -2626,12 +2315,12 @@ void Update(App &a, float dt) {
   uint32_t presentationFocus = 0;
   for (int index = 0; index < 10; ++index) { const int key = index == 9 ? '0' : '1' + index; if (rising(key, a.presentationFocusWasDown[index])) { presentationFocus = static_cast<uint32_t>(index + 1); break; } }
   NcInputState in{dt,
-                  (GetAsyncKeyState('A') & 0x8000) != 0,
-                  (GetAsyncKeyState('D') & 0x8000) != 0,
-                  (GetAsyncKeyState('W') & 0x8000) != 0,
-                  (GetAsyncKeyState('S') & 0x8000) != 0,
-                  (GetAsyncKeyState('Q') & 0x8000) != 0,
-                  (GetAsyncKeyState('E') & 0x8000) != 0,
+                  (RegionalValidationKeyState('A') & 0x8000) != 0,
+                  (RegionalValidationKeyState('D') & 0x8000) != 0,
+                  (RegionalValidationKeyState('W') & 0x8000) != 0,
+                  (RegionalValidationKeyState('S') & 0x8000) != 0,
+                  (RegionalValidationKeyState('Q') & 0x8000) != 0,
+                  (RegionalValidationKeyState('E') & 0x8000) != 0,
                   rising('R', a.resetWasDown),
                   a.lookActive,
                   x,
@@ -2640,8 +2329,8 @@ void Update(App &a, float dt) {
                   rising(VK_SPACE, a.pauseWasDown),
                   rising(VK_OEM_COMMA, a.rateDecreaseWasDown),
                   rising(VK_OEM_PERIOD, a.rateIncreaseWasDown), sasModeKey,
-                  (GetAsyncKeyState(VK_SHIFT) & 0x8000) != 0,
-                  (GetAsyncKeyState(VK_CONTROL) & 0x8000) != 0,
+                  (RegionalValidationKeyState(VK_SHIFT) & 0x8000) != 0,
+                  (RegionalValidationKeyState(VK_CONTROL) & 0x8000) != 0,
                   static_cast<NcPresentationFocus>(presentationFocus),
                   a.extent.width,
                   a.extent.height};
@@ -2653,7 +2342,8 @@ void Update(App &a, float dt) {
   Validate(a);
   Upload(a);
   PrepareProductionUploads(a);
-  PrepareLocalUploads(a);
+
+  UpdateRegionalPhysical(a);
   const auto updateEnd=std::chrono::steady_clock::now();
   const double updateMs=std::chrono::duration<double,std::milli>(updateEnd-updateStart).count();a.cpuUpdateMs+=updateMs;
   const double fenceWaitMs=std::chrono::duration<double,std::milli>(fenceEnd-updateStart).count();
@@ -2663,7 +2353,7 @@ void Update(App &a, float dt) {
   a.cpuHostCallbackMs+=std::chrono::duration<double,std::milli>(callbackEnd-inspectionEnd).count();
   a.cpuUploadMs+=std::chrono::duration<double,std::milli>(updateEnd-callbackEnd).count();
   if((a.submission->productionBillboardFlags&2u)!=0u){a.c3CpuMs[0].push_back(updateMs);a.c3CpuMs[1].push_back(fenceWaitMs);a.c3CpuMs[2].push_back(std::chrono::duration<double,std::milli>(inspectionEnd-fenceEnd).count());a.c3CpuMs[3].push_back(std::chrono::duration<double,std::milli>(callbackEnd-inspectionEnd).count());a.c3CpuMs[4].push_back(std::chrono::duration<double,std::milli>(updateEnd-callbackEnd).count());a.c3FenceMs.push_back(fenceWaitMs);}
-  if(a.canonicalBenchmark&&a.frame>=120u&&a.canonicalCpuUpdateMs.size()<480u){a.canonicalCpuUpdateMs.push_back(std::chrono::duration<double,std::milli>(updateEnd-updateStart).count());a.canonicalCpuFenceMs.push_back(std::chrono::duration<double,std::milli>(fenceEnd-updateStart).count());}
+
 }
 } // namespace
 extern "C" NC_API NcResult __cdecl nc_validate_planetary_patches(const NcPlanetaryPatch *patches, uint32_t count) {
@@ -2726,14 +2416,9 @@ static NcResult RunRenderer(NcFrameSubmission *s, NcHostCallback cb, void *data,
   a.cb = cb;
   a.cbData = data;
   a.submission = s;
-  a.canonicalBenchmark=std::getenv("NOVACORE_M12_CANONICAL_BENCHMARK")&&std::strcmp(std::getenv("NOVACORE_M12_CANONICAL_BENCHMARK"),"1")==0;
   if(assets){a.productionTerrainPath=assets->productionTerrainPathUtf8;if(assets->localTerrainPathUtf8)a.localTerrainPath=assets->localTerrainPathUtf8;a.elevationOraclePath=assets->elevationOraclePathUtf8;}
   try {
     gApp = &a;
-    if(const char*groundTruth=std::getenv("NOVACORE_GPU_GROUND_TRUTH"))
-      a.anchoredGroundTruthEnabled=std::strcmp(groundTruth,"1")==0;
-    if(a.anchoredGroundTruthEnabled)a.Log(NC_LOG_ALWAYS,"GPU ground-truth instrumentation enabled");
-    if(a.canonicalBenchmark)a.Log(NC_LOG_ALWAYS,"M12 canonical benchmark telemetry: warmup=120; measured=480; fixed pose required by host");
     a.surfaceDiagnostic=SurfaceDiagnosticFromEnvironment();
     if(a.surfaceDiagnostic){char message[128];std::snprintf(message,sizeof message,"Surface diagnostic isolation flags: 0x%02X",a.surfaceDiagnostic);a.Log(NC_LOG_ALWAYS,message);}
     LogLoadedRuntimePaths(a);
@@ -2784,7 +2469,7 @@ static NcResult RunRenderer(NcFrameSubmission *s, NcHostCallback cb, void *data,
     if(a.frameTimeCount){std::vector<double> sorted(a.frameTimesMs.begin(),a.frameTimesMs.begin()+a.frameTimeCount);std::sort(sorted.begin(),sorted.end());auto percentile=[&](double p){return sorted[std::min(sorted.size()-1,size_t(std::ceil(p*sorted.size()))-1)];};std::snprintf(text,sizeof text,"Frame pacing: p50=%.3f ms; p95=%.3f ms; p99=%.3f ms; max=%.3f ms; samples=%zu",percentile(.50),percentile(.95),percentile(.99),sorted.back(),sorted.size());a.Log(NC_LOG_ALWAYS,text);}
     if(a.fenceTimeCount){std::vector<double> sorted(a.fenceTimesMs.begin(),a.fenceTimesMs.begin()+a.fenceTimeCount);const double average=std::accumulate(sorted.begin(),sorted.end(),0.0)/double(sorted.size());std::sort(sorted.begin(),sorted.end());const double p95=sorted[std::min(sorted.size()-1,size_t(std::ceil(.95*sorted.size()))-1)];std::snprintf(text,sizeof text,"Fence wait pacing: average=%.3f ms; p95=%.3f ms; max=%.3f ms; samples=%zu",average,p95,sorted.back(),sorted.size());a.Log(NC_LOG_ALWAYS,text);}
     if(a.cpuTimingSamples){const double n=double(a.cpuTimingSamples);std::snprintf(text,sizeof text,"CPU timings: update=%.3f ms; fence=%.3f; inspection=%.3f; hostCallback=%.3f; validationUpload=%.3f; record=%.3f; submit=%.3f; present=%.3f",a.cpuUpdateMs/n,a.cpuFenceWaitMs/n,a.cpuInspectionMs/n,a.cpuHostCallbackMs/n,a.cpuUploadMs/n,a.cpuRecordMs/n,a.cpuSubmitMs/n,a.cpuPresentMs/n);a.Log(NC_LOG_ALWAYS,text);}
-    if(a.canonicalBenchmark){auto report=[&](const char*name,std::vector<double> values){if(values.empty())return;const double average=std::accumulate(values.begin(),values.end(),0.0)/double(values.size());std::sort(values.begin(),values.end());const double p95=values[std::min(values.size()-1,size_t(std::ceil(.95*values.size()))-1)];std::snprintf(text,sizeof text,"M12 canonical timing: %s average=%.3f ms; p95=%.3f ms; samples=%zu",name,average,p95,values.size());a.Log(NC_LOG_ALWAYS,text);};report("cpuUpdate",a.canonicalCpuUpdateMs);report("fenceWait",a.canonicalCpuFenceMs);report("gpuTotal",a.canonicalGpuTotalMs);report("materialsOverlays",a.canonicalGpuMaterialMs);report("anchoredTerrain",a.canonicalGpuAnchoredMs);report("globalFallback",a.canonicalGpuGlobalFillMs);report("overlays",a.canonicalGpuOverlayMs);}
+
     if(!a.c3FrameMs.empty()){
       auto report=[&](const char*kind,const char*name,std::vector<double> values){if(values.empty())return;const double average=std::accumulate(values.begin(),values.end(),0.0)/double(values.size());std::sort(values.begin(),values.end());auto percentile=[&](double p){return values[std::min(values.size()-1,size_t(std::ceil(p*values.size()))-1)];};char line[320];std::snprintf(line,sizeof line,"P2S5C3 %s timing: %s avg=%.3f ms; p50=%.3f; p95=%.3f; p99=%.3f; max=%.3f; samples=%zu",kind,name,average,percentile(.50),percentile(.95),percentile(.99),values.back(),values.size());a.Log(NC_LOG_ALWAYS,line);};
       const char*cpuNames[8]{"update","fenceWait","inspection","hostCallback","validationUpload","record","submit","present"};for(uint32_t i=0;i<8;i++)report("CPU",cpuNames[i],a.c3CpuMs[i]);
@@ -2793,9 +2478,6 @@ static NcResult RunRenderer(NcFrameSubmission *s, NcHostCallback cb, void *data,
       auto reportCounts=[&](const char*name,std::vector<uint64_t> values){if(values.empty())return;std::sort(values.begin(),values.end());const double average=std::accumulate(values.begin(),values.end(),0.0)/double(values.size());auto percentile=[&](double p){return values[std::min(values.size()-1,size_t(std::ceil(p*values.size()))-1)];};char line[320];std::snprintf(line,sizeof line,"P2S5C3 GPU workload: %s avg=%.1f; p50=%llu; p95=%llu; p99=%llu; max=%llu; samples=%zu",name,average,(unsigned long long)percentile(.50),(unsigned long long)percentile(.95),(unsigned long long)percentile(.99),(unsigned long long)values.back(),values.size());a.Log(NC_LOG_ALWAYS,line);};
       reportCounts("clippingOutputPrimitives",a.c3PipelineValues[0]);reportCounts("fragmentInvocations",a.c3PipelineValues[1]);reportCounts("tcsPatches",a.c3PipelineValues[2]);reportCounts("tesInvocations",a.c3PipelineValues[3]);if(!a.c3MaximumTesFactors.empty()){const auto maximum=*std::max_element(a.c3MaximumTesFactors.begin(),a.c3MaximumTesFactors.end());std::snprintf(text,sizeof text,"P2S5C3 TES factor: actualMaximum=%u; configuredMaximum=64; samples=%zu",maximum,a.c3MaximumTesFactors.size());a.Log(NC_LOG_ALWAYS,text);}
     }
-    const uint64_t naturalGlobalBytes=32ull+uint64_t(NaturalGlobalPatchCount)*NaturalGlobalVerticesPerPatch*sizeof(double)*4ull;
-    const uint64_t naturalAnchoredBytes=uint64_t(std::max(1u,a.submission?a.submission->anchoredSurfaceCacheSlotCount:0u))*NaturalAnchoredVerticesPerPatch*sizeof(double)*4ull;
-    std::snprintf(text,sizeof text,"GPU terrain descriptor totals: physicalGeneration=%u; publications=%llu; bytes=%llu; reusableBaseVertices=%u; reusableTopologyTemplates=16; tessellationTargetPixels=16; tessellationMaximum=16; tessellationRangeMetres=50; basePhysicalEvaluation=preparedVertex; nearPhysicalEvaluation=TES; naturalGlobalPrepareDispatches=%llu; naturalAnchoredPrepareDispatches=%llu; naturalPreparedBytes=%llu; capacityRejects=%llu",a.submission?a.submission->physicalSurfaceGeneration:0u,static_cast<unsigned long long>(a.anchoredSurfaceUploads),static_cast<unsigned long long>(a.anchoredSurfaceUploadBytes),AnchoredSurfaceBaseVerticesPerPatch,static_cast<unsigned long long>(a.naturalGlobalPreparationDispatches),static_cast<unsigned long long>(a.naturalAnchoredPreparationDispatches),static_cast<unsigned long long>(naturalGlobalBytes+naturalAnchoredBytes),static_cast<unsigned long long>(a.anchoredSurfaceCapacityRejects));a.Log(NC_LOG_ALWAYS,text);
     if(a.anchoredPipelineStatisticsSamples){const double n=double(a.anchoredPipelineStatisticsSamples);std::snprintf(text,sizeof text,"GPU anchored refinement averages: tcsPatches=%.1f; refinedVertices=%.1f; clippingOutputPrimitives=%.1f; fragmentInvocations=%.1f; samples=%llu; CPUFinalRaster=false",double(a.anchoredTessellationControlPatches)/n,double(a.anchoredTessellationEvaluationInvocations)/n,double(a.anchoredClippingPrimitives)/n,double(a.anchoredFragmentShaderInvocations)/n,(unsigned long long)a.anchoredPipelineStatisticsSamples);a.Log(NC_LOG_ALWAYS,text);}
     if(a.timestampSampleCount){const double n=double(a.timestampSampleCount);std::snprintf(text,sizeof text,"GPU timing averages: total=%.3f ms; anchoredCompute=%.3f; anchoredDraw=%.3f; background=%.3f; preSurface=%.3f; toneMap=%.3f",a.timestampAccumulatedMs[0]/n,a.timestampAccumulatedMs[1]/n,a.timestampAccumulatedMs[2]/n,a.timestampAccumulatedMs[3]/n,a.timestampAccumulatedMs[4]/n,a.timestampAccumulatedMs[6]/n);a.Log(NC_LOG_ALWAYS,text);}
     Destroy(a);

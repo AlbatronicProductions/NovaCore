@@ -315,6 +315,8 @@ internal sealed class SolarSystemScene
     private bool _surfaceCameraToggleWasDown;
     private SurfaceCameraTransitionMetrics _surfaceCameraLastTransitionMetrics;
     private FloridaLaunchSite _floridaLaunchSite;
+    internal NativeFacilityCasterDefinition FacilityCaster { get; private set; }
+
 
     private SolarSystemScene(
         CelestialSystemDefinition system,
@@ -1072,8 +1074,22 @@ internal sealed class SolarSystemScene
     private bool TryInitializeFloridaLaunchSite()
     {
         if(!Presentation.TryGetBody(SolarSystemBodyIds.Earth.Value,out var earth))return false;
-        return FloridaLaunchSite.TryCreate(earth.BodyId,earth.RadiusMetres,
-            PlanetaryTerrainDefinition.EarthProductionCubeV5,out _floridaLaunchSite);
+        if(!FloridaLaunchSite.TryCreate(earth.BodyId,earth.RadiusMetres,
+            PlanetaryTerrainDefinition.EarthProductionCubeV5,out _floridaLaunchSite))return false;
+        if(!SurfaceEnuFrame.TryCreate(_floridaLaunchSite.Object.Anchor,out var frame))return false;
+        var origin=_floridaLaunchSite.Object.Anchor.NormalizedBodyFixedDirection*_floridaLaunchSite.LocalPhysicalSurfaceRadiusMetres;
+        var scale=_floridaLaunchSite.FoundationScale;
+        // Created once with the authored site. Camera/Sun/pupil updates do not rebuild casters.
+        // A separate finite near-field presentation policy: 2 km ray reach, local FP32
+        // intersection quantum below 0.5 mm. This is not the grading footprint.
+        FacilityCaster=new(){BodyId=earth.BodyId,FacilityId=FloridaLaunchSite.ObjectId.Value,ObjectId=FloridaLaunchSite.ObjectId.Value,
+            Version=1,GeometrySet=MeshHandle.FloridaLaunchPad.Value,
+            OriginX=origin.X,OriginY=origin.Y,OriginZ=origin.Z,
+            EastX=frame.East.X,EastY=frame.East.Y,EastZ=frame.East.Z,
+            NorthX=frame.North.X,NorthY=frame.North.Y,NorthZ=frame.North.Z,
+            UpX=frame.Up.X,UpY=frame.Up.Y,UpZ=frame.Up.Z,
+            FoundationScaleX=scale.X,FoundationScaleY=scale.Y,FoundationScaleZ=scale.Z,MaximumRayDistance=2048};
+        return true;
     }
 
     internal bool TryEvaluateFloridaLaunchSite(out AnchoredSurfaceObjectPose pose)

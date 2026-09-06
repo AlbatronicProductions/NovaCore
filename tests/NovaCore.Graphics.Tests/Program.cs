@@ -16,6 +16,7 @@ using NovaCore.Simulation.Time;
 
 var tests = new (string, Action)[]
 {
+    ("Facility lighting authority", FacilityLightingTests.Run),
     ("MeshHandle", MeshHandleTest),
     ("Transport layout", LayoutTest),
     ("Transform conversion", TransformTest),
@@ -43,6 +44,9 @@ var tests = new (string, Action)[]
     ("Canonical body-fixed geographic handedness", CanonicalBodyFixedGeographicHandednessTest),
     ("Canonical SurfaceAnchor physical terrain authority", CanonicalSurfaceAnchorPhysicalTerrainAuthorityTest),
     ("Anchored Florida launch site", AnchoredFloridaLaunchSiteTest),
+    ("Earth route convergence", EarthRouteConvergenceTests.Run),
+    ("Live NCSM1 regional physical residency", RegionalPhysicalResidencyTests.Run),
+    ("Florida facility support", FacilitySupportTests.Run),
     ("Surface-relative camera authority", SurfaceRelativeCameraAuthorityTest),
     ("Near-surface inertial free-look", NearSurfaceInertialFreeLookRegressionTest),
     ("SurfaceAnchor acquisition, ENU, and handoff", SurfaceAnchorPhaseBTest),
@@ -70,14 +74,13 @@ var tests = new (string, Action)[]
     ("M12D-P2A canonical hashed cell field proof", PlanetaryNaturalTerrainFieldTests.Run),
     ("M12D-P2B multiscale natural terrain family proof", PlanetaryNaturalTerrainFamiliesTests.Run),
     ("M12D-P2C1 prepared natural terrain", PlanetaryNaturalTerrainPreparationTests.Run),
-    ("M12D-P2C2 opt-in candidate renderer", PlanetaryNaturalTerrainRendererIntegrationTests.Run),
+    ("Generation-4 physical renderer integration", PlanetaryNaturalTerrainRendererIntegrationTests.Run),
     ("Production material noise value preservation", PlanetaryProductionMaterialNoiseTests.Run),
-    ("Dynamic anchored production hierarchy", PlanetaryDynamicAnchoredSurfaceTests.Run),
     ("Displaced mesh and physical normals", GpuDisplacedMeshPreparationTests.Run),
     ("Screen-space subdivision", PlanetaryScreenSpaceSubdivisionTests.Run),
     ("Terrain-v5 seams, mixed-LOD authority, and Florida classification", TerrainV5PayloadSeamAndFloridaClassificationTest),
     ("Terrain asset distribution boundary", TerrainAssetDistributionBoundaryTest),
-    ("Local terrain streaming and GPU compression", LocalTerrainStreamingAndGpuCompressionTest),
+    ("Local terrain format and GPU compression", LocalTerrainStreamingAndGpuCompressionTest),
     ("M12 Florida regional physical surface", M12FloridaRegionalPhysicalSurfaceTest),
     ("Production cube-sphere GPU residency integration", ProductionCubeSphereGpuResidencyIntegrationTest),
     ("Production physical-normal tangent continuity", ProductionPhysicalNormalTangentContinuityTest),
@@ -97,6 +100,7 @@ var tests = new (string, Action)[]
     ("Camera drag isolation", CameraDragIsolationTest),
     ("Sol system presentation and focus", SolarSystemSceneTest),
     ("SolAnalytical Earth planetary scene", EarthPlanetarySceneTest),
+    ("Florida foundation seating", FloridaFoundationSeatingTests.Run),
 };
 var testFilter=args.FirstOrDefault(argument=>argument.StartsWith("--test=",StringComparison.OrdinalIgnoreCase))?[7..];
 foreach (var (name, test) in tests) if(testFilter is null||name.Contains(testFilter,StringComparison.OrdinalIgnoreCase)){test();Console.WriteLine($"PASS {name}");}
@@ -383,21 +387,10 @@ static void LocalTerrainStreamingAndGpuCompressionTest()
           contentRoot.GetProperty("worstVerticalSample").GetProperty("verticalErrorMetres").GetDouble()==contentRoot.GetProperty("maximumVerticalErrorMetres").GetDouble(),
           "BC4 slope/normal error and worst geographic sample are explicit and bounded");
 
-    var nativeSource=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","NovaCoreNative.cpp"));
     var localSource=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","LocalTerrainPack.cpp"));
-    var shaderSource=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","shaders","local_terrain.glsl"));
-    Check(nativeSource.Contains("VK_FORMAT_BC7_SRGB_BLOCK",StringComparison.Ordinal)&&nativeSource.Contains("VK_FORMAT_R16_UNORM",StringComparison.Ordinal)&&nativeSource.Contains("VK_FORMAT_BC5_UNORM_BLOCK",StringComparison.Ordinal)&&nativeSource.Contains("VK_FORMAT_R8_UNORM",StringComparison.Ordinal),"native residency uses BC7/R16/BC5/R8 regional channels");
-    Check(nativeSource.Contains("LocalPayloadSlots=256",StringComparison.Ordinal)&&nativeSource.Contains("LocalUploadBudget=2",StringComparison.Ordinal)&&nativeSource.Contains("std::thread(LocalIoWorker",StringComparison.Ordinal),"runtime cache, uploads, and asynchronous I/O are fixed and bounded");
-    Check(nativeSource.Contains("TryPromoteLocalVisibleTransaction",StringComparison.Ordinal)&&nativeSource.Contains("localLayerPublished",StringComparison.Ordinal)&&
-          nativeSource.Contains("a.localLayerPublished[layer]=0",StringComparison.Ordinal),"visible local sectors remain behind the coherent terrain-v5 base until the complete footprint transaction is resident");
-    Check(localSource.Contains("local terrain payload digest mismatch",StringComparison.Ordinal)&&shaderSource.Contains("binding=28",StringComparison.Ordinal)&&shaderSource.Contains("binding=31",StringComparison.Ordinal),"fixture exercises the production parser while the shared local-terrain shader declares fixed BC arrays and remap metadata");
-    Check(shaderSource.Contains("textureGrad(localTerrainAlbedo",StringComparison.Ordinal)&&shaderSource.Contains("LocalTerrainStoredExtent=264.0",StringComparison.Ordinal)&&
-          shaderSource.Contains("ProductionDirectionAddress",StringComparison.Ordinal),"local sector sampling preserves body-direction addressing, explicit gradients, and four-texel filtering gutters");
-    var productionFragment=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","shaders","planetary_production.frag"));
-    Check(productionFragment.Contains("LocalTerrainElevationResidual",StringComparison.Ordinal)&&productionFragment.Contains("SampleLocalTerrainMaterial",StringComparison.Ordinal)&&
-          !productionFragment.Contains("surfaceNormal=normalize(mix(surfaceNormal,ApplyLocalTerrainNormal",StringComparison.Ordinal),
-          "the dynamic anchored production path consumes regional height/albedo/control while final displaced geometry remains normal authority");
-    Console.WriteLine($"Local terrain fixture: sectors={header.RecordCount}; disk={manifest.ByteSize}B; GPU={contentRoot.GetProperty("gpuBytes").GetInt64()}B; cache=128/256/512 bounded candidates; production=256 slots");
+    Check(localSource.Contains("local terrain payload digest mismatch",StringComparison.Ordinal),
+        "regional physical residency retains the validated NCCUBE parser");
+    Console.WriteLine($"Local terrain codec fixture: sectors={header.RecordCount}; disk={manifest.ByteSize}B; GPU={contentRoot.GetProperty("gpuBytes").GetInt64()}B");
 }
 
 static void M12FloridaRegionalPhysicalSurfaceTest()
@@ -446,10 +439,10 @@ static void M12FloridaRegionalPhysicalSurfaceTest()
           "M12 source quantization is millimetre-class and every foundational Florida control family is represented");
     var nativeSource=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","NovaCoreNative.cpp"));
     var fragment=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","shaders","planetary_production.frag"));
-    foreach(var diagnostic in new[]{"global-height","regional-height","residual","final-height","physical-modifier","biome-id","biome-blend","modifier-family","near-physical","regional-control","material-id","regional-mip","regional-residency","regional-boundary"})
-        Check(nativeSource.Contains($"\"{diagnostic}\"",StringComparison.Ordinal),$"M12 diagnostic {diagnostic}");
-    Check(fragment.Contains("stored regional BC5 field is a payload/diagnostic channel",StringComparison.Ordinal),
-        "production normal is generated from final composed physical geometry rather than reapplied regional BC5");
+    foreach(var diagnostic in new[]{"global-height","final-height","physical-modifier","biome-id","biome-blend","modifier-family","near-physical","material-id"})
+        Check(nativeSource.Contains($"\"{diagnostic}\"",StringComparison.Ordinal),$"physical/material diagnostic {diagnostic}");
+    Check(fragment.Contains("vec3 physical=normalize(normal)"),
+        "final composed geometry remains normal authority");
     Console.WriteLine($"M12 Florida: records={header.RecordCount}; levels={string.Join('/',levels.Order())}; launchResidual={launchResidual:F3}m; maxQuantization={root.GetProperty("maximumVerticalErrorMetres").GetDouble():F6}m; bytes={package.Length}");
 }
 
@@ -884,20 +877,18 @@ static void ProductionTerrainMaterialSynthesisAndTessellationStudyTest()
     var native=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","NovaCoreNative.cpp"));
     Check(fragment.Contains("#include \"production_terrain_material.glsl\"",StringComparison.Ordinal)&&fragment.Contains("SynthesizeProductionTerrainMaterial",StringComparison.Ordinal)&&
           fragment.Contains("terrainMaterial.ambientOcclusion",StringComparison.Ordinal),"global and dynamic anchored terrain share one GPU material-synthesis implementation");
-    Check(fragment.Contains("ProductionRaySphereDirection(unitDirection,0.0,bodyRadius)",StringComparison.Ordinal)&&
-          fragment.Contains("visible.elevation+LocalTerrainElevationResidual(samplingDirection)",StringComparison.Ordinal)&&
-          fragment.Contains("SampleLocalTerrainMaterial(samplingDirection)",StringComparison.Ordinal)&&
-          !fragment.Contains("anchored?LocalTerrainElevationResidual",StringComparison.Ordinal)&&
-          !fragment.Contains("if(anchored&&localSample.resident)",StringComparison.Ordinal),
-          "global and dynamic owners resolve addressing, local physical height, and local material from the same camera-ray/body-fixed authority");
+    Check(fragment.Contains("SurfaceMaterialBodyPosition(bodyCameraHigh,bodyCameraLow,-viewDirection)") &&
+          fragment.Contains("differentialMetres=anchored?-viewDirection:") &&
+          fragment.Contains("ProductionRaySphereDirection(unitDirection,0.0,bodyRadius)"),
+          "NCSM1 uses final physical receiver/derivatives; bootstrap retains its separate global presentation");
     Check(synthesis.Contains("result.albedo=mix(geographicAlbedo,detailedGeographic,landDetail)",StringComparison.Ordinal)&&
           !synthesis.Contains("mix(geographicAlbedo,synthesized,.62)",StringComparison.Ordinal),
           "procedural near-field response preserves terrain-v5 geographic albedo instead of replacing it with an altitude-dependent constant palette");
     Check(synthesis.Contains("TerrainBiplanarWeights",StringComparison.Ordinal)&&synthesis.Contains("selectionConfidence",StringComparison.Ordinal)&&
           synthesis.Contains("if(weights.x>1e-4)",StringComparison.Ordinal)&&!synthesis.Contains("Triplanar",StringComparison.Ordinal),
           "adaptive biplanar path retains two-axis sampling away from a narrow smooth axis-change bridge");
-    Check(fragment.Contains("dvec3 bodyMetres=ProductionRaySpherePosition(samplingDirection,representedHeight,bodyRadiusMetres)",StringComparison.Ordinal)&&
-          fragment.Contains("vec3 differentialMetres=vec3(bodyMetres-cameraBodyMetres)",StringComparison.Ordinal)&&
+    Check(fragment.Contains("?SurfaceMaterialBodyPosition(bodyCameraHigh,bodyCameraLow,-viewDirection)",StringComparison.Ordinal)&&
+          fragment.Contains("vec3 differentialMetres=anchored?-viewDirection:vec3(bodyMetres-cameraBodyMetres)",StringComparison.Ordinal)&&
           fragment.Contains("double bodyRadiusMetres=double(inputData.cameraHighRadiusHigh.w)+double(inputData.cameraLowRadiusLow.w)",StringComparison.Ordinal)&&
           synthesis.Contains("96.0",StringComparison.Ordinal)&&
           synthesis.Contains("5.5",StringComparison.Ordinal)&&synthesis.Contains("410.0",StringComparison.Ordinal)&&
@@ -909,26 +900,10 @@ static void ProductionTerrainMaterialSynthesisAndTessellationStudyTest()
           synthesis.Contains("TerrainNormalFrequencyAttenuation",StringComparison.Ordinal)&&synthesis.Contains(".12,.38",StringComparison.Ordinal)&&
           synthesis.Contains("isnan(footprint)||isinf(footprint)",StringComparison.Ordinal),"procedural normal bands fade earlier than color before Nyquist and reject grazing derivative collapse/explosion");
 
-    // A final pixel's view ray is independent of which valid surface owner
-    // supplied its depth.  Owner-interpolated chord positions are not: a
-    // coarse global triangle and a fine billboard triangle can lie hundreds
-    // of metres apart on the same ray.  Material identity must therefore use
-    // the represented radial-shell intersection shared by both owners.
-    const double materialRadius=6_371_008.8d,representedHeight=120d;
-    var materialCamera=new Double3(0d,0d,materialRadius+1_000d);
-    var materialRay=new Double3(.08d,.03d,-1d).Normalized();
-    var materialShell=materialRadius+representedHeight;
-    var rayB=Double3.Dot(materialCamera,materialRay);
-    var rayC=materialCamera.LengthSquared-materialShell*materialShell;
-    var rayDistance=-rayB-Math.Sqrt(rayB*rayB-rayC);
-    var canonicalMaterialPoint=materialCamera+materialRay*rayDistance;
-    var coarseChordPoint=materialCamera+materialRay*(rayDistance+240d);
-    var finePatchPoint=materialCamera+materialRay*(rayDistance+3d);
-    var legacyOwnerDelta=Math.Sqrt((coarseChordPoint-finePatchPoint).LengthSquared);
-    var canonicalOwnerDelta=Math.Sqrt((canonicalMaterialPoint-canonicalMaterialPoint).LengthSquared);
-    Check(legacyOwnerDelta>200d&&canonicalOwnerDelta==0d&&
-          Math.Abs(Math.Sqrt(canonicalMaterialPoint.LengthSquared)-materialShell)<1e-6d,
-          "global and dynamic raster owners resolve one canonical FP64 body-fixed material point on the represented physical shell");
+    // The former radial-shell identity test asserted agreement between two
+    // hypothetical owners without following a fixed physical receiver as the
+    // camera moved. SurfaceMaterialCoordinatesTests now exercises that actual
+    // responsibility through the production GLSL on Vulkan.
     Check(synthesis.Contains("ApplyTerrainHeightNormal",StringComparison.Ordinal)&&synthesis.Contains("TerrainMaterialMaximumVisualDisplacement=.45",StringComparison.Ordinal)&&
           synthesis.Contains("TerrainMaterialMaximumNormalAngleRadians=.1396263402",StringComparison.Ordinal),
           "height-derived visual normals retain bounded material detail with an 8-degree shading-normal limit");
@@ -943,7 +918,7 @@ static void ProductionTerrainMaterialSynthesisAndTessellationStudyTest()
     Check(!PlanetaryTerrainTessellationStudy.AcceptedForProduction&&PlanetaryTerrainTessellationStudy.T3TriangleCount==261_632&&
           PlanetaryTerrainTessellationStudy.MaximumAmplifiedTriangleCount==16_744_448,
           "the bounded tessellation study remains rejected after finding up to 64x amplification without physical-height benefit");
-    Check(native.Contains("anchoredTerrainPipeline",StringComparison.Ordinal)&&
+    Check(native.Contains("productionBillboardPipeline",StringComparison.Ordinal)&&
           native.Contains("VK_PRIMITIVE_TOPOLOGY_PATCH_LIST",StringComparison.Ordinal)&&
           native.Contains("patchControlPoints=3",StringComparison.Ordinal)&&
           native.Contains("VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT",StringComparison.Ordinal)&&
@@ -2159,8 +2134,6 @@ static void PlanetaryPresentationSpirvStrideTest()
     var shaderBinaryDirectory = Path.GetFullPath(Path.Combine(shaderSourceDirectory, "..", "..", "..", "build", "native-ninja", "shaders"));
     string[] expectedConsumers =
     [
-        "anchored_terrain.vert",
-        "anchored_terrain.tese",
         "distant_planet.vert",
         "planetary.vert",
         "planetary_ring.vert",
@@ -2631,7 +2604,7 @@ static void TerrainV5PayloadSeamAndFloridaClassificationTest()
     Check(maximumActualEdgePositionGapMetres<1e-8d&&maximumOneSidedNormalAngleRadians>1e-5d&&maximumGutterNormalAngleRadians<1e-5d,"real terrain-v5 shared positions are closed while one-sided edge normals are measurably discontinuous and canonical gutter normals agree");
     Check(double.IsFinite(minimumPayloadElevationMetres)&&double.IsFinite(maximumPayloadElevationMetres)&&minimumPayloadElevationMetres>=-11_000d&&maximumPayloadElevationMetres<=9_000d,"all real terrain-v5 payload elevations remain inside the signed production geometry envelope");
 
-    var shaderRoot=Path.Combine(repositoryRoot,"native","NovaCore.Native","shaders");var selectorSource=File.ReadAllText(Path.Combine(shaderRoot,"planetary_select.comp"));var vertexSource=File.ReadAllText(Path.Combine(shaderRoot,"planetary.vert"));var fragmentSource=File.ReadAllText(Path.Combine(shaderRoot,"planetary_production.frag"));var authoritySource=File.ReadAllText(Path.Combine(shaderRoot,"planetary_physical_authority.glsl"));var localSource=File.ReadAllText(Path.Combine(shaderRoot,"local_terrain.glsl"));var nativeSource=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","NovaCoreNative.cpp"));
+    var shaderRoot=Path.Combine(repositoryRoot,"native","NovaCore.Native","shaders");var selectorSource=File.ReadAllText(Path.Combine(shaderRoot,"planetary_select.comp"));var vertexSource=File.ReadAllText(Path.Combine(shaderRoot,"planetary.vert"));var fragmentSource=File.ReadAllText(Path.Combine(shaderRoot,"planetary_production.frag"));var authoritySource=File.ReadAllText(Path.Combine(shaderRoot,"planetary_physical_authority.glsl"));var nativeSource=File.ReadAllText(Path.Combine(repositoryRoot,"native","NovaCore.Native","NovaCoreNative.cpp"));
     Check(vertexSource.Contains("surfaceMorph=temporalMorph",StringComparison.Ordinal)&&!vertexSource.Contains("DemandMorph",StringComparison.Ordinal)&&vertexSource.Contains("ConstrainedMorph(mask,p.transitions.w,p.transitions.z",StringComparison.Ordinal)&&vertexSource.Contains("return 0.0",StringComparison.Ordinal)&&vertexSource.Contains("return 1.0",StringComparison.Ordinal),"temporal morph ownership uses retained-parent fine edges and current-coarse reverse edges instead of spatially divergent per-patch demand morphing");
     Check(selectorSource.Contains("TransitionAge",StringComparison.Ordinal)&&selectorSource.Contains("packedAges",StringComparison.Ordinal)&&selectorSource.Contains("FinerOutputNeighbor",StringComparison.Ordinal)&&selectorSource.Contains("transitionsSettled",StringComparison.Ordinal)&&selectorSource.Contains("ProductionPatchBindingCurrent",StringComparison.Ordinal)&&selectorSource.Contains("payloadBindingsCurrent",StringComparison.Ordinal)&&selectorSource.Contains("patchData.patches[index].transitions.w=finerNeighborMask",StringComparison.Ordinal),"selector publishes exact shared edge ages and reverse coarse/fine ownership and cannot fast-reuse an in-progress transition or a stale zero payload-layer binding");
     Check(vertexSource.Contains("struct PlanetaryPatch { uvec4 address; vec4 centerRadius; vec4 color; uvec4 transitions; };",StringComparison.Ordinal)&&selectorSource.Contains("struct PlanetaryPatch { uvec4 address; vec4 centerRadius; vec4 color; uvec4 transitions; };",StringComparison.Ordinal)&&vertexSource.Contains("p.transitions.z",StringComparison.Ordinal)&&vertexSource.Contains("p.transitions.w",StringComparison.Ordinal),"native/shader patch ABI remains four 16-byte records (64 bytes), with packed edge ages and reverse-edge mask contained in the existing transition record");
@@ -2639,11 +2612,9 @@ static void TerrainV5PayloadSeamAndFloridaClassificationTest()
     Check(authoritySource.Contains("CanonicalPhysicalHeight",StringComparison.Ordinal)&&vertexSource.Contains("CanonicalPhysicalHeight(direction)",StringComparison.Ordinal)&&fragmentSource.Contains("vec3 physical=normalize(normal)",StringComparison.Ordinal)&&!fragmentSource.Contains("materialBenchmark",StringComparison.Ordinal)&&!fragmentSource.Contains("ProductionFixedPhysicalNormal",StringComparison.Ordinal)&&fragmentSource.Contains("mix(analyticSphere,physical,landWeight)",StringComparison.Ordinal),"every production geometry owner uses one body-fixed physical height authority and fragment lighting consumes its prepared normal with a continuous analytic sea-level blend and no profiling bypass");
     Check(nativeSource.Contains("terrain[sample]=ProductionSampleElevation(a.productionElevationCpu[parentLayer]",StringComparison.Ordinal)&&nativeSource.Contains("terrain[sample+1]=ProductionSampleElevation(payload.elevation",StringComparison.Ordinal)&&nativeSource.Contains("ProductionHierarchyPayloadsReady",StringComparison.Ordinal)&&vertexSource.Contains("binding=9) readonly buffer TerrainSamples { vec2 heights[]; }",StringComparison.Ordinal)&&vertexSource.Contains("binding=10) readonly buffer PatchTerrainSlots { uvec2 values[]; }",StringComparison.Ordinal),"native two-float parent/current endpoint transport remains byte-compatible for non-immutable terrain users");
     Check(selectorSource.Contains("uint slot=ProductionPatchOrdinal(keyB.x,keyB.y,keyB.z,keyB.w)",StringComparison.Ordinal)&&selectorSource.Contains("patchTerrain.values[index]=uvec2(slot,slot+1u)",StringComparison.Ordinal)&&selectorSource.Contains("production?cacheHighWater:0u",StringComparison.Ordinal)&&!vertexSource.Contains("productionElevation",StringComparison.Ordinal)&&vertexSource.Contains("planetary_physical_authority.glsl",StringComparison.Ordinal)&&fragmentSource.Contains("layout(set=0,binding=25) uniform sampler2DArray productionElevation",StringComparison.Ordinal)&&nativeSource.Contains("terrainBindings=%u",StringComparison.Ordinal)&&nativeSource.Contains("NOVACORE_PRODUCTION_BOOTSTRAP_DELAY_MS",StringComparison.Ordinal),"the complete global owner publishes synchronously before rendering, uses the canonical oracle for geometry, and retains terrain-v5 only as its presentation payload");
-    Check(fragmentSource.Contains("SampleLocalTerrainMaterial(samplingDirection)",StringComparison.Ordinal)&&
-          fragmentSource.Contains("if(localSample.resident)",StringComparison.Ordinal)&&
-          !fragmentSource.Contains("if(anchored&&localSample.resident)",StringComparison.Ordinal)&&
-          localSource.Contains("LocalTerrainCoverage",StringComparison.Ordinal),
-          "local-v2 material follows the same canonical body-fixed lookup for global and dynamic pixels and fades at incomplete sparse-footprint boundaries");
+    Check(fragmentSource.Contains("SurfaceMaterialBodyPosition(bodyCameraHigh,bodyCameraLow,-viewDirection)") &&
+          !fragmentSource.Contains("SampleLocalTerrainMaterial"),
+          "NCSM1 material follows the final physical receiver without retired local texture ownership");
 
     var floridaDirection=BodyFixedGeography.DirectionFromLatitudeLongitude(FloridaLaunchSite.Latitude*Math.PI/180d,FloridaLaunchSite.Longitude*Math.PI/180d);
     Check(RelaxedCubeSphereProjection.TryAddress(floridaDirection,out var floridaFace,out var floridaU,out var floridaV)&&floridaFace==CubeSphereFace.PositiveZ&&Math.Sqrt((RelaxedCubeSphereProjection.UnitDirection(floridaFace,floridaU,floridaV)-floridaDirection).LengthSquared)<2e-12,"Florida launch site maps to one exact canonical +Z relaxed-cube address");
@@ -3494,7 +3465,7 @@ static void ProductionCubeSphereGpuResidencyIntegrationTest()
 
     Check((uint)PlanetarySurfaceRendererMode.ProductionCubeSphere==2u&&(uint)NativePlanetarySurfaceMode.ProductionCubeSphere==2u,"managed production surface mode is the explicit ABI value 2");
     Check(scene.Contains("EarthProductionCubeV5.Version",StringComparison.Ordinal)&&scene.Contains("ProductionSurfaceRequested",StringComparison.Ordinal),"production scene submission explicitly selects terrain version 5");
-    Check(program.Contains("\"production\"=>PlanetarySurfaceRendererMode.ProductionCubeSphere",StringComparison.Ordinal)&&program.Contains("NativePlanetarySurfaceMode.ProductionCubeSphere",StringComparison.Ordinal),"dedicated production proof selection cannot silently fall through to mode 1");
+    Check(File.ReadAllText(Path.Combine(root,"samples","NovaCore.Triangle","SampleOptions.cs")).Contains("\"production\"=>PlanetarySurfaceRendererMode.ProductionCubeSphere",StringComparison.Ordinal)&&program.Contains("NativePlanetarySurfaceMode.ProductionCubeSphere",StringComparison.Ordinal),"dedicated production proof selection cannot silently fall through to mode 1");
     Check(projection.Contains("ProductionSpherifyD",StringComparison.Ordinal)&&terrain.Contains("void main()",StringComparison.Ordinal),"GPU geometry uses the accepted relaxed cube-sphere projection while production elevation arrives through native payload residency");
     Check(selector.Contains("ProductionQuartetResident",StringComparison.Ordinal)&&selector.Contains("ProductionRootsResident",StringComparison.Ordinal)&&selector.Contains("!productionRootsReady",StringComparison.Ordinal)&&selector.Contains("face<6u",StringComparison.Ordinal)&&selector.Contains("pendingChildren",StringComparison.Ordinal)&&selector.Contains("payloadCount",StringComparison.Ordinal),"GPU residency bootstraps one complete six-face root transaction and retains parents while complete child quartets prepare invisibly");
     Check(selector.Contains("production?uvec4(presentation.identity.xy,inputData.controls.zz)",StringComparison.Ordinal),"production cache identity uses stable body ID and terrain version rather than material/albedo identity");
@@ -3504,7 +3475,7 @@ static void ProductionCubeSphereGpuResidencyIntegrationTest()
     var vertex=File.ReadAllText(Path.Combine(shaderRoot,"planetary.vert"));
     Check(vertex.Contains("float temporalMorph=p.transitions.y==0u?1.0:clamp",StringComparison.Ordinal)&&vertex.Contains("surfaceMorph=temporalMorph",StringComparison.Ordinal)&&!vertex.Contains("DemandMorph",StringComparison.Ordinal)&&vertex.Contains("ConstrainedMorph(mask,p.transitions.w,p.transitions.z",StringComparison.Ordinal)&&vertex.Contains("/30.0",StringComparison.Ordinal),"production child geometry uses retained-parent/current endpoints with edge-compatible temporal morphing rather than spatially divergent per-patch demand morphing");
     Check(native.Contains("if(!productionSurface&&a.submission->planetaryPresentation.enabled&&a.submission->planetaryPresentation.regime==NC_PLANETARY_DISTANT_ONLY)",StringComparison.Ordinal),"production Earth roots remain available in the distant presentation regime");
-    Check(native.Contains("production?a.productionPlanetaryTerrainPipeline:a.planetaryTerrainPipeline",StringComparison.Ordinal)&&native.Contains("a.productionPlanetaryFillPipeline:a.productionPlanetaryPipeline",StringComparison.Ordinal),"mode 2 selects dedicated production compute and exact-raster global-fill graphics pipelines");
+    Check(native.Contains("production?a.productionPlanetaryTerrainPipeline:a.planetaryTerrainPipeline",StringComparison.Ordinal)&&native.Contains("a.productionPlanetaryPipeline",StringComparison.Ordinal),"bootstrap selects dedicated production compute and global graphics pipelines");
     Check(native.Contains("sizeof(GpuPlanetaryControl) == 204",StringComparison.Ordinal)&&native.Contains("offsetof(GpuPlanetaryControl, productionDemandSignature) == 124",StringComparison.Ordinal),"production demand signature ABI is fixed and bounded");
     Check(selector.Contains("outputData.values[25]==0u",StringComparison.Ordinal)&&selector.Contains("index<20u",StringComparison.Ordinal)&&selector.Contains("presentation.identity[index-15u]",StringComparison.Ordinal),"steady-state selector reuse requires complete residency and includes stable body identity");
     Check(parser.Contains("production cube payload digest mismatch",StringComparison.Ordinal)&&parser.Contains("production cube hierarchy is incomplete",StringComparison.Ordinal)&&parser.Contains("record.ordinal >= records_.size()",StringComparison.Ordinal),"native pack parser rejects corrupt, incomplete, duplicate, and out-of-range patch transactions");
@@ -3517,22 +3488,13 @@ static void ProductionCubeSphereGpuResidencyIntegrationTest()
     Check(!solar.Contains("PlanetaryEnvironment",StringComparison.Ordinal)&&!native.Contains("planetaryEnvironment",StringComparison.Ordinal)&&!File.Exists(Path.Combine(shaderRoot,"planetary_environment.frag")),"provisional environment presentation has no managed, native, or shader owner");
 
     Check(File.Exists(TerrainAssetRepository.ManifestPath(root,TerrainAssetCache.ProductionEarthAssetId))&&File.Exists(Path.Combine(root,"assets","earth","runtime","earth_elevation_8192x4096.r16")),"tracked terrain-v5 identity manifest and topology-neutral elevation oracle are retained while heavy runtime bytes resolve externally");
-    Check(fragment.Contains("bool anchored=(productionLayer&0x40000000u)!=0u",StringComparison.Ordinal)&&
-          !fragment.Contains("if(!anchored&&ProductionAnchoredOwnsDirection(unitDirection))discard",StringComparison.Ordinal)&&
-          native.Contains("VK_FORMAT_D32_SFLOAT_S8_UINT",StringComparison.Ordinal)&&
-          native.Contains("fillDepth.front.compareOp=VK_COMPARE_OP_EQUAL",StringComparison.Ordinal)&&
-          native.Contains("anchoredDepth.front.passOp=VK_STENCIL_OP_REPLACE",StringComparison.Ordinal)&&
-          native.IndexOf("vkCmdDrawIndexedIndirect(c,a.anchoredSurfaceIndirectBuffer",StringComparison.Ordinal)<native.IndexOf("a.productionPlanetaryFillPipeline:a.productionPlanetaryPipeline",StringComparison.Ordinal)&&
-          !native.Contains("dynamicNeedsGlobal",StringComparison.Ordinal),
-          "terrain-v5 remains the complete global fill while actual anchored raster samples transfer pixel ownership without analytic-boundary holes or visible overlap");
-    Check(native.Contains("ValidateAnchoredStitchTemplates",StringComparison.Ordinal)&&
-          native.Contains("doubleArea!=expectedDoubleArea",StringComparison.Ordinal)&&
-          native.Contains("draws[index]={AnchoredSurfaceBaseIndicesPerPatch,1u,firstIndex,0,index}",StringComparison.Ordinal)&&
-          native.Contains("command.vertexOffset!=0",StringComparison.Ordinal),
-          "all sixteen stitch templates prove bounded winding and exact patch area while every indirect command carries validated index, vertex, and patch-instance correspondence");
+    Check(fragment.Contains("bool anchored=(productionLayer&0x40000000u)!=0u",StringComparison.Ordinal) &&
+          !native.Contains("anchoredSurfaceIndirectBuffer",StringComparison.Ordinal) &&
+          !native.Contains("productionPlanetaryFillPipeline",StringComparison.Ordinal),
+          "physical NCSM1 shading has no alternate anchored draw or stencil-fill owner");
 
     var binaryRoot=Path.Combine(root,"build","native-ninja","shaders");
-    foreach(var shader in new[]{"planetary_production_terrain.comp.spv","anchored_terrain.vert.spv","planetary_production.frag.spv"})
+    foreach(var shader in new[]{"planetary_production_terrain.comp.spv","production_spherical_billboard.vert.spv","planetary_production.frag.spv"})
     {
         var path=Path.Combine(binaryRoot,shader);Check(File.Exists(path),$"compiled production SPIR-V exists: {shader}");
         if(shader.EndsWith("comp.spv",StringComparison.Ordinal))
@@ -4392,8 +4354,7 @@ static void LayoutTest()
     Check(Marshal.SizeOf<NativeRenderTransform>()==32&&Marshal.SizeOf<NativeRenderObject>()==80&&Marshal.OffsetOf<NativeRenderObject>(nameof(NativeRenderObject.Mesh)).ToInt32()==64,"render object layout");
     Check(Marshal.SizeOf<NativeDrawBatch>()==16,"draw batch stride");
     Check(Marshal.SizeOf<NativePlanetaryGpuConstants>()==96&&Marshal.SizeOf<NativePlanetaryPresentation>()==192&&Marshal.SizeOf<NativeSolarLighting>()==48,"planetary presentation layout");
-    Check(Marshal.SizeOf<NativeAnchoredSurfacePatch>()==80&&
-        Marshal.SizeOf<NativeAnchoredSurfacePresentation>()==144,"dynamic hierarchy descriptor and shared-frame ABI");
+
     Check(Marshal.SizeOf<NativeProductionBillboardPupilFrame>()==160&&
         Marshal.SizeOf<NativeProductionBillboardFrame>()==480&&
         Marshal.SizeOf<NativeFrameSubmission>()==800&&
@@ -4402,9 +4363,7 @@ static void LayoutTest()
         Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.PlanetaryPresentation)).ToInt32()==320&&
         Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.DistantBodies)).ToInt32()==512&&
         Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.SolarLighting)).ToInt32()==528&&
-        Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.AnchoredSurfacePatches)).ToInt32()==576&&
-        Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.AnchoredSurfacePatchCount)).ToInt32()==584&&
-        Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.AnchoredSurfacePresentation)).ToInt32()==624&&
+        Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.ReservedSurface)).ToInt32()==576&&
         Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.ProductionBillboard)).ToInt32()==768,
         "native frame ABI and dynamic hierarchy offsets");
     Check(Marshal.SizeOf<NativeInputState>()==84&&Marshal.OffsetOf<NativeInputState>(nameof(NativeInputState.PresentationFocus)).ToInt32()==72&&

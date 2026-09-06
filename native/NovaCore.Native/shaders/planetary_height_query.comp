@@ -151,8 +151,9 @@ void main()
     if(naturalCandidate)
     {
       natural=EvaluateNaturalCandidateD(direction);baseModifierHeight=natural.macro.height+natural.meso.height;
-      nearHeight=natural.nearField.height;dvec3 east0=PhysicalEastD(direction),north0=normalize(cross(direction,east0));
-      nearEastGradient=dot(natural.nearField.bodyGradient,east0);nearNorthGradient=dot(natural.nearField.bodyGradient,north0);
+      NaturalTerrainFieldSampleD supportedNear=EvaluateNaturalCandidateNearD(direction);
+      nearHeight=supportedNear.height;dvec3 east0=PhysicalEastD(direction),north0=normalize(cross(direction,east0));
+      nearEastGradient=dot(supportedNear.bodyGradient,east0);nearNorthGradient=dot(supportedNear.bodyGradient,north0);
       modifierHeights=dvec2(natural.macro.height,natural.meso.height);
     }
     else
@@ -162,7 +163,10 @@ void main()
       modifierHeights=dvec2(modifiers.tiledHeight,modifiers.erosionHeight);
     }
     modifierHeight=baseModifierHeight+nearHeight;
-    physical=max(0.0,max(0.0,base+baseModifierHeight)+nearHeight);
+    double naturalBase=max(0.0,base+baseModifierHeight);
+    physical=max(0.0,(naturalCandidate?FacilityBaseHeight(direction,naturalBase):naturalBase)+nearHeight);
+    if(naturalCandidate)modifierHeight=baseModifierHeight+natural.nearField.height+
+      physical-max(0.0,naturalBase+natural.nearField.height);
     dvec3 east=PhysicalEastD(direction),north=normalize(cross(direction,east));
     double angle=NOVACORE_NORMAL_SAMPLE_RADIUS/NOVACORE_EARTH_REFERENCE_RADIUS;
     dvec3 ld=normalize(direction-east*angle),rd=normalize(direction+east*angle);
@@ -179,9 +183,11 @@ void main()
     dvec3 left=ld*(NOVACORE_EARTH_REFERENCE_RADIUS+lh),right=rd*(NOVACORE_EARTH_REFERENCE_RADIUS+rh);
     dvec3 down=dd*(NOVACORE_EARTH_REFERENCE_RADIUS+dh),up=ud*(NOVACORE_EARTH_REFERENCE_RADIUS+uh);
     dvec3 baseNormal=normalize(cross(right-left,up-down));if(dot(baseNormal,direction)<0.0)baseNormal=-baseNormal;
+    if(naturalCandidate)baseNormal=FacilityBaseNormal(direction,naturalBase,baseNormal);
     preparedBaseNormal=vec3(baseNormal);
     double radialComponent=max(dot(baseNormal,direction),1e-9);
     double baseEastSlope=-dot(baseNormal,east)/radialComponent,baseNorthSlope=-dot(baseNormal,north)/radialComponent;
+    if(naturalCandidate)gradient=dvec2(baseEastSlope+nearEastGradient,baseNorthSlope+nearNorthGradient);
     dvec3 normal=normalize(direction-east*(baseEastSlope+nearEastGradient)-north*(baseNorthSlope+nearNorthGradient));
     physicalNormalAndWeight=vec4(vec3(normal),naturalCandidate?preparedBaseNormal.z:float(modifiers.geographicWeight));
   }

@@ -136,6 +136,8 @@ internal static unsafe class GpuPhysicalHeightPreparationTests
                     PlanetaryPhysicalSurfaceGeneration.M12DNaturalTerrainCandidate);
                 maximumHeightError = Math.Max(maximumHeightError,
                     Math.Abs(result.PhysicalHeightMetres - cpu.FinalHeightMetres));
+                Require(Math.Abs(result.ModifierHeightMetres-cpu.ModifierHeightMetres)<=2e-6d,
+                    "candidate modifier reporting includes canonical facility support");
                 maximumGradientError = Math.Max(maximumGradientError, Math.Max(
                     Math.Abs(result.EastGradient - cpu.EastGradient),
                     Math.Abs(result.NorthGradient - cpu.NorthGradient)));

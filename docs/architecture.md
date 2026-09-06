@@ -59,15 +59,20 @@ NCPE v2 remains the deterministic artifact contract for fixed and sampled celest
 `PlanetaryPresentationSnapshot` is the parallel immutable renderer input for evaluated celestial bodies. `PlanetaryBodyPresentationProvider` copies stable identity, root-resolved center, physical radius, color, and presentation label data from evaluated authority; graphics cannot mutate its celestial source. A separate immutable `PlanetMaterialCatalog` maps those stable identities to presentation-only material and optional ring records. Earth production uses the 18-level immutable NCSM1 New Earth Renderer scale-mesh library. Projected error and hysteresis select one persistent topology resource, while a camera-facing pupil snaps to exact lattice identity and reuses matching physical samples across movement. Every level and pupil evaluates the same canonical body-fixed `H(bodyDirection)`; topology density changes representation, never physical truth. One current and at most one incoming GPU generation exist. The incoming generation publishes atomically only after complete physical preparation, conservative visibility/compaction, indirect payload creation, GPU execution, and fence confirmation; a complete zero-visible generation is a valid sole owner and regenerates visible work on re-entry. Earth presentation authority is selected from body focus and eligibility, never inferred from resident Earth resources. Distant-body presentation, cheaper derived material classification, rings, labels, markers, and orbit paths remain presentation only. See [Current Engineering State](NOVACORE_CURRENT_STATE.md) for the accepted baseline and next work boundary.
 
 The banked P2S5G production Earth contract above applies to the New Earth route.
-The accepted production Earth entry is **New Earth Renderer**
-(`--scene=m12d-production-spherical-billboard`, generation 4 by default). Older
-Earth/Solar/Florida routes still retain anchored/global Earth rendering and
-generally select generation 3. Their divergence requires a compatibility and
-ownership decision; it does not establish another accepted production Earth
-authority. This normalization changes no route or retirement status.
+The **unbanked consolidated candidate** uses NCSM1 and generation 4 for all six
+supported Earth/Solar/Florida launcher routes, including **New Earth Renderer**.
+Scene, focus, altitude, camera and Florida initialization remain route-specific.
+Florida launcher-based manual acceptance **PASSED** before consolidation.
+The superseded dynamic anchored owner, stitch/coverage draw, local texture-demand
+transport and its investigation drivers have been retired. Generation-3 numerical
+oracles and independent development scenes remain outside production Earth routing.
+Terrain-v5 global bootstrap remains only until complete NCSM1 publication;
+non-Earth presentation remains independent. No banking is authorized by this work.
 
-Earth-route ownership/convergence is the next major architectural responsibility,
-not further P2S5G optimization.
+See [production consolidation](production-consolidation.md) for reachability, retained responsibilities and validation.
+
+
+Earth-route convergence has passed manual acceptance. Consolidation validation and website review precede banking; optimization remains separate.
 
 NovaCore spatial frames are right-handed. Canonical Earth body-fixed geography
 uses +Y at the north pole, +X at longitude zero, and -Z at +90 degrees east.
@@ -93,3 +98,5 @@ The current sample has one foreground application thread and uses one frame in f
 The camera path is managed: native Win32 input is mapped to a bounded `CameraCommand` span, managed controllers update frame-aware `CameraState`, and `CameraRenderSnapshotBuilder` converts it to `GpuCameraData`. Native code neither controls the camera nor resolves reference frames. Local scenes use a finite reversed-Z projection; Solar uses the corresponding infinite-far reversed form. The Solar presentation camera follows an explicit orientation-free `FocusTarget`. Body-center focus evaluates from the latest immutable body proxy. Approaching a focused body may acquire `SurfaceAnchorFocus` only from an actual camera-view-ray intersection with its physical/elevation surface; a missed ray retains the previous valid target and never fabricates a sub-camera anchor. The body-local anchor reevaluates through the current body quaternion, while the camera orientation and orbit offset remain root-inertial. Smooth acquisition/release hysteresis, logarithmic anchor-relative zoom, deterministic ENU tangent translation, and a ten-metre terrain-aware floor are presentation only. `SceneObject` is the explicit alternative target seam and is not required for surface-scale focus. The deterministic Solar Map home pose remains Sun-focused near the ecliptic normal. Focus distance and camera clearance never change the evaluated body center or physical radius. Comma/period arrive as rising-edge rate pulses and index one shared managed preset catalog; a packed preset/alpha field in the existing 48-byte Solar-lighting record lets the existing Solar label pipeline draw the transient speed notice without a new UI subsystem or an ABI-size increase.
 
 Current limitations include one window, one foreground application thread, no general image-asset pipeline, no `SimulationSnapshot`, no production multiple-scattering atmosphere/volumetric weather/physical ocean simulation, and no complete spacecraft or surface gameplay. Global physical source fidelity remains shallow outside installed regional data. Terrain material/presentation quality and finer pupil/re-triangulation morphing remain active work: a rare full pupil rebase can change the factor-1 triangulated approximation by about 2.595 m even while canonical body-fixed height and FP64 position remain invariant; the measured adjacent L14→L15 representation difference is about 2.8 mm. Atmosphere/cloud presentation is intentionally absent until a future production architecture is designed against this surface. Celestial analytical/sample authority is intentionally separate from future active-spacecraft force/torque and rigid-body authority. The renderer now has procedural deep space, a dedicated stellar Sun, evaluated-Sun planet lighting, shared procedural planet materials, generic ordered rings, Solar-lit distant bodies, the production spherical-billboard Earth path, orbit-line, label, marker, HDR scene-color, reversed-Z depth, and tone-map presentation paths.
+
+Unrelated retirement findings are tracked in [the subsequent debt ledger](repository-debt-retirement.md). Deferral is not permanent acceptance.

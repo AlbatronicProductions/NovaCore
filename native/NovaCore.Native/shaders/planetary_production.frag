@@ -1,18 +1,16 @@
 #version 460
 #extension GL_GOOGLE_include_directive : require
 #extension GL_ARB_gpu_shader_fp64 : require
-// Published anchored geometry is payload-complete. Run depth/stencil before
-// this shared material shader so terrain-v5 fill pixels already owned by the
-// anchored raster never execute the expensive fallback material path.
+// Depth tests precede material evaluation for the sole published physical owner.
 layout(early_fragment_tests) in;
-#define NOVACORE_LOCAL_TERRAIN_FRAGMENT
 #include "planet_material.glsl"
+#include "facility_light_occlusion.glsl"
 #include "production_cube_surface.glsl"
-#include "local_terrain.glsl"
 #include "physical_surface.glsl"
 #include "production_cube_filter.glsl"
 #include "production_earth_material.glsl"
 #include "production_terrain_material.glsl"
+#include "surface_material_coordinates.glsl"
 layout(location=0) in vec4 color;
 layout(location=1) in vec3 normal;
 layout(location=2) flat in vec3 lightDirection;
@@ -34,7 +32,6 @@ layout(set=0,binding=24) uniform sampler2DArray productionAlbedo;
 layout(set=0,binding=25) uniform sampler2DArray productionElevation;
 layout(set=0,binding=26) uniform sampler2DArray productionLand;
 layout(std430,set=0,binding=27) readonly buffer ProductionLayers { uint values[]; } productionLayers;
-layout(std430,set=0,binding=32) readonly buffer AnchoredCoverage { uvec4 control; uvec4 entries[]; } anchoredCoverage;
 layout(push_constant) uniform StellarLighting { vec4 sourceCenterExposure; vec4 sourceColorAmbient; vec4 radianceGlowEnabled; } lighting;
 layout(location=0) out vec4 outColor;
 
@@ -123,26 +120,6 @@ vec3 ProductionRaySphereDirection(vec3 fallbackDirection,float representedHeight
   return normalize(vec3(ProductionRaySpherePosition(fallbackDirection,representedHeight,radiusMetres)));
 }
 
-bool ProductionAnchoredOwnsDirection(vec3 unitDirection)
-{
-  if(anchoredCoverage.control.x==0u||anchoredCoverage.control.w==0u)return false;
-  uint face;vec2 uv;ProductionDirectionAddress(normalize(unitDirection),face,uv);
-  for(int signedLevel=int(anchoredCoverage.control.y);signedLevel>=0;signedLevel--)
-  {
-    uint level=uint(signedLevel),cells=1u<<level;
-    uvec2 coordinate=min(uvec2(floor(uv*float(cells))),uvec2(cells-1u));
-    uint key=0x80000000u|face|(level<<3u),slot=(key*0x9e3779b9u^coordinate.x*0x85ebca6bu^coordinate.y*0xc2b2ae35u);
-    slot^=slot>>16u;slot&=anchoredCoverage.control.w-1u;
-    for(uint probe=0u;probe<anchoredCoverage.control.w;probe++,slot=(slot+1u)&(anchoredCoverage.control.w-1u))
-    {
-      uvec4 entry=anchoredCoverage.entries[slot];
-      if(entry.x==0u)break;
-      if(entry.x==key&&entry.y==coordinate.x&&entry.z==coordinate.y&&entry.w==anchoredCoverage.control.z)return true;
-    }
-  }
-  return false;
-}
-
 uint ResolveProductionFragmentLayerAtOrBelow(vec3 unitDirection,uint requestedLevel,out vec2 localUv,out uvec4 address)
 {
   // A rendered triangle is not physical addressing authority. Anchored
@@ -176,12 +153,7 @@ uint ResolveProductionFragmentLayer(vec3 unitDirection,out vec2 localUv,out uvec
 void main()
 {
   bool anchored=(productionLayer&0x40000000u)!=0u;
-  // Published patch identities remain the transactional geographic authority,
-  // but pixel ownership is resolved by the rasterizer.  The anchored pass
-  // writes stencil for the samples it actually covers and the complete
-  // terrain-v5 parent subsequently fills stencil zero.  Discarding the parent
-  // from an independently reconstructed direction created grazing-angle teeth
-  // wherever that analytic boundary differed from the piecewise-linear mesh.
+  // NCSM1 and startup terrain-v5 are mutually exclusive publication owners.
   vec3 unitDirection=normalize(bodyDirection);
   uint diagnostic=floatBitsToUint(lighting.radianceGlowEnabled.w)>>16;
   // Ownership visualization is purely topological. Keep it ahead of physical
@@ -248,51 +220,13 @@ void main()
     }
   }
   float globalHeight=max(0.0,visible.elevation);
-  float baseHeight=max(0.0,visible.elevation+LocalTerrainElevationResidual(samplingDirection));
+  float baseHeight=max(0.0,visible.elevation);
   // Geometry/TES has already produced physical height and position. Fragment
   // presentation must not reconstruct modifiers; it consumes the geographic
   // base height only for its independent FP32 material classification.
   ProductionTerrainWeights presentationWeights=EvaluatePresentationBiomeWeightsF(samplingDirection,baseHeight,visible.land);
   float sampledHeight=max(0.0,terrainHeight);
   vec3 sampledAlbedo=visible.albedo;
-  LocalTerrainMaterialSample localSample;
-  localSample=SampleLocalTerrainMaterial(samplingDirection);
-  if(diagnostic==32770u)
-  {
-    float value=clamp((baseHeight+100.0)/200.0,0.0,1.0);
-    outColor=vec4(vec3(value),1.0);return;
-  }
-  if(diagnostic==32784u)
-  {
-    float residual=LocalTerrainElevationResidual(samplingDirection);
-    float value=clamp(.5+residual/128.0,0.0,1.0);
-    outColor=vec4(value,.25,1.0-value,1.0);return;
-  }
-  if(diagnostic==32800u||diagnostic==33040u)
-  {
-    float control=localSample.resident?localSample.controlClass:0.0;
-    vec3 color=control==0.0?vec3(0,.12,.3):
-      control==1.0?vec3(.1,.65,.8):control==2.0?vec3(.85,.72,.35):
-      control==3.0?vec3(.2,.5,.3):control==4.0?vec3(.2,.72,.16):
-      control==5.0?vec3(.55,.72,.24):control==6.0?vec3(.08,.36,.08):
-      control==7.0?vec3(.55,.55,.58):vec3(1.0,.55,.08);
-    if(diagnostic==33040u)color=mix(color,vec3(localSample.controlClass/8.0),.35);
-    outColor=vec4(color,1.0);return;
-  }
-  if(diagnostic==33296u)
-  {
-    float levelValue=localSample.resident?float(localSample.level-8u)/3.0:0.0;
-    outColor=localSample.resident?vec4(levelValue,localSample.weight,1.0-levelValue,1.0):vec4(.5,0,.5,1);return;
-  }
-  if(diagnostic==32832u)
-  {
-    outColor=vec4(1.0-localSample.weight,localSample.weight,0.0,1.0);return;
-  }
-  if(diagnostic==32896u)
-  {
-    float boundary=localSample.resident?1.0-localSample.weight:1.0;
-    outColor=vec4(boundary,localSample.weight,0.0,1.0);return;
-  }
   if((diagnostic&32768u)!=0u)
   {
     // Physical diagnostics retain the complete FP64 evaluator, outside the
@@ -313,26 +247,16 @@ void main()
     float nearValue=clamp(.5+float(modifierEvaluation.nearHeight)/(2.0*float(NOVACORE_NEAR_AMPLITUDE)),0.0,1.0);
     outColor=vec4(nearValue,.2,1.0-nearValue,1);return;
   }
-  // Geometry producers may provide a useful construction normal, but it is
-  // never lighting authority. Reconstruct the same physical differential
-  // after the rendered elevation transaction for global and anchored
-  // ownership alike so mesh-tier changes cannot expose interpolated facets.
+  // Complete physical terrain owns its material receiver. The legacy radial
+  // shell exists only for the bootstrap/global compatibility representation;
+  // re-intersecting it for NCSM1 slides material identity with the camera and
+  // evaluates filtering/normal derivatives on a surface that was never drawn.
   float landWeight=smoothstep(.45,.55,visible.land);
   float representedHeight=mix(0.0,visible.elevation,landWeight);
-  // Resolve one final-pixel body-fixed surface point for every geometry owner.
-  // The former material coordinate used each owner's interpolated mesh point:
-  // coarse global chord positions and fine dynamic positions therefore sampled
-  // different procedural fields at the same canonical pixel.  The represented
-  // radial shell is already the payload/height authority, so retain its FP64
-  // ray intersection and derive both material identity and smooth derivatives
-  // from that shared point instead of from renderer topology.
-  dvec3 bodyMetres=ProductionRaySpherePosition(samplingDirection,representedHeight,bodyRadiusMetres);
+  dvec3 bodyMetres=anchored
+    ?SurfaceMaterialBodyPosition(bodyCameraHigh,bodyCameraLow,-viewDirection)
+    :ProductionRaySpherePosition(samplingDirection,representedHeight,bodyRadiusMetres);
   vec3 analyticSphere=normalize(vec3(bodyMetres));
-  // Both complete global and refined anchored vertices now derive from the
-  // same canonical prepared height field.  Their construction normals may be
-  // sampled at different geometry densities, as in the reference preparation
-  // model, but no fragment path reconstructs a second terrain-v5 physical
-  // surface or normal authority.
   vec3 physical=normalize(normal);
   if((diagnostic&8192u)!=0u){outColor=vec4(normalize(mix(unitDirection,physical,smoothstep(.45,.55,visible.land)))*.5+.5,1.0);return;}
   // The terrain payload contains bathymetry, not an implemented water
@@ -340,10 +264,6 @@ void main()
   // level normal and blend continuously through the land mask so quantized
   // sub-sea elevation cannot become high-frequency specular noise.
   surfaceNormal=normalize(mix(analyticSphere,physical,landWeight));
-  if(localSample.resident)sampledAlbedo=mix(sampledAlbedo,localSample.albedo,localSample.weight);
-  // The stored regional BC5 field is a payload/diagnostic channel.  Lighting
-  // authority is the normal generated from the final composed displaced
-  // surface above; applying BC5 here would count the regional slope twice.
   ProductionEarthMaterial earth=ProductionEarthSurfaceMaterial(
     sampledAlbedo,
     visible.land,
@@ -351,7 +271,7 @@ void main()
     response);
   float surfaceAltitude=max(length(bodyCameraHigh+bodyCameraLow)-bodyRadius,0.0);
   dvec3 cameraBodyMetres=dvec3(bodyCameraHigh)+dvec3(bodyCameraLow);
-  vec3 differentialMetres=vec3(bodyMetres-cameraBodyMetres);
+  vec3 differentialMetres=anchored?-viewDirection:vec3(bodyMetres-cameraBodyMetres);
   if((diagnostic&130u)==130u)
   {
     float footprint=TerrainWorldFootprintMetres(differentialMetres);
@@ -368,7 +288,7 @@ void main()
     bodyMetres,
     differentialMetres,
     surfaceAltitude,
-    localSample.resident?localSample.controlClass:-1.0,
+    -1.0,
     presentationWeights);
   earth.albedo=terrainMaterial.albedo;
   earth.roughness=mix(earth.roughness,terrainMaterial.roughness,terrainMaterial.detailWeight);
@@ -397,5 +317,8 @@ void main()
   if((diagnostic&512u)!=0u){float diffuse=max(dot(normalize(surfaceNormal),normalize(lightDirection)),0.0);outColor=vec4(earth.albedo*mix(ambient,1.0,diffuse),1.0);return;}
   if((diagnostic&1024u)!=0u)earth.specular=0.0;
   vec3 lit=PlanetLighting(earth.albedo,surfaceNormal,lightDirection,viewDirection,earth.roughness,earth.specular,response.z*terrainMaterial.ambientOcclusion,ambient);
+  uint facilityTests;bool facilityEntered;
+  float facilitySunVisibility=AuthoredFacilitySunVisibility(-viewDirection,lightDirection,facilityTests,facilityEntered);
+  lit=FacilityVisibleLighting(lit,earth.albedo,ambient,response.z*terrainMaterial.ambientOcclusion,facilitySunVisibility);
   outColor=vec4(lit,1.0);
 }
