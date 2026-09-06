@@ -1,5 +1,8 @@
 # Precision Model
 
+The public `RelativePosition` value contract and its distinction from contextual
+positions are defined in the [API contract policy](public-api-contracts.md#camera-and-position-semantics).
+
 Authoritative spatial values use `Double3` and double-precision quaternions. `FramePosition` is the contextual authoritative position representation. It resolves through a managed immutable `ReferenceFrameSnapshot` to a root/ECL `UniversePosition` before entering Graphics.
 
 `UniversePosition` contains a root-space `Double3` and root `ReferenceFrameId`. The authoritative camera resolves through `CameraRenderSnapshotBuilder` to root/ECL position and orientation. Simulation position authority, focus position authority, camera orientation authority, and render-space authority are separate: none may implicitly rewrite or inherit another.

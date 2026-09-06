@@ -52,13 +52,15 @@ Simulation        -> Core, EphemerisFormat
   CPU/GPU parity protects the single generation-4 height contract; it does not make
   a second simulation timeline or celestial authority.
 - **Platform:** consumed log categories/options. Its empty public `RuntimeHost`
-  placeholder is not the actual window owner; public-surface retirement is separate.
+  placeholder is not the actual window owner; its explicit unresolved retirement
+  condition is in the [API contract policy](public-api-contracts.md#runtimehost-bounded-unresolved-decision).
 
 `PlanetarySphericalBillboardNaturalTerrainProof` has both proof orchestration and
 `PrepareProductionIncremental`, used by the moving-runtime preparation seam.
 Do not classify a public helper as obsolete from “Proof” in its name. The native
 GPU production path and independent managed/query reference path must remain
-distinguishable; renaming/extraction requires a bounded API/caller review.
+distinguishable. The [API contract policy](public-api-contracts.md#proofpreparation-ownership)
+defines the retained developer surface and the gate for any public rename/extraction.
 
 ## Asset families — one production topology owner
 

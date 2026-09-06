@@ -1,5 +1,8 @@
 # Free Camera
 
+Public axis-helper support and exact conventions are defined in the
+[API contract policy](public-api-contracts.md#camera-and-position-semantics).
+
 Milestone 5 implements a managed, frame-aware Free camera. `CameraState` is authoritative: it stores `FramePosition`, a normalized double-precision XYZW Hamilton orientation quaternion, projection parameters, and camera mode. Native code supplies only `NativeInputState`; it does not mutate camera state, create camera commands, or resolve reference frames.
 
 The input and render path is:

@@ -3,7 +3,10 @@
 Historical audit snapshot: the subsequently authorized
 [tiny-local/internal-authoring migration](tiny-local-internal-authoring-migration.md)
 implements the bounded internal follow-up. The measurements and matrix below
-remain the original pre-migration evidence; public compatibility decisions remain open.
+remain the original pre-migration evidence. The subsequent
+[public API contract decisions](public-api-contracts.md) define support for the
+in-scope public surfaces; other unresolved format contracts retain their existing
+boundaries. The matrix below is preserved as the original audit snapshot.
 
 **PARTIAL RESOLUTION — PROJECT CONTROL DECISION REQUIRED.**
 
