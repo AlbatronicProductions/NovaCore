@@ -51,9 +51,9 @@ Simulation        -> Core, EphemerisFormat
   topology generation/loading, pupil/publication coordination and presentation.
   CPU/GPU parity protects the single generation-4 height contract; it does not make
   a second simulation timeline or celestial authority.
-- **Platform:** consumed log categories/options. Its empty public `RuntimeHost`
-  placeholder is not the actual window owner; its explicit unresolved retirement
-  condition is in the [API contract policy](public-api-contracts.md#runtimehost-bounded-unresolved-decision).
+- **Platform:** consumed log categories/options. The empty `RuntimeHost` scaffold
+  is retired under the [API contract decision](public-api-contracts.md#runtimehost-retired);
+  actual startup/window ownership remains in the sample/native boundary.
 
 `PlanetarySphericalBillboardNaturalTerrainProof` has both proof orchestration and
 `PrepareProductionIncremental`, used by the moving-runtime preparation seam.

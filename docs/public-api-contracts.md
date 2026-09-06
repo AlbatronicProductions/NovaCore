@@ -44,7 +44,7 @@ measured implementation from unknown external consumption.
 | CAM-2 | `CameraMath.Up(in DoubleQuaternion)` | Public static, Core | No call site found outside declaration | Source/DLL camera tooling | `q.Rotate(Double3.UnitY)` | Camera guide; this contract | KEEP — SUPPORTED axis helper | Same as CAM-1 | Same as CAM-1 | High semantics; unknown external count |
 | CAM-3 | `CameraMath.Forward(in DoubleQuaternion)` | Public static, Core | No call site found outside declaration | Source/DLL camera tooling | `q.Rotate(-Double3.UnitZ)` | Camera guide; this contract | KEEP — SUPPORTED axis helper | Preserve local negative-Z convention | Same as CAM-1 | High semantics; unknown external count |
 | POS-1 | `RelativePosition(Double3 Value)` | Public readonly record struct, Core | No call site found outside declaration | Typed FP64 displacement values, record equality/deconstruction | `Double3` for a plain offset; frame-aware types for contextual positions | Precision guide; this contract | KEEP — SUPPORTED value abstraction | Optional `.Value`; retain origin/frame/units at caller; no blind absolute-position substitution | A separately justified value/coordinate contract migration | High representation; external coordinate meanings unknown |
-| HOST-1 | `RuntimeHost` | Public empty static class, Platform | None found; no sample/test use or documented facade | Compiled/source `typeof`/reflection/alias references remain possible | No facade equivalent; existing sample/native owners provide actual startup | Repository map; this contract | UNKNOWN — UNRESOLVED EXTERNAL CONTRACT; proposed scaffold retirement | Stop new references; remove identity-only references after consumer review; select a real startup API by responsibility | Explicit decision that the exposed empty type has no supported identity obligation, or identified consumers migrated | High empty/scaffold history; insufficient retirement entitlement |
+| HOST-1 | `RuntimeHost` | Formerly public empty static class, Platform; removed | None; no sample/test use or documented facade | Theoretical identity-only uses; no actual downstream consumer identified | No replacement type; existing sample/native owners provide actual startup | Repository map; this contract | RETIRED — HISTORICAL ONLY | Remove any identity-only reference; choose actual startup APIs by responsibility, not a substitute placeholder | Satisfied by RuntimeHost resolution: no workflow/purpose/publication contract, always-empty scaffold, theoretical risk only | High reasonable engineering entitlement; not an absolute external-consumer census |
 | PREP-1 | `PlanetarySphericalBillboardNaturalTerrainProof.Run` and report/level-result records | Public, Graphics | Triangle natural-terrain proof branch; NaturalTerrainTests | Developer GPU parity/proof runner | Existing explicit proof route | Planetary rendering/history; this contract | KEEP — SUPPORTED development proof | None; retain public name reflecting actual proof responsibility | Equivalent proof API plus external migration before rename/removal | High |
 | PREP-2 | `PrepareProduction` | Public, Graphics | Forwards to incremental preparation with a fresh cache; no other local direct caller found | Developer one-shot physical preparation | `PrepareProductionIncremental` with fresh cache | This contract; XML summary | KEEP — SUPPORTED convenience entry point | Optional explicit cache; do not imply production NCSM1 ownership | Public preparation migration with equivalent inputs/results | High semantics; external usage unknown |
 | PREP-3 | `PrepareProductionIncremental` | Public, Graphics | Two moving-runtime constructor delegates; two direct regression calls | Developer/reference preparation and reuse | Same current entry point; native NCSM1 path is not an API-compatible replacement | Repository map; this contract | KEEP — SUPPORTED development/reference preparation | No rename now; future extraction needs an explicit compatible transition | Preserve callers, query/cache/result behavior and declare public migration | High |
@@ -102,24 +102,62 @@ an externally meaningful displacement. Supporting this value type does not make
 it a second frame resolver or renderer precision owner. No direct local/sample/test
 uses were found; the precision responsibility itself is current and distinct.
 
-## RuntimeHost: bounded unresolved decision
+## RuntimeHost: retired
 
-[RuntimeHost.cs](../src/NovaCore.Platform/RuntimeHost.cs) contains only an empty
-public static type. Its only file-history commit is Milestone 1,
-`12d3d83695a086f0960b28860e7685153b90fb4a`; that commit already described startup
-through the managed sample/native seam, not through this type. No repository
-caller, test, reflection string, facade documentation or promised future role was
-found. No functioning hosting API is provided, and no future implementation is
-invented to justify retention. Platform logging has separate current consumers.
+**RETIRE / RETIRED — HISTORICAL ONLY.** The RuntimeHost resolution applies the
+explicit reasonable-engineering-entitlement rule: theoretical identity risk alone
+does not establish a supported compatibility obligation. This supersedes HOST-1's
+earlier unresolved decision without changing any other API decision in this document.
 
-Retirement is recommended, but this package retains the type because published
-source and built DLLs expose its identity. Absence of local callers and package
-listings does not prove entitlement to break identity-only consumers. The missing
-evidence is an explicit supported-surface decision for this exposed placeholder,
-or a downstream source/DLL consumer review resolving those references. This is
-the sole unresolved in-scope retirement decision. Do not create new RuntimeHost
-dependencies while it is unresolved; do not substitute an unrelated type merely
-to keep a `typeof` expression compiling.
+Before removal, `src/NovaCore.Platform/RuntimeHost.cs` declared only
+`public static class RuntimeHost { }` in `NovaCore.Platform`. Reflection on the
+existing Release `NovaCore.Platform.dll` confirmed a public, abstract/sealed type:
+zero constructors, declared members, interfaces and attributes; no type initializer.
+There was no XML documentation. Its only file-history commit is Milestone 1,
+`12d3d83695a086f0960b28860e7685153b90fb4a`; it remained empty throughout subsequent
+history. That milestone called Platform a future managed-host placeholder while
+assigning actual startup to Triangle and native Win32/Vulkan. No implemented facade
+or subsequent supported RuntimeHost workflow followed. Platform now has real,
+separate logging consumers; its assembly/project remains.
+
+Tracked repository searches and generated-code/config/XML/script searches found
+no production, test, tool, sample, reflection-string, serialization, DI, plugin or
+interop consumer. The declaration was the only non-document reference. Existing
+contract/map references describe the audit decision; the two structure-evidence
+references remain historical observations, not active consumers.
+
+Live publication checks on 2026-09-06 found a public repository, no GitHub releases,
+zero retained GitHub Actions artifacts and a 404 for the exact `NovaCore.Platform`
+NuGet flat-container ID. Inspected package/workflow history has no formal SDK or
+package-publication contract. Public Git source and locally built/deployed DLLs
+did expose the identity; absence of listings does not disprove private feeds,
+copied DLLs or source downloads. No actual downstream identity consumer, promised
+facade or supported publication obligation was identified.
+
+Removal can break hypothetical source aliases/`typeof` references, binary type
+resolution, reflection by full name, assembly-scanning expectations or serialized
+type names. A static type had no instance constructor or behavioral DI/plugin
+contract. These are theoretical risks, not evidence of a supported consumer.
+The always-empty history, absent supported workflow and explicit decision rule
+justify retirement rather than indefinite retention. Internalization is unjustified
+because no internal caller needs the type. No replacement or future facade is added.
+
+RuntimeHost resolution baseline: initially clean `main`; HEAD, `origin/main` and
+live remote main `74364dfda880e11e04074240df9c90bcd1f410c0`, the banked public API
+contract package. P2S5H still targets `32ffac50ab5c06518ede24edfb5c531976d4ec99`.
+The source removal and direct contract/map updates are an unbanked candidate.
+Existing logging tests and both solution builds validate retained Platform usage;
+no dedicated RuntimeHost test exists or needs to be preserved.
+
+Resolution validation: full Debug and Release solution builds passed with zero
+warnings/errors, including samples/tools. Precision.Tests passed in both
+configurations, including retained logging-option behavior. Reflection on rebuilt
+Platform assemblies confirms RuntimeHost absent and only `LogCategory`/`LogOptions`
+exported; all three deployed copies per configuration match their source binary
+SHA-256. Repository/generated-code searches now find only current decision docs
+and historical evidence. Document links/anchors and `git diff --check` pass.
+No other contract-matrix row changed; no runtime dependency appeared, so no
+Graphics/Florida gate was reopened. Nothing staged, committed, pushed or tagged.
 
 ## Proof/preparation ownership
 
@@ -145,13 +183,15 @@ type would be a compatibility migration, not an internal rename. Retain current
 entry points; a later justified extraction must describe its replacement and
 forwarding/removal policy instead of adding an unplanned duplicate API today.
 
-## Decision evidence — 2026-09-06 snapshot
+## Original decision evidence — 2026-09-06 snapshot
 
 Initially clean `main`; HEAD, `origin/main` and live remote main:
 `a0595b31a90ed2b705b86255d7eaffb2477e18a9`. Prior debt packages, including structure
 and Graphics, are banked. P2S5H remains
 `32ffac50ab5c06518ede24edfb5c531976d4ec99` through
-`m12d-p2s5h-earth-route-convergence`. This documentation package is unbanked.
+`m12d-p2s5h-earth-route-convergence`. That documentation package was subsequently
+banked at `74364dfda880e11e04074240df9c90bcd1f410c0`; the RuntimeHost resolution
+above records the later, separately authorized retirement decision.
 
 Current tracked source, sample/test callers, project metadata and file history
 were inspected. The four relevant Release DLLs exist. CameraMath and
@@ -181,15 +221,14 @@ historical evidence in the compatibility audit, not newly queried Discord data.
 | Game save/API consumers belong to KSA's own distribution | NovaCore public source/DLL consumers | INTENTIONALLY DIFFER: KSA history cannot authorize removing NovaCore APIs or prove no consumers |
 
 No equivalent KSA contract for these exact helpers/NCPE was established. No KSA
-source or assets were copied. This package changes documentation only: supported
-behavior and existing tests remain intact; no build/GPU/manual acceptance result
-is newly claimed. Validation is Markdown path/anchor checks and `git diff --check`.
-No temporary capture/artifact package is generated. No staging, commits, pushes,
-tags, public API removals or P2S5H movement.
+source or assets were copied. That original package changed documentation only:
+supported behavior and existing tests remained intact; no build/GPU/manual
+acceptance result was claimed. Validation used Markdown path/anchor checks and
+`git diff --check`. No temporary capture/artifact package or API removal occurred.
 
-Closeout: all 32 checked relative document paths/anchors resolve; all 13 matrix
-rows have the required columns; `git diff --check` passes. Only seven Markdown
-files change. Builds/tests are not required for this documentation-only package.
-**PARTIAL PUBLIC CONTRACT RESOLUTION — FOLLOW-UP REQUIRED:** HOST-1 remains the
-specific external-contract decision; all other in-scope surfaces have defined
-support without implementation or API changes.
+Historical closeout: all 32 checked relative document paths/anchors resolved;
+all 13 matrix rows had the required columns; `git diff --check` passed. Seven
+Markdown files changed; no builds/tests were required. The original classification
+was **PARTIAL PUBLIC CONTRACT RESOLUTION — FOLLOW-UP REQUIRED**, with HOST-1
+unresolved at that time. Its later resolution is recorded above; other surface
+decisions remain unchanged.
