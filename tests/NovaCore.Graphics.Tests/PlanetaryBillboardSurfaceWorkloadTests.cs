@@ -16,6 +16,7 @@ internal static class PlanetaryBillboardSurfaceWorkloadTests
         var evaluationIn = Interface(Path.Combine(compiled, "production_spherical_billboard.tese.spv"), 1);
         var evaluationOut = Interface(Path.Combine(compiled, "production_spherical_billboard.tese.spv"), 3);
         var fragmentIn = Interface(Path.Combine(compiled, "planetary_production.frag.spv"), 1);
+        VerifyAddressSpecialization(Path.Combine(compiled, "production_spherical_billboard.tese.spv"));
 
         Match(vertex, controlIn, "vertex/control");
         Match(controlOut, evaluationIn, "control/evaluation");
@@ -67,6 +68,57 @@ internal static class PlanetaryBillboardSurfaceWorkloadTests
             "fixed-time benchmarking uses the normal pause input and is excluded from full physical traversal");
         Console.WriteLine("P2S5G compiled surface interface: VS=16 scalars; TCS=13 scalars/control point; " +
             "32 redundant TCS scalars removed; fragment inputs=16; frame/body provenance preserved");
+    }
+
+    private static void VerifyAddressSpecialization(string shader)
+    {
+        // Exercise the compiled specialization, including its negative boundary:
+        // ordinary code must lose the inverse function; diagnostics must retain it.
+        var sdk = Environment.GetEnvironmentVariable("VULKAN_SDK") ??
+            throw new InvalidOperationException("VULKAN_SDK is required for compiled shader regression.");
+        var temporary = Path.Combine(Path.GetTempPath(), "novacore-tes-specialization-" + Guid.NewGuid());
+        Directory.CreateDirectory(temporary);
+        try
+        {
+            string Disassemble(string path, string label)
+            {
+                var textPath = Path.Combine(temporary, label + ".txt");
+                RunTool("spirv-dis.exe", path, "-o", textPath);
+                return File.ReadAllText(textPath);
+            }
+            void RunTool(string tool, params string[] arguments)
+            {
+                var start = new System.Diagnostics.ProcessStartInfo(Path.Combine(sdk, "Bin", tool))
+                { UseShellExecute = false, CreateNoWindow = true, RedirectStandardOutput = true, RedirectStandardError = true };
+                foreach (var argument in arguments) start.ArgumentList.Add(argument);
+                using var process = System.Diagnostics.Process.Start(start)!;
+                var stdout = process.StandardOutput.ReadToEndAsync();
+                var stderr = process.StandardError.ReadToEndAsync();
+                process.WaitForExit();
+                Require(process.ExitCode == 0, tool + ": " + stdout.Result + stderr.Result);
+            }
+            var original = Disassemble(shader, "original");
+            var identity = Regex.Match(original, @"OpDecorate\s+(%\S+)\s+SpecId\s+0\b");
+            Require(identity.Success && Regex.IsMatch(original,
+                Regex.Escape(identity.Groups[1].Value) + @"\s*=\s*OpSpecConstantFalse\b"),
+                "deployed TES address specialization ID 0 defaults to ordinary production");
+            foreach (var diagnostic in new[] { false, true })
+            {
+                var path = Path.Combine(temporary, diagnostic ? "diagnostic.spv" : "ordinary.spv");
+                RunTool("spirv-opt.exe", shader, "--set-spec-const-default-value", diagnostic ? "0:true" : "0:false",
+                    "--freeze-spec-const", "--fold-spec-const-op-composite", "--eliminate-dead-branches",
+                    "--eliminate-dead-functions", "-o", path);
+                var assembly = Disassemble(path, diagnostic ? "diagnostic" : "ordinary");
+                Require(assembly.Contains("ProductionDirectionAddressD", StringComparison.Ordinal) == diagnostic,
+                    "inverse geographic solve survives specialization only for owner/seam diagnostics");
+            }
+            Console.WriteLine("TES geographic specialization PASS: default=false; ordinary inverse absent; diagnostic inverse retained");
+        }
+        finally
+        {
+            foreach (var file in Directory.GetFiles(temporary)) File.Delete(file);
+            Directory.Delete(temporary);
+        }
     }
 
     // Reflect actual compiled SPIR-V rather than counting source declarations.

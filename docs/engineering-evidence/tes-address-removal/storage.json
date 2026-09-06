@@ -1,0 +1,20 @@
+{
+  "budgetBytes": 1048576,
+  "measurementScope": "Logical generated files and final retained package; excludes cumulative runtime copies, compiler overwrites and in-memory stdout. Not a full workspace allocated-byte audit.",
+  "rawReadbackBytesCreated": 1655960192,
+  "rawReadbackBytesRemoved": 1655960192,
+  "newPersistentTemporaryBytes": 2321625,
+  "priorTemporaryBytes": 4633924,
+  "permanentEvidenceBytes": 634565,
+  "diagnosticBytesCreated": 1658916382,
+  "disposableBytesRemoved": 1655960192,
+  "persistentFilesRemoved": 0,
+  "disposableBytesRemaining": 6955549,
+  "disposableFilesRemaining": 112,
+  "retainedPreviousEvidenceBytes": 672442,
+  "cleanupResult": "Automatic approval review rejected reviewed file-only deletion before execution: blocked by policy; no more specific reason; not retried.",
+  "priorInventory": "prior-temporary-inventory.json",
+  "currentInventory": "current-temporary-inventory.json",
+  "postAttemptSmokeFrames": 120,
+  "postAttemptSmoke": "PASS"
+}

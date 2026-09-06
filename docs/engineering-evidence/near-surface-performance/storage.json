@@ -1,0 +1,217 @@
+{
+  "budgetBytes": 1048576,
+  "retentionAuthority": "User requested bounded report and reproduction method for Project Control review; no banking authorized",
+  "startingInheritedLogBytes": 4061599,
+  "newIntermediateResultBytes": 563471,
+  "newInMemoryNormalizedLogBytes": 12902742,
+  "transientRuntimeCopies": "Each run copied an isolated runtime and shaders, hard-linked read-only Earth oracle, then removed that directory. Cumulative transient copy allocation was not metered.",
+  "preserved": "Production source, 49 deployed shaders, runtime assets/cache, regression fixtures, all unrelated evidence",
+  "remainingDisposableBytes": 4633924,
+  "pendingRetirementFiles": [
+    {
+      "path": "build/near-surface-performance/A-geometry.json",
+      "bytes": 23638,
+      "sha256": "8770556167e24eb560766afa60bdab8d5c9192c4df543c157047365199720f85",
+      "reason": "Summarized fixed-pose log/result; regenerate with retained runner"
+    },
+    {
+      "path": "build/near-surface-performance/A-normal.json",
+      "bytes": 23054,
+      "sha256": "cf2e85e6c8c1defdecc7b7f425eadf059271addfb62ccd8e6f45c17e36ba254f",
+      "reason": "Summarized fixed-pose log/result; regenerate with retained runner"
+    },
+    {
+      "path": "build/near-surface-performance/B-counters-off.json",
+      "bytes": 23141,
+      "sha256": "4984591d9ecdc150cdb8b5f25b5e30efe50a213f3f2e14f0d57797aeae476a81",
+      "reason": "Summarized fixed-pose log/result; regenerate with retained runner"
+    },
+    {
+      "path": "build/near-surface-performance/B-geometry.json",
+      "bytes": 23798,
+      "sha256": "705162db4cee4ba6ec1de3a993472711666e9b7fe0adcf445668ad18b729808d",
+      "reason": "Summarized fixed-pose log/result; regenerate with retained runner"
+    },
+    {
+      "path": "build/near-surface-performance/B-minimal-tcs.json",
+      "bytes": 23530,
+      "sha256": "31985963ba48f439cab1cf262f68f1e4a02106ad97bf97ebe2721360356381d1",
+      "reason": "Summarized fixed-pose log/result; regenerate with retained runner"
+    },
+    {
+      "path": "build/near-surface-performance/B-no-address-1.json",
+      "bytes": 23445,
+      "sha256": "a2c00cf7f4baef37b51c5e15f4d252b0bc6df0e7c325024b0384091339cd14d6",
+      "reason": "Summarized fixed-pose log/result; regenerate with retained runner"
+    },
+    {
+      "path": "build/near-surface-performance/B-no-address-repeat.json",
+      "bytes": 23431,
+      "sha256": "4d0a99df65ad10f66dade0162be6de777c273d3125b2258107d6371bb929e0e1",
+      "reason": "Summarized fixed-pose log/result; regenerate with retained runner"
+    },
+    {
+      "path": "build/near-surface-performance/B-normal.json",
+      "bytes": 23214,
+      "sha256": "52e5b726d24ff699bd2516c858fb7a9051ecdd255832324671b09a39af7f0e7e",
+      "reason": "Summarized fixed-pose log/result; regenerate with retained runner"
+    },
+    {
+      "path": "build/near-surface-performance/B-restored-host.json",
+      "bytes": 22688,
+      "sha256": "3a4ff822db4b1dedff819949c1063c021616f1c6f2013d58205e1ae578ce5caf",
+      "reason": "Summarized fixed-pose log/result; regenerate with retained runner"
+    },
+    {
+      "path": "build/near-surface-performance/baseline-B.log",
+      "bytes": 462983,
+      "sha256": "40b882ff79616247fbe10233664b34c8b754d6911404abc69333d5bf2c338d2f",
+      "reason": "Summarized fixed-pose log/result; regenerate with retained runner"
+    },
+    {
+      "path": "build/near-surface-performance/C-geometry.json",
+      "bytes": 24122,
+      "sha256": "dce04196351eb2c8a4e4899fa955cfaf34b579cd537c8f2a4fa4accaad09589c",
+      "reason": "Summarized fixed-pose log/result; regenerate with retained runner"
+    },
+    {
+      "path": "build/near-surface-performance/C-no-address.json",
+      "bytes": 23758,
+      "sha256": "ff9a43660bdd768cee1835e9768fbc5eda9e301fd52f83756a81ded3d7a3d846",
+      "reason": "Summarized fixed-pose log/result; regenerate with retained runner"
+    },
+    {
+      "path": "build/near-surface-performance/C-normal.json",
+      "bytes": 23512,
+      "sha256": "f9954cf6fa38f37e9a59ab711cd84337286bb8e0c367edb21a232f858ec8de2b",
+      "reason": "Summarized fixed-pose log/result; regenerate with retained runner"
+    },
+    {
+      "path": "build/near-surface-performance/counter-off-B.log",
+      "bytes": 532742,
+      "sha256": "7da22e88051cfeb29c12634bd4ddb0b63645bd6376f42a5f5ab2033b5cd077c5",
+      "reason": "Summarized fixed-pose log/result; regenerate with retained runner"
+    },
+    {
+      "path": "build/near-surface-performance/D-force-one.json",
+      "bytes": 23142,
+      "sha256": "21c977a97a8e7d53c1c850dccfc0d37c1afb0bf1edab0a0be7d1f18ec25947ec",
+      "reason": "Summarized fixed-pose log/result; regenerate with retained runner"
+    },
+    {
+      "path": "build/near-surface-performance/D-geometry.json",
+      "bytes": 23848,
+      "sha256": "93c26a982c07555010f3642700bcc5f9de90cf27e14ae9596fd5e7324ce29c06",
+      "reason": "Summarized fixed-pose log/result; regenerate with retained runner"
+    },
+    {
+      "path": "build/near-surface-performance/D-no-address.json",
+      "bytes": 23508,
+      "sha256": "6a54e4195991387e4841cc227155d05576c0f016d9113d3ade8d0accad51c74c",
+      "reason": "Summarized fixed-pose log/result; regenerate with retained runner"
+    },
+    {
+      "path": "build/near-surface-performance/D-no-near.json",
+      "bytes": 23577,
+      "sha256": "c384a19e085e0f01b7d3d99fe51385139505a9ca63d4d89896a2f000c4074cda",
+      "reason": "Summarized fixed-pose log/result; regenerate with retained runner"
+    },
+    {
+      "path": "build/near-surface-performance/D-no-normal.json",
+      "bytes": 23582,
+      "sha256": "fd845bf19f68c29497d1c58eb78c27d6d0b2579e1fe76504589accec3db68265",
+      "reason": "Summarized fixed-pose log/result; regenerate with retained runner"
+    },
+    {
+      "path": "build/near-surface-performance/D-normal.json",
+      "bytes": 23269,
+      "sha256": "552dfae7dbf27ec147e28dc4be2140f1f8859c42a0869a086c7343a41dcfc6f6",
+      "reason": "Summarized fixed-pose log/result; regenerate with retained runner"
+    },
+    {
+      "path": "build/near-surface-performance/D-owners.json",
+      "bytes": 23334,
+      "sha256": "cdd91ad2df40e5b97c8b0110caae67361dfb9531e91c7169846b836eafad2201",
+      "reason": "Summarized fixed-pose log/result; regenerate with retained runner"
+    },
+    {
+      "path": "build/near-surface-performance/E-force-one.json",
+      "bytes": 23298,
+      "sha256": "c668e827965fff9166951d1fba22269d2dd3d40da18958a654950dc4a2c069eb",
+      "reason": "Summarized fixed-pose log/result; regenerate with retained runner"
+    },
+    {
+      "path": "build/near-surface-performance/E-geometry.json",
+      "bytes": 24006,
+      "sha256": "a476c486af0050315cfec478caec95a98744accf7d78ddc6f0f55538d6f11b40",
+      "reason": "Summarized fixed-pose log/result; regenerate with retained runner"
+    },
+    {
+      "path": "build/near-surface-performance/E-no-address.json",
+      "bytes": 23646,
+      "sha256": "133e504bbf05b15c073388c17e8a75dbc8360e2a95203d50d1f5b0980cad755a",
+      "reason": "Summarized fixed-pose log/result; regenerate with retained runner"
+    },
+    {
+      "path": "build/near-surface-performance/E-normal.json",
+      "bytes": 23411,
+      "sha256": "9825728960c0461f58e2e597f580b49517d974e26bcf5dcbb16969346a748233",
+      "reason": "Summarized fixed-pose log/result; regenerate with retained runner"
+    },
+    {
+      "path": "build/near-surface-performance/E-owners.json",
+      "bytes": 23519,
+      "sha256": "c551f7ec2513a6a093937d35a0c59d9a316b977a0a0bc3375b5ac48deae97e9b",
+      "reason": "Summarized fixed-pose log/result; regenerate with retained runner"
+    },
+    {
+      "path": "build/near-surface-performance/initial-baseline.log",
+      "bytes": 447649,
+      "sha256": "e9b407cfaa02259c80cfdda676c381d2176f26831a5acfa3649f69c53267abc0",
+      "reason": "Summarized fixed-pose log/result; regenerate with retained runner"
+    },
+    {
+      "path": "build/near-surface-performance/matrix-A.log",
+      "bytes": 511781,
+      "sha256": "b7e7200eb6246403505e2bec30959534faeb47e790f3a8b686e28bb3ff8e72b8",
+      "reason": "Summarized fixed-pose log/result; regenerate with retained runner"
+    },
+    {
+      "path": "build/near-surface-performance/matrix-C.log",
+      "bytes": 560124,
+      "sha256": "f1b3a34fdf93b6c61adb04cd8f736d245013a98b76c5fae09af1e8ebb86484b2",
+      "reason": "Summarized fixed-pose log/result; regenerate with retained runner"
+    },
+    {
+      "path": "build/near-surface-performance/matrix-D.log",
+      "bytes": 539416,
+      "sha256": "5821a27b117bb177d88f4d121e324aaf059d7d74448f38a468c3d472bcbae461",
+      "reason": "Summarized fixed-pose log/result; regenerate with retained runner"
+    },
+    {
+      "path": "build/near-surface-performance/matrix-E.log",
+      "bytes": 543878,
+      "sha256": "ceccb142f493c7c148b136b48f2e90f34f60d0f3ac2c6021294eeb4815343163",
+      "reason": "Summarized fixed-pose log/result; regenerate with retained runner"
+    },
+    {
+      "path": "build/near-surface-performance/owners-B.log",
+      "bytes": 463026,
+      "sha256": "8a6f10f88d0bca745a16ce1aab82d9f5a8892c36f7a96785b1525648288cd9f1",
+      "reason": "Summarized fixed-pose log/result; regenerate with retained runner"
+    },
+    {
+      "path": "docs/engineering-evidence/near-surface-performance/__pycache__/analyze.cpython-311.pyc",
+      "bytes": 8854,
+      "sha256": "32be609cef33a858f487c26f24897b69a0d72d2cf11b65d697f88e8988b038ac",
+      "reason": "Rebuildable Python bytecode"
+    }
+  ],
+  "plannedRemovalBytes": 4633924,
+  "removedBytes": 0,
+  "cleanupStatus": "Automatic approval review rejected the reviewed 33-file deletion with blocked by policy; no specific rationale supplied. No deletion retried.",
+  "persistentAccountingScope": "New retained files plus intermediate run JSON and bytecode; excludes inherited logs, transient runtime copies and ordinary compiler intermediates.",
+  "newInMemoryNormalizedLogBytesIncludingSmoke": 13019276,
+  "permanentEvidenceRetainedBytes": 672442,
+  "newPersistentDiagnosticOutputBytes": 1244767
+}

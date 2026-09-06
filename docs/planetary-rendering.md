@@ -111,6 +111,16 @@ is an accepted bounded invocation-accounting consequence (classification C),
 with bit-identical measured outer/inner factors. It is not increased refinement
 or changed tessellation semantics.
 
+The current TES address-removal candidate specializes inverse geographic-address
+reconstruction at native context creation. Ordinary NCSM1 rendering uses the
+default-false specialization; `owners` and `boundaries` diagnostics select the
+same shader with that specialization enabled. The immutable context diagnostic
+mode drives all four existing raster-state pipelines. This keeps one physical
+algorithm and one deployed TES binary, with no per-frame diagnostic branch.
+Ordinary material coordinates still come from the final physical receiver.
+See the [candidate parity and performance evidence](engineering-evidence/tes-address-removal/README.md)
+for validation and the manual-acceptance boundary; P2S5H remains the banked milestone.
+
 TCS/TES provides bounded near-camera raster refinement. The configured physical
 range is 50 m, the evaluation shader exits before displacement work outside the
 range, and exact per-edge tessellation factors derive the interior factor. That range is not a

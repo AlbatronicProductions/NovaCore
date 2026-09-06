@@ -1,0 +1,37 @@
+{
+  "files": {
+    "analyze.py": {
+      "bytes": 3216,
+      "sha256": "6d2bc98a4b727b95731c84074fdb44b6034de4cd1ef90c67fb79e664ae1edb87"
+    },
+    "instrumentation.patch": {
+      "bytes": 18634,
+      "sha256": "77f83f3b2321e76c0c8972e03deb769210c7b8bdf5ab85e4769b474aa770f3ff"
+    },
+    "measurements.json": {
+      "bytes": 472854,
+      "sha256": "f56c4048500a07c5b535fffc865f39e60567e313b3943a4a46bc0c0e0e99899f"
+    },
+    "preliminary.json": {
+      "bytes": 119696,
+      "sha256": "87a1be18e87e2d45bb1543f56235008721e5b4b8b2354a15dcc1281812dff914"
+    },
+    "README.md": {
+      "bytes": 36184,
+      "sha256": "64f621803fff5b3ced7a91b1ee6ebb81b1aea6edd8b9836a7608e094b51d7f0b"
+    },
+    "run.py": {
+      "bytes": 7465,
+      "sha256": "b4a99503200388fcc5d336aae35c4c38ac49b0663517503e57ec09368603fa1d"
+    },
+    "storage.json": {
+      "bytes": 10280,
+      "sha256": "6a903184ef170526ebadeb3fc7f52d96dc8845b8c85fdb2a389b72684324149d"
+    },
+    "validation.json": {
+      "bytes": 2888,
+      "sha256": "e95efdd5d8ccd394cb7d670f0471c577404ec2342387426e8d58ac34589c1872"
+    }
+  },
+  "selfHash": "Excluded to avoid a self-reference; verify every other retained file."
+}

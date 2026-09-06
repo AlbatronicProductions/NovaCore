@@ -1,0 +1,798 @@
+{
+  "files": [
+    {
+      "path": "build/tes-address-validation/A-baseline-boundaries-capture.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\A-baseline-boundaries-capture.json",
+      "bytes": 17933,
+      "sha256": "c9ee96b82a8863e903a7bfc0d11b839195106a1f1280635bcb7e0e4a4c9d353e",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/A-baseline-owners-capture.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\A-baseline-owners-capture.json",
+      "bytes": 17933,
+      "sha256": "1db71136ba2b3ef747717574219d0a976fbe3669dc0ebbccfaca56925d8b9af4",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/A-baseline.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\A-baseline.json",
+      "bytes": 18256,
+      "sha256": "70aedbdc82d796130291fabbb27c58fc32d5af438be37998cd898ea87032d5ca",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/A-candidate-boundaries-capture.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\A-candidate-boundaries-capture.json",
+      "bytes": 17943,
+      "sha256": "33b45c2870c03eafff87b208ae8be0eb5735c76ea172bb91aea1dd436804ad86",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/A-candidate-boundaries-negative-capture.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\A-candidate-boundaries-negative-capture.json",
+      "bytes": 17967,
+      "sha256": "288d62bc0ce359864acc961c56c95587b53e5edc8616e92f2b04eb273b98c148",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/A-candidate-owners-capture.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\A-candidate-owners-capture.json",
+      "bytes": 17938,
+      "sha256": "de6d1dbd701259e6426899bcf97d5c55921571147d28a070c6f0f36180d9978f",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/A-candidate-owners-negative-capture.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\A-candidate-owners-negative-capture.json",
+      "bytes": 17947,
+      "sha256": "62b5b50c51c54ccba22ffc1bbbf90f091e7a6e0389cb03ac5da65d667440e297",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/A-candidate.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\A-candidate.json",
+      "bytes": 18251,
+      "sha256": "6fb27c782b61b0666e55606ac1fd7f4eff4e316c277b8f03132fac2af26e0960",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/A-parity-boundaries-negative.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\A-parity-boundaries-negative.json",
+      "bytes": 5084,
+      "sha256": "2ad2c36ef71c95f26e72aae1e1f1ec89dd25b1f37c9a9a43e223d8cda7366e59",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/A-parity-boundaries.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\A-parity-boundaries.json",
+      "bytes": 4912,
+      "sha256": "8008da42d4b8d3f8746d3c258ca47d11792474f0979b5971441b376e278494da",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/A-parity-owners-negative.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\A-parity-owners-negative.json",
+      "bytes": 5102,
+      "sha256": "93182d0ad9d03e0abc98eac8c460b79f5ffeaf251febdb04630016bd666222ca",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/A-parity-owners.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\A-parity-owners.json",
+      "bytes": 4924,
+      "sha256": "762a4c7eb8c17fdb4054f51ce1737f2e8ae126432894c0427374277d52d14656",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/B-baseline-capture.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\B-baseline-capture.json",
+      "bytes": 18065,
+      "sha256": "ff3668517f392c01bfd613bc5966aff2706b9c7c25906de30be7b82b977581e8",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/B-baseline.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\B-baseline.json",
+      "bytes": 18418,
+      "sha256": "ae6b3b560ce9da5ae62a5c83db5da72478537bc482c5e3554e68214960bd76a4",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/B-candidate-capture.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\B-candidate-capture.json",
+      "bytes": 18053,
+      "sha256": "006ffd2ab1354c3f12cd9397a0fa23e09201afca222ee4b5628ad8c0cc3dfc58",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/B-candidate.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\B-candidate.json",
+      "bytes": 18411,
+      "sha256": "b105daa49d54e50dbcadbeda5f33619df49224dab84668fcf84d6520b3912ea9",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/B-parity.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\B-parity.json",
+      "bytes": 4060,
+      "sha256": "6e56668ad5f01503b289ef3de5ff891c3645ca0b0fbec8c21a601f9048c680c9",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/C-baseline-capture.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\C-baseline-capture.json",
+      "bytes": 18366,
+      "sha256": "8fb8c434df48db2cfa537213a1750d5f69abb36969e32c38882f6f7e7f002465",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/C-baseline.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\C-baseline.json",
+      "bytes": 18728,
+      "sha256": "3c7bc8b3876a9f2bcee2164299be748e87419144c91dc873200a7ad91eaf64f9",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/C-candidate-capture.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\C-candidate-capture.json",
+      "bytes": 18372,
+      "sha256": "8774a29670c33ef0b57ff157d26d5b16dbb8b70732fc5de705c7c1ff31a3c3ec",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/C-candidate.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\C-candidate.json",
+      "bytes": 18722,
+      "sha256": "be0c80e52a3e37ba841dae19a1a9d3d1fb35530cacc390511eba79d384e59070",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/C-parity.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\C-parity.json",
+      "bytes": 4062,
+      "sha256": "80976f3393af3152386f10bc5d87f2e55b823c7e1359b00d0315df927d7a9257",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/D-baseline-capture.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\D-baseline-capture.json",
+      "bytes": 18124,
+      "sha256": "67ff080902fd8c193220f5f88b8c7f1e28a7eed80a103742f275155683131575",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/D-baseline.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\D-baseline.json",
+      "bytes": 18447,
+      "sha256": "4a0b208915895355c5a574beee89e5c14c6b6fcf214ef892e6c65fd2d6b6ffb3",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/D-candidate-capture.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\D-candidate-capture.json",
+      "bytes": 18118,
+      "sha256": "9bca2a662ee168c9df60c9b264e41ea4de85e4147cdef6f41ef2991353190dfb",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/D-candidate.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\D-candidate.json",
+      "bytes": 18457,
+      "sha256": "ec790845f96a0057494d89ac08b73451f5ca6d84757bb73a46aa3c298a048799",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/D-parity.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\D-parity.json",
+      "bytes": 4067,
+      "sha256": "18b6933ac1170901cb1b9142019dcf21245291ac671e9cfdbf62a248c868b92a",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/deployment.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\deployment.json",
+      "bytes": 26917,
+      "sha256": "dc04fdc47eac1d66e715ab0803f289a40b6adc5b94ea9c00f1be2096ac94846f",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/diagnostic-progress.log",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\diagnostic-progress.log",
+      "bytes": 20957,
+      "sha256": "2efc005f924de427e562e193a6271b9f5a62172779716cd9131e9245a2380dd2",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/diagnostic.spv",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\diagnostic.spv",
+      "bytes": 64076,
+      "sha256": "9cca450b8ab12a451c86a445f0968250e1f99d975441001077541a37b2f46a30",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/diagnostic.spvasm",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\diagnostic.spvasm",
+      "bytes": 190448,
+      "sha256": "b90f4562b11146f8cec2929d8ef86c365a9e299ff6707ae71c171ff0cfcb69e7",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/E-baseline-capture.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\E-baseline-capture.json",
+      "bytes": 18252,
+      "sha256": "048dee8dc0f5483069cedb1b7979212d7bd06544c9e1998319ddab03e224a83a",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/E-baseline.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\E-baseline.json",
+      "bytes": 18611,
+      "sha256": "cfd0d0bdf9b37104641f0284535f6a381e201a207784855f7f5643d11d6af54b",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/E-candidate-capture.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\E-candidate-capture.json",
+      "bytes": 18243,
+      "sha256": "799020fad28d307d51086257fa79fa96e1fa8a809ef422e04048c80f830a4b1a",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/E-candidate.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\E-candidate.json",
+      "bytes": 18610,
+      "sha256": "b0a8d060a5650d9180919805aedf38991e660a03cc0f8e67033973204e2e62ea",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/E-parity.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\E-parity.json",
+      "bytes": 4067,
+      "sha256": "f9650eb7c650e29d99a9cf7be8a854f41a218142885f5e6f5e63f0e5960342b6",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/final-validation.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\final-validation.json",
+      "bytes": 21324,
+      "sha256": "4e2fd55b998cbe91a887ce7212ff62b9ff3c023ff215dd2a4a43d8d3e7676993",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/florida-smoke.err",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\florida-smoke.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/florida-smoke.log",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\florida-smoke.log",
+      "bytes": 249783,
+      "sha256": "969d92f2ad63a5282aee2bad7cd6acb705122dddfaffa6e272e960ffadf2b9c9",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/launcher-route-probe.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\launcher-route-probe.json",
+      "bytes": 3327,
+      "sha256": "c75bc90d6369564ee86171499f7700099f9017f1ca73da1ff02fe52c7c6e66fb",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/ordinary.spv",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\ordinary.spv",
+      "bytes": 54640,
+      "sha256": "9dca5c13d0fdc99df1cbf238a8e527edd7738f7df8c78c68e8c9089f284fc331",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/ordinary.spvasm",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\ordinary.spvasm",
+      "bytes": 163801,
+      "sha256": "6fb97c4dcdff6666f0a964fc2aff166a19aec33b6e0d152d9890a751176e0dd9",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/parity-progress.log",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\parity-progress.log",
+      "bytes": 12851,
+      "sha256": "7b0fd20d24f52764095728cffdee2659f33190399408376a81c6626dbdc21443",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/performance-progress.log",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\performance-progress.log",
+      "bytes": 1004,
+      "sha256": "2e3ce951a8541e19483c660a3d21cf27d4b83bec0375a13f9e0fc13c7ef4a701",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/production-native.cpp",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\production-native.cpp",
+      "bytes": 283681,
+      "sha256": "742712d3f1ac972dda2bfe37f1991586e2ddd6abd3d25aa700bcb9d7d248615d",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/smoke-result.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\smoke-result.json",
+      "bytes": 171,
+      "sha256": "19cdbaa5e4db78eadb235ee4c112bc595b15ea80d3639c435292ad565dcc2844",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/source.spvasm",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\source.spvasm",
+      "bytes": 190608,
+      "sha256": "bfca344bdb53c593105b8c44fb81c1301ea976b1bfe82fcb294d3e6d088d76b4",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/final-host/B-candidate.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\final-host\\B-candidate.json",
+      "bytes": 17319,
+      "sha256": "6fe7291585ded0f1c63fe516e17a22f25c6c879fba9d0d3e99febccd2ccc8b94",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/route/Program.cs",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\route\\Program.cs",
+      "bytes": 5006,
+      "sha256": "d0224319d3804cdfca0b9c1ec4dc38040eecb44d72fcd60b0cc1dc0e08899447",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/route/route.csproj",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\route\\route.csproj",
+      "bytes": 407,
+      "sha256": "ed000e6d5f50e4ad1c97aeb3c037371c57a9ce524236282dd3bc58a48457b120",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/route/bin/Release/net10.0-windows/NovaCore.Launcher.dll",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\route\\bin\\Release\\net10.0-windows\\NovaCore.Launcher.dll",
+      "bytes": 59904,
+      "sha256": "bb0dfd991bc1c4921d049bc0e865f74f659a669ffd43e6cc41001458115b9644",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/route/bin/Release/net10.0-windows/NovaCore.Launcher.pdb",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\route\\bin\\Release\\net10.0-windows\\NovaCore.Launcher.pdb",
+      "bytes": 22420,
+      "sha256": "2be14bd3df818c78e1736b8bd7c3e2246096beef8258803bb69444cdd31b543e",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/route/bin/Release/net10.0-windows/route.deps.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\route\\bin\\Release\\net10.0-windows\\route.deps.json",
+      "bytes": 824,
+      "sha256": "86863cbd50107f4f27b309061f4ba1388244a6a2ce34b32cf9f2fe7525793b65",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/route/bin/Release/net10.0-windows/route.dll",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\route\\bin\\Release\\net10.0-windows\\route.dll",
+      "bytes": 17920,
+      "sha256": "a5eca9310ac499619d0a427d236de6d050791e128cb00b21d311b445d3399e06",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/route/bin/Release/net10.0-windows/route.exe",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\route\\bin\\Release\\net10.0-windows\\route.exe",
+      "bytes": 162304,
+      "sha256": "ba2a7ae11f87d774f941697071a19f38ef6fc3363c881c35a3c42c08db6c698c",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/route/bin/Release/net10.0-windows/route.pdb",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\route\\bin\\Release\\net10.0-windows\\route.pdb",
+      "bytes": 16452,
+      "sha256": "d2cfab9638a6ca897ac99b4194f48368d05cd5062671aa445c26f3a7e7591a11",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/route/bin/Release/net10.0-windows/route.runtimeconfig.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\route\\bin\\Release\\net10.0-windows\\route.runtimeconfig.json",
+      "bytes": 519,
+      "sha256": "96bc2946dff8790400d652ec7f8de7bb043e954980d59470c112788b68a1fbd3",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/route/obj/project.assets.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\route\\obj\\project.assets.json",
+      "bytes": 21993,
+      "sha256": "233145cedc5971f2433005253f8f146c62e1eeed8ca120a1d5ab3ba015d12389",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/route/obj/project.nuget.cache",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\route\\obj\\project.nuget.cache",
+      "bytes": 209,
+      "sha256": "7f680dc49e55c62a5738e8442bf60b1a8d8b9ccf73e36d89246badfc9237ff5c",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/route/obj/route.csproj.nuget.dgspec.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\route\\obj\\route.csproj.nuget.dgspec.json",
+      "bytes": 22664,
+      "sha256": "05aaa36ac1c904a03bf249ec6aba840b48fd3aad83bc4d2c93f821fbd94cbf77",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/route/obj/route.csproj.nuget.g.props",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\route\\obj\\route.csproj.nuget.g.props",
+      "bytes": 1135,
+      "sha256": "1e51d59a0a61bbe5b26b92eb01307b6f7909cd9d6f3577f96af5da8201057d69",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/route/obj/route.csproj.nuget.g.targets",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\route\\obj\\route.csproj.nuget.g.targets",
+      "bytes": 150,
+      "sha256": "971cc9b535384849b5c661d776cd7a80833a416265e32e8968e06c367368b8b5",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/route/obj/Release/net10.0-windows/.NETCoreApp,Version=v10.0.AssemblyAttributes.cs",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\route\\obj\\Release\\net10.0-windows\\.NETCoreApp,Version=v10.0.AssemblyAttributes.cs",
+      "bytes": 200,
+      "sha256": "93d67476196ebfc80d1d7d8844b91146cfd678d105f5ce635eb900ca40610c9b",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/route/obj/Release/net10.0-windows/apphost.exe",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\route\\obj\\Release\\net10.0-windows\\apphost.exe",
+      "bytes": 162304,
+      "sha256": "ba2a7ae11f87d774f941697071a19f38ef6fc3363c881c35a3c42c08db6c698c",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/route/obj/Release/net10.0-windows/route.AssemblyInfo.cs",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\route\\obj\\Release\\net10.0-windows\\route.AssemblyInfo.cs",
+      "bytes": 1150,
+      "sha256": "e8bd799b5faaeb766a7446eef83e6ab2bed8c772a5d328e1e0fedfdfcb871b84",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/route/obj/Release/net10.0-windows/route.AssemblyInfoInputs.cache",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\route\\obj\\Release\\net10.0-windows\\route.AssemblyInfoInputs.cache",
+      "bytes": 66,
+      "sha256": "e400b90e8f9af15992f8bacd43fc6b97a891bfd3edc438cf70a47cc0da3bb6bf",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/route/obj/Release/net10.0-windows/route.assets.cache",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\route\\obj\\Release\\net10.0-windows\\route.assets.cache",
+      "bytes": 152,
+      "sha256": "d958f9150cc9a93c269cc462b55a7b2a5b15d42b2a945d315412c036e2fb573d",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/route/obj/Release/net10.0-windows/route.csproj.AssemblyReference.cache",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\route\\obj\\Release\\net10.0-windows\\route.csproj.AssemblyReference.cache",
+      "bytes": 1271,
+      "sha256": "cf2c235a23266006392f1e8c9ba0fb034fe1c4417bf2c6911f3371c241b3afad",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/route/obj/Release/net10.0-windows/route.csproj.CoreCompileInputs.cache",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\route\\obj\\Release\\net10.0-windows\\route.csproj.CoreCompileInputs.cache",
+      "bytes": 66,
+      "sha256": "a9c085c1737338900ae36ee2eecdebb198923249e983523742e390671179929e",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/route/obj/Release/net10.0-windows/route.csproj.FileListAbsolute.txt",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\route\\obj\\Release\\net10.0-windows\\route.csproj.FileListAbsolute.txt",
+      "bytes": 1857,
+      "sha256": "63b4c54e5d5e69f76d52b4dc04d89ca4fbb6a8199a6e7eeb1a698420a4f8ea98",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/route/obj/Release/net10.0-windows/route.csproj.Up2Date",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\route\\obj\\Release\\net10.0-windows\\route.csproj.Up2Date",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/route/obj/Release/net10.0-windows/route.dll",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\route\\obj\\Release\\net10.0-windows\\route.dll",
+      "bytes": 17920,
+      "sha256": "a5eca9310ac499619d0a427d236de6d050791e128cb00b21d311b445d3399e06",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/route/obj/Release/net10.0-windows/route.GeneratedMSBuildEditorConfig.editorconfig",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\route\\obj\\Release\\net10.0-windows\\route.GeneratedMSBuildEditorConfig.editorconfig",
+      "bytes": 1152,
+      "sha256": "98254432b145cb84d853f32df6d9e6ce5b3c6848036e37f7350054ea61be8c2b",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/route/obj/Release/net10.0-windows/route.genruntimeconfig.cache",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\route\\obj\\Release\\net10.0-windows\\route.genruntimeconfig.cache",
+      "bytes": 66,
+      "sha256": "c69ae8e9ab5a4574e526d276c6d86c3591dd4f061ddcc95f67906261461a30ad",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/route/obj/Release/net10.0-windows/route.GlobalUsings.g.cs",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\route\\obj\\Release\\net10.0-windows\\route.GlobalUsings.g.cs",
+      "bytes": 305,
+      "sha256": "c95ea51a9e8c77e5367f652ede0c8871e7d6413090add59e1b8dd6805ac37e70",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/route/obj/Release/net10.0-windows/route.pdb",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\route\\obj\\Release\\net10.0-windows\\route.pdb",
+      "bytes": 16452,
+      "sha256": "d2cfab9638a6ca897ac99b4194f48368d05cd5062671aa445c26f3a7e7591a11",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/route/obj/Release/net10.0-windows/route.sourcelink.json",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\route\\obj\\Release\\net10.0-windows\\route.sourcelink.json",
+      "bytes": 143,
+      "sha256": "f923b6b5981847f9792bdf84e781e6b2ced606b2d5f0e89ae23e27b6ed3cb29c",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/route/obj/Release/net10.0-windows/ref/route.dll",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\route\\obj\\Release\\net10.0-windows\\ref\\route.dll",
+      "bytes": 5632,
+      "sha256": "d08019a26f4211fb5a554f48c2afd7c805c0d12e9588632c0ecf7c56ec36a17f",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    },
+    {
+      "path": "build/tes-address-validation/route/obj/Release/net10.0-windows/refint/route.dll",
+      "absolutePath": "E:\\NovaCore\\build\\tes-address-validation\\route\\obj\\Release\\net10.0-windows\\refint\\route.dll",
+      "bytes": 5632,
+      "sha256": "d08019a26f4211fb5a554f48c2afd7c805c0d12e9588632c0ecf7c56ec36a17f",
+      "classification": "reproducible temporary output",
+      "gitTracked": false,
+      "gitIgnored": true,
+      "reason": "Summarized in retained measurements/validation; compiled helper and readback reproducer preserved; no production/runtime/test/asset consumer"
+    }
+  ],
+  "count": 79,
+  "bytes": 2321625.0,
+  "root": "E:\\NovaCore\\build\\tes-address-validation",
+  "reparsePoints": 0
+}

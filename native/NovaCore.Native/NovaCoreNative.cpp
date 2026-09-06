@@ -1420,6 +1420,15 @@ void Swap(App &a) {
     try{candidateTcs=Shader(a,"shaders/production_spherical_billboard.tesc.spv");candidateTes=Shader(a,"shaders/production_spherical_billboard.tese.spv");candidateFs=Shader(a,"shaders/planetary_production.frag.spv");}
     catch(...){vkDestroyShaderModule(a.device,candidateVs,nullptr);if(candidateTcs)vkDestroyShaderModule(a.device,candidateTcs,nullptr);if(candidateTes)vkDestroyShaderModule(a.device,candidateTes,nullptr);throw;}
     VkPipelineShaderStageCreateInfo candidateStages[4]{{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_VERTEX_BIT,candidateVs,"main"},{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT,candidateTcs,"main"},{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT,candidateTes,"main"},{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_FRAGMENT_BIT,candidateFs,"main"}};
+    // surfaceDiagnostic is immutable for this native context and supplies the
+    // fragment diagnostic bits. Submitted lighting may not set those bits.
+    // Specialize the same physical shader for all raster-state variants; no
+    // per-TES dynamic flag branch, extra renderer, or extra deployment is needed.
+    const VkBool32 diagnosticAddress=(a.surfaceDiagnostic&(SurfaceDiagnosticOwners|SurfaceDiagnosticBoundaries))?VK_TRUE:VK_FALSE;
+    const VkSpecializationMapEntry addressEntry{0,0,sizeof diagnosticAddress};
+    const VkSpecializationInfo addressSpecialization{1,&addressEntry,sizeof diagnosticAddress,&diagnosticAddress};
+    candidateStages[2].pSpecializationInfo=&addressSpecialization;
+    a.Log(NC_LOG_VULKAN,diagnosticAddress?"NCSM1 TES geographic address: owner/seam specialization":"NCSM1 TES geographic address: ordinary specialization (inverse disabled)");
     VkPipelineVertexInputStateCreateInfo candidateInput{VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO};VkPipelineInputAssemblyStateCreateInfo candidateAssembly=ia;candidateAssembly.topology=VK_PRIMITIVE_TOPOLOGY_PATCH_LIST;VkPipelineTessellationStateCreateInfo candidateTessellation{VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO};candidateTessellation.patchControlPoints=3;
     // .nctop2 candidate triangles remain clockwise after Vulkan's authored
     // projection convention.  Inheriting the cube-sphere CCW contract culls

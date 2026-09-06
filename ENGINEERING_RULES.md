@@ -32,7 +32,24 @@ GPU LOD, culling, label selection, and representation handoff are presentation-o
 - Rejected production architectures are removed after their accepted replacement is ready. Do not accumulate hidden compatibility modes, dormant renderers, or runtime bridges merely because tests reference them.
 - Do not optimize systems already scheduled for architectural retirement unless the work is required for migration correctness or safety. Preserve them as recovery paths until their accepted replacement passes its retirement gate.
 - Do not stage or commit a rendering milestone before its required physical Desktop acceptance unless the user explicitly changes that gate.
-- Main-branch NovaCore milestone commits follow `NovaCore <milestone>: <description>` unless a specific non-milestone maintenance operation justifies otherwise. Do not rewrite already-pushed history solely to rename an older commit.
+
+### Milestone naming (M13 onward)
+
+M12 is complete. M13 begins the simplified milestone convention:
+
+- Major production fronts use `M13`, `M14`, `M15`, and so on.
+- Bounded banked production steps use `M13.1`, `M13.2`, `M13.3`, and so on.
+- Milestone commit titles use `NovaCore <milestone>: <plain-language responsibility>`, for example `NovaCore M13: NCSM1 Terrain Performance` and `NovaCore M13.1: Optimize NCSM1 TES hot path`.
+- Ordinary supporting commits receive no milestone identifier or tag unless they represent a banked production checkpoint.
+- For banked M13+ steps, prefer concise annotated tags such as `m13.1-ncsm1-tes-hotpath` and `m13.2-<plain-responsibility>`.
+- Use plain-language milestone names in current-facing documentation. Detailed ticket IDs, experiment IDs and architectural lineage belong in engineering evidence, implementation reports, diagnostics or internal planning documents. Do not encode the planning tree into primary Git history with future names such as `M13A-P2S4C3`.
+- M1 through M12 retain their existing identifiers, including `M12D-P2S5F`, `M12D-P2S5G` and `M12D-P2S5H`. Historical commits and tags remain unchanged, and old milestone identifiers remain valid historical coordinates. No Git history rewriting or movement of existing tags is permitted for naming cleanup.
+
+Current major front: **NovaCore M13 — NCSM1 Terrain Performance**.
+Current accepted production step: **NovaCore M13.1 — Optimize NCSM1 TES hot path**.
+M13.1 has passed automated validation and Project Control manual acceptance and
+is production accepted. This naming normalization establishes the convention for
+the subsequent banking action; it does not itself create or bank the milestone.
 
 ## Diagnostic evidence lifecycle
 

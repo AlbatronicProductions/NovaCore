@@ -1,0 +1,53 @@
+{
+  "head": "219ec3c3f4f1db0496e7ef6204d510a1bd337aeb",
+  "p2s5h": "32ffac50ab5c06518ede24edfb5c531976d4ec99",
+  "files": {
+    "baseline.json": {
+      "bytes": 5963,
+      "sha256": "5d0e813d566f7789f3f9ffe46e121f5b1552777eedee348ddfc3acb332cb2489"
+    },
+    "capture_host.py": {
+      "bytes": 7348,
+      "sha256": "056ed9f8d670f46ac184c6644eadadad6f67dc0a4ee8ccb475c9d1ee8f192662"
+    },
+    "current-temporary-inventory.json": {
+      "bytes": 46091,
+      "sha256": "acc062298c6dcdda439eef993fb96dded61fc40087158f39bb9435446414f930"
+    },
+    "final_verify.py": {
+      "bytes": 10372,
+      "sha256": "de3e1eef26a6269a34f8dc0f17440c57543c1856bb7138d586454622903175ad"
+    },
+    "measurements.json": {
+      "bytes": 418923,
+      "sha256": "4a68d84aadddca9b898e99732ad3d9bc09bf465daceac1b3d3b6f5e73248e39d"
+    },
+    "prior-temporary-inventory.json": {
+      "bytes": 17554,
+      "sha256": "85feb35f6ed7f4f86a6a81ea507c8e0595bc3333bf7bbfd784a04c3c6160b73e"
+    },
+    "README.md": {
+      "bytes": 23334,
+      "sha256": "a1b96791088094e9b2c5a064817305e2eab3ee363f93768c0e176e04ab4ca836"
+    },
+    "storage.json": {
+      "bytes": 1004,
+      "sha256": "ca5c077d3135bfe4c72cca19e9a3543ad9ed175becd1ab12a87204acb0ad5823"
+    },
+    "validate.py": {
+      "bytes": 10308,
+      "sha256": "8c4177d09c9e1bacfbcf943ae1fa68f21f3454ff790ab147a0659e1cfd37df54"
+    },
+    "validation.json": {
+      "bytes": 91371,
+      "sha256": "5ef0fa6021d3f2ca04d13dab38aa9aded670a40ced90a195c30af660bfd22189"
+    }
+  },
+  "workspaceSourceSha256": {
+    "native/NovaCore.Native/NovaCoreNative.cpp": "742712d3f1ac972dda2bfe37f1991586e2ddd6abd3d25aa700bcb9d7d248615d",
+    "native/NovaCore.Native/shaders/production_spherical_billboard.tese": "d8db99cbc7366a63136774c0db317493be46e05a631674a82c2769e4d6571e23",
+    "tests/NovaCore.Graphics.Tests/PlanetaryBillboardSurfaceWorkloadTests.cs": "67b00d63adb5ab9b8cd5813b1f80c202e54b59598d9c8f90de5fd3b4483d23d0",
+    "docs/planetary-rendering.md": "bce2aa9d4e7390128ce6c25705672b1931301b139e661b52678a65a58501882f"
+  },
+  "note": "Observed workspace byte hashes; Git newline normalization and toolchain variation can change reproduction binary hashes. No proprietary KSA source or raw captures retained."
+}

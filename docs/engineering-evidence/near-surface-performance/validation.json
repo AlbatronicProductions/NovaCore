@@ -1,0 +1,48 @@
+{
+  "launcher": "E:\\NovaCore\\tools\\NovaCore.Launcher\\bin\\Release\\net10.0-windows\\NovaCore.Launcher.exe",
+  "runtime": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Triangle.exe",
+  "arguments": [
+    "--scene=sol",
+    "--focus=earth",
+    "--surface-site=florida-launch",
+    "--physical-surface=m12d-natural-candidate",
+    "--solar-epoch=j2000",
+    "--benchmark-frames=120",
+    "--log=startup,validation,vulkan"
+  ],
+  "exitCode": 0,
+  "vuidCount": 0,
+  "launcherRegressions": [
+    "PASS default selection",
+    "PASS scenario catalog",
+    "PASS Earth fullscreen native preset",
+    "PASS M12D spherical billboard GPU proof preset",
+    "PASS new Earth renderer preset",
+    "PASS Earth fullscreen Solar camera path",
+    "PASS structured launch environment",
+    "PASS launcher build configuration",
+    "PASS Earth orbital arguments",
+    "PASS invariant altitude formatting",
+    "PASS subdivision diagnostic mapping",
+    "PASS Florida launch mapping",
+    "PASS invalid configuration rejection",
+    "PASS diagnostics arguments",
+    "PASS existing production scenarios",
+    "NovaCore launcher tests passed: 15"
+  ],
+  "floridaSmoke": [
+    "Runtime fingerprint: cwd=E:\\NovaCore; process=E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Triangle.exe; base=E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\",
+    "[native] NCSM1 regional ready: incoming=1; pupil=1; dependencyDelayMs=1040.094; requests=670; resident=670; uploadedBytes=93392640; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+    "[native] Production spherical billboard publication: generation=1; level=17; topologyFamily=1; hash=0xBCE444AFFB2D713B; topologyResident=true; topologyReused=0; topologyUploads=1; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1424208; postHorizonTriangles=1184192; horizonRejected=240016; postScreenConeTriangles=339013; screenConeRejected=845179; compactedIndices=1017039; visibleTriangles=339013; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=1; deferredRetirements=0",
+    "[native] Average frame time: 13.969 ms (120 frames)"
+  ],
+  "logSha256": "06d9fbf6a7e83f9f687a336ea5f76667cb2f96e918d1f616ad23dc5bdcfe5a2f",
+  "rawUtf8Bytes": 116534,
+  "sourceMatchesHead": true,
+  "build": "Release native/Triangle/Graphics tests PASS",
+  "focusedRegressions": [
+    "M12D-P2S5G: pass=1 fail=0 skip=0",
+    "M12D-P2S5C production spherical billboard runtime: pass=1 fail=0 skip=0"
+  ],
+  "note": "Initial workload substring selected no test; corrected exact named regressions passed. No full suite or manual acceptance rerun claimed."
+}

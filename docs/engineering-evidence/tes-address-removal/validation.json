@@ -1,0 +1,1317 @@
+{
+  "records": [
+    {
+      "label": "native-build-Debug",
+      "arguments": [
+        "pwsh",
+        "-NoProfile",
+        "-Command",
+        "& 'C:/Program Files/Microsoft Visual Studio/18/Community/Common7/Tools/Launch-VsDevShell.ps1' -Arch amd64 -HostArch amd64 -SkipAutomaticLocation\ncmake --build build/native-ninja\nexit $LASTEXITCODE"
+      ],
+      "exitCode": 0,
+      "stdoutUtf8Bytes": 1128,
+      "logSha256": "6b0b09ee49d8b09d043733543e653c299c9de2e48ba16c1811b0eb8e7ddc94db",
+      "summary": []
+    },
+    {
+      "label": "managed-build-Debug",
+      "arguments": [
+        "dotnet",
+        "build",
+        "NovaCore.sln",
+        "-c",
+        "Debug",
+        "--no-restore",
+        "-v",
+        "quiet"
+      ],
+      "exitCode": 0,
+      "stdoutUtf8Bytes": 76,
+      "logSha256": "e1d8330a8b4bad29937b5267ac9db32aea2746fc21191dcc81fba987de958410",
+      "summary": [
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)"
+      ]
+    },
+    {
+      "label": "native-build-Release",
+      "arguments": [
+        "pwsh",
+        "-NoProfile",
+        "-Command",
+        "& 'C:/Program Files/Microsoft Visual Studio/18/Community/Common7/Tools/Launch-VsDevShell.ps1' -Arch amd64 -HostArch amd64 -SkipAutomaticLocation\ncmake --build build/native-ninja-release\nexit $LASTEXITCODE"
+      ],
+      "exitCode": 0,
+      "stdoutUtf8Bytes": 370,
+      "logSha256": "678d615efccc8f844ce37e6cc2d9c50d8437cef1e4ac7a84e2ef6e52c70aebc8",
+      "summary": []
+    },
+    {
+      "label": "managed-build-Release",
+      "arguments": [
+        "dotnet",
+        "build",
+        "NovaCore.sln",
+        "-c",
+        "Release",
+        "--no-restore",
+        "-v",
+        "quiet"
+      ],
+      "exitCode": 0,
+      "stdoutUtf8Bytes": 76,
+      "logSha256": "0816138237745807430ca43663ced6ab95e35df3a1dcf7a60d22d356483909c6",
+      "summary": [
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)"
+      ]
+    },
+    {
+      "label": "graphics-Debug-headless",
+      "arguments": [
+        "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Graphics.Tests.exe",
+        "--category=headless"
+      ],
+      "exitCode": 0,
+      "stdoutUtf8Bytes": 72932,
+      "logSha256": "ae0f9b27cc437a989afc4bb666495af7b59dff40c0d749b2b36e8e3adbd944fd",
+      "summary": [
+        "Native identity: configuration=Debug; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Native.dll; sha256=2BFA9B8E9D200F303C4614A47DA4418A6E1817455F192ED92FB3BE5D36E01C3C; source=E:\\NovaCore\\build\\native-ninja\\NovaCore.Native.dll",
+        "PASS [headless] Facility lighting authority",
+        "PASS [headless] MeshHandle",
+        "PASS [headless] Transport layout",
+        "PASS [headless] Transform conversion",
+        "PASS [headless] Camera relative",
+        "PASS [headless] Batches and capacity",
+        "PASS [headless] Resolved render transport",
+        "PASS [headless] Orbit curve transport",
+        "PASS [headless] Static reference-frame fixture transport",
+        "PASS [headless] Dynamic reference-frame fixture publication",
+        "PASS [headless] Celestial analytical fixture publication",
+        "PASS [headless] Celestial player torque controls",
+        "PASS [headless] Celestial SAS mode selection",
+        "PASS [headless] Celestial SAS control cadence",
+        "PASS [headless] Celestial SAS convergence",
+        "PASS [headless] Celestial SAS diagnostic indicators",
+        "PASS [headless] Camera snapshot allocation",
+        "PASS [headless] Planetary presentation pipeline",
+        "PASS [headless] Planetary presentation SPIR-V stride",
+        "PASS [headless] Focus target authority",
+        "PASS [headless] Planet material presentation",
+        "PASS [headless] Planet micro-normal foundation",
+        "PASS [headless] Planet surface scatter placement",
+        "PASS [headless] Planetary surface camera presentation",
+        "PASS [headless] Earth CPU elevation oracle",
+        "PASS [headless] Canonical body-fixed geographic handedness",
+        "PASS [headless] Canonical SurfaceAnchor physical terrain authority",
+        "PASS [headless] Anchored Florida launch site",
+        "PASS [headless] Earth route convergence",
+        "PASS [headless] Window validation message policy",
+        "PASS [headless] Florida facility support",
+        "PASS [headless] Surface-relative camera authority",
+        "PASS [headless] Near-surface inertial free-look",
+        "PASS [headless] SurfaceAnchor acquisition, ENU, and handoff",
+        "PASS [headless] Camera focus-position continuity",
+        "PASS [headless] Camera SurfaceAnchor handoff monotonicity",
+        "PASS [headless] Solar preset camera-path convergence",
+        "PASS [headless] Zoom motion-profile continuity",
+        "PASS [headless] Solar camera bounded-domain crash regression",
+        "PASS [headless] Surface visual-aim continuity",
+        "PASS [headless] Inertial visual-aim authority",
+        "PASS [headless] Cube-sphere planetary surface",
+        "PASS [headless] Production relaxed cube-sphere patch hierarchy",
+        "PASS [headless] Anchored spherical mesh-tier contract",
+        "PASS [headless] M12D-P2S2 spherical billboard topology proof",
+        "PASS [headless] M12D-P2S5B production spherical billboard topology library",
+        "PASS [headless] M12D-P2S5F nested production scale-mesh topology",
+        "TES geographic specialization PASS: default=false; ordinary inverse absent; diagnostic inverse retained",
+        "PASS [headless] M12D-P2S5G bounded spherical billboard surface interface",
+        "PASS [headless] Multiscale physical terrain modifier foundation",
+        "PASS [headless] Single canonical physical surface authority",
+        "PASS [headless] Global/anchored physical frequency continuity",
+        "PASS [headless] Generation-4 physical renderer integration",
+        "PASS [headless] Production material noise value preservation",
+        "PASS [headless] Screen-space subdivision",
+        "PASS [headless] Terrain-v5 seams, mixed-LOD authority, and Florida classification",
+        "PASS [headless] Terrain asset distribution boundary",
+        "PASS [headless] Cache lifecycle cleanup",
+        "PASS [headless] Local terrain format and GPU compression",
+        "PASS [headless] Local terrain payload-2 authoring contract",
+        "PASS [headless] M12 Florida regional physical surface",
+        "PASS [headless] Production cube-sphere GPU residency integration",
+        "PASS [headless] Production physical-normal tangent continuity",
+        "PASS [headless] Production surface body eligibility and transition ownership",
+        "PASS [headless] Production Earth material-state continuity",
+        "PASS [headless] Planetary camera terrain exclusion",
+        "PASS [headless] Close-ground reference-frame diagnostic",
+        "PASS [headless] Production terrain material synthesis",
+        "PASS [headless] Planetary terrain residency and surface frame",
+        "PASS [headless] Planetary patch topology and ABI",
+        "PASS [headless] Parent-child LOD geographic correspondence",
+        "PASS [headless] Opaque distant-detailed handoff",
+        "PASS [headless] Planetary representation handoff",
+        "PASS [headless] Distant quaternion transform parity",
+        "PASS [headless] Distant visible hemisphere winding",
+        "PASS [headless] Continuous Earth distance visibility",
+        "PASS [headless] Camera drag isolation",
+        "PASS [headless] Sol system presentation and focus",
+        "PASS [headless] SolAnalytical Earth planetary scene",
+        "PASS [headless] Florida foundation seating",
+        "Graphics Debug: selected=79; pass=79; fail=0; skip=0; excluded=12"
+      ]
+    },
+    {
+      "label": "graphics-Debug-gpu",
+      "arguments": [
+        "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Graphics.Tests.exe",
+        "--category=gpu"
+      ],
+      "exitCode": 0,
+      "stdoutUtf8Bytes": 20797,
+      "logSha256": "b10101ce417805e10b3c8d2655a7c71f78f33a14a89c62899168af4745a1e8a7",
+      "summary": [
+        "Native identity: configuration=Debug; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Native.dll; sha256=2BFA9B8E9D200F303C4614A47DA4418A6E1817455F192ED92FB3BE5D36E01C3C; source=E:\\NovaCore\\build\\native-ninja\\NovaCore.Native.dll",
+        "PASS [gpu] M12D-P2S3 spherical billboard GPU runtime proof",
+        "PASS [gpu] M12D-P2S4 canonical natural terrain billboard binding",
+        "PASS [gpu] M12D-P2S5C production spherical billboard runtime",
+        "PASS [gpu] GPU physical-height preparation",
+        "PASS [gpu] M12D-P2A canonical hashed cell field proof",
+        "PASS [gpu] M12D-P2B multiscale natural terrain family proof",
+        "PASS [gpu] M12D-P2C1 prepared natural terrain",
+        "PASS [gpu] Displaced mesh and physical normals",
+        "Graphics Debug: selected=8; pass=8; fail=0; skip=0; excluded=83"
+      ]
+    },
+    {
+      "label": "regional-window-Debug",
+      "arguments": [
+        "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Graphics.Tests.exe",
+        "--test=Live NCSM1 regional physical residency"
+      ],
+      "exitCode": 0,
+      "stdoutUtf8Bytes": 1514,
+      "logSha256": "fe5dcb77403cb9f842dcdcc99c282e6b024e0cc339ec1bb32ca2086ff3473e5c",
+      "summary": [
+        "Native identity: configuration=Debug; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Native.dll; sha256=2BFA9B8E9D200F303C4614A47DA4418A6E1817455F192ED92FB3BE5D36E01C3C; source=E:\\NovaCore\\build\\native-ninja\\NovaCore.Native.dll",
+        "PASS [window] Live NCSM1 regional physical residency",
+        "Graphics Debug: selected=1; pass=1; fail=0; skip=0; excluded=90"
+      ]
+    },
+    {
+      "label": "native-gpu-Debug",
+      "arguments": [
+        "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Graphics.Tests.exe",
+        "--native-gpu"
+      ],
+      "exitCode": 0,
+      "stdoutUtf8Bytes": 12144,
+      "logSha256": "3b944a568c3c827092949f79c9888d15dc46562f01f18bbdd48311941cb52cd2",
+      "summary": [
+        "PASS [native-gpu] NovaCoreFacilityVisibilityTests",
+        "PASS [native-gpu] NovaCoreSurfaceMaterialCoordinatesTests",
+        "Native GPU Debug: pass=2; fail=0; skip=0"
+      ]
+    },
+    {
+      "label": "graphics-Release-headless",
+      "arguments": [
+        "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.exe",
+        "--category=headless"
+      ],
+      "exitCode": 0,
+      "stdoutUtf8Bytes": 73868,
+      "logSha256": "227fb937eaf2e1a54bce3993609fabe90a9857d5fbc94d4f4bc5fcc6c17fe036",
+      "summary": [
+        "Native identity: configuration=Release; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Native.dll; sha256=7C4B9E8A78B3B18E5A9C143E176F51EAB345DE1D61862089E2D432613E06E8DD; source=E:\\NovaCore\\build\\native-ninja-release\\NovaCore.Native.dll",
+        "PASS [headless] Facility lighting authority",
+        "PASS [headless] MeshHandle",
+        "PASS [headless] Transport layout",
+        "PASS [headless] Transform conversion",
+        "PASS [headless] Camera relative",
+        "PASS [headless] Batches and capacity",
+        "PASS [headless] Resolved render transport",
+        "PASS [headless] Orbit curve transport",
+        "PASS [headless] Static reference-frame fixture transport",
+        "PASS [headless] Dynamic reference-frame fixture publication",
+        "PASS [headless] Celestial analytical fixture publication",
+        "PASS [headless] Celestial player torque controls",
+        "PASS [headless] Celestial SAS mode selection",
+        "PASS [headless] Celestial SAS control cadence",
+        "PASS [headless] Celestial SAS convergence",
+        "PASS [headless] Celestial SAS diagnostic indicators",
+        "PASS [headless] Camera snapshot allocation",
+        "PASS [headless] Planetary presentation pipeline",
+        "PASS [headless] Planetary presentation SPIR-V stride",
+        "PASS [headless] Focus target authority",
+        "PASS [headless] Planet material presentation",
+        "PASS [headless] Planet micro-normal foundation",
+        "PASS [headless] Planet surface scatter placement",
+        "PASS [headless] Planetary surface camera presentation",
+        "PASS [headless] Earth CPU elevation oracle",
+        "PASS [headless] Canonical body-fixed geographic handedness",
+        "PASS [headless] Canonical SurfaceAnchor physical terrain authority",
+        "PASS [headless] Anchored Florida launch site",
+        "PASS [headless] Earth route convergence",
+        "PASS [headless] Window validation message policy",
+        "PASS [headless] Florida facility support",
+        "PASS [headless] Surface-relative camera authority",
+        "PASS [headless] Near-surface inertial free-look",
+        "PASS [headless] SurfaceAnchor acquisition, ENU, and handoff",
+        "PASS [headless] Camera focus-position continuity",
+        "PASS [headless] Camera SurfaceAnchor handoff monotonicity",
+        "PASS [headless] Solar preset camera-path convergence",
+        "PASS [headless] Zoom motion-profile continuity",
+        "PASS [headless] Solar camera bounded-domain crash regression",
+        "PASS [headless] Surface visual-aim continuity",
+        "PASS [headless] Inertial visual-aim authority",
+        "PASS [headless] Cube-sphere planetary surface",
+        "PASS [headless] Production relaxed cube-sphere patch hierarchy",
+        "PASS [headless] Anchored spherical mesh-tier contract",
+        "PASS [headless] M12D-P2S2 spherical billboard topology proof",
+        "PASS [headless] M12D-P2S5B production spherical billboard topology library",
+        "PASS [headless] M12D-P2S5F nested production scale-mesh topology",
+        "TES geographic specialization PASS: default=false; ordinary inverse absent; diagnostic inverse retained",
+        "PASS [headless] M12D-P2S5G bounded spherical billboard surface interface",
+        "PASS [headless] Multiscale physical terrain modifier foundation",
+        "PASS [headless] Single canonical physical surface authority",
+        "PASS [headless] Global/anchored physical frequency continuity",
+        "PASS [headless] Generation-4 physical renderer integration",
+        "PASS [headless] Production material noise value preservation",
+        "PASS [headless] Screen-space subdivision",
+        "PASS [headless] Terrain-v5 seams, mixed-LOD authority, and Florida classification",
+        "PASS [headless] Terrain asset distribution boundary",
+        "PASS [headless] Cache lifecycle cleanup",
+        "PASS [headless] Local terrain format and GPU compression",
+        "PASS [headless] Local terrain payload-2 authoring contract",
+        "PASS [headless] M12 Florida regional physical surface",
+        "PASS [headless] Production cube-sphere GPU residency integration",
+        "PASS [headless] Production physical-normal tangent continuity",
+        "PASS [headless] Production surface body eligibility and transition ownership",
+        "PASS [headless] Production Earth material-state continuity",
+        "PASS [headless] Planetary camera terrain exclusion",
+        "PASS [headless] Close-ground reference-frame diagnostic",
+        "PASS [headless] Production terrain material synthesis",
+        "PASS [headless] Planetary terrain residency and surface frame",
+        "PASS [headless] Planetary patch topology and ABI",
+        "PASS [headless] Parent-child LOD geographic correspondence",
+        "PASS [headless] Opaque distant-detailed handoff",
+        "PASS [headless] Planetary representation handoff",
+        "PASS [headless] Distant quaternion transform parity",
+        "PASS [headless] Distant visible hemisphere winding",
+        "PASS [headless] Continuous Earth distance visibility",
+        "PASS [headless] Camera drag isolation",
+        "PASS [headless] Sol system presentation and focus",
+        "PASS [headless] SolAnalytical Earth planetary scene",
+        "PASS [headless] Florida foundation seating",
+        "Graphics Release: selected=79; pass=79; fail=0; skip=0; excluded=12"
+      ]
+    },
+    {
+      "label": "graphics-Release-gpu",
+      "arguments": [
+        "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.exe",
+        "--category=gpu"
+      ],
+      "exitCode": 0,
+      "stdoutUtf8Bytes": 20879,
+      "logSha256": "8a3e3b1ddb66541faccdd47a2032a222582edb9492760b880931ceec824e1fe3",
+      "summary": [
+        "Native identity: configuration=Release; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Native.dll; sha256=7C4B9E8A78B3B18E5A9C143E176F51EAB345DE1D61862089E2D432613E06E8DD; source=E:\\NovaCore\\build\\native-ninja-release\\NovaCore.Native.dll",
+        "PASS [gpu] M12D-P2S3 spherical billboard GPU runtime proof",
+        "PASS [gpu] M12D-P2S4 canonical natural terrain billboard binding",
+        "PASS [gpu] M12D-P2S5C production spherical billboard runtime",
+        "PASS [gpu] GPU physical-height preparation",
+        "PASS [gpu] M12D-P2A canonical hashed cell field proof",
+        "PASS [gpu] M12D-P2B multiscale natural terrain family proof",
+        "PASS [gpu] M12D-P2C1 prepared natural terrain",
+        "PASS [gpu] Displaced mesh and physical normals",
+        "Graphics Release: selected=8; pass=8; fail=0; skip=0; excluded=83"
+      ]
+    },
+    {
+      "label": "regional-window-Release",
+      "arguments": [
+        "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.exe",
+        "--test=Live NCSM1 regional physical residency"
+      ],
+      "exitCode": 0,
+      "stdoutUtf8Bytes": 1532,
+      "logSha256": "373a29e4da9434edfb8b629d6b2846daa4159ddd871187b8e1463a23633d6a91",
+      "summary": [
+        "Native identity: configuration=Release; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Native.dll; sha256=7C4B9E8A78B3B18E5A9C143E176F51EAB345DE1D61862089E2D432613E06E8DD; source=E:\\NovaCore\\build\\native-ninja-release\\NovaCore.Native.dll",
+        "PASS [window] Live NCSM1 regional physical residency",
+        "Graphics Release: selected=1; pass=1; fail=0; skip=0; excluded=90"
+      ]
+    },
+    {
+      "label": "native-gpu-Release",
+      "arguments": [
+        "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.exe",
+        "--native-gpu"
+      ],
+      "exitCode": 0,
+      "stdoutUtf8Bytes": 12146,
+      "logSha256": "54adfc839444848ea3edc23b45f0b812a744d887ec054149693e38aa85b43876",
+      "summary": [
+        "PASS [native-gpu] NovaCoreFacilityVisibilityTests",
+        "PASS [native-gpu] NovaCoreSurfaceMaterialCoordinatesTests",
+        "Native GPU Release: pass=2; fail=0; skip=0"
+      ]
+    },
+    {
+      "label": "launcher-Release",
+      "arguments": [
+        "E:\\NovaCore\\tests\\NovaCore.Launcher.Tests\\bin\\Release\\net10.0-windows\\NovaCore.Launcher.Tests.exe"
+      ],
+      "exitCode": 0,
+      "stdoutUtf8Bytes": 530,
+      "logSha256": "4142420cd4169a6d4847213a549a73ede208d9663c6f83071ad04ee96a54223c",
+      "summary": [
+        "PASS default selection",
+        "PASS scenario catalog",
+        "PASS Earth fullscreen native preset",
+        "PASS M12D spherical billboard GPU proof preset",
+        "PASS new Earth renderer preset",
+        "PASS Earth fullscreen Solar camera path",
+        "PASS structured launch environment",
+        "PASS launcher build configuration",
+        "PASS Earth orbital arguments",
+        "PASS invariant altitude formatting",
+        "PASS subdivision diagnostic mapping",
+        "PASS Florida launch mapping",
+        "PASS invalid configuration rejection",
+        "PASS diagnostics arguments",
+        "PASS existing production scenarios",
+        "NovaCore launcher tests passed: 15"
+      ]
+    },
+    {
+      "label": "asset-earth-surface-v5",
+      "arguments": [
+        "E:\\NovaCore\\tools\\NovaCore.AssetTool\\bin\\Release\\net10.0\\NovaCore.AssetTool.exe",
+        "verify",
+        "earth-surface-v5"
+      ],
+      "exitCode": 0,
+      "stdoutUtf8Bytes": 374,
+      "logSha256": "458279d3eaaf3686928d3f949bd2cd7ea441d98dc417e6f32163acf037af8d68",
+      "summary": []
+    },
+    {
+      "label": "asset-earth-florida-m12",
+      "arguments": [
+        "E:\\NovaCore\\tools\\NovaCore.AssetTool\\bin\\Release\\net10.0\\NovaCore.AssetTool.exe",
+        "verify",
+        "earth-florida-m12"
+      ],
+      "exitCode": 0,
+      "stdoutUtf8Bytes": 377,
+      "logSha256": "0e85399513500a393285c2bdffca0ddaafdcceb9d1afc255ecb3fa370465330c",
+      "summary": []
+    },
+    {
+      "label": "route-probe-build",
+      "arguments": [
+        "dotnet",
+        "build",
+        "E:\\NovaCore\\build\\tes-address-validation\\route\\route.csproj",
+        "-c",
+        "Release",
+        "-v",
+        "quiet"
+      ],
+      "exitCode": 0,
+      "stdoutUtf8Bytes": 76,
+      "logSha256": "5e1c1d64a41bb8f5afe1b2c8b165e78327c4d3f64bcf7b7544e92a3790d7f646",
+      "summary": [
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)"
+      ]
+    },
+    {
+      "label": "six-routes-Florida-smoke",
+      "arguments": [
+        "E:\\NovaCore\\build\\tes-address-validation\\route\\bin\\Release\\net10.0-windows\\route.exe",
+        "--smoke"
+      ],
+      "exitCode": 0,
+      "stdoutUtf8Bytes": 236,
+      "logSha256": "e6ba9579f9fae14eab5aaf5799b461d370fd26098edfac7b395e50f183a117d5",
+      "summary": [
+        "Launcher route probe PASS: six supported presets, current Release executable; exact Florida arguments"
+      ]
+    }
+  ],
+  "deployment": [
+    {
+      "configuration": "Debug",
+      "directory": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0",
+      "nativeSha256": "2bfa9b8e9d200f303c4614a47da4418a6e1817455f192ed92fb3be5d36e01c3c",
+      "shaderDirectory": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0\\shaders",
+      "shaders": {
+        "body_forward.frag.spv": "fa706803f042fb5a9f7a3c9965a3e2de3e8838e075d67876b78df9bdc132ce0e",
+        "distant_planet.frag.spv": "04137afb1c632dfb7074480377d9f93136ab3127d382baeef07d52b09409eba8",
+        "distant_planet.vert.spv": "cf28fe0a7c0797bd7d72076437ba78c4e0d97bb1a0ae3c065baf3bfc5db62cb8",
+        "fullscreen.vert.spv": "a18f9b5e0b4a4e7a077b1017bad7b1c5c40313b3f70113f1e0771cd202433130",
+        "orbit.frag.spv": "b06f50708727144e8d0f08d35cd2e64d8b1cef501ed20b10fea4a34196026267",
+        "orbit.vert.spv": "b4b9dd635f32156654e30d843c29eb864feb09751d7b3027cf99a5d741b6a45b",
+        "orbit_previous.frag.spv": "c4935060e07e01742d59d8a5834241e2963dcc80ed8e35baeac5b08288761e61",
+        "planetary.frag.spv": "417f17b236834f0ac94fa3bbfdae52ad164599ff14051e9b396809beea75cda1",
+        "planetary.vert.spv": "ddb84030e2621df8f05489e339989d66de60d73435f490b4ec0af4251d7a0338",
+        "planetary_natural_terrain_global_prepare.comp.spv": "5a5450321873f5ff8bed7dd9e4f06c342625724d629da2232521fbace01c7a85",
+        "planetary_production.frag.spv": "3c75d16a441d456c7c80279250388cb75b21712e31a17b3e75b6c1902a927241",
+        "planetary_production_terrain.comp.spv": "405e6e6daab609ca383297ba8be706bfa96859c65dc2d9f42476a32cddd85df7",
+        "planetary_ring.vert.spv": "cccede52d3c64db872360912db9eb29e60cb892c648ed53ce1c178f8623d0cfb",
+        "planetary_ring_far.frag.spv": "343db81bccc310b21c600ab6ee6722438151694683bb0cf7ba01d54a9b68ade6",
+        "planetary_ring_near.frag.spv": "48b8ef4e56b6be9380cfbaca7daa790035e704541b6b8a550b3cc7bed540244c",
+        "planetary_select.comp.spv": "8189bbd2a85fe23033f12c558d8b221b62b8969c17ba9ffcf07b7c8501fe8adf",
+        "planetary_terrain_generate.comp.spv": "1fc8c24ea6b4a55e83997fadf80b4901f692b8bc2de84a5cf6ac043e4da531d1",
+        "production_nested_scale_mesh_cull.comp.spv": "497d88225a914b9601ad6c0f44733e834794a952854e71b26be426ead8780d94",
+        "production_nested_scale_mesh_incoming_cull.comp.spv": "23bd1b04d0291e6271138041433eee07e57503482e8e5cf845e4b72c75967336",
+        "production_spherical_billboard.tesc.spv": "0163498278f9523fd442434f05f056be28252d16c2f2ba44b8d91642b33e4439",
+        "production_spherical_billboard.tese.spv": "3b64eca169c95f00b1d375d380de8b38d18a2ae00dce0cc640f7621fc1df3ed5",
+        "production_spherical_billboard.vert.spv": "1baa9043db7a8b71dcf5931f4cb415fa84ce6341b07d850ea9beb8baa02d2b6a",
+        "production_spherical_billboard_compact.comp.spv": "2aabd7633b333f86df8a6eae6b76ed2d13a7129443dcd9201531de047b12f4d9",
+        "production_spherical_billboard_cull.comp.spv": "2827b58dcd7029695e0b33272018e54d19d6113b8d7ab9ac591c343b3d994398",
+        "production_spherical_billboard_incoming_compact.comp.spv": "6b0238138222112ddf1f945f5e6a31867d5dd11f57169481ece9c05337f43e4e",
+        "production_spherical_billboard_incoming_cull.comp.spv": "8c677f08ae051cf525108a436066983d41961ce70757ca29a86df165d2663cfb",
+        "production_spherical_billboard_incoming_prepare.comp.spv": "9f32e3fcf9ffe534a10107ab0b1ef2b1ecdb3c6a9bb44d2c5d3d38b15ed47613",
+        "production_spherical_billboard_incoming_reset.comp.spv": "5d750f929dcab4f9f3138b4cdfa869ab26e3051d4b28485c02ee483f89e14d6e",
+        "production_spherical_billboard_prepare.comp.spv": "cd6b8feeaa382281c4d8891af64d54e45354491dbd93af6b90621a3658e9492c",
+        "production_spherical_billboard_reset.comp.spv": "cf583d16e14c8a8ec63b393d8752541648d932cf0165231cc48f6076e28fc027",
+        "regional_physical_demand.comp.spv": "7d80dbd70be13cc55f00ef836cd8da9d3783064411320697777f6b5c848d8f67",
+        "regional_physical_incoming_demand.comp.spv": "a56b62b5432206b8ab5eded734b13a0ddf9f0c726a4b444f8d24139bdcc17a60",
+        "sas_target.frag.spv": "4e99fda06f571590f950e91d93025cafa83e4a454e68e3583ce59d869f0a3ef2",
+        "solar_label.frag.spv": "673c5dc0cc1e199d497c7c927f282a02da444fa258860b6cb94b6fd1ed12c90a",
+        "solar_label.vert.spv": "a13a7a8acb3ae2da2cac129a203caffd86b5a7f434701d99b59284fdd01f1844",
+        "solar_marker.frag.spv": "d428743c08f96f4e508eab131cfb54981c2628eecc7acd3d2df220b19103275b",
+        "solar_marker.vert.spv": "50d948741d3ca6b59577a82d3346ab3cac51edcb9ab80047247ac61c345b6db6",
+        "solar_orbit.frag.spv": "23b511270c196c2186f7935699ca7fdedf3c92c629da67c10e8ae7615286181f",
+        "solar_orbit.vert.spv": "d71520615e2533a06208c3cec752d2689f524a30fb6a11bd2ca4ae00e2cc027f",
+        "solar_speed_hud.frag.spv": "e073b0ab31c69a3516d695146ade0dbd618d3dede5a10699f390f10da52c3586",
+        "solar_speed_hud.vert.spv": "a777a4dfece073339efcd97c7292d970f8c26d21f221ebd62ce244970f0a5fb4",
+        "space_background.frag.spv": "0c98ee3df0ba8ad8f313cc352a02032528e6b0e36b2dfa8cc2be1a6755b71cfc",
+        "stellar_glow.frag.spv": "e83a5e7458ec4be4b835384c88ec3ea958ae13569ee9ac823a4e2b2db17facee",
+        "stellar_glow.vert.spv": "30a9ed63e3d92581852afef62a242f2160a10c6cdb276a3b1aa0360a476183e8",
+        "stellar_sun.frag.spv": "5c448c0da4cadeb08bf2c85c74448d3b690fd3d6bccab1fc2c49da7a0bf54769",
+        "stellar_sun.vert.spv": "3e124d5babcb1d219499aa2de1482f90fc7c9008e92b054f7ca0d268336346b6",
+        "tone_map.frag.spv": "d617345e95589ecb087ed40c20f4d04a427251a2b5249d8181cc63c421ee3979",
+        "triangle.frag.spv": "36e2c4762d87eddd045909f600217f3ea7d48b023d08887abbf958d3bfaa5ddf",
+        "triangle.vert.spv": "87c254e6166b18954b8c0fbd533af2e83f4cf7f09842d752a0a76ae68e8f1aef"
+      },
+      "managedSha256": "4a8af4c85eea2dee868c51f2e84cf7b8752964287d0864bbb1732bc3accb4419",
+      "executableSha256": "579a4e2d1710fbb2cc514da6790c3e275e4cea72447cc0475dbdc9a9c72dde20",
+      "elevationOracleSha256": "4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317",
+      "changedProductionShaders": [
+        "production_spherical_billboard.tese.spv"
+      ]
+    },
+    {
+      "configuration": "Debug",
+      "directory": "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0",
+      "nativeSha256": "2bfa9b8e9d200f303c4614a47da4418a6e1817455f192ed92fb3be5d36e01c3c",
+      "shaderDirectory": "E:\\NovaCore\\build\\native-ninja\\shaders",
+      "shaders": {
+        "body_forward.frag.spv": "fa706803f042fb5a9f7a3c9965a3e2de3e8838e075d67876b78df9bdc132ce0e",
+        "distant_planet.frag.spv": "04137afb1c632dfb7074480377d9f93136ab3127d382baeef07d52b09409eba8",
+        "distant_planet.vert.spv": "cf28fe0a7c0797bd7d72076437ba78c4e0d97bb1a0ae3c065baf3bfc5db62cb8",
+        "facility_visibility_test.comp.spv": "db991ea145b654b9b0d249bc5d033d87f2f27d4ab9943474005044124308da9c",
+        "fullscreen.vert.spv": "a18f9b5e0b4a4e7a077b1017bad7b1c5c40313b3f70113f1e0771cd202433130",
+        "orbit.frag.spv": "b06f50708727144e8d0f08d35cd2e64d8b1cef501ed20b10fea4a34196026267",
+        "orbit.vert.spv": "b4b9dd635f32156654e30d843c29eb864feb09751d7b3027cf99a5d741b6a45b",
+        "orbit_previous.frag.spv": "c4935060e07e01742d59d8a5834241e2963dcc80ed8e35baeac5b08288761e61",
+        "planetary.frag.spv": "417f17b236834f0ac94fa3bbfdae52ad164599ff14051e9b396809beea75cda1",
+        "planetary.vert.spv": "ddb84030e2621df8f05489e339989d66de60d73435f490b4ec0af4251d7a0338",
+        "planetary_height_query.comp.spv": "99ed73cd152d802ed582430ddf33ad52767f69937e1e4867dad4716abc4f56f8",
+        "planetary_mesh_displace.comp.spv": "587446a3d54eb3272baba135cae0136fb5dc30d254ce27a2f7ca7c5409efb2f2",
+        "planetary_mesh_normals.comp.spv": "90b7b85919712be884e944b2afffe639fc24db83f5e73c0599118d8807150066",
+        "planetary_natural_terrain_families_query.comp.spv": "5fabc5591f492948d69ff236785f8478d4b9196000a0a7af8b731267fc5016c5",
+        "planetary_natural_terrain_field_query.comp.spv": "aa136512bebc9c818b4ccd6a1ae106f3bd21021786c9c8f9a37c0c2c844abd5d",
+        "planetary_natural_terrain_global_prepare.comp.spv": "5a5450321873f5ff8bed7dd9e4f06c342625724d629da2232521fbace01c7a85",
+        "planetary_natural_terrain_prepare.comp.spv": "aceb31079451be0bc1b10d495d7cd23a1c45be601755724c6de2a29ca21335c7",
+        "planetary_production.frag.spv": "3c75d16a441d456c7c80279250388cb75b21712e31a17b3e75b6c1902a927241",
+        "planetary_production_terrain.comp.spv": "405e6e6daab609ca383297ba8be706bfa96859c65dc2d9f42476a32cddd85df7",
+        "planetary_ring.vert.spv": "cccede52d3c64db872360912db9eb29e60cb892c648ed53ce1c178f8623d0cfb",
+        "planetary_ring_far.frag.spv": "343db81bccc310b21c600ab6ee6722438151694683bb0cf7ba01d54a9b68ade6",
+        "planetary_ring_near.frag.spv": "48b8ef4e56b6be9380cfbaca7daa790035e704541b6b8a550b3cc7bed540244c",
+        "planetary_select.comp.spv": "8189bbd2a85fe23033f12c558d8b221b62b8969c17ba9ffcf07b7c8501fe8adf",
+        "planetary_terrain_generate.comp.spv": "1fc8c24ea6b4a55e83997fadf80b4901f692b8bc2de84a5cf6ac043e4da531d1",
+        "production_nested_scale_mesh_cull.comp.spv": "497d88225a914b9601ad6c0f44733e834794a952854e71b26be426ead8780d94",
+        "production_nested_scale_mesh_incoming_cull.comp.spv": "23bd1b04d0291e6271138041433eee07e57503482e8e5cf845e4b72c75967336",
+        "production_spherical_billboard.tesc.spv": "0163498278f9523fd442434f05f056be28252d16c2f2ba44b8d91642b33e4439",
+        "production_spherical_billboard.tese.spv": "3b64eca169c95f00b1d375d380de8b38d18a2ae00dce0cc640f7621fc1df3ed5",
+        "production_spherical_billboard.vert.spv": "1baa9043db7a8b71dcf5931f4cb415fa84ce6341b07d850ea9beb8baa02d2b6a",
+        "production_spherical_billboard_compact.comp.spv": "2aabd7633b333f86df8a6eae6b76ed2d13a7129443dcd9201531de047b12f4d9",
+        "production_spherical_billboard_cull.comp.spv": "2827b58dcd7029695e0b33272018e54d19d6113b8d7ab9ac591c343b3d994398",
+        "production_spherical_billboard_incoming_compact.comp.spv": "6b0238138222112ddf1f945f5e6a31867d5dd11f57169481ece9c05337f43e4e",
+        "production_spherical_billboard_incoming_cull.comp.spv": "8c677f08ae051cf525108a436066983d41961ce70757ca29a86df165d2663cfb",
+        "production_spherical_billboard_incoming_prepare.comp.spv": "9f32e3fcf9ffe534a10107ab0b1ef2b1ecdb3c6a9bb44d2c5d3d38b15ed47613",
+        "production_spherical_billboard_incoming_reset.comp.spv": "5d750f929dcab4f9f3138b4cdfa869ab26e3051d4b28485c02ee483f89e14d6e",
+        "production_spherical_billboard_prepare.comp.spv": "cd6b8feeaa382281c4d8891af64d54e45354491dbd93af6b90621a3658e9492c",
+        "production_spherical_billboard_reset.comp.spv": "cf583d16e14c8a8ec63b393d8752541648d932cf0165231cc48f6076e28fc027",
+        "regional_physical_demand.comp.spv": "7d80dbd70be13cc55f00ef836cd8da9d3783064411320697777f6b5c848d8f67",
+        "regional_physical_incoming_demand.comp.spv": "a56b62b5432206b8ab5eded734b13a0ddf9f0c726a4b444f8d24139bdcc17a60",
+        "sas_target.frag.spv": "4e99fda06f571590f950e91d93025cafa83e4a454e68e3583ce59d869f0a3ef2",
+        "solar_label.frag.spv": "673c5dc0cc1e199d497c7c927f282a02da444fa258860b6cb94b6fd1ed12c90a",
+        "solar_label.vert.spv": "a13a7a8acb3ae2da2cac129a203caffd86b5a7f434701d99b59284fdd01f1844",
+        "solar_marker.frag.spv": "d428743c08f96f4e508eab131cfb54981c2628eecc7acd3d2df220b19103275b",
+        "solar_marker.vert.spv": "50d948741d3ca6b59577a82d3346ab3cac51edcb9ab80047247ac61c345b6db6",
+        "solar_orbit.frag.spv": "23b511270c196c2186f7935699ca7fdedf3c92c629da67c10e8ae7615286181f",
+        "solar_orbit.vert.spv": "d71520615e2533a06208c3cec752d2689f524a30fb6a11bd2ca4ae00e2cc027f",
+        "solar_speed_hud.frag.spv": "e073b0ab31c69a3516d695146ade0dbd618d3dede5a10699f390f10da52c3586",
+        "solar_speed_hud.vert.spv": "a777a4dfece073339efcd97c7292d970f8c26d21f221ebd62ce244970f0a5fb4",
+        "space_background.frag.spv": "0c98ee3df0ba8ad8f313cc352a02032528e6b0e36b2dfa8cc2be1a6755b71cfc",
+        "spherical_billboard_proof.frag.spv": "31b75eb3c71e58c55e863e42a0ae703421afcb47a5bad1f8a10f213ecb7ae269",
+        "spherical_billboard_proof.vert.spv": "bb46f890042a949a2e664b3bdde8f5b5cdb7ab6761b7bd54c6d4b67c828198ed",
+        "spherical_billboard_proof_compact.comp.spv": "4565eb6dab20c8d08c93d042bf4cf69e362ab3c0b9cc92b8df8793c1a268a5ac",
+        "spherical_billboard_proof_cull.comp.spv": "4d61c6f06bd8c5f5c80ebe83a1cb835266a8b85df70fefd17da6c6db0ef2ed76",
+        "spherical_billboard_proof_normals.comp.spv": "6241b4d06ffe62704a88997afd189cee8f38778e0d4100c1cd7cfc5e9d13e63e",
+        "spherical_billboard_proof_prepare.comp.spv": "c8491a619f5f723976fb97734033dcc81883062a7a3f43ae14b653c43216d632",
+        "spherical_billboard_proof_reset.comp.spv": "6b8289c27561c96b77b293915fccf6619642186b0ab19ca0f43c7e4d1f6141cb",
+        "stellar_glow.frag.spv": "e83a5e7458ec4be4b835384c88ec3ea958ae13569ee9ac823a4e2b2db17facee",
+        "stellar_glow.vert.spv": "30a9ed63e3d92581852afef62a242f2160a10c6cdb276a3b1aa0360a476183e8",
+        "stellar_sun.frag.spv": "5c448c0da4cadeb08bf2c85c74448d3b690fd3d6bccab1fc2c49da7a0bf54769",
+        "stellar_sun.vert.spv": "3e124d5babcb1d219499aa2de1482f90fc7c9008e92b054f7ca0d268336346b6",
+        "surface_material_coordinates_test.comp.spv": "bbd5a46a771c53f5a421ca80ab8b3c3ba1a4370381b074fe2775fef4e22b2f68",
+        "tone_map.frag.spv": "d617345e95589ecb087ed40c20f4d04a427251a2b5249d8181cc63c421ee3979",
+        "triangle.frag.spv": "36e2c4762d87eddd045909f600217f3ea7d48b023d08887abbf958d3bfaa5ddf",
+        "triangle.vert.spv": "87c254e6166b18954b8c0fbd533af2e83f4cf7f09842d752a0a76ae68e8f1aef"
+      }
+    },
+    {
+      "configuration": "Release",
+      "directory": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0",
+      "nativeSha256": "7c4b9e8a78b3b18e5a9c143e176f51eab345de1d61862089e2d432613e06e8dd",
+      "shaderDirectory": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\shaders",
+      "shaders": {
+        "body_forward.frag.spv": "fa706803f042fb5a9f7a3c9965a3e2de3e8838e075d67876b78df9bdc132ce0e",
+        "distant_planet.frag.spv": "04137afb1c632dfb7074480377d9f93136ab3127d382baeef07d52b09409eba8",
+        "distant_planet.vert.spv": "cf28fe0a7c0797bd7d72076437ba78c4e0d97bb1a0ae3c065baf3bfc5db62cb8",
+        "fullscreen.vert.spv": "a18f9b5e0b4a4e7a077b1017bad7b1c5c40313b3f70113f1e0771cd202433130",
+        "orbit.frag.spv": "b06f50708727144e8d0f08d35cd2e64d8b1cef501ed20b10fea4a34196026267",
+        "orbit.vert.spv": "b4b9dd635f32156654e30d843c29eb864feb09751d7b3027cf99a5d741b6a45b",
+        "orbit_previous.frag.spv": "c4935060e07e01742d59d8a5834241e2963dcc80ed8e35baeac5b08288761e61",
+        "planetary.frag.spv": "417f17b236834f0ac94fa3bbfdae52ad164599ff14051e9b396809beea75cda1",
+        "planetary.vert.spv": "ddb84030e2621df8f05489e339989d66de60d73435f490b4ec0af4251d7a0338",
+        "planetary_natural_terrain_global_prepare.comp.spv": "5a5450321873f5ff8bed7dd9e4f06c342625724d629da2232521fbace01c7a85",
+        "planetary_production.frag.spv": "3c75d16a441d456c7c80279250388cb75b21712e31a17b3e75b6c1902a927241",
+        "planetary_production_terrain.comp.spv": "405e6e6daab609ca383297ba8be706bfa96859c65dc2d9f42476a32cddd85df7",
+        "planetary_ring.vert.spv": "cccede52d3c64db872360912db9eb29e60cb892c648ed53ce1c178f8623d0cfb",
+        "planetary_ring_far.frag.spv": "343db81bccc310b21c600ab6ee6722438151694683bb0cf7ba01d54a9b68ade6",
+        "planetary_ring_near.frag.spv": "48b8ef4e56b6be9380cfbaca7daa790035e704541b6b8a550b3cc7bed540244c",
+        "planetary_select.comp.spv": "8189bbd2a85fe23033f12c558d8b221b62b8969c17ba9ffcf07b7c8501fe8adf",
+        "planetary_terrain_generate.comp.spv": "1fc8c24ea6b4a55e83997fadf80b4901f692b8bc2de84a5cf6ac043e4da531d1",
+        "production_nested_scale_mesh_cull.comp.spv": "497d88225a914b9601ad6c0f44733e834794a952854e71b26be426ead8780d94",
+        "production_nested_scale_mesh_incoming_cull.comp.spv": "23bd1b04d0291e6271138041433eee07e57503482e8e5cf845e4b72c75967336",
+        "production_spherical_billboard.tesc.spv": "0163498278f9523fd442434f05f056be28252d16c2f2ba44b8d91642b33e4439",
+        "production_spherical_billboard.tese.spv": "3b64eca169c95f00b1d375d380de8b38d18a2ae00dce0cc640f7621fc1df3ed5",
+        "production_spherical_billboard.vert.spv": "1baa9043db7a8b71dcf5931f4cb415fa84ce6341b07d850ea9beb8baa02d2b6a",
+        "production_spherical_billboard_compact.comp.spv": "2aabd7633b333f86df8a6eae6b76ed2d13a7129443dcd9201531de047b12f4d9",
+        "production_spherical_billboard_cull.comp.spv": "2827b58dcd7029695e0b33272018e54d19d6113b8d7ab9ac591c343b3d994398",
+        "production_spherical_billboard_incoming_compact.comp.spv": "6b0238138222112ddf1f945f5e6a31867d5dd11f57169481ece9c05337f43e4e",
+        "production_spherical_billboard_incoming_cull.comp.spv": "8c677f08ae051cf525108a436066983d41961ce70757ca29a86df165d2663cfb",
+        "production_spherical_billboard_incoming_prepare.comp.spv": "9f32e3fcf9ffe534a10107ab0b1ef2b1ecdb3c6a9bb44d2c5d3d38b15ed47613",
+        "production_spherical_billboard_incoming_reset.comp.spv": "5d750f929dcab4f9f3138b4cdfa869ab26e3051d4b28485c02ee483f89e14d6e",
+        "production_spherical_billboard_prepare.comp.spv": "cd6b8feeaa382281c4d8891af64d54e45354491dbd93af6b90621a3658e9492c",
+        "production_spherical_billboard_reset.comp.spv": "cf583d16e14c8a8ec63b393d8752541648d932cf0165231cc48f6076e28fc027",
+        "regional_physical_demand.comp.spv": "7d80dbd70be13cc55f00ef836cd8da9d3783064411320697777f6b5c848d8f67",
+        "regional_physical_incoming_demand.comp.spv": "a56b62b5432206b8ab5eded734b13a0ddf9f0c726a4b444f8d24139bdcc17a60",
+        "sas_target.frag.spv": "4e99fda06f571590f950e91d93025cafa83e4a454e68e3583ce59d869f0a3ef2",
+        "solar_label.frag.spv": "673c5dc0cc1e199d497c7c927f282a02da444fa258860b6cb94b6fd1ed12c90a",
+        "solar_label.vert.spv": "a13a7a8acb3ae2da2cac129a203caffd86b5a7f434701d99b59284fdd01f1844",
+        "solar_marker.frag.spv": "d428743c08f96f4e508eab131cfb54981c2628eecc7acd3d2df220b19103275b",
+        "solar_marker.vert.spv": "50d948741d3ca6b59577a82d3346ab3cac51edcb9ab80047247ac61c345b6db6",
+        "solar_orbit.frag.spv": "23b511270c196c2186f7935699ca7fdedf3c92c629da67c10e8ae7615286181f",
+        "solar_orbit.vert.spv": "d71520615e2533a06208c3cec752d2689f524a30fb6a11bd2ca4ae00e2cc027f",
+        "solar_speed_hud.frag.spv": "e073b0ab31c69a3516d695146ade0dbd618d3dede5a10699f390f10da52c3586",
+        "solar_speed_hud.vert.spv": "a777a4dfece073339efcd97c7292d970f8c26d21f221ebd62ce244970f0a5fb4",
+        "space_background.frag.spv": "0c98ee3df0ba8ad8f313cc352a02032528e6b0e36b2dfa8cc2be1a6755b71cfc",
+        "stellar_glow.frag.spv": "e83a5e7458ec4be4b835384c88ec3ea958ae13569ee9ac823a4e2b2db17facee",
+        "stellar_glow.vert.spv": "30a9ed63e3d92581852afef62a242f2160a10c6cdb276a3b1aa0360a476183e8",
+        "stellar_sun.frag.spv": "5c448c0da4cadeb08bf2c85c74448d3b690fd3d6bccab1fc2c49da7a0bf54769",
+        "stellar_sun.vert.spv": "3e124d5babcb1d219499aa2de1482f90fc7c9008e92b054f7ca0d268336346b6",
+        "tone_map.frag.spv": "d617345e95589ecb087ed40c20f4d04a427251a2b5249d8181cc63c421ee3979",
+        "triangle.frag.spv": "36e2c4762d87eddd045909f600217f3ea7d48b023d08887abbf958d3bfaa5ddf",
+        "triangle.vert.spv": "87c254e6166b18954b8c0fbd533af2e83f4cf7f09842d752a0a76ae68e8f1aef"
+      },
+      "managedSha256": "2a9b5d865e7d7873d860c2c8cedb695d64633212c30d9247501d94677d7defb4",
+      "executableSha256": "579a4e2d1710fbb2cc514da6790c3e275e4cea72447cc0475dbdc9a9c72dde20",
+      "elevationOracleSha256": "4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317",
+      "changedProductionShaders": [
+        "production_spherical_billboard.tese.spv"
+      ]
+    },
+    {
+      "configuration": "Release",
+      "directory": "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0",
+      "nativeSha256": "7c4b9e8a78b3b18e5a9c143e176f51eab345de1d61862089e2d432613e06e8dd",
+      "shaderDirectory": "E:\\NovaCore\\build\\native-ninja-release\\shaders",
+      "shaders": {
+        "body_forward.frag.spv": "fa706803f042fb5a9f7a3c9965a3e2de3e8838e075d67876b78df9bdc132ce0e",
+        "distant_planet.frag.spv": "04137afb1c632dfb7074480377d9f93136ab3127d382baeef07d52b09409eba8",
+        "distant_planet.vert.spv": "cf28fe0a7c0797bd7d72076437ba78c4e0d97bb1a0ae3c065baf3bfc5db62cb8",
+        "facility_visibility_test.comp.spv": "db991ea145b654b9b0d249bc5d033d87f2f27d4ab9943474005044124308da9c",
+        "fullscreen.vert.spv": "a18f9b5e0b4a4e7a077b1017bad7b1c5c40313b3f70113f1e0771cd202433130",
+        "orbit.frag.spv": "b06f50708727144e8d0f08d35cd2e64d8b1cef501ed20b10fea4a34196026267",
+        "orbit.vert.spv": "b4b9dd635f32156654e30d843c29eb864feb09751d7b3027cf99a5d741b6a45b",
+        "orbit_previous.frag.spv": "c4935060e07e01742d59d8a5834241e2963dcc80ed8e35baeac5b08288761e61",
+        "planetary.frag.spv": "417f17b236834f0ac94fa3bbfdae52ad164599ff14051e9b396809beea75cda1",
+        "planetary.vert.spv": "ddb84030e2621df8f05489e339989d66de60d73435f490b4ec0af4251d7a0338",
+        "planetary_height_query.comp.spv": "99ed73cd152d802ed582430ddf33ad52767f69937e1e4867dad4716abc4f56f8",
+        "planetary_mesh_displace.comp.spv": "587446a3d54eb3272baba135cae0136fb5dc30d254ce27a2f7ca7c5409efb2f2",
+        "planetary_mesh_normals.comp.spv": "90b7b85919712be884e944b2afffe639fc24db83f5e73c0599118d8807150066",
+        "planetary_natural_terrain_families_query.comp.spv": "5fabc5591f492948d69ff236785f8478d4b9196000a0a7af8b731267fc5016c5",
+        "planetary_natural_terrain_field_query.comp.spv": "aa136512bebc9c818b4ccd6a1ae106f3bd21021786c9c8f9a37c0c2c844abd5d",
+        "planetary_natural_terrain_global_prepare.comp.spv": "5a5450321873f5ff8bed7dd9e4f06c342625724d629da2232521fbace01c7a85",
+        "planetary_natural_terrain_prepare.comp.spv": "aceb31079451be0bc1b10d495d7cd23a1c45be601755724c6de2a29ca21335c7",
+        "planetary_production.frag.spv": "3c75d16a441d456c7c80279250388cb75b21712e31a17b3e75b6c1902a927241",
+        "planetary_production_terrain.comp.spv": "405e6e6daab609ca383297ba8be706bfa96859c65dc2d9f42476a32cddd85df7",
+        "planetary_ring.vert.spv": "cccede52d3c64db872360912db9eb29e60cb892c648ed53ce1c178f8623d0cfb",
+        "planetary_ring_far.frag.spv": "343db81bccc310b21c600ab6ee6722438151694683bb0cf7ba01d54a9b68ade6",
+        "planetary_ring_near.frag.spv": "48b8ef4e56b6be9380cfbaca7daa790035e704541b6b8a550b3cc7bed540244c",
+        "planetary_select.comp.spv": "8189bbd2a85fe23033f12c558d8b221b62b8969c17ba9ffcf07b7c8501fe8adf",
+        "planetary_terrain_generate.comp.spv": "1fc8c24ea6b4a55e83997fadf80b4901f692b8bc2de84a5cf6ac043e4da531d1",
+        "production_nested_scale_mesh_cull.comp.spv": "497d88225a914b9601ad6c0f44733e834794a952854e71b26be426ead8780d94",
+        "production_nested_scale_mesh_incoming_cull.comp.spv": "23bd1b04d0291e6271138041433eee07e57503482e8e5cf845e4b72c75967336",
+        "production_spherical_billboard.tesc.spv": "0163498278f9523fd442434f05f056be28252d16c2f2ba44b8d91642b33e4439",
+        "production_spherical_billboard.tese.spv": "3b64eca169c95f00b1d375d380de8b38d18a2ae00dce0cc640f7621fc1df3ed5",
+        "production_spherical_billboard.vert.spv": "1baa9043db7a8b71dcf5931f4cb415fa84ce6341b07d850ea9beb8baa02d2b6a",
+        "production_spherical_billboard_compact.comp.spv": "2aabd7633b333f86df8a6eae6b76ed2d13a7129443dcd9201531de047b12f4d9",
+        "production_spherical_billboard_cull.comp.spv": "2827b58dcd7029695e0b33272018e54d19d6113b8d7ab9ac591c343b3d994398",
+        "production_spherical_billboard_incoming_compact.comp.spv": "6b0238138222112ddf1f945f5e6a31867d5dd11f57169481ece9c05337f43e4e",
+        "production_spherical_billboard_incoming_cull.comp.spv": "8c677f08ae051cf525108a436066983d41961ce70757ca29a86df165d2663cfb",
+        "production_spherical_billboard_incoming_prepare.comp.spv": "9f32e3fcf9ffe534a10107ab0b1ef2b1ecdb3c6a9bb44d2c5d3d38b15ed47613",
+        "production_spherical_billboard_incoming_reset.comp.spv": "5d750f929dcab4f9f3138b4cdfa869ab26e3051d4b28485c02ee483f89e14d6e",
+        "production_spherical_billboard_prepare.comp.spv": "cd6b8feeaa382281c4d8891af64d54e45354491dbd93af6b90621a3658e9492c",
+        "production_spherical_billboard_reset.comp.spv": "cf583d16e14c8a8ec63b393d8752541648d932cf0165231cc48f6076e28fc027",
+        "regional_physical_demand.comp.spv": "7d80dbd70be13cc55f00ef836cd8da9d3783064411320697777f6b5c848d8f67",
+        "regional_physical_incoming_demand.comp.spv": "a56b62b5432206b8ab5eded734b13a0ddf9f0c726a4b444f8d24139bdcc17a60",
+        "sas_target.frag.spv": "4e99fda06f571590f950e91d93025cafa83e4a454e68e3583ce59d869f0a3ef2",
+        "solar_label.frag.spv": "673c5dc0cc1e199d497c7c927f282a02da444fa258860b6cb94b6fd1ed12c90a",
+        "solar_label.vert.spv": "a13a7a8acb3ae2da2cac129a203caffd86b5a7f434701d99b59284fdd01f1844",
+        "solar_marker.frag.spv": "d428743c08f96f4e508eab131cfb54981c2628eecc7acd3d2df220b19103275b",
+        "solar_marker.vert.spv": "50d948741d3ca6b59577a82d3346ab3cac51edcb9ab80047247ac61c345b6db6",
+        "solar_orbit.frag.spv": "23b511270c196c2186f7935699ca7fdedf3c92c629da67c10e8ae7615286181f",
+        "solar_orbit.vert.spv": "d71520615e2533a06208c3cec752d2689f524a30fb6a11bd2ca4ae00e2cc027f",
+        "solar_speed_hud.frag.spv": "e073b0ab31c69a3516d695146ade0dbd618d3dede5a10699f390f10da52c3586",
+        "solar_speed_hud.vert.spv": "a777a4dfece073339efcd97c7292d970f8c26d21f221ebd62ce244970f0a5fb4",
+        "space_background.frag.spv": "0c98ee3df0ba8ad8f313cc352a02032528e6b0e36b2dfa8cc2be1a6755b71cfc",
+        "spherical_billboard_proof.frag.spv": "31b75eb3c71e58c55e863e42a0ae703421afcb47a5bad1f8a10f213ecb7ae269",
+        "spherical_billboard_proof.vert.spv": "bb46f890042a949a2e664b3bdde8f5b5cdb7ab6761b7bd54c6d4b67c828198ed",
+        "spherical_billboard_proof_compact.comp.spv": "4565eb6dab20c8d08c93d042bf4cf69e362ab3c0b9cc92b8df8793c1a268a5ac",
+        "spherical_billboard_proof_cull.comp.spv": "4d61c6f06bd8c5f5c80ebe83a1cb835266a8b85df70fefd17da6c6db0ef2ed76",
+        "spherical_billboard_proof_normals.comp.spv": "6241b4d06ffe62704a88997afd189cee8f38778e0d4100c1cd7cfc5e9d13e63e",
+        "spherical_billboard_proof_prepare.comp.spv": "c8491a619f5f723976fb97734033dcc81883062a7a3f43ae14b653c43216d632",
+        "spherical_billboard_proof_reset.comp.spv": "6b8289c27561c96b77b293915fccf6619642186b0ab19ca0f43c7e4d1f6141cb",
+        "stellar_glow.frag.spv": "e83a5e7458ec4be4b835384c88ec3ea958ae13569ee9ac823a4e2b2db17facee",
+        "stellar_glow.vert.spv": "30a9ed63e3d92581852afef62a242f2160a10c6cdb276a3b1aa0360a476183e8",
+        "stellar_sun.frag.spv": "5c448c0da4cadeb08bf2c85c74448d3b690fd3d6bccab1fc2c49da7a0bf54769",
+        "stellar_sun.vert.spv": "3e124d5babcb1d219499aa2de1482f90fc7c9008e92b054f7ca0d268336346b6",
+        "surface_material_coordinates_test.comp.spv": "bbd5a46a771c53f5a421ca80ab8b3c3ba1a4370381b074fe2775fef4e22b2f68",
+        "tone_map.frag.spv": "d617345e95589ecb087ed40c20f4d04a427251a2b5249d8181cc63c421ee3979",
+        "triangle.frag.spv": "36e2c4762d87eddd045909f600217f3ea7d48b023d08887abbf958d3bfaa5ddf",
+        "triangle.vert.spv": "87c254e6166b18954b8c0fbd533af2e83f4cf7f09842d752a0a76ae68e8f1aef"
+      }
+    }
+  ],
+  "launcherRoutes": [
+    {
+      "preset": "Solar System Overview",
+      "FileName": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Triangle.exe",
+      "Arguments": [
+        "--scene=sol",
+        "--physical-surface=m12d-natural-candidate"
+      ],
+      "WorkingDirectory": "E:\\NovaCore",
+      "EnvironmentVariables": {
+        "NOVACORE_WINDOW_CLIENT_WIDTH": "960",
+        "NOVACORE_WINDOW_CLIENT_HEIGHT": "540",
+        "NOVACORE_WINDOW_BORDERLESS": "0"
+      }
+    },
+    {
+      "preset": "Earth Far / Orbital View",
+      "FileName": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Triangle.exe",
+      "Arguments": [
+        "--scene=earth",
+        "--altitude=3000000",
+        "--surface-site=land",
+        "--physical-surface=m12d-natural-candidate"
+      ],
+      "WorkingDirectory": "E:\\NovaCore",
+      "EnvironmentVariables": {
+        "NOVACORE_WINDOW_CLIENT_WIDTH": "960",
+        "NOVACORE_WINDOW_CLIENT_HEIGHT": "540",
+        "NOVACORE_WINDOW_BORDERLESS": "0"
+      }
+    },
+    {
+      "preset": "Earth 700 km",
+      "FileName": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Triangle.exe",
+      "Arguments": [
+        "--scene=earth",
+        "--altitude=700000",
+        "--surface-site=land",
+        "--physical-surface=m12d-natural-candidate"
+      ],
+      "WorkingDirectory": "E:\\NovaCore",
+      "EnvironmentVariables": {
+        "NOVACORE_WINDOW_CLIENT_WIDTH": "960",
+        "NOVACORE_WINDOW_CLIENT_HEIGHT": "540",
+        "NOVACORE_WINDOW_BORDERLESS": "0"
+      }
+    },
+    {
+      "preset": "Earth \u2014 Fullscreen Native",
+      "FileName": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Triangle.exe",
+      "Arguments": [
+        "--scene=sol",
+        "--focus=earth",
+        "--altitude=700000",
+        "--surface-site=land",
+        "--log=validation",
+        "--log=vulkan",
+        "--physical-surface=m12d-natural-candidate"
+      ],
+      "WorkingDirectory": "E:\\NovaCore",
+      "EnvironmentVariables": {
+        "NOVACORE_WINDOW_CLIENT_WIDTH": "3440",
+        "NOVACORE_WINDOW_CLIENT_HEIGHT": "1440",
+        "NOVACORE_WINDOW_BORDERLESS": "1",
+        "VK_INSTANCE_LAYERS": "VK_LAYER_KHRONOS_validation"
+      }
+    },
+    {
+      "preset": "Florida Launch Site",
+      "FileName": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Triangle.exe",
+      "Arguments": [
+        "--scene=sol",
+        "--focus=earth",
+        "--surface-site=florida-launch",
+        "--physical-surface=m12d-natural-candidate"
+      ],
+      "WorkingDirectory": "E:\\NovaCore",
+      "EnvironmentVariables": {
+        "NOVACORE_WINDOW_CLIENT_WIDTH": "960",
+        "NOVACORE_WINDOW_CLIENT_HEIGHT": "540",
+        "NOVACORE_WINDOW_BORDERLESS": "0"
+      }
+    },
+    {
+      "preset": "New Earth Renderer",
+      "FileName": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Triangle.exe",
+      "Arguments": [
+        "--scene=m12d-production-spherical-billboard",
+        "--altitude=700000",
+        "--surface-site=land",
+        "--log=vulkan",
+        "--physical-surface=m12d-natural-candidate"
+      ],
+      "WorkingDirectory": "E:\\NovaCore",
+      "EnvironmentVariables": {
+        "NOVACORE_WINDOW_CLIENT_WIDTH": "3440",
+        "NOVACORE_WINDOW_CLIENT_HEIGHT": "1440",
+        "NOVACORE_WINDOW_BORDERLESS": "1"
+      }
+    }
+  ],
+  "floridaSmoke": {
+    "pass": true,
+    "frames": 500,
+    "exitCode": 0,
+    "physicalProbeEnabled": false,
+    "bulkCaptureEnabled": false,
+    "vuidLines": 0,
+    "manualAcceptance": false,
+    "logSha256": "c2a0788aa9786669ffdf16085a3149dfe1a41e7a3b4be2eb7b2876bed31cd680",
+    "summary": [
+      "Runtime fingerprint: cwd=E:\\NovaCore; process=E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Triangle.exe; base=E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\",
+      "[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)",
+      "[native] NCSM1 regional ready: incoming=1; pupil=1; dependencyDelayMs=577.209; requests=670; resident=670; uploadedBytes=93392640; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=1; level=17; topologyFamily=1; hash=0xBCE444AFFB2D713B; topologyResident=true; topologyReused=0; topologyUploads=1; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1424208; postHorizonTriangles=1184192; horizonRejected=240016; postScreenConeTriangles=294748; screenConeRejected=889444; compactedIndices=884244; visibleTriangles=294748; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=1; deferredRetirements=0",
+      "[native] Production spherical billboard publication: generation=2; level=16; topologyFamily=1; hash=0x32840D29EDE00769; topologyResident=true; topologyReused=0; topologyUploads=2; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1392816; postHorizonTriangles=1357789; horizonRejected=35027; postScreenConeTriangles=1106450; screenConeRejected=251339; compactedIndices=3319350; visibleTriangles=1106450; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=2; deferredRetirements=1",
+      "[native] Production spherical billboard publication: generation=3; level=15; topologyFamily=1; hash=0x967DCF11C4ABC256; topologyResident=true; topologyReused=0; topologyUploads=3; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1294000; postHorizonTriangles=1258973; horizonRejected=35027; postScreenConeTriangles=1007632; screenConeRejected=251341; compactedIndices=3022896; visibleTriangles=1007632; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=3; deferredRetirements=2",
+      "[native] Production spherical billboard publication: generation=4; level=14; topologyFamily=1; hash=0x8999DD8A034A9AB1; topologyResident=true; topologyReused=0; topologyUploads=4; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1195184; postHorizonTriangles=1160157; horizonRejected=35027; postScreenConeTriangles=908810; screenConeRejected=251347; compactedIndices=2726430; visibleTriangles=908810; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=4; deferredRetirements=3",
+      "[native] Production spherical billboard publication: generation=5; level=13; topologyFamily=1; hash=0x72F194C57A876360; topologyResident=true; topologyReused=0; topologyUploads=5; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1096368; postHorizonTriangles=1061340; horizonRejected=35028; postScreenConeTriangles=809996; screenConeRejected=251344; compactedIndices=2429988; visibleTriangles=809996; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=5; deferredRetirements=4",
+      "[native] Production spherical billboard publication: generation=6; level=12; topologyFamily=1; hash=0xE79EBA567AF0F876; topologyResident=true; topologyReused=0; topologyUploads=6; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=997552; postHorizonTriangles=962524; horizonRejected=35028; postScreenConeTriangles=711178; screenConeRejected=251346; compactedIndices=2133534; visibleTriangles=711178; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=6; deferredRetirements=5",
+      "[native] Production spherical billboard publication: generation=7; level=11; topologyFamily=1; hash=0x29745C559AE6222F; topologyResident=true; topologyReused=0; topologyUploads=7; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=898736; postHorizonTriangles=863707; horizonRejected=35029; postScreenConeTriangles=612362; screenConeRejected=251345; compactedIndices=1837086; visibleTriangles=612362; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=7; deferredRetirements=6",
+      "[native] Production spherical billboard publication: generation=8; level=10; topologyFamily=1; hash=0x94FC3260597D77E0; topologyResident=true; topologyReused=0; topologyUploads=8; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=799920; postHorizonTriangles=764891; horizonRejected=35029; postScreenConeTriangles=513548; screenConeRejected=251343; compactedIndices=1540644; visibleTriangles=513548; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=8; deferredRetirements=7",
+      "[native] Production spherical billboard publication: generation=9; level=9; topologyFamily=1; hash=0x8F6B13684734EB1E; topologyResident=true; topologyReused=0; topologyUploads=9; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=701104; postHorizonTriangles=666075; horizonRejected=35029; postScreenConeTriangles=414727; screenConeRejected=251348; compactedIndices=1244181; visibleTriangles=414727; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=9; deferredRetirements=8",
+      "[native] Production spherical billboard publication: generation=10; level=8; topologyFamily=1; hash=0xA707B386EC02AB80; topologyResident=true; topologyReused=0; topologyUploads=10; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=602288; postHorizonTriangles=567259; horizonRejected=35029; postScreenConeTriangles=315913; screenConeRejected=251346; compactedIndices=947739; visibleTriangles=315913; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=10; deferredRetirements=9",
+      "[native] Production spherical billboard publication: generation=11; level=7; topologyFamily=1; hash=0x34679CE6A107E3CF; topologyResident=true; topologyReused=0; topologyUploads=11; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=503472; postHorizonTriangles=468443; horizonRejected=35029; postScreenConeTriangles=217099; screenConeRejected=251344; compactedIndices=651297; visibleTriangles=217099; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=11; deferredRetirements=10",
+      "[native] Production spherical billboard publication: generation=12; level=8; topologyFamily=1; hash=0xA707B386EC02AB80; topologyResident=true; topologyReused=1; topologyUploads=11; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=602288; postHorizonTriangles=362272; horizonRejected=240016; postScreenConeTriangles=91461; screenConeRejected=270811; compactedIndices=274383; visibleTriangles=91461; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=12; deferredRetirements=11",
+      "[native] Production spherical billboard publication: generation=13; level=9; topologyFamily=1; hash=0x8F6B13684734EB1E; topologyResident=true; topologyReused=1; topologyUploads=11; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=701104; postHorizonTriangles=461088; horizonRejected=240016; postScreenConeTriangles=115928; screenConeRejected=345160; compactedIndices=347784; visibleTriangles=115928; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=13; deferredRetirements=12",
+      "[native] Production spherical billboard publication: generation=14; level=10; topologyFamily=1; hash=0x94FC3260597D77E0; topologyResident=true; topologyReused=1; topologyUploads=11; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=799920; postHorizonTriangles=559904; horizonRejected=240016; postScreenConeTriangles=140537; screenConeRejected=419367; compactedIndices=421611; visibleTriangles=140537; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=14; deferredRetirements=13",
+      "[native] Production spherical billboard publication: generation=15; level=11; topologyFamily=1; hash=0x29745C559AE6222F; topologyResident=true; topologyReused=1; topologyUploads=11; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=898736; postHorizonTriangles=658720; horizonRejected=240016; postScreenConeTriangles=165404; screenConeRejected=493316; compactedIndices=496212; visibleTriangles=165404; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=15; deferredRetirements=14",
+      "[native] Production spherical billboard publication: generation=16; level=12; topologyFamily=1; hash=0xE79EBA567AF0F876; topologyResident=true; topologyReused=1; topologyUploads=11; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=997552; postHorizonTriangles=757536; horizonRejected=240016; postScreenConeTriangles=190826; screenConeRejected=566710; compactedIndices=572478; visibleTriangles=190826; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=16; deferredRetirements=15",
+      "[native] Production spherical billboard publication: generation=17; level=13; topologyFamily=1; hash=0x72F194C57A876360; topologyResident=true; topologyReused=1; topologyUploads=11; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1096368; postHorizonTriangles=856352; horizonRejected=240016; postScreenConeTriangles=213918; screenConeRejected=642434; compactedIndices=641754; visibleTriangles=213918; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=17; deferredRetirements=16",
+      "[native] Production spherical billboard publication: generation=18; level=14; topologyFamily=1; hash=0x8999DD8A034A9AB1; topologyResident=true; topologyReused=1; topologyUploads=11; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1195184; postHorizonTriangles=955168; horizonRejected=240016; postScreenConeTriangles=241353; screenConeRejected=713815; compactedIndices=724059; visibleTriangles=241353; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=18; deferredRetirements=17",
+      "[native] Production spherical billboard publication: generation=19; level=15; topologyFamily=1; hash=0x967DCF11C4ABC256; topologyResident=true; topologyReused=1; topologyUploads=11; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1294000; postHorizonTriangles=1053984; horizonRejected=240016; postScreenConeTriangles=272838; screenConeRejected=781146; compactedIndices=818514; visibleTriangles=272838; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=19; deferredRetirements=18",
+      "[native] Production spherical billboard publication: generation=20; level=16; topologyFamily=1; hash=0x32840D29EDE00769; topologyResident=true; topologyReused=1; topologyUploads=11; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1392816; postHorizonTriangles=1152800; horizonRejected=240016; postScreenConeTriangles=287682; screenConeRejected=865118; compactedIndices=863046; visibleTriangles=287682; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=20; deferredRetirements=19",
+      "[native] Production spherical billboard publication: generation=21; level=17; topologyFamily=1; hash=0xBCE444AFFB2D713B; topologyResident=true; topologyReused=1; topologyUploads=11; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1424208; postHorizonTriangles=1184192; horizonRejected=240016; postScreenConeTriangles=294748; screenConeRejected=889444; compactedIndices=884244; visibleTriangles=294748; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=21; deferredRetirements=20",
+      "Florida seating stability: frame=440; depth=6.835569277405739; bodyFixedStable=true; foundationSubmittedWithPad=True; H=15.134892258793116",
+      "Earth route scenario validation: PASS; automated scenario evidence only.",
+      "[native] NCSM1 regional physical totals: requests=670; hits=840; misses=670; loaded=670; readBytes=163158696; uploadedBytes=93392640; residentHighWater=670; allocatedBytes=119737728; maximumBytes=124895232; queueHighWater=635; readyCapacity=8; uploadBudget=8; demandDispatches=22; dependencyDelayMsMax=577.209; recordReadDecodeVerifyMs=223.141; contributingRecords=670; anchoredDemandRequired=false"
+    ]
+  },
+  "finalProductionHost": {
+    "name": "B-candidate",
+    "logSha256": "8e4cf3fd304fccf518f48c712e02563b80172bb10b1c8fa01b689ad10ef29ac7",
+    "rawUtf8Bytes": 461946,
+    "samples": 100,
+    "metrics": {
+      "submittedFrame": {
+        "n": 100,
+        "median": 162,
+        "p95": 207,
+        "minimum": 113,
+        "maximum": 212
+      },
+      "timingFrame": {
+        "n": 100,
+        "median": 162,
+        "p95": 207,
+        "minimum": 113,
+        "maximum": 212
+      },
+      "generation": {
+        "n": 100,
+        "median": 1,
+        "p95": 1,
+        "minimum": 1,
+        "maximum": 1
+      },
+      "level": {
+        "n": 100,
+        "median": 17,
+        "p95": 17,
+        "minimum": 17,
+        "maximum": 17
+      },
+      "topologyFamily": {
+        "n": 100,
+        "median": 1,
+        "p95": 1,
+        "minimum": 1,
+        "maximum": 1
+      },
+      "broadAccepts": {
+        "n": 100,
+        "median": 361798,
+        "p95": 361798,
+        "minimum": 361798,
+        "maximum": 361798
+      },
+      "broadRejects": {
+        "n": 100,
+        "median": 822358,
+        "p95": 822358,
+        "minimum": 822358,
+        "maximum": 822358
+      },
+      "narrowTests": {
+        "n": 100,
+        "median": 6041,
+        "p95": 6041,
+        "minimum": 6041,
+        "maximum": 6041
+      },
+      "narrowRejectLeft": {
+        "n": 100,
+        "median": 87,
+        "p95": 87,
+        "minimum": 87,
+        "maximum": 87
+      },
+      "narrowRejectRight": {
+        "n": 100,
+        "median": 611,
+        "p95": 611,
+        "minimum": 611,
+        "maximum": 611
+      },
+      "narrowRejectBottom": {
+        "n": 100,
+        "median": 0,
+        "p95": 0,
+        "minimum": 0,
+        "maximum": 0
+      },
+      "narrowRejectTop": {
+        "n": 100,
+        "median": 150,
+        "p95": 150,
+        "minimum": 150,
+        "maximum": 150
+      },
+      "narrowRejectNear": {
+        "n": 100,
+        "median": 0,
+        "p95": 0,
+        "minimum": 0,
+        "maximum": 0
+      },
+      "narrowRejectFar": {
+        "n": 100,
+        "median": 0,
+        "p95": 0,
+        "minimum": 0,
+        "maximum": 0
+      },
+      "nearPlaneIntersections": {
+        "n": 100,
+        "median": 0,
+        "p95": 0,
+        "minimum": 0,
+        "maximum": 0
+      },
+      "tesEnvelopeActive": {
+        "n": 100,
+        "median": 0,
+        "p95": 0,
+        "minimum": 0,
+        "maximum": 0
+      },
+      "tesEnvelopeInactive": {
+        "n": 100,
+        "median": 1184156,
+        "p95": 1184156,
+        "minimum": 1184156,
+        "maximum": 1184156
+      },
+      "compactedTriangles": {
+        "n": 100,
+        "median": 360950,
+        "p95": 360950,
+        "minimum": 360950,
+        "maximum": 360950
+      },
+      "tcsPatches": {
+        "n": 100,
+        "median": 360950,
+        "p95": 360950,
+        "minimum": 360950,
+        "maximum": 360950
+      },
+      "refinedVertices": {
+        "n": 100,
+        "median": 1082850,
+        "p95": 1082850,
+        "minimum": 1082850,
+        "maximum": 1082850
+      },
+      "clippingOutputPrimitives": {
+        "n": 100,
+        "median": 142657,
+        "p95": 142711,
+        "minimum": 142554,
+        "maximum": 142770
+      },
+      "fragmentInvocations": {
+        "n": 100,
+        "median": 2591685,
+        "p95": 2591691,
+        "minimum": 2591671,
+        "maximum": 2591694
+      },
+      "maximumOuterTesFactor": {
+        "n": 100,
+        "median": 1.0,
+        "p95": 1.0,
+        "minimum": 1.0,
+        "maximum": 1.0
+      },
+      "maximumInnerTesFactor": {
+        "n": 100,
+        "median": 0.9999,
+        "p95": 0.9999,
+        "minimum": 0.9999,
+        "maximum": 0.9999
+      },
+      "tcsBehindOrOnCamera": {
+        "n": 100,
+        "median": 0,
+        "p95": 0,
+        "minimum": 0,
+        "maximum": 0
+      },
+      "tcsWithinOneMetre": {
+        "n": 100,
+        "median": 0,
+        "p95": 0,
+        "minimum": 0,
+        "maximum": 0
+      },
+      "maximumProjectedEdgePixels": {
+        "n": 100,
+        "median": 65.720512,
+        "p95": 65.720512,
+        "minimum": 65.720512,
+        "maximum": 65.720512
+      },
+      "maximumFactorPatch": {
+        "n": 100,
+        "median": 693,
+        "p95": 1298,
+        "minimum": 0,
+        "maximum": 1485
+      },
+      "gpuCullCompactMs": {
+        "n": 100,
+        "median": 2.6882,
+        "p95": 2.69312,
+        "minimum": 2.68136,
+        "maximum": 2.696
+      },
+      "gpuDetailedDrawMs": {
+        "n": 100,
+        "median": 7.07164,
+        "p95": 7.12892,
+        "minimum": 6.98696,
+        "maximum": 7.23192
+      },
+      "gpuTotalMs": {
+        "n": 100,
+        "median": 9.82044,
+        "p95": 9.87852,
+        "minimum": 9.73628,
+        "maximum": 9.98208
+      },
+      "clippingInputPrimitives": null,
+      "fenceWait": null,
+      "update": null,
+      "record": null,
+      "submit": null,
+      "present": null
+    },
+    "firstFrame": {
+      "submittedFrame": 113,
+      "timingFrame": 113,
+      "generation": 1,
+      "level": 17,
+      "topologyFamily": 1,
+      "mode": "broad+narrow",
+      "cameraBody": "(-1036.8510346254334,-2603399.3763885498,5814963.3804244846)",
+      "bodyOrientation": "(0.542257845,-0.453824222,-0.453824222,0.542257845)",
+      "viewProjection": "(0.291645557,1.54455137,0,0.207330495,0.0521431826,0.337720186,0,-0.978166461,-0.661750376,0.707323134,0,0.0142989019,0,0,0.200080127,0)",
+      "broadAccepts": 361798,
+      "broadRejects": 822358,
+      "narrowTests": 6041,
+      "narrowRejectLeft": 87,
+      "narrowRejectRight": 611,
+      "narrowRejectBottom": 0,
+      "narrowRejectTop": 150,
+      "narrowRejectNear": 0,
+      "narrowRejectFar": 0,
+      "nearPlaneIntersections": 0,
+      "tesEnvelopeActive": 0,
+      "tesEnvelopeInactive": 1184156,
+      "compactedTriangles": 360950,
+      "tcsPatches": 360950,
+      "refinedVertices": 1082850,
+      "clippingOutputPrimitives": 142626,
+      "fragmentInvocations": 2591690,
+      "maximumOuterTesFactor": 1.0,
+      "maximumInnerTesFactor": 0.9999,
+      "innerFactorBins": "(360950,0,0,0,0,0,0)",
+      "tcsBehindOrOnCamera": 0,
+      "tcsWithinOneMetre": 0,
+      "maximumProjectedEdgePixels": 65.720512,
+      "maximumFactorPatch": 297,
+      "gpuCullCompactMs": 2.686,
+      "gpuDetailedDrawMs": 7.11248,
+      "gpuTotalMs": 9.86044
+    },
+    "lastFrame": {
+      "submittedFrame": 212,
+      "timingFrame": 212,
+      "generation": 1,
+      "level": 17,
+      "topologyFamily": 1,
+      "mode": "broad+narrow",
+      "cameraBody": "(-1036.8510346254334,-2603399.3763885498,5814963.3804244846)",
+      "bodyOrientation": "(0.542257845,-0.453824222,-0.453824222,0.542257845)",
+      "viewProjection": "(0.291645557,1.54455137,0,0.207330495,0.0521431826,0.337720186,0,-0.978166461,-0.661750376,0.707323134,0,0.0142989019,0,0,0.200080127,0)",
+      "broadAccepts": 361798,
+      "broadRejects": 822358,
+      "narrowTests": 6041,
+      "narrowRejectLeft": 87,
+      "narrowRejectRight": 611,
+      "narrowRejectBottom": 0,
+      "narrowRejectTop": 150,
+      "narrowRejectNear": 0,
+      "narrowRejectFar": 0,
+      "nearPlaneIntersections": 0,
+      "tesEnvelopeActive": 0,
+      "tesEnvelopeInactive": 1184156,
+      "compactedTriangles": 360950,
+      "tcsPatches": 360950,
+      "refinedVertices": 1082850,
+      "clippingOutputPrimitives": 142554,
+      "fragmentInvocations": 2591685,
+      "maximumOuterTesFactor": 1.0,
+      "maximumInnerTesFactor": 0.9999,
+      "innerFactorBins": "(360950,0,0,0,0,0,0)",
+      "tcsBehindOrOnCamera": 0,
+      "tcsWithinOneMetre": 0,
+      "maximumProjectedEdgePixels": 65.720512,
+      "maximumFactorPatch": 0,
+      "gpuCullCompactMs": 2.68184,
+      "gpuDetailedDrawMs": 7.08268,
+      "gpuTotalMs": 9.8262
+    },
+    "preparation": {
+      "demand": {
+        "sumMs": 68.40028,
+        "slices": {
+          "n": 44,
+          "median": 1.57784,
+          "p95": 1.58472,
+          "minimum": 0.84156,
+          "maximum": 2.1122
+        }
+      },
+      "incomingPhysicalPreparation": {
+        "sumMs": 40.01988,
+        "slices": {
+          "n": 11,
+          "median": 3.72004,
+          "p95": 3.72532,
+          "minimum": 3.11244,
+          "maximum": 3.72532
+        }
+      }
+    },
+    "provenance": [
+      "[native] NCSM1 regional demand: incoming=1; pupil=1; generation=1; required=0; anchoredPatches=0; unresolved=0; demandMs=481.992",
+      "[native] NCSM1 regional ready: incoming=1; pupil=1; dependencyDelayMs=484.152; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=1; level=17; topologyFamily=1; hash=0xBCE444AFFB2D713B; topologyResident=true; topologyReused=0; topologyUploads=1; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1424208; postHorizonTriangles=1184156; horizonRejected=240052; postScreenConeTriangles=360950; screenConeRejected=823206; compactedIndices=1082850; visibleTriangles=360950; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=1; deferredRetirements=0",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=1; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+      "[native] P2S5D pupil identity: pupil=1; prepared=1; culled=1; tes=1; raster=1; match=true",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=10; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=20; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+      "[native] NCSM1 regional demand: incoming=0; pupil=1; generation=1; required=0; anchoredPatches=0; unresolved=0; demandMs=307.313",
+      "[native] NCSM1 regional ready: incoming=0; pupil=1; dependencyDelayMs=309.421; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=30; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=40; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=50; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=60; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=70; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=80; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=90; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=100; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=110; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=120; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=130; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=140; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=150; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=160; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=170; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=180; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+      "P2S5F directional visibility PASS: mode=broad+narrow; frames=213; measuredFrames=180; level=L17; yaw=1.5707963267948966; pitch=-0.035; zeroOwner=0; overlap=0; stale=0; heightParityMax=0.000000000E+000m; normalParityMax=0.000000000E+000rad",
+      "[native] CPU timings: update=12.242 ms; fence=9.982; inspection=0.072; hostCallback=0.176; validationUpload=2.012; record=0.165; submit=0.053; present=0.225",
+      "[native] P2S5C3 frame timing: publication avg=13.837 ms; p50=13.837; p95=13.837; p99=13.837; max=13.837; samples=1",
+      "[native] NCSM1 regional physical totals: requests=0; hits=0; misses=0; loaded=0; readBytes=0; uploadedBytes=0; residentHighWater=0; allocatedBytes=4; maximumBytes=124895232; queueHighWater=0; readyCapacity=8; uploadBudget=8; demandDispatches=44; dependencyDelayMsMax=484.152; recordReadDecodeVerifyMs=0.000; contributingRecords=670; anchoredDemandRequired=false"
+    ],
+    "preparedGeometry": [],
+    "pose": "B",
+    "kind": "candidate",
+    "capture": false,
+    "diagnostic": null,
+    "negativeControl": false,
+    "shaderSha256": "3b64eca169c95f00b1d375d380de8b38d18a2ae00dce0cc640f7621fc1df3ed5",
+    "nativeSha256": "7c4b9e8a78b3b18e5a9c143e176f51eab345de1d61862089e2d432613e06e8dd",
+    "managedSha256": "2a9b5d865e7d7873d860c2c8cedb695d64633212c30d9247501d94677d7defb4",
+    "arguments": [
+      "--scene=sol",
+      "--focus=earth",
+      "--altitude=10.004",
+      "--solar-epoch=j2000",
+      "--physical-surface=m12d-natural-candidate",
+      "--p2s5c3-traversal",
+      "--benchmark-frames=1000",
+      "--log=startup,validation,vulkan"
+    ],
+    "environment": {
+      "NOVACORE_WINDOW_CLIENT_WIDTH": "3440",
+      "NOVACORE_WINDOW_CLIENT_HEIGHT": "1440",
+      "NOVACORE_WINDOW_BORDERLESS": "1",
+      "NOVACORE_PERFORMANCE_FRAME_LOG": "1",
+      "NOVACORE_P2S5F_DIRECTIONAL_ONLY": "1",
+      "NOVACORE_P2S5G_FIXED_DIAGNOSTIC_TIME": "1",
+      "NOVACORE_P2S5F_DIRECTIONAL_LEVEL": "17",
+      "NOVACORE_P2S5F_DIRECTIONAL_YAW_RADIANS": "1.5707963267948966",
+      "NOVACORE_P2S5F_DIRECTIONAL_PITCH_RADIANS": "-0.035",
+      "NOVACORE_PERFORMANCE_GEOMETRY": "1"
+    },
+    "captureIdentity": [
+      "[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)",
+      "[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)"
+    ]
+  },
+  "harnessNotes": [
+    "Initial broad Debug headless run was intentionally stopped during offline topology regeneration; no completed pass is claimed for it. Final Debug/Release headless runs used NOVACORE_P2S5F_ARTIFACT_INPUT=assets/planetary-nested-scale-mesh, preserving all assertions.",
+    "An initial deployment verifier incorrectly expected a native-only fixture shader in the sample. Corrected verifier checks the exact 49 production shaders and the actual Graphics build-directory shader ownership; no deployment or production correction was necessary."
+  ],
+  "excludedWindowTests": "The three unrelated window lifecycle/input/generic-startup cases were outside this focused shader ticket. The regional window regression ran in both configurations.",
+  "gitDiffCheck": "PASS",
+  "postCleanupAttemptSmoke": {
+    "passResult": true,
+    "frames": 120,
+    "arguments": [
+      "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Triangle.exe",
+      "--scene=sol",
+      "--focus=earth",
+      "--surface-site=florida-launch",
+      "--physical-surface=m12d-natural-candidate",
+      "--benchmark-frames=120",
+      "--log=startup,validation,vulkan"
+    ],
+    "exitCode": 0,
+    "logSha256": "402142cf4ff1a15b6cd90748bb301e949784b32b288a13c75486646ef154a822",
+    "rawUtf8Bytes": 128391,
+    "vuidCount": 0,
+    "manualAcceptance": false,
+    "summary": [
+      "Runtime fingerprint: cwd=E:\\NovaCore; process=E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Triangle.exe; base=E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\",
+      "[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)",
+      "[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)",
+      "[native] NCSM1 regional ready: incoming=1; pupil=1; dependencyDelayMs=715.420; requests=670; resident=670; uploadedBytes=93392640; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=1; level=17; topologyFamily=1; hash=0xBCE444AFFB2D713B; topologyResident=true; topologyReused=0; topologyUploads=1; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1424208; postHorizonTriangles=1184192; horizonRejected=240016; postScreenConeTriangles=294748; screenConeRejected=889444; compactedIndices=884244; visibleTriangles=294748; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=1; deferredRetirements=0",
+      "[native] Average frame time: 8.005 ms (120 frames)"
+    ]
+  },
+  "postCleanupAssets": [
+    {
+      "asset": "earth-surface-v5",
+      "exitCode": 0,
+      "verification": [
+        "Asset: earth-surface-v5",
+        "Version: terrain-v5; NCCUBE1",
+        "Cache: E:\\NovaCore\\.novacore\\cache\\terrain\\v1",
+        "Path: E:\\NovaCore\\.novacore\\cache\\terrain\\v1\\sha256\\38\\38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae.nccube",
+        "Status: Valid",
+        "Bytes: 61484224/61484224",
+        "SHA-256: 38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae",
+        "Verification buffer: 1048576 bytes"
+      ]
+    },
+    {
+      "asset": "earth-florida-m12",
+      "exitCode": 0,
+      "verification": [
+        "Asset: earth-florida-m12",
+        "Version: terrain-v5; NCCUBE3",
+        "Cache: E:\\NovaCore\\.novacore\\cache\\terrain\\v1",
+        "Path: E:\\NovaCore\\.novacore\\cache\\terrain\\v1\\sha256\\c4\\c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe.nccube",
+        "Status: Valid",
+        "Bytes: 210307596/210307596",
+        "SHA-256: c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe",
+        "Verification buffer: 1048576 bytes"
+      ]
+    }
+  ]
+}

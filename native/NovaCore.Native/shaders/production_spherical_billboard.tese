@@ -15,6 +15,9 @@ layout(set=0,binding=2,std430)readonly buffer Input{vec4 cameraHighRadiusHigh;ve
 layout(set=0,binding=6,std430)readonly buffer Presentations{Presentation values[];}presentations;
 
 layout(triangles,fractional_odd_spacing,cw) in;
+// Pipeline specialization: only owner/seam visualization consumes these outputs.
+// The ordinary pipeline eliminates the inverse solve without changing physical work.
+layout(constant_id=0) const bool diagnosticGeographicAddress=false;
 layout(location=0) out vec4 color;
 layout(location=1) in vec3 i1[];layout(location=1) out vec3 normal;
 layout(location=2) flat in vec3 i2[];layout(location=2) flat out vec3 lightDirection;
@@ -75,7 +78,12 @@ void main()
   vec3 relativeBody=-interpolatedView+vec3(direction*localDisplacement);Presentation p=presentations.values[0];
   vec3 localRelative=preparedRadiusSquared>1e-18?
     RotateQuaternion(vec3(direction*localDisplacement),p.bodyOrientation):vec3(0.0);
-  uint face;dvec2 faceUv;ProductionDirectionAddressD(direction,face,faceUv);uint level=min(uint(max(inputData.textureDemand.w,0.0)),2u),cells=1u<<level;uvec2 cell=min(uvec2(faceUv*double(cells)),uvec2(cells-1u));vec2 local=vec2(faceUv*double(cells)-dvec2(cell));
+  uint face=0u;uint level=0u;uvec2 cell=uvec2(0);vec2 local=vec2(0);
+  if(diagnosticGeographicAddress){
+    dvec2 faceUv;ProductionDirectionAddressD(direction,face,faceUv);
+    level=min(uint(max(inputData.textureDemand.w,0.0)),2u);uint cells=1u<<level;
+    cell=min(uvec2(faceUv*double(cells)),uvec2(cells-1u));local=vec2(faceUv*double(cells)-dvec2(cell));
+  }
   vec4 baseClip=gl_in[0].gl_Position*barycentric.x+
     gl_in[1].gl_Position*barycentric.y+gl_in[2].gl_Position*barycentric.z;
   gl_Position=baseClip+frameData.camera.viewProjection*vec4(localRelative,0.0);
