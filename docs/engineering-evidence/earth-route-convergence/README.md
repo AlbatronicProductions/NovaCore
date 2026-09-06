@@ -1,5 +1,20 @@
 # Earth/Solar/Florida bounded engineering evidence
 
+Current status: **P2S5H banked** at `32ffac50ab5c06518ede24edfb5c531976d4ec99`.
+The later hygiene commit `c78b5824e7f99570d696dc4607944964bccf006e` removed
+`florida-accepted-native.mp4` from the tracked tree. Its provenance remains in
+`accepted-video-provenance.json`; the historical recording remains reachable at
+the P2S5H tag. Do not restore it into the working tree by default.
+
+The package budget and deployed identities below are the original consolidation
+snapshot, not a current deployment fingerprint. Bulk raw captures were deliberately
+retired; retained manifests/reproduction tooling are the durable record.
+`package-hashes.json` is also the original package snapshot: its README hash
+predates this status note and its video entry identifies the intentionally removed
+working-tree recording. Preserve those historical hashes as provenance.
+
+## Historical consolidation package record
+
 This package preserves conclusions from completed investigations and the accepted, unbanked architectural consolidation. Historical FAIL/BLOCKED statements inside the original reports remain unchanged; later final-raster, visibility and material-receiver work resolved those responsibilities and the user subsequently supplied Florida manual PASS. It does not turn a rejected intermediate candidate into a passed candidate.
 
 Package budget: **160 MB**, including one exact native-resolution 120.512-second accepted manual recording. No raw depth/HDR/vertex/TES/NPZ corpus is retained. Compressed metadata and useful source retain reconstruction value without keeping every intermediate buffer. Source/archive copies are historical data, not live production ownership.

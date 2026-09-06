@@ -4,14 +4,15 @@ The accepted milestone and current work boundary are summarized in
 [NOVACORE_CURRENT_STATE.md](NOVACORE_CURRENT_STATE.md). This document defines
 the production planetary-rendering responsibilities and invariants.
 
-The banked, production-accepted baseline is **M12D-P2S5G — Surface Workload
-Efficiency**, commit `7bb03b0e635fa3444a4243bbad82758a1770ea60`, annotated tag
-`m12d-p2s5g-surface-workload-efficiency`. NCSM1 / New Earth Renderer is the
-accepted production Earth renderer; manual native 3440×1440 acceptance passed.
+The banked, production-accepted baseline is **M12D-P2S5H — Earth Route
+Convergence**, commit `32ffac50ab5c06518ede24edfb5c531976d4ec99`, annotated tag
+`m12d-p2s5h-earth-route-convergence`. It preserves P2S5G surface workload
+efficiency and the accepted Florida result. The later `c78b582` commit retires
+tracked diagnostic video evidence; it does not move the production tag.
 
 The accepted Earth contracts below apply to every supported Earth route.
 
-The **unbanked consolidated candidate** uses NCSM1 and generation 4 for all six
+The **banked P2S5H production baseline** uses NCSM1 and generation 4 for all six
 supported Earth/Solar/Florida launcher routes, including **New Earth Renderer**.
 Scene, focus, altitude, camera and Florida initialization remain route-specific.
 Florida launcher-based manual acceptance **PASSED** before consolidation.
@@ -19,7 +20,8 @@ The superseded dynamic anchored owner, stitch/coverage draw, local texture-deman
 transport and its investigation drivers have been retired. Generation-3 numerical
 oracles and independent development scenes remain outside production Earth routing.
 Terrain-v5 global bootstrap remains only until complete NCSM1 publication;
-non-Earth presentation remains independent. No banking is authorized by this work.
+non-Earth presentation remains independent. P2S5H is banked; subsequent debt
+retirement remains separately reviewed and unbanked.
 
 See [production consolidation](production-consolidation.md) for reachability, retained responsibilities and validation.
 
@@ -186,7 +188,7 @@ identity and reevaluates through authoritative body orientation. Near-surface
 ENU navigation and free look use the anchor; outward navigation hands off to
 ordinary body-center orbit without changing physical terrain. Earth —
 Fullscreen Native shares the Solar navigation path after preset initialization
-and now selects NCSM1 in the unbanked route-convergence candidate.
+and now selects NCSM1 in the banked P2S5H baseline.
 
 ## Diagnostics and acceptance
 
@@ -204,7 +206,9 @@ benchmark alone is not player-facing acceptance.
 
 ## Current development boundary
 
-The route-convergence candidate passed manual acceptance and is undergoing production consolidation. All ordinary routes select the accepted owner. Do not begin the next performance objective here.
+P2S5H Earth-route convergence is production accepted and banked. All ordinary
+routes select NCSM1. Repository-debt retirement precedes the next performance
+campaign; this pass does not change the accepted renderer.
 
 The NCSM1 production topology/runtime, moving pupil, canonical physical
 authority, persistent GPU scale lifecycle, culling/coverage, KSA-parity bounded

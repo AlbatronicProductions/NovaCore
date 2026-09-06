@@ -35,7 +35,5 @@ internal static class SyntheticEphemerisDemo
         var payloads=new[]{new NcpeV2Payload(17,0,4,1,-20,20),new NcpeV2Payload(17,4,4,1,-20,20)};return new(system,sources,bodies,bindings,payloads,samples);
     }
     private static NcpeV2Body Body(ulong id,string name,byte classification,ulong parent)=>new(id,name,classification,parent,0,0,0,Array.Empty<string>(),1d,1d,1d,1d,0d,0,0,0,0,0);
-    internal static NormalizedEphemerisInput Create() => new(9001, 71, 2, 9002, 1, 17, 23, 29, -20, 20, 0xA5A5, 0x5A5A,
-    [new(1,0,101,EphemerisInterpolationModel.CubicHermitePositionVelocityV1, Samples(0),0,0), new(2,1,102,EphemerisInterpolationModel.CubicHermitePositionVelocityV1,Samples(10),.01,.001),new(3,1,103,EphemerisInterpolationModel.CubicHermitePositionVelocityV1,Samples(-10),.02,.002)]);
     private static NormalizedEphemerisSample[] Samples(double offset) => [new(-20,offset-20,1,2,1,0,0),new(-5,offset-5,2,3,1,0,0),new(5,offset+5,3,4,1,0,0),new(20,offset+20,4,5,1,0,0)];
 }

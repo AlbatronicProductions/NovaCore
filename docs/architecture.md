@@ -58,8 +58,8 @@ NCPE v2 remains the deterministic artifact contract for fixed and sampled celest
 
 `PlanetaryPresentationSnapshot` is the parallel immutable renderer input for evaluated celestial bodies. `PlanetaryBodyPresentationProvider` copies stable identity, root-resolved center, physical radius, color, and presentation label data from evaluated authority; graphics cannot mutate its celestial source. A separate immutable `PlanetMaterialCatalog` maps those stable identities to presentation-only material and optional ring records. Earth production uses the 18-level immutable NCSM1 New Earth Renderer scale-mesh library. Projected error and hysteresis select one persistent topology resource, while a camera-facing pupil snaps to exact lattice identity and reuses matching physical samples across movement. Every level and pupil evaluates the same canonical body-fixed `H(bodyDirection)`; topology density changes representation, never physical truth. One current and at most one incoming GPU generation exist. The incoming generation publishes atomically only after complete physical preparation, conservative visibility/compaction, indirect payload creation, GPU execution, and fence confirmation; a complete zero-visible generation is a valid sole owner and regenerates visible work on re-entry. Earth presentation authority is selected from body focus and eligibility, never inferred from resident Earth resources. Distant-body presentation, cheaper derived material classification, rings, labels, markers, and orbit paths remain presentation only. See [Current Engineering State](NOVACORE_CURRENT_STATE.md) for the accepted baseline and next work boundary.
 
-The banked P2S5G production Earth contract above applies to the New Earth route.
-The **unbanked consolidated candidate** uses NCSM1 and generation 4 for all six
+P2S5H extends the accepted P2S5G Earth contract to all supported Earth routes.
+The **banked P2S5H production baseline** uses NCSM1 and generation 4 for all six
 supported Earth/Solar/Florida launcher routes, including **New Earth Renderer**.
 Scene, focus, altitude, camera and Florida initialization remain route-specific.
 Florida launcher-based manual acceptance **PASSED** before consolidation.
@@ -67,12 +67,14 @@ The superseded dynamic anchored owner, stitch/coverage draw, local texture-deman
 transport and its investigation drivers have been retired. Generation-3 numerical
 oracles and independent development scenes remain outside production Earth routing.
 Terrain-v5 global bootstrap remains only until complete NCSM1 publication;
-non-Earth presentation remains independent. No banking is authorized by this work.
+non-Earth presentation remains independent. P2S5H is banked; subsequent debt
+retirement remains separately reviewed and unbanked.
 
 See [production consolidation](production-consolidation.md) for reachability, retained responsibilities and validation.
 
 
-Earth-route convergence has passed manual acceptance. Consolidation validation and website review precede banking; optimization remains separate.
+P2S5H Earth-route convergence is production accepted and banked. Repository-debt
+retirement is the current front; performance work remains separate.
 
 NovaCore spatial frames are right-handed. Canonical Earth body-fixed geography
 uses +Y at the north pole, +X at longitude zero, and -Z at +90 degrees east.

@@ -1,0 +1,37 @@
+{
+  "status": "PARTIAL RETIREMENT \u2014 FOLLOW-UP REQUIRED",
+  "baselineHead": "c78b5824e7f99570d696dc4607944964bccf006e",
+  "milestone": "32ffac50ab5c06518ede24edfb5c531976d4ec99",
+  "startingAllocated": 4578649088,
+  "startingBuildAllocated": 63888216,
+  "cacheDuplicateAllocatedRemoved": 340934656,
+  "diagnosticEvidenceCreatedBytes": 361114,
+  "disposableEvidenceCopiesAfterReviewBytes": 361114,
+  "archiveSha256": "b03268acbdd9630e6ced6c629ac9299108be6df2883a6bbb190e794431e96fe7",
+  "archiveBytes": 85549,
+  "productionAssetsShadersFixturesGeneratorsPreserved": true,
+  "debugReleaseBuilds": "PASS",
+  "launcherRegressions": 15,
+  "launcherRouteProbes": 6,
+  "gpuHeightAndMeshVulkanErrors": 0,
+  "gitDiffCheck": "PASS",
+  "nativeDeployment": {
+    "Debug": {
+      "nativeHash": "7e91c7cc4e08384b8545c39ceaa60f2f54fe109190075ce3b42c86dd39edc013",
+      "shaderCount": 49,
+      "testNativeMatchesConfiguration": true
+    },
+    "Release": {
+      "nativeHash": "48a6d48def689e76687a4dcc2f77398dc7cbeac356739c3bac345fa25c606b65",
+      "shaderCount": 49,
+      "testNativeMatchesConfiguration": true
+    }
+  },
+  "endingAllocated": 4324752672,
+  "endingLogical": 4310995496,
+  "endingFiles": 7852,
+  "endingBuildAllocated": 62724952,
+  "netAllocatedRecovered": 253896416,
+  "retainedEvidenceAllocated": 110592,
+  "endingCacheAllocated": 1012031488
+}

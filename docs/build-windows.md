@@ -35,6 +35,22 @@ dotnet run --project samples/NovaCore.Triangle -c Debug -- --objects=1000 --log=
 dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=frames
 ```
 
+For Release, configure/build `build/native-ninja-release` with
+`-DCMAKE_BUILD_TYPE=Release`, then run `dotnet build NovaCore.sln -c Release`.
+Both solution configurations map all 20 projects. A Release build must report
+actual project outputs; MSB4121 warnings do not constitute a successful build.
+
+The separate offline NAIF regression requires its own rebuildable shim:
+
+```powershell
+cmake -S native/NovaCore.CSpiceShim -B external/naif/build/cspice-shim -G Ninja -DCMAKE_BUILD_TYPE=Release
+cmake --build external/naif/build/cspice-shim
+dotnet run --project tests/NovaCore.NaifEphemerisAdapter.Tests -c Release
+```
+
+The shim uses the pinned local CSPICE source bundle and is never a runtime
+dependency. The solution does not implicitly configure native projects.
+
 The sample copies the native DLL and compiled SPIR-V shaders beside the managed executable. It remains open until the window closes, reports average frame time during shutdown, and releases resources deterministically.
 
 The sample does not copy the heavy terrain-v5 `.nccube` payloads. Earth and

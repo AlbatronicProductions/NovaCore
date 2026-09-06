@@ -1,7 +1,7 @@
 # Diagnostic output guidance
 
 The authoritative repository policy is
-[ENGINEERING_RULES.md — Diagnostic evidence lifecycle](../ENGINEERING_RULES.md#diagnostic-evidence-lifecycle).
+[ENGINEERING_RULES.md â€” Diagnostic evidence lifecycle](../ENGINEERING_RULES.md#diagnostic-evidence-lifecycle).
 Read it for retention decisions, acceptance gates, video/fixture/tooling treatment,
 capture-heavy storage reporting and the Git/LFS boundary. This page provides
 archive recovery guidance; it does not define a second policy.
@@ -27,6 +27,7 @@ manifests preserve the durable report/provenance/reproduction mapping. Original
 measurements and acceptance chronology remain unchanged. See the
 [cleanup report](diagnostic-evidence-consolidation.md) for the measured result.
 
-The existing accepted Florida recording and bounded package remain untouched by
-this policy normalization. Their retention is documented in that index; it does
-not establish a default to retain or commit future acceptance recordings.
+The accepted Florida recording was later removed from the tracked tree by the
+post-P2S5H hygiene commit `c78b582`; its provenance and historical Git record
+remain. The evidence index distinguishes that current disposition from the
+original retained package. Future acceptance recordings remain temporary by default.

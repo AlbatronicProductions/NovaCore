@@ -24,13 +24,19 @@ terrain narrative here.
 
 ## Current planetary checkpoint
 
-Start from the banked, production-accepted **M12D-P2S5G — Surface Workload
-Efficiency** baseline on **NCSM1 / New Earth Renderer**:
+The banked, production-accepted baseline is **M12D-P2S5H — Earth Route
+Convergence**, on **NCSM1 / New Earth Renderer**:
 
-- authoritative production commit `7bb03b0e635fa3444a4243bbad82758a1770ea60`;
-- annotated tag `m12d-p2s5g-surface-workload-efficiency`;
-- commit title `NovaCore M12D-P2S5G: bank surface workload efficiency`;
-- physical/manual Desktop acceptance PASS at native 3440×1440.
+- authoritative production commit `32ffac50ab5c06518ede24edfb5c531976d4ec99`;
+- annotated tag `m12d-p2s5h-earth-route-convergence`;
+- commit title `NovaCore M12D-P2S5H: converge production Earth routes on NCSM1`;
+- accepted Florida result preserved through consolidation and bounded validation;
+- repository baseline for debt retirement: `c78b5824e7f99570d696dc4607944964bccf006e`,
+  the subsequent diagnostic-video hygiene commit. The P2S5H tag remains untouched.
+
+P2S5G Surface Workload Efficiency remains accepted historical architecture at
+`7bb03b0e635fa3444a4243bbad82758a1770ea60`, tag
+`m12d-p2s5g-surface-workload-efficiency`, with native 3440×1440 manual PASS.
 
 Earth's accepted production owner is the 18-level NCSM1 New Earth Renderer. It
 uses projected-error selection and hysteresis, an exact-lattice moving/snapped
@@ -73,7 +79,7 @@ difference is an accepted bounded invocation-accounting consequence
 Read [the preserved measurement and closeout record](M12D-P2S5G-workload-investigation.md)
 for the evidence and its limits.
 
-The **unbanked consolidated candidate** uses NCSM1 and generation 4 for all six
+The **banked P2S5H production baseline** uses NCSM1 and generation 4 for all six
 supported Earth/Solar/Florida launcher routes, including **New Earth Renderer**.
 Scene, focus, altitude, camera and Florida initialization remain route-specific.
 Florida launcher-based manual acceptance **PASSED** before consolidation.
@@ -81,12 +87,14 @@ The superseded dynamic anchored owner, stitch/coverage draw, local texture-deman
 transport and its investigation drivers have been retired. Generation-3 numerical
 oracles and independent development scenes remain outside production Earth routing.
 Terrain-v5 global bootstrap remains only until complete NCSM1 publication;
-non-Earth presentation remains independent. No banking is authorized by this work.
+non-Earth presentation remains independent. P2S5H is banked; subsequent debt
+retirement remains separately reviewed and unbanked.
 
 See [production consolidation](production-consolidation.md) for reachability, retained responsibilities and validation.
 
 
-Finish consolidation validation and website review before banking. Do not begin the next performance objective in this ticket.
+Complete the bounded repository-debt retirement review before the next performance
+objective. Do not reopen P2S5H or move its tag.
 
 - Preserve the accepted NCSM1 production spherical-billboard owner and C3/P2S5F
   coverage/culling architecture.

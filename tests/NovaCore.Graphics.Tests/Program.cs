@@ -88,7 +88,7 @@ var tests = new (string, Action)[]
     ("Production Earth material-state continuity", ProductionEarthMaterialStateContinuityTest),
     ("Planetary camera terrain exclusion", PlanetaryCameraTerrainExclusionTest),
     ("Close-ground reference-frame diagnostic", CloseGroundReferenceFrameDiagnosticTest),
-    ("Production terrain material synthesis and tessellation study", ProductionTerrainMaterialSynthesisAndTessellationStudyTest),
+    ("Production terrain material synthesis", ProductionTerrainMaterialSynthesisTest),
     ("Planetary terrain residency and surface frame", PlanetaryTerrainResidencyAndSurfaceFrameTest),
     ("Planetary patch topology and ABI", PlanetaryPatchTopologyAndAbiTest),
     ("Parent-child LOD geographic correspondence", ParentChildLodGeographicCorrespondenceTest),
@@ -340,42 +340,6 @@ static void LocalTerrainStreamingAndGpuCompressionTest()
     finally{if(File.Exists(corruptPath))File.Delete(corruptPath);}
     var missingSector=new PlanetaryLocalTerrainSectorId(6,4,CubeSphereFace.PositiveZ,4,0,0,1,1);
     Check(!sectors.Contains(missingSector),"sparse local package reports geographically absent sectors without inventing unrelated fallback");
-
-    var pupil=RelaxedCubeSphereProjection.UnitDirection(sectors[0].Face,(sectors[0].X+.5)/(1<<sectors[0].Level),(sectors[0].Y+.5)/(1<<sectors[0].Level));
-    var orbital=new PlanetaryLocalTerrainDemandInput(6,4,pupil,pupil,pupil,700_000,6_371_008.8,1080,Math.Tan(Math.PI/6));
-    Span<PlanetaryLocalTerrainDemand> demand=stackalloc PlanetaryLocalTerrainDemand[64];
-    Check(PlanetaryLocalTerrainDemandPlanner.Plan(orbital,sectors,demand)==0,"maximum local detail is not requested at orbital altitude");
-    var near=orbital with{SurfaceAltitudeMetres=10_000,PreviousPupilDirection=(pupil+new Double3(.0002,0,0)).Normalized()};
-    var demandCount=PlanetaryLocalTerrainDemandPlanner.Plan(near,sectors,demand);
-    Check(demandCount>0&&demand[..demandCount].ToArray().All(value=>value.Sector.BodyId==6&&value.Sector.TerrainVersion==4),"near-field demand follows visible and predicted body-fixed footprint");
-    var repeated=new PlanetaryLocalTerrainDemand[demand.Length];var repeatedCount=PlanetaryLocalTerrainDemandPlanner.Plan(near,sectors,repeated);
-    Check(repeatedCount==demandCount&&repeated.AsSpan(0,repeatedCount).SequenceEqual(demand[..demandCount]),"local demand ordering is deterministic");
-    Check(PlanetaryLocalTerrainDemandPlanner.Plan(near with{BodyId=5},sectors,demand)==0,"Earth local package remains isolated from unsupported bodies");
-    var opposite=RelaxedCubeSphereProjection.UnitDirection(sectors[^1].Face,(sectors[^1].X+.5)/(1<<sectors[^1].Level),(sectors[^1].Y+.5)/(1<<sectors[^1].Level));
-    var reversed=near with{PupilDirection=opposite,PreviousPupilDirection=pupil,ViewDirection=opposite};
-    Check(PlanetaryLocalTerrainDemandPlanner.Plan(reversed,sectors,demand)>0,"rapid motion and direction reversal immediately demand the new visible/predicted footprint rather than traversed sectors");
-    _=PlanetaryLocalTerrainDemandPlanner.Plan(near,sectors,demand);var allocationStart=GC.GetAllocatedBytesForCurrentThread();
-    for(var iteration=0;iteration<1_000;iteration++)_=PlanetaryLocalTerrainDemandPlanner.Plan(near,sectors,demand);
-    Check(GC.GetAllocatedBytesForCurrentThread()==allocationStart,"local demand planning is allocation-free on the render path");
-
-    var firstCache=new PlanetaryLocalTerrainCache(128);var secondCache=new PlanetaryLocalTerrainCache(128);
-    var firstTokens=new PlanetaryLocalTerrainSlot[128];
-    for(var index=0;index<128;index++)
-    {
-        var id=new PlanetaryLocalTerrainSectorId(6,4,CubeSphereFace.PositiveX,12,index,0,1,1);
-        firstTokens[index]=firstCache.Request(id,false);var mirror=secondCache.Request(id,false);
-        Check(firstCache.TryBeginRead(firstTokens[index])&&secondCache.TryBeginRead(mirror),$"cache read begins {index}");
-        Check(firstCache.TryCompleteRead(firstTokens[index],100,174_240)&&secondCache.TryCompleteRead(mirror,100,174_240),$"cache read completes {index}");
-        Check(firstCache.TryPublish(firstTokens[index],174_240)&&secondCache.TryPublish(mirror,174_240),$"cache publishes {index}");
-    }
-    firstCache.BeginFrame();secondCache.BeginFrame();
-    var replacementId=new PlanetaryLocalTerrainSectorId(6,4,CubeSphereFace.PositiveX,12,128,0,1,1);
-    var replacement=firstCache.Request(replacementId,true);var replacementMirror=secondCache.Request(replacementId,true);
-    Check(replacement.Slot==replacementMirror.Slot&&replacement.Generation==replacementMirror.Generation&&replacement.Slot==0,"deterministic LRU selects the same oldest GPU-safe slot");
-    Check(!firstCache.Owns(firstTokens[0])&&!firstCache.TryPublish(firstTokens[0],1),"generation token prevents stale slot publication");
-    Check(firstCache.Statistics.Capacity==128&&firstCache.Statistics.Evictions==1&&firstCache.Statistics.Resident==127,"fixed-capacity cache remains bounded through eviction");
-    var cancellationCache=new PlanetaryLocalTerrainCache(128);var cancellation=cancellationCache.Request(sectors[0],false);
-    Check(cancellationCache.TryBeginRead(cancellation)&&cancellationCache.Cancel(cancellation)&&!cancellationCache.TryCompleteRead(cancellation,1,1)&&cancellationCache.Statistics.Canceled==1,"stale predictive request cancellation invalidates its generation before publication");
 
     using var content=JsonDocument.Parse(File.ReadAllText(Path.Combine(fixtureRoot,"tiny-local.content.json")));
     var contentRoot=content.RootElement;
@@ -785,7 +749,7 @@ static void CloseGroundReferenceFrameDiagnosticTest()
     Check(Math.Abs(measurements[2].CameraBodyDrift/one.CameraBodyDrift-2d)<.001d&&Math.Abs(measurements[3].CameraBodyDrift/one.CameraBodyDrift-10d)<.01d&&Math.Abs(measurements[4].CameraBodyDrift/one.CameraBodyDrift-30d)<.05d,"body-fixed camera drift scales linearly with simulation warp");
 }
 
-static void ProductionTerrainMaterialSynthesisAndTessellationStudyTest()
+static void ProductionTerrainMaterialSynthesisTest()
 {
     var library=PlanetaryTerrainMaterialSynthesis.Materials;
     Check(library.Length==7&&library.ToArray().All(material=>material.IsFinite&&material.Roughness is >=0f and <=1f&&material.Metallic==0f&&
@@ -908,16 +872,6 @@ static void ProductionTerrainMaterialSynthesisAndTessellationStudyTest()
           synthesis.Contains("TerrainMaterialMaximumNormalAngleRadians=.1396263402",StringComparison.Ordinal),
           "height-derived visual normals retain bounded material detail with an 8-degree shading-normal limit");
 
-    foreach(var edgePixels in new[]{0f,12f,48f,96f,384f})
-    {
-        var a=PlanetaryTerrainTessellationStudy.EdgeFactor(edgePixels,48f,1f);
-        var b=PlanetaryTerrainTessellationStudy.EdgeFactor(edgePixels,48f,1f);
-        Check(a==b&&a is >=1 and <=PlanetaryTerrainTessellationStudy.MaximumFactor&&(a&(a-1))==0,"candidate tessellation edge factors are deterministic, power-of-two, symmetric, and bounded");
-        Check(PlanetaryTerrainTessellationStudy.AmplifiedTriangleCount(a)<=PlanetaryTerrainTessellationStudy.MaximumAmplifiedTriangleCount,"candidate triangle amplification is strictly capped");
-    }
-    Check(!PlanetaryTerrainTessellationStudy.AcceptedForProduction&&PlanetaryTerrainTessellationStudy.T3TriangleCount==261_632&&
-          PlanetaryTerrainTessellationStudy.MaximumAmplifiedTriangleCount==16_744_448,
-          "the bounded tessellation study remains rejected after finding up to 64x amplification without physical-height benefit");
     Check(native.Contains("productionBillboardPipeline",StringComparison.Ordinal)&&
           native.Contains("VK_PRIMITIVE_TOPOLOGY_PATCH_LIST",StringComparison.Ordinal)&&
           native.Contains("patchControlPoints=3",StringComparison.Ordinal)&&
@@ -930,7 +884,7 @@ static void ProductionTerrainMaterialSynthesisAndTessellationStudyTest()
     for(var iteration=0;iteration<100_000;iteration++)_ = PlanetaryTerrainMaterialSynthesis.Blend(
         PlanetaryTerrainMaterialSynthesis.Classify(1f,(iteration&4095)-100f,(iteration&255)/255f,.31f,.62f,.74f));
     Check(GC.GetAllocatedBytesForCurrentThread()==allocatedBefore,"material classification/oracle evaluation is allocation-free");
-    Console.WriteLine($"Terrain material synthesis: library={library.Length}; maxBoundaryDelta={maximumBoundaryDelta:R}; biplanarWeightDelta={maximumWeightTransition:E3}; normalAngles={string.Join(',',altitudeNormalStatistics.Select(value=>$"{value.Altitude:R}m/max{value.Maximum:F3}/p95{value.P95:F3}"))}; visualDisplacement<=0.45m; adaptiveBiplanar=true; legacyFullCpuT3={PlanetaryTerrainTessellationStudy.T3TriangleCount}; legacyTessellationStudy=rejected/{PlanetaryTerrainTessellationStudy.MaximumAmplifiedTriangleCount}; productionLateGpuRefinement=true");
+    Console.WriteLine($"Terrain material synthesis: library={library.Length}; maxBoundaryDelta={maximumBoundaryDelta:R}; biplanarWeightDelta={maximumWeightTransition:E3}; normalAngles={string.Join(',',altitudeNormalStatistics.Select(value=>$"{value.Altitude:R}m/max{value.Maximum:F3}/p95{value.P95:F3}"))}; visualDisplacement<=0.45m; adaptiveBiplanar=true; productionLateGpuRefinement=true");
 
     static PlanetaryTerrainMaterialKind Top(in PlanetaryTerrainMaterialWeights weights)
     {

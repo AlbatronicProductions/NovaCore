@@ -47,18 +47,6 @@ std::vector<uint32_t> ReadWords(const char* path){
 }
 std::vector<uint32_t> ReadSpirv(const char* path){return ReadWords(path);}
 
-std::vector<uint8_t> DecodeBc4(const std::vector<uint8_t>& blocks){
-  if(blocks.size()!=nc::localterrain::Bc4Bytes)throw std::runtime_error("local BC4 payload size mismatch");
-  std::vector<uint8_t> result(StoredExtent*StoredExtent);std::array<uint8_t,8> palette{};const uint32_t blocksPerRow=StoredExtent/4;
-  for(uint32_t block=0;block<blocks.size()/8;block++){
-    const auto* source=blocks.data()+block*8;palette[0]=source[0];palette[1]=source[1];
-    if(palette[0]>palette[1])for(uint32_t index=1;index<7;index++)palette[index+1]=uint8_t(((7-index)*palette[0]+index*palette[1]+3)/7);
-    else{for(uint32_t index=1;index<5;index++)palette[index+1]=uint8_t(((5-index)*palette[0]+index*palette[1]+2)/5);palette[6]=0;palette[7]=255;}
-    uint64_t indices=0;for(uint32_t index=0;index<6;index++)indices|=uint64_t(source[index+2])<<(8*index);
-    const uint32_t blockX=block%blocksPerRow,blockY=block/blocksPerRow;
-    for(uint32_t pixel=0;pixel<16;pixel++)result[(blockY*4+pixel/4)*StoredExtent+blockX*4+pixel%4]=palette[(indices>>(3*pixel))&7u];
-  }return result;
-}
 void PackU16(const std::vector<uint16_t>& source,std::vector<uint32_t>& target){
   const size_t start=target.size();target.resize(start+(source.size()+1)/2);
   for(size_t index=0;index<source.size();index++)target[start+index/2]|=uint32_t(source[index])<<((index&1)*16);

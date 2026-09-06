@@ -1,5 +1,13 @@
 # Earth/Solar/Florida production consolidation
 
+Current milestone status: **P2S5H production accepted and banked**, commit
+`32ffac50ab5c06518ede24edfb5c531976d4ec99`, tag
+`m12d-p2s5h-earth-route-convergence`. The closeout records below describe the
+pre-banking review; their measurements and limits remain historical evidence.
+Current debt disposition is in [the debt ledger](repository-debt-retirement.md).
+
+## Historical storage closeout
+
 **Current storage closeout: DIAGNOSTIC EVIDENCE CONSOLIDATION PASS.** The subsequent
 [evidence cleanup](diagnostic-evidence-consolidation.md) consolidated the completed
 investigations and retired their bulk output. Runtime, shaders, assets, launcher
@@ -57,7 +65,7 @@ Compiled and executed the incoming SampleOptions/EarthRoutePolicy and EarthPlane
 | Solar System Overview | sol / overview | NCSM1 on Earth focus; preparation legitimately deferred during overview |
 | Earth Far / Orbital View | earth / 3000000 m | NCSM1 |
 | Earth 700 km | earth / 700000 m | NCSM1 |
-| Earth — Fullscreen Native | sol / Earth / 700000 m | NCSM1 |
+| Earth â€” Fullscreen Native | sol / Earth / 700000 m | NCSM1 |
 | Florida Launch Site | sol / Earth / florida-launch | NCSM1 |
 | New Earth Renderer | former scene alias maps to sol / Earth / 700000 m | NCSM1 |
 

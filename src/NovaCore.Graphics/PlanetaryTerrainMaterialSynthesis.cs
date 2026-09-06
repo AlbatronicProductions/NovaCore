@@ -256,28 +256,3 @@ public static class PlanetaryTerrainMaterialSynthesis
         return t * t * (3f - 2f * t);
     }
 }
-
-/// <summary>Evidence model for the optional T3 tessellation gate. No runtime tessellation is enabled by this type.</summary>
-public static class PlanetaryTerrainTessellationStudy
-{
-    public const int MaximumFactor = 8;
-    public const int T3TriangleCount = 261_632;
-    public const int MaximumAmplifiedTriangleCount = T3TriangleCount * MaximumFactor * MaximumFactor;
-    public const bool AcceptedForProduction = false;
-
-    public static int EdgeFactor(float projectedEdgePixels, float targetEdgePixels, float rangeWeight)
-    {
-        if (!float.IsFinite(projectedEdgePixels) || projectedEdgePixels < 0f || !float.IsFinite(targetEdgePixels) || targetEdgePixels <= 0f ||
-            !float.IsFinite(rangeWeight)) throw new ArgumentOutOfRangeException();
-        var raw = projectedEdgePixels / targetEdgePixels * Math.Clamp(rangeWeight, 0f, 1f);
-        var factor = 1;
-        while (factor < MaximumFactor && factor < raw) factor <<= 1;
-        return Math.Min(factor, MaximumFactor);
-    }
-
-    public static long AmplifiedTriangleCount(int factor)
-    {
-        if (factor is < 1 or > MaximumFactor || (factor & (factor - 1)) != 0) throw new ArgumentOutOfRangeException(nameof(factor));
-        return (long)T3TriangleCount * factor * factor;
-    }
-}

@@ -112,7 +112,7 @@ NovaCore treats correctness tooling as part of the engine rather than as present
 - Camera/reference-frame precision tests.
 - Native, managed, Solar-scene, Earth-LOD, resize, and triangle regression coverage.
 
-The banked M12D-P2S5G Surface Workload Efficiency baseline has completed automated validation and passed manual native 3440×1440 acceptance on the NCSM1 New Earth Renderer. It retains the accepted orbit-to-near-surface coverage established by P2S5F. Focused regressions cover all 18 NCSM1 levels, persistent level reuse, moving-pupil identity, atomic and zero-visible publication, one-owner coverage, body authority, body-fixed height and normal parity, topology-family winding, KSA-parity tessellation responsibility, conservative horizon coverage beyond the TES range, and Vulkan validation. Camera motion cannot mutate Earth orientation, body-fixed geography, or canonical physical height.
+The banked M12D-P2S5H Earth Route Convergence baseline has completed validation and preserves the accepted native 3440×1440 Florida result on the NCSM1 New Earth Renderer. It retains the accepted orbit-to-near-surface coverage established by P2S5F. Focused regressions cover all 18 NCSM1 levels, persistent level reuse, moving-pupil identity, atomic and zero-visible publication, one-owner coverage, body authority, body-fixed height and normal parity, topology-family winding, KSA-parity tessellation responsibility, conservative horizon coverage beyond the TES range, and Vulkan validation. Camera motion cannot mutate Earth orientation, body-fixed geography, or canonical physical height.
 
 The CPU reference/parity path is a development and regression oracle; the intended production planetary path remains GPU-driven.
 
@@ -190,7 +190,7 @@ shows the resolved client dimensions and starts the matching Triangle runtime:
 a Release launcher uses Release and a Debug launcher uses Debug. No shell
 environment setup is required.
 
-The **unbanked consolidated candidate** uses NCSM1 and generation 4 for all six
+The **banked P2S5H production baseline** uses NCSM1 and generation 4 for all six
 supported Earth/Solar/Florida launcher routes, including **New Earth Renderer**.
 Scene, focus, altitude, camera and Florida initialization remain route-specific.
 Florida launcher-based manual acceptance **PASSED** before consolidation.
@@ -198,7 +198,8 @@ The superseded dynamic anchored owner, stitch/coverage draw, local texture-deman
 transport and its investigation drivers have been retired. Generation-3 numerical
 oracles and independent development scenes remain outside production Earth routing.
 Terrain-v5 global bootstrap remains only until complete NCSM1 publication;
-non-Earth presentation remains independent. No banking is authorized by this work.
+non-Earth presentation remains independent. P2S5H is banked; subsequent debt
+retirement remains separately reviewed and unbanked.
 
 See [production consolidation](docs/production-consolidation.md) for reachability, retained responsibilities and validation.
 
@@ -207,9 +208,11 @@ Current Solar-scene controls include mouse drag for free orbiting, mouse wheel z
 
 ## Current planetary baseline
 
-The banked, production-accepted planetary baseline is **M12D-P2S5G — Surface
-Workload Efficiency**, commit `7bb03b0e635fa3444a4243bbad82758a1770ea60`, at
-annotated tag `m12d-p2s5g-surface-workload-efficiency`. **NCSM1 / New Earth
+The banked, production-accepted planetary baseline is **M12D-P2S5H — Earth
+Route Convergence**, commit `32ffac50ab5c06518ede24edfb5c531976d4ec99`, at
+annotated tag `m12d-p2s5h-earth-route-convergence`. The later repository-hygiene
+commit `c78b5824e7f99570d696dc4607944964bccf006e` retires tracked diagnostic
+video evidence without moving the milestone tag. **NCSM1 / New Earth
 Renderer** is the accepted production Earth renderer. Its responsibility chain is:
 
 ```text
@@ -248,8 +251,8 @@ This is a production architecture milestone, not a claim of finished visuals.
 Terrain materials and presentation quality, atmosphere/cloud/environment
 rebuilding, finer pupil and re-triangulation morph quality, spacecraft and
 surface gameplay, and possible later surface-workload optimization remain
-separate future work. The current checkpoint is validation of the unbanked
-production consolidation, followed by website review. Performance work comes later.
+separate future work. The current checkpoint is repository-debt retirement and
+Project Control review. P2S5H is banked; performance work comes later.
 
 One known presentation limitation is documented rather than hidden: a rare
 full pupil rebase can change the coarse factor-1 triangulated approximation by

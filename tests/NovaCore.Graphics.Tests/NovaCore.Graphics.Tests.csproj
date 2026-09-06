@@ -1,5 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup><OutputType>Exe</OutputType><PlatformTarget>x64</PlatformTarget><AllowUnsafeBlocks>true</AllowUnsafeBlocks></PropertyGroup>
+  <PropertyGroup><NativeBuildDirectory>native-ninja</NativeBuildDirectory></PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'"><NativeBuildDirectory>native-ninja-release</NativeBuildDirectory></PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\NovaCore.Core\NovaCore.Core.csproj" />
     <ProjectReference Include="..\..\src\NovaCore.Graphics\NovaCore.Graphics.csproj" />
@@ -17,6 +19,6 @@
     <Compile Include="..\..\samples\NovaCore.Triangle\SolarPlanetMaterials.cs" Link="SolarPlanetMaterials.cs" />
   </ItemGroup>
   <Target Name="CopyNativeRuntime" AfterTargets="Build">
-    <Copy SourceFiles="$(MSBuildThisFileDirectory)..\..\build\native-ninja\NovaCore.Native.dll" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\NovaCore.Native.dll" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
   </Target>
 </Project>
