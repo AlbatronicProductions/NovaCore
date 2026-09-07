@@ -1,0 +1,148 @@
+No .natvis files found at C:\Windows\System32\Visualizers.
+No .natvis files found at C:\Users\Tyler\AppData\Local\Dbg\Visualizers.
+
+Microsoft (R) Windows Debugger Version 10.0.26100.1 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+
+Loading Dump File [C:\Users\Tyler\AppData\Local\CrashDumps\NovaCore.Triangle.exe.37048.dmp]
+User Mini Dump File: Only registers, stack and portions of memory are available
+
+Symbol search path is: srv*
+Executable search path is: 
+Windows 10 Version 26200 MP (24 procs) Free x64
+Product: WinNt, suite: SingleUserTS
+Edition build lab: 26100.1.amd64fre.ge_release.240331-1435
+Debug session time: Sun Sep  6 20:16:47.000 2026 (UTC - 4:00)
+System Uptime: 5 days 18:44:28.222
+Process Uptime: 0 days 0:00:26.000
+................................................................
+..............................
+Loading unloaded module list
+........
+Unable to add extension DLL: ntsdexts
+Unable to add extension DLL: uext
+Unable to add extension DLL: exts
+This dump file has an exception of interest stored in it.
+The stored exception information can be accessed via .ecxr.
+(90b8.eb38): Access violation - code c0000005 (first/second chance not available)
+
++------------------------------------------------------------------------+
+| This target supports Hardware-enforced Stack Protection. A HW based    |
+| "Shadow Stack" may be available to assist in debugging and analysis.   |
+| See aka.ms/userhsp for more info.                                      |
+|                                                                        |
+| dps @ssp                                                               |
+|                                                                        |
++------------------------------------------------------------------------+
+
+For analysis of this file, run !analyze -v
+.ecxr; kv; lm m dxcore; lm m amd*; q
+rax=0000000000000000 rbx=0000000000000000 rcx=00007ff90b9ca630
+rdx=00007ff931dfed58 rsi=0000003dbed7f201 rdi=0000000000000000
+rip=00007ff931de69f2 rsp=0000003dbed7ee48 rbp=0000003dbed7ef90
+ r8=0000003dbed7efc8  r9=0000023ca816a3d0 r10=00007ff90b9ca630
+r11=0004004005500004 r12=00007ff931e0d030 r13=00007ff90ba5e8c8
+r14=0000003dbed7efc8 r15=00007ff90b9ca630
+iopl=0         nv up ei pl zr na po nc
+cs=0033  ss=002b  ds=002b  es=002b  fs=0053  gs=002b             efl=00010244
+DXCore!Ordinal241+0x169f2:
+00007ff9`31de69f2 3901            cmp     dword ptr [rcx],eax ds:00007ff9`0b9ca630=????????
+  *** Stack trace for last set context - .thread/.cxr resets it
+Child-SP          RetAddr               : Args to Child                                                           : Call Site
+0000003d`bed7ee48 00007ff9`31de7234     : 0000003d`bed7f201 000001ec`a6ab0340 00007ff9`31dd2cc0 00000000`00000000 : DXCore!Ordinal241+0x169f2
+0000003d`bed7ee50 00007ff9`31ded736     : 00000000`00000000 0000023c`a816a3d0 00000000`00000000 00000000`00000000 : DXCore!Ordinal241+0x17234
+0000003d`bed7ee80 00007ff9`0b79e372     : 00000000`00000002 00000000`00000000 0000003d`bed7f2c0 00000000`00000000 : DXCore!DXCoreCreateAdapterFactory+0xe6
+0000003d`bed7ef70 00000000`00000002     : 00000000`00000000 0000003d`bed7f2c0 00000000`00000000 00000000`00000000 : <Unloaded_D3D12Core.dll>+0x5e372
+0000003d`bed7ef78 00000000`00000000     : 0000003d`bed7f2c0 00000000`00000000 00000000`00000000 00000000`00000000 : 0x2
+start             end                 module name
+00007ff9`31dd0000 00007ff9`31e14000   DXCore     (export symbols)       DXCore.dll
+start             end                 module name
+00007ff8`39e90000 00007ff8`4017e000   amdvlk64   (deferred)             
+00007ff8`8fbb0000 00007ff8`94997000   amdxc64    (deferred)             
+00007ff9`27c20000 00007ff9`27c5c000   amdihk64   (deferred)             
+
+Unloaded modules:
+00000000`55610000 00000000`5576e000   amdenc64.dll
+00007ff8`39e90000 00007ff8`4017e000   amdvlk64.dll
+quit:
+
+MAIN THREAD EXCERPT
+No .natvis files found at C:\Windows\System32\Visualizers.
+No .natvis files found at C:\Users\Tyler\AppData\Local\Dbg\Visualizers.
+
+Microsoft (R) Windows Debugger Version 10.0.26100.1 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+
+Loading Dump File [C:\Users\Tyler\AppData\Local\CrashDumps\NovaCore.Triangle.exe.37048.dmp]
+User Mini Dump File: Only registers, stack and portions of memory are available
+
+Symbol search path is: srv*
+Executable search path is: 
+Windows 10 Version 26200 MP (24 procs) Free x64
+Product: WinNt, suite: SingleUserTS
+Edition build lab: 26100.1.amd64fre.ge_release.240331-1435
+Debug session time: Sun Sep  6 20:16:47.000 2026 (UTC - 4:00)
+System Uptime: 5 days 18:44:28.222
+Process Uptime: 0 days 0:00:26.000
+................................................................
+..............................
+Loading unloaded module list
+........
+Unable to add extension DLL: ntsdexts
+Unable to add extension DLL: uext
+Unable to add extension DLL: exts
+This dump file has an exception of interest stored in it.
+The stored exception information can be accessed via .ecxr.
+(90b8.eb38): Access violation - code c0000005 (first/second chance not available)
+
++------------------------------------------------------------------------+
+| This target supports Hardware-enforced Stack Protection. A HW based    |
+| "Shadow Stack" may be available to assist in debugging and analysis.   |
+| See aka.ms/userhsp for more info.                                      |
+|                                                                        |
+| dps @ssp                                                               |
+|                                                                        |
++------------------------------------------------------------------------+
+
+For analysis of this file, run !analyze -v
+~* k; lm; .ecxr; !address @rcx; q
+
+   0  Id: 90b8.1e48 Suspend: 0 Teb: 0000003d`bafad000 Unfrozen
+Child-SP          RetAddr               Call Site
+0000003d`bb1551c8 00007ff9`35c4ab6a     ntdll!NtFreeVirtualMemory+0x14
+0000003d`bb1551d0 00007ff8`3a121e05     KERNELBASE!VirtualFree+0x4a
+0000003d`bb155200 00007ff8`3a121cca     amdvlk64!GetSettingsBlobsAll+0x1c25
+0000003d`bb155260 00007ff8`3a124b85     amdvlk64!GetSettingsBlobsAll+0x1aea
+0000003d`bb155290 00007ff8`3a121c11     amdvlk64!GetSettingsBlobsAll+0x49a5
+0000003d`bb155310 00007ff8`3a120cdf     amdvlk64!GetSettingsBlobsAll+0x1a31
+0000003d`bb155340 00007ff8`3cdd29b6     amdvlk64!GetSettingsBlobsAll+0xaff
+0000003d`bb155380 00007ff8`3cd5dc73     amdvlk64!boost::serialization::singleton<std::set<boost::serialization::void_cast_detail::void_caster const * __ptr64,boost::serialization::void_cast_detail::void_caster_compare,std::allocator<boost::serialization::void_cast_detail::void_caster const * __ptr64> > >::is_destroyed+0xa9316
+0000003d`bb1553b0 00007ff9`384883fb     amdvlk64!boost::serialization::singleton<std::set<boost::serialization::void_cast_detail::void_caster const * __ptr64,boost::serialization::void_cast_detail::void_caster_compare,std::allocator<boost::serialization::void_cast_detail::void_caster const * __ptr64> > >::is_destroyed+0x345d3
+0000003d`bb1553e0 00007ff9`384beada     ntdll!RtlTimeToSecondsSince1970+0x33b
+0000003d`bb155410 00007ff9`383b0c33     ntdll!RtlIsCriticalSectionLocked+0x516a
+0000003d`bb155440 00007ff9`383b0feb     ntdll!RtlRaiseException+0x1533
+0000003d`bb155710 00007ff9`384282fd     ntdll!RtlRaiseException+0x18eb
+0000003d`bb1557e0 00007ff9`384265fe     ntdll!LdrGetProcedureAddressForCaller+0x105d
+0000003d`bb1558b0 00007ff9`38426444     ntdll!LdrUnloadDll+0x50e
+0000003d`bb155910 00007ff9`384262e0     ntdll!LdrUnloadDll+0x354
+0000003d`bb155950 00007ff9`35bb1359     ntdll!LdrUnloadDll+0x1f0
+0000003d`bb155990 00007ff8`8768f5a3     KERNELBASE!FreeLibrary+0x19
+0000003d`bb1559c0 00007ff8`8767a439     vulkan_1!vkResetEvent+0x2e593
+0000003d`bb1559f0 00007ff8`840e7149     vulkan_1!vkResetEvent+0x19429
+0000003d`bb155a20 00007ff8`876b375e     VkLayer_khronos_validation+0x67149
+*** WARNING: Unable to verify timestamp for NovaCore.Native.dll
+0000003d`bb155ba0 00007ff8`cd512902     vulkan_1!vkResetEvent+0x5274e
+0000003d`bb155bd0 0000003d`bb155d80     NovaCore_Native+0x12902
+0000003d`bb155bd8 00007ff8`cd54a5f8     0x0000003d`bb155d80
+0000003d`bb155be0 0000003d`bb155d80     NovaCore_Native+0x4a5f8
+0000003d`bb155be8 0000003d`bb155d80     0x0000003d`bb155d80
+0000003d`bb155bf0 0000003d`bb155c80     0x0000003d`bb155d80
+0000003d`bb155bf8 00007ff8`cd5213fb     0x0000003d`bb155c80
+0000003d`bb155c00 0000023c`aaa88fb0     NovaCore_Native+0x213fb
+0000003d`bb155c08 00007ff8`cd54a5f8     0x0000023c`aaa88fb0
+0000003d`bb155c10 0000023c`aaa88a00     NovaCore_Native+0x4a5f8
+0000003d`bb155c18 3ff0c963`5610adce     0x0000023c`aaa88a00
+0000003d`bb155c20 00000000`00000000     0x3ff0c963`5610adce
+

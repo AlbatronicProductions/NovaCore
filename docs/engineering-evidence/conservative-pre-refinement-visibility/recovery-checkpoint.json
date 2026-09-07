@@ -1,0 +1,1260 @@
+{
+  "time": "2026-09-06T21:38:37.232949",
+  "head": "4accf92fd080c16cc8656080aa69def3fa65db53",
+  "originMain": "4accf92fd080c16cc8656080aa69def3fa65db53",
+  "branch": "codex/m13-next-performance-target",
+  "status": "M native/NovaCore.Native/NovaCoreNative.cpp\n M samples/NovaCore.Triangle/ProductionBillboardDesktopTraversal.cs\n?? docs/engineering-evidence/conservative-pre-refinement-visibility/\n?? docs/engineering-evidence/post-m13.2-next-target/",
+  "stagedDiff": "",
+  "trackedDiffSha256": "7e8c9b7f4a8acae765d63f232b6c4a2731db3e1a4f7f6a63c3c2f2210dda37f0",
+  "m13_1": "fade1384c1c7df93d954e7223b1cc8f17db17f98",
+  "m13_2": "4accf92fd080c16cc8656080aa69def3fa65db53",
+  "lastPreRestartCheckpoint": "sphere-D-active.json / 2026-09-06 21:27:33 local",
+  "postRestartUnqualified": [
+    "sphere-E-grazing.json",
+    "sphere-A-orbital.json"
+  ],
+  "interrupted": [
+    "isolated-msmz547c (restart)",
+    "isolated-dai7sfzk (recovery pause)"
+  ],
+  "diagnosticFileIdentities": {
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\baseline.json": {
+      "bytes": 17165,
+      "sha256": "c18c691e0b577f5977f678ba98d48628013ec2dd6b60254a5c039922ee3b2656"
+    },
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\clean-runtime.json": {
+      "bytes": 77082,
+      "sha256": "711176feb78c1a3f3060f7130134c08cac3605222b5e279b9b3b93f65ff4cf31"
+    },
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\clean_baseline.py": {
+      "bytes": 2748,
+      "sha256": "cc5693c65d47564533a7c11ca7a779867c80eef9d40e881b56595ce0eab75fa8"
+    },
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\conservative_bound.glsl": {
+      "bytes": 5243,
+      "sha256": "c8195d71fbe5b7622fcbd5bec7c853bc6df48ef450feae4792f681241d837c59"
+    },
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\dump_inspect.cpp": {
+      "bytes": 1508,
+      "sha256": "0d3bf28bbe63a454b0a1ade5278a8b95de7aa068b92bdd5f383a1df14d934b0e"
+    },
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\envelope.py": {
+      "bytes": 1302,
+      "sha256": "6d7442a3161f61ccd8336243ef553e646c5a27e4e51b72f7df07b2e970262674"
+    },
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\exploratory-cone.glsl": {
+      "bytes": 4454,
+      "sha256": "7326db5d2f96b5840ea761cdb44e9bc2b0e534d5045d19d4fe1fedade6f8116b"
+    },
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\ksa-reference.json": {
+      "bytes": 1792,
+      "sha256": "a56d5a1d3309d03b5e1c69bb4e08b96db5cf4632b2f21f92d8717b5c56d82999"
+    },
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\probe_shader.py": {
+      "bytes": 2904,
+      "sha256": "015b8f4cf9745506299946494b6b8f75b5c2aa11d7d307443f8fc751b7f24332"
+    },
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\restart-events.json": {
+      "bytes": 9644,
+      "sha256": "027816633cd27b8e0b1072f3a1a7c72566022be9daf4c5d5737ecb449021d7b2"
+    },
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\run.py": {
+      "bytes": 8104,
+      "sha256": "54b33b9da2cb7a9e1be043c01316b6cf96578dad587c6375fd33c8aaa8016d6d"
+    },
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\validate.py": {
+      "bytes": 5686,
+      "sha256": "18ddfb8bc5cfa127164d155ace5314bfeb37915a9c5500c70444a15e049967c3"
+    }
+  },
+  "scratchInventory": [
+    {
+      "path": "baseline-A-stage-1.isa",
+      "bytes": 50672,
+      "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+    },
+    {
+      "path": "baseline-A-stage-16.isa",
+      "bytes": 173789,
+      "sha256": "24808b90a08d718a676c9e0cd3a21094125d1733d92f1777849c6df3da67f320"
+    },
+    {
+      "path": "baseline-A-stage-2.isa",
+      "bytes": 50672,
+      "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+    },
+    {
+      "path": "baseline-A-stage-4.isa",
+      "bytes": 486936,
+      "sha256": "5458bb37bc54ee428dd4bd53c93fd549d620b4a5ab5ebd17e88e40c28d45cc60"
+    },
+    {
+      "path": "baseline-A.json",
+      "bytes": 20784,
+      "sha256": "228007ce0699a7b6eb84347582c02ae88df1565a3d3811a982df0ca895b1025e"
+    },
+    {
+      "path": "baseline-A.log",
+      "bytes": 528175,
+      "sha256": "96e3639d8d74e6d579e67d279572a3f3c1772be10825742326f0cae0b2137ff9"
+    },
+    {
+      "path": "baseline-B-stage-1.isa",
+      "bytes": 50672,
+      "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+    },
+    {
+      "path": "baseline-B-stage-16.isa",
+      "bytes": 173789,
+      "sha256": "24808b90a08d718a676c9e0cd3a21094125d1733d92f1777849c6df3da67f320"
+    },
+    {
+      "path": "baseline-B-stage-2.isa",
+      "bytes": 50672,
+      "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+    },
+    {
+      "path": "baseline-B-stage-4.isa",
+      "bytes": 486936,
+      "sha256": "5458bb37bc54ee428dd4bd53c93fd549d620b4a5ab5ebd17e88e40c28d45cc60"
+    },
+    {
+      "path": "baseline-B.json",
+      "bytes": 20935,
+      "sha256": "d76434e04d931bccb437a11f91bafd1b26ea5d686bc5085ea3b8964c29d45c8f"
+    },
+    {
+      "path": "baseline-B.log",
+      "bytes": 554515,
+      "sha256": "87aa6fec41b4fce96ce2d5e2f7cb40e2e1d5cea59c5fa0bbb52e95988e62b991"
+    },
+    {
+      "path": "baseline-C-stage-1.isa",
+      "bytes": 50672,
+      "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+    },
+    {
+      "path": "baseline-C-stage-16.isa",
+      "bytes": 173789,
+      "sha256": "24808b90a08d718a676c9e0cd3a21094125d1733d92f1777849c6df3da67f320"
+    },
+    {
+      "path": "baseline-C-stage-2.isa",
+      "bytes": 50672,
+      "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+    },
+    {
+      "path": "baseline-C-stage-4.isa",
+      "bytes": 486936,
+      "sha256": "5458bb37bc54ee428dd4bd53c93fd549d620b4a5ab5ebd17e88e40c28d45cc60"
+    },
+    {
+      "path": "baseline-C.json",
+      "bytes": 21255,
+      "sha256": "7b3d41b135e6cd1aaae428c023eb09c7ff2d4d2105b1f3c771163c0eed675375"
+    },
+    {
+      "path": "baseline-C.log",
+      "bytes": 576402,
+      "sha256": "1c93f7a8c13cdfe36ecbcd07feaf57b7a07e18eed615d18805e74021a9b58c35"
+    },
+    {
+      "path": "baseline-D-stage-1.isa",
+      "bytes": 50672,
+      "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+    },
+    {
+      "path": "baseline-D-stage-16.isa",
+      "bytes": 173789,
+      "sha256": "24808b90a08d718a676c9e0cd3a21094125d1733d92f1777849c6df3da67f320"
+    },
+    {
+      "path": "baseline-D-stage-2.isa",
+      "bytes": 50672,
+      "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+    },
+    {
+      "path": "baseline-D-stage-4.isa",
+      "bytes": 486936,
+      "sha256": "5458bb37bc54ee428dd4bd53c93fd549d620b4a5ab5ebd17e88e40c28d45cc60"
+    },
+    {
+      "path": "baseline-D.json",
+      "bytes": 20996,
+      "sha256": "4c51187bd339dc47bc2c759e2e731dc65f2cee2f6a46e8963d66a28fcdf4d6ca"
+    },
+    {
+      "path": "baseline-D.log",
+      "bytes": 556015,
+      "sha256": "9b001b94ba04ee27d63eef0bcd9256a341b1f85fe59cb828430ae97779380e0b"
+    },
+    {
+      "path": "baseline-E-stage-1.isa",
+      "bytes": 50672,
+      "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+    },
+    {
+      "path": "baseline-E-stage-16.isa",
+      "bytes": 173789,
+      "sha256": "24808b90a08d718a676c9e0cd3a21094125d1733d92f1777849c6df3da67f320"
+    },
+    {
+      "path": "baseline-E-stage-2.isa",
+      "bytes": 50672,
+      "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+    },
+    {
+      "path": "baseline-E-stage-4.isa",
+      "bytes": 486936,
+      "sha256": "5458bb37bc54ee428dd4bd53c93fd549d620b4a5ab5ebd17e88e40c28d45cc60"
+    },
+    {
+      "path": "baseline-E.json",
+      "bytes": 21159,
+      "sha256": "27a889aee9aece83c498265669b330f84742a5412b65265ae662301fb3a4517f"
+    },
+    {
+      "path": "baseline-E.log",
+      "bytes": 560495,
+      "sha256": "2f3cce3e8575417ca9ab309dff2833705a908675edb45c41935444ac58bc61af"
+    },
+    {
+      "path": "clean-A.log",
+      "bytes": 448178,
+      "sha256": "86ce15b0f9c97d133e1cfd046e09ffbc0743c170a1fc59b5f712f497a922d52d"
+    },
+    {
+      "path": "clean-B.log",
+      "bytes": 462814,
+      "sha256": "5f6064755929d77d3a3dae2172476ba5c48198201c141b2621f4734b008b16b6"
+    },
+    {
+      "path": "clean-C.log",
+      "bytes": 166445,
+      "sha256": "8d0eeb9eda42a0a16b938aa4861d2884a1e22d3dce505a9e52bccf36398bc70e"
+    },
+    {
+      "path": "clean-D.log",
+      "bytes": 281566,
+      "sha256": "f44b163ff1552aa6ca2b5782ec3bcc385cd14e0a6f12a331dfe99695de271d62"
+    },
+    {
+      "path": "clean-E.log",
+      "bytes": 463001,
+      "sha256": "b6067b8ac054508482b65d653df436f70b6c13cb93eb383857f6c44a290c7abc"
+    },
+    {
+      "path": "oracle-A-orbital-stage-1.isa",
+      "bytes": 110787,
+      "sha256": "ecc238d2b15fc397d8d00534f3b14e5c54fcfd3cd2b14e00bbb201856dc20638"
+    },
+    {
+      "path": "oracle-A-orbital-stage-16.isa",
+      "bytes": 173761,
+      "sha256": "4a7b578adb57b00ee17b90db75124051d80ce9fe73961239c4342b0dd299e473"
+    },
+    {
+      "path": "oracle-A-orbital-stage-2.isa",
+      "bytes": 110787,
+      "sha256": "ecc238d2b15fc397d8d00534f3b14e5c54fcfd3cd2b14e00bbb201856dc20638"
+    },
+    {
+      "path": "oracle-A-orbital-stage-4.isa",
+      "bytes": 287328,
+      "sha256": "f8437c2a74df08bb020730289067e7cf3552bf3b80cbc6b2daa7591067af8b69"
+    },
+    {
+      "path": "oracle-A-orbital.json",
+      "bytes": 72998,
+      "sha256": "8476f41adebaaecbd82743abe4bbc17d2bf4a529aeea81b9ff9d8877b9624189"
+    },
+    {
+      "path": "oracle-A-orbital.log",
+      "bytes": 578361,
+      "sha256": "a1aa7e5038aec59c1296994b595c14d90f99b7a0a48afd409f90b6b6bead4716"
+    },
+    {
+      "path": "oracle-B-factor1-stage-1.isa",
+      "bytes": 110787,
+      "sha256": "ecc238d2b15fc397d8d00534f3b14e5c54fcfd3cd2b14e00bbb201856dc20638"
+    },
+    {
+      "path": "oracle-B-factor1-stage-16.isa",
+      "bytes": 173761,
+      "sha256": "4a7b578adb57b00ee17b90db75124051d80ce9fe73961239c4342b0dd299e473"
+    },
+    {
+      "path": "oracle-B-factor1-stage-2.isa",
+      "bytes": 110787,
+      "sha256": "ecc238d2b15fc397d8d00534f3b14e5c54fcfd3cd2b14e00bbb201856dc20638"
+    },
+    {
+      "path": "oracle-B-factor1-stage-4.isa",
+      "bytes": 287328,
+      "sha256": "f8437c2a74df08bb020730289067e7cf3552bf3b80cbc6b2daa7591067af8b69"
+    },
+    {
+      "path": "oracle-B-factor1.json",
+      "bytes": 83770,
+      "sha256": "2c32d6654d523f28bf63dfd09c46113314ae724d319307fa6a19830f459cd580"
+    },
+    {
+      "path": "oracle-B-factor1.log",
+      "bytes": 614984,
+      "sha256": "5d7bcd1d64ed1730679d805a1204b0ed89b4e983e5cb27edc5d1d4cea427fefc"
+    },
+    {
+      "path": "oracle-C-Florida-stage-1.isa",
+      "bytes": 110787,
+      "sha256": "ecc238d2b15fc397d8d00534f3b14e5c54fcfd3cd2b14e00bbb201856dc20638"
+    },
+    {
+      "path": "oracle-C-Florida-stage-16.isa",
+      "bytes": 173761,
+      "sha256": "4a7b578adb57b00ee17b90db75124051d80ce9fe73961239c4342b0dd299e473"
+    },
+    {
+      "path": "oracle-C-Florida-stage-2.isa",
+      "bytes": 110787,
+      "sha256": "ecc238d2b15fc397d8d00534f3b14e5c54fcfd3cd2b14e00bbb201856dc20638"
+    },
+    {
+      "path": "oracle-C-Florida-stage-4.isa",
+      "bytes": 287328,
+      "sha256": "f8437c2a74df08bb020730289067e7cf3552bf3b80cbc6b2daa7591067af8b69"
+    },
+    {
+      "path": "oracle-C-Florida.json",
+      "bytes": 102325,
+      "sha256": "7f54beb6f3c5f8c21afc752da00926a2d4899feed7feb904b719b56319171667"
+    },
+    {
+      "path": "oracle-C-Florida.log",
+      "bytes": 654737,
+      "sha256": "b7f35296120f9287a69de6d85bf15dd3b9c8c124b335fe4c2ae8bd6774234f62"
+    },
+    {
+      "path": "oracle-D-active-v2.log",
+      "bytes": 15801,
+      "sha256": "d405a6f500b30b1ebd252ad69f96f9b5e1d6f26534052e968cd156358be8ff60"
+    },
+    {
+      "path": "oracle-D-active-v3-stage-1.isa",
+      "bytes": 110787,
+      "sha256": "ecc238d2b15fc397d8d00534f3b14e5c54fcfd3cd2b14e00bbb201856dc20638"
+    },
+    {
+      "path": "oracle-D-active-v3-stage-16.isa",
+      "bytes": 173761,
+      "sha256": "4a7b578adb57b00ee17b90db75124051d80ce9fe73961239c4342b0dd299e473"
+    },
+    {
+      "path": "oracle-D-active-v3-stage-2.isa",
+      "bytes": 110787,
+      "sha256": "ecc238d2b15fc397d8d00534f3b14e5c54fcfd3cd2b14e00bbb201856dc20638"
+    },
+    {
+      "path": "oracle-D-active-v3-stage-4.isa",
+      "bytes": 287328,
+      "sha256": "f8437c2a74df08bb020730289067e7cf3552bf3b80cbc6b2daa7591067af8b69"
+    },
+    {
+      "path": "oracle-D-active-v3.json",
+      "bytes": 87054,
+      "sha256": "b327526eaa9460edde10b2be1b74201117459e5cd705d9e88c022cf361bc8927"
+    },
+    {
+      "path": "oracle-D-active-v3.log",
+      "bytes": 619686,
+      "sha256": "58af9e1a161dd21f5e65080c116b7edc22d368ba724caa35465f8f58c04f57fb"
+    },
+    {
+      "path": "oracle-D-active.log",
+      "bytes": 9694,
+      "sha256": "2f6406368420e93345aabb2d89e8effe91585dd187e7a5eeacfdc6deba539fa9"
+    },
+    {
+      "path": "oracle-E-grazing-stage-1.isa",
+      "bytes": 110787,
+      "sha256": "ecc238d2b15fc397d8d00534f3b14e5c54fcfd3cd2b14e00bbb201856dc20638"
+    },
+    {
+      "path": "oracle-E-grazing-stage-16.isa",
+      "bytes": 173761,
+      "sha256": "4a7b578adb57b00ee17b90db75124051d80ce9fe73961239c4342b0dd299e473"
+    },
+    {
+      "path": "oracle-E-grazing-stage-2.isa",
+      "bytes": 110787,
+      "sha256": "ecc238d2b15fc397d8d00534f3b14e5c54fcfd3cd2b14e00bbb201856dc20638"
+    },
+    {
+      "path": "oracle-E-grazing-stage-4.isa",
+      "bytes": 287328,
+      "sha256": "f8437c2a74df08bb020730289067e7cf3552bf3b80cbc6b2daa7591067af8b69"
+    },
+    {
+      "path": "oracle-E-grazing.json",
+      "bytes": 87563,
+      "sha256": "3fecaebaf5dd01b6176fc438357ebaf3eb388cc6bdd1a3872872069a55818773"
+    },
+    {
+      "path": "oracle-E-grazing.log",
+      "bytes": 624525,
+      "sha256": "798eb22cbc008ac6ec94e39afd8e988621647593150f59688319f43744ce19d7"
+    },
+    {
+      "path": "oracle-traversal.log",
+      "bytes": 1680408,
+      "sha256": "33f5d6f9ea608dad2e925e85c16b79783ed30645ff9383c2706146f73a171a82"
+    },
+    {
+      "path": "sphere-A-orbital-stage-1.isa",
+      "bytes": 2146830,
+      "sha256": "985b6474637bbaa6b7cf226da6c05e3b42e766f7a28dd0482da3b0aa5e32d09c"
+    },
+    {
+      "path": "sphere-A-orbital-stage-16.isa",
+      "bytes": 173832,
+      "sha256": "a8ccd120ac38404d8fecb095868280f2df8c7876bac6f3a1911c0fa481dbc7bd"
+    },
+    {
+      "path": "sphere-A-orbital-stage-2.isa",
+      "bytes": 2146830,
+      "sha256": "985b6474637bbaa6b7cf226da6c05e3b42e766f7a28dd0482da3b0aa5e32d09c"
+    },
+    {
+      "path": "sphere-A-orbital-stage-4.isa",
+      "bytes": 287371,
+      "sha256": "7275167ba302e2941e9a05b4c774dc128089e3eb55a5a6f25d0e180d75953ad4"
+    },
+    {
+      "path": "sphere-A-orbital.json",
+      "bytes": 72996,
+      "sha256": "44817dcf0da2edfe44631e080a33b68a0e0598ee42ffa44c99c6be223561f36d"
+    },
+    {
+      "path": "sphere-A-orbital.log",
+      "bytes": 578419,
+      "sha256": "978a578efd917ac226ded55daf07311f8e55a71a24affe660bf090396b32f885"
+    },
+    {
+      "path": "sphere-D-active-stage-1.isa",
+      "bytes": 2146830,
+      "sha256": "985b6474637bbaa6b7cf226da6c05e3b42e766f7a28dd0482da3b0aa5e32d09c"
+    },
+    {
+      "path": "sphere-D-active-stage-16.isa",
+      "bytes": 173832,
+      "sha256": "a8ccd120ac38404d8fecb095868280f2df8c7876bac6f3a1911c0fa481dbc7bd"
+    },
+    {
+      "path": "sphere-D-active-stage-2.isa",
+      "bytes": 2146830,
+      "sha256": "985b6474637bbaa6b7cf226da6c05e3b42e766f7a28dd0482da3b0aa5e32d09c"
+    },
+    {
+      "path": "sphere-D-active-stage-4.isa",
+      "bytes": 287371,
+      "sha256": "7275167ba302e2941e9a05b4c774dc128089e3eb55a5a6f25d0e180d75953ad4"
+    },
+    {
+      "path": "sphere-D-active.json",
+      "bytes": 85254,
+      "sha256": "92596acfbf00b772915f485600443fd818ad55b8abb1dac76ef3b6edfebf058f"
+    },
+    {
+      "path": "sphere-D-active.log",
+      "bytes": 617893,
+      "sha256": "4897014fff5ed725c49e692eae8d9ad1f31afe584565108fa2390447871fec3a"
+    },
+    {
+      "path": "sphere-E-grazing-stage-1.isa",
+      "bytes": 2146830,
+      "sha256": "985b6474637bbaa6b7cf226da6c05e3b42e766f7a28dd0482da3b0aa5e32d09c"
+    },
+    {
+      "path": "sphere-E-grazing-stage-16.isa",
+      "bytes": 173832,
+      "sha256": "a8ccd120ac38404d8fecb095868280f2df8c7876bac6f3a1911c0fa481dbc7bd"
+    },
+    {
+      "path": "sphere-E-grazing-stage-2.isa",
+      "bytes": 2146830,
+      "sha256": "985b6474637bbaa6b7cf226da6c05e3b42e766f7a28dd0482da3b0aa5e32d09c"
+    },
+    {
+      "path": "sphere-E-grazing-stage-4.isa",
+      "bytes": 287371,
+      "sha256": "7275167ba302e2941e9a05b4c774dc128089e3eb55a5a6f25d0e180d75953ad4"
+    },
+    {
+      "path": "sphere-E-grazing.json",
+      "bytes": 85779,
+      "sha256": "7f8d972e7b540064ddcf3bb6fd634af9fc74d7b2fafbdb3af53b2eb2dc5a1d65"
+    },
+    {
+      "path": "sphere-E-grazing.log",
+      "bytes": 622720,
+      "sha256": "4a2df103b819805bf2da7ab803c75e3b38c57ea50eb2ce114eb41cde3c831b0c"
+    },
+    {
+      "path": "debugger\\DbgEng.h",
+      "bytes": 861454,
+      "sha256": "a9037bf9a096700082ec5d4d96a98d1d98dee6c8ed71b3eac8de64c1fd9a0f4f"
+    },
+    {
+      "path": "debugger\\dump_inspect.exe",
+      "bytes": 143872,
+      "sha256": "781be95e547731cf845338c4af8123a79d24f6cc2b3fa7fd5f6c38211ffabd63"
+    },
+    {
+      "path": "debugger\\dump_inspect.obj",
+      "bytes": 10648,
+      "sha256": "2c2bcbe6ce0a4b5cf650667a237a34b300c1b68917552e96e108caa79621abae"
+    },
+    {
+      "path": "debugger\\stack.log",
+      "bytes": 3964,
+      "sha256": "444d30cdfc6f2b45e36a69a84fd1a4c3ea735115b1f7fc7897c914942a21aba3"
+    },
+    {
+      "path": "debugger\\threads.log",
+      "bytes": 20728,
+      "sha256": "30d5c2a1fb192b7bf8778dcda704098c0a6ed675f034e5e1d3cc568b0a9cfc2c"
+    },
+    {
+      "path": "isolated-dai7sfzk\\NovaCore.Core.dll",
+      "bytes": 86528,
+      "sha256": "19e8bdbb02ee2608833b97fd4e1697ad7ca7783931ed6bf6359392fcd48ad8da"
+    },
+    {
+      "path": "isolated-dai7sfzk\\NovaCore.Core.pdb",
+      "bytes": 31136,
+      "sha256": "c375282a662ef41e6519e8cb77b09deb8a5f50bca36e5f4f498f8b672893053d"
+    },
+    {
+      "path": "isolated-dai7sfzk\\NovaCore.EphemerisFormat.dll",
+      "bytes": 77312,
+      "sha256": "b51c867d3b18d91122470fa06acbbc7e24ac35adc46cb9ecba54408386722067"
+    },
+    {
+      "path": "isolated-dai7sfzk\\NovaCore.EphemerisFormat.pdb",
+      "bytes": 27748,
+      "sha256": "b0e89f61f74c87a539075d6736ad96d9fe5b1ca72403d81b2e0ed34e31259d18"
+    },
+    {
+      "path": "isolated-dai7sfzk\\NovaCore.Graphics.dll",
+      "bytes": 634880,
+      "sha256": "78dd856286036d69a1aca71536f1bdd285b481fef1727838b9d3b9016c34a95d"
+    },
+    {
+      "path": "isolated-dai7sfzk\\NovaCore.Graphics.pdb",
+      "bytes": 143408,
+      "sha256": "1525fca65c581462b8f6c27243e0ac90cf40d2c1cadec544221d4f5eb1c9327e"
+    },
+    {
+      "path": "isolated-dai7sfzk\\NovaCore.Interop.dll",
+      "bytes": 23040,
+      "sha256": "cabcaa39c3a3dbfd36b00e1a4fbd8e04e40c3c16bbc43addf540440e4c40e3ac"
+    },
+    {
+      "path": "isolated-dai7sfzk\\NovaCore.Interop.pdb",
+      "bytes": 14060,
+      "sha256": "a536e5eefbbfb87f8d569e7aa4a9b8befeb8dd19eeae27152df36e7d32468b03"
+    },
+    {
+      "path": "isolated-dai7sfzk\\NovaCore.Native.dll",
+      "bytes": 365056,
+      "sha256": "7a668d9037863d378a5ba94518c5373e9da9d05b84c1629a1e71fbbbec3234b0"
+    },
+    {
+      "path": "isolated-dai7sfzk\\NovaCore.Platform.dll",
+      "bytes": 6656,
+      "sha256": "7cbdfcc55e1ceb53336607d10578ffcdc721d9edb16c8b6301fb8f0e377a8a34"
+    },
+    {
+      "path": "isolated-dai7sfzk\\NovaCore.Platform.pdb",
+      "bytes": 12048,
+      "sha256": "04a44979c30e749bf1ff7f00a80e663a1d1333f34134d2e5d7df766e44b29858"
+    },
+    {
+      "path": "isolated-dai7sfzk\\NovaCore.Simulation.dll",
+      "bytes": 3787776,
+      "sha256": "c67735d2845cfca4c94b626cd0a9514d2bd2d02598004f214353a5808d17ee94"
+    },
+    {
+      "path": "isolated-dai7sfzk\\NovaCore.Simulation.pdb",
+      "bytes": 81876,
+      "sha256": "6798ad34cf033e317a03c6b4e58a1715b85db8b9a9f30e6f8317cb2257f2fcdf"
+    },
+    {
+      "path": "isolated-dai7sfzk\\NovaCore.Triangle.deps.json",
+      "bytes": 2903,
+      "sha256": "1fe99f6524f2ecb5fc38ff699cc14da53f55b905631d575bcfee772ed51c4eb6"
+    },
+    {
+      "path": "isolated-dai7sfzk\\NovaCore.Triangle.dll",
+      "bytes": 241664,
+      "sha256": "95923aa7346ee6b427d7648e12545d97d177ae97f58723e0c1d2b58e57a0e5a1"
+    },
+    {
+      "path": "isolated-dai7sfzk\\NovaCore.Triangle.exe",
+      "bytes": 162304,
+      "sha256": "cc1583917855c5a37768c3e7a6b6e8c036a19938c34183dcbf9caee9e7e25c37"
+    },
+    {
+      "path": "isolated-dai7sfzk\\NovaCore.Triangle.pdb",
+      "bytes": 60940,
+      "sha256": "5f58a48317e3b7e6bbbe50d6ce289a3a82c6f4e5d0aea59ac247243852b020a0"
+    },
+    {
+      "path": "isolated-dai7sfzk\\NovaCore.Triangle.runtimeconfig.json",
+      "bytes": 342,
+      "sha256": "c230a317a54dd960bcbeb5f347f52e18dc665a26f7efda2159fced9a5ac7e097"
+    },
+    {
+      "path": "isolated-dai7sfzk\\production_spherical_billboard.tesc",
+      "bytes": 10669,
+      "sha256": "75e36e0b3414ad163eb5176d115f7e5f3c09a47dcba842c7b9d08d5e391620a8"
+    },
+    {
+      "path": "isolated-dai7sfzk\\production_spherical_billboard.tese",
+      "bytes": 7591,
+      "sha256": "172f028c7c52438dffa7299d5b543f30a636d7b7b5ed6e4a1a760c4aac0a8e20"
+    },
+    {
+      "path": "isolated-dai7sfzk\\stage-1.isa",
+      "bytes": 2146830,
+      "sha256": "985b6474637bbaa6b7cf226da6c05e3b42e766f7a28dd0482da3b0aa5e32d09c"
+    },
+    {
+      "path": "isolated-dai7sfzk\\stage-16.isa",
+      "bytes": 173832,
+      "sha256": "a8ccd120ac38404d8fecb095868280f2df8c7876bac6f3a1911c0fa481dbc7bd"
+    },
+    {
+      "path": "isolated-dai7sfzk\\stage-2.isa",
+      "bytes": 2146830,
+      "sha256": "985b6474637bbaa6b7cf226da6c05e3b42e766f7a28dd0482da3b0aa5e32d09c"
+    },
+    {
+      "path": "isolated-dai7sfzk\\stage-4.isa",
+      "bytes": 287371,
+      "sha256": "7275167ba302e2941e9a05b4c774dc128089e3eb55a5a6f25d0e180d75953ad4"
+    },
+    {
+      "path": "isolated-dai7sfzk\\earth-data\\earth_elevation_8192x4096.r16",
+      "bytes": 67108864,
+      "sha256": "4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317"
+    },
+    {
+      "path": "isolated-dai7sfzk\\layers\\explicit\\validation.json",
+      "bytes": 60443,
+      "sha256": "9b304ff60cebad448f299127d23abad8507f108bfd8aac11074f994db88dc21f"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\body_forward.frag.spv",
+      "bytes": 440,
+      "sha256": "fa706803f042fb5a9f7a3c9965a3e2de3e8838e075d67876b78df9bdc132ce0e"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\distant_planet.frag.spv",
+      "bytes": 35760,
+      "sha256": "04137afb1c632dfb7074480377d9f93136ab3127d382baeef07d52b09409eba8"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\distant_planet.vert.spv",
+      "bytes": 8428,
+      "sha256": "cf28fe0a7c0797bd7d72076437ba78c4e0d97bb1a0ae3c065baf3bfc5db62cb8"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\fullscreen.vert.spv",
+      "bytes": 1308,
+      "sha256": "a18f9b5e0b4a4e7a077b1017bad7b1c5c40313b3f70113f1e0771cd202433130"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\orbit.frag.spv",
+      "bytes": 456,
+      "sha256": "b06f50708727144e8d0f08d35cd2e64d8b1cef501ed20b10fea4a34196026267"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\orbit.vert.spv",
+      "bytes": 1756,
+      "sha256": "b4b9dd635f32156654e30d843c29eb864feb09751d7b3027cf99a5d741b6a45b"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\orbit_previous.frag.spv",
+      "bytes": 456,
+      "sha256": "c4935060e07e01742d59d8a5834241e2963dcc80ed8e35baeac5b08288761e61"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\planetary.frag.spv",
+      "bytes": 18548,
+      "sha256": "417f17b236834f0ac94fa3bbfdae52ad164599ff14051e9b396809beea75cda1"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\planetary.vert.spv",
+      "bytes": 135600,
+      "sha256": "ddb84030e2621df8f05489e339989d66de60d73435f490b4ec0af4251d7a0338"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\planetary_natural_terrain_global_prepare.comp.spv",
+      "bytes": 49540,
+      "sha256": "5a5450321873f5ff8bed7dd9e4f06c342625724d629da2232521fbace01c7a85"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\planetary_production.frag.spv",
+      "bytes": 151940,
+      "sha256": "4b79673d14c90df52703a322c116415ec9e833cf2247731ca5ee1ab7b563df06"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\planetary_production_terrain.comp.spv",
+      "bytes": 368,
+      "sha256": "405e6e6daab609ca383297ba8be706bfa96859c65dc2d9f42476a32cddd85df7"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\planetary_ring.vert.spv",
+      "bytes": 7728,
+      "sha256": "cccede52d3c64db872360912db9eb29e60cb892c648ed53ce1c178f8623d0cfb"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\planetary_ring_far.frag.spv",
+      "bytes": 2692,
+      "sha256": "343db81bccc310b21c600ab6ee6722438151694683bb0cf7ba01d54a9b68ade6"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\planetary_ring_near.frag.spv",
+      "bytes": 2692,
+      "sha256": "48b8ef4e56b6be9380cfbaca7daa790035e704541b6b8a550b3cc7bed540244c"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\planetary_select.comp.spv",
+      "bytes": 91064,
+      "sha256": "8189bbd2a85fe23033f12c558d8b221b62b8969c17ba9ffcf07b7c8501fe8adf"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\planetary_terrain_generate.comp.spv",
+      "bytes": 10292,
+      "sha256": "1fc8c24ea6b4a55e83997fadf80b4901f692b8bc2de84a5cf6ac043e4da531d1"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\production_nested_scale_mesh_cull.comp.spv",
+      "bytes": 30484,
+      "sha256": "497d88225a914b9601ad6c0f44733e834794a952854e71b26be426ead8780d94"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\production_nested_scale_mesh_incoming_cull.comp.spv",
+      "bytes": 30484,
+      "sha256": "23bd1b04d0291e6271138041433eee07e57503482e8e5cf845e4b72c75967336"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\production_spherical_billboard.tesc.spv",
+      "bytes": 42544,
+      "sha256": "13e7cf5b6a89f49b841ea6c3c74f4c4d702de528e9df70361f06514b594d1617"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\production_spherical_billboard.tese.spv",
+      "bytes": 68188,
+      "sha256": "39166315593cb9fe1db9b2af71b1aba3fe3d1b6b0829e40a3e7dcbde90c008c9"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\production_spherical_billboard.vert.spv",
+      "bytes": 8028,
+      "sha256": "1baa9043db7a8b71dcf5931f4cb415fa84ce6341b07d850ea9beb8baa02d2b6a"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\production_spherical_billboard_compact.comp.spv",
+      "bytes": 3460,
+      "sha256": "2aabd7633b333f86df8a6eae6b76ed2d13a7129443dcd9201531de047b12f4d9"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\production_spherical_billboard_cull.comp.spv",
+      "bytes": 14624,
+      "sha256": "2827b58dcd7029695e0b33272018e54d19d6113b8d7ab9ac591c343b3d994398"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\production_spherical_billboard_incoming_compact.comp.spv",
+      "bytes": 2940,
+      "sha256": "6b0238138222112ddf1f945f5e6a31867d5dd11f57169481ece9c05337f43e4e"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\production_spherical_billboard_incoming_cull.comp.spv",
+      "bytes": 14624,
+      "sha256": "8c677f08ae051cf525108a436066983d41961ce70757ca29a86df165d2663cfb"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\production_spherical_billboard_incoming_prepare.comp.spv",
+      "bytes": 86632,
+      "sha256": "9f32e3fcf9ffe534a10107ab0b1ef2b1ecdb3c6a9bb44d2c5d3d38b15ed47613"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\production_spherical_billboard_incoming_reset.comp.spv",
+      "bytes": 1736,
+      "sha256": "5d750f929dcab4f9f3138b4cdfa869ab26e3051d4b28485c02ee483f89e14d6e"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\production_spherical_billboard_prepare.comp.spv",
+      "bytes": 89684,
+      "sha256": "cd6b8feeaa382281c4d8891af64d54e45354491dbd93af6b90621a3658e9492c"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\production_spherical_billboard_reset.comp.spv",
+      "bytes": 1736,
+      "sha256": "cf583d16e14c8a8ec63b393d8752541648d932cf0165231cc48f6076e28fc027"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\regional_physical_demand.comp.spv",
+      "bytes": 22344,
+      "sha256": "7d80dbd70be13cc55f00ef836cd8da9d3783064411320697777f6b5c848d8f67"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\regional_physical_incoming_demand.comp.spv",
+      "bytes": 22360,
+      "sha256": "a56b62b5432206b8ab5eded734b13a0ddf9f0c726a4b444f8d24139bdcc17a60"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\sas_target.frag.spv",
+      "bytes": 440,
+      "sha256": "4e99fda06f571590f950e91d93025cafa83e4a454e68e3583ce59d869f0a3ef2"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\solar_label.frag.spv",
+      "bytes": 47588,
+      "sha256": "673c5dc0cc1e199d497c7c927f282a02da444fa258860b6cb94b6fd1ed12c90a"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\solar_label.vert.spv",
+      "bytes": 11388,
+      "sha256": "a13a7a8acb3ae2da2cac129a203caffd86b5a7f434701d99b59284fdd01f1844"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\solar_marker.frag.spv",
+      "bytes": 448,
+      "sha256": "d428743c08f96f4e508eab131cfb54981c2628eecc7acd3d2df220b19103275b"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\solar_marker.vert.spv",
+      "bytes": 7776,
+      "sha256": "50d948741d3ca6b59577a82d3346ab3cac51edcb9ab80047247ac61c345b6db6"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\solar_orbit.frag.spv",
+      "bytes": 1412,
+      "sha256": "23b511270c196c2186f7935699ca7fdedf3c92c629da67c10e8ae7615286181f"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\solar_orbit.vert.spv",
+      "bytes": 4008,
+      "sha256": "d71520615e2533a06208c3cec752d2689f524a30fb6a11bd2ca4ae00e2cc027f"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\solar_speed_hud.frag.spv",
+      "bytes": 49400,
+      "sha256": "e073b0ab31c69a3516d695146ade0dbd618d3dede5a10699f390f10da52c3586"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\solar_speed_hud.vert.spv",
+      "bytes": 11036,
+      "sha256": "a777a4dfece073339efcd97c7292d970f8c26d21f221ebd62ce244970f0a5fb4"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\space_background.frag.spv",
+      "bytes": 12108,
+      "sha256": "0c98ee3df0ba8ad8f313cc352a02032528e6b0e36b2dfa8cc2be1a6755b71cfc"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\stellar_glow.frag.spv",
+      "bytes": 1736,
+      "sha256": "e83a5e7458ec4be4b835384c88ec3ea958ae13569ee9ac823a4e2b2db17facee"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\stellar_glow.vert.spv",
+      "bytes": 6392,
+      "sha256": "30a9ed63e3d92581852afef62a242f2160a10c6cdb276a3b1aa0360a476183e8"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\stellar_sun.frag.spv",
+      "bytes": 3208,
+      "sha256": "5c448c0da4cadeb08bf2c85c74448d3b690fd3d6bccab1fc2c49da7a0bf54769"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\stellar_sun.vert.spv",
+      "bytes": 5168,
+      "sha256": "3e124d5babcb1d219499aa2de1482f90fc7c9008e92b054f7ca0d268336346b6"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\tone_map.frag.spv",
+      "bytes": 2700,
+      "sha256": "d617345e95589ecb087ed40c20f4d04a427251a2b5249d8181cc63c421ee3979"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\triangle.frag.spv",
+      "bytes": 2180,
+      "sha256": "36e2c4762d87eddd045909f600217f3ea7d48b023d08887abbf958d3bfaa5ddf"
+    },
+    {
+      "path": "isolated-dai7sfzk\\shaders\\triangle.vert.spv",
+      "bytes": 4828,
+      "sha256": "87c254e6166b18954b8c0fbd533af2e83f4cf7f09842d752a0a76ae68e8f1aef"
+    },
+    {
+      "path": "isolated-msmz547c\\NovaCore.Core.dll",
+      "bytes": 86528,
+      "sha256": "19e8bdbb02ee2608833b97fd4e1697ad7ca7783931ed6bf6359392fcd48ad8da"
+    },
+    {
+      "path": "isolated-msmz547c\\NovaCore.Core.pdb",
+      "bytes": 31136,
+      "sha256": "c375282a662ef41e6519e8cb77b09deb8a5f50bca36e5f4f498f8b672893053d"
+    },
+    {
+      "path": "isolated-msmz547c\\NovaCore.EphemerisFormat.dll",
+      "bytes": 77312,
+      "sha256": "b51c867d3b18d91122470fa06acbbc7e24ac35adc46cb9ecba54408386722067"
+    },
+    {
+      "path": "isolated-msmz547c\\NovaCore.EphemerisFormat.pdb",
+      "bytes": 27748,
+      "sha256": "b0e89f61f74c87a539075d6736ad96d9fe5b1ca72403d81b2e0ed34e31259d18"
+    },
+    {
+      "path": "isolated-msmz547c\\NovaCore.Graphics.dll",
+      "bytes": 634880,
+      "sha256": "78dd856286036d69a1aca71536f1bdd285b481fef1727838b9d3b9016c34a95d"
+    },
+    {
+      "path": "isolated-msmz547c\\NovaCore.Graphics.pdb",
+      "bytes": 143408,
+      "sha256": "1525fca65c581462b8f6c27243e0ac90cf40d2c1cadec544221d4f5eb1c9327e"
+    },
+    {
+      "path": "isolated-msmz547c\\NovaCore.Interop.dll",
+      "bytes": 23040,
+      "sha256": "cabcaa39c3a3dbfd36b00e1a4fbd8e04e40c3c16bbc43addf540440e4c40e3ac"
+    },
+    {
+      "path": "isolated-msmz547c\\NovaCore.Interop.pdb",
+      "bytes": 14060,
+      "sha256": "a536e5eefbbfb87f8d569e7aa4a9b8befeb8dd19eeae27152df36e7d32468b03"
+    },
+    {
+      "path": "isolated-msmz547c\\NovaCore.Native.dll",
+      "bytes": 365056,
+      "sha256": "7a668d9037863d378a5ba94518c5373e9da9d05b84c1629a1e71fbbbec3234b0"
+    },
+    {
+      "path": "isolated-msmz547c\\NovaCore.Platform.dll",
+      "bytes": 6656,
+      "sha256": "7cbdfcc55e1ceb53336607d10578ffcdc721d9edb16c8b6301fb8f0e377a8a34"
+    },
+    {
+      "path": "isolated-msmz547c\\NovaCore.Platform.pdb",
+      "bytes": 12048,
+      "sha256": "04a44979c30e749bf1ff7f00a80e663a1d1333f34134d2e5d7df766e44b29858"
+    },
+    {
+      "path": "isolated-msmz547c\\NovaCore.Simulation.dll",
+      "bytes": 3787776,
+      "sha256": "c67735d2845cfca4c94b626cd0a9514d2bd2d02598004f214353a5808d17ee94"
+    },
+    {
+      "path": "isolated-msmz547c\\NovaCore.Simulation.pdb",
+      "bytes": 81876,
+      "sha256": "6798ad34cf033e317a03c6b4e58a1715b85db8b9a9f30e6f8317cb2257f2fcdf"
+    },
+    {
+      "path": "isolated-msmz547c\\NovaCore.Triangle.deps.json",
+      "bytes": 2903,
+      "sha256": "1fe99f6524f2ecb5fc38ff699cc14da53f55b905631d575bcfee772ed51c4eb6"
+    },
+    {
+      "path": "isolated-msmz547c\\NovaCore.Triangle.dll",
+      "bytes": 241664,
+      "sha256": "95923aa7346ee6b427d7648e12545d97d177ae97f58723e0c1d2b58e57a0e5a1"
+    },
+    {
+      "path": "isolated-msmz547c\\NovaCore.Triangle.exe",
+      "bytes": 162304,
+      "sha256": "cc1583917855c5a37768c3e7a6b6e8c036a19938c34183dcbf9caee9e7e25c37"
+    },
+    {
+      "path": "isolated-msmz547c\\NovaCore.Triangle.pdb",
+      "bytes": 60940,
+      "sha256": "5f58a48317e3b7e6bbbe50d6ce289a3a82c6f4e5d0aea59ac247243852b020a0"
+    },
+    {
+      "path": "isolated-msmz547c\\NovaCore.Triangle.runtimeconfig.json",
+      "bytes": 342,
+      "sha256": "c230a317a54dd960bcbeb5f347f52e18dc665a26f7efda2159fced9a5ac7e097"
+    },
+    {
+      "path": "isolated-msmz547c\\production_spherical_billboard.tesc",
+      "bytes": 10669,
+      "sha256": "75e36e0b3414ad163eb5176d115f7e5f3c09a47dcba842c7b9d08d5e391620a8"
+    },
+    {
+      "path": "isolated-msmz547c\\production_spherical_billboard.tese",
+      "bytes": 7591,
+      "sha256": "172f028c7c52438dffa7299d5b543f30a636d7b7b5ed6e4a1a760c4aac0a8e20"
+    },
+    {
+      "path": "isolated-msmz547c\\earth-data\\earth_elevation_8192x4096.r16",
+      "bytes": 67108864,
+      "sha256": "4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317"
+    },
+    {
+      "path": "isolated-msmz547c\\layers\\explicit\\validation.json",
+      "bytes": 60443,
+      "sha256": "9b304ff60cebad448f299127d23abad8507f108bfd8aac11074f994db88dc21f"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\body_forward.frag.spv",
+      "bytes": 440,
+      "sha256": "fa706803f042fb5a9f7a3c9965a3e2de3e8838e075d67876b78df9bdc132ce0e"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\distant_planet.frag.spv",
+      "bytes": 35760,
+      "sha256": "04137afb1c632dfb7074480377d9f93136ab3127d382baeef07d52b09409eba8"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\distant_planet.vert.spv",
+      "bytes": 8428,
+      "sha256": "cf28fe0a7c0797bd7d72076437ba78c4e0d97bb1a0ae3c065baf3bfc5db62cb8"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\fullscreen.vert.spv",
+      "bytes": 1308,
+      "sha256": "a18f9b5e0b4a4e7a077b1017bad7b1c5c40313b3f70113f1e0771cd202433130"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\orbit.frag.spv",
+      "bytes": 456,
+      "sha256": "b06f50708727144e8d0f08d35cd2e64d8b1cef501ed20b10fea4a34196026267"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\orbit.vert.spv",
+      "bytes": 1756,
+      "sha256": "b4b9dd635f32156654e30d843c29eb864feb09751d7b3027cf99a5d741b6a45b"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\orbit_previous.frag.spv",
+      "bytes": 456,
+      "sha256": "c4935060e07e01742d59d8a5834241e2963dcc80ed8e35baeac5b08288761e61"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\planetary.frag.spv",
+      "bytes": 18548,
+      "sha256": "417f17b236834f0ac94fa3bbfdae52ad164599ff14051e9b396809beea75cda1"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\planetary.vert.spv",
+      "bytes": 135600,
+      "sha256": "ddb84030e2621df8f05489e339989d66de60d73435f490b4ec0af4251d7a0338"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\planetary_natural_terrain_global_prepare.comp.spv",
+      "bytes": 49540,
+      "sha256": "5a5450321873f5ff8bed7dd9e4f06c342625724d629da2232521fbace01c7a85"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\planetary_production.frag.spv",
+      "bytes": 151940,
+      "sha256": "4b79673d14c90df52703a322c116415ec9e833cf2247731ca5ee1ab7b563df06"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\planetary_production_terrain.comp.spv",
+      "bytes": 368,
+      "sha256": "405e6e6daab609ca383297ba8be706bfa96859c65dc2d9f42476a32cddd85df7"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\planetary_ring.vert.spv",
+      "bytes": 7728,
+      "sha256": "cccede52d3c64db872360912db9eb29e60cb892c648ed53ce1c178f8623d0cfb"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\planetary_ring_far.frag.spv",
+      "bytes": 2692,
+      "sha256": "343db81bccc310b21c600ab6ee6722438151694683bb0cf7ba01d54a9b68ade6"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\planetary_ring_near.frag.spv",
+      "bytes": 2692,
+      "sha256": "48b8ef4e56b6be9380cfbaca7daa790035e704541b6b8a550b3cc7bed540244c"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\planetary_select.comp.spv",
+      "bytes": 91064,
+      "sha256": "8189bbd2a85fe23033f12c558d8b221b62b8969c17ba9ffcf07b7c8501fe8adf"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\planetary_terrain_generate.comp.spv",
+      "bytes": 10292,
+      "sha256": "1fc8c24ea6b4a55e83997fadf80b4901f692b8bc2de84a5cf6ac043e4da531d1"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\production_nested_scale_mesh_cull.comp.spv",
+      "bytes": 30484,
+      "sha256": "497d88225a914b9601ad6c0f44733e834794a952854e71b26be426ead8780d94"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\production_nested_scale_mesh_incoming_cull.comp.spv",
+      "bytes": 30484,
+      "sha256": "23bd1b04d0291e6271138041433eee07e57503482e8e5cf845e4b72c75967336"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\production_spherical_billboard.tesc.spv",
+      "bytes": 42544,
+      "sha256": "13e7cf5b6a89f49b841ea6c3c74f4c4d702de528e9df70361f06514b594d1617"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\production_spherical_billboard.tese.spv",
+      "bytes": 68188,
+      "sha256": "39166315593cb9fe1db9b2af71b1aba3fe3d1b6b0829e40a3e7dcbde90c008c9"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\production_spherical_billboard.vert.spv",
+      "bytes": 8028,
+      "sha256": "1baa9043db7a8b71dcf5931f4cb415fa84ce6341b07d850ea9beb8baa02d2b6a"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\production_spherical_billboard_compact.comp.spv",
+      "bytes": 3460,
+      "sha256": "2aabd7633b333f86df8a6eae6b76ed2d13a7129443dcd9201531de047b12f4d9"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\production_spherical_billboard_cull.comp.spv",
+      "bytes": 14624,
+      "sha256": "2827b58dcd7029695e0b33272018e54d19d6113b8d7ab9ac591c343b3d994398"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\production_spherical_billboard_incoming_compact.comp.spv",
+      "bytes": 2940,
+      "sha256": "6b0238138222112ddf1f945f5e6a31867d5dd11f57169481ece9c05337f43e4e"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\production_spherical_billboard_incoming_cull.comp.spv",
+      "bytes": 14624,
+      "sha256": "8c677f08ae051cf525108a436066983d41961ce70757ca29a86df165d2663cfb"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\production_spherical_billboard_incoming_prepare.comp.spv",
+      "bytes": 86632,
+      "sha256": "9f32e3fcf9ffe534a10107ab0b1ef2b1ecdb3c6a9bb44d2c5d3d38b15ed47613"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\production_spherical_billboard_incoming_reset.comp.spv",
+      "bytes": 1736,
+      "sha256": "5d750f929dcab4f9f3138b4cdfa869ab26e3051d4b28485c02ee483f89e14d6e"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\production_spherical_billboard_prepare.comp.spv",
+      "bytes": 89684,
+      "sha256": "cd6b8feeaa382281c4d8891af64d54e45354491dbd93af6b90621a3658e9492c"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\production_spherical_billboard_reset.comp.spv",
+      "bytes": 1736,
+      "sha256": "cf583d16e14c8a8ec63b393d8752541648d932cf0165231cc48f6076e28fc027"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\regional_physical_demand.comp.spv",
+      "bytes": 22344,
+      "sha256": "7d80dbd70be13cc55f00ef836cd8da9d3783064411320697777f6b5c848d8f67"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\regional_physical_incoming_demand.comp.spv",
+      "bytes": 22360,
+      "sha256": "a56b62b5432206b8ab5eded734b13a0ddf9f0c726a4b444f8d24139bdcc17a60"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\sas_target.frag.spv",
+      "bytes": 440,
+      "sha256": "4e99fda06f571590f950e91d93025cafa83e4a454e68e3583ce59d869f0a3ef2"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\solar_label.frag.spv",
+      "bytes": 47588,
+      "sha256": "673c5dc0cc1e199d497c7c927f282a02da444fa258860b6cb94b6fd1ed12c90a"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\solar_label.vert.spv",
+      "bytes": 11388,
+      "sha256": "a13a7a8acb3ae2da2cac129a203caffd86b5a7f434701d99b59284fdd01f1844"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\solar_marker.frag.spv",
+      "bytes": 448,
+      "sha256": "d428743c08f96f4e508eab131cfb54981c2628eecc7acd3d2df220b19103275b"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\solar_marker.vert.spv",
+      "bytes": 7776,
+      "sha256": "50d948741d3ca6b59577a82d3346ab3cac51edcb9ab80047247ac61c345b6db6"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\solar_orbit.frag.spv",
+      "bytes": 1412,
+      "sha256": "23b511270c196c2186f7935699ca7fdedf3c92c629da67c10e8ae7615286181f"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\solar_orbit.vert.spv",
+      "bytes": 4008,
+      "sha256": "d71520615e2533a06208c3cec752d2689f524a30fb6a11bd2ca4ae00e2cc027f"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\solar_speed_hud.frag.spv",
+      "bytes": 49400,
+      "sha256": "e073b0ab31c69a3516d695146ade0dbd618d3dede5a10699f390f10da52c3586"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\solar_speed_hud.vert.spv",
+      "bytes": 11036,
+      "sha256": "a777a4dfece073339efcd97c7292d970f8c26d21f221ebd62ce244970f0a5fb4"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\space_background.frag.spv",
+      "bytes": 12108,
+      "sha256": "0c98ee3df0ba8ad8f313cc352a02032528e6b0e36b2dfa8cc2be1a6755b71cfc"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\stellar_glow.frag.spv",
+      "bytes": 1736,
+      "sha256": "e83a5e7458ec4be4b835384c88ec3ea958ae13569ee9ac823a4e2b2db17facee"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\stellar_glow.vert.spv",
+      "bytes": 6392,
+      "sha256": "30a9ed63e3d92581852afef62a242f2160a10c6cdb276a3b1aa0360a476183e8"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\stellar_sun.frag.spv",
+      "bytes": 3208,
+      "sha256": "5c448c0da4cadeb08bf2c85c74448d3b690fd3d6bccab1fc2c49da7a0bf54769"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\stellar_sun.vert.spv",
+      "bytes": 5168,
+      "sha256": "3e124d5babcb1d219499aa2de1482f90fc7c9008e92b054f7ca0d268336346b6"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\tone_map.frag.spv",
+      "bytes": 2700,
+      "sha256": "d617345e95589ecb087ed40c20f4d04a427251a2b5249d8181cc63c421ee3979"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\triangle.frag.spv",
+      "bytes": 2180,
+      "sha256": "36e2c4762d87eddd045909f600217f3ea7d48b023d08887abbf958d3bfaa5ddf"
+    },
+    {
+      "path": "isolated-msmz547c\\shaders\\triangle.vert.spv",
+      "bytes": 4828,
+      "sha256": "87c254e6166b18954b8c0fbd533af2e83f4cf7f09842d752a0a76ae68e8f1aef"
+    }
+  ],
+  "dumpAccess": "WER records two WATCHDOG dumps; direct dump and ReportQueue reads are access denied. No privilege or ACL changes attempted.",
+  "freezeClassification": "UNCLASSIFIED host/diagnostic event; contemporaneous VIDEO_ENGINE_TIMEOUT_DETECTED 0x141 live-kernel reports. Recovery/reset success and initiating process not established.",
+  "pressure": "No Resource-Exhaustion-Detector event found 20:00 through recovery. Current free RAM ~19.2 GiB, E ~435 GiB, C ~84 GiB; not historical peak proof. No bulk GPU raw capture enabled at interruption; oracle storage allocation 96,000,016 bytes, timing/log/ISA output only. Transient driver/compiler demand remains unmeasured."
+}

@@ -42,7 +42,7 @@ void main()
   vec3 barycentric=gl_TessCoord;
   dvec3 camera=dvec3(inputData.cameraHighRadiusHigh.xyz)+dvec3(inputData.cameraLowRadiusLow.xyz);
   vec3 interpolatedView=i5[0]*barycentric.x+i5[1]*barycentric.y+i5[2]*barycentric.z;
-  // The prepared vertices are already the displaced physical base. Interpolate
+  // The prepared vertices define the published render surface. Interpolate
   // that small camera-relative quantity and recover its body-fixed anchor for
   // height/material addressing. Normalizing interpolated corner directions and
   // rebuilding a planet-radius point changes the coarse spherical triangle and
@@ -55,14 +55,18 @@ void main()
   vec3 baseNormal=normalize(i1[0]*barycentric.x+i1[1]*barycentric.y+i1[2]*barycentric.z);
   double localWeight=preparedRadiusSquared>1e-18?
     1.0-smoothstep(40.0,50.0,double(length(interpolatedView))):0.0;
-  // Match the production scale-mesh responsibility: the prepared base is the
-  // complete terrain outside the bounded refinement footprint.  Do not run
-  // the expensive near-field authority and discard it by multiplying by zero.
-  // KSA's TES takes the same early-out boundary before detailed displacement;
-  // NovaCore keeps evaluating the common outputs below because its fragment ABI
-  // still consumes the anchored body direction and prepared base normal.
+  // The fragment interface retains its bounded detail weight. The temporary
+  // banked comparison below also uses it for near-field physical displacement.
   double nearHeight=0.0;
   dvec3 nearGradient=dvec3(0.0);
+#if NOVACORE_PREPARED_RENDER_TERRAIN
+  // Render authority: local interpolation of the published full-relief surface.
+  // Gameplay continues to query full physical H independently. Current material
+  // detail remains in fragment shading; no authored TES height maps exist yet.
+  double height=baseHeight;
+  vec3 surfaceNormal=baseNormal;
+  double localDisplacement=0.0;
+#else
   if(localWeight>0.0){
     NaturalTerrainFieldSampleD nearValue=EvaluateNaturalCandidateNearD(direction);
     nearHeight=nearValue.height;
@@ -75,6 +79,7 @@ void main()
   double northSlope=-dot(dvec3(baseNormal),north)/radial+dot(nearGradient,north)*localWeight;
   vec3 surfaceNormal=normalize(vec3(direction-east*eastSlope-north*northSlope));
   double localDisplacement=height-baseHeight;
+#endif
   vec3 relativeBody=-interpolatedView+vec3(direction*localDisplacement);Presentation p=presentations.values[0];
   vec3 localRelative=preparedRadiusSquared>1e-18?
     RotateQuaternion(vec3(direction*localDisplacement),p.bodyOrientation):vec3(0.0);

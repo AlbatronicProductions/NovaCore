@@ -1,0 +1,63 @@
+{
+  "classification": "NO PROVEN M13.3 CONVERGENCE TARGET YET",
+  "hInTes": "INSUFFICIENT EVIDENCE",
+  "finalRefinement": "RETAIN",
+  "performanceSignificance": "NOT ASSIGNED: numerical gate stopped GPU implementation and timing",
+  "stopInstruction": "Ticket section 6; sections 9 and 16 gate subsequent prototype and timing",
+  "productionFilesChanged": 0,
+  "temporaryProductionInstrumentation": false,
+  "productionAndPriorEvidenceUnchanged": true,
+  "runtimeIdentity": "PASS",
+  "shaderIdentity": "PASS 49 Debug + 49 Release",
+  "diagnosticCpuBuild": "PASS",
+  "repeatability": "PASS",
+  "losslessControl": "PASS 26208/26208 points",
+  "exactReducedRepresentation": "FAIL",
+  "laterGpuRuntimeValidation": "NOT RUN due to earlier stop gate",
+  "gitDiffCheck": "PASS",
+  "untrackedEvidenceWhitespace": "PASS",
+  "cleanup": "Rejected before execution: blocked by policy; no retry",
+  "gitStatusShort": "?? docs/engineering-evidence/conservative-pre-refinement-visibility/\n?? docs/engineering-evidence/ksa-terrain-architecture/\n?? docs/engineering-evidence/local-physical-domain-proof/\n?? docs/engineering-evidence/post-m13.2-next-target/",
+  "storage": {
+    "accountedCreatedPayloadBytesLowerBound": 1564726,
+    "permanentRetainedBytes": 127780,
+    "disposableRemovedBytes": 0,
+    "disposableRemainingBytes": 1436946,
+    "remainingFileCount": 33
+  },
+  "packageBudgetBytes": 200000,
+  "files": {
+    "CoordinateProof.cs": {
+      "bytes": 10002,
+      "sha256": "2f7471351eaf54e68faa05fded41416a51230fa90e7d33279cf85aa730874126"
+    },
+    "CoordinateProof.csproj": {
+      "bytes": 675,
+      "sha256": "e48d350648f197a4efadc481cacc592c90fafcea54c7406445b426d8cd782584"
+    },
+    "manual-cleanup.md": {
+      "bytes": 1232,
+      "sha256": "1d264e476cf6c1026d9e43cc29a4bc89ef286a74ffbfaa88c6cd4567353cd1af"
+    },
+    "numerical-results.json": {
+      "bytes": 49590,
+      "sha256": "0812d27857366b28999c5f7e3dda7a578a35ff336bc41a0824a2536fe105b6d7"
+    },
+    "README.md": {
+      "bytes": 30684,
+      "sha256": "4d2b4953f5a2b38323b1f1773dae26a01e66d7983dadb183732636e9481258ce"
+    },
+    "run.py": {
+      "bytes": 5991,
+      "sha256": "1dca3da94852c2a23fb1d1688a4e2bf51a867a08ca5583cc44d4926eb054bd02"
+    },
+    "scratch-manifest.json": {
+      "bytes": 7946,
+      "sha256": "6f7b9c21218cfc067bf7e938401464bed05759aa83cb47a7685269c8b7bcc016"
+    },
+    "verification.json": {
+      "bytes": 19083,
+      "sha256": "c9ea9dfe6e9d7defa5090b5afbb6fda63ba12af33de7b42c07de227300c77cc2"
+    }
+  }
+}

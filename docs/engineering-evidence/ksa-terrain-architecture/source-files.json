@@ -1,0 +1,51 @@
+{
+  "ksaInstalled": [
+    "Content/Core/MeshCollections/EarthScaleMesh.xml",
+    "Content/Core/Shaders/Common/PrecisionFuncs.glsl",
+    "Content/Core/Shaders/Planet/Planet.vert",
+    "Content/Core/Shaders/Planet/PlanetTessControl.tesc",
+    "Content/Core/Shaders/Planet/PlanetTessEvaluation.tese",
+    "Content/Core/Shaders/Planet/TessellationFuncs.glsl",
+    "Content/Core/Shaders/Planet/TerrainMesh/MeshDataCommon.glsl",
+    "Content/Core/Shaders/Planet/TerrainMesh/PrepareModifiers.comp",
+    "Content/Core/Shaders/Planet/TerrainMesh/FinalizeModifiers.comp",
+    "Content/Core/Shaders/Planet/TerrainMesh/GenerateMeshNormals.comp",
+    "Content/Core/Shaders/Planet/Culling/PlanetFrustumCulling.comp",
+    "Content/Core/Shaders/Planet/ProceduralModifiersLibrary/Modifiers.glsl"
+  ],
+  "ksaDecompiled": [
+    "build/ksa-residency-reference/assembly-source/Properties/AssemblyInfo.cs",
+    "build/ksa-residency-reference/source/KSA.PlanetRenderer.cs",
+    "build/ksa-residency-reference/source/KSA.Program.cs",
+    "build/ksa-residency-reference/source/KSA.PlanetMeshCollection.cs",
+    "build/ksa-residency-reference/assembly-source/KSA/CubeMesh.cs",
+    "build/ksa-residency-reference/assembly-source/KSA/Celestial.cs",
+    "build/ksa-residency-reference/assembly-source/KSA/TerrainPatch.cs",
+    "build/ksa-residency-reference/assembly-source/KSA/PlanetFrustumCulling.cs",
+    "build/ksa-residency-reference/source/KSA.Rendering.CelestialTextureStreamer.cs",
+    "build/ksa-residency-reference/source/KSA.Rendering.StreamingUploader.cs",
+    "build/ksa-residency-reference/source/KSA.Rendering.RetiredResourceQueue.cs",
+    "build/ksa-residency-reference/source/KSA.ProceduralModifiersRenderData.cs"
+  ],
+  "novaCore": [
+    "ENGINEERING_RULES.md",
+    "samples/NovaCore.Triangle/Program.cs",
+    "samples/NovaCore.Triangle/EarthRoutePolicy.cs",
+    "src/NovaCore.Graphics/PlanetaryNestedScaleMeshRuntimeAdapter.cs",
+    "src/NovaCore.Graphics/PlanetaryProductionSphericalBillboardMovingRuntime.cs",
+    "native/NovaCore.Native/NovaCoreNative.cpp",
+    "native/NovaCore.Native/RegionalPhysicalResidency.h",
+    "native/NovaCore.Native/Shaders/production_spherical_billboard.tese",
+    "native/NovaCore.Native/Shaders/production_spherical_billboard.tesc",
+    "native/NovaCore.Native/Shaders/production_spherical_billboard_prepare.comp",
+    "native/NovaCore.Native/Shaders/production_nested_scale_mesh_cull.comp",
+    "native/NovaCore.Native/Shaders/planetary_natural_terrain_surface.glsl",
+    "native/NovaCore.Native/Shaders/planetary_natural_terrain_families.glsl",
+    "native/NovaCore.Native/Shaders/planetary_natural_terrain_field.glsl",
+    "docs/engineering-evidence/post-m13.2-next-target/README.md",
+    "docs/engineering-evidence/m13.2-terrain-shading/README.md",
+    "docs/engineering-evidence/m13-next-target/README.md",
+    "docs/engineering-evidence/near-surface-performance/README.md",
+    "docs/engineering-evidence/conservative-pre-refinement-visibility/README.md"
+  ]
+}

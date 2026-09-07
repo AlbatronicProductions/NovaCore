@@ -1,0 +1,328 @@
+diff --git a/native/NovaCore.Native/NovaCoreNative.cpp b/native/NovaCore.Native/NovaCoreNative.cpp
+index 65d69bd..3a0e755 100644
+--- a/native/NovaCore.Native/NovaCoreNative.cpp
++++ b/native/NovaCore.Native/NovaCoreNative.cpp
+@@ -482,6 +482,10 @@ struct App {
+   double cpuUpdateMs{},cpuFenceWaitMs{},cpuInspectionMs{},cpuHostCallbackMs{},cpuUploadMs{};
+   double cpuRecordMs{},cpuSubmitMs{},cpuPresentMs{};
+   uint64_t cpuTimingSamples{};
++  const bool performanceCountersOff = std::getenv("NOVACORE_PERFORMANCE_COUNTERS_OFF") != nullptr;
++  const bool performanceFrameLog = std::getenv("NOVACORE_PERFORMANCE_FRAME_LOG") != nullptr;
++  const bool performanceGeometry = std::getenv("NOVACORE_PERFORMANCE_GEOMETRY") != nullptr;
++  bool performanceGeometryLogged = false;
+   std::array<std::vector<double>,8> c3CpuMs;
+   std::array<std::vector<double>,TimestampCount> c3GpuMs;
+   std::array<std::vector<uint64_t>,4> c3PipelineValues;
+@@ -499,6 +503,16 @@ struct App {
+   std::array<bool, 10> presentationFocusWasDown{};
+   bool resetWasDown{};
+   uint32_t surfaceDiagnostic{};
++  const char* parityDirectory=std::getenv("NOVACORE_TES_PARITY");
++  const uint64_t parityFrame=std::getenv("NOVACORE_PARITY_FRAME")?std::strtoull(std::getenv("NOVACORE_PARITY_FRAME"),nullptr,10):175;
++  VkBuffer parityPixels{},paritySamples{};VkDeviceMemory parityPixelMemory{},paritySampleMemory{};
++  void *parityPixelMapped=nullptr,*paritySampleMapped=nullptr;
++  bool parityRecorded=false,parityWritten=false;
++  static constexpr VkDeviceSize ParitySampleBytes=32+16777216ull*128;
++  const bool primitiveCapture=std::getenv("NOVACORE_PRIMITIVE_CAPTURE")!=nullptr;
++  VkBuffer primitiveRecords{};VkDeviceMemory primitiveMemory{};void* primitiveMapped=nullptr;
++  static constexpr VkDeviceSize PrimitiveBytes=16+8388608ull*80;
++
+   void Log(uint32_t cat, const char *msg) const {
+     if (cb) {
+       NcHostEvent e{NC_DIAGNOSTIC, cat, msg, {}, {}};
+@@ -931,13 +945,13 @@ void Device(App &a) {
+                      [id](auto &v) { return v.queueFamilyIndex == id; }))
+       qs.push_back({VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO, nullptr, 0, id,
+                     1, &pri});
+-  const char *ex = VK_KHR_SWAPCHAIN_EXTENSION_NAME;
++  const char *extensions[]{VK_KHR_SWAPCHAIN_EXTENSION_NAME,VK_AMD_SHADER_INFO_EXTENSION_NAME};
+   VkDeviceCreateInfo ci{VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO};
+   ci.queueCreateInfoCount = (uint32_t)qs.size();
+   ci.pQueueCreateInfos = qs.data();
+-  ci.enabledExtensionCount = 1;
+-  ci.ppEnabledExtensionNames = &ex;
+-  VkPhysicalDeviceFeatures enabledFeatures{};enabledFeatures.shaderFloat64=VK_TRUE;enabledFeatures.samplerAnisotropy=VK_TRUE;enabledFeatures.multiDrawIndirect=VK_TRUE;enabledFeatures.tessellationShader=VK_TRUE;enabledFeatures.vertexPipelineStoresAndAtomics=VK_TRUE;enabledFeatures.pipelineStatisticsQuery=VK_TRUE;ci.pEnabledFeatures=&enabledFeatures;
++  ci.enabledExtensionCount = std::getenv("NOVACORE_SHADER_INFO")?2u:1u;
++  ci.ppEnabledExtensionNames = extensions;
++  VkPhysicalDeviceFeatures enabledFeatures{};enabledFeatures.shaderFloat64=VK_TRUE;enabledFeatures.samplerAnisotropy=VK_TRUE;enabledFeatures.multiDrawIndirect=VK_TRUE;enabledFeatures.tessellationShader=VK_TRUE;enabledFeatures.vertexPipelineStoresAndAtomics=VK_TRUE;enabledFeatures.pipelineStatisticsQuery=VK_TRUE;enabledFeatures.geometryShader=VK_TRUE;enabledFeatures.fragmentStoresAndAtomics=VK_TRUE;ci.pEnabledFeatures=&enabledFeatures;
+   a.Check(vkCreateDevice(a.physical, &ci, nullptr, &a.device),
+           "logical device failed");
+   vkGetDeviceQueue(a.device, *q.graphics, 0, &a.graphicsQueue);
+@@ -1221,10 +1235,10 @@ VkShaderModule Shader(App &a, const char *n) {
+   return m;
+ }
+ void CreateSceneColor(App &a){
+-  VkImageCreateInfo image{VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO};image.imageType=VK_IMAGE_TYPE_2D;image.format=App::SceneFormat;image.extent={a.extent.width,a.extent.height,1};image.mipLevels=1;image.arrayLayers=1;image.samples=VK_SAMPLE_COUNT_1_BIT;image.tiling=VK_IMAGE_TILING_OPTIMAL;image.usage=VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT|VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT;image.sharingMode=VK_SHARING_MODE_EXCLUSIVE;image.initialLayout=VK_IMAGE_LAYOUT_UNDEFINED;
++  VkImageCreateInfo image{VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO};image.imageType=VK_IMAGE_TYPE_2D;image.format=App::SceneFormat;image.extent={a.extent.width,a.extent.height,1};image.mipLevels=1;image.arrayLayers=1;image.samples=VK_SAMPLE_COUNT_1_BIT;image.tiling=VK_IMAGE_TILING_OPTIMAL;image.usage=VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT|VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT|(a.parityDirectory?VK_IMAGE_USAGE_TRANSFER_SRC_BIT:0);image.sharingMode=VK_SHARING_MODE_EXCLUSIVE;image.initialLayout=VK_IMAGE_LAYOUT_UNDEFINED;
+   a.Check(vkCreateImage(a.device,&image,nullptr,&a.sceneColor),"HDR scene-color image failed");VkMemoryRequirements requirements;vkGetImageMemoryRequirements(a.device,a.sceneColor,&requirements);VkMemoryAllocateInfo allocation{VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO};allocation.allocationSize=requirements.size;allocation.memoryTypeIndex=Memory(a,requirements.memoryTypeBits,VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);a.Check(vkAllocateMemory(a.device,&allocation,nullptr,&a.sceneColorMemory),"HDR scene-color memory failed");a.Check(vkBindImageMemory(a.device,a.sceneColor,a.sceneColorMemory,0),"HDR scene-color bind failed");
+   VkImageViewCreateInfo view{VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO};view.image=a.sceneColor;view.viewType=VK_IMAGE_VIEW_TYPE_2D;view.format=App::SceneFormat;view.subresourceRange.aspectMask=VK_IMAGE_ASPECT_COLOR_BIT;view.subresourceRange.levelCount=1;view.subresourceRange.layerCount=1;a.Check(vkCreateImageView(a.device,&view,nullptr,&a.sceneColorView),"HDR scene-color view failed");
+-  VkImageCreateInfo depth=image;depth.format=App::DepthFormat;depth.usage=VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT;a.Check(vkCreateImage(a.device,&depth,nullptr,&a.sceneDepth),"scene-depth image failed");vkGetImageMemoryRequirements(a.device,a.sceneDepth,&requirements);allocation.allocationSize=requirements.size;allocation.memoryTypeIndex=Memory(a,requirements.memoryTypeBits,VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);a.Check(vkAllocateMemory(a.device,&allocation,nullptr,&a.sceneDepthMemory),"scene-depth memory failed");a.Check(vkBindImageMemory(a.device,a.sceneDepth,a.sceneDepthMemory,0),"scene-depth bind failed");view.image=a.sceneDepth;view.format=App::DepthFormat;view.subresourceRange.aspectMask=VK_IMAGE_ASPECT_DEPTH_BIT|VK_IMAGE_ASPECT_STENCIL_BIT;a.Check(vkCreateImageView(a.device,&view,nullptr,&a.sceneDepthView),"scene-depth view failed");
++  VkImageCreateInfo depth=image;depth.format=App::DepthFormat;depth.usage=VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT|(a.parityDirectory?VK_IMAGE_USAGE_TRANSFER_SRC_BIT:0);a.Check(vkCreateImage(a.device,&depth,nullptr,&a.sceneDepth),"scene-depth image failed");vkGetImageMemoryRequirements(a.device,a.sceneDepth,&requirements);allocation.allocationSize=requirements.size;allocation.memoryTypeIndex=Memory(a,requirements.memoryTypeBits,VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);a.Check(vkAllocateMemory(a.device,&allocation,nullptr,&a.sceneDepthMemory),"scene-depth memory failed");a.Check(vkBindImageMemory(a.device,a.sceneDepth,a.sceneDepthMemory,0),"scene-depth bind failed");view.image=a.sceneDepth;view.format=App::DepthFormat;view.subresourceRange.aspectMask=VK_IMAGE_ASPECT_DEPTH_BIT|VK_IMAGE_ASPECT_STENCIL_BIT;a.Check(vkCreateImageView(a.device,&view,nullptr,&a.sceneDepthView),"scene-depth view failed");
+ }
+ void Swap(App &a) {
+   VkSurfaceCapabilitiesKHR c;
+@@ -1248,7 +1262,7 @@ void Swap(App &a) {
+   ci.imageColorSpace = sf.colorSpace;
+   ci.imageExtent = a.extent;
+   ci.imageArrayLayers = 1;
+-  ci.imageUsage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
++  ci.imageUsage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT|(a.parityDirectory?VK_IMAGE_USAGE_TRANSFER_SRC_BIT:0);
+   ci.imageSharingMode = *q.graphics == *q.present ? VK_SHARING_MODE_EXCLUSIVE
+                                                   : VK_SHARING_MODE_CONCURRENT;
+   ci.queueFamilyIndexCount = *q.graphics == *q.present ? 0 : 2;
+@@ -1284,6 +1298,7 @@ void Swap(App &a) {
+   attachments[0].format=App::SceneFormat;attachments[0].samples=VK_SAMPLE_COUNT_1_BIT;attachments[0].loadOp=VK_ATTACHMENT_LOAD_OP_CLEAR;attachments[0].storeOp=VK_ATTACHMENT_STORE_OP_DONT_CARE;attachments[0].initialLayout=VK_IMAGE_LAYOUT_UNDEFINED;attachments[0].finalLayout=VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+   attachments[1].format=a.format;attachments[1].samples=VK_SAMPLE_COUNT_1_BIT;attachments[1].loadOp=VK_ATTACHMENT_LOAD_OP_DONT_CARE;attachments[1].storeOp=VK_ATTACHMENT_STORE_OP_STORE;attachments[1].initialLayout=VK_IMAGE_LAYOUT_UNDEFINED;attachments[1].finalLayout=VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
+   attachments[2].format=App::DepthFormat;attachments[2].samples=VK_SAMPLE_COUNT_1_BIT;attachments[2].loadOp=VK_ATTACHMENT_LOAD_OP_CLEAR;attachments[2].storeOp=VK_ATTACHMENT_STORE_OP_DONT_CARE;attachments[2].stencilLoadOp=VK_ATTACHMENT_LOAD_OP_CLEAR;attachments[2].stencilStoreOp=VK_ATTACHMENT_STORE_OP_DONT_CARE;attachments[2].initialLayout=VK_IMAGE_LAYOUT_UNDEFINED;attachments[2].finalLayout=VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
++  if(a.parityDirectory){attachments[0].storeOp=VK_ATTACHMENT_STORE_OP_STORE;attachments[2].storeOp=VK_ATTACHMENT_STORE_OP_STORE;}
+   VkAttachmentReference sceneColor{0,VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL};
+   VkAttachmentReference sceneInput{0,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL};
+   VkAttachmentReference swapColor{1,VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL};
+@@ -1314,6 +1329,7 @@ void Swap(App &a) {
+   for(uint32_t i=40;i<45;++i){binds[i].binding=53+i-40;binds[i].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;binds[i].descriptorCount=1;binds[i].stageFlags=VK_SHADER_STAGE_COMPUTE_BIT;}
+   binds[45]={58,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT,nullptr};
+   std::vector<VkDescriptorSetLayoutBinding> activeBindings; for(const auto &binding:binds)if(binding.descriptorCount)activeBindings.push_back(binding);
++  if(a.parityDirectory){for(auto& b:activeBindings)if(b.binding==41)b.stageFlags|=VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT;activeBindings.push_back({59,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT|VK_SHADER_STAGE_GEOMETRY_BIT,nullptr});if(a.primitiveCapture)activeBindings.push_back({60,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_GEOMETRY_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,nullptr});}
+   dl.bindingCount = uint32_t(activeBindings.size());
+   dl.pBindings = activeBindings.data();
+   a.Check(
+@@ -1443,11 +1459,28 @@ void Swap(App &a) {
+     // the depth-owning near-surface hemisphere at grazing views.
+     VkPipelineRasterizationStateCreateInfo candidateRaster=planetaryRaster;candidateRaster.frontFace=VK_FRONT_FACE_CLOCKWISE;
+     VkGraphicsPipelineCreateInfo candidateCreate=planetaryCreate;candidateCreate.stageCount=4;candidateCreate.pStages=candidateStages;candidateCreate.pVertexInputState=&candidateInput;candidateCreate.pInputAssemblyState=&candidateAssembly;candidateCreate.pTessellationState=&candidateTessellation;candidateCreate.pRasterizationState=&candidateRaster;candidateCreate.pDepthStencilState=&depth;candidateCreate.pColorBlendState=&cb;
++    VkShaderModule captureGs{};
++    std::array<VkPipelineShaderStageCreateInfo,5> captureStages{};
++    if(a.primitiveCapture){
++      captureGs=Shader(a,"shaders/primitive_capture.geom.spv");
++      std::copy(candidateStages,candidateStages+4,captureStages.begin());
++      captureStages[4]=captureStages[3];captureStages[3]={VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_GEOMETRY_BIT,captureGs,"main"};
++      candidateCreate.stageCount=5;candidateCreate.pStages=captureStages.data();
++    }
+     VkResult result=vkCreateGraphicsPipelines(a.device,{},1,&candidateCreate,nullptr,&a.productionBillboardPipeline);
++    if(result==VK_SUCCESS&&std::getenv("NOVACORE_SHADER_INFO")){
++      auto query=reinterpret_cast<PFN_vkGetShaderInfoAMD>(vkGetDeviceProcAddr(a.device,"vkGetShaderInfoAMD"));
++      for(auto stage:{VK_SHADER_STAGE_VERTEX_BIT,VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT,VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT,VK_SHADER_STAGE_FRAGMENT_BIT}){
++        VkShaderStatisticsInfoAMD info{};size_t bytes=sizeof info;VkResult status=query(a.device,a.productionBillboardPipeline,stage,VK_SHADER_INFO_TYPE_STATISTICS_AMD,&bytes,&info);
++        char message[640];std::snprintf(message,sizeof message,"AMD shader statistics: stage=%u; result=%d; stageMask=%u; vgpr=%u; sgpr=%u; ldsBytes=%zu; scratchBytes=%zu; availableVgpr=%u; availableSgpr=%u; physicalVgpr=%u; physicalSgpr=%u",stage,status,info.shaderStageMask,info.resourceUsage.numUsedVgprs,info.resourceUsage.numUsedSgprs,info.resourceUsage.ldsUsageSizeInBytes,info.resourceUsage.scratchMemUsageInBytes,info.numAvailableVgprs,info.numAvailableSgprs,info.numPhysicalVgprs,info.numPhysicalSgprs);a.Log(NC_LOG_ALWAYS,message);
++        bytes=0;status=query(a.device,a.productionBillboardPipeline,stage,VK_SHADER_INFO_TYPE_DISASSEMBLY_AMD,&bytes,nullptr);
++        if(status==VK_SUCCESS&&bytes){std::vector<char> data(bytes);status=query(a.device,a.productionBillboardPipeline,stage,VK_SHADER_INFO_TYPE_DISASSEMBLY_AMD,&bytes,data.data());if(status==VK_SUCCESS){std::ofstream out(std::string(std::getenv("NOVACORE_SHADER_INFO"))+"/stage-"+std::to_string(stage)+".isa",std::ios::binary);out.write(data.data(),bytes);}}
++      }
++    }
+     if(result==VK_SUCCESS){candidateRaster.cullMode=VK_CULL_MODE_NONE;result=vkCreateGraphicsPipelines(a.device,{},1,&candidateCreate,nullptr,&a.productionBillboardNoFaceCullPipeline);}
+     if(result==VK_SUCCESS){candidateRaster.cullMode=VK_CULL_MODE_BACK_BIT;candidateRaster.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE;result=vkCreateGraphicsPipelines(a.device,{},1,&candidateCreate,nullptr,&a.productionBillboardOppositeFacePipeline);}
+     if(result==VK_SUCCESS){candidateRaster.frontFace=VK_FRONT_FACE_CLOCKWISE;VkPipelineDepthStencilStateCreateInfo diagnosticNoDepth=depth;diagnosticNoDepth.depthTestEnable=VK_FALSE;diagnosticNoDepth.depthWriteEnable=VK_FALSE;candidateCreate.pDepthStencilState=&diagnosticNoDepth;result=vkCreateGraphicsPipelines(a.device,{},1,&candidateCreate,nullptr,&a.productionBillboardNoDepthPipeline);}
+-    vkDestroyShaderModule(a.device,candidateVs,nullptr);vkDestroyShaderModule(a.device,candidateTcs,nullptr);vkDestroyShaderModule(a.device,candidateTes,nullptr);vkDestroyShaderModule(a.device,candidateFs,nullptr);a.Check(result,"production spherical billboard graphics/diagnostic pipeline failed");
++    if(captureGs)vkDestroyShaderModule(a.device,captureGs,nullptr);vkDestroyShaderModule(a.device,candidateVs,nullptr);vkDestroyShaderModule(a.device,candidateTcs,nullptr);vkDestroyShaderModule(a.device,candidateTes,nullptr);vkDestroyShaderModule(a.device,candidateFs,nullptr);a.Check(result,"production spherical billboard graphics/diagnostic pipeline failed");
+   }
+   VkShaderModule distantVs{},distantFs{};try{distantVs=Shader(a,"shaders/distant_planet.vert.spv");distantFs=Shader(a,"shaders/distant_planet.frag.spv");}catch(...){if(distantVs)vkDestroyShaderModule(a.device,distantVs,nullptr);throw;}VkPipelineShaderStageCreateInfo distantStages[2]{{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_VERTEX_BIT,distantVs,"main"},{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_FRAGMENT_BIT,distantFs,"main"}};VkVertexInputBindingDescription distantBinding{0,sizeof(DistantVertex),VK_VERTEX_INPUT_RATE_VERTEX};VkVertexInputAttributeDescription distantAttribute{0,0,VK_FORMAT_R32G32B32_SFLOAT,0};VkPipelineVertexInputStateCreateInfo distantInput{VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO};distantInput.vertexBindingDescriptionCount=1;distantInput.pVertexBindingDescriptions=&distantBinding;distantInput.vertexAttributeDescriptionCount=1;distantInput.pVertexAttributeDescriptions=&distantAttribute;VkPipelineRasterizationStateCreateInfo distantRaster=rs;distantRaster.cullMode=VK_CULL_MODE_BACK_BIT;distantRaster.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE;VkGraphicsPipelineCreateInfo distantCreate=gp;distantCreate.pStages=distantStages;distantCreate.pVertexInputState=&distantInput;distantCreate.pRasterizationState=&distantRaster;distantCreate.pColorBlendState=&planetaryBlend;VkResult distantResult=vkCreateGraphicsPipelines(a.device,{},1,&distantCreate,nullptr,&a.distantPlanetaryPipeline);VkPipelineDepthStencilStateCreateInfo handoffDepth=depth;handoffDepth.depthWriteEnable=VK_FALSE;distantCreate.pDepthStencilState=&handoffDepth;VkResult handoffResult=distantResult==VK_SUCCESS?vkCreateGraphicsPipelines(a.device,{},1,&distantCreate,nullptr,&a.distantPlanetaryHandoffPipeline):distantResult;vkDestroyShaderModule(a.device,distantVs,nullptr);vkDestroyShaderModule(a.device,distantFs,nullptr);a.Check(distantResult,"distant planetary pipeline failed");a.Check(handoffResult,"distant planetary handoff pipeline failed");
+   VkShaderModule ringVs=Shader(a,"shaders/planetary_ring.vert.spv"),ringFarFs{},ringNearFs{};try{ringFarFs=Shader(a,"shaders/planetary_ring_far.frag.spv");ringNearFs=Shader(a,"shaders/planetary_ring_near.frag.spv");}catch(...){vkDestroyShaderModule(a.device,ringVs,nullptr);if(ringFarFs)vkDestroyShaderModule(a.device,ringFarFs,nullptr);throw;}VkPipelineShaderStageCreateInfo ringStages[2]{{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_VERTEX_BIT,ringVs,"main"},{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_FRAGMENT_BIT,ringFarFs,"main"}};VkPipelineRasterizationStateCreateInfo ringRaster=rs;ringRaster.cullMode=VK_CULL_MODE_NONE;VkGraphicsPipelineCreateInfo ringCreate=gp;ringCreate.pStages=ringStages;ringCreate.pVertexInputState=&distantInput;ringCreate.pRasterizationState=&ringRaster;ringCreate.pColorBlendState=&planetaryBlend;a.Check(vkCreateGraphicsPipelines(a.device,{},1,&ringCreate,nullptr,&a.planetaryRingFarPipeline),"far planetary ring pipeline failed");ringStages[1].module=ringNearFs;a.Check(vkCreateGraphicsPipelines(a.device,{},1,&ringCreate,nullptr,&a.planetaryRingNearPipeline),"near planetary ring pipeline failed");vkDestroyShaderModule(a.device,ringVs,nullptr);vkDestroyShaderModule(a.device,ringFarFs,nullptr);vkDestroyShaderModule(a.device,ringNearFs,nullptr);
+@@ -1636,6 +1669,8 @@ void CreateProductionBillboard(App &a){
+   if(!gpuPreparation)std::memcpy(a.productionBillboardIncomingPhysicalMapped,candidate->physicalVertices,VkDeviceSize(candidate->vertexCount)*sizeof(NcSphericalBillboardPhysicalVertex));auto *counters=static_cast<uint32_t*>(a.productionBillboardIncomingCounterMapped);std::memset(counters,0,sizeof(uint32_t)*ProductionBillboardCounterCount);counters[5]=a.productionBillboardIncomingTriangleCount;counters[6]=a.productionBillboardIncomingVertexCount;counters[7]=static_cast<uint32_t>(a.productionBillboardIncomingGeneration);std::memcpy(counters+9,&candidate->displacementEnvelopeMetres,sizeof(float));std::memcpy(counters+10,&a.productionBillboardIncomingOcclusionSupportRadiusMetres,sizeof(float));a.productionBillboardIncomingGpuPreparation=gpuPreparation;a.productionBillboardIncomingEnabled=true;a.productionBillboardEnabled=true;UpdateProductionBillboardDescriptors(a,true);
+ }
+ void DestroySubmission(App &a,bool destroyProductionBillboard=true) {
++  DestroyHostBuffer(a,a.primitiveRecords,a.primitiveMemory,a.primitiveMapped);
++  DestroyHostBuffer(a,a.parityPixels,a.parityPixelMemory,a.parityPixelMapped);DestroyHostBuffer(a,a.paritySamples,a.paritySampleMemory,a.paritySampleMapped);
+   if (a.mapped)
+     vkUnmapMemory(a.device, a.submissionMemory);
+   if (a.descriptorPool)
+@@ -1729,7 +1764,7 @@ void CreateSubmission(App &a) {
+   }
+   CreateTerrainResidency(a);
+   CreateProductionBillboard(a);
+-  VkDescriptorPoolSize ps[3]{{VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,39},{VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT,1},{VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,7}};
++  VkDescriptorPoolSize ps[3]{{VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,a.primitiveCapture?41u:a.parityDirectory?40u:39u},{VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT,1},{VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,7}};
+   VkDescriptorPoolCreateInfo pi{VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO};
+   pi.maxSets = 1;
+   pi.poolSizeCount = 3;
+@@ -1746,6 +1781,15 @@ void CreateSubmission(App &a) {
+   VkDescriptorBufferInfo infos[10]{{a.submissionBuffer,0,a.submissionSize},{a.patchBuffer,0,a.patchSize},{a.gpuInputBuffer,0,sizeof(NcPlanetaryGpuConstants)},{a.gpuWorkBuffer,0,sizeof(uint32_t)*4*GpuPatchCapacity*2},{a.gpuNodeBuffer,0,sizeof(uint32_t)*4*GpuNodeEntryCapacity},{a.gpuControlBuffer,0,sizeof(GpuPlanetaryControl)},{a.planetaryPresentationBuffer,0,sizeof(NcPlanetaryPresentation)*10},{a.terrainKeyBuffer,0,sizeof(uint32_t)*4*3*TerrainCacheCapacity},{a.terrainSampleBuffer,0,sizeof(float)*2*TerrainGridVertexCount*TerrainCacheCapacity},{a.terrainPatchSlotBuffer,0,sizeof(uint32_t)*2*GpuPatchCapacity}};
+   const uint32_t storageBindings[10]{0,1,2,3,4,5,6,8,9,10};VkWriteDescriptorSet writes[10]{};for(uint32_t index=0;index<10;index++){writes[index].sType=VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;writes[index].dstSet=a.descriptor;writes[index].dstBinding=storageBindings[index];writes[index].descriptorCount=1;writes[index].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;writes[index].pBufferInfo=&infos[index];}
+   vkUpdateDescriptorSets(a.device,10,writes,0,nullptr);
++  if(a.parityDirectory){
++    CreateHostBuffer(a,VkDeviceSize(a.extent.width)*a.extent.height*16,VK_BUFFER_USAGE_TRANSFER_DST_BIT,a.parityPixels,a.parityPixelMemory,a.parityPixelMapped,"parity pixels");
++    CreateHostBuffer(a,App::ParitySampleBytes,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT|VK_BUFFER_USAGE_TRANSFER_DST_BIT,a.paritySamples,a.paritySampleMemory,a.paritySampleMapped,"parity TES samples");
++    VkDescriptorBufferInfo info{a.paritySamples,0,App::ParitySampleBytes};VkWriteDescriptorSet write{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};write.dstSet=a.descriptor;write.dstBinding=59;write.descriptorCount=1;write.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;write.pBufferInfo=&info;vkUpdateDescriptorSets(a.device,1,&write,0,nullptr);
++  }
++  if(a.primitiveCapture){
++    CreateHostBuffer(a,App::PrimitiveBytes,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT|VK_BUFFER_USAGE_TRANSFER_DST_BIT,a.primitiveRecords,a.primitiveMemory,a.primitiveMapped,"primitive capture");
++    VkDescriptorBufferInfo info{a.primitiveRecords,0,App::PrimitiveBytes};VkWriteDescriptorSet write{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};write.dstSet=a.descriptor;write.dstBinding=60;write.descriptorCount=1;write.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;write.pBufferInfo=&info;vkUpdateDescriptorSets(a.device,1,&write,0,nullptr);
++  }
+   CreateRegionalPhysical(a);
+   VkDescriptorBufferInfo facilityInfo{a.facilityVisibilityBuffer,0,sizeof(nc::facility::GpuVisibility)};VkWriteDescriptorSet facilityWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};facilityWrite.dstSet=a.descriptor;facilityWrite.dstBinding=58;facilityWrite.descriptorCount=1;facilityWrite.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;facilityWrite.pBufferInfo=&facilityInfo;vkUpdateDescriptorSets(a.device,1,&facilityWrite,0,nullptr);
+   VkDescriptorBufferInfo pupilFrameInfo{a.productionBillboardFrameBuffer,0,sizeof(NcProductionBillboardFrame)};VkWriteDescriptorSet pupilFrameWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};pupilFrameWrite.dstSet=a.descriptor;pupilFrameWrite.dstBinding=52;pupilFrameWrite.descriptorCount=1;pupilFrameWrite.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;pupilFrameWrite.pBufferInfo=&pupilFrameInfo;vkUpdateDescriptorSets(a.device,1,&pupilFrameWrite,0,nullptr);
+@@ -1795,7 +1839,7 @@ void Upload(App &a) {
+   std::memcpy((char *)a.mapped + sizeof(NcCameraData),
+               a.submission->objects,
+               sizeof(NcRenderObject) * a.submission->objectCount);
+-  auto gpuInput=a.submission->planetaryGpu;gpuInput.terrainFrame=static_cast<uint32_t>(++a.frame);if((a.submission->productionBillboardFlags&32u)!=0u)gpuInput.targetTexelPixels=-1001.0f;else if((a.submission->productionBillboardFlags&64u)!=0u)gpuInput.targetTexelPixels=-1002.0f;else if((a.submission->productionBillboardFlags&256u)!=0u)gpuInput.targetTexelPixels=-1003.0f;else if((a.submission->productionBillboardFlags&512u)!=0u)gpuInput.targetTexelPixels=-1004.0f;else if((a.submission->productionBillboardFlags&16384u)!=0u)gpuInput.targetTexelPixels=-1005.0f;else if((a.submission->productionBillboardFlags&32768u)!=0u)gpuInput.targetTexelPixels=-1006.0f;else if((a.submission->productionBillboardFlags&2u)!=0u)gpuInput.targetTexelPixels=-std::abs(gpuInput.targetTexelPixels);const bool productionSurface=a.submission->planetarySurfaceMode==NC_PLANETARY_SURFACE_PRODUCTION_CUBE;if(productionSurface){if(!a.productionPack)throw std::runtime_error("production cube pack is required for mode 2");gpuInput.maximumLevel=std::min(gpuInput.maximumLevel,a.productionPack->MaximumLevel());}if(a.submission->planetaryMode==NC_PLANETARY_CPU_REFERENCE)gpuInput.terrainVersion=0;
++  auto gpuInput=a.submission->planetaryGpu;gpuInput.terrainFrame=static_cast<uint32_t>(++a.frame);if((a.submission->productionBillboardFlags&32u)!=0u)gpuInput.targetTexelPixels=-1001.0f;else if((a.submission->productionBillboardFlags&64u)!=0u)gpuInput.targetTexelPixels=-1002.0f;else if((a.submission->productionBillboardFlags&256u)!=0u)gpuInput.targetTexelPixels=-1003.0f;else if((a.submission->productionBillboardFlags&512u)!=0u)gpuInput.targetTexelPixels=-1004.0f;else if((a.submission->productionBillboardFlags&16384u)!=0u)gpuInput.targetTexelPixels=-1005.0f;else if((a.submission->productionBillboardFlags&32768u)!=0u)gpuInput.targetTexelPixels=-1006.0f;else if((a.submission->productionBillboardFlags&2u)!=0u)gpuInput.targetTexelPixels=-std::abs(gpuInput.targetTexelPixels);if(a.performanceCountersOff&&(a.submission->productionBillboardFlags&2u)!=0u)gpuInput.targetTexelPixels=std::abs(a.submission->planetaryGpu.targetTexelPixels);const bool productionSurface=a.submission->planetarySurfaceMode==NC_PLANETARY_SURFACE_PRODUCTION_CUBE;if(productionSurface){if(!a.productionPack)throw std::runtime_error("production cube pack is required for mode 2");gpuInput.maximumLevel=std::min(gpuInput.maximumLevel,a.productionPack->MaximumLevel());}if(a.submission->planetaryMode==NC_PLANETARY_CPU_REFERENCE)gpuInput.terrainVersion=0;
+   const auto &contextPresentation=a.submission->planetaryPresentation;
+   const uint64_t contextBody=uint64_t(contextPresentation.bodyIdLow)|(uint64_t(contextPresentation.bodyIdHigh)<<32u);
+   uint32_t radiusHighBits{},radiusLowBits{};
+@@ -1900,6 +1944,7 @@ void Commands(App &a) {
+     VK_QUERY_PIPELINE_STATISTIC_FRAGMENT_SHADER_INVOCATIONS_BIT|
+     VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_CONTROL_SHADER_PATCHES_BIT|
+     VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_EVALUATION_SHADER_INVOCATIONS_BIT;
++  if(a.performanceGeometry)pipelineStatistics.pipelineStatistics|=VK_QUERY_PIPELINE_STATISTIC_CLIPPING_INVOCATIONS_BIT;
+   a.Check(vkCreateQueryPool(a.device,&pipelineStatistics,nullptr,&a.anchoredPipelineStatistics),
+     "anchored pipeline statistics query pool failed");
+ }
+@@ -1921,6 +1966,8 @@ void Record(App &a, uint32_t image) {
+   vkResetCommandBuffer(c, 0);
+   VkCommandBufferBeginInfo bi{VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO};
+   a.Check(vkBeginCommandBuffer(c, &bi), "command begin failed");
++  if(a.parityDirectory){uint32_t header[4]{0,a.frame==a.parityFrame?1u:0u,0,0};vkCmdUpdateBuffer(c,a.paritySamples,0,16,header);if(a.primitiveCapture){if(a.frame==a.parityFrame)vkCmdFillBuffer(c,a.primitiveRecords,16,App::PrimitiveBytes-16,0);vkCmdUpdateBuffer(c,a.primitiveRecords,0,16,header);}VkMemoryBarrier barrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};barrier.srcAccessMask=VK_ACCESS_TRANSFER_WRITE_BIT;barrier.dstAccessMask=VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT;vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT|VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT|VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,0,1,&barrier,0,nullptr,0,nullptr);}
++
+   RecordProductionUploads(a,c);
+ 
+   vkCmdResetQueryPool(c,a.regionalTimingQueries,0,6);
+@@ -2009,6 +2056,19 @@ void Record(App &a, uint32_t image) {
+   vkCmdDraw(c,3,1,0,0);
+   vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT,a.timestampQueries,8);
+   vkCmdEndRenderPass(c);
++  if(a.parityDirectory&&a.frame==a.parityFrame){
++    const VkDeviceSize pixels=VkDeviceSize(a.extent.width)*a.extent.height;
++    auto copy=[&](VkImage image,VkImageLayout layout,VkImageAspectFlags aspect,VkDeviceSize offset){
++      VkImageMemoryBarrier b{VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER};b.srcAccessMask=VK_ACCESS_MEMORY_READ_BIT|VK_ACCESS_MEMORY_WRITE_BIT;b.dstAccessMask=VK_ACCESS_TRANSFER_READ_BIT;b.oldLayout=layout;b.newLayout=VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL;b.srcQueueFamilyIndex=VK_QUEUE_FAMILY_IGNORED;b.dstQueueFamilyIndex=VK_QUEUE_FAMILY_IGNORED;b.image=image;b.subresourceRange={aspect==VK_IMAGE_ASPECT_DEPTH_BIT?VkImageAspectFlags(VK_IMAGE_ASPECT_DEPTH_BIT|VK_IMAGE_ASPECT_STENCIL_BIT):aspect,0,1,0,1};
++      vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,VK_PIPELINE_STAGE_TRANSFER_BIT,0,0,nullptr,0,nullptr,1,&b);
++      VkBufferImageCopy region{};region.bufferOffset=offset;region.imageSubresource={aspect,0,0,1};region.imageExtent={a.extent.width,a.extent.height,1};vkCmdCopyImageToBuffer(c,image,VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,a.parityPixels,1,&region);
++      b.srcAccessMask=VK_ACCESS_TRANSFER_READ_BIT;b.dstAccessMask=VK_ACCESS_MEMORY_READ_BIT;b.oldLayout=VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL;b.newLayout=layout;vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,0,0,nullptr,0,nullptr,1,&b);
++    };
++    copy(a.sceneDepth,VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL,VK_IMAGE_ASPECT_DEPTH_BIT,0);
++    copy(a.sceneColor,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,VK_IMAGE_ASPECT_COLOR_BIT,pixels*4);
++    copy(a.images[image],VK_IMAGE_LAYOUT_PRESENT_SRC_KHR,VK_IMAGE_ASPECT_COLOR_BIT,pixels*12);
++    VkMemoryBarrier host{VK_STRUCTURE_TYPE_MEMORY_BARRIER};host.srcAccessMask=VK_ACCESS_TRANSFER_WRITE_BIT|VK_ACCESS_SHADER_WRITE_BIT;host.dstAccessMask=VK_ACCESS_HOST_READ_BIT;vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,VK_PIPELINE_STAGE_HOST_BIT,0,1,&host,0,nullptr,0,nullptr);a.parityRecorded=true;
++  }
+   a.Check(vkEndCommandBuffer(c), "command end failed");
+ }
+ void Recreate(App &a) {
+@@ -2068,6 +2128,7 @@ void InspectGpuPlanetary(App &a) {
+ void InspectGpuTimings(App &a){
+   if(!a.timestampFrameSubmitted||!a.timestampQueries)return;std::array<uint64_t,App::TimestampCount> ticks{};const auto result=vkGetQueryPoolResults(a.device,a.timestampQueries,0,App::TimestampCount,sizeof(ticks),ticks.data(),sizeof(uint64_t),VK_QUERY_RESULT_64_BIT);if(result!=VK_SUCCESS)return;
+   std::array<double,App::TimestampCount> values{};const double scale=double(a.timestampPeriodNanoseconds)/1e6;const bool detailedOwner=ProductionBillboardPresentationEnabled(a.productionBillboardAuthoritative,a.submission->productionBillboardFlags);values[0]=(ticks[8]-ticks[0])*scale;values[1]=0;values[2]=detailedOwner?(ticks[6]-ticks[5])*scale:0;values[3]=(ticks[3]-ticks[2])*scale;values[4]=(ticks[4]-ticks[3])*scale;values[5]=(ticks[7]-ticks[0])*scale;values[6]=(ticks[8]-ticks[7])*scale;values[7]=(ticks[1]-ticks[0])*scale;values[8]=(ticks[7]-ticks[4])*scale;values[9]=detailedOwner?(ticks[9]-ticks[5])*scale:0;values[10]=(ticks[10]-ticks[9])*scale;a.lastGpuTimingMs=values;a.lastGpuTimingFrame=a.anchoredPipelineStatisticsTerrainFrame;for(uint32_t i=0;i<App::TimestampCount;i++)a.timestampAccumulatedMs[i]+=values[i];a.timestampSampleCount++;
++  if(a.performanceFrameLog){char message[384];std::snprintf(message,sizeof message,"Performance GPU frame: frame=%llu; total=%.6f; terrain=%.6f; compute=%.6f; background=%.6f; toneMap=%.6f",(unsigned long long)a.frame,values[0],values[2],values[7],values[3],values[6]);a.Log(NC_LOG_ALWAYS,message);}
+   if((a.submission->productionBillboardFlags&2u)!=0u)
+     for(uint32_t i=0;i<App::TimestampCount;i++)a.c3GpuMs[i].push_back(values[i]);
+   if(a.timestampSampleCount==1||a.timestampSampleCount%120==0){char message[384];std::snprintf(message,sizeof message,"GPU timings: total=%.3f ms; anchoredCompute=%.3f; anchoredDraw=%.3f; background=%.3f; preSurface=%.3f; scene=%.3f; toneMap=%.3f; regionalCompute=%.3f; materialsOverlays=%.3f",values[0],values[1],values[2],values[3],values[4],values[5],values[6],values[7],values[8]);a.Log(NC_LOG_ALWAYS,message);}
+@@ -2079,9 +2140,30 @@ void InspectAnchoredPipelineStatistics(App &a){
+   // Results are returned in ascending VkQueryPipelineStatisticFlagBits order:
+   // clipping-output primitives, fragment invocations, TCS patches, TES invocations.
+   std::array<uint64_t,4> values{};
++  std::array<uint64_t,5> extended{};
+   const auto result=vkGetQueryPoolResults(a.device,a.anchoredPipelineStatistics,0,1,
+-    sizeof values,values.data(),sizeof values,VK_QUERY_RESULT_64_BIT);
++    a.performanceGeometry?sizeof extended:sizeof values,a.performanceGeometry?extended.data():values.data(),a.performanceGeometry?sizeof extended:sizeof values,VK_QUERY_RESULT_64_BIT);
+   if(result!=VK_SUCCESS)return;
++  if(a.performanceGeometry){std::copy(extended.begin()+1,extended.end(),values.begin());char row[256];std::snprintf(row,sizeof row,"Performance geometry frame: frame=%llu; clippingInputPrimitives=%llu",(unsigned long long)a.frame,(unsigned long long)extended[0]);a.Log(NC_LOG_ALWAYS,row);}
++  if(a.performanceGeometry&&!a.performanceGeometryLogged&&a.frame>=150&&a.productionBillboardAuthoritative&&!a.productionBillboardIncomingEnabled&&a.productionBillboardPhysicalMapped&&a.productionBillboardCompactedMapped&&a.productionBillboardIndirectMapped){
++    a.performanceGeometryLogged=true;
++    const auto*vertices=static_cast<const NcSphericalBillboardPhysicalVertex*>(a.productionBillboardPhysicalMapped);
++    const auto*indices=static_cast<const uint32_t*>(a.productionBillboardCompactedMapped);
++    const auto*draw=static_cast<const VkDrawIndexedIndirectCommand*>(a.productionBillboardIndirectMapped);
++    const auto&g=a.submission->planetaryGpu;const auto&p=a.submission->planetaryPresentation;const auto&m=a.submission->camera.viewProjection.columns;
++    const double camera[3]{double(g.cameraBodyHighX)+g.cameraBodyLowX,double(g.cameraBodyHighY)+g.cameraBodyLowY,double(g.cameraBodyHighZ)+g.cameraBodyLowZ};
++    using Point=std::array<double,4>;
++    auto clip=[&](uint32_t i){const auto&v=vertices[i];const float x=float(v.bodyFixed[0]-camera[0]),y=float(v.bodyFixed[1]-camera[1]),z=float(v.bodyFixed[2]-camera[2]);const float qx=p.bodyOrientationX,qy=p.bodyOrientationY,qz=p.bodyOrientationZ,qw=p.bodyOrientationW;const float ux=qy*z-qz*y+qw*x,uy=qz*x-qx*z+qw*y,uz=qx*y-qy*x+qw*z;const float rx=x+2*(qy*uz-qz*uy),ry=y+2*(qz*ux-qx*uz),rz=z+2*(qx*uy-qy*ux);Point r{};for(int j=0;j<4;j++)r[j]=m[j]*rx+m[4+j]*ry+m[8+j]*rz+m[12+j];return r;};
++    auto distance=[](const Point&v,int plane){switch(plane){case 0:return v[3]+v[0];case 1:return v[3]-v[0];case 2:return v[3]+v[1];case 3:return v[3]-v[1];case 4:return v[2];default:return v[3]-v[2];}};
++    uint64_t empty=0,tiny=0,quarter=0,positive=0,negative=0,invalid=0;double areaSum=0;std::vector<uint8_t> used(a.productionBillboardVertexCount,0);
++    const uint32_t count=std::min<uint32_t>(draw->indexCount/3,a.productionBillboardTriangleCount);
++    for(uint32_t t=0;t<count;t++){
++      std::vector<Point> poly;bool valid=true;for(int k=0;k<3;k++){const uint32_t i=indices[t*3+k];if(i>=used.size()){valid=false;break;}used[i]=1;poly.push_back(clip(i));}if(!valid){invalid++;continue;}
++      for(int plane=0;plane<6&&!poly.empty();plane++){std::vector<Point> next;Point prev=poly.back();double dp=distance(prev,plane);for(const auto&cur:poly){const double dc=distance(cur,plane);if((dp>=0)!=(dc>=0)){Point cut{};const double u=dp/(dp-dc);for(int k=0;k<4;k++)cut[k]=prev[k]+u*(cur[k]-prev[k]);next.push_back(cut);}if(dc>=0)next.push_back(cur);prev=cur;dp=dc;}poly=std::move(next);}
++      if(poly.size()<3){empty++;continue;}double area=0;for(size_t j=0;j<poly.size();j++){const auto&a0=poly[j];const auto&b0=poly[(j+1)%poly.size()];if(a0[3]<=0||b0[3]<=0){valid=false;break;}area+=(a0[0]/a0[3])*(b0[1]/b0[3])-(a0[1]/a0[3])*(b0[0]/b0[3]);}if(!valid){invalid++;continue;}if(area>0)positive++;if(area<0)negative++;const double pixels=std::abs(area)*3440.0*1440.0/8.0;areaSum+=pixels;if(pixels<1)tiny++;if(pixels<.25)quarter++;
++    }
++    char row[768];std::snprintf(row,sizeof row,"Performance prepared geometry: frame=%llu; generation=%llu; triangles=%u; distinctControls=%llu; clippedEmpty=%llu; areaBelowOnePixel=%llu; areaBelowQuarterPixel=%llu; positiveWinding=%llu; negativeWinding=%llu; invalid=%llu; summedProjectedAreaPixels=%.9g",(unsigned long long)a.frame,(unsigned long long)a.productionBillboardGeneration,count,(unsigned long long)std::count(used.begin(),used.end(),uint8_t(1)),(unsigned long long)empty,(unsigned long long)tiny,(unsigned long long)quarter,(unsigned long long)positive,(unsigned long long)negative,(unsigned long long)invalid,areaSum);a.Log(NC_LOG_ALWAYS,row);
++  }
+   a.anchoredClippingPrimitives+=values[0];
+   a.anchoredFragmentShaderInvocations+=values[1];
+   a.anchoredTessellationControlPatches+=values[2];
+@@ -2320,6 +2402,16 @@ void Update(App &a, float dt) {
+   const auto updateStart=std::chrono::steady_clock::now();
+   a.Check(vkWaitForFences(a.device, 1, &a.fence, VK_TRUE, UINT64_MAX), "frame fence wait failed");
+   const auto fenceEnd=std::chrono::steady_clock::now();
++  if(a.parityDirectory&&a.parityRecorded&&!a.parityWritten){
++    auto save=[&](const char*name,const void*bytes,size_t size){std::ofstream f(std::string(a.parityDirectory)+name,std::ios::binary);f.write(static_cast<const char*>(bytes),size);if(!f)throw std::runtime_error("parity output failed");};
++    const uint32_t samples=*static_cast<const uint32_t*>(a.paritySampleMapped);if(samples>16777216)throw std::runtime_error("parity TES sample overflow");
++    if(a.primitiveCapture){const uint32_t triangles=*static_cast<const uint32_t*>(a.primitiveMapped);if(triangles>8388608)throw std::runtime_error("primitive capture overflow");save("/triangles.bin",a.primitiveMapped,16+size_t(triangles)*80);}
++    save("/pixels.bin",a.parityPixelMapped,size_t(a.extent.width)*a.extent.height*16);save("/tes.bin",a.paritySampleMapped,32+size_t(samples)*128);
++    save("/prepared.bin",a.productionBillboardPhysicalMapped,size_t(a.productionBillboardVertexCount)*sizeof(NcSphericalBillboardPhysicalVertex));
++    const auto* selected=static_cast<const VkDrawIndexedIndirectCommand*>(a.productionBillboardIndirectMapped);
++    save("/selected.bin",a.productionBillboardCompactedMapped,size_t(selected->indexCount)*sizeof(uint32_t));
++    char row[512];std::snprintf(row,sizeof row,"TES parity capture: frame=%llu; width=%u; height=%u; samples=%u; prepared=%u; generation=%llu; pupil=%u; physicalGeneration=%u; diagnostic=%u",(unsigned long long)a.frame,a.extent.width,a.extent.height,samples,a.productionBillboardVertexCount,(unsigned long long)a.productionBillboardGeneration,a.productionBillboardRasterFrameIdentity,a.submission->physicalSurfaceGeneration,a.surfaceDiagnostic);a.Log(NC_LOG_ALWAYS,row);a.parityWritten=true;
++  }
+   InspectRegionalPhysical(a);
+   InspectProductionBillboardPublication(a);
+   InspectGpuTimings(a);
+@@ -2392,6 +2484,7 @@ void Update(App &a, float dt) {
+   a.cpuInspectionMs+=std::chrono::duration<double,std::milli>(inspectionEnd-fenceEnd).count();
+   a.cpuHostCallbackMs+=std::chrono::duration<double,std::milli>(callbackEnd-inspectionEnd).count();
+   a.cpuUploadMs+=std::chrono::duration<double,std::milli>(updateEnd-callbackEnd).count();
++  if(a.performanceFrameLog){char message[384];std::snprintf(message,sizeof message,"Performance CPU frame: frame=%llu; generation=%llu; flags=%u; update=%.6f; fenceWait=%.6f; incoming=%u",(unsigned long long)a.frame,(unsigned long long)a.productionBillboardGeneration,a.submission->productionBillboardFlags,updateMs,fenceWaitMs,a.productionBillboardIncomingEnabled?1u:0u);a.Log(NC_LOG_ALWAYS,message);}
+   if((a.submission->productionBillboardFlags&2u)!=0u){a.c3CpuMs[0].push_back(updateMs);a.c3CpuMs[1].push_back(fenceWaitMs);a.c3CpuMs[2].push_back(std::chrono::duration<double,std::milli>(inspectionEnd-fenceEnd).count());a.c3CpuMs[3].push_back(std::chrono::duration<double,std::milli>(callbackEnd-inspectionEnd).count());a.c3CpuMs[4].push_back(std::chrono::duration<double,std::milli>(updateEnd-callbackEnd).count());a.c3FenceMs.push_back(fenceWaitMs);}
+ 
+ }
+@@ -2513,6 +2606,7 @@ static NcResult RunRenderer(NcFrameSubmission *s, NcHostCallback cb, void *data,
+     if(!a.c3FrameMs.empty()){
+       auto report=[&](const char*kind,const char*name,std::vector<double> values){if(values.empty())return;const double average=std::accumulate(values.begin(),values.end(),0.0)/double(values.size());std::sort(values.begin(),values.end());auto percentile=[&](double p){return values[std::min(values.size()-1,size_t(std::ceil(p*values.size()))-1)];};char line[320];std::snprintf(line,sizeof line,"P2S5C3 %s timing: %s avg=%.3f ms; p50=%.3f; p95=%.3f; p99=%.3f; max=%.3f; samples=%zu",kind,name,average,percentile(.50),percentile(.95),percentile(.99),values.back(),values.size());a.Log(NC_LOG_ALWAYS,line);};
+       const char*cpuNames[8]{"update","fenceWait","inspection","hostCallback","validationUpload","record","submit","present"};for(uint32_t i=0;i<8;i++)report("CPU",cpuNames[i],a.c3CpuMs[i]);
++      if(a.performanceFrameLog)for(size_t i=0;i<a.c3CpuMs[6].size();i++){char row[256];std::snprintf(row,sizeof row,"Performance CPU submission: sample=%zu; record=%.6f; submit=%.6f; present=%.6f",i+1,a.c3CpuMs[5][i],a.c3CpuMs[6][i],a.c3CpuMs[7][i]);a.Log(NC_LOG_ALWAYS,row);}
+       const char*gpuNames[App::TimestampCount]{"total","unusedAnchoredCompute","detailedDraw","background","preSurface","scene","toneMap","cullCompact","materialsOverlays","candidateDraw","globalFill"};for(uint32_t i=0;i<App::TimestampCount;i++)report("GPU",gpuNames[i],a.c3GpuMs[i]);
+       report("frame","all",a.c3FrameMs);report("frame","scaleTransition",a.c3ScaleFrameMs);report("frame","snap",a.c3SnapFrameMs);report("frame","publication",a.c3PublicationFrameMs);report("sync","fenceWait",a.c3FenceMs);
+       auto reportCounts=[&](const char*name,std::vector<uint64_t> values){if(values.empty())return;std::sort(values.begin(),values.end());const double average=std::accumulate(values.begin(),values.end(),0.0)/double(values.size());auto percentile=[&](double p){return values[std::min(values.size()-1,size_t(std::ceil(p*values.size()))-1)];};char line[320];std::snprintf(line,sizeof line,"P2S5C3 GPU workload: %s avg=%.1f; p50=%llu; p95=%llu; p99=%llu; max=%llu; samples=%zu",name,average,(unsigned long long)percentile(.50),(unsigned long long)percentile(.95),(unsigned long long)percentile(.99),(unsigned long long)values.back(),values.size());a.Log(NC_LOG_ALWAYS,line);};
+diff --git a/samples/NovaCore.Triangle/ProductionBillboardDesktopTraversal.cs b/samples/NovaCore.Triangle/ProductionBillboardDesktopTraversal.cs
+index f77a41b..2d4654f 100644
+--- a/samples/NovaCore.Triangle/ProductionBillboardDesktopTraversal.cs
++++ b/samples/NovaCore.Triangle/ProductionBillboardDesktopTraversal.cs
+@@ -73,6 +73,8 @@ internal sealed class ProductionBillboardDesktopTraversal
+     private readonly int _directionalLevel;
+     private readonly double? _directionalYawRadians;
+     private readonly double _directionalPitchRadians;
++    private readonly double? _performanceAltitude;
++    private readonly bool _performanceFlorida;
+     private readonly string _coverageDiagnostic;
+     private readonly string _rasterDiagnostic;
+     private readonly int? _frozenHorizonFrame;
+@@ -209,6 +211,19 @@ internal sealed class ProductionBillboardDesktopTraversal
+                 "NOVACORE_P2S5G_FIXED_DIAGNOSTIC_TIME requires a directional or horizon diagnostic.");
+         if (_fixedDiagnosticTime)
+             Console.WriteLine("P2S5G fixed diagnostic time: pause before first simulation advance; physical traversal unchanged.");
++        var performanceAltitude = Environment.GetEnvironmentVariable("NOVACORE_PERFORMANCE_ALTITUDE_METRES");
++        _performanceFlorida = Environment.GetEnvironmentVariable("NOVACORE_PERFORMANCE_FLORIDA") == "1";
++        if (performanceAltitude is not null || _performanceFlorida)
++        {
++            if (!_directionalDiagnosticOnly || !_fixedDiagnosticTime || !_directionalYawRadians.HasValue)
++                throw new InvalidOperationException("Performance poses require a fixed-time, fixed-yaw directional diagnostic.");
++            if (performanceAltitude is not null)
++                _performanceAltitude = double.TryParse(performanceAltitude, NumberStyles.Float,
++                    CultureInfo.InvariantCulture, out var value) && double.IsFinite(value) && value >= 10.004d
++                    ? value : throw new InvalidOperationException("Performance altitude must be finite and at least 10.004 metres.");
++            if (_performanceFlorida && _performanceAltitude.HasValue)
++                throw new InvalidOperationException("Florida performance pose uses the authored launcher eye, without an altitude override.");
++        }
+     }
+ 
+     internal bool Failed { get; private set; }
+@@ -258,6 +273,14 @@ internal sealed class ProductionBillboardDesktopTraversal
+     {
+         if (Complete) return;
+         var body = scene.FocusedBody;
++        if (_performanceFlorida)
++        {
++            if (!scene.TryStartAtFloridaLaunchSite(camera))
++                throw new InvalidOperationException("Florida performance pose initialization failed.");
++            _lastCameraBody = body.BodyFixedToRoot.Conjugate().Rotate(camera.Position.Value - body.Position.Value);
++            _lastBodyOrientation = (body.BodyFixedToRoot.Conjugate() * camera.Orientation).Normalized();
++            return;
++        }
+         var altitude = TargetAltitude();
+         var direction = _direction;
+         var unanchored = _phase is Phase.UnanchoredWarpUp or Phase.UnanchoredWarpHold or
+@@ -568,7 +591,7 @@ internal sealed class ProductionBillboardDesktopTraversal
+             : _representativeAltitude[14],
+         Phase.ZeroVisibleOffEarthHold or Phase.ZeroVisibleReentry =>
+             _representativeAltitude[14],
+-        Phase.DirectionalVisibility => _representativeAltitude[_directionalLevel],
++        Phase.DirectionalVisibility => _performanceAltitude ?? _representativeAltitude[_directionalLevel],
+         Phase.DeepOrbit => _representativeAltitude[0],
+         Phase.Retreat => _currentLevel <= 1
+             ? _representativeAltitude[0] * 2d

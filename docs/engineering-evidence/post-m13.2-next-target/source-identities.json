@@ -1,0 +1,62 @@
+{
+  "E:\\Kitten Space Agency\\KSA.dll": {
+    "bytes": 4798552,
+    "sha256": "a8a5164204eed962df9d9025e99f523d9a23ee2ce6e802b18216a9da35506d2f"
+  },
+  "E:\\Kitten Space Agency\\Planet.Render.Core.dll": {
+    "bytes": 274008,
+    "sha256": "6b9b3c3bd709bf198c6ab3ec6daaef7e468f593fb110187869a1d44272b92e3c"
+  },
+  "E:\\Kitten Space Agency\\Planet.Core.dll": {
+    "bytes": 34904,
+    "sha256": "2823b299051b91252453acb4f1fff5543b1f5473bc6f42c8d51d4958d3159ece"
+  },
+  "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\Planet\\Culling\\PlanetFrustumCulling.comp": {
+    "bytes": 2973,
+    "sha256": "4a1617f6ce1660aa78a373d79f4c97022c325525a4f694e100e22aad7c2f23e5"
+  },
+  "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\Planet\\PlanetTessEvaluation.tese": {
+    "bytes": 6914,
+    "sha256": "80c3168561c468d3b255d635b31c1e0163ed8331c21e1340b8d490525bc93b27"
+  },
+  "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\Planet\\TessellationFuncs.glsl": {
+    "bytes": 5125,
+    "sha256": "308ee11e81ec65757c4514e485dfc6ffbf7cb2fb76e6467ca267e6980eb4172e"
+  },
+  "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\Common\\Planet.glsl": {
+    "bytes": 33189,
+    "sha256": "c4c5f1cbf5277fb0642997fd9f5da0fd8565588beba0d9f7bfe40636539a94ad"
+  },
+  "E:\\NovaCore\\build\\ksa-residency-reference\\assembly-source\\KSA\\PlanetFrustumCulling.cs": {
+    "bytes": 12197,
+    "sha256": "92f55e123ac3af9fef631df56f2db2992e366b70df711eb959273090e62e75c5"
+  },
+  "E:\\NovaCore\\build\\ksa-residency-reference\\source\\KSA.PlanetRenderer.cs": {
+    "bytes": 116885,
+    "sha256": "5ce37c334045f9b5cba9a450a6accc454444e8d20327b9778b98740cf7a64a50"
+  },
+  "E:\\NovaCore\\native\\NovaCore.Native\\shaders\\production_nested_scale_mesh_cull.comp": {
+    "bytes": 9665,
+    "sha256": "611c3670b5800cc3ac352bed5d326eb59ef1abba6ba2cc5519337967703b5550"
+  },
+  "E:\\NovaCore\\native\\NovaCore.Native\\shaders\\production_spherical_billboard.vert": {
+    "bytes": 2441,
+    "sha256": "a798669960b7ff379f095e1c9749cb1d90a0caf5506b51aa87c40f865e933bb7"
+  },
+  "E:\\NovaCore\\native\\NovaCore.Native\\shaders\\production_spherical_billboard.tesc": {
+    "bytes": 4198,
+    "sha256": "825f7fa1989f9b72e0941a0e7a1a8ffdb51d54b08cae1deed124a986877c6b25"
+  },
+  "E:\\NovaCore\\native\\NovaCore.Native\\shaders\\production_spherical_billboard.tese": {
+    "bytes": 6195,
+    "sha256": "d8db99cbc7366a63136774c0db317493be46e05a631674a82c2769e4d6571e23"
+  },
+  "E:\\NovaCore\\native\\NovaCore.Native\\shaders\\planetary_natural_terrain_families.glsl": {
+    "bytes": 14628,
+    "sha256": "3f27d55252390c77f15d52009ad392a90e6b52b87dcbc4f2a9e48c63a550f454"
+  },
+  "E:\\NovaCore\\native\\NovaCore.Native\\shaders\\planetary_natural_terrain_surface.glsl": {
+    "bytes": 1500,
+    "sha256": "38c32c6df5a103714201544c339baf84190a434d84fe8dc75bbaba4a2d58aa81"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "regeneratedTcsSourceSha256": {
+    "oracle": "21ef7097842ddf90c5457c15340689daf9c2ace78278436347853dad8d9472c8",
+    "reject": "37e1de611f47b3d6721c1796610801ff7394b2f7f3fb98caa0afe2746b8ed23b"
+  },
+  "matchedFinalOracleAndPerformanceVariants": true,
+  "sources": {
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\attachment_compare.comp": "7f90b2706b522b425fe082a5b04502d0bc150ec2e65ceb3deb96b7756c3ca077",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\cleanup_inventory.py": "7d4366e99a27a60e3eb1992fe5478eefb1bab061f8e137e4a25a2468157b23dc",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\clean_baseline.py": "cc5693c65d47564533a7c11ca7a779867c80eef9d40e881b56595ce0eab75fa8",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\conservative_bound.glsl": "90c34f861c4e7540e72e967ec46ec2e6839cd3e390da3adc37538eb9827d3c10",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\dump_inspect.cpp": "0d3bf28bbe63a454b0a1ade5278a8b95de7aa068b92bdd5f383a1df14d934b0e",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\envelope.py": "6d7442a3161f61ccd8336243ef553e646c5a27e4e51b72f7df07b2e970262674",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\exact_capture.py": "d74db50170cb9358f3222710fbfc2a653019f22d797cc968223b91cfffdfa72d",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\exploratory-cone.glsl": "7326db5d2f96b5840ea761cdb44e9bc2b0e534d5045d19d4fe1fedade6f8116b",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\instrumentation.patch": "d53fc9d6539f12ac2df1a57028ef576066d6ed3e897b38e432197c37409fd761",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\physical_compare.glsl": "fc909a4196bef8a96081afacc7d17ec1d433d89b240b61828300a1c39b65793d",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\physical_shader.py": "cac12506365b54934ecf4b826b0f71fd3e96a46f793cf553c8ff9c6b1e5e929c",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\physical_table.comp": "3bb8b44d2594f2f9524a63ae0254d442006704fa5f3c9dbeaaf840949452e451",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\probe_shader.py": "5b063b8eda296b679a63623b4621fffb50fdc9efb586b2aaac3f3179e72bdd42",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\recovery-instrumentation.patch": "7e8c9b7f4a8acae765d63f232b6c4a2731db3e1a4f7f6a63c3c2f2210dda37f0",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\report.py": "f2db0722d8885e9d4d2956e5263dabfbacd436e8e498c79b9fc9220d47a98b66",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\run.py": "80319740fc2eef99d3de7de5887b57584124dd73beaa6254ec6817164b5c7bac",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\summarize.py": "7f1c0d4c6f3f50e969d147e5d004f54d1ea0d57637911090efc0a681651eb51d",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\validate.py": "18ddfb8bc5cfa127164d155ace5314bfeb37915a9c5500c70444a15e049967c3"
+  }
+}

@@ -81,7 +81,7 @@ internal static class RegionalPhysicalResidencyTests
                     if(Math.Abs(s.GetProperty("east").GetDouble())<=32&&Math.Abs(s.GetProperty("north").GetDouble())<=24)found++;
                     var direction=Vector(s.GetProperty("direction"));double h=Height(direction),render=s.GetProperty("height").GetDouble();
                     foreach(var vertex in s.GetProperty("vertices").EnumerateArray()){
-                        var d=Vector(vertex.GetProperty("position")).Normalized();var expected=PlanetaryPhysicalSurface.EvaluateBaseHeightNoGradient(PlanetaryTerrainDefinition.EarthProductionCubeV5,d);
+                        var d=Vector(vertex.GetProperty("position")).Normalized();var expected=PlanetaryPhysicalSurface.EvaluateFinalHeightNoGradient(PlanetaryTerrainDefinition.EarthProductionCubeV5,d);
                         Require(Math.Abs(vertex.GetProperty("preparedHeight").GetDouble()-expected)<.003,"live prepared vertex omitted/changed authoritative physical data");checkedVertices++;
                     }
                     footprint.Add(new {frame,level,east=s.GetProperty("east").GetDouble(),north=s.GetProperty("north").GetDouble(),canonicalH=h,regional=EarthLocalTerrainElevationDataset.SampleResidual(direction),rendered=render,error=render-h,baseHeight=PlanetaryPhysicalSurface.EvaluateBaseHeightNoGradient(PlanetaryTerrainDefinition.EarthProductionCubeV5,direction)});

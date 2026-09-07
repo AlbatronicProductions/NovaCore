@@ -1,0 +1,267 @@
+{
+  "source": "../conservative-pre-refinement-visibility/results.json",
+  "sourceSha256": "13d0f5ad7c3f1154d2bd240e5c5beaf65860d30724ad76378231445d721c9563",
+  "newMeasurements": false,
+  "pairedSteady": {
+    "paired-control-A-orbital": {
+      "gpuTotalMs": {
+        "n": 100,
+        "median": 0.97328,
+        "p95": 1.01236,
+        "p99": 1.09436,
+        "minimum": 0.95956,
+        "maximum": 1.10244
+      },
+      "gpuDetailedDrawMs": {
+        "n": 100,
+        "median": 0.80896,
+        "p95": 0.8186,
+        "p99": 0.93292,
+        "minimum": 0.79392,
+        "maximum": 0.94096
+      },
+      "gpuCullCompactMs": {
+        "n": 100,
+        "median": 0.10464,
+        "p95": 0.10616,
+        "p99": 0.10644,
+        "minimum": 0.09472,
+        "maximum": 0.10652
+      }
+    },
+    "paired-control-B-factor1": {
+      "gpuTotalMs": {
+        "n": 100,
+        "median": 9.38616,
+        "p95": 9.73972,
+        "p99": 9.88756,
+        "minimum": 9.00428,
+        "maximum": 10.7362
+      },
+      "gpuDetailedDrawMs": {
+        "n": 100,
+        "median": 6.28892,
+        "p95": 6.41364,
+        "p99": 6.57996,
+        "minimum": 6.2286,
+        "maximum": 7.462
+      },
+      "gpuCullCompactMs": {
+        "n": 100,
+        "median": 2.6952,
+        "p95": 2.70932,
+        "p99": 2.7148,
+        "minimum": 2.6798,
+        "maximum": 2.7202
+      }
+    },
+    "paired-control-C-Florida": {
+      "gpuTotalMs": {
+        "n": 100,
+        "median": 11.18926,
+        "p95": 11.54331,
+        "p99": 11.6912,
+        "minimum": 10.74364,
+        "maximum": 11.76235
+      },
+      "gpuDetailedDrawMs": {
+        "n": 100,
+        "median": 8.03128,
+        "p95": 8.3336,
+        "p99": 8.38276,
+        "minimum": 7.94864,
+        "maximum": 8.42184
+      },
+      "gpuCullCompactMs": {
+        "n": 100,
+        "median": 2.68288,
+        "p95": 2.69572,
+        "p99": 2.69844,
+        "minimum": 2.66308,
+        "maximum": 2.6994
+      }
+    },
+    "paired-control-D-active": {
+      "gpuTotalMs": {
+        "n": 100,
+        "median": 26.64628,
+        "p95": 27.34446,
+        "p99": 27.62973,
+        "minimum": 25.71884,
+        "maximum": 27.83652
+      },
+      "gpuDetailedDrawMs": {
+        "n": 100,
+        "median": 22.826,
+        "p95": 22.91264,
+        "p99": 22.93036,
+        "minimum": 22.66964,
+        "maximum": 22.98068
+      },
+      "gpuCullCompactMs": {
+        "n": 100,
+        "median": 2.53564,
+        "p95": 2.5524,
+        "p99": 2.55516,
+        "minimum": 2.51804,
+        "maximum": 2.55608
+      }
+    },
+    "paired-control-E-grazing": {
+      "gpuTotalMs": {
+        "n": 100,
+        "median": 16.63324,
+        "p95": 16.97664,
+        "p99": 17.33018,
+        "minimum": 16.0784,
+        "maximum": 18.2356
+      },
+      "gpuDetailedDrawMs": {
+        "n": 100,
+        "median": 13.36036,
+        "p95": 13.60344,
+        "p99": 13.91964,
+        "minimum": 13.2194,
+        "maximum": 15.37752
+      },
+      "gpuCullCompactMs": {
+        "n": 100,
+        "median": 2.70196,
+        "p95": 2.71944,
+        "p99": 2.72496,
+        "minimum": 2.69236,
+        "maximum": 2.72536
+      }
+    },
+    "paired-reject-A-orbital": {
+      "gpuTotalMs": {
+        "n": 100,
+        "median": 0.97076,
+        "p95": 0.98372,
+        "p99": 1.10532,
+        "minimum": 0.957,
+        "maximum": 1.10656
+      },
+      "gpuDetailedDrawMs": {
+        "n": 100,
+        "median": 0.80712,
+        "p95": 0.81472,
+        "p99": 0.94156,
+        "minimum": 0.79664,
+        "maximum": 0.94204
+      },
+      "gpuCullCompactMs": {
+        "n": 100,
+        "median": 0.10448,
+        "p95": 0.1058,
+        "p99": 0.106,
+        "minimum": 0.0966,
+        "maximum": 0.10636
+      }
+    },
+    "paired-reject-B-factor1": {
+      "gpuTotalMs": {
+        "n": 100,
+        "median": 9.40484,
+        "p95": 9.86168,
+        "p99": 10.06444,
+        "minimum": 9.06748,
+        "maximum": 10.79232
+      },
+      "gpuDetailedDrawMs": {
+        "n": 100,
+        "median": 6.34284,
+        "p95": 6.8078,
+        "p99": 6.85904,
+        "minimum": 6.27932,
+        "maximum": 7.52448
+      },
+      "gpuCullCompactMs": {
+        "n": 100,
+        "median": 2.71304,
+        "p95": 2.72748,
+        "p99": 2.73544,
+        "minimum": 2.6974,
+        "maximum": 2.73628
+      }
+    },
+    "paired-reject-C-Florida": {
+      "gpuTotalMs": {
+        "n": 100,
+        "median": 11.55276,
+        "p95": 12.05134,
+        "p99": 12.48384,
+        "minimum": 10.76572,
+        "maximum": 12.54703
+      },
+      "gpuDetailedDrawMs": {
+        "n": 100,
+        "median": 8.084,
+        "p95": 8.41136,
+        "p99": 8.4612,
+        "minimum": 7.9564,
+        "maximum": 8.4768
+      },
+      "gpuCullCompactMs": {
+        "n": 100,
+        "median": 2.7024,
+        "p95": 2.72188,
+        "p99": 2.72556,
+        "minimum": 2.67444,
+        "maximum": 2.72608
+      }
+    },
+    "paired-reject-D-active": {
+      "gpuTotalMs": {
+        "n": 100,
+        "median": 25.54533,
+        "p95": 26.28584,
+        "p99": 26.45075,
+        "minimum": 24.7488,
+        "maximum": 26.59422
+      },
+      "gpuDetailedDrawMs": {
+        "n": 100,
+        "median": 21.9096,
+        "p95": 22.00084,
+        "p99": 22.01968,
+        "minimum": 21.79168,
+        "maximum": 22.05764
+      },
+      "gpuCullCompactMs": {
+        "n": 100,
+        "median": 2.49496,
+        "p95": 2.5106,
+        "p99": 2.52124,
+        "minimum": 2.48364,
+        "maximum": 2.52416
+      }
+    },
+    "paired-reject-E-grazing": {
+      "gpuTotalMs": {
+        "n": 100,
+        "median": 15.56016,
+        "p95": 16.55472,
+        "p99": 17.19721,
+        "minimum": 14.81776,
+        "maximum": 17.70629
+      },
+      "gpuDetailedDrawMs": {
+        "n": 100,
+        "median": 12.0982,
+        "p95": 12.74612,
+        "p99": 12.7926,
+        "minimum": 11.95276,
+        "maximum": 14.04012
+      },
+      "gpuCullCompactMs": {
+        "n": 100,
+        "median": 2.70008,
+        "p95": 2.7182,
+        "p99": 2.929,
+        "minimum": 2.68204,
+        "maximum": 3.11716
+      }
+    }
+  }
+}

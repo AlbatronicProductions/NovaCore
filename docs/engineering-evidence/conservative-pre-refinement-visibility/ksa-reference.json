@@ -1,0 +1,37 @@
+{
+  "files": {
+    "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\Planet\\Culling\\PlanetFrustumCulling.comp": {
+      "sha256": "4a1617f6ce1660aa78a373d79f4c97022c325525a4f694e100e22aad7c2f23e5",
+      "bytes": 2973
+    },
+    "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\Culling\\Culling.glsl": {
+      "sha256": "869739acc53279a7494143c2bc5d88d8063daafe96e6b4b0930b8cd5d509ef88",
+      "bytes": 3409
+    },
+    "E:\\Kitten Space Agency\\KSA.dll": {
+      "sha256": "a8a5164204eed962df9d9025e99f523d9a23ee2ce6e802b18216a9da35506d2f",
+      "bytes": 4798552
+    },
+    "E:\\NovaCore\\build\\ksa-residency-reference\\assembly-source\\KSA\\PlanetFrustumCulling.cs": {
+      "sha256": "92f55e123ac3af9fef631df56f2db2992e366b70df711eb959273090e62e75c5",
+      "bytes": 12197
+    },
+    "E:\\NovaCore\\build\\ksa-residency-reference\\source\\KSA.PlanetRenderer.cs": {
+      "sha256": "5ce37c334045f9b5cba9a450a6accc454444e8d20327b9778b98740cf7a64a50",
+      "bytes": 116885
+    }
+  },
+  "officialHistory": [
+    {
+      "date": "2025-06-16",
+      "url": "https://discord.com/channels/1260011486735241329/1260112103134724146/1384241537331761153",
+      "finding": "Prepared height and mesh-normal buffers decoupled mesh preparation from surface shading; intended regeneration on LOD/snap changes."
+    },
+    {
+      "date": "2025-08-20",
+      "url": "https://discord.com/channels/1260011486735241329/1260112103134724146/1407745827572682962",
+      "finding": "GPU terrain frustum culling introduced; aggressive near-camera rejection corrected by including maximum world-space tessellation displacement."
+    }
+  ],
+  "verifiedVia": "Signed-in official Discord UI; current local shader and decompiled production source read; no KSA source copied."
+}

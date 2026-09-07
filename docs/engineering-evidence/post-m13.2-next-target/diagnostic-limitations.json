@@ -1,0 +1,35 @@
+{
+  "label": "capture-control-A-gs",
+  "exitCode": 3221225477,
+  "hex": "0xC0000005",
+  "classification": "Unclassified diagnostic-only access violation after capture and shutdown statistics; successful repeat does not establish its cause",
+  "logBytes": 528119,
+  "logSha256": "bda4e5b2f6b421f1c908e832e275acc0d6356b65963fa145ec984a3006928479",
+  "vuidLines": [],
+  "captureLines": [
+    "[native] TES parity capture: frame=175; width=3440; height=1440; samples=46128; prepared=13826; generation=1; pupil=1; physicalGeneration=4; diagnostic=0"
+  ],
+  "lastLines": [
+    "[native] P2S5C3 GPU timing: preSurface avg=0.000 ms; p50=0.000; p95=0.000; p99=0.000; max=0.000; samples=180",
+    "[native] P2S5C3 GPU timing: scene avg=0.999 ms; p50=0.953; p95=1.116; p99=1.611; max=4.665; samples=180",
+    "[native] P2S5C3 GPU timing: toneMap avg=0.050 ms; p50=0.047; p95=0.049; p99=0.201; max=0.222; samples=180",
+    "[native] P2S5C3 GPU timing: cullCompact avg=0.116 ms; p50=0.098; p95=0.109; p99=0.542; max=2.462; samples=180",
+    "[native] P2S5C3 GPU timing: materialsOverlays avg=0.180 ms; p50=0.158; p95=0.312; p99=0.368; max=1.140; samples=180",
+    "[native] P2S5C3 GPU timing: candidateDraw avg=0.841 ms; p50=0.839; p95=0.851; p99=1.056; max=1.183; samples=180",
+    "[native] P2S5C3 GPU timing: globalFill avg=0.006 ms; p50=0.000; p95=0.000; p99=0.000; max=1.139; samples=180",
+    "[native] P2S5C3 frame timing: all avg=13.321 ms; p50=3.802; p95=5.642; p99=712.405; max=835.654; samples=182",
+    "[native] P2S5C3 frame timing: publication avg=3.019 ms; p50=3.019; p95=3.019; p99=3.019; max=3.019; samples=1",
+    "[native] P2S5C3 sync timing: fenceWait avg=1.757 ms; p50=0.942; p95=2.343; p99=47.835; max=48.711; samples=182",
+    "[native] P2S5C3 GPU workload: clippingOutputPrimitives avg=15376.0; p50=15376; p95=15376; p99=15376; max=15376; samples=179",
+    "[native] P2S5C3 GPU workload: fragmentInvocations avg=35913.0; p50=35913; p95=35913; p99=35913; max=35913; samples=179",
+    "[native] P2S5C3 GPU workload: tcsPatches avg=15376.0; p50=15376; p95=15376; p99=15376; max=15376; samples=179",
+    "[native] P2S5C3 GPU workload: tesInvocations avg=46128.0; p50=46128; p95=46128; p99=46128; max=46128; samples=179",
+    "[native] P2S5C3 TES factor: actualMaximum=1; configuredMaximum=64; samples=179",
+    "[native] GPU anchored refinement averages: tcsPatches=15376.0; refinedVertices=46128.0; clippingOutputPrimitives=15376.0; fragmentInvocations=35913.0; samples=179; CPUFinalRaster=false",
+    "[native] GPU timing averages: total=1.049 ms; anchoredCompute=0.000; anchoredDraw=0.847; background=0.703; preSurface=0.000; toneMap=0.050",
+    "[native] NCSM1 regional physical totals: requests=0; hits=0; misses=0; loaded=0; readBytes=0; uploadedBytes=0; residentHighWater=0; allocatedBytes=4; maximumBytes=124895232; queueHighWater=0; readyCapacity=8; uploadBudget=8; demandDispatches=2; dependencyDelayMsMax=830.766; recordReadDecodeVerifyMs=0.000; contributingRecords=670; anchoredDemandRequired=false",
+    "",
+    "STDERR"
+  ],
+  "repeat": "capture-repeat-A-gs completed with exit zero; two HDR bytes differ from TES-only control"
+}

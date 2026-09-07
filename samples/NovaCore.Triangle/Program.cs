@@ -157,7 +157,8 @@ static unsafe int Run(SampleOptions options,LogOptions log,bool productionEarth)
         {
         var gpu=earth?.GpuConstants(camera)??sol!.GpuConstants(camera);
         var cameraBody=new Double3((double)gpu.CameraBodyHighX+gpu.CameraBodyLowX,(double)gpu.CameraBodyHighY+gpu.CameraBodyLowY,(double)gpu.CameraBodyHighZ+gpu.CameraBodyLowZ);
-        var candidateAltitude=Math.Max(10d,Math.Sqrt(cameraBody.LengthSquared)-PlanetarySphericalBillboardNaturalTerrainProof.EarthRadiusMetres);
+        // Render sampling follows physical ground clearance, already resolved by the scene.
+        var candidateAltitude=Math.Max(10d,gpu.SurfaceAltitudeMetres);
         var view=new PlanetaryProductionBillboardView(candidateAltitude,cameraBody.Normalized(),(int)state.ViewportWidthPixels,(int)state.ViewportHeightPixels,camera.Projection.VerticalFieldOfViewRadians,0);
         state.ProductionBillboardRuntime.Update(view,0);
         PlanetaryProductionBillboardPreparedGeneration initial;
@@ -240,7 +241,7 @@ static unsafe void UpdateProductionBillboard(HostState state,NativeFrameSubmissi
     }
     var gpu=submission->PlanetaryGpu;var cameraBody=new Double3((double)gpu.CameraBodyHighX+gpu.CameraBodyLowX,(double)gpu.CameraBodyHighY+gpu.CameraBodyLowY,(double)gpu.CameraBodyHighZ+gpu.CameraBodyLowZ);
     if(!cameraBody.IsFinite||cameraBody.LengthSquared<=0d)return;
-    var altitude=Math.Max(10d,Math.Sqrt(cameraBody.LengthSquared)-PlanetarySphericalBillboardNaturalTerrainProof.EarthRadiusMetres);
+    var altitude=Math.Max(10d,gpu.SurfaceAltitudeMetres);
     var telemetry=runtime.Update(new(altitude,cameraBody.Normalized(),(int)state.ViewportWidthPixels,(int)state.ViewportHeightPixels,state.Camera.Projection.VerticalFieldOfViewRadians,state.ProductionBillboardFrame++),submission->ProductionBillboardPadding);
     PlanetaryProductionBillboardPreparedGeneration? newlyPrepared=null;
     PlanetaryProductionBillboardPreparedGeneration prepared=null!;

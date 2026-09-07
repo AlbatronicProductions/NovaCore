@@ -112,21 +112,18 @@ public static unsafe class PlanetarySphericalBillboardNaturalTerrainProof
             if (value.Valid != 1 || value.ResultTerrainVersion != TerrainDataGeneration)
                 throw new InvalidOperationException("Production billboard GPU physical sample was invalid.");
             var direction = directions[missing[i].index];
-            // The persistent presentation mesh owns geographic + macro/meso
-            // displacement. The query still proves the complete canonical
-            // surface, but only its prepared base is published to the raster
-            // path; TES adds the bounded near field once per emitted vertex.
-            var baseHeight = Math.Max(0d, value.BaseHeightMetres +
-                value.TiledModifierHeightMetres + value.ErosionModifierHeightMetres);
-            var baseNormal = new Double3(value.ReconstructedHighPadding,
-                value.ReconstructedLowPadding, value.ModifierWeight).Normalized();
-            var body = direction * (EarthRadiusMetres + baseHeight);
+            // Match production preparation: full physical relief at shared
+            // vertices, then render-owned interpolation without H in TES.
+            var height = value.PhysicalHeightMetres;
+            var normal = new Double3(value.PhysicalNormalX,
+                value.PhysicalNormalY, value.PhysicalNormalZ).Normalized();
+            var body = direction * (EarthRadiusMetres + height);
             var prepared = new NativeSphericalBillboardPhysicalVertex
             {
                 BodyX = body.X, BodyY = body.Y, BodyZ = body.Z,
-                PhysicalHeightMetres = baseHeight,
-                NormalX = (float)baseNormal.X, NormalY = (float)baseNormal.Y,
-                NormalZ = (float)baseNormal.Z, NormalValidity = 1f
+                PhysicalHeightMetres = height,
+                NormalX = (float)normal.X, NormalY = (float)normal.Y,
+                NormalZ = (float)normal.Z, NormalValidity = 1f
             };
             cache.Store(missing[i].identity, prepared);
         }
@@ -148,18 +145,10 @@ public static unsafe class PlanetarySphericalBillboardNaturalTerrainProof
             var baseNormal = new Double3(prepared.NormalX, prepared.NormalY, prepared.NormalZ).Normalized();
             var cpu = PlanetaryTerrainDefinition.EarthProductionCubeV5.SamplePhysicalSurface(
                 directions[i], PlanetaryPhysicalSurfaceGeneration.M12DNaturalTerrainCandidate);
-            var representedHeight = Math.Max(0d,
-                prepared.PhysicalHeightMetres + cpu.Modifiers.NearHeightMetres);
+            var representedHeight = prepared.PhysicalHeightMetres;
             maximumHeightError = Math.Max(maximumHeightError,
                 Math.Abs(representedHeight - cpu.FinalHeightMetres));
-            var frame = PlanetarySurfaceFrame.AtDirection(directions[i]);
-            var radial = Math.Max(Double3.Dot(baseNormal, directions[i]), 1e-9d);
-            var eastSlope = -Double3.Dot(baseNormal, frame.East) / radial +
-                cpu.Modifiers.NearEastGradient;
-            var northSlope = -Double3.Dot(baseNormal, frame.North) / radial +
-                cpu.Modifiers.NearNorthGradient;
-            var representedNormal = (directions[i] - frame.East * eastSlope -
-                frame.North * northSlope).Normalized();
+            var representedNormal = baseNormal;
             maximumNormalError = Math.Max(maximumNormalError, Math.Acos(Math.Clamp(
                 Double3.Dot(representedNormal, cpu.PhysicalNormal), -1d, 1d)));
         }

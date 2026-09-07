@@ -1,0 +1,28 @@
+{
+  "scratchLogicalBytes": 407583455,
+  "scratchAllocatedBytes": 408639696,
+  "scratchFiles": 600,
+  "sharedHardLinkLogicalBytes": 134217728,
+  "uniquelyLinkedScratchAllocatedBytes": 274421968,
+  "completedRawCaptureLogicalBytes": 2130343736,
+  "generatedBytecode": {
+    "path": "E:\\NovaCore\\docs\\engineering-evidence\\near-surface-performance\\__pycache__\\analyze.cpython-311.pyc",
+    "bytes": 8854,
+    "allocated": 12288,
+    "sha256": "891eb47012e36f57783665a3e8a77376174d90567acb4e36f54d638001aa054b"
+  },
+  "retentionBudgetBytes": 3000000,
+  "rawArchiveRetention": "None; each completed private raw capture was disposed by its runner. A bounded interrupted-runtime overlay is retained for the unresolved watchdog cause.",
+  "createdAccounting": "Known lower bound only: raw capture payloads + inventoried scratch unique logical payload + retained files. Repeated private runtime copies, overwritten files, build-cache churn and GPU memory allocations are not represented as cumulative disk writes.",
+  "scratchRemoved": false,
+  "productionDeploymentRemoved": false,
+  "bytecodeRemoved": false,
+  "automaticDeletion": "REJECTED: blocked by policy; no retry or workaround attempted",
+  "remainingDisposableLogicalBytes": 407592309,
+  "remainingDisposableFiles": 601,
+  "remainingDisposableUniqueAllocatedBytes": 274434256,
+  "completedRawCaptureRemovedBytes": 2130343736,
+  "permanentRetainedBytes": 2051700,
+  "knownCreatedLogicalLowerBoundBytes": 2405770017,
+  "allocationMethod": "Windows FileStandardInfo.AllocationSize; uniquely-linked allocation excludes shared production-asset hard links; filesystem metadata not counted."
+}

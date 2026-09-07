@@ -1,0 +1,39 @@
+{
+  "judgment": "PASS",
+  "technicalClassification": "BLOCKED",
+  "refs": {
+    "HEAD": "4accf92fd080c16cc8656080aa69def3fa65db53",
+    "main": "4accf92fd080c16cc8656080aa69def3fa65db53",
+    "origin/main": "4accf92fd080c16cc8656080aa69def3fa65db53",
+    "m13.1-ncsm1-tes-hotpath": "b534d149b74b0ca854e4fb09267fc84321cc52ff",
+    "m13.1-ncsm1-tes-hotpath^{}": "fade1384c1c7df93d954e7223b1cc8f17db17f98",
+    "m13.2-ordinary-terrain-shading": "add1c94658c1de869124c75606ce0a084c77ba25",
+    "m13.2-ordinary-terrain-shading^{}": "4accf92fd080c16cc8656080aa69def3fa65db53"
+  },
+  "branch": "codex/m13-ksa-terrain-convergence-implementation",
+  "stagedDiff": "",
+  "diffCheck": "PASS",
+  "priorEvidenceFilesVerified": 95,
+  "priorEvidenceUnchanged": true,
+  "temporaryHostInstrumentationAbsent": true,
+  "deployedDebugReleaseIdentity": "PASS49 shaders each plus native, managed and executable",
+  "trackedFiles": {
+    "docs/CODEX_HANDOFF.md": "ee6e98e7aefa403fcd3fca010a3d004afe174f81b7b431ba481a56c05137b381",
+    "docs/NOVACORE_CURRENT_STATE.md": "8cb4d39223f2be1782026967e8972ba8422cce1b9b026404a620ed96463aac1e",
+    "native/NovaCore.Native/shaders/production_spherical_billboard.tese": "44dfb5a32e48bf85d7689286cbdfab2e2f2f13b014cce380b95e621040c872ee",
+    "native/NovaCore.Native/shaders/production_spherical_billboard_incoming_prepare.comp": "a8ed23e122490f81b070558a89dcc9e77717c906bca6414732e439afac13d1b5",
+    "native/NovaCore.Native/shaders/production_spherical_billboard_physical.glsl": "5b5535a1118659a3c27098778ad38a838d622116f883283d4157a63e5f6fdf8d",
+    "native/NovaCore.Native/shaders/production_spherical_billboard_prepare.comp": "61a5cd9464c0807a222309998d5f78adc97d539297692d3e9340b1779ff04d4f",
+    "samples/NovaCore.Triangle/Program.cs": "78089c2099e582e7a973190a6a2e1401704d3deb10aa028044c019a2db91062d",
+    "src/NovaCore.Graphics/PlanetarySphericalBillboardNaturalTerrainProof.cs": "f63d1223c7a747f862ea8c78edfe94cfb3d37bc965d7e55fa712fa7dba33a1bb",
+    "tests/NovaCore.Graphics.Tests/FacilitySupportTests.cs": "c8789c8759e38decbb05525ce08641f64b4106bdecf600f6555949fc3e50c904",
+    "tests/NovaCore.Graphics.Tests/PlanetaryCanonicalPhysicalSurfaceAuthorityTests.cs": "3bd2eaa863b85fa73aad171b297e64a5c9b59836acdaadbd28ac2b4608c88e51",
+    "tests/NovaCore.Graphics.Tests/PlanetaryNaturalTerrainRendererIntegrationTests.cs": "e65510053c5bdb3ca3dcb2238329154ab74e303436216e443160bb152326276f",
+    "tests/NovaCore.Graphics.Tests/PlanetaryProductionSphericalBillboardRuntimeTests.cs": "bfd483d93c0a07b1e0eb763c98519b77a03f822acf732a7b7af51b4725373a59",
+    "tests/NovaCore.Graphics.Tests/Program.cs": "6ddb26088f95ca14a9ce2db68a4777cd93f4452a9b05085b61863716e85ff8dd",
+    "tests/NovaCore.Graphics.Tests/RegionalPhysicalResidencyTests.cs": "5d3ea3ba2c2d2b943f4ee6817721a8297516427495af24c38f8c879c4015fc2d"
+  },
+  "newPermanentTestSha256": "de545a23266a31f7d1164549d732ac77ef3f917e0861823aac14f18b55ab1c84",
+  "status": " M docs/CODEX_HANDOFF.md\n M docs/NOVACORE_CURRENT_STATE.md\n M native/NovaCore.Native/shaders/production_spherical_billboard.tese\n M native/NovaCore.Native/shaders/production_spherical_billboard_incoming_prepare.comp\n M native/NovaCore.Native/shaders/production_spherical_billboard_physical.glsl\n M native/NovaCore.Native/shaders/production_spherical_billboard_prepare.comp\n M samples/NovaCore.Triangle/Program.cs\n M src/NovaCore.Graphics/PlanetarySphericalBillboardNaturalTerrainProof.cs\n M tests/NovaCore.Graphics.Tests/FacilitySupportTests.cs\n M tests/NovaCore.Graphics.Tests/PlanetaryCanonicalPhysicalSurfaceAuthorityTests.cs\n M tests/NovaCore.Graphics.Tests/PlanetaryNaturalTerrainRendererIntegrationTests.cs\n M tests/NovaCore.Graphics.Tests/PlanetaryProductionSphericalBillboardRuntimeTests.cs\n M tests/NovaCore.Graphics.Tests/Program.cs\n M tests/NovaCore.Graphics.Tests/RegionalPhysicalResidencyTests.cs\n?? docs/engineering-evidence/conservative-pre-refinement-visibility/\n?? docs/engineering-evidence/exact-local-domain-encoding/\n?? docs/engineering-evidence/ksa-terrain-architecture/\n?? docs/engineering-evidence/ksa-terrain-convergence/\n?? docs/engineering-evidence/local-physical-domain-proof/\n?? docs/engineering-evidence/post-m13.2-next-target/\n?? tests/NovaCore.Graphics.Tests/TerrainRenderAuthorityTests.cs",
+  "blocker": "Automatic approval review rejected manifest-verified scratch deletion: blocked by policy. No deletion performed; guarded manual cleanup script supplied."
+}

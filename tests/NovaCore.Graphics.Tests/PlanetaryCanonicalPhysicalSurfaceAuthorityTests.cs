@@ -109,16 +109,16 @@ internal static class PlanetaryCanonicalPhysicalSurfaceAuthorityTests
         var authority=File.ReadAllText(Path.Combine(shaders,"planetary_physical_authority.glsl"));
         var global=File.ReadAllText(Path.Combine(shaders,"planetary.vert"));
         var prepare=File.ReadAllText(Path.Combine(shaders,"production_spherical_billboard_prepare.comp"));
-        var tes=File.ReadAllText(Path.Combine(shaders,"production_spherical_billboard.tese"));
+        var tes=TerrainRenderAuthorityTests.ReadCandidate(Path.Combine(shaders,"production_spherical_billboard.tese"));
         var fragment=File.ReadAllText(Path.Combine(shaders,"planetary_production.frag"));
         var publication=File.ReadAllText(Path.Combine(root,"native","NovaCore.Native","RegionalPhysicalPreparation.inl"));
         Require(authority.Contains("binding=33") && authority.Contains("CanonicalElevationOracleMetres") &&
             authority.Contains("RegionalPhysicalResidual") && global.Contains("planetary_physical_authority.glsl") &&
             prepare.Contains("planetary_physical_authority.glsl"),
             "bootstrap oracle and NCSM1 regional preparation share canonical physical authority");
-        Require(tes.Contains("EvaluateNaturalCandidateNearD(direction)") &&
+        Require(!tes.Contains("EvaluateNaturalCandidateNearD(direction)") &&
             tes.Contains("gl_Position=baseClip+") && !tes.Contains("EvaluateNaturalCandidatePreparedD"),
-            "TES preserves prepared base geometry and adds only bounded near detail");
+            "render refinement consumes prepared geometry independently of physical height queries");
         Require(!global.Contains("productionElevation") && !fragment.Contains("ProductionFixedPhysicalNormal") &&
             fragment.Contains("vec3 physical=normalize(normal)"),
             "terrain presentation consumes the final geometry normal without a second physical surface");

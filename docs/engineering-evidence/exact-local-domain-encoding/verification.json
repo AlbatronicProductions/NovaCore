@@ -1,0 +1,418 @@
+{
+  "refs": {
+    "HEAD": "4accf92fd080c16cc8656080aa69def3fa65db53",
+    "main": "4accf92fd080c16cc8656080aa69def3fa65db53",
+    "origin/main": "4accf92fd080c16cc8656080aa69def3fa65db53",
+    "m13.1-ncsm1-tes-hotpath": "b534d149b74b0ca854e4fb09267fc84321cc52ff",
+    "m13.1-ncsm1-tes-hotpath^{}": "fade1384c1c7df93d954e7223b1cc8f17db17f98",
+    "m13.2-ordinary-terrain-shading": "add1c94658c1de869124c75606ce0a084c77ba25",
+    "m13.2-ordinary-terrain-shading^{}": "4accf92fd080c16cc8656080aa69def3fa65db53"
+  },
+  "branch": "codex/m13-exact-local-domain-encoding",
+  "status": "?? docs/engineering-evidence/conservative-pre-refinement-visibility/\n?? docs/engineering-evidence/exact-local-domain-encoding/\n?? docs/engineering-evidence/ksa-terrain-architecture/\n?? docs/engineering-evidence/local-physical-domain-proof/\n?? docs/engineering-evidence/post-m13.2-next-target/",
+  "trackedDiff": "",
+  "stagedDiff": "",
+  "diffCheck": "PASS",
+  "build": "Release PASS: zero warnings/errors",
+  "repeatCanonicalJsonSha256": [
+    "62b3b6fb139ea15bda3a00d342157ef40f08e9ea4d0147445f1f851905e5f35e",
+    "62b3b6fb139ea15bda3a00d342157ef40f08e9ea4d0147445f1f851905e5f35e",
+    "62b3b6fb139ea15bda3a00d342157ef40f08e9ea4d0147445f1f851905e5f35e"
+  ],
+  "binarySha256": "369e10099b088b998045a079c0a8e5d8aec69a15a71a1d1247fc2c89334db121",
+  "sourceSha256": "329726f3b2babbe5665c46b20ebe0d311b29675931d41646004fbd8dd2ad807c",
+  "deployments": {
+    "Debug": {
+      "binaries": {
+        "NovaCore.Native.dll": "88b761d0a53b4d8681cab7fbd8cf1923befdd17e4ab2ada8464ed69c21c1591d",
+        "NovaCore.Triangle.dll": "f6fef85ab5a80d57c1c10b69d3a1ce0a262ff8201e0ff7892e337608d8067b4c",
+        "NovaCore.Core.dll": "c4598c4e4e64ec79d5cec75b72d6db07d0b06a18639b318e544e977590ea6021",
+        "NovaCore.Graphics.dll": "d6aa49f19aa5b597a3992a923c556fe75d38642dbde1e63dc56bd0fb3dc94f27"
+      },
+      "shaders": {
+        "body_forward.frag.spv": "fa706803f042fb5a9f7a3c9965a3e2de3e8838e075d67876b78df9bdc132ce0e",
+        "distant_planet.frag.spv": "04137afb1c632dfb7074480377d9f93136ab3127d382baeef07d52b09409eba8",
+        "distant_planet.vert.spv": "cf28fe0a7c0797bd7d72076437ba78c4e0d97bb1a0ae3c065baf3bfc5db62cb8",
+        "fullscreen.vert.spv": "a18f9b5e0b4a4e7a077b1017bad7b1c5c40313b3f70113f1e0771cd202433130",
+        "orbit.frag.spv": "b06f50708727144e8d0f08d35cd2e64d8b1cef501ed20b10fea4a34196026267",
+        "orbit.vert.spv": "b4b9dd635f32156654e30d843c29eb864feb09751d7b3027cf99a5d741b6a45b",
+        "orbit_previous.frag.spv": "c4935060e07e01742d59d8a5834241e2963dcc80ed8e35baeac5b08288761e61",
+        "planetary.frag.spv": "417f17b236834f0ac94fa3bbfdae52ad164599ff14051e9b396809beea75cda1",
+        "planetary.vert.spv": "ddb84030e2621df8f05489e339989d66de60d73435f490b4ec0af4251d7a0338",
+        "planetary_natural_terrain_global_prepare.comp.spv": "5a5450321873f5ff8bed7dd9e4f06c342625724d629da2232521fbace01c7a85",
+        "planetary_production.frag.spv": "4b79673d14c90df52703a322c116415ec9e833cf2247731ca5ee1ab7b563df06",
+        "planetary_production_terrain.comp.spv": "405e6e6daab609ca383297ba8be706bfa96859c65dc2d9f42476a32cddd85df7",
+        "planetary_ring.vert.spv": "cccede52d3c64db872360912db9eb29e60cb892c648ed53ce1c178f8623d0cfb",
+        "planetary_ring_far.frag.spv": "343db81bccc310b21c600ab6ee6722438151694683bb0cf7ba01d54a9b68ade6",
+        "planetary_ring_near.frag.spv": "48b8ef4e56b6be9380cfbaca7daa790035e704541b6b8a550b3cc7bed540244c",
+        "planetary_select.comp.spv": "8189bbd2a85fe23033f12c558d8b221b62b8969c17ba9ffcf07b7c8501fe8adf",
+        "planetary_terrain_generate.comp.spv": "1fc8c24ea6b4a55e83997fadf80b4901f692b8bc2de84a5cf6ac043e4da531d1",
+        "production_nested_scale_mesh_cull.comp.spv": "497d88225a914b9601ad6c0f44733e834794a952854e71b26be426ead8780d94",
+        "production_nested_scale_mesh_incoming_cull.comp.spv": "23bd1b04d0291e6271138041433eee07e57503482e8e5cf845e4b72c75967336",
+        "production_spherical_billboard.tesc.spv": "0163498278f9523fd442434f05f056be28252d16c2f2ba44b8d91642b33e4439",
+        "production_spherical_billboard.tese.spv": "3b64eca169c95f00b1d375d380de8b38d18a2ae00dce0cc640f7621fc1df3ed5",
+        "production_spherical_billboard.vert.spv": "1baa9043db7a8b71dcf5931f4cb415fa84ce6341b07d850ea9beb8baa02d2b6a",
+        "production_spherical_billboard_compact.comp.spv": "2aabd7633b333f86df8a6eae6b76ed2d13a7129443dcd9201531de047b12f4d9",
+        "production_spherical_billboard_cull.comp.spv": "2827b58dcd7029695e0b33272018e54d19d6113b8d7ab9ac591c343b3d994398",
+        "production_spherical_billboard_incoming_compact.comp.spv": "6b0238138222112ddf1f945f5e6a31867d5dd11f57169481ece9c05337f43e4e",
+        "production_spherical_billboard_incoming_cull.comp.spv": "8c677f08ae051cf525108a436066983d41961ce70757ca29a86df165d2663cfb",
+        "production_spherical_billboard_incoming_prepare.comp.spv": "9f32e3fcf9ffe534a10107ab0b1ef2b1ecdb3c6a9bb44d2c5d3d38b15ed47613",
+        "production_spherical_billboard_incoming_reset.comp.spv": "5d750f929dcab4f9f3138b4cdfa869ab26e3051d4b28485c02ee483f89e14d6e",
+        "production_spherical_billboard_prepare.comp.spv": "cd6b8feeaa382281c4d8891af64d54e45354491dbd93af6b90621a3658e9492c",
+        "production_spherical_billboard_reset.comp.spv": "cf583d16e14c8a8ec63b393d8752541648d932cf0165231cc48f6076e28fc027",
+        "regional_physical_demand.comp.spv": "7d80dbd70be13cc55f00ef836cd8da9d3783064411320697777f6b5c848d8f67",
+        "regional_physical_incoming_demand.comp.spv": "a56b62b5432206b8ab5eded734b13a0ddf9f0c726a4b444f8d24139bdcc17a60",
+        "sas_target.frag.spv": "4e99fda06f571590f950e91d93025cafa83e4a454e68e3583ce59d869f0a3ef2",
+        "solar_label.frag.spv": "673c5dc0cc1e199d497c7c927f282a02da444fa258860b6cb94b6fd1ed12c90a",
+        "solar_label.vert.spv": "a13a7a8acb3ae2da2cac129a203caffd86b5a7f434701d99b59284fdd01f1844",
+        "solar_marker.frag.spv": "d428743c08f96f4e508eab131cfb54981c2628eecc7acd3d2df220b19103275b",
+        "solar_marker.vert.spv": "50d948741d3ca6b59577a82d3346ab3cac51edcb9ab80047247ac61c345b6db6",
+        "solar_orbit.frag.spv": "23b511270c196c2186f7935699ca7fdedf3c92c629da67c10e8ae7615286181f",
+        "solar_orbit.vert.spv": "d71520615e2533a06208c3cec752d2689f524a30fb6a11bd2ca4ae00e2cc027f",
+        "solar_speed_hud.frag.spv": "e073b0ab31c69a3516d695146ade0dbd618d3dede5a10699f390f10da52c3586",
+        "solar_speed_hud.vert.spv": "a777a4dfece073339efcd97c7292d970f8c26d21f221ebd62ce244970f0a5fb4",
+        "space_background.frag.spv": "0c98ee3df0ba8ad8f313cc352a02032528e6b0e36b2dfa8cc2be1a6755b71cfc",
+        "stellar_glow.frag.spv": "e83a5e7458ec4be4b835384c88ec3ea958ae13569ee9ac823a4e2b2db17facee",
+        "stellar_glow.vert.spv": "30a9ed63e3d92581852afef62a242f2160a10c6cdb276a3b1aa0360a476183e8",
+        "stellar_sun.frag.spv": "5c448c0da4cadeb08bf2c85c74448d3b690fd3d6bccab1fc2c49da7a0bf54769",
+        "stellar_sun.vert.spv": "3e124d5babcb1d219499aa2de1482f90fc7c9008e92b054f7ca0d268336346b6",
+        "tone_map.frag.spv": "d617345e95589ecb087ed40c20f4d04a427251a2b5249d8181cc63c421ee3979",
+        "triangle.frag.spv": "36e2c4762d87eddd045909f600217f3ea7d48b023d08887abbf958d3bfaa5ddf",
+        "triangle.vert.spv": "87c254e6166b18954b8c0fbd533af2e83f4cf7f09842d752a0a76ae68e8f1aef"
+      },
+      "matchesPriorVerifiedDeployment": true
+    },
+    "Release": {
+      "binaries": {
+        "NovaCore.Native.dll": "b6b3ad74c35d73df34e0cba41a6703cfd7a7014a181d422b2e7b6184697883a2",
+        "NovaCore.Triangle.dll": "92eefa86a87b1988161c082a929ca75263cbdc072abef42f3bab550dc916ad0a",
+        "NovaCore.Core.dll": "19e8bdbb02ee2608833b97fd4e1697ad7ca7783931ed6bf6359392fcd48ad8da",
+        "NovaCore.Graphics.dll": "78dd856286036d69a1aca71536f1bdd285b481fef1727838b9d3b9016c34a95d"
+      },
+      "shaders": {
+        "body_forward.frag.spv": "fa706803f042fb5a9f7a3c9965a3e2de3e8838e075d67876b78df9bdc132ce0e",
+        "distant_planet.frag.spv": "04137afb1c632dfb7074480377d9f93136ab3127d382baeef07d52b09409eba8",
+        "distant_planet.vert.spv": "cf28fe0a7c0797bd7d72076437ba78c4e0d97bb1a0ae3c065baf3bfc5db62cb8",
+        "fullscreen.vert.spv": "a18f9b5e0b4a4e7a077b1017bad7b1c5c40313b3f70113f1e0771cd202433130",
+        "orbit.frag.spv": "b06f50708727144e8d0f08d35cd2e64d8b1cef501ed20b10fea4a34196026267",
+        "orbit.vert.spv": "b4b9dd635f32156654e30d843c29eb864feb09751d7b3027cf99a5d741b6a45b",
+        "orbit_previous.frag.spv": "c4935060e07e01742d59d8a5834241e2963dcc80ed8e35baeac5b08288761e61",
+        "planetary.frag.spv": "417f17b236834f0ac94fa3bbfdae52ad164599ff14051e9b396809beea75cda1",
+        "planetary.vert.spv": "ddb84030e2621df8f05489e339989d66de60d73435f490b4ec0af4251d7a0338",
+        "planetary_natural_terrain_global_prepare.comp.spv": "5a5450321873f5ff8bed7dd9e4f06c342625724d629da2232521fbace01c7a85",
+        "planetary_production.frag.spv": "4b79673d14c90df52703a322c116415ec9e833cf2247731ca5ee1ab7b563df06",
+        "planetary_production_terrain.comp.spv": "405e6e6daab609ca383297ba8be706bfa96859c65dc2d9f42476a32cddd85df7",
+        "planetary_ring.vert.spv": "cccede52d3c64db872360912db9eb29e60cb892c648ed53ce1c178f8623d0cfb",
+        "planetary_ring_far.frag.spv": "343db81bccc310b21c600ab6ee6722438151694683bb0cf7ba01d54a9b68ade6",
+        "planetary_ring_near.frag.spv": "48b8ef4e56b6be9380cfbaca7daa790035e704541b6b8a550b3cc7bed540244c",
+        "planetary_select.comp.spv": "8189bbd2a85fe23033f12c558d8b221b62b8969c17ba9ffcf07b7c8501fe8adf",
+        "planetary_terrain_generate.comp.spv": "1fc8c24ea6b4a55e83997fadf80b4901f692b8bc2de84a5cf6ac043e4da531d1",
+        "production_nested_scale_mesh_cull.comp.spv": "497d88225a914b9601ad6c0f44733e834794a952854e71b26be426ead8780d94",
+        "production_nested_scale_mesh_incoming_cull.comp.spv": "23bd1b04d0291e6271138041433eee07e57503482e8e5cf845e4b72c75967336",
+        "production_spherical_billboard.tesc.spv": "0163498278f9523fd442434f05f056be28252d16c2f2ba44b8d91642b33e4439",
+        "production_spherical_billboard.tese.spv": "3b64eca169c95f00b1d375d380de8b38d18a2ae00dce0cc640f7621fc1df3ed5",
+        "production_spherical_billboard.vert.spv": "1baa9043db7a8b71dcf5931f4cb415fa84ce6341b07d850ea9beb8baa02d2b6a",
+        "production_spherical_billboard_compact.comp.spv": "2aabd7633b333f86df8a6eae6b76ed2d13a7129443dcd9201531de047b12f4d9",
+        "production_spherical_billboard_cull.comp.spv": "2827b58dcd7029695e0b33272018e54d19d6113b8d7ab9ac591c343b3d994398",
+        "production_spherical_billboard_incoming_compact.comp.spv": "6b0238138222112ddf1f945f5e6a31867d5dd11f57169481ece9c05337f43e4e",
+        "production_spherical_billboard_incoming_cull.comp.spv": "8c677f08ae051cf525108a436066983d41961ce70757ca29a86df165d2663cfb",
+        "production_spherical_billboard_incoming_prepare.comp.spv": "9f32e3fcf9ffe534a10107ab0b1ef2b1ecdb3c6a9bb44d2c5d3d38b15ed47613",
+        "production_spherical_billboard_incoming_reset.comp.spv": "5d750f929dcab4f9f3138b4cdfa869ab26e3051d4b28485c02ee483f89e14d6e",
+        "production_spherical_billboard_prepare.comp.spv": "cd6b8feeaa382281c4d8891af64d54e45354491dbd93af6b90621a3658e9492c",
+        "production_spherical_billboard_reset.comp.spv": "cf583d16e14c8a8ec63b393d8752541648d932cf0165231cc48f6076e28fc027",
+        "regional_physical_demand.comp.spv": "7d80dbd70be13cc55f00ef836cd8da9d3783064411320697777f6b5c848d8f67",
+        "regional_physical_incoming_demand.comp.spv": "a56b62b5432206b8ab5eded734b13a0ddf9f0c726a4b444f8d24139bdcc17a60",
+        "sas_target.frag.spv": "4e99fda06f571590f950e91d93025cafa83e4a454e68e3583ce59d869f0a3ef2",
+        "solar_label.frag.spv": "673c5dc0cc1e199d497c7c927f282a02da444fa258860b6cb94b6fd1ed12c90a",
+        "solar_label.vert.spv": "a13a7a8acb3ae2da2cac129a203caffd86b5a7f434701d99b59284fdd01f1844",
+        "solar_marker.frag.spv": "d428743c08f96f4e508eab131cfb54981c2628eecc7acd3d2df220b19103275b",
+        "solar_marker.vert.spv": "50d948741d3ca6b59577a82d3346ab3cac51edcb9ab80047247ac61c345b6db6",
+        "solar_orbit.frag.spv": "23b511270c196c2186f7935699ca7fdedf3c92c629da67c10e8ae7615286181f",
+        "solar_orbit.vert.spv": "d71520615e2533a06208c3cec752d2689f524a30fb6a11bd2ca4ae00e2cc027f",
+        "solar_speed_hud.frag.spv": "e073b0ab31c69a3516d695146ade0dbd618d3dede5a10699f390f10da52c3586",
+        "solar_speed_hud.vert.spv": "a777a4dfece073339efcd97c7292d970f8c26d21f221ebd62ce244970f0a5fb4",
+        "space_background.frag.spv": "0c98ee3df0ba8ad8f313cc352a02032528e6b0e36b2dfa8cc2be1a6755b71cfc",
+        "stellar_glow.frag.spv": "e83a5e7458ec4be4b835384c88ec3ea958ae13569ee9ac823a4e2b2db17facee",
+        "stellar_glow.vert.spv": "30a9ed63e3d92581852afef62a242f2160a10c6cdb276a3b1aa0360a476183e8",
+        "stellar_sun.frag.spv": "5c448c0da4cadeb08bf2c85c74448d3b690fd3d6bccab1fc2c49da7a0bf54769",
+        "stellar_sun.vert.spv": "3e124d5babcb1d219499aa2de1482f90fc7c9008e92b054f7ca0d268336346b6",
+        "tone_map.frag.spv": "d617345e95589ecb087ed40c20f4d04a427251a2b5249d8181cc63c421ee3979",
+        "triangle.frag.spv": "36e2c4762d87eddd045909f600217f3ea7d48b023d08887abbf958d3bfaa5ddf",
+        "triangle.vert.spv": "87c254e6166b18954b8c0fbd533af2e83f4cf7f09842d752a0a76ae68e8f1aef"
+      },
+      "matchesPriorVerifiedDeployment": true
+    }
+  },
+  "ksaSourceProvenance": {
+    "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\Common\\PrecisionFuncs.glsl": "fd3b6b654637447b8e9e6ea1932f5a69f4f810cb7f598481177fd102c3362264",
+    "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\Planet\\TerrainMesh\\MeshDataCommon.glsl": "6ec907559793a67f0fcc68d0338544bcbad96b5d13e4bcb58dee227a5d140995",
+    "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\Planet\\TerrainMesh\\PrepareModifiers.comp": "d3ea1e2cfc3d090c0602a9df0f9b6ec46337ab0a48cc6dea2ecc2d4d921b61b4",
+    "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\Planet\\TerrainMesh\\FinalizeModifiers.comp": "8ab510ac2547520bdc6284244fe46d583891afa8470f0b3a03694907047c89c6",
+    "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\Planet\\PlanetTessEvaluation.tese": "80c3168561c468d3b255d635b31c1e0163ed8331c21e1340b8d490525bc93b27",
+    "E:\\Kitten Space Agency\\KSA.dll": "a8a5164204eed962df9d9025e99f523d9a23ee2ce6e802b18216a9da35506d2f",
+    "E:\\Kitten Space Agency\\Planet.Core.dll": "2823b299051b91252453acb4f1fff5543b1f5473bc6f42c8d51d4958d3159ece",
+    "E:\\Kitten Space Agency\\Planet.Render.Core.dll": "6b9b3c3bd709bf198c6ab3ec6daaef7e468f593fb110187869a1d44272b92e3c",
+    "E:\\NovaCore\\build\\ksa-residency-reference\\source\\KSA.PlanetRenderer.cs": "5ce37c334045f9b5cba9a450a6accc454444e8d20327b9778b98740cf7a64a50",
+    "E:\\NovaCore\\build\\ksa-residency-reference\\assembly-source\\KSA\\CubeMesh.cs": "d872a66602894ad826800059924b96873e2ba0c1e291576668c91ff956a019cd"
+  },
+  "priorEvidenceFiles": {
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\__pycache__\\summarize.cpython-311.pyc": "c034230e167ca382bb0a18e393d791fb11ee0e0ecf17857428dfdf6a84cec5a6",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\attachment_compare.comp": "7f90b2706b522b425fe082a5b04502d0bc150ec2e65ceb3deb96b7756c3ca077",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\baseline.json": "c18c691e0b577f5977f678ba98d48628013ec2dd6b60254a5c039922ee3b2656",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\bound-proof.md": "bab9d515bffe932437ac1a2234458a7811ec48c0d67ffd3e6170d79c4aebc64e",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\clean-runtime.json": "711176feb78c1a3f3060f7130134c08cac3605222b5e279b9b3b93f65ff4cf31",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\clean_baseline.py": "cc5693c65d47564533a7c11ca7a779867c80eef9d40e881b56595ce0eab75fa8",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\cleanup_inventory.py": "7d4366e99a27a60e3eb1992fe5478eefb1bab061f8e137e4a25a2468157b23dc",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\closeout.json": "a1a6348b3a771c063fe57909648233aae04deaf2f6869dd1f19b2a3f2baca718",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\comparator-selftest.json": "599830004afc0bd011929dbdc315ff73d00cc9c1d9fda8fa7fdc9f76c1aec66e",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\conservative_bound.glsl": "90c34f861c4e7540e72e967ec46ec2e6839cd3e390da3adc37538eb9827d3c10",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\diagnostic-source-identity.json": "9620031e44d8862f841b92741ad632d2209624f9a7aa1bf735735803053f7c9c",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\driver-teardown-evidence.txt": "a9817e4652bb74488b025db6e1c100306acc539080e06af48fb6c0f5de3ad59f",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\driver-teardown-identity.json": "6e68bb5005c84b927fcfd794dc0dcc6f062d7dfd00d9e1bcedee0020efbe9bd6",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\dump_inspect.cpp": "0d3bf28bbe63a454b0a1ade5278a8b95de7aa068b92bdd5f383a1df14d934b0e",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\envelope.py": "6d7442a3161f61ccd8336243ef553e646c5a27e4e51b72f7df07b2e970262674",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\exact_capture.py": "d74db50170cb9358f3222710fbfc2a653019f22d797cc968223b91cfffdfa72d",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\exploratory-cone.glsl": "7326db5d2f96b5840ea761cdb44e9bc2b0e534d5045d19d4fe1fedade6f8116b",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\final-identity.json": "1e96f3f6972eac17650a517fb0529f3a0866c809582663ef059a0ad7de8c8900",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\final-validation.json": "0f404465f758494a91e32042bb40f0ecfd68772b2e5eb1d866fb6e1d1c9115b7",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\frame-traces.json.gz": "938d18f24a5159efdf03a929d65a3dda1c5c90e5d335f009b93c24984240ef25",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\instrumentation.patch": "d53fc9d6539f12ac2df1a57028ef576066d6ed3e897b38e432197c37409fd761",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\interrupted-runtime.json": "18cfb624d857ba375ddc23ea555aca4a08c9a37e4d38cf259dd250b9e42bd2d2",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\interrupted-runtime.zip": "bfd63a6b864f15ca766f239cff5b01f83c0456c01f942329d1ed3af1267e020d",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\ksa-reference.json": "a56d5a1d3309d03b5e1c69bb4e08b96db5cf4632b2f21f92d8717b5c56d82999",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\manual-cleanup.md": "39adc5c51e9b5ccad0fe692657d6078baaa583c2b75692e043ec5b9fb196184b",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\measurements.json.gz": "a48b23f97ecf84314deafcd257a04348946b075db9d06c4ee6bc8c0e6753fe54",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\physical-count-identity.json": "ca366c34d0c012c4cac1ca97460578ec9afa5345b8995727d44c680ed6f70039",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\physical-selftest.json": "4f466c5602eb89ae73f50de663e1c23bee35d25f6dde42a0474a43a6014d982d",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\physical_compare.glsl": "fc909a4196bef8a96081afacc7d17ec1d433d89b240b61828300a1c39b65793d",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\physical_shader.py": "cac12506365b54934ecf4b826b0f71fd3e96a46f793cf553c8ff9c6b1e5e929c",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\physical_table.comp": "3bb8b44d2594f2f9524a63ae0254d442006704fa5f3c9dbeaaf840949452e451",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\post-recovery-events.json": "4b242283e1e032298782712a194a80aa2e071e1fcde4aa54741144d7f37f37b5",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\probe_shader.py": "5b063b8eda296b679a63623b4621fffb50fdc9efb586b2aaac3f3179e72bdd42",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\proof-source-identity.json": "c6d821caeb7fec68125496edb05bc8a06f087c47581530eba310a02a41a821f7",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\README.md": "e81b69a697defe93964cf044241b12d7e5966ce4f92b641f773e0ac872edb166",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\recovery-checkpoint.json": "cee627b2edb2465a834c567575fa6c925ab47cb7de697f9b53ba36e8903f84dc",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\recovery-instrumentation.patch": "7e8c9b7f4a8acae765d63f232b6c4a2731db3e1a4f7f6a63c3c2f2210dda37f0",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\recovery-runtime-identity.json": "7c46436286104c6d279e3c6ed81bc87b50dbc1628b029892154856646a98b11a",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\regional-range-proof.json": "c2e66d30fb35fabf4fd0ee23f3e1c2e12ee77f5e9f979f4c758ae6a98058ec01",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\report.py": "f2db0722d8885e9d4d2956e5263dabfbacd436e8e498c79b9fc9220d47a98b66",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\restart-events.json": "027816633cd27b8e0b1072f3a1a7c72566022be9daf4c5d5737ecb449021d7b2",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\restored-factor1.json": "a93d53430a2df317109b4cc3275ad46e691507c2d766599c1096863ab1b9af4b",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\results.json": "13d0f5ad7c3f1154d2bd240e5c5beaf65860d30724ad76378231445d721c9563",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\run.py": "80319740fc2eef99d3de7de5887b57584124dd73beaa6254ec6817164b5c7bac",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\scratch-retirement-manifest.json": "2083faea7c4954cc0cf6cad3890d10f0d73dd1d3885601373a05f9fc3b16f78e",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\storage.json": "ec796ea423da35b8c170383f70caf155ceee2914fa52b4054619bf0364476ff0",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\summarize.py": "7f1c0d4c6f3f50e969d147e5d004f54d1ea0d57637911090efc0a681651eb51d",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\validate.py": "18ddfb8bc5cfa127164d155ace5314bfeb37915a9c5500c70444a15e049967c3",
+    "docs\\engineering-evidence\\conservative-pre-refinement-visibility\\warp-summary.json": "372a1e0bf1fe2389fe010628095ee8b16d10b37638effb703ca048ed24b18ed3",
+    "docs\\engineering-evidence\\ksa-terrain-architecture\\closeout.json": "117c81e0f41ef03a260904849a8a76faff400164686d44202a93e768e9fa7797",
+    "docs\\engineering-evidence\\ksa-terrain-architecture\\history.md": "037fc47e692e56dd2a2c6b8c8045c9607487e7f7ae93cff3b59a4964740ca3ab",
+    "docs\\engineering-evidence\\ksa-terrain-architecture\\measured-context.json": "24a01063b818a372e34b7890daf85ba2bf669dc686f1f65fe0fd3a95a5701b00",
+    "docs\\engineering-evidence\\ksa-terrain-architecture\\pipeline-maps.md": "4efc02af3e680a17bb26d1655d9af378f4ec54aa50f0a851dbbfb5f2fee115e0",
+    "docs\\engineering-evidence\\ksa-terrain-architecture\\README.md": "b631195ff0804e11f3fc09db3a7945b43659364566d3bec11821ea6059cb393d",
+    "docs\\engineering-evidence\\ksa-terrain-architecture\\source-files.json": "e2db61b893c8c649cdf2bdebe42ab80859d0e8e7a338ea9293b005f01b8e1aac",
+    "docs\\engineering-evidence\\ksa-terrain-architecture\\verification.json": "8d90ba7a268b20a29e520716dbae86fbf3e9107a7b0c85459e3864c677a8f468",
+    "docs\\engineering-evidence\\ksa-terrain-architecture\\verify.py": "297a770c6b0488acd8b58372d0f07fda6ba5c4c3ba68790d30cbd7fb5a0b7f81",
+    "docs\\engineering-evidence\\local-physical-domain-proof\\closeout.json": "8b1c30199d401470a9498ecd86c61d3999464be3e2550e98b649698e222897d1",
+    "docs\\engineering-evidence\\local-physical-domain-proof\\CoordinateProof.cs": "2f7471351eaf54e68faa05fded41416a51230fa90e7d33279cf85aa730874126",
+    "docs\\engineering-evidence\\local-physical-domain-proof\\CoordinateProof.csproj": "e48d350648f197a4efadc481cacc592c90fafcea54c7406445b426d8cd782584",
+    "docs\\engineering-evidence\\local-physical-domain-proof\\manual-cleanup.md": "1d264e476cf6c1026d9e43cc29a4bc89ef286a74ffbfaa88c6cd4567353cd1af",
+    "docs\\engineering-evidence\\local-physical-domain-proof\\numerical-results.json": "0812d27857366b28999c5f7e3dda7a578a35ff336bc41a0824a2536fe105b6d7",
+    "docs\\engineering-evidence\\local-physical-domain-proof\\README.md": "4d2b4953f5a2b38323b1f1773dae26a01e66d7983dadb183732636e9481258ce",
+    "docs\\engineering-evidence\\local-physical-domain-proof\\run.py": "1dca3da94852c2a23fb1d1688a4e2bf51a867a08ca5583cc44d4926eb054bd02",
+    "docs\\engineering-evidence\\local-physical-domain-proof\\scratch-manifest.json": "6f7b9c21218cfc067bf7e938401464bed05759aa83cb47a7685269c8b7bcc016",
+    "docs\\engineering-evidence\\local-physical-domain-proof\\verification.json": "c9ea9dfe6e9d7defa5090b5afbb6fda63ba12af33de7b42c07de227300c77cc2",
+    "docs\\engineering-evidence\\post-m13.2-next-target\\baseline.json": "94ff6d3a56ce25cdd1cf7998188ed04be6f0c9eac8a35c3c03ac8fe421819fed",
+    "docs\\engineering-evidence\\post-m13.2-next-target\\capture.py": "6f80d06446206e1667c8fa03fdd4c2c84624b3dac1f22f974d7eee72cc95f729",
+    "docs\\engineering-evidence\\post-m13.2-next-target\\clean-runtime.json": "2ffac0c54e5b85f9cd5f3ecc17acd2093d84207a0993a99c194fcafa30d6b878",
+    "docs\\engineering-evidence\\post-m13.2-next-target\\clean_baseline.py": "c78c7251376ec65664ac45915957e981f6295a7c0ee226b2584948abd87186f3",
+    "docs\\engineering-evidence\\post-m13.2-next-target\\closeout.json": "ef1c82ec77a85f6df56003fc98d17db39dfbab70717f99fcad9ccdc5b2d343f3",
+    "docs\\engineering-evidence\\post-m13.2-next-target\\compiler.json": "80af2c330d40f405b0dfeb04d0fcf86b013736387627db48338f73cdfa851afb",
+    "docs\\engineering-evidence\\post-m13.2-next-target\\consolidate.py": "b243c9403f1b71811f3ae60ac577ebc1bb30fc237257b610bfe9e16f40977974",
+    "docs\\engineering-evidence\\post-m13.2-next-target\\diagnostic-limitations.json": "ed7e642708a102a59fc865bcb7e9cb290538695712d634165cdf324c582f27a4",
+    "docs\\engineering-evidence\\post-m13.2-next-target\\final-identity.json": "9e5d6bced16a19d1e7ad715db6ed1afc0196a5032bd0e2a61fa87bc8abcb16b0",
+    "docs\\engineering-evidence\\post-m13.2-next-target\\final-validation.json": "b0d210347c817a042c5059edcff9d076dddafbe31b31863c67d123c84e8826a7",
+    "docs\\engineering-evidence\\post-m13.2-next-target\\initial-projection-control.json": "6a88beec563b1ef91b42fd18f6becab11aa12114f15eda79d395a318e995969b",
+    "docs\\engineering-evidence\\post-m13.2-next-target\\instrumentation.patch": "6ea6b9f0b3a6d966c9733ce1d28bb7384609cdc090dbb635c88556b8efb0e923",
+    "docs\\engineering-evidence\\post-m13.2-next-target\\ksa-comparison.md": "94bea1181cfa497436d1b4a7342e7e50cb666bf2e30d532855203b208b505978",
+    "docs\\engineering-evidence\\post-m13.2-next-target\\README.md": "90f128546c97e2ca62dd9c1f0d1162e997ade68dac4c5e283901b624b2375058",
+    "docs\\engineering-evidence\\post-m13.2-next-target\\restored-factor1.json": "b9eefa4add43384002cbb6d6b95896b3fe2d997eb858372077058ed7f7301795",
+    "docs\\engineering-evidence\\post-m13.2-next-target\\results.json": "a23f3a32faa4a6e7d48700fc9122503d892d9f4ab6a569a9ce999829d8554f32",
+    "docs\\engineering-evidence\\post-m13.2-next-target\\run.py": "58a8f11684e5bd07d8b494ab15f9b7392219a7caddf9f7cee04c5b1ac98cbfae",
+    "docs\\engineering-evidence\\post-m13.2-next-target\\scratch-retirement-manifest.json": "fb14618a029465a8a9e3ec074348e520d4fae3a869c8eb99830380cae02d322b",
+    "docs\\engineering-evidence\\post-m13.2-next-target\\source-identities.json": "7dc65e2511d9e2689ea63aa631d3869e1f9d6e74f5b9c4bc9d216ca8b890da29",
+    "docs\\engineering-evidence\\post-m13.2-next-target\\validate.py": "bbbf1e648e6521e8ae1c50373cb590a8d91434f5adc8dd24b5c2871d399ac34a"
+  },
+  "previousScratch": {
+    "count": 33,
+    "bytes": 1436946,
+    "files": [
+      {
+        "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\bin\\CoordinateProof.deps.json",
+        "bytes": 1546,
+        "sha256": "b7e96b592b99af49c90caa98f54546567e81015ae2c28183a89cb18cb2208557"
+      },
+      {
+        "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\bin\\CoordinateProof.dll",
+        "bytes": 37888,
+        "sha256": "2ed82e32128cce07b1278a63912d6ab17343fb28cdfdbc16ea606f9fbddf0956"
+      },
+      {
+        "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\bin\\CoordinateProof.exe",
+        "bytes": 162304,
+        "sha256": "81a72e2470b816590a7e3b009d5a572e6ba26492de6b77e6721456013604514c"
+      },
+      {
+        "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\bin\\CoordinateProof.pdb",
+        "bytes": 15564,
+        "sha256": "433f3409f0c0f9b2a1a0ffb2a458a96f67e39683e257f1cc3fb8c171e8bd7449"
+      },
+      {
+        "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\bin\\CoordinateProof.runtimeconfig.json",
+        "bytes": 342,
+        "sha256": "c230a317a54dd960bcbeb5f347f52e18dc665a26f7efda2159fced9a5ac7e097"
+      },
+      {
+        "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\bin\\NovaCore.Core.dll",
+        "bytes": 86528,
+        "sha256": "19e8bdbb02ee2608833b97fd4e1697ad7ca7783931ed6bf6359392fcd48ad8da"
+      },
+      {
+        "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\bin\\NovaCore.Core.pdb",
+        "bytes": 31136,
+        "sha256": "c375282a662ef41e6519e8cb77b09deb8a5f50bca36e5f4f498f8b672893053d"
+      },
+      {
+        "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\bin\\NovaCore.Graphics.dll",
+        "bytes": 634880,
+        "sha256": "78dd856286036d69a1aca71536f1bdd285b481fef1727838b9d3b9016c34a95d"
+      },
+      {
+        "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\bin\\NovaCore.Graphics.pdb",
+        "bytes": 143408,
+        "sha256": "1525fca65c581462b8f6c27243e0ac90cf40d2c1cadec544221d4f5eb1c9327e"
+      },
+      {
+        "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\bin\\NovaCore.Interop.dll",
+        "bytes": 23040,
+        "sha256": "cabcaa39c3a3dbfd36b00e1a4fbd8e04e40c3c16bbc43addf540440e4c40e3ac"
+      },
+      {
+        "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\bin\\NovaCore.Interop.pdb",
+        "bytes": 14060,
+        "sha256": "a536e5eefbbfb87f8d569e7aa4a9b8befeb8dd19eeae27152df36e7d32468b03"
+      },
+      {
+        "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\CoordinateProof.csproj.nuget.dgspec.json",
+        "bytes": 21612,
+        "sha256": "7a853f9c092797e55f834a2dd6cae601ad8196c3d585328eea6b24699b53c3dc"
+      },
+      {
+        "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\CoordinateProof.csproj.nuget.g.props",
+        "bytes": 1135,
+        "sha256": "1e51d59a0a61bbe5b26b92eb01307b6f7909cd9d6f3577f96af5da8201057d69"
+      },
+      {
+        "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\CoordinateProof.csproj.nuget.g.targets",
+        "bytes": 150,
+        "sha256": "971cc9b535384849b5c661d776cd7a80833a416265e32e8968e06c367368b8b5"
+      },
+      {
+        "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\project.assets.json",
+        "bytes": 20905,
+        "sha256": "a1f99ab008f08594356fbdd4e78850f3bc1ee4dab5392b5ddd231c1d68b66adb"
+      },
+      {
+        "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\project.nuget.cache",
+        "bytes": 238,
+        "sha256": "fe9d0dc8e09f565f785b3f0041ca2ddc5b6cda06c41656dcd75d94b8ec7de4c1"
+      },
+      {
+        "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\Release\\net10.0\\.NETCoreApp,Version=v10.0.AssemblyAttributes.cs",
+        "bytes": 200,
+        "sha256": "93d67476196ebfc80d1d7d8844b91146cfd678d105f5ce635eb900ca40610c9b"
+      },
+      {
+        "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\Release\\net10.0\\apphost.exe",
+        "bytes": 162304,
+        "sha256": "81a72e2470b816590a7e3b009d5a572e6ba26492de6b77e6721456013604514c"
+      },
+      {
+        "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\Release\\net10.0\\Coordina.ABFEC4C8.Up2Date",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\Release\\net10.0\\CoordinateProof.AssemblyInfo.cs",
+        "bytes": 1021,
+        "sha256": "fdc7f4390d45f2f379af171620a6a18d44e7c7200fdc5fcd9d1c65e000363d51"
+      },
+      {
+        "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\Release\\net10.0\\CoordinateProof.AssemblyInfoInputs.cache",
+        "bytes": 66,
+        "sha256": "96ec2dfacb18fdf6f48f70fa5c989fe8107382eeb91571ad89b6c55b8441087c"
+      },
+      {
+        "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\Release\\net10.0\\CoordinateProof.assets.cache",
+        "bytes": 152,
+        "sha256": "33144b0791de20c2e427e6b08d892e7fd3a81d88e4ee7127c72aa91ca37ac917"
+      },
+      {
+        "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\Release\\net10.0\\CoordinateProof.csproj.AssemblyReference.cache",
+        "bytes": 2597,
+        "sha256": "8df2e9d382e4b0a9292d11fae7e27a25f097a8b679439fcd7fa9508bb1ec5216"
+      },
+      {
+        "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\Release\\net10.0\\CoordinateProof.csproj.CoreCompileInputs.cache",
+        "bytes": 66,
+        "sha256": "6b5dc8d10ee99be6b7bdf800fc64507eeb07f78b20d1c36892ed2b12cd5adb41"
+      },
+      {
+        "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\Release\\net10.0\\CoordinateProof.csproj.FileListAbsolute.txt",
+        "bytes": 1593,
+        "sha256": "5127d3bf4a14217f2e433ba0ceb9465aa3aeb846c8ef25cb8f54558131cf9f82"
+      },
+      {
+        "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\Release\\net10.0\\CoordinateProof.dll",
+        "bytes": 37888,
+        "sha256": "2ed82e32128cce07b1278a63912d6ab17343fb28cdfdbc16ea606f9fbddf0956"
+      },
+      {
+        "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\Release\\net10.0\\CoordinateProof.GeneratedMSBuildEditorConfig.editorconfig",
+        "bytes": 855,
+        "sha256": "cc063a79d747f70ee58f32a0f08c05a0075ef9456b0a72cde57f55f1596747d5"
+      },
+      {
+        "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\Release\\net10.0\\CoordinateProof.genruntimeconfig.cache",
+        "bytes": 66,
+        "sha256": "f86c8a877b0a606ac12f2f3388a5243dff2f4aeefd7d44a4c1be386ae8f6cc49"
+      },
+      {
+        "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\Release\\net10.0\\CoordinateProof.GlobalUsings.g.cs",
+        "bytes": 239,
+        "sha256": "a3c6048bb4d922b1799a9977f84362a3787b68810cac67aa86ac3aa23295f227"
+      },
+      {
+        "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\Release\\net10.0\\CoordinateProof.pdb",
+        "bytes": 15564,
+        "sha256": "433f3409f0c0f9b2a1a0ffb2a458a96f67e39683e257f1cc3fb8c171e8bd7449"
+      },
+      {
+        "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\Release\\net10.0\\CoordinateProof.sourcelink.json",
+        "bytes": 143,
+        "sha256": "293b14151d144d6b6498ae3627388a232f02736c73afce4aa3dcbacab6516e63"
+      },
+      {
+        "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\Release\\net10.0\\ref\\CoordinateProof.dll",
+        "bytes": 9728,
+        "sha256": "bfb88c6e84bc22a5b73fa3028209aeb2094eb1f7de022046b4318f7af4c57596"
+      },
+      {
+        "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\Release\\net10.0\\refint\\CoordinateProof.dll",
+        "bytes": 9728,
+        "sha256": "bfb88c6e84bc22a5b73fa3028209aeb2094eb1f7de022046b4318f7af4c57596"
+      }
+    ]
+  },
+  "gpuWork": "NOT RUN: CPU/cost gate did not authorize GPU prototype"
+}

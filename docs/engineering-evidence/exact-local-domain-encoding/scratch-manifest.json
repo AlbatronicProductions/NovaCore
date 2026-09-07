@@ -1,0 +1,182 @@
+{
+  "root": "E:\\NovaCore\\build\\exact-local-domain-encoding",
+  "files": [
+    {
+      "path": "E:\\NovaCore\\build\\exact-local-domain-encoding\\bin\\EncodingProof.deps.json",
+      "bytes": 1540,
+      "sha256": "b4a7730e1fbc0f254b9e689275e5551a9df79efdf0153829026423a5067afb27"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\exact-local-domain-encoding\\bin\\EncodingProof.dll",
+      "bytes": 46080,
+      "sha256": "369e10099b088b998045a079c0a8e5d8aec69a15a71a1d1247fc2c89334db121"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\exact-local-domain-encoding\\bin\\EncodingProof.exe",
+      "bytes": 162304,
+      "sha256": "30c9b8e41d49997443a908ece1c340c889992d2496eb2459e0751ba05114675e"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\exact-local-domain-encoding\\bin\\EncodingProof.pdb",
+      "bytes": 17396,
+      "sha256": "3d3db560781ae6a7dd6d58ab413e5e0a357725e8029e00819942ec5bcf2b9586"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\exact-local-domain-encoding\\bin\\EncodingProof.runtimeconfig.json",
+      "bytes": 342,
+      "sha256": "c230a317a54dd960bcbeb5f347f52e18dc665a26f7efda2159fced9a5ac7e097"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\exact-local-domain-encoding\\bin\\NovaCore.Core.dll",
+      "bytes": 86528,
+      "sha256": "19e8bdbb02ee2608833b97fd4e1697ad7ca7783931ed6bf6359392fcd48ad8da"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\exact-local-domain-encoding\\bin\\NovaCore.Core.pdb",
+      "bytes": 31136,
+      "sha256": "c375282a662ef41e6519e8cb77b09deb8a5f50bca36e5f4f498f8b672893053d"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\exact-local-domain-encoding\\bin\\NovaCore.Graphics.dll",
+      "bytes": 634880,
+      "sha256": "78dd856286036d69a1aca71536f1bdd285b481fef1727838b9d3b9016c34a95d"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\exact-local-domain-encoding\\bin\\NovaCore.Graphics.pdb",
+      "bytes": 143408,
+      "sha256": "1525fca65c581462b8f6c27243e0ac90cf40d2c1cadec544221d4f5eb1c9327e"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\exact-local-domain-encoding\\bin\\NovaCore.Interop.dll",
+      "bytes": 23040,
+      "sha256": "cabcaa39c3a3dbfd36b00e1a4fbd8e04e40c3c16bbc43addf540440e4c40e3ac"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\exact-local-domain-encoding\\bin\\NovaCore.Interop.pdb",
+      "bytes": 14060,
+      "sha256": "a536e5eefbbfb87f8d569e7aa4a9b8befeb8dd19eeae27152df36e7d32468b03"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\exact-local-domain-encoding\\build.log",
+      "bytes": 82,
+      "sha256": "da2f54ebc37ed1e4de3690ec1f4df2b0637402f3b34b4456d39b5ca0bca4ae64"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\exact-local-domain-encoding\\obj\\EncodingProof.csproj.nuget.dgspec.json",
+      "bytes": 21602,
+      "sha256": "741b5c66df850171bfcfc4effe41abeb29bace77d78415dd6a3bd24b558cafcd"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\exact-local-domain-encoding\\obj\\EncodingProof.csproj.nuget.g.props",
+      "bytes": 1135,
+      "sha256": "1e51d59a0a61bbe5b26b92eb01307b6f7909cd9d6f3577f96af5da8201057d69"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\exact-local-domain-encoding\\obj\\EncodingProof.csproj.nuget.g.targets",
+      "bytes": 150,
+      "sha256": "971cc9b535384849b5c661d776cd7a80833a416265e32e8968e06c367368b8b5"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\exact-local-domain-encoding\\obj\\project.assets.json",
+      "bytes": 20899,
+      "sha256": "1924e2e60be2b1882f4e10ed126e1dc3cce916ad84dce31ce91d7f76959097ae"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\exact-local-domain-encoding\\obj\\project.nuget.cache",
+      "bytes": 236,
+      "sha256": "53736f501e9ef89e6d38b088da74a7a536f4a2836c19cb20723a398643263ee8"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\exact-local-domain-encoding\\obj\\Release\\net10.0\\.NETCoreApp,Version=v10.0.AssemblyAttributes.cs",
+      "bytes": 200,
+      "sha256": "93d67476196ebfc80d1d7d8844b91146cfd678d105f5ce635eb900ca40610c9b"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\exact-local-domain-encoding\\obj\\Release\\net10.0\\apphost.exe",
+      "bytes": 162304,
+      "sha256": "30c9b8e41d49997443a908ece1c340c889992d2496eb2459e0751ba05114675e"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\exact-local-domain-encoding\\obj\\Release\\net10.0\\Encoding.E3186D18.Up2Date",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\exact-local-domain-encoding\\obj\\Release\\net10.0\\EncodingProof.AssemblyInfo.cs",
+      "bytes": 1015,
+      "sha256": "bfdd4a89943be643990e0db426fc10073f81b514e9886abbdf55638a795a1253"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\exact-local-domain-encoding\\obj\\Release\\net10.0\\EncodingProof.AssemblyInfoInputs.cache",
+      "bytes": 66,
+      "sha256": "5da557bfe026d99c6acfb235e2659d8b26f9f7aa395edbe4b84b0c44c7bdaab4"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\exact-local-domain-encoding\\obj\\Release\\net10.0\\EncodingProof.assets.cache",
+      "bytes": 152,
+      "sha256": "c02d16eedd7427ce5ae9ed0235ec87d65b483502bce2b80e0db8160129282d51"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\exact-local-domain-encoding\\obj\\Release\\net10.0\\EncodingProof.csproj.AssemblyReference.cache",
+      "bytes": 2597,
+      "sha256": "8df2e9d382e4b0a9292d11fae7e27a25f097a8b679439fcd7fa9508bb1ec5216"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\exact-local-domain-encoding\\obj\\Release\\net10.0\\EncodingProof.csproj.CoreCompileInputs.cache",
+      "bytes": 66,
+      "sha256": "e93bb002321bb543989721ad8a5c62642945f6c35472e5c2b7a3ecdd990aefa8"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\exact-local-domain-encoding\\obj\\Release\\net10.0\\EncodingProof.csproj.FileListAbsolute.txt",
+      "bytes": 1561,
+      "sha256": "b82a1ff45909400b448ad085481c151ef2a70f0d5df3093168fe53534eabf00f"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\exact-local-domain-encoding\\obj\\Release\\net10.0\\EncodingProof.dll",
+      "bytes": 46080,
+      "sha256": "369e10099b088b998045a079c0a8e5d8aec69a15a71a1d1247fc2c89334db121"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\exact-local-domain-encoding\\obj\\Release\\net10.0\\EncodingProof.GeneratedMSBuildEditorConfig.editorconfig",
+      "bytes": 853,
+      "sha256": "2aef9904463fc3434ccc3d13975e2c39c68a0590fd6a064f5f46f4d4e95d2d16"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\exact-local-domain-encoding\\obj\\Release\\net10.0\\EncodingProof.genruntimeconfig.cache",
+      "bytes": 66,
+      "sha256": "a97948699655ef5ea2c40538321ee7f6807392031723d4dc6db9beee72ecc53e"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\exact-local-domain-encoding\\obj\\Release\\net10.0\\EncodingProof.GlobalUsings.g.cs",
+      "bytes": 239,
+      "sha256": "a3c6048bb4d922b1799a9977f84362a3787b68810cac67aa86ac3aa23295f227"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\exact-local-domain-encoding\\obj\\Release\\net10.0\\EncodingProof.pdb",
+      "bytes": 17396,
+      "sha256": "3d3db560781ae6a7dd6d58ab413e5e0a357725e8029e00819942ec5bcf2b9586"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\exact-local-domain-encoding\\obj\\Release\\net10.0\\EncodingProof.sourcelink.json",
+      "bytes": 143,
+      "sha256": "293b14151d144d6b6498ae3627388a232f02736c73afce4aa3dcbacab6516e63"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\exact-local-domain-encoding\\obj\\Release\\net10.0\\ref\\EncodingProof.dll",
+      "bytes": 11264,
+      "sha256": "b55d6fb0367cbf8bcc76e73cb4bce7d53264f351988dcc551ca21ac64cf1b763"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\exact-local-domain-encoding\\obj\\Release\\net10.0\\refint\\EncodingProof.dll",
+      "bytes": 11264,
+      "sha256": "b55d6fb0367cbf8bcc76e73cb4bce7d53264f351988dcc551ca21ac64cf1b763"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\exact-local-domain-encoding\\run1.json",
+      "bytes": 29309,
+      "sha256": "5b16e1343ae027b1adf38dc08973b3f31e640a368e2e02fdadd92fdc0a11f0c6"
+    }
+  ],
+  "count": 35,
+  "bytes": 1489393
+}

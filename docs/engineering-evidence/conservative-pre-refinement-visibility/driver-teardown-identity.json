@@ -1,0 +1,6 @@
+{
+  "path": "C:\\Users\\Tyler\\AppData\\Local\\CrashDumps\\NovaCore.Triangle.exe.37048.dmp",
+  "bytes": 7426405,
+  "sha256": "c2431d81532e796d6d5a14baec67f86cf7fbda9646ce82e49092fe477454bbd1",
+  "classification": "Measured DXCore access into unloaded D3D12Core during Vulkan driver unload; diagnostic process lifetime mitigation only; separate from unclassified host watchdog event"
+}

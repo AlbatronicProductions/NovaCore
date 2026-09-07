@@ -1,0 +1,13 @@
+{
+  "records": 859,
+  "rangeMinimum": -128.0,
+  "rangeMaximum": 127.99609375,
+  "packSha256": "c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe",
+  "perRecordRangeVariants": [
+    [
+      -128.0,
+      127.99609375
+    ]
+  ],
+  "parser": "NCCUBE2/3 interleaved header then channel payloads; all 859 header offsets checked; exact EOF"
+}

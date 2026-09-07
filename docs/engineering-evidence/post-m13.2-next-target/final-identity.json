@@ -1,0 +1,23 @@
+{
+  "Debug": {
+    "runtime": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Debug\\net10.0",
+    "native": "88b761d0a53b4d8681cab7fbd8cf1923befdd17e4ab2ada8464ed69c21c1591d",
+    "managed": "f6fef85ab5a80d57c1c10b69d3a1ce0a262ff8201e0ff7892e337608d8067b4c",
+    "shaderCount": 49,
+    "shadersEqualBanked": true,
+    "spirvValidation": "PASS",
+    "nativeMatchesBuild": true,
+    "nativeMatchesStartingBanked": true
+  },
+  "Release": {
+    "runtime": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0",
+    "native": "a004ef72d6b0771c6392ab826d0e0f90e7724175525653dd907773e56e0db139",
+    "managed": "92eefa86a87b1988161c082a929ca75263cbdc072abef42f3bab550dc916ad0a",
+    "shaderCount": 49,
+    "shadersEqualBanked": true,
+    "spirvValidation": "PASS",
+    "nativeMatchesBuild": true,
+    "nativeMatchesStartingBanked": false
+  },
+  "launcher": "E:\\NovaCore\\tools\\NovaCore.Launcher\\bin\\Release\\net10.0-windows\\NovaCore.Launcher.exe"
+}

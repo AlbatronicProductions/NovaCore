@@ -1,0 +1,3403 @@
+{
+  "kind": "CPU representation and production CPU H evaluation; no GPU or raster inference",
+  "cases": 3180,
+  "groups": {
+    "explicit-cross-face-edge-corner": 144,
+    "L0": 120,
+    "L1": 120,
+    "L2": 120,
+    "L3": 120,
+    "L4": 120,
+    "L5": 120,
+    "L6": 120,
+    "L7": 120,
+    "L8": 120,
+    "L9": 120,
+    "L10": 120,
+    "L11": 120,
+    "L12": 120,
+    "L13": 120,
+    "L14": 120,
+    "L15": 120,
+    "L16": 120,
+    "L17": 120,
+    "facility-support-boundary": 140,
+    "regional-boundary": 12,
+    "Florida-regional-sector-boundary-L8": 12,
+    "Florida-regional-sector-boundary-L9": 12,
+    "Florida-regional-sector-boundary-L10": 12,
+    "Florida-regional-sector-boundary-L11": 12,
+    "reachable-near-axis-camera": 512,
+    "camera-distance-10": 24,
+    "camera-distance-40": 24,
+    "camera-distance-49.999": 24,
+    "camera-distance-50": 24,
+    "camera-distance-1000": 24,
+    "camera-distance-700000": 24,
+    "near-zero-axis": 20
+  },
+  "globalLoaded": true,
+  "regionalLoaded": true,
+  "localPath": "E:\\NovaCore\\.novacore\\cache\\terrain\\v1\\sha256\\c4\\c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe.nccube",
+  "localSha256": "c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe",
+  "globalSha256": "4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317",
+  "facilityIdentity": 5597594574148789740,
+  "results": {
+    "global-fp64-control": {
+      "Attempts": 8884,
+      "Samples": 8884,
+      "RangeRejects": 0,
+      "Collisions": 0,
+      "CollisionsChangingInput": 0,
+      "CollisionsChangingHeight": 0,
+      "AnchorMismatches": 0,
+      "StreamSha256": "2860b9d00a126b199785b6905fadec3b84165e8f5ef28028360dede2e90a8aee",
+      "CollisionWitness": null,
+      "MismatchWitness": null,
+      "CollisionWitnessHeightEqual": false,
+      "WitnessHeightDelta": 0,
+      "MaximumHeightWitness": null,
+      "ReachableNearCollisionWitness": null,
+      "Metrics": {
+        "point": {
+          "Mismatch": 0,
+          "Rms": 0,
+          "N": 8884,
+          "Exact": 8884,
+          "Max": 0
+        },
+        "direction": {
+          "Mismatch": 0,
+          "Rms": 0,
+          "N": 8884,
+          "Exact": 8884,
+          "Max": 0
+        },
+        "input": {
+          "Mismatch": 0,
+          "Rms": 0,
+          "N": 8884,
+          "Exact": 8884,
+          "Max": 0
+        },
+        "final": {
+          "Mismatch": 0,
+          "Rms": 0,
+          "N": 8884,
+          "Exact": 8884,
+          "Max": 0
+        },
+        "normal": {
+          "Mismatch": 0,
+          "Rms": 0,
+          "N": 8884,
+          "Exact": 8884,
+          "Max": 0
+        },
+        "height": {
+          "Mismatch": 0,
+          "Rms": 0,
+          "N": 8884,
+          "Exact": 8884,
+          "Max": 0
+        },
+        "near": {
+          "Mismatch": 0,
+          "Rms": 0,
+          "N": 8884,
+          "Exact": 8884,
+          "Max": 0
+        },
+        "support": {
+          "Mismatch": 0,
+          "Rms": 0,
+          "N": 8884,
+          "Exact": 8884,
+          "Max": 0
+        },
+        "global": {
+          "Mismatch": 0,
+          "Rms": 0,
+          "N": 8884,
+          "Exact": 8884,
+          "Max": 0
+        },
+        "regional": {
+          "Mismatch": 0,
+          "Rms": 0,
+          "N": 8884,
+          "Exact": 8884,
+          "Max": 0
+        },
+        "angular": {
+          "Mismatch": 0,
+          "Rms": 0,
+          "N": 8884,
+          "Exact": 8884,
+          "Max": 0
+        }
+      },
+      "Subsets": {
+        "explicit-cross-face-edge-corner": {
+          "Samples": 432,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L0": {
+          "Samples": 360,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L1": {
+          "Samples": 360,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L2": {
+          "Samples": 360,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L3": {
+          "Samples": 360,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L4": {
+          "Samples": 360,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L5": {
+          "Samples": 360,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L6": {
+          "Samples": 360,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L7": {
+          "Samples": 360,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L8": {
+          "Samples": 360,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L9": {
+          "Samples": 360,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L10": {
+          "Samples": 360,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L11": {
+          "Samples": 360,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L12": {
+          "Samples": 360,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L13": {
+          "Samples": 360,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L14": {
+          "Samples": 360,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L15": {
+          "Samples": 360,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L16": {
+          "Samples": 360,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L17": {
+          "Samples": 360,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "facility-support-boundary": {
+          "Samples": 420,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 420,
+          "SupportNonzero": 294,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "regional-boundary": {
+          "Samples": 36,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "Florida-regional-sector-boundary-L8": {
+          "Samples": 36,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "Florida-regional-sector-boundary-L9": {
+          "Samples": 36,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 36,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "Florida-regional-sector-boundary-L10": {
+          "Samples": 36,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 36,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "Florida-regional-sector-boundary-L11": {
+          "Samples": 36,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 36,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "reachable-near-axis-camera": {
+          "Samples": 1024,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "camera-distance-10": {
+          "Samples": 48,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "camera-distance-40": {
+          "Samples": 48,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "camera-distance-49.999": {
+          "Samples": 48,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "camera-distance-50": {
+          "Samples": 48,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "camera-distance-1000": {
+          "Samples": 48,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "camera-distance-700000": {
+          "Samples": 48,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "near-zero-axis": {
+          "Samples": 60,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        }
+      }
+    },
+    "single-fp32-control": {
+      "Attempts": 8884,
+      "Samples": 8884,
+      "RangeRejects": 0,
+      "Collisions": 4406,
+      "CollisionsChangingInput": 3192,
+      "CollisionsChangingHeight": 2718,
+      "AnchorMismatches": 4766,
+      "StreamSha256": "ffd7f89c5982265c80d0b95fc038f1a5f4e29691948f6d4e5b8cedc6c598850a",
+      "CollisionWitness": {
+        "Label": "explicit-cross-face-edge-corner",
+        "anchor": {
+          "X": 3678331.7091332935,
+          "Y": -3678289.6138872737,
+          "Z": 3678289.6138872737,
+          "bits": "414c103ddac4e138c14c1028ce93dbb2414c1028ce93dbb2"
+        },
+        "a": {
+          "X": 3678303.6456894744,
+          "Y": -3678303.6456894744,
+          "Z": 3678303.6456894744,
+          "bits": "414c102fd2a5f3e4c14c102fd2a5f3e4414c102fd2a5f3e4"
+        },
+        "b": {
+          "X": 3678303.645689475,
+          "Y": -3678303.6456894744,
+          "Z": 3678303.6456894744,
+          "bits": "414c102fd2a5f3e5c14c102fd2a5f3e4414c102fd2a5f3e4"
+        },
+        "payload": "c03c103de0000000/c02c104860000000/402c104860000000",
+        "heightA": 6.8667482039338825,
+        "heightB": 6.8667482039401,
+        "nearA": 0.9562361442034253,
+        "nearB": 0.9562361442093568
+      },
+      "MismatchWitness": {
+        "Label": "explicit-cross-face-edge-corner",
+        "anchor": {
+          "X": 3678331.7091332935,
+          "Y": -3678289.6138872737,
+          "Z": 3678289.6138872737,
+          "bits": "414c103ddac4e138c14c1028ce93dbb2414c1028ce93dbb2"
+        },
+        "point": {
+          "X": 3678303.6456894744,
+          "Y": -3678303.6456894744,
+          "Z": 3678303.6456894744,
+          "bits": "414c102fd2a5f3e4c14c102fd2a5f3e4414c102fd2a5f3e4"
+        },
+        "decoded": {
+          "X": 3678303.645689156,
+          "Y": -3678303.645689451,
+          "Z": 3678303.645689451,
+          "bits": "414c102fd2a5f138c14c102fd2a5f3b2414c102fd2a5f3b2"
+        },
+        "inputA": {
+          "X": 3678303.6456894744,
+          "Y": -3678303.6456894744,
+          "Z": 3678303.6456894744,
+          "bits": "414c102fd2a5f3e4c14c102fd2a5f3e4414c102fd2a5f3e4"
+        },
+        "inputB": {
+          "X": 3678303.6456892784,
+          "Y": -3678303.645689573,
+          "Z": 3678303.645689573,
+          "bits": "414c102fd2a5f23fc14c102fd2a5f4b8414c102fd2a5f4b8"
+        },
+        "Height": 6.8667482039338825,
+        "candidateHeight": 6.866748201872572,
+        "nearA": 0.9562361442034253,
+        "nearB": 0.9562361424332717
+      },
+      "CollisionWitnessHeightEqual": false,
+      "WitnessHeightDelta": 3.3569848172428465,
+      "MaximumHeightWitness": {
+        "Label": "L17/NegativeY/(0.5, 0.5)",
+        "anchor": {
+          "X": -17.185148336289377,
+          "Y": -6371008.799953644,
+          "Z": -17.185148336289377,
+          "bits": "c0312f65e1a1458dc1584db0333270c5c0312f65e1a1458d"
+        },
+        "point": {
+          "X": 0,
+          "Y": -6371008.8,
+          "Z": 0,
+          "bits": "0000000000000000c1584db0333333330000000000000000"
+        },
+        "decoded": {
+          "X": -9.715363447071468e-08,
+          "Y": -6371008.8,
+          "Z": -9.715363447071468e-08,
+          "bits": "be7a1458d0000000c1584db033333333be7a1458d0000000"
+        },
+        "directionA": {
+          "X": 0,
+          "Y": -1,
+          "Z": 0,
+          "bits": "0000000000000000bff00000000000000000000000000000"
+        },
+        "directionB": {
+          "X": -1.524933295818312e-14,
+          "Y": -1,
+          "Z": -1.524933295818312e-14,
+          "bits": "bd112b522b64310ebff0000000000000bd112b522b64310e"
+        },
+        "heightA": 2828.0147435574927,
+        "heightB": 2831.3717283747355,
+        "globalA": 2828.0308232242314,
+        "globalB": 2831.3878080415034,
+        "regionalA": 0,
+        "regionalB": 0,
+        "supportA": 0,
+        "supportB": 0
+      },
+      "ReachableNearCollisionWitness": {
+        "anchor": {
+          "X": 32,
+          "Y": 3822605.279999621,
+          "Z": 5096807.039999813,
+          "bits": "4040000000000000414d2a06a3d7071041537159c28f5b60"
+        },
+        "a": {
+          "X": 9.999999847378751e-05,
+          "Y": 3822605.279999621,
+          "Z": 5096807.039999813,
+          "bits": "3f1a36e2e465e660414d2a06a3d7071041537159c28f5b60"
+        },
+        "b": {
+          "X": 9.999999847378762e-05,
+          "Y": 3822605.279999621,
+          "Z": 5096807.039999813,
+          "bits": "3f1a36e2e465e668414d2a06a3d7071041537159c28f5b60"
+        },
+        "payload": "c03ffff980000000/0000000000000000/0000000000000000",
+        "inputA": {
+          "X": 9.999999847379343e-05,
+          "Y": 3822605.2799998475,
+          "Z": 5096807.040000115,
+          "bits": "3f1a36e2e465e815414d2a06a3d708f641537159c28f5ca4"
+        },
+        "inputB": {
+          "X": 9.999999847379353e-05,
+          "Y": 3822605.2799998475,
+          "Z": 5096807.040000115,
+          "bits": "3f1a36e2e465e81c414d2a06a3d708f641537159c28f5ca4"
+        },
+        "heightA": 119.79204033514499,
+        "heightB": 119.79204033514499,
+        "nearA": -0.5037956646803454,
+        "nearB": -0.5037956646803454,
+        "finalA": {
+          "X": 0.00010000187874177401,
+          "Y": 3822677.1552240485,
+          "Z": 5096902.873632383,
+          "bits": "3f1a370331e77364414d2a2a93de61b241537171b7e997cc"
+        },
+        "finalB": {
+          "X": 0.00010000187874177412,
+          "Y": 3822677.1552240485,
+          "Z": 5096902.873632383,
+          "bits": "3f1a370331e7736c414d2a2a93de61b241537171b7e997cc"
+        }
+      },
+      "Metrics": {
+        "point": {
+          "Mismatch": 6554,
+          "Rms": 0.01673860960997407,
+          "N": 8884,
+          "Exact": 2330,
+          "Max": 0.1273096469222218
+        },
+        "direction": {
+          "Mismatch": 6375,
+          "Rms": 2.3048528145052395e-09,
+          "N": 8884,
+          "Exact": 2509,
+          "Max": 1.6949066284268088e-08
+        },
+        "input": {
+          "Mismatch": 6375,
+          "Rms": 0.014684237560382252,
+          "N": 8884,
+          "Exact": 2509,
+          "Max": 0.10798265044885529
+        },
+        "final": {
+          "Mismatch": 6375,
+          "Rms": 0.31748047105446653,
+          "N": 8884,
+          "Exact": 2509,
+          "Max": 3.3587000305991324
+        },
+        "normal": {
+          "Mismatch": 5961,
+          "Rms": 0.00010011611329453509,
+          "N": 8884,
+          "Exact": 2923,
+          "Max": 0.0009636840001684438
+        },
+        "height": {
+          "Mismatch": 5012,
+          "Rms": 0.31714067935543166,
+          "N": 8884,
+          "Exact": 3872,
+          "Max": 3.3569848172428465
+        },
+        "near": {
+          "Mismatch": 5865,
+          "Rms": 7.869149262237189e-05,
+          "N": 8884,
+          "Exact": 3019,
+          "Max": 0.0016411796032243797
+        },
+        "support": {
+          "Mismatch": 231,
+          "Rms": 3.0005559916753087e-09,
+          "N": 8884,
+          "Exact": 8653,
+          "Max": 8.26926765951086e-08
+        },
+        "global": {
+          "Mismatch": 5873,
+          "Rms": 1.0277926829215638,
+          "N": 8884,
+          "Exact": 3011,
+          "Max": 10.223737365696252
+        },
+        "regional": {
+          "Mismatch": 428,
+          "Rms": 5.0685334607320745e-08,
+          "N": 8884,
+          "Exact": 8456,
+          "Max": 1.1945375035793404e-06
+        },
+        "angular": {
+          "Mismatch": 5989,
+          "Rms": 2.304852815416059e-09,
+          "N": 8884,
+          "Exact": 2895,
+          "Max": 1.6949066284268088e-08
+        }
+      },
+      "Subsets": {
+        "explicit-cross-face-edge-corner": {
+          "Samples": 432,
+          "Collisions": 228,
+          "InputMismatches": 296,
+          "HeightMismatches": 224,
+          "FinalMismatches": 296,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 1.149616934981168e-08,
+          "NearMax": 1.729149267694352e-08
+        },
+        "L0": {
+          "Samples": 360,
+          "Collisions": 173,
+          "InputMismatches": 237,
+          "HeightMismatches": 180,
+          "FinalMismatches": 237,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569622105628696,
+          "NearMax": 0.0016411796032243797
+        },
+        "L1": {
+          "Samples": 360,
+          "Collisions": 173,
+          "InputMismatches": 237,
+          "HeightMismatches": 180,
+          "FinalMismatches": 237,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.35697565865712,
+          "NearMax": 0.0005316407517790833
+        },
+        "L2": {
+          "Samples": 360,
+          "Collisions": 173,
+          "InputMismatches": 237,
+          "HeightMismatches": 188,
+          "FinalMismatches": 237,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569841442699726,
+          "NearMax": 0.0003713069303549754
+        },
+        "L3": {
+          "Samples": 360,
+          "Collisions": 173,
+          "InputMismatches": 237,
+          "HeightMismatches": 188,
+          "FinalMismatches": 237,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.356982243483344,
+          "NearMax": 0.00018650731689562328
+        },
+        "L4": {
+          "Samples": 360,
+          "Collisions": 173,
+          "InputMismatches": 237,
+          "HeightMismatches": 180,
+          "FinalMismatches": 237,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569826482735152,
+          "NearMax": 9.858243037630388e-05
+        },
+        "L5": {
+          "Samples": 360,
+          "Collisions": 173,
+          "InputMismatches": 237,
+          "HeightMismatches": 180,
+          "FinalMismatches": 237,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569838222988437,
+          "NearMax": 4.4313266465700885e-05
+        },
+        "L6": {
+          "Samples": 360,
+          "Collisions": 173,
+          "InputMismatches": 237,
+          "HeightMismatches": 164,
+          "FinalMismatches": 237,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569843553927967,
+          "NearMax": 2.3687191815668918e-05
+        },
+        "L7": {
+          "Samples": 360,
+          "Collisions": 173,
+          "InputMismatches": 237,
+          "HeightMismatches": 172,
+          "FinalMismatches": 237,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.356984737208222,
+          "NearMax": 7.333543553145194e-06
+        },
+        "L8": {
+          "Samples": 360,
+          "Collisions": 173,
+          "InputMismatches": 237,
+          "HeightMismatches": 164,
+          "FinalMismatches": 237,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.356984723288406,
+          "NearMax": 5.512304768695575e-06
+        },
+        "L9": {
+          "Samples": 360,
+          "Collisions": 173,
+          "InputMismatches": 237,
+          "HeightMismatches": 172,
+          "FinalMismatches": 237,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569847617477535,
+          "NearMax": 2.2324571783971514e-06
+        },
+        "L10": {
+          "Samples": 360,
+          "Collisions": 173,
+          "InputMismatches": 237,
+          "HeightMismatches": 164,
+          "FinalMismatches": 237,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.356984794905202,
+          "NearMax": 1.245958449636042e-06
+        },
+        "L11": {
+          "Samples": 360,
+          "Collisions": 164,
+          "InputMismatches": 237,
+          "HeightMismatches": 172,
+          "FinalMismatches": 237,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569848158681452,
+          "NearMax": 5.158041682384873e-07
+        },
+        "L12": {
+          "Samples": 360,
+          "Collisions": 133,
+          "InputMismatches": 237,
+          "HeightMismatches": 156,
+          "FinalMismatches": 237,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569848167512646,
+          "NearMax": 3.0903098524603934e-07
+        },
+        "L13": {
+          "Samples": 360,
+          "Collisions": 117,
+          "InputMismatches": 237,
+          "HeightMismatches": 156,
+          "FinalMismatches": 237,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569848168590397,
+          "NearMax": 1.5999063918137324e-07
+        },
+        "L14": {
+          "Samples": 360,
+          "Collisions": 113,
+          "InputMismatches": 237,
+          "HeightMismatches": 164,
+          "FinalMismatches": 237,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569848170463956,
+          "NearMax": 4.9968772730668576e-08
+        },
+        "L15": {
+          "Samples": 360,
+          "Collisions": 113,
+          "InputMismatches": 237,
+          "HeightMismatches": 172,
+          "FinalMismatches": 237,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569848171568992,
+          "NearMax": 2.9241718713102216e-08
+        },
+        "L16": {
+          "Samples": 360,
+          "Collisions": 113,
+          "InputMismatches": 237,
+          "HeightMismatches": 180,
+          "FinalMismatches": 237,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569848172141974,
+          "NearMax": 2.4852682189990816e-08
+        },
+        "L17": {
+          "Samples": 360,
+          "Collisions": 113,
+          "InputMismatches": 237,
+          "HeightMismatches": 180,
+          "FinalMismatches": 237,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569848172428465,
+          "NearMax": 8.292781572549757e-09
+        },
+        "facility-support-boundary": {
+          "Samples": 420,
+          "Collisions": 247,
+          "InputMismatches": 420,
+          "HeightMismatches": 355,
+          "FinalMismatches": 420,
+          "RegionalNonzero": 420,
+          "SupportNonzero": 294,
+          "HeightMax": 6.990321423927526e-07,
+          "NearMax": 2.397022682565364e-07
+        },
+        "regional-boundary": {
+          "Samples": 36,
+          "Collisions": 9,
+          "InputMismatches": 8,
+          "HeightMismatches": 8,
+          "FinalMismatches": 8,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 1.0862422072932532e-12,
+          "NearMax": 1.6142642778049776e-12
+        },
+        "Florida-regional-sector-boundary-L8": {
+          "Samples": 36,
+          "Collisions": 9,
+          "InputMismatches": 9,
+          "HeightMismatches": 9,
+          "FinalMismatches": 9,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 4.740208225939568e-12,
+          "NearMax": 4.737765735285393e-12
+        },
+        "Florida-regional-sector-boundary-L9": {
+          "Samples": 36,
+          "Collisions": 9,
+          "InputMismatches": 8,
+          "HeightMismatches": 8,
+          "FinalMismatches": 8,
+          "RegionalNonzero": 36,
+          "SupportNonzero": 0,
+          "HeightMax": 7.786660205510998e-12,
+          "NearMax": 7.23421322845752e-12
+        },
+        "Florida-regional-sector-boundary-L10": {
+          "Samples": 36,
+          "Collisions": 9,
+          "InputMismatches": 8,
+          "HeightMismatches": 8,
+          "FinalMismatches": 8,
+          "RegionalNonzero": 36,
+          "SupportNonzero": 0,
+          "HeightMax": 3.0171420917213254e-11,
+          "NearMax": 8.881784197001252e-13
+        },
+        "Florida-regional-sector-boundary-L11": {
+          "Samples": 36,
+          "Collisions": 9,
+          "InputMismatches": 8,
+          "HeightMismatches": 8,
+          "FinalMismatches": 8,
+          "RegionalNonzero": 36,
+          "SupportNonzero": 0,
+          "HeightMax": 4.012790100205166e-12,
+          "NearMax": 3.206324095117452e-12
+        },
+        "reachable-near-axis-camera": {
+          "Samples": 1024,
+          "Collisions": 1014,
+          "InputMismatches": 1024,
+          "HeightMismatches": 1024,
+          "FinalMismatches": 1024,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 4.143160481362429e-09,
+          "NearMax": 8.596756639889236e-10
+        },
+        "camera-distance-10": {
+          "Samples": 48,
+          "Collisions": 22,
+          "InputMismatches": 48,
+          "HeightMismatches": 40,
+          "FinalMismatches": 48,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 2.8994804779358674e-08,
+          "NearMax": 2.587705538736884e-08
+        },
+        "camera-distance-40": {
+          "Samples": 48,
+          "Collisions": 15,
+          "InputMismatches": 48,
+          "HeightMismatches": 40,
+          "FinalMismatches": 48,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.76145408154116e-08,
+          "NearMax": 3.135185699942866e-08
+        },
+        "camera-distance-49.999": {
+          "Samples": 48,
+          "Collisions": 16,
+          "InputMismatches": 48,
+          "HeightMismatches": 40,
+          "FinalMismatches": 48,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 2.5199000219799927e-08,
+          "NearMax": 2.5107724233031092e-08
+        },
+        "camera-distance-50": {
+          "Samples": 48,
+          "Collisions": 14,
+          "InputMismatches": 48,
+          "HeightMismatches": 40,
+          "FinalMismatches": 48,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3917871178346104e-08,
+          "NearMax": 2.913874230792146e-08
+        },
+        "camera-distance-1000": {
+          "Samples": 48,
+          "Collisions": 0,
+          "InputMismatches": 48,
+          "HeightMismatches": 40,
+          "FinalMismatches": 48,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 2.250378550172627e-08,
+          "NearMax": 2.0649648269088772e-08
+        },
+        "camera-distance-700000": {
+          "Samples": 48,
+          "Collisions": 0,
+          "InputMismatches": 48,
+          "HeightMismatches": 40,
+          "FinalMismatches": 48,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 1.2001952320872533e-08,
+          "NearMax": 1.0890176982414346e-08
+        },
+        "near-zero-axis": {
+          "Samples": 60,
+          "Collisions": 36,
+          "InputMismatches": 40,
+          "HeightMismatches": 16,
+          "FinalMismatches": 40,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 1.3283482758197351e-08,
+          "NearMax": 2.7528642698726458e-09
+        }
+      }
+    },
+    "split-fp32-local": {
+      "Attempts": 8884,
+      "Samples": 8884,
+      "RangeRejects": 0,
+      "Collisions": 1248,
+      "CollisionsChangingInput": 624,
+      "CollisionsChangingHeight": 237,
+      "AnchorMismatches": 3350,
+      "StreamSha256": "cfa7d6f188bbbd124db48a13a70c6c70f64559dac03dd94bfe9f3a369eacd7c1",
+      "CollisionWitness": {
+        "Label": "L1/PositiveX/(0, 0)",
+        "anchor": {
+          "X": 4694567.873577881,
+          "Y": -3045552.955544189,
+          "Z": 3045552.955544189,
+          "bits": "4151e889f7e8b333c1473c587a4f45a141473c587a4f45a1"
+        },
+        "a": {
+          "X": 3678303.6456894744,
+          "Y": -3678303.6456894744,
+          "Z": 3678303.6456894744,
+          "bits": "414c102fd2a5f3e4c14c102fd2a5f3e4414c102fd2a5f3e4"
+        },
+        "b": {
+          "X": 3678303.645689475,
+          "Y": -3678303.6456894744,
+          "Z": 3678303.6456894744,
+          "bits": "414c102fd2a5f3e5c14c102fd2a5f3e4414c102fd2a5f3e4"
+        },
+        "payload": "c12f0390800000003f96a46c00000000/c1234f5d60000000bf65ab90c0000000/41234f5d600000003f65ab90c0000000",
+        "heightA": 6.8667482039338825,
+        "heightB": 6.8667482039401,
+        "nearA": 0.9562361442034253,
+        "nearB": 0.9562361442093568
+      },
+      "MismatchWitness": {
+        "Label": "explicit-cross-face-edge-corner",
+        "anchor": {
+          "X": 4505017.895513618,
+          "Y": -4504949.155182496,
+          "Z": 0,
+          "bits": "41512f6e7950185ac1512f5d49ee82908000000000000000"
+        },
+        "point": {
+          "X": 4504983.525479169,
+          "Y": -4504983.525479169,
+          "Z": 0,
+          "bits": "41512f65e1a17361c1512f65e1a173618000000000000000"
+        },
+        "decoded": {
+          "X": 4504983.525479169,
+          "Y": -4504983.525479169,
+          "Z": 0,
+          "bits": "41512f65e1a17361c1512f65e1a173610000000000000000"
+        },
+        "inputA": {
+          "X": 4504983.525479169,
+          "Y": -4504983.525479169,
+          "Z": 0,
+          "bits": "41512f65e1a17361c1512f65e1a173618000000000000000"
+        },
+        "inputB": {
+          "X": 4504983.525479169,
+          "Y": -4504983.525479169,
+          "Z": 0,
+          "bits": "41512f65e1a17361c1512f65e1a173610000000000000000"
+        },
+        "Height": 0,
+        "candidateHeight": 0,
+        "nearA": -0.4128101052028667,
+        "nearB": -0.4128101052028667
+      },
+      "CollisionWitnessHeightEqual": false,
+      "WitnessHeightDelta": 3.356984817272405,
+      "MaximumHeightWitness": {
+        "Label": "L2/NegativeY/(0.5, 0.5)",
+        "anchor": {
+          "X": 561654.5602438025,
+          "Y": -6321300.612974526,
+          "Z": 561654.5602438025,
+          "bits": "412123ed1ed84693c1581d25273af982412123ed1ed84693"
+        },
+        "point": {
+          "X": 0,
+          "Y": -6371008.8,
+          "Z": 0,
+          "bits": "0000000000000000c1584db0333333330000000000000000"
+        },
+        "decoded": {
+          "X": -1.1641532182693481e-10,
+          "Y": -6371008.8,
+          "Z": -1.1641532182693481e-10,
+          "bits": "bde0000000000000c1584db033333333bde0000000000000"
+        },
+        "directionA": {
+          "X": 0,
+          "Y": -1,
+          "Z": 0,
+          "bits": "0000000000000000bff00000000000000000000000000000"
+        },
+        "directionB": {
+          "X": -1.8272666932579786e-17,
+          "Y": -1,
+          "Z": -1.8272666932579786e-17,
+          "bits": "bc751123ad917749bff0000000000000bc751123ad917749"
+        },
+        "heightA": 2828.0147435574927,
+        "heightB": 2831.371728374765,
+        "globalA": 2828.0308232242314,
+        "globalB": 2831.3878080415034,
+        "regionalA": 0,
+        "regionalB": 0,
+        "supportA": 0,
+        "supportB": 0
+      },
+      "ReachableNearCollisionWitness": {
+        "anchor": {
+          "X": 32,
+          "Y": 3822605.279999621,
+          "Z": 5096807.039999813,
+          "bits": "4040000000000000414d2a06a3d7071041537159c28f5b60"
+        },
+        "a": {
+          "X": 9.999999847378751e-05,
+          "Y": 3822605.279999621,
+          "Z": 5096807.039999813,
+          "bits": "3f1a36e2e465e660414d2a06a3d7071041537159c28f5b60"
+        },
+        "b": {
+          "X": 9.999999847378762e-05,
+          "Y": 3822605.279999621,
+          "Z": 5096807.039999813,
+          "bits": "3f1a36e2e465e668414d2a06a3d7071041537159c28f5b60"
+        },
+        "payload": "c03ffff9800000003eab717240000000/00000000000000000000000000000000/00000000000000000000000000000000",
+        "inputA": {
+          "X": 9.999999847379343e-05,
+          "Y": 3822605.2799998475,
+          "Z": 5096807.040000115,
+          "bits": "3f1a36e2e465e815414d2a06a3d708f641537159c28f5ca4"
+        },
+        "inputB": {
+          "X": 9.999999847379353e-05,
+          "Y": 3822605.2799998475,
+          "Z": 5096807.040000115,
+          "bits": "3f1a36e2e465e81c414d2a06a3d708f641537159c28f5ca4"
+        },
+        "heightA": 119.79204033514499,
+        "heightB": 119.79204033514499,
+        "nearA": -0.5037956646803454,
+        "nearB": -0.5037956646803454,
+        "finalA": {
+          "X": 0.00010000187874177401,
+          "Y": 3822677.1552240485,
+          "Z": 5096902.873632383,
+          "bits": "3f1a370331e77364414d2a2a93de61b241537171b7e997cc"
+        },
+        "finalB": {
+          "X": 0.00010000187874177412,
+          "Y": 3822677.1552240485,
+          "Z": 5096902.873632383,
+          "bits": "3f1a370331e7736c414d2a2a93de61b241537171b7e997cc"
+        }
+      },
+      "Metrics": {
+        "point": {
+          "Mismatch": 4188,
+          "Rms": 2.62089897525094e-10,
+          "N": 8884,
+          "Exact": 4696,
+          "Max": 3.754281321679498e-09
+        },
+        "direction": {
+          "Mismatch": 3945,
+          "Rms": 3.548577542316175e-17,
+          "N": 8884,
+          "Exact": 4939,
+          "Max": 4.0691475407299e-16
+        },
+        "input": {
+          "Mismatch": 3941,
+          "Rms": 2.1738642446614977e-10,
+          "N": 8884,
+          "Exact": 4943,
+          "Max": 2.9816870751943665e-09
+        },
+        "final": {
+          "Mismatch": 3941,
+          "Rms": 0.29900332154626463,
+          "N": 8884,
+          "Exact": 4943,
+          "Max": 3.3569848174229264
+        },
+        "normal": {
+          "Mismatch": 2867,
+          "Rms": 1.5104213053999083e-14,
+          "N": 8884,
+          "Exact": 6017,
+          "Max": 3.7324910993002475e-13
+        },
+        "height": {
+          "Mismatch": 2273,
+          "Rms": 0.2990033215404439,
+          "N": 8884,
+          "Exact": 6611,
+          "Max": 3.356984817272405
+        },
+        "near": {
+          "Mismatch": 3036,
+          "Rms": 1.3395513209258451e-12,
+          "N": 8884,
+          "Exact": 5848,
+          "Max": 4.15923961938347e-11
+        },
+        "support": {
+          "Mismatch": 0,
+          "Rms": 0,
+          "N": 8884,
+          "Exact": 8884,
+          "Max": 0
+        },
+        "global": {
+          "Mismatch": 416,
+          "Rms": 0.9690113308005138,
+          "N": 8884,
+          "Exact": 8468,
+          "Max": 10.223544670786396
+        },
+        "regional": {
+          "Mismatch": 0,
+          "Rms": 0,
+          "N": 8884,
+          "Exact": 8884,
+          "Max": 0
+        },
+        "angular": {
+          "Mismatch": 3462,
+          "Rms": 2.975007588475121e-17,
+          "N": 8884,
+          "Exact": 5422,
+          "Max": 3.4099239068631536e-16
+        }
+      },
+      "Subsets": {
+        "explicit-cross-face-edge-corner": {
+          "Samples": 432,
+          "Collisions": 36,
+          "InputMismatches": 24,
+          "HeightMismatches": 0,
+          "FinalMismatches": 24,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L0": {
+          "Samples": 360,
+          "Collisions": 78,
+          "InputMismatches": 228,
+          "HeightMismatches": 172,
+          "FinalMismatches": 228,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569848172719503,
+          "NearMax": 2.2306212432710026e-11
+        },
+        "L1": {
+          "Samples": 360,
+          "Collisions": 77,
+          "InputMismatches": 234,
+          "HeightMismatches": 177,
+          "FinalMismatches": 234,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569848172719503,
+          "NearMax": 4.15923961938347e-11
+        },
+        "L2": {
+          "Samples": 360,
+          "Collisions": 63,
+          "InputMismatches": 213,
+          "HeightMismatches": 167,
+          "FinalMismatches": 213,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.356984817272405,
+          "NearMax": 1.2513101665945214e-11
+        },
+        "L3": {
+          "Samples": 360,
+          "Collisions": 53,
+          "InputMismatches": 213,
+          "HeightMismatches": 168,
+          "FinalMismatches": 213,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569848172719503,
+          "NearMax": 1.497946211515e-11
+        },
+        "L4": {
+          "Samples": 360,
+          "Collisions": 56,
+          "InputMismatches": 213,
+          "HeightMismatches": 160,
+          "FinalMismatches": 213,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569848172719503,
+          "NearMax": 5.255129664760716e-12
+        },
+        "L5": {
+          "Samples": 360,
+          "Collisions": 58,
+          "InputMismatches": 213,
+          "HeightMismatches": 154,
+          "FinalMismatches": 213,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569848172719503,
+          "NearMax": 1.269429006356404e-12
+        },
+        "L6": {
+          "Samples": 360,
+          "Collisions": 51,
+          "InputMismatches": 213,
+          "HeightMismatches": 136,
+          "FinalMismatches": 213,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569848172719503,
+          "NearMax": 7.047695760320494e-13
+        },
+        "L7": {
+          "Samples": 360,
+          "Collisions": 47,
+          "InputMismatches": 213,
+          "HeightMismatches": 144,
+          "FinalMismatches": 213,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569848172719503,
+          "NearMax": 2.1110890813247352e-13
+        },
+        "L8": {
+          "Samples": 360,
+          "Collisions": 51,
+          "InputMismatches": 173,
+          "HeightMismatches": 92,
+          "FinalMismatches": 173,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569848172719503,
+          "NearMax": 1.7041923427996153e-13
+        },
+        "L9": {
+          "Samples": 360,
+          "Collisions": 55,
+          "InputMismatches": 213,
+          "HeightMismatches": 144,
+          "FinalMismatches": 213,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569848172719503,
+          "NearMax": 1.3422596367718143e-13
+        },
+        "L10": {
+          "Samples": 360,
+          "Collisions": 46,
+          "InputMismatches": 213,
+          "HeightMismatches": 132,
+          "FinalMismatches": 213,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569848172719503,
+          "NearMax": 3.852473895449293e-14
+        },
+        "L11": {
+          "Samples": 360,
+          "Collisions": 52,
+          "InputMismatches": 213,
+          "HeightMismatches": 130,
+          "FinalMismatches": 213,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569848172719503,
+          "NearMax": 2.4202861936828413e-14
+        },
+        "L12": {
+          "Samples": 360,
+          "Collisions": 42,
+          "InputMismatches": 174,
+          "HeightMismatches": 82,
+          "FinalMismatches": 174,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 8.881784197001252e-15,
+          "NearMax": 8.881784197001252e-15
+        },
+        "L13": {
+          "Samples": 360,
+          "Collisions": 42,
+          "InputMismatches": 193,
+          "HeightMismatches": 103,
+          "FinalMismatches": 193,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569848172719503,
+          "NearMax": 1.2934098236883074e-14
+        },
+        "L14": {
+          "Samples": 360,
+          "Collisions": 42,
+          "InputMismatches": 153,
+          "HeightMismatches": 71,
+          "FinalMismatches": 153,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569848172719503,
+          "NearMax": 4.884981308350689e-15
+        },
+        "L15": {
+          "Samples": 360,
+          "Collisions": 40,
+          "InputMismatches": 193,
+          "HeightMismatches": 100,
+          "FinalMismatches": 193,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569848172719503,
+          "NearMax": 9.769962616701378e-15
+        },
+        "L16": {
+          "Samples": 360,
+          "Collisions": 35,
+          "InputMismatches": 163,
+          "HeightMismatches": 67,
+          "FinalMismatches": 163,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.0531133177191805e-15,
+          "NearMax": 3.0531133177191805e-15
+        },
+        "L17": {
+          "Samples": 360,
+          "Collisions": 40,
+          "InputMismatches": 193,
+          "HeightMismatches": 74,
+          "FinalMismatches": 193,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569848172719503,
+          "NearMax": 9.769962616701378e-15
+        },
+        "facility-support-boundary": {
+          "Samples": 420,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 420,
+          "SupportNonzero": 294,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "regional-boundary": {
+          "Samples": 36,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "Florida-regional-sector-boundary-L8": {
+          "Samples": 36,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "Florida-regional-sector-boundary-L9": {
+          "Samples": 36,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 36,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "Florida-regional-sector-boundary-L10": {
+          "Samples": 36,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 36,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "Florida-regional-sector-boundary-L11": {
+          "Samples": 36,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 36,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "reachable-near-axis-camera": {
+          "Samples": 1024,
+          "Collisions": 254,
+          "InputMismatches": 256,
+          "HeightMismatches": 0,
+          "FinalMismatches": 256,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "camera-distance-10": {
+          "Samples": 48,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "camera-distance-40": {
+          "Samples": 48,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "camera-distance-49.999": {
+          "Samples": 48,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "camera-distance-50": {
+          "Samples": 48,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "camera-distance-1000": {
+          "Samples": 48,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "camera-distance-700000": {
+          "Samples": 48,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "near-zero-axis": {
+          "Samples": 60,
+          "Collisions": 30,
+          "InputMismatches": 40,
+          "HeightMismatches": 0,
+          "FinalMismatches": 40,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 1.1102230246251565e-16
+        }
+      }
+    },
+    "exact-two-diff-local": {
+      "Attempts": 8884,
+      "Samples": 8884,
+      "RangeRejects": 0,
+      "Collisions": 0,
+      "CollisionsChangingInput": 0,
+      "CollisionsChangingHeight": 0,
+      "AnchorMismatches": 0,
+      "StreamSha256": "5e50e19aeeda797736208a72ec3d22e27cf08f5cae885bbfa044cd0209b82167",
+      "CollisionWitness": null,
+      "MismatchWitness": null,
+      "CollisionWitnessHeightEqual": false,
+      "WitnessHeightDelta": 0,
+      "MaximumHeightWitness": null,
+      "ReachableNearCollisionWitness": null,
+      "Metrics": {
+        "point": {
+          "Mismatch": 0,
+          "Rms": 0,
+          "N": 8884,
+          "Exact": 8884,
+          "Max": 0
+        },
+        "direction": {
+          "Mismatch": 0,
+          "Rms": 0,
+          "N": 8884,
+          "Exact": 8884,
+          "Max": 0
+        },
+        "input": {
+          "Mismatch": 0,
+          "Rms": 0,
+          "N": 8884,
+          "Exact": 8884,
+          "Max": 0
+        },
+        "final": {
+          "Mismatch": 0,
+          "Rms": 0,
+          "N": 8884,
+          "Exact": 8884,
+          "Max": 0
+        },
+        "normal": {
+          "Mismatch": 0,
+          "Rms": 0,
+          "N": 8884,
+          "Exact": 8884,
+          "Max": 0
+        },
+        "height": {
+          "Mismatch": 0,
+          "Rms": 0,
+          "N": 8884,
+          "Exact": 8884,
+          "Max": 0
+        },
+        "near": {
+          "Mismatch": 0,
+          "Rms": 0,
+          "N": 8884,
+          "Exact": 8884,
+          "Max": 0
+        },
+        "support": {
+          "Mismatch": 0,
+          "Rms": 0,
+          "N": 8884,
+          "Exact": 8884,
+          "Max": 0
+        },
+        "global": {
+          "Mismatch": 0,
+          "Rms": 0,
+          "N": 8884,
+          "Exact": 8884,
+          "Max": 0
+        },
+        "regional": {
+          "Mismatch": 0,
+          "Rms": 0,
+          "N": 8884,
+          "Exact": 8884,
+          "Max": 0
+        },
+        "angular": {
+          "Mismatch": 0,
+          "Rms": 0,
+          "N": 8884,
+          "Exact": 8884,
+          "Max": 0
+        }
+      },
+      "Subsets": {
+        "explicit-cross-face-edge-corner": {
+          "Samples": 432,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L0": {
+          "Samples": 360,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L1": {
+          "Samples": 360,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L2": {
+          "Samples": 360,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L3": {
+          "Samples": 360,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L4": {
+          "Samples": 360,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L5": {
+          "Samples": 360,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L6": {
+          "Samples": 360,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L7": {
+          "Samples": 360,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L8": {
+          "Samples": 360,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L9": {
+          "Samples": 360,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L10": {
+          "Samples": 360,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L11": {
+          "Samples": 360,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L12": {
+          "Samples": 360,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L13": {
+          "Samples": 360,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L14": {
+          "Samples": 360,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L15": {
+          "Samples": 360,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L16": {
+          "Samples": 360,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L17": {
+          "Samples": 360,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "facility-support-boundary": {
+          "Samples": 420,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 420,
+          "SupportNonzero": 294,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "regional-boundary": {
+          "Samples": 36,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "Florida-regional-sector-boundary-L8": {
+          "Samples": 36,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "Florida-regional-sector-boundary-L9": {
+          "Samples": 36,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 36,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "Florida-regional-sector-boundary-L10": {
+          "Samples": 36,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 36,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "Florida-regional-sector-boundary-L11": {
+          "Samples": 36,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 36,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "reachable-near-axis-camera": {
+          "Samples": 1024,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "camera-distance-10": {
+          "Samples": 48,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "camera-distance-40": {
+          "Samples": 48,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "camera-distance-49.999": {
+          "Samples": 48,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "camera-distance-50": {
+          "Samples": 48,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "camera-distance-1000": {
+          "Samples": 48,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "camera-distance-700000": {
+          "Samples": 48,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "near-zero-axis": {
+          "Samples": 60,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        }
+      }
+    },
+    "fixed64-q2^-40": {
+      "Attempts": 8884,
+      "Samples": 8884,
+      "RangeRejects": 0,
+      "Collisions": 1567,
+      "CollisionsChangingInput": 989,
+      "CollisionsChangingHeight": 414,
+      "AnchorMismatches": 1436,
+      "StreamSha256": "b0ad1e585b8d568daa8850b463ac9fb71e8b26c5946091059e7af6974c11b9d6",
+      "CollisionWitness": {
+        "Label": "L11/PositiveY/(0.500244140625, 0.5)",
+        "anchor": {
+          "X": 1099.8494825991645,
+          "Y": 6371008.610129143,
+          "Z": 1099.8494825991645,
+          "bits": "40912f65dec437bb41584db0270c5b1b40912f65dec437bb"
+        },
+        "a": {
+          "X": 2199.6989870503753,
+          "Y": 6371008.420258272,
+          "Z": 0,
+          "bits": "40a12f65e1a1736141584db01ae582f48000000000000000"
+        },
+        "b": {
+          "X": 2199.6989870503758,
+          "Y": 6371008.420258272,
+          "Z": 0,
+          "bits": "40a12f65e1a1736241584db01ae582f48000000000000000"
+        },
+        "payload": "00044bd9791fabc2/ffffffcf649f6400/fffbb426884ef211",
+        "heightA": 1.013163265553593,
+        "heightB": 1.0131632655536011,
+        "nearA": 1.013163265553593,
+        "nearB": 1.0131632655536011
+      },
+      "MismatchWitness": {
+        "Label": "explicit-cross-face-edge-corner",
+        "anchor": {
+          "X": 4505017.895513618,
+          "Y": -4504949.155182496,
+          "Z": 0,
+          "bits": "41512f6e7950185ac1512f5d49ee82908000000000000000"
+        },
+        "point": {
+          "X": 4504983.525479169,
+          "Y": -4504983.525479169,
+          "Z": 0,
+          "bits": "41512f65e1a17361c1512f65e1a173618000000000000000"
+        },
+        "decoded": {
+          "X": 4504983.525479169,
+          "Y": -4504983.525479169,
+          "Z": 0,
+          "bits": "41512f65e1a17361c1512f65e1a173610000000000000000"
+        },
+        "inputA": {
+          "X": 4504983.525479169,
+          "Y": -4504983.525479169,
+          "Z": 0,
+          "bits": "41512f65e1a17361c1512f65e1a173618000000000000000"
+        },
+        "inputB": {
+          "X": 4504983.525479169,
+          "Y": -4504983.525479169,
+          "Z": 0,
+          "bits": "41512f65e1a17361c1512f65e1a173610000000000000000"
+        },
+        "Height": 0,
+        "candidateHeight": 0,
+        "nearA": -0.4128101052028667,
+        "nearB": -0.4128101052028667
+      },
+      "CollisionWitnessHeightEqual": false,
+      "WitnessHeightDelta": 3.3569848172719503,
+      "MaximumHeightWitness": {
+        "Label": "L11/NegativeY/(0.5, 0.5)",
+        "anchor": {
+          "X": 1099.8494825991645,
+          "Y": -6371008.610129143,
+          "Z": 1099.8494825991645,
+          "bits": "40912f65dec437bbc1584db0270c5b1b40912f65dec437bb"
+        },
+        "point": {
+          "X": 0,
+          "Y": -6371008.8,
+          "Z": 0,
+          "bits": "0000000000000000c1584db0333333330000000000000000"
+        },
+        "decoded": {
+          "X": -2.2737367544323206e-13,
+          "Y": -6371008.8,
+          "Z": -2.2737367544323206e-13,
+          "bits": "bd50000000000000c1584db033333333bd50000000000000"
+        },
+        "directionA": {
+          "X": 0,
+          "Y": -1,
+          "Z": 0,
+          "bits": "0000000000000000bff00000000000000000000000000000"
+        },
+        "directionB": {
+          "X": -3.5688802602694895e-20,
+          "Y": -1,
+          "Z": -3.5688802602694895e-20,
+          "bits": "bbe51123ad917749bff0000000000000bbe51123ad917749"
+        },
+        "heightA": 2828.0147435574927,
+        "heightB": 2831.3717283747646,
+        "globalA": 2828.0308232242314,
+        "globalB": 2831.3878080415034,
+        "regionalA": 0,
+        "regionalB": 0,
+        "supportA": 0,
+        "supportB": 0
+      },
+      "ReachableNearCollisionWitness": {
+        "anchor": {
+          "X": 32,
+          "Y": 3822605.279999621,
+          "Z": 5096807.039999813,
+          "bits": "4040000000000000414d2a06a3d7071041537159c28f5b60"
+        },
+        "a": {
+          "X": 9.999999847378751e-05,
+          "Y": 3822605.279999621,
+          "Z": 5096807.039999813,
+          "bits": "3f1a36e2e465e660414d2a06a3d7071041537159c28f5b60"
+        },
+        "b": {
+          "X": 9.999999847378762e-05,
+          "Y": 3822605.279999621,
+          "Z": 5096807.039999813,
+          "bits": "3f1a36e2e465e668414d2a06a3d7071041537159c28f5b60"
+        },
+        "payload": "ffffe000068db8b9/0000000000000000/0000000000000000",
+        "inputA": {
+          "X": 9.999999847379343e-05,
+          "Y": 3822605.2799998475,
+          "Z": 5096807.040000115,
+          "bits": "3f1a36e2e465e815414d2a06a3d708f641537159c28f5ca4"
+        },
+        "inputB": {
+          "X": 9.999999847379353e-05,
+          "Y": 3822605.2799998475,
+          "Z": 5096807.040000115,
+          "bits": "3f1a36e2e465e81c414d2a06a3d708f641537159c28f5ca4"
+        },
+        "heightA": 119.79204033514499,
+        "heightB": 119.79204033514499,
+        "nearA": -0.5037956646803454,
+        "nearB": -0.5037956646803454,
+        "finalA": {
+          "X": 0.00010000187874177401,
+          "Y": 3822677.1552240485,
+          "Z": 5096902.873632383,
+          "bits": "3f1a370331e77364414d2a2a93de61b241537171b7e997cc"
+        },
+        "finalB": {
+          "X": 0.00010000187874177412,
+          "Y": 3822677.1552240485,
+          "Z": 5096902.873632383,
+          "bits": "3f1a370331e7736c414d2a2a93de61b241537171b7e997cc"
+        }
+      },
+      "Metrics": {
+        "point": {
+          "Mismatch": 3488,
+          "Rms": 1.4984892376519433e-13,
+          "N": 8884,
+          "Exact": 5396,
+          "Max": 6.042538309847401e-13
+        },
+        "direction": {
+          "Mismatch": 3092,
+          "Rms": 2.3500194342277906e-20,
+          "N": 8884,
+          "Exact": 5792,
+          "Max": 1.1414304244866175e-19
+        },
+        "input": {
+          "Mismatch": 3089,
+          "Rms": 1.500600138014581e-13,
+          "N": 8884,
+          "Exact": 5795,
+          "Max": 9.374856803373542e-13
+        },
+        "final": {
+          "Mismatch": 3084,
+          "Rms": 0.197772107498424,
+          "N": 8884,
+          "Exact": 5800,
+          "Max": 3.3569848174229264
+        },
+        "normal": {
+          "Mismatch": 1729,
+          "Rms": 1.5359452661541723e-17,
+          "N": 8884,
+          "Exact": 7155,
+          "Max": 2.2247786310271853e-16
+        },
+        "height": {
+          "Mismatch": 951,
+          "Rms": 0.19777210749457352,
+          "N": 8884,
+          "Exact": 7933,
+          "Max": 3.3569848172719503
+        },
+        "near": {
+          "Mismatch": 2186,
+          "Rms": 1.333224945688826e-15,
+          "N": 8884,
+          "Exact": 6698,
+          "Max": 2.2815083156046967e-14
+        },
+        "support": {
+          "Mismatch": 0,
+          "Rms": 0,
+          "N": 8884,
+          "Exact": 8884,
+          "Max": 0
+        },
+        "global": {
+          "Mismatch": 124,
+          "Rms": 0.6409407497254768,
+          "N": 8884,
+          "Exact": 8760,
+          "Max": 10.223544670786396
+        },
+        "regional": {
+          "Mismatch": 0,
+          "Rms": 0,
+          "N": 8884,
+          "Exact": 8884,
+          "Max": 0
+        },
+        "angular": {
+          "Mismatch": 2246,
+          "Rms": 2.3500195074110232e-20,
+          "N": 8884,
+          "Exact": 6638,
+          "Max": 1.1414304244866172e-19
+        }
+      },
+      "Subsets": {
+        "explicit-cross-face-edge-corner": {
+          "Samples": 432,
+          "Collisions": 36,
+          "InputMismatches": 24,
+          "HeightMismatches": 0,
+          "FinalMismatches": 24,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L0": {
+          "Samples": 360,
+          "Collisions": 35,
+          "InputMismatches": 63,
+          "HeightMismatches": 0,
+          "FinalMismatches": 63,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L1": {
+          "Samples": 360,
+          "Collisions": 35,
+          "InputMismatches": 63,
+          "HeightMismatches": 0,
+          "FinalMismatches": 63,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L2": {
+          "Samples": 360,
+          "Collisions": 35,
+          "InputMismatches": 63,
+          "HeightMismatches": 0,
+          "FinalMismatches": 63,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L3": {
+          "Samples": 360,
+          "Collisions": 35,
+          "InputMismatches": 63,
+          "HeightMismatches": 0,
+          "FinalMismatches": 63,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L4": {
+          "Samples": 360,
+          "Collisions": 35,
+          "InputMismatches": 63,
+          "HeightMismatches": 0,
+          "FinalMismatches": 63,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L5": {
+          "Samples": 360,
+          "Collisions": 35,
+          "InputMismatches": 63,
+          "HeightMismatches": 0,
+          "FinalMismatches": 63,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L6": {
+          "Samples": 360,
+          "Collisions": 35,
+          "InputMismatches": 63,
+          "HeightMismatches": 0,
+          "FinalMismatches": 63,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L7": {
+          "Samples": 360,
+          "Collisions": 35,
+          "InputMismatches": 63,
+          "HeightMismatches": 0,
+          "FinalMismatches": 63,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L8": {
+          "Samples": 360,
+          "Collisions": 35,
+          "InputMismatches": 63,
+          "HeightMismatches": 0,
+          "FinalMismatches": 63,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L9": {
+          "Samples": 360,
+          "Collisions": 35,
+          "InputMismatches": 63,
+          "HeightMismatches": 0,
+          "FinalMismatches": 63,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "L10": {
+          "Samples": 360,
+          "Collisions": 35,
+          "InputMismatches": 103,
+          "HeightMismatches": 40,
+          "FinalMismatches": 103,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 1.4210854715202004e-14,
+          "NearMax": 7.244205235679146e-15
+        },
+        "L11": {
+          "Samples": 360,
+          "Collisions": 47,
+          "InputMismatches": 216,
+          "HeightMismatches": 127,
+          "FinalMismatches": 216,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569848172719503,
+          "NearMax": 1.762479051592436e-14
+        },
+        "L12": {
+          "Samples": 360,
+          "Collisions": 55,
+          "InputMismatches": 231,
+          "HeightMismatches": 121,
+          "FinalMismatches": 231,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569848172719503,
+          "NearMax": 1.4432899320127035e-14
+        },
+        "L13": {
+          "Samples": 360,
+          "Collisions": 57,
+          "InputMismatches": 218,
+          "HeightMismatches": 110,
+          "FinalMismatches": 218,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569848172719503,
+          "NearMax": 1.1074474670635936e-14
+        },
+        "L14": {
+          "Samples": 360,
+          "Collisions": 53,
+          "InputMismatches": 228,
+          "HeightMismatches": 132,
+          "FinalMismatches": 228,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569848172719503,
+          "NearMax": 2.2815083156046967e-14
+        },
+        "L15": {
+          "Samples": 360,
+          "Collisions": 59,
+          "InputMismatches": 225,
+          "HeightMismatches": 139,
+          "FinalMismatches": 221,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569848172719503,
+          "NearMax": 9.825473767932635e-15
+        },
+        "L16": {
+          "Samples": 360,
+          "Collisions": 59,
+          "InputMismatches": 218,
+          "HeightMismatches": 136,
+          "FinalMismatches": 218,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569848172719503,
+          "NearMax": 8.104628079763643e-15
+        },
+        "L17": {
+          "Samples": 360,
+          "Collisions": 59,
+          "InputMismatches": 218,
+          "HeightMismatches": 134,
+          "FinalMismatches": 217,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569848172719503,
+          "NearMax": 1.0269562977782698e-14
+        },
+        "facility-support-boundary": {
+          "Samples": 420,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 420,
+          "SupportNonzero": 294,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "regional-boundary": {
+          "Samples": 36,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "Florida-regional-sector-boundary-L8": {
+          "Samples": 36,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "Florida-regional-sector-boundary-L9": {
+          "Samples": 36,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 36,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "Florida-regional-sector-boundary-L10": {
+          "Samples": 36,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 36,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "Florida-regional-sector-boundary-L11": {
+          "Samples": 36,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 36,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "reachable-near-axis-camera": {
+          "Samples": 1024,
+          "Collisions": 724,
+          "InputMismatches": 736,
+          "HeightMismatches": 12,
+          "FinalMismatches": 736,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 1.4210854715202004e-14,
+          "NearMax": 4.440892098500626e-16
+        },
+        "camera-distance-10": {
+          "Samples": 48,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "camera-distance-40": {
+          "Samples": 48,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "camera-distance-49.999": {
+          "Samples": 48,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "camera-distance-50": {
+          "Samples": 48,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "camera-distance-1000": {
+          "Samples": 48,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "camera-distance-700000": {
+          "Samples": 48,
+          "Collisions": 0,
+          "InputMismatches": 0,
+          "HeightMismatches": 0,
+          "FinalMismatches": 0,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 0
+        },
+        "near-zero-axis": {
+          "Samples": 60,
+          "Collisions": 33,
+          "InputMismatches": 42,
+          "HeightMismatches": 0,
+          "FinalMismatches": 42,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 0,
+          "NearMax": 3.3306690738754696e-16
+        }
+      }
+    },
+    "ksa-pattern": {
+      "Attempts": 8884,
+      "Samples": 8884,
+      "RangeRejects": 0,
+      "Collisions": 3092,
+      "CollisionsChangingInput": 2402,
+      "CollisionsChangingHeight": 1902,
+      "AnchorMismatches": 5428,
+      "StreamSha256": "91f35b834b28d53edde367df56f70e4792bb4acbe956919c64457df29da01123",
+      "CollisionWitness": {
+        "Label": "explicit-cross-face-edge-corner",
+        "anchor": {
+          "X": 3678331.7091332935,
+          "Y": -3678289.6138872737,
+          "Z": 3678289.6138872737,
+          "bits": "414c103ddac4e138c14c1028ce93dbb2414c1028ce93dbb2"
+        },
+        "a": {
+          "X": 3678303.6456894744,
+          "Y": -3678303.6456894744,
+          "Z": 3678303.6456894744,
+          "bits": "414c102fd2a5f3e4c14c102fd2a5f3e4414c102fd2a5f3e4"
+        },
+        "b": {
+          "X": 3678303.645689475,
+          "Y": -3678303.6456894744,
+          "Z": 3678303.6456894744,
+          "bits": "414c102fd2a5f3e5c14c102fd2a5f3e4414c102fd2a5f3e4"
+        },
+        "payload": "3fe279b080000000bfe279a2a00000003fe279a2a00000003e3343a240000000be4c895c800000003e4c895c80000000bed279b080000000bec279b7600000003ec279b76000000041584db033333333",
+        "heightA": 6.8667482039338825,
+        "heightB": 6.8667482039401,
+        "nearA": 0.9562361442034253,
+        "nearB": 0.9562361442093568
+      },
+      "MismatchWitness": {
+        "Label": "explicit-cross-face-edge-corner",
+        "anchor": {
+          "X": 3678331.7091332935,
+          "Y": -3678289.6138872737,
+          "Z": 3678289.6138872737,
+          "bits": "414c103ddac4e138c14c1028ce93dbb2414c1028ce93dbb2"
+        },
+        "point": {
+          "X": 3678303.6456894744,
+          "Y": -3678303.6456894744,
+          "Z": 3678303.6456894744,
+          "bits": "414c102fd2a5f3e4c14c102fd2a5f3e4414c102fd2a5f3e4"
+        },
+        "decoded": {
+          "X": 3678303.6456896863,
+          "Y": -3678303.6456887526,
+          "Z": 3678303.6456887526,
+          "bits": "414c102fd2a5f5abc14c102fd2a5edd6414c102fd2a5edd6"
+        },
+        "inputA": {
+          "X": 3678303.6456894744,
+          "Y": -3678303.6456894744,
+          "Z": 3678303.6456894744,
+          "bits": "414c102fd2a5f3e4c14c102fd2a5f3e4414c102fd2a5f3e4"
+        },
+        "inputB": {
+          "X": 3678303.6456900975,
+          "Y": -3678303.645689164,
+          "Z": 3678303.645689164,
+          "bits": "414c102fd2a5f91ec14c102fd2a5f149414c102fd2a5f149"
+        },
+        "Height": 6.8667482039338825,
+        "candidateHeight": 6.866748210485994,
+        "nearA": 0.9562361442034253,
+        "nearB": 0.956236149846045
+      },
+      "CollisionWitnessHeightEqual": false,
+      "WitnessHeightDelta": 3.356984817184639,
+      "MaximumHeightWitness": {
+        "Label": "L17/NegativeY/(0.5, 0.5)",
+        "anchor": {
+          "X": -17.185148336289377,
+          "Y": -6371008.799953644,
+          "Z": -17.185148336289377,
+          "bits": "c0312f65e1a1458dc1584db0333270c5c0312f65e1a1458d"
+        },
+        "point": {
+          "X": 0,
+          "Y": -6371008.8,
+          "Z": 0,
+          "bits": "0000000000000000c1584db0333333330000000000000000"
+        },
+        "decoded": {
+          "X": -2.94069613474346e-07,
+          "Y": -6371008.8,
+          "Z": -2.94069613474346e-07,
+          "bits": "be93bc13d66a7fcdc1584db033333333be93bc13d66a7fcd"
+        },
+        "directionA": {
+          "X": 0,
+          "Y": -1,
+          "Z": 0,
+          "bits": "0000000000000000bff00000000000000000000000000000"
+        },
+        "directionB": {
+          "X": -4.615746465055047e-14,
+          "Y": -1,
+          "Z": -4.615746465055047e-14,
+          "bits": "bd29fbfde0000000bff0000000000000bd29fbfde0000000"
+        },
+        "heightA": 2828.0147435574927,
+        "heightB": 2831.3717283746773,
+        "globalA": 2828.0308232242314,
+        "globalB": 2831.3878080415034,
+        "regionalA": 0,
+        "regionalB": 0,
+        "supportA": 0,
+        "supportB": 0
+      },
+      "ReachableNearCollisionWitness": {
+        "anchor": {
+          "X": 32,
+          "Y": 3822605.279999621,
+          "Z": 5096807.039999813,
+          "bits": "4040000000000000414d2a06a3d7071041537159c28f5b60"
+        },
+        "a": {
+          "X": 9.999999847378751e-05,
+          "Y": 3822605.279999621,
+          "Z": 5096807.039999813,
+          "bits": "3f1a36e2e465e660414d2a06a3d7071041537159c28f5b60"
+        },
+        "b": {
+          "X": 9.999999847378762e-05,
+          "Y": 3822605.279999621,
+          "Z": 5096807.039999813,
+          "bits": "3f1a36e2e465e668414d2a06a3d7071041537159c28f5b60"
+        },
+        "payload": "3ed51123a00000003fe33333400000003fe99999a00000003d4b20a900000000be599bafe0000000be499f2340000000bed5111f600000003da0a4a0000000003da630e00000000041584db03333319e",
+        "inputA": {
+          "X": 9.999999847379343e-05,
+          "Y": 3822605.2799998475,
+          "Z": 5096807.040000115,
+          "bits": "3f1a36e2e465e815414d2a06a3d708f641537159c28f5ca4"
+        },
+        "inputB": {
+          "X": 9.999999847379353e-05,
+          "Y": 3822605.2799998475,
+          "Z": 5096807.040000115,
+          "bits": "3f1a36e2e465e81c414d2a06a3d708f641537159c28f5ca4"
+        },
+        "heightA": 119.79204033514499,
+        "heightB": 119.79204033514499,
+        "nearA": -0.5037956646803454,
+        "nearB": -0.5037956646803454,
+        "finalA": {
+          "X": 0.00010000187874177401,
+          "Y": 3822677.1552240485,
+          "Z": 5096902.873632383,
+          "bits": "3f1a370331e77364414d2a2a93de61b241537171b7e997cc"
+        },
+        "finalB": {
+          "X": 0.00010000187874177412,
+          "Y": 3822677.1552240485,
+          "Z": 5096902.873632383,
+          "bits": "3f1a370331e7736c414d2a2a93de61b241537171b7e997cc"
+        }
+      },
+      "Metrics": {
+        "point": {
+          "Mismatch": 8758,
+          "Rms": 0.01634425465012337,
+          "N": 8884,
+          "Exact": 126,
+          "Max": 0.16381898706970396
+        },
+        "direction": {
+          "Mismatch": 8618,
+          "Rms": 2.5654107772982365e-09,
+          "N": 8884,
+          "Exact": 266,
+          "Max": 2.5713194253840967e-08
+        },
+        "input": {
+          "Mismatch": 7810,
+          "Rms": 0.01580314928081689,
+          "N": 8884,
+          "Exact": 1074,
+          "Max": 0.16082400654046167
+        },
+        "final": {
+          "Mismatch": 7956,
+          "Rms": 0.3175343498555914,
+          "N": 8884,
+          "Exact": 928,
+          "Max": 3.357040147604803
+        },
+        "normal": {
+          "Mismatch": 7791,
+          "Rms": 0.0001081420843888163,
+          "N": 8884,
+          "Exact": 1093,
+          "Max": 0.0009631753297437218
+        },
+        "height": {
+          "Mismatch": 6225,
+          "Rms": 0.31714085499098704,
+          "N": 8884,
+          "Exact": 2659,
+          "Max": 3.356984817184639
+        },
+        "near": {
+          "Mismatch": 7432,
+          "Rms": 8.588306311754472e-05,
+          "N": 8884,
+          "Exact": 1452,
+          "Max": 0.0017680945711024965
+        },
+        "support": {
+          "Mismatch": 230,
+          "Rms": 3.4052073042518606e-09,
+          "N": 8884,
+          "Exact": 8654,
+          "Max": 8.000136242358735e-08
+        },
+        "global": {
+          "Mismatch": 6786,
+          "Rms": 1.027792226128966,
+          "N": 8884,
+          "Exact": 2098,
+          "Max": 10.223544670786396
+        },
+        "regional": {
+          "Mismatch": 495,
+          "Rms": 4.9169824929001126e-08,
+          "N": 8884,
+          "Exact": 8389,
+          "Max": 1.0909168111084e-06
+        },
+        "angular": {
+          "Mismatch": 7306,
+          "Rms": 2.4804783343876004e-09,
+          "N": 8884,
+          "Exact": 1578,
+          "Max": 2.524309916325453e-08
+        }
+      },
+      "Subsets": {
+        "explicit-cross-face-edge-corner": {
+          "Samples": 432,
+          "Collisions": 124,
+          "InputMismatches": 380,
+          "HeightMismatches": 293,
+          "FinalMismatches": 384,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.4592690489887445e-08,
+          "NearMax": 3.421051142371567e-08
+        },
+        "L0": {
+          "Samples": 360,
+          "Collisions": 83,
+          "InputMismatches": 297,
+          "HeightMismatches": 233,
+          "FinalMismatches": 307,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569806069858714,
+          "NearMax": 0.0017680945711024965
+        },
+        "L1": {
+          "Samples": 360,
+          "Collisions": 89,
+          "InputMismatches": 300,
+          "HeightMismatches": 235,
+          "FinalMismatches": 311,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.356982525224339,
+          "NearMax": 0.0004292592630212311
+        },
+        "L2": {
+          "Samples": 360,
+          "Collisions": 95,
+          "InputMismatches": 302,
+          "HeightMismatches": 246,
+          "FinalMismatches": 308,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569834687618822,
+          "NearMax": 0.0003719922592080316
+        },
+        "L3": {
+          "Samples": 360,
+          "Collisions": 97,
+          "InputMismatches": 307,
+          "HeightMismatches": 251,
+          "FinalMismatches": 314,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569834330692174,
+          "NearMax": 0.00023006662281421786
+        },
+        "L4": {
+          "Samples": 360,
+          "Collisions": 101,
+          "InputMismatches": 303,
+          "HeightMismatches": 237,
+          "FinalMismatches": 310,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569842050387706,
+          "NearMax": 6.188489624703308e-05
+        },
+        "L5": {
+          "Samples": 360,
+          "Collisions": 101,
+          "InputMismatches": 299,
+          "HeightMismatches": 233,
+          "FinalMismatches": 307,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569839766528276,
+          "NearMax": 4.820882203293575e-05
+        },
+        "L6": {
+          "Samples": 360,
+          "Collisions": 95,
+          "InputMismatches": 307,
+          "HeightMismatches": 218,
+          "FinalMismatches": 314,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569843949926508,
+          "NearMax": 3.022041391781416e-05
+        },
+        "L7": {
+          "Samples": 360,
+          "Collisions": 101,
+          "InputMismatches": 306,
+          "HeightMismatches": 229,
+          "FinalMismatches": 314,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.356984802621355,
+          "NearMax": 1.6163892477522035e-05
+        },
+        "L8": {
+          "Samples": 360,
+          "Collisions": 95,
+          "InputMismatches": 304,
+          "HeightMismatches": 213,
+          "FinalMismatches": 312,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569847421595114,
+          "NearMax": 5.284838196617514e-06
+        },
+        "L9": {
+          "Samples": 360,
+          "Collisions": 95,
+          "InputMismatches": 302,
+          "HeightMismatches": 224,
+          "FinalMismatches": 310,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.356984782152722,
+          "NearMax": 3.4357200786594433e-06
+        },
+        "L10": {
+          "Samples": 360,
+          "Collisions": 95,
+          "InputMismatches": 303,
+          "HeightMismatches": 212,
+          "FinalMismatches": 312,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.356984802425359,
+          "NearMax": 1.4910867790485227e-06
+        },
+        "L11": {
+          "Samples": 360,
+          "Collisions": 89,
+          "InputMismatches": 303,
+          "HeightMismatches": 222,
+          "FinalMismatches": 312,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569848149159043,
+          "NearMax": 8.157512766671093e-07
+        },
+        "L12": {
+          "Samples": 360,
+          "Collisions": 89,
+          "InputMismatches": 305,
+          "HeightMismatches": 202,
+          "FinalMismatches": 312,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.356984814871794,
+          "NearMax": 3.801604596953556e-07
+        },
+        "L13": {
+          "Samples": 360,
+          "Collisions": 83,
+          "InputMismatches": 307,
+          "HeightMismatches": 206,
+          "FinalMismatches": 313,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.356984815919077,
+          "NearMax": 3.3135395149930247e-07
+        },
+        "L14": {
+          "Samples": 360,
+          "Collisions": 83,
+          "InputMismatches": 303,
+          "HeightMismatches": 214,
+          "FinalMismatches": 311,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.3569848165766416,
+          "NearMax": 1.3235123963450945e-07
+        },
+        "L15": {
+          "Samples": 360,
+          "Collisions": 83,
+          "InputMismatches": 307,
+          "HeightMismatches": 224,
+          "FinalMismatches": 314,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.356984816921795,
+          "NearMax": 2.2253438647368284e-08
+        },
+        "L16": {
+          "Samples": 360,
+          "Collisions": 80,
+          "InputMismatches": 303,
+          "HeightMismatches": 236,
+          "FinalMismatches": 311,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.356984817096418,
+          "NearMax": 2.0709615022873606e-08
+        },
+        "L17": {
+          "Samples": 360,
+          "Collisions": 83,
+          "InputMismatches": 302,
+          "HeightMismatches": 232,
+          "FinalMismatches": 310,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 3.356984817184639,
+          "NearMax": 8.989806843384684e-09
+        },
+        "facility-support-boundary": {
+          "Samples": 420,
+          "Collisions": 216,
+          "InputMismatches": 418,
+          "HeightMismatches": 361,
+          "FinalMismatches": 418,
+          "RegionalNonzero": 420,
+          "SupportNonzero": 294,
+          "HeightMax": 6.271777728272809e-07,
+          "NearMax": 2.5992588814638395e-07
+        },
+        "regional-boundary": {
+          "Samples": 36,
+          "Collisions": 13,
+          "InputMismatches": 36,
+          "HeightMismatches": 36,
+          "FinalMismatches": 36,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 5.5552091815513904e-09,
+          "NearMax": 8.22673906775151e-09
+        },
+        "Florida-regional-sector-boundary-L8": {
+          "Samples": 36,
+          "Collisions": 12,
+          "InputMismatches": 36,
+          "HeightMismatches": 36,
+          "FinalMismatches": 36,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 1.0431642660790885e-08,
+          "NearMax": 1.0463467592369824e-08
+        },
+        "Florida-regional-sector-boundary-L9": {
+          "Samples": 36,
+          "Collisions": 14,
+          "InputMismatches": 36,
+          "HeightMismatches": 36,
+          "FinalMismatches": 36,
+          "RegionalNonzero": 36,
+          "SupportNonzero": 0,
+          "HeightMax": 2.3981724606159105e-08,
+          "NearMax": 2.435810175782649e-08
+        },
+        "Florida-regional-sector-boundary-L10": {
+          "Samples": 36,
+          "Collisions": 13,
+          "InputMismatches": 36,
+          "HeightMismatches": 36,
+          "FinalMismatches": 36,
+          "RegionalNonzero": 36,
+          "SupportNonzero": 0,
+          "HeightMax": 6.408792696532828e-08,
+          "NearMax": 7.75385067264267e-09
+        },
+        "Florida-regional-sector-boundary-L11": {
+          "Samples": 36,
+          "Collisions": 13,
+          "InputMismatches": 36,
+          "HeightMismatches": 36,
+          "FinalMismatches": 36,
+          "RegionalNonzero": 36,
+          "SupportNonzero": 0,
+          "HeightMax": 1.1703917834893218e-08,
+          "NearMax": 1.2097536528088426e-08
+        },
+        "reachable-near-axis-camera": {
+          "Samples": 1024,
+          "Collisions": 1014,
+          "InputMismatches": 1024,
+          "HeightMismatches": 1024,
+          "FinalMismatches": 1024,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 5.10210895754426e-09,
+          "NearMax": 1.087262835319791e-09
+        },
+        "camera-distance-10": {
+          "Samples": 48,
+          "Collisions": 1,
+          "InputMismatches": 48,
+          "HeightMismatches": 40,
+          "FinalMismatches": 48,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 1.5859285440456006e-08,
+          "NearMax": 9.219121244186113e-09
+        },
+        "camera-distance-40": {
+          "Samples": 48,
+          "Collisions": 0,
+          "InputMismatches": 48,
+          "HeightMismatches": 40,
+          "FinalMismatches": 48,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 2.525405307096662e-08,
+          "NearMax": 8.614192054112735e-09
+        },
+        "camera-distance-49.999": {
+          "Samples": 48,
+          "Collisions": 0,
+          "InputMismatches": 48,
+          "HeightMismatches": 40,
+          "FinalMismatches": 48,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 1.747525057993471e-08,
+          "NearMax": 1.5615565285287403e-08
+        },
+        "camera-distance-50": {
+          "Samples": 48,
+          "Collisions": 0,
+          "InputMismatches": 48,
+          "HeightMismatches": 40,
+          "FinalMismatches": 48,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 2.263783471789793e-08,
+          "NearMax": 1.9970477049824353e-08
+        },
+        "camera-distance-1000": {
+          "Samples": 48,
+          "Collisions": 0,
+          "InputMismatches": 48,
+          "HeightMismatches": 40,
+          "FinalMismatches": 48,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 1.6539289049433137e-08,
+          "NearMax": 2.892892159156446e-08
+        },
+        "camera-distance-700000": {
+          "Samples": 48,
+          "Collisions": 0,
+          "InputMismatches": 48,
+          "HeightMismatches": 40,
+          "FinalMismatches": 48,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 1.4617134169725432e-08,
+          "NearMax": 2.170716983940224e-08
+        },
+        "near-zero-axis": {
+          "Samples": 60,
+          "Collisions": 35,
+          "InputMismatches": 60,
+          "HeightMismatches": 60,
+          "FinalMismatches": 60,
+          "RegionalNonzero": 0,
+          "SupportNonzero": 0,
+          "HeightMax": 1.02572954574498e-08,
+          "NearMax": 2.203162652314461e-09
+        }
+      }
+    }
+  }
+}

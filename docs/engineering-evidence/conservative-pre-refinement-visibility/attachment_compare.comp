@@ -1,0 +1,16 @@
+#version 460
+layout(local_size_x=256) in;
+layout(set=0,binding=62,std430) readonly buffer CapturedAttachments {uvec4 values[];} images;
+layout(set=0,binding=63,std430) buffer Comparison {uint values[];} result;
+void main(){
+  uint id=gl_GlobalInvocationID.x,n=result.values[7];if(id>=n)return;
+  uvec4 a=images.values[id],b=images.values[id+n];
+#ifdef DIAGNOSTIC_COMPARE_SELF_TEST
+  if(id==0u)b.x^=1u;
+#endif
+  for(uint k=0u;k<4u;k++){
+    uint bits=a[k]^b[k];if(bits==0u)continue;
+    uint word=id*4u+k,part=word<n?0u:word<n*3u?1u:2u;
+    for(uint byteIndex=0u;byteIndex<4u;byteIndex++)if((bits&(255u<<(8u*byteIndex)))!=0u){atomicAdd(result.values[part],1u);atomicMin(result.values[part+3u],word*4u+byteIndex);}
+  }
+}

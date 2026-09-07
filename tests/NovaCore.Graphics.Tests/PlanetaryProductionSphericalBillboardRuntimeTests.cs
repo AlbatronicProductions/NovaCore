@@ -196,9 +196,9 @@ internal static class PlanetaryProductionSphericalBillboardRuntimeTests
         var shaderRoot = Path.Combine(root, "native", "NovaCore.Native", "shaders");
         var physical = File.ReadAllText(Path.Combine(shaderRoot,
             "production_spherical_billboard_physical.glsl"));
-        var preparation = File.ReadAllText(Path.Combine(shaderRoot,
+        var preparation = TerrainRenderAuthorityTests.ReadCandidate(Path.Combine(shaderRoot,
             "production_spherical_billboard_prepare.comp"));
-        var evaluation = File.ReadAllText(Path.Combine(shaderRoot,
+        var evaluation = TerrainRenderAuthorityTests.ReadCandidate(Path.Combine(shaderRoot,
             "production_spherical_billboard.tese"));
         var fragment = File.ReadAllText(Path.Combine(shaderRoot,
             "planetary_production.frag"));
@@ -213,15 +213,14 @@ internal static class PlanetaryProductionSphericalBillboardRuntimeTests
         var sample = File.ReadAllText(Path.Combine(root, "samples", "NovaCore.Triangle",
             "Program.cs"));
 
-        Require(physical.Contains("vec3 CandidateBaseNormalD", StringComparison.Ordinal) &&
-            preparation.Contains("CandidateBaseHeightD(direction)", StringComparison.Ordinal) &&
-            preparation.Contains("CandidateBaseNormalD(direction,radius)", StringComparison.Ordinal) &&
-            !preparation.Contains("CandidatePhysicalHeightD(direction)", StringComparison.Ordinal) &&
-            !preparation.Contains("CandidatePhysicalNormalD(direction,radius)", StringComparison.Ordinal),
-            "persistent production billboard preparation owns only geographic plus macro/meso displacement and its normal");
-        Require(evaluation.Contains("EvaluateNaturalCandidateNearD(direction)", StringComparison.Ordinal) &&
-            evaluation.Contains("baseHeight+nearHeight*localWeight", StringComparison.Ordinal) &&
-            evaluation.Contains("nearValue.bodyGradient", StringComparison.Ordinal) &&
+        TerrainRenderAuthorityTests.VerifyDefaultAndSampling(root);
+        Require(physical.Contains("vec3 CandidatePhysicalNormalD", StringComparison.Ordinal) &&
+            preparation.Contains("double height=CandidatePhysicalHeightD(direction)", StringComparison.Ordinal) &&
+            preparation.Contains("CandidatePhysicalNormalD(direction,radius)", StringComparison.Ordinal),
+            "production preparation owns full shared terrain relief and its normal before refinement");
+        Require(!evaluation.Contains("EvaluateNaturalCandidateNearD(direction)", StringComparison.Ordinal) &&
+            evaluation.Contains("double height=baseHeight", StringComparison.Ordinal) &&
+            evaluation.Contains("vec3 surfaceNormal=baseNormal", StringComparison.Ordinal) &&
             evaluation.Contains("dvec3 preparedBody=camera-dvec3(interpolatedView)", StringComparison.Ordinal) &&
             evaluation.Contains("gl_Position=baseClip+frameData.camera.viewProjection*vec4(localRelative,0.0)",
                 StringComparison.Ordinal) &&
@@ -229,13 +228,7 @@ internal static class PlanetaryProductionSphericalBillboardRuntimeTests
             !evaluation.Contains("bool refined", StringComparison.Ordinal) &&
             !evaluation.Contains("CandidatePhysicalHeightD(direction)", StringComparison.Ordinal) &&
             !evaluation.Contains("CandidatePhysicalNormalD(direction", StringComparison.Ordinal),
-            "TES retains the prepared base position, derives one anchored body direction, and adds only the bounded canonical near field rather than rebuilding a second radial surface");
-        var nearWeight = evaluation.IndexOf("if(localWeight>0.0)", StringComparison.Ordinal);
-        var nearEvaluation = evaluation.IndexOf("EvaluateNaturalCandidateNearD(direction)", StringComparison.Ordinal);
-        Require(nearWeight >= 0 && nearEvaluation > nearWeight &&
-                evaluation.Contains("double nearHeight=0.0", StringComparison.Ordinal) &&
-                evaluation.Contains("dvec3 nearGradient=dvec3(0.0)", StringComparison.Ordinal),
-            "TES evaluates detailed physical displacement only inside the bounded 50 m refinement footprint");
+            "TES interpolates the prepared local surface without recomputing physical H or its normal");
         Require(cull.Contains("curvedPatchOccluded", StringComparison.Ordinal) &&
             incomingCull.Contains("curvedPatchOccluded", StringComparison.Ordinal) &&
             cull.Contains("uintBitsToFloat(counters.values[9])", StringComparison.Ordinal) &&
@@ -268,7 +261,7 @@ internal static class PlanetaryProductionSphericalBillboardRuntimeTests
             maximumIdentityError = Math.Max(maximumIdentityError, Math.Abs(split - canonical));
         }
         Require(maximumIdentityError <= 1e-9,
-            "base plus TES near responsibility split preserves canonical H(bodyDirection)");
+            "physical query composition remains deterministic independently of render interpolation");
         Require(sample.Contains(
                 "new NativeProductionBillboardFrame{Previous=_current,Current=_current,Incoming=_current}",
                 StringComparison.Ordinal),

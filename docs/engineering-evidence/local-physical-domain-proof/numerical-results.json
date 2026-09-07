@@ -1,0 +1,1519 @@
+{
+  "kind": "CPU numerical preflight; not actual TES or raster samples",
+  "cases": 26208,
+  "reference": "CPU binary64 operation order, current canonical composed.Near + current facility attenuation",
+  "groups": {
+    "local-fp32-delta": {
+      "face-seam-corner/near": {
+        "samples": 4992,
+        "preparedPointExact": 0,
+        "directionExact": 36,
+        "hInputExact": 128,
+        "nearHeightExact": 882,
+        "nearGradientExact": 870,
+        "pointMaxMetres": 2.060249467825047e-06,
+        "pointRmsMetres": 7.736321397061249e-07,
+        "hInputMaxMetres": 1.663088214405986e-06,
+        "angularMaxRadians": 2.609974356595528e-13,
+        "nearHeightMaxMetres": 4.0677814672207546e-08,
+        "nearHeightRmsMetres": 5.4479016297320355e-09,
+        "gradientMax": 4.731302759387804e-10,
+        "nearDisplacementMaxMetres": 4.067781462350692e-08,
+        "fp32NearDisplacementMaxMetres": 2.0647654623614278e-07,
+        "supportWeightMax": 0
+      },
+      "face-seam-corner/outside-near-stress": {
+        "samples": 5824,
+        "preparedPointExact": 0,
+        "directionExact": 92,
+        "hInputExact": 116,
+        "nearHeightExact": 179,
+        "nearGradientExact": 176,
+        "pointMaxMetres": 0.00023442999104070436,
+        "pointRmsMetres": 5.331562140810341e-05,
+        "hInputMaxMetres": 9.968389962453287e-05,
+        "angularMaxRadians": 1.5646425580880137e-11,
+        "nearHeightMaxMetres": 2.5978162199180588e-06,
+        "nearHeightRmsMetres": 9.218920772673066e-08,
+        "gradientMax": 3.15046204531231e-08,
+        "nearDisplacementMaxMetres": 2.5978162198660726e-06,
+        "fp32NearDisplacementMaxMetres": 2.615822345911466e-06,
+        "supportWeightMax": 0
+      },
+      "Florida/near": {
+        "samples": 192,
+        "preparedPointExact": 0,
+        "directionExact": 0,
+        "hInputExact": 0,
+        "nearHeightExact": 192,
+        "nearGradientExact": 192,
+        "pointMaxMetres": 2.6198195484087036e-06,
+        "pointRmsMetres": 1.0811957570171794e-06,
+        "hInputMaxMetres": 2.591938030156966e-06,
+        "angularMaxRadians": 4.0682946545206446e-13,
+        "nearHeightMaxMetres": 0,
+        "nearHeightRmsMetres": 0,
+        "gradientMax": 0,
+        "nearDisplacementMaxMetres": 0,
+        "fp32NearDisplacementMaxMetres": 0,
+        "supportWeightMax": 0
+      },
+      "Florida/outside-near-stress": {
+        "samples": 224,
+        "preparedPointExact": 0,
+        "directionExact": 0,
+        "hInputExact": 0,
+        "nearHeightExact": 86,
+        "nearGradientExact": 85,
+        "pointMaxMetres": 0.0003155830884405686,
+        "pointRmsMetres": 9.052848622493163e-05,
+        "hInputMaxMetres": 0.00028887455121488943,
+        "angularMaxRadians": 4.534204404110688e-11,
+        "nearHeightMaxMetres": 6.656931422988066e-06,
+        "nearHeightRmsMetres": 9.027357085233318e-07,
+        "gradientMax": 3.886332654275584e-08,
+        "nearDisplacementMaxMetres": 6.6569314242902945e-06,
+        "fp32NearDisplacementMaxMetres": 6.63407997034861e-06,
+        "supportWeightMax": 4.287738675223807e-08
+      },
+      "Florida-support-transition/near": {
+        "samples": 2304,
+        "preparedPointExact": 0,
+        "directionExact": 0,
+        "hInputExact": 0,
+        "nearHeightExact": 482,
+        "nearGradientExact": 396,
+        "pointMaxMetres": 2.669133740538226e-06,
+        "pointRmsMetres": 9.680013629228877e-07,
+        "hInputMaxMetres": 2.661268719720318e-06,
+        "angularMaxRadians": 4.1763395258743233e-13,
+        "nearHeightMaxMetres": 8.607263546345223e-08,
+        "nearHeightRmsMetres": 1.057731676193302e-08,
+        "gradientMax": 2.6375225317863033e-09,
+        "nearDisplacementMaxMetres": 8.607263557686916e-08,
+        "fp32NearDisplacementMaxMetres": 2.6656007498500226e-07,
+        "supportWeightMax": 2.7733567886656374e-08
+      },
+      "Florida-support-transition/outside-near-stress": {
+        "samples": 2688,
+        "preparedPointExact": 0,
+        "directionExact": 0,
+        "hInputExact": 0,
+        "nearHeightExact": 272,
+        "nearGradientExact": 255,
+        "pointMaxMetres": 0.0004830184413919039,
+        "pointRmsMetres": 9.608784524222806e-05,
+        "hInputMaxMetres": 0.00048113378293191685,
+        "angularMaxRadians": 7.55192307381986e-11,
+        "nearHeightMaxMetres": 8.934503975099872e-06,
+        "nearHeightRmsMetres": 8.300580708944502e-07,
+        "gradientMax": 8.578519357717983e-08,
+        "nearDisplacementMaxMetres": 8.934503975082844e-06,
+        "fp32NearDisplacementMaxMetres": 8.931750962108404e-06,
+        "supportWeightMax": 9.372447395961103e-08
+      },
+      "remote/near": {
+        "samples": 4608,
+        "preparedPointExact": 0,
+        "directionExact": 0,
+        "hInputExact": 0,
+        "nearHeightExact": 0,
+        "nearGradientExact": 0,
+        "pointMaxMetres": 2.557224992865307e-06,
+        "pointRmsMetres": 7.826784555270439e-07,
+        "hInputMaxMetres": 2.5441787011245188e-06,
+        "angularMaxRadians": 3.9932542278023105e-13,
+        "nearHeightMaxMetres": 3.223479305702881e-08,
+        "nearHeightRmsMetres": 4.405931832494305e-09,
+        "gradientMax": 5.714684769253128e-10,
+        "nearDisplacementMaxMetres": 3.22347933494289e-08,
+        "fp32NearDisplacementMaxMetres": 2.4027400458748785e-07,
+        "supportWeightMax": 0
+      },
+      "remote/outside-near-stress": {
+        "samples": 5376,
+        "preparedPointExact": 0,
+        "directionExact": 0,
+        "hInputExact": 0,
+        "nearHeightExact": 0,
+        "nearGradientExact": 0,
+        "pointMaxMetres": 0.00049249843773568,
+        "pointRmsMetres": 9.619267644983525e-05,
+        "hInputMaxMetres": 0.0004904221087333165,
+        "angularMaxRadians": 7.6977154110851e-11,
+        "nearHeightMaxMetres": 6.0741142571263396e-06,
+        "nearHeightRmsMetres": 5.134526724760398e-07,
+        "gradientMax": 1.0422704171126468e-07,
+        "nearDisplacementMaxMetres": 6.074114257424283e-06,
+        "fp32NearDisplacementMaxMetres": 6.026082831309299e-06,
+        "supportWeightMax": 0
+      }
+    },
+    "local-fp64-roundtrip-control": {
+      "face-seam-corner/near": {
+        "samples": 4992,
+        "preparedPointExact": 4992,
+        "directionExact": 4992,
+        "hInputExact": 4992,
+        "nearHeightExact": 4992,
+        "nearGradientExact": 4992,
+        "pointMaxMetres": 0,
+        "pointRmsMetres": 0,
+        "hInputMaxMetres": 0,
+        "angularMaxRadians": 0,
+        "nearHeightMaxMetres": 0,
+        "nearHeightRmsMetres": 0,
+        "gradientMax": 0,
+        "nearDisplacementMaxMetres": 0,
+        "fp32NearDisplacementMaxMetres": 0,
+        "supportWeightMax": 0
+      },
+      "face-seam-corner/outside-near-stress": {
+        "samples": 5824,
+        "preparedPointExact": 5824,
+        "directionExact": 5824,
+        "hInputExact": 5824,
+        "nearHeightExact": 5824,
+        "nearGradientExact": 5824,
+        "pointMaxMetres": 0,
+        "pointRmsMetres": 0,
+        "hInputMaxMetres": 0,
+        "angularMaxRadians": 0,
+        "nearHeightMaxMetres": 0,
+        "nearHeightRmsMetres": 0,
+        "gradientMax": 0,
+        "nearDisplacementMaxMetres": 0,
+        "fp32NearDisplacementMaxMetres": 0,
+        "supportWeightMax": 0
+      },
+      "Florida/near": {
+        "samples": 192,
+        "preparedPointExact": 192,
+        "directionExact": 192,
+        "hInputExact": 192,
+        "nearHeightExact": 192,
+        "nearGradientExact": 192,
+        "pointMaxMetres": 0,
+        "pointRmsMetres": 0,
+        "hInputMaxMetres": 0,
+        "angularMaxRadians": 0,
+        "nearHeightMaxMetres": 0,
+        "nearHeightRmsMetres": 0,
+        "gradientMax": 0,
+        "nearDisplacementMaxMetres": 0,
+        "fp32NearDisplacementMaxMetres": 0,
+        "supportWeightMax": 0
+      },
+      "Florida/outside-near-stress": {
+        "samples": 224,
+        "preparedPointExact": 224,
+        "directionExact": 224,
+        "hInputExact": 224,
+        "nearHeightExact": 224,
+        "nearGradientExact": 224,
+        "pointMaxMetres": 0,
+        "pointRmsMetres": 0,
+        "hInputMaxMetres": 0,
+        "angularMaxRadians": 0,
+        "nearHeightMaxMetres": 0,
+        "nearHeightRmsMetres": 0,
+        "gradientMax": 0,
+        "nearDisplacementMaxMetres": 0,
+        "fp32NearDisplacementMaxMetres": 0,
+        "supportWeightMax": 0
+      },
+      "Florida-support-transition/near": {
+        "samples": 2304,
+        "preparedPointExact": 2304,
+        "directionExact": 2304,
+        "hInputExact": 2304,
+        "nearHeightExact": 2304,
+        "nearGradientExact": 2304,
+        "pointMaxMetres": 0,
+        "pointRmsMetres": 0,
+        "hInputMaxMetres": 0,
+        "angularMaxRadians": 0,
+        "nearHeightMaxMetres": 0,
+        "nearHeightRmsMetres": 0,
+        "gradientMax": 0,
+        "nearDisplacementMaxMetres": 0,
+        "fp32NearDisplacementMaxMetres": 0,
+        "supportWeightMax": 0
+      },
+      "Florida-support-transition/outside-near-stress": {
+        "samples": 2688,
+        "preparedPointExact": 2688,
+        "directionExact": 2688,
+        "hInputExact": 2688,
+        "nearHeightExact": 2688,
+        "nearGradientExact": 2688,
+        "pointMaxMetres": 0,
+        "pointRmsMetres": 0,
+        "hInputMaxMetres": 0,
+        "angularMaxRadians": 0,
+        "nearHeightMaxMetres": 0,
+        "nearHeightRmsMetres": 0,
+        "gradientMax": 0,
+        "nearDisplacementMaxMetres": 0,
+        "fp32NearDisplacementMaxMetres": 0,
+        "supportWeightMax": 0
+      },
+      "remote/near": {
+        "samples": 4608,
+        "preparedPointExact": 4608,
+        "directionExact": 4608,
+        "hInputExact": 4608,
+        "nearHeightExact": 4608,
+        "nearGradientExact": 4608,
+        "pointMaxMetres": 0,
+        "pointRmsMetres": 0,
+        "hInputMaxMetres": 0,
+        "angularMaxRadians": 0,
+        "nearHeightMaxMetres": 0,
+        "nearHeightRmsMetres": 0,
+        "gradientMax": 0,
+        "nearDisplacementMaxMetres": 0,
+        "fp32NearDisplacementMaxMetres": 0,
+        "supportWeightMax": 0
+      },
+      "remote/outside-near-stress": {
+        "samples": 5376,
+        "preparedPointExact": 5376,
+        "directionExact": 5376,
+        "hInputExact": 5376,
+        "nearHeightExact": 5376,
+        "nearGradientExact": 5376,
+        "pointMaxMetres": 0,
+        "pointRmsMetres": 0,
+        "hInputMaxMetres": 0,
+        "angularMaxRadians": 0,
+        "nearHeightMaxMetres": 0,
+        "nearHeightRmsMetres": 0,
+        "gradientMax": 0,
+        "nearDisplacementMaxMetres": 0,
+        "fp32NearDisplacementMaxMetres": 0,
+        "supportWeightMax": 0
+      }
+    },
+    "local-fp32-basis": {
+      "face-seam-corner/near": {
+        "samples": 4992,
+        "preparedPointExact": 0,
+        "directionExact": 60,
+        "hInputExact": 272,
+        "nearHeightExact": 1268,
+        "nearGradientExact": 1257,
+        "pointMaxMetres": 1.8980953274515204e-06,
+        "pointRmsMetres": 5.490335532850967e-07,
+        "hInputMaxMetres": 1.8980380346920062e-06,
+        "angularMaxRadians": 2.979189001318399e-13,
+        "nearHeightMaxMetres": 5.640127365147407e-08,
+        "nearHeightRmsMetres": 4.772131147295997e-09,
+        "gradientMax": 5.589325700130539e-10,
+        "nearDisplacementMaxMetres": 5.640127362690901e-08,
+        "fp32NearDisplacementMaxMetres": 2.384185791015625e-07,
+        "supportWeightMax": 0
+      },
+      "face-seam-corner/outside-near-stress": {
+        "samples": 5824,
+        "preparedPointExact": 0,
+        "directionExact": 0,
+        "hInputExact": 0,
+        "nearHeightExact": 1,
+        "nearGradientExact": 0,
+        "pointMaxMetres": 0.0004968469842967832,
+        "pointRmsMetres": 6.957931608684381e-05,
+        "hInputMaxMetres": 0.000496845496366265,
+        "angularMaxRadians": 7.798540021662508e-11,
+        "nearHeightMaxMetres": 1.0530345492365534e-05,
+        "nearHeightRmsMetres": 5.188004512853429e-07,
+        "gradientMax": 1.518778741083033e-07,
+        "nearDisplacementMaxMetres": 1.0530345492599994e-05,
+        "fp32NearDisplacementMaxMetres": 1.0536714037920429e-05,
+        "supportWeightMax": 0
+      },
+      "Florida/near": {
+        "samples": 192,
+        "preparedPointExact": 0,
+        "directionExact": 7,
+        "hInputExact": 12,
+        "nearHeightExact": 192,
+        "nearGradientExact": 192,
+        "pointMaxMetres": 2.3161495571364352e-06,
+        "pointRmsMetres": 7.061356908083427e-07,
+        "hInputMaxMetres": 2.307054418605067e-06,
+        "angularMaxRadians": 3.6215563660629325e-13,
+        "nearHeightMaxMetres": 0,
+        "nearHeightRmsMetres": 0,
+        "gradientMax": 0,
+        "nearDisplacementMaxMetres": 0,
+        "fp32NearDisplacementMaxMetres": 0,
+        "supportWeightMax": 0
+      },
+      "Florida/outside-near-stress": {
+        "samples": 224,
+        "preparedPointExact": 0,
+        "directionExact": 0,
+        "hInputExact": 0,
+        "nearHeightExact": 86,
+        "nearGradientExact": 85,
+        "pointMaxMetres": 0.00048481113189782977,
+        "pointRmsMetres": 0.00010917629017870306,
+        "hInputMaxMetres": 0.00048480852397298613,
+        "angularMaxRadians": 7.609606406441722e-11,
+        "nearHeightMaxMetres": 4.203514970990696e-06,
+        "nearHeightRmsMetres": 8.397484026991888e-07,
+        "gradientMax": 6.867712882265107e-08,
+        "nearDisplacementMaxMetres": 4.203514971314384e-06,
+        "fp32NearDisplacementMaxMetres": 4.155714527882559e-06,
+        "supportWeightMax": 6.113621531245172e-08
+      },
+      "Florida-support-transition/near": {
+        "samples": 2304,
+        "preparedPointExact": 0,
+        "directionExact": 88,
+        "hInputExact": 136,
+        "nearHeightExact": 551,
+        "nearGradientExact": 494,
+        "pointMaxMetres": 2.4634259912301375e-06,
+        "pointRmsMetres": 6.989266327918005e-07,
+        "hInputMaxMetres": 2.459477828662961e-06,
+        "angularMaxRadians": 3.860243111725836e-13,
+        "nearHeightMaxMetres": 8.60687796588877e-08,
+        "nearHeightRmsMetres": 8.1036260861988e-09,
+        "gradientMax": 2.249129127693485e-09,
+        "nearDisplacementMaxMetres": 8.60687796354345e-08,
+        "fp32NearDisplacementMaxMetres": 2.4027400458748785e-07,
+        "supportWeightMax": 2.5518332447127534e-08
+      },
+      "Florida-support-transition/outside-near-stress": {
+        "samples": 2688,
+        "preparedPointExact": 0,
+        "directionExact": 0,
+        "hInputExact": 0,
+        "nearHeightExact": 272,
+        "nearGradientExact": 258,
+        "pointMaxMetres": 0.0005373356380777542,
+        "pointRmsMetres": 0.00010977577374639257,
+        "hInputMaxMetres": 0.0005373345648310895,
+        "angularMaxRadians": 8.43405335261871e-11,
+        "nearHeightMaxMetres": 1.289621828204357e-05,
+        "nearHeightRmsMetres": 1.095680300665584e-06,
+        "gradientMax": 9.791965059520797e-08,
+        "nearDisplacementMaxMetres": 1.2896218282070899e-05,
+        "fp32NearDisplacementMaxMetres": 1.2870575533658787e-05,
+        "supportWeightMax": 1.1034543179189171e-07
+      },
+      "remote/near": {
+        "samples": 4608,
+        "preparedPointExact": 2,
+        "directionExact": 154,
+        "hInputExact": 288,
+        "nearHeightExact": 290,
+        "nearGradientExact": 288,
+        "pointMaxMetres": 2.4480613842340598e-06,
+        "pointRmsMetres": 7.344808719893359e-07,
+        "hInputMaxMetres": 2.420250988823052e-06,
+        "angularMaxRadians": 3.7987661443145745e-13,
+        "nearHeightMaxMetres": 4.3901248303335194e-08,
+        "nearHeightRmsMetres": 4.997286695248757e-09,
+        "gradientMax": 4.821134856283479e-10,
+        "nearDisplacementMaxMetres": 4.390124835472717e-08,
+        "fp32NearDisplacementMaxMetres": 2.4027400458748785e-07,
+        "supportWeightMax": 0
+      },
+      "remote/outside-near-stress": {
+        "samples": 5376,
+        "preparedPointExact": 0,
+        "directionExact": 0,
+        "hInputExact": 0,
+        "nearHeightExact": 0,
+        "nearGradientExact": 0,
+        "pointMaxMetres": 0.0005312559759269602,
+        "pointRmsMetres": 0.0001097897456823483,
+        "hInputMaxMetres": 0.0005312529929771112,
+        "angularMaxRadians": 8.338602897810565e-11,
+        "nearHeightMaxMetres": 8.58914020629431e-06,
+        "nearHeightRmsMetres": 7.438520567095559e-07,
+        "gradientMax": 1.1638273028353052e-07,
+        "nearDisplacementMaxMetres": 8.589140206302865e-06,
+        "fp32NearDisplacementMaxMetres": 8.595903741684044e-06,
+        "supportWeightMax": 0
+      }
+    },
+    "local-fp64-norm-reassociation": {
+      "face-seam-corner/near": {
+        "samples": 4992,
+        "preparedPointExact": 4992,
+        "directionExact": 4072,
+        "hInputExact": 4624,
+        "nearHeightExact": 4756,
+        "nearGradientExact": 4744,
+        "pointMaxMetres": 0,
+        "pointRmsMetres": 0,
+        "hInputMaxMetres": 1.3969838619232178e-09,
+        "angularMaxRadians": 1.2412670766236366e-16,
+        "nearHeightMaxMetres": 2.4817703447865824e-11,
+        "nearHeightRmsMetres": 1.4736515142669125e-12,
+        "gradientMax": 4.91646007540062e-13,
+        "nearDisplacementMaxMetres": 2.4817564134197638e-11,
+        "fp32NearDisplacementMaxMetres": 0,
+        "supportWeightMax": 0
+      },
+      "face-seam-corner/outside-near-stress": {
+        "samples": 5824,
+        "preparedPointExact": 5824,
+        "directionExact": 4488,
+        "hInputExact": 5280,
+        "nearHeightExact": 5377,
+        "nearGradientExact": 5342,
+        "pointMaxMetres": 0,
+        "pointRmsMetres": 0,
+        "hInputMaxMetres": 1.6130980174698654e-09,
+        "angularMaxRadians": 1.2412670766236368e-16,
+        "nearHeightMaxMetres": 3.166866768822274e-11,
+        "nearHeightRmsMetres": 2.0956569318295657e-12,
+        "gradientMax": 3.954451035892568e-13,
+        "nearDisplacementMaxMetres": 3.166860646692194e-11,
+        "fp32NearDisplacementMaxMetres": 0,
+        "supportWeightMax": 0
+      },
+      "Florida/near": {
+        "samples": 192,
+        "preparedPointExact": 192,
+        "directionExact": 141,
+        "hInputExact": 151,
+        "nearHeightExact": 192,
+        "nearGradientExact": 192,
+        "pointMaxMetres": 0,
+        "pointRmsMetres": 0,
+        "hInputMaxMetres": 1.877140660839749e-09,
+        "angularMaxRadians": 1.1188630228279527e-16,
+        "nearHeightMaxMetres": 0,
+        "nearHeightRmsMetres": 0,
+        "gradientMax": 0,
+        "nearDisplacementMaxMetres": 0,
+        "fp32NearDisplacementMaxMetres": 0,
+        "supportWeightMax": 0
+      },
+      "Florida/outside-near-stress": {
+        "samples": 224,
+        "preparedPointExact": 224,
+        "directionExact": 158,
+        "hInputExact": 173,
+        "nearHeightExact": 189,
+        "nearGradientExact": 189,
+        "pointMaxMetres": 0,
+        "pointRmsMetres": 0,
+        "hInputMaxMetres": 2.0954757928848267e-09,
+        "angularMaxRadians": 6.206335383118185e-17,
+        "nearHeightMaxMetres": 1.5199841385538093e-11,
+        "nearHeightRmsMetres": 2.4472844088056936e-12,
+        "gradientMax": 4.138326272331601e-13,
+        "nearDisplacementMaxMetres": 1.5199681818447136e-11,
+        "fp32NearDisplacementMaxMetres": 0,
+        "supportWeightMax": 4.717892743144603e-12
+      },
+      "Florida-support-transition/near": {
+        "samples": 2304,
+        "preparedPointExact": 2304,
+        "directionExact": 1857,
+        "hInputExact": 1963,
+        "nearHeightExact": 1975,
+        "nearGradientExact": 1950,
+        "pointMaxMetres": 0,
+        "pointRmsMetres": 0,
+        "hInputMaxMetres": 2.3312150028651566e-09,
+        "angularMaxRadians": 1.1274368112207337e-16,
+        "nearHeightMaxMetres": 2.2529089704903527e-11,
+        "nearHeightRmsMetres": 1.931339513292633e-12,
+        "gradientMax": 5.177847465988581e-13,
+        "nearDisplacementMaxMetres": 2.2529247379336644e-11,
+        "fp32NearDisplacementMaxMetres": 0,
+        "supportWeightMax": 6.991296430669536e-12
+      },
+      "Florida-support-transition/outside-near-stress": {
+        "samples": 2688,
+        "preparedPointExact": 2688,
+        "directionExact": 2135,
+        "hInputExact": 2248,
+        "nearHeightExact": 2249,
+        "nearGradientExact": 2239,
+        "pointMaxMetres": 0,
+        "pointRmsMetres": 0,
+        "hInputMaxMetres": 2.3312150028651566e-09,
+        "angularMaxRadians": 1.1188630228279527e-16,
+        "nearHeightMaxMetres": 3.3926639275705384e-11,
+        "nearHeightRmsMetres": 2.9448202210840653e-12,
+        "gradientMax": 6.050757417669648e-13,
+        "nearDisplacementMaxMetres": 3.3926173057052715e-11,
+        "fp32NearDisplacementMaxMetres": 0,
+        "supportWeightMax": 9.587663996057927e-12
+      },
+      "remote/near": {
+        "samples": 4608,
+        "preparedPointExact": 4608,
+        "directionExact": 3532,
+        "hInputExact": 3935,
+        "nearHeightExact": 3935,
+        "nearGradientExact": 3935,
+        "pointMaxMetres": 0,
+        "pointRmsMetres": 0,
+        "hInputMaxMetres": 2.3744159907068985e-09,
+        "angularMaxRadians": 1.5700924586837752e-16,
+        "nearHeightMaxMetres": 3.239852830461132e-11,
+        "nearHeightRmsMetres": 2.503129051875053e-12,
+        "gradientMax": 4.495797541794437e-13,
+        "nearDisplacementMaxMetres": 3.239819304463702e-11,
+        "fp32NearDisplacementMaxMetres": 0,
+        "supportWeightMax": 0
+      },
+      "remote/outside-near-stress": {
+        "samples": 5376,
+        "preparedPointExact": 5376,
+        "directionExact": 3993,
+        "hInputExact": 4546,
+        "nearHeightExact": 4546,
+        "nearGradientExact": 4546,
+        "pointMaxMetres": 0,
+        "pointRmsMetres": 0,
+        "hInputMaxMetres": 2.1339280972982942e-09,
+        "angularMaxRadians": 1.5700924586837752e-16,
+        "nearHeightMaxMetres": 3.546174465185459e-11,
+        "nearHeightRmsMetres": 2.3385659670894124e-12,
+        "gradientMax": 5.335435851963264e-13,
+        "nearDisplacementMaxMetres": 3.546183964189176e-11,
+        "fp32NearDisplacementMaxMetres": 5.820766091346741e-11,
+        "supportWeightMax": 0
+      }
+    },
+    "shared-point-two-fp32-anchors": {
+      "face-seam-corner/near": {
+        "samples": 4992,
+        "preparedPointExact": 266,
+        "directionExact": 266,
+        "hInputExact": 266,
+        "nearHeightExact": 417,
+        "nearGradientExact": 417,
+        "pointMaxMetres": 4.299637092619174e-06,
+        "pointRmsMetres": 1.8087549918141971e-06,
+        "hInputMaxMetres": 4.299637143051438e-06,
+        "angularMaxRadians": 6.74906928059095e-13,
+        "nearHeightMaxMetres": 1.2894463607970863e-07,
+        "nearHeightRmsMetres": 1.3357767021140754e-08,
+        "gradientMax": 1.0064564668609687e-09,
+        "nearDisplacementMaxMetres": 1.2894463613021895e-07,
+        "fp32NearDisplacementMaxMetres": 2.384185791085014e-07,
+        "supportWeightMax": 0
+      },
+      "face-seam-corner/outside-near-stress": {
+        "samples": 5824,
+        "preparedPointExact": 2156,
+        "directionExact": 2156,
+        "hInputExact": 2156,
+        "nearHeightExact": 2227,
+        "nearGradientExact": 2217,
+        "pointMaxMetres": 0.00029699670668315866,
+        "pointRmsMetres": 2.567803080089882e-05,
+        "hInputMaxMetres": 0.0002615007911058428,
+        "angularMaxRadians": 4.104542362717992e-11,
+        "nearHeightMaxMetres": 4.310732275858431e-06,
+        "nearHeightRmsMetres": 1.4556817126633353e-07,
+        "gradientMax": 3.817021737397153e-08,
+        "nearDisplacementMaxMetres": 4.310732275861058e-06,
+        "fp32NearDisplacementMaxMetres": 4.31450378611913e-06,
+        "supportWeightMax": 0
+      },
+      "Florida/near": {
+        "samples": 192,
+        "preparedPointExact": 0,
+        "directionExact": 0,
+        "hInputExact": 0,
+        "nearHeightExact": 192,
+        "nearGradientExact": 192,
+        "pointMaxMetres": 3.933070063563754e-06,
+        "pointRmsMetres": 1.6425857899314762e-06,
+        "hInputMaxMetres": 3.5947993994548846e-06,
+        "angularMaxRadians": 5.642360661053585e-13,
+        "nearHeightMaxMetres": 0,
+        "nearHeightRmsMetres": 0,
+        "gradientMax": 0,
+        "nearDisplacementMaxMetres": 0,
+        "fp32NearDisplacementMaxMetres": 0,
+        "supportWeightMax": 0
+      },
+      "Florida/outside-near-stress": {
+        "samples": 224,
+        "preparedPointExact": 0,
+        "directionExact": 0,
+        "hInputExact": 0,
+        "nearHeightExact": 86,
+        "nearGradientExact": 84,
+        "pointMaxMetres": 0.0002712787901488536,
+        "pointRmsMetres": 8.188422842462353e-05,
+        "hInputMaxMetres": 0.00026728070660565675,
+        "angularMaxRadians": 4.195264130176419e-11,
+        "nearHeightMaxMetres": 5.8597057035481015e-06,
+        "nearHeightRmsMetres": 8.433345285227132e-07,
+        "gradientMax": 5.097979400590164e-08,
+        "nearDisplacementMaxMetres": 5.85970570390977e-06,
+        "fp32NearDisplacementMaxMetres": 5.797605032695099e-06,
+        "supportWeightMax": 6.811095372427634e-08
+      },
+      "Florida-support-transition/near": {
+        "samples": 2304,
+        "preparedPointExact": 0,
+        "directionExact": 0,
+        "hInputExact": 0,
+        "nearHeightExact": 482,
+        "nearGradientExact": 395,
+        "pointMaxMetres": 5.5299106477180175e-06,
+        "pointRmsMetres": 1.7519983645018674e-06,
+        "hInputMaxMetres": 5.4965625767126256e-06,
+        "angularMaxRadians": 8.627271239954958e-13,
+        "nearHeightMaxMetres": 1.6990726892096575e-07,
+        "nearHeightRmsMetres": 2.1927992657562973e-08,
+        "gradientMax": 6.9518459605516736e-09,
+        "nearDisplacementMaxMetres": 1.6990726891631355e-07,
+        "fp32NearDisplacementMaxMetres": 2.682209014892578e-07,
+        "supportWeightMax": 5.4323955445134686e-08
+      },
+      "Florida-support-transition/outside-near-stress": {
+        "samples": 2688,
+        "preparedPointExact": 0,
+        "directionExact": 0,
+        "hInputExact": 0,
+        "nearHeightExact": 272,
+        "nearGradientExact": 252,
+        "pointMaxMetres": 0.0006401323499672572,
+        "pointRmsMetres": 0.00010959732146855586,
+        "hInputMaxMetres": 0.0006348308555799575,
+        "angularMaxRadians": 9.96436967993933e-11,
+        "nearHeightMaxMetres": 1.3645620437818806e-05,
+        "nearHeightRmsMetres": 9.974604566450182e-07,
+        "gradientMax": 1.4676302774891624e-07,
+        "nearDisplacementMaxMetres": 1.3645620439229086e-05,
+        "fp32NearDisplacementMaxMetres": 1.3638950707455978e-05,
+        "supportWeightMax": 1.0518318993568698e-07
+      },
+      "remote/near": {
+        "samples": 4608,
+        "preparedPointExact": 0,
+        "directionExact": 0,
+        "hInputExact": 0,
+        "nearHeightExact": 0,
+        "nearGradientExact": 0,
+        "pointMaxMetres": 5.471829757091823e-06,
+        "pointRmsMetres": 1.8033442556004226e-06,
+        "hInputMaxMetres": 5.366600221639999e-06,
+        "angularMaxRadians": 8.423502320874503e-13,
+        "nearHeightMaxMetres": 7.425292213730783e-08,
+        "nearHeightRmsMetres": 1.0989202838818436e-08,
+        "gradientMax": 7.542745553622424e-10,
+        "nearDisplacementMaxMetres": 7.42529221345463e-08,
+        "fp32NearDisplacementMaxMetres": 2.457562461863554e-07,
+        "supportWeightMax": 0
+      },
+      "remote/outside-near-stress": {
+        "samples": 5376,
+        "preparedPointExact": 0,
+        "directionExact": 0,
+        "hInputExact": 0,
+        "nearHeightExact": 0,
+        "nearGradientExact": 0,
+        "pointMaxMetres": 0.0008136351865115534,
+        "pointRmsMetres": 0.000123746419691295,
+        "hInputMaxMetres": 0.0007441399463887653,
+        "angularMaxRadians": 1.1680098610275557e-10,
+        "nearHeightMaxMetres": 1.1891114870987707e-05,
+        "nearHeightRmsMetres": 6.889389644966698e-07,
+        "gradientMax": 1.8653850419514932e-07,
+        "nearDisplacementMaxMetres": 1.189111487122151e-05,
+        "fp32NearDisplacementMaxMetres": 1.1893339193264728e-05,
+        "supportWeightMax": 0
+      }
+    }
+  },
+  "witness": [
+    {
+      "Variant": "local-fp32-delta",
+      "Group": "face-seam-corner/near",
+      "Anchor": {
+        "X": -3678303.645689475,
+        "Y": -3678303.645689475,
+        "Z": -3678303.645689475,
+        "bits": [
+          "c14c102fd2a5f3e5",
+          "c14c102fd2a5f3e5",
+          "c14c102fd2a5f3e5"
+        ]
+      },
+      "View": {
+        "X": 3.4618630409240723,
+        "Y": 3.461792230606079,
+        "Z": 3.461721420288086,
+        "bits": [
+          "400bb1e540000000",
+          "400bb1c020000000",
+          "400bb19b00000000"
+        ]
+      },
+      "PointA": {
+        "X": -3678312.8833646104,
+        "Y": -3678312.8832938,
+        "Z": -3678312.8832229897,
+        "bits": [
+          "c14c103471121770",
+          "c14c1034710fc570",
+          "c14c1034710d7370"
+        ]
+      },
+      "PointB": {
+        "X": -3678312.883364188,
+        "Y": -3678312.883293616,
+        "Z": -3678312.883223044,
+        "bits": [
+          "c14c1034711213e5",
+          "c14c1034710fc3e5",
+          "c14c1034710d73e5"
+        ]
+      },
+      "InputA": {
+        "X": -3678303.645760285,
+        "Y": -3678303.645689475,
+        "Z": -3678303.6456186646,
+        "bits": [
+          "c14c102fd2a845e5",
+          "c14c102fd2a5f3e5",
+          "c14c102fd2a3a1e5"
+        ]
+      },
+      "InputB": {
+        "X": -3678303.6457600463,
+        "Y": -3678303.6456894744,
+        "Z": -3678303.645618903,
+        "bits": [
+          "c14c102fd2a843e4",
+          "c14c102fd2a5f3e4",
+          "c14c102fd2a3a3e5"
+        ]
+      },
+      "HeightA": -2.376184122721222,
+      "HeightB": -2.3761841176920235,
+      "PositionError": 4.6387975176638884e-07,
+      "InputError": 3.3750454220263475e-07,
+      "HeightError": 5.029198391071077e-09,
+      "AngularError": 5.296188581291741e-14
+    },
+    {
+      "Variant": "shared-point-two-fp32-anchors",
+      "Group": "face-seam-corner/near",
+      "Anchor": {
+        "X": -3678348.9005234707,
+        "Y": -3678303.645689475,
+        "Z": -3678258.390855479,
+        "bits": [
+          "c14c104673445a64",
+          "c14c102fd2a5f3e5",
+          "c14c101932078d66"
+        ]
+      },
+      "View": {
+        "X": 3.4618630409240723,
+        "Y": 3.461792230606079,
+        "Z": 3.461721420288086,
+        "bits": [
+          "400bb1e540000000",
+          "400bb1c020000000",
+          "400bb19b00000000"
+        ]
+      },
+      "PointA": {
+        "X": -3678312.883364188,
+        "Y": -3678312.883293616,
+        "Z": -3678312.883223044,
+        "bits": [
+          "c14c1034711213e5",
+          "c14c1034710fc3e5",
+          "c14c1034710d73e5"
+        ]
+      },
+      "PointB": {
+        "X": -3678312.8833649624,
+        "Y": -3678312.883293616,
+        "Z": -3678312.88322227,
+        "bits": [
+          "c14c103471121a64",
+          "c14c1034710fc3e5",
+          "c14c1034710d6d66"
+        ]
+      },
+      "InputA": {
+        "X": -3678303.6457600463,
+        "Y": -3678303.6456894744,
+        "Z": -3678303.645618903,
+        "bits": [
+          "c14c102fd2a843e4",
+          "c14c102fd2a5f3e4",
+          "c14c102fd2a3a3e5"
+        ]
+      },
+      "InputB": {
+        "X": -3678303.6457608207,
+        "Y": -3678303.6456894744,
+        "Z": -3678303.6456181286,
+        "bits": [
+          "c14c102fd2a84a63",
+          "c14c102fd2a5f3e4",
+          "c14c102fd2a39d66"
+        ]
+      },
+      "HeightA": -2.3761841176920235,
+      "HeightB": -2.3761841339727474,
+      "PositionError": 1.0951595167752622e-06,
+      "InputError": 1.0951595167752622e-06,
+      "HeightError": 1.6280723880157666e-08,
+      "AngularError": 1.719617826934985e-13
+    },
+    {
+      "Variant": "local-fp32-delta",
+      "Group": "face-seam-corner/near",
+      "Anchor": {
+        "X": -3678303.645689475,
+        "Y": -3678303.645689475,
+        "Z": -3678303.645689475,
+        "bits": [
+          "c14c102fd2a5f3e5",
+          "c14c102fd2a5f3e5",
+          "c14c102fd2a5f3e5"
+        ]
+      },
+      "View": {
+        "X": 3.461869478225708,
+        "Y": 3.4617762565612793,
+        "Z": 3.461730718612671,
+        "bits": [
+          "400bb1e8a0000000",
+          "400bb1b7c0000000",
+          "400bb19fe0000000"
+        ]
+      },
+      "PointA": {
+        "X": -3678312.8833710477,
+        "Y": -3678312.883277826,
+        "Z": -3678312.883232288,
+        "bits": [
+          "c14c103471124d70",
+          "c14c1034710f3f70",
+          "c14c1034710dc170"
+        ]
+      },
+      "PointB": {
+        "X": -3678312.8833708637,
+        "Y": -3678312.8832774037,
+        "Z": -3678312.883232581,
+        "bits": [
+          "c14c103471124be5",
+          "c14c1034710f3be5",
+          "c14c1034710dc3e5"
+        ]
+      },
+      "InputA": {
+        "X": -3678303.6457668017,
+        "Y": -3678303.64567358,
+        "Z": -3678303.6456280425,
+        "bits": [
+          "c14c102fd2a87c8f",
+          "c14c102fd2a56e8f",
+          "c14c102fd2a3f090"
+        ]
+      },
+      "InputB": {
+        "X": -3678303.645766722,
+        "Y": -3678303.6456732624,
+        "Z": -3678303.6456284393,
+        "bits": [
+          "c14c102fd2a87be4",
+          "c14c102fd2a56be5",
+          "c14c102fd2a3f3e4"
+        ]
+      },
+      "HeightA": -2.3761836801539937,
+      "HeightB": -2.3761836668945437,
+      "PositionError": 5.459002305695457e-07,
+      "InputError": 5.14396403723182e-07,
+      "HeightError": 1.3259449982427896e-08,
+      "AngularError": 8.073741526184894e-14
+    },
+    {
+      "Variant": "local-fp32-basis",
+      "Group": "face-seam-corner/near",
+      "Anchor": {
+        "X": -3678303.645689475,
+        "Y": -3678303.645689475,
+        "Z": -3678303.645689475,
+        "bits": [
+          "c14c102fd2a5f3e5",
+          "c14c102fd2a5f3e5",
+          "c14c102fd2a5f3e5"
+        ]
+      },
+      "View": {
+        "X": 3.461869478225708,
+        "Y": 3.4617762565612793,
+        "Z": 3.461730718612671,
+        "bits": [
+          "400bb1e8a0000000",
+          "400bb1b7c0000000",
+          "400bb19fe0000000"
+        ]
+      },
+      "PointA": {
+        "X": -3678312.8833710477,
+        "Y": -3678312.883277826,
+        "Z": -3678312.883232288,
+        "bits": [
+          "c14c103471124d70",
+          "c14c1034710f3f70",
+          "c14c1034710dc170"
+        ]
+      },
+      "PointB": {
+        "X": -3678312.883371109,
+        "Y": -3678312.8832778875,
+        "Z": -3678312.8832323495,
+        "bits": [
+          "c14c103471124df4",
+          "c14c1034710f3ff4",
+          "c14c1034710dc1f4"
+        ]
+      },
+      "InputA": {
+        "X": -3678303.6457668017,
+        "Y": -3678303.64567358,
+        "Z": -3678303.6456280425,
+        "bits": [
+          "c14c102fd2a87c8f",
+          "c14c102fd2a56e8f",
+          "c14c102fd2a3f090"
+        ]
+      },
+      "InputB": {
+        "X": -3678303.6457668017,
+        "Y": -3678303.645673581,
+        "Z": -3678303.6456280425,
+        "bits": [
+          "c14c102fd2a87c8f",
+          "c14c102fd2a56e91",
+          "c14c102fd2a3f090"
+        ]
+      },
+      "HeightA": -2.3761836801539937,
+      "HeightB": -2.3761836801779808,
+      "PositionError": 1.0646446915301113e-07,
+      "InputError": 9.313225746154785e-10,
+      "HeightError": 2.3987034580841282e-11,
+      "AngularError": 7.850462293418876e-17
+    },
+    {
+      "Variant": "shared-point-two-fp32-anchors",
+      "Group": "face-seam-corner/near",
+      "Anchor": {
+        "X": -3678348.9005234707,
+        "Y": -3678303.645689475,
+        "Z": -3678258.390855479,
+        "bits": [
+          "c14c104673445a64",
+          "c14c102fd2a5f3e5",
+          "c14c101932078d66"
+        ]
+      },
+      "View": {
+        "X": 3.461869478225708,
+        "Y": 3.4617762565612793,
+        "Z": 3.461730718612671,
+        "bits": [
+          "400bb1e8a0000000",
+          "400bb1b7c0000000",
+          "400bb19fe0000000"
+        ]
+      },
+      "PointA": {
+        "X": -3678312.8833708637,
+        "Y": -3678312.8832774037,
+        "Z": -3678312.883232581,
+        "bits": [
+          "c14c103471124be5",
+          "c14c1034710f3be5",
+          "c14c1034710dc3e5"
+        ]
+      },
+      "PointB": {
+        "X": -3678312.883372592,
+        "Y": -3678312.8832774037,
+        "Z": -3678312.883233714,
+        "bits": [
+          "c14c103471125a64",
+          "c14c1034710f3be5",
+          "c14c1034710dcd66"
+        ]
+      },
+      "InputA": {
+        "X": -3678303.645766722,
+        "Y": -3678303.6456732624,
+        "Z": -3678303.6456284393,
+        "bits": [
+          "c14c102fd2a87be4",
+          "c14c102fd2a56be5",
+          "c14c102fd2a3f3e4"
+        ]
+      },
+      "InputB": {
+        "X": -3678303.6457674964,
+        "Y": -3678303.6456723087,
+        "Z": -3678303.645628619,
+        "bits": [
+          "c14c102fd2a88263",
+          "c14c102fd2a563e5",
+          "c14c102fd2a3f566"
+        ]
+      },
+      "HeightA": -2.3761836668945437,
+      "HeightB": -2.37618364840721,
+      "PositionError": 2.0663511715308117e-06,
+      "InputError": 1.2415676553224843e-06,
+      "HeightError": 1.848733388598589e-08,
+      "AngularError": 1.9487009174287435e-13
+    },
+    {
+      "Variant": "local-fp32-basis",
+      "Group": "face-seam-corner/near",
+      "Anchor": {
+        "X": -3678303.645689475,
+        "Y": -3678303.645689475,
+        "Z": -3678303.645689475,
+        "bits": [
+          "c14c102fd2a5f3e5",
+          "c14c102fd2a5f3e5",
+          "c14c102fd2a5f3e5"
+        ]
+      },
+      "View": {
+        "X": 3.4618730545043945,
+        "Y": 3.461760997772217,
+        "Z": 3.461742401123047,
+        "bits": [
+          "400bb1ea80000000",
+          "400bb1afc0000000",
+          "400bb1a600000000"
+        ]
+      },
+      "PointA": {
+        "X": -3678312.883374624,
+        "Y": -3678312.883262567,
+        "Z": -3678312.8832439706,
+        "bits": [
+          "c14c103471126b70",
+          "c14c1034710ebf70",
+          "c14c1034710e2370"
+        ]
+      },
+      "PointB": {
+        "X": -3678312.8833746854,
+        "Y": -3678312.8832626287,
+        "Z": -3678312.883244032,
+        "bits": [
+          "c14c103471126bf4",
+          "c14c1034710ebff4",
+          "c14c1034710e23f4"
+        ]
+      },
+      "InputA": {
+        "X": -3678303.645770378,
+        "Y": -3678303.6456583217,
+        "Z": -3678303.6456397246,
+        "bits": [
+          "c14c102fd2a89a8f",
+          "c14c102fd2a4ee90",
+          "c14c102fd2a4528f"
+        ]
+      },
+      "InputB": {
+        "X": -3678303.645770378,
+        "Y": -3678303.6456583217,
+        "Z": -3678303.6456397255,
+        "bits": [
+          "c14c102fd2a89a8f",
+          "c14c102fd2a4ee90",
+          "c14c102fd2a45291"
+        ]
+      },
+      "HeightA": -2.3761831989560562,
+      "HeightB": -2.376183198945555,
+      "PositionError": 1.0646446915301113e-07,
+      "InputError": 9.313225746154785e-10,
+      "HeightError": 1.050137754532443e-11,
+      "AngularError": 7.850462293418877e-17
+    },
+    {
+      "Variant": "local-fp64-norm-reassociation",
+      "Group": "face-seam-corner/near",
+      "Anchor": {
+        "X": -3678303.645689475,
+        "Y": -3678303.645689475,
+        "Z": -3678303.645689475,
+        "bits": [
+          "c14c102fd2a5f3e5",
+          "c14c102fd2a5f3e5",
+          "c14c102fd2a5f3e5"
+        ]
+      },
+      "View": {
+        "X": 3.461786985397339,
+        "Y": 3.461724281311035,
+        "Z": 3.4618654251098633,
+        "bits": [
+          "400bb1bd60000000",
+          "400bb19c80000000",
+          "400bb1e680000000"
+        ]
+      },
+      "PointA": {
+        "X": -3678312.883288555,
+        "Y": -3678312.8832258508,
+        "Z": -3678312.8833669946,
+        "bits": [
+          "c14c1034710f9970",
+          "c14c1034710d8b70",
+          "c14c103471122b70"
+        ]
+      },
+      "PointB": {
+        "X": -3678312.883288555,
+        "Y": -3678312.8832258508,
+        "Z": -3678312.8833669946,
+        "bits": [
+          "c14c1034710f9970",
+          "c14c1034710d8b70",
+          "c14c103471122b70"
+        ]
+      },
+      "InputA": {
+        "X": -3678303.6456842297,
+        "Y": -3678303.645621526,
+        "Z": -3678303.6457626694,
+        "bits": [
+          "c14c102fd2a5c7e5",
+          "c14c102fd2a3b9e6",
+          "c14c102fd2a859e5"
+        ]
+      },
+      "InputB": {
+        "X": -3678303.6456842297,
+        "Y": -3678303.645621526,
+        "Z": -3678303.645762669,
+        "bits": [
+          "c14c102fd2a5c7e5",
+          "c14c102fd2a3b9e6",
+          "c14c102fd2a859e4"
+        ]
+      },
+      "HeightA": -2.3761800457154525,
+      "HeightB": -2.376180045720704,
+      "PositionError": 0,
+      "InputError": 4.656612873077393e-10,
+      "HeightError": 5.2513549064769904e-12,
+      "AngularError": 7.850462293418876e-17
+    },
+    {
+      "Variant": "local-fp64-norm-reassociation",
+      "Group": "face-seam-corner/near",
+      "Anchor": {
+        "X": -3678303.645689475,
+        "Y": -3678303.645689475,
+        "Z": -3678303.645689475,
+        "bits": [
+          "c14c102fd2a5f3e5",
+          "c14c102fd2a5f3e5",
+          "c14c102fd2a5f3e5"
+        ]
+      },
+      "View": {
+        "X": 3.461721420288086,
+        "Y": 3.461792230606079,
+        "Z": 3.4618630409240723,
+        "bits": [
+          "400bb19b00000000",
+          "400bb1c020000000",
+          "400bb1e540000000"
+        ]
+      },
+      "PointA": {
+        "X": -3678312.8832229897,
+        "Y": -3678312.8832938,
+        "Z": -3678312.8833646104,
+        "bits": [
+          "c14c1034710d7370",
+          "c14c1034710fc570",
+          "c14c103471121770"
+        ]
+      },
+      "PointB": {
+        "X": -3678312.8832229897,
+        "Y": -3678312.8832938,
+        "Z": -3678312.8833646104,
+        "bits": [
+          "c14c1034710d7370",
+          "c14c1034710fc570",
+          "c14c103471121770"
+        ]
+      },
+      "InputA": {
+        "X": -3678303.645618664,
+        "Y": -3678303.6456894744,
+        "Z": -3678303.6457602847,
+        "bits": [
+          "c14c102fd2a3a1e4",
+          "c14c102fd2a5f3e4",
+          "c14c102fd2a845e4"
+        ]
+      },
+      "InputB": {
+        "X": -3678303.6456186646,
+        "Y": -3678303.645689475,
+        "Z": -3678303.645760285,
+        "bits": [
+          "c14c102fd2a3a1e5",
+          "c14c102fd2a5f3e5",
+          "c14c102fd2a845e5"
+        ]
+      },
+      "HeightA": -2.376181144775517,
+      "HeightB": -2.376181144786952,
+      "PositionError": 0,
+      "InputError": 8.065490087349327e-10,
+      "HeightError": 1.1435297153639112e-11,
+      "AngularError": 0
+    }
+  ],
+  "informationLossWitness": {
+    "meaning": "Same anchor and identical FP32 local offset encode two distinct current-input results; no decoder of that payload alone can recover both",
+    "camera": {
+      "X": 1762774.9274627417,
+      "Y": 4436454.586141296,
+      "Z": 4219049.165527254,
+      "bits": [
+        "413ae5d6ed6e32c0",
+        "4150ec79a58356c8",
+        "4150182a4a97ffa0"
+      ]
+    },
+    "anchor": {
+      "X": 1762772.1594909444,
+      "Y": 4436447.619862736,
+      "Z": 4219042.5406264085,
+      "bits": [
+        "413ae5d428d46606",
+        "4150ec77e7abd4c1",
+        "41501828a2999f82"
+      ]
+    },
+    "view1": {
+      "X": -1.659104585647583,
+      "Y": -4.1753106117248535,
+      "Z": -3.9706637859344482,
+      "bits": [
+        "bffa8bb140000000",
+        "c010b384a0000000",
+        "c00fc3eb60000000"
+      ]
+    },
+    "view2": {
+      "X": -1.6591044664382935,
+      "Y": -4.1753106117248535,
+      "Z": -3.9706637859344482,
+      "bits": [
+        "bffa8bb120000000",
+        "c010b384a0000000",
+        "c00fc3eb60000000"
+      ]
+    },
+    "point1": {
+      "X": 1762776.5865673274,
+      "Y": 4436458.761451907,
+      "Z": 4219053.13619104,
+      "bits": [
+        "413ae5d8962946c0",
+        "4150ec7ab0bba0c8",
+        "4150182b48b75aa0"
+      ]
+    },
+    "point2": {
+      "X": 1762776.5865672082,
+      "Y": 4436458.761451907,
+      "Z": 4219053.13619104,
+      "bits": [
+        "413ae5d8962944c0",
+        "4150ec7ab0bba0c8",
+        "4150182b48b75aa0"
+      ]
+    },
+    "encodedLocal": {
+      "X": 4.42707633972168,
+      "Y": 11.141589164733887,
+      "Z": 10.595564842224121,
+      "bits": [
+        "4011b55380000000",
+        "4026487e60000000",
+        "402530ede0000000"
+      ]
+    },
+    "input1": {
+      "X": 1762772.1595832054,
+      "Y": 4436447.619862756,
+      "Z": 4219042.54058784,
+      "bits": [
+        "413ae5d428da71e8",
+        "4150ec77e7abd4d6",
+        "41501828a298fdbd"
+      ]
+    },
+    "input2": {
+      "X": 1762772.1595830955,
+      "Y": 4436447.619862778,
+      "Z": 4219042.540587861,
+      "bits": [
+        "413ae5d428da7010",
+        "4150ec77e7abd4ee",
+        "41501828a298fdd4"
+      ]
+    },
+    "height1": 0.1226087860617272,
+    "height2": 0.12260878599794128
+  },
+  "reduction": {
+    "120": {
+      "n": 12000,
+      "exact": 8989,
+      "cellMismatch": 0,
+      "maxQuotientDelta": 7.275957614183426e-12,
+      "example": {
+        "anchor": -6363089.8,
+        "point": -6363081.342573929,
+        "cell": 120,
+        "direct": -53025.67785478274,
+        "local": -53025.677854782734,
+        "directBits": "c0e9e435b0fc836a",
+        "localBits": "c0e9e435b0fc8369"
+      }
+    },
+    "180": {
+      "n": 12000,
+      "exact": 8972,
+      "cellMismatch": 0,
+      "maxQuotientDelta": 7.275957614183426e-12,
+      "example": {
+        "anchor": -6363089.8,
+        "point": -6363081.342573929,
+        "cell": 180,
+        "direct": -35350.45190318849,
+        "local": -35350.4519031885,
+        "directBits": "c0e142ce75fdacf1",
+        "localBits": "c0e142ce75fdacf2"
+      }
+    },
+    "220": {
+      "n": 12000,
+      "exact": 8992,
+      "cellMismatch": 0,
+      "maxQuotientDelta": 3.637978807091713e-12,
+      "example": {
+        "anchor": -6331413.8,
+        "point": -6331376.243492889,
+        "cell": 220,
+        "direct": -28778.982924967677,
+        "local": -28778.98292496768,
+        "directBits": "c0dc1abee83e1fa6",
+        "localBits": "c0dc1abee83e1fa7"
+      }
+    },
+    "240": {
+      "n": 12000,
+      "exact": 8989,
+      "cellMismatch": 0,
+      "maxQuotientDelta": 3.637978807091713e-12,
+      "example": {
+        "anchor": -6363089.8,
+        "point": -6363081.342573929,
+        "cell": 240,
+        "direct": -26512.83892739137,
+        "local": -26512.838927391367,
+        "directBits": "c0d9e435b0fc836a",
+        "localBits": "c0d9e435b0fc8369"
+      }
+    },
+    "260": {
+      "n": 12000,
+      "exact": 9014,
+      "cellMismatch": 0,
+      "maxQuotientDelta": 3.637978807091713e-12,
+      "example": {
+        "anchor": -6236385.8,
+        "point": -6236373.355150032,
+        "cell": 260,
+        "direct": -23986.051365961663,
+        "local": -23986.05136596166,
+        "directBits": "c0d76c834994755e",
+        "localBits": "c0d76c834994755d"
+      }
+    },
+    "320": {
+      "n": 12000,
+      "exact": 9129,
+      "cellMismatch": 0,
+      "maxQuotientDelta": 3.637978807091713e-12,
+      "example": {
+        "anchor": 6355170.8,
+        "point": 6355187.471020508,
+        "cell": 320,
+        "direct": 19859.960846939088,
+        "local": 19859.960846939084,
+        "directBits": "40d364fd7e8428f6",
+        "localBits": "40d364fd7e8428f5"
+      }
+    },
+    "520": {
+      "n": 12000,
+      "exact": 9014,
+      "cellMismatch": 0,
+      "maxQuotientDelta": 1.8189894035458565e-12,
+      "example": {
+        "anchor": -6236385.8,
+        "point": -6236373.355150032,
+        "cell": 520,
+        "direct": -11993.025682980831,
+        "local": -11993.02568298083,
+        "directBits": "c0c76c834994755e",
+        "localBits": "c0c76c834994755d"
+      }
+    },
+    "240000": {
+      "n": 12000,
+      "exact": 9008,
+      "cellMismatch": 0,
+      "maxQuotientDelta": 3.552713678800501e-15,
+      "example": {
+        "anchor": -6363089.8,
+        "point": -6363081.342573929,
+        "cell": 240000,
+        "direct": -26.512838927391368,
+        "local": -26.51283892739137,
+        "directBits": "c03a8349697542fb",
+        "localBits": "c03a8349697542fc"
+      }
+    }
+  },
+  "canonicalGradientBound": 0.7331112062836733,
+  "facilityIdentity": 5597594574148789740,
+  "runtime": ".NET 10.0.11"
+}

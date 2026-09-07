@@ -11,9 +11,22 @@ renderer. Simulation owns celestial identity, exact time, physical state, and
 reference-frame transforms. Graphics consumes immutable root-resolved snapshots
 and performs FP64 camera-relative subtraction before GPU transport.
 
-## Banked baseline
+## Current M13 development candidate
 
-The banked, production-accepted baseline is **M12D-P2S5H — Earth Route
+The current banked M13.2 baseline is `4accf92fd080c16cc8656080aa69def3fa65db53`,
+tag `m13.2-ordinary-terrain-shading`. The unbanked
+[KSA terrain responsibility candidate](engineering-evidence/ksa-terrain-convergence/README.md)
+prepares full terrain relief at shared vertices and makes TES interpolate the
+published render surface. Gameplay retains full physical queries. The candidate
+also uses physical ground clearance for render sampling. Its measured coherence,
+performance, temporary A/B bridge and retirement gate are in that report; it
+does not move main or declare a new production milestone.
+The technical closeout is blocked only on execution of the classified scratch
+cleanup; the architectural candidate and normal deployment remain available.
+
+## Historical Earth-route baseline
+
+The production-accepted Earth-route baseline is **M12D-P2S5H — Earth Route
 Convergence**, on **NCSM1 / New Earth Renderer**:
 
 - authoritative production commit `32ffac50ab5c06518ede24edfb5c531976d4ec99`;

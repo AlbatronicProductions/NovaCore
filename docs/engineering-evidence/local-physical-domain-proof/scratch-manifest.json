@@ -1,0 +1,173 @@
+{
+  "root": "E:\\NovaCore\\build\\local-physical-domain-proof",
+  "files": [
+    {
+      "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\bin\\CoordinateProof.deps.json",
+      "bytes": 1546,
+      "sha256": "b7e96b592b99af49c90caa98f54546567e81015ae2c28183a89cb18cb2208557"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\bin\\CoordinateProof.dll",
+      "bytes": 37888,
+      "sha256": "2ed82e32128cce07b1278a63912d6ab17343fb28cdfdbc16ea606f9fbddf0956"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\bin\\CoordinateProof.exe",
+      "bytes": 162304,
+      "sha256": "81a72e2470b816590a7e3b009d5a572e6ba26492de6b77e6721456013604514c"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\bin\\CoordinateProof.pdb",
+      "bytes": 15564,
+      "sha256": "433f3409f0c0f9b2a1a0ffb2a458a96f67e39683e257f1cc3fb8c171e8bd7449"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\bin\\CoordinateProof.runtimeconfig.json",
+      "bytes": 342,
+      "sha256": "c230a317a54dd960bcbeb5f347f52e18dc665a26f7efda2159fced9a5ac7e097"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\bin\\NovaCore.Core.dll",
+      "bytes": 86528,
+      "sha256": "19e8bdbb02ee2608833b97fd4e1697ad7ca7783931ed6bf6359392fcd48ad8da"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\bin\\NovaCore.Core.pdb",
+      "bytes": 31136,
+      "sha256": "c375282a662ef41e6519e8cb77b09deb8a5f50bca36e5f4f498f8b672893053d"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\bin\\NovaCore.Graphics.dll",
+      "bytes": 634880,
+      "sha256": "78dd856286036d69a1aca71536f1bdd285b481fef1727838b9d3b9016c34a95d"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\bin\\NovaCore.Graphics.pdb",
+      "bytes": 143408,
+      "sha256": "1525fca65c581462b8f6c27243e0ac90cf40d2c1cadec544221d4f5eb1c9327e"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\bin\\NovaCore.Interop.dll",
+      "bytes": 23040,
+      "sha256": "cabcaa39c3a3dbfd36b00e1a4fbd8e04e40c3c16bbc43addf540440e4c40e3ac"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\bin\\NovaCore.Interop.pdb",
+      "bytes": 14060,
+      "sha256": "a536e5eefbbfb87f8d569e7aa4a9b8befeb8dd19eeae27152df36e7d32468b03"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\CoordinateProof.csproj.nuget.dgspec.json",
+      "bytes": 21612,
+      "sha256": "7a853f9c092797e55f834a2dd6cae601ad8196c3d585328eea6b24699b53c3dc"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\CoordinateProof.csproj.nuget.g.props",
+      "bytes": 1135,
+      "sha256": "1e51d59a0a61bbe5b26b92eb01307b6f7909cd9d6f3577f96af5da8201057d69"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\CoordinateProof.csproj.nuget.g.targets",
+      "bytes": 150,
+      "sha256": "971cc9b535384849b5c661d776cd7a80833a416265e32e8968e06c367368b8b5"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\project.assets.json",
+      "bytes": 20905,
+      "sha256": "a1f99ab008f08594356fbdd4e78850f3bc1ee4dab5392b5ddd231c1d68b66adb"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\project.nuget.cache",
+      "bytes": 238,
+      "sha256": "fe9d0dc8e09f565f785b3f0041ca2ddc5b6cda06c41656dcd75d94b8ec7de4c1"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\Release\\net10.0\\.NETCoreApp,Version=v10.0.AssemblyAttributes.cs",
+      "bytes": 200,
+      "sha256": "93d67476196ebfc80d1d7d8844b91146cfd678d105f5ce635eb900ca40610c9b"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\Release\\net10.0\\apphost.exe",
+      "bytes": 162304,
+      "sha256": "81a72e2470b816590a7e3b009d5a572e6ba26492de6b77e6721456013604514c"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\Release\\net10.0\\Coordina.ABFEC4C8.Up2Date",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\Release\\net10.0\\CoordinateProof.AssemblyInfo.cs",
+      "bytes": 1021,
+      "sha256": "fdc7f4390d45f2f379af171620a6a18d44e7c7200fdc5fcd9d1c65e000363d51"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\Release\\net10.0\\CoordinateProof.AssemblyInfoInputs.cache",
+      "bytes": 66,
+      "sha256": "96ec2dfacb18fdf6f48f70fa5c989fe8107382eeb91571ad89b6c55b8441087c"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\Release\\net10.0\\CoordinateProof.assets.cache",
+      "bytes": 152,
+      "sha256": "33144b0791de20c2e427e6b08d892e7fd3a81d88e4ee7127c72aa91ca37ac917"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\Release\\net10.0\\CoordinateProof.csproj.AssemblyReference.cache",
+      "bytes": 2597,
+      "sha256": "8df2e9d382e4b0a9292d11fae7e27a25f097a8b679439fcd7fa9508bb1ec5216"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\Release\\net10.0\\CoordinateProof.csproj.CoreCompileInputs.cache",
+      "bytes": 66,
+      "sha256": "6b5dc8d10ee99be6b7bdf800fc64507eeb07f78b20d1c36892ed2b12cd5adb41"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\Release\\net10.0\\CoordinateProof.csproj.FileListAbsolute.txt",
+      "bytes": 1593,
+      "sha256": "5127d3bf4a14217f2e433ba0ceb9465aa3aeb846c8ef25cb8f54558131cf9f82"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\Release\\net10.0\\CoordinateProof.dll",
+      "bytes": 37888,
+      "sha256": "2ed82e32128cce07b1278a63912d6ab17343fb28cdfdbc16ea606f9fbddf0956"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\Release\\net10.0\\CoordinateProof.GeneratedMSBuildEditorConfig.editorconfig",
+      "bytes": 855,
+      "sha256": "cc063a79d747f70ee58f32a0f08c05a0075ef9456b0a72cde57f55f1596747d5"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\Release\\net10.0\\CoordinateProof.genruntimeconfig.cache",
+      "bytes": 66,
+      "sha256": "f86c8a877b0a606ac12f2f3388a5243dff2f4aeefd7d44a4c1be386ae8f6cc49"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\Release\\net10.0\\CoordinateProof.GlobalUsings.g.cs",
+      "bytes": 239,
+      "sha256": "a3c6048bb4d922b1799a9977f84362a3787b68810cac67aa86ac3aa23295f227"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\Release\\net10.0\\CoordinateProof.pdb",
+      "bytes": 15564,
+      "sha256": "433f3409f0c0f9b2a1a0ffb2a458a96f67e39683e257f1cc3fb8c171e8bd7449"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\Release\\net10.0\\CoordinateProof.sourcelink.json",
+      "bytes": 143,
+      "sha256": "293b14151d144d6b6498ae3627388a232f02736c73afce4aa3dcbacab6516e63"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\Release\\net10.0\\ref\\CoordinateProof.dll",
+      "bytes": 9728,
+      "sha256": "bfb88c6e84bc22a5b73fa3028209aeb2094eb1f7de022046b4318f7af4c57596"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\local-physical-domain-proof\\obj\\Release\\net10.0\\refint\\CoordinateProof.dll",
+      "bytes": 9728,
+      "sha256": "bfb88c6e84bc22a5b73fa3028209aeb2094eb1f7de022046b4318f7af4c57596"
+    }
+  ],
+  "fileCount": 33,
+  "logicalBytes": 1436946.0,
+  "classification": "Only newly generated CPU preflight bin/obj output; source/project/reproducer/results retained"
+}

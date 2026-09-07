@@ -45,9 +45,15 @@ void main()
   if(frame.metadata.x==0u||vertex>=frame.metadata.z)return;
   dvec3 direction=canonicalDirection(lattice.values[vertex].xyz,frame);
   double radius=frame.transition.y;
+#if NOVACORE_PREPARED_RENDER_TERRAIN
+  double height=CandidatePhysicalHeightD(direction);
+  physical.values[vertex].body=dvec4(direction*(radius+height),height);
+  physical.values[vertex].normal=vec4(CandidatePhysicalNormalD(direction,radius),1.0);
+#else
   double height=CandidateBaseHeightD(direction);
   physical.values[vertex].body=dvec4(direction*(radius+height),height);
   physical.values[vertex].normal=vec4(CandidateBaseNormalD(direction,radius),1.0);
+#endif
   physical.values[vertex].reserved=vec4(0.0);
   // Test-only catalog queries use the same function as real geographic demand.
   if(vertex==3u&&regionalCatalog.entries[0].storage.w!=0u){

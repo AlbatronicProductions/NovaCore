@@ -1,0 +1,192 @@
+[
+  {
+    "pose": "orbital",
+    "baselineTerrain": {
+      "n": 100,
+      "median": 0.86872,
+      "p95": 0.94356,
+      "minimum": 0.79144,
+      "maximum": 0.9536,
+      "p99": 0.94696
+    },
+    "candidateTerrain": {
+      "n": 100,
+      "median": 0.83636,
+      "p95": 0.90296,
+      "minimum": 0.761,
+      "maximum": 0.91188,
+      "p99": 0.90712
+    },
+    "baselineTotal": {
+      "n": 100,
+      "median": 1.26044,
+      "p95": 1.41156,
+      "minimum": 0.96296,
+      "maximum": 1.45684,
+      "p99": 1.43128
+    },
+    "candidateTotal": {
+      "n": 100,
+      "median": 1.14236,
+      "p95": 1.2242,
+      "minimum": 0.92064,
+      "maximum": 1.26796,
+      "p99": 1.24344
+    },
+    "gainMs": 0.032360000000000055,
+    "gainPercent": 3.725020720139982,
+    "candidateDistanceTo833": -7.18764
+  },
+  {
+    "pose": "factor1",
+    "baselineTerrain": {
+      "n": 100,
+      "median": 6.28488,
+      "p95": 6.5384,
+      "minimum": 6.21828,
+      "maximum": 7.49308,
+      "p99": 6.77108
+    },
+    "candidateTerrain": {
+      "n": 100,
+      "median": 6.04852,
+      "p95": 6.61872,
+      "minimum": 5.98504,
+      "maximum": 7.1506,
+      "p99": 6.64908
+    },
+    "baselineTotal": {
+      "n": 100,
+      "median": 9.23236,
+      "p95": 9.5154,
+      "minimum": 9.0214,
+      "maximum": 10.45261,
+      "p99": 9.78292
+    },
+    "candidateTotal": {
+      "n": 100,
+      "median": 9.08768,
+      "p95": 9.68848,
+      "minimum": 8.76324,
+      "maximum": 10.0464,
+      "p99": 9.74548
+    },
+    "gainMs": 0.23636000000000035,
+    "gainPercent": 3.760771884268281,
+    "candidateDistanceTo833": 0.7576800000000006
+  },
+  {
+    "pose": "florida",
+    "baselineTerrain": {
+      "n": 100,
+      "median": 8.02504,
+      "p95": 8.35704,
+      "minimum": 7.94628,
+      "maximum": 8.45492,
+      "p99": 8.41372
+    },
+    "candidateTerrain": {
+      "n": 100,
+      "median": 8.06448,
+      "p95": 8.30804,
+      "minimum": 7.74392,
+      "maximum": 8.34552,
+      "p99": 8.32552
+    },
+    "baselineTotal": {
+      "n": 100,
+      "median": 11.13628,
+      "p95": 11.48336,
+      "minimum": 10.70288,
+      "maximum": 11.80083,
+      "p99": 11.71593
+    },
+    "candidateTotal": {
+      "n": 100,
+      "median": 11.29351,
+      "p95": 11.92392,
+      "minimum": 10.4996,
+      "maximum": 12.1412,
+      "p99": 12.03557
+    },
+    "gainMs": -0.03943999999999903,
+    "gainPercent": -0.4914617248013596,
+    "candidateDistanceTo833": 2.9635099999999994
+  },
+  {
+    "pose": "active",
+    "baselineTerrain": {
+      "n": 100,
+      "median": 22.8102,
+      "p95": 22.89748,
+      "minimum": 22.6946,
+      "maximum": 22.94884,
+      "p99": 22.92208
+    },
+    "candidateTerrain": {
+      "n": 100,
+      "median": 14.48768,
+      "p95": 14.5578,
+      "minimum": 14.41276,
+      "maximum": 14.58364,
+      "p99": 14.57596
+    },
+    "baselineTotal": {
+      "n": 100,
+      "median": 26.40286,
+      "p95": 27.06091,
+      "minimum": 25.33344,
+      "maximum": 27.52192,
+      "p99": 27.27917
+    },
+    "candidateTotal": {
+      "n": 100,
+      "median": 17.35252,
+      "p95": 17.62653,
+      "minimum": 16.9818,
+      "maximum": 17.85634,
+      "p99": 17.73311
+    },
+    "gainMs": 8.322519999999999,
+    "gainPercent": 36.485958036317086,
+    "candidateDistanceTo833": 9.022519999999998
+  },
+  {
+    "pose": "grazing",
+    "baselineTerrain": {
+      "n": 100,
+      "median": 13.35304,
+      "p95": 13.50032,
+      "minimum": 12.81308,
+      "maximum": 15.01004,
+      "p99": 13.99908
+    },
+    "candidateTerrain": {
+      "n": 100,
+      "median": 7.52564,
+      "p95": 8.33064,
+      "minimum": 7.40992,
+      "maximum": 8.98852,
+      "p99": 8.46744
+    },
+    "baselineTotal": {
+      "n": 100,
+      "median": 16.45209,
+      "p95": 16.93884,
+      "minimum": 16.13232,
+      "maximum": 17.89804,
+      "p99": 17.21894
+    },
+    "candidateTotal": {
+      "n": 100,
+      "median": 10.91547,
+      "p95": 12.04125,
+      "minimum": 10.2104,
+      "maximum": 12.51092,
+      "p99": 12.34868
+    },
+    "gainMs": 5.8274,
+    "gainPercent": 43.64099860406319,
+    "candidateDistanceTo833": 2.585469999999999
+  }
+]

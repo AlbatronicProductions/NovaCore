@@ -1,0 +1,5 @@
+{
+  "time": "2026-09-06T22:05:40.7669563-04:00",
+  "Id": 1001,
+  "Message": "Fault bucket , type 0\r\nEvent Name: AppHangTransient\r\nResponse: Not available\r\nCab Id: 0\r\n\r\nProblem signature:\r\nP1: NovaCore.Triangle.exe\r\nP2: 1.0.0.0\r\nP3: 6a630000\r\nP4: unknown\r\nP5: unknown\r\nP6: unknown\r\nP7: unknown\r\nP8: \r\nP9: \r\nP10: \r\n\r\nAttached files:\r\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.f01327f5-0589-496c-ab38-c95404f6db81.tmp.WERInternalMetadata.xml\r\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.598b2473-1f8a-4748-8574-2ceaf7413c1c.tmp.csv\r\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.39dc28c1-e1f2-4b07-90b2-890230317fe3.tmp.txt\r\n\r\nThese files may be available here:\r\nNULL\r\n\r\nAnalysis symbol: \r\nRechecking for solution: 0\r\nReport Id: 38a0d25f-1f8e-4a87-a03d-659448fa4ed9\r\nReport Status: 2049\r\nHashed bucket: \r\nCab Guid: 0"
+}

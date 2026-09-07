@@ -98,7 +98,7 @@ internal static class FacilitySupportTests
             foreach(var vertex in sample.GetProperty("vertices").EnumerateArray())
             {
                 var p=vertex.GetProperty("position");var direction=new Double3(p[0].GetDouble(),p[1].GetDouble(),p[2].GetDouble()).Normalized();
-                var expected=PlanetaryPhysicalSurface.EvaluateBaseHeightNoGradient(PlanetaryTerrainDefinition.EarthProductionCubeV5,direction);
+                var expected=PlanetaryPhysicalSurface.EvaluateFinalHeightNoGradient(PlanetaryTerrainDefinition.EarthProductionCubeV5,direction);
                 maxBaseError=Math.Max(maxBaseError,Math.Abs(expected-vertex.GetProperty("preparedHeight").GetDouble()));
                 if(isContact){var norm=vertex.GetProperty("normal");maxNormalError=Math.Max(maxNormalError,(new Double3(norm[0].GetDouble(),norm[1].GetDouble(),norm[2].GetDouble())-region.Up).LengthSquared);}
             }

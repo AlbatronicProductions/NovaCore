@@ -1,0 +1,80 @@
+[
+  {
+    "name": "Colorado coarse land / daylight",
+    "baseline": "gate4-land-coarse-control",
+    "candidate": "gate4-land-coarse-candidate",
+    "hashes": [
+      "6e63bcce7aa5f05098b33ef438dffb0db0f4ec669e6595d49b6d48a256f9158c",
+      "79837f2c1cf321d068ce07d89d6dbea8942530860c50aec5f1d5f3670498b48d"
+    ],
+    "camera": [
+      "(-1296781.2293276545,4204206.2662616372,4839653.4341553524)",
+      "(-1296781.2293276545,4204206.2662616372,4839653.4341553524)"
+    ],
+    "levels": [
+      10,
+      10
+    ],
+    "depthChanged": 4783400,
+    "depthAbsMax": 4.18367562815547e-11,
+    "hdrChanged": 14056289,
+    "hdrAbsMax": 0.020263671875,
+    "hdrRms": 0.0012736169155687094,
+    "rgbChangedPixels": 2664609,
+    "rgbMeanAbs": 0.3538986461024978,
+    "rgbAbsMax": 5,
+    "rgbP99": 2.0
+  },
+  {
+    "name": "Florida authored facility / daylight",
+    "baseline": "gate3-florida-day-baseline",
+    "candidate": "gate3-florida-day-candidate",
+    "hashes": [
+      "e031398b9b16843f5889ac08ba6aba0549da6c390809f5fd6090a8b9f494d10f",
+      "168beea429bc3c3375dc0dd2726fa739f28907968079f2c8e51fcb07f2f75a9d"
+    ],
+    "camera": [
+      "(913246.13161280798,3050496.553464897,5518278.9729780685)",
+      "(913246.13161280798,3050496.553464897,5518278.9729780685)"
+    ],
+    "levels": [
+      17,
+      17
+    ],
+    "depthChanged": 3702116,
+    "depthAbsMax": 0.0006306106224656105,
+    "hdrChanged": 10435020,
+    "hdrAbsMax": 0.3802318572998047,
+    "hdrRms": 0.00018633728905115277,
+    "rgbChangedPixels": 885229,
+    "rgbMeanAbs": 0.07429727874677003,
+    "rgbAbsMax": 190,
+    "rgbP99": 1.0
+  },
+  {
+    "name": "Colorado near land / daylight",
+    "baseline": "gate4-land-day-control",
+    "candidate": "gate4-land-day-candidate",
+    "hashes": [
+      "085dec4f2e78a9435a0686c977b5a6f2a94d45041612504d53ca6892d0221f0d",
+      "be7e9315968879d41ba8b2d5ac35835c8dbcb0a3fda9cb6828dc1fa2f65a97df"
+    ],
+    "camera": [
+      "(-1263476.9137611538,4096232.608845368,4715360.0363413468)",
+      "(-1263476.9137611538,4096232.608845368,4715360.0363413468)"
+    ],
+    "levels": [
+      17,
+      17
+    ],
+    "depthChanged": 4905101,
+    "depthAbsMax": 1.6763806343078613e-07,
+    "hdrChanged": 109576,
+    "hdrAbsMax": 6.103515625e-05,
+    "hdrRms": 1.7629540707275737e-06,
+    "rgbChangedPixels": 2230,
+    "rgbMeanAbs": 0.0001501937984496124,
+    "rgbAbsMax": 1,
+    "rgbP99": 0.0
+  }
+]

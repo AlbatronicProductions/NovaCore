@@ -1,0 +1,18 @@
+#version 460
+#extension GL_ARB_gpu_shader_fp64 : require
+layout(local_size_x=256) in;
+#include "physical_compare.glsl"
+void main(){uint id=gl_GlobalInvocationID.x;if(id>=min(samples.count,PHYSICAL_CAPACITY))return;
+  PhysicalRecord r=samples.records[id];uint slot=PhysicalHash(r.identity.x,r.barycentric.xyz);
+  for(uint probe=0u;probe<256u;probe++){
+    uint old=atomicCompSwap(physicalTable.values[slot],0xffffffffu,id);
+    if(old==0xffffffffu)return;
+    PhysicalRecord previous=samples.records[old];
+    if(PhysicalKey(previous,r.identity.x,r.barycentric.xyz)){
+      if(!ExactPhysical(previous,r))atomicAdd(physicalResult.values[3],1u);
+      return;
+    }
+    slot=(slot+1u)&(TABLE_CAPACITY-1u);
+  }
+  atomicAdd(physicalResult.values[4],1u);
+}

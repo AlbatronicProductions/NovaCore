@@ -1,0 +1,74 @@
+{
+  "classification": "NO VIABLE LOCAL REPRESENTATION FOUND",
+  "ksa": "INTENTIONALLY DIFFER",
+  "hInTes": "RETAIN H-IN-TES",
+  "finalRefinement": "RETAIN",
+  "gpuStage": "NOT RUN: no CPU-authority and GPU-cost survivor",
+  "build": "Release PASS, 0 warnings, 0 errors",
+  "repetition": "Three identical CPU result hashes",
+  "diffCheck": "PASS",
+  "trackedDiff": "",
+  "stagedDiff": "",
+  "status": "?? docs/engineering-evidence/conservative-pre-refinement-visibility/\n?? docs/engineering-evidence/exact-local-domain-encoding/\n?? docs/engineering-evidence/ksa-terrain-architecture/\n?? docs/engineering-evidence/local-physical-domain-proof/\n?? docs/engineering-evidence/post-m13.2-next-target/",
+  "files": [
+    {
+      "path": "EncodingProof.cs",
+      "bytes": 17934,
+      "sha256": "329726f3b2babbe5665c46b20ebe0d311b29675931d41646004fbd8dd2ad807c"
+    },
+    {
+      "path": "EncodingProof.csproj",
+      "bytes": 645,
+      "sha256": "a24cfe7b6d15688b7d4d79688aeb7d678f9a2464bc92352235d6e13f2e4b12e6"
+    },
+    {
+      "path": "measurements.md",
+      "bytes": 3581,
+      "sha256": "76ba9ab2746ea5d8994d4a60b1845f668b25bff96b9f9e55775747f2d4d67f93"
+    },
+    {
+      "path": "README.md",
+      "bytes": 24062,
+      "sha256": "b7833643efc871d733792324ede1d223957e35d977f6c75bc5ab65edf438e3f6"
+    },
+    {
+      "path": "results.json",
+      "bytes": 103026,
+      "sha256": "1bb07a0c412bc44aa7e079603612aa46772c6c403acbe09eec33ac357f0b0a78"
+    },
+    {
+      "path": "run.py",
+      "bytes": 5521,
+      "sha256": "575f9c92e6b82a6b7bc422009f331f540730cd4e5da3b83fb04eb9d31b981d0a"
+    },
+    {
+      "path": "scratch-manifest.json",
+      "bytes": 8170,
+      "sha256": "7c22a4b15f731f69483a2c2ac15d5a12e56adfbc1411d93dbd07e085b25e29af"
+    },
+    {
+      "path": "verification.json",
+      "bytes": 36636,
+      "sha256": "045252f3b053e592fea49f8cf94f539eaeae937042f2b0c39cfd53e14958dc6d"
+    },
+    {
+      "path": "verify.py",
+      "bytes": 4680,
+      "sha256": "454a80fbec5abb7bd1bdeb9b4f702f8e56fbabb603419aed71dc37ea2bb75390"
+    }
+  ],
+  "storage": {
+    "unit": "logical bytes; final package plus final scratch high-water inventory, not cumulative overwritten writes",
+    "createdBytes": 1696181,
+    "retainedBytes": 206788,
+    "disposedBytes": 1489393,
+    "remainingNewScratchBytes": 0,
+    "remainingNewTotalBytes": 206788,
+    "removedFiles": 35,
+    "previousScratchExcluded": {
+      "files": 33,
+      "bytes": 1436946,
+      "action": "untouched; no retry of prior rejected deletion"
+    }
+  }
+}

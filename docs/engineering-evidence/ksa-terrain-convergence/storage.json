@@ -1,0 +1,16 @@
+{
+  "unit": "Logical file-view bytes at retirement plus final retained package, not cumulative overwritten writes. Allocated retirement uses Windows FileStandardInfo and distinct file identities.",
+  "createdBytes": 3943243604,
+  "retainedBytes": 4250838,
+  "disposedBytes": 0,
+  "remainingNewScratchBytes": 3938992766,
+  "remainingNewTotalBytes": 3943243604,
+  "removedFiles": 0,
+  "allocatedBytesRecovered": 0,
+  "retiredSharedOracleLinkEntries": 0,
+  "sharedOracleBytesNotReclaimed": 67108864,
+  "activeNormalBuildDeployments": "Retained; ordinary build outputs not counted as diagnostic scratch creation or deletion.",
+  "priorEvidenceAndScratch": "Unchanged; no retry of prior rejected cleanup.",
+  "allocatedBytesRecoverableAfterManualCleanup": 1662054600,
+  "cleanupExecution": "BLOCKED by automatic execution policy; no deletion performed."
+}

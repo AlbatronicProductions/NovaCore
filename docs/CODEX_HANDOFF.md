@@ -15,6 +15,14 @@ not as an onboarding requirement.
 
 ## Repository rules
 
+Current work awaiting Project Control: the unbanked
+[KSA terrain responsibility convergence candidate](engineering-evidence/ksa-terrain-convergence/README.md).
+M13.2 remains banked. Preserve the candidate and its temporary shader comparison
+bridge until the report's acceptance and retirement decision; do not treat
+historical exact render/query identity as the candidate's coherence contract.
+The architectural gauntlet passed. Scratch cleanup remains blocked by automatic
+execution policy; the report includes a manifest-checked manual cleanup script.
+
 - Work in `E:\NovaCore` and inspect `git status --short` before editing.
 - Preserve unrelated and unstaged user work.
 - Do not stage, commit, push, or tag without explicit instruction.

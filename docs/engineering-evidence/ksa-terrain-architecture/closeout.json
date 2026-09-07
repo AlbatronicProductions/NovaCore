@@ -1,0 +1,58 @@
+{
+  "classification": "ARCHITECTURAL COMPARISON INCOMPLETE — FOLLOW-UP REQUIRED",
+  "strategicClassification": "NO CONCLUSION YET",
+  "productionFilesChanged": 0,
+  "priorEvidenceUnchanged": true,
+  "priorKsaExtractionBackboneMatches": {
+    "E:\\Kitten Space Agency\\KSA.dll": true,
+    "E:\\NovaCore\\build\\ksa-residency-reference\\assembly-source\\KSA\\PlanetFrustumCulling.cs": true,
+    "E:\\NovaCore\\build\\ksa-residency-reference\\source\\KSA.PlanetRenderer.cs": true
+  },
+  "gitDiffCheck": "PASS",
+  "newUntrackedEvidenceWhitespace": "PASS",
+  "jsonParsing": "PASS",
+  "verificationPythonSyntax": "PASS",
+  "runtimeIdentity": "PASS both restored configurations",
+  "shaders": "PASS 49 Debug + 49 Release match banked hashes",
+  "buildsAndGpuTests": "Not rerun: architecture/documentation only, no instrumentation or runtime edits",
+  "gitStatusShort": "?? docs/engineering-evidence/conservative-pre-refinement-visibility/\n?? docs/engineering-evidence/ksa-terrain-architecture/\n?? docs/engineering-evidence/post-m13.2-next-target/",
+  "sourceFilesInspected": 43,
+  "budgetBytes": 250000,
+  "storage": {
+    "createdPayloadBytes": 119434,
+    "permanentRetainedBytes": 119434,
+    "disposableCreatedBytes": 0,
+    "disposableRemovedBytes": 0,
+    "disposableRemainingBytes": 0
+  },
+  "files": {
+    "history.md": {
+      "bytes": 14615,
+      "sha256": "037fc47e692e56dd2a2c6b8c8045c9607487e7f7ae93cff3b59a4964740ca3ab"
+    },
+    "measured-context.json": {
+      "bytes": 6384,
+      "sha256": "24a01063b818a372e34b7890daf85ba2bf669dc686f1f65fe0fd3a95a5701b00"
+    },
+    "pipeline-maps.md": {
+      "bytes": 23585,
+      "sha256": "4efc02af3e680a17bb26d1655d9af378f4ec54aa50f0a851dbbfb5f2fee115e0"
+    },
+    "README.md": {
+      "bytes": 34796,
+      "sha256": "b631195ff0804e11f3fc09db3a7945b43659364566d3bec11821ea6059cb393d"
+    },
+    "source-files.json": {
+      "bytes": 2991,
+      "sha256": "e2db61b893c8c649cdf2bdebe42ab80859d0e8e7a338ea9293b005f01b8e1aac"
+    },
+    "verification.json": {
+      "bytes": 30113,
+      "sha256": "8d90ba7a268b20a29e520716dbae86fbf3e9107a7b0c85459e3864c677a8f468"
+    },
+    "verify.py": {
+      "bytes": 4630,
+      "sha256": "297a770c6b0488acd8b58372d0f07fda6ba5c4c3ba68790d30cbd7fb5a0b7f81"
+    }
+  }
+}

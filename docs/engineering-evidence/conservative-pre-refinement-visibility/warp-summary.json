@@ -1,0 +1,272 @@
+{
+  "WarpDiagnosticOne": {
+    "rate": "1:1",
+    "totalGpu": {
+      "n": 239,
+      "median": 17.24968,
+      "p95": 18.77838,
+      "p99": 19.56574,
+      "minimum": 16.41012,
+      "maximum": 19.87917
+    },
+    "terrainGpu": {
+      "n": 239,
+      "median": 13.73012,
+      "p95": 14.036,
+      "p99": 14.38712,
+      "minimum": 13.6018,
+      "maximum": 15.71124
+    },
+    "cpuSubmit": {
+      "n": 239,
+      "median": 0.0837,
+      "p95": 0.1334,
+      "p99": 0.1847,
+      "minimum": 0.0557,
+      "maximum": 2.1665
+    },
+    "cpuRecord": {
+      "n": 239,
+      "median": 0.3716,
+      "p95": 0.456,
+      "p99": 0.5519,
+      "minimum": 0.2029,
+      "maximum": 0.6642
+    },
+    "update": {
+      "n": 239,
+      "median": 19.6705,
+      "p95": 21.4094,
+      "p99": 22.359,
+      "minimum": 16.9027,
+      "maximum": 1069.1776
+    },
+    "drawCounts": [
+      1
+    ]
+  },
+  "WarpDiagnosticModerateUp": {
+    "rate": "2:1",
+    "totalGpu": {
+      "n": 6,
+      "median": 17.06391,
+      "p95": 17.8874,
+      "p99": 17.8874,
+      "minimum": 16.62208,
+      "maximum": 17.8874
+    },
+    "terrainGpu": {
+      "n": 6,
+      "median": 13.73304,
+      "p95": 13.77344,
+      "p99": 13.77344,
+      "minimum": 13.651,
+      "maximum": 13.77344
+    },
+    "cpuSubmit": {
+      "n": 6,
+      "median": 0.0872,
+      "p95": 0.1071,
+      "p99": 0.1071,
+      "minimum": 0.0831,
+      "maximum": 0.1071
+    },
+    "cpuRecord": {
+      "n": 6,
+      "median": 0.3525,
+      "p95": 0.4013,
+      "p99": 0.4013,
+      "minimum": 0.3467,
+      "maximum": 0.4013
+    },
+    "update": {
+      "n": 6,
+      "median": 19.3505,
+      "p95": 20.2553,
+      "p99": 20.2553,
+      "minimum": 18.8331,
+      "maximum": 20.2553
+    },
+    "drawCounts": []
+  },
+  "WarpDiagnosticModerate": {
+    "rate": "600:1",
+    "totalGpu": {
+      "n": 239,
+      "median": 16.74428,
+      "p95": 17.72183,
+      "p99": 18.36104,
+      "minimum": 15.67672,
+      "maximum": 18.48678
+    },
+    "terrainGpu": {
+      "n": 239,
+      "median": 13.00556,
+      "p95": 13.80936,
+      "p99": 14.1472,
+      "minimum": 12.80536,
+      "maximum": 14.39756
+    },
+    "cpuSubmit": {
+      "n": 239,
+      "median": 0.0891,
+      "p95": 0.1342,
+      "p99": 0.1558,
+      "minimum": 0.0709,
+      "maximum": 0.1831
+    },
+    "cpuRecord": {
+      "n": 239,
+      "median": 0.3609,
+      "p95": 0.4716,
+      "p99": 0.5384,
+      "minimum": 0.2997,
+      "maximum": 0.5794
+    },
+    "update": {
+      "n": 239,
+      "median": 19.091,
+      "p95": 20.2746,
+      "p99": 20.6359,
+      "minimum": 17.8479,
+      "maximum": 20.9805
+    },
+    "drawCounts": [
+      1
+    ]
+  },
+  "WarpDiagnosticHighUp": {
+    "rate": "1200:1",
+    "totalGpu": {
+      "n": 7,
+      "median": 16.1564,
+      "p95": 16.93491,
+      "p99": 16.93491,
+      "minimum": 15.6582,
+      "maximum": 16.93491
+    },
+    "terrainGpu": {
+      "n": 7,
+      "median": 12.96436,
+      "p95": 13.02316,
+      "p99": 13.02316,
+      "minimum": 12.86216,
+      "maximum": 13.02316
+    },
+    "cpuSubmit": {
+      "n": 7,
+      "median": 0.1117,
+      "p95": 0.154,
+      "p99": 0.154,
+      "minimum": 0.0828,
+      "maximum": 0.154
+    },
+    "cpuRecord": {
+      "n": 7,
+      "median": 0.4385,
+      "p95": 0.4507,
+      "p99": 0.4507,
+      "minimum": 0.3534,
+      "maximum": 0.4507
+    },
+    "update": {
+      "n": 7,
+      "median": 18.6775,
+      "p95": 19.3924,
+      "p99": 19.3924,
+      "minimum": 18.2012,
+      "maximum": 19.3924
+    },
+    "drawCounts": []
+  },
+  "WarpDiagnosticHigh": {
+    "rate": "7776000:1",
+    "totalGpu": {
+      "n": 239,
+      "median": 16.29355,
+      "p95": 16.9297,
+      "p99": 17.30264,
+      "minimum": 15.6688,
+      "maximum": 17.35367
+    },
+    "terrainGpu": {
+      "n": 239,
+      "median": 12.97232,
+      "p95": 13.605,
+      "p99": 13.76744,
+      "minimum": 12.84352,
+      "maximum": 13.884
+    },
+    "cpuSubmit": {
+      "n": 239,
+      "median": 0.0723,
+      "p95": 0.1244,
+      "p99": 0.1927,
+      "minimum": 0.048,
+      "maximum": 0.2327
+    },
+    "cpuRecord": {
+      "n": 239,
+      "median": 0.3146,
+      "p95": 0.4384,
+      "p99": 0.5003,
+      "minimum": 0.1913,
+      "maximum": 0.7692
+    },
+    "update": {
+      "n": 239,
+      "median": 18.562,
+      "p95": 19.3843,
+      "p99": 19.7117,
+      "minimum": 17.8692,
+      "maximum": 20.257
+    },
+    "drawCounts": [
+      1
+    ]
+  },
+  "WarpDiagnosticDown": {
+    "rate": "2592000:1",
+    "totalGpu": {
+      "n": 12,
+      "median": 16.34705,
+      "p95": 16.66963,
+      "p99": 16.66963,
+      "minimum": 15.88629,
+      "maximum": 16.66963
+    },
+    "terrainGpu": {
+      "n": 12,
+      "median": 12.94508,
+      "p95": 13.13828,
+      "p99": 13.13828,
+      "minimum": 12.89424,
+      "maximum": 13.13828
+    },
+    "cpuSubmit": {
+      "n": 12,
+      "median": 0.0694,
+      "p95": 0.098,
+      "p99": 0.098,
+      "minimum": 0.0556,
+      "maximum": 0.098
+    },
+    "cpuRecord": {
+      "n": 12,
+      "median": 0.2973,
+      "p95": 0.5648,
+      "p99": 0.5648,
+      "minimum": 0.2479,
+      "maximum": 0.5648
+    },
+    "update": {
+      "n": 13,
+      "median": 18.6218,
+      "p95": 22.5713,
+      "p99": 22.5713,
+      "minimum": 18.0086,
+      "maximum": 22.5713
+    },
+    "drawCounts": []
+  }
+}

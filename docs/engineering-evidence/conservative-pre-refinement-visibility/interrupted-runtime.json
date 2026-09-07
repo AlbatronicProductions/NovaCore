@@ -1,0 +1,39 @@
+{
+  "reason": "Bounded exact diagnostic overlay retained because the host watchdog cause is unresolved. Other runtime dependencies and all asset/shader identities are in recovery-checkpoint.json; reconstruct against banked HEAD. This is not a production deployment.",
+  "files": {
+    "NovaCore.Native.dll": {
+      "bytes": 365056,
+      "sha256": "7a668d9037863d378a5ba94518c5373e9da9d05b84c1629a1e71fbbbec3234b0"
+    },
+    "NovaCore.Triangle.dll": {
+      "bytes": 241664,
+      "sha256": "95923aa7346ee6b427d7648e12545d97d177ae97f58723e0c1d2b58e57a0e5a1"
+    },
+    "NovaCore.Triangle.exe": {
+      "bytes": 162304,
+      "sha256": "cc1583917855c5a37768c3e7a6b6e8c036a19938c34183dcbf9caee9e7e25c37"
+    },
+    "NovaCore.Triangle.pdb": {
+      "bytes": 60940,
+      "sha256": "5f58a48317e3b7e6bbbe50d6ce289a3a82c6f4e5d0aea59ac247243852b020a0"
+    },
+    "production_spherical_billboard.tesc": {
+      "bytes": 10669,
+      "sha256": "75e36e0b3414ad163eb5176d115f7e5f3c09a47dcba842c7b9d08d5e391620a8"
+    },
+    "production_spherical_billboard.tese": {
+      "bytes": 7591,
+      "sha256": "172f028c7c52438dffa7299d5b543f30a636d7b7b5ed6e4a1a760c4aac0a8e20"
+    },
+    "shaders/production_spherical_billboard.tesc.spv": {
+      "bytes": 42544,
+      "sha256": "13e7cf5b6a89f49b841ea6c3c74f4c4d702de528e9df70361f06514b594d1617"
+    },
+    "shaders/production_spherical_billboard.tese.spv": {
+      "bytes": 68188,
+      "sha256": "39166315593cb9fe1db9b2af71b1aba3fe3d1b6b0829e40a3e7dcbde90c008c9"
+    }
+  },
+  "zipBytes": 406641,
+  "zipSha256": "bfd63a6b864f15ca766f239cff5b01f83c0456c01f942329d1ed3af1267e020d"
+}

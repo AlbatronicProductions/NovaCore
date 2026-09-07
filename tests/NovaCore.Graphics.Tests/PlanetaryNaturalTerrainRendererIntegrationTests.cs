@@ -151,18 +151,18 @@ internal static class PlanetaryNaturalTerrainRendererIntegrationTests
     {
         var shader = Path.Combine(RepositoryRoot(), "native", "NovaCore.Native", "shaders");
         var global = File.ReadAllText(Path.Combine(shader, "planetary.vert"));
-        var prepared = File.ReadAllText(Path.Combine(shader, "production_spherical_billboard_prepare.comp"));
-        var tes = File.ReadAllText(Path.Combine(shader, "production_spherical_billboard.tese"));
+        var prepared = TerrainRenderAuthorityTests.ReadCandidate(Path.Combine(shader, "production_spherical_billboard_prepare.comp"));
+        var tes = TerrainRenderAuthorityTests.ReadCandidate(Path.Combine(shader, "production_spherical_billboard.tese"));
         var query = File.ReadAllText(Path.Combine(shader, "planetary_height_query.comp"));
         var mesh = File.ReadAllText(Path.Combine(shader, "planetary_mesh_displace.comp"));
         Require(global.Contains("naturalGlobal.naturalValues", StringComparison.Ordinal) &&
             global.Contains("EvaluateNaturalCandidateNearD", StringComparison.Ordinal),
             "global candidate consumes prepared macro/meso plus canonical near detail");
-        Require(prepared.Contains("CandidateBaseHeightD") && prepared.Contains("CandidateBaseNormalD"),
-            "NCSM1 prepares canonical base position and normal once per publication");
-        Require(tes.Contains("EvaluateNaturalCandidateNearD", StringComparison.Ordinal) &&
+        Require(prepared.Contains("CandidatePhysicalHeightD") && prepared.Contains("CandidatePhysicalNormalD"),
+            "NCSM1 prepares full physical position and normal once per publication");
+        Require(!tes.Contains("EvaluateNaturalCandidateNearD", StringComparison.Ordinal) &&
             !tes.Contains("EvaluateNaturalCandidatePreparedD", StringComparison.Ordinal),
-            "TES evaluates only bounded near-family detail and never macro/meso");
+            "TES interpolates prepared terrain without evaluating physical terrain families");
         Require(query.Contains("naturalCandidate", StringComparison.Ordinal) &&
             mesh.Contains("NOVACORE_PHYSICAL_GENERATION_M12D", StringComparison.Ordinal),
             "GPU query and mesh displacement share the explicit candidate authority");

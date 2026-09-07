@@ -1,0 +1,8 @@
+{
+  "expectedFailure": true,
+  "result": "PASS: injected one-byte difference detected at byte zero",
+  "evidence": [
+    "[native] Dual parity: frame=1; generation=0; pupil=0; preparedVertices=0; width=3440; height=1440; depth=1; hdr=0; image=0; firstDepth=0; firstHdr=4294967295; firstImage=4294967295; sameSubmission=true",
+    "[native] same-submission exact pixel parity failed"
+  ]
+}

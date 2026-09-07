@@ -1,0 +1,135 @@
+{
+  "parity": {
+    "A": {
+      "preparedExact": true,
+      "parity": {
+        "depth": {
+          "exact": true,
+          "unequalBytes": 0,
+          "changedPixels": 0,
+          "maxAbsolute": 0.0
+        },
+        "hdr": {
+          "exact": true,
+          "unequalBytes": 0
+        },
+        "image": {
+          "exact": true,
+          "unequalBytes": 0
+        },
+        "physicalRecordSetExact": true,
+        "tesRecordSetExact": false
+      },
+      "gsCombinedAttachmentsExact": false
+    },
+    "B": {
+      "preparedExact": true,
+      "parity": {
+        "depth": {
+          "exact": true,
+          "unequalBytes": 0,
+          "changedPixels": 0,
+          "maxAbsolute": 0.0
+        },
+        "hdr": {
+          "exact": true,
+          "unequalBytes": 0
+        },
+        "image": {
+          "exact": true,
+          "unequalBytes": 0
+        },
+        "physicalRecordSetExact": true,
+        "tesRecordSetExact": false
+      },
+      "gsCombinedAttachmentsExact": true
+    },
+    "C": {
+      "preparedExact": true,
+      "parity": {
+        "depth": {
+          "exact": true,
+          "unequalBytes": 0,
+          "changedPixels": 0,
+          "maxAbsolute": 0.0
+        },
+        "hdr": {
+          "exact": true,
+          "unequalBytes": 0
+        },
+        "image": {
+          "exact": true,
+          "unequalBytes": 0
+        },
+        "physicalRecordSetExact": true,
+        "tesRecordSetExact": false
+      },
+      "gsCombinedAttachmentsExact": false
+    },
+    "D": {
+      "preparedExact": true,
+      "parity": {
+        "depth": {
+          "exact": true,
+          "unequalBytes": 0,
+          "changedPixels": 0,
+          "maxAbsolute": 0.0
+        },
+        "hdr": {
+          "exact": true,
+          "unequalBytes": 0
+        },
+        "image": {
+          "exact": true,
+          "unequalBytes": 0
+        },
+        "physicalRecordSetExact": true,
+        "tesRecordSetExact": false
+      },
+      "gsCombinedAttachmentsExact": true
+    },
+    "E": {
+      "preparedExact": true,
+      "parity": {
+        "depth": {
+          "exact": true,
+          "unequalBytes": 0,
+          "changedPixels": 0,
+          "maxAbsolute": 0.0
+        },
+        "hdr": {
+          "exact": true,
+          "unequalBytes": 0
+        },
+        "image": {
+          "exact": true,
+          "unequalBytes": 0
+        },
+        "physicalRecordSetExact": true,
+        "tesRecordSetExact": false
+      },
+      "gsCombinedAttachmentsExact": true
+    }
+  },
+  "completedCaptureRawBytes": 9467741400,
+  "scratchBytesBeforeRetirement": 41454002,
+  "scratchFilesBeforeRetirement": 198,
+  "rawRetention": "All completed per-run raw data retired by bounded TemporaryDirectory after hash/analysis; no raw capture retained.",
+  "diagnosticCreatedAccounting": "Completed serialized captures plus final scratch file sizes are measured. Transient isolated executable/shader copies and compiler intermediate writes are excluded; report a lower bound, not an invented exact cumulative total.",
+  "disposableRemaining": "Automatic approval review rejected exact bounded deletion before execution: blocked by policy. No alternate deletion attempted.",
+  "finalClassification": "PARTIAL PERFORMANCE DIAGNOSIS \u2014 FOLLOW-UP REQUIRED",
+  "winner": "NO WINNER YET",
+  "disposableRemainingBytes": 41454002,
+  "disposableRemainingFiles": 198,
+  "scratchRemovedBytes": 0,
+  "completedCaptureRawRemovedBytes": 9467741400,
+  "knownDiagnosticCreatedLowerBoundBytes": 9509195402,
+  "finalGitStatus": "?? docs/engineering-evidence/post-m13.2-next-target/\n",
+  "head": "4accf92fd080c16cc8656080aa69def3fa65db53",
+  "originMain": "4accf92fd080c16cc8656080aa69def3fa65db53",
+  "productionDiffEmpty": true,
+  "gitDiffCheckExitCode": 0,
+  "retentionBudgetBytes": 3000000,
+  "validationSummary": "Release native/Triangle/Graphics builds; GPU 8/8, selected headless 6/6, visible-window 1/1; launcher regressions; both asset checks; full traversal; Florida smoke; restored factor-1 control; shader identity/spirv-val PASS.",
+  "permanentRetainedBytes": 1221258
+}

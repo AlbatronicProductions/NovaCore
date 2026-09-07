@@ -58,13 +58,20 @@ void main()
     if(all(equal(prior,direction))){if(preparation.ranges[0].z!=0u)stagedPhysical.values[vertex]=physical.values[vertex];return;}
   }
   double radius=current.transition.y;
-  // KSA-parity responsibility split: the persistent reusable base owns the
-  // geographic + macro/meso displacement.  TES adds only the canonical near
-  // field, so tessellation density can never select a second full surface.
+  // Shared terrain relief is prepared before render refinement. The alternate
+  // branch exists only for the bounded M13.2 comparison.
   PhysicalVertex result;
+#if NOVACORE_PREPARED_RENDER_TERRAIN
+  // Physical/query relief is resolved at publication vertices. Final render
+  // refinement interpolates this shared terrain; it does not reevaluate H.
+  double height=CandidatePhysicalHeightD(direction);
+  result.body=dvec4(direction*(radius+height),height);
+  result.normal=vec4(CandidatePhysicalNormalD(direction,radius),1.0);
+#else
   double height=CandidateBaseHeightD(direction);
   result.body=dvec4(direction*(radius+height),height);
   result.normal=vec4(CandidateBaseNormalD(direction,radius),1.0);
+#endif
   result.reserved=vec4(0.0);
   // Test-only catalog queries use the same function as real geographic demand.
   if(vertex==3u&&regionalCatalog.entries[0].storage.w!=0u){

@@ -1,0 +1,1363 @@
+[
+  {
+    "pose": "A",
+    "args": [
+      "--scene=sol",
+      "--focus=earth",
+      "--solar-epoch=j2000",
+      "--physical-surface=m12d-natural-candidate",
+      "--benchmark-frames=350",
+      "--log=startup,validation,vulkan",
+      "--p2s5c3-traversal"
+    ],
+    "env": {
+      "NOVACORE_WINDOW_CLIENT_WIDTH": "3440",
+      "NOVACORE_WINDOW_CLIENT_HEIGHT": "1440",
+      "NOVACORE_WINDOW_BORDERLESS": "1",
+      "NOVACORE_P2S5F_DIRECTIONAL_ONLY": "1",
+      "NOVACORE_P2S5G_FIXED_DIAGNOSTIC_TIME": "1",
+      "NOVACORE_P2S5F_DIRECTIONAL_LEVEL": "0",
+      "NOVACORE_P2S5F_DIRECTIONAL_YAW_RADIANS": "1.5707963267948966",
+      "NOVACORE_P2S5F_DIRECTIONAL_PITCH_RADIANS": "-0.035"
+    },
+    "sha256": "c36a61697a1a259a349dff8734a7789d58593c0b67beb089af5bda17aeb11633",
+    "bytes": 446584,
+    "summary": [
+      "[native] NCSM1 fragment shading: ordinary specialization; startup=shared default",
+      "[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)",
+      "[native] NCSM1 fragment shading: ordinary specialization; startup=shared default",
+      "[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)",
+      "[native] GPU timings: total=3.125 ms; anchoredCompute=0.000; anchoredDraw=1.289; background=0.700; preSurface=0.000; scene=3.078; toneMap=0.046; regionalCompute=1.778; materialsOverlays=0.600",
+      "[native] GPU timings: total=0.981 ms; anchoredCompute=0.000; anchoredDraw=0.824; background=0.696; preSurface=0.000; scene=0.935; toneMap=0.046; regionalCompute=0.099; materialsOverlays=0.139",
+      "P2S5F directional visibility PASS: mode=broad+narrow; frames=182; measuredFrames=180; level=L0; yaw=1.5707963267948966; pitch=-0.035; zeroOwner=0; overlap=0; stale=0; heightParityMax=0.000000000E+000m; normalParityMax=0.000000000E+000rad",
+      "[native] CPU timings: update=3.748 ms; fence=1.381; inspection=0.171; hostCallback=0.213; validationUpload=1.983; record=0.162; submit=0.055; present=0.314",
+      "[native] P2S5C3 CPU timing: update avg=3.748 ms; p50=3.112; p95=4.903; p99=23.309; max=48.290; samples=182",
+      "[native] P2S5C3 CPU timing: fenceWait avg=1.381 ms; p50=0.929; p95=1.246; p99=12.223; max=45.975; samples=182",
+      "[native] P2S5C3 CPU timing: inspection avg=0.171 ms; p50=0.072; p95=0.107; p99=0.233; max=17.173; samples=182",
+      "[native] P2S5C3 CPU timing: hostCallback avg=0.213 ms; p50=0.139; p95=0.411; p99=1.154; max=4.705; samples=182",
+      "[native] P2S5C3 CPU timing: validationUpload avg=1.983 ms; p50=1.948; p95=2.218; p99=2.511; max=2.584; samples=182",
+      "[native] P2S5C3 CPU timing: record avg=0.162 ms; p50=0.151; p95=0.222; p99=0.383; max=0.453; samples=182",
+      "[native] P2S5C3 CPU timing: submit avg=0.055 ms; p50=0.040; p95=0.065; p99=0.088; max=2.241; samples=182",
+      "[native] P2S5C3 CPU timing: present avg=0.314 ms; p50=0.171; p95=0.264; p99=3.894; max=21.791; samples=182",
+      "[native] P2S5C3 GPU timing: total avg=1.021 ms; p50=0.985; p95=1.161; p99=1.437; max=3.125; samples=180",
+      "[native] P2S5C3 GPU timing: unusedAnchoredCompute avg=0.000 ms; p50=0.000; p95=0.000; p99=0.000; max=0.000; samples=180",
+      "[native] P2S5C3 GPU timing: detailedDraw avg=0.831 ms; p50=0.829; p95=0.840; p99=1.090; max=1.289; samples=180",
+      "[native] P2S5C3 GPU timing: background avg=0.704 ms; p50=0.696; p95=0.704; p99=0.896; max=0.965; samples=180",
+      "[native] P2S5C3 GPU timing: preSurface avg=0.000 ms; p50=0.000; p95=0.000; p99=0.000; max=0.000; samples=180",
+      "[native] P2S5C3 GPU timing: scene avg=0.973 ms; p50=0.939; p95=1.115; p99=1.390; max=3.078; samples=180",
+      "[native] P2S5C3 GPU timing: toneMap avg=0.047 ms; p50=0.046; p95=0.048; p99=0.094; max=0.166; samples=180",
+      "[native] P2S5C3 GPU timing: cullCompact avg=0.111 ms; p50=0.098; p95=0.108; p99=0.537; max=1.778; samples=180",
+      "[native] P2S5C3 GPU timing: materialsOverlays avg=0.158 ms; p50=0.143; p95=0.297; p99=0.441; max=0.600; samples=180",
+      "[native] P2S5C3 GPU timing: candidateDraw avg=0.828 ms; p50=0.829; p95=0.839; p99=1.021; max=1.089; samples=180",
+      "[native] P2S5C3 GPU timing: globalFill avg=0.003 ms; p50=0.000; p95=0.000; p99=0.000; max=0.599; samples=180",
+      "[native] P2S5C3 frame timing: all avg=5.517 ms; p50=3.537; p95=5.485; p99=48.905; max=244.513; samples=182",
+      "[native] P2S5C3 frame timing: publication avg=8.136 ms; p50=8.136; p95=8.136; p99=8.136; max=8.136; samples=1",
+      "[native] P2S5C3 sync timing: fenceWait avg=1.381 ms; p50=0.929; p95=1.246; p99=12.223; max=45.975; samples=182",
+      "[native] P2S5C3 GPU workload: clippingOutputPrimitives avg=12895.6; p50=12896; p95=12916; p99=12923; max=12934; samples=179",
+      "[native] P2S5C3 GPU workload: fragmentInvocations avg=35913.0; p50=35913; p95=35913; p99=35913; max=35913; samples=179",
+      "[native] P2S5C3 GPU workload: tcsPatches avg=15376.0; p50=15376; p95=15376; p99=15376; max=15376; samples=179",
+      "[native] P2S5C3 GPU workload: tesInvocations avg=46128.0; p50=46128; p95=46128; p99=46128; max=46128; samples=179",
+      "[native] GPU anchored refinement averages: tcsPatches=15376.0; refinedVertices=46128.0; clippingOutputPrimitives=12895.6; fragmentInvocations=35913.0; samples=179; CPUFinalRaster=false",
+      "[native] GPU timing averages: total=1.021 ms; anchoredCompute=0.000; anchoredDraw=0.831; background=0.704; preSurface=0.000; toneMap=0.047"
+    ],
+    "aligned100": {
+      "name": "A",
+      "logSha256": "c36a61697a1a259a349dff8734a7789d58593c0b67beb089af5bda17aeb11633",
+      "rawUtf8Bytes": 446584,
+      "samples": 100,
+      "metrics": {
+        "submittedFrame": {
+          "n": 100,
+          "median": 131,
+          "p95": 176,
+          "minimum": 82,
+          "maximum": 181
+        },
+        "timingFrame": {
+          "n": 100,
+          "median": 131,
+          "p95": 176,
+          "minimum": 82,
+          "maximum": 181
+        },
+        "generation": {
+          "n": 100,
+          "median": 1,
+          "p95": 1,
+          "minimum": 1,
+          "maximum": 1
+        },
+        "level": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "topologyFamily": {
+          "n": 100,
+          "median": 1,
+          "p95": 1,
+          "minimum": 1,
+          "maximum": 1
+        },
+        "broadAccepts": {
+          "n": 100,
+          "median": 15376,
+          "p95": 15376,
+          "minimum": 15376,
+          "maximum": 15376
+        },
+        "broadRejects": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "narrowTests": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "narrowRejectLeft": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "narrowRejectRight": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "narrowRejectBottom": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "narrowRejectTop": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "narrowRejectNear": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "narrowRejectFar": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "nearPlaneIntersections": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "tesEnvelopeActive": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "tesEnvelopeInactive": {
+          "n": 100,
+          "median": 15376,
+          "p95": 15376,
+          "minimum": 15376,
+          "maximum": 15376
+        },
+        "compactedTriangles": {
+          "n": 100,
+          "median": 15376,
+          "p95": 15376,
+          "minimum": 15376,
+          "maximum": 15376
+        },
+        "tcsPatches": {
+          "n": 100,
+          "median": 15376,
+          "p95": 15376,
+          "minimum": 15376,
+          "maximum": 15376
+        },
+        "refinedVertices": {
+          "n": 100,
+          "median": 46128,
+          "p95": 46128,
+          "minimum": 46128,
+          "maximum": 46128
+        },
+        "clippingOutputPrimitives": {
+          "n": 100,
+          "median": 12896,
+          "p95": 12914,
+          "minimum": 12865,
+          "maximum": 12923
+        },
+        "fragmentInvocations": {
+          "n": 100,
+          "median": 35913,
+          "p95": 35913,
+          "minimum": 35913,
+          "maximum": 35913
+        },
+        "maximumOuterTesFactor": {
+          "n": 100,
+          "median": 1.0,
+          "p95": 1.0,
+          "minimum": 1.0,
+          "maximum": 1.0
+        },
+        "maximumInnerTesFactor": {
+          "n": 100,
+          "median": 0.9999,
+          "p95": 0.9999,
+          "minimum": 0.9999,
+          "maximum": 0.9999
+        },
+        "tcsBehindOrOnCamera": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "tcsWithinOneMetre": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "maximumProjectedEdgePixels": {
+          "n": 100,
+          "median": 6.856565,
+          "p95": 6.856565,
+          "minimum": 6.856565,
+          "maximum": 6.856565
+        },
+        "maximumFactorPatch": {
+          "n": 100,
+          "median": 561,
+          "p95": 1496,
+          "minimum": 0,
+          "maximum": 1573
+        },
+        "gpuCullCompactMs": {
+          "n": 100,
+          "median": 0.098,
+          "p95": 0.10344,
+          "minimum": 0.09404,
+          "maximum": 0.10916
+        },
+        "gpuDetailedDrawMs": {
+          "n": 100,
+          "median": 0.82832,
+          "p95": 0.8362,
+          "minimum": 0.81772,
+          "maximum": 0.84264
+        },
+        "gpuTotalMs": {
+          "n": 100,
+          "median": 0.98404,
+          "p95": 1.0446,
+          "minimum": 0.97068,
+          "maximum": 1.23986
+        },
+        "clippingInputPrimitives": null,
+        "fenceWait": null,
+        "update": null,
+        "record": null,
+        "submit": null,
+        "present": null
+      },
+      "firstFrame": {
+        "submittedFrame": 82,
+        "timingFrame": 82,
+        "generation": 1,
+        "level": 0,
+        "topologyFamily": 1,
+        "mode": "broad+narrow",
+        "cameraBody": "(-12138.468492075801,-30478130.813346863,68076076.298873425)",
+        "bodyOrientation": "(0.542257845,-0.453824222,-0.453824222,0.542257845)",
+        "viewProjection": "(0.127606928,0.696708798,0,0.898456097,-0.713726878,0.124564268,0,0.160634592,0,-1.58084798,0,0.408623457,0,0,1000000,0)",
+        "broadAccepts": 15376,
+        "broadRejects": 0,
+        "narrowTests": 0,
+        "narrowRejectLeft": 0,
+        "narrowRejectRight": 0,
+        "narrowRejectBottom": 0,
+        "narrowRejectTop": 0,
+        "narrowRejectNear": 0,
+        "narrowRejectFar": 0,
+        "nearPlaneIntersections": 0,
+        "tesEnvelopeActive": 0,
+        "tesEnvelopeInactive": 15376,
+        "compactedTriangles": 15376,
+        "tcsPatches": 15376,
+        "refinedVertices": 46128,
+        "clippingOutputPrimitives": 12874,
+        "fragmentInvocations": 35913,
+        "maximumOuterTesFactor": 1.0,
+        "maximumInnerTesFactor": 0.9999,
+        "innerFactorBins": "(15376,0,0,0,0,0,0)",
+        "tcsBehindOrOnCamera": 0,
+        "tcsWithinOneMetre": 0,
+        "maximumProjectedEdgePixels": 6.856565,
+        "maximumFactorPatch": 583,
+        "gpuCullCompactMs": 0.09716,
+        "gpuDetailedDrawMs": 0.8306,
+        "gpuTotalMs": 0.98464
+      },
+      "lastFrame": {
+        "submittedFrame": 181,
+        "timingFrame": 181,
+        "generation": 1,
+        "level": 0,
+        "topologyFamily": 1,
+        "mode": "broad+narrow",
+        "cameraBody": "(-12138.468492075801,-30478130.813346863,68076076.298873425)",
+        "bodyOrientation": "(0.542257845,-0.453824222,-0.453824222,0.542257845)",
+        "viewProjection": "(0.127606928,0.696708798,0,0.898456097,-0.713726878,0.124564268,0,0.160634592,0,-1.58084798,0,0.408623457,0,0,1000000,0)",
+        "broadAccepts": 15376,
+        "broadRejects": 0,
+        "narrowTests": 0,
+        "narrowRejectLeft": 0,
+        "narrowRejectRight": 0,
+        "narrowRejectBottom": 0,
+        "narrowRejectTop": 0,
+        "narrowRejectNear": 0,
+        "narrowRejectFar": 0,
+        "nearPlaneIntersections": 0,
+        "tesEnvelopeActive": 0,
+        "tesEnvelopeInactive": 15376,
+        "compactedTriangles": 15376,
+        "tcsPatches": 15376,
+        "refinedVertices": 46128,
+        "clippingOutputPrimitives": 12896,
+        "fragmentInvocations": 35913,
+        "maximumOuterTesFactor": 1.0,
+        "maximumInnerTesFactor": 0.9999,
+        "innerFactorBins": "(15376,0,0,0,0,0,0)",
+        "tcsBehindOrOnCamera": 0,
+        "tcsWithinOneMetre": 0,
+        "maximumProjectedEdgePixels": 6.856565,
+        "maximumFactorPatch": 0,
+        "gpuCullCompactMs": 0.09544,
+        "gpuDetailedDrawMs": 0.83228,
+        "gpuTotalMs": 0.98328
+      },
+      "preparation": {
+        "demand": {
+          "sumMs": 0.86764,
+          "slices": {
+            "n": 2,
+            "median": 0.4328,
+            "p95": 0.43484,
+            "minimum": 0.4328,
+            "maximum": 0.43484
+          }
+        },
+        "incomingPhysicalPreparation": {
+          "sumMs": 0.89944,
+          "slices": {
+            "n": 1,
+            "median": 0.89944,
+            "p95": 0.89944,
+            "minimum": 0.89944,
+            "maximum": 0.89944
+          }
+        }
+      },
+      "provenance": [
+        "[native] NCSM1 regional demand: incoming=1; pupil=1; generation=1; required=0; anchoredPatches=0; unresolved=0; demandMs=237.465",
+        "[native] NCSM1 regional ready: incoming=1; pupil=1; dependencyDelayMs=240.457; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+        "[native] Production spherical billboard publication: generation=1; level=0; topologyFamily=1; hash=0x118D7D350CB66136; topologyResident=true; topologyReused=0; topologyUploads=1; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=27648; postHorizonTriangles=15376; horizonRejected=12272; postScreenConeTriangles=15376; screenConeRejected=0; compactedIndices=46128; visibleTriangles=15376; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=1; deferredRetirements=0",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=1; yaw=1.5707963267948966; pitch=-0.035; level=L0; generation=1; cameraBody=(-12138.468486503525,-30478130.813347496,68076076.29887469); orientationBody=(0.2089221723493503,-8.71862815134938E-05,1.862618501912181E-05,0.9779322665463319)",
+        "[native] P2S5D pupil identity: pupil=1; prepared=1; culled=1; tes=1; raster=1; match=true",
+        "[native] NCSM1 regional demand: incoming=0; pupil=1; generation=1; required=0; anchoredPatches=0; unresolved=0; demandMs=4.271",
+        "[native] NCSM1 regional ready: incoming=0; pupil=1; dependencyDelayMs=6.838; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=10; yaw=1.5707963267948966; pitch=-0.035; level=L0; generation=1; cameraBody=(-12138.468486503525,-30478130.813347496,68076076.29887469); orientationBody=(0.2089221723493503,-8.71862815134938E-05,1.862618501912181E-05,0.9779322665463319)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=20; yaw=1.5707963267948966; pitch=-0.035; level=L0; generation=1; cameraBody=(-12138.468486503525,-30478130.813347496,68076076.29887469); orientationBody=(0.2089221723493503,-8.71862815134938E-05,1.862618501912181E-05,0.9779322665463319)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=30; yaw=1.5707963267948966; pitch=-0.035; level=L0; generation=1; cameraBody=(-12138.468486503525,-30478130.813347496,68076076.29887469); orientationBody=(0.2089221723493503,-8.71862815134938E-05,1.862618501912181E-05,0.9779322665463319)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=40; yaw=1.5707963267948966; pitch=-0.035; level=L0; generation=1; cameraBody=(-12138.468486503525,-30478130.813347496,68076076.29887469); orientationBody=(0.2089221723493503,-8.71862815134938E-05,1.862618501912181E-05,0.9779322665463319)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=50; yaw=1.5707963267948966; pitch=-0.035; level=L0; generation=1; cameraBody=(-12138.468486503525,-30478130.813347496,68076076.29887469); orientationBody=(0.2089221723493503,-8.71862815134938E-05,1.862618501912181E-05,0.9779322665463319)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=60; yaw=1.5707963267948966; pitch=-0.035; level=L0; generation=1; cameraBody=(-12138.468486503525,-30478130.813347496,68076076.29887469); orientationBody=(0.2089221723493503,-8.71862815134938E-05,1.862618501912181E-05,0.9779322665463319)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=70; yaw=1.5707963267948966; pitch=-0.035; level=L0; generation=1; cameraBody=(-12138.468486503525,-30478130.813347496,68076076.29887469); orientationBody=(0.2089221723493503,-8.71862815134938E-05,1.862618501912181E-05,0.9779322665463319)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=80; yaw=1.5707963267948966; pitch=-0.035; level=L0; generation=1; cameraBody=(-12138.468486503525,-30478130.813347496,68076076.29887469); orientationBody=(0.2089221723493503,-8.71862815134938E-05,1.862618501912181E-05,0.9779322665463319)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=90; yaw=1.5707963267948966; pitch=-0.035; level=L0; generation=1; cameraBody=(-12138.468486503525,-30478130.813347496,68076076.29887469); orientationBody=(0.2089221723493503,-8.71862815134938E-05,1.862618501912181E-05,0.9779322665463319)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=100; yaw=1.5707963267948966; pitch=-0.035; level=L0; generation=1; cameraBody=(-12138.468486503525,-30478130.813347496,68076076.29887469); orientationBody=(0.2089221723493503,-8.71862815134938E-05,1.862618501912181E-05,0.9779322665463319)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=110; yaw=1.5707963267948966; pitch=-0.035; level=L0; generation=1; cameraBody=(-12138.468486503525,-30478130.813347496,68076076.29887469); orientationBody=(0.2089221723493503,-8.71862815134938E-05,1.862618501912181E-05,0.9779322665463319)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=120; yaw=1.5707963267948966; pitch=-0.035; level=L0; generation=1; cameraBody=(-12138.468486503525,-30478130.813347496,68076076.29887469); orientationBody=(0.2089221723493503,-8.71862815134938E-05,1.862618501912181E-05,0.9779322665463319)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=130; yaw=1.5707963267948966; pitch=-0.035; level=L0; generation=1; cameraBody=(-12138.468486503525,-30478130.813347496,68076076.29887469); orientationBody=(0.2089221723493503,-8.71862815134938E-05,1.862618501912181E-05,0.9779322665463319)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=140; yaw=1.5707963267948966; pitch=-0.035; level=L0; generation=1; cameraBody=(-12138.468486503525,-30478130.813347496,68076076.29887469); orientationBody=(0.2089221723493503,-8.71862815134938E-05,1.862618501912181E-05,0.9779322665463319)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=150; yaw=1.5707963267948966; pitch=-0.035; level=L0; generation=1; cameraBody=(-12138.468486503525,-30478130.813347496,68076076.29887469); orientationBody=(0.2089221723493503,-8.71862815134938E-05,1.862618501912181E-05,0.9779322665463319)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=160; yaw=1.5707963267948966; pitch=-0.035; level=L0; generation=1; cameraBody=(-12138.468486503525,-30478130.813347496,68076076.29887469); orientationBody=(0.2089221723493503,-8.71862815134938E-05,1.862618501912181E-05,0.9779322665463319)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=170; yaw=1.5707963267948966; pitch=-0.035; level=L0; generation=1; cameraBody=(-12138.468486503525,-30478130.813347496,68076076.29887469); orientationBody=(0.2089221723493503,-8.71862815134938E-05,1.862618501912181E-05,0.9779322665463319)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=180; yaw=1.5707963267948966; pitch=-0.035; level=L0; generation=1; cameraBody=(-12138.468486503525,-30478130.813347496,68076076.29887469); orientationBody=(0.2089221723493503,-8.71862815134938E-05,1.862618501912181E-05,0.9779322665463319)",
+        "P2S5F directional visibility PASS: mode=broad+narrow; frames=182; measuredFrames=180; level=L0; yaw=1.5707963267948966; pitch=-0.035; zeroOwner=0; overlap=0; stale=0; heightParityMax=0.000000000E+000m; normalParityMax=0.000000000E+000rad",
+        "[native] CPU timings: update=3.748 ms; fence=1.381; inspection=0.171; hostCallback=0.213; validationUpload=1.983; record=0.162; submit=0.055; present=0.314",
+        "[native] P2S5C3 frame timing: publication avg=8.136 ms; p50=8.136; p95=8.136; p99=8.136; max=8.136; samples=1",
+        "[native] NCSM1 regional physical totals: requests=0; hits=0; misses=0; loaded=0; readBytes=0; uploadedBytes=0; residentHighWater=0; allocatedBytes=4; maximumBytes=124895232; queueHighWater=0; readyCapacity=8; uploadBudget=8; demandDispatches=2; dependencyDelayMsMax=240.457; recordReadDecodeVerifyMs=0.000; contributingRecords=670; anchoredDemandRequired=false"
+      ],
+      "preparedGeometry": []
+    }
+  },
+  {
+    "pose": "B",
+    "args": [
+      "--scene=sol",
+      "--focus=earth",
+      "--solar-epoch=j2000",
+      "--physical-surface=m12d-natural-candidate",
+      "--benchmark-frames=350",
+      "--log=startup,validation,vulkan",
+      "--p2s5c3-traversal"
+    ],
+    "env": {
+      "NOVACORE_WINDOW_CLIENT_WIDTH": "3440",
+      "NOVACORE_WINDOW_CLIENT_HEIGHT": "1440",
+      "NOVACORE_WINDOW_BORDERLESS": "1",
+      "NOVACORE_P2S5F_DIRECTIONAL_ONLY": "1",
+      "NOVACORE_P2S5G_FIXED_DIAGNOSTIC_TIME": "1",
+      "NOVACORE_P2S5F_DIRECTIONAL_LEVEL": "17",
+      "NOVACORE_P2S5F_DIRECTIONAL_YAW_RADIANS": "1.5707963267948966",
+      "NOVACORE_P2S5F_DIRECTIONAL_PITCH_RADIANS": "-0.035"
+    },
+    "sha256": "9630a225fb56cb0d939512e35da15b8d8bc6d938b22f858902fd96bfba5e882d",
+    "bytes": 446787,
+    "summary": [
+      "[native] NCSM1 fragment shading: ordinary specialization; startup=shared default",
+      "[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)",
+      "[native] NCSM1 fragment shading: ordinary specialization; startup=shared default",
+      "[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)",
+      "[native] GPU timings: total=2.958 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.699; preSurface=0.000; scene=2.909; toneMap=0.049; regionalCompute=1.979; materialsOverlays=0.231",
+      "[native] GPU timings: total=3.251 ms; anchoredCompute=0.000; anchoredDraw=0.692; background=0.701; preSurface=0.000; scene=3.205; toneMap=0.046; regionalCompute=2.489; materialsOverlays=0.014",
+      "P2S5F directional visibility PASS: mode=broad+narrow; frames=213; measuredFrames=180; level=L17; yaw=1.5707963267948966; pitch=-0.035; zeroOwner=0; overlap=0; stale=0; heightParityMax=0.000000000E+000m; normalParityMax=0.000000000E+000rad",
+      "[native] CPU timings: update=5.991 ms; fence=3.552; inspection=0.095; hostCallback=0.226; validationUpload=2.118; record=0.186; submit=0.056; present=0.291",
+      "[native] P2S5C3 CPU timing: update avg=5.991 ms; p50=5.632; p95=7.533; p99=9.823; max=18.738; samples=213",
+      "[native] P2S5C3 CPU timing: fenceWait avg=3.552 ms; p50=3.259; p95=4.937; p99=6.745; max=7.422; samples=213",
+      "[native] P2S5C3 CPU timing: inspection avg=0.095 ms; p50=0.078; p95=0.166; p99=0.347; max=0.430; samples=213",
+      "[native] P2S5C3 CPU timing: hostCallback avg=0.226 ms; p50=0.176; p95=0.374; p99=1.013; max=4.519; samples=213",
+      "[native] P2S5C3 CPU timing: validationUpload avg=2.118 ms; p50=2.006; p95=2.332; p99=2.447; max=15.655; samples=213",
+      "[native] P2S5C3 CPU timing: record avg=0.186 ms; p50=0.176; p95=0.253; p99=0.345; max=0.416; samples=213",
+      "[native] P2S5C3 CPU timing: submit avg=0.056 ms; p50=0.043; p95=0.072; p99=0.095; max=2.229; samples=213",
+      "[native] P2S5C3 CPU timing: present avg=0.291 ms; p50=0.178; p95=0.287; p99=0.422; max=18.981; samples=213",
+      "[native] P2S5C3 GPU timing: total avg=3.522 ms; p50=3.266; p95=4.846; p99=4.984; max=6.614; samples=211",
+      "[native] P2S5C3 GPU timing: unusedAnchoredCompute avg=0.000 ms; p50=0.000; p95=0.000; p99=0.000; max=0.000; samples=211",
+      "[native] P2S5C3 GPU timing: detailedDraw avg=0.591 ms; p50=0.692; p95=0.692; p99=0.692; max=0.914; samples=211",
+      "[native] P2S5C3 GPU timing: background avg=0.731 ms; p50=0.701; p95=0.858; p99=0.896; max=0.936; samples=211",
+      "[native] P2S5C3 GPU timing: preSurface avg=0.000 ms; p50=0.000; p95=0.000; p99=0.000; max=0.000; samples=211",
+      "[native] P2S5C3 GPU timing: scene avg=3.475 ms; p50=3.219; p95=4.801; p99=4.939; max=6.568; samples=211",
+      "[native] P2S5C3 GPU timing: toneMap avg=0.047 ms; p50=0.046; p95=0.049; p99=0.052; max=0.159; samples=211",
+      "[native] P2S5C3 GPU timing: cullCompact avg=2.672 ms; p50=2.496; p95=4.085; p99=4.090; max=5.640; samples=211",
+      "[native] P2S5C3 GPU timing: materialsOverlays avg=0.072 ms; p50=0.014; p95=0.305; p99=0.405; max=0.448; samples=211",
+      "[native] P2S5C3 GPU timing: candidateDraw avg=0.590 ms; p50=0.692; p95=0.692; p99=0.692; max=0.694; samples=211",
+      "[native] P2S5C3 GPU timing: globalFill avg=0.036 ms; p50=0.000; p95=0.250; p99=0.257; max=0.259; samples=211",
+      "[native] P2S5C3 frame timing: all avg=7.639 ms; p50=6.137; p95=8.084; p99=11.815; max=250.959; samples=213",
+      "[native] P2S5C3 frame timing: publication avg=7.288 ms; p50=7.288; p95=7.288; p99=7.288; max=7.288; samples=1",
+      "[native] P2S5C3 sync timing: fenceWait avg=3.552 ms; p50=3.259; p95=4.937; p99=6.745; max=7.422; samples=213",
+      "[native] P2S5C3 GPU workload: clippingOutputPrimitives avg=0.0; p50=0; p95=0; p99=0; max=0; samples=179",
+      "[native] P2S5C3 GPU workload: fragmentInvocations avg=0.0; p50=0; p95=0; p99=0; max=0; samples=179",
+      "[native] P2S5C3 GPU workload: tcsPatches avg=0.0; p50=0; p95=0; p99=0; max=0; samples=179",
+      "[native] P2S5C3 GPU workload: tesInvocations avg=0.0; p50=0; p95=0; p99=0; max=0; samples=179",
+      "[native] GPU anchored refinement averages: tcsPatches=0.0; refinedVertices=0.0; clippingOutputPrimitives=0.0; fragmentInvocations=0.0; samples=179; CPUFinalRaster=false",
+      "[native] GPU timing averages: total=3.522 ms; anchoredCompute=0.000; anchoredDraw=0.591; background=0.731; preSurface=0.000; toneMap=0.047"
+    ],
+    "aligned100": {
+      "name": "B",
+      "logSha256": "9630a225fb56cb0d939512e35da15b8d8bc6d938b22f858902fd96bfba5e882d",
+      "rawUtf8Bytes": 446787,
+      "samples": 100,
+      "metrics": {
+        "submittedFrame": {
+          "n": 100,
+          "median": 162,
+          "p95": 207,
+          "minimum": 113,
+          "maximum": 212
+        },
+        "timingFrame": {
+          "n": 100,
+          "median": 162,
+          "p95": 207,
+          "minimum": 113,
+          "maximum": 212
+        },
+        "generation": {
+          "n": 100,
+          "median": 1,
+          "p95": 1,
+          "minimum": 1,
+          "maximum": 1
+        },
+        "level": {
+          "n": 100,
+          "median": 17,
+          "p95": 17,
+          "minimum": 17,
+          "maximum": 17
+        },
+        "topologyFamily": {
+          "n": 100,
+          "median": 1,
+          "p95": 1,
+          "minimum": 1,
+          "maximum": 1
+        },
+        "broadAccepts": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "broadRejects": {
+          "n": 100,
+          "median": 1184156,
+          "p95": 1184156,
+          "minimum": 1184156,
+          "maximum": 1184156
+        },
+        "narrowTests": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "narrowRejectLeft": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "narrowRejectRight": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "narrowRejectBottom": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "narrowRejectTop": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "narrowRejectNear": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "narrowRejectFar": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "nearPlaneIntersections": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "tesEnvelopeActive": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "tesEnvelopeInactive": {
+          "n": 100,
+          "median": 1184156,
+          "p95": 1184156,
+          "minimum": 1184156,
+          "maximum": 1184156
+        },
+        "compactedTriangles": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "tcsPatches": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "refinedVertices": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "clippingOutputPrimitives": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "fragmentInvocations": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "maximumOuterTesFactor": {
+          "n": 100,
+          "median": 0.0,
+          "p95": 0.0,
+          "minimum": 0.0,
+          "maximum": 0.0
+        },
+        "maximumInnerTesFactor": {
+          "n": 100,
+          "median": 0.0,
+          "p95": 0.0,
+          "minimum": 0.0,
+          "maximum": 0.0
+        },
+        "tcsBehindOrOnCamera": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "tcsWithinOneMetre": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "maximumProjectedEdgePixels": {
+          "n": 100,
+          "median": 0.0,
+          "p95": 0.0,
+          "minimum": 0.0,
+          "maximum": 0.0
+        },
+        "maximumFactorPatch": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "gpuCullCompactMs": {
+          "n": 100,
+          "median": 2.49524,
+          "p95": 2.504,
+          "minimum": 2.48328,
+          "maximum": 2.6287
+        },
+        "gpuDetailedDrawMs": {
+          "n": 100,
+          "median": 0.69164,
+          "p95": 0.69192,
+          "minimum": 0.69108,
+          "maximum": 0.69424
+        },
+        "gpuTotalMs": {
+          "n": 100,
+          "median": 3.26184,
+          "p95": 3.43608,
+          "minimum": 3.24548,
+          "maximum": 3.56517
+        },
+        "clippingInputPrimitives": null,
+        "fenceWait": null,
+        "update": null,
+        "record": null,
+        "submit": null,
+        "present": null
+      },
+      "firstFrame": {
+        "submittedFrame": 113,
+        "timingFrame": 113,
+        "generation": 1,
+        "level": 17,
+        "topologyFamily": 1,
+        "mode": "broad+narrow",
+        "cameraBody": "(-1036.8510346254334,-2603399.3763885498,5814963.3804244846)",
+        "bodyOrientation": "(0.542257845,-0.453824222,-0.453824222,0.542257845)",
+        "viewProjection": "(0.291645557,1.54455137,0,0.207330495,0.0521431826,0.337720186,0,-0.978166461,-0.661750376,0.707323134,0,0.0142989019,0,0,1000000,0)",
+        "broadAccepts": 0,
+        "broadRejects": 1184156,
+        "narrowTests": 0,
+        "narrowRejectLeft": 0,
+        "narrowRejectRight": 0,
+        "narrowRejectBottom": 0,
+        "narrowRejectTop": 0,
+        "narrowRejectNear": 0,
+        "narrowRejectFar": 0,
+        "nearPlaneIntersections": 0,
+        "tesEnvelopeActive": 0,
+        "tesEnvelopeInactive": 1184156,
+        "compactedTriangles": 0,
+        "tcsPatches": 0,
+        "refinedVertices": 0,
+        "clippingOutputPrimitives": 0,
+        "fragmentInvocations": 0,
+        "maximumOuterTesFactor": 0.0,
+        "maximumInnerTesFactor": 0.0,
+        "innerFactorBins": "(0,0,0,0,0,0,0)",
+        "tcsBehindOrOnCamera": 0,
+        "tcsWithinOneMetre": 0,
+        "maximumProjectedEdgePixels": 0.0,
+        "maximumFactorPatch": 0,
+        "gpuCullCompactMs": 2.49928,
+        "gpuDetailedDrawMs": 0.692,
+        "gpuTotalMs": 3.2612
+      },
+      "lastFrame": {
+        "submittedFrame": 212,
+        "timingFrame": 212,
+        "generation": 1,
+        "level": 17,
+        "topologyFamily": 1,
+        "mode": "broad+narrow",
+        "cameraBody": "(-1036.8510346254334,-2603399.3763885498,5814963.3804244846)",
+        "bodyOrientation": "(0.542257845,-0.453824222,-0.453824222,0.542257845)",
+        "viewProjection": "(0.291645557,1.54455137,0,0.207330495,0.0521431826,0.337720186,0,-0.978166461,-0.661750376,0.707323134,0,0.0142989019,0,0,1000000,0)",
+        "broadAccepts": 0,
+        "broadRejects": 1184156,
+        "narrowTests": 0,
+        "narrowRejectLeft": 0,
+        "narrowRejectRight": 0,
+        "narrowRejectBottom": 0,
+        "narrowRejectTop": 0,
+        "narrowRejectNear": 0,
+        "narrowRejectFar": 0,
+        "nearPlaneIntersections": 0,
+        "tesEnvelopeActive": 0,
+        "tesEnvelopeInactive": 1184156,
+        "compactedTriangles": 0,
+        "tcsPatches": 0,
+        "refinedVertices": 0,
+        "clippingOutputPrimitives": 0,
+        "fragmentInvocations": 0,
+        "maximumOuterTesFactor": 0.0,
+        "maximumInnerTesFactor": 0.0,
+        "innerFactorBins": "(0,0,0,0,0,0,0)",
+        "tcsBehindOrOnCamera": 0,
+        "tcsWithinOneMetre": 0,
+        "maximumProjectedEdgePixels": 0.0,
+        "maximumFactorPatch": 0,
+        "gpuCullCompactMs": 2.49948,
+        "gpuDetailedDrawMs": 0.69148,
+        "gpuTotalMs": 3.26096
+      },
+      "preparation": {
+        "demand": {
+          "sumMs": 71.91045000000003,
+          "slices": {
+            "n": 44,
+            "median": 1.58312,
+            "p95": 2.18183,
+            "minimum": 0.84676,
+            "maximum": 2.19194
+          }
+        },
+        "incomingPhysicalPreparation": {
+          "sumMs": 40.04204,
+          "slices": {
+            "n": 11,
+            "median": 3.71976,
+            "p95": 3.72908,
+            "minimum": 3.11764,
+            "maximum": 3.72908
+          }
+        }
+      },
+      "provenance": [
+        "[native] NCSM1 regional demand: incoming=1; pupil=1; generation=1; required=0; anchoredPatches=0; unresolved=0; demandMs=409.820",
+        "[native] NCSM1 regional ready: incoming=1; pupil=1; dependencyDelayMs=412.028; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+        "[native] Production spherical billboard publication: generation=1; level=17; topologyFamily=1; hash=0xBCE444AFFB2D713B; topologyResident=true; topologyReused=0; topologyUploads=1; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1424208; postHorizonTriangles=1184156; horizonRejected=240052; postScreenConeTriangles=0; screenConeRejected=1184156; compactedIndices=0; visibleTriangles=0; zeroVisible=1; noOpIndirect=1; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=1; deferredRetirements=0",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=1; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+        "[native] P2S5D pupil identity: pupil=1; prepared=1; culled=1; tes=1; raster=1; match=true",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=10; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=20; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+        "[native] NCSM1 regional demand: incoming=0; pupil=1; generation=1; required=0; anchoredPatches=0; unresolved=0; demandMs=164.970",
+        "[native] NCSM1 regional ready: incoming=0; pupil=1; dependencyDelayMs=167.138; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=30; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=40; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=50; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=60; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=70; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=80; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=90; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=100; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=110; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=120; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=130; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=140; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=150; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=160; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=170; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=180; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5866613563479516,0.3740969255948584,0.6000125498402591,-0.3947972685602671)",
+        "P2S5F directional visibility PASS: mode=broad+narrow; frames=213; measuredFrames=180; level=L17; yaw=1.5707963267948966; pitch=-0.035; zeroOwner=0; overlap=0; stale=0; heightParityMax=0.000000000E+000m; normalParityMax=0.000000000E+000rad",
+        "[native] CPU timings: update=5.991 ms; fence=3.552; inspection=0.095; hostCallback=0.226; validationUpload=2.118; record=0.186; submit=0.056; present=0.291",
+        "[native] P2S5C3 frame timing: publication avg=7.288 ms; p50=7.288; p95=7.288; p99=7.288; max=7.288; samples=1",
+        "[native] NCSM1 regional physical totals: requests=0; hits=0; misses=0; loaded=0; readBytes=0; uploadedBytes=0; residentHighWater=0; allocatedBytes=4; maximumBytes=124895232; queueHighWater=0; readyCapacity=8; uploadBudget=8; demandDispatches=44; dependencyDelayMsMax=412.028; recordReadDecodeVerifyMs=0.000; contributingRecords=670; anchoredDemandRequired=false"
+      ],
+      "preparedGeometry": []
+    }
+  },
+  {
+    "pose": "C",
+    "args": [
+      "--scene=sol",
+      "--focus=earth",
+      "--solar-epoch=j2000",
+      "--physical-surface=m12d-natural-candidate",
+      "--benchmark-frames=350",
+      "--log=startup,validation,vulkan",
+      "--surface-site=florida-launch"
+    ],
+    "env": {
+      "NOVACORE_WINDOW_CLIENT_WIDTH": "3440",
+      "NOVACORE_WINDOW_CLIENT_HEIGHT": "1440",
+      "NOVACORE_WINDOW_BORDERLESS": "1"
+    },
+    "sha256": "1dcba512b262ea45cc1bbb0cdc5431e2d77c60ca63bfff69553221f294c79cb1",
+    "bytes": 168010,
+    "summary": [
+      "Florida seating: body=6; id=0x4E435F464C5F5044; direction=(0.1433224599406355,0.4788205718227514,0.8661348234979923); physicalGeneration=4; terrainVersion=5; H=15.134892258793116; slabRootHeight=21.970461536198854; foundationDepth=6.835569277405739; foundationBottomLocalZ=-6.835569277405739; foundationBottomCenterHeight=15.134892258793116; minimumContactLocalZ=-6.585569277405739; embed=0.25; regionalLoaded=True; regionalResidual=15.001533002687239; regionalSha=c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe; authority=canonical-H; publicationDependent=false.",
+      "[native] NCSM1 fragment shading: ordinary specialization; startup=shared default",
+      "[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)",
+      "[native] NCSM1 fragment shading: ordinary specialization; startup=shared default",
+      "[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)",
+      "[native] GPU timings: total=8.509 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.702; preSurface=0.000; scene=8.350; toneMap=0.159; regionalCompute=2.132; materialsOverlays=5.516",
+      "[native] GPU timings: total=11.517 ms; anchoredCompute=0.000; anchoredDraw=8.777; background=0.705; preSurface=0.000; scene=11.468; toneMap=0.049; regionalCompute=2.680; materialsOverlays=8.083",
+      "[native] GPU timings: total=11.777 ms; anchoredCompute=0.000; anchoredDraw=8.850; background=0.883; preSurface=0.000; scene=11.727; toneMap=0.050; regionalCompute=2.684; materialsOverlays=8.160",
+      "[native] CPU timings: update=12.585 ms; fence=10.108; inspection=0.045; hostCallback=0.291; validationUpload=2.141; record=0.217; submit=0.057; present=0.372",
+      "[native] GPU anchored refinement averages: tcsPatches=339013.0; refinedVertices=1017039.0; clippingOutputPrimitives=141261.5; fragmentInvocations=4010251.6; samples=247; CPUFinalRaster=false",
+      "[native] GPU timing averages: total=10.371 ms; anchoredCompute=0.000; anchoredDraw=6.259; background=0.723; preSurface=0.000; toneMap=0.127"
+    ]
+  },
+  {
+    "pose": "D",
+    "args": [
+      "--scene=sol",
+      "--focus=earth",
+      "--solar-epoch=j2000",
+      "--physical-surface=m12d-natural-candidate",
+      "--benchmark-frames=350",
+      "--log=startup,validation,vulkan",
+      "--p2s5c3-traversal"
+    ],
+    "env": {
+      "NOVACORE_WINDOW_CLIENT_WIDTH": "3440",
+      "NOVACORE_WINDOW_CLIENT_HEIGHT": "1440",
+      "NOVACORE_WINDOW_BORDERLESS": "1",
+      "NOVACORE_P2S5C3_HORIZON_ONLY": "1",
+      "NOVACORE_P2S5E_HORIZON_FRAME": "150",
+      "NOVACORE_P2S5G_FIXED_DIAGNOSTIC_TIME": "1"
+    },
+    "sha256": "16a45322ff389d7b761c741f6810acb80d62eca1f483471cd9f7267ca2edb12f",
+    "bytes": 273341,
+    "summary": [
+      "[native] NCSM1 fragment shading: ordinary specialization; startup=shared default",
+      "[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)",
+      "[native] NCSM1 fragment shading: ordinary specialization; startup=shared default",
+      "[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)",
+      "[native] GPU timings: total=3.187 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.700; preSurface=0.000; scene=2.938; toneMap=0.249; regionalCompute=1.965; materialsOverlays=0.273",
+      "[native] GPU timings: total=3.260 ms; anchoredCompute=0.000; anchoredDraw=0.692; background=0.702; preSurface=0.000; scene=3.214; toneMap=0.046; regionalCompute=2.495; materialsOverlays=0.018",
+      "P2S5C3 horizon diagnostic PASS: mode=baseline; frames=240; level=L17; generation=1; pupilErrorMax=0.000000000E+000rad; heightParityMax=0.000000000E+000m; normalParityMax=0.000000000E+000rad; zeroOwner=0; overlap=0; stale=0; rasterDiagnostic=none",
+      "[native] CPU timings: update=6.828 ms; fence=3.381; inspection=1.167; hostCallback=0.206; validationUpload=2.075; record=0.206; submit=0.060; present=0.271",
+      "[native] P2S5C3 CPU timing: update avg=6.828 ms; p50=5.506; p95=7.253; p99=9.372; max=254.152; samples=240",
+      "[native] P2S5C3 CPU timing: fenceWait avg=3.381 ms; p50=3.228; p95=4.835; p99=5.070; max=6.564; samples=240",
+      "[native] P2S5C3 CPU timing: inspection avg=1.167 ms; p50=0.060; p95=0.111; p99=0.322; max=247.475; samples=240",
+      "[native] P2S5C3 CPU timing: hostCallback avg=0.206 ms; p50=0.143; p95=0.367; p99=1.339; max=4.611; samples=240",
+      "[native] P2S5C3 CPU timing: validationUpload avg=2.075 ms; p50=2.047; p95=2.290; p99=2.488; max=2.851; samples=240",
+      "[native] P2S5C3 CPU timing: record avg=0.206 ms; p50=0.203; p95=0.288; p99=0.323; max=0.559; samples=240",
+      "[native] P2S5C3 CPU timing: submit avg=0.060 ms; p50=0.049; p95=0.072; p99=0.095; max=2.342; samples=240",
+      "[native] P2S5C3 CPU timing: present avg=0.271 ms; p50=0.200; p95=0.278; p99=0.434; max=13.340; samples=240",
+      "[native] P2S5C3 GPU timing: total avg=3.479 ms; p50=3.263; p95=4.936; p99=5.009; max=6.621; samples=238",
+      "[native] P2S5C3 GPU timing: unusedAnchoredCompute avg=0.000 ms; p50=0.000; p95=0.000; p99=0.000; max=0.000; samples=238",
+      "[native] P2S5C3 GPU timing: detailedDraw avg=0.603 ms; p50=0.692; p95=0.692; p99=0.692; max=0.927; samples=238",
+      "[native] P2S5C3 GPU timing: background avg=0.737 ms; p50=0.702; p95=0.862; p99=0.925; max=0.946; samples=238",
+      "[native] P2S5C3 GPU timing: preSurface avg=0.000 ms; p50=0.000; p95=0.000; p99=0.000; max=0.000; samples=238",
+      "[native] P2S5C3 GPU timing: scene avg=3.432 ms; p50=3.217; p95=4.890; p99=4.963; max=6.575; samples=238",
+      "[native] P2S5C3 GPU timing: toneMap avg=0.047 ms; p50=0.046; p95=0.046; p99=0.050; max=0.249; samples=238",
+      "[native] P2S5C3 GPU timing: cullCompact avg=2.629 ms; p50=2.493; p95=4.081; p99=4.086; max=5.633; samples=238",
+      "[native] P2S5C3 GPU timing: materialsOverlays avg=0.066 ms; p50=0.018; p95=0.241; p99=0.321; max=0.424; samples=238",
+      "[native] P2S5C3 GPU timing: candidateDraw avg=0.602 ms; p50=0.692; p95=0.692; p99=0.692; max=0.692; samples=238",
+      "[native] P2S5C3 GPU timing: globalFill avg=0.032 ms; p50=0.000; p95=0.237; p99=0.267; max=0.268; samples=238",
+      "[native] P2S5C3 frame timing: all avg=8.325 ms; p50=6.063; p95=7.717; p99=26.384; max=255.013; samples=240",
+      "[native] P2S5C3 frame timing: publication avg=255.013 ms; p50=255.013; p95=255.013; p99=255.013; max=255.013; samples=1",
+      "[native] P2S5C3 sync timing: fenceWait avg=3.381 ms; p50=3.228; p95=4.835; p99=5.070; max=6.564; samples=240",
+      "[native] P2S5C3 GPU workload: clippingOutputPrimitives avg=0.0; p50=0; p95=0; p99=0; max=0; samples=206",
+      "[native] P2S5C3 GPU workload: fragmentInvocations avg=0.0; p50=0; p95=0; p99=0; max=0; samples=206",
+      "[native] P2S5C3 GPU workload: tcsPatches avg=0.0; p50=0; p95=0; p99=0; max=0; samples=206",
+      "[native] P2S5C3 GPU workload: tesInvocations avg=0.0; p50=0; p95=0; p99=0; max=0; samples=206",
+      "[native] GPU anchored refinement averages: tcsPatches=0.0; refinedVertices=0.0; clippingOutputPrimitives=0.0; fragmentInvocations=0.0; samples=206; CPUFinalRaster=false",
+      "[native] GPU timing averages: total=3.479 ms; anchoredCompute=0.000; anchoredDraw=0.603; background=0.737; preSurface=0.000; toneMap=0.047"
+    ]
+  },
+  {
+    "pose": "E",
+    "args": [
+      "--scene=sol",
+      "--focus=earth",
+      "--solar-epoch=j2000",
+      "--physical-surface=m12d-natural-candidate",
+      "--benchmark-frames=350",
+      "--log=startup,validation,vulkan",
+      "--p2s5c3-traversal"
+    ],
+    "env": {
+      "NOVACORE_WINDOW_CLIENT_WIDTH": "3440",
+      "NOVACORE_WINDOW_CLIENT_HEIGHT": "1440",
+      "NOVACORE_WINDOW_BORDERLESS": "1",
+      "NOVACORE_P2S5F_DIRECTIONAL_ONLY": "1",
+      "NOVACORE_P2S5G_FIXED_DIAGNOSTIC_TIME": "1",
+      "NOVACORE_P2S5F_DIRECTIONAL_LEVEL": "17",
+      "NOVACORE_P2S5F_DIRECTIONAL_YAW_RADIANS": "1.5707963267948966",
+      "NOVACORE_P2S5F_DIRECTIONAL_PITCH_RADIANS": "-0.001"
+    },
+    "sha256": "d951ef5f9d2d0e9be518135a365ad68eda8763b39af4d2324a7e866da5d675fa",
+    "bytes": 446814,
+    "summary": [
+      "[native] NCSM1 fragment shading: ordinary specialization; startup=shared default",
+      "[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)",
+      "[native] NCSM1 fragment shading: ordinary specialization; startup=shared default",
+      "[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)",
+      "[native] GPU timings: total=3.134 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.700; preSurface=0.000; scene=3.087; toneMap=0.046; regionalCompute=1.965; materialsOverlays=0.422",
+      "[native] GPU timings: total=3.253 ms; anchoredCompute=0.000; anchoredDraw=0.692; background=0.702; preSurface=0.000; scene=3.207; toneMap=0.046; regionalCompute=2.492; materialsOverlays=0.014",
+      "P2S5F directional visibility PASS: mode=broad+narrow; frames=213; measuredFrames=180; level=L17; yaw=1.5707963267948966; pitch=-0.001; zeroOwner=0; overlap=0; stale=0; heightParityMax=0.000000000E+000m; normalParityMax=0.000000000E+000rad",
+      "[native] CPU timings: update=6.517 ms; fence=4.036; inspection=0.181; hostCallback=0.213; validationUpload=2.088; record=0.188; submit=0.056; present=0.251",
+      "[native] P2S5C3 CPU timing: update avg=6.517 ms; p50=5.609; p95=7.403; p99=23.690; max=80.382; samples=213",
+      "[native] P2S5C3 CPU timing: fenceWait avg=4.036 ms; p50=3.244; p95=4.943; p99=17.259; max=77.726; samples=213",
+      "[native] P2S5C3 CPU timing: inspection avg=0.181 ms; p50=0.081; p95=0.174; p99=0.284; max=18.041; samples=213",
+      "[native] P2S5C3 CPU timing: hostCallback avg=0.213 ms; p50=0.159; p95=0.375; p99=1.092; max=4.899; samples=213",
+      "[native] P2S5C3 CPU timing: validationUpload avg=2.088 ms; p50=2.027; p95=2.365; p99=2.473; max=2.681; samples=213",
+      "[native] P2S5C3 CPU timing: record avg=0.188 ms; p50=0.176; p95=0.273; p99=0.375; max=0.573; samples=213",
+      "[native] P2S5C3 CPU timing: submit avg=0.056 ms; p50=0.042; p95=0.072; p99=0.089; max=2.178; samples=213",
+      "[native] P2S5C3 CPU timing: present avg=0.251 ms; p50=0.181; p95=0.263; p99=0.413; max=10.256; samples=213",
+      "[native] P2S5C3 GPU timing: total avg=3.503 ms; p50=3.259; p95=4.843; p99=5.020; max=6.494; samples=211",
+      "[native] P2S5C3 GPU timing: unusedAnchoredCompute avg=0.000 ms; p50=0.000; p95=0.000; p99=0.000; max=0.000; samples=211",
+      "[native] P2S5C3 GPU timing: detailedDraw avg=0.591 ms; p50=0.692; p95=0.692; p99=0.692; max=0.914; samples=211",
+      "[native] P2S5C3 GPU timing: background avg=0.741 ms; p50=0.702; p95=0.862; p99=0.917; max=0.933; samples=211",
+      "[native] P2S5C3 GPU timing: preSurface avg=0.000 ms; p50=0.000; p95=0.000; p99=0.000; max=0.000; samples=211",
+      "[native] P2S5C3 GPU timing: scene avg=3.457 ms; p50=3.213; p95=4.797; p99=4.974; max=6.448; samples=211",
+      "[native] P2S5C3 GPU timing: toneMap avg=0.046 ms; p50=0.046; p95=0.046; p99=0.051; max=0.158; samples=211",
+      "[native] P2S5C3 GPU timing: cullCompact avg=2.644 ms; p50=2.493; p95=4.080; p99=4.086; max=5.519; samples=211",
+      "[native] P2S5C3 GPU timing: materialsOverlays avg=0.072 ms; p50=0.014; p95=0.232; p99=0.410; max=0.422; samples=211",
+      "[native] P2S5C3 GPU timing: candidateDraw avg=0.590 ms; p50=0.692; p95=0.692; p99=0.692; max=0.692; samples=211",
+      "[native] P2S5C3 GPU timing: globalFill avg=0.035 ms; p50=0.000; p95=0.227; p99=0.254; max=0.257; samples=211",
+      "[native] P2S5C3 frame timing: all avg=8.128 ms; p50=6.064; p95=7.878; p99=47.256; max=242.777; samples=213",
+      "[native] P2S5C3 frame timing: publication avg=7.468 ms; p50=7.468; p95=7.468; p99=7.468; max=7.468; samples=1",
+      "[native] P2S5C3 sync timing: fenceWait avg=4.036 ms; p50=3.244; p95=4.943; p99=17.259; max=77.726; samples=213",
+      "[native] P2S5C3 GPU workload: clippingOutputPrimitives avg=0.0; p50=0; p95=0; p99=0; max=0; samples=179",
+      "[native] P2S5C3 GPU workload: fragmentInvocations avg=0.0; p50=0; p95=0; p99=0; max=0; samples=179",
+      "[native] P2S5C3 GPU workload: tcsPatches avg=0.0; p50=0; p95=0; p99=0; max=0; samples=179",
+      "[native] P2S5C3 GPU workload: tesInvocations avg=0.0; p50=0; p95=0; p99=0; max=0; samples=179",
+      "[native] GPU anchored refinement averages: tcsPatches=0.0; refinedVertices=0.0; clippingOutputPrimitives=0.0; fragmentInvocations=0.0; samples=179; CPUFinalRaster=false",
+      "[native] GPU timing averages: total=3.503 ms; anchoredCompute=0.000; anchoredDraw=0.591; background=0.741; preSurface=0.000; toneMap=0.046"
+    ],
+    "aligned100": {
+      "name": "E",
+      "logSha256": "d951ef5f9d2d0e9be518135a365ad68eda8763b39af4d2324a7e866da5d675fa",
+      "rawUtf8Bytes": 446814,
+      "samples": 100,
+      "metrics": {
+        "submittedFrame": {
+          "n": 100,
+          "median": 162,
+          "p95": 207,
+          "minimum": 113,
+          "maximum": 212
+        },
+        "timingFrame": {
+          "n": 100,
+          "median": 162,
+          "p95": 207,
+          "minimum": 113,
+          "maximum": 212
+        },
+        "generation": {
+          "n": 100,
+          "median": 1,
+          "p95": 1,
+          "minimum": 1,
+          "maximum": 1
+        },
+        "level": {
+          "n": 100,
+          "median": 17,
+          "p95": 17,
+          "minimum": 17,
+          "maximum": 17
+        },
+        "topologyFamily": {
+          "n": 100,
+          "median": 1,
+          "p95": 1,
+          "minimum": 1,
+          "maximum": 1
+        },
+        "broadAccepts": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "broadRejects": {
+          "n": 100,
+          "median": 1184156,
+          "p95": 1184156,
+          "minimum": 1184156,
+          "maximum": 1184156
+        },
+        "narrowTests": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "narrowRejectLeft": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "narrowRejectRight": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "narrowRejectBottom": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "narrowRejectTop": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "narrowRejectNear": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "narrowRejectFar": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "nearPlaneIntersections": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "tesEnvelopeActive": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "tesEnvelopeInactive": {
+          "n": 100,
+          "median": 1184156,
+          "p95": 1184156,
+          "minimum": 1184156,
+          "maximum": 1184156
+        },
+        "compactedTriangles": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "tcsPatches": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "refinedVertices": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "clippingOutputPrimitives": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "fragmentInvocations": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "maximumOuterTesFactor": {
+          "n": 100,
+          "median": 0.0,
+          "p95": 0.0,
+          "minimum": 0.0,
+          "maximum": 0.0
+        },
+        "maximumInnerTesFactor": {
+          "n": 100,
+          "median": 0.0,
+          "p95": 0.0,
+          "minimum": 0.0,
+          "maximum": 0.0
+        },
+        "tcsBehindOrOnCamera": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "tcsWithinOneMetre": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "maximumProjectedEdgePixels": {
+          "n": 100,
+          "median": 0.0,
+          "p95": 0.0,
+          "minimum": 0.0,
+          "maximum": 0.0
+        },
+        "maximumFactorPatch": {
+          "n": 100,
+          "median": 0,
+          "p95": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "gpuCullCompactMs": {
+          "n": 100,
+          "median": 2.49116,
+          "p95": 2.49996,
+          "minimum": 2.48124,
+          "maximum": 2.50736
+        },
+        "gpuDetailedDrawMs": {
+          "n": 100,
+          "median": 0.69176,
+          "p95": 0.69212,
+          "minimum": 0.69124,
+          "maximum": 0.69232
+        },
+        "gpuTotalMs": {
+          "n": 100,
+          "median": 3.25624,
+          "p95": 3.44368,
+          "minimum": 3.243,
+          "maximum": 3.52273
+        },
+        "clippingInputPrimitives": null,
+        "fenceWait": null,
+        "update": null,
+        "record": null,
+        "submit": null,
+        "present": null
+      },
+      "firstFrame": {
+        "submittedFrame": 113,
+        "timingFrame": 113,
+        "generation": 1,
+        "level": 17,
+        "topologyFamily": 1,
+        "mode": "broad+narrow",
+        "cameraBody": "(-1036.8510346254334,-2603399.3763885498,5814963.3804244846)",
+        "bodyOrientation": "(0.542257845,-0.453824222,-0.453824222,0.542257845)",
+        "viewProjection": "(0.291645557,1.555866,0,0.176897109,0.0521431826,0.279932112,0,-0.984229267,-0.661750376,0.707756281,0,0.000408623397,0,0,1000000,0)",
+        "broadAccepts": 0,
+        "broadRejects": 1184156,
+        "narrowTests": 0,
+        "narrowRejectLeft": 0,
+        "narrowRejectRight": 0,
+        "narrowRejectBottom": 0,
+        "narrowRejectTop": 0,
+        "narrowRejectNear": 0,
+        "narrowRejectFar": 0,
+        "nearPlaneIntersections": 0,
+        "tesEnvelopeActive": 0,
+        "tesEnvelopeInactive": 1184156,
+        "compactedTriangles": 0,
+        "tcsPatches": 0,
+        "refinedVertices": 0,
+        "clippingOutputPrimitives": 0,
+        "fragmentInvocations": 0,
+        "maximumOuterTesFactor": 0.0,
+        "maximumInnerTesFactor": 0.0,
+        "innerFactorBins": "(0,0,0,0,0,0,0)",
+        "tcsBehindOrOnCamera": 0,
+        "tcsWithinOneMetre": 0,
+        "maximumProjectedEdgePixels": 0.0,
+        "maximumFactorPatch": 0,
+        "gpuCullCompactMs": 2.48652,
+        "gpuDetailedDrawMs": 0.69204,
+        "gpuTotalMs": 3.24512
+      },
+      "lastFrame": {
+        "submittedFrame": 212,
+        "timingFrame": 212,
+        "generation": 1,
+        "level": 17,
+        "topologyFamily": 1,
+        "mode": "broad+narrow",
+        "cameraBody": "(-1036.8510346254334,-2603399.3763885498,5814963.3804244846)",
+        "bodyOrientation": "(0.542257845,-0.453824222,-0.453824222,0.542257845)",
+        "viewProjection": "(0.291645557,1.555866,0,0.176897109,0.0521431826,0.279932112,0,-0.984229267,-0.661750376,0.707756281,0,0.000408623397,0,0,1000000,0)",
+        "broadAccepts": 0,
+        "broadRejects": 1184156,
+        "narrowTests": 0,
+        "narrowRejectLeft": 0,
+        "narrowRejectRight": 0,
+        "narrowRejectBottom": 0,
+        "narrowRejectTop": 0,
+        "narrowRejectNear": 0,
+        "narrowRejectFar": 0,
+        "nearPlaneIntersections": 0,
+        "tesEnvelopeActive": 0,
+        "tesEnvelopeInactive": 1184156,
+        "compactedTriangles": 0,
+        "tcsPatches": 0,
+        "refinedVertices": 0,
+        "clippingOutputPrimitives": 0,
+        "fragmentInvocations": 0,
+        "maximumOuterTesFactor": 0.0,
+        "maximumInnerTesFactor": 0.0,
+        "innerFactorBins": "(0,0,0,0,0,0,0)",
+        "tcsBehindOrOnCamera": 0,
+        "tcsWithinOneMetre": 0,
+        "maximumProjectedEdgePixels": 0.0,
+        "maximumFactorPatch": 0,
+        "gpuCullCompactMs": 2.48832,
+        "gpuDetailedDrawMs": 0.69164,
+        "gpuTotalMs": 3.2494
+      },
+      "preparation": {
+        "demand": {
+          "sumMs": 68.21964,
+          "slices": {
+            "n": 44,
+            "median": 1.58296,
+            "p95": 1.59984,
+            "minimum": 0.8478,
+            "maximum": 1.84316
+          }
+        },
+        "incomingPhysicalPreparation": {
+          "sumMs": 39.97132,
+          "slices": {
+            "n": 11,
+            "median": 3.72576,
+            "p95": 3.7296,
+            "minimum": 2.99436,
+            "maximum": 3.7296
+          }
+        }
+      },
+      "provenance": [
+        "[native] NCSM1 regional demand: incoming=1; pupil=1; generation=1; required=0; anchoredPatches=0; unresolved=0; demandMs=517.588",
+        "[native] NCSM1 regional ready: incoming=1; pupil=1; dependencyDelayMs=520.087; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+        "[native] Production spherical billboard publication: generation=1; level=17; topologyFamily=1; hash=0xBCE444AFFB2D713B; topologyResident=true; topologyReused=0; topologyUploads=1; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1424208; postHorizonTriangles=1184156; horizonRejected=240052; postScreenConeTriangles=0; screenConeRejected=1184156; compactedIndices=0; visibleTriangles=0; zeroVisible=1; noOpIndirect=1; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=1; deferredRetirements=0",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=1; yaw=1.5707963267948966; pitch=-0.001; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5932878161205779,0.38424259193507776,0.5935665086983494,-0.3847674590418751)",
+        "[native] P2S5D pupil identity: pupil=1; prepared=1; culled=1; tes=1; raster=1; match=true",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=10; yaw=1.5707963267948966; pitch=-0.001; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5932878161205779,0.38424259193507776,0.5935665086983494,-0.3847674590418751)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=20; yaw=1.5707963267948966; pitch=-0.001; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5932878161205779,0.38424259193507776,0.5935665086983494,-0.3847674590418751)",
+        "[native] NCSM1 regional demand: incoming=0; pupil=1; generation=1; required=0; anchoredPatches=0; unresolved=0; demandMs=166.371",
+        "[native] NCSM1 regional ready: incoming=0; pupil=1; dependencyDelayMs=168.786; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=30; yaw=1.5707963267948966; pitch=-0.001; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5932878161205779,0.38424259193507776,0.5935665086983494,-0.3847674590418751)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=40; yaw=1.5707963267948966; pitch=-0.001; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5932878161205779,0.38424259193507776,0.5935665086983494,-0.3847674590418751)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=50; yaw=1.5707963267948966; pitch=-0.001; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5932878161205779,0.38424259193507776,0.5935665086983494,-0.3847674590418751)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=60; yaw=1.5707963267948966; pitch=-0.001; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5932878161205779,0.38424259193507776,0.5935665086983494,-0.3847674590418751)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=70; yaw=1.5707963267948966; pitch=-0.001; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5932878161205779,0.38424259193507776,0.5935665086983494,-0.3847674590418751)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=80; yaw=1.5707963267948966; pitch=-0.001; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5932878161205779,0.38424259193507776,0.5935665086983494,-0.3847674590418751)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=90; yaw=1.5707963267948966; pitch=-0.001; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5932878161205779,0.38424259193507776,0.5935665086983494,-0.3847674590418751)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=100; yaw=1.5707963267948966; pitch=-0.001; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5932878161205779,0.38424259193507776,0.5935665086983494,-0.3847674590418751)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=110; yaw=1.5707963267948966; pitch=-0.001; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5932878161205779,0.38424259193507776,0.5935665086983494,-0.3847674590418751)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=120; yaw=1.5707963267948966; pitch=-0.001; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5932878161205779,0.38424259193507776,0.5935665086983494,-0.3847674590418751)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=130; yaw=1.5707963267948966; pitch=-0.001; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5932878161205779,0.38424259193507776,0.5935665086983494,-0.3847674590418751)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=140; yaw=1.5707963267948966; pitch=-0.001; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5932878161205779,0.38424259193507776,0.5935665086983494,-0.3847674590418751)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=150; yaw=1.5707963267948966; pitch=-0.001; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5932878161205779,0.38424259193507776,0.5935665086983494,-0.3847674590418751)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=160; yaw=1.5707963267948966; pitch=-0.001; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5932878161205779,0.38424259193507776,0.5935665086983494,-0.3847674590418751)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=170; yaw=1.5707963267948966; pitch=-0.001; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5932878161205779,0.38424259193507776,0.5935665086983494,-0.3847674590418751)",
+        "P2S5F directional pose: mode=broad+narrow; phaseFrame=180; yaw=1.5707963267948966; pitch=-0.001; level=L17; generation=1; cameraBody=(-1036.8510287459462,-2603399.376388347,5814963.380426226); orientationBody=(-0.5932878161205779,0.38424259193507776,0.5935665086983494,-0.3847674590418751)",
+        "P2S5F directional visibility PASS: mode=broad+narrow; frames=213; measuredFrames=180; level=L17; yaw=1.5707963267948966; pitch=-0.001; zeroOwner=0; overlap=0; stale=0; heightParityMax=0.000000000E+000m; normalParityMax=0.000000000E+000rad",
+        "[native] CPU timings: update=6.517 ms; fence=4.036; inspection=0.181; hostCallback=0.213; validationUpload=2.088; record=0.188; submit=0.056; present=0.251",
+        "[native] P2S5C3 frame timing: publication avg=7.468 ms; p50=7.468; p95=7.468; p99=7.468; max=7.468; samples=1",
+        "[native] NCSM1 regional physical totals: requests=0; hits=0; misses=0; loaded=0; readBytes=0; uploadedBytes=0; residentHighWater=0; allocatedBytes=4; maximumBytes=124895232; queueHighWater=0; readyCapacity=8; uploadBudget=8; demandDispatches=44; dependencyDelayMsMax=520.087; recordReadDecodeVerifyMs=0.000; contributingRecords=670; anchoredDemandRequired=false"
+      ],
+      "preparedGeometry": []
+    }
+  }
+]

@@ -1,0 +1,1505 @@
+{
+  "label": "gate4-florida-baseline",
+  "pose": "florida",
+  "mode": "baseline",
+  "capture": false,
+  "daylight": false,
+  "dynamic": false,
+  "exitCode": 0,
+  "runtime": "E:\\NovaCore\\build\\ksa-terrain-convergence\\gate4-florida-baseline",
+  "shaders": {
+    "production_spherical_billboard_prepare.comp": "cd6b8feeaa382281c4d8891af64d54e45354491dbd93af6b90621a3658e9492c",
+    "production_spherical_billboard_incoming_prepare.comp": "9f32e3fcf9ffe534a10107ab0b1ef2b1ecdb3c6a9bb44d2c5d3d38b15ed47613",
+    "production_spherical_billboard.tese": "3b64eca169c95f00b1d375d380de8b38d18a2ae00dce0cc640f7621fc1df3ed5"
+  },
+  "native": "f5136d742cd85bbcf2ab20aa0342ae32015b780df10affbd46f0c48cc2a117cc",
+  "managed": "18d4e54132f7a17cecd5bb90a96799f56ba3d591ce4c8a3febbe23df663b51df",
+  "logSha256": "87b157e4de8b7c09fbb408095cf15003ee752679cfe964437d89419eb867b329",
+  "args": [
+    "--scene=sol",
+    "--focus=earth",
+    "--altitude=10.004",
+    "--solar-epoch=j2000",
+    "--physical-surface=m12d-natural-candidate",
+    "--p2s5c3-traversal",
+    "--benchmark-frames=1000",
+    "--log=startup,validation,vulkan",
+    "--surface-site=florida-launch"
+  ],
+  "environment": {
+    "VK_SDK_PATH": "C:\\VulkanSDK\\1.4.357.0",
+    "VK_LAYER_PATH": "E:\\NovaCore\\build\\ksa-terrain-convergence\\gate4-florida-baseline\\layers\\explicit",
+    "VK_IMPLICIT_LAYER_PATH": "E:\\NovaCore\\build\\ksa-terrain-convergence\\gate4-florida-baseline\\layers\\implicit",
+    "VK_LAYER_SETTINGS_PATH": "E:\\NovaCore\\build\\ksa-terrain-convergence\\gate4-florida-baseline\\layers",
+    "VK_INSTANCE_LAYERS": "VK_LAYER_KHRONOS_validation",
+    "NOVACORE_WINDOW_CLIENT_WIDTH": "3440",
+    "NOVACORE_WINDOW_CLIENT_HEIGHT": "1440",
+    "NOVACORE_WINDOW_BORDERLESS": "1",
+    "NOVACORE_PERFORMANCE_FRAME_LOG": "1",
+    "NOVACORE_PERFORMANCE_GEOMETRY": "1",
+    "NOVACORE_P2S5F_DIRECTIONAL_ONLY": "1",
+    "NOVACORE_P2S5G_FIXED_DIAGNOSTIC_TIME": "1",
+    "NOVACORE_P2S5F_DIRECTIONAL_LEVEL": "17",
+    "NOVACORE_P2S5F_DIRECTIONAL_YAW_RADIANS": "1.5707963267948966",
+    "NOVACORE_P2S5F_DIRECTIONAL_PITCH_RADIANS": "-0.035",
+    "NOVACORE_SHADER_INFO": "E:\\NovaCore\\build\\ksa-terrain-convergence\\gate4-florida-baseline",
+    "NOVACORE_PERFORMANCE_FLORIDA": "1"
+  },
+  "validation": [],
+  "captureIdentity": [],
+  "compiler": [
+    "[native] AMD shader statistics: stage=1; result=0; stageMask=3; vgpr=39; sgpr=64; ldsBytes=32212; scratchBytes=0; availableVgpr=256; availableSgpr=104; physicalVgpr=1024; physicalSgpr=2048",
+    "[native] AMD shader statistics: stage=2; result=0; stageMask=3; vgpr=39; sgpr=64; ldsBytes=32212; scratchBytes=0; availableVgpr=256; availableSgpr=104; physicalVgpr=1024; physicalSgpr=2048",
+    "[native] AMD shader statistics: stage=4; result=0; stageMask=4; vgpr=190; sgpr=36; ldsBytes=4608; scratchBytes=0; availableVgpr=256; availableSgpr=104; physicalVgpr=1024; physicalSgpr=2048",
+    "[native] AMD shader statistics: stage=16; result=0; stageMask=16; vgpr=85; sgpr=53; ldsBytes=0; scratchBytes=0; availableVgpr=256; availableSgpr=104; physicalVgpr=1024; physicalSgpr=2048",
+    "[native] AMD shader statistics: stage=1; result=0; stageMask=3; vgpr=39; sgpr=64; ldsBytes=32212; scratchBytes=0; availableVgpr=256; availableSgpr=104; physicalVgpr=1024; physicalSgpr=2048",
+    "[native] AMD shader statistics: stage=2; result=0; stageMask=3; vgpr=39; sgpr=64; ldsBytes=32212; scratchBytes=0; availableVgpr=256; availableSgpr=104; physicalVgpr=1024; physicalSgpr=2048",
+    "[native] AMD shader statistics: stage=4; result=0; stageMask=4; vgpr=190; sgpr=36; ldsBytes=4608; scratchBytes=0; availableVgpr=256; availableSgpr=104; physicalVgpr=1024; physicalSgpr=2048",
+    "[native] AMD shader statistics: stage=16; result=0; stageMask=16; vgpr=85; sgpr=53; ldsBytes=0; scratchBytes=0; availableVgpr=256; availableSgpr=104; physicalVgpr=1024; physicalSgpr=2048"
+  ],
+  "analysis": {
+    "name": "gate4-florida-baseline",
+    "logSha256": "0c7b2f0642d08181e3446a827f13dfea5c6c15f7e6dcf84221575dff7420bd4b",
+    "rawUtf8Bytes": 574342,
+    "samples": 100,
+    "metrics": {
+      "submittedFrame": {
+        "n": 100,
+        "median": 231,
+        "p95": 276,
+        "minimum": 182,
+        "maximum": 281
+      },
+      "timingFrame": {
+        "n": 100,
+        "median": 231,
+        "p95": 276,
+        "minimum": 182,
+        "maximum": 281
+      },
+      "generation": {
+        "n": 100,
+        "median": 1,
+        "p95": 1,
+        "minimum": 1,
+        "maximum": 1
+      },
+      "level": {
+        "n": 100,
+        "median": 17,
+        "p95": 17,
+        "minimum": 17,
+        "maximum": 17
+      },
+      "topologyFamily": {
+        "n": 100,
+        "median": 1,
+        "p95": 1,
+        "minimum": 1,
+        "maximum": 1
+      },
+      "broadAccepts": {
+        "n": 100,
+        "median": 295609,
+        "p95": 295609,
+        "minimum": 295609,
+        "maximum": 295609
+      },
+      "broadRejects": {
+        "n": 100,
+        "median": 888583,
+        "p95": 888583,
+        "minimum": 888583,
+        "maximum": 888583
+      },
+      "narrowTests": {
+        "n": 100,
+        "median": 5265,
+        "p95": 5265,
+        "minimum": 5265,
+        "maximum": 5265
+      },
+      "narrowRejectLeft": {
+        "n": 100,
+        "median": 430,
+        "p95": 430,
+        "minimum": 430,
+        "maximum": 430
+      },
+      "narrowRejectRight": {
+        "n": 100,
+        "median": 396,
+        "p95": 396,
+        "minimum": 396,
+        "maximum": 396
+      },
+      "narrowRejectBottom": {
+        "n": 100,
+        "median": 0,
+        "p95": 0,
+        "minimum": 0,
+        "maximum": 0
+      },
+      "narrowRejectTop": {
+        "n": 100,
+        "median": 35,
+        "p95": 35,
+        "minimum": 35,
+        "maximum": 35
+      },
+      "narrowRejectNear": {
+        "n": 100,
+        "median": 0,
+        "p95": 0,
+        "minimum": 0,
+        "maximum": 0
+      },
+      "narrowRejectFar": {
+        "n": 100,
+        "median": 0,
+        "p95": 0,
+        "minimum": 0,
+        "maximum": 0
+      },
+      "nearPlaneIntersections": {
+        "n": 100,
+        "median": 0,
+        "p95": 0,
+        "minimum": 0,
+        "maximum": 0
+      },
+      "tesEnvelopeActive": {
+        "n": 100,
+        "median": 0,
+        "p95": 0,
+        "minimum": 0,
+        "maximum": 0
+      },
+      "tesEnvelopeInactive": {
+        "n": 100,
+        "median": 1184192,
+        "p95": 1184192,
+        "minimum": 1184192,
+        "maximum": 1184192
+      },
+      "compactedTriangles": {
+        "n": 100,
+        "median": 294748,
+        "p95": 294748,
+        "minimum": 294748,
+        "maximum": 294748
+      },
+      "tcsPatches": {
+        "n": 100,
+        "median": 294748,
+        "p95": 294748,
+        "minimum": 294748,
+        "maximum": 294748
+      },
+      "refinedVertices": {
+        "n": 100,
+        "median": 884244,
+        "p95": 884244,
+        "minimum": 884244,
+        "maximum": 884244
+      },
+      "clippingOutputPrimitives": {
+        "n": 100,
+        "median": 119655,
+        "p95": 119696,
+        "minimum": 119540,
+        "maximum": 119724
+      },
+      "fragmentInvocations": {
+        "n": 100,
+        "median": 3984342,
+        "p95": 3984516,
+        "minimum": 3984126,
+        "maximum": 3984572
+      },
+      "maximumOuterTesFactor": {
+        "n": 100,
+        "median": 1.0,
+        "p95": 1.0,
+        "minimum": 1.0,
+        "maximum": 1.0
+      },
+      "maximumInnerTesFactor": {
+        "n": 100,
+        "median": 0.9999,
+        "p95": 0.9999,
+        "minimum": 0.9999,
+        "maximum": 0.9999
+      },
+      "tcsBehindOrOnCamera": {
+        "n": 100,
+        "median": 0,
+        "p95": 0,
+        "minimum": 0,
+        "maximum": 0
+      },
+      "tcsWithinOneMetre": {
+        "n": 100,
+        "median": 0,
+        "p95": 0,
+        "minimum": 0,
+        "maximum": 0
+      },
+      "maximumProjectedEdgePixels": {
+        "n": 100,
+        "median": 77.477913,
+        "p95": 77.477913,
+        "minimum": 77.477913,
+        "maximum": 77.477913
+      },
+      "maximumFactorPatch": {
+        "n": 100,
+        "median": 495,
+        "p95": 1254,
+        "minimum": 0,
+        "maximum": 1573
+      },
+      "gpuCullCompactMs": {
+        "n": 100,
+        "median": 2.65692,
+        "p95": 2.67156,
+        "minimum": 2.64704,
+        "maximum": 2.70956
+      },
+      "gpuDetailedDrawMs": {
+        "n": 100,
+        "median": 8.02504,
+        "p95": 8.35704,
+        "minimum": 7.94628,
+        "maximum": 8.45492,
+        "p99": 8.41372
+      },
+      "gpuTotalMs": {
+        "n": 100,
+        "median": 11.13628,
+        "p95": 11.48336,
+        "minimum": 10.70288,
+        "maximum": 11.80083,
+        "p99": 11.71593
+      },
+      "clippingInputPrimitives": {
+        "n": 100,
+        "median": 119659,
+        "p95": 119700,
+        "minimum": 119544,
+        "maximum": 119728
+      },
+      "fenceWait": {
+        "n": 100,
+        "median": 11.1181,
+        "p95": 11.5514,
+        "minimum": 10.6849,
+        "maximum": 11.7575
+      },
+      "update": {
+        "n": 100,
+        "median": 13.41,
+        "p95": 13.9415,
+        "minimum": 12.9446,
+        "maximum": 14.2481
+      },
+      "record": {
+        "n": 100,
+        "median": 0.2381,
+        "p95": 0.3228,
+        "minimum": 0.1913,
+        "maximum": 0.365
+      },
+      "submit": {
+        "n": 100,
+        "median": 0.0567,
+        "p95": 0.0779,
+        "minimum": 0.0451,
+        "maximum": 0.1315
+      },
+      "present": {
+        "n": 100,
+        "median": 0.2139,
+        "p95": 0.3416,
+        "minimum": 0.1552,
+        "maximum": 0.3905
+      }
+    },
+    "firstFrame": {
+      "submittedFrame": 182,
+      "timingFrame": 182,
+      "generation": 1,
+      "level": 17,
+      "topologyFamily": 1,
+      "mode": "broad+narrow",
+      "cameraBody": "(913246.13160787709,3050496.5534667969,5518278.9729758967)",
+      "bodyOrientation": "(0.542257845,-0.453824222,-0.453824222,0.542257845)",
+      "viewProjection": "(0.53317976,1.25950658,0,0.414397478,-0.597743332,0.0203681625,0,0.789588451,0.554653883,-1.18879271,0,0.452575773,0,0,1.70111132,0)",
+      "broadAccepts": 295609,
+      "broadRejects": 888583,
+      "narrowTests": 5265,
+      "narrowRejectLeft": 430,
+      "narrowRejectRight": 396,
+      "narrowRejectBottom": 0,
+      "narrowRejectTop": 35,
+      "narrowRejectNear": 0,
+      "narrowRejectFar": 0,
+      "nearPlaneIntersections": 0,
+      "tesEnvelopeActive": 0,
+      "tesEnvelopeInactive": 1184192,
+      "compactedTriangles": 294748,
+      "tcsPatches": 294748,
+      "refinedVertices": 884244,
+      "clippingOutputPrimitives": 119616,
+      "fragmentInvocations": 3984499,
+      "maximumOuterTesFactor": 1.0,
+      "maximumInnerTesFactor": 0.9999,
+      "innerFactorBins": "(294748,0,0,0,0,0,0)",
+      "tcsBehindOrOnCamera": 0,
+      "tcsWithinOneMetre": 0,
+      "maximumProjectedEdgePixels": 77.477913,
+      "maximumFactorPatch": 33,
+      "gpuCullCompactMs": 2.65772,
+      "gpuDetailedDrawMs": 7.97644,
+      "gpuTotalMs": 11.42338
+    },
+    "lastFrame": {
+      "submittedFrame": 281,
+      "timingFrame": 281,
+      "generation": 1,
+      "level": 17,
+      "topologyFamily": 1,
+      "mode": "broad+narrow",
+      "cameraBody": "(913246.13160787709,3050496.5534667969,5518278.9729758967)",
+      "bodyOrientation": "(0.542257845,-0.453824222,-0.453824222,0.542257845)",
+      "viewProjection": "(0.53317976,1.25950658,0,0.414397478,-0.597743332,0.0203681625,0,0.789588451,0.554653883,-1.18879271,0,0.452575773,0,0,1.70111132,0)",
+      "broadAccepts": 295609,
+      "broadRejects": 888583,
+      "narrowTests": 5265,
+      "narrowRejectLeft": 430,
+      "narrowRejectRight": 396,
+      "narrowRejectBottom": 0,
+      "narrowRejectTop": 35,
+      "narrowRejectNear": 0,
+      "narrowRejectFar": 0,
+      "nearPlaneIntersections": 0,
+      "tesEnvelopeActive": 0,
+      "tesEnvelopeInactive": 1184192,
+      "compactedTriangles": 294748,
+      "tcsPatches": 294748,
+      "refinedVertices": 884244,
+      "clippingOutputPrimitives": 119645,
+      "fragmentInvocations": 3984250,
+      "maximumOuterTesFactor": 1.0,
+      "maximumInnerTesFactor": 0.9999,
+      "innerFactorBins": "(294748,0,0,0,0,0,0)",
+      "tcsBehindOrOnCamera": 0,
+      "tcsWithinOneMetre": 0,
+      "maximumProjectedEdgePixels": 77.477913,
+      "maximumFactorPatch": 418,
+      "gpuCullCompactMs": 2.66392,
+      "gpuDetailedDrawMs": 7.9998,
+      "gpuTotalMs": 11.39984
+    },
+    "preparation": {
+      "demand": {
+        "sumMs": 31.823520000000002,
+        "slices": {
+          "n": 22,
+          "median": 1.45484,
+          "p95": 1.51808,
+          "minimum": 0.9602,
+          "maximum": 1.52136
+        }
+      },
+      "incomingPhysicalPreparation": {
+        "sumMs": 38.32684,
+        "slices": {
+          "n": 11,
+          "median": 3.50976,
+          "p95": 3.60864,
+          "minimum": 3.19988,
+          "maximum": 3.60864
+        }
+      }
+    },
+    "provenance": [
+      "Florida seating: body=6; id=0x4E435F464C5F5044; direction=(0.1433224599406355,0.4788205718227514,0.8661348234979923); physicalGeneration=4; terrainVersion=5; H=15.134892258793116; slabRootHeight=21.970461536198854; foundationDepth=6.835569277405739; foundationBottomLocalZ=-6.835569277405739; foundationBottomCenterHeight=15.134892258793116; minimumContactLocalZ=-6.585569277405739; embed=0.25; regionalLoaded=True; regionalResidual=15.001533002687239; regionalSha=c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe; authority=canonical-H; publicationDependent=false.",
+      "[native] NCSM1 regional demand: incoming=1; pupil=1; generation=1; required=670; anchoredPatches=0; unresolved=1; demandMs=673.161",
+      "[native] NCSM1 regional ready: incoming=1; pupil=1; dependencyDelayMs=1325.653; requests=670; resident=670; uploadedBytes=93392640; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+      "[native] Production spherical billboard publication: generation=1; level=17; topologyFamily=1; hash=0xBCE444AFFB2D713B; topologyResident=true; topologyReused=0; topologyUploads=1; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=1424208; postHorizonTriangles=1184192; horizonRejected=240016; postScreenConeTriangles=294748; screenConeRejected=889444; compactedIndices=884244; visibleTriangles=294748; zeroVisible=0; noOpIndirect=0; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=1; deferredRetirements=0",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=1; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(913246.1316078771,3050496.553466797,5518278.972975897); orientationBody=(0.3416758351446499,0.3312809999165141,0.20020665880547464,0.8564040031097875)",
+      "[native] P2S5D pupil identity: pupil=1; prepared=1; culled=1; tes=1; raster=1; match=true",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=10; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(913246.1316078771,3050496.553466797,5518278.972975897); orientationBody=(0.3416758351446499,0.3312809999165141,0.20020665880547464,0.8564040031097875)",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=20; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(913246.1316078771,3050496.553466797,5518278.972975897); orientationBody=(0.3416758351446499,0.3312809999165141,0.20020665880547464,0.8564040031097875)",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=30; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(913246.1316078771,3050496.553466797,5518278.972975897); orientationBody=(0.3416758351446499,0.3312809999165141,0.20020665880547464,0.8564040031097875)",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=40; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(913246.1316078771,3050496.553466797,5518278.972975897); orientationBody=(0.3416758351446499,0.3312809999165141,0.20020665880547464,0.8564040031097875)",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=50; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(913246.1316078771,3050496.553466797,5518278.972975897); orientationBody=(0.3416758351446499,0.3312809999165141,0.20020665880547464,0.8564040031097875)",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=60; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(913246.1316078771,3050496.553466797,5518278.972975897); orientationBody=(0.3416758351446499,0.3312809999165141,0.20020665880547464,0.8564040031097875)",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=70; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(913246.1316078771,3050496.553466797,5518278.972975897); orientationBody=(0.3416758351446499,0.3312809999165141,0.20020665880547464,0.8564040031097875)",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=80; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(913246.1316078771,3050496.553466797,5518278.972975897); orientationBody=(0.3416758351446499,0.3312809999165141,0.20020665880547464,0.8564040031097875)",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=90; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(913246.1316078771,3050496.553466797,5518278.972975897); orientationBody=(0.3416758351446499,0.3312809999165141,0.20020665880547464,0.8564040031097875)",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=100; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(913246.1316078771,3050496.553466797,5518278.972975897); orientationBody=(0.3416758351446499,0.3312809999165141,0.20020665880547464,0.8564040031097875)",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=110; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(913246.1316078771,3050496.553466797,5518278.972975897); orientationBody=(0.3416758351446499,0.3312809999165141,0.20020665880547464,0.8564040031097875)",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=120; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(913246.1316078771,3050496.553466797,5518278.972975897); orientationBody=(0.3416758351446499,0.3312809999165141,0.20020665880547464,0.8564040031097875)",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=130; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(913246.1316078771,3050496.553466797,5518278.972975897); orientationBody=(0.3416758351446499,0.3312809999165141,0.20020665880547464,0.8564040031097875)",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=140; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(913246.1316078771,3050496.553466797,5518278.972975897); orientationBody=(0.3416758351446499,0.3312809999165141,0.20020665880547464,0.8564040031097875)",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=150; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(913246.1316078771,3050496.553466797,5518278.972975897); orientationBody=(0.3416758351446499,0.3312809999165141,0.20020665880547464,0.8564040031097875)",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=160; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(913246.1316078771,3050496.553466797,5518278.972975897); orientationBody=(0.3416758351446499,0.3312809999165141,0.20020665880547464,0.8564040031097875)",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=170; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(913246.1316078771,3050496.553466797,5518278.972975897); orientationBody=(0.3416758351446499,0.3312809999165141,0.20020665880547464,0.8564040031097875)",
+      "P2S5F directional pose: mode=broad+narrow; phaseFrame=180; yaw=1.5707963267948966; pitch=-0.035; level=L17; generation=1; cameraBody=(913246.1316078771,3050496.553466797,5518278.972975897); orientationBody=(0.3416758351446499,0.3312809999165141,0.20020665880547464,0.8564040031097875)",
+      "P2S5F directional visibility PASS: mode=broad+narrow; frames=282; measuredFrames=180; level=L17; yaw=1.5707963267948966; pitch=-0.035; zeroOwner=0; overlap=0; stale=0; heightParityMax=0.000000000E+000m; normalParityMax=0.000000000E+000rad",
+      "[native] CPU timings: update=14.835 ms; fence=9.538; inspection=2.842; hostCallback=0.336; validationUpload=2.118; record=0.285; submit=0.076; present=0.253",
+      "[native] P2S5C3 frame timing: publication avg=13.771 ms; p50=13.771; p95=13.771; p99=13.771; max=13.771; samples=1",
+      "[native] NCSM1 regional physical totals: requests=670; hits=840; misses=670; loaded=670; readBytes=163158696; uploadedBytes=93392640; residentHighWater=670; allocatedBytes=119737728; maximumBytes=124895232; queueHighWater=634; readyCapacity=8; uploadBudget=8; demandDispatches=22; dependencyDelayMsMax=1325.653; recordReadDecodeVerifyMs=236.007; contributingRecords=670; anchoredDemandRequired=false"
+    ],
+    "preparedGeometry": [
+      {
+        "frame": 150,
+        "generation": 1,
+        "triangles": 294748,
+        "distinctControls": 148371,
+        "clippedEmpty": 4,
+        "areaBelowOnePixel": 87163,
+        "areaBelowQuarterPixel": 25352,
+        "positiveWinding": 113781,
+        "negativeWinding": 180963,
+        "invalid": 0,
+        "summedProjectedAreaPixels": 4432272.52
+      }
+    ]
+  },
+  "frameRows": [
+    {
+      "submittedFrame": 182,
+      "timingFrame": 182,
+      "clippingOutputPrimitives": 119616,
+      "fragmentInvocations": 3984499,
+      "maximumFactorPatch": 33,
+      "gpuCullCompactMs": 2.65772,
+      "gpuDetailedDrawMs": 7.97644,
+      "gpuTotalMs": 11.42338
+    },
+    {
+      "submittedFrame": 183,
+      "timingFrame": 183,
+      "clippingOutputPrimitives": 119657,
+      "fragmentInvocations": 3984547,
+      "maximumFactorPatch": 418,
+      "gpuCullCompactMs": 2.64764,
+      "gpuDetailedDrawMs": 8.01996,
+      "gpuTotalMs": 10.83828
+    },
+    {
+      "submittedFrame": 184,
+      "timingFrame": 184,
+      "clippingOutputPrimitives": 119664,
+      "fragmentInvocations": 3984340,
+      "maximumFactorPatch": 737,
+      "gpuCullCompactMs": 2.67132,
+      "gpuDetailedDrawMs": 7.97532,
+      "gpuTotalMs": 10.93552
+    },
+    {
+      "submittedFrame": 185,
+      "timingFrame": 185,
+      "clippingOutputPrimitives": 119655,
+      "fragmentInvocations": 3984318,
+      "maximumFactorPatch": 66,
+      "gpuCullCompactMs": 2.65544,
+      "gpuDetailedDrawMs": 8.02048,
+      "gpuTotalMs": 11.31253
+    },
+    {
+      "submittedFrame": 186,
+      "timingFrame": 186,
+      "clippingOutputPrimitives": 119668,
+      "fragmentInvocations": 3984318,
+      "maximumFactorPatch": 550,
+      "gpuCullCompactMs": 2.66112,
+      "gpuDetailedDrawMs": 8.00688,
+      "gpuTotalMs": 11.03548
+    },
+    {
+      "submittedFrame": 187,
+      "timingFrame": 187,
+      "clippingOutputPrimitives": 119601,
+      "fragmentInvocations": 3984498,
+      "maximumFactorPatch": 1155,
+      "gpuCullCompactMs": 2.66496,
+      "gpuDetailedDrawMs": 8.00736,
+      "gpuTotalMs": 11.30889
+    },
+    {
+      "submittedFrame": 188,
+      "timingFrame": 188,
+      "clippingOutputPrimitives": 119694,
+      "fragmentInvocations": 3984297,
+      "maximumFactorPatch": 363,
+      "gpuCullCompactMs": 2.6496,
+      "gpuDetailedDrawMs": 8.05268,
+      "gpuTotalMs": 10.84476
+    },
+    {
+      "submittedFrame": 189,
+      "timingFrame": 189,
+      "clippingOutputPrimitives": 119612,
+      "fragmentInvocations": 3984396,
+      "maximumFactorPatch": 352,
+      "gpuCullCompactMs": 2.70956,
+      "gpuDetailedDrawMs": 8.08668,
+      "gpuTotalMs": 11.0902
+    },
+    {
+      "submittedFrame": 190,
+      "timingFrame": 190,
+      "clippingOutputPrimitives": 119656,
+      "fragmentInvocations": 3984450,
+      "maximumFactorPatch": 924,
+      "gpuCullCompactMs": 2.64756,
+      "gpuDetailedDrawMs": 7.99344,
+      "gpuTotalMs": 11.02768
+    },
+    {
+      "submittedFrame": 191,
+      "timingFrame": 191,
+      "clippingOutputPrimitives": 119661,
+      "fragmentInvocations": 3984407,
+      "maximumFactorPatch": 407,
+      "gpuCullCompactMs": 2.67476,
+      "gpuDetailedDrawMs": 7.96412,
+      "gpuTotalMs": 10.98756
+    },
+    {
+      "submittedFrame": 192,
+      "timingFrame": 192,
+      "clippingOutputPrimitives": 119645,
+      "fragmentInvocations": 3984139,
+      "maximumFactorPatch": 1056,
+      "gpuCullCompactMs": 2.66416,
+      "gpuDetailedDrawMs": 8.04876,
+      "gpuTotalMs": 11.1708
+    },
+    {
+      "submittedFrame": 193,
+      "timingFrame": 193,
+      "clippingOutputPrimitives": 119637,
+      "fragmentInvocations": 3984252,
+      "maximumFactorPatch": 44,
+      "gpuCullCompactMs": 2.70212,
+      "gpuDetailedDrawMs": 7.98796,
+      "gpuTotalMs": 11.10556
+    },
+    {
+      "submittedFrame": 194,
+      "timingFrame": 194,
+      "clippingOutputPrimitives": 119656,
+      "fragmentInvocations": 3984393,
+      "maximumFactorPatch": 902,
+      "gpuCullCompactMs": 2.65696,
+      "gpuDetailedDrawMs": 8.02188,
+      "gpuTotalMs": 11.2699
+    },
+    {
+      "submittedFrame": 195,
+      "timingFrame": 195,
+      "clippingOutputPrimitives": 119637,
+      "fragmentInvocations": 3984171,
+      "maximumFactorPatch": 484,
+      "gpuCullCompactMs": 2.65864,
+      "gpuDetailedDrawMs": 8.36592,
+      "gpuTotalMs": 11.20388
+    },
+    {
+      "submittedFrame": 196,
+      "timingFrame": 196,
+      "clippingOutputPrimitives": 119540,
+      "fragmentInvocations": 3984293,
+      "maximumFactorPatch": 451,
+      "gpuCullCompactMs": 2.66372,
+      "gpuDetailedDrawMs": 7.9574,
+      "gpuTotalMs": 11.25338
+    },
+    {
+      "submittedFrame": 197,
+      "timingFrame": 197,
+      "clippingOutputPrimitives": 119685,
+      "fragmentInvocations": 3984316,
+      "maximumFactorPatch": 627,
+      "gpuCullCompactMs": 2.65908,
+      "gpuDetailedDrawMs": 7.99184,
+      "gpuTotalMs": 10.77668
+    },
+    {
+      "submittedFrame": 198,
+      "timingFrame": 198,
+      "clippingOutputPrimitives": 119682,
+      "fragmentInvocations": 3984366,
+      "maximumFactorPatch": 814,
+      "gpuCullCompactMs": 2.664,
+      "gpuDetailedDrawMs": 8.08144,
+      "gpuTotalMs": 11.20468
+    },
+    {
+      "submittedFrame": 199,
+      "timingFrame": 199,
+      "clippingOutputPrimitives": 119635,
+      "fragmentInvocations": 3984306,
+      "maximumFactorPatch": 308,
+      "gpuCullCompactMs": 2.657,
+      "gpuDetailedDrawMs": 7.94772,
+      "gpuTotalMs": 10.71884
+    },
+    {
+      "submittedFrame": 200,
+      "timingFrame": 200,
+      "clippingOutputPrimitives": 119677,
+      "fragmentInvocations": 3984167,
+      "maximumFactorPatch": 429,
+      "gpuCullCompactMs": 2.66488,
+      "gpuDetailedDrawMs": 8.0526,
+      "gpuTotalMs": 11.14056
+    },
+    {
+      "submittedFrame": 201,
+      "timingFrame": 201,
+      "clippingOutputPrimitives": 119681,
+      "fragmentInvocations": 3984516,
+      "maximumFactorPatch": 385,
+      "gpuCullCompactMs": 2.64952,
+      "gpuDetailedDrawMs": 8.37204,
+      "gpuTotalMs": 11.35356
+    },
+    {
+      "submittedFrame": 202,
+      "timingFrame": 202,
+      "clippingOutputPrimitives": 119666,
+      "fragmentInvocations": 3984442,
+      "maximumFactorPatch": 1364,
+      "gpuCullCompactMs": 2.67052,
+      "gpuDetailedDrawMs": 8.34964,
+      "gpuTotalMs": 11.52548
+    },
+    {
+      "submittedFrame": 203,
+      "timingFrame": 203,
+      "clippingOutputPrimitives": 119623,
+      "fragmentInvocations": 3984173,
+      "maximumFactorPatch": 825,
+      "gpuCullCompactMs": 2.66348,
+      "gpuDetailedDrawMs": 8.01496,
+      "gpuTotalMs": 11.04176
+    },
+    {
+      "submittedFrame": 204,
+      "timingFrame": 204,
+      "clippingOutputPrimitives": 119652,
+      "fragmentInvocations": 3984311,
+      "maximumFactorPatch": 121,
+      "gpuCullCompactMs": 2.65688,
+      "gpuDetailedDrawMs": 8.35704,
+      "gpuTotalMs": 11.48336
+    },
+    {
+      "submittedFrame": 205,
+      "timingFrame": 205,
+      "clippingOutputPrimitives": 119640,
+      "fragmentInvocations": 3984480,
+      "maximumFactorPatch": 44,
+      "gpuCullCompactMs": 2.66164,
+      "gpuDetailedDrawMs": 8.13,
+      "gpuTotalMs": 11.2078
+    },
+    {
+      "submittedFrame": 206,
+      "timingFrame": 206,
+      "clippingOutputPrimitives": 119647,
+      "fragmentInvocations": 3984281,
+      "maximumFactorPatch": 572,
+      "gpuCullCompactMs": 2.65004,
+      "gpuDetailedDrawMs": 8.05816,
+      "gpuTotalMs": 10.86968
+    },
+    {
+      "submittedFrame": 207,
+      "timingFrame": 207,
+      "clippingOutputPrimitives": 119655,
+      "fragmentInvocations": 3984415,
+      "maximumFactorPatch": 968,
+      "gpuCullCompactMs": 2.65412,
+      "gpuDetailedDrawMs": 8.0538,
+      "gpuTotalMs": 11.40563
+    },
+    {
+      "submittedFrame": 208,
+      "timingFrame": 208,
+      "clippingOutputPrimitives": 119670,
+      "fragmentInvocations": 3984212,
+      "maximumFactorPatch": 770,
+      "gpuCullCompactMs": 2.655,
+      "gpuDetailedDrawMs": 8.02504,
+      "gpuTotalMs": 11.15135
+    },
+    {
+      "submittedFrame": 209,
+      "timingFrame": 209,
+      "clippingOutputPrimitives": 119665,
+      "fragmentInvocations": 3984321,
+      "maximumFactorPatch": 1254,
+      "gpuCullCompactMs": 2.65292,
+      "gpuDetailedDrawMs": 8.01664,
+      "gpuTotalMs": 11.25087
+    },
+    {
+      "submittedFrame": 210,
+      "timingFrame": 210,
+      "clippingOutputPrimitives": 119661,
+      "fragmentInvocations": 3984503,
+      "maximumFactorPatch": 385,
+      "gpuCullCompactMs": 2.65636,
+      "gpuDetailedDrawMs": 8.09148,
+      "gpuTotalMs": 10.82396
+    },
+    {
+      "submittedFrame": 211,
+      "timingFrame": 211,
+      "clippingOutputPrimitives": 119702,
+      "fragmentInvocations": 3984430,
+      "maximumFactorPatch": 649,
+      "gpuCullCompactMs": 2.648,
+      "gpuDetailedDrawMs": 8.02928,
+      "gpuTotalMs": 10.84248
+    },
+    {
+      "submittedFrame": 212,
+      "timingFrame": 212,
+      "clippingOutputPrimitives": 119667,
+      "fragmentInvocations": 3984213,
+      "maximumFactorPatch": 396,
+      "gpuCullCompactMs": 2.65672,
+      "gpuDetailedDrawMs": 8.11352,
+      "gpuTotalMs": 11.27979
+    },
+    {
+      "submittedFrame": 213,
+      "timingFrame": 213,
+      "clippingOutputPrimitives": 119674,
+      "fragmentInvocations": 3984380,
+      "maximumFactorPatch": 374,
+      "gpuCullCompactMs": 2.66592,
+      "gpuDetailedDrawMs": 8.1354,
+      "gpuTotalMs": 11.19248
+    },
+    {
+      "submittedFrame": 214,
+      "timingFrame": 214,
+      "clippingOutputPrimitives": 119592,
+      "fragmentInvocations": 3984364,
+      "maximumFactorPatch": 11,
+      "gpuCullCompactMs": 2.6474,
+      "gpuDetailedDrawMs": 8.3172,
+      "gpuTotalMs": 11.42672
+    },
+    {
+      "submittedFrame": 215,
+      "timingFrame": 215,
+      "clippingOutputPrimitives": 119665,
+      "fragmentInvocations": 3984213,
+      "maximumFactorPatch": 11,
+      "gpuCullCompactMs": 2.656,
+      "gpuDetailedDrawMs": 7.94628,
+      "gpuTotalMs": 11.07756
+    },
+    {
+      "submittedFrame": 216,
+      "timingFrame": 216,
+      "clippingOutputPrimitives": 119631,
+      "fragmentInvocations": 3984558,
+      "maximumFactorPatch": 902,
+      "gpuCullCompactMs": 2.65356,
+      "gpuDetailedDrawMs": 8.01968,
+      "gpuTotalMs": 11.29939
+    },
+    {
+      "submittedFrame": 217,
+      "timingFrame": 217,
+      "clippingOutputPrimitives": 119655,
+      "fragmentInvocations": 3984193,
+      "maximumFactorPatch": 737,
+      "gpuCullCompactMs": 2.65236,
+      "gpuDetailedDrawMs": 8.05144,
+      "gpuTotalMs": 10.86444
+    },
+    {
+      "submittedFrame": 218,
+      "timingFrame": 218,
+      "clippingOutputPrimitives": 119677,
+      "fragmentInvocations": 3984311,
+      "maximumFactorPatch": 143,
+      "gpuCullCompactMs": 2.6802,
+      "gpuDetailedDrawMs": 7.9562,
+      "gpuTotalMs": 11.06048
+    },
+    {
+      "submittedFrame": 219,
+      "timingFrame": 219,
+      "clippingOutputPrimitives": 119698,
+      "fragmentInvocations": 3984192,
+      "maximumFactorPatch": 1573,
+      "gpuCullCompactMs": 2.65436,
+      "gpuDetailedDrawMs": 7.9816,
+      "gpuTotalMs": 11.3053
+    },
+    {
+      "submittedFrame": 220,
+      "timingFrame": 220,
+      "clippingOutputPrimitives": 119677,
+      "fragmentInvocations": 3984492,
+      "maximumFactorPatch": 484,
+      "gpuCullCompactMs": 2.6558,
+      "gpuDetailedDrawMs": 8.01224,
+      "gpuTotalMs": 11.24852
+    },
+    {
+      "submittedFrame": 221,
+      "timingFrame": 221,
+      "clippingOutputPrimitives": 119641,
+      "fragmentInvocations": 3984408,
+      "maximumFactorPatch": 946,
+      "gpuCullCompactMs": 2.66064,
+      "gpuDetailedDrawMs": 8.04828,
+      "gpuTotalMs": 10.85012
+    },
+    {
+      "submittedFrame": 222,
+      "timingFrame": 222,
+      "clippingOutputPrimitives": 119668,
+      "fragmentInvocations": 3984379,
+      "maximumFactorPatch": 869,
+      "gpuCullCompactMs": 2.67044,
+      "gpuDetailedDrawMs": 7.9984,
+      "gpuTotalMs": 11.10652
+    },
+    {
+      "submittedFrame": 223,
+      "timingFrame": 223,
+      "clippingOutputPrimitives": 119645,
+      "fragmentInvocations": 3984295,
+      "maximumFactorPatch": 451,
+      "gpuCullCompactMs": 2.65252,
+      "gpuDetailedDrawMs": 7.96076,
+      "gpuTotalMs": 10.75188
+    },
+    {
+      "submittedFrame": 224,
+      "timingFrame": 224,
+      "clippingOutputPrimitives": 119626,
+      "fragmentInvocations": 3984322,
+      "maximumFactorPatch": 946,
+      "gpuCullCompactMs": 2.65092,
+      "gpuDetailedDrawMs": 8.06624,
+      "gpuTotalMs": 11.29708
+    },
+    {
+      "submittedFrame": 225,
+      "timingFrame": 225,
+      "clippingOutputPrimitives": 119607,
+      "fragmentInvocations": 3984290,
+      "maximumFactorPatch": 77,
+      "gpuCullCompactMs": 2.65264,
+      "gpuDetailedDrawMs": 7.97064,
+      "gpuTotalMs": 10.70288
+    },
+    {
+      "submittedFrame": 226,
+      "timingFrame": 226,
+      "clippingOutputPrimitives": 119576,
+      "fragmentInvocations": 3984572,
+      "maximumFactorPatch": 737,
+      "gpuCullCompactMs": 2.65388,
+      "gpuDetailedDrawMs": 8.00808,
+      "gpuTotalMs": 11.11912
+    },
+    {
+      "submittedFrame": 227,
+      "timingFrame": 227,
+      "clippingOutputPrimitives": 119634,
+      "fragmentInvocations": 3984366,
+      "maximumFactorPatch": 352,
+      "gpuCullCompactMs": 2.65156,
+      "gpuDetailedDrawMs": 8.13232,
+      "gpuTotalMs": 11.24618
+    },
+    {
+      "submittedFrame": 228,
+      "timingFrame": 228,
+      "clippingOutputPrimitives": 119650,
+      "fragmentInvocations": 3984305,
+      "maximumFactorPatch": 143,
+      "gpuCullCompactMs": 2.66344,
+      "gpuDetailedDrawMs": 7.98684,
+      "gpuTotalMs": 11.08268
+    },
+    {
+      "submittedFrame": 229,
+      "timingFrame": 229,
+      "clippingOutputPrimitives": 119639,
+      "fragmentInvocations": 3984259,
+      "maximumFactorPatch": 1155,
+      "gpuCullCompactMs": 2.65872,
+      "gpuDetailedDrawMs": 8.32268,
+      "gpuTotalMs": 11.71593
+    },
+    {
+      "submittedFrame": 230,
+      "timingFrame": 230,
+      "clippingOutputPrimitives": 119663,
+      "fragmentInvocations": 3984434,
+      "maximumFactorPatch": 286,
+      "gpuCullCompactMs": 2.65604,
+      "gpuDetailedDrawMs": 7.97584,
+      "gpuTotalMs": 11.12372
+    },
+    {
+      "submittedFrame": 231,
+      "timingFrame": 231,
+      "clippingOutputPrimitives": 119694,
+      "fragmentInvocations": 3984342,
+      "maximumFactorPatch": 66,
+      "gpuCullCompactMs": 2.66492,
+      "gpuDetailedDrawMs": 8.04976,
+      "gpuTotalMs": 11.04952
+    },
+    {
+      "submittedFrame": 232,
+      "timingFrame": 232,
+      "clippingOutputPrimitives": 119657,
+      "fragmentInvocations": 3984185,
+      "maximumFactorPatch": 1177,
+      "gpuCullCompactMs": 2.66564,
+      "gpuDetailedDrawMs": 8.00212,
+      "gpuTotalMs": 10.96208
+    },
+    {
+      "submittedFrame": 233,
+      "timingFrame": 233,
+      "clippingOutputPrimitives": 119719,
+      "fragmentInvocations": 3984289,
+      "maximumFactorPatch": 429,
+      "gpuCullCompactMs": 2.66148,
+      "gpuDetailedDrawMs": 8.10768,
+      "gpuTotalMs": 11.15112
+    },
+    {
+      "submittedFrame": 234,
+      "timingFrame": 234,
+      "clippingOutputPrimitives": 119672,
+      "fragmentInvocations": 3984406,
+      "maximumFactorPatch": 473,
+      "gpuCullCompactMs": 2.65976,
+      "gpuDetailedDrawMs": 8.01768,
+      "gpuTotalMs": 11.18941
+    },
+    {
+      "submittedFrame": 235,
+      "timingFrame": 235,
+      "clippingOutputPrimitives": 119635,
+      "fragmentInvocations": 3984287,
+      "maximumFactorPatch": 1177,
+      "gpuCullCompactMs": 2.65336,
+      "gpuDetailedDrawMs": 8.40976,
+      "gpuTotalMs": 11.48932
+    },
+    {
+      "submittedFrame": 236,
+      "timingFrame": 236,
+      "clippingOutputPrimitives": 119595,
+      "fragmentInvocations": 3984298,
+      "maximumFactorPatch": 286,
+      "gpuCullCompactMs": 2.6504,
+      "gpuDetailedDrawMs": 8.00516,
+      "gpuTotalMs": 10.78076
+    },
+    {
+      "submittedFrame": 237,
+      "timingFrame": 237,
+      "clippingOutputPrimitives": 119659,
+      "fragmentInvocations": 3984272,
+      "maximumFactorPatch": 847,
+      "gpuCullCompactMs": 2.65864,
+      "gpuDetailedDrawMs": 7.97124,
+      "gpuTotalMs": 11.28704
+    },
+    {
+      "submittedFrame": 238,
+      "timingFrame": 238,
+      "clippingOutputPrimitives": 119622,
+      "fragmentInvocations": 3984280,
+      "maximumFactorPatch": 594,
+      "gpuCullCompactMs": 2.6586,
+      "gpuDetailedDrawMs": 8.01016,
+      "gpuTotalMs": 11.07208
+    },
+    {
+      "submittedFrame": 239,
+      "timingFrame": 239,
+      "clippingOutputPrimitives": 119683,
+      "fragmentInvocations": 3984182,
+      "maximumFactorPatch": 1210,
+      "gpuCullCompactMs": 2.66152,
+      "gpuDetailedDrawMs": 8.0362,
+      "gpuTotalMs": 11.11556
+    },
+    {
+      "submittedFrame": 240,
+      "timingFrame": 240,
+      "clippingOutputPrimitives": 119663,
+      "fragmentInvocations": 3984263,
+      "maximumFactorPatch": 1254,
+      "gpuCullCompactMs": 2.65972,
+      "gpuDetailedDrawMs": 8.41372,
+      "gpuTotalMs": 11.47007
+    },
+    {
+      "submittedFrame": 241,
+      "timingFrame": 241,
+      "clippingOutputPrimitives": 119638,
+      "fragmentInvocations": 3984439,
+      "maximumFactorPatch": 22,
+      "gpuCullCompactMs": 2.65992,
+      "gpuDetailedDrawMs": 8.23788,
+      "gpuTotalMs": 11.2456
+    },
+    {
+      "submittedFrame": 242,
+      "timingFrame": 242,
+      "clippingOutputPrimitives": 119682,
+      "fragmentInvocations": 3984282,
+      "maximumFactorPatch": 1309,
+      "gpuCullCompactMs": 2.65556,
+      "gpuDetailedDrawMs": 8.0526,
+      "gpuTotalMs": 11.1937
+    },
+    {
+      "submittedFrame": 243,
+      "timingFrame": 243,
+      "clippingOutputPrimitives": 119651,
+      "fragmentInvocations": 3984536,
+      "maximumFactorPatch": 957,
+      "gpuCullCompactMs": 2.65556,
+      "gpuDetailedDrawMs": 8.1154,
+      "gpuTotalMs": 10.97024
+    },
+    {
+      "submittedFrame": 244,
+      "timingFrame": 244,
+      "clippingOutputPrimitives": 119641,
+      "fragmentInvocations": 3984438,
+      "maximumFactorPatch": 66,
+      "gpuCullCompactMs": 2.6554,
+      "gpuDetailedDrawMs": 8.09744,
+      "gpuTotalMs": 11.36529
+    },
+    {
+      "submittedFrame": 245,
+      "timingFrame": 245,
+      "clippingOutputPrimitives": 119594,
+      "fragmentInvocations": 3984515,
+      "maximumFactorPatch": 88,
+      "gpuCullCompactMs": 2.6512,
+      "gpuDetailedDrawMs": 7.97564,
+      "gpuTotalMs": 11.08037
+    },
+    {
+      "submittedFrame": 246,
+      "timingFrame": 246,
+      "clippingOutputPrimitives": 119627,
+      "fragmentInvocations": 3984368,
+      "maximumFactorPatch": 99,
+      "gpuCullCompactMs": 2.65496,
+      "gpuDetailedDrawMs": 7.97048,
+      "gpuTotalMs": 11.07396
+    },
+    {
+      "submittedFrame": 247,
+      "timingFrame": 247,
+      "clippingOutputPrimitives": 119724,
+      "fragmentInvocations": 3984300,
+      "maximumFactorPatch": 0,
+      "gpuCullCompactMs": 2.65732,
+      "gpuDetailedDrawMs": 8.07448,
+      "gpuTotalMs": 10.88428
+    },
+    {
+      "submittedFrame": 248,
+      "timingFrame": 248,
+      "clippingOutputPrimitives": 119663,
+      "fragmentInvocations": 3984201,
+      "maximumFactorPatch": 1177,
+      "gpuCullCompactMs": 2.65752,
+      "gpuDetailedDrawMs": 7.98676,
+      "gpuTotalMs": 11.21265
+    },
+    {
+      "submittedFrame": 249,
+      "timingFrame": 249,
+      "clippingOutputPrimitives": 119695,
+      "fragmentInvocations": 3984378,
+      "maximumFactorPatch": 1199,
+      "gpuCullCompactMs": 2.64976,
+      "gpuDetailedDrawMs": 8.23508,
+      "gpuTotalMs": 11.27378
+    },
+    {
+      "submittedFrame": 250,
+      "timingFrame": 250,
+      "clippingOutputPrimitives": 119651,
+      "fragmentInvocations": 3984185,
+      "maximumFactorPatch": 1177,
+      "gpuCullCompactMs": 2.65772,
+      "gpuDetailedDrawMs": 7.9822,
+      "gpuTotalMs": 11.02956
+    },
+    {
+      "submittedFrame": 251,
+      "timingFrame": 251,
+      "clippingOutputPrimitives": 119667,
+      "fragmentInvocations": 3984392,
+      "maximumFactorPatch": 748,
+      "gpuCullCompactMs": 2.65416,
+      "gpuDetailedDrawMs": 7.96336,
+      "gpuTotalMs": 11.0284
+    },
+    {
+      "submittedFrame": 252,
+      "timingFrame": 252,
+      "clippingOutputPrimitives": 119701,
+      "fragmentInvocations": 3984475,
+      "maximumFactorPatch": 462,
+      "gpuCullCompactMs": 2.6538,
+      "gpuDetailedDrawMs": 8.17208,
+      "gpuTotalMs": 11.56704
+    },
+    {
+      "submittedFrame": 253,
+      "timingFrame": 253,
+      "clippingOutputPrimitives": 119689,
+      "fragmentInvocations": 3984448,
+      "maximumFactorPatch": 451,
+      "gpuCullCompactMs": 2.65664,
+      "gpuDetailedDrawMs": 8.09716,
+      "gpuTotalMs": 10.91612
+    },
+    {
+      "submittedFrame": 254,
+      "timingFrame": 254,
+      "clippingOutputPrimitives": 119680,
+      "fragmentInvocations": 3984276,
+      "maximumFactorPatch": 330,
+      "gpuCullCompactMs": 2.66028,
+      "gpuDetailedDrawMs": 8.04408,
+      "gpuTotalMs": 11.13628
+    },
+    {
+      "submittedFrame": 255,
+      "timingFrame": 255,
+      "clippingOutputPrimitives": 119604,
+      "fragmentInvocations": 3984278,
+      "maximumFactorPatch": 517,
+      "gpuCullCompactMs": 2.65236,
+      "gpuDetailedDrawMs": 8.06328,
+      "gpuTotalMs": 11.14468
+    },
+    {
+      "submittedFrame": 256,
+      "timingFrame": 256,
+      "clippingOutputPrimitives": 119584,
+      "fragmentInvocations": 3984313,
+      "maximumFactorPatch": 121,
+      "gpuCullCompactMs": 2.65268,
+      "gpuDetailedDrawMs": 7.992,
+      "gpuTotalMs": 11.16604
+    },
+    {
+      "submittedFrame": 257,
+      "timingFrame": 257,
+      "clippingOutputPrimitives": 119645,
+      "fragmentInvocations": 3984440,
+      "maximumFactorPatch": 803,
+      "gpuCullCompactMs": 2.65392,
+      "gpuDetailedDrawMs": 8.05144,
+      "gpuTotalMs": 11.24816
+    },
+    {
+      "submittedFrame": 258,
+      "timingFrame": 258,
+      "clippingOutputPrimitives": 119637,
+      "fragmentInvocations": 3984361,
+      "maximumFactorPatch": 374,
+      "gpuCullCompactMs": 2.66416,
+      "gpuDetailedDrawMs": 7.99656,
+      "gpuTotalMs": 11.11316
+    },
+    {
+      "submittedFrame": 259,
+      "timingFrame": 259,
+      "clippingOutputPrimitives": 119604,
+      "fragmentInvocations": 3984224,
+      "maximumFactorPatch": 1408,
+      "gpuCullCompactMs": 2.64824,
+      "gpuDetailedDrawMs": 8.11532,
+      "gpuTotalMs": 11.03124
+    },
+    {
+      "submittedFrame": 260,
+      "timingFrame": 260,
+      "clippingOutputPrimitives": 119662,
+      "fragmentInvocations": 3984355,
+      "maximumFactorPatch": 495,
+      "gpuCullCompactMs": 2.66088,
+      "gpuDetailedDrawMs": 8.3342,
+      "gpuTotalMs": 11.42532
+    },
+    {
+      "submittedFrame": 261,
+      "timingFrame": 261,
+      "clippingOutputPrimitives": 119687,
+      "fragmentInvocations": 3984135,
+      "maximumFactorPatch": 495,
+      "gpuCullCompactMs": 2.65692,
+      "gpuDetailedDrawMs": 7.97956,
+      "gpuTotalMs": 11.17811
+    },
+    {
+      "submittedFrame": 262,
+      "timingFrame": 262,
+      "clippingOutputPrimitives": 119590,
+      "fragmentInvocations": 3984316,
+      "maximumFactorPatch": 1221,
+      "gpuCullCompactMs": 2.65712,
+      "gpuDetailedDrawMs": 8.076,
+      "gpuTotalMs": 11.126
+    },
+    {
+      "submittedFrame": 263,
+      "timingFrame": 263,
+      "clippingOutputPrimitives": 119696,
+      "fragmentInvocations": 3984406,
+      "maximumFactorPatch": 814,
+      "gpuCullCompactMs": 2.65388,
+      "gpuDetailedDrawMs": 7.99296,
+      "gpuTotalMs": 11.15312
+    },
+    {
+      "submittedFrame": 264,
+      "timingFrame": 264,
+      "clippingOutputPrimitives": 119673,
+      "fragmentInvocations": 3984490,
+      "maximumFactorPatch": 847,
+      "gpuCullCompactMs": 2.66672,
+      "gpuDetailedDrawMs": 7.96424,
+      "gpuTotalMs": 11.07092
+    },
+    {
+      "submittedFrame": 265,
+      "timingFrame": 265,
+      "clippingOutputPrimitives": 119595,
+      "fragmentInvocations": 3984422,
+      "maximumFactorPatch": 1144,
+      "gpuCullCompactMs": 2.65436,
+      "gpuDetailedDrawMs": 7.99192,
+      "gpuTotalMs": 11.11711
+    },
+    {
+      "submittedFrame": 266,
+      "timingFrame": 266,
+      "clippingOutputPrimitives": 119658,
+      "fragmentInvocations": 3984342,
+      "maximumFactorPatch": 407,
+      "gpuCullCompactMs": 2.6496,
+      "gpuDetailedDrawMs": 8.02936,
+      "gpuTotalMs": 11.06812
+    },
+    {
+      "submittedFrame": 267,
+      "timingFrame": 267,
+      "clippingOutputPrimitives": 119624,
+      "fragmentInvocations": 3984348,
+      "maximumFactorPatch": 539,
+      "gpuCullCompactMs": 2.64704,
+      "gpuDetailedDrawMs": 8.02196,
+      "gpuTotalMs": 11.25211
+    },
+    {
+      "submittedFrame": 268,
+      "timingFrame": 268,
+      "clippingOutputPrimitives": 119676,
+      "fragmentInvocations": 3984371,
+      "maximumFactorPatch": 352,
+      "gpuCullCompactMs": 2.66256,
+      "gpuDetailedDrawMs": 7.98324,
+      "gpuTotalMs": 11.09892
+    },
+    {
+      "submittedFrame": 269,
+      "timingFrame": 269,
+      "clippingOutputPrimitives": 119643,
+      "fragmentInvocations": 3984251,
+      "maximumFactorPatch": 814,
+      "gpuCullCompactMs": 2.65332,
+      "gpuDetailedDrawMs": 8.09224,
+      "gpuTotalMs": 11.22522
+    },
+    {
+      "submittedFrame": 270,
+      "timingFrame": 270,
+      "clippingOutputPrimitives": 119638,
+      "fragmentInvocations": 3984501,
+      "maximumFactorPatch": 242,
+      "gpuCullCompactMs": 2.66108,
+      "gpuDetailedDrawMs": 8.07456,
+      "gpuTotalMs": 10.93424
+    },
+    {
+      "submittedFrame": 271,
+      "timingFrame": 271,
+      "clippingOutputPrimitives": 119656,
+      "fragmentInvocations": 3984379,
+      "maximumFactorPatch": 275,
+      "gpuCullCompactMs": 2.66832,
+      "gpuDetailedDrawMs": 7.9744,
+      "gpuTotalMs": 11.03752
+    },
+    {
+      "submittedFrame": 272,
+      "timingFrame": 272,
+      "clippingOutputPrimitives": 119664,
+      "fragmentInvocations": 3984534,
+      "maximumFactorPatch": 847,
+      "gpuCullCompactMs": 2.65336,
+      "gpuDetailedDrawMs": 8.05296,
+      "gpuTotalMs": 11.28144
+    },
+    {
+      "submittedFrame": 273,
+      "timingFrame": 273,
+      "clippingOutputPrimitives": 119669,
+      "fragmentInvocations": 3984347,
+      "maximumFactorPatch": 308,
+      "gpuCullCompactMs": 2.66708,
+      "gpuDetailedDrawMs": 8.45492,
+      "gpuTotalMs": 11.80083
+    },
+    {
+      "submittedFrame": 274,
+      "timingFrame": 274,
+      "clippingOutputPrimitives": 119576,
+      "fragmentInvocations": 3984363,
+      "maximumFactorPatch": 1199,
+      "gpuCullCompactMs": 2.65936,
+      "gpuDetailedDrawMs": 8.12012,
+      "gpuTotalMs": 10.92364
+    },
+    {
+      "submittedFrame": 275,
+      "timingFrame": 275,
+      "clippingOutputPrimitives": 119592,
+      "fragmentInvocations": 3984359,
+      "maximumFactorPatch": 154,
+      "gpuCullCompactMs": 2.67528,
+      "gpuDetailedDrawMs": 8.03832,
+      "gpuTotalMs": 11.15736
+    },
+    {
+      "submittedFrame": 276,
+      "timingFrame": 276,
+      "clippingOutputPrimitives": 119655,
+      "fragmentInvocations": 3984453,
+      "maximumFactorPatch": 825,
+      "gpuCullCompactMs": 2.64992,
+      "gpuDetailedDrawMs": 7.96316,
+      "gpuTotalMs": 11.14498
+    },
+    {
+      "submittedFrame": 277,
+      "timingFrame": 277,
+      "clippingOutputPrimitives": 119620,
+      "fragmentInvocations": 3984126,
+      "maximumFactorPatch": 495,
+      "gpuCullCompactMs": 2.65512,
+      "gpuDetailedDrawMs": 7.99856,
+      "gpuTotalMs": 11.09448
+    },
+    {
+      "submittedFrame": 278,
+      "timingFrame": 278,
+      "clippingOutputPrimitives": 119573,
+      "fragmentInvocations": 3984221,
+      "maximumFactorPatch": 1199,
+      "gpuCullCompactMs": 2.65972,
+      "gpuDetailedDrawMs": 8.08228,
+      "gpuTotalMs": 11.22146
+    },
+    {
+      "submittedFrame": 279,
+      "timingFrame": 279,
+      "clippingOutputPrimitives": 119608,
+      "fragmentInvocations": 3984411,
+      "maximumFactorPatch": 814,
+      "gpuCullCompactMs": 2.67156,
+      "gpuDetailedDrawMs": 8.01668,
+      "gpuTotalMs": 11.13012
+    },
+    {
+      "submittedFrame": 280,
+      "timingFrame": 280,
+      "clippingOutputPrimitives": 119633,
+      "fragmentInvocations": 3984210,
+      "maximumFactorPatch": 1210,
+      "gpuCullCompactMs": 2.6532,
+      "gpuDetailedDrawMs": 8.0634,
+      "gpuTotalMs": 10.86416
+    },
+    {
+      "submittedFrame": 281,
+      "timingFrame": 281,
+      "clippingOutputPrimitives": 119645,
+      "fragmentInvocations": 3984250,
+      "maximumFactorPatch": 418,
+      "gpuCullCompactMs": 2.66392,
+      "gpuDetailedDrawMs": 7.9998,
+      "gpuTotalMs": 11.39984
+    }
+  ],
+  "frameConstants": {
+    "generation": 1,
+    "level": 17,
+    "topologyFamily": 1,
+    "mode": "broad+narrow",
+    "cameraBody": "(913246.13160787709,3050496.5534667969,5518278.9729758967)",
+    "bodyOrientation": "(0.542257845,-0.453824222,-0.453824222,0.542257845)",
+    "viewProjection": "(0.53317976,1.25950658,0,0.414397478,-0.597743332,0.0203681625,0,0.789588451,0.554653883,-1.18879271,0,0.452575773,0,0,1.70111132,0)",
+    "broadAccepts": 295609,
+    "broadRejects": 888583,
+    "narrowTests": 5265,
+    "narrowRejectLeft": 430,
+    "narrowRejectRight": 396,
+    "narrowRejectBottom": 0,
+    "narrowRejectTop": 35,
+    "narrowRejectNear": 0,
+    "narrowRejectFar": 0,
+    "nearPlaneIntersections": 0,
+    "tesEnvelopeActive": 0,
+    "tesEnvelopeInactive": 1184192,
+    "compactedTriangles": 294748,
+    "tcsPatches": 294748,
+    "refinedVertices": 884244,
+    "maximumOuterTesFactor": 1.0,
+    "maximumInnerTesFactor": 0.9999,
+    "innerFactorBins": "(294748,0,0,0,0,0,0)",
+    "tcsBehindOrOnCamera": 0,
+    "tcsWithinOneMetre": 0,
+    "maximumProjectedEdgePixels": 77.477913
+  },
+  "rowEncoding": "Full sample = frameConstants merged with each frameRows entry. All original samples retained."
+}

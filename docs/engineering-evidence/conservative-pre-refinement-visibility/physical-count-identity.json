@@ -1,0 +1,58 @@
+{
+  "physical-active": {
+    "frames": 213,
+    "loggedQueryFrames": 179,
+    "queryCountDifferences": 0,
+    "recordCapacity": 4194304,
+    "peakBaselineRecords": 2779332
+  },
+  "physical-factor1": {
+    "frames": 213,
+    "loggedQueryFrames": 179,
+    "queryCountDifferences": 0,
+    "recordCapacity": 4194304,
+    "peakBaselineRecords": 1082850
+  },
+  "physical-Florida-motion": {
+    "frames": 1020,
+    "loggedQueryFrames": 917,
+    "queryCountDifferences": 0,
+    "recordCapacity": 4194304,
+    "peakBaselineRecords": 2864835
+  },
+  "physical-Florida": {
+    "frames": 282,
+    "loggedQueryFrames": 179,
+    "queryCountDifferences": 0,
+    "recordCapacity": 4194304,
+    "peakBaselineRecords": 884244
+  },
+  "physical-full-traversal": {
+    "frames": 1702,
+    "loggedQueryFrames": 15,
+    "queryCountDifferences": 0,
+    "recordCapacity": 4194304,
+    "peakBaselineRecords": 3470327
+  },
+  "physical-grazing": {
+    "frames": 213,
+    "loggedQueryFrames": 179,
+    "queryCountDifferences": 0,
+    "recordCapacity": 4194304,
+    "peakBaselineRecords": 3470070
+  },
+  "physical-orbital": {
+    "frames": 182,
+    "loggedQueryFrames": 179,
+    "queryCountDifferences": 0,
+    "recordCapacity": 4194304,
+    "peakBaselineRecords": 46128
+  },
+  "physical-return": {
+    "frames": 379,
+    "loggedQueryFrames": 345,
+    "queryCountDifferences": 0,
+    "recordCapacity": 4194304,
+    "peakBaselineRecords": 3379101
+  }
+}

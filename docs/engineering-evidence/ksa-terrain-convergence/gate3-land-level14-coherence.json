@@ -1,0 +1,365 @@
+{
+  "camera": [
+    -1263476.9137643687,
+    4096232.6088409424,
+    4715360.036347989
+  ],
+  "radius": 6371008.8,
+  "tesCount": 24817,
+  "maximumTesNearHeight": 0,
+  "preparedVertices": 712106,
+  "selectedTriangles": 2056,
+  "triangleProbes": 30840,
+  "productionLocalAsset": "E:\\NovaCore\\.novacore\\cache\\terrain\\v1\\sha256\\c4\\c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe.nccube",
+  "source": "GPU final TES body positions; every selected triangle centroid plus 15 barycentric probes per triangle within 500 m; current production CPU full-H oracle",
+  "transportWithin500m": {
+    "count": 30840,
+    "min": 1.7497962553106188E-08,
+    "max": 5.441031103013247E-06,
+    "maxAbs": 5.441031103013247E-06,
+    "rms": 1.213613126338837E-06,
+    "worst": {
+      "triangle": 1058,
+      "distance": 49.61353586537652,
+      "bary": [
+        0.75,
+        0.25,
+        0
+      ]
+    }
+  },
+  "preparedVertexError": {
+    "count": 1093,
+    "min": -0.005235549282588181,
+    "max": 0.0017838702810877294,
+    "maxAbs": 0.005235549282588181,
+    "rms": 0.002199766760217935,
+    "worst": {
+      "vertex": 689753,
+      "body": [
+        -1263453.1168630917,
+        4096218.3628957514,
+        4715365.149902183
+      ],
+      "preparedHeight": 1587.7784715603302,
+      "physicalHeight": 1587.7837071096128
+    }
+  },
+  "statistics": {
+    "gpuTes/all": {
+      "count": 24817,
+      "min": -0.004676656227502463,
+      "max": 0.0012274408516077528,
+      "maxAbs": 0.004676656227502463,
+      "rms": 0.002164602268200986,
+      "worst": {
+        "primitive": 1778,
+        "bary": [
+          0,
+          0,
+          1
+        ],
+        "body": [
+          -1263461.6726106517,
+          4096250.883911133,
+          4715334.4638553895
+        ],
+        "distance": 34.9316952758156,
+        "renderHeight": 1587.6730336751789,
+        "physicalHeight": 1587.6777103314064,
+        "error": -0.004676656227502463,
+        "visible": false
+      }
+    },
+    "gpuTes/0-50m": {
+      "count": 24817,
+      "min": -0.004676656227502463,
+      "max": 0.0012274408516077528,
+      "maxAbs": 0.004676656227502463,
+      "rms": 0.002164602268200986,
+      "worst": {
+        "primitive": 1778,
+        "bary": [
+          0,
+          0,
+          1
+        ],
+        "body": [
+          -1263461.6726106517,
+          4096250.883911133,
+          4715334.4638553895
+        ],
+        "distance": 34.9316952758156,
+        "renderHeight": 1587.6730336751789,
+        "physicalHeight": 1587.6777103314064,
+        "error": -0.004676656227502463,
+        "visible": false
+      }
+    },
+    "gpuTes/clip-visible": {
+      "count": 4706,
+      "min": -0.0034927762108054594,
+      "max": 0.0012274408516077528,
+      "maxAbs": 0.0034927762108054594,
+      "rms": 0.0012906145460603383,
+      "worst": {
+        "primitive": 1016,
+        "bary": [
+          1,
+          0,
+          0
+        ],
+        "body": [
+          -1263473.388155114,
+          4096215.3551006317,
+          4715362.532729033
+        ],
+        "distance": 17.786326029975214,
+        "renderHeight": 1587.9276301991194,
+        "physicalHeight": 1587.9311229753303,
+        "error": -0.0034927762108054594,
+        "visible": true
+      }
+    },
+    "preparedTriangle/all": {
+      "count": 30840,
+      "min": -0.005235633928123207,
+      "max": 0.0017839661657035322,
+      "maxAbs": 0.005235633928123207,
+      "rms": 0.0020310525292852816,
+      "worst": {
+        "primitive": 2003,
+        "bary": [
+          0,
+          1,
+          0
+        ],
+        "body": [
+          -1263453.1168626659,
+          4096218.3628959656,
+          4715365.14990199
+        ],
+        "distance": 28.20262245711259,
+        "renderHeight": 1587.7784714717418,
+        "physicalHeight": 1587.78370710567,
+        "error": -0.005235633928123207,
+        "visible": false
+      }
+    },
+    "preparedTriangle/0-50m": {
+      "count": 30144,
+      "min": -0.005235633928123207,
+      "max": 0.0017839661657035322,
+      "maxAbs": 0.005235633928123207,
+      "rms": 0.002027847074653331,
+      "worst": {
+        "primitive": 2003,
+        "bary": [
+          0,
+          1,
+          0
+        ],
+        "body": [
+          -1263453.1168626659,
+          4096218.3628959656,
+          4715365.14990199
+        ],
+        "distance": 28.20262245711259,
+        "renderHeight": 1587.7784714717418,
+        "physicalHeight": 1587.78370710567,
+        "error": -0.005235633928123207,
+        "visible": false
+      }
+    },
+    "publishedTriangle64/all": {
+      "count": 30840,
+      "min": -0.0052355484640429495,
+      "max": 0.0017838707399278064,
+      "maxAbs": 0.0052355484640429495,
+      "rms": 0.0020310538693377113,
+      "worst": {
+        "primitive": 2003,
+        "bary": [
+          0,
+          1,
+          0
+        ],
+        "body": [
+          -1263453.1168630917,
+          4096218.3628957514,
+          4715365.149902183
+        ],
+        "distance": 28.202622240944976,
+        "renderHeight": 1587.7784715611488,
+        "physicalHeight": 1587.7837071096128,
+        "error": -0.0052355484640429495,
+        "visible": false
+      }
+    },
+    "publishedTriangle64/0-50m": {
+      "count": 30144,
+      "min": -0.0052355484640429495,
+      "max": 0.0017838707399278064,
+      "maxAbs": 0.0052355484640429495,
+      "rms": 0.0020278506571057065,
+      "worst": {
+        "primitive": 2003,
+        "bary": [
+          0,
+          1,
+          0
+        ],
+        "body": [
+          -1263453.1168630917,
+          4096218.3628957514,
+          4715365.149902183
+        ],
+        "distance": 28.202622240944976,
+        "renderHeight": 1587.7784715611488,
+        "physicalHeight": 1587.7837071096128,
+        "error": -0.0052355484640429495,
+        "visible": false
+      }
+    },
+    "preparedTriangle/50-100m": {
+      "count": 696,
+      "min": -0.004165760100704574,
+      "max": 0.000533148967406305,
+      "maxAbs": 0.004165760100704574,
+      "rms": 0.002165333404336192,
+      "worst": {
+        "primitive": 656,
+        "bary": [
+          1,
+          0,
+          0
+        ],
+        "body": [
+          -1263433.6045068614,
+          4096209.019197464,
+          4715378.426530484
+        ],
+        "distance": 52.634227243089164,
+        "renderHeight": 1587.7278951210901,
+        "physicalHeight": 1587.7320608811908,
+        "error": -0.004165760100704574,
+        "visible": false
+      }
+    },
+    "publishedTriangle64/50-100m": {
+      "count": 696,
+      "min": -0.00416479061618702,
+      "max": 0.0005330214553396218,
+      "maxAbs": 0.00416479061618702,
+      "rms": 0.0021652437926346552,
+      "worst": {
+        "primitive": 656,
+        "bary": [
+          1,
+          0,
+          0
+        ],
+        "body": [
+          -1263433.6045076258,
+          4096209.0191981117,
+          4715378.42653103
+        ],
+        "distance": 52.63422651451079,
+        "renderHeight": 1587.7278960933909,
+        "physicalHeight": 1587.732060884007,
+        "error": -0.00416479061618702,
+        "visible": false
+      }
+    }
+  },
+  "floridaContacts": [
+    {
+      "east": 0,
+      "north": 0,
+      "found": false
+    },
+    {
+      "east": -32,
+      "north": -24,
+      "found": false
+    },
+    {
+      "east": 32,
+      "north": -24,
+      "found": false
+    },
+    {
+      "east": -32,
+      "north": 24,
+      "found": false
+    },
+    {
+      "east": 32,
+      "north": 24,
+      "found": false
+    },
+    {
+      "east": -32,
+      "north": 0,
+      "found": false
+    },
+    {
+      "east": 32,
+      "north": 0,
+      "found": false
+    },
+    {
+      "east": 0,
+      "north": -24,
+      "found": false
+    },
+    {
+      "east": 0,
+      "north": 24,
+      "found": false
+    },
+    {
+      "east": 96,
+      "north": 0,
+      "found": false
+    },
+    {
+      "east": 128,
+      "north": 0,
+      "found": false
+    },
+    {
+      "east": 160,
+      "north": 0,
+      "found": false
+    },
+    {
+      "east": 192.001,
+      "north": 0,
+      "found": false
+    },
+    {
+      "east": 224,
+      "north": 0,
+      "found": false
+    },
+    {
+      "east": 0,
+      "north": 120,
+      "found": false
+    },
+    {
+      "east": 0,
+      "north": 216,
+      "found": false
+    }
+  ],
+  "floridaCore": {
+    "count": 0,
+    "min": null,
+    "max": null,
+    "maxAbs": 0,
+    "rms": null,
+    "worst": null
+  }
+}

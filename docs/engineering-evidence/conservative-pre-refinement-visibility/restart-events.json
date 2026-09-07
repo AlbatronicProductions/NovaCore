@@ -1,0 +1,73 @@
+{
+  "system": [
+    {
+      "time": "2026-09-06T21:29:57.6521312-04:00",
+      "id": 41,
+      "provider": "Microsoft-Windows-Kernel-Power",
+      "message": "The system has rebooted without cleanly shutting down first. This error could be caused if the system stopped responding, crashed, or lost power unexpectedly.",
+      "xml": "<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Kernel-Power' Guid='{331c3b3a-2005-44c2-ac5e-77220c37d6b4}'/><EventID>41</EventID><Version>10</Version><Level>1</Level><Task>63</Task><Opcode>0</Opcode><Keywords>0x8000400000000002</Keywords><TimeCreated SystemTime='2026-09-07T01:29:57.6521312Z'/><EventRecordID>12312</EventRecordID><Correlation/><Execution ProcessID='4' ThreadID='8'/><Channel>System</Channel><Computer>Albatronic007</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='BugcheckCode'>0</Data><Data Name='BugcheckParameter1'>0x0</Data><Data Name='BugcheckParameter2'>0x0</Data><Data Name='BugcheckParameter3'>0x0</Data><Data Name='BugcheckParameter4'>0x0</Data><Data Name='SleepInProgress'>0</Data><Data Name='PowerButtonTimestamp'>0</Data><Data Name='BootAppStatus'>0</Data><Data Name='Checkpoint'>0</Data><Data Name='ConnectedStandbyInProgress'>false</Data><Data Name='SystemSleepTransitionsToOn'>0</Data><Data Name='CsEntryScenarioInstanceId'>0</Data><Data Name='BugcheckInfoFromEFI'>false</Data><Data Name='CheckpointStatus'>0</Data><Data Name='CsEntryScenarioInstanceIdV2'>0</Data><Data Name='LongPowerButtonPressDetected'>false</Data><Data Name='LidReliability'>false</Data><Data Name='InputSuppressionState'>0</Data><Data Name='PowerButtonSuppressionState'>0</Data><Data Name='LidState'>3</Data><Data Name='WHEABootErrorCount'>0</Data></EventData></Event>"
+    },
+    {
+      "time": "2026-09-06T21:30:13.1405752-04:00",
+      "id": 6008,
+      "provider": "EventLog",
+      "message": "The previous system shutdown at 8:52:39 PM on ‎9/‎6/‎2026 was unexpected.",
+      "xml": "<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='EventLog'/><EventID Qualifiers='32768'>6008</EventID><Version>0</Version><Level>2</Level><Task>0</Task><Opcode>0</Opcode><Keywords>0x80000000000000</Keywords><TimeCreated SystemTime='2026-09-07T01:30:13.1405752Z'/><EventRecordID>12292</EventRecordID><Correlation/><Execution ProcessID='3584' ThreadID='3684'/><Channel>System</Channel><Computer>Albatronic007</Computer><Security/></System><EventData><Data>8:52:39 PM</Data><Data>‎9/‎6/‎2026</Data><Data></Data><Data></Data><Data>501619</Data><Data></Data><Data></Data><Binary>EA070900000006001400340027001B00EA070900010007000000340027001B00600900003C000000010000006009000001000000B00400000000000000000000</Binary></EventData></Event>"
+    }
+  ],
+  "application": [
+    {
+      "TimeCreated": "2026-09-06T21:33:13.7415171-04:00",
+      "Id": 1001,
+      "ProviderName": "Windows Error Reporting",
+      "Message": "Fault bucket , type 0\r\nEvent Name: LiveKernelEvent\r\nResponse: Not available\r\nCab Id: 0\r\n\r\nProblem signature:\r\nP1: 141\r\nP2: ffffbc07b24ed010\r\nP3: fffff8067e33b6a0\r\nP4: 0\r\nP5: 0\r\nP6: 10_0_26200\r\nP7: 0_0\r\nP8: 256_1\r\nP9: \r\nP10: \r\n\r\nAttached files:\r\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260906-2129.dmp\r\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-503805312-0.sysdata.xml\r\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.30b9057f-037a-4344-b81a-f02d7125032e.tmp.xml\r\n\r\nThese files may be available here:\r\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportQueue\\Kernel_141_216d52c3c2d0b495b57b97cd722aa6108a98d8_00000000_4a91108d-b3ec-4ff3-a9a5-c5a1fece42ff\r\n\r\nAnalysis symbol: \r\nRechecking for solution: 0\r\nReport Id: 4a91108d-b3ec-4ff3-a9a5-c5a1fece42ff\r\nReport Status: 2049\r\nHashed bucket: \r\nCab Guid: 0"
+    },
+    {
+      "TimeCreated": "2026-09-06T21:33:13.7226206-04:00",
+      "Id": 1001,
+      "ProviderName": "Windows Error Reporting",
+      "Message": "Fault bucket , type 0\r\nEvent Name: LiveKernelEvent\r\nResponse: Not available\r\nCab Id: 0\r\n\r\nProblem signature:\r\nP1: 141\r\nP2: ffffbc07b0c40010\r\nP3: fffff8067e33b6a0\r\nP4: 0\r\nP5: ffffbc07b41760c0\r\nP6: 10_0_26200\r\nP7: 0_0\r\nP8: 256_1\r\nP9: \r\nP10: \r\n\r\nAttached files:\r\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260906-2128.dmp\r\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-503752515-0.sysdata.xml\r\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.74992a85-060e-4e6b-98b8-2e19fe5aa7dd.tmp.xml\r\n\r\nThese files may be available here:\r\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportQueue\\Kernel_141_454e8693a7796ad71b3a651386abec80c35499df_00000000_5af0362b-ef7e-4523-9ba0-2eefe525b84c\r\n\r\nAnalysis symbol: \r\nRechecking for solution: 0\r\nReport Id: 5af0362b-ef7e-4523-9ba0-2eefe525b84c\r\nReport Status: 2049\r\nHashed bucket: \r\nCab Guid: 0"
+    },
+    {
+      "TimeCreated": "2026-09-06T21:30:17.0838296-04:00",
+      "Id": 1001,
+      "ProviderName": "Windows Error Reporting",
+      "Message": "Fault bucket , type 0\r\nEvent Name: LiveKernelEvent\r\nResponse: Not available\r\nCab Id: 0\r\n\r\nProblem signature:\r\nP1: 141\r\nP2: ffffbc07b24ed010\r\nP3: fffff8067e33b6a0\r\nP4: 0\r\nP5: 0\r\nP6: 10_0_26200\r\nP7: 0_0\r\nP8: 256_1\r\nP9: \r\nP10: \r\n\r\nAttached files:\r\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260906-2129.dmp\r\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-503805312-0.sysdata.xml\r\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.30b9057f-037a-4344-b81a-f02d7125032e.tmp.xml\r\n\r\nThese files may be available here:\r\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportQueue\\Kernel_141_216d52c3c2d0b495b57b97cd722aa6108a98d8_00000000_4a91108d-b3ec-4ff3-a9a5-c5a1fece42ff\r\n\r\nAnalysis symbol: \r\nRechecking for solution: 0\r\nReport Id: 4a91108d-b3ec-4ff3-a9a5-c5a1fece42ff\r\nReport Status: 2049\r\nHashed bucket: \r\nCab Guid: 0"
+    },
+    {
+      "TimeCreated": "2026-09-06T21:30:17.0351614-04:00",
+      "Id": 1001,
+      "ProviderName": "Windows Error Reporting",
+      "Message": "Fault bucket , type 0\r\nEvent Name: LiveKernelEvent\r\nResponse: Not available\r\nCab Id: 0\r\n\r\nProblem signature:\r\nP1: 141\r\nP2: ffffbc07b0c40010\r\nP3: fffff8067e33b6a0\r\nP4: 0\r\nP5: ffffbc07b41760c0\r\nP6: 10_0_26200\r\nP7: 0_0\r\nP8: 256_1\r\nP9: \r\nP10: \r\n\r\nAttached files:\r\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260906-2128.dmp\r\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-503752515-0.sysdata.xml\r\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.74992a85-060e-4e6b-98b8-2e19fe5aa7dd.tmp.xml\r\n\r\nThese files may be available here:\r\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportQueue\\Kernel_141_454e8693a7796ad71b3a651386abec80c35499df_00000000_5af0362b-ef7e-4523-9ba0-2eefe525b84c\r\n\r\nAnalysis symbol: \r\nRechecking for solution: 0\r\nReport Id: 5af0362b-ef7e-4523-9ba0-2eefe525b84c\r\nReport Status: 2049\r\nHashed bucket: \r\nCab Guid: 0"
+    },
+    {
+      "TimeCreated": "2026-09-06T21:28:15.4730294-04:00",
+      "Id": 1001,
+      "ProviderName": "Windows Error Reporting",
+      "Message": "Fault bucket , type 0\r\nEvent Name: LiveKernelEvent\r\nResponse: Not available\r\nCab Id: 0\r\n\r\nProblem signature:\r\nP1: 141\r\nP2: ffffbc07b0c40010\r\nP3: fffff8067e33b6a0\r\nP4: 0\r\nP5: ffffbc07b41760c0\r\nP6: 10_0_26200\r\nP7: 0_0\r\nP8: 256_1\r\nP9: \r\nP10: \r\n\r\nAttached files:\r\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260906-2128.dmp\r\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-503752515-0.sysdata.xml\r\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.74992a85-060e-4e6b-98b8-2e19fe5aa7dd.tmp.xml\r\n\r\nThese files may be available here:\r\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportQueue\\Kernel_141_454e8693a7796ad71b3a651386abec80c35499df_00000000_5af0362b-ef7e-4523-9ba0-2eefe525b84c\r\n\r\nAnalysis symbol: \r\nRechecking for solution: 0\r\nReport Id: 5af0362b-ef7e-4523-9ba0-2eefe525b84c\r\nReport Status: 2049\r\nHashed bucket: \r\nCab Guid: 0"
+    },
+    {
+      "TimeCreated": "2026-09-06T21:28:15.2934634-04:00",
+      "Id": 1001,
+      "ProviderName": "Windows Error Reporting",
+      "Message": "Fault bucket , type 0\r\nEvent Name: LiveKernelEvent\r\nResponse: Not available\r\nCab Id: 0\r\n\r\nProblem signature:\r\nP1: 141\r\nP2: ffffbc07b0c40010\r\nP3: fffff8067e33b6a0\r\nP4: 0\r\nP5: ffffbc07b41760c0\r\nP6: 10_0_26200\r\nP7: 0_0\r\nP8: 256_1\r\nP9: \r\nP10: \r\n\r\nAttached files:\r\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260906-2128.dmp\r\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-503752515-0.sysdata.xml\r\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.74992a85-060e-4e6b-98b8-2e19fe5aa7dd.tmp.xml\r\n\r\nThese files may be available here:\r\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportQueue\\Kernel_141_454e8693a7796ad71b3a651386abec80c35499df_00000000_5af0362b-ef7e-4523-9ba0-2eefe525b84c\r\n\r\nAnalysis symbol: \r\nRechecking for solution: 0\r\nReport Id: 5af0362b-ef7e-4523-9ba0-2eefe525b84c\r\nReport Status: 4\r\nHashed bucket: \r\nCab Guid: 0"
+    }
+  ],
+  "os": {
+    "LastBootUpTime": "2026-09-06T21:29:53.5-04:00",
+    "FreePhysicalMemory": 22083412,
+    "TotalVisibleMemorySize": 32623332
+  },
+  "volumes": [
+    {
+      "DriveLetter": "E",
+      "Size": 1000186310656,
+      "SizeRemaining": 467197276160
+    },
+    {
+      "DriveLetter": "C",
+      "Size": 247819993088,
+      "SizeRemaining": 90129027072
+    }
+  ]
+}

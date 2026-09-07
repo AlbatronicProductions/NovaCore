@@ -3495,7 +3495,7 @@ static void ProductionCubeSphereGpuResidencyIntegrationTest()
     Check(!solar.Contains("PlanetaryEnvironment",StringComparison.Ordinal)&&!native.Contains("planetaryEnvironment",StringComparison.Ordinal)&&!File.Exists(Path.Combine(shaderRoot,"planetary_environment.frag")),"provisional environment presentation has no managed, native, or shader owner");
 
     Check(File.Exists(TerrainAssetRepository.ManifestPath(root,TerrainAssetCache.ProductionEarthAssetId))&&File.Exists(Path.Combine(root,"assets","earth","runtime","earth_elevation_8192x4096.r16")),"tracked terrain-v5 identity manifest and topology-neutral elevation oracle are retained while heavy runtime bytes resolve externally");
-    Check(fragment.Contains("bool anchored=(productionLayer&0x40000000u)!=0u",StringComparison.Ordinal) &&
+    Check(fragment.Contains("bool anchored=ordinaryNcsm1||(productionLayer&0x40000000u)!=0u",StringComparison.Ordinal) &&
           !native.Contains("anchoredSurfaceIndirectBuffer",StringComparison.Ordinal) &&
           !native.Contains("productionPlanetaryFillPipeline",StringComparison.Ordinal),
           "physical NCSM1 shading has no alternate anchored draw or stencil-fill owner");
