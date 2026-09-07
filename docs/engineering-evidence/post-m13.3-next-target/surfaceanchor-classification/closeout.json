@@ -1,0 +1,36 @@
+{
+  "classification": "INSUFFICIENT EVIDENCE",
+  "leadJudgment": "ESCALATE TO PROJECT CONTROL",
+  "technicalClassification": "M13.4 CANDIDATE \u2014 FOLLOW-UP REQUIRED",
+  "decisionMatrixCase": "D; one targeted candidate attempt also passed",
+  "baselineRelease": "79 pass / 0 fail / 0 skip",
+  "candidateRelease": "79 pass / 0 fail / 0 skip, twice this ticket",
+  "historicalCandidateRelease": "78 pass / 1 fail / 0 skip, twice previous ticket; preserved",
+  "historicalFailedPredicate": "Unknown individual value; combined condition false. Failure did not recur.",
+  "candidateProductionRevision": false,
+  "acceptedActiveGpuMs": [
+    17.12243,
+    5.95516
+  ],
+  "acceptedSavingMs": 11.16727,
+  "gpuCampaignsRerun": 0,
+  "productionDeploymentAndAssetsUnchanged": true,
+  "diffCheckExit": 0,
+  "diffCheckOutput": "warning: in the working copy of 'native/NovaCore.Native/shaders/production_terrain_material.glsl', LF will be replaced by CRLF the next time Git touches it\n",
+  "gitStatusShort": " M native/NovaCore.Native/shaders/production_terrain_material.glsl\n?? docs/engineering-evidence/post-m13.3-next-target/\n",
+  "storage": {
+    "definition": "Created exclusive artifact footprint equals new retained evidence plus exclusive disposable files. Hard-linked references are reported separately; not new copied payload or reclaimed allocation. Build-internal temporary byte churn not measured.",
+    "createdExclusiveFootprintBytes": 29062179,
+    "retainedNewPermanentBytes": 216871,
+    "retainedEntirePackageBytes": 8202072,
+    "disposedBytes": 0,
+    "disposedFiles": 0,
+    "remainingFiles": 713,
+    "remainingLogicalBytes": 2031635908,
+    "remainingSharedHardlinkBytes": 2002790600,
+    "remainingExclusiveDisposableBytes": 28845308,
+    "cleanupOutcome": "Automatic approval review rejected action: blocked by policy; no more specific reason supplied. No command executed; no alternative automatic deletion attempted.",
+    "manualProcedure": "manual-cleanup.ps1",
+    "permanentEvidenceBudgetBytes": 10485760
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "pose": "active",
+  "mixed": true,
+  "aa": false,
+  "frame": 175,
+  "before": {
+    "identity": [
+      "[native] Pixel parity: frame=175; width=3440; height=1440; generation=1; pupil=1; physicalGeneration=4; vertices=712106"
+    ],
+    "files": {
+      "pixels.bin": {
+        "bytes": 79257600,
+        "sha256": "0f84cadcbcc6e44be4e889a8f08d77ccaef9021d52c3d9116ccbbd0750324d32"
+      },
+      "prepared.bin": {
+        "bytes": 45574784,
+        "sha256": "8c0e511a011f6feb8f28ebf88b135afa5874ffdcf932789cb6606f921330c570"
+      },
+      "selected.bin": {
+        "bytes": 24720,
+        "sha256": "b05742e1033e7a0452b0e6e546a6e886c3f3525da966aa705c1755a4bc98be62"
+      }
+    },
+    "selectedOrientedMultisetSha256": "911490e91a6a9dcf1800a14c99c2cf1bfdd5428a3454b980e5e3b974c6417b23"
+  },
+  "after": {
+    "identity": [
+      "[native] Pixel parity: frame=175; width=3440; height=1440; generation=1; pupil=1; physicalGeneration=4; vertices=712106"
+    ],
+    "files": {
+      "pixels.bin": {
+        "bytes": 79257600,
+        "sha256": "0f84cadcbcc6e44be4e889a8f08d77ccaef9021d52c3d9116ccbbd0750324d32"
+      },
+      "prepared.bin": {
+        "bytes": 45574784,
+        "sha256": "8c0e511a011f6feb8f28ebf88b135afa5874ffdcf932789cb6606f921330c570"
+      },
+      "selected.bin": {
+        "bytes": 24720,
+        "sha256": "e364033fb4fe9d42ca1d78d7ea1ede65624c336ec4a41bd45974af0148842c3b"
+      }
+    },
+    "selectedOrientedMultisetSha256": "911490e91a6a9dcf1800a14c99c2cf1bfdd5428a3454b980e5e3b974c6417b23"
+  },
+  "attachments": {
+    "depth": {
+      "equal": true,
+      "differentPixels": 0,
+      "maxAbsolute": 0.0,
+      "finite": true,
+      "beforeSha256": "b01a9fe866fa46e584a96794c881a37b94b2017fb07f0faf20c4651e062c3ddd",
+      "afterSha256": "b01a9fe866fa46e584a96794c881a37b94b2017fb07f0faf20c4651e062c3ddd"
+    },
+    "hdr": {
+      "equal": true,
+      "differentPixels": 0,
+      "maxAbsolute": 0.0,
+      "finite": true,
+      "beforeSha256": "9ac6870d290a662979fd0780f48a53439bec8d27a7fed2d0ff491f9a3d692a57",
+      "afterSha256": "9ac6870d290a662979fd0780f48a53439bec8d27a7fed2d0ff491f9a3d692a57"
+    },
+    "image": {
+      "equal": true,
+      "differentPixels": 0,
+      "maxAbsolute": 0.0,
+      "finite": true,
+      "beforeSha256": "d4f22f8ee0a435c3a2a12f79bc4d5762f852c535add0e341755a97fc5789f9e0",
+      "afterSha256": "d4f22f8ee0a435c3a2a12f79bc4d5762f852c535add0e341755a97fc5789f9e0"
+    }
+  },
+  "preparedExact": true,
+  "selectedExact": false,
+  "selectedOrientedMultisetExact": true,
+  "pass": true
+}

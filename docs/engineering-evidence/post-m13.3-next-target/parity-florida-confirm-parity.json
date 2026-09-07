@@ -1,0 +1,79 @@
+{
+  "pose": "florida",
+  "mixed": false,
+  "aa": false,
+  "frame": 175,
+  "before": {
+    "identity": [
+      "[native] Pixel parity: frame=175; width=3440; height=1440; generation=1; pupil=1; physicalGeneration=4; vertices=712106"
+    ],
+    "files": {
+      "pixels.bin": {
+        "bytes": 79257600,
+        "sha256": "1dd10fb4c309b447989a395e3bb01a09d7573bdc704889717e7cda6a862ac625"
+      },
+      "prepared.bin": {
+        "bytes": 45574784,
+        "sha256": "70a2ee470ed34202ab0cbf79ca471b2cb95e34d53fcb184d89793396d045f5be"
+      },
+      "selected.bin": {
+        "bytes": 3537000,
+        "sha256": "4b38826c40474a24f40e7ca05795e715e8cba9845395c78a23097153d428fc5a"
+      }
+    },
+    "selectedOrientedMultisetSha256": "d22a65ed60ef16b44b5703e7834cbdcf23e28a611d584f7dfbfb9b4604687289"
+  },
+  "after": {
+    "identity": [
+      "[native] Pixel parity: frame=175; width=3440; height=1440; generation=1; pupil=1; physicalGeneration=4; vertices=712106"
+    ],
+    "files": {
+      "pixels.bin": {
+        "bytes": 79257600,
+        "sha256": "1dd10fb4c309b447989a395e3bb01a09d7573bdc704889717e7cda6a862ac625"
+      },
+      "prepared.bin": {
+        "bytes": 45574784,
+        "sha256": "70a2ee470ed34202ab0cbf79ca471b2cb95e34d53fcb184d89793396d045f5be"
+      },
+      "selected.bin": {
+        "bytes": 3537000,
+        "sha256": "d67e15aac013ed522f9363429415fccb311976cc86b17f2adb4149eed6a32c10"
+      }
+    },
+    "selectedOrientedMultisetSha256": "d22a65ed60ef16b44b5703e7834cbdcf23e28a611d584f7dfbfb9b4604687289"
+  },
+  "attachments": {
+    "depth": {
+      "equal": true,
+      "differentPixels": 0,
+      "maxAbsolute": 0.0,
+      "finite": true,
+      "beforeSha256": "c32937a98726e6a73ba09ad204242bfb2fa5e3e5d88f6b24aff15a43cc59114a",
+      "afterSha256": "c32937a98726e6a73ba09ad204242bfb2fa5e3e5d88f6b24aff15a43cc59114a",
+      "examples": []
+    },
+    "hdr": {
+      "equal": true,
+      "differentPixels": 0,
+      "maxAbsolute": 0.0,
+      "finite": true,
+      "beforeSha256": "6985062a2f3f7a48708c2f073e70311919ecb84c981ed74599bd4d0166021ad2",
+      "afterSha256": "6985062a2f3f7a48708c2f073e70311919ecb84c981ed74599bd4d0166021ad2",
+      "examples": []
+    },
+    "image": {
+      "equal": true,
+      "differentPixels": 0,
+      "maxAbsolute": 0.0,
+      "finite": true,
+      "beforeSha256": "96f56d0c23e52bf989e0648d83bca921ec9f96b83a21bc52c0e3989a27577a08",
+      "afterSha256": "96f56d0c23e52bf989e0648d83bca921ec9f96b83a21bc52c0e3989a27577a08",
+      "examples": []
+    }
+  },
+  "preparedExact": true,
+  "selectedExact": false,
+  "selectedOrientedMultisetExact": true,
+  "pass": true
+}

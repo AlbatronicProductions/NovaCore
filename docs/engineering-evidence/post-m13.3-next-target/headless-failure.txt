@@ -1,0 +1,420 @@
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Facility lighting authority
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] MeshHandle
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Transport layout
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Transform conversion
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Camera relative
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Batches and capacity
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Deterministic render-transport hash: 0xD3D6A4AC609FC299
+PASS [headless] Resolved render transport
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Orbit curve transport
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Fixture 16:9: minHeight=21.4px, maxHeight=285.0px, Moon/Vessel=42.7px
+Fixture 3440x1440: minHeight=21.4px, maxHeight=285.0px, Moon/Vessel=42.7px
+Deterministic fixture render setup hash: 0x3507EC35D630029A
+PASS [headless] Static reference-frame fixture transport
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Fixture dynamic 16:9: minHeight=23.4px, maxHeight=285.0px, Moon/Vessel=54.9px
+Dynamic snapshot hash t=0s: 0x136936234477043F
+Dynamic snapshot hash t=1s: 0x0907288563F14832
+Dynamic snapshot hash t=5s: 0xFF958BAB23DCA0B9
+Dynamic snapshot hash t=10s: 0x8614356ED71C9A5E
+Dynamic snapshot hash t=100s: 0x31D5A71D40C3D5A7
+Dynamic scripted publication allocations: 4800 bytes/4 updates
+Dynamic publication allocations: 1168 bytes/update (116800 bytes/100 updates)
+Dynamic scripted-sequence hash: 0xF50E51E41E5C9985
+PASS [headless] Dynamic reference-frame fixture publication
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Celestial fixture snapshot hash: 0x0AF7F2104C67A136; active=0x34B4073455189A0E; ghost=0x12BA1763BE632AC5; burn=0x18F2C77409088157; curve replacement/publication allocations: 15864 bytes; unchanged publication allocations: 952 bytes/update (19040 bytes/20 updates)
+PASS [headless] Celestial analytical fixture publication
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Celestial player torque controls
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Celestial SAS suspended: rate 10000:1 exceeds 10:1.
+PASS [headless] Celestial SAS mode selection
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Celestial SAS suspended: rate 10000:1 exceeds 10:1.
+Celestial SAS resumed at supported rate.
+Celestial SAS suspended: rate 100:1 exceeds 10:1.
+Deterministic SAS cadence hash: 0xDEE55B316B832F1A; quantization allocation=0 bytes
+PASS [headless] Celestial SAS control cadence
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Deterministic SAS convergence hash: 0x949BA3A1AA3A1CA4; prograde=SasConvergenceMetrics { InitialError = 1.570796326774932, FinalError = 0.003911925461423544, FinalRate = 0.00199999916666676, PeakOvershoot = 0, Crossings = 0, SettledSeconds = 32, TransactionCount = 327, PostSettleChanges = 46, RawTorque = Double3 { X = 0, Y = 0, Z = -0.09666054388959716, LengthSquared = 0.00934326074503274, IsFinite = True }, QuantizedTorque = Double3 { X = 0, Y = 0, Z = -0.1, LengthSquared = 0.010000000000000002, IsFinite = True } }; retrograde=SasConvergenceMetrics { InitialError = 3.141592653569828, FinalError = 0.0010342691027552665, FinalRate = 0.00195416666666568, PeakOvershoot = 0, Crossings = 0, SettledSeconds = 36.85, TransactionCount = 454, PostSettleChanges = 68, RawTorque = Double3 { X = 0, Y = 0, Z = 0, LengthSquared = 0, IsFinite = True }, QuantizedTorque = Double3 { X = 0, Y = 0, Z = 0, LengthSquared = 0, IsFinite = True } }; normal=SasConvergenceMetrics { InitialError = 1.5707963267948966, FinalError = 0.004140283119932069, FinalRate = 0.00200833250000025, PeakOvershoot = 0, Crossings = 0, SettledSeconds = 32.1, TransactionCount = 329, PostSettleChanges = 47, RawTorque = Double3 { X = 0, Y = -0.09547286153802834, Z = 4.163339316002031E-16, LengthSquared = 0.009115067290259531, IsFinite = True }, QuantizedTorque = Double3 { X = 0, Y = -0.1, Z = 0, LengthSquared = 0.010000000000000002, IsFinite = True } }; radial=SasConvergenceMetrics { InitialError = 1.5707963267749316, FinalError = 0.003911925461439211, FinalRate = 0.00199999916666676, PeakOvershoot = 0, Crossings = 0, SettledSeconds = 32, TransactionCount = 327, PostSettleChanges = 46, RawTorque = Double3 { X = 0, Y = 0, Z = -0.09666054388947759, LengthSquared = 0.009343260745009624, IsFinite = True }, QuantizedTorque = Double3 { X = 0, Y = 0, Z = -0.1, LengthSquared = 0.010000000000000002, IsFinite = True } }; hold=SasConvergenceMetrics { InitialError = 0, FinalError = 0.007086823024998958, FinalRate = 0.0019750004166667412, PeakOvershoot = 0.011981349045821163, Crossings = 5, SettledSeconds = 18.55, TransactionCount = 159, PostSettleChanges = 26, RawTorque = Double3 { X = -0.05315118749999373, Y = 0, Z = 0, LengthSquared = 0.0028250487326594896, IsFinite = True }, QuantizedTorque = Double3 { X = -0.05, Y = 0, Z = 0, LengthSquared = 0.0025000000000000005, IsFinite = True } }; switch-normal=SasConvergenceMetrics { InitialError = 3.141592653589793, FinalError = 0.0017775087808490758, FinalRate = 0.0019563287612831284, PeakOvershoot = 0, Crossings = 0, SettledSeconds = 36.300000000000004, TransactionCount = 399, PostSettleChanges = 64, RawTorque = Double3 { X = 0, Y = 0, Z = 0, LengthSquared = 0, IsFinite = True }, QuantizedTorque = Double3 { X = 0, Y = 0, Z = 0, LengthSquared = 0, IsFinite = True } }; switch-radial=SasConvergenceMetrics { InitialError = 2.096504287052091, FinalError = 0.007136400193013067, FinalRate = 0.0019896402597444256, PeakOvershoot = 0, Crossings = 0, SettledSeconds = 33.6, TransactionCount = 386, PostSettleChanges = 26, RawTorque = Double3 { X = 0.03047737930621273, Y = -0.030382072472553617, Z = -0.031824133456271005, LengthSquared = 0.002864716447344812, IsFinite = True }, QuantizedTorque = Double3 { X = 0.03, Y = -0.03, Z = -0.03, LengthSquared = 0.0027, IsFinite = True } }
+PASS [headless] Celestial SAS convergence
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Deterministic SAS indicator hashes: forward=0x781C39B7A1BFDF0F; target=0xA1649412F3A6DB83; transport allocation=0 bytes
+PASS [headless] Celestial SAS diagnostic indicators
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Deterministic camera snapshot hash: 0x8A15F3AC5A4C0C7C
+PASS [headless] Camera snapshot allocation
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Planetary presentation pipeline
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Presentation ABI distant_planet.vert.spv: stride=192; members=12
+Presentation ABI planetary.vert.spv: stride=192; members=12
+Presentation ABI planetary_ring.vert.spv: stride=192; members=12
+Presentation ABI production_nested_scale_mesh_cull.comp.spv: stride=192; members=12
+Presentation ABI production_nested_scale_mesh_incoming_cull.comp.spv: stride=192; members=12
+Presentation ABI production_spherical_billboard.tese.spv: stride=192; members=12
+Presentation ABI production_spherical_billboard.vert.spv: stride=192; members=12
+Presentation ABI solar_label.vert.spv: stride=192; members=12
+Presentation ABI solar_marker.vert.spv: stride=192; members=12
+Presentation ABI solar_orbit.vert.spv: stride=192; members=12
+Presentation ABI stellar_glow.vert.spv: stride=192; members=12
+Presentation ABI stellar_sun.vert.spv: stride=192; members=12
+Projected-demand ABI distant_planet.vert.spv: textureDemand=80; size=96
+Projected-demand ABI planetary.vert.spv: textureDemand=80; size=96
+Projected-demand ABI planetary_select.comp.spv: textureDemand=80; size=96
+Projected-demand ABI planetary_terrain_generate.comp.spv: textureDemand=80; size=96
+PASS [headless] Planetary presentation SPIR-V stride
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+focus target evaluation: 208.38 ns/update; allocations=0 bytes
+PASS [headless] Focus target authority
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Planet material presentation
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Planet micro-normal foundation
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Planet surface scatter placement
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Planetary surface camera presentation
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Earth CPU elevation oracle
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Geographic handedness: East x North = Up; +longitude=-Z; maxOrthogonalityError=5.551E-017; maxCrossAlignmentError=4.441E-016; maxEastError=6.382E-010; maxIauError=0.000E+000
+PASS [headless] Canonical body-fixed geographic handedness
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+FAIL [headless] Canonical SurfaceAnchor physical terrain authority
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Florida production camera cycle: orientationStep=0.000000000E+000 rad; distanceRatio=1.2493444787471149; minimumClearance=1228799.999689415 m; centeredDot=1; authority=Inertial; projection=infinite-far Solar
+Florida launch site: terrain=0 m; foundation=0.25075524509061115 m; radius=6371009.050755245 m; eastError=0; northError=0; evaluation=4010.0 ns; presentation=3160.7 ns; allocations=0; hash=0x5B21D11ADAC71C6F
+PASS [headless] Anchored Florida launch site
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Florida generation migration: height=7.51885814532582->15.134892258793116; foundation=2.5979252590846995->6.835569277405739; authoredIdentity=unchanged; placement=canonical-generation-4
+PASS [headless] Earth route convergence
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Window validation message policy
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Facility support CPU PASS: maxSlope=0.13058577407507954; boundaryJump=2.7174163168552923E-06; queryNs=9454.32; root/depth/geography=unchanged
+PASS [headless] Florida facility support
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Surface camera Pause: stateEqual=True; anchorEqual=True; eye=0.000000000E+000; pivot=0.000000000E+000; terrain=0.000000000E+000; rootRoundTrip=0.000000000E+000; orientation=0.000000000E+000; altitude=24.999996909871697; rootMotion=0
+Surface camera 0.1x: stateEqual=True; anchorEqual=True; eye=0.000000000E+000; pivot=0.000000000E+000; terrain=0.000000000E+000; rootRoundTrip=7.642621954E-006; orientation=0.000000000E+000; altitude=24.999996909871697; rootMotion=30128.88774968894
+Surface camera 1x: stateEqual=True; anchorEqual=True; eye=0.000000000E+000; pivot=0.000000000E+000; terrain=0.000000000E+000; rootRoundTrip=5.047598325E-006; orientation=0.000000000E+000; altitude=24.999996909871697; rootMotion=301288.56160511746
+Surface camera 2x: stateEqual=True; anchorEqual=True; eye=0.000000000E+000; pivot=0.000000000E+000; terrain=0.000000000E+000; rootRoundTrip=6.724573117E-006; orientation=0.000000000E+000; altitude=24.999996909871697; rootMotion=602576.4218236074
+Surface camera 10x: stateEqual=True; anchorEqual=True; eye=0.000000000E+000; pivot=0.000000000E+000; terrain=0.000000000E+000; rootRoundTrip=6.950395420E-006; orientation=0.000000000E+000; altitude=24.999996909871697; rootMotion=3012854.154101886
+Surface camera 30x: stateEqual=True; anchorEqual=True; eye=0.000000000E+000; pivot=0.000000000E+000; terrain=0.000000000E+000; rootRoundTrip=3.754689072E-006; orientation=0.000000000E+000; altitude=24.999996909871697; rootMotion=9038355.147021038
+Surface camera 600x: stateEqual=True; anchorEqual=True; eye=0.000000000E+000; pivot=0.000000000E+000; terrain=0.000000000E+000; rootRoundTrip=6.731470670E-006; orientation=0.000000000E+000; altitude=24.999996909871697; rootMotion=180678721.15533426
+Surface camera inertial control: expected=184.8006320648956 m/s; measured=184.80063209355725 m/s; latitude=66.56070000000001 deg
+Surface free-look controls: horizonError=1.665334537E-016 rad; rollError=1.490116119E-008 rad; pitch=[-88.50000000000001,88.50000000000001] deg; speeds=12.125000001232602/60.6249999933301/303.1249999658523 m/s; pitchSpeedError=0.000000000E+000; ratios=0.20000000004233537/4.999999999986834; clearances=24.999999728053808/24.999999728053808/24.999999728053808/24.999999728053808/24.999999728053808
+Surface camera authority: attach=0.000000000E+000 m/0.000000000E+000 m/0.000000000E+000 rad; detach=0.000000000E+000 m/0.000000000E+000 m/0.000000000E+000 rad; canonicalEyeDrift=0.000000000E+000 m; pivotDrift=0.000000000E+000 m; rootRoundTrip=7.642621954E-006 m; terrainDrift=0.000000000E+000 m; rootMotion=180678721.15533426 m; orientation=0.000000000E+000 rad; minClearance=10.001000000163913 m; evaluation=3267.0 ns; allocations=0
+PASS [headless] Surface-relative camera authority
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Near-surface inertial free-look: pitch=-1.5707963267948966->1.3092036732051033 rad; horizonCrossed=True; aboveHorizonContinued=True; positionDrift=0.000000000E+000 m; minimumClearance=10.001000934280455 m; anchorStable=True
+PASS [headless] Near-surface inertial free-look
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+SurfaceAnchor warp 1x: targetMotion=30198.70933274536 m; offsetError=0.000E+000 m; orientationFixed=True
+SurfaceAnchor warp 30x: targetMotion=905960.8167300873 m; offsetError=0.000E+000 m; orientationFixed=True
+SurfaceAnchor warp 600x: targetMotion=18119050.084106065 m; offsetError=0.000E+000 m; orientationFixed=True
+SurfaceAnchor warp 14400x: targetMotion=434978466.1034225 m; offsetError=0.000E+000 m; orientationFixed=True
+SurfaceAnchor warp 7776000x: targetMotion=210995507682.7945 m; offsetError=0.000E+000 m; orientationFixed=True
+SurfaceAnchor: acquisitionError=0.000E+000 m; ENU maxError=7.288E-010 m; cameraRelativePackError=0.000E+000 m; acquisitionCameraPositionError=2.751E-005 m; acquisitionInvariantError=0.000E+000 m; zoomRatioError=6.710E-011; maxOrientationStep=0.000E+000 rad; handoffTarget=0.000E+000/0.000E+000 m; handoffCamera=2.751E-005 m; handoffDistance=0.000E+000 m; handoffOrientation=0.000E+000/0.000E+000 rad; anchor=296.43 ns; ENU=70.25 ns; handoff=5.31 ns; zoom=20.38 ns; allocations=0
+PASS [headless] SurfaceAnchor acquisition, ENU, and handoff
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Camera focus continuity: focus=0.000E+000 m; camera=0.000E+000 m; offset=0.000E+000 m; orientation=0.000E+000 rad
+PASS [headless] Camera focus-position continuity
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Camera handoff monotonicity: slowFrames=21; slowAltitudeReverse=0.000E+000m; slowBlendReverse=0.000E+000; slowPivotReverse=0.000E+000m; slowScreenReverse=0.000E+000rad; rapidFrames=6; rapidAltitudeReverse=0.000E+000m; rapidBlendReverse=0.000E+000; rapidPivotReverse=0.000E+000m; outwardFrames=8; outwardAltitudeReverse=0.000E+000m; outwardBlendReverse=0.000E+000; outwardPivotReverse=0.000E+000m; orientation=0.000E+000rad
+PASS [headless] Camera SurfaceAnchor handoff monotonicity
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Solar preset camera convergence: outwardFrames=7; inwardFrames=7; wheelOrientationMax=0.000E+000rad; finalAltitude=67195064.11379m; path=SolarSystemScene
+PASS [headless] Solar preset camera-path convergence
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Zoom motion continuity: distance=1.078E-004 m; velocity=3.377E-005; acceleration=4.958E-005; symmetry=2.121E-010
+PASS [headless] Zoom motion-profile continuity
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Bounded camera-domain reproduction: current=2926.757821308449 m; detents=-1000; formerRequested=14959780698991.201 m; activeLineMaximum=14959787070000.004 m; formerExcess=-6371008.802734375 m; correctedRequested=14959787070000.004 m; maximumOffset=14959787070000 m
+Bounded camera-domain stress: cycles=24; minimumAltitude=10.000007342547178 m; maximumDomainExcess=1.953E-003 m; invariant=0.000E+000 m
+PASS [headless] Solar camera bounded-domain crash regression
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Surface visual aim: angular=3.636E-002 rad; visualAim=0.000E+000 rad; centered=0.000E+000 rad; pivotRelease=0.000E+000 m; orbitLine=0.000E+000 m; invariant=0.000E+000 m; symmetry=0.000E+000; releases=1; cycles=2
+PASS [headless] Surface visual-aim continuity
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Inertial visual aim: anchorMotion=3.543E+006 m; cameraTranslation=5.395E-006 m; orientation=0.000E+000 rad; ray=1.490E-008 rad; invariant=0.000E+000 m; roundTripRay=0.000E+000 rad
+PASS [headless] Inertial visual-aim authority
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Cube-sphere planetary surface
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Production relaxed cube-sphere topology hash: 0x61C28B0A3B4F21FF
+Production relaxed cube-sphere: topologyHash=0x61C28B0A3B4F21FF; radiusError=1.110E-016; edgeError=0.000E+000; cornerError=0.000E+000; parentChildError=0.000E+000; cachePromotions=1; demands=10
+PASS [headless] Production relaxed cube-sphere patch hierarchy
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Anchored mesh tier: identity=0x11D71BDA21DAECC1; topology=0x620D695AB3D18F5D; anchorRoundTrip=1.24126707662363656E-016; florida=7.90812377957369228E-010 m; splitMax=9.15527343750000000E-005 m; sharedDirection=0.00000000000000000E+000; cubeEdges=12; cubeCorners=8; subdivision=7; nativeAbi=unchanged; liveRenderer=unchanged
+PASS [headless] Anchored spherical mesh-tier contract
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+P2S2 0: vertices=162; triangles=320; bytes=11764; hash=0x46714C6571D73AE6; aspect=1.5793; minAngle=38.0376; spacingMin=8.77899E-002; spacingMedian=2.65333E-001; spacingMax=5.15614E-001; pupil=1.30158E-001; antipode=5.15614E-001; densityRatio=3.961; tangentCoverage=100.0%
+P2S2 region=0; vertices=43; triangles=106; representative=1.30158E-001; maximum=2.20613E-001
+P2S2 region=1; vertices=46; triangles=134; representative=2.31099E-001; maximum=3.49399E-001
+P2S2 region=2; vertices=38; triangles=116; representative=3.31953E-001; maximum=4.55954E-001
+P2S2 region=3; vertices=35; triangles=88; representative=4.34021E-001; maximum=5.44264E-001
+P2S2 1: vertices=642; triangles=1280; bytes=46972; hash=0xAAC90882FE7F656E; aspect=1.5239; minAngle=39.7822; spacingMin=4.23460E-002; spacingMedian=1.33428E-001; spacingMax=2.72357E-001; pupil=6.42777E-002; antipode=2.50857E-001; densityRatio=3.903; tangentCoverage=100.0%
+P2S2 region=0; vertices=169; triangles=378; representative=6.36414E-002; maximum=1.07849E-001
+P2S2 region=1; vertices=168; triangles=422; representative=1.10970E-001; maximum=1.72748E-001
+P2S2 region=2; vertices=160; triangles=404; representative=1.65826E-001; maximum=2.33518E-001
+P2S2 region=3; vertices=145; triangles=328; representative=2.23429E-001; maximum=2.81091E-001
+P2S2 2: vertices=2562; triangles=5120; bytes=187132; hash=0xBBBACB117D88439D; aspect=1.5069; minAngle=40.8113; spacingMin=2.07026E-002; spacingMedian=6.69454E-002; spacingMax=1.37112E-001; pupil=3.15654E-002; antipode=1.25920E-001; densityRatio=3.989; tangentCoverage=100.0%
+P2S2 region=0; vertices=665; triangles=1410; representative=3.14184E-002; maximum=5.40715E-002
+P2S2 region=1; vertices=648; triangles=1470; representative=5.47717E-002; maximum=8.48600E-002
+P2S2 region=2; vertices=684; triangles=1540; representative=8.14375E-002; maximum=1.17454E-001
+P2S2 region=3; vertices=565; triangles=1208; representative=1.12431E-001; maximum=1.41666E-001
+P2S2 projected: altitude=35786000m; pupilPixels=13.227; antipodeRegionPixels=34.496
+P2S2 projected: altitude=10000m; pupilPixels=2082.958; antipodeRegionPixels=2047.400
+P2S2 projected: altitude=1000m; pupilPixels=2118.833; antipodeRegionPixels=2061.077
+P2S2 projected: altitude=100m; pupilPixels=2122.424; antipodeRegionPixels=2062.446
+P2S2 projected: altitude=10m; pupilPixels=2122.783; antipodeRegionPixels=2062.583
+P2S2 proof library bytes=245868
+PASS [headless] M12D-P2S2 spherical billboard topology proof
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+P2S5B candidate preflight: base16=1344.683; transition16=0.459; silhouette16=1.312; tes16=225; jump16=8.003; bytes16=178195320; overlap16=245675016; base18=1344.683; transition18=0.459; silhouette18=1.312; tes18=225; jump18=2.000; bytes18=235627328; overlap18=267010792
+P2S5B validating L00
+P2S5B L00: vertices=2486; triangles=4968; bytes=169228; pupil=3.487488776E-002; transition=3.487488776E-002; outer=1.189038868E-001; density=3.4; minAngle=13.0405; p1=30.6896; p5=35.1614; median=49.0855; aspect=3.2418; pupilWorst=13.0405; transitionWorst=180.0000; farWorst=30.1185; map=0x141CFC9842C4B0E3; hash=0xF0788006615C9665
+P2S5B validating L01
+P2S5B L01: vertices=8822; triangles=17640; bytes=610052; pupil=1.883691235E-002; transition=1.883691235E-002; outer=6.002834058E-002; density=3.2; minAngle=30.0275; p1=32.0088; p5=36.0871; median=48.6876; aspect=1.9983; pupilWorst=31.8935; transitionWorst=180.0000; farWorst=30.0275; map=0xB345D1EFD3566D9F; hash=0xF19A534B746248DE
+P2S5B validating L02
+P2S5B L02: vertices=14702; triangles=29400; bytes=1035268; pupil=1.069115435E-002; transition=1.069115435E-002; outer=6.002834058E-002; density=5.6; minAngle=30.0275; p1=32.8261; p5=38.1578; median=47.1353; aspect=1.9983; pupilWorst=35.9394; transitionWorst=180.0000; farWorst=30.0275; map=0x15269F5DD12A72AA; hash=0x19CE1D01255D82DC
+P2S5B validating L03
+P2S5B L03: vertices=24198; triangles=48392; bytes=1704548; pupil=5.689516137E-003; transition=5.689516137E-003; outer=6.002834058E-002; density=10.6; minAngle=30.0275; p1=33.9725; p5=40.1324; median=46.0405; aspect=1.9983; pupilWorst=40.4956; transitionWorst=180.0000; farWorst=30.0275; map=0x05BF3A0136634815; hash=0xB0D103DF89C9151B
+P2S5B validating L04
+P2S5B L04: vertices=38394; triangles=76784; bytes=2707892; pupil=2.920956638E-003; transition=1.620837836E-002; outer=6.002834058E-002; density=20.6; minAngle=30.0275; p1=35.4306; p5=41.9141; median=45.4580; aspect=1.9983; pupilWorst=43.0339; transitionWorst=40.4956; farWorst=30.0275; map=0x0233A6180674D476; hash=0xB7388814AB66033F
+P2S5B validating L05
+P2S5B L05: vertices=58082; triangles=116160; bytes=4103492; pupil=1.475011471E-003; transition=1.620837836E-002; outer=6.002834058E-002; density=40.7; minAngle=30.0275; p1=36.9224; p5=43.2494; median=45.1895; aspect=1.9983; pupilWorst=44.2410; transitionWorst=40.4956; farWorst=30.0275; map=0xB30106FF42C2557F; hash=0x0B88597718CCA3C5
+P2S5B validating L06
+P2S5B L06: vertices=82850; triangles=165696; bytes=5866500; pupil=7.400014062E-004; transition=1.620837836E-002; outer=6.002834058E-002; density=81.1; minAngle=30.0275; p1=38.4295; p5=43.9294; median=45.0775; aspect=1.9983; pupilWorst=44.7357; transitionWorst=40.4956; farWorst=30.0275; map=0xAACA93D2BB2AA419; hash=0x3CEB30A7B76DEB78
+P2S5B validating L07
+P2S5B L07: vertices=111446; triangles=222888; bytes=7910132; pupil=3.703535812E-004; transition=1.620837836E-002; outer=6.002834058E-002; density=162.1; minAngle=30.0275; p1=39.7518; p5=44.3922; median=45.0357; aspect=1.9983; pupilWorst=44.9172; transitionWorst=40.4956; farWorst=30.0275; map=0x67A5A4E0B3F22323; hash=0xDAB1109356510A89
+P2S5B validating L08
+P2S5B L08: vertices=142786; triangles=285568; bytes=10155668; pupil=1.852195268E-004; transition=1.620837836E-002; outer=6.002834058E-002; density=324.1; minAngle=30.0275; p1=40.8502; p5=44.6075; median=45.0153; aspect=1.9983; pupilWorst=44.9759; transitionWorst=40.4956; farWorst=30.0275; map=0x030EF3FACEAA4210; hash=0x2A12C500AA09E634
+P2S5B validating L09
+P2S5B L09: vertices=175618; triangles=351232; bytes=12513636; pupil=9.261494916E-005; transition=1.620837836E-002; outer=6.002834058E-002; density=648.1; minAngle=30.0275; p1=41.5722; p5=44.7605; median=45.0067; aspect=1.9983; pupilWorst=44.9934; transitionWorst=40.4956; farWorst=30.0275; map=0xE40E9E490EC6B008; hash=0x7EB1114EEAFEC76A
+P2S5B validating L10
+P2S5B L10: vertices=209290; triangles=418576; bytes=14934692; pupil=4.630805456E-005; transition=1.620837836E-002; outer=6.002834058E-002; density=1296.3; minAngle=30.0275; p1=42.1760; p5=44.8297; median=45.0033; aspect=1.9983; pupilWorst=44.9983; transitionWorst=40.4956; farWorst=30.0275; map=0x75014A0DB46BADA6; hash=0x9F24B160FFD220BB
+P2S5B validating L11
+P2S5B L11: vertices=243394; triangles=486784; bytes=17388484; pupil=2.315409547E-005; transition=1.620837836E-002; outer=6.002834058E-002; density=2592.6; minAngle=30.0275; p1=42.6420; p5=44.8810; median=45.0015; aspect=1.9983; pupilWorst=44.9996; transitionWorst=40.4956; farWorst=30.0275; map=0x7A351A5FAD8AB4D6; hash=0x47984C51EB0667B3
+P2S5B validating L12
+P2S5B L12: vertices=277838; triangles=555672; bytes=19867124; pupil=1.157705926E-005; transition=1.620837836E-002; outer=6.002834058E-002; density=5185.1; minAngle=30.0275; p1=43.1206; p5=44.9207; median=45.0007; aspect=1.9983; pupilWorst=44.9999; transitionWorst=40.4956; farWorst=30.0275; map=0xC5E6830433F526B0; hash=0xD5A860EA57373C84
+P2S5B validating L13
+P2S5B L13: vertices=312330; triangles=624656; bytes=22350388; pupil=5.788540445E-006; transition=1.620837836E-002; outer=6.002834058E-002; density=10370.2; minAngle=30.0275; p1=43.4000; p5=44.9409; median=45.0003; aspect=1.9983; pupilWorst=45.0000; transitionWorst=40.4956; farWorst=30.0275; map=0xFCB1B03B2AB6CDB1; hash=0x1FADAFF7949AA73D
+P2S5B validating L14
+P2S5B L14: vertices=346870; triangles=693736; bytes=24837108; pupil=2.894289385E-006; transition=1.620837836E-002; outer=6.002834058E-002; density=20740.3; minAngle=30.0275; p1=43.6132; p5=44.9548; median=45.0002; aspect=1.9983; pupilWorst=45.0000; transitionWorst=40.4956; farWorst=30.0275; map=0xB6B5EE54C9EAD765; hash=0x03FD44358540D951
+P2S5B validating L15
+P2S5B L15: vertices=381506; triangles=763008; bytes=27330548; pupil=1.447143699E-006; transition=1.620837836E-002; outer=6.002834058E-002; density=41480.6; minAngle=30.0275; p1=43.7712; p5=44.9662; median=45.0001; aspect=1.9983; pupilWorst=45.0000; transitionWorst=40.4956; farWorst=30.0275; map=0x2ED96056324378B1; hash=0xE2D652EE643A59E5
+P2S5B validating L16
+P2S5B L16: vertices=416142; triangles=832280; bytes=29824372; pupil=7.235179344E-007; transition=1.620837836E-002; outer=6.002834058E-002; density=82967.3; minAngle=30.0275; p1=43.9403; p5=44.9757; median=45.0000; aspect=1.9983; pupilWorst=45.0000; transitionWorst=40.4956; farWorst=30.0275; map=0x58558F51C1A8C536; hash=0x7D6E2E4117BE64AE
+P2S5B validating L17
+P2S5B L17: vertices=450778; triangles=901552; bytes=32318196; pupil=3.616710667E-007; transition=1.620837836E-002; outer=6.002834058E-002; density=165975.0; minAngle=30.0275; p1=44.0873; p5=44.9815; median=45.0000; aspect=1.9983; pupilWorst=45.0000; transitionWorst=40.4956; farWorst=30.0275; map=0x1B5F683B064DA4EA; hash=0xE7D3421EF8CC59AB
+P2S5B compare: 16/base=1344.683px/transition=0.459px/silhouette=1.312px/TES=225/jump=8.00/bytes=178195320/angle=30.0275/aspect=1.9983; 18/base=1344.683px/transition=0.459px/silhouette=1.312px/TES=225/jump=2.00/bytes=235627328/angle=30.0275/aspect=1.9983; selectedIncoming=267010792; decision=18
+P2S5B library: levels=18; bytes=235627328; runtimeGeneration=0; format=2; coordinate=SignedCubeLatticeInt32
+PASS [headless] M12D-P2S5B production spherical billboard topology library
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+P2S5F S00: vertices=13826; triangles=27648; regions=1; minEdge=126884.165864m; avgEdge=217308.912m; maxEdge=375144.030m; maxSpan=5.888298722E-002rad; sag=2761.001212m; support=6360008.800m; pupil=6086330.581m; immutable=1161292; hash=0x118D7D350CB66136; generatedMs=25.3
+P2S5F S01: vertices=18706; triangles=37408; regions=2; minEdge=72850.659856m; avgEdge=181142.128m; maxEdge=375144.030m; maxSpan=5.888298722E-002rad; sag=2761.001212m; support=6360008.800m; pupil=5524667.270m; immutable=1571212; hash=0xCF2AF9997149E418; generatedMs=10.4
+P2S5F S02: vertices=29626; triangles=59248; regions=3; minEdge=44096.124021m; avgEdge=130277.780m; maxEdge=375144.030m; maxSpan=5.888298722E-002rad; sag=2761.001212m; support=6360008.800m; pupil=4611586.258m; immutable=2488492; hash=0xF2F37B98BDE248B3; generatedMs=14.8
+P2S5F S03: vertices=54106; triangles=108208; regions=4; minEdge=25502.079060m; avgEdge=81715.125m; maxEdge=375144.030m; maxSpan=5.888298722E-002rad; sag=2761.001212m; support=6360008.800m; pupil=3729583.037m; immutable=4544812; hash=0xDCF463780EF4E7C1; generatedMs=24.8
+P2S5F S04: vertices=103514; triangles=207024; regions=5; minEdge=14319.022657m; avgEdge=48436.069m; maxEdge=375144.030m; maxSpan=5.888298722E-002rad; sag=2761.001212m; support=6360008.800m; pupil=2806497.310m; immutable=8695084; hash=0x626F04C2587A9589; generatedMs=47.4
+P2S5F S05: vertices=152922; triangles=305840; regions=6; minEdge=7969.013655m; avgEdge=34800.849m; maxEdge=375144.030m; maxSpan=5.888298722E-002rad; sag=2761.001212m; support=6360008.800m; pupil=1474744.323m; immutable=12845356; hash=0x92538E1161BE12BB; generatedMs=70.9
+P2S5F S06: vertices=202330; triangles=404656; regions=7; minEdge=4105.372418m; avgEdge=27071.682m; maxEdge=375144.030m; maxSpan=5.888298722E-002rad; sag=2761.001212m; support=6360008.800m; pupil=747383.203m; immutable=16995628; hash=0x87A3877A754ED82E; generatedMs=106.6
+P2S5F S07: vertices=251738; triangles=503472; regions=8; minEdge=2068.541115m; avgEdge=22068.239m; maxEdge=375144.030m; maxSpan=5.888298722E-002rad; sag=2761.001212m; support=6360008.800m; pupil=374981.688m; immutable=21145900; hash=0x34679CE6A107E3CF; generatedMs=104.8
+P2S5F S08: vertices=301146; triangles=602288; regions=9; minEdge=1036.277017m; avgEdge=18577.163m; maxEdge=375144.030m; maxSpan=5.888298722E-002rad; sag=2761.001212m; support=6360008.800m; pupil=187653.362m; immutable=25296172; hash=0xA707B386EC02AB80; generatedMs=124.8
+P2S5F S09: vertices=350554; triangles=701104; regions=10; minEdge=518.390093m; avgEdge=16014.514m; maxEdge=375144.030m; maxSpan=5.888298722E-002rad; sag=2761.001212m; support=6360008.800m; pupil=93847.035m; immutable=29446444; hash=0x8F6B13684734EB1E; generatedMs=146.4
+P2S5F S10: vertices=399962; triangles=799920; regions=11; minEdge=259.226504m; avgEdge=14060.606m; maxEdge=375144.030m; maxSpan=5.888298722E-002rad; sag=2761.001212m; support=6360008.800m; pupil=46926.063m; immutable=33596716; hash=0x94FC3260597D77E0; generatedMs=151.7
+P2S5F S11: vertices=449370; triangles=898736; regions=12; minEdge=129.617181m; avgEdge=12525.502m; maxEdge=375144.030m; maxSpan=5.888298722E-002rad; sag=2761.001212m; support=6360008.800m; pupil=23463.350m; immutable=37746988; hash=0x29745C559AE6222F; generatedMs=167.5
+P2S5F S12: vertices=498778; triangles=997552; regions=13; minEdge=64.808921m; avgEdge=11289.637m; maxEdge=375144.030m; maxSpan=5.888298722E-002rad; sag=2761.001212m; support=6360008.800m; pupil=11731.715m; immutable=41897260; hash=0xE79EBA567AF0F876; generatedMs=184.0
+P2S5F S13: vertices=548186; triangles=1096368; regions=14; minEdge=32.404147m; avgEdge=10274.323m; maxEdge=375144.030m; maxSpan=5.888298722E-002rad; sag=2761.001212m; support=6360008.800m; pupil=5865.862m; immutable=46047532; hash=0x72F194C57A876360; generatedMs=201.1
+P2S5F S14: vertices=597594; triangles=1195184; regions=15; minEdge=16.201448m; avgEdge=9425.879m; maxEdge=375144.030m; maxSpan=5.888298722E-002rad; sag=2761.001212m; support=6360008.800m; pupil=2932.932m; immutable=50197804; hash=0x8999DD8A034A9AB1; generatedMs=232.2
+P2S5F S15: vertices=647002; triangles=1294000; regions=16; minEdge=8.099055m; avgEdge=8706.545m; maxEdge=375144.030m; maxSpan=5.888298722E-002rad; sag=2761.001212m; support=6360008.800m; pupil=1466.466m; immutable=54348076; hash=0x967DCF11C4ABC256; generatedMs=238.0
+P2S5F S16: vertices=696410; triangles=1392816; regions=17; minEdge=4.047858m; avgEdge=8089.062m; maxEdge=375144.030m; maxSpan=5.888298722E-002rad; sag=2761.001212m; support=6360008.800m; pupil=733.233m; immutable=58498348; hash=0x32840D29EDE00769; generatedMs=260.7
+P2S5F S17: vertices=712106; triangles=1424208; regions=18; minEdge=2.020586m; avgEdge=7910.799m; maxEdge=375144.030m; maxSpan=5.888298722E-002rad; sag=2761.001212m; support=6360008.800m; pupil=206.222m; immutable=59816812; hash=0xBCE444AFFB2D713B; generatedMs=266.9
+P2S5F library: levels=18; bytes=554579640; maxPair=253532632; finest=712106/1424208; maxEdge=375144.030m; maxSag=2761.001212m; finestSpacing=2.020586m
+PASS [headless] M12D-P2S5F nested production scale-mesh topology
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+TES geographic specialization PASS: default=false; ordinary inverse absent; diagnostic inverse retained
+M13.2 fragment specialization PASS: default=full; ordinary diagnostic read absent; five nonordinary inputs removed; full interface retained; SPIR-V valid
+P2S5G compiled surface interface: VS=16 scalars; TCS=13 scalars/control point; 32 redundant TCS scalars removed; fragment inputs=16; frame/body provenance preserved
+PASS [headless] M12D-P2S5G bounded spherical billboard surface interface
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+M12C Candidate D presentation parity: maxWeightError=3.868E-005; maxL1=7.735E-005
+7H modifier foundation: generation=0xC6CDFF4A0E5468E2; tiled=8m/2500000m; erosion=1.5m/1200m/R24000m; gradientError=0; cost100k=234.789ms; allocations=0
+PASS [headless] Multiscale physical terrain modifier foundation
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Canonical physical authority: directions=10; heightDelta=0.000000000E+000m; splitHeightDelta=0.000000000E+000m; positionDelta=0.000000000E+000m; normalDelta=0.000000000E+000rad; boundaryHeight=0.000000000E+000m; boundaryNormal=0.000000000E+000rad
+PASS [headless] Single canonical physical surface authority
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Physical frequency continuity: bands=21; globalSpacing=156368.08157840566m; anchoredSpacing=19.087900583301472m; suppressed=19; activated=15; heightDelta=0.000000000E+000m; normalDelta=2.107342426E-008rad; edgePositionDelta=0.000000000E+000m; c2Derivative=1.578946316E-008
+PASS [headless] Global/anchored physical frequency continuity
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+M12D candidate renderer integration: samples=24; heightMax=9.09494701772928238E-013m; normalMax=2.10734242554470173E-008rad; sharedBoundaryMax=0.00000000000000000E+000m; production=4; numericalReference=3
+PASS [headless] Generation-4 physical renderer integration
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Production material noise optimization: scalarSamples=97; biplanarSamples=120; scalarMax=0.000E+000; biplanarMax=0.000E+000; materialMax=0.000E+000; visualNormalMax=0.000E+000; bitIdentity=true
+PASS [headless] Production material noise value preservation
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Subdivision demand: altitude=100000000m; target=32px; edges=288; min=1; max=2; avg=1.083; boundedProofFactor=2; boundedProofTriangles=768
+Subdivision demand: altitude=100000000m; target=16px; edges=288; min=1; max=3; avg=1.917; boundedProofFactor=4; boundedProofTriangles=3072
+Subdivision demand: altitude=100000000m; target=8px; edges=288; min=1; max=6; avg=3.479; boundedProofFactor=4; boundedProofTriangles=3072
+Subdivision demand: altitude=100000000m; target=4px; edges=288; min=1; max=11; avg=6.465; boundedProofFactor=4; boundedProofTriangles=3072
+Subdivision demand: altitude=20000000m; target=32px; edges=288; min=1; max=7; avg=3.549; boundedProofFactor=4; boundedProofTriangles=3072
+Subdivision demand: altitude=20000000m; target=16px; edges=288; min=1; max=13; avg=6.590; boundedProofFactor=4; boundedProofTriangles=3072
+Subdivision demand: altitude=20000000m; target=8px; edges=288; min=1; max=25; avg=12.681; boundedProofFactor=4; boundedProofTriangles=3072
+Subdivision demand: altitude=20000000m; target=4px; edges=288; min=2; max=50; avg=24.938; boundedProofFactor=4; boundedProofTriangles=3072
+Subdivision demand: altitude=3000000m; target=32px; edges=288; min=4; max=37; avg=10.944; boundedProofFactor=4; boundedProofTriangles=3072
+Subdivision demand: altitude=3000000m; target=16px; edges=288; min=7; max=64; avg=21.326; boundedProofFactor=4; boundedProofTriangles=3072
+Subdivision demand: altitude=3000000m; target=8px; edges=288; min=14; max=64; avg=39.035; boundedProofFactor=4; boundedProofTriangles=3072
+Subdivision demand: altitude=3000000m; target=4px; edges=288; min=28; max=64; avg=57.285; boundedProofFactor=4; boundedProofTriangles=3072
+Subdivision demand: altitude=700000m; target=32px; edges=288; min=7; max=64; avg=18.993; boundedProofFactor=4; boundedProofTriangles=3072
+Subdivision demand: altitude=700000m; target=16px; edges=288; min=13; max=64; avg=33.056; boundedProofFactor=4; boundedProofTriangles=3072
+Subdivision demand: altitude=700000m; target=8px; edges=288; min=26; max=64; avg=50.993; boundedProofFactor=4; boundedProofTriangles=3072
+Subdivision demand: altitude=700000m; target=4px; edges=288; min=51; max=64; avg=63.042; boundedProofFactor=4; boundedProofTriangles=3072
+Subdivision demand: altitude=100000m; target=32px; edges=288; min=7; max=64; avg=24.201; boundedProofFactor=4; boundedProofTriangles=3072
+Subdivision demand: altitude=100000m; target=16px; edges=288; min=14; max=64; avg=38.021; boundedProofFactor=4; boundedProofTriangles=3072
+Subdivision demand: altitude=100000m; target=8px; edges=288; min=27; max=64; avg=53.722; boundedProofFactor=4; boundedProofTriangles=3072
+Subdivision demand: altitude=100000m; target=4px; edges=288; min=54; max=64; avg=63.319; boundedProofFactor=4; boundedProofTriangles=3072
+Subdivision demand: altitude=10000m; target=32px; edges=288; min=7; max=64; avg=24.743; boundedProofFactor=4; boundedProofTriangles=3072
+Subdivision demand: altitude=10000m; target=16px; edges=288; min=14; max=64; avg=38.444; boundedProofFactor=4; boundedProofTriangles=3072
+Subdivision demand: altitude=10000m; target=8px; edges=288; min=27; max=64; avg=54.000; boundedProofFactor=4; boundedProofTriangles=3072
+Subdivision demand: altitude=10000m; target=4px; edges=288; min=54; max=64; avg=63.375; boundedProofFactor=4; boundedProofTriangles=3072
+Subdivision demand: altitude=10m; target=32px; edges=288; min=7; max=64; avg=24.799; boundedProofFactor=4; boundedProofTriangles=3072
+Subdivision demand: altitude=10m; target=16px; edges=288; min=14; max=64; avg=38.528; boundedProofFactor=4; boundedProofTriangles=3072
+Subdivision demand: altitude=10m; target=8px; edges=288; min=27; max=64; avg=54.056; boundedProofFactor=4; boundedProofTriangles=3072
+Subdivision demand: altitude=10m; target=4px; edges=288; min=54; max=64; avg=63.375; boundedProofFactor=4; boundedProofTriangles=3072
+PASS [headless] Screen-space subdivision
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Near-field height authority comparison: samples=1089; footprint=64km; terrainV5L2=[494.269,1009.045]m; oracle8192=[2459.598,2644.145]m; deltaMean=1894.346m; deltaMax=2122.032m
+Terrain-v5 payload continuity: internal=E0/A0/L0; face=E0/A0/L0; corner=E0/A0/L0; rawParentChild=E934.157321m/A0.342157/L0.480392; uncoordinatedMorphGap=467.078660m; coherentMorphGap=0m; edgeAgeGap=0; renderedMixedEdge=position0m/material0/land0/normal0rad; actualEdgeGap=0.000E+000m; oneSidedNormal=7.074E-002rad; gutterNormal=2.980E-008rad; constrainedVertices=32; stitch=[-U/+U oddY->evenY,-V/+V oddX->evenX]; parentAddressDirection=0.000E+000; elevationEnvelope=[-10036.240177,6196.917678]m; quarterMorphStep=233.539330m; Florida=PositiveZ/0.6102718683788446/0.8413558131838053; land=[0.866448,0.933995,1.000000]
+PASS [headless] Terrain-v5 seams, mixed-LOD authority, and Florida classification
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Terrain asset boundary: fixture=5032B/78fdca1b5378fa2a13c35d283a9c2198a0c4b3a872e5870108700404534bbbda; production=Valid; buffer=1048576B; cache=E:\NovaCore\.novacore\cache\terrain\v1
+PASS [headless] Terrain asset distribution boundary
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Cache lifecycle: dry run, owner/handle/read-only safety, changed reports, recovery hash, interruption, override containment and atomic install PASS; bounded 5032-byte asset.
+PASS [headless] Cache lifecycle cleanup
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Current local physical oracle: samples=278784; max=0.001961682224806083m; RMS=0.0011270416053056442m; slope=3.994816183666011E-07; normal=5.433658708365317E-07; mirrored=49.88018319105478m
+Local terrain codec fixture: sectors=4; disk=1117669B; GPU=1393920B
+PASS [headless] Local terrain format and GPU compression
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+NCCUBE2 schema=2 payload=2 terrain=5; bytes=174624; sha256=19366ff801f81204ca1be18efa466785126a5bd1601fb2b28cc89be1fe749524; channels/digest/oracle/corruption/truncation PASS
+PASS [headless] Local terrain payload-2 authoring contract
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+M12 Florida: records=859; levels=8/9/10/11; launchResidual=15.002m; maxQuantization=0.001961m; bytes=210307596
+PASS [headless] M12 Florida regional physical surface
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Production GPU residency: mode=2; terrainVersion=5; realPayload=true; maxPackLevel=2; parent-retained quartet preparation=true
+PASS [headless] Production cube-sphere GPU residency integration
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Physical-normal frame: boundaryLatitude=71.80512766123321deg; longitude=-42deg; discontinuousReferenceJump=2.382990847247186rad; canonicalEastJump=0rad; canonicalNorthJump=1.4901161193847656E-08rad; longitudeWrap=1.4901161193847656E-08rad; polarStep=9.99155915632302E-07rad; minimumHandedness=0.9999999999999997; south=PositiveY/L2/2/1@0.6666189931924974,0.3494472650593392; north=PositiveY/L2/2/1@0.6666189827254602,0.3494472745838204
+PASS [headless] Production physical-normal tangent continuity
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Production surface body eligibility and transition ownership
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Earth material-state fingerprint: 0xDA5A1386F3A86070; focus=0x10F9ED0DC55FBEB1; switches=Sun/Venus/Mars/Moon; no-warp=warp-control-identical; terrain-v5 shared payload=true
+PASS [headless] Production Earth material-state continuity
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Final terrain preflight: altitude=10.000997751951218; gpu=10.000998
+Stationary camera proof: drift=0.000000000E+000 m; corrections=0; directionError=0.000000000E+000 m; radial=Double3 { X = -1.2473591267899286E-13, Y = 0.471404520790842, Z = -0.8819171036882983, LengthSquared = 1.0000000000000002, IsFinite = True }
+Camera terrain exclusion: sites=0/2.15218388006408/5248.158850966612 m; localResidualMax=28.279296875 m; formerClearance=-14.083751551623099 m; physical=10 m; guard=0.001 m; tolerance=0.0001 m; rootLoss=1.494608819E-006 m; highLowLoss=9.313225746E-010 m; floatLoss=3.362074494E-007 m; maximumError=3.074131905E-006; minimumStress=10.000011461786926 m; corrections=9; guardConsumed=9.885382131E-004 m; exteriorCorrection=110.00100687891245 m; exteriorIterations=1; exteriorQueries=1584; runtimeIterations=14; runtimeDistribution=2298/14/0/0; runtimeMaxIterations=1; runtimeMaxCorrection=110.00100021902472 m; runtimeQueries=2326; maxPositionDelta=30286.01124767529 m; maxOrientationDelta=1.3728589052673685 rad; maxTargetDistance=57.42364609426007 m; transportError=3.357931297E-009 m; gpuClearance=10.000997754745185 m; stationaryDrift=0.000000000E+000 m; directionError=0.000000000E+000 m; invariantAvg/P95/P99=9170.6/12400.0/19200.0 ns; invariantAllocations=0
+PASS [headless] Planetary camera terrain exclusion
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Reference frame Pause / 0x: sim=0 s; orientation=0 rad; omega=7.292115018609224E-05 rad/s; lat=1.1617035225763264; lon=-0.1770985591998639; radius=6371008.799999999 m; expected=184.79984205777154 m/s; cameraBodyDrift=0 m (0 m/s); terrainRelativeDrift=0 m (0 m/s); inertialOffsetDrift=0 m; anchorBodyDrift=0 m; cameraRoot=Double3 { X = -26502576889.713287, Y = 132751642327.20645, Z = 57561639076.31295, LengthSquared = 2.1638727415517432E+22, IsFinite = True }; earthRelativeInertial=Double3 { X = 0, Y = -2534245.7390289307, Z = 5845295.467033386, LengthSquared = 40589880562707.34, IsFinite = True }; earthBodyFixed=Double3 { X = 2494607.587730784, Y = 5845295.467033388, Z = 446468.86680069193, LengthSquared = 40589880562707.375, IsFinite = True }; anchorBody=Double3 { X = 2494603.67178365, Y = 5845286.2912944285, Z = 446468.1659495889, LengthSquared = 40589753129677.43, IsFinite = True }; cameraToAnchor=Double3 { X = 0, Y = 3.9781646728515625, Z = -9.175735473632812, LengthSquared = 100.01991564640775, IsFinite = True }
+Reference frame 1x: sim=0.1 s; orientation=7.2920138254576835E-06 rad; omega=7.292115018609224E-05 rad/s; lat=1.1617035225763264; lon=-0.1770985591998639; radius=6371008.799999999 m; expected=184.79984205777154 m/s; cameraBodyDrift=18.480013221035566 m (184.80013221035566 m/s); terrainRelativeDrift=18.47998428596708 m (184.7998428596708 m/s); inertialOffsetDrift=0.0002664832946254422 m; anchorBodyDrift=0 m; cameraRoot=Double3 { X = -26502579868.357357, Y = 132751641824.59175, Z = 57561638858.40767, LengthSquared = 2.1638727414869106E+22, IsFinite = True }; earthRelativeInertial=Double3 { X = 0, Y = -2534245.739135742, Z = 5845295.467277527, LengthSquared = 40589880566102.86, IsFinite = True }; earthBodyFixed=Double3 { X = 2494604.3320669523, Y = 5845295.467277529, Z = 446487.0577748716, LengthSquared = 40589880566102.89, IsFinite = True }; anchorBody=Double3 { X = 2494603.67178365, Y = 5845286.2912944285, Z = 446468.1659495889, LengthSquared = 40589753129677.43, IsFinite = True }; cameraToAnchor=Double3 { X = 18.479984283447266, Y = 3.9783477783203125, Z = -9.175979614257812, LengthSquared = 441.53567204299907, IsFinite = True }
+Reference frame 2x: sim=0.2 s; orientation=1.4584210352085886E-05 rad; omega=7.292115018609224E-05 rad/s; lat=1.1617035225763264; lon=-0.1770985591998639; radius=6371008.799999999 m; expected=184.79984205777154 m/s; cameraBodyDrift=36.960026430095496 m (184.80013215047748 m/s); terrainRelativeDrift=36.959968567915055 m (184.79984283957526 m/s); inertialOffsetDrift=0 m; anchorBodyDrift=0 m; cameraRoot=Double3 { X = -26502582847.001423, Y = 132751641321.9772, Z = 57561638640.50188, LengthSquared = 2.163872741422078E+22, IsFinite = True }; earthRelativeInertial=Double3 { X = 0, Y = -2534245.7390289307, Z = 5845295.467033386, LengthSquared = 40589880562707.34, IsFinite = True }; earthBodyFixed=Double3 { X = 2494601.07606019, Y = 5845295.467033388, Z = 446505.2486876659, LengthSquared = 40589880562707.37, IsFinite = True }; anchorBody=Double3 { X = 2494603.67178365, Y = 5845286.2912944285, Z = 446468.1659495889, LengthSquared = 40589753129677.43, IsFinite = True }; cameraToAnchor=Double3 { X = 36.95996856689453, Y = 3.9784393310546875, Z = -9.175735473632812, LengthSquared = 1466.0613774587982, IsFinite = True }
+Reference frame 10x: sim=1 s; orientation=7.292113702425804E-05 rad; omega=7.292115018609224E-05 rad/s; lat=1.1617035225763264; lon=-0.1770985591998639; radius=6371008.799999999 m; expected=184.79984205777154 m/s; cameraBodyDrift=184.80013212669445 m (184.80013212669445 m/s); terrainRelativeDrift=184.79984297164268 m (184.79984297164268 m/s); inertialOffsetDrift=0.000826549040372903 m; anchorBodyDrift=0 m; cameraRoot=Double3 { X = -26502606676.153522, Y = 132751637301.05768, Z = 57561636897.25742, LengthSquared = 2.163872740903417E+22, IsFinite = True }; earthRelativeInertial=Double3 { X = 0, Y = -2534245.739364624, Z = 5845295.467788696, LengthSquared = 40589880573238.83, IsFinite = True }; earthBodyFixed=Double3 { X = 2494575.024402257, Y = 5845295.467788698, Z = 446650.77534493525, LengthSquared = 40589880573238.85, IsFinite = True }; anchorBody=Double3 { X = 2494603.67178365, Y = 5845286.2912944285, Z = 446468.1659495889, LengthSquared = 40589753129677.43, IsFinite = True }; cameraToAnchor=Double3 { X = 184.79984283447266, Y = 3.9852447509765625, Z = -9.176490783691406, LengthSquared = 34251.072070474154, IsFinite = True }
+Reference frame 30x: sim=3 s; orientation=0.0002187634517696628 rad; omega=7.292115018609224E-05 rad/s; lat=1.1617035225763264; lon=-0.1770985591998639; radius=6371008.799999999 m; expected=184.79984205777154 m/s; cameraBodyDrift=554.4003953957236 m (184.80013179857454 m/s); terrainRelativeDrift=554.399524232743 m (184.79984141091433 m/s); inertialOffsetDrift=0.0009226521776159535 m; anchorBodyDrift=0 m; cameraRoot=Double3 { X = -26502666249.030678, Y = 132751627248.74419, Z = 57561632539.13774, LengthSquared = 2.1638727396067753E+22, IsFinite = True }; earthRelativeInertial=Double3 { X = 0, Y = -2534245.7393951416, Z = 5845295.467880249, LengthSquared = 40589880574463.805, IsFinite = True }; earthBodyFixed=Double3 { X = 2494509.857319857, Y = 5845295.467880249, Z = 447014.58519436605, LengthSquared = 40589880574463.805, IsFinite = True }; anchorBody=Double3 { X = 2494603.67178365, Y = 5845286.2912944285, Z = 446468.1659495889, LengthSquared = 40589753129677.43, IsFinite = True }; cameraToAnchor=Double3 { X = 554.3995208740234, Y = 4.0391845703125, Z = -9.176582336425781, LengthSquared = 307459.353420717, IsFinite = True }
+Reference frame warp ratios: 2x=1.9999999993519681; 10x=9.999999995472882; 30x=29.999999933152463; terrain=(1.9999999997825157,10.00000000605909,29.999999764812063)
+PASS [headless] Close-ground reference-frame diagnostic
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Terrain material synthesis: library=7; maxBoundaryDelta=6.0498714E-05; biplanarWeightDelta=9.236E-006; normalAngles=1000m/max1.429/p950.921,100m/max1.479/p950.949,10m/max1.483/p950.973; visualDisplacement<=0.45m; adaptiveBiplanar=true; productionLateGpuRefinement=true
+PASS [headless] Production terrain material synthesis
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Planetary terrain residency and surface frame
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Planetary patch topology hash: 0x98792D7EBC45FF6D
+PASS [headless] Planetary patch topology and ABI
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Parent/child LOD correspondence: sharedDrift=0.000E+000 m; elevationMismatch=0.000E+000 m; edgeError=0.000E+000 m; splitMerge=0.000E+000 m; patchHash=0x98792D7EBC45FF6D
+PASS [headless] Parent-child LOD geographic correspondence
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Opaque distant-detailed handoff
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Planetary representation handoff
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Distant transform parity: helper=identity/+90X/+90Y/+90Z/-90Z; bodies=Earth/Moon/Mars/Jupiter/Saturn; T0=0s; T1=3600s; paused-camera and Sun vectors invariant
+PASS [headless] Distant quaternion transform parity
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Production model winding: triangles=64512; outward=64512; inward=0; degenerate=0; firstMismatch=
+Production winding L0: model=[0.006385754726562707,0.009035605161429296]; projectedFramebuffer=[-0.0022539039899489694,-0.0015931755563503903]
+Production winding L1: model=[0.0016414172373987025,0.0022558524913333716]; projectedFramebuffer=[-0.0005636442310354596,-0.0004101383788571533]
+Production winding L2: model=[0.0004164378659873892,0.0005638435080160784]; projectedFramebuffer=[-0.000140940719923835,-0.00010409556221013721]
+Visible-hemisphere winding: productionModel=outward; productionProjected=counter-clockwise; distantModel=0.017474880210236333; productionRaster=VK_FRONT_FACE_COUNTER_CLOCKWISE; distantRaster=VK_FRONT_FACE_COUNTER_CLOCKWISE
+PASS [headless] Distant visible hemisphere winding
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Continuous Earth visibility: samples=1025; altitude=[10,100000000]m; patches=[4,2792]; minimumFrontCoverage=4
+PASS [headless] Continuous Earth distance visibility
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Camera drag isolation: far/700km/near and Solar focus-away/back preserve body quaternion, root landmark, and dynamic hierarchy geographic anchor
+PASS [headless] Camera drag isolation
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Moon presentation orbit: base=2387951.610052195s (27.638328820048553d); corrected=2371178.058792906s (27.44419049528826d); currentSample=0; preSnapError=1.6049041769309353E-07m; closed=true
+Moon periodic fit: endpointMismatch=0m; maximumControlCorrection=0m
+Moon periodic seam: positionError=0m; tangentDiscontinuity=0deg; renderedTurn=2.8134801067233433deg; previousSegment=18937681.111847304m; seamSegment=18936359.90291801m; nextSegment=18935064.206858978m; maximumRelativeSegmentDiscontinuity=6.977097724767236E-05
+Solar finite-depth boundary: last=87.69226950000007 AU depth=1; first=96.46149645000007 AU depth=1.0000001192092896; infiniteDepth=0.9999999403953552
+Earth focus authority 30x: offsetError=0.000E+000 m; orientationFixed=True; bodyLongitudeMotion=8.702E-004; bodySunMotion=2.007E-003
+Earth focus authority 600x: offsetError=0.000E+000 m; orientationFixed=True; bodyLongitudeMotion=1.740E-002; bodySunMotion=4.014E-002
+Earth focus authority 14400x: offsetError=0.000E+000 m; orientationFixed=True; bodyLongitudeMotion=3.988E-001; bodySunMotion=9.201E-001
+Earth focus authority 7776000x: offsetError=4.265E-006 m; orientationFixed=True; bodyLongitudeMotion=5.562E-001; bodySunMotion=4.749E-001
+surface-anchor focus 1x: targetMotion=30140.77749331504 m; distanceError=0.000E+000 m; orientationInherited=false
+surface-anchor focus 30x: targetMotion=904210.8189972623 m; distanceError=0.000E+000 m; orientationInherited=false
+surface-anchor focus 600x: targetMotion=18079327.01365206 m; distanceError=0.000E+000 m; orientationInherited=false
+surface-anchor focus 14400x: targetMotion=431669685.0928805 m; distanceError=0.000E+000 m; orientationInherited=false
+surface-anchor focus 7776000x: targetMotion=210994289287.30127 m; distanceError=0.000E+000 m; orientationInherited=false
+Moon same-instant orbit 1x: turn=2.8134801264263554deg; relativeSegmentDiscontinuity=6.977092790421658E-05; authority=1000000; sample=0; attachment=0.000E+000m
+Moon same-instant orbit 30x: turn=2.813480717840513deg; relativeSegmentDiscontinuity=6.97694452983335E-05; authority=31000000; sample=0; attachment=0.000E+000m
+Moon same-instant orbit 600x: turn=2.8134925430229583deg; relativeSegmentDiscontinuity=6.973943389072476E-05; authority=631000000; sample=0; attachment=0.000E+000m
+Moon same-instant orbit 14400x: turn=2.8137743682512726deg; relativeSegmentDiscontinuity=6.880903304468522E-05; authority=15031000000; sample=0; attachment=0.000E+000m
+Moon same-instant orbit 7776000x: turn=2.8106430284874255deg; relativeSegmentDiscontinuity=5.864006447255275E-05; authority=7791031000000; sample=0; attachment=0.000E+000m
+Solar orbit cache: entries=9; frames=256; builds=1; reuses=257; averageMs=0.075411328125
+Earth-Moon evaluated separation: 402448639.8873211 m
+Sun-Earth evaluated separation: 147101078776.12323 m; Earth-Neptune: 4641195418980.48 m
+Solar interaction proof: time=10000000; rate=10:1; focus=Earth; distance=60127060.32512148 m; corrected_epoch_static_mismatch=199554550995.4979 m; HUD allocation=0 bytes
+11B label/camera cost: label=21.54 ns/update, zoom=21.21 ns/update, allocations=0 bytes
+PASS [headless] Sol system presentation and focus
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Earth adaptive LOD: patches=928; min=4; max=12; refined=381; balanced=17; culled=272
+Earth patch batch hash: 0x8D936A93D4057B70
+Earth patch batch hash: 0x8D936A93D4057B70
+Selecting Earth terrain at 3000000 m
+Selecting Earth terrain at 1500000 m
+Selecting Earth terrain at 1000000 m
+Selecting Earth terrain at 100000 m
+Selecting Earth terrain at 10000 m
+Selecting Earth terrain at 1000 m
+Selecting Earth terrain at 100 m
+Selecting Earth terrain at 10 m
+Selecting Earth terrain at 10 m
+Earth production descent proof: global 3000km=1492/L12; nearAltitudes=7; fallback=terrain-v5
+Earth diagnostic detach raw: mode=Orbital; focus=False; radialError=1.4901161193847656E-08; centeredDot=1; truth=True; yaw=1.5907437672482416; pitch=0.1477227285103822
+Earth diagnostic camera handoff: samples=9; radialError=1.490E-008 rad; orientationStep=4.157E-001 rad; postDetachDrag=1.772E-002 rad; centered=0.000E+000 rad
+PASS [headless] SolAnalytical Earth planetary scene
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=74859DBB7854E92D3069E4081276EEF98980945C2C9C4D4ADF3A926B18CBAECA; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Florida seating proof: H=15.134892258793116; root=21.970461536198854; minimumContactLocalZ=-6.5855692772856855; depth=6.835569277405739; bottomCenterHeight=15.134892258793116; denseMaximumBottomGap=1.862645149230957E-09; denseMinimumDeckClearance=8.335569275543094; regional=15.001533002687239; generation=4; owner=NCSM1; geography/time/LOD/pupil/return=stable
+PASS [headless] Florida foundation seating
+Graphics Release: selected=79; pass=78; fail=1; skip=0; excluded=12
+System.Exception: production SurfaceAnchor authority precision and allocation
+   at Program.<<Main>$>g__CanonicalSurfaceAnchorPhysicalTerrainAuthorityTest|0_33() in E:\NovaCore\tests\NovaCore.Graphics.Tests\Program.cs:line 2974
+   at GraphicsTestHarness.RunSelected(String[] args, ValueTuple`2[] tests) in E:\NovaCore\tests\NovaCore.Graphics.Tests\GraphicsTestHarness.cs:line 68

@@ -1,0 +1,209 @@
+{
+  "sourceHash": "ba6c41d34276a922eed095cacd1b237e6b816aef137e5485eb2f9cf3ec5a0e45",
+  "privateSourceHash": "c7c295531bc7a4129679a2af3143142715380742f0ca94c04642b67b86f16cd1",
+  "privateTestHash": "0e62b31eb89622e5e1b780ad796a50cc0b8b557df71c1dbe23b475827cd69d6b",
+  "nativeHash": "74859dbb7854e92d3069e4081276eef98980945c2c9c4d4adf3a926b18cbaeca",
+  "environment": "canonical; default JIT settings",
+  "attempts": [
+    {
+      "attempt": 0,
+      "exitCode": 0,
+      "logSha256": "ed587908f4596c5fce3c039f2d6f23f268943a86d562cc63387a07561e2b20d5",
+      "lines": [
+        "Anchor predicate: maximumAuthorityError=0; terrainChecksum=3922222.9812172437; enuValid=True; allocated=0",
+        "Canonical SurfaceAnchor terrain: maxAuthorityError=0.00000000000000000E+000 m; terrainQuery=3799.0 ns; ENU=98.4 ns; allocations=0; hash=0x5BE7729CD52A7AD1",
+        "PASS [headless] Canonical SurfaceAnchor physical terrain authority"
+      ]
+    },
+    {
+      "attempt": 1,
+      "exitCode": 0,
+      "logSha256": "88411cf547fd2de8cf86af4ad5737b3c93dba09352e5741f97d513274827693c",
+      "lines": [
+        "Anchor predicate: maximumAuthorityError=0; terrainChecksum=3922222.9812172437; enuValid=True; allocated=0",
+        "Canonical SurfaceAnchor terrain: maxAuthorityError=0.00000000000000000E+000 m; terrainQuery=3800.1 ns; ENU=91.9 ns; allocations=0; hash=0x5BE7729CD52A7AD1",
+        "PASS [headless] Canonical SurfaceAnchor physical terrain authority"
+      ]
+    },
+    {
+      "attempt": 2,
+      "exitCode": 0,
+      "logSha256": "5d0d24fd03d2e8c38bf367640c1a82eed86efcaff873bf605475aaded3e7d14f",
+      "lines": [
+        "Anchor predicate: maximumAuthorityError=0; terrainChecksum=3922222.9812172437; enuValid=True; allocated=0",
+        "Canonical SurfaceAnchor terrain: maxAuthorityError=0.00000000000000000E+000 m; terrainQuery=3819.6 ns; ENU=98.6 ns; allocations=0; hash=0x5BE7729CD52A7AD1",
+        "PASS [headless] Canonical SurfaceAnchor physical terrain authority"
+      ]
+    },
+    {
+      "attempt": 3,
+      "exitCode": 0,
+      "logSha256": "d0e5ea456606f36a0a488e1d4176707fdcac72713879a63661167620922b928f",
+      "lines": [
+        "Anchor predicate: maximumAuthorityError=0; terrainChecksum=3922222.9812172437; enuValid=True; allocated=0",
+        "Canonical SurfaceAnchor terrain: maxAuthorityError=0.00000000000000000E+000 m; terrainQuery=3812.7 ns; ENU=94.5 ns; allocations=0; hash=0x5BE7729CD52A7AD1",
+        "PASS [headless] Canonical SurfaceAnchor physical terrain authority"
+      ]
+    },
+    {
+      "attempt": 4,
+      "exitCode": 0,
+      "logSha256": "63a96152beff449565cd1346d73a49ab2e9646298f65ce4eab341c3e5be106b5",
+      "lines": [
+        "Anchor predicate: maximumAuthorityError=0; terrainChecksum=3922222.9812172437; enuValid=True; allocated=0",
+        "Canonical SurfaceAnchor terrain: maxAuthorityError=0.00000000000000000E+000 m; terrainQuery=3777.0 ns; ENU=95.7 ns; allocations=0; hash=0x5BE7729CD52A7AD1",
+        "PASS [headless] Canonical SurfaceAnchor physical terrain authority"
+      ]
+    },
+    {
+      "attempt": 5,
+      "exitCode": 0,
+      "logSha256": "c16e3e0fa61f1e350d652c48fd0970caf4c0313d26147dcbf91ef1b47157be63",
+      "lines": [
+        "Anchor predicate: maximumAuthorityError=0; terrainChecksum=3922222.9812172437; enuValid=True; allocated=0",
+        "Canonical SurfaceAnchor terrain: maxAuthorityError=0.00000000000000000E+000 m; terrainQuery=3585.6 ns; ENU=85.9 ns; allocations=0; hash=0x5BE7729CD52A7AD1",
+        "PASS [headless] Canonical SurfaceAnchor physical terrain authority"
+      ]
+    },
+    {
+      "attempt": 6,
+      "exitCode": 0,
+      "logSha256": "c5e7b6be7d2397b002fe40b6dbef5a2a3401e66dbcc4043fecd5788594002917",
+      "lines": [
+        "Anchor predicate: maximumAuthorityError=0; terrainChecksum=3922222.9812172437; enuValid=True; allocated=0",
+        "Canonical SurfaceAnchor terrain: maxAuthorityError=0.00000000000000000E+000 m; terrainQuery=3679.7 ns; ENU=85.2 ns; allocations=0; hash=0x5BE7729CD52A7AD1",
+        "PASS [headless] Canonical SurfaceAnchor physical terrain authority"
+      ]
+    },
+    {
+      "attempt": 7,
+      "exitCode": 0,
+      "logSha256": "1083e6e2382487842ad4a52511aaacc84307a4691df137a654f789e40274725d",
+      "lines": [
+        "Anchor predicate: maximumAuthorityError=0; terrainChecksum=3922222.9812172437; enuValid=True; allocated=0",
+        "Canonical SurfaceAnchor terrain: maxAuthorityError=0.00000000000000000E+000 m; terrainQuery=3520.3 ns; ENU=83.9 ns; allocations=0; hash=0x5BE7729CD52A7AD1",
+        "PASS [headless] Canonical SurfaceAnchor physical terrain authority"
+      ]
+    },
+    {
+      "attempt": 8,
+      "exitCode": 0,
+      "logSha256": "b2049a24bef04202073e5b708a5c566da3fbc99756b60061bfd4729920103e77",
+      "lines": [
+        "Anchor predicate: maximumAuthorityError=0; terrainChecksum=3922222.9812172437; enuValid=True; allocated=0",
+        "Canonical SurfaceAnchor terrain: maxAuthorityError=0.00000000000000000E+000 m; terrainQuery=3596.8 ns; ENU=83.4 ns; allocations=0; hash=0x5BE7729CD52A7AD1",
+        "PASS [headless] Canonical SurfaceAnchor physical terrain authority"
+      ]
+    },
+    {
+      "attempt": 9,
+      "exitCode": 0,
+      "logSha256": "5d990fcc1e21725fd468f3713b9ec1b156492acc0338591d672db529e8dde8f9",
+      "lines": [
+        "Anchor predicate: maximumAuthorityError=0; terrainChecksum=3922222.9812172437; enuValid=True; allocated=0",
+        "Canonical SurfaceAnchor terrain: maxAuthorityError=0.00000000000000000E+000 m; terrainQuery=3674.1 ns; ENU=85.6 ns; allocations=0; hash=0x5BE7729CD52A7AD1",
+        "PASS [headless] Canonical SurfaceAnchor physical terrain authority"
+      ]
+    },
+    {
+      "attempt": 10,
+      "exitCode": 0,
+      "logSha256": "abb37f9e99b009f1658c9b9f08f7d5ed7f01bf44f95a49aaa79419a5304a34e7",
+      "lines": [
+        "Anchor predicate: maximumAuthorityError=0; terrainChecksum=3922222.9812172437; enuValid=True; allocated=0",
+        "Canonical SurfaceAnchor terrain: maxAuthorityError=0.00000000000000000E+000 m; terrainQuery=3542.0 ns; ENU=83.9 ns; allocations=0; hash=0x5BE7729CD52A7AD1",
+        "PASS [headless] Canonical SurfaceAnchor physical terrain authority"
+      ]
+    },
+    {
+      "attempt": 11,
+      "exitCode": 0,
+      "logSha256": "61a43c6660c88b794ec7f2d8963c9798bb7aa11558781b903680edded6d16eae",
+      "lines": [
+        "Anchor predicate: maximumAuthorityError=0; terrainChecksum=3922222.9812172437; enuValid=True; allocated=0",
+        "Canonical SurfaceAnchor terrain: maxAuthorityError=0.00000000000000000E+000 m; terrainQuery=3586.9 ns; ENU=88.7 ns; allocations=0; hash=0x5BE7729CD52A7AD1",
+        "PASS [headless] Canonical SurfaceAnchor physical terrain authority"
+      ]
+    },
+    {
+      "attempt": 12,
+      "exitCode": 0,
+      "logSha256": "6785d5d6441d75a07ebf36e8fbc88b58896d41dd43e1541775287e279312d81a",
+      "lines": [
+        "Anchor predicate: maximumAuthorityError=0; terrainChecksum=3922222.9812172437; enuValid=True; allocated=0",
+        "Canonical SurfaceAnchor terrain: maxAuthorityError=0.00000000000000000E+000 m; terrainQuery=3752.3 ns; ENU=89.6 ns; allocations=0; hash=0x5BE7729CD52A7AD1",
+        "PASS [headless] Canonical SurfaceAnchor physical terrain authority"
+      ]
+    },
+    {
+      "attempt": 13,
+      "exitCode": 0,
+      "logSha256": "60f9e53c62d90654966958556be31b92bf2741cb221e2d5c5d1d9eae27c3cab9",
+      "lines": [
+        "Anchor predicate: maximumAuthorityError=0; terrainChecksum=3922222.9812172437; enuValid=True; allocated=0",
+        "Canonical SurfaceAnchor terrain: maxAuthorityError=0.00000000000000000E+000 m; terrainQuery=3558.2 ns; ENU=84.3 ns; allocations=0; hash=0x5BE7729CD52A7AD1",
+        "PASS [headless] Canonical SurfaceAnchor physical terrain authority"
+      ]
+    },
+    {
+      "attempt": 14,
+      "exitCode": 0,
+      "logSha256": "424db1c71f40d1920c207302197225fd311900791c4d067308d07d541fb4e4b5",
+      "lines": [
+        "Anchor predicate: maximumAuthorityError=0; terrainChecksum=3922222.9812172437; enuValid=True; allocated=0",
+        "Canonical SurfaceAnchor terrain: maxAuthorityError=0.00000000000000000E+000 m; terrainQuery=3532.6 ns; ENU=85.7 ns; allocations=0; hash=0x5BE7729CD52A7AD1",
+        "PASS [headless] Canonical SurfaceAnchor physical terrain authority"
+      ]
+    },
+    {
+      "attempt": 15,
+      "exitCode": 0,
+      "logSha256": "675069449b6f6502c8b200237f6d3fd2fc9a23fe87afbf78407a0bd34bb4a09b",
+      "lines": [
+        "Anchor predicate: maximumAuthorityError=0; terrainChecksum=3922222.9812172437; enuValid=True; allocated=0",
+        "Canonical SurfaceAnchor terrain: maxAuthorityError=0.00000000000000000E+000 m; terrainQuery=3567.3 ns; ENU=83.4 ns; allocations=0; hash=0x5BE7729CD52A7AD1",
+        "PASS [headless] Canonical SurfaceAnchor physical terrain authority"
+      ]
+    },
+    {
+      "attempt": 16,
+      "exitCode": 0,
+      "logSha256": "ae4dc7227d8330d5f788fa0ef4754c218f16d1b87ff9e596805960e8bba99287",
+      "lines": [
+        "Anchor predicate: maximumAuthorityError=0; terrainChecksum=3922222.9812172437; enuValid=True; allocated=0",
+        "Canonical SurfaceAnchor terrain: maxAuthorityError=0.00000000000000000E+000 m; terrainQuery=3675.9 ns; ENU=83.9 ns; allocations=0; hash=0x5BE7729CD52A7AD1",
+        "PASS [headless] Canonical SurfaceAnchor physical terrain authority"
+      ]
+    },
+    {
+      "attempt": 17,
+      "exitCode": 0,
+      "logSha256": "71342fbc82f75b124b53a69d9786ba2c6509b4163c461e35577f3b60b24b199e",
+      "lines": [
+        "Anchor predicate: maximumAuthorityError=0; terrainChecksum=3922222.9812172437; enuValid=True; allocated=0",
+        "Canonical SurfaceAnchor terrain: maxAuthorityError=0.00000000000000000E+000 m; terrainQuery=3546.0 ns; ENU=83.8 ns; allocations=0; hash=0x5BE7729CD52A7AD1",
+        "PASS [headless] Canonical SurfaceAnchor physical terrain authority"
+      ]
+    },
+    {
+      "attempt": 18,
+      "exitCode": 0,
+      "logSha256": "7f990719e20dea9d49acfa6943023f5561c61e94fe85670276bfae4b29fcde86",
+      "lines": [
+        "Anchor predicate: maximumAuthorityError=0; terrainChecksum=3922222.9812172437; enuValid=True; allocated=0",
+        "Canonical SurfaceAnchor terrain: maxAuthorityError=0.00000000000000000E+000 m; terrainQuery=3709.9 ns; ENU=85.5 ns; allocations=0; hash=0x5BE7729CD52A7AD1",
+        "PASS [headless] Canonical SurfaceAnchor physical terrain authority"
+      ]
+    },
+    {
+      "attempt": 19,
+      "exitCode": 0,
+      "logSha256": "a846262a021780731f3bcb5021035af14fb4cd9a7b0b9a8efe03e30581f95a5c",
+      "lines": [
+        "Anchor predicate: maximumAuthorityError=0; terrainChecksum=3922222.9812172437; enuValid=True; allocated=0",
+        "Canonical SurfaceAnchor terrain: maxAuthorityError=0.00000000000000000E+000 m; terrainQuery=3758.2 ns; ENU=88.9 ns; allocations=0; hash=0x5BE7729CD52A7AD1",
+        "PASS [headless] Canonical SurfaceAnchor physical terrain authority"
+      ]
+    }
+  ]
+}

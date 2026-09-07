@@ -1,0 +1,60 @@
+{
+  "leadJudgment": "ESCALATE TO PROJECT CONTROL",
+  "technicalClassification": "M13.4 CANDIDATE \u2014 FOLLOW-UP REQUIRED",
+  "winner": "Skip procedural terrain material noise when its complete land-detail contribution is zero",
+  "blocker": "Both unchanged stock Release full headless runs fail SurfaceAnchor compound assertion, 78/79. Focused and diagnostic passes do not identify its cause.",
+  "productionRevisionCount": 0,
+  "gitDiffCheckExitCode": 0,
+  "gitDiffCheckOutput": "warning: in the working copy of 'native/NovaCore.Native/shaders/production_terrain_material.glsl', LF will be replaced by CRLF the next time Git touches it\n",
+  "gitStatusShort": " M native/NovaCore.Native/shaders/production_terrain_material.glsl\n?? docs/engineering-evidence/post-m13.3-next-target/\n",
+  "head": "180eaf150ba5db6364e17dd48336690778f058f9",
+  "branch": "codex/post-m13.3-next-performance-target",
+  "noStagingOrBanking": true,
+  "reproductionChecks": {
+    "pinnedSource": true,
+    "allPythonParse": true,
+    "allJsonParse": true,
+    "baselineSpirvRegenerationMatches": true
+  },
+  "builds": {
+    "nativeDebug": "PASS",
+    "nativeRelease": "PASS",
+    "managedDebug": "PASS; zero warnings/errors",
+    "managedRelease": "PASS; zero warnings/errors",
+    "evidenceBoundary": "Build completion observed in session; no raw build logs retained"
+  },
+  "storage": {
+    "definition": "Logical sizes of classified final artifact footprint; excludes ordinary rebuild churn and unmetered test-internal temporary writes. Cumulative readback writes are separate from resident storage.",
+    "disposedFiles": 164,
+    "disposedLogicalBytes": 213777532,
+    "unlinkedSharedAssetBytes": 67108864,
+    "exclusiveDisposableLogicalBytes": 146668668,
+    "cumulativeRawCaptureWrites": 2152688968,
+    "rawCaptureWriteCount": 17,
+    "retainedPermanentBytes": 7985201,
+    "createdAccountedFinalFootprintBytes": 221762733,
+    "remainingDisposableFiles": 0,
+    "remainingDisposableBytes": 0,
+    "scratchAbsent": true,
+    "permanentBudgetBytes": 10485760,
+    "rawSetBudgetBytes": 536870912,
+    "allocatedDiskSavings": "Not separately measured"
+  },
+  "postCleanupSmoke": {
+    "pass": true,
+    "frames": 500,
+    "record": "post-cleanup-smoke.json"
+  },
+  "deferred": [
+    {
+      "responsibility": "Stock Release headless SurfaceAnchor assertion",
+      "risk": "Acceptance gate unresolved; failed predicate unknown",
+      "next": "Bounded stock full-suite predicate/caller investigation without weakened expectations"
+    },
+    {
+      "responsibility": "Unclassified host/fence/cull timing outliers",
+      "risk": "No hitch-free or future sustained-floor proof",
+      "next": "Only open causal performance work with correlated frame evidence; M13 remains open"
+    }
+  ]
+}

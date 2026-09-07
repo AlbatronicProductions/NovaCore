@@ -230,9 +230,13 @@ ProductionTerrainMaterial SynthesizeProductionTerrainMaterial(
   // Do not evaluate a decorrelated noise field once both its material and normal
   // contributions are fully band-limited at this pixel.
   vec3 biplanarWeights=TerrainBiplanarWeights(geometricNormal);
-  float mesoRaw=(mesoAttenuation>0.0||normalMesoAttenuation>0.0)?TerrainBiplanarNoiseRaw(bodyMetres,96.0,dvec3(137,271,419),biplanarWeights):.5;
-  float microRaw=(microAttenuation>0.0||normalMicroAttenuation>0.0)?TerrainBiplanarNoiseRaw(bodyMetres,5.5,dvec3(613,89,347),biplanarWeights):.5;
-  float broadRaw=broadAttenuation>0.0?TerrainBiplanarNoiseRaw(bodyMetres,410.0,dvec3(43,719,181),biplanarWeights):.5;
+  // Zero land detail removes every noise contribution. Skip only the value
+  // evaluation; keep footprint and height-normal derivatives outside these
+  // branches so mixed coastal quads retain their contributing helper values.
+  float landDetail=result.detailWeight*smoothstep(.45,.55,landMask);
+  float mesoRaw=(landDetail>0.0&&(mesoAttenuation>0.0||normalMesoAttenuation>0.0))?TerrainBiplanarNoiseRaw(bodyMetres,96.0,dvec3(137,271,419),biplanarWeights):.5;
+  float microRaw=(landDetail>0.0&&(microAttenuation>0.0||normalMicroAttenuation>0.0))?TerrainBiplanarNoiseRaw(bodyMetres,5.5,dvec3(613,89,347),biplanarWeights):.5;
+  float broadRaw=(landDetail>0.0&&broadAttenuation>0.0)?TerrainBiplanarNoiseRaw(bodyMetres,410.0,dvec3(43,719,181),biplanarWeights):.5;
   float meso=mix(.5,mesoRaw,mesoAttenuation);
   float micro=mix(.5,microRaw,microAttenuation);
   float broad=mix(.5,broadRaw,broadAttenuation);
@@ -246,7 +250,6 @@ ProductionTerrainMaterial SynthesizeProductionTerrainMaterial(
   // synthesis contributes band-limited metre-scale variation and response;
   // it must not replace the macro geographic signal.
   vec3 detailedGeographic=max(geographicAlbedo*(1.0+variation),vec3(0));
-  float landDetail=result.detailWeight*smoothstep(.45,.55,landMask);
   result.albedo=mix(geographicAlbedo,detailedGeographic,landDetail);
   result.roughness=mix(.8,clamp(materialRoughness+(micro-.5)*.08,.04,1.0),landDetail);
   result.metallic=mix(0.0,materialMetallic,landDetail);

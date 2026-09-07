@@ -1,0 +1,3567 @@
+[
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline-stock.txt",
+    "bytes": 78390,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\candidate-original-environment.txt",
+    "bytes": 74440,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\candidate-stock-repeat.txt",
+    "bytes": 74441,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\.git",
+    "bytes": 44,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\.gitattributes",
+    "bytes": 582,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\.gitignore",
+    "bytes": 336,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\Directory.Build.props",
+    "bytes": 284,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\ENGINEERING_RULES.md",
+    "bytes": 13652,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\NovaCore.sln",
+    "bytes": 10974,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\README.md",
+    "bytes": 20625,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\.novacore\\cache\\m12-level9-test.json",
+    "bytes": 1630,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\.novacore\\cache\\m12-level9-test.nccube",
+    "bytes": 6537834,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\.novacore\\cache\\sources\\usgs-3dep\\USGS_13_n29w081_20221103.tif",
+    "bytes": 174745033,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\.novacore\\cache\\terrain\\v1\\.generation\\earth_local_v2.nccube.manifest.json",
+    "bytes": 964,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\.novacore\\cache\\terrain\\v1\\.generation\\earth_surface_v5.nccube.manifest.json",
+    "bytes": 42961,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\.novacore\\cache\\terrain\\v1\\sha256\\17\\17344f8a99931083853fe3351a621ddaf0b352702054febf53705c13a17da285.nccube",
+    "bytes": 7650603,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\.novacore\\cache\\terrain\\v1\\sha256\\28\\288f56e129717ceb83ad133490d424fd1d49836601d0a768bb5dab525cf4bf08.nccube",
+    "bytes": 61484224,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\.novacore\\cache\\terrain\\v1\\sha256\\38\\38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae.nccube",
+    "bytes": 61484224,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\.novacore\\cache\\terrain\\v1\\sha256\\5e\\5e92a0676bf8cd64f4c00b5e8d79f4b8186cd9a8a57b395138edbab760f1cb76.nccube",
+    "bytes": 61484224,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\.novacore\\cache\\terrain\\v1\\sha256\\60\\60ada8949bfd782dfaea6c04270186bda52654d7263fbc3dbda5eaa4fd2e578a.nccube",
+    "bytes": 7652567,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\.novacore\\cache\\terrain\\v1\\sha256\\6f\\6f10ebcd19def6a116d2804fc6fc7d67bbe655e129151beae35a91c0e317be8f.nccube",
+    "bytes": 210307596,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\.novacore\\cache\\terrain\\v1\\sha256\\b8\\b8ba51985b6869d41f4bb4b81eeb03c4dc61d9560ce4099768dc041a27b6fa98.nccube",
+    "bytes": 210307363,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\.novacore\\cache\\terrain\\v1\\sha256\\c4\\c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe.nccube",
+    "bytes": 210307596,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\earth\\PROVENANCE.md",
+    "bytes": 4887,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\earth\\runtime\\earth_elevation_8192x4096.r16",
+    "bytes": 67108864,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\earth\\runtime\\earth_florida_m12.nccube.manifest.json",
+    "bytes": 1879,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\earth\\runtime\\earth_surface_v5.nccube.manifest.json",
+    "bytes": 43187,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\earth\\source\\nasa-blue-marble-2004-12-21600x10800.png",
+    "bytes": 130592521,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\earth\\source\\nasa-blue-marble-clouds-2048.jpg",
+    "bytes": 829367,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-nested-scale-mesh\\nested-scale-00.ncsm1",
+    "bytes": 1272284,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-nested-scale-mesh\\nested-scale-01.ncsm1",
+    "bytes": 1721308,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-nested-scale-mesh\\nested-scale-02.ncsm1",
+    "bytes": 2726012,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-nested-scale-mesh\\nested-scale-03.ncsm1",
+    "bytes": 4978236,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-nested-scale-mesh\\nested-scale-04.ncsm1",
+    "bytes": 9523836,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-nested-scale-mesh\\nested-scale-05.ncsm1",
+    "bytes": 14069436,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-nested-scale-mesh\\nested-scale-06.ncsm1",
+    "bytes": 18615036,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-nested-scale-mesh\\nested-scale-07.ncsm1",
+    "bytes": 23160636,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-nested-scale-mesh\\nested-scale-08.ncsm1",
+    "bytes": 27706236,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-nested-scale-mesh\\nested-scale-09.ncsm1",
+    "bytes": 32251836,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-nested-scale-mesh\\nested-scale-10.ncsm1",
+    "bytes": 36797436,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-nested-scale-mesh\\nested-scale-11.ncsm1",
+    "bytes": 41343036,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-nested-scale-mesh\\nested-scale-12.ncsm1",
+    "bytes": 45888636,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-nested-scale-mesh\\nested-scale-13.ncsm1",
+    "bytes": 50434236,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-nested-scale-mesh\\nested-scale-14.ncsm1",
+    "bytes": 54979836,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-nested-scale-mesh\\nested-scale-15.ncsm1",
+    "bytes": 59525436,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-nested-scale-mesh\\nested-scale-16.ncsm1",
+    "bytes": 64071036,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-nested-scale-mesh\\nested-scale-17.ncsm1",
+    "bytes": 65515132,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-nested-scale-mesh\\nested-scale-mesh-manifest.json",
+    "bytes": 8968,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-nested-scale-mesh\\README.md",
+    "bytes": 562,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-production-topology\\production-00.nctop2",
+    "bytes": 169228,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-production-topology\\production-01.nctop2",
+    "bytes": 610052,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-production-topology\\production-02.nctop2",
+    "bytes": 1035268,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-production-topology\\production-03.nctop2",
+    "bytes": 1704548,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-production-topology\\production-04.nctop2",
+    "bytes": 2707892,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-production-topology\\production-05.nctop2",
+    "bytes": 4103492,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-production-topology\\production-06.nctop2",
+    "bytes": 5866500,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-production-topology\\production-07.nctop2",
+    "bytes": 7910132,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-production-topology\\production-08.nctop2",
+    "bytes": 10155668,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-production-topology\\production-09.nctop2",
+    "bytes": 12513636,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-production-topology\\production-10.nctop2",
+    "bytes": 14934692,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-production-topology\\production-11.nctop2",
+    "bytes": 17388484,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-production-topology\\production-12.nctop2",
+    "bytes": 19867124,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-production-topology\\production-13.nctop2",
+    "bytes": 22350388,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-production-topology\\production-14.nctop2",
+    "bytes": 24837108,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-production-topology\\production-15.nctop2",
+    "bytes": 27330548,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-production-topology\\production-16.nctop2",
+    "bytes": 29824372,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-production-topology\\production-17.nctop2",
+    "bytes": 32318196,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-production-topology\\production-manifest.json",
+    "bytes": 3678,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-production-topology\\README.md",
+    "bytes": 1162,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-topology\\intermediate-approach.nctop",
+    "bytes": 46972,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-topology\\manifest.json",
+    "bytes": 478,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-topology\\orbital.nctop",
+    "bytes": 11764,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-topology\\README.md",
+    "bytes": 987,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\planetary-topology\\surface-pupil.nctop",
+    "bytes": 187132,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\terrain\\manifests\\earth-florida-m12.json",
+    "bytes": 1439,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\assets\\terrain\\manifests\\earth-surface-v5.json",
+    "bytes": 1278,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\facility-support\\cpu-support.json",
+    "bytes": 3989,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\NovaCore.Native.dll",
+    "bytes": 347136,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\body_forward.frag.spv",
+    "bytes": 440,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\distant_planet.frag.spv",
+    "bytes": 35760,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\distant_planet.vert.spv",
+    "bytes": 8428,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\facility_visibility_test.comp.spv",
+    "bytes": 11420,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\fullscreen.vert.spv",
+    "bytes": 1308,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\orbit_previous.frag.spv",
+    "bytes": 456,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\orbit.frag.spv",
+    "bytes": 456,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\orbit.vert.spv",
+    "bytes": 1756,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\planetary_height_query.comp.spv",
+    "bytes": 156160,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\planetary_mesh_displace.comp.spv",
+    "bytes": 133704,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\planetary_mesh_normals.comp.spv",
+    "bytes": 6264,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\planetary_natural_terrain_families_query.comp.spv",
+    "bytes": 50884,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\planetary_natural_terrain_field_query.comp.spv",
+    "bytes": 27172,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\planetary_natural_terrain_global_prepare.comp.spv",
+    "bytes": 49540,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\planetary_natural_terrain_prepare.comp.spv",
+    "bytes": 55480,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\planetary_production_terrain.comp.spv",
+    "bytes": 368,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\planetary_production.frag.spv",
+    "bytes": 151940,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\planetary_ring_far.frag.spv",
+    "bytes": 2692,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\planetary_ring_near.frag.spv",
+    "bytes": 2692,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\planetary_ring.vert.spv",
+    "bytes": 7728,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\planetary_select.comp.spv",
+    "bytes": 91064,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\planetary_terrain_generate.comp.spv",
+    "bytes": 10292,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\planetary.frag.spv",
+    "bytes": 18548,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\planetary.vert.spv",
+    "bytes": 135600,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\production_nested_scale_mesh_cull.comp.spv",
+    "bytes": 30484,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\production_nested_scale_mesh_incoming_cull.comp.spv",
+    "bytes": 30484,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\production_spherical_billboard_compact.comp.spv",
+    "bytes": 3460,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\production_spherical_billboard_cull.comp.spv",
+    "bytes": 14624,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\production_spherical_billboard_incoming_compact.comp.spv",
+    "bytes": 2940,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\production_spherical_billboard_incoming_cull.comp.spv",
+    "bytes": 14624,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\production_spherical_billboard_incoming_prepare.comp.spv",
+    "bytes": 91824,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\production_spherical_billboard_incoming_reset.comp.spv",
+    "bytes": 1736,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\production_spherical_billboard_prepare.comp.spv",
+    "bytes": 94876,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\production_spherical_billboard_reset.comp.spv",
+    "bytes": 1736,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\production_spherical_billboard.tesc.spv",
+    "bytes": 12632,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\production_spherical_billboard.tese.spv",
+    "bytes": 22836,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\production_spherical_billboard.vert.spv",
+    "bytes": 8028,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\regional_physical_demand.comp.spv",
+    "bytes": 22344,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\regional_physical_incoming_demand.comp.spv",
+    "bytes": 22360,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\sas_target.frag.spv",
+    "bytes": 440,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\solar_label.frag.spv",
+    "bytes": 47588,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\solar_label.vert.spv",
+    "bytes": 11388,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\solar_marker.frag.spv",
+    "bytes": 448,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\solar_marker.vert.spv",
+    "bytes": 7776,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\solar_orbit.frag.spv",
+    "bytes": 1412,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\solar_orbit.vert.spv",
+    "bytes": 4008,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\solar_speed_hud.frag.spv",
+    "bytes": 49400,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\solar_speed_hud.vert.spv",
+    "bytes": 11036,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\space_background.frag.spv",
+    "bytes": 12108,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\spherical_billboard_proof_compact.comp.spv",
+    "bytes": 4424,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\spherical_billboard_proof_cull.comp.spv",
+    "bytes": 7408,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\spherical_billboard_proof_normals.comp.spv",
+    "bytes": 5368,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\spherical_billboard_proof_prepare.comp.spv",
+    "bytes": 4128,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\spherical_billboard_proof_reset.comp.spv",
+    "bytes": 1372,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\spherical_billboard_proof.frag.spv",
+    "bytes": 716,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\spherical_billboard_proof.vert.spv",
+    "bytes": 3056,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\stellar_glow.frag.spv",
+    "bytes": 1736,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\stellar_glow.vert.spv",
+    "bytes": 6392,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\stellar_sun.frag.spv",
+    "bytes": 3208,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\stellar_sun.vert.spv",
+    "bytes": 5168,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\surface_material_coordinates_test.comp.spv",
+    "bytes": 3064,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\tone_map.frag.spv",
+    "bytes": 2700,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\triangle.frag.spv",
+    "bytes": 2180,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\build\\native-ninja-release\\shaders\\triangle.vert.spv",
+    "bytes": 4828,
+    "hardLink": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.CSpiceShim\\CMakeLists.txt",
+    "bytes": 865,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.CSpiceShim\\NovaCoreCSpiceShim.cpp",
+    "bytes": 1602,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.CSpiceShim\\NovaCoreCSpiceShim.h",
+    "bytes": 886,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\AuthoredFacilityGeometry.h",
+    "bytes": 699,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\CMakeLists.txt",
+    "bytes": 25565,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\FacilityLightOcclusion.h",
+    "bytes": 4775,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\FacilityLightOcclusionTests.cpp",
+    "bytes": 5078,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\LocalTerrainPack.cpp",
+    "bytes": 8944,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\LocalTerrainPack.h",
+    "bytes": 2706,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\NovaCoreNative.cpp",
+    "bytes": 287005,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\NovaCoreNative.h",
+    "bytes": 18313,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\PlanetaryHeightQuery.cpp",
+    "bytes": 21831,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\PlanetaryHeightQuery.h",
+    "bytes": 261,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\PlanetaryMeshPreparation.cpp",
+    "bytes": 26950,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\PlanetaryMeshPreparation.h",
+    "bytes": 560,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\PlanetarySphericalBillboardGpuProof.cpp",
+    "bytes": 59606,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\PlanetarySphericalBillboardGpuProof.h",
+    "bytes": 654,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\PresentationGpuTestDevice.h",
+    "bytes": 9265,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\ProductionCubeSurface.cpp",
+    "bytes": 8191,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\ProductionCubeSurface.h",
+    "bytes": 2425,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\RegionalPhysicalPreparation.inl",
+    "bytes": 6653,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\RegionalPhysicalProbe.inl",
+    "bytes": 7661,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\RegionalPhysicalResidency.h",
+    "bytes": 6542,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\RegionalPhysicalResidency.inl",
+    "bytes": 13061,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\RegionalPhysicalResidencyTests.cpp",
+    "bytes": 2825,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\SurfaceMaterialCoordinatesTests.cpp",
+    "bytes": 2554,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\body_forward.frag",
+    "bytes": 111,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\distant_planet.frag",
+    "bytes": 2255,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\distant_planet.vert",
+    "bytes": 2694,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\earth_ocean_material.glsl",
+    "bytes": 555,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\facility_light_occlusion.glsl",
+    "bytes": 2888,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\facility_support.glsl",
+    "bytes": 2457,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\facility_visibility_test.comp",
+    "bytes": 767,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\fullscreen.vert",
+    "bytes": 190,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\orbit_previous.frag",
+    "bytes": 112,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\orbit.frag",
+    "bytes": 112,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\orbit.vert",
+    "bytes": 489,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\physical_surface.glsl",
+    "bytes": 22133,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\planet_material.glsl",
+    "bytes": 7450,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\planet_terrain.glsl",
+    "bytes": 1656,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\planetary_height_query.comp",
+    "bytes": 12755,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\planetary_mesh_displace.comp",
+    "bytes": 7160,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\planetary_mesh_normals.comp",
+    "bytes": 1640,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\planetary_natural_terrain_families_query.comp",
+    "bytes": 3509,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\planetary_natural_terrain_families.glsl",
+    "bytes": 14852,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\planetary_natural_terrain_field_query.comp",
+    "bytes": 3070,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\planetary_natural_terrain_field.glsl",
+    "bytes": 6731,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\planetary_natural_terrain_global_prepare.comp",
+    "bytes": 1541,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\planetary_natural_terrain_prepare.comp",
+    "bytes": 4989,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\planetary_natural_terrain_surface.glsl",
+    "bytes": 1500,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\planetary_physical_authority.glsl",
+    "bytes": 4298,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\planetary_production_terrain.comp",
+    "bytes": 318,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\planetary_production.frag",
+    "bytes": 18873,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\planetary_ring_far.frag",
+    "bytes": 887,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\planetary_ring_near.frag",
+    "bytes": 886,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\planetary_ring.vert",
+    "bytes": 2167,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\planetary_select.comp",
+    "bytes": 26342,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\planetary_terrain_generate.comp",
+    "bytes": 1905,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\planetary.frag",
+    "bytes": 1037,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\planetary.vert",
+    "bytes": 9258,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\production_cube_filter.glsl",
+    "bytes": 1719,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\production_cube_surface.glsl",
+    "bytes": 6378,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\production_earth_material.glsl",
+    "bytes": 823,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\production_nested_scale_mesh_cull.comp",
+    "bytes": 9818,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\production_nested_scale_mesh_incoming_cull.comp",
+    "bytes": 9365,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\production_spherical_billboard_compact.comp",
+    "bytes": 1060,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\production_spherical_billboard_cull.comp",
+    "bytes": 4427,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\production_spherical_billboard_incoming_compact.comp",
+    "bytes": 941,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\production_spherical_billboard_incoming_cull.comp",
+    "bytes": 4209,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\production_spherical_billboard_incoming_prepare.comp",
+    "bytes": 3624,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\production_spherical_billboard_incoming_reset.comp",
+    "bytes": 437,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\production_spherical_billboard_physical.glsl",
+    "bytes": 2898,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\production_spherical_billboard_prepare.comp",
+    "bytes": 4539,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\production_spherical_billboard_reset.comp",
+    "bytes": 437,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\production_spherical_billboard.tesc",
+    "bytes": 4259,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\production_spherical_billboard.tese",
+    "bytes": 6364,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\production_spherical_billboard.vert",
+    "bytes": 2458,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\production_terrain_material.glsl",
+    "bytes": 17306,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\regional_physical_demand.comp",
+    "bytes": 2003,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\regional_physical_incoming_demand.comp",
+    "bytes": 2003,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\regional_physical.glsl",
+    "bytes": 3119,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\sas_target.frag",
+    "bytes": 111,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\solar_label.frag",
+    "bytes": 566,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\solar_label.vert",
+    "bytes": 2486,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\solar_marker.frag",
+    "bytes": 118,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\solar_marker.vert",
+    "bytes": 1818,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\solar_orbit.frag",
+    "bytes": 409,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\solar_orbit.vert",
+    "bytes": 1229,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\solar_sans_sdf.glsl",
+    "bytes": 7863,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\solar_speed_hud.frag",
+    "bytes": 1069,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\solar_speed_hud.vert",
+    "bytes": 3111,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\space_background.frag",
+    "bytes": 2650,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\spherical_billboard_proof_compact.comp",
+    "bytes": 1576,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\spherical_billboard_proof_cull.comp",
+    "bytes": 2051,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\spherical_billboard_proof_normals.comp",
+    "bytes": 1666,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\spherical_billboard_proof_prepare.comp",
+    "bytes": 1423,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\spherical_billboard_proof_reset.comp",
+    "bytes": 369,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\spherical_billboard_proof.frag",
+    "bytes": 160,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\spherical_billboard_proof.vert",
+    "bytes": 835,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\stellar_glow.frag",
+    "bytes": 480,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\stellar_glow.vert",
+    "bytes": 1626,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\stellar_sun.frag",
+    "bytes": 814,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\stellar_sun.vert",
+    "bytes": 1226,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\surface_material_coordinates_test.comp",
+    "bytes": 814,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\surface_material_coordinates.glsl",
+    "bytes": 419,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\tone_map.frag",
+    "bytes": 713,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\triangle.frag",
+    "bytes": 758,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\native\\NovaCore.Native\\shaders\\triangle.vert",
+    "bytes": 1498,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\samples\\NovaCore.ReferenceFrameFixture\\NovaCore.ReferenceFrameFixture.csproj",
+    "bytes": 212,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\samples\\NovaCore.ReferenceFrameFixture\\Program.cs",
+    "bytes": 11546,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\samples\\NovaCore.Triangle\\CelestialAnalyticalScene.cs",
+    "bytes": 35657,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\samples\\NovaCore.Triangle\\DebugCameraInput.cs",
+    "bytes": 958,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\samples\\NovaCore.Triangle\\DynamicReferenceFrameFixtureScene.cs",
+    "bytes": 9798,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\samples\\NovaCore.Triangle\\EarthPlanetaryScene.cs",
+    "bytes": 25855,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\samples\\NovaCore.Triangle\\EarthRoutePolicy.cs",
+    "bytes": 232,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\samples\\NovaCore.Triangle\\EarthRouteValidation.cs",
+    "bytes": 4866,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\samples\\NovaCore.Triangle\\NovaCore.Triangle.csproj",
+    "bytes": 8396,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\samples\\NovaCore.Triangle\\ProductionBillboardDesktopTraversal.cs",
+    "bytes": 45860,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\samples\\NovaCore.Triangle\\Program.cs",
+    "bytes": 59253,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\samples\\NovaCore.Triangle\\ReferenceFrameDemoSceneFactory.cs",
+    "bytes": 1960,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\samples\\NovaCore.Triangle\\SampleOptions.cs",
+    "bytes": 5354,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\samples\\NovaCore.Triangle\\SampleSceneFactory.cs",
+    "bytes": 1097,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\samples\\NovaCore.Triangle\\SolarPlanetMaterials.cs",
+    "bytes": 2809,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\samples\\NovaCore.Triangle\\SolarSystemScene.cs",
+    "bytes": 111309,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\samples\\NovaCore.Triangle\\SolarWarpVulkanTraversal.cs",
+    "bytes": 14516,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\samples\\NovaCore.Triangle\\StaticReferenceFrameFixtureSceneFactory.cs",
+    "bytes": 7521,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\AssemblyInfo.cs",
+    "bytes": 473,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\NovaCore.Core.csproj",
+    "bytes": 37,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\Precision.cs",
+    "bytes": 3125,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\bin\\Release\\net10.0\\NovaCore.Core.deps.json",
+    "bytes": 433,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\bin\\Release\\net10.0\\NovaCore.Core.dll",
+    "bytes": 86528,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\bin\\Release\\net10.0\\NovaCore.Core.pdb",
+    "bytes": 31348,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\Camera\\CameraCommand.cs",
+    "bytes": 253,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\Camera\\CameraMath.cs",
+    "bytes": 300,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\Camera\\CameraMode.cs",
+    "bytes": 81,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\Camera\\CameraProjection.cs",
+    "bytes": 646,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\Camera\\CameraState.cs",
+    "bytes": 749,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\Camera\\FreeCameraController.cs",
+    "bytes": 1729,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\Camera\\SurfaceCameraState.cs",
+    "bytes": 6265,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\obj\\NovaCore.Core.csproj.nuget.dgspec.json",
+    "bytes": 21704,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\obj\\NovaCore.Core.csproj.nuget.g.props",
+    "bytes": 1135,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\obj\\NovaCore.Core.csproj.nuget.g.targets",
+    "bytes": 150,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\obj\\project.assets.json",
+    "bytes": 20969,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\obj\\project.nuget.cache",
+    "bytes": 252,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\obj\\Release\\net10.0\\.NETCoreApp,Version=v10.0.AssemblyAttributes.cs",
+    "bytes": 200,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\obj\\Release\\net10.0\\NovaCore.Core.AssemblyInfo.cs",
+    "bytes": 1015,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\obj\\Release\\net10.0\\NovaCore.Core.AssemblyInfoInputs.cache",
+    "bytes": 66,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\obj\\Release\\net10.0\\NovaCore.Core.assets.cache",
+    "bytes": 152,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\obj\\Release\\net10.0\\NovaCore.Core.csproj.CoreCompileInputs.cache",
+    "bytes": 66,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\obj\\Release\\net10.0\\NovaCore.Core.csproj.FileListAbsolute.txt",
+    "bytes": 1555,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\obj\\Release\\net10.0\\NovaCore.Core.dll",
+    "bytes": 86528,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\obj\\Release\\net10.0\\NovaCore.Core.GeneratedMSBuildEditorConfig.editorconfig",
+    "bytes": 867,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\obj\\Release\\net10.0\\NovaCore.Core.GlobalUsings.g.cs",
+    "bytes": 239,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\obj\\Release\\net10.0\\NovaCore.Core.pdb",
+    "bytes": 31348,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\obj\\Release\\net10.0\\NovaCore.Core.sourcelink.json",
+    "bytes": 196,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\obj\\Release\\net10.0\\ref\\NovaCore.Core.dll",
+    "bytes": 40960,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\obj\\Release\\net10.0\\refint\\NovaCore.Core.dll",
+    "bytes": 40960,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\ReferenceFrames\\CelestialFrameFactory.cs",
+    "bytes": 2374,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\ReferenceFrames\\EvaluatedReferenceFrame.cs",
+    "bytes": 315,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\ReferenceFrames\\FramePosition.cs",
+    "bytes": 127,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\ReferenceFrames\\FrameTransform.cs",
+    "bytes": 1256,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\ReferenceFrames\\FrameVelocity.cs",
+    "bytes": 127,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\ReferenceFrames\\OrbitalFrameGeometry.cs",
+    "bytes": 664,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\ReferenceFrames\\ReferenceFrameDefinition.cs",
+    "bytes": 310,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\ReferenceFrames\\ReferenceFrameGraph.cs",
+    "bytes": 7078,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\ReferenceFrames\\ReferenceFrameGraphBuilder.cs",
+    "bytes": 1405,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\ReferenceFrames\\ReferenceFrameKind.cs",
+    "bytes": 104,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\ReferenceFrames\\ReferenceFrameMath.cs",
+    "bytes": 3747,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\ReferenceFrames\\ReferenceFrameNode.cs",
+    "bytes": 347,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\ReferenceFrames\\ReferenceFramePathQuery.cs",
+    "bytes": 5410,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\ReferenceFrames\\ReferenceFrameResolver.cs",
+    "bytes": 2549,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\ReferenceFrames\\ReferenceFrameSnapshot.cs",
+    "bytes": 4003,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\ReferenceFrames\\ReferenceFrameTransformResolver.cs",
+    "bytes": 5451,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\ReferenceFrames\\ReferenceFrameTransformSet.cs",
+    "bytes": 2710,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\Surface\\AnchoredSurfaceObject.cs",
+    "bytes": 5739,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\Surface\\BodyFixedGeography.cs",
+    "bytes": 1701,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\Surface\\FacilitySupportRegion.cs",
+    "bytes": 4173,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Core\\Surface\\SurfaceAnchor.cs",
+    "bytes": 18324,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.EphemerisFormat\\EphemerisArtifact.cs",
+    "bytes": 14798,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.EphemerisFormat\\NcpeV2.cs",
+    "bytes": 15729,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.EphemerisFormat\\NcpeV2RuntimeHash.cs",
+    "bytes": 2790,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.EphemerisFormat\\NovaCore.EphemerisFormat.csproj",
+    "bytes": 37,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.EphemerisFormat\\bin\\Release\\net10.0\\NovaCore.EphemerisFormat.deps.json",
+    "bytes": 466,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.EphemerisFormat\\bin\\Release\\net10.0\\NovaCore.EphemerisFormat.dll",
+    "bytes": 77312,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.EphemerisFormat\\bin\\Release\\net10.0\\NovaCore.EphemerisFormat.pdb",
+    "bytes": 27872,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.EphemerisFormat\\obj\\NovaCore.EphemerisFormat.csproj.nuget.dgspec.json",
+    "bytes": 21814,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.EphemerisFormat\\obj\\NovaCore.EphemerisFormat.csproj.nuget.g.props",
+    "bytes": 1135,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.EphemerisFormat\\obj\\NovaCore.EphemerisFormat.csproj.nuget.g.targets",
+    "bytes": 150,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.EphemerisFormat\\obj\\project.assets.json",
+    "bytes": 21035,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.EphemerisFormat\\obj\\project.nuget.cache",
+    "bytes": 274,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.EphemerisFormat\\obj\\Release\\net10.0\\.NETCoreApp,Version=v10.0.AssemblyAttributes.cs",
+    "bytes": 200,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.EphemerisFormat\\obj\\Release\\net10.0\\NovaCore.EphemerisFormat.AssemblyInfo.cs",
+    "bytes": 1048,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.EphemerisFormat\\obj\\Release\\net10.0\\NovaCore.EphemerisFormat.AssemblyInfoInputs.cache",
+    "bytes": 66,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.EphemerisFormat\\obj\\Release\\net10.0\\NovaCore.EphemerisFormat.assets.cache",
+    "bytes": 152,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.EphemerisFormat\\obj\\Release\\net10.0\\NovaCore.EphemerisFormat.csproj.CoreCompileInputs.cache",
+    "bytes": 66,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.EphemerisFormat\\obj\\Release\\net10.0\\NovaCore.EphemerisFormat.csproj.FileListAbsolute.txt",
+    "bytes": 1819,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.EphemerisFormat\\obj\\Release\\net10.0\\NovaCore.EphemerisFormat.dll",
+    "bytes": 77312,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.EphemerisFormat\\obj\\Release\\net10.0\\NovaCore.EphemerisFormat.GeneratedMSBuildEditorConfig.editorconfig",
+    "bytes": 889,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.EphemerisFormat\\obj\\Release\\net10.0\\NovaCore.EphemerisFormat.GlobalUsings.g.cs",
+    "bytes": 239,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.EphemerisFormat\\obj\\Release\\net10.0\\NovaCore.EphemerisFormat.pdb",
+    "bytes": 27872,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.EphemerisFormat\\obj\\Release\\net10.0\\NovaCore.EphemerisFormat.sourcelink.json",
+    "bytes": 196,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.EphemerisFormat\\obj\\Release\\net10.0\\ref\\NovaCore.EphemerisFormat.dll",
+    "bytes": 29184,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.EphemerisFormat\\obj\\Release\\net10.0\\refint\\NovaCore.EphemerisFormat.dll",
+    "bytes": 29184,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\AssemblyInfo.cs",
+    "bytes": 101,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\CameraRelativeRenderPosition.cs",
+    "bytes": 2410,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\CameraRenderSnapshotBuilder.cs",
+    "bytes": 4427,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\EarthElevationDataset.cs",
+    "bytes": 4571,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\EncodedPosition.cs",
+    "bytes": 702,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\FloridaLaunchSite.cs",
+    "bytes": 8533,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\FocusTarget.cs",
+    "bytes": 6659,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\GpuCameraData.cs",
+    "bytes": 646,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\NovaCore.Graphics.csproj",
+    "bytes": 284,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\OrbitLineVertex.cs",
+    "bytes": 289,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\PlanetaryAnchoredMeshTier.cs",
+    "bytes": 16347,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\PlanetaryBiomeControl.cs",
+    "bytes": 10644,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\PlanetaryCanonicalPhysicalSampleIdentity.cs",
+    "bytes": 1137,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\PlanetaryGpuPhysicalHeightQuery.cs",
+    "bytes": 2802,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\PlanetaryLocalTerrain.cs",
+    "bytes": 28328,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\PlanetaryNaturalTerrainFamilies.cs",
+    "bytes": 22956,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\PlanetaryNaturalTerrainField.cs",
+    "bytes": 12168,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\PlanetaryNestedScaleMeshRuntimeAdapter.cs",
+    "bytes": 6150,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\PlanetaryNestedScaleMeshTopology.cs",
+    "bytes": 15832,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\PlanetaryNestedScaleMeshTopologyGenerator.cs",
+    "bytes": 26446,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\PlanetaryPatchTopology.cs",
+    "bytes": 1455,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\PlanetaryPhysicalSurface.cs",
+    "bytes": 45480,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\PlanetaryPhysicalTerrainAuthority.cs",
+    "bytes": 1372,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\PlanetaryPresentationSnapshot.cs",
+    "bytes": 4375,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\PlanetaryProductionSphericalBillboardMovingRuntime.cs",
+    "bytes": 15577,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\PlanetaryProductionSphericalBillboardRuntime.cs",
+    "bytes": 29753,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\PlanetaryProductionSphericalBillboardTopology.cs",
+    "bytes": 16353,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\PlanetaryProductionSphericalBillboardTopologyGenerator.cs",
+    "bytes": 27943,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\PlanetaryProductionSurface.cs",
+    "bytes": 33976,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\PlanetaryReferenceDisplacedMesh.cs",
+    "bytes": 6128,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\PlanetaryRepresentationHandoff.cs",
+    "bytes": 4244,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\PlanetaryScreenSpaceSubdivision.cs",
+    "bytes": 5377,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\PlanetarySphericalBillboardGpuProof.cs",
+    "bytes": 20921,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\PlanetarySphericalBillboardNaturalTerrainProof.cs",
+    "bytes": 18832,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\PlanetarySphericalBillboardTopology.cs",
+    "bytes": 12247,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\PlanetarySphericalBillboardTopologyGenerator.cs",
+    "bytes": 8856,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\PlanetarySurface.cs",
+    "bytes": 33821,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\PlanetarySurfaceCameraPresentation.cs",
+    "bytes": 3968,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\PlanetarySurfaceScatterPlacement.cs",
+    "bytes": 8398,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\PlanetaryTerrain.cs",
+    "bytes": 10394,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\PlanetaryTerrainMaterialSynthesis.cs",
+    "bytes": 14942,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\PlanetMaterialPresentation.cs",
+    "bytes": 7271,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\RenderFrameSubmission.cs",
+    "bytes": 5532,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\RenderObject.cs",
+    "bytes": 1280,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\RenderObjectId.cs",
+    "bytes": 278,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\RenderSubmission.cs",
+    "bytes": 733,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\RenderTransform.cs",
+    "bytes": 1396,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\ResolvedDirectionIndicator.cs",
+    "bytes": 468,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\ResolvedOrbitCurve.cs",
+    "bytes": 1058,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\ResolvedRenderObject.cs",
+    "bytes": 1119,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\ResolvedRenderSnapshot.cs",
+    "bytes": 4560,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\ResolvedRenderSubmissionBuilder.cs",
+    "bytes": 3698,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\SolarLightingPresentation.cs",
+    "bytes": 2035,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\SurfaceAnchorAcquisition.cs",
+    "bytes": 17598,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\SurfaceCameraAuthority.cs",
+    "bytes": 11198,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\TerrainAssetDistribution.cs",
+    "bytes": 21643,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\TerrainCacheCleanup.cs",
+    "bytes": 10290,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\bin\\Release\\net10.0\\NovaCore.Core.dll",
+    "bytes": 86528,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\bin\\Release\\net10.0\\NovaCore.Core.pdb",
+    "bytes": 31348,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\bin\\Release\\net10.0\\NovaCore.Graphics.deps.json",
+    "bytes": 1201,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\bin\\Release\\net10.0\\NovaCore.Graphics.dll",
+    "bytes": 634880,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\bin\\Release\\net10.0\\NovaCore.Graphics.pdb",
+    "bytes": 143632,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\bin\\Release\\net10.0\\NovaCore.Interop.dll",
+    "bytes": 23040,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\bin\\Release\\net10.0\\NovaCore.Interop.pdb",
+    "bytes": 14192,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\obj\\NovaCore.Graphics.csproj.nuget.dgspec.json",
+    "bytes": 65413,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\obj\\NovaCore.Graphics.csproj.nuget.g.props",
+    "bytes": 1135,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\obj\\NovaCore.Graphics.csproj.nuget.g.targets",
+    "bytes": 150,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\obj\\project.assets.json",
+    "bytes": 22636,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\obj\\project.nuget.cache",
+    "bytes": 260,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\obj\\Release\\net10.0\\.NETCoreApp,Version=v10.0.AssemblyAttributes.cs",
+    "bytes": 200,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\obj\\Release\\net10.0\\NovaCore.C9FCC830.Up2Date",
+    "bytes": 0,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\obj\\Release\\net10.0\\NovaCore.Graphics.AssemblyInfo.cs",
+    "bytes": 1027,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\obj\\Release\\net10.0\\NovaCore.Graphics.AssemblyInfoInputs.cache",
+    "bytes": 66,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\obj\\Release\\net10.0\\NovaCore.Graphics.assets.cache",
+    "bytes": 152,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\obj\\Release\\net10.0\\NovaCore.Graphics.csproj.AssemblyReference.cache",
+    "bytes": 1081,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\obj\\Release\\net10.0\\NovaCore.Graphics.csproj.CoreCompileInputs.cache",
+    "bytes": 66,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\obj\\Release\\net10.0\\NovaCore.Graphics.csproj.FileListAbsolute.txt",
+    "bytes": 2434,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\obj\\Release\\net10.0\\NovaCore.Graphics.dll",
+    "bytes": 634880,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\obj\\Release\\net10.0\\NovaCore.Graphics.GeneratedMSBuildEditorConfig.editorconfig",
+    "bytes": 875,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\obj\\Release\\net10.0\\NovaCore.Graphics.GlobalUsings.g.cs",
+    "bytes": 239,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\obj\\Release\\net10.0\\NovaCore.Graphics.pdb",
+    "bytes": 143632,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\obj\\Release\\net10.0\\NovaCore.Graphics.sourcelink.json",
+    "bytes": 196,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\obj\\Release\\net10.0\\ref\\NovaCore.Graphics.dll",
+    "bytes": 228352,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Graphics\\obj\\Release\\net10.0\\refint\\NovaCore.Graphics.dll",
+    "bytes": 228352,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Interop\\NativeRuntime.cs",
+    "bytes": 22660,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Interop\\NovaCore.Interop.csproj",
+    "bytes": 125,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Interop\\bin\\Release\\net10.0\\NovaCore.Interop.deps.json",
+    "bytes": 442,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Interop\\bin\\Release\\net10.0\\NovaCore.Interop.dll",
+    "bytes": 23040,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Interop\\bin\\Release\\net10.0\\NovaCore.Interop.pdb",
+    "bytes": 14192,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Interop\\obj\\NovaCore.Interop.csproj.nuget.dgspec.json",
+    "bytes": 21734,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Interop\\obj\\NovaCore.Interop.csproj.nuget.g.props",
+    "bytes": 1135,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Interop\\obj\\NovaCore.Interop.csproj.nuget.g.targets",
+    "bytes": 150,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Interop\\obj\\project.assets.json",
+    "bytes": 20987,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Interop\\obj\\project.nuget.cache",
+    "bytes": 258,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Interop\\obj\\Release\\net10.0\\.NETCoreApp,Version=v10.0.AssemblyAttributes.cs",
+    "bytes": 200,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Interop\\obj\\Release\\net10.0\\NovaCore.Interop.AssemblyInfo.cs",
+    "bytes": 1024,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Interop\\obj\\Release\\net10.0\\NovaCore.Interop.AssemblyInfoInputs.cache",
+    "bytes": 66,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Interop\\obj\\Release\\net10.0\\NovaCore.Interop.assets.cache",
+    "bytes": 152,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Interop\\obj\\Release\\net10.0\\NovaCore.Interop.csproj.CoreCompileInputs.cache",
+    "bytes": 66,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Interop\\obj\\Release\\net10.0\\NovaCore.Interop.csproj.FileListAbsolute.txt",
+    "bytes": 1627,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Interop\\obj\\Release\\net10.0\\NovaCore.Interop.dll",
+    "bytes": 23040,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Interop\\obj\\Release\\net10.0\\NovaCore.Interop.GeneratedMSBuildEditorConfig.editorconfig",
+    "bytes": 873,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Interop\\obj\\Release\\net10.0\\NovaCore.Interop.GlobalUsings.g.cs",
+    "bytes": 239,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Interop\\obj\\Release\\net10.0\\NovaCore.Interop.pdb",
+    "bytes": 14192,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Interop\\obj\\Release\\net10.0\\NovaCore.Interop.sourcelink.json",
+    "bytes": 196,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Interop\\obj\\Release\\net10.0\\ref\\NovaCore.Interop.dll",
+    "bytes": 22528,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Interop\\obj\\Release\\net10.0\\refint\\NovaCore.Interop.dll",
+    "bytes": 22528,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Platform\\Logging.cs",
+    "bytes": 1626,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Platform\\NovaCore.Platform.csproj",
+    "bytes": 37,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\NovaCore.Simulation.csproj",
+    "bytes": 378,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\bin\\Release\\net10.0\\NovaCore.Core.dll",
+    "bytes": 86528,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\bin\\Release\\net10.0\\NovaCore.Core.pdb",
+    "bytes": 31348,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\bin\\Release\\net10.0\\NovaCore.EphemerisFormat.dll",
+    "bytes": 77312,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\bin\\Release\\net10.0\\NovaCore.EphemerisFormat.pdb",
+    "bytes": 27872,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\bin\\Release\\net10.0\\NovaCore.Simulation.deps.json",
+    "bytes": 1239,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\bin\\Release\\net10.0\\NovaCore.Simulation.dll",
+    "bytes": 3787776,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\bin\\Release\\net10.0\\NovaCore.Simulation.pdb",
+    "bytes": 82300,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\AnalyticalKeplerSecularCorrectionEvaluator.cs",
+    "bytes": 8528,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\AnalyticalOrbitSampler.cs",
+    "bytes": 3690,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\CartesianState.cs",
+    "bytes": 338,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\CelestialBodyCatalog.cs",
+    "bytes": 8368,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\CelestialBodyDefinition.cs",
+    "bytes": 404,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\CelestialBodyId.cs",
+    "bytes": 641,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\CelestialBodyOrientation.cs",
+    "bytes": 12733,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\CelestialBodyState.cs",
+    "bytes": 486,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\CelestialContractHash.cs",
+    "bytes": 1714,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\CelestialEphemerisCatalogs.cs",
+    "bytes": 4948,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\CelestialEphemerisMetadata.cs",
+    "bytes": 1270,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\CelestialHierarchyNode.cs",
+    "bytes": 419,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\CelestialStateStore.cs",
+    "bytes": 7892,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\CelestialStateStoreMutationStatus.cs",
+    "bytes": 332,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\CelestialStateStoreStatus.cs",
+    "bytes": 694,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\CelestialStateView.cs",
+    "bytes": 904,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\CelestialSystemDefinition.cs",
+    "bytes": 27347,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\CelestialSystemDefinitionHash.cs",
+    "bytes": 8868,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\CelestialSystemEvaluation.cs",
+    "bytes": 560,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\CelestialSystemEvaluationHash.cs",
+    "bytes": 950,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\CelestialSystemEvaluator.cs",
+    "bytes": 10236,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\CelestialSystemFixtures.cs",
+    "bytes": 5808,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\CelestialSystemId.cs",
+    "bytes": 306,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\CelestialSystemTime.cs",
+    "bytes": 3764,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\CelestialSystemValidationResult.cs",
+    "bytes": 2080,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\CelestialTrajectoryEvaluator.cs",
+    "bytes": 1629,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\CelestialTrajectoryModel.cs",
+    "bytes": 343,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\LunarHighPrecisionOrientation.cs",
+    "bytes": 4952,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\NcpeCelestialSystemLoader.cs",
+    "bytes": 5112,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\SampledEphemeris.cs",
+    "bytes": 5011,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\SolAnalyticalDefinition.cs",
+    "bytes": 12819,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\TwoBodyPropagationResult.cs",
+    "bytes": 492,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\TwoBodyPropagationStatus.cs",
+    "bytes": 609,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\TwoBodyTrajectory.cs",
+    "bytes": 565,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\TwoBodyTrajectoryIdentity.cs",
+    "bytes": 2308,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\UniversalVariableTwoBodyPropagator.cs",
+    "bytes": 12061,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\Data\\moon_me_de440_1900_2100.nclo",
+    "bytes": 3506540,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\ReferenceFrames\\CelestialReferenceFrameEvaluationStatus.cs",
+    "bytes": 597,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\ReferenceFrames\\CelestialReferenceFrameEvaluator.cs",
+    "bytes": 3820,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\Transactions\\CelestialImpulseEvaluationStatus.cs",
+    "bytes": 500,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\Transactions\\CelestialImpulseEvaluator.cs",
+    "bytes": 3700,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\Transactions\\CelestialTrajectoryReplacementTransaction.cs",
+    "bytes": 1246,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\Transactions\\CelestialTrajectoryTransactionEvaluator.cs",
+    "bytes": 3860,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\Transactions\\CelestialTrajectoryTransactionStatus.cs",
+    "bytes": 819,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\Transactions\\ProcessedCelestialImpulseAudit.cs",
+    "bytes": 287,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Celestial\\Transactions\\ProcessedCelestialTrajectoryTransition.cs",
+    "bytes": 680,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Clock\\SimulationAdvanceResult.cs",
+    "bytes": 578,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Clock\\SimulationAdvanceStopReason.cs",
+    "bytes": 253,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Clock\\SimulationClock.cs",
+    "bytes": 8715,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Clock\\SimulationClockSettings.cs",
+    "bytes": 689,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Clock\\SimulationHostAdvanceResult.cs",
+    "bytes": 713,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\obj\\NovaCore.Simulation.csproj.nuget.dgspec.json",
+    "bytes": 65529,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\obj\\NovaCore.Simulation.csproj.nuget.g.props",
+    "bytes": 1135,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\obj\\NovaCore.Simulation.csproj.nuget.g.targets",
+    "bytes": 150,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\obj\\project.assets.json",
+    "bytes": 22752,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\obj\\project.nuget.cache",
+    "bytes": 264,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\obj\\Release\\net10.0\\.NETCoreApp,Version=v10.0.AssemblyAttributes.cs",
+    "bytes": 200,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\obj\\Release\\net10.0\\NovaCore.983E24CA.Up2Date",
+    "bytes": 0,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\obj\\Release\\net10.0\\NovaCore.Simulation.AssemblyInfo.cs",
+    "bytes": 1033,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\obj\\Release\\net10.0\\NovaCore.Simulation.AssemblyInfoInputs.cache",
+    "bytes": 66,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\obj\\Release\\net10.0\\NovaCore.Simulation.assets.cache",
+    "bytes": 152,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\obj\\Release\\net10.0\\NovaCore.Simulation.csproj.AssemblyReference.cache",
+    "bytes": 1258,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\obj\\Release\\net10.0\\NovaCore.Simulation.csproj.CoreCompileInputs.cache",
+    "bytes": 66,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\obj\\Release\\net10.0\\NovaCore.Simulation.csproj.FileListAbsolute.txt",
+    "bytes": 2512,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\obj\\Release\\net10.0\\NovaCore.Simulation.dll",
+    "bytes": 3787776,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\obj\\Release\\net10.0\\NovaCore.Simulation.GeneratedMSBuildEditorConfig.editorconfig",
+    "bytes": 879,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\obj\\Release\\net10.0\\NovaCore.Simulation.GlobalUsings.g.cs",
+    "bytes": 239,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\obj\\Release\\net10.0\\NovaCore.Simulation.pdb",
+    "bytes": 82300,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\obj\\Release\\net10.0\\NovaCore.Simulation.sourcelink.json",
+    "bytes": 196,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\obj\\Release\\net10.0\\ref\\NovaCore.Simulation.dll",
+    "bytes": 119296,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\obj\\Release\\net10.0\\refint\\NovaCore.Simulation.dll",
+    "bytes": 119296,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Properties\\AssemblyInfo.cs",
+    "bytes": 418,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Spacecraft\\SpacecraftAttitudeEvaluation.cs",
+    "bytes": 721,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Spacecraft\\SpacecraftAttitudeEvaluator.cs",
+    "bytes": 5063,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Spacecraft\\SpacecraftAttitudeModel.cs",
+    "bytes": 137,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Spacecraft\\SpacecraftAttitudeState.cs",
+    "bytes": 1537,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Spacecraft\\SpacecraftDefinition.cs",
+    "bytes": 350,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Spacecraft\\SpacecraftId.cs",
+    "bytes": 322,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Spacecraft\\SpacecraftStateStore.cs",
+    "bytes": 7503,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Spacecraft\\SpacecraftStateStoreStatus.cs",
+    "bytes": 514,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Spacecraft\\SpacecraftStateView.cs",
+    "bytes": 1224,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Spacecraft\\Guidance\\FlightReferenceEvaluator.cs",
+    "bytes": 3716,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Spacecraft\\Guidance\\SpacecraftSasController.cs",
+    "bytes": 6878,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Spacecraft\\ReferenceFrames\\SpacecraftReferenceFrameEvaluator.cs",
+    "bytes": 2993,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Spacecraft\\Rotation\\PrincipalMomentsOfInertia.cs",
+    "bytes": 560,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Spacecraft\\Rotation\\RigidBodyRotationModel.cs",
+    "bytes": 136,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Spacecraft\\Rotation\\SpacecraftRigidBodyRotationEvaluation.cs",
+    "bytes": 947,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Spacecraft\\Rotation\\SpacecraftRigidBodyRotationEvaluator.cs",
+    "bytes": 10192,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Spacecraft\\Rotation\\SpacecraftRigidBodyRotationState.cs",
+    "bytes": 2106,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Spacecraft\\Rotation\\SpacecraftTorqueCommand.cs",
+    "bytes": 443,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Spacecraft\\Rotation\\Transactions\\RigidBodyTorqueReplacementTransaction.cs",
+    "bytes": 1586,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Spacecraft\\Rotation\\Transactions\\RigidBodyTorqueTransactionEvaluator.cs",
+    "bytes": 5421,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Spacecraft\\Transactions\\SpacecraftAttitudeReplacementTransaction.cs",
+    "bytes": 1584,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Spacecraft\\Transactions\\SpacecraftAttitudeTransactionEvaluator.cs",
+    "bytes": 3102,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Time\\SimulationDuration.cs",
+    "bytes": 2184,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Time\\SimulationInstant.cs",
+    "bytes": 1916,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Time\\SimulationRate.cs",
+    "bytes": 2025,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Time\\SimulationSpeedPresets.cs",
+    "bytes": 1663,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Time\\SolarUtcTime.cs",
+    "bytes": 3352,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Timeline\\ScheduledSimulationEvent.cs",
+    "bytes": 464,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Timeline\\SimulationCancelResult.cs",
+    "bytes": 495,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Timeline\\SimulationEventHeader.cs",
+    "bytes": 1150,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Timeline\\SimulationEventHeaderComparer.cs",
+    "bytes": 1151,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Timeline\\SimulationEventHeap.cs",
+    "bytes": 4075,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Timeline\\SimulationEventId.cs",
+    "bytes": 517,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Timeline\\SimulationEventKind.cs",
+    "bytes": 349,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Timeline\\SimulationEventPayload.cs",
+    "bytes": 2287,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Timeline\\SimulationEventRequest.cs",
+    "bytes": 1794,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Timeline\\SimulationEventSequence.cs",
+    "bytes": 743,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Timeline\\SimulationScheduleResult.cs",
+    "bytes": 619,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Timeline\\SimulationTimeline.cs",
+    "bytes": 6678,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Timeline\\StateRevision.cs",
+    "bytes": 261,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Timeline\\TimelineRevision.cs",
+    "bytes": 334,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Transactions\\ProcessedSimulationEvent.cs",
+    "bytes": 642,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Transactions\\SimulationCanonicalGroupResult.cs",
+    "bytes": 721,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Transactions\\SimulationDebtServiceResult.cs",
+    "bytes": 814,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Transactions\\SimulationEventEvaluator.cs",
+    "bytes": 2674,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Transactions\\SimulationExecutionOrchestrator.cs",
+    "bytes": 8942,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Transactions\\SimulationExecutionResult.cs",
+    "bytes": 852,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Transactions\\SimulationState.cs",
+    "bytes": 2680,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Transactions\\SimulationStateView.cs",
+    "bytes": 424,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Transactions\\SimulationTransaction.cs",
+    "bytes": 861,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Transactions\\SimulationTransactionEngine.cs",
+    "bytes": 22902,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Transactions\\SimulationTransactionResult.cs",
+    "bytes": 663,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\src\\NovaCore.Simulation\\Transactions\\SimulationTransactionValidationResult.cs",
+    "bytes": 670,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\.gitkeep",
+    "bytes": 2,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\fixtures\\terrain\\local-payload2.nccube",
+    "bytes": 174624,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\fixtures\\terrain\\README.md",
+    "bytes": 4385,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\fixtures\\terrain\\tiny-global.content.json",
+    "bytes": 354,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\fixtures\\terrain\\tiny-global.json",
+    "bytes": 852,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\fixtures\\terrain\\tiny-global.nccube",
+    "bytes": 5032,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\fixtures\\terrain\\tiny-local.content.json",
+    "bytes": 1402,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\fixtures\\terrain\\tiny-local.json",
+    "bytes": 973,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\fixtures\\terrain\\tiny-local.nccube",
+    "bytes": 1117669,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Camera.Tests\\NovaCore.Camera.Tests.csproj",
+    "bytes": 383,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Camera.Tests\\Program.cs",
+    "bytes": 6623,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.EphemerisBuilder.Tests\\NovaCore.EphemerisBuilder.Tests.csproj",
+    "bytes": 321,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.EphemerisBuilder.Tests\\Program.cs",
+    "bytes": 5614,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\CacheLifecycleTests.cs",
+    "bytes": 8579,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\EarthRouteConvergenceTests.cs",
+    "bytes": 6183,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\FacilityLightingTests.cs",
+    "bytes": 3629,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\FacilitySupportTests.cs",
+    "bytes": 11342,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\FloridaFoundationSeatingTests.cs",
+    "bytes": 10429,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\GpuDisplacedMeshPreparationTests.cs",
+    "bytes": 32830,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\GpuPhysicalHeightPreparationTests.cs",
+    "bytes": 22068,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\GraphicsTestHarness.cs",
+    "bytes": 9940,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\LocalTerrainPayload2Tests.cs",
+    "bytes": 8685,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\NovaCore.Graphics.Tests.csproj",
+    "bytes": 2027,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\PlanetaryBillboardSurfaceWorkloadTests.cs",
+    "bytes": 13802,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\PlanetaryCanonicalPhysicalSurfaceAuthorityTests.cs",
+    "bytes": 8882,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\PlanetaryNaturalTerrainFamiliesTests.cs",
+    "bytes": 41122,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\PlanetaryNaturalTerrainFieldTests.cs",
+    "bytes": 36787,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\PlanetaryNaturalTerrainPreparationTests.cs",
+    "bytes": 14014,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\PlanetaryNaturalTerrainRendererIntegrationTests.cs",
+    "bytes": 14793,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\PlanetaryNestedScaleMeshTopologyTests.cs",
+    "bytes": 10520,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\PlanetaryPhysicalFrequencyContinuityTests.cs",
+    "bytes": 6580,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\PlanetaryPhysicalSurfaceModifierTests.cs",
+    "bytes": 23660,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\PlanetaryProductionMaterialNoiseTests.cs",
+    "bytes": 13932,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\PlanetaryProductionSphericalBillboardRuntimeTests.cs",
+    "bytes": 81337,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\PlanetaryProductionSphericalBillboardTopologyTests.cs",
+    "bytes": 12547,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\PlanetaryScreenSpaceSubdivisionTests.cs",
+    "bytes": 12593,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\PlanetarySphericalBillboardGpuRuntimeTests.cs",
+    "bytes": 6476,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\PlanetarySphericalBillboardNaturalTerrainTests.cs",
+    "bytes": 5171,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\PlanetarySphericalBillboardTopologyTests.cs",
+    "bytes": 7451,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\Program.cs",
+    "bytes": 565473,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\RegionalPhysicalResidencyTests.cs",
+    "bytes": 14195,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\TerrainRenderAuthorityTests.cs",
+    "bytes": 1835,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\VulkanValidationEnvironment.cs",
+    "bytes": 6957,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\WindowLifecycleTests.cs",
+    "bytes": 12299,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Core.dll",
+    "bytes": 86528,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Core.pdb",
+    "bytes": 31348,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.EphemerisFormat.dll",
+    "bytes": 77312,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.EphemerisFormat.pdb",
+    "bytes": 27872,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Graphics.dll",
+    "bytes": 634880,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Graphics.pdb",
+    "bytes": 143632,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.deps.json",
+    "bytes": 2552,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.dll",
+    "bytes": 1004032,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.exe",
+    "bytes": 162816,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.pdb",
+    "bytes": 211920,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.runtimeconfig.json",
+    "bytes": 342,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Interop.dll",
+    "bytes": 23040,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Interop.pdb",
+    "bytes": 14192,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Native.dll",
+    "bytes": 347136,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Simulation.dll",
+    "bytes": 3787776,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Simulation.pdb",
+    "bytes": 82300,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\obj\\NovaCore.Graphics.Tests.csproj.nuget.dgspec.json",
+    "bytes": 132067,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\obj\\NovaCore.Graphics.Tests.csproj.nuget.g.props",
+    "bytes": 1135,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\obj\\NovaCore.Graphics.Tests.csproj.nuget.g.targets",
+    "bytes": 150,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\obj\\project.assets.json",
+    "bytes": 25259,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\obj\\project.nuget.cache",
+    "bytes": 274,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\obj\\Release\\net10.0\\.NETCoreApp,Version=v10.0.AssemblyAttributes.cs",
+    "bytes": 200,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\obj\\Release\\net10.0\\apphost.exe",
+    "bytes": 162816,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\obj\\Release\\net10.0\\NovaCore.0668A6B1.Up2Date",
+    "bytes": 0,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\obj\\Release\\net10.0\\NovaCore.Graphics.Tests.AssemblyInfo.cs",
+    "bytes": 1045,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\obj\\Release\\net10.0\\NovaCore.Graphics.Tests.AssemblyInfoInputs.cache",
+    "bytes": 66,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\obj\\Release\\net10.0\\NovaCore.Graphics.Tests.assets.cache",
+    "bytes": 305,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\obj\\Release\\net10.0\\NovaCore.Graphics.Tests.csproj.AssemblyReference.cache",
+    "bytes": 4311,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\obj\\Release\\net10.0\\NovaCore.Graphics.Tests.csproj.CoreCompileInputs.cache",
+    "bytes": 66,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\obj\\Release\\net10.0\\NovaCore.Graphics.Tests.csproj.FileListAbsolute.txt",
+    "bytes": 3941,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\obj\\Release\\net10.0\\NovaCore.Graphics.Tests.dll",
+    "bytes": 1004032,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\obj\\Release\\net10.0\\NovaCore.Graphics.Tests.GeneratedMSBuildEditorConfig.editorconfig",
+    "bytes": 889,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\obj\\Release\\net10.0\\NovaCore.Graphics.Tests.genruntimeconfig.cache",
+    "bytes": 66,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\obj\\Release\\net10.0\\NovaCore.Graphics.Tests.GlobalUsings.g.cs",
+    "bytes": 239,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\obj\\Release\\net10.0\\NovaCore.Graphics.Tests.pdb",
+    "bytes": 211920,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\obj\\Release\\net10.0\\NovaCore.Graphics.Tests.sourcelink.json",
+    "bytes": 196,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\obj\\Release\\net10.0\\ref\\NovaCore.Graphics.Tests.dll",
+    "bytes": 77312,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Graphics.Tests\\obj\\Release\\net10.0\\refint\\NovaCore.Graphics.Tests.dll",
+    "bytes": 77312,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Launcher.Tests\\GlobalUsings.cs",
+    "bytes": 91,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Launcher.Tests\\NovaCore.Launcher.Tests.csproj",
+    "bytes": 298,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Launcher.Tests\\Program.cs",
+    "bytes": 15162,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.NaifEphemerisAdapter.Tests\\CompactSolarOracleValidation.cs",
+    "bytes": 65697,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.NaifEphemerisAdapter.Tests\\NovaCore.NaifEphemerisAdapter.Tests.csproj",
+    "bytes": 323,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.NaifEphemerisAdapter.Tests\\Program.cs",
+    "bytes": 19216,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Precision.Tests\\NovaCore.Precision.Tests.csproj",
+    "bytes": 400,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Precision.Tests\\Program.cs",
+    "bytes": 6241,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.ReferenceFrames.Tests\\NovaCore.ReferenceFrames.Tests.csproj",
+    "bytes": 202,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.ReferenceFrames.Tests\\Program.cs",
+    "bytes": 36922,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Simulation.Tests\\NovaCore.Simulation.Tests.csproj",
+    "bytes": 214,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tests\\NovaCore.Simulation.Tests\\Program.cs",
+    "bytes": 231106,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tools\\earth_data\\acquire_florida_m12.ps1",
+    "bytes": 1531,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tools\\earth_data\\build_cube_surface_pack.py",
+    "bytes": 19594,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tools\\earth_data\\build_elevation_oracle.py",
+    "bytes": 1295,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tools\\earth_data\\build_local_terrain_pack.py",
+    "bytes": 37280,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tools\\earth_data\\requirements.txt",
+    "bytes": 30,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tools\\earth_data\\test_local_terrain_fixture.py",
+    "bytes": 3534,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tools\\earth_data\\test_local_terrain_payload2.py",
+    "bytes": 3753,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tools\\NovaCore.AssetTool\\NovaCore.AssetTool.csproj",
+    "bytes": 220,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tools\\NovaCore.AssetTool\\Program.cs",
+    "bytes": 6412,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tools\\NovaCore.EphemerisBuilder\\NovaCore.EphemerisBuilder.csproj",
+    "bytes": 234,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tools\\NovaCore.EphemerisBuilder\\Program.cs",
+    "bytes": 3405,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tools\\NovaCore.Launcher\\AssetStatusService.cs",
+    "bytes": 2646,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tools\\NovaCore.Launcher\\GlobalUsings.cs",
+    "bytes": 252,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tools\\NovaCore.Launcher\\LaunchCommandBuilder.cs",
+    "bytes": 4335,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tools\\NovaCore.Launcher\\LaunchConfiguration.cs",
+    "bytes": 2548,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tools\\NovaCore.Launcher\\LauncherSettingsStore.cs",
+    "bytes": 3650,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tools\\NovaCore.Launcher\\MainForm.cs",
+    "bytes": 19465,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tools\\NovaCore.Launcher\\NovaCore.Launcher.csproj",
+    "bytes": 372,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tools\\NovaCore.Launcher\\NovaCoreProcessLauncher.cs",
+    "bytes": 3751,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tools\\NovaCore.Launcher\\Program.cs",
+    "bytes": 840,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tools\\NovaCore.Launcher\\RepositoryLocator.cs",
+    "bytes": 914,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tools\\NovaCore.Launcher\\ScenarioCatalog.cs",
+    "bytes": 7160,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tools\\NovaCore.NaifEphemerisAdapter\\AdaptiveHermiteSampler.cs",
+    "bytes": 10561,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tools\\NovaCore.NaifEphemerisAdapter\\AssemblyInfo.cs",
+    "bytes": 111,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tools\\NovaCore.NaifEphemerisAdapter\\CspiceExtraction.cs",
+    "bytes": 3360,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tools\\NovaCore.NaifEphemerisAdapter\\CspiceSession.cs",
+    "bytes": 5707,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tools\\NovaCore.NaifEphemerisAdapter\\LunarOrientationPackBuilder.cs",
+    "bytes": 5546,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tools\\NovaCore.NaifEphemerisAdapter\\NaifAdapterContracts.cs",
+    "bytes": 6477,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tools\\NovaCore.NaifEphemerisAdapter\\NovaCore.NaifEphemerisAdapter.csproj",
+    "bytes": 364,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tools\\NovaCore.NaifEphemerisAdapter\\Program.cs",
+    "bytes": 537,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\m13.4-surfaceanchor-classification\\baseline\\tools\\terrain_assets\\build_test_fixture.py",
+    "bytes": 2101,
+    "hardLink": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\layers\\explicit\\validation.json",
+    "bytes": 60443,
+    "hardLink": false
+  }
+]

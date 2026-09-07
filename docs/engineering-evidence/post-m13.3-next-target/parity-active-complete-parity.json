@@ -1,0 +1,76 @@
+{
+  "pose": "active",
+  "mixed": false,
+  "aa": false,
+  "frame": 175,
+  "before": {
+    "identity": [
+      "[native] Pixel parity: frame=175; width=3440; height=1440; generation=1; pupil=1; physicalGeneration=4; vertices=712106"
+    ],
+    "files": {
+      "pixels.bin": {
+        "bytes": 79257600,
+        "sha256": "0da704d4c1fb9bfa3172a529d14b003d3b9e0bb7ec8cdb530bda720136646f2f"
+      },
+      "prepared.bin": {
+        "bytes": 45574784,
+        "sha256": "8c0e511a011f6feb8f28ebf88b135afa5874ffdcf932789cb6606f921330c570"
+      },
+      "selected.bin": {
+        "bytes": 24720,
+        "sha256": "2b9fdc0a018fc81b2deae4e59a68bba34da667cff7f261a6fd4b8f3ad6a43ef5"
+      }
+    },
+    "selectedOrientedMultisetSha256": "911490e91a6a9dcf1800a14c99c2cf1bfdd5428a3454b980e5e3b974c6417b23"
+  },
+  "after": {
+    "identity": [
+      "[native] Pixel parity: frame=175; width=3440; height=1440; generation=1; pupil=1; physicalGeneration=4; vertices=712106"
+    ],
+    "files": {
+      "pixels.bin": {
+        "bytes": 79257600,
+        "sha256": "0da704d4c1fb9bfa3172a529d14b003d3b9e0bb7ec8cdb530bda720136646f2f"
+      },
+      "prepared.bin": {
+        "bytes": 45574784,
+        "sha256": "8c0e511a011f6feb8f28ebf88b135afa5874ffdcf932789cb6606f921330c570"
+      },
+      "selected.bin": {
+        "bytes": 24720,
+        "sha256": "6e17bd5e772ff85eba3e8b25c58c4d6792de94cfda073d8d400d045463b1a6b8"
+      }
+    },
+    "selectedOrientedMultisetSha256": "911490e91a6a9dcf1800a14c99c2cf1bfdd5428a3454b980e5e3b974c6417b23"
+  },
+  "attachments": {
+    "depth": {
+      "equal": true,
+      "differentPixels": 0,
+      "maxAbsolute": 0.0,
+      "finite": true,
+      "beforeSha256": "b01a9fe866fa46e584a96794c881a37b94b2017fb07f0faf20c4651e062c3ddd",
+      "afterSha256": "b01a9fe866fa46e584a96794c881a37b94b2017fb07f0faf20c4651e062c3ddd"
+    },
+    "hdr": {
+      "equal": true,
+      "differentPixels": 0,
+      "maxAbsolute": 0.0,
+      "finite": true,
+      "beforeSha256": "ead98d463be7a8397c81a37d864473a242b3c3b1b2e531218d89cae7f7988616",
+      "afterSha256": "ead98d463be7a8397c81a37d864473a242b3c3b1b2e531218d89cae7f7988616"
+    },
+    "image": {
+      "equal": true,
+      "differentPixels": 0,
+      "maxAbsolute": 0.0,
+      "finite": true,
+      "beforeSha256": "23c5a3a4523693918907c34659411676412d35f44a585a2fdead6930bd7c64ae",
+      "afterSha256": "23c5a3a4523693918907c34659411676412d35f44a585a2fdead6930bd7c64ae"
+    }
+  },
+  "preparedExact": true,
+  "selectedExact": false,
+  "selectedOrientedMultisetExact": true,
+  "pass": true
+}

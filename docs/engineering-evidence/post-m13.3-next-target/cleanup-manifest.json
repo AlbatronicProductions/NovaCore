@@ -1,0 +1,1188 @@
+{
+  "roots": [
+    "E:\\NovaCore\\build\\post-m13.3-next-target",
+    "E:\\NovaCore\\docs\\engineering-evidence\\post-m13.3-next-target\\__pycache__"
+  ],
+  "files": [
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\banked-planetary_production.frag.spv",
+      "relative": "build/post-m13.3-next-target/banked-planetary_production.frag.spv",
+      "bytes": 151940,
+      "sha256": "4b79673d14c90df52703a322c116415ec9e833cf2247731ca5ee1ab7b563df06",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\cheap.frag",
+      "relative": "build/post-m13.3-next-target/cheap.frag",
+      "bytes": 7964,
+      "sha256": "38f03865ab3ad3c44a4ed0b075f0dd1f102e1a027da72bcf9a081963443a01ee",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\Debug-NovaCoreRegionalPhysicalTests-failed.log",
+      "relative": "build/post-m13.3-next-target/Debug-NovaCoreRegionalPhysicalTests-failed.log",
+      "bytes": 40,
+      "sha256": "ba299fa1cc2cca954ccb0e634067628c41efd01c49067fc6320eb98d368af187",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\florida-smoke.err",
+      "relative": "build/post-m13.3-next-target/florida-smoke.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\florida-smoke.log",
+      "relative": "build/post-m13.3-next-target/florida-smoke.log",
+      "bytes": 265105,
+      "sha256": "7d5f970429ccb23dd07378fb6d06016cdc6a9be3f6b9c19e482e0ae44c097643",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\launcher-route-probe.json",
+      "relative": "build/post-m13.3-next-target/launcher-route-probe.json",
+      "bytes": 3327,
+      "sha256": "c75bc90d6369564ee86171499f7700099f9017f1ca73da1ff02fe52c7c6e66fb",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\pixels.bin",
+      "relative": "build/post-m13.3-next-target/pixels.bin",
+      "bytes": 79257600,
+      "sha256": "886609294be17fe088e8ce37d47dbcce7e437c4c507306a090446ee11b5ead49",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\planetary_production.frag",
+      "relative": "build/post-m13.3-next-target/planetary_production.frag",
+      "bytes": 18873,
+      "sha256": "c12377419c69f7060c80ea9a0ace21df7d5f9969b7aec336d36f02f85c6765c2",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\prepared.bin",
+      "relative": "build/post-m13.3-next-target/prepared.bin",
+      "bytes": 45574784,
+      "sha256": "8c0e511a011f6feb8f28ebf88b135afa5874ffdcf932789cb6606f921330c570",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\production_terrain_material.glsl",
+      "relative": "build/post-m13.3-next-target/production_terrain_material.glsl",
+      "bytes": 17362,
+      "sha256": "2dbfaa48917a39faa5b2c93f9e87f31ae216bf5bbedf116cff21563a7de7d3a5",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\Release-headless-confirmation-failed.log",
+      "relative": "build/post-m13.3-next-target/Release-headless-confirmation-failed.log",
+      "bytes": 74665,
+      "sha256": "833eb0fc1d28e2d49b311a27880491c2ebd6281b41c1efb2dc1cd85089d384d4",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\Release-headless-failed.log",
+      "relative": "build/post-m13.3-next-target/Release-headless-failed.log",
+      "bytes": 74667,
+      "sha256": "74a2ed6e4b40c99d91593a00e3121e5d0493333bddc52371a69ca4fb16ae4869",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\selected.bin",
+      "relative": "build/post-m13.3-next-target/selected.bin",
+      "bytes": 4547028,
+      "sha256": "085c81bdb86745b79b2ddaf58a44f021e1e9d05eb744f35a98efb5659a4b1482",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\smoke-result.json",
+      "relative": "build/post-m13.3-next-target/smoke-result.json",
+      "bytes": 171,
+      "sha256": "19cdbaa5e4db78eadb235ee4c112bc595b15ea80d3639c435292ad565dcc2844",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\probe.csproj",
+      "relative": "build/post-m13.3-next-target/anchor-test/probe.csproj",
+      "bytes": 4625,
+      "sha256": "f0a1655bc2a8676340d7265b845be503a4ae55fd6569cae86ef984d494711070",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\Program.cs",
+      "relative": "build/post-m13.3-next-target/anchor-test/Program.cs",
+      "bytes": 565651,
+      "sha256": "c7c295531bc7a4129679a2af3143142715380742f0ca94c04642b67b86f16cd1",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\bin\\Release\\net10.0\\NovaCore.Core.dll",
+      "relative": "build/post-m13.3-next-target/anchor-test/bin/Release/net10.0/NovaCore.Core.dll",
+      "bytes": 86528,
+      "sha256": "10532cdfbee6d1d557701ec105a58b316b131cee054799e51bbf3bdd540b61da",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\bin\\Release\\net10.0\\NovaCore.Core.pdb",
+      "relative": "build/post-m13.3-next-target/anchor-test/bin/Release/net10.0/NovaCore.Core.pdb",
+      "bytes": 31136,
+      "sha256": "4284fca5125b643035a8e66777c5c6bd6555d853d441df0e61a48024af0173a4",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\bin\\Release\\net10.0\\NovaCore.EphemerisFormat.dll",
+      "relative": "build/post-m13.3-next-target/anchor-test/bin/Release/net10.0/NovaCore.EphemerisFormat.dll",
+      "bytes": 77312,
+      "sha256": "6745948a4ad6a58c3095b0454210f9ba88872d4e062985a421363ae730bb7110",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\bin\\Release\\net10.0\\NovaCore.EphemerisFormat.pdb",
+      "relative": "build/post-m13.3-next-target/anchor-test/bin/Release/net10.0/NovaCore.EphemerisFormat.pdb",
+      "bytes": 27748,
+      "sha256": "e00751e3793535ed0919160c8ff6d3872529320c980a0fd057d6ac244d56ea18",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\bin\\Release\\net10.0\\NovaCore.Graphics.dll",
+      "relative": "build/post-m13.3-next-target/anchor-test/bin/Release/net10.0/NovaCore.Graphics.dll",
+      "bytes": 634880,
+      "sha256": "daca071a734af00a178ef525b5bda6abe95a4deb640ed8ee7567466433d5f7ce",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\bin\\Release\\net10.0\\NovaCore.Graphics.pdb",
+      "relative": "build/post-m13.3-next-target/anchor-test/bin/Release/net10.0/NovaCore.Graphics.pdb",
+      "bytes": 143352,
+      "sha256": "78c51da7b0d3f556b1824d283c232f7808db313b0ea51cbcfa95571c12faa49a",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.deps.json",
+      "relative": "build/post-m13.3-next-target/anchor-test/bin/Release/net10.0/NovaCore.Graphics.Tests.deps.json",
+      "bytes": 2352,
+      "sha256": "2be28fbf53224446daec9f8dbd748e1492fd91580fdfa8354a7ba84393b3bf59",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.dll",
+      "relative": "build/post-m13.3-next-target/anchor-test/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+      "bytes": 1004544,
+      "sha256": "0e62b31eb89622e5e1b780ad796a50cc0b8b557df71c1dbe23b475827cd69d6b",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.exe",
+      "relative": "build/post-m13.3-next-target/anchor-test/bin/Release/net10.0/NovaCore.Graphics.Tests.exe",
+      "bytes": 162816,
+      "sha256": "7b2fda8a25796870106b6e31c47a3ec7dbfddead81df1f44eef6f7924eb63c24",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.pdb",
+      "relative": "build/post-m13.3-next-target/anchor-test/bin/Release/net10.0/NovaCore.Graphics.Tests.pdb",
+      "bytes": 332428,
+      "sha256": "127df96329c560f5b5c685e3c36d5b7786f9b408ac6e404ab309d3525c0a9588",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.runtimeconfig.json",
+      "relative": "build/post-m13.3-next-target/anchor-test/bin/Release/net10.0/NovaCore.Graphics.Tests.runtimeconfig.json",
+      "bytes": 342,
+      "sha256": "c230a317a54dd960bcbeb5f347f52e18dc665a26f7efda2159fced9a5ac7e097",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\bin\\Release\\net10.0\\NovaCore.Interop.dll",
+      "relative": "build/post-m13.3-next-target/anchor-test/bin/Release/net10.0/NovaCore.Interop.dll",
+      "bytes": 23040,
+      "sha256": "f4b86a09a93334398903631d6280539f16de566f7bd16c9bfb3063fd099633b4",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\bin\\Release\\net10.0\\NovaCore.Interop.pdb",
+      "relative": "build/post-m13.3-next-target/anchor-test/bin/Release/net10.0/NovaCore.Interop.pdb",
+      "bytes": 14060,
+      "sha256": "d9753fa45c7663534ae7f40295f514bb856f2f0f106dbe683a11002ca7e4bf04",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\bin\\Release\\net10.0\\NovaCore.Native.dll",
+      "relative": "build/post-m13.3-next-target/anchor-test/bin/Release/net10.0/NovaCore.Native.dll",
+      "bytes": 347136,
+      "sha256": "74859dbb7854e92d3069e4081276eef98980945c2c9c4d4adf3a926b18cbaeca",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\bin\\Release\\net10.0\\NovaCore.Simulation.dll",
+      "relative": "build/post-m13.3-next-target/anchor-test/bin/Release/net10.0/NovaCore.Simulation.dll",
+      "bytes": 3787776,
+      "sha256": "2ce473d9ee2009377cc99d20241dd609d1df98b507a959a569cc7d24afed152d",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\bin\\Release\\net10.0\\NovaCore.Simulation.pdb",
+      "relative": "build/post-m13.3-next-target/anchor-test/bin/Release/net10.0/NovaCore.Simulation.pdb",
+      "bytes": 81876,
+      "sha256": "1c3564260b354e82caf430b16eae0d16a7e396c35c82b9a1a2729161a6572d3c",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\obj\\probe.csproj.nuget.dgspec.json",
+      "relative": "build/post-m13.3-next-target/anchor-test/obj/probe.csproj.nuget.dgspec.json",
+      "bytes": 21537,
+      "sha256": "78798b8e039444c0d9006f83ac249be08ddbe0c5feed23e955fe98b732e6ff98",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\obj\\probe.csproj.nuget.g.props",
+      "relative": "build/post-m13.3-next-target/anchor-test/obj/probe.csproj.nuget.g.props",
+      "bytes": 1135,
+      "sha256": "1e51d59a0a61bbe5b26b92eb01307b6f7909cd9d6f3577f96af5da8201057d69",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\obj\\probe.csproj.nuget.g.targets",
+      "relative": "build/post-m13.3-next-target/anchor-test/obj/probe.csproj.nuget.g.targets",
+      "bytes": 150,
+      "sha256": "971cc9b535384849b5c661d776cd7a80833a416265e32e8968e06c367368b8b5",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\obj\\project.assets.json",
+      "relative": "build/post-m13.3-next-target/anchor-test/obj/project.assets.json",
+      "bytes": 20876,
+      "sha256": "e93a4f27d10a681bc644fe61a36aafa9cce9d12fad8d50b42eb8e2eeb639e1f4",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\obj\\project.nuget.cache",
+      "relative": "build/post-m13.3-next-target/anchor-test/obj/project.nuget.cache",
+      "bytes": 215,
+      "sha256": "f689a1da3b86479e0b088978b51930672c561d6ff24f3f2ed9386cadbfa309f8",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\obj\\Release\\net10.0\\.NETCoreApp,Version=v10.0.AssemblyAttributes.cs",
+      "relative": "build/post-m13.3-next-target/anchor-test/obj/Release/net10.0/.NETCoreApp,Version=v10.0.AssemblyAttributes.cs",
+      "bytes": 200,
+      "sha256": "93d67476196ebfc80d1d7d8844b91146cfd678d105f5ce635eb900ca40610c9b",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\obj\\Release\\net10.0\\apphost.exe",
+      "relative": "build/post-m13.3-next-target/anchor-test/obj/Release/net10.0/apphost.exe",
+      "bytes": 162816,
+      "sha256": "7b2fda8a25796870106b6e31c47a3ec7dbfddead81df1f44eef6f7924eb63c24",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\obj\\Release\\net10.0\\NovaCore.Graphics.Tests.dll",
+      "relative": "build/post-m13.3-next-target/anchor-test/obj/Release/net10.0/NovaCore.Graphics.Tests.dll",
+      "bytes": 1004544,
+      "sha256": "0e62b31eb89622e5e1b780ad796a50cc0b8b557df71c1dbe23b475827cd69d6b",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\obj\\Release\\net10.0\\NovaCore.Graphics.Tests.pdb",
+      "relative": "build/post-m13.3-next-target/anchor-test/obj/Release/net10.0/NovaCore.Graphics.Tests.pdb",
+      "bytes": 332428,
+      "sha256": "127df96329c560f5b5c685e3c36d5b7786f9b408ac6e404ab309d3525c0a9588",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\obj\\Release\\net10.0\\probe.AssemblyInfo.cs",
+      "relative": "build/post-m13.3-next-target/anchor-test/obj/Release/net10.0/probe.AssemblyInfo.cs",
+      "bytes": 1045,
+      "sha256": "9bb71953e4dbf53f342cc801c127e7953efd70c3837702275948b619d042c3e1",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\obj\\Release\\net10.0\\probe.AssemblyInfoInputs.cache",
+      "relative": "build/post-m13.3-next-target/anchor-test/obj/Release/net10.0/probe.AssemblyInfoInputs.cache",
+      "bytes": 66,
+      "sha256": "7eb81ab72959e27ed2b6a2bad9dbe5ff9f4e46b6f28a3e8bf37ddc33a5b85950",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\obj\\Release\\net10.0\\probe.assets.cache",
+      "relative": "build/post-m13.3-next-target/anchor-test/obj/Release/net10.0/probe.assets.cache",
+      "bytes": 152,
+      "sha256": "b83cecbdcbe733ab2fa468693aa31ed9cb9b679da7d5f6ac4ab0c651673c19a5",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\obj\\Release\\net10.0\\probe.csproj.AssemblyReference.cache",
+      "relative": "build/post-m13.3-next-target/anchor-test/obj/Release/net10.0/probe.csproj.AssemblyReference.cache",
+      "bytes": 4015,
+      "sha256": "c77e4beee46d3758bbec6d48b6e093254f278f39ac3ef08019dfa0fd47951ee9",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\obj\\Release\\net10.0\\probe.csproj.CoreCompileInputs.cache",
+      "relative": "build/post-m13.3-next-target/anchor-test/obj/Release/net10.0/probe.csproj.CoreCompileInputs.cache",
+      "bytes": 66,
+      "sha256": "36d9d5502a3205a291c0ab84bff7662cc1222c5ebdffd8d5f7ca6222113d0149",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\obj\\Release\\net10.0\\probe.csproj.FileListAbsolute.txt",
+      "relative": "build/post-m13.3-next-target/anchor-test/obj/Release/net10.0/probe.csproj.FileListAbsolute.txt",
+      "bytes": 2757,
+      "sha256": "9a26c33d22ad89af3d1173b699e5d985081ee9d56869fe447bdccd247f39b992",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\obj\\Release\\net10.0\\probe.csproj.Up2Date",
+      "relative": "build/post-m13.3-next-target/anchor-test/obj/Release/net10.0/probe.csproj.Up2Date",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\obj\\Release\\net10.0\\probe.GeneratedMSBuildEditorConfig.editorconfig",
+      "relative": "build/post-m13.3-next-target/anchor-test/obj/Release/net10.0/probe.GeneratedMSBuildEditorConfig.editorconfig",
+      "bytes": 832,
+      "sha256": "eaf864947eb64cdc26e41bcdd60fd0153b75837c8a7731306eec07980b0c1654",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\obj\\Release\\net10.0\\probe.genruntimeconfig.cache",
+      "relative": "build/post-m13.3-next-target/anchor-test/obj/Release/net10.0/probe.genruntimeconfig.cache",
+      "bytes": 66,
+      "sha256": "7d00f0d70ee79eb870ace7f634a1efd2898fed316d3e4e8997cad9f86a3ee93c",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\obj\\Release\\net10.0\\probe.GlobalUsings.g.cs",
+      "relative": "build/post-m13.3-next-target/anchor-test/obj/Release/net10.0/probe.GlobalUsings.g.cs",
+      "bytes": 239,
+      "sha256": "a3c6048bb4d922b1799a9977f84362a3787b68810cac67aa86ac3aa23295f227",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\obj\\Release\\net10.0\\probe.sourcelink.json",
+      "relative": "build/post-m13.3-next-target/anchor-test/obj/Release/net10.0/probe.sourcelink.json",
+      "bytes": 143,
+      "sha256": "c6658240c093c707a2250965dda72160d394653f851dd636d1cc06971014f291",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\obj\\Release\\net10.0\\ref\\NovaCore.Graphics.Tests.dll",
+      "relative": "build/post-m13.3-next-target/anchor-test/obj/Release/net10.0/ref/NovaCore.Graphics.Tests.dll",
+      "bytes": 77312,
+      "sha256": "a47aa48804af7dd5e934b8e5e03fc7147f572cd295b8075f2d9f64fce79d654b",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\obj\\Release\\net10.0\\refint\\NovaCore.Graphics.Tests.dll",
+      "relative": "build/post-m13.3-next-target/anchor-test/obj/Release/net10.0/refint/NovaCore.Graphics.Tests.dll",
+      "bytes": 77312,
+      "sha256": "a47aa48804af7dd5e934b8e5e03fc7147f572cd295b8075f2d9f64fce79d654b",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\baseline-source\\planetary_production.frag",
+      "relative": "build/post-m13.3-next-target/baseline-source/planetary_production.frag",
+      "bytes": 18545,
+      "sha256": "216c796f072666df1342276a1972e83ff6c0a67553e845d208b2891e027ea156",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\baseline-source\\production_terrain_material.glsl",
+      "relative": "build/post-m13.3-next-target/baseline-source/production_terrain_material.glsl",
+      "bytes": 17030,
+      "sha256": "2cbe392b55f1444d1c44d277e58ef557efc61285a3e232c210e985ae8561521c",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\baseline-source\\regenerated.spv",
+      "relative": "build/post-m13.3-next-target/baseline-source/regenerated.spv",
+      "bytes": 151940,
+      "sha256": "4b79673d14c90df52703a322c116415ec9e833cf2247731ca5ee1ab7b563df06",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\NovaCore.Core.deps.json",
+      "relative": "build/post-m13.3-next-target/host/NovaCore.Core.deps.json",
+      "bytes": 433,
+      "sha256": "4e4f8878a47e2b305b315915d7d843dfd682c1ab005ad51148f681b1a2f01f47",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\NovaCore.Core.dll",
+      "relative": "build/post-m13.3-next-target/host/NovaCore.Core.dll",
+      "bytes": 86528,
+      "sha256": "10532cdfbee6d1d557701ec105a58b316b131cee054799e51bbf3bdd540b61da",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\NovaCore.Core.pdb",
+      "relative": "build/post-m13.3-next-target/host/NovaCore.Core.pdb",
+      "bytes": 31136,
+      "sha256": "4284fca5125b643035a8e66777c5c6bd6555d853d441df0e61a48024af0173a4",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\NovaCore.EphemerisFormat.deps.json",
+      "relative": "build/post-m13.3-next-target/host/NovaCore.EphemerisFormat.deps.json",
+      "bytes": 466,
+      "sha256": "ebfdb677b16c0681e96ce4e85fdd0a20e73b2bbea04e0e1bb5bf40ff0b4a4d8a",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\NovaCore.EphemerisFormat.dll",
+      "relative": "build/post-m13.3-next-target/host/NovaCore.EphemerisFormat.dll",
+      "bytes": 77312,
+      "sha256": "6745948a4ad6a58c3095b0454210f9ba88872d4e062985a421363ae730bb7110",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\NovaCore.EphemerisFormat.pdb",
+      "relative": "build/post-m13.3-next-target/host/NovaCore.EphemerisFormat.pdb",
+      "bytes": 27748,
+      "sha256": "e00751e3793535ed0919160c8ff6d3872529320c980a0fd057d6ac244d56ea18",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\NovaCore.Graphics.deps.json",
+      "relative": "build/post-m13.3-next-target/host/NovaCore.Graphics.deps.json",
+      "bytes": 1201,
+      "sha256": "c37e1103757a04e513f2236d5bcc7c1c6d1f8bd507f38ae76c9a483e6ff7e636",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\NovaCore.Graphics.dll",
+      "relative": "build/post-m13.3-next-target/host/NovaCore.Graphics.dll",
+      "bytes": 634880,
+      "sha256": "daca071a734af00a178ef525b5bda6abe95a4deb640ed8ee7567466433d5f7ce",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\NovaCore.Graphics.pdb",
+      "relative": "build/post-m13.3-next-target/host/NovaCore.Graphics.pdb",
+      "bytes": 143352,
+      "sha256": "78c51da7b0d3f556b1824d283c232f7808db313b0ea51cbcfa95571c12faa49a",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\NovaCore.Interop.deps.json",
+      "relative": "build/post-m13.3-next-target/host/NovaCore.Interop.deps.json",
+      "bytes": 442,
+      "sha256": "ac64497a11539d4c4db7043fe9c7026cfcc23dc81ea51fcd449023ac68f12120",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\NovaCore.Interop.dll",
+      "relative": "build/post-m13.3-next-target/host/NovaCore.Interop.dll",
+      "bytes": 23040,
+      "sha256": "f4b86a09a93334398903631d6280539f16de566f7bd16c9bfb3063fd099633b4",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\NovaCore.Interop.pdb",
+      "relative": "build/post-m13.3-next-target/host/NovaCore.Interop.pdb",
+      "bytes": 14060,
+      "sha256": "d9753fa45c7663534ae7f40295f514bb856f2f0f106dbe683a11002ca7e4bf04",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\NovaCore.Native.dll",
+      "relative": "build/post-m13.3-next-target/host/NovaCore.Native.dll",
+      "bytes": 355328,
+      "sha256": "0611f7bd510e2b7da2eccd3045e74762ad4086dd2fb498a3ebefbb29ac26aca5",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\NovaCore.Platform.deps.json",
+      "relative": "build/post-m13.3-next-target/host/NovaCore.Platform.deps.json",
+      "bytes": 445,
+      "sha256": "21fc3b5ee699165c251450b5ee2f7e292ff76eed139d7cc0469ae4c3939013a7",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\NovaCore.Platform.dll",
+      "relative": "build/post-m13.3-next-target/host/NovaCore.Platform.dll",
+      "bytes": 6656,
+      "sha256": "9fe9d7824e73513450c5f84b9de330945b0ebf234e938923a7da428fe24108e9",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\NovaCore.Platform.pdb",
+      "relative": "build/post-m13.3-next-target/host/NovaCore.Platform.pdb",
+      "bytes": 12052,
+      "sha256": "2b05e471004cd8fef79f4c0f6089ae804e7aa15ecf93a1b38322a2db7ccbb470",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\NovaCore.Simulation.deps.json",
+      "relative": "build/post-m13.3-next-target/host/NovaCore.Simulation.deps.json",
+      "bytes": 1239,
+      "sha256": "a2b5f1389410593af29abe02cff9653a5baab91233bc73d0840edc9647288cd9",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\NovaCore.Simulation.dll",
+      "relative": "build/post-m13.3-next-target/host/NovaCore.Simulation.dll",
+      "bytes": 3787776,
+      "sha256": "2ce473d9ee2009377cc99d20241dd609d1df98b507a959a569cc7d24afed152d",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\NovaCore.Simulation.pdb",
+      "relative": "build/post-m13.3-next-target/host/NovaCore.Simulation.pdb",
+      "bytes": 81876,
+      "sha256": "1c3564260b354e82caf430b16eae0d16a7e396c35c82b9a1a2729161a6572d3c",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\NovaCore.Triangle.deps.json",
+      "relative": "build/post-m13.3-next-target/host/NovaCore.Triangle.deps.json",
+      "bytes": 2903,
+      "sha256": "1fe99f6524f2ecb5fc38ff699cc14da53f55b905631d575bcfee772ed51c4eb6",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\NovaCore.Triangle.dll",
+      "relative": "build/post-m13.3-next-target/host/NovaCore.Triangle.dll",
+      "bytes": 242176,
+      "sha256": "c60c0af1c74305c1e44774d0a2f0a78cf202da50762f4ef64611423595511b96",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\NovaCore.Triangle.exe",
+      "relative": "build/post-m13.3-next-target/host/NovaCore.Triangle.exe",
+      "bytes": 162304,
+      "sha256": "c4c87237d11d9e935001a774419db7c65504ca5becda4132fa73b91479741b94",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\NovaCore.Triangle.pdb",
+      "relative": "build/post-m13.3-next-target/host/NovaCore.Triangle.pdb",
+      "bytes": 61048,
+      "sha256": "25d0a8c3aef98d28ffa523b28d16aca5da2974ed64bd530a593c78b4a2fb2e35",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\NovaCore.Triangle.runtimeconfig.json",
+      "relative": "build/post-m13.3-next-target/host/NovaCore.Triangle.runtimeconfig.json",
+      "bytes": 342,
+      "sha256": "c230a317a54dd960bcbeb5f347f52e18dc665a26f7efda2159fced9a5ac7e097",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\earth-data\\earth_elevation_8192x4096.r16",
+      "relative": "build/post-m13.3-next-target/host/earth-data/earth_elevation_8192x4096.r16",
+      "bytes": 67108864,
+      "sha256": "4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317",
+      "hardLink": true
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\body_forward.frag.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/body_forward.frag.spv",
+      "bytes": 440,
+      "sha256": "fa706803f042fb5a9f7a3c9965a3e2de3e8838e075d67876b78df9bdc132ce0e",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\distant_planet.frag.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/distant_planet.frag.spv",
+      "bytes": 35760,
+      "sha256": "04137afb1c632dfb7074480377d9f93136ab3127d382baeef07d52b09409eba8",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\distant_planet.vert.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/distant_planet.vert.spv",
+      "bytes": 8428,
+      "sha256": "cf28fe0a7c0797bd7d72076437ba78c4e0d97bb1a0ae3c065baf3bfc5db62cb8",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\fullscreen.vert.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/fullscreen.vert.spv",
+      "bytes": 1308,
+      "sha256": "a18f9b5e0b4a4e7a077b1017bad7b1c5c40313b3f70113f1e0771cd202433130",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\orbit_previous.frag.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/orbit_previous.frag.spv",
+      "bytes": 456,
+      "sha256": "c4935060e07e01742d59d8a5834241e2963dcc80ed8e35baeac5b08288761e61",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\orbit.frag.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/orbit.frag.spv",
+      "bytes": 456,
+      "sha256": "b06f50708727144e8d0f08d35cd2e64d8b1cef501ed20b10fea4a34196026267",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\orbit.vert.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/orbit.vert.spv",
+      "bytes": 1756,
+      "sha256": "b4b9dd635f32156654e30d843c29eb864feb09751d7b3027cf99a5d741b6a45b",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\planetary_natural_terrain_global_prepare.comp.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/planetary_natural_terrain_global_prepare.comp.spv",
+      "bytes": 49540,
+      "sha256": "5a5450321873f5ff8bed7dd9e4f06c342625724d629da2232521fbace01c7a85",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\planetary_production_terrain.comp.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/planetary_production_terrain.comp.spv",
+      "bytes": 368,
+      "sha256": "405e6e6daab609ca383297ba8be706bfa96859c65dc2d9f42476a32cddd85df7",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\planetary_production.frag.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/planetary_production.frag.spv",
+      "bytes": 152228,
+      "sha256": "8c59838abb3d7ee6418695ea40f044ca1f04f5c3c9216296d5cc19bba6110d6b",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\planetary_ring_far.frag.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/planetary_ring_far.frag.spv",
+      "bytes": 2692,
+      "sha256": "343db81bccc310b21c600ab6ee6722438151694683bb0cf7ba01d54a9b68ade6",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\planetary_ring_near.frag.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/planetary_ring_near.frag.spv",
+      "bytes": 2692,
+      "sha256": "48b8ef4e56b6be9380cfbaca7daa790035e704541b6b8a550b3cc7bed540244c",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\planetary_ring.vert.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/planetary_ring.vert.spv",
+      "bytes": 7728,
+      "sha256": "cccede52d3c64db872360912db9eb29e60cb892c648ed53ce1c178f8623d0cfb",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\planetary_select.comp.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/planetary_select.comp.spv",
+      "bytes": 91064,
+      "sha256": "8189bbd2a85fe23033f12c558d8b221b62b8969c17ba9ffcf07b7c8501fe8adf",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\planetary_terrain_generate.comp.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/planetary_terrain_generate.comp.spv",
+      "bytes": 10292,
+      "sha256": "1fc8c24ea6b4a55e83997fadf80b4901f692b8bc2de84a5cf6ac043e4da531d1",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\planetary.frag.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/planetary.frag.spv",
+      "bytes": 18548,
+      "sha256": "417f17b236834f0ac94fa3bbfdae52ad164599ff14051e9b396809beea75cda1",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\planetary.vert.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/planetary.vert.spv",
+      "bytes": 135600,
+      "sha256": "ddb84030e2621df8f05489e339989d66de60d73435f490b4ec0af4251d7a0338",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\production_nested_scale_mesh_cull.comp.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/production_nested_scale_mesh_cull.comp.spv",
+      "bytes": 30484,
+      "sha256": "497d88225a914b9601ad6c0f44733e834794a952854e71b26be426ead8780d94",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\production_nested_scale_mesh_incoming_cull.comp.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/production_nested_scale_mesh_incoming_cull.comp.spv",
+      "bytes": 30484,
+      "sha256": "23bd1b04d0291e6271138041433eee07e57503482e8e5cf845e4b72c75967336",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\production_spherical_billboard_compact.comp.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/production_spherical_billboard_compact.comp.spv",
+      "bytes": 3460,
+      "sha256": "2aabd7633b333f86df8a6eae6b76ed2d13a7129443dcd9201531de047b12f4d9",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\production_spherical_billboard_cull.comp.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/production_spherical_billboard_cull.comp.spv",
+      "bytes": 14624,
+      "sha256": "2827b58dcd7029695e0b33272018e54d19d6113b8d7ab9ac591c343b3d994398",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\production_spherical_billboard_incoming_compact.comp.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/production_spherical_billboard_incoming_compact.comp.spv",
+      "bytes": 2940,
+      "sha256": "6b0238138222112ddf1f945f5e6a31867d5dd11f57169481ece9c05337f43e4e",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\production_spherical_billboard_incoming_cull.comp.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/production_spherical_billboard_incoming_cull.comp.spv",
+      "bytes": 14624,
+      "sha256": "8c677f08ae051cf525108a436066983d41961ce70757ca29a86df165d2663cfb",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\production_spherical_billboard_incoming_prepare.comp.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/production_spherical_billboard_incoming_prepare.comp.spv",
+      "bytes": 91824,
+      "sha256": "3b330d24dc873c2676dbb877208efae4d91347b66ef029706b8a3f0d3116f91c",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\production_spherical_billboard_incoming_reset.comp.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/production_spherical_billboard_incoming_reset.comp.spv",
+      "bytes": 1736,
+      "sha256": "5d750f929dcab4f9f3138b4cdfa869ab26e3051d4b28485c02ee483f89e14d6e",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\production_spherical_billboard_prepare.comp.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/production_spherical_billboard_prepare.comp.spv",
+      "bytes": 94876,
+      "sha256": "d178e6ba6b73045dc214e75000489c09a7f0982f9cff7663489ba0818d30ae8b",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\production_spherical_billboard_reset.comp.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/production_spherical_billboard_reset.comp.spv",
+      "bytes": 1736,
+      "sha256": "cf583d16e14c8a8ec63b393d8752541648d932cf0165231cc48f6076e28fc027",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\production_spherical_billboard.tesc.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/production_spherical_billboard.tesc.spv",
+      "bytes": 12632,
+      "sha256": "0163498278f9523fd442434f05f056be28252d16c2f2ba44b8d91642b33e4439",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\production_spherical_billboard.tese.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/production_spherical_billboard.tese.spv",
+      "bytes": 22836,
+      "sha256": "d0bc5d7a450f336d45c26c499b0b3a79ecc0258e1ffb9dee0b5bcfb8aa21d31e",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\production_spherical_billboard.vert.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/production_spherical_billboard.vert.spv",
+      "bytes": 8028,
+      "sha256": "1baa9043db7a8b71dcf5931f4cb415fa84ce6341b07d850ea9beb8baa02d2b6a",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\regional_physical_demand.comp.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/regional_physical_demand.comp.spv",
+      "bytes": 22344,
+      "sha256": "7d80dbd70be13cc55f00ef836cd8da9d3783064411320697777f6b5c848d8f67",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\regional_physical_incoming_demand.comp.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/regional_physical_incoming_demand.comp.spv",
+      "bytes": 22360,
+      "sha256": "a56b62b5432206b8ab5eded734b13a0ddf9f0c726a4b444f8d24139bdcc17a60",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\sas_target.frag.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/sas_target.frag.spv",
+      "bytes": 440,
+      "sha256": "4e99fda06f571590f950e91d93025cafa83e4a454e68e3583ce59d869f0a3ef2",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\solar_label.frag.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/solar_label.frag.spv",
+      "bytes": 47588,
+      "sha256": "673c5dc0cc1e199d497c7c927f282a02da444fa258860b6cb94b6fd1ed12c90a",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\solar_label.vert.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/solar_label.vert.spv",
+      "bytes": 11388,
+      "sha256": "a13a7a8acb3ae2da2cac129a203caffd86b5a7f434701d99b59284fdd01f1844",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\solar_marker.frag.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/solar_marker.frag.spv",
+      "bytes": 448,
+      "sha256": "d428743c08f96f4e508eab131cfb54981c2628eecc7acd3d2df220b19103275b",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\solar_marker.vert.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/solar_marker.vert.spv",
+      "bytes": 7776,
+      "sha256": "50d948741d3ca6b59577a82d3346ab3cac51edcb9ab80047247ac61c345b6db6",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\solar_orbit.frag.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/solar_orbit.frag.spv",
+      "bytes": 1412,
+      "sha256": "23b511270c196c2186f7935699ca7fdedf3c92c629da67c10e8ae7615286181f",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\solar_orbit.vert.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/solar_orbit.vert.spv",
+      "bytes": 4008,
+      "sha256": "d71520615e2533a06208c3cec752d2689f524a30fb6a11bd2ca4ae00e2cc027f",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\solar_speed_hud.frag.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/solar_speed_hud.frag.spv",
+      "bytes": 49400,
+      "sha256": "e073b0ab31c69a3516d695146ade0dbd618d3dede5a10699f390f10da52c3586",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\solar_speed_hud.vert.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/solar_speed_hud.vert.spv",
+      "bytes": 11036,
+      "sha256": "a777a4dfece073339efcd97c7292d970f8c26d21f221ebd62ce244970f0a5fb4",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\space_background.frag.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/space_background.frag.spv",
+      "bytes": 12108,
+      "sha256": "0c98ee3df0ba8ad8f313cc352a02032528e6b0e36b2dfa8cc2be1a6755b71cfc",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\stellar_glow.frag.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/stellar_glow.frag.spv",
+      "bytes": 1736,
+      "sha256": "e83a5e7458ec4be4b835384c88ec3ea958ae13569ee9ac823a4e2b2db17facee",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\stellar_glow.vert.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/stellar_glow.vert.spv",
+      "bytes": 6392,
+      "sha256": "30a9ed63e3d92581852afef62a242f2160a10c6cdb276a3b1aa0360a476183e8",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\stellar_sun.frag.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/stellar_sun.frag.spv",
+      "bytes": 3208,
+      "sha256": "5c448c0da4cadeb08bf2c85c74448d3b690fd3d6bccab1fc2c49da7a0bf54769",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\stellar_sun.vert.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/stellar_sun.vert.spv",
+      "bytes": 5168,
+      "sha256": "3e124d5babcb1d219499aa2de1482f90fc7c9008e92b054f7ca0d268336346b6",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\tone_map.frag.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/tone_map.frag.spv",
+      "bytes": 2700,
+      "sha256": "d617345e95589ecb087ed40c20f4d04a427251a2b5249d8181cc63c421ee3979",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\triangle.frag.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/triangle.frag.spv",
+      "bytes": 2180,
+      "sha256": "36e2c4762d87eddd045909f600217f3ea7d48b023d08887abbf958d3bfaa5ddf",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders\\triangle.vert.spv",
+      "relative": "build/post-m13.3-next-target/host/shaders/triangle.vert.spv",
+      "bytes": 4828,
+      "sha256": "87c254e6166b18954b8c0fbd533af2e83f4cf7f09842d752a0a76ae68e8f1aef",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\layers\\explicit\\validation.json",
+      "relative": "build/post-m13.3-next-target/layers/explicit/validation.json",
+      "bytes": 60443,
+      "sha256": "9b304ff60cebad448f299127d23abad8507f108bfd8aac11074f994db88dc21f",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\Program.cs",
+      "relative": "build/post-m13.3-next-target/route/Program.cs",
+      "bytes": 5006,
+      "sha256": "d0224319d3804cdfca0b9c1ec4dc38040eecb44d72fcd60b0cc1dc0e08899447",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\route.csproj",
+      "relative": "build/post-m13.3-next-target/route/route.csproj",
+      "bytes": 407,
+      "sha256": "ed000e6d5f50e4ad1c97aeb3c037371c57a9ce524236282dd3bc58a48457b120",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\bin\\Release\\net10.0-windows\\NovaCore.Launcher.dll",
+      "relative": "build/post-m13.3-next-target/route/bin/Release/net10.0-windows/NovaCore.Launcher.dll",
+      "bytes": 59904,
+      "sha256": "a6087cd1b4ee1d3a939e78c187f51b59058daff513d7b106f22767499ef56b6c",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\bin\\Release\\net10.0-windows\\NovaCore.Launcher.pdb",
+      "relative": "build/post-m13.3-next-target/route/bin/Release/net10.0-windows/NovaCore.Launcher.pdb",
+      "bytes": 22420,
+      "sha256": "92a7aac9f3f323844bf1fd3bd64b4aa1a9ac370f823d2c92b85746840fe4e3c6",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\bin\\Release\\net10.0-windows\\route.deps.json",
+      "relative": "build/post-m13.3-next-target/route/bin/Release/net10.0-windows/route.deps.json",
+      "bytes": 824,
+      "sha256": "86863cbd50107f4f27b309061f4ba1388244a6a2ce34b32cf9f2fe7525793b65",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\bin\\Release\\net10.0-windows\\route.dll",
+      "relative": "build/post-m13.3-next-target/route/bin/Release/net10.0-windows/route.dll",
+      "bytes": 17920,
+      "sha256": "f863650c29828d5adcdffb787c049fb245f10c19a565f0b16a2e65b53ca48b93",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\bin\\Release\\net10.0-windows\\route.exe",
+      "relative": "build/post-m13.3-next-target/route/bin/Release/net10.0-windows/route.exe",
+      "bytes": 162304,
+      "sha256": "5074e59337e31be4d63a19dd8a78b27dc44a109f021dfb1b849e89700db644d4",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\bin\\Release\\net10.0-windows\\route.pdb",
+      "relative": "build/post-m13.3-next-target/route/bin/Release/net10.0-windows/route.pdb",
+      "bytes": 16456,
+      "sha256": "fe121026998e78fa02d45fcb966bbb31490ebd5e4bc3314c8e16f66d0caa5321",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\bin\\Release\\net10.0-windows\\route.runtimeconfig.json",
+      "relative": "build/post-m13.3-next-target/route/bin/Release/net10.0-windows/route.runtimeconfig.json",
+      "bytes": 519,
+      "sha256": "96bc2946dff8790400d652ec7f8de7bb043e954980d59470c112788b68a1fbd3",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\obj\\project.assets.json",
+      "relative": "build/post-m13.3-next-target/route/obj/project.assets.json",
+      "bytes": 21993,
+      "sha256": "d928149a84f98ee9b6a326d75a38ab3f732890eb013473cc77819e859138495f",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\obj\\project.nuget.cache",
+      "relative": "build/post-m13.3-next-target/route/obj/project.nuget.cache",
+      "bytes": 209,
+      "sha256": "8fa0910ff8a8c1e93dafe6e3a4c05fc35bc5e93978a22ad1d3a6bc4f168c2b86",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\obj\\route.csproj.nuget.dgspec.json",
+      "relative": "build/post-m13.3-next-target/route/obj/route.csproj.nuget.dgspec.json",
+      "bytes": 22664,
+      "sha256": "70f4405270f01c01106a525ae97b6db2dd559567fb3564500e46f9a17aedf68c",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\obj\\route.csproj.nuget.g.props",
+      "relative": "build/post-m13.3-next-target/route/obj/route.csproj.nuget.g.props",
+      "bytes": 1135,
+      "sha256": "1e51d59a0a61bbe5b26b92eb01307b6f7909cd9d6f3577f96af5da8201057d69",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\obj\\route.csproj.nuget.g.targets",
+      "relative": "build/post-m13.3-next-target/route/obj/route.csproj.nuget.g.targets",
+      "bytes": 150,
+      "sha256": "971cc9b535384849b5c661d776cd7a80833a416265e32e8968e06c367368b8b5",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\obj\\Release\\net10.0-windows\\.NETCoreApp,Version=v10.0.AssemblyAttributes.cs",
+      "relative": "build/post-m13.3-next-target/route/obj/Release/net10.0-windows/.NETCoreApp,Version=v10.0.AssemblyAttributes.cs",
+      "bytes": 200,
+      "sha256": "93d67476196ebfc80d1d7d8844b91146cfd678d105f5ce635eb900ca40610c9b",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\obj\\Release\\net10.0-windows\\apphost.exe",
+      "relative": "build/post-m13.3-next-target/route/obj/Release/net10.0-windows/apphost.exe",
+      "bytes": 162304,
+      "sha256": "5074e59337e31be4d63a19dd8a78b27dc44a109f021dfb1b849e89700db644d4",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\obj\\Release\\net10.0-windows\\route.AssemblyInfo.cs",
+      "relative": "build/post-m13.3-next-target/route/obj/Release/net10.0-windows/route.AssemblyInfo.cs",
+      "bytes": 1150,
+      "sha256": "692a6fc1eb20da390d5084c1b0b90ca424c80a16632b88e49bfb80ecabed4fe4",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\obj\\Release\\net10.0-windows\\route.AssemblyInfoInputs.cache",
+      "relative": "build/post-m13.3-next-target/route/obj/Release/net10.0-windows/route.AssemblyInfoInputs.cache",
+      "bytes": 66,
+      "sha256": "f3304bb4ce12da8e2abc4d057ed0480d4af6a9dbdf08441f7cf56e2396f5a0aa",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\obj\\Release\\net10.0-windows\\route.assets.cache",
+      "relative": "build/post-m13.3-next-target/route/obj/Release/net10.0-windows/route.assets.cache",
+      "bytes": 152,
+      "sha256": "83476fdffb0a6cf6cc42edd678c1faa7351d79b4d59fd88975c79fa95bff4d10",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\obj\\Release\\net10.0-windows\\route.csproj.AssemblyReference.cache",
+      "relative": "build/post-m13.3-next-target/route/obj/Release/net10.0-windows/route.csproj.AssemblyReference.cache",
+      "bytes": 1271,
+      "sha256": "18e4cfafa20b85329cdcc600c21c9b7aae9dea2492a700a597fe53ba7777ce0c",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\obj\\Release\\net10.0-windows\\route.csproj.CoreCompileInputs.cache",
+      "relative": "build/post-m13.3-next-target/route/obj/Release/net10.0-windows/route.csproj.CoreCompileInputs.cache",
+      "bytes": 66,
+      "sha256": "a9c085c1737338900ae36ee2eecdebb198923249e983523742e390671179929e",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\obj\\Release\\net10.0-windows\\route.csproj.FileListAbsolute.txt",
+      "relative": "build/post-m13.3-next-target/route/obj/Release/net10.0-windows/route.csproj.FileListAbsolute.txt",
+      "bytes": 1857,
+      "sha256": "67acd0476a51fcfeb946a8c9ea71529e0b9280c81380da0482d521ced3086437",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\obj\\Release\\net10.0-windows\\route.csproj.Up2Date",
+      "relative": "build/post-m13.3-next-target/route/obj/Release/net10.0-windows/route.csproj.Up2Date",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\obj\\Release\\net10.0-windows\\route.dll",
+      "relative": "build/post-m13.3-next-target/route/obj/Release/net10.0-windows/route.dll",
+      "bytes": 17920,
+      "sha256": "f863650c29828d5adcdffb787c049fb245f10c19a565f0b16a2e65b53ca48b93",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\obj\\Release\\net10.0-windows\\route.GeneratedMSBuildEditorConfig.editorconfig",
+      "relative": "build/post-m13.3-next-target/route/obj/Release/net10.0-windows/route.GeneratedMSBuildEditorConfig.editorconfig",
+      "bytes": 1152,
+      "sha256": "2bcc4764d3a5f5626bb61ba2d65cab03d0a9b5a314d76029612f48dff1c04061",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\obj\\Release\\net10.0-windows\\route.genruntimeconfig.cache",
+      "relative": "build/post-m13.3-next-target/route/obj/Release/net10.0-windows/route.genruntimeconfig.cache",
+      "bytes": 66,
+      "sha256": "e7997ff42b2a9850601f84ddd4185e013dd131ddb68535889f1c677ab596c201",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\obj\\Release\\net10.0-windows\\route.GlobalUsings.g.cs",
+      "relative": "build/post-m13.3-next-target/route/obj/Release/net10.0-windows/route.GlobalUsings.g.cs",
+      "bytes": 305,
+      "sha256": "c95ea51a9e8c77e5367f652ede0c8871e7d6413090add59e1b8dd6805ac37e70",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\obj\\Release\\net10.0-windows\\route.pdb",
+      "relative": "build/post-m13.3-next-target/route/obj/Release/net10.0-windows/route.pdb",
+      "bytes": 16456,
+      "sha256": "fe121026998e78fa02d45fcb966bbb31490ebd5e4bc3314c8e16f66d0caa5321",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\obj\\Release\\net10.0-windows\\route.sourcelink.json",
+      "relative": "build/post-m13.3-next-target/route/obj/Release/net10.0-windows/route.sourcelink.json",
+      "bytes": 143,
+      "sha256": "c6658240c093c707a2250965dda72160d394653f851dd636d1cc06971014f291",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\obj\\Release\\net10.0-windows\\ref\\route.dll",
+      "relative": "build/post-m13.3-next-target/route/obj/Release/net10.0-windows/ref/route.dll",
+      "bytes": 5632,
+      "sha256": "13030dee83bf2cfff7bdd4d10fcd62cf74ef503cefdd7624b26088b5d2495a4b",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\obj\\Release\\net10.0-windows\\refint\\route.dll",
+      "relative": "build/post-m13.3-next-target/route/obj/Release/net10.0-windows/refint/route.dll",
+      "bytes": 5632,
+      "sha256": "13030dee83bf2cfff7bdd4d10fcd62cf74ef503cefdd7624b26088b5d2495a4b",
+      "hardLink": false
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\post-m13.3-next-target\\__pycache__\\run.cpython-311.pyc",
+      "relative": "docs/engineering-evidence/post-m13.3-next-target/__pycache__/run.cpython-311.pyc",
+      "bytes": 24490,
+      "sha256": "cbab5050a36302c6a4d00f67dc5a8995793b54f951586ea5db6a097210fea7c7",
+      "hardLink": false
+    }
+  ],
+  "directories": [
+    "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test",
+    "E:\\NovaCore\\build\\post-m13.3-next-target\\baseline-source",
+    "E:\\NovaCore\\build\\post-m13.3-next-target\\host",
+    "E:\\NovaCore\\build\\post-m13.3-next-target\\layers",
+    "E:\\NovaCore\\build\\post-m13.3-next-target\\route",
+    "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\bin",
+    "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\obj",
+    "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\bin\\Release",
+    "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\bin\\Release\\net10.0",
+    "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\obj\\Release",
+    "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\obj\\Release\\net10.0",
+    "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\obj\\Release\\net10.0\\ref",
+    "E:\\NovaCore\\build\\post-m13.3-next-target\\anchor-test\\obj\\Release\\net10.0\\refint",
+    "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\earth-data",
+    "E:\\NovaCore\\build\\post-m13.3-next-target\\host\\shaders",
+    "E:\\NovaCore\\build\\post-m13.3-next-target\\layers\\explicit",
+    "E:\\NovaCore\\build\\post-m13.3-next-target\\layers\\implicit",
+    "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\bin",
+    "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\obj",
+    "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\bin\\Release",
+    "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\bin\\Release\\net10.0-windows",
+    "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\obj\\Release",
+    "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\obj\\Release\\net10.0-windows",
+    "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\obj\\Release\\net10.0-windows\\ref",
+    "E:\\NovaCore\\build\\post-m13.3-next-target\\route\\obj\\Release\\net10.0-windows\\refint",
+    "E:\\NovaCore\\build\\post-m13.3-next-target",
+    "E:\\NovaCore\\docs\\engineering-evidence\\post-m13.3-next-target\\__pycache__"
+  ],
+  "logicalBytes": 213777532.0,
+  "fileCount": 164,
+  "reason": "Private host, bounded raw readbacks, private test copy, route probe, layer manifests and generated Python bytecode. Source/reproduction and important logs/hashes retained. Oracle hard link unlinked only; original production asset preserved."
+}

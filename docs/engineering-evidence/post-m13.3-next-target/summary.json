@@ -1,0 +1,2492 @@
+{
+  "performance": [
+    {
+      "pose": "orbital",
+      "baselineTerrain": {
+        "n": 100,
+        "median": 0.75704,
+        "p95": 0.76248,
+        "p99": 0.7678,
+        "min": 0.75088,
+        "max": 0.88736
+      },
+      "candidateTerrain": {
+        "n": 100,
+        "median": 0.75784,
+        "p95": 0.76148,
+        "p99": 0.7634,
+        "min": 0.75204,
+        "max": 0.81472
+      },
+      "baselineGpu": {
+        "n": 100,
+        "median": 0.91356,
+        "p95": 0.91952,
+        "p99": 1.03332,
+        "min": 0.90248,
+        "max": 1.04928
+      },
+      "candidateGpu": {
+        "n": 100,
+        "median": 0.912,
+        "p95": 1.00501,
+        "p99": 1.12946,
+        "min": 0.9032,
+        "max": 1.25178
+      },
+      "savedGpuMs": 0.0015600000000000058,
+      "candidateAbove8_33": -7.418,
+      "candidateAbove11_11": -10.197999999999999
+    },
+    {
+      "pose": "factor1",
+      "baselineTerrain": {
+        "n": 100,
+        "median": 5.9992,
+        "p95": 6.31,
+        "p99": 6.3378,
+        "min": 5.95508,
+        "max": 6.34256
+      },
+      "candidateTerrain": {
+        "n": 100,
+        "median": 2.38832,
+        "p95": 2.72968,
+        "p99": 2.73804,
+        "min": 2.35124,
+        "max": 2.7454
+      },
+      "baselineGpu": {
+        "n": 100,
+        "median": 8.74516,
+        "p95": 9.05476,
+        "p99": 9.08384,
+        "min": 8.69868,
+        "max": 9.08672
+      },
+      "candidateGpu": {
+        "n": 100,
+        "median": 5.1342,
+        "p95": 5.47208,
+        "p99": 5.48396,
+        "min": 5.09632,
+        "max": 5.48868
+      },
+      "savedGpuMs": 3.6109600000000004,
+      "candidateAbove8_33": -3.1958,
+      "candidateAbove11_11": -5.9758
+    },
+    {
+      "pose": "florida",
+      "baselineTerrain": {
+        "n": 100,
+        "median": 7.79888,
+        "p95": 8.0716,
+        "p99": 8.09976,
+        "min": 7.70988,
+        "max": 8.12012
+      },
+      "candidateTerrain": {
+        "n": 100,
+        "median": 7.78664,
+        "p95": 8.02568,
+        "p99": 8.08876,
+        "min": 7.73212,
+        "max": 8.1018
+      },
+      "baselineGpu": {
+        "n": 100,
+        "median": 10.51148,
+        "p95": 10.78356,
+        "p99": 10.8104,
+        "min": 10.42824,
+        "max": 10.83352
+      },
+      "candidateGpu": {
+        "n": 100,
+        "median": 10.49888,
+        "p95": 10.7408,
+        "p99": 10.801,
+        "min": 10.44732,
+        "max": 10.8154
+      },
+      "savedGpuMs": 0.012600000000000833,
+      "candidateAbove8_33": 2.1688799999999997,
+      "candidateAbove11_11": -0.6111199999999997
+    },
+    {
+      "pose": "active",
+      "baselineTerrain": {
+        "n": 100,
+        "median": 14.49268,
+        "p95": 14.5462,
+        "p99": 14.56052,
+        "min": 14.4154,
+        "max": 14.57476
+      },
+      "candidateTerrain": {
+        "n": 100,
+        "median": 3.40748,
+        "p95": 3.41872,
+        "p99": 3.42356,
+        "min": 3.3932,
+        "max": 3.42524
+      },
+      "baselineGpu": {
+        "n": 100,
+        "median": 17.12243,
+        "p95": 17.26257,
+        "p99": 17.31656,
+        "min": 16.96752,
+        "max": 17.35104
+      },
+      "candidateGpu": {
+        "n": 100,
+        "median": 5.95516,
+        "p95": 5.97308,
+        "p99": 5.97736,
+        "min": 5.9396,
+        "max": 5.97952
+      },
+      "savedGpuMs": 11.167270000000002,
+      "candidateAbove8_33": -2.37484,
+      "candidateAbove11_11": -5.154839999999999
+    },
+    {
+      "pose": "grazing",
+      "baselineTerrain": {
+        "n": 100,
+        "median": 7.49756,
+        "p95": 7.93512,
+        "p99": 8.01216,
+        "min": 7.3436,
+        "max": 8.0402
+      },
+      "candidateTerrain": {
+        "n": 100,
+        "median": 2.71036,
+        "p95": 3.22276,
+        "p99": 3.2338,
+        "min": 2.66788,
+        "max": 3.23644
+      },
+      "baselineGpu": {
+        "n": 100,
+        "median": 10.25564,
+        "p95": 10.6922,
+        "p99": 10.7636,
+        "min": 10.1042,
+        "max": 10.7922
+      },
+      "candidateGpu": {
+        "n": 100,
+        "median": 5.46592,
+        "p95": 5.97704,
+        "p99": 5.99236,
+        "min": 5.42292,
+        "max": 5.9952
+      },
+      "savedGpuMs": 4.78972,
+      "candidateAbove8_33": -2.8640800000000004,
+      "candidateAbove11_11": -5.64408
+    }
+  ],
+  "cpu": [
+    {
+      "pose": "orbital",
+      "baseline": {
+        "host_update": {
+          "n": 100,
+          "median": 3.0368,
+          "p95": 3.3939,
+          "p99": 3.5053,
+          "min": 2.8871,
+          "max": 4.0017
+        },
+        "host_fenceWait": {
+          "n": 100,
+          "median": 0.8479,
+          "p95": 1.0088,
+          "p99": 1.1018,
+          "min": 0.7201,
+          "max": 1.1205
+        },
+        "host_inspection": {
+          "n": 100,
+          "median": 0.0748,
+          "p95": 0.1051,
+          "p99": 0.1815,
+          "min": 0.0646,
+          "max": 0.2017
+        },
+        "host_hostCallback": {
+          "n": 100,
+          "median": 0.2089,
+          "p95": 0.32,
+          "p99": 0.6777,
+          "min": 0.1263,
+          "max": 0.9066
+        },
+        "host_validationUpload": {
+          "n": 100,
+          "median": 1.906,
+          "p95": 2.0895,
+          "p99": 2.2111,
+          "min": 1.8221,
+          "max": 2.2572
+        },
+        "host_acquire": {
+          "n": 100,
+          "median": 0.0392,
+          "p95": 0.0627,
+          "p99": 0.0766,
+          "min": 0.0292,
+          "max": 0.1222
+        },
+        "host_record": {
+          "n": 100,
+          "median": 0.1409,
+          "p95": 0.1632,
+          "p99": 0.1838,
+          "min": 0.1329,
+          "max": 0.3287
+        },
+        "host_submit": {
+          "n": 100,
+          "median": 0.0373,
+          "p95": 0.0444,
+          "p99": 0.072,
+          "min": 0.034,
+          "max": 0.0762
+        },
+        "host_present": {
+          "n": 100,
+          "median": 0.1693,
+          "p95": 0.2611,
+          "p99": 0.2911,
+          "min": 0.1268,
+          "max": 0.3031
+        },
+        "host_recreate": {
+          "n": 100,
+          "median": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "host_total": {
+          "n": 100,
+          "median": 3.4495,
+          "p95": 3.8394,
+          "p99": 4.1874,
+          "min": 3.2858,
+          "max": 4.4238
+        },
+        "host_unattributed": {
+          "n": 100,
+          "median": 0.0116,
+          "p95": 0.0202,
+          "p99": 0.0446,
+          "min": 0.0034,
+          "max": 0.0495
+        }
+      },
+      "candidate": {
+        "host_update": {
+          "n": 100,
+          "median": 2.9893,
+          "p95": 3.234,
+          "p99": 3.3908,
+          "min": 2.8222,
+          "max": 3.6836
+        },
+        "host_fenceWait": {
+          "n": 100,
+          "median": 0.8474,
+          "p95": 0.9336,
+          "p99": 1.032,
+          "min": 0.7084,
+          "max": 1.104
+        },
+        "host_inspection": {
+          "n": 100,
+          "median": 0.0708,
+          "p95": 0.1064,
+          "p99": 0.1285,
+          "min": 0.0598,
+          "max": 0.1293
+        },
+        "host_hostCallback": {
+          "n": 100,
+          "median": 0.2007,
+          "p95": 0.2899,
+          "p99": 0.3953,
+          "min": 0.0934,
+          "max": 0.8862
+        },
+        "host_validationUpload": {
+          "n": 100,
+          "median": 1.9041,
+          "p95": 1.9943,
+          "p99": 2.0506,
+          "min": 1.8084,
+          "max": 2.0931
+        },
+        "host_acquire": {
+          "n": 100,
+          "median": 0.0388,
+          "p95": 0.0442,
+          "p99": 0.0718,
+          "min": 0.0248,
+          "max": 0.0787
+        },
+        "host_record": {
+          "n": 100,
+          "median": 0.1393,
+          "p95": 0.1552,
+          "p99": 0.1631,
+          "min": 0.1259,
+          "max": 0.1666
+        },
+        "host_submit": {
+          "n": 100,
+          "median": 0.0373,
+          "p95": 0.0417,
+          "p99": 0.045,
+          "min": 0.0326,
+          "max": 0.0487
+        },
+        "host_present": {
+          "n": 100,
+          "median": 0.1698,
+          "p95": 0.2068,
+          "p99": 0.2429,
+          "min": 0.1231,
+          "max": 0.3213
+        },
+        "host_recreate": {
+          "n": 100,
+          "median": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "host_total": {
+          "n": 100,
+          "median": 3.38,
+          "p95": 3.6301,
+          "p99": 3.7709,
+          "min": 3.2608,
+          "max": 4.0881
+        },
+        "host_unattributed": {
+          "n": 100,
+          "median": 0.0108,
+          "p95": 0.0156,
+          "p99": 0.0182,
+          "min": 0.0036,
+          "max": 0.035
+        }
+      }
+    },
+    {
+      "pose": "factor1",
+      "baseline": {
+        "host_update": {
+          "n": 100,
+          "median": 10.9947,
+          "p95": 11.3559,
+          "p99": 11.4398,
+          "min": 10.5441,
+          "max": 11.4994
+        },
+        "host_fenceWait": {
+          "n": 100,
+          "median": 8.8354,
+          "p95": 9.2758,
+          "p99": 9.2921,
+          "min": 8.5672,
+          "max": 9.3068
+        },
+        "host_inspection": {
+          "n": 100,
+          "median": 0.0708,
+          "p95": 0.0888,
+          "p99": 0.1559,
+          "min": 0.0631,
+          "max": 0.1628
+        },
+        "host_hostCallback": {
+          "n": 100,
+          "median": 0.0945,
+          "p95": 0.196,
+          "p99": 0.2558,
+          "min": 0.0894,
+          "max": 0.5757
+        },
+        "host_validationUpload": {
+          "n": 100,
+          "median": 1.8822,
+          "p95": 2.0106,
+          "p99": 2.0964,
+          "min": 1.783,
+          "max": 2.1493
+        },
+        "host_acquire": {
+          "n": 100,
+          "median": 0.0407,
+          "p95": 0.0455,
+          "p99": 0.0502,
+          "min": 0.0372,
+          "max": 0.0569
+        },
+        "host_record": {
+          "n": 100,
+          "median": 0.1455,
+          "p95": 0.1609,
+          "p99": 0.169,
+          "min": 0.1381,
+          "max": 0.1716
+        },
+        "host_submit": {
+          "n": 100,
+          "median": 0.0374,
+          "p95": 0.04,
+          "p99": 0.0408,
+          "min": 0.0339,
+          "max": 0.0413
+        },
+        "host_present": {
+          "n": 100,
+          "median": 0.1688,
+          "p95": 0.1942,
+          "p99": 0.3017,
+          "min": 0.1573,
+          "max": 0.3039
+        },
+        "host_recreate": {
+          "n": 100,
+          "median": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "host_total": {
+          "n": 100,
+          "median": 11.3908,
+          "p95": 11.7684,
+          "p99": 11.856,
+          "min": 10.9319,
+          "max": 11.9303
+        },
+        "host_unattributed": {
+          "n": 100,
+          "median": 0.0108,
+          "p95": 0.0143,
+          "p99": 0.0189,
+          "min": 0.003,
+          "max": 0.0342
+        }
+      },
+      "candidate": {
+        "host_update": {
+          "n": 100,
+          "median": 7.4465,
+          "p95": 7.8866,
+          "p99": 7.958,
+          "min": 7.042,
+          "max": 7.9968
+        },
+        "host_fenceWait": {
+          "n": 100,
+          "median": 5.3678,
+          "p95": 5.7499,
+          "p99": 5.7615,
+          "min": 4.8981,
+          "max": 5.7884
+        },
+        "host_inspection": {
+          "n": 100,
+          "median": 0.0695,
+          "p95": 0.0924,
+          "p99": 0.1118,
+          "min": 0.0626,
+          "max": 0.1172
+        },
+        "host_hostCallback": {
+          "n": 100,
+          "median": 0.0931,
+          "p95": 0.1896,
+          "p99": 0.2728,
+          "min": 0.0899,
+          "max": 0.5131
+        },
+        "host_validationUpload": {
+          "n": 100,
+          "median": 1.8961,
+          "p95": 2.0236,
+          "p99": 2.0909,
+          "min": 1.8212,
+          "max": 2.0975
+        },
+        "host_acquire": {
+          "n": 100,
+          "median": 0.0401,
+          "p95": 0.0541,
+          "p99": 0.0651,
+          "min": 0.0377,
+          "max": 0.0736
+        },
+        "host_record": {
+          "n": 100,
+          "median": 0.141,
+          "p95": 0.191,
+          "p99": 0.2409,
+          "min": 0.1356,
+          "max": 0.2629
+        },
+        "host_submit": {
+          "n": 100,
+          "median": 0.0367,
+          "p95": 0.0493,
+          "p99": 0.0559,
+          "min": 0.0342,
+          "max": 0.0762
+        },
+        "host_present": {
+          "n": 100,
+          "median": 0.1673,
+          "p95": 0.2177,
+          "p99": 0.3254,
+          "min": 0.1573,
+          "max": 0.388
+        },
+        "host_recreate": {
+          "n": 100,
+          "median": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "host_total": {
+          "n": 100,
+          "median": 7.8362,
+          "p95": 8.3263,
+          "p99": 8.4208,
+          "min": 7.4278,
+          "max": 8.4524
+        },
+        "host_unattributed": {
+          "n": 100,
+          "median": 0.0108,
+          "p95": 0.015,
+          "p99": 0.0191,
+          "min": 0.003,
+          "max": 0.0239
+        }
+      }
+    },
+    {
+      "pose": "florida",
+      "baseline": {
+        "host_update": {
+          "n": 100,
+          "median": 12.8418,
+          "p95": 13.2243,
+          "p99": 13.4155,
+          "min": 12.2862,
+          "max": 13.5081
+        },
+        "host_fenceWait": {
+          "n": 100,
+          "median": 10.6461,
+          "p95": 10.9167,
+          "p99": 10.9552,
+          "min": 10.2324,
+          "max": 10.9769
+        },
+        "host_inspection": {
+          "n": 100,
+          "median": 0.0728,
+          "p95": 0.1103,
+          "p99": 0.1343,
+          "min": 0.0648,
+          "max": 0.1683
+        },
+        "host_hostCallback": {
+          "n": 100,
+          "median": 0.1622,
+          "p95": 0.3381,
+          "p99": 0.5804,
+          "min": 0.1524,
+          "max": 0.7932
+        },
+        "host_validationUpload": {
+          "n": 100,
+          "median": 1.8828,
+          "p95": 2.0975,
+          "p99": 2.1424,
+          "min": 1.7912,
+          "max": 2.1973
+        },
+        "host_acquire": {
+          "n": 100,
+          "median": 0.042,
+          "p95": 0.0592,
+          "p99": 0.0846,
+          "min": 0.0389,
+          "max": 0.1289
+        },
+        "host_record": {
+          "n": 100,
+          "median": 0.1571,
+          "p95": 0.2514,
+          "p99": 0.2907,
+          "min": 0.1472,
+          "max": 0.2975
+        },
+        "host_submit": {
+          "n": 100,
+          "median": 0.0397,
+          "p95": 0.054,
+          "p99": 0.0631,
+          "min": 0.0357,
+          "max": 0.0659
+        },
+        "host_present": {
+          "n": 100,
+          "median": 0.1788,
+          "p95": 0.2485,
+          "p99": 0.2743,
+          "min": 0.1597,
+          "max": 0.333
+        },
+        "host_recreate": {
+          "n": 100,
+          "median": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "host_total": {
+          "n": 100,
+          "median": 13.2929,
+          "p95": 13.703,
+          "p99": 14.1151,
+          "min": 12.6859,
+          "max": 14.1843
+        },
+        "host_unattributed": {
+          "n": 100,
+          "median": 0.0035,
+          "p95": 0.0058,
+          "p99": 0.0087,
+          "min": 0.0028,
+          "max": 0.0125
+        }
+      },
+      "candidate": {
+        "host_update": {
+          "n": 100,
+          "median": 12.8363,
+          "p95": 13.1531,
+          "p99": 13.2646,
+          "min": 12.4156,
+          "max": 13.5939
+        },
+        "host_fenceWait": {
+          "n": 100,
+          "median": 10.6912,
+          "p95": 10.9327,
+          "p99": 10.97,
+          "min": 10.3538,
+          "max": 10.9857
+        },
+        "host_inspection": {
+          "n": 100,
+          "median": 0.0723,
+          "p95": 0.0979,
+          "p99": 0.1243,
+          "min": 0.064,
+          "max": 0.1471
+        },
+        "host_hostCallback": {
+          "n": 100,
+          "median": 0.1561,
+          "p95": 0.3111,
+          "p99": 0.5794,
+          "min": 0.1522,
+          "max": 0.8635
+        },
+        "host_validationUpload": {
+          "n": 100,
+          "median": 1.8441,
+          "p95": 1.9524,
+          "p99": 2.0189,
+          "min": 1.7866,
+          "max": 2.0657
+        },
+        "host_acquire": {
+          "n": 100,
+          "median": 0.0412,
+          "p95": 0.0443,
+          "p99": 0.047,
+          "min": 0.0385,
+          "max": 0.0496
+        },
+        "host_record": {
+          "n": 100,
+          "median": 0.1522,
+          "p95": 0.1761,
+          "p99": 0.1903,
+          "min": 0.1469,
+          "max": 0.1964
+        },
+        "host_submit": {
+          "n": 100,
+          "median": 0.0382,
+          "p95": 0.0419,
+          "p99": 0.0452,
+          "min": 0.0354,
+          "max": 0.0507
+        },
+        "host_present": {
+          "n": 100,
+          "median": 0.1702,
+          "p95": 0.2145,
+          "p99": 0.2222,
+          "min": 0.1606,
+          "max": 0.2338
+        },
+        "host_recreate": {
+          "n": 100,
+          "median": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "host_total": {
+          "n": 100,
+          "median": 13.2366,
+          "p95": 13.568,
+          "p99": 13.6558,
+          "min": 12.8305,
+          "max": 13.6854
+        },
+        "host_unattributed": {
+          "n": 100,
+          "median": 0.0033,
+          "p95": 0.0042,
+          "p99": 0.0044,
+          "min": 0.0029,
+          "max": 0.011
+        }
+      }
+    },
+    {
+      "pose": "active",
+      "baseline": {
+        "host_update": {
+          "n": 100,
+          "median": 19.2994,
+          "p95": 19.534,
+          "p99": 19.597,
+          "min": 18.963,
+          "max": 19.6156
+        },
+        "host_fenceWait": {
+          "n": 100,
+          "median": 17.1001,
+          "p95": 17.1936,
+          "p99": 17.2534,
+          "min": 16.8667,
+          "max": 17.3198
+        },
+        "host_inspection": {
+          "n": 100,
+          "median": 0.1255,
+          "p95": 0.2286,
+          "p99": 0.2526,
+          "min": 0.065,
+          "max": 0.259
+        },
+        "host_hostCallback": {
+          "n": 100,
+          "median": 0.184,
+          "p95": 0.2637,
+          "p99": 0.288,
+          "min": 0.0979,
+          "max": 0.6123
+        },
+        "host_validationUpload": {
+          "n": 100,
+          "median": 1.9269,
+          "p95": 2.034,
+          "p99": 2.0864,
+          "min": 1.804,
+          "max": 2.1016
+        },
+        "host_acquire": {
+          "n": 100,
+          "median": 0.0433,
+          "p95": 0.0529,
+          "p99": 0.0566,
+          "min": 0.0393,
+          "max": 0.0801
+        },
+        "host_record": {
+          "n": 100,
+          "median": 0.1741,
+          "p95": 0.2111,
+          "p99": 0.2567,
+          "min": 0.1482,
+          "max": 0.2604
+        },
+        "host_submit": {
+          "n": 100,
+          "median": 0.0415,
+          "p95": 0.0502,
+          "p99": 0.0628,
+          "min": 0.0377,
+          "max": 0.08
+        },
+        "host_present": {
+          "n": 100,
+          "median": 0.1817,
+          "p95": 0.2084,
+          "p99": 0.2422,
+          "min": 0.1671,
+          "max": 0.3141
+        },
+        "host_recreate": {
+          "n": 100,
+          "median": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "host_total": {
+          "n": 100,
+          "median": 19.7566,
+          "p95": 20.0257,
+          "p99": 20.1067,
+          "min": 19.3899,
+          "max": 20.1718
+        },
+        "host_unattributed": {
+          "n": 100,
+          "median": 0.0112,
+          "p95": 0.0154,
+          "p99": 0.0215,
+          "min": 0.0032,
+          "max": 0.0356
+        }
+      },
+      "candidate": {
+        "host_update": {
+          "n": 100,
+          "median": 7.897,
+          "p95": 8.0642,
+          "p99": 8.2467,
+          "min": 7.757,
+          "max": 8.3565
+        },
+        "host_fenceWait": {
+          "n": 100,
+          "median": 5.8715,
+          "p95": 5.9041,
+          "p99": 5.9139,
+          "min": 5.7151,
+          "max": 5.9175
+        },
+        "host_inspection": {
+          "n": 100,
+          "median": 0.0709,
+          "p95": 0.088,
+          "p99": 0.1305,
+          "min": 0.0648,
+          "max": 0.1359
+        },
+        "host_hostCallback": {
+          "n": 100,
+          "median": 0.0933,
+          "p95": 0.1048,
+          "p99": 0.237,
+          "min": 0.0896,
+          "max": 0.5292
+        },
+        "host_validationUpload": {
+          "n": 100,
+          "median": 1.857,
+          "p95": 1.9827,
+          "p99": 2.0186,
+          "min": 1.8038,
+          "max": 2.1104
+        },
+        "host_acquire": {
+          "n": 100,
+          "median": 0.04,
+          "p95": 0.0475,
+          "p99": 0.0538,
+          "min": 0.028,
+          "max": 0.0554
+        },
+        "host_record": {
+          "n": 100,
+          "median": 0.1406,
+          "p95": 0.1658,
+          "p99": 0.1806,
+          "min": 0.1339,
+          "max": 0.1914
+        },
+        "host_submit": {
+          "n": 100,
+          "median": 0.0364,
+          "p95": 0.0414,
+          "p99": 0.0452,
+          "min": 0.0335,
+          "max": 0.0503
+        },
+        "host_present": {
+          "n": 100,
+          "median": 0.1679,
+          "p95": 0.1854,
+          "p99": 0.2904,
+          "min": 0.1576,
+          "max": 0.326
+        },
+        "host_recreate": {
+          "n": 100,
+          "median": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "host_total": {
+          "n": 100,
+          "median": 8.2947,
+          "p95": 8.5372,
+          "p99": 8.6398,
+          "min": 8.1577,
+          "max": 8.6565
+        },
+        "host_unattributed": {
+          "n": 100,
+          "median": 0.0107,
+          "p95": 0.0154,
+          "p99": 0.0196,
+          "min": 0.0026,
+          "max": 0.0286
+        }
+      }
+    },
+    {
+      "pose": "grazing",
+      "baseline": {
+        "host_update": {
+          "n": 100,
+          "median": 12.5085,
+          "p95": 13.1839,
+          "p99": 13.2671,
+          "min": 12.0999,
+          "max": 13.3379
+        },
+        "host_fenceWait": {
+          "n": 100,
+          "median": 10.3648,
+          "p95": 11.047,
+          "p99": 11.1004,
+          "min": 10.067,
+          "max": 11.108
+        },
+        "host_inspection": {
+          "n": 100,
+          "median": 0.0726,
+          "p95": 0.0876,
+          "p99": 0.117,
+          "min": 0.0638,
+          "max": 0.1692
+        },
+        "host_hostCallback": {
+          "n": 100,
+          "median": 0.0943,
+          "p95": 0.1885,
+          "p99": 0.2054,
+          "min": 0.0896,
+          "max": 0.5797
+        },
+        "host_validationUpload": {
+          "n": 100,
+          "median": 1.8934,
+          "p95": 2.0118,
+          "p99": 2.053,
+          "min": 1.826,
+          "max": 2.1227
+        },
+        "host_acquire": {
+          "n": 100,
+          "median": 0.042,
+          "p95": 0.0467,
+          "p99": 0.0507,
+          "min": 0.0374,
+          "max": 0.0544
+        },
+        "host_record": {
+          "n": 100,
+          "median": 0.1471,
+          "p95": 0.1736,
+          "p99": 0.1863,
+          "min": 0.1381,
+          "max": 0.1903
+        },
+        "host_submit": {
+          "n": 100,
+          "median": 0.038,
+          "p95": 0.0426,
+          "p99": 0.0467,
+          "min": 0.0354,
+          "max": 0.0527
+        },
+        "host_present": {
+          "n": 100,
+          "median": 0.171,
+          "p95": 0.2027,
+          "p99": 0.2673,
+          "min": 0.1603,
+          "max": 0.2941
+        },
+        "host_recreate": {
+          "n": 100,
+          "median": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "host_total": {
+          "n": 100,
+          "median": 12.9202,
+          "p95": 13.5887,
+          "p99": 13.7738,
+          "min": 12.4997,
+          "max": 13.7898
+        },
+        "host_unattributed": {
+          "n": 100,
+          "median": 0.0108,
+          "p95": 0.0133,
+          "p99": 0.0187,
+          "min": 0.0031,
+          "max": 0.0296
+        }
+      },
+      "candidate": {
+        "host_update": {
+          "n": 100,
+          "median": 7.6389,
+          "p95": 8.414,
+          "p99": 8.5894,
+          "min": 7.39,
+          "max": 8.6207
+        },
+        "host_fenceWait": {
+          "n": 100,
+          "median": 5.4597,
+          "p95": 6.3221,
+          "p99": 6.3463,
+          "min": 5.3379,
+          "max": 6.3515
+        },
+        "host_inspection": {
+          "n": 100,
+          "median": 0.0707,
+          "p95": 0.1012,
+          "p99": 0.1309,
+          "min": 0.0569,
+          "max": 0.1343
+        },
+        "host_hostCallback": {
+          "n": 100,
+          "median": 0.095,
+          "p95": 0.1869,
+          "p99": 0.2411,
+          "min": 0.0884,
+          "max": 0.5377
+        },
+        "host_validationUpload": {
+          "n": 100,
+          "median": 1.9035,
+          "p95": 2.0368,
+          "p99": 2.0708,
+          "min": 1.8478,
+          "max": 2.0904
+        },
+        "host_acquire": {
+          "n": 100,
+          "median": 0.0401,
+          "p95": 0.0464,
+          "p99": 0.0643,
+          "min": 0.0373,
+          "max": 0.0758
+        },
+        "host_record": {
+          "n": 100,
+          "median": 0.1402,
+          "p95": 0.174,
+          "p99": 0.1978,
+          "min": 0.1354,
+          "max": 0.2494
+        },
+        "host_submit": {
+          "n": 100,
+          "median": 0.0364,
+          "p95": 0.0418,
+          "p99": 0.0456,
+          "min": 0.0342,
+          "max": 0.0539
+        },
+        "host_present": {
+          "n": 100,
+          "median": 0.1655,
+          "p95": 0.1984,
+          "p99": 0.2331,
+          "min": 0.1566,
+          "max": 0.3186
+        },
+        "host_recreate": {
+          "n": 100,
+          "median": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "host_total": {
+          "n": 100,
+          "median": 8.0415,
+          "p95": 8.8156,
+          "p99": 9.0227,
+          "min": 7.7769,
+          "max": 9.0514
+        },
+        "host_unattributed": {
+          "n": 100,
+          "median": 0.0103,
+          "p95": 0.0151,
+          "p99": 0.0184,
+          "min": 0.0029,
+          "max": 0.0206
+        }
+      }
+    }
+  ],
+  "baselineWorkload": [
+    {
+      "pose": "orbital",
+      "terrain": {
+        "n": 100,
+        "median": 0.7654,
+        "p95": 0.77196,
+        "p99": 0.87508,
+        "min": 0.7592,
+        "max": 0.89848
+      },
+      "gpu": {
+        "n": 100,
+        "median": 0.92648,
+        "p95": 1.049,
+        "p99": 1.14771,
+        "min": 0.91636,
+        "max": 1.16587
+      },
+      "tcsPatches": 15376,
+      "tesInvocations": 46128,
+      "clipInput": {
+        "n": 100,
+        "median": 12894,
+        "p95": 12912,
+        "p99": 12920,
+        "min": 12863,
+        "max": 12928
+      },
+      "clipOutput": 12884,
+      "fragments": 35913,
+      "factorBins": "(15376,0,0,0,0,0,0)",
+      "maximumFactor": 1.0
+    },
+    {
+      "pose": "factor1",
+      "terrain": {
+        "n": 100,
+        "median": 6.27448,
+        "p95": 6.6404,
+        "p99": 6.6606,
+        "min": 5.97864,
+        "max": 6.76876
+      },
+      "gpu": {
+        "n": 100,
+        "median": 11.91288,
+        "p95": 14.41584,
+        "p99": 15.31971,
+        "min": 9.78191,
+        "max": 17.15898
+      },
+      "tcsPatches": 360946,
+      "tesInvocations": 1082838,
+      "clipInput": {
+        "n": 100,
+        "median": 145261,
+        "p95": 145317,
+        "p99": 145323,
+        "min": 145194,
+        "max": 145336
+      },
+      "clipOutput": 145248,
+      "fragments": 2595826,
+      "factorBins": "(360946,0,0,0,0,0,0)",
+      "maximumFactor": 1.0
+    },
+    {
+      "pose": "florida",
+      "terrain": {
+        "n": 100,
+        "median": 7.97924,
+        "p95": 8.30596,
+        "p99": 8.31704,
+        "min": 7.74524,
+        "max": 8.3518
+      },
+      "gpu": {
+        "n": 100,
+        "median": 10.69688,
+        "p95": 11.01636,
+        "p99": 11.02896,
+        "min": 10.45304,
+        "max": 11.05792
+      },
+      "tcsPatches": 294750,
+      "tesInvocations": 884250,
+      "clipInput": {
+        "n": 100,
+        "median": 121847,
+        "p95": 121911,
+        "p99": 121928,
+        "min": 121690,
+        "max": 121933
+      },
+      "clipOutput": 121817,
+      "fragments": 3993415,
+      "factorBins": "(294750,0,0,0,0,0,0)",
+      "maximumFactor": 1.0
+    },
+    {
+      "pose": "active",
+      "terrain": {
+        "n": 100,
+        "median": 14.48428,
+        "p95": 14.5414,
+        "p99": 14.5596,
+        "min": 14.38768,
+        "max": 14.56804
+      },
+      "gpu": {
+        "n": 100,
+        "median": 18.6673,
+        "p95": 20.62929,
+        "p99": 21.03114,
+        "min": 17.60978,
+        "max": 21.04226
+      },
+      "tcsPatches": 2060,
+      "tesInvocations": 2779241,
+      "clipInput": {
+        "n": 100,
+        "median": 953924,
+        "p95": 953966,
+        "p99": 953986,
+        "min": 953848,
+        "max": 953989
+      },
+      "clipOutput": 946145,
+      "fragments": 4953599,
+      "factorBins": "(97,120,157,255,344,372,715)",
+      "maximumFactor": 64.0
+    },
+    {
+      "pose": "grazing",
+      "terrain": {
+        "n": 100,
+        "median": 7.5908,
+        "p95": 8.32596,
+        "p99": 8.37504,
+        "min": 7.35368,
+        "max": 8.43028
+      },
+      "gpu": {
+        "n": 100,
+        "median": 10.35852,
+        "p95": 11.13248,
+        "p99": 11.4096,
+        "min": 10.11168,
+        "max": 11.4364
+      },
+      "tcsPatches": 378919,
+      "tesInvocations": 3469973,
+      "clipInput": {
+        "n": 100,
+        "median": 252803,
+        "p95": 252882,
+        "p99": 252906,
+        "min": 252697,
+        "max": 252928
+      },
+      "clipOutput": 242635,
+      "fragments": 2489113,
+      "factorBins": "(377285,138,165,234,270,240,587)",
+      "maximumFactor": 64.0
+    }
+  ],
+  "preparation": [
+    {
+      "pose": "orbital",
+      "mode": "baseline",
+      "groups": {
+        "demand": {
+          "sumMs": 0.84096,
+          "slices": 2,
+          "cost": {
+            "n": 2,
+            "median": 0.4192,
+            "p95": 0.42176,
+            "p99": 0.42176,
+            "min": 0.4192,
+            "max": 0.42176
+          },
+          "settledSlices": 0,
+          "settledMs": 0
+        },
+        "currentPhysicalPreparation": {
+          "sumMs": 0,
+          "slices": 0,
+          "cost": null,
+          "settledSlices": 0,
+          "settledMs": 0
+        },
+        "incomingPhysicalPreparation": {
+          "sumMs": 0.96404,
+          "slices": 1,
+          "cost": {
+            "n": 1,
+            "median": 0.96404,
+            "p95": 0.96404,
+            "p99": 0.96404,
+            "min": 0.96404,
+            "max": 0.96404
+          },
+          "settledSlices": 0,
+          "settledMs": 0
+        }
+      },
+      "provenance": [
+        "[native] NCSM1 regional ready: incoming=1; pupil=1; dependencyDelayMs=186.102; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+        "[native] NCSM1 regional ready: incoming=0; pupil=1; dependencyDelayMs=22.811; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+        "[native] NCSM1 regional physical totals: requests=0; hits=0; misses=0; loaded=0; readBytes=0; uploadedBytes=0; residentHighWater=0; allocatedBytes=4; maximumBytes=124895232; queueHighWater=0; readyCapacity=8; uploadBudget=8; demandDispatches=2; dependencyDelayMsMax=186.102; recordReadDecodeVerifyMs=0.000; contributingRecords=670; anchoredDemandRequired=false"
+      ]
+    },
+    {
+      "pose": "orbital",
+      "mode": "candidate",
+      "groups": {
+        "demand": {
+          "sumMs": 0.83636,
+          "slices": 2,
+          "cost": {
+            "n": 2,
+            "median": 0.41752,
+            "p95": 0.41884,
+            "p99": 0.41884,
+            "min": 0.41752,
+            "max": 0.41884
+          },
+          "settledSlices": 0,
+          "settledMs": 0
+        },
+        "currentPhysicalPreparation": {
+          "sumMs": 0,
+          "slices": 0,
+          "cost": null,
+          "settledSlices": 0,
+          "settledMs": 0
+        },
+        "incomingPhysicalPreparation": {
+          "sumMs": 0.9646,
+          "slices": 1,
+          "cost": {
+            "n": 1,
+            "median": 0.9646,
+            "p95": 0.9646,
+            "p99": 0.9646,
+            "min": 0.9646,
+            "max": 0.9646
+          },
+          "settledSlices": 0,
+          "settledMs": 0
+        }
+      },
+      "provenance": [
+        "[native] NCSM1 regional ready: incoming=1; pupil=1; dependencyDelayMs=191.617; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+        "[native] NCSM1 regional ready: incoming=0; pupil=1; dependencyDelayMs=20.865; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+        "[native] NCSM1 regional physical totals: requests=0; hits=0; misses=0; loaded=0; readBytes=0; uploadedBytes=0; residentHighWater=0; allocatedBytes=4; maximumBytes=124895232; queueHighWater=0; readyCapacity=8; uploadBudget=8; demandDispatches=2; dependencyDelayMsMax=191.617; recordReadDecodeVerifyMs=0.000; contributingRecords=670; anchoredDemandRequired=false"
+      ]
+    },
+    {
+      "pose": "factor1",
+      "mode": "baseline",
+      "groups": {
+        "demand": {
+          "sumMs": 65.07672,
+          "slices": 44,
+          "cost": {
+            "n": 44,
+            "median": 1.51828,
+            "p95": 1.52496,
+            "p99": 1.52592,
+            "min": 0.8166,
+            "max": 1.52592
+          },
+          "settledSlices": 0,
+          "settledMs": 0
+        },
+        "currentPhysicalPreparation": {
+          "sumMs": 0,
+          "slices": 0,
+          "cost": null,
+          "settledSlices": 0,
+          "settledMs": 0
+        },
+        "incomingPhysicalPreparation": {
+          "sumMs": 41.069880000000005,
+          "slices": 11,
+          "cost": {
+            "n": 11,
+            "median": 3.81472,
+            "p95": 3.82204,
+            "p99": 3.82204,
+            "min": 3.1984,
+            "max": 3.82204
+          },
+          "settledSlices": 0,
+          "settledMs": 0
+        }
+      },
+      "provenance": [
+        "[native] NCSM1 regional ready: incoming=1; pupil=1; dependencyDelayMs=384.043; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+        "[native] NCSM1 regional ready: incoming=0; pupil=1; dependencyDelayMs=288.535; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+        "[native] NCSM1 regional physical totals: requests=0; hits=0; misses=0; loaded=0; readBytes=0; uploadedBytes=0; residentHighWater=0; allocatedBytes=4; maximumBytes=124895232; queueHighWater=0; readyCapacity=8; uploadBudget=8; demandDispatches=44; dependencyDelayMsMax=384.043; recordReadDecodeVerifyMs=0.000; contributingRecords=670; anchoredDemandRequired=false"
+      ]
+    },
+    {
+      "pose": "factor1",
+      "mode": "candidate",
+      "groups": {
+        "demand": {
+          "sumMs": 65.37696,
+          "slices": 44,
+          "cost": {
+            "n": 44,
+            "median": 1.5184,
+            "p95": 1.586,
+            "p99": 1.63056,
+            "min": 0.8162,
+            "max": 1.63056
+          },
+          "settledSlices": 0,
+          "settledMs": 0
+        },
+        "currentPhysicalPreparation": {
+          "sumMs": 0,
+          "slices": 0,
+          "cost": null,
+          "settledSlices": 0,
+          "settledMs": 0
+        },
+        "incomingPhysicalPreparation": {
+          "sumMs": 40.97312,
+          "slices": 11,
+          "cost": {
+            "n": 11,
+            "median": 3.8144,
+            "p95": 3.82068,
+            "p99": 3.82068,
+            "min": 3.10232,
+            "max": 3.82068
+          },
+          "settledSlices": 0,
+          "settledMs": 0
+        }
+      },
+      "provenance": [
+        "[native] NCSM1 regional ready: incoming=1; pupil=1; dependencyDelayMs=382.318; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+        "[native] NCSM1 regional ready: incoming=0; pupil=1; dependencyDelayMs=214.732; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+        "[native] NCSM1 regional physical totals: requests=0; hits=0; misses=0; loaded=0; readBytes=0; uploadedBytes=0; residentHighWater=0; allocatedBytes=4; maximumBytes=124895232; queueHighWater=0; readyCapacity=8; uploadBudget=8; demandDispatches=44; dependencyDelayMsMax=382.318; recordReadDecodeVerifyMs=0.000; contributingRecords=670; anchoredDemandRequired=false"
+      ]
+    },
+    {
+      "pose": "florida",
+      "mode": "baseline",
+      "groups": {
+        "demand": {
+          "sumMs": 31.666439999999998,
+          "slices": 22,
+          "cost": {
+            "n": 22,
+            "median": 1.458,
+            "p95": 1.52296,
+            "p99": 1.52548,
+            "min": 0.96348,
+            "max": 1.52548
+          },
+          "settledSlices": 0,
+          "settledMs": 0
+        },
+        "currentPhysicalPreparation": {
+          "sumMs": 0,
+          "slices": 0,
+          "cost": null,
+          "settledSlices": 0,
+          "settledMs": 0
+        },
+        "incomingPhysicalPreparation": {
+          "sumMs": 40.92572,
+          "slices": 11,
+          "cost": {
+            "n": 11,
+            "median": 3.76032,
+            "p95": 3.90644,
+            "p99": 3.90644,
+            "min": 3.369,
+            "max": 3.90644
+          },
+          "settledSlices": 0,
+          "settledMs": 0
+        }
+      },
+      "provenance": [
+        "[native] NCSM1 regional ready: incoming=1; pupil=1; dependencyDelayMs=1073.795; requests=670; resident=670; uploadedBytes=93392640; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+        "[native] NCSM1 regional physical totals: requests=670; hits=840; misses=670; loaded=670; readBytes=163158696; uploadedBytes=93392640; residentHighWater=670; allocatedBytes=119737728; maximumBytes=124895232; queueHighWater=634; readyCapacity=8; uploadBudget=8; demandDispatches=22; dependencyDelayMsMax=1073.795; recordReadDecodeVerifyMs=212.539; contributingRecords=670; anchoredDemandRequired=false"
+      ]
+    },
+    {
+      "pose": "florida",
+      "mode": "candidate",
+      "groups": {
+        "demand": {
+          "sumMs": 31.67048000000001,
+          "slices": 22,
+          "cost": {
+            "n": 22,
+            "median": 1.45836,
+            "p95": 1.52108,
+            "p99": 1.52228,
+            "min": 0.963,
+            "max": 1.52228
+          },
+          "settledSlices": 0,
+          "settledMs": 0
+        },
+        "currentPhysicalPreparation": {
+          "sumMs": 0,
+          "slices": 0,
+          "cost": null,
+          "settledSlices": 0,
+          "settledMs": 0
+        },
+        "incomingPhysicalPreparation": {
+          "sumMs": 40.91908,
+          "slices": 11,
+          "cost": {
+            "n": 11,
+            "median": 3.76288,
+            "p95": 3.8606,
+            "p99": 3.8606,
+            "min": 3.38132,
+            "max": 3.8606
+          },
+          "settledSlices": 0,
+          "settledMs": 0
+        }
+      },
+      "provenance": [
+        "[native] NCSM1 regional ready: incoming=1; pupil=1; dependencyDelayMs=1041.168; requests=670; resident=670; uploadedBytes=93392640; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+        "[native] NCSM1 regional physical totals: requests=670; hits=840; misses=670; loaded=670; readBytes=163158696; uploadedBytes=93392640; residentHighWater=670; allocatedBytes=119737728; maximumBytes=124895232; queueHighWater=634; readyCapacity=8; uploadBudget=8; demandDispatches=22; dependencyDelayMsMax=1041.168; recordReadDecodeVerifyMs=212.520; contributingRecords=670; anchoredDemandRequired=false"
+      ]
+    },
+    {
+      "pose": "active",
+      "mode": "baseline",
+      "groups": {
+        "demand": {
+          "sumMs": 65.07748,
+          "slices": 44,
+          "cost": {
+            "n": 44,
+            "median": 1.51812,
+            "p95": 1.525,
+            "p99": 1.52616,
+            "min": 0.81532,
+            "max": 1.52616
+          },
+          "settledSlices": 0,
+          "settledMs": 0
+        },
+        "currentPhysicalPreparation": {
+          "sumMs": 0,
+          "slices": 0,
+          "cost": null,
+          "settledSlices": 0,
+          "settledMs": 0
+        },
+        "incomingPhysicalPreparation": {
+          "sumMs": 41.17576,
+          "slices": 11,
+          "cost": {
+            "n": 11,
+            "median": 3.8168,
+            "p95": 3.82772,
+            "p99": 3.82772,
+            "min": 3.2598,
+            "max": 3.82772
+          },
+          "settledSlices": 0,
+          "settledMs": 0
+        }
+      },
+      "provenance": [
+        "[native] NCSM1 regional ready: incoming=1; pupil=1; dependencyDelayMs=462.444; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+        "[native] NCSM1 regional ready: incoming=0; pupil=1; dependencyDelayMs=473.399; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+        "[native] NCSM1 regional physical totals: requests=0; hits=0; misses=0; loaded=0; readBytes=0; uploadedBytes=0; residentHighWater=0; allocatedBytes=4; maximumBytes=124895232; queueHighWater=0; readyCapacity=8; uploadBudget=8; demandDispatches=44; dependencyDelayMsMax=473.399; recordReadDecodeVerifyMs=0.000; contributingRecords=670; anchoredDemandRequired=false"
+      ]
+    },
+    {
+      "pose": "active",
+      "mode": "candidate",
+      "groups": {
+        "demand": {
+          "sumMs": 65.07176000000001,
+          "slices": 44,
+          "cost": {
+            "n": 44,
+            "median": 1.5182,
+            "p95": 1.52436,
+            "p99": 1.52504,
+            "min": 0.81544,
+            "max": 1.52504
+          },
+          "settledSlices": 0,
+          "settledMs": 0
+        },
+        "currentPhysicalPreparation": {
+          "sumMs": 0,
+          "slices": 0,
+          "cost": null,
+          "settledSlices": 0,
+          "settledMs": 0
+        },
+        "incomingPhysicalPreparation": {
+          "sumMs": 40.99852,
+          "slices": 11,
+          "cost": {
+            "n": 11,
+            "median": 3.81432,
+            "p95": 3.82552,
+            "p99": 3.82552,
+            "min": 3.09948,
+            "max": 3.82552
+          },
+          "settledSlices": 0,
+          "settledMs": 0
+        }
+      },
+      "provenance": [
+        "[native] NCSM1 regional ready: incoming=1; pupil=1; dependencyDelayMs=482.978; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+        "[native] NCSM1 regional ready: incoming=0; pupil=1; dependencyDelayMs=220.712; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+        "[native] NCSM1 regional physical totals: requests=0; hits=0; misses=0; loaded=0; readBytes=0; uploadedBytes=0; residentHighWater=0; allocatedBytes=4; maximumBytes=124895232; queueHighWater=0; readyCapacity=8; uploadBudget=8; demandDispatches=44; dependencyDelayMsMax=482.978; recordReadDecodeVerifyMs=0.000; contributingRecords=670; anchoredDemandRequired=false"
+      ]
+    },
+    {
+      "pose": "grazing",
+      "mode": "baseline",
+      "groups": {
+        "demand": {
+          "sumMs": 65.23743999999999,
+          "slices": 44,
+          "cost": {
+            "n": 44,
+            "median": 1.52016,
+            "p95": 1.53128,
+            "p99": 1.53268,
+            "min": 0.8156,
+            "max": 1.53268
+          },
+          "settledSlices": 0,
+          "settledMs": 0
+        },
+        "currentPhysicalPreparation": {
+          "sumMs": 0,
+          "slices": 0,
+          "cost": null,
+          "settledSlices": 0,
+          "settledMs": 0
+        },
+        "incomingPhysicalPreparation": {
+          "sumMs": 41.08148,
+          "slices": 11,
+          "cost": {
+            "n": 11,
+            "median": 3.81452,
+            "p95": 3.8284,
+            "p99": 3.8284,
+            "min": 3.2366,
+            "max": 3.8284
+          },
+          "settledSlices": 0,
+          "settledMs": 0
+        }
+      },
+      "provenance": [
+        "[native] NCSM1 regional ready: incoming=1; pupil=1; dependencyDelayMs=411.169; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+        "[native] NCSM1 regional ready: incoming=0; pupil=1; dependencyDelayMs=323.424; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+        "[native] NCSM1 regional physical totals: requests=0; hits=0; misses=0; loaded=0; readBytes=0; uploadedBytes=0; residentHighWater=0; allocatedBytes=4; maximumBytes=124895232; queueHighWater=0; readyCapacity=8; uploadBudget=8; demandDispatches=44; dependencyDelayMsMax=411.169; recordReadDecodeVerifyMs=0.000; contributingRecords=670; anchoredDemandRequired=false"
+      ]
+    },
+    {
+      "pose": "grazing",
+      "mode": "candidate",
+      "groups": {
+        "demand": {
+          "sumMs": 65.42864,
+          "slices": 44,
+          "cost": {
+            "n": 44,
+            "median": 1.51832,
+            "p95": 1.57592,
+            "p99": 1.63368,
+            "min": 0.81612,
+            "max": 1.63368
+          },
+          "settledSlices": 0,
+          "settledMs": 0
+        },
+        "currentPhysicalPreparation": {
+          "sumMs": 0,
+          "slices": 0,
+          "cost": null,
+          "settledSlices": 0,
+          "settledMs": 0
+        },
+        "incomingPhysicalPreparation": {
+          "sumMs": 40.94056,
+          "slices": 11,
+          "cost": {
+            "n": 11,
+            "median": 3.81296,
+            "p95": 3.81908,
+            "p99": 3.81908,
+            "min": 3.09504,
+            "max": 3.81908
+          },
+          "settledSlices": 0,
+          "settledMs": 0
+        }
+      },
+      "provenance": [
+        "[native] NCSM1 regional ready: incoming=1; pupil=1; dependencyDelayMs=461.644; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+        "[native] NCSM1 regional ready: incoming=0; pupil=1; dependencyDelayMs=224.050; requests=0; resident=0; uploadedBytes=0; complete=true; gpuVisibility=hostBarrierBeforePrepare",
+        "[native] NCSM1 regional physical totals: requests=0; hits=0; misses=0; loaded=0; readBytes=0; uploadedBytes=0; residentHighWater=0; allocatedBytes=4; maximumBytes=124895232; queueHighWater=0; readyCapacity=8; uploadBudget=8; demandDispatches=44; dependencyDelayMsMax=461.644; recordReadDecodeVerifyMs=0.000; contributingRecords=670; anchoredDemandRequired=false"
+      ]
+    }
+  ],
+  "outliers": [
+    {
+      "label": "cpu-orbital-baseline",
+      "acquireResult": 0,
+      "presentResult": 0,
+      "shaderInfo": 0.0,
+      "frame": 1,
+      "generation": 0,
+      "pupil": 0,
+      "flags": 32771,
+      "update": 7.7888,
+      "fenceWait": 0.0112,
+      "inspection": 0.0218,
+      "hostCallback": 5.2594,
+      "validationUpload": 2.4964,
+      "acquire": 0.1396,
+      "record": 0.4094,
+      "submit": 0.0596,
+      "present": 8.061,
+      "recreate": 173.8182,
+      "recreateCount": 1,
+      "total": 190.3336,
+      "unattributed": 0.057,
+      "gpuFrame": 0,
+      "geometryFrame": 0,
+      "gpuGeneration": 0,
+      "gpuTotal": 0.0,
+      "gpuCandidate": 0.0,
+      "gpuCullAndPreparation": 0.0,
+      "clippingInput": 0,
+      "clippingOutput": 0,
+      "fragments": 0,
+      "tcsPatches": 0,
+      "tesInvocations": 0
+    },
+    {
+      "label": "cpu-orbital-candidate",
+      "acquireResult": 0,
+      "presentResult": 0,
+      "shaderInfo": 0.0,
+      "frame": 1,
+      "generation": 0,
+      "pupil": 0,
+      "flags": 32771,
+      "update": 6.7741,
+      "fenceWait": 0.0114,
+      "inspection": 0.0119,
+      "hostCallback": 4.3688,
+      "validationUpload": 2.382,
+      "acquire": 0.1355,
+      "record": 0.4097,
+      "submit": 0.0615,
+      "present": 8.318,
+      "recreate": 179.6045,
+      "recreateCount": 1,
+      "total": 195.3448,
+      "unattributed": 0.0415,
+      "gpuFrame": 0,
+      "geometryFrame": 0,
+      "gpuGeneration": 0,
+      "gpuTotal": 0.0,
+      "gpuCandidate": 0.0,
+      "gpuCullAndPreparation": 0.0,
+      "clippingInput": 0,
+      "clippingOutput": 0,
+      "fragments": 0,
+      "tcsPatches": 0,
+      "tesInvocations": 0
+    },
+    {
+      "label": "cpu-factor1-baseline",
+      "acquireResult": 0,
+      "presentResult": 0,
+      "shaderInfo": 0.0,
+      "frame": 1,
+      "generation": 0,
+      "pupil": 0,
+      "flags": 32771,
+      "update": 8.1747,
+      "fenceWait": 0.0102,
+      "inspection": 0.0108,
+      "hostCallback": 5.7611,
+      "validationUpload": 2.3926,
+      "acquire": 0.1548,
+      "record": 0.4116,
+      "submit": 0.0623,
+      "present": 8.5974,
+      "recreate": 167.923,
+      "recreateCount": 1,
+      "total": 185.3693,
+      "unattributed": 0.0455,
+      "gpuFrame": 0,
+      "geometryFrame": 0,
+      "gpuGeneration": 0,
+      "gpuTotal": 0.0,
+      "gpuCandidate": 0.0,
+      "gpuCullAndPreparation": 0.0,
+      "clippingInput": 0,
+      "clippingOutput": 0,
+      "fragments": 0,
+      "tcsPatches": 0,
+      "tesInvocations": 0
+    },
+    {
+      "label": "cpu-factor1-candidate",
+      "acquireResult": 0,
+      "presentResult": 0,
+      "shaderInfo": 0.0,
+      "frame": 1,
+      "generation": 0,
+      "pupil": 0,
+      "flags": 32771,
+      "update": 7.0444,
+      "fenceWait": 0.0111,
+      "inspection": 0.012,
+      "hostCallback": 4.705,
+      "validationUpload": 2.3163,
+      "acquire": 0.1456,
+      "record": 0.4144,
+      "submit": 0.0589,
+      "present": 8.7482,
+      "recreate": 170.9958,
+      "recreateCount": 1,
+      "total": 187.4509,
+      "unattributed": 0.0436,
+      "gpuFrame": 0,
+      "geometryFrame": 0,
+      "gpuGeneration": 0,
+      "gpuTotal": 0.0,
+      "gpuCandidate": 0.0,
+      "gpuCullAndPreparation": 0.0,
+      "clippingInput": 0,
+      "clippingOutput": 0,
+      "fragments": 0,
+      "tcsPatches": 0,
+      "tesInvocations": 0
+    },
+    {
+      "label": "cpu-factor1-candidate",
+      "acquireResult": 0,
+      "presentResult": 0,
+      "shaderInfo": 0.0,
+      "frame": 8,
+      "generation": 0,
+      "pupil": 0,
+      "flags": 32771,
+      "update": 48.2141,
+      "fenceWait": 45.6168,
+      "inspection": 0.1117,
+      "hostCallback": 0.5354,
+      "validationUpload": 1.9502,
+      "acquire": 0.1099,
+      "record": 0.3136,
+      "submit": 0.0719,
+      "present": 0.2245,
+      "recreate": 0.0,
+      "recreateCount": 0,
+      "total": 48.9566,
+      "unattributed": 0.0226,
+      "gpuFrame": 0,
+      "geometryFrame": 0,
+      "gpuGeneration": 0,
+      "gpuTotal": 3.68648,
+      "gpuCandidate": 0.0,
+      "gpuCullAndPreparation": 1.5406,
+      "clippingInput": 0,
+      "clippingOutput": 0,
+      "fragments": 0,
+      "tcsPatches": 0,
+      "tesInvocations": 0
+    },
+    {
+      "label": "cpu-florida-baseline",
+      "acquireResult": 0,
+      "presentResult": 0,
+      "shaderInfo": 0.0,
+      "frame": 1,
+      "generation": 0,
+      "pupil": 0,
+      "flags": 32771,
+      "update": 8.9875,
+      "fenceWait": 0.0113,
+      "inspection": 0.0114,
+      "hostCallback": 6.5875,
+      "validationUpload": 2.3773,
+      "acquire": 0.1439,
+      "record": 0.4278,
+      "submit": 0.0623,
+      "present": 8.2099,
+      "recreate": 180.6712,
+      "recreateCount": 1,
+      "total": 198.5475,
+      "unattributed": 0.0449,
+      "gpuFrame": 0,
+      "geometryFrame": 0,
+      "gpuGeneration": 0,
+      "gpuTotal": 0.0,
+      "gpuCandidate": 0.0,
+      "gpuCullAndPreparation": 0.0,
+      "clippingInput": 0,
+      "clippingOutput": 0,
+      "fragments": 0,
+      "tcsPatches": 0,
+      "tesInvocations": 0
+    },
+    {
+      "label": "cpu-florida-baseline",
+      "acquireResult": 0,
+      "presentResult": 0,
+      "shaderInfo": 0.0,
+      "frame": 8,
+      "generation": 0,
+      "pupil": 0,
+      "flags": 32771,
+      "update": 47.6782,
+      "fenceWait": 44.8488,
+      "inspection": 0.0984,
+      "hostCallback": 0.8265,
+      "validationUpload": 1.9045,
+      "acquire": 0.0645,
+      "record": 0.2274,
+      "submit": 0.0567,
+      "present": 0.1707,
+      "recreate": 0.0,
+      "recreateCount": 0,
+      "total": 48.2134,
+      "unattributed": 0.0159,
+      "gpuFrame": 0,
+      "geometryFrame": 0,
+      "gpuGeneration": 0,
+      "gpuTotal": 7.80817,
+      "gpuCandidate": 0.0,
+      "gpuCullAndPreparation": 1.67519,
+      "clippingInput": 0,
+      "clippingOutput": 0,
+      "fragments": 0,
+      "tcsPatches": 0,
+      "tesInvocations": 0
+    },
+    {
+      "label": "cpu-florida-candidate",
+      "acquireResult": 0,
+      "presentResult": 0,
+      "shaderInfo": 0.0,
+      "frame": 1,
+      "generation": 0,
+      "pupil": 0,
+      "flags": 32771,
+      "update": 8.2937,
+      "fenceWait": 0.013,
+      "inspection": 0.0111,
+      "hostCallback": 5.7567,
+      "validationUpload": 2.5129,
+      "acquire": 0.1721,
+      "record": 0.4676,
+      "submit": 0.073,
+      "present": 9.9017,
+      "recreate": 165.3569,
+      "recreateCount": 1,
+      "total": 184.3294,
+      "unattributed": 0.0644,
+      "gpuFrame": 0,
+      "geometryFrame": 0,
+      "gpuGeneration": 0,
+      "gpuTotal": 0.0,
+      "gpuCandidate": 0.0,
+      "gpuCullAndPreparation": 0.0,
+      "clippingInput": 0,
+      "clippingOutput": 0,
+      "fragments": 0,
+      "tcsPatches": 0,
+      "tesInvocations": 0
+    },
+    {
+      "label": "cpu-active-baseline",
+      "acquireResult": 0,
+      "presentResult": 0,
+      "shaderInfo": 0.0,
+      "frame": 1,
+      "generation": 0,
+      "pupil": 0,
+      "flags": 32771,
+      "update": 7.0401,
+      "fenceWait": 0.0118,
+      "inspection": 0.0116,
+      "hostCallback": 4.6804,
+      "validationUpload": 2.3363,
+      "acquire": 0.1711,
+      "record": 0.4191,
+      "submit": 0.0642,
+      "present": 8.561,
+      "recreate": 181.9632,
+      "recreateCount": 1,
+      "total": 198.2622,
+      "unattributed": 0.0435,
+      "gpuFrame": 0,
+      "geometryFrame": 0,
+      "gpuGeneration": 0,
+      "gpuTotal": 0.0,
+      "gpuCandidate": 0.0,
+      "gpuCullAndPreparation": 0.0,
+      "clippingInput": 0,
+      "clippingOutput": 0,
+      "fragments": 0,
+      "tcsPatches": 0,
+      "tesInvocations": 0
+    },
+    {
+      "label": "cpu-active-candidate",
+      "acquireResult": 0,
+      "presentResult": 0,
+      "shaderInfo": 0.0,
+      "frame": 1,
+      "generation": 0,
+      "pupil": 0,
+      "flags": 32771,
+      "update": 6.9477,
+      "fenceWait": 0.0113,
+      "inspection": 0.0123,
+      "hostCallback": 4.3894,
+      "validationUpload": 2.5347,
+      "acquire": 0.1434,
+      "record": 0.4187,
+      "submit": 0.0577,
+      "present": 9.5762,
+      "recreate": 179.1739,
+      "recreateCount": 1,
+      "total": 196.3635,
+      "unattributed": 0.0459,
+      "gpuFrame": 0,
+      "geometryFrame": 0,
+      "gpuGeneration": 0,
+      "gpuTotal": 0.0,
+      "gpuCandidate": 0.0,
+      "gpuCullAndPreparation": 0.0,
+      "clippingInput": 0,
+      "clippingOutput": 0,
+      "fragments": 0,
+      "tcsPatches": 0,
+      "tesInvocations": 0
+    },
+    {
+      "label": "cpu-active-candidate",
+      "acquireResult": 0,
+      "presentResult": 0,
+      "shaderInfo": 0.0,
+      "frame": 8,
+      "generation": 0,
+      "pupil": 0,
+      "flags": 32771,
+      "update": 43.5252,
+      "fenceWait": 41.2493,
+      "inspection": 0.0779,
+      "hostCallback": 0.3053,
+      "validationUpload": 1.8927,
+      "acquire": 0.075,
+      "record": 0.2894,
+      "submit": 0.06,
+      "present": 0.1955,
+      "recreate": 0.0,
+      "recreateCount": 0,
+      "total": 44.1611,
+      "unattributed": 0.016,
+      "gpuFrame": 0,
+      "geometryFrame": 0,
+      "gpuGeneration": 0,
+      "gpuTotal": 5.4724,
+      "gpuCandidate": 0.0,
+      "gpuCullAndPreparation": 1.85378,
+      "clippingInput": 0,
+      "clippingOutput": 0,
+      "fragments": 0,
+      "tcsPatches": 0,
+      "tesInvocations": 0
+    },
+    {
+      "label": "cpu-active-candidate",
+      "acquireResult": 0,
+      "presentResult": 0,
+      "shaderInfo": 0.0,
+      "frame": 9,
+      "generation": 0,
+      "pupil": 0,
+      "flags": 32771,
+      "update": 62.2718,
+      "fenceWait": 59.8414,
+      "inspection": 0.1382,
+      "hostCallback": 0.3238,
+      "validationUpload": 1.9684,
+      "acquire": 0.0702,
+      "record": 0.2607,
+      "submit": 0.0582,
+      "present": 0.1966,
+      "recreate": 0.0,
+      "recreateCount": 0,
+      "total": 62.8733,
+      "unattributed": 0.0158,
+      "gpuFrame": 0,
+      "geometryFrame": 0,
+      "gpuGeneration": 0,
+      "gpuTotal": 5.42519,
+      "gpuCandidate": 0.0,
+      "gpuCullAndPreparation": 1.85615,
+      "clippingInput": 0,
+      "clippingOutput": 0,
+      "fragments": 0,
+      "tcsPatches": 0,
+      "tesInvocations": 0
+    },
+    {
+      "label": "cpu-grazing-baseline",
+      "acquireResult": 0,
+      "presentResult": 0,
+      "shaderInfo": 0.0,
+      "frame": 1,
+      "generation": 0,
+      "pupil": 0,
+      "flags": 32771,
+      "update": 7.1502,
+      "fenceWait": 0.012,
+      "inspection": 0.0125,
+      "hostCallback": 4.7322,
+      "validationUpload": 2.3935,
+      "acquire": 0.1347,
+      "record": 0.4033,
+      "submit": 0.0543,
+      "present": 8.324,
+      "recreate": 176.8529,
+      "recreateCount": 1,
+      "total": 192.962,
+      "unattributed": 0.0426,
+      "gpuFrame": 0,
+      "geometryFrame": 0,
+      "gpuGeneration": 0,
+      "gpuTotal": 0.0,
+      "gpuCandidate": 0.0,
+      "gpuCullAndPreparation": 0.0,
+      "clippingInput": 0,
+      "clippingOutput": 0,
+      "fragments": 0,
+      "tcsPatches": 0,
+      "tesInvocations": 0
+    },
+    {
+      "label": "cpu-grazing-baseline",
+      "acquireResult": 0,
+      "presentResult": 0,
+      "shaderInfo": 0.0,
+      "frame": 8,
+      "generation": 0,
+      "pupil": 0,
+      "flags": 32771,
+      "update": 46.4759,
+      "fenceWait": 43.8513,
+      "inspection": 0.1313,
+      "hostCallback": 0.5125,
+      "validationUpload": 1.9808,
+      "acquire": 0.0564,
+      "record": 0.2117,
+      "submit": 0.0667,
+      "present": 0.1839,
+      "recreate": 0.0,
+      "recreateCount": 0,
+      "total": 47.0108,
+      "unattributed": 0.0162,
+      "gpuFrame": 0,
+      "geometryFrame": 0,
+      "gpuGeneration": 0,
+      "gpuTotal": 4.93428,
+      "gpuCandidate": 0.0,
+      "gpuCullAndPreparation": 1.53928,
+      "clippingInput": 0,
+      "clippingOutput": 0,
+      "fragments": 0,
+      "tcsPatches": 0,
+      "tesInvocations": 0
+    },
+    {
+      "label": "cpu-grazing-candidate",
+      "acquireResult": 0,
+      "presentResult": 0,
+      "shaderInfo": 0.0,
+      "frame": 1,
+      "generation": 0,
+      "pupil": 0,
+      "flags": 32771,
+      "update": 7.079,
+      "fenceWait": 0.0112,
+      "inspection": 0.0123,
+      "hostCallback": 4.5635,
+      "validationUpload": 2.492,
+      "acquire": 0.1625,
+      "record": 0.5174,
+      "submit": 0.0726,
+      "present": 10.5722,
+      "recreate": 181.223,
+      "recreateCount": 1,
+      "total": 199.6839,
+      "unattributed": 0.0572,
+      "gpuFrame": 0,
+      "geometryFrame": 0,
+      "gpuGeneration": 0,
+      "gpuTotal": 0.0,
+      "gpuCandidate": 0.0,
+      "gpuCullAndPreparation": 0.0,
+      "clippingInput": 0,
+      "clippingOutput": 0,
+      "fragments": 0,
+      "tcsPatches": 0,
+      "tesInvocations": 0
+    },
+    {
+      "label": "cpu-grazing-candidate",
+      "acquireResult": 0,
+      "presentResult": 0,
+      "shaderInfo": 0.0,
+      "frame": 9,
+      "generation": 0,
+      "pupil": 0,
+      "flags": 32771,
+      "update": 76.1506,
+      "fenceWait": 73.7231,
+      "inspection": 0.1001,
+      "hostCallback": 0.3336,
+      "validationUpload": 1.9938,
+      "acquire": 0.1187,
+      "record": 0.3168,
+      "submit": 0.0688,
+      "present": 0.219,
+      "recreate": 0.0,
+      "recreateCount": 0,
+      "total": 76.8988,
+      "unattributed": 0.0249,
+      "gpuFrame": 0,
+      "geometryFrame": 0,
+      "gpuGeneration": 0,
+      "gpuTotal": 3.44756,
+      "gpuCandidate": 0.0,
+      "gpuCullAndPreparation": 1.55168,
+      "clippingInput": 0,
+      "clippingOutput": 0,
+      "fragments": 0,
+      "tcsPatches": 0,
+      "tesInvocations": 0
+    }
+  ],
+  "compiler": {
+    "baseline-active": {
+      "stages": {
+        "stage-1": {
+          "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e",
+          "machineWordsSha256": "0800126c5d180c5960d9c2dff2b7d651ad1252144e88cf08f57ae0e89e582ad1",
+          "instructions": 806,
+          "fp64Named": 67,
+          "fp32Named": 407,
+          "wave32": true
+        },
+        "stage-16": {
+          "sha256": "8adda64df885cf852551160f19eab54d86c340642f707baaa74f819146ec13b6",
+          "machineWordsSha256": "9c9776bc521c13fb5427446e019f96029066fc01084945d7700390b1a15a552b",
+          "instructions": 2891,
+          "fp64Named": 763,
+          "fp32Named": 1210,
+          "wave32": true
+        },
+        "stage-2": {
+          "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e",
+          "machineWordsSha256": "0800126c5d180c5960d9c2dff2b7d651ad1252144e88cf08f57ae0e89e582ad1",
+          "instructions": 806,
+          "fp64Named": 67,
+          "fp32Named": 407,
+          "wave32": true
+        },
+        "stage-4": {
+          "sha256": "b9e48ba68fc07d7e4abcf6e6032521b3aeef68283d01e636b91c36663245e4d5",
+          "machineWordsSha256": "5edd330f24b73826394bdbe0e50e4c43dad8442ee21f1be2eda07ce20adc3533",
+          "instructions": 546,
+          "fp64Named": 101,
+          "fp32Named": 150,
+          "wave32": true
+        }
+      },
+      "resources": [
+        "[native] AMD shader statistics: oppositeFace=1; stage=1; vgpr=39; sgpr=64; ldsBytes=32212; scratchBytes=0",
+        "[native] AMD shader statistics: oppositeFace=1; stage=2; vgpr=39; sgpr=64; ldsBytes=32212; scratchBytes=0",
+        "[native] AMD shader statistics: oppositeFace=1; stage=4; vgpr=48; sgpr=32; ldsBytes=4608; scratchBytes=0",
+        "[native] AMD shader statistics: oppositeFace=1; stage=16; vgpr=85; sgpr=53; ldsBytes=0; scratchBytes=0"
+      ]
+    },
+    "cheap-active": {
+      "stages": {
+        "stage-1": {
+          "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e",
+          "machineWordsSha256": "0800126c5d180c5960d9c2dff2b7d651ad1252144e88cf08f57ae0e89e582ad1",
+          "instructions": 806,
+          "fp64Named": 67,
+          "fp32Named": 407,
+          "wave32": true
+        },
+        "stage-16": {
+          "sha256": "5253da0c3d01c47cc5fceab8c73edc9d0fa9dbb28b398376313a98732594ffbb",
+          "machineWordsSha256": "0078415000dd16b1884748206ffc9203f925efa61f5a2e0ecee5b480e5748727",
+          "instructions": 128,
+          "fp64Named": 0,
+          "fp32Named": 123,
+          "wave32": false
+        },
+        "stage-2": {
+          "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e",
+          "machineWordsSha256": "0800126c5d180c5960d9c2dff2b7d651ad1252144e88cf08f57ae0e89e582ad1",
+          "instructions": 806,
+          "fp64Named": 67,
+          "fp32Named": 407,
+          "wave32": true
+        },
+        "stage-4": {
+          "sha256": "3496d807c1d536eaf19019752cf8509a0e728620a780008a60ef3fc0540ace02",
+          "machineWordsSha256": "36860e9269ae93abf33a505c46334a345539bd1b76af9b29a0cb8075eda7925e",
+          "instructions": 567,
+          "fp64Named": 101,
+          "fp32Named": 150,
+          "wave32": true
+        }
+      },
+      "resources": [
+        "[native] AMD shader statistics: oppositeFace=1; stage=1; vgpr=39; sgpr=64; ldsBytes=32212; scratchBytes=0",
+        "[native] AMD shader statistics: oppositeFace=1; stage=2; vgpr=39; sgpr=64; ldsBytes=32212; scratchBytes=0",
+        "[native] AMD shader statistics: oppositeFace=1; stage=4; vgpr=48; sgpr=32; ldsBytes=4608; scratchBytes=0",
+        "[native] AMD shader statistics: oppositeFace=1; stage=16; vgpr=9; sgpr=8; ldsBytes=0; scratchBytes=0"
+      ]
+    },
+    "zero-active": {
+      "stages": {
+        "stage-1": {
+          "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e",
+          "machineWordsSha256": "0800126c5d180c5960d9c2dff2b7d651ad1252144e88cf08f57ae0e89e582ad1",
+          "instructions": 806,
+          "fp64Named": 67,
+          "fp32Named": 407,
+          "wave32": true
+        },
+        "stage-16": {
+          "sha256": "a531c7fed6d8111a015cbaae2fc06f36f1e436b75c34967a8b6430b981df091b",
+          "machineWordsSha256": "b9ae8a412540aa8b6f5f15b49aaa226ac9f6379028d2daf9d5cfe02f97d7b5d8",
+          "instructions": 2895,
+          "fp64Named": 763,
+          "fp32Named": 1212,
+          "wave32": true
+        },
+        "stage-2": {
+          "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e",
+          "machineWordsSha256": "0800126c5d180c5960d9c2dff2b7d651ad1252144e88cf08f57ae0e89e582ad1",
+          "instructions": 806,
+          "fp64Named": 67,
+          "fp32Named": 407,
+          "wave32": true
+        },
+        "stage-4": {
+          "sha256": "b9e48ba68fc07d7e4abcf6e6032521b3aeef68283d01e636b91c36663245e4d5",
+          "machineWordsSha256": "5edd330f24b73826394bdbe0e50e4c43dad8442ee21f1be2eda07ce20adc3533",
+          "instructions": 546,
+          "fp64Named": 101,
+          "fp32Named": 150,
+          "wave32": true
+        }
+      },
+      "resources": [
+        "[native] AMD shader statistics: oppositeFace=1; stage=1; vgpr=39; sgpr=64; ldsBytes=32212; scratchBytes=0",
+        "[native] AMD shader statistics: oppositeFace=1; stage=2; vgpr=39; sgpr=64; ldsBytes=32212; scratchBytes=0",
+        "[native] AMD shader statistics: oppositeFace=1; stage=4; vgpr=48; sgpr=32; ldsBytes=4608; scratchBytes=0",
+        "[native] AMD shader statistics: oppositeFace=1; stage=16; vgpr=78; sgpr=53; ldsBytes=0; scratchBytes=0"
+      ]
+    }
+  }
+}

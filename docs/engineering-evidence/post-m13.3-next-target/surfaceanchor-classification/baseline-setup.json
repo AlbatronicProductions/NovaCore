@@ -1,0 +1,338 @@
+{
+  "commit": "180eaf150ba5db6364e17dd48336690778f058f9",
+  "assetsHardlinked": [
+    {
+      "path": "assets\\earth\\PROVENANCE.md",
+      "bytes": 4887,
+      "sha256": "75040df85d40853a5d902679d239bb0a4e84a654ab7a46be11ebaf824251c115"
+    },
+    {
+      "path": "assets\\earth\\runtime\\earth_elevation_8192x4096.r16",
+      "bytes": 67108864,
+      "sha256": "4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317"
+    },
+    {
+      "path": "assets\\earth\\runtime\\earth_florida_m12.nccube.manifest.json",
+      "bytes": 1879,
+      "sha256": "55cf59eed9bafdfd38213c5ea7d6d867a4873c7bb3c8d6709fc674094a7ea9b1"
+    },
+    {
+      "path": "assets\\earth\\runtime\\earth_surface_v5.nccube.manifest.json",
+      "bytes": 43187,
+      "sha256": "ac79a3c4e41d1dcbba948c4cb82184898f8f5a71b883bb4a076ef8aed5452485"
+    },
+    {
+      "path": "assets\\earth\\source\\nasa-blue-marble-2004-12-21600x10800.png",
+      "bytes": 130592521,
+      "sha256": "4ee45a0a18229e5667b3523088567e11ea4d857ceac8d7a2d7b6130d5376c5a6"
+    },
+    {
+      "path": "assets\\earth\\source\\nasa-blue-marble-clouds-2048.jpg",
+      "bytes": 829367,
+      "sha256": "daddaad84d7a33bbbc86cdda3f591099f57cee8607b7bcf3b67eb7e4f7a1c793"
+    },
+    {
+      "path": "assets\\planetary-nested-scale-mesh\\nested-scale-00.ncsm1",
+      "bytes": 1272284,
+      "sha256": "87e0271e46e63c479ecf7d7040d4ed98786eef34f3d88a339cf07d3aafa76f9c"
+    },
+    {
+      "path": "assets\\planetary-nested-scale-mesh\\nested-scale-01.ncsm1",
+      "bytes": 1721308,
+      "sha256": "312046fb14907168db53853fb7906654b021e8b8d3918bcdd500197ca9b8da81"
+    },
+    {
+      "path": "assets\\planetary-nested-scale-mesh\\nested-scale-02.ncsm1",
+      "bytes": 2726012,
+      "sha256": "7057cb6d87fab076615092873e744ae2a3c3ef0834989a2c161abd7d1c0e6ddb"
+    },
+    {
+      "path": "assets\\planetary-nested-scale-mesh\\nested-scale-03.ncsm1",
+      "bytes": 4978236,
+      "sha256": "45ce4465a44b8bfc79789a4dc6ce38eca39db7c6e3d18a849327865de8682b74"
+    },
+    {
+      "path": "assets\\planetary-nested-scale-mesh\\nested-scale-04.ncsm1",
+      "bytes": 9523836,
+      "sha256": "cf499fcfa3395bf8650a903d213aa4542d1b0f176493e21913ac7b014450079a"
+    },
+    {
+      "path": "assets\\planetary-nested-scale-mesh\\nested-scale-05.ncsm1",
+      "bytes": 14069436,
+      "sha256": "5d9479382df7824a9e9fd17b2e8f6081a3ead3350ac177fddf9b578d72f74907"
+    },
+    {
+      "path": "assets\\planetary-nested-scale-mesh\\nested-scale-06.ncsm1",
+      "bytes": 18615036,
+      "sha256": "c8099bdb7e29d90e356acf3128e4bc42b6bc8fbdc8b9b0dd15aebda82a4d0802"
+    },
+    {
+      "path": "assets\\planetary-nested-scale-mesh\\nested-scale-07.ncsm1",
+      "bytes": 23160636,
+      "sha256": "65f457d2ec4dc2e6389d065ade81441fa3e342a5052dc27465554afab9277b8e"
+    },
+    {
+      "path": "assets\\planetary-nested-scale-mesh\\nested-scale-08.ncsm1",
+      "bytes": 27706236,
+      "sha256": "ec1ca91c6f363c29ea819f11fd9fc8ddf0ebc0a6b0ad4660e5a436f1eac16024"
+    },
+    {
+      "path": "assets\\planetary-nested-scale-mesh\\nested-scale-09.ncsm1",
+      "bytes": 32251836,
+      "sha256": "a1ab93092e8d95ae646d4d98c10ac45693a6e5df5db8c000d3d4990528734341"
+    },
+    {
+      "path": "assets\\planetary-nested-scale-mesh\\nested-scale-10.ncsm1",
+      "bytes": 36797436,
+      "sha256": "0ba3996ab578035b3183b32b247d63501f2a4638ef41b96626dfd0a51f68275d"
+    },
+    {
+      "path": "assets\\planetary-nested-scale-mesh\\nested-scale-11.ncsm1",
+      "bytes": 41343036,
+      "sha256": "91354d15e3d2040f23756ca95e6833b5f6aaa1ff0def7f63b303e26abace520a"
+    },
+    {
+      "path": "assets\\planetary-nested-scale-mesh\\nested-scale-12.ncsm1",
+      "bytes": 45888636,
+      "sha256": "34f0be7641dec074196b04e23c67dfbb1e1a257324b473116b9b26b3801ecc77"
+    },
+    {
+      "path": "assets\\planetary-nested-scale-mesh\\nested-scale-13.ncsm1",
+      "bytes": 50434236,
+      "sha256": "577ced0aa21d6e6290911cdbbeef938a88f41659f89656575853bf2dd6e40fd3"
+    },
+    {
+      "path": "assets\\planetary-nested-scale-mesh\\nested-scale-14.ncsm1",
+      "bytes": 54979836,
+      "sha256": "3f005bfd18a358ecf7670f6e05284e9c72e7fe2920860cafce2964ac38e67c24"
+    },
+    {
+      "path": "assets\\planetary-nested-scale-mesh\\nested-scale-15.ncsm1",
+      "bytes": 59525436,
+      "sha256": "97831f7b0158e6706f592f26b0d2ec881cb3b4bc64b11907f5bd6de727e6db63"
+    },
+    {
+      "path": "assets\\planetary-nested-scale-mesh\\nested-scale-16.ncsm1",
+      "bytes": 64071036,
+      "sha256": "01293426c73bb9d1eaa159f06737bd7fe6ff8286911a4b7f4a4035fdaa398d7e"
+    },
+    {
+      "path": "assets\\planetary-nested-scale-mesh\\nested-scale-17.ncsm1",
+      "bytes": 65515132,
+      "sha256": "8603cc2c69c6f5c396769e04a991c9f021eecfe7a4839046f94a48fb69fd072e"
+    },
+    {
+      "path": "assets\\planetary-nested-scale-mesh\\nested-scale-mesh-manifest.json",
+      "bytes": 8968,
+      "sha256": "6be40d1770d7af04685753dd28bccd9c29b7f8645ed17ee05bce6c4705fdf7da"
+    },
+    {
+      "path": "assets\\planetary-nested-scale-mesh\\README.md",
+      "bytes": 562,
+      "sha256": "6c4528a4e08542cd02c56f0d15574fb62df0c3dca9440b6a7046e2ac852712ba"
+    },
+    {
+      "path": "assets\\planetary-production-topology\\production-00.nctop2",
+      "bytes": 169228,
+      "sha256": "9d6c33349ff0bf8e34ec3df251fe4fda2dc9c925fe1c2d5ce2036cba666710dd"
+    },
+    {
+      "path": "assets\\planetary-production-topology\\production-01.nctop2",
+      "bytes": 610052,
+      "sha256": "4f3353a0690192a59d9f00aa7da942ee103c182c3ce84285ae8f97fa8f2618eb"
+    },
+    {
+      "path": "assets\\planetary-production-topology\\production-02.nctop2",
+      "bytes": 1035268,
+      "sha256": "9aae06aa35b3f1420cae42bdfe562bc83eea4c34094b930b4b9297927fc20bba"
+    },
+    {
+      "path": "assets\\planetary-production-topology\\production-03.nctop2",
+      "bytes": 1704548,
+      "sha256": "75dae8365705c9878bc0ea45b9f9152f06a9a1497799c48ee2f213c2db9f4506"
+    },
+    {
+      "path": "assets\\planetary-production-topology\\production-04.nctop2",
+      "bytes": 2707892,
+      "sha256": "312ecc5652087129b7d636ece24fd8afaae5f4dfa216c10a45e439196740b9c4"
+    },
+    {
+      "path": "assets\\planetary-production-topology\\production-05.nctop2",
+      "bytes": 4103492,
+      "sha256": "a25b636579ebde212e6c26aa5b172b9151939ee9e24e2cfaa96db18161e9bfd7"
+    },
+    {
+      "path": "assets\\planetary-production-topology\\production-06.nctop2",
+      "bytes": 5866500,
+      "sha256": "9afece2b3a798c30e89cbafcbae26cb9d0499f1ef5a07a049a07c006aa9db9ac"
+    },
+    {
+      "path": "assets\\planetary-production-topology\\production-07.nctop2",
+      "bytes": 7910132,
+      "sha256": "3fc098ae316cd2711786b927a545e87175bb0b3ed623ae77ef28ae2dbd476a78"
+    },
+    {
+      "path": "assets\\planetary-production-topology\\production-08.nctop2",
+      "bytes": 10155668,
+      "sha256": "2330b22e54b77372ce88023fadbbafa5ea9a06dd2498c1dfe636734fefa2394c"
+    },
+    {
+      "path": "assets\\planetary-production-topology\\production-09.nctop2",
+      "bytes": 12513636,
+      "sha256": "b49153dc02b6a03cfc8b8b430f41290743db2d4a97eeeefdca14a98ac0420752"
+    },
+    {
+      "path": "assets\\planetary-production-topology\\production-10.nctop2",
+      "bytes": 14934692,
+      "sha256": "92f55e705b7149a93378910ec8335f5adbde744f4cb61f67f304a30b801c180a"
+    },
+    {
+      "path": "assets\\planetary-production-topology\\production-11.nctop2",
+      "bytes": 17388484,
+      "sha256": "099136349b5efcf916ecccbf78c92df04ac10b822e5b81e57f414cb31a78764a"
+    },
+    {
+      "path": "assets\\planetary-production-topology\\production-12.nctop2",
+      "bytes": 19867124,
+      "sha256": "a1a3a599671faf1f1ff011eece59ed3ceaf19c4154a430f42d2f13c47cb5933b"
+    },
+    {
+      "path": "assets\\planetary-production-topology\\production-13.nctop2",
+      "bytes": 22350388,
+      "sha256": "adb7e698e20672196cd3e2b798166fc2214a83564b0fcf710fa96882b4a0731f"
+    },
+    {
+      "path": "assets\\planetary-production-topology\\production-14.nctop2",
+      "bytes": 24837108,
+      "sha256": "1b7af471636e7578d89abd4396bdfe02ba2dd2c97d84aee9f95e4b5d6c59aba4"
+    },
+    {
+      "path": "assets\\planetary-production-topology\\production-15.nctop2",
+      "bytes": 27330548,
+      "sha256": "37a415ec1cd03c1e382b08f084abfc6fef4fe2879323525ec5afd23edde45d48"
+    },
+    {
+      "path": "assets\\planetary-production-topology\\production-16.nctop2",
+      "bytes": 29824372,
+      "sha256": "05577cfd4540a3432fa185b2aef2203a51c4962f1771522cfeed18038d32f8dc"
+    },
+    {
+      "path": "assets\\planetary-production-topology\\production-17.nctop2",
+      "bytes": 32318196,
+      "sha256": "7c10a664eb1362e27c68ea920735ea640b9b63f4af6ae57c4ea213ac0f42bcba"
+    },
+    {
+      "path": "assets\\planetary-production-topology\\production-manifest.json",
+      "bytes": 3678,
+      "sha256": "1b68467b33957b721f45dff9d175b933a5770fa5e6c10a99a71a560865a72dcf"
+    },
+    {
+      "path": "assets\\planetary-production-topology\\README.md",
+      "bytes": 1162,
+      "sha256": "fb7eb7553b31192e0dd45baeaa1cefc31e91ee3f5f127f07c633d00cf43e3699"
+    },
+    {
+      "path": "assets\\planetary-topology\\intermediate-approach.nctop",
+      "bytes": 46972,
+      "sha256": "59bc53c6faf0002a35420c4719a52d716ec46e808d3727d4c2d989c3461d7e34"
+    },
+    {
+      "path": "assets\\planetary-topology\\manifest.json",
+      "bytes": 478,
+      "sha256": "e06dc35a7ead20e9ddea09b923d6f1b398eb399e5974d1996b67537a21ce2cc2"
+    },
+    {
+      "path": "assets\\planetary-topology\\orbital.nctop",
+      "bytes": 11764,
+      "sha256": "4ee34c2eba9df2fd1ebed6579231449d671a28ced742e9539c11d97f0b80a810"
+    },
+    {
+      "path": "assets\\planetary-topology\\README.md",
+      "bytes": 987,
+      "sha256": "d79eba26e090ed5c74aa78200d231b06d1a44e566fb700c5043ba7b18e8fbbae"
+    },
+    {
+      "path": "assets\\planetary-topology\\surface-pupil.nctop",
+      "bytes": 187132,
+      "sha256": "af3279dc1bc41d7bc137270ee352b8b11468147339ed912b3fccc8c7f751291c"
+    },
+    {
+      "path": "assets\\terrain\\manifests\\earth-florida-m12.json",
+      "bytes": 1439,
+      "sha256": "828e999a73e47b6d7f3e786ece8dfcb21cb826e9a9da517c93e2aaaf3eba0a15"
+    },
+    {
+      "path": "assets\\terrain\\manifests\\earth-surface-v5.json",
+      "bytes": 1278,
+      "sha256": "308c489a6aab4b45561ab9e9db6168066bb9261d49f1302f69a2b0e9d5d4680a"
+    },
+    {
+      "path": ".novacore\\cache\\m12-level9-test.json",
+      "bytes": 1630,
+      "sha256": "3b41aea5e0babe0645aba8dd1ec1dbdd97ef00944a61f3f99da189dd6ff3f1cd"
+    },
+    {
+      "path": ".novacore\\cache\\m12-level9-test.nccube",
+      "bytes": 6537834,
+      "sha256": "2ba7db1de96c35f23fde3b84adadb4077e065ceb7931c0609bfeb2eb803e4f73"
+    },
+    {
+      "path": ".novacore\\cache\\sources\\usgs-3dep\\USGS_13_n29w081_20221103.tif",
+      "bytes": 174745033,
+      "sha256": "532ab3a4ade336d9a7d266e6745a12f043db928ba8bf28a4576886de421a74cd"
+    },
+    {
+      "path": ".novacore\\cache\\terrain\\v1\\.generation\\earth_local_v2.nccube.manifest.json",
+      "bytes": 964,
+      "sha256": "3532e50008e9c7bae811747c13ab4445e92da617d8804450e27ecb289325c077"
+    },
+    {
+      "path": ".novacore\\cache\\terrain\\v1\\.generation\\earth_surface_v5.nccube.manifest.json",
+      "bytes": 42961,
+      "sha256": "2da63796092582fc3bfbc444907a1dcaca8042f0055f144caf50a725e41148f9"
+    },
+    {
+      "path": ".novacore\\cache\\terrain\\v1\\sha256\\17\\17344f8a99931083853fe3351a621ddaf0b352702054febf53705c13a17da285.nccube",
+      "bytes": 7650603,
+      "sha256": "17344f8a99931083853fe3351a621ddaf0b352702054febf53705c13a17da285"
+    },
+    {
+      "path": ".novacore\\cache\\terrain\\v1\\sha256\\28\\288f56e129717ceb83ad133490d424fd1d49836601d0a768bb5dab525cf4bf08.nccube",
+      "bytes": 61484224,
+      "sha256": "288f56e129717ceb83ad133490d424fd1d49836601d0a768bb5dab525cf4bf08"
+    },
+    {
+      "path": ".novacore\\cache\\terrain\\v1\\sha256\\38\\38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae.nccube",
+      "bytes": 61484224,
+      "sha256": "38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae"
+    },
+    {
+      "path": ".novacore\\cache\\terrain\\v1\\sha256\\5e\\5e92a0676bf8cd64f4c00b5e8d79f4b8186cd9a8a57b395138edbab760f1cb76.nccube",
+      "bytes": 61484224,
+      "sha256": "5e92a0676bf8cd64f4c00b5e8d79f4b8186cd9a8a57b395138edbab760f1cb76"
+    },
+    {
+      "path": ".novacore\\cache\\terrain\\v1\\sha256\\60\\60ada8949bfd782dfaea6c04270186bda52654d7263fbc3dbda5eaa4fd2e578a.nccube",
+      "bytes": 7652567,
+      "sha256": "60ada8949bfd782dfaea6c04270186bda52654d7263fbc3dbda5eaa4fd2e578a"
+    },
+    {
+      "path": ".novacore\\cache\\terrain\\v1\\sha256\\6f\\6f10ebcd19def6a116d2804fc6fc7d67bbe655e129151beae35a91c0e317be8f.nccube",
+      "bytes": 210307596,
+      "sha256": "6f10ebcd19def6a116d2804fc6fc7d67bbe655e129151beae35a91c0e317be8f"
+    },
+    {
+      "path": ".novacore\\cache\\terrain\\v1\\sha256\\b8\\b8ba51985b6869d41f4bb4b81eeb03c4dc61d9560ce4099768dc041a27b6fa98.nccube",
+      "bytes": 210307363,
+      "sha256": "b8ba51985b6869d41f4bb4b81eeb03c4dc61d9560ce4099768dc041a27b6fa98"
+    },
+    {
+      "path": ".novacore\\cache\\terrain\\v1\\sha256\\c4\\c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe.nccube",
+      "bytes": 210307596,
+      "sha256": "c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe"
+    }
+  ],
+  "native": "74859dbb7854e92d3069e4081276eef98980945c2c9c4d4adf3a926b18cbaeca",
+  "baselineFragment": "4b79673d14c90df52703a322c116415ec9e833cf2247731ca5ee1ab7b563df06",
+  "normalCandidateFragment": "8c59838abb3d7ee6418695ea40f044ca1f04f5c3c9216296d5cc19bba6110d6b"
+}
