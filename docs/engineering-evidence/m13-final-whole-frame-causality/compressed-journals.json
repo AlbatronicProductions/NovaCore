@@ -1,0 +1,269 @@
+{
+  "lossless": true,
+  "files": [
+    {
+      "source": "base-active.json",
+      "destination": "base-active.json.gz",
+      "sourceBytes": 132322,
+      "compressedBytes": 24578,
+      "sourceSha256": "469051f65fa19411d9c4dcb311f3fbbf8bf350292628b93762c3946eaf16bf1a",
+      "compressedSha256": "348e42360c581a88820b2546a42f71284dc528417ad50e974f37958f5e2f0b9e"
+    },
+    {
+      "source": "base-florida-repeat-isa.json",
+      "destination": "base-florida-repeat-isa.json.gz",
+      "sourceBytes": 148390,
+      "compressedBytes": 32914,
+      "sourceSha256": "3a6004d7043ecb39e7223a501ccdd6f60fe56b3a150f36043f24ad43f5cbebc8",
+      "compressedSha256": "2ecaf5cbc53dd8639bda9e0316c1685e65a965ee34d04af2e2bbb907fa4ee163"
+    },
+    {
+      "source": "base-florida-return.json",
+      "destination": "base-florida-return.json.gz",
+      "sourceBytes": 146161,
+      "compressedBytes": 33017,
+      "sourceSha256": "50d6955c308d73418940057e7ff0ead40858667febb21b588c64805fd42d8968",
+      "compressedSha256": "e111b66bbfd1eda87b7b6c0026879e59c2381a06f0f2737653ac2474552c608e"
+    },
+    {
+      "source": "base-florida.json",
+      "destination": "base-florida.json.gz",
+      "sourceBytes": 146191,
+      "compressedBytes": 32409,
+      "sourceSha256": "be30903ddf5c920b850ddfea089db3aab832a0cb870b4e0fb668b010ea894088",
+      "compressedSha256": "234c7123181f6b5c485057f43d9d262f364c30fdb2097e1703b3f46c2e342cf7"
+    },
+    {
+      "source": "base-grazing.json",
+      "destination": "base-grazing.json.gz",
+      "sourceBytes": 133553,
+      "compressedBytes": 27045,
+      "sourceSha256": "e5c6dfa5ff9ddf54f7da43b00cadbc2290c2961c94afcc3a1e0e120983e18166",
+      "compressedSha256": "40ff7ef0308dc95fc1b48af473eeb15d6841432b4dbacb68a6447bd0789c88f0"
+    },
+    {
+      "source": "base-inland-return.json",
+      "destination": "base-inland-return.json.gz",
+      "sourceBytes": 128428,
+      "compressedBytes": 25354,
+      "sourceSha256": "6b7904b9af89ae004e547990ff7190c5be0566f04c87538d2a29211ef8bba637",
+      "compressedSha256": "0346793a5a480a75815334645b344dda9a6d45011013f1560bb29773e6b01344"
+    },
+    {
+      "source": "base-inland.json",
+      "destination": "base-inland.json.gz",
+      "sourceBytes": 128433,
+      "compressedBytes": 23864,
+      "sourceSha256": "bd2f3a4d33751a8d18714ef8e9538f7d0173d202c6ba15e507505613d84461ab",
+      "compressedSha256": "a7c169fa411ab044fb5a918695c37a1a0a1facf9a3bb068607063382f274b514"
+    },
+    {
+      "source": "candidate-final-active.json",
+      "destination": "candidate-final-active.json.gz",
+      "sourceBytes": 130547,
+      "compressedBytes": 24321,
+      "sourceSha256": "1278caa6375edbf99d44f7376d3217a01efece21d04b8b2b0aeb5f4bd7f458a7",
+      "compressedSha256": "e3958481635562f7ae55f06aff6bbea8846c6c8941fa2ee518eeb8d90233a41c"
+    },
+    {
+      "source": "candidate-final-florida.json",
+      "destination": "candidate-final-florida.json.gz",
+      "sourceBytes": 145003,
+      "compressedBytes": 28870,
+      "sourceSha256": "f50e37e09566c378fe44b1b1ff3301615731bce2d568fed7fd88e476ffd7fd51",
+      "compressedSha256": "4a3960100d5e563d6302b40b65894970105eed75601518e15c909c0c8a345a26"
+    },
+    {
+      "source": "candidate-final-grazing.json",
+      "destination": "candidate-final-grazing.json.gz",
+      "sourceBytes": 134057,
+      "compressedBytes": 26351,
+      "sourceSha256": "13fbe6d281f74770f036aa5d8270fd0921feeec5ffac987ece4ba0c792d15abf",
+      "compressedSha256": "ef0175311ae270d7b859ad400e43f39c727043b398f1818758d5e5b19a7c6bdd"
+    },
+    {
+      "source": "candidate-final-inland.json",
+      "destination": "candidate-final-inland.json.gz",
+      "sourceBytes": 127661,
+      "compressedBytes": 23191,
+      "sourceSha256": "5229decf53cc70da32b62a8c9a63d7aaa3975f3963f9681daba1c7a38157dcb0",
+      "compressedSha256": "c77ac3e86550db04df331681d5674a2030cbc2593620bc880532558d45777f5d"
+    },
+    {
+      "source": "candidate-florida-capture.json",
+      "destination": "candidate-florida-capture.json.gz",
+      "sourceBytes": 644454,
+      "compressedBytes": 34813,
+      "sourceSha256": "0ccc5e5a86872e1db5abe8d5ea58e86c2f66b592d10a4cb42ef9a18eaee53d97",
+      "compressedSha256": "5240c7099700cb03dc1f0ff41d7f1f320eb3de9106115ed96f2f1858525e8a14"
+    },
+    {
+      "source": "candidate-florida.json",
+      "destination": "candidate-florida.json.gz",
+      "sourceBytes": 144537,
+      "compressedBytes": 30419,
+      "sourceSha256": "92845db46ed29feef635cb96d71023b0924be45a2e1d9be2af82c47674517df6",
+      "compressedSha256": "ea46a0ba1c713d6e132a527d097d7e79f17814dd0bfe4dea116499a50731b22d"
+    },
+    {
+      "source": "candidate-inland-capture.json",
+      "destination": "candidate-inland-capture.json.gz",
+      "sourceBytes": 505507,
+      "compressedBytes": 28613,
+      "sourceSha256": "a07ccdb9c2e9489aa9670f0be4a31e0c6fa05bdfd88f29d579281205db69ae48",
+      "compressedSha256": "a1a8c6d40b01ce08e6ede237c5596f8e8453811d9d15e0dbb9c3f98c8edb8938"
+    },
+    {
+      "source": "local-active.json",
+      "destination": "local-active.json.gz",
+      "sourceBytes": 131217,
+      "compressedBytes": 25562,
+      "sourceSha256": "8ffccced8bd784e30a048e588f354585878eca2c8575cd14dcd8fa5d5357af49",
+      "compressedSha256": "803eff291c976c823fa6b5b541248283def0beb5449a31a5eca2c3b2adbc8dcd"
+    },
+    {
+      "source": "local-florida-repeat.json",
+      "destination": "local-florida-repeat.json.gz",
+      "sourceBytes": 145232,
+      "compressedBytes": 30429,
+      "sourceSha256": "32b8b611ff6c36afc21c4ac222c70fd7b0eb7c803d0e7052cefab4f40be90e9f",
+      "compressedSha256": "4d62c265c71f527208b11c18e72395a7aa752fcc54e48808f25ed599d240ae0e"
+    },
+    {
+      "source": "local-florida.json",
+      "destination": "local-florida.json.gz",
+      "sourceBytes": 145674,
+      "compressedBytes": 28884,
+      "sourceSha256": "1a0b6011cc7f6513f500a1ab8a2acab5d0a318dfe24482043092dc40e13c5474",
+      "compressedSha256": "c0e3ebc73f0d0756f36b353bbe543d2554aee200e87deb9208527837c8f3564a"
+    },
+    {
+      "source": "local-grazing.json",
+      "destination": "local-grazing.json.gz",
+      "sourceBytes": 133559,
+      "compressedBytes": 27245,
+      "sourceSha256": "f8e754388ab6ddb8cc4ac4739e3474595e849c46dbf93add733b6be7502aabaf",
+      "compressedSha256": "3d7a21b30cc6fd8c604cc4d1a20313584e623f8d787ee67bcb4f2b6bc0e07b08"
+    },
+    {
+      "source": "local-inland.json",
+      "destination": "local-inland.json.gz",
+      "sourceBytes": 127785,
+      "compressedBytes": 24228,
+      "sourceSha256": "70670160aefd1dfa85811b98c9e69d30f3e575fb8e8a45fa866ca48a2c4d048f",
+      "compressedSha256": "d706548d05f0407c61c39952ee22bce3bef5727e22ae55e5b54250d0f9ae48e2"
+    },
+    {
+      "source": "noise-florida-isa.json",
+      "destination": "noise-florida-isa.json.gz",
+      "sourceBytes": 148109,
+      "compressedBytes": 30726,
+      "sourceSha256": "1120cd425de4403a9bd8e0f7e76a762b5c9e824ef93b70169cd95ca6f6f370e1",
+      "compressedSha256": "7ab8ea3d0cbdf559ad83aee9439ea749e689192c7819f741f88833656c414e0a"
+    },
+    {
+      "source": "noise-inland.json",
+      "destination": "noise-inland.json.gz",
+      "sourceBytes": 127995,
+      "compressedBytes": 25067,
+      "sourceSha256": "49f6eb39ab5985a58146dcef14cdf972b06cfeafd5a6e9ec2d96b9431f9d2f4c",
+      "compressedSha256": "69250656a3e24a8d2bd2f799da926f973a82d622524ef69b9e5750222ba737a2"
+    },
+    {
+      "source": "physical-local-florida.json",
+      "destination": "physical-local-florida.json.gz",
+      "sourceBytes": 145756,
+      "compressedBytes": 32066,
+      "sourceSha256": "d43218915cfe89d7d7df34136acff34037ba43b4dab507c92cae2eaf96d58fa1",
+      "compressedSha256": "2256ae3774b94cd7a46dae26f51da784963e87e5d4ef7bae2c140b227154c045"
+    },
+    {
+      "source": "physical-local-inland.json",
+      "destination": "physical-local-inland.json.gz",
+      "sourceBytes": 128414,
+      "compressedBytes": 25361,
+      "sourceSha256": "defb5c11bc2d9daa39128e7bfca086b450fc295b3df090fc24551b826a5fefb7",
+      "compressedSha256": "9487d4c088bdce9dc10b80e485038816e74956cd5821f115ed9c29935bcfe118"
+    },
+    {
+      "source": "placement-florida-capture-base.json",
+      "destination": "placement-florida-capture-base.json.gz",
+      "sourceBytes": 646098,
+      "compressedBytes": 38828,
+      "sourceSha256": "bf240d77a439239afe14158fcc11a135a5282b3f5883ca8fc95f634de6991aeb",
+      "compressedSha256": "74226c4a3546faf1a0903122552b0f23304a7c5d46f7e79bc3496dc11716df46"
+    },
+    {
+      "source": "placement-florida-capture-local.json",
+      "destination": "placement-florida-capture-local.json.gz",
+      "sourceBytes": 645080,
+      "compressedBytes": 36143,
+      "sourceSha256": "bb9d6fc7be9ea8e306a344e85fb93cf9b768044ae6a9038332193948e71cd3ed",
+      "compressedSha256": "39b9f2cf40e5344c96f338199e489b98e6d906df2a53b9b696e1e170efa03ee9"
+    },
+    {
+      "source": "placement-inland-capture-base.json",
+      "destination": "placement-inland-capture-base.json.gz",
+      "sourceBytes": 505617,
+      "compressedBytes": 29802,
+      "sourceSha256": "32c5fd948633406d7a545f7e6bfb5778cad02a35716bf56331345bc31d4fb8dd",
+      "compressedSha256": "c92e1c17be51aac82836feb1c43a74e7c106dde4437f988037c71470075f36dc"
+    },
+    {
+      "source": "placement-inland-capture-local.json",
+      "destination": "placement-inland-capture-local.json.gz",
+      "sourceBytes": 506164,
+      "compressedBytes": 29391,
+      "sourceSha256": "6d62db9cc3242d6d33e06938346aeab189d037b44d0283e74ccb582aea0b8822",
+      "compressedSha256": "2d4cfdc17b1b64b664ab1e8f40114b7c607e476925080f3fe1f1de21a0474af7"
+    },
+    {
+      "source": "regional-base.json",
+      "destination": "regional-base.json.gz",
+      "sourceBytes": 2598438,
+      "compressedBytes": 149569,
+      "sourceSha256": "6d00f976510f4a8aa997715954138466a4713013785515ffa8e41796fc59e778",
+      "compressedSha256": "52267781017f4cb730972e679eb858a8a1569313ddcc09ff098226f8e5e17cc2"
+    },
+    {
+      "source": "regional-candidate.json",
+      "destination": "regional-candidate.json.gz",
+      "sourceBytes": 2591370,
+      "compressedBytes": 141302,
+      "sourceSha256": "3c439db20a2e58826d519b8ac120abeaa35422c0079021d4465c674264d16aad",
+      "compressedSha256": "9df7dfaaf5e71e87086a0c1d9595319010475b594aeb352801a05565b6d77f2d"
+    },
+    {
+      "source": "regional-local.json",
+      "destination": "regional-local.json.gz",
+      "sourceBytes": 2594863,
+      "compressedBytes": 142000,
+      "sourceSha256": "05cc20b2e3a853cef7130e1804ae52f515f13a7ceff3d639d284c664d9768845",
+      "compressedSha256": "c22a598d654a767a1e49d8077f22d0e401e53978fe7adcf851472a3dc3405726"
+    },
+    {
+      "source": "validation.json",
+      "destination": "validation.json.gz",
+      "sourceBytes": 213426,
+      "compressedBytes": 21813,
+      "sourceSha256": "01af25513a1fbeb8438a8d8624fcfb5c39dec1afb76d2d6f9ed9478c51b3dc0f",
+      "compressedSha256": "783f29b19d8b030a02ec1e9933ac1ad8fe8bb3dd068a3430b9566d817c5f3e54"
+    },
+    {
+      "source": "verify-b.json",
+      "destination": "verify-b.json.gz",
+      "sourceBytes": 2374469,
+      "compressedBytes": 164239,
+      "sourceSha256": "da888e0b9d106beaa730c77b0d16c95bd285bfa0fded1b5e9ca9a81819fb4c7b",
+      "compressedSha256": "30a9c4f52ccd0c735faf020ab0b3d63bcfab3872200b57f41e9698b7a02ad5f5"
+    },
+    {
+      "source": "work-a.json",
+      "destination": "work-a.json.gz",
+      "sourceBytes": 977261,
+      "compressedBytes": 83725,
+      "sourceSha256": "ad73f466979fa92cf8fe62309f39fa16aa9716a798bd7ce8f3cb3e05bee9d717",
+      "compressedSha256": "026fe0d949b206242aaebcef581f9c0cfe9fe2638f741b3a2def479a8b5b0880"
+    }
+  ]
+}

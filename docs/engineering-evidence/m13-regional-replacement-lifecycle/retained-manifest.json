@@ -1,0 +1,211 @@
+{
+  "budgetBytes": 12582912,
+  "files": [
+    {
+      "path": "bank-event.json.gz",
+      "bytes": 275166,
+      "sha256": "0e74c407a9be023b6c90f16692eac6aef19462ae6d57cc5a055e83bb1508debe"
+    },
+    {
+      "path": "baseline.json",
+      "bytes": 12421,
+      "sha256": "db493e3fb1f366ecc566908135707cca1c98730fc6268d7d633864968e014ca5"
+    },
+    {
+      "path": "cleanup.ps1",
+      "bytes": 1799,
+      "sha256": "afac4cd66ad5d33dae7182497cfe2acc0199d5791b1b81765ff526ec3a9b7521"
+    },
+    {
+      "path": "closeout.json",
+      "bytes": 12266,
+      "sha256": "24237e1b3a0717a75d40aa0f30af0214a97d8ff67e64d589cfbd8432e0a82ec3"
+    },
+    {
+      "path": "compact.ps1",
+      "bytes": 1425,
+      "sha256": "0d4a7a23a4a2e740a9a4e2b31f2e2535960c30b1a2c85ab58705b397a6f48dae"
+    },
+    {
+      "path": "compact.py",
+      "bytes": 1268,
+      "sha256": "77188d7ea1024fc028ce6bb2ef16b6a384044be75f074c0f395af8380a6f3a40"
+    },
+    {
+      "path": "deployed-route.json",
+      "bytes": 119777,
+      "sha256": "26632c6eb002feba8d3ca7973b3b4fbe0f44db90e88866d504641653bab4da55"
+    },
+    {
+      "path": "disposable-manifest.json",
+      "bytes": 16713,
+      "sha256": "795809b781b3bb20eea1f2bc9653811f9aff3179b51304a3c9ab7f3e841c3b12"
+    },
+    {
+      "path": "host.inl",
+      "bytes": 1711,
+      "sha256": "dbd0593ff9c48b41b52c67f184ac35c00876dc5fc49b98236bd0e6fb5bec6030"
+    },
+    {
+      "path": "inventory.py",
+      "bytes": 1667,
+      "sha256": "e7e365737f4321548d602c7400d68ac8af451f2833030789149546918f7ef00c"
+    },
+    {
+      "path": "journal-manifest.json",
+      "bytes": 1439,
+      "sha256": "fbc791bb8c7b2d8d45b9290ac000baa35f9bb5269bfa309250b135d41a6c7a43"
+    },
+    {
+      "path": "lifecycle.py",
+      "bytes": 7184,
+      "sha256": "0b5d736b9b53afc756c434915aac8f9588b9ffa7a81c11aeecadadf7e53e9d35"
+    },
+    {
+      "path": "post-cleanup-smoke.json",
+      "bytes": 14807,
+      "sha256": "72d479e9561aea5652189bf36bb43359cd7a4159c15470385b983e2a9620ad57"
+    },
+    {
+      "path": "post_cleanup.py",
+      "bytes": 3403,
+      "sha256": "642f24df3b35057d45f651a3d8c59fda3c46c5092efb344a055ef390ebde5a2f"
+    },
+    {
+      "path": "private-build-bank.json",
+      "bytes": 215,
+      "sha256": "79b4179dd8a588b2c44c5fd74faa0049b44ef22e3169b48d12b707e9e9c50200"
+    },
+    {
+      "path": "private-build-bank.patch",
+      "bytes": 89121,
+      "sha256": "4bfddf791d4f7118ef8a118d4022a4a4afd29e464d8e2ab8fe375a71ac3ac344"
+    },
+    {
+      "path": "private-build-reference-coordinator.json",
+      "bytes": 215,
+      "sha256": "1574d7c13c8690b2b1db37f1bed1445d15097439572dd61f1fdb86b0e108e771"
+    },
+    {
+      "path": "private-build-reference-coordinator.patch",
+      "bytes": 114510,
+      "sha256": "2ca94d5bc36c30fa43e6045cde29f6167e8358904623f8e38d7603fcb0133d81"
+    },
+    {
+      "path": "private-build-reference-pairs.json",
+      "bytes": 215,
+      "sha256": "fc9111d1c85175c9c48ab9b686c6cd5b187309bffb36b394afa0992cf76eb7d1"
+    },
+    {
+      "path": "private-build-reference-pairs.patch",
+      "bytes": 113895,
+      "sha256": "e57d8ff6ff56abd9efc37609a5257fc2a00051c32eebfbf23987330d3dce2e40"
+    },
+    {
+      "path": "private-build-reference.json",
+      "bytes": 215,
+      "sha256": "cfa63a54e4ac84cde4f309fb0d2c04f43ce21410e7c5154292e11573a3b8f932"
+    },
+    {
+      "path": "private-build-reference.patch",
+      "bytes": 113855,
+      "sha256": "23a58bb01a387ea09d494a6f7a36ad56b32d0115f15be2c2453dac063b142f2d"
+    },
+    {
+      "path": "README.md",
+      "bytes": 31136,
+      "sha256": "e88118940cd21466f42f102bb9d61140d8a36933b55d29578e38376863a3ce32"
+    },
+    {
+      "path": "reference-paired-coordinator.json.gz",
+      "bytes": 462217,
+      "sha256": "fe27ed19e31a462821061ad83aab96aa0ad7592b6f0386992b89995e96275a7f"
+    },
+    {
+      "path": "reference-paired.json.gz",
+      "bytes": 475484,
+      "sha256": "b378dcfdf2990ab0ed69d9add45c2014e8881d29db3dc262ad5c09658676f09e"
+    },
+    {
+      "path": "restoration.json",
+      "bytes": 349,
+      "sha256": "7c055a74eebab7c9a872681a919ede8f0782a3ad39d89110c1d63a5e2ce30a5f"
+    },
+    {
+      "path": "restore.py",
+      "bytes": 1415,
+      "sha256": "abafedab3215829e58671f0e381cff6d94b7222c762d927756f785a7948f7010"
+    },
+    {
+      "path": "seal.py",
+      "bytes": 7547,
+      "sha256": "a75d13e002f068427f0d772d8cbd6ccef932991eca0a78171e1a50d2ef47a970"
+    },
+    {
+      "path": "timing.inl",
+      "bytes": 1531,
+      "sha256": "156a228678ee6da56039b3e1ea8f92b4f960caecb64a1228df041d633dd2ad97"
+    },
+    {
+      "path": "verification.json",
+      "bytes": 1956,
+      "sha256": "78e72ad1fc1f87a539cad010446eec03b0396f5c3dfd60c48eeb40cd80f767e5"
+    },
+    {
+      "path": "verify-a.json",
+      "bytes": 132380,
+      "sha256": "672e63042e5728f9fc8bcf7fae268f41fac5ee938507e166c306e1caa6a0c025"
+    },
+    {
+      "path": "verify-a.md",
+      "bytes": 11371,
+      "sha256": "34dbd989fa73f419c77914ee7c6d556480d674d635c249f177509f51df0df178"
+    },
+    {
+      "path": "verify-b.json",
+      "bytes": 1505798,
+      "sha256": "844b800126a4013ae2cd22f80d245e03917f78eaa171211b7e7475054e933f79"
+    },
+    {
+      "path": "verify-b.md",
+      "bytes": 29583,
+      "sha256": "50a04d5c6e6fba960dad0b74ad6d2334d23cb0eb0f77af6157ffeeef0c306964"
+    },
+    {
+      "path": "work-a.json",
+      "bytes": 143355,
+      "sha256": "f7035ceac3b29e1626ecc1b2949d0ec1fd2d1fc17fc9a503761d48fff09fc63e"
+    },
+    {
+      "path": "work-a.md",
+      "bytes": 15600,
+      "sha256": "afe8132756a4672b3a8b5073f37f46d430325b68936b421812be9bd2f89f344f"
+    },
+    {
+      "path": "work-b.json",
+      "bytes": 7856,
+      "sha256": "b9563de00264e5868581f442c5c40427747d218c7897f7c04b7fb1f86061daf9"
+    },
+    {
+      "path": "work-b.md",
+      "bytes": 20371,
+      "sha256": "c58fabfecad4c30dddd7cf8425def943daa49076270b801445d6b5d85a51194f"
+    },
+    {
+      "path": "work-c.json",
+      "bytes": 14847,
+      "sha256": "8ff76ea837906f79c817ba8245056f45a70eaa1948ffb8d6069eb2932193c229"
+    },
+    {
+      "path": "work-c.md",
+      "bytes": 18099,
+      "sha256": "6bd89010c6078d147ee98db20b288e299f4de172349fd0833afb29a420c6bd86"
+    }
+  ],
+  "exclusions": [
+    "retained-manifest.json",
+    "storage.json"
+  ],
+  "reason": "Manifest/accounting self-reference only",
+  "retainedPurpose": "Regional event timing, production lifetime model, paired causal control with explicit limits, KSA frequency comparison, independent reviews and reproducible Project Control judgment. No production dependency."
+}

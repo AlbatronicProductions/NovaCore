@@ -1,0 +1,52 @@
+{
+  "result": "PASS",
+  "jsonFilesParsed": [
+    "baseline.json",
+    "closeout.json",
+    "deployed-route.json",
+    "disposable-manifest.json",
+    "journal-manifest.json",
+    "post-cleanup-smoke.json",
+    "private-build-bank.json",
+    "private-build-reference-coordinator.json",
+    "private-build-reference-pairs.json",
+    "private-build-reference.json",
+    "restoration.json",
+    "verify-a.json",
+    "verify-b.json",
+    "work-a.json",
+    "work-b.json",
+    "work-c.json"
+  ],
+  "pythonSyntax": "PASS",
+  "utf8AndWhitespace": "PASS",
+  "losslessJournals": 3,
+  "retainedNumericReproduction": "PASS",
+  "reproductionLines": 2433,
+  "pairedTargetCount": 64,
+  "pairedInputsAndTcsTesExact": true,
+  "pairedClippingAndFragmentCountersDifferInAll64": true,
+  "rasterParityClaimed": false,
+  "priorSealedManifestHashesVerified": {
+    "m13-regional-preparation-convergence": 35,
+    "m13-residual-regional-frames": 41
+  },
+  "revisions": {
+    "HEAD": "047ae479b33831eae1c0dfa3f37c657a7f70148f",
+    "main": "047ae479b33831eae1c0dfa3f37c657a7f70148f",
+    "origin/main": "047ae479b33831eae1c0dfa3f37c657a7f70148f",
+    "m13.4-zero-contribution-terrain-material-noise^{}": "047ae479b33831eae1c0dfa3f37c657a7f70148f",
+    "m13.3-prepared-physical-terrain^{}": "180eaf150ba5db6364e17dd48336690778f058f9"
+  },
+  "branch": "codex/m13-regional-replacement-lifecycle",
+  "sourceDiffEmpty": true,
+  "stagedDiffEmpty": true,
+  "scratchAbsent": true,
+  "postCleanupNormalFloridaSmoke": "PASS",
+  "gitDiffCheck": {
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "gitStatusShort": "?? docs/engineering-evidence/m13-exit-assessment/\n?? docs/engineering-evidence/m13-regional-preparation-blocker/\n?? docs/engineering-evidence/m13-regional-preparation-convergence/\n?? docs/engineering-evidence/m13-regional-replacement-lifecycle/\n?? docs/engineering-evidence/m13-residual-regional-frames/\n"
+}

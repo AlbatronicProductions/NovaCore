@@ -1,0 +1,204 @@
+{
+  "final": "PASS",
+  "initialFailure": {
+    "label": "Debug-window",
+    "result": "3 pass / 1 fail / 0 skip",
+    "cause": "Live probe repeated CPU scalar reads from mapped local GPU working buffers; unchanged 600-second timeout",
+    "resolution": "Opt-in after-fence CPU snapshot, equations/assertions/timeout unchanged; complete Debug and Release windows pass, final guarded-source focused tests pass"
+  },
+  "managed": {
+    "Debug": {
+      "headless": {
+        "passCount": 79,
+        "fail": 0,
+        "skip": 0
+      },
+      "gpu": {
+        "passCount": 8,
+        "fail": 0,
+        "skip": 0
+      },
+      "window": {
+        "passCount": 4,
+        "fail": 0,
+        "skip": 0
+      }
+    },
+    "Release": {
+      "headless": {
+        "passCount": 79,
+        "fail": 0,
+        "skip": 0
+      },
+      "gpu": {
+        "passCount": 8,
+        "fail": 0,
+        "skip": 0
+      },
+      "window": {
+        "passCount": 4,
+        "fail": 0,
+        "skip": 0
+      }
+    }
+  },
+  "native": {
+    "Debug": {
+      "gpuExecutables": 2,
+      "facilityCases": 102,
+      "materialCoordinateComponents": 540,
+      "regionalCpu": "PASS",
+      "mappedMemoryChecks": 14
+    },
+    "Release": {
+      "gpuExecutables": 2,
+      "facilityCases": 102,
+      "materialCoordinateComponents": 540,
+      "regionalCpu": "PASS",
+      "mappedMemoryChecks": 14
+    }
+  },
+  "launcherPass": 15,
+  "routesPass": 6,
+  "floridaRouteSmokeFrames": 500,
+  "fullTraversalFrames": 1701,
+  "levels": "L0-L17",
+  "warpFrames": 779,
+  "postCleanupFrames": 240,
+  "strictVulkan": "PASS; no final validation errors or VUID suppression",
+  "latest": {
+    "Debug-native-build": {
+      "exitCode": 0,
+      "wallSeconds": 3.2845865999988746,
+      "validationErrors": []
+    },
+    "Debug-managed-build": {
+      "exitCode": 0,
+      "wallSeconds": 1.8339489000063622,
+      "validationErrors": []
+    },
+    "Debug-mapped-memory-policy": {
+      "exitCode": 0,
+      "wallSeconds": 0.024286699990625493,
+      "validationErrors": []
+    },
+    "Release-native-build": {
+      "exitCode": 0,
+      "wallSeconds": 4.005109599995194,
+      "validationErrors": []
+    },
+    "Release-managed-build": {
+      "exitCode": 0,
+      "wallSeconds": 1.6512223000027006,
+      "validationErrors": []
+    },
+    "Release-mapped-memory-policy": {
+      "exitCode": 0,
+      "wallSeconds": 0.02154980000341311,
+      "validationErrors": []
+    },
+    "Debug-headless": {
+      "exitCode": 0,
+      "wallSeconds": null,
+      "validationErrors": []
+    },
+    "Debug-gpu": {
+      "exitCode": 0,
+      "wallSeconds": null,
+      "validationErrors": []
+    },
+    "Debug-window": {
+      "exitCode": 0,
+      "wallSeconds": 158.03374440000334,
+      "validationErrors": []
+    },
+    "Debug-native-gpu": {
+      "exitCode": 0,
+      "wallSeconds": 3.565894700004719,
+      "validationErrors": []
+    },
+    "Debug-regional-cpu": {
+      "exitCode": 0,
+      "wallSeconds": 0.050913700004457496,
+      "validationErrors": []
+    },
+    "Release-headless": {
+      "exitCode": 0,
+      "wallSeconds": 48.09339180000825,
+      "validationErrors": []
+    },
+    "Release-gpu": {
+      "exitCode": 0,
+      "wallSeconds": 18.89586689999851,
+      "validationErrors": []
+    },
+    "Release-window": {
+      "exitCode": 0,
+      "wallSeconds": 118.93052549999265,
+      "validationErrors": []
+    },
+    "Release-native-gpu": {
+      "exitCode": 0,
+      "wallSeconds": 3.22005239999271,
+      "validationErrors": []
+    },
+    "Release-regional-cpu": {
+      "exitCode": 0,
+      "wallSeconds": 0.039259400000446476,
+      "validationErrors": []
+    },
+    "launcher-Release": {
+      "exitCode": 0,
+      "wallSeconds": 0.18262449999747332,
+      "validationErrors": []
+    },
+    "asset-earth-surface-v5": {
+      "exitCode": 0,
+      "wallSeconds": 0.20221109999693,
+      "validationErrors": []
+    },
+    "asset-earth-florida-m12": {
+      "exitCode": 0,
+      "wallSeconds": 0.1935273999988567,
+      "validationErrors": []
+    },
+    "Debug-final-live-probe": {
+      "exitCode": 0,
+      "wallSeconds": 128.75860920001287,
+      "validationErrors": []
+    },
+    "Release-final-live-probe": {
+      "exitCode": 0,
+      "wallSeconds": 113.89266659998975,
+      "validationErrors": []
+    },
+    "route-probe-build": {
+      "exitCode": 0,
+      "wallSeconds": 1.092717099993024,
+      "validationErrors": []
+    },
+    "six-routes-and-Florida-smoke": {
+      "exitCode": 0,
+      "wallSeconds": 6.415046499998425,
+      "validationErrors": []
+    },
+    "normal-full-transitions": {
+      "exitCode": 0,
+      "wallSeconds": 13.737290700009908,
+      "validationErrors": []
+    },
+    "normal-warp": {
+      "exitCode": 0,
+      "wallSeconds": 6.554935899999691,
+      "validationErrors": []
+    }
+  },
+  "productionSourceHashes": {
+    "native/NovaCore.Native/NovaCoreNative.cpp": "f95d69d15257864b612391d8b35e8b552f8c5d80b6937ec44fef17d9a18dfe64",
+    "native/NovaCore.Native/RegionalPhysicalPreparation.inl": "437cb06e864bfbf511df5ea477168a9b4c81247e06d24ac4db27e86cca948c79",
+    "native/NovaCore.Native/RegionalPhysicalProbe.inl": "73a815c49e4078997045dd2df603ebc908089ecd259581fee2a93a76c10b4439",
+    "native/NovaCore.Native/MappedBufferMemory.h": "f5b1cddafbbdb3f0c496d4822d10a97424f1510797ebd429b2a9b19d6dee793e",
+    "native/NovaCore.Native/MappedBufferMemoryTests.cpp": "d809addf730ac3b7978d256db366daaecdb0772aa7d3798584378868f9c1946a",
+    "native/NovaCore.Native/CMakeLists.txt": "2e701b8b5d2efbcb95f95833e27e9e7db11c2b5c21407ded714490f2f5b4b287"
+  }
+}

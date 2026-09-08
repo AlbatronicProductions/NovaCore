@@ -1,0 +1,8 @@
+{
+  "nativeProductionRebuild": "PASS",
+  "managedProductionRebuild": "PASS",
+  "rebuiltNativeHash": "b6a169231bb891854e999a17ff6ad352884ed1aace3a4ed2da7846922f5bb78b",
+  "nativeBuildDllRestoredHash": "74859dbb7854e92d3069e4081276eef98980945c2c9c4d4adf3a926b18cbaeca",
+  "normalDeployedArtifactsUnchanged": true,
+  "trackedDiffEmpty": true
+}

@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "budgetBytes": 12582912,
+  "scope": "Final materialized ticket evidence and scratch only; not cumulative capture I/O, entire workspace or ordinary self-cleaned test/build output",
+  "scratchFilesDisposed": 152,
+  "scratchLogicalBytesDisposedByName": 200307167,
+  "scratchExclusiveLogicalBytesDisposed": 133198303,
+  "scratchExclusiveAllocatedBytesDisposed": 133438560,
+  "productionHardlinkDataRetainedBytes": 67108864,
+  "journalsArchived": 33,
+  "originalJournalBytes": 17681771,
+  "compressedJournalBytes": 1482139,
+  "disposableRemainingFiles": 0,
+  "disposableRemainingBytes": 0,
+  "postCleanupSmoke": "PASS",
+  "gitDiffCheck": "PASS",
+  "retainedBytes": 2944945,
+  "retainedFiles": 88,
+  "createdMaterializedLogicalBytes": 152342880,
+  "disposedExclusiveLogicalBytes": 149397935
+}

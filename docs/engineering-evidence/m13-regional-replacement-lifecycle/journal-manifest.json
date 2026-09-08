@@ -1,0 +1,34 @@
+{
+  "files": [
+    {
+      "original": "bank-event.json",
+      "compressed": "bank-event.json.gz",
+      "originalBytes": 4067727,
+      "compressedBytes": 275166,
+      "originalSha256": "530e05ca39761d4712f8fcddb1fe0c6fd0060a6ea2c4303b807dc8576e2ba705",
+      "compressedSha256": "0e74c407a9be023b6c90f16692eac6aef19462ae6d57cc5a055e83bb1508debe",
+      "losslessVerified": true
+    },
+    {
+      "original": "reference-paired.json",
+      "compressed": "reference-paired.json.gz",
+      "originalBytes": 8634424,
+      "compressedBytes": 475484,
+      "originalSha256": "ad8bbd21426e8a8958ab50bb133c4fbdd9e3fed7e6873c7a33a828a3af3baaa2",
+      "compressedSha256": "b378dcfdf2990ab0ed69d9add45c2014e8881d29db3dc262ad5c09658676f09e",
+      "losslessVerified": true
+    },
+    {
+      "original": "reference-paired-coordinator.json",
+      "compressed": "reference-paired-coordinator.json.gz",
+      "originalBytes": 8636064,
+      "compressedBytes": 462217,
+      "originalSha256": "2e6f45f952726536f29b5ac11046cf41ed8ee63a2cf8121869d965a8982d93cd",
+      "compressedSha256": "fe27ed19e31a462821061ad83aab96aa0ad7592b6f0386992b89995e96275a7f",
+      "losslessVerified": true
+    }
+  ],
+  "originalBytes": 21338215,
+  "compressedBytes": 1212867,
+  "reason": "Full scalar timing and exact input journals support continued Project Control review; gzip is lossless; no depth/HDR/frame buffers retained."
+}

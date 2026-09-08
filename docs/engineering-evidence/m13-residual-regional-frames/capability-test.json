@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "qualification": "private CPU capability predicate model",
+  "utc": "2026-09-08T00:08:52.0252837Z",
+  "compiler": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\cl.exe",
+  "compilerVersion": "19.51.36252.0",
+  "compileFlags": [
+    "/std:c++20",
+    "/EHsc",
+    "/W4",
+    "/WX",
+    "/O2"
+  ],
+  "compileExit": 0,
+  "compileOutput": [
+    "capability_test.cpp"
+  ],
+  "runExit": 0,
+  "runOutput": [
+    "capability qualification: checks=91 failures=0"
+  ],
+  "sourceHashes": {
+    "capability_test.cpp": "8faab380769ae2041c44cc6b723e39a2a1b59941bde0687cc245855d5f914d14",
+    "capability.hpp": "1a7d29172b0e54793025aa74fc179b84a49b72b24feee0ddb6c1cb777cc6c022"
+  },
+  "actualNativeBindingAllocationEpochIntegrationProven": false,
+  "gpuExecutionPerformed": false,
+  "physicalWordOraclePerformed": false,
+  "productionQualification": false,
+  "limits": [
+    "Tests exercise shared CPU predicates with independently constructed model states.",
+    "Native instrumentation must derive actual identities from live resources and consume these predicates; that integration is not established by this test.",
+    "GPU map-entry bounds and exact canonical-direction/radius checks, Vulkan lifetime execution, and complete physical-word oracle remain separate.",
+    "Physical publication predicate is additional to existing draw/compaction readiness until a separately proven replacement."
+  ],
+  "artifacts": [
+    "E:\\NovaCore\\build\\m13-residual-regional-frames\\capability-test.exe",
+    "E:\\NovaCore\\build\\m13-residual-regional-frames\\capability-test.obj"
+  ],
+  "binarySha256": "9195225c966ea6d9973afaa67d4b328bbfff00adb4c6f9ee02990252fea82f41"
+}

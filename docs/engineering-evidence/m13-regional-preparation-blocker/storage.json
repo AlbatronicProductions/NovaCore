@@ -1,0 +1,14 @@
+{
+  "accounting": "Logical file-inventory bytes, not cumulative compiler rewrites or a whole-workspace allocation audit. Excludes transient captured stdout kept only in memory and driver-managed caches. Includes one post-cleanup loader manifest; the private R16 alias is a hard link.",
+  "scratchFilesRemoved": 90,
+  "postCleanupLoaderFilesRemoved": 1,
+  "disposedBytes": 85862904,
+  "exclusiveDisposableLogicalBytes": 18754040,
+  "hardLinkAliasBytes": 67108864,
+  "permanentBudgetBytes": 10485760,
+  "remainingDisposableBytes": 0,
+  "scratchAbsent": true,
+  "retentionReason": "Compact unresolved preparation findings, numeric timing rows, provenance, oracle/prototype source and reproduction recipe; no production dependency.",
+  "retainedBytes": 3272888,
+  "createdBytes": 89135792
+}

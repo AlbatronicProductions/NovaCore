@@ -1,0 +1,497 @@
+diff --git a/native/NovaCore.Native/NovaCoreNative.cpp b/native/NovaCore.Native/NovaCoreNative.cpp
+index 65d69bd..b755fa2 100644
+--- a/native/NovaCore.Native/NovaCoreNative.cpp
++++ b/native/NovaCore.Native/NovaCoreNative.cpp
+@@ -348,6 +348,7 @@ struct App {
+   uint32_t regionalScratchCapacity{};
+   RegionalPreparationJob regionalPreparation[2]{};
+   VkQueryPool regionalTimingQueries{};bool regionalTimingRecorded[3]{};
++  VkQueryPool residualQueries{};bool residualRecorded[2]{};uint64_t residualRecordFrame{};
+   uint64_t regionalDemandDispatches{};double regionalDependencyDelayMs{};
+   std::unique_ptr<nc::localterrain::Pack>localPack;
+   uint64_t surfaceContextBodyId{},surfaceTransitionEpoch{},surfaceContextInvalidations{},productionDemandHits{},productionDemandMisses{};
+@@ -482,6 +483,17 @@ struct App {
+   double cpuUpdateMs{},cpuFenceWaitMs{},cpuInspectionMs{},cpuHostCallbackMs{},cpuUploadMs{};
+   double cpuRecordMs{},cpuSubmitMs{},cpuPresentMs{};
+   uint64_t cpuTimingSamples{};
++  const bool performanceFrameLog=std::getenv("NOVACORE_PERFORMANCE_FRAME_LOG")!=nullptr;
++  const bool performanceClipping=std::getenv("NOVACORE_PERFORMANCE_CLIPPING")!=nullptr;
++  const bool performanceCountersOff=std::getenv("NOVACORE_PERFORMANCE_COUNTERS_OFF")!=nullptr;
++  const char* performanceShaderInfo=std::getenv("NOVACORE_SHADER_INFO");
++  bool performanceShaderDumped=false;
++  std::array<double,8> performanceCpu{};
++  double performanceAcquireMs{},performanceRecreateMs{},performanceShaderInfoMs{};
++  uint32_t performanceRecreateCount{};
++  VkResult performanceAcquireResult=VK_SUCCESS,performancePresentResult=VK_SUCCESS;
++  std::array<uint64_t,5> performancePipeline{};
++  uint64_t performancePipelineFrame{},performancePipelineGeneration{};
+   std::array<std::vector<double>,8> c3CpuMs;
+   std::array<std::vector<double>,TimestampCount> c3GpuMs;
+   std::array<std::vector<uint64_t>,4> c3PipelineValues;
+@@ -499,6 +511,11 @@ struct App {
+   std::array<bool, 10> presentationFocusWasDown{};
+   bool resetWasDown{};
+   uint32_t surfaceDiagnostic{};
++  const char* parityDirectory=std::getenv("NOVACORE_PIXEL_PARITY");
++  VkBuffer parityPixels{};VkDeviceMemory parityPixelMemory{};void* parityPixelMapped=nullptr;
++  bool parityRecorded=false,parityWritten=false;
++  const uint64_t parityFrame=175;
++
+   void Log(uint32_t cat, const char *msg) const {
+     if (cb) {
+       NcHostEvent e{NC_DIAGNOSTIC, cat, msg, {}, {}};
+@@ -931,12 +948,13 @@ void Device(App &a) {
+                      [id](auto &v) { return v.queueFamilyIndex == id; }))
+       qs.push_back({VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO, nullptr, 0, id,
+                     1, &pri});
+-  const char *ex = VK_KHR_SWAPCHAIN_EXTENSION_NAME;
++  const char* performanceExtensions[]{VK_KHR_SWAPCHAIN_EXTENSION_NAME,VK_AMD_SHADER_INFO_EXTENSION_NAME};
++  if(a.performanceShaderInfo){uint32_t count=0;a.Check(vkEnumerateDeviceExtensionProperties(a.physical,nullptr,&count,nullptr),"extension enumeration failed");std::vector<VkExtensionProperties> available(count);a.Check(vkEnumerateDeviceExtensionProperties(a.physical,nullptr,&count,available.data()),"extension enumeration failed");if(std::none_of(available.begin(),available.end(),[](const auto& v){return std::strcmp(v.extensionName,VK_AMD_SHADER_INFO_EXTENSION_NAME)==0;}))throw std::runtime_error("requested AMD shader info unavailable");}
+   VkDeviceCreateInfo ci{VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO};
+   ci.queueCreateInfoCount = (uint32_t)qs.size();
+   ci.pQueueCreateInfos = qs.data();
+-  ci.enabledExtensionCount = 1;
+-  ci.ppEnabledExtensionNames = &ex;
++  ci.enabledExtensionCount=a.performanceShaderInfo?2u:1u;
++  ci.ppEnabledExtensionNames=performanceExtensions;
+   VkPhysicalDeviceFeatures enabledFeatures{};enabledFeatures.shaderFloat64=VK_TRUE;enabledFeatures.samplerAnisotropy=VK_TRUE;enabledFeatures.multiDrawIndirect=VK_TRUE;enabledFeatures.tessellationShader=VK_TRUE;enabledFeatures.vertexPipelineStoresAndAtomics=VK_TRUE;enabledFeatures.pipelineStatisticsQuery=VK_TRUE;ci.pEnabledFeatures=&enabledFeatures;
+   a.Check(vkCreateDevice(a.physical, &ci, nullptr, &a.device),
+           "logical device failed");
+@@ -1221,10 +1239,10 @@ VkShaderModule Shader(App &a, const char *n) {
+   return m;
+ }
+ void CreateSceneColor(App &a){
+-  VkImageCreateInfo image{VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO};image.imageType=VK_IMAGE_TYPE_2D;image.format=App::SceneFormat;image.extent={a.extent.width,a.extent.height,1};image.mipLevels=1;image.arrayLayers=1;image.samples=VK_SAMPLE_COUNT_1_BIT;image.tiling=VK_IMAGE_TILING_OPTIMAL;image.usage=VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT|VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT;image.sharingMode=VK_SHARING_MODE_EXCLUSIVE;image.initialLayout=VK_IMAGE_LAYOUT_UNDEFINED;
++  VkImageCreateInfo image{VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO};image.imageType=VK_IMAGE_TYPE_2D;image.format=App::SceneFormat;image.extent={a.extent.width,a.extent.height,1};image.mipLevels=1;image.arrayLayers=1;image.samples=VK_SAMPLE_COUNT_1_BIT;image.tiling=VK_IMAGE_TILING_OPTIMAL;image.usage=VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT|VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT|(a.parityDirectory?VK_IMAGE_USAGE_TRANSFER_SRC_BIT:0);image.sharingMode=VK_SHARING_MODE_EXCLUSIVE;image.initialLayout=VK_IMAGE_LAYOUT_UNDEFINED;
+   a.Check(vkCreateImage(a.device,&image,nullptr,&a.sceneColor),"HDR scene-color image failed");VkMemoryRequirements requirements;vkGetImageMemoryRequirements(a.device,a.sceneColor,&requirements);VkMemoryAllocateInfo allocation{VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO};allocation.allocationSize=requirements.size;allocation.memoryTypeIndex=Memory(a,requirements.memoryTypeBits,VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);a.Check(vkAllocateMemory(a.device,&allocation,nullptr,&a.sceneColorMemory),"HDR scene-color memory failed");a.Check(vkBindImageMemory(a.device,a.sceneColor,a.sceneColorMemory,0),"HDR scene-color bind failed");
+   VkImageViewCreateInfo view{VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO};view.image=a.sceneColor;view.viewType=VK_IMAGE_VIEW_TYPE_2D;view.format=App::SceneFormat;view.subresourceRange.aspectMask=VK_IMAGE_ASPECT_COLOR_BIT;view.subresourceRange.levelCount=1;view.subresourceRange.layerCount=1;a.Check(vkCreateImageView(a.device,&view,nullptr,&a.sceneColorView),"HDR scene-color view failed");
+-  VkImageCreateInfo depth=image;depth.format=App::DepthFormat;depth.usage=VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT;a.Check(vkCreateImage(a.device,&depth,nullptr,&a.sceneDepth),"scene-depth image failed");vkGetImageMemoryRequirements(a.device,a.sceneDepth,&requirements);allocation.allocationSize=requirements.size;allocation.memoryTypeIndex=Memory(a,requirements.memoryTypeBits,VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);a.Check(vkAllocateMemory(a.device,&allocation,nullptr,&a.sceneDepthMemory),"scene-depth memory failed");a.Check(vkBindImageMemory(a.device,a.sceneDepth,a.sceneDepthMemory,0),"scene-depth bind failed");view.image=a.sceneDepth;view.format=App::DepthFormat;view.subresourceRange.aspectMask=VK_IMAGE_ASPECT_DEPTH_BIT|VK_IMAGE_ASPECT_STENCIL_BIT;a.Check(vkCreateImageView(a.device,&view,nullptr,&a.sceneDepthView),"scene-depth view failed");
++  VkImageCreateInfo depth=image;depth.format=App::DepthFormat;depth.usage=VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT|(a.parityDirectory?VK_IMAGE_USAGE_TRANSFER_SRC_BIT:0);a.Check(vkCreateImage(a.device,&depth,nullptr,&a.sceneDepth),"scene-depth image failed");vkGetImageMemoryRequirements(a.device,a.sceneDepth,&requirements);allocation.allocationSize=requirements.size;allocation.memoryTypeIndex=Memory(a,requirements.memoryTypeBits,VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);a.Check(vkAllocateMemory(a.device,&allocation,nullptr,&a.sceneDepthMemory),"scene-depth memory failed");a.Check(vkBindImageMemory(a.device,a.sceneDepth,a.sceneDepthMemory,0),"scene-depth bind failed");view.image=a.sceneDepth;view.format=App::DepthFormat;view.subresourceRange.aspectMask=VK_IMAGE_ASPECT_DEPTH_BIT|VK_IMAGE_ASPECT_STENCIL_BIT;a.Check(vkCreateImageView(a.device,&view,nullptr,&a.sceneDepthView),"scene-depth view failed");
+ }
+ void Swap(App &a) {
+   VkSurfaceCapabilitiesKHR c;
+@@ -1248,7 +1266,7 @@ void Swap(App &a) {
+   ci.imageColorSpace = sf.colorSpace;
+   ci.imageExtent = a.extent;
+   ci.imageArrayLayers = 1;
+-  ci.imageUsage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
++  ci.imageUsage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT|(a.parityDirectory?VK_IMAGE_USAGE_TRANSFER_SRC_BIT:0);
+   ci.imageSharingMode = *q.graphics == *q.present ? VK_SHARING_MODE_EXCLUSIVE
+                                                   : VK_SHARING_MODE_CONCURRENT;
+   ci.queueFamilyIndexCount = *q.graphics == *q.present ? 0 : 2;
+@@ -1284,6 +1302,7 @@ void Swap(App &a) {
+   attachments[0].format=App::SceneFormat;attachments[0].samples=VK_SAMPLE_COUNT_1_BIT;attachments[0].loadOp=VK_ATTACHMENT_LOAD_OP_CLEAR;attachments[0].storeOp=VK_ATTACHMENT_STORE_OP_DONT_CARE;attachments[0].initialLayout=VK_IMAGE_LAYOUT_UNDEFINED;attachments[0].finalLayout=VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+   attachments[1].format=a.format;attachments[1].samples=VK_SAMPLE_COUNT_1_BIT;attachments[1].loadOp=VK_ATTACHMENT_LOAD_OP_DONT_CARE;attachments[1].storeOp=VK_ATTACHMENT_STORE_OP_STORE;attachments[1].initialLayout=VK_IMAGE_LAYOUT_UNDEFINED;attachments[1].finalLayout=VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
+   attachments[2].format=App::DepthFormat;attachments[2].samples=VK_SAMPLE_COUNT_1_BIT;attachments[2].loadOp=VK_ATTACHMENT_LOAD_OP_CLEAR;attachments[2].storeOp=VK_ATTACHMENT_STORE_OP_DONT_CARE;attachments[2].stencilLoadOp=VK_ATTACHMENT_LOAD_OP_CLEAR;attachments[2].stencilStoreOp=VK_ATTACHMENT_STORE_OP_DONT_CARE;attachments[2].initialLayout=VK_IMAGE_LAYOUT_UNDEFINED;attachments[2].finalLayout=VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
++  if(a.parityDirectory){attachments[0].storeOp=VK_ATTACHMENT_STORE_OP_STORE;attachments[2].storeOp=VK_ATTACHMENT_STORE_OP_STORE;}
+   VkAttachmentReference sceneColor{0,VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL};
+   VkAttachmentReference sceneInput{0,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL};
+   VkAttachmentReference swapColor{1,VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL};
+@@ -1549,7 +1568,13 @@ void CreatePatchBuffer(App &a,VkDeviceSize size) {
+   a.Check(vkCreateBuffer(a.device,&pci,nullptr,&a.patchBuffer),"patch buffer failed");VkMemoryRequirements pr;vkGetBufferMemoryRequirements(a.device,a.patchBuffer,&pr);VkMemoryAllocateInfo pai{VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO};pai.allocationSize=pr.size;pai.memoryTypeIndex=Memory(a,pr.memoryTypeBits,VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT|VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);a.Check(vkAllocateMemory(a.device,&pai,nullptr,&a.patchMemory),"patch memory failed");a.Check(vkBindBufferMemory(a.device,a.patchBuffer,a.patchMemory,0),"patch bind failed");a.Check(vkMapMemory(a.device,a.patchMemory,0,a.patchSize,0,&a.patchMapped),"patch map failed");
+ }
+ void CreateHostBuffer(App &a,VkDeviceSize size,VkBufferUsageFlags usage,VkBuffer &buffer,VkDeviceMemory &memory,void *&mapped,const char *failure) {
+-  VkBufferCreateInfo ci{VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO};ci.size=size;ci.usage=usage;ci.sharingMode=VK_SHARING_MODE_EXCLUSIVE;a.Check(vkCreateBuffer(a.device,&ci,nullptr,&buffer),failure);VkMemoryRequirements requirements;vkGetBufferMemoryRequirements(a.device,buffer,&requirements);VkMemoryAllocateInfo allocation{VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO};allocation.allocationSize=requirements.size;allocation.memoryTypeIndex=Memory(a,requirements.memoryTypeBits,VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT|VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);a.Check(vkAllocateMemory(a.device,&allocation,nullptr,&memory),failure);a.Check(vkBindBufferMemory(a.device,buffer,memory,0),failure);a.Check(vkMapMemory(a.device,memory,0,size,0,&mapped),failure);std::memset(mapped,0,(size_t)size);
++  VkBufferCreateInfo ci{VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO};ci.size=size;ci.usage=usage;ci.sharingMode=VK_SHARING_MODE_EXCLUSIVE;a.Check(vkCreateBuffer(a.device,&ci,nullptr,&buffer),failure);VkMemoryRequirements requirements;vkGetBufferMemoryRequirements(a.device,buffer,&requirements);VkMemoryAllocateInfo allocation{VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO};allocation.allocationSize=requirements.size;allocation.memoryTypeIndex=Memory(a,requirements.memoryTypeBits,VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT|VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
++    const bool bulk=std::strcmp(failure,"incoming production billboard physical buffer failed")==0||std::strcmp(failure,"regional pupil staging allocation failed")==0||std::strcmp(failure,"incoming production billboard visibility buffer failed")==0||std::strcmp(failure,"incoming production billboard compacted buffer failed")==0||std::strcmp(failure,"resident production billboard lattice buffer failed")==0||std::strcmp(failure,"resident production billboard index buffer failed")==0;
++    const char*placement=std::getenv("NOVACORE_WHOLE_BULK_LOCAL");
++    const bool physicalOnly=std::strcmp(failure,"incoming production billboard physical buffer failed")==0||std::strcmp(failure,"regional pupil staging allocation failed")==0;
++    if(bulk&&placement&&(std::strcmp(placement,"physical")!=0||physicalOnly))allocation.memoryTypeIndex=Memory(a,requirements.memoryTypeBits,VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT|VK_MEMORY_PROPERTY_HOST_COHERENT_BIT|VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
++    if(bulk){VkPhysicalDeviceMemoryProperties props{};vkGetPhysicalDeviceMemoryProperties(a.physical,&props);const auto&type=props.memoryTypes[allocation.memoryTypeIndex];char row[512];std::snprintf(row,sizeof row,"Whole heap: label=%s; bytes=%llu; type=%u; properties=%u; heap=%u",failure,(unsigned long long)size,allocation.memoryTypeIndex,type.propertyFlags,type.heapIndex);a.Log(NC_LOG_ALWAYS,row);}
++a.Check(vkAllocateMemory(a.device,&allocation,nullptr,&memory),failure);a.Check(vkBindBufferMemory(a.device,buffer,memory,0),failure);a.Check(vkMapMemory(a.device,memory,0,size,0,&mapped),failure);std::memset(mapped,0,(size_t)size);
+ }
+ void DestroyHostBuffer(App &a,VkBuffer &buffer,VkDeviceMemory &memory,void *&mapped) {
+   if(mapped)vkUnmapMemory(a.device,memory);if(buffer)vkDestroyBuffer(a.device,buffer,nullptr);if(memory)vkFreeMemory(a.device,memory,nullptr);mapped=nullptr;buffer={};memory={};
+@@ -1622,6 +1647,39 @@ void DestroyProductionBillboard(App &a){
+   DestroyProductionBillboardIncoming(a);DestroyHostBuffer(a,a.productionBillboardPhysicalBuffer,a.productionBillboardPhysicalMemory,a.productionBillboardPhysicalMapped);DestroyHostBuffer(a,a.productionBillboardVisibilityBuffer,a.productionBillboardVisibilityMemory,a.productionBillboardVisibilityMapped);DestroyHostBuffer(a,a.productionBillboardCompactedBuffer,a.productionBillboardCompactedMemory,a.productionBillboardCompactedMapped);DestroyHostBuffer(a,a.productionBillboardIndirectBuffer,a.productionBillboardIndirectMemory,a.productionBillboardIndirectMapped);DestroyHostBuffer(a,a.productionBillboardCounterBuffer,a.productionBillboardCounterMemory,a.productionBillboardCounterMapped);DestroyProductionBillboardSpare(a);DestroyProductionBillboardTopologyResources(a);a.productionBillboardLatticeBuffer={};a.productionBillboardLatticeMemory={};a.productionBillboardLatticeMapped=nullptr;a.productionBillboardIndexBuffer={};a.productionBillboardIndexMemory={};a.productionBillboardIndexMapped=nullptr;a.productionBillboardEnabled=false;a.productionBillboardWorkRecorded=false;a.productionBillboardFencePending=false;a.productionBillboardAuthoritative=false;a.productionBillboardVertexCount=0;a.productionBillboardTriangleCount=0;a.productionBillboardVertexCapacity=0;a.productionBillboardTriangleCapacity=0;a.productionBillboardTopologyFamily=NC_PLANETARY_PRODUCTION_TOPOLOGY_RADIAL_NCTOP2;a.productionBillboardDisplacementEnvelopeMetres=0;a.productionBillboardOcclusionSupportRadiusMetres=0;a.productionBillboardTopologyHash=0;a.productionBillboardGeneration=0;a.productionBillboardPreparedFrameIdentity=0;a.productionBillboardCullFrameIdentity=0;a.productionBillboardRasterFrameIdentity=0;a.productionBillboardLoggedFrameIdentity=0;
+ }
+ #include "RegionalPhysicalResidency.inl"
++// Private diagnostic constants and readiness; no production dependencies.
++extern "C" __declspec(dllexport) int ncCompositionReady(){
++  if(!gApp)return 0;auto& a=*gApp;
++  return a.regionalPhysical&&a.regionalPhysical->AllContributingResident()&&
++    a.productionBillboardAuthoritative&&!a.productionBillboardIncomingEnabled&&
++    !a.regionalPreparation[0].active&&!a.regionalPreparation[1].active;
++}
++std::string CompositionHex(const void* data,size_t bytes){
++  static const char digits[]="0123456789abcdef";std::string s(bytes*2,'0');const auto* p=static_cast<const unsigned char*>(data);
++  for(size_t i=0;i<bytes;i++){s[i*2]=digits[p[i]>>4];s[i*2+1]=digits[p[i]&15];}return s;
++}
++void CompositionCorrelation(App& a){
++  if(!std::getenv("NOVACORE_COMPOSITION_CONTROL"))return;
++  auto gpu=a.submission->planetaryGpu;gpu.terrainFrame=0;
++  std::string line="Composition frame: frame="+std::to_string(a.frame)+
++    "; generation="+std::to_string(a.productionBillboardGeneration)+
++    "; incomingGeneration="+std::to_string(a.productionBillboardIncomingGeneration)+
++    "; currentTopology="+std::to_string(a.productionBillboardTopologyHash)+
++    "; incomingTopology="+std::to_string(a.productionBillboardIncomingTopologyHash)+
++    "; cameraBits="+CompositionHex(&a.submission->camera,sizeof a.submission->camera)+
++    "; gpuBits="+CompositionHex(&gpu,sizeof gpu)+
++    "; presentationBits="+CompositionHex(&a.submission->planetaryPresentation,sizeof a.submission->planetaryPresentation)+
++    "; lightingBits="+CompositionHex(&a.submission->solarLighting,sizeof a.submission->solarLighting)+
++    "; publishedBits="+CompositionHex(&a.regionalPublishedPupil,sizeof a.regionalPublishedPupil);
++  if(a.regionalPreparationMapped){const auto& c=*static_cast<const RegionalPreparationControl*>(a.regionalPreparationMapped);
++    line+="; incomingBits="+CompositionHex(&c.incoming,sizeof c.incoming)+
++      "; cursor="+std::to_string(a.regionalPreparation[1].cursor)+
++      "; active="+std::to_string(a.regionalPreparation[1].active?1:0)+
++      "; completeDependencies="+std::to_string(a.regionalReady[1]?1:0);
++  }
++  a.Log(NC_LOG_ALWAYS,line.c_str());
++}
++
+ void CreateProductionBillboard(App &a){
+   const auto *candidate=a.submission->productionBillboard;if(!candidate||!candidate->enabled||candidate->publicationGeneration==a.productionBillboardGeneration||candidate->publicationGeneration==a.productionBillboardIncomingGeneration)return;if(a.productionBillboardIncomingEnabled)return;
+   const bool knownFamily=candidate->topologyFamily==NC_PLANETARY_PRODUCTION_TOPOLOGY_RADIAL_NCTOP2||candidate->topologyFamily==NC_PLANETARY_PRODUCTION_TOPOLOGY_NESTED_SCALE_MESH_NCSM1;
+@@ -1636,6 +1694,7 @@ void CreateProductionBillboard(App &a){
+   if(!gpuPreparation)std::memcpy(a.productionBillboardIncomingPhysicalMapped,candidate->physicalVertices,VkDeviceSize(candidate->vertexCount)*sizeof(NcSphericalBillboardPhysicalVertex));auto *counters=static_cast<uint32_t*>(a.productionBillboardIncomingCounterMapped);std::memset(counters,0,sizeof(uint32_t)*ProductionBillboardCounterCount);counters[5]=a.productionBillboardIncomingTriangleCount;counters[6]=a.productionBillboardIncomingVertexCount;counters[7]=static_cast<uint32_t>(a.productionBillboardIncomingGeneration);std::memcpy(counters+9,&candidate->displacementEnvelopeMetres,sizeof(float));std::memcpy(counters+10,&a.productionBillboardIncomingOcclusionSupportRadiusMetres,sizeof(float));a.productionBillboardIncomingGpuPreparation=gpuPreparation;a.productionBillboardIncomingEnabled=true;a.productionBillboardEnabled=true;UpdateProductionBillboardDescriptors(a,true);
+ }
+ void DestroySubmission(App &a,bool destroyProductionBillboard=true) {
++  DestroyHostBuffer(a,a.parityPixels,a.parityPixelMemory,a.parityPixelMapped);
+   if (a.mapped)
+     vkUnmapMemory(a.device, a.submissionMemory);
+   if (a.descriptorPool)
+@@ -1746,6 +1805,7 @@ void CreateSubmission(App &a) {
+   VkDescriptorBufferInfo infos[10]{{a.submissionBuffer,0,a.submissionSize},{a.patchBuffer,0,a.patchSize},{a.gpuInputBuffer,0,sizeof(NcPlanetaryGpuConstants)},{a.gpuWorkBuffer,0,sizeof(uint32_t)*4*GpuPatchCapacity*2},{a.gpuNodeBuffer,0,sizeof(uint32_t)*4*GpuNodeEntryCapacity},{a.gpuControlBuffer,0,sizeof(GpuPlanetaryControl)},{a.planetaryPresentationBuffer,0,sizeof(NcPlanetaryPresentation)*10},{a.terrainKeyBuffer,0,sizeof(uint32_t)*4*3*TerrainCacheCapacity},{a.terrainSampleBuffer,0,sizeof(float)*2*TerrainGridVertexCount*TerrainCacheCapacity},{a.terrainPatchSlotBuffer,0,sizeof(uint32_t)*2*GpuPatchCapacity}};
+   const uint32_t storageBindings[10]{0,1,2,3,4,5,6,8,9,10};VkWriteDescriptorSet writes[10]{};for(uint32_t index=0;index<10;index++){writes[index].sType=VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;writes[index].dstSet=a.descriptor;writes[index].dstBinding=storageBindings[index];writes[index].descriptorCount=1;writes[index].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;writes[index].pBufferInfo=&infos[index];}
+   vkUpdateDescriptorSets(a.device,10,writes,0,nullptr);
++  if(a.parityDirectory)CreateHostBuffer(a,VkDeviceSize(a.extent.width)*a.extent.height*16,VK_BUFFER_USAGE_TRANSFER_DST_BIT,a.parityPixels,a.parityPixelMemory,a.parityPixelMapped,"single parity frame");
+   CreateRegionalPhysical(a);
+   VkDescriptorBufferInfo facilityInfo{a.facilityVisibilityBuffer,0,sizeof(nc::facility::GpuVisibility)};VkWriteDescriptorSet facilityWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};facilityWrite.dstSet=a.descriptor;facilityWrite.dstBinding=58;facilityWrite.descriptorCount=1;facilityWrite.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;facilityWrite.pBufferInfo=&facilityInfo;vkUpdateDescriptorSets(a.device,1,&facilityWrite,0,nullptr);
+   VkDescriptorBufferInfo pupilFrameInfo{a.productionBillboardFrameBuffer,0,sizeof(NcProductionBillboardFrame)};VkWriteDescriptorSet pupilFrameWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};pupilFrameWrite.dstSet=a.descriptor;pupilFrameWrite.dstBinding=52;pupilFrameWrite.descriptorCount=1;pupilFrameWrite.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;pupilFrameWrite.pBufferInfo=&pupilFrameInfo;vkUpdateDescriptorSets(a.device,1,&pupilFrameWrite,0,nullptr);
+@@ -1795,7 +1855,7 @@ void Upload(App &a) {
+   std::memcpy((char *)a.mapped + sizeof(NcCameraData),
+               a.submission->objects,
+               sizeof(NcRenderObject) * a.submission->objectCount);
+-  auto gpuInput=a.submission->planetaryGpu;gpuInput.terrainFrame=static_cast<uint32_t>(++a.frame);if((a.submission->productionBillboardFlags&32u)!=0u)gpuInput.targetTexelPixels=-1001.0f;else if((a.submission->productionBillboardFlags&64u)!=0u)gpuInput.targetTexelPixels=-1002.0f;else if((a.submission->productionBillboardFlags&256u)!=0u)gpuInput.targetTexelPixels=-1003.0f;else if((a.submission->productionBillboardFlags&512u)!=0u)gpuInput.targetTexelPixels=-1004.0f;else if((a.submission->productionBillboardFlags&16384u)!=0u)gpuInput.targetTexelPixels=-1005.0f;else if((a.submission->productionBillboardFlags&32768u)!=0u)gpuInput.targetTexelPixels=-1006.0f;else if((a.submission->productionBillboardFlags&2u)!=0u)gpuInput.targetTexelPixels=-std::abs(gpuInput.targetTexelPixels);const bool productionSurface=a.submission->planetarySurfaceMode==NC_PLANETARY_SURFACE_PRODUCTION_CUBE;if(productionSurface){if(!a.productionPack)throw std::runtime_error("production cube pack is required for mode 2");gpuInput.maximumLevel=std::min(gpuInput.maximumLevel,a.productionPack->MaximumLevel());}if(a.submission->planetaryMode==NC_PLANETARY_CPU_REFERENCE)gpuInput.terrainVersion=0;
++  auto gpuInput=a.submission->planetaryGpu;gpuInput.terrainFrame=static_cast<uint32_t>(++a.frame);if((a.submission->productionBillboardFlags&32u)!=0u)gpuInput.targetTexelPixels=-1001.0f;else if((a.submission->productionBillboardFlags&64u)!=0u)gpuInput.targetTexelPixels=-1002.0f;else if((a.submission->productionBillboardFlags&256u)!=0u)gpuInput.targetTexelPixels=-1003.0f;else if((a.submission->productionBillboardFlags&512u)!=0u)gpuInput.targetTexelPixels=-1004.0f;else if((a.submission->productionBillboardFlags&16384u)!=0u)gpuInput.targetTexelPixels=-1005.0f;else if((a.submission->productionBillboardFlags&32768u)!=0u)gpuInput.targetTexelPixels=-1006.0f;else if((a.submission->productionBillboardFlags&2u)!=0u)gpuInput.targetTexelPixels=-std::abs(gpuInput.targetTexelPixels);if(a.performanceCountersOff&&(a.submission->productionBillboardFlags&32u)==0u)gpuInput.targetTexelPixels=std::abs(a.submission->planetaryGpu.targetTexelPixels);const bool productionSurface=a.submission->planetarySurfaceMode==NC_PLANETARY_SURFACE_PRODUCTION_CUBE;if(productionSurface){if(!a.productionPack)throw std::runtime_error("production cube pack is required for mode 2");gpuInput.maximumLevel=std::min(gpuInput.maximumLevel,a.productionPack->MaximumLevel());}if(a.submission->planetaryMode==NC_PLANETARY_CPU_REFERENCE)gpuInput.terrainVersion=0;
+   const auto &contextPresentation=a.submission->planetaryPresentation;
+   const uint64_t contextBody=uint64_t(contextPresentation.bodyIdLow)|(uint64_t(contextPresentation.bodyIdHigh)<<32u);
+   uint32_t radiusHighBits{},radiusLowBits{};
+@@ -1893,16 +1953,35 @@ void Commands(App &a) {
+   VkFenceCreateInfo fi{VK_STRUCTURE_TYPE_FENCE_CREATE_INFO};
+   fi.flags = VK_FENCE_CREATE_SIGNALED_BIT;
+   a.Check(vkCreateFence(a.device, &fi, nullptr, &a.fence), "fence failed");
+-  VkQueryPoolCreateInfo qi{VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO};qi.queryType=VK_QUERY_TYPE_TIMESTAMP;qi.queryCount=App::TimestampCount;a.Check(vkCreateQueryPool(a.device,&qi,nullptr,&a.timestampQueries),"timestamp query pool failed");qi.queryCount=6;a.Check(vkCreateQueryPool(a.device,&qi,nullptr,&a.regionalTimingQueries),"regional timestamp pool failed");
++  VkQueryPoolCreateInfo qi{VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO};qi.queryType=VK_QUERY_TYPE_TIMESTAMP;qi.queryCount=App::TimestampCount;a.Check(vkCreateQueryPool(a.device,&qi,nullptr,&a.timestampQueries),"timestamp query pool failed");qi.queryCount=6;a.Check(vkCreateQueryPool(a.device,&qi,nullptr,&a.regionalTimingQueries),"regional timestamp pool failed");qi.queryCount=16;a.Check(vkCreateQueryPool(a.device,&qi,nullptr,&a.residualQueries),"residual query pool failed");
+   VkQueryPoolCreateInfo pipelineStatistics{VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO};
+   pipelineStatistics.queryType=VK_QUERY_TYPE_PIPELINE_STATISTICS;pipelineStatistics.queryCount=1;
+   pipelineStatistics.pipelineStatistics=VK_QUERY_PIPELINE_STATISTIC_CLIPPING_PRIMITIVES_BIT|
+     VK_QUERY_PIPELINE_STATISTIC_FRAGMENT_SHADER_INVOCATIONS_BIT|
+     VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_CONTROL_SHADER_PATCHES_BIT|
+     VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_EVALUATION_SHADER_INVOCATIONS_BIT;
++  if(a.performanceClipping)pipelineStatistics.pipelineStatistics|=VK_QUERY_PIPELINE_STATISTIC_CLIPPING_INVOCATIONS_BIT;
+   a.Check(vkCreateQueryPool(a.device,&pipelineStatistics,nullptr,&a.anchoredPipelineStatistics),
+     "anchored pipeline statistics query pool failed");
+ }
++// Diagnostic-only adjacent timestamp boundaries. No overlapping summation.
++void ResidualStamp(App& a,VkCommandBuffer c,bool incoming,uint32_t point){
++  if(!a.residualQueries)return;
++  vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,a.residualQueries,(incoming?8u:0u)+point);
++  if(point==0)a.residualRecorded[incoming?1:0]=true;
++}
++void ResidualInspect(App& a){
++  for(uint32_t slot=0;slot<2;slot++)if(a.residualRecorded[slot]){
++    uint64_t ticks[7]{};a.Check(vkGetQueryPoolResults(a.device,a.residualQueries,slot*8,7,sizeof ticks,ticks,sizeof(uint64_t),VK_QUERY_RESULT_64_BIT),"residual timing readback failed");
++    const double scale=double(a.timestampPeriodNanoseconds)/1e6;
++    char row[768];std::snprintf(row,sizeof row,"Residual GPU: observedFrame=%llu; recordFrame=%llu; incoming=%u; resetMs=%.6f; resetBarrierMs=%.6f; cullMs=%.6f; cullBarrierMs=%.6f; compactMs=%.6f; compactBarrierMs=%.6f; blockMs=%.6f; fenceComplete=true",
++      (unsigned long long)a.frame,(unsigned long long)a.residualRecordFrame,slot,
++      (ticks[1]-ticks[0])*scale,(ticks[2]-ticks[1])*scale,(ticks[3]-ticks[2])*scale,
++      (ticks[4]-ticks[3])*scale,(ticks[5]-ticks[4])*scale,(ticks[6]-ticks[5])*scale,(ticks[6]-ticks[0])*scale);
++    a.Log(NC_LOG_ALWAYS,row);a.residualRecorded[slot]=false;
++  }
++}
++
+ void RecordProductionBillboardWork(App &a,VkCommandBuffer c,bool incoming){
+   if(incoming&&RegionalPhysicalEnabled(a)&&!a.regionalReady[1])return;
+   const bool enabled=incoming?a.productionBillboardIncomingEnabled:a.productionBillboardAuthoritative;if(!enabled)return;if(incoming&&a.productionBillboardIncomingWorkRecorded)return;const uint32_t triangles=incoming?a.productionBillboardIncomingTriangleCount:a.productionBillboardTriangleCount;
+@@ -1910,7 +1989,8 @@ void RecordProductionBillboardWork(App &a,VkCommandBuffer c,bool incoming){
+   if(!incoming){const auto*frame=static_cast<const NcProductionBillboardFrame*>(a.productionBillboardFrameMapped);const auto&current=frame->current;const uint32_t frameIdentity=current.identity[0];if(current.metadata[0]&&frameIdentity!=a.productionBillboardPreparedFrameIdentity){if(current.identity[2]>=18u||current.identity[3]==0u||current.metadata[2]!=a.productionBillboardVertexCount)throw std::runtime_error("production billboard pupil frame does not match authoritative topology");vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_COMPUTE,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,a.regionalTimingQueries,2);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_COMPUTE,a.productionBillboardPreparePipeline);vkCmdDispatch(c,(a.productionBillboardVertexCount+63u)/64u,1,1);vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,a.regionalTimingQueries,3);a.regionalTimingRecorded[1]=true;VkMemoryBarrier prepareBarrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};prepareBarrier.srcAccessMask=VK_ACCESS_SHADER_WRITE_BIT;prepareBarrier.dstAccessMask=VK_ACCESS_SHADER_READ_BIT;vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT|VK_PIPELINE_STAGE_VERTEX_SHADER_BIT|VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT,0,1,&prepareBarrier,0,nullptr,0,nullptr);a.productionBillboardPreparedFrameIdentity=frameIdentity;}a.productionBillboardCullFrameIdentity=frameIdentity;if(RegionalPhysicalEnabled(a))a.regionalPublishedPupil=current;}
+   if(incoming&&RegionalPhysicalEnabled(a)&&!RecordRegionalPreparation(a,c,true))return;
+   if(incoming&&a.productionBillboardIncomingGpuPreparation&&!RegionalPhysicalEnabled(a)){const auto*frame=static_cast<const NcProductionBillboardFrame*>(a.productionBillboardFrameMapped);const auto&candidateFrame=frame->incoming;if(candidateFrame.metadata[0]==0u||candidateFrame.identity[2]>=18u||candidateFrame.identity[3]==0u||candidateFrame.metadata[2]!=a.productionBillboardIncomingVertexCount)throw std::runtime_error("incoming production billboard pupil frame does not match topology");vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_COMPUTE,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,a.regionalTimingQueries,4);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_COMPUTE,a.productionBillboardIncomingPreparePipeline);vkCmdDispatch(c,(a.productionBillboardIncomingVertexCount+63u)/64u,1,1);vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,a.regionalTimingQueries,5);a.regionalTimingRecorded[2]=true;VkMemoryBarrier prepareBarrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};prepareBarrier.srcAccessMask=VK_ACCESS_SHADER_WRITE_BIT;prepareBarrier.dstAccessMask=VK_ACCESS_SHADER_READ_BIT;vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT|VK_PIPELINE_STAGE_VERTEX_SHADER_BIT|VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT,0,1,&prepareBarrier,0,nullptr,0,nullptr);}
+-  vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_COMPUTE,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_COMPUTE,incoming?a.productionBillboardIncomingResetPipeline:a.productionBillboardResetPipeline);vkCmdDispatch(c,1,1,1);VkMemoryBarrier resetBarrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};resetBarrier.srcAccessMask=VK_ACCESS_SHADER_WRITE_BIT;resetBarrier.dstAccessMask=VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT;vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,0,1,&resetBarrier,0,nullptr,0,nullptr);const uint32_t topologyFamily=incoming?a.productionBillboardIncomingTopologyFamily:a.productionBillboardTopologyFamily;const bool nestedScaleMesh=topologyFamily==NC_PLANETARY_PRODUCTION_TOPOLOGY_NESTED_SCALE_MESH_NCSM1;VkPipeline cullPipeline=nestedScaleMesh?(incoming?a.productionNestedScaleMeshIncomingCullPipeline:a.productionNestedScaleMeshCullPipeline):(incoming?a.productionBillboardIncomingCullPipeline:a.productionBillboardCullPipeline);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_COMPUTE,cullPipeline);vkCmdDispatch(c,(triangles+63u)/64u,1,1);VkMemoryBarrier cullBarrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};cullBarrier.srcAccessMask=VK_ACCESS_SHADER_WRITE_BIT;cullBarrier.dstAccessMask=VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT;vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,0,1,&cullBarrier,0,nullptr,0,nullptr);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_COMPUTE,incoming?a.productionBillboardIncomingCompactPipeline:a.productionBillboardCompactPipeline);vkCmdDispatch(c,(triangles+63u)/64u,1,1);VkMemoryBarrier compactBarrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};compactBarrier.srcAccessMask=VK_ACCESS_SHADER_WRITE_BIT;cullBarrier.dstAccessMask=VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT;compactBarrier.dstAccessMask=VK_ACCESS_HOST_READ_BIT|VK_ACCESS_INDIRECT_COMMAND_READ_BIT|VK_ACCESS_INDEX_READ_BIT;vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_HOST_BIT|VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT|VK_PIPELINE_STAGE_VERTEX_INPUT_BIT,0,1,&compactBarrier,0,nullptr,0,nullptr);if(incoming)a.productionBillboardIncomingWorkRecorded=true;else a.productionBillboardWorkRecorded=true;
++  ResidualStamp(a,c,incoming,0);
++  vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_COMPUTE,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_COMPUTE,incoming?a.productionBillboardIncomingResetPipeline:a.productionBillboardResetPipeline);vkCmdDispatch(c,1,1,1);ResidualStamp(a,c,incoming,1);VkMemoryBarrier resetBarrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};resetBarrier.srcAccessMask=VK_ACCESS_SHADER_WRITE_BIT;resetBarrier.dstAccessMask=VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT;vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,0,1,&resetBarrier,0,nullptr,0,nullptr);ResidualStamp(a,c,incoming,2);const uint32_t topologyFamily=incoming?a.productionBillboardIncomingTopologyFamily:a.productionBillboardTopologyFamily;const bool nestedScaleMesh=topologyFamily==NC_PLANETARY_PRODUCTION_TOPOLOGY_NESTED_SCALE_MESH_NCSM1;VkPipeline cullPipeline=nestedScaleMesh?(incoming?a.productionNestedScaleMeshIncomingCullPipeline:a.productionNestedScaleMeshCullPipeline):(incoming?a.productionBillboardIncomingCullPipeline:a.productionBillboardCullPipeline);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_COMPUTE,cullPipeline);vkCmdDispatch(c,(triangles+63u)/64u,1,1);ResidualStamp(a,c,incoming,3);VkMemoryBarrier cullBarrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};cullBarrier.srcAccessMask=VK_ACCESS_SHADER_WRITE_BIT;cullBarrier.dstAccessMask=VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT;vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,0,1,&cullBarrier,0,nullptr,0,nullptr);ResidualStamp(a,c,incoming,4);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_COMPUTE,incoming?a.productionBillboardIncomingCompactPipeline:a.productionBillboardCompactPipeline);vkCmdDispatch(c,(triangles+63u)/64u,1,1);ResidualStamp(a,c,incoming,5);VkMemoryBarrier compactBarrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};compactBarrier.srcAccessMask=VK_ACCESS_SHADER_WRITE_BIT;cullBarrier.dstAccessMask=VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT;compactBarrier.dstAccessMask=VK_ACCESS_HOST_READ_BIT|VK_ACCESS_INDIRECT_COMMAND_READ_BIT|VK_ACCESS_INDEX_READ_BIT;vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_HOST_BIT|VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT|VK_PIPELINE_STAGE_VERTEX_INPUT_BIT,0,1,&compactBarrier,0,nullptr,0,nullptr);ResidualStamp(a,c,incoming,6);if(incoming)a.productionBillboardIncomingWorkRecorded=true;else a.productionBillboardWorkRecorded=true;
+ }
+ constexpr bool ProductionBillboardPresentationEnabled(bool resident,uint32_t flags){return resident&&(flags&1u)!=0u;}
+ static_assert(ProductionBillboardPresentationEnabled(true,1u));
+@@ -1924,6 +2004,7 @@ void Record(App &a, uint32_t image) {
+   RecordProductionUploads(a,c);
+ 
+   vkCmdResetQueryPool(c,a.regionalTimingQueries,0,6);
++  vkCmdResetQueryPool(c,a.residualQueries,0,16);a.residualRecordFrame=a.frame;
+   vkCmdResetQueryPool(c,a.timestampQueries,0,App::TimestampCount);vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT,a.timestampQueries,0);
+   vkCmdResetQueryPool(c,a.anchoredPipelineStatistics,0,1);
+   const auto &presentation=a.submission->planetaryPresentation;const bool candidateRequested=(a.submission->productionBillboardFlags&1u)!=0u;const bool candidate=ProductionBillboardPresentationEnabled(a.productionBillboardAuthoritative,a.submission->productionBillboardFlags);const bool production=a.submission->planetarySurfaceMode==NC_PLANETARY_SURFACE_PRODUCTION_CUBE;const bool handoff=presentation.enabled!=0;const bool detailedPresentation=!handoff||presentation.regime!=NC_PLANETARY_DISTANT_ONLY;const bool distantPresentation=!candidate&&handoff&&!production&&presentation.regime!=NC_PLANETARY_DETAILED_ONLY&&presentation.distantAlpha>0;const bool diagnosticGlobal=(a.surfaceDiagnostic&SurfaceDiagnosticDisableGlobal)==0;const bool regional=production||detailedPresentation;const bool gpuPlanetary=!candidate&&regional&&a.submission->planetaryMode!=NC_PLANETARY_CPU_REFERENCE;
+@@ -1987,6 +2068,19 @@ void Record(App &a, uint32_t image) {
+       if((a.submission->productionBillboardFlags&1024u)!=0u)rasterPipeline=a.productionBillboardNoFaceCullPipeline;
+       else if((a.submission->productionBillboardFlags&2048u)!=0u)rasterPipeline=a.productionBillboardOppositeFacePipeline;
+       else if((a.submission->productionBillboardFlags&4096u)!=0u)rasterPipeline=a.productionBillboardNoDepthPipeline;
++      if(a.performanceShaderInfo&&!a.performanceShaderDumped){
++        const auto begin=std::chrono::steady_clock::now();
++        auto query=reinterpret_cast<PFN_vkGetShaderInfoAMD>(vkGetDeviceProcAddr(a.device,"vkGetShaderInfoAMD"));
++        if(!query)throw std::runtime_error("shader info function unavailable");
++        for(auto stage:{VK_SHADER_STAGE_VERTEX_BIT,VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT,VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT,VK_SHADER_STAGE_FRAGMENT_BIT}){
++          VkShaderStatisticsInfoAMD info{};size_t bytes=sizeof info;
++          a.Check(query(a.device,rasterPipeline,stage,VK_SHADER_INFO_TYPE_STATISTICS_AMD,&bytes,&info),"shader statistics failed");
++          char row[640];std::snprintf(row,sizeof row,"AMD shader statistics: oppositeFace=%u; stage=%u; vgpr=%u; sgpr=%u; ldsBytes=%zu; scratchBytes=%zu",rasterPipeline==a.productionBillboardOppositeFacePipeline?1u:0u,unsigned(stage),info.resourceUsage.numUsedVgprs,info.resourceUsage.numUsedSgprs,info.resourceUsage.ldsUsageSizeInBytes,info.resourceUsage.scratchMemUsageInBytes);a.Log(NC_LOG_ALWAYS,row);
++          bytes=0;a.Check(query(a.device,rasterPipeline,stage,VK_SHADER_INFO_TYPE_DISASSEMBLY_AMD,&bytes,nullptr),"shader ISA size failed");std::vector<char> isa(bytes);a.Check(query(a.device,rasterPipeline,stage,VK_SHADER_INFO_TYPE_DISASSEMBLY_AMD,&bytes,isa.data()),"shader ISA failed");
++          std::ofstream out(std::string(a.performanceShaderInfo)+"/stage-"+std::to_string(unsigned(stage))+".isa",std::ios::binary);out.write(isa.data(),bytes);if(!out)throw std::runtime_error("shader ISA write failed");
++        }
++        a.performanceShaderDumped=true;a.performanceShaderInfoMs=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-begin).count();
++      }
+       vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,rasterPipeline);
+       vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);vkCmdBindIndexBuffer(c,a.productionBillboardCompactedBuffer,0,VK_INDEX_TYPE_UINT32);vkCmdDrawIndexedIndirect(c,a.productionBillboardIndirectBuffer,0,1,sizeof(VkDrawIndexedIndirectCommand));
+     }
+@@ -2009,9 +2103,23 @@ void Record(App &a, uint32_t image) {
+   vkCmdDraw(c,3,1,0,0);
+   vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT,a.timestampQueries,8);
+   vkCmdEndRenderPass(c);
++  if(a.parityDirectory&&a.frame==a.parityFrame){
++    const VkDeviceSize pixels=VkDeviceSize(a.extent.width)*a.extent.height;
++    auto copy=[&](VkImage image,VkImageLayout layout,VkImageAspectFlags aspect,VkDeviceSize offset){
++      VkImageMemoryBarrier b{VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER};b.srcAccessMask=VK_ACCESS_MEMORY_READ_BIT|VK_ACCESS_MEMORY_WRITE_BIT;b.dstAccessMask=VK_ACCESS_TRANSFER_READ_BIT;b.oldLayout=layout;b.newLayout=VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL;b.srcQueueFamilyIndex=VK_QUEUE_FAMILY_IGNORED;b.dstQueueFamilyIndex=VK_QUEUE_FAMILY_IGNORED;b.image=image;b.subresourceRange={aspect==VK_IMAGE_ASPECT_DEPTH_BIT?VkImageAspectFlags(VK_IMAGE_ASPECT_DEPTH_BIT|VK_IMAGE_ASPECT_STENCIL_BIT):aspect,0,1,0,1};
++      vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,VK_PIPELINE_STAGE_TRANSFER_BIT,0,0,nullptr,0,nullptr,1,&b);
++      VkBufferImageCopy region{};region.bufferOffset=offset;region.imageSubresource={aspect,0,0,1};region.imageExtent={a.extent.width,a.extent.height,1};vkCmdCopyImageToBuffer(c,image,VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,a.parityPixels,1,&region);
++      b.srcAccessMask=VK_ACCESS_TRANSFER_READ_BIT;b.dstAccessMask=VK_ACCESS_MEMORY_READ_BIT;b.oldLayout=VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL;b.newLayout=layout;vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,0,0,nullptr,0,nullptr,1,&b);
++    };
++    copy(a.sceneDepth,VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL,VK_IMAGE_ASPECT_DEPTH_BIT,0);
++    copy(a.sceneColor,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,VK_IMAGE_ASPECT_COLOR_BIT,pixels*4);
++    copy(a.images[image],VK_IMAGE_LAYOUT_PRESENT_SRC_KHR,VK_IMAGE_ASPECT_COLOR_BIT,pixels*12);
++    VkMemoryBarrier host{VK_STRUCTURE_TYPE_MEMORY_BARRIER};host.srcAccessMask=VK_ACCESS_TRANSFER_WRITE_BIT|VK_ACCESS_SHADER_WRITE_BIT;host.dstAccessMask=VK_ACCESS_HOST_READ_BIT;vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,VK_PIPELINE_STAGE_HOST_BIT,0,1,&host,0,nullptr,0,nullptr);a.parityRecorded=true;
++  }
+   a.Check(vkEndCommandBuffer(c), "command end failed");
+ }
+ void Recreate(App &a) {
++  const auto performanceBegin=std::chrono::steady_clock::now();
+   int w = 0, h = 0;
+   while (!w || !h) {
+     RECT r;
+@@ -2051,6 +2159,7 @@ void Recreate(App &a) {
+             "resize semaphore failed");
+   a.resized = false;
+   a.Log(NC_LOG_ALWAYS, "Swapchain recreated after resize");
++  a.performanceRecreateMs+=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-performanceBegin).count();++a.performanceRecreateCount;
+ }
+ void InspectGpuPlanetary(App &a) {
+   if(!a.gpuFrameSubmitted||!a.gpuControlMapped)return;GpuPlanetaryControl telemetry;std::memcpy(&telemetry,a.gpuControlMapped,sizeof(telemetry));
+@@ -2068,6 +2177,7 @@ void InspectGpuPlanetary(App &a) {
+ void InspectGpuTimings(App &a){
+   if(!a.timestampFrameSubmitted||!a.timestampQueries)return;std::array<uint64_t,App::TimestampCount> ticks{};const auto result=vkGetQueryPoolResults(a.device,a.timestampQueries,0,App::TimestampCount,sizeof(ticks),ticks.data(),sizeof(uint64_t),VK_QUERY_RESULT_64_BIT);if(result!=VK_SUCCESS)return;
+   std::array<double,App::TimestampCount> values{};const double scale=double(a.timestampPeriodNanoseconds)/1e6;const bool detailedOwner=ProductionBillboardPresentationEnabled(a.productionBillboardAuthoritative,a.submission->productionBillboardFlags);values[0]=(ticks[8]-ticks[0])*scale;values[1]=0;values[2]=detailedOwner?(ticks[6]-ticks[5])*scale:0;values[3]=(ticks[3]-ticks[2])*scale;values[4]=(ticks[4]-ticks[3])*scale;values[5]=(ticks[7]-ticks[0])*scale;values[6]=(ticks[8]-ticks[7])*scale;values[7]=(ticks[1]-ticks[0])*scale;values[8]=(ticks[7]-ticks[4])*scale;values[9]=detailedOwner?(ticks[9]-ticks[5])*scale:0;values[10]=(ticks[10]-ticks[9])*scale;a.lastGpuTimingMs=values;a.lastGpuTimingFrame=a.anchoredPipelineStatisticsTerrainFrame;for(uint32_t i=0;i<App::TimestampCount;i++)a.timestampAccumulatedMs[i]+=values[i];a.timestampSampleCount++;
++  if(a.performanceFrameLog){char row[640];std::snprintf(row,sizeof row,"Performance GPU frame: frame=%llu; total=%.6f; detailed=%.6f; background=%.6f; preSurface=%.6f; scene=%.6f; toneMap=%.6f; cullAndPreparation=%.6f; materialsOverlays=%.6f; candidate=%.6f; globalFill=%.6f",(unsigned long long)a.lastGpuTimingFrame,values[0],values[2],values[3],values[4],values[5],values[6],values[7],values[8],values[9],values[10]);a.Log(NC_LOG_ALWAYS,row);}
+   if((a.submission->productionBillboardFlags&2u)!=0u)
+     for(uint32_t i=0;i<App::TimestampCount;i++)a.c3GpuMs[i].push_back(values[i]);
+   if(a.timestampSampleCount==1||a.timestampSampleCount%120==0){char message[384];std::snprintf(message,sizeof message,"GPU timings: total=%.3f ms; anchoredCompute=%.3f; anchoredDraw=%.3f; background=%.3f; preSurface=%.3f; scene=%.3f; toneMap=%.3f; regionalCompute=%.3f; materialsOverlays=%.3f",values[0],values[1],values[2],values[3],values[4],values[5],values[6],values[7],values[8]);a.Log(NC_LOG_ALWAYS,message);}
+@@ -2078,10 +2188,13 @@ void InspectAnchoredPipelineStatistics(App &a){
+   if(!a.anchoredPipelineStatisticsFrameSubmitted||!a.anchoredPipelineStatistics)return;
+   // Results are returned in ascending VkQueryPipelineStatisticFlagBits order:
+   // clipping-output primitives, fragment invocations, TCS patches, TES invocations.
+-  std::array<uint64_t,4> values{};
+-  const auto result=vkGetQueryPoolResults(a.device,a.anchoredPipelineStatistics,0,1,
+-    sizeof values,values.data(),sizeof values,VK_QUERY_RESULT_64_BIT);
++  std::array<uint64_t,5> extended{};
++  const size_t count=a.performanceClipping?5u:4u;
++  const auto result=vkGetQueryPoolResults(a.device,a.anchoredPipelineStatistics,0,1,count*sizeof(uint64_t),extended.data(),count*sizeof(uint64_t),VK_QUERY_RESULT_64_BIT);
+   if(result!=VK_SUCCESS)return;
++  std::array<uint64_t,4> values{};std::copy_n(extended.begin()+(a.performanceClipping?1:0),4,values.begin());
++  a.performancePipeline={a.performanceClipping?extended[0]:0,values[0],values[1],values[2],values[3]};
++  a.performancePipelineFrame=a.anchoredPipelineStatisticsTerrainFrame;a.performancePipelineGeneration=a.anchoredPipelineStatisticsGeneration;
+   a.anchoredClippingPrimitives+=values[0];
+   a.anchoredFragmentShaderInvocations+=values[1];
+   a.anchoredTessellationControlPatches+=values[2];
+@@ -2192,8 +2305,10 @@ void InspectAnchoredPipelineStatistics(App &a){
+ }
+ void Draw(App &a) {
+   uint32_t image{};
++  const auto acquireBegin=std::chrono::steady_clock::now();
+   VkResult ar = vkAcquireNextImageKHR(a.device, a.swapchain, UINT64_MAX,
+                                       a.imageAvailable, {}, &image);
++  a.performanceAcquireMs=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-acquireBegin).count();a.performanceAcquireResult=ar;
+   if (ar == VK_ERROR_OUT_OF_DATE_KHR) {
+     a.Log(NC_LOG_ALWAYS, "Acquire out of date; recreating swapchain");
+     Recreate(a);
+@@ -2231,8 +2346,9 @@ void Draw(App &a) {
+   pi.pSwapchains = &a.swapchain;
+   pi.pImageIndices = &image;
+   const auto presentStart=std::chrono::steady_clock::now();VkResult pr = vkQueuePresentKHR(a.presentQueue, &pi);a.presentSerial++;const auto presentEnd=std::chrono::steady_clock::now();
++  a.performancePresentResult=pr;
+   if(a.earthSubmissionTraceRemaining&&a.submission->planetarySurfaceMode==NC_PLANETARY_SURFACE_PRODUCTION_CUBE){const bool candidate=a.productionBillboardAuthoritative;char trace[448];std::snprintf(trace,sizeof trace,"Earth Vulkan submission: terrainFrame=%llu; swapchainImage=%u; recordSerial=%llu; submitSerial=%llu; presentSerial=%llu; serializedFence=true; globalDraw=%u; dynamicHierarchyDraw=%u; candidateIndirectDraw=%u; visibleEarthOwners=1",(unsigned long long)a.frame,image,(unsigned long long)a.recordSerial,(unsigned long long)a.submitSerial,(unsigned long long)a.presentSerial,candidate?0u:1u,0u,candidate?1u:0u);a.Log(NC_LOG_ALWAYS,trace);a.earthSubmissionTraceRemaining--;}
+-  const double recordMs=std::chrono::duration<double,std::milli>(recordEnd-recordStart).count(),submitMs=std::chrono::duration<double,std::milli>(submitEnd-submitStart).count(),presentMs=std::chrono::duration<double,std::milli>(presentEnd-presentStart).count();a.cpuRecordMs+=recordMs;a.cpuSubmitMs+=submitMs;a.cpuPresentMs+=presentMs;a.cpuTimingSamples++;if((a.submission->productionBillboardFlags&2u)!=0u){a.c3CpuMs[5].push_back(recordMs);a.c3CpuMs[6].push_back(submitMs);a.c3CpuMs[7].push_back(presentMs);}a.timestampFrameSubmitted=true;
++  const double recordMs=std::chrono::duration<double,std::milli>(recordEnd-recordStart).count(),submitMs=std::chrono::duration<double,std::milli>(submitEnd-submitStart).count(),presentMs=std::chrono::duration<double,std::milli>(presentEnd-presentStart).count();a.performanceCpu[5]=recordMs;a.performanceCpu[6]=submitMs;a.performanceCpu[7]=presentMs;a.cpuRecordMs+=recordMs;a.cpuSubmitMs+=submitMs;a.cpuPresentMs+=presentMs;a.cpuTimingSamples++;if((a.submission->productionBillboardFlags&2u)!=0u){a.c3CpuMs[5].push_back(recordMs);a.c3CpuMs[6].push_back(submitMs);a.c3CpuMs[7].push_back(presentMs);}a.timestampFrameSubmitted=true;
+   if (pr == VK_ERROR_OUT_OF_DATE_KHR || pr == VK_SUBOPTIMAL_KHR || recreate) {
+     Recreate(a);
+     return;
+@@ -2247,6 +2363,7 @@ void Destroy(App &a) {
+       vkDestroyFence(a.device, a.fence, nullptr);
+     if(a.timestampQueries)vkDestroyQueryPool(a.device,a.timestampQueries,nullptr);
+     if(a.regionalTimingQueries)vkDestroyQueryPool(a.device,a.regionalTimingQueries,nullptr);
++    if(a.residualQueries)vkDestroyQueryPool(a.device,a.residualQueries,nullptr);
+     if(a.anchoredPipelineStatistics)vkDestroyQueryPool(a.device,a.anchoredPipelineStatistics,nullptr);
+     for (auto s : a.renderFinished)
+       vkDestroySemaphore(a.device, s, nullptr);
+@@ -2320,6 +2437,14 @@ void Update(App &a, float dt) {
+   const auto updateStart=std::chrono::steady_clock::now();
+   a.Check(vkWaitForFences(a.device, 1, &a.fence, VK_TRUE, UINT64_MAX), "frame fence wait failed");
+   const auto fenceEnd=std::chrono::steady_clock::now();
++  ResidualInspect(a);
++  if(a.parityDirectory&&a.parityRecorded&&!a.parityWritten){
++    auto save=[&](const char*name,const void*data,size_t bytes){std::ofstream out(std::string(a.parityDirectory)+name,std::ios::binary);out.write(static_cast<const char*>(data),bytes);if(!out)throw std::runtime_error("pixel parity write failed");};
++    save("/pixels.bin",a.parityPixelMapped,size_t(a.extent.width)*a.extent.height*16);
++    save("/prepared.bin",a.productionBillboardPhysicalMapped,size_t(a.productionBillboardVertexCount)*sizeof(NcSphericalBillboardPhysicalVertex));
++    auto* draw=static_cast<VkDrawIndexedIndirectCommand*>(a.productionBillboardIndirectMapped);save("/selected.bin",a.productionBillboardCompactedMapped,size_t(draw->indexCount)*sizeof(uint32_t));
++    char row[512];std::snprintf(row,sizeof row,"Pixel parity: frame=%llu; width=%u; height=%u; generation=%llu; pupil=%u; physicalGeneration=%u; vertices=%u",(unsigned long long)a.frame,a.extent.width,a.extent.height,(unsigned long long)a.productionBillboardGeneration,a.productionBillboardRasterFrameIdentity,a.submission->physicalSurfaceGeneration,a.productionBillboardVertexCount);a.Log(NC_LOG_ALWAYS,row);a.parityWritten=true;
++  }
+   InspectRegionalPhysical(a);
+   InspectProductionBillboardPublication(a);
+   InspectGpuTimings(a);
+@@ -2374,6 +2499,7 @@ void Update(App &a, float dt) {
+                   static_cast<NcPresentationFocus>(presentationFocus),
+                   a.extent.width,
+                   a.extent.height};
++  if(std::getenv("NOVACORE_COMPOSITION_CONTROL")){in={};in.viewportWidthPixels=a.extent.width;in.viewportHeightPixels=a.extent.height;}
+   NcHostEvent e{NC_UPDATE_FRAME, NC_LOG_NONE, nullptr, in, a.submission};
+   a.cb(&e, a.cbData);
+   const auto callbackEnd=std::chrono::steady_clock::now();
+@@ -2384,6 +2510,7 @@ void Update(App &a, float dt) {
+   PrepareProductionUploads(a);
+ 
+   UpdateRegionalPhysical(a);
++  CompositionCorrelation(a);
+   const auto updateEnd=std::chrono::steady_clock::now();
+   const double updateMs=std::chrono::duration<double,std::milli>(updateEnd-updateStart).count();a.cpuUpdateMs+=updateMs;
+   const double fenceWaitMs=std::chrono::duration<double,std::milli>(fenceEnd-updateStart).count();
+@@ -2392,6 +2519,7 @@ void Update(App &a, float dt) {
+   a.cpuInspectionMs+=std::chrono::duration<double,std::milli>(inspectionEnd-fenceEnd).count();
+   a.cpuHostCallbackMs+=std::chrono::duration<double,std::milli>(callbackEnd-inspectionEnd).count();
+   a.cpuUploadMs+=std::chrono::duration<double,std::milli>(updateEnd-callbackEnd).count();
++  a.performanceCpu[0]=updateMs;a.performanceCpu[1]=fenceWaitMs;a.performanceCpu[2]=std::chrono::duration<double,std::milli>(inspectionEnd-fenceEnd).count();a.performanceCpu[3]=std::chrono::duration<double,std::milli>(callbackEnd-inspectionEnd).count();a.performanceCpu[4]=std::chrono::duration<double,std::milli>(updateEnd-callbackEnd).count();
+   if((a.submission->productionBillboardFlags&2u)!=0u){a.c3CpuMs[0].push_back(updateMs);a.c3CpuMs[1].push_back(fenceWaitMs);a.c3CpuMs[2].push_back(std::chrono::duration<double,std::milli>(inspectionEnd-fenceEnd).count());a.c3CpuMs[3].push_back(std::chrono::duration<double,std::milli>(callbackEnd-inspectionEnd).count());a.c3CpuMs[4].push_back(std::chrono::duration<double,std::milli>(updateEnd-callbackEnd).count());a.c3FenceMs.push_back(fenceWaitMs);}
+ 
+ }
+@@ -2488,11 +2616,19 @@ static NcResult RunRenderer(NcFrameSubmission *s, NcHostCallback cb, void *data,
+         DispatchMessage(&m);
+       }
+       if (run) {
++        a.performanceCpu.fill(0);a.performanceAcquireMs=0;a.performanceRecreateMs=0;a.performanceShaderInfoMs=0;a.performanceRecreateCount=0;a.performanceAcquireResult=VK_SUCCESS;a.performancePresentResult=VK_SUCCESS;
+         auto frameBegin=std::chrono::steady_clock::now();auto now = frameBegin;
+         Update(a, std::chrono::duration<float>(now - last).count());
+         last = now;
+         Draw(a);
+         const double frameMs=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-frameBegin).count();a.frameTimesMs[a.frameTimeCursor]=frameMs;a.frameTimeCursor=(a.frameTimeCursor+1)%a.frameTimesMs.size();a.frameTimeCount=std::min(a.frameTimeCount+1,a.frameTimesMs.size());if((a.submission->productionBillboardFlags&2u)!=0u){a.c3FrameMs.push_back(frameMs);if((a.submission->productionBillboardFlags&4u)!=0u)a.c3SnapFrameMs.push_back(frameMs);if((a.submission->productionBillboardFlags&8u)!=0u)a.c3ScaleFrameMs.push_back(frameMs);if((a.submission->productionBillboardFlags&16u)!=0u)a.c3PublicationFrameMs.push_back(frameMs);}
++        if(a.performanceFrameLog){
++          const auto& pc=a.performanceCpu;const double scoped=pc[0]+a.performanceAcquireMs+pc[5]+pc[6]+pc[7]+a.performanceRecreateMs;
++          char message[2048];const int n=std::snprintf(message,sizeof message,
++          "Performance host frame: frame=%llu; generation=%llu; pupil=%u; flags=%u; update=%.6f; fenceWait=%.6f; inspection=%.6f; hostCallback=%.6f; validationUpload=%.6f; acquire=%.6f; record=%.6f; submit=%.6f; present=%.6f; recreate=%.6f; recreateCount=%u; acquireResult=%d; presentResult=%d; shaderInfo=%.6f; total=%.6f; unattributed=%.6f; gpuFrame=%llu; geometryFrame=%llu; gpuGeneration=%llu; gpuTotal=%.6f; gpuCandidate=%.6f; gpuCullAndPreparation=%.6f; clippingInput=%llu; clippingOutput=%llu; fragments=%llu; tcsPatches=%llu; tesInvocations=%llu",
++          (unsigned long long)a.frame,(unsigned long long)a.productionBillboardGeneration,a.productionBillboardRasterFrameIdentity,a.submission->productionBillboardFlags,pc[0],pc[1],pc[2],pc[3],pc[4],a.performanceAcquireMs,pc[5],pc[6],pc[7],a.performanceRecreateMs,a.performanceRecreateCount,int(a.performanceAcquireResult),int(a.performancePresentResult),a.performanceShaderInfoMs,frameMs,frameMs-scoped,(unsigned long long)a.lastGpuTimingFrame,(unsigned long long)a.performancePipelineFrame,(unsigned long long)a.performancePipelineGeneration,a.lastGpuTimingMs[0],a.lastGpuTimingMs[9],a.lastGpuTimingMs[7],(unsigned long long)a.performancePipeline[0],(unsigned long long)a.performancePipeline[1],(unsigned long long)a.performancePipeline[2],(unsigned long long)a.performancePipeline[3],(unsigned long long)a.performancePipeline[4]);
++          if(n<0||size_t(n)>=sizeof message)throw std::runtime_error("performance row truncated");a.Log(NC_LOG_ALWAYS,message);
++        }
+         frames++;
+       }
+     }
+diff --git a/samples/NovaCore.Triangle/EarthRouteValidation.cs b/samples/NovaCore.Triangle/EarthRouteValidation.cs
+index b599650..101c996 100644
+--- a/samples/NovaCore.Triangle/EarthRouteValidation.cs
++++ b/samples/NovaCore.Triangle/EarthRouteValidation.cs
+@@ -6,6 +6,12 @@ using NovaCore.Interop;
+ internal sealed class EarthRouteValidation(string mode)
+ {
+     private int _frame;
++    private static readonly bool Composition=Environment.GetEnvironmentVariable("NOVACORE_COMPOSITION_CONTROL") is not null;
++    private bool _compositionStarted;
++    internal bool CompositionComplete=>Composition&&_frame>=1000;
++    [System.Runtime.InteropServices.DllImport("NovaCore.Native",EntryPoint="ncCompositionReady")]
++    private static extern int CompositionReady();
++
+     private FloridaLaunchSite? _site;
+     private NovaCore.Core.Double3? _siteBodyPosition;
+     internal static EarthRouteValidation? FromEnvironment() =>
+@@ -17,7 +23,9 @@ internal sealed class EarthRouteValidation(string mode)
+         };
+     internal void Advance(SolarSystemScene scene, CameraState camera)
+     {
++        if(Composition&&!_compositionStarted){if(CompositionReady()==0)return;_compositionStarted=true;Console.WriteLine("Composition route: logicalFrame=0; ready=true; clock=pausedJ2000; externalInput=disabled");}
+         _frame++;
++        if(Composition)Console.WriteLine($"Composition route frame: logicalFrame={_frame}");
+         if(mode=="regional-isolation")
+         {
+             if(_frame==1)Require(scene.Focus(camera,NativePresentationFocus.Mars),"fresh Mars isolation");
+diff --git a/samples/NovaCore.Triangle/ProductionBillboardDesktopTraversal.cs b/samples/NovaCore.Triangle/ProductionBillboardDesktopTraversal.cs
+index f77a41b..8ebc83f 100644
+--- a/samples/NovaCore.Triangle/ProductionBillboardDesktopTraversal.cs
++++ b/samples/NovaCore.Triangle/ProductionBillboardDesktopTraversal.cs
+@@ -73,6 +73,8 @@ internal sealed class ProductionBillboardDesktopTraversal
+     private readonly int _directionalLevel;
+     private readonly double? _directionalYawRadians;
+     private readonly double _directionalPitchRadians;
++    private readonly double? _performanceAltitude;
++    private readonly bool _performanceFlorida;
+     private readonly string _coverageDiagnostic;
+     private readonly string _rasterDiagnostic;
+     private readonly int? _frozenHorizonFrame;
+@@ -209,6 +211,21 @@ internal sealed class ProductionBillboardDesktopTraversal
+                 "NOVACORE_P2S5G_FIXED_DIAGNOSTIC_TIME requires a directional or horizon diagnostic.");
+         if (_fixedDiagnosticTime)
+             Console.WriteLine("P2S5G fixed diagnostic time: pause before first simulation advance; physical traversal unchanged.");
++        var geography=Environment.GetEnvironmentVariable("NOVACORE_PERFORMANCE_GEOGRAPHY");
++        if(geography is not null){var degrees=geography.Split(',').Select(x=>double.Parse(x,CultureInfo.InvariantCulture)).ToArray();if(degrees.Length!=2||!double.IsFinite(degrees[0])||!double.IsFinite(degrees[1])||Math.Abs(degrees[0])>90||Math.Abs(degrees[1])>180)throw new InvalidOperationException("invalid diagnostic geography");_direction=NovaCore.Core.Surface.BodyFixedGeography.DirectionFromLatitudeLongitude(degrees[0]*Math.PI/180,degrees[1]*Math.PI/180);}
++        var performanceAltitude = Environment.GetEnvironmentVariable("NOVACORE_PERFORMANCE_ALTITUDE_METRES");
++        _performanceFlorida = Environment.GetEnvironmentVariable("NOVACORE_PERFORMANCE_FLORIDA") == "1";
++        if (performanceAltitude is not null || _performanceFlorida)
++        {
++            if (!_directionalDiagnosticOnly || !_fixedDiagnosticTime || !_directionalYawRadians.HasValue)
++                throw new InvalidOperationException("Performance poses require a fixed-time, fixed-yaw directional diagnostic.");
++            if (performanceAltitude is not null)
++                _performanceAltitude = double.TryParse(performanceAltitude, NumberStyles.Float,
++                    CultureInfo.InvariantCulture, out var value) && double.IsFinite(value) && value >= 10.004d
++                    ? value : throw new InvalidOperationException("Performance altitude must be finite and at least 10.004 metres.");
++            if (_performanceFlorida && _performanceAltitude.HasValue)
++                throw new InvalidOperationException("Florida performance pose uses the authored launcher eye, without an altitude override.");
++        }
+     }
+ 
+     internal bool Failed { get; private set; }
+@@ -258,6 +275,14 @@ internal sealed class ProductionBillboardDesktopTraversal
+     {
+         if (Complete) return;
+         var body = scene.FocusedBody;
++        if (_performanceFlorida)
++        {
++            if (!scene.TryStartAtFloridaLaunchSite(camera))
++                throw new InvalidOperationException("Florida performance pose initialization failed.");
++            _lastCameraBody = body.BodyFixedToRoot.Conjugate().Rotate(camera.Position.Value - body.Position.Value);
++            _lastBodyOrientation = (body.BodyFixedToRoot.Conjugate() * camera.Orientation).Normalized();
++            return;
++        }
+         var altitude = TargetAltitude();
+         var direction = _direction;
+         var unanchored = _phase is Phase.UnanchoredWarpUp or Phase.UnanchoredWarpHold or
+@@ -568,7 +593,7 @@ internal sealed class ProductionBillboardDesktopTraversal
+             : _representativeAltitude[14],
+         Phase.ZeroVisibleOffEarthHold or Phase.ZeroVisibleReentry =>
+             _representativeAltitude[14],
+-        Phase.DirectionalVisibility => _representativeAltitude[_directionalLevel],
++        Phase.DirectionalVisibility => _performanceAltitude ?? _representativeAltitude[_directionalLevel],
+         Phase.DeepOrbit => _representativeAltitude[0],
+         Phase.Retreat => _currentLevel <= 1
+             ? _representativeAltitude[0] * 2d
+diff --git a/samples/NovaCore.Triangle/Program.cs b/samples/NovaCore.Triangle/Program.cs
+index 09ccee0..99aceac 100644
+--- a/samples/NovaCore.Triangle/Program.cs
++++ b/samples/NovaCore.Triangle/Program.cs
+@@ -216,7 +216,7 @@ static unsafe void Callback(NativeHostEvent* e,IntPtr data)
+     if(s.Dynamic is not null){var duration=SimulationDuration.FromSecondsRounded(Math.Clamp((double)e->Input.DeltaSeconds,0d,FreeCameraController.MaximumDeltaSeconds));if(!s.Dynamic.TryAdvanceByHostDuration(duration,out var publicationError)&&!s.DynamicFailureLogged){Console.Error.WriteLine(publicationError);s.DynamicFailureLogged=true;}else s.Snapshot=s.Dynamic.CurrentSnapshot;}
+     if(celestialScene is not null){celestialScene.ApplyPresentationInput(s.Camera,e->Input,out var rateChanged,out var pauseChanged);var previousSasMode=celestialScene.SasMode;var duration=SimulationDuration.FromSecondsRounded(Math.Clamp((double)e->Input.DeltaSeconds,0d,FreeCameraController.MaximumDeltaSeconds));if(!celestialScene.TryAdvanceByHostDuration(duration,e->Input,out var publicationError)&&!s.CelestialFailureLogged){Console.Error.WriteLine(publicationError);s.CelestialFailureLogged=true;}else s.Snapshot=celestialScene.CurrentSnapshot;if(s.Log.IsEnabled(LogCategory.Camera)&&rateChanged)Console.WriteLine($"Celestial rate={celestialScene.Rate.Numerator}:{celestialScene.Rate.Denominator}");if(s.Log.IsEnabled(LogCategory.Camera)&&pauseChanged)Console.WriteLine($"Celestial paused={celestialScene.IsPaused}");if(s.Log.IsEnabled(LogCategory.Camera)&&e->Input.MouseWheelDetents!=0)Console.WriteLine($"Celestial zoom distance={celestialScene.OrbitDistance:R}");if(s.Log.IsEnabled(LogCategory.Camera)&&previousSasMode!=celestialScene.SasMode)Console.WriteLine($"Celestial SAS mode={celestialScene.SasMode}");LogSasIndicatorDiagnostics(s,celestialScene);}
+     earthScene?.ApplyPresentationInput(s.Camera,e->Input);
+-    if(s.Sol is not null){var solarScene=s.Sol;var solarInput=s.ProductionBillboardDesktopTraversal?.PrepareInput(e->Input,solarScene)??s.SolarWarpTraversal?.PrepareInput(e->Input,solarScene)??e->Input;solarScene.ApplyPresentationInput(s.Camera,solarInput,out var rateChanged,out var pauseChanged);var duration=SimulationDuration.FromSecondsRounded(Math.Clamp((double)solarInput.DeltaSeconds,0d,FreeCameraController.MaximumDeltaSeconds));if(!solarScene.TryAdvanceByHostDuration(duration,s.Camera,out var publicationError)&&!s.SolarFailureLogged){Console.Error.WriteLine(publicationError);s.SolarFailureLogged=true;}if(s.Log.IsEnabled(LogCategory.Camera)&&rateChanged)Console.WriteLine($"Solar rate={solarScene.Rate.Numerator}:{solarScene.Rate.Denominator}");if(s.Log.IsEnabled(LogCategory.Camera)&&pauseChanged)Console.WriteLine($"Solar paused={solarScene.IsPaused}");if(s.Log.IsEnabled(LogCategory.Camera)&&solarInput.MouseWheelDetents!=0)Console.WriteLine($"Solar orbit distance={solarScene.OrbitDistance:R} m");if(solarScene.Focus(s.Camera,solarInput.PresentationFocus))Console.WriteLine($"Solar focus: {solarScene.FocusedBody.Label}; id={solarScene.FocusedBody.BodyId}; radius={solarScene.FocusedBody.RadiusMetres:R} m; distance/radius={solarScene.FocusedBlend.DistanceRadii:R}; state={solarScene.FocusedBlend.Regime}");LogSolarTelemetry(s,solarScene);}
++    if(s.Sol is not null){var solarScene=s.Sol;var solarInput=s.ProductionBillboardDesktopTraversal?.PrepareInput(e->Input,solarScene)??s.SolarWarpTraversal?.PrepareInput(e->Input,solarScene)??e->Input;if(Environment.GetEnvironmentVariable("NOVACORE_COMPOSITION_CONTROL") is not null&&!solarScene.IsPaused)solarInput.PauseToggle=1u;solarScene.ApplyPresentationInput(s.Camera,solarInput,out var rateChanged,out var pauseChanged);var duration=SimulationDuration.FromSecondsRounded(Math.Clamp((double)solarInput.DeltaSeconds,0d,FreeCameraController.MaximumDeltaSeconds));if(!solarScene.TryAdvanceByHostDuration(duration,s.Camera,out var publicationError)&&!s.SolarFailureLogged){Console.Error.WriteLine(publicationError);s.SolarFailureLogged=true;}if(s.Log.IsEnabled(LogCategory.Camera)&&rateChanged)Console.WriteLine($"Solar rate={solarScene.Rate.Numerator}:{solarScene.Rate.Denominator}");if(s.Log.IsEnabled(LogCategory.Camera)&&pauseChanged)Console.WriteLine($"Solar paused={solarScene.IsPaused}");if(s.Log.IsEnabled(LogCategory.Camera)&&solarInput.MouseWheelDetents!=0)Console.WriteLine($"Solar orbit distance={solarScene.OrbitDistance:R} m");if(solarScene.Focus(s.Camera,solarInput.PresentationFocus))Console.WriteLine($"Solar focus: {solarScene.FocusedBody.Label}; id={solarScene.FocusedBody.BodyId}; radius={solarScene.FocusedBody.RadiusMetres:R} m; distance/radius={solarScene.FocusedBlend.DistanceRadii:R}; state={solarScene.FocusedBlend.Regime}");LogSolarTelemetry(s,solarScene);}
+     var resetRequested=s.ProductionBillboardDesktopTraversal is null&&e->Input.Reset!=0;
+     if(resetRequested){s.Camera.Position=s.Default.Position;s.Camera.Orientation=s.Default.Orientation;s.Camera.Projection=s.Default.Projection;s.Camera.Mode=s.Default.Mode;s.Controller.Reset();celestialScene?.ResetPresentationCamera(s.Camera);earthScene?.ResetPresentationCamera(s.Camera);s.Sol?.ResetPresentationCamera(s.Camera);}else if(!orbitCamera)s.Controller.Update(s.Camera,commands[..count],e->Input.DeltaSeconds);
+     ApplyViewport(s,e->Input);
+@@ -224,6 +224,7 @@ static unsafe void Callback(NativeHostEvent* e,IntPtr data)
+     if(s.Sol is { } c3Solar)s.ProductionBillboardDesktopTraversal?.ApplyPose(s.Camera,c3Solar);
+     if(s.Sol is { } routeSolar)s.RouteValidation?.Advance(routeSolar,s.Camera);
+     UpdatePlanetaryPatches(s);LogEarthLodDiagnostics(s,earthScene);
++    if(s.RouteValidation?.CompositionComplete==true)PostQuitMessage(0);
+     if(s.Sol is { } observedSolar&&s.SolarWarpTraversal?.Observe(observedSolar)==true){Console.WriteLine(s.SolarWarpTraversal.FinalReport);PostQuitMessage(s.SolarWarpTraversal.Failed?1:0);}
+     if(!TryBuild(s,out var buildError)){Console.Error.WriteLine(buildError);PostQuitMessage(1);return;} CopyObjectsToNative(s.Submission,e->Submission->Objects,e->Submission->Batches,e->Submission->OrbitVertices,e->Submission->PreviousOrbitVertices,e->Submission->BodyForwardVertices,e->Submission->TargetDirectionVertices,out var batchCount);e->Submission->ObjectCount=(uint)s.Submission.ObjectCount;e->Submission->BatchCount=(uint)batchCount;e->Submission->OrbitVertexCount=(uint)(s.Sol?.OrbitVertices.Length??s.Submission.OrbitVertexCount);e->Submission->PreviousOrbitVertexCount=(uint)s.Submission.PreviousOrbitVertexCount;e->Submission->BodyForwardVertexCount=(uint)s.Submission.BodyForwardVertexCount;e->Submission->TargetDirectionVertexCount=(uint)s.Submission.TargetDirectionVertexCount;e->Submission->PlanetaryPatchCount=ActivePlanetaryPatchCount(s);e->Submission->PlanetaryGpu=earthScene?.GpuConstants(s.Camera,s.ViewportHeightPixels)??s.Sol?.GpuConstants(s.Camera,s.ViewportHeightPixels)??default;e->Submission->PlanetaryMode=earthScene?.Mode??(s.Sol is null?NativePlanetaryMode.CpuReference:NativePlanetaryMode.GpuProduction);e->Submission->PlanetarySurfaceMode=NativeSurfaceMode(earthScene,s.Sol);e->Submission->PhysicalSurfaceGeneration=(uint)PlanetaryPhysicalSurface.RuntimeGeneration;e->Submission->PlanetaryPresentation=earthScene?.NativePresentation(s.Camera)??s.Sol?.FocusedPresentation(s.Camera)??default;e->Submission->DistantBodyCount=(uint)(s.Sol?.DistantBodyCount??0);e->Submission->SolarLighting=earthScene?.SolarLighting(s.Camera)??s.Sol?.SolarLighting(s.Camera)??default;e->Submission->Camera=NativeCamera(s.Submission.Camera);UpdateProductionBillboard(s,e->Submission);
+     if(!orbitCamera&&s.Log.IsEnabled(LogCategory.Camera)&&e->Input.MouseWheelDetents!=0)Console.WriteLine($"Camera wheelDetents={e->Input.MouseWheelDetents} speed={previousSpeed:R}->{s.Controller.MovementSpeed:R}");if(earthScene is not null&&s.Log.IsEnabled(LogCategory.Camera)&&e->Input.MouseWheelDetents!=0)Console.WriteLine($"Earth orbit distance={earthScene.OrbitDistance:R} m");if(s.Log.IsEnabled(LogCategory.Camera)&&resetRequested)Console.WriteLine($"Camera reset speed={s.Controller.MovementSpeed:R}");if(s.BenchmarkFramesRemaining>0&&--s.BenchmarkFramesRemaining==0){if(s.Sol is { } benchmarkSolar)Console.WriteLine($"Solar workload: bodies={benchmarkSolar.DistantBodyCount}; representation={(benchmarkSolar.ProductionSurfaceEligible?"production":"bounded-sphere")}; dynamicTerrain={benchmarkSolar.DetailedComputeRequested}; orbitCurveBuilds={benchmarkSolar.OrbitCurveBuildCount}; orbitCurveReuses={benchmarkSolar.OrbitCacheKeys.Length}");PostQuitMessage(0);}

@@ -1,0 +1,9 @@
+{
+  "native": "3fcd4b19550dc69213ddaf7744a811d0874750ff317ee34559daf8b7a5ed7ab0",
+  "managed": "d243eedae6d9aa389c41774e8702732b0bc14d9cf20aa1850500f1d752aa4e93",
+  "sourceRestored": true,
+  "productionDeploymentUnchanged": true,
+  "captureInstrumentationAvailable": true,
+  "captureEnabledOnlyByExplicitProcessEnvironment": true,
+  "metadataCorrection": "Inherited noCaptureInstrumentation flag removed; v3/candidate host includes opt-in capture hooks, timed runs have no capture environment variable."
+}

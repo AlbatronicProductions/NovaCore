@@ -1,0 +1,1090 @@
+{
+  "roots": [
+    {
+      "root": "E:\\NovaCore\\build\\m13-final-whole-frame-causality",
+      "files": [
+        {
+          "relative": "Debug-window-failed.log",
+          "bytes": 63237,
+          "allocated": 65536,
+          "links": 1,
+          "sha256": "c59c5f4feb81600324e1977a06e78f03a39be57e884686bf14d3f011a7acc39d"
+        },
+        {
+          "relative": "florida-smoke.err",
+          "bytes": 0,
+          "allocated": 0,
+          "links": 1,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "relative": "florida-smoke.log",
+          "bytes": 251032,
+          "allocated": 253952,
+          "links": 1,
+          "sha256": "a0ebdd2ad90717b0e426382a31960a7b53851d8f6283184bb9adfa9988f54d10"
+        },
+        {
+          "relative": "host/earth-data/earth_elevation_8192x4096.r16",
+          "bytes": 67108864,
+          "allocated": 67108864,
+          "links": 2,
+          "sha256": "4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317"
+        },
+        {
+          "relative": "host/NovaCore.Core.deps.json",
+          "bytes": 433,
+          "allocated": 440,
+          "links": 1,
+          "sha256": "4e4f8878a47e2b305b315915d7d843dfd682c1ab005ad51148f681b1a2f01f47"
+        },
+        {
+          "relative": "host/NovaCore.Core.dll",
+          "bytes": 86528,
+          "allocated": 90112,
+          "links": 1,
+          "sha256": "e807002974462b950c3c2967e76118a675a2f7e36e5f8a5ce0293786925f43e7"
+        },
+        {
+          "relative": "host/NovaCore.Core.pdb",
+          "bytes": 31136,
+          "allocated": 32768,
+          "links": 1,
+          "sha256": "f761b311d4d814e99b23d42010e67d1cf7a49a75e4250539c4948152f35f1340"
+        },
+        {
+          "relative": "host/NovaCore.EphemerisFormat.deps.json",
+          "bytes": 466,
+          "allocated": 472,
+          "links": 1,
+          "sha256": "ebfdb677b16c0681e96ce4e85fdd0a20e73b2bbea04e0e1bb5bf40ff0b4a4d8a"
+        },
+        {
+          "relative": "host/NovaCore.EphemerisFormat.dll",
+          "bytes": 77312,
+          "allocated": 77824,
+          "links": 1,
+          "sha256": "3de94da2d3ade85961eec8c539237c6d661ab4cce265082dd5b929d16eddc806"
+        },
+        {
+          "relative": "host/NovaCore.EphemerisFormat.pdb",
+          "bytes": 27748,
+          "allocated": 28672,
+          "links": 1,
+          "sha256": "598831dc58c1e46af0c95b5ee4ef6202ec6f2b0fc15a740c896f8b159180b0fd"
+        },
+        {
+          "relative": "host/NovaCore.Graphics.deps.json",
+          "bytes": 1201,
+          "allocated": 4096,
+          "links": 1,
+          "sha256": "c37e1103757a04e513f2236d5bcc7c1c6d1f8bd507f38ae76c9a483e6ff7e636"
+        },
+        {
+          "relative": "host/NovaCore.Graphics.dll",
+          "bytes": 634880,
+          "allocated": 634880,
+          "links": 1,
+          "sha256": "e33cdee2c569234e6a883cb2c4b83f9a9304254aae14de99fe074e83b4393f0f"
+        },
+        {
+          "relative": "host/NovaCore.Graphics.pdb",
+          "bytes": 143352,
+          "allocated": 143360,
+          "links": 1,
+          "sha256": "7304aae7d2070794cf53a45e4ed050e0cb6736bcf98eff1291a302e245caf032"
+        },
+        {
+          "relative": "host/NovaCore.Interop.deps.json",
+          "bytes": 442,
+          "allocated": 448,
+          "links": 1,
+          "sha256": "ac64497a11539d4c4db7043fe9c7026cfcc23dc81ea51fcd449023ac68f12120"
+        },
+        {
+          "relative": "host/NovaCore.Interop.dll",
+          "bytes": 23040,
+          "allocated": 24576,
+          "links": 1,
+          "sha256": "201cfe9d34c0449177cee6fad849caa94fd2044d3ab16a83525bb75fbf8a7582"
+        },
+        {
+          "relative": "host/NovaCore.Interop.pdb",
+          "bytes": 14060,
+          "allocated": 16384,
+          "links": 1,
+          "sha256": "bf2b8d5e368d0ee5bc52825b64805aaed2c06c945309577d1a7880aea85c5fc7"
+        },
+        {
+          "relative": "host/NovaCore.Native.dll",
+          "bytes": 368640,
+          "allocated": 368640,
+          "links": 1,
+          "sha256": "3fcd4b19550dc69213ddaf7744a811d0874750ff317ee34559daf8b7a5ed7ab0"
+        },
+        {
+          "relative": "host/NovaCore.Platform.deps.json",
+          "bytes": 445,
+          "allocated": 448,
+          "links": 1,
+          "sha256": "21fc3b5ee699165c251450b5ee2f7e292ff76eed139d7cc0469ae4c3939013a7"
+        },
+        {
+          "relative": "host/NovaCore.Platform.dll",
+          "bytes": 6656,
+          "allocated": 8192,
+          "links": 1,
+          "sha256": "c08eab3a74e49dde4a4cea8782db16ced8ab724337d69dd28af52ef240f2f6b9"
+        },
+        {
+          "relative": "host/NovaCore.Platform.pdb",
+          "bytes": 12048,
+          "allocated": 12288,
+          "links": 1,
+          "sha256": "578e5d894781f7afa292c9a14127015623fde82d4070e8dc7fc53e7db6743929"
+        },
+        {
+          "relative": "host/NovaCore.Simulation.deps.json",
+          "bytes": 1239,
+          "allocated": 4096,
+          "links": 1,
+          "sha256": "a2b5f1389410593af29abe02cff9653a5baab91233bc73d0840edc9647288cd9"
+        },
+        {
+          "relative": "host/NovaCore.Simulation.dll",
+          "bytes": 3787776,
+          "allocated": 3788800,
+          "links": 1,
+          "sha256": "3fd55a2cbee6e50fe2080e2299c7db606e55302278546af259fdbad7fa35531d"
+        },
+        {
+          "relative": "host/NovaCore.Simulation.pdb",
+          "bytes": 81876,
+          "allocated": 81920,
+          "links": 1,
+          "sha256": "358f872105f5d8f48a858e2d7571b7a27a9bf6e70ae56ec8b06c7a7d21ad5aa1"
+        },
+        {
+          "relative": "host/NovaCore.Triangle.deps.json",
+          "bytes": 2903,
+          "allocated": 4096,
+          "links": 1,
+          "sha256": "1fe99f6524f2ecb5fc38ff699cc14da53f55b905631d575bcfee772ed51c4eb6"
+        },
+        {
+          "relative": "host/NovaCore.Triangle.dll",
+          "bytes": 242688,
+          "allocated": 245760,
+          "links": 1,
+          "sha256": "d243eedae6d9aa389c41774e8702732b0bc14d9cf20aa1850500f1d752aa4e93"
+        },
+        {
+          "relative": "host/NovaCore.Triangle.exe",
+          "bytes": 162304,
+          "allocated": 163840,
+          "links": 1,
+          "sha256": "3cfc9a650f99da508a7b81cca9467fdc10640d5fde50da0f50eb29f165237ac2"
+        },
+        {
+          "relative": "host/NovaCore.Triangle.pdb",
+          "bytes": 61164,
+          "allocated": 61440,
+          "links": 1,
+          "sha256": "6269244496fc11385d266cf0be719b8d9d48049d2cee569bcc15cc6ecc853f02"
+        },
+        {
+          "relative": "host/NovaCore.Triangle.runtimeconfig.json",
+          "bytes": 342,
+          "allocated": 344,
+          "links": 1,
+          "sha256": "c230a317a54dd960bcbeb5f347f52e18dc665a26f7efda2159fced9a5ac7e097"
+        },
+        {
+          "relative": "host/shaders/body_forward.frag.spv",
+          "bytes": 440,
+          "allocated": 440,
+          "links": 1,
+          "sha256": "fa706803f042fb5a9f7a3c9965a3e2de3e8838e075d67876b78df9bdc132ce0e"
+        },
+        {
+          "relative": "host/shaders/distant_planet.frag.spv",
+          "bytes": 35760,
+          "allocated": 36864,
+          "links": 1,
+          "sha256": "04137afb1c632dfb7074480377d9f93136ab3127d382baeef07d52b09409eba8"
+        },
+        {
+          "relative": "host/shaders/distant_planet.vert.spv",
+          "bytes": 8428,
+          "allocated": 12288,
+          "links": 1,
+          "sha256": "cf28fe0a7c0797bd7d72076437ba78c4e0d97bb1a0ae3c065baf3bfc5db62cb8"
+        },
+        {
+          "relative": "host/shaders/fullscreen.vert.spv",
+          "bytes": 1308,
+          "allocated": 4096,
+          "links": 1,
+          "sha256": "a18f9b5e0b4a4e7a077b1017bad7b1c5c40313b3f70113f1e0771cd202433130"
+        },
+        {
+          "relative": "host/shaders/orbit.frag.spv",
+          "bytes": 456,
+          "allocated": 456,
+          "links": 1,
+          "sha256": "b06f50708727144e8d0f08d35cd2e64d8b1cef501ed20b10fea4a34196026267"
+        },
+        {
+          "relative": "host/shaders/orbit.vert.spv",
+          "bytes": 1756,
+          "allocated": 4096,
+          "links": 1,
+          "sha256": "b4b9dd635f32156654e30d843c29eb864feb09751d7b3027cf99a5d741b6a45b"
+        },
+        {
+          "relative": "host/shaders/orbit_previous.frag.spv",
+          "bytes": 456,
+          "allocated": 456,
+          "links": 1,
+          "sha256": "c4935060e07e01742d59d8a5834241e2963dcc80ed8e35baeac5b08288761e61"
+        },
+        {
+          "relative": "host/shaders/planetary.frag.spv",
+          "bytes": 18548,
+          "allocated": 20480,
+          "links": 1,
+          "sha256": "417f17b236834f0ac94fa3bbfdae52ad164599ff14051e9b396809beea75cda1"
+        },
+        {
+          "relative": "host/shaders/planetary.vert.spv",
+          "bytes": 135600,
+          "allocated": 139264,
+          "links": 1,
+          "sha256": "ddb84030e2621df8f05489e339989d66de60d73435f490b4ec0af4251d7a0338"
+        },
+        {
+          "relative": "host/shaders/planetary_natural_terrain_global_prepare.comp.spv",
+          "bytes": 49540,
+          "allocated": 53248,
+          "links": 1,
+          "sha256": "5a5450321873f5ff8bed7dd9e4f06c342625724d629da2232521fbace01c7a85"
+        },
+        {
+          "relative": "host/shaders/planetary_production.frag.spv",
+          "bytes": 152228,
+          "allocated": 155648,
+          "links": 1,
+          "sha256": "8c59838abb3d7ee6418695ea40f044ca1f04f5c3c9216296d5cc19bba6110d6b"
+        },
+        {
+          "relative": "host/shaders/planetary_production_terrain.comp.spv",
+          "bytes": 368,
+          "allocated": 368,
+          "links": 1,
+          "sha256": "405e6e6daab609ca383297ba8be706bfa96859c65dc2d9f42476a32cddd85df7"
+        },
+        {
+          "relative": "host/shaders/planetary_ring.vert.spv",
+          "bytes": 7728,
+          "allocated": 8192,
+          "links": 1,
+          "sha256": "cccede52d3c64db872360912db9eb29e60cb892c648ed53ce1c178f8623d0cfb"
+        },
+        {
+          "relative": "host/shaders/planetary_ring_far.frag.spv",
+          "bytes": 2692,
+          "allocated": 4096,
+          "links": 1,
+          "sha256": "343db81bccc310b21c600ab6ee6722438151694683bb0cf7ba01d54a9b68ade6"
+        },
+        {
+          "relative": "host/shaders/planetary_ring_near.frag.spv",
+          "bytes": 2692,
+          "allocated": 4096,
+          "links": 1,
+          "sha256": "48b8ef4e56b6be9380cfbaca7daa790035e704541b6b8a550b3cc7bed540244c"
+        },
+        {
+          "relative": "host/shaders/planetary_select.comp.spv",
+          "bytes": 91064,
+          "allocated": 94208,
+          "links": 1,
+          "sha256": "8189bbd2a85fe23033f12c558d8b221b62b8969c17ba9ffcf07b7c8501fe8adf"
+        },
+        {
+          "relative": "host/shaders/planetary_terrain_generate.comp.spv",
+          "bytes": 10292,
+          "allocated": 12288,
+          "links": 1,
+          "sha256": "1fc8c24ea6b4a55e83997fadf80b4901f692b8bc2de84a5cf6ac043e4da531d1"
+        },
+        {
+          "relative": "host/shaders/production_nested_scale_mesh_cull.comp.spv",
+          "bytes": 30484,
+          "allocated": 32768,
+          "links": 1,
+          "sha256": "497d88225a914b9601ad6c0f44733e834794a952854e71b26be426ead8780d94"
+        },
+        {
+          "relative": "host/shaders/production_nested_scale_mesh_incoming_cull.comp.spv",
+          "bytes": 30484,
+          "allocated": 32768,
+          "links": 1,
+          "sha256": "23bd1b04d0291e6271138041433eee07e57503482e8e5cf845e4b72c75967336"
+        },
+        {
+          "relative": "host/shaders/production_spherical_billboard.tesc.spv",
+          "bytes": 12632,
+          "allocated": 16384,
+          "links": 1,
+          "sha256": "0163498278f9523fd442434f05f056be28252d16c2f2ba44b8d91642b33e4439"
+        },
+        {
+          "relative": "host/shaders/production_spherical_billboard.tese.spv",
+          "bytes": 22836,
+          "allocated": 24576,
+          "links": 1,
+          "sha256": "d0bc5d7a450f336d45c26c499b0b3a79ecc0258e1ffb9dee0b5bcfb8aa21d31e"
+        },
+        {
+          "relative": "host/shaders/production_spherical_billboard.vert.spv",
+          "bytes": 8028,
+          "allocated": 8192,
+          "links": 1,
+          "sha256": "1baa9043db7a8b71dcf5931f4cb415fa84ce6341b07d850ea9beb8baa02d2b6a"
+        },
+        {
+          "relative": "host/shaders/production_spherical_billboard_compact.comp.spv",
+          "bytes": 3460,
+          "allocated": 4096,
+          "links": 1,
+          "sha256": "2aabd7633b333f86df8a6eae6b76ed2d13a7129443dcd9201531de047b12f4d9"
+        },
+        {
+          "relative": "host/shaders/production_spherical_billboard_cull.comp.spv",
+          "bytes": 14624,
+          "allocated": 16384,
+          "links": 1,
+          "sha256": "2827b58dcd7029695e0b33272018e54d19d6113b8d7ab9ac591c343b3d994398"
+        },
+        {
+          "relative": "host/shaders/production_spherical_billboard_incoming_compact.comp.spv",
+          "bytes": 2940,
+          "allocated": 4096,
+          "links": 1,
+          "sha256": "6b0238138222112ddf1f945f5e6a31867d5dd11f57169481ece9c05337f43e4e"
+        },
+        {
+          "relative": "host/shaders/production_spherical_billboard_incoming_cull.comp.spv",
+          "bytes": 14624,
+          "allocated": 16384,
+          "links": 1,
+          "sha256": "8c677f08ae051cf525108a436066983d41961ce70757ca29a86df165d2663cfb"
+        },
+        {
+          "relative": "host/shaders/production_spherical_billboard_incoming_prepare.comp.spv",
+          "bytes": 91824,
+          "allocated": 94208,
+          "links": 1,
+          "sha256": "3b330d24dc873c2676dbb877208efae4d91347b66ef029706b8a3f0d3116f91c"
+        },
+        {
+          "relative": "host/shaders/production_spherical_billboard_incoming_reset.comp.spv",
+          "bytes": 1736,
+          "allocated": 4096,
+          "links": 1,
+          "sha256": "5d750f929dcab4f9f3138b4cdfa869ab26e3051d4b28485c02ee483f89e14d6e"
+        },
+        {
+          "relative": "host/shaders/production_spherical_billboard_prepare.comp.spv",
+          "bytes": 94876,
+          "allocated": 98304,
+          "links": 1,
+          "sha256": "d178e6ba6b73045dc214e75000489c09a7f0982f9cff7663489ba0818d30ae8b"
+        },
+        {
+          "relative": "host/shaders/production_spherical_billboard_reset.comp.spv",
+          "bytes": 1736,
+          "allocated": 4096,
+          "links": 1,
+          "sha256": "cf583d16e14c8a8ec63b393d8752541648d932cf0165231cc48f6076e28fc027"
+        },
+        {
+          "relative": "host/shaders/regional_physical_demand.comp.spv",
+          "bytes": 22344,
+          "allocated": 24576,
+          "links": 1,
+          "sha256": "7d80dbd70be13cc55f00ef836cd8da9d3783064411320697777f6b5c848d8f67"
+        },
+        {
+          "relative": "host/shaders/regional_physical_incoming_demand.comp.spv",
+          "bytes": 22360,
+          "allocated": 24576,
+          "links": 1,
+          "sha256": "a56b62b5432206b8ab5eded734b13a0ddf9f0c726a4b444f8d24139bdcc17a60"
+        },
+        {
+          "relative": "host/shaders/sas_target.frag.spv",
+          "bytes": 440,
+          "allocated": 440,
+          "links": 1,
+          "sha256": "4e99fda06f571590f950e91d93025cafa83e4a454e68e3583ce59d869f0a3ef2"
+        },
+        {
+          "relative": "host/shaders/solar_label.frag.spv",
+          "bytes": 47588,
+          "allocated": 49152,
+          "links": 1,
+          "sha256": "673c5dc0cc1e199d497c7c927f282a02da444fa258860b6cb94b6fd1ed12c90a"
+        },
+        {
+          "relative": "host/shaders/solar_label.vert.spv",
+          "bytes": 11388,
+          "allocated": 12288,
+          "links": 1,
+          "sha256": "a13a7a8acb3ae2da2cac129a203caffd86b5a7f434701d99b59284fdd01f1844"
+        },
+        {
+          "relative": "host/shaders/solar_marker.frag.spv",
+          "bytes": 448,
+          "allocated": 448,
+          "links": 1,
+          "sha256": "d428743c08f96f4e508eab131cfb54981c2628eecc7acd3d2df220b19103275b"
+        },
+        {
+          "relative": "host/shaders/solar_marker.vert.spv",
+          "bytes": 7776,
+          "allocated": 8192,
+          "links": 1,
+          "sha256": "50d948741d3ca6b59577a82d3346ab3cac51edcb9ab80047247ac61c345b6db6"
+        },
+        {
+          "relative": "host/shaders/solar_orbit.frag.spv",
+          "bytes": 1412,
+          "allocated": 4096,
+          "links": 1,
+          "sha256": "23b511270c196c2186f7935699ca7fdedf3c92c629da67c10e8ae7615286181f"
+        },
+        {
+          "relative": "host/shaders/solar_orbit.vert.spv",
+          "bytes": 4008,
+          "allocated": 4096,
+          "links": 1,
+          "sha256": "d71520615e2533a06208c3cec752d2689f524a30fb6a11bd2ca4ae00e2cc027f"
+        },
+        {
+          "relative": "host/shaders/solar_speed_hud.frag.spv",
+          "bytes": 49400,
+          "allocated": 53248,
+          "links": 1,
+          "sha256": "e073b0ab31c69a3516d695146ade0dbd618d3dede5a10699f390f10da52c3586"
+        },
+        {
+          "relative": "host/shaders/solar_speed_hud.vert.spv",
+          "bytes": 11036,
+          "allocated": 12288,
+          "links": 1,
+          "sha256": "a777a4dfece073339efcd97c7292d970f8c26d21f221ebd62ce244970f0a5fb4"
+        },
+        {
+          "relative": "host/shaders/space_background.frag.spv",
+          "bytes": 12108,
+          "allocated": 12288,
+          "links": 1,
+          "sha256": "0c98ee3df0ba8ad8f313cc352a02032528e6b0e36b2dfa8cc2be1a6755b71cfc"
+        },
+        {
+          "relative": "host/shaders/stellar_glow.frag.spv",
+          "bytes": 1736,
+          "allocated": 4096,
+          "links": 1,
+          "sha256": "e83a5e7458ec4be4b835384c88ec3ea958ae13569ee9ac823a4e2b2db17facee"
+        },
+        {
+          "relative": "host/shaders/stellar_glow.vert.spv",
+          "bytes": 6392,
+          "allocated": 8192,
+          "links": 1,
+          "sha256": "30a9ed63e3d92581852afef62a242f2160a10c6cdb276a3b1aa0360a476183e8"
+        },
+        {
+          "relative": "host/shaders/stellar_sun.frag.spv",
+          "bytes": 3208,
+          "allocated": 4096,
+          "links": 1,
+          "sha256": "5c448c0da4cadeb08bf2c85c74448d3b690fd3d6bccab1fc2c49da7a0bf54769"
+        },
+        {
+          "relative": "host/shaders/stellar_sun.vert.spv",
+          "bytes": 5168,
+          "allocated": 8192,
+          "links": 1,
+          "sha256": "3e124d5babcb1d219499aa2de1482f90fc7c9008e92b054f7ca0d268336346b6"
+        },
+        {
+          "relative": "host/shaders/tone_map.frag.spv",
+          "bytes": 2700,
+          "allocated": 4096,
+          "links": 1,
+          "sha256": "d617345e95589ecb087ed40c20f4d04a427251a2b5249d8181cc63c421ee3979"
+        },
+        {
+          "relative": "host/shaders/triangle.frag.spv",
+          "bytes": 2180,
+          "allocated": 4096,
+          "links": 1,
+          "sha256": "36e2c4762d87eddd045909f600217f3ea7d48b023d08887abbf958d3bfaa5ddf"
+        },
+        {
+          "relative": "host/shaders/triangle.vert.spv",
+          "bytes": 4828,
+          "allocated": 8192,
+          "links": 1,
+          "sha256": "87c254e6166b18954b8c0fbd533af2e83f4cf7f09842d752a0a76ae68e8f1aef"
+        },
+        {
+          "relative": "launcher-route-probe.json",
+          "bytes": 3327,
+          "allocated": 4096,
+          "links": 1,
+          "sha256": "c75bc90d6369564ee86171499f7700099f9017f1ca73da1ff02fe52c7c6e66fb"
+        },
+        {
+          "relative": "layers/explicit/validation.json",
+          "bytes": 60443,
+          "allocated": 61440,
+          "links": 1,
+          "sha256": "9b304ff60cebad448f299127d23abad8507f108bfd8aac11074f994db88dc21f"
+        },
+        {
+          "relative": "pixels.bin",
+          "bytes": 79257600,
+          "allocated": 79257600,
+          "links": 1,
+          "sha256": "bcbc947225c216aadea0523a3c0bca12ad2fcc32450d0e49534510454658e5a6"
+        },
+        {
+          "relative": "planetary_production.frag",
+          "bytes": 18873,
+          "allocated": 20480,
+          "links": 1,
+          "sha256": "c12377419c69f7060c80ea9a0ace21df7d5f9969b7aec336d36f02f85c6765c2"
+        },
+        {
+          "relative": "prepared.bin",
+          "bytes": 45574784,
+          "allocated": 45576192,
+          "links": 1,
+          "sha256": "8e8a68f7e2f71d8f64fa0e863f39346cd34fb625d0d70f72dd76fbec6acd8f67"
+        },
+        {
+          "relative": "production_terrain_material.glsl",
+          "bytes": 17470,
+          "allocated": 20480,
+          "links": 1,
+          "sha256": "b3df55b293b9b6ba5cbf48bd911f2d84317bb63d4d255b5210284f323ce03cf5"
+        },
+        {
+          "relative": "route/bin/Release/net10.0-windows/NovaCore.Launcher.dll",
+          "bytes": 59904,
+          "allocated": 61440,
+          "links": 1,
+          "sha256": "6cadb5e236c9dbcef8665b4e73cf5236f00b4203504d465d6b34da79e5391be7"
+        },
+        {
+          "relative": "route/bin/Release/net10.0-windows/NovaCore.Launcher.pdb",
+          "bytes": 22420,
+          "allocated": 24576,
+          "links": 1,
+          "sha256": "29890b5e253cabcb83e27cc5264bb53f36ed018a2b4dd575c050e065d1afbe76"
+        },
+        {
+          "relative": "route/bin/Release/net10.0-windows/route.deps.json",
+          "bytes": 824,
+          "allocated": 4096,
+          "links": 1,
+          "sha256": "86863cbd50107f4f27b309061f4ba1388244a6a2ce34b32cf9f2fe7525793b65"
+        },
+        {
+          "relative": "route/bin/Release/net10.0-windows/route.dll",
+          "bytes": 17920,
+          "allocated": 20480,
+          "links": 1,
+          "sha256": "d2a61cfb8eccae631a3be1c02d0e315846f910c3310cff13d938355368b04bb1"
+        },
+        {
+          "relative": "route/bin/Release/net10.0-windows/route.exe",
+          "bytes": 162304,
+          "allocated": 163840,
+          "links": 1,
+          "sha256": "5e07c2b6a424c0a9cd8ffde3dd218207979a897ef1cfed42f611979063330e1f"
+        },
+        {
+          "relative": "route/bin/Release/net10.0-windows/route.pdb",
+          "bytes": 16464,
+          "allocated": 20480,
+          "links": 1,
+          "sha256": "d87c78112f44da0dc2c9e981e44f10bc0c22dc5b07eecf4ad85321c3d2b98d31"
+        },
+        {
+          "relative": "route/bin/Release/net10.0-windows/route.runtimeconfig.json",
+          "bytes": 519,
+          "allocated": 520,
+          "links": 1,
+          "sha256": "96bc2946dff8790400d652ec7f8de7bb043e954980d59470c112788b68a1fbd3"
+        },
+        {
+          "relative": "route/obj/project.assets.json",
+          "bytes": 22020,
+          "allocated": 24576,
+          "links": 1,
+          "sha256": "ee7a3f23a611a09134f7d620da4513f69c6e9b4fa06515e2d45f0ba0d0140ea6"
+        },
+        {
+          "relative": "route/obj/project.nuget.cache",
+          "bytes": 218,
+          "allocated": 224,
+          "links": 1,
+          "sha256": "aedc2ce366cff8c1f1bf1bc416033db688b07160708bef020c5d561cfef45896"
+        },
+        {
+          "relative": "route/obj/Release/net10.0-windows/.NETCoreApp,Version=v10.0.AssemblyAttributes.cs",
+          "bytes": 200,
+          "allocated": 200,
+          "links": 1,
+          "sha256": "93d67476196ebfc80d1d7d8844b91146cfd678d105f5ce635eb900ca40610c9b"
+        },
+        {
+          "relative": "route/obj/Release/net10.0-windows/apphost.exe",
+          "bytes": 162304,
+          "allocated": 163840,
+          "links": 1,
+          "sha256": "5e07c2b6a424c0a9cd8ffde3dd218207979a897ef1cfed42f611979063330e1f"
+        },
+        {
+          "relative": "route/obj/Release/net10.0-windows/ref/route.dll",
+          "bytes": 5632,
+          "allocated": 8192,
+          "links": 1,
+          "sha256": "29684f9936200225bef54beee62d7a7130933dbb45b71ba21b1e870eafe4d9f5"
+        },
+        {
+          "relative": "route/obj/Release/net10.0-windows/refint/route.dll",
+          "bytes": 5632,
+          "allocated": 8192,
+          "links": 1,
+          "sha256": "29684f9936200225bef54beee62d7a7130933dbb45b71ba21b1e870eafe4d9f5"
+        },
+        {
+          "relative": "route/obj/Release/net10.0-windows/route.AssemblyInfo.cs",
+          "bytes": 1150,
+          "allocated": 4096,
+          "links": 1,
+          "sha256": "f5e37c6db4a961413a9026df999f1702fbb8b8c8aa4db84461838a60e13e939e"
+        },
+        {
+          "relative": "route/obj/Release/net10.0-windows/route.AssemblyInfoInputs.cache",
+          "bytes": 66,
+          "allocated": 72,
+          "links": 1,
+          "sha256": "100c80d10932d586656a6cf9ae7af52fa794de98590dc6f4ece4f512cb975daa"
+        },
+        {
+          "relative": "route/obj/Release/net10.0-windows/route.assets.cache",
+          "bytes": 152,
+          "allocated": 152,
+          "links": 1,
+          "sha256": "1d55f8ee66ae11fdcfc94a9b8404272a3d75f1eb0b68f6a584eb3e2bce066b66"
+        },
+        {
+          "relative": "route/obj/Release/net10.0-windows/route.csproj.AssemblyReference.cache",
+          "bytes": 1271,
+          "allocated": 4096,
+          "links": 1,
+          "sha256": "53e221e7910874a0d93dadedd1f56169dee19ee35d140bf78dbc2e08971a299a"
+        },
+        {
+          "relative": "route/obj/Release/net10.0-windows/route.csproj.CoreCompileInputs.cache",
+          "bytes": 66,
+          "allocated": 72,
+          "links": 1,
+          "sha256": "a9c085c1737338900ae36ee2eecdebb198923249e983523742e390671179929e"
+        },
+        {
+          "relative": "route/obj/Release/net10.0-windows/route.csproj.FileListAbsolute.txt",
+          "bytes": 2028,
+          "allocated": 4096,
+          "links": 1,
+          "sha256": "fb45668034265676cd9512eb06b051ec6e39e1c328ad0c7f678dc2c77b05b15d"
+        },
+        {
+          "relative": "route/obj/Release/net10.0-windows/route.csproj.Up2Date",
+          "bytes": 0,
+          "allocated": 0,
+          "links": 1,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "relative": "route/obj/Release/net10.0-windows/route.dll",
+          "bytes": 17920,
+          "allocated": 20480,
+          "links": 1,
+          "sha256": "d2a61cfb8eccae631a3be1c02d0e315846f910c3310cff13d938355368b04bb1"
+        },
+        {
+          "relative": "route/obj/Release/net10.0-windows/route.GeneratedMSBuildEditorConfig.editorconfig",
+          "bytes": 1161,
+          "allocated": 4096,
+          "links": 1,
+          "sha256": "df16054c77202e740ffce7903c47974baeaed9edeb39b4d9cc7b2496d0cac220"
+        },
+        {
+          "relative": "route/obj/Release/net10.0-windows/route.genruntimeconfig.cache",
+          "bytes": 66,
+          "allocated": 72,
+          "links": 1,
+          "sha256": "040774205dbd20d603570644b69fa10dede42bf2496b4a89be975f8153d88b50"
+        },
+        {
+          "relative": "route/obj/Release/net10.0-windows/route.GlobalUsings.g.cs",
+          "bytes": 305,
+          "allocated": 312,
+          "links": 1,
+          "sha256": "c95ea51a9e8c77e5367f652ede0c8871e7d6413090add59e1b8dd6805ac37e70"
+        },
+        {
+          "relative": "route/obj/Release/net10.0-windows/route.pdb",
+          "bytes": 16464,
+          "allocated": 20480,
+          "links": 1,
+          "sha256": "d87c78112f44da0dc2c9e981e44f10bc0c22dc5b07eecf4ad85321c3d2b98d31"
+        },
+        {
+          "relative": "route/obj/Release/net10.0-windows/route.sourcelink.json",
+          "bytes": 143,
+          "allocated": 144,
+          "links": 1,
+          "sha256": "41a322fd60eb49be720702c6ba7149cba02fcd3676b168ad1c102252fd519453"
+        },
+        {
+          "relative": "route/obj/route.csproj.nuget.dgspec.json",
+          "bytes": 22709,
+          "allocated": 24576,
+          "links": 1,
+          "sha256": "5079f03977ba509a1a9832d05676b31cfded43074c8274ea781c25723b697112"
+        },
+        {
+          "relative": "route/obj/route.csproj.nuget.g.props",
+          "bytes": 1135,
+          "allocated": 4096,
+          "links": 1,
+          "sha256": "1e51d59a0a61bbe5b26b92eb01307b6f7909cd9d6f3577f96af5da8201057d69"
+        },
+        {
+          "relative": "route/obj/route.csproj.nuget.g.targets",
+          "bytes": 150,
+          "allocated": 152,
+          "links": 1,
+          "sha256": "971cc9b535384849b5c661d776cd7a80833a416265e32e8968e06c367368b8b5"
+        },
+        {
+          "relative": "route/Program.cs",
+          "bytes": 5006,
+          "allocated": 8192,
+          "links": 1,
+          "sha256": "d0224319d3804cdfca0b9c1ec4dc38040eecb44d72fcd60b0cc1dc0e08899447"
+        },
+        {
+          "relative": "route/route.csproj",
+          "bytes": 407,
+          "allocated": 408,
+          "links": 1,
+          "sha256": "ed000e6d5f50e4ad1c97aeb3c037371c57a9ce524236282dd3bc58a48457b120"
+        },
+        {
+          "relative": "selected.bin",
+          "bytes": 111024,
+          "allocated": 114688,
+          "links": 1,
+          "sha256": "8bd9e868c38f389f47ad2a95a5b19d2b29867fdca95de4e2841176fbc3e3d5bf"
+        },
+        {
+          "relative": "smoke-result.json",
+          "bytes": 171,
+          "allocated": 176,
+          "links": 1,
+          "sha256": "19cdbaa5e4db78eadb235ee4c112bc595b15ea80d3639c435292ad565dcc2844"
+        }
+      ],
+      "allIgnored": true
+    },
+    {
+      "root": "E:\\NovaCore\\build\\regional-live-tests\\c035332a73f94fed8db68c247b03628a",
+      "files": [
+        {
+          "relative": "frame-103.json",
+          "bytes": 15761,
+          "allocated": 16384,
+          "links": 1,
+          "sha256": "2232e87ce6ed735ec6024d4e2fa2e998de158f8cb9ea16dbf9942bfd33b7f4f9"
+        },
+        {
+          "relative": "frame-150.json",
+          "bytes": 15764,
+          "allocated": 16384,
+          "links": 1,
+          "sha256": "f84de240885e858bc0d368e8cec177eb07e2fea74ee1e328b5602f57493483fd"
+        },
+        {
+          "relative": "frame-165.json",
+          "bytes": 15782,
+          "allocated": 16384,
+          "links": 1,
+          "sha256": "e6b55802b5a84cd6e5aa69f4904352245fa101da470a9a79629416ff0219c10a"
+        },
+        {
+          "relative": "frame-175.json",
+          "bytes": 15775,
+          "allocated": 16384,
+          "links": 1,
+          "sha256": "fe9a8e9cc7d43c34319f9dc663bd140cc9bf5d0bee64df1675c575727543ccea"
+        },
+        {
+          "relative": "frame-193.json",
+          "bytes": 17398,
+          "allocated": 20480,
+          "links": 1,
+          "sha256": "21046cb24c4e23a8424752ce3e40e617baf7dc8360abe1ebf9cdbfcaf49d919a"
+        },
+        {
+          "relative": "frame-205.json",
+          "bytes": 17330,
+          "allocated": 20480,
+          "links": 1,
+          "sha256": "efc1167b8b39830745911024d65519acd4058be040870675521b5202f04d5d28"
+        },
+        {
+          "relative": "frame-217.json",
+          "bytes": 17275,
+          "allocated": 20480,
+          "links": 1,
+          "sha256": "c881779b100df4329b4fcf3f766ed1d81d6176b75985049b326c5f8f7148a285"
+        },
+        {
+          "relative": "frame-228.json",
+          "bytes": 17273,
+          "allocated": 20480,
+          "links": 1,
+          "sha256": "b6cd44f6938e7b635c5c5bc4f04f0a7c3cb18d9f0afde17892a612f21342338f"
+        },
+        {
+          "relative": "frame-238.json",
+          "bytes": 17252,
+          "allocated": 20480,
+          "links": 1,
+          "sha256": "311495d4cb4c998cf4a81ced6aa184d8a9d2bb1e3d480e5ed6369a556b047beb"
+        },
+        {
+          "relative": "frame-247.json",
+          "bytes": 17218,
+          "allocated": 20480,
+          "links": 1,
+          "sha256": "58b55d04fc3d0f0071823d84b8d1c3bde48ba5a726f985c17019b2a3892c8dd1"
+        },
+        {
+          "relative": "frame-256.json",
+          "bytes": 17216,
+          "allocated": 20480,
+          "links": 1,
+          "sha256": "e96b47e3b42bc4c9c0cc519f04fa23137ace5846a42fb528143fe42990cda0f2"
+        },
+        {
+          "relative": "frame-264.json",
+          "bytes": 17237,
+          "allocated": 20480,
+          "links": 1,
+          "sha256": "5a6033ac4346c57340d50b97895f5af41767595cdb4a694a23026a7971f55dd6"
+        },
+        {
+          "relative": "frame-271.json",
+          "bytes": 17213,
+          "allocated": 20480,
+          "links": 1,
+          "sha256": "22a15c0bd134926e8ed1ba4a5ce3888a33d3b9be01e9bd8f6ad4459dffc4ca49"
+        },
+        {
+          "relative": "frame-287.json",
+          "bytes": 17251,
+          "allocated": 20480,
+          "links": 1,
+          "sha256": "97bfd1d12868462ca5dd9cb558323b8576e938ae54ae3c26e7d50e5f9b42b53e"
+        },
+        {
+          "relative": "frame-295.json",
+          "bytes": 15573,
+          "allocated": 16384,
+          "links": 1,
+          "sha256": "9d07ace446b362c56b5e76899b3b5f1c63ff88b888c599635e070010a5c4db13"
+        },
+        {
+          "relative": "frame-300.json",
+          "bytes": 15574,
+          "allocated": 16384,
+          "links": 1,
+          "sha256": "09306b371c02c19d3cf65b92766e537787c902fa8c9af355ff3a62fa6296b44a"
+        },
+        {
+          "relative": "frame-303.json",
+          "bytes": 15590,
+          "allocated": 16384,
+          "links": 1,
+          "sha256": "f212a4e10e581daf4dfc9e68ce352390dae4bce6a9988007a8462a43f20e3113"
+        },
+        {
+          "relative": "frame-312.json",
+          "bytes": 15587,
+          "allocated": 16384,
+          "links": 1,
+          "sha256": "08840a93fbe9c225b775b98213760dde303d085aaabcf7cfc75c905ae7800c8e"
+        },
+        {
+          "relative": "frame-322.json",
+          "bytes": 15600,
+          "allocated": 16384,
+          "links": 1,
+          "sha256": "2bcf09a81324aa168c3c0d7f84b854d144b2c3e87e3d61543efa6249d1e8e962"
+        },
+        {
+          "relative": "frame-333.json",
+          "bytes": 15673,
+          "allocated": 16384,
+          "links": 1,
+          "sha256": "d424331f7475b3dab5d8aab53d91e13c8c01d58f6f718b5a80e0212b44d00968"
+        },
+        {
+          "relative": "frame-344.json",
+          "bytes": 15717,
+          "allocated": 16384,
+          "links": 1,
+          "sha256": "ff743bd6929829318c4dece003fe5eaee8374b2e6a2310c3d8a88b2f877d6fde"
+        },
+        {
+          "relative": "frame-356.json",
+          "bytes": 15718,
+          "allocated": 16384,
+          "links": 1,
+          "sha256": "cb9ccb1a7d8d3b3edb924e959ec0b32bc4988a4e8c86b160d16663bf7cbf5155"
+        },
+        {
+          "relative": "frame-368.json",
+          "bytes": 15784,
+          "allocated": 16384,
+          "links": 1,
+          "sha256": "f9436c427195fc20902fbc3552e3b8bd14717c01604a6356c3180607b694531f"
+        },
+        {
+          "relative": "frame-413.json",
+          "bytes": 3085,
+          "allocated": 4096,
+          "links": 1,
+          "sha256": "7f67c287c5a8de7be354d74899ddbecbe0e9eed0158a3caed4717414e6835164"
+        },
+        {
+          "relative": "frame-425.json",
+          "bytes": 3090,
+          "allocated": 4096,
+          "links": 1,
+          "sha256": "33f3928988962b1e934142dfe90a783b6ff50c5ce0ce81465e0ae026be1afd3c"
+        },
+        {
+          "relative": "frame-437.json",
+          "bytes": 3087,
+          "allocated": 4096,
+          "links": 1,
+          "sha256": "f3f819ffb0fc3b6214bbddee33eb0bad67f08a1deb6f561fbc95a01c6cdcef57"
+        },
+        {
+          "relative": "frame-440.json",
+          "bytes": 3088,
+          "allocated": 4096,
+          "links": 1,
+          "sha256": "2de9f59d31b7358d23aedf0dbe67daba172bd6a0f4d19530760994abf3be660c"
+        },
+        {
+          "relative": "frame-448.json",
+          "bytes": 3085,
+          "allocated": 4096,
+          "links": 1,
+          "sha256": "39556665f58a5dbdc2536c02a3b050e784d3084bf5f7a0b9229a4befdbfed163"
+        },
+        {
+          "relative": "frame-458.json",
+          "bytes": 3087,
+          "allocated": 4096,
+          "links": 1,
+          "sha256": "e6a00a4ff7c23d34e690d2a5ef130bc7fec8c4b7e9ee5443fa4989555b410bfe"
+        },
+        {
+          "relative": "frame-467.json",
+          "bytes": 3085,
+          "allocated": 4096,
+          "links": 1,
+          "sha256": "8dbb3f9b459606ae52f7e58742a228dbf4c5184cd77a3e10678e993b11ab084b"
+        },
+        {
+          "relative": "frame-476.json",
+          "bytes": 3086,
+          "allocated": 4096,
+          "links": 1,
+          "sha256": "f220967830ae718f9c2f88bc7111b0033d8eda9fec5f6c1bb4029fc4786636a6"
+        },
+        {
+          "relative": "frame-484.json",
+          "bytes": 3081,
+          "allocated": 4096,
+          "links": 1,
+          "sha256": "2323ae862e6a3c9a472386ab6315c9d3d6eafbf19fa94b579ed463de8f344956"
+        },
+        {
+          "relative": "frame-491.json",
+          "bytes": 3082,
+          "allocated": 4096,
+          "links": 1,
+          "sha256": "27fa256d1324a1e91c8128e1fd46350e00f5f767f1d0a798b42dc8ebfe4d9632"
+        },
+        {
+          "relative": "frame-667.json",
+          "bytes": 17154,
+          "allocated": 20480,
+          "links": 1,
+          "sha256": "53f6ff4886ac01d4ee762793abf613f63ad9502593a1716e42461414cc64e6e7"
+        },
+        {
+          "relative": "frame-675.json",
+          "bytes": 17185,
+          "allocated": 20480,
+          "links": 1,
+          "sha256": "f29551817e45c2dbcf70ab34142996a5804cfe12e92e9c54e7e00f97b8159b63"
+        },
+        {
+          "relative": "frame-683.json",
+          "bytes": 17187,
+          "allocated": 20480,
+          "links": 1,
+          "sha256": "340b043b0cadbb835a011a5f5ec30f25146ede4ca86c67603b60d6dd90a8f335"
+        }
+      ],
+      "allIgnored": true
+    }
+  ],
+  "count": 152,
+  "logicalBytesByName": 200307167,
+  "exclusiveLogicalBytes": 133198303,
+  "exclusiveAllocatedBytes": 133438560,
+  "protectedHardlink": {
+    "path": "E:\\NovaCore\\assets\\earth\\runtime\\earth_elevation_8192x4096.r16",
+    "sha256": "4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317",
+    "bytes": 67108864
+  },
+  "reason": "Resolved private timing/capture host, route probe, raw readbacks and classified failed-test output. Reports/hashes/source and successful unchanged regressions retained. No permanent runtime/test consumer."
+}

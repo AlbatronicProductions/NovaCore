@@ -1,0 +1,188 @@
+{
+  "budgetBytes": 16777216,
+  "files": [
+    {
+      "path": "A.json.gz",
+      "bytes": 119606,
+      "sha256": "cf47eebff7e0cba0cd9d20e29cc8b942da4087c038100188edb06fca2a835359"
+    },
+    {
+      "path": "analysis.json",
+      "bytes": 148803,
+      "sha256": "6aaa9f468e0932e17988bd2f9cab7d9a2c1c27634095bc28980fbaa5f1cd828c"
+    },
+    {
+      "path": "analyze.py",
+      "bytes": 6059,
+      "sha256": "f62e420ae36d262662d23946259cfac4e32cd690a68a4aa37cfdc5826f3d89d3"
+    },
+    {
+      "path": "B.json.gz",
+      "bytes": 119623,
+      "sha256": "d573fcc68e448bde8e7f53fd9a1a10e7353f6430429d766689f799bcce677719"
+    },
+    {
+      "path": "baseline.json",
+      "bytes": 11829,
+      "sha256": "5706f5bfda3f3685ae118bb229193ac7b2e6c887479e4ee6c3bca908be02bb9a"
+    },
+    {
+      "path": "C.json.gz",
+      "bytes": 118970,
+      "sha256": "7744a50d31137985793a38e02d959538ce42eaebcf3f256a27fa5b025dd4aa4f"
+    },
+    {
+      "path": "cleanup.ps1",
+      "bytes": 1801,
+      "sha256": "32bea45e714a23fc92764b974b860df55248e7658a74e2853d89b77a5edd695a"
+    },
+    {
+      "path": "closeout.json",
+      "bytes": 12219,
+      "sha256": "e050e36ddd1339c296ab4ae61108e8a50e91e326e7c9446d9847416eecb596c7"
+    },
+    {
+      "path": "compact.ps1",
+      "bytes": 1406,
+      "sha256": "90bffdec45c429a1344a452b9c98bb56d8d2d88afe47b6e1f6ffd5a0e0eff3c7"
+    },
+    {
+      "path": "compact.py",
+      "bytes": 1266,
+      "sha256": "6415c6f0c02e00752ff27cff825fa5329108f1b576600ee09eb3cc0d2bd18e84"
+    },
+    {
+      "path": "composition.py",
+      "bytes": 10413,
+      "sha256": "bdd3ad5bc238a0a3c6cf9090cae42bce98c6fdd4dc4d6b4dee52e70cd7f50387"
+    },
+    {
+      "path": "correlation.inl",
+      "bytes": 2135,
+      "sha256": "2e6694f0565fb9c1bcc346fea50257c3613c8e7efef57e239344336964793f6b"
+    },
+    {
+      "path": "D-invalid-source.json.gz",
+      "bytes": 126752,
+      "sha256": "62e18c7a40351f9c74496c1470e658931abe9920b2bd83e9359b5809a33c4ec9"
+    },
+    {
+      "path": "D-mapped-oracle.json.gz",
+      "bytes": 134596,
+      "sha256": "05b6e9b6349d2df17328c4d86e825b92dbc8060281292423e36f46369ffe8716"
+    },
+    {
+      "path": "D-mapped.json.gz",
+      "bytes": 124209,
+      "sha256": "1d7633c9bde1b7c368cdaa63ece7b348d00c0dff730d2f64b8b1db6dba3569c9"
+    },
+    {
+      "path": "D-oracle.json.gz",
+      "bytes": 126218,
+      "sha256": "30edf96068946ec415bb970d62825b9e28d32c39c9ac916595f62b2a1203ee9e"
+    },
+    {
+      "path": "D.json.gz",
+      "bytes": 118542,
+      "sha256": "952dba90298d1b998c641c41f50a6abe6452f3e675cf5f75e8823a288c952669"
+    },
+    {
+      "path": "disposable-manifest.json",
+      "bytes": 17392,
+      "sha256": "7652cd7023a24c146b0c11f883ed286ddffdac69366e3e3dc4ce3c7aa1f2ec5b"
+    },
+    {
+      "path": "inventory.py",
+      "bytes": 1671,
+      "sha256": "f1b28b4a79eaf823afd88fc5df5d451b34b3a191d53ed7c6c80312c11e66357c"
+    },
+    {
+      "path": "journal-manifest.json",
+      "bytes": 3247,
+      "sha256": "8590a2a99a5a85ad61e84460874a9fadd4cb7afb8dedd2005cc2359bb35e1d06"
+    },
+    {
+      "path": "ksa-reference-check.json",
+      "bytes": 6378,
+      "sha256": "0111509e41f74184bbd86b2f71b4f054aa4432e2ab72f22f0e16c96311e1d9b2"
+    },
+    {
+      "path": "mapped.inl",
+      "bytes": 3346,
+      "sha256": "6d57001c18d0697f3bbee7427b727daf7abbe1f149445ce95c9326a84aaae493"
+    },
+    {
+      "path": "mapped.py",
+      "bytes": 6433,
+      "sha256": "76183177245fd3786ab87898c751a29955b4df49342fd1f54f850cd6ac95f4b0"
+    },
+    {
+      "path": "post-cleanup-smoke.json",
+      "bytes": 12492,
+      "sha256": "95bd7f834b9f9143bfec902c913b3e665aad27014cc89210712fc2a7f34e8ddc"
+    },
+    {
+      "path": "post_cleanup.py",
+      "bytes": 3410,
+      "sha256": "45fe0e8e90bf08fde5036938b9f2289fba52f5490dac4b12765301ea5d4a9e98"
+    },
+    {
+      "path": "private-host-v2.json",
+      "bytes": 215,
+      "sha256": "2a733d6fc071a4d24bf166dbfdc83c5a197d58c691478cbc6c6b5e1f82adc152"
+    },
+    {
+      "path": "private-host-v2.patch",
+      "bytes": 60479,
+      "sha256": "9ad1d3453c49a922ef73c696dd5b246d8abce0fa45cc7745bdf752607004cb96"
+    },
+    {
+      "path": "private-host-v3.json",
+      "bytes": 215,
+      "sha256": "76f372ffcce539893ff710ac70b0357a2eb5cdc3047e812635729caba1ee4c8e"
+    },
+    {
+      "path": "private-host-v3.patch",
+      "bytes": 72482,
+      "sha256": "9fdf810f964f487b30cc47e01bd77c794c642e5dafeb6b71a6b365e7ffb421a7"
+    },
+    {
+      "path": "private-host.json",
+      "bytes": 215,
+      "sha256": "98528e5093cddd0d63b4c0eeb6dc493d7e80b8673aa00e1b2f89a3d861e05a0e"
+    },
+    {
+      "path": "private-host.patch",
+      "bytes": 59824,
+      "sha256": "d8dc0f41d69b774640db64f9c13838cb8c2846005b8773065a408b3e16dddb55"
+    },
+    {
+      "path": "README.md",
+      "bytes": 24501,
+      "sha256": "7f18177253c6c1010c2f8d6ce5d8cd87d87552a116292d82bcf9e9950fe0b7b6"
+    },
+    {
+      "path": "restoration.json",
+      "bytes": 349,
+      "sha256": "494c24c019d5c793ff07bda943684bde7b1dc4e182de4467261482f81e2cef75"
+    },
+    {
+      "path": "restore.py",
+      "bytes": 1417,
+      "sha256": "d0338143cad7b6a5c3057b5496de4935169afeb5afd4d6f19529cc3c8c81e523"
+    },
+    {
+      "path": "seal.py",
+      "bytes": 3820,
+      "sha256": "657e17fc1107bf06f98c566986acabb0ba09283d460d655e62f35a4a20f6761d"
+    }
+  ],
+  "retainedPurpose": "Bounded exact-input/performance and physical-oracle evidence for Project Control review of the rejected final M13 blocker candidate; no production consumers.",
+  "exclusions": "Manifest and storage ledger excluded from their own hash list.",
+  "gitDiffCheck": {
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "gitStatusShort": "?? docs/engineering-evidence/m13-exit-assessment/\n?? docs/engineering-evidence/m13-regional-preparation-blocker/\n?? docs/engineering-evidence/m13-regional-preparation-convergence/\n"
+}

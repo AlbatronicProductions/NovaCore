@@ -1,0 +1,2428 @@
+{
+  "profile": {
+    "label": "profile",
+    "nativeHash": "95e9beade9bd6f8273c4e6ab53d8600cc0e0c539874e7fe8c6ea51917ab0187b",
+    "managedHash": "82c72c8d968df824ffc498604e1a14dc8c738d73dd741c05e759cc668bbf03bb",
+    "errors": [],
+    "frames": 1000,
+    "publications": 37,
+    "stagedPublications": 4,
+    "validEarthGpu": {
+      "n": 737,
+      "median": 11.48508,
+      "p95": 14.01601,
+      "p99": 15.35648,
+      "min": 4.45948,
+      "max": 17.7848,
+      "mean": 10.9386370963365,
+      "total": 8061.775539999997
+    },
+    "bands": [
+      {
+        "generation": 18,
+        "firstGpuFrame": 345,
+        "lastGpuFrame": 355,
+        "publicationHostFrame": 356,
+        "gpu": {
+          "n": 11,
+          "median": 13.98132,
+          "p95": 14.99904,
+          "p99": 14.99904,
+          "min": 13.54488,
+          "max": 14.99904,
+          "mean": 14.025986363636363,
+          "total": 154.28584999999998
+        },
+        "prep": {
+          "n": 11,
+          "median": 3.83996,
+          "p95": 4.18504,
+          "p99": 4.18504,
+          "min": 2.4388,
+          "max": 4.18504,
+          "mean": 3.7465854545454547,
+          "total": 41.21244000000001
+        },
+        "first8Prep": {
+          "n": 8,
+          "median": 3.83996,
+          "p95": 4.18504,
+          "p99": 4.18504,
+          "min": 3.73952,
+          "max": 4.18504,
+          "mean": 3.8917,
+          "total": 31.1336
+        },
+        "last3Prep": [
+          3.7424,
+          3.89764,
+          2.4388
+        ],
+        "last3Gpu": [
+          13.87892,
+          14.16848,
+          14.99904
+        ],
+        "publication": [],
+        "finalCullPreparationResidual": 5.0976
+      },
+      {
+        "generation": 19,
+        "firstGpuFrame": 357,
+        "lastGpuFrame": 367,
+        "publicationHostFrame": 368,
+        "gpu": {
+          "n": 11,
+          "median": 15.0144,
+          "p95": 17.38183,
+          "p99": 17.38183,
+          "min": 14.57352,
+          "max": 17.38183,
+          "mean": 15.203197272727273,
+          "total": 167.23517
+        },
+        "prep": {
+          "n": 11,
+          "median": 3.83912,
+          "p95": 4.28584,
+          "p99": 4.28584,
+          "min": 3.46612,
+          "max": 4.28584,
+          "mean": 3.858149090909091,
+          "total": 42.43964
+        },
+        "first8Prep": {
+          "n": 8,
+          "median": 3.83912,
+          "p95": 4.21404,
+          "p99": 4.21404,
+          "min": 3.50488,
+          "max": 4.21404,
+          "mean": 3.868065,
+          "total": 30.94452
+        },
+        "last3Prep": [
+          3.74316,
+          4.28584,
+          3.46612
+        ],
+        "last3Gpu": [
+          15.23443,
+          15.35648,
+          17.38183
+        ],
+        "publication": [],
+        "finalCullPreparationResidual": 5.321960000000001
+      },
+      {
+        "generation": 36,
+        "firstGpuFrame": 725,
+        "lastGpuFrame": 735,
+        "publicationHostFrame": 736,
+        "gpu": {
+          "n": 11,
+          "median": 14.05124,
+          "p95": 15.64493,
+          "p99": 15.64493,
+          "min": 13.7823,
+          "max": 15.64493,
+          "mean": 14.152292727272727,
+          "total": 155.67522
+        },
+        "prep": {
+          "n": 11,
+          "median": 3.84008,
+          "p95": 4.21232,
+          "p99": 4.21232,
+          "min": 2.54008,
+          "max": 4.21232,
+          "mean": 3.8029818181818182,
+          "total": 41.832800000000006
+        },
+        "first8Prep": {
+          "n": 8,
+          "median": 3.91932,
+          "p95": 4.21232,
+          "p99": 4.21232,
+          "min": 3.73968,
+          "max": 4.21232,
+          "mean": 3.964035,
+          "total": 31.71228
+        },
+        "last3Prep": [
+          3.74036,
+          3.84008,
+          2.54008
+        ],
+        "last3Gpu": [
+          14.05124,
+          14.14048,
+          15.64493
+        ],
+        "publication": [],
+        "finalCullPreparationResidual": 5.1053999999999995
+      },
+      {
+        "generation": 37,
+        "firstGpuFrame": 737,
+        "lastGpuFrame": 747,
+        "publicationHostFrame": 748,
+        "gpu": {
+          "n": 11,
+          "median": 15.11708,
+          "p95": 17.7848,
+          "p99": 17.7848,
+          "min": 14.59932,
+          "max": 17.7848,
+          "mean": 15.428661818181817,
+          "total": 169.71528
+        },
+        "prep": {
+          "n": 11,
+          "median": 3.87552,
+          "p95": 4.1116,
+          "p99": 4.1116,
+          "min": 3.49212,
+          "max": 4.1116,
+          "mean": 3.8321745454545453,
+          "total": 42.15392
+        },
+        "first8Prep": {
+          "n": 8,
+          "median": 3.80848,
+          "p95": 4.03028,
+          "p99": 4.03028,
+          "min": 3.49212,
+          "max": 4.03028,
+          "mean": 3.82149,
+          "total": 30.57192
+        },
+        "last3Prep": [
+          3.87552,
+          4.1116,
+          3.59488
+        ],
+        "last3Gpu": [
+          14.98876,
+          15.65169,
+          17.7848
+        ],
+        "publication": [],
+        "finalCullPreparationResidual": 5.836640000000001
+      }
+    ],
+    "combinedBands": {
+      "n": 44,
+      "median": 14.59628,
+      "p95": 15.65169,
+      "p99": 17.7848,
+      "min": 13.54488,
+      "max": 17.7848,
+      "mean": 14.702534545454546,
+      "total": 646.9115199999999
+    },
+    "preparation": {
+      "demand": {
+        "n": 22,
+        "median": 1.45472,
+        "p95": 1.51872,
+        "p99": 1.51876,
+        "min": 0.96056,
+        "max": 1.51876,
+        "mean": 1.4466436363636364,
+        "total": 31.826160000000005
+      },
+      "currentPhysicalPreparation": {
+        "n": 56,
+        "median": 0.2096,
+        "p95": 3.49824,
+        "p99": 3.6482,
+        "min": 0.20084,
+        "max": 3.6482,
+        "mean": 0.6268621428571428,
+        "total": 35.10428
+      },
+      "incomingPhysicalPreparation": {
+        "n": 315,
+        "median": 3.75388,
+        "p95": 4.14372,
+        "p99": 4.23352,
+        "min": 0.53572,
+        "max": 4.28584,
+        "mean": 3.2186946031746033,
+        "total": 1013.8888000000004
+      }
+    },
+    "cpu": {
+      "update": {
+        "n": 970,
+        "median": 13.4801,
+        "p95": 16.0723,
+        "p99": 17.9112,
+        "min": 2.6373,
+        "max": 26.6321,
+        "mean": 11.651212989690721,
+        "total": 11301.67659999999
+      },
+      "fenceWait": {
+        "n": 970,
+        "median": 11.1109,
+        "p95": 13.4592,
+        "p99": 15.125,
+        "min": 0.5594,
+        "max": 17.2445,
+        "mean": 9.184443092783505,
+        "total": 8908.909799999994
+      },
+      "inspection": {
+        "n": 970,
+        "median": 0.067,
+        "p95": 0.1485,
+        "p99": 0.2194,
+        "min": 0.0293,
+        "max": 0.312,
+        "mean": 0.07667319587628867,
+        "total": 74.37300000000002
+      },
+      "hostCallback": {
+        "n": 970,
+        "median": 0.2503,
+        "p95": 0.5766,
+        "p99": 0.9234,
+        "min": 0.1101,
+        "max": 3.8906,
+        "mean": 0.29547690721649483,
+        "total": 286.61259999999993
+      },
+      "validationUpload": {
+        "n": 970,
+        "median": 2.0154,
+        "p95": 2.2947,
+        "p99": 5.4318,
+        "min": 1.8151,
+        "max": 17.7267,
+        "mean": 2.094619793814433,
+        "total": 2031.7811999999994
+      },
+      "record": {
+        "n": 970,
+        "median": 0.2844,
+        "p95": 0.4091,
+        "p99": 0.4913,
+        "min": 0.1271,
+        "max": 0.6493,
+        "mean": 0.28352948453608245,
+        "total": 275.0235999999997
+      },
+      "submit": {
+        "n": 970,
+        "median": 0.067,
+        "p95": 0.1084,
+        "p99": 0.1475,
+        "min": 0.0419,
+        "max": 1.9345,
+        "mean": 0.07345680412371135,
+        "total": 71.25310000000009
+      },
+      "present": {
+        "n": 970,
+        "median": 0.2558,
+        "p95": 0.4111,
+        "p99": 0.5426,
+        "min": 0.1559,
+        "max": 0.7547,
+        "mean": 0.2754580412371134,
+        "total": 267.1942999999999
+      },
+      "total": {
+        "n": 970,
+        "median": 14.1488,
+        "p95": 16.9049,
+        "p99": 18.9399,
+        "min": 3.1073,
+        "max": 27.504,
+        "mean": 12.37155969072165,
+        "total": 12000.412900000005
+      }
+    },
+    "post30HostOver40ms": [],
+    "residency": [
+      "[native] NCSM1 regional physical totals: requests=670; hits=840; misses=670; loaded=670; readBytes=163158696; uploadedBytes=93392640; residentHighWater=670; allocatedBytes=119737728; maximumBytes=124895232; queueHighWater=634; readyCapacity=8; uploadBudget=8; demandDispatches=22; dependencyDelayMsMax=1163.580; recordReadDecodeVerifyMs=248.275; contributingRecords=670; anchoredDemandRequired=false"
+    ],
+    "heap": [],
+    "routeResult": [
+      "Earth route validation: mode=regional; frame=1; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=85.05556330084801; padSubmitted=True; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=80; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=85.05556330084801; padSubmitted=True; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=160; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=73.09652871917933; padSubmitted=True; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=180; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=699999.9999984233; padSubmitted=False; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=260; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=700010.1848163903; padSubmitted=False; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=280; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=85.05556330084801; padSubmitted=True; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=340; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=85.05556330084801; padSubmitted=True; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=400; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=699999.9999974128; padSubmitted=False; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=440; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=699999.7169076791; padSubmitted=False; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=500; focus=Mars; body=8; earthEligible=False; bodies=10; altitude=35749074.748357125; padSubmitted=False; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=580; focus=Saturn; body=10; earthEligible=False; bodies=10; altitude=1521109661.368196; padSubmitted=False; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=660; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=85.05556330084801; padSubmitted=True; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=740; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=85.05556330084801; padSubmitted=True; siteStable=True; physicalGeneration=4"
+    ]
+  },
+  "profile-repeat": {
+    "label": "profile-repeat",
+    "nativeHash": "ca0f2f68105d876c241cfcf3964196c23fdf7dd2e019dc37d33a878e12057d4e",
+    "managedHash": "82c72c8d968df824ffc498604e1a14dc8c738d73dd741c05e759cc668bbf03bb",
+    "errors": [],
+    "frames": 1000,
+    "publications": 37,
+    "stagedPublications": 4,
+    "validEarthGpu": {
+      "n": 737,
+      "median": 11.1568,
+      "p95": 14.06632,
+      "p99": 15.2934,
+      "min": 4.312,
+      "max": 18.68696,
+      "mean": 10.763390719131614,
+      "total": 7932.618959999997
+    },
+    "bands": [
+      {
+        "generation": 18,
+        "firstGpuFrame": 345,
+        "lastGpuFrame": 355,
+        "publicationHostFrame": 356,
+        "gpu": {
+          "n": 11,
+          "median": 13.91008,
+          "p95": 15.18888,
+          "p99": 15.18888,
+          "min": 13.37408,
+          "max": 15.18888,
+          "mean": 13.978356363636363,
+          "total": 153.76192
+        },
+        "prep": {
+          "n": 11,
+          "median": 3.85176,
+          "p95": 3.99552,
+          "p99": 3.99552,
+          "min": 2.44428,
+          "max": 3.99552,
+          "mean": 3.6943745454545454,
+          "total": 40.63812
+        },
+        "first8Prep": {
+          "n": 8,
+          "median": 3.82812,
+          "p95": 3.9056,
+          "p99": 3.9056,
+          "min": 3.56068,
+          "max": 3.9056,
+          "mean": 3.789805,
+          "total": 30.31844
+        },
+        "last3Prep": [
+          3.99552,
+          3.87988,
+          2.44428
+        ],
+        "last3Gpu": [
+          13.8346,
+          13.91008,
+          15.18888
+        ],
+        "publication": [
+          {
+            "completedGpuFrame": 355,
+            "generation": 18,
+            "sourceGeneration": 17,
+            "pupil": 37,
+            "vertices": 696410,
+            "elapsedMs": 199.6527,
+            "currentRetained": "true",
+            "completeDependencies": 1,
+            "finalFence": "true"
+          }
+        ],
+        "finalCullPreparationResidual": 5.17704
+      },
+      {
+        "generation": 19,
+        "firstGpuFrame": 357,
+        "lastGpuFrame": 367,
+        "publicationHostFrame": 368,
+        "gpu": {
+          "n": 11,
+          "median": 14.76256,
+          "p95": 18.68696,
+          "p99": 18.68696,
+          "min": 14.3172,
+          "max": 18.68696,
+          "mean": 15.176,
+          "total": 166.93600000000004
+        },
+        "prep": {
+          "n": 11,
+          "median": 3.82132,
+          "p95": 3.93552,
+          "p99": 3.93552,
+          "min": 3.42828,
+          "max": 3.93552,
+          "mean": 3.7610727272727273,
+          "total": 41.3718
+        },
+        "first8Prep": {
+          "n": 8,
+          "median": 3.8188,
+          "p95": 3.93552,
+          "p99": 3.93552,
+          "min": 3.51584,
+          "max": 3.93552,
+          "mean": 3.7782999999999998,
+          "total": 30.226399999999998
+        },
+        "last3Prep": [
+          3.86688,
+          3.85024,
+          3.42828
+        ],
+        "last3Gpu": [
+          15.48704,
+          14.66452,
+          18.68696
+        ],
+        "publication": [
+          {
+            "completedGpuFrame": 367,
+            "generation": 19,
+            "sourceGeneration": 18,
+            "pupil": 38,
+            "vertices": 712106,
+            "elapsedMs": 215.6249,
+            "currentRetained": "true",
+            "completeDependencies": 1,
+            "finalFence": "true"
+          }
+        ],
+        "finalCullPreparationResidual": 6.900239999999999
+      },
+      {
+        "generation": 36,
+        "firstGpuFrame": 725,
+        "lastGpuFrame": 735,
+        "publicationHostFrame": 736,
+        "gpu": {
+          "n": 11,
+          "median": 14.09948,
+          "p95": 16.61592,
+          "p99": 16.61592,
+          "min": 13.98412,
+          "max": 16.61592,
+          "mean": 14.406141818181817,
+          "total": 158.46756
+        },
+        "prep": {
+          "n": 11,
+          "median": 3.8172,
+          "p95": 4.1362,
+          "p99": 4.1362,
+          "min": 2.45276,
+          "max": 4.1362,
+          "mean": 3.7023127272727274,
+          "total": 40.72543999999999
+        },
+        "first8Prep": {
+          "n": 8,
+          "median": 3.80368,
+          "p95": 4.1362,
+          "p99": 4.1362,
+          "min": 3.57332,
+          "max": 4.1362,
+          "mean": 3.81088,
+          "total": 30.487039999999997
+        },
+        "last3Prep": [
+          3.8742,
+          3.91144,
+          2.45276
+        ],
+        "last3Gpu": [
+          14.0542,
+          14.29688,
+          16.61592
+        ],
+        "publication": [
+          {
+            "completedGpuFrame": 735,
+            "generation": 36,
+            "sourceGeneration": 35,
+            "pupil": 63,
+            "vertices": 696410,
+            "elapsedMs": 209.5064,
+            "currentRetained": "true",
+            "completeDependencies": 1,
+            "finalFence": "true"
+          }
+        ],
+        "finalCullPreparationResidual": 6.247440000000001
+      },
+      {
+        "generation": 37,
+        "firstGpuFrame": 737,
+        "lastGpuFrame": 747,
+        "publicationHostFrame": 748,
+        "gpu": {
+          "n": 11,
+          "median": 15.16932,
+          "p95": 17.514,
+          "p99": 17.514,
+          "min": 14.6576,
+          "max": 17.514,
+          "mean": 15.286283636363637,
+          "total": 168.14912
+        },
+        "prep": {
+          "n": 11,
+          "median": 3.8534,
+          "p95": 3.9934,
+          "p99": 3.9934,
+          "min": 3.39216,
+          "max": 3.9934,
+          "mean": 3.792890909090909,
+          "total": 41.7218
+        },
+        "first8Prep": {
+          "n": 8,
+          "median": 3.8534,
+          "p95": 3.9934,
+          "p99": 3.9934,
+          "min": 3.5034,
+          "max": 3.9934,
+          "mean": 3.837,
+          "total": 30.696000000000005
+        },
+        "last3Prep": [
+          3.73844,
+          3.8952,
+          3.39216
+        ],
+        "last3Gpu": [
+          15.73092,
+          15.21212,
+          17.514
+        ],
+        "publication": [
+          {
+            "completedGpuFrame": 747,
+            "generation": 37,
+            "sourceGeneration": 36,
+            "pupil": 64,
+            "vertices": 712106,
+            "elapsedMs": 217.1203,
+            "currentRetained": "true",
+            "completeDependencies": 1,
+            "finalFence": "true"
+          }
+        ],
+        "finalCullPreparationResidual": 6.053319999999999
+      }
+    ],
+    "combinedBands": {
+      "n": 44,
+      "median": 14.58432,
+      "p95": 16.61592,
+      "p99": 18.68696,
+      "min": 13.37408,
+      "max": 18.68696,
+      "mean": 14.711695454545454,
+      "total": 647.3145999999999
+    },
+    "preparation": {
+      "demand": {
+        "n": 22,
+        "median": 1.46436,
+        "p95": 1.52848,
+        "p99": 1.5302,
+        "min": 0.96812,
+        "max": 1.5302,
+        "mean": 1.444109090909091,
+        "total": 31.770400000000002
+      },
+      "currentPhysicalPreparation": {
+        "n": 58,
+        "median": 0.26188,
+        "p95": 3.50692,
+        "p99": 3.68104,
+        "min": 0.19988,
+        "max": 3.68104,
+        "mean": 0.6681372413793103,
+        "total": 38.75196000000001
+      },
+      "incomingPhysicalPreparation": {
+        "n": 315,
+        "median": 3.7478,
+        "p95": 4.00744,
+        "p99": 4.08432,
+        "min": 0.52444,
+        "max": 4.14988,
+        "mean": 3.169270857142857,
+        "total": 998.3203199999995
+      }
+    },
+    "cpu": {
+      "update": {
+        "n": 970,
+        "median": 13.8135,
+        "p95": 17.5173,
+        "p99": 19.1548,
+        "min": 2.5979,
+        "max": 32.0824,
+        "mean": 12.243086597938145,
+        "total": 11875.794000000004
+      },
+      "fenceWait": {
+        "n": 970,
+        "median": 10.5425,
+        "p95": 13.2817,
+        "p99": 14.7681,
+        "min": 0.3462,
+        "max": 18.0356,
+        "mean": 8.736928865979381,
+        "total": 8474.820999999998
+      },
+      "inspection": {
+        "n": 970,
+        "median": 0.082,
+        "p95": 0.1835,
+        "p99": 0.2704,
+        "min": 0.0378,
+        "max": 0.4639,
+        "mean": 0.09368845360824742,
+        "total": 90.87779999999988
+      },
+      "hostCallback": {
+        "n": 970,
+        "median": 0.2514,
+        "p95": 0.4031,
+        "p99": 0.598,
+        "min": 0.1244,
+        "max": 3.0331,
+        "mean": 0.26699237113402063,
+        "total": 258.98259999999993
+      },
+      "validationUpload": {
+        "n": 970,
+        "median": 3.0579,
+        "p95": 4.0781,
+        "p99": 10.2351,
+        "min": 1.8611,
+        "max": 23.2696,
+        "mean": 3.1454769072164948,
+        "total": 3051.112599999999
+      },
+      "record": {
+        "n": 970,
+        "median": 0.4193,
+        "p95": 0.7963,
+        "p99": 0.9884,
+        "min": 0.169,
+        "max": 1.2289,
+        "mean": 0.4608040206185567,
+        "total": 446.9798999999993
+      },
+      "submit": {
+        "n": 970,
+        "median": 0.0983,
+        "p95": 0.2037,
+        "p99": 0.3003,
+        "min": 0.053,
+        "max": 2.4043,
+        "mean": 0.11466515463917526,
+        "total": 111.22519999999997
+      },
+      "present": {
+        "n": 970,
+        "median": 0.3756,
+        "p95": 0.8667,
+        "p99": 1.1084,
+        "min": 0.1701,
+        "max": 1.7354,
+        "mean": 0.4338878350515464,
+        "total": 420.8712000000001
+      },
+      "total": {
+        "n": 970,
+        "median": 14.9359,
+        "p95": 19.1805,
+        "p99": 20.9467,
+        "min": 3.2615,
+        "max": 32.8539,
+        "mean": 13.407919175257732,
+        "total": 13005.681600000007
+      }
+    },
+    "post30HostOver40ms": [],
+    "residency": [
+      "[native] NCSM1 regional physical totals: requests=670; hits=840; misses=670; loaded=670; readBytes=163158696; uploadedBytes=93392640; residentHighWater=670; allocatedBytes=119737728; maximumBytes=124895232; queueHighWater=634; readyCapacity=8; uploadBudget=8; demandDispatches=22; dependencyDelayMsMax=1293.515; recordReadDecodeVerifyMs=250.608; contributingRecords=670; anchoredDemandRequired=false"
+    ],
+    "heap": [
+      "[native] Prep heap: label=incoming production billboard physical buffer failed; bytes=45574784; allocationBytes=45574784; type=1; properties=6; heap=0; heapFlags=0; heapBytes=16703094784",
+      "[native] Prep heap: label=regional pupil staging allocation failed; bytes=45574784; allocationBytes=45574784; type=1; properties=6; heap=0; heapFlags=0; heapBytes=16703094784",
+      "[native] Prep heap: label=incoming production billboard physical buffer failed; bytes=44570240; allocationBytes=44570240; type=1; properties=6; heap=0; heapFlags=0; heapBytes=16703094784"
+    ],
+    "routeResult": [
+      "Earth route validation: mode=regional; frame=1; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=85.05556330084801; padSubmitted=True; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=80; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=85.05556330084801; padSubmitted=True; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=160; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=73.09652871917933; padSubmitted=True; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=180; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=700000.0000021467; padSubmitted=False; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=260; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=700010.7445628932; padSubmitted=False; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=280; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=85.05556330084801; padSubmitted=True; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=340; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=85.05556330084801; padSubmitted=True; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=400; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=700000.0000046492; padSubmitted=False; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=440; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=699999.7162347417; padSubmitted=False; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=500; focus=Mars; body=8; earthEligible=False; bodies=10; altitude=35749074.74837203; padSubmitted=False; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=580; focus=Saturn; body=10; earthEligible=False; bodies=10; altitude=1521109661.3682272; padSubmitted=False; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=660; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=85.05556330084801; padSubmitted=True; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=740; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=85.05556330084801; padSubmitted=True; siteStable=True; physicalGeneration=4"
+    ]
+  },
+  "same-index-copy": {
+    "label": "same-index-copy",
+    "nativeHash": "4ea2ffbff07a4026471ae1a7f6c09728280b620acb417c8b21170e7d11b1251d",
+    "managedHash": "82c72c8d968df824ffc498604e1a14dc8c738d73dd741c05e759cc668bbf03bb",
+    "errors": [],
+    "frames": 1000,
+    "publications": 37,
+    "stagedPublications": 4,
+    "validEarthGpu": {
+      "n": 737,
+      "median": 10.83284,
+      "p95": 11.69528,
+      "p99": 13.89668,
+      "min": 4.27812,
+      "max": 16.68952,
+      "mean": 9.612146811397558,
+      "total": 7084.152199999994
+    },
+    "bands": [
+      {
+        "generation": 18,
+        "firstGpuFrame": 345,
+        "lastGpuFrame": 355,
+        "publicationHostFrame": 356,
+        "gpu": {
+          "n": 11,
+          "median": 13.6816,
+          "p95": 14.6564,
+          "p99": 14.6564,
+          "min": 13.3806,
+          "max": 14.6564,
+          "mean": 13.75724,
+          "total": 151.32963999999998
+        },
+        "prep": {
+          "n": 11,
+          "median": 3.77848,
+          "p95": 3.86356,
+          "p99": 3.86356,
+          "min": 2.29176,
+          "max": 3.86356,
+          "mean": 3.632807272727273,
+          "total": 39.96088
+        },
+        "first8Prep": {
+          "n": 8,
+          "median": 3.77848,
+          "p95": 3.857,
+          "p99": 3.857,
+          "min": 3.51172,
+          "max": 3.857,
+          "mean": 3.755,
+          "total": 30.040000000000003
+        },
+        "last3Prep": [
+          3.76556,
+          3.86356,
+          2.29176
+        ],
+        "last3Gpu": [
+          13.79232,
+          13.72532,
+          14.6564
+        ],
+        "publication": [],
+        "finalCullPreparationResidual": 5.12632
+      },
+      {
+        "generation": 19,
+        "firstGpuFrame": 357,
+        "lastGpuFrame": 367,
+        "publicationHostFrame": 368,
+        "gpu": {
+          "n": 11,
+          "median": 10.92876,
+          "p95": 16.68952,
+          "p99": 16.68952,
+          "min": 10.77804,
+          "max": 16.68952,
+          "mean": 11.547923636363636,
+          "total": 127.02716000000002
+        },
+        "prep": {
+          "n": 11,
+          "median": 0.23632,
+          "p95": 3.37168,
+          "p99": 3.37168,
+          "min": 0.23156,
+          "max": 3.37168,
+          "mean": 0.6361163636363636,
+          "total": 6.99728
+        },
+        "first8Prep": {
+          "n": 8,
+          "median": 0.2328,
+          "p95": 0.24268,
+          "p99": 0.24268,
+          "min": 0.23156,
+          "max": 0.24268,
+          "mean": 0.23639,
+          "total": 1.89112
+        },
+        "last3Prep": [
+          0.23212,
+          1.50236,
+          3.37168
+        ],
+        "last3Gpu": [
+          10.96576,
+          12.066,
+          16.68952
+        ],
+        "publication": [],
+        "finalCullPreparationResidual": 5.34108
+      },
+      {
+        "generation": 36,
+        "firstGpuFrame": 725,
+        "lastGpuFrame": 735,
+        "publicationHostFrame": 736,
+        "gpu": {
+          "n": 11,
+          "median": 10.17472,
+          "p95": 14.981,
+          "p99": 14.981,
+          "min": 10.0128,
+          "max": 14.981,
+          "mean": 10.970410909090909,
+          "total": 120.67451999999999
+        },
+        "prep": {
+          "n": 11,
+          "median": 0.2336,
+          "p95": 3.8612,
+          "p99": 3.8612,
+          "min": 0.23156,
+          "max": 3.8612,
+          "mean": 0.8125963636363637,
+          "total": 8.93856
+        },
+        "first8Prep": {
+          "n": 8,
+          "median": 0.23312,
+          "p95": 0.23468,
+          "p99": 0.23468,
+          "min": 0.23156,
+          "max": 0.23468,
+          "mean": 0.23321999999999998,
+          "total": 1.8657599999999999
+        },
+        "last3Prep": [
+          0.75904,
+          3.8612,
+          2.45256
+        ],
+        "last3Gpu": [
+          10.5556,
+          13.81464,
+          14.981
+        ],
+        "publication": [],
+        "finalCullPreparationResidual": 5.10236
+      },
+      {
+        "generation": 37,
+        "firstGpuFrame": 737,
+        "lastGpuFrame": 747,
+        "publicationHostFrame": 748,
+        "gpu": {
+          "n": 11,
+          "median": 10.88316,
+          "p95": 16.58832,
+          "p99": 16.58832,
+          "min": 10.77112,
+          "max": 16.58832,
+          "mean": 11.563883636363636,
+          "total": 127.20272000000001
+        },
+        "prep": {
+          "n": 11,
+          "median": 0.23416,
+          "p95": 3.35536,
+          "p99": 3.35536,
+          "min": 0.23172,
+          "max": 3.35536,
+          "mean": 0.6454218181818182,
+          "total": 7.099640000000001
+        },
+        "first8Prep": {
+          "n": 8,
+          "median": 0.233,
+          "p95": 0.2852,
+          "p99": 0.2852,
+          "min": 0.23172,
+          "max": 0.2852,
+          "mean": 0.241205,
+          "total": 1.9296400000000002
+        },
+        "last3Prep": [
+          0.2324,
+          1.58224,
+          3.35536
+        ],
+        "last3Gpu": [
+          10.85952,
+          12.44352,
+          16.58832
+        ],
+        "publication": [],
+        "finalCullPreparationResidual": 5.337319999999999
+      }
+    ],
+    "combinedBands": {
+      "n": 44,
+      "median": 10.96576,
+      "p95": 14.981,
+      "p99": 16.68952,
+      "min": 10.0128,
+      "max": 16.68952,
+      "mean": 11.959864545454545,
+      "total": 526.2340399999999
+    },
+    "preparation": {
+      "demand": {
+        "n": 22,
+        "median": 1.45804,
+        "p95": 1.52092,
+        "p99": 1.52172,
+        "min": 0.96976,
+        "max": 1.52172,
+        "mean": 1.4499381818181818,
+        "total": 31.89864
+      },
+      "currentPhysicalPreparation": {
+        "n": 55,
+        "median": 0.2024,
+        "p95": 3.49132,
+        "p99": 3.64484,
+        "min": 0.19436,
+        "max": 3.64484,
+        "mean": 0.6348167272727273,
+        "total": 34.914919999999995
+      },
+      "incomingPhysicalPreparation": {
+        "n": 315,
+        "median": 0.23892,
+        "p95": 3.82812,
+        "p99": 3.87496,
+        "min": 0.2308,
+        "max": 4.17972,
+        "mean": 1.1459297777777777,
+        "total": 360.96788000000004
+      }
+    },
+    "cpu": {
+      "update": {
+        "n": 970,
+        "median": 11.5023,
+        "p95": 13.7724,
+        "p99": 16.5025,
+        "min": 2.5271,
+        "max": 24.0599,
+        "mean": 10.501262989690721,
+        "total": 10186.225100000001
+      },
+      "fenceWait": {
+        "n": 970,
+        "median": 9.0543,
+        "p95": 11.3939,
+        "p99": 13.7013,
+        "min": 0.5957,
+        "max": 16.6433,
+        "mean": 8.222884020618556,
+        "total": 7976.1975000000075
+      },
+      "inspection": {
+        "n": 970,
+        "median": 0.0493,
+        "p95": 0.1038,
+        "p99": 0.1458,
+        "min": 0.033,
+        "max": 0.2284,
+        "mean": 0.055174536082474225,
+        "total": 53.51930000000004
+      },
+      "hostCallback": {
+        "n": 970,
+        "median": 0.1664,
+        "p95": 0.3182,
+        "p99": 0.4995,
+        "min": 0.1046,
+        "max": 2.6637,
+        "mean": 0.19767546391752577,
+        "total": 191.7452000000001
+      },
+      "validationUpload": {
+        "n": 970,
+        "median": 1.9456,
+        "p95": 2.2109,
+        "p99": 4.7497,
+        "min": 1.7711,
+        "max": 15.3423,
+        "mean": 2.0255289690721647,
+        "total": 1964.7631000000008
+      },
+      "record": {
+        "n": 970,
+        "median": 0.1725,
+        "p95": 0.2245,
+        "p99": 0.274,
+        "min": 0.1228,
+        "max": 0.3376,
+        "mean": 0.1732682474226804,
+        "total": 168.07020000000006
+      },
+      "submit": {
+        "n": 970,
+        "median": 0.0407,
+        "p95": 0.052,
+        "p99": 0.0704,
+        "min": 0.0343,
+        "max": 1.8289,
+        "mean": 0.04442649484536083,
+        "total": 43.093700000000084
+      },
+      "present": {
+        "n": 970,
+        "median": 0.2044,
+        "p95": 0.2454,
+        "p99": 0.3006,
+        "min": 0.1334,
+        "max": 0.47,
+        "mean": 0.2045419587628866,
+        "total": 198.4057
+      },
+      "total": {
+        "n": 970,
+        "median": 11.9919,
+        "p95": 14.2576,
+        "p99": 17.079,
+        "min": 2.9635,
+        "max": 24.5906,
+        "mean": 10.97422412371134,
+        "total": 10644.997400000015
+      }
+    },
+    "post30HostOver40ms": [],
+    "residency": [
+      "[native] NCSM1 regional physical totals: requests=670; hits=840; misses=670; loaded=670; readBytes=163158696; uploadedBytes=93392640; residentHighWater=670; allocatedBytes=119737728; maximumBytes=124895232; queueHighWater=634; readyCapacity=8; uploadBudget=8; demandDispatches=22; dependencyDelayMsMax=1092.775; recordReadDecodeVerifyMs=211.911; contributingRecords=670; anchoredDemandRequired=false"
+    ],
+    "heap": [],
+    "routeResult": [
+      "Earth route validation: mode=regional; frame=1; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=85.05556330084801; padSubmitted=True; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=80; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=85.05556330084801; padSubmitted=True; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=160; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=73.09652871917933; padSubmitted=True; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=180; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=699999.9999972647; padSubmitted=False; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=260; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=700006.1926075919; padSubmitted=False; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=280; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=85.05556330084801; padSubmitted=True; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=340; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=85.05556330084801; padSubmitted=True; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=400; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=699999.9999969136; padSubmitted=False; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=440; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=699999.7277993541; padSubmitted=False; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=500; focus=Mars; body=8; earthEligible=False; bodies=10; altitude=35749074.74836511; padSubmitted=False; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=580; focus=Saturn; body=10; earthEligible=False; bodies=10; altitude=1521109661.3682537; padSubmitted=False; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=660; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=85.05556330084801; padSubmitted=True; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=740; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=85.05556330084801; padSubmitted=True; siteStable=True; physicalGeneration=4"
+    ]
+  },
+  "placement-only": {
+    "label": "placement-only",
+    "nativeHash": "ca0f2f68105d876c241cfcf3964196c23fdf7dd2e019dc37d33a878e12057d4e",
+    "managedHash": "82c72c8d968df824ffc498604e1a14dc8c738d73dd741c05e759cc668bbf03bb",
+    "errors": [],
+    "frames": 1000,
+    "publications": 37,
+    "stagedPublications": 4,
+    "validEarthGpu": {
+      "n": 737,
+      "median": 9.15512,
+      "p95": 11.9548,
+      "p99": 12.76708,
+      "min": 3.60088,
+      "max": 13.56464,
+      "mean": 8.748260895522389,
+      "total": 6447.468280000002
+    },
+    "bands": [
+      {
+        "generation": 18,
+        "firstGpuFrame": 345,
+        "lastGpuFrame": 355,
+        "publicationHostFrame": 356,
+        "gpu": {
+          "n": 11,
+          "median": 12.0748,
+          "p95": 12.1904,
+          "p99": 12.1904,
+          "min": 11.87756,
+          "max": 12.1904,
+          "mean": 12.03734909090909,
+          "total": 132.41084
+        },
+        "prep": {
+          "n": 11,
+          "median": 3.77596,
+          "p95": 3.85964,
+          "p99": 3.85964,
+          "min": 2.49224,
+          "max": 3.85964,
+          "mean": 3.6423490909090908,
+          "total": 40.06584000000001
+        },
+        "first8Prep": {
+          "n": 8,
+          "median": 3.77596,
+          "p95": 3.85964,
+          "p99": 3.85964,
+          "min": 3.4984,
+          "max": 3.85964,
+          "mean": 3.748215,
+          "total": 29.985720000000004
+        },
+        "last3Prep": [
+          3.74148,
+          3.8464,
+          2.49224
+        ],
+        "last3Gpu": [
+          11.94092,
+          12.103,
+          12.0218
+        ],
+        "publication": [
+          {
+            "completedGpuFrame": 355,
+            "generation": 18,
+            "sourceGeneration": 17,
+            "pupil": 32,
+            "vertices": 696410,
+            "elapsedMs": 158.3554,
+            "currentRetained": "true",
+            "completeDependencies": 1,
+            "finalFence": "true"
+          }
+        ],
+        "finalCullPreparationResidual": 2.24956
+      },
+      {
+        "generation": 19,
+        "firstGpuFrame": 357,
+        "lastGpuFrame": 367,
+        "publicationHostFrame": 368,
+        "gpu": {
+          "n": 11,
+          "median": 12.76708,
+          "p95": 13.56464,
+          "p99": 13.56464,
+          "min": 12.44156,
+          "max": 13.56464,
+          "mean": 12.799254545454545,
+          "total": 140.79180000000002
+        },
+        "prep": {
+          "n": 11,
+          "median": 3.77388,
+          "p95": 3.84936,
+          "p99": 3.84936,
+          "min": 3.39656,
+          "max": 3.84936,
+          "mean": 3.723429090909091,
+          "total": 40.957719999999995
+        },
+        "first8Prep": {
+          "n": 8,
+          "median": 3.77388,
+          "p95": 3.84548,
+          "p99": 3.84548,
+          "min": 3.49128,
+          "max": 3.84548,
+          "mean": 3.74607,
+          "total": 29.968559999999997
+        },
+        "last3Prep": [
+          3.74324,
+          3.84936,
+          3.39656
+        ],
+        "last3Gpu": [
+          12.74384,
+          12.82156,
+          13.56464
+        ],
+        "publication": [
+          {
+            "completedGpuFrame": 367,
+            "generation": 19,
+            "sourceGeneration": 18,
+            "pupil": 33,
+            "vertices": 712106,
+            "elapsedMs": 165.7735,
+            "currentRetained": "true",
+            "completeDependencies": 1,
+            "finalFence": "true"
+          }
+        ],
+        "finalCullPreparationResidual": 2.35412
+      },
+      {
+        "generation": 36,
+        "firstGpuFrame": 725,
+        "lastGpuFrame": 735,
+        "publicationHostFrame": 736,
+        "gpu": {
+          "n": 11,
+          "median": 11.97312,
+          "p95": 12.13236,
+          "p99": 12.13236,
+          "min": 11.69148,
+          "max": 12.13236,
+          "mean": 11.96172,
+          "total": 131.57892
+        },
+        "prep": {
+          "n": 11,
+          "median": 3.76352,
+          "p95": 3.84,
+          "p99": 3.84,
+          "min": 2.45464,
+          "max": 3.84,
+          "mean": 3.6278,
+          "total": 39.9058
+        },
+        "first8Prep": {
+          "n": 8,
+          "median": 3.76352,
+          "p95": 3.8218,
+          "p99": 3.8218,
+          "min": 3.48452,
+          "max": 3.8218,
+          "mean": 3.734285,
+          "total": 29.874280000000002
+        },
+        "last3Prep": [
+          3.73688,
+          3.84,
+          2.45464
+        ],
+        "last3Gpu": [
+          12.01412,
+          12.00052,
+          11.9282
+        ],
+        "publication": [
+          {
+            "completedGpuFrame": 735,
+            "generation": 36,
+            "sourceGeneration": 35,
+            "pupil": 55,
+            "vertices": 696410,
+            "elapsedMs": 157.7096,
+            "currentRetained": "true",
+            "completeDependencies": 1,
+            "finalFence": "true"
+          }
+        ],
+        "finalCullPreparationResidual": 2.24068
+      },
+      {
+        "generation": 37,
+        "firstGpuFrame": 737,
+        "lastGpuFrame": 747,
+        "publicationHostFrame": 748,
+        "gpu": {
+          "n": 11,
+          "median": 12.68756,
+          "p95": 13.39124,
+          "p99": 13.39124,
+          "min": 12.40604,
+          "max": 13.39124,
+          "mean": 12.713727272727272,
+          "total": 139.85100000000003
+        },
+        "prep": {
+          "n": 11,
+          "median": 3.77852,
+          "p95": 3.84408,
+          "p99": 3.84408,
+          "min": 3.33336,
+          "max": 3.84408,
+          "mean": 3.711621818181818,
+          "total": 40.82784
+        },
+        "first8Prep": {
+          "n": 8,
+          "median": 3.77852,
+          "p95": 3.83528,
+          "p99": 3.83528,
+          "min": 3.48716,
+          "max": 3.83528,
+          "mean": 3.73907,
+          "total": 29.912560000000003
+        },
+        "last3Prep": [
+          3.73784,
+          3.84408,
+          3.33336
+        ],
+        "last3Gpu": [
+          12.60816,
+          12.81592,
+          13.39124
+        ],
+        "publication": [
+          {
+            "completedGpuFrame": 747,
+            "generation": 37,
+            "sourceGeneration": 36,
+            "pupil": 56,
+            "vertices": 712106,
+            "elapsedMs": 166.9707,
+            "currentRetained": "true",
+            "completeDependencies": 1,
+            "finalFence": "true"
+          }
+        ],
+        "finalCullPreparationResidual": 2.3548400000000003
+      }
+    ],
+    "combinedBands": {
+      "n": 44,
+      "median": 12.1904,
+      "p95": 12.82156,
+      "p99": 13.56464,
+      "min": 11.69148,
+      "max": 13.56464,
+      "mean": 12.378012727272727,
+      "total": 544.6325600000001
+    },
+    "preparation": {
+      "demand": {
+        "n": 22,
+        "median": 1.46496,
+        "p95": 1.5274,
+        "p99": 1.52816,
+        "min": 0.96388,
+        "max": 1.52816,
+        "mean": 1.4441527272727273,
+        "total": 31.77136
+      },
+      "currentPhysicalPreparation": {
+        "n": 53,
+        "median": 0.0496,
+        "p95": 3.4836,
+        "p99": 3.64464,
+        "min": 0.04624,
+        "max": 3.64464,
+        "mean": 0.5131622641509433,
+        "total": 27.197599999999998
+      },
+      "incomingPhysicalPreparation": {
+        "n": 315,
+        "median": 3.63792,
+        "p95": 3.84936,
+        "p99": 3.90404,
+        "min": 0.54764,
+        "max": 3.94116,
+        "mean": 3.1039945396825397,
+        "total": 977.75828
+      }
+    },
+    "cpu": {
+      "update": {
+        "n": 970,
+        "median": 11.0481,
+        "p95": 13.7235,
+        "p99": 14.804,
+        "min": 2.4851,
+        "max": 20.347,
+        "mean": 9.344779072164949,
+        "total": 9064.435699999985
+      },
+      "fenceWait": {
+        "n": 970,
+        "median": 8.9744,
+        "p95": 11.1684,
+        "p99": 12.5962,
+        "min": 0.4535,
+        "max": 13.4557,
+        "mean": 7.15711443298969,
+        "total": 6942.400999999999
+      },
+      "inspection": {
+        "n": 970,
+        "median": 0.0496,
+        "p95": 0.0993,
+        "p99": 0.1274,
+        "min": 0.0296,
+        "max": 0.248,
+        "mean": 0.05405649484536083,
+        "total": 52.43479999999998
+      },
+      "hostCallback": {
+        "n": 970,
+        "median": 0.1639,
+        "p95": 0.326,
+        "p99": 0.4281,
+        "min": 0.0991,
+        "max": 2.6407,
+        "mean": 0.18484731958762887,
+        "total": 179.30190000000013
+      },
+      "validationUpload": {
+        "n": 970,
+        "median": 1.8883,
+        "p95": 2.064,
+        "p99": 3.9565,
+        "min": 1.7468,
+        "max": 14.2098,
+        "mean": 1.948760824742268,
+        "total": 1890.2980000000011
+      },
+      "record": {
+        "n": 970,
+        "median": 0.1659,
+        "p95": 0.2171,
+        "p99": 0.2875,
+        "min": 0.1039,
+        "max": 0.3779,
+        "mean": 0.16914144329896907,
+        "total": 164.06719999999984
+      },
+      "submit": {
+        "n": 970,
+        "median": 0.0447,
+        "p95": 0.063,
+        "p99": 0.0784,
+        "min": 0.0352,
+        "max": 2.1065,
+        "mean": 0.0485580412371134,
+        "total": 47.10130000000005
+      },
+      "present": {
+        "n": 970,
+        "median": 0.2081,
+        "p95": 0.2592,
+        "p99": 0.3043,
+        "min": 0.1291,
+        "max": 0.4888,
+        "mean": 0.2075879381443299,
+        "total": 201.3603
+      },
+      "total": {
+        "n": 970,
+        "median": 11.5121,
+        "p95": 14.2895,
+        "p99": 15.4246,
+        "min": 2.8384,
+        "max": 20.842,
+        "mean": 9.820739587628866,
+        "total": 9526.117399999997
+      }
+    },
+    "post30HostOver40ms": [],
+    "residency": [
+      "[native] NCSM1 regional physical totals: requests=670; hits=840; misses=670; loaded=670; readBytes=163158696; uploadedBytes=93392640; residentHighWater=670; allocatedBytes=119737728; maximumBytes=124895232; queueHighWater=634; readyCapacity=8; uploadBudget=8; demandDispatches=22; dependencyDelayMsMax=1067.117; recordReadDecodeVerifyMs=213.142; contributingRecords=670; anchoredDemandRequired=false"
+    ],
+    "heap": [
+      "[native] Prep heap: label=incoming production billboard physical buffer failed; bytes=45574784; allocationBytes=45574784; type=2; properties=7; heap=1; heapFlags=3; heapBytes=17163091968",
+      "[native] Prep heap: label=regional pupil staging allocation failed; bytes=45574784; allocationBytes=45574784; type=2; properties=7; heap=1; heapFlags=3; heapBytes=17163091968",
+      "[native] Prep heap: label=incoming production billboard physical buffer failed; bytes=44570240; allocationBytes=44570240; type=2; properties=7; heap=1; heapFlags=3; heapBytes=17163091968"
+    ],
+    "routeResult": [
+      "Earth route validation: mode=regional; frame=1; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=85.05556330084801; padSubmitted=True; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=80; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=85.05556330084801; padSubmitted=True; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=160; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=73.09652871917933; padSubmitted=True; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=180; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=699999.9999948917; padSubmitted=False; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=260; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=700007.1064246567; padSubmitted=False; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=280; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=85.05556330084801; padSubmitted=True; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=340; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=85.05556330084801; padSubmitted=True; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=400; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=699999.9999995101; padSubmitted=False; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=440; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=699999.757866215; padSubmitted=False; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=500; focus=Mars; body=8; earthEligible=False; bodies=10; altitude=35749074.74837033; padSubmitted=False; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=580; focus=Saturn; body=10; earthEligible=False; bodies=10; altitude=1521109661.3682218; padSubmitted=False; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=660; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=85.05556330084801; padSubmitted=True; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=740; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=85.05556330084801; padSubmitted=True; siteStable=True; physicalGeneration=4"
+    ]
+  },
+  "same-index-height": {
+    "label": "same-index-height",
+    "nativeHash": "ca0f2f68105d876c241cfcf3964196c23fdf7dd2e019dc37d33a878e12057d4e",
+    "managedHash": "82c72c8d968df824ffc498604e1a14dc8c738d73dd741c05e759cc668bbf03bb",
+    "errors": [],
+    "frames": 1000,
+    "publications": 37,
+    "stagedPublications": 4,
+    "validEarthGpu": {
+      "n": 737,
+      "median": 10.93228,
+      "p95": 11.62604,
+      "p99": 14.19436,
+      "min": 4.27912,
+      "max": 17.08696,
+      "mean": 9.808396960651288,
+      "total": 7228.788560000004
+    },
+    "bands": [
+      {
+        "generation": 18,
+        "firstGpuFrame": 345,
+        "lastGpuFrame": 355,
+        "publicationHostFrame": 356,
+        "gpu": {
+          "n": 11,
+          "median": 13.94512,
+          "p95": 14.86968,
+          "p99": 14.86968,
+          "min": 13.5538,
+          "max": 14.86968,
+          "mean": 13.972607272727272,
+          "total": 153.69868
+        },
+        "prep": {
+          "n": 11,
+          "median": 3.78084,
+          "p95": 3.9138,
+          "p99": 3.9138,
+          "min": 2.28308,
+          "max": 3.9138,
+          "mean": 3.634810909090909,
+          "total": 39.98292
+        },
+        "first8Prep": {
+          "n": 8,
+          "median": 3.78084,
+          "p95": 3.84612,
+          "p99": 3.84612,
+          "min": 3.49804,
+          "max": 3.84612,
+          "mean": 3.752305,
+          "total": 30.01844
+        },
+        "last3Prep": [
+          3.7676,
+          3.9138,
+          2.28308
+        ],
+        "last3Gpu": [
+          13.67812,
+          13.9484,
+          14.86968
+        ],
+        "publication": [
+          {
+            "completedGpuFrame": 355,
+            "generation": 18,
+            "sourceGeneration": 17,
+            "pupil": 34,
+            "vertices": 696410,
+            "elapsedMs": 179.465,
+            "currentRetained": "true",
+            "completeDependencies": 1,
+            "finalFence": "true"
+          }
+        ],
+        "finalCullPreparationResidual": 5.30336
+      },
+      {
+        "generation": 19,
+        "firstGpuFrame": 357,
+        "lastGpuFrame": 367,
+        "publicationHostFrame": 368,
+        "gpu": {
+          "n": 11,
+          "median": 11.4768,
+          "p95": 17.08696,
+          "p99": 17.08696,
+          "min": 11.3766,
+          "max": 17.08696,
+          "mean": 12.03588,
+          "total": 132.39468
+        },
+        "prep": {
+          "n": 11,
+          "median": 0.831,
+          "p95": 3.3606,
+          "p99": 3.3606,
+          "min": 0.79884,
+          "max": 3.3606,
+          "mean": 1.123189090909091,
+          "total": 12.35508
+        },
+        "first8Prep": {
+          "n": 8,
+          "median": 0.82628,
+          "p95": 0.86544,
+          "p99": 0.86544,
+          "min": 0.79884,
+          "max": 0.86544,
+          "mean": 0.829815,
+          "total": 6.63852
+        },
+        "last3Prep": [
+          0.8154,
+          1.54056,
+          3.3606
+        ],
+        "last3Gpu": [
+          11.62604,
+          12.09224,
+          17.08696
+        ],
+        "publication": [
+          {
+            "completedGpuFrame": 367,
+            "generation": 19,
+            "sourceGeneration": 18,
+            "pupil": 35,
+            "vertices": 712106,
+            "elapsedMs": 159.2596,
+            "currentRetained": "true",
+            "completeDependencies": 1,
+            "finalFence": "true"
+          }
+        ],
+        "finalCullPreparationResidual": 5.45852
+      },
+      {
+        "generation": 36,
+        "firstGpuFrame": 725,
+        "lastGpuFrame": 735,
+        "publicationHostFrame": 736,
+        "gpu": {
+          "n": 11,
+          "median": 10.80708,
+          "p95": 14.94776,
+          "p99": 14.94776,
+          "min": 10.69016,
+          "max": 14.94776,
+          "mean": 11.493432727272728,
+          "total": 126.42776
+        },
+        "prep": {
+          "n": 11,
+          "median": 0.833,
+          "p95": 3.8622,
+          "p99": 3.8622,
+          "min": 0.7994,
+          "max": 3.8622,
+          "mean": 1.2818945454545454,
+          "total": 14.100840000000002
+        },
+        "first8Prep": {
+          "n": 8,
+          "median": 0.82568,
+          "p95": 0.86452,
+          "p99": 0.86452,
+          "min": 0.7994,
+          "max": 0.86452,
+          "mean": 0.828785,
+          "total": 6.63028
+        },
+        "last3Prep": [
+          1.1584,
+          3.8622,
+          2.44996
+        ],
+        "last3Gpu": [
+          11.06724,
+          13.93432,
+          14.94776
+        ],
+        "publication": [
+          {
+            "completedGpuFrame": 735,
+            "generation": 36,
+            "sourceGeneration": 35,
+            "pupil": 59,
+            "vertices": 696410,
+            "elapsedMs": 152.8419,
+            "currentRetained": "true",
+            "completeDependencies": 1,
+            "finalFence": "true"
+          }
+        ],
+        "finalCullPreparationResidual": 5.20076
+      },
+      {
+        "generation": 37,
+        "firstGpuFrame": 737,
+        "lastGpuFrame": 747,
+        "publicationHostFrame": 748,
+        "gpu": {
+          "n": 11,
+          "median": 11.45868,
+          "p95": 16.81328,
+          "p99": 16.81328,
+          "min": 11.36688,
+          "max": 16.81328,
+          "mean": 12.00532,
+          "total": 132.05852
+        },
+        "prep": {
+          "n": 11,
+          "median": 0.83312,
+          "p95": 3.34944,
+          "p99": 3.34944,
+          "min": 0.79392,
+          "max": 3.34944,
+          "mean": 1.1186581818181818,
+          "total": 12.30524
+        },
+        "first8Prep": {
+          "n": 8,
+          "median": 0.82856,
+          "p95": 0.84624,
+          "p99": 0.84624,
+          "min": 0.79392,
+          "max": 0.84624,
+          "mean": 0.8251999999999999,
+          "total": 6.6016
+        },
+        "last3Prep": [
+          0.81572,
+          1.53848,
+          3.34944
+        ],
+        "last3Gpu": [
+          11.36688,
+          12.16944,
+          16.81328
+        ],
+        "publication": [
+          {
+            "completedGpuFrame": 747,
+            "generation": 37,
+            "sourceGeneration": 36,
+            "pupil": 60,
+            "vertices": 712106,
+            "elapsedMs": 157.3834,
+            "currentRetained": "true",
+            "completeDependencies": 1,
+            "finalFence": "true"
+          }
+        ],
+        "finalCullPreparationResidual": 5.457040000000001
+      }
+    ],
+    "combinedBands": {
+      "n": 44,
+      "median": 11.506,
+      "p95": 14.94776,
+      "p99": 17.08696,
+      "min": 10.69016,
+      "max": 17.08696,
+      "mean": 12.37681,
+      "total": 544.5796399999999
+    },
+    "preparation": {
+      "demand": {
+        "n": 22,
+        "median": 1.45924,
+        "p95": 1.51908,
+        "p99": 1.52212,
+        "min": 0.96532,
+        "max": 1.52212,
+        "mean": 1.4494254545454546,
+        "total": 31.887359999999994
+      },
+      "currentPhysicalPreparation": {
+        "n": 55,
+        "median": 0.20752,
+        "p95": 3.5012,
+        "p99": 3.6496,
+        "min": 0.19128,
+        "max": 3.6496,
+        "mean": 0.6287934545454545,
+        "total": 34.58364
+      },
+      "incomingPhysicalPreparation": {
+        "n": 315,
+        "median": 0.84356,
+        "p95": 3.82644,
+        "p99": 3.8716,
+        "min": 0.30308,
+        "max": 3.9138,
+        "mean": 1.4721418412698413,
+        "total": 463.72468000000003
+      }
+    },
+    "cpu": {
+      "update": {
+        "n": 970,
+        "median": 11.8887,
+        "p95": 13.79,
+        "p99": 16.2994,
+        "min": 2.5396,
+        "max": 24.4544,
+        "mean": 10.660829793814433,
+        "total": 10341.004900000004
+      },
+      "fenceWait": {
+        "n": 970,
+        "median": 9.5084,
+        "p95": 11.4163,
+        "p99": 13.8553,
+        "min": 0.5833,
+        "max": 16.9797,
+        "mean": 8.368415360824743,
+        "total": 8117.362899999999
+      },
+      "inspection": {
+        "n": 970,
+        "median": 0.0499,
+        "p95": 0.1069,
+        "p99": 0.144,
+        "min": 0.0325,
+        "max": 0.2185,
+        "mean": 0.05505216494845361,
+        "total": 53.40060000000012
+      },
+      "hostCallback": {
+        "n": 970,
+        "median": 0.17,
+        "p95": 0.3241,
+        "p99": 0.4481,
+        "min": 0.1081,
+        "max": 2.628,
+        "mean": 0.19982731958762887,
+        "total": 193.83249999999984
+      },
+      "validationUpload": {
+        "n": 970,
+        "median": 1.9546,
+        "p95": 2.2335,
+        "p99": 5.6029,
+        "min": 1.771,
+        "max": 15.6216,
+        "mean": 2.037534948453608,
+        "total": 1976.408899999997
+      },
+      "record": {
+        "n": 970,
+        "median": 0.1728,
+        "p95": 0.235,
+        "p99": 0.2978,
+        "min": 0.1186,
+        "max": 0.3423,
+        "mean": 0.1757738144329897,
+        "total": 170.50060000000013
+      },
+      "submit": {
+        "n": 970,
+        "median": 0.0405,
+        "p95": 0.0532,
+        "p99": 0.0672,
+        "min": 0.0352,
+        "max": 1.8499,
+        "mean": 0.044607938144329895,
+        "total": 43.2697
+      },
+      "present": {
+        "n": 970,
+        "median": 0.2057,
+        "p95": 0.2523,
+        "p99": 0.3079,
+        "min": 0.1308,
+        "max": 0.5354,
+        "mean": 0.20756711340206185,
+        "total": 201.34010000000015
+      },
+      "total": {
+        "n": 970,
+        "median": 12.3388,
+        "p95": 14.3278,
+        "p99": 17.4469,
+        "min": 3.0107,
+        "max": 25.0002,
+        "mean": 11.140650206185567,
+        "total": 10806.430699999997
+      }
+    },
+    "post30HostOver40ms": [],
+    "residency": [
+      "[native] NCSM1 regional physical totals: requests=670; hits=840; misses=670; loaded=670; readBytes=163158696; uploadedBytes=93392640; residentHighWater=670; allocatedBytes=119737728; maximumBytes=124895232; queueHighWater=634; readyCapacity=8; uploadBudget=8; demandDispatches=22; dependencyDelayMsMax=1051.429; recordReadDecodeVerifyMs=214.123; contributingRecords=670; anchoredDemandRequired=false"
+    ],
+    "heap": [
+      "[native] Prep heap: label=incoming production billboard physical buffer failed; bytes=45574784; allocationBytes=45574784; type=1; properties=6; heap=0; heapFlags=0; heapBytes=16703094784",
+      "[native] Prep heap: label=regional pupil staging allocation failed; bytes=45574784; allocationBytes=45574784; type=1; properties=6; heap=0; heapFlags=0; heapBytes=16703094784",
+      "[native] Prep heap: label=incoming production billboard physical buffer failed; bytes=44570240; allocationBytes=44570240; type=1; properties=6; heap=0; heapFlags=0; heapBytes=16703094784"
+    ],
+    "routeResult": [
+      "Earth route validation: mode=regional; frame=1; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=85.05556330084801; padSubmitted=True; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=80; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=85.05556330084801; padSubmitted=True; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=160; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=73.09652871917933; padSubmitted=True; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=180; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=700000.0000006622; padSubmitted=False; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=260; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=700006.3101928653; padSubmitted=False; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=280; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=85.05556330084801; padSubmitted=True; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=340; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=85.05556330084801; padSubmitted=True; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=400; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=700000.0000016727; padSubmitted=False; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=440; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=699999.7261013556; padSubmitted=False; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=500; focus=Mars; body=8; earthEligible=False; bodies=10; altitude=35749074.748367436; padSubmitted=False; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=580; focus=Saturn; body=10; earthEligible=False; bodies=10; altitude=1521109661.3682375; padSubmitted=False; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=660; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=85.05556330084801; padSubmitted=True; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=740; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=85.05556330084801; padSubmitted=True; siteStable=True; physicalGeneration=4"
+    ]
+  },
+  "same-index-normal": {
+    "label": "same-index-normal",
+    "nativeHash": "ca0f2f68105d876c241cfcf3964196c23fdf7dd2e019dc37d33a878e12057d4e",
+    "managedHash": "82c72c8d968df824ffc498604e1a14dc8c738d73dd741c05e759cc668bbf03bb",
+    "errors": [],
+    "frames": 1000,
+    "publications": 37,
+    "stagedPublications": 4,
+    "validEarthGpu": {
+      "n": 737,
+      "median": 10.79188,
+      "p95": 13.38496,
+      "p99": 13.94288,
+      "min": 4.27612,
+      "max": 16.94944,
+      "mean": 10.221285753052918,
+      "total": 7533.087599999995
+    },
+    "bands": [
+      {
+        "generation": 18,
+        "firstGpuFrame": 345,
+        "lastGpuFrame": 355,
+        "publicationHostFrame": 356,
+        "gpu": {
+          "n": 11,
+          "median": 13.69048,
+          "p95": 14.9316,
+          "p99": 14.9316,
+          "min": 13.54296,
+          "max": 14.9316,
+          "mean": 13.810945454545454,
+          "total": 151.9204
+        },
+        "prep": {
+          "n": 11,
+          "median": 3.77872,
+          "p95": 3.86412,
+          "p99": 3.86412,
+          "min": 2.45424,
+          "max": 3.86412,
+          "mean": 3.646487272727273,
+          "total": 40.11136
+        },
+        "first8Prep": {
+          "n": 8,
+          "median": 3.77872,
+          "p95": 3.84672,
+          "p99": 3.84672,
+          "min": 3.4922,
+          "max": 3.84672,
+          "mean": 3.7532449999999997,
+          "total": 30.02596
+        },
+        "last3Prep": [
+          3.76704,
+          3.86412,
+          2.45424
+        ],
+        "last3Gpu": [
+          13.78708,
+          13.62728,
+          14.9316
+        ],
+        "publication": [
+          {
+            "completedGpuFrame": 355,
+            "generation": 18,
+            "sourceGeneration": 17,
+            "pupil": 35,
+            "vertices": 696410,
+            "elapsedMs": 180.91,
+            "currentRetained": "true",
+            "completeDependencies": 1,
+            "finalFence": "true"
+          }
+        ],
+        "finalCullPreparationResidual": 5.07884
+      },
+      {
+        "generation": 19,
+        "firstGpuFrame": 357,
+        "lastGpuFrame": 367,
+        "publicationHostFrame": 368,
+        "gpu": {
+          "n": 11,
+          "median": 13.77368,
+          "p95": 16.53196,
+          "p99": 16.53196,
+          "min": 13.38496,
+          "max": 16.53196,
+          "mean": 13.965952727272727,
+          "total": 153.62548
+        },
+        "prep": {
+          "n": 11,
+          "median": 3.08136,
+          "p95": 3.3862,
+          "p99": 3.3862,
+          "min": 2.8102,
+          "max": 3.3862,
+          "mean": 3.096370909090909,
+          "total": 34.06008
+        },
+        "first8Prep": {
+          "n": 8,
+          "median": 3.06336,
+          "p95": 3.15328,
+          "p99": 3.15328,
+          "min": 2.8102,
+          "max": 3.15328,
+          "mean": 3.02765,
+          "total": 24.2212
+        },
+        "last3Prep": [
+          3.08452,
+          3.3862,
+          3.36816
+        ],
+        "last3Gpu": [
+          13.83336,
+          13.91484,
+          16.53196
+        ],
+        "publication": [
+          {
+            "completedGpuFrame": 367,
+            "generation": 19,
+            "sourceGeneration": 18,
+            "pupil": 36,
+            "vertices": 712106,
+            "elapsedMs": 182.1306,
+            "currentRetained": "true",
+            "completeDependencies": 1,
+            "finalFence": "true"
+          }
+        ],
+        "finalCullPreparationResidual": 5.30044
+      },
+      {
+        "generation": 36,
+        "firstGpuFrame": 725,
+        "lastGpuFrame": 735,
+        "publicationHostFrame": 736,
+        "gpu": {
+          "n": 11,
+          "median": 12.93292,
+          "p95": 15.20924,
+          "p99": 15.20924,
+          "min": 12.55732,
+          "max": 15.20924,
+          "mean": 13.182705454545454,
+          "total": 145.00976
+        },
+        "prep": {
+          "n": 11,
+          "median": 3.0592,
+          "p95": 3.91516,
+          "p99": 3.91516,
+          "min": 2.4602,
+          "max": 3.91516,
+          "mean": 3.069421818181818,
+          "total": 33.763639999999995
+        },
+        "first8Prep": {
+          "n": 8,
+          "median": 3.0382,
+          "p95": 3.16708,
+          "p99": 3.16708,
+          "min": 2.79844,
+          "max": 3.16708,
+          "mean": 3.020405,
+          "total": 24.16324
+        },
+        "last3Prep": [
+          3.22504,
+          3.91516,
+          2.4602
+        ],
+        "last3Gpu": [
+          13.18264,
+          13.87036,
+          15.20924
+        ],
+        "publication": [
+          {
+            "completedGpuFrame": 735,
+            "generation": 36,
+            "sourceGeneration": 35,
+            "pupil": 61,
+            "vertices": 696410,
+            "elapsedMs": 171.6231,
+            "currentRetained": "true",
+            "completeDependencies": 1,
+            "finalFence": "true"
+          }
+        ],
+        "finalCullPreparationResidual": 5.1736
+      },
+      {
+        "generation": 37,
+        "firstGpuFrame": 737,
+        "lastGpuFrame": 747,
+        "publicationHostFrame": 748,
+        "gpu": {
+          "n": 11,
+          "median": 13.694,
+          "p95": 16.94944,
+          "p99": 16.94944,
+          "min": 13.31528,
+          "max": 16.94944,
+          "mean": 14.01372,
+          "total": 154.15092
+        },
+        "prep": {
+          "n": 11,
+          "median": 3.06956,
+          "p95": 3.37188,
+          "p99": 3.37188,
+          "min": 2.7932,
+          "max": 3.37188,
+          "mean": 3.0893454545454544,
+          "total": 33.9828
+        },
+        "first8Prep": {
+          "n": 8,
+          "median": 3.05312,
+          "p95": 3.1558,
+          "p99": 3.1558,
+          "min": 2.7932,
+          "max": 3.1558,
+          "mean": 3.0228099999999998,
+          "total": 24.182479999999998
+        },
+        "last3Prep": [
+          3.07704,
+          3.37188,
+          3.3514
+        ],
+        "last3Gpu": [
+          13.66692,
+          14.09264,
+          16.94944
+        ],
+        "publication": [
+          {
+            "completedGpuFrame": 747,
+            "generation": 37,
+            "sourceGeneration": 36,
+            "pupil": 62,
+            "vertices": 712106,
+            "elapsedMs": 180.4412,
+            "currentRetained": "true",
+            "completeDependencies": 1,
+            "finalFence": "true"
+          }
+        ],
+        "finalCullPreparationResidual": 5.30608
+      }
+    ],
+    "combinedBands": {
+      "n": 44,
+      "median": 13.6896,
+      "p95": 15.20924,
+      "p99": 16.94944,
+      "min": 12.55732,
+      "max": 16.94944,
+      "mean": 13.74333090909091,
+      "total": 604.70656
+    },
+    "preparation": {
+      "demand": {
+        "n": 22,
+        "median": 1.4646,
+        "p95": 1.5244,
+        "p99": 1.52556,
+        "min": 0.96452,
+        "max": 1.52556,
+        "mean": 1.4537527272727273,
+        "total": 31.98256
+      },
+      "currentPhysicalPreparation": {
+        "n": 55,
+        "median": 0.20836,
+        "p95": 3.50372,
+        "p99": 3.64352,
+        "min": 0.1998,
+        "max": 3.64352,
+        "mean": 0.6319796363636364,
+        "total": 34.758880000000005
+      },
+      "incomingPhysicalPreparation": {
+        "n": 315,
+        "median": 3.06336,
+        "p95": 3.84384,
+        "p99": 3.92348,
+        "min": 0.50904,
+        "max": 4.13728,
+        "mean": 2.7299879365079365,
+        "total": 859.9462000000005
+      }
+    },
+    "cpu": {
+      "update": {
+        "n": 970,
+        "median": 12.7421,
+        "p95": 14.9996,
+        "p99": 16.3865,
+        "min": 2.5894,
+        "max": 27.7136,
+        "mean": 10.966576907216496,
+        "total": 10637.579600000005
+      },
+      "fenceWait": {
+        "n": 970,
+        "median": 10.5608,
+        "p95": 12.5085,
+        "p99": 13.8203,
+        "min": 0.6139,
+        "max": 16.7902,
+        "mean": 8.672222577319587,
+        "total": 8412.055900000003
+      },
+      "inspection": {
+        "n": 970,
+        "median": 0.051,
+        "p95": 0.0999,
+        "p99": 0.1565,
+        "min": 0.033,
+        "max": 0.2683,
+        "mean": 0.05584329896907216,
+        "total": 54.168
+      },
+      "hostCallback": {
+        "n": 970,
+        "median": 0.1719,
+        "p95": 0.3467,
+        "p99": 0.4224,
+        "min": 0.1061,
+        "max": 2.6257,
+        "mean": 0.19859948453608248,
+        "total": 192.6414999999998
+      },
+      "validationUpload": {
+        "n": 970,
+        "median": 1.9636,
+        "p95": 2.2026,
+        "p99": 5.4341,
+        "min": 1.7684,
+        "max": 19.1712,
+        "mean": 2.0399115463917528,
+        "total": 1978.7142000000003
+      },
+      "record": {
+        "n": 970,
+        "median": 0.1796,
+        "p95": 0.2896,
+        "p99": 0.3392,
+        "min": 0.1204,
+        "max": 0.7459,
+        "mean": 0.18928659793814434,
+        "total": 183.608
+      },
+      "submit": {
+        "n": 970,
+        "median": 0.0423,
+        "p95": 0.0631,
+        "p99": 0.0838,
+        "min": 0.0355,
+        "max": 1.9165,
+        "mean": 0.04718628865979382,
+        "total": 45.770700000000076
+      },
+      "present": {
+        "n": 970,
+        "median": 0.2113,
+        "p95": 0.2807,
+        "p99": 0.327,
+        "min": 0.1311,
+        "max": 0.5538,
+        "mean": 0.21682092783505155,
+        "total": 210.31630000000033
+      },
+      "total": {
+        "n": 970,
+        "median": 13.2127,
+        "p95": 15.6541,
+        "p99": 17.386,
+        "min": 2.9817,
+        "max": 28.2969,
+        "mean": 11.475117216494846,
+        "total": 11130.863699999996
+      }
+    },
+    "post30HostOver40ms": [],
+    "residency": [
+      "[native] NCSM1 regional physical totals: requests=670; hits=840; misses=670; loaded=670; readBytes=163158696; uploadedBytes=93392640; residentHighWater=670; allocatedBytes=119737728; maximumBytes=124895232; queueHighWater=634; readyCapacity=8; uploadBudget=8; demandDispatches=22; dependencyDelayMsMax=1183.906; recordReadDecodeVerifyMs=213.833; contributingRecords=670; anchoredDemandRequired=false"
+    ],
+    "heap": [
+      "[native] Prep heap: label=incoming production billboard physical buffer failed; bytes=45574784; allocationBytes=45574784; type=1; properties=6; heap=0; heapFlags=0; heapBytes=16703094784",
+      "[native] Prep heap: label=regional pupil staging allocation failed; bytes=45574784; allocationBytes=45574784; type=1; properties=6; heap=0; heapFlags=0; heapBytes=16703094784",
+      "[native] Prep heap: label=incoming production billboard physical buffer failed; bytes=44570240; allocationBytes=44570240; type=1; properties=6; heap=0; heapFlags=0; heapBytes=16703094784"
+    ],
+    "routeResult": [
+      "Earth route validation: mode=regional; frame=1; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=85.05556330084801; padSubmitted=True; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=80; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=85.05556330084801; padSubmitted=True; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=160; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=73.09652871917933; padSubmitted=True; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=180; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=700000.0000034664; padSubmitted=False; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=260; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=700009.1605380429; padSubmitted=False; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=280; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=85.05556330084801; padSubmitted=True; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=340; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=85.05556330084801; padSubmitted=True; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=400; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=700000.0000038845; padSubmitted=False; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=440; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=699999.7232469525; padSubmitted=False; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=500; focus=Mars; body=8; earthEligible=False; bodies=10; altitude=35749074.74837372; padSubmitted=False; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=580; focus=Saturn; body=10; earthEligible=False; bodies=10; altitude=1521109661.3682299; padSubmitted=False; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=660; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=85.05556330084801; padSubmitted=True; siteStable=True; physicalGeneration=4",
+      "Earth route validation: mode=regional; frame=740; focus=Earth; body=6; earthEligible=True; bodies=10; altitude=85.05556330084801; padSubmitted=True; siteStable=True; physicalGeneration=4"
+    ]
+  },
+  "gpuOracle": {
+    "publications": 37,
+    "proposedCopies": 13726148,
+    "mismatches": 0,
+    "note": "Mismatch total is repeated per slice, zero remains exact."
+  },
+  "rejectedInitialProbe": {
+    "sha256": "42307bb32f7353ff42b58994446a31706ffd503fe93f34d1457feab4ae007223",
+    "bytes": 1376354,
+    "errors": [
+      "[native] Vulkan validation [error][VUID-vkCmdDispatch-None-08114]: vkCmdDispatch(): the descriptor [VkDescriptorSet 0x1670000000167, Set 0, Binding 44, Index 0, variable \"publishedLattice\"] is being used in dispatch but has never been updated via vkUpdateDescriptorSets() or a similar call.",
+      "[native] Vulkan validation [error][VUID-vkCmdDispatch-None-08114]: vkCmdDispatch(): the descriptor [VkDescriptorSet 0x1670000000167, Set 0, Binding 38, Index 0, variable \"publishedPhysical\"] is being used in dispatch but has never been updated via vkUpdateDescriptorSets() or a similar call.",
+      "[native] Vulkan validation [error][VUID-vkCmdDispatch-None-08114]: (Warning - This VUID has now been reported 10 times, which is the duplicate_message_limit value, this will be the last time reporting it)."
+    ],
+    "classification": "Private prototype bootstrap descriptor initialization failure; fixed and rerun strictly. Not a production failure."
+  }
+}

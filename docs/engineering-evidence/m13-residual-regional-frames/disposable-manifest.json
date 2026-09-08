@@ -1,0 +1,509 @@
+{
+  "root": "E:\\NovaCore\\build\\m13-residual-regional-frames",
+  "files": [
+    {
+      "relative": "capability-test.exe",
+      "bytes": 207360,
+      "sha256": "9195225c966ea6d9973afaa67d4b328bbfff00adb4c6f9ee02990252fea82f41",
+      "links": 1
+    },
+    {
+      "relative": "capability-test.obj",
+      "bytes": 801007,
+      "sha256": "fdc9f803c1adc236c0af706890ec7b5a4cf4a430d6c8b9fff071f96576448952",
+      "links": 1
+    },
+    {
+      "relative": "host/earth-data/earth_elevation_8192x4096.r16",
+      "bytes": 67108864,
+      "sha256": "4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317",
+      "links": 2
+    },
+    {
+      "relative": "host/NovaCore.Core.deps.json",
+      "bytes": 433,
+      "sha256": "4e4f8878a47e2b305b315915d7d843dfd682c1ab005ad51148f681b1a2f01f47",
+      "links": 1
+    },
+    {
+      "relative": "host/NovaCore.Core.dll",
+      "bytes": 86528,
+      "sha256": "e807002974462b950c3c2967e76118a675a2f7e36e5f8a5ce0293786925f43e7",
+      "links": 1
+    },
+    {
+      "relative": "host/NovaCore.Core.pdb",
+      "bytes": 31136,
+      "sha256": "f761b311d4d814e99b23d42010e67d1cf7a49a75e4250539c4948152f35f1340",
+      "links": 1
+    },
+    {
+      "relative": "host/NovaCore.EphemerisFormat.deps.json",
+      "bytes": 466,
+      "sha256": "ebfdb677b16c0681e96ce4e85fdd0a20e73b2bbea04e0e1bb5bf40ff0b4a4d8a",
+      "links": 1
+    },
+    {
+      "relative": "host/NovaCore.EphemerisFormat.dll",
+      "bytes": 77312,
+      "sha256": "3de94da2d3ade85961eec8c539237c6d661ab4cce265082dd5b929d16eddc806",
+      "links": 1
+    },
+    {
+      "relative": "host/NovaCore.EphemerisFormat.pdb",
+      "bytes": 27748,
+      "sha256": "598831dc58c1e46af0c95b5ee4ef6202ec6f2b0fc15a740c896f8b159180b0fd",
+      "links": 1
+    },
+    {
+      "relative": "host/NovaCore.Graphics.deps.json",
+      "bytes": 1201,
+      "sha256": "c37e1103757a04e513f2236d5bcc7c1c6d1f8bd507f38ae76c9a483e6ff7e636",
+      "links": 1
+    },
+    {
+      "relative": "host/NovaCore.Graphics.dll",
+      "bytes": 634880,
+      "sha256": "e33cdee2c569234e6a883cb2c4b83f9a9304254aae14de99fe074e83b4393f0f",
+      "links": 1
+    },
+    {
+      "relative": "host/NovaCore.Graphics.pdb",
+      "bytes": 143352,
+      "sha256": "7304aae7d2070794cf53a45e4ed050e0cb6736bcf98eff1291a302e245caf032",
+      "links": 1
+    },
+    {
+      "relative": "host/NovaCore.Interop.deps.json",
+      "bytes": 442,
+      "sha256": "ac64497a11539d4c4db7043fe9c7026cfcc23dc81ea51fcd449023ac68f12120",
+      "links": 1
+    },
+    {
+      "relative": "host/NovaCore.Interop.dll",
+      "bytes": 23040,
+      "sha256": "201cfe9d34c0449177cee6fad849caa94fd2044d3ab16a83525bb75fbf8a7582",
+      "links": 1
+    },
+    {
+      "relative": "host/NovaCore.Interop.pdb",
+      "bytes": 14060,
+      "sha256": "bf2b8d5e368d0ee5bc52825b64805aaed2c06c945309577d1a7880aea85c5fc7",
+      "links": 1
+    },
+    {
+      "relative": "host/NovaCore.Native.dll",
+      "bytes": 347136,
+      "sha256": "3a02bf5812dd4be027af7f5764fe315effaf41952687c09014fc0b367578172b",
+      "links": 1
+    },
+    {
+      "relative": "host/NovaCore.Platform.deps.json",
+      "bytes": 445,
+      "sha256": "21fc3b5ee699165c251450b5ee2f7e292ff76eed139d7cc0469ae4c3939013a7",
+      "links": 1
+    },
+    {
+      "relative": "host/NovaCore.Platform.dll",
+      "bytes": 6656,
+      "sha256": "c08eab3a74e49dde4a4cea8782db16ced8ab724337d69dd28af52ef240f2f6b9",
+      "links": 1
+    },
+    {
+      "relative": "host/NovaCore.Platform.pdb",
+      "bytes": 12048,
+      "sha256": "578e5d894781f7afa292c9a14127015623fde82d4070e8dc7fc53e7db6743929",
+      "links": 1
+    },
+    {
+      "relative": "host/NovaCore.Simulation.deps.json",
+      "bytes": 1239,
+      "sha256": "a2b5f1389410593af29abe02cff9653a5baab91233bc73d0840edc9647288cd9",
+      "links": 1
+    },
+    {
+      "relative": "host/NovaCore.Simulation.dll",
+      "bytes": 3787776,
+      "sha256": "3fd55a2cbee6e50fe2080e2299c7db606e55302278546af259fdbad7fa35531d",
+      "links": 1
+    },
+    {
+      "relative": "host/NovaCore.Simulation.pdb",
+      "bytes": 81876,
+      "sha256": "358f872105f5d8f48a858e2d7571b7a27a9bf6e70ae56ec8b06c7a7d21ad5aa1",
+      "links": 1
+    },
+    {
+      "relative": "host/NovaCore.Triangle.deps.json",
+      "bytes": 2903,
+      "sha256": "1fe99f6524f2ecb5fc38ff699cc14da53f55b905631d575bcfee772ed51c4eb6",
+      "links": 1
+    },
+    {
+      "relative": "host/NovaCore.Triangle.dll",
+      "bytes": 240640,
+      "sha256": "a83c1d5114de80acec12e160e5867d788108baff06d247dfa4410650700caaec",
+      "links": 1
+    },
+    {
+      "relative": "host/NovaCore.Triangle.exe",
+      "bytes": 162304,
+      "sha256": "3cfc9a650f99da508a7b81cca9467fdc10640d5fde50da0f50eb29f165237ac2",
+      "links": 1
+    },
+    {
+      "relative": "host/NovaCore.Triangle.pdb",
+      "bytes": 60812,
+      "sha256": "e47e531dcf0067db9e501f41b4e389664a4e4de6c8d734cca8c861e37f79d007",
+      "links": 1
+    },
+    {
+      "relative": "host/NovaCore.Triangle.runtimeconfig.json",
+      "bytes": 342,
+      "sha256": "c230a317a54dd960bcbeb5f347f52e18dc665a26f7efda2159fced9a5ac7e097",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/body_forward.frag.spv",
+      "bytes": 440,
+      "sha256": "fa706803f042fb5a9f7a3c9965a3e2de3e8838e075d67876b78df9bdc132ce0e",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/distant_planet.frag.spv",
+      "bytes": 35760,
+      "sha256": "04137afb1c632dfb7074480377d9f93136ab3127d382baeef07d52b09409eba8",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/distant_planet.vert.spv",
+      "bytes": 8428,
+      "sha256": "cf28fe0a7c0797bd7d72076437ba78c4e0d97bb1a0ae3c065baf3bfc5db62cb8",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/fullscreen.vert.spv",
+      "bytes": 1308,
+      "sha256": "a18f9b5e0b4a4e7a077b1017bad7b1c5c40313b3f70113f1e0771cd202433130",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/orbit.frag.spv",
+      "bytes": 456,
+      "sha256": "b06f50708727144e8d0f08d35cd2e64d8b1cef501ed20b10fea4a34196026267",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/orbit.vert.spv",
+      "bytes": 1756,
+      "sha256": "b4b9dd635f32156654e30d843c29eb864feb09751d7b3027cf99a5d741b6a45b",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/orbit_previous.frag.spv",
+      "bytes": 456,
+      "sha256": "c4935060e07e01742d59d8a5834241e2963dcc80ed8e35baeac5b08288761e61",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/planetary.frag.spv",
+      "bytes": 18548,
+      "sha256": "417f17b236834f0ac94fa3bbfdae52ad164599ff14051e9b396809beea75cda1",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/planetary.vert.spv",
+      "bytes": 135600,
+      "sha256": "ddb84030e2621df8f05489e339989d66de60d73435f490b4ec0af4251d7a0338",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/planetary_natural_terrain_global_prepare.comp.spv",
+      "bytes": 49540,
+      "sha256": "5a5450321873f5ff8bed7dd9e4f06c342625724d629da2232521fbace01c7a85",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/planetary_production.frag.spv",
+      "bytes": 152228,
+      "sha256": "8c59838abb3d7ee6418695ea40f044ca1f04f5c3c9216296d5cc19bba6110d6b",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/planetary_production_terrain.comp.spv",
+      "bytes": 368,
+      "sha256": "405e6e6daab609ca383297ba8be706bfa96859c65dc2d9f42476a32cddd85df7",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/planetary_ring.vert.spv",
+      "bytes": 7728,
+      "sha256": "cccede52d3c64db872360912db9eb29e60cb892c648ed53ce1c178f8623d0cfb",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/planetary_ring_far.frag.spv",
+      "bytes": 2692,
+      "sha256": "343db81bccc310b21c600ab6ee6722438151694683bb0cf7ba01d54a9b68ade6",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/planetary_ring_near.frag.spv",
+      "bytes": 2692,
+      "sha256": "48b8ef4e56b6be9380cfbaca7daa790035e704541b6b8a550b3cc7bed540244c",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/planetary_select.comp.spv",
+      "bytes": 91064,
+      "sha256": "8189bbd2a85fe23033f12c558d8b221b62b8969c17ba9ffcf07b7c8501fe8adf",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/planetary_terrain_generate.comp.spv",
+      "bytes": 10292,
+      "sha256": "1fc8c24ea6b4a55e83997fadf80b4901f692b8bc2de84a5cf6ac043e4da531d1",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/production_nested_scale_mesh_cull.comp.spv",
+      "bytes": 30484,
+      "sha256": "497d88225a914b9601ad6c0f44733e834794a952854e71b26be426ead8780d94",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/production_nested_scale_mesh_incoming_cull.comp.spv",
+      "bytes": 30484,
+      "sha256": "23bd1b04d0291e6271138041433eee07e57503482e8e5cf845e4b72c75967336",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/production_spherical_billboard.tesc.spv",
+      "bytes": 12632,
+      "sha256": "0163498278f9523fd442434f05f056be28252d16c2f2ba44b8d91642b33e4439",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/production_spherical_billboard.tese.spv",
+      "bytes": 22836,
+      "sha256": "d0bc5d7a450f336d45c26c499b0b3a79ecc0258e1ffb9dee0b5bcfb8aa21d31e",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/production_spherical_billboard.vert.spv",
+      "bytes": 8028,
+      "sha256": "1baa9043db7a8b71dcf5931f4cb415fa84ce6341b07d850ea9beb8baa02d2b6a",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/production_spherical_billboard_compact.comp.spv",
+      "bytes": 3460,
+      "sha256": "2aabd7633b333f86df8a6eae6b76ed2d13a7129443dcd9201531de047b12f4d9",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/production_spherical_billboard_cull.comp.spv",
+      "bytes": 14624,
+      "sha256": "2827b58dcd7029695e0b33272018e54d19d6113b8d7ab9ac591c343b3d994398",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/production_spherical_billboard_incoming_compact.comp.spv",
+      "bytes": 2940,
+      "sha256": "6b0238138222112ddf1f945f5e6a31867d5dd11f57169481ece9c05337f43e4e",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/production_spherical_billboard_incoming_cull.comp.spv",
+      "bytes": 14624,
+      "sha256": "8c677f08ae051cf525108a436066983d41961ce70757ca29a86df165d2663cfb",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/production_spherical_billboard_incoming_prepare.comp.spv",
+      "bytes": 91824,
+      "sha256": "3b330d24dc873c2676dbb877208efae4d91347b66ef029706b8a3f0d3116f91c",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/production_spherical_billboard_incoming_reset.comp.spv",
+      "bytes": 1736,
+      "sha256": "5d750f929dcab4f9f3138b4cdfa869ab26e3051d4b28485c02ee483f89e14d6e",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/production_spherical_billboard_prepare.comp.spv",
+      "bytes": 94876,
+      "sha256": "d178e6ba6b73045dc214e75000489c09a7f0982f9cff7663489ba0818d30ae8b",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/production_spherical_billboard_reset.comp.spv",
+      "bytes": 1736,
+      "sha256": "cf583d16e14c8a8ec63b393d8752541648d932cf0165231cc48f6076e28fc027",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/regional_physical_demand.comp.spv",
+      "bytes": 22344,
+      "sha256": "7d80dbd70be13cc55f00ef836cd8da9d3783064411320697777f6b5c848d8f67",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/regional_physical_incoming_demand.comp.spv",
+      "bytes": 22360,
+      "sha256": "a56b62b5432206b8ab5eded734b13a0ddf9f0c726a4b444f8d24139bdcc17a60",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/sas_target.frag.spv",
+      "bytes": 440,
+      "sha256": "4e99fda06f571590f950e91d93025cafa83e4a454e68e3583ce59d869f0a3ef2",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/solar_label.frag.spv",
+      "bytes": 47588,
+      "sha256": "673c5dc0cc1e199d497c7c927f282a02da444fa258860b6cb94b6fd1ed12c90a",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/solar_label.vert.spv",
+      "bytes": 11388,
+      "sha256": "a13a7a8acb3ae2da2cac129a203caffd86b5a7f434701d99b59284fdd01f1844",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/solar_marker.frag.spv",
+      "bytes": 448,
+      "sha256": "d428743c08f96f4e508eab131cfb54981c2628eecc7acd3d2df220b19103275b",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/solar_marker.vert.spv",
+      "bytes": 7776,
+      "sha256": "50d948741d3ca6b59577a82d3346ab3cac51edcb9ab80047247ac61c345b6db6",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/solar_orbit.frag.spv",
+      "bytes": 1412,
+      "sha256": "23b511270c196c2186f7935699ca7fdedf3c92c629da67c10e8ae7615286181f",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/solar_orbit.vert.spv",
+      "bytes": 4008,
+      "sha256": "d71520615e2533a06208c3cec752d2689f524a30fb6a11bd2ca4ae00e2cc027f",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/solar_speed_hud.frag.spv",
+      "bytes": 49400,
+      "sha256": "e073b0ab31c69a3516d695146ade0dbd618d3dede5a10699f390f10da52c3586",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/solar_speed_hud.vert.spv",
+      "bytes": 11036,
+      "sha256": "a777a4dfece073339efcd97c7292d970f8c26d21f221ebd62ce244970f0a5fb4",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/space_background.frag.spv",
+      "bytes": 12108,
+      "sha256": "0c98ee3df0ba8ad8f313cc352a02032528e6b0e36b2dfa8cc2be1a6755b71cfc",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/stellar_glow.frag.spv",
+      "bytes": 1736,
+      "sha256": "e83a5e7458ec4be4b835384c88ec3ea958ae13569ee9ac823a4e2b2db17facee",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/stellar_glow.vert.spv",
+      "bytes": 6392,
+      "sha256": "30a9ed63e3d92581852afef62a242f2160a10c6cdb276a3b1aa0360a476183e8",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/stellar_sun.frag.spv",
+      "bytes": 3208,
+      "sha256": "5c448c0da4cadeb08bf2c85c74448d3b690fd3d6bccab1fc2c49da7a0bf54769",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/stellar_sun.vert.spv",
+      "bytes": 5168,
+      "sha256": "3e124d5babcb1d219499aa2de1482f90fc7c9008e92b054f7ca0d268336346b6",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/tone_map.frag.spv",
+      "bytes": 2700,
+      "sha256": "d617345e95589ecb087ed40c20f4d04a427251a2b5249d8181cc63c421ee3979",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/triangle.frag.spv",
+      "bytes": 2180,
+      "sha256": "36e2c4762d87eddd045909f600217f3ea7d48b023d08887abbf958d3bfaa5ddf",
+      "links": 1
+    },
+    {
+      "relative": "host/shaders/triangle.vert.spv",
+      "bytes": 4828,
+      "sha256": "87c254e6166b18954b8c0fbd533af2e83f4cf7f09842d752a0a76ae68e8f1aef",
+      "links": 1
+    },
+    {
+      "relative": "layers/explicit/validation.json",
+      "bytes": 60443,
+      "sha256": "9b304ff60cebad448f299127d23abad8507f108bfd8aac11074f994db88dc21f",
+      "links": 1
+    },
+    {
+      "relative": "timing.comp",
+      "bytes": 6218,
+      "sha256": "5541f2d62c1b7f725c91d85e3dfe20bb8a7999f4303f752a2988193da6d3a275",
+      "links": 1
+    },
+    {
+      "relative": "validation-control.comp",
+      "bytes": 6218,
+      "sha256": "5541f2d62c1b7f725c91d85e3dfe20bb8a7999f4303f752a2988193da6d3a275",
+      "links": 1
+    },
+    {
+      "relative": "validation-vertices-failure.txt",
+      "bytes": 414186,
+      "sha256": "c00fa75aa84193477d21d479870813423ca0b37aa00c9c5b8594e51cd55e5713",
+      "links": 1
+    },
+    {
+      "relative": "validation-vertices.comp",
+      "bytes": 6218,
+      "sha256": "5541f2d62c1b7f725c91d85e3dfe20bb8a7999f4303f752a2988193da6d3a275",
+      "links": 1
+    }
+  ],
+  "logicalBytes": 75421449,
+  "exclusiveLogicalBytes": 8312585,
+  "allGitIgnored": true,
+  "reason": "Only private diagnostic host, copied shaders, generated probe shaders and loader manifest. All source/reproduction, compact numeric rows, oracle results and hashes retained. No production or permanent regression consumer. Elevation is a hard link; delete only private alias, preserving production asset.",
+  "protectedAssets": {
+    "assets\\earth\\runtime\\earth_elevation_8192x4096.r16": {
+      "bytes": 67108864,
+      "sha256": "4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317"
+    },
+    ".novacore\\cache\\terrain\\v1\\sha256\\38\\38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae.nccube": {
+      "bytes": 61484224,
+      "sha256": "38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae"
+    },
+    ".novacore\\cache\\terrain\\v1\\sha256\\c4\\c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe.nccube": {
+      "bytes": 210307596,
+      "sha256": "c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe"
+    }
+  }
+}

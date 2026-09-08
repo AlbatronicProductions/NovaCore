@@ -1,0 +1,79 @@
+{
+  "files": [
+    {
+      "original": "A.json",
+      "compressed": "A.json.gz",
+      "originalBytes": 2396753,
+      "compressedBytes": 119606,
+      "originalSha256": "2cf5d36f777f3f424d0e20aeb62e758116413e72c68a9f563de6239086a45cc3",
+      "compressedSha256": "cf47eebff7e0cba0cd9d20e29cc8b942da4087c038100188edb06fca2a835359",
+      "losslessVerified": true
+    },
+    {
+      "original": "B.json",
+      "compressed": "B.json.gz",
+      "originalBytes": 2395157,
+      "compressedBytes": 119623,
+      "originalSha256": "e01845ad96d34ba03f526161c405941ca2f7a0ecef9a2aa338e1a07890c5fd74",
+      "compressedSha256": "d573fcc68e448bde8e7f53fd9a1a10e7353f6430429d766689f799bcce677719",
+      "losslessVerified": true
+    },
+    {
+      "original": "C.json",
+      "compressed": "C.json.gz",
+      "originalBytes": 2393479,
+      "compressedBytes": 118970,
+      "originalSha256": "3f824c16d839cbf7f2df016229b7f6b866984eb17111f0c4f76644e535c2c87c",
+      "compressedSha256": "7744a50d31137985793a38e02d959538ce42eaebcf3f256a27fa5b025dd4aa4f",
+      "losslessVerified": true
+    },
+    {
+      "original": "D.json",
+      "compressed": "D.json.gz",
+      "originalBytes": 2393294,
+      "compressedBytes": 118542,
+      "originalSha256": "f0d1d4d8d1914e132e8cc976aeed2fffbff1b9b0be41a9fbde969d9ae899ae89",
+      "compressedSha256": "952dba90298d1b998c641c41f50a6abe6452f3e675cf5f75e8823a288c952669",
+      "losslessVerified": true
+    },
+    {
+      "original": "D-oracle.json",
+      "compressed": "D-oracle.json.gz",
+      "originalBytes": 2473497,
+      "compressedBytes": 126218,
+      "originalSha256": "2436d07a4e8121c0c96b6a9b94f21ad43e7e12045bcc120fddbe7b392c74e56f",
+      "compressedSha256": "30edf96068946ec415bb970d62825b9e28d32c39c9ac916595f62b2a1203ee9e",
+      "losslessVerified": true
+    },
+    {
+      "original": "D-invalid-source.json",
+      "compressed": "D-invalid-source.json.gz",
+      "originalBytes": 2474174,
+      "compressedBytes": 126752,
+      "originalSha256": "a77880f28f8b4d0b297445b951bd5d8a4e02e3f7a781ba013cf90d6a34ef509f",
+      "compressedSha256": "62e18c7a40351f9c74496c1470e658931abe9920b2bd83e9359b5809a33c4ec9",
+      "losslessVerified": true
+    },
+    {
+      "original": "D-mapped.json",
+      "compressed": "D-mapped.json.gz",
+      "originalBytes": 2425204,
+      "compressedBytes": 124209,
+      "originalSha256": "d19537e44b0760ace965d1d2b240382e6bff563fa6ae9da1de48f365db1af44a",
+      "compressedSha256": "1d7633c9bde1b7c368cdaa63ece7b348d00c0dff730d2f64b8b1db6dba3569c9",
+      "losslessVerified": true
+    },
+    {
+      "original": "D-mapped-oracle.json",
+      "compressed": "D-mapped-oracle.json.gz",
+      "originalBytes": 2542670,
+      "compressedBytes": 134596,
+      "originalSha256": "5c44cb9a7e895b8b62a0844e620b085d47045a8c6e8de71c86c8283b1f9abb3b",
+      "compressedSha256": "05b6e9b6349d2df17328c4d86e825b92dbc8060281292423e36f46369ffe8716",
+      "losslessVerified": true
+    }
+  ],
+  "originalBytes": 19494228,
+  "compressedBytes": 988516,
+  "reason": "Full scalar timing and exact input journals support continued Project Control review; gzip is lossless; no depth/HDR/frame buffers retained."
+}

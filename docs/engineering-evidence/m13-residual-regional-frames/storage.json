@@ -1,0 +1,22 @@
+{
+  "units": "bytes",
+  "accounting": "Final distinct retained files plus hash-inventoried disposed file instances; not cumulative write traffic or allocated NTFS bytes",
+  "createdExclusiveAccountedBytes": 19646912,
+  "createdLogicalAccountedBytes": 86755776,
+  "permanentRetainedBytes": 1560357,
+  "disposedExclusiveBytes": 18086555,
+  "disposedLogicalBytes": 85195419,
+  "disposedPrivateHostFiles": 81,
+  "disposedPrivateHostExclusiveBytes": 8312585,
+  "disposedPrivateHostLogicalBytes": 75421449,
+  "removedProtectedAssetHardLinkAliasBytes": 67108864,
+  "protectedAssetRemoved": false,
+  "uncompressedJournalDuplicatesRemovedBytes": 9755700,
+  "compressedJournalBytes": 485989,
+  "accidentalBytecodeRemovedBytes": 18270,
+  "remainingScratchBytes": 0,
+  "remainingScratchFiles": 0,
+  "retainedBudgetBytes": 8388608,
+  "allocatedDiskSavings": "not measured",
+  "allPriorEvidencePreserved": true
+}

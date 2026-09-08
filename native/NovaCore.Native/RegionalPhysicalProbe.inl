@@ -21,11 +21,17 @@ void Capture(App& a){
     a.productionBillboardPreparedFrameIdentity!=a.productionBillboardRasterFrameIdentity)return;
   capturedGeneration=a.productionBillboardGeneration;
   lastFrame=frameNumber;if(adjacent)adjacentCaptured=true;
-  const auto* vertices=static_cast<const NcSphericalBillboardPhysicalVertex*>(a.productionBillboardPhysicalMapped);
-  const auto* indices=static_cast<const uint32_t*>(a.productionBillboardCompactedMapped);
-  const auto* source=static_cast<const uint32_t*>(a.productionBillboardIndexMapped);
   const auto* lattice=static_cast<const int32_t*>(a.productionBillboardLatticeMapped);
   const auto* draw=static_cast<const VkDrawIndexedIndirectCommand*>(a.productionBillboardIndirectMapped);
+  // The completed GPU working set may be local device memory. Snapshot once
+  // after the existing frame fence, then perform the diagnostic's repeated CPU
+  // scans in ordinary memory. Preserve the exact bytes, samples and equations.
+  std::vector<NcSphericalBillboardPhysicalVertex> vertexSnapshot(a.productionBillboardVertexCount);
+  std::vector<uint32_t> indexSnapshot(draw->indexCount),sourceSnapshot(size_t(a.productionBillboardTriangleCount)*3u);
+  std::memcpy(vertexSnapshot.data(),a.productionBillboardPhysicalMapped,vertexSnapshot.size()*sizeof(vertexSnapshot[0]));
+  if(!indexSnapshot.empty())std::memcpy(indexSnapshot.data(),a.productionBillboardCompactedMapped,indexSnapshot.size()*sizeof(uint32_t));
+  std::memcpy(sourceSnapshot.data(),a.productionBillboardIndexMapped,sourceSnapshot.size()*sizeof(uint32_t));
+  const auto* vertices=vertexSnapshot.data();const auto* indices=indexSnapshot.data();const auto* source=sourceSnapshot.data();
   const auto* pupil=static_cast<const NcProductionBillboardFrame*>(a.productionBillboardFrameMapped);
   const auto* counters=static_cast<const uint32_t*>(a.productionBillboardCounterMapped);
   const auto& gpu=a.submission->planetaryGpu;const auto& pr=a.submission->planetaryPresentation;

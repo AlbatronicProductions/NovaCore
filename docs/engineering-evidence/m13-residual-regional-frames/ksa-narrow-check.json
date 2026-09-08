@@ -1,0 +1,23 @@
+{
+  "prior": "docs\\engineering-evidence\\m13-regional-preparation-convergence\\ksa-reference-check.json",
+  "version": "2026.9.7.5402",
+  "revision": "487c3f340de24c6a81037120b6d1129c045c5400",
+  "verified": [
+    {
+      "path": "E:\\Kitten Space Agency\\KSA.dll",
+      "sha256": "a8a5164204eed962df9d9025e99f523d9a23ee2ce6e802b18216a9da35506d2f",
+      "bytes": 4798552
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\Planet\\Culling\\PlanetFrustumCulling.comp",
+      "sha256": "4a1617f6ce1660aa78a373d79f4c97022c325525a4f694e100e22aad7c2f23e5",
+      "bytes": 2973
+    },
+    {
+      "path": "E:\\NovaCore\\build\\ksa-residency-reference\\source\\KSA.PlanetRenderer.cs",
+      "sha256": "5ce37c334045f9b5cba9a450a6accc454444e8d20327b9778b98740cf7a64a50",
+      "bytes": 116885
+    }
+  ],
+  "scope": "Only replacement preparation versus per-frame culling boundary; no new broad KSA reconstruction"
+}

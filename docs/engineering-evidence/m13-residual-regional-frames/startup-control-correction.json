@@ -1,0 +1,12 @@
+{
+  "rawLogSha256": "c00fa75aa84193477d21d479870813423ca0b37aa00c9c5b8594e51cd55e5713",
+  "rawLogBytes": 414186,
+  "exitCode": 1,
+  "scope": "Private diagnostic host only",
+  "cause": "Orchestrator insertion order left the old triangle-count expected value after switching the GPU counter to vertex-count validation. The completeness gate correctly rejected initial generation 1; no invalid geometry was published.",
+  "correction": "Expected count now selects incomingVertexCount for the vertex validator; no check removed. Diagnostic host rebuilt v4; rerun completed 1000 logical frames/37 publications.",
+  "evidence": [
+    "[native] Residual GPU: observedFrame=102; recordFrame=102; incoming=1; resetMs=0.000840; resetBarrierMs=0.004720; cullMs=0.052920; cullBarrierMs=0.004760; compactMs=0.000160; compactBarrierMs=0.000080; blockMs=0.063480; fenceComplete=true",
+    "[native] production billboard incoming generation failed complete readiness validation: generation=1; vertices=712106/712106; triangles=1424208; visible=0; horizonRejected=0; screenRejected=0; invalid=0; overflow=0; compactCounter=0; drawIndexCount=0; drawInstances=1; topology=1; topologyFamily=1; physical=1; normal=1; cull=0; compact=1; draw=1; generationCoherent=1; fenceComplete=1"
+  ]
+}

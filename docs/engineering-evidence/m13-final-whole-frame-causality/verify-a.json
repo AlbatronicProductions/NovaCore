@@ -1,0 +1,302 @@
+{
+  "schema": 1,
+  "review": "VERIFY A GPU-hot working-set placement",
+  "designVerdict": "No remaining correctness blocker found in inspected implemented candidate; final guarded-source focused/route/dynamic gates pending lead completion",
+  "implementationContract": [
+    "Explicit typed GPU-hot intent at exactly six roles",
+    "Required HOST_VISIBLE|HOST_COHERENT plus compatible DEVICE_LOCAL preference",
+    "Original compatible coherent fallback when preferred type unavailable",
+    "Bounded recognized memory-capacity allocation/map retry; no blanket failure suppression",
+    "Map tentative memory before binding; publish resource only after success",
+    "No second attempt when preferred and fallback types are identical",
+    "Unchanged allocation sizes/counts, geometry, publication/fence/descriptor ownership"
+  ],
+  "parity": {
+    "placement-florida-parity.json": {
+      "sha256": "f5d31ea84cecaba916b8e67e6630e0fbdcc0719efaaa16a2354b37f50efb32eb",
+      "pass": true,
+      "baselineRepeatRun": false,
+      "frame": 175,
+      "capture": {
+        "frame": "175",
+        "width": "3440",
+        "height": "1440",
+        "generation": "1",
+        "pupil": "1",
+        "physicalGeneration": "4",
+        "vertices": "712106"
+      },
+      "inputDifferences": {},
+      "preparedFull64ByteExact": true,
+      "selectedOrientedMultisetExact": true,
+      "selectedBufferOrderExact": false,
+      "attachments": {
+        "depth": {
+          "equal": true,
+          "differentPixels": 0,
+          "finite": true,
+          "maxFiniteAbsoluteDifference": 0.0,
+          "beforeSha256": "c32937a98726e6a73ba09ad204242bfb2fa5e3e5d88f6b24aff15a43cc59114a",
+          "afterSha256": "c32937a98726e6a73ba09ad204242bfb2fa5e3e5d88f6b24aff15a43cc59114a",
+          "examples": []
+        },
+        "hdr": {
+          "equal": true,
+          "differentPixels": 0,
+          "finite": true,
+          "maxFiniteAbsoluteDifference": 0.0,
+          "beforeSha256": "6985062a2f3f7a48708c2f073e70311919ecb84c981ed74599bd4d0166021ad2",
+          "afterSha256": "6985062a2f3f7a48708c2f073e70311919ecb84c981ed74599bd4d0166021ad2",
+          "examples": []
+        },
+        "image": {
+          "equal": true,
+          "differentPixels": 0,
+          "finite": true,
+          "maxFiniteAbsoluteDifference": 0.0,
+          "beforeSha256": "96f56d0c23e52bf989e0648d83bca921ec9f96b83a21bc52c0e3989a27577a08",
+          "afterSha256": "96f56d0c23e52bf989e0648d83bca921ec9f96b83a21bc52c0e3989a27577a08",
+          "examples": []
+        }
+      }
+    },
+    "placement-inland-parity.json": {
+      "sha256": "12e2093df4f101395bb458c07a8c06bd677f4c2ba0989c1455e4c02772383750",
+      "pass": true,
+      "baselineRepeatRun": false,
+      "frame": 175,
+      "capture": {
+        "frame": "175",
+        "width": "3440",
+        "height": "1440",
+        "generation": "1",
+        "pupil": "1",
+        "physicalGeneration": "4",
+        "vertices": "712106"
+      },
+      "inputDifferences": {},
+      "preparedFull64ByteExact": true,
+      "selectedOrientedMultisetExact": true,
+      "selectedBufferOrderExact": false,
+      "attachments": {
+        "depth": {
+          "equal": true,
+          "differentPixels": 0,
+          "finite": true,
+          "maxFiniteAbsoluteDifference": 0.0,
+          "beforeSha256": "cae982236222ed75aa766a3bdcd95a4b991cb156817f6da6b618579b1c3c72b5",
+          "afterSha256": "cae982236222ed75aa766a3bdcd95a4b991cb156817f6da6b618579b1c3c72b5",
+          "examples": []
+        },
+        "hdr": {
+          "equal": true,
+          "differentPixels": 0,
+          "finite": true,
+          "maxFiniteAbsoluteDifference": 0.0,
+          "beforeSha256": "18a59c2b2abb4983ff47b36b0985bbcc63d24480970d663a42c692a162922f67",
+          "afterSha256": "18a59c2b2abb4983ff47b36b0985bbcc63d24480970d663a42c692a162922f67",
+          "examples": []
+        },
+        "image": {
+          "equal": true,
+          "differentPixels": 0,
+          "finite": true,
+          "maxFiniteAbsoluteDifference": 0.0,
+          "beforeSha256": "106903d66d8ec1107431edb95f305294d7ceb82f1fc709d3b30359510061c39e",
+          "afterSha256": "106903d66d8ec1107431edb95f305294d7ceb82f1fc709d3b30359510061c39e",
+          "examples": []
+        }
+      }
+    }
+  },
+  "unproven": [
+    "Final normal rebuilt guarded-source focused live Debug/Release gates pending lead",
+    "Remaining route/dynamic/full acceptance gates pending lead",
+    "Every individual post-TES vertex is not directly captured by this parity helper",
+    "Other two explicit one-shot mapped-read traces have unmeasured diagnostic-only slowdown risk"
+  ],
+  "leadReportedRegional": {
+    "gpuRecoveryMsApprox": 2.45,
+    "nonFenceCpuIncreaseMsApprox": 0.047,
+    "attributionOwner": "Work A / lead; not independently recomputed in this review"
+  },
+  "runner": {
+    "path": "placement_parity.py",
+    "sha256": "70d39af4fa8c6e150558e9f565c622843687162882223fedbcb261a077506c7a",
+    "workerGpuExecutions": 0
+  },
+  "actualProductionReview": {
+    "verdict": "No concrete architecture, cleanup or lifetime defect found in inspected diff",
+    "sources": [
+      {
+        "path": "native/NovaCore.Native/MappedBufferMemory.h",
+        "sha256": "f5b1cddafbbdb3f0c496d4822d10a97424f1510797ebd429b2a9b19d6dee793e"
+      },
+      {
+        "path": "native/NovaCore.Native/MappedBufferMemoryTests.cpp",
+        "sha256": "d809addf730ac3b7978d256db366daaecdb0772aa7d3798584378868f9c1946a"
+      },
+      {
+        "path": "native/NovaCore.Native/NovaCoreNative.cpp",
+        "sha256": "f95d69d15257864b612391d8b35e8b552f8c5d80b6937ec44fef17d9a18dfe64"
+      },
+      {
+        "path": "native/NovaCore.Native/RegionalPhysicalPreparation.inl",
+        "sha256": "437cb06e864bfbf511df5ea477168a9b4c81247e06d24ac4db27e86cca948c79"
+      },
+      {
+        "path": "native/NovaCore.Native/CMakeLists.txt",
+        "sha256": "2e701b8b5d2efbcb95f95833e27e9e7db11c2b5c21407ded714490f2f5b4b287"
+      }
+    ],
+    "policyChecksInSource": 14,
+    "testsExecutedByWorker": false,
+    "cleanupVerifiedBy": "Source inspection, not mock Vulkan callback test",
+    "productionPixelParity": "Actual production-default capture host3fcd4b... with final snapshot/empty guard now matches sealed pre-change fixed Florida/inland outputs",
+    "unchanged": [
+      "Shaders",
+      "Allocation sizes/usages/counts",
+      "Publication/fence/descriptor boundaries",
+      "Ordinary Host default callers"
+    ],
+    "selectionAndRetry": [
+      "Required flags and memoryTypeBits checked before preference",
+      "Original coherent fallback retained",
+      "Only out-of-device-memory, out-of-host-memory or map-failed retry",
+      "Device loss/noncapacity/final failure observable",
+      "Same preferred/fallback UMA type attempted once"
+    ],
+    "ownership": [
+      "Tentative map failure frees memory",
+      "Bind failure unmaps/frees then throws",
+      "Live memory/pointer assigned only after successful bind"
+    ]
+  },
+  "boundedDiagnosticRevision": {
+    "source": "native\\NovaCore.Native\\RegionalPhysicalProbe.inl",
+    "sha256": "0edc6efdf06bfad56cd40fc7bbb651ea0469231847cc7a865fc0fdec4c484e4d",
+    "leadObserved": "Debug live regional child high CPU; approximately frame467 at9min; probe outputs10-30second intervals",
+    "independentStackProfile": false,
+    "causeEvidence": "Opt-in repeated CPU loops directly read device-local mapped physical/compacted/source buffers",
+    "fix": "Copy three exact completed ranges once into temporary CPU vectors after unchanged capture gates and existing fence; unchanged analysis loops use snapshots",
+    "temporaryBytesFormula": "vertexCount*64 + drawIndexCount*4 + triangleCount*12",
+    "reviewedFloridaTemporaryBytes": 63321656,
+    "unchanged": [
+      "Sample count/equations/output schema",
+      "600second test timeout",
+      "Physical/residency/facility/publication assertions",
+      "GPU geometry/scheduling/ownership",
+      "Sparse at-most51 vertex lattice readbacks"
+    ],
+    "reviewVerdict": "No correctness or lifetime defect found; unchanged live-test rerun needed to measure fix",
+    "testsRunByWorker": false,
+    "otherOptInLimitations": [
+      {
+        "source": "NovaCoreNative.cpp:2117",
+        "responsibility": "One-shot raster lineage trace, rasterDiagnostic8192",
+        "cost": "Not measured; mapped random/scalar read risk, absent normal production"
+      },
+      {
+        "source": "NovaCoreNative.cpp:2151",
+        "responsibility": "One-shot projected physical-vertex trace, submissionflags128",
+        "cost": "Not measured; mapped scalar read risk, absent normal production"
+      }
+    ],
+    "normalProductionRepeatedBulkCpuScanFound": false,
+    "finalSourceSha256": "73a815c49e4078997045dd2df603ebc908089ecd259581fee2a93a76c10b4439",
+    "emptySelectedGuard": "Correct; zero-visible publication is expressly valid and no triangle loop iteration reads empty selected storage",
+    "resolution": {
+      "DebugWindowPass": 4,
+      "DebugWindowFail": 0,
+      "DebugWindowSkip": 0,
+      "DebugWindowSeconds": 158.03374440000334,
+      "DebugCaptures": 43,
+      "DebugCheckedVertices": 1569,
+      "ReleaseWindowPass": 4,
+      "ReleaseWindowSeconds": 118.93052549999265,
+      "ReleaseCaptures": 43,
+      "ReleaseCheckedVertices": 1584,
+      "levels": "8-17",
+      "pupils": 40,
+      "initialTimeoutPreserved": true,
+      "timeoutSecondsUnchanged": 600,
+      "liveRawBeforeAfterExactClaim": false,
+      "reason": "Elapsed-time live route camera/orientation/matrix differ; canonical assertions pass and exact fixed-input parity is separate",
+      "finalEmptyGuardFocusedRerun": "Pending lead at review checkpoint"
+    }
+  },
+  "actualProductionParity": {
+    "candidate-florida-parity.json": {
+      "sha256": "c950d24791e2d745322fc38fe4bdbb7eaaff261be5ca6dd48f723f46db3fdf60",
+      "pass": true,
+      "implementationDefault": true,
+      "inputDifferences": {},
+      "nativeCaptureHostSha256": "3fcd4b19550dc69213ddaf7744a811d0874750ff317ee34559daf8b7a5ed7ab0",
+      "placementEnvironmentPresent": false,
+      "preparedFull64ByteExact": true,
+      "selectedOrientedMultisetExact": true,
+      "attachments": {
+        "depth": {
+          "equalToPreChange": true,
+          "sha256": "c32937a98726e6a73ba09ad204242bfb2fa5e3e5d88f6b24aff15a43cc59114a",
+          "finite": true
+        },
+        "hdr": {
+          "equalToPreChange": true,
+          "sha256": "6985062a2f3f7a48708c2f073e70311919ecb84c981ed74599bd4d0166021ad2",
+          "finite": true
+        },
+        "image": {
+          "equalToPreChange": true,
+          "sha256": "96f56d0c23e52bf989e0648d83bca921ec9f96b83a21bc52c0e3989a27577a08",
+          "finite": true
+        }
+      }
+    },
+    "candidate-inland-parity.json": {
+      "sha256": "d9b9b7f4a579f423e58602efaf03342fadcbb0565d1c164b88ded409925b8809",
+      "pass": true,
+      "implementationDefault": true,
+      "inputDifferences": {},
+      "nativeCaptureHostSha256": "3fcd4b19550dc69213ddaf7744a811d0874750ff317ee34559daf8b7a5ed7ab0",
+      "placementEnvironmentPresent": false,
+      "preparedFull64ByteExact": true,
+      "selectedOrientedMultisetExact": true,
+      "attachments": {
+        "depth": {
+          "equalToPreChange": true,
+          "sha256": "cae982236222ed75aa766a3bdcd95a4b991cb156817f6da6b618579b1c3c72b5",
+          "finite": true
+        },
+        "hdr": {
+          "equalToPreChange": true,
+          "sha256": "18a59c2b2abb4983ff47b36b0985bbcc63d24480970d663a42c692a162922f67",
+          "finite": true
+        },
+        "image": {
+          "equalToPreChange": true,
+          "sha256": "106903d66d8ec1107431edb95f305294d7ceb82f1fc709d3b30359510061c39e",
+          "finite": true
+        }
+      }
+    }
+  },
+  "completedManagedSuite": {
+    "Debug": {
+      "headlessPass": 79,
+      "gpuNoWindowPass": 8,
+      "windowPass": 4,
+      "fail": 0,
+      "skip": 0,
+      "nativePolicyChecksPass": 14
+    },
+    "Release": {
+      "headlessPass": 79,
+      "gpuNoWindowPass": 8,
+      "windowPass": 4,
+      "fail": 0,
+      "skip": 0,
+      "nativePolicyChecksPass": 14
+    }
+  }
+}

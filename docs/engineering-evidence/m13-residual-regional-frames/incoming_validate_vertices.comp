@@ -1,0 +1,23 @@
+#version 460
+#extension GL_ARB_gpu_shader_fp64 : require
+// Private bounded revision: native has qualified immutable indices; validate
+// every prepared physical vertex once, including values copied by exact reuse.
+layout(local_size_x=64) in;
+struct PhysicalVertex{dvec4 body;vec4 normal;vec4 reserved;};
+layout(set=0,binding=45,std430) readonly buffer Physical{PhysicalVertex values[];} physical;
+layout(set=0,binding=50,std430) buffer Counters{uint values[];} counters;
+shared uint invalid;
+void main(){
+  uint lane=gl_LocalInvocationID.x,vertex=gl_GlobalInvocationID.x,total=counters.values[6];
+  if(lane==0u)invalid=0u;
+  barrier();
+  if(vertex<total){
+    dvec3 p=physical.values[vertex].body.xyz;vec4 n=physical.values[vertex].normal;
+    if(any(isnan(p))||any(isinf(p))||n.w!=1.0||any(isnan(n.xyz))||any(isinf(n.xyz)))atomicAdd(invalid,1u);
+  }
+  barrier();
+  if(lane==0u){
+    atomicAdd(counters.values[23],min(64u,total-gl_WorkGroupID.x*64u));
+    if(invalid!=0u)atomicAdd(counters.values[3],invalid);
+  }
+}

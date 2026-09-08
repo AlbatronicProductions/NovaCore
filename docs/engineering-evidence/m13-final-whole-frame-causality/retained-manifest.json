@@ -1,0 +1,611 @@
+{
+  "files": [
+    {
+      "relative": "archive.py",
+      "bytes": 4290,
+      "allocated": 8192,
+      "links": 1,
+      "sha256": "1148b5d878eda8958f9aa8c0b8a4bd6e8090e4ce5ffdf8a87fd6d1ffcb908bc8"
+    },
+    {
+      "relative": "base-active.json.gz",
+      "bytes": 24578,
+      "allocated": 28672,
+      "links": 1,
+      "sha256": "348e42360c581a88820b2546a42f71284dc528417ad50e974f37958f5e2f0b9e"
+    },
+    {
+      "relative": "base-florida-repeat-isa-compiler/stage-1.isa",
+      "bytes": 50672,
+      "allocated": 53248,
+      "links": 1,
+      "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+    },
+    {
+      "relative": "base-florida-repeat-isa-compiler/stage-16.isa",
+      "bytes": 173928,
+      "allocated": 176128,
+      "links": 1,
+      "sha256": "a531c7fed6d8111a015cbaae2fc06f36f1e436b75c34967a8b6430b981df091b"
+    },
+    {
+      "relative": "base-florida-repeat-isa-compiler/stage-2.isa",
+      "bytes": 50672,
+      "allocated": 53248,
+      "links": 1,
+      "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+    },
+    {
+      "relative": "base-florida-repeat-isa-compiler/stage-4.isa",
+      "bytes": 36816,
+      "allocated": 36864,
+      "links": 1,
+      "sha256": "b9e48ba68fc07d7e4abcf6e6032521b3aeef68283d01e636b91c36663245e4d5"
+    },
+    {
+      "relative": "base-florida-repeat-isa.json.gz",
+      "bytes": 32914,
+      "allocated": 36864,
+      "links": 1,
+      "sha256": "2ecaf5cbc53dd8639bda9e0316c1685e65a965ee34d04af2e2bbb907fa4ee163"
+    },
+    {
+      "relative": "base-florida-return.json.gz",
+      "bytes": 33017,
+      "allocated": 36864,
+      "links": 1,
+      "sha256": "e111b66bbfd1eda87b7b6c0026879e59c2381a06f0f2737653ac2474552c608e"
+    },
+    {
+      "relative": "base-florida.json.gz",
+      "bytes": 32409,
+      "allocated": 32768,
+      "links": 1,
+      "sha256": "234c7123181f6b5c485057f43d9d262f364c30fdb2097e1703b3f46c2e342cf7"
+    },
+    {
+      "relative": "base-grazing.json.gz",
+      "bytes": 27045,
+      "allocated": 28672,
+      "links": 1,
+      "sha256": "40ff7ef0308dc95fc1b48af473eeb15d6841432b4dbacb68a6447bd0789c88f0"
+    },
+    {
+      "relative": "base-inland-return.json.gz",
+      "bytes": 25354,
+      "allocated": 28672,
+      "links": 1,
+      "sha256": "0346793a5a480a75815334645b344dda9a6d45011013f1560bb29773e6b01344"
+    },
+    {
+      "relative": "base-inland.json.gz",
+      "bytes": 23864,
+      "allocated": 24576,
+      "links": 1,
+      "sha256": "a7c169fa411ab044fb5a918695c37a1a0a1facf9a3bb068607063382f274b514"
+    },
+    {
+      "relative": "baseline.json",
+      "bytes": 12027,
+      "allocated": 12288,
+      "links": 1,
+      "sha256": "ce5180a75daae7141d94721965a69869876eb92bae75b32ba82cd6d5fdb1caf3"
+    },
+    {
+      "relative": "build-candidate-final-host.patch",
+      "bytes": 84951,
+      "allocated": 86016,
+      "links": 1,
+      "sha256": "210ebc80790d444d4b8637670b8d76f1f29f26d5f8eb8f641371c8e09cd0e36d"
+    },
+    {
+      "relative": "build-candidate-host.patch",
+      "bytes": 84951,
+      "allocated": 86016,
+      "links": 1,
+      "sha256": "210ebc80790d444d4b8637670b8d76f1f29f26d5f8eb8f641371c8e09cd0e36d"
+    },
+    {
+      "relative": "build-v2-host.patch",
+      "bytes": 42908,
+      "allocated": 45056,
+      "links": 1,
+      "sha256": "d1211f0b47ca9ab18829cb7fcd0ce15907c21c2bedf192a6c6c7b5c6c4f81d67"
+    },
+    {
+      "relative": "build-v3-host.patch",
+      "bytes": 71735,
+      "allocated": 73728,
+      "links": 1,
+      "sha256": "eda60a7d210a53eaceb8bdb9b54176f6b3896024c0154a4408f275b632b4c4b4"
+    },
+    {
+      "relative": "candidate-deployment-final.json",
+      "bytes": 12179,
+      "allocated": 12288,
+      "links": 1,
+      "sha256": "45571541aae3a63b71aa4b32bc4fc79b4f16822e978125f1dddeb692518ef357"
+    },
+    {
+      "relative": "candidate-deployment-revised.json",
+      "bytes": 12179,
+      "allocated": 12288,
+      "links": 1,
+      "sha256": "9465b57f9dc8f2fc89f3be507c45d078253818d4e9f2d10cf03853c06b5c317f"
+    },
+    {
+      "relative": "candidate-deployment.json",
+      "bytes": 12126,
+      "allocated": 12288,
+      "links": 1,
+      "sha256": "49120223c4944784956ef825078267c11fa29e50eb57cb4d9d5e1a7d307ec4dc"
+    },
+    {
+      "relative": "candidate-final-active.json.gz",
+      "bytes": 24321,
+      "allocated": 24576,
+      "links": 1,
+      "sha256": "e3958481635562f7ae55f06aff6bbea8846c6c8941fa2ee518eeb8d90233a41c"
+    },
+    {
+      "relative": "candidate-final-florida.json.gz",
+      "bytes": 28870,
+      "allocated": 32768,
+      "links": 1,
+      "sha256": "4a3960100d5e563d6302b40b65894970105eed75601518e15c909c0c8a345a26"
+    },
+    {
+      "relative": "candidate-final-grazing.json.gz",
+      "bytes": 26351,
+      "allocated": 28672,
+      "links": 1,
+      "sha256": "ef0175311ae270d7b859ad400e43f39c727043b398f1818758d5e5b19a7c6bdd"
+    },
+    {
+      "relative": "candidate-final-inland.json.gz",
+      "bytes": 23191,
+      "allocated": 24576,
+      "links": 1,
+      "sha256": "c77ac3e86550db04df331681d5674a2030cbc2593620bc880532558d45777f5d"
+    },
+    {
+      "relative": "candidate-florida-capture.json.gz",
+      "bytes": 34813,
+      "allocated": 36864,
+      "links": 1,
+      "sha256": "5240c7099700cb03dc1f0ff41d7f1f320eb3de9106115ed96f2f1858525e8a14"
+    },
+    {
+      "relative": "candidate-florida-parity.json",
+      "bytes": 11256,
+      "allocated": 12288,
+      "links": 1,
+      "sha256": "c950d24791e2d745322fc38fe4bdbb7eaaff261be5ca6dd48f723f46db3fdf60"
+    },
+    {
+      "relative": "candidate-florida.json.gz",
+      "bytes": 30419,
+      "allocated": 32768,
+      "links": 1,
+      "sha256": "ea46a0ba1c713d6e132a527d097d7e79f17814dd0bfe4dea116499a50731b22d"
+    },
+    {
+      "relative": "candidate-inland-capture.json.gz",
+      "bytes": 28613,
+      "allocated": 28672,
+      "links": 1,
+      "sha256": "a1a8c6d40b01ce08e6ede237c5596f8e8453811d9d15e0dbb9c3f98c8edb8938"
+    },
+    {
+      "relative": "candidate-inland-parity.json",
+      "bytes": 11264,
+      "allocated": 12288,
+      "links": 1,
+      "sha256": "d9b9b7f4a579f423e58602efaf03342fadcbb0565d1c164b88ded409925b8809"
+    },
+    {
+      "relative": "candidate_parity.py",
+      "bytes": 2045,
+      "allocated": 4096,
+      "links": 1,
+      "sha256": "b2a25372eaff86a92136cddd7d8d8a3417cd14c7070e45d42f2b997bd46cdd8d"
+    },
+    {
+      "relative": "cleanup.ps1",
+      "bytes": 2735,
+      "allocated": 4096,
+      "links": 1,
+      "sha256": "9d3edd0de7568c250d0ea8cf5498813f29254d7a2dd6231ff48806f41efcd749"
+    },
+    {
+      "relative": "closeout.json",
+      "bytes": 14879,
+      "allocated": 16384,
+      "links": 1,
+      "sha256": "52e0596c87b47b3593099b16df732d48f9004ca9a7657c922871ba278d68d303"
+    },
+    {
+      "relative": "compressed-journals.json",
+      "bytes": 11898,
+      "allocated": 12288,
+      "links": 1,
+      "sha256": "fe07ab436ba36698472feb1a38c1aeca9a9c1072a1f5530a973efe43716dfdad"
+    },
+    {
+      "relative": "disposable-manifest.json",
+      "bytes": 39134,
+      "allocated": 40960,
+      "links": 1,
+      "sha256": "ab983c7fab7fef6703b4158928c8e7b3746a3daa9f3301bb2f0403f73bc35138"
+    },
+    {
+      "relative": "implementation-decision.md",
+      "bytes": 7042,
+      "allocated": 8192,
+      "links": 1,
+      "sha256": "c6d11844e529ea0af84f7564dc65a1c36dc0ad765ac7a6ffc4b180de8881e309"
+    },
+    {
+      "relative": "local-active.json.gz",
+      "bytes": 25562,
+      "allocated": 28672,
+      "links": 1,
+      "sha256": "803eff291c976c823fa6b5b541248283def0beb5449a31a5eca2c3b2adbc8dcd"
+    },
+    {
+      "relative": "local-florida-repeat.json.gz",
+      "bytes": 30429,
+      "allocated": 32768,
+      "links": 1,
+      "sha256": "4d62c265c71f527208b11c18e72395a7aa752fcc54e48808f25ed599d240ae0e"
+    },
+    {
+      "relative": "local-florida.json.gz",
+      "bytes": 28884,
+      "allocated": 32768,
+      "links": 1,
+      "sha256": "c0e3ebc73f0d0756f36b353bbe543d2554aee200e87deb9208527837c8f3564a"
+    },
+    {
+      "relative": "local-grazing.json.gz",
+      "bytes": 27245,
+      "allocated": 28672,
+      "links": 1,
+      "sha256": "3d7a21b30cc6fd8c604cc4d1a20313584e623f8d787ee67bcb4f2b6bc0e07b08"
+    },
+    {
+      "relative": "local-inland.json.gz",
+      "bytes": 24228,
+      "allocated": 24576,
+      "links": 1,
+      "sha256": "d706548d05f0407c61c39952ee22bce3bef5727e22ae55e5b54250d0f9ae48e2"
+    },
+    {
+      "relative": "noise-florida-isa-compiler/stage-1.isa",
+      "bytes": 50672,
+      "allocated": 53248,
+      "links": 1,
+      "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+    },
+    {
+      "relative": "noise-florida-isa-compiler/stage-16.isa",
+      "bytes": 123386,
+      "allocated": 126976,
+      "links": 1,
+      "sha256": "34bf39abef9c54ed89f0e5cd1023c9b07747f6addbc943f4d753d8bea71b77cd"
+    },
+    {
+      "relative": "noise-florida-isa-compiler/stage-2.isa",
+      "bytes": 50672,
+      "allocated": 53248,
+      "links": 1,
+      "sha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e"
+    },
+    {
+      "relative": "noise-florida-isa-compiler/stage-4.isa",
+      "bytes": 36816,
+      "allocated": 36864,
+      "links": 1,
+      "sha256": "b9e48ba68fc07d7e4abcf6e6032521b3aeef68283d01e636b91c36663245e4d5"
+    },
+    {
+      "relative": "noise-florida-isa.json.gz",
+      "bytes": 30726,
+      "allocated": 32768,
+      "links": 1,
+      "sha256": "7ab8ea3d0cbdf559ad83aee9439ea749e689192c7819f741f88833656c414e0a"
+    },
+    {
+      "relative": "noise-inland.json.gz",
+      "bytes": 25067,
+      "allocated": 28672,
+      "links": 1,
+      "sha256": "69250656a3e24a8d2bd2f799da926f973a82d622524ef69b9e5750222ba737a2"
+    },
+    {
+      "relative": "physical-local-florida.json.gz",
+      "bytes": 32066,
+      "allocated": 32768,
+      "links": 1,
+      "sha256": "2256ae3774b94cd7a46dae26f51da784963e87e5d4ef7bae2c140b227154c045"
+    },
+    {
+      "relative": "physical-local-inland.json.gz",
+      "bytes": 25361,
+      "allocated": 28672,
+      "links": 1,
+      "sha256": "9487d4c088bdce9dc10b80e485038816e74956cd5821f115ed9c29935bcfe118"
+    },
+    {
+      "relative": "placement-florida-capture-base.json.gz",
+      "bytes": 38828,
+      "allocated": 40960,
+      "links": 1,
+      "sha256": "74226c4a3546faf1a0903122552b0f23304a7c5d46f7e79bc3496dc11716df46"
+    },
+    {
+      "relative": "placement-florida-capture-local.json.gz",
+      "bytes": 36143,
+      "allocated": 36864,
+      "links": 1,
+      "sha256": "39b9f2cf40e5344c96f338199e489b98e6d906df2a53b9b696e1e170efa03ee9"
+    },
+    {
+      "relative": "placement-florida-parity.json",
+      "bytes": 24331,
+      "allocated": 24576,
+      "links": 1,
+      "sha256": "f5d31ea84cecaba916b8e67e6630e0fbdcc0719efaaa16a2354b37f50efb32eb"
+    },
+    {
+      "relative": "placement-inland-capture-base.json.gz",
+      "bytes": 29802,
+      "allocated": 32768,
+      "links": 1,
+      "sha256": "c92e1c17be51aac82836feb1c43a74e7c106dde4437f988037c71470075f36dc"
+    },
+    {
+      "relative": "placement-inland-capture-local.json.gz",
+      "bytes": 29391,
+      "allocated": 32768,
+      "links": 1,
+      "sha256": "2d4cfdc17b1b64b664ab1e8f40114b7c607e476925080f3fe1f1de21a0474af7"
+    },
+    {
+      "relative": "placement-inland-parity.json",
+      "bytes": 24348,
+      "allocated": 24576,
+      "links": 1,
+      "sha256": "12e2093df4f101395bb458c07a8c06bd677f4c2ba0989c1455e4c02772383750"
+    },
+    {
+      "relative": "placement_parity.py",
+      "bytes": 11094,
+      "allocated": 12288,
+      "links": 1,
+      "sha256": "70d39af4fa8c6e150558e9f565c622843687162882223fedbcb261a077506c7a"
+    },
+    {
+      "relative": "post-cleanup-smoke.json",
+      "bytes": 12491,
+      "allocated": 16384,
+      "links": 1,
+      "sha256": "8eda6a0939d6a8bc983e0c8dfd74910450852dde0bd571b3058504525f40be33"
+    },
+    {
+      "relative": "post_cleanup.py",
+      "bytes": 3787,
+      "allocated": 4096,
+      "links": 1,
+      "sha256": "faeeee79ce30542b4419b360b5f3184d98fd62ad0105e4b80eaa8989efa5f897"
+    },
+    {
+      "relative": "private-host-build-candidate-final.json",
+      "bytes": 515,
+      "allocated": 520,
+      "links": 1,
+      "sha256": "a93538e41e123f1760abbf2dc9a96fe37b0311b4c6292fe9feaf6de61bbc49d2"
+    },
+    {
+      "relative": "private-host-build-candidate.json",
+      "bytes": 515,
+      "allocated": 520,
+      "links": 1,
+      "sha256": "ce1bb2becf7a38fb3bf09c78917946760ad19bb10ce227da6e9d07a7537a5b26"
+    },
+    {
+      "relative": "private-host-build-v2.json",
+      "bytes": 247,
+      "allocated": 248,
+      "links": 1,
+      "sha256": "6c54dbe81d01bf06fc9473d43e38003c2743a377c5f96316076b70dfb8725918"
+    },
+    {
+      "relative": "private-host-build-v3.json",
+      "bytes": 515,
+      "allocated": 520,
+      "links": 1,
+      "sha256": "238ff5b821c691e9b3a7908e29a38b6ea8df4ee5dd38da1a19e3b43baf516298"
+    },
+    {
+      "relative": "private-host.json",
+      "bytes": 247,
+      "allocated": 248,
+      "links": 1,
+      "sha256": "bb4d82212b48dcad42563e1a73a25577ae6035745178d1e3ddb314e6cd92ebda"
+    },
+    {
+      "relative": "probe-revision-proof.json",
+      "bytes": 5818,
+      "allocated": 8192,
+      "links": 1,
+      "sha256": "d014c304b15bb18b661278447d2cd26a054b70343ec6825ed799d98ad82ca2c5"
+    },
+    {
+      "relative": "README.md",
+      "bytes": 31426,
+      "allocated": 32768,
+      "links": 1,
+      "sha256": "1b2431e4a133e9688c95af65ab7b95a2eb7d4cdccafa1a6a6b9c46d35356c258"
+    },
+    {
+      "relative": "regional-base.json.gz",
+      "bytes": 149569,
+      "allocated": 151552,
+      "links": 1,
+      "sha256": "52267781017f4cb730972e679eb858a8a1569313ddcc09ff098226f8e5e17cc2"
+    },
+    {
+      "relative": "regional-candidate.json.gz",
+      "bytes": 141302,
+      "allocated": 143360,
+      "links": 1,
+      "sha256": "9df7dfaaf5e71e87086a0c1d9595319010475b594aeb352801a05565b6d77f2d"
+    },
+    {
+      "relative": "regional-local.json.gz",
+      "bytes": 142000,
+      "allocated": 143360,
+      "links": 1,
+      "sha256": "c22a598d654a767a1e49d8077f22d0e401e53978fe7adcf851472a3dc3405726"
+    },
+    {
+      "relative": "seal.py",
+      "bytes": 15071,
+      "allocated": 16384,
+      "links": 1,
+      "sha256": "3bce09ec37dcc807329b4a2fce2baf6046b16a764d57bc33d70f8e3648daec91"
+    },
+    {
+      "relative": "storage-notes.md",
+      "bytes": 6193,
+      "allocated": 8192,
+      "links": 1,
+      "sha256": "2ddda0a6d78d961e20cb7737b38337aa5f1fa5e2bfddecf94edcfd4f2fbd6e42"
+    },
+    {
+      "relative": "storage-plan.json",
+      "bytes": 94196,
+      "allocated": 94208,
+      "links": 1,
+      "sha256": "bf8b24d752206dc289ff2414d51de7560866c12be96b5019f2973049cf4c35b5"
+    },
+    {
+      "relative": "timing-host.patch",
+      "bytes": 42640,
+      "allocated": 45056,
+      "links": 1,
+      "sha256": "2f116257cce3d098f0d039474b89e4f628f985125f12d1304a64ed4bdf32bb53"
+    },
+    {
+      "relative": "timing.inl",
+      "bytes": 1307,
+      "allocated": 4096,
+      "links": 1,
+      "sha256": "85e442cc31e677d9af69d436f5df6a9fad1ba505e19eecae1aaee085ef0be1db"
+    },
+    {
+      "relative": "validate.py",
+      "bytes": 3359,
+      "allocated": 4096,
+      "links": 1,
+      "sha256": "b8d607a5005307b6b6c1acddc3589b132e566c423ee0b7e0cb4557fa81ca5cc1"
+    },
+    {
+      "relative": "validation-summary.json",
+      "bytes": 5757,
+      "allocated": 8192,
+      "links": 1,
+      "sha256": "aba31ca8beb592a5b2b8bf69077371f806f9b127bec8be337ebb5608e83e8339"
+    },
+    {
+      "relative": "validation.json.gz",
+      "bytes": 21813,
+      "allocated": 24576,
+      "links": 1,
+      "sha256": "783f29b19d8b030a02ec1e9933ac1ad8fe8bb3dd068a3430b9566d817c5f3e54"
+    },
+    {
+      "relative": "verify-a.json",
+      "bytes": 12436,
+      "allocated": 16384,
+      "links": 1,
+      "sha256": "29614989747473a002281da0a1324f4a90917d360912acf480d05a7cc2dd0997"
+    },
+    {
+      "relative": "verify-a.md",
+      "bytes": 21791,
+      "allocated": 24576,
+      "links": 1,
+      "sha256": "23f615e01a55bbe11234cce1b3eb8ba166966e85097e7e2961d9f069e3c65662"
+    },
+    {
+      "relative": "verify-b.json.gz",
+      "bytes": 164239,
+      "allocated": 167936,
+      "links": 1,
+      "sha256": "30a9c4f52ccd0c735faf020ab0b3d63bcfab3872200b57f41e9698b7a02ad5f5"
+    },
+    {
+      "relative": "verify-b.md",
+      "bytes": 16670,
+      "allocated": 20480,
+      "links": 1,
+      "sha256": "dfdf44f0e0c2027a36045fc4b7f5f93ea9987aa6ba479a46cba46d3512935428"
+    },
+    {
+      "relative": "whole.py",
+      "bytes": 9222,
+      "allocated": 12288,
+      "links": 1,
+      "sha256": "0ce2636627f25a35017d427f98a6363ed32fcf14919339b32ce9b4881c88fe6c"
+    },
+    {
+      "relative": "work-a.json.gz",
+      "bytes": 83725,
+      "allocated": 86016,
+      "links": 1,
+      "sha256": "026fe0d949b206242aaebcef581f9c0cfe9fe2638f741b3a2def479a8b5b0880"
+    },
+    {
+      "relative": "work-a.md",
+      "bytes": 19460,
+      "allocated": 20480,
+      "links": 1,
+      "sha256": "81bade74cd82b01dcba2ccb1c22af02143399183890659ed02ebb7bf14be3610"
+    },
+    {
+      "relative": "work-b.json",
+      "bytes": 9586,
+      "allocated": 12288,
+      "links": 1,
+      "sha256": "2e19aff121a1c378b8eb58f54e618c82619f619789d1fe2bc82dec911a0b3bbe"
+    },
+    {
+      "relative": "work-b.md",
+      "bytes": 14677,
+      "allocated": 16384,
+      "links": 1,
+      "sha256": "eb6525697c354e67e9ca0aa2e51c8d6acd4ce0ea5a415cd8806d398552c0ec89"
+    },
+    {
+      "relative": "work-c.json",
+      "bytes": 23296,
+      "allocated": 24576,
+      "links": 1,
+      "sha256": "7c5c8d97e513d6fc658ecfec47e3abfa81438a5723e7bf8d2749ed550da3b139"
+    },
+    {
+      "relative": "work-c.md",
+      "bytes": 21017,
+      "allocated": 24576,
+      "links": 1,
+      "sha256": "122e205a967e265b63cc1197ea04f4303a9eb3b6bf708ff675344688a041e283"
+    }
+  ],
+  "excludedSelfReferential": [
+    "retained-manifest.json",
+    "seal.json"
+  ],
+  "reason": "Compact causal model, exact runtime/input/output provenance, original failing result and verified remedy, regressions, reproduction and narrow KSA evidence"
+}

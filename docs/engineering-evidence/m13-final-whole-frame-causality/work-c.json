@@ -1,0 +1,526 @@
+{
+  "schema": 1,
+  "review": "Work C: current KSA material, GPU work placement, and zero-support visibility boundaries",
+  "observedUtc": "2026-09-08T01:47:28.446583+00:00",
+  "novaCoreHead": "047ae479b33831eae1c0dfa3f37c657a7f70148f",
+  "installedFileVersion": "2026.9.7.5402",
+  "installedProductVersion": "2026.9.7.5402+487c3f340de24c6a81037120b6d1129c045c5400",
+  "priorReference": "docs/engineering-evidence/m13-regional-replacement-lifecycle/work-c.json",
+  "files": [
+    {
+      "path": "E:/Kitten Space Agency/KSA.dll",
+      "bytes": 4798552,
+      "sha256": "a8a5164204eed962df9d9025e99f523d9a23ee2ce6e802b18216a9da35506d2f",
+      "priorSha256": "a8a5164204eed962df9d9025e99f523d9a23ee2ce6e802b18216a9da35506d2f",
+      "comparison": "unchanged"
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/assembly-source/Properties/AssemblyInfo.cs",
+      "bytes": 556,
+      "sha256": "ff5516e41874502b182b035197a11c3f3dfc4e6d309ee3186bbbad09c1834bf5",
+      "priorSha256": "ff5516e41874502b182b035197a11c3f3dfc4e6d309ee3186bbbad09c1834bf5",
+      "comparison": "unchanged"
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/source/KSA.PlanetRenderer.cs",
+      "bytes": 116885,
+      "sha256": "5ce37c334045f9b5cba9a450a6accc454444e8d20327b9778b98740cf7a64a50",
+      "priorSha256": "5ce37c334045f9b5cba9a450a6accc454444e8d20327b9778b98740cf7a64a50",
+      "comparison": "unchanged"
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/source/KSA.Program.cs",
+      "bytes": 190778,
+      "sha256": "d11020c5280417d1a02ef35c5d13bad01607ddd5a21a3302e52db136a872557e",
+      "priorSha256": "d11020c5280417d1a02ef35c5d13bad01607ddd5a21a3302e52db136a872557e",
+      "comparison": "unchanged"
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/assembly-source/KSA/PlanetFrustumCulling.cs",
+      "bytes": 12197,
+      "sha256": "92f55e123ac3af9fef631df56f2db2992e366b70df711eb959273090e62e75c5",
+      "priorSha256": "92f55e123ac3af9fef631df56f2db2992e366b70df711eb959273090e62e75c5",
+      "comparison": "unchanged"
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/source/KSA.Rendering.CelestialTextureStreamer.cs",
+      "bytes": 33788,
+      "sha256": "433574981d77a48b354baddbadab6a354411e53a67535696a6bb4b8b33ff3ec7",
+      "priorSha256": "433574981d77a48b354baddbadab6a354411e53a67535696a6bb4b8b33ff3ec7",
+      "comparison": "unchanged"
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/source/KSA.Rendering.StreamingUploader.cs",
+      "bytes": 16757,
+      "sha256": "bf250fc959cf32b3fae471b6a0101f41b466856ecde7a7985fbe3a1ccd922602",
+      "priorSha256": "bf250fc959cf32b3fae471b6a0101f41b466856ecde7a7985fbe3a1ccd922602",
+      "comparison": "unchanged"
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/source/KSA.Rendering.RetiredResourceQueue.cs",
+      "bytes": 2698,
+      "sha256": "3dcdaf9312ee23e4fb853b7a6962823ae103ab8b3c49a7b8316beecd39999e28",
+      "priorSha256": "3dcdaf9312ee23e4fb853b7a6962823ae103ab8b3c49a7b8316beecd39999e28",
+      "comparison": "unchanged"
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/assembly-source/KSA.Rendering/FreeImagePool.cs",
+      "bytes": 1514,
+      "sha256": "247dcc1917f565b8591f929e75281db70bb55bfe2283d7e64ed14a26b2b38376",
+      "priorSha256": "247dcc1917f565b8591f929e75281db70bb55bfe2283d7e64ed14a26b2b38376",
+      "comparison": "unchanged"
+    },
+    {
+      "path": "E:/Kitten Space Agency/Content/Core/Shaders/Planet/Planet.frag",
+      "bytes": 19290,
+      "sha256": "69173727f94b0a85e91ef5a9989503144d614ffb2a165f920ada722c9253ae20",
+      "priorSha256": null,
+      "comparison": "current fingerprint"
+    },
+    {
+      "path": "E:/Kitten Space Agency/Content/Core/Shaders/Planet/PlanetTessControl.tesc",
+      "bytes": 3117,
+      "sha256": "52804d08ed0e42853b008e407e75e47a6113a646f664e8fe4b93d8b713b861c9",
+      "priorSha256": null,
+      "comparison": "current fingerprint"
+    },
+    {
+      "path": "E:/Kitten Space Agency/Content/Core/Shaders/Planet/PlanetTessEvaluation.tese",
+      "bytes": 6914,
+      "sha256": "80c3168561c468d3b255d635b31c1e0163ed8331c21e1340b8d490525bc93b27",
+      "priorSha256": null,
+      "comparison": "current fingerprint"
+    },
+    {
+      "path": "E:/Kitten Space Agency/Content/Core/Shaders/Planet/TessellationFuncs.glsl",
+      "bytes": 5125,
+      "sha256": "308ee11e81ec65757c4514e485dfc6ffbf7cb2fb76e6467ca267e6980eb4172e",
+      "priorSha256": null,
+      "comparison": "current fingerprint"
+    },
+    {
+      "path": "E:/Kitten Space Agency/Content/Core/Shaders/Common/Planet.glsl",
+      "bytes": 33189,
+      "sha256": "c4c5f1cbf5277fb0642997fd9f5da0fd8565588beba0d9f7bfe40636539a94ad",
+      "priorSha256": null,
+      "comparison": "current fingerprint"
+    },
+    {
+      "path": "E:/Kitten Space Agency/Content/Core/Shaders/Planet/Culling/PlanetFrustumCulling.comp",
+      "bytes": 2973,
+      "sha256": "4a1617f6ce1660aa78a373d79f4c97022c325525a4f694e100e22aad7c2f23e5",
+      "priorSha256": "4a1617f6ce1660aa78a373d79f4c97022c325525a4f694e100e22aad7c2f23e5",
+      "comparison": "unchanged"
+    },
+    {
+      "path": "E:/Kitten Space Agency/Content/Core/Shaders/Culling/Culling.glsl",
+      "bytes": 3409,
+      "sha256": "869739acc53279a7494143c2bc5d88d8063daafe96e6b4b0930b8cd5d509ef88",
+      "priorSha256": null,
+      "comparison": "current fingerprint"
+    },
+    {
+      "path": "E:/NovaCore/native/NovaCore.Native/shaders/production_terrain_material.glsl",
+      "bytes": 17593,
+      "sha256": "8b936d826431278cd05f0fc9e9daeab08e97cecd56e752bb7cc26863e264c49f",
+      "priorSha256": null,
+      "comparison": "current fingerprint"
+    },
+    {
+      "path": "E:/NovaCore/native/NovaCore.Native/shaders/planetary_production.frag",
+      "bytes": 18873,
+      "sha256": "c12377419c69f7060c80ea9a0ace21df7d5f9969b7aec336d36f02f85c6765c2",
+      "priorSha256": null,
+      "comparison": "current fingerprint"
+    },
+    {
+      "path": "E:/NovaCore/native/NovaCore.Native/shaders/production_nested_scale_mesh_cull.comp",
+      "bytes": 9665,
+      "sha256": "611c3670b5800cc3ac352bed5d326eb59ef1abba6ba2cc5519337967703b5550",
+      "priorSha256": null,
+      "comparison": "current fingerprint"
+    },
+    {
+      "path": "E:/NovaCore/native/NovaCore.Native/shaders/production_nested_scale_mesh_incoming_cull.comp",
+      "bytes": 9218,
+      "sha256": "7dc18dfb540a3be29bc90671f49675fcc5a6d6d13b6ba05282a6ba900b3f1bd4",
+      "priorSha256": null,
+      "comparison": "current fingerprint"
+    },
+    {
+      "path": "E:/NovaCore/native/NovaCore.Native/NovaCoreNative.cpp",
+      "bytes": 287005,
+      "sha256": "edb58bb76f4b1f2b9232a065c75303d21b5e656fe62733bfcd664d835f24e2aa",
+      "priorSha256": null,
+      "comparison": "current fingerprint"
+    },
+    {
+      "path": "E:/NovaCore/native/NovaCore.Native/RegionalPhysicalPreparation.inl",
+      "bytes": 6653,
+      "sha256": "03ba49c5e0067b7f11739419ad290286a5c3467e3648c423d8edc9c372fedbbf",
+      "priorSha256": null,
+      "comparison": "current fingerprint"
+    },
+    {
+      "path": "E:/NovaCore/native/NovaCore.Native/RegionalPhysicalResidency.inl",
+      "bytes": 13059,
+      "sha256": "0fe2767c7ece2470cb2a6b0d83c0cf848debc5b1563173c7b6650339e71638fd",
+      "priorSha256": null,
+      "comparison": "current fingerprint"
+    }
+  ],
+  "versionVerification": "Installed DLL Windows VersionInfo read live; cached decompilation reused with previously verified unchanged binary/source identities; no fresh decompilation.",
+  "freshDecompilation": false,
+  "builds": 0,
+  "gpuRuns": 0,
+  "productionEdits": 0,
+  "discordUsed": false,
+  "ksaPerformanceMeasured": false,
+  "priorOverlapMatches": 10,
+  "candidateGate": {
+    "avoidableWholeFrameMsMinimum": 1.5,
+    "payoffMeasuredByThisWorker": false,
+    "regionalBlockerAssumed": false
+  },
+  "material": {
+    "stage": "fragment",
+    "resolvedMaterialCandidates": 4,
+    "responseMaterialsSampledMaximum": 3,
+    "source": "sampled authored displacement/diffuse/normal/AO-rough-metal textures",
+    "sharedInputs": [
+      "biplanar projection/weights",
+      "pre-projection coarse derivatives",
+      "two distance scales",
+      "CPU double-precision fractional coordinate offsets"
+    ],
+    "cpuOffsetUpdate": "per applicable rendered frame; per material and 16 scale levels; staging-to-GPU copy",
+    "tessellation": "retained for material displacement; explicit LOD 2 sampling in TES",
+    "novaCoreDifference": "FP64 procedural hash field with accepted macro identity and derivative contracts; four-corner prefix sharing and zero-contribution guards already in HEAD",
+    "noEquivalentExactHashImplementation": true
+  },
+  "placement": {
+    "ksa": "persistent device-local generated vertex/normal/color/gradient/culling-index arrays per frame slot; separate mapped controls",
+    "novaCore": "persistent topology/current/incoming/spare allocations; host-visible coherent required, device-local not required",
+    "caveat": "HOST_VISIBLE|HOST_COHERENT does not establish actual absence of DEVICE_LOCAL; record selected memory type and heap.",
+    "isolatedControl": "device-local placement of existing bulk working arrays while preserving coherent host mappings and all current consumers",
+    "frequency": "KSA terrain preparation and camera culling recorded every applicable frame; persistent allocation does not imply content reuse",
+    "queue": "GenerateMeshData and terrain Render in same acquired graphics frame command buffer; no separate asynchronous preparation queue proven"
+  },
+  "culling": {
+    "ksaEnvelope": "maximum authored ground/slope material DisplacementScale; added to centroid/max-vertex enclosing sphere",
+    "ksaPointToTriangleDistanceClassification": false,
+    "novaCoreCandidate": "skip unused point-to-triangle distance only where exact zero TES support leaves no production consumer; preserve diagnostic and nonzero-envelope consumers",
+    "noSemanticsReplacement": "Do not replace NovaCore conservative rejection with KSA sphere or remove future TES support.",
+    "avoidedTimeMeasuredByThisWorker": false
+  },
+  "actualIsaAudit": {
+  "method": {
+    "stages": {
+      "1": "vertex flag; AMD merged hull executable",
+      "2": "tessellation control flag; same AMD merged hull executable",
+      "4": "tessellation evaluation flag",
+      "16": "fragment flag"
+    },
+    "opcodeNormalization": "UTF-8; remove NUL; for lines containing semicolon keep assembly before first semicolon; trim; discard s_code_end padding; first whitespace-separated token; join with LF and final LF; SHA-256. Labels and hex encodings are not included.",
+    "instructionNormalization": "Same parsed instruction sequence including operands, collapsed internal whitespace; no s_code_end; LF and final LF. Labels themselves omitted; branch targets retained.",
+    "interfaceMethod": "Count attrN.component references in actual ISA; preserve TES exp instructions; compare against raw byte identity of stages 1,2,4."
+  },
+  "runs": {
+    "base-florida-repeat-isa": {
+      "journalPath": "E:/NovaCore/docs/engineering-evidence/m13-final-whole-frame-causality/base-florida-repeat-isa.json",
+      "journalSha256": "3a6004d7043ecb39e7223a501ccdd6f60fe56b3a150f36043f24ad43f5cbebc8",
+      "nativeSha256": "047a5e928583ec8ee17aa24c9e5877f48b782f7cb711d08cf7d07bbdad68109a",
+      "managedSha256": "82c72c8d968df824ffc498604e1a14dc8c738d73dd741c05e759cc668bbf03bb",
+      "args": [
+        "--scene=sol",
+        "--focus=earth",
+        "--altitude=10.004",
+        "--solar-epoch=j2000",
+        "--physical-surface=m12d-natural-candidate",
+        "--p2s5c3-traversal",
+        "--benchmark-frames=1000",
+        "--log=startup,validation,vulkan",
+        "--surface-site=florida-launch"
+      ],
+      "stageInfo": {
+        "1": {
+          "path": "E:/NovaCore/docs/engineering-evidence/m13-final-whole-frame-causality/base-florida-repeat-isa-compiler/stage-1.isa",
+          "bytes": 50672,
+          "rawSha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e",
+          "instructionCount": 806,
+          "opcodeSha256": "922fd309e6a1c1b0cf71331ac2c1d9212079ed591a622dc52477537c07d139e7",
+          "instructionSha256": "d45ee824fccd6c636313552fcc5633535a29cc538308fbb2847aa33547386d84",
+          "attributes": {},
+          "exports": [],
+          "fp64OpcodeCount": 67,
+          "imageOpcodeCount": 0,
+          "metadata": {
+            "oppositeFace": 1,
+            "stage": 1,
+            "vgpr": 39,
+            "sgpr": 64,
+            "ldsBytes": 32212,
+            "scratchBytes": 0
+          }
+        },
+        "2": {
+          "path": "E:/NovaCore/docs/engineering-evidence/m13-final-whole-frame-causality/base-florida-repeat-isa-compiler/stage-2.isa",
+          "bytes": 50672,
+          "rawSha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e",
+          "instructionCount": 806,
+          "opcodeSha256": "922fd309e6a1c1b0cf71331ac2c1d9212079ed591a622dc52477537c07d139e7",
+          "instructionSha256": "d45ee824fccd6c636313552fcc5633535a29cc538308fbb2847aa33547386d84",
+          "attributes": {},
+          "exports": [],
+          "fp64OpcodeCount": 67,
+          "imageOpcodeCount": 0,
+          "metadata": {
+            "oppositeFace": 1,
+            "stage": 2,
+            "vgpr": 39,
+            "sgpr": 64,
+            "ldsBytes": 32212,
+            "scratchBytes": 0
+          }
+        },
+        "4": {
+          "path": "E:/NovaCore/docs/engineering-evidence/m13-final-whole-frame-causality/base-florida-repeat-isa-compiler/stage-4.isa",
+          "bytes": 36816,
+          "rawSha256": "b9e48ba68fc07d7e4abcf6e6032521b3aeef68283d01e636b91c36663245e4d5",
+          "instructionCount": 546,
+          "opcodeSha256": "5bf857b285e9fd00d9dca5c88049e034ed480c5ab7955a5250f05d0b806172c7",
+          "instructionSha256": "9d3b82a079b44d2e50cae7b368bd20397b2d771cb99a2000c48c11ac5356b2b6",
+          "attributes": {},
+          "exports": [
+            "exp prim v2, off, off, off done",
+            "exp pos0 v44, v45, v46, v47 done",
+            "exp param0 v2, v11, v1, off",
+            "exp param1 v28, v29, v30, off",
+            "exp param2 v3, v12, v10, v13",
+            "exp param3 v7, v8, v9, off",
+            "exp param4 v4, v5, v6, off",
+            "exp param5 v0, off, off, off",
+            "exp param6 v14, v16, v15, off",
+            "exp param7 v17, v19, v18, off"
+          ],
+          "fp64OpcodeCount": 101,
+          "imageOpcodeCount": 0,
+          "metadata": {
+            "oppositeFace": 1,
+            "stage": 4,
+            "vgpr": 48,
+            "sgpr": 32,
+            "ldsBytes": 4608,
+            "scratchBytes": 0
+          }
+        },
+        "16": {
+          "path": "E:/NovaCore/docs/engineering-evidence/m13-final-whole-frame-causality/base-florida-repeat-isa-compiler/stage-16.isa",
+          "bytes": 173928,
+          "rawSha256": "a531c7fed6d8111a015cbaae2fc06f36f1e436b75c34967a8b6430b981df091b",
+          "instructionCount": 2895,
+          "opcodeSha256": "69589311f892d3dbbc4422dce6ee84e2243d635de077799394bf71933126c0f9",
+          "instructionSha256": "d2b639b9238b45c234da2d39d9f8fa18da4d608c1572173f3e5bf3b5df810cae",
+          "attributes": {
+            "attr0.x": 2,
+            "attr0.y": 2,
+            "attr0.z": 2,
+            "attr1.x": 1,
+            "attr1.y": 1,
+            "attr1.z": 1,
+            "attr2.x": 1,
+            "attr2.y": 1,
+            "attr2.z": 1,
+            "attr3.x": 2,
+            "attr3.y": 2,
+            "attr3.z": 2,
+            "attr4.x": 2,
+            "attr4.y": 2,
+            "attr4.z": 2,
+            "attr5.x": 2,
+            "attr6.x": 1,
+            "attr6.y": 1,
+            "attr6.z": 1,
+            "attr7.x": 1,
+            "attr7.y": 1,
+            "attr7.z": 1
+          },
+          "exports": [
+            "exp mrt0 off, off, off, off done vm",
+            "exp mrt0 v1, v1, v0, v0 done compr vm"
+          ],
+          "fp64OpcodeCount": 763,
+          "imageOpcodeCount": 3,
+          "metadata": {
+            "oppositeFace": 1,
+            "stage": 16,
+            "vgpr": 78,
+            "sgpr": 53,
+            "ldsBytes": 0,
+            "scratchBytes": 0
+          }
+        }
+      }
+    },
+    "noise-florida-isa": {
+      "journalPath": "E:/NovaCore/docs/engineering-evidence/m13-final-whole-frame-causality/noise-florida-isa.json",
+      "journalSha256": "1120cd425de4403a9bd8e0f7e76a762b5c9e824ef93b70169cd95ca6f6f370e1",
+      "nativeSha256": "247b9024bffc719a21463a899c1222b350e41eaa1b0969193587f74ca60fa2e4",
+      "managedSha256": "82c72c8d968df824ffc498604e1a14dc8c738d73dd741c05e759cc668bbf03bb",
+      "args": [
+        "--scene=sol",
+        "--focus=earth",
+        "--altitude=10.004",
+        "--solar-epoch=j2000",
+        "--physical-surface=m12d-natural-candidate",
+        "--p2s5c3-traversal",
+        "--benchmark-frames=1000",
+        "--log=startup,validation,vulkan",
+        "--surface-site=florida-launch"
+      ],
+      "stageInfo": {
+        "1": {
+          "path": "E:/NovaCore/docs/engineering-evidence/m13-final-whole-frame-causality/noise-florida-isa-compiler/stage-1.isa",
+          "bytes": 50672,
+          "rawSha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e",
+          "instructionCount": 806,
+          "opcodeSha256": "922fd309e6a1c1b0cf71331ac2c1d9212079ed591a622dc52477537c07d139e7",
+          "instructionSha256": "d45ee824fccd6c636313552fcc5633535a29cc538308fbb2847aa33547386d84",
+          "attributes": {},
+          "exports": [],
+          "fp64OpcodeCount": 67,
+          "imageOpcodeCount": 0,
+          "metadata": {
+            "oppositeFace": 1,
+            "stage": 1,
+            "vgpr": 39,
+            "sgpr": 64,
+            "ldsBytes": 32212,
+            "scratchBytes": 0
+          }
+        },
+        "2": {
+          "path": "E:/NovaCore/docs/engineering-evidence/m13-final-whole-frame-causality/noise-florida-isa-compiler/stage-2.isa",
+          "bytes": 50672,
+          "rawSha256": "e8f78eeaf1f499eca00aa18e0cf4cd0a1514ed98a17b6d8d94bf6b4c0c52c28e",
+          "instructionCount": 806,
+          "opcodeSha256": "922fd309e6a1c1b0cf71331ac2c1d9212079ed591a622dc52477537c07d139e7",
+          "instructionSha256": "d45ee824fccd6c636313552fcc5633535a29cc538308fbb2847aa33547386d84",
+          "attributes": {},
+          "exports": [],
+          "fp64OpcodeCount": 67,
+          "imageOpcodeCount": 0,
+          "metadata": {
+            "oppositeFace": 1,
+            "stage": 2,
+            "vgpr": 39,
+            "sgpr": 64,
+            "ldsBytes": 32212,
+            "scratchBytes": 0
+          }
+        },
+        "4": {
+          "path": "E:/NovaCore/docs/engineering-evidence/m13-final-whole-frame-causality/noise-florida-isa-compiler/stage-4.isa",
+          "bytes": 36816,
+          "rawSha256": "b9e48ba68fc07d7e4abcf6e6032521b3aeef68283d01e636b91c36663245e4d5",
+          "instructionCount": 546,
+          "opcodeSha256": "5bf857b285e9fd00d9dca5c88049e034ed480c5ab7955a5250f05d0b806172c7",
+          "instructionSha256": "9d3b82a079b44d2e50cae7b368bd20397b2d771cb99a2000c48c11ac5356b2b6",
+          "attributes": {},
+          "exports": [
+            "exp prim v2, off, off, off done",
+            "exp pos0 v44, v45, v46, v47 done",
+            "exp param0 v2, v11, v1, off",
+            "exp param1 v28, v29, v30, off",
+            "exp param2 v3, v12, v10, v13",
+            "exp param3 v7, v8, v9, off",
+            "exp param4 v4, v5, v6, off",
+            "exp param5 v0, off, off, off",
+            "exp param6 v14, v16, v15, off",
+            "exp param7 v17, v19, v18, off"
+          ],
+          "fp64OpcodeCount": 101,
+          "imageOpcodeCount": 0,
+          "metadata": {
+            "oppositeFace": 1,
+            "stage": 4,
+            "vgpr": 48,
+            "sgpr": 32,
+            "ldsBytes": 4608,
+            "scratchBytes": 0
+          }
+        },
+        "16": {
+          "path": "E:/NovaCore/docs/engineering-evidence/m13-final-whole-frame-causality/noise-florida-isa-compiler/stage-16.isa",
+          "bytes": 123386,
+          "rawSha256": "34bf39abef9c54ed89f0e5cd1023c9b07747f6addbc943f4d753d8bea71b77cd",
+          "instructionCount": 2047,
+          "opcodeSha256": "83d829289934c1ce1a1c77aca34dae073dbd72bec981039de655ca002b9aa301",
+          "instructionSha256": "f59cc45a9efa3be4ad5e11afcc12f729623b1e634a898761dbe924448155af17",
+          "attributes": {
+            "attr0.x": 2,
+            "attr0.y": 2,
+            "attr0.z": 2,
+            "attr1.x": 1,
+            "attr1.y": 1,
+            "attr1.z": 1,
+            "attr2.x": 1,
+            "attr2.y": 1,
+            "attr2.z": 1,
+            "attr3.x": 2,
+            "attr3.y": 2,
+            "attr3.z": 2,
+            "attr4.x": 2,
+            "attr4.y": 2,
+            "attr4.z": 2,
+            "attr5.x": 2,
+            "attr6.x": 1,
+            "attr6.y": 1,
+            "attr6.z": 1,
+            "attr7.x": 1,
+            "attr7.y": 1,
+            "attr7.z": 1
+          },
+          "exports": [
+            "exp mrt0 off, off, off, off done vm",
+            "exp mrt0 v2, v2, v3, v3 done compr vm"
+          ],
+          "fp64OpcodeCount": 187,
+          "imageOpcodeCount": 3,
+          "metadata": {
+            "oppositeFace": 1,
+            "stage": 16,
+            "vgpr": 63,
+            "sgpr": 53,
+            "ldsBytes": 0,
+            "scratchBytes": 0
+          }
+        }
+      }
+    }
+  },
+  "differentDeployedShaders": [
+    {
+      "name": "planetary_production.frag.spv",
+      "baseline": "8c59838abb3d7ee6418695ea40f044ca1f04f5c3c9216296d5cc19bba6110d6b",
+      "control": "7abac39c6f56512d21c0e62d4dcddddb9e8d370744fb523f3a1a33461b53c99b"
+    }
+  ],
+  "conclusion": "No executable upstream DCE/interface change: stages 1/2/4 byte-identical; fragment interpolant references unchanged. Fragment instructions/registers change as intended. No exact timing attribution made.",
+  "limits": [
+    "Static opcode counts are not dynamic instruction counts, occupancy measurements or milliseconds.",
+    "Fragment VGPR reduction changes scheduling potential as part of this conditional control; it does not prove an output-preserving production optimization.",
+    "The two journal native DLL hashes differ; root owns host source/provenance equivalence check.",
+    "Pipeline evidence is for oppositeFace=1 from these journals, not all renderer variants."
+  ]
+},
+  "limits": [
+    "Source comparison provides responsibility boundaries, not measured >=1.5 ms saving.",
+    "Cheap-fragment declarations alone cannot prove live upstream dependencies; compiler/ISA and matched execution are required.",
+    "KSA fractional texture offsets do not prove exact encoding of NovaCore nonperiodic hash cell identity.",
+    "KSA TES displaced gl_Position and pre-displacement world-position varying are not qualified as NovaCore physical/material receiver parity.",
+    "KSA completion-gated texture views do not provide NovaCore exact regional physical publication contract.",
+    "Prior regional gate timings are not fresh whole-frame payoff evidence.",
+    "No KSA fixed terrain GPU-time budget or universally bounded idle image-pool memory proved."
+  ]
+}

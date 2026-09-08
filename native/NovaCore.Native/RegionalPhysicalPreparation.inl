@@ -48,7 +48,7 @@ void UpdateRegionalPreparation(App& a){
       if(a.regionalScratchCapacity<a.productionBillboardVertexCapacity){
         DestroyHostBuffer(a,a.regionalScratchBuffer,a.regionalScratchMemory,a.regionalScratchMapped);
         a.regionalScratchCapacity=a.productionBillboardVertexCapacity;
-        CreateHostBuffer(a,VkDeviceSize(a.regionalScratchCapacity)*sizeof(NcSphericalBillboardPhysicalVertex),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,a.regionalScratchBuffer,a.regionalScratchMemory,a.regionalScratchMapped,"regional pupil staging allocation failed");
+        CreateHostBuffer(a,VkDeviceSize(a.regionalScratchCapacity)*sizeof(NcSphericalBillboardPhysicalVertex),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,a.regionalScratchBuffer,a.regionalScratchMemory,a.regionalScratchMapped,"regional pupil staging allocation failed",nc::MappedBufferUse::TerrainGpuWorkingSet);
         RegionalDescriptor(a,57,a.regionalScratchBuffer,VkDeviceSize(a.regionalScratchCapacity)*sizeof(NcSphericalBillboardPhysicalVertex));
       }
       current={};current.active=true;current.generation=a.productionBillboardGeneration;

@@ -1,0 +1,142 @@
+{
+  "version": "2026.9.7.5402",
+  "revision": "487c3f340de24c6a81037120b6d1129c045c5400",
+  "existingManifest": "docs\\engineering-evidence\\ksa-terrain-convergence\\ksa-provenance.json",
+  "verified": [
+    {
+      "path": "E:\\Kitten Space Agency\\KSA.dll",
+      "sha256": "a8a5164204eed962df9d9025e99f523d9a23ee2ce6e802b18216a9da35506d2f",
+      "bytes": 4798552
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\Content\\Core\\MeshCollections\\EarthScaleMesh.xml",
+      "sha256": "ae3b9b61a9a9abdeed3dca83dadf6f77d54821d3c173d7f86528826f07957a8d",
+      "bytes": 8293
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\Common\\PrecisionFuncs.glsl",
+      "sha256": "fd3b6b654637447b8e9e6ea1932f5a69f4f810cb7f598481177fd102c3362264",
+      "bytes": 12796
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\Planet\\Planet.vert",
+      "sha256": "fff1a28f3a29c028acfe02a259ec2b3235cc5d43fa6b309278910c94049ace32",
+      "bytes": 2778
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\Planet\\PlanetTessControl.tesc",
+      "sha256": "52804d08ed0e42853b008e407e75e47a6113a646f664e8fe4b93d8b713b861c9",
+      "bytes": 3117
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\Planet\\PlanetTessEvaluation.tese",
+      "sha256": "80c3168561c468d3b255d635b31c1e0163ed8331c21e1340b8d490525bc93b27",
+      "bytes": 6914
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\Planet\\TessellationFuncs.glsl",
+      "sha256": "308ee11e81ec65757c4514e485dfc6ffbf7cb2fb76e6467ca267e6980eb4172e",
+      "bytes": 5125
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\Planet\\TerrainMesh\\MeshDataCommon.glsl",
+      "sha256": "6ec907559793a67f0fcc68d0338544bcbad96b5d13e4bcb58dee227a5d140995",
+      "bytes": 5581
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\Planet\\TerrainMesh\\PrepareModifiers.comp",
+      "sha256": "d3ea1e2cfc3d090c0602a9df0f9b6ec46337ab0a48cc6dea2ecc2d4d921b61b4",
+      "bytes": 7180
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\Planet\\TerrainMesh\\FinalizeModifiers.comp",
+      "sha256": "8ab510ac2547520bdc6284244fe46d583891afa8470f0b3a03694907047c89c6",
+      "bytes": 1302
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\Planet\\TerrainMesh\\GenerateMeshNormals.comp",
+      "sha256": "af645f0557632e4c8fad6c22228eebfc8fa0a4e27f40b1bf86a4bceded8f81dd",
+      "bytes": 1874
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\Planet\\Culling\\PlanetFrustumCulling.comp",
+      "sha256": "4a1617f6ce1660aa78a373d79f4c97022c325525a4f694e100e22aad7c2f23e5",
+      "bytes": 2973
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\Planet\\ProceduralModifiersLibrary\\Modifiers.glsl",
+      "sha256": "a0ddd940567917875c78be5e331c51c47f3d4894e4017563e0a8195bc2eed1e5",
+      "bytes": 52810
+    },
+    {
+      "path": "E:\\NovaCore\\build\\ksa-residency-reference\\assembly-source\\Properties\\AssemblyInfo.cs",
+      "sha256": "ff5516e41874502b182b035197a11c3f3dfc4e6d309ee3186bbbad09c1834bf5",
+      "bytes": 556
+    },
+    {
+      "path": "E:\\NovaCore\\build\\ksa-residency-reference\\source\\KSA.PlanetRenderer.cs",
+      "sha256": "5ce37c334045f9b5cba9a450a6accc454444e8d20327b9778b98740cf7a64a50",
+      "bytes": 116885
+    },
+    {
+      "path": "E:\\NovaCore\\build\\ksa-residency-reference\\source\\KSA.Program.cs",
+      "sha256": "d11020c5280417d1a02ef35c5d13bad01607ddd5a21a3302e52db136a872557e",
+      "bytes": 190778
+    },
+    {
+      "path": "E:\\NovaCore\\build\\ksa-residency-reference\\source\\KSA.PlanetMeshCollection.cs",
+      "sha256": "b41f4ecef5361e5365d814f76e6dcaa5fab6b6563ede91b2a91f78974b076bb5",
+      "bytes": 4194
+    },
+    {
+      "path": "E:\\NovaCore\\build\\ksa-residency-reference\\assembly-source\\KSA\\CubeMesh.cs",
+      "sha256": "d872a66602894ad826800059924b96873e2ba0c1e291576668c91ff956a019cd",
+      "bytes": 14452
+    },
+    {
+      "path": "E:\\NovaCore\\build\\ksa-residency-reference\\assembly-source\\KSA\\Celestial.cs",
+      "sha256": "6a36a243ff291ba54e8ac792917c909ccba54786a10fdd9608bc1da47f15c621",
+      "bytes": 65607
+    },
+    {
+      "path": "E:\\NovaCore\\build\\ksa-residency-reference\\assembly-source\\KSA\\TerrainPatch.cs",
+      "sha256": "052e2c591279541f27af1ffdce1849126c514f04bcb997eaef7f0e5122f702cd",
+      "bytes": 19472
+    },
+    {
+      "path": "E:\\NovaCore\\build\\ksa-residency-reference\\assembly-source\\KSA\\PlanetFrustumCulling.cs",
+      "sha256": "92f55e123ac3af9fef631df56f2db2992e366b70df711eb959273090e62e75c5",
+      "bytes": 12197
+    },
+    {
+      "path": "E:\\NovaCore\\build\\ksa-residency-reference\\source\\KSA.Rendering.CelestialTextureStreamer.cs",
+      "sha256": "433574981d77a48b354baddbadab6a354411e53a67535696a6bb4b8b33ff3ec7",
+      "bytes": 33788
+    },
+    {
+      "path": "E:\\NovaCore\\build\\ksa-residency-reference\\source\\KSA.Rendering.StreamingUploader.cs",
+      "sha256": "bf250fc959cf32b3fae471b6a0101f41b466856ecde7a7985fbe3a1ccd922602",
+      "bytes": 16757
+    },
+    {
+      "path": "E:\\NovaCore\\build\\ksa-residency-reference\\source\\KSA.Rendering.RetiredResourceQueue.cs",
+      "sha256": "3dcdaf9312ee23e4fb853b7a6962823ae103ab8b3c49a7b8316beecd39999e28",
+      "bytes": 2698
+    },
+    {
+      "path": "E:\\NovaCore\\build\\ksa-residency-reference\\source\\KSA.ProceduralModifiersRenderData.cs",
+      "sha256": "061fd27bed2b638f5d3fcc902b93ed2e0a5a76fb0c9d2e05f56cefaf692db197",
+      "bytes": 10476
+    },
+    {
+      "path": "E:\\NovaCore\\build\\ksa-residency-reference\\assembly-source\\KSA\\DecalModifierReference.cs",
+      "sha256": "c4ce5a948af9fd556245b50b1c52cd84554367928adfcc64c94d8a49f24d7a3f",
+      "bytes": 8742
+    },
+    {
+      "path": "E:\\NovaCore\\build\\ksa-residency-reference\\assembly-source\\KSA\\PlanetMeshCollection.cs",
+      "sha256": "b41f4ecef5361e5365d814f76e6dcaa5fab6b6563ede91b2a91f78974b076bb5",
+      "bytes": 4194
+    }
+  ]
+}

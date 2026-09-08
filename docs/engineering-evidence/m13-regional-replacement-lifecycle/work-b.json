@@ -1,0 +1,206 @@
+{
+  "schema": 1,
+  "worker": "B - CPU map and resource lifecycle",
+  "head": "047ae479b33831eae1c0dfa3f37c657a7f70148f",
+  "hardGpuTargetMs": 8.33,
+  "methods": [
+    "Live production source inspection",
+    "Retained scalar evidence review",
+    "No builds or GPU measurements by this worker"
+  ],
+  "bankedSourceBlobs": {
+    "native/NovaCore.Native/shaders/production_nested_scale_mesh_cull.comp": "df23077b1a534aa413afec6f7b1cb2286c82f560",
+    "native/NovaCore.Native/shaders/production_spherical_billboard_incoming_prepare.comp": "002536dfb00836110eb892de46613e24dcd226b3",
+    "native/NovaCore.Native/RegionalPhysicalResidency.h": "f915887ac2d32996a7f4be5e6d589f09e39aa10d",
+    "native/NovaCore.Native/RegionalPhysicalResidency.inl": "5b8054921321b98a3a5ba20fd18dc31d245acdfb",
+    "samples/NovaCore.Triangle/Program.cs": "09ccee0f053e6d656bfe2370ca368ee3a9412a42",
+    "native/NovaCore.Native/RegionalPhysicalPreparation.inl": "7bd8109db674b28f8ae43c156b23b3c3d2e2293d",
+    "native/NovaCore.Native/NovaCoreNative.cpp": "65d69bd0b1cd3187186daa4dff1b8264f1e65c5a",
+    "src/NovaCore.Graphics/PlanetaryNestedScaleMeshRuntimeAdapter.cs": "e635b5d0ed48293b711490ed80d6ef7337573548",
+    "src/NovaCore.Graphics/PlanetaryProductionSphericalBillboardMovingRuntime.cs": "6b19ac5ec12c4844767baf94c8ada45524b9a589"
+  },
+  "productionAbsences": [
+    "Private synchronous rational reuse map",
+    "Private mapped-index validation scan",
+    "Private prepared-value exact-copy transport",
+    "Private device-local physical-buffer selection override",
+    "Actual integration of capability.hpp predicates"
+  ],
+  "existingManagedParentMap": {
+    "frequency": "Once during immutable topology-library adaptation",
+    "nativeReplacementMapTransport": false,
+    "source": "PlanetaryNestedScaleMeshRuntimeAdapter.cs:80"
+  },
+  "privateOnlyCosts": [
+    {
+      "evidence": "../m13-regional-preparation-convergence/analysis.json",
+      "cpuPeakMs": 370.2112,
+      "responsibility": "Rational map construction",
+      "count": 36,
+      "cpuMeanMs": 247.5213,
+      "productionCost": false
+    },
+    {
+      "evidence": "../m13-residual-regional-frames/validation-vertices.json.gz",
+      "cpuMaximumMs": 451.4311,
+      "responsibility": "Mapped native index validation scan",
+      "count": 10,
+      "cpuMinimumMs": 183.8632,
+      "productionCost": false
+    }
+  ],
+  "memory": {
+    "physicalBuffersPersistentlyMapped": true,
+    "currentHardwareRecapturePerformed": false,
+    "materialImages": "DEVICE_LOCAL, separately staged",
+    "productionWorkRequest": "HOST_VISIBLE | HOST_COHERENT",
+    "selector": "First compatible memory type",
+    "perSliceMapUnmap": false,
+    "priorBaselineObserved": {
+      "evidence": "../m13-regional-preparation-convergence/A.json.gz",
+      "properties": 6,
+      "heapFlags": 0,
+      "type": 1,
+      "device": "RX 6800 XT",
+      "heap": 0
+    }
+  },
+  "frequency": [
+    {
+      "item": "Native topology allocation/upload",
+      "frequency": "First family/hash/count residency, maximum18",
+      "cpuMs": null,
+      "reusable": true
+    },
+    {
+      "item": "Working-buffer allocation",
+      "frequency": "No suitable spare capacity",
+      "cpuMs": null,
+      "reusable": true
+    },
+    {
+      "item": "Physical preparation",
+      "frequency": "Once per incoming generation, at most65536 vertices per eligible display frame",
+      "cpuMs": null,
+      "physicalValueReuseInProduction": false
+    },
+    {
+      "item": "Current visibility and compaction",
+      "frequency": "Every authoritative displayed frame",
+      "cpuMs": null,
+      "causedSolelyByIncoming": false
+    },
+    {
+      "item": "Incoming visibility and compaction",
+      "frequency": "Final banked incoming slice",
+      "cpuMs": null,
+      "excludedFromReoptimization": true
+    },
+    {
+      "item": "Descriptor reconstruction",
+      "frequency": "Startup or swapchain recreation",
+      "cpuMs": null
+    },
+    {
+      "item": "Billboard descriptor updates",
+      "frequency": "Incoming acceptance, ownership publication, pupil swap, resource growth or recreation",
+      "cpuMs": null,
+      "writesPerCall": 7
+    },
+    {
+      "item": "Frame/control writes",
+      "frequency": "Each displayed frame",
+      "cpuMs": null
+    },
+    {
+      "item": "Regional identity validation",
+      "frequency": "Each enabled update",
+      "cpuMs": null
+    },
+    {
+      "item": "Regional payload writes",
+      "frequency": "Missing records completed by worker",
+      "cpuMs": null
+    },
+    {
+      "item": "Publication bookkeeping",
+      "frequency": "Pending final submission after completed fence",
+      "cpuMs": null
+    },
+    {
+      "item": "Frame fence",
+      "frequency": "Each update",
+      "cpuMs": null
+    }
+  ],
+  "currentOwner": {
+    "incomingTriggersAdditionalCurrentCull": false,
+    "physicalCopyAtSwap": false,
+    "physicalIndependent": true,
+    "currentPupilFrozenDuringIncoming": true,
+    "sharedFrameFence": true,
+    "sharedGraphicsSubmission": true,
+    "distinctIncomingWorkBuffers": true,
+    "hardwareContentionMeasuredByThisWorker": false
+  },
+  "hostScopes": [
+    "fenceWait",
+    "InspectRegionalPhysical",
+    "InspectProductionBillboardPublication",
+    "remainingInspection",
+    "managedCallback",
+    "CreateProductionBillboard",
+    "Validate",
+    "Upload",
+    "PrepareProductionUploads",
+    "UpdateRegionalPhysical",
+    "acquire",
+    "record",
+    "submit",
+    "present",
+    "wholeFrame"
+  ],
+  "conditionalChildScopes": [
+    "topology lookup versus first upload",
+    "incoming spare acquisition versus allocation/map/initialization",
+    "descriptor update count and CPU time",
+    "regional Matches versus payload upload versus catalog/control",
+    "publication readiness versus swap bookkeeping versus descriptor update"
+  ],
+  "timingCautions": [
+    "Nested scopes must not be summed with parent scopes.",
+    "validationUpload is a production aggregate, not diagnostic-only cost.",
+    "RecordProductionUploads executes before existing GPU timestamp0; pending material copies require separate accounting.",
+    "Regional physical payload uploads are host memcpy, not GPU copy commands.",
+    "Preparation started excludes earlier scheduling/native resource creation; not end-to-end publication latency.",
+    "GPU timing readback frame must not relabel the CPU frame that recorded the work."
+  ],
+  "capabilityModel": {
+    "failures": 0,
+    "thisWorkerReranTests": false,
+    "actualNativeIntegrationProven": false,
+    "checks": 91,
+    "evidence": "../m13-residual-regional-frames/capability-test.json"
+  },
+  "pendingExecutionNegatives": [
+    "Full64 source/destination generation mismatch",
+    "Recycled allocation and overwritten content epoch",
+    "Basis/radius and exact-direction mismatch",
+    "Invalid map address/mapping epoch/extent/topology orientation",
+    "Regional identity change including normal neighbors",
+    "Facility/support/oracle/preparation identity change",
+    "Cancellation and incomplete or duplicated ranges",
+    "Withheld final fence",
+    "Invalid physical position/normal",
+    "Resize descriptor rebinding",
+    "No stale publication or current-owner overwrite"
+  ],
+  "qualification": "Structural current lifetime traced; new reuse/resource capability execution remains unqualified",
+  "judgment": "NO SINGLE AVOIDABLE PRODUCTION CPU/RESOURCE RESPONSIBILITY PROVEN BY THIS AUDIT",
+  "deferred": [
+    "Fresh event CPU/GPU costs and allocation/descriptor counts: lead",
+    "KSA equivalent frequencies: Work C",
+    "Measured payoff under8.33ms: lead and independent verification"
+  ],
+  "report": "work-b.md"
+}

@@ -1,0 +1,44 @@
+{
+  "result": "PASS",
+  "jsonFilesParsed": [
+    "accidental-bytecode-cleanup.json",
+    "baseline.json",
+    "capability-test.json",
+    "closeout.json",
+    "disposable-manifest.json",
+    "frame-pacing-review.json",
+    "journal-manifest.json",
+    "ksa-narrow-check.json",
+    "post-cleanup-smoke.json",
+    "prior-evidence-verification.json",
+    "private-timing-host-v2.json",
+    "private-timing-host-v3.json",
+    "private-timing-host-v4.json",
+    "private-timing-host.json",
+    "restoration.json",
+    "startup-control-correction.json"
+  ],
+  "pythonSyntax": "PASS",
+  "utf8AndWhitespace": "PASS",
+  "losslessJournals": 3,
+  "retainedNumericReproduction": "PASS",
+  "reproductionLines": 95,
+  "priorManifestHashesVerified": 35,
+  "revisions": {
+    "HEAD": "047ae479b33831eae1c0dfa3f37c657a7f70148f",
+    "main": "047ae479b33831eae1c0dfa3f37c657a7f70148f",
+    "origin/main": "047ae479b33831eae1c0dfa3f37c657a7f70148f",
+    "m13.4-zero-contribution-terrain-material-noise^{}": "047ae479b33831eae1c0dfa3f37c657a7f70148f",
+    "m13.3-prepared-physical-terrain^{}": "180eaf150ba5db6364e17dd48336690778f058f9"
+  },
+  "sourceDiffEmpty": true,
+  "stagedDiffEmpty": true,
+  "scratchAbsent": true,
+  "postCleanupNormalFloridaSmoke": "PASS",
+  "gitDiffCheck": {
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "gitStatusShort": "?? docs/engineering-evidence/m13-exit-assessment/\n?? docs/engineering-evidence/m13-regional-preparation-blocker/\n?? docs/engineering-evidence/m13-regional-preparation-convergence/\n?? docs/engineering-evidence/m13-residual-regional-frames/\n"
+}

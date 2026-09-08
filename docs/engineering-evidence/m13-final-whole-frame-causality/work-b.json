@@ -1,0 +1,289 @@
+{
+  "schema": 1,
+  "scope": "Work B required versus avoidable production terrain work",
+  "baseline": "047ae479b33831eae1c0dfa3f37c657a7f70148f",
+  "sourceIdentities": [
+    {
+      "path": "native/NovaCore.Native/shaders/production_terrain_material.glsl",
+      "sha256": "8b936d826431278cd05f0fc9e9daeab08e97cecd56e752bb7cc26863e264c49f"
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/planetary_production.frag",
+      "sha256": "c12377419c69f7060c80ea9a0ace21df7d5f9969b7aec336d36f02f85c6765c2"
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/production_spherical_billboard.tese",
+      "sha256": "1e795f02e3990a03bab876eee81cf8094554785459e36198f55db226a7e65f2d"
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/production_spherical_billboard.tesc",
+      "sha256": "825f7fa1989f9b72e0941a0e7a1a8ffdb51d54b08cae1deed124a986877c6b25"
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/production_nested_scale_mesh_cull.comp",
+      "sha256": "611c3670b5800cc3ac352bed5d326eb59ef1abba6ba2cc5519337967703b5550"
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/production_nested_scale_mesh_incoming_cull.comp",
+      "sha256": "7dc18dfb540a3be29bc90671f49675fcc5a6d6d13b6ba05282a6ba900b3f1bd4"
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/production_spherical_billboard_compact.comp",
+      "sha256": "0548e96e73826a873ac60b41fa6a9545db885ad2844eef439865fc8b545bf420"
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/facility_light_occlusion.glsl",
+      "sha256": "c4c098e733c7250d79f3d52a8ef6c933478ab65ed55b84c6512dac64890bf97e"
+    },
+    {
+      "path": "native/NovaCore.Native/NovaCoreNative.cpp",
+      "sha256": "edb58bb76f4b1f2b9232a065c75303d21b5e656fe62733bfcd664d835f24e2aa"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetaryNestedScaleMeshTopologyGenerator.cs",
+      "sha256": "f884797d9ef7c7e964e7da401c38f36f916815bbbd9a1e5a8a9297a2e83ff8b8"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetaryNestedScaleMeshRuntimeAdapter.cs",
+      "sha256": "31e1471d7ca3d5c8ef51fa3c31064ff7a6957fd79352d1637d5ea608986bc6a9"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/Program.cs",
+      "sha256": "c926a9a7e6adeb795e8378ce6fc63a01e81ac3cf21ef1712b4b54a17e7cb988d"
+    }
+  ],
+  "initialControls": {
+    "base-florida": {
+      "path": "docs\\engineering-evidence\\m13-final-whole-frame-causality\\base-florida.json",
+      "sha256": "be30903ddf5c920b850ddfea089db3aab832a0cb870b4e0fb668b010ea894088",
+      "exitCode": 0,
+      "errors": [],
+      "metrics": {
+        "gpuTotalMs": {
+          "n": 100,
+          "median": 11.06856,
+          "p95": 11.47504,
+          "p99": 11.50571,
+          "min": 10.58004,
+          "max": 11.54186
+        },
+        "gpuDetailedDrawMs": {
+          "n": 100,
+          "median": 8.04804,
+          "p95": 8.33296,
+          "p99": 8.35244,
+          "min": 7.73724,
+          "max": 8.35364
+        },
+        "gpuCullCompactMs": {
+          "n": 100,
+          "median": 2.6644,
+          "p95": 2.69176,
+          "p99": 2.7058,
+          "min": 2.64672,
+          "max": 2.72104
+        }
+      }
+    },
+    "noise-florida-isa": {
+      "path": "docs\\engineering-evidence\\m13-final-whole-frame-causality\\noise-florida-isa.json",
+      "sha256": "1120cd425de4403a9bd8e0f7e76a762b5c9e824ef93b70169cd95ca6f6f370e1",
+      "exitCode": 0,
+      "errors": [],
+      "metrics": {
+        "gpuTotalMs": {
+          "n": 100,
+          "median": 6.83248,
+          "p95": 7.31892,
+          "p99": 7.3358,
+          "min": 6.75488,
+          "max": 7.34992
+        },
+        "gpuDetailedDrawMs": {
+          "n": 100,
+          "median": 4.11872,
+          "p95": 4.60768,
+          "p99": 4.62276,
+          "min": 4.04088,
+          "max": 4.63184
+        },
+        "gpuCullCompactMs": {
+          "n": 100,
+          "median": 2.65432,
+          "p95": 2.65976,
+          "p99": 2.66564,
+          "min": 2.64392,
+          "max": 2.67336
+        }
+      }
+    },
+    "local-florida": {
+      "path": "docs\\engineering-evidence\\m13-final-whole-frame-causality\\local-florida.json",
+      "sha256": "1a0b6011cc7f6513f500a1ab8a2acab5d0a318dfe24482043092dc40e13c5474",
+      "exitCode": 0,
+      "errors": [],
+      "metrics": {
+        "gpuTotalMs": {
+          "n": 100,
+          "median": 8.88184,
+          "p95": 8.94156,
+          "p99": 8.97756,
+          "min": 8.84776,
+          "max": 8.98348
+        },
+        "gpuDetailedDrawMs": {
+          "n": 100,
+          "median": 7.7072,
+          "p95": 7.76652,
+          "p99": 7.80288,
+          "min": 7.67632,
+          "max": 7.80508
+        },
+        "gpuCullCompactMs": {
+          "n": 100,
+          "median": 1.12084,
+          "p95": 1.12804,
+          "p99": 1.12976,
+          "min": 1.0746,
+          "max": 1.13036
+        }
+      }
+    },
+    "base-inland": {
+      "path": "docs\\engineering-evidence\\m13-final-whole-frame-causality\\base-inland.json",
+      "sha256": "bd2f3a4d33751a8d18714ef8e9538f7d0173d202c6ba15e507505613d84461ab",
+      "exitCode": 0,
+      "errors": [],
+      "metrics": {
+        "gpuTotalMs": {
+          "n": 100,
+          "median": 9.38668,
+          "p95": 9.40228,
+          "p99": 9.40468,
+          "min": 9.35668,
+          "max": 9.41028
+        },
+        "gpuDetailedDrawMs": {
+          "n": 100,
+          "median": 6.7858,
+          "p95": 6.79324,
+          "p99": 6.79472,
+          "min": 6.76368,
+          "max": 6.79632
+        },
+        "gpuCullCompactMs": {
+          "n": 100,
+          "median": 2.54224,
+          "p95": 2.55784,
+          "p99": 2.55868,
+          "min": 2.52396,
+          "max": 2.55976
+        }
+      }
+    },
+    "base-active": {
+      "path": "docs\\engineering-evidence\\m13-final-whole-frame-causality\\base-active.json",
+      "sha256": "469051f65fa19411d9c4dcb311f3fbbf8bf350292628b93762c3946eaf16bf1a",
+      "exitCode": 0,
+      "errors": [],
+      "metrics": {
+        "gpuTotalMs": {
+          "n": 100,
+          "median": 5.95776,
+          "p95": 5.9682,
+          "p99": 5.9754,
+          "min": 5.93844,
+          "max": 5.98768
+        },
+        "gpuDetailedDrawMs": {
+          "n": 100,
+          "median": 3.4118,
+          "p95": 3.4212,
+          "p99": 3.42416,
+          "min": 3.39568,
+          "max": 3.42644
+        },
+        "gpuCullCompactMs": {
+          "n": 100,
+          "median": 2.49152,
+          "p95": 2.4962,
+          "p99": 2.49892,
+          "min": 2.482,
+          "max": 2.51664
+        }
+      }
+    },
+    "base-grazing": {
+      "path": "docs\\engineering-evidence\\m13-final-whole-frame-causality\\base-grazing.json",
+      "sha256": "e5c6dfa5ff9ddf54f7da43b00cadbc2290c2961c94afcc3a1e0e120983e18166",
+      "exitCode": 0,
+      "errors": [],
+      "metrics": {
+        "gpuTotalMs": {
+          "n": 100,
+          "median": 5.49704,
+          "p95": 6.429,
+          "p99": 6.44044,
+          "min": 5.4372,
+          "max": 6.44192
+        },
+        "gpuDetailedDrawMs": {
+          "n": 100,
+          "median": 2.7426,
+          "p95": 3.66828,
+          "p99": 3.68572,
+          "min": 2.68968,
+          "max": 3.68976
+        },
+        "gpuCullCompactMs": {
+          "n": 100,
+          "median": 2.69664,
+          "p95": 2.7046,
+          "p99": 2.71024,
+          "min": 2.68596,
+          "max": 2.71596
+        }
+      }
+    }
+  },
+  "candidates": [
+    {
+      "responsibility": "GPU-hot terrain working-set placement",
+      "status": "Initial isolated signal; lead must verify repeated net payoff, CPU/fallback/lifetime/correctness",
+      "minimumRequiredRecoveryMs": 1.5
+    },
+    {
+      "responsibility": "Positive material evaluation",
+      "status": "Output-changing sensitivity is large; no exact safe replacement established"
+    },
+    {
+      "responsibility": "Conservative early near-support distance rejection",
+      "status": "Source lead only; outward rounding, exact threshold fallback, diagnostic outputs and measured recovery unproven"
+    },
+    {
+      "responsibility": "Zero-envelope triangle distance skip",
+      "status": "Conditional algebra valid but live envelope not established zero; generator forwards positive near-height bound; not a confirmed production opportunity"
+    }
+  ],
+  "bankedWorkAlreadyRemoved": [
+    "Unneeded TES geographic addressing",
+    "Ordinary fragment bootstrap/diagnostic branches",
+    "Full physical terrain evaluation in prepared-render TES",
+    "Zero-contribution fragment noise",
+    "Repeated four-corner noise hash prefixes"
+  ],
+  "lifetimeRestrictions": [
+    "Retain exact physical and publication authority",
+    "Retain hardware TES and future material displacement capacity",
+    "Retain mapped coherent fallback when local type unsupported",
+    "Do not add private rational maps or mapped-index scans",
+    "Do not treat counter-off diagnostics as unchanged counter coverage"
+  ],
+  "limits": [
+    "No builds, GPU execution or production changes by this worker",
+    "Initial controls are not final repeated performance qualification",
+    "Source and input identities are not complete live GPU-content parity",
+    "No broad KSA re-audit; Work C owns material equivalent KSA evidence",
+    "Historical fixed cost inputs remain historical"
+  ]
+}

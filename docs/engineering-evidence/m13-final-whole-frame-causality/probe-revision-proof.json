@@ -1,0 +1,176 @@
+{
+  "initialResult": "FAIL Debug live regional scenario timed out at unchanged 600 seconds; other three window tests passed",
+  "beforeOutputFiles": 36,
+  "commonCompletedFrames": [
+    {
+      "frame": 103,
+      "beforeSha": "2232e87ce6ed735ec6024d4e2fa2e998de158f8cb9ea16dbf9942bfd33b7f4f9",
+      "afterSha": "4f624c8ceadadca52e71baf7028972e9976c61e97805a722440b06f68b826edd",
+      "equal": false,
+      "differingFields": [
+        "camera",
+        "orientation",
+        "matrix",
+        "samples"
+      ],
+      "beforeTime": 1788833606.113584,
+      "afterTime": 1788834308.137279
+    },
+    {
+      "frame": 150,
+      "beforeSha": "f84de240885e858bc0d368e8cec177eb07e2fea74ee1e328b5602f57493483fd",
+      "afterSha": "e615058e7723acb4b42e4b9a00c03b4e095544b082c6c748201669bf695f27f0",
+      "equal": false,
+      "differingFields": [
+        "camera",
+        "orientation",
+        "matrix",
+        "samples"
+      ],
+      "beforeTime": 1788833628.267249,
+      "afterTime": 1788834311.1319146
+    },
+    {
+      "frame": 165,
+      "beforeSha": "e6b55802b5a84cd6e5aa69f4904352245fa101da470a9a79629416ff0219c10a",
+      "afterSha": "7b26b7152ca5c934c029aa6b718476cf5ef5e4a7f56294e1adb1879994c2e237",
+      "equal": false,
+      "differingFields": [
+        "camera",
+        "orientation",
+        "matrix",
+        "samples"
+      ],
+      "beforeTime": 1788833650.0061488,
+      "afterTime": 1788834313.7532923
+    },
+    {
+      "frame": 175,
+      "beforeSha": "fe9a8e9cc7d43c34319f9dc663bd140cc9bf5d0bee64df1675c575727543ccea",
+      "afterSha": "2fa7e2b40d9518bed47fbbf9748414266d31740da482a56b7da8f90ff15d0015",
+      "equal": false,
+      "differingFields": [
+        "camera",
+        "orientation",
+        "matrix",
+        "samples"
+      ],
+      "beforeTime": 1788833671.9667737,
+      "afterTime": 1788834316.2408452
+    },
+    {
+      "frame": 193,
+      "beforeSha": "21046cb24c4e23a8424752ce3e40e617baf7dc8360abe1ebf9cdbfcaf49d919a",
+      "afterSha": "dfceb2cadac086a198d003d9c458d61d31a521271ba03db77ad8248c9db7a226",
+      "equal": false,
+      "differingFields": [
+        "camera",
+        "orientation",
+        "matrix",
+        "samples"
+      ],
+      "beforeTime": 1788833707.4779027,
+      "afterTime": 1788834320.4350832
+    },
+    {
+      "frame": 205,
+      "beforeSha": "efc1167b8b39830745911024d65519acd4058be040870675521b5202f04d5d28",
+      "afterSha": "f9b82df59cdf02dc3196c7638cf8b578671635a53ee80b05cda8094b08deac65",
+      "equal": false,
+      "differingFields": [
+        "camera",
+        "orientation",
+        "matrix",
+        "pupil",
+        "samples"
+      ],
+      "beforeTime": 1788833739.9497137,
+      "afterTime": 1788834324.2213314
+    },
+    {
+      "frame": 217,
+      "beforeSha": "c881779b100df4329b4fcf3f766ed1d81d6176b75985049b326c5f8f7148a285",
+      "afterSha": "88adbd961c3083b80d139625cc12d4ac0590d3e80052c87f01e3cfcf1df56c97",
+      "equal": false,
+      "differingFields": [
+        "pupilFrameIdentity",
+        "camera",
+        "orientation",
+        "matrix",
+        "pupil",
+        "samples"
+      ],
+      "beforeTime": 1788833769.1941228,
+      "afterTime": 1788834327.86168
+    },
+    {
+      "frame": 228,
+      "beforeSha": "b6cd44f6938e7b635c5c5bc4f04f0a7c3cb18d9f0afde17892a612f21342338f",
+      "afterSha": "d6452527cfcfade3a6033599c6effc2046265094517542102ca85fc3fe77c25f",
+      "equal": false,
+      "differingFields": [
+        "pupilFrameIdentity",
+        "camera",
+        "orientation",
+        "matrix",
+        "pupil",
+        "samples"
+      ],
+      "beforeTime": 1788833795.7304318,
+      "afterTime": 1788834331.4779174
+    },
+    {
+      "frame": 238,
+      "beforeSha": "311495d4cb4c998cf4a81ced6aa184d8a9d2bb1e3d480e5ed6369a556b047beb",
+      "afterSha": "cff79b54a6173fccc4b1f8c6b6618176c8c54b39195ec03a00e7c3ccbf4c6412",
+      "equal": false,
+      "differingFields": [
+        "pupilFrameIdentity",
+        "camera",
+        "orientation",
+        "matrix",
+        "pupil",
+        "samples"
+      ],
+      "beforeTime": 1788833819.0793269,
+      "afterTime": 1788834334.8801777
+    },
+    {
+      "frame": 247,
+      "beforeSha": "58b55d04fc3d0f0071823d84b8d1c3bde48ba5a726f985c17019b2a3892c8dd1",
+      "afterSha": "7552f8eec1b8444700861ee7ec7c27cd4be816098f3fdcc6c06aafd944db1797",
+      "equal": false,
+      "differingFields": [
+        "pupilFrameIdentity",
+        "camera",
+        "orientation",
+        "matrix",
+        "pupil",
+        "samples"
+      ],
+      "beforeTime": 1788833839.7386103,
+      "afterTime": 1788834337.7432199
+    },
+    {
+      "frame": 256,
+      "beforeSha": "e96b47e3b42bc4c9c0cc519f04fa23137ace5846a42fb528143fe42990cda0f2",
+      "afterSha": "0d0764c21de9a723c772b213dae81a855c5f0786321f1002ae2c655aeb269892",
+      "equal": false,
+      "differingFields": [
+        "pupilFrameIdentity",
+        "camera",
+        "orientation",
+        "matrix",
+        "pupil",
+        "samples"
+      ],
+      "beforeTime": 1788833857.5044274,
+      "afterTime": 1788834340.1724615
+    }
+  ],
+  "revision": "Three opt-in after-fence CPU snapshots; all probe loops and tests unchanged",
+  "timeoutUnchanged": true,
+  "resolution": "Original 600-second scenario timeout preserved. Revised complete Debug window category PASS, 4/4, zero skips.",
+  "revisedWindowCategoryWallSeconds": 158.03374440000334,
+  "comparability": "Live test uses elapsed simulation time. Before/after camera/orientation/matrix differ; common-frame raw JSON comparison is not an exact-input parity gate. Exact fixed-pose D32/HDR/image checks are separate. All canonical live physical/facility checks remain unchanged."
+}

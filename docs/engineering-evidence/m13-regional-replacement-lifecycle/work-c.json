@@ -1,0 +1,232 @@
+{
+  "schema": 1,
+  "review": "Work C: KSA replacement and residency frequency/ownership",
+  "observedUtc": "2026-09-08T00:47:22.935225+00:00",
+  "installedFileVersion": "2026.9.7.5402",
+  "installedProductVersion": "2026.9.7.5402+487c3f340de24c6a81037120b6d1129c045c5400",
+  "versionVerification": "Read installed KSA.dll VersionInfo live with PowerShell; identical to cached AssemblyInfo and prior verified reference.",
+  "priorReference": "docs/engineering-evidence/m13-regional-preparation-convergence/ksa-reference-check.json",
+  "files": [
+    {
+      "path": "E:/Kitten Space Agency/KSA.dll",
+      "bytes": 4798552,
+      "sha256": "a8a5164204eed962df9d9025e99f523d9a23ee2ce6e802b18216a9da35506d2f",
+      "priorSha256": "a8a5164204eed962df9d9025e99f523d9a23ee2ce6e802b18216a9da35506d2f",
+      "comparison": "unchanged"
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/assembly-source/Properties/AssemblyInfo.cs",
+      "bytes": 556,
+      "sha256": "ff5516e41874502b182b035197a11c3f3dfc4e6d309ee3186bbbad09c1834bf5",
+      "priorSha256": "ff5516e41874502b182b035197a11c3f3dfc4e6d309ee3186bbbad09c1834bf5",
+      "comparison": "unchanged"
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/source/KSA.PlanetRenderer.cs",
+      "bytes": 116885,
+      "sha256": "5ce37c334045f9b5cba9a450a6accc454444e8d20327b9778b98740cf7a64a50",
+      "priorSha256": "5ce37c334045f9b5cba9a450a6accc454444e8d20327b9778b98740cf7a64a50",
+      "comparison": "unchanged"
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/source/KSA.Program.cs",
+      "bytes": 190778,
+      "sha256": "d11020c5280417d1a02ef35c5d13bad01607ddd5a21a3302e52db136a872557e",
+      "priorSha256": "d11020c5280417d1a02ef35c5d13bad01607ddd5a21a3302e52db136a872557e",
+      "comparison": "unchanged"
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/source/KSA.PlanetMeshCollection.cs",
+      "bytes": 4194,
+      "sha256": "b41f4ecef5361e5365d814f76e6dcaa5fab6b6563ede91b2a91f78974b076bb5",
+      "priorSha256": "b41f4ecef5361e5365d814f76e6dcaa5fab6b6563ede91b2a91f78974b076bb5",
+      "comparison": "unchanged"
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/assembly-source/KSA/CubeMesh.cs",
+      "bytes": 14452,
+      "sha256": "d872a66602894ad826800059924b96873e2ba0c1e291576668c91ff956a019cd",
+      "priorSha256": "d872a66602894ad826800059924b96873e2ba0c1e291576668c91ff956a019cd",
+      "comparison": "unchanged"
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/assembly-source/KSA/PlanetMeshLibrary.cs",
+      "bytes": 4390,
+      "sha256": "6e2aa1c1e6d1ea6f44c6c74450f9f4802a974bfb66c15f9eca19948c7c6a8136",
+      "priorSha256": null,
+      "comparison": "newly fingerprinted cached source"
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/assembly-source/KSA/PlanetFrustumCulling.cs",
+      "bytes": 12197,
+      "sha256": "92f55e123ac3af9fef631df56f2db2992e366b70df711eb959273090e62e75c5",
+      "priorSha256": "92f55e123ac3af9fef631df56f2db2992e366b70df711eb959273090e62e75c5",
+      "comparison": "unchanged"
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/source/KSA.Rendering.CelestialTextureStreamer.cs",
+      "bytes": 33788,
+      "sha256": "433574981d77a48b354baddbadab6a354411e53a67535696a6bb4b8b33ff3ec7",
+      "priorSha256": "433574981d77a48b354baddbadab6a354411e53a67535696a6bb4b8b33ff3ec7",
+      "comparison": "unchanged"
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/source/KSA.Rendering.StreamingUploader.cs",
+      "bytes": 16757,
+      "sha256": "bf250fc959cf32b3fae471b6a0101f41b466856ecde7a7985fbe3a1ccd922602",
+      "priorSha256": "bf250fc959cf32b3fae471b6a0101f41b466856ecde7a7985fbe3a1ccd922602",
+      "comparison": "unchanged"
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/source/KSA.Rendering.RetiredResourceQueue.cs",
+      "bytes": 2698,
+      "sha256": "3dcdaf9312ee23e4fb853b7a6962823ae103ab8b3c49a7b8316beecd39999e28",
+      "priorSha256": "3dcdaf9312ee23e4fb853b7a6962823ae103ab8b3c49a7b8316beecd39999e28",
+      "comparison": "unchanged"
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/assembly-source/KSA.Rendering/FreeImagePool.cs",
+      "bytes": 1514,
+      "sha256": "247dcc1917f565b8591f929e75281db70bb55bfe2283d7e64ed14a26b2b38376",
+      "priorSha256": null,
+      "comparison": "newly fingerprinted cached source"
+    },
+    {
+      "path": "E:/Kitten Space Agency/Content/Core/Shaders/Planet/Culling/PlanetFrustumCulling.comp",
+      "bytes": 2973,
+      "sha256": "4a1617f6ce1660aa78a373d79f4c97022c325525a4f694e100e22aad7c2f23e5",
+      "priorSha256": "4a1617f6ce1660aa78a373d79f4c97022c325525a4f694e100e22aad7c2f23e5",
+      "comparison": "unchanged"
+    }
+  ],
+  "unchangedPriorFingerprints": 11,
+  "newlyFingerprintedCachedSources": 2,
+  "freshDecompilation": false,
+  "builds": false,
+  "gpuRuns": false,
+  "discordUsed": false,
+  "productionEdits": false,
+  "ksaPerformanceMeasured": false,
+  "queueConclusion": "Terrain preparation and culling are recorded before terrain draw in the same acquired-frame graphics-capable command buffer. Separate compute-pool submission is not the terrain-preparation queue.",
+  "transferConclusion": "Texture uploads use a dedicated transfer family only when available and batch images are not already graphics-owned; otherwise graphics queue. Completion gate includes graphics acquire when required.",
+  "replacementPublicationEquivalence": false,
+  "limits": [
+    "No demonstrated KSA current/incoming exact physical-generation publication contract.",
+    "No measured KSA terrain milliseconds or guarantee against transition spikes.",
+    "32/96 MB uploader values are batching/admission targets, not hard per-frame time bounds; a whole request/batch may overshoot.",
+    "FreeImagePool has no explicit idle byte/count cap in reviewed class; active published-image budget is not a verified total idle-pool bound.",
+    "PlanetMeshLibrary and FreeImagePool are newly fingerprinted cached decompilation files, not prior-manifest matches or freshly decompiled source."
+  ],
+  "repeatedWork": [
+    {
+      "responsibility": "Topology validation",
+      "novaCoreFrequency": "Managed immutable topology load/generation; banked native per-triangle checks during current and incoming cull.",
+      "requiredFrequency": "Immutable structural/index qualification once per retained topology; changed physical values require their own readiness.",
+      "ksaFrequency": "CubeMesh topology, adjacency and neighbor data generated during library loading and retained. No equivalent repeated standalone index validator found in selected render path.",
+      "migration": "ADAPT immutable topology authority; do not remove native checks without moving their proof.",
+      "costPerEventMs": null,
+      "costPerFrameMs": null,
+      "costStatus": "Not measured by this source-only worker; use lead Work A/B event evidence."
+    },
+    {
+      "responsibility": "Source map construction",
+      "novaCoreFrequency": "Rejected mapped prototype builds synchronous rational lookup per replacement; banked incoming preparation has no such copy map.",
+      "requiredFrequency": "A topology-pair address relation can belong to those immutable resources; physical reuse authorization still belongs to each transaction.",
+      "ksaFrequency": "No equivalent current-to-incoming exact physical copy map in inspected path; selected persistent CubeMesh supplies indices directly.",
+      "migration": "ADAPT persistent resource ownership only; KSA does not prove the NovaCore map algorithm.",
+      "costPerEventMs": null,
+      "costPerFrameMs": null,
+      "costStatus": "Not measured by this source-only worker; use lead Work A/B event evidence."
+    },
+    {
+      "responsibility": "Mapped-index scan",
+      "novaCoreFrequency": "Private residual vertex-validator prototype scans once per distinct resident topology, gated from incoming acquisition (10 scans in the preceding control); this is not banked behavior.",
+      "requiredFrequency": "Actual immutable native index resource once on creation, if that replaces repeated structural validation.",
+      "ksaFrequency": "Generated static mesh/index/adjacency resources persist; no recurring CPU mapped-index scan in GenerateMeshData or PerformCulling.",
+      "migration": "ADAPT once-per-resource qualification, subject to Work B measured lifecycle.",
+      "costPerEventMs": null,
+      "costPerFrameMs": null,
+      "costStatus": "Not measured by this source-only worker; use lead Work A/B event evidence."
+    },
+    {
+      "responsibility": "Visibility list construction",
+      "novaCoreFrequency": "Banked current-owner camera cull every frame; incoming cull once on its final preparation frame.",
+      "requiredFrequency": "When camera or geometry inputs require a current draw list; stable topology alone does not make visibility invariant.",
+      "ksaFrequency": "Applicable rendered frame: frustum cull directly emits current visible indices.",
+      "migration": "ADAPT camera-owned visibility. KSA does not justify caching current visibility solely during replacement.",
+      "costPerEventMs": null,
+      "costPerFrameMs": null,
+      "costStatus": "Not measured by this source-only worker; use lead Work A/B event evidence."
+    },
+    {
+      "responsibility": "Compaction",
+      "novaCoreFrequency": "Separate compact dispatch after current cull every frame; once after final incoming cull.",
+      "requiredFrequency": "When producing a changed visibility-derived index list, without duplicating its ownership.",
+      "ksaFrequency": "Fused with culling: each survivor reserves three indices and writes them directly in PlanetFrustumCulling.comp.",
+      "migration": "ADAPT only if a measured single visibility-construction responsibility clears the gate; no performance claim from source alone.",
+      "costPerEventMs": null,
+      "costPerFrameMs": null,
+      "costStatus": "Not measured by this source-only worker; use lead Work A/B event evidence."
+    },
+    {
+      "responsibility": "Full physical preparation",
+      "novaCoreFrequency": "Incoming or staged-pupil job, 65536-vertex slices; published physical geometry retained between jobs.",
+      "requiredFrequency": "Changed authoritative physical inputs/topology/pupil, with complete required data and deterministic publication.",
+      "ksaFrequency": "GenerateMeshData dispatches prepare, modifiers, finalization and normals every applicable rendered frame.",
+      "migration": "INTENTIONALLY DIFFER: retain NovaCore complete generation-4 physical authority; KSA is not evidence for a lower-frequency physical reuse cache.",
+      "costPerEventMs": null,
+      "costPerFrameMs": null,
+      "costStatus": "Not measured by this source-only worker; use lead Work A/B event evidence."
+    },
+    {
+      "responsibility": "Reusable physical copy",
+      "novaCoreFrequency": "Private same-index/mapped incoming copy per slice; not an accepted banked incoming path.",
+      "requiredFrequency": "Only exactly authorized unchanged physical values in a qualified source/destination lifetime.",
+      "ksaFrequency": "No equivalent exact 64-byte prepared-vertex source copy in the inspected GenerateMeshData path.",
+      "migration": "INTENTIONALLY DIFFER where exact reuse is required; retain NovaCore identity/fallback proof.",
+      "costPerEventMs": null,
+      "costPerFrameMs": null,
+      "costStatus": "Not measured by this source-only worker; use lead Work A/B event evidence."
+    },
+    {
+      "responsibility": "Buffer allocation",
+      "novaCoreFrequency": "Bounded retained topology resources and current/incoming/spare work capacities; growth/acquisition allocates, not every frame.",
+      "requiredFrequency": "At retained resource creation/capacity change, never merely because an equivalent replacement recurs.",
+      "ksaFrequency": "Per-frame-slot maximum-capacity geometry and culling buffers created by PlanetRenderer constructor and released at Dispose; static CubeMesh library retained.",
+      "migration": "ADAPT persistent capacity ownership; first identify actual NovaCore avoidable allocation frequency.",
+      "costPerEventMs": null,
+      "costPerFrameMs": null,
+      "costStatus": "Not measured by this source-only worker; use lead Work A/B event evidence."
+    },
+    {
+      "responsibility": "Buffer mapping",
+      "novaCoreFrequency": "Host-visible allocations stay mapped over their resource lifetime; private CPU scans read those mappings.",
+      "requiredFrequency": "Resource lifetime for persistent host mappings; device-local-only resources do not need CPU mapping.",
+      "ksaFrequency": "Uniform/modifier/staging control buffers mapped at construction and unmapped at Dispose; generated vertex/normal/color/height/index output requests device-local memory without a CPU map.",
+      "migration": "ADAPT separated host control and GPU working-data ownership without weakening native inspection readiness.",
+      "costPerEventMs": null,
+      "costPerFrameMs": null,
+      "costStatus": "Not measured by this source-only worker; use lead Work A/B event evidence."
+    },
+    {
+      "responsibility": "Descriptor/resource binding",
+      "novaCoreFrequency": "Descriptor contents change at resource/publication changes; compute/draw binds occur in command recording.",
+      "requiredFrequency": "Descriptor update when its resource/view/range changes; binds for consumers.",
+      "ksaFrequency": "Persistent descriptor sets, but mesh descriptors updated in each GenerateMeshData and cull descriptors in each PerformCulling; frame-slot sets bind for current commands.",
+      "migration": "ADOPT correct resource lifetime; KSA does not prove eliminating all per-frame descriptor updates.",
+      "costPerEventMs": null,
+      "costPerFrameMs": null,
+      "costStatus": "Not measured by this source-only worker; use lead Work A/B event evidence."
+    },
+    {
+      "responsibility": "Publication readiness",
+      "novaCoreFrequency": "Complete regional footprint, finished slices, final fence and atomic current/incoming swap.",
+      "requiredFrequency": "Each authoritative replacement, with current owner retained through the last consuming fence.",
+      "ksaFrequency": "Geometry consumed after same-command-buffer preparation/barriers. Texture views published from zero-time completion polling, with old views retired after safe frames/fences.",
+      "migration": "ADAPT completion-before-exposure and delayed retirement; INTENTIONALLY DIFFER for NovaCore exact physical-generation contract.",
+      "costPerEventMs": null,
+      "costPerFrameMs": null,
+      "costStatus": "Not measured by this source-only worker; use lead Work A/B event evidence."
+    }
+  ]
+}

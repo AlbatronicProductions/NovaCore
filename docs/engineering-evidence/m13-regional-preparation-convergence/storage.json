@@ -1,0 +1,17 @@
+{
+  "accounting": "Exclusive logical file inventory, not allocated bytes, cumulative write I/O, or host RAM output.",
+  "scratchFilesRemoved": 81,
+  "scratchLogicalBytesRemoved": 74016558,
+  "protectedElevationAliasBytes": 67108864,
+  "scratchExclusiveBytesRemoved": 6907694,
+  "uncompressedJournalDuplicatesRemoved": 19494228,
+  "compressedJournalBytesRetained": 988516,
+  "disposedBytes": 26401922,
+  "remainingTemporaryBytes": 0,
+  "retainedBytes": 1469032,
+  "createdAccountedBytes": 27870954,
+  "budgetBytes": 16777216,
+  "retainedFileCount": 37,
+  "postCleanupSmoke": "PASS; 240 normal deployed Florida frames",
+  "scratchAbsent": true
+}
