@@ -1,0 +1,10 @@
+Native identity: configuration=Debug; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Debug\net10.0\NovaCore.Native.dll; sha256=6E10A80772EFAA51DA256983355B1AB3BDEC49E792891BFC5280C12A596BDC6E; source=E:\NovaCore\build\native-ninja\NovaCore.Native.dll
+{"samples":564,"ready":527,"unqualified":37,"creases":12,"maxHeight":9.094947017729282E-13,"maxPosition":0,"maxNormal":2.181364183438901E-07,"maxPlane":4.691547355542352E-08,"maxUnit":4.440892098500626E-16,"acquisitionMs":1.8442,"firstQueryUs":6276.4,"authority":{"BodyId":6,"Terrain":{"SourceId":2,"Version":5,"IsValid":true},"PhysicalGeneration":4,"ReferenceRadiusMetres":6371008.8,"GlobalSha256":"4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317","RegionalSha256":"c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe","CompositionIdentity":86364352542676184,"FacilitySupportIdentity":5597594574148789740,"QueryPolicyVersion":1}}
+{"name":"Florida","status":"Ready","firstProbeUs":318.4,"medianUs":308.4,"p95Us":311,"p99Us":315.8,"allocatedBytes":0,"batch16MeanUs":5117.603125}
+{"name":"regional","status":"Ready","firstProbeUs":2641.4,"medianUs":2563.3,"p95Us":2819.3,"p99Us":3434.3,"allocatedBytes":0,"batch16MeanUs":46737.375}
+{"name":"inland","status":"Ready","firstProbeUs":1287.4,"medianUs":1112.7,"p95Us":1230.5,"p99Us":1279,"allocatedBytes":0,"batch16MeanUs":18119.73125}
+{"name":"unqualified-pole","status":"NormalUnqualified","firstProbeUs":4721.2,"medianUs":4329,"p95Us":4482.9,"p99Us":4769.7,"allocatedBytes":0,"batch16MeanUs":69245.8984375}
+PASS [headless] Physical surface-point query
+Native identity: configuration=Debug; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Debug\net10.0\NovaCore.Native.dll; sha256=6E10A80772EFAA51DA256983355B1AB3BDEC49E792891BFC5280C12A596BDC6E; source=E:\NovaCore\build\native-ninja\NovaCore.Native.dll
+PASS [headless] Physical surface-point stale snapshot
+Graphics Debug: selected=2; pass=2; fail=0; skip=0; excluded=91

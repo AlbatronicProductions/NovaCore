@@ -17,6 +17,10 @@ See [production consolidation](production-consolidation.md) for route provenance
 
 ## Authority boundary
 
+The unbanked [surface-point query contract](surface-point-queries.md) consumes the
+same complete canonical CPU H for future gameplay. It does not consume or change
+this renderer's geometry, shading normals, tessellation, or residency ownership.
+
 Celestial simulation publishes immutable body center, radius, orientation, and
 material identity. Rendering cannot modify them. Earth geography is body fixed
 in the right-handed convention +Y north, +X at longitude zero, and

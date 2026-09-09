@@ -1,0 +1,444 @@
+{
+  "status": "PASS",
+  "processOrder": "baseline forward; candidate forward; candidate reverse; baseline reverse",
+  "runtime": "actual original and final production Release DLLs; identical benchmark executable; no cloned query implementation",
+  "TieredCompilation": 0,
+  "ReadyToRun": 0,
+  "cpuCostIncludes": "all Query calls + rotation/modulo + result struct array store + two timestamps per sample; no context setup excluded from a new path",
+  "setup": [
+    {
+      "globalLoadUs": 70488,
+      "regionalResolveUs": 308478.4,
+      "regionalReadDecodeHashPublishUs": 205332.4,
+      "firstAcquireUs": 8102,
+      "patternConstructionUs": 10065.3,
+      "firstRegionalQueryIncludingJitUs": 15769.4,
+      "warmedAcquireMedianUs": 41.5,
+      "warmedAcquireAllocatedBytesPerCall": 70232
+    },
+    {
+      "globalLoadUs": 75860.2,
+      "regionalResolveUs": 326250.2,
+      "regionalReadDecodeHashPublishUs": 204018.5,
+      "firstAcquireUs": 7988,
+      "patternConstructionUs": 10071.8,
+      "firstRegionalQueryIncludingJitUs": 15280.5,
+      "warmedAcquireMedianUs": 35.8,
+      "warmedAcquireAllocatedBytesPerCall": 70232
+    },
+    {
+      "globalLoadUs": 73239.6,
+      "regionalResolveUs": 300782.9,
+      "regionalReadDecodeHashPublishUs": 200370.2,
+      "firstAcquireUs": 8083.4,
+      "patternConstructionUs": 10156.6,
+      "firstRegionalQueryIncludingJitUs": 15410.1,
+      "warmedAcquireMedianUs": 41.8,
+      "warmedAcquireAllocatedBytesPerCall": 70232
+    },
+    {
+      "globalLoadUs": 71695.8,
+      "regionalResolveUs": 323990.8,
+      "regionalReadDecodeHashPublishUs": 203575.1,
+      "firstAcquireUs": 7199,
+      "patternConstructionUs": 9326.5,
+      "firstRegionalQueryIncludingJitUs": 14415.1,
+      "warmedAcquireMedianUs": 37,
+      "warmedAcquireAllocatedBytesPerCall": 70232
+    }
+  ],
+  "rows": [
+    {
+      "name": "single-regional",
+      "points": 1,
+      "statuses": {
+        "Ready": 1
+      },
+      "resultHashExactAcrossABBA": true,
+      "resultSha256": "9b42591eb5e96d14c5aaca41ad0bb76bb2a9522e293ecc5e806bb8d783f75efd",
+      "samplesPerProcess": 1024,
+      "allocations": 0,
+      "baselineMedianUs": [
+        338.7,
+        346.1
+      ],
+      "candidateMedianUs": [
+        135.6,
+        137.9
+      ],
+      "baselineP95Us": [
+        394.4,
+        430.5
+      ],
+      "candidateP95Us": [
+        163.6,
+        228.8
+      ],
+      "baselineP99Us": [
+        425.8,
+        465.5
+      ],
+      "candidateP99Us": [
+        194.6,
+        297.1
+      ],
+      "medianRecoveryUs": [
+        210.5,
+        200.8
+      ]
+    },
+    {
+      "name": "repeated-identical-16",
+      "points": 16,
+      "statuses": {
+        "Ready": 16
+      },
+      "resultHashExactAcrossABBA": true,
+      "resultSha256": "1e7a5635dde3385bf735a3a20dec42004a9e9909274cce3a71eec6a1ddfb32c1",
+      "samplesPerProcess": 1024,
+      "allocations": 0,
+      "baselineMedianUs": [
+        5596.9,
+        5813.1
+      ],
+      "candidateMedianUs": [
+        2253.5,
+        2356.4
+      ],
+      "baselineP95Us": [
+        6016.1,
+        6161.3
+      ],
+      "candidateP95Us": [
+        2422.5,
+        2711.4
+      ],
+      "baselineP99Us": [
+        6235.9,
+        6614.3
+      ],
+      "candidateP99Us": [
+        2652.4,
+        2880.9
+      ],
+      "medianRecoveryUs": [
+        3343.4,
+        3456.7
+      ]
+    },
+    {
+      "name": "nearby-16",
+      "points": 16,
+      "statuses": {
+        "Ready": 16
+      },
+      "resultHashExactAcrossABBA": true,
+      "resultSha256": "402cced6d62d9bd6ce58b27d01541d3aabcfb1e13b8d3758b9df23b62613f30b",
+      "samplesPerProcess": 1024,
+      "allocations": 0,
+      "baselineMedianUs": [
+        3506.5,
+        3647.5
+      ],
+      "candidateMedianUs": [
+        1608.2,
+        1609
+      ],
+      "baselineP95Us": [
+        3771.7,
+        4076.6
+      ],
+      "candidateP95Us": [
+        1959.3,
+        2057.8
+      ],
+      "baselineP99Us": [
+        4009.6,
+        4534.2
+      ],
+      "candidateP99Us": [
+        2111.2,
+        2256.5
+      ],
+      "medianRecoveryUs": [
+        2039.3,
+        1897.5
+      ]
+    },
+    {
+      "name": "regional-foot4",
+      "points": 4,
+      "statuses": {
+        "Ready": 4
+      },
+      "resultHashExactAcrossABBA": true,
+      "resultSha256": "0fd91cb7b7de2d9df3f61920ca410f621de42a648bb34dbfe7f4311f28827f65",
+      "samplesPerProcess": 1024,
+      "allocations": 0,
+      "baselineMedianUs": [
+        709.5,
+        720
+      ],
+      "candidateMedianUs": [
+        345.9,
+        366.1
+      ],
+      "baselineP95Us": [
+        943.2,
+        944.9
+      ],
+      "candidateP95Us": [
+        421.1,
+        506.9
+      ],
+      "baselineP99Us": [
+        1041.4,
+        1067
+      ],
+      "candidateP99Us": [
+        471.3,
+        521.2
+      ],
+      "medianRecoveryUs": [
+        353.9,
+        363.6
+      ]
+    },
+    {
+      "name": "regional-foot8",
+      "points": 8,
+      "statuses": {
+        "Ready": 8
+      },
+      "resultHashExactAcrossABBA": true,
+      "resultSha256": "bee65007b88e77801ce1985111e1e7ea5b2eca503ca8afc1bdb8f707a7a95209",
+      "samplesPerProcess": 1024,
+      "allocations": 0,
+      "baselineMedianUs": [
+        1431.7,
+        1433.4
+      ],
+      "candidateMedianUs": [
+        693,
+        694.7
+      ],
+      "baselineP95Us": [
+        1714.5,
+        1759.9
+      ],
+      "candidateP95Us": [
+        826.9,
+        879.4
+      ],
+      "baselineP99Us": [
+        1829.3,
+        1977
+      ],
+      "candidateP99Us": [
+        884.6,
+        928
+      ],
+      "medianRecoveryUs": [
+        738.7,
+        738.7
+      ]
+    },
+    {
+      "name": "regional-foot16",
+      "points": 16,
+      "statuses": {
+        "Ready": 16
+      },
+      "resultHashExactAcrossABBA": true,
+      "resultSha256": "c076f5881763cc0c83353baebbdd1e50790ec2a689d7cb508c58dfbda5deebf8",
+      "samplesPerProcess": 1024,
+      "allocations": 0,
+      "baselineMedianUs": [
+        2926.4,
+        2958.1
+      ],
+      "candidateMedianUs": [
+        1377.4,
+        1394.7
+      ],
+      "baselineP95Us": [
+        3296,
+        4037.3
+      ],
+      "candidateP95Us": [
+        1588,
+        1592.9
+      ],
+      "baselineP99Us": [
+        3489.9,
+        4189.4
+      ],
+      "candidateP99Us": [
+        1679.4,
+        1683
+      ],
+      "medianRecoveryUs": [
+        1580.7,
+        1531.7
+      ]
+    },
+    {
+      "name": "coverage-boundary-foot16",
+      "points": 16,
+      "statuses": {
+        "Ready": 16
+      },
+      "resultHashExactAcrossABBA": true,
+      "resultSha256": "e7eace2c09c21bcb75b5d0711f8b214362e92593b749100c20e0152761c43f0c",
+      "samplesPerProcess": 1024,
+      "allocations": 0,
+      "baselineMedianUs": [
+        2047.4,
+        2174.7
+      ],
+      "candidateMedianUs": [
+        1094.8,
+        1123.3
+      ],
+      "baselineP95Us": [
+        2288.3,
+        2940.1
+      ],
+      "candidateP95Us": [
+        1288.8,
+        1350.5
+      ],
+      "baselineP99Us": [
+        2505.4,
+        3253.9
+      ],
+      "candidateP99Us": [
+        1373.9,
+        1487
+      ],
+      "medianRecoveryUs": [
+        1079.9,
+        924.1
+      ]
+    },
+    {
+      "name": "florida-foot16",
+      "points": 16,
+      "statuses": {
+        "Ready": 16
+      },
+      "resultHashExactAcrossABBA": true,
+      "resultSha256": "855679aeb4b9bfdd35092a6032d86e8d4d7a5a321c2cea6c10e59ed76d231ce7",
+      "samplesPerProcess": 1024,
+      "allocations": 0,
+      "baselineMedianUs": [
+        671.3,
+        697.7
+      ],
+      "candidateMedianUs": [
+        684.4,
+        687.6
+      ],
+      "baselineP95Us": [
+        816,
+        915.8
+      ],
+      "candidateP95Us": [
+        798,
+        942.8
+      ],
+      "baselineP99Us": [
+        873.5,
+        1026.3
+      ],
+      "candidateP99Us": [
+        922.7,
+        1047.2
+      ],
+      "medianRecoveryUs": [
+        10.1,
+        -13.1
+      ]
+    },
+    {
+      "name": "inland-foot16",
+      "points": 16,
+      "statuses": {
+        "Ready": 16
+      },
+      "resultHashExactAcrossABBA": true,
+      "resultSha256": "423b6af4db3e2627c57a95a16f5a74cfcd0c54e08f08b5b97a725198c0c05de8",
+      "samplesPerProcess": 1024,
+      "allocations": 0,
+      "baselineMedianUs": [
+        2544.4,
+        2636
+      ],
+      "candidateMedianUs": [
+        1261,
+        1305.2
+      ],
+      "baselineP95Us": [
+        2808.2,
+        3040.4
+      ],
+      "candidateP95Us": [
+        1382.1,
+        1673.8
+      ],
+      "baselineP99Us": [
+        3006.5,
+        3335.6
+      ],
+      "candidateP99Us": [
+        1429.2,
+        1792.5
+      ],
+      "medianRecoveryUs": [
+        1330.8,
+        1283.4
+      ]
+    },
+    {
+      "name": "unqualified-south-pole",
+      "points": 1,
+      "statuses": {
+        "NormalUnqualified": 1
+      },
+      "resultHashExactAcrossABBA": true,
+      "resultSha256": "bdfcd036b91bcc1b607891fab04ba16bcf1d2c80c7c39f1632c0314523947c80",
+      "samplesPerProcess": 1024,
+      "allocations": 0,
+      "baselineMedianUs": [
+        570.5,
+        596.2
+      ],
+      "candidateMedianUs": [
+        195.8,
+        203.2
+      ],
+      "baselineP95Us": [
+        630.9,
+        726.1
+      ],
+      "candidateP95Us": [
+        240.5,
+        322.4
+      ],
+      "baselineP99Us": [
+        685.3,
+        788.6
+      ],
+      "candidateP99Us": [
+        271.7,
+        394.5
+      ],
+      "medianRecoveryUs": [
+        393.0,
+        374.7
+      ]
+    }
+  ],
+  "precisionNote": "P99 descriptive from 1024 samples per process; no confidence interval or worst-case guarantee",
+  "newProductionSetupOrCaching": false
+}

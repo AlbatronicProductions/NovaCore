@@ -1,0 +1,19 @@
+{
+  "sourceHashes": {
+    "src/NovaCore.Core/Surface/PhysicalSurfacePointQuery.cs": "c15f71e8d37e15d7cf826a776dee06b6dbe92ed175815136b89246338e611ba1",
+    "src/NovaCore.Graphics/PlanetaryPhysicalSurfacePointQuery.cs": "1e1726c2eb4f377951455696e4b3858bde76699bee070091eef0e76a8d5789a0",
+    "src/NovaCore.Graphics/PlanetaryLocalTerrain.cs": "10a9057affc2b1dcacb7329d9f6f1e8daeb1631d407cc105e4ad0db63b56d19b",
+    "src/NovaCore.Graphics/TerrainAssetDistribution.cs": "666654b0e5a92da21a0884eaa0799f75b836cb318874a353a0eecb3088f68b62"
+  },
+  "assemblies": {
+    "NovaCore.Core.dll": "51647a9464e160a97616a128de6a9d4c63d23521f3fc03869e7d03dc8d714fc3",
+    "NovaCore.EphemerisFormat.dll": "3dfd95d4f94073a7fab8d48b054beba9baec7520423a9dc60ccb82ce42ed151e",
+    "NovaCore.Graphics.dll": "7f0e6592057afb4f5243df91e3529e900a9cb65db6da19d99e2ab16bf2f6568e",
+    "NovaCore.Interop.dll": "b87853f157ffde90f47abac7b04344b46de63a7a78ff34ce62ffcaa4dfcbe587",
+    "NovaCore.Native.dll": "0ce79ade1cccb3c28c89666a8a0cbb5d5a15a5d1cd98fe9d3178767c07b22b04",
+    "NovaCore.Platform.dll": "ade5d84416ade19da732d8046db7e3633855409527b6162ab84ce5ca544ee59a",
+    "NovaCore.Simulation.dll": "ba313d55dc767cba7ce78efb6eafbbb5f24a59728b0246d98311ac7af3a69f49",
+    "NovaCore.Triangle.dll": "43aa178cd772bb6fd964d5bcba80f986b6d2fb02689bbd9e08bddbe42286e6d4"
+  },
+  "gitStatus": " M src/NovaCore.Graphics/PlanetaryLocalTerrain.cs\n M src/NovaCore.Graphics/TerrainAssetDistribution.cs\n M tests/NovaCore.Graphics.Tests/Program.cs\n?? src/NovaCore.Core/Surface/PhysicalSurfacePointQuery.cs\n?? src/NovaCore.Graphics/PlanetaryPhysicalSurfacePointQuery.cs\n?? tests/NovaCore.Graphics.Tests/PhysicalSurfacePointQueryTests.cs\n"
+}

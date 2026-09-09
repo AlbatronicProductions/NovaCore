@@ -13,6 +13,14 @@ and performs FP64 camera-relative subtraction before GPU transport.
 
 ## Banked production checkpoint and M13 closure
 
+Current unbanked work: **immutable canonical surface-point queries for spacecraft
+contact**, within the authorized Surface Interaction / Launch Foundation front.
+See [query contract](surface-point-queries.md) and
+[candidate evidence](engineering-evidence/surface-point-query/README.md).
+This adds a physical query boundary only; contact response and launch are not
+implemented. No new milestone number is assigned. M13's closed state and banked
+renderer remain unchanged.
+
 Latest banked production milestone: **M13.6 — Prefer CPU-cached memory for
 terrain residency keys**.
 
@@ -20,7 +28,7 @@ terrain residency keys**.
 - Annotated tag: `m13.6-cpu-cached-terrain-residency-keys`.
 - Project Control decision: **PASS — M13 CLOSED**.
 - Front: **M13 — NCSM1 Terrain Performance**.
-- **There is no M13.7.** Next production-front authorization returns to Project Control.
+- **There is no M13.7.** Project Control authorized the bounded surface-query candidate above.
 
 M13 contains six banked production accomplishments:
 

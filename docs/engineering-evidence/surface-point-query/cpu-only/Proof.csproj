@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NovaCore.Core"><HintPath>$(NovaCoreRoot)/src/NovaCore.Core/bin/Release/net10.0/NovaCore.Core.dll</HintPath></Reference>
+    <Reference Include="NovaCore.Graphics"><HintPath>$(NovaCoreRoot)/src/NovaCore.Graphics/bin/Release/net10.0/NovaCore.Graphics.dll</HintPath></Reference>
+    <Reference Include="NovaCore.Interop"><HintPath>$(NovaCoreRoot)/src/NovaCore.Interop/bin/Release/net10.0/NovaCore.Interop.dll</HintPath></Reference>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,26 @@
+{
+  "HEAD": "aaf3e7a032a806e7e547c2830d1f95d97aaf620b",
+  "branch": "codex/surface-contact-query",
+  "gitStatus": " M docs/CODEX_HANDOFF.md\n M docs/NOVACORE_CURRENT_STATE.md\n M docs/engineering-evidence/README.md\n M docs/planetary-rendering.md\n M src/NovaCore.Graphics/PlanetaryLocalTerrain.cs\n M src/NovaCore.Graphics/TerrainAssetDistribution.cs\n M tests/NovaCore.Graphics.Tests/Program.cs\n?? docs/engineering-evidence/surface-point-query/\n?? docs/surface-point-queries.md\n?? src/NovaCore.Core/Surface/PhysicalSurfacePointQuery.cs\n?? src/NovaCore.Graphics/PlanetaryPhysicalSurfacePointQuery.cs\n?? tests/NovaCore.Graphics.Tests/PhysicalSurfacePointQueryTests.cs\n",
+  "trackedDiffSha256": "16a0fc78d3a0ad662ca6d276e45f33815dea0ea0faf104b1a6277fe711028fb4",
+  "source": {
+    "src/NovaCore.Core/Surface/PhysicalSurfacePointQuery.cs": "c15f71e8d37e15d7cf826a776dee06b6dbe92ed175815136b89246338e611ba1",
+    "src/NovaCore.Graphics/PlanetaryPhysicalSurfacePointQuery.cs": "1e1726c2eb4f377951455696e4b3858bde76699bee070091eef0e76a8d5789a0",
+    "src/NovaCore.Graphics/PlanetaryLocalTerrain.cs": "10a9057affc2b1dcacb7329d9f6f1e8daeb1631d407cc105e4ad0db63b56d19b",
+    "src/NovaCore.Graphics/TerrainAssetDistribution.cs": "666654b0e5a92da21a0884eaa0799f75b836cb318874a353a0eecb3088f68b62",
+    "tests/NovaCore.Graphics.Tests/PhysicalSurfacePointQueryTests.cs": "145820324e583b5142118333603d685042ff5e687707bb6afe811c16a610cd94",
+    "tests/NovaCore.Graphics.Tests/Program.cs": "b8d1f4804a281c0c9c8b1ebdad3351d12db7090c13c60fa781c4335847caef01"
+  },
+  "assemblies": {
+    "Core": {
+      "currentReleaseSha256": "51647a9464e160a97616a128de6a9d4c63d23521f3fc03869e7d03dc8d714fc3",
+      "priorParitySha256": "51647a9464e160a97616a128de6a9d4c63d23521f3fc03869e7d03dc8d714fc3",
+      "identical": true
+    },
+    "Graphics": {
+      "currentReleaseSha256": "7f0e6592057afb4f5243df91e3529e900a9cb65db6da19d99e2ab16bf2f6568e",
+      "priorParitySha256": "7f0e6592057afb4f5243df91e3529e900a9cb65db6da19d99e2ab16bf2f6568e",
+      "identical": true
+    }
+  }
+}

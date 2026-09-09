@@ -1,0 +1,80 @@
+{
+  "status": "PASS",
+  "pairs": [
+    {
+      "pose": "florida",
+      "pass": true,
+      "checks": {
+        "pixelMarker": true,
+        "composition": true,
+        "triangles": true,
+        "preparedBytes": true,
+        "preparedSha256": true,
+        "orientedTriangleMultisetSha256": true,
+        "depthSha256": true,
+        "hdrSha256": true,
+        "imageSha256": true,
+        "finiteDepthHdr": true,
+        "validationErrors": true,
+        "validationLayerLoaded": true,
+        "captureFrame": true,
+        "completedFrames": true,
+        "assetFingerprint": true,
+        "unchangedRuntimeShaders": true,
+        "commandExceptHost": true,
+        "cwd": true,
+        "environmentExceptCaptureDestination": true
+      },
+      "differences": {}
+    },
+    {
+      "pose": "inland",
+      "pass": true,
+      "checks": {
+        "pixelMarker": true,
+        "composition": true,
+        "triangles": true,
+        "preparedBytes": true,
+        "preparedSha256": true,
+        "orientedTriangleMultisetSha256": true,
+        "depthSha256": true,
+        "hdrSha256": true,
+        "imageSha256": true,
+        "finiteDepthHdr": true,
+        "validationErrors": true,
+        "validationLayerLoaded": true,
+        "captureFrame": true,
+        "completedFrames": true,
+        "assetFingerprint": true,
+        "unchangedRuntimeShaders": true,
+        "commandExceptHost": true,
+        "cwd": true,
+        "environmentExceptCaptureDestination": true
+      },
+      "differences": {}
+    }
+  ],
+  "oldCandidateUnchanged": true,
+  "finalSourceUnchanged": true,
+  "disposableBytes": 260612811,
+  "disposableGroups": [
+    {
+      "directory": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified",
+      "count": 67,
+      "bytes": 6830363,
+      "classification": "disposable external proof host"
+    },
+    {
+      "directory": "E:\\NovaCore-Research\\surface-query-parity-20260909\\raw-final-qualified-florida",
+      "count": 3,
+      "bytes": 128901032,
+      "classification": "disposable resolved raw parity capture"
+    },
+    {
+      "directory": "E:\\NovaCore-Research\\surface-query-parity-20260909\\raw-final-qualified-inland",
+      "count": 3,
+      "bytes": 124881416,
+      "classification": "disposable resolved raw parity capture"
+    }
+  ]
+}

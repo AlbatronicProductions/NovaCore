@@ -1,0 +1,413 @@
+{
+  "baseline": "aaf3e7a032a806e7e547c2830d1f95d97aaf620b",
+  "compiled": "external proof only; references existing normal Release assemblies; production sources not rebuilt",
+  "assemblies": [
+    {
+      "Path": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Core.dll",
+      "Sha256": "6F10A3958C3AB0DDA6BD42C6A4912C7F1E487CB9BB7FABD593EE0D5750AC1039",
+      "FileVersion": "1.0.0.0",
+      "ProductVersion": "1.0.0+d4baab6940a57a46e478b98e36f5e45d1c4b558f"
+    },
+    {
+      "Path": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Graphics.dll",
+      "Sha256": "CD55A6FF9898A72C3C962D221685E2897F7561A5130AD1F0773028B06F59C197",
+      "FileVersion": "1.0.0.0",
+      "ProductVersion": "1.0.0+d4baab6940a57a46e478b98e36f5e45d1c4b558f"
+    }
+  ],
+  "global": "E:/NovaCore/assets/earth/runtime/earth_elevation_8192x4096.r16",
+  "regional": "E:/NovaCore/.novacore/cache/terrain/v1/sha256/c4/c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe.nccube",
+  "generation": 4,
+  "initialCounterexamples": [
+    {
+      "Name": "near-SouthPole",
+      "X": 1.5696101380319472E-07,
+      "Y": -0.9999999999999877,
+      "Z": 0,
+      "c": 2828.0106746425863,
+      "qualified": true,
+      "level": 12,
+      "h": 0.009418787501024692,
+      "convergence": 5.613538791679043E-10,
+      "sides": 6.828947024776945E-10,
+      "oracleAngle": 1.5642650700171323,
+      "planeAngle": 0
+    },
+    {
+      "Name": "near-SouthPole",
+      "X": -1.1098819724215427E-07,
+      "Y": -0.9999999999999877,
+      "Z": -1.1098819724215428E-07,
+      "c": 2831.371532288661,
+      "qualified": true,
+      "level": 14,
+      "h": 0.002354696875256173,
+      "convergence": 0,
+      "sides": 4.825828792825198E-10,
+      "oracleAngle": 1.5508275162534733,
+      "planeAngle": 0
+    },
+    {
+      "Name": "near-SouthPole",
+      "X": -1.1098819721514377E-05,
+      "Y": -0.9999999998768162,
+      "Z": -1.109881972151438E-05,
+      "c": 2831.2206980212295,
+      "qualified": true,
+      "level": 7,
+      "h": 0.30140120003279014,
+      "convergence": 5.277285652152603E-07,
+      "sides": 5.279575871154197E-07,
+      "oracleAngle": 0.7818171293255535,
+      "planeAngle": 0
+    }
+  ],
+  "crossOnlyCounterexamples": [
+    {
+      "Name": "near-SouthPole",
+      "X": -1.1098819721514377E-05,
+      "Y": -0.9999999998768162,
+      "Z": -1.109881972151438E-05,
+      "c": 2831.2206980212295,
+      "qualified": true,
+      "level": 7,
+      "h": 0.30140120003279014,
+      "convergence": 5.277285652152603E-07,
+      "sides": 5.279575871154197E-07,
+      "oracleAngle": 0.7818171293255535,
+      "planeAngle": 0
+    }
+  ],
+  "revised": {
+    "samples": 564,
+    "ready": 527,
+    "unqualified": 37,
+    "maximumOracle": 2.181364183438901E-07,
+    "maximumPlane": 4.691547355542352E-08,
+    "maximumHeight": 1.862645149230957E-09,
+    "maximumPosition": 1.3969838619232178E-09,
+    "maximumUnit": 4.440892098500626E-16,
+    "minimumOutward": 0.990952915528472,
+    "minStep": 0.0001471685547035108,
+    "maxStep": 19.28967680209857,
+    "maxLevels": 18,
+    "bar": 5E-05
+  },
+  "groups": [
+    {
+      "Name": "Australia",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "axis",
+      "Count": 8,
+      "Qualified": 7
+    },
+    {
+      "Name": "clamp-boundary",
+      "Count": 12,
+      "Qualified": 0
+    },
+    {
+      "Name": "Everest",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Everglades",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Florida:0,0",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Florida:0,130",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Florida:0,56",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Florida:10000,0",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Florida:10000,130",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Florida:10000,56",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Florida:128,0",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Florida:128,130",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Florida:128,56",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Florida:191.999,0",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Florida:191.999,130",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Florida:191.999,56",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Florida:192,0",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Florida:192,130",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Florida:192,56",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Florida:192.001,0",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Florida:192.001,130",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Florida:192.001,56",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Florida:2000,0",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Florida:2000,130",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Florida:2000,56",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Florida:32,0",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Florida:32,130",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Florida:32,56",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Florida:500,0",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Florida:500,130",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Florida:500,56",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Florida:63.999,0",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Florida:63.999,130",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Florida:63.999,56",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Florida:64,0",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Florida:64,130",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Florida:64,56",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Florida:64.001,0",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Florida:64.001,130",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Florida:64.001,56",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "global-random",
+      "Count": 100,
+      "Qualified": 100
+    },
+    {
+      "Name": "global-texel-knot",
+      "Count": 50,
+      "Qualified": 30
+    },
+    {
+      "Name": "GreatPlains",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Greenland",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Himalaya",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "near-NorthPole",
+      "Count": 12,
+      "Qualified": 12
+    },
+    {
+      "Name": "near-SouthPole",
+      "Count": 12,
+      "Qualified": 8
+    },
+    {
+      "Name": "Pacific",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "regional-bound",
+      "Count": 25,
+      "Qualified": 25
+    },
+    {
+      "Name": "regional-random",
+      "Count": 300,
+      "Qualified": 300
+    },
+    {
+      "Name": "Rockies",
+      "Count": 1,
+      "Qualified": 1
+    },
+    {
+      "Name": "Sahara",
+      "Count": 1,
+      "Qualified": 1
+    }
+  ],
+  "unqualifiedWitnesses": [
+    {
+      "Name": "axis",
+      "X": 0,
+      "Y": -1,
+      "Z": 0,
+      "c": 2834.4235327541046,
+      "qualified": false,
+      "level": 21,
+      "h": 3.67921386758777E-05,
+      "convergence": 1.007527130442217E-05,
+      "sides": 2.0718096317016306
+    },
+    {
+      "Name": "clamp-boundary",
+      "X": 0.1488106041539326,
+      "Y": 0.469466361405221,
+      "Z": 0.8703199064713412,
+      "c": 0,
+      "qualified": false,
+      "level": 21,
+      "h": 3.67921386758777E-05,
+      "convergence": 5.386938611707625E-09,
+      "sides": 0.0045162110653679975
+    },
+    {
+      "Name": "global-texel-knot",
+      "X": 0.014620469073159463,
+      "Y": -0.9997081566271049,
+      "Z": -0.01923131449789105,
+      "c": 2890.5117839056434,
+      "qualified": false,
+      "level": 21,
+      "h": 3.67921386758777E-05,
+      "convergence": 2.1185246574416532E-06,
+      "sides": 0.0015111392124186817
+    },
+    {
+      "Name": "near-SouthPole",
+      "X": 1.569607279185855E-10,
+      "Y": -1,
+      "Z": 0,
+      "c": 2828.014739479445,
+      "qualified": false,
+      "level": 21,
+      "h": 3.67921386758777E-05,
+      "convergence": 8.040890943831977E-05,
+      "sides": 3.1412308139332197
+    }
+  ]
+}

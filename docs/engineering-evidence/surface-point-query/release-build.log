@@ -1,0 +1,12 @@
+  NovaCore.Interop -> E:\NovaCore\src\NovaCore.Interop\bin\Release\net10.0\NovaCore.Interop.dll
+  NovaCore.EphemerisFormat -> E:\NovaCore\src\NovaCore.EphemerisFormat\bin\Release\net10.0\NovaCore.EphemerisFormat.dll
+  NovaCore.Core -> E:\NovaCore\src\NovaCore.Core\bin\Release\net10.0\NovaCore.Core.dll
+  NovaCore.Graphics -> E:\NovaCore\src\NovaCore.Graphics\bin\Release\net10.0\NovaCore.Graphics.dll
+  NovaCore.Simulation -> E:\NovaCore\src\NovaCore.Simulation\bin\Release\net10.0\NovaCore.Simulation.dll
+  NovaCore.Graphics.Tests -> E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Graphics.Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.87

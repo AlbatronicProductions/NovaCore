@@ -1,0 +1,318 @@
+[
+  {
+    "directory": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified",
+    "count": 67,
+    "bytes": 6830363,
+    "classification": "disposable external proof host",
+    "files": [
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\NovaCore.Core.dll",
+        "bytes": 93184
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\NovaCore.Core.pdb",
+        "bytes": 32092
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\NovaCore.EphemerisFormat.dll",
+        "bytes": 76800
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\NovaCore.EphemerisFormat.pdb",
+        "bytes": 26992
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\NovaCore.Graphics.dll",
+        "bytes": 639488
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\NovaCore.Graphics.pdb",
+        "bytes": 144608
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\NovaCore.Interop.dll",
+        "bytes": 23040
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\NovaCore.Interop.pdb",
+        "bytes": 13336
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\NovaCore.Native.dll",
+        "bytes": 361472
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\NovaCore.Platform.dll",
+        "bytes": 6656
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\NovaCore.Platform.pdb",
+        "bytes": 11304
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\NovaCore.Simulation.dll",
+        "bytes": 3787776
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\NovaCore.Simulation.pdb",
+        "bytes": 81316
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\NovaCore.Triangle.deps.json",
+        "bytes": 2761
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\NovaCore.Triangle.dll",
+        "bytes": 240640
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\NovaCore.Triangle.exe",
+        "bytes": 162304
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\NovaCore.Triangle.pdb",
+        "bytes": 60092
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\NovaCore.Triangle.runtimeconfig.json",
+        "bytes": 342
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\body_forward.frag.spv",
+        "bytes": 440
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\distant_planet.frag.spv",
+        "bytes": 35760
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\distant_planet.vert.spv",
+        "bytes": 8428
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\fullscreen.vert.spv",
+        "bytes": 1308
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\orbit.frag.spv",
+        "bytes": 456
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\orbit.vert.spv",
+        "bytes": 1756
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\orbit_previous.frag.spv",
+        "bytes": 456
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\planetary.frag.spv",
+        "bytes": 18548
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\planetary.vert.spv",
+        "bytes": 135600
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\planetary_natural_terrain_global_prepare.comp.spv",
+        "bytes": 49540
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\planetary_production.frag.spv",
+        "bytes": 152228
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\planetary_production_terrain.comp.spv",
+        "bytes": 368
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\planetary_ring.vert.spv",
+        "bytes": 7728
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\planetary_ring_far.frag.spv",
+        "bytes": 2692
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\planetary_ring_near.frag.spv",
+        "bytes": 2692
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\planetary_select.comp.spv",
+        "bytes": 91064
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\planetary_terrain_generate.comp.spv",
+        "bytes": 10292
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\production_nested_scale_mesh_cull.comp.spv",
+        "bytes": 30484
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\production_nested_scale_mesh_incoming_cull.comp.spv",
+        "bytes": 30484
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\production_spherical_billboard.tesc.spv",
+        "bytes": 12632
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\production_spherical_billboard.tese.spv",
+        "bytes": 22836
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\production_spherical_billboard.vert.spv",
+        "bytes": 8028
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\production_spherical_billboard_compact.comp.spv",
+        "bytes": 3460
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\production_spherical_billboard_cull.comp.spv",
+        "bytes": 14624
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\production_spherical_billboard_incoming_compact.comp.spv",
+        "bytes": 2940
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\production_spherical_billboard_incoming_cull.comp.spv",
+        "bytes": 14624
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\production_spherical_billboard_incoming_prepare.comp.spv",
+        "bytes": 91824
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\production_spherical_billboard_incoming_reset.comp.spv",
+        "bytes": 1736
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\production_spherical_billboard_prepare.comp.spv",
+        "bytes": 94876
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\production_spherical_billboard_reset.comp.spv",
+        "bytes": 1736
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\regional_physical_demand.comp.spv",
+        "bytes": 22344
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\regional_physical_incoming_demand.comp.spv",
+        "bytes": 22360
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\sas_target.frag.spv",
+        "bytes": 440
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\solar_label.frag.spv",
+        "bytes": 47588
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\solar_label.vert.spv",
+        "bytes": 11388
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\solar_marker.frag.spv",
+        "bytes": 448
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\solar_marker.vert.spv",
+        "bytes": 7776
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\solar_orbit.frag.spv",
+        "bytes": 1412
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\solar_orbit.vert.spv",
+        "bytes": 4008
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\solar_speed_hud.frag.spv",
+        "bytes": 49400
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\solar_speed_hud.vert.spv",
+        "bytes": 11036
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\space_background.frag.spv",
+        "bytes": 12108
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\stellar_glow.frag.spv",
+        "bytes": 1736
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\stellar_glow.vert.spv",
+        "bytes": 6392
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\stellar_sun.frag.spv",
+        "bytes": 3208
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\stellar_sun.vert.spv",
+        "bytes": 5168
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\tone_map.frag.spv",
+        "bytes": 2700
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\triangle.frag.spv",
+        "bytes": 2180
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-final-qualified\\shaders\\triangle.vert.spv",
+        "bytes": 4828
+      }
+    ]
+  },
+  {
+    "directory": "E:\\NovaCore-Research\\surface-query-parity-20260909\\raw-final-qualified-florida",
+    "count": 3,
+    "bytes": 128901032,
+    "classification": "disposable resolved raw parity capture",
+    "files": [
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\raw-final-qualified-florida\\pixels.bin",
+        "bytes": 79257600
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\raw-final-qualified-florida\\prepared.bin",
+        "bytes": 45574784
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\raw-final-qualified-florida\\selected.bin",
+        "bytes": 4068648
+      }
+    ]
+  },
+  {
+    "directory": "E:\\NovaCore-Research\\surface-query-parity-20260909\\raw-final-qualified-inland",
+    "count": 3,
+    "bytes": 124881416,
+    "classification": "disposable resolved raw parity capture",
+    "files": [
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\raw-final-qualified-inland\\pixels.bin",
+        "bytes": 79257600
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\raw-final-qualified-inland\\prepared.bin",
+        "bytes": 45574784
+      },
+      {
+        "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\raw-final-qualified-inland\\selected.bin",
+        "bytes": 49032
+      }
+    ]
+  }
+]

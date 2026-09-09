@@ -73,10 +73,10 @@ public sealed record TerrainAssetManifest
         Schema == CurrentSchema &&
         IsSafeIdentity(AssetId) &&
         BodyId != 0 && TerrainVersion != 0 &&
-        Format.Equals("nccube", StringComparison.Ordinal) && FormatVersion is PlanetaryCubeSurfacePackContract.Version or PlanetaryLocalTerrainPackContract.LegacyVersion or PlanetaryLocalTerrainPackContract.Version &&
+        Format is not null && Format.Equals("nccube", StringComparison.Ordinal) && FormatVersion is PlanetaryCubeSurfacePackContract.Version or PlanetaryLocalTerrainPackContract.LegacyVersion or PlanetaryLocalTerrainPackContract.Version &&
         IsSafeFileName(FileName) && ByteSize > PlanetaryCubeSurfacePackContract.HeaderBytes &&
-        Sha256.Length == 64 && Sha256.All(IsLowerHex) &&
-        IsSafeIdentity(Hierarchy.Coverage) &&
+        Sha256 is not null && Sha256.Length == 64 && Sha256.All(IsLowerHex) &&
+        Hierarchy is not null && IsSafeIdentity(Hierarchy.Coverage) &&
         Hierarchy.MinimumPayloadLevel >= 0 && Hierarchy.MaximumPayloadLevel >= Hierarchy.MinimumPayloadLevel &&
         Hierarchy.MaximumPayloadLevel <= (FormatVersion is PlanetaryLocalTerrainPackContract.LegacyVersion or PlanetaryLocalTerrainPackContract.Version ? PlanetaryLocalTerrainPackContract.MaximumSectorLevel : PlanetaryCubeSurfacePackContract.MaximumLevel) &&
         Hierarchy.FaceCount is >= 1 and <= 6 && Hierarchy.RecordCount > 0 &&

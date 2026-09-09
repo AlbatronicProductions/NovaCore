@@ -1,0 +1,531 @@
+{
+  "reverse": false,
+  "fullProofCount": 564,
+  "qualified": 527,
+  "unqualified": 37,
+  "loadMs": 300.8608,
+  "acquisitionMs": 29.5353,
+  "diagnosticCtorMs": 0.0584,
+  "checksum": 0,
+  "decomposition": [
+    {
+      "name": "Florida",
+      "staged": false,
+      "status": "Ready",
+      "eagerCalls": 33,
+      "stagedCalls": 33,
+      "profiledWallUs": 38.028125,
+      "globalUs": 2.0171875,
+      "regionalUs": 17.817578125,
+      "naturalUs": 13.196875,
+      "supportUs": 2.282421875,
+      "remainderUs": 2.7140625
+    },
+    {
+      "name": "Florida",
+      "staged": true,
+      "status": "Ready",
+      "eagerCalls": 33,
+      "stagedCalls": 33,
+      "profiledWallUs": 38.066796875,
+      "globalUs": 2.0203125,
+      "regionalUs": 17.8296875,
+      "naturalUs": 13.21796875,
+      "supportUs": 2.253125,
+      "remainderUs": 2.745703125
+    },
+    {
+      "name": "regional",
+      "staged": false,
+      "status": "Ready",
+      "eagerCalls": 273,
+      "stagedCalls": 113,
+      "profiledWallUs": 306.559765625,
+      "globalUs": 17.21328125,
+      "regionalUs": 151.529296875,
+      "naturalUs": 110.31640625,
+      "supportUs": 4.8515625,
+      "remainderUs": 22.64921875
+    },
+    {
+      "name": "regional",
+      "staged": true,
+      "status": "Ready",
+      "eagerCalls": 273,
+      "stagedCalls": 113,
+      "profiledWallUs": 130.36328125,
+      "globalUs": 7.309765625,
+      "regionalUs": 64.4328125,
+      "naturalUs": 46.037109375,
+      "supportUs": 2.13515625,
+      "remainderUs": 10.4484375
+    },
+    {
+      "name": "inland",
+      "staged": false,
+      "status": "Ready",
+      "eagerCalls": 129,
+      "stagedCalls": 65,
+      "profiledWallUs": 143.799609375,
+      "globalUs": 8.03515625,
+      "regionalUs": 70.2828125,
+      "naturalUs": 52.178515625,
+      "supportUs": 2.40625,
+      "remainderUs": 10.896875
+    },
+    {
+      "name": "inland",
+      "staged": true,
+      "status": "Ready",
+      "eagerCalls": 129,
+      "stagedCalls": 65,
+      "profiledWallUs": 67.32265625,
+      "globalUs": 4.034375,
+      "regionalUs": 33.64140625,
+      "naturalUs": 23.064453125,
+      "supportUs": 1.158203125,
+      "remainderUs": 5.42421875
+    },
+    {
+      "name": "pole",
+      "staged": false,
+      "status": "NormalUnqualified",
+      "eagerCalls": 489,
+      "stagedCalls": 169,
+      "profiledWallUs": 511.26328125,
+      "globalUs": 28.4078125,
+      "regionalUs": 258.201171875,
+      "naturalUs": 176.708203125,
+      "supportUs": 8.572265625,
+      "remainderUs": 39.373828125
+    },
+    {
+      "name": "pole",
+      "staged": true,
+      "status": "NormalUnqualified",
+      "eagerCalls": 489,
+      "stagedCalls": 169,
+      "profiledWallUs": 186.53125,
+      "globalUs": 8.677734375,
+      "regionalUs": 95.544140625,
+      "naturalUs": 63.926953125,
+      "supportUs": 3.03125,
+      "remainderUs": 15.351171875
+    }
+  ],
+  "rows": [
+    {
+      "name": "regional-single",
+      "count": 1,
+      "statuses": [
+        "Ready"
+      ],
+      "eagerCount": 273,
+      "lazyCount": 113,
+      "original": {
+        "medianUs": 266.7,
+        "p95Us": 324.2,
+        "p99Us": 375,
+        "minUs": 252.7,
+        "maxUs": 392.9
+      },
+      "staged": {
+        "medianUs": 105.7,
+        "p95Us": 123.5,
+        "p99Us": 139.4,
+        "minUs": 105,
+        "maxUs": 171.6
+      },
+      "allocated": 0
+    },
+    {
+      "name": "regional-identical16",
+      "count": 16,
+      "statuses": [
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready"
+      ],
+      "eagerCount": 4368,
+      "lazyCount": 1808,
+      "original": {
+        "medianUs": 4215,
+        "p95Us": 4393,
+        "p99Us": 4434.9,
+        "minUs": 4101.1,
+        "maxUs": 4437.2
+      },
+      "staged": {
+        "medianUs": 1742.7,
+        "p95Us": 1856.2,
+        "p99Us": 2042.7,
+        "minUs": 1693.5,
+        "maxUs": 2116
+      },
+      "allocated": 0
+    },
+    {
+      "name": "regional-near4",
+      "count": 4,
+      "statuses": [
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready"
+      ],
+      "eagerCount": 780,
+      "lazyCount": 348,
+      "original": {
+        "medianUs": 746.7,
+        "p95Us": 780.6,
+        "p99Us": 786.4,
+        "minUs": 728.8,
+        "maxUs": 803.7
+      },
+      "staged": {
+        "medianUs": 333.4,
+        "p95Us": 352.9,
+        "p99Us": 367.6,
+        "minUs": 324.2,
+        "maxUs": 432.4
+      },
+      "allocated": 0
+    },
+    {
+      "name": "regional-near8",
+      "count": 8,
+      "statuses": [
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready"
+      ],
+      "eagerCount": 1560,
+      "lazyCount": 696,
+      "original": {
+        "medianUs": 1502,
+        "p95Us": 1554.2,
+        "p99Us": 1719,
+        "minUs": 1469.1,
+        "maxUs": 1917.9
+      },
+      "staged": {
+        "medianUs": 672.2,
+        "p95Us": 710.9,
+        "p99Us": 716.6,
+        "minUs": 648.4,
+        "maxUs": 719.3
+      },
+      "allocated": 0
+    },
+    {
+      "name": "regional-near16",
+      "count": 16,
+      "statuses": [
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready"
+      ],
+      "eagerCount": 3120,
+      "lazyCount": 1392,
+      "original": {
+        "medianUs": 3000,
+        "p95Us": 3052.6,
+        "p99Us": 3089.9,
+        "minUs": 2939.7,
+        "maxUs": 3093.4
+      },
+      "staged": {
+        "medianUs": 1334.2,
+        "p95Us": 1391.9,
+        "p99Us": 1477.1,
+        "minUs": 1305.8,
+        "maxUs": 1531
+      },
+      "allocated": 0
+    },
+    {
+      "name": "regional-legs4",
+      "count": 4,
+      "statuses": [
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready"
+      ],
+      "eagerCount": 732,
+      "lazyCount": 332,
+      "original": {
+        "medianUs": 683.1,
+        "p95Us": 747,
+        "p99Us": 1044,
+        "minUs": 677.4,
+        "maxUs": 1067.3
+      },
+      "staged": {
+        "medianUs": 310.6,
+        "p95Us": 335.5,
+        "p99Us": 459.6,
+        "minUs": 308.7,
+        "maxUs": 465.9
+      },
+      "allocated": 0
+    },
+    {
+      "name": "regional-legs8",
+      "count": 8,
+      "statuses": [
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready"
+      ],
+      "eagerCount": 1488,
+      "lazyCount": 672,
+      "original": {
+        "medianUs": 1378.9,
+        "p95Us": 1388.5,
+        "p99Us": 1420.3,
+        "minUs": 1372.4,
+        "maxUs": 1625.2
+      },
+      "staged": {
+        "medianUs": 625.4,
+        "p95Us": 629.7,
+        "p99Us": 635,
+        "minUs": 621.8,
+        "maxUs": 857.1
+      },
+      "allocated": 0
+    },
+    {
+      "name": "regional-legs16",
+      "count": 16,
+      "statuses": [
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready"
+      ],
+      "eagerCount": 3048,
+      "lazyCount": 1368,
+      "original": {
+        "medianUs": 2821.6,
+        "p95Us": 2839.7,
+        "p99Us": 2884.4,
+        "minUs": 2811.6,
+        "maxUs": 2961.3
+      },
+      "staged": {
+        "medianUs": 1272,
+        "p95Us": 1282,
+        "p99Us": 1299.2,
+        "minUs": 1263.3,
+        "maxUs": 1300.1
+      },
+      "allocated": 0
+    },
+    {
+      "name": "boundary-legs16",
+      "count": 16,
+      "statuses": [
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready"
+      ],
+      "eagerCount": 1680,
+      "lazyCount": 912,
+      "original": {
+        "medianUs": 1540.1,
+        "p95Us": 1553.1,
+        "p99Us": 2153.4,
+        "minUs": 1528.3,
+        "maxUs": 2260
+      },
+      "staged": {
+        "medianUs": 839.1,
+        "p95Us": 844.5,
+        "p99Us": 1061.4,
+        "minUs": 832.5,
+        "maxUs": 1216.1
+      },
+      "allocated": 0
+    },
+    {
+      "name": "Florida-legs16",
+      "count": 16,
+      "statuses": [
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready"
+      ],
+      "eagerCount": 528,
+      "lazyCount": 528,
+      "original": {
+        "medianUs": 522.1,
+        "p95Us": 525.5,
+        "p99Us": 536.8,
+        "minUs": 518.8,
+        "maxUs": 545.4
+      },
+      "staged": {
+        "medianUs": 523.4,
+        "p95Us": 527,
+        "p99Us": 535.5,
+        "minUs": 519.4,
+        "maxUs": 536.9
+      },
+      "allocated": 0
+    },
+    {
+      "name": "inland-legs16",
+      "count": 16,
+      "statuses": [
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready"
+      ],
+      "eagerCount": 2064,
+      "lazyCount": 1040,
+      "original": {
+        "medianUs": 1825.7,
+        "p95Us": 1842,
+        "p99Us": 1874.1,
+        "minUs": 1817,
+        "maxUs": 1891.5
+      },
+      "staged": {
+        "medianUs": 921.2,
+        "p95Us": 928.8,
+        "p99Us": 932.4,
+        "minUs": 916.2,
+        "maxUs": 933.2
+      },
+      "allocated": 0
+    },
+    {
+      "name": "unqualified-pole16",
+      "count": 16,
+      "statuses": [
+        "NormalUnqualified",
+        "NormalUnqualified",
+        "NormalUnqualified",
+        "NormalUnqualified",
+        "NormalUnqualified",
+        "NormalUnqualified",
+        "NormalUnqualified",
+        "NormalUnqualified",
+        "NormalUnqualified",
+        "NormalUnqualified",
+        "NormalUnqualified",
+        "NormalUnqualified",
+        "NormalUnqualified",
+        "NormalUnqualified",
+        "NormalUnqualified",
+        "NormalUnqualified"
+      ],
+      "eagerCount": 7824,
+      "lazyCount": 2704,
+      "original": {
+        "medianUs": 7162.2,
+        "p95Us": 7308.7,
+        "p99Us": 7344.8,
+        "minUs": 7105.7,
+        "maxUs": 7752.3
+      },
+      "staged": {
+        "medianUs": 2438.4,
+        "p95Us": 2484.3,
+        "p99Us": 2535.8,
+        "minUs": 2417.9,
+        "maxUs": 2543
+      },
+      "allocated": 0
+    }
+  ]
+}

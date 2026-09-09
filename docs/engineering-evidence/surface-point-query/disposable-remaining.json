@@ -1,0 +1,79 @@
+[
+  {
+    "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\baseline-source",
+    "files": 430,
+    "logicalBytes": 11909927,
+    "classification": "Disposable external generated reconstruction/build output; no production runtime consumer",
+    "safeManualDeletion": true
+  },
+  {
+    "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\baseline-libs",
+    "files": 18,
+    "logicalBytes": 4925998,
+    "classification": "Disposable external generated reconstruction/build output; no production runtime consumer",
+    "safeManualDeletion": true
+  },
+  {
+    "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-baseline",
+    "files": 67,
+    "logicalBytes": 6815543,
+    "classification": "Disposable external generated reconstruction/build output; no production runtime consumer",
+    "safeManualDeletion": true
+  },
+  {
+    "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\host-candidate",
+    "files": 67,
+    "logicalBytes": 6826807,
+    "classification": "Disposable external generated reconstruction/build output; no production runtime consumer",
+    "safeManualDeletion": true
+  },
+  {
+    "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\native-build",
+    "files": 29,
+    "logicalBytes": 3803483,
+    "classification": "Disposable external generated reconstruction/build output; no production runtime consumer",
+    "safeManualDeletion": true
+  },
+  {
+    "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\banked-deployment",
+    "files": 11,
+    "logicalBytes": 5371565,
+    "classification": "Disposable external generated reconstruction/build output; no production runtime consumer",
+    "safeManualDeletion": true
+  },
+  {
+    "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\private",
+    "files": 25,
+    "logicalBytes": 937631,
+    "classification": "Disposable external generated reconstruction/build output; no production runtime consumer",
+    "safeManualDeletion": true
+  },
+  {
+    "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\baseline-source.zip",
+    "files": 1,
+    "logicalBytes": 3680507,
+    "classification": "Disposable external generated reconstruction/build output; no production runtime consumer",
+    "safeManualDeletion": true
+  },
+  {
+    "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\refine-runner.py",
+    "files": 1,
+    "logicalBytes": 1049,
+    "classification": "Disposable external generated reconstruction/build output; no production runtime consumer",
+    "safeManualDeletion": true
+  },
+  {
+    "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\make-reproducible.py",
+    "files": 1,
+    "logicalBytes": 386,
+    "classification": "Disposable external generated reconstruction/build output; no production runtime consumer",
+    "safeManualDeletion": true
+  },
+  {
+    "path": "E:\\NovaCore-Research\\surface-query-parity-20260909\\consolidate.py",
+    "files": 1,
+    "logicalBytes": 1435,
+    "classification": "Disposable external generated reconstruction/build output; no production runtime consumer",
+    "safeManualDeletion": true
+  }
+]

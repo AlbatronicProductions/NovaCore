@@ -1,0 +1,14 @@
+{
+  "rawBytesCumulativelyCreated": 507564896,
+  "rawBytesCumulativelyRemoved": 507564896,
+  "rawBytesRemaining": 0,
+  "peakRawSlotBytes": 128901032,
+  "disposableRemainingFiles": 651,
+  "disposableRemainingLogicalBytes": 44274331,
+  "evidenceFiles": 33,
+  "evidenceLogicalBytes": 888066,
+  "totalFiles": 684,
+  "totalLogicalBytes": 45162397,
+  "cleanupLimitation": "Automatic tool policy rejected recursive removal before shell execution: blocked by policy. No broad retry. Narrow explicit raw-file cleanup succeeded.",
+  "productionFilesDeleted": 0
+}

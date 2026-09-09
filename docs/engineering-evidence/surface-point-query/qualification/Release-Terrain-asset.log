@@ -1,0 +1,4 @@
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=62594A23368D008963011AA79FE1D385CCC863976D6014DC79F5CC6DACD5997B; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Terrain asset boundary: fixture=5032B/78fdca1b5378fa2a13c35d283a9c2198a0c4b3a872e5870108700404534bbbda; production=Valid; buffer=1048576B; cache=E:\NovaCore\.novacore\cache\terrain\v1
+PASS [headless] Terrain asset distribution boundary
+Graphics Release: selected=1; pass=1; fail=0; skip=0; excluded=92

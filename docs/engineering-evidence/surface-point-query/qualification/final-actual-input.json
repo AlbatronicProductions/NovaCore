@@ -1,0 +1,23 @@
+{
+  "querySourceSha256": "f8e4dd8f97cbdc4d7134c3fe90ba613fca31977cfe3de02e002d4bc93aef5e71",
+  "assemblies": {
+    "baseline": {
+      "ActualBenchmark.deps.json": "723f66d8194ea8224c14aae1b3eda9f89c63f0a5892c911eddbbff9523c1b008",
+      "ActualBenchmark.dll": "87990ba5f95560107bc2712027dc0e6ec04cd535e8ddac70148cea93ee2474be",
+      "ActualBenchmark.exe": "c98f670c9477fde6cea469405a031e4ac2de397a7d051f81778244c367ef4ef7",
+      "ActualBenchmark.runtimeconfig.json": "c230a317a54dd960bcbeb5f347f52e18dc665a26f7efda2159fced9a5ac7e097",
+      "NovaCore.Core.dll": "51647a9464e160a97616a128de6a9d4c63d23521f3fc03869e7d03dc8d714fc3",
+      "NovaCore.Graphics.dll": "7f0e6592057afb4f5243df91e3529e900a9cb65db6da19d99e2ab16bf2f6568e",
+      "NovaCore.Interop.dll": "b87853f157ffde90f47abac7b04344b46de63a7a78ff34ce62ffcaa4dfcbe587"
+    },
+    "candidate": {
+      "ActualBenchmark.deps.json": "723f66d8194ea8224c14aae1b3eda9f89c63f0a5892c911eddbbff9523c1b008",
+      "ActualBenchmark.dll": "87990ba5f95560107bc2712027dc0e6ec04cd535e8ddac70148cea93ee2474be",
+      "ActualBenchmark.exe": "c98f670c9477fde6cea469405a031e4ac2de397a7d051f81778244c367ef4ef7",
+      "ActualBenchmark.runtimeconfig.json": "c230a317a54dd960bcbeb5f347f52e18dc665a26f7efda2159fced9a5ac7e097",
+      "NovaCore.Core.dll": "51647a9464e160a97616a128de6a9d4c63d23521f3fc03869e7d03dc8d714fc3",
+      "NovaCore.Graphics.dll": "4991b20d74ccc82805a04b4b7d27ffef25286df57415f3a5bbba764ecbd47e2b",
+      "NovaCore.Interop.dll": "b87853f157ffde90f47abac7b04344b46de63a7a78ff34ce62ffcaa4dfcbe587"
+    }
+  }
+}

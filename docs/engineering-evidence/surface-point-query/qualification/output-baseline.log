@@ -1,0 +1,11 @@
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=62594A23368D008963011AA79FE1D385CCC863976D6014DC79F5CC6DACD5997B; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Surface-point output fingerprint: 3e08f86757588127099cbb100d3829b73d5e5f29b1de8d0f22ec83de28534912
+{"samples":564,"ready":527,"unqualified":37,"creases":12,"maxHeight":9.094947017729282E-13,"maxPosition":0,"maxNormal":2.181364183438901E-07,"maxPlane":4.691547355542352E-08,"maxUnit":4.440892098500626E-16,"acquisitionMs":1.6499,"firstQueryUs":6719.8,"authority":{"BodyId":6,"Terrain":{"SourceId":2,"Version":5,"IsValid":true},"PhysicalGeneration":4,"ReferenceRadiusMetres":6371008.8,"GlobalSha256":"4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317","RegionalSha256":"c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe","CompositionIdentity":86364352542676184,"FacilitySupportIdentity":5597594574148789740,"QueryPolicyVersion":1}}
+{"name":"Florida","status":"Ready","firstProbeUs":40,"medianUs":33.4,"p95Us":48,"p99Us":67.2,"allocatedBytes":0,"batch16MeanUs":568.653125}
+{"name":"regional","status":"Ready","firstProbeUs":261.1,"medianUs":263.4,"p95Us":325.2,"p99Us":382.6,"allocatedBytes":0,"batch16MeanUs":4541.1796875}
+{"name":"inland","status":"Ready","firstProbeUs":120.7,"medianUs":115.3,"p95Us":118.3,"p99Us":127.5,"allocatedBytes":0,"batch16MeanUs":1843.10625}
+{"name":"unqualified-pole","status":"NormalUnqualified","firstProbeUs":479.7,"medianUs":462.7,"p95Us":466.2,"p99Us":475.3,"allocatedBytes":0,"batch16MeanUs":7574.1234375}
+PASS [headless] Physical surface-point query
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=62594A23368D008963011AA79FE1D385CCC863976D6014DC79F5CC6DACD5997B; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Physical surface-point stale snapshot
+Graphics Release: selected=2; pass=2; fail=0; skip=0; excluded=91

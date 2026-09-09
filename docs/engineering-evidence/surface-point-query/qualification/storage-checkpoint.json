@@ -1,0 +1,22 @@
+{
+  "unit": "logical bytes",
+  "scope": "Diagnostic qualification only; excludes ordinary production/test builds, old external compact evidence and this JSON file itself",
+  "repositoryEvidenceFiles": 54,
+  "repositoryEvidenceBytes": 273011,
+  "repositoryEvidenceInitialCheckpointBytes": 83501,
+  "repositoryEvidenceNetAddedBytes": 189510,
+  "newQualificationExternalFiles": 135,
+  "newQualificationExternalBytes": 6149318,
+  "newQualificationDisposableBytes": 5319400,
+  "newQualificationExternalRetainedBytes": 829918,
+  "newParityExternalFiles": 83,
+  "newParityCreatedBytes": 260996874,
+  "newParityRetainedBytes": 384063,
+  "newParityDisposableBytes": 260612811,
+  "newExternalDiagnosticCreatedBytes": 267146192,
+  "priorRawDisposedBytes": 507564896,
+  "followupDisposedBytes": 0,
+  "allDisposableRemainingFiles": 836,
+  "allDisposableRemainingBytes": 311582292,
+  "classification": "PROJECT CONTROL CLEANUP REQUIRED"
+}

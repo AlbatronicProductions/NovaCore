@@ -1,0 +1,57 @@
+{
+  "status": "PASS",
+  "pairs": [
+    {
+      "pose": "florida",
+      "pass": true,
+      "checks": {
+        "pixelMarker": true,
+        "composition": true,
+        "triangles": true,
+        "preparedBytes": true,
+        "preparedSha256": true,
+        "orientedTriangleMultisetSha256": true,
+        "depthSha256": true,
+        "hdrSha256": true,
+        "imageSha256": true,
+        "finiteDepthHdr": true,
+        "validationErrors": true,
+        "validationLayerLoaded": true,
+        "captureFrame": true,
+        "completedFrames": true,
+        "assetFingerprint": true,
+        "allOtherRuntimeShaderIdentities": true,
+        "controlledEnvironment": true,
+        "commandExceptHost": true,
+        "cwd": true
+      },
+      "differences": {}
+    },
+    {
+      "pose": "inland",
+      "pass": true,
+      "checks": {
+        "pixelMarker": true,
+        "composition": true,
+        "triangles": true,
+        "preparedBytes": true,
+        "preparedSha256": true,
+        "orientedTriangleMultisetSha256": true,
+        "depthSha256": true,
+        "hdrSha256": true,
+        "imageSha256": true,
+        "finiteDepthHdr": true,
+        "validationErrors": true,
+        "validationLayerLoaded": true,
+        "captureFrame": true,
+        "completedFrames": true,
+        "assetFingerprint": true,
+        "allOtherRuntimeShaderIdentities": true,
+        "controlledEnvironment": true,
+        "commandExceptHost": true,
+        "cwd": true
+      },
+      "differences": {}
+    }
+  ]
+}

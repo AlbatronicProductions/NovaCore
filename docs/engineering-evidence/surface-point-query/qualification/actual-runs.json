@@ -1,0 +1,42 @@
+[
+  {
+    "label": "actual-1-baseline-forward",
+    "command": [
+      "E:\\NovaCore-Research\\surface-query-qualification-20260909\\verify-b\\actual-baseline\\ActualBenchmark.exe",
+      "forward"
+    ],
+    "elapsedSeconds": 23.531000000002678,
+    "exitCode": 0,
+    "sha256": "2700d9358791cefd8606925ea55044daa686dc140df3f6db6b3dd8d3b18387ad"
+  },
+  {
+    "label": "actual-2-candidate-forward",
+    "command": [
+      "E:\\NovaCore-Research\\surface-query-qualification-20260909\\verify-b\\actual-candidate\\ActualBenchmark.exe",
+      "forward"
+    ],
+    "elapsedSeconds": 11.687000000005355,
+    "exitCode": 0,
+    "sha256": "5e26ab3307e354f2bf0a0d6bc2c9efb21a965a270f093db7311813815c11f60d"
+  },
+  {
+    "label": "actual-3-candidate-reverse",
+    "command": [
+      "E:\\NovaCore-Research\\surface-query-qualification-20260909\\verify-b\\actual-candidate\\ActualBenchmark.exe",
+      "reverse"
+    ],
+    "elapsedSeconds": 11.655999999988126,
+    "exitCode": 0,
+    "sha256": "660f30f66be6414be519a3f909405aabb9dfa79081040d6d21769eb62b2e3cb4"
+  },
+  {
+    "label": "actual-4-baseline-reverse",
+    "command": [
+      "E:\\NovaCore-Research\\surface-query-qualification-20260909\\verify-b\\actual-baseline\\ActualBenchmark.exe",
+      "reverse"
+    ],
+    "elapsedSeconds": 23.031000000002678,
+    "exitCode": 0,
+    "sha256": "28d1004b80d8d07c8b479b3836095e93f1d55811667e4e6319ac694b53493491"
+  }
+]

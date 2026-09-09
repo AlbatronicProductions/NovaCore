@@ -1,4 +1,5 @@
 using System.Buffers.Binary;
+using System.Security.Cryptography;
 using NovaCore.Core;
 using NovaCore.Core.Surface;
 
@@ -281,8 +282,10 @@ public static class EarthLocalTerrainElevationDataset
     private sealed class Snapshot
     {
         internal Snapshot(PlanetaryLocalTerrainPackHeader header, byte detailFrequency, byte payloadVersion,
-            Dictionary<PlanetaryLocalTerrainSectorId, DecodedSector> residuals)
-        { Header = header; DetailFrequency = detailFrequency; PayloadVersion = payloadVersion; Residuals = residuals; }
+            Dictionary<PlanetaryLocalTerrainSectorId, DecodedSector> residuals, string sha256, long byteCount)
+        { Header = header; DetailFrequency = detailFrequency; PayloadVersion = payloadVersion; Residuals = residuals; Sha256 = sha256; ByteCount = byteCount; }
+        internal string Sha256 { get; }
+        internal long ByteCount { get; }
         internal PlanetaryLocalTerrainPackHeader Header { get; }
         internal byte DetailFrequency { get; }
         internal byte PayloadVersion { get; }
@@ -292,6 +295,16 @@ public static class EarthLocalTerrainElevationDataset
     private static readonly object Gate = new();
     private static Snapshot? _snapshot;
     public static bool IsLoaded => Volatile.Read(ref _snapshot) is not null;
+
+    // Identity belongs to the once-published winning snapshot, never a later path or load attempt.
+    internal static bool TryGetPublishedIdentity(out PlanetaryLocalTerrainPackHeader header, out string sha256, out long byteCount)
+    {
+        var snapshot = Volatile.Read(ref _snapshot);
+        header = snapshot?.Header ?? default;
+        sha256 = snapshot?.Sha256 ?? string.Empty;
+        byteCount = snapshot?.ByteCount ?? 0;
+        return snapshot is not null;
+    }
 
     public static bool TryLoad(string path, out string error)
     {
@@ -350,7 +363,8 @@ public static class EarthLocalTerrainElevationDataset
                 offset = recordEnd;
             }
             if (offset != package.Length) { error = "Local terrain elevation package has trailing bytes."; return false; }
-            lock (Gate) _snapshot ??= new Snapshot(header, detailFrequency, payloadVersion, residuals);
+            var sha256 = Convert.ToHexStringLower(SHA256.HashData(package));
+            lock (Gate) _snapshot ??= new Snapshot(header, detailFrequency, payloadVersion, residuals, sha256, package.LongLength);
             error = string.Empty; return true;
         }
         catch (Exception exception) when (exception is IOException or UnauthorizedAccessException or OverflowException or OutOfMemoryException)

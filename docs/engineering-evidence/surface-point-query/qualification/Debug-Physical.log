@@ -1,0 +1,33 @@
+Native identity: configuration=Debug; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Debug\net10.0\NovaCore.Native.dll; sha256=6E10A80772EFAA51DA256983355B1AB3BDEC49E792891BFC5280C12A596BDC6E; source=E:\NovaCore\build\native-ninja\NovaCore.Native.dll
+Surface-point output fingerprint: 3e08f86757588127099cbb100d3829b73d5e5f29b1de8d0f22ec83de28534912
+{"samples":564,"ready":527,"unqualified":37,"creases":12,"maxHeight":9.094947017729282E-13,"maxPosition":0,"maxNormal":2.181364183438901E-07,"maxPlane":4.691547355542352E-08,"maxUnit":4.440892098500626E-16,"acquisitionMs":1.8406,"firstQueryUs":6514.2,"authority":{"BodyId":6,"Terrain":{"SourceId":2,"Version":5,"IsValid":true},"PhysicalGeneration":4,"ReferenceRadiusMetres":6371008.8,"GlobalSha256":"4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317","RegionalSha256":"c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe","CompositionIdentity":86364352542676184,"FacilitySupportIdentity":5597594574148789740,"QueryPolicyVersion":1}}
+{"name":"Florida","status":"Ready","firstProbeUs":323.6,"medianUs":309.7,"p95Us":312.9,"p99Us":327.9,"allocatedBytes":0,"batch16MeanUs":4989.6890625}
+{"name":"regional","status":"Ready","firstProbeUs":1278.9,"medianUs":1116.3,"p95Us":1396.7,"p99Us":1617.1,"allocatedBytes":0,"batch16MeanUs":18493.184375}
+{"name":"inland","status":"Ready","firstProbeUs":648.2,"medianUs":570.5,"p95Us":695,"p99Us":741,"allocatedBytes":0,"batch16MeanUs":9413.1328125}
+{"name":"unqualified-pole","status":"NormalUnqualified","firstProbeUs":1598.5,"medianUs":1498.7,"p95Us":1728.5,"p99Us":1913.7,"allocatedBytes":0,"batch16MeanUs":25557.6109375}
+PASS [headless] Physical surface-point query
+Native identity: configuration=Debug; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Debug\net10.0\NovaCore.Native.dll; sha256=6E10A80772EFAA51DA256983355B1AB3BDEC49E792891BFC5280C12A596BDC6E; source=E:\NovaCore\build\native-ninja\NovaCore.Native.dll
+PASS [headless] Physical surface-point stale snapshot
+Native identity: configuration=Debug; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Debug\net10.0\NovaCore.Native.dll; sha256=6E10A80772EFAA51DA256983355B1AB3BDEC49E792891BFC5280C12A596BDC6E; source=E:\NovaCore\build\native-ninja\NovaCore.Native.dll
+Canonical SurfaceAnchor terrain: maxAuthorityError=0.00000000000000000E+000 m; terrainQuery=20071.4 ns; ENU=280.2 ns; allocations=0; hash=0x5BE7729CD52A7AD1
+PASS [headless] Canonical SurfaceAnchor physical terrain authority
+Native identity: configuration=Debug; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Debug\net10.0\NovaCore.Native.dll; sha256=6E10A80772EFAA51DA256983355B1AB3BDEC49E792891BFC5280C12A596BDC6E; source=E:\NovaCore\build\native-ninja\NovaCore.Native.dll
+M12C Candidate D presentation parity: maxWeightError=3.868E-005; maxL1=7.735E-005
+7H modifier foundation: generation=0xC6CDFF4A0E5468E2; tiled=8m/2500000m; erosion=1.5m/1200m/R24000m; gradientError=0; cost100k=370.707ms; allocations=0
+PASS [headless] Multiscale physical terrain modifier foundation
+Native identity: configuration=Debug; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Debug\net10.0\NovaCore.Native.dll; sha256=6E10A80772EFAA51DA256983355B1AB3BDEC49E792891BFC5280C12A596BDC6E; source=E:\NovaCore\build\native-ninja\NovaCore.Native.dll
+Canonical physical authority: directions=10; heightDelta=0.000000000E+000m; splitHeightDelta=0.000000000E+000m; positionDelta=0.000000000E+000m; normalDelta=0.000000000E+000rad; boundaryHeight=0.000000000E+000m; boundaryNormal=0.000000000E+000rad
+PASS [headless] Single canonical physical surface authority
+Native identity: configuration=Debug; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Debug\net10.0\NovaCore.Native.dll; sha256=6E10A80772EFAA51DA256983355B1AB3BDEC49E792891BFC5280C12A596BDC6E; source=E:\NovaCore\build\native-ninja\NovaCore.Native.dll
+Physical frequency continuity: bands=21; globalSpacing=156368.08157840566m; anchoredSpacing=19.087900583301472m; suppressed=19; activated=15; heightDelta=0.000000000E+000m; normalDelta=2.107342426E-008rad; edgePositionDelta=0.000000000E+000m; c2Derivative=1.578946316E-008
+PASS [headless] Global/anchored physical frequency continuity
+Native identity: configuration=Debug; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Debug\net10.0\NovaCore.Native.dll; sha256=6E10A80772EFAA51DA256983355B1AB3BDEC49E792891BFC5280C12A596BDC6E; source=E:\NovaCore\build\native-ninja\NovaCore.Native.dll
+M12D candidate renderer integration: samples=24; heightMax=9.09494701772928238E-013m; normalMax=2.10734242554470173E-008rad; sharedBoundaryMax=0.00000000000000000E+000m; production=4; numericalReference=3
+PASS [headless] Generation-4 physical renderer integration
+Native identity: configuration=Debug; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Debug\net10.0\NovaCore.Native.dll; sha256=6E10A80772EFAA51DA256983355B1AB3BDEC49E792891BFC5280C12A596BDC6E; source=E:\NovaCore\build\native-ninja\NovaCore.Native.dll
+M12 Florida: records=859; levels=8/9/10/11; launchResidual=15.002m; maxQuantization=0.001961m; bytes=210307596
+PASS [headless] M12 Florida regional physical surface
+Native identity: configuration=Debug; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Debug\net10.0\NovaCore.Native.dll; sha256=6E10A80772EFAA51DA256983355B1AB3BDEC49E792891BFC5280C12A596BDC6E; source=E:\NovaCore\build\native-ninja\NovaCore.Native.dll
+Physical-normal frame: boundaryLatitude=71.80512766123321deg; longitude=-42deg; discontinuousReferenceJump=2.382990847247186rad; canonicalEastJump=0rad; canonicalNorthJump=1.4901161193847656E-08rad; longitudeWrap=1.4901161193847656E-08rad; polarStep=9.99155915632302E-07rad; minimumHandedness=0.9999999999999997; south=PositiveY/L2/2/1@0.6666189931924974,0.3494472650593392; north=PositiveY/L2/2/1@0.6666189827254602,0.3494472745838204
+PASS [headless] Production physical-normal tangent continuity
+Graphics Debug: selected=9; pass=9; fail=0; skip=0; excluded=84

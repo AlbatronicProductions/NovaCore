@@ -1,0 +1,38 @@
+{
+  "head": "aaf3e7a032a806e7e547c2830d1f95d97aaf620b",
+  "branch": "codex/surface-contact-query",
+  "source": [
+    {
+      "path": "src/NovaCore.Core/Surface/PhysicalSurfacePointQuery.cs",
+      "sha256": "c15f71e8d37e15d7cf826a776dee06b6dbe92ed175815136b89246338e611ba1",
+      "bytes": 2054
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetaryPhysicalSurfacePointQuery.cs",
+      "sha256": "f8e4dd8f97cbdc4d7134c3fe90ba613fca31977cfe3de02e002d4bc93aef5e71",
+      "bytes": 8677
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetaryLocalTerrain.cs",
+      "sha256": "10a9057affc2b1dcacb7329d9f6f1e8daeb1631d407cc105e4ad0db63b56d19b",
+      "bytes": 28614
+    },
+    {
+      "path": "src/NovaCore.Graphics/TerrainAssetDistribution.cs",
+      "sha256": "666654b0e5a92da21a0884eaa0799f75b836cb318874a353a0eecb3088f68b62",
+      "bytes": 21279
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PhysicalSurfacePointQueryTests.cs",
+      "sha256": "3a92a0a29b78ec25164734327188588cf50cce426a61a2a8d06d0a0053c2a1c1",
+      "bytes": 18955
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/Program.cs",
+      "sha256": "b8d1f4804a281c0c9c8b1ebdad3351d12db7090c13c60fa781c4335847caef01",
+      "bytes": 565644
+    }
+  ],
+  "outputFingerprint": "3e08f86757588127099cbb100d3829b73d5e5f29b1de8d0f22ec83de28534912",
+  "tests": "Debug and Release:11 headless; native regional and mapped-memory PASS"
+}

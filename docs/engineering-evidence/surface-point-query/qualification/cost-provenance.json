@@ -1,0 +1,32 @@
+[
+  {
+    "path": "E:\\NovaCore-Research\\surface-query-qualification-20260909\\cost-proof\\bin\\Release\\net10.0\\NovaCore.Core.dll",
+    "bytes": 93184,
+    "sha256": "51647A9464E160A97616A128DE6A9D4C63D23521F3FC03869E7D03DC8D714FC3"
+  },
+  {
+    "path": "E:\\NovaCore-Research\\surface-query-qualification-20260909\\cost-proof\\bin\\Release\\net10.0\\NovaCore.Graphics.dll",
+    "bytes": 639488,
+    "sha256": "7F0E6592057AFB4F5243DF91E3529E900A9CB65DB6DA19D99E2AB16BF2F6568E"
+  },
+  {
+    "path": "E:\\NovaCore-Research\\surface-query-qualification-20260909\\cost-proof\\Program.cs",
+    "bytes": 6617,
+    "sha256": "63CB8CC44DFA8E7323CF5DB697464A92F3C45B58D30004546D8D0196455CA28F"
+  },
+  {
+    "path": "E:\\NovaCore-Research\\surface-query-qualification-20260909\\cost-proof\\CountedQuery.cs",
+    "bytes": 7595,
+    "sha256": "E18867DD9BF0269073524AB0BD3BB2DADBC85B4B8A45CEA840734D1981998FED"
+  },
+  {
+    "path": "E:\\NovaCore-Research\\surface-query-qualification-20260909\\cost-proof\\StagedQuery.cs",
+    "bytes": 6212,
+    "sha256": "4230FC96C3292FBD274686C60939BF545625054580AB9EEC22FDF4674F42D0B4"
+  },
+  {
+    "path": "E:\\NovaCore-Research\\surface-query-qualification-20260909\\cost-proof\\Proof.csproj",
+    "bytes": 573,
+    "sha256": "44E67D5E652DF0AF10DBCA0FAED4CB491FCEA6D28CFD400AB0920598ACE3E9F9"
+  }
+]

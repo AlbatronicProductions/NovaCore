@@ -8,6 +8,7 @@ records its investigation stage. Follow subsequent accepted conclusions.
 
 | Family | Continuing value | Read the conclusion first |
 |---|---|---|
+| [Surface-point query candidate](surface-point-query/README.md) | Bounded numerical/readiness proof, cost, source identity and exact raster-parity evidence for the unbanked physical API. | [Current query contract](../surface-point-queries.md). |
 | [Earth-route convergence](earth-route-convergence/README.md) | Manual acceptance, original failures, final physical/presentation causes, hashes, compact visuals, recipes and raw-retirement provenance. | [Earth-route convergence](../earth-route-convergence.md), [production consolidation](../production-consolidation.md), [evidence cleanup](../diagnostic-evidence-consolidation.md). |
 | [Repository debt retirement](repository-debt-retirement/README.md) | Original producer/consumer decisions, retired islands, compatibility questions and measured storage. | [Debt review](../repository-debt-retirement.md); later packages supersede its snapshot dispositions. |
 | [Compatibility resolution](compatibility-contract-resolution/README.md) | Public-contract boundaries and the original 25-row matrix. | [Contract resolution](../compatibility-contract-resolution.md), then [implemented internal migration](../tiny-local-internal-authoring-migration.md). |

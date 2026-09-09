@@ -19,8 +19,10 @@ not as an onboarding requirement.
 M13.6 is the latest banked production step, commit
 `90fef759243dd67918cd556e19027159e5a5eada`, tag
 `m13.6-cpu-cached-terrain-residency-keys`. No unbanked M13 candidate or temporary
-comparison bridge is awaiting preservation/acceptance. Next production-front
-authorization returns to Project Control; this handoff opens no new front.
+comparison bridge is awaiting preservation/acceptance. The separately authorized
+Surface Interaction / Launch Foundation now has an unbanked
+[surface-point query candidate](surface-point-queries.md). No contact response,
+launch behavior or new milestone number is authorized by this handoff.
 
 - Work in `E:\NovaCore` and inspect `git status --short` before editing.
 - Preserve unrelated and unstaged user work.

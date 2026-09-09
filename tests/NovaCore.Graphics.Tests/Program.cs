@@ -16,6 +16,8 @@ using NovaCore.Simulation.Time;
 
 var tests = new (string, Action)[]
 {
+    ("Physical surface-point query", PhysicalSurfacePointQueryTests.Run),
+    ("Physical surface-point stale snapshot", PhysicalSurfacePointQueryTests.RejectStaleSnapshot),
     ("Generic grid and frames startup", WindowLifecycleTests.RunGenericStartup),
     ("Facility lighting authority", FacilityLightingTests.Run),
     ("MeshHandle", MeshHandleTest),

@@ -1,0 +1,531 @@
+{
+  "reverse": true,
+  "fullProofCount": 564,
+  "qualified": 527,
+  "unqualified": 37,
+  "loadMs": 278.5658,
+  "acquisitionMs": 26.4132,
+  "diagnosticCtorMs": 0.0344,
+  "checksum": 0,
+  "decomposition": [
+    {
+      "name": "Florida",
+      "staged": false,
+      "status": "Ready",
+      "eagerCalls": 33,
+      "stagedCalls": 33,
+      "profiledWallUs": 39.258203125,
+      "globalUs": 2.095703125,
+      "regionalUs": 18.09609375,
+      "naturalUs": 14.0015625,
+      "supportUs": 2.230859375,
+      "remainderUs": 2.833984375
+    },
+    {
+      "name": "Florida",
+      "staged": true,
+      "status": "Ready",
+      "eagerCalls": 33,
+      "stagedCalls": 33,
+      "profiledWallUs": 39.091796875,
+      "globalUs": 2.2234375,
+      "regionalUs": 18.353515625,
+      "naturalUs": 13.483203125,
+      "supportUs": 2.26328125,
+      "remainderUs": 2.768359375
+    },
+    {
+      "name": "regional",
+      "staged": false,
+      "status": "Ready",
+      "eagerCalls": 273,
+      "stagedCalls": 113,
+      "profiledWallUs": 290.78359375,
+      "globalUs": 16.438671875,
+      "regionalUs": 146.091015625,
+      "naturalUs": 101.53359375,
+      "supportUs": 4.8875,
+      "remainderUs": 21.8328125
+    },
+    {
+      "name": "regional",
+      "staged": true,
+      "status": "Ready",
+      "eagerCalls": 273,
+      "stagedCalls": 113,
+      "profiledWallUs": 119.81171875,
+      "globalUs": 6.826171875,
+      "regionalUs": 60.13515625,
+      "naturalUs": 41.5453125,
+      "supportUs": 1.983203125,
+      "remainderUs": 9.321875
+    },
+    {
+      "name": "inland",
+      "staged": false,
+      "status": "Ready",
+      "eagerCalls": 129,
+      "stagedCalls": 65,
+      "profiledWallUs": 130.879296875,
+      "globalUs": 7.77890625,
+      "regionalUs": 65.65859375,
+      "naturalUs": 44.72734375,
+      "supportUs": 2.240625,
+      "remainderUs": 10.473828125
+    },
+    {
+      "name": "inland",
+      "staged": true,
+      "status": "Ready",
+      "eagerCalls": 129,
+      "stagedCalls": 65,
+      "profiledWallUs": 66.11484375,
+      "globalUs": 4.00546875,
+      "regionalUs": 33.071875,
+      "naturalUs": 22.65546875,
+      "supportUs": 1.09609375,
+      "remainderUs": 5.2859375
+    },
+    {
+      "name": "pole",
+      "staged": false,
+      "status": "NormalUnqualified",
+      "eagerCalls": 489,
+      "stagedCalls": 169,
+      "profiledWallUs": 565.255078125,
+      "globalUs": 30.684375,
+      "regionalUs": 289.341796875,
+      "naturalUs": 194.156640625,
+      "supportUs": 8.832421875,
+      "remainderUs": 42.23984375
+    },
+    {
+      "name": "pole",
+      "staged": true,
+      "status": "NormalUnqualified",
+      "eagerCalls": 489,
+      "stagedCalls": 169,
+      "profiledWallUs": 198.59453125,
+      "globalUs": 9.071875,
+      "regionalUs": 102.3421875,
+      "naturalUs": 69.270703125,
+      "supportUs": 2.971875,
+      "remainderUs": 14.937890625
+    }
+  ],
+  "rows": [
+    {
+      "name": "unqualified-pole16",
+      "count": 16,
+      "statuses": [
+        "NormalUnqualified",
+        "NormalUnqualified",
+        "NormalUnqualified",
+        "NormalUnqualified",
+        "NormalUnqualified",
+        "NormalUnqualified",
+        "NormalUnqualified",
+        "NormalUnqualified",
+        "NormalUnqualified",
+        "NormalUnqualified",
+        "NormalUnqualified",
+        "NormalUnqualified",
+        "NormalUnqualified",
+        "NormalUnqualified",
+        "NormalUnqualified",
+        "NormalUnqualified"
+      ],
+      "eagerCount": 7824,
+      "lazyCount": 2704,
+      "original": {
+        "medianUs": 7722.6,
+        "p95Us": 7971.5,
+        "p99Us": 8339,
+        "minUs": 7554.6,
+        "maxUs": 8514.1
+      },
+      "staged": {
+        "medianUs": 2643.2,
+        "p95Us": 2803.9,
+        "p99Us": 2943.3,
+        "minUs": 2512.1,
+        "maxUs": 3750.1
+      },
+      "allocated": 0
+    },
+    {
+      "name": "inland-legs16",
+      "count": 16,
+      "statuses": [
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready"
+      ],
+      "eagerCount": 2064,
+      "lazyCount": 1040,
+      "original": {
+        "medianUs": 1926.3,
+        "p95Us": 2225.5,
+        "p99Us": 2895.3,
+        "minUs": 1821.2,
+        "maxUs": 2897.8
+      },
+      "staged": {
+        "medianUs": 987.6,
+        "p95Us": 1172.2,
+        "p99Us": 1483.7,
+        "minUs": 916.1,
+        "maxUs": 1497.8
+      },
+      "allocated": 0
+    },
+    {
+      "name": "Florida-legs16",
+      "count": 16,
+      "statuses": [
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready"
+      ],
+      "eagerCount": 528,
+      "lazyCount": 528,
+      "original": {
+        "medianUs": 537,
+        "p95Us": 641.2,
+        "p99Us": 694.1,
+        "minUs": 516.5,
+        "maxUs": 710.7
+      },
+      "staged": {
+        "medianUs": 538.9,
+        "p95Us": 638.7,
+        "p99Us": 669.2,
+        "minUs": 519.5,
+        "maxUs": 691.1
+      },
+      "allocated": 0
+    },
+    {
+      "name": "boundary-legs16",
+      "count": 16,
+      "statuses": [
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready"
+      ],
+      "eagerCount": 1680,
+      "lazyCount": 912,
+      "original": {
+        "medianUs": 1578.8,
+        "p95Us": 1788.9,
+        "p99Us": 1933.3,
+        "minUs": 1532,
+        "maxUs": 2010.1
+      },
+      "staged": {
+        "medianUs": 853.7,
+        "p95Us": 994.8,
+        "p99Us": 1120.2,
+        "minUs": 827.6,
+        "maxUs": 1221.8
+      },
+      "allocated": 0
+    },
+    {
+      "name": "regional-legs16",
+      "count": 16,
+      "statuses": [
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready"
+      ],
+      "eagerCount": 3048,
+      "lazyCount": 1368,
+      "original": {
+        "medianUs": 2986.9,
+        "p95Us": 3104.6,
+        "p99Us": 3232.1,
+        "minUs": 2828.3,
+        "maxUs": 3336
+      },
+      "staged": {
+        "medianUs": 1306.2,
+        "p95Us": 1506.7,
+        "p99Us": 1541.7,
+        "minUs": 1271.1,
+        "maxUs": 1608.2
+      },
+      "allocated": 0
+    },
+    {
+      "name": "regional-legs8",
+      "count": 8,
+      "statuses": [
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready"
+      ],
+      "eagerCount": 1488,
+      "lazyCount": 672,
+      "original": {
+        "medianUs": 1413.2,
+        "p95Us": 1594.6,
+        "p99Us": 1635.2,
+        "minUs": 1375.5,
+        "maxUs": 1745.2
+      },
+      "staged": {
+        "medianUs": 641.1,
+        "p95Us": 765.3,
+        "p99Us": 800.4,
+        "minUs": 616.5,
+        "maxUs": 869.1
+      },
+      "allocated": 0
+    },
+    {
+      "name": "regional-legs4",
+      "count": 4,
+      "statuses": [
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready"
+      ],
+      "eagerCount": 732,
+      "lazyCount": 332,
+      "original": {
+        "medianUs": 700.1,
+        "p95Us": 890.9,
+        "p99Us": 951.8,
+        "minUs": 669.5,
+        "maxUs": 956
+      },
+      "staged": {
+        "medianUs": 320.5,
+        "p95Us": 432.9,
+        "p99Us": 470.6,
+        "minUs": 304.3,
+        "maxUs": 472.3
+      },
+      "allocated": 0
+    },
+    {
+      "name": "regional-near16",
+      "count": 16,
+      "statuses": [
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready"
+      ],
+      "eagerCount": 3120,
+      "lazyCount": 1392,
+      "original": {
+        "medianUs": 3072.3,
+        "p95Us": 4441.8,
+        "p99Us": 4527.6,
+        "minUs": 2904.3,
+        "maxUs": 4571.6
+      },
+      "staged": {
+        "medianUs": 1348.8,
+        "p95Us": 1985.3,
+        "p99Us": 2169.1,
+        "minUs": 1294.8,
+        "maxUs": 2196.3
+      },
+      "allocated": 0
+    },
+    {
+      "name": "regional-near8",
+      "count": 8,
+      "statuses": [
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready"
+      ],
+      "eagerCount": 1560,
+      "lazyCount": 696,
+      "original": {
+        "medianUs": 1608.8,
+        "p95Us": 2179.5,
+        "p99Us": 2297,
+        "minUs": 1453.8,
+        "maxUs": 2322
+      },
+      "staged": {
+        "medianUs": 718,
+        "p95Us": 1002.2,
+        "p99Us": 1160.3,
+        "minUs": 639.8,
+        "maxUs": 1172.6
+      },
+      "allocated": 0
+    },
+    {
+      "name": "regional-near4",
+      "count": 4,
+      "statuses": [
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready"
+      ],
+      "eagerCount": 780,
+      "lazyCount": 348,
+      "original": {
+        "medianUs": 777.8,
+        "p95Us": 1008.7,
+        "p99Us": 1084.2,
+        "minUs": 711.9,
+        "maxUs": 1106.1
+      },
+      "staged": {
+        "medianUs": 348.6,
+        "p95Us": 510.3,
+        "p99Us": 595,
+        "minUs": 318.7,
+        "maxUs": 606.1
+      },
+      "allocated": 0
+    },
+    {
+      "name": "regional-identical16",
+      "count": 16,
+      "statuses": [
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready",
+        "Ready"
+      ],
+      "eagerCount": 4368,
+      "lazyCount": 1808,
+      "original": {
+        "medianUs": 4474.1,
+        "p95Us": 4832.6,
+        "p99Us": 4957.4,
+        "minUs": 4099,
+        "maxUs": 5016.8
+      },
+      "staged": {
+        "medianUs": 1791.7,
+        "p95Us": 2144.7,
+        "p99Us": 2205.8,
+        "minUs": 1685.5,
+        "maxUs": 2806.3
+      },
+      "allocated": 0
+    },
+    {
+      "name": "regional-single",
+      "count": 1,
+      "statuses": [
+        "Ready"
+      ],
+      "eagerCount": 273,
+      "lazyCount": 113,
+      "original": {
+        "medianUs": 280.1,
+        "p95Us": 417.4,
+        "p99Us": 504.8,
+        "minUs": 250,
+        "maxUs": 565.7
+      },
+      "staged": {
+        "medianUs": 106.2,
+        "p95Us": 179,
+        "p99Us": 247.7,
+        "minUs": 103.9,
+        "maxUs": 269.8
+      },
+      "allocated": 0
+    }
+  ]
+}
