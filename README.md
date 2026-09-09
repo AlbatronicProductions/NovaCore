@@ -94,7 +94,7 @@ NovaCore currently combines a C# simulation core with a native Vulkan renderer, 
 - **Moving snapped pupil** — a camera-facing spherical representation retains exact lattice identity, reuses samples across movement, and changes scale through projected-error selection with hysteresis.
 - **Persistent scale resources and transactional GPU generations** — immutable topology is reused when a level is revisited; one current and at most one incoming generation prepare asynchronously, and fence-confirmed atomic publication preserves exactly one Earth presentation owner, including valid zero-visible views.
 - **Conservative GPU visibility** — curved-patch planet occlusion and screen/frustum rejection feed compacted indexed-indirect work without removing required base coverage.
-- **KSA-parity bounded refinement responsibility** — exact per-edge TCS factors and TES displacement are limited to 50 metres around the camera while the production base remains depth-owning outside that range.
+- **Prepared physical terrain and bounded tessellation** — full relief is prepared before TES, which interpolates the published surface. KSA-parity per-edge factors retain the 50-metre near-camera refinement contract and future displacement capacity; base terrain remains depth-owning outside that range.
 - **FP64 physical/world authority** with camera-relative GPU presentation for stable rendering across planetary and astronomical scales.
 - **Correct body-fixed handoff conventions** across detailed, transitional, and distant paths, including a dedicated outward-winding convention for the shared distant sphere.
 - **FP16 HDR scene color** with fixed exposure and ACES-style tone mapping.
@@ -118,7 +118,7 @@ NovaCore treats correctness tooling as part of the engine rather than as present
 - Camera/reference-frame precision tests.
 - Native, managed, Solar-scene, Earth-LOD, resize, and triangle regression coverage.
 
-The banked M12D-P2S5H Earth Route Convergence baseline has completed validation and preserves the accepted native 3440×1440 Florida result on the NCSM1 New Earth Renderer. It retains the accepted orbit-to-near-surface coverage established by P2S5F. Focused regressions cover all 18 NCSM1 levels, persistent level reuse, moving-pupil identity, atomic and zero-visible publication, one-owner coverage, body authority, body-fixed height and normal parity, topology-family winding, KSA-parity tessellation responsibility, conservative horizon coverage beyond the TES range, and Vulkan validation. Camera motion cannot mutate Earth orientation, body-fixed geography, or canonical physical height.
+The banked M13.6 production baseline preserves the accepted native 3440×1440 Florida result and orbit-to-near-surface coverage on the NCSM1 New Earth Renderer. Focused regressions cover all 18 NCSM1 levels, persistent level reuse, moving-pupil identity, atomic and zero-visible publication, one-owner coverage, body authority, body-fixed height and normal parity, topology-family winding, KSA-parity tessellation responsibility, conservative horizon coverage beyond the TES range, and Vulkan validation. Camera motion cannot mutate Earth orientation, body-fixed geography, or canonical physical height.
 
 The CPU reference/parity path is a development and regression oracle; the intended production planetary path remains GPU-driven.
 
@@ -196,76 +196,51 @@ shows the resolved client dimensions and starts the matching Triangle runtime:
 a Release launcher uses Release and a Debug launcher uses Debug. No shell
 environment setup is required.
 
-The **banked P2S5H production baseline** uses NCSM1 and generation 4 for all six
-supported Earth/Solar/Florida launcher routes, including **New Earth Renderer**.
-Scene, focus, altitude, camera and Florida initialization remain route-specific.
-Florida launcher-based manual acceptance **PASSED** before consolidation.
-The superseded dynamic anchored owner, stitch/coverage draw, local texture-demand
-transport and its investigation drivers have been retired. Generation-3 numerical
-oracles and independent development scenes remain outside production Earth routing.
-Terrain-v5 global bootstrap remains only until complete NCSM1 publication;
-non-Earth presentation remains independent. P2S5H is banked; subsequent debt
-retirement remains separately reviewed and unbanked.
-
-See [production consolidation](docs/production-consolidation.md) for reachability, retained responsibilities and validation.
-
+All six supported Earth/Solar/Florida routes use NCSM1 and generation-4 physical
+terrain, including **New Earth Renderer**. Scene, focus, altitude, camera and
+Florida initialization remain route-specific. Terrain-v5 global bootstrap is
+temporary presentation until complete NCSM1 publication; non-Earth rendering
+remains independent. See [production consolidation](docs/production-consolidation.md)
+for route-ownership provenance.
 
 Current Solar-scene controls include mouse drag for free orbiting, mouse wheel zoom, number-key body focus, `.` / `,` simulation-rate changes, Space pause/resume, and `R` to return to the deterministic Solar Map home view.
 
 ## Current planetary baseline
 
-The banked, production-accepted planetary baseline is **M12D-P2S5H — Earth
-Route Convergence**, commit `32ffac50ab5c06518ede24edfb5c531976d4ec99`, at
-annotated tag `m12d-p2s5h-earth-route-convergence`. The later repository-hygiene
-commit `c78b5824e7f99570d696dc4607944964bccf006e` retires tracked diagnostic
-video evidence without moving the milestone tag. **NCSM1 / New Earth
-Renderer** is the accepted production Earth renderer. Its responsibility chain is:
+The latest banked production milestone is **M13.6 — Prefer CPU-cached memory
+for terrain residency keys**, commit `90fef759243dd67918cd556e19027159e5a5eada`,
+tag `m13.6-cpu-cached-terrain-residency-keys`.
+**M13 — NCSM1 Terrain Performance is CLOSED. There is no M13.7.**
 
-```text
-canonical body-fixed physical terrain
-→ immutable persistent NCSM1 scale resource
-→ retained and snapped pupil representation
-→ physical position and normal preparation
-→ conservative curved-patch planet occlusion
-→ conservative screen visibility and compacted original index triplets
-→ compacted GPU workload
-→ KSA-parity per-edge TCS factors and bounded TES refinement
-→ indexed indirect raster
-→ fence-complete atomic publication
-```
+**NCSM1 / New Earth Renderer** remains the production Earth renderer. M13 moved
+expensive terrain work to appropriate shader, preparation, material and memory
+boundaries while preserving canonical physical terrain, accepted Florida
+presentation and future tessellation capacity.
 
-Topology density controls representation, not physical truth. The pupil may
-change level or snap to a new lattice origin without changing
-`H(bodyDirection)` or the corresponding FP64 body-fixed point. The 50 m
-contract bounds near-camera TES refinement only; the base spherical-billboard
-geometry continues to own planetary depth outside that range.
+The production chain is canonical `H(bodyDirection)` → persistent NCSM1 scale
+and snapped pupil → prepared full physical relief and normals → conservative
+visibility and compaction → bounded hardware tessellation and interpolation →
+indexed indirect raster. Complete, fence-confirmed generations publish atomically;
+the current generation remains the sole Earth owner while its replacement prepares.
 
-Implemented and stable today are the 18-level NCSM1 topology library,
-projected-error selection and hysteresis, moving-pupil identity, persistent
-scale reuse, asynchronous current plus one-incoming GPU lifecycle, conservative
-visibility and compaction, KSA-parity bounded TES, zero-visible publication and
-re-entry, body-specific presentation authority, and exactly-one-owner
-publication. P2S5G tessellation interface compaction is accepted production
-architecture: the TCS user payload is 13 scalars per control point instead of
-45, with physical calculations, the fragment interface, edge factors, and 50 m
-refinement semantics preserved. The deterministic +89 TES invocation difference
-is an accepted bounded invocation-accounting consequence, not increased
-refinement or changed tessellation semantics. See the
-[P2S5G investigation and historical closeout](docs/M12D-P2S5G-workload-investigation.md).
+Topology density controls the rendered approximation, not physical truth.
+Camera movement and pupil replacement cannot change canonical body-fixed height.
+Gameplay and camera clearance retain full physical queries. Ordinary shading
+avoids unused diagnostic work and zero-contribution material noise; terrain
+working memory prefers GPU locality and residency keys prefer CPU caching where
+compatible.
 
-This is a production architecture milestone, not a claim of finished visuals.
-Terrain materials and presentation quality, atmosphere/cloud/environment
-rebuilding, finer pupil and re-triangulation morph quality, spacecraft and
-surface gameplay, and possible later surface-workload optimization remain
-separate future work. The current checkpoint is repository-debt retirement and
-Project Control review. P2S5H is banked; performance work comes later.
+M13 closure does not mean universal 120 FPS terrain performance or finished
+visuals. Regional replacement remains the principal measured performance
+limitation. Terrain materials, finer representation continuity, environment and
+spacecraft/surface gameplay remain future responsibilities. See
+[current engineering state](docs/NOVACORE_CURRENT_STATE.md) for the measured
+performance envelope, accepted limitations and closure rationale.
 
-One known presentation limitation is documented rather than hidden: a rare
-full pupil rebase can change the coarse factor-1 triangulated approximation by
-up to approximately 2.595 m even though canonical `H(bodyDirection)` and FP64
-body-fixed positions remain invariant. The measured adjacent L14→L15
-representation difference is approximately 2.8 mm. These are presentation/LOD
-continuity effects, not moving physical terrain or loss of depth ownership.
+A rare full pupil rebase can change the triangulated presentation while canonical
+physical terrain stays fixed. Historical measured continuity bounds and the
+physical/presentation distinction are documented in the
+[renderer contract](docs/planetary-rendering.md#presentation-continuity).
 
 ## Accuracy and current scope
 
@@ -277,9 +252,12 @@ NovaCore now has a production spherical-billboard terrain architecture, but glob
 
 ## Roadmap
 
-**Next planetary frontier**
+**Future planetary and gameplay responsibilities**
 
-Finer pupil/re-triangulation continuity → close-ground material/detail quality → atmosphere/cloud reconstruction → water and coastline systems → GPU-driven local environmental detail → surface, launch, and landing gameplay.
+Surface interaction, launch and landing; planetary environment; richer terrain
+materials and detail; water/coastlines; and finer presentation continuity remain
+future work. Next production-front authorization returns to Project Control;
+this list does not assign implementation order or a milestone.
 
 **Future flight and navigation**
 

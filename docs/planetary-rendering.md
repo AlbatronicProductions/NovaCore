@@ -4,25 +4,16 @@ The accepted milestone and current work boundary are summarized in
 [NOVACORE_CURRENT_STATE.md](NOVACORE_CURRENT_STATE.md). This document defines
 the production planetary-rendering responsibilities and invariants.
 
-The current banked baseline is **M13.1 — NCSM1 TES hot-path removal**, commit
-`fade1384c1c7df93d954e7223b1cc8f17db17f98`, annotated tag
-`m13.1-ncsm1-tes-hotpath`. It preserves the accepted **M12D-P2S5H — Earth Route
-Convergence** architecture and Florida result. M13.2 ordinary terrain shading
-specialization is an unbanked candidate pending Project Control review.
+The current banked production baseline is **M13.6 — Prefer CPU-cached memory
+for terrain residency keys**, commit `90fef759243dd67918cd556e19027159e5a5eada`,
+tag `m13.6-cpu-cached-terrain-residency-keys`. **M13 is CLOSED; there is no M13.7.**
 
-The accepted Earth contracts below apply to every supported Earth route.
-
-The **banked P2S5H production baseline** uses NCSM1 and generation 4 for all six
-supported Earth/Solar/Florida launcher routes, including **New Earth Renderer**.
-Scene, focus, altitude, camera and Florida initialization remain route-specific.
-Florida launcher-based manual acceptance **PASSED** before consolidation.
-The superseded dynamic anchored owner, stitch/coverage draw, local texture-demand
-transport and its investigation drivers have been retired. Generation-3 numerical
-oracles and independent development scenes remain outside production Earth routing.
-Terrain-v5 global bootstrap remains only until complete NCSM1 publication;
-non-Earth presentation remains independent. M13.1 retains these ownership contracts.
-
-See [production consolidation](production-consolidation.md) for reachability, retained responsibilities and validation.
+**NCSM1 / New Earth Renderer** and generation-4 physical terrain serve all six
+supported Earth/Solar/Florida routes. Scene, focus, altitude, camera and Florida
+initialization remain route-specific. Accepted Florida presentation and
+surface/orbit continuity are preserved. Terrain-v5 global bootstrap is temporary
+presentation until complete NCSM1 publication; non-Earth rendering is independent.
+See [production consolidation](production-consolidation.md) for route provenance.
 
 ## Authority boundary
 
@@ -78,11 +69,11 @@ The production chain is:
 canonical body-fixed physical terrain
 → immutable persistent NCSM1 scale resource
 → retained/snapped pupil
-→ physical position and normal preparation
+→ full physical relief and normal preparation before TES
 → conservative curved-patch planet occlusion
 → conservative screen/frustum rejection
 → compacted original index triplets
-→ KSA-parity per-edge TCS factors and bounded TES refinement
+→ KSA-parity per-edge TCS factors and ordinary TES interpolation
 → indexed indirect raster
 → fence-complete atomic publication
 ```
@@ -97,59 +88,44 @@ it does not infer visibility from a planar triangle-facing test. Screen and
 frustum rejection likewise remove only work proven unable to contribute. The
 surviving triangle stream is compacted into an indexed-indirect draw payload.
 
-The accepted P2S5G tessellation interface compaction bounds the TCS user output
-to 13 scalars per control point, down from 45. It carries only physical normal, lighting
-direction, view vector, physical direction, and height into TES. Frame/body
-constants are read from the same existing immutable buffers in TES, and unused
-vertex-stage addresses are no longer calculated or forwarded. This removes
-redundant per-patch transport without changing physical evaluation, edge factors,
-the fragment interface, culling, resource lifetime, or draw responsibility.
-See [the measurement and historical closeout record](M12D-P2S5G-workload-investigation.md)
-for validation and its limits. The deterministic +89 TES invocation difference
-is an accepted bounded invocation-accounting consequence (classification C),
-with bit-identical measured outer/inner factors. It is not increased refinement
-or changed tessellation semantics.
+The compact VS/TCS interface carries 13 scalars per control point: prepared
+normal, light direction, camera-relative view, physical direction and height. TES reads frame/body
+constants from immutable buffers and reconstructs material geography from the
+interpolated prepared receiver. Ordinary NCSM1 rendering specializes inverse
+geographic-address reconstruction away; `owners` and `boundaries` diagnostics
+retain it. Diagnostic mode is immutable for a native context, and all four
+NCSM1 raster-state pipelines use the same applicable specialization.
 
-Banked M13.1 specializes inverse geographic-address
-reconstruction at native context creation. Ordinary NCSM1 rendering uses the
-default-false specialization; `owners` and `boundaries` diagnostics select the
-same shader with that specialization enabled. The immutable context diagnostic
-mode drives all four existing raster-state pipelines. This keeps one physical
-algorithm and one deployed TES binary, with no per-frame diagnostic branch.
-Ordinary material coordinates still come from the final physical receiver.
-See the [parity and performance evidence](engineering-evidence/tes-address-removal/README.md)
-for the implementation measurements; M13.1 remains authoritative.
+Full canonical physical relief is prepared at shared vertices before
+tessellation. Ordinary TES interpolates the published camera-relative surface,
+height and normal; it does not evaluate an additional near-field H displacement.
+Gameplay and clearance continue to query full canonical H independently. No
+authored TES height maps are currently supplied. Hardware tessellation remains:
+KSA-parity per-edge factors retain the bounded 50 m near-camera refinement
+contract and future geometric/material-displacement capacity. Factor-1 base
+terrain remains depth-owning beyond that range, including the local horizon.
+Future relief must preserve canonical physical authority and contact coherence.
 
-The unbanked M13.2 candidate also specializes ordinary NCSM1 fragment shading.
+## Ordinary material shading
+
 The shared fragment module defaults to its full bootstrap/diagnostic contract.
 Only an NCSM1 context with no surface diagnostic enables `ordinaryNcsm1`, making
-the already-known owner and disabled-diagnostic selector compile-time constants.
-The separate startup terrain pipeline retains the default; every nonzero surface
-diagnostic retains the full NCSM1 fragment path. Owner/seam diagnostics also retain
-M13.1's enabled TES geographic-address specialization.
+the known owner and disabled-diagnostic selector compile-time constants. The
+startup terrain pipeline and nonzero diagnostics retain their required paths;
+owner/seam diagnostics also retain TES geographic-address reconstruction.
+Changing diagnostic mode requires context recreation. Focus changes and physical
+publications select existing pipelines without changing that contract.
 
-Diagnostic mode is immutable for a native context. Changing it requires context
-recreation; focus changes and physical/pupil publications select existing owner
-pipelines and update data without changing that contract. All four NCSM1 raster
-states receive the same fragment specialization. Declared inter-stage interfaces
-and descriptor layouts remain complete and unchanged; the compiler may eliminate
-five unused ordinary inputs/exports while retained variants still consume them.
-Physical H, 50 m refinement, material synthesis, lighting and facility visibility
-are unchanged. See [M13.2 candidate evidence](engineering-evidence/m13.2-terrain-shading/README.md)
-for exact parity, pipeline/transition gates and the Project Control review boundary.
+Material evaluation skips procedural noise only when its computed contribution
+is zero. Positive-contribution albedo, roughness, AO and shading-normal response
+remain. This does not lower tessellation factors, remove accepted material detail
+or change physical terrain. Material coordinates derive from the final prepared
+receiver; presentation data never feeds back into canonical H or publication.
 
-TCS/TES provides bounded near-camera raster refinement. The configured physical
-range is 50 m, the evaluation shader exits before displacement work outside the
-range, and exact per-edge tessellation factors derive the interior factor. That range is not a
-terrain or ownership radius: factor-1 base geometry remains present and
-depth-owning everywhere outside the refined footprint, including across the
-local horizon.
-
-The P2S5C3 stabilization restored the 50 m contract after an accidental
-50,000 m value and replaced the old planar pre-TES facing assumption with the
-curved conservative bound. It also aligned physical preparation with the
-canonical Earth radius. The accepted traversal no longer reproduces the broad
-missing-Earth band or device-loss workload associated with those defects.
+Implementation evidence: [TES specialization](engineering-evidence/tes-address-removal/README.md),
+[ordinary shading](engineering-evidence/m13.2-terrain-shading/README.md),
+[prepared terrain](engineering-evidence/ksa-terrain-convergence/README.md), and
+[zero-contribution noise](engineering-evidence/post-m13.3-next-target/README.md).
 
 ## Persistent scale resources and transactional GPU ownership
 
@@ -182,18 +158,48 @@ current/incoming relationship is a lifecycle for one production
 spherical-billboard renderer. It is not the retired global-versus-anchored patch
 ownership split.
 
+## Mapped terrain memory placement
+
+Native allocation chooses memory by consumer role, after checking the buffer's
+compatible memory-type mask and requiring HOST_VISIBLE|HOST_COHERENT:
+
+| Role | Preference | Resources |
+|---|---|---|
+| `TerrainGpuWorkingSet` | DEVICE_LOCAL | Prepared physical storage, regional physical staging, immutable lattice/index topology, visibility output and compacted indices |
+| `TerrainRequestKeys` | HOST_CACHED | The renderer-lifetime terrain residency-key buffer only |
+| `Host` | Existing first compatible coherent-host selection | Other host/control/staging allocations |
+
+These are preferences, not new device requirements. If a preferred compatible
+type is unavailable, the original compatible coherent-host type remains the
+fallback. The preferred allocator maps tentative memory before publishing it as
+a live bound resource. Allocation/map capacity failures release tentative state
+and may retry a different compatible fallback; the same type is not retried.
+Device loss, binding failures and unrelated errors remain observable and fatal.
+No noncoherent-memory path or new flush/invalidate contract is introduced.
+
+Placement does not change buffer contents, polling/writes, mappings' successful
+lifetimes, descriptor ownership, barriers, fences, reuse or retirement. CPU caching
+is not a substitute for synchronization. See [GPU working-data evidence](engineering-evidence/m13-final-whole-frame-causality/README.md)
+and [CPU residency-key evidence](engineering-evidence/m13-final-exit/README.md).
+
 ## Physical preparation and normals
 
-CPU code owns FP64 canonical selection and physical evaluation, bounded
-preparation scheduling, residency identity, and immutable publication. Native
-Vulkan owns reusable generation resources, conservative culling and compaction,
-bounded refinement, indirect rasterization, reversed-Z depth, and presentation.
+Managed code owns canonical FP64 identity and physical queries, selection,
+bounded preparation scheduling, regional demand/residency identity and immutable
+submission. Native Vulkan owns full-relief render preparation, reusable generation
+resources, conservative visibility/compaction, bounded tessellation, indirect
+rasterization, synchronization and fence-confirmed publication, reversed-Z depth,
+and presentation.
 
 Physical positions derive from canonical direction, canonical Earth radius,
 and `H(bodyDirection)`. Physical normals derive from the same displaced surface.
 Material lookup derives from the same body-fixed direction. The preparation and
 shader paths retain CPU/GPU parity tests for height, gradient, normal, address,
-and generation identity.
+and generation identity. Regional residual data must be resident and ready where
+the authoritative catalog contributes before a complete incoming physical surface
+can publish. Facility support/grading participates in that same physical field;
+facility lighting/visibility remains presentation. Neither residency nor material
+fallback may create another height authority.
 
 ## Presentation continuity
 
@@ -202,9 +208,12 @@ selection cannot change canonical height or the FP64 position of a tracked
 body-fixed sample. The current factor-1 triangulated approximation can still
 change slightly when a new lattice triangulates that physical field.
 
-The accepted measured bounds are approximately 2.595 m for a rare/full pupil
-rebase and approximately 2.8 mm across an adjacent L14→L15 representation
-change. This is deferred representation/morph quality. It is not moving
+Historical C3 measurements bound the rare/full pupil rebase at approximately
+2.595 m and the adjacent L14→L15 representation change at approximately 2.8 mm.
+They are not a new universal M13.6 error bound. Full-relief preparation and TES
+interpolation preserve the physical-versus-rendered approximation distinction;
+exact equality to a fresh H query at every interpolated point is not claimed.
+This is deferred representation/morph quality. It is not moving
 physical terrain, duplicate geometry, translucency, or missing depth ownership.
 Future morph work must preserve canonical identity and the one-owner contract.
 
@@ -215,7 +224,7 @@ identity and reevaluates through authoritative body orientation. Near-surface
 ENU navigation and free look use the anchor; outward navigation hands off to
 ordinary body-center orbit without changing physical terrain. Earth —
 Fullscreen Native shares the Solar navigation path after preset initialization
-and now selects NCSM1 in the banked P2S5H baseline.
+and selects the same production NCSM1 owner.
 
 ## Diagnostics and acceptance
 
@@ -233,17 +242,14 @@ benchmark alone is not player-facing acceptance.
 
 ## Current development boundary
 
-P2S5H Earth-route convergence is production accepted and banked. All ordinary
-routes select NCSM1. Repository-debt retirement precedes the next performance
-campaign; this pass does not change the accepted renderer.
+M13 is closed at banked M13.6. The [current-state performance envelope](NOVACORE_CURRENT_STATE.md#final-accepted-performance-envelope)
+retains the regional replacement limitation: universal 8.33 ms terrain performance
+was not achieved. No remaining single bounded, quality-preserving >=1.5 ms
+recovery qualified for continuation.
 
-The NCSM1 production topology/runtime, moving pupil, canonical physical
-authority, persistent GPU scale lifecycle, culling/coverage, KSA-parity bounded
-TES, zero-visible re-entry, body authority, and atomic ownership are stable.
-Terrain presentation and material quality, finer pupil/re-triangulation morph
-quality, atmosphere/cloud/environment rebuilding, richer data coverage,
-spacecraft/surface gameplay, and later specialized-renderer retirement or
-promotion remain in development.
+There is no M13.7. Next production-front authorization returns to Project Control.
+Richer materials, representation continuity, environment and spacecraft/surface
+gameplay remain future responsibilities, not work opened by this renderer contract.
 
 Do not reintroduce radial Eye, adaptive CPU final-raster grids, dynamic
 patch/stitch ownership, or a second physical surface into the accepted NCSM1

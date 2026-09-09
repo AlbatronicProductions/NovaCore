@@ -15,13 +15,12 @@ not as an onboarding requirement.
 
 ## Repository rules
 
-Current work awaiting Project Control: the unbanked
-[KSA terrain responsibility convergence candidate](engineering-evidence/ksa-terrain-convergence/README.md).
-M13.2 remains banked. Preserve the candidate and its temporary shader comparison
-bridge until the report's acceptance and retirement decision; do not treat
-historical exact render/query identity as the candidate's coherence contract.
-The architectural gauntlet passed. Scratch cleanup remains blocked by automatic
-execution policy; the report includes a manifest-checked manual cleanup script.
+**M13 — NCSM1 Terrain Performance is CLOSED. There is no M13.7.**
+M13.6 is the latest banked production step, commit
+`90fef759243dd67918cd556e19027159e5a5eada`, tag
+`m13.6-cpu-cached-terrain-residency-keys`. No unbanked M13 candidate or temporary
+comparison bridge is awaiting preservation/acceptance. Next production-front
+authorization returns to Project Control; this handoff opens no new front.
 
 - Work in `E:\NovaCore` and inspect `git status --short` before editing.
 - Preserve unrelated and unstaged user work.
@@ -38,38 +37,35 @@ execution policy; the report includes a manifest-checked manual cleanup script.
 
 ## Current planetary checkpoint
 
-The banked, production-accepted baseline is **M12D-P2S5H — Earth Route
-Convergence**, on **NCSM1 / New Earth Renderer**:
+**NCSM1 / New Earth Renderer** remains the production Earth owner for all six
+supported Earth/Solar/Florida routes. Banked M13.6 preserves accepted Florida
+presentation and surface/orbit continuity.
 
-- authoritative production commit `32ffac50ab5c06518ede24edfb5c531976d4ec99`;
-- annotated tag `m12d-p2s5h-earth-route-convergence`;
-- commit title `NovaCore M12D-P2S5H: converge production Earth routes on NCSM1`;
-- accepted Florida result preserved through consolidation and bounded validation;
-- repository baseline for debt retirement: `c78b5824e7f99570d696dc4607944964bccf006e`,
-  the subsequent diagnostic-video hygiene commit. The P2S5H tag remains untouched.
+Preserve the 18-level immutable topology library, exact-lattice moving/snapped
+pupil, canonical `H(bodyDirection)`, prepared full physical relief and normals,
+regional/facility participation, conservative curved-patch visibility,
+compaction, KSA-parity bounded hardware tessellation, ordinary TES interpolation,
+zero-visible re-entry and fence-confirmed atomic current/incoming publication.
 
-P2S5G Surface Workload Efficiency remains accepted historical architecture at
-`7bb03b0e635fa3444a4243bbad82758a1770ea60`, tag
-`m12d-p2s5g-surface-workload-efficiency`, with native 3440×1440 manual PASS.
+Ordinary shading avoids unused diagnostic work and zero-contribution material
+noise. GPU-consumed terrain working data prefers compatible device-local memory;
+CPU-read residency keys prefer compatible cached memory. Both retain coherent
+host mapping, compatible fallback and existing synchronization/lifetime contracts.
 
-Earth's accepted production owner is the 18-level NCSM1 New Earth Renderer. It
-uses projected-error selection and hysteresis, an exact-lattice moving/snapped
-pupil, persistent scale resources, canonical `H(bodyDirection)` physical
-preparation, conservative curved-patch planet occlusion, conservative screen
-visibility, GPU compaction of original index triplets, KSA-parity per-edge TCS
-factors, bounded 50 m TES refinement, indexed indirect draw, valid zero-visible
-publication/re-entry, body-specific presentation authority, and fence-confirmed
-atomic current/incoming generation publication.
-
-The orbit-to-near-surface native 3440×1440 trajectory is accepted. The recovered
-missing-Earth band and device-loss workload did not reproduce, and production
-ownership remained exactly one Earth owner with zero overlap or stale
-generations.
+M13 did not establish universal 8.33 ms performance. Regional replacement remains
+the principal measured residual limitation; no remaining single bounded,
+quality-preserving >=1.5 ms recovery qualified for continuation. The
+[current-state envelope](NOVACORE_CURRENT_STATE.md#final-accepted-performance-envelope)
+is the concise performance checkpoint. Historical LiveKernelEvent 141 remains
+**UNRESOLVED / NOT REPRODUCED / RESIDUAL UNCERTAINTY ACCEPTED**, as recorded in
+[current state](NOVACORE_CURRENT_STATE.md#historical-livekernelevent-141-disposition).
 
 ## Physical and presentation boundary
 
 - FP64 body-fixed height, displacement, physical normals, collision, clearance,
-  and physical queries are one canonical physical authority.
+  and physical queries are one canonical physical authority. Full relief is
+  prepared before TES; ordinary TES interpolates the published render surface.
+  Gameplay and clearance retain full H queries, not interpolated render geometry.
 - Material shading may consume cheaper deterministic derived classification.
 - No material, fallback, LOD, cache, or renderer path may become a second
   physical authority.
@@ -78,58 +74,33 @@ generations.
   fence-confirmed.
 - Topology density and pupil triangulation describe presentation, not physical
   truth. `H(bodyDirection)` and the FP64 body-fixed point remain authoritative.
-- A rare full pupil rebase may change the coarse factor-1 triangulated
-  approximation by up to approximately 2.595 m; the adjacent L14→L15 difference
+- Historical continuity measurements show a rare full pupil rebase may change
+  the coarse factor-1 triangulated approximation by up to approximately 2.595 m;
+  the adjacent L14→L15 difference
   is approximately 2.8 mm. Treat these as deferred presentation/morph behavior,
   not moving physical terrain or lost ownership.
 
 ## Next architectural decision and work boundary
 
-P2S5G tessellation interface compaction is accepted production architecture:
-the TCS user payload is reduced from 45 to 13 scalars while TES physics and
-the fragment interface are preserved. The deterministic +89 TES invocation
-difference is an accepted bounded invocation-accounting consequence
-(classification C), not increased refinement or changed tessellation semantics.
-Read [the preserved measurement and closeout record](M12D-P2S5G-workload-investigation.md)
-for the evidence and its limits.
+M13 is closed. There is no M13.7 and no next milestone assignment. Next
+production-front authorization returns to Project Control. Do not start Surface
+Interaction / Launch Foundation, Planetary Environment Foundation or Terrain /
+Material Fidelity based on a provisional research ranking.
 
-The **banked P2S5H production baseline** uses NCSM1 and generation 4 for all six
-supported Earth/Solar/Florida launcher routes, including **New Earth Renderer**.
-Scene, focus, altitude, camera and Florida initialization remain route-specific.
-Florida launcher-based manual acceptance **PASSED** before consolidation.
-The superseded dynamic anchored owner, stitch/coverage draw, local texture-demand
-transport and its investigation drivers have been retired. Generation-3 numerical
-oracles and independent development scenes remain outside production Earth routing.
-Terrain-v5 global bootstrap remains only until complete NCSM1 publication;
-non-Earth presentation remains independent. P2S5H is banked; subsequent debt
-retirement remains separately reviewed and unbanked.
+- Preserve banked M13.1–M13.6 outcomes and future tessellation/displacement capacity.
+- Historical exact-copy, residual-validation and lifecycle experiments are evidence,
+  not approved production candidates. Do not restore rejected mechanisms.
+- Do not reopen terrain optimization merely because further improvement is possible.
+- Do not regenerate NCSM1 assets, enlarge the 50 m refinement range, weaken
+  conservative visibility or create another physical/terrain owner without an
+  explicitly authorized bounded responsibility and measured evidence.
+- Keep canonical physical truth distinct from material quality and
+  presentation/LOD continuity. Current limitations are in
+  [current state](NOVACORE_CURRENT_STATE.md#known-debt).
 
-See [production consolidation](production-consolidation.md) for reachability, retained responsibilities and validation.
-
-
-Complete the bounded repository-debt retirement review before the next performance
-objective. Do not reopen P2S5H or move its tag.
-
-- Preserve the accepted NCSM1 production spherical-billboard owner and C3/P2S5F
-  coverage/culling architecture.
-- Do not regenerate NCSM1 assets without explicit authorization.
-- Do not reintroduce radial Eye, adaptive CPU final-raster grids, or dynamic
-  patch/stitch ownership into the accepted NCSM1 path.
-- Do not increase the 50 m TES range, weaken conservative culling, or reopen C3
-  coverage based on visual impression alone; require measured causal evidence.
-- Keep remaining surface workload optimization, terrain presentation/material
-  quality, and finer pupil/re-triangulation
-  morphing distinct from physical terrain and depth ownership.
-- Atmosphere, clouds, environmental rebuilding, and spacecraft/surface gameplay
-  remain separate future work.
-
-Known non-blocking debt includes orientation-sensitive surface GPU variability
-and ambient OBS KMT/Epic interoperability. Banked Graphics Package 2 isolates
-canonical validation while keeping ambient failures observable. The opaque
-distant/detailed handoff assertion was fixed in banked Package 1; it is no longer
-an outstanding suite failure. See [current known debt](NOVACORE_CURRENT_STATE.md#known-debt).
-Do not reopen accepted ownership, topology, tessellation or physical authority
-to address the remaining independent responsibilities.
+Canonical Graphics validation remains strict and isolates third-party implicit
+layers; ambient OBS/Epic interoperability remains observable under the
+[Graphics Package 2 contract](graphics-validation-package-2.md).
 
 ## KSA reference workflow
 
