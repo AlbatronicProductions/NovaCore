@@ -1,0 +1,100 @@
+{
+  "artifacts": [
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Native.dll",
+      "sha256": "873aed18af5872bde044b473d5656462813a93086cb239111dc2a7fb2501ebc2",
+      "coffTimestamp": 1788838937,
+      "sections": {
+        ".text": {
+          "bytes": 264704,
+          "sha256": "b96aaed75171368daa2bcce9fafa44fbcb64052b5581917d566933f5ca18f880"
+        },
+        ".rdata": {
+          "bytes": 73216,
+          "sha256": "f53088d8fca168c3031206925700e15d733f7ea58eb2a35f856de323ccd85e65"
+        },
+        ".data": {
+          "bytes": 1536,
+          "sha256": "ee3fc875a3c1c7e18ae4a621f711c678e9b75d0a1f7ca8ba5938a73666ee20b2"
+        },
+        ".pdata": {
+          "bytes": 7680,
+          "sha256": "68fcb63e1584cf36c9703f85c7725205225c765faf3c336cd12112ede1e93952"
+        },
+        ".rsrc": {
+          "bytes": 512,
+          "sha256": "f1a55308921c1f5a4259f10d161187aee006ae301f5bb4e381681e56f65be821"
+        },
+        ".reloc": {
+          "bytes": 512,
+          "sha256": "acaf7fc5b145e99349fb53357118009ad42fbe96460fd8c96ce3ea5f2631fdd6"
+        }
+      }
+    },
+    {
+      "path": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0\\NovaCore.Native.dll",
+      "sha256": "932267253ea6e0221ba4ef5093515874116b26ede8c565ff8b8316e02e21eabf",
+      "coffTimestamp": 1788839771,
+      "sections": {
+        ".text": {
+          "bytes": 264704,
+          "sha256": "b96aaed75171368daa2bcce9fafa44fbcb64052b5581917d566933f5ca18f880"
+        },
+        ".rdata": {
+          "bytes": 73216,
+          "sha256": "3418239cb28f80b3d7026dd2942cddad2b9f8805e962cc971e68dc919bd1dc11"
+        },
+        ".data": {
+          "bytes": 1536,
+          "sha256": "ee3fc875a3c1c7e18ae4a621f711c678e9b75d0a1f7ca8ba5938a73666ee20b2"
+        },
+        ".pdata": {
+          "bytes": 7680,
+          "sha256": "68fcb63e1584cf36c9703f85c7725205225c765faf3c336cd12112ede1e93952"
+        },
+        ".rsrc": {
+          "bytes": 512,
+          "sha256": "f1a55308921c1f5a4259f10d161187aee006ae301f5bb4e381681e56f65be821"
+        },
+        ".reloc": {
+          "bytes": 512,
+          "sha256": "acaf7fc5b145e99349fb53357118009ad42fbe96460fd8c96ce3ea5f2631fdd6"
+        }
+      }
+    }
+  ],
+  "identicalSections": [
+    ".text",
+    ".data",
+    ".pdata",
+    ".rsrc",
+    ".reloc"
+  ],
+  "limits": "A new native link changes file identity. Section equality supplements unchanged production-source and restoration/build assertions; final deployed runtime receives a separate normal smoke.",
+  "equalLength": true,
+  "changedBytes": 4,
+  "outsideCoffChecksumAndCodeView": 0,
+  "debugRecords": [],
+  "changedBytesDetail": [
+    {
+      "offset": 272,
+      "validated": 25,
+      "rebuilt": 91
+    },
+    {
+      "offset": 273,
+      "validated": 132,
+      "rebuilt": 135
+    },
+    {
+      "offset": 308660,
+      "validated": 25,
+      "rebuilt": 91
+    },
+    {
+      "offset": 308661,
+      "validated": 132,
+      "rebuilt": 135
+    }
+  ]
+}

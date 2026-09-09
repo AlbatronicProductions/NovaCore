@@ -1,0 +1,435 @@
+{
+  "schema": 1,
+  "task": "M13.6 offline incident - Work B exact key-buffer contract",
+  "date": "2026-09-08",
+  "sourceOnly": true,
+  "baseline": {
+    "bank": "d4baab6940a57a46e478b98e36f5e45d1c4b558f",
+    "head": "d4baab6940a57a46e478b98e36f5e45d1c4b558f",
+    "originMain": "d4baab6940a57a46e478b98e36f5e45d1c4b558f",
+    "branch": "codex/m13-final-exit",
+    "trackedDiffNames": [
+      "native/NovaCore.Native/MappedBufferMemory.h",
+      "native/NovaCore.Native/MappedBufferMemoryTests.cpp",
+      "native/NovaCore.Native/NovaCoreNative.cpp"
+    ],
+    "stagedNames": [],
+    "diffSha256": "578f4b0a197cba321d3110662f15580088b31ba275b7d854b88ea0bbe0131801"
+  },
+  "allocation": {
+    "slots": 8192,
+    "wordsPerSlot": 12,
+    "wordBytes": 4,
+    "slotBytes": 48,
+    "logicalBytes": 393216,
+    "usage": "STORAGE_BUFFER",
+    "sharing": "EXCLUSIVE",
+    "descriptorSet": 0,
+    "descriptorBinding": 8,
+    "descriptorOffset": 0,
+    "descriptorRange": 393216,
+    "mapOffset": 0,
+    "mapSize": 393216,
+    "allocationSize": "driver VkMemoryRequirements.size; not inferred from logical-byte log",
+    "bufferDeviceAddressUsage": false,
+    "bufferDeviceAddressQueryFound": false,
+    "requiredFlags": 6,
+    "preferredAddedFlag": 8,
+    "requiresAmdDeviceCoherent": false,
+    "bankOrder": [
+      "create-buffer",
+      "allocate",
+      "bind",
+      "map",
+      "zero",
+      "seed"
+    ],
+    "candidateOrder": [
+      "create-buffer",
+      "allocate",
+      "map",
+      "bind",
+      "zero",
+      "seed"
+    ],
+    "persistentSuccessfulMapping": true,
+    "zoomReallocation": false,
+    "resizeReallocation": false,
+    "preferredCapacityFallback": [
+      "VK_ERROR_OUT_OF_DEVICE_MEMORY",
+      "VK_ERROR_OUT_OF_HOST_MEMORY",
+      "VK_ERROR_MEMORY_MAP_FAILED"
+    ],
+    "noFallbackFor": [
+      "VK_ERROR_DEVICE_LOST",
+      "VK_ERROR_UNKNOWN",
+      "bind failure"
+    ]
+  },
+  "retainedMemoryObservation": {
+    "evidenceRole": "Prior controlled/native-default traces, not failed process",
+    "compatibleMask": 15,
+    "bank": {
+      "typeIndex": 1,
+      "propertyFlags": 6,
+      "heapIndex": 0
+    },
+    "candidate": {
+      "typeIndex": 3,
+      "propertyFlags": 14,
+      "heapIndex": 0
+    },
+    "identicalGpuVaProven": false,
+    "identicalPhysicalBackingProven": false,
+    "identicalCpuPointerProven": false,
+    "incidentSelectedType": null
+  },
+  "questions": [
+    {
+      "number": 1,
+      "question": "Can M13.6 alter GPU-visible address?",
+      "answer": "Yes, different allocation/type/backing can have a different mapping. No address identity was measured or promised; logical descriptor/index contract unchanged.",
+      "actualGpuVa": null,
+      "physicalBacking": null,
+      "cpuPointer": null
+    },
+    {
+      "number": 2,
+      "question": "Can it alter data visibility to the GPU?",
+      "answer": "Memory/cache implementation path can change. Required HOST_VISIBLE/HOST_COHERENT properties and host-before-submit visibility dependencies are unchanged; no permitted stale visibility or incident-level visibility failure is established."
+    },
+    {
+      "number": 3,
+      "question": "Can CPU caching produce stale values under the actual synchronization contract?",
+      "answer": "No new missing dependency is demonstrated for normal production consumers. CPU reads host-owned words 0-7/10-11; production selector writes 8-9, which CPU does not consume. NCSM1 disables that selector. This is conditional route/source proof, not failed-process cache observation."
+    },
+    {
+      "number": 4,
+      "question": "Can it change map lifetime?",
+      "answer": "Successful mapping begins before binding instead of after; candidate may retry a failed preferred map. Successful mapping remains persistent with no zoom/frame remapping."
+    },
+    {
+      "number": 5,
+      "question": "Can it change flush/invalidate requirements?",
+      "answer": "No for admitted compatible types: both require HOST_COHERENT. HOST_CACHED adds no explicit flush/invalidate requirement; synchronization is still required."
+    },
+    {
+      "number": 6,
+      "question": "Can it alter destruction/reuse timing?",
+      "answer": "Logical successful-path lifetime/order unchanged; wall-clock timing and startup failed-attempt cleanup can change. Key survives resize and generation replacement, final teardown owns destruction."
+    },
+    {
+      "number": 7,
+      "question": "Can it cause GPU to wait on CPU-visible memory differently?",
+      "answer": "Access/translation cost or driver behavior may differ, but no new key spin/event/semaphore/wait protocol exists. Key selector is not dispatched under normal authoritative NCSM1."
+    },
+    {
+      "number": 8,
+      "question": "Can it plausibly affect zoom-out generation transitions?",
+      "answer": "Indirectly via changed CPU cadence or driver allocation/mapping state. No key-derived NCSM1 LOD/pupil/readiness/retirement dependency is found; incident correlation remains missing."
+    }
+  ],
+  "fieldOwnership": [
+    {
+      "words": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "byteRange": [
+        0,
+        31
+      ],
+      "host": "initial seed/read identity",
+      "gpuProduction": "mutable-key reads bypassed by immutable ordinal/level checks"
+    },
+    {
+      "words": [
+        8
+      ],
+      "byteRange": [
+        32,
+        35
+      ],
+      "host": "initial zero; not consumed by CPU poller",
+      "gpuProduction": "last-frame write if selector runs"
+    },
+    {
+      "words": [
+        9
+      ],
+      "byteRange": [
+        36,
+        39
+      ],
+      "host": "initial zero; not consumed by CPU poller",
+      "gpuProduction": "transition start read/write if selector runs"
+    },
+    {
+      "words": [
+        10
+      ],
+      "byteRange": [
+        40,
+        43
+      ],
+      "host": "payload layer+1 publication/read",
+      "gpuProduction": "mutable readiness fallback bypassed"
+    },
+    {
+      "words": [
+        11
+      ],
+      "byteRange": [
+        44,
+        47
+      ],
+      "host": "queue/upload state write/read",
+      "gpuProduction": "not written"
+    }
+  ],
+  "gpuReachability": {
+    "keyStorageDeclaration": "planetary_select.comp:13",
+    "immutableReadiness": "planetary_select.comp:72-75",
+    "immutableBindingBypass": "planetary_select.comp:98-112",
+    "productionWrites": "planetary_select.comp:129",
+    "genericOtherWrites": "planetary_select.comp:144-145",
+    "authoritativeNcsm1SelectorDispatched": false,
+    "authoritativeGate": "NovaCoreNative.cpp:1936-1956",
+    "normalCpuReadsGpuWrittenFields": false,
+    "otherProductionShadersConsumeKeyTable": false,
+    "regionalBindings": [
+      53,
+      54,
+      55,
+      56,
+      57
+    ],
+    "incidentFinalOwnerMeasured": false,
+    "scope": "Intended Florida Earth production route; not all possible modes or malformed inputs"
+  },
+  "synchronization": {
+    "hostReadsWrites": "render thread after prior graphics frame fence, before next queue submission",
+    "ioWorker": "mutex-protected request/ready records; no mapped key pointer",
+    "fenceAloneEstablishesAllHostVisibility": false,
+    "hostBarrier": "HOST_WRITE to SHADER_READ at HOST to relevant shader stages, NovaCoreNative.cpp:1952",
+    "keyFlushCalls": 0,
+    "keyInvalidateCalls": 0,
+    "explicitGpuWaitOnKey": false,
+    "teardown": "device idle, submission destruction, production I/O join, key unmap/destroy/free",
+    "uncheckedExistingDeviceIdleResult": true
+  },
+  "zoom": {
+    "managedEntry": "Program.cs:231-279",
+    "nativeIncoming": "NovaCoreNative.cpp:1646-1657",
+    "regionalOwner": "RegionalPhysicalResidency.inl and RegionalPhysicalPreparation.inl",
+    "publication": "NovaCoreNative.cpp:2309-2338",
+    "keyRole": "same persistent host-scanned table; no direct LOD/pupil/generation/readiness/retirement authority",
+    "indirectTimingOrMappingInteractionPossible": true,
+    "causeProven": false
+  },
+  "resourceBounds": {
+    "keyBuffers": 1,
+    "keyLogicalBytes": 393216,
+    "topologyResourcesMaximum": 18,
+    "mutableFiveBufferWorkSetsMaximum": 2,
+    "extraPupilScratchBuffers": 1,
+    "regionalDependencySlots": 2,
+    "regionalCatalogMaximum": 896,
+    "regionalPayloadMaximumBytes": 124895232,
+    "currentCatalogRecords": 859,
+    "currentCatalogAllocatedWhenNeeded": 119737728,
+    "regionalIoWorkers": 1,
+    "readyCapacity": 8,
+    "uploadBudgetPerFrame": 8,
+    "incidentLiveResourceSeries": null
+  },
+  "retainedShortControlSummary": {
+    "source": "docs/engineering-evidence/m13.6-manual-failure/work-b.json:retainedShortControls",
+    "full": {
+      "baselinePublications": 58,
+      "candidatePublications": 58,
+      "baselineTopologyUploads": 18,
+      "candidateTopologyUploads": 18,
+      "baselineRegionalRecords": 8,
+      "candidateRegionalRecords": 0
+    },
+    "regional": {
+      "baselinePublications": 37,
+      "candidatePublications": 37,
+      "baselineTopologyUploads": 10,
+      "candidateTopologyUploads": 10,
+      "eachRequestedLoadedRecords": 670,
+      "eachUploadedBytes": 93392640,
+      "eachAllocatedBytes": 119737728
+    },
+    "warp": {
+      "publications": 1,
+      "regionalPayloadBytes": 4
+    },
+    "exactIncidentOrWholeRouteInputJoin": false,
+    "provesFiveMinuteStability": false
+  },
+  "limits": [
+    "No failed-process key address/mapping/cache contents or final shader/owner record.",
+    "Static bounded resources and prior short controls do not prove five-minute live stability.",
+    "Same memory heap index does not guarantee identical backing.",
+    "No production correction or candidate exoneration follows from this source audit."
+  ],
+  "specificationReferences": {
+    "verifiedBy": "Parent lead during this ticket; worker requested exact questions and did not independently browse",
+    "urls": [
+      "https://docs.vulkan.org/refpages/latest/refpages/source/vkMapMemory.html",
+      "https://docs.vulkan.org/refpages/latest/refpages/source/vkBindBufferMemory.html",
+      "https://docs.vulkan.org/refpages/latest/refpages/source/VkMemoryPropertyFlagBits.html"
+    ],
+    "mapBeforeBind": "Joint inference from valid-usage requirements; legal ordering, not platform exoneration"
+  },
+  "workerConclusion": "No demonstrated M13.6 contract defect; actual candidate causality remains unresolved. Keep unbanked.",
+  "mutationBoundary": {
+    "productionWrites": 0,
+    "builds": 0,
+    "gpuRuns": 0,
+    "windowsLogAccess": 0,
+    "oldPackageWrites": 0,
+    "gitIndexWrites": 0,
+    "created": [
+      "work-b.md",
+      "work-b.json"
+    ],
+    "disposableFiles": 0
+  },
+  "sources": [
+    {
+      "path": "native/NovaCore.Native/MappedBufferMemory.h",
+      "currentBytes": 2143,
+      "currentSha256": "af450251465e7ba18ad8ee644d33233c8e4ff0fb352167320a5a384ef28bfee6",
+      "bankSha256": "f5b1cddafbbdb3f0c496d4822d10a97424f1510797ebd429b2a9b19d6dee793e",
+      "currentNormalizedSha256": "950190ac7d012cf38d6e5ed6fefc1754ab52b5a8013f604796615c0dd6a0d218",
+      "bankNormalizedSha256": "f5b1cddafbbdb3f0c496d4822d10a97424f1510797ebd429b2a9b19d6dee793e",
+      "matchesBankNormalized": false
+    },
+    {
+      "path": "native/NovaCore.Native/MappedBufferMemoryTests.cpp",
+      "currentBytes": 5200,
+      "currentSha256": "1b595ba03b22b8081ade4e3e770182f6bbd5e2a40474c1006b898777edf01076",
+      "bankSha256": "d809addf730ac3b7978d256db366daaecdb0772aa7d3798584378868f9c1946a",
+      "currentNormalizedSha256": "9eb79f8e9306dced8473a43471587fca33a2f8fe538272e092e3be568e0dfec8",
+      "bankNormalizedSha256": "d809addf730ac3b7978d256db366daaecdb0772aa7d3798584378868f9c1946a",
+      "matchesBankNormalized": false
+    },
+    {
+      "path": "native/NovaCore.Native/NovaCoreNative.cpp",
+      "currentBytes": 288896,
+      "currentSha256": "8a4f45c100c0d94de7925890bd71cf1f71dd7e3ffef309e3f9d7651d464e7163",
+      "bankSha256": "7a4f912fd709fe671e37ab89a8198130cf072b843627ec827e460da5253d98ea",
+      "currentNormalizedSha256": "feaa8651e4991cbd35d92b4f8a978deae540680344cbff839b373981ee884b39",
+      "bankNormalizedSha256": "7a4f912fd709fe671e37ab89a8198130cf072b843627ec827e460da5253d98ea",
+      "matchesBankNormalized": false
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/planetary_select.comp",
+      "currentBytes": 26194,
+      "currentSha256": "0dcb07c630f22cdb937acf4d4b134aa942c233abe9b80c153a1f9fa5b4a1c232",
+      "bankSha256": "0dcb07c630f22cdb937acf4d4b134aa942c233abe9b80c153a1f9fa5b4a1c232",
+      "currentNormalizedSha256": "0dcb07c630f22cdb937acf4d4b134aa942c233abe9b80c153a1f9fa5b4a1c232",
+      "bankNormalizedSha256": "0dcb07c630f22cdb937acf4d4b134aa942c233abe9b80c153a1f9fa5b4a1c232",
+      "matchesBankNormalized": true
+    },
+    {
+      "path": "native/NovaCore.Native/RegionalPhysicalResidency.h",
+      "currentBytes": 6446,
+      "currentSha256": "0ccb0b7cfe1020bb9f3a66e483a53c8d5d8cafce4bc9459c48943094751bd07a",
+      "bankSha256": "0ccb0b7cfe1020bb9f3a66e483a53c8d5d8cafce4bc9459c48943094751bd07a",
+      "currentNormalizedSha256": "0ccb0b7cfe1020bb9f3a66e483a53c8d5d8cafce4bc9459c48943094751bd07a",
+      "bankNormalizedSha256": "0ccb0b7cfe1020bb9f3a66e483a53c8d5d8cafce4bc9459c48943094751bd07a",
+      "matchesBankNormalized": true
+    },
+    {
+      "path": "native/NovaCore.Native/RegionalPhysicalResidency.inl",
+      "currentBytes": 13059,
+      "currentSha256": "0fe2767c7ece2470cb2a6b0d83c0cf848debc5b1563173c7b6650339e71638fd",
+      "bankSha256": "4c9b62651fe53226e5f536517a6ea5bcc8422e94037a095e5fb2b244ebb61d4c",
+      "currentNormalizedSha256": "4c9b62651fe53226e5f536517a6ea5bcc8422e94037a095e5fb2b244ebb61d4c",
+      "bankNormalizedSha256": "4c9b62651fe53226e5f536517a6ea5bcc8422e94037a095e5fb2b244ebb61d4c",
+      "matchesBankNormalized": true
+    },
+    {
+      "path": "native/NovaCore.Native/RegionalPhysicalPreparation.inl",
+      "currentBytes": 6695,
+      "currentSha256": "437cb06e864bfbf511df5ea477168a9b4c81247e06d24ac4db27e86cca948c79",
+      "bankSha256": "69f8ccd9dc2fbdc92202a1ca30925022f6ea22aad406d6f85e247bf00ab46349",
+      "currentNormalizedSha256": "69f8ccd9dc2fbdc92202a1ca30925022f6ea22aad406d6f85e247bf00ab46349",
+      "bankNormalizedSha256": "69f8ccd9dc2fbdc92202a1ca30925022f6ea22aad406d6f85e247bf00ab46349",
+      "matchesBankNormalized": true
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/regional_physical_demand.comp",
+      "currentBytes": 2003,
+      "currentSha256": "62cee944c903b0c1027b718334819bed0c656f9e753d1b13f0b433a24977d6a2",
+      "bankSha256": "a8dfe905880f4652c2f37c94f28b8af2cd37d056b6be365d767efd24d003f052",
+      "currentNormalizedSha256": "a8dfe905880f4652c2f37c94f28b8af2cd37d056b6be365d767efd24d003f052",
+      "bankNormalizedSha256": "a8dfe905880f4652c2f37c94f28b8af2cd37d056b6be365d767efd24d003f052",
+      "matchesBankNormalized": true
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetaryProductionSphericalBillboardRuntime.cs",
+      "currentBytes": 29138,
+      "currentSha256": "cd3ca9020b66d9df9929866809ca485c830221f579e8cc126186fd0a2d8e1a90",
+      "bankSha256": "cd3ca9020b66d9df9929866809ca485c830221f579e8cc126186fd0a2d8e1a90",
+      "currentNormalizedSha256": "cd3ca9020b66d9df9929866809ca485c830221f579e8cc126186fd0a2d8e1a90",
+      "bankNormalizedSha256": "cd3ca9020b66d9df9929866809ca485c830221f579e8cc126186fd0a2d8e1a90",
+      "matchesBankNormalized": true
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetaryProductionSphericalBillboardMovingRuntime.cs",
+      "currentBytes": 15251,
+      "currentSha256": "052d3f1d2fc3b18e9c1bacb80b6925adc7b810e70d98ea778b8d92ec55d81ec7",
+      "bankSha256": "052d3f1d2fc3b18e9c1bacb80b6925adc7b810e70d98ea778b8d92ec55d81ec7",
+      "currentNormalizedSha256": "052d3f1d2fc3b18e9c1bacb80b6925adc7b810e70d98ea778b8d92ec55d81ec7",
+      "bankNormalizedSha256": "052d3f1d2fc3b18e9c1bacb80b6925adc7b810e70d98ea778b8d92ec55d81ec7",
+      "matchesBankNormalized": true
+    },
+    {
+      "path": "samples/NovaCore.Triangle/Program.cs",
+      "currentBytes": 59253,
+      "currentSha256": "c926a9a7e6adeb795e8378ce6fc63a01e81ac3cf21ef1712b4b54a17e7cb988d",
+      "bankSha256": "78089c2099e582e7a973190a6a2e1401704d3deb10aa028044c019a2db91062d",
+      "currentNormalizedSha256": "78089c2099e582e7a973190a6a2e1401704d3deb10aa028044c019a2db91062d",
+      "bankNormalizedSha256": "78089c2099e582e7a973190a6a2e1401704d3deb10aa028044c019a2db91062d",
+      "matchesBankNormalized": true
+    }
+  ],
+  "sealedReferences": [
+    {
+      "path": "docs/engineering-evidence/m13.6-manual-failure/work-b.md",
+      "bytes": 20272,
+      "sha256": "1d487be7c6eb65adb4db122c2e36194b3ce9fc24d9b2b5dc196e5005f6f42e86"
+    },
+    {
+      "path": "docs/engineering-evidence/m13.6-manual-failure/work-b.json",
+      "bytes": 41825,
+      "sha256": "53c87be77c24dca56687bdf25b7d580a332d732beaafcc3e87c1d70db25d29be"
+    },
+    {
+      "path": "docs/engineering-evidence/m13-final-exit/poll-florida.json.gz",
+      "bytes": 30689,
+      "sha256": "9afa46ebf7b1b7a3fe125720e16e963c4414e48adadbad0423a7857ce90b6d18"
+    },
+    {
+      "path": "docs/engineering-evidence/m13-final-exit/keys-florida-parity.json",
+      "bytes": 26084,
+      "sha256": "49d1af1f2927a55ee198bad6de7347ef6c6ba2e65d893612bcead31e4f3c415a"
+    },
+    {
+      "path": "docs/engineering-evidence/m13-final-exit/candidate-florida-parity.json",
+      "bytes": 12688,
+      "sha256": "d57641ea4a3d2222ba16370a2f1e00e44a36c405a9c801ffb8cd426d29b2983e"
+    }
+  ]
+}

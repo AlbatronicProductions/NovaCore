@@ -2,12 +2,12 @@
 #include <vulkan/vulkan.h>
 
 namespace nc {
-enum class MappedBufferUse { Host, TerrainGpuWorkingSet };
+enum class MappedBufferUse { Host, TerrainGpuWorkingSet, TerrainRequestKeys };
 constexpr uint32_t NoMappedMemoryType=~0u;
 struct MappedMemoryTypes { uint32_t preferred=NoMappedMemoryType,fallback=NoMappedMemoryType; };
 
-// Mapping/coherence are requirements. Locality is a preference for persistent
-// terrain data consumed or produced on the GPU, never a new device requirement.
+// Mapping/coherence are requirements. GPU locality and CPU read caching are
+// role-specific preferences, never new device requirements.
 inline MappedMemoryTypes SelectMappedMemoryTypes(const VkPhysicalDeviceMemoryProperties& properties,
     uint32_t compatibleBits,MappedBufferUse use){
   MappedMemoryTypes result;
@@ -16,7 +16,9 @@ inline MappedMemoryTypes SelectMappedMemoryTypes(const VkPhysicalDeviceMemoryPro
     const auto flags=properties.memoryTypes[i].propertyFlags;
     if(!(compatibleBits&(1u<<i))||(flags&required)!=required)continue;
     if(result.fallback==NoMappedMemoryType)result.fallback=i;
-    if(use==MappedBufferUse::TerrainGpuWorkingSet&&(flags&VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT)&&result.preferred==NoMappedMemoryType)result.preferred=i;
+    const bool preferred=(use==MappedBufferUse::TerrainGpuWorkingSet&&(flags&VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT))||
+        (use==MappedBufferUse::TerrainRequestKeys&&(flags&VK_MEMORY_PROPERTY_HOST_CACHED_BIT));
+    if(preferred&&result.preferred==NoMappedMemoryType)result.preferred=i;
   }
   return result;
 }

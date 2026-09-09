@@ -1,0 +1,8 @@
+{
+  "permanentBudgetBytes": 6291456,
+  "rawSlot": "E:/NovaCore/build/m13-final-exit/parity-slot",
+  "rawSlotMaximumBytes": 536870912,
+  "rawSlots": 1,
+  "purpose": "Required exact same-input physical, selected-geometry, D32, HDR and image parity for the measured CPU-read terrain-key memory preference.",
+  "retention": "Keep hashes, numerical comparisons, runtime/input provenance and reproduction source. Purge the reusable raw slot and private host after resolution; no raw archive or performance capture is promoted."
+}

@@ -1,0 +1,827 @@
+{
+  "capturedUtc": "2026-09-08T04:36:27.067115+00:00",
+  "refs": {
+    "HEAD": "d4baab6940a57a46e478b98e36f5e45d1c4b558f",
+    "main": "d4baab6940a57a46e478b98e36f5e45d1c4b558f",
+    "origin/main": "d4baab6940a57a46e478b98e36f5e45d1c4b558f",
+    "m13.5-local-gpu-terrain-working-data": "75712e4bc990e11c3072a37299c55187cc30e0a1",
+    "m13.5-local-gpu-terrain-working-data^{}": "d4baab6940a57a46e478b98e36f5e45d1c4b558f"
+  },
+  "branch": "codex/m13-final-exit",
+  "status": "M native/NovaCore.Native/MappedBufferMemory.h\n M native/NovaCore.Native/MappedBufferMemoryTests.cpp\n M native/NovaCore.Native/NovaCoreNative.cpp\n?? docs/engineering-evidence/m13-final-exit/\n?? docs/engineering-evidence/m13.6-manual-failure/",
+  "staged": "",
+  "source": {
+    "native/NovaCore.Native/MappedBufferMemory.h": "af450251465e7ba18ad8ee644d33233c8e4ff0fb352167320a5a384ef28bfee6",
+    "native/NovaCore.Native/MappedBufferMemoryTests.cpp": "1b595ba03b22b8081ade4e3e770182f6bbd5e2a40474c1006b898777edf01076",
+    "native/NovaCore.Native/NovaCoreNative.cpp": "8a4f45c100c0d94de7925890bd71cf1f71dd7e3ffef309e3f9d7651d464e7163"
+  },
+  "trackedDiffSha256": "578f4b0a197cba321d3110662f15580088b31ba275b7d854b88ea0bbe0131801",
+  "previousPackage": {
+    "archive.py": {
+      "bytes": 2945,
+      "sha256": "5d1b6889503d3399fbdf1f37070f9f91a7f30afdb9c0c9daf34fa4ae6967d961"
+    },
+    "baseline.json": {
+      "bytes": 20165,
+      "sha256": "4715974ca48e94a1cc74b65f4ef4fafbe61b2ae904e6dc37e683109e0ca32ffb"
+    },
+    "build_capture.py": {
+      "bytes": 2654,
+      "sha256": "a259e6ce3906a842120381f0bec0cf2839a60f904941c337d07e39b78c724640"
+    },
+    "cached-florida.json.gz": {
+      "bytes": 31850,
+      "sha256": "6b3e914fa83ec1364ea0ad87d9f59069f501691bc5ed55f721b988f49d5ecc7f"
+    },
+    "cached-full.json.gz": {
+      "bytes": 188167,
+      "sha256": "7b9089c5f0804c3078aa58e348e600f5d7b980fead2a7bbc400284b5bd36280b"
+    },
+    "cached-orbital.json.gz": {
+      "bytes": 23003,
+      "sha256": "9534bda5860d10ef5c3c74615c1cf2c7a2cffd1f81eaf0b665c00492232c4a69"
+    },
+    "cached-regional.json.gz": {
+      "bytes": 102191,
+      "sha256": "cf102c43d44af8465563c5e4f523419d47f5da6990d1f09d4917f392c24523c0"
+    },
+    "cached-repeat-florida.json.gz": {
+      "bytes": 31560,
+      "sha256": "e14beef4586389b0716db412b7d2b1678001884be40b03f3e651a64e1bfc042b"
+    },
+    "cached-repeat-orbital.json.gz": {
+      "bytes": 22945,
+      "sha256": "5c44013f161de511249f475f93f86ffc34b04079ea23624bbcad613440eda2c9"
+    },
+    "candidate-capture-host.patch": {
+      "bytes": 72665,
+      "sha256": "ddae1f7c954fccc6f0f846c487a5af9d9c217d16a76b3b50fd818569195181be"
+    },
+    "candidate-cpu-florida.json.gz": {
+      "bytes": 29826,
+      "sha256": "7905404468ee30ee33995650e66b51525d6503bb9e53794e6ebeeda12d089824"
+    },
+    "candidate-cpu-inland.json.gz": {
+      "bytes": 23817,
+      "sha256": "dd721353fe15dab8402f73c4337616c678f01250a1d9ee9bb784056223812f9f"
+    },
+    "candidate-deployment-final.json": {
+      "bytes": 11682,
+      "sha256": "3d6cc18b5d10abfee0ea904ef02abd77c860e4afd36740c6f60895b5b5e0d88a"
+    },
+    "candidate-deployment-revised.json": {
+      "bytes": 11682,
+      "sha256": "3d6cc18b5d10abfee0ea904ef02abd77c860e4afd36740c6f60895b5b5e0d88a"
+    },
+    "candidate-deployment.json": {
+      "bytes": 11682,
+      "sha256": "19d131b0441b8dcf3feadfcfd9869e251a530f2993a4b787e317a20dcfe3a446"
+    },
+    "candidate-dynamic-full.json.gz": {
+      "bytes": 181114,
+      "sha256": "b8718b324c49a3ed19b08bb98dba1f01ae3624f9eb39d1dc8a680b8fa312e464"
+    },
+    "candidate-dynamic-regional.json.gz": {
+      "bytes": 97303,
+      "sha256": "3f78e9c93ce4ee2566dfc5b113505c305b755f696e0af274e06c208139640c86"
+    },
+    "candidate-dynamic-warp.json.gz": {
+      "bytes": 69086,
+      "sha256": "feb6672d0e24b7b1b12cd326ca0774796658d853e8e7bccb448475fc54428335"
+    },
+    "candidate-fixed-active-refinement.json": {
+      "bytes": 35120,
+      "sha256": "edf95f6b4a29c25fa33e56373c512147082fceca3af4fba1ecb46c514752fc8e"
+    },
+    "candidate-fixed-factor1.json": {
+      "bytes": 35000,
+      "sha256": "7409f32c3a3e7bd53ad1782d4d253b0783aca243e3a22476e52a25eca5291f1d"
+    },
+    "candidate-fixed-florida.json": {
+      "bytes": 34177,
+      "sha256": "2406a2bc0e9f53c7707e203c83fb0092a93b6bf05526f35c1cf1c8d732db19c4"
+    },
+    "candidate-fixed-grazing.json": {
+      "bytes": 37182,
+      "sha256": "565b6edad527be9f223021255497bb3a462b62c3a47b6b2a3ecd2d1c6831de3e"
+    },
+    "candidate-fixed-inland.json": {
+      "bytes": 32417,
+      "sha256": "f2e8e1063cec0f1b907cf099d2581783aa658ba2b0e2d42f2c6da3c323453e2a"
+    },
+    "candidate-fixed-orbital.json": {
+      "bytes": 29555,
+      "sha256": "24a7a659bd4480ea2e5e0774cfbb98cb7bfba74c103925dff0f9f516841b4bee"
+    },
+    "candidate-florida-capture.json.gz": {
+      "bytes": 30456,
+      "sha256": "0f76751ba9f93cd292db9120fe6ae38f3e87e371a998e87f6539a8fa5cc75032"
+    },
+    "candidate-florida-parity.json": {
+      "bytes": 12688,
+      "sha256": "d57641ea4a3d2222ba16370a2f1e00e44a36c405a9c801ffb8cd426d29b2983e"
+    },
+    "candidate-inland-capture.json.gz": {
+      "bytes": 24625,
+      "sha256": "f99556b30fd7dafc17f457e43e4a3cc5b4737dea336d414f29f750015ffec22e"
+    },
+    "candidate-inland-parity.json": {
+      "bytes": 12695,
+      "sha256": "8fe8b976538e6124f5b0a98a9203c7fa7971767926a70f1c01db8798c035b9ad"
+    },
+    "candidate-timing-host.patch": {
+      "bytes": 46875,
+      "sha256": "2d1b88b694ffc3b5022f6bb3e609610d951a4c2abac81bdf7b28158eaf95ef33"
+    },
+    "candidate_parity.py": {
+      "bytes": 7166,
+      "sha256": "9ba6b64b5f7cb8c39e393df5626f5da1776bcc6a5da16a5d3c504d0c3a619d58"
+    },
+    "candidate_runs.py": {
+      "bytes": 1602,
+      "sha256": "ebcc180d9db1f4fa410079f5b72af247e3b03961fa5dca96491dde86be11c6c2"
+    },
+    "capture-budget.json": {
+      "bytes": 524,
+      "sha256": "8e7d7ea09b2bc2e23ed89a063c06ce7e01456ab5eed85d77135074417b129de3"
+    },
+    "capture-host.patch": {
+      "bytes": 77616,
+      "sha256": "6e963cdc7a9a29777aa398cd50bea583ff2c4ad75c949f3e3266e81c5e049c2c"
+    },
+    "capture.py": {
+      "bytes": 10880,
+      "sha256": "07f3f8fb6684dacaae580618d36be0432f256baaf9995af865d874157fe771e0"
+    },
+    "cleanup.ps1": {
+      "bytes": 3583,
+      "sha256": "34043abb327b5d421ca401afae044abdcdf2ad4cbc18b5926b5a81ef0d29c36a"
+    },
+    "closeout.json": {
+      "bytes": 14137,
+      "sha256": "028785e98113c1953ffac49327c20548781aa11d8de9cd186cb50a36a697bf23"
+    },
+    "compressed-journals.json": {
+      "bytes": 15413,
+      "sha256": "c3e07615002cbb98ef919f79cf1c97aa75dd908c8f1d3efd84533415753b9cd7"
+    },
+    "control-full.json.gz": {
+      "bytes": 24149,
+      "sha256": "6b62bff85f140ab25e46bbeb1d1b68576182edca0e45d9b4d06975abe7e35c1a"
+    },
+    "control-regional.json.gz": {
+      "bytes": 13085,
+      "sha256": "bb1931ede9a3ad0a61dab444b85ea5cc017494635bba1ce2fc6f51f1f72b503e"
+    },
+    "control-warp.json": {
+      "bytes": 20016,
+      "sha256": "a89c05948a49e12125cdec732c69bf771780bd69c18b659db5e536d743adf456"
+    },
+    "cpu-active-refinement.json.gz": {
+      "bytes": 23987,
+      "sha256": "cdc80ee1a12b4dccd3c0af241b1af5a1ffd30c9c1fc92d288bb17447f9baf6e9"
+    },
+    "cpu-factor1.json.gz": {
+      "bytes": 25205,
+      "sha256": "675bef8bc1c8b8c11fcd9cbf1a02b68b7df8d09e5793cd16dd522cdf4e855bf3"
+    },
+    "cpu-florida.json.gz": {
+      "bytes": 28651,
+      "sha256": "37cc8283b07e1fce7c4c1bb9733bb975ab2da31d7e0c2aeea585698d0b649832"
+    },
+    "cpu-grazing.json.gz": {
+      "bytes": 25829,
+      "sha256": "dc69dc984c416bb7f627e3c2f730a941b7265cdb4fe60550afee0be840c8fa4d"
+    },
+    "cpu-inland.json.gz": {
+      "bytes": 23035,
+      "sha256": "43c72e2754b47c5df37cd3b236e45b32c90fefcbfd57048f855911aadc474c21"
+    },
+    "cpu-orbital.json.gz": {
+      "bytes": 21075,
+      "sha256": "f57f00cc180feb958f5fa5bfe6779c0d769893e533dc91ce35215b600f45be53"
+    },
+    "disposable-manifest.json": {
+      "bytes": 29878,
+      "sha256": "d8d0b66c4a689e733a4f400f654709f7eab39eb68961a56cece204db40ec5b3d"
+    },
+    "dynamic-active-grid.json.gz": {
+      "bytes": 144674,
+      "sha256": "650cbcc85446852a24e5d80c4d612912ca1a80ec83e726ccd3ec7d6a29b7a7e2"
+    },
+    "dynamic-full.json.gz": {
+      "bytes": 175708,
+      "sha256": "248125819ed6bb847fe4fd1bce4fdde79cc689b80800a26fc1c96ec1cf38b135"
+    },
+    "dynamic-inland-grid.json.gz": {
+      "bytes": 141752,
+      "sha256": "57e43f323997997070b30307793dba9b99d117df3d42f8e2c6a993c2eb670bec"
+    },
+    "dynamic-regional-repeat.json.gz": {
+      "bytes": 94156,
+      "sha256": "d6ccb557766d9e6fcf1ac7356239f7ca5434977dd42d7d913f0ccb89c271aa24"
+    },
+    "dynamic-regional.json.gz": {
+      "bytes": 94895,
+      "sha256": "720d515cbf1d5fa8fc6f47b202ef4e34e4c098adbadac9805a060899c67f6b80"
+    },
+    "dynamic-warp.json.gz": {
+      "bytes": 65403,
+      "sha256": "26b520112241275a1853007c31af108949e7e5bc18c10dec6db73ad058c89e2f"
+    },
+    "exit.py": {
+      "bytes": 5998,
+      "sha256": "ed4ec3e0f6836dc1229944565505fae97f18b02a03b1690bc7d81d17839c20f2"
+    },
+    "fixed-active-refinement.json": {
+      "bytes": 35015,
+      "sha256": "c170eab77cf5787fa18eec1a446d359432e6adacfdbce3f48925e56361706003"
+    },
+    "fixed-factor1.json": {
+      "bytes": 34841,
+      "sha256": "6144c43b56e227cba676ca5def23cbb46f425bf62d9a305cf81ac7432b39c10b"
+    },
+    "fixed-florida.json": {
+      "bytes": 34054,
+      "sha256": "2871bc18f3be5d72ba0170d4bc4bf949868502d133a29572fd297f876503d7cb"
+    },
+    "fixed-grazing.json": {
+      "bytes": 37042,
+      "sha256": "78ce2206dda9920f0e5157df0f023b12761d0e8e96c60fb8fcafe53ce23a8d05"
+    },
+    "fixed-inland.json": {
+      "bytes": 32277,
+      "sha256": "6fde8856651dc93512c9f4517152ef9e50c682aa079e3f12ae6b85ad110ec116"
+    },
+    "fixed-orbital.json": {
+      "bytes": 29440,
+      "sha256": "3488e75313d1ba621fb28f6f0cb90388a53abe776e37e32ffc61bebb76cb4c5d"
+    },
+    "keys-florida-capture-base.json.gz": {
+      "bytes": 33251,
+      "sha256": "4f7c5281cea44637679cab42e3632cda40b4844ec638ad914c33949f5eff8102"
+    },
+    "keys-florida-capture-cached.json.gz": {
+      "bytes": 32607,
+      "sha256": "5078915e90d9b78cb2579c65baadf811958ff1337a9b131a72f22cdc4bf9978e"
+    },
+    "keys-florida-parity.json": {
+      "bytes": 26084,
+      "sha256": "49d1af1f2927a55ee198bad6de7347ef6c6ba2e65d893612bcead31e4f3c415a"
+    },
+    "keys-inland-capture-base.json.gz": {
+      "bytes": 26823,
+      "sha256": "0046889e90fe62e465fab443ceed169c11b66b192b55e7a051084cb14fe98fd9"
+    },
+    "keys-inland-capture-cached.json.gz": {
+      "bytes": 26320,
+      "sha256": "57633d02522f28ad0669e03b61b28bf01fa7192e7fc4a659de2e071fc262fd0f"
+    },
+    "keys-inland-parity.json": {
+      "bytes": 26101,
+      "sha256": "3f187efe933fcb70ab9a601273b27fb3184fe34e03ee322003a402493ddf4a7d"
+    },
+    "normal-rebuild-identity.json": {
+      "bytes": 3115,
+      "sha256": "1df8269bbc3a01f63fe32444b4d15d4909a4b933494299e3ad174ec6c8380d4a"
+    },
+    "parity-tooling-review.md": {
+      "bytes": 5935,
+      "sha256": "792923632e4a1df65e41e7f2690d48934354f0c5be645fd50f416d16d177802e"
+    },
+    "parity.py": {
+      "bytes": 11099,
+      "sha256": "023cb2a9f51def3ddac66f2cc88310d9fcb0f2f785932eebad639dd8e529dd3a"
+    },
+    "poll-cached-host.patch": {
+      "bytes": 52760,
+      "sha256": "87fc56a3627bf91b196c202e98913d78d73eb33ce1aab51abeb12d6a276db73a"
+    },
+    "poll-florida.json.gz": {
+      "bytes": 30689,
+      "sha256": "9afa46ebf7b1b7a3fe125720e16e963c4414e48adadbad0423a7857ce90b6d18"
+    },
+    "poll-full.json.gz": {
+      "bytes": 193647,
+      "sha256": "a8671880872774c742a8f9787c2b9bdbbb1da6a9e5be0b00dfd84776ee1b207d"
+    },
+    "poll-host.patch": {
+      "bytes": 52543,
+      "sha256": "b76bb50c0e55a1b24adf37417665b64420611ffebfaca04ef81709f456fe0d4d"
+    },
+    "poll-orbital.json.gz": {
+      "bytes": 22660,
+      "sha256": "03034b5394990f15318d6e612cb55d206bcf51345c4fc840bbd78e91deda6ba1"
+    },
+    "poll-regional.json.gz": {
+      "bytes": 103943,
+      "sha256": "90715a254fec6467f18b6177f41017ed479698d413fcf4b8c33d1da9ab424b4a"
+    },
+    "poll-return-florida.json.gz": {
+      "bytes": 32007,
+      "sha256": "0b6fd4f2a9d4daa9e29ad166b3e5fa66ff1afb55823b9bafeeda93d6da5367ed"
+    },
+    "poll-return-orbital.json.gz": {
+      "bytes": 23473,
+      "sha256": "af0411a003cecabe73f6d2838fd83a0ce101e0b946fc8455fb30fd48a5344828"
+    },
+    "poll-return-regional.json.gz": {
+      "bytes": 102724,
+      "sha256": "d71b950fd9e789a46755a0dbde94e9660acf41ee2775588476de726e1ab39e0d"
+    },
+    "poll.py": {
+      "bytes": 4055,
+      "sha256": "31b7fa7562e0de244f8ff2aa1f0eccb2770f2d391b0104d7c7cf01a299d35496"
+    },
+    "poll_dynamic.py": {
+      "bytes": 663,
+      "sha256": "ff8c2b30b7f6e45622326d4707a7cd446559e0792839d5030078e92157f5c9a1"
+    },
+    "post_cleanup.py": {
+      "bytes": 1630,
+      "sha256": "1c92428e6baa9bb5f73e10a9ba3ba6a146a584925538dfe396ee57e7dce4fba1"
+    },
+    "private-candidate-capture-host.json": {
+      "bytes": 331,
+      "sha256": "7cfc0fdabd082b12d673f1e77849ebfa2b54867f729a10f6aaa94fc79c20ae18"
+    },
+    "private-candidate-timing-host.json": {
+      "bytes": 247,
+      "sha256": "981e7ff1f6e110e7ee0aabd2f24209549ebeca67ff12718571fedc7bc8040d27"
+    },
+    "private-capture-host.json": {
+      "bytes": 331,
+      "sha256": "6af6ed57c0ab965270c6e099b1130f62f8395ed257418d8e0a114ca9486ca960"
+    },
+    "private-host-v2.json": {
+      "bytes": 247,
+      "sha256": "cdc497fdcdb5ff39f04262a657e5526e12aa5f4ae611c36e0dcd1d0a10af1863"
+    },
+    "private-host.json": {
+      "bytes": 247,
+      "sha256": "442e4d84d590373ffbb5c713bbcb8e618f2e9d612eb4ddb7be0797f836eceb2b"
+    },
+    "private-poll-cached-host.json": {
+      "bytes": 247,
+      "sha256": "48cf8feb4a5a8c558245296d8a580d046bba881fadbb2a98811e17a9dccc6bb0"
+    },
+    "private-poll-host.json": {
+      "bytes": 247,
+      "sha256": "047345c521fb7122ed693f1eaa0383c64d6117b6d7b561090b360c4aa2f8c698"
+    },
+    "quiet-cached-regional.json.gz": {
+      "bytes": 26572,
+      "sha256": "6dd4cbd3a954252d5d8e4a7f8ab2cafc0e69ac8b4bafa22cbaaf9edd566a935e"
+    },
+    "quiet-poll-regional.json.gz": {
+      "bytes": 26298,
+      "sha256": "c1d876a7663161e463960b09211e2d17cf3e26938f3f618b74d3c105bf8cff54"
+    },
+    "README.md": {
+      "bytes": 20710,
+      "sha256": "90e3569405ff27ac93108d82f147163f71200d44a4504065852eb518a1d5bc24"
+    },
+    "seal.py": {
+      "bytes": 5084,
+      "sha256": "ec31a15044a12109220e08449f8a1aa0b21bcd4a22ffa745809ad853320c4fc4"
+    },
+    "timing-host-v2.patch": {
+      "bytes": 44433,
+      "sha256": "d83505a427af63ffbd8895d7c7025370775f79dcd628d99c1e2ddf967ece326c"
+    },
+    "timing-host.patch": {
+      "bytes": 38814,
+      "sha256": "8b7144e4cec2280e9a1c02524094a236d6d1e17e453f3e74e4a06c77304a6903"
+    },
+    "timing.inl": {
+      "bytes": 1307,
+      "sha256": "85e442cc31e677d9af69d436f5df6a9fad1ba505e19eecae1aaee085ef0be1db"
+    },
+    "validate.py": {
+      "bytes": 3255,
+      "sha256": "b828c289b9bf6607dcf9b23b9203542b6589feeb4833198aa85dfdff6ad61b7f"
+    },
+    "validation.json.gz": {
+      "bytes": 21169,
+      "sha256": "8131d00b28266cfcb6fa7050170f64bf58632ca2fb3c4c8fd01eb2a103e64f79"
+    },
+    "verify-a.md": {
+      "bytes": 4794,
+      "sha256": "184e975a43656e1dbb4fc68fdf26f8f29a4b2b480722d5fbb3d7e0618c760c3d"
+    },
+    "verify-b.json.gz": {
+      "bytes": 204639,
+      "sha256": "9d8a5fda5f2372bb180e01c42e77271e6b95c194f5c9efff7a94a53cf4363d09"
+    },
+    "verify-b.md": {
+      "bytes": 19504,
+      "sha256": "f18345e0c0d37ea3fb6dde8e41b0a69938236123eb6321b8621502c448167978"
+    },
+    "verify-b.py": {
+      "bytes": 34013,
+      "sha256": "42f6184afb4f6222be519f4f4ebaea783db4613370961ec67c7dd9e80a4e5c34"
+    },
+    "work-a.json.gz": {
+      "bytes": 1786686,
+      "sha256": "995bcfba83a86a13c77ca598bbfadc616c8a373909a0ea1eaa70313fcbb11deb"
+    },
+    "work-a.md": {
+      "bytes": 22928,
+      "sha256": "60c13ef6425bb18f16f24ad84c6982346d47fb18c7dc344f618c538b566692cb"
+    },
+    "work-a.py": {
+      "bytes": 29226,
+      "sha256": "c1bdf4e7f70c056a42ecf25e79fb456d1d8ad20cde74b88f54a7d800408f55b6"
+    },
+    "work-b.json": {
+      "bytes": 11437,
+      "sha256": "db4bb7a1222610c4754efb9e6ea7bbf3e399b4c5d7695799c96c5115ebb4b63d"
+    },
+    "work-b.md": {
+      "bytes": 21518,
+      "sha256": "3d416a5dfd3fca8e31be18665afa04d7c282b383ce977fafdad52e7409c874e6"
+    },
+    "work-c.json": {
+      "bytes": 12856,
+      "sha256": "534bf8cd6713351f00df7bc401ea1b142e4d15e112c9da2b24dc69c1d3f1c334"
+    },
+    "work-c.md": {
+      "bytes": 13065,
+      "sha256": "3038fc60789aee20674a25b9df2b4df08b6d3451e086f575dec89cfcb89ab5bf"
+    }
+  },
+  "deployment": {
+    "Debug": {
+      "native": "6e10a80772efaa51da256983355b1ab3bdec49e792891bfc5280c12a596bdc6e",
+      "managed": "41405f9ebd1394a6e7775e08ffa92b8a431f7195b748a945768d0f999e8200af",
+      "executable": "59a1e9f40073ad39fefcbc3ad4e3df69b740bd1971dd297a96d01ea63131b1d8",
+      "shaders": {
+        "body_forward.frag.spv": "fa706803f042fb5a9f7a3c9965a3e2de3e8838e075d67876b78df9bdc132ce0e",
+        "distant_planet.frag.spv": "04137afb1c632dfb7074480377d9f93136ab3127d382baeef07d52b09409eba8",
+        "distant_planet.vert.spv": "cf28fe0a7c0797bd7d72076437ba78c4e0d97bb1a0ae3c065baf3bfc5db62cb8",
+        "fullscreen.vert.spv": "a18f9b5e0b4a4e7a077b1017bad7b1c5c40313b3f70113f1e0771cd202433130",
+        "orbit.frag.spv": "b06f50708727144e8d0f08d35cd2e64d8b1cef501ed20b10fea4a34196026267",
+        "orbit.vert.spv": "b4b9dd635f32156654e30d843c29eb864feb09751d7b3027cf99a5d741b6a45b",
+        "orbit_previous.frag.spv": "c4935060e07e01742d59d8a5834241e2963dcc80ed8e35baeac5b08288761e61",
+        "planetary.frag.spv": "417f17b236834f0ac94fa3bbfdae52ad164599ff14051e9b396809beea75cda1",
+        "planetary.vert.spv": "ddb84030e2621df8f05489e339989d66de60d73435f490b4ec0af4251d7a0338",
+        "planetary_natural_terrain_global_prepare.comp.spv": "5a5450321873f5ff8bed7dd9e4f06c342625724d629da2232521fbace01c7a85",
+        "planetary_production.frag.spv": "8c59838abb3d7ee6418695ea40f044ca1f04f5c3c9216296d5cc19bba6110d6b",
+        "planetary_production_terrain.comp.spv": "405e6e6daab609ca383297ba8be706bfa96859c65dc2d9f42476a32cddd85df7",
+        "planetary_ring.vert.spv": "cccede52d3c64db872360912db9eb29e60cb892c648ed53ce1c178f8623d0cfb",
+        "planetary_ring_far.frag.spv": "343db81bccc310b21c600ab6ee6722438151694683bb0cf7ba01d54a9b68ade6",
+        "planetary_ring_near.frag.spv": "48b8ef4e56b6be9380cfbaca7daa790035e704541b6b8a550b3cc7bed540244c",
+        "planetary_select.comp.spv": "8189bbd2a85fe23033f12c558d8b221b62b8969c17ba9ffcf07b7c8501fe8adf",
+        "planetary_terrain_generate.comp.spv": "1fc8c24ea6b4a55e83997fadf80b4901f692b8bc2de84a5cf6ac043e4da531d1",
+        "production_nested_scale_mesh_cull.comp.spv": "497d88225a914b9601ad6c0f44733e834794a952854e71b26be426ead8780d94",
+        "production_nested_scale_mesh_incoming_cull.comp.spv": "23bd1b04d0291e6271138041433eee07e57503482e8e5cf845e4b72c75967336",
+        "production_spherical_billboard.tesc.spv": "0163498278f9523fd442434f05f056be28252d16c2f2ba44b8d91642b33e4439",
+        "production_spherical_billboard.tese.spv": "d0bc5d7a450f336d45c26c499b0b3a79ecc0258e1ffb9dee0b5bcfb8aa21d31e",
+        "production_spherical_billboard.vert.spv": "1baa9043db7a8b71dcf5931f4cb415fa84ce6341b07d850ea9beb8baa02d2b6a",
+        "production_spherical_billboard_compact.comp.spv": "2aabd7633b333f86df8a6eae6b76ed2d13a7129443dcd9201531de047b12f4d9",
+        "production_spherical_billboard_cull.comp.spv": "2827b58dcd7029695e0b33272018e54d19d6113b8d7ab9ac591c343b3d994398",
+        "production_spherical_billboard_incoming_compact.comp.spv": "6b0238138222112ddf1f945f5e6a31867d5dd11f57169481ece9c05337f43e4e",
+        "production_spherical_billboard_incoming_cull.comp.spv": "8c677f08ae051cf525108a436066983d41961ce70757ca29a86df165d2663cfb",
+        "production_spherical_billboard_incoming_prepare.comp.spv": "3b330d24dc873c2676dbb877208efae4d91347b66ef029706b8a3f0d3116f91c",
+        "production_spherical_billboard_incoming_reset.comp.spv": "5d750f929dcab4f9f3138b4cdfa869ab26e3051d4b28485c02ee483f89e14d6e",
+        "production_spherical_billboard_prepare.comp.spv": "d178e6ba6b73045dc214e75000489c09a7f0982f9cff7663489ba0818d30ae8b",
+        "production_spherical_billboard_reset.comp.spv": "cf583d16e14c8a8ec63b393d8752541648d932cf0165231cc48f6076e28fc027",
+        "regional_physical_demand.comp.spv": "7d80dbd70be13cc55f00ef836cd8da9d3783064411320697777f6b5c848d8f67",
+        "regional_physical_incoming_demand.comp.spv": "a56b62b5432206b8ab5eded734b13a0ddf9f0c726a4b444f8d24139bdcc17a60",
+        "sas_target.frag.spv": "4e99fda06f571590f950e91d93025cafa83e4a454e68e3583ce59d869f0a3ef2",
+        "solar_label.frag.spv": "673c5dc0cc1e199d497c7c927f282a02da444fa258860b6cb94b6fd1ed12c90a",
+        "solar_label.vert.spv": "a13a7a8acb3ae2da2cac129a203caffd86b5a7f434701d99b59284fdd01f1844",
+        "solar_marker.frag.spv": "d428743c08f96f4e508eab131cfb54981c2628eecc7acd3d2df220b19103275b",
+        "solar_marker.vert.spv": "50d948741d3ca6b59577a82d3346ab3cac51edcb9ab80047247ac61c345b6db6",
+        "solar_orbit.frag.spv": "23b511270c196c2186f7935699ca7fdedf3c92c629da67c10e8ae7615286181f",
+        "solar_orbit.vert.spv": "d71520615e2533a06208c3cec752d2689f524a30fb6a11bd2ca4ae00e2cc027f",
+        "solar_speed_hud.frag.spv": "e073b0ab31c69a3516d695146ade0dbd618d3dede5a10699f390f10da52c3586",
+        "solar_speed_hud.vert.spv": "a777a4dfece073339efcd97c7292d970f8c26d21f221ebd62ce244970f0a5fb4",
+        "space_background.frag.spv": "0c98ee3df0ba8ad8f313cc352a02032528e6b0e36b2dfa8cc2be1a6755b71cfc",
+        "stellar_glow.frag.spv": "e83a5e7458ec4be4b835384c88ec3ea958ae13569ee9ac823a4e2b2db17facee",
+        "stellar_glow.vert.spv": "30a9ed63e3d92581852afef62a242f2160a10c6cdb276a3b1aa0360a476183e8",
+        "stellar_sun.frag.spv": "5c448c0da4cadeb08bf2c85c74448d3b690fd3d6bccab1fc2c49da7a0bf54769",
+        "stellar_sun.vert.spv": "3e124d5babcb1d219499aa2de1482f90fc7c9008e92b054f7ca0d268336346b6",
+        "tone_map.frag.spv": "d617345e95589ecb087ed40c20f4d04a427251a2b5249d8181cc63c421ee3979",
+        "triangle.frag.spv": "36e2c4762d87eddd045909f600217f3ea7d48b023d08887abbf958d3bfaa5ddf",
+        "triangle.vert.spv": "87c254e6166b18954b8c0fbd533af2e83f4cf7f09842d752a0a76ae68e8f1aef"
+      },
+      "matchesPriorDeployment": true
+    },
+    "Release": {
+      "native": "932267253ea6e0221ba4ef5093515874116b26ede8c565ff8b8316e02e21eabf",
+      "managed": "1a2843c69458704feabcbd11760f43620c8cc39f0b0740980b9bfa96b47f705e",
+      "executable": "59a1e9f40073ad39fefcbc3ad4e3df69b740bd1971dd297a96d01ea63131b1d8",
+      "shaders": {
+        "body_forward.frag.spv": "fa706803f042fb5a9f7a3c9965a3e2de3e8838e075d67876b78df9bdc132ce0e",
+        "distant_planet.frag.spv": "04137afb1c632dfb7074480377d9f93136ab3127d382baeef07d52b09409eba8",
+        "distant_planet.vert.spv": "cf28fe0a7c0797bd7d72076437ba78c4e0d97bb1a0ae3c065baf3bfc5db62cb8",
+        "fullscreen.vert.spv": "a18f9b5e0b4a4e7a077b1017bad7b1c5c40313b3f70113f1e0771cd202433130",
+        "orbit.frag.spv": "b06f50708727144e8d0f08d35cd2e64d8b1cef501ed20b10fea4a34196026267",
+        "orbit.vert.spv": "b4b9dd635f32156654e30d843c29eb864feb09751d7b3027cf99a5d741b6a45b",
+        "orbit_previous.frag.spv": "c4935060e07e01742d59d8a5834241e2963dcc80ed8e35baeac5b08288761e61",
+        "planetary.frag.spv": "417f17b236834f0ac94fa3bbfdae52ad164599ff14051e9b396809beea75cda1",
+        "planetary.vert.spv": "ddb84030e2621df8f05489e339989d66de60d73435f490b4ec0af4251d7a0338",
+        "planetary_natural_terrain_global_prepare.comp.spv": "5a5450321873f5ff8bed7dd9e4f06c342625724d629da2232521fbace01c7a85",
+        "planetary_production.frag.spv": "8c59838abb3d7ee6418695ea40f044ca1f04f5c3c9216296d5cc19bba6110d6b",
+        "planetary_production_terrain.comp.spv": "405e6e6daab609ca383297ba8be706bfa96859c65dc2d9f42476a32cddd85df7",
+        "planetary_ring.vert.spv": "cccede52d3c64db872360912db9eb29e60cb892c648ed53ce1c178f8623d0cfb",
+        "planetary_ring_far.frag.spv": "343db81bccc310b21c600ab6ee6722438151694683bb0cf7ba01d54a9b68ade6",
+        "planetary_ring_near.frag.spv": "48b8ef4e56b6be9380cfbaca7daa790035e704541b6b8a550b3cc7bed540244c",
+        "planetary_select.comp.spv": "8189bbd2a85fe23033f12c558d8b221b62b8969c17ba9ffcf07b7c8501fe8adf",
+        "planetary_terrain_generate.comp.spv": "1fc8c24ea6b4a55e83997fadf80b4901f692b8bc2de84a5cf6ac043e4da531d1",
+        "production_nested_scale_mesh_cull.comp.spv": "497d88225a914b9601ad6c0f44733e834794a952854e71b26be426ead8780d94",
+        "production_nested_scale_mesh_incoming_cull.comp.spv": "23bd1b04d0291e6271138041433eee07e57503482e8e5cf845e4b72c75967336",
+        "production_spherical_billboard.tesc.spv": "0163498278f9523fd442434f05f056be28252d16c2f2ba44b8d91642b33e4439",
+        "production_spherical_billboard.tese.spv": "d0bc5d7a450f336d45c26c499b0b3a79ecc0258e1ffb9dee0b5bcfb8aa21d31e",
+        "production_spherical_billboard.vert.spv": "1baa9043db7a8b71dcf5931f4cb415fa84ce6341b07d850ea9beb8baa02d2b6a",
+        "production_spherical_billboard_compact.comp.spv": "2aabd7633b333f86df8a6eae6b76ed2d13a7129443dcd9201531de047b12f4d9",
+        "production_spherical_billboard_cull.comp.spv": "2827b58dcd7029695e0b33272018e54d19d6113b8d7ab9ac591c343b3d994398",
+        "production_spherical_billboard_incoming_compact.comp.spv": "6b0238138222112ddf1f945f5e6a31867d5dd11f57169481ece9c05337f43e4e",
+        "production_spherical_billboard_incoming_cull.comp.spv": "8c677f08ae051cf525108a436066983d41961ce70757ca29a86df165d2663cfb",
+        "production_spherical_billboard_incoming_prepare.comp.spv": "3b330d24dc873c2676dbb877208efae4d91347b66ef029706b8a3f0d3116f91c",
+        "production_spherical_billboard_incoming_reset.comp.spv": "5d750f929dcab4f9f3138b4cdfa869ab26e3051d4b28485c02ee483f89e14d6e",
+        "production_spherical_billboard_prepare.comp.spv": "d178e6ba6b73045dc214e75000489c09a7f0982f9cff7663489ba0818d30ae8b",
+        "production_spherical_billboard_reset.comp.spv": "cf583d16e14c8a8ec63b393d8752541648d932cf0165231cc48f6076e28fc027",
+        "regional_physical_demand.comp.spv": "7d80dbd70be13cc55f00ef836cd8da9d3783064411320697777f6b5c848d8f67",
+        "regional_physical_incoming_demand.comp.spv": "a56b62b5432206b8ab5eded734b13a0ddf9f0c726a4b444f8d24139bdcc17a60",
+        "sas_target.frag.spv": "4e99fda06f571590f950e91d93025cafa83e4a454e68e3583ce59d869f0a3ef2",
+        "solar_label.frag.spv": "673c5dc0cc1e199d497c7c927f282a02da444fa258860b6cb94b6fd1ed12c90a",
+        "solar_label.vert.spv": "a13a7a8acb3ae2da2cac129a203caffd86b5a7f434701d99b59284fdd01f1844",
+        "solar_marker.frag.spv": "d428743c08f96f4e508eab131cfb54981c2628eecc7acd3d2df220b19103275b",
+        "solar_marker.vert.spv": "50d948741d3ca6b59577a82d3346ab3cac51edcb9ab80047247ac61c345b6db6",
+        "solar_orbit.frag.spv": "23b511270c196c2186f7935699ca7fdedf3c92c629da67c10e8ae7615286181f",
+        "solar_orbit.vert.spv": "d71520615e2533a06208c3cec752d2689f524a30fb6a11bd2ca4ae00e2cc027f",
+        "solar_speed_hud.frag.spv": "e073b0ab31c69a3516d695146ade0dbd618d3dede5a10699f390f10da52c3586",
+        "solar_speed_hud.vert.spv": "a777a4dfece073339efcd97c7292d970f8c26d21f221ebd62ce244970f0a5fb4",
+        "space_background.frag.spv": "0c98ee3df0ba8ad8f313cc352a02032528e6b0e36b2dfa8cc2be1a6755b71cfc",
+        "stellar_glow.frag.spv": "e83a5e7458ec4be4b835384c88ec3ea958ae13569ee9ac823a4e2b2db17facee",
+        "stellar_glow.vert.spv": "30a9ed63e3d92581852afef62a242f2160a10c6cdb276a3b1aa0360a476183e8",
+        "stellar_sun.frag.spv": "5c448c0da4cadeb08bf2c85c74448d3b690fd3d6bccab1fc2c49da7a0bf54769",
+        "stellar_sun.vert.spv": "3e124d5babcb1d219499aa2de1482f90fc7c9008e92b054f7ca0d268336346b6",
+        "tone_map.frag.spv": "d617345e95589ecb087ed40c20f4d04a427251a2b5249d8181cc63c421ee3979",
+        "triangle.frag.spv": "36e2c4762d87eddd045909f600217f3ea7d48b023d08887abbf958d3bfaa5ddf",
+        "triangle.vert.spv": "87c254e6166b18954b8c0fbd533af2e83f4cf7f09842d752a0a76ae68e8f1aef"
+      },
+      "matchesPriorDeployment": true
+    }
+  },
+  "assets": {
+    "assets\\earth\\runtime\\earth_elevation_8192x4096.r16": {
+      "bytes": 67108864,
+      "sha256": "4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317",
+      "matchesPrior": true
+    },
+    ".novacore\\cache\\terrain\\v1\\sha256\\38\\38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae.nccube": {
+      "bytes": 61484224,
+      "sha256": "38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae",
+      "matchesPrior": true
+    },
+    ".novacore\\cache\\terrain\\v1\\sha256\\c4\\c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe.nccube": {
+      "bytes": 210307596,
+      "sha256": "c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe",
+      "matchesPrior": true
+    }
+  },
+  "displays": [
+    {
+      "name": "\\\\.\\DISPLAY1",
+      "description": "AMD Radeon(TM) Graphics",
+      "flags": 524288,
+      "attached": false,
+      "primary": false,
+      "modeAvailable": false,
+      "monitors": [
+        {
+          "name": "\\\\.\\DISPLAY1\\Monitor0",
+          "description": "Generic PnP Monitor",
+          "id": "MONITOR\\ACR0623\\{4d36e96e-e325-11ce-bfc1-08002be10318}\\0002",
+          "flags": 2
+        }
+      ]
+    },
+    {
+      "name": "\\\\.\\DISPLAY2",
+      "description": "AMD Radeon(TM) Graphics",
+      "flags": 524288,
+      "attached": false,
+      "primary": false,
+      "modeAvailable": false,
+      "monitors": [
+        {
+          "name": "\\\\.\\DISPLAY2\\Monitor0",
+          "description": "Generic PnP Monitor",
+          "id": "MONITOR\\ACR0623\\{4d36e96e-e325-11ce-bfc1-08002be10318}\\0002",
+          "flags": 2
+        }
+      ]
+    },
+    {
+      "name": "\\\\.\\DISPLAY3",
+      "description": "AMD Radeon(TM) Graphics",
+      "flags": 524288,
+      "attached": false,
+      "primary": false,
+      "modeAvailable": false,
+      "monitors": [
+        {
+          "name": "\\\\.\\DISPLAY3\\Monitor0",
+          "description": "Generic PnP Monitor",
+          "id": "MONITOR\\ACR0623\\{4d36e96e-e325-11ce-bfc1-08002be10318}\\0002",
+          "flags": 2
+        }
+      ]
+    },
+    {
+      "name": "\\\\.\\DISPLAY4",
+      "description": "AMD Radeon(TM) Graphics",
+      "flags": 524288,
+      "attached": false,
+      "primary": false,
+      "modeAvailable": false,
+      "monitors": [
+        {
+          "name": "\\\\.\\DISPLAY4\\Monitor0",
+          "description": "Generic PnP Monitor",
+          "id": "MONITOR\\ACR0623\\{4d36e96e-e325-11ce-bfc1-08002be10318}\\0002",
+          "flags": 2
+        }
+      ]
+    },
+    {
+      "name": "\\\\.\\DISPLAY5",
+      "description": "AMD Radeon(TM) Graphics",
+      "flags": 524288,
+      "attached": false,
+      "primary": false,
+      "modeAvailable": false,
+      "monitors": [
+        {
+          "name": "\\\\.\\DISPLAY5\\Monitor0",
+          "description": "Generic PnP Monitor",
+          "id": "MONITOR\\ACR0623\\{4d36e96e-e325-11ce-bfc1-08002be10318}\\0002",
+          "flags": 2
+        }
+      ]
+    },
+    {
+      "name": "\\\\.\\DISPLAY6",
+      "description": "AMD Radeon RX 6800 XT",
+      "flags": 524289,
+      "attached": true,
+      "primary": false,
+      "modeAvailable": true,
+      "width": 2560,
+      "height": 1440,
+      "hz": 144,
+      "x": -2560,
+      "y": 0,
+      "bpp": 32,
+      "monitors": [
+        {
+          "name": "\\\\.\\DISPLAY6\\Monitor0",
+          "description": "Generic PnP Monitor",
+          "id": "MONITOR\\ACR0623\\{4d36e96e-e325-11ce-bfc1-08002be10318}\\0000",
+          "flags": 3
+        }
+      ]
+    },
+    {
+      "name": "\\\\.\\DISPLAY7",
+      "description": "AMD Radeon RX 6800 XT",
+      "flags": 524293,
+      "attached": true,
+      "primary": true,
+      "modeAvailable": true,
+      "width": 3440,
+      "height": 1440,
+      "hz": 180,
+      "x": 0,
+      "y": 0,
+      "bpp": 32,
+      "monitors": [
+        {
+          "name": "\\\\.\\DISPLAY7\\Monitor0",
+          "description": "PG34QRT2B",
+          "id": "MONITOR\\ASRAAA4\\{4d36e96e-e325-11ce-bfc1-08002be10318}\\0001",
+          "flags": 3
+        }
+      ]
+    },
+    {
+      "name": "\\\\.\\DISPLAY8",
+      "description": "AMD Radeon RX 6800 XT",
+      "flags": 524288,
+      "attached": false,
+      "primary": false,
+      "modeAvailable": false,
+      "monitors": []
+    },
+    {
+      "name": "\\\\.\\DISPLAY9",
+      "description": "AMD Radeon RX 6800 XT",
+      "flags": 524288,
+      "attached": false,
+      "primary": false,
+      "modeAvailable": false,
+      "monitors": []
+    },
+    {
+      "name": "\\\\.\\DISPLAY10",
+      "description": "AMD Radeon RX 6800 XT",
+      "flags": 524288,
+      "attached": false,
+      "primary": false,
+      "modeAvailable": false,
+      "monitors": []
+    },
+    {
+      "name": "\\\\.\\DISPLAY11",
+      "description": "AMD Radeon RX 6800 XT",
+      "flags": 524288,
+      "attached": false,
+      "primary": false,
+      "modeAvailable": false,
+      "monitors": []
+    },
+    {
+      "name": "\\\\.\\DISPLAY12",
+      "description": "AMD Radeon RX 6800 XT",
+      "flags": 524288,
+      "attached": false,
+      "primary": false,
+      "modeAvailable": false,
+      "monitors": []
+    },
+    {
+      "name": "\\\\.\\DISPLAY13",
+      "description": "Meta Virtual Monitor",
+      "flags": 0,
+      "attached": false,
+      "primary": false,
+      "modeAvailable": false,
+      "monitors": []
+    },
+    {
+      "name": "\\\\.\\DISPLAY14",
+      "description": "Meta Virtual Monitor",
+      "flags": 0,
+      "attached": false,
+      "primary": false,
+      "modeAvailable": false,
+      "monitors": []
+    },
+    {
+      "name": "\\\\.\\DISPLAY15",
+      "description": "Meta Virtual Monitor",
+      "flags": 0,
+      "attached": false,
+      "primary": false,
+      "modeAvailable": false,
+      "monitors": []
+    },
+    {
+      "name": "\\\\.\\DISPLAY16",
+      "description": "Meta Virtual Monitor",
+      "flags": 0,
+      "attached": false,
+      "primary": false,
+      "modeAvailable": false,
+      "monitors": []
+    },
+    {
+      "name": "\\\\.\\DISPLAY17",
+      "description": "Meta Virtual Monitor",
+      "flags": 0,
+      "attached": false,
+      "primary": false,
+      "modeAvailable": false,
+      "monitors": []
+    },
+    {
+      "name": "\\\\.\\DISPLAY18",
+      "description": "Meta Virtual Monitor",
+      "flags": 0,
+      "attached": false,
+      "primary": false,
+      "modeAvailable": false,
+      "monitors": []
+    },
+    {
+      "name": "\\\\.\\DISPLAY19",
+      "description": "Meta Virtual Monitor",
+      "flags": 0,
+      "attached": false,
+      "primary": false,
+      "modeAvailable": false,
+      "monitors": []
+    }
+  ],
+  "displayLimit": "Post-restart desktop enumeration; not proof of failed window placement, driver override, VRR state or displayed cadence.",
+  "sourceMatchesPriorSeal": true,
+  "launcher": {
+    "path": "E:\\NovaCore\\tools\\NovaCore.Launcher\\bin\\Release\\net10.0-windows\\NovaCore.Launcher.exe",
+    "bytes": 162304,
+    "sha256": "53e4df6057ad941a7c72305df7e4089b2b490e0bd1e69e51b982ee80b6a44c2c"
+  }
+}

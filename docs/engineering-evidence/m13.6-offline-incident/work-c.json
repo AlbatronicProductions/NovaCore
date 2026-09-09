@@ -1,0 +1,403 @@
+{
+  "schema": 1,
+  "task": "M13.6 offline incident Work C: narrow KSA reference and installed diagnostic interfaces",
+  "date": "2026-09-08",
+  "scope": {
+    "readOnlyExceptOwnReports": true,
+    "productionEdits": 0,
+    "builds": 0,
+    "gpuRuns": 0,
+    "traceSessionsStarted": 0,
+    "sensorSamples": 0,
+    "windowsEventQueries": 0,
+    "dumpReads": 0,
+    "downloads": 0,
+    "browserCalls": 0,
+    "oldEvidenceWrites": 0,
+    "temporaryCaptureBytes": 0
+  },
+  "ksa": {
+    "version": "2026.9.7.5402+487c3f340de24c6a81037120b6d1129c045c5400",
+    "files": [
+      {
+        "path": "E:/Kitten Space Agency/KSA.dll",
+        "bytes": 4798552,
+        "sha256": "a8a5164204eed962df9d9025e99f523d9a23ee2ce6e802b18216a9da35506d2f",
+        "matchesPriorSourceReview": true
+      },
+      {
+        "path": "E:/Kitten Space Agency/Planet.Render.Core.dll",
+        "bytes": 274008,
+        "sha256": "6b9b3c3bd709bf198c6ab3ec6daaef7e468f593fb110187869a1d44272b92e3c",
+        "matchesPriorSourceReview": true
+      },
+      {
+        "path": "E:/Kitten Space Agency/Planet.Core.dll",
+        "bytes": 34904,
+        "sha256": "2823b299051b91252453acb4f1fff5543b1f5473bc6f42c8d51d4958d3159ece",
+        "matchesPriorSourceReview": true
+      }
+    ],
+    "priorEvidence": [
+      "docs/engineering-evidence/m13.6-manual-failure/work-c-source.md",
+      "docs/engineering-evidence/m13.6-manual-failure/work-c-source.json",
+      "docs/engineering-evidence/m13.6-manual-failure/ksa-history.md"
+    ],
+    "narrowComparisons": [
+      {
+        "responsibility": "FIFO presentation and per-acquired-image present semaphore",
+        "decision": "already aligned",
+        "limit": "Static policy does not measure failed-process display cadence"
+      },
+      {
+        "responsibility": "frame slots and actual image count",
+        "decision": "intentionally differ",
+        "limit": "KSA two slots do not authorize changing NovaCore shared-state/publication synchronization"
+      },
+      {
+        "responsibility": "device failure versus recoverable swapchain conditions",
+        "decision": "preserve narrow recoverable-result handling and observable fatal errors",
+        "limit": "No demonstrated successful KSA device-loss recovery path"
+      },
+      {
+        "responsibility": "completed content publication and retirement",
+        "decision": "preserve explicit completion/retirement owner, intentionally differ on coarse fallback and age rule",
+        "limit": "No weakening of NovaCore exact physical and regional-completeness contract"
+      }
+    ],
+    "alreadyReviewedHistoryLinks": [
+      {
+        "responsibility": "Windows FIFO decision",
+        "url": "https://discord.com/channels/1260011486735241329/1260112103134724146/1364835073962016849"
+      },
+      {
+        "responsibility": "compute/frame-fence ownership",
+        "url": "https://discord.com/channels/1260011486735241329/1260112103134724146/1381810057213116548"
+      },
+      {
+        "responsibility": "frame-slot/image-count separation",
+        "url": "https://discord.com/channels/1260011486735241329/1260112103134724146/1484009179244007424"
+      },
+      {
+        "responsibility": "historical Bandicam interception, not current incident cause evidence",
+        "url": "https://discord.com/channels/1260011486735241329/1260112103134724146/1407214631092752455"
+      }
+    ]
+  },
+  "installedFiles": [
+    {
+      "path": "C:/Program Files/AMD/CNext/CNext/PresentMon-x64.exe",
+      "bytes": 396560,
+      "sha256": "8b035dc90c7d664ec3dcf4a8713566e29a30622d58a7b650acb9b5d91bdd0227",
+      "helpIdentity": "PresentMon HEAD 6af680f45c64574f03ae05e2a02684e35d978065"
+    },
+    {
+      "path": "C:/Program Files/AMD/CNext/CNext/RadeonSoftware.exe",
+      "bytes": 35929352,
+      "sha256": "e4cc8a3f8be90ed370ace987aa802780c83cdf9c2eb0e1b60e892b581e85c8d8",
+      "fileVersion": "10,01,02,2068",
+      "productVersion": "25.10.45.05;2384340;25.10.45.05;AMD-Radeon-Driver/drivers:6af680f45c64574f03ae05e2a02684e35d978065",
+      "isLoadedDriverProof": false
+    },
+    {
+      "path": "C:/Windows/System32/atiadlxx.dll",
+      "bytes": 2194960,
+      "sha256": "2df5edac9f02578226db608a13f412ec750330da6348251ae526294f3768f3e8",
+      "fileVersion": "7.25.10.1590",
+      "sensorInterfaceQualified": false
+    },
+    {
+      "path": "C:/Windows/System32/amdadlx64.dll",
+      "bytes": 5222408,
+      "sha256": "302f9718f4aab9c33545c3295f5f72f326ed31f5fd637f475e73ab27187b3b33",
+      "fileVersion": "1.4.0.121",
+      "sensorInterfaceQualified": false
+    },
+    {
+      "path": "C:/Windows/System32/wpr.exe",
+      "bytes": 389120,
+      "sha256": "bd50bb8bd641516e7759c0ec4e9e99ea8a2fc5c821c524d6ede33136deadc87a"
+    },
+    {
+      "path": "C:/Windows/System32/logman.exe",
+      "bytes": 118784,
+      "sha256": "a6325762ed7725748df62d9bf3478596da03aa8ce0a9eb8e07087eebfa52cdac"
+    },
+    {
+      "path": "C:/Windows/System32/typeperf.exe",
+      "bytes": 81920,
+      "sha256": "91af8ea302e2d8e2bc0e8623f59412b9994e4617d160cd3a0af22da9acb24ca0"
+    }
+  ],
+  "interfaceEvidence": {
+    "presentMonHelpOnly": {
+      "command": "C:/Program Files/AMD/CNext/CNext/PresentMon-x64.exe -help",
+      "targeting": [
+        "--process_id",
+        "--process_name",
+        "--exclude"
+      ],
+      "output": [
+        "--output_file",
+        "--output_stdout",
+        "--qpc_time",
+        "--qpc_time_ms",
+        "--date_time",
+        "--no_console_stats"
+      ],
+      "limits": [
+        "--timed",
+        "--terminate_after_timed",
+        "--terminate_on_proc_exit",
+        "--session_name"
+      ],
+      "offlineEtlInput": "--etl_file",
+      "displayGpuInputDefaultTracking": true,
+      "droppedPresentsPreservedByOmitting": "--exclude_dropped",
+      "byteLimitOptionEstablished": false,
+      "livePermissionVerified": false,
+      "actualCsvSchemaVerified": false,
+      "sessionStarted": false,
+      "helpExitCode": 1,
+      "helpExitCodeIsCaptureFailure": false
+    },
+    "wpr": {
+      "query": "wpr -profiles",
+      "relevantProfiles": [
+        "GPU",
+        "DesktopComposition",
+        "Power",
+        "Thermal"
+      ],
+      "profilesAreSensorProof": false
+    },
+    "dxgKrnl": {
+      "query": "logman query providers Microsoft-Windows-DxgKrnl",
+      "guid": "{802EC45A-1E99-4B83-9920-87C98277BA9D}",
+      "relevantKeywords": {
+        "Resource": "0x40",
+        "Memory": "0x80",
+        "DriverEvents": "0x400",
+        "HistoryBuffer": "0x4000",
+        "GPUScheduler": "0x8000",
+        "GPUVA": "0x100000",
+        "Diagnostics": "0x400000",
+        "HardwareSchedulingLog": "0x4000000",
+        "Present": "0x8000000",
+        "PerfData": "0x20000000"
+      },
+      "isEventHistoryQuery": false,
+      "minimalDecoderRecipeQualified": false
+    },
+    "logmanTraceHelp": {
+      "query": "logman create trace -?",
+      "boundedOptions": [
+        "-f bincirc",
+        "-ct perf",
+        "-ft",
+        "-bs",
+        "-nb",
+        "-rf",
+        "-o",
+        "-max",
+        "-ets"
+      ],
+      "sessionCreated": false
+    },
+    "counterDefinitions": [
+      {
+        "set": "GPU Engine",
+        "fields": [
+          "Utilization Percentage",
+          "Running Time"
+        ],
+        "instancesAndSamplesRead": false
+      },
+      {
+        "set": "GPU Adapter Memory",
+        "fields": [
+          "Shared Usage",
+          "Dedicated Usage",
+          "Total Committed"
+        ],
+        "instancesAndSamplesRead": false
+      },
+      {
+        "set": "GPU Process Memory",
+        "fields": [
+          "Shared Usage",
+          "Dedicated Usage",
+          "Non Local Usage",
+          "Local Usage",
+          "Total Committed"
+        ],
+        "instancesAndSamplesRead": false
+      },
+      {
+        "set": "Thermal Zone Information",
+        "fields": [
+          "High Precision Temperature",
+          "Throttle Reasons",
+          "% Passive Limit",
+          "Temperature"
+        ],
+        "amdGpuIdentityProven": false,
+        "instancesAndSamplesRead": false
+      },
+      {
+        "set": "Power Meter",
+        "fields": [
+          "Power Budget",
+          "Power"
+        ],
+        "amdGpuIdentityProven": false,
+        "instancesAndSamplesRead": false
+      }
+    ],
+    "boundedDiscovery": {
+      "locations": [
+        "PATH",
+        "matching C:/Program Files and C:/Program Files (x86) directories",
+        "AMD trees",
+        "Windows Kits",
+        "matching Downloads filenames",
+        "matching E:/NovaCore/build and tools filenames"
+      ],
+      "notFound": [
+        "standalone HWiNFO",
+        "GPU-Z",
+        "CapFrameX",
+        "Afterburner",
+        "uProf",
+        "amd-smi"
+      ],
+      "wholeDiskAbsenceProof": false,
+      "qualifiedAmdSensorStream": false
+    }
+  },
+  "nativeEvidence": {
+    "currentContractAudit": "docs/engineering-evidence/m13.6-offline-incident/work-b.md",
+    "sources": [
+      "src/NovaCore.Platform/Logging.cs",
+      "samples/NovaCore.Triangle/Program.cs",
+      "native/NovaCore.Native/NovaCoreNative.cpp",
+      "tools/NovaCore.Launcher/NovaCoreProcessLauncher.cs"
+    ],
+    "existing": [
+      "startup runtime/native/shader/terrain fingerprints",
+      "strict VkResult and Vulkan validation callbacks",
+      "camera category",
+      "NCSM1 transition/publication/owner logs",
+      "bounded startup submission trace",
+      "shutdown timing/pacing aggregates"
+    ],
+    "missing": [
+      "durable continuous before-and-after operation breadcrumbs",
+      "failed-process memory-allocation identity",
+      "actual selected presentation/display identity in a correlated incident record",
+      "same-frame camera/publication/submission join",
+      "live-resource trend",
+      "qualified sensor stream"
+    ],
+    "normalLauncherRedirectsStdout": false,
+    "absenceOfValidationMessageProvesCorrectness": false
+  },
+  "proposedProtocol": {
+    "state": "DESIGN ONLY - HELD FOR PROJECT CONTROL",
+    "variant": "Lead chooses one exact variant after available offline classification; no automatic baseline/candidate pair",
+    "route": "Florida Launch Site / Fullscreen Native / Normal Diagnostics",
+    "permissionToRun": false,
+    "performanceAcceptance": false,
+    "manualFiveMinuteAcceptance": false,
+    "requiredPreflight": [
+      "source/deployment/PID/start-time identity",
+      "actual driver/adapter/HWND/display mapping",
+      "effective ambient layers/modules",
+      "PresentMon permission and delivered schema",
+      "private bounded breadcrumb recorder",
+      "independent CPU supervisor",
+      "qualified AMD telemetry if required as a safety gate"
+    ],
+    "presentMonCommandExecuted": false,
+    "presentMonTimingOrigin": "collection start; not assumed equal to first displayed frame",
+    "absoluteProcessLifetimeCeilingSeconds": 180,
+    "phasesSeconds": {
+      "nearFlorida": 45,
+      "gradualZoomOut": 45,
+      "returnAndHold": 30
+    },
+    "exactCameraReplayClaim": false,
+    "qpcUtcAnchorRequired": true,
+    "proposedRing": {
+      "preallocatedSlots": 2,
+      "bytesPerSlot": 4194304,
+      "totalBytes": 8388608,
+      "nonblockingObserverFlush": true,
+      "journalLagLimitSeconds": 1
+    },
+    "counterSampleHz": 1,
+    "independentProgressAbortSeconds": 1,
+    "gracefulCloseBudgetSeconds": 2,
+    "forcedTermination": "At most once for verified PID/start-time/path if approved, only while OS remains responsive",
+    "outputCapBytes": 67108864,
+    "outputPartitionBytes": {
+      "breadcrumbs": 8388608,
+      "csv": 33554432,
+      "scalarSensorSystemSummaries": 25165824
+    },
+    "outputCapEnforcer": "independent supervisor; PresentMon has no established CLI byte limit",
+    "permanentCurrentPackageCapBytes": 4194304,
+    "stopCriteria": [
+      "first Vulkan error or device loss",
+      "invalid/missing/overlapping/stale terrain owner",
+      "unexpected recreation loop",
+      "visible black/flicker/input failure",
+      "qualified sensor warning",
+      "loss of required collector stream",
+      "one second without progress after first present",
+      "output cap",
+      "absolute lifetime cap",
+      "user stop"
+    ],
+    "noActions": [
+      "automatic retry",
+      "automatic reboot",
+      "GPU reset",
+      "TDR or global registry change",
+      "quality or FPS policy change",
+      "broad concurrent WPR trace",
+      "raw frame/HDR/D32/geometry capture",
+      "termination of unrelated trace sessions",
+      "full ETL capture"
+    ],
+    "doesNotGuaranteeHardHangAvoidance": true,
+    "limitations": [
+      "kernel/driver/system stall can stop watchdog and disk flush",
+      "process termination may not cancel GPU work immediately",
+      "lost tail remains missing",
+      "one-second progress stop is an abort policy, not fault attribution",
+      "short pass does not certify the approximate five-minute failure condition",
+      "sensor and schema availability remain unqualified"
+    ],
+    "authority": "docs/engineering-evidence/m13.6-offline-incident/retest-protocol.md",
+    "presentMonOptionsForReview": [
+      "--process_id <verified-runtime-pid>",
+      "--output_file <new-current-ticket-run>/present.csv",
+      "--qpc_time",
+      "--session_name NovaCore-M13_6-<unique-run-guid>",
+      "--timed 180",
+      "--terminate_after_timed",
+      "--terminate_on_proc_exit",
+      "--no_console_stats"
+    ],
+    "startupHealthyTerrainCeilingSeconds": 60,
+    "phasesLimitedByRemainingAbsoluteBudget": true,
+    "completedOperationAbortMilliseconds": 500,
+    "consecutiveCpuFramesAbort": {
+      "count": 3,
+      "millisecondsEach": 250
+    },
+    "mockChildObserverQualificationRequired": true
+  },
+  "conclusion": "Installed interfaces support a bounded design, but live permission/schema, qualified AMD sensors and durable private breadcrumbs remain preflight gaps. No KSA-derived correction or retest authorization follows."
+}

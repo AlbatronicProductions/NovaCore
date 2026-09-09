@@ -1,0 +1,312 @@
+{
+  "schema": 1,
+  "review": "Work C: post-M13.5 narrow KSA responsibility review",
+  "observedUtc": "2026-09-08T03:19:13.189901+00:00",
+  "novaCoreHead": "d4baab6940a57a46e478b98e36f5e45d1c4b558f",
+  "ksaVersion": "2026.9.7.5402",
+  "ksaProductVersion": "2026.9.7.5402+487c3f340de24c6a81037120b6d1129c045c5400",
+  "priorReference": "docs/engineering-evidence/m13-final-whole-frame-causality/work-c.json",
+  "files": [
+    {
+      "path": "E:/Kitten Space Agency/KSA.dll",
+      "bytes": 4798552,
+      "sha256": "a8a5164204eed962df9d9025e99f523d9a23ee2ce6e802b18216a9da35506d2f",
+      "priorSha256": "a8a5164204eed962df9d9025e99f523d9a23ee2ce6e802b18216a9da35506d2f",
+      "unchanged": true
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/assembly-source/Properties/AssemblyInfo.cs",
+      "bytes": 556,
+      "sha256": "ff5516e41874502b182b035197a11c3f3dfc4e6d309ee3186bbbad09c1834bf5",
+      "priorSha256": "ff5516e41874502b182b035197a11c3f3dfc4e6d309ee3186bbbad09c1834bf5",
+      "unchanged": true
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/source/KSA.PlanetRenderer.cs",
+      "bytes": 116885,
+      "sha256": "5ce37c334045f9b5cba9a450a6accc454444e8d20327b9778b98740cf7a64a50",
+      "priorSha256": "5ce37c334045f9b5cba9a450a6accc454444e8d20327b9778b98740cf7a64a50",
+      "unchanged": true
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/source/KSA.Program.cs",
+      "bytes": 190778,
+      "sha256": "d11020c5280417d1a02ef35c5d13bad01607ddd5a21a3302e52db136a872557e",
+      "priorSha256": "d11020c5280417d1a02ef35c5d13bad01607ddd5a21a3302e52db136a872557e",
+      "unchanged": true
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/assembly-source/KSA/PlanetFrustumCulling.cs",
+      "bytes": 12197,
+      "sha256": "92f55e123ac3af9fef631df56f2db2992e366b70df711eb959273090e62e75c5",
+      "priorSha256": "92f55e123ac3af9fef631df56f2db2992e366b70df711eb959273090e62e75c5",
+      "unchanged": true
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/source/KSA.Rendering.CelestialTextureStreamer.cs",
+      "bytes": 33788,
+      "sha256": "433574981d77a48b354baddbadab6a354411e53a67535696a6bb4b8b33ff3ec7",
+      "priorSha256": "433574981d77a48b354baddbadab6a354411e53a67535696a6bb4b8b33ff3ec7",
+      "unchanged": true
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/source/KSA.Rendering.StreamingUploader.cs",
+      "bytes": 16757,
+      "sha256": "bf250fc959cf32b3fae471b6a0101f41b466856ecde7a7985fbe3a1ccd922602",
+      "priorSha256": "bf250fc959cf32b3fae471b6a0101f41b466856ecde7a7985fbe3a1ccd922602",
+      "unchanged": true
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/source/KSA.Rendering.RetiredResourceQueue.cs",
+      "bytes": 2698,
+      "sha256": "3dcdaf9312ee23e4fb853b7a6962823ae103ab8b3c49a7b8316beecd39999e28",
+      "priorSha256": "3dcdaf9312ee23e4fb853b7a6962823ae103ab8b3c49a7b8316beecd39999e28",
+      "unchanged": true
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/assembly-source/KSA.Rendering/FreeImagePool.cs",
+      "bytes": 1514,
+      "sha256": "247dcc1917f565b8591f929e75281db70bb55bfe2283d7e64ed14a26b2b38376",
+      "priorSha256": "247dcc1917f565b8591f929e75281db70bb55bfe2283d7e64ed14a26b2b38376",
+      "unchanged": true
+    },
+    {
+      "path": "E:/Kitten Space Agency/Content/Core/Shaders/Planet/Planet.frag",
+      "bytes": 19290,
+      "sha256": "69173727f94b0a85e91ef5a9989503144d614ffb2a165f920ada722c9253ae20",
+      "priorSha256": "69173727f94b0a85e91ef5a9989503144d614ffb2a165f920ada722c9253ae20",
+      "unchanged": true
+    },
+    {
+      "path": "E:/Kitten Space Agency/Content/Core/Shaders/Planet/PlanetTessControl.tesc",
+      "bytes": 3117,
+      "sha256": "52804d08ed0e42853b008e407e75e47a6113a646f664e8fe4b93d8b713b861c9",
+      "priorSha256": "52804d08ed0e42853b008e407e75e47a6113a646f664e8fe4b93d8b713b861c9",
+      "unchanged": true
+    },
+    {
+      "path": "E:/Kitten Space Agency/Content/Core/Shaders/Planet/PlanetTessEvaluation.tese",
+      "bytes": 6914,
+      "sha256": "80c3168561c468d3b255d635b31c1e0163ed8331c21e1340b8d490525bc93b27",
+      "priorSha256": "80c3168561c468d3b255d635b31c1e0163ed8331c21e1340b8d490525bc93b27",
+      "unchanged": true
+    },
+    {
+      "path": "E:/Kitten Space Agency/Content/Core/Shaders/Planet/TessellationFuncs.glsl",
+      "bytes": 5125,
+      "sha256": "308ee11e81ec65757c4514e485dfc6ffbf7cb2fb76e6467ca267e6980eb4172e",
+      "priorSha256": "308ee11e81ec65757c4514e485dfc6ffbf7cb2fb76e6467ca267e6980eb4172e",
+      "unchanged": true
+    },
+    {
+      "path": "E:/Kitten Space Agency/Content/Core/Shaders/Common/Planet.glsl",
+      "bytes": 33189,
+      "sha256": "c4c5f1cbf5277fb0642997fd9f5da0fd8565588beba0d9f7bfe40636539a94ad",
+      "priorSha256": "c4c5f1cbf5277fb0642997fd9f5da0fd8565588beba0d9f7bfe40636539a94ad",
+      "unchanged": true
+    },
+    {
+      "path": "E:/Kitten Space Agency/Content/Core/Shaders/Planet/Culling/PlanetFrustumCulling.comp",
+      "bytes": 2973,
+      "sha256": "4a1617f6ce1660aa78a373d79f4c97022c325525a4f694e100e22aad7c2f23e5",
+      "priorSha256": "4a1617f6ce1660aa78a373d79f4c97022c325525a4f694e100e22aad7c2f23e5",
+      "unchanged": true
+    },
+    {
+      "path": "E:/Kitten Space Agency/Content/Core/Shaders/Culling/Culling.glsl",
+      "bytes": 3409,
+      "sha256": "869739acc53279a7494143c2bc5d88d8063daafe96e6b4b0930b8cd5d509ef88",
+      "priorSha256": "869739acc53279a7494143c2bc5d88d8063daafe96e6b4b0930b8cd5d509ef88",
+      "unchanged": true
+    },
+    {
+      "path": "E:/NovaCore/native/NovaCore.Native/shaders/production_terrain_material.glsl",
+      "bytes": 17593,
+      "sha256": "8b936d826431278cd05f0fc9e9daeab08e97cecd56e752bb7cc26863e264c49f",
+      "priorSha256": "8b936d826431278cd05f0fc9e9daeab08e97cecd56e752bb7cc26863e264c49f",
+      "unchanged": true
+    },
+    {
+      "path": "E:/NovaCore/native/NovaCore.Native/shaders/planetary_production.frag",
+      "bytes": 18873,
+      "sha256": "c12377419c69f7060c80ea9a0ace21df7d5f9969b7aec336d36f02f85c6765c2",
+      "priorSha256": "c12377419c69f7060c80ea9a0ace21df7d5f9969b7aec336d36f02f85c6765c2",
+      "unchanged": true
+    },
+    {
+      "path": "E:/NovaCore/native/NovaCore.Native/shaders/production_nested_scale_mesh_cull.comp",
+      "bytes": 9665,
+      "sha256": "611c3670b5800cc3ac352bed5d326eb59ef1abba6ba2cc5519337967703b5550",
+      "priorSha256": "611c3670b5800cc3ac352bed5d326eb59ef1abba6ba2cc5519337967703b5550",
+      "unchanged": true
+    },
+    {
+      "path": "E:/NovaCore/native/NovaCore.Native/shaders/production_nested_scale_mesh_incoming_cull.comp",
+      "bytes": 9218,
+      "sha256": "7dc18dfb540a3be29bc90671f49675fcc5a6d6d13b6ba05282a6ba900b3f1bd4",
+      "priorSha256": "7dc18dfb540a3be29bc90671f49675fcc5a6d6d13b6ba05282a6ba900b3f1bd4",
+      "unchanged": true
+    },
+    {
+      "path": "E:/NovaCore/native/NovaCore.Native/NovaCoreNative.cpp",
+      "bytes": 288812,
+      "sha256": "f95d69d15257864b612391d8b35e8b552f8c5d80b6937ec44fef17d9a18dfe64",
+      "priorSha256": "edb58bb76f4b1f2b9232a065c75303d21b5e656fe62733bfcd664d835f24e2aa",
+      "unchanged": false
+    },
+    {
+      "path": "E:/NovaCore/native/NovaCore.Native/RegionalPhysicalPreparation.inl",
+      "bytes": 6695,
+      "sha256": "437cb06e864bfbf511df5ea477168a9b4c81247e06d24ac4db27e86cca948c79",
+      "priorSha256": "03ba49c5e0067b7f11739419ad290286a5c3467e3648c423d8edc9c372fedbbf",
+      "unchanged": false
+    },
+    {
+      "path": "E:/NovaCore/native/NovaCore.Native/RegionalPhysicalResidency.inl",
+      "bytes": 13059,
+      "sha256": "0fe2767c7ece2470cb2a6b0d83c0cf848debc5b1563173c7b6650339e71638fd",
+      "priorSha256": "0fe2767c7ece2470cb2a6b0d83c0cf848debc5b1563173c7b6650339e71638fd",
+      "unchanged": true
+    },
+    {
+      "path": "E:/NovaCore/native/NovaCore.Native/MappedBufferMemory.h",
+      "bytes": 2014,
+      "sha256": "0311e59b639eddb556130d222babfb01a647e529c71c216e25040147d4040758",
+      "priorSha256": null,
+      "unchanged": null
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/source/KSA.Rendering.TextureStreamRequest.cs",
+      "bytes": 676,
+      "sha256": "25719c44ba54912e5d415d589354c33add234e310223c69f9f56cf8d9a5ac34a",
+      "priorSha256": null,
+      "unchanged": null
+    }
+  ],
+  "ksaFingerprintCount": 16,
+  "ksaChangedFingerprints": 0,
+  "productionFilesReadOnly": true,
+  "builds": 0,
+  "gpuRuns": 0,
+  "freshDecompilation": false,
+  "discordUsed": false,
+  "scope": "Narrow current candidates; completed M13.5 placement excluded",
+  "provenMeaningfulGpuOpportunity": false,
+  "provenMeaningfulCpuOpportunity": false,
+  "cpuCandidate": {
+    "name": "Coherent host-cached memory preference for CPU-read shared terrain keys",
+    "reportedEnclosingScopeMs": [
+      1.92,
+      1.96
+    ],
+    "measurementStatus": "Queue cost isolated; prototype recovery pending",
+    "kind": "CPU display-frame responsibility",
+    "gpuSavingClaimed": false,
+    "ksaEquivalent": "CPU-owned per-map/request metadata and polling actual in-flight batches",
+    "noEquivalentMappedGpuKeyScannerFoundInReviewedOwners": true,
+    "cachedMirrorImplementationProven": false,
+    "baselineQueueEvidence": [
+      {
+        "path": "docs/engineering-evidence/m13-final-exit/poll-florida.json",
+        "sha256": "668ff5002e9db00c829286628faa895101a2058fb1465b104c1b0939e1547ec3",
+        "window": [
+          182,
+          281
+        ],
+        "n": 100,
+        "queueConventionalMedianMs": 1.9143,
+        "queueNearestRankMedianMs": 1.9139,
+        "queueP95Ms": 2.0203,
+        "queueP99Ms": 2.0765,
+        "requests": [
+          0.0
+        ],
+        "uploads": [
+          126.0
+        ],
+        "pending": [
+          0.0
+        ],
+        "records": [
+          126.0
+        ]
+      },
+      {
+        "path": "docs/engineering-evidence/m13-final-exit/poll-orbital.json",
+        "sha256": "f4fee342386b95614cba263e5f596bef403d81df3b113791a391eff7674a6761",
+        "window": [
+          82,
+          181
+        ],
+        "n": 100,
+        "queueConventionalMedianMs": 1.8865,
+        "queueNearestRankMedianMs": 1.8862,
+        "queueP95Ms": 1.97,
+        "queueP99Ms": 1.9866,
+        "requests": [
+          0.0
+        ],
+        "uploads": [
+          126.0
+        ],
+        "pending": [
+          0.0
+        ],
+        "records": [
+          126.0
+        ]
+      }
+    ],
+    "keyBufferBytes": 393216,
+    "currentMemory": {
+      "type": 1,
+      "flagsDecimal": 6,
+      "heap": 0,
+      "required": "HOST_VISIBLE|HOST_COHERENT"
+    },
+    "compatibleCachedMemory": {
+      "type": 3,
+      "flagsDecimal": 14,
+      "heap": 0,
+      "properties": "HOST_VISIBLE|HOST_COHERENT|HOST_CACHED"
+    },
+    "preserveAllPollingAndProducerLifetime": true,
+    "newApplicationKeyMirror": false,
+    "ksaHostCachedSelectorImplementationProven": false,
+    "ksaClassification": {
+      "adapt": "placement according to actual producer/consumer role",
+      "intentionallyDiffer": "preserve NovaCore GPU-shared key/readback contract versus KSA CPU-owned request state"
+    }
+  },
+  "boundaries": [
+    {
+      "responsibility": "positive material detail",
+      "classification": "required output; no exact KSA replacement"
+    },
+    {
+      "responsibility": "hardware tessellation",
+      "classification": "required geometric/future-fidelity capacity"
+    },
+    {
+      "responsibility": "visibility and regional readiness",
+      "classification": "required/mixed; KSA does not establish exact replacement or new payoff"
+    },
+    {
+      "responsibility": "terrain GPU placement",
+      "classification": "completed banked M13.5; excluded from new payoff"
+    },
+    {
+      "responsibility": "production request inspection",
+      "classification": "isolated recurring CPU cost; coherent host-cached key allocation prototype, recovery and behavioral proof pending"
+    }
+  ],
+  "decision": "Support one bounded CPU-read terrain-key placement prototype preserving every scan/state transition; no independent acceptance or closure claim.",
+  "limits": [
+    "No KSA timings were measured.",
+    "No claim that all KSA subsystems avoid readback.",
+    "No CPU milliseconds subtracted from GPU frame budget.",
+    "No broad KSA research or current-state doc cleanup performed.",
+    "Isolated queue cost is not itself prototype recovery; no CPU time is subtracted from GPU budget."
+  ],
+  "ksaAdditionalCurrentFingerprint": "KSA.Rendering.TextureStreamRequest.cs"
+}

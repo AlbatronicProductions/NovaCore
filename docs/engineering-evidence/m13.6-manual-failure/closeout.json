@@ -1,0 +1,106 @@
+{
+  "capturedUtc": "2026-09-08T04:47:17.172910+00:00",
+  "failureClassification": "INSUFFICIENT EVIDENCE",
+  "confirmedManifestation": "Windows LiveKernelEvent141 display-engine timeout; initiating cause unresolved",
+  "overRenderingClassification": "INSUFFICIENT EVIDENCE",
+  "leadJudgment": "ESCALATE TO PROJECT CONTROL",
+  "candidateStatus": "M13.6 CANDIDATE — FOLLOW-UP REQUIRED",
+  "refs": {
+    "HEAD": "d4baab6940a57a46e478b98e36f5e45d1c4b558f",
+    "main": "d4baab6940a57a46e478b98e36f5e45d1c4b558f",
+    "origin/main": "d4baab6940a57a46e478b98e36f5e45d1c4b558f",
+    "m13.5-local-gpu-terrain-working-data": "75712e4bc990e11c3072a37299c55187cc30e0a1",
+    "m13.5-local-gpu-terrain-working-data^{}": "d4baab6940a57a46e478b98e36f5e45d1c4b558f"
+  },
+  "branch": "codex/m13-final-exit",
+  "baselineSourceAndTrackedDiffPreserved": true,
+  "priorPackageFilesPreserved": 108,
+  "deploymentShadersAssetsAndLauncherPreserved": true,
+  "newProductionChanges": 0,
+  "gpuRuns": 0,
+  "builds": 0,
+  "diagnosticRawBytes": 0,
+  "dumpBytesCopied": 0,
+  "protectedIndexEmpty": true,
+  "diffCheck": {
+    "exitCode": 0,
+    "warnings": "warning: in the working copy of 'native/NovaCore.Native/MappedBufferMemory.h', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'native/NovaCore.Native/MappedBufferMemoryTests.cpp', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'native/NovaCore.Native/NovaCoreNative.cpp', LF will be replaced by CRLF the next time Git touches it\n"
+  },
+  "gitStatus": " M native/NovaCore.Native/MappedBufferMemory.h\n M native/NovaCore.Native/MappedBufferMemoryTests.cpp\n M native/NovaCore.Native/NovaCoreNative.cpp\n?? docs/engineering-evidence/m13-final-exit/\n?? docs/engineering-evidence/m13.6-manual-failure/\n",
+  "permanentBudgetBytes": 4194304,
+  "disposedBytes": 0,
+  "disposableRemainingBytes": 0,
+  "storageMeaning": "Created/retained denote final new-file footprint, not cumulative rewrite I/O. No disposable files or bulk payloads were created.",
+  "files": {
+    "identity.json": {
+      "bytes": 36028,
+      "allocated": 36864,
+      "sha256": "e57d4d1065cbf661ee8a725ff5bf7c1c87ca08778529f425ee0eb8d276130fbf"
+    },
+    "identity.py": {
+      "bytes": 5831,
+      "allocated": 8192,
+      "sha256": "1f54ca5e821f7d3cd1a92e94896153a1bd3967f35dc6b88ef4fe23777fd3e8e1"
+    },
+    "ksa-history.md": {
+      "bytes": 11244,
+      "allocated": 12288,
+      "sha256": "6d9ad5c0b32febd3fd8072c1f968aaaf343bde1251cb63ca23a1b737c992690a"
+    },
+    "README.md": {
+      "bytes": 17283,
+      "allocated": 20480,
+      "sha256": "39dcd0427b6a137af35fb4f6006e65d846e896916d48171c4b9311c61272d796"
+    },
+    "verify-a.md": {
+      "bytes": 8274,
+      "allocated": 12288,
+      "sha256": "54bdbe59601104a5a2ea1e3bc84d19cbf2df92489b3522eba07f35924f7989c5"
+    },
+    "verify-b.md": {
+      "bytes": 12444,
+      "allocated": 16384,
+      "sha256": "391e496467b2b90cbfd6fd29d286440b21712aeaf0bbc48b4bae9979d9421a9b"
+    },
+    "verify.py": {
+      "bytes": 5715,
+      "allocated": 8192,
+      "sha256": "1d6eed3ff11c2f822c5026b478f35aba2190c22e4f62c314c4e160d62547d428"
+    },
+    "work-a.json": {
+      "bytes": 47009,
+      "allocated": 49152,
+      "sha256": "f2db58749078f2b59131e046a93551ae1a8a8d3a324c8e23c458b922c733bcfc"
+    },
+    "work-a.md": {
+      "bytes": 10408,
+      "allocated": 12288,
+      "sha256": "14c5494146a9d7e7ba96680cfad91b7657452f7641072f6ca075d2be9b1f0228"
+    },
+    "work-b.json": {
+      "bytes": 41825,
+      "allocated": 45056,
+      "sha256": "53c87be77c24dca56687bdf25b7d580a332d732beaafcc3e87c1d70db25d29be"
+    },
+    "work-b.md": {
+      "bytes": 20272,
+      "allocated": 20480,
+      "sha256": "1d487be7c6eb65adb4db122c2e36194b3ce9fc24d9b2b5dc196e5005f6f42e86"
+    },
+    "work-c-source.json": {
+      "bytes": 25742,
+      "allocated": 28672,
+      "sha256": "90904ded45b313d2a7fda800412b44c2630f435a23799811d94b72a6e69754f2"
+    },
+    "work-c-source.md": {
+      "bytes": 14184,
+      "allocated": 16384,
+      "sha256": "a68856a288e577f904bdb87f8f1bea814203c2ef76f49b7968dfc497ac376abf"
+    }
+  },
+  "fileCount": 14,
+  "createdLogicalBytes": 260680,
+  "retainedLogicalBytes": 260680,
+  "retainedAllocatedBytes": 294912,
+  "remainingPermanentLogicalBytes": 260680
+}

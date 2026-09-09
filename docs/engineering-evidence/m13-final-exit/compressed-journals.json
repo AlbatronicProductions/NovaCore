@@ -1,0 +1,349 @@
+{
+  "lossless": true,
+  "files": [
+    {
+      "source": "cached-florida.json",
+      "destination": "cached-florida.json.gz",
+      "sourceBytes": 181916,
+      "compressedBytes": 31850,
+      "sourceSha256": "130f2eb4776834b6c75ea441b78fab1c833afbd73ae840c468a53fdd4dd71ea3",
+      "compressedSha256": "6b3e914fa83ec1364ea0ad87d9f59069f501691bc5ed55f721b988f49d5ecc7f"
+    },
+    {
+      "source": "cached-full.json",
+      "destination": "cached-full.json.gz",
+      "sourceBytes": 1247262,
+      "compressedBytes": 188167,
+      "sourceSha256": "6f07bd8ccc88bc92c240f032b7839d0ec43038a6d55754eb548584c0a32ab4c4",
+      "compressedSha256": "7b9089c5f0804c3078aa58e348e600f5d7b980fead2a7bbc400284b5bd36280b"
+    },
+    {
+      "source": "cached-orbital.json",
+      "destination": "cached-orbital.json.gz",
+      "sourceBytes": 142925,
+      "compressedBytes": 23003,
+      "sourceSha256": "32daf67ca2f135031ebf05de068b1ce6fba3fb3996be0f7e27809e616e3ad231",
+      "compressedSha256": "9534bda5860d10ef5c3c74615c1cf2c7a2cffd1f81eaf0b665c00492232c4a69"
+    },
+    {
+      "source": "cached-regional.json",
+      "destination": "cached-regional.json.gz",
+      "sourceBytes": 631119,
+      "compressedBytes": 102191,
+      "sourceSha256": "d2bd0a01bb2d3264c5210dda361b4bcd1404b6f3b608d032db73ae9e57a291b9",
+      "compressedSha256": "cf102c43d44af8465563c5e4f523419d47f5da6990d1f09d4917f392c24523c0"
+    },
+    {
+      "source": "cached-repeat-florida.json",
+      "destination": "cached-repeat-florida.json.gz",
+      "sourceBytes": 181675,
+      "compressedBytes": 31560,
+      "sourceSha256": "c12cff58c9c52f571a9f081bb430930ff04ce5a31b230a80d0f70b2dfe1946a3",
+      "compressedSha256": "e14beef4586389b0716db412b7d2b1678001884be40b03f3e651a64e1bfc042b"
+    },
+    {
+      "source": "cached-repeat-orbital.json",
+      "destination": "cached-repeat-orbital.json.gz",
+      "sourceBytes": 143045,
+      "compressedBytes": 22945,
+      "sourceSha256": "264b573a58e0ca8ea48fc2061356868b645fbc1250978f262a2da58e75c0bcd2",
+      "compressedSha256": "5c44013f161de511249f475f93f86ffc34b04079ea23624bbcad613440eda2c9"
+    },
+    {
+      "source": "candidate-cpu-florida.json",
+      "destination": "candidate-cpu-florida.json.gz",
+      "sourceBytes": 143610,
+      "compressedBytes": 29826,
+      "sourceSha256": "8bb377d43900b0392d8fc4d0dfde36e2d4b1d943fbe0bab17088e48d4d380069",
+      "compressedSha256": "7905404468ee30ee33995650e66b51525d6503bb9e53794e6ebeeda12d089824"
+    },
+    {
+      "source": "candidate-cpu-inland.json",
+      "destination": "candidate-cpu-inland.json.gz",
+      "sourceBytes": 126478,
+      "compressedBytes": 23817,
+      "sourceSha256": "cf0f779ed682dce6124c39f6d63923b6bd925436b5cb16f950c1dcd17fa9320b",
+      "compressedSha256": "dd721353fe15dab8402f73c4337616c678f01250a1d9ee9bb784056223812f9f"
+    },
+    {
+      "source": "candidate-dynamic-full.json",
+      "destination": "candidate-dynamic-full.json.gz",
+      "sourceBytes": 1060054,
+      "compressedBytes": 181114,
+      "sourceSha256": "6981a241787e612ab9b93f6ce5df9a33cf504ce6bc4ddfd98ed3419b8b41538e",
+      "compressedSha256": "b8718b324c49a3ed19b08bb98dba1f01ae3624f9eb39d1dc8a680b8fa312e464"
+    },
+    {
+      "source": "candidate-dynamic-regional.json",
+      "destination": "candidate-dynamic-regional.json.gz",
+      "sourceBytes": 542212,
+      "compressedBytes": 97303,
+      "sourceSha256": "cd019be24c122f67dda2f86d3fab4d37e5c8fe2c99c4a1fc1b945d7e1d5ace65",
+      "compressedSha256": "3f78e9c93ce4ee2566dfc5b113505c305b755f696e0af274e06c208139640c86"
+    },
+    {
+      "source": "candidate-dynamic-warp.json",
+      "destination": "candidate-dynamic-warp.json.gz",
+      "sourceBytes": 381968,
+      "compressedBytes": 69086,
+      "sourceSha256": "a68b35ca888103224ae13243e99cef871d1d8e01529e2dcc8f21bd4651184119",
+      "compressedSha256": "feb6672d0e24b7b1b12cd326ca0774796658d853e8e7bccb448475fc54428335"
+    },
+    {
+      "source": "candidate-florida-capture.json",
+      "destination": "candidate-florida-capture.json.gz",
+      "sourceBytes": 144603,
+      "compressedBytes": 30456,
+      "sourceSha256": "b25d1beaa1ac7400165fbde740dfaf74a289b7120200a821c842e458db87e54d",
+      "compressedSha256": "0f76751ba9f93cd292db9120fe6ae38f3e87e371a998e87f6539a8fa5cc75032"
+    },
+    {
+      "source": "candidate-inland-capture.json",
+      "destination": "candidate-inland-capture.json.gz",
+      "sourceBytes": 127103,
+      "compressedBytes": 24625,
+      "sourceSha256": "88a426fde04e345515ecb3151e0d02e04d3b3f73f5bc34e3138dbfcb450f2095",
+      "compressedSha256": "f99556b30fd7dafc17f457e43e4a3cc5b4737dea336d414f29f750015ffec22e"
+    },
+    {
+      "source": "control-full.json",
+      "destination": "control-full.json.gz",
+      "sourceBytes": 221242,
+      "compressedBytes": 24149,
+      "sourceSha256": "0e7c3772d41b7c3cdc41699b58ec8569f032f6ab5e84df61e62bf1d084ae392d",
+      "compressedSha256": "6b62bff85f140ab25e46bbeb1d1b68576182edca0e45d9b4d06975abe7e35c1a"
+    },
+    {
+      "source": "control-regional.json",
+      "destination": "control-regional.json.gz",
+      "sourceBytes": 118366,
+      "compressedBytes": 13085,
+      "sourceSha256": "f869e9802cc78646202e2e619f1091546b7172251fa99432b42c3e3229bd4034",
+      "compressedSha256": "bb1931ede9a3ad0a61dab444b85ea5cc017494635bba1ce2fc6f51f1f72b503e"
+    },
+    {
+      "source": "cpu-active-refinement.json",
+      "destination": "cpu-active-refinement.json.gz",
+      "sourceBytes": 130191,
+      "compressedBytes": 23987,
+      "sourceSha256": "f08b4aaf986d00ddb2bf7654eb54ebabe97591fcb9b6c05a84d420d25e10ec02",
+      "compressedSha256": "cdc80ee1a12b4dccd3c0af241b1af5a1ffd30c9c1fc92d288bb17447f9baf6e9"
+    },
+    {
+      "source": "cpu-factor1.json",
+      "destination": "cpu-factor1.json.gz",
+      "sourceBytes": 130578,
+      "compressedBytes": 25205,
+      "sourceSha256": "dcf5802950632c7676f299a194976620ddb9663f4f9abe8dbd07bc60bad14b68",
+      "compressedSha256": "675bef8bc1c8b8c11fcd9cbf1a02b68b7df8d09e5793cd16dd522cdf4e855bf3"
+    },
+    {
+      "source": "cpu-florida.json",
+      "destination": "cpu-florida.json.gz",
+      "sourceBytes": 143059,
+      "compressedBytes": 28651,
+      "sourceSha256": "a66cee77059392f965cf769851b5275adca889063c778c4312d84fa9248a1423",
+      "compressedSha256": "37cc8283b07e1fce7c4c1bb9733bb975ab2da31d7e0c2aeea585698d0b649832"
+    },
+    {
+      "source": "cpu-grazing.json",
+      "destination": "cpu-grazing.json.gz",
+      "sourceBytes": 132169,
+      "compressedBytes": 25829,
+      "sourceSha256": "8ab7394be8d8c1e6ed6e26924e1eaee2fe975421638747bea7d54800210fa792",
+      "compressedSha256": "dc69dc984c416bb7f627e3c2f730a941b7265cdb4fe60550afee0be840c8fa4d"
+    },
+    {
+      "source": "cpu-inland.json",
+      "destination": "cpu-inland.json.gz",
+      "sourceBytes": 127256,
+      "compressedBytes": 23035,
+      "sourceSha256": "b23eac4dbd6d0d388b4a3dc9f591911eb111df4b61305a8feae23c4deacbc4b6",
+      "compressedSha256": "43c72e2754b47c5df37cd3b236e45b32c90fefcbfd57048f855911aadc474c21"
+    },
+    {
+      "source": "cpu-orbital.json",
+      "destination": "cpu-orbital.json.gz",
+      "sourceBytes": 116540,
+      "compressedBytes": 21075,
+      "sourceSha256": "5c28ea6a79a03927b3dd632b06b954467445a2cd6fcf434eb360bec4191cce96",
+      "compressedSha256": "f57f00cc180feb958f5fa5bfe6779c0d769893e533dc91ce35215b600f45be53"
+    },
+    {
+      "source": "dynamic-active-grid.json",
+      "destination": "dynamic-active-grid.json.gz",
+      "sourceBytes": 665194,
+      "compressedBytes": 144674,
+      "sourceSha256": "23b7d06f78c14305a79b2a6c4635d7191114d08756881eab0b0b8b478e854ad9",
+      "compressedSha256": "650cbcc85446852a24e5d80c4d612912ca1a80ec83e726ccd3ec7d6a29b7a7e2"
+    },
+    {
+      "source": "dynamic-full.json",
+      "destination": "dynamic-full.json.gz",
+      "sourceBytes": 1059860,
+      "compressedBytes": 175708,
+      "sourceSha256": "ba1c277c43daf8edac3ef4410f58c0f82d95c8ab4a386feb254b97c4544dae9b",
+      "compressedSha256": "248125819ed6bb847fe4fd1bce4fdde79cc689b80800a26fc1c96ec1cf38b135"
+    },
+    {
+      "source": "dynamic-inland-grid.json",
+      "destination": "dynamic-inland-grid.json.gz",
+      "sourceBytes": 651683,
+      "compressedBytes": 141752,
+      "sourceSha256": "80bfd6e81a0bc28d4f413e5a38786910dc01b9186ef7b6f102995bdbb91b1fe1",
+      "compressedSha256": "57e43f323997997070b30307793dba9b99d117df3d42f8e2c6a993c2eb670bec"
+    },
+    {
+      "source": "dynamic-regional-repeat.json",
+      "destination": "dynamic-regional-repeat.json.gz",
+      "sourceBytes": 542693,
+      "compressedBytes": 94156,
+      "sourceSha256": "b9f864af28533be37e609b066fca2ecd8e8dc75b02123f1f8420182f3183b961",
+      "compressedSha256": "d6ccb557766d9e6fcf1ac7356239f7ca5434977dd42d7d913f0ccb89c271aa24"
+    },
+    {
+      "source": "dynamic-regional.json",
+      "destination": "dynamic-regional.json.gz",
+      "sourceBytes": 542681,
+      "compressedBytes": 94895,
+      "sourceSha256": "14e84f4f55e2cf15a99d0152cd7a2e5e2eb3a57909610e4aec45aed5edd50d12",
+      "compressedSha256": "720d515cbf1d5fa8fc6f47b202ef4e34e4c098adbadac9805a060899c67f6b80"
+    },
+    {
+      "source": "dynamic-warp.json",
+      "destination": "dynamic-warp.json.gz",
+      "sourceBytes": 381946,
+      "compressedBytes": 65403,
+      "sourceSha256": "c593ff53b8d470236db046cfd8ab074ead2b5ed0b286dd7b83ef433feacc052c",
+      "compressedSha256": "26b520112241275a1853007c31af108949e7e5bc18c10dec6db73ad058c89e2f"
+    },
+    {
+      "source": "keys-florida-capture-base.json",
+      "destination": "keys-florida-capture-base.json.gz",
+      "sourceBytes": 184468,
+      "compressedBytes": 33251,
+      "sourceSha256": "724f54bcc204a010daa5faa41529a3b5e62ff02859eb24d70d8ad16b3adcc12f",
+      "compressedSha256": "4f7c5281cea44637679cab42e3632cda40b4844ec638ad914c33949f5eff8102"
+    },
+    {
+      "source": "keys-florida-capture-cached.json",
+      "destination": "keys-florida-capture-cached.json.gz",
+      "sourceBytes": 184269,
+      "compressedBytes": 32607,
+      "sourceSha256": "d87ba0604930991baac508aa20ea29e19017e14395a49b70d0c0bd800a042180",
+      "compressedSha256": "5078915e90d9b78cb2579c65baadf811958ff1337a9b131a72f22cdc4bf9978e"
+    },
+    {
+      "source": "keys-inland-capture-base.json",
+      "destination": "keys-inland-capture-base.json.gz",
+      "sourceBytes": 158051,
+      "compressedBytes": 26823,
+      "sourceSha256": "3815126620fee7a12de6cea444af9de481663043b06b84b642666bc1864c43e0",
+      "compressedSha256": "0046889e90fe62e465fab443ceed169c11b66b192b55e7a051084cb14fe98fd9"
+    },
+    {
+      "source": "keys-inland-capture-cached.json",
+      "destination": "keys-inland-capture-cached.json.gz",
+      "sourceBytes": 157793,
+      "compressedBytes": 26320,
+      "sourceSha256": "574f177c9bb52901f658002d95f4aec9cd87f78d89f246a85fe1fcb1f238e9e3",
+      "compressedSha256": "57633d02522f28ad0669e03b61b28bf01fa7192e7fc4a659de2e071fc262fd0f"
+    },
+    {
+      "source": "poll-florida.json",
+      "destination": "poll-florida.json.gz",
+      "sourceBytes": 181998,
+      "compressedBytes": 30689,
+      "sourceSha256": "668ff5002e9db00c829286628faa895101a2058fb1465b104c1b0939e1547ec3",
+      "compressedSha256": "9afa46ebf7b1b7a3fe125720e16e963c4414e48adadbad0423a7857ce90b6d18"
+    },
+    {
+      "source": "poll-full.json",
+      "destination": "poll-full.json.gz",
+      "sourceBytes": 1247070,
+      "compressedBytes": 193647,
+      "sourceSha256": "b07c6236e359212a894259c0288b8a3f2dd6cec13015aaa6d258699854c492da",
+      "compressedSha256": "a8671880872774c742a8f9787c2b9bdbbb1da6a9e5be0b00dfd84776ee1b207d"
+    },
+    {
+      "source": "poll-orbital.json",
+      "destination": "poll-orbital.json.gz",
+      "sourceBytes": 144149,
+      "compressedBytes": 22660,
+      "sourceSha256": "f4fee342386b95614cba263e5f596bef403d81df3b113791a391eff7674a6761",
+      "compressedSha256": "03034b5394990f15318d6e612cb55d206bcf51345c4fc840bbd78e91deda6ba1"
+    },
+    {
+      "source": "poll-regional.json",
+      "destination": "poll-regional.json.gz",
+      "sourceBytes": 632106,
+      "compressedBytes": 103943,
+      "sourceSha256": "4913ee610153f522339d773c1c027e057ed07cab203270ce0afb4e5ce803e3df",
+      "compressedSha256": "90715a254fec6467f18b6177f41017ed479698d413fcf4b8c33d1da9ab424b4a"
+    },
+    {
+      "source": "poll-return-florida.json",
+      "destination": "poll-return-florida.json.gz",
+      "sourceBytes": 181888,
+      "compressedBytes": 32007,
+      "sourceSha256": "2bb55776d5ef6d8e5ecb0d7176c62d140d950fbfd8736bea468c5ba95ffac1fd",
+      "compressedSha256": "0b6fd4f2a9d4daa9e29ad166b3e5fa66ff1afb55823b9bafeeda93d6da5367ed"
+    },
+    {
+      "source": "poll-return-orbital.json",
+      "destination": "poll-return-orbital.json.gz",
+      "sourceBytes": 143074,
+      "compressedBytes": 23473,
+      "sourceSha256": "e4916517c8578ace56a4665765788b8312cf56bace6e85eae1dd8dc239518e1d",
+      "compressedSha256": "af0411a003cecabe73f6d2838fd83a0ce101e0b946fc8455fb30fd48a5344828"
+    },
+    {
+      "source": "poll-return-regional.json",
+      "destination": "poll-return-regional.json.gz",
+      "sourceBytes": 632020,
+      "compressedBytes": 102724,
+      "sourceSha256": "c102e06c6d0737af4a3ff0451c806b46f498ce3d411cb18b5285890381855732",
+      "compressedSha256": "d71b950fd9e789a46755a0dbde94e9660acf41ee2775588476de726e1ab39e0d"
+    },
+    {
+      "source": "quiet-cached-regional.json",
+      "destination": "quiet-cached-regional.json.gz",
+      "sourceBytes": 255914,
+      "compressedBytes": 26572,
+      "sourceSha256": "e1450f2103a97d952e88daa3900c519e974b8ffa98b9e4b6ea48b33bd7d1b704",
+      "compressedSha256": "6dd4cbd3a954252d5d8e4a7f8ab2cafc0e69ac8b4bafa22cbaaf9edd566a935e"
+    },
+    {
+      "source": "quiet-poll-regional.json",
+      "destination": "quiet-poll-regional.json.gz",
+      "sourceBytes": 256030,
+      "compressedBytes": 26298,
+      "sourceSha256": "b5b0eddf41fe0e5016468972c72ffc19cac55849f80656520b1085f8ac0f6db0",
+      "compressedSha256": "c1d876a7663161e463960b09211e2d17cf3e26938f3f618b74d3c105bf8cff54"
+    },
+    {
+      "source": "validation.json",
+      "destination": "validation.json.gz",
+      "sourceBytes": 206504,
+      "compressedBytes": 21169,
+      "sourceSha256": "7f4835073b05a6fdc0130513142c8c7e86340ffa2cf92fad4a3f4f6829e46be7",
+      "compressedSha256": "8131d00b28266cfcb6fa7050170f64bf58632ca2fb3c4c8fd01eb2a103e64f79"
+    },
+    {
+      "source": "verify-b.json",
+      "destination": "verify-b.json.gz",
+      "sourceBytes": 1606343,
+      "compressedBytes": 204639,
+      "sourceSha256": "dc21ca99ebc2a01f9886a5b10e2946fc0c030efdfc4bb17bcb11002a85928040",
+      "compressedSha256": "9d8a5fda5f2372bb180e01c42e77271e6b95c194f5c9efff7a94a53cf4363d09"
+    },
+    {
+      "source": "work-a.json",
+      "destination": "work-a.json.gz",
+      "sourceBytes": 11860648,
+      "compressedBytes": 1786686,
+      "sourceSha256": "9393df076e9901a8813c590fc193bdfc2fea3e9dcd31d0689df492b7b82300e8",
+      "compressedSha256": "995bcfba83a86a13c77ca598bbfadc616c8a373909a0ea1eaa70313fcbb11deb"
+    }
+  ]
+}

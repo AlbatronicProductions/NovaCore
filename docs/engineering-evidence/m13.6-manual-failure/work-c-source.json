@@ -1,0 +1,623 @@
+{
+  "schema": 1,
+  "task": "M13.6 Manual Acceptance Failure Gauntlet — Work C current local KSA source",
+  "observedUtc": "2026-09-08T04:42:07.316Z",
+  "sourceOnly": true,
+  "builds": 0,
+  "gpuRuns": 0,
+  "productionWrites": 0,
+  "downloads": 0,
+  "oldEvidenceWrites": 0,
+  "install": {
+    "root": "E:/Kitten Space Agency",
+    "ksaFileVersion": "2026.9.7.5402",
+    "ksaProductVersion": "2026.9.7.5402+487c3f340de24c6a81037120b6d1129c045c5400",
+    "dependencyFileVersion": "1.0.0.0",
+    "dependencyProductVersion": "1.0.0+487c3f340de24c6a81037120b6d1129c045c5400"
+  },
+  "files": [
+    {
+      "path": "E:/Kitten Space Agency/KSA.dll",
+      "bytes": 4798552,
+      "sha256": "a8a5164204eed962df9d9025e99f523d9a23ee2ce6e802b18216a9da35506d2f",
+      "priorSha256": "a8a5164204eed962df9d9025e99f523d9a23ee2ce6e802b18216a9da35506d2f",
+      "unchangedFromPrior": true
+    },
+    {
+      "path": "E:/Kitten Space Agency/Planet.Render.Core.dll",
+      "bytes": 274008,
+      "sha256": "6b9b3c3bd709bf198c6ab3ec6daaef7e468f593fb110187869a1d44272b92e3c",
+      "priorSha256": null,
+      "unchangedFromPrior": null
+    },
+    {
+      "path": "E:/Kitten Space Agency/Planet.Core.dll",
+      "bytes": 34904,
+      "sha256": "2823b299051b91252453acb4f1fff5543b1f5473bc6f42c8d51d4958d3159ece",
+      "priorSha256": null,
+      "unchangedFromPrior": null
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/assembly-source/Properties/AssemblyInfo.cs",
+      "bytes": 556,
+      "sha256": "ff5516e41874502b182b035197a11c3f3dfc4e6d309ee3186bbbad09c1834bf5",
+      "priorSha256": "ff5516e41874502b182b035197a11c3f3dfc4e6d309ee3186bbbad09c1834bf5",
+      "unchangedFromPrior": true
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/assembly-source/KSA/GameSettings.cs",
+      "bytes": 116826,
+      "sha256": "051338396ecb85f559700dbe97e5805e35f0cc62d21c2c41c61f1b1d29f6c189",
+      "priorSha256": null,
+      "unchangedFromPrior": null
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/assembly-source/KSA/App.cs",
+      "bytes": 1612,
+      "sha256": "45b6d609b3d4a5892cf7180015f69c8299d7ae6fbebfb0a1668fe6bac54c468d",
+      "priorSha256": null,
+      "unchangedFromPrior": null
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/source/KSA.Program.cs",
+      "bytes": 190778,
+      "sha256": "d11020c5280417d1a02ef35c5d13bad01607ddd5a21a3302e52db136a872557e",
+      "priorSha256": "d11020c5280417d1a02ef35c5d13bad01607ddd5a21a3302e52db136a872557e",
+      "unchangedFromPrior": true
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/source/KSA.PlanetRenderer.cs",
+      "bytes": 116885,
+      "sha256": "5ce37c334045f9b5cba9a450a6accc454444e8d20327b9778b98740cf7a64a50",
+      "priorSha256": "5ce37c334045f9b5cba9a450a6accc454444e8d20327b9778b98740cf7a64a50",
+      "unchangedFromPrior": true
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/source/KSA.Rendering.CelestialTextureStreamer.cs",
+      "bytes": 33788,
+      "sha256": "433574981d77a48b354baddbadab6a354411e53a67535696a6bb4b8b33ff3ec7",
+      "priorSha256": "433574981d77a48b354baddbadab6a354411e53a67535696a6bb4b8b33ff3ec7",
+      "unchangedFromPrior": true
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/source/KSA.Rendering.StreamingUploader.cs",
+      "bytes": 16757,
+      "sha256": "bf250fc959cf32b3fae471b6a0101f41b466856ecde7a7985fbe3a1ccd922602",
+      "priorSha256": "bf250fc959cf32b3fae471b6a0101f41b466856ecde7a7985fbe3a1ccd922602",
+      "unchangedFromPrior": true
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/source/KSA.Rendering.RetiredResourceQueue.cs",
+      "bytes": 2698,
+      "sha256": "3dcdaf9312ee23e4fb853b7a6962823ae103ab8b3c49a7b8316beecd39999e28",
+      "priorSha256": "3dcdaf9312ee23e4fb853b7a6962823ae103ab8b3c49a7b8316beecd39999e28",
+      "unchangedFromPrior": true
+    },
+    {
+      "path": "E:/NovaCore/build/ksa-residency-reference/assembly-source/KSA.Rendering/FreeImagePool.cs",
+      "bytes": 1514,
+      "sha256": "247dcc1917f565b8591f929e75281db70bb55bfe2283d7e64ed14a26b2b38376",
+      "priorSha256": "247dcc1917f565b8591f929e75281db70bb55bfe2283d7e64ed14a26b2b38376",
+      "unchangedFromPrior": true
+    }
+  ],
+  "freshIlInspection": true,
+  "freshSourceDecompilation": false,
+  "decompilationProvenance": {
+    "retainedRoot": "E:/NovaCore/build/ksa-residency-reference",
+    "priorPackage": "docs/engineering-evidence/m13-final-exit/work-c.json",
+    "sameLiveKsaDll": true,
+    "matchingProductionAssemblyInfo": true,
+    "additionalSourceFingerprints": [
+      "KSA/GameSettings.cs",
+      "KSA/App.cs"
+    ],
+    "liveMethodCrossChecks": [
+      "KSA.App.Run",
+      "KSA.GameSettings.GetPresentMode",
+      "KSA.GameSettings.ApplyTo FrameLimit write",
+      "KSA.Program.RebuildRenderer FrameLimit write"
+    ],
+    "tool": "System.Reflection.PortableExecutable.PEReader + System.Reflection.Metadata.MetadataReader",
+    "loadedKsaTypes": false,
+    "executedKsaCode": false
+  },
+  "methods": [
+    {
+      "assembly": "Planet.Core.dll",
+      "type": "Core.Time",
+      "Name": "Update",
+      "Token": "0600003a",
+      "Rva": 11564,
+      "IlBytes": 363,
+      "IlSha256": "a393829fbe54b12141795ffc9d2db012a4ca69c9c7cae2d8fe500764021bcdcf",
+      "instructionCount": 137
+    },
+    {
+      "assembly": "Planet.Core.dll",
+      "type": "Core.Time",
+      "Name": ".cctor",
+      "Token": "0600003b",
+      "Rva": 11940,
+      "IlBytes": 69,
+      "IlSha256": "00e93dd04570638ee9a7e39a9b48b9545022513a14a8b785cc64fc8fc8bcbc2b",
+      "instructionCount": 17
+    },
+    {
+      "assembly": "Planet.Render.Core.dll",
+      "type": "Core.Renderer",
+      "Name": ".ctor",
+      "Token": "06000111",
+      "Rva": 37124,
+      "IlBytes": 412,
+      "IlSha256": "222787e3dd39e8727e4bbb2bb551594b2190f163a1debd0b38d5b4c4d27e59e1",
+      "instructionCount": 142
+    },
+    {
+      "assembly": "Planet.Render.Core.dll",
+      "type": "Core.Renderer",
+      "Name": "Rebuild",
+      "Token": "06000113",
+      "Rva": 37776,
+      "IlBytes": 613,
+      "IlSha256": "51fe10a43c926490fbd905de0075d7bd5d36d03b88b7732cc06d44f2c652a490",
+      "instructionCount": 232
+    },
+    {
+      "assembly": "Planet.Render.Core.dll",
+      "type": "Core.Renderer",
+      "Name": "TryAcquireNextFrame",
+      "Token": "0600011e",
+      "Rva": 38780,
+      "IlBytes": 577,
+      "IlSha256": "9ace78581ad26e96c5e0d6fe48d8ebaea2aee917d5c5c8418d5dfbf43bc9fa19",
+      "instructionCount": 223
+    },
+    {
+      "assembly": "Planet.Render.Core.dll",
+      "type": "Core.Renderer",
+      "Name": "PresentFrame",
+      "Token": "0600011f",
+      "Rva": 39400,
+      "IlBytes": 215,
+      "IlSha256": "0b615b90c6815e6d21d0791cf03f8514dfef48dd43ab992b06c5fda912d6e8a0",
+      "instructionCount": 86
+    },
+    {
+      "assembly": "Planet.Render.Core.dll",
+      "type": "Core.Renderer",
+      "Name": "TrySubmitFrame",
+      "Token": "06000120",
+      "Rva": 39644,
+      "IlBytes": 39,
+      "IlSha256": "d99ba7eb44a1a39abef2981157bea007992986f83a3c0b3d5d81563342805391",
+      "instructionCount": 16
+    },
+    {
+      "assembly": "Planet.Render.Core.dll",
+      "type": "Core.Renderer",
+      "Name": "TrySubmitFrame",
+      "Token": "06000121",
+      "Rva": 39696,
+      "IlBytes": 395,
+      "IlSha256": "3166bceb7672fa0777917b5060dbc54078720b158fafe3557658317061f1d8d1",
+      "instructionCount": 159
+    },
+    {
+      "assembly": "Planet.Render.Core.dll",
+      "type": "Core.Renderer",
+      "Name": "CreateSwapchain",
+      "Token": "06000125",
+      "Rva": 41408,
+      "IlBytes": 801,
+      "IlSha256": "57cd67d21b713e133408897c390208ca4127c21ef6e88325a32eb3da90cf5c81",
+      "instructionCount": 311
+    },
+    {
+      "assembly": "KSA.dll",
+      "type": "KSA.App",
+      "Name": "Run",
+      "Token": "060000d5",
+      "Rva": 22752,
+      "IlBytes": 303,
+      "IlSha256": "67bebeeccb89cd51be1e238a722dbc6ad890cc5853fbfe897463b5e2e1480755",
+      "instructionCount": 118
+    },
+    {
+      "assembly": "KSA.dll",
+      "type": "KSA.GameSettings",
+      "Name": "GetPresentMode",
+      "Token": "06000b39",
+      "Rva": 352258,
+      "IlBytes": 17,
+      "IlSha256": "ce1384b71a2d4a26d9a9fa20ff046f851788505b33002a0ec33e3a1c0e714b63",
+      "instructionCount": 7
+    },
+    {
+      "assembly": "Planet.Render.Core.dll",
+      "type": "Render.WindowsFullScreenExclusive",
+      "Name": "ModeLost",
+      "Token": "0600000c",
+      "Rva": 9012,
+      "IlBytes": 32,
+      "IlSha256": "fa112b55784ab6694fafb276167640ebd30a7cd4a889369de4d35d6782d4eb31",
+      "instructionCount": 19
+    },
+    {
+      "assembly": "Planet.Render.Core.dll",
+      "type": "Core.Renderer",
+      "Name": "Dispose",
+      "Token": "06000112",
+      "Rva": 37548,
+      "IlBytes": 213,
+      "IlSha256": "12e1566692e5747e7815463c398af79ec58cfe8ddf9728b50f95846582b930c0",
+      "instructionCount": 93
+    },
+    {
+      "assembly": "Planet.Render.Core.dll",
+      "type": "Core.Renderer",
+      "Name": "CreateFrameResources",
+      "Token": "06000116",
+      "Rva": 38468,
+      "IlBytes": 249,
+      "IlSha256": "3ce6f5a716e8065ec2d284870c5b23976590eb269b7351a317de9c674f15f62d",
+      "instructionCount": 97
+    },
+    {
+      "assembly": "Planet.Render.Core.dll",
+      "type": "Core.Renderer",
+      "Name": "CreateSyncObjects",
+      "Token": "06000122",
+      "Rva": 40104,
+      "IlBytes": 238,
+      "IlSha256": "b4ba60b737cae977627d2e4aab41b23f3d7123313a9542456cc3c21ff4b893bd",
+      "instructionCount": 92
+    }
+  ],
+  "timeCallReferences": [
+    {
+      "Dll": "KSA.dll",
+      "ScannedMethodBodies": 16706,
+      "References": [
+        {
+          "Token": "0a0009ed",
+          "Name": "Core.Time::FrameLimit"
+        }
+      ],
+      "Hits": [
+        {
+          "Method": "KSA.GameSettings::ApplyTo",
+          "Token": "06000b30",
+          "IlSha256": "ba016ef309dbbc427a0cd90d4d0f08a7382c205f4ec4e56ed516e15b281f7003",
+          "RelevantInstructions": [
+            "IL_0185: stsfld 0a0009ed Core.Time::FrameLimit"
+          ]
+        },
+        {
+          "Method": "KSA.Program::RebuildRenderer",
+          "Token": "06001d7a",
+          "IlSha256": "44b634179362166f40519c85543339f915c5f3f113be6f773be81feb9a29cdb8",
+          "RelevantInstructions": [
+            "IL_0486: stsfld 0a0009ed Core.Time::FrameLimit"
+          ]
+        }
+      ]
+    },
+    {
+      "Dll": "Planet.Render.Core.dll",
+      "ScannedMethodBodies": 919,
+      "References": [],
+      "Hits": []
+    },
+    {
+      "Dll": "Planet.Core.dll",
+      "ScannedMethodBodies": 107,
+      "References": [
+        {
+          "Token": "0600003a",
+          "Name": "Core.Time::Update internal"
+        }
+      ],
+      "Hits": []
+    }
+  ],
+  "installedProductMemberReferenceInventory": [
+    {
+      "Dll": "Brutal.Concurrency.dll",
+      "TimeReferences": []
+    },
+    {
+      "Dll": "Brutal.Core.Collections.dll",
+      "TimeReferences": []
+    },
+    {
+      "Dll": "Brutal.Core.Common.dll",
+      "TimeReferences": []
+    },
+    {
+      "Dll": "Brutal.Core.Logging.dll",
+      "TimeReferences": []
+    },
+    {
+      "Dll": "Brutal.Core.Maths.dll",
+      "TimeReferences": []
+    },
+    {
+      "Dll": "Brutal.Core.Memory.dll",
+      "TimeReferences": []
+    },
+    {
+      "Dll": "Brutal.Core.Numerics.dll",
+      "TimeReferences": []
+    },
+    {
+      "Dll": "Brutal.Core.Package.dll",
+      "TimeReferences": []
+    },
+    {
+      "Dll": "Brutal.Core.Strings.dll",
+      "TimeReferences": []
+    },
+    {
+      "Dll": "Brutal.Fmod.dll",
+      "TimeReferences": []
+    },
+    {
+      "Dll": "Brutal.Glfw.dll",
+      "TimeReferences": []
+    },
+    {
+      "Dll": "Brutal.Gli.dll",
+      "TimeReferences": []
+    },
+    {
+      "Dll": "Brutal.Gltf.dll",
+      "TimeReferences": []
+    },
+    {
+      "Dll": "Brutal.ImGui.Abstractions.dll",
+      "TimeReferences": []
+    },
+    {
+      "Dll": "Brutal.ImGui.dll",
+      "TimeReferences": []
+    },
+    {
+      "Dll": "Brutal.ImGui.Extensions.dll",
+      "TimeReferences": []
+    },
+    {
+      "Dll": "Brutal.ImPlot.dll",
+      "TimeReferences": []
+    },
+    {
+      "Dll": "Brutal.Interop.dll",
+      "TimeReferences": []
+    },
+    {
+      "Dll": "Brutal.Ktx.dll",
+      "TimeReferences": []
+    },
+    {
+      "Dll": "Brutal.Localization.dll",
+      "TimeReferences": []
+    },
+    {
+      "Dll": "Brutal.Monitor.Common.dll",
+      "TimeReferences": []
+    },
+    {
+      "Dll": "Brutal.Monitor.Host.dll",
+      "TimeReferences": []
+    },
+    {
+      "Dll": "Brutal.RakNet.dll",
+      "TimeReferences": []
+    },
+    {
+      "Dll": "Brutal.Render.Common.dll",
+      "TimeReferences": []
+    },
+    {
+      "Dll": "Brutal.Render.Mesh.dll",
+      "TimeReferences": []
+    },
+    {
+      "Dll": "Brutal.ShaderC.dll",
+      "TimeReferences": []
+    },
+    {
+      "Dll": "Brutal.Stb.dll",
+      "TimeReferences": []
+    },
+    {
+      "Dll": "Brutal.Texture.Abstractions.dll",
+      "TimeReferences": []
+    },
+    {
+      "Dll": "Brutal.Texture.dll",
+      "TimeReferences": []
+    },
+    {
+      "Dll": "Brutal.Vulkan.Abstractions.dll",
+      "TimeReferences": []
+    },
+    {
+      "Dll": "Brutal.Vulkan.dll",
+      "TimeReferences": []
+    },
+    {
+      "Dll": "Brutal.Vulkan.Vma.dll",
+      "TimeReferences": []
+    },
+    {
+      "Dll": "KSA.dll",
+      "TimeReferences": [
+        "Core.Time::FrameLimit"
+      ]
+    },
+    {
+      "Dll": "Planet.Core.dll",
+      "TimeReferences": []
+    },
+    {
+      "Dll": "Planet.Render.Core.dll",
+      "TimeReferences": []
+    }
+  ],
+  "findings": {
+    "presentMode": {
+      "vsyncDefault": true,
+      "vsyncOn": "FIFO",
+      "vsyncOffRequest": "Immediate",
+      "fallback": "FIFO if requested mode not enumerated",
+      "mailboxSelectionFound": false,
+      "actualKsaRuntimeModeMeasured": false
+    },
+    "buffering": {
+      "defaultFramesInFlight": 2,
+      "requestedSwapchainImagesBeforeClamp": 3,
+      "surfaceClamping": "Clamp(requested, minimum, maximum != 0 ? maximum : minimum+1)",
+      "actualSwapchainImageCountMeasured": false,
+      "acquireSemaphoreAndFence": "per frame slot",
+      "presentReadySemaphore": "per acquired swapchain image",
+      "acquireTimeout": "all-ones/infinite",
+      "frameFenceTimeout": "all-ones/infinite"
+    },
+    "fpsLimiter": {
+      "settingsUi": true,
+      "settingsDefault": 240,
+      "uiUnlimitedThreshold": 240,
+      "disabledUiWhenVsync": true,
+      "frameLimitWrites": [
+        "KSA.GameSettings.ApplyTo",
+        "KSA.Program.RebuildRenderer"
+      ],
+      "sleepMethod": "Core.Time.Update",
+      "sleepMechanism": "if positive limit and positive remaining interval, Thread.Sleep(integer milliseconds)",
+      "coreFieldInitializer": 200,
+      "directCallFromReviewedProductionPathFound": false,
+      "effectiveGameplayLimiterEstablished": false,
+      "scope": "17,732 method bodies in KSA/Planet.Render.Core/Planet.Core plus Core.Time member references in 35 installed product assemblies",
+      "reflectionExcludedFromNegativeProof": true
+    },
+    "refresh": {
+      "configuration": "GLFW primary-monitor modes/current refresh/fullscreen setup",
+      "hardcoded144Found": false,
+      "explicitVrrPolicyFound": false,
+      "actualVrrMeasured": false,
+      "presentIdWaitTimingChainInPresentMethod": false,
+      "benchmarkOnlyModeOverrideFoundInReviewedOwners": false
+    },
+    "recovery": {
+      "rebuildResults": [
+        "out-of-date",
+        "suboptimal",
+        "recognized fullscreen-exclusive-mode loss"
+      ],
+      "otherErrors": "propagate; no device-lost recovery success branch in inspected methods",
+      "rebuildIdleWait": true,
+      "shutdownDisposeOwnIdleWait": false,
+      "normalShutdownCaller": "Program.Dispose waits device idle, disposes uploader and dependents, then Renderer.Dispose",
+      "normalShutdownCallerSource": "KSA.Program.cs:1362-1482",
+      "exceptionalShutdownRecoveryProven": false
+    },
+    "terrain": {
+      "lod": "altitude-derived existing mesh selection",
+      "meshWork": "per-frame descriptors/buffers with prepare/modifier/finalize/normal barriers",
+      "graphicsWaitsComputePool": true,
+      "texturePromotion": "completed batch gate before publishing completed resident mip range",
+      "demotion": "coarse fallback plus deferred retirement before reuse",
+      "retirementGate": "old-enough frame rule OR all frame fences complete",
+      "exactNovaCorePupilGenerationContractEquivalent": false,
+      "liveGrowthMeasured": false
+    }
+  },
+  "responsibilityDecisions": [
+    {
+      "responsibility": "FIFO normal presentation",
+      "classification": "ADOPT",
+      "status": "already aligned; no change established"
+    },
+    {
+      "responsibility": "per-image presentation semaphore",
+      "classification": "ADOPT",
+      "status": "already aligned per Work B"
+    },
+    {
+      "responsibility": "frame-slot count",
+      "classification": "INTENTIONALLY DIFFER",
+      "reason": "NovaCore one-frame fence currently gates shared mapped/readback/publication ownership; two slots would require new proof"
+    },
+    {
+      "responsibility": "cap/unlimited policy",
+      "classification": "ADAPT",
+      "reason": "only if measured NovaCore need; KSA dormant limiter not an implementation precedent"
+    },
+    {
+      "responsibility": "refresh/VRR",
+      "classification": "ADAPT",
+      "reason": "capability-aware owner if required; no VRR or 144 Hz guarantee"
+    },
+    {
+      "responsibility": "rebuild/error ownership",
+      "classification": "ADOPT",
+      "reason": "retain narrow recoverable-result handling and observable fatal failures"
+    },
+    {
+      "responsibility": "regional authority/completeness",
+      "classification": "INTENTIONALLY DIFFER",
+      "reason": "NovaCore H and authoritative regional publication cannot use KSA coarse-height fallback as a substitute"
+    },
+    {
+      "responsibility": "resource completion/retirement",
+      "classification": "ADAPT",
+      "reason": "gate published/reused resources on qualified lifetime, not copied frame-age heuristic"
+    },
+    {
+      "responsibility": "simulation/pacing coupling",
+      "classification": "INTENTIONALLY DIFFER",
+      "reason": "keep deterministic NovaCore authority; no copied player-dt clamp or Time.Update sleep"
+    }
+  ],
+  "novaCoreComparison": "docs/engineering-evidence/m13.6-manual-failure/work-b.md and lead clarification; no duplicate NovaCore runtime probe",
+  "officialHistory": {
+    "owner": "lead",
+    "performedByThisWorker": false,
+    "chronologyInferredFromSource": false,
+    "record": "docs/engineering-evidence/m13.6-manual-failure/ksa-history.md",
+    "leadRecordRead": true,
+    "currentSourceCorroboration": {
+      "2026-04-09 revision4034": "Program PrepareFrame waits/applies prior jobs, applies input, queues next jobs; ImGui and separate pre-render/render/post-render follow",
+      "2025-06-07 minimum target": "simulation time-compression budgeting, not a maximum render limiter",
+      "2025-05-07 uniforms": "consumer-specific multibuffer lifetime lesson, no inference that NovaCore cached keys are invalid"
+    }
+  },
+  "judgment": {
+    "freezeClassification": "INSUFFICIENT EVIDENCE",
+    "overRenderingClassification": "INSUFFICIENT EVIDENCE",
+    "productionCorrectionJustifiedByThisWork": false,
+    "fpsEstimateWithdrawn": true
+  },
+  "reproduction": {
+    "instructions": "Use installed PowerShell/.NET metadata APIs only; paste helper then InspectType with exact assembly/type/method names recorded above. Verify full-file SHA256 before comparing method IL SHA256. Returned IL is transient, not a permanent capture. This does not execute KSA types.",
+    "powershellHelper": "\n$ErrorActionPreference='Stop'\n$opcodeMap=@{}\n[System.Reflection.Emit.OpCodes].GetFields([System.Reflection.BindingFlags]'Public,Static') | ForEach-Object { $op=$_.GetValue($null);$opcodeMap[[int]$op.Value -band 65535]=$op }\nfunction EntityText($reader,$handle) {\n $handle=[System.Reflection.Metadata.EntityHandle]$handle\n if($handle.IsNil){return '<nil>'}\n switch($handle.Kind.ToString()) {\n  'TypeDefinition' { $x=$reader.GetTypeDefinition([System.Reflection.Metadata.TypeDefinitionHandle]$handle);return $reader.GetString($x.Namespace)+'.'+$reader.GetString($x.Name) }\n  'TypeReference' { $x=$reader.GetTypeReference([System.Reflection.Metadata.TypeReferenceHandle]$handle);return $reader.GetString($x.Namespace)+'.'+$reader.GetString($x.Name) }\n  'MethodDefinition' { $x=$reader.GetMethodDefinition([System.Reflection.Metadata.MethodDefinitionHandle]$handle);return (EntityText $reader $x.GetDeclaringType())+'::'+$reader.GetString($x.Name) }\n  'FieldDefinition' { $x=$reader.GetFieldDefinition([System.Reflection.Metadata.FieldDefinitionHandle]$handle);return (EntityText $reader $x.GetDeclaringType())+'::'+$reader.GetString($x.Name) }\n  'MemberReference' { $x=$reader.GetMemberReference([System.Reflection.Metadata.MemberReferenceHandle]$handle);return (EntityText $reader $x.Parent)+'::'+$reader.GetString($x.Name) }\n  'MethodSpecification' { $x=$reader.GetMethodSpecification([System.Reflection.Metadata.MethodSpecificationHandle]$handle);return (EntityText $reader $x.Method)+'<...>' }\n  default { return $handle.Kind.ToString() }\n }\n}\nfunction ReadMethodIl($reader,$pe,$method,$handle) {\n $body=[System.Reflection.Metadata.PEReaderExtensions]::GetMethodBody($pe,$method.RelativeVirtualAddress);$bytes=$body.GetILBytes()\n $stream=[System.IO.MemoryStream]::new([byte[]]$bytes);$br=[System.IO.BinaryReader]::new($stream)\n $lines=[System.Collections.Generic.List[string]]::new()\n while($stream.Position -lt $stream.Length){\n  $pos=$stream.Position;$code=[int]$br.ReadByte();if($code -eq 254){$code=65024+[int]$br.ReadByte()}\n  $op=$opcodeMap[$code];$operand=''\n  switch($op.OperandType.ToString()){\n   'InlineNone' {}\n   'ShortInlineI' {$operand=$br.ReadSByte().ToString()}\n   'InlineI' {$operand=$br.ReadInt32().ToString()}\n   'InlineI8' {$operand=$br.ReadInt64().ToString()}\n   'ShortInlineR' {$operand=$br.ReadSingle().ToString('R')}\n   'InlineR' {$operand=$br.ReadDouble().ToString('R')}\n   'ShortInlineVar' {$operand=$br.ReadByte().ToString()}\n   'InlineVar' {$operand=$br.ReadUInt16().ToString()}\n   'ShortInlineBrTarget' {$jump=$br.ReadSByte();$operand='IL_{0:x4}' -f ($stream.Position+$jump)}\n   'InlineBrTarget' {$jump=$br.ReadInt32();$operand='IL_{0:x4}' -f ($stream.Position+$jump)}\n   'InlineSwitch' {$count=$br.ReadInt32();$jumps=@();for($j=0;$j -lt $count;$j++){$jumps+=$br.ReadInt32()};$base=$stream.Position;$operand=(@($jumps | ForEach-Object {'IL_{0:x4}' -f ($base+$_)}) -join ', ')}\n   'InlineString' {$token=$br.ReadInt32();$operand='\"'+$reader.GetUserString([System.Reflection.Metadata.Ecma335.MetadataTokens]::UserStringHandle($token -band 16777215))+'\"'}\n   default {$token=$br.ReadInt32();$operand=('{0:x8} ' -f $token)+(EntityText $reader ([System.Reflection.Metadata.Ecma335.MetadataTokens]::EntityHandle($token)))}\n  }\n  $lines.Add(('IL_{0:x4}: {1} {2}' -f $pos,$op.Name,$operand).TrimEnd())\n }\n $br.Dispose();$stream.Dispose()\n return [pscustomobject]@{Name=$reader.GetString($method.Name);Token=('{0:x8}' -f [System.Reflection.Metadata.Ecma335.MetadataTokens]::GetToken([System.Reflection.Metadata.EntityHandle]$handle));Rva=$method.RelativeVirtualAddress;IlBytes=$bytes.Length;IlSha256=[Convert]::ToHexString([System.Security.Cryptography.SHA256]::HashData([byte[]]$bytes)).ToLowerInvariant();Instructions=$lines.ToArray()}\n}\nfunction InspectType($dll,$typeName,$wanted){\n $stream=[System.IO.File]::OpenRead((Join-Path 'E:\\Kitten Space Agency' $dll));$pe=[System.Reflection.PortableExecutable.PEReader]::new($stream);$reader=[System.Reflection.Metadata.PEReaderExtensions]::GetMetadataReader($pe)\n $answer=@()\n foreach($typeHandle in $reader.TypeDefinitions){\n  $type=$reader.GetTypeDefinition($typeHandle)\n  if($reader.GetString($type.Namespace)+'.'+$reader.GetString($type.Name) -ne $typeName){continue}\n  foreach($methodHandle in $type.GetMethods()){\n   $method=$reader.GetMethodDefinition($methodHandle);$name=$reader.GetString($method.Name)\n   if(($wanted -contains $name) -and $method.RelativeVirtualAddress -ne 0){$answer+=ReadMethodIl $reader $pe $method $methodHandle}\n  }\n }\n $pe.Dispose();$stream.Dispose();return $answer\n}\n",
+    "example": "InspectType 'Planet.Render.Core.dll' 'Core.Renderer' @('TryAcquireNextFrame','PresentFrame','CreateSwapchain') | ConvertTo-Json -Depth 5"
+  },
+  "storage": {
+    "newFiles": [
+      "work-c-source.md",
+      "work-c-source.json"
+    ],
+    "newDisposableFiles": 0,
+    "rawCaptureFiles": 0,
+    "bulkIlRetained": false
+  },
+  "limits": [
+    "No application, GPU, frame cadence, utilization, temperatures or live allocation trend measured.",
+    "Configured UI is distinguished from reachable execution.",
+    "No history or freeze attribution inferred from source.",
+    "No blanket assertion against reflection, future modules or external presentation policy.",
+    "No KSA frame count, coarse fallback, age gate or dt clamp copied into NovaCore."
+  ]
+}

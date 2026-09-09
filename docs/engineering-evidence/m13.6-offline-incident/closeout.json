@@ -1,0 +1,129 @@
+{
+  "capturedUtc": "2026-09-08T05:24:15.779490+00:00",
+  "classification": "INSUFFICIENT EVIDENCE",
+  "confidence": "LOW for causal attribution",
+  "pacing": "INSUFFICIENT EVIDENCE",
+  "leadJudgment": "ESCALATE TO PROJECT CONTROL",
+  "status": "M13.6 CANDIDATE — FOLLOW-UP REQUIRED",
+  "sourceAndTrackedDiffUnchanged": true,
+  "refs": {
+    "HEAD": "d4baab6940a57a46e478b98e36f5e45d1c4b558f",
+    "main": "d4baab6940a57a46e478b98e36f5e45d1c4b558f",
+    "origin/main": "d4baab6940a57a46e478b98e36f5e45d1c4b558f",
+    "m13.5-local-gpu-terrain-working-data": "75712e4bc990e11c3072a37299c55187cc30e0a1",
+    "m13.5-local-gpu-terrain-working-data^{}": "d4baab6940a57a46e478b98e36f5e45d1c4b558f"
+  },
+  "branch": "codex/m13-final-exit",
+  "priorPackagesPreserved": {
+    "m13-final-exit": 108,
+    "m13.6-manual-failure": 14
+  },
+  "deploymentShadersAssetsPreserved": true,
+  "stagedDiff": "",
+  "elevatedExport": {
+    "attempts": 1,
+    "outcome": "Windows RunAs returned operation canceled by the user",
+    "helperStarted": false,
+    "bytesCopied": 0
+  },
+  "dumpAnalysisPerformed": false,
+  "newProductionEdits": 0,
+  "gpuRuns": 0,
+  "builds": 0,
+  "traces": 0,
+  "rawCaptureBytes": 0,
+  "retestProtocol": {
+    "designOnly": true,
+    "implemented": false,
+    "executed": false,
+    "maximumProcessSeconds": 180,
+    "prospectiveTemporaryBudget": 67108864
+  },
+  "budgetBytes": 4194304,
+  "disposedBytes": 0,
+  "disposableRemainingBytes": 0,
+  "temporaryBytesCreated": 0,
+  "storageMeaning": "Created/retained are final new-file footprint, not cumulative rewrite I/O. Protected originals and prior packages remain in place.",
+  "files": {
+    "access.md": {
+      "bytes": 4928,
+      "allocated": 8192,
+      "sha256": "cc44fc22e7ea74043ebf04f94332e1b043385624999f19b3712cb7239bc6adfb"
+    },
+    "baseline.json": {
+      "bytes": 38592,
+      "allocated": 40960,
+      "sha256": "09a0d46b4fe1fa996d6216cc009071ed557e035da519ae020321ce5a64fd5a5d"
+    },
+    "closeout.py": {
+      "bytes": 4644,
+      "allocated": 8192,
+      "sha256": "d2fa81cbb2814b1e20ee67cb50abb1c60230c27836911c9dae48299f4f5471c6"
+    },
+    "export-incident.ps1": {
+      "bytes": 4457,
+      "allocated": 8192,
+      "sha256": "c60302ca34e385ff2ca1f2d4bac52bb901d280d97e6f30109fb957ff4f80ac35"
+    },
+    "inventory.py": {
+      "bytes": 2833,
+      "allocated": 4096,
+      "sha256": "65ab9301d3b28468f9fc7d120979d8e1566216b1e2931aa9dd5b1f8af06a0862"
+    },
+    "README.md": {
+      "bytes": 18200,
+      "allocated": 20480,
+      "sha256": "3acfba57217b33358c2200e0a8b92b86919abc19cb7da64c8024fd23101b7500"
+    },
+    "retest-protocol.md": {
+      "bytes": 13381,
+      "allocated": 16384,
+      "sha256": "3b4c45d6e8a97c56722c37b5524a31b58ef098bef73f636181947b80bf3b1ff0"
+    },
+    "verify.md": {
+      "bytes": 8035,
+      "allocated": 8192,
+      "sha256": "84f3d262bb9617c157bb6c956a31e21e02131fda4e2b6fe08e41ddbd2078a745"
+    },
+    "work-a.json": {
+      "bytes": 46329,
+      "allocated": 49152,
+      "sha256": "c37ce3e6453a642b4fc78e714020f99e6d8b0a07236f201828b0ca95345185a6"
+    },
+    "work-a.md": {
+      "bytes": 9619,
+      "allocated": 12288,
+      "sha256": "715b1b2b50e2d2512ec3ae9269d43026e1b9b52f06fe667858042ce5daf7298a"
+    },
+    "work-b.json": {
+      "bytes": 17897,
+      "allocated": 20480,
+      "sha256": "8d4ddc6b859d8a2ea91592be989c118be111e2db2fc0d6a83b3a67a1d564d60b"
+    },
+    "work-b.md": {
+      "bytes": 19011,
+      "allocated": 20480,
+      "sha256": "6f1732f72ac3b1ebbd6f6c81554bddb93eafabc0c5e954f7ba1cbdf895817484"
+    },
+    "work-c.json": {
+      "bytes": 13888,
+      "allocated": 16384,
+      "sha256": "4240fb4379c15a251d896b396fdde2e71bd73aff2787c91484c282ebd56f2d06"
+    },
+    "work-c.md": {
+      "bytes": 19532,
+      "allocated": 20480,
+      "sha256": "82b8122831b4334b2f33272573f792d2427a0d8a92666a02448bcc9c33b3516e"
+    }
+  },
+  "diffCheck": {
+    "exitCode": 0,
+    "warnings": "warning: in the working copy of 'native/NovaCore.Native/MappedBufferMemory.h', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'native/NovaCore.Native/MappedBufferMemoryTests.cpp', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'native/NovaCore.Native/NovaCoreNative.cpp', LF will be replaced by CRLF the next time Git touches it\n"
+  },
+  "gitStatus": " M native/NovaCore.Native/MappedBufferMemory.h\n M native/NovaCore.Native/MappedBufferMemoryTests.cpp\n M native/NovaCore.Native/NovaCoreNative.cpp\n?? docs/engineering-evidence/m13-final-exit/\n?? docs/engineering-evidence/m13.6-manual-failure/\n?? docs/engineering-evidence/m13.6-offline-incident/\n",
+  "fileCount": 15,
+  "createdLogicalBytes": 226306,
+  "retainedLogicalBytes": 226306,
+  "retainedAllocatedBytes": 262144,
+  "remainingPermanentLogicalBytes": 226306
+}

@@ -1,0 +1,931 @@
+{
+  "schema": 1,
+  "role": "WORK A bounded offline incident metadata refresh",
+  "observedAtUtc": "2026-09-08T05:12:21.5245341Z",
+  "window": {
+    "startLocal": "2026-09-08T00:03:10.0000000-04:00",
+    "endLocal": "2026-09-08T00:23:10.0000000-04:00",
+    "widened": false
+  },
+  "result": {
+    "newCauseAttribution": false,
+    "observed": "LiveKernelEvent 0x141 display-engine timeout",
+    "initiatingCause": "INSUFFICIENT EVIDENCE",
+    "newEquivalentMetadata": "Postboot PnP device identities and AMD policy-reset process path; no faulting process/module/engine resolution",
+    "m13_6": "Neither attributed nor exonerated"
+  },
+  "systemTotal": 157,
+  "applicationTotal": 139,
+  "systemRelevant": [
+    {
+      "timeLocal": "2026-09-08T00:10:40.0162139-04:00",
+      "timeUtc": "2026-09-08T04:10:40.0162139Z",
+      "log": "System",
+      "provider": "Tcpip",
+      "id": 4266,
+      "type": "Warning",
+      "recordId": 12744,
+      "eventWriterProcessId": "4",
+      "eventWriterThreadId": "32656",
+      "data": {},
+      "message": "A request to allocate an ephemeral port number from the global UDP port space has failed due to all such ports being in use."
+    },
+    {
+      "timeLocal": "2026-09-08T00:14:02.2358503-04:00",
+      "timeUtc": "2026-09-08T04:14:02.2358503Z",
+      "log": "System",
+      "provider": "Microsoft-Windows-Kernel-Boot",
+      "id": 20,
+      "type": "Information",
+      "recordId": 12750,
+      "eventWriterProcessId": "4",
+      "eventWriterThreadId": "8",
+      "data": {
+        "LastShutdownGood": "false",
+        "LastBootGood": "true",
+        "LastBootId": "8",
+        "BootStatusPolicy": "2"
+      },
+      "message": "The last shutdown's success status was false. The last boot's success status was true."
+    },
+    {
+      "timeLocal": "2026-09-08T00:14:05.5421013-04:00",
+      "timeUtc": "2026-09-08T04:14:05.5421013Z",
+      "log": "System",
+      "provider": "Microsoft-Windows-Kernel-PnP",
+      "id": 219,
+      "type": "Warning",
+      "recordId": 12778,
+      "eventWriterProcessId": "4",
+      "eventWriterThreadId": "556",
+      "data": {
+        "DriverNameLength": "17",
+        "DriverName": "ROOT\\DISPLAY\\0000",
+        "Status": "3221226341",
+        "FailureNameLength": "14",
+        "FailureName": "\\Driver\\WUDFRd",
+        "Version": "0"
+      },
+      "message": "The driver \\Driver\\WUDFRd failed to load.\r\nDevice: ROOT\\DISPLAY\\0000\r\nStatus: 0xC0000365"
+    },
+    {
+      "timeLocal": "2026-09-08T00:14:05.5435891-04:00",
+      "timeUtc": "2026-09-08T04:14:05.5435891Z",
+      "log": "System",
+      "provider": "Microsoft-Windows-Kernel-Power",
+      "id": 41,
+      "type": "Critical",
+      "recordId": 12779,
+      "eventWriterProcessId": "4",
+      "eventWriterThreadId": "8",
+      "data": {
+        "BugcheckCode": "0",
+        "BugcheckParameter1": "0x0",
+        "BugcheckParameter2": "0x0",
+        "BugcheckParameter3": "0x0",
+        "BugcheckParameter4": "0x0",
+        "SleepInProgress": "0",
+        "PowerButtonTimestamp": "0",
+        "BootAppStatus": "0",
+        "Checkpoint": "0",
+        "ConnectedStandbyInProgress": "false",
+        "SystemSleepTransitionsToOn": "0",
+        "CsEntryScenarioInstanceId": "0",
+        "BugcheckInfoFromEFI": "false",
+        "CheckpointStatus": "0",
+        "CsEntryScenarioInstanceIdV2": "0",
+        "LongPowerButtonPressDetected": "false",
+        "LidReliability": "false",
+        "InputSuppressionState": "0",
+        "PowerButtonSuppressionState": "0",
+        "LidState": "3",
+        "WHEABootErrorCount": "0"
+      },
+      "message": "The system has rebooted without cleanly shutting down first. This error could be caused if the system stopped responding, crashed, or lost power unexpectedly."
+    },
+    {
+      "timeLocal": "2026-09-08T00:14:06.0322663-04:00",
+      "timeUtc": "2026-09-08T04:14:06.0322663Z",
+      "log": "System",
+      "provider": "Microsoft-Windows-Kernel-PnP",
+      "id": 219,
+      "type": "Warning",
+      "recordId": 12783,
+      "eventWriterProcessId": "4",
+      "eventWriterThreadId": "556",
+      "data": {
+        "DriverNameLength": "16",
+        "DriverName": "ROOT\\SYSTEM\\0004",
+        "Status": "3221226341",
+        "FailureNameLength": "14",
+        "FailureName": "\\Driver\\WUDFRd",
+        "Version": "0"
+      },
+      "message": "The driver \\Driver\\WUDFRd failed to load.\r\nDevice: ROOT\\SYSTEM\\0004\r\nStatus: 0xC0000365"
+    },
+    {
+      "timeLocal": "2026-09-08T00:14:20.7873331-04:00",
+      "timeUtc": "2026-09-08T04:14:20.7873331Z",
+      "log": "System",
+      "provider": "EventLog",
+      "id": 6008,
+      "type": "Error",
+      "recordId": 12759,
+      "eventWriterProcessId": "3572",
+      "eventWriterThreadId": "3656",
+      "data": {},
+      "message": "The previous system shutdown at 12:10:13 AM on ‎9/‎8/‎2026 was unexpected."
+    },
+    {
+      "timeLocal": "2026-09-08T00:14:22.0483275-04:00",
+      "timeUtc": "2026-09-08T04:14:22.0483275Z",
+      "log": "System",
+      "provider": "Microsoft-Windows-UserModePowerService",
+      "id": 12,
+      "type": "Information",
+      "recordId": 12862,
+      "eventWriterProcessId": "2176",
+      "eventWriterThreadId": "2384",
+      "data": {
+        "ProcessPath": "C:\\Windows\\System32\\DriverStore\\FileRepository\\u0203303.inf_amd64_e5876a26758f154c\\B026363\\atieclxx.exe",
+        "ProcessPid": "3892",
+        "OldSchemeGuid": "{8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c}",
+        "NewSchemeGuid": "{8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c}"
+      },
+      "message": "Process C:\\Windows\\System32\\DriverStore\\FileRepository\\u0203303.inf_amd64_e5876a26758f154c\\B026363\\atieclxx.exe (process ID:3892) reset policy scheme from {8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c} to {8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c}"
+    },
+    {
+      "timeLocal": "2026-09-08T00:14:23.1358628-04:00",
+      "timeUtc": "2026-09-08T04:14:23.1358628Z",
+      "log": "System",
+      "provider": "Service Control Manager",
+      "id": 7000,
+      "type": "Error",
+      "recordId": 12869,
+      "eventWriterProcessId": "1112",
+      "eventWriterThreadId": "4448",
+      "data": {
+        "param1": "AMDRyzenMasterDriverV28",
+        "param2": "%%577"
+      },
+      "message": "The AMDRyzenMasterDriverV28 service failed to start due to the following error: \r\nWindows cannot verify the digital signature for this file. A recent hardware or software change might have installed a file that is signed incorrectly or damaged, or that might be malicious software from an unknown source."
+    },
+    {
+      "timeLocal": "2026-09-08T00:14:23.1383729-04:00",
+      "timeUtc": "2026-09-08T04:14:23.1383729Z",
+      "log": "System",
+      "provider": "Service Control Manager",
+      "id": 7000,
+      "type": "Error",
+      "recordId": 12871,
+      "eventWriterProcessId": "1112",
+      "eventWriterThreadId": "2056",
+      "data": {
+        "param1": "AMDRyzenMasterDriverV31",
+        "param2": "%%577"
+      },
+      "message": "The AMDRyzenMasterDriverV31 service failed to start due to the following error: \r\nWindows cannot verify the digital signature for this file. A recent hardware or software change might have installed a file that is signed incorrectly or damaged, or that might be malicious software from an unknown source."
+    },
+    {
+      "timeLocal": "2026-09-08T00:14:52.7346871-04:00",
+      "timeUtc": "2026-09-08T04:14:52.7346871Z",
+      "log": "System",
+      "provider": "Service Control Manager",
+      "id": 7000,
+      "type": "Error",
+      "recordId": 12883,
+      "eventWriterProcessId": "1112",
+      "eventWriterThreadId": "10096",
+      "data": {
+        "param1": "AMDRyzenMasterDriverV31",
+        "param2": "%%577"
+      },
+      "message": "The AMDRyzenMasterDriverV31 service failed to start due to the following error: \r\nWindows cannot verify the digital signature for this file. A recent hardware or software change might have installed a file that is signed incorrectly or damaged, or that might be malicious software from an unknown source."
+    }
+  ],
+  "fresh141": [
+    {
+      "timeLocal": "2026-09-08T00:13:10.0808385-04:00",
+      "timeUtc": "2026-09-08T04:13:10.0808385Z",
+      "log": "Application",
+      "provider": "Windows Error Reporting",
+      "id": 1001,
+      "type": "Information",
+      "recordId": 15585,
+      "eventWriterProcessId": "36372",
+      "eventWriterThreadId": "33152",
+      "data": {
+        "Bucket": "",
+        "BucketType": "0",
+        "EventName": "LiveKernelEvent",
+        "Response": "Not available",
+        "CabId": "0",
+        "P1": "141",
+        "P2": "ffffe603859e4010",
+        "P3": "fffff8079758b6a0",
+        "P4": "0",
+        "P5": "ffffe6035aae30c0",
+        "P6": "10_0_26200",
+        "P7": "0_0",
+        "P8": "256_1",
+        "P9": "",
+        "P10": "",
+        "AttachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260908-0013.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-96193296-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.3cb57269-ccc6-4799-8779-8b1b1898dd1e.tmp.xml",
+        "StorePath": "\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportQueue\\Kernel_141_8fd8944c0573f6a90fdeed091b6736e541e5bff_00000000_5880d346-5ecd-4c93-a8eb-576e32823930",
+        "AnalysisSymbol": "",
+        "Rechecking": "0",
+        "ReportId": "5880d346-5ecd-4c93-a8eb-576e32823930",
+        "ReportStatus": "4",
+        "HashedBucket": "",
+        "CabGuid": "0"
+      },
+      "message": "Fault bucket , type 0\r\nEvent Name: LiveKernelEvent\r\nResponse: Not available\r\nCab Id: 0\r\n\r\nProblem signature:\r\nP1: 141\r\nP2: ffffe603859e4010\r\nP3: fffff8079758b6a0\r\nP4: 0\r\nP5: ffffe6035aae30c0\r\nP6: 10_0_26200\r\nP7: 0_0\r\nP8: 256_1\r\nP9: \r\nP10: \r\n\r\nAttached files:\r\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260908-0013.dmp\r\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-96193296-0.sysdata.xml\r\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.3cb57269-ccc6-4799-8779-8b1b1898dd1e.tmp.xml\r\n\r\nThese files may be available here:\r\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportQueue\\Kernel_141_8fd8944c0573f6a90fdeed091b6736e541e5bff_00000000_5880d346-5ecd-4c93-a8eb-576e32823930\r\n\r\nAnalysis symbol: \r\nRechecking for solution: 0\r\nReport Id: 5880d346-5ecd-4c93-a8eb-576e32823930\r\nReport Status: 4\r\nHashed bucket: \r\nCab Guid: 0"
+    },
+    {
+      "timeLocal": "2026-09-08T00:14:24.5908999-04:00",
+      "timeUtc": "2026-09-08T04:14:24.5908999Z",
+      "log": "Application",
+      "provider": "Windows Error Reporting",
+      "id": 1001,
+      "type": "Information",
+      "recordId": 15623,
+      "eventWriterProcessId": "9652",
+      "eventWriterThreadId": "9656",
+      "data": {
+        "Bucket": "",
+        "BucketType": "0",
+        "EventName": "LiveKernelEvent",
+        "Response": "Not available",
+        "CabId": "0",
+        "P1": "141",
+        "P2": "ffffe603859e4010",
+        "P3": "fffff8079758b6a0",
+        "P4": "0",
+        "P5": "ffffe6035aae30c0",
+        "P6": "10_0_26200",
+        "P7": "0_0",
+        "P8": "256_1",
+        "P9": "",
+        "P10": "",
+        "AttachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260908-0013.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-96193296-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.3cb57269-ccc6-4799-8779-8b1b1898dd1e.tmp.xml",
+        "StorePath": "\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportQueue\\Kernel_141_8fd8944c0573f6a90fdeed091b6736e541e5bff_00000000_5880d346-5ecd-4c93-a8eb-576e32823930",
+        "AnalysisSymbol": "",
+        "Rechecking": "0",
+        "ReportId": "5880d346-5ecd-4c93-a8eb-576e32823930",
+        "ReportStatus": "2049",
+        "HashedBucket": "",
+        "CabGuid": "0"
+      },
+      "message": "Fault bucket , type 0\r\nEvent Name: LiveKernelEvent\r\nResponse: Not available\r\nCab Id: 0\r\n\r\nProblem signature:\r\nP1: 141\r\nP2: ffffe603859e4010\r\nP3: fffff8079758b6a0\r\nP4: 0\r\nP5: ffffe6035aae30c0\r\nP6: 10_0_26200\r\nP7: 0_0\r\nP8: 256_1\r\nP9: \r\nP10: \r\n\r\nAttached files:\r\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260908-0013.dmp\r\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-96193296-0.sysdata.xml\r\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.3cb57269-ccc6-4799-8779-8b1b1898dd1e.tmp.xml\r\n\r\nThese files may be available here:\r\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportQueue\\Kernel_141_8fd8944c0573f6a90fdeed091b6736e541e5bff_00000000_5880d346-5ecd-4c93-a8eb-576e32823930\r\n\r\nAnalysis symbol: \r\nRechecking for solution: 0\r\nReport Id: 5880d346-5ecd-4c93-a8eb-576e32823930\r\nReport Status: 2049\r\nHashed bucket: \r\nCab Guid: 0"
+    },
+    {
+      "timeLocal": "2026-09-08T00:17:21.3318743-04:00",
+      "timeUtc": "2026-09-08T04:17:21.3318743Z",
+      "log": "Application",
+      "provider": "Windows Error Reporting",
+      "id": 1001,
+      "type": "Information",
+      "recordId": 15689,
+      "eventWriterProcessId": "24468",
+      "eventWriterThreadId": "24476",
+      "data": {
+        "Bucket": "",
+        "BucketType": "0",
+        "EventName": "LiveKernelEvent",
+        "Response": "Not available",
+        "CabId": "0",
+        "P1": "141",
+        "P2": "ffffe603859e4010",
+        "P3": "fffff8079758b6a0",
+        "P4": "0",
+        "P5": "ffffe6035aae30c0",
+        "P6": "10_0_26200",
+        "P7": "0_0",
+        "P8": "256_1",
+        "P9": "",
+        "P10": "",
+        "AttachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260908-0013.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-96193296-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.3cb57269-ccc6-4799-8779-8b1b1898dd1e.tmp.xml",
+        "StorePath": "\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportQueue\\Kernel_141_8fd8944c0573f6a90fdeed091b6736e541e5bff_00000000_5880d346-5ecd-4c93-a8eb-576e32823930",
+        "AnalysisSymbol": "",
+        "Rechecking": "0",
+        "ReportId": "5880d346-5ecd-4c93-a8eb-576e32823930",
+        "ReportStatus": "2049",
+        "HashedBucket": "",
+        "CabGuid": "0"
+      },
+      "message": "Fault bucket , type 0\r\nEvent Name: LiveKernelEvent\r\nResponse: Not available\r\nCab Id: 0\r\n\r\nProblem signature:\r\nP1: 141\r\nP2: ffffe603859e4010\r\nP3: fffff8079758b6a0\r\nP4: 0\r\nP5: ffffe6035aae30c0\r\nP6: 10_0_26200\r\nP7: 0_0\r\nP8: 256_1\r\nP9: \r\nP10: \r\n\r\nAttached files:\r\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260908-0013.dmp\r\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-96193296-0.sysdata.xml\r\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.3cb57269-ccc6-4799-8779-8b1b1898dd1e.tmp.xml\r\n\r\nThese files may be available here:\r\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportQueue\\Kernel_141_8fd8944c0573f6a90fdeed091b6736e541e5bff_00000000_5880d346-5ecd-4c93-a8eb-576e32823930\r\n\r\nAnalysis symbol: \r\nRechecking for solution: 0\r\nReport Id: 5880d346-5ecd-4c93-a8eb-576e32823930\r\nReport Status: 2049\r\nHashed bucket: \r\nCab Guid: 0"
+    }
+  ],
+  "werIdentitySummary": [
+    {
+      "timeLocal": "2026-09-08T00:04:25.1076636-04:00",
+      "recordId": 15554,
+      "reportId": "771e3890-57df-4dc1-b675-43048e8b7879",
+      "code": "a1000001",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\AMD_WATCHDOG\\AMD_WATCHDOG-20260902-2257.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-163500437-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.47df108d-c55a-4bad-8014-a043d154d3cb.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:04:25.1246125-04:00",
+      "recordId": 15555,
+      "reportId": "6ab31761-dc5e-47c7-aabc-a39b8edd9f99",
+      "code": "141",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260902-2257.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-163549468-0.sysdata.xml\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG-20260902-2257.dmp\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.a783481c-5726-431b-b6f8-f9139d79f607.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:04:25.1407614-04:00",
+      "recordId": 15556,
+      "reportId": "029eea57-b381-4c9e-a2ac-026e7fe78458",
+      "code": "a1000001",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\AMD_WATCHDOG\\AMD_WATCHDOG-20260902-2259.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-163609875-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.9073b456-6dc3-49d3-9f89-361ba0e64c04.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:04:25.1575195-04:00",
+      "recordId": 15557,
+      "reportId": "25c63f5b-6d6c-4926-9ab1-942662cde75e",
+      "code": "141",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260902-2259.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-163609968-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.0f7d0e82-6db9-4ab5-9388-3a56b77e810e.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:04:25.1748990-04:00",
+      "recordId": 15558,
+      "reportId": "7c65acc3-0045-4695-872d-10458e8bc856",
+      "code": "141",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260902-2302.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-163785171-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.8dbaeda6-f071-43e1-95af-441d7862c6c8.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:04:25.1922601-04:00",
+      "recordId": 15559,
+      "reportId": "6b1c0a87-4b7a-4bac-99d0-a90ff2f1759a",
+      "code": "141",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260902-2306.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-164063625-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.4ca608c1-87ec-4a64-b627-8310ca0462ba.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:04:25.2097309-04:00",
+      "recordId": 15560,
+      "reportId": "01a9f4da-9613-4a57-9cea-cb3292f38f84",
+      "code": "a1000001",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\AMD_WATCHDOG\\AMD_WATCHDOG-20260902-2306.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-164063546-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.45f004ce-23a4-47e1-80d7-caa44dca1f7e.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:04:25.2269113-04:00",
+      "recordId": 15561,
+      "reportId": "aa1670c3-85b3-40f9-9703-b8b6aa9c3d26",
+      "code": "141",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260902-2307.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-164078687-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.35ffc41b-8847-433f-8598-faf7e338dfaa.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:04:25.2440363-04:00",
+      "recordId": 15562,
+      "reportId": "6678b561-8c39-4675-9d3a-2148efc211c7",
+      "code": "141",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260902-2310.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-164270578-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.21916ef1-165a-4f13-bc55-751d67cf3cb7.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:04:25.2603141-04:00",
+      "recordId": 15563,
+      "reportId": "5af0362b-ef7e-4523-9ba0-2eefe525b84c",
+      "code": "141",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260906-2128.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-503752515-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.74992a85-060e-4e6b-98b8-2e19fe5aa7dd.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:04:25.2766183-04:00",
+      "recordId": 15564,
+      "reportId": "4a91108d-b3ec-4ff3-a9a5-c5a1fece42ff",
+      "code": "141",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260906-2129.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-503805312-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.30b9057f-037a-4344-b81a-f02d7125032e.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:13:10.0808385-04:00",
+      "recordId": 15585,
+      "reportId": "5880d346-5ecd-4c93-a8eb-576e32823930",
+      "code": "141",
+      "reportStatus": "4",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260908-0013.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-96193296-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.3cb57269-ccc6-4799-8779-8b1b1898dd1e.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:13:10.1194131-04:00",
+      "recordId": 15586,
+      "reportId": "771e3890-57df-4dc1-b675-43048e8b7879",
+      "code": "a1000001",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\AMD_WATCHDOG\\AMD_WATCHDOG-20260902-2257.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-163500437-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.47df108d-c55a-4bad-8014-a043d154d3cb.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:13:10.1369182-04:00",
+      "recordId": 15587,
+      "reportId": "6ab31761-dc5e-47c7-aabc-a39b8edd9f99",
+      "code": "141",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260902-2257.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-163549468-0.sysdata.xml\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG-20260902-2257.dmp\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.a783481c-5726-431b-b6f8-f9139d79f607.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:13:10.1534018-04:00",
+      "recordId": 15588,
+      "reportId": "029eea57-b381-4c9e-a2ac-026e7fe78458",
+      "code": "a1000001",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\AMD_WATCHDOG\\AMD_WATCHDOG-20260902-2259.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-163609875-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.9073b456-6dc3-49d3-9f89-361ba0e64c04.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:13:10.1690542-04:00",
+      "recordId": 15589,
+      "reportId": "25c63f5b-6d6c-4926-9ab1-942662cde75e",
+      "code": "141",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260902-2259.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-163609968-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.0f7d0e82-6db9-4ab5-9388-3a56b77e810e.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:14:23.7312828-04:00",
+      "recordId": 15612,
+      "reportId": "771e3890-57df-4dc1-b675-43048e8b7879",
+      "code": "a1000001",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\AMD_WATCHDOG\\AMD_WATCHDOG-20260902-2257.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-163500437-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.47df108d-c55a-4bad-8014-a043d154d3cb.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:14:23.8393817-04:00",
+      "recordId": 15613,
+      "reportId": "6ab31761-dc5e-47c7-aabc-a39b8edd9f99",
+      "code": "141",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260902-2257.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-163549468-0.sysdata.xml\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG-20260902-2257.dmp\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.a783481c-5726-431b-b6f8-f9139d79f607.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:14:23.8893062-04:00",
+      "recordId": 15614,
+      "reportId": "029eea57-b381-4c9e-a2ac-026e7fe78458",
+      "code": "a1000001",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\AMD_WATCHDOG\\AMD_WATCHDOG-20260902-2259.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-163609875-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.9073b456-6dc3-49d3-9f89-361ba0e64c04.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:14:24.1060209-04:00",
+      "recordId": 15615,
+      "reportId": "25c63f5b-6d6c-4926-9ab1-942662cde75e",
+      "code": "141",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260902-2259.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-163609968-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.0f7d0e82-6db9-4ab5-9388-3a56b77e810e.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:14:24.3283992-04:00",
+      "recordId": 15616,
+      "reportId": "7c65acc3-0045-4695-872d-10458e8bc856",
+      "code": "141",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260902-2302.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-163785171-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.8dbaeda6-f071-43e1-95af-441d7862c6c8.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:14:24.3549907-04:00",
+      "recordId": 15617,
+      "reportId": "6b1c0a87-4b7a-4bac-99d0-a90ff2f1759a",
+      "code": "141",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260902-2306.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-164063625-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.4ca608c1-87ec-4a64-b627-8310ca0462ba.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:14:24.4135999-04:00",
+      "recordId": 15618,
+      "reportId": "01a9f4da-9613-4a57-9cea-cb3292f38f84",
+      "code": "a1000001",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\AMD_WATCHDOG\\AMD_WATCHDOG-20260902-2306.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-164063546-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.45f004ce-23a4-47e1-80d7-caa44dca1f7e.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:14:24.4411541-04:00",
+      "recordId": 15619,
+      "reportId": "aa1670c3-85b3-40f9-9703-b8b6aa9c3d26",
+      "code": "141",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260902-2307.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-164078687-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.35ffc41b-8847-433f-8598-faf7e338dfaa.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:14:24.5104452-04:00",
+      "recordId": 15620,
+      "reportId": "6678b561-8c39-4675-9d3a-2148efc211c7",
+      "code": "141",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260902-2310.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-164270578-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.21916ef1-165a-4f13-bc55-751d67cf3cb7.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:14:24.5387907-04:00",
+      "recordId": 15621,
+      "reportId": "5af0362b-ef7e-4523-9ba0-2eefe525b84c",
+      "code": "141",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260906-2128.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-503752515-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.74992a85-060e-4e6b-98b8-2e19fe5aa7dd.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:14:24.5654894-04:00",
+      "recordId": 15622,
+      "reportId": "4a91108d-b3ec-4ff3-a9a5-c5a1fece42ff",
+      "code": "141",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260906-2129.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-503805312-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.30b9057f-037a-4344-b81a-f02d7125032e.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:14:24.5908999-04:00",
+      "recordId": 15623,
+      "reportId": "5880d346-5ecd-4c93-a8eb-576e32823930",
+      "code": "141",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260908-0013.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-96193296-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.3cb57269-ccc6-4799-8779-8b1b1898dd1e.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:17:21.1515585-04:00",
+      "recordId": 15678,
+      "reportId": "771e3890-57df-4dc1-b675-43048e8b7879",
+      "code": "a1000001",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\AMD_WATCHDOG\\AMD_WATCHDOG-20260902-2257.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-163500437-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.47df108d-c55a-4bad-8014-a043d154d3cb.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:17:21.1682998-04:00",
+      "recordId": 15679,
+      "reportId": "6ab31761-dc5e-47c7-aabc-a39b8edd9f99",
+      "code": "141",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260902-2257.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-163549468-0.sysdata.xml\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG-20260902-2257.dmp\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.a783481c-5726-431b-b6f8-f9139d79f607.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:17:21.1847003-04:00",
+      "recordId": 15680,
+      "reportId": "029eea57-b381-4c9e-a2ac-026e7fe78458",
+      "code": "a1000001",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\AMD_WATCHDOG\\AMD_WATCHDOG-20260902-2259.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-163609875-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.9073b456-6dc3-49d3-9f89-361ba0e64c04.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:17:21.2021584-04:00",
+      "recordId": 15681,
+      "reportId": "25c63f5b-6d6c-4926-9ab1-942662cde75e",
+      "code": "141",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260902-2259.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-163609968-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.0f7d0e82-6db9-4ab5-9388-3a56b77e810e.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:17:21.2195077-04:00",
+      "recordId": 15682,
+      "reportId": "7c65acc3-0045-4695-872d-10458e8bc856",
+      "code": "141",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260902-2302.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-163785171-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.8dbaeda6-f071-43e1-95af-441d7862c6c8.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:17:21.2362561-04:00",
+      "recordId": 15683,
+      "reportId": "6b1c0a87-4b7a-4bac-99d0-a90ff2f1759a",
+      "code": "141",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260902-2306.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-164063625-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.4ca608c1-87ec-4a64-b627-8310ca0462ba.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:17:21.2529395-04:00",
+      "recordId": 15684,
+      "reportId": "01a9f4da-9613-4a57-9cea-cb3292f38f84",
+      "code": "a1000001",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\AMD_WATCHDOG\\AMD_WATCHDOG-20260902-2306.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-164063546-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.45f004ce-23a4-47e1-80d7-caa44dca1f7e.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:17:21.2707410-04:00",
+      "recordId": 15685,
+      "reportId": "aa1670c3-85b3-40f9-9703-b8b6aa9c3d26",
+      "code": "141",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260902-2307.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-164078687-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.35ffc41b-8847-433f-8598-faf7e338dfaa.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:17:21.2868957-04:00",
+      "recordId": 15686,
+      "reportId": "6678b561-8c39-4675-9d3a-2148efc211c7",
+      "code": "141",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260902-2310.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-164270578-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.21916ef1-165a-4f13-bc55-751d67cf3cb7.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:17:21.3017312-04:00",
+      "recordId": 15687,
+      "reportId": "5af0362b-ef7e-4523-9ba0-2eefe525b84c",
+      "code": "141",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260906-2128.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-503752515-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.74992a85-060e-4e6b-98b8-2e19fe5aa7dd.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:17:21.3173424-04:00",
+      "recordId": 15688,
+      "reportId": "4a91108d-b3ec-4ff3-a9a5-c5a1fece42ff",
+      "code": "141",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260906-2129.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-503805312-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.30b9057f-037a-4344-b81a-f02d7125032e.tmp.xml"
+    },
+    {
+      "timeLocal": "2026-09-08T00:17:21.3318743-04:00",
+      "recordId": 15689,
+      "reportId": "5880d346-5ecd-4c93-a8eb-576e32823930",
+      "code": "141",
+      "reportStatus": "2049",
+      "attachedFiles": "\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260908-0013.dmp\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-96193296-0.sysdata.xml\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.3cb57269-ccc6-4799-8779-8b1b1898dd1e.tmp.xml"
+    }
+  ],
+  "applicationCrashHang": [],
+  "negativeSystem": {
+    "whea": 0,
+    "display4101": 0,
+    "amdFaultProvider": 0,
+    "limitation": "Counts are bounded readable logs, not proof events could not be lost or absent despite a fault"
+  },
+  "operational": [
+    {
+      "log": "Microsoft-Windows-Kernel-PnP/Configuration",
+      "enabled": true,
+      "count": 2,
+      "events": [
+        {
+          "timeLocal": "2026-09-08T00:14:23.1855203-04:00",
+          "timeUtc": "2026-09-08T04:14:23.1855203Z",
+          "log": "Microsoft-Windows-Kernel-PnP/Configuration",
+          "provider": "Microsoft-Windows-Kernel-PnP",
+          "id": 410,
+          "type": "Information",
+          "recordId": 1123,
+          "eventWriterProcessId": "4",
+          "eventWriterThreadId": "400",
+          "data": {
+            "DeviceInstanceId": "SWD\\XvddEnum\\XvddRootDevice_Instance",
+            "DriverName": "oem16.inf",
+            "ClassGuid": "{4d36e97b-e325-11ce-bfc1-08002be10318}",
+            "ServiceName": "Xvdd",
+            "LowerFilters": "",
+            "UpperFilters": "",
+            "Problem": "0x0",
+            "Status": "0x0"
+          },
+          "message": "Device SWD\\XvddEnum\\XvddRootDevice_Instance was started.\r\n\r\nDriver Name: oem16.inf\r\nClass GUID: {4d36e97b-e325-11ce-bfc1-08002be10318}\r\nService: Xvdd\r\nLower Filters: \r\nUpper Filters: "
+        },
+        {
+          "timeLocal": "2026-09-08T00:14:23.1760965-04:00",
+          "timeUtc": "2026-09-08T04:14:23.1760965Z",
+          "log": "Microsoft-Windows-Kernel-PnP/Configuration",
+          "provider": "Microsoft-Windows-Kernel-PnP",
+          "id": 400,
+          "type": "Information",
+          "recordId": 1122,
+          "eventWriterProcessId": "4",
+          "eventWriterThreadId": "400",
+          "data": {
+            "DeviceInstanceId": "SWD\\XvddEnum\\XvddRootDevice_Instance",
+            "DriverName": "oem16.inf",
+            "ClassGuid": "{4d36e97b-e325-11ce-bfc1-08002be10318}",
+            "DriverDate": "07/16/2026",
+            "DriverVersion": "10.0.22029.3",
+            "DriverProvider": "Xbox",
+            "DriverInbox": "false",
+            "DriverSection": "xvdd_Install_Control",
+            "DriverRank": "0xff0000",
+            "MatchingDeviceId": "XvddRootDevice",
+            "OutrankedDrivers": "oem16.inf:XvddRootDevice:00FF2000",
+            "DeviceUpdated": "true",
+            "Status": "0x0",
+            "ParentDeviceInstanceId": "HTREE\\ROOT\\0",
+            "DriverPackageId": "xvdd.inf_amd64_1e22073ba7136f03"
+          },
+          "message": "Device SWD\\XvddEnum\\XvddRootDevice_Instance was configured.\r\n\r\nDriver Name: oem16.inf\r\nDriver Package ID: xvdd.inf_amd64_1e22073ba7136f03\r\nClass GUID: {4d36e97b-e325-11ce-bfc1-08002be10318}\r\nDriver Date: 07/16/2026\r\nDriver Version: 10.0.22029.3\r\nDriver Provider: Xbox\r\nDriver Section: xvdd_Install_Control\r\nDriver Rank: 0xFF0000\r\nMatching Device ID: XvddRootDevice\r\nOutranked Drivers: oem16.inf:XvddRootDevice:00FF2000\r\nDevice Updated: true\r\nParent Device: HTREE\\ROOT\\0"
+        }
+      ]
+    },
+    {
+      "log": "Microsoft-Windows-DriverFrameworks-UserMode/Operational",
+      "enabled": false,
+      "count": 0,
+      "events": []
+    },
+    {
+      "log": "Microsoft-Windows-DeviceSetupManager/Admin",
+      "enabled": true,
+      "count": 0,
+      "events": []
+    },
+    {
+      "log": "Microsoft-Windows-WerKernel/Operational",
+      "enabled": true,
+      "count": 0,
+      "events": []
+    },
+    {
+      "log": "Microsoft-Windows-WER-Diag/Operational",
+      "enabled": true,
+      "count": 0,
+      "events": []
+    },
+    {
+      "log": "Microsoft-Windows-WER-PayloadHealth/Operational",
+      "enabled": true,
+      "count": 0,
+      "events": []
+    },
+    {
+      "log": "Microsoft-Windows-Resource-Exhaustion-Resolver/Operational",
+      "enabled": true,
+      "count": 0,
+      "events": []
+    },
+    {
+      "log": "Microsoft-Windows-Resource-Exhaustion-Detector/Operational",
+      "enabled": true,
+      "count": 2,
+      "events": [
+        {
+          "timeLocal": "2026-09-08T00:14:28.6807092-04:00",
+          "timeUtc": "2026-09-08T04:14:28.6807092Z",
+          "log": "Microsoft-Windows-Resource-Exhaustion-Detector/Operational",
+          "provider": "Microsoft-Windows-Resource-Exhaustion-Detector",
+          "id": 1001,
+          "type": "Information",
+          "recordId": 20,
+          "eventWriterProcessId": "10048",
+          "eventWriterThreadId": "10948",
+          "data": {},
+          "message": "The Windows Resource Exhaustion Detector started."
+        },
+        {
+          "timeLocal": "2026-09-08T00:14:27.6756197-04:00",
+          "timeUtc": "2026-09-08T04:14:27.6756197Z",
+          "log": "Microsoft-Windows-Resource-Exhaustion-Detector/Operational",
+          "provider": "Microsoft-Windows-Resource-Exhaustion-Detector",
+          "id": 1001,
+          "type": "Information",
+          "recordId": 19,
+          "eventWriterProcessId": "5456",
+          "eventWriterThreadId": "5908",
+          "data": {},
+          "message": "The Windows Resource Exhaustion Detector started."
+        }
+      ]
+    }
+  ],
+  "reliability": [
+    {
+      "TimeGenerated": "2026-09-08T00:14:30.044-04:00",
+      "SourceName": "MsiInstaller",
+      "EventIdentifier": 1035,
+      "ProductName": "Microsoft GameInput",
+      "Message": "Windows Installer reconfigured the product. Product Name: Microsoft GameInput. Product Version: 3.3.221.0. Product Language: 1033. Manufacturer: Microsoft Corporation. Reconfiguration success or error status: 0."
+    },
+    {
+      "TimeGenerated": "2026-09-08T00:14:20.787-04:00",
+      "SourceName": "EventLog",
+      "EventIdentifier": 6008,
+      "ProductName": "Windows",
+      "Message": "The previous system shutdown at 12:10:13 AM on ‎9/‎8/‎2026 was unexpected."
+    }
+  ],
+  "deviceSnapshot": [
+    {
+      "instanceId": "ROOT\\DISPLAY\\0000",
+      "friendlyName": "Meta Virtual Monitor",
+      "class": "Display",
+      "status": "OK",
+      "problem": "CM_PROB_NONE",
+      "properties": [
+        {
+          "KeyName": "DEVPKEY_Device_DriverProvider",
+          "Data": "Meta Inc."
+        },
+        {
+          "KeyName": "DEVPKEY_Device_DriverVersion",
+          "Data": "5.3.57.114"
+        },
+        {
+          "KeyName": "DEVPKEY_Device_Service",
+          "Data": "WUDFRd"
+        },
+        {
+          "KeyName": "DEVPKEY_Device_DriverInfPath",
+          "Data": "oem189.inf"
+        },
+        {
+          "KeyName": "DEVPKEY_Device_ProblemCode",
+          "Data": 0
+        }
+      ],
+      "limitation": "Current postrestart state; not incident-frame state or causal attribution"
+    },
+    {
+      "instanceId": "ROOT\\SYSTEM\\0004",
+      "friendlyName": "FakerInput Device",
+      "class": "System",
+      "status": "OK",
+      "problem": "CM_PROB_NONE",
+      "properties": [
+        {
+          "KeyName": "DEVPKEY_Device_DriverProvider",
+          "Data": "Ryochan7"
+        },
+        {
+          "KeyName": "DEVPKEY_Device_DriverVersion",
+          "Data": "0.1.0.0"
+        },
+        {
+          "KeyName": "DEVPKEY_Device_Service",
+          "Data": "mshidumdf"
+        },
+        {
+          "KeyName": "DEVPKEY_Device_DriverInfPath",
+          "Data": "oem81.inf"
+        },
+        {
+          "KeyName": "DEVPKEY_Device_ProblemCode",
+          "Data": 0
+        }
+      ],
+      "limitation": "Current postrestart state; not incident-frame state or causal attribution"
+    }
+  ],
+  "lastBoot": "2026-09-08T00:14:01.5000000-04:00",
+  "priorPackageIdentityAtRefresh": [
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\m13.6-manual-failure\\closeout.json",
+      "bytes": 4421,
+      "sha256": "1565d15fe8a738e1035a1bc08be8ad4d7e0fdbf9e925147481cf9662af52536d"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\m13.6-manual-failure\\identity.json",
+      "bytes": 36028,
+      "sha256": "e57d4d1065cbf661ee8a725ff5bf7c1c87ca08778529f425ee0eb8d276130fbf"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\m13.6-manual-failure\\identity.py",
+      "bytes": 5831,
+      "sha256": "1f54ca5e821f7d3cd1a92e94896153a1bd3967f35dc6b88ef4fe23777fd3e8e1"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\m13.6-manual-failure\\ksa-history.md",
+      "bytes": 11244,
+      "sha256": "6d9ad5c0b32febd3fd8072c1f968aaaf343bde1251cb63ca23a1b737c992690a"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\m13.6-manual-failure\\README.md",
+      "bytes": 17283,
+      "sha256": "39dcd0427b6a137af35fb4f6006e65d846e896916d48171c4b9311c61272d796"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\m13.6-manual-failure\\verify-a.md",
+      "bytes": 8274,
+      "sha256": "54bdbe59601104a5a2ea1e3bc84d19cbf2df92489b3522eba07f35924f7989c5"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\m13.6-manual-failure\\verify-b.md",
+      "bytes": 12444,
+      "sha256": "391e496467b2b90cbfd6fd29d286440b21712aeaf0bbc48b4bae9979d9421a9b"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\m13.6-manual-failure\\verify.py",
+      "bytes": 5715,
+      "sha256": "1d6eed3ff11c2f822c5026b478f35aba2190c22e4f62c314c4e160d62547d428"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\m13.6-manual-failure\\work-a.json",
+      "bytes": 47009,
+      "sha256": "f2db58749078f2b59131e046a93551ae1a8a8d3a324c8e23c458b922c733bcfc"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\m13.6-manual-failure\\work-a.md",
+      "bytes": 10408,
+      "sha256": "14c5494146a9d7e7ba96680cfad91b7657452f7641072f6ca075d2be9b1f0228"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\m13.6-manual-failure\\work-b.json",
+      "bytes": 41825,
+      "sha256": "53c87be77c24dca56687bdf25b7d580a332d732beaafcc3e87c1d70db25d29be"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\m13.6-manual-failure\\work-b.md",
+      "bytes": 20272,
+      "sha256": "1d487be7c6eb65adb4db122c2e36194b3ce9fc24d9b2b5dc196e5005f6f42e86"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\m13.6-manual-failure\\work-c-source.json",
+      "bytes": 25742,
+      "sha256": "90904ded45b313d2a7fda800412b44c2630f435a23799811d94b72a6e69754f2"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\m13.6-manual-failure\\work-c-source.md",
+      "bytes": 14184,
+      "sha256": "a68856a288e577f904bdb87f8f1bea814203c2ef76f49b7968dfc497ac376abf"
+    }
+  ],
+  "protectedAccess": "Not attempted in this task; parent owns dump/Report.wer access. Earlier denied access and paths remain in preserved prior package.",
+  "eventWriterIdentityLimit": "Execution ProcessID/ThreadID identifies event writer, not established GPU-fault initiator.",
+  "scope": "No NovaCore execution, GPU workload, builds, production/source changes, registry/ACL changes, dump parsing, or broad log mining."
+}

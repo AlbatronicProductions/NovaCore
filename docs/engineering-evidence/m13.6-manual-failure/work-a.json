@@ -1,0 +1,981 @@
+{
+  "schema": 1,
+  "role": "Work A Windows/runtime failure evidence",
+  "observedAtUtc": "2026-09-08T04:32:34.8164688Z",
+  "timeZone": "America/New_York (UTC-04:00 at event)",
+  "queryWindow": {
+    "startLocal": "2026-09-07T22:00:00.0000000",
+    "endLocal": "2026-09-08T00:32:34.8164688-04:00"
+  },
+  "classification": {
+    "pacingCausality": "Not established",
+    "preciseObservation": "Windows LiveKernelEvent 0x141 VIDEO_ENGINE_TIMEOUT_DETECTED",
+    "m13_6Causality": "Unresolved; neither caused nor exonerated",
+    "observedFailureClass": "GPU-DEVICE-OR-DRIVER-FAILURE",
+    "initiatingCause": "INSUFFICIENT EVIDENCE"
+  },
+  "systemEventCount": 178,
+  "systemRelevant": [
+    {
+      "timeLocal": "2026-09-08T00:14:08.4078946-04:00",
+      "timeUtc": "2026-09-08T04:14:08.4078946Z",
+      "id": 125,
+      "provider": "Microsoft-Windows-Kernel-Power",
+      "recordId": 12784,
+      "level": "Information",
+      "message": "ACPI thermal zone \\_TZ.TZ10 has been enumerated.             \r\n_PSV = 290K             \r\n_TC1 = 0             \r\n_TC2 = 0             \r\n_TSP = 1000ms             \r\n_AC0 = 0K             \r\n_AC1 = 0K             \r\n_AC2 = 0K             \r\n_AC3 = 0K             \r\n_AC4 = 0K             \r\n_AC5 = 0K             \r\n_AC6 = 0K             \r\n_AC7 = 0K             \r\n_AC8 = 0K             \r\n_AC9 = 0K             \r\n_CRT = 294K             \r\n_HOT = 293K             \r\nminimum throttle = 0             \r\n_CR3 = 0K"
+    },
+    {
+      "timeLocal": "2026-09-08T00:14:05.5437614-04:00",
+      "timeUtc": "2026-09-08T04:14:05.5437614Z",
+      "id": 172,
+      "provider": "Microsoft-Windows-Kernel-Power",
+      "recordId": 12780,
+      "level": "Information",
+      "message": "Connectivity state in standby: Disconnected, Reason: NIC compliance"
+    },
+    {
+      "timeLocal": "2026-09-08T00:14:05.5435891-04:00",
+      "timeUtc": "2026-09-08T04:14:05.5435891Z",
+      "id": 41,
+      "provider": "Microsoft-Windows-Kernel-Power",
+      "recordId": 12779,
+      "level": "Critical",
+      "message": "The system has rebooted without cleanly shutting down first. This error could be caused if the system stopped responding, crashed, or lost power unexpectedly.",
+      "xml": "<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Kernel-Power' Guid='{331c3b3a-2005-44c2-ac5e-77220c37d6b4}'/><EventID>41</EventID><Version>10</Version><Level>1</Level><Task>63</Task><Opcode>0</Opcode><Keywords>0x8000400000000002</Keywords><TimeCreated SystemTime='2026-09-08T04:14:05.5435891Z'/><EventRecordID>12779</EventRecordID><Correlation/><Execution ProcessID='4' ThreadID='8'/><Channel>System</Channel><Computer>Albatronic007</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='BugcheckCode'>0</Data><Data Name='BugcheckParameter1'>0x0</Data><Data Name='BugcheckParameter2'>0x0</Data><Data Name='BugcheckParameter3'>0x0</Data><Data Name='BugcheckParameter4'>0x0</Data><Data Name='SleepInProgress'>0</Data><Data Name='PowerButtonTimestamp'>0</Data><Data Name='BootAppStatus'>0</Data><Data Name='Checkpoint'>0</Data><Data Name='ConnectedStandbyInProgress'>false</Data><Data Name='SystemSleepTransitionsToOn'>0</Data><Data Name='CsEntryScenarioInstanceId'>0</Data><Data Name='BugcheckInfoFromEFI'>false</Data><Data Name='CheckpointStatus'>0</Data><Data Name='CsEntryScenarioInstanceIdV2'>0</Data><Data Name='LongPowerButtonPressDetected'>false</Data><Data Name='LidReliability'>false</Data><Data Name='InputSuppressionState'>0</Data><Data Name='PowerButtonSuppressionState'>0</Data><Data Name='LidState'>3</Data><Data Name='WHEABootErrorCount'>0</Data></EventData></Event>"
+    },
+    {
+      "timeLocal": "2026-09-08T00:14:02.2451160-04:00",
+      "timeUtc": "2026-09-08T04:14:02.2451160Z",
+      "id": 30,
+      "provider": "Microsoft-Windows-Kernel-Boot",
+      "recordId": 12764,
+      "level": "Information",
+      "message": "The firmware reported boot metrics."
+    },
+    {
+      "timeLocal": "2026-09-08T00:14:20.7884582-04:00",
+      "timeUtc": "2026-09-08T04:14:20.7884582Z",
+      "id": 6005,
+      "provider": "EventLog",
+      "recordId": 12761,
+      "level": "Information",
+      "message": "The Event log service was started."
+    },
+    {
+      "timeLocal": "2026-09-08T00:14:20.7873331-04:00",
+      "timeUtc": "2026-09-08T04:14:20.7873331Z",
+      "id": 6008,
+      "provider": "EventLog",
+      "recordId": 12759,
+      "level": "Error",
+      "message": "The previous system shutdown at 12:10:13 AM on \u200e9/\u200e8/\u200e2026 was unexpected."
+    },
+    {
+      "timeLocal": "2026-09-08T00:14:02.2358967-04:00",
+      "timeUtc": "2026-09-08T04:14:02.2358967Z",
+      "id": 27,
+      "provider": "Microsoft-Windows-Kernel-Boot",
+      "recordId": 12753,
+      "level": "Information",
+      "message": "The boot type was 0x0."
+    },
+    {
+      "timeLocal": "2026-09-08T00:14:02.2358965-04:00",
+      "timeUtc": "2026-09-08T04:14:02.2358965Z",
+      "id": 25,
+      "provider": "Microsoft-Windows-Kernel-Boot",
+      "recordId": 12752,
+      "level": "Information",
+      "message": "The boot menu policy was 0x1."
+    },
+    {
+      "timeLocal": "2026-09-08T00:14:02.2358845-04:00",
+      "timeUtc": "2026-09-08T04:14:02.2358845Z",
+      "id": 238,
+      "provider": "Microsoft-Windows-Kernel-Boot",
+      "recordId": 12751,
+      "level": "Information",
+      "message": "EFI time zone bias: 2047. Daylight flags: 0. Firmware time: \u200e2026\u200e-\u200e09\u200e-\u200e08T00:14:00.000000000Z."
+    },
+    {
+      "timeLocal": "2026-09-08T00:14:02.2358503-04:00",
+      "timeUtc": "2026-09-08T04:14:02.2358503Z",
+      "id": 20,
+      "provider": "Microsoft-Windows-Kernel-Boot",
+      "recordId": 12750,
+      "level": "Information",
+      "message": "The last shutdown's success status was false. The last boot's success status was true."
+    },
+    {
+      "timeLocal": "2026-09-08T00:14:02.2358290-04:00",
+      "timeUtc": "2026-09-08T04:14:02.2358290Z",
+      "id": 32,
+      "provider": "Microsoft-Windows-Kernel-Boot",
+      "recordId": 12749,
+      "level": "Information",
+      "message": "The bootmgr spent 0 ms waiting for user input."
+    },
+    {
+      "timeLocal": "2026-09-08T00:14:02.2358197-04:00",
+      "timeUtc": "2026-09-08T04:14:02.2358197Z",
+      "id": 18,
+      "provider": "Microsoft-Windows-Kernel-Boot",
+      "recordId": 12748,
+      "level": "Information",
+      "message": "There are 0x2 boot options on this system."
+    },
+    {
+      "timeLocal": "2026-09-08T00:14:02.2358103-04:00",
+      "timeUtc": "2026-09-08T04:14:02.2358103Z",
+      "id": 153,
+      "provider": "Microsoft-Windows-Kernel-Boot",
+      "recordId": 12747,
+      "level": "Information",
+      "message": "Virtualization-based security (policies: VBS Enabled,VSM Required,Boot Chain Signer Soft Enforced) is enabled due to HyperV."
+    },
+    {
+      "timeLocal": "2026-09-08T00:10:40.0162139-04:00",
+      "timeUtc": "2026-09-08T04:10:40.0162139Z",
+      "id": 4266,
+      "provider": "Tcpip",
+      "recordId": 12744,
+      "level": "Warning",
+      "message": "A request to allocate an ephemeral port number from the global UDP port space has failed due to all such ports being in use."
+    }
+  ],
+  "prebootSystem": [
+    {
+      "timeLocal": "2026-09-08T00:10:40.0162139-04:00",
+      "timeUtc": "2026-09-08T04:10:40.0162139Z",
+      "id": 4266,
+      "provider": "Tcpip",
+      "recordId": 12744,
+      "level": "Warning",
+      "message": "A request to allocate an ephemeral port number from the global UDP port space has failed due to all such ports being in use."
+    },
+    {
+      "timeLocal": "2026-09-08T00:10:33.0951874-04:00",
+      "timeUtc": "2026-09-08T04:10:33.0951874Z",
+      "id": 7040,
+      "provider": "Service Control Manager",
+      "recordId": 12743,
+      "level": "Information",
+      "message": "The start type of the Background Intelligent Transfer Service service was changed from auto start to demand start."
+    },
+    {
+      "timeLocal": "2026-09-08T00:06:28.7365071-04:00",
+      "timeUtc": "2026-09-08T04:06:28.7365071Z",
+      "id": 7040,
+      "provider": "Service Control Manager",
+      "recordId": 12742,
+      "level": "Information",
+      "message": "The start type of the Background Intelligent Transfer Service service was changed from demand start to auto start."
+    },
+    {
+      "timeLocal": "2026-09-08T00:03:04.7737817-04:00",
+      "timeUtc": "2026-09-08T04:03:04.7737817Z",
+      "id": 37,
+      "provider": "Microsoft-Windows-Time-Service",
+      "recordId": 12741,
+      "level": "Information",
+      "message": "The time provider NtpClient is currently receiving valid time data from time.windows.com,0x9 (ntp.m|0x9|0.0.0.0:123->168.61.215.74:123)."
+    },
+    {
+      "timeLocal": "2026-09-08T00:03:04.7063522-04:00",
+      "timeUtc": "2026-09-08T04:03:04.7063522Z",
+      "id": 158,
+      "provider": "Microsoft-Windows-Time-Service",
+      "recordId": 12740,
+      "level": "Information",
+      "message": "The time provider 'VMICTimeProvider' has indicated that the current hardware and operating environment is not supported and has stopped. This behavior is expected for VMICTimeProvider on non-HyperV-guest environments. This may be the expected behavior for the current provider in the current operating environment as well."
+    },
+    {
+      "timeLocal": "2026-09-07T23:54:25.1732429-04:00",
+      "timeUtc": "2026-09-08T03:54:25.1732429Z",
+      "id": 7040,
+      "provider": "Service Control Manager",
+      "recordId": 12739,
+      "level": "Information",
+      "message": "The start type of the Background Intelligent Transfer Service service was changed from auto start to demand start."
+    },
+    {
+      "timeLocal": "2026-09-07T23:50:20.8704809-04:00",
+      "timeUtc": "2026-09-08T03:50:20.8704809Z",
+      "id": 7040,
+      "provider": "Service Control Manager",
+      "recordId": 12738,
+      "level": "Information",
+      "message": "The start type of the Background Intelligent Transfer Service service was changed from demand start to auto start."
+    },
+    {
+      "timeLocal": "2026-09-07T23:38:17.0206514-04:00",
+      "timeUtc": "2026-09-08T03:38:17.0206514Z",
+      "id": 7040,
+      "provider": "Service Control Manager",
+      "recordId": 12737,
+      "level": "Information",
+      "message": "The start type of the Background Intelligent Transfer Service service was changed from auto start to demand start."
+    },
+    {
+      "timeLocal": "2026-09-07T23:34:12.6017888-04:00",
+      "timeUtc": "2026-09-08T03:34:12.6017888Z",
+      "id": 7040,
+      "provider": "Service Control Manager",
+      "recordId": 12736,
+      "level": "Information",
+      "message": "The start type of the Background Intelligent Transfer Service service was changed from demand start to auto start."
+    },
+    {
+      "timeLocal": "2026-09-07T23:30:39.8128644-04:00",
+      "timeUtc": "2026-09-08T03:30:39.8128644Z",
+      "id": 19,
+      "provider": "Microsoft-Windows-WindowsUpdateClient",
+      "recordId": 12735,
+      "level": "Information",
+      "message": "Installation Successful: Windows successfully installed the following update: Security Intelligence Update for Microsoft Defender Antivirus - KB2267602 (Version 1.459.105.0) - Current Channel (Broad)"
+    },
+    {
+      "timeLocal": "2026-09-07T23:30:35.4177991-04:00",
+      "timeUtc": "2026-09-08T03:30:35.4177991Z",
+      "id": 43,
+      "provider": "Microsoft-Windows-WindowsUpdateClient",
+      "recordId": 12734,
+      "level": "Information",
+      "message": "Installation Started: Windows has started installing the following update: Security Intelligence Update for Microsoft Defender Antivirus - KB2267602 (Version 1.459.105.0) - Current Channel (Broad)"
+    },
+    {
+      "timeLocal": "2026-09-07T23:30:35.4177973-04:00",
+      "timeUtc": "2026-09-08T03:30:35.4177973Z",
+      "id": 44,
+      "provider": "Microsoft-Windows-WindowsUpdateClient",
+      "recordId": 12733,
+      "level": "Information",
+      "message": "Windows Update started downloading an update."
+    },
+    {
+      "timeLocal": "2026-09-07T23:22:08.8116103-04:00",
+      "timeUtc": "2026-09-08T03:22:08.8116103Z",
+      "id": 7040,
+      "provider": "Service Control Manager",
+      "recordId": 12732,
+      "level": "Information",
+      "message": "The start type of the Background Intelligent Transfer Service service was changed from auto start to demand start."
+    },
+    {
+      "timeLocal": "2026-09-07T23:18:04.4420315-04:00",
+      "timeUtc": "2026-09-08T03:18:04.4420315Z",
+      "id": 7040,
+      "provider": "Service Control Manager",
+      "recordId": 12731,
+      "level": "Information",
+      "message": "The start type of the Background Intelligent Transfer Service service was changed from demand start to auto start."
+    },
+    {
+      "timeLocal": "2026-09-07T23:06:01.0786989-04:00",
+      "timeUtc": "2026-09-08T03:06:01.0786989Z",
+      "id": 7040,
+      "provider": "Service Control Manager",
+      "recordId": 12730,
+      "level": "Information",
+      "message": "The start type of the Background Intelligent Transfer Service service was changed from auto start to demand start."
+    },
+    {
+      "timeLocal": "2026-09-07T23:01:56.7556120-04:00",
+      "timeUtc": "2026-09-08T03:01:56.7556120Z",
+      "id": 7040,
+      "provider": "Service Control Manager",
+      "recordId": 12729,
+      "level": "Information",
+      "message": "The start type of the Background Intelligent Transfer Service service was changed from demand start to auto start."
+    },
+    {
+      "timeLocal": "2026-09-07T22:49:53.6931705-04:00",
+      "timeUtc": "2026-09-08T02:49:53.6931705Z",
+      "id": 7040,
+      "provider": "Service Control Manager",
+      "recordId": 12728,
+      "level": "Information",
+      "message": "The start type of the Background Intelligent Transfer Service service was changed from auto start to demand start."
+    },
+    {
+      "timeLocal": "2026-09-07T22:45:49.3694828-04:00",
+      "timeUtc": "2026-09-08T02:45:49.3694828Z",
+      "id": 7040,
+      "provider": "Service Control Manager",
+      "recordId": 12727,
+      "level": "Information",
+      "message": "The start type of the Background Intelligent Transfer Service service was changed from demand start to auto start."
+    },
+    {
+      "timeLocal": "2026-09-07T22:33:46.1944538-04:00",
+      "timeUtc": "2026-09-08T02:33:46.1944538Z",
+      "id": 7040,
+      "provider": "Service Control Manager",
+      "recordId": 12726,
+      "level": "Information",
+      "message": "The start type of the Background Intelligent Transfer Service service was changed from auto start to demand start."
+    },
+    {
+      "timeLocal": "2026-09-07T22:29:41.7454421-04:00",
+      "timeUtc": "2026-09-08T02:29:41.7454421Z",
+      "id": 7040,
+      "provider": "Service Control Manager",
+      "recordId": 12725,
+      "level": "Information",
+      "message": "The start type of the Background Intelligent Transfer Service service was changed from demand start to auto start."
+    },
+    {
+      "timeLocal": "2026-09-07T22:17:38.7356750-04:00",
+      "timeUtc": "2026-09-08T02:17:38.7356750Z",
+      "id": 7040,
+      "provider": "Service Control Manager",
+      "recordId": 12724,
+      "level": "Information",
+      "message": "The start type of the Background Intelligent Transfer Service service was changed from auto start to demand start."
+    },
+    {
+      "timeLocal": "2026-09-07T22:12:04.3143333-04:00",
+      "timeUtc": "2026-09-08T02:12:04.3143333Z",
+      "id": 7040,
+      "provider": "Service Control Manager",
+      "recordId": 12723,
+      "level": "Information",
+      "message": "The start type of the Background Intelligent Transfer Service service was changed from demand start to auto start."
+    },
+    {
+      "timeLocal": "2026-09-07T22:01:35.7664226-04:00",
+      "timeUtc": "2026-09-08T02:01:35.7664226Z",
+      "id": 7040,
+      "provider": "Service Control Manager",
+      "recordId": 12722,
+      "level": "Information",
+      "message": "The start type of the Background Intelligent Transfer Service service was changed from auto start to demand start."
+    }
+  ],
+  "applicationCrashHang": [],
+  "freshWatchdogEvents": [
+    {
+      "timeLocal": "2026-09-08T00:17:21.3318743-04:00",
+      "timeUtc": "2026-09-08T04:17:21.3318743Z",
+      "id": 1001,
+      "provider": "Windows Error Reporting",
+      "recordId": 15689,
+      "level": "Information",
+      "message": "Fault bucket , type 0\r\nEvent Name: LiveKernelEvent\r\nResponse: Not available\r\nCab Id: 0\r\n\r\nProblem signature:\r\nP1: 141\r\nP2: ffffe603859e4010\r\nP3: fffff8079758b6a0\r\nP4: 0\r\nP5: ffffe6035aae30c0\r\nP6: 10_0_26200\r\nP7: 0_0\r\nP8: 256_1\r\nP9: \r\nP10: \r\n\r\nAttached files:\r\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260908-0013.dmp\r\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-96193296-0.sysdata.xml\r\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.3cb57269-ccc6-4799-8779-8b1b1898dd1e.tmp.xml\r\n\r\nThese files may be available here:\r\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportQueue\\Kernel_141_8fd8944c0573f6a90fdeed091b6736e541e5bff_00000000_5880d346-5ecd-4c93-a8eb-576e32823930\r\n\r\nAnalysis symbol: \r\nRechecking for solution: 0\r\nReport Id: 5880d346-5ecd-4c93-a8eb-576e32823930\r\nReport Status: 2049\r\nHashed bucket: \r\nCab Guid: 0",
+      "xml": "<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Windows Error Reporting' Guid='{0ead09bd-2157-539a-8d6d-c87f95b64d70}'/><EventID>1001</EventID><Version>0</Version><Level>4</Level><Task>0</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-09-08T04:17:21.3318743Z'/><EventRecordID>15689</EventRecordID><Correlation/><Execution ProcessID='24468' ThreadID='24476'/><Channel>Application</Channel><Computer>Albatronic007</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='Bucket'></Data><Data Name='BucketType'>0</Data><Data Name='EventName'>LiveKernelEvent</Data><Data Name='Response'>Not available</Data><Data Name='CabId'>0</Data><Data Name='P1'>141</Data><Data Name='P2'>ffffe603859e4010</Data><Data Name='P3'>fffff8079758b6a0</Data><Data Name='P4'>0</Data><Data Name='P5'>ffffe6035aae30c0</Data><Data Name='P6'>10_0_26200</Data><Data Name='P7'>0_0</Data><Data Name='P8'>256_1</Data><Data Name='P9'></Data><Data Name='P10'></Data><Data Name='AttachedFiles'>\r\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260908-0013.dmp\r\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-96193296-0.sysdata.xml\r\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.3cb57269-ccc6-4799-8779-8b1b1898dd1e.tmp.xml</Data><Data Name='StorePath'>\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportQueue\\Kernel_141_8fd8944c0573f6a90fdeed091b6736e541e5bff_00000000_5880d346-5ecd-4c93-a8eb-576e32823930</Data><Data Name='AnalysisSymbol'></Data><Data Name='Rechecking'>0</Data><Data Name='ReportId'>5880d346-5ecd-4c93-a8eb-576e32823930</Data><Data Name='ReportStatus'>2049</Data><Data Name='HashedBucket'></Data><Data Name='CabGuid'>0</Data></EventData></Event>"
+    },
+    {
+      "timeLocal": "2026-09-08T00:14:24.5908999-04:00",
+      "timeUtc": "2026-09-08T04:14:24.5908999Z",
+      "id": 1001,
+      "provider": "Windows Error Reporting",
+      "recordId": 15623,
+      "level": "Information",
+      "message": "Fault bucket , type 0\r\nEvent Name: LiveKernelEvent\r\nResponse: Not available\r\nCab Id: 0\r\n\r\nProblem signature:\r\nP1: 141\r\nP2: ffffe603859e4010\r\nP3: fffff8079758b6a0\r\nP4: 0\r\nP5: ffffe6035aae30c0\r\nP6: 10_0_26200\r\nP7: 0_0\r\nP8: 256_1\r\nP9: \r\nP10: \r\n\r\nAttached files:\r\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260908-0013.dmp\r\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-96193296-0.sysdata.xml\r\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.3cb57269-ccc6-4799-8779-8b1b1898dd1e.tmp.xml\r\n\r\nThese files may be available here:\r\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportQueue\\Kernel_141_8fd8944c0573f6a90fdeed091b6736e541e5bff_00000000_5880d346-5ecd-4c93-a8eb-576e32823930\r\n\r\nAnalysis symbol: \r\nRechecking for solution: 0\r\nReport Id: 5880d346-5ecd-4c93-a8eb-576e32823930\r\nReport Status: 2049\r\nHashed bucket: \r\nCab Guid: 0",
+      "xml": "<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Windows Error Reporting' Guid='{0ead09bd-2157-539a-8d6d-c87f95b64d70}'/><EventID>1001</EventID><Version>0</Version><Level>4</Level><Task>0</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-09-08T04:14:24.5908999Z'/><EventRecordID>15623</EventRecordID><Correlation/><Execution ProcessID='9652' ThreadID='9656'/><Channel>Application</Channel><Computer>Albatronic007</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='Bucket'></Data><Data Name='BucketType'>0</Data><Data Name='EventName'>LiveKernelEvent</Data><Data Name='Response'>Not available</Data><Data Name='CabId'>0</Data><Data Name='P1'>141</Data><Data Name='P2'>ffffe603859e4010</Data><Data Name='P3'>fffff8079758b6a0</Data><Data Name='P4'>0</Data><Data Name='P5'>ffffe6035aae30c0</Data><Data Name='P6'>10_0_26200</Data><Data Name='P7'>0_0</Data><Data Name='P8'>256_1</Data><Data Name='P9'></Data><Data Name='P10'></Data><Data Name='AttachedFiles'>\r\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260908-0013.dmp\r\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-96193296-0.sysdata.xml\r\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.3cb57269-ccc6-4799-8779-8b1b1898dd1e.tmp.xml</Data><Data Name='StorePath'>\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportQueue\\Kernel_141_8fd8944c0573f6a90fdeed091b6736e541e5bff_00000000_5880d346-5ecd-4c93-a8eb-576e32823930</Data><Data Name='AnalysisSymbol'></Data><Data Name='Rechecking'>0</Data><Data Name='ReportId'>5880d346-5ecd-4c93-a8eb-576e32823930</Data><Data Name='ReportStatus'>2049</Data><Data Name='HashedBucket'></Data><Data Name='CabGuid'>0</Data></EventData></Event>"
+    },
+    {
+      "timeLocal": "2026-09-08T00:13:10.0808385-04:00",
+      "timeUtc": "2026-09-08T04:13:10.0808385Z",
+      "id": 1001,
+      "provider": "Windows Error Reporting",
+      "recordId": 15585,
+      "level": "Information",
+      "message": "Fault bucket , type 0\r\nEvent Name: LiveKernelEvent\r\nResponse: Not available\r\nCab Id: 0\r\n\r\nProblem signature:\r\nP1: 141\r\nP2: ffffe603859e4010\r\nP3: fffff8079758b6a0\r\nP4: 0\r\nP5: ffffe6035aae30c0\r\nP6: 10_0_26200\r\nP7: 0_0\r\nP8: 256_1\r\nP9: \r\nP10: \r\n\r\nAttached files:\r\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260908-0013.dmp\r\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-96193296-0.sysdata.xml\r\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.3cb57269-ccc6-4799-8779-8b1b1898dd1e.tmp.xml\r\n\r\nThese files may be available here:\r\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportQueue\\Kernel_141_8fd8944c0573f6a90fdeed091b6736e541e5bff_00000000_5880d346-5ecd-4c93-a8eb-576e32823930\r\n\r\nAnalysis symbol: \r\nRechecking for solution: 0\r\nReport Id: 5880d346-5ecd-4c93-a8eb-576e32823930\r\nReport Status: 4\r\nHashed bucket: \r\nCab Guid: 0",
+      "xml": "<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Windows Error Reporting' Guid='{0ead09bd-2157-539a-8d6d-c87f95b64d70}'/><EventID>1001</EventID><Version>0</Version><Level>4</Level><Task>0</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-09-08T04:13:10.0808385Z'/><EventRecordID>15585</EventRecordID><Correlation/><Execution ProcessID='36372' ThreadID='33152'/><Channel>Application</Channel><Computer>Albatronic007</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='Bucket'></Data><Data Name='BucketType'>0</Data><Data Name='EventName'>LiveKernelEvent</Data><Data Name='Response'>Not available</Data><Data Name='CabId'>0</Data><Data Name='P1'>141</Data><Data Name='P2'>ffffe603859e4010</Data><Data Name='P3'>fffff8079758b6a0</Data><Data Name='P4'>0</Data><Data Name='P5'>ffffe6035aae30c0</Data><Data Name='P6'>10_0_26200</Data><Data Name='P7'>0_0</Data><Data Name='P8'>256_1</Data><Data Name='P9'></Data><Data Name='P10'></Data><Data Name='AttachedFiles'>\r\n\\\\?\\C:\\WINDOWS\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260908-0013.dmp\r\n\\\\?\\C:\\WINDOWS\\SystemTemp\\WER-96193296-0.sysdata.xml\r\n\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\Temp\\WER.3cb57269-ccc6-4799-8779-8b1b1898dd1e.tmp.xml</Data><Data Name='StorePath'>\\\\?\\C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportQueue\\Kernel_141_8fd8944c0573f6a90fdeed091b6736e541e5bff_00000000_5880d346-5ecd-4c93-a8eb-576e32823930</Data><Data Name='AnalysisSymbol'></Data><Data Name='Rechecking'>0</Data><Data Name='ReportId'>5880d346-5ecd-4c93-a8eb-576e32823930</Data><Data Name='ReportStatus'>4</Data><Data Name='HashedBucket'></Data><Data Name='CabGuid'>0</Data></EventData></Event>"
+    }
+  ],
+  "werSummary": [
+    {
+      "timeUtc": "2026-09-08T04:17:21.3318743Z",
+      "recordId": 15689,
+      "eventName": "LiveKernelEvent",
+      "code": "141",
+      "reportId": "5880d346-5ecd-4c93-a8eb-576e32823930",
+      "dump": "WATCHDOG-20260908-0013.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:17:21.3173424Z",
+      "recordId": 15688,
+      "eventName": "LiveKernelEvent",
+      "code": "141",
+      "reportId": "4a91108d-b3ec-4ff3-a9a5-c5a1fece42ff",
+      "dump": "WATCHDOG-20260906-2129.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:17:21.3017312Z",
+      "recordId": 15687,
+      "eventName": "LiveKernelEvent",
+      "code": "141",
+      "reportId": "5af0362b-ef7e-4523-9ba0-2eefe525b84c",
+      "dump": "WATCHDOG-20260906-2128.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:17:21.2868957Z",
+      "recordId": 15686,
+      "eventName": "LiveKernelEvent",
+      "code": "141",
+      "reportId": "6678b561-8c39-4675-9d3a-2148efc211c7",
+      "dump": "WATCHDOG-20260902-2310.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:17:21.2707410Z",
+      "recordId": 15685,
+      "eventName": "LiveKernelEvent",
+      "code": "141",
+      "reportId": "aa1670c3-85b3-40f9-9703-b8b6aa9c3d26",
+      "dump": "WATCHDOG-20260902-2307.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:17:21.2529395Z",
+      "recordId": 15684,
+      "eventName": "LiveKernelEvent",
+      "code": "a1000001",
+      "reportId": "01a9f4da-9613-4a57-9cea-cb3292f38f84",
+      "dump": "AMD_WATCHDOG-20260902-2306.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:17:21.2362561Z",
+      "recordId": 15683,
+      "eventName": "LiveKernelEvent",
+      "code": "141",
+      "reportId": "6b1c0a87-4b7a-4bac-99d0-a90ff2f1759a",
+      "dump": "WATCHDOG-20260902-2306.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:17:21.2195077Z",
+      "recordId": 15682,
+      "eventName": "LiveKernelEvent",
+      "code": "141",
+      "reportId": "7c65acc3-0045-4695-872d-10458e8bc856",
+      "dump": "WATCHDOG-20260902-2302.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:17:21.2021584Z",
+      "recordId": 15681,
+      "eventName": "LiveKernelEvent",
+      "code": "141",
+      "reportId": "25c63f5b-6d6c-4926-9ab1-942662cde75e",
+      "dump": "WATCHDOG-20260902-2259.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:17:21.1847003Z",
+      "recordId": 15680,
+      "eventName": "LiveKernelEvent",
+      "code": "a1000001",
+      "reportId": "029eea57-b381-4c9e-a2ac-026e7fe78458",
+      "dump": "AMD_WATCHDOG-20260902-2259.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:17:21.1682998Z",
+      "recordId": 15679,
+      "eventName": "LiveKernelEvent",
+      "code": "141",
+      "reportId": "6ab31761-dc5e-47c7-aabc-a39b8edd9f99",
+      "dump": "WATCHDOG-20260902-2257.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:17:21.1515585Z",
+      "recordId": 15678,
+      "eventName": "LiveKernelEvent",
+      "code": "a1000001",
+      "reportId": "771e3890-57df-4dc1-b675-43048e8b7879",
+      "dump": "AMD_WATCHDOG-20260902-2257.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:14:24.5908999Z",
+      "recordId": 15623,
+      "eventName": "LiveKernelEvent",
+      "code": "141",
+      "reportId": "5880d346-5ecd-4c93-a8eb-576e32823930",
+      "dump": "WATCHDOG-20260908-0013.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:14:24.5654894Z",
+      "recordId": 15622,
+      "eventName": "LiveKernelEvent",
+      "code": "141",
+      "reportId": "4a91108d-b3ec-4ff3-a9a5-c5a1fece42ff",
+      "dump": "WATCHDOG-20260906-2129.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:14:24.5387907Z",
+      "recordId": 15621,
+      "eventName": "LiveKernelEvent",
+      "code": "141",
+      "reportId": "5af0362b-ef7e-4523-9ba0-2eefe525b84c",
+      "dump": "WATCHDOG-20260906-2128.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:14:24.5104452Z",
+      "recordId": 15620,
+      "eventName": "LiveKernelEvent",
+      "code": "141",
+      "reportId": "6678b561-8c39-4675-9d3a-2148efc211c7",
+      "dump": "WATCHDOG-20260902-2310.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:14:24.4411541Z",
+      "recordId": 15619,
+      "eventName": "LiveKernelEvent",
+      "code": "141",
+      "reportId": "aa1670c3-85b3-40f9-9703-b8b6aa9c3d26",
+      "dump": "WATCHDOG-20260902-2307.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:14:24.4135999Z",
+      "recordId": 15618,
+      "eventName": "LiveKernelEvent",
+      "code": "a1000001",
+      "reportId": "01a9f4da-9613-4a57-9cea-cb3292f38f84",
+      "dump": "AMD_WATCHDOG-20260902-2306.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:14:24.3549907Z",
+      "recordId": 15617,
+      "eventName": "LiveKernelEvent",
+      "code": "141",
+      "reportId": "6b1c0a87-4b7a-4bac-99d0-a90ff2f1759a",
+      "dump": "WATCHDOG-20260902-2306.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:14:24.3283992Z",
+      "recordId": 15616,
+      "eventName": "LiveKernelEvent",
+      "code": "141",
+      "reportId": "7c65acc3-0045-4695-872d-10458e8bc856",
+      "dump": "WATCHDOG-20260902-2302.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:14:24.1060209Z",
+      "recordId": 15615,
+      "eventName": "LiveKernelEvent",
+      "code": "141",
+      "reportId": "25c63f5b-6d6c-4926-9ab1-942662cde75e",
+      "dump": "WATCHDOG-20260902-2259.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:14:23.8893062Z",
+      "recordId": 15614,
+      "eventName": "LiveKernelEvent",
+      "code": "a1000001",
+      "reportId": "029eea57-b381-4c9e-a2ac-026e7fe78458",
+      "dump": "AMD_WATCHDOG-20260902-2259.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:14:23.8393817Z",
+      "recordId": 15613,
+      "eventName": "LiveKernelEvent",
+      "code": "141",
+      "reportId": "6ab31761-dc5e-47c7-aabc-a39b8edd9f99",
+      "dump": "WATCHDOG-20260902-2257.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:14:23.7312828Z",
+      "recordId": 15612,
+      "eventName": "LiveKernelEvent",
+      "code": "a1000001",
+      "reportId": "771e3890-57df-4dc1-b675-43048e8b7879",
+      "dump": "AMD_WATCHDOG-20260902-2257.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:13:10.1690542Z",
+      "recordId": 15589,
+      "eventName": "LiveKernelEvent",
+      "code": "141",
+      "reportId": "25c63f5b-6d6c-4926-9ab1-942662cde75e",
+      "dump": "WATCHDOG-20260902-2259.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:13:10.1534018Z",
+      "recordId": 15588,
+      "eventName": "LiveKernelEvent",
+      "code": "a1000001",
+      "reportId": "029eea57-b381-4c9e-a2ac-026e7fe78458",
+      "dump": "AMD_WATCHDOG-20260902-2259.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:13:10.1369182Z",
+      "recordId": 15587,
+      "eventName": "LiveKernelEvent",
+      "code": "141",
+      "reportId": "6ab31761-dc5e-47c7-aabc-a39b8edd9f99",
+      "dump": "WATCHDOG-20260902-2257.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:13:10.1194131Z",
+      "recordId": 15586,
+      "eventName": "LiveKernelEvent",
+      "code": "a1000001",
+      "reportId": "771e3890-57df-4dc1-b675-43048e8b7879",
+      "dump": "AMD_WATCHDOG-20260902-2257.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:13:10.0808385Z",
+      "recordId": 15585,
+      "eventName": "LiveKernelEvent",
+      "code": "141",
+      "reportId": "5880d346-5ecd-4c93-a8eb-576e32823930",
+      "dump": "WATCHDOG-20260908-0013.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:04:25.2766183Z",
+      "recordId": 15564,
+      "eventName": "LiveKernelEvent",
+      "code": "141",
+      "reportId": "4a91108d-b3ec-4ff3-a9a5-c5a1fece42ff",
+      "dump": "WATCHDOG-20260906-2129.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:04:25.2603141Z",
+      "recordId": 15563,
+      "eventName": "LiveKernelEvent",
+      "code": "141",
+      "reportId": "5af0362b-ef7e-4523-9ba0-2eefe525b84c",
+      "dump": "WATCHDOG-20260906-2128.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:04:25.2440363Z",
+      "recordId": 15562,
+      "eventName": "LiveKernelEvent",
+      "code": "141",
+      "reportId": "6678b561-8c39-4675-9d3a-2148efc211c7",
+      "dump": "WATCHDOG-20260902-2310.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:04:25.2269113Z",
+      "recordId": 15561,
+      "eventName": "LiveKernelEvent",
+      "code": "141",
+      "reportId": "aa1670c3-85b3-40f9-9703-b8b6aa9c3d26",
+      "dump": "WATCHDOG-20260902-2307.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:04:25.2097309Z",
+      "recordId": 15560,
+      "eventName": "LiveKernelEvent",
+      "code": "a1000001",
+      "reportId": "01a9f4da-9613-4a57-9cea-cb3292f38f84",
+      "dump": "AMD_WATCHDOG-20260902-2306.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:04:25.1922601Z",
+      "recordId": 15559,
+      "eventName": "LiveKernelEvent",
+      "code": "141",
+      "reportId": "6b1c0a87-4b7a-4bac-99d0-a90ff2f1759a",
+      "dump": "WATCHDOG-20260902-2306.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:04:25.1748990Z",
+      "recordId": 15558,
+      "eventName": "LiveKernelEvent",
+      "code": "141",
+      "reportId": "7c65acc3-0045-4695-872d-10458e8bc856",
+      "dump": "WATCHDOG-20260902-2302.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:04:25.1575195Z",
+      "recordId": 15557,
+      "eventName": "LiveKernelEvent",
+      "code": "141",
+      "reportId": "25c63f5b-6d6c-4926-9ab1-942662cde75e",
+      "dump": "WATCHDOG-20260902-2259.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:04:25.1407614Z",
+      "recordId": 15556,
+      "eventName": "LiveKernelEvent",
+      "code": "a1000001",
+      "reportId": "029eea57-b381-4c9e-a2ac-026e7fe78458",
+      "dump": "AMD_WATCHDOG-20260902-2259.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:04:25.1246125Z",
+      "recordId": 15555,
+      "eventName": "LiveKernelEvent",
+      "code": "141",
+      "reportId": "6ab31761-dc5e-47c7-aabc-a39b8edd9f99",
+      "dump": "WATCHDOG-20260902-2257.dmp"
+    },
+    {
+      "timeUtc": "2026-09-08T04:04:25.1076636Z",
+      "recordId": 15554,
+      "eventName": "LiveKernelEvent",
+      "code": "a1000001",
+      "reportId": "771e3890-57df-4dc1-b675-43048e8b7879",
+      "dump": "AMD_WATCHDOG-20260902-2257.dmp"
+    }
+  ],
+  "operationalChannels": [
+    {
+      "log": "Microsoft-Windows-WerKernel/Operational",
+      "events": [],
+      "querySucceeded": true,
+      "count": 0
+    },
+    {
+      "log": "Microsoft-Windows-WER-Diag/Operational",
+      "events": [],
+      "querySucceeded": true,
+      "count": 0
+    },
+    {
+      "log": "Microsoft-Windows-WER-PayloadHealth/Operational",
+      "events": [],
+      "querySucceeded": true,
+      "count": 0
+    },
+    {
+      "log": "Microsoft-Windows-Resource-Exhaustion-Detector/Operational",
+      "events": [
+        {
+          "timeLocal": "2026-09-08T00:14:28.6807092-04:00",
+          "timeUtc": "2026-09-08T04:14:28.6807092Z",
+          "id": 1001,
+          "provider": "Microsoft-Windows-Resource-Exhaustion-Detector",
+          "recordId": 20,
+          "level": "Information",
+          "message": "The Windows Resource Exhaustion Detector started."
+        },
+        {
+          "timeLocal": "2026-09-08T00:14:27.6756197-04:00",
+          "timeUtc": "2026-09-08T04:14:27.6756197Z",
+          "id": 1001,
+          "provider": "Microsoft-Windows-Resource-Exhaustion-Detector",
+          "recordId": 19,
+          "level": "Information",
+          "message": "The Windows Resource Exhaustion Detector started."
+        }
+      ],
+      "querySucceeded": true,
+      "count": 2
+    },
+    {
+      "log": "Microsoft-Windows-Resource-Exhaustion-Resolver/Operational",
+      "events": [],
+      "querySucceeded": true,
+      "count": 0
+    },
+    {
+      "log": "Microsoft-Windows-Kernel-Power/Thermal-Operational",
+      "events": [
+        {
+          "timeLocal": "2026-09-08T00:14:08.4078972-04:00",
+          "timeUtc": "2026-09-08T04:14:08.4078972Z",
+          "id": 114,
+          "provider": "Microsoft-Windows-Kernel-Power",
+          "recordId": 8,
+          "level": "Information",
+          "message": "ACPI thermal zone \\_TZ.TZ10 has engaged passive cooling.             \r\nEventTime = \u200e2026\u200e-\u200e09\u200e-\u200e08T00:14:08.407560700Z             \r\n_PSV = 290K             \r\n_TMP = 290K             \r\n_TC1 = 0             \r\n_TC2 = 0             \r\n_TSP = 1000ms             \r\nDelta P = 0             \r\nMinimum Throttle = 0"
+        }
+      ],
+      "querySucceeded": true,
+      "count": 1
+    }
+  ],
+  "reliability": [
+    {
+      "timeUtc": "2026-09-08T04:14:30.0440000Z",
+      "SourceName": "MsiInstaller",
+      "EventIdentifier": 1035,
+      "ProductName": "Microsoft GameInput",
+      "Message": "Windows Installer reconfigured the product. Product Name: Microsoft GameInput. Product Version: 3.3.221.0. Product Language: 1033. Manufacturer: Microsoft Corporation. Reconfiguration success or error status: 0."
+    },
+    {
+      "timeUtc": "2026-09-08T04:14:20.7870000Z",
+      "SourceName": "EventLog",
+      "EventIdentifier": 6008,
+      "ProductName": "Windows",
+      "Message": "The previous system shutdown at 12:10:13 AM on \u200e9/\u200e8/\u200e2026 was unexpected."
+    },
+    {
+      "timeUtc": "2026-09-08T03:30:39.8120000Z",
+      "SourceName": "Microsoft-Windows-WindowsUpdateClient",
+      "EventIdentifier": 19,
+      "ProductName": "Security Intelligence Update for Microsoft Defender Antivirus - KB2267602 (Version 1.459.105.0) - Current Channel (Broad)",
+      "Message": "Installation Successful: Windows successfully installed the following update: Security Intelligence Update for Microsoft Defender Antivirus - KB2267602 (Version 1.459.105.0) - Current Channel (Broad)"
+    }
+  ],
+  "dumpAccess": [
+    {
+      "result": "Access denied; contents and metadata not enumerated",
+      "path": "C:\\Windows\\LiveKernelReports"
+    },
+    {
+      "result": "Direct Get-Item access denied; WER-referenced file, content/size/hash unverified",
+      "path": "C:\\Windows\\LiveKernelReports\\WATCHDOG\\WATCHDOG-20260908-0013.dmp"
+    },
+    {
+      "result": "Access denied",
+      "path": "C:\\ProgramData\\Microsoft\\Windows\\WER\\ReportQueue\\Kernel_141_8fd8944c0573f6a90fdeed091b6736e541e5bff_00000000_5880d346-5ecd-4c93-a8eb-576e32823930\\Report.wer"
+    },
+    {
+      "result": "Not found",
+      "path": "C:\\Windows\\SystemTemp\\WER-96193296-0.sysdata.xml"
+    },
+    {
+      "result": "Not found",
+      "path": "C:\\Windows\\MEMORY.DMP"
+    },
+    {
+      "result": "Enumeration succeeded; no files returned",
+      "path": "C:\\Windows\\Minidump"
+    }
+  ],
+  "oldNovaCoreDumps": [
+    {
+      "FullName": "C:\\Users\\Tyler\\AppData\\Local\\CrashDumps\\NovaCore.Graphics.Tests.exe.19140.dmp",
+      "Length": 2405769,
+      "writeUtc": "2026-09-06T02:33:33.9662751Z"
+    },
+    {
+      "FullName": "C:\\Users\\Tyler\\AppData\\Local\\CrashDumps\\NovaCore.Graphics.Tests.exe.27736.dmp",
+      "Length": 2484936,
+      "writeUtc": "2026-09-06T03:00:06.4899297Z"
+    },
+    {
+      "FullName": "C:\\Users\\Tyler\\AppData\\Local\\CrashDumps\\NovaCore.Graphics.Tests.exe.53368.dmp",
+      "Length": 2534766,
+      "writeUtc": "2026-09-06T02:59:42.6366751Z"
+    },
+    {
+      "FullName": "C:\\Users\\Tyler\\AppData\\Local\\CrashDumps\\NovaCore.Graphics.Tests.exe.57696.dmp",
+      "Length": 1831883,
+      "writeUtc": "2026-09-06T03:31:50.6640724Z"
+    },
+    {
+      "FullName": "C:\\Users\\Tyler\\AppData\\Local\\CrashDumps\\NovaCore.Graphics.Tests.exe.8872.dmp",
+      "Length": 2369478,
+      "writeUtc": "2026-09-06T02:07:19.5410633Z"
+    },
+    {
+      "FullName": "C:\\Users\\Tyler\\AppData\\Local\\CrashDumps\\NovaCore.NaifEphemerisAdapter.Tests.exe.60492.dmp",
+      "Length": 2018552,
+      "writeUtc": "2026-09-06T00:34:05.1697859Z"
+    },
+    {
+      "FullName": "C:\\Users\\Tyler\\AppData\\Local\\CrashDumps\\NovaCore.Triangle.exe.37048.dmp",
+      "Length": 7426405,
+      "writeUtc": "2026-09-07T00:16:47.7319827Z"
+    }
+  ],
+  "availableRuntimeLog": {
+    "association": "Predates Sep8 failure; no tested runtime identity/start/end timestamps; cannot characterize this manual event or discredit its runtime",
+    "lastLines": [
+      "[native] GPU timings: total=0.765 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.707; preSurface=0.000; scene=0.722; toneMap=0.044; regionalCompute=0.002; materialsOverlays=0.013",
+      "[native] GPU timings: total=0.774 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.711; preSurface=0.000; scene=0.730; toneMap=0.044; regionalCompute=0.002; materialsOverlays=0.017",
+      "[native] GPU timings: total=0.854 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.708; preSurface=0.000; scene=0.810; toneMap=0.044; regionalCompute=0.002; materialsOverlays=0.100",
+      "[native] GPU timings: total=0.828 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.707; preSurface=0.000; scene=0.784; toneMap=0.044; regionalCompute=0.002; materialsOverlays=0.075"
+    ],
+    "searchedFailurePattern": "device.?lost|vuid|validation error|fatal|crash|exception",
+    "writeUtc": "2026-09-06T13:42:54.1313619Z",
+    "path": "C:\\Users\\Tyler\\Downloads\\ENovaCoresamplesNovaCore.TrianglebinReleasenet10.0NovaCore.Triangle.exe.txt",
+    "sha256": "36957963928af39f077e3052c1e37ed422a1d9a15fef046169a1c36a310483b1",
+    "failurePatternMatches": [],
+    "creationUtc": "2026-09-06T13:42:54.1313619Z",
+    "bytes": 685589,
+    "lineCount": 5357,
+    "firstLines": [
+      "[native] NCSM1 physical slice: incoming=0; generation=38; pupil=4156; first=0; count=13826; total=13826; complete=1; currentOwner=38",
+      "[native] NCSM1 staged pupil publication: generation=38; pupil=4156; vertices=13826; readinessMs=2.573; fenceComplete=true; atomicFrameBoundary=true",
+      "[native] NCSM1 regional GPU work: kind=currentPhysicalPreparation; ms=0.955040; frame=10651",
+      "[native] NCSM1 physical slice: incoming=0; generation=38; pupil=4157; first=0; count=13826; total=13826; complete=1; currentOwner=38"
+    ]
+  },
+  "postRestartSnapshot": {
+    "video": [
+      {
+        "Name": "Meta Virtual Monitor",
+        "DriverVersion": "5.3.57.114",
+        "DriverDate": "2025-11-05T19:00:00-05:00",
+        "Status": "OK",
+        "CurrentHorizontalResolution": 3440,
+        "CurrentVerticalResolution": 1440,
+        "CurrentRefreshRate": 180
+      },
+      {
+        "Name": "Virtual Desktop Monitor",
+        "DriverVersion": "13.50.53.699",
+        "DriverDate": "2024-05-20T20:00:00-04:00",
+        "Status": "Error",
+        "CurrentHorizontalResolution": 3440,
+        "CurrentVerticalResolution": 1440,
+        "CurrentRefreshRate": 180
+      },
+      {
+        "Name": "AMD Radeon RX 6800 XT",
+        "DriverVersion": "32.0.21045.5002",
+        "DriverDate": "2026-08-16T20:00:00-04:00",
+        "Status": "OK",
+        "CurrentHorizontalResolution": 2560,
+        "CurrentVerticalResolution": 1440,
+        "CurrentRefreshRate": 144
+      },
+      {
+        "Name": "AMD Radeon(TM) Graphics",
+        "DriverVersion": "32.0.21045.5002",
+        "DriverDate": "2026-08-16T20:00:00-04:00",
+        "Status": "OK",
+        "CurrentHorizontalResolution": null,
+        "CurrentVerticalResolution": null,
+        "CurrentRefreshRate": null
+      }
+    ],
+    "disks": [
+      {
+        "DeviceID": "C:",
+        "Size": 247819993088,
+        "FreeSpace": 91004121088
+      },
+      {
+        "DeviceID": "E:",
+        "Size": 1000186310656,
+        "FreeSpace": 467188334592
+      }
+    ],
+    "limit": "Post-restart state is not incident telemetry",
+    "os": {
+      "LastBootUpTime": "2026-09-08T00:14:01.5-04:00",
+      "TotalVisibleMemorySize": 32623332,
+      "FreePhysicalMemory": 21847248,
+      "TotalVirtualMemorySize": 49400548,
+      "FreeVirtualMemory": 34340120
+    }
+  },
+  "scope": {
+    "dumpCopies": 0,
+    "registryWrites": false,
+    "sealedPriorPackageWrites": false,
+    "gpuRuns": 0,
+    "reproductionAttempts": 0,
+    "productionWrites": false
+  },
+  "sources": [
+    "https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0x141---video-engine-timeout-detected",
+    "https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/event-id-41-restart"
+  ],
+  "attributionLimits": [
+    "LiveKernelEvent141 proves the timeout class, not initiating application/driver/hardware cause.",
+    "Fresh ReportId appears three times; repeated reports are not three fresh timeouts.",
+    "Eleven other dump filenames predate the incident and do not exonerate M13.6.",
+    "KernelPower41 with zero bugcheck fields is a restart consequence, not a causal power diagnosis.",
+    "No fresh manual runtime log or accessible live dump binds a NovaCore frame/resource/generation to the watchdog.",
+    "Postrestart memory/storage/adapter state is not incident telemetry."
+  ],
+  "nextBoundedEvidence": [
+    "Fresh watchdog dump read access or user-provided copy",
+    "Fresh Report.wer export/read access",
+    "Manual run approximate launch/freeze times and exact preset/runtime log if retained"
+  ],
+  "storage": {
+    "diagnosticGpuOutputCreatedBytes": 0,
+    "dumpCopyBytes": 0,
+    "disposableRemainingBytes": 0,
+    "retainedFiles": [
+      "work-a.md",
+      "work-a.json"
+    ]
+  }
+}

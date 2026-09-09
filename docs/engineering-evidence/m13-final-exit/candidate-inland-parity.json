@@ -1,0 +1,194 @@
+{
+  "schema": 1,
+  "pose": "inland",
+  "frame": 175,
+  "width": 3440,
+  "height": 1440,
+  "pass": true,
+  "actual": {
+    "label": "candidate-inland-capture",
+    "cachedKeys": false,
+    "capture": {
+      "frame": "175",
+      "width": "3440",
+      "height": "1440",
+      "generation": "1",
+      "pupil": "1",
+      "physicalGeneration": "4",
+      "vertices": "712106"
+    },
+    "inputs": {
+      "generation": "1",
+      "incomingGeneration": "0",
+      "currentTopology": "13611079496444506427",
+      "incomingTopology": "0",
+      "cameraBits": "000000000000000000000000000000000000000000000000000000000000000012c3edbe3c6e563f00000000b9b9183fd87e213dda1fb23f0000000034c817bfc42f0ebf91fe19bf0000000094770abf0000000000000000cee14c3e00000000",
+      "gpuBits": "e73b9ac909047a4afbe68f4a826dc24af368003d00cc8a3d7637063ecdcc4cbef234d23dffff7f7fffff474200a00c460c0000000020000005000000000000007750303f94770abf7831f7be2f377b3f0000b4443acd133f0000c03f0000803f",
+      "presentationBits": "cb71944a0da8c9c809047aca826dc24a0ad7a33d0ad7a33eec51383f000000000000803f6d08803f02000000010000000600000000000000020000000a000000e17a143f0ad7233e000000000000000000000000000000000100000001000000000000000000000000000000000000000000000000000000000000000000803f0000000000000000000000000000000069d10a3fa65be8bea65be8be69d10a3f00008042000040400000964400a08c460023503e0000553c00cc8abd00000000",
+      "lightingBits": "ee7ec5505246f7d1646d56d10000803f0000803f85eb513f8fc2f53ecdcccc3c000010400000803f0100000000000000",
+      "publishedBits": "9db34847dde8ee3f0000000000000080285c93c17d90d03f00000000000000001380636f784bc53f3058cfa26f83e83f2e99588a4adee3bf00000000000000009d01f43acf60c9bf9f0c3c52b791e43f590f55149bade73fc1d3c14660eef03e5634a3b9b392fb3e33333333b04d584100000000000000000000000000000000010000000100000011000000000060000100000000000000aadd0a0000000000",
+      "incomingBits": "9db34847dde8ee3f0000000000000080285c93c17d90d03f00000000000000001380636f784bc53f3058cfa26f83e83f2e99588a4adee3bf00000000000000009d01f43acf60c9bf9f0c3c52b791e43f590f55149bade73fc1d3c14660eef03e5634a3b9b392fb3e33333333b04d584100000000000000000000000000000000010000000100000011000000000060000100000000000000aadd0a0000000000",
+      "cursor": "0",
+      "active": "0",
+      "completeDependencies": "1"
+    },
+    "geometry": {
+      "tcsPatches": 9252,
+      "refinedVertices": 27756,
+      "compactedTriangles": 9252,
+      "maximumOuterTesFactor": 1.0,
+      "maximumInnerTesFactor": 0.9999
+    },
+    "files": {
+      "pixels.bin": {
+        "bytes": 79257600,
+        "sha256": "bcbc947225c216aadea0523a3c0bca12ad2fcc32450d0e49534510454658e5a6"
+      },
+      "prepared.bin": {
+        "bytes": 45574784,
+        "sha256": "8e8a68f7e2f71d8f64fa0e863f39346cd34fb625d0d70f72dd76fbec6acd8f67"
+      },
+      "selected.bin": {
+        "bytes": 111024,
+        "sha256": "fe2b92da413165917c0e31413c420b349b026ec33c6c4c9701f9fe94db7c8446"
+      }
+    },
+    "selectedOrientedMultisetSha256": "0cab7ea2091fb77d65cd9fc34091355714ed5aab39f42c318284ba615de34a25",
+    "selectedTriangles": 9252,
+    "runtime": {
+      "nativeHash": "c2348f3d2815d2a7d68bb80bcc064181bc86f155589e8912cf197cd49b4936a0",
+      "managedHash": "9d5b3d8ef61e96be493a8feb58fff38094205a1a596f0944a1546d454b769f4f",
+      "shaderHashes": {
+        "body_forward.frag.spv": "fa706803f042fb5a9f7a3c9965a3e2de3e8838e075d67876b78df9bdc132ce0e",
+        "distant_planet.frag.spv": "04137afb1c632dfb7074480377d9f93136ab3127d382baeef07d52b09409eba8",
+        "distant_planet.vert.spv": "cf28fe0a7c0797bd7d72076437ba78c4e0d97bb1a0ae3c065baf3bfc5db62cb8",
+        "fullscreen.vert.spv": "a18f9b5e0b4a4e7a077b1017bad7b1c5c40313b3f70113f1e0771cd202433130",
+        "orbit.frag.spv": "b06f50708727144e8d0f08d35cd2e64d8b1cef501ed20b10fea4a34196026267",
+        "orbit.vert.spv": "b4b9dd635f32156654e30d843c29eb864feb09751d7b3027cf99a5d741b6a45b",
+        "orbit_previous.frag.spv": "c4935060e07e01742d59d8a5834241e2963dcc80ed8e35baeac5b08288761e61",
+        "planetary.frag.spv": "417f17b236834f0ac94fa3bbfdae52ad164599ff14051e9b396809beea75cda1",
+        "planetary.vert.spv": "ddb84030e2621df8f05489e339989d66de60d73435f490b4ec0af4251d7a0338",
+        "planetary_natural_terrain_global_prepare.comp.spv": "5a5450321873f5ff8bed7dd9e4f06c342625724d629da2232521fbace01c7a85",
+        "planetary_production.frag.spv": "8c59838abb3d7ee6418695ea40f044ca1f04f5c3c9216296d5cc19bba6110d6b",
+        "planetary_production_terrain.comp.spv": "405e6e6daab609ca383297ba8be706bfa96859c65dc2d9f42476a32cddd85df7",
+        "planetary_ring.vert.spv": "cccede52d3c64db872360912db9eb29e60cb892c648ed53ce1c178f8623d0cfb",
+        "planetary_ring_far.frag.spv": "343db81bccc310b21c600ab6ee6722438151694683bb0cf7ba01d54a9b68ade6",
+        "planetary_ring_near.frag.spv": "48b8ef4e56b6be9380cfbaca7daa790035e704541b6b8a550b3cc7bed540244c",
+        "planetary_select.comp.spv": "8189bbd2a85fe23033f12c558d8b221b62b8969c17ba9ffcf07b7c8501fe8adf",
+        "planetary_terrain_generate.comp.spv": "1fc8c24ea6b4a55e83997fadf80b4901f692b8bc2de84a5cf6ac043e4da531d1",
+        "production_nested_scale_mesh_cull.comp.spv": "497d88225a914b9601ad6c0f44733e834794a952854e71b26be426ead8780d94",
+        "production_nested_scale_mesh_incoming_cull.comp.spv": "23bd1b04d0291e6271138041433eee07e57503482e8e5cf845e4b72c75967336",
+        "production_spherical_billboard.tesc.spv": "0163498278f9523fd442434f05f056be28252d16c2f2ba44b8d91642b33e4439",
+        "production_spherical_billboard.tese.spv": "d0bc5d7a450f336d45c26c499b0b3a79ecc0258e1ffb9dee0b5bcfb8aa21d31e",
+        "production_spherical_billboard.vert.spv": "1baa9043db7a8b71dcf5931f4cb415fa84ce6341b07d850ea9beb8baa02d2b6a",
+        "production_spherical_billboard_compact.comp.spv": "2aabd7633b333f86df8a6eae6b76ed2d13a7129443dcd9201531de047b12f4d9",
+        "production_spherical_billboard_cull.comp.spv": "2827b58dcd7029695e0b33272018e54d19d6113b8d7ab9ac591c343b3d994398",
+        "production_spherical_billboard_incoming_compact.comp.spv": "6b0238138222112ddf1f945f5e6a31867d5dd11f57169481ece9c05337f43e4e",
+        "production_spherical_billboard_incoming_cull.comp.spv": "8c677f08ae051cf525108a436066983d41961ce70757ca29a86df165d2663cfb",
+        "production_spherical_billboard_incoming_prepare.comp.spv": "3b330d24dc873c2676dbb877208efae4d91347b66ef029706b8a3f0d3116f91c",
+        "production_spherical_billboard_incoming_reset.comp.spv": "5d750f929dcab4f9f3138b4cdfa869ab26e3051d4b28485c02ee483f89e14d6e",
+        "production_spherical_billboard_prepare.comp.spv": "d178e6ba6b73045dc214e75000489c09a7f0982f9cff7663489ba0818d30ae8b",
+        "production_spherical_billboard_reset.comp.spv": "cf583d16e14c8a8ec63b393d8752541648d932cf0165231cc48f6076e28fc027",
+        "regional_physical_demand.comp.spv": "7d80dbd70be13cc55f00ef836cd8da9d3783064411320697777f6b5c848d8f67",
+        "regional_physical_incoming_demand.comp.spv": "a56b62b5432206b8ab5eded734b13a0ddf9f0c726a4b444f8d24139bdcc17a60",
+        "sas_target.frag.spv": "4e99fda06f571590f950e91d93025cafa83e4a454e68e3583ce59d869f0a3ef2",
+        "solar_label.frag.spv": "673c5dc0cc1e199d497c7c927f282a02da444fa258860b6cb94b6fd1ed12c90a",
+        "solar_label.vert.spv": "a13a7a8acb3ae2da2cac129a203caffd86b5a7f434701d99b59284fdd01f1844",
+        "solar_marker.frag.spv": "d428743c08f96f4e508eab131cfb54981c2628eecc7acd3d2df220b19103275b",
+        "solar_marker.vert.spv": "50d948741d3ca6b59577a82d3346ab3cac51edcb9ab80047247ac61c345b6db6",
+        "solar_orbit.frag.spv": "23b511270c196c2186f7935699ca7fdedf3c92c629da67c10e8ae7615286181f",
+        "solar_orbit.vert.spv": "d71520615e2533a06208c3cec752d2689f524a30fb6a11bd2ca4ae00e2cc027f",
+        "solar_speed_hud.frag.spv": "e073b0ab31c69a3516d695146ade0dbd618d3dede5a10699f390f10da52c3586",
+        "solar_speed_hud.vert.spv": "a777a4dfece073339efcd97c7292d970f8c26d21f221ebd62ce244970f0a5fb4",
+        "space_background.frag.spv": "0c98ee3df0ba8ad8f313cc352a02032528e6b0e36b2dfa8cc2be1a6755b71cfc",
+        "stellar_glow.frag.spv": "e83a5e7458ec4be4b835384c88ec3ea958ae13569ee9ac823a4e2b2db17facee",
+        "stellar_glow.vert.spv": "30a9ed63e3d92581852afef62a242f2160a10c6cdb276a3b1aa0360a476183e8",
+        "stellar_sun.frag.spv": "5c448c0da4cadeb08bf2c85c74448d3b690fd3d6bccab1fc2c49da7a0bf54769",
+        "stellar_sun.vert.spv": "3e124d5babcb1d219499aa2de1482f90fc7c9008e92b054f7ca0d268336346b6",
+        "tone_map.frag.spv": "d617345e95589ecb087ed40c20f4d04a427251a2b5249d8181cc63c421ee3979",
+        "triangle.frag.spv": "36e2c4762d87eddd045909f600217f3ea7d48b023d08887abbf958d3bfaa5ddf",
+        "triangle.vert.spv": "87c254e6166b18954b8c0fbd533af2e83f4cf7f09842d752a0a76ae68e8f1aef"
+      },
+      "args": [
+        "--scene=sol",
+        "--focus=earth",
+        "--altitude=10.004",
+        "--solar-epoch=j2000",
+        "--physical-surface=m12d-natural-candidate",
+        "--p2s5c3-traversal",
+        "--benchmark-frames=1000",
+        "--log=startup,validation,vulkan"
+      ],
+      "cwd": "E:\\NovaCore",
+      "env": {
+        "VK_SDK_PATH": "C:\\VulkanSDK\\1.4.357.0",
+        "VK_LAYER_PATH": "E:\\NovaCore\\build\\m13-final-exit\\layers\\explicit",
+        "VK_IMPLICIT_LAYER_PATH": "E:\\NovaCore\\build\\m13-final-exit\\layers\\implicit",
+        "VK_LAYER_SETTINGS_PATH": "E:\\NovaCore\\build\\m13-final-exit\\layers",
+        "VK_INSTANCE_LAYERS": "VK_LAYER_KHRONOS_validation",
+        "NOVACORE_WINDOW_CLIENT_WIDTH": "3440",
+        "NOVACORE_WINDOW_CLIENT_HEIGHT": "1440",
+        "NOVACORE_WINDOW_BORDERLESS": "1",
+        "NOVACORE_COMPOSITION_CONTROL": "1",
+        "NOVACORE_PIXEL_PARITY": "E:\\NovaCore\\build\\m13-final-exit\\parity-slot",
+        "NOVACORE_PERFORMANCE_FRAME_LOG": "1",
+        "NOVACORE_P2S5F_DIRECTIONAL_ONLY": "1",
+        "NOVACORE_P2S5G_FIXED_DIAGNOSTIC_TIME": "1",
+        "NOVACORE_P2S5F_DIRECTIONAL_LEVEL": "17",
+        "NOVACORE_P2S5F_DIRECTIONAL_YAW_RADIANS": "1.5707963267948966",
+        "NOVACORE_P2S5F_DIRECTIONAL_PITCH_RADIANS": "-1.0",
+        "NOVACORE_PERFORMANCE_GEOGRAPHY": "40,-105",
+        "NOVACORE_PERFORMANCE_ALTITUDE_METRES": "50"
+      }
+    },
+    "runJournal": "candidate-inland-capture.json",
+    "runJournalSha256": "88a426fde04e345515ecb3151e0d02e04d3b3f73f5bc34e3138dbfcb450f2095",
+    "keyMemory": [
+      "[native] Poll memory type: index=3; flags=14; heap=0; compatible=1; selected=3; bytes=393216"
+    ]
+  },
+  "comparison": {
+    "pass": true,
+    "inputDifferences": {},
+    "preparedFull64ByteExact": true,
+    "selectedOrientedMultisetExact": true,
+    "selectedBufferOrderExact": false,
+    "attachments": {
+      "depth": {
+        "equalToPreChange": true,
+        "referenceSha256": "cae982236222ed75aa766a3bdcd95a4b991cb156817f6da6b618579b1c3c72b5",
+        "candidateSha256": "cae982236222ed75aa766a3bdcd95a4b991cb156817f6da6b618579b1c3c72b5",
+        "finite": true
+      },
+      "hdr": {
+        "equalToPreChange": true,
+        "referenceSha256": "18a59c2b2abb4983ff47b36b0985bbcc63d24480970d663a42c692a162922f67",
+        "candidateSha256": "18a59c2b2abb4983ff47b36b0985bbcc63d24480970d663a42c692a162922f67",
+        "finite": true
+      },
+      "image": {
+        "equalToPreChange": true,
+        "referenceSha256": "106903d66d8ec1107431edb95f305294d7ceb82f1fc709d3b30359510061c39e",
+        "candidateSha256": "106903d66d8ec1107431edb95f305294d7ceb82f1fc709d3b30359510061c39e",
+        "finite": true
+      }
+    },
+    "nativeHashChange": {
+      "preChange": "616793f6962a609042807ab204a0cc48d0376b54f254d174950afa25fbdbe8b2",
+      "implementedDefault": "c2348f3d2815d2a7d68bb80bcc064181bc86f155589e8912cf197cd49b4936a0"
+    }
+  },
+  "preChangeReport": "keys-inland-parity.json",
+  "preChangeReportSha256": "3f187efe933fcb70ab9a601273b27fb3184fe34e03ee322003a402493ddf4a7d",
+  "candidateManifest": "private-candidate-capture-host.json",
+  "candidateManifestSha256": "7cfc0fdabd082b12d673f1e77849ebfa2b54867f729a10f6aaa94fc79c20ae18",
+  "implementationDefault": true,
+  "performanceTimingsExcluded": true,
+  "rawCaptureSlot": "E:\\NovaCore\\build\\m13-final-exit\\parity-slot",
+  "limits": [
+    "Comparison uses complete pre-change SHA256 digests from this ticket; prior raw buffers are not required.",
+    "This fixed-frame proof does not qualify dynamic transitions or resource lifetime negatives.",
+    "No individual post-TES vertex stream is recorded; prepared values, selected triangles and full D32/HDR/image bytes are checked.",
+    "A mismatch fails; no variation allowance or attachment tolerance is applied."
+  ]
+}

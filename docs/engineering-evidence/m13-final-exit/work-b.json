@@ -1,0 +1,285 @@
+{
+  "schema": 1,
+  "role": "Work B required versus avoidable post-M13.5 responsibility",
+  "baseline": "d4baab6940a57a46e478b98e36f5e45d1c4b558f",
+  "tag": "m13.5-local-gpu-terrain-working-data",
+  "productionEdits": false,
+  "gpuRuns": 0,
+  "builds": 0,
+  "sourceIdentities": [
+    {
+      "path": "native/NovaCore.Native/NovaCoreNative.cpp",
+      "sha256": "f95d69d15257864b612391d8b35e8b552f8c5d80b6937ec44fef17d9a18dfe64"
+    },
+    {
+      "path": "native/NovaCore.Native/MappedBufferMemory.h",
+      "sha256": "0311e59b639eddb556130d222babfb01a647e529c71c216e25040147d4040758"
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/production_terrain_material.glsl",
+      "sha256": "8b936d826431278cd05f0fc9e9daeab08e97cecd56e752bb7cc26863e264c49f"
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/planetary_production.frag",
+      "sha256": "c12377419c69f7060c80ea9a0ace21df7d5f9969b7aec336d36f02f85c6765c2"
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/production_spherical_billboard.tese",
+      "sha256": "1e795f02e3990a03bab876eee81cf8094554785459e36198f55db226a7e65f2d"
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/production_nested_scale_mesh_cull.comp",
+      "sha256": "611c3670b5800cc3ac352bed5d326eb59ef1abba6ba2cc5519337967703b5550"
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/planetary_select.comp",
+      "sha256": "0dcb07c630f22cdb937acf4d4b134aa942c233abe9b80c153a1f9fa5b4a1c232"
+    }
+  ],
+  "newMilestoneAssigned": false,
+  "provenSafeRecoveryAtLeast1_5ms": false,
+  "classification": "Source candidate screen complete; fresh performance and normal traversal verdict pending",
+  "required": [
+    "positive-contribution material fields and filtered shading normals",
+    "conservative camera-dependent current-owner cull",
+    "complete physical preparation and fenced atomic publication",
+    "hardware TES capacity and shared-edge consistency",
+    "accepted facility light visibility",
+    "banked six-role mapped local-memory preference and fallback"
+  ],
+  "unprovenQuestions": [
+    {
+      "owner": "QueueProductionRequests",
+      "kind": "CPU request polling",
+      "slots": 8192,
+      "fullScansPerCall": 2,
+      "keyBytes": 393216,
+      "payoffMeasured": false,
+      "guardLimits": [
+        "no full-hierarchy-completed boolean exists",
+        "root-log flag is weaker than complete hierarchy",
+        "empty queue and ready array do not exclude worker read in flight",
+        "non-production selector may overwrite shared keys",
+        "pending uploads and ready completion must be retained"
+      ],
+      "nextProof": "Cached coherent key-buffer A/B; retain all polling behavior and prove actual CPU displayed-frame recovery without GPU/output regression",
+      "isolatedOriginalCostMeasured": true
+    }
+  ],
+  "rejectedInferences": [
+    "positive-noise sensitivity equals safe savings",
+    "regional replacement necessarily remains dominant after M13.5",
+    "full-H preparation means hardware TES can be retired",
+    "CPU duration may be subtracted from GPU duration",
+    "M13.5 placement gain is a new opportunity"
+  ],
+  "historicalReferenceOnly": {
+    "directory": "docs/engineering-evidence/m13-final-whole-frame-causality",
+    "floridaMedianGpuMs": 8.87728,
+    "inlandMedianGpuMs": 7.9506,
+    "fixedCullCompactApproxMs": [
+      1.12,
+      1.13
+    ]
+  },
+  "currentDocumentationDrift": [
+    "docs/NOVACORE_CURRENT_STATE.md:14",
+    "docs/CODEX_HANDOFF.md:18",
+    "docs/CODEX_HANDOFF.md:39",
+    "docs/planetary-rendering.md:11",
+    "docs/planetary-rendering.md:123",
+    "README.md:215"
+  ],
+  "limits": [
+    "No current source optimization has been proposed or implemented by this worker.",
+    "Fresh timing data is owned by the lead and not duplicated here.",
+    "No broad KSA audit is necessary without a proven equivalent candidate."
+  ],
+  "cachedKeyCandidateScreen": {
+    "scope": "Terrain residency key buffer only; retain all polling and worker behavior",
+    "status": "Architecture bounded; recoverable payoff and final output validation pending",
+    "isolatedQueueCost": {
+      "florida": {
+        "frameFirst": 182,
+        "frameLast": 281,
+        "n": 100,
+        "arithmeticMedianMs": 1.9143,
+        "nearestRankP99Ms": 2.0765
+      },
+      "orbital": {
+        "frameFirst": 82,
+        "frameLast": 181,
+        "n": 100,
+        "arithmeticMedianMs": 1.8865,
+        "nearestRankP99Ms": 1.9866
+      },
+      "requests": [
+        0
+      ],
+      "pending": [
+        0
+      ],
+      "uploads": [
+        126
+      ]
+    },
+    "observedMemory": {
+      "selectedType": 1,
+      "selectedFlags": 6,
+      "cachedCompatibleType": 3,
+      "cachedFlags": 14,
+      "keyBytes": 393216
+    },
+    "requiredProperties": [
+      "HOST_VISIBLE",
+      "HOST_COHERENT"
+    ],
+    "preferredProperty": "HOST_CACHED",
+    "leaveGpuWorkingSetRolesUnchanged": true,
+    "cpuPayoffCanQualify": "At least 1.5 ms actual normal CPU displayed-frame recovery with no GPU/output regression; ticket payoff clause does not specify GPU-only",
+    "gpuBudgetClaim": "No GPU budget recovery may be inferred from CPU recovery",
+    "proofPending": [
+      "baseline/cached A/B actual whole-frame CPU payoff",
+      "no fence or GPU cost migration",
+      "normal runtime and dynamic route behavior",
+      "exact controlled-input output parity",
+      "selection and failure fallback tests"
+    ],
+    "specification": "https://docs.vulkan.org/refpages/latest/refpages/source/VkMemoryPropertyFlagBits.html"
+  },
+  "productionDesignReview": {
+    "productionDiffAvailableAtReview": false,
+    "optInAllocation": "terrainKeyBuffer only",
+    "preserveDefaultHostBranch": true,
+    "preserveSixGpuUseCallsites": true,
+    "selector": "Apply compatible HOST_VISIBLE|HOST_COHERENT requirements; prefer eligible HOST_CACHED; preserve first coherent host fallback",
+    "reuseExistingAllocationHelper": true,
+    "newBuffersOrCopies": 0,
+    "pollingWorkerPublicationChanges": false,
+    "tests": [
+      "retain existing 14 checks",
+      "cached preference later than first uncached fallback",
+      "cached type excluded by memoryTypeBits",
+      "cached noncoherent excluded",
+      "cached non-host-visible excluded",
+      "missing cached type original fallback",
+      "no compatible coherent type",
+      "preferred equals fallback attempted once",
+      "preferred success",
+      "three existing capacity/map failure fallbacks",
+      "fallback failure preserved",
+      "fatal device error not retried",
+      "Host and TerrainGpuWorkingSet selections unchanged"
+    ],
+    "testLimit": "Synthetic selector/attempt checks do not simulate actual driver map cleanup; source review and actual runtime tests remain necessary",
+    "qualification": "Actual default candidate, full ticket-required validation and exact parity; no private selector retained",
+    "performanceLimits": [
+      "Orbital pacing-limited same-host comparison must report no measured end-to-end gain",
+      "Contemporary return baseline needed for GPU drift",
+      "CPU scope recovery alone is not actual displayed-frame recovery",
+      "Total GPU8.33ms target remains separate"
+    ]
+  },
+  "verifyAImplementation": {
+    "codeJudgment": "No implementation blocker found; proceed to final qualification",
+    "finalProductionReadiness": "PASS architecture/quality candidate ready for Project Control acceptance; unbanked, GPU-budget limits preserved",
+    "reviewedFiles": [
+      {
+        "path": "native/NovaCore.Native/MappedBufferMemory.h",
+        "sha256": "af450251465e7ba18ad8ee644d33233c8e4ff0fb352167320a5a384ef28bfee6"
+      },
+      {
+        "path": "native/NovaCore.Native/MappedBufferMemoryTests.cpp",
+        "sha256": "1b595ba03b22b8081ade4e3e770182f6bbd5e2a40474c1006b898777edf01076"
+      },
+      {
+        "path": "native/NovaCore.Native/NovaCoreNative.cpp",
+        "sha256": "8a4f45c100c0d94de7925890bd71cf1f71dd7e3ffef309e3f9d7651d464e7163"
+      }
+    ],
+    "defaultHostTailUnchanged": true,
+    "queuePrepareUnchanged": true,
+    "oldGpuRoleCallLinesUnchanged": true,
+    "regionalScratchFileUnchanged": true,
+    "oldChecksRetained": 14,
+    "newChecks": 16,
+    "testExecutionClaimedByWorker": false,
+    "cheapParity": [
+      {
+        "path": "docs/engineering-evidence/m13-final-exit/keys-florida-parity.json",
+        "sha256": "49d1af1f2927a55ee198bad6de7347ef6c6ba2e65d893612bcead31e4f3c415a",
+        "pass": true,
+        "preparedFull64ByteExact": true,
+        "selectedOrientedMultisetExact": true,
+        "selectedBufferOrderExact": false,
+        "exactAttachments": {
+          "depth": true,
+          "hdr": true,
+          "image": true
+        },
+        "actualDefaultBinary": false
+      },
+      {
+        "path": "docs/engineering-evidence/m13-final-exit/keys-inland-parity.json",
+        "sha256": "3f187efe933fcb70ab9a601273b27fb3184fe34e03ee322003a402493ddf4a7d",
+        "pass": true,
+        "preparedFull64ByteExact": true,
+        "selectedOrientedMultisetExact": true,
+        "selectedBufferOrderExact": false,
+        "exactAttachments": {
+          "depth": true,
+          "hdr": true,
+          "image": true
+        },
+        "actualDefaultBinary": false
+      }
+    ],
+    "strongestLimit": "Final default-binary qualification pending; universal >=1.5ms payoff and totalGPU8.33ms closure not proven",
+    "performanceLimits": [
+      "regional return CPU mean recovery1.446264ms below1.5",
+      "orbital paced condition no end-to-end recovery",
+      "fixed parity only current vertices and attachments, not every transition/unpublished input"
+    ],
+    "synchronizationSource": "https://docs.vulkan.org/spec/latest/chapters/synchronization.html",
+    "finalReport": "verify-a.md",
+    "actualDefaultParity": [
+      {
+        "path": "candidate-florida-parity.json",
+        "sha256": "d57641ea4a3d2222ba16370a2f1e00e44a36c405a9c801ffb8cd426d29b2983e",
+        "pass": true,
+        "prototypeAllocationSwitchPresent": false
+      },
+      {
+        "path": "candidate-inland-parity.json",
+        "sha256": "8fe8b976538e6124f5b0a98a9203c7fa7971767926a70f1c01db8798c035b9ad",
+        "pass": true,
+        "prototypeAllocationSwitchPresent": false
+      }
+    ],
+    "completedValidation": {
+      "journal": "validation.json",
+      "records": 25,
+      "allExitZero": true,
+      "recordedValidationErrors": 0,
+      "perConfiguration": {
+        "policyChecks": 30,
+        "headlessPass": 79,
+        "gpuPass": 8,
+        "windowPass": 4,
+        "nativeGpuPass": 2,
+        "fail": 0,
+        "skip": 0
+      },
+      "launcherPass": 15,
+      "supportedRoutes": 6,
+      "floridaSmokeFrames": 500,
+      "normalFullTransitions": true,
+      "warp": true
+    },
+    "deployedNativeHashesVerified": {
+      "Debug": "6e10a80772efaa51da256983355b1ab3bdec49e792891bfc5280c12a596bdc6e",
+      "Release": "932267253ea6e0221ba4ef5093515874116b26ede8c565ff8b8316e02e21eabf"
+    },
+    "artifactIdentityLimit": "Release full-suite hash873aed18... precedes journaled normal rebuild hash93226725...; source boundary unchanged, binary identity is not claimed equal"
+  }
+}
