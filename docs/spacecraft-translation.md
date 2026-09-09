@@ -1,11 +1,10 @@
 # Independent spacecraft translational authority
 
-**M14.2 — Establish independent spacecraft translational authority** is production
-accepted but unbanked on `codex/spacecraft-translation`. The transient allocation
-gate is resolved as CLR accounting; the test-only measurement boundary and all
-technical closeout gates passed. Classified diagnostics await manual disposal
-([attribution](engineering-evidence/spacecraft-translation/allocation-attribution.md)). No M14.2 tag was
-created. M14.1 remains banked; M14 remains open.
+**M14.2 — Establish independent spacecraft translational authority** is banked at
+`caa6d93ccd7c4e5924381e077a62585f99e5a32a`, annotated tag
+`m14.2-spacecraft-translational-authority`. M14.1 remains banked; M14 remains open.
+The unbanked [contact-generation candidate](contact-generation.md) is a read-only
+consumer of this authority and implements no response.
 [Validation and decision evidence](engineering-evidence/spacecraft-translation/README.md).
 
 ## State and ownership

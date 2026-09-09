@@ -18,6 +18,7 @@ using System.Diagnostics;
 if (args.Contains("--orchestration-only", StringComparer.Ordinal)) { ClockExecutionTests(); return; }
 
 if (args.Contains("--translation-only", StringComparer.Ordinal)) { SpacecraftTranslationTests.Run(); return; }
+if (args.Contains("--contact-only", StringComparer.Ordinal)) { ContactGenerationTests.Run(); return; }
 if (args.Contains("--translation-performance", StringComparer.Ordinal)) { SpacecraftTranslationTests.Performance(); return; }
 
 if (args.Contains("--orientation-only", StringComparer.Ordinal))
@@ -52,6 +53,7 @@ var tests = new (string Name, Action Test)[]
     ("Two-body propagation", TwoBodyPropagationTests),
     ("Spacecraft attitude", SpacecraftAttitudeTests),
     ("Spacecraft translational authority", SpacecraftTranslationTests.Run),
+    ("Spacecraft contact generation", ContactGenerationTests.Run),
     ("Spacecraft attitude integration", SpacecraftAttitudeIntegrationTests),
     ("Rigid-body rotation", RigidBodyRotationTests),
     ("Rigid-body torque transaction", RigidBodyTorqueTransactionTests),

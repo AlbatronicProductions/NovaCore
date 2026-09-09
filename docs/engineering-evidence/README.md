@@ -8,7 +8,8 @@ records its investigation stage. Follow subsequent accepted conclusions.
 
 | Family | Continuing value | Read the conclusion first |
 |---|---|---|
-| [M14.2 accepted, unbanked spacecraft translation](spacecraft-translation/README.md) | Physical/time/frame contracts, numerical/replay validation, source identity, KSA ownership, bounded performance and blocked final closeout. | [Translation contract](../spacecraft-translation.md). |
+| [M14.2 banked spacecraft translation](spacecraft-translation/README.md) | Physical/time/frame contracts, numerical/replay validation, source identity, KSA ownership, bounded performance and the resolved allocation-accounting closeout. | [Translation contract](../spacecraft-translation.md). |
+| [Unbanked contact generation](contact-generation/README.md) | Authored feature identity, exact-time geometry/velocity, canonical readiness, numerical/replay proof and bounded query-inclusive CPU cost. | [Contact contract](../contact-generation.md). |
 | [M14.1 surface-point queries](surface-point-query/README.md) | Bounded numerical/readiness proof, cost, source identity and exact raster-parity evidence for the banked physical API. | [Current query contract](../surface-point-queries.md). |
 | [Earth-route convergence](earth-route-convergence/README.md) | Manual acceptance, original failures, final physical/presentation causes, hashes, compact visuals, recipes and raw-retirement provenance. | [Earth-route convergence](../earth-route-convergence.md), [production consolidation](../production-consolidation.md), [evidence cleanup](../diagnostic-evidence-consolidation.md). |
 | [Repository debt retirement](repository-debt-retirement/README.md) | Original producer/consumer decisions, retired islands, compatibility questions and measured storage. | [Debt review](../repository-debt-retirement.md); later packages supersede its snapshot dispositions. |

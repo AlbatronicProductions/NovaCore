@@ -1,0 +1,47 @@
+[
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Contact/SpacecraftContactGeometry.cs",
+    "sha256": "5c24a3d9c0658b2c8f16875897058329e2a19d5a29d2b0fb3574f0c2f0cbd693",
+    "bytes": 2901
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Contact/ContactBodyMotion.cs",
+    "sha256": "94b9ee181dccd24f3c0bae6984cfda137f61940ec17ba208465cb839401112ee",
+    "bytes": 3969
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Contact/SpacecraftContactGenerator.cs",
+    "sha256": "b2ee0c321e9951624b5f4d6a1204b75e54e869cf63f92b66978d43853d74878f",
+    "bytes": 6585
+  },
+  {
+    "path": "tests/NovaCore.Simulation.Tests/ContactGenerationFixture.cs",
+    "sha256": "a6009e6dee662671c5877ca6f32e3e92e1f22a9ceaf2168dbd87c3b4a26a3829",
+    "bytes": 5894
+  },
+  {
+    "path": "tests/NovaCore.Simulation.Tests/ContactGenerationTests.cs",
+    "sha256": "863d734756c14d2efffe9b770909039076459b4e153593da270be93363811ae6",
+    "bytes": 17059
+  },
+  {
+    "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+    "sha256": "1428b8f1ac34d8309d5d631ec231f1640f038756c7201590ee635be19366d1e0",
+    "bytes": 234108
+  },
+  {
+    "path": "tests/NovaCore.Graphics.Tests/ContactGenerationProductionTests.cs",
+    "sha256": "f7239dc1c4d9d9206e3aec19c07b3b62ba835f1c8c1552069a12e5a0c3d1d5e4",
+    "bytes": 8577
+  },
+  {
+    "path": "tests/NovaCore.Graphics.Tests/Program.cs",
+    "sha256": "5fccc42cdc05ea58de37a758ff8b248cba10a76f30ff5ac00b26084e5a556a2b",
+    "bytes": 565731
+  },
+  {
+    "path": "tests/NovaCore.Graphics.Tests/NovaCore.Graphics.Tests.csproj",
+    "sha256": "eba9fc4b1e1909f28097c921901529568ff7d0be86d56584bdfca88a8080eed0",
+    "bytes": 2121
+  }
+]

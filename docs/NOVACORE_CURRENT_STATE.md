@@ -13,31 +13,28 @@ and performs FP64 camera-relative subtraction before GPU transport.
 
 ## Banked production checkpoint
 
-M14.2 — Establish independent spacecraft translational authority is **PRODUCTION
-ACCEPTED but UNBANKED** on `codex/spacecraft-translation`. The transient allocation
-gate is resolved as CLR background-GC allocation-context accounting. A test-only
-measurement boundary preserves the exact-zero contract; repeated Debug/Release
-validation passed. Manual disposal of classified diagnostic copies remains before
-banking; see [attribution and closeout](engineering-evidence/spacecraft-translation/allocation-attribution.md).
-No M14.2 tag was created. M14 — Surface Interaction / Launch Foundation remains
-**OPEN**. Manual visual acceptance is **NOT REQUIRED**; there is no intended visible
-production-route change.
+Latest banked accomplishment: **M14.2 — Establish independent spacecraft
+translational authority**, commit `caa6d93ccd7c4e5924381e077a62585f99e5a32a`,
+annotated tag `m14.2-spacecraft-translational-authority`.
+**M14 — Surface Interaction / Launch Foundation remains OPEN.**
 
-Latest banked accomplishment: **M14.1 — Provide immutable canonical surface-point queries
-for spacecraft contact**, commit
-`5b9b02ab1d2ba0e903809510908e4819984d4de2`, annotated tag
-`m14.1-canonical-surface-point-queries`. M14.1 remains closed.
-See the [query contract](surface-point-queries.md).
+M14.1 remains banked at `5b9b02ab1d2ba0e903809510908e4819984d4de2`, tag
+`m14.1-canonical-surface-point-queries`. It owns immutable canonical natural-terrain
+witnesses and qualified physical normals. See the [query contract](surface-point-queries.md).
+M14.2 owns immutable mass, FP64 inertial-root COM position/velocity, deterministic
+constant-net-force advancement and canonical exact-time force transactions;
+rotation and translation retain one craft identity. See the
+[translation contract](spacecraft-translation.md).
 
-M14.2's existing spacecraft store supports immutable
-mass, FP64 inertial-root COM position/velocity, analytic constant-net-force
-advancement and canonical exact-time force transactions. Existing rotation and
-derived frame extraction share the same craft identity. See the
-[translation contract](spacecraft-translation.md) and
-[accepted evidence](engineering-evidence/spacecraft-translation/README.md).
-Contact response, grounded state, pad collision and launch/landing are not
-implemented. No visible route changes. The next production responsibility returns
-to Project Control; no subsequent milestone work is authorized here.
+**Unbanked candidate:** pure authored point-feature contact generation on
+`codex/contact-generation`. Simulation derives immutable, ordered terrain-contact
+observations at one exact time/revision from those existing authorities. It adds
+no response, grounding, pad collision or visible route change. Radial signed gap
+is not finite-volume penetration or closest-point distance. See the
+[contact contract](contact-generation.md) and
+[validation evidence](engineering-evidence/contact-generation/README.md).
+Manual visual acceptance is not required. No milestone number is assigned;
+Project Control decides acceptance and the next responsibility.
 
 ### Closed M13 renderer baseline
 

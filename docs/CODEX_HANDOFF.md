@@ -22,19 +22,16 @@ M13.6 is the closed renderer baseline, commit
 comparison bridge is awaiting preservation/acceptance. The separately authorized
 Surface Interaction / Launch Foundation has banked **M14.1**, commit
 `5b9b02ab1d2ba0e903809510908e4819984d4de2`, tag
-`m14.1-canonical-surface-point-queries`. M14.1 remains the latest banked accomplishment.
-**M14.2 — Establish independent spacecraft translational authority** is production
-accepted but unbanked on `codex/spacecraft-translation`. The allocation blocker is
-resolved as CLR background-GC allocation-context accounting. The test-only
-measurement boundary passed 10 full-suite and five isolated runs per configuration;
-all remaining technical gates passed. Classified diagnostic copies still require
-manual disposal before banking. See
-[attribution and cleanup commands](engineering-evidence/spacecraft-translation/allocation-attribution.md).
-No M14.2 tag exists. The
-[translation contract](spacecraft-translation.md) adds constant-net-force dynamics
-to the existing simulation owner, with no visible route change. Manual visual
-acceptance was not required. M14 remains **OPEN**; the next responsibility returns
-to Project Control. Contact response, grounded state and launch are not implemented.
+`m14.1-canonical-surface-point-queries`, and **M14.2**, commit
+`caa6d93ccd7c4e5924381e077a62585f99e5a32a`, tag
+`m14.2-spacecraft-translational-authority`. M14 remains **OPEN**.
+
+Current unbanked candidate: [pure authored point-feature contact generation](contact-generation.md)
+on `codex/contact-generation`; [evidence and reproduction](engineering-evidence/contact-generation/README.md).
+It generates exact-time observations only, with explicit readiness and no response,
+grounded state, pad collider or launch behavior. Manual visual acceptance is not
+required. No milestone number or banking is authorized by this candidate ticket.
+Return the candidate to Project Control.
 
 - Work in `E:\NovaCore` and inspect `git status --short` before editing.
 - Preserve unrelated and unstaged user work.

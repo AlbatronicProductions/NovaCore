@@ -1,0 +1,833 @@
+{
+  "baseline": "caa6d93ccd7c4e5924381e077a62585f99e5a32a",
+  "branch": "codex/contact-generation",
+  "date": "2026-09-09",
+  "host": {
+    "cpu": "AMD Ryzen 9 9900X 12-Core Processor",
+    "logicalProcessors": 24,
+    "dotnetSdk": "10.0.303"
+  },
+  "protocol": {
+    "warmupBatches": 64,
+    "samplesPerPath": 201,
+    "order": "Alternating complete/query-only",
+    "complete": "Fresh body evaluation plus coherent spacecraft motion plus all production queries and output. Setup/acquisition excluded.",
+    "allocation": "Separate 32-batch no-GC test measurement region; exact zero bytes; ordinary production GC/tiering unchanged.",
+    "percentile": "Nearest rank: sorted indices 100,190,198 for median,P95,P99 of 201 individual samples.",
+    "repetitions": "Three fresh Release processes, each awaited to completion; no concurrent NovaCore test workload.",
+    "limits": "Early Florida process-state tails retained; not an independently attributed JIT mechanism or universal worst-case bound. Mean differences are noisy comparative estimates, not exact decomposition."
+  },
+  "validation": {
+    "buildDebug": "PASS 0 warnings/errors",
+    "buildRelease": "PASS 0 warnings/errors",
+    "simulationDebug": "34 groups PASS",
+    "simulationRelease": "34 groups PASS",
+    "referenceFramesDebug": "11 groups PASS",
+    "referenceFramesRelease": "11 groups PASS",
+    "precisionDebug": "PASS",
+    "precisionRelease": "PASS",
+    "m141Debug": "2 PASS, 0 fail, 0 skip",
+    "m141Release": "2 PASS, 0 fail, 0 skip",
+    "surfaceQueryFingerprint": "3e08f86757588127099cbb100d3829b73d5e5f29b1de8d0f22ec83de28534912"
+  },
+  "oracle": {
+    "featureErrorM": 0.000030517578125,
+    "witnessErrorM": 0.000030768239642021255,
+    "relativeVelocityErrorMps": 4.741560129417225e-10,
+    "normalVectorError": 3.3678454736423286e-7,
+    "radialGapErrorM": 0.000019352994833354842,
+    "zeroGapErrorM": 3.552713678800501e-15,
+    "replayBitDifference": 0,
+    "allocationBytes": 0,
+    "allocationBatches": 10000
+  },
+  "release": [
+    {
+      "run": 1,
+      "config": "Release",
+      "exit": 0,
+      "rows": [
+        {
+          "site": "Florida",
+          "features": 1,
+          "samples": 201,
+          "completeMs": {
+            "median": 0.3138,
+            "p95": 0.3202,
+            "p99": 0.3328
+          },
+          "queryOnlyMs": {
+            "median": 0.2923,
+            "p95": 0.2961,
+            "p99": 0.3108
+          },
+          "allocatedBytes": 0,
+          "meanAdditionalMs": 0.021691044776119404,
+          "maxWitnessErrorM": 0,
+          "maxNormalError": 0,
+          "maxGapErrorM": 0,
+          "positionBarM": 0.00024423116248044606
+        },
+        {
+          "site": "Florida",
+          "features": 4,
+          "samples": 201,
+          "completeMs": {
+            "median": 0.1526,
+            "p95": 1.1939,
+            "p99": 1.2048
+          },
+          "queryOnlyMs": {
+            "median": 0.1313,
+            "p95": 1.1656,
+            "p99": 1.5077
+          },
+          "allocatedBytes": 0,
+          "meanAdditionalMs": 0.008256218905472634,
+          "maxWitnessErrorM": 0,
+          "maxNormalError": 0,
+          "maxGapErrorM": 0,
+          "positionBarM": 0.00024423116248044606
+        },
+        {
+          "site": "Florida",
+          "features": 8,
+          "samples": 201,
+          "completeMs": {
+            "median": 0.2525,
+            "p95": 0.2575,
+            "p99": 0.2689
+          },
+          "queryOnlyMs": {
+            "median": 0.2501,
+            "p95": 0.2531,
+            "p99": 0.2623
+          },
+          "allocatedBytes": 0,
+          "meanAdditionalMs": 0.0029671641791044747,
+          "maxWitnessErrorM": 0,
+          "maxNormalError": 0,
+          "maxGapErrorM": 0,
+          "positionBarM": 0.00024423116248044606
+        },
+        {
+          "site": "regional",
+          "features": 1,
+          "samples": 201,
+          "completeMs": {
+            "median": 0.0919,
+            "p95": 0.0936,
+            "p99": 0.0959
+          },
+          "queryOnlyMs": {
+            "median": 0.0904,
+            "p95": 0.0928,
+            "p99": 0.0957
+          },
+          "allocatedBytes": 0,
+          "meanAdditionalMs": 0.0014800995024875647,
+          "maxWitnessErrorM": 0,
+          "maxNormalError": 0,
+          "maxGapErrorM": 0,
+          "positionBarM": 0.00024423116248044606
+        },
+        {
+          "site": "regional",
+          "features": 4,
+          "samples": 201,
+          "completeMs": {
+            "median": 0.3113,
+            "p95": 0.3146,
+            "p99": 0.3227
+          },
+          "queryOnlyMs": {
+            "median": 0.3095,
+            "p95": 0.3123,
+            "p99": 0.3218
+          },
+          "allocatedBytes": 0,
+          "meanAdditionalMs": 0.0017537313432835616,
+          "maxWitnessErrorM": 0,
+          "maxNormalError": 0,
+          "maxGapErrorM": 0,
+          "positionBarM": 0.00024423116248044606
+        },
+        {
+          "site": "regional",
+          "features": 8,
+          "samples": 201,
+          "completeMs": {
+            "median": 0.6133,
+            "p95": 0.6202,
+            "p99": 0.6259
+          },
+          "queryOnlyMs": {
+            "median": 0.6106,
+            "p95": 0.6142,
+            "p99": 0.6293
+          },
+          "allocatedBytes": 0,
+          "meanAdditionalMs": 0.002771144278606971,
+          "maxWitnessErrorM": 0,
+          "maxNormalError": 0,
+          "maxGapErrorM": 0,
+          "positionBarM": 0.00024423116248044606
+        },
+        {
+          "site": "inland",
+          "features": 1,
+          "samples": 201,
+          "completeMs": {
+            "median": 0.0603,
+            "p95": 0.0607,
+            "p99": 0.0629
+          },
+          "queryOnlyMs": {
+            "median": 0.059,
+            "p95": 0.0594,
+            "p99": 0.0616
+          },
+          "allocatedBytes": 0,
+          "meanAdditionalMs": 0.00126069651741293,
+          "maxWitnessErrorM": 0,
+          "maxNormalError": 0,
+          "maxGapErrorM": 0,
+          "positionBarM": 0.00024423116248044606
+        },
+        {
+          "site": "inland",
+          "features": 4,
+          "samples": 201,
+          "completeMs": {
+            "median": 0.2374,
+            "p95": 0.243,
+            "p99": 0.2709
+          },
+          "queryOnlyMs": {
+            "median": 0.2359,
+            "p95": 0.24,
+            "p99": 0.2673
+          },
+          "allocatedBytes": 0,
+          "meanAdditionalMs": 0.0022840796019900607,
+          "maxWitnessErrorM": 0,
+          "maxNormalError": 0,
+          "maxGapErrorM": 0,
+          "positionBarM": 0.00024423116248044606
+        },
+        {
+          "site": "inland",
+          "features": 8,
+          "samples": 201,
+          "completeMs": {
+            "median": 0.4729,
+            "p95": 0.4802,
+            "p99": 0.5101
+          },
+          "queryOnlyMs": {
+            "median": 0.4713,
+            "p95": 0.4757,
+            "p99": 0.4889
+          },
+          "allocatedBytes": 0,
+          "meanAdditionalMs": 0.002471144278606971,
+          "maxWitnessErrorM": 0,
+          "maxNormalError": 0,
+          "maxGapErrorM": 0,
+          "positionBarM": 0.00024423116248044606
+        }
+      ]
+    },
+    {
+      "run": 2,
+      "config": "Release",
+      "exit": 0,
+      "rows": [
+        {
+          "site": "Florida",
+          "features": 1,
+          "samples": 201,
+          "completeMs": {
+            "median": 0.3169,
+            "p95": 0.3269,
+            "p99": 0.3597
+          },
+          "queryOnlyMs": {
+            "median": 0.2925,
+            "p95": 0.2952,
+            "p99": 0.2978
+          },
+          "allocatedBytes": 0,
+          "meanAdditionalMs": 0.02583681592039802,
+          "maxWitnessErrorM": 0,
+          "maxNormalError": 0,
+          "maxGapErrorM": 0,
+          "positionBarM": 0.00024423116248044606
+        },
+        {
+          "site": "Florida",
+          "features": 4,
+          "samples": 201,
+          "completeMs": {
+            "median": 0.1536,
+            "p95": 1.2105,
+            "p99": 1.3638
+          },
+          "queryOnlyMs": {
+            "median": 0.1316,
+            "p95": 1.1679,
+            "p99": 1.4678
+          },
+          "allocatedBytes": 0,
+          "meanAdditionalMs": 0.013922388059701505,
+          "maxWitnessErrorM": 0,
+          "maxNormalError": 0,
+          "maxGapErrorM": 0,
+          "positionBarM": 0.00024423116248044606
+        },
+        {
+          "site": "Florida",
+          "features": 8,
+          "samples": 201,
+          "completeMs": {
+            "median": 0.2523,
+            "p95": 0.2556,
+            "p99": 0.2712
+          },
+          "queryOnlyMs": {
+            "median": 0.2503,
+            "p95": 0.2549,
+            "p99": 0.2839
+          },
+          "allocatedBytes": 0,
+          "meanAdditionalMs": 0.0011776119402985388,
+          "maxWitnessErrorM": 0,
+          "maxNormalError": 0,
+          "maxGapErrorM": 0,
+          "positionBarM": 0.00024423116248044606
+        },
+        {
+          "site": "regional",
+          "features": 1,
+          "samples": 201,
+          "completeMs": {
+            "median": 0.0924,
+            "p95": 0.0948,
+            "p99": 0.0982
+          },
+          "queryOnlyMs": {
+            "median": 0.0911,
+            "p95": 0.0936,
+            "p99": 0.1002
+          },
+          "allocatedBytes": 0,
+          "meanAdditionalMs": 0.0011472636815920397,
+          "maxWitnessErrorM": 0,
+          "maxNormalError": 0,
+          "maxGapErrorM": 0,
+          "positionBarM": 0.00024423116248044606
+        },
+        {
+          "site": "regional",
+          "features": 4,
+          "samples": 201,
+          "completeMs": {
+            "median": 0.3141,
+            "p95": 0.3183,
+            "p99": 0.3401
+          },
+          "queryOnlyMs": {
+            "median": 0.3128,
+            "p95": 0.3161,
+            "p99": 0.3328
+          },
+          "allocatedBytes": 0,
+          "meanAdditionalMs": 0.0011800995024875646,
+          "maxWitnessErrorM": 0,
+          "maxNormalError": 0,
+          "maxGapErrorM": 0,
+          "positionBarM": 0.00024423116248044606
+        },
+        {
+          "site": "regional",
+          "features": 8,
+          "samples": 201,
+          "completeMs": {
+            "median": 0.6195,
+            "p95": 0.6263,
+            "p99": 0.6395
+          },
+          "queryOnlyMs": {
+            "median": 0.6176,
+            "p95": 0.6229,
+            "p99": 0.6344
+          },
+          "allocatedBytes": 0,
+          "meanAdditionalMs": 0.002367164179104475,
+          "maxWitnessErrorM": 0,
+          "maxNormalError": 0,
+          "maxGapErrorM": 0,
+          "positionBarM": 0.00024423116248044606
+        },
+        {
+          "site": "inland",
+          "features": 1,
+          "samples": 201,
+          "completeMs": {
+            "median": 0.0598,
+            "p95": 0.0602,
+            "p99": 0.0626
+          },
+          "queryOnlyMs": {
+            "median": 0.0584,
+            "p95": 0.059,
+            "p99": 0.0614
+          },
+          "allocatedBytes": 0,
+          "meanAdditionalMs": 0.0012980099502487633,
+          "maxWitnessErrorM": 0,
+          "maxNormalError": 0,
+          "maxGapErrorM": 0,
+          "positionBarM": 0.00024423116248044606
+        },
+        {
+          "site": "inland",
+          "features": 4,
+          "samples": 201,
+          "completeMs": {
+            "median": 0.2353,
+            "p95": 0.2486,
+            "p99": 0.3353
+          },
+          "queryOnlyMs": {
+            "median": 0.234,
+            "p95": 0.2616,
+            "p99": 0.3174
+          },
+          "allocatedBytes": 0,
+          "meanAdditionalMs": -0.0002537313432835617,
+          "maxWitnessErrorM": 0,
+          "maxNormalError": 0,
+          "maxGapErrorM": 0,
+          "positionBarM": 0.00024423116248044606
+        },
+        {
+          "site": "inland",
+          "features": 8,
+          "samples": 201,
+          "completeMs": {
+            "median": 0.4938,
+            "p95": 0.5811,
+            "p99": 0.6284
+          },
+          "queryOnlyMs": {
+            "median": 0.4935,
+            "p95": 0.5784,
+            "p99": 0.5904
+          },
+          "allocatedBytes": 0,
+          "meanAdditionalMs": 0.00706318407960198,
+          "maxWitnessErrorM": 0,
+          "maxNormalError": 0,
+          "maxGapErrorM": 0,
+          "positionBarM": 0.00024423116248044606
+        }
+      ]
+    },
+    {
+      "run": 3,
+      "config": "Release",
+      "exit": 0,
+      "rows": [
+        {
+          "site": "Florida",
+          "features": 1,
+          "samples": 201,
+          "completeMs": {
+            "median": 0.3297,
+            "p95": 0.4031,
+            "p99": 0.4384
+          },
+          "queryOnlyMs": {
+            "median": 0.309,
+            "p95": 0.3757,
+            "p99": 0.3969
+          },
+          "allocatedBytes": 0,
+          "meanAdditionalMs": 0.02223084577114428,
+          "maxWitnessErrorM": 0,
+          "maxNormalError": 0,
+          "maxGapErrorM": 0,
+          "positionBarM": 0.00024423116248044606
+        },
+        {
+          "site": "Florida",
+          "features": 4,
+          "samples": 201,
+          "completeMs": {
+            "median": 0.2103,
+            "p95": 1.3434,
+            "p99": 1.4517
+          },
+          "queryOnlyMs": {
+            "median": 0.1887,
+            "p95": 1.3057,
+            "p99": 1.448
+          },
+          "allocatedBytes": 0,
+          "meanAdditionalMs": 0.015883084577114463,
+          "maxWitnessErrorM": 0,
+          "maxNormalError": 0,
+          "maxGapErrorM": 0,
+          "positionBarM": 0.00024423116248044606
+        },
+        {
+          "site": "Florida",
+          "features": 8,
+          "samples": 201,
+          "completeMs": {
+            "median": 0.2569,
+            "p95": 0.2603,
+            "p99": 0.276
+          },
+          "queryOnlyMs": {
+            "median": 0.2508,
+            "p95": 0.2533,
+            "p99": 0.2625
+          },
+          "allocatedBytes": 0,
+          "meanAdditionalMs": 0.006338308457711446,
+          "maxWitnessErrorM": 0,
+          "maxNormalError": 0,
+          "maxGapErrorM": 0,
+          "positionBarM": 0.00024423116248044606
+        },
+        {
+          "site": "regional",
+          "features": 1,
+          "samples": 201,
+          "completeMs": {
+            "median": 0.0945,
+            "p95": 0.0969,
+            "p99": 0.1038
+          },
+          "queryOnlyMs": {
+            "median": 0.0905,
+            "p95": 0.092,
+            "p99": 0.0972
+          },
+          "allocatedBytes": 0,
+          "meanAdditionalMs": 0.004107462686567169,
+          "maxWitnessErrorM": 0,
+          "maxNormalError": 0,
+          "maxGapErrorM": 0,
+          "positionBarM": 0.00024423116248044606
+        },
+        {
+          "site": "regional",
+          "features": 4,
+          "samples": 201,
+          "completeMs": {
+            "median": 0.316,
+            "p95": 0.3864,
+            "p99": 0.4824
+          },
+          "queryOnlyMs": {
+            "median": 0.3112,
+            "p95": 0.3881,
+            "p99": 0.4639
+          },
+          "allocatedBytes": 0,
+          "meanAdditionalMs": 0.004981094527363211,
+          "maxWitnessErrorM": 0,
+          "maxNormalError": 0,
+          "maxGapErrorM": 0,
+          "positionBarM": 0.00024423116248044606
+        },
+        {
+          "site": "regional",
+          "features": 8,
+          "samples": 201,
+          "completeMs": {
+            "median": 0.6157,
+            "p95": 0.6584,
+            "p99": 0.7731
+          },
+          "queryOnlyMs": {
+            "median": 0.614,
+            "p95": 0.6669,
+            "p99": 0.7288
+          },
+          "allocatedBytes": 0,
+          "meanAdditionalMs": 0.0022462686567164382,
+          "maxWitnessErrorM": 0,
+          "maxNormalError": 0,
+          "maxGapErrorM": 0,
+          "positionBarM": 0.00024423116248044606
+        },
+        {
+          "site": "inland",
+          "features": 1,
+          "samples": 201,
+          "completeMs": {
+            "median": 0.06,
+            "p95": 0.0606,
+            "p99": 0.0631
+          },
+          "queryOnlyMs": {
+            "median": 0.0587,
+            "p95": 0.0591,
+            "p99": 0.0614
+          },
+          "allocatedBytes": 0,
+          "meanAdditionalMs": 0.0012094527363184057,
+          "maxWitnessErrorM": 0,
+          "maxNormalError": 0,
+          "maxGapErrorM": 0,
+          "positionBarM": 0.00024423116248044606
+        },
+        {
+          "site": "inland",
+          "features": 4,
+          "samples": 201,
+          "completeMs": {
+            "median": 0.2371,
+            "p95": 0.2408,
+            "p99": 0.2526
+          },
+          "queryOnlyMs": {
+            "median": 0.2355,
+            "p95": 0.2381,
+            "p99": 0.2432
+          },
+          "allocatedBytes": 0,
+          "meanAdditionalMs": 0.002001990049751248,
+          "maxWitnessErrorM": 0,
+          "maxNormalError": 0,
+          "maxGapErrorM": 0,
+          "positionBarM": 0.00024423116248044606
+        },
+        {
+          "site": "inland",
+          "features": 8,
+          "samples": 201,
+          "completeMs": {
+            "median": 0.4936,
+            "p95": 0.5649,
+            "p99": 0.6515
+          },
+          "queryOnlyMs": {
+            "median": 0.4909,
+            "p95": 0.5735,
+            "p99": 0.5901
+          },
+          "allocatedBytes": 0,
+          "meanAdditionalMs": 0.0019119402985074885,
+          "maxWitnessErrorM": 0,
+          "maxNormalError": 0,
+          "maxGapErrorM": 0,
+          "positionBarM": 0.00024423116248044606
+        }
+      ]
+    }
+  ],
+  "debugCorrectness": {
+    "exit": 0,
+    "rows": [
+      {
+        "site": "Florida",
+        "features": 1,
+        "samples": 201,
+        "completeMs": {
+          "median": 0.3836,
+          "p95": 0.4124,
+          "p99": 0.4351
+        },
+        "queryOnlyMs": {
+          "median": 0.3615,
+          "p95": 0.3687,
+          "p99": 0.3988
+        },
+        "allocatedBytes": 0,
+        "meanAdditionalMs": 0.025809950248756194,
+        "maxWitnessErrorM": 0,
+        "maxNormalError": 0,
+        "maxGapErrorM": 0,
+        "positionBarM": 0.00024423116248044606
+      },
+      {
+        "site": "Florida",
+        "features": 4,
+        "samples": 201,
+        "completeMs": {
+          "median": 1.5141,
+          "p95": 1.7784,
+          "p99": 1.9841
+        },
+        "queryOnlyMs": {
+          "median": 1.4782,
+          "p95": 1.6852,
+          "p99": 1.9939
+        },
+        "allocatedBytes": 0,
+        "meanAdditionalMs": 0.029498009950248705,
+        "maxWitnessErrorM": 0,
+        "maxNormalError": 0,
+        "maxGapErrorM": 0,
+        "positionBarM": 0.00024423116248044606
+      },
+      {
+        "site": "Florida",
+        "features": 8,
+        "samples": 201,
+        "completeMs": {
+          "median": 2.8722,
+          "p95": 2.9106,
+          "p99": 2.947
+        },
+        "queryOnlyMs": {
+          "median": 2.836,
+          "p95": 2.8736,
+          "p99": 2.8954
+        },
+        "allocatedBytes": 0,
+        "meanAdditionalMs": 0.035201990049751115,
+        "maxWitnessErrorM": 0,
+        "maxNormalError": 0,
+        "maxGapErrorM": 0,
+        "positionBarM": 0.00024423116248044606
+      },
+      {
+        "site": "regional",
+        "features": 1,
+        "samples": 201,
+        "completeMs": {
+          "median": 1.0231,
+          "p95": 1.0391,
+          "p99": 1.0643
+        },
+        "queryOnlyMs": {
+          "median": 1.0061,
+          "p95": 1.0174,
+          "p99": 1.0849
+        },
+        "allocatedBytes": 0,
+        "meanAdditionalMs": 0.01567910447761187,
+        "maxWitnessErrorM": 0,
+        "maxNormalError": 0,
+        "maxGapErrorM": 0,
+        "positionBarM": 0.00024423116248044606
+      },
+      {
+        "site": "regional",
+        "features": 4,
+        "samples": 201,
+        "completeMs": {
+          "median": 3.4733,
+          "p95": 3.5085,
+          "p99": 3.5355
+        },
+        "queryOnlyMs": {
+          "median": 3.4448,
+          "p95": 3.4802,
+          "p99": 3.5337
+        },
+        "allocatedBytes": 0,
+        "meanAdditionalMs": 0.024840796019900153,
+        "maxWitnessErrorM": 0,
+        "maxNormalError": 0,
+        "maxGapErrorM": 0,
+        "positionBarM": 0.00024423116248044606
+      },
+      {
+        "site": "regional",
+        "features": 8,
+        "samples": 201,
+        "completeMs": {
+          "median": 7.2127,
+          "p95": 7.5362,
+          "p99": 7.8358
+        },
+        "queryOnlyMs": {
+          "median": 7.0154,
+          "p95": 7.5333,
+          "p99": 7.6815
+        },
+        "allocatedBytes": 0,
+        "meanAdditionalMs": 0.06111940298507543,
+        "maxWitnessErrorM": 0,
+        "maxNormalError": 0,
+        "maxGapErrorM": 0,
+        "positionBarM": 0.00024423116248044606
+      },
+      {
+        "site": "inland",
+        "features": 1,
+        "samples": 201,
+        "completeMs": {
+          "median": 0.6989,
+          "p95": 0.8103,
+          "p99": 0.861
+        },
+        "queryOnlyMs": {
+          "median": 0.6658,
+          "p95": 0.7789,
+          "p99": 0.8172
+        },
+        "allocatedBytes": 0,
+        "meanAdditionalMs": 0.028851741293532268,
+        "maxWitnessErrorM": 0,
+        "maxNormalError": 0,
+        "maxGapErrorM": 0,
+        "positionBarM": 0.00024423116248044606
+      },
+      {
+        "site": "inland",
+        "features": 4,
+        "samples": 201,
+        "completeMs": {
+          "median": 2.7556,
+          "p95": 2.9711,
+          "p99": 3.0803
+        },
+        "queryOnlyMs": {
+          "median": 2.7152,
+          "p95": 2.9189,
+          "p99": 3.1388
+        },
+        "allocatedBytes": 0,
+        "meanAdditionalMs": 0.03792885572139312,
+        "maxWitnessErrorM": 0,
+        "maxNormalError": 0,
+        "maxGapErrorM": 0,
+        "positionBarM": 0.00024423116248044606
+      },
+      {
+        "site": "inland",
+        "features": 8,
+        "samples": 201,
+        "completeMs": {
+          "median": 5.2449,
+          "p95": 5.3428,
+          "p99": 5.5196
+        },
+        "queryOnlyMs": {
+          "median": 5.1893,
+          "p95": 5.2816,
+          "p99": 5.3708
+        },
+        "allocatedBytes": 0,
+        "meanAdditionalMs": 0.060525870646765546,
+        "maxWitnessErrorM": 0,
+        "maxNormalError": 0,
+        "maxGapErrorM": 0,
+        "positionBarM": 0.00024423116248044606
+      }
+    ],
+    "performanceUse": "Not production qualification. Final portion may overlap initial Release scheduling; all correctness/allocation assertions passed."
+  },
+  "excludedMeasurements": {
+    "initialReleaseCheck": "Pre-final-test-patch exploratory run: all queries ready, zero bytes; Florida4 P99 1.4864ms; regional4 median .3167ms/P99 .3758ms.",
+    "firstRepeatBatch": "Three Release runs potentially overlapped the tail of a running Debug test due to command yielding. Excluded from performance qualification. Replaced with exactly three explicitly awaited sequential runs; no production behavior changed."
+  }
+}
