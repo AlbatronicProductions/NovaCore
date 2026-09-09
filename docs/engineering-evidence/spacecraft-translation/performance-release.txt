@@ -1,0 +1,2 @@
+Translation PERF craftCount=1 samples=101 callsPerSample=1000 medianBatchNs=12.00 p95BatchNs=12.10 p99BatchNs=12.10 medianPerCraftNs=12.00 allocatedBytes=0 checksum=10557610134.899956
+Translation PERF craftCount=256 samples=101 callsPerSample=256000 medianBatchNs=3071.70 p95BatchNs=3082.20 p99BatchNs=3110.10 medianPerCraftNs=12.00 allocatedBytes=0 checksum=48150757551.16582

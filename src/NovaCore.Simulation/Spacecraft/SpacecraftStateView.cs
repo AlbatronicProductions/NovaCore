@@ -1,6 +1,7 @@
 namespace NovaCore.Simulation.Spacecraft;
 
 using NovaCore.Simulation.Spacecraft.Rotation;
+using NovaCore.Simulation.Spacecraft.Translation;
 
 /// <summary>Allocation-free read-only traversal over the authoritative fixed spacecraft store.</summary>
 internal readonly struct SpacecraftStateView
@@ -8,6 +9,8 @@ internal readonly struct SpacecraftStateView
     private readonly SpacecraftStateStore _store;
     internal SpacecraftStateView(SpacecraftStateStore store) => _store = store;
     public int Count => _store.Count;
+    internal bool TryGetTranslation(SpacecraftId id, out SpacecraftTranslationState translation, out SpacecraftPhysicalProperties properties) =>
+        _store.TryGetTranslation(id, out translation, out properties);
     internal SpacecraftDefinition GetDefinition(int index) => _store.GetDefinitionAt(index);
     internal SpacecraftAttitudeState GetAttitude(int index) => _store.GetAttitudeAt(index);
     internal bool TryGetIndex(SpacecraftId id, out int index) => _store.TryGetIndex(id, out index);

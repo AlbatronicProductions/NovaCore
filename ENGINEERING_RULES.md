@@ -46,7 +46,7 @@ M12 is complete. M13 begins the simplified milestone convention:
 - M1 through M12 retain their existing identifiers, including `M12D-P2S5F`, `M12D-P2S5G` and `M12D-P2S5H`. Historical commits and tags remain unchanged, and old milestone identifiers remain valid historical coordinates. No Git history rewriting or movement of existing tags is permitted for naming cleanup.
 
 **M13 — NCSM1 Terrain Performance is CLOSED. There is no M13.7.**
-The latest banked production step is **M13.6 — Prefer CPU-cached memory for
+The final banked M13 production step is **M13.6 — Prefer CPU-cached memory for
 terrain residency keys**, commit `90fef759243dd67918cd556e19027159e5a5eada`,
 tag `m13.6-cpu-cached-terrain-residency-keys`. Next production-front authorization
 returns to Project Control. See [current state](docs/NOVACORE_CURRENT_STATE.md)

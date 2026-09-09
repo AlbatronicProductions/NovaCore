@@ -22,4 +22,11 @@ public readonly record struct SimulationEventRequest
     }
     internal static bool TryCreateRigidBodyTorque(SimulationEventId id, SimulationInstant time, int priority, Spacecraft.SpacecraftId subject, out SimulationEventRequest request)
     { if (!SimulationEventPayload.TryCreateRigidBodyTorque(subject, out var payload)) { request = default; return false; } request = new(id, time, priority, SimulationEventKind.RigidBodyTorque, payload); return true; }
+
+    internal static bool TryCreateSpacecraftForce(SimulationEventId id, int priority, Spacecraft.Translation.SpacecraftForceCommand command, out SimulationEventRequest request)
+    {
+        request = default;
+        if (!SimulationEventPayload.TryCreateSpacecraftForce(command.Spacecraft, command.ForceRoot, out var payload)) return false;
+        request = new(id, command.Time, priority, SimulationEventKind.SpacecraftForce, payload); return true;
+    }
 }

@@ -11,24 +11,44 @@ renderer. Simulation owns celestial identity, exact time, physical state, and
 reference-frame transforms. Graphics consumes immutable root-resolved snapshots
 and performs FP64 camera-relative subtraction before GPU transport.
 
-## Banked production checkpoint and M13 closure
+## Banked production checkpoint
 
-Current unbanked work: **immutable canonical surface-point queries for spacecraft
-contact**, within the authorized Surface Interaction / Launch Foundation front.
-See [query contract](surface-point-queries.md) and
-[candidate evidence](engineering-evidence/surface-point-query/README.md).
-This adds a physical query boundary only; contact response and launch are not
-implemented. No new milestone number is assigned. M13's closed state and banked
-renderer remain unchanged.
+M14.2 — Establish independent spacecraft translational authority is **PRODUCTION
+ACCEPTED but UNBANKED** on `codex/spacecraft-translation`. The transient allocation
+gate is resolved as CLR background-GC allocation-context accounting. A test-only
+measurement boundary preserves the exact-zero contract; repeated Debug/Release
+validation passed. Manual disposal of classified diagnostic copies remains before
+banking; see [attribution and closeout](engineering-evidence/spacecraft-translation/allocation-attribution.md).
+No M14.2 tag was created. M14 — Surface Interaction / Launch Foundation remains
+**OPEN**. Manual visual acceptance is **NOT REQUIRED**; there is no intended visible
+production-route change.
 
-Latest banked production milestone: **M13.6 — Prefer CPU-cached memory for
+Latest banked accomplishment: **M14.1 — Provide immutable canonical surface-point queries
+for spacecraft contact**, commit
+`5b9b02ab1d2ba0e903809510908e4819984d4de2`, annotated tag
+`m14.1-canonical-surface-point-queries`. M14.1 remains closed.
+See the [query contract](surface-point-queries.md).
+
+M14.2's existing spacecraft store supports immutable
+mass, FP64 inertial-root COM position/velocity, analytic constant-net-force
+advancement and canonical exact-time force transactions. Existing rotation and
+derived frame extraction share the same craft identity. See the
+[translation contract](spacecraft-translation.md) and
+[accepted evidence](engineering-evidence/spacecraft-translation/README.md).
+Contact response, grounded state, pad collision and launch/landing are not
+implemented. No visible route changes. The next production responsibility returns
+to Project Control; no subsequent milestone work is authorized here.
+
+### Closed M13 renderer baseline
+
+Latest banked M13 production milestone: **M13.6 — Prefer CPU-cached memory for
 terrain residency keys**.
 
 - Commit: `90fef759243dd67918cd556e19027159e5a5eada`.
 - Annotated tag: `m13.6-cpu-cached-terrain-residency-keys`.
 - Project Control decision: **PASS — M13 CLOSED**.
 - Front: **M13 — NCSM1 Terrain Performance**.
-- **There is no M13.7.** Project Control authorized the bounded surface-query candidate above.
+- **There is no M13.7.** M14 work retains this renderer baseline.
 
 M13 contains six banked production accomplishments:
 

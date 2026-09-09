@@ -15,6 +15,11 @@ using NovaCore.Core;
 using NovaCore.Core.ReferenceFrames;
 using System.Diagnostics;
 
+if (args.Contains("--orchestration-only", StringComparer.Ordinal)) { ClockExecutionTests(); return; }
+
+if (args.Contains("--translation-only", StringComparer.Ordinal)) { SpacecraftTranslationTests.Run(); return; }
+if (args.Contains("--translation-performance", StringComparer.Ordinal)) { SpacecraftTranslationTests.Performance(); return; }
+
 if (args.Contains("--orientation-only", StringComparer.Ordinal))
 {
     CelestialBodyOrientationTests();
@@ -46,6 +51,7 @@ var tests = new (string Name, Action Test)[]
     ("Celestial body orientation", CelestialBodyOrientationTests),
     ("Two-body propagation", TwoBodyPropagationTests),
     ("Spacecraft attitude", SpacecraftAttitudeTests),
+    ("Spacecraft translational authority", SpacecraftTranslationTests.Run),
     ("Spacecraft attitude integration", SpacecraftAttitudeIntegrationTests),
     ("Rigid-body rotation", RigidBodyRotationTests),
     ("Rigid-body torque transaction", RigidBodyTorqueTransactionTests),
@@ -1322,13 +1328,43 @@ static void ClockExecutionTests()
     var allocationTimeline = new SimulationTimeline(1_000);
     for (ulong id = 1; id <= 1_000; id++) Check(allocationTimeline.Schedule(SimulationInstant.Zero, Request(id, 1, (int)id)).Succeeded, "orchestration allocation schedule");
     var allocationEngine = new SimulationTransactionEngine(new SimulationClock(SimulationInstant.Zero, allocationTimeline), new SimulationState(), 1_000);
-    var allocationBefore = GC.GetAllocatedBytesForCurrentThread();
-    var allocation = allocationEngine.AdvanceAndExecuteOneCanonicalGroup(new SimulationInstant(2));
-    Check(GC.GetAllocatedBytesForCurrentThread() == allocationBefore && allocation.Reason == SimulationExecutionStopReason.Completed && allocationEngine.ProcessedCount == 1_000, "preallocated orchestration allocates zero bytes");
+    var stateBeforeAllocation = allocationEngine.State;
+    var pendingBeforeAllocation = allocationTimeline.PendingCount;
+    // Background GC can discard unused allocation-context space and charge it to this
+    // counter without allocating an object. Successful entry establishes the measurement
+    // boundary; failed entry/exit invalidates the test. This reservation is not an
+    // allocation allowance: the orchestration threshold below remains exactly zero.
+    Check(GC.TryStartNoGCRegion(1L << 20, disallowFullBlockingGC: true), "orchestration allocation measurement enters no-GC region");
+    SimulationExecutionResult allocation;
+    long allocatedBytes;
+    long allocationControlBytes;
+    try
+    {
+        var allocationBefore = GC.GetAllocatedBytesForCurrentThread();
+        allocation = allocationEngine.AdvanceAndExecuteOneCanonicalGroup(new SimulationInstant(2));
+        allocatedBytes = GC.GetAllocatedBytesForCurrentThread() - allocationBefore;
+
+        // Verify that the same boundary still detects real allocation, after the workload
+        // measurement so this control cannot add warmup to the operation under test.
+        var controlBefore = GC.GetAllocatedBytesForCurrentThread();
+        var control = AllocateOrchestrationCounterControl();
+        allocationControlBytes = GC.GetAllocatedBytesForCurrentThread() - controlBefore;
+        GC.KeepAlive(control);
+    }
+    finally { GC.EndNoGCRegion(); }
+    // Observation occurs after the allocation counter is closed, never inside the measured operation.
+    Console.WriteLine($"Orchestration observation: allocatedBytes={allocatedBytes}; reason={allocation.Reason}; processed={allocationEngine.ProcessedCount}; expected=1000; pendingBefore={pendingBeforeAllocation}; pendingAfter={allocationTimeline.PendingCount}; markerBefore={stateBeforeAllocation.MarkerValue}; markerAfter={allocationEngine.State.MarkerValue}; revisionBefore={stateBeforeAllocation.Revision.Value}; revisionAfter={allocationEngine.State.Revision.Value}; startTicks=0; targetTicks=2; reachedTicks={allocation.ReachedTime.Ticks}");
+    Check(allocationControlBytes > 0, "orchestration allocation counter detects deliberate managed allocation");
+    Check(allocation.Reason == SimulationExecutionStopReason.Completed, $"preallocated orchestration completes execution: {allocation.Reason}");
+    Check(allocationEngine.ProcessedCount == 1_000, $"preallocated orchestration processes exactly 1000 events: {allocationEngine.ProcessedCount}");
+    Check(allocatedBytes == 0, $"preallocated orchestration allocates zero bytes: {allocatedBytes}");
 
     var hash = ClockExecutionHash(); Check(ClockExecutionHash() == hash, "deterministic orchestration hash");
     Console.WriteLine($"Deterministic clock-orchestration hash: 0x{hash:X16}");
 }
+
+[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+static byte[] AllocateOrchestrationCounterControl() => new byte[128];
 
 static SimulationEventHeader Header(ulong id, long time, int priority, ulong sequence) => new(new SimulationEventId(id), new SimulationInstant(time), priority, new SimulationEventSequence(sequence), SimulationEventKind.Marker);
 static SimulationEventRequest Request(ulong id, long time, int priority) => new(new SimulationEventId(id), new SimulationInstant(time), priority, SimulationEventKind.Marker);

@@ -1,0 +1,120 @@
+{
+  "technicalResult": "PASS",
+  "bankingStatus": "M14.2 BANKING FOLLOW-UP REQUIRED",
+  "remaining": "Manual disposal only; no remaining technical allocation blocker",
+  "repeatPlan": "10 full Simulation and5 isolated orchestration fresh processes per configuration, stop on first failure. Fixed before execution; suite-state and isolated coverage.",
+  "groups": [
+    {
+      "configuration": "Debug",
+      "scope": "full",
+      "runs": 10,
+      "failures": 0,
+      "groupsPerFullRun": 33,
+      "allCompleted1000AtZeroBytes": true,
+      "positiveAllocationControlPassed": true
+    },
+    {
+      "configuration": "Debug",
+      "scope": "isolated",
+      "runs": 5,
+      "failures": 0,
+      "groupsPerFullRun": 1,
+      "allCompleted1000AtZeroBytes": true,
+      "positiveAllocationControlPassed": true
+    },
+    {
+      "configuration": "Release",
+      "scope": "full",
+      "runs": 10,
+      "failures": 0,
+      "groupsPerFullRun": 33,
+      "allCompleted1000AtZeroBytes": true,
+      "positiveAllocationControlPassed": true
+    },
+    {
+      "configuration": "Release",
+      "scope": "isolated",
+      "runs": 5,
+      "failures": 0,
+      "groupsPerFullRun": 1,
+      "allCompleted1000AtZeroBytes": true,
+      "positiveAllocationControlPassed": true
+    }
+  ],
+  "gates": [
+    {
+      "gate": "Build",
+      "configuration": "Debug",
+      "exit": 0,
+      "summary": [
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)"
+      ]
+    },
+    {
+      "gate": "ReferenceFrames",
+      "configuration": "Debug",
+      "exit": 0,
+      "passLines": 11,
+      "summary": []
+    },
+    {
+      "gate": "Precision",
+      "configuration": "Debug",
+      "exit": 0,
+      "passLines": 1,
+      "summary": []
+    },
+    {
+      "gate": "Graphics",
+      "configuration": "Debug",
+      "exit": 0,
+      "passLines": 2,
+      "summary": [
+        "Surface-point output fingerprint: 3e08f86757588127099cbb100d3829b73d5e5f29b1de8d0f22ec83de28534912",
+        "Graphics Debug: selected=2; pass=2; fail=0; skip=0; excluded=91"
+      ]
+    },
+    {
+      "gate": "Build",
+      "configuration": "Release",
+      "exit": 0,
+      "summary": [
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)"
+      ]
+    },
+    {
+      "gate": "ReferenceFrames",
+      "configuration": "Release",
+      "exit": 0,
+      "passLines": 11,
+      "summary": []
+    },
+    {
+      "gate": "Precision",
+      "configuration": "Release",
+      "exit": 0,
+      "passLines": 1,
+      "summary": []
+    },
+    {
+      "gate": "Graphics",
+      "configuration": "Release",
+      "exit": 0,
+      "passLines": 2,
+      "summary": [
+        "Surface-point output fingerprint: 3e08f86757588127099cbb100d3829b73d5e5f29b1de8d0f22ec83de28534912",
+        "Graphics Release: selected=2; pass=2; fail=0; skip=0; excluded=91"
+      ]
+    }
+  ],
+  "sourceProgramSha256": "DA03AE9DB05302ACF626F59EC17F007D8F9412E2D1C1C911A0A24D3A6608AA26",
+  "all17AcceptedProductionFingerprintsMatch": true,
+  "productionChanged": false,
+  "measurementCorrection": "Test-only no-GC measurement boundary, fail-closed entry/exit, original warmup, zero threshold, post-measurement deliberate-allocation control, independent assertions",
+  "profilerAttachedDuringValidation": false,
+  "diffCheck": "PASS; exit0; line-ending normalization warnings only"
+}

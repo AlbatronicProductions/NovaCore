@@ -1,0 +1,33 @@
+{
+  "utc": "2026-09-09T16:15:18.7464121Z",
+  "status": "M14.2 BANKING BLOCKED",
+  "judgment": "ESCALATE TO PROJECT CONTROL",
+  "sourceAndTestFingerprints": "19 of 19 match accepted candidate; no production/test closeout edits",
+  "debugBuild": "PASS; final script continued only after exit 0",
+  "debugSimulation": {
+    "status": "FAIL",
+    "exitCode": -532462766,
+    "test": "Clock execution orchestration",
+    "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+    "line": 1331,
+    "message": "preallocated orchestration allocates zero bytes",
+    "assertion": "allocated bytes unchanged AND execution reason Completed AND ProcessedCount == 1000",
+    "unknown": "The failing conjunct, allocation amount and cause were not recorded. No repeat run or production change performed."
+  },
+  "notReached": [
+    "Debug ReferenceFrames",
+    "Debug Precision",
+    "Debug selected M14.1 regressions",
+    "Release build",
+    "Release Simulation",
+    "Release ReferenceFrames",
+    "Release Precision",
+    "Release selected M14.1 regressions"
+  ],
+  "priorAcceptedValidation": "Preserved in README and original logs, not substituted for this failed final gate",
+  "next": "Project Control review; bounded classification of failed clock assertion before final validation/banking",
+  "commitCreated": false,
+  "tagCreated": false,
+  "pushed": false,
+  "deletedFiles": 0
+}

@@ -13,6 +13,7 @@ internal enum SpacecraftStateStoreStatus : byte
     InvalidDiagnosticName,
     InvalidAttitudeState,
     CapacityOverflow,
+    InvalidTranslationState,
 }
 
 internal enum SpacecraftStateStoreMutationStatus : byte

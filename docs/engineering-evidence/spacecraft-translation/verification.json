@@ -1,0 +1,157 @@
+{
+  "verifiedUtc": "2026-09-09T15:55:05.7799572Z",
+  "branch": "codex/spacecraft-translation",
+  "head": "5b9b02ab1d2ba0e903809510908e4819984d4de2",
+  "main": "5b9b02ab1d2ba0e903809510908e4819984d4de2",
+  "originMain": "5b9b02ab1d2ba0e903809510908e4819984d4de2",
+  "m14_1": "5b9b02ab1d2ba0e903809510908e4819984d4de2",
+  "diffCheckExitCode": 0,
+  "stagedFiles": [],
+  "trackedChanges": [
+    "docs/CODEX_HANDOFF.md",
+    "docs/NOVACORE_CURRENT_STATE.md",
+    "docs/architecture.md",
+    "src/NovaCore.Simulation/Spacecraft/ReferenceFrames/SpacecraftReferenceFrameEvaluator.cs",
+    "src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.cs",
+    "src/NovaCore.Simulation/Spacecraft/SpacecraftStateStoreStatus.cs",
+    "src/NovaCore.Simulation/Spacecraft/SpacecraftStateView.cs",
+    "src/NovaCore.Simulation/Timeline/SimulationEventHeader.cs",
+    "src/NovaCore.Simulation/Timeline/SimulationEventKind.cs",
+    "src/NovaCore.Simulation/Timeline/SimulationEventPayload.cs",
+    "src/NovaCore.Simulation/Timeline/SimulationEventRequest.cs",
+    "src/NovaCore.Simulation/Timeline/SimulationTimeline.cs",
+    "src/NovaCore.Simulation/Transactions/SimulationEventEvaluator.cs",
+    "src/NovaCore.Simulation/Transactions/SimulationState.cs",
+    "src/NovaCore.Simulation/Transactions/SimulationTransaction.cs",
+    "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.cs",
+    "tests/NovaCore.Simulation.Tests/Program.cs"
+  ],
+  "untrackedFiles": [
+    "docs/engineering-evidence/spacecraft-translation/README.md",
+    "docs/engineering-evidence/spacecraft-translation/build-debug.txt",
+    "docs/engineering-evidence/spacecraft-translation/build-release.txt",
+    "docs/engineering-evidence/spacecraft-translation/performance-release.txt",
+    "docs/engineering-evidence/spacecraft-translation/precision-debug.txt",
+    "docs/engineering-evidence/spacecraft-translation/precision-release.txt",
+    "docs/engineering-evidence/spacecraft-translation/referenceframes-debug.txt",
+    "docs/engineering-evidence/spacecraft-translation/referenceframes-release.txt",
+    "docs/engineering-evidence/spacecraft-translation/simulation-debug.txt",
+    "docs/engineering-evidence/spacecraft-translation/simulation-release.txt",
+    "docs/engineering-evidence/spacecraft-translation/surface-query-debug.txt",
+    "docs/engineering-evidence/spacecraft-translation/surface-query-release.txt",
+    "docs/engineering-evidence/spacecraft-translation/verification.json",
+    "docs/spacecraft-translation.md",
+    "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftForceTransaction.cs",
+    "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftMotionEvaluator.cs",
+    "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftTranslationEvaluator.cs",
+    "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftTranslationState.cs",
+    "tests/NovaCore.Simulation.Tests/SpacecraftTranslationTests.cs"
+  ],
+  "statusShort": [
+    " M docs/CODEX_HANDOFF.md",
+    " M docs/NOVACORE_CURRENT_STATE.md",
+    " M docs/architecture.md",
+    " M src/NovaCore.Simulation/Spacecraft/ReferenceFrames/SpacecraftReferenceFrameEvaluator.cs",
+    " M src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.cs",
+    " M src/NovaCore.Simulation/Spacecraft/SpacecraftStateStoreStatus.cs",
+    " M src/NovaCore.Simulation/Spacecraft/SpacecraftStateView.cs",
+    " M src/NovaCore.Simulation/Timeline/SimulationEventHeader.cs",
+    " M src/NovaCore.Simulation/Timeline/SimulationEventKind.cs",
+    " M src/NovaCore.Simulation/Timeline/SimulationEventPayload.cs",
+    " M src/NovaCore.Simulation/Timeline/SimulationEventRequest.cs",
+    " M src/NovaCore.Simulation/Timeline/SimulationTimeline.cs",
+    " M src/NovaCore.Simulation/Transactions/SimulationEventEvaluator.cs",
+    " M src/NovaCore.Simulation/Transactions/SimulationState.cs",
+    " M src/NovaCore.Simulation/Transactions/SimulationTransaction.cs",
+    " M src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.cs",
+    " M tests/NovaCore.Simulation.Tests/Program.cs",
+    "?? docs/engineering-evidence/spacecraft-translation/",
+    "?? docs/spacecraft-translation.md",
+    "?? src/NovaCore.Simulation/Spacecraft/Translation/",
+    "?? tests/NovaCore.Simulation.Tests/SpacecraftTranslationTests.cs"
+  ],
+  "sourceFingerprints": [
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/ReferenceFrames/SpacecraftReferenceFrameEvaluator.cs",
+      "sha256": "50ae33099b8f66c1bab11da197e699a7c88c06b5ce3520ab98e2ea967623e7b1"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.cs",
+      "sha256": "a427a429acf0c79baf22fa51e7ce4d29bc295822d132ae092eb841c24c51c9ee"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftStateStoreStatus.cs",
+      "sha256": "c710243b1a18303cb5ff86e58a79f7d461b3e00b650001d755d367e8af037a95"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftStateView.cs",
+      "sha256": "5a35d36774ecd5ba3c8bd349c50a42fdc79958691a71c19ed4613d42db471149"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Timeline/SimulationEventHeader.cs",
+      "sha256": "a619a1fabfb6f376d3797ae1c709b2a36bd313fbea45d17d65237c94dfb1522f"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Timeline/SimulationEventKind.cs",
+      "sha256": "14d2e662467412e1164d81f882b158ce219e53b2a9dfee6c73515023e94ef259"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Timeline/SimulationEventPayload.cs",
+      "sha256": "26a3bafaee0d084d123dd35330e1c87856aa3a47bb7f3de72553eddb99180e18"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Timeline/SimulationEventRequest.cs",
+      "sha256": "4a70dcf87abfc07966b5c640bab68809fb0434812aded97448e579fa2c9d79b8"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Timeline/SimulationTimeline.cs",
+      "sha256": "9711cb78ea35933afe450ac234a778a6b26d99597216e204d06bcfa2c499d6e9"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationEventEvaluator.cs",
+      "sha256": "7a00d41563900452047a2c6ec0f62f939d61e6122dabab6282a7f7b3123e4adb"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationState.cs",
+      "sha256": "f587346fe333bf88b04f0a8660de30831d7ed250d455ccf2fe4ce9e638e8a86c"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransaction.cs",
+      "sha256": "77e546130fd2fa7126829495e13eaeeea0b7682afb91664fe552f2178df6fa8f"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.cs",
+      "sha256": "49b2c1fea2026d6ea9e85b318fc256dbcc8e9cce64d244cefe49b750bb2b0110"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "sha256": "48d7fb49cc4a288751ac5b78f0508871304edc736a291c1e265b857b13d5dca8"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftForceTransaction.cs",
+      "sha256": "f616eb30203f22ed0f530ab8ee05aadf66ad36d9cdda8ba86a56d71c6aab88c3"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftMotionEvaluator.cs",
+      "sha256": "6a3c843bffa19923340078a7f90bab7089501417a90a29c1c8a652964f914a63"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftTranslationEvaluator.cs",
+      "sha256": "162728e5a7dbeb9ade69a2471677f644fd3d3677cf5c9016cf7cd271a327b98e"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftTranslationState.cs",
+      "sha256": "01299597d91c193e4a8f51d7e3e117ce3c5df3947ed42b4132c8595ced7b1565"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/SpacecraftTranslationTests.cs",
+      "sha256": "970294979e8690b577ddbf77089f305e0c5903a471404bb363c5bbfa5c696cb9"
+    }
+  ],
+  "evidenceBytesExcludingThisManifest": 47855.0,
+  "evidenceBudgetBytes": 131072,
+  "disposableDiagnosticBytesRemaining": 0,
+  "runtime": "Microsoft Windows 10.0.26200",
+  "dotnetSdk": "10.0.303",
+  "ksaSha256": "a8a5164204eed962df9d9025e99f523d9a23ee2ce6e802b18216a9da35506d2f"
+}

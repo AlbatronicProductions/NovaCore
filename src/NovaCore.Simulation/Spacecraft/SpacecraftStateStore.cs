@@ -1,4 +1,6 @@
 using NovaCore.Simulation.Spacecraft.Rotation;
+using NovaCore.Simulation.Spacecraft.Translation;
+using NovaCore.Core.ReferenceFrames;
 
 namespace NovaCore.Simulation.Spacecraft;
 
@@ -9,11 +11,14 @@ internal sealed class SpacecraftStateStore
     private readonly SpacecraftAttitudeState[] _attitudes;
     private readonly SpacecraftRigidBodyRotationState[] _rigidBodies;
     private readonly bool[] _hasRigidBody;
+    private readonly SpacecraftTranslationState[] _translations;
+    private readonly SpacecraftPhysicalProperties[] _properties;
     private readonly ulong[] _lookupIds;
     private readonly int[] _lookupIndices;
 
     private SpacecraftStateStore(SpacecraftDefinition[] definitions, SpacecraftAttitudeState[] attitudes, SpacecraftRigidBodyRotationState[] rigidBodies, bool[] hasRigidBody, ulong[] lookupIds, int[] lookupIndices)
-    { _definitions = definitions; _attitudes = attitudes; _rigidBodies = rigidBodies; _hasRigidBody = hasRigidBody; _lookupIds = lookupIds; _lookupIndices = lookupIndices; }
+    { _definitions = definitions; _attitudes = attitudes; _rigidBodies = rigidBodies; _hasRigidBody = hasRigidBody; _lookupIds = lookupIds; _lookupIndices = lookupIndices;
+        _translations = new SpacecraftTranslationState[definitions.Length]; _properties = new SpacecraftPhysicalProperties[definitions.Length]; }
 
     internal static SpacecraftStateStore Empty { get; } = new([], [], [], [], [], []);
     internal int Count => _definitions.Length;
@@ -58,6 +63,44 @@ internal sealed class SpacecraftStateStore
     }
 
     internal SpacecraftDefinition GetDefinitionAt(int index) => _definitions[index];
+    /// <summary>Independent craft use the existing ECL root as carrier and their body-frame origin as COM.</summary>
+    internal static bool TryCreateTranslating(ReadOnlySpan<SpacecraftDefinition> definitions,
+        ReadOnlySpan<SpacecraftRigidBodyRotationState> rotations, ReadOnlySpan<SpacecraftPhysicalProperties> properties,
+        ReadOnlySpan<SpacecraftTranslationState> translations, ReferenceFrameGraph graph,
+        out SpacecraftStateStore? store, out SpacecraftStateStoreStatus status)
+    {
+        ArgumentNullException.ThrowIfNull(graph);
+        store = null;
+        if (definitions.Length != properties.Length || definitions.Length != translations.Length || definitions.Length != rotations.Length)
+        { status = SpacecraftStateStoreStatus.StateCountMismatch; return false; }
+        for (var i = 0; i < definitions.Length; i++)
+        {
+            var definition = definitions[i]; var translation = translations[i];
+            if (translation.Spacecraft != definition.Id || translation.Epoch != rotations[i].Epoch ||
+                !SpacecraftTranslationEvaluator.TryEvaluate(translation, properties[i], translation.Epoch).Succeeded)
+            { status = SpacecraftStateStoreStatus.InvalidTranslationState; return false; }
+            if (translation.RootFrame != definition.CarrierFrame || graph.RootCount != 1 ||
+                !graph.TryGetNode(translation.RootFrame, out var root) || root.ParentId is not null || root.Kind != ReferenceFrameKind.Ecl ||
+                !graph.TryGetNode(definition.BodyFrame, out var body) || body.ParentId != root.Id)
+            { status = SpacecraftStateStoreStatus.InvalidCarrierFrame; return false; }
+        }
+        if (!TryCreateRigidBody(definitions, rotations, out store, out status) || store is null) return false;
+        translations.CopyTo(store._translations); properties.CopyTo(store._properties);
+        return true;
+    }
+
+    internal bool TryGetTranslation(SpacecraftId id, out SpacecraftTranslationState translation, out SpacecraftPhysicalProperties properties)
+    {
+        if (TryGetIndex(id, out var index) && _properties[index].IsValid)
+        { translation = _translations[index]; properties = _properties[index]; return true; }
+        translation = default; properties = default; return false;
+    }
+
+    internal bool TryReplaceTranslation(in SpacecraftTranslationState expected, in SpacecraftTranslationState replacement)
+    {
+        if (!TryGetIndex(expected.Spacecraft, out var index) || !_properties[index].IsValid || _translations[index] != expected) return false;
+        _translations[index] = replacement; return true;
+    }
     internal SpacecraftAttitudeState GetAttitudeAt(int index) => _attitudes[index];
     internal bool TryGetIndex(SpacecraftId id, out int index) { var found = Array.BinarySearch(_lookupIds, id.Value); if (found >= 0) { index = _lookupIndices[found]; return true; } index = -1; return false; }
     internal bool TryGetDefinition(SpacecraftId id, out SpacecraftDefinition value) { if (TryGetIndex(id, out var index)) { value = _definitions[index]; return true; } value = default; return false; }

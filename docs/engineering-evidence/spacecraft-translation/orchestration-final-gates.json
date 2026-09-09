@@ -1,0 +1,308 @@
+{
+  "status": "M14.2 BANKING FOLLOW-UP REQUIRED",
+  "causalClassification": "INSUFFICIENT EVIDENCE",
+  "failedContract": "ZERO-ALLOCATION CONTRACT",
+  "observedFailure": {
+    "configuration": "Release",
+    "scope": "full Simulation suite",
+    "allocatedBytes": 8160,
+    "reason": "Completed",
+    "processed": 1000,
+    "expected": 1000,
+    "intermittent": true
+  },
+  "qualification": "Subsequent passing consistency sequence does not clear the earlier reproduced intermittent failure.",
+  "head": "5b9b02ab1d2ba0e903809510908e4819984d4de2",
+  "branch": "codex/spacecraft-translation",
+  "runtime": "Microsoft.NETCore.App 10.0.11 win-x64",
+  "finalConsistencyGates": [
+    {
+      "Gate": "Build",
+      "Configuration": "Debug",
+      "Exit": 0,
+      "Summary": [
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)"
+      ]
+    },
+    {
+      "Gate": "Simulation",
+      "Configuration": "Debug",
+      "Exit": 0,
+      "PassLines": 34,
+      "Summary": [
+        "Deterministic event-order stress hash: 0x871F0B2A00578823",
+        "Deterministic timeline stress hash: 0x5B42511799128BEF",
+        "Deterministic mixed-timeline stress hash: 0xEE895B4573F23F30",
+        "Deterministic clock stress hash: 0x97E0A268E405BFE5",
+        "Deterministic host-duration conversion hash: 0xA6D4EC25DBF2641F",
+        "Deterministic host-duration orchestration hash: 0x2DB5C6703CC7E025",
+        "Deterministic long-duration host advancement hash: 0xF5E81045A0C3D909",
+        "Deterministic transaction replay hash: 0xB1AFF1F2BB1260C5",
+        "Deterministic canonical-group replay hash: 0x26EC01B5608A1EB4",
+        "Orchestration observation: allocatedBytes=0; reason=Completed; processed=1000; expected=1000; pendingBefore=1000; pendingAfter=0; markerBefore=0; markerAfter=1000; revisionBefore=0; revisionAfter=1000; startTicks=0; targetTicks=2; reachedTicks=2",
+        "Deterministic clock-orchestration hash: 0x4BAF8048C764B33E",
+        "Deterministic celestial-contract hash: 0xF8C4E8511BDFEAC2",
+        "Deterministic celestial-system validation hash: 0xAB869A12B4D3734A; warm allocations=0 bytes",
+        "Deterministic celestial-system time hash: 0x52818656D0A49113; warm mappings=0 bytes",
+        "Deterministic celestial ephemeris-catalog hash: 0x393A2730EA3A1BF5; construction=1528 bytes; warm allocations=0 bytes",
+        "Deterministic SampledDemo hash: 0x79D206F8D15C2775; warm allocation=0 bytes",
+        "Deterministic celestial-system evaluation hashes: sol=0x30D2A77A73625294; geocentric=0x7377065D834280B0; binary=0x7787BF55024F3FB4; warm allocations=0 bytes",
+        "Circular orbit: t=0 PASS; t=0.25P PASS; t=0.50P PASS; t=1.00P PASS; max checkpoint position error=3.181E-003 m; velocity error=3.429E-006 m/s",
+        "Elliptic orbit: energy relative error=7.477E-016; angular momentum relative error=9.802E-016; maximum iterations=5",
+        "Allocation: circular=0 bytes, elliptic=0 bytes, adapter/failure=0 bytes",
+        "Deterministic propagation hashes: circular=0xA008D291E12F2793, elliptic=0x576D0926E444B269, backward=0xA9686D0C088A0E6A, validation=0x6A87018FE75AA3E0, combined=0x2BBF33C222A3CC70",
+        "Deterministic spacecraft-attitude hash: 0xB598B1ECD69CDCA6; allocation=0 bytes",
+        "Translation oracle: maxPositionError=2.2737367544323206E-13 m; maxVelocityError=0 m/s; boundedInterval=86400 s; repeatedEvaluationDifference=0 bits",
+        "Translation frame roundtrip: position=9.313225746154785E-10 m; velocity=1.831802048925619E-13 m/s; bars=0.000244140625 m/1.7919430458545685E-08 m/s",
+        "Translation warmed allocation: 0 bytes / 100000 linear + coherent evaluations",
+        "PASS Spacecraft translation: contracts, numerical oracle, transactions, cadence, frames, allocations",
+        "PASS Spacecraft translational authority",
+        "Deterministic spacecraft-attitude integration hash: 0xE41DB63F425CA55C; allocation=0 bytes",
+        "Rigid-body rotation: spherical orientation error=0.000E+000; momentum error=1.555E-011; energy error=4.859E-011; hash=0xCA36951D94319AC5; allocation=0 bytes",
+        "SAS sign/frame proof: one-step 90-degree error=1.551161E+000 rad; continuity prograde=2.454369E-002, radial=2.454369E-002, preferred-up=1.570796E+000 rad; fallback transitions=2; hash=0xB88A70CC5EF45185; allocation=0 bytes",
+        "Same-time ordering: PASS; Failure atomicity: PASS; Replay: PASS",
+        "Unsupported resulting orbit rejection: PASS; Failure atomicity: PASS; Replay: PASS"
+      ]
+    },
+    {
+      "Gate": "ReferenceFrames",
+      "Configuration": "Debug",
+      "Exit": 0,
+      "PassLines": 11,
+      "Summary": [
+        "Deterministic transform-resolution hash: 0x25EE9E820C726F4E",
+        "Deterministic static-fixture hash: 0x17E48B3F5A63A4D0"
+      ]
+    },
+    {
+      "Gate": "Precision",
+      "Configuration": "Debug",
+      "Exit": 0,
+      "PassLines": 1,
+      "Summary": [
+        "Separation       Represented    GPU error      Result"
+      ]
+    },
+    {
+      "Gate": "Graphics",
+      "Configuration": "Debug",
+      "Exit": 0,
+      "PassLines": 2,
+      "Summary": [
+        "Surface-point output fingerprint: 3e08f86757588127099cbb100d3829b73d5e5f29b1de8d0f22ec83de28534912",
+        "Graphics Debug: selected=2; pass=2; fail=0; skip=0; excluded=91"
+      ]
+    },
+    {
+      "Gate": "Build",
+      "Configuration": "Release",
+      "Exit": 0,
+      "Summary": [
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)"
+      ]
+    },
+    {
+      "Gate": "Simulation",
+      "Configuration": "Release",
+      "Exit": 0,
+      "PassLines": 34,
+      "Summary": [
+        "Deterministic event-order stress hash: 0x871F0B2A00578823",
+        "Deterministic timeline stress hash: 0x5B42511799128BEF",
+        "Deterministic mixed-timeline stress hash: 0xEE895B4573F23F30",
+        "Deterministic clock stress hash: 0x97E0A268E405BFE5",
+        "Deterministic host-duration conversion hash: 0xA6D4EC25DBF2641F",
+        "Deterministic host-duration orchestration hash: 0x2DB5C6703CC7E025",
+        "Deterministic long-duration host advancement hash: 0xF5E81045A0C3D909",
+        "Deterministic transaction replay hash: 0xB1AFF1F2BB1260C5",
+        "Deterministic canonical-group replay hash: 0x26EC01B5608A1EB4",
+        "Orchestration observation: allocatedBytes=0; reason=Completed; processed=1000; expected=1000; pendingBefore=1000; pendingAfter=0; markerBefore=0; markerAfter=1000; revisionBefore=0; revisionAfter=1000; startTicks=0; targetTicks=2; reachedTicks=2",
+        "Deterministic clock-orchestration hash: 0x4BAF8048C764B33E",
+        "Deterministic celestial-contract hash: 0xF8C4E8511BDFEAC2",
+        "Deterministic celestial-system validation hash: 0xAB869A12B4D3734A; warm allocations=0 bytes",
+        "Deterministic celestial-system time hash: 0x52818656D0A49113; warm mappings=0 bytes",
+        "Deterministic celestial ephemeris-catalog hash: 0x393A2730EA3A1BF5; construction=1528 bytes; warm allocations=0 bytes",
+        "Deterministic SampledDemo hash: 0x79D206F8D15C2775; warm allocation=0 bytes",
+        "Deterministic celestial-system evaluation hashes: sol=0x30D2A77A73625294; geocentric=0x7377065D834280B0; binary=0x7787BF55024F3FB4; warm allocations=0 bytes",
+        "Circular orbit: t=0 PASS; t=0.25P PASS; t=0.50P PASS; t=1.00P PASS; max checkpoint position error=3.181E-003 m; velocity error=3.429E-006 m/s",
+        "Elliptic orbit: energy relative error=7.477E-016; angular momentum relative error=9.802E-016; maximum iterations=5",
+        "Allocation: circular=0 bytes, elliptic=0 bytes, adapter/failure=0 bytes",
+        "Deterministic propagation hashes: circular=0xA008D291E12F2793, elliptic=0x576D0926E444B269, backward=0xA9686D0C088A0E6A, validation=0x6A87018FE75AA3E0, combined=0x2BBF33C222A3CC70",
+        "Deterministic spacecraft-attitude hash: 0xB598B1ECD69CDCA6; allocation=0 bytes",
+        "Translation oracle: maxPositionError=2.2737367544323206E-13 m; maxVelocityError=0 m/s; boundedInterval=86400 s; repeatedEvaluationDifference=0 bits",
+        "Translation frame roundtrip: position=9.313225746154785E-10 m; velocity=1.831802048925619E-13 m/s; bars=0.000244140625 m/1.7919430458545685E-08 m/s",
+        "Translation warmed allocation: 0 bytes / 100000 linear + coherent evaluations",
+        "PASS Spacecraft translation: contracts, numerical oracle, transactions, cadence, frames, allocations",
+        "PASS Spacecraft translational authority",
+        "Deterministic spacecraft-attitude integration hash: 0xE41DB63F425CA55C; allocation=0 bytes",
+        "Rigid-body rotation: spherical orientation error=0.000E+000; momentum error=1.555E-011; energy error=4.859E-011; hash=0xCA36951D94319AC5; allocation=0 bytes",
+        "SAS sign/frame proof: one-step 90-degree error=1.551161E+000 rad; continuity prograde=2.454369E-002, radial=2.454369E-002, preferred-up=1.570796E+000 rad; fallback transitions=2; hash=0xB88A70CC5EF45185; allocation=0 bytes",
+        "Same-time ordering: PASS; Failure atomicity: PASS; Replay: PASS",
+        "Unsupported resulting orbit rejection: PASS; Failure atomicity: PASS; Replay: PASS"
+      ]
+    },
+    {
+      "Gate": "ReferenceFrames",
+      "Configuration": "Release",
+      "Exit": 0,
+      "PassLines": 11,
+      "Summary": [
+        "Deterministic transform-resolution hash: 0x25EE9E820C726F4E",
+        "Deterministic static-fixture hash: 0x17E48B3F5A63A4D0"
+      ]
+    },
+    {
+      "Gate": "Precision",
+      "Configuration": "Release",
+      "Exit": 0,
+      "PassLines": 1,
+      "Summary": [
+        "Separation       Represented    GPU error      Result"
+      ]
+    },
+    {
+      "Gate": "Graphics",
+      "Configuration": "Release",
+      "Exit": 0,
+      "PassLines": 2,
+      "Summary": [
+        "Surface-point output fingerprint: 3e08f86757588127099cbb100d3829b73d5e5f29b1de8d0f22ec83de28534912",
+        "Graphics Release: selected=2; pass=2; fail=0; skip=0; excluded=91"
+      ]
+    }
+  ],
+  "candidateFingerprints": [
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/ReferenceFrames/SpacecraftReferenceFrameEvaluator.cs",
+      "acceptedSha256": "50ae33099b8f66c1bab11da197e699a7c88c06b5ce3520ab98e2ea967623e7b1",
+      "currentSha256": "50ae33099b8f66c1bab11da197e699a7c88c06b5ce3520ab98e2ea967623e7b1",
+      "matchesAccepted": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.cs",
+      "acceptedSha256": "a427a429acf0c79baf22fa51e7ce4d29bc295822d132ae092eb841c24c51c9ee",
+      "currentSha256": "a427a429acf0c79baf22fa51e7ce4d29bc295822d132ae092eb841c24c51c9ee",
+      "matchesAccepted": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftStateStoreStatus.cs",
+      "acceptedSha256": "c710243b1a18303cb5ff86e58a79f7d461b3e00b650001d755d367e8af037a95",
+      "currentSha256": "c710243b1a18303cb5ff86e58a79f7d461b3e00b650001d755d367e8af037a95",
+      "matchesAccepted": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftStateView.cs",
+      "acceptedSha256": "5a35d36774ecd5ba3c8bd349c50a42fdc79958691a71c19ed4613d42db471149",
+      "currentSha256": "5a35d36774ecd5ba3c8bd349c50a42fdc79958691a71c19ed4613d42db471149",
+      "matchesAccepted": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Timeline/SimulationEventHeader.cs",
+      "acceptedSha256": "a619a1fabfb6f376d3797ae1c709b2a36bd313fbea45d17d65237c94dfb1522f",
+      "currentSha256": "a619a1fabfb6f376d3797ae1c709b2a36bd313fbea45d17d65237c94dfb1522f",
+      "matchesAccepted": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Timeline/SimulationEventKind.cs",
+      "acceptedSha256": "14d2e662467412e1164d81f882b158ce219e53b2a9dfee6c73515023e94ef259",
+      "currentSha256": "14d2e662467412e1164d81f882b158ce219e53b2a9dfee6c73515023e94ef259",
+      "matchesAccepted": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Timeline/SimulationEventPayload.cs",
+      "acceptedSha256": "26a3bafaee0d084d123dd35330e1c87856aa3a47bb7f3de72553eddb99180e18",
+      "currentSha256": "26a3bafaee0d084d123dd35330e1c87856aa3a47bb7f3de72553eddb99180e18",
+      "matchesAccepted": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Timeline/SimulationEventRequest.cs",
+      "acceptedSha256": "4a70dcf87abfc07966b5c640bab68809fb0434812aded97448e579fa2c9d79b8",
+      "currentSha256": "4a70dcf87abfc07966b5c640bab68809fb0434812aded97448e579fa2c9d79b8",
+      "matchesAccepted": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Timeline/SimulationTimeline.cs",
+      "acceptedSha256": "9711cb78ea35933afe450ac234a778a6b26d99597216e204d06bcfa2c499d6e9",
+      "currentSha256": "9711cb78ea35933afe450ac234a778a6b26d99597216e204d06bcfa2c499d6e9",
+      "matchesAccepted": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationEventEvaluator.cs",
+      "acceptedSha256": "7a00d41563900452047a2c6ec0f62f939d61e6122dabab6282a7f7b3123e4adb",
+      "currentSha256": "7a00d41563900452047a2c6ec0f62f939d61e6122dabab6282a7f7b3123e4adb",
+      "matchesAccepted": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationState.cs",
+      "acceptedSha256": "f587346fe333bf88b04f0a8660de30831d7ed250d455ccf2fe4ce9e638e8a86c",
+      "currentSha256": "f587346fe333bf88b04f0a8660de30831d7ed250d455ccf2fe4ce9e638e8a86c",
+      "matchesAccepted": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransaction.cs",
+      "acceptedSha256": "77e546130fd2fa7126829495e13eaeeea0b7682afb91664fe552f2178df6fa8f",
+      "currentSha256": "77e546130fd2fa7126829495e13eaeeea0b7682afb91664fe552f2178df6fa8f",
+      "matchesAccepted": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.cs",
+      "acceptedSha256": "49b2c1fea2026d6ea9e85b318fc256dbcc8e9cce64d244cefe49b750bb2b0110",
+      "currentSha256": "49b2c1fea2026d6ea9e85b318fc256dbcc8e9cce64d244cefe49b750bb2b0110",
+      "matchesAccepted": true
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "acceptedSha256": "48d7fb49cc4a288751ac5b78f0508871304edc736a291c1e265b857b13d5dca8",
+      "currentSha256": "e6bd4c9d6b65e5ce738aaf887e13001695732c56ac2deac65180e5fd6b4cc949",
+      "matchesAccepted": false
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftForceTransaction.cs",
+      "acceptedSha256": "f616eb30203f22ed0f530ab8ee05aadf66ad36d9cdda8ba86a56d71c6aab88c3",
+      "currentSha256": "f616eb30203f22ed0f530ab8ee05aadf66ad36d9cdda8ba86a56d71c6aab88c3",
+      "matchesAccepted": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftMotionEvaluator.cs",
+      "acceptedSha256": "6a3c843bffa19923340078a7f90bab7089501417a90a29c1c8a652964f914a63",
+      "currentSha256": "6a3c843bffa19923340078a7f90bab7089501417a90a29c1c8a652964f914a63",
+      "matchesAccepted": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftTranslationEvaluator.cs",
+      "acceptedSha256": "162728e5a7dbeb9ade69a2471677f644fd3d3677cf5c9016cf7cd271a327b98e",
+      "currentSha256": "162728e5a7dbeb9ade69a2471677f644fd3d3677cf5c9016cf7cd271a327b98e",
+      "matchesAccepted": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftTranslationState.cs",
+      "acceptedSha256": "01299597d91c193e4a8f51d7e3e117ce3c5df3947ed42b4132c8595ced7b1565",
+      "currentSha256": "01299597d91c193e4a8f51d7e3e117ce3c5df3947ed42b4132c8595ced7b1565",
+      "matchesAccepted": true
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/SpacecraftTranslationTests.cs",
+      "acceptedSha256": "970294979e8690b577ddbf77089f305e0c5903a471404bb363c5bbfa5c696cb9",
+      "currentSha256": "970294979e8690b577ddbf77089f305e0c5903a471404bb363c5bbfa5c696cb9",
+      "matchesAccepted": true
+    }
+  ],
+  "pendingCleanup": [
+    {
+      "path": "E:\\NovaCore\\.codex\\m14-2-orchestration-baseline",
+      "files": 330,
+      "logicalBytes": 36298331.0
+    },
+    {
+      "path": "E:\\NovaCore\\.codex\\m14-2-orchestration-trace",
+      "files": 253,
+      "logicalBytes": 18895067.0
+    }
+  ],
+  "temporarySummaryBytes": 9151,
+  "cleanup": "Automatic approval review rejected deletion command: blocked by policy. Nothing deleted."
+}

@@ -7,15 +7,17 @@ namespace NovaCore.Simulation.Timeline;
 /// <summary>Closed internal event payload value. It intentionally has no extensible object or byte-payload path.</summary>
 internal readonly record struct SimulationEventPayload
 {
-    private SimulationEventPayload(SimulationEventPayloadKind kind, CelestialBodyId subject, SpacecraftId spacecraftSubject, Double3 deltaVelocity)
+    private SimulationEventPayload(SimulationEventPayloadKind kind, CelestialBodyId subject, SpacecraftId spacecraftSubject, Double3 deltaVelocity, Double3 forceRoot = default)
     {
         Kind = kind; Subject = subject; SpacecraftSubject = spacecraftSubject; DeltaVelocity = deltaVelocity;
+        ForceRoot = forceRoot;
     }
 
     internal SimulationEventPayloadKind Kind { get; }
     internal CelestialBodyId Subject { get; }
     internal SpacecraftId SpacecraftSubject { get; }
     internal Double3 DeltaVelocity { get; }
+    internal Double3 ForceRoot { get; }
     internal static SimulationEventPayload None => default;
 
     internal static bool TryCreateCelestialImpulse(CelestialBodyId subject, Double3 deltaVelocity, out SimulationEventPayload payload)
@@ -32,8 +34,16 @@ internal readonly record struct SimulationEventPayload
         SimulationEventKind.Marker or SimulationEventKind.NoOpMarker or SimulationEventKind.ReplaceTrajectory => Kind == SimulationEventPayloadKind.None,
         SimulationEventKind.CelestialImpulse => Kind == SimulationEventPayloadKind.CelestialImpulse && Subject.IsValid && DeltaVelocity.IsFinite && DeltaVelocity.LengthSquared != 0d,
         SimulationEventKind.RigidBodyTorque => Kind == SimulationEventPayloadKind.RigidBodyTorque && SpacecraftSubject.IsValid,
+        SimulationEventKind.SpacecraftForce => Kind == SimulationEventPayloadKind.SpacecraftForce && SpacecraftSubject.IsValid && ForceRoot.IsFinite,
         _ => false,
     };
+
+    internal static bool TryCreateSpacecraftForce(SpacecraftId subject, Double3 forceRoot, out SimulationEventPayload payload)
+    {
+        payload = default;
+        if (!subject.IsValid || !forceRoot.IsFinite) return false;
+        payload = new(SimulationEventPayloadKind.SpacecraftForce, default, subject, default, forceRoot); return true;
+    }
 }
 
-internal enum SimulationEventPayloadKind : byte { None = 0, CelestialImpulse = 1, RigidBodyTorque = 2 }
+internal enum SimulationEventPayloadKind : byte { None = 0, CelestialImpulse = 1, RigidBodyTorque = 2, SpacecraftForce = 3 }

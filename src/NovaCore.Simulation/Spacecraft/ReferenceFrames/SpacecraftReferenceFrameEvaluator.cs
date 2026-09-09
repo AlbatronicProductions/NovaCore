@@ -2,6 +2,7 @@ using NovaCore.Core;
 using NovaCore.Core.ReferenceFrames;
 using NovaCore.Simulation.Time;
 using NovaCore.Simulation.Spacecraft.Rotation;
+using NovaCore.Simulation.Spacecraft.Translation;
 
 namespace NovaCore.Simulation.Spacecraft.ReferenceFrames;
 
@@ -23,6 +24,8 @@ internal static class SpacecraftReferenceFrameEvaluator
             Double3 angularVelocity;
             if (spacecraft.TryGetRigidBody(definition.Id, out var rigid))
             {
+                if (spacecraft.TryGetTranslation(definition.Id, out _, out _) && requestedTime < rigid.Epoch)
+                    return SpacecraftReferenceFrameEvaluationStatus.AttitudeEvaluationFailed;
                 var evaluatedRigid = SpacecraftRigidBodyRotationEvaluator.TryEvaluate(rigid, requestedTime);
                 if (!evaluatedRigid.Succeeded) return SpacecraftReferenceFrameEvaluationStatus.AttitudeEvaluationFailed;
                 orientation = evaluatedRigid.OrientationLocalToParent;
@@ -38,7 +41,17 @@ internal static class SpacecraftReferenceFrameEvaluator
             }
             var parentAngularVelocity = orientation.Rotate(angularVelocity);
             if (!parentAngularVelocity.IsFinite) return SpacecraftReferenceFrameEvaluationStatus.NonFiniteResult;
-            destination[bodyIndex] = new ReferenceFrameEvaluation(definition.BodyFrame, new EvaluatedReferenceFrame(new FrameTransform(Double3.Zero, orientation), Double3.Zero, parentAngularVelocity, false));
+            var position = Double3.Zero; var velocity = Double3.Zero;
+            if (spacecraft.TryGetTranslation(definition.Id, out var translation, out var properties))
+            {
+                var root = graph.GetNodeAt(carrierIndex);
+                if (graph.RootCount != 1 || root.ParentId is not null || root.Kind != ReferenceFrameKind.Ecl || translation.RootFrame != root.Id)
+                    return SpacecraftReferenceFrameEvaluationStatus.CarrierOwnershipMismatch;
+                var linear = SpacecraftTranslationEvaluator.TryEvaluate(translation, properties, requestedTime);
+                if (!linear.Succeeded) return SpacecraftReferenceFrameEvaluationStatus.TranslationEvaluationFailed;
+                position = linear.PositionRoot; velocity = linear.VelocityRoot;
+            }
+            destination[bodyIndex] = new ReferenceFrameEvaluation(definition.BodyFrame, new EvaluatedReferenceFrame(new FrameTransform(position, orientation), velocity, parentAngularVelocity, false));
         }
         return SpacecraftReferenceFrameEvaluationStatus.Success;
     }
@@ -52,4 +65,5 @@ internal enum SpacecraftReferenceFrameEvaluationStatus : byte
     CarrierOwnershipMismatch,
     AttitudeEvaluationFailed,
     NonFiniteResult,
+    TranslationEvaluationFailed,
 }

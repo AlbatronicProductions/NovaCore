@@ -7,6 +7,7 @@ using NovaCore.Simulation.Spacecraft;
 using NovaCore.Simulation.Spacecraft.Transactions;
 using NovaCore.Simulation.Spacecraft.Rotation.Transactions;
 using System.Diagnostics;
+using NovaCore.Simulation.Spacecraft.Translation;
 
 namespace NovaCore.Simulation.Transactions;
 
@@ -18,6 +19,7 @@ internal sealed class SimulationTransactionEngine
     private readonly List<ProcessedSimulationEvent> _history;
     private readonly List<ProcessedSpacecraftAttitudeTransition> _spacecraftAttitudeHistory;
     private readonly List<ProcessedRigidBodyTorqueTransition> _rigidBodyTorqueHistory;
+    private readonly List<ProcessedSpacecraftForceTransition> _spacecraftForceHistory;
     private bool _isExecutingGroup;
     private readonly SimulationExecutionOrchestrator _orchestrator;
 
@@ -29,11 +31,15 @@ internal sealed class SimulationTransactionEngine
         _history = new List<ProcessedSimulationEvent>(initialHistoryCapacity);
         _spacecraftAttitudeHistory = new List<ProcessedSpacecraftAttitudeTransition>(initialHistoryCapacity);
         _rigidBodyTorqueHistory = new List<ProcessedRigidBodyTorqueTransition>(initialHistoryCapacity);
+        _spacecraftForceHistory = new List<ProcessedSpacecraftForceTransition>(initialHistoryCapacity);
         _orchestrator = new SimulationExecutionOrchestrator(_clock, this);
     }
 
     public SimulationStateView State => _state.CreateView();
     public int ProcessedCount => _history.Count;
+    internal int ProcessedSpacecraftForceCount => _spacecraftForceHistory.Count;
+    internal bool TryGetProcessedSpacecraftForce(int index, out ProcessedSpacecraftForceTransition value)
+    { if ((uint)index < (uint)_spacecraftForceHistory.Count) { value = _spacecraftForceHistory[index]; return true; } value = default; return false; }
     internal int ProcessedSpacecraftAttitudeCount => _spacecraftAttitudeHistory.Count;
     internal int ProcessedRigidBodyTorqueCount => _rigidBodyTorqueHistory.Count;
     internal bool TryGetProcessedSpacecraftAttitude(int index, out ProcessedSpacecraftAttitudeTransition value)
@@ -109,6 +115,22 @@ internal sealed class SimulationTransactionEngine
 
     public SimulationTransactionResult ValidateAndCommit(SimulationTransaction transaction)
     {
+        // A force event cannot fall through to marker semantics if its typed proposal was stripped.
+        if (transaction.Event.Kind == SimulationEventKind.SpacecraftForce && transaction.SpacecraftForceReplacement is null)
+            return new(SimulationTransactionStatus.ValidationFailed, new(SimulationTransactionValidationStatus.InvalidTransaction), null);
+        if (transaction.SpacecraftForceReplacement is { } force)
+        {
+            if (transaction.Event != force.Event || transaction.EvaluationTime != force.Event.Time ||
+                transaction.ExpectedTimelineRevision != force.ExpectedTimelineRevision || transaction.ExpectedStateRevision != force.ExpectedStateRevision ||
+                !transaction.IsInternallyConsistent || transaction.ChangesAuthoritativeState != (force.Expected != force.Replacement) ||
+                transaction.ProposedMarkerValue != _state.CreateView().MarkerValue || transaction.CelestialImpulseStatus is not null ||
+                transaction.CelestialReplacement is not null || transaction.RigidBodyTorqueReplacement is not null)
+                return new(SimulationTransactionStatus.ValidationFailed, new(SimulationTransactionValidationStatus.InvalidTransaction), null);
+            var status = ValidateAndCommit(force);
+            return new(status == SpacecraftTranslationStatus.Success ? SimulationTransactionStatus.Committed : SimulationTransactionStatus.ValidationFailed,
+                status == SpacecraftTranslationStatus.Success ? SimulationTransactionValidationResult.Valid : new(SimulationTransactionValidationStatus.InvalidTransaction),
+                status == SpacecraftTranslationStatus.Success ? GetLastProcessed() : null);
+        }
         if (transaction.CelestialReplacement is { } celestialReplacement)
         {
             var celestial = ValidateAndCommit(celestialReplacement);
@@ -303,6 +325,35 @@ internal sealed class SimulationTransactionEngine
     }
 
     private ProcessedSimulationEvent? GetLastProcessed() => _history.Count == 0 ? null : _history[^1];
+
+    /// <summary>Canonical force intent is re-evaluated before commit: callers cannot inject arbitrary pose or momentum.</summary>
+    internal SpacecraftTranslationStatus ValidateAndCommit(SpacecraftForceTransaction transaction)
+    {
+        if (!_clock.Timeline.TryPeekPending(out var pending) || pending.Header != transaction.Event ||
+            pending.Header.Kind != SimulationEventKind.SpacecraftForce) return SpacecraftTranslationStatus.EventMismatch;
+        if (transaction.Event.Time != _clock.CurrentTime) return SpacecraftTranslationStatus.TimeMismatch;
+        if (transaction.ExpectedTimelineRevision != _clock.Timeline.Revision) return SpacecraftTranslationStatus.EventMismatch;
+        var state = _state.CreateView();
+        if (transaction.ExpectedStateRevision != state.Revision) return SpacecraftTranslationStatus.StateRevisionMismatch;
+        var status = SpacecraftForceTransactionEvaluator.TryCreate(state, pending, _clock.CurrentTime, _clock.Timeline.Revision, out var canonical);
+        if (status != SpacecraftTranslationStatus.Success) return status;
+        if (transaction != canonical) return SpacecraftTranslationStatus.InvalidReplacement;
+        if (_history.Count == _history.Capacity || _spacecraftForceHistory.Count == _spacecraftForceHistory.Capacity)
+            return SpacecraftTranslationStatus.HistoryCapacityFailure;
+        var changesState = transaction.Expected != transaction.Replacement;
+        if (changesState && state.Revision.Value == ulong.MaxValue) return SpacecraftTranslationStatus.StateRevisionOverflow;
+        if (!_clock.Timeline.CanConsumeCanonical(transaction.Event)) return SpacecraftTranslationStatus.EventMismatch;
+
+        // All normal rejection/capacity paths precede mutation. Same-force events preserve the original segment exactly.
+        var timelineBefore = _clock.Timeline.Revision;
+        if (changesState) _state.CommitSpacecraftTranslation(transaction.Expected, transaction.Replacement);
+        if (!_clock.Timeline.TryConsumeCanonical(transaction.Event, out _)) throw new InvalidOperationException("Validated spacecraft force event could not be consumed.");
+        _clock.AdvanceAfterSuccessfulTransaction(_clock.CurrentTime);
+        var after = _state.CreateView().Revision;
+        _spacecraftForceHistory.Add(new(transaction.Event, state.Revision, after, transaction.Expected, transaction.Replacement));
+        _history.Add(new(transaction.Event, _clock.CurrentTime, timelineBefore, _clock.Timeline.Revision, state.Revision, after));
+        return SpacecraftTranslationStatus.Success;
+    }
 
     internal SimulationCanonicalGroupResult ExecuteCanonicalGroupWhileGuardedForTest()
     {

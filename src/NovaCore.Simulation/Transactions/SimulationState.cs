@@ -2,6 +2,7 @@ using NovaCore.Simulation.Timeline;
 using NovaCore.Simulation.Celestial;
 using NovaCore.Simulation.Spacecraft;
 using NovaCore.Simulation.Spacecraft.Rotation;
+using NovaCore.Simulation.Spacecraft.Translation;
 
 namespace NovaCore.Simulation.Transactions;
 
@@ -16,6 +17,13 @@ internal sealed class SimulationState
     internal SimulationState(CelestialStateStore? celestial = null, SpacecraftStateStore? spacecraft = null) { _celestial = celestial ?? CelestialStateStore.Empty; _spacecraft = spacecraft ?? SpacecraftStateStore.Empty; }
 
     public SimulationStateView CreateView() => new(_markerValue, _revision, _celestial.CreateView(), _spacecraft.CreateView());
+
+    /// <summary>Only the transaction engine calls this after complete continuity, revision and capacity validation.</summary>
+    internal void CommitSpacecraftTranslation(in SpacecraftTranslationState expected, in SpacecraftTranslationState replacement)
+    {
+        if (!_spacecraft.TryReplaceTranslation(expected, replacement)) throw new InvalidOperationException("Validated translation replacement failed.");
+        _revision = new StateRevision(checked(_revision.Value + 1));
+    }
 
     internal void CommitMarkerValue(long markerValue)
     {

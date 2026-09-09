@@ -1,0 +1,69 @@
+{
+  "classification": "CLR / JIT / TIERED-COMPILATION ACCOUNTING",
+  "mechanism": "Background-GC allocation-context retirement; not JIT allocation",
+  "original8160ContextUnavailable": true,
+  "runtime": "Microsoft.NETCore.App 10.0.11 win-x64",
+  "coreclrSha256": "C98C3078A4F2495DD7D3CED967C7A6981545194ED163454703580B740F435521",
+  "profilerSha256": "781614770AC1ADC9D6475474C77AF20E47569F410A346632F7986A77F09B6216",
+  "sourceSha256": "D13F0F1CC3E95A37F369086BB93D86EE90C9C8EE601E1BCF5A2A6476F840B937",
+  "profilerFlagsLow": "COR_PRF_MONITOR_OBJECT_ALLOCATED | COR_PRF_ENABLE_OBJECT_ALLOCATED | COR_PRF_MONITOR_SUSPENDS | COR_PRF_MONITOR_JIT_COMPILATION",
+  "profilerFlagsHigh": "COR_PRF_HIGH_BASIC_GC",
+  "positiveControl": {
+    "type": "System.Byte[]",
+    "length": 128,
+    "count": 1,
+    "objectBytes": 152,
+    "counterDelta": 152,
+    "ownerOsThread": 37228,
+    "contextUnusedBefore": 5024,
+    "contextUnusedAfter": 4872,
+    "allocationTotalsUnchanged": true
+  },
+  "directContextRun": {
+    "run": 3,
+    "exit": -532462766,
+    "lines": [
+      "NATIVE_ATTRIBUTION owner=0; delta=-1; objectCount=0; objectBytes=0; entries=0",
+      "NATIVE_ATTRIBUTION owner=39940; delta=3128; objectCount=0; objectBytes=0; entries=5",
+      "NATIVE_EVENT kind=0; thread=39940; qpc=1323414502600; a=4; b=3",
+      "NATIVE_EVENT kind=4; thread=42432; qpc=1323414502608; a=7; b=0",
+      "NATIVE_EVENT kind=5; thread=42432; qpc=1323414503602; a=0; b=0",
+      "NATIVE_EVENT kind=3; thread=42432; qpc=1323414503862; a=0; b=0",
+      "NATIVE_EVENT kind=7; thread=39940; qpc=1323414513291; a=4; b=4",
+      "CONTEXT phase=0; thread=39940; qpc=1323414502600; address=2022639491856; ptr=2022716134232; limit=2022716137360; bytes=3358200; uoh=28252192; unused=3128",
+      "CONTEXT phase=4; thread=42432; qpc=1323414502607; address=2022639491856; ptr=2022716134232; limit=2022716137360; bytes=3358200; uoh=28252192; unused=3128",
+      "CONTEXT phase=5; thread=42432; qpc=1323414503602; address=2022639491856; ptr=0; limit=0; bytes=3358200; uoh=28252192; unused=0",
+      "CONTEXT phase=7; thread=39940; qpc=1323414513289; address=2022639491856; ptr=0; limit=0; bytes=3358200; uoh=28252192; unused=0",
+      "Orchestration observation: allocatedBytes=3128; reason=Completed; processed=1000; expected=1000; pendingBefore=1000; pendingAfter=0; markerBefore=0; markerAfter=1000; revisionBefore=0; revisionAfter=1000; startTicks=0; targetTicks=2; reachedTicks=2"
+    ]
+  },
+  "earlierObjectCallbackRun": {
+    "run": 2,
+    "exit": -532462766,
+    "lines": [
+      "NATIVE_ATTRIBUTION owner=0; delta=-1; objectCount=0; objectBytes=0; entries=0",
+      "NATIVE_ATTRIBUTION owner=12884; delta=7992; objectCount=0; objectBytes=0; entries=5",
+      "NATIVE_EVENT kind=0; thread=12884; qpc=1320837264663; a=4; b=3",
+      "NATIVE_EVENT kind=4; thread=42708; qpc=1320837265320; a=7; b=0",
+      "NATIVE_EVENT kind=5; thread=42708; qpc=1320837266351; a=0; b=0",
+      "NATIVE_EVENT kind=3; thread=42708; qpc=1320837266611; a=0; b=0",
+      "NATIVE_EVENT kind=7; thread=12884; qpc=1320837275461; a=4; b=4",
+      "Orchestration observation: allocatedBytes=7992; reason=Completed; processed=1000; expected=1000; pendingBefore=1000; pendingAfter=0; markerBefore=0; markerAfter=1000; revisionBefore=0; revisionAfter=1000; startTicks=0; targetTicks=2; reachedTicks=2"
+    ]
+  },
+  "baselineControl": {
+    "configuration": "Release",
+    "runs": 3,
+    "failures": 0,
+    "targetCounterDelta": 0,
+    "targetObjectCount": 0,
+    "gcOverlap": false
+  },
+  "limits": [
+    "Historical8160-byte run had no direct context snapshot; explanation uses reproduced same-class failure and pinned runtime mechanism.",
+    "Profiler perturbs timing/layout; measured3128 and7992 are attribution results, not performance measurements.",
+    "Purpose-built profiler: caller must reject unsupported native instruction encoding; concurrent record publication is not a general tracing framework. Positive record has no truncation or malformed entries."
+  ],
+  "retainedSourceSha256": "8F1DB35F8A9CC8D5E11C6FDB95FC3FCFA9117B922C753A92A921B0AED08B71DC",
+  "retainedSourceNormalization": "Trailing whitespace removed only; sourceSha256 identifies original compiled source."
+}

@@ -16,13 +16,25 @@ not as an onboarding requirement.
 ## Repository rules
 
 **M13 — NCSM1 Terrain Performance is CLOSED. There is no M13.7.**
-M13.6 is the latest banked production step, commit
+M13.6 is the closed renderer baseline, commit
 `90fef759243dd67918cd556e19027159e5a5eada`, tag
 `m13.6-cpu-cached-terrain-residency-keys`. No unbanked M13 candidate or temporary
 comparison bridge is awaiting preservation/acceptance. The separately authorized
-Surface Interaction / Launch Foundation now has an unbanked
-[surface-point query candidate](surface-point-queries.md). No contact response,
-launch behavior or new milestone number is authorized by this handoff.
+Surface Interaction / Launch Foundation has banked **M14.1**, commit
+`5b9b02ab1d2ba0e903809510908e4819984d4de2`, tag
+`m14.1-canonical-surface-point-queries`. M14.1 remains the latest banked accomplishment.
+**M14.2 — Establish independent spacecraft translational authority** is production
+accepted but unbanked on `codex/spacecraft-translation`. The allocation blocker is
+resolved as CLR background-GC allocation-context accounting. The test-only
+measurement boundary passed 10 full-suite and five isolated runs per configuration;
+all remaining technical gates passed. Classified diagnostic copies still require
+manual disposal before banking. See
+[attribution and cleanup commands](engineering-evidence/spacecraft-translation/allocation-attribution.md).
+No M14.2 tag exists. The
+[translation contract](spacecraft-translation.md) adds constant-net-force dynamics
+to the existing simulation owner, with no visible route change. Manual visual
+acceptance was not required. M14 remains **OPEN**; the next responsibility returns
+to Project Control. Contact response, grounded state and launch are not implemented.
 
 - Work in `E:\NovaCore` and inspect `git status --short` before editing.
 - Preserve unrelated and unstaged user work.

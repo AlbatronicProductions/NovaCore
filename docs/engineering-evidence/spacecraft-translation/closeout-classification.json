@@ -1,0 +1,237 @@
+{
+  "purpose": "Classification of all 36 incoming accepted-candidate paths before staging",
+  "incomingCount": 36,
+  "files": [
+    {
+      "path": "docs/CODEX_HANDOFF.md",
+      "category": "CURRENT-FACING DOCUMENTATION",
+      "bytes": 9015,
+      "disposition": "Keep; not staged because final validation failed"
+    },
+    {
+      "path": "docs/NOVACORE_CURRENT_STATE.md",
+      "category": "CURRENT-FACING DOCUMENTATION",
+      "bytes": 18205,
+      "disposition": "Keep; not staged because final validation failed"
+    },
+    {
+      "path": "docs/architecture.md",
+      "category": "CURRENT-FACING DOCUMENTATION",
+      "bytes": 25644,
+      "disposition": "Keep; not staged because final validation failed"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/ReferenceFrames/SpacecraftReferenceFrameEvaluator.cs",
+      "category": "PRODUCTION",
+      "bytes": 4024,
+      "disposition": "Keep; not staged because final validation failed"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.cs",
+      "category": "PRODUCTION",
+      "bytes": 10433,
+      "disposition": "Keep; not staged because final validation failed"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftStateStoreStatus.cs",
+      "category": "PRODUCTION",
+      "bytes": 520,
+      "disposition": "Keep; not staged because final validation failed"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftStateView.cs",
+      "category": "PRODUCTION",
+      "bytes": 1472,
+      "disposition": "Keep; not staged because final validation failed"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Timeline/SimulationEventHeader.cs",
+      "category": "PRODUCTION",
+      "bytes": 1168,
+      "disposition": "Keep; not staged because final validation failed"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Timeline/SimulationEventKind.cs",
+      "category": "PRODUCTION",
+      "bytes": 366,
+      "disposition": "Keep; not staged because final validation failed"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Timeline/SimulationEventPayload.cs",
+      "category": "PRODUCTION",
+      "bytes": 2871,
+      "disposition": "Keep; not staged because final validation failed"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Timeline/SimulationEventRequest.cs",
+      "category": "PRODUCTION",
+      "bytes": 2228,
+      "disposition": "Keep; not staged because final validation failed"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Timeline/SimulationTimeline.cs",
+      "category": "PRODUCTION",
+      "bytes": 6608,
+      "disposition": "Keep; not staged because final validation failed"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationEventEvaluator.cs",
+      "category": "PRODUCTION",
+      "bytes": 3268,
+      "disposition": "Keep; not staged because final validation failed"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationState.cs",
+      "category": "PRODUCTION",
+      "bytes": 3174,
+      "disposition": "Keep; not staged because final validation failed"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransaction.cs",
+      "category": "PRODUCTION",
+      "bytes": 959,
+      "disposition": "Keep; not staged because final validation failed"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.cs",
+      "category": "PRODUCTION",
+      "bytes": 27461,
+      "disposition": "Keep; not staged because final validation failed"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "category": "PERMANENT TEST",
+      "bytes": 231418,
+      "disposition": "Keep; not staged because final validation failed"
+    },
+    {
+      "path": "docs/engineering-evidence/spacecraft-translation/README.md",
+      "category": "CONCISE ENGINEERING EVIDENCE",
+      "bytes": 21063,
+      "disposition": "Keep; not staged because final validation failed"
+    },
+    {
+      "path": "docs/engineering-evidence/spacecraft-translation/build-debug.txt",
+      "category": "TEMPORARY DIAGNOSTIC",
+      "bytes": 2432,
+      "disposition": "Retire after final validation is resolved and results consolidated; not deleted or staged"
+    },
+    {
+      "path": "docs/engineering-evidence/spacecraft-translation/build-release.txt",
+      "category": "TEMPORARY DIAGNOSTIC",
+      "bytes": 2472,
+      "disposition": "Retire after final validation is resolved and results consolidated; not deleted or staged"
+    },
+    {
+      "path": "docs/engineering-evidence/spacecraft-translation/performance-release.txt",
+      "category": "CONCISE ENGINEERING EVIDENCE",
+      "bytes": 379,
+      "disposition": "Keep; not staged because final validation failed"
+    },
+    {
+      "path": "docs/engineering-evidence/spacecraft-translation/precision-debug.txt",
+      "category": "TEMPORARY DIAGNOSTIC",
+      "bytes": 693,
+      "disposition": "Retire after final validation is resolved and results consolidated; not deleted or staged"
+    },
+    {
+      "path": "docs/engineering-evidence/spacecraft-translation/precision-release.txt",
+      "category": "TEMPORARY DIAGNOSTIC",
+      "bytes": 692,
+      "disposition": "Retire after final validation is resolved and results consolidated; not deleted or staged"
+    },
+    {
+      "path": "docs/engineering-evidence/spacecraft-translation/referenceframes-debug.txt",
+      "category": "TEMPORARY DIAGNOSTIC",
+      "bytes": 934,
+      "disposition": "Retire after final validation is resolved and results consolidated; not deleted or staged"
+    },
+    {
+      "path": "docs/engineering-evidence/spacecraft-translation/referenceframes-release.txt",
+      "category": "TEMPORARY DIAGNOSTIC",
+      "bytes": 934,
+      "disposition": "Retire after final validation is resolved and results consolidated; not deleted or staged"
+    },
+    {
+      "path": "docs/engineering-evidence/spacecraft-translation/simulation-debug.txt",
+      "category": "TEMPORARY DIAGNOSTIC",
+      "bytes": 7542,
+      "disposition": "Retire after final validation is resolved and results consolidated; not deleted or staged"
+    },
+    {
+      "path": "docs/engineering-evidence/spacecraft-translation/simulation-release.txt",
+      "category": "TEMPORARY DIAGNOSTIC",
+      "bytes": 7540,
+      "disposition": "Retire after final validation is resolved and results consolidated; not deleted or staged"
+    },
+    {
+      "path": "docs/engineering-evidence/spacecraft-translation/surface-query-debug.txt",
+      "category": "TEMPORARY DIAGNOSTIC",
+      "bytes": 2069,
+      "disposition": "Retire after final validation is resolved and results consolidated; not deleted or staged"
+    },
+    {
+      "path": "docs/engineering-evidence/spacecraft-translation/surface-query-release.txt",
+      "category": "TEMPORARY DIAGNOSTIC",
+      "bytes": 2074,
+      "disposition": "Retire after final validation is resolved and results consolidated; not deleted or staged"
+    },
+    {
+      "path": "docs/engineering-evidence/spacecraft-translation/verification.json",
+      "category": "CONCISE ENGINEERING EVIDENCE",
+      "bytes": 8099,
+      "disposition": "Keep; not staged because final validation failed"
+    },
+    {
+      "path": "docs/spacecraft-translation.md",
+      "category": "CURRENT-FACING DOCUMENTATION",
+      "bytes": 7657,
+      "disposition": "Keep; not staged because final validation failed"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftForceTransaction.cs",
+      "category": "PRODUCTION",
+      "bytes": 2228,
+      "disposition": "Keep; not staged because final validation failed"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftMotionEvaluator.cs",
+      "category": "PRODUCTION",
+      "bytes": 2019,
+      "disposition": "Keep; not staged because final validation failed"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftTranslationEvaluator.cs",
+      "category": "PRODUCTION",
+      "bytes": 2326,
+      "disposition": "Keep; not staged because final validation failed"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftTranslationState.cs",
+      "category": "PRODUCTION",
+      "bytes": 1733,
+      "disposition": "Keep; not staged because final validation failed"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/SpacecraftTranslationTests.cs",
+      "category": "PERMANENT TEST",
+      "bytes": 25149,
+      "disposition": "Keep; not staged because final validation failed"
+    }
+  ],
+  "closeoutAddedPaths": [
+    "ENGINEERING_RULES.md",
+    "docs/engineering-evidence/README.md",
+    "docs/engineering-evidence/spacecraft-translation/closeout-classification.json",
+    "docs/engineering-evidence/spacecraft-translation/closeout-validation.json"
+  ],
+  "closeoutAddedCategories": [
+    "CURRENT-FACING DOCUMENTATION",
+    "CURRENT-FACING DOCUMENTATION",
+    "CONCISE ENGINEERING EVIDENCE",
+    "CONCISE ENGINEERING EVIDENCE"
+  ],
+  "plannedTranscriptRetirementBytes": 27382.0,
+  "deletedFiles": 0,
+  "stagedFiles": 0
+}
