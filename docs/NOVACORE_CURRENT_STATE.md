@@ -13,9 +13,9 @@ and performs FP64 camera-relative subtraction before GPU transport.
 
 ## Banked production checkpoint
 
-Latest banked accomplishment: **M14.3 — Generate deterministic spacecraft-to-terrain
-contact observations**, commit `79978cf8b0fd783d43a661df6df53a2c0202af4a`,
-annotated tag `m14.3-spacecraft-terrain-contact-observations`.
+Latest banked accomplishment: **M14.4 — Atomically commit linear and angular
+contact response**, commit `28b92f724f8decd3c9356aa5f9f5bbd6c9dd069c`,
+annotated tag `m14.4-atomic-contact-response`.
 **M14 — Surface Interaction / Launch Foundation remains OPEN.**
 
 M14.1 remains banked at `5b9b02ab1d2ba0e903809510908e4819984d4de2`, tag
@@ -30,21 +30,21 @@ M14.3 derives immutable, ordered point-feature observations at one exact
 time/revision. Radial signed gap is not finite-volume penetration or closest-point
 distance. See the [contact-generation contract](contact-generation.md).
 
-**Unbanked candidate:** unified linear/angular contact transaction on
-`codex/contact-response-transaction`. One already-qualified root-space impulse at
+Banked M14.4 owns the unified linear/angular contact transaction. One already-qualified root-space impulse at
 an exact canonical event produces paired FP64 replacements, one state revision
-and one coupled physical history. Rejection changes neither half. The analytical
-contact oracle is test-only; no automatic response, solver, friction, rest,
-grounded state or visible route change is introduced. Bepu remains deferred.
-See the [response contract](contact-response-transaction.md) and
-[candidate evidence](engineering-evidence/contact-response-transaction/README.md).
-Manual visual acceptance is not required. No milestone number is assigned.
-The bounded typed-payload revision retains 112-byte reference-free generic events;
-contact-capable timelines explicitly preallocate their own intent slots.
-**Validation follow-up required:** focused response checks and full Debug Simulation
-pass. The original timeline gate reports zero in both full-suite configurations;
-full Release later fails the separate warm SAS proof allocation assertion. Its
-cause remains unclassified; see the [ownership revision evidence](engineering-evidence/contact-response-transaction/payload-ownership/README.md).
+and one coupled physical history. Rejection changes neither half. The bounded
+timeline-owned typed arena retains 112-byte reference-free generic events.
+See the [response contract](contact-response-transaction.md).
+
+**Unbanked candidate:** [minimal analytical contact response policy](isolated-contact-response.md)
+on `codex/minimal-contact-response`. A generator-issued, single-feature receipt
+is requalified without another terrain query; an eligible isolated approach
+produces the existing M14.4 impulse intent. Admission requires represented
+canonical radial gap exactly zero. Positive gaps receive no response; negative
+gaps require unsupported recovery. This is a supplied-instant policy, not impact
+discovery, friction, persistent support, grounding, finite collision or landing.
+No visible route uses it. [Validation and reproduction](engineering-evidence/isolated-contact-response/README.md).
+M14 remains open; no next milestone number or banking is assigned.
 
 ### Closed M13 renderer baseline
 

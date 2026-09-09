@@ -1,0 +1,18 @@
+[
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Contact/IsolatedContactResponsePolicy.cs",
+    "sha256": "1cc902acb40252858ac28a9347f4668c4e54e4c3ada67d10059a61c3354e71a3"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Contact/SpacecraftContactGenerator.cs",
+    "sha256": "6f9a66fd2d61ad57256e98f08b5ec20489125b32a273616cf7a03e5ed610ae1e"
+  },
+  {
+    "path": "tests/NovaCore.Simulation.Tests/IsolatedContactResponseTests.cs",
+    "sha256": "1443f3cb726ff395b8a7667db58306ef2e65715f882a42c3a88a2caba01d2e54"
+  },
+  {
+    "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+    "sha256": "7b6fbb6540ff042f53bb6b6fc37ff6f44dfb90507084c1ef8e1994c1eefe6e31"
+  }
+]

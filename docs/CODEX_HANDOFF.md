@@ -26,21 +26,17 @@ Surface Interaction / Launch Foundation has banked **M14.1**, commit
 `caa6d93ccd7c4e5924381e077a62585f99e5a32a`, tag
 `m14.2-spacecraft-translational-authority`, and **M14.3**, commit
 `79978cf8b0fd783d43a661df6df53a2c0202af4a`, tag
-`m14.3-spacecraft-terrain-contact-observations`. M14 remains **OPEN**.
+`m14.3-spacecraft-terrain-contact-observations`, and **M14.4**, commit
+`28b92f724f8decd3c9356aa5f9f5bbd6c9dd069c`, tag
+`m14.4-atomic-contact-response`. M14 remains **OPEN**.
 
-Current unbanked candidate: [unified linear/angular contact transaction](contact-response-transaction.md)
-on `codex/contact-response-transaction`; [evidence and reproduction](engineering-evidence/contact-response-transaction/README.md).
-It applies one qualified instantaneous impulse through one paired commit/revision
-and coupled history. It does not calculate contact impulses, adopt a solver or add
-friction, grounded state, pad collision or launch behavior. Manual visual
-acceptance is not required. No milestone number or banking is authorized.
-Return the candidate to Project Control.
-Current payload ownership is a bounded timeline-owned typed arena with compact,
-112-byte reference-free generic events. The candidate-associated timeline counter
-excess is absent in matched controls. Full Debug passes; full Release passes the
-timeline/contact gates but later fails the separate warm SAS proof allocation
-assertion. Do not attribute that new failure or describe full validation as passed.
-See the [ownership revision evidence](engineering-evidence/contact-response-transaction/payload-ownership/README.md).
+Current unbanked candidate: [isolated analytical response](isolated-contact-response.md)
+on `codex/minimal-contact-response`; [evidence and reproduction](engineering-evidence/isolated-contact-response/README.md).
+It produces qualified M14.4 intents without mutation or terrain requery. The
+complete authored definition must contain one feature; represented canonical
+radial gap must equal zero. No tolerance skin, penetration recovery, CCD, solver,
+friction, grounding or visible route is added. Manual visual acceptance is not
+required. No milestone number or banking is authorized. Return to Project Control.
 
 - Work in `E:\NovaCore` and inspect `git status --short` before editing.
 - Preserve unrelated and unstaged user work.

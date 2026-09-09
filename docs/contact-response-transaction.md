@@ -1,12 +1,10 @@
 # Unified linear/angular contact transaction
 
-Unbanked candidate on `codex/contact-response-transaction`, based on banked
-M14.3 plus the README-only `35c2693e0f5ca01c02c4cc5e73f68323e66ed8e7` refresh.
-No milestone number is assigned. [Evidence and reproduction](engineering-evidence/contact-response-transaction/README.md).
-The bounded typed-payload revision restores banked generic event size and timeline
-allocation behavior. Full Debug Simulation passes; full Release requires follow-up
-at the separate warm SAS proof allocation assertion. Focused response checks pass.
-This candidate is not production-accepted.
+Banked **M14.4**, commit `28b92f724f8decd3c9356aa5f9f5bbd6c9dd069c`, tag
+`m14.4-atomic-contact-response`. [Investigation evidence](engineering-evidence/contact-response-transaction/README.md)
+retains the dated candidate and allocation closeout chronology.
+The current unbanked [isolated analytical policy](isolated-contact-response.md)
+produces this existing intent; it does not change the banked transaction.
 
 ## Responsibility and admission
 
@@ -23,7 +21,8 @@ impulse, provenance or either replacement cannot authorize different physics.
 Structural provenance validation and payload equality are not independent proof
 of physical contact. The trusted producer owns qualification, support readiness,
 current geometry and identity admission at the event boundary. There is no
-automatic M14.3-observation-to-impulse conversion. A future finite-shape producer
+automatic conversion inside the transaction engine. The separate unbanked isolated
+policy qualifies a restricted M14.3 supplied-instant observation. A future finite-shape producer
 can use the same qualified-intent contract without invoking the point generator.
 
 Zero impulse is rejected at admission without scheduling/consumption or mutation.

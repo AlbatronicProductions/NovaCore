@@ -3,8 +3,11 @@
 **Banked M14.3**, commit `79978cf8b0fd783d43a661df6df53a2c0202af4a`, tag
 `m14.3-spacecraft-terrain-contact-observations`. M14 remains open.
 [Validation and provenance](engineering-evidence/contact-generation/README.md).
-The separate unbanked [response transaction](contact-response-transaction.md)
+The separate banked M14.4 [response transaction](contact-response-transaction.md)
 consumes qualified intent without changing this read-only generator.
+The unbanked [isolated response policy](isolated-contact-response.md) can request
+an opaque receipt for a complete single-feature definition. It retains the same
+generated motion and observation; the existing multi-feature API is unchanged.
 
 ## Authority and scope
 

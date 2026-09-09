@@ -43,7 +43,15 @@ internal static class SpacecraftContactGenerator
         SpacecraftContactGeometry? geometry, in ContactBodyMotion body, CelestialSystemDefinition expectedSystem,
         IPhysicalSurfacePointQuery? query, in PhysicalSurfaceAuthorityIdentity expectedAuthority,
         Span<SpacecraftContactObservation> destination)
+        => GenerateWithMotion(state, expectedRevision, time, geometry, body, expectedSystem, query, expectedAuthority, destination, out _);
+
+    // The response receipt retains this same evaluated motion; no second frame evaluation or terrain query.
+    internal static ContactGenerationResult GenerateWithMotion(in SimulationStateView state, StateRevision expectedRevision, SimulationInstant time,
+        SpacecraftContactGeometry? geometry, in ContactBodyMotion body, CelestialSystemDefinition expectedSystem,
+        IPhysicalSurfacePointQuery? query, in PhysicalSurfaceAuthorityIdentity expectedAuthority,
+        Span<SpacecraftContactObservation> destination, out SpacecraftMotion motion)
     {
+        motion = default;
         if (geometry is null) { destination.Clear(); return new(ContactGenerationStatus.InvalidGeometry, 0); }
         var output = destination[..Math.Min(destination.Length, geometry.Count)];
         output.Clear();
@@ -56,7 +64,7 @@ internal static class SpacecraftContactGenerator
         if (query.Authority != expectedAuthority) return new(ContactGenerationStatus.AuthorityMismatch, 0);
         if (!double.IsFinite(expectedAuthority.ReferenceRadiusMetres) || expectedAuthority.ReferenceRadiusMetres <= 0)
             return new(ContactGenerationStatus.AuthorityMismatch, 0);
-        var status = SpacecraftMotionEvaluator.TryEvaluate(state, geometry.Spacecraft, time, out var motion);
+        var status = SpacecraftMotionEvaluator.TryEvaluate(state, geometry.Spacecraft, time, out motion);
         if (status != SpacecraftTranslationStatus.Success) return new(ContactGenerationStatus.MotionUnavailable, 0);
         if (motion.RootFrame != body.Root) return new(ContactGenerationStatus.RootMismatch, 0);
         var craftPose = new FrameTransform(motion.PositionRoot, motion.BodyToRoot);

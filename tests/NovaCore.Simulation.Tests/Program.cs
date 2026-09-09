@@ -20,6 +20,8 @@ if (args.Contains("--orchestration-only", StringComparer.Ordinal)) { ClockExecut
 if (args.Contains("--translation-only", StringComparer.Ordinal)) { SpacecraftTranslationTests.Run(); return; }
 if (args.Contains("--contact-only", StringComparer.Ordinal)) { ContactGenerationTests.Run(); return; }
 if (args.Contains("--contact-response-only", StringComparer.Ordinal)) { ContactResponseTests.Run(); return; }
+if (args.Contains("--isolated-contact-only", StringComparer.Ordinal)) { IsolatedContactResponseTests.Run(); return; }
+if (args.Contains("--isolated-contact-performance", StringComparer.Ordinal)) { IsolatedContactResponseTests.Performance(); return; }
 if (args.Contains("--contact-response-performance", StringComparer.Ordinal)) { ContactResponseTests.Performance(); return; }
 if (args.Contains("--translation-performance", StringComparer.Ordinal)) { SpacecraftTranslationTests.Performance(); return; }
 
@@ -57,6 +59,7 @@ var tests = new (string Name, Action Test)[]
     ("Spacecraft translational authority", SpacecraftTranslationTests.Run),
     ("Spacecraft contact generation", ContactGenerationTests.Run),
     ("Unified linear/angular contact transaction", ContactResponseTests.Run),
+    ("Isolated analytical contact response policy", IsolatedContactResponseTests.Run),
     ("Spacecraft attitude integration", SpacecraftAttitudeIntegrationTests),
     ("Rigid-body rotation", RigidBodyRotationTests),
     ("Rigid-body torque transaction", RigidBodyTorqueTransactionTests),
