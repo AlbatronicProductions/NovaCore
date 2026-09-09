@@ -1,0 +1,3 @@
+EXPORTS
+DllGetClassObject=ProfilerGetClassObject
+DllCanUnloadNow=ProfilerCanUnloadNow

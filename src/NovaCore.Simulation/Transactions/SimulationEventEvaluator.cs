@@ -3,6 +3,7 @@ using NovaCore.Simulation.Timeline;
 using NovaCore.Simulation.Celestial.Transactions;
 using NovaCore.Simulation.Spacecraft.Rotation.Transactions;
 using NovaCore.Simulation.Spacecraft.Translation;
+using NovaCore.Simulation.Spacecraft.Contact;
 
 namespace NovaCore.Simulation.Transactions;
 
@@ -13,8 +14,16 @@ internal static class SimulationEventEvaluator
         ScheduledSimulationEvent pending,
         SimulationStateView state,
         SimulationInstant evaluationTime,
-        TimelineRevision timelineRevision)
+        TimelineRevision timelineRevision,
+        SimulationTimeline timeline)
     {
+        if (pending.Header.Kind == SimulationEventKind.SpacecraftContactImpulse)
+        {
+            var status = SpacecraftContactImpulseEvaluator.TryCreate(state, timeline, pending, evaluationTime, timelineRevision, out var response);
+            return new(pending.Header, evaluationTime, timelineRevision, state.Revision, state.MarkerValue,
+                status == ContactImpulseStatus.Success, status == ContactImpulseStatus.Success,
+                ContactImpulseReplacement: status == ContactImpulseStatus.Success ? response : null);
+        }
         if (pending.Header.Kind == SimulationEventKind.SpacecraftForce)
         {
             var status = SpacecraftForceTransactionEvaluator.TryCreate(state, pending, evaluationTime, timelineRevision, out var force);

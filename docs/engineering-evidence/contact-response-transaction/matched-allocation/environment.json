@@ -1,0 +1,16 @@
+{
+  "environmentSha256": "B204C3C0C4F4BF5BD52F35DF5890EEC985DE607F7EF68BC4B17E8E5000BFE336",
+  "runtimeSettings": [
+    {
+      "Name": "DOTNET_ROOT",
+      "Value": "C:\\Program Files\\dotnet"
+    },
+    {
+      "Name": "DOTNET_ROOT(x86)",
+      "Value": "C:\\Program Files (x86)\\dotnet"
+    }
+  ],
+  "dotnetPath": "C:\\Program Files\\dotnet\\dotnet.exe",
+  "workingDirectory": "E:\\NovaCore",
+  "plan": "Debug then Release; baseline/candidate alternating; exactly 3 repetitions per cell; no profiler, no GC/tiering changes"
+}

@@ -6,7 +6,7 @@ namespace NovaCore.Simulation.Timeline;
 /// Authoritative pending-event topology. It owns neither simulation time nor event execution;
 /// callers explicitly provide their current authoritative time when scheduling or replacing.
 /// </summary>
-public sealed class SimulationTimeline
+public sealed partial class SimulationTimeline
 {
     private readonly SimulationEventHeap _pending;
     private readonly HashSet<SimulationEventId> _usedIds;
@@ -15,7 +15,8 @@ public sealed class SimulationTimeline
     private TimelineRevision _revision;
 
     public SimulationTimeline(int initialCapacity = 0) : this(initialCapacity, 1, TimelineRevision.Zero) { }
-    internal SimulationTimeline(int initialCapacity, ulong nextSequenceValue, TimelineRevision revision)
+    internal SimulationTimeline(int initialCapacity, int contactPayloadCapacity) : this(initialCapacity, 1, TimelineRevision.Zero, contactPayloadCapacity) { }
+    internal SimulationTimeline(int initialCapacity, ulong nextSequenceValue, TimelineRevision revision, int contactPayloadCapacity = 0)
     {
         if (initialCapacity < 0 || nextSequenceValue == 0) throw new ArgumentOutOfRangeException(nameof(initialCapacity));
         _pending = new SimulationEventHeap(initialCapacity);
@@ -23,6 +24,7 @@ public sealed class SimulationTimeline
         _cancelled = new List<ScheduledSimulationEvent>(initialCapacity);
         _nextSequenceValue = nextSequenceValue;
         _revision = revision;
+        InitializeContactPayloads(contactPayloadCapacity);
     }
 
     public TimelineRevision Revision => _revision;
@@ -34,25 +36,37 @@ public sealed class SimulationTimeline
     public int CopyPending(Span<ScheduledSimulationEvent> destination) => _pending.CopyTo(destination);
 
     internal bool CanConsumeCanonical(SimulationEventHeader expected) =>
-        CanAdvanceRevision() && _pending.TryPeek(out var pending) && pending.Header == expected;
+        CanAdvanceRevision() && _pending.TryPeek(out var pending) && pending.Header == expected && CanRetireContactPayload(pending);
 
     internal bool TryConsumeCanonical(SimulationEventHeader expected, out ScheduledSimulationEvent consumed)
     {
         if (!CanConsumeCanonical(expected)) { consumed = default; return false; }
         if (!_pending.TryRemove(expected.Id, out consumed)) throw new InvalidOperationException("Canonical event lookup became inconsistent.");
+        RetireContactPayload(consumed);
         _revision = _revision.Next();
         return true;
     }
 
     public SimulationScheduleResult Schedule(SimulationInstant currentTime, SimulationEventRequest request)
     {
-        var status = ValidateRequest(currentTime, request);
+        var status = ValidateSchedule(currentTime, request);
         if (status is not null) return SimulationScheduleResult.Failure(status.Value);
+        return CommitSchedule(request);
+    }
+
+    private SimulationScheduleStatus? ValidateSchedule(SimulationInstant currentTime, SimulationEventRequest request, bool contactAdmission = false)
+    {
+        var status = ValidateRequest(currentTime, request, contactAdmission);
+        if (status is not null) return status;
         // Reserve ulong.MaxValue as the overflow sentinel so a successful operation can always
         // leave a valid next sequence without partially committing checked arithmetic.
-        if (_nextSequenceValue == 0 || _nextSequenceValue == ulong.MaxValue) return SimulationScheduleResult.Failure(SimulationScheduleStatus.SequenceOverflow);
-        if (!CanAdvanceRevision()) return SimulationScheduleResult.Failure(SimulationScheduleStatus.RevisionOverflow);
+        if (_nextSequenceValue == 0 || _nextSequenceValue == ulong.MaxValue) return SimulationScheduleStatus.SequenceOverflow;
+        if (!CanAdvanceRevision()) return SimulationScheduleStatus.RevisionOverflow;
+        return null;
+    }
 
+    private SimulationScheduleResult CommitSchedule(SimulationEventRequest request)
+    {
         var scheduled = CreateScheduled(request, _nextSequenceValue);
         // All validation precedes these three commit operations; only these mutate timeline topology.
         _pending.Add(scheduled);
@@ -65,28 +79,43 @@ public sealed class SimulationTimeline
     public SimulationCancelResult Cancel(SimulationEventId id)
     {
         if (!id.IsValid) return SimulationCancelResult.Failure(SimulationCancelStatus.InvalidId);
-        if (!_pending.TryGet(id, out _)) return SimulationCancelResult.Failure(SimulationCancelStatus.NotPending);
+        if (!_pending.TryGet(id, out var pending)) return SimulationCancelResult.Failure(SimulationCancelStatus.NotPending);
+        if (!CanRetireContactPayload(pending)) throw new InvalidOperationException("Pending contact payload ownership is inconsistent.");
         if (!CanAdvanceRevision()) return SimulationCancelResult.Failure(SimulationCancelStatus.RevisionOverflow);
         _pending.TryRemove(id, out var removed);
         _cancelled.Add(removed);
+        RetireContactPayload(removed);
         _revision = _revision.Next();
         return new SimulationCancelResult(SimulationCancelStatus.Cancelled, removed);
     }
 
     public SimulationScheduleResult Replace(SimulationInstant currentTime, SimulationEventId oldId, SimulationEventRequest replacement)
     {
-        if (!oldId.IsValid || !_pending.TryGet(oldId, out _)) return SimulationScheduleResult.Failure(SimulationScheduleStatus.ReplacementTargetNotPending);
-        var status = ValidateRequest(currentTime, replacement);
+        var status = ValidateReplacement(currentTime, oldId, replacement);
         if (status is not null) return SimulationScheduleResult.Failure(status.Value);
-        if (!CanAdvanceRevision()) return SimulationScheduleResult.Failure(SimulationScheduleStatus.RevisionOverflow);
-        if (_nextSequenceValue == ulong.MaxValue) return SimulationScheduleResult.Failure(SimulationScheduleStatus.SequenceOverflow);
+        return CommitReplacement(oldId, replacement);
+    }
 
+    private SimulationScheduleStatus? ValidateReplacement(SimulationInstant currentTime, SimulationEventId oldId, SimulationEventRequest replacement, bool contactAdmission = false)
+    {
+        if (!oldId.IsValid || !_pending.TryGet(oldId, out var oldEvent)) return SimulationScheduleStatus.ReplacementTargetNotPending;
+        if (!CanRetireContactPayload(oldEvent)) return SimulationScheduleStatus.InvalidPayload;
+        var status = ValidateRequest(currentTime, replacement, contactAdmission);
+        if (status is not null) return status;
+        if (!CanAdvanceRevision()) return SimulationScheduleStatus.RevisionOverflow;
+        if (_nextSequenceValue == ulong.MaxValue) return SimulationScheduleStatus.SequenceOverflow;
+        return null;
+    }
+
+    private SimulationScheduleResult CommitReplacement(SimulationEventId oldId, SimulationEventRequest replacement)
+    {
         var scheduled = CreateScheduled(replacement, _nextSequenceValue);
         // The new node is committed before the old one is removed, so a failed validation never tears topology.
         _pending.Add(scheduled);
         _usedIds.Add(replacement.Id);
         _pending.TryRemove(oldId, out var oldEvent);
         _cancelled.Add(oldEvent);
+        RetireContactPayload(oldEvent);
         _nextSequenceValue = checked(_nextSequenceValue + 1);
         _revision = _revision.Next();
         return new SimulationScheduleResult(SimulationScheduleStatus.Scheduled, scheduled);
@@ -94,11 +123,13 @@ public sealed class SimulationTimeline
 
     public bool ValidateInvariants() => _pending.ValidateInvariants();
 
-    private SimulationScheduleStatus? ValidateRequest(SimulationInstant currentTime, SimulationEventRequest request)
+    private SimulationScheduleStatus? ValidateRequest(SimulationInstant currentTime, SimulationEventRequest request, bool contactAdmission = false)
     {
         if (!request.Id.IsValid) return SimulationScheduleStatus.InvalidId;
-        if (request.Kind is not (SimulationEventKind.Marker or SimulationEventKind.ReplaceTrajectory or SimulationEventKind.NoOpMarker or SimulationEventKind.CelestialImpulse or SimulationEventKind.RigidBodyTorque or SimulationEventKind.SpacecraftForce)) return SimulationScheduleStatus.InvalidKind;
+        if (request.Kind is not (SimulationEventKind.Marker or SimulationEventKind.ReplaceTrajectory or SimulationEventKind.NoOpMarker or SimulationEventKind.CelestialImpulse or SimulationEventKind.RigidBodyTorque or SimulationEventKind.SpacecraftForce or SimulationEventKind.SpacecraftContactImpulse)) return SimulationScheduleStatus.InvalidKind;
         if (!request.Payload.IsCompatibleWith(request.Kind)) return SimulationScheduleStatus.InvalidPayload;
+        if (request.Kind == SimulationEventKind.SpacecraftContactImpulse && !contactAdmission)
+            return SimulationScheduleStatus.InvalidPayload;
         if (_usedIds.Contains(request.Id)) return SimulationScheduleStatus.DuplicateId;
         if (request.Time < currentTime) return SimulationScheduleStatus.PastTime;
         return null;

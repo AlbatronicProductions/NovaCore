@@ -14,9 +14,19 @@ internal sealed class SimulationState
     private readonly CelestialStateStore _celestial;
     private readonly SpacecraftStateStore _spacecraft;
 
-    internal SimulationState(CelestialStateStore? celestial = null, SpacecraftStateStore? spacecraft = null) { _celestial = celestial ?? CelestialStateStore.Empty; _spacecraft = spacecraft ?? SpacecraftStateStore.Empty; }
+    internal SimulationState(CelestialStateStore? celestial = null, SpacecraftStateStore? spacecraft = null, StateRevision initialRevision = default) { _celestial = celestial ?? CelestialStateStore.Empty; _spacecraft = spacecraft ?? SpacecraftStateStore.Empty; _revision = initialRevision; }
 
     public SimulationStateView CreateView() => new(_markerValue, _revision, _celestial.CreateView(), _spacecraft.CreateView());
+
+    /// <summary>Single-writer paired commit: arithmetic and both store checks precede any assignment.</summary>
+    internal void CommitContactResponse(in SpacecraftTranslationState expectedLinear, in SpacecraftTranslationState replacementLinear,
+        in SpacecraftRigidBodyRotationState expectedAngular, in SpacecraftRigidBodyRotationState replacementAngular)
+    {
+        var next = new StateRevision(checked(_revision.Value + 1));
+        if (!_spacecraft.TryReplaceContactResponse(expectedLinear, replacementLinear, expectedAngular, replacementAngular))
+            throw new InvalidOperationException("Validated paired spacecraft replacement failed before mutation.");
+        _revision = next;
+    }
 
     /// <summary>Only the transaction engine calls this after complete continuity, revision and capacity validation.</summary>
     internal void CommitSpacecraftTranslation(in SpacecraftTranslationState expected, in SpacecraftTranslationState replacement)

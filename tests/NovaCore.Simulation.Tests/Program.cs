@@ -19,6 +19,8 @@ if (args.Contains("--orchestration-only", StringComparer.Ordinal)) { ClockExecut
 
 if (args.Contains("--translation-only", StringComparer.Ordinal)) { SpacecraftTranslationTests.Run(); return; }
 if (args.Contains("--contact-only", StringComparer.Ordinal)) { ContactGenerationTests.Run(); return; }
+if (args.Contains("--contact-response-only", StringComparer.Ordinal)) { ContactResponseTests.Run(); return; }
+if (args.Contains("--contact-response-performance", StringComparer.Ordinal)) { ContactResponseTests.Performance(); return; }
 if (args.Contains("--translation-performance", StringComparer.Ordinal)) { SpacecraftTranslationTests.Performance(); return; }
 
 if (args.Contains("--orientation-only", StringComparer.Ordinal))
@@ -54,6 +56,7 @@ var tests = new (string Name, Action Test)[]
     ("Spacecraft attitude", SpacecraftAttitudeTests),
     ("Spacecraft translational authority", SpacecraftTranslationTests.Run),
     ("Spacecraft contact generation", ContactGenerationTests.Run),
+    ("Unified linear/angular contact transaction", ContactResponseTests.Run),
     ("Spacecraft attitude integration", SpacecraftAttitudeIntegrationTests),
     ("Rigid-body rotation", RigidBodyRotationTests),
     ("Rigid-body torque transaction", RigidBodyTorqueTransactionTests),
@@ -1045,9 +1048,15 @@ static void TimelineTopologyTests()
 
     var allocatedTimeline = new SimulationTimeline(20_000);
     for (ulong id = 1; id <= 100; id++) Check(allocatedTimeline.Schedule(SimulationInstant.Zero, Request(id, (long)id, 0)).Succeeded, "allocation warmup");
+    var collectionsBefore = (GC.CollectionCount(0), GC.CollectionCount(1), GC.CollectionCount(2));
     var before = GC.GetAllocatedBytesForCurrentThread();
     for (ulong id = 101; id <= 10_000; id++) { Check(allocatedTimeline.Schedule(SimulationInstant.Zero, Request(id, (long)id, 0)).Succeeded, "allocation schedule"); Check(allocatedTimeline.Cancel(new SimulationEventId(id)).Succeeded, "allocation cancel"); }
-    Check(GC.GetAllocatedBytesForCurrentThread() == before && allocatedTimeline.ValidateInvariants(), "preallocated timeline operations allocate zero bytes");
+    var timelineAllocated = GC.GetAllocatedBytesForCurrentThread() - before;
+    var collectionsAfter = (GC.CollectionCount(0), GC.CollectionCount(1), GC.CollectionCount(2));
+    var timelineValid = allocatedTimeline.ValidateInvariants();
+    Console.WriteLine($"Timeline allocation gate: allocated={timelineAllocated}; valid={timelineValid}; pending={allocatedTimeline.PendingCount}; cancelled={allocatedTimeline.CancelledCount}; GC-before={collectionsBefore}; GC-after={collectionsAfter}");
+    Check(timelineAllocated == 0, $"preallocated timeline operations allocate zero bytes: actual={timelineAllocated}");
+    Check(timelineValid, "preallocated timeline invariants");
 
     var hash = TimelineHash(expected); Check(TimelineHash(CanonicalHeaders()) == hash, "deterministic timeline stress hash");
     Console.WriteLine($"Deterministic timeline stress hash: 0x{hash:X16}");

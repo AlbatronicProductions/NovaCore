@@ -1,0 +1,200 @@
+[
+  {
+    "variant": "control",
+    "configuration": "Debug",
+    "run": 1,
+    "exitCode": 0,
+    "environmentSha256": "B204C3C0C4F4BF5BD52F35DF5890EEC985DE607F7EF68BC4B17E8E5000BFE336",
+    "testAssemblySha256": "E74D82C7DFD3871B530E4A4F60F75CCC1F003D652945319E218C773C679782C9",
+    "simulationAssemblySha256": "1D32021350DC86C8289BCD24654781FC16DECD6A49484889DA84CC1034D49280",
+    "observation": {
+      "allocatedBytes": 0,
+      "timelineInvariants": true,
+      "pendingEvents": 100,
+      "completedCancellations": 9900,
+      "expectedCancellations": 9900,
+      "gcBefore": [
+        1,
+        1,
+        1
+      ],
+      "gcAfter": [
+        1,
+        1,
+        1
+      ],
+      "processId": 31724,
+      "runtime": ".NET 10.0.11",
+      "architecture": "X64",
+      "testAssembly": "E:\\NovaCore\\.codex\\contact-payload-ownership\\control\\tests\\NovaCore.Simulation.Tests\\bin\\Debug\\net10.0\\NovaCore.Simulation.Tests.dll",
+      "simulationAssembly": "E:\\NovaCore\\.codex\\contact-payload-ownership\\control\\tests\\NovaCore.Simulation.Tests\\bin\\Debug\\net10.0\\NovaCore.Simulation.dll",
+      "configuration": "Debug",
+      "eventRecordBytes": 112
+    }
+  },
+  {
+    "variant": "control",
+    "configuration": "Debug",
+    "run": 2,
+    "exitCode": 0,
+    "environmentSha256": "B204C3C0C4F4BF5BD52F35DF5890EEC985DE607F7EF68BC4B17E8E5000BFE336",
+    "testAssemblySha256": "E74D82C7DFD3871B530E4A4F60F75CCC1F003D652945319E218C773C679782C9",
+    "simulationAssemblySha256": "1D32021350DC86C8289BCD24654781FC16DECD6A49484889DA84CC1034D49280",
+    "observation": {
+      "allocatedBytes": 0,
+      "timelineInvariants": true,
+      "pendingEvents": 100,
+      "completedCancellations": 9900,
+      "expectedCancellations": 9900,
+      "gcBefore": [
+        1,
+        1,
+        1
+      ],
+      "gcAfter": [
+        1,
+        1,
+        1
+      ],
+      "processId": 25720,
+      "runtime": ".NET 10.0.11",
+      "architecture": "X64",
+      "testAssembly": "E:\\NovaCore\\.codex\\contact-payload-ownership\\control\\tests\\NovaCore.Simulation.Tests\\bin\\Debug\\net10.0\\NovaCore.Simulation.Tests.dll",
+      "simulationAssembly": "E:\\NovaCore\\.codex\\contact-payload-ownership\\control\\tests\\NovaCore.Simulation.Tests\\bin\\Debug\\net10.0\\NovaCore.Simulation.dll",
+      "configuration": "Debug",
+      "eventRecordBytes": 112
+    }
+  },
+  {
+    "variant": "control",
+    "configuration": "Debug",
+    "run": 3,
+    "exitCode": 0,
+    "environmentSha256": "B204C3C0C4F4BF5BD52F35DF5890EEC985DE607F7EF68BC4B17E8E5000BFE336",
+    "testAssemblySha256": "E74D82C7DFD3871B530E4A4F60F75CCC1F003D652945319E218C773C679782C9",
+    "simulationAssemblySha256": "1D32021350DC86C8289BCD24654781FC16DECD6A49484889DA84CC1034D49280",
+    "observation": {
+      "allocatedBytes": 0,
+      "timelineInvariants": true,
+      "pendingEvents": 100,
+      "completedCancellations": 9900,
+      "expectedCancellations": 9900,
+      "gcBefore": [
+        1,
+        1,
+        1
+      ],
+      "gcAfter": [
+        1,
+        1,
+        1
+      ],
+      "processId": 38884,
+      "runtime": ".NET 10.0.11",
+      "architecture": "X64",
+      "testAssembly": "E:\\NovaCore\\.codex\\contact-payload-ownership\\control\\tests\\NovaCore.Simulation.Tests\\bin\\Debug\\net10.0\\NovaCore.Simulation.Tests.dll",
+      "simulationAssembly": "E:\\NovaCore\\.codex\\contact-payload-ownership\\control\\tests\\NovaCore.Simulation.Tests\\bin\\Debug\\net10.0\\NovaCore.Simulation.dll",
+      "configuration": "Debug",
+      "eventRecordBytes": 112
+    }
+  },
+  {
+    "variant": "control",
+    "configuration": "Release",
+    "run": 1,
+    "exitCode": -532462766,
+    "environmentSha256": "B204C3C0C4F4BF5BD52F35DF5890EEC985DE607F7EF68BC4B17E8E5000BFE336",
+    "testAssemblySha256": "0630C829F6D0F89F26E07449AB3B6BAF87981EAF9CEA69345CE4BBDA6B02BA2F",
+    "simulationAssemblySha256": "CBB864B81763460065398AE4030AC87B49DF408F326ADAA30C4AE2E6BBED9E8B",
+    "observation": {
+      "allocatedBytes": 128,
+      "timelineInvariants": true,
+      "pendingEvents": 100,
+      "completedCancellations": 9900,
+      "expectedCancellations": 9900,
+      "gcBefore": [
+        1,
+        1,
+        1
+      ],
+      "gcAfter": [
+        1,
+        1,
+        1
+      ],
+      "processId": 21844,
+      "runtime": ".NET 10.0.11",
+      "architecture": "X64",
+      "testAssembly": "E:\\NovaCore\\.codex\\contact-payload-ownership\\control\\tests\\NovaCore.Simulation.Tests\\bin\\Release\\net10.0\\NovaCore.Simulation.Tests.dll",
+      "simulationAssembly": "E:\\NovaCore\\.codex\\contact-payload-ownership\\control\\tests\\NovaCore.Simulation.Tests\\bin\\Release\\net10.0\\NovaCore.Simulation.dll",
+      "configuration": "Release",
+      "eventRecordBytes": 112
+    }
+  },
+  {
+    "variant": "control",
+    "configuration": "Release",
+    "run": 2,
+    "exitCode": -532462766,
+    "environmentSha256": "B204C3C0C4F4BF5BD52F35DF5890EEC985DE607F7EF68BC4B17E8E5000BFE336",
+    "testAssemblySha256": "0630C829F6D0F89F26E07449AB3B6BAF87981EAF9CEA69345CE4BBDA6B02BA2F",
+    "simulationAssemblySha256": "CBB864B81763460065398AE4030AC87B49DF408F326ADAA30C4AE2E6BBED9E8B",
+    "observation": {
+      "allocatedBytes": 128,
+      "timelineInvariants": true,
+      "pendingEvents": 100,
+      "completedCancellations": 9900,
+      "expectedCancellations": 9900,
+      "gcBefore": [
+        1,
+        1,
+        1
+      ],
+      "gcAfter": [
+        1,
+        1,
+        1
+      ],
+      "processId": 23416,
+      "runtime": ".NET 10.0.11",
+      "architecture": "X64",
+      "testAssembly": "E:\\NovaCore\\.codex\\contact-payload-ownership\\control\\tests\\NovaCore.Simulation.Tests\\bin\\Release\\net10.0\\NovaCore.Simulation.Tests.dll",
+      "simulationAssembly": "E:\\NovaCore\\.codex\\contact-payload-ownership\\control\\tests\\NovaCore.Simulation.Tests\\bin\\Release\\net10.0\\NovaCore.Simulation.dll",
+      "configuration": "Release",
+      "eventRecordBytes": 112
+    }
+  },
+  {
+    "variant": "control",
+    "configuration": "Release",
+    "run": 3,
+    "exitCode": -532462766,
+    "environmentSha256": "B204C3C0C4F4BF5BD52F35DF5890EEC985DE607F7EF68BC4B17E8E5000BFE336",
+    "testAssemblySha256": "0630C829F6D0F89F26E07449AB3B6BAF87981EAF9CEA69345CE4BBDA6B02BA2F",
+    "simulationAssemblySha256": "CBB864B81763460065398AE4030AC87B49DF408F326ADAA30C4AE2E6BBED9E8B",
+    "observation": {
+      "allocatedBytes": 128,
+      "timelineInvariants": true,
+      "pendingEvents": 100,
+      "completedCancellations": 9900,
+      "expectedCancellations": 9900,
+      "gcBefore": [
+        1,
+        1,
+        1
+      ],
+      "gcAfter": [
+        1,
+        1,
+        1
+      ],
+      "processId": 31412,
+      "runtime": ".NET 10.0.11",
+      "architecture": "X64",
+      "testAssembly": "E:\\NovaCore\\.codex\\contact-payload-ownership\\control\\tests\\NovaCore.Simulation.Tests\\bin\\Release\\net10.0\\NovaCore.Simulation.Tests.dll",
+      "simulationAssembly": "E:\\NovaCore\\.codex\\contact-payload-ownership\\control\\tests\\NovaCore.Simulation.Tests\\bin\\Release\\net10.0\\NovaCore.Simulation.dll",
+      "configuration": "Release",
+      "eventRecordBytes": 112
+    }
+  }
+]

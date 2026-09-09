@@ -1,8 +1,10 @@
 # Pure authored point-feature contact generation
 
-**Unbanked candidate** on `codex/contact-generation`, based on banked M14.2
-`caa6d93ccd7c4e5924381e077a62585f99e5a32a`. M14 remains open. No milestone
-number is assigned. [Validation and provenance](engineering-evidence/contact-generation/README.md).
+**Banked M14.3**, commit `79978cf8b0fd783d43a661df6df53a2c0202af4a`, tag
+`m14.3-spacecraft-terrain-contact-observations`. M14 remains open.
+[Validation and provenance](engineering-evidence/contact-generation/README.md).
+The separate unbanked [response transaction](contact-response-transaction.md)
+consumes qualified intent without changing this read-only generator.
 
 ## Authority and scope
 

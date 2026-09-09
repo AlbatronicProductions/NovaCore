@@ -12,7 +12,7 @@ using NovaCore.Simulation.Spacecraft.Translation;
 namespace NovaCore.Simulation.Transactions;
 
 /// <summary>The only component allowed to commit authoritative state and consume pending events.</summary>
-internal sealed class SimulationTransactionEngine
+internal sealed partial class SimulationTransactionEngine
 {
     private readonly SimulationClock _clock;
     private readonly SimulationState _state;
@@ -23,15 +23,17 @@ internal sealed class SimulationTransactionEngine
     private bool _isExecutingGroup;
     private readonly SimulationExecutionOrchestrator _orchestrator;
 
-    public SimulationTransactionEngine(SimulationClock clock, SimulationState state, int initialHistoryCapacity = 0)
+    public SimulationTransactionEngine(SimulationClock clock, SimulationState state, int initialHistoryCapacity = 0, int? contactImpulseHistoryCapacity = null)
     {
         _clock = clock ?? throw new ArgumentNullException(nameof(clock));
         _state = state ?? throw new ArgumentNullException(nameof(state));
         if (initialHistoryCapacity < 0) throw new ArgumentOutOfRangeException(nameof(initialHistoryCapacity));
+        if (contactImpulseHistoryCapacity < 0) throw new ArgumentOutOfRangeException(nameof(contactImpulseHistoryCapacity));
         _history = new List<ProcessedSimulationEvent>(initialHistoryCapacity);
         _spacecraftAttitudeHistory = new List<ProcessedSpacecraftAttitudeTransition>(initialHistoryCapacity);
         _rigidBodyTorqueHistory = new List<ProcessedRigidBodyTorqueTransition>(initialHistoryCapacity);
         _spacecraftForceHistory = new List<ProcessedSpacecraftForceTransition>(initialHistoryCapacity);
+        _contactImpulseHistory = new(contactImpulseHistoryCapacity ?? initialHistoryCapacity);
         _orchestrator = new SimulationExecutionOrchestrator(_clock, this);
     }
 
@@ -55,7 +57,7 @@ internal sealed class SimulationTransactionEngine
     public SimulationTransaction EvaluateNext()
     {
         if (!_clock.Timeline.TryPeekPending(out var pending)) return default;
-        return SimulationEventEvaluator.Evaluate(pending, _state.CreateView(), _clock.CurrentTime, _clock.Timeline.Revision);
+        return SimulationEventEvaluator.Evaluate(pending, _state.CreateView(), _clock.CurrentTime, _clock.Timeline.Revision, _clock.Timeline);
     }
 
     /// <summary>
@@ -115,6 +117,9 @@ internal sealed class SimulationTransactionEngine
 
     public SimulationTransactionResult ValidateAndCommit(SimulationTransaction transaction)
     {
+        // A contact event cannot fall through to another mutation or marker path, including stripped/mixed proposals.
+        if (transaction.Event.Kind == SimulationEventKind.SpacecraftContactImpulse || transaction.ContactImpulseReplacement is not null)
+            return ValidateAndCommitContactEnvelope(transaction);
         // A force event cannot fall through to marker semantics if its typed proposal was stripped.
         if (transaction.Event.Kind == SimulationEventKind.SpacecraftForce && transaction.SpacecraftForceReplacement is null)
             return new(SimulationTransactionStatus.ValidationFailed, new(SimulationTransactionValidationStatus.InvalidTransaction), null);

@@ -101,6 +101,19 @@ internal sealed class SpacecraftStateStore
         if (!TryGetIndex(expected.Spacecraft, out var index) || !_properties[index].IsValid || _translations[index] != expected) return false;
         _translations[index] = replacement; return true;
     }
+
+    /// <summary>Both identities and expected slots are checked before the first write. Only the transaction engine reaches this via SimulationState.</summary>
+    internal bool TryReplaceContactResponse(in SpacecraftTranslationState expectedLinear, in SpacecraftTranslationState replacementLinear,
+        in SpacecraftRigidBodyRotationState expectedAngular, in SpacecraftRigidBodyRotationState replacementAngular)
+    {
+        if (!TryGetIndex(expectedLinear.Spacecraft, out var index) || !_properties[index].IsValid || !_hasRigidBody[index] ||
+            expectedAngular.Spacecraft != expectedLinear.Spacecraft || replacementLinear.Spacecraft != expectedLinear.Spacecraft ||
+            replacementAngular.Spacecraft != expectedLinear.Spacecraft ||
+            _translations[index] != expectedLinear || _rigidBodies[index] != expectedAngular) return false;
+        _translations[index] = replacementLinear;
+        _rigidBodies[index] = replacementAngular;
+        return true;
+    }
     internal SpacecraftAttitudeState GetAttitudeAt(int index) => _attitudes[index];
     internal bool TryGetIndex(SpacecraftId id, out int index) { var found = Array.BinarySearch(_lookupIds, id.Value); if (found >= 0) { index = _lookupIndices[found]; return true; } index = -1; return false; }
     internal bool TryGetDefinition(SpacecraftId id, out SpacecraftDefinition value) { if (TryGetIndex(id, out var index)) { value = _definitions[index]; return true; } value = default; return false; }

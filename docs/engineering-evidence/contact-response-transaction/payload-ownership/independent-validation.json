@@ -1,0 +1,86 @@
+[
+  {
+    "name": "contact-response",
+    "configuration": "Debug",
+    "exitCode": 0,
+    "result": "PASS Contact payload lifetime: explicit capacity, cancellation, retry, replacement, sequence ABA/overflow, history independence, 9900 slot reuses\nContact response permanent allocation contract: 256 complete transactions; allocated=0 bytes; preallocated canonical+coupled histories\nContact response numerical: maxDeltaVError=1.6653345369377348E-16; maxDeltaOmegaError=2.220446049250313E-15; maxLinearMomentumError=1.3322676295501878E-15; maxAngularMomentumRootError=7.105427357601002E-15; bars=gamma32/gamma256/gamma64/gamma512 times stated scales; poses=exact; replay=exact\nPASS Contact response: impulse contracts, coupled publication, analytical conservation, forgery/preflight rejection, exact-time replay and independent force/torque compatibility"
+  },
+  {
+    "name": "translation",
+    "configuration": "Debug",
+    "exitCode": 0,
+    "result": "Translation oracle: maxPositionError=2.2737367544323206E-13 m; maxVelocityError=0 m/s; boundedInterval=86400 s; repeatedEvaluationDifference=0 bits\nTranslation warmed allocation: 0 bytes / 100000 linear + coherent evaluations\nPASS Spacecraft translation: contracts, numerical oracle, transactions, cadence, frames, allocations"
+  },
+  {
+    "name": "contact-generation",
+    "configuration": "Debug",
+    "exitCode": 0,
+    "result": "Contact oracle maxima: featureM=3.0517578125E-05 witnessM=3.0768239642021255E-05 relativeVelocityMps=4.741560129417225E-10 normalVector=3.3678454736423286E-07 radialGapM=1.9352994833354842E-05; zeroGapM=3.552713678800501E-15; replayDifference=0 bits\nContact warmed allocations=0; completeFourFeatureBatches=10000\nPASS Contact generation: immutable identity, analytical point geometry, rotating frames, readiness, replay, no mutation, allocations"
+  },
+  {
+    "name": "ReferenceFrames",
+    "configuration": "Debug",
+    "exitCode": 0,
+    "result": "PASS transform algebra\nPASS hierarchy and conversion\nPASS reference-frame graph\nPASS reference-frame paths\nPASS transform resolution\nPASS static universe fixture\nPASS ORB\nPASS CCI/CCF\nPASS rotating velocity\nSurfaceAnchor performance: forward=3048567/s; inverse=1716040/s; terrainQueries=200000; allocations=0 bytes\nPASS surface anchor authority\nPASS validation\nBenchmark: 10,000 root resolutions in 1.915 ms; managed allocations=0 bytes; final=4000000000009.999"
+  },
+  {
+    "name": "Precision",
+    "configuration": "Debug",
+    "exitCode": 0,
+    "result": "kilometre        1000           0              PASS\nmetre            1              0              PASS\ncentimetre       0.02001953125  0              PASS\nmillimetre       0.0009765625   0              PASS\nnegative root    0.5            0              PASS\nmixed signs      0.02978515625  0              PASS\nnear zero        1000           5.204170427930421E-18 PASS\nrelative subtraction/pack: 60.83 ns/update; allocations=0 bytes\nlog options: parsing and verbose-input compatibility passed\nPASS"
+  },
+  {
+    "name": "M14.1",
+    "configuration": "Debug",
+    "exitCode": 0,
+    "result": "PASS [headless] Physical surface-point query\nPASS [headless] Physical surface-point stale snapshot\nGraphics Debug: selected=2; pass=2; fail=0; skip=0; excluded=92"
+  },
+  {
+    "name": "M14.3-terrain",
+    "configuration": "Debug",
+    "exitCode": 0,
+    "result": "Contact cost protocol: 64 warmup batches; 201 individual samples per path; alternating complete/query-only order; complete includes fresh body evaluation; setup/acquisition excluded; zero-byte allocation window separate; milliseconds CPU, not GPU.\nPASS [headless] Contact generation production terrain\nGraphics Debug: selected=1; pass=1; fail=0; skip=0; excluded=93"
+  },
+  {
+    "name": "contact-response",
+    "configuration": "Release",
+    "exitCode": 0,
+    "result": "PASS Contact payload lifetime: explicit capacity, cancellation, retry, replacement, sequence ABA/overflow, history independence, 9900 slot reuses\nContact response permanent allocation contract: 256 complete transactions; allocated=0 bytes; preallocated canonical+coupled histories\nContact response numerical: maxDeltaVError=1.6653345369377348E-16; maxDeltaOmegaError=2.220446049250313E-15; maxLinearMomentumError=1.3322676295501878E-15; maxAngularMomentumRootError=7.105427357601002E-15; bars=gamma32/gamma256/gamma64/gamma512 times stated scales; poses=exact; replay=exact\nPASS Contact response: impulse contracts, coupled publication, analytical conservation, forgery/preflight rejection, exact-time replay and independent force/torque compatibility"
+  },
+  {
+    "name": "translation",
+    "configuration": "Release",
+    "exitCode": 0,
+    "result": "Translation oracle: maxPositionError=2.2737367544323206E-13 m; maxVelocityError=0 m/s; boundedInterval=86400 s; repeatedEvaluationDifference=0 bits\nTranslation warmed allocation: 0 bytes / 100000 linear + coherent evaluations\nPASS Spacecraft translation: contracts, numerical oracle, transactions, cadence, frames, allocations"
+  },
+  {
+    "name": "contact-generation",
+    "configuration": "Release",
+    "exitCode": 0,
+    "result": "Contact oracle maxima: featureM=3.0517578125E-05 witnessM=3.0768239642021255E-05 relativeVelocityMps=4.741560129417225E-10 normalVector=3.3678454736423286E-07 radialGapM=1.9352994833354842E-05; zeroGapM=3.552713678800501E-15; replayDifference=0 bits\nContact warmed allocations=0; completeFourFeatureBatches=10000\nPASS Contact generation: immutable identity, analytical point geometry, rotating frames, readiness, replay, no mutation, allocations"
+  },
+  {
+    "name": "ReferenceFrames",
+    "configuration": "Release",
+    "exitCode": 0,
+    "result": "PASS transform algebra\nPASS hierarchy and conversion\nPASS reference-frame graph\nPASS reference-frame paths\nPASS transform resolution\nPASS static universe fixture\nPASS ORB\nPASS CCI/CCF\nPASS rotating velocity\nSurfaceAnchor performance: forward=4759910/s; inverse=4404083/s; terrainQueries=200000; allocations=0 bytes\nPASS surface anchor authority\nPASS validation\nBenchmark: 10,000 root resolutions in 3.255 ms; managed allocations=0 bytes; final=4000000000009.999"
+  },
+  {
+    "name": "Precision",
+    "configuration": "Release",
+    "exitCode": 0,
+    "result": "kilometre        1000           0              PASS\nmetre            1              0              PASS\ncentimetre       0.02001953125  0              PASS\nmillimetre       0.0009765625   0              PASS\nnegative root    0.5            0              PASS\nmixed signs      0.02978515625  0              PASS\nnear zero        1000           5.204170427930421E-18 PASS\nrelative subtraction/pack: 6.53 ns/update; allocations=0 bytes\nlog options: parsing and verbose-input compatibility passed\nPASS"
+  },
+  {
+    "name": "M14.1",
+    "configuration": "Release",
+    "exitCode": 0,
+    "result": "PASS [headless] Physical surface-point query\nPASS [headless] Physical surface-point stale snapshot\nGraphics Release: selected=2; pass=2; fail=0; skip=0; excluded=92"
+  },
+  {
+    "name": "M14.3-terrain",
+    "configuration": "Release",
+    "exitCode": 0,
+    "result": "Contact cost protocol: 64 warmup batches; 201 individual samples per path; alternating complete/query-only order; complete includes fresh body evaluation; setup/acquisition excluded; zero-byte allocation window separate; milliseconds CPU, not GPU.\nPASS [headless] Contact generation production terrain\nGraphics Release: selected=1; pass=1; fail=0; skip=0; excluded=93"
+  }
+]

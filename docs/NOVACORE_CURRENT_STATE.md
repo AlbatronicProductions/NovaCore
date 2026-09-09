@@ -13,9 +13,9 @@ and performs FP64 camera-relative subtraction before GPU transport.
 
 ## Banked production checkpoint
 
-Latest banked accomplishment: **M14.2 — Establish independent spacecraft
-translational authority**, commit `caa6d93ccd7c4e5924381e077a62585f99e5a32a`,
-annotated tag `m14.2-spacecraft-translational-authority`.
+Latest banked accomplishment: **M14.3 — Generate deterministic spacecraft-to-terrain
+contact observations**, commit `79978cf8b0fd783d43a661df6df53a2c0202af4a`,
+annotated tag `m14.3-spacecraft-terrain-contact-observations`.
 **M14 — Surface Interaction / Launch Foundation remains OPEN.**
 
 M14.1 remains banked at `5b9b02ab1d2ba0e903809510908e4819984d4de2`, tag
@@ -26,15 +26,25 @@ constant-net-force advancement and canonical exact-time force transactions;
 rotation and translation retain one craft identity. See the
 [translation contract](spacecraft-translation.md).
 
-**Unbanked candidate:** pure authored point-feature contact generation on
-`codex/contact-generation`. Simulation derives immutable, ordered terrain-contact
-observations at one exact time/revision from those existing authorities. It adds
-no response, grounding, pad collision or visible route change. Radial signed gap
-is not finite-volume penetration or closest-point distance. See the
-[contact contract](contact-generation.md) and
-[validation evidence](engineering-evidence/contact-generation/README.md).
-Manual visual acceptance is not required. No milestone number is assigned;
-Project Control decides acceptance and the next responsibility.
+M14.3 derives immutable, ordered point-feature observations at one exact
+time/revision. Radial signed gap is not finite-volume penetration or closest-point
+distance. See the [contact-generation contract](contact-generation.md).
+
+**Unbanked candidate:** unified linear/angular contact transaction on
+`codex/contact-response-transaction`. One already-qualified root-space impulse at
+an exact canonical event produces paired FP64 replacements, one state revision
+and one coupled physical history. Rejection changes neither half. The analytical
+contact oracle is test-only; no automatic response, solver, friction, rest,
+grounded state or visible route change is introduced. Bepu remains deferred.
+See the [response contract](contact-response-transaction.md) and
+[candidate evidence](engineering-evidence/contact-response-transaction/README.md).
+Manual visual acceptance is not required. No milestone number is assigned.
+The bounded typed-payload revision retains 112-byte reference-free generic events;
+contact-capable timelines explicitly preallocate their own intent slots.
+**Validation follow-up required:** focused response checks and full Debug Simulation
+pass. The original timeline gate reports zero in both full-suite configurations;
+full Release later fails the separate warm SAS proof allocation assertion. Its
+cause remains unclassified; see the [ownership revision evidence](engineering-evidence/contact-response-transaction/payload-ownership/README.md).
 
 ### Closed M13 renderer baseline
 

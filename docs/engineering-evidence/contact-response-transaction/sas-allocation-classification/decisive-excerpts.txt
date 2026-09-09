@@ -1,0 +1,65 @@
+candidate-Release-selfcheck-2-attribution
+NATIVE_ATTRIBUTION owner=15208; delta=152; objectCount=1; objectBytes=152; entries=3
+NATIVE_EVENT kind=1; thread=15208; qpc=1464925836968; a=140718676063736; b=152
+CONTEXT phase=0; thread=15208; qpc=1464925836964; address=1945399704224; ptr=1945474033472; limit=1945474035888; bytes=649576; uoh=8184; unused=2416
+CONTEXT phase=7; thread=15208; qpc=1464925836969; address=1945399704224; ptr=1945474033624; limit=1945474035888; bytes=649576; uoh=8184; unused=2264
+CONTROL_RESULT bytes=152; type=System.Byte[]; length=128
+
+candidate-Release-full-2-attribution
+Lunar orientation: 2130.5 ns/evaluation; allocated=0 bytes; pack=0x3BCE78D924EA3532
+ATTRIBUTION_NAME kind=1; id=140718680952040; token=33554481; name=System.Text.Json.JsonEncodedText
+ATTRIBUTION_NAME kind=8; id=140718676896248; token=100663399; name=<<Main>$>g__SasSignFrameContinuityProofTests|0_8
+ATTRIBUTION_NAME kind=8; id=140718676895936; token=100663389; name=<Main>$
+ATTRIBUTION_NAME kind=1; id=140718680952040; token=33554481; name=System.Text.Json.JsonEncodedText
+ATTRIBUTION_NAME kind=8; id=140718676896248; token=100663399; name=<<Main>$>g__SasSignFrameContinuityProofTests|0_8
+ATTRIBUTION_NAME kind=8; id=140718676895936; token=100663389; name=<Main>$
+ATTRIBUTION_NAME kind=1; id=140718680952040; token=33554481; name=System.Text.Json.JsonEncodedText
+ATTRIBUTION_NAME kind=8; id=140718676896248; token=100663399; name=<<Main>$>g__SasSignFrameContinuityProofTests|0_8
+ATTRIBUTION_NAME kind=8; id=140718676895936; token=100663389; name=<Main>$
+ATTRIBUTION_NAME kind=1; id=140718680952040; token=33554481; name=System.Text.Json.JsonEncodedText
+ATTRIBUTION_NAME kind=8; id=140718676896248; token=100663399; name=<<Main>$>g__SasSignFrameContinuityProofTests|0_8
+ATTRIBUTION_NAME kind=8; id=140718676895936; token=100663389; name=<Main>$
+ATTRIBUTION_NAME kind=1; id=140718674926984; token=33554633; name=System.String
+ATTRIBUTION_NAME kind=8; id=140718676896248; token=100663399; name=<<Main>$>g__SasSignFrameContinuityProofTests|0_8
+ATTRIBUTION_NAME kind=8; id=140718676895936; token=100663389; name=<Main>$
+NATIVE_ATTRIBUTION owner=4448; delta=128; objectCount=5; objectBytes=174; entries=28
+NATIVE_EVENT kind=1; thread=4448; qpc=1467556450662; a=140718680952040; b=32
+NATIVE_EVENT kind=8; thread=4448; qpc=1467556451094; a=140718676896248; b=1
+NATIVE_EVENT kind=8; thread=4448; qpc=1467556451126; a=140718676895936; b=1
+NATIVE_EVENT kind=8; thread=4448; qpc=1467556451135; a=0; b=1
+NATIVE_EVENT kind=1; thread=4448; qpc=1467556451143; a=140718680952040; b=32
+NATIVE_EVENT kind=8; thread=4448; qpc=1467556451156; a=140718676896248; b=2
+NATIVE_EVENT kind=8; thread=4448; qpc=1467556451165; a=140718676895936; b=2
+NATIVE_EVENT kind=8; thread=4448; qpc=1467556451170; a=0; b=2
+NATIVE_EVENT kind=1; thread=4448; qpc=1467556451172; a=140718680952040; b=32
+NATIVE_EVENT kind=8; thread=4448; qpc=1467556451181; a=140718676896248; b=3
+NATIVE_EVENT kind=8; thread=4448; qpc=1467556451188; a=140718676895936; b=3
+NATIVE_EVENT kind=8; thread=4448; qpc=1467556451192; a=0; b=3
+NATIVE_EVENT kind=1; thread=4448; qpc=1467556451193; a=140718680952040; b=32
+NATIVE_EVENT kind=8; thread=4448; qpc=1467556451201; a=140718676896248; b=4
+NATIVE_EVENT kind=8; thread=4448; qpc=1467556451208; a=140718676895936; b=4
+NATIVE_EVENT kind=8; thread=4448; qpc=1467556451212; a=0; b=4
+NATIVE_EVENT kind=1; thread=4448; qpc=1467556499755; a=140718674926984; b=46
+NATIVE_EVENT kind=8; thread=4448; qpc=1467556499869; a=140718676896248; b=5
+NATIVE_EVENT kind=8; thread=4448; qpc=1467556499893; a=140718676895936; b=5
+NATIVE_EVENT kind=8; thread=4448; qpc=1467556499900; a=0; b=5
+CONTEXT phase=0; thread=4448; qpc=1467556429042; address=2418965155216; ptr=2419041333560; limit=2419041338080; bytes=7493280; uoh=46622840; unused=4520
+CONTEXT phase=7; thread=4448; qpc=1467556662681; address=2418965155216; ptr=2419041333688; limit=2419041338080; bytes=7493280; uoh=46622840; unused=4392
+SAS_RESULT {"delta":128,"completed":true,"iterations":100000,"explicitWarmup":1,"proofSetupPassed":true,"hash":"B88A70CC5EF45185","gcBefore":[8,7,6],"gcAfter":[8,7,6],"managedThread":2,"osThread":4448,"pid":21396,"runtime":".NET 10.0.12","current":"Identity","rate":"Zero","target":"Y axis pi/2","inertia":"1,1,1","gain":"10,10,10","derivative":"0,0,0","limit":"100,100,100","profiler":true,"mode":"full"}
+Unhandled exception. System.Exception: warm SAS proof evaluation allocation: actual=128
+   at Program.<<Main>$>g__SasSignFrameContinuityProofTests|0_8() in E:\NovaCore\.codex\sas-allocation-classification\candidate\tests\NovaCore.Simulation.Tests\Program.cs:line 298
+   at Program.<Main>$(String[] args) in E:\NovaCore\.codex\sas-allocation-classification\candidate\tests\NovaCore.Simulation.Tests\Program.cs:line 74
+
+isolatedReporter-candidate-Release-full-3-attribution
+Lunar orientation: 1875.7 ns/evaluation; allocated=0 bytes; pack=0x3BCE78D924EA3532
+NATIVE_ATTRIBUTION owner=9796; delta=0; objectCount=0; objectBytes=0; entries=3
+CONTEXT phase=0; thread=9796; qpc=1469515356839; address=2496725192080; ptr=2496803729720; limit=2496803734240; bytes=7493280; uoh=46622840; unused=4520
+CONTEXT phase=7; thread=9796; qpc=1469515576729; address=2496725192080; ptr=2496803729720; limit=2496803734240; bytes=7493280; uoh=46622840; unused=4520
+SAS_RESULT {"delta":0,"completed":true,"iterations":100000,"explicitWarmup":1,"proofSetupPassed":true,"hash":"B88A70CC5EF45185","gcBefore":[8,7,6],"gcAfter":[8,7,6],"managedThread":2,"osThread":9796,"pid":34572,"runtime":".NET 10.0.12","current":"Identity","rate":"Zero","target":"Y axis pi/2","inertia":"1,1,1","gain":"10,10,10","derivative":"0,0,0","limit":"100,100,100","profiler":true,"mode":"full"}
+
+corrected-candidate-Release-full-4-attribution
+Lunar orientation: 1992.6 ns/evaluation; allocated=12336 bytes; pack=0x3BCE78D924EA3532
+Unhandled exception. System.Exception: high-precision lunar orientation performance and allocation
+   at Program.<<Main>$>g__Check|0_84(Boolean condition, String message) in E:\NovaCore\.codex\sas-allocation-classification\candidate\tests\NovaCore.Simulation.Tests\Program.cs:line 1412
+   at Program.<<Main>$>g__CelestialBodyOrientationTests|0_1() in E:\NovaCore\.codex\sas-allocation-classification\candidate\tests\NovaCore.Simulation.Tests\Program.cs:line 123
+   at Program.<Main>$(String[] args) in E:\NovaCore\.codex\sas-allocation-classification\candidate\tests\NovaCore.Simulation.Tests\Program.cs:line 74

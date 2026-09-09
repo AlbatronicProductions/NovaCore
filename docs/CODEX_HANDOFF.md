@@ -24,14 +24,23 @@ Surface Interaction / Launch Foundation has banked **M14.1**, commit
 `5b9b02ab1d2ba0e903809510908e4819984d4de2`, tag
 `m14.1-canonical-surface-point-queries`, and **M14.2**, commit
 `caa6d93ccd7c4e5924381e077a62585f99e5a32a`, tag
-`m14.2-spacecraft-translational-authority`. M14 remains **OPEN**.
+`m14.2-spacecraft-translational-authority`, and **M14.3**, commit
+`79978cf8b0fd783d43a661df6df53a2c0202af4a`, tag
+`m14.3-spacecraft-terrain-contact-observations`. M14 remains **OPEN**.
 
-Current unbanked candidate: [pure authored point-feature contact generation](contact-generation.md)
-on `codex/contact-generation`; [evidence and reproduction](engineering-evidence/contact-generation/README.md).
-It generates exact-time observations only, with explicit readiness and no response,
-grounded state, pad collider or launch behavior. Manual visual acceptance is not
-required. No milestone number or banking is authorized by this candidate ticket.
+Current unbanked candidate: [unified linear/angular contact transaction](contact-response-transaction.md)
+on `codex/contact-response-transaction`; [evidence and reproduction](engineering-evidence/contact-response-transaction/README.md).
+It applies one qualified instantaneous impulse through one paired commit/revision
+and coupled history. It does not calculate contact impulses, adopt a solver or add
+friction, grounded state, pad collision or launch behavior. Manual visual
+acceptance is not required. No milestone number or banking is authorized.
 Return the candidate to Project Control.
+Current payload ownership is a bounded timeline-owned typed arena with compact,
+112-byte reference-free generic events. The candidate-associated timeline counter
+excess is absent in matched controls. Full Debug passes; full Release passes the
+timeline/contact gates but later fails the separate warm SAS proof allocation
+assertion. Do not attribute that new failure or describe full validation as passed.
+See the [ownership revision evidence](engineering-evidence/contact-response-transaction/payload-ownership/README.md).
 
 - Work in `E:\NovaCore` and inspect `git status --short` before editing.
 - Preserve unrelated and unstaged user work.

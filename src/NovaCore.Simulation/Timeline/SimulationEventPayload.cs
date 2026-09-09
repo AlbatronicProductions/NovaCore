@@ -7,13 +7,16 @@ namespace NovaCore.Simulation.Timeline;
 /// <summary>Closed internal event payload value. It intentionally has no extensible object or byte-payload path.</summary>
 internal readonly record struct SimulationEventPayload
 {
-    private SimulationEventPayload(SimulationEventPayloadKind kind, CelestialBodyId subject, SpacecraftId spacecraftSubject, Double3 deltaVelocity, Double3 forceRoot = default)
+    private SimulationEventPayload(SimulationEventPayloadKind kind, CelestialBodyId subject, SpacecraftId spacecraftSubject, Double3 deltaVelocity, Double3 forceRoot = default, int contactSlot = 0)
     {
         Kind = kind; Subject = subject; SpacecraftSubject = spacecraftSubject; DeltaVelocity = deltaVelocity;
         ForceRoot = forceRoot;
+        ContactSlot = contactSlot;
     }
 
     internal SimulationEventPayloadKind Kind { get; }
+    // Fits the existing alignment gap; no managed contact provenance in generic events.
+    internal int ContactSlot { get; }
     internal CelestialBodyId Subject { get; }
     internal SpacecraftId SpacecraftSubject { get; }
     internal Double3 DeltaVelocity { get; }
@@ -35,6 +38,7 @@ internal readonly record struct SimulationEventPayload
         SimulationEventKind.CelestialImpulse => Kind == SimulationEventPayloadKind.CelestialImpulse && Subject.IsValid && DeltaVelocity.IsFinite && DeltaVelocity.LengthSquared != 0d,
         SimulationEventKind.RigidBodyTorque => Kind == SimulationEventPayloadKind.RigidBodyTorque && SpacecraftSubject.IsValid,
         SimulationEventKind.SpacecraftForce => Kind == SimulationEventPayloadKind.SpacecraftForce && SpacecraftSubject.IsValid && ForceRoot.IsFinite,
+        SimulationEventKind.SpacecraftContactImpulse => Kind == SimulationEventPayloadKind.SpacecraftContactImpulse && ContactSlot > 0,
         _ => false,
     };
 
@@ -44,6 +48,9 @@ internal readonly record struct SimulationEventPayload
         if (!subject.IsValid || !forceRoot.IsFinite) return false;
         payload = new(SimulationEventPayloadKind.SpacecraftForce, default, subject, default, forceRoot); return true;
     }
+
+    internal static SimulationEventPayload ContactHandle(int slot) =>
+        new(SimulationEventPayloadKind.SpacecraftContactImpulse, default, default, default, contactSlot: slot);
 }
 
-internal enum SimulationEventPayloadKind : byte { None = 0, CelestialImpulse = 1, RigidBodyTorque = 2, SpacecraftForce = 3 }
+internal enum SimulationEventPayloadKind : byte { None = 0, CelestialImpulse = 1, RigidBodyTorque = 2, SpacecraftForce = 3, SpacecraftContactImpulse = 4 }

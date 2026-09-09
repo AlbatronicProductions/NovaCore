@@ -42,7 +42,7 @@ extraction derives the translated body frame without mutating celestial state.
 See [state, force and time contracts](spacecraft-translation.md). This does not
 implement contact response, gravity contributors, propulsion or coupled wrench response.
 
-The unbanked `Spacecraft.Contact` candidate owns immutable authored point features
+Banked M14.3 `Spacecraft.Contact` owns immutable authored point features
 and pure exact-time observations. It consumes coherent spacecraft motion, fresh
 celestial body motion and Core's canonical physical-surface query interface.
 Application composition supplies current revisions/authority and reusable buffers;
@@ -50,6 +50,15 @@ no Graphics dependency enters Simulation. It publishes a complete ordered set or
 explicit failure, never force, torque, pose correction or solver state.
 [Contact-generation contract](contact-generation.md) defines radial gap, witness
 velocity, readiness and the finite-volume/continuous-collision limits.
+
+The unbanked [contact transaction](contact-response-transaction.md) adds one
+instantaneous root-space impulse event under `SimulationTransactionEngine`.
+Canonical intent is re-evaluated against fresh state; both linear and angular
+replacements and all history/event/revision preconditions pass before mutation.
+One paired store operation produces one revision and one coupled physical history
+record, alongside the existing canonical event receipt. It preserves continuous
+force/torque controls and event pose. No automatic contact-response calculation,
+solver interval, friction/rest policy, Bepu dependency or renderer wiring is added.
 
 `Spacecraft.Guidance` is a pure managed math layer. It evaluates orbital flight-reference vectors, deterministically constructs body-forward target orientations, and computes bounded body-space PD torque requests. The celestial sample owns SAS mode selection, exact-time hold-attitude capture, and a deterministic 20 Hz simulation-time cadence. At each active boundary it evaluates guidance and submits a quantized torque request through the existing rigid-body transaction path. The fixture uses `(120, 120, 120) kg·m²` inertia, fixture-specific `(8, 8, 8) N·m` SAS authority, gains `(7.5, 7.5, 7.5)` and `(63, 63, 63)`, `.002` deadbands, and `.01` settlement thresholds for deliberately mildly overdamped behavior. SAS control is sample-locally suspended above 10×; clock and orbital evaluation continue, and resumption begins at the first future cadence boundary. Graphics receives only the resulting evaluated body frame. Full high-warp control behavior remains deferred.
 

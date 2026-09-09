@@ -1,0 +1,398 @@
+[
+  {
+    "variant": "baseline",
+    "configuration": "Debug",
+    "run": 1,
+    "exitCode": 0,
+    "environmentSha256": "B204C3C0C4F4BF5BD52F35DF5890EEC985DE607F7EF68BC4B17E8E5000BFE336",
+    "testAssemblySha256": "325EA0CCE27342864339774A2EB4880CA518296C1651CF103C34DC5BCBE61237",
+    "simulationAssemblySha256": "6B9B8FFFA36151FE47A1F3A1FCAB3EA9F81C079654EAF7A8DAE8E3812364713C",
+    "observation": {
+      "allocatedBytes": 0,
+      "timelineInvariants": true,
+      "pendingEvents": 100,
+      "completedCancellations": 9900,
+      "expectedCancellations": 9900,
+      "gcBefore": [
+        1,
+        1,
+        1
+      ],
+      "gcAfter": [
+        1,
+        1,
+        1
+      ],
+      "processId": 42676,
+      "runtime": ".NET 10.0.11",
+      "architecture": "X64",
+      "testAssembly": "E:\\NovaCore\\.codex\\contact-allocation-discriminator\\baseline\\tests\\NovaCore.Simulation.Tests\\bin\\Debug\\net10.0\\NovaCore.Simulation.Tests.dll",
+      "simulationAssembly": "E:\\NovaCore\\.codex\\contact-allocation-discriminator\\baseline\\tests\\NovaCore.Simulation.Tests\\bin\\Debug\\net10.0\\NovaCore.Simulation.dll",
+      "configuration": "Debug",
+      "eventRecordBytes": 112
+    }
+  },
+  {
+    "variant": "candidate",
+    "configuration": "Debug",
+    "run": 1,
+    "exitCode": -532462766,
+    "environmentSha256": "B204C3C0C4F4BF5BD52F35DF5890EEC985DE607F7EF68BC4B17E8E5000BFE336",
+    "testAssemblySha256": "CF79E3AEE97322DF1DFB6464F301D76265B8FC37137667E96E54DDDA80746350",
+    "simulationAssemblySha256": "F3B2E139283912E0E46AF7160F9FF68629572ADEDF9D7B63497A4BAD9D0E152B",
+    "observation": {
+      "allocatedBytes": 8104,
+      "timelineInvariants": true,
+      "pendingEvents": 100,
+      "completedCancellations": 9900,
+      "expectedCancellations": 9900,
+      "gcBefore": [
+        2,
+        2,
+        2
+      ],
+      "gcAfter": [
+        2,
+        2,
+        2
+      ],
+      "processId": 16152,
+      "runtime": ".NET 10.0.11",
+      "architecture": "X64",
+      "testAssembly": "E:\\NovaCore\\.codex\\contact-allocation-discriminator\\candidate\\tests\\NovaCore.Simulation.Tests\\bin\\Debug\\net10.0\\NovaCore.Simulation.Tests.dll",
+      "simulationAssembly": "E:\\NovaCore\\.codex\\contact-allocation-discriminator\\candidate\\tests\\NovaCore.Simulation.Tests\\bin\\Debug\\net10.0\\NovaCore.Simulation.dll",
+      "configuration": "Debug",
+      "eventRecordBytes": 312
+    }
+  },
+  {
+    "variant": "baseline",
+    "configuration": "Debug",
+    "run": 2,
+    "exitCode": 0,
+    "environmentSha256": "B204C3C0C4F4BF5BD52F35DF5890EEC985DE607F7EF68BC4B17E8E5000BFE336",
+    "testAssemblySha256": "325EA0CCE27342864339774A2EB4880CA518296C1651CF103C34DC5BCBE61237",
+    "simulationAssemblySha256": "6B9B8FFFA36151FE47A1F3A1FCAB3EA9F81C079654EAF7A8DAE8E3812364713C",
+    "observation": {
+      "allocatedBytes": 0,
+      "timelineInvariants": true,
+      "pendingEvents": 100,
+      "completedCancellations": 9900,
+      "expectedCancellations": 9900,
+      "gcBefore": [
+        1,
+        1,
+        1
+      ],
+      "gcAfter": [
+        1,
+        1,
+        1
+      ],
+      "processId": 42800,
+      "runtime": ".NET 10.0.11",
+      "architecture": "X64",
+      "testAssembly": "E:\\NovaCore\\.codex\\contact-allocation-discriminator\\baseline\\tests\\NovaCore.Simulation.Tests\\bin\\Debug\\net10.0\\NovaCore.Simulation.Tests.dll",
+      "simulationAssembly": "E:\\NovaCore\\.codex\\contact-allocation-discriminator\\baseline\\tests\\NovaCore.Simulation.Tests\\bin\\Debug\\net10.0\\NovaCore.Simulation.dll",
+      "configuration": "Debug",
+      "eventRecordBytes": 112
+    }
+  },
+  {
+    "variant": "candidate",
+    "configuration": "Debug",
+    "run": 2,
+    "exitCode": -532462766,
+    "environmentSha256": "B204C3C0C4F4BF5BD52F35DF5890EEC985DE607F7EF68BC4B17E8E5000BFE336",
+    "testAssemblySha256": "CF79E3AEE97322DF1DFB6464F301D76265B8FC37137667E96E54DDDA80746350",
+    "simulationAssemblySha256": "F3B2E139283912E0E46AF7160F9FF68629572ADEDF9D7B63497A4BAD9D0E152B",
+    "observation": {
+      "allocatedBytes": 8104,
+      "timelineInvariants": true,
+      "pendingEvents": 100,
+      "completedCancellations": 9900,
+      "expectedCancellations": 9900,
+      "gcBefore": [
+        2,
+        2,
+        2
+      ],
+      "gcAfter": [
+        2,
+        2,
+        2
+      ],
+      "processId": 42724,
+      "runtime": ".NET 10.0.11",
+      "architecture": "X64",
+      "testAssembly": "E:\\NovaCore\\.codex\\contact-allocation-discriminator\\candidate\\tests\\NovaCore.Simulation.Tests\\bin\\Debug\\net10.0\\NovaCore.Simulation.Tests.dll",
+      "simulationAssembly": "E:\\NovaCore\\.codex\\contact-allocation-discriminator\\candidate\\tests\\NovaCore.Simulation.Tests\\bin\\Debug\\net10.0\\NovaCore.Simulation.dll",
+      "configuration": "Debug",
+      "eventRecordBytes": 312
+    }
+  },
+  {
+    "variant": "baseline",
+    "configuration": "Debug",
+    "run": 3,
+    "exitCode": 0,
+    "environmentSha256": "B204C3C0C4F4BF5BD52F35DF5890EEC985DE607F7EF68BC4B17E8E5000BFE336",
+    "testAssemblySha256": "325EA0CCE27342864339774A2EB4880CA518296C1651CF103C34DC5BCBE61237",
+    "simulationAssemblySha256": "6B9B8FFFA36151FE47A1F3A1FCAB3EA9F81C079654EAF7A8DAE8E3812364713C",
+    "observation": {
+      "allocatedBytes": 0,
+      "timelineInvariants": true,
+      "pendingEvents": 100,
+      "completedCancellations": 9900,
+      "expectedCancellations": 9900,
+      "gcBefore": [
+        1,
+        1,
+        1
+      ],
+      "gcAfter": [
+        1,
+        1,
+        1
+      ],
+      "processId": 36100,
+      "runtime": ".NET 10.0.11",
+      "architecture": "X64",
+      "testAssembly": "E:\\NovaCore\\.codex\\contact-allocation-discriminator\\baseline\\tests\\NovaCore.Simulation.Tests\\bin\\Debug\\net10.0\\NovaCore.Simulation.Tests.dll",
+      "simulationAssembly": "E:\\NovaCore\\.codex\\contact-allocation-discriminator\\baseline\\tests\\NovaCore.Simulation.Tests\\bin\\Debug\\net10.0\\NovaCore.Simulation.dll",
+      "configuration": "Debug",
+      "eventRecordBytes": 112
+    }
+  },
+  {
+    "variant": "candidate",
+    "configuration": "Debug",
+    "run": 3,
+    "exitCode": -532462766,
+    "environmentSha256": "B204C3C0C4F4BF5BD52F35DF5890EEC985DE607F7EF68BC4B17E8E5000BFE336",
+    "testAssemblySha256": "CF79E3AEE97322DF1DFB6464F301D76265B8FC37137667E96E54DDDA80746350",
+    "simulationAssemblySha256": "F3B2E139283912E0E46AF7160F9FF68629572ADEDF9D7B63497A4BAD9D0E152B",
+    "observation": {
+      "allocatedBytes": 8104,
+      "timelineInvariants": true,
+      "pendingEvents": 100,
+      "completedCancellations": 9900,
+      "expectedCancellations": 9900,
+      "gcBefore": [
+        2,
+        2,
+        2
+      ],
+      "gcAfter": [
+        2,
+        2,
+        2
+      ],
+      "processId": 30152,
+      "runtime": ".NET 10.0.11",
+      "architecture": "X64",
+      "testAssembly": "E:\\NovaCore\\.codex\\contact-allocation-discriminator\\candidate\\tests\\NovaCore.Simulation.Tests\\bin\\Debug\\net10.0\\NovaCore.Simulation.Tests.dll",
+      "simulationAssembly": "E:\\NovaCore\\.codex\\contact-allocation-discriminator\\candidate\\tests\\NovaCore.Simulation.Tests\\bin\\Debug\\net10.0\\NovaCore.Simulation.dll",
+      "configuration": "Debug",
+      "eventRecordBytes": 312
+    }
+  },
+  {
+    "variant": "baseline",
+    "configuration": "Release",
+    "run": 1,
+    "exitCode": -532462766,
+    "environmentSha256": "B204C3C0C4F4BF5BD52F35DF5890EEC985DE607F7EF68BC4B17E8E5000BFE336",
+    "testAssemblySha256": "97D370EDB5D3DF5EE40A52974B936F6465F53F58CE17D6A2EBCD88CDAAA7155E",
+    "simulationAssemblySha256": "EDBF7ADE82C8B192CAC877E5E33B9E6396C77FED8CAD7973D91D8E37A66C79FD",
+    "observation": {
+      "allocatedBytes": 128,
+      "timelineInvariants": true,
+      "pendingEvents": 100,
+      "completedCancellations": 9900,
+      "expectedCancellations": 9900,
+      "gcBefore": [
+        1,
+        1,
+        1
+      ],
+      "gcAfter": [
+        1,
+        1,
+        1
+      ],
+      "processId": 39776,
+      "runtime": ".NET 10.0.11",
+      "architecture": "X64",
+      "testAssembly": "E:\\NovaCore\\.codex\\contact-allocation-discriminator\\baseline\\tests\\NovaCore.Simulation.Tests\\bin\\Release\\net10.0\\NovaCore.Simulation.Tests.dll",
+      "simulationAssembly": "E:\\NovaCore\\.codex\\contact-allocation-discriminator\\baseline\\tests\\NovaCore.Simulation.Tests\\bin\\Release\\net10.0\\NovaCore.Simulation.dll",
+      "configuration": "Release",
+      "eventRecordBytes": 112
+    }
+  },
+  {
+    "variant": "candidate",
+    "configuration": "Release",
+    "run": 1,
+    "exitCode": -532462766,
+    "environmentSha256": "B204C3C0C4F4BF5BD52F35DF5890EEC985DE607F7EF68BC4B17E8E5000BFE336",
+    "testAssemblySha256": "EE3140D354134E2DA739FD47BA18B13099C0C0977EDD26D9811D0F4A74720724",
+    "simulationAssemblySha256": "F0363E7FE1FAD34528A84EE31E39B0C00C1A6E46FEFACB5771187396B861F580",
+    "observation": {
+      "allocatedBytes": 8232,
+      "timelineInvariants": true,
+      "pendingEvents": 100,
+      "completedCancellations": 9900,
+      "expectedCancellations": 9900,
+      "gcBefore": [
+        2,
+        2,
+        2
+      ],
+      "gcAfter": [
+        2,
+        2,
+        2
+      ],
+      "processId": 34948,
+      "runtime": ".NET 10.0.11",
+      "architecture": "X64",
+      "testAssembly": "E:\\NovaCore\\.codex\\contact-allocation-discriminator\\candidate\\tests\\NovaCore.Simulation.Tests\\bin\\Release\\net10.0\\NovaCore.Simulation.Tests.dll",
+      "simulationAssembly": "E:\\NovaCore\\.codex\\contact-allocation-discriminator\\candidate\\tests\\NovaCore.Simulation.Tests\\bin\\Release\\net10.0\\NovaCore.Simulation.dll",
+      "configuration": "Release",
+      "eventRecordBytes": 312
+    }
+  },
+  {
+    "variant": "baseline",
+    "configuration": "Release",
+    "run": 2,
+    "exitCode": -532462766,
+    "environmentSha256": "B204C3C0C4F4BF5BD52F35DF5890EEC985DE607F7EF68BC4B17E8E5000BFE336",
+    "testAssemblySha256": "97D370EDB5D3DF5EE40A52974B936F6465F53F58CE17D6A2EBCD88CDAAA7155E",
+    "simulationAssemblySha256": "EDBF7ADE82C8B192CAC877E5E33B9E6396C77FED8CAD7973D91D8E37A66C79FD",
+    "observation": {
+      "allocatedBytes": 128,
+      "timelineInvariants": true,
+      "pendingEvents": 100,
+      "completedCancellations": 9900,
+      "expectedCancellations": 9900,
+      "gcBefore": [
+        1,
+        1,
+        1
+      ],
+      "gcAfter": [
+        1,
+        1,
+        1
+      ],
+      "processId": 39744,
+      "runtime": ".NET 10.0.11",
+      "architecture": "X64",
+      "testAssembly": "E:\\NovaCore\\.codex\\contact-allocation-discriminator\\baseline\\tests\\NovaCore.Simulation.Tests\\bin\\Release\\net10.0\\NovaCore.Simulation.Tests.dll",
+      "simulationAssembly": "E:\\NovaCore\\.codex\\contact-allocation-discriminator\\baseline\\tests\\NovaCore.Simulation.Tests\\bin\\Release\\net10.0\\NovaCore.Simulation.dll",
+      "configuration": "Release",
+      "eventRecordBytes": 112
+    }
+  },
+  {
+    "variant": "candidate",
+    "configuration": "Release",
+    "run": 2,
+    "exitCode": -532462766,
+    "environmentSha256": "B204C3C0C4F4BF5BD52F35DF5890EEC985DE607F7EF68BC4B17E8E5000BFE336",
+    "testAssemblySha256": "EE3140D354134E2DA739FD47BA18B13099C0C0977EDD26D9811D0F4A74720724",
+    "simulationAssemblySha256": "F0363E7FE1FAD34528A84EE31E39B0C00C1A6E46FEFACB5771187396B861F580",
+    "observation": {
+      "allocatedBytes": 8232,
+      "timelineInvariants": true,
+      "pendingEvents": 100,
+      "completedCancellations": 9900,
+      "expectedCancellations": 9900,
+      "gcBefore": [
+        2,
+        2,
+        2
+      ],
+      "gcAfter": [
+        2,
+        2,
+        2
+      ],
+      "processId": 38924,
+      "runtime": ".NET 10.0.11",
+      "architecture": "X64",
+      "testAssembly": "E:\\NovaCore\\.codex\\contact-allocation-discriminator\\candidate\\tests\\NovaCore.Simulation.Tests\\bin\\Release\\net10.0\\NovaCore.Simulation.Tests.dll",
+      "simulationAssembly": "E:\\NovaCore\\.codex\\contact-allocation-discriminator\\candidate\\tests\\NovaCore.Simulation.Tests\\bin\\Release\\net10.0\\NovaCore.Simulation.dll",
+      "configuration": "Release",
+      "eventRecordBytes": 312
+    }
+  },
+  {
+    "variant": "baseline",
+    "configuration": "Release",
+    "run": 3,
+    "exitCode": -532462766,
+    "environmentSha256": "B204C3C0C4F4BF5BD52F35DF5890EEC985DE607F7EF68BC4B17E8E5000BFE336",
+    "testAssemblySha256": "97D370EDB5D3DF5EE40A52974B936F6465F53F58CE17D6A2EBCD88CDAAA7155E",
+    "simulationAssemblySha256": "EDBF7ADE82C8B192CAC877E5E33B9E6396C77FED8CAD7973D91D8E37A66C79FD",
+    "observation": {
+      "allocatedBytes": 128,
+      "timelineInvariants": true,
+      "pendingEvents": 100,
+      "completedCancellations": 9900,
+      "expectedCancellations": 9900,
+      "gcBefore": [
+        1,
+        1,
+        1
+      ],
+      "gcAfter": [
+        1,
+        1,
+        1
+      ],
+      "processId": 34512,
+      "runtime": ".NET 10.0.11",
+      "architecture": "X64",
+      "testAssembly": "E:\\NovaCore\\.codex\\contact-allocation-discriminator\\baseline\\tests\\NovaCore.Simulation.Tests\\bin\\Release\\net10.0\\NovaCore.Simulation.Tests.dll",
+      "simulationAssembly": "E:\\NovaCore\\.codex\\contact-allocation-discriminator\\baseline\\tests\\NovaCore.Simulation.Tests\\bin\\Release\\net10.0\\NovaCore.Simulation.dll",
+      "configuration": "Release",
+      "eventRecordBytes": 112
+    }
+  },
+  {
+    "variant": "candidate",
+    "configuration": "Release",
+    "run": 3,
+    "exitCode": -532462766,
+    "environmentSha256": "B204C3C0C4F4BF5BD52F35DF5890EEC985DE607F7EF68BC4B17E8E5000BFE336",
+    "testAssemblySha256": "EE3140D354134E2DA739FD47BA18B13099C0C0977EDD26D9811D0F4A74720724",
+    "simulationAssemblySha256": "F0363E7FE1FAD34528A84EE31E39B0C00C1A6E46FEFACB5771187396B861F580",
+    "observation": {
+      "allocatedBytes": 8232,
+      "timelineInvariants": true,
+      "pendingEvents": 100,
+      "completedCancellations": 9900,
+      "expectedCancellations": 9900,
+      "gcBefore": [
+        2,
+        2,
+        2
+      ],
+      "gcAfter": [
+        2,
+        2,
+        2
+      ],
+      "processId": 37524,
+      "runtime": ".NET 10.0.11",
+      "architecture": "X64",
+      "testAssembly": "E:\\NovaCore\\.codex\\contact-allocation-discriminator\\candidate\\tests\\NovaCore.Simulation.Tests\\bin\\Release\\net10.0\\NovaCore.Simulation.Tests.dll",
+      "simulationAssembly": "E:\\NovaCore\\.codex\\contact-allocation-discriminator\\candidate\\tests\\NovaCore.Simulation.Tests\\bin\\Release\\net10.0\\NovaCore.Simulation.dll",
+      "configuration": "Release",
+      "eventRecordBytes": 312
+    }
+  }
+]

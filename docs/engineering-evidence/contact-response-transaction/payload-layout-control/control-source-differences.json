@@ -1,0 +1,4 @@
+[
+  "src\\NovaCore.Simulation\\Timeline\\InertTimelinePayloadLayout.cs",
+  "src\\NovaCore.Simulation\\Timeline\\SimulationEventPayload.cs"
+]

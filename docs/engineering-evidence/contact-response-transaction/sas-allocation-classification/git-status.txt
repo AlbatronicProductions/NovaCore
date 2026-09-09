@@ -1,0 +1,23 @@
+ M docs/CODEX_HANDOFF.md
+ M docs/NOVACORE_CURRENT_STATE.md
+ M docs/architecture.md
+ M docs/contact-generation.md
+ M docs/engineering-evidence/README.md
+ M src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.cs
+ M src/NovaCore.Simulation/Timeline/SimulationEventHeader.cs
+ M src/NovaCore.Simulation/Timeline/SimulationEventKind.cs
+ M src/NovaCore.Simulation/Timeline/SimulationEventPayload.cs
+ M src/NovaCore.Simulation/Timeline/SimulationEventRequest.cs
+ M src/NovaCore.Simulation/Timeline/SimulationScheduleResult.cs
+ M src/NovaCore.Simulation/Timeline/SimulationTimeline.cs
+ M src/NovaCore.Simulation/Transactions/SimulationEventEvaluator.cs
+ M src/NovaCore.Simulation/Transactions/SimulationState.cs
+ M src/NovaCore.Simulation/Transactions/SimulationTransaction.cs
+ M src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.cs
+ M tests/NovaCore.Simulation.Tests/Program.cs
+?? docs/contact-response-transaction.md
+?? docs/engineering-evidence/contact-response-transaction/
+?? src/NovaCore.Simulation/Spacecraft/Contact/SpacecraftContactImpulse.cs
+?? src/NovaCore.Simulation/Timeline/SimulationTimeline.ContactPayloads.cs
+?? src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.ContactImpulse.cs
+?? tests/NovaCore.Simulation.Tests/ContactResponseTests.cs

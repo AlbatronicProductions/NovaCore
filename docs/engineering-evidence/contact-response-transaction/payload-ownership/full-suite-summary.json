@@ -1,0 +1,37 @@
+[
+  {
+    "configuration": "Debug",
+    "expectedGroups": 35,
+    "passedGroups": 35,
+    "failedGroups": 0,
+    "notReachedGroups": 0,
+    "evidence": [
+      "Timeline allocation gate: allocated=0; valid=True; pending=100; cancelled=9900; GC-before=(1, 1, 1); GC-after=(1, 1, 1)",
+      "Orchestration observation: allocatedBytes=0; reason=Completed; processed=1000; expected=1000; pendingBefore=1000; pendingAfter=0; markerBefore=0; markerAfter=1000; revisionBefore=0; revisionAfter=1000; startTicks=0; targetTicks=2; reachedTicks=2",
+      "Contact payload structure: generic=112; intent=200; slot=248; genericReferences=false",
+      "Contact response deterministic state+complete history bit hash: 0x88CC7A6780F19270; cadences=1,30,60,144,1000; identical",
+      "Contact response permanent allocation contract: 256 complete transactions; allocated=0 bytes; preallocated canonical+coupled histories",
+      "Contact response numerical: maxDeltaVError=1.6653345369377348E-16; maxDeltaOmegaError=2.220446049250313E-15; maxLinearMomentumError=1.3322676295501878E-15; maxAngularMomentumRootError=7.105427357601002E-15; bars=gamma32/gamma256/gamma64/gamma512 times stated scales; poses=exact; replay=exact",
+      "PASS Contact response: impulse contracts, coupled publication, analytical conservation, forgery/preflight rejection, exact-time replay and independent force/torque compatibility"
+    ]
+  },
+  {
+    "configuration": "Release",
+    "expectedGroups": 35,
+    "passedGroups": 29,
+    "failedGroups": 1,
+    "notReachedGroups": 5,
+    "evidence": [
+      "Timeline allocation gate: allocated=0; valid=True; pending=100; cancelled=9900; GC-before=(1, 1, 1); GC-after=(1, 1, 1)",
+      "Orchestration observation: allocatedBytes=0; reason=Completed; processed=1000; expected=1000; pendingBefore=1000; pendingAfter=0; markerBefore=0; markerAfter=1000; revisionBefore=0; revisionAfter=1000; startTicks=0; targetTicks=2; reachedTicks=2",
+      "Contact payload structure: generic=112; intent=200; slot=248; genericReferences=false",
+      "Contact response deterministic state+complete history bit hash: 0x88CC7A6780F19270; cadences=1,30,60,144,1000; identical",
+      "Contact response permanent allocation contract: 256 complete transactions; allocated=0 bytes; preallocated canonical+coupled histories",
+      "Contact response numerical: maxDeltaVError=1.6653345369377348E-16; maxDeltaOmegaError=2.220446049250313E-15; maxLinearMomentumError=1.3322676295501878E-15; maxAngularMomentumRootError=7.105427357601002E-15; bars=gamma32/gamma256/gamma64/gamma512 times stated scales; poses=exact; replay=exact",
+      "PASS Contact response: impulse contracts, coupled publication, analytical conservation, forgery/preflight rejection, exact-time replay and independent force/torque compatibility",
+      "Unhandled exception. System.Exception: warm SAS proof evaluation allocation",
+      "   at Program.<<Main>$>g__SasSignFrameContinuityProofTests|0_8() in E:\\NovaCore\\tests\\NovaCore.Simulation.Tests\\Program.cs:line 282",
+      "   at Program.<Main>$(String[] args) in E:\\NovaCore\\tests\\NovaCore.Simulation.Tests\\Program.cs:line 71"
+    ]
+  }
+]

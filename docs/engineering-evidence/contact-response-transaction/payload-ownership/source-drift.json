@@ -1,0 +1,86 @@
+[
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Contact/SpacecraftContactImpulse.cs",
+    "beforeSha256": "54B2ADEFF965EE6960FBB8B16BCF3997F7173844871E758495EDF59865667A57",
+    "afterSha256": "7FDBCA662C38CDA01079151472934A6DCF77FEFDFFF90A98306E82B0A15416C8",
+    "changed": true
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.cs",
+    "beforeSha256": "181B47104B805623A4B3FACF1675EFAD88073430E57F6F5A691B5712D4C43E4C",
+    "afterSha256": "181B47104B805623A4B3FACF1675EFAD88073430E57F6F5A691B5712D4C43E4C",
+    "changed": false
+  },
+  {
+    "path": "src/NovaCore.Simulation/Timeline/SimulationEventHeader.cs",
+    "beforeSha256": "8FE504A5E9CDF5820B6D17D8414A8E6FE2C1CA5F3CDA4385F7739A14A152E656",
+    "afterSha256": "8FE504A5E9CDF5820B6D17D8414A8E6FE2C1CA5F3CDA4385F7739A14A152E656",
+    "changed": false
+  },
+  {
+    "path": "src/NovaCore.Simulation/Timeline/SimulationEventKind.cs",
+    "beforeSha256": "7ABD42C695A64B355EDAE70CC5C71160962BFC0F6C925125AE4FB33CF7E3B49F",
+    "afterSha256": "7ABD42C695A64B355EDAE70CC5C71160962BFC0F6C925125AE4FB33CF7E3B49F",
+    "changed": false
+  },
+  {
+    "path": "src/NovaCore.Simulation/Timeline/SimulationEventPayload.cs",
+    "beforeSha256": "797B1ACE0E192672F4791AA7EDE392B8EE811AACA89A1C9EF0A37B268B2CAB70",
+    "afterSha256": "9E8BB6D3F7B14903281DF3D61545A9324899A7DDD31C2520745739307C928198",
+    "changed": true
+  },
+  {
+    "path": "src/NovaCore.Simulation/Timeline/SimulationEventRequest.cs",
+    "beforeSha256": "1EB1CFB7FE3048347FEDBCA795A2EFFEE03E7B329CB04D2B7CFD4C830773F9EA",
+    "afterSha256": "3FF7C9E9E749350294F7F43227618BE4EAC28932A03D043D13720D80093D74F7",
+    "changed": true
+  },
+  {
+    "path": "src/NovaCore.Simulation/Timeline/SimulationTimeline.cs",
+    "beforeSha256": "86BF24913EE160D536874CCCA1E50A933E62A9604E0C4DB9277773407BF01F66",
+    "afterSha256": "8A8AC015F7065317C0C5413E36503947944B9F56D3F24D9AA88F8FCAE67758F2",
+    "changed": true
+  },
+  {
+    "path": "src/NovaCore.Simulation/Transactions/SimulationEventEvaluator.cs",
+    "beforeSha256": "64F9C632D2AA04284FC32552E447DA25993016669C052E1E1A6762BA1DA0D716",
+    "afterSha256": "700F55C07B6D0A81EA1337DB10060819A242631787078D587C65536713606C8D",
+    "changed": true
+  },
+  {
+    "path": "src/NovaCore.Simulation/Transactions/SimulationState.cs",
+    "beforeSha256": "7C7FC2D21E43414F743DF9F4625EB008B1AA5FA21F0CC4EAF756341F4919B650",
+    "afterSha256": "7C7FC2D21E43414F743DF9F4625EB008B1AA5FA21F0CC4EAF756341F4919B650",
+    "changed": false
+  },
+  {
+    "path": "src/NovaCore.Simulation/Transactions/SimulationTransaction.cs",
+    "beforeSha256": "6CB386DAD2EC8D7F8F788D3E709A4678CFD1DDECDEA5D950C063F0C302CC667A",
+    "afterSha256": "6CB386DAD2EC8D7F8F788D3E709A4678CFD1DDECDEA5D950C063F0C302CC667A",
+    "changed": false
+  },
+  {
+    "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.ContactImpulse.cs",
+    "beforeSha256": "6CFE6A9A8199C68E9C70E1B61B0AD58F58E01CC60E3F4C1416F00CF841D7A49F",
+    "afterSha256": "8D084B43FE1F8433DE1F13AE3DD2412CE2BAABC5CFC87DE6BE1B4ADB018F4943",
+    "changed": true
+  },
+  {
+    "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.cs",
+    "beforeSha256": "4D0D0C713F4244374D3E318FCCB9AC97181C586E6EB49296C698CC39D6300EFE",
+    "afterSha256": "CAD7B3FC2F4379458D95B807C694A6585BDDB7983ACD3A42CC6FD3D955587ABF",
+    "changed": true
+  },
+  {
+    "path": "tests/NovaCore.Simulation.Tests/ContactResponseTests.cs",
+    "beforeSha256": "406C8645ECCACC6919085FA4B4B0B9D836FCB47EFE8EDEF4B2414A095F098486",
+    "afterSha256": "032AD987E4131E5A82DCA89A8CA234291AC5DB9FB7517C743021D707B2585705",
+    "changed": true
+  },
+  {
+    "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+    "beforeSha256": "655789780A17490BB4A76208B08C72AFC025EAA40A497132EF6F119DD749F912",
+    "afterSha256": "655789780A17490BB4A76208B08C72AFC025EAA40A497132EF6F119DD749F912",
+    "changed": false
+  }
+]

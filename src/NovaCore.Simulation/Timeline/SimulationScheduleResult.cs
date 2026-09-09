@@ -11,6 +11,7 @@ public enum SimulationScheduleStatus : byte
     ReplacementTargetNotPending,
     SequenceOverflow,
     RevisionOverflow,
+    ContactPayloadCapacityExceeded,
 }
 
 public readonly record struct SimulationScheduleResult(
