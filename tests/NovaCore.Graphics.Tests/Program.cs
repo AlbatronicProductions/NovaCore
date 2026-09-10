@@ -16,6 +16,7 @@ using NovaCore.Simulation.Time;
 
 var tests = new (string, Action)[]
 {
+    ("Exact-event Earth-relative production terrain", EarthRelativeObservationProductionTests.Run),
     ("Contact generation production terrain", ContactGenerationProductionTests.Run),
     ("Physical surface-point query", PhysicalSurfacePointQueryTests.Run),
     ("Physical surface-point stale snapshot", PhysicalSurfacePointQueryTests.RejectStaleSnapshot),

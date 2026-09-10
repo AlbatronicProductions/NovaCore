@@ -49,7 +49,7 @@ internal static class CelestialBodyFixedFrameEvaluator
 /// SimulationInstant zero is J2000 ET zero. The Moon uses an embedded compact residual extracted
 /// from the DE440 binary lunar PCK/frame chain and deterministically falls back to IAU_MOON.
 /// </summary>
-internal static class CelestialBodyOrientationEvaluator
+internal static partial class CelestialBodyOrientationEvaluator
 {
     private const double DegreesToRadians = Math.PI / 180d;
     private const double SecondsPerDay = 86_400d;

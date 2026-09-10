@@ -1,0 +1,300 @@
+{
+  "baseline": "56c0ae95b7f514e2f0440dfe272dd2836f32506e",
+  "disposition": "UNBANKED",
+  "builds": {
+    "Debug": {
+      "exit": 0,
+      "warnings": 0,
+      "errors": 0
+    },
+    "Release": {
+      "exit": 0,
+      "warnings": 0,
+      "errors": 0
+    }
+  },
+  "finalSimulation": {
+    "Debug": {
+      "groups": 39,
+      "passed": 39,
+      "failed": 0,
+      "skipped": 0,
+      "observationBytes": 0
+    },
+    "Release": {
+      "groups": 39,
+      "passed": 39,
+      "failed": 0,
+      "skipped": 0,
+      "observationBytes": 0
+    }
+  },
+  "focused": {
+    "Debug": "PASS",
+    "Release": "PASS",
+    "canonicalBitCases": 20,
+    "canonicalRefusals": 15,
+    "ellipseCases": 27,
+    "orientationCases": 15,
+    "fractionalFrameCases": 25,
+    "refusalCases": 21,
+    "seededReplayQueries": 128
+  },
+  "allocation": [
+    {
+      "configuration": "Debug",
+      "run": 1,
+      "exit": 0,
+      "calls": 256,
+      "bytes": 0,
+      "entry": "PASS",
+      "exitRegion": "PASS",
+      "positiveControlBytes": 152
+    },
+    {
+      "configuration": "Debug",
+      "run": 2,
+      "exit": 0,
+      "calls": 256,
+      "bytes": 0,
+      "entry": "PASS",
+      "exitRegion": "PASS",
+      "positiveControlBytes": 152
+    },
+    {
+      "configuration": "Debug",
+      "run": 3,
+      "exit": 0,
+      "calls": 256,
+      "bytes": 0,
+      "entry": "PASS",
+      "exitRegion": "PASS",
+      "positiveControlBytes": 152
+    },
+    {
+      "configuration": "Release",
+      "run": 1,
+      "exit": 0,
+      "calls": 256,
+      "bytes": 0,
+      "entry": "PASS",
+      "exitRegion": "PASS",
+      "positiveControlBytes": 152
+    },
+    {
+      "configuration": "Release",
+      "run": 2,
+      "exit": 0,
+      "calls": 256,
+      "bytes": 0,
+      "entry": "PASS",
+      "exitRegion": "PASS",
+      "positiveControlBytes": 152
+    },
+    {
+      "configuration": "Release",
+      "run": 3,
+      "exit": 0,
+      "calls": 256,
+      "bytes": 0,
+      "entry": "PASS",
+      "exitRegion": "PASS",
+      "positiveControlBytes": 152
+    }
+  ],
+  "allocationNote": "3+3 fresh processes, no retries. Later default-run registration adds this unchanged allocation body to the full suite; final full Debug/Release both pass it again. Timing and allocation method bodies unchanged.",
+  "numerical": {
+    "maxEllipsePositionErrorMetres": 7.275957614183426e-12,
+    "maxEllipseVelocityErrorMps": 8.134767913360665e-12,
+    "maxEulerDirectionError": 8.54602163694437e-11,
+    "maxStencilOmegaErrorRadps": 1.5147606783834545e-15,
+    "sameEpochPositionSignalM": 0.015143005615216129,
+    "sameEpochVelocitySignalMps": 3.066549103105144e-9,
+    "sameEpochSpinSignal": 3.6460575093517937e-11
+  },
+  "timingProtocol": {
+    "configuration": "Release",
+    "ordinaryRuntime": true,
+    "warmups": 64,
+    "samples": 101,
+    "callsPerSample": 16,
+    "terrain": "analytical test control",
+    "compositionResidual": "Estimated only: fractional median minus separate craft/Earth/query medians = 1425 ns. Not a directly isolated timing."
+  },
+  "timing": [
+    {
+      "kind": "earth-timing",
+      "path": "canonical",
+      "batch": 1,
+      "medianNs": 16056.25,
+      "p95Ns": 16425,
+      "p99Ns": 18718.75
+    },
+    {
+      "kind": "earth-timing",
+      "path": "fractional",
+      "batch": 1,
+      "medianNs": 5906.25,
+      "p95Ns": 7306.25,
+      "p99Ns": 9300
+    },
+    {
+      "kind": "earth-timing",
+      "path": "batch8",
+      "batch": 8,
+      "medianNs": 52925,
+      "p95Ns": 58681.25,
+      "p99Ns": 59787.5
+    },
+    {
+      "kind": "earth-timing",
+      "path": "craft",
+      "batch": 1,
+      "medianNs": 1293.75,
+      "p95Ns": 1462.5,
+      "p99Ns": 2587.5
+    },
+    {
+      "kind": "earth-timing",
+      "path": "earth",
+      "batch": 1,
+      "medianNs": 3050,
+      "p95Ns": 4012.5,
+      "p99Ns": 5925
+    },
+    {
+      "kind": "earth-timing",
+      "path": "terrain-control",
+      "batch": 1,
+      "medianNs": 137.5,
+      "p95Ns": 143.75,
+      "p99Ns": 150
+    }
+  ],
+  "realTerrain": {
+    "Debug": [
+      {
+        "kind": "earth-real-terrain",
+        "site": "Florida",
+        "epochFloor": 0,
+        "Numerator": 15625,
+        "Denominator": 32768,
+        "HeightMetres": 15.13489249162376,
+        "NormalSampleDistanceMetres": 6.429892267366189,
+        "RadialSignedGapMetres": 10.255949144251645,
+        "bytes": 0,
+        "medianNs": 316387.5,
+        "p95Ns": 330606.25,
+        "p99Ns": 358300
+      },
+      {
+        "kind": "earth-real-terrain",
+        "site": "regional",
+        "epochFloor": 0,
+        "Numerator": 15625,
+        "Denominator": 32768,
+        "HeightMetres": 3.970722066773668,
+        "NormalSampleDistanceMetres": 0.10046706667759671,
+        "RadialSignedGapMetres": 10.267108895280764,
+        "bytes": 0,
+        "medianNs": 768056.25,
+        "p95Ns": 803581.25,
+        "p99Ns": 810412.5
+      },
+      {
+        "kind": "earth-real-terrain",
+        "site": "inland",
+        "epochFloor": 0,
+        "Numerator": 15625,
+        "Denominator": 32768,
+        "HeightMetres": 3178.7658051032904,
+        "NormalSampleDistanceMetres": 0.40186826671038683,
+        "RadialSignedGapMetres": 10.314668481763874,
+        "bytes": 0,
+        "medianNs": 595500,
+        "p95Ns": 611493.75,
+        "p99Ns": 615212.5
+      }
+    ],
+    "Release": [
+      {
+        "kind": "earth-real-terrain",
+        "site": "Florida",
+        "epochFloor": 0,
+        "Numerator": 15625,
+        "Denominator": 32768,
+        "HeightMetres": 15.13489249162376,
+        "NormalSampleDistanceMetres": 6.429892267366189,
+        "RadialSignedGapMetres": 10.255949144251645,
+        "bytes": 0,
+        "medianNs": 59562.5,
+        "p95Ns": 295337.5,
+        "p99Ns": 337175
+      },
+      {
+        "kind": "earth-real-terrain",
+        "site": "regional",
+        "epochFloor": 0,
+        "Numerator": 15625,
+        "Denominator": 32768,
+        "HeightMetres": 3.970722066773668,
+        "NormalSampleDistanceMetres": 0.10046706667759671,
+        "RadialSignedGapMetres": 10.267108895280764,
+        "bytes": 0,
+        "medianNs": 83687.5,
+        "p95Ns": 94068.75,
+        "p99Ns": 100275
+      },
+      {
+        "kind": "earth-real-terrain",
+        "site": "inland",
+        "epochFloor": 0,
+        "Numerator": 15625,
+        "Denominator": 32768,
+        "HeightMetres": 3178.7658051032904,
+        "NormalSampleDistanceMetres": 0.40186826671038683,
+        "RadialSignedGapMetres": 10.314668481763874,
+        "bytes": 0,
+        "medianNs": 62043.75,
+        "p95Ns": 64412.5,
+        "p99Ns": 66012.5
+      }
+    ]
+  },
+  "regressions": {
+    "M14_2throughM14_7Focused": {
+      "Debug": "PASS",
+      "Release": "PASS"
+    },
+    "ReferenceFrames": {
+      "Debug": "11 groups PASS",
+      "Release": "11 groups PASS"
+    },
+    "Precision": {
+      "Debug": "PASS",
+      "Release": "PASS"
+    },
+    "HeadlessExisting": {
+      "Debug": "3/3 PASS, 0 skip",
+      "Release": "3/3 PASS, 0 skip"
+    },
+    "HeadlessNew": {
+      "Debug": "1/1 PASS, 0 skip",
+      "Release": "1/1 PASS, 0 skip"
+    }
+  },
+  "developmentCorrections": [
+    "Nonfinite test fixture initially threw in its own normalization; replaced with direct malformed Ready payload controls.",
+    "New Graphics test initially resolved top-level Check incorrectly; qualified fixture assertion helper. Final builds zero warnings/errors.",
+    "Compose made private during authority review; numerical code unchanged.",
+    "New allocation contract added to default full Simulation Run; final affected builds/full suites repeated."
+  ],
+  "verifier": {
+    "sameEpoch": "PASS; direct anti-floor and independent exact-epoch Euler wiring witnesses added",
+    "frameVelocity": "PASS",
+    "authority": "PASS; private composition, stale-view and default refusal controls",
+    "scope": "PASS; current Earth only",
+    "Ksa": "PASS; current installed source ownership reverified"
+  },
+  "outOfScope": "No rendering, contact/discovery/certification, response, scheduling or mutation added."
+}

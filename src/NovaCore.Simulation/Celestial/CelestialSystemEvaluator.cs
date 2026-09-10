@@ -5,7 +5,7 @@ using NovaCore.Simulation.Time;
 namespace NovaCore.Simulation.Celestial;
 
 /// <summary>Pure, caller-buffered authored-system evaluation. It publishes no partial result on failure.</summary>
-internal static class CelestialSystemEvaluator
+internal static partial class CelestialSystemEvaluator
 {
     internal static CelestialSystemEvaluationResult TryEvaluateSystem(CelestialSystemDefinition system, SimulationInstant instant, Span<ReferenceFrameEvaluation> destination, Span<FrameTransform> rootTransforms, Span<ReferenceFrameEvaluation> staging, Span<FrameTransform> stagingRoots)
     {

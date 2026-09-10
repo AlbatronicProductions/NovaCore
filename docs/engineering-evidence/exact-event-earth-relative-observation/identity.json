@@ -1,0 +1,80 @@
+{
+  "baseline": "56c0ae95b7f514e2f0440dfe272dd2836f32506e",
+  "branch": "codex/exact-event-earth-relative-observation",
+  "date": "2026-09-10",
+  "sdk": "10.0.303",
+  "runtime": "10.0.12",
+  "initialWorktree": "clean",
+  "stagedPaths": [],
+  "tags": [
+    "m14.1-canonical-surface-point-queries 3ccb998031e15cb1898394589c27244d55e06e24 5b9b02ab1d2ba0e903809510908e4819984d4de2",
+    "m14.2-spacecraft-translational-authority ae2f203b97224ff88b38b7c68902ac2d31108a91 caa6d93ccd7c4e5924381e077a62585f99e5a32a",
+    "m14.3-spacecraft-terrain-contact-observations b9ad79c38b322c8e1e095039d5b69c035a1bcca8 79978cf8b0fd783d43a661df6df53a2c0202af4a",
+    "m14.4-atomic-contact-response b198d3b381ba4a82577ba89bd5e31e6050d3a896 28b92f724f8decd3c9356aa5f9f5bbd6c9dd069c",
+    "m14.5-isolated-analytical-contact-response c2964fe4531b8e383d2d89beec2e8c055f3541a5 b53d48025cfb8142cb32a6fc6fceb6018e33cfcd",
+    "m14.6-physical-event-epochs 07adc9983252f2cabf0af9da0a1281457af606bf d0b9f9d69d55b8ba85a7b24a44f93e03cea2dcf6",
+    "m14.7-exact-event-spacecraft-motion 315da29c4eff5562f9040f7a0aedbb4e961fa877 56c0ae95b7f514e2f0440dfe272dd2836f32506e"
+  ],
+  "existingProductionCs": 215,
+  "unchangedExistingProductionCs": 213,
+  "existingMethodBodies": "unchanged; exactly two partial declarations added",
+  "candidateSourceCs": 218,
+  "productionAggregateSha256": "F262F4E942193272BFD4160F8FB2F40B1D63929FFE5ED685CE99AFDF373C0ECF",
+  "aggregateRecipe": "rg --files src -g *.cs, PowerShell Sort-Object; SHA256 of UTF8 LF-joined path-forwardslash SPACE file-sha256 uppercase, no trailing LF",
+  "candidateFiles": [
+    {
+      "path": "src/NovaCore.Simulation/Celestial/CelestialBodyOrientation.cs",
+      "sha256": "D580F57F701C3B17128098A99D930EA71CAC726AA52797D5F138CC2DD1410989"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/CelestialSystemEvaluator.cs",
+      "sha256": "23821C049F43BB4DEA43191F4641830514AE15EF2CA5DE41C45545EE76F4D8FE"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/EarthPhysicalEventEvaluation.cs",
+      "sha256": "61D89CAC9B6EC68C4C62D66DCB6CAF13D2FE0E07BBBCEC6C110531A7214582FC"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/EarthPhysicalEventOrientation.cs",
+      "sha256": "0E76988E51C52EE96F32D2FA2BE6D5953BAC045F7EAF96D8D8F35628DC5B4673"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/SpacecraftPhysicalEventObservation.cs",
+      "sha256": "224BE2AE9DE524FFA1031B3797D4C349C6933263646CE1AB317E7766ABB0CD18"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "sha256": "5D42CC32306BA1DFC225C8964A2E22D5C26ECEA3200157E78267EAC4155D8AD0"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/EarthRelativeObservationTests.cs",
+      "sha256": "96A1CEFEA54EB24633E970E61A1D7B0825CCFC877B4F3C0D7C271EB9BCA06363"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/Program.cs",
+      "sha256": "5A52201C75A6B0A890FE4DA68065D1AB3BBCC5B957EE46952FDAAEC420D853A8"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/EarthRelativeObservationProductionTests.cs",
+      "sha256": "DE10F0D6242781B4676A9063534FE529BA2C1475BD82D6656E0028CD0B5729F9"
+    }
+  ],
+  "finalTestAssemblies": [
+    {
+      "path": "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+      "sha256": "AD83521F6D4AE2F2480E4513A85FEBDF1012413A38E43CCA962B7CA2443EB180"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.dll",
+      "sha256": "5786C02D41119483A862FF614B7AED63CF934810B09490A67FF96824F92E4E2D"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "sha256": "8C42222B66539ED757C7D6A6D0A649BC885C4FF825BF01DF152B42BA6F3432D9"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+      "sha256": "C99C0AF646041AD7166666BCB5589E73B6529272003CA5B27A0BF49BDC743B2B"
+    }
+  ]
+}

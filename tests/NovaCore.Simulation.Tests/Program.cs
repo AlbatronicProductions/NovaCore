@@ -15,6 +15,9 @@ using NovaCore.Core;
 using NovaCore.Core.ReferenceFrames;
 using System.Diagnostics;
 
+if (args.Contains("--earth-event-only", StringComparer.Ordinal)) { EarthRelativeObservationTests.Run(); return; }
+if (args.Contains("--earth-event-allocation", StringComparer.Ordinal)) { EarthRelativeObservationTests.Allocation(); return; }
+if (args.Contains("--earth-event-performance", StringComparer.Ordinal)) { EarthRelativeObservationTests.Performance(); return; }
 if (args.Contains("--orchestration-only", StringComparer.Ordinal)) { ClockExecutionTests(); return; }
 if (args.Contains("--ordinary-allocation-control", StringComparer.Ordinal)) { OrdinaryAllocationMeasurement.PositiveControl(); return; }
 if (args.Contains("--ordinary-allocation-helper", StringComparer.Ordinal)) { CanonicalGroupTests(); OrdinaryAllocationMeasurement.PositiveControl(); return; }
@@ -82,6 +85,7 @@ var tests = new (string Name, Action Test)[]
     ("Celestial impulse events", CelestialImpulseEventTests),
     ("Allocation", AllocationTests),
     ("Exact-event spacecraft motion", SpacecraftPhysicalEventMotionTests.Run),
+    ("Exact-event Earth-relative observation", EarthRelativeObservationTests.Run),
 };
 foreach (var (name, test) in tests) { test(); Console.WriteLine($"PASS {name}"); }
 

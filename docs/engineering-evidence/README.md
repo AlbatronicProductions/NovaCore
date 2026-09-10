@@ -8,6 +8,7 @@ records its investigation stage. Follow subsequent accepted conclusions.
 
 | Family | Continuing value | Read the conclusion first |
 |---|---|---|
+| [Unbanked exact-event Earth-relative observation](exact-event-earth-relative-observation/README.md) | Same-epoch Earth/craft numerical composition, Earth-only model boundary, canonical parity, real terrain, allocation and bounded performance. | [Candidate contract](../spacecraft-earth-event-observation.md). |
 | [M14.7 banked exact-event motion](m14.7-closeout/README.md) | Unchanged canonical mechanisms, fractional sidecars, numerical/reference validation, historical allocation witnesses and retirement provenance. | [Contract](../spacecraft-physical-event-motion.md); [timed-family qualification](timed-measurement-split/README.md): fresh Release 5/5 and bounded performance. |
 | [M14.2 banked spacecraft translation](spacecraft-translation/README.md) | Physical/time/frame contracts, numerical/replay validation, source identity, KSA ownership, bounded performance and the resolved allocation-accounting closeout. | [Translation contract](../spacecraft-translation.md). |
 | [M14.3 contact generation](contact-generation/README.md) | Authored feature identity, exact-time geometry/velocity, canonical readiness, numerical/replay proof and bounded query-inclusive CPU cost. | [Contact contract](../contact-generation.md). |

@@ -133,10 +133,11 @@ is the concise performance checkpoint. Historical LiveKernelEvent 141 remains
 
 ## Next architectural decision and work boundary
 
-M13 is closed at M13.6; M14 remains open with M14.1–M14.7 banked. There is no
-next milestone assignment or unbanked production candidate. Project Control must
-choose the next responsibility. Do not start implementation from a provisional
-research ranking or treat this documentation correction as engineering authority.
+M13 is closed at M13.6; M14 remains open with M14.1–M14.7 banked. The authorized
+[exact-event Earth-relative observation](spacecraft-earth-event-observation.md)
+candidate is **UNBANKED** on `codex/exact-event-earth-relative-observation`.
+No next milestone number is assigned. Return the candidate to Project Control;
+do not start discovery, contact execution or support from a provisional ranking.
 
 - Preserve banked M13.1–M13.6 outcomes and future tessellation/displacement capacity.
 - Historical exact-copy, residual-validation and lifecycle experiments are evidence,
