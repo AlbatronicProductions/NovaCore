@@ -1,0 +1,54 @@
+[
+  {
+    "Label": "build-Debug",
+    "PID": 32740,
+    "StartUTC": "2026-09-10T01:58:16.5555659Z",
+    "ExitCode": 0,
+    "Arguments": [
+      "build",
+      "NovaCore.sln",
+      "-c",
+      "Debug",
+      "--nologo"
+    ],
+    "ElapsedSeconds": 8.6528062,
+    "Status": "PASS"
+  },
+  {
+    "Label": "build-Release",
+    "PID": 37912,
+    "StartUTC": "2026-09-10T01:58:25.2204027Z",
+    "ExitCode": 0,
+    "Arguments": [
+      "build",
+      "NovaCore.sln",
+      "-c",
+      "Release",
+      "--nologo"
+    ],
+    "ElapsedSeconds": 7.0056119,
+    "Status": "PASS"
+  },
+  {
+    "Label": "full-Debug-1",
+    "PID": 47032,
+    "StartUTC": "2026-09-10T01:58:32.2294537Z",
+    "ExitCode": 0,
+    "Arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll"
+    ],
+    "ElapsedSeconds": 6.5325309,
+    "Status": "PASS"
+  },
+  {
+    "Label": "full-Debug-2",
+    "PID": 20720,
+    "StartUTC": "2026-09-10T01:59:20.0187429Z",
+    "ExitCode": -532462766,
+    "Arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll"
+    ],
+    "ElapsedSeconds": 2.0473873,
+    "Status": "FAIL"
+  }
+]

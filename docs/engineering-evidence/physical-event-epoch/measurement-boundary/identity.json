@@ -1,0 +1,34 @@
+{
+  "HEAD": "b53d48025cfb8142cb32a6fc6fceb6018e33cfcd",
+  "Main": "b53d48025cfb8142cb32a6fc6fceb6018e33cfcd",
+  "OriginMain": "b53d48025cfb8142cb32a6fc6fceb6018e33cfcd",
+  "Branch": "codex/physical-event-epoch",
+  "Tags": [
+    "m14.1-canonical-surface-point-queries 3ccb998031e15cb1898394589c27244d55e06e24 5b9b02ab1d2ba0e903809510908e4819984d4de2",
+    "m14.2-spacecraft-translational-authority ae2f203b97224ff88b38b7c68902ac2d31108a91 caa6d93ccd7c4e5924381e077a62585f99e5a32a",
+    "m14.3-spacecraft-terrain-contact-observations b9ad79c38b322c8e1e095039d5b69c035a1bcca8 79978cf8b0fd783d43a661df6df53a2c0202af4a",
+    "m14.4-atomic-contact-response b198d3b381ba4a82577ba89bd5e31e6050d3a896 28b92f724f8decd3c9356aa5f9f5bbd6c9dd069c",
+    "m14.5-isolated-analytical-contact-response c2964fe4531b8e383d2d89beec2e8c055f3541a5 b53d48025cfb8142cb32a6fc6fceb6018e33cfcd"
+  ],
+  "ProductionFilesChecked": 210,
+  "ProductionDrift": [],
+  "OtherStartingCandidateDrift": [],
+  "CandidateProductionFingerprints": [
+    {
+      "Path": "src\\NovaCore.Simulation\\Time\\PhysicalEventEpoch.cs",
+      "SHA256": "0F4923E14C9370F18A0F77C73B6BCA88CB51E6D56EDC7D632D596ABC326DF3C2"
+    },
+    {
+      "Path": "src\\NovaCore.Simulation\\Timeline\\PhysicalEventOrderKey.cs",
+      "SHA256": "C65C540656C553610DC8ABC36D26967EA874A682E0E1D67E4EFA8374239C6FCF"
+    },
+    {
+      "Path": "src\\NovaCore.Simulation\\Timeline\\SimulationEventHeaderComparer.cs",
+      "SHA256": "0C5F4A0957EBCF2528243909BC0372CBA8C3084337051F295D5AE24863135D65"
+    }
+  ],
+  "EpochTestSHA256": "F601C9A61E76C16F82BCE9761431805CA7890A531897D54FE3912F42F6AB003D",
+  "ProgramBeforeSHA256": "872B9E2D2AB58CBAF7F573F0D916ACEB2DCD0BB72649D8B105D65DD59EC1C11C",
+  "ProgramAfterSHA256": "391893BEEB9E8B2361EFF81EE333756A46AD8E1740930FC0848911B278DD9E8C",
+  "StagedPaths": []
+}

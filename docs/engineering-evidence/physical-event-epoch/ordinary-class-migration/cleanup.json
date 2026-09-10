@@ -1,0 +1,74 @@
+[
+  {
+    "Path": "E:\\NovaCore\\.codex\\physical-epoch-gate",
+    "Purpose": "earlier failure controls",
+    "Files": 361,
+    "Bytes": 38126642,
+    "TrackedFiles": 0,
+    "ReparsePoints": 0,
+    "Disposition": "Disposable; manual cleanup only after technical acceptance"
+  },
+  {
+    "Path": "E:\\NovaCore\\.codex\\physical-epoch-matched-ab",
+    "Purpose": "matched full-suite comparison builds",
+    "Files": 550,
+    "Bytes": 42878848,
+    "TrackedFiles": 0,
+    "ReparsePoints": 0,
+    "Disposition": "Disposable; manual cleanup only after technical acceptance"
+  },
+  {
+    "Path": "E:\\NovaCore\\.codex\\physical-epoch-structural",
+    "Purpose": "epoch-group omission controls",
+    "Files": 306,
+    "Bytes": 30074202,
+    "TrackedFiles": 0,
+    "ReparsePoints": 0,
+    "Disposition": "Disposable; manual cleanup only after technical acceptance"
+  },
+  {
+    "Path": "E:\\NovaCore\\.codex\\physical-epoch-allocation-phase",
+    "Purpose": "Allocation phase omission controls",
+    "Files": 307,
+    "Bytes": 30092394,
+    "TrackedFiles": 0,
+    "ReparsePoints": 0,
+    "Disposition": "Disposable; manual cleanup only after technical acceptance"
+  },
+  {
+    "Path": "E:\\NovaCore\\.codex\\physical-epoch-gc-region",
+    "Purpose": "GC-region omission controls",
+    "Files": 307,
+    "Bytes": 30092806,
+    "TrackedFiles": 0,
+    "ReparsePoints": 0,
+    "Disposition": "Disposable; manual cleanup only after technical acceptance"
+  },
+  {
+    "Path": "E:\\NovaCore\\.codex\\physical-epoch-accounting",
+    "Purpose": "runtime observer copies and accounting scratch",
+    "Files": 305,
+    "Bytes": 22109126,
+    "TrackedFiles": 0,
+    "ReparsePoints": 0,
+    "Disposition": "Disposable; manual cleanup only after technical acceptance"
+  },
+  {
+    "Path": "E:\\NovaCore\\.codex\\physical-epoch-measurement",
+    "Purpose": "prior servicing migration backups and logs",
+    "Files": 19,
+    "Bytes": 307947,
+    "TrackedFiles": 0,
+    "ReparsePoints": 0,
+    "Disposition": "Disposable; manual cleanup only after technical acceptance"
+  },
+  {
+    "Path": "E:\\NovaCore\\.codex\\physical-epoch-small-class",
+    "Purpose": "class migration backups, temporary scripts and raw validation logs",
+    "Files": 90,
+    "Bytes": 645928,
+    "TrackedFiles": 0,
+    "ReparsePoints": 0,
+    "Disposition": "Disposable; manual cleanup only after technical acceptance"
+  }
+]

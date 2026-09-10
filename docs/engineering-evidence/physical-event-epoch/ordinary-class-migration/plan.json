@@ -1,0 +1,25 @@
+{
+  "Builds": [
+    "Debug full solution",
+    "Release full solution"
+  ],
+  "FocusedHelper": [
+    "Debug canonical+control",
+    "Release canonical+control"
+  ],
+  "PositiveControls": {
+    "KnownObject": "byte[128]",
+    "PermanentContract": "nonzero",
+    "Release": 3,
+    "Debug": 3,
+    "ExpectedX64Bytes": 152
+  },
+  "FullSuites": {
+    "Release": 5,
+    "Debug": 5,
+    "FreshProcesses": true
+  },
+  "FocusedCandidateAfterFull": "Epoch, ReferenceFrames, Precision, translation, contact, response, isolated-response in Debug and Release",
+  "Stop": "First actual failure; no retries",
+  "EnvironmentSHA256": "B204C3C0C4F4BF5BD52F35DF5890EEC985DE607F7EF68BC4B17E8E5000BFE336"
+}

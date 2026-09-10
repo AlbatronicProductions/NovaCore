@@ -1,0 +1,44 @@
+[
+  {
+    "File": "ContactGenerationFixture.cs",
+    "PerThreadCalls": 0,
+    "CheckedRegionEntrySites": 0,
+    "RegionExitSites": 0
+  },
+  {
+    "File": "ContactGenerationTests.cs",
+    "PerThreadCalls": 2,
+    "CheckedRegionEntrySites": 1,
+    "RegionExitSites": 1
+  },
+  {
+    "File": "ContactResponseTests.cs",
+    "PerThreadCalls": 6,
+    "CheckedRegionEntrySites": 0,
+    "RegionExitSites": 0
+  },
+  {
+    "File": "IsolatedContactResponseTests.cs",
+    "PerThreadCalls": 4,
+    "CheckedRegionEntrySites": 2,
+    "RegionExitSites": 2
+  },
+  {
+    "File": "PhysicalEventEpochTests.cs",
+    "PerThreadCalls": 2,
+    "CheckedRegionEntrySites": 1,
+    "RegionExitSites": 1
+  },
+  {
+    "File": "Program.cs",
+    "PerThreadCalls": 80,
+    "CheckedRegionEntrySites": 3,
+    "RegionExitSites": 3
+  },
+  {
+    "File": "SpacecraftTranslationTests.cs",
+    "PerThreadCalls": 4,
+    "CheckedRegionEntrySites": 0,
+    "RegionExitSites": 0
+  }
+]

@@ -1,0 +1,34 @@
+[
+  {
+    "Path": "tests\\NovaCore.Simulation.Tests\\ContactGenerationFixture.cs",
+    "SHA256": "19E0696F8C25425CEB03388DF0CFF5DA1F9FA74A0FA0E90CF023D51BE5DAA9F9"
+  },
+  {
+    "Path": "tests\\NovaCore.Simulation.Tests\\ContactGenerationTests.cs",
+    "SHA256": "1361289F656A2D20A388A802AA9419D9497583B6DC16B8D86711DA8354934697"
+  },
+  {
+    "Path": "tests\\NovaCore.Simulation.Tests\\ContactResponseTests.cs",
+    "SHA256": "497E2C4B4ADE2A05B1CA5B9EEB4D5D1C3DA3FCC210A2E07F5554E5EF2C913401"
+  },
+  {
+    "Path": "tests\\NovaCore.Simulation.Tests\\IsolatedContactResponseTests.cs",
+    "SHA256": "85526A9618BEF6A72D51342C38DF9DEC2507520620C04BA4A49C15ECA2046947"
+  },
+  {
+    "Path": "tests\\NovaCore.Simulation.Tests\\NovaCore.Simulation.Tests.csproj",
+    "SHA256": "7EB998A1E382762D7E515693106C72461DCA058FD21E3B58BA4ED7C4949AD616"
+  },
+  {
+    "Path": "tests\\NovaCore.Simulation.Tests\\PhysicalEventEpochTests.cs",
+    "SHA256": "F601C9A61E76C16F82BCE9761431805CA7890A531897D54FE3912F42F6AB003D"
+  },
+  {
+    "Path": "tests\\NovaCore.Simulation.Tests\\Program.cs",
+    "SHA256": "391893BEEB9E8B2361EFF81EE333756A46AD8E1740930FC0848911B278DD9E8C"
+  },
+  {
+    "Path": "tests\\NovaCore.Simulation.Tests\\SpacecraftTranslationTests.cs",
+    "SHA256": "68ECB835DD13D18FE3F250CE040D6DF86E992FE77CC4FB560F808EC9D10699E3"
+  }
+]

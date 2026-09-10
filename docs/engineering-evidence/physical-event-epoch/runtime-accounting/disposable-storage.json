@@ -1,0 +1,32 @@
+[
+  {
+    "Path": "E:/NovaCore/.codex/physical-epoch-gate",
+    "Files": 361,
+    "Bytes": 38126642.0
+  },
+  {
+    "Path": "E:/NovaCore/.codex/physical-epoch-matched-ab",
+    "Files": 550,
+    "Bytes": 42878848.0
+  },
+  {
+    "Path": "E:/NovaCore/.codex/physical-epoch-structural",
+    "Files": 306,
+    "Bytes": 30074202.0
+  },
+  {
+    "Path": "E:/NovaCore/.codex/physical-epoch-allocation-phase",
+    "Files": 307,
+    "Bytes": 30092394.0
+  },
+  {
+    "Path": "E:/NovaCore/.codex/physical-epoch-gc-region",
+    "Files": 307,
+    "Bytes": 30092806.0
+  },
+  {
+    "Path": "E:/NovaCore/.codex/physical-epoch-accounting",
+    "Files": 305,
+    "Bytes": 22109126.0
+  }
+]

@@ -7,10 +7,17 @@ public static class SimulationEventHeaderComparer
     {
         var compare = left.Time.CompareTo(right.Time);
         if (compare != 0) return compare;
-        compare = left.Priority.CompareTo(right.Priority);
+        return CompareEqualTime(left.Priority, left.Sequence, left.Id, right.Priority, right.Sequence, right.Id);
+    }
+
+    // Shared only after exact time equality. The live timeline still compares integral SimulationInstant first.
+    internal static int CompareEqualTime(int leftPriority, SimulationEventSequence leftSequence, SimulationEventId leftId,
+        int rightPriority, SimulationEventSequence rightSequence, SimulationEventId rightId)
+    {
+        var compare = leftPriority.CompareTo(rightPriority);
         if (compare != 0) return compare;
-        compare = left.Sequence.CompareTo(right.Sequence);
-        return compare != 0 ? compare : left.Id.CompareTo(right.Id);
+        compare = leftSequence.CompareTo(rightSequence);
+        return compare != 0 ? compare : leftId.CompareTo(rightId);
     }
 
     public static void ValidateStrictlyOrdered(ReadOnlySpan<SimulationEventHeader> headers)

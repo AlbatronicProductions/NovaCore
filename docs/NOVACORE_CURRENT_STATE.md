@@ -13,9 +13,9 @@ and performs FP64 camera-relative subtraction before GPU transport.
 
 ## Banked production checkpoint
 
-Latest banked accomplishment: **M14.4 — Atomically commit linear and angular
-contact response**, commit `28b92f724f8decd3c9356aa5f9f5bbd6c9dd069c`,
-annotated tag `m14.4-atomic-contact-response`.
+Latest banked accomplishment: **M14.5 — Qualify isolated analytical terrain-contact
+response**, commit `b53d48025cfb8142cb32a6fc6fceb6018e33cfcd`,
+annotated tag `m14.5-isolated-analytical-contact-response`.
 **M14 — Surface Interaction / Launch Foundation remains OPEN.**
 
 M14.1 remains banked at `5b9b02ab1d2ba0e903809510908e4819984d4de2`, tag
@@ -36,14 +36,23 @@ and one coupled physical history. Rejection changes neither half. The bounded
 timeline-owned typed arena retains 112-byte reference-free generic events.
 See the [response contract](contact-response-transaction.md).
 
-**Unbanked candidate:** [minimal analytical contact response policy](isolated-contact-response.md)
-on `codex/minimal-contact-response`. A generator-issued, single-feature receipt
+**Banked M14.5:** [minimal analytical contact response policy](isolated-contact-response.md).
+A generator-issued, single-feature receipt
 is requalified without another terrain query; an eligible isolated approach
 produces the existing M14.4 impulse intent. Admission requires represented
 canonical radial gap exactly zero. Positive gaps receive no response; negative
 gaps require unsupported recovery. This is a supplied-instant policy, not impact
 discovery, friction, persistent support, grounding, finite collision or landing.
 No visible route uses it. [Validation and reproduction](engineering-evidence/isolated-contact-response/README.md).
+**Unbanked candidate:** [internal exact physical-event epochs](physical-event-epochs.md)
+on `codex/physical-event-epoch`. Canonical and reduced rational identity/order are
+internal; public time, live scheduling and M14.5 admission remain unchanged. No
+event-local execution or automatic contact is implemented. Focused gates pass,
+but full Simulation acceptance remains blocked by long-duration servicing.
+Bounded follow-up isolated a full Debug allocation-counter delta of 8,160 bytes;
+clock/debt/count/completion checks passed. Five isolated runs per configuration
+passed, as did a banked M14.5 control. Candidate causality remains unproven;
+[follow-up is required](engineering-evidence/physical-event-epoch/debt-gate-classification.md).
 M14 remains open; no next milestone number or banking is assigned.
 
 ### Closed M13 renderer baseline

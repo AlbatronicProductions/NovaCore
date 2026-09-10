@@ -1,8 +1,8 @@
 # Isolated analytical contact response
 
-**Unbanked candidate** on `codex/minimal-contact-response`, based on banked M14.4
-`28b92f724f8decd3c9356aa5f9f5bbd6c9dd069c`. M14 remains open. No new milestone
-number is assigned. [Validation/provenance](engineering-evidence/isolated-contact-response/README.md).
+**Banked M14.5**, commit `b53d48025cfb8142cb32a6fc6fceb6018e33cfcd`, tag
+`m14.5-isolated-analytical-contact-response`. M14 remains open.
+[Validation/provenance](engineering-evidence/isolated-contact-response/README.md).
 
 ## Responsibility and supported geometry
 

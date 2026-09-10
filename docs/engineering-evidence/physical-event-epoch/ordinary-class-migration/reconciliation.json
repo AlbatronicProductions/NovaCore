@@ -1,0 +1,281 @@
+[
+  {
+    "Id": 1,
+    "Gate": "Speed preset access",
+    "File": "Program.cs",
+    "Method": "SolarUtcAndSpeedPresetTests",
+    "Migrated": true,
+    "WorkloadExact": true,
+    "Reason": "Audited B window; checked helper; original measured body exact"
+  },
+  {
+    "Id": 3,
+    "Gate": "Timeline topology",
+    "File": "Program.cs",
+    "Method": "TimelineTopologyTests",
+    "Migrated": true,
+    "WorkloadExact": true,
+    "Reason": "Audited B window; checked helper; original measured body exact"
+  },
+  {
+    "Id": 4,
+    "Gate": "Clock steady state",
+    "File": "Program.cs",
+    "Method": "ClockTests",
+    "Migrated": true,
+    "WorkloadExact": true,
+    "Reason": "Audited B window; checked helper; original measured body exact"
+  },
+  {
+    "Id": 5,
+    "Gate": "Host conversion",
+    "File": "Program.cs",
+    "Method": "HostDurationTests",
+    "Migrated": true,
+    "WorkloadExact": true,
+    "Reason": "Audited B window; checked helper; original measured body exact"
+  },
+  {
+    "Id": 6,
+    "Gate": "Single debt service",
+    "File": "Program.cs",
+    "Method": "HostDurationDebtServiceTests",
+    "Migrated": true,
+    "WorkloadExact": true,
+    "Reason": "Audited B window; checked helper; original measured body exact"
+  },
+  {
+    "Id": 8,
+    "Gate": "Per-event transaction",
+    "File": "Program.cs",
+    "Method": "TransactionTests",
+    "Migrated": true,
+    "WorkloadExact": true,
+    "Reason": "Audited B window; checked helper; original measured body exact"
+  },
+  {
+    "Id": 9,
+    "Gate": "Canonical group",
+    "File": "Program.cs",
+    "Method": "CanonicalGroupTests",
+    "Migrated": true,
+    "WorkloadExact": true,
+    "Reason": "Audited B window; checked helper; original measured body exact"
+  },
+  {
+    "Id": 11,
+    "Gate": "Celestial store",
+    "File": "Program.cs",
+    "Method": "CelestialContractTests",
+    "Migrated": true,
+    "WorkloadExact": true,
+    "Reason": "Audited B window; checked helper; original measured body exact"
+  },
+  {
+    "Id": 12,
+    "Gate": "System definitions",
+    "File": "Program.cs",
+    "Method": "CelestialSystemDefinitionTests",
+    "Migrated": true,
+    "WorkloadExact": true,
+    "Reason": "Audited B window; checked helper; original measured body exact"
+  },
+  {
+    "Id": 13,
+    "Gate": "Body catalog",
+    "File": "Program.cs",
+    "Method": "CelestialBodyCatalogTests",
+    "Migrated": true,
+    "WorkloadExact": true,
+    "Reason": "Audited B window; checked helper; original measured body exact"
+  },
+  {
+    "Id": 14,
+    "Gate": "SolAnalytical warm evaluation",
+    "File": "Program.cs",
+    "Method": "SolAnalyticalDatasetTests",
+    "Migrated": true,
+    "WorkloadExact": true,
+    "Reason": "Audited B window; checked helper; original measured body exact"
+  },
+  {
+    "Id": 15,
+    "Gate": "System time mapping",
+    "File": "Program.cs",
+    "Method": "CelestialSystemTimeAndProvenanceTests",
+    "Migrated": true,
+    "WorkloadExact": true,
+    "Reason": "Audited B window; checked helper; original measured body exact"
+  },
+  {
+    "Id": 16,
+    "Gate": "Ephemeris catalog",
+    "File": "Program.cs",
+    "Method": "CelestialEphemerisCatalogTests",
+    "Migrated": true,
+    "WorkloadExact": true,
+    "Reason": "Audited B window; checked helper; original measured body exact"
+  },
+  {
+    "Id": 17,
+    "Gate": "Sampled evaluation",
+    "File": "Program.cs",
+    "Method": "CelestialSystemEvaluationTests",
+    "Migrated": true,
+    "WorkloadExact": true,
+    "Reason": "Audited B window; checked helper; original measured body exact"
+  },
+  {
+    "Id": 18,
+    "Gate": "SolMini evaluation",
+    "File": "Program.cs",
+    "Method": "CelestialSystemEvaluationTests",
+    "Migrated": true,
+    "WorkloadExact": true,
+    "Reason": "Audited B window; checked helper; original measured body exact"
+  },
+  {
+    "Id": 23,
+    "Gate": "Propagation adapter/refusal",
+    "File": "Program.cs",
+    "Method": "TwoBodyPropagationTests",
+    "Migrated": true,
+    "WorkloadExact": true,
+    "Reason": "Audited B window; checked helper; original measured body exact"
+  },
+  {
+    "Id": 24,
+    "Gate": "Spacecraft attitude",
+    "File": "Program.cs",
+    "Method": "SpacecraftAttitudeTests",
+    "Migrated": true,
+    "WorkloadExact": true,
+    "Reason": "Audited B window; checked helper; original measured body exact"
+  },
+  {
+    "Id": 25,
+    "Gate": "Spacecraft translation",
+    "File": "SpacecraftTranslationTests.cs",
+    "Method": "Allocations",
+    "Migrated": true,
+    "WorkloadExact": true,
+    "Reason": "Audited B window; checked helper; original measured body exact"
+  },
+  {
+    "Id": 27,
+    "Gate": "Atomic contact response",
+    "File": "ContactResponseTests.cs",
+    "Method": "Allocations",
+    "Migrated": true,
+    "WorkloadExact": true,
+    "Reason": "Audited B window; checked helper; original measured body exact"
+  },
+  {
+    "Id": 29,
+    "Gate": "Attitude integration",
+    "File": "Program.cs",
+    "Method": "SpacecraftAttitudeIntegrationTests",
+    "Migrated": true,
+    "WorkloadExact": true,
+    "Reason": "Audited B window; checked helper; original measured body exact"
+  },
+  {
+    "Id": 30,
+    "Gate": "Rigid rotation",
+    "File": "Program.cs",
+    "Method": "RigidBodyRotationTests",
+    "Migrated": true,
+    "WorkloadExact": true,
+    "Reason": "Audited B window; checked helper; original measured body exact"
+  },
+  {
+    "Id": 31,
+    "Gate": "Torque transaction lookup",
+    "File": "Program.cs",
+    "Method": "RigidBodyTorqueTransactionTests",
+    "Migrated": true,
+    "WorkloadExact": true,
+    "Reason": "Audited B window; checked helper; original measured body exact"
+  },
+  {
+    "Id": 32,
+    "Gate": "Guidance",
+    "File": "Program.cs",
+    "Method": "FlightReferenceAndSasTests",
+    "Migrated": true,
+    "WorkloadExact": true,
+    "Reason": "Audited B window; checked helper; original measured body exact"
+  },
+  {
+    "Id": 33,
+    "Gate": "SAS sign/frame proof",
+    "File": "Program.cs",
+    "Method": "SasSignFrameContinuityProofTests",
+    "Migrated": true,
+    "WorkloadExact": true,
+    "Reason": "Audited B window; checked helper; original measured body exact"
+  },
+  {
+    "Id": 34,
+    "Gate": "Orbit sampling",
+    "File": "Program.cs",
+    "Method": "AnalyticalOrbitSamplingTests",
+    "Migrated": true,
+    "WorkloadExact": true,
+    "Reason": "Audited B window; checked helper; original measured body exact"
+  },
+  {
+    "Id": 35,
+    "Gate": "Celestial frame extraction",
+    "File": "Program.cs",
+    "Method": "CelestialFrameExtractionTests",
+    "Migrated": true,
+    "WorkloadExact": true,
+    "Reason": "Audited B window; checked helper; original measured body exact"
+  },
+  {
+    "Id": 36,
+    "Gate": "Trajectory candidate creation",
+    "File": "Program.cs",
+    "Method": "CelestialTrajectoryReplacementTests",
+    "Migrated": true,
+    "WorkloadExact": true,
+    "Reason": "Audited B window; checked helper; original measured body exact"
+  },
+  {
+    "Id": 37,
+    "Gate": "Trajectory commit",
+    "File": "Program.cs",
+    "Method": "CelestialTrajectoryReplacementTests",
+    "Migrated": true,
+    "WorkloadExact": true,
+    "Reason": "Audited B window; checked helper; original measured body exact"
+  },
+  {
+    "Id": 38,
+    "Gate": "Impulse evaluation",
+    "File": "Program.cs",
+    "Method": "CelestialImpulseEventTests",
+    "Migrated": true,
+    "WorkloadExact": true,
+    "Reason": "Audited B window; checked helper; original measured body exact"
+  },
+  {
+    "Id": 39,
+    "Gate": "Impulse commit",
+    "File": "Program.cs",
+    "Method": "CelestialImpulseEventTests",
+    "Migrated": true,
+    "WorkloadExact": true,
+    "Reason": "Audited B window; checked helper; original measured body exact"
+  },
+  {
+    "Id": 40,
+    "Gate": "Integral arithmetic/order",
+    "File": "Program.cs",
+    "Method": "AllocationTests",
+    "Migrated": true,
+    "WorkloadExact": true,
+    "Reason": "Audited B window; checked helper; original measured body exact"
+  }
+]

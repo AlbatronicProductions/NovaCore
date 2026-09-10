@@ -272,14 +272,14 @@ internal static class SpacecraftTranslationTests
     {
         var fixture = Fixture(); var view = fixture.Engine.State; var time = SimulationInstant.FromWholeSeconds(8);
         for (var i = 0; i < 20_000; i++) SpacecraftMotionEvaluator.TryEvaluate(view, Craft, time, out _);
-        var before = GC.GetAllocatedBytesForCurrentThread(); double checksum = 0;
+        using var ordinary25 = new OrdinaryAllocationMeasurement("spacecraft-translation"); double checksum = 0;
         for (var i = 0; i < 100_000; i++)
         {
             var evaluated = Evaluate(Initial, new(i)); checksum += evaluated.PositionRoot.X;
             SpacecraftMotionEvaluator.TryEvaluate(view, Craft, time, out var motion); checksum += motion.PositionRoot.X;
         }
-        var bytes = GC.GetAllocatedBytesForCurrentThread() - before;
-        Check(bytes == 0 && checksum > 0, "warmed pure and coherent evaluation allocate zero");
+        var bytes = ordinary25.Complete();
+        OrdinaryAllocationMeasurement.RequireZero(bytes, "spacecraft-translation"); Check(checksum > 0, "spacecraft-translation: original non-allocation predicate (checksum > 0)");
         Console.WriteLine($"Translation warmed allocation: {bytes} bytes / 100000 linear + coherent evaluations");
     }
 

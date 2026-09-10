@@ -1,0 +1,118 @@
+[
+  {
+    "Path": "docs/CODEX_HANDOFF.md",
+    "SHA256": "03457692AFC8D6DE138EAFF03E13B2DEBDF12D6ECE53968E560C04F9CDAEDFEB"
+  },
+  {
+    "Path": "docs/NOVACORE_CURRENT_STATE.md",
+    "SHA256": "370D11F4E29F9D352505F0B2FC69D9E8A93BC82A4E57DA2C44CB5B5B0F3F9956"
+  },
+  {
+    "Path": "docs/engineering-evidence/README.md",
+    "SHA256": "18C51EF0E99F262EA87000B668907B2C28C1C453C04CA7966CD835C62B303BA4"
+  },
+  {
+    "Path": "docs/isolated-contact-response.md",
+    "SHA256": "074367F429B0316BFD5083F2191883A66724A774180CDA81804918C628F6E213"
+  },
+  {
+    "Path": "docs/simulation-time.md",
+    "SHA256": "5254593C68188060733C2116AEAC4994BA65AAFBC11A49DA5D1AF99760272B99"
+  },
+  {
+    "Path": "src/NovaCore.Simulation/Timeline/SimulationEventHeaderComparer.cs",
+    "SHA256": "0C5F4A0957EBCF2528243909BC0372CBA8C3084337051F295D5AE24863135D65"
+  },
+  {
+    "Path": "tests/NovaCore.Simulation.Tests/Program.cs",
+    "SHA256": "872B9E2D2AB58CBAF7F573F0D916ACEB2DCD0BB72649D8B105D65DD59EC1C11C"
+  },
+  {
+    "Path": "docs/engineering-evidence/physical-event-epoch/README.md",
+    "SHA256": "03208399CC42C13B146C754C7532DEF3FFE443A06BA8055F8187DAF22D374967"
+  },
+  {
+    "Path": "docs/engineering-evidence/physical-event-epoch/allocation-phase/README.md",
+    "SHA256": "F903DF7AD8C6F3B571F014D91DF58AEB086A11F52122104FC6052F119A9C25C4"
+  },
+  {
+    "Path": "docs/engineering-evidence/physical-event-epoch/allocation-phase/matrix.json",
+    "SHA256": "F60723697DC78536DC84C8A797D788A5E916831F2FE32EFD92C212CFA4F8E233"
+  },
+  {
+    "Path": "docs/engineering-evidence/physical-event-epoch/allocation-phase/phase-omission.patch",
+    "SHA256": "413EDD6E7FA7C6EFA2109929A41A9A67795F30F34C745F67470BE5C4EFA13927"
+  },
+  {
+    "Path": "docs/engineering-evidence/physical-event-epoch/allocation-phase/preflight.json",
+    "SHA256": "E4E1686AEA556A55B8BB6C3C87055537A6E944834093F377920AAF291454818B"
+  },
+  {
+    "Path": "docs/engineering-evidence/physical-event-epoch/debt-gate-classification.md",
+    "SHA256": "F060F8723D4CD1098D156C8E45F1D16D82E36C6C10CA2DFA6BFBDD3BBDA6B9A4"
+  },
+  {
+    "Path": "docs/engineering-evidence/physical-event-epoch/debt-gate-reporting.patch",
+    "SHA256": "A87EE2F63415063BA9E34C1238743119075C35388A6F271BC69D5340BB59FECC"
+  },
+  {
+    "Path": "docs/engineering-evidence/physical-event-epoch/gc-region/README.md",
+    "SHA256": "1957F2FB12EB96E8E30FA766FBC86D09936ADC05B22A2FE1F1E69109CB805527"
+  },
+  {
+    "Path": "docs/engineering-evidence/physical-event-epoch/gc-region/gc-region-omission.patch",
+    "SHA256": "C5C83BD03AE3255DAF7736F47B6683EB3CC7703F28A49DA089A51988C29740A3"
+  },
+  {
+    "Path": "docs/engineering-evidence/physical-event-epoch/gc-region/matrix.json",
+    "SHA256": "D89D578AFDA9B520B25BFC7FDFDF1078EB73AA33BEAC1A87075200C79FC42B99"
+  },
+  {
+    "Path": "docs/engineering-evidence/physical-event-epoch/gc-region/preflight.json",
+    "SHA256": "776EEBB83B6E6043D437A22E6016CD253D278049246C6679C57E3CC83ACBDEBD"
+  },
+  {
+    "Path": "docs/engineering-evidence/physical-event-epoch/matched-full-suite-ab/README.md",
+    "SHA256": "BA2456EFDD65648B5FC5223FE832D1D9B7FCB2F410C9659DB257EECE8E57C270"
+  },
+  {
+    "Path": "docs/engineering-evidence/physical-event-epoch/matched-full-suite-ab/matrix.json",
+    "SHA256": "BBBFCEF877891A5AC82006BC9BD4A8D32131371698851EE6645E11B0F6DEE458"
+  },
+  {
+    "Path": "docs/engineering-evidence/physical-event-epoch/matched-full-suite-ab/preflight.json",
+    "SHA256": "B743C29B4AA636EBAB588AFA65374F9424113C1ED3FE53F752161193305ABC79"
+  },
+  {
+    "Path": "docs/engineering-evidence/physical-event-epoch/structural-omission/README.md",
+    "SHA256": "107125142A15DEC2A3D503EA03DFA2BB7A5085A58A12676B0EE213DEFDD17207"
+  },
+  {
+    "Path": "docs/engineering-evidence/physical-event-epoch/structural-omission/matrix.json",
+    "SHA256": "A3891617A3A69AE8B5AFFE1435FBB80FA716A407610F3A82A38735A043674BE2"
+  },
+  {
+    "Path": "docs/engineering-evidence/physical-event-epoch/structural-omission/omission-runner.patch",
+    "SHA256": "545B340955A52B489B237D68B77358DB9420E94627734315AA6A167834505208"
+  },
+  {
+    "Path": "docs/engineering-evidence/physical-event-epoch/structural-omission/preflight.json",
+    "SHA256": "A93D7DCF2F28FDB6403D77E24C658DB3906FFAE9F1D77AE41E57D791C8569DC1"
+  },
+  {
+    "Path": "docs/physical-event-epochs.md",
+    "SHA256": "E0049A07ADA903530FBC59608848FCAB7785CDB84974519B9E1C7B4470637AEC"
+  },
+  {
+    "Path": "src/NovaCore.Simulation/Time/PhysicalEventEpoch.cs",
+    "SHA256": "0F4923E14C9370F18A0F77C73B6BCA88CB51E6D56EDC7D632D596ABC326DF3C2"
+  },
+  {
+    "Path": "src/NovaCore.Simulation/Timeline/PhysicalEventOrderKey.cs",
+    "SHA256": "C65C540656C553610DC8ABC36D26967EA874A682E0E1D67E4EFA8374239C6FCF"
+  },
+  {
+    "Path": "tests/NovaCore.Simulation.Tests/PhysicalEventEpochTests.cs",
+    "SHA256": "F601C9A61E76C16F82BCE9761431805CA7890A531897D54FE3912F42F6AB003D"
+  }
+]

@@ -16,6 +16,11 @@ using NovaCore.Core.ReferenceFrames;
 using System.Diagnostics;
 
 if (args.Contains("--orchestration-only", StringComparer.Ordinal)) { ClockExecutionTests(); return; }
+if (args.Contains("--ordinary-allocation-control", StringComparer.Ordinal)) { OrdinaryAllocationMeasurement.PositiveControl(); return; }
+if (args.Contains("--ordinary-allocation-helper", StringComparer.Ordinal)) { CanonicalGroupTests(); OrdinaryAllocationMeasurement.PositiveControl(); return; }
+if (args.Contains("--servicing-allocation-control", StringComparer.Ordinal)) { ServicingAllocationControl(); return; }
+if (args.Contains("--physical-event-epoch-only", StringComparer.Ordinal)) { PhysicalEventEpochTests.Run(); return; }
+if (args.Contains("--physical-event-epoch-performance", StringComparer.Ordinal)) { PhysicalEventEpochTests.Performance(); return; }
 
 if (args.Contains("--translation-only", StringComparer.Ordinal)) { SpacecraftTranslationTests.Run(); return; }
 if (args.Contains("--contact-only", StringComparer.Ordinal)) { ContactGenerationTests.Run(); return; }
@@ -39,6 +44,7 @@ var tests = new (string Name, Action Test)[]
     ("SimulationRate", RateTests),
     ("Solar UTC and speed presets", SolarUtcAndSpeedPresetTests),
     ("Event ordering", EventOrderingTests),
+    ("Internal physical-event epochs", PhysicalEventEpochTests.Run),
     ("Timeline topology", TimelineTopologyTests),
     ("Simulation clock", ClockTests),
     ("Host-duration conversion", HostDurationTests),
@@ -100,7 +106,7 @@ static void SolarUtcAndSpeedPresetTests()
         for(var body=0;body<CelestialBodyOrientationEvaluator.SupportedBodyCount;body++){var id=CelestialBodyOrientationEvaluator.GetSource(body).BodyId;Check(CelestialBodyOrientationEvaluator.TryEvaluate(id,clock.CurrentTime,out var viaOrientation)&&CelestialBodyOrientationEvaluator.TryEvaluate(id,target,out var directOrientation)&&viaOrientation==directOrientation,$"all-body direct orientation parity {rate} body {id.Value}");}
     }
 
-    _=SimulationSpeedPresets.Get(0);var before=GC.GetAllocatedBytesForCurrentThread();long checksum=0;for(var pass=0;pass<100_000;pass++){var preset=SimulationSpeedPresets.Get(pass%SimulationSpeedPresets.Count);checksum^=preset.Rate.Numerator+preset.Label.Length;}var allocated=GC.GetAllocatedBytesForCurrentThread()-before;Check(allocated==0&&checksum!=long.MinValue,"warmed speed-preset access allocates zero bytes");
+    _=SimulationSpeedPresets.Get(0);using var ordinary1 = new OrdinaryAllocationMeasurement("speed-presets");long checksum=0;for(var pass=0;pass<100_000;pass++){var preset=SimulationSpeedPresets.Get(pass%SimulationSpeedPresets.Count);checksum^=preset.Rate.Numerator+preset.Label.Length;}var allocated=ordinary1.Complete();OrdinaryAllocationMeasurement.RequireZero(allocated, "speed-presets"); Check(checksum!=long.MinValue, "speed-presets: original non-allocation predicate (checksum!=long.MinValue)");
     Console.WriteLine($"Solar UTC: J2000 UTC-noon ET ticks={j2000UtcNoon.Ticks}; fixed startup ticks={startup.Ticks}; max preset={expectedRates[^1].Numerator}x; allocation={allocated} bytes");
 }
 
@@ -166,14 +172,14 @@ static void SpacecraftAttitudeTests()
     var longDuration = SpacecraftAttitudeEvaluator.TryEvaluate(zSpin, new SimulationInstant(SpacecraftAttitudeEvaluator.MaximumEvaluationTicks)); Check(longDuration.Succeeded && Math.Abs(longDuration.OrientationLocalToParent.LengthSquared - 1d) < 1e-12d, "long-duration normalization stability");
     var overflowingEpoch = new SpacecraftAttitudeState(id, new SimulationInstant(long.MinValue), DoubleQuaternion.Identity, Double3.Zero, SpacecraftAttitudeModel.ConstantBodyAngularVelocityV1); Check(SpacecraftAttitudeEvaluator.TryEvaluate(overflowingEpoch, new SimulationInstant(long.MaxValue)).Status == SpacecraftAttitudeEvaluationStatus.DurationOverflow, "duration subtraction overflow");
     Check(SpacecraftAttitudeEvaluator.TryEvaluate(zSpin, new SimulationInstant(SpacecraftAttitudeEvaluator.MaximumEvaluationTicks + 1)).Status == SpacecraftAttitudeEvaluationStatus.EvaluationSpanExceeded, "duration bound");
-    _ = SpacecraftAttitudeEvaluator.TryEvaluate(zSpin, SimulationInstant.FromWholeSeconds(1)); var before = GC.GetAllocatedBytesForCurrentThread(); ulong hash = 14695981039346656037UL;
+    _ = SpacecraftAttitudeEvaluator.TryEvaluate(zSpin, SimulationInstant.FromWholeSeconds(1)); using var ordinary24 = new OrdinaryAllocationMeasurement("spacecraft-attitude"); ulong hash = 14695981039346656037UL;
     for (var index = 0; index < 100_000; index++)
     {
         var evaluated = SpacecraftAttitudeEvaluator.TryEvaluate(zSpin, new SimulationInstant(index)); Check(evaluated.Succeeded, "warm attitude");
         var orientation = evaluated.OrientationLocalToParent; var basis = SpacecraftAttitudeEvaluator.Forward(orientation);
         hash = Mix(hash, (ulong)evaluated.RequestedTime.Ticks); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(orientation.X)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(orientation.Y)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(orientation.Z)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(orientation.W)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(evaluated.AngularVelocityBody.Z)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(basis.X)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(basis.Y)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(basis.Z));
     }
-    Check(GC.GetAllocatedBytesForCurrentThread() == before, "warm attitude allocation"); Console.WriteLine($"Deterministic spacecraft-attitude hash: 0x{hash:X16}; allocation=0 bytes");
+    OrdinaryAllocationMeasurement.RequireZero(ordinary24.Complete(), "spacecraft-attitude"); Console.WriteLine($"Deterministic spacecraft-attitude hash: 0x{hash:X16}; allocation=0 bytes");
 }
 
 static void SpacecraftAttitudeIntegrationTests()
@@ -194,9 +200,9 @@ static void SpacecraftAttitudeIntegrationTests()
     Check(engine.ValidateAndCommit(transaction).Status == SpacecraftAttitudeTransactionStatus.StateRevisionMismatch, "stale attitude candidate rejection");
     var noOp = SpacecraftAttitudeTransactionEvaluator.TryCreateReplacement(engine.State, clock.CurrentTime, id, replacement); Check(noOp.Status == SpacecraftAttitudeTransactionStatus.ReplacementNoOp, "attitude no-op rejection");
     var mismatch = new SpacecraftAttitudeReplacementTransaction(SimulationInstant.FromWholeSeconds(1), engine.State.Revision, id, replacement, initial); Check(engine.ValidateAndCommit(mismatch).Status == SpacecraftAttitudeTransactionStatus.TimeMismatch, "attitude time mismatch rejection");
-    _ = view.TryGetAttitude(id, out _); var before = GC.GetAllocatedBytesForCurrentThread(); ulong hash = 14695981039346656037UL;
+    _ = view.TryGetAttitude(id, out _); using var ordinary29 = new OrdinaryAllocationMeasurement("attitude-integration"); ulong hash = 14695981039346656037UL;
     for (var index = 0; index < 100_000; index++) { Check(view.TryGetAttitude(id, out var warm), "warm spacecraft lookup"); var evaluated = SpacecraftAttitudeEvaluator.TryEvaluate(warm, new SimulationInstant(index)); Check(evaluated.Succeeded && SpacecraftReferenceFrameEvaluator.TryEvaluate(view, graph, new SimulationInstant(index), evaluations) == SpacecraftReferenceFrameEvaluationStatus.Success, "warm spacecraft evaluation/extraction"); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(evaluated.OrientationLocalToParent.W)); }
-    Check(GC.GetAllocatedBytesForCurrentThread() == before, "warm spacecraft store/evaluation/frame extraction allocation"); Console.WriteLine($"Deterministic spacecraft-attitude integration hash: 0x{hash:X16}; allocation=0 bytes");
+    OrdinaryAllocationMeasurement.RequireZero(ordinary29.Complete(), "attitude-integration"); Console.WriteLine($"Deterministic spacecraft-attitude integration hash: 0x{hash:X16}; allocation=0 bytes");
 }
 
 static void RigidBodyRotationTests()
@@ -213,9 +219,9 @@ static void RigidBodyRotationTests()
     var forward = SpacecraftRigidBodyRotationEvaluator.TryEvaluate(coupled, SimulationInstant.FromWholeSeconds(1)); Check(SpacecraftRigidBodyRotationState.TryCreate(id, SimulationInstant.FromWholeSeconds(1), forward.OrientationLocalToParent, forward.AngularVelocityBody, asymmetric, coupled.ConstantBodyTorque, coupled.Model, out var reverseState) == SpacecraftRigidBodyRotationEvaluationStatus.Success, "reverse state"); var backward = SpacecraftRigidBodyRotationEvaluator.TryEvaluate(reverseState, SimulationInstant.Zero); Check(backward.Succeeded && Math.Abs(backward.AngularVelocityBody.X-coupled.AngularVelocityBody.X) < 1e-8d, "forward/backward bounded evaluation");
     var remainder = SpacecraftRigidBodyRotationEvaluator.TryEvaluate(xTorque, new SimulationInstant(SpacecraftRigidBodyRotationEvaluator.FullSubstepTicks + 1)); Check(remainder.Succeeded && remainder.SubstepCount == 2, "integer full and remainder steps"); Check(SpacecraftRigidBodyRotationEvaluator.TryEvaluate(xTorque, new SimulationInstant((long)SpacecraftRigidBodyRotationEvaluator.MaximumSubstepCount * SpacecraftRigidBodyRotationEvaluator.FullSubstepTicks + 1)).Status == SpacecraftRigidBodyRotationEvaluationStatus.ExcessiveStepCount, "maximum step boundary");
     Check(SpacecraftRigidBodyRotationState.TryCreate(id, SimulationInstant.Zero, DoubleQuaternion.Identity, Double3.Zero, new PrincipalMomentsOfInertia(0d, 1d, 1d), Double3.Zero, RigidBodyRotationModel.ConstantBodyTorqueV1, out _) == SpacecraftRigidBodyRotationEvaluationStatus.NonPositiveInertia, "invalid inertia"); Check(SpacecraftRigidBodyRotationState.TryCreate(id, SimulationInstant.Zero, DoubleQuaternion.Identity, Double3.Zero, spherical, new Double3(double.NaN, 0d, 0d), RigidBodyRotationModel.ConstantBodyTorqueV1, out _) == SpacecraftRigidBodyRotationEvaluationStatus.NonFiniteTorque, "invalid torque"); Check(SpacecraftRigidBodyRotationState.TryCreate(id, SimulationInstant.Zero, DoubleQuaternion.Identity, Double3.Zero, spherical, Double3.Zero, (RigidBodyRotationModel)99, out _) == SpacecraftRigidBodyRotationEvaluationStatus.UnsupportedModel, "unsupported rigid model");
-    _ = SpacecraftRigidBodyRotationEvaluator.TryEvaluate(coupled, new SimulationInstant(1)); var before = GC.GetAllocatedBytesForCurrentThread(); ulong hash = 14695981039346656037UL;
+    _ = SpacecraftRigidBodyRotationEvaluator.TryEvaluate(coupled, new SimulationInstant(1)); using var ordinary30 = new OrdinaryAllocationMeasurement("rigid-rotation"); ulong hash = 14695981039346656037UL;
     for (var index = 0; index < 100_000; index++) { var result = SpacecraftRigidBodyRotationEvaluator.TryEvaluate(coupled, new SimulationInstant(index % 10)); Check(result.Succeeded, "warm rigid evaluation"); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(result.OrientationLocalToParent.W)); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(result.AngularVelocityBody.X)); hash = Mix(hash, (ulong)result.RequestedTime.Ticks); hash = Mix(hash, (uint)result.SubstepCount); }
-    Check(GC.GetAllocatedBytesForCurrentThread() == before, "warm rigid evaluation allocation"); Console.WriteLine($"Rigid-body rotation: spherical orientation error={sphericalOrientationError:E3}; momentum error={momentumError:E3}; energy error={energyError:E3}; hash=0x{hash:X16}; allocation=0 bytes");
+    OrdinaryAllocationMeasurement.RequireZero(ordinary30.Complete(), "rigid-rotation"); Console.WriteLine($"Rigid-body rotation: spherical orientation error={sphericalOrientationError:E3}; momentum error={momentumError:E3}; energy error={energyError:E3}; hash=0x{hash:X16}; allocation=0 bytes");
 }
 
 static SpacecraftRigidBodyRotationState CreateRigid(SpacecraftId id, PrincipalMomentsOfInertia inertia, Double3 torque, Double3 angularVelocity)
@@ -238,9 +244,9 @@ static void FlightReferenceAndSasTests()
     var damping = SpacecraftSasController.TryEvaluate(DoubleQuaternion.Identity, new Double3(.5, 0, 0), DoubleQuaternion.Identity, inertia, config); Check(damping.RequestedBodyTorque.X < 0d, "rate damping");
     var correction = SpacecraftSasController.TryEvaluate(DoubleQuaternion.Identity, Double3.Zero, DoubleQuaternion.FromAxisAngle(Double3.UnitX, Math.PI), inertia, config); Check(correction.RequestedBodyTorque.X == 1d, "shortest path clamp");
     Check(SpacecraftSasTargetOrientation.CaptureHold(new DoubleQuaternion(0, 0, 0, -1)) == DoubleQuaternion.Identity, "canonical hold capture");
-    _ = SpacecraftSasController.TryEvaluate(DoubleQuaternion.Identity, Double3.Zero, target, inertia, config); var before = GC.GetAllocatedBytesForCurrentThread(); ulong hash = 14695981039346656037UL;
+    _ = SpacecraftSasController.TryEvaluate(DoubleQuaternion.Identity, Double3.Zero, target, inertia, config); using var ordinary32 = new OrdinaryAllocationMeasurement("guidance"); ulong hash = 14695981039346656037UL;
     for (var index = 0; index < 100_000; index++) { var reference = FlightReferenceEvaluator.TryEvaluate(r, v, DoubleQuaternion.Identity, FlightReferenceMode.Prograde); var t = SpacecraftSasTargetOrientation.TryCreate(reference.DirectionCarrierParent, -Double3.UnitZ, out var q); var result = SpacecraftSasController.TryEvaluate(DoubleQuaternion.Identity, Double3.Zero, q, inertia, config); Check(t == SpacecraftSasControlStatus.Success && result.Succeeded, "warm guidance"); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(result.RequestedBodyTorque.X)); }
-    Check(GC.GetAllocatedBytesForCurrentThread() == before, "warm guidance allocation"); Console.WriteLine($"Flight-reference/SAS guidance hash: 0x{hash:X16}; allocation=0 bytes");
+    OrdinaryAllocationMeasurement.RequireZero(ordinary32.Complete(), "guidance"); Console.WriteLine($"Flight-reference/SAS guidance hash: 0x{hash:X16}; allocation=0 bytes");
 }
 
 static void SasSignFrameContinuityProofTests()
@@ -282,7 +288,7 @@ static void SasSignFrameContinuityProofTests()
     Check(parallelJump <= Math.PI / 2d + 1e-6d && fallbackTransitions == 2, "preferred-up singularity has deterministic bounded fallback transitions");
 
     VerifyModeSwitch(FlightReferenceMode.Prograde, FlightReferenceMode.Normal); VerifyModeSwitch(FlightReferenceMode.Normal, FlightReferenceMode.RadialOut); VerifyModeSwitch(FlightReferenceMode.RadialOut, FlightReferenceMode.Retrograde);
-    _ = SpacecraftSasController.TryEvaluate(DoubleQuaternion.Identity, Double3.Zero, equivalent, inertia, correction); var before = GC.GetAllocatedBytesForCurrentThread(); for (var index = 0; index < 100_000; index++) { var result = SpacecraftSasController.TryEvaluate(DoubleQuaternion.Identity, Double3.Zero, equivalent, inertia, correction); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(result.RequestedBodyTorque.Y)); } Check(GC.GetAllocatedBytesForCurrentThread() == before, "warm SAS proof evaluation allocation");
+    _ = SpacecraftSasController.TryEvaluate(DoubleQuaternion.Identity, Double3.Zero, equivalent, inertia, correction); using var ordinary33 = new OrdinaryAllocationMeasurement("sas-proof"); for (var index = 0; index < 100_000; index++) { var result = SpacecraftSasController.TryEvaluate(DoubleQuaternion.Identity, Double3.Zero, equivalent, inertia, correction); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(result.RequestedBodyTorque.Y)); } OrdinaryAllocationMeasurement.RequireZero(ordinary33.Complete(), "sas-proof");
     Console.WriteLine($"SAS sign/frame proof: one-step 90-degree error={QuaternionAngle(ApplyShortStep(DoubleQuaternion.Identity, Double3.Zero, positiveResult.RequestedBodyTorque, inertia).OrientationLocalToParent, equivalent):E6} rad; continuity prograde={progradeJump:E6}, radial={radialJump:E6}, preferred-up={parallelJump:E6} rad; fallback transitions={fallbackTransitions}; hash=0x{hash:X16}; allocation=0 bytes");
 
     void VerifyFullPipeline(FlightReferenceMode mode, in Double3 expected, in DoubleQuaternion current)
@@ -338,9 +344,9 @@ static void RigidBodyTorqueTransactionTests()
     var graphBuilder = new ReferenceFrameGraphBuilder(); graphBuilder.Add(new ReferenceFrameNode(new ReferenceFrameId(1), null, ReferenceFrameKind.Ecl, "root")); graphBuilder.Add(new ReferenceFrameNode(carrier, new ReferenceFrameId(1), ReferenceFrameKind.Cce, "carrier")); graphBuilder.Add(new ReferenceFrameNode(body, carrier, ReferenceFrameKind.Ccf, "body")); var graph = graphBuilder.Build(); var evaluations = new ReferenceFrameEvaluation[3];
     Check(SpacecraftReferenceFrameEvaluator.TryEvaluate(engine.State.Spacecraft, graph, eventTime, evaluations) == SpacecraftReferenceFrameEvaluationStatus.Success && evaluations[2].Value.LocalToParent.Rotation == committed.OrientationLocalToParent, "rigid source frame extraction");
     var stale = new RigidBodyTorqueReplacementTransaction(eventTime, StateRevision.Zero, id, initial, proposed.ReplacementRotation); Check(RigidBodyTorqueTransactionEvaluator.Validate(engine.State, eventTime, id, stale.ExpectedRotation, stale.ReplacementRotation, true) == RigidBodyTorqueTransactionStatus.RotationBasisMismatch, "stale rigid candidate rejection");
-    _ = RigidBodyTorqueTransactionEvaluator.TryCreateReplacement(engine.State, eventTime, id); var before = GC.GetAllocatedBytesForCurrentThread(); ulong hash = 14695981039346656037UL;
+    _ = RigidBodyTorqueTransactionEvaluator.TryCreateReplacement(engine.State, eventTime, id); using var ordinary31 = new OrdinaryAllocationMeasurement("rigid-lookup"); ulong hash = 14695981039346656037UL;
     for (var index = 0; index < 100_000; index++) { Check(engine.State.Spacecraft.TryGetRigidBody(id, out var warm), "warm rigid lookup"); hash = Mix(hash, RigidBodyTorqueTransactionEvaluator.ComputeHash(warm)); }
-    Check(GC.GetAllocatedBytesForCurrentThread() == before, "warm rigid transaction lookup allocation"); Console.WriteLine($"Rigid-body torque transaction hash: 0x{hash:X16}; allocation=0 bytes");
+    OrdinaryAllocationMeasurement.RequireZero(ordinary31.Complete(), "rigid-lookup"); Console.WriteLine($"Rigid-body torque transaction hash: 0x{hash:X16}; allocation=0 bytes");
 }
 
 static void AnalyticalOrbitSamplingTests()
@@ -355,9 +361,9 @@ static void AnalyticalOrbitSamplingTests()
     var repeated = AnalyticalOrbitSampler.TrySample(trajectory, view, samples); Check(repeated == result, "deterministic sampler result");
     Check(AnalyticalOrbitSampler.TrySample(trajectory, view, samples[..256]).Status == AnalyticalOrbitSamplingStatus.DestinationTooSmall, "sampler capacity rejection");
     Check(AnalyticalOrbitSampler.TrySample(trajectory with { Model = 0 }, view, samples).Status == AnalyticalOrbitSamplingStatus.UnsupportedModel, "unsupported sampler model");
-    _ = AnalyticalOrbitSampler.TrySample(trajectory, view, samples); var before = GC.GetAllocatedBytesForCurrentThread(); ulong hash = 14695981039346656037UL;
+    _ = AnalyticalOrbitSampler.TrySample(trajectory, view, samples); using var ordinary34 = new OrdinaryAllocationMeasurement("orbit-sampling"); ulong hash = 14695981039346656037UL;
     for (var index = 0; index < 10_000; index++) { var warm = AnalyticalOrbitSampler.TrySample(trajectory, view, samples); Check(warm.Status == AnalyticalOrbitSamplingStatus.Success, "warm sampling"); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(samples[64].X)); }
-    Check(GC.GetAllocatedBytesForCurrentThread() == before, "warm orbit sampling allocation"); Console.WriteLine($"Analytical orbit sampler: vertices=257; allocation=0 bytes; hash=0x{hash:X16}");
+    OrdinaryAllocationMeasurement.RequireZero(ordinary34.Complete(), "orbit-sampling"); Console.WriteLine($"Analytical orbit sampler: vertices=257; allocation=0 bytes; hash=0x{hash:X16}");
 }
 
 static void DurationTests()
@@ -417,9 +423,10 @@ static void AllocationTests()
 {
     var instant = SimulationInstant.Zero; var duration = new SimulationDuration(1); var rate = new SimulationRate(5, 7); long remainder = 0; var left = Header(1, 0, 0, 1); var right = Header(2, 1, 0, 2);
     _ = instant + duration; rate.TryScale(1, ref remainder, out _); _ = SimulationEventHeaderComparer.Compare(left, right);
-    var before = GC.GetAllocatedBytesForCurrentThread();
+    using var ordinary40 = new OrdinaryAllocationMeasurement("integral-arithmetic");
     for (var index = 0; index < 100_000; index++) { instant += duration; _ = instant - duration; rate.TryScale(13, ref remainder, out _); _ = SimulationEventHeaderComparer.Compare(left, right); }
-    Check(GC.GetAllocatedBytesForCurrentThread() == before, "steady-state arithmetic, scaling, and comparison allocations");
+    OrdinaryAllocationMeasurement.RequireZero(ordinary40.Complete(), "integral-arithmetic");
+    OrdinaryAllocationMeasurement.PositiveControl();
 }
 
 static void CelestialContractTests()
@@ -465,10 +472,10 @@ static void CelestialContractTests()
     CheckStore(new[] { new CelestialBodyDefinition(new CelestialBodyId(1), null, new ReferenceFrameId(1), 1d), new CelestialBodyDefinition(new CelestialBodyId(2), new CelestialBodyId(1), new ReferenceFrameId(2), 1d) }, new[] { CelestialBodyState.Root(new CelestialBodyId(1)), CelestialBodyState.Orbiting(new CelestialBodyId(2), new TwoBodyTrajectory(new CelestialBodyId(1), SimulationInstant.Zero, new CartesianState(Double3.Zero, Double3.Zero), (TwoBodyPropagationModel)99)) }, CelestialStateStoreStatus.InvalidTrajectoryModel, "trajectory model rejection");
     Check(!CelestialStateStore.TryCreate(new[] { new CelestialBodyDefinition(new CelestialBodyId(1), null, new ReferenceFrameId(1), 1d) }, Array.Empty<CelestialBodyState>(), out var failedStore, out var failedStatus) && failedStore is null && failedStatus == CelestialStateStoreStatus.StateCountMismatch, "failed construction publishes no store");
 
-    _ = CelestialContractHash.Compute(view); _ = view.TryGetIndex(new CelestialBodyId(20), out _); var before = GC.GetAllocatedBytesForCurrentThread(); ulong traversal = 0;
+    _ = CelestialContractHash.Compute(view); _ = view.TryGetIndex(new CelestialBodyId(20), out _); using var ordinary11 = new OrdinaryAllocationMeasurement("celestial-store"); ulong traversal = 0;
     for (var iteration = 0; iteration < 100_000; iteration++) { for (var index = 0; index < view.Count; index++) traversal = Mix(traversal, view.GetDefinition(index).Id.Value); Check(view.TryGetIndex(new CelestialBodyId(30), out var lookup) && lookup == 2 && view.GetState(1).Trajectory!.Value.StateAtEpoch.IsFinite, "warm lookup and validation"); traversal = Mix(traversal, CelestialContractHash.Compute(view)); }
-    var allocated = GC.GetAllocatedBytesForCurrentThread() - before;
-    Check(allocated == 0 && traversal != 0, "warmed celestial traversal, lookup, validation, and hashing allocate zero bytes");
+    var allocated = ordinary11.Complete();
+    OrdinaryAllocationMeasurement.RequireZero(allocated, "celestial-store"); Check(traversal != 0, "celestial-store: original non-allocation predicate (traversal != 0)");
     Console.WriteLine($"Warm celestial view traversal and lookup allocations: {allocated} bytes");
 }
 
@@ -508,9 +515,9 @@ static void CelestialSystemDefinitionTests()
     CheckSystem([new CelestialBodyCatalogEntry(new(new(1), "Legacy-1", CelestialBodyClassification.Other, null, default, default, default), new(1d, 0d, 0d, 0d, 0d, default, default, default))], [new CelestialHierarchyNode(new CelestialBodyId(1), new((CelestialTrajectoryModel)99, new(100), 0))], CelestialSystemValidationStatus.InvalidTrajectoryModel, "unsupported trajectory model rejection");
     CheckSystem([new CelestialBodyCatalogEntry(new(new(1), "Legacy-1", CelestialBodyClassification.Other, null, default, default, default), new(1d, 0d, 0d, 0d, 0d, default, default, default))], [new CelestialHierarchyNode(new CelestialBodyId(1), new(CelestialTrajectoryModel.AnalyticalKepler, new(1), 0))], CelestialSystemValidationStatus.RootModelInvalid, "root model rejection");
 
-    _ = CelestialSystemDefinitionHash.Compute(sol); _ = sol.TryGetNode(new CelestialBodyId(3), out _); var before = GC.GetAllocatedBytesForCurrentThread(); ulong traversal = 14695981039346656037UL;
+    _ = CelestialSystemDefinitionHash.Compute(sol); _ = sol.TryGetNode(new CelestialBodyId(3), out _); using var ordinary12 = new OrdinaryAllocationMeasurement("system-definitions"); ulong traversal = 14695981039346656037UL;
     for (var iteration = 0; iteration < 100_000; iteration++) { for (var index = 0; index < sol.Count; index++) traversal = Mix(traversal, sol.GetNodeInTraversalOrder(index).Id.Value); Check(sol.TryGetNode(new CelestialBodyId(3), out var moon) && moon.TrajectoryModel == CelestialTrajectoryModel.AnalyticalKepler, "warm system lookup"); traversal = Mix(traversal, CelestialSystemDefinitionHash.Compute(sol)); }
-    var allocated = GC.GetAllocatedBytesForCurrentThread() - before; Check(allocated == 0 && traversal != 0, "warmed celestial-system traversal, lookup, and hashing allocate zero bytes");
+    var allocated = ordinary12.Complete(); OrdinaryAllocationMeasurement.RequireZero(allocated, "system-definitions"); Check(traversal != 0, "system-definitions: original non-allocation predicate (traversal != 0)");
     Console.WriteLine($"Deterministic celestial-system validation hash: 0x{hash:X16}; warm allocations={allocated} bytes");
 
     static CelestialSystemTimeMapping Mapping() => CelestialSystemTimeMapping.Identity(new(1));
@@ -538,9 +545,9 @@ static void CelestialBodyCatalogTests()
     Check(SolarSystemBodyIds.SolarSystemBarycenter.IsValid && SolarSystemBodyIds.Sun.Value < SolarSystemBodyIds.Neptune.Value, "reserved solar IDs stable");
     var firstHash = CatalogHash(catalog); Check(CelestialBodyCatalog.TryCreate(entries, out var copy, out _) && CatalogHash(copy!) == firstHash, "catalog hash determinism");
     Check(CelestialBodyCatalog.TryCreate([root, child with { PhysicalProperties = child.PhysicalProperties with { MeanRadius = 6_372_000d } }], out var changed, out _) && CatalogHash(changed!) != firstHash, "catalog hash sensitivity");
-    _ = catalog.TryGet(new(701), out _); _ = catalog.TryGetPhysicalProperties(new(701), out _); var before = GC.GetAllocatedBytesForCurrentThread(); ulong checksum = 0;
+    _ = catalog.TryGet(new(701), out _); _ = catalog.TryGetPhysicalProperties(new(701), out _); using var ordinary13 = new OrdinaryAllocationMeasurement("body-catalog"); ulong checksum = 0;
     for (var index = 0; index < 100_000; index++) { Check(catalog.TryGet(new(701), out var body), "warm catalog lookup"); Check(catalog.TryGetPhysicalProperties(new(701), out var props), "warm property lookup"); checksum = Mix(checksum, body.Id.Value ^ (ulong)BitConverter.DoubleToInt64Bits(props.MeanRadius)); }
-    Check(GC.GetAllocatedBytesForCurrentThread() - before == 0 && checksum != 0, "warmed catalog lookup allocation");
+    OrdinaryAllocationMeasurement.RequireZero(ordinary13.Complete(), "body-catalog"); Check(checksum != 0, "body-catalog: original non-allocation predicate (checksum != 0)");
 }
 
 static void SolAnalyticalDatasetTests()
@@ -590,9 +597,9 @@ static void SolAnalyticalDatasetTests()
     Check(Magnitude(earthCenteredMoon) == Magnitude(Root(roots, values, SolarSystemBodyIds.Moon) - Root(roots, values, SolarSystemBodyIds.Earth)) && Approx(Magnitude(earthCenteredSun - earthCenteredMars), Magnitude(Root(roots, values, SolarSystemBodyIds.Sun) - Root(roots, values, SolarSystemBodyIds.Mars)), 1e-12d), "Earth-centered viewing is derived and separation-preserving");
     var continuityTime=SimulationInstant.FromWholeSeconds((long)SolAnalyticalDefinition.JulianYearSeconds);Check(CelestialSystemEvaluator.TryEvaluateSystem(system,continuityTime-new SimulationDuration(1),values,roots,staging,rootStaging).Succeeded,"corrected Moon continuity before instant");var moonBefore=Local(values,SolarSystemBodyIds.Moon);Check(CelestialSystemEvaluator.TryEvaluateSystem(system,continuityTime,values,roots,staging,rootStaging).Succeeded,"corrected Moon continuity at instant");var moonAt=Local(values,SolarSystemBodyIds.Moon);var moonAtHash=CelestialSystemEvaluationHash.Compute(values);Check(CelestialSystemEvaluator.TryEvaluateSystem(system,continuityTime+new SimulationDuration(1),values,roots,staging,rootStaging).Succeeded,"corrected Moon continuity after instant");var moonAfter=Local(values,SolarSystemBodyIds.Moon);Check(Magnitude(moonAt.Position-moonBefore.Position)<.01d&&Magnitude(moonAfter.Position-moonAt.Position)<.01d&&moonBefore.IsFinite&&moonAt.IsFinite&&moonAfter.IsFinite,"corrected Moon microtick continuity");Check(CelestialSystemEvaluator.TryEvaluateSystem(system,continuityTime,values,roots,staging,rootStaging).Succeeded&&CelestialSystemEvaluationHash.Compute(values)==moonAtHash,"corrected Moon repeated evaluation determinism");var earthIndex=Array.FindIndex(values,value=>value.Frame.Value==(long)SolarSystemBodyIds.Earth.Value);var moonIndex=Array.FindIndex(values,value=>value.Frame.Value==(long)SolarSystemBodyIds.Moon.Value);Check(Magnitude((roots[moonIndex].Translation-roots[earthIndex].Translation)-values[moonIndex].Value.LocalToParent.Translation)<1e-4d,"corrected Moon parent-relative root reconstruction");
     var derivativeTime=SimulationInstant.FromWholeSeconds(1234*86_400L);var derivativeStep=SimulationDuration.FromWholeSeconds(1);Check(CelestialSystemEvaluator.TryEvaluateSystem(system,derivativeTime-derivativeStep,values,roots,staging,rootStaging).Succeeded,"periodic derivative before");var derivativeBefore=Local(values,SolarSystemBodyIds.Moon);Check(CelestialSystemEvaluator.TryEvaluateSystem(system,derivativeTime+derivativeStep,values,roots,staging,rootStaging).Succeeded,"periodic derivative after");var derivativeAfter=Local(values,SolarSystemBodyIds.Moon);Check(CelestialSystemEvaluator.TryEvaluateSystem(system,derivativeTime,values,roots,staging,rootStaging).Succeeded,"periodic derivative center");var derivativeCenter=Local(values,SolarSystemBodyIds.Moon);var numericalVelocity=(derivativeAfter.Position-derivativeBefore.Position)/2d;Check(Magnitude(numericalVelocity-derivativeCenter.Velocity)<1e-3d,"periodic analytical velocity matches deterministic central derivative");var jumpTime=SimulationInstant.FromWholeSeconds(10L*365L*86_400L+12345L);Check(CelestialSystemEvaluator.TryEvaluateSystem(system,jumpTime,values,roots,staging,rootStaging).Succeeded,"large direct jump");var jumpHash=CelestialSystemEvaluationHash.Compute(values);Check(CelestialSystemEvaluator.TryEvaluateSystem(system,SimulationInstant.FromWholeSeconds(50_000),values,roots,staging,rootStaging).Succeeded&&CelestialSystemEvaluator.TryEvaluateSystem(system,jumpTime,values,roots,staging,rootStaging).Succeeded&&CelestialSystemEvaluationHash.Compute(values)==jumpHash,"large-time-jump and path independence");
-    _ = CelestialSystemEvaluator.TryEvaluateSystem(system, SimulationInstant.Zero, values, roots, staging, rootStaging); _ = CelestialSystemDefinitionHash.Compute(system); var before = GC.GetAllocatedBytesForCurrentThread(); ulong warm = 0;
+    _ = CelestialSystemEvaluator.TryEvaluateSystem(system, SimulationInstant.Zero, values, roots, staging, rootStaging); _ = CelestialSystemDefinitionHash.Compute(system); using var ordinary14 = new OrdinaryAllocationMeasurement("sol-evaluation"); ulong warm = 0;
     for (var index = 0; index < 100_000; index++) { Check(CelestialSystemEvaluator.TryEvaluateSystem(system, SimulationInstant.Zero, values, roots, staging, rootStaging).Succeeded, "warmed ten-body evaluation"); Check(system.TryGetBody(SolarSystemBodyIds.Earth, out _), "warmed catalog lookup"); warm = Mix(warm, CelestialSystemDefinitionHash.Compute(system)); }
-    var allocated = GC.GetAllocatedBytesForCurrentThread() - before; Check(allocated == 0 && warm != 0, "SolAnalytical warmed allocation");
+    var allocated = ordinary14.Complete(); OrdinaryAllocationMeasurement.RequireZero(allocated, "sol-evaluation"); Check(warm != 0, "sol-evaluation: original non-allocation predicate (warm != 0)");
     Check(CelestialSystemDefinitionHash.Compute(constructed) == definitionHash, "SolAnalytical construction deterministic");
     Console.WriteLine($"SolAnalytical source validation: max position={maximumPositionError:E3} m; max velocity={maximumVelocityError:E3} m/s; max invariant={maximumInvariantError:E3}; direct/generic={directPositionError:E3} m,{directVelocityError:E3} m/s; segmented={segmentedPositionError:E3} m,{segmentedVelocityError:E3} m/s; segments={segments}");
     Console.WriteLine($"SolAnalytical hashes: source=0x{sourceHash:X16}; conversion=0x{conversionHash:X16}; invariants=0x{invariantHash:X16}; definition=0x{definitionHash:X16}; catalog=0x{catalogHash:X16}; trajectories=0x{trajectoryHash:X16}; epoch=0x{epochHash:X16}; EarthMoon=0x{earthMoonHash:X16}; broad=0x{broadHash:X16}; construction={constructionAllocated} bytes; warm allocation={allocated} bytes");
@@ -642,9 +649,9 @@ static void CelestialSystemTimeAndProvenanceTests()
     var hash = CelestialSystemDefinitionHash.Compute(system); Check(hash == 0x52818656D0A49113UL, "explicit time fixture preserves pre-migration hash"); Check(CelestialSystemDefinition.TryCreate(new(400), bodies, nodes, new(SimulationInstant.Zero, new(domain, 0, 1), 1, 1), metadata with { Version = new(9) }, [new(new(2), CelestialTrajectoryModel.FixedBody, metadata with { Version = new(9) } with { Source = new(2) })], [FixedBodyEphemerisPayload.Identity], [], [], out var changed, out _) && CelestialSystemDefinitionHash.Compute(changed!) != hash, "dataset version changes definition hash");
     Check(CelestialSystemDefinition.TryCreate(new(400), bodies, nodes, new(SimulationInstant.Zero, new(domain, 0, 1), 1, 1), metadata with { ContentHash = new(9, 9) }, [new(new(2), CelestialTrajectoryModel.FixedBody, metadata with { ContentHash = new(9, 9) } with { Source = new(2) })], [FixedBodyEphemerisPayload.Identity], [], [], out changed, out _) && CelestialSystemDefinitionHash.Compute(changed!) != hash, "content hash changes definition hash");
     Check(CelestialSystemDefinition.TryCreate(new(400), bodies, nodes, new(SimulationInstant.Zero, new(domain, 0, 1), 1, 1), metadata with { AuthoredModificationHash = new(9, 9), CoordinateFrame = new(9), ConstantsVersion = new(9) }, [new(new(2), CelestialTrajectoryModel.FixedBody, metadata with { AuthoredModificationHash = new(9, 9), CoordinateFrame = new(9), ConstantsVersion = new(9) } with { Source = new(2) })], [FixedBodyEphemerisPayload.Identity], [], [], out changed, out _) && CelestialSystemDefinitionHash.Compute(changed!) != hash, "authored metadata changes definition hash");
-    _ = system.TryMapTime(SimulationInstant.Zero, out _); var allocationBefore = GC.GetAllocatedBytesForCurrentThread(); ulong checksum = 14695981039346656037UL;
+    _ = system.TryMapTime(SimulationInstant.Zero, out _); using var ordinary15 = new OrdinaryAllocationMeasurement("system-time"); ulong checksum = 14695981039346656037UL;
     for (var index = 0; index < 100_000; index++) { Check(system.TryMapTime(new SimulationInstant(index - 50_000), out var value) == CelestialSystemTimeMappingStatus.Success, "warm system mapping"); checksum = Mix(checksum, (ulong)value.WholeDomainTicks); }
-    var allocated = GC.GetAllocatedBytesForCurrentThread() - allocationBefore; Check(allocated == 0 && checksum != 0, "warmed system mapping allocates zero bytes");
+    var allocated = ordinary15.Complete(); OrdinaryAllocationMeasurement.RequireZero(allocated, "system-time"); Check(checksum != 0, "system-time: original non-allocation predicate (checksum != 0)");
     Console.WriteLine($"Deterministic celestial-system time hash: 0x{hash:X16}; warm mappings={allocated} bytes");
 }
 
@@ -670,9 +677,9 @@ static void CelestialEphemerisCatalogTests()
     Check(!CelestialSystemDefinition.TryCreate(new(902), bodies, nodes, mapping, metadata, [fixedSource, circularSource], [FixedBodyEphemerisPayload.Identity with { Position = new Double3(double.NaN, 0, 0) }], circularPayloads, [], out _, out validation) && validation.Status == CelestialSystemValidationStatus.InvalidFixedBodyPayload, "invalid FixedBody rejection");
     Check(!CelestialSystemDefinition.TryCreate(new(902), bodies, nodes, mapping, metadata, [fixedSource, circularSource], fixedPayloads, [circularPayloads[0] with { Radius = 0d }], [], out _, out validation) && validation.Status == CelestialSystemValidationStatus.InvalidCircularOrbitPayload, "invalid CircularOrbit rejection");
     Check(!CelestialSystemDefinition.TryCreate(new(902), bodies, nodes, mapping, metadata, [fixedSource, circularSource with { Metadata = circularSource.Metadata with { Domain = new(2) } }], fixedPayloads, circularPayloads, [], out _, out validation) && validation.Status == CelestialSystemValidationStatus.SourceSystemTimeDomainMismatch, "source/system time-domain mismatch rejection");
-    _ = system.TryGetSource(new(2), out _); _ = CelestialSystemDefinitionHash.Compute(system); var before = GC.GetAllocatedBytesForCurrentThread(); ulong checksum = 0;
+    _ = system.TryGetSource(new(2), out _); _ = CelestialSystemDefinitionHash.Compute(system); using var ordinary16 = new OrdinaryAllocationMeasurement("ephemeris-catalog"); ulong checksum = 0;
     for (var i = 0; i < 100_000; i++) { Check(system.TryGetSource(new(2), out var source), "warm source lookup"); Check(system.TryGetCircularOrbit(0, out var payload), "warm payload lookup"); checksum = Mix(checksum, source.Id.Value ^ (ulong)BitConverter.DoubleToInt64Bits(payload.Radius) ^ CelestialSystemDefinitionHash.Compute(system)); }
-    var allocated = GC.GetAllocatedBytesForCurrentThread() - before; Check(allocated == 0 && checksum != 0, "warmed catalog lookup and hashing allocate zero bytes"); Console.WriteLine($"Deterministic celestial ephemeris-catalog hash: 0x{hash:X16}; construction={constructionAllocated} bytes; warm allocations={allocated} bytes");
+    var allocated = ordinary16.Complete(); OrdinaryAllocationMeasurement.RequireZero(allocated, "ephemeris-catalog"); Check(checksum != 0, "ephemeris-catalog: original non-allocation predicate (checksum != 0)"); Console.WriteLine($"Deterministic celestial ephemeris-catalog hash: 0x{hash:X16}; construction={constructionAllocated} bytes; warm allocations={allocated} bytes");
 }
 
 static void CelestialSystemEvaluationTests()
@@ -688,9 +695,9 @@ static void CelestialSystemEvaluationTests()
     var sampled = CelestialSystemEvaluator.TryEvaluateSystem(CelestialSystemFixtures.SampledDemo, SimulationInstant.Zero, sampledEvaluations, sampledRoots, sampledStaging, sampledRootStaging);
     Check(sol.Succeeded && geocentric.Succeeded && binary.Succeeded && sampled.Succeeded && sampledEvaluations[1].Value.LocalToParent.Translation == Double3.Zero, "binding-routed Kepler, circular, fixed, and sampled dispatch succeeds");
     Check(CelestialSystemEvaluator.TryEvaluateSystem(CelestialSystemFixtures.SampledDemo, SimulationInstant.FromSecondsRounded(.5d), sampledEvaluations, sampledRoots, sampledStaging, sampledRootStaging).Succeeded && sampledEvaluations[1].Value.LocalToParent.Translation.IsFinite && CelestialSystemEvaluator.TryEvaluateSystem(CelestialSystemFixtures.SampledDemo, new SimulationInstant(-1_000_001), sampledEvaluations, sampledRoots, sampledStaging, sampledRootStaging).Status == CelestialSystemEvaluationStatus.TimeMappingFailure, "sampled exact rational interior and strict coverage");
-    Check(CelestialSystemEvaluator.TryEvaluateSystem(CelestialSystemFixtures.SampledDemo, SimulationInstant.Zero, sampledEvaluations, sampledRoots, sampledStaging, sampledRootStaging).Succeeded, "sampled exact interior identity"); var sampledHash = CelestialSystemEvaluationHash.Compute(sampledEvaluations); var sampledBefore = GC.GetAllocatedBytesForCurrentThread();
+    Check(CelestialSystemEvaluator.TryEvaluateSystem(CelestialSystemFixtures.SampledDemo, SimulationInstant.Zero, sampledEvaluations, sampledRoots, sampledStaging, sampledRootStaging).Succeeded, "sampled exact interior identity"); var sampledHash = CelestialSystemEvaluationHash.Compute(sampledEvaluations); using var ordinary17 = new OrdinaryAllocationMeasurement("sampled-evaluation");
     for (var sampleIteration = 0; sampleIteration < 100_000; sampleIteration++) Check(CelestialSystemEvaluator.TryEvaluateSystem(CelestialSystemFixtures.SampledDemo, new SimulationInstant(sampleIteration % 1_000_000), sampledEvaluations, sampledRoots, sampledStaging, sampledRootStaging).Succeeded, "warm sampled evaluation");
-    var sampledAllocated = GC.GetAllocatedBytesForCurrentThread() - sampledBefore; Check(sampledAllocated == 0, "warm sampled evaluation allocates zero bytes"); Console.WriteLine($"Deterministic SampledDemo hash: 0x{sampledHash:X16}; warm allocation={sampledAllocated} bytes");
+    var sampledAllocated = ordinary17.Complete(); OrdinaryAllocationMeasurement.RequireZero(sampledAllocated, "sampled-evaluation"); Console.WriteLine($"Deterministic SampledDemo hash: 0x{sampledHash:X16}; warm allocation={sampledAllocated} bytes");
     CelestialBodyCatalogEntry[] unsupportedBodies = [new CelestialBodyCatalogEntry(new(new(900), "Legacy-900", CelestialBodyClassification.Other, null, default, default, default), new(1d, 0d, 0d, 0d, 0d, default, default, default)), new CelestialBodyCatalogEntry(new(new(901), "Legacy-901", CelestialBodyClassification.Other, new(900), default, default, default), new(1d, 0d, 0d, 0d, 0d, default, default, default))];
     var unsupportedNodes = new[] { new CelestialHierarchyNode(new CelestialBodyId(900), new(CelestialTrajectoryModel.FixedBody, new(2), 0)), new CelestialHierarchyNode(new CelestialBodyId(901), new(CelestialTrajectoryModel.ReservedNumericalNBody, new(5), 0)) };
     var unsupportedMetadata = new CelestialEphemerisMetadata(new(1), new(1), new(1), long.MinValue, long.MaxValue, new(1), new(1), new(0, 0), new(0, 0));
@@ -702,9 +709,9 @@ static void CelestialSystemEvaluationTests()
     Check(CelestialSystemEvaluator.TryEvaluateSystem(CelestialSystemFixtures.SolMini, instant, solEvaluations, solRoots, solStaging, solRootStaging).Succeeded && CelestialSystemEvaluationHash.Compute(solEvaluations) == solHash, "SolMini repeatability");
     Check(CelestialSystemEvaluator.TryEvaluateSystem(CelestialSystemFixtures.GeocentricDemo, instant, geocentricEvaluations, geocentricRoots, geocentricStaging, geocentricRootStaging).Succeeded && CelestialSystemEvaluationHash.Compute(geocentricEvaluations) == geocentricHash, "GeocentricDemo repeatability");
     Check(CelestialSystemEvaluator.TryEvaluateSystem(CelestialSystemFixtures.BinaryDemo, instant, binaryEvaluations, binaryRoots, binaryStaging, binaryRootStaging).Succeeded && CelestialSystemEvaluationHash.Compute(binaryEvaluations) == binaryHash, "BinaryDemo repeatability");
-    _ = CelestialSystemEvaluator.TryEvaluateSystem(CelestialSystemFixtures.SolMini, instant, solEvaluations, solRoots, solStaging, solRootStaging); var before = GC.GetAllocatedBytesForCurrentThread(); ulong composition = 14695981039346656037UL;
+    _ = CelestialSystemEvaluator.TryEvaluateSystem(CelestialSystemFixtures.SolMini, instant, solEvaluations, solRoots, solStaging, solRootStaging); using var ordinary18 = new OrdinaryAllocationMeasurement("solmini-evaluation"); ulong composition = 14695981039346656037UL;
     for (var index = 0; index < 100_000; index++) { Check(CelestialSystemEvaluator.TryEvaluateSystem(CelestialSystemFixtures.SolMini, instant, solEvaluations, solRoots, solStaging, solRootStaging).Succeeded, "warm SolMini evaluation"); composition = Mix(composition, (ulong)BitConverter.DoubleToInt64Bits(solRoots[2].Translation.X)); }
-    var allocated = GC.GetAllocatedBytesForCurrentThread() - before; Check(allocated == 0 && composition != 0, "warmed system evaluation and transform composition allocate zero bytes");
+    var allocated = ordinary18.Complete(); OrdinaryAllocationMeasurement.RequireZero(allocated, "solmini-evaluation"); Check(composition != 0, "solmini-evaluation: original non-allocation predicate (composition != 0)");
     Console.WriteLine($"Deterministic celestial-system evaluation hashes: sol=0x{solHash:X16}; geocentric=0x{geocentricHash:X16}; binary=0x{binaryHash:X16}; warm allocations={allocated} bytes");
 }
 
@@ -761,10 +768,10 @@ static void TwoBodyPropagationTests()
     stopwatch.Restart(); before = GC.GetAllocatedBytesForCurrentThread();
     for (var index = 0; index < 100_000; index++) { var result = UniversalVariableTwoBodyPropagator.TryEvaluate(moderate, epoch, moderateTime, mu); Check(result.Succeeded, "warm elliptic"); maximumIterations = Math.Max(maximumIterations, result.Iterations); }
     var ellipticMilliseconds = stopwatch.Elapsed.TotalMilliseconds; var ellipticAllocated = GC.GetAllocatedBytesForCurrentThread() - before;
-    before = GC.GetAllocatedBytesForCurrentThread();
+    using var ordinary23 = new OrdinaryAllocationMeasurement("propagation-adapter");
     for (var index = 0; index < 100_000; index++) { Check(CelestialTrajectoryEvaluator.TryEvaluate(new CelestialBodyId(2), adapterView, moderateTime).Succeeded, "warm adapter"); Check(UniversalVariableTwoBodyPropagator.TryEvaluate(circular, epoch, SimulationInstant.FromWholeSeconds(1), 0d).Status == TwoBodyPropagationStatus.InvalidGravitationalParameter, "warm invalid"); Check(UniversalVariableTwoBodyPropagator.TryEvaluate(hyperbolic, epoch, SimulationInstant.FromWholeSeconds(1), mu).Status == TwoBodyPropagationStatus.HyperbolicUnsupported, "warm unsupported"); Check(UniversalVariableTwoBodyPropagator.TryEvaluateWithIterationLimitForTest(high, epoch, highTime, mu, 1).Status == TwoBodyPropagationStatus.NonConvergent, "warm nonconvergent"); }
-    var adapterAllocated = GC.GetAllocatedBytesForCurrentThread() - before;
-    Check(circularAllocated == 0 && ellipticAllocated == 0 && adapterAllocated == 0, "propagation paths allocate zero bytes");
+    var adapterAllocated = ordinary23.Complete();
+    Check(circularAllocated == 0 && ellipticAllocated == 0, "propagation paths allocate zero bytes"); OrdinaryAllocationMeasurement.RequireZero(adapterAllocated, "propagation-adapter");
     Console.WriteLine("Two-Body Propagation"); Console.WriteLine($"Circular orbit: t=0 PASS; t=0.25P PASS; t=0.50P PASS; t=1.00P PASS; max checkpoint position error={circularCheckpointPositionError:E3} m; velocity error={circularCheckpointVelocityError:E3} m/s"); Console.WriteLine($"Elliptic orbit: energy relative error={Math.Max(moderateEnergyError, highEnergyError):E3}; angular momentum relative error={Math.Max(moderateMomentumError, highMomentumError):E3}; maximum iterations={maximumIterations}"); Console.WriteLine("Backward propagation: PASS; Epoch replacement equivalence: PASS; Unsupported regimes: PASS"); Console.WriteLine($"Allocation: circular={circularAllocated} bytes, elliptic={ellipticAllocated} bytes, adapter/failure={adapterAllocated} bytes"); Console.WriteLine($"Benchmark: circular={circularMilliseconds:F3} ms, elliptic={ellipticMilliseconds:F3} ms"); Console.WriteLine($"Deterministic propagation hashes: circular=0x{circularHash:X16}, elliptic=0x{ellipticHash:X16}, backward=0x{backwardHash:X16}, validation=0x{validationHash:X16}, combined=0x{combined:X16}");
 }
 
@@ -818,9 +825,9 @@ static void CelestialFrameExtractionTests()
     Check(CelestialReferenceFrameEvaluator.TryEvaluate(store.CreateView(), graph, SimulationInstant.Zero, values[..2]) == CelestialReferenceFrameEvaluationStatus.DestinationTooSmall, "capacity rejection");
     var mismatchBuilder = new ReferenceFrameGraphBuilder(); mismatchBuilder.Add(new ReferenceFrameNode(rootFrame, null, ReferenceFrameKind.Ecl, "root")); mismatchBuilder.Add(new ReferenceFrameNode(moonFrame, rootFrame, ReferenceFrameKind.Cce, "mismatch")); mismatchBuilder.Add(new ReferenceFrameNode(planetFrame, moonFrame, ReferenceFrameKind.Cci, "mismatch-child"));
     Check(CelestialReferenceFrameEvaluator.TryEvaluate(store.CreateView(), mismatchBuilder.Build(), SimulationInstant.Zero, values) == CelestialReferenceFrameEvaluationStatus.FrameMappingMismatch, "mapping mismatch rejection");
-    _ = CelestialReferenceFrameEvaluator.TryEvaluate(store.CreateView(), graph, SimulationInstant.Zero, values); var before = GC.GetAllocatedBytesForCurrentThread(); ulong hash = 14695981039346656037UL;
+    _ = CelestialReferenceFrameEvaluator.TryEvaluate(store.CreateView(), graph, SimulationInstant.Zero, values); using var ordinary35 = new OrdinaryAllocationMeasurement("frame-extraction"); ulong hash = 14695981039346656037UL;
     for (var index = 0; index < 100_000; index++) { Check(CelestialReferenceFrameEvaluator.TryEvaluate(store.CreateView(), graph, SimulationInstant.Zero, values) == CelestialReferenceFrameEvaluationStatus.Success, "warm extraction"); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(values[2].Value.LocalToParent.Translation.X)); }
-    Check(GC.GetAllocatedBytesForCurrentThread() == before, "warm celestial extraction allocation"); Console.WriteLine($"Celestial frame extraction: allocation=0 bytes; hash=0x{hash:X16}");
+    OrdinaryAllocationMeasurement.RequireZero(ordinary35.Complete(), "frame-extraction"); Console.WriteLine($"Celestial frame extraction: allocation=0 bytes; hash=0x{hash:X16}");
 }
 
 static void CelestialTrajectoryReplacementTests()
@@ -897,11 +904,11 @@ static void CelestialTrajectoryReplacementTests()
     var allocationScenario = CreateReplacementScenario(initial, eventTime, 2, 13, 0);
     _ = CelestialTrajectoryTransactionEvaluator.TryCreateReplacement(allocationScenario.scheduled, allocationScenario.engine.State, allocationScenario.timeline.Revision, new CelestialBodyId(2), replacement);
     var allocationCandidate = CelestialTrajectoryTransactionEvaluator.TryCreateReplacement(allocationScenario.scheduled, allocationScenario.engine.State, allocationScenario.timeline.Revision, new CelestialBodyId(2), replacement).Transaction!.Value;
-    var allocationBefore = GC.GetAllocatedBytesForCurrentThread();
+    using var ordinary36 = new OrdinaryAllocationMeasurement("trajectory-candidate");
     for (var index = 0; index < 100_000; index++) Check(CelestialTrajectoryTransactionEvaluator.TryCreateReplacement(allocationScenario.scheduled, allocationScenario.engine.State, allocationScenario.timeline.Revision, new CelestialBodyId(2), replacement).Succeeded, "warm replacement creation");
-    var creationAllocated = GC.GetAllocatedBytesForCurrentThread() - allocationBefore;
-    allocationBefore = GC.GetAllocatedBytesForCurrentThread(); var allocationCommit = allocationScenario.engine.ValidateAndCommit(allocationCandidate); var commitAllocated = GC.GetAllocatedBytesForCurrentThread() - allocationBefore;
-    Check(allocationCommit.Committed && creationAllocated == 0 && commitAllocated == 0, "replacement paths allocate zero bytes after warmup");
+    var creationAllocated = ordinary36.Complete();
+    using var ordinary37 = new OrdinaryAllocationMeasurement("trajectory-commit"); var allocationCommit = allocationScenario.engine.ValidateAndCommit(allocationCandidate); var commitAllocated = ordinary37.Complete();
+    OrdinaryAllocationMeasurement.RequireZero(creationAllocated, "trajectory-candidate"); OrdinaryAllocationMeasurement.RequireZero(commitAllocated, "trajectory-commit"); Check(allocationCommit.Committed, $"replacement commit succeeds: {allocationCommit.Committed}");
 
     Console.WriteLine("Celestial Trajectory Replacement");
     Console.WriteLine("Initial authoritative trajectory: PASS; Candidate evaluation: PASS; Atomic replacement commit: PASS");
@@ -980,9 +987,9 @@ static void CelestialImpulseEventTests()
 
     var replayA = ImpulseReplayHash(initial, eventTime); var replayB = ImpulseReplayHash(initial, eventTime); Check(replayA == replayB, "impulse replay hash");
     var allocation = CreateImpulseScenario(initial, eventTime, (60UL, 0, delta)); Check(allocation.timeline.TryPeekPending(out var pending), "allocation impulse pending"); _ = CelestialImpulseEvaluator.TryEvaluate(pending, allocation.engine.State, eventTime, allocation.timeline.Revision);
-    var allocationBefore = GC.GetAllocatedBytesForCurrentThread(); for (var index = 0; index < 100_000; index++) Check(CelestialImpulseEvaluator.TryEvaluate(pending, allocation.engine.State, eventTime, allocation.timeline.Revision).Succeeded, "warm impulse evaluation"); var evaluationAllocated = GC.GetAllocatedBytesForCurrentThread() - allocationBefore;
-    allocationBefore = GC.GetAllocatedBytesForCurrentThread(); var allocationResult = allocation.engine.AdvanceAndExecuteOneCanonicalGroup(eventTime); var commitAllocated = GC.GetAllocatedBytesForCurrentThread() - allocationBefore;
-    Check(allocationResult.Reason == SimulationExecutionStopReason.Completed && evaluationAllocated == 0 && commitAllocated == 0, "impulse paths allocate zero bytes after warmup");
+    using var ordinary38 = new OrdinaryAllocationMeasurement("impulse-evaluation"); for (var index = 0; index < 100_000; index++) Check(CelestialImpulseEvaluator.TryEvaluate(pending, allocation.engine.State, eventTime, allocation.timeline.Revision).Succeeded, "warm impulse evaluation"); var evaluationAllocated = ordinary38.Complete();
+    using var ordinary39 = new OrdinaryAllocationMeasurement("impulse-commit"); var allocationResult = allocation.engine.AdvanceAndExecuteOneCanonicalGroup(eventTime); var commitAllocated = ordinary39.Complete();
+    OrdinaryAllocationMeasurement.RequireZero(evaluationAllocated, "impulse-evaluation"); OrdinaryAllocationMeasurement.RequireZero(commitAllocated, "impulse-commit"); Check(allocationResult.Reason == SimulationExecutionStopReason.Completed, $"impulse execution completes: {allocationResult.Reason}");
     Console.WriteLine("Celestial Impulse Events"); Console.WriteLine("Impulse scheduling: PASS; Exact event-time propagation: PASS; Delta-v application: PASS"); Console.WriteLine("Authoritative replacement: PASS; Post-impulse propagation: PASS; Same-time impulse ordering: PASS"); Console.WriteLine("Unsupported resulting orbit rejection: PASS; Failure atomicity: PASS; Replay: PASS"); Console.WriteLine($"Allocation: {evaluationAllocated + commitAllocated} bytes; Impulse hash: 0x{replayA:X16}");
 }
 
@@ -1052,13 +1059,13 @@ static void TimelineTopologyTests()
     var allocatedTimeline = new SimulationTimeline(20_000);
     for (ulong id = 1; id <= 100; id++) Check(allocatedTimeline.Schedule(SimulationInstant.Zero, Request(id, (long)id, 0)).Succeeded, "allocation warmup");
     var collectionsBefore = (GC.CollectionCount(0), GC.CollectionCount(1), GC.CollectionCount(2));
-    var before = GC.GetAllocatedBytesForCurrentThread();
+    using var ordinary3 = new OrdinaryAllocationMeasurement("timeline");
     for (ulong id = 101; id <= 10_000; id++) { Check(allocatedTimeline.Schedule(SimulationInstant.Zero, Request(id, (long)id, 0)).Succeeded, "allocation schedule"); Check(allocatedTimeline.Cancel(new SimulationEventId(id)).Succeeded, "allocation cancel"); }
-    var timelineAllocated = GC.GetAllocatedBytesForCurrentThread() - before;
+    var timelineAllocated = ordinary3.Complete();
     var collectionsAfter = (GC.CollectionCount(0), GC.CollectionCount(1), GC.CollectionCount(2));
     var timelineValid = allocatedTimeline.ValidateInvariants();
     Console.WriteLine($"Timeline allocation gate: allocated={timelineAllocated}; valid={timelineValid}; pending={allocatedTimeline.PendingCount}; cancelled={allocatedTimeline.CancelledCount}; GC-before={collectionsBefore}; GC-after={collectionsAfter}");
-    Check(timelineAllocated == 0, $"preallocated timeline operations allocate zero bytes: actual={timelineAllocated}");
+    OrdinaryAllocationMeasurement.RequireZero(timelineAllocated, "timeline");
     Check(timelineValid, "preallocated timeline invariants");
 
     var hash = TimelineHash(expected); Check(TimelineHash(CanonicalHeaders()) == hash, "deterministic timeline stress hash");
@@ -1103,9 +1110,9 @@ static void ClockTests()
 
     var allocationTimeline = new SimulationTimeline(2); Check(allocationTimeline.Schedule(SimulationInstant.Zero, Request(50, 5, 0)).Succeeded, "allocation boundary setup");
     var allocationClock = new SimulationClock(SimulationInstant.Zero, allocationTimeline); _ = allocationClock.AdvanceTo(new SimulationInstant(1)); _ = allocationClock.AdvanceUntilNextEvent(); allocationClock.Pause(); allocationClock.Resume(); _ = allocationClock.TrySetRate(SimulationRate.One);
-    var before = GC.GetAllocatedBytesForCurrentThread();
+    using var ordinary4 = new OrdinaryAllocationMeasurement("clock");
     for (var index = 0; index < 100_000; index++) { _ = allocationClock.AdvanceTo(new SimulationInstant(5)); _ = allocationClock.AdvanceUntilNextEvent(); allocationClock.Pause(); allocationClock.Resume(); _ = allocationClock.TrySetRate(SimulationRate.One); }
-    Check(GC.GetAllocatedBytesForCurrentThread() == before, "clock steady-state operations allocate zero bytes");
+    OrdinaryAllocationMeasurement.RequireZero(ordinary4.Complete(), "clock");
 
     var hash = ClockHash(); Check(ClockHash() == hash, "deterministic clock script");
     Console.WriteLine($"Deterministic clock stress hash: 0x{hash:X16}");
@@ -1156,9 +1163,9 @@ static void HostDurationTests()
 
     var warm = new SimulationClock(SimulationInstant.Zero, new SimulationTimeline(), new SimulationRate(5, 7)); _ = warm.AdvanceByHostDuration(new SimulationDuration(1));
     var allocation = new SimulationClock(SimulationInstant.Zero, new SimulationTimeline(), new SimulationRate(5, 7));
-    var allocationBefore = GC.GetAllocatedBytesForCurrentThread();
+    using var ordinary5 = new OrdinaryAllocationMeasurement("host-conversion");
     for (var index = 0; index < 100_000; index++) _ = allocation.AdvanceByHostDuration(new SimulationDuration(13));
-    Check(GC.GetAllocatedBytesForCurrentThread() == allocationBefore, "host conversion and debt accumulation allocate zero bytes");
+    OrdinaryAllocationMeasurement.RequireZero(ordinary5.Complete(), "host-conversion");
 
     var hash = HostDurationHash(); Check(HostDurationHash() == hash, "deterministic host conversion replay hash");
     Console.WriteLine($"Deterministic host-duration conversion hash: 0x{hash:X16}");
@@ -1211,8 +1218,8 @@ static void HostDurationDebtServiceTests()
     var allocationTimeline = new SimulationTimeline(1_000);
     for (ulong id = 1; id <= 1_000; id++) Check(allocationTimeline.Schedule(SimulationInstant.Zero, Request(id, 1, (int)id)).Succeeded, "debt allocation schedule");
     var allocationClock = new SimulationClock(SimulationInstant.Zero, allocationTimeline); var allocationEngine = new SimulationTransactionEngine(allocationClock, new SimulationState(), 1_000); _ = allocationClock.AdvanceByHostDuration(new SimulationDuration(2));
-    var allocationBefore = GC.GetAllocatedBytesForCurrentThread(); var allocation = allocationEngine.ServicePendingHostDurationDebt();
-    Check(GC.GetAllocatedBytesForCurrentThread() == allocationBefore && allocation.Reason == SimulationDebtServiceStopReason.Completed && allocation.ProcessedEventCount == 1_000, "preallocated debt servicing allocates zero bytes");
+    using var ordinary6 = new OrdinaryAllocationMeasurement("single-debt-service"); var allocation = allocationEngine.ServicePendingHostDurationDebt();
+    OrdinaryAllocationMeasurement.RequireZero(ordinary6.Complete(), "single-debt-service"); Check(allocation.Reason == SimulationDebtServiceStopReason.Completed, $"single debt servicing completes: {allocation.Reason}"); Check(allocation.ProcessedEventCount == 1_000, $"single debt servicing processes 1000 events: {allocation.ProcessedEventCount}");
 
     const int stressEventCount = 5_000;
     var stressTimeline = new SimulationTimeline(stressEventCount);
@@ -1220,15 +1227,67 @@ static void HostDurationDebtServiceTests()
     var stressClock = new SimulationClock(SimulationInstant.Zero, stressTimeline, settings: new SimulationClockSettings(16));
     var stressEngine = new SimulationTransactionEngine(stressClock, new SimulationState(), stressEventCount);
     _ = stressClock.AdvanceByHostDuration(new SimulationDuration(100)); _ = stressEngine.ServicePendingHostDurationDebt();
-    var stressBefore = GC.GetAllocatedBytesForCurrentThread();
-    for (var cycle = 1; cycle < 500; cycle++) { _ = stressClock.AdvanceByHostDuration(new SimulationDuration(100)); Check(stressEngine.ServicePendingHostDurationDebt().Reason == SimulationDebtServiceStopReason.Completed, "long-run debt service"); }
-    Check(GC.GetAllocatedBytesForCurrentThread() == stressBefore && stressClock.CurrentTime.Ticks == 50_000 && stressClock.PendingSimulationDebt.IsZero && stressEngine.ProcessedCount == stressEventCount && stressTimeline.PendingCount == 0, "repeated long-duration servicing is allocation-free");
+    // Use the qualified orchestration test's 1 MiB reservation. All servicing storage
+    // is already allocated: the 499 calls require zero object bytes, not a per-call
+    // budget. This small reservation also accommodates the separate 128-byte-array
+    // control below; it is never an allocation allowance or a relaxed threshold.
+    // A checked region isolates the counter from unrelated unused-context retirement.
+    // Real object allocation still advances the counter; no bytes are subtracted.
+    const long servicingMeasurementBudget = 1L << 20;
+    long servicingAllocatedBytes;
+    var completedMeasuredCalls = 0;
+    Check(GC.TryStartNoGCRegion(servicingMeasurementBudget, disallowFullBlockingGC: true), "long-duration servicing measurement enters no-GC region");
+    try
+    {
+        var stressBefore = GC.GetAllocatedBytesForCurrentThread();
+        for (var cycle = 1; cycle < 500; cycle++)
+        {
+            _ = stressClock.AdvanceByHostDuration(new SimulationDuration(100));
+            Check(stressEngine.ServicePendingHostDurationDebt().Reason == SimulationDebtServiceStopReason.Completed, "long-run debt service");
+            completedMeasuredCalls++;
+        }
+        servicingAllocatedBytes = GC.GetAllocatedBytesForCurrentThread() - stressBefore;
+    }
+    finally { GC.EndNoGCRegion(); } // An unsuccessful exit throws and fails the test.
+    // All reporting and independent assertions follow the closed counter and region.
+    Console.WriteLine($"SERVICING_GATE entry=PASS exit=PASS allocated={servicingAllocatedBytes} clock={stressClock.CurrentTime.Ticks} debt={stressClock.PendingSimulationDebt.Ticks} processed={stressEngine.ProcessedCount} pending={stressTimeline.PendingCount} completed={completedMeasuredCalls}");
+    Check(servicingAllocatedBytes == 0, $"long-duration servicing allocates zero bytes: {servicingAllocatedBytes}");
+    Check(stressClock.CurrentTime.Ticks == 50_000, $"long-duration servicing clock reaches 50000 ticks: {stressClock.CurrentTime.Ticks}");
+    Check(stressClock.PendingSimulationDebt.IsZero, $"long-duration servicing pending debt is zero: {stressClock.PendingSimulationDebt.Ticks}");
+    Check(stressEngine.ProcessedCount == stressEventCount, $"long-duration servicing processes exactly 5000 events: {stressEngine.ProcessedCount}");
+    Check(stressTimeline.PendingCount == 0, $"long-duration servicing pending event count is zero: {stressTimeline.PendingCount}");
+    Check(completedMeasuredCalls == 499, $"long-duration servicing completes exactly 499 measured calls: {completedMeasuredCalls}");
+    ServicingAllocationControl();
 
     var hash = HostDurationDebtServiceHash(); Check(HostDurationDebtServiceHash() == hash, "deterministic host-duration orchestration hash");
     Console.WriteLine($"Deterministic host-duration orchestration hash: 0x{hash:X16}");
     var longRunHash = HostDurationLongRunHash(); Check(HostDurationLongRunHash() == longRunHash, "deterministic long-duration replay hash");
     Console.WriteLine($"Deterministic long-duration host advancement hash: 0x{longRunHash:X16}");
 }
+
+static void ServicingAllocationControl()
+{
+    // Independent known-object body, using the same checked counter architecture
+    // and qualified reservation as servicing. It runs after servicing in the suite,
+    // so it adds no warmup to the production workload. Warm only the control itself.
+    GC.KeepAlive(AllocateServicingCounterControl());
+    const long servicingMeasurementBudget = 1L << 20;
+    long allocatedBytes;
+    Check(GC.TryStartNoGCRegion(servicingMeasurementBudget, disallowFullBlockingGC: true), "servicing positive control enters no-GC region");
+    try
+    {
+        var before = GC.GetAllocatedBytesForCurrentThread();
+        var control = AllocateServicingCounterControl();
+        allocatedBytes = GC.GetAllocatedBytesForCurrentThread() - before;
+        GC.KeepAlive(control);
+    }
+    finally { GC.EndNoGCRegion(); }
+    Console.WriteLine($"SERVICING_CONTROL entry=PASS exit=PASS allocated={allocatedBytes} type=System.Byte[] length=128");
+    Check(allocatedBytes > 0, $"servicing counter detects deliberate managed allocation: {allocatedBytes}");
+}
+
+[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+static byte[] AllocateServicingCounterControl() => new byte[128];
 
 static void TransactionTests()
 {
@@ -1256,9 +1315,9 @@ static void TransactionTests()
     var allocationTimeline = new SimulationTimeline(5_000); var allocationClock = new SimulationClock(SimulationInstant.Zero, allocationTimeline); var allocationEngine = new SimulationTransactionEngine(allocationClock, new SimulationState(), 5_000);
     for (ulong id = 1; id <= 5_000; id++) Check(allocationTimeline.Schedule(SimulationInstant.Zero, Request(id, 0, 0)).Succeeded, "allocation transaction schedule");
     _ = allocationEngine.EvaluateNext();
-    var before = GC.GetAllocatedBytesForCurrentThread();
+    using var ordinary8 = new OrdinaryAllocationMeasurement("per-event-transactions");
     for (var index = 0; index < 5_000; index++) Check(allocationEngine.ExecuteCanonicalPendingEvent().Committed, "allocation transaction commit");
-    Check(GC.GetAllocatedBytesForCurrentThread() == before && allocationEngine.ProcessedCount == 5_000, "preallocated transaction execution allocates zero bytes");
+    OrdinaryAllocationMeasurement.RequireZero(ordinary8.Complete(), "per-event-transactions"); Check(allocationEngine.ProcessedCount == 5_000, "per-event-transactions: original non-allocation predicate (allocationEngine.ProcessedCount == 5_000)");
 
     var hash = TransactionHash(); Check(TransactionHash() == hash, "deterministic transaction replay hash");
     Console.WriteLine($"Deterministic transaction replay hash: 0x{hash:X16}");
@@ -1304,9 +1363,13 @@ static void CanonicalGroupTests()
     var allocationTimeline = new SimulationTimeline(5_000);
     for (ulong id = 1; id <= 5_000; id++) Check(allocationTimeline.Schedule(SimulationInstant.Zero, Request(id, 0, (int)id)).Succeeded, "group allocation schedule");
     var allocationEngine = new SimulationTransactionEngine(new SimulationClock(SimulationInstant.Zero, allocationTimeline), new SimulationState(), 5_000);
-    var allocationBefore = GC.GetAllocatedBytesForCurrentThread();
+    using var ordinary9 = new OrdinaryAllocationMeasurement("canonical-group");
     var allocationResult = allocationEngine.ExecuteCanonicalGroup();
-    Check(GC.GetAllocatedBytesForCurrentThread() == allocationBefore && allocationResult.IsComplete && allocationEngine.ProcessedCount == 5_000, "preallocated canonical group execution allocates zero bytes");
+    var canonicalGroupAllocated = ordinary9.Complete();
+    Console.WriteLine($"CANONICAL_GROUP allocation={canonicalGroupAllocated} complete={allocationResult.IsComplete} processed={allocationEngine.ProcessedCount} expected=5000");
+    OrdinaryAllocationMeasurement.RequireZero(canonicalGroupAllocated, "canonical-group");
+    Check(allocationResult.IsComplete, $"preallocated canonical group completes: {allocationResult.IsComplete}");
+    Check(allocationEngine.ProcessedCount == 5_000, $"preallocated canonical group processes 5000 events: {allocationEngine.ProcessedCount}");
 
     var hash = CanonicalGroupHash(); Check(CanonicalGroupHash() == hash, "canonical group permutation replay hash");
     Console.WriteLine($"Deterministic canonical-group replay hash: 0x{hash:X16}");

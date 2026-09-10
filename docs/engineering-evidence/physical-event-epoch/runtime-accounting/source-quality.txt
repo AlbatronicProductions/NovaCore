@@ -1,0 +1,1 @@
+All production and unrelated test source matches canonical after CRLF/LF normalization. 121 archive files differ only in line endings; accepted five candidate files retain exact starting hashes. Both arms use identical binaries.

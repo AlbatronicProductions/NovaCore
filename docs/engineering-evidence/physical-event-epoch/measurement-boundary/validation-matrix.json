@@ -1,0 +1,72 @@
+[
+  {
+    "Configuration": "Debug",
+    "Run": 1,
+    "Result": "PASS",
+    "GroupsPassed": 37,
+    "Allocation": 0,
+    "Entry": "PASS",
+    "Exit": "PASS",
+    "Clock": 50000,
+    "Debt": 0,
+    "Processed": 5000,
+    "Pending": 0,
+    "Completed": 499,
+    "PositiveControl": "SERVICING_CONTROL entry=PASS exit=PASS allocated=152 type=System.Byte[] length=128"
+  },
+  {
+    "Configuration": "Debug",
+    "Run": 2,
+    "Result": "FAIL: Canonical transaction groups",
+    "GroupsPassed": 11,
+    "Allocation": 0,
+    "Entry": "PASS",
+    "Exit": "PASS",
+    "Clock": 50000,
+    "Debt": 0,
+    "Processed": 5000,
+    "Pending": 0,
+    "Completed": 499,
+    "PositiveControl": "SERVICING_CONTROL entry=PASS exit=PASS allocated=152 type=System.Byte[] length=128"
+  },
+  {
+    "Configuration": "Debug",
+    "Run": 3,
+    "Result": "NOT RUN: first-failure stop"
+  },
+  {
+    "Configuration": "Debug",
+    "Run": 4,
+    "Result": "NOT RUN: first-failure stop"
+  },
+  {
+    "Configuration": "Debug",
+    "Run": 5,
+    "Result": "NOT RUN: first-failure stop"
+  },
+  {
+    "Configuration": "Release",
+    "Run": 1,
+    "Result": "NOT RUN: first-failure stop"
+  },
+  {
+    "Configuration": "Release",
+    "Run": 2,
+    "Result": "NOT RUN: first-failure stop"
+  },
+  {
+    "Configuration": "Release",
+    "Run": 3,
+    "Result": "NOT RUN: first-failure stop"
+  },
+  {
+    "Configuration": "Release",
+    "Run": 4,
+    "Result": "NOT RUN: first-failure stop"
+  },
+  {
+    "Configuration": "Release",
+    "Run": 5,
+    "Result": "NOT RUN: first-failure stop"
+  }
+]

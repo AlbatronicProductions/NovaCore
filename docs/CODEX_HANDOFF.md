@@ -28,15 +28,23 @@ Surface Interaction / Launch Foundation has banked **M14.1**, commit
 `79978cf8b0fd783d43a661df6df53a2c0202af4a`, tag
 `m14.3-spacecraft-terrain-contact-observations`, and **M14.4**, commit
 `28b92f724f8decd3c9356aa5f9f5bbd6c9dd069c`, tag
-`m14.4-atomic-contact-response`. M14 remains **OPEN**.
+`m14.4-atomic-contact-response`, and **M14.5**, commit
+`b53d48025cfb8142cb32a6fc6fceb6018e33cfcd`, tag
+`m14.5-isolated-analytical-contact-response`. M14 remains **OPEN**.
 
-Current unbanked candidate: [isolated analytical response](isolated-contact-response.md)
-on `codex/minimal-contact-response`; [evidence and reproduction](engineering-evidence/isolated-contact-response/README.md).
-It produces qualified M14.4 intents without mutation or terrain requery. The
-complete authored definition must contain one feature; represented canonical
-radial gap must equal zero. No tolerance skin, penetration recovery, CCD, solver,
-friction, grounding or visible route is added. Manual visual acceptance is not
-required. No milestone number or banking is authorized. Return to Project Control.
+Current unbanked candidate: [internal physical-event epochs](physical-event-epochs.md)
+on `codex/physical-event-epoch`; [evidence and reproduction](engineering-evidence/physical-event-epoch/README.md).
+It supplies exact canonical/rational identity and ordering, with no public
+fractional clock, fractional scheduling, event-local execution or automatic
+contact. Banked M14.5 still requires qualified represented canonical zero gap.
+Focused checks pass; full Simulation acceptance remains blocked. Bounded operand
+reporting captured 8,160 allocation-counter bytes in full Debug while exact
+clock/debt/count/completion contracts passed. Isolated candidate and banked
+controls passed; causality remains unproven. See the
+[classification](engineering-evidence/physical-event-epoch/debt-gate-classification.md).
+Do not expand into a diagnostic campaign without Project Control's
+payoff decision. Manual visual acceptance is not required. No next milestone
+number or banking is authorized. Return the candidate for follow-up.
 
 - Work in `E:\NovaCore` and inspect `git status --short` before editing.
 - Preserve unrelated and unstaged user work.

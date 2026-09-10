@@ -1,0 +1,39 @@
+{
+  "GitDiffCheckExit": 0,
+  "StagedPaths": [],
+  "GitStatus": [
+    " M docs/CODEX_HANDOFF.md",
+    " M docs/NOVACORE_CURRENT_STATE.md",
+    " M docs/engineering-evidence/README.md",
+    " M docs/isolated-contact-response.md",
+    " M docs/simulation-time.md",
+    " M src/NovaCore.Simulation/Timeline/SimulationEventHeaderComparer.cs",
+    " M tests/NovaCore.Simulation.Tests/ContactResponseTests.cs",
+    " M tests/NovaCore.Simulation.Tests/Program.cs",
+    " M tests/NovaCore.Simulation.Tests/SpacecraftTranslationTests.cs",
+    "?? docs/engineering-evidence/physical-event-epoch/",
+    "?? docs/physical-event-epochs.md",
+    "?? src/NovaCore.Simulation/Time/PhysicalEventEpoch.cs",
+    "?? src/NovaCore.Simulation/Timeline/PhysicalEventOrderKey.cs",
+    "?? tests/NovaCore.Simulation.Tests/OrdinaryAllocationMeasurement.cs",
+    "?? tests/NovaCore.Simulation.Tests/PhysicalEventEpochTests.cs"
+  ],
+  "TrackedDiffStat": [
+    " docs/CODEX_HANDOFF.md                              |  26 ++-",
+    " docs/NOVACORE_CURRENT_STATE.md                     |  19 ++-",
+    " docs/engineering-evidence/README.md                |   3 +-",
+    " docs/isolated-contact-response.md                  |   6 +-",
+    " docs/simulation-time.md                            |   6 +",
+    " .../Timeline/SimulationEventHeaderComparer.cs      |  13 +-",
+    " .../ContactResponseTests.cs                        |   6 +-",
+    " tests/NovaCore.Simulation.Tests/Program.cs         | 185 ++++++++++++++-------",
+    " .../SpacecraftTranslationTests.cs                  |   6 +-",
+    " 9 files changed, 182 insertions(+), 88 deletions(-)"
+  ],
+  "Branch": "codex/physical-event-epoch",
+  "ProductionChecked": 210,
+  "ProductionDrift": [],
+  "DisposedBytes": 0,
+  "DisposableFiles": 2245,
+  "DisposableBytes": 194327893
+}

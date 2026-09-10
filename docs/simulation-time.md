@@ -6,6 +6,12 @@ Milestone 6A establishes the managed temporal value types used by later simulati
 
 Scheduled event headers have no payload. Their canonical ascending ordering is `(Time, Priority, Sequence, EventId)`.
 
+The unbanked [internal physical-event epoch candidate](physical-event-epochs.md)
+separately defines canonical and exact rational identities. Public
+`SimulationInstant`, its tick rate, scheduled headers and live execution remain
+integer-tick. Fractional identity alone does not qualify physical contact state
+or enable fractional execution/publication.
+
 ## Pending-event timeline (Milestone 6B-1)
 
 `SimulationTimeline` owns only pending-event topology: the indexed canonical min-heap, timeline-assigned sequences, permanently reserved caller-supplied event IDs, cancelled-header diagnostics, and `TimelineRevision`. It does not own current time, host time, event execution, or simulation state. Scheduling and replacement therefore receive the authoritative current `SimulationInstant` explicitly.

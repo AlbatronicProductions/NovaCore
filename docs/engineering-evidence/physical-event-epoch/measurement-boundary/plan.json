@@ -1,0 +1,28 @@
+{
+  "Builds": [
+    "Debug",
+    "Release"
+  ],
+  "FullSuite": {
+    "Debug": 5,
+    "Release": 5
+  },
+  "PositiveControl": {
+    "Length": 128,
+    "Release": 3,
+    "ExpectedType": "System.Byte[]",
+    "ExpectedMeasuredBytesOnX64": 152,
+    "Debug": 3
+  },
+  "Focused": [
+    "physical-event-epoch-only",
+    "ReferenceFrames",
+    "Precision",
+    "translation-only",
+    "contact-only",
+    "contact-response-only",
+    "isolated-contact-only"
+  ],
+  "StopRule": "First failure; no retries",
+  "EnvironmentSHA256": "B204C3C0C4F4BF5BD52F35DF5890EEC985DE607F7EF68BC4B17E8E5000BFE336"
+}

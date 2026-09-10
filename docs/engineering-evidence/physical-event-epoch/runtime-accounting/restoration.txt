@@ -1,0 +1,1 @@
+All starting canonical file hashes unchanged. Disposable Program.cs and PhysicalEventEpochTests.cs restored; helper moved outside project. No production or permanent test edits.

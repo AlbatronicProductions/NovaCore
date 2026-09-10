@@ -1,0 +1,788 @@
+[
+  {
+    "Label": "build-Debug",
+    "PID": 9712,
+    "StartedUTC": "2026-09-10T02:40:23.5357976Z",
+    "ExitCode": 0,
+    "Status": "PASS",
+    "Arguments": [
+      "build",
+      "NovaCore.sln",
+      "-c",
+      "Debug",
+      "--nologo"
+    ],
+    "GateReports": []
+  },
+  {
+    "Label": "build-Release",
+    "PID": 45212,
+    "StartedUTC": "2026-09-10T02:40:27.5279972Z",
+    "ExitCode": 0,
+    "Status": "PASS",
+    "Arguments": [
+      "build",
+      "NovaCore.sln",
+      "-c",
+      "Release",
+      "--nologo"
+    ],
+    "GateReports": []
+  },
+  {
+    "Label": "helper-Debug",
+    "PID": 30072,
+    "StartedUTC": "2026-09-10T02:40:31.3558594Z",
+    "ExitCode": 0,
+    "Status": "PASS",
+    "Arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+      "--ordinary-allocation-helper"
+    ],
+    "GateReports": [
+      "ORDINARY_ALLOCATION gate=canonical-group bytes=0 entry=PASS exit=PASS",
+      "CANONICAL_GROUP allocation=0 complete=True processed=5000 expected=5000",
+      "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+      "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+    ]
+  },
+  {
+    "Label": "helper-Release",
+    "PID": 40376,
+    "StartedUTC": "2026-09-10T02:40:31.7725298Z",
+    "ExitCode": 0,
+    "Status": "PASS",
+    "Arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "--ordinary-allocation-helper"
+    ],
+    "GateReports": [
+      "ORDINARY_ALLOCATION gate=canonical-group bytes=0 entry=PASS exit=PASS",
+      "CANONICAL_GROUP allocation=0 complete=True processed=5000 expected=5000",
+      "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+      "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+    ]
+  },
+  {
+    "Label": "control-Debug-1",
+    "PID": 46188,
+    "StartedUTC": "2026-09-10T02:40:32.2596950Z",
+    "ExitCode": 0,
+    "Status": "PASS",
+    "Arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+      "--ordinary-allocation-control"
+    ],
+    "GateReports": [
+      "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+      "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+    ]
+  },
+  {
+    "Label": "control-Debug-2",
+    "PID": 22384,
+    "StartedUTC": "2026-09-10T02:40:32.3259995Z",
+    "ExitCode": 0,
+    "Status": "PASS",
+    "Arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+      "--ordinary-allocation-control"
+    ],
+    "GateReports": [
+      "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+      "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+    ]
+  },
+  {
+    "Label": "control-Debug-3",
+    "PID": 47676,
+    "StartedUTC": "2026-09-10T02:40:32.3995840Z",
+    "ExitCode": 0,
+    "Status": "PASS",
+    "Arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+      "--ordinary-allocation-control"
+    ],
+    "GateReports": [
+      "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+      "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+    ]
+  },
+  {
+    "Label": "control-Release-1",
+    "PID": 7028,
+    "StartedUTC": "2026-09-10T02:40:32.4634479Z",
+    "ExitCode": 0,
+    "Status": "PASS",
+    "Arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "--ordinary-allocation-control"
+    ],
+    "GateReports": [
+      "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+      "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+    ]
+  },
+  {
+    "Label": "control-Release-2",
+    "PID": 31852,
+    "StartedUTC": "2026-09-10T02:40:32.5307876Z",
+    "ExitCode": 0,
+    "Status": "PASS",
+    "Arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "--ordinary-allocation-control"
+    ],
+    "GateReports": [
+      "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+      "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+    ]
+  },
+  {
+    "Label": "control-Release-3",
+    "PID": 16716,
+    "StartedUTC": "2026-09-10T02:40:32.5975404Z",
+    "ExitCode": 0,
+    "Status": "PASS",
+    "Arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "--ordinary-allocation-control"
+    ],
+    "GateReports": [
+      "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+      "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+    ]
+  },
+  {
+    "Label": "full-Debug-1",
+    "PID": 42024,
+    "StartedUTC": "2026-09-10T02:40:32.6766762Z",
+    "ExitCode": 0,
+    "Status": "PASS",
+    "Arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll"
+    ],
+    "GateReports": [
+      "ORDINARY_ALLOCATION gate=speed-presets bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=timeline bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=clock bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=host-conversion bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=single-debt-service bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=per-event-transactions bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=canonical-group bytes=0 entry=PASS exit=PASS",
+      "CANONICAL_GROUP allocation=0 complete=True processed=5000 expected=5000",
+      "ORDINARY_ALLOCATION gate=celestial-store bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=system-definitions bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=body-catalog bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=sol-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=system-time bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=ephemeris-catalog bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=sampled-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=solmini-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=propagation-adapter bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=spacecraft-attitude bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=spacecraft-translation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=contact-response bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=attitude-integration bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=rigid-rotation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=rigid-lookup bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=guidance bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=sas-proof bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=orbit-sampling bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=frame-extraction bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=trajectory-candidate bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=trajectory-commit bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=impulse-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=impulse-commit bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=integral-arithmetic bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+      "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+    ]
+  },
+  {
+    "Label": "full-Debug-2",
+    "PID": 40920,
+    "StartedUTC": "2026-09-10T02:40:38.9652708Z",
+    "ExitCode": 0,
+    "Status": "PASS",
+    "Arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll"
+    ],
+    "GateReports": [
+      "ORDINARY_ALLOCATION gate=speed-presets bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=timeline bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=clock bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=host-conversion bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=single-debt-service bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=per-event-transactions bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=canonical-group bytes=0 entry=PASS exit=PASS",
+      "CANONICAL_GROUP allocation=0 complete=True processed=5000 expected=5000",
+      "ORDINARY_ALLOCATION gate=celestial-store bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=system-definitions bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=body-catalog bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=sol-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=system-time bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=ephemeris-catalog bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=sampled-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=solmini-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=propagation-adapter bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=spacecraft-attitude bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=spacecraft-translation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=contact-response bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=attitude-integration bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=rigid-rotation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=rigid-lookup bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=guidance bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=sas-proof bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=orbit-sampling bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=frame-extraction bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=trajectory-candidate bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=trajectory-commit bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=impulse-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=impulse-commit bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=integral-arithmetic bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+      "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+    ]
+  },
+  {
+    "Label": "full-Debug-3",
+    "PID": 45852,
+    "StartedUTC": "2026-09-10T02:40:44.9829388Z",
+    "ExitCode": 0,
+    "Status": "PASS",
+    "Arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll"
+    ],
+    "GateReports": [
+      "ORDINARY_ALLOCATION gate=speed-presets bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=timeline bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=clock bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=host-conversion bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=single-debt-service bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=per-event-transactions bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=canonical-group bytes=0 entry=PASS exit=PASS",
+      "CANONICAL_GROUP allocation=0 complete=True processed=5000 expected=5000",
+      "ORDINARY_ALLOCATION gate=celestial-store bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=system-definitions bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=body-catalog bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=sol-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=system-time bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=ephemeris-catalog bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=sampled-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=solmini-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=propagation-adapter bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=spacecraft-attitude bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=spacecraft-translation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=contact-response bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=attitude-integration bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=rigid-rotation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=rigid-lookup bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=guidance bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=sas-proof bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=orbit-sampling bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=frame-extraction bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=trajectory-candidate bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=trajectory-commit bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=impulse-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=impulse-commit bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=integral-arithmetic bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+      "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+    ]
+  },
+  {
+    "Label": "full-Debug-4",
+    "PID": 13908,
+    "StartedUTC": "2026-09-10T02:40:50.9712991Z",
+    "ExitCode": 0,
+    "Status": "PASS",
+    "Arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll"
+    ],
+    "GateReports": [
+      "ORDINARY_ALLOCATION gate=speed-presets bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=timeline bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=clock bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=host-conversion bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=single-debt-service bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=per-event-transactions bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=canonical-group bytes=0 entry=PASS exit=PASS",
+      "CANONICAL_GROUP allocation=0 complete=True processed=5000 expected=5000",
+      "ORDINARY_ALLOCATION gate=celestial-store bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=system-definitions bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=body-catalog bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=sol-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=system-time bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=ephemeris-catalog bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=sampled-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=solmini-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=propagation-adapter bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=spacecraft-attitude bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=spacecraft-translation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=contact-response bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=attitude-integration bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=rigid-rotation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=rigid-lookup bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=guidance bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=sas-proof bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=orbit-sampling bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=frame-extraction bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=trajectory-candidate bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=trajectory-commit bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=impulse-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=impulse-commit bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=integral-arithmetic bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+      "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+    ]
+  },
+  {
+    "Label": "full-Debug-5",
+    "PID": 38548,
+    "StartedUTC": "2026-09-10T02:40:57.0487968Z",
+    "ExitCode": 0,
+    "Status": "PASS",
+    "Arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll"
+    ],
+    "GateReports": [
+      "ORDINARY_ALLOCATION gate=speed-presets bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=timeline bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=clock bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=host-conversion bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=single-debt-service bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=per-event-transactions bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=canonical-group bytes=0 entry=PASS exit=PASS",
+      "CANONICAL_GROUP allocation=0 complete=True processed=5000 expected=5000",
+      "ORDINARY_ALLOCATION gate=celestial-store bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=system-definitions bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=body-catalog bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=sol-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=system-time bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=ephemeris-catalog bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=sampled-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=solmini-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=propagation-adapter bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=spacecraft-attitude bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=spacecraft-translation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=contact-response bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=attitude-integration bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=rigid-rotation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=rigid-lookup bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=guidance bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=sas-proof bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=orbit-sampling bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=frame-extraction bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=trajectory-candidate bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=trajectory-commit bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=impulse-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=impulse-commit bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=integral-arithmetic bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+      "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+    ]
+  },
+  {
+    "Label": "full-Release-1",
+    "PID": 23452,
+    "StartedUTC": "2026-09-10T02:41:03.0279758Z",
+    "ExitCode": 0,
+    "Status": "PASS",
+    "Arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll"
+    ],
+    "GateReports": [
+      "ORDINARY_ALLOCATION gate=speed-presets bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=timeline bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=clock bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=host-conversion bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=single-debt-service bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=per-event-transactions bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=canonical-group bytes=0 entry=PASS exit=PASS",
+      "CANONICAL_GROUP allocation=0 complete=True processed=5000 expected=5000",
+      "ORDINARY_ALLOCATION gate=celestial-store bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=system-definitions bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=body-catalog bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=sol-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=system-time bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=ephemeris-catalog bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=sampled-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=solmini-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=propagation-adapter bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=spacecraft-attitude bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=spacecraft-translation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=contact-response bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=attitude-integration bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=rigid-rotation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=rigid-lookup bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=guidance bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=sas-proof bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=orbit-sampling bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=frame-extraction bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=trajectory-candidate bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=trajectory-commit bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=impulse-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=impulse-commit bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=integral-arithmetic bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+      "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+    ]
+  },
+  {
+    "Label": "full-Release-2",
+    "PID": 15304,
+    "StartedUTC": "2026-09-10T02:41:05.8107532Z",
+    "ExitCode": 0,
+    "Status": "PASS",
+    "Arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll"
+    ],
+    "GateReports": [
+      "ORDINARY_ALLOCATION gate=speed-presets bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=timeline bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=clock bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=host-conversion bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=single-debt-service bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=per-event-transactions bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=canonical-group bytes=0 entry=PASS exit=PASS",
+      "CANONICAL_GROUP allocation=0 complete=True processed=5000 expected=5000",
+      "ORDINARY_ALLOCATION gate=celestial-store bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=system-definitions bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=body-catalog bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=sol-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=system-time bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=ephemeris-catalog bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=sampled-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=solmini-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=propagation-adapter bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=spacecraft-attitude bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=spacecraft-translation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=contact-response bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=attitude-integration bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=rigid-rotation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=rigid-lookup bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=guidance bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=sas-proof bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=orbit-sampling bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=frame-extraction bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=trajectory-candidate bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=trajectory-commit bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=impulse-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=impulse-commit bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=integral-arithmetic bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+      "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+    ]
+  },
+  {
+    "Label": "full-Release-3",
+    "PID": 45296,
+    "StartedUTC": "2026-09-10T02:41:08.5888074Z",
+    "ExitCode": 0,
+    "Status": "PASS",
+    "Arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll"
+    ],
+    "GateReports": [
+      "ORDINARY_ALLOCATION gate=speed-presets bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=timeline bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=clock bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=host-conversion bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=single-debt-service bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=per-event-transactions bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=canonical-group bytes=0 entry=PASS exit=PASS",
+      "CANONICAL_GROUP allocation=0 complete=True processed=5000 expected=5000",
+      "ORDINARY_ALLOCATION gate=celestial-store bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=system-definitions bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=body-catalog bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=sol-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=system-time bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=ephemeris-catalog bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=sampled-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=solmini-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=propagation-adapter bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=spacecraft-attitude bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=spacecraft-translation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=contact-response bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=attitude-integration bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=rigid-rotation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=rigid-lookup bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=guidance bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=sas-proof bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=orbit-sampling bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=frame-extraction bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=trajectory-candidate bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=trajectory-commit bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=impulse-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=impulse-commit bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=integral-arithmetic bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+      "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+    ]
+  },
+  {
+    "Label": "full-Release-4",
+    "PID": 18192,
+    "StartedUTC": "2026-09-10T02:41:11.3862735Z",
+    "ExitCode": 0,
+    "Status": "PASS",
+    "Arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll"
+    ],
+    "GateReports": [
+      "ORDINARY_ALLOCATION gate=speed-presets bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=timeline bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=clock bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=host-conversion bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=single-debt-service bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=per-event-transactions bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=canonical-group bytes=0 entry=PASS exit=PASS",
+      "CANONICAL_GROUP allocation=0 complete=True processed=5000 expected=5000",
+      "ORDINARY_ALLOCATION gate=celestial-store bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=system-definitions bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=body-catalog bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=sol-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=system-time bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=ephemeris-catalog bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=sampled-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=solmini-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=propagation-adapter bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=spacecraft-attitude bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=spacecraft-translation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=contact-response bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=attitude-integration bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=rigid-rotation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=rigid-lookup bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=guidance bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=sas-proof bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=orbit-sampling bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=frame-extraction bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=trajectory-candidate bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=trajectory-commit bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=impulse-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=impulse-commit bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=integral-arithmetic bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+      "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+    ]
+  },
+  {
+    "Label": "full-Release-5",
+    "PID": 44220,
+    "StartedUTC": "2026-09-10T02:41:14.1899040Z",
+    "ExitCode": 0,
+    "Status": "PASS",
+    "Arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll"
+    ],
+    "GateReports": [
+      "ORDINARY_ALLOCATION gate=speed-presets bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=timeline bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=clock bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=host-conversion bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=single-debt-service bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=per-event-transactions bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=canonical-group bytes=0 entry=PASS exit=PASS",
+      "CANONICAL_GROUP allocation=0 complete=True processed=5000 expected=5000",
+      "ORDINARY_ALLOCATION gate=celestial-store bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=system-definitions bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=body-catalog bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=sol-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=system-time bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=ephemeris-catalog bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=sampled-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=solmini-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=propagation-adapter bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=spacecraft-attitude bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=spacecraft-translation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=contact-response bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=attitude-integration bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=rigid-rotation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=rigid-lookup bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=guidance bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=sas-proof bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=orbit-sampling bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=frame-extraction bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=trajectory-candidate bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=trajectory-commit bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=impulse-evaluation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=impulse-commit bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=integral-arithmetic bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+      "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+    ]
+  },
+  {
+    "Label": "focused-Debug-physical-event-epoch-only",
+    "PID": 47756,
+    "StartedUTC": "2026-09-10T02:41:16.9662905Z",
+    "ExitCode": 0,
+    "Status": "PASS",
+    "Arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+      "--physical-event-epoch-only"
+    ],
+    "GateReports": []
+  },
+  {
+    "Label": "focused-Debug-translation-only",
+    "PID": 22744,
+    "StartedUTC": "2026-09-10T02:41:17.3193878Z",
+    "ExitCode": 0,
+    "Status": "PASS",
+    "Arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+      "--translation-only"
+    ],
+    "GateReports": [
+      "ORDINARY_ALLOCATION gate=spacecraft-translation bytes=0 entry=PASS exit=PASS"
+    ]
+  },
+  {
+    "Label": "focused-Debug-contact-only",
+    "PID": 40548,
+    "StartedUTC": "2026-09-10T02:41:17.5194882Z",
+    "ExitCode": 0,
+    "Status": "PASS",
+    "Arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+      "--contact-only"
+    ],
+    "GateReports": []
+  },
+  {
+    "Label": "focused-Debug-contact-response-only",
+    "PID": 44820,
+    "StartedUTC": "2026-09-10T02:41:17.8133922Z",
+    "ExitCode": 0,
+    "Status": "PASS",
+    "Arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+      "--contact-response-only"
+    ],
+    "GateReports": [
+      "ORDINARY_ALLOCATION gate=contact-response bytes=0 entry=PASS exit=PASS"
+    ]
+  },
+  {
+    "Label": "focused-Debug-isolated-contact-only",
+    "PID": 34380,
+    "StartedUTC": "2026-09-10T02:41:17.9852885Z",
+    "ExitCode": 0,
+    "Status": "PASS",
+    "Arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+      "--isolated-contact-only"
+    ],
+    "GateReports": []
+  },
+  {
+    "Label": "focused-Debug-ReferenceFrames",
+    "PID": 47368,
+    "StartedUTC": "2026-09-10T02:41:18.1218539Z",
+    "ExitCode": 0,
+    "Status": "PASS",
+    "Arguments": [
+      "tests/NovaCore.ReferenceFrames.Tests/bin/Debug/net10.0/NovaCore.ReferenceFrames.Tests.dll"
+    ],
+    "GateReports": []
+  },
+  {
+    "Label": "focused-Debug-Precision",
+    "PID": 34156,
+    "StartedUTC": "2026-09-10T02:41:19.3103815Z",
+    "ExitCode": 0,
+    "Status": "PASS",
+    "Arguments": [
+      "tests/NovaCore.Precision.Tests/bin/Debug/net10.0/NovaCore.Precision.Tests.dll"
+    ],
+    "GateReports": []
+  },
+  {
+    "Label": "focused-Release-physical-event-epoch-only",
+    "PID": 17556,
+    "StartedUTC": "2026-09-10T02:41:19.5569933Z",
+    "ExitCode": 0,
+    "Status": "PASS",
+    "Arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "--physical-event-epoch-only"
+    ],
+    "GateReports": []
+  },
+  {
+    "Label": "focused-Release-translation-only",
+    "PID": 23476,
+    "StartedUTC": "2026-09-10T02:41:19.8331414Z",
+    "ExitCode": 0,
+    "Status": "PASS",
+    "Arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "--translation-only"
+    ],
+    "GateReports": [
+      "ORDINARY_ALLOCATION gate=spacecraft-translation bytes=0 entry=PASS exit=PASS"
+    ]
+  },
+  {
+    "Label": "focused-Release-contact-only",
+    "PID": 47316,
+    "StartedUTC": "2026-09-10T02:41:20.0068489Z",
+    "ExitCode": 0,
+    "Status": "PASS",
+    "Arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "--contact-only"
+    ],
+    "GateReports": []
+  },
+  {
+    "Label": "focused-Release-contact-response-only",
+    "PID": 13792,
+    "StartedUTC": "2026-09-10T02:41:20.2621964Z",
+    "ExitCode": 0,
+    "Status": "PASS",
+    "Arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "--contact-response-only"
+    ],
+    "GateReports": [
+      "ORDINARY_ALLOCATION gate=contact-response bytes=0 entry=PASS exit=PASS"
+    ]
+  },
+  {
+    "Label": "focused-Release-isolated-contact-only",
+    "PID": 30072,
+    "StartedUTC": "2026-09-10T02:41:20.4367301Z",
+    "ExitCode": 0,
+    "Status": "PASS",
+    "Arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "--isolated-contact-only"
+    ],
+    "GateReports": []
+  },
+  {
+    "Label": "focused-Release-ReferenceFrames",
+    "PID": 22456,
+    "StartedUTC": "2026-09-10T02:41:20.5706636Z",
+    "ExitCode": 0,
+    "Status": "PASS",
+    "Arguments": [
+      "tests/NovaCore.ReferenceFrames.Tests/bin/Release/net10.0/NovaCore.ReferenceFrames.Tests.dll"
+    ],
+    "GateReports": []
+  },
+  {
+    "Label": "focused-Release-Precision",
+    "PID": 30844,
+    "StartedUTC": "2026-09-10T02:41:21.0534611Z",
+    "ExitCode": 0,
+    "Status": "PASS",
+    "Arguments": [
+      "tests/NovaCore.Precision.Tests/bin/Release/net10.0/NovaCore.Precision.Tests.dll"
+    ],
+    "GateReports": []
+  }
+]

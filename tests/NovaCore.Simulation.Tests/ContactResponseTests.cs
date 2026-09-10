@@ -553,10 +553,10 @@ internal static class ContactResponseTests
         const int count = 256;
         // One bounded warmup and one independently measured batch. No retry or GC/JIT policy overrides.
         for (var warm = 0; warm < 4; warm++) ExecutePrepared(Prepare(count), count);
-        var f = Prepare(count); var before = GC.GetAllocatedBytesForCurrentThread();
+        var f = Prepare(count); using var ordinary27 = new OrdinaryAllocationMeasurement("contact-response");
         ExecutePrepared(f, count);
-        var allocated = GC.GetAllocatedBytesForCurrentThread() - before;
-        Check(allocated == 0, $"warmed complete coupled transaction allocation: expected=0 bytes, actual={allocated} bytes");
+        var allocated = ordinary27.Complete();
+        OrdinaryAllocationMeasurement.RequireZero(allocated, "contact-response");
         Check(f.Engine.ProcessedCount == count && f.Engine.ProcessedContactImpulseCount == count &&
             f.Engine.State.Revision.Value == count && f.Clock.Timeline.PendingCount == 0,
             "warmed complete coupled transactions publish all records and consume all pending events");
