@@ -138,7 +138,7 @@ is the concise performance checkpoint. Historical LiveKernelEvent 141 remains
 
 M13 is closed at M13.6; M14 remains open with M14.1–M14.8 banked. The authorized
 [monotone Florida point-contact certification](florida-monotone-contact-certification.md)
-candidate is **UNBANKED** on `codex/florida-monotone-contact-certification`.
+candidate is **BANKED as M14.9**.
 It admits one nonrotating authored point in the existing full-weight grading,
 within one-second cells and seed-relative ±3,600-second coverage. It proves
 clear/root outcomes and bounded comparison, without event execution or response.

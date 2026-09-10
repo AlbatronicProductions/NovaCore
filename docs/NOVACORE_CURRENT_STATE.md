@@ -13,7 +13,7 @@ and performs FP64 camera-relative subtraction before GPU transport.
 
 ## Banked production checkpoint
 
-Current development: **UNBANKED monotone Florida point-contact certification**,
+Current development: **BANKED M14.9 monotone Florida point-contact certification**,
 on `codex/florida-monotone-contact-certification`. It proves clear intervals or
 unique approaching roots for one nonrotating authored point, using the existing
 full-weight grading and physical motion. Coverage is one-second cells within
@@ -128,7 +128,7 @@ Full solution builds passed with zero warnings/errors; all measured no-GC entry/
 checks passed. [Final validation and reproduction](engineering-evidence/physical-event-epoch/ordinary-class-migration/README.md)
 record these completed runs; they were not rerun for documentation reconciliation.
 M14 remains open. No next milestone number is assigned; the separately authorized
-Florida certification candidate above remains unbanked.
+Florida monotone point-contact certification is banked as M14.9.
 
 ### Closed M13 renderer baseline
 
