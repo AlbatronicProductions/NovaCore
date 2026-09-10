@@ -44,7 +44,7 @@ internal sealed partial class FloridaContactProvider
             Kinematics.Qualify(this,request,current);
 
         /// <summary>Provider-controlled evidence. Every consumption rechecks authority and exact issuing-root lineage.</summary>
-        internal readonly struct Kinematics
+        internal readonly partial struct Kinematics
         {
             private readonly Proof original;
             private readonly FloridaContactKinematics values;

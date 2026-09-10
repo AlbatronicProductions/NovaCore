@@ -13,7 +13,13 @@ and performs FP64 camera-relative subtraction before GPU transport.
 
 ## Banked production checkpoint
 
-Latest banked accomplishment: **M14.9 monotone Florida point-contact certification**,
+Latest banked accomplishment: **M14.10 — Evaluate qualified contact kinematics at
+provider-owned certified roots**, commit `fce80a520240293a0373857986c607caf187eacd`,
+tag `m14.10-certified-root-contact-kinematics`. It supplies checked same-root
+normal, relative-speed and lever enclosures with bounded qualification.
+See the [banked contract](certified-root-contact-kinematics.md).
+
+Banked predecessor: **M14.9 monotone Florida point-contact certification**,
 commit `9698a08b84b9b40b0fa03bec8f8ba80d1d7404e7`, tag
 `m14.9-florida-monotone-contact-certification`. It proves clear intervals or
 unique approaching roots for one nonrotating authored point, using the existing
@@ -21,17 +27,17 @@ full-weight grading and physical motion. Coverage is one-second cells within
 ±3,600 seconds of the Earth seed, not general mission dates. It performs no event
 execution, response or support. See the [banked contract](florida-monotone-contact-certification.md).
 
-Current development: **UNBANKED — Evaluate qualified contact kinematics at
-provider-owned certified roots**, on `codex/certified-root-contact-kinematics`.
-The provider issues a checked, immutable same-root normal/relative-speed/lever
-witness with bounded qualification and current applicability. It adds no
-response admission, mutation or coverage extension. See the
-[candidate contract](certified-root-contact-kinematics.md).
+Current development: **UNBANKED — Qualify certified isolated-contact response
+proposals at provider-owned roots**, on `codex/certified-response-proposal`.
+The read-only provider qualifies same-root effective mass and exact-law scalar,
+linear and angular impulse enclosures. It selects no executable FP64 command and
+adds no mutation, support or coverage extension. See the
+[candidate contract](certified-response-proposals.md).
 
 Banked predecessor: **M14.8 — Evaluate Earth-relative point-feature
 observations at exact physical-event epochs**, commit
 `2657bb16cdee2a42d1e5f9be830d247fb3c607f6`, annotated tag
-`m14.8-exact-event-earth-relative-observation`. **M14.1 through M14.9 are banked.**
+`m14.8-exact-event-earth-relative-observation`. **M14.1 through M14.10 are banked.**
 M14.8 owns coherent numerical observations, not interval proof. See its
 [banked contract](spacecraft-earth-event-observation.md).
 **M14 — Surface Interaction / Launch Foundation remains OPEN.**

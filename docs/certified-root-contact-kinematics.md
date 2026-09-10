@@ -1,9 +1,9 @@
 # Qualified contact kinematics at a certified root
 
-**UNBANKED — Evaluate qualified contact kinematics at provider-owned certified
-roots.** Baseline: banked M14.9 at
-`9698a08b84b9b40b0fa03bec8f8ba80d1d7404e7`. M14 remains open; no new milestone
-number is assigned. [Validation and reproduction](engineering-evidence/certified-root-contact-kinematics/README.md).
+**BANKED M14.10 — Evaluate qualified contact kinematics at provider-owned certified roots.**
+Commit `fce80a520240293a0373857986c607caf187eacd`, tag
+`m14.10-certified-root-contact-kinematics`. M14 remains open.
+[Validation and reproduction](engineering-evidence/certified-root-contact-kinematics/README.md).
 
 ## Responsibility and authority
 

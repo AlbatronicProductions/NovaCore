@@ -1,0 +1,387 @@
+{
+  "date": "2026-09-10",
+  "status": "UNBANKED; ready for Project Control acceptance",
+  "plan": {
+    "configurations": [
+      "Debug",
+      "Release"
+    ],
+    "fullSolutionBuildsPerConfiguration": 1,
+    "fullSimulationProcessesPerConfiguration": 1,
+    "fullSimulationGroups": 42,
+    "warmupsPerMeasuredOperation": 32,
+    "ordinaryTimingSamplesPerOperation": 101,
+    "separateAllocationCallsPerOperation": 8,
+    "checkedAllocationReservationBytes": 1048576,
+    "timingIncludesNoGcRegion": false,
+    "positiveControl": "one byte[128]; observed 152 bytes",
+    "sampleQuantileIndices": {
+      "median": 50,
+      "p95": 95,
+      "p99": 99,
+      "maximum": 100
+    },
+    "timerResolutionObservedNs": 100
+  },
+  "gates": [
+    {"configuration":"Debug","gate":"full solution build","exitCode":0,"result":"PASS","warnings":0,"errors":0},
+    {"configuration":"Release","gate":"full solution build","exitCode":0,"result":"PASS","warnings":0,"errors":0},
+    {"configuration":"Debug","gate":"full Simulation","exitCode":0,"result":"PASS","groups":42,"failures":0},
+    {"configuration":"Release","gate":"full Simulation","exitCode":0,"result":"PASS","groups":42,"failures":0},
+    {"configuration":"Debug","gate":"--certified-response-only","exitCode":0,"result":"PASS"},
+    {"configuration":"Debug","gate":"--translation-only","exitCode":0,"result":"PASS"},
+    {"configuration":"Debug","gate":"--contact-only","exitCode":0,"result":"PASS"},
+    {"configuration":"Debug","gate":"--contact-response-only","exitCode":0,"result":"PASS"},
+    {"configuration":"Debug","gate":"--isolated-contact-only","exitCode":0,"result":"PASS"},
+    {"configuration":"Debug","gate":"--physical-event-epoch-only","exitCode":0,"result":"PASS"},
+    {"configuration":"Debug","gate":"--exact-event-motion-only","exitCode":0,"result":"PASS"},
+    {"configuration":"Debug","gate":"--earth-event-only","exitCode":0,"result":"PASS"},
+    {"configuration":"Debug","gate":"--florida-proof-only","exitCode":0,"result":"PASS"},
+    {"configuration":"Debug","gate":"--root-kinematics-only","exitCode":0,"result":"PASS"},
+    {"configuration":"Release","gate":"--certified-response-only","exitCode":0,"result":"PASS"},
+    {"configuration":"Release","gate":"--translation-only","exitCode":0,"result":"PASS"},
+    {"configuration":"Release","gate":"--contact-only","exitCode":0,"result":"PASS"},
+    {"configuration":"Release","gate":"--contact-response-only","exitCode":0,"result":"PASS"},
+    {"configuration":"Release","gate":"--isolated-contact-only","exitCode":0,"result":"PASS"},
+    {"configuration":"Release","gate":"--physical-event-epoch-only","exitCode":0,"result":"PASS"},
+    {"configuration":"Release","gate":"--exact-event-motion-only","exitCode":0,"result":"PASS"},
+    {"configuration":"Release","gate":"--earth-event-only","exitCode":0,"result":"PASS"},
+    {"configuration":"Release","gate":"--florida-proof-only","exitCode":0,"result":"PASS"},
+    {"configuration":"Release","gate":"--root-kinematics-only","exitCode":0,"result":"PASS"},
+    {"configuration":"Debug","gate":"ReferenceFrames","exitCode":0,"result":"PASS","groups":11},
+    {"configuration":"Debug","gate":"Precision","exitCode":0,"result":"PASS"},
+    {"configuration":"Release","gate":"ReferenceFrames","exitCode":0,"result":"PASS","groups":11},
+    {"configuration":"Release","gate":"Precision","exitCode":0,"result":"PASS"},
+    {"configuration":"Debug","gate":"Certified Florida isolated response proposal","exitCode":0,"result":"PASS","category":"headless","selected":1,"passed":1,"failed":0,"skipped":0,"excluded":97},
+    {"configuration":"Release","gate":"Certified Florida isolated response proposal","exitCode":0,"result":"PASS","category":"headless","selected":1,"passed":1,"failed":0,"skipped":0,"excluded":97},
+    {"configuration":"Debug","gate":"Physical surface-point","exitCode":0,"result":"PASS","category":"headless","selected":2,"passed":2,"failed":0,"skipped":0,"excluded":96},
+    {"configuration":"Debug","gate":"Contact generation production terrain","exitCode":0,"result":"PASS","category":"headless","selected":1,"passed":1,"failed":0,"skipped":0,"excluded":97},
+    {"configuration":"Debug","gate":"Exact-event Earth-relative production terrain","exitCode":0,"result":"PASS","category":"headless","selected":1,"passed":1,"failed":0,"skipped":0,"excluded":97},
+    {"configuration":"Debug","gate":"Florida monotone contact certification","exitCode":0,"result":"PASS","category":"headless","selected":1,"passed":1,"failed":0,"skipped":0,"excluded":97},
+    {"configuration":"Debug","gate":"Qualified Florida root contact kinematics","exitCode":0,"result":"PASS","category":"headless","selected":1,"passed":1,"failed":0,"skipped":0,"excluded":97},
+    {"configuration":"Release","gate":"Physical surface-point","exitCode":0,"result":"PASS","category":"headless","selected":2,"passed":2,"failed":0,"skipped":0,"excluded":96},
+    {"configuration":"Release","gate":"Contact generation production terrain","exitCode":0,"result":"PASS","category":"headless","selected":1,"passed":1,"failed":0,"skipped":0,"excluded":97},
+    {"configuration":"Release","gate":"Exact-event Earth-relative production terrain","exitCode":0,"result":"PASS","category":"headless","selected":1,"passed":1,"failed":0,"skipped":0,"excluded":97},
+    {"configuration":"Release","gate":"Florida monotone contact certification","exitCode":0,"result":"PASS","category":"headless","selected":1,"passed":1,"failed":0,"skipped":0,"excluded":97},
+    {"configuration":"Release","gate":"Qualified Florida root contact kinematics","exitCode":0,"result":"PASS","category":"headless","selected":1,"passed":1,"failed":0,"skipped":0,"excluded":97}
+  ],
+  "simulationGroupOrder": [
+    "SimulationInstant",
+    "SimulationDuration",
+    "SimulationRate",
+    "Solar UTC and speed presets",
+    "Event ordering",
+    "Internal physical-event epochs",
+    "Timeline topology",
+    "Simulation clock",
+    "Host-duration conversion",
+    "Host-duration debt servicing",
+    "Transaction contracts",
+    "Canonical transaction groups",
+    "Clock execution orchestration",
+    "Celestial contracts",
+    "Celestial system definitions",
+    "Celestial body catalog",
+    "SolAnalytical dataset",
+    "Celestial system time and provenance",
+    "Celestial ephemeris catalogs",
+    "Celestial system evaluation",
+    "Celestial body orientation",
+    "Two-body propagation",
+    "Spacecraft attitude",
+    "Spacecraft translational authority",
+    "Spacecraft contact generation",
+    "Unified linear/angular contact transaction",
+    "Isolated analytical contact response policy",
+    "Spacecraft attitude integration",
+    "Rigid-body rotation",
+    "Rigid-body torque transaction",
+    "Flight reference and SAS guidance",
+    "SAS sign/frame continuity proof",
+    "Analytical orbit sampling",
+    "Celestial frame extraction",
+    "Celestial trajectory replacement",
+    "Celestial impulse events",
+    "Allocation",
+    "Exact-event spacecraft motion",
+    "Exact-event Earth-relative observation",
+    "Florida monotone contact proof",
+    "Qualified root contact kinematics",
+    "Certified isolated-contact response proposals"
+  ],
+  "response": {
+    "Debug": {
+      "independentRoot": {
+        "kind": "response-independent-root",
+        "rootLower": "0.48001532256603240966796875",
+        "rootUpper": "0.480015337467193603515625",
+        "speed": "-1.0832595112553633842299820061",
+        "speedError": "0.0000000775860382080078125000",
+        "normalRemainder": "0.0000000000000000000001005551",
+        "oracle": "independent ODE/decimal root bracket then exact-rational interval rotation matrix and response",
+        "containment": "PASS"
+      },
+      "values": {
+        "kind": "response-values",
+        "k": [
+          6.294770917159207,
+          6.294771118411056
+        ],
+        "j": [
+          0.17208846935722585,
+          0.1720890762406888
+        ],
+        "linear": [
+          {
+            "Lower": -0.14237404218033572,
+            "Upper": -0.14237353915395642
+          },
+          {
+            "Lower": -0.05054262637812698,
+            "Upper": -0.050542447197718186
+          },
+          {
+            "Lower": 0.08239949930193914,
+            "Upper": 0.08239978989022677
+          }
+        ],
+        "angular": [
+          {
+            "Lower": -0.5323810179177274,
+            "Upper": -0.5323791329056656
+          },
+          {
+            "Lower": -0.3475567513101953,
+            "Upper": -0.34755551810121726
+          },
+          {
+            "Lower": -0.054244164079340566,
+            "Upper": -0.054243965253812386
+          }
+        ]
+      },
+      "costs": [
+        {
+          "kind": "response-cost",
+          "name": "request setup",
+          "bytes": 0,
+          "calls": 8,
+          "medianNs": 0,
+          "p95Ns": 100,
+          "p99Ns": 100,
+          "maximumNs": 300
+        },
+        {
+          "kind": "response-cost",
+          "name": "qualified proposal",
+          "bytes": 0,
+          "calls": 8,
+          "medianNs": 3400,
+          "p95Ns": 3400,
+          "p99Ns": 3500,
+          "maximumNs": 8900
+        },
+        {
+          "kind": "response-cost",
+          "name": "checked consumption",
+          "bytes": 0,
+          "calls": 8,
+          "medianNs": 700,
+          "p95Ns": 800,
+          "p99Ns": 800,
+          "maximumNs": 800
+        },
+        {
+          "kind": "response-cost",
+          "name": "width refusal",
+          "bytes": 0,
+          "calls": 8,
+          "medianNs": 3000,
+          "p95Ns": 4000,
+          "p99Ns": 4400,
+          "maximumNs": 4400
+        },
+        {
+          "kind": "response-cost",
+          "name": "stale refusal",
+          "bytes": 0,
+          "calls": 8,
+          "medianNs": 200,
+          "p95Ns": 300,
+          "p99Ns": 300,
+          "maximumNs": 300
+        },
+        {
+          "kind": "response-cost",
+          "name": "unsupported refusal",
+          "bytes": 0,
+          "calls": 8,
+          "medianNs": 200,
+          "p95Ns": 300,
+          "p99Ns": 300,
+          "maximumNs": 300
+        }
+      ],
+      "workspace": {
+        "kind": "response-workspace",
+        "proposalBytes": 640,
+        "valuesBytes": 128,
+        "requestBytes": 32,
+        "additionalHeapWorkspaceBytes": 0,
+        "sourceReadsPerQualification": 1,
+        "sourceReadsPerConsumption": 1,
+        "refinementCalls": 0,
+        "responseEvaluationsPerQualification": 1,
+        "policyVersion": 1,
+        "numericalVersion": 1
+      },
+      "allocationRegionEntries": "PASS all six operations and positive control",
+      "allocationRegionExits": "PASS all six operations and positive control",
+      "positiveControlBytes": 152,
+      "authorityRefusalReplayAndNonmutation": "PASS"
+    },
+    "Release": {
+      "independentRoot": {
+        "kind": "response-independent-root",
+        "rootLower": "0.48001532256603240966796875",
+        "rootUpper": "0.480015337467193603515625",
+        "speed": "-1.0832595112553633842299820061",
+        "speedError": "0.0000000775860382080078125000",
+        "normalRemainder": "0.0000000000000000000001005551",
+        "oracle": "independent ODE/decimal root bracket then exact-rational interval rotation matrix and response",
+        "containment": "PASS"
+      },
+      "values": {
+        "kind": "response-values",
+        "k": [
+          6.294770917159207,
+          6.294771118411056
+        ],
+        "j": [
+          0.17208846935722585,
+          0.1720890762406888
+        ],
+        "linear": [
+          {
+            "Lower": -0.14237404218033572,
+            "Upper": -0.14237353915395642
+          },
+          {
+            "Lower": -0.05054262637812698,
+            "Upper": -0.050542447197718186
+          },
+          {
+            "Lower": 0.08239949930193914,
+            "Upper": 0.08239978989022677
+          }
+        ],
+        "angular": [
+          {
+            "Lower": -0.5323810179177274,
+            "Upper": -0.5323791329056656
+          },
+          {
+            "Lower": -0.3475567513101953,
+            "Upper": -0.34755551810121726
+          },
+          {
+            "Lower": -0.054244164079340566,
+            "Upper": -0.054243965253812386
+          }
+        ]
+      },
+      "costs": [
+        {
+          "kind": "response-cost",
+          "name": "request setup",
+          "bytes": 0,
+          "calls": 8,
+          "medianNs": 0,
+          "p95Ns": 100,
+          "p99Ns": 100,
+          "maximumNs": 100
+        },
+        {
+          "kind": "response-cost",
+          "name": "qualified proposal",
+          "bytes": 0,
+          "calls": 8,
+          "medianNs": 2900,
+          "p95Ns": 3000,
+          "p99Ns": 3000,
+          "maximumNs": 3100
+        },
+        {
+          "kind": "response-cost",
+          "name": "checked consumption",
+          "bytes": 0,
+          "calls": 8,
+          "medianNs": 700,
+          "p95Ns": 700,
+          "p99Ns": 700,
+          "maximumNs": 700
+        },
+        {
+          "kind": "response-cost",
+          "name": "width refusal",
+          "bytes": 0,
+          "calls": 8,
+          "medianNs": 2500,
+          "p95Ns": 2700,
+          "p99Ns": 19100,
+          "maximumNs": 20400
+        },
+        {
+          "kind": "response-cost",
+          "name": "stale refusal",
+          "bytes": 0,
+          "calls": 8,
+          "medianNs": 200,
+          "p95Ns": 200,
+          "p99Ns": 200,
+          "maximumNs": 200
+        },
+        {
+          "kind": "response-cost",
+          "name": "unsupported refusal",
+          "bytes": 0,
+          "calls": 8,
+          "medianNs": 200,
+          "p95Ns": 200,
+          "p99Ns": 200,
+          "maximumNs": 200
+        }
+      ],
+      "workspace": {
+        "kind": "response-workspace",
+        "proposalBytes": 640,
+        "valuesBytes": 128,
+        "requestBytes": 32,
+        "additionalHeapWorkspaceBytes": 0,
+        "sourceReadsPerQualification": 1,
+        "sourceReadsPerConsumption": 1,
+        "refinementCalls": 0,
+        "responseEvaluationsPerQualification": 1,
+        "policyVersion": 1,
+        "numericalVersion": 1
+      },
+      "allocationRegionEntries": "PASS all six operations and positive control",
+      "allocationRegionExits": "PASS all six operations and positive control",
+      "positiveControlBytes": 152,
+      "authorityRefusalReplayAndNonmutation": "PASS"
+    }
+  },
+  "focusedHeadlessTotalPerConfiguration": {
+    "passed": 7,
+    "failed": 0,
+    "skipped": 0
+  },
+  "manualVisualAcceptance": "NOT REQUIRED",
+  "limitations": [
+    "One bounded run per final full suite; measured per-root CPU costs, not whole-frame or scaling guarantees.",
+    "Root admission and M14.10 witness construction are upstream costs and are excluded from incremental response request setup.",
+    "Zero-valued request-setup timing samples reflect timer quantization/possible inlining; they do not establish zero execution cost.",
+    "Release width-refusal maximum 20400 ns retained; no causal allocation/performance campaign launched.",
+    "No GPU/window campaign run; excluded Graphics tests are outside this ticket's selected headless surface."
+  ]
+}

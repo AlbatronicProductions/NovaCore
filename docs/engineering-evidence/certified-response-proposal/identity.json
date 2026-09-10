@@ -1,0 +1,123 @@
+{
+  "baseline": {
+    "branch": "main",
+    "clean": true,
+    "refs": {
+      "HEAD": "fce80a520240293a0373857986c607caf187eacd",
+      "main": "fce80a520240293a0373857986c607caf187eacd",
+      "origin/main": "fce80a520240293a0373857986c607caf187eacd",
+      "m14.1-canonical-surface-point-queries": "5b9b02ab1d2ba0e903809510908e4819984d4de2",
+      "m14.10-certified-root-contact-kinematics": "fce80a520240293a0373857986c607caf187eacd",
+      "m14.2-spacecraft-translational-authority": "caa6d93ccd7c4e5924381e077a62585f99e5a32a",
+      "m14.3-spacecraft-terrain-contact-observations": "79978cf8b0fd783d43a661df6df53a2c0202af4a",
+      "m14.4-atomic-contact-response": "28b92f724f8decd3c9356aa5f9f5bbd6c9dd069c",
+      "m14.5-isolated-analytical-contact-response": "b53d48025cfb8142cb32a6fc6fceb6018e33cfcd",
+      "m14.6-physical-event-epochs": "d0b9f9d69d55b8ba85a7b24a44f93e03cea2dcf6",
+      "m14.7-exact-event-spacecraft-motion": "56c0ae95b7f514e2f0440dfe272dd2836f32506e",
+      "m14.8-exact-event-earth-relative-observation": "2657bb16cdee2a42d1e5f9be830d247fb3c607f6",
+      "m14.9-florida-monotone-contact-certification": "9698a08b84b9b40b0fa03bec8f8ba80d1d7404e7"
+    }
+  },
+  "candidateBranch": "codex/certified-response-proposal",
+  "sdk": "10.0.303",
+  "runtime": "Microsoft.NETCore.App 10.0.12; win-x64; default ordinary runtime",
+  "productionInventory": {
+    "baselineTrackedCSharp": 225,
+    "unchangedExisting": 224,
+    "modifiedExisting": 1,
+    "newFiles": 2,
+    "onlyExistingProductionEdit": "FloridaContactKinematics.Kinematics declaration gains partial; no changed existing method",
+    "method": "Case-insensitive SHA256 comparison of all baseline tracked src/**/*.cs before/after; Git content diff reviewed."
+  },
+  "testInventory": {
+    "baselineTrackedCSharp": 56,
+    "unchangedExisting": 54,
+    "modifiedExistingRegistrations": 2,
+    "newCSharpFiles": 3,
+    "testProjectLinksAdded": 1
+  },
+  "fingerprints": [
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/CertifiedContactResponse.cs",
+      "beforeSha256": null,
+      "afterSha256": "faaa90b6257cb121e30895900a48c1e68bf4fedf34f37d2ae677da7f22eddb85"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/FloridaCertifiedResponse.cs",
+      "beforeSha256": null,
+      "afterSha256": "ef26f4210ad5a1efc304d77855d51827bdc401c3db2f2821268b86a5b9b38d02"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/FloridaContactKinematics.cs",
+      "beforeSha256": "2ef46bf1079b0e0b01a02abc92120230783fcf5d7b8244f8d412e86bb42224ce",
+      "afterSha256": "2ffff60d5a0d8d0614de4ee559ae682dc51059dea3271a94536426a276773543"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/NovaCore.Graphics.Tests.csproj",
+      "beforeSha256": null,
+      "afterSha256": "1b48b741e0519e9d50f9eec1ba20be6413f41b00d9a753f4c1c3a9898a596ac2",
+      "baselineNote": "Existing project; outside initial C# hash inventory. One test-only Compile link added."
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/Program.cs",
+      "beforeSha256": "f165ca416b74a96010799d2b058d6048d4cd86b509ae455e6a0c99baa337043e",
+      "afterSha256": "9538b833057632a259ad287e2e9675b66e6ca2ce0044d15d11160da99e809516"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/CertifiedFloridaResponseTests.cs",
+      "beforeSha256": null,
+      "afterSha256": "4339b328471ff2abb3ea0b6cc950a497797f05907db108531518bd024b8940c5"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "beforeSha256": "c04fe4b0246bfb24022c3e0e966dd5fb15dfacb3cf857051f1a58535041e87c3",
+      "afterSha256": "04bce7e67dc7b3066638ce73b88505ec670035b6fd3cb5cb7eaf0122e055357e"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/CertifiedContactResponseTests.cs",
+      "beforeSha256": null,
+      "afterSha256": "d6f63f222bf871375c1fe910f95d3a8f068620dac89885d496cf702dca9fa9d2"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/CertifiedResponseOracle.cs",
+      "beforeSha256": null,
+      "afterSha256": "adfcd63a4a2ac598d29ce56ddb88e9b016c178bd2648aead871d65ec783f3614"
+    }
+  ],
+  "unchangedBankedBoundaries": [
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/IsolatedContactResponsePolicy.cs",
+      "sha256": "175bdd275bd9de78fa3196de1585bab1cb56c7b2be14bcf63275736b1af7c6d6"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/SpacecraftContactImpulse.cs",
+      "sha256": "3dd79ffb33aa0a16ba840755297509b54fbe58fb6f8cf1df7b617054a0d3cd40"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.ContactImpulse.cs",
+      "sha256": "7b78e6045ca6d38fce8bb5931aad2bedca5a7a5b9d72913259a95980638dd061"
+    }
+  ],
+  "nativeHeadlessDependencies": {
+    "Debug": {
+      "loaded": "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Native.dll",
+      "source": "build/native-ninja/NovaCore.Native.dll",
+      "sha256": "6E10A80772EFAA51DA256983355B1AB3BDEC49E792891BFC5280C12A596BDC6E"
+    },
+    "Release": {
+      "loaded": "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Native.dll",
+      "source": "build/native-ninja-release/NovaCore.Native.dll",
+      "sha256": "62594A23368D008963011AA79FE1D385CCC863976D6014DC79F5CC6DACD5997B"
+    }
+  },
+  "ksa": {
+    "installedPath": "E:/Kitten Space Agency",
+    "version": "2026.9.7.5402+487c3f340de24c6a81037120b6d1129c045c5400",
+    "ksaSha256": "A8A5164204EED962DF9D9025E99F523D9A23EE2CE6E802B18216A9DA35506D2F",
+    "bepuSha256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7",
+    "brutalNumericsSha256": "73346CB3BE59CB0B480F342DA54279EFF09D36C8030AB76C954F7B64DFA06A20",
+    "cachedSource": "build/ksa-residency-reference/assembly-source/KSA",
+    "matchingSixSourceFingerprints": "Rechecked against ../certified-root-contact-kinematics/identity.json; all six match.",
+    "historyProvenance": "Authenticated official engineering-history observations reused from the preceding assessment; current installed source and hashes rechecked."
+  }
+}

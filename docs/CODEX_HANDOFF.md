@@ -34,9 +34,12 @@ Surface Interaction / Launch Foundation has banked **M14.1**, commit
 physical-event epochs**, commit `d0b9f9d69d55b8ba85a7b24a44f93e03cea2dcf6`, tag
 `m14.6-physical-event-epochs`. M14 remains **OPEN**.
 
-M14.1 through M14.9 are banked. The current baseline is M14.9,
-`9698a08b84b9b40b0fa03bec8f8ba80d1d7404e7`, tag
-`m14.9-florida-monotone-contact-certification`. M14.8 is
+M14.1 through M14.10 are banked. The current baseline is M14.10,
+`fce80a520240293a0373857986c607caf187eacd`, tag
+`m14.10-certified-root-contact-kinematics`. Current development is the unbanked
+[certified response proposal](certified-response-proposals.md), on
+`codex/certified-response-proposal`: same-root exact-law enclosures without
+executable FP64 selection or mutation. M14.8 is
 `2657bb16cdee2a42d1e5f9be830d247fb3c607f6`, tag
 `m14.8-exact-event-earth-relative-observation`; it owns same-epoch numerical
 Earth/point observations. **M14.7 — Evaluate coherent spacecraft motion at
@@ -61,7 +64,7 @@ unsupported recovery. It is frictionless with restitution zero, no penetration
 recovery, general multi-contact solver, persistent support/grounding or automatic
 touchdown. **Exact event time is not exact representable event state**: M14.6 does
 not guarantee an FP64 impact state satisfying strict represented-zero admission.
-The unbanked [root-kinematics witness](certified-root-contact-kinematics.md)
+The banked [root-kinematics witness](certified-root-contact-kinematics.md)
 qualifies read-only normal, velocity and lever enclosures. It supplies no
 response/application contract or exact FP64 impact state.
 
