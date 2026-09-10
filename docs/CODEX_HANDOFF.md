@@ -34,7 +34,10 @@ Surface Interaction / Launch Foundation has banked **M14.1**, commit
 physical-event epochs**, commit `d0b9f9d69d55b8ba85a7b24a44f93e03cea2dcf6`, tag
 `m14.6-physical-event-epochs`. M14 remains **OPEN**.
 
-M14.1 through M14.7 are banked. **M14.7 — Evaluate coherent spacecraft motion at
+M14.1 through M14.8 are banked. M14.8's current baseline is
+`2657bb16cdee2a42d1e5f9be830d247fb3c607f6`, tag
+`m14.8-exact-event-earth-relative-observation`; it owns same-epoch numerical
+Earth/point observations. **M14.7 — Evaluate coherent spacecraft motion at
 exact physical-event epochs**, tag `m14.7-exact-event-spacecraft-motion`, adds
 read-only exact-event motion beside unchanged banked canonical evaluators.
 The earlier final Release matrix stopped on the lunar 12,336-byte counter witness;
@@ -133,11 +136,14 @@ is the concise performance checkpoint. Historical LiveKernelEvent 141 remains
 
 ## Next architectural decision and work boundary
 
-M13 is closed at M13.6; M14 remains open with M14.1–M14.7 banked. The authorized
-[exact-event Earth-relative observation](spacecraft-earth-event-observation.md)
-candidate is **UNBANKED** on `codex/exact-event-earth-relative-observation`.
+M13 is closed at M13.6; M14 remains open with M14.1–M14.8 banked. The authorized
+[monotone Florida point-contact certification](florida-monotone-contact-certification.md)
+candidate is **UNBANKED** on `codex/florida-monotone-contact-certification`.
+It admits one nonrotating authored point in the existing full-weight grading,
+within one-second cells and seed-relative ±3,600-second coverage. It proves
+clear/root outcomes and bounded comparison, without event execution or response.
 No next milestone number is assigned. Return the candidate to Project Control;
-do not start discovery, contact execution or support from a provisional ranking.
+do not broaden discovery or start contact execution or support.
 
 - Preserve banked M13.1–M13.6 outcomes and future tessellation/displacement capacity.
 - Historical exact-copy, residual-validation and lifecycle experiments are evidence,

@@ -9,7 +9,7 @@ namespace NovaCore.Graphics;
 /// No renderer or simulation startup is required. The current oracle datasets publish once and
 /// never mutate/unload; consequently an acquired authority cannot become partially resident.
 /// </summary>
-public sealed class PlanetaryPhysicalSurfacePointQuery : IPhysicalSurfacePointQuery
+public sealed class PlanetaryPhysicalSurfacePointQuery : IPhysicalSurfacePointQuery, IPhysicalGradingProofSource
 {
     // Existing physical normal parity ceiling. This is numerical qualification, not proof of
     // differentiability everywhere: unresolved creases and unstable stencils explicitly fail.
@@ -22,6 +22,14 @@ public sealed class PlanetaryPhysicalSurfacePointQuery : IPhysicalSurfacePointQu
 
     private PlanetaryPhysicalSurfacePointQuery(PhysicalSurfaceAuthorityIdentity authority) => Authority = authority;
     public PhysicalSurfaceAuthorityIdentity Authority { get; }
+    FacilitySupportRegion IPhysicalGradingProofSource.GradingRegion => FloridaFacilitySupport.Region;
+    bool IPhysicalGradingProofSource.IsNumericalFullWeight(in Double3 direction)
+    {
+        if (!direction.IsFinite || Math.Abs(direction.LengthSquared-1d)>SurfaceAnchor.DirectionUnitLengthSquaredTolerance) return false;
+        // M14.8 supplies the returned query direction: attest those exact sample bits.
+        var sample=FloridaFacilitySupport.Region.Sample(direction);
+        return sample.Weight==1d && double.IsFinite(sample.PlaneHeight) && sample.PlaneHeight>0;
+    }
 
     /// <summary>
     /// repositoryRoot is the trusted application's content root. Authority comes from its fixed

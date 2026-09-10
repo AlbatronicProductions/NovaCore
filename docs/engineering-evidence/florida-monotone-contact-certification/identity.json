@@ -1,0 +1,128 @@
+{
+  "baseline": "2657bb16cdee2a42d1e5f9be830d247fb3c607f6",
+  "branch": "codex/florida-monotone-contact-certification",
+  "main": "2657bb16cdee2a42d1e5f9be830d247fb3c607f6",
+  "originMain": "2657bb16cdee2a42d1e5f9be830d247fb3c607f6",
+  "bankedTags": [
+    "m14.1-canonical-surface-point-queries 5b9b02ab1d2ba0e903809510908e4819984d4de2",
+    "m14.2-spacecraft-translational-authority caa6d93ccd7c4e5924381e077a62585f99e5a32a",
+    "m14.3-spacecraft-terrain-contact-observations 79978cf8b0fd783d43a661df6df53a2c0202af4a",
+    "m14.4-atomic-contact-response 28b92f724f8decd3c9356aa5f9f5bbd6c9dd069c",
+    "m14.5-isolated-analytical-contact-response b53d48025cfb8142cb32a6fc6fceb6018e33cfcd",
+    "m14.6-physical-event-epochs d0b9f9d69d55b8ba85a7b24a44f93e03cea2dcf6",
+    "m14.7-exact-event-spacecraft-motion 56c0ae95b7f514e2f0440dfe272dd2836f32506e",
+    "m14.8-exact-event-earth-relative-observation 2657bb16cdee2a42d1e5f9be830d247fb3c607f6"
+  ],
+  "baselineTrackedProductionCSharpCount": 218,
+  "existingProductionCSharpChanges": [
+    "src/NovaCore.Core/AssemblyInfo.cs",
+    "src/NovaCore.Graphics/PlanetaryPhysicalSurfacePointQuery.cs"
+  ],
+  "newProductionCSharp": [
+    "src/NovaCore.Core/Surface/IPhysicalGradingProofSource.cs",
+    "src/NovaCore.Simulation/Celestial/EarthContactProofModel.cs",
+    "src/NovaCore.Simulation/Spacecraft/Contact/FloridaContactBounds.cs",
+    "src/NovaCore.Simulation/Spacecraft/Contact/FloridaContactMotion.cs",
+    "src/NovaCore.Simulation/Spacecraft/Contact/FloridaContactProvider.cs",
+    "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.ContactProof.cs"
+  ],
+  "stagedCount": 0,
+  "files": [
+    {
+      "path": "src/NovaCore.Core/AssemblyInfo.cs",
+      "bytes": 516,
+      "sha256": "35C6E45F034D3878D094899F59EF31CB3CD3F8EA1352430D79C33057C19690DD",
+      "gitFilteredBlob": "7b15e064a1a2449eb2ae4e3d5f6aad2c96e77630"
+    },
+    {
+      "path": "src/NovaCore.Core/Surface/IPhysicalGradingProofSource.cs",
+      "bytes": 598,
+      "sha256": "D6C155554254CBB8F86BDE5CA703D2217B63A35EB3E306C4F3A808A684CEE2F9",
+      "gitFilteredBlob": "76432587c638bf4861f3cdf8ffd6e56ba0ceb457"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetaryPhysicalSurfacePointQuery.cs",
+      "bytes": 9418,
+      "sha256": "AB365A121E40C03910A9701F90FD4048FC66B5DDAA9F8AC1388E523F3F2D9FA1",
+      "gitFilteredBlob": "ab4660fad9697a12fec9a0650c9a95342bcbdaaa"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/EarthContactProofModel.cs",
+      "bytes": 814,
+      "sha256": "AD42FD9671350F48A00D72DB8480AD0D2AC9FCF9B067AD935BDBA83CEE31A2CD",
+      "gitFilteredBlob": "f25fc53351a75f1c04cf8d256f7e21353eeee8fc"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/FloridaContactBounds.cs",
+      "bytes": 5558,
+      "sha256": "F8658D0E6EF10E382940A791849820A0744548B353848D19652DF9C706652005",
+      "gitFilteredBlob": "b7c99ad56eafbef5908d70f04a3f888e9fe59680"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/FloridaContactMotion.cs",
+      "bytes": 8766,
+      "sha256": "BDFB1C1C8589ACA64DF94EA6D3C4167A3E8811E4D6F9A90144286C465ADA6F13",
+      "gitFilteredBlob": "0f578fcb0951a6dfa39e8ff3c06268ace9d8acce"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/FloridaContactProvider.cs",
+      "bytes": 19396,
+      "sha256": "6977F382201668A6E8B7F0C285DE4949B2BAA60B64262F5EE54F9D70A7BDB57A",
+      "gitFilteredBlob": "a81931f62850c747828b33e43048c477be84c742"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.ContactProof.cs",
+      "bytes": 681,
+      "sha256": "E48425DEC1A0B9B89B69FE20A9A497F326B4CA5583CCFF3CD9DC7D21E3F725D0",
+      "gitFilteredBlob": "c4be259e06ca112ee2c0793f06247594ce2f9ce2"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/FloridaContactProductionTests.cs",
+      "bytes": 27784,
+      "sha256": "90C016E54040B7F18211EF052146557C1EEF571B79EDA369D83F822C6A602DC0",
+      "gitFilteredBlob": "1728b6cda8d83678ae17acd98907454ecbc8c085"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/NovaCore.Graphics.Tests.csproj",
+      "bytes": 2273,
+      "sha256": "813682257CD4B967FEF42F67DBC151E74EDDF9A932D103CC3099388605C9C55F",
+      "gitFilteredBlob": "c1741cd65bd95b0b6a29db58fa2dd2b32d8b3d8d"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/Program.cs",
+      "bytes": 565916,
+      "sha256": "69C392FA676222F95C9AC844CCDF4A8C756BD7A14A875A34F2342308B0BD7E66",
+      "gitFilteredBlob": "68c86a2e7324734d26ff35deb637757ec2427bcc"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/FloridaContactProofTests.cs",
+      "bytes": 9432,
+      "sha256": "0EA2933396D252FF255265099A575B5C441E471D077DC28B3465CB4415FA54F3",
+      "gitFilteredBlob": "47ae0c3378fc0cf786a84342a49eb3ca87788dcf"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "bytes": 247408,
+      "sha256": "0B100C74D775A3EEBF1E8E2B25551A8F6A79FED0CAF9858C8BF1C865996BF0B9",
+      "gitFilteredBlob": "eba60d6644be4f6e48f640cbf740f30ec01a564d"
+    }
+  ],
+  "runtimeConfig": {
+    "runtimeOptions": {
+      "tfm": "net10.0",
+      "framework": {
+        "name": "Microsoft.NETCore.App",
+        "version": "10.0.0"
+      },
+      "configProperties": {
+        "System.Reflection.Metadata.MetadataUpdater.IsSupported": false,
+        "System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization": false
+      }
+    }
+  },
+  "sdk": "10.0.303",
+  "machine": "ALBATRONIC007",
+  "cpu": "AMD Ryzen 9 9900X 12-Core Processor",
+  "ksaDllSha256": "A8A5164204EED962DF9D9025E99F523D9A23EE2CE6E802B18216A9DA35506D2F",
+  "ksaVersion": "2026.9.7.5402"
+}

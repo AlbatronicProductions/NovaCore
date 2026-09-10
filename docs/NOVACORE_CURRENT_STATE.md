@@ -13,16 +13,19 @@ and performs FP64 camera-relative subtraction before GPU transport.
 
 ## Banked production checkpoint
 
-Current development: **UNBANKED exact-event Earth-relative point-feature
-observation candidate**, on `codex/exact-event-earth-relative-observation`.
-It evaluates one authored point against canonical physical Earth at the same exact
-event epoch. It adds no contact proof, discovery or mutation. See the
-[candidate contract](spacecraft-earth-event-observation.md).
+Current development: **UNBANKED monotone Florida point-contact certification**,
+on `codex/florida-monotone-contact-certification`. It proves clear intervals or
+unique approaching roots for one nonrotating authored point, using the existing
+full-weight grading and physical motion. Coverage is one-second cells within
+±3,600 seconds of the Earth seed, not general mission dates. It performs no event
+execution, response or support. See the [candidate contract](florida-monotone-contact-certification.md).
 
-Latest banked accomplishment: **M14.7 — Evaluate coherent spacecraft motion at exact
-physical-event epochs**, annotated tag `m14.7-exact-event-spacecraft-motion`.
-**BANKED.** M14.1 through M14.7 are banked. The tag identifies the milestone commit;
-the preceding reconciled main was `00f226096b61a117184464b5619e464d39789574`.
+Latest banked accomplishment: **M14.8 — Evaluate Earth-relative point-feature
+observations at exact physical-event epochs**, commit
+`2657bb16cdee2a42d1e5f9be830d247fb3c607f6`, annotated tag
+`m14.8-exact-event-earth-relative-observation`. **M14.1 through M14.8 are banked.**
+M14.8 owns coherent numerical observations, not interval proof. See its
+[banked contract](spacecraft-earth-event-observation.md).
 **M14 — Surface Interaction / Launch Foundation remains OPEN.**
 
 ### Banked additive exact-event motion
@@ -125,7 +128,7 @@ Full solution builds passed with zero warnings/errors; all measured no-GC entry/
 checks passed. [Final validation and reproduction](engineering-evidence/physical-event-epoch/ordinary-class-migration/README.md)
 record these completed runs; they were not rerun for documentation reconciliation.
 M14 remains open. No next milestone number is assigned; the separately authorized
-Earth-relative observation candidate above remains unbanked.
+Florida certification candidate above remains unbanked.
 
 ### Closed M13 renderer baseline
 
@@ -398,18 +401,18 @@ visually finished.
 
 ## Next architectural decision and work boundary
 
-M14 remains open at banked M14.7. Read-only exact-event motion and the timed-test
-split are accepted. The development worktree is `E:\NovaCore` on
-`codex/exact-event-earth-relative-observation`; `main` remains the banked baseline.
+M14 remains open at banked M14.8. The development worktree is `E:\NovaCore` on
+`codex/florida-monotone-contact-certification`; `main` remains the banked baseline.
 M13 is closed at M13.6 and there is no M13.7. Preserve the
 accepted NCSM1 physical, regional/facility, visibility, tessellation, memory and
 publication contracts. Historical exact-copy, residual-validation and lifecycle
 experiments do not automatically become production candidates.
 
-Project Control must accept the current read-only Earth-relative observation
+Project Control must accept the current bounded Florida certification
 candidate and choose any later responsibility within the open M14 front.
-No physical execution, discovery, solver, launch/landing or measurement migration
-is opened by this candidate.
+Only its declared monotone grading-domain discovery is implemented. No physical
+execution, general terrain discovery, solver, launch/landing or measurement
+migration is opened by this candidate.
 Do not assign a next milestone or regenerate NCSM1 assets.
 Future work must distinguish physical geometry, depth/ownership and
 presentation/LOD behavior while keeping `H(bodyDirection)` authoritative.

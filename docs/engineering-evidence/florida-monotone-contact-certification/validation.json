@@ -1,0 +1,758 @@
+{
+  "schema": 1,
+  "baseline": "2657bb16cdee2a42d1e5f9be830d247fb3c607f6",
+  "configurationOrder": "Final changed tests: Debug then Release, fresh processes. No unchanged failed gate retried.",
+  "gates": [
+    {
+      "configuration": "Debug",
+      "name": "Full solution build",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Debug",
+      "name": "Full Simulation 40 groups",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Debug",
+      "name": "ReferenceFrames 11 groups",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Debug",
+      "name": "Precision",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Debug",
+      "name": "--florida-proof-only",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Debug",
+      "name": "--translation-only",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Debug",
+      "name": "--contact-only",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Debug",
+      "name": "--contact-response-only",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Debug",
+      "name": "--isolated-contact-only",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Debug",
+      "name": "--physical-event-epoch-only",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Debug",
+      "name": "--exact-event-motion-only",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Debug",
+      "name": "--earth-event-only",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Debug",
+      "name": "Exact-event Earth-relative production terrain",
+      "pass": 1,
+      "fail": 0,
+      "skip": 0,
+      "exitCode": 0
+    },
+    {
+      "configuration": "Debug",
+      "name": "Contact generation production terrain",
+      "pass": 1,
+      "fail": 0,
+      "skip": 0,
+      "exitCode": 0
+    },
+    {
+      "configuration": "Debug",
+      "name": "Physical surface-point",
+      "pass": 2,
+      "fail": 0,
+      "skip": 0,
+      "exitCode": 0
+    },
+    {
+      "configuration": "Release",
+      "name": "Full solution build",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Release",
+      "name": "Full Simulation 40 groups",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Release",
+      "name": "ReferenceFrames 11 groups",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Release",
+      "name": "Precision",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Release",
+      "name": "--florida-proof-only",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Release",
+      "name": "--translation-only",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Release",
+      "name": "--contact-only",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Release",
+      "name": "--contact-response-only",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Release",
+      "name": "--isolated-contact-only",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Release",
+      "name": "--physical-event-epoch-only",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Release",
+      "name": "--exact-event-motion-only",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Release",
+      "name": "--earth-event-only",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Release",
+      "name": "Exact-event Earth-relative production terrain",
+      "pass": 1,
+      "fail": 0,
+      "skip": 0,
+      "exitCode": 0
+    },
+    {
+      "configuration": "Release",
+      "name": "Contact generation production terrain",
+      "pass": 1,
+      "fail": 0,
+      "skip": 0,
+      "exitCode": 0
+    },
+    {
+      "configuration": "Release",
+      "name": "Physical surface-point",
+      "pass": 2,
+      "fail": 0,
+      "skip": 0,
+      "exitCode": 0
+    },
+    {
+      "configuration": "Debug",
+      "name": "Florida production terrain and cost",
+      "exitCode": 0,
+      "pass": 1,
+      "fail": 0,
+      "skip": 0
+    },
+    {
+      "configuration": "Release",
+      "name": "Florida production terrain and cost",
+      "exitCode": 0,
+      "pass": 1,
+      "fail": 0,
+      "skip": 0
+    }
+  ],
+  "witnessEqualityDebugRelease": true,
+  "debug": {
+    "records": [
+      {
+        "kind": "Florida-certificate",
+        "start": 0,
+        "status": "CertifiedClear",
+        "RootEnclosure": {
+          "Lower": 0,
+          "Upper": 1
+        },
+        "Function": {
+          "Lower": 9.971718955785034,
+          "Upper": 10.034916226752104
+        },
+        "Derivative": {
+          "Lower": -0.08598212156656489,
+          "Upper": 0.11253029317444561
+        },
+        "RefinementCount": 0,
+        "StartNumericalError": {
+          "Lower": -4.954651267041755e-7,
+          "Upper": 4.7031942074227123e-7
+        },
+        "EndNumericalError": {
+          "Lower": -0.000005262905446556943,
+          "Upper": -0.00000426079920146094
+        },
+        "initialObserved": 9.999999046325684,
+        "endObserved": 10.013268337585032
+      },
+      {
+        "kind": "Florida-certificate",
+        "start": 0,
+        "status": "CertifiedUniqueApproachingRoot",
+        "RootEnclosure": {
+          "Lower": 0,
+          "Upper": 1
+        },
+        "Function": {
+          "Lower": -0.51485956273973,
+          "Upper": 0.5214954661205412
+        },
+        "Derivative": {
+          "Lower": -1.085982153958896,
+          "Upper": -0.8874696315145535
+        },
+        "RefinementCount": 0,
+        "StartNumericalError": {
+          "Lower": -4.963950080427716e-7,
+          "Upper": 4.6845533085981833e-7
+        },
+        "EndNumericalError": {
+          "Lower": -0.000006221234875147808,
+          "Upper": -0.000005219131631595263
+        },
+        "initialObserved": 0.4999993992969394,
+        "endObserved": -0.4867322435602546
+      },
+      {
+        "kind": "Florida-refinement",
+        "start": 0,
+        "status": "CertifiedUniqueApproachingRoot",
+        "failure": "None",
+        "RootEnclosure": {
+          "Lower": 0.50335693359375,
+          "Upper": 0.5033645629882812
+        },
+        "RefinementCount": 17
+      },
+      {
+        "kind": "Florida-root-witness",
+        "seconds": 0.50335693359375,
+        "FloorTicks": 503356,
+        "Numerator": 239,
+        "Denominator": 256,
+        "mathematicalRadialGap": {
+          "Lower": 0.000005222856998442774,
+          "Upper": 0.000006231479346753155
+        },
+        "observedGap": 0.0000059390440583229065,
+        "observedMinusMathematical": {
+          "Lower": -2.924352884302488e-7,
+          "Upper": 7.161870598801323e-7
+        }
+      },
+      {
+        "kind": "Florida-root-witness",
+        "seconds": 0.5033645629882812,
+        "FloorTicks": 503364,
+        "Numerator": 1153,
+        "Denominator": 2048,
+        "mathematicalRadialGap": {
+          "Lower": -0.0000022966414690021287,
+          "Upper": -0.000001302920281886851
+        },
+        "observedGap": -0.0000015078112483024597,
+        "observedMinusMathematical": {
+          "Lower": -2.048909664156088e-7,
+          "Upper": 7.888302206996691e-7
+        }
+      },
+      {
+        "kind": "Florida-certificate",
+        "start": 3599000000,
+        "status": "CertifiedUniqueApproachingRoot",
+        "RootEnclosure": {
+          "Lower": 3599,
+          "Upper": 3600
+        },
+        "Function": {
+          "Lower": -0.6089300457388164,
+          "Upper": 0.6147470148280264
+        },
+        "Derivative": {
+          "Lower": -1.0867134658046327,
+          "Upper": -0.8879834987829515
+        },
+        "RefinementCount": 0,
+        "StartNumericalError": {
+          "Lower": -0.09298838268718558,
+          "Upper": 0.09349796993301691
+        },
+        "EndNumericalError": {
+          "Lower": -0.09309804104755905,
+          "Upper": 0.09359924055605585
+        },
+        "initialObserved": 0.5000004917383194,
+        "endObserved": -0.4873522324487567
+      },
+      {
+        "kind": "Florida-refinement",
+        "start": 3599000000,
+        "status": "Unresolved",
+        "failure": "NumericalResolution",
+        "RootEnclosure": {
+          "Lower": 0,
+          "Upper": 0
+        },
+        "RefinementCount": 0
+      },
+      {
+        "kind": "Florida-cost",
+        "status": "CertifiedClear",
+        "bytes": 0,
+        "medianNs": 171400,
+        "p95Ns": 222400,
+        "p99Ns": 252200,
+        "maximumNs": 281700,
+        "refinements": 0,
+        "maximumRefinements": 24,
+        "observationCallsPerAdmission": 2,
+        "observationCallsPerEvaluation": 0,
+        "proofSize": 64
+      },
+      {
+        "kind": "Florida-cost",
+        "status": "CertifiedUniqueApproachingRoot",
+        "bytes": 0,
+        "medianNs": 176200,
+        "p95Ns": 232900,
+        "p99Ns": 280500,
+        "maximumNs": 333200,
+        "refinements": 0,
+        "maximumRefinements": 24,
+        "observationCallsPerAdmission": 2,
+        "observationCallsPerEvaluation": 0,
+        "proofSize": 64
+      },
+      {
+        "kind": "Florida-cost",
+        "status": "Unresolved",
+        "bytes": 0,
+        "medianNs": 172800,
+        "p95Ns": 225600,
+        "p99Ns": 242800,
+        "maximumNs": 248400,
+        "refinements": 0,
+        "maximumRefinements": 24,
+        "observationCallsPerAdmission": 2,
+        "observationCallsPerEvaluation": 0,
+        "proofSize": 64
+      },
+      {
+        "kind": "Florida-operation-cost",
+        "name": "bounded refinement",
+        "bytes": 0,
+        "calls": 8,
+        "bytesPerCall": 0,
+        "medianNs": 1000900,
+        "p95Ns": 1114400,
+        "p99Ns": 1194100,
+        "maximumNs": 1915300,
+        "timingSamples": 101
+      },
+      {
+        "kind": "Florida-operation-cost",
+        "name": "root comparison",
+        "bytes": 0,
+        "calls": 8,
+        "bytesPerCall": 0,
+        "medianNs": 352400,
+        "p95Ns": 409000,
+        "p99Ns": 459000,
+        "maximumNs": 550900,
+        "timingSamples": 101
+      },
+      {
+        "kind": "Florida-operation-cost",
+        "name": "rational comparison",
+        "bytes": 0,
+        "calls": 8,
+        "bytesPerCall": 0,
+        "medianNs": 57100,
+        "p95Ns": 75000,
+        "p99Ns": 94800,
+        "maximumNs": 154900,
+        "timingSamples": 101
+      },
+      {
+        "kind": "Florida-operation-cost",
+        "name": "stale refusal",
+        "bytes": 0,
+        "calls": 8,
+        "bytesPerCall": 0,
+        "medianNs": 100,
+        "p95Ns": 100,
+        "p99Ns": 100,
+        "maximumNs": 100,
+        "timingSamples": 101
+      },
+      {
+        "kind": "Florida-operation-cost",
+        "name": "unsupported admission",
+        "bytes": 0,
+        "calls": 8,
+        "bytesPerCall": 0,
+        "medianNs": 300,
+        "p95Ns": 400,
+        "p99Ns": 400,
+        "maximumNs": 400,
+        "timingSamples": 101
+      },
+      {
+        "kind": "Florida-operation-cost",
+        "name": "admission",
+        "bytes": 13376,
+        "calls": 8,
+        "bytesPerCall": 1672,
+        "medianNs": 862700,
+        "p95Ns": 950200,
+        "p99Ns": 1058100,
+        "maximumNs": 1186600,
+        "timingSamples": 101
+      },
+      {
+        "kind": "Florida-workspace",
+        "callerArrays": 4,
+        "callerArrayPayloadBytes": 3520,
+        "proofSizeBytes": 64,
+        "maximumRefinementSteps": 24,
+        "maximumRootComparisonNarrowingCalls": 48,
+        "domainCallsPerCertification": 3,
+        "noPerCallHeapWorkspace": true
+      }
+    ]
+  },
+  "release": {
+    "records": [
+      {
+        "kind": "Florida-certificate",
+        "start": 0,
+        "status": "CertifiedClear",
+        "RootEnclosure": {
+          "Lower": 0,
+          "Upper": 1
+        },
+        "Function": {
+          "Lower": 9.971718955785034,
+          "Upper": 10.034916226752104
+        },
+        "Derivative": {
+          "Lower": -0.08598212156656489,
+          "Upper": 0.11253029317444561
+        },
+        "RefinementCount": 0,
+        "StartNumericalError": {
+          "Lower": -4.954651267041755e-7,
+          "Upper": 4.7031942074227123e-7
+        },
+        "EndNumericalError": {
+          "Lower": -0.000005262905446556943,
+          "Upper": -0.00000426079920146094
+        },
+        "initialObserved": 9.999999046325684,
+        "endObserved": 10.013268337585032
+      },
+      {
+        "kind": "Florida-certificate",
+        "start": 0,
+        "status": "CertifiedUniqueApproachingRoot",
+        "RootEnclosure": {
+          "Lower": 0,
+          "Upper": 1
+        },
+        "Function": {
+          "Lower": -0.51485956273973,
+          "Upper": 0.5214954661205412
+        },
+        "Derivative": {
+          "Lower": -1.085982153958896,
+          "Upper": -0.8874696315145535
+        },
+        "RefinementCount": 0,
+        "StartNumericalError": {
+          "Lower": -4.963950080427716e-7,
+          "Upper": 4.6845533085981833e-7
+        },
+        "EndNumericalError": {
+          "Lower": -0.000006221234875147808,
+          "Upper": -0.000005219131631595263
+        },
+        "initialObserved": 0.4999993992969394,
+        "endObserved": -0.4867322435602546
+      },
+      {
+        "kind": "Florida-refinement",
+        "start": 0,
+        "status": "CertifiedUniqueApproachingRoot",
+        "failure": "None",
+        "RootEnclosure": {
+          "Lower": 0.50335693359375,
+          "Upper": 0.5033645629882812
+        },
+        "RefinementCount": 17
+      },
+      {
+        "kind": "Florida-root-witness",
+        "seconds": 0.50335693359375,
+        "FloorTicks": 503356,
+        "Numerator": 239,
+        "Denominator": 256,
+        "mathematicalRadialGap": {
+          "Lower": 0.000005222856998442774,
+          "Upper": 0.000006231479346753155
+        },
+        "observedGap": 0.0000059390440583229065,
+        "observedMinusMathematical": {
+          "Lower": -2.924352884302488e-7,
+          "Upper": 7.161870598801323e-7
+        }
+      },
+      {
+        "kind": "Florida-root-witness",
+        "seconds": 0.5033645629882812,
+        "FloorTicks": 503364,
+        "Numerator": 1153,
+        "Denominator": 2048,
+        "mathematicalRadialGap": {
+          "Lower": -0.0000022966414690021287,
+          "Upper": -0.000001302920281886851
+        },
+        "observedGap": -0.0000015078112483024597,
+        "observedMinusMathematical": {
+          "Lower": -2.048909664156088e-7,
+          "Upper": 7.888302206996691e-7
+        }
+      },
+      {
+        "kind": "Florida-certificate",
+        "start": 3599000000,
+        "status": "CertifiedUniqueApproachingRoot",
+        "RootEnclosure": {
+          "Lower": 3599,
+          "Upper": 3600
+        },
+        "Function": {
+          "Lower": -0.6089300457388164,
+          "Upper": 0.6147470148280264
+        },
+        "Derivative": {
+          "Lower": -1.0867134658046327,
+          "Upper": -0.8879834987829515
+        },
+        "RefinementCount": 0,
+        "StartNumericalError": {
+          "Lower": -0.09298838268718558,
+          "Upper": 0.09349796993301691
+        },
+        "EndNumericalError": {
+          "Lower": -0.09309804104755905,
+          "Upper": 0.09359924055605585
+        },
+        "initialObserved": 0.5000004917383194,
+        "endObserved": -0.4873522324487567
+      },
+      {
+        "kind": "Florida-refinement",
+        "start": 3599000000,
+        "status": "Unresolved",
+        "failure": "NumericalResolution",
+        "RootEnclosure": {
+          "Lower": 0,
+          "Upper": 0
+        },
+        "RefinementCount": 0
+      },
+      {
+        "kind": "Florida-cost",
+        "status": "CertifiedClear",
+        "bytes": 0,
+        "medianNs": 137500,
+        "p95Ns": 144400,
+        "p99Ns": 149700,
+        "maximumNs": 164600,
+        "refinements": 0,
+        "maximumRefinements": 24,
+        "observationCallsPerAdmission": 2,
+        "observationCallsPerEvaluation": 0,
+        "proofSize": 64
+      },
+      {
+        "kind": "Florida-cost",
+        "status": "CertifiedUniqueApproachingRoot",
+        "bytes": 0,
+        "medianNs": 137400,
+        "p95Ns": 144000,
+        "p99Ns": 149400,
+        "maximumNs": 156500,
+        "refinements": 0,
+        "maximumRefinements": 24,
+        "observationCallsPerAdmission": 2,
+        "observationCallsPerEvaluation": 0,
+        "proofSize": 64
+      },
+      {
+        "kind": "Florida-cost",
+        "status": "Unresolved",
+        "bytes": 0,
+        "medianNs": 137400,
+        "p95Ns": 145800,
+        "p99Ns": 149400,
+        "maximumNs": 161600,
+        "refinements": 0,
+        "maximumRefinements": 24,
+        "observationCallsPerAdmission": 2,
+        "observationCallsPerEvaluation": 0,
+        "proofSize": 64
+      },
+      {
+        "kind": "Florida-operation-cost",
+        "name": "bounded refinement",
+        "bytes": 0,
+        "calls": 8,
+        "bytesPerCall": 0,
+        "medianNs": 763600,
+        "p95Ns": 773500,
+        "p99Ns": 775800,
+        "maximumNs": 800000,
+        "timingSamples": 101
+      },
+      {
+        "kind": "Florida-operation-cost",
+        "name": "root comparison",
+        "bytes": 0,
+        "calls": 8,
+        "bytesPerCall": 0,
+        "medianNs": 270000,
+        "p95Ns": 273900,
+        "p99Ns": 285000,
+        "maximumNs": 295600,
+        "timingSamples": 101
+      },
+      {
+        "kind": "Florida-operation-cost",
+        "name": "rational comparison",
+        "bytes": 0,
+        "calls": 8,
+        "bytesPerCall": 0,
+        "medianNs": 45400,
+        "p95Ns": 46900,
+        "p99Ns": 49700,
+        "maximumNs": 54600,
+        "timingSamples": 101
+      },
+      {
+        "kind": "Florida-operation-cost",
+        "name": "stale refusal",
+        "bytes": 0,
+        "calls": 8,
+        "bytesPerCall": 0,
+        "medianNs": 100,
+        "p95Ns": 100,
+        "p99Ns": 100,
+        "maximumNs": 100,
+        "timingSamples": 101
+      },
+      {
+        "kind": "Florida-operation-cost",
+        "name": "unsupported admission",
+        "bytes": 0,
+        "calls": 8,
+        "bytesPerCall": 0,
+        "medianNs": 300,
+        "p95Ns": 300,
+        "p99Ns": 400,
+        "maximumNs": 400,
+        "timingSamples": 101
+      },
+      {
+        "kind": "Florida-operation-cost",
+        "name": "admission",
+        "bytes": 13376,
+        "calls": 8,
+        "bytesPerCall": 1672,
+        "medianNs": 701400,
+        "p95Ns": 709900,
+        "p99Ns": 729100,
+        "maximumNs": 741200,
+        "timingSamples": 101
+      },
+      {
+        "kind": "Florida-workspace",
+        "callerArrays": 4,
+        "callerArrayPayloadBytes": 3520,
+        "proofSizeBytes": 64,
+        "maximumRefinementSteps": 24,
+        "maximumRootComparisonNarrowingCalls": 48,
+        "domainCallsPerCertification": 3,
+        "noPerCallHeapWorkspace": true
+      }
+    ]
+  },
+  "positiveControl": {
+    "object": "System.Byte[128]",
+    "detectedBytesEachConfiguration": 152
+  },
+  "coverage": {
+    "seedRelativeSeconds": [
+      -3600,
+      3600
+    ],
+    "maximumSearchCellSeconds": 1,
+    "positionRemainderMetresPerComponent": 0.05123638785047009,
+    "realEarthClearAndCrossSearchStartsSeconds": [
+      -3600,
+      0,
+      3599
+    ]
+  },
+  "measurement": {
+    "timingSamples": 101,
+    "warmupCalls": 32,
+    "quantiles": "sorted zero-based 50/95/99/100; individual CPU samples; timer resolution 100 ns",
+    "allocationBoundary": "checked existing OrdinaryAllocationMeasurement, 1 MiB; outside timing",
+    "reusableWorkloads": "exact zero",
+    "admissionBytesPerCall": 1672,
+    "scratchArrayPayloadBytes": 3520,
+    "proofValueBytes": 64
+  },
+  "limitations": [
+    "Seed-relative coverage does not include the normal 2024 launcher start.",
+    "Near coverage boundary tight requested refinement returns Unresolved despite certified existence.",
+    "No persisted certificate/import, private event execution, response or visible route.",
+    "M14.8 numerical errors are a-posteriori sample-specific intervals, not uniform allowances."
+  ],
+  "finalTestStrengthening": "A new distinct-input assertion caught that a 1e-7 m position difference rounded to the same inertial-root bits. The nearby-root fixture now uses distinct stored velocities, asserts that distinction and still requires Unresolved overlap. Final Debug/Release focused provider and full Simulation passed; production unchanged."
+}

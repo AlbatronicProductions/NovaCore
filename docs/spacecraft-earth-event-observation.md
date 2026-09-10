@@ -1,7 +1,8 @@
 # Exact-event Earth-relative observation
 
-**UNBANKED CANDIDATE.** Latest banked accomplishment remains M14.7. M14 — Surface
-Interaction / Launch Foundation remains open. No next milestone number is assigned.
+**BANKED M14.8**, commit `2657bb16cdee2a42d1e5f9be830d247fb3c607f6`, tag
+`m14.8-exact-event-earth-relative-observation`. M14 — Surface Interaction / Launch
+Foundation remains open.
 
 `SpacecraftPhysicalEventObservationEvaluator.Evaluate` is a read-only Simulation
 query for one complete immutable spacecraft geometry containing exactly one
@@ -50,7 +51,9 @@ Exact time identity accompanies evaluated FP64 state, not exact mathematical
 physical state. There is no contact flag, discovery, admissibility, root identity,
 response, scheduling, mutation or canonical publication. Future discovery and
 certification consume this numerical prerequisite and own their own proof duties.
+The unbanked [Florida certification provider](florida-monotone-contact-certification.md)
+is one bounded consumer; this observation API remains unchanged.
 
 [Equations, numerical qualification, validation, performance and reproduction](engineering-evidence/exact-event-earth-relative-observation/README.md)
-describe the bounded candidate evidence. Manual visual acceptance is not required:
+describe the bounded qualification evidence. Manual visual acceptance is not required:
 this adds no visible production route.
