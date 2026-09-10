@@ -1,0 +1,68 @@
+{
+  "baseline": "00f226096b61a117184464b5619e464d39789574",
+  "branch": "codex/exact-event-spacecraft-motion",
+  "sdk": "10.0.303",
+  "source": [
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Rotation/SpacecraftRigidBodyRotationEvaluator.cs",
+      "sha256": "CE75B0C3765F6282EAD10094FABDBEC2FEE77BD64BFE7822F1AA2385AA0B286A",
+      "bytes": 13573
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftAttitudeEvaluator.cs",
+      "sha256": "860F1A4F0E43232438A29F55DD973997C79137EE70B6A67C3997FDAF8D04EB48",
+      "bytes": 5462
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftMotionEvaluator.cs",
+      "sha256": "B46983FE1E1A5D53F3705380D0ABCFC06182D5880DE73E1ACD53026FD1F4DF10",
+      "bytes": 4906
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftTranslationEvaluator.cs",
+      "sha256": "7DD139AAEEB9B0BA92E15078FFE706683CF3DF327743EFC4BDD92C2495DFCA50",
+      "bytes": 4010
+    },
+    {
+      "path": "src/NovaCore.Simulation/Time/PhysicalEventDuration.cs",
+      "sha256": "D4A22C7FC4E750EA670307AF8EA671D3EAB6E7C2B8E7FCF6DEE996C4590A2FFE",
+      "bytes": 2165
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "sha256": "59DF61F09E436209269136C450312FBB9C925326E84EB082373246B471629C95",
+      "bytes": 241305
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/SpacecraftPhysicalEventMotionTests.cs",
+      "sha256": "9CDD4F29DA82ECF70BD898EDD25BE62AD8793D2579382DC684286FE042660057",
+      "bytes": 30461
+    }
+  ],
+  "buildOutputs": [
+    {
+      "path": "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.dll",
+      "sha256": "65C73D42C033FFA096EF0AF123FFF77E2E9826A12A425D37CBEBF87AAC27FDD8"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+      "sha256": "482001F63304E5F8E8EB3E21091393E19589778C1B008B5DC977863B5724D7F8"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.dll",
+      "sha256": "A011FED5035D5C01569FF18C2D0B22D8529EF42EF61F1052CA179BDB7A62F751"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "sha256": "1EFDC0FEF20329436347D1F4CE510A63F30D1B1553FFDAAB7D0B36F26116EC5F"
+    }
+  ],
+  "tags": [
+    "m14.1-canonical-surface-point-queries 5b9b02ab1d2ba0e903809510908e4819984d4de2",
+    "m14.2-spacecraft-translational-authority caa6d93ccd7c4e5924381e077a62585f99e5a32a",
+    "m14.3-spacecraft-terrain-contact-observations 79978cf8b0fd783d43a661df6df53a2c0202af4a",
+    "m14.4-atomic-contact-response 28b92f724f8decd3c9356aa5f9f5bbd6c9dd069c",
+    "m14.5-isolated-analytical-contact-response b53d48025cfb8142cb32a6fc6fceb6018e33cfcd",
+    "m14.6-physical-event-epochs d0b9f9d69d55b8ba85a7b24a44f93e03cea2dcf6"
+  ]
+}

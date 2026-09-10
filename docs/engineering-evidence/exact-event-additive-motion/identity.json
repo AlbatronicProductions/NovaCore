@@ -1,0 +1,84 @@
+{
+  "baseline": "00f226096b61a117184464b5619e464d39789574",
+  "branch": "codex/exact-event-spacecraft-motion-additive",
+  "head": "00f226096b61a117184464b5619e464d39789574",
+  "main": "00f226096b61a117184464b5619e464d39789574",
+  "originMain": "00f226096b61a117184464b5619e464d39789574",
+  "unchangedBankedProduction": 327,
+  "changedBankedProduction": 0,
+  "unchangedBankedTestFiles": 8,
+  "programBodiesUnchanged": true,
+  "programChanges": "Three focused selectors and one appended 38th group only",
+  "programSha256": "2AAFBFDC3580B519E25128A0C4E5945D2A01F748345E1D7A63B7B2D42DFC629F",
+  "oldCanonicalMatches": 14,
+  "oldSourceClosureMatches": 167,
+  "oldStatusUnchanged": true,
+  "oldStatus": [
+    " M docs/CODEX_HANDOFF.md",
+    " M docs/NOVACORE_CURRENT_STATE.md",
+    " M docs/engineering-evidence/README.md",
+    " M src/NovaCore.Simulation/Spacecraft/Rotation/SpacecraftRigidBodyRotationEvaluator.cs",
+    " M src/NovaCore.Simulation/Spacecraft/SpacecraftAttitudeEvaluator.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftMotionEvaluator.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftTranslationEvaluator.cs",
+    " M tests/NovaCore.Simulation.Tests/Program.cs",
+    "?? docs/engineering-evidence/exact-event-spacecraft-motion/",
+    "?? docs/spacecraft-physical-event-motion.md",
+    "?? src/NovaCore.Simulation/Time/PhysicalEventDuration.cs",
+    "?? tests/NovaCore.Simulation.Tests/SpacecraftPhysicalEventMotionTests.cs"
+  ],
+  "tagsUnchanged": [
+    "m14.1-canonical-surface-point-queries 5b9b02ab1d2ba0e903809510908e4819984d4de2",
+    "m14.2-spacecraft-translational-authority caa6d93ccd7c4e5924381e077a62585f99e5a32a",
+    "m14.3-spacecraft-terrain-contact-observations 79978cf8b0fd783d43a661df6df53a2c0202af4a",
+    "m14.4-atomic-contact-response 28b92f724f8decd3c9356aa5f9f5bbd6c9dd069c",
+    "m14.5-isolated-analytical-contact-response b53d48025cfb8142cb32a6fc6fceb6018e33cfcd",
+    "m14.6-physical-event-epochs d0b9f9d69d55b8ba85a7b24a44f93e03cea2dcf6"
+  ],
+  "newFiles": [
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Rotation/SpacecraftPhysicalEventRotationEvaluator.cs",
+      "sha256": "33BA54E391D88DDAA96D70BFD04DFBD7535BB22E2CA9A956A568504DCD5CD829"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftPhysicalEventMotion.cs",
+      "sha256": "C596E8EEFF5139D975BBBB3EA8FDB78A098AC929C0B96559D44C411141DD77E9"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftPhysicalEventMotionEvaluator.cs",
+      "sha256": "8654049D224276E0AB926DBE9DFD7E9EE5A5D4EB982C22F199ABF7AB238D32F0"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftPhysicalEventTranslationEvaluator.cs",
+      "sha256": "15F9AF3DFDFE4B7B3F2CFE38D416D7C2AF914D8068CC1E3B408CE14C9B4E40F1"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Time/PhysicalEventDuration.cs",
+      "sha256": "D912D5D94E443C4B5A76DCD78337F2FFF14C9A3D73F1DB9E144717EE25F39BF5"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/SpacecraftPhysicalEventMotionTests.cs",
+      "sha256": "F040F574B71FDAD8BE8A143A9E47787EB2B3A3019623F76CC0DE54E1E27DE9E1"
+    }
+  ],
+  "testedBinaryFingerprints": [
+    {
+      "path": "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "sha256": "45F6009ABC8C475A68E220DAF232121DD6849B371CBF41237C928D76E6B2ACCA"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.dll",
+      "sha256": "5EEFF148D819F8F582D2A669DDD34AE01A2E10EF37B90AC8A24388583A88EDB7"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+      "sha256": "391BE1639BCADE89B19AF133A3C091B026F962B20C7764735FEB8312E3487C28"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.dll",
+      "sha256": "D88A39A6928D5906E63E175587E4B2738A3C747A27765497ECC24E29C79BD55C"
+    }
+  ],
+  "stagedPaths": [],
+  "engineeringRulesUnchanged": true
+}

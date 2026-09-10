@@ -1,0 +1,27 @@
+{
+  "classification": "EXACT-EVENT SPACECRAFT MOTION CANDIDATE — FOLLOW-UP REQUIRED",
+  "acceptance": "MIGRATING PROCESS-LEVEL ALLOCATION WITNESS",
+  "additionalSignal": "REPRODUCIBLE GATE-SPECIFIC ALLOCATION SIGNAL: sas-proof in runs 1 and 2",
+  "lead": "ESCALATE TO PROJECT CONTROL",
+  "cleanPasses": 2,
+  "requiredPasses": 5,
+  "runsExecuted": 5,
+  "allocationFailures": 3,
+  "canonicalVerified": 14,
+  "sourceClosureVerified": 167,
+  "sourceMismatches": 0,
+  "canonicalMismatches": 0,
+  "binaryMismatches": 0,
+  "environmentHashes": [
+    "E6BA15A56660573C429F8C664E2291B655AE4B755F62B28837051D17AE7A7B2B"
+  ],
+  "runtimes": [
+    "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\coreclr.dll"
+  ],
+  "gitStatusUnchanged": true,
+  "staged": [],
+  "focusedAcceptance": "NOT RUN: 5/5 prerequisite failed",
+  "performance": "UNQUALIFIED; NOT RUN",
+  "engineeringRuleUpdate": "NOT PERFORMED: technical PASS prerequisite failed",
+  "cleanup": "NONE"
+}

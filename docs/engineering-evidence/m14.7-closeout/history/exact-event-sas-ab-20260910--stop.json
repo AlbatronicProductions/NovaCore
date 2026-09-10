@@ -1,0 +1,18 @@
+{
+  "classification": "OTHER — A/B MATRIX STOPPED AT EARLIER CANDIDATE ATTITUDE-INTEGRATION ALLOCATION FAILURE",
+  "sequence": 2,
+  "gate": "attitude-integration",
+  "bytes": 12336,
+  "entry": "PASS",
+  "exit": "PASS",
+  "passedGroups": 27,
+  "failedGroups": 1,
+  "unreachedGroups": 10,
+  "sasReached": false,
+  "sasBytes": null,
+  "candidateAssociation": "SAS QUESTION UNANSWERED",
+  "continued": false,
+  "line": [
+    "ORDINARY_ALLOCATION gate=attitude-integration bytes=12336 entry=PASS exit=PASS"
+  ]
+}

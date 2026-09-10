@@ -1,0 +1,5 @@
+Lunar orientation: 1952.7 ns/evaluation; allocated=12336 bytes; pack=0x3BCE78D924EA3532
+Unhandled exception. System.Exception: high-precision lunar orientation performance and allocation
+   at Program.<<Main>$>g__Check|0_86(Boolean condition, String message) in E:\NovaCore-ExactEvent-Additive\tests\NovaCore.Simulation.Tests\Program.cs:line 1472
+   at Program.<<Main>$>g__CelestialBodyOrientationTests|0_1() in E:\NovaCore-ExactEvent-Additive\tests\NovaCore.Simulation.Tests\Program.cs:line 133
+   at Program.<Main>$(String[] args) in E:\NovaCore-ExactEvent-Additive\tests\NovaCore.Simulation.Tests\Program.cs:line 84

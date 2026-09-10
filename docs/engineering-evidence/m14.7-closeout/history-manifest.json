@@ -1,0 +1,104 @@
+[
+  {
+    "source": "E:\\NovaCore-Research\\exact-event-allocation-attribution-20260910\\README.md",
+    "retained": "history/exact-event-allocation-attribution-20260910--README.md",
+    "bytes": 13041,
+    "sha256": "1A8778A2069A746844A7A9C6423277F207DB8A6B2026B9A438131ED8EBE89C4A"
+  },
+  {
+    "source": "E:\\NovaCore-Research\\exact-event-allocation-attribution-20260910\\result.json",
+    "retained": "history/exact-event-allocation-attribution-20260910--result.json",
+    "bytes": 4528,
+    "sha256": "63C50D0BE9D657931BEA4F12FF0D3AA94B17C02A26818312ACD3474057061576"
+  },
+  {
+    "source": "E:\\NovaCore-Research\\exact-event-attitude-ab-20260910\\README.md",
+    "retained": "history/exact-event-attitude-ab-20260910--README.md",
+    "bytes": 13649,
+    "sha256": "FC78EDA50BCF3EBBAF450399D75420DB35260532FC54D57C045B27A7A17F866E"
+  },
+  {
+    "source": "E:\\NovaCore-Research\\exact-event-attitude-ab-20260910\\result.json",
+    "retained": "history/exact-event-attitude-ab-20260910--result.json",
+    "bytes": 982,
+    "sha256": "305EBABBCCCEAFFC7007834800570ADDA39D207CB89C4C4B6E5D1143F2C82928"
+  },
+  {
+    "source": "E:\\NovaCore-Research\\exact-event-banked-baseline-stability-20260910\\README.md",
+    "retained": "history/exact-event-banked-baseline-stability-20260910--README.md",
+    "bytes": 11288,
+    "sha256": "36D34B2D53E6634F4335FB52C55AC9C97B56F708D0E0A6F6494779CE32CE5754"
+  },
+  {
+    "source": "E:\\NovaCore-Research\\exact-event-banked-baseline-stability-20260910\\result.json",
+    "retained": "history/exact-event-banked-baseline-stability-20260910--result.json",
+    "bytes": 934,
+    "sha256": "6AD4A7E6E41EAFF6056A7E64D4F250C4111A38F5B0D741E545685AF0C46FBD64"
+  },
+  {
+    "source": "E:\\NovaCore-Research\\exact-event-clean-release-acceptance-20260910\\README.md",
+    "retained": "history/exact-event-clean-release-acceptance-20260910--README.md",
+    "bytes": 11863,
+    "sha256": "F5B8E8ABAFF84009FD16698363F549A974326A925878DB943941D1A329D40FEB"
+  },
+  {
+    "source": "E:\\NovaCore-Research\\exact-event-clean-release-acceptance-20260910\\result.json",
+    "retained": "history/exact-event-clean-release-acceptance-20260910--result.json",
+    "bytes": 998,
+    "sha256": "65D43D07D3A5AA28567F7E6DE150054D859377781D2663FBE542534C7E92BCE5"
+  },
+  {
+    "source": "E:\\NovaCore-Research\\exact-event-component-discriminator-20260910\\README.md",
+    "retained": "history/exact-event-component-discriminator-20260910--README.md",
+    "bytes": 14677,
+    "sha256": "B15BA3F66D9F691AF010942F2F174B14BBA35B039CA088EC9D0F809937F10704"
+  },
+  {
+    "source": "E:\\NovaCore-Research\\exact-event-component-discriminator-20260910\\result.json",
+    "retained": "history/exact-event-component-discriminator-20260910--result.json",
+    "bytes": 1612,
+    "sha256": "1E40432F29394C6E98667FAA06512F4DF49A89A20BE5D7F04E3FD1EEB932DD3B"
+  },
+  {
+    "source": "E:\\NovaCore-Research\\exact-event-sas-ab-20260910\\README.md",
+    "retained": "history/exact-event-sas-ab-20260910--README.md",
+    "bytes": 12169,
+    "sha256": "8B9DCFA6EFF60EF3248C7D2EC1C417D59B838FA9F1210392E5652E4FA81488FC"
+  },
+  {
+    "source": "E:\\NovaCore-Research\\exact-event-sas-ab-20260910\\stop.json",
+    "retained": "history/exact-event-sas-ab-20260910--stop.json",
+    "bytes": 528,
+    "sha256": "2BAAD8D9A43CBC64AF55125DF809651812A826F51EB576B08A06E0134F946305"
+  },
+  {
+    "source": "E:\\NovaCore-Research\\exact-event-second-components-20260910\\README.md",
+    "retained": "history/exact-event-second-components-20260910--README.md",
+    "bytes": 15406,
+    "sha256": "E099A8651A986A99F82D217A9F2E1D89A8BD0A318C4EC36DDFEF06F12BFDE441"
+  },
+  {
+    "source": "E:\\NovaCore-Research\\exact-event-second-components-20260910\\result.json",
+    "retained": "history/exact-event-second-components-20260910--result.json",
+    "bytes": 4273,
+    "sha256": "03F2EACBA3566E8882E1F28B792B4E5625117846B5D3D4CDE47E883F6BABB139"
+  },
+  {
+    "source": "E:\\NovaCore-Research\\post-m14.6-responsibility-20260910\\assessment.md",
+    "retained": "history/post-m14.6-responsibility-20260910--assessment.md",
+    "bytes": 34099,
+    "sha256": "392CD7F6A4874779D01066DAF7C9B9C59CF10872C0B7802A30C225C8D7A5412F"
+  },
+  {
+    "source": "E:\\NovaCore-Research\\post-m14.6-responsibility-20260910\\source-fingerprints.json",
+    "retained": "history/post-m14.6-responsibility-20260910--source-fingerprints.json",
+    "bytes": 2667,
+    "sha256": "CFC714A2DA47645A6488269300609B2444FF0A93140044DD18C5640173B669E6"
+  },
+  {
+    "source": "E:\\NovaCore\\docs\\spacecraft-physical-event-motion.md",
+    "retained": "history/superseded-motion-contract.md",
+    "bytes": 4867,
+    "sha256": "24E735B14CFD9C9A278D3383F5AC3553289D84F811760B63D9F693C6E475A0A0"
+  }
+]

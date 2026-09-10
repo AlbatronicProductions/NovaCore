@@ -1,0 +1,87 @@
+{
+  "classification": "ATTRIBUTION INSUFFICIENT",
+  "lead": "ESCALATE TO PROJECT CONTROL",
+  "performance": "RELEASE PERFORMANCE UNQUALIFIED",
+  "runs": [
+    {
+      "run": "candidate-1",
+      "groupsExpected": 38,
+      "groupsPassed": 38,
+      "missing": [],
+      "exitCode": 0,
+      "ordinaryZeroRequired": 32,
+      "nonzeroOrdinary": 0,
+      "targetReproduced": false,
+      "osThread": 51436,
+      "phase1IncidentalObject": "body-catalog: System.String, count 1, size 108, counter delta 0; mechanism unresolved"
+    },
+    {
+      "run": "candidate-2",
+      "groupsExpected": 38,
+      "groupsPassed": 38,
+      "missing": [],
+      "exitCode": 0,
+      "ordinaryZeroRequired": 32,
+      "nonzeroOrdinary": 0,
+      "targetReproduced": false,
+      "osThread": 13416,
+      "phase1IncidentalObject": "body-catalog: System.String, count 1, size 108, counter delta 0; mechanism unresolved"
+    }
+  ],
+  "candidateAttributedRuns": 2,
+  "baselineAttributedRuns": 0,
+  "baselineReason": "No target event captured; no mechanism to compare. Another baseline would not attribute absent 12336 bytes.",
+  "observerEscalations": 0,
+  "observerTechnicalControlCorrection": "metadata moved to supported callback context before candidate execution",
+  "canonicalFilesVerified": 14,
+  "canonicalMismatches": 0,
+  "restoredDisposableSourceFiles": 167,
+  "restorationMismatches": 0,
+  "priorComparisonSourcesVerified": 332,
+  "helperUnchanged": true,
+  "tags": [
+    "m14.1-canonical-surface-point-queries 5b9b02ab1d2ba0e903809510908e4819984d4de2",
+    "m14.2-spacecraft-translational-authority caa6d93ccd7c4e5924381e077a62585f99e5a32a",
+    "m14.3-spacecraft-terrain-contact-observations 79978cf8b0fd783d43a661df6df53a2c0202af4a",
+    "m14.4-atomic-contact-response 28b92f724f8decd3c9356aa5f9f5bbd6c9dd069c",
+    "m14.5-isolated-analytical-contact-response b53d48025cfb8142cb32a6fc6fceb6018e33cfcd",
+    "m14.6-physical-event-epochs d0b9f9d69d55b8ba85a7b24a44f93e03cea2dcf6"
+  ],
+  "status": [
+    " M docs/CODEX_HANDOFF.md",
+    " M docs/NOVACORE_CURRENT_STATE.md",
+    " M docs/engineering-evidence/README.md",
+    " M src/NovaCore.Simulation/Spacecraft/Rotation/SpacecraftRigidBodyRotationEvaluator.cs",
+    " M src/NovaCore.Simulation/Spacecraft/SpacecraftAttitudeEvaluator.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftMotionEvaluator.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftTranslationEvaluator.cs",
+    " M tests/NovaCore.Simulation.Tests/Program.cs",
+    "?? docs/engineering-evidence/exact-event-spacecraft-motion/",
+    "?? docs/spacecraft-physical-event-motion.md",
+    "?? src/NovaCore.Simulation/Time/PhysicalEventDuration.cs",
+    "?? tests/NovaCore.Simulation.Tests/SpacecraftPhysicalEventMotionTests.cs"
+  ],
+  "statusUnchanged": true,
+  "stagedCount": 0,
+  "diffCheckExit": 0,
+  "diffCheckMessages": [
+    "warning: in the working copy of 'docs/CODEX_HANDOFF.md', LF will be replaced by CRLF the next time Git touches it",
+    "warning: in the working copy of 'docs/NOVACORE_CURRENT_STATE.md', LF will be replaced by CRLF the next time Git touches it",
+    "warning: in the working copy of 'docs/engineering-evidence/README.md', LF will be replaced by CRLF the next time Git touches it",
+    "warning: in the working copy of 'src/NovaCore.Simulation/Spacecraft/Rotation/SpacecraftRigidBodyRotationEvaluator.cs', LF will be replaced by CRLF the next time Git touches it",
+    "warning: in the working copy of 'src/NovaCore.Simulation/Spacecraft/SpacecraftAttitudeEvaluator.cs', LF will be replaced by CRLF the next time Git touches it",
+    "warning: in the working copy of 'src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftMotionEvaluator.cs', LF will be replaced by CRLF the next time Git touches it",
+    "warning: in the working copy of 'src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftTranslationEvaluator.cs', LF will be replaced by CRLF the next time Git touches it",
+    "warning: in the working copy of 'tests/NovaCore.Simulation.Tests/Program.cs', LF will be replaced by CRLF the next time Git touches it"
+  ],
+  "disposable": {
+    "newBytes": 21478493.0,
+    "existingBytes": 44067060.0,
+    "newFiles": 290,
+    "disposedFiles": 0,
+    "disposedBytes": 0,
+    "existingFiles": 557
+  },
+  "hooksRestored": true,
+  "diagnosticBinaryWarning": "Built DLL retains attribution hooks; source restored. It is disposable, not production deployment."
+}

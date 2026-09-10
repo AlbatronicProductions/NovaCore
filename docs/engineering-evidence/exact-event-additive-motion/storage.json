@@ -1,0 +1,49 @@
+{
+  "scratch": [
+    {
+      "path": "E:\\NovaCore\\.codex\\exact-event-sas-ab",
+      "files": 557,
+      "logicalBytes": 44067060,
+      "classification": "DISPOSABLE after Project Control accepts disposition; manual cleanup only"
+    },
+    {
+      "path": "E:\\NovaCore\\.codex\\exact-event-attribution",
+      "files": 290,
+      "logicalBytes": 21478493,
+      "classification": "DISPOSABLE after Project Control accepts disposition; manual cleanup only"
+    },
+    {
+      "path": "E:\\NovaCore\\.codex\\exact-event-components",
+      "files": 552,
+      "logicalBytes": 39650561,
+      "classification": "DISPOSABLE after Project Control accepts disposition; manual cleanup only"
+    },
+    {
+      "path": "E:\\NovaCore\\.codex\\exact-event-banked-baseline",
+      "files": 279,
+      "logicalBytes": 24247109,
+      "classification": "DISPOSABLE after Project Control accepts disposition; manual cleanup only"
+    },
+    {
+      "path": "E:\\NovaCore\\.codex\\exact-event-second-components",
+      "files": 551,
+      "logicalBytes": 39525752,
+      "classification": "DISPOSABLE after Project Control accepts disposition; manual cleanup only"
+    },
+    {
+      "path": "E:\\NovaCore-ExactEvent-Additive\\.codex\\exact-event-additive-validation",
+      "files": 34,
+      "logicalBytes": 123551,
+      "classification": "DISPOSABLE after Project Control accepts disposition; manual cleanup only"
+    }
+  ],
+  "totalDisposableFiles": 2263.0,
+  "totalDisposableBytes": 169092526.0,
+  "disposedFiles": 0,
+  "disposedBytes": 0,
+  "retainedEvidenceFiles": 7,
+  "retainedEvidenceBytes": 174590,
+  "measurement": "Logical bytes; native and managed build dependencies excluded from diagnostic scratch. No raw captures or new comparison build trees.",
+  "newOutput": "One small parent-side build/test log directory; concise evidence package; ordinary native/managed development builds",
+  "cleanup": "Deferred manual; no old worktree write or deletion"
+}

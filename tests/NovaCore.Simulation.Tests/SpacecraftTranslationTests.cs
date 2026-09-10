@@ -294,7 +294,6 @@ internal static class SpacecraftTranslationTests
             var warmStart = Stopwatch.GetTimestamp();
             for (var warm = 0; Stopwatch.GetElapsedTime(warmStart).TotalMilliseconds < 500; warm++)
                 checksum += Evaluate(states[warm % count], new(warm)).PositionRoot.X;
-            var allocatedBefore = GC.GetAllocatedBytesForCurrentThread();
             for (var sample = 0; sample < samples; sample++)
             {
                 var start = Stopwatch.GetTimestamp();
@@ -302,10 +301,24 @@ internal static class SpacecraftTranslationTests
                     for (var i = 0; i < states.Length; i++) checksum += Evaluate(states[i], new(1000000 + repeat)).PositionRoot.X;
                 values[sample] = Stopwatch.GetElapsedTime(start).TotalNanoseconds / repeats;
             }
-            var allocated = GC.GetAllocatedBytesForCurrentThread() - allocatedBefore;
+            // The identical immutable state array and 500 ms warmup policy are reused independently.
+            // Warmup contributes a variable number of calls to each checksum, so require the original
+            // positive checksum in each pass; do not compare whole checksum bits across timed warmups.
+            double allocationChecksum = 0;
+            var allocationWarmStart = Stopwatch.GetTimestamp();
+            for (var warm = 0; Stopwatch.GetElapsedTime(allocationWarmStart).TotalMilliseconds < 500; warm++)
+                allocationChecksum += Evaluate(states[warm % count], new(warm)).PositionRoot.X;
+            using var measurement = new OrdinaryAllocationMeasurement("timed-translation-performance");
+            for (var sample = 0; sample < samples; sample++)
+                for (var repeat = 0; repeat < repeats; repeat++)
+                    for (var i = 0; i < states.Length; i++) allocationChecksum += Evaluate(states[i], new(1000000 + repeat)).PositionRoot.X;
+            var allocated = measurement.Complete();
+            OrdinaryAllocationMeasurement.RequireZero(allocated, "timed-translation-performance");
+            Check(allocationChecksum > 0, "benchmark allocation-pass checksum");
+            Check(checksum > 0, "benchmark timing-pass checksum");
             Array.Sort(values);
             Console.WriteLine($"Translation PERF craftCount={count} samples={samples} callsPerSample={repeats * count} medianBatchNs={values[50]:F2} p95BatchNs={values[95]:F2} p99BatchNs={values[99]:F2} medianPerCraftNs={values[50] / count:F2} allocatedBytes={allocated} checksum={checksum:R}");
-            Check(allocated == 0 && checksum > 0, "benchmark work and allocations");
+            Console.WriteLine($"TIMED_RESULT gate=translation-performance craftCount={count} allocation={allocated} checksum={allocationChecksum:R} timingChecksum={checksum:R} correctness=PASS threshold=REPORT_ONLY");
         }
     }
 }

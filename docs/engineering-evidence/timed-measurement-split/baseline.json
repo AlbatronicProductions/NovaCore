@@ -1,0 +1,99 @@
+{
+  "head": "00f226096b61a117184464b5619e464d39789574",
+  "main": "00f226096b61a117184464b5619e464d39789574",
+  "origin": "00f226096b61a117184464b5619e464d39789574",
+  "branch": "codex/exact-event-spacecraft-motion-additive",
+  "tags": [
+    "m14.1-canonical-surface-point-queries 5b9b02ab1d2ba0e903809510908e4819984d4de2",
+    "m14.2-spacecraft-translational-authority caa6d93ccd7c4e5924381e077a62585f99e5a32a",
+    "m14.3-spacecraft-terrain-contact-observations 79978cf8b0fd783d43a661df6df53a2c0202af4a",
+    "m14.4-atomic-contact-response 28b92f724f8decd3c9356aa5f9f5bbd6c9dd069c",
+    "m14.5-isolated-analytical-contact-response b53d48025cfb8142cb32a6fc6fceb6018e33cfcd",
+    "m14.6-physical-event-epochs d0b9f9d69d55b8ba85a7b24a44f93e03cea2dcf6"
+  ],
+  "productionCount": 332,
+  "productionBefore": "327 prior banked hashes plus five additive hashes verified before any test edit",
+  "identityReferences": [
+    {
+      "repositoryPath": "docs/engineering-evidence/exact-event-additive-motion/baseline.json",
+      "sha256": "A411C8ED4EE3884C361AC0E2855D29702C37479E00B2216AFA3A98D423E3E4D9"
+    },
+    {
+      "repositoryPath": "docs/engineering-evidence/exact-event-additive-motion/identity.json",
+      "sha256": "969D278478DFC3E4C42C1F29142EE3A6EA00C7B61587DE02DAE71BE2D7E4D8C8"
+    }
+  ],
+  "tests": [
+    {
+      "path": "tests/NovaCore.Simulation.Tests/ContactGenerationFixture.cs",
+      "sha256": "19E0696F8C25425CEB03388DF0CFF5DA1F9FA74A0FA0E90CF023D51BE5DAA9F9"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/ContactGenerationTests.cs",
+      "sha256": "1361289F656A2D20A388A802AA9419D9497583B6DC16B8D86711DA8354934697"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/ContactResponseTests.cs",
+      "sha256": "59604FDFE84563BCCC45F87887D7C3800B0F5535C1F005E660676A1A17B3D4A0"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/IsolatedContactResponseTests.cs",
+      "sha256": "85526A9618BEF6A72D51342C38DF9DEC2507520620C04BA4A49C15ECA2046947"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/NovaCore.Simulation.Tests.csproj",
+      "sha256": "5B022E3A27AB6A8EE043CD47C96EB396F3D67D6DACF4AECAC6A9288EE4E19357"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/OrdinaryAllocationMeasurement.cs",
+      "sha256": "3B6F2D9905EA52BFB131DF670F1E6A2116BA340C9EF7767DE1020197D473CFB7"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/PhysicalEventEpochTests.cs",
+      "sha256": "89DDB14301915314660DBC151DA4808ADB0D17DAE1A46CD78AB856F05EB04540"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "sha256": "2AAFBFDC3580B519E25128A0C4E5945D2A01F748345E1D7A63B7B2D42DFC629F"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/SpacecraftPhysicalEventMotionTests.cs",
+      "sha256": "F040F574B71FDAD8BE8A143A9E47787EB2B3A3019623F76CC0DE54E1E27DE9E1"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/SpacecraftTranslationTests.cs",
+      "sha256": "121C788EEDA337A2B53558CF666808049AFF7575391C8C376D10ADB5C7A3F4EC"
+    }
+  ],
+  "startingStatus": [
+    " M docs/CODEX_HANDOFF.md",
+    " M docs/NOVACORE_CURRENT_STATE.md",
+    " M docs/engineering-evidence/README.md",
+    " M docs/physical-event-epochs.md",
+    " M tests/NovaCore.Simulation.Tests/Program.cs",
+    "?? docs/engineering-evidence/exact-event-additive-motion/",
+    "?? docs/spacecraft-physical-event-motion.md",
+    "?? src/NovaCore.Simulation/Spacecraft/Rotation/SpacecraftPhysicalEventRotationEvaluator.cs",
+    "?? src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftPhysicalEventMotion.cs",
+    "?? src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftPhysicalEventMotionEvaluator.cs",
+    "?? src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftPhysicalEventTranslationEvaluator.cs",
+    "?? src/NovaCore.Simulation/Time/PhysicalEventDuration.cs",
+    "?? tests/NovaCore.Simulation.Tests/SpacecraftPhysicalEventMotionTests.cs"
+  ],
+  "oldStatus": [
+    " M docs/CODEX_HANDOFF.md",
+    " M docs/NOVACORE_CURRENT_STATE.md",
+    " M docs/engineering-evidence/README.md",
+    " M src/NovaCore.Simulation/Spacecraft/Rotation/SpacecraftRigidBodyRotationEvaluator.cs",
+    " M src/NovaCore.Simulation/Spacecraft/SpacecraftAttitudeEvaluator.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftMotionEvaluator.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftTranslationEvaluator.cs",
+    " M tests/NovaCore.Simulation.Tests/Program.cs",
+    "?? docs/engineering-evidence/exact-event-spacecraft-motion/",
+    "?? docs/spacecraft-physical-event-motion.md",
+    "?? src/NovaCore.Simulation/Time/PhysicalEventDuration.cs",
+    "?? tests/NovaCore.Simulation.Tests/SpacecraftPhysicalEventMotionTests.cs"
+  ],
+  "oldPreservationBefore": "14 canonical +167 closure hashes verified; stored in referenced baseline",
+  "noProductionEdits": true
+}

@@ -1,0 +1,27 @@
+{
+  "classification": "BANKED BASELINE RELEASE STABLE — 5 / 5 CLEAN",
+  "lead": "PASS",
+  "baseline": "00f226096b61a117184464b5619e464d39789574",
+  "baselineProcesses": 5,
+  "candidateProcesses": 0,
+  "cleanPasses": 5,
+  "baselineSourcesVerified": 165,
+  "baselineSourceMismatches": 0,
+  "candidateFingerprintsVerified": 14,
+  "candidateMismatches": 0,
+  "candidateSourceClosureMismatches": 0,
+  "binaryMismatches": 0,
+  "environmentHashes": [
+    "E6BA15A56660573C429F8C664E2291B655AE4B755F62B28837051D17AE7A7B2B"
+  ],
+  "runtimePaths": [
+    "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\coreclr.dll"
+  ],
+  "gitStatusUnchanged": true,
+  "staged": [],
+  "candidateStatus": "UNBANKED; FOLLOW-UP REQUIRED; prior 2/5 acceptance not cleared",
+  "disposedBytes": 0,
+  "newDisposableBytes": 24247109,
+  "totalDeferredDisposableFiles": 1678,
+  "totalDeferredDisposableBytes": 129443223
+}

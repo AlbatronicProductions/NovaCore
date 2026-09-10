@@ -2,7 +2,9 @@
 
 **M14.6 — Establish internal exact physical-event epochs** is **BANKED** at
 `d0b9f9d69d55b8ba85a7b24a44f93e03cea2dcf6`, tag `m14.6-physical-event-epochs`.
-M14 remains open; no unbanked candidate or next milestone assignment exists.
+M14 remains open. [Banked M14.7 exact-event motion](spacecraft-physical-event-motion.md)
+adds a read-only consumer; its fresh final Release 5/5 and performance qualification
+passed after the separate timed-test measurement split. No next milestone is assigned.
 [Accepted validation and provenance](engineering-evidence/physical-event-epoch/README.md).
 
 ## Authority and representation
@@ -34,7 +36,8 @@ to cover all future physical roots. BigInteger is used only as a test oracle.
 The domain includes `Int64.MaxValue + fraction` when the floor fits. This is not
 a public instant: `TryGetCanonicalInstant` succeeds only for zero fraction. No
 floating constructor, approximate comparison or rounded public conversion exists.
-Duration arithmetic is deferred until an execution consumer requires it.
+The banked epoch type does not own duration arithmetic. The M14.7 motion
+sidecar adds only a bounded segment-relative duration for read-only evaluation.
 
 ## Ordering and arithmetic failures
 

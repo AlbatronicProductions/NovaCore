@@ -34,8 +34,18 @@ Surface Interaction / Launch Foundation has banked **M14.1**, commit
 physical-event epochs**, commit `d0b9f9d69d55b8ba85a7b24a44f93e03cea2dcf6`, tag
 `m14.6-physical-event-epochs`. M14 remains **OPEN**.
 
-M14.1 through M14.6 are banked. There is no current unbanked development branch
-or candidate. Begin from main and the [banked epoch contract](physical-event-epochs.md).
+M14.1 through M14.7 are banked. **M14.7 — Evaluate coherent spacecraft motion at
+exact physical-event epochs**, tag `m14.7-exact-event-spacecraft-motion`, adds
+read-only exact-event motion beside unchanged banked canonical evaluators.
+The earlier final Release matrix stopped on the lunar 12,336-byte counter witness;
+that cause remains unattributed. The authorized timed-family test-only split is
+now validated in Debug/Release, followed by **fresh Release 5/5, 38 groups each**
+and bounded exact-event performance with zero allocations. All 332 production
+fingerprints matched the accepted candidate at closeout. Project Control accepted
+M14.7 for production banking. See the [qualification](engineering-evidence/timed-measurement-split/README.md)
+and [closeout](engineering-evidence/m14.7-closeout/README.md).
+The superseded generalized mechanism and both development branches are retired.
+The [banked epoch contract](physical-event-epochs.md) remains authoritative.
 Internal canonical/reduced-rational identity and exact deterministic ordering exist;
 public `SimulationInstant` and canonical publication remain integral. General
 event-local transient execution and automatic contact discovery do not exist.
@@ -54,14 +64,16 @@ claimed CLR bug. The ordinary zero-allocation measurement class was hardened
 without production changes. Final Simulation passed 5/5 Debug and 5/5 Release,
 37/37 groups each; all 31 migrated windows measured zero. Fresh real-allocation
 controls passed 3/3 per configuration, detecting 152 bytes each. Focused epoch,
-ReferenceFrames, Precision and M14.2–M14.5 gates passed. The five unchanged timed
-windows are not an active blocker. See [current validation and scope](NOVACORE_CURRENT_STATE.md#accepted-m146-validation-and-measurement-correction)
+ReferenceFrames, Precision and M14.2–M14.5 gates passed. The five timed windows
+were deferred at that banked checkpoint; their later split is now qualified in
+banked M14.7 above. See [banked validation and scope](NOVACORE_CURRENT_STATE.md#accepted-m146-validation-and-measurement-correction)
 and [final evidence](engineering-evidence/physical-event-epoch/ordinary-class-migration/README.md).
 
-No next milestone number or production responsibility has been assigned.
-Project Control chooses the next responsibility from current banked truth.
+No next milestone number is assigned. M14.7 is read-only evaluation, not contact
+certification, root discovery or private event-local execution.
 
-- Work in `E:\NovaCore` and inspect `git status --short` before editing.
+- The normal production worktree is `E:\NovaCore` on `main`; inspect
+  `git status --short` before editing.
 - Preserve unrelated and unstaged user work.
 - Do not stage, commit, push, or tag without explicit instruction.
 - Do not commit a rendering milestone before its required physical Desktop
@@ -121,7 +133,7 @@ is the concise performance checkpoint. Historical LiveKernelEvent 141 remains
 
 ## Next architectural decision and work boundary
 
-M13 is closed at M13.6; M14 remains open with M14.1–M14.6 banked. There is no
+M13 is closed at M13.6; M14 remains open with M14.1–M14.7 banked. There is no
 next milestone assignment or unbanked production candidate. Project Control must
 choose the next responsibility. Do not start implementation from a provisional
 research ranking or treat this documentation correction as engineering authority.

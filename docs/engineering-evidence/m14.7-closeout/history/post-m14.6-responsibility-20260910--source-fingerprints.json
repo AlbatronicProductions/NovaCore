@@ -1,0 +1,62 @@
+[
+  {
+    "Path": "src/NovaCore.Simulation/Time/PhysicalEventEpoch.cs",
+    "SHA256": "27C36DFDBCA7ADEAC3BBC23A824EEE28F2D9CCD5D36315AE696FBE64A1EC7AA8"
+  },
+  {
+    "Path": "src/NovaCore.Simulation/Timeline/PhysicalEventOrderKey.cs",
+    "SHA256": "8767CDC15B7029B6E1A704B0FB55B013586DB9C9C369A59798D9FE9FC8B99929"
+  },
+  {
+    "Path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftMotionEvaluator.cs",
+    "SHA256": "8018209EC9D8B20545E2D4D7B6637A005E9E33A30BED4F1EDEC629D4491D3F4F"
+  },
+  {
+    "Path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftTranslationEvaluator.cs",
+    "SHA256": "1991C124B73B3097E4133F4C13B5A8D7AE7481AD7642D78581C557B45480F4ED"
+  },
+  {
+    "Path": "src/NovaCore.Simulation/Spacecraft/Rotation/SpacecraftRigidBodyRotationEvaluator.cs",
+    "SHA256": "8869D5CD57AC38E9A2B5972DE86DAC8677DB76E009932D0220B50A65810C138A"
+  },
+  {
+    "Path": "src/NovaCore.Simulation/Spacecraft/Contact/ContactBodyMotion.cs",
+    "SHA256": "2EDCCC606F7A14AC43A7C53BFEB1B8A2C2F7EE89C5DEB42D244F65A82E0101DF"
+  },
+  {
+    "Path": "src/NovaCore.Simulation/Spacecraft/Contact/IsolatedContactResponsePolicy.cs",
+    "SHA256": "175BDD275BD9DE78FA3196DE1585BAB1CB56C7B2BE14BCF63275736B1AF7C6D6"
+  },
+  {
+    "Path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.ContactImpulse.cs",
+    "SHA256": "7B78E6045CA6D38FCE8BB5931AAD2BEDCA5A7A5B9D72913259A95980638DD061"
+  },
+  {
+    "Path": "src/NovaCore.Simulation/Clock/SimulationClock.cs",
+    "SHA256": "13033C6DC2D7FAFFA3A21F3E06539B18E8377963D22CCAAC0B184A17594A28BB"
+  },
+  {
+    "Path": "build/ksa-residency-reference/assembly-source/KSA/UniverseTime.cs",
+    "SHA256": "80275BF45075DAF852C8395FF6D9AF02CE67B3428BE6601F444263B55CD3D03F"
+  },
+  {
+    "Path": "build/ksa-residency-reference/assembly-source/KSA/ConstraintSim.cs",
+    "SHA256": "2A34A8B269A74C0555DB344E8BFA3B307EBF4EE1515DD41EE29E6679B8E39410"
+  },
+  {
+    "Path": "build/ksa-residency-reference/assembly-source/KSA/PhysicsBubble.cs",
+    "SHA256": "E2FE83C15D846E840EC382E6823E8E3550A04E80E510FE4FCC29CAB9DBDB11D9"
+  },
+  {
+    "Path": "build/ksa-residency-reference/assembly-source/KSA/VehicleUpdateState.cs",
+    "SHA256": "6477C8B4EBA2917BD148FC6BB953C979DAB26445A31DAA6C622DCB597FF4F8C0"
+  },
+  {
+    "Path": "build/ksa-residency-reference/assembly-source/KSA/VehicleUpdateTask.cs",
+    "SHA256": "1AA77D886DD64BBE4ECD212096476442E5EC431E4BCDCB2EF1EAC0FA63CD3759"
+  },
+  {
+    "Path": "build/ksa-residency-reference/assembly-source/KSA/Universe.cs",
+    "SHA256": "AD279C97210A1C3C35DD87ECE34386D50E1FEDDF4E2AC45C74985F9F0ABA087A"
+  }
+]

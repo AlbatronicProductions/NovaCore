@@ -1,0 +1,34 @@
+{
+  "classification": "INTERMITTENT CANDIDATE-ASSOCIATED ATTITUDE SIGNAL",
+  "baseline": [
+    0,
+    0,
+    0
+  ],
+  "candidate": [
+    0,
+    12336,
+    12336
+  ],
+  "incidentalLaterFailure": {
+    "sequence": 2,
+    "gate": "impulse-evaluation",
+    "line": [
+      "ORDINARY_ALLOCATION gate=impulse-evaluation bytes=12336 entry=PASS exit=PASS"
+    ],
+    "investigated": false,
+    "sharedMechanism": "NOT ESTABLISHED"
+  },
+  "canonicalFingerprints": "14/14 unchanged",
+  "candidateProductionTestFingerprints": "7/7 unchanged",
+  "tags": "M14.1-M14.6 unchanged",
+  "staged": 0,
+  "disposablePath": "E:\\NovaCore\\.codex\\exact-event-sas-ab",
+  "disposableFiles": 557,
+  "disposableBytes": 44067060.0,
+  "newDisposableFiles": 14,
+  "newDisposableBytes": 72694.0,
+  "cleanup": "Manual only; no deletion attempted in this ticket",
+  "sas": "UNRESOLVED — DEFERRED UNTIL EARLIER GATE IS CLEARED",
+  "leadJudgment": "ESCALATE TO PROJECT CONTROL"
+}

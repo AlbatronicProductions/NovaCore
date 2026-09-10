@@ -1,0 +1,116 @@
+{
+  "date": "2026-09-10",
+  "baseline": "00f226096b61a117184464b5619e464d39789574",
+  "branch": "codex/exact-event-spacecraft-motion",
+  "stop": "Existing full-Release sas-proof allocation gate failed. No retries or later validation.",
+  "builds": {
+    "Debug": {
+      "exitCode": 0,
+      "warnings": 0,
+      "errors": 0
+    },
+    "Release": {
+      "exitCode": 0,
+      "warnings": 0,
+      "errors": 0
+    }
+  },
+  "suites": [
+    {
+      "configuration": "Debug",
+      "runs": 1,
+      "exitCode": 0,
+      "passed": 38,
+      "failed": 0,
+      "unreached": 0
+    },
+    {
+      "configuration": "Release",
+      "runs": 1,
+      "exitCode": 1,
+      "passed": 31,
+      "failed": 1,
+      "unreached": 6,
+      "firstFailure": "SAS sign/frame continuity proof",
+      "unreachedGroups": [
+        "Analytical orbit sampling",
+        "Celestial frame extraction",
+        "Celestial trajectory replacement",
+        "Celestial impulse events",
+        "Allocation",
+        "Exact-event spacecraft motion"
+      ]
+    }
+  ],
+  "groupOrder": [
+    "SimulationInstant",
+    "SimulationDuration",
+    "SimulationRate",
+    "Solar UTC and speed presets",
+    "Event ordering",
+    "Internal physical-event epochs",
+    "Timeline topology",
+    "Simulation clock",
+    "Host-duration conversion",
+    "Host-duration debt servicing",
+    "Transaction contracts",
+    "Canonical transaction groups",
+    "Clock execution orchestration",
+    "Celestial contracts",
+    "Celestial system definitions",
+    "Celestial body catalog",
+    "SolAnalytical dataset",
+    "Celestial system time and provenance",
+    "Celestial ephemeris catalogs",
+    "Celestial system evaluation",
+    "Celestial body orientation",
+    "Two-body propagation",
+    "Spacecraft attitude",
+    "Spacecraft translational authority",
+    "Spacecraft contact generation",
+    "Unified linear/angular contact transaction",
+    "Isolated analytical contact response policy",
+    "Spacecraft attitude integration",
+    "Rigid-body rotation",
+    "Rigid-body torque transaction",
+    "Flight reference and SAS guidance",
+    "SAS sign/frame continuity proof",
+    "Analytical orbit sampling",
+    "Celestial frame extraction",
+    "Celestial trajectory replacement",
+    "Celestial impulse events",
+    "Allocation",
+    "Exact-event spacecraft motion"
+  ],
+  "decisiveDebug": [
+    "Rigid-body rotation: spherical orientation error=0.000E+000; momentum error=1.555E-011; energy error=4.859E-011; hash=0xCA36951D94319AC5; allocation=0 bytes",
+    "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+    "EXACT_EVENT canonical_bit_parity=64",
+    "EXACT_EVENT translation_max_position_error_m=0.0001220703125 velocity_error_m_s=0",
+    "EXACT_EVENT rotation_axis_max_q_error=1.1103267813128674E-16 mixed_q_error=2.784314975363703E-15 mixed_omega_error=2.7722596276462393E-15 reference_refinement=1.3557157818527375E-14",
+    "ORDINARY_ALLOCATION gate=exact-event-spacecraft-motion bytes=0 entry=PASS exit=PASS"
+  ],
+  "decisiveRelease": [
+    "ORDINARY_ALLOCATION gate=sas-proof bytes=12336 entry=PASS exit=PASS",
+    "Unhandled exception. System.InvalidOperationException: sas-proof: expected zero managed allocation, actual=12336",
+    "   at OrdinaryAllocationMeasurement.RequireZero(Int64 bytes, String gate) in E:\\NovaCore\\tests\\NovaCore.Simulation.Tests\\OrdinaryAllocationMeasurement.cs:line 44",
+    "   at Program.<<Main>$>g__SasSignFrameContinuityProofTests|0_8() in E:\\NovaCore\\tests\\NovaCore.Simulation.Tests\\Program.cs:line 295"
+  ],
+  "actualObjectAllocation": "UNCLASSIFIED",
+  "cause": "UNCLASSIFIED",
+  "candidateCausality": "UNCLASSIFIED",
+  "notRunAfterStop": [
+    "Release focused exact-event correctness",
+    "Standalone existing focused regressions",
+    "ReferenceFrames Debug/Release",
+    "Precision Debug/Release",
+    "Release timing and allocation performance mode"
+  ],
+  "performance": {
+    "median": null,
+    "p95": null,
+    "p99": null,
+    "reason": "NOT RUN: explicit validation stop"
+  },
+  "validationMethod": "Current candidate full suites once each. No profiler or diagnostic runtime override. New group appended after all existing groups."
+}

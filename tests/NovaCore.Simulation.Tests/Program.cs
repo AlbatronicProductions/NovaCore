@@ -21,7 +21,12 @@ if (args.Contains("--ordinary-allocation-helper", StringComparer.Ordinal)) { Can
 if (args.Contains("--servicing-allocation-control", StringComparer.Ordinal)) { ServicingAllocationControl(); return; }
 if (args.Contains("--physical-event-epoch-only", StringComparer.Ordinal)) { PhysicalEventEpochTests.Run(); return; }
 if (args.Contains("--physical-event-epoch-performance", StringComparer.Ordinal)) { PhysicalEventEpochTests.Performance(); return; }
+if (args.Contains("--exact-event-motion-only", StringComparer.Ordinal)) { SpacecraftPhysicalEventMotionTests.Run(); return; }
+if (args.Contains("--exact-event-motion-performance", StringComparer.Ordinal)) { SpacecraftPhysicalEventMotionTests.Performance(); return; }
+if (args.Contains("--rigid-rotation-only", StringComparer.Ordinal)) { RigidBodyRotationTests(); return; }
 
+if (args.Contains("--lunar-timed-only", StringComparer.Ordinal)) { _=OrientationMeasurementWarmup(); var checksum=LunarOrientationTiming(); LunarOrientationAllocation(checksum); OrdinaryAllocationMeasurement.PositiveControl(); return; }
+if (args.Contains("--timed-measurements-only", StringComparer.Ordinal)) { CelestialBodyOrientationTests(); TwoBodyPropagationTests(); SpacecraftTranslationTests.Performance(); OrdinaryAllocationMeasurement.PositiveControl(); return; }
 if (args.Contains("--translation-only", StringComparer.Ordinal)) { SpacecraftTranslationTests.Run(); return; }
 if (args.Contains("--contact-only", StringComparer.Ordinal)) { ContactGenerationTests.Run(); return; }
 if (args.Contains("--contact-response-only", StringComparer.Ordinal)) { ContactResponseTests.Run(); return; }
@@ -76,6 +81,7 @@ var tests = new (string Name, Action Test)[]
     ("Celestial trajectory replacement", CelestialTrajectoryReplacementTests),
     ("Celestial impulse events", CelestialImpulseEventTests),
     ("Allocation", AllocationTests),
+    ("Exact-event spacecraft motion", SpacecraftPhysicalEventMotionTests.Run),
 };
 foreach (var (name, test) in tests) { test(); Console.WriteLine($"PASS {name}"); }
 
@@ -126,7 +132,36 @@ static void CelestialBodyOrientationTests()
     Check(CelestialBodyFixedFrameEvaluator.TryEvaluate(SolarSystemBodyIds.Earth,SimulationInstant.Zero,new Double3(1,2,3),new Double3(4,5,6),out var frame)&&frame.LocalToParent.Rotation==earth.BodyFixedToInertial&&frame.LocalToParent.Translation==new Double3(1,2,3)&&!frame.IsInertial,"separate CCF frame contract");
     for(var rateIndex=0;rateIndex<SimulationSpeedPresets.Count;rateIndex++){var rate=SimulationSpeedPresets.Get(rateIndex).Rate;var clock=new SimulationClock(SimulationInstant.Zero,new SimulationTimeline(),rate);var host=clock.AdvanceByHostDuration(SimulationDuration.FromWholeSeconds(10));Check(host.Reason==SimulationHostAdvanceStopReason.Accepted,$"orientation warp conversion {rate}");Check(clock.TryGetPendingSimulationDebtTarget(out var target),$"orientation warp target {rate}");var advance=clock.AdvanceTo(target);clock.ConsumePendingSimulationDebt(new SimulationDuration(clock.CurrentTime.Ticks));Check(advance.Reason==SimulationAdvanceStopReason.ReachedTarget&&CelestialBodyOrientationEvaluator.TryEvaluate(SolarSystemBodyIds.Earth,clock.CurrentTime,out var viaWarp)&&CelestialBodyOrientationEvaluator.TryEvaluate(SolarSystemBodyIds.Earth,target,out var direct)&&viaWarp==direct,$"orientation direct-epoch parity {rate}");}
     for(var index=0;index<9;index++){var source=CelestialBodyOrientationEvaluator.GetSource(index);Check(CelestialBodyOrientationEvaluator.TryEvaluate(source.BodyId,SimulationInstant.Zero,out var value),$"{source.FrameName} report evaluation");var q=value.BodyFixedToInertial;Console.WriteLine($"{source.FrameName} ET0 body-fixed-to-inertial: ({q.X:R}, {q.Y:R}, {q.Z:R}, {q.W:R})");}
-    var bodyIds=new[]{SolarSystemBodyIds.Mercury,SolarSystemBodyIds.Venus,SolarSystemBodyIds.Earth,SolarSystemBodyIds.Moon,SolarSystemBodyIds.Mars,SolarSystemBodyIds.Jupiter,SolarSystemBodyIds.Saturn,SolarSystemBodyIds.Uranus,SolarSystemBodyIds.Neptune};for(var index=0;index<bodyIds.Length;index++)_=CelestialBodyOrientationEvaluator.TryEvaluate(bodyIds[index],SimulationInstant.Zero,out _);for(var index=0;index<bodyIds.Length;index++){var bodyBefore=GC.GetAllocatedBytesForCurrentThread();for(var pass=0;pass<100;pass++)_=CelestialBodyOrientationEvaluator.TryEvaluate(bodyIds[index],new SimulationInstant(pass),out _);var bodyAllocated=GC.GetAllocatedBytesForCurrentThread()-bodyBefore;Console.WriteLine($"Orientation allocation probe body {bodyIds[index].Value}: {bodyAllocated/100d:F1} bytes/evaluation");}var lunarWatch=new Stopwatch();var lunarBefore=GC.GetAllocatedBytesForCurrentThread();lunarWatch.Start();ulong lunarChecksum=0;for(var pass=0;pass<100_000;pass++){Check(CelestialBodyOrientationEvaluator.TryEvaluate(SolarSystemBodyIds.Moon,new SimulationInstant(pass*1_000_000L),out var lunarValue),"lunar orientation performance evaluation");lunarChecksum^=(ulong)BitConverter.DoubleToInt64Bits(lunarValue.BodyFixedToInertial.W);}lunarWatch.Stop();var lunarAllocated=GC.GetAllocatedBytesForCurrentThread()-lunarBefore;var lunarNanoseconds=lunarWatch.Elapsed.TotalNanoseconds/100_000d;Console.WriteLine($"Lunar orientation: {lunarNanoseconds:F1} ns/evaluation; allocated={lunarAllocated} bytes; pack=0x{LunarHighPrecisionOrientation.DeterministicHash:X16}");Check(lunarChecksum!=ulong.MaxValue&&lunarAllocated==0&&lunarNanoseconds<10_000d,"high-precision lunar orientation performance and allocation");var watch=new Stopwatch();watch.Start();watch.Stop();watch.Reset();var before=GC.GetAllocatedBytesForCurrentThread();watch.Start();ulong checksum=0;var allEvaluated=true;for(var pass=0;pass<10_000;pass++)for(var index=0;index<bodyIds.Length;index++){allEvaluated&=CelestialBodyOrientationEvaluator.TryEvaluate(bodyIds[index],new SimulationInstant(pass),out var value);checksum^=(ulong)BitConverter.DoubleToInt64Bits(value.BodyFixedToInertial.W);}watch.Stop();var allocated=GC.GetAllocatedBytesForCurrentThread()-before;Console.WriteLine($"Body orientation: hash=0x{hash:X16}; 90,000 evaluations={watch.Elapsed.TotalMilliseconds:F3} ms; all-body={watch.Elapsed.TotalNanoseconds/10_000d:F1} ns; allocated={allocated} bytes");Check(allEvaluated&&allocated==0&&checksum!=ulong.MaxValue,"all-body orientation evaluation allocates zero bytes");
+    var bodyIds=OrientationMeasurementWarmup();
+    var lunarChecksum=LunarOrientationTiming();
+    var watch=new Stopwatch(); watch.Start(); watch.Stop(); watch.Reset();
+    watch.Start(); ulong checksum=0; var allEvaluated=true;
+    for(var pass=0;pass<10_000;pass++)
+        for(var index=0;index<bodyIds.Length;index++)
+        {
+            allEvaluated&=CelestialBodyOrientationEvaluator.TryEvaluate(bodyIds[index],new SimulationInstant(pass),out var value);
+            checksum^=(ulong)BitConverter.DoubleToInt64Bits(value.BodyFixedToInertial.W);
+        }
+    watch.Stop();
+    Console.WriteLine($"TIMING gate=all-body-orientation evaluations=90000 total_ms={watch.Elapsed.TotalMilliseconds:F3} ns_per_nine_body_pass={watch.Elapsed.TotalNanoseconds/10_000d:F1} threshold=REPORT_ONLY success={allEvaluated} checksum=0x{checksum:X16} hash=0x{hash:X16}");
+    Check(allEvaluated,"all-body orientation timing evaluations succeed");
+    Check(checksum!=ulong.MaxValue,"all-body orientation timing checksum");
+    // Both original normal timing passes finish before either isolated allocation pass.
+    LunarOrientationAllocation(lunarChecksum);
+    using var allocationMeasurement=new OrdinaryAllocationMeasurement("timed-all-body-orientation");
+    ulong allocationChecksum=0; var allocationAllEvaluated=true;
+    for(var pass=0;pass<10_000;pass++)
+        for(var index=0;index<bodyIds.Length;index++)
+        {
+            allocationAllEvaluated&=CelestialBodyOrientationEvaluator.TryEvaluate(bodyIds[index],new SimulationInstant(pass),out var value);
+            allocationChecksum^=(ulong)BitConverter.DoubleToInt64Bits(value.BodyFixedToInertial.W);
+        }
+    var allocated=allocationMeasurement.Complete();
+    OrdinaryAllocationMeasurement.RequireZero(allocated,"timed-all-body-orientation");
+    Check(allocationAllEvaluated,"all-body orientation allocation evaluations succeed");
+    Check(allocationChecksum!=ulong.MaxValue,"all-body orientation allocation checksum");
+    Check(allocationChecksum==checksum,"all-body orientation independent passes preserve output checksum");
+    Console.WriteLine($"TIMED_RESULT gate=all-body-orientation allocation=0 success=PASS checksum=0x{allocationChecksum:X16} parity=PASS");
 }
 
 static void InstantTests()
@@ -143,6 +178,48 @@ static void InstantTests()
     Throws<ArgumentOutOfRangeException>(() => SimulationInstant.FromSecondsRounded(double.PositiveInfinity));
     Throws<ArgumentOutOfRangeException>(() => SimulationInstant.FromSecondsRounded(double.NegativeInfinity));
     Throws<OverflowException>(() => SimulationInstant.FromSecondsRounded(double.MaxValue));
+}
+
+static CelestialBodyId[] OrientationMeasurementWarmup()
+{
+    var bodyIds=new[]{SolarSystemBodyIds.Mercury,SolarSystemBodyIds.Venus,SolarSystemBodyIds.Earth,SolarSystemBodyIds.Moon,SolarSystemBodyIds.Mars,SolarSystemBodyIds.Jupiter,SolarSystemBodyIds.Saturn,SolarSystemBodyIds.Uranus,SolarSystemBodyIds.Neptune};for(var index=0;index<bodyIds.Length;index++)_=CelestialBodyOrientationEvaluator.TryEvaluate(bodyIds[index],SimulationInstant.Zero,out _);for(var index=0;index<bodyIds.Length;index++){var bodyBefore=GC.GetAllocatedBytesForCurrentThread();for(var pass=0;pass<100;pass++)_=CelestialBodyOrientationEvaluator.TryEvaluate(bodyIds[index],new SimulationInstant(pass),out _);var bodyAllocated=GC.GetAllocatedBytesForCurrentThread()-bodyBefore;Console.WriteLine($"Orientation allocation probe body {bodyIds[index].Value}: {bodyAllocated/100d:F1} bytes/evaluation");}
+    return bodyIds;
+}
+
+static ulong LunarOrientationTiming()
+{
+    // Original normal-runtime timer boundaries and 100,000-call workload. No GC isolation here.
+    var lunarWatch=new Stopwatch();
+    lunarWatch.Start(); ulong lunarChecksum=0;
+    for(var pass=0;pass<100_000;pass++)
+    {
+        Check(CelestialBodyOrientationEvaluator.TryEvaluate(SolarSystemBodyIds.Moon,new SimulationInstant(pass*1_000_000L),out var lunarValue),"lunar orientation performance evaluation");
+        lunarChecksum^=(ulong)BitConverter.DoubleToInt64Bits(lunarValue.BodyFixedToInertial.W);
+    }
+    lunarWatch.Stop();
+    var lunarNanoseconds=lunarWatch.Elapsed.TotalNanoseconds/100_000d;
+    Console.WriteLine($"TIMING gate=lunar-orientation evaluations=100000 ns_per_evaluation={lunarNanoseconds:F1} threshold_ns=10000 checksum=0x{lunarChecksum:X16} pack=0x{LunarHighPrecisionOrientation.DeterministicHash:X16}");
+    Check(lunarChecksum!=ulong.MaxValue,"lunar orientation timing checksum");
+    Check(lunarNanoseconds<10_000d,"lunar orientation timing below 10000 ns/evaluation");
+    return lunarChecksum;
+}
+
+static void LunarOrientationAllocation(ulong timingChecksum)
+{
+    // Reuse the same warmed immutable orientation model/pack; evaluation changes no source state.
+    // No timer operations belong in this pass. The common 1 MiB reservation is not an allocation allowance.
+    using var measurement=new OrdinaryAllocationMeasurement("timed-lunar-orientation");
+    ulong checksum=0;
+    for(var pass=0;pass<100_000;pass++)
+    {
+        Check(CelestialBodyOrientationEvaluator.TryEvaluate(SolarSystemBodyIds.Moon,new SimulationInstant(pass*1_000_000L),out var value),"lunar orientation allocation evaluation");
+        checksum^=(ulong)BitConverter.DoubleToInt64Bits(value.BodyFixedToInertial.W);
+    }
+    var bytes=measurement.Complete();
+    OrdinaryAllocationMeasurement.RequireZero(bytes,"timed-lunar-orientation");
+    Check(checksum!=ulong.MaxValue,"lunar orientation allocation checksum");
+    Check(checksum==timingChecksum,"lunar orientation independent passes preserve output checksum");
+    Console.WriteLine($"TIMED_RESULT gate=lunar-orientation allocation=0 success=PASS checksum=0x{checksum:X16} parity=PASS");
 }
 
 static void SpacecraftAttitudeTests()
@@ -762,16 +839,36 @@ static void TwoBodyPropagationTests()
     Check(circularHash == PropagationHash(circular, epoch, mu, [epoch, quarter, half, full]) && combined != 0, "propagator raw-hash repeatability");
 
     _ = UniversalVariableTwoBodyPropagator.TryEvaluate(circular, epoch, quarter, mu); _ = CelestialTrajectoryEvaluator.TryEvaluate(new CelestialBodyId(2), adapterView, quarter);
-    var stopwatch = Stopwatch.StartNew(); var before = GC.GetAllocatedBytesForCurrentThread(); var maximumIterations = 0;
+    // Preserve both normal timing loops before either isolated pass. Removing the old opening
+    // counter read removes instrumentation overhead only, not a propagator call or correctness check.
+    var stopwatch = Stopwatch.StartNew(); var maximumIterations = 0;
     for (var index = 0; index < 100_000; index++) { var result = UniversalVariableTwoBodyPropagator.TryEvaluate(circular, epoch, quarter, mu); Check(result.Succeeded, "warm circular"); maximumIterations = Math.Max(maximumIterations, result.Iterations); }
-    var circularMilliseconds = stopwatch.Elapsed.TotalMilliseconds; var circularAllocated = GC.GetAllocatedBytesForCurrentThread() - before;
-    stopwatch.Restart(); before = GC.GetAllocatedBytesForCurrentThread();
+    var circularMilliseconds = stopwatch.Elapsed.TotalMilliseconds;
+    var circularMaximumIterations = maximumIterations;
+    stopwatch.Restart();
     for (var index = 0; index < 100_000; index++) { var result = UniversalVariableTwoBodyPropagator.TryEvaluate(moderate, epoch, moderateTime, mu); Check(result.Succeeded, "warm elliptic"); maximumIterations = Math.Max(maximumIterations, result.Iterations); }
-    var ellipticMilliseconds = stopwatch.Elapsed.TotalMilliseconds; var ellipticAllocated = GC.GetAllocatedBytesForCurrentThread() - before;
+    var ellipticMilliseconds = stopwatch.Elapsed.TotalMilliseconds;
+    stopwatch.Stop();
+    Console.WriteLine($"TIMING gate=circular-propagation evaluations=100000 total_ms={circularMilliseconds:F3} threshold=REPORT_ONLY maximum_iterations={circularMaximumIterations} success=PASS");
+    Console.WriteLine($"TIMING gate=elliptic-propagation evaluations=100000 total_ms={ellipticMilliseconds:F3} threshold=REPORT_ONLY aggregate_maximum_iterations={maximumIterations} success=PASS");
+    // Cartesian inputs are immutable values; both loops independently repeat the same warmed calls.
+    using var circularMeasurement = new OrdinaryAllocationMeasurement("timed-circular-propagation");
+    var allocationMaximumIterations = 0;
+    for (var index = 0; index < 100_000; index++) { var result = UniversalVariableTwoBodyPropagator.TryEvaluate(circular, epoch, quarter, mu); Check(result.Succeeded, "circular allocation evaluation"); allocationMaximumIterations = Math.Max(allocationMaximumIterations, result.Iterations); }
+    var circularAllocated = circularMeasurement.Complete();
+    OrdinaryAllocationMeasurement.RequireZero(circularAllocated, "timed-circular-propagation");
+    Check(allocationMaximumIterations == circularMaximumIterations, "circular allocation maximum-iteration parity");
+    Console.WriteLine($"TIMED_RESULT gate=circular-propagation allocation=0 success=PASS maximum_iterations={allocationMaximumIterations} parity=PASS");
+    using var ellipticMeasurement = new OrdinaryAllocationMeasurement("timed-elliptic-propagation");
+    for (var index = 0; index < 100_000; index++) { var result = UniversalVariableTwoBodyPropagator.TryEvaluate(moderate, epoch, moderateTime, mu); Check(result.Succeeded, "elliptic allocation evaluation"); allocationMaximumIterations = Math.Max(allocationMaximumIterations, result.Iterations); }
+    var ellipticAllocated = ellipticMeasurement.Complete();
+    OrdinaryAllocationMeasurement.RequireZero(ellipticAllocated, "timed-elliptic-propagation");
+    Check(allocationMaximumIterations == maximumIterations, "elliptic allocation aggregate maximum-iteration parity");
+    Console.WriteLine($"TIMED_RESULT gate=elliptic-propagation allocation=0 success=PASS aggregate_maximum_iterations={allocationMaximumIterations} parity=PASS");
     using var ordinary23 = new OrdinaryAllocationMeasurement("propagation-adapter");
     for (var index = 0; index < 100_000; index++) { Check(CelestialTrajectoryEvaluator.TryEvaluate(new CelestialBodyId(2), adapterView, moderateTime).Succeeded, "warm adapter"); Check(UniversalVariableTwoBodyPropagator.TryEvaluate(circular, epoch, SimulationInstant.FromWholeSeconds(1), 0d).Status == TwoBodyPropagationStatus.InvalidGravitationalParameter, "warm invalid"); Check(UniversalVariableTwoBodyPropagator.TryEvaluate(hyperbolic, epoch, SimulationInstant.FromWholeSeconds(1), mu).Status == TwoBodyPropagationStatus.HyperbolicUnsupported, "warm unsupported"); Check(UniversalVariableTwoBodyPropagator.TryEvaluateWithIterationLimitForTest(high, epoch, highTime, mu, 1).Status == TwoBodyPropagationStatus.NonConvergent, "warm nonconvergent"); }
     var adapterAllocated = ordinary23.Complete();
-    Check(circularAllocated == 0 && ellipticAllocated == 0, "propagation paths allocate zero bytes"); OrdinaryAllocationMeasurement.RequireZero(adapterAllocated, "propagation-adapter");
+    OrdinaryAllocationMeasurement.RequireZero(adapterAllocated, "propagation-adapter");
     Console.WriteLine("Two-Body Propagation"); Console.WriteLine($"Circular orbit: t=0 PASS; t=0.25P PASS; t=0.50P PASS; t=1.00P PASS; max checkpoint position error={circularCheckpointPositionError:E3} m; velocity error={circularCheckpointVelocityError:E3} m/s"); Console.WriteLine($"Elliptic orbit: energy relative error={Math.Max(moderateEnergyError, highEnergyError):E3}; angular momentum relative error={Math.Max(moderateMomentumError, highMomentumError):E3}; maximum iterations={maximumIterations}"); Console.WriteLine("Backward propagation: PASS; Epoch replacement equivalence: PASS; Unsupported regimes: PASS"); Console.WriteLine($"Allocation: circular={circularAllocated} bytes, elliptic={ellipticAllocated} bytes, adapter/failure={adapterAllocated} bytes"); Console.WriteLine($"Benchmark: circular={circularMilliseconds:F3} ms, elliptic={ellipticMilliseconds:F3} ms"); Console.WriteLine($"Deterministic propagation hashes: circular=0x{circularHash:X16}, elliptic=0x{ellipticHash:X16}, backward=0x{backwardHash:X16}, validation=0x{validationHash:X16}, combined=0x{combined:X16}");
 }
 

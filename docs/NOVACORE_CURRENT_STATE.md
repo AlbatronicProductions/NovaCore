@@ -13,11 +13,37 @@ and performs FP64 camera-relative subtraction before GPU transport.
 
 ## Banked production checkpoint
 
-Latest banked accomplishment: **M14.6 — Establish internal exact physical-event
-epochs**, commit `d0b9f9d69d55b8ba85a7b24a44f93e03cea2dcf6`,
-annotated tag `m14.6-physical-event-epochs`. **BANKED.**
-M14.1 through M14.6 are banked; no unbanked candidate currently exists.
+Latest banked accomplishment: **M14.7 — Evaluate coherent spacecraft motion at exact
+physical-event epochs**, annotated tag `m14.7-exact-event-spacecraft-motion`.
+**BANKED.** M14.1 through M14.7 are banked. The tag identifies the milestone commit;
+the preceding reconciled main was `00f226096b61a117184464b5619e464d39789574`.
 **M14 — Surface Interaction / Launch Foundation remains OPEN.**
+
+### Banked additive exact-event motion
+
+The five additive production files evaluate immutable
+FP64 spacecraft motion at an exact `PhysicalEventEpoch`. Canonical requests
+delegate to banked coherent motion; fractional requests use analytical local-duration
+translation and banked rotation to the floor followed by fractional dynamics.
+All 327 existing production-file fingerprints remain unchanged. The result is a
+read-only derived value, without contact proof, mutation or publication authority.
+
+The earlier final Release matrix stopped on a 12,336-byte lunar-orientation
+counter witness; its cause remains unattributed. The separately authorized five
+timed-test windows now split normal timing from checked zero-allocation measurement.
+Focused Debug/Release qualification and a **fresh 5/5 Release matrix** passed,
+38 groups each. All allocation contracts remained exact zero and the lunar timing
+threshold remained unchanged. Bounded exact-event performance passed zero-allocation
+qualification; the complete measured distribution, including its canonical-wrapper
+P99 outlier, is retained. Earlier full Debug and numerical/reference regressions
+remain applicable: all 332 existing-plus-additive production files are unchanged.
+Project Control accepted this responsibility for M14.7. The superseded generalized
+mechanism is retired; its stage-specific evidence remains historical provenance.
+See the [banked contract](spacecraft-physical-event-motion.md),
+[closeout](engineering-evidence/m14.7-closeout/README.md) and
+[latest qualification](engineering-evidence/timed-measurement-split/README.md).
+
+### Banked responsibilities
 
 M14.1 remains banked at `5b9b02ab1d2ba0e903809510908e4819984d4de2`, tag
 `m14.1-canonical-surface-point-queries`. It owns immutable canonical natural-terrain
@@ -76,8 +102,9 @@ The inventory found 42 zero-required windows: 31 equivalent ordinary raw-counter
 windows migrated to checked temporary no-GC measurement, six existing checked
 windows remained, and five timing-bearing raw-counter windows stayed unchanged.
 Exact zero, workloads, warmups, counts, checksums and state predicates were preserved;
-positive controls still detect real allocation. The timed family is not an active
-blocker and needs separate treatment only if a proven problem warrants it.
+positive controls still detect real allocation. The five timed windows were deferred
+at that banked checkpoint. Their subsequent test-only split is qualified in the
+[M14.7 qualification](engineering-evidence/timed-measurement-split/README.md).
 Allocation-test corrections changed no production code.
 
 | Final accepted gate | Debug | Release |
@@ -365,15 +392,16 @@ visually finished.
 
 ## Next architectural decision and work boundary
 
-Begin from banked M14.6, with M14 open and no unbanked development candidate.
+M14 remains open at banked M14.7. Read-only exact-event motion and the timed-test
+split are accepted. The normal production worktree is `E:\NovaCore` on `main`.
 M13 is closed at M13.6 and there is no M13.7. Preserve the
 accepted NCSM1 physical, regional/facility, visibility, tessellation, memory and
 publication contracts. Historical exact-copy, residual-validation and lifecycle
 experiments do not automatically become production candidates.
 
-Project Control must choose the next responsibility within the open M14 front.
-No new physical execution, discovery, solver, launch/landing, measurement migration
-or other production implementation is opened by this documentation closeout.
+Project Control must choose any later responsibility
+within the open M14 front. No further physical execution, discovery, solver,
+launch/landing, measurement migration or other implementation is opened by this closeout.
 Do not assign a next milestone or regenerate NCSM1 assets.
 Future work must distinguish physical geometry, depth/ownership and
 presentation/LOD behavior while keeping `H(bodyDirection)` authoritative.

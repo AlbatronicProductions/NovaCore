@@ -1,0 +1,801 @@
+{
+  "date": "2026-09-10",
+  "sdk": "10.0.303",
+  "runtime": "Microsoft.NETCore.App 10.0.12 selected by default net10.0 patch roll-forward; no child instrumentation",
+  "profilerOrRuntimeOverrides": "NONE; only DOTNET_ROOT and DOTNET_ROOT(x86) present",
+  "groups": [
+    "SimulationInstant",
+    "SimulationDuration",
+    "SimulationRate",
+    "Solar UTC and speed presets",
+    "Event ordering",
+    "Internal physical-event epochs",
+    "Timeline topology",
+    "Simulation clock",
+    "Host-duration conversion",
+    "Host-duration debt servicing",
+    "Transaction contracts",
+    "Canonical transaction groups",
+    "Clock execution orchestration",
+    "Celestial contracts",
+    "Celestial system definitions",
+    "Celestial body catalog",
+    "SolAnalytical dataset",
+    "Celestial system time and provenance",
+    "Celestial ephemeris catalogs",
+    "Celestial system evaluation",
+    "Celestial body orientation",
+    "Two-body propagation",
+    "Spacecraft attitude",
+    "Spacecraft translational authority",
+    "Spacecraft contact generation",
+    "Unified linear/angular contact transaction",
+    "Isolated analytical contact response policy",
+    "Spacecraft attitude integration",
+    "Rigid-body rotation",
+    "Rigid-body torque transaction",
+    "Flight reference and SAS guidance",
+    "SAS sign/frame continuity proof",
+    "Analytical orbit sampling",
+    "Celestial frame extraction",
+    "Celestial trajectory replacement",
+    "Celestial impulse events",
+    "Allocation",
+    "Exact-event spacecraft motion"
+  ],
+  "earlyRelease": [
+    {
+      "run": 1,
+      "exitCode": 0,
+      "passLines": 44,
+      "startUtc": "2026-09-10T16:04:46.3899172Z",
+      "endUtc": "2026-09-10T16:04:49.5101699Z",
+      "log": ".codex/exact-event-additive-validation/early-release-1.txt"
+    },
+    {
+      "run": 2,
+      "exitCode": 0,
+      "passLines": 44,
+      "startUtc": "2026-09-10T16:04:49.5266615Z",
+      "endUtc": "2026-09-10T16:04:52.6003993Z",
+      "log": ".codex/exact-event-additive-validation/early-release-2.txt"
+    },
+    {
+      "run": 3,
+      "exitCode": 0,
+      "passLines": 44,
+      "startUtc": "2026-09-10T16:04:52.6032371Z",
+      "endUtc": "2026-09-10T16:04:55.6338289Z",
+      "log": ".codex/exact-event-additive-validation/early-release-3.txt"
+    }
+  ],
+  "finalRelease": [
+    {
+      "run": 1,
+      "exitCode": -532462766,
+      "passLines": 20,
+      "startUtc": "2026-09-10T16:07:39.133567Z",
+      "endUtc": "2026-09-10T16:07:41.1352769Z",
+      "log": ".codex/exact-event-additive-validation/final-release-1.txt"
+    }
+  ],
+  "finalUnexecuted": [
+    2,
+    3,
+    4,
+    5
+  ],
+  "functional": [
+    {
+      "configuration": "Debug",
+      "gate": "exact-event-motion-only",
+      "exitCode": 0,
+      "log": ".codex/exact-event-additive-validation/Debug-exact-event-motion-only.txt"
+    },
+    {
+      "configuration": "Debug",
+      "gate": "translation-only",
+      "exitCode": 0,
+      "log": ".codex/exact-event-additive-validation/Debug-translation-only.txt"
+    },
+    {
+      "configuration": "Debug",
+      "gate": "rigid-rotation-only",
+      "exitCode": 0,
+      "log": ".codex/exact-event-additive-validation/Debug-rigid-rotation-only.txt"
+    },
+    {
+      "configuration": "Debug",
+      "gate": "contact-only",
+      "exitCode": 0,
+      "log": ".codex/exact-event-additive-validation/Debug-contact-only.txt"
+    },
+    {
+      "configuration": "Debug",
+      "gate": "contact-response-only",
+      "exitCode": 0,
+      "log": ".codex/exact-event-additive-validation/Debug-contact-response-only.txt"
+    },
+    {
+      "configuration": "Debug",
+      "gate": "isolated-contact-only",
+      "exitCode": 0,
+      "log": ".codex/exact-event-additive-validation/Debug-isolated-contact-only.txt"
+    },
+    {
+      "configuration": "Debug",
+      "gate": "physical-event-epoch-only",
+      "exitCode": 0,
+      "log": ".codex/exact-event-additive-validation/Debug-physical-event-epoch-only.txt"
+    },
+    {
+      "configuration": "Debug",
+      "gate": "ReferenceFrames",
+      "exitCode": 0,
+      "log": ".codex/exact-event-additive-validation/Debug-ReferenceFrames.txt"
+    },
+    {
+      "configuration": "Debug",
+      "gate": "Precision",
+      "exitCode": 0,
+      "log": ".codex/exact-event-additive-validation/Debug-Precision.txt"
+    },
+    {
+      "configuration": "Release",
+      "gate": "exact-event-motion-only",
+      "exitCode": 0,
+      "log": ".codex/exact-event-additive-validation/Release-exact-event-motion-only.txt"
+    },
+    {
+      "configuration": "Release",
+      "gate": "translation-only",
+      "exitCode": 0,
+      "log": ".codex/exact-event-additive-validation/Release-translation-only.txt"
+    },
+    {
+      "configuration": "Release",
+      "gate": "rigid-rotation-only",
+      "exitCode": 0,
+      "log": ".codex/exact-event-additive-validation/Release-rigid-rotation-only.txt"
+    },
+    {
+      "configuration": "Release",
+      "gate": "contact-only",
+      "exitCode": 0,
+      "log": ".codex/exact-event-additive-validation/Release-contact-only.txt"
+    },
+    {
+      "configuration": "Release",
+      "gate": "contact-response-only",
+      "exitCode": 0,
+      "log": ".codex/exact-event-additive-validation/Release-contact-response-only.txt"
+    },
+    {
+      "configuration": "Release",
+      "gate": "isolated-contact-only",
+      "exitCode": 0,
+      "log": ".codex/exact-event-additive-validation/Release-isolated-contact-only.txt"
+    },
+    {
+      "configuration": "Release",
+      "gate": "physical-event-epoch-only",
+      "exitCode": 0,
+      "log": ".codex/exact-event-additive-validation/Release-physical-event-epoch-only.txt"
+    },
+    {
+      "configuration": "Release",
+      "gate": "ReferenceFrames",
+      "exitCode": 0,
+      "log": ".codex/exact-event-additive-validation/Release-ReferenceFrames.txt"
+    },
+    {
+      "configuration": "Release",
+      "gate": "Precision",
+      "exitCode": 0,
+      "log": ".codex/exact-event-additive-validation/Release-Precision.txt"
+    }
+  ],
+  "runs": [
+    {
+      "stage": "early Release",
+      "run": 1,
+      "passedGroups": 38,
+      "registeredGroups": 38,
+      "groupPasses": [
+        "SimulationInstant",
+        "SimulationDuration",
+        "SimulationRate",
+        "Solar UTC and speed presets",
+        "Event ordering",
+        "Internal physical-event epochs",
+        "Timeline topology",
+        "Simulation clock",
+        "Host-duration conversion",
+        "Host-duration debt servicing",
+        "Transaction contracts",
+        "Canonical transaction groups",
+        "Clock execution orchestration",
+        "Celestial contracts",
+        "Celestial system definitions",
+        "Celestial body catalog",
+        "SolAnalytical dataset",
+        "Celestial system time and provenance",
+        "Celestial ephemeris catalogs",
+        "Celestial system evaluation",
+        "Celestial body orientation",
+        "Two-body propagation",
+        "Spacecraft attitude",
+        "Spacecraft translational authority",
+        "Spacecraft contact generation",
+        "Unified linear/angular contact transaction",
+        "Isolated analytical contact response policy",
+        "Spacecraft attitude integration",
+        "Rigid-body rotation",
+        "Rigid-body torque transaction",
+        "Flight reference and SAS guidance",
+        "SAS sign/frame continuity proof",
+        "Analytical orbit sampling",
+        "Celestial frame extraction",
+        "Celestial trajectory replacement",
+        "Celestial impulse events",
+        "Allocation",
+        "Exact-event spacecraft motion"
+      ],
+      "observations": [
+        "ORDINARY_ALLOCATION gate=speed-presets bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=timeline bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=clock bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=host-conversion bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=single-debt-service bytes=0 entry=PASS exit=PASS",
+        "SERVICING_GATE entry=PASS exit=PASS allocated=0 clock=50000 debt=0 processed=5000 pending=0 completed=499",
+        "ORDINARY_ALLOCATION gate=per-event-transactions bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=canonical-group bytes=0 entry=PASS exit=PASS",
+        "CANONICAL_GROUP allocation=0 complete=True processed=5000 expected=5000",
+        "ORDINARY_ALLOCATION gate=celestial-store bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=system-definitions bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=body-catalog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=sol-evaluation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=system-time bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=ephemeris-catalog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=sampled-evaluation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=solmini-evaluation bytes=0 entry=PASS exit=PASS",
+        "Lunar orientation: 1938.8 ns/evaluation; allocated=0 bytes; pack=0x3BCE78D924EA3532",
+        "Body orientation: hash=0xD5767D2C2BABE9AA; 90,000 evaluations=28.260 ms; all-body=2826.0 ns; allocated=0 bytes",
+        "ORDINARY_ALLOCATION gate=propagation-adapter bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=spacecraft-attitude bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=spacecraft-translation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=contact-response bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=attitude-integration bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=rigid-rotation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=rigid-lookup bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=guidance bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=sas-proof bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=orbit-sampling bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=frame-extraction bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=trajectory-candidate bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=trajectory-commit bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=impulse-evaluation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=impulse-commit bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=integral-arithmetic bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "EXACT_EVENT canonical_bit_parity=64",
+        "EXACT_EVENT translation_max_position_error_m=0.0001220703125 velocity_error_m_s=0",
+        "EXACT_EVENT rotation_axis_max_q_error=1.1103267813128674E-16 mixed_q_error=2.7841134087907843E-15 mixed_omega_error=2.7722596276462393E-15 reference_refinement=1.3557157818527375E-14",
+        "ORDINARY_ALLOCATION gate=exact-event-spacecraft-motion bytes=0 entry=PASS exit=PASS"
+      ],
+      "stdoutSha256": "2E509BDC22253BB0540FB696868865DAAD1EF98B6533FC1EB34EC302502E56E7"
+    },
+    {
+      "stage": "early Release",
+      "run": 2,
+      "passedGroups": 38,
+      "registeredGroups": 38,
+      "groupPasses": [
+        "SimulationInstant",
+        "SimulationDuration",
+        "SimulationRate",
+        "Solar UTC and speed presets",
+        "Event ordering",
+        "Internal physical-event epochs",
+        "Timeline topology",
+        "Simulation clock",
+        "Host-duration conversion",
+        "Host-duration debt servicing",
+        "Transaction contracts",
+        "Canonical transaction groups",
+        "Clock execution orchestration",
+        "Celestial contracts",
+        "Celestial system definitions",
+        "Celestial body catalog",
+        "SolAnalytical dataset",
+        "Celestial system time and provenance",
+        "Celestial ephemeris catalogs",
+        "Celestial system evaluation",
+        "Celestial body orientation",
+        "Two-body propagation",
+        "Spacecraft attitude",
+        "Spacecraft translational authority",
+        "Spacecraft contact generation",
+        "Unified linear/angular contact transaction",
+        "Isolated analytical contact response policy",
+        "Spacecraft attitude integration",
+        "Rigid-body rotation",
+        "Rigid-body torque transaction",
+        "Flight reference and SAS guidance",
+        "SAS sign/frame continuity proof",
+        "Analytical orbit sampling",
+        "Celestial frame extraction",
+        "Celestial trajectory replacement",
+        "Celestial impulse events",
+        "Allocation",
+        "Exact-event spacecraft motion"
+      ],
+      "observations": [
+        "ORDINARY_ALLOCATION gate=speed-presets bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=timeline bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=clock bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=host-conversion bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=single-debt-service bytes=0 entry=PASS exit=PASS",
+        "SERVICING_GATE entry=PASS exit=PASS allocated=0 clock=50000 debt=0 processed=5000 pending=0 completed=499",
+        "ORDINARY_ALLOCATION gate=per-event-transactions bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=canonical-group bytes=0 entry=PASS exit=PASS",
+        "CANONICAL_GROUP allocation=0 complete=True processed=5000 expected=5000",
+        "ORDINARY_ALLOCATION gate=celestial-store bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=system-definitions bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=body-catalog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=sol-evaluation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=system-time bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=ephemeris-catalog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=sampled-evaluation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=solmini-evaluation bytes=0 entry=PASS exit=PASS",
+        "Lunar orientation: 1849.5 ns/evaluation; allocated=0 bytes; pack=0x3BCE78D924EA3532",
+        "Body orientation: hash=0xD5767D2C2BABE9AA; 90,000 evaluations=27.217 ms; all-body=2721.7 ns; allocated=0 bytes",
+        "ORDINARY_ALLOCATION gate=propagation-adapter bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=spacecraft-attitude bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=spacecraft-translation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=contact-response bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=attitude-integration bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=rigid-rotation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=rigid-lookup bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=guidance bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=sas-proof bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=orbit-sampling bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=frame-extraction bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=trajectory-candidate bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=trajectory-commit bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=impulse-evaluation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=impulse-commit bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=integral-arithmetic bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "EXACT_EVENT canonical_bit_parity=64",
+        "EXACT_EVENT translation_max_position_error_m=0.0001220703125 velocity_error_m_s=0",
+        "EXACT_EVENT rotation_axis_max_q_error=1.1103267813128674E-16 mixed_q_error=2.7841134087907843E-15 mixed_omega_error=2.7722596276462393E-15 reference_refinement=1.3557157818527375E-14",
+        "ORDINARY_ALLOCATION gate=exact-event-spacecraft-motion bytes=0 entry=PASS exit=PASS"
+      ],
+      "stdoutSha256": "829558C48A1ED1C41C1C4EC09A14BB4D8AB76C824C46632D708554D03C2C066C"
+    },
+    {
+      "stage": "early Release",
+      "run": 3,
+      "passedGroups": 38,
+      "registeredGroups": 38,
+      "groupPasses": [
+        "SimulationInstant",
+        "SimulationDuration",
+        "SimulationRate",
+        "Solar UTC and speed presets",
+        "Event ordering",
+        "Internal physical-event epochs",
+        "Timeline topology",
+        "Simulation clock",
+        "Host-duration conversion",
+        "Host-duration debt servicing",
+        "Transaction contracts",
+        "Canonical transaction groups",
+        "Clock execution orchestration",
+        "Celestial contracts",
+        "Celestial system definitions",
+        "Celestial body catalog",
+        "SolAnalytical dataset",
+        "Celestial system time and provenance",
+        "Celestial ephemeris catalogs",
+        "Celestial system evaluation",
+        "Celestial body orientation",
+        "Two-body propagation",
+        "Spacecraft attitude",
+        "Spacecraft translational authority",
+        "Spacecraft contact generation",
+        "Unified linear/angular contact transaction",
+        "Isolated analytical contact response policy",
+        "Spacecraft attitude integration",
+        "Rigid-body rotation",
+        "Rigid-body torque transaction",
+        "Flight reference and SAS guidance",
+        "SAS sign/frame continuity proof",
+        "Analytical orbit sampling",
+        "Celestial frame extraction",
+        "Celestial trajectory replacement",
+        "Celestial impulse events",
+        "Allocation",
+        "Exact-event spacecraft motion"
+      ],
+      "observations": [
+        "ORDINARY_ALLOCATION gate=speed-presets bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=timeline bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=clock bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=host-conversion bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=single-debt-service bytes=0 entry=PASS exit=PASS",
+        "SERVICING_GATE entry=PASS exit=PASS allocated=0 clock=50000 debt=0 processed=5000 pending=0 completed=499",
+        "ORDINARY_ALLOCATION gate=per-event-transactions bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=canonical-group bytes=0 entry=PASS exit=PASS",
+        "CANONICAL_GROUP allocation=0 complete=True processed=5000 expected=5000",
+        "ORDINARY_ALLOCATION gate=celestial-store bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=system-definitions bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=body-catalog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=sol-evaluation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=system-time bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=ephemeris-catalog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=sampled-evaluation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=solmini-evaluation bytes=0 entry=PASS exit=PASS",
+        "Lunar orientation: 2007.4 ns/evaluation; allocated=0 bytes; pack=0x3BCE78D924EA3532",
+        "Body orientation: hash=0xD5767D2C2BABE9AA; 90,000 evaluations=28.208 ms; all-body=2820.8 ns; allocated=0 bytes",
+        "ORDINARY_ALLOCATION gate=propagation-adapter bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=spacecraft-attitude bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=spacecraft-translation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=contact-response bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=attitude-integration bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=rigid-rotation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=rigid-lookup bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=guidance bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=sas-proof bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=orbit-sampling bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=frame-extraction bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=trajectory-candidate bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=trajectory-commit bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=impulse-evaluation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=impulse-commit bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=integral-arithmetic bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "EXACT_EVENT canonical_bit_parity=64",
+        "EXACT_EVENT translation_max_position_error_m=0.0001220703125 velocity_error_m_s=0",
+        "EXACT_EVENT rotation_axis_max_q_error=1.1103267813128674E-16 mixed_q_error=2.7841134087907843E-15 mixed_omega_error=2.7722596276462393E-15 reference_refinement=1.3557157818527375E-14",
+        "ORDINARY_ALLOCATION gate=exact-event-spacecraft-motion bytes=0 entry=PASS exit=PASS"
+      ],
+      "stdoutSha256": "6F9D9E746C447F1C1220E62403F97D8EEFD4F48FD6E20ECE857E71A906FA12D4"
+    },
+    {
+      "stage": "full Debug",
+      "run": 1,
+      "passedGroups": 38,
+      "registeredGroups": 38,
+      "groupPasses": [
+        "SimulationInstant",
+        "SimulationDuration",
+        "SimulationRate",
+        "Solar UTC and speed presets",
+        "Event ordering",
+        "Internal physical-event epochs",
+        "Timeline topology",
+        "Simulation clock",
+        "Host-duration conversion",
+        "Host-duration debt servicing",
+        "Transaction contracts",
+        "Canonical transaction groups",
+        "Clock execution orchestration",
+        "Celestial contracts",
+        "Celestial system definitions",
+        "Celestial body catalog",
+        "SolAnalytical dataset",
+        "Celestial system time and provenance",
+        "Celestial ephemeris catalogs",
+        "Celestial system evaluation",
+        "Celestial body orientation",
+        "Two-body propagation",
+        "Spacecraft attitude",
+        "Spacecraft translational authority",
+        "Spacecraft contact generation",
+        "Unified linear/angular contact transaction",
+        "Isolated analytical contact response policy",
+        "Spacecraft attitude integration",
+        "Rigid-body rotation",
+        "Rigid-body torque transaction",
+        "Flight reference and SAS guidance",
+        "SAS sign/frame continuity proof",
+        "Analytical orbit sampling",
+        "Celestial frame extraction",
+        "Celestial trajectory replacement",
+        "Celestial impulse events",
+        "Allocation",
+        "Exact-event spacecraft motion"
+      ],
+      "observations": [
+        "ORDINARY_ALLOCATION gate=speed-presets bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=timeline bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=clock bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=host-conversion bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=single-debt-service bytes=0 entry=PASS exit=PASS",
+        "SERVICING_GATE entry=PASS exit=PASS allocated=0 clock=50000 debt=0 processed=5000 pending=0 completed=499",
+        "ORDINARY_ALLOCATION gate=per-event-transactions bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=canonical-group bytes=0 entry=PASS exit=PASS",
+        "CANONICAL_GROUP allocation=0 complete=True processed=5000 expected=5000",
+        "ORDINARY_ALLOCATION gate=celestial-store bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=system-definitions bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=body-catalog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=sol-evaluation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=system-time bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=ephemeris-catalog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=sampled-evaluation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=solmini-evaluation bytes=0 entry=PASS exit=PASS",
+        "Lunar orientation: 4566.3 ns/evaluation; allocated=0 bytes; pack=0x3BCE78D924EA3532",
+        "Body orientation: hash=0xD5767D2C2BABE9AA; 90,000 evaluations=180.832 ms; all-body=18083.2 ns; allocated=0 bytes",
+        "ORDINARY_ALLOCATION gate=propagation-adapter bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=spacecraft-attitude bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=spacecraft-translation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=contact-response bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=attitude-integration bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=rigid-rotation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=rigid-lookup bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=guidance bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=sas-proof bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=orbit-sampling bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=frame-extraction bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=trajectory-candidate bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=trajectory-commit bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=impulse-evaluation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=impulse-commit bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=integral-arithmetic bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "EXACT_EVENT canonical_bit_parity=64",
+        "EXACT_EVENT translation_max_position_error_m=0.0001220703125 velocity_error_m_s=0",
+        "EXACT_EVENT rotation_axis_max_q_error=1.1103267813128674E-16 mixed_q_error=2.7841134087907843E-15 mixed_omega_error=2.7722596276462393E-15 reference_refinement=1.3557157818527375E-14",
+        "ORDINARY_ALLOCATION gate=exact-event-spacecraft-motion bytes=0 entry=PASS exit=PASS"
+      ],
+      "stdoutSha256": "5D9E0162EBF1F1F5191427837ECA73B20F17D8A075618AFDE177FD107BD293F4"
+    },
+    {
+      "stage": "final Release",
+      "run": 1,
+      "passedGroups": 20,
+      "registeredGroups": 38,
+      "groupPasses": [
+        "SimulationInstant",
+        "SimulationDuration",
+        "SimulationRate",
+        "Solar UTC and speed presets",
+        "Event ordering",
+        "Internal physical-event epochs",
+        "Timeline topology",
+        "Simulation clock",
+        "Host-duration conversion",
+        "Host-duration debt servicing",
+        "Transaction contracts",
+        "Canonical transaction groups",
+        "Clock execution orchestration",
+        "Celestial contracts",
+        "Celestial system definitions",
+        "Celestial body catalog",
+        "SolAnalytical dataset",
+        "Celestial system time and provenance",
+        "Celestial ephemeris catalogs",
+        "Celestial system evaluation"
+      ],
+      "observations": [
+        "ORDINARY_ALLOCATION gate=speed-presets bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=timeline bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=clock bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=host-conversion bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=single-debt-service bytes=0 entry=PASS exit=PASS",
+        "SERVICING_GATE entry=PASS exit=PASS allocated=0 clock=50000 debt=0 processed=5000 pending=0 completed=499",
+        "ORDINARY_ALLOCATION gate=per-event-transactions bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=canonical-group bytes=0 entry=PASS exit=PASS",
+        "CANONICAL_GROUP allocation=0 complete=True processed=5000 expected=5000",
+        "ORDINARY_ALLOCATION gate=celestial-store bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=system-definitions bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=body-catalog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=sol-evaluation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=system-time bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=ephemeris-catalog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=sampled-evaluation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=solmini-evaluation bytes=0 entry=PASS exit=PASS",
+        "Lunar orientation: 1952.7 ns/evaluation; allocated=12336 bytes; pack=0x3BCE78D924EA3532",
+        "Unhandled exception. System.Exception: high-precision lunar orientation performance and allocation",
+        "   at Program.<<Main>$>g__Check|0_86(Boolean condition, String message) in E:\\NovaCore-ExactEvent-Additive\\tests\\NovaCore.Simulation.Tests\\Program.cs:line 1472",
+        "   at Program.<<Main>$>g__CelestialBodyOrientationTests|0_1() in E:\\NovaCore-ExactEvent-Additive\\tests\\NovaCore.Simulation.Tests\\Program.cs:line 133",
+        "   at Program.<Main>$(String[] args) in E:\\NovaCore-ExactEvent-Additive\\tests\\NovaCore.Simulation.Tests\\Program.cs:line 84"
+      ],
+      "stdoutSha256": "FBCF6D0D8DBBD7F951DC35AC1584A83934FFE424BFFCBE7DD55CF95842CA6430"
+    }
+  ],
+  "builds": {
+    "Debug": "PASS 0 warnings 0 errors after native prerequisites built",
+    "initialDebug": "MSB3030 missing native DLL/shaders in clean worktree; dependencies built locally from unchanged native source",
+    "nativeDependencies": "Debug/Release NovaCore.Native target only; no native tests or GPU execution",
+    "Release": "PASS 0 warnings 0 errors"
+  },
+  "performance": "NOT RUN - final acceptance failed",
+  "firstFailure": {
+    "allocationBoundary": "unchanged raw timed per-thread counter; no checked no-GC entry/exit here",
+    "counterMechanism": "UNATTRIBUTED",
+    "assertion": "high-precision lunar orientation performance and allocation",
+    "checksum": "UNAVAILABLE",
+    "nanosecondsPerEvaluation": 1952.7,
+    "group": "Celestial body orientation",
+    "timeLimitNanoseconds": 10000,
+    "counterBytes": 12336,
+    "source": "Program.cs:133"
+  },
+  "originalRawLogs": [
+    {
+      "name": "build-focused-release.txt",
+      "bytes": 685,
+      "sha256": "7993A75A8CF4CB39520ABE8024B2C8E8CD7BD9E1AA589C34E4C2E85ADAFBE350"
+    },
+    {
+      "name": "build-native-Debug.txt",
+      "bytes": 4225,
+      "sha256": "868B23385F501E5247D7693547C2BC67BD124FDDB51DC8901498550DFE3DB39F"
+    },
+    {
+      "name": "build-native-Release.txt",
+      "bytes": 4233,
+      "sha256": "ED634B39846E608FF32B7360783B66867959042EB5976B687C0AFF6382528421"
+    },
+    {
+      "name": "build-solution-Debug.txt",
+      "bytes": 32781,
+      "sha256": "3A0D955D34034DA319929B2997BAECA69DA09782B02DC758B5CFEDCF9294868B"
+    },
+    {
+      "name": "build-solution-ready-Debug.txt",
+      "bytes": 2914,
+      "sha256": "A2A1E937BEF8A01A2B1A8CB260EAB889AA910E8F2955AE5BC898FCB3E4A30C6C"
+    },
+    {
+      "name": "build-solution-ready-Release.txt",
+      "bytes": 2954,
+      "sha256": "31FD4113BBD671AC324CB721ACE35EFC1EFDE38385551E1D7BC926B7FEEB8F27"
+    },
+    {
+      "name": "Debug-contact-only.txt",
+      "bytes": 449,
+      "sha256": "5A0D8FD6E22F2B037A05AF371E10DF0DE469BF87A1C98347D5542BB2612035B5"
+    },
+    {
+      "name": "Debug-contact-response-only.txt",
+      "bytes": 1037,
+      "sha256": "CCB84ACD2ABAFBA5D01EBDC9CA9A1F144E17D91A7A2B342C06E472794208175A"
+    },
+    {
+      "name": "Debug-exact-event-motion-only.txt",
+      "bytes": 528,
+      "sha256": "C9F4D25BB14C59589A8E5373A5CB852679AF4CA1C62A78079173F3A78E143125"
+    },
+    {
+      "name": "Debug-isolated-contact-only.txt",
+      "bytes": 497,
+      "sha256": "1CC20E9EB538ADB01E4B46450FC69BB10CABAB990FDF5148F09027512B41F24D"
+    },
+    {
+      "name": "Debug-physical-event-epoch-only.txt",
+      "bytes": 253,
+      "sha256": "33E5B95D10EF08AB4FA5077F8D8279582D618E2F909F4A509618A02989F8144C"
+    },
+    {
+      "name": "Debug-Precision.txt",
+      "bytes": 693,
+      "sha256": "93B9B12B25E26643D30217010AE897FDC0C8710A1775A771A4CFFBBC4534FFB0"
+    },
+    {
+      "name": "Debug-ReferenceFrames.txt",
+      "bytes": 934,
+      "sha256": "F53B545ACB90287F3215E393FD3F87ECDDBAD8AC017E982F74592C2C6010366F"
+    },
+    {
+      "name": "Debug-rigid-rotation-only.txt",
+      "bytes": 228,
+      "sha256": "AAA8944B728BE90DD70E2A1CB00E0888CB44B703C1FCA272A10151EB543BFA60"
+    },
+    {
+      "name": "Debug-translation-only.txt",
+      "bytes": 557,
+      "sha256": "F163093D125437500F682FA75D5204A3B720D4E48FE3DEE8C68BA225CB71D871"
+    },
+    {
+      "name": "early-release-1.txt",
+      "bytes": 13417,
+      "sha256": "2E509BDC22253BB0540FB696868865DAAD1EF98B6533FC1EB34EC302502E56E7"
+    },
+    {
+      "name": "early-release-2.txt",
+      "bytes": 13417,
+      "sha256": "829558C48A1ED1C41C1C4EC09A14BB4D8AB76C824C46632D708554D03C2C066C"
+    },
+    {
+      "name": "early-release-3.txt",
+      "bytes": 13417,
+      "sha256": "6F9D9E746C447F1C1220E62403F97D8EEFD4F48FD6E20ECE857E71A906FA12D4"
+    },
+    {
+      "name": "early-release-matrix.json",
+      "bytes": 716,
+      "sha256": "DB8C968F59D3D8852B8B7DE3A6A1D4816F95CFC97AFD2E379972B956EF0BBC72"
+    },
+    {
+      "name": "final-release-1.txt",
+      "bytes": 6765,
+      "sha256": "FBCF6D0D8DBBD7F951DC35AC1584A83934FFE424BFFCBE7DD55CF95842CA6430"
+    },
+    {
+      "name": "final-release-matrix.json",
+      "bytes": 229,
+      "sha256": "9B6AA7D2D7CB57E3C714F78AD35FD6DC8C9055F35B407613966B2255AAE88BF7"
+    },
+    {
+      "name": "focused-release.txt",
+      "bytes": 528,
+      "sha256": "C9F4D25BB14C59589A8E5373A5CB852679AF4CA1C62A78079173F3A78E143125"
+    },
+    {
+      "name": "full-debug.txt",
+      "bytes": 13419,
+      "sha256": "5D9E0162EBF1F1F5191427837ECA73B20F17D8A075618AFDE177FD107BD293F4"
+    },
+    {
+      "name": "functional-matrix.json",
+      "bytes": 3259,
+      "sha256": "048D1AF5198C1099D6DC4F1112B8CF7DC39EB30117671E219A09848C79F16F13"
+    },
+    {
+      "name": "native-environment.txt",
+      "bytes": 241,
+      "sha256": "43CE651E3856CFAF3E45D33DB31B547EFC2ADBD3575F75EDF3683225AA7A6B0F"
+    },
+    {
+      "name": "Release-contact-only.txt",
+      "bytes": 449,
+      "sha256": "5A0D8FD6E22F2B037A05AF371E10DF0DE469BF87A1C98347D5542BB2612035B5"
+    },
+    {
+      "name": "Release-contact-response-only.txt",
+      "bytes": 1037,
+      "sha256": "CCB84ACD2ABAFBA5D01EBDC9CA9A1F144E17D91A7A2B342C06E472794208175A"
+    },
+    {
+      "name": "Release-exact-event-motion-only.txt",
+      "bytes": 528,
+      "sha256": "C9F4D25BB14C59589A8E5373A5CB852679AF4CA1C62A78079173F3A78E143125"
+    },
+    {
+      "name": "Release-isolated-contact-only.txt",
+      "bytes": 497,
+      "sha256": "1CC20E9EB538ADB01E4B46450FC69BB10CABAB990FDF5148F09027512B41F24D"
+    },
+    {
+      "name": "Release-physical-event-epoch-only.txt",
+      "bytes": 253,
+      "sha256": "33E5B95D10EF08AB4FA5077F8D8279582D618E2F909F4A509618A02989F8144C"
+    },
+    {
+      "name": "Release-Precision.txt",
+      "bytes": 692,
+      "sha256": "175501834376530F38D4D5EFC79ADD94F70AF1DEA2289EAC1E285FAE56910BE2"
+    },
+    {
+      "name": "Release-ReferenceFrames.txt",
+      "bytes": 934,
+      "sha256": "918ECBDAA9A4D4BCF8814CBA4C70C5CB4C85AA5F3FD2654A2598FC0D63867985"
+    },
+    {
+      "name": "Release-rigid-rotation-only.txt",
+      "bytes": 228,
+      "sha256": "AAA8944B728BE90DD70E2A1CB00E0888CB44B703C1FCA272A10151EB543BFA60"
+    },
+    {
+      "name": "Release-translation-only.txt",
+      "bytes": 557,
+      "sha256": "F163093D125437500F682FA75D5204A3B720D4E48FE3DEE8C68BA225CB71D871"
+    }
+  ],
+  "judgment": "ESCALATE TO PROJECT CONTROL",
+  "classification": "ADDITIVE EXACT-EVENT SPACECRAFT MOTION CANDIDATE — FOLLOW-UP REQUIRED"
+}

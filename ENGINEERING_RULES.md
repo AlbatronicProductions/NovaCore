@@ -33,6 +33,25 @@ GPU LOD, culling, label selection, and representation handoff are presentation-o
 - Do not optimize systems already scheduled for architectural retirement unless the work is required for migration correctness or safety. Preserve them as recovery paths until their accepted replacement passes its retirement gate.
 - Do not stage or commit a rendering milestone before its required physical Desktop acceptance unless the user explicitly changes that gate.
 
+### Allocation witnesses and timed test contracts
+
+Zero-allocation gates enforce exact production contracts. A nonzero
+allocation-counter result is a failure witness. Root-cause forensics require
+sufficient reproducibility, candidate association, and mechanism relevance to
+justify their payoff. Candidate acceptance still requires the declared
+zero-allocation acceptance gates to pass exactly.
+
+When a test has both performance and zero-allocation responsibilities, preserve
+each with a measurement boundary appropriate to that responsibility. Do not force
+GC/allocation isolation into benchmark timing when it changes the meaning of that
+measurement. For qualified repeatable workloads, time under normal runtime
+behavior and independently measure equivalent warmed work with checked temporary
+no-GC isolation. Preserve workload, warmup, counts, timing thresholds, exact zero
+and correctness predicates; entry/exit failure remains test failure. Mutable
+workloads require equivalent fresh fixtures or separate review. Existing timings
+that are report-only do not acquire invented thresholds. See the
+[five-window qualification](docs/engineering-evidence/timed-measurement-split/README.md).
+
 ### Milestone naming (M13 onward)
 
 M12 is complete. M13 begins the simplified milestone convention:
