@@ -120,7 +120,7 @@ advancement. This policy accepts a supplied instant and implements none of them.
 No positional correction, penetration recovery, friction, configurable restitution,
 multi-contact/manifold solver, warm start, sleeping, grounded state, finite shape,
 pad collision, launch or landing is present. No existing visible route invokes it;
-manual visual acceptance is therefore not required for this simulation-only candidate.
+manual visual acceptance was not required for this banked simulation-only responsibility.
 
 The closed-form specialization remains a reference for future solver qualification.
 It must not grow into an arbitrary sequential multi-contact solver. Solver state

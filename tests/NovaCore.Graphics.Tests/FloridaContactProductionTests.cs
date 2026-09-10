@@ -71,7 +71,7 @@ internal static class FloridaContactProductionTests
         Console.WriteLine("FLORIDA_PRODUCTION clear/crossing/domain/refusals/stale/replay/ordering/allocation PASS");
     }
 
-    private sealed class Case
+    internal sealed class Case
     {
         internal readonly PlanetaryPhysicalSurfacePointQuery Query;
         internal readonly CelestialSystemDefinition System=SolAnalyticalDefinition.Instance;

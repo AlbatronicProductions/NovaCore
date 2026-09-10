@@ -17,6 +17,7 @@ using NovaCore.Simulation.Time;
 var tests = new (string, Action)[]
 {
     ("Florida monotone contact certification", FloridaContactProductionTests.Run),
+    ("Qualified Florida root contact kinematics", QualifiedFloridaKinematicsTests.Run),
     ("Exact-event Earth-relative production terrain", EarthRelativeObservationProductionTests.Run),
     ("Contact generation production terrain", ContactGenerationProductionTests.Run),
     ("Physical surface-point query", PhysicalSurfacePointQueryTests.Run),

@@ -5,7 +5,7 @@
 [Validation and provenance](engineering-evidence/contact-generation/README.md).
 The separate banked M14.4 [response transaction](contact-response-transaction.md)
 consumes qualified intent without changing this read-only generator.
-The unbanked [isolated response policy](isolated-contact-response.md) can request
+The banked M14.5 [isolated response policy](isolated-contact-response.md) can request
 an opaque receipt for a complete single-feature definition. It retains the same
 generated motion and observation; the existing multi-feature API is unchanged.
 

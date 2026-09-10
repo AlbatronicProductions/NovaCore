@@ -27,7 +27,7 @@ internal readonly record struct FloridaContactUse(SimulationTransactionEngine En
 /// One frozen current-Earth relation. Admission owns bounded setup; evaluation/refinement allocate nothing.
 /// Single-writer read-phase only. Never schedules, executes or grants response permission.
 /// </summary>
-internal sealed class FloridaContactProvider
+internal sealed partial class FloridaContactProvider
 {
     internal const uint ProviderVersion=1,RelationVersion=1;
     internal const int MaximumRefinements=24;
@@ -149,7 +149,7 @@ internal sealed class FloridaContactProvider
         Proof.Evaluate(this,new(engine,currentGeometry,system,currentGraph,currentTerrain));
 
     /// <summary>Private construction only from the enclosing provider's complete checked proof path.</summary>
-    internal readonly struct Proof
+    internal readonly partial struct Proof
     {
         private readonly FloridaContactProvider? owner;
         internal FloridaBound RootEnclosure { get; }

@@ -3,7 +3,7 @@
 Banked **M14.4**, commit `28b92f724f8decd3c9356aa5f9f5bbd6c9dd069c`, tag
 `m14.4-atomic-contact-response`. [Investigation evidence](engineering-evidence/contact-response-transaction/README.md)
 retains the dated candidate and allocation closeout chronology.
-The current unbanked [isolated analytical policy](isolated-contact-response.md)
+The banked M14.5 [isolated analytical policy](isolated-contact-response.md)
 produces this existing intent; it does not change the banked transaction.
 
 ## Responsibility and admission
@@ -21,7 +21,7 @@ impulse, provenance or either replacement cannot authorize different physics.
 Structural provenance validation and payload equality are not independent proof
 of physical contact. The trusted producer owns qualification, support readiness,
 current geometry and identity admission at the event boundary. There is no
-automatic conversion inside the transaction engine. The separate unbanked isolated
+automatic conversion inside the transaction engine. The separate banked M14.5 isolated
 policy qualifies a restricted M14.3 supplied-instant observation. A future finite-shape producer
 can use the same qualified-intent contract without invoking the point generator.
 

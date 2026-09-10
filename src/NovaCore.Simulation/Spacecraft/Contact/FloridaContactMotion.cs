@@ -67,24 +67,55 @@ internal readonly struct FloridaContactMotion
         var maxPosition=relative.Norm+relativeVelocity.Norm*h+maxAcceleration*(FloridaBound.Point(h).Square()/2);
         // For a product of three constant-rate axial rotations, |Omega'| <= |rates|_1^2.
         var second=maxAcceleration+2*omega*maxVelocity+2*omega.Square()*maxPosition;
-        BodyFixed(t,relative,relativeVelocity,out var center,out var first);
+        BodyFixed(orientation,t,relative,relativeVelocity,out var center,out var first);
         var delta=time-t;
         q=(center+first*delta).Expand((second*FloridaBound.Point(h).Square()/2).Upper);
         derivative=first.Expand((second*h).Upper);
         return q.IsFinite&&derivative.IsFinite;
     }
 
-    private void BodyFixed(FloridaBound t,FloridaVector p,FloridaVector v,out FloridaVector q,out FloridaVector dq)
+    internal static void BodyFixed(in EarthContactOrientation orientation,FloridaBound t,FloridaVector p,FloridaVector v,out FloridaVector q,out FloridaVector dq)
     {
+        Angles(orientation,t,out var ra,out var tilt,out var w);
         var rad=FloridaBound.Pi/180;var day=(FloridaBound)orientation.SecondsPerDay;var century=day*orientation.DaysPerCentury;
-        var ra=((FloridaBound)orientation.Ra0+orientation.RaT*t/century+90)*rad;
-        var tilt=(90-(FloridaBound)orientation.Dec0-orientation.DecT*t/century)*rad;
-        var w=((FloridaBound)orientation.W0+orientation.Wd*t/day)*rad;
         RotateZ(p,v,-ra,-orientation.RaT*rad/century,out q,out dq);
         RotateX(q,dq,-tilt,orientation.DecT*rad/century,out q,out dq);
         RotateZ(q,dq,-w,-orientation.Wd*rad/day,out q,out dq);
         // Inverse of banked fixed +90-degree X basis conversion, exactly represented.
         q=new(q.X,q.Z,-q.Y);dq=new(dq.X,dq.Z,-dq.Y);
+    }
+
+    private static void Angles(in EarthContactOrientation model,FloridaBound t,out FloridaBound ra,out FloridaBound tilt,out FloridaBound w)
+    {
+        var rad=FloridaBound.Pi/180;var day=(FloridaBound)model.SecondsPerDay;var century=day*model.DaysPerCentury;
+        ra=((FloridaBound)model.Ra0+model.RaT*t/century+90)*rad;
+        tilt=(90-(FloridaBound)model.Dec0-model.DecT*t/century)*rad;
+        w=((FloridaBound)model.W0+model.Wd*t/day)*rad;
+    }
+
+    // The exact inverse of BodyFixed: fixed basis, W, declination, right ascension.
+    // A direction enclosure over time, never a rotation sampled at an approximate root.
+    internal static FloridaVector RootDirection(in EarthContactOrientation model,FloridaBound time,FloridaVector body)
+    {
+        Angles(model,time,out var ra,out var tilt,out var w);
+        var p=new FloridaVector(body.X,-body.Z,body.Y);
+        RotateZ(p,default,w,0,out p,out _);
+        RotateX(p,default,tilt,0,out p,out _);
+        RotateZ(p,default,ra,0,out p,out _);
+        return p;
+    }
+
+    internal bool ContactKinematics(FloridaBound time,Double3 up,out FloridaVector normalRoot,
+        out FloridaBound normalVelocity,out FloridaVector leverRoot)
+    {
+        normalRoot=default;normalVelocity=default;leverRoot=offset;
+        if(!Evaluate(time,out _,out var derivative))return false;
+        var u=FloridaVector.From(up);var length=u.Norm;
+        normalRoot=RootDirection(orientation,time,u/length);
+        // At the certified contact root, the Earth material point and feature coincide.
+        // Q*dq = v_feature-v_E-omega_E x (p_feature-p_E), including every Euler rate.
+        normalVelocity=FloridaVector.Dot(u,derivative)/length;
+        return normalRoot.IsFinite&&normalVelocity.IsFinite&&leverRoot.IsFinite;
     }
     private static void RotateZ(FloridaVector p,FloridaVector v,FloridaBound a,FloridaBound rate,out FloridaVector q,out FloridaVector dq)
     {var c=FloridaBound.Cos(a);var s=FloridaBound.Sin(a);q=new(c*p.X-s*p.Y,s*p.X+c*p.Y,p.Z);

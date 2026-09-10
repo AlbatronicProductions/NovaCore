@@ -1,0 +1,538 @@
+{
+  "responsibility": "Evaluate qualified contact kinematics at provider-owned certified roots",
+  "status": "UNBANKED - READY FOR PROJECT CONTROL ACCEPTANCE",
+  "date": "2026-09-10",
+  "baseline": "9698a08b84b9b40b0fa03bec8f8ba80d1d7404e7",
+  "plan": {
+    "fullBuildsPerConfiguration": 1,
+    "fullSimulationProcessesPerConfiguration": 1,
+    "registeredSimulationGroups": 41,
+    "timingWarmup": 32,
+    "timingSamples": 101,
+    "allocationCallsPerReusableOperation": 8,
+    "maximumAdditionalRefinements": 24,
+    "note": "Final results below follow bounded mathematical test strengthening. Earlier clean full runs also passed; no profiler or allocation forensics."
+  },
+  "builds": [
+    {
+      "configuration": "Debug",
+      "exit": 0,
+      "warnings": 0,
+      "errors": 0
+    },
+    {
+      "configuration": "Release",
+      "exit": 0,
+      "warnings": 0,
+      "errors": 0
+    }
+  ],
+  "simulation": [
+    {
+      "configuration": "Debug",
+      "exit": 0,
+      "groupsPassed": 41,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "configuration": "Release",
+      "exit": 0,
+      "groupsPassed": 41,
+      "failed": 0,
+      "skipped": 0
+    }
+  ],
+  "focusedNew": [
+    {
+      "configuration": "Debug",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "exit": 0
+    }
+  ],
+  "regressions": [
+    {
+      "configuration": "Debug",
+      "gate": "ReferenceFrames",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "gate": "Precision",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "gate": "--translation-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "gate": "--contact-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "gate": "--contact-response-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "gate": "--isolated-contact-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "gate": "--physical-event-epoch-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "gate": "--exact-event-motion-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "gate": "--earth-event-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "gate": "--florida-proof-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "gate": "ReferenceFrames",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "gate": "Precision",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "gate": "--translation-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "gate": "--contact-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "gate": "--contact-response-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "gate": "--isolated-contact-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "gate": "--physical-event-epoch-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "gate": "--exact-event-motion-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "gate": "--earth-event-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "gate": "--florida-proof-only",
+      "exit": 0
+    }
+  ],
+  "graphicsRegressions": [
+    {
+      "configuration": "Debug",
+      "gate": "Florida monotone contact certification",
+      "exit": 0,
+      "result": "Graphics Debug: selected=1; pass=1; fail=0; skip=0; excluded=96"
+    },
+    {
+      "configuration": "Debug",
+      "gate": "Physical surface-point",
+      "exit": 0,
+      "result": "Graphics Debug: selected=2; pass=2; fail=0; skip=0; excluded=95"
+    },
+    {
+      "configuration": "Debug",
+      "gate": "Contact generation production terrain",
+      "exit": 0,
+      "result": "Graphics Debug: selected=1; pass=1; fail=0; skip=0; excluded=96"
+    },
+    {
+      "configuration": "Debug",
+      "gate": "Exact-event Earth-relative production terrain",
+      "exit": 0,
+      "result": "Graphics Debug: selected=1; pass=1; fail=0; skip=0; excluded=96"
+    },
+    {
+      "configuration": "Release",
+      "gate": "Florida monotone contact certification",
+      "exit": 0,
+      "result": "Graphics Release: selected=1; pass=1; fail=0; skip=0; excluded=96"
+    },
+    {
+      "configuration": "Release",
+      "gate": "Physical surface-point",
+      "exit": 0,
+      "result": "Graphics Release: selected=2; pass=2; fail=0; skip=0; excluded=95"
+    },
+    {
+      "configuration": "Release",
+      "gate": "Contact generation production terrain",
+      "exit": 0,
+      "result": "Graphics Release: selected=1; pass=1; fail=0; skip=0; excluded=96"
+    },
+    {
+      "configuration": "Release",
+      "gate": "Exact-event Earth-relative production terrain",
+      "exit": 0,
+      "result": "Graphics Release: selected=1; pass=1; fail=0; skip=0; excluded=96"
+    }
+  ],
+  "witness": [
+    {
+      "configuration": "Debug",
+      "exit": 0,
+      "records": [
+        {
+          "kind": "kinematics-independent-oracle",
+          "rootLower": 0.4800153225660324,
+          "rootUpper": 0.4800153374671936,
+          "normalSpeed": -1.0832595112553633,
+          "gapErrorMetres": 1e-10,
+          "speedErrorMetresPerSecond": 1e-10,
+          "speedRootBracketErrorMetresPerSecond": 7.758603820800781e-8,
+          "snapBound": 1.36e-13,
+          "source": "exact stored seed bits; decimal ODE derivatives, rotation matrix and material velocity"
+        },
+        {
+          "kind": "kinematics-values",
+          "name": "coarse",
+          "root": [
+            0,
+            0.5
+          ],
+          "normal": [
+            -0.8275105458180297,
+            -0.8271544977519966,
+            -0.29386520015691775,
+            -0.29350779254680504,
+            0.47882057182274973,
+            0.47882057182402915
+          ],
+          "speed": [
+            -1.1674072469715175,
+            -0.9193185802354312
+          ],
+          "lever": [
+            2.1999999999999935,
+            2.200000000000006,
+            0.3999999999999943,
+            0.40000000000000485,
+            2.999999999999999,
+            3.000000000000001
+          ],
+          "AdditionalRefinements": 1
+        },
+        {
+          "kind": "kinematics-values",
+          "name": "fine",
+          "root": [
+            0.480010986328125,
+            0.48001861572265625
+          ],
+          "normal": [
+            -0.8273275985351167,
+            -0.8273275931022064,
+            -0.2937003758881045,
+            -0.2937003704344701,
+            0.4788205718239731,
+            0.47882057182397797
+          ],
+          "speed": [
+            -1.0832613122806811,
+            -1.0832575267214317
+          ],
+          "lever": [
+            2.1999999999999935,
+            2.200000000000006,
+            0.3999999999999943,
+            0.40000000000000485,
+            2.999999999999999,
+            3.000000000000001
+          ],
+          "AdditionalRefinements": 17
+        },
+        {
+          "kind": "kinematics-cost",
+          "name": "setup/admission/root",
+          "bytes": 13376,
+          "calls": 8,
+          "medianNs": 1051400,
+          "p95Ns": 1097200,
+          "p99Ns": 1175500,
+          "maximumNs": 1197900
+        },
+        {
+          "kind": "kinematics-cost",
+          "name": "qualified evaluation",
+          "bytes": 0,
+          "calls": 8,
+          "medianNs": 103900,
+          "p95Ns": 113300,
+          "p99Ns": 122800,
+          "maximumNs": 123800
+        },
+        {
+          "kind": "kinematics-cost",
+          "name": "qualified refinement",
+          "bytes": 0,
+          "calls": 8,
+          "medianNs": 2766200,
+          "p95Ns": 2870900,
+          "p99Ns": 3445500,
+          "maximumNs": 3569800
+        },
+        {
+          "kind": "kinematics-cost",
+          "name": "checked witness consumption",
+          "bytes": 0,
+          "calls": 8,
+          "medianNs": 300,
+          "p95Ns": 400,
+          "p99Ns": 400,
+          "maximumNs": 500
+        },
+        {
+          "kind": "kinematics-cost",
+          "name": "uncertainty-floor refusal",
+          "bytes": 0,
+          "calls": 8,
+          "medianNs": 154800,
+          "p95Ns": 157300,
+          "p99Ns": 167300,
+          "maximumNs": 175100
+        },
+        {
+          "kind": "kinematics-cost",
+          "name": "stale refusal",
+          "bytes": 0,
+          "calls": 8,
+          "medianNs": 200,
+          "p95Ns": 200,
+          "p99Ns": 200,
+          "maximumNs": 300
+        },
+        {
+          "kind": "kinematics-cost",
+          "name": "unsupported refusal",
+          "bytes": 0,
+          "calls": 8,
+          "medianNs": 200,
+          "p95Ns": 200,
+          "p99Ns": 200,
+          "maximumNs": 200
+        },
+        {
+          "kind": "kinematics-workspace",
+          "witnessBytes": 416,
+          "snapshotBytes": 352,
+          "requestBytes": 40,
+          "additionalHeapWorkspaceBytes": 0,
+          "maximumValueEvaluations": 25,
+          "maximumSignEvaluations": 24,
+          "coarseWork": 1,
+          "fineWork": 17
+        }
+      ],
+      "positiveControlBytes": 152,
+      "entryExit": "PASS",
+      "result": "1 pass / 0 fail / 0 skip"
+    },
+    {
+      "configuration": "Release",
+      "exit": 0,
+      "records": [
+        {
+          "kind": "kinematics-independent-oracle",
+          "rootLower": 0.4800153225660324,
+          "rootUpper": 0.4800153374671936,
+          "normalSpeed": -1.0832595112553633,
+          "gapErrorMetres": 1e-10,
+          "speedErrorMetresPerSecond": 1e-10,
+          "speedRootBracketErrorMetresPerSecond": 7.758603820800781e-8,
+          "snapBound": 1.36e-13,
+          "source": "exact stored seed bits; decimal ODE derivatives, rotation matrix and material velocity"
+        },
+        {
+          "kind": "kinematics-values",
+          "name": "coarse",
+          "root": [
+            0,
+            0.5
+          ],
+          "normal": [
+            -0.8275105458180297,
+            -0.8271544977519966,
+            -0.29386520015691775,
+            -0.29350779254680504,
+            0.47882057182274973,
+            0.47882057182402915
+          ],
+          "speed": [
+            -1.1674072469715175,
+            -0.9193185802354312
+          ],
+          "lever": [
+            2.1999999999999935,
+            2.200000000000006,
+            0.3999999999999943,
+            0.40000000000000485,
+            2.999999999999999,
+            3.000000000000001
+          ],
+          "AdditionalRefinements": 1
+        },
+        {
+          "kind": "kinematics-values",
+          "name": "fine",
+          "root": [
+            0.480010986328125,
+            0.48001861572265625
+          ],
+          "normal": [
+            -0.8273275985351167,
+            -0.8273275931022064,
+            -0.2937003758881045,
+            -0.2937003704344701,
+            0.4788205718239731,
+            0.47882057182397797
+          ],
+          "speed": [
+            -1.0832613122806811,
+            -1.0832575267214317
+          ],
+          "lever": [
+            2.1999999999999935,
+            2.200000000000006,
+            0.3999999999999943,
+            0.40000000000000485,
+            2.999999999999999,
+            3.000000000000001
+          ],
+          "AdditionalRefinements": 17
+        },
+        {
+          "kind": "kinematics-cost",
+          "name": "setup/admission/root",
+          "bytes": 13376,
+          "calls": 8,
+          "medianNs": 841700,
+          "p95Ns": 856600,
+          "p99Ns": 890900,
+          "maximumNs": 915000
+        },
+        {
+          "kind": "kinematics-cost",
+          "name": "qualified evaluation",
+          "bytes": 0,
+          "calls": 8,
+          "medianNs": 83200,
+          "p95Ns": 83900,
+          "p99Ns": 86500,
+          "maximumNs": 95900
+        },
+        {
+          "kind": "kinematics-cost",
+          "name": "qualified refinement",
+          "bytes": 0,
+          "calls": 8,
+          "medianNs": 2245700,
+          "p95Ns": 2259700,
+          "p99Ns": 2274300,
+          "maximumNs": 3133200
+        },
+        {
+          "kind": "kinematics-cost",
+          "name": "checked witness consumption",
+          "bytes": 0,
+          "calls": 8,
+          "medianNs": 800,
+          "p95Ns": 900,
+          "p99Ns": 1300,
+          "maximumNs": 7500
+        },
+        {
+          "kind": "kinematics-cost",
+          "name": "uncertainty-floor refusal",
+          "bytes": 0,
+          "calls": 8,
+          "medianNs": 17000,
+          "p95Ns": 17100,
+          "p99Ns": 17100,
+          "maximumNs": 21900
+        },
+        {
+          "kind": "kinematics-cost",
+          "name": "stale refusal",
+          "bytes": 0,
+          "calls": 8,
+          "medianNs": 200,
+          "p95Ns": 200,
+          "p99Ns": 200,
+          "maximumNs": 200
+        },
+        {
+          "kind": "kinematics-cost",
+          "name": "unsupported refusal",
+          "bytes": 0,
+          "calls": 8,
+          "medianNs": 100,
+          "p95Ns": 200,
+          "p99Ns": 200,
+          "maximumNs": 200
+        },
+        {
+          "kind": "kinematics-workspace",
+          "witnessBytes": 416,
+          "snapshotBytes": 352,
+          "requestBytes": 40,
+          "additionalHeapWorkspaceBytes": 0,
+          "maximumValueEvaluations": 25,
+          "maximumSignEvaluations": 24,
+          "coarseWork": 1,
+          "fineWork": 17
+        }
+      ],
+      "positiveControlBytes": 152,
+      "entryExit": "PASS",
+      "result": "1 pass / 0 fail / 0 skip"
+    }
+  ],
+  "developmentCorrections": [
+    "Initial new coarse fixture expected qualification with zero refinement budget, but initial interval did not meet unchanged width requests. It returned Unresolved/RefinementBudget correctly. Fixture permits the predeclared maximum 24 refinements; succeeds after 1. Separate zero-budget refusal retained. No production correction or width enlargement.",
+    "Read-only mathematical review strengthened independent tests: squared endpoint irrational-root proof, actual production inverse-rotation derivative with synthetic nonzero Euler rates, and variation bounds over the entire independent real-root bracket. Pure BodyFixed calculation extracted without arithmetic changes.",
+    "Routine compilation fixes in newly written tests: imports, Check wrapper, vector norm API, local name scope. Final full builds have zero warnings/errors."
+  ],
+  "reviews": {
+    "mathematics": "PASS - initial sampled/algebraic validation objections resolved by independent entire-bracket and actual derivative tests",
+    "authority": "PASS - private issuance/read, current applicability, same-owner lineage, immutable snapshots, no production mutation",
+    "performance": "Reported without invented threshold; all reusable allocation gates exactly zero. Setup allocates 1672 bytes per provider admission/root certification."
+  }
+}

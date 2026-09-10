@@ -29,7 +29,7 @@ The ambition is a physically coherent spaceflight experience: explore a planet, 
 - **Spacecraft-to-terrain observations** — deterministic measurements of authored spacecraft contact points against physical terrain, including surface normals, radial gaps, and relative velocities.
 - **Development tools** — a Windows launcher, repeatable scenarios, and automated simulation and graphics validation.
 
-The latest banked production milestone is **M14.6 — Establish internal exact physical-event epochs**, at [commit `d0b9f9d`](https://github.com/AlbatronicProductions/NovaCore/commit/d0b9f9d69d55b8ba85a7b24a44f93e03cea2dcf6), tagged `m14.6-physical-event-epochs`. M14.1 through M14.6 are banked; no unbanked candidate currently exists.
+The latest banked production milestone is **M14.9 — Certify monotone point contact on the existing Florida grading plane**, at [commit `9698a08b`](https://github.com/AlbatronicProductions/NovaCore/commit/9698a08b84b9b40b0fa03bec8f8ba80d1d7404e7), tagged `m14.9-florida-monotone-contact-certification`. M14.1 through M14.9 are banked. A bounded [read-only contact-kinematics candidate](docs/certified-root-contact-kinematics.md) is awaiting Project Control acceptance.
 
 M14.4 supplies atomic linear/angular contact response, and M14.5 supplies an isolated analytical policy for one qualified point at exactly zero represented radial gap. M14.6 adds internal exact event identity/order; public time remains integral. General contact discovery, event-local execution, persistent grounding, and playable launch/landing remain unfinished. M14 — Surface Interaction / Launch Foundation remains open.
 
@@ -64,4 +64,4 @@ Start with the [Windows build and run guide](docs/build-windows.md) and [terrain
 | Validation and development history | [Engineering evidence](docs/engineering-evidence/README.md) · [M14.6 epoch evidence](docs/engineering-evidence/physical-event-epoch/README.md) |
 | Development conventions | [Engineering rules](ENGINEERING_RULES.md) |
 
-Dated engineering reports preserve earlier candidate and blocked states. The current-state document and M14.6 evidence index identify the later accepted result; historical stage judgments do not override banked production truth.
+Dated engineering reports preserve earlier candidate and blocked states. The current-state document and engineering-evidence index identify later accepted results; historical stage judgments do not override banked production truth.

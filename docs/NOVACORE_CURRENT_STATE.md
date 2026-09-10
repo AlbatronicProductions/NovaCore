@@ -13,17 +13,25 @@ and performs FP64 camera-relative subtraction before GPU transport.
 
 ## Banked production checkpoint
 
-Current development: **BANKED M14.9 monotone Florida point-contact certification**,
-on `codex/florida-monotone-contact-certification`. It proves clear intervals or
+Latest banked accomplishment: **M14.9 monotone Florida point-contact certification**,
+commit `9698a08b84b9b40b0fa03bec8f8ba80d1d7404e7`, tag
+`m14.9-florida-monotone-contact-certification`. It proves clear intervals or
 unique approaching roots for one nonrotating authored point, using the existing
 full-weight grading and physical motion. Coverage is one-second cells within
 ±3,600 seconds of the Earth seed, not general mission dates. It performs no event
-execution, response or support. See the [candidate contract](florida-monotone-contact-certification.md).
+execution, response or support. See the [banked contract](florida-monotone-contact-certification.md).
 
-Latest banked accomplishment: **M14.8 — Evaluate Earth-relative point-feature
+Current development: **UNBANKED — Evaluate qualified contact kinematics at
+provider-owned certified roots**, on `codex/certified-root-contact-kinematics`.
+The provider issues a checked, immutable same-root normal/relative-speed/lever
+witness with bounded qualification and current applicability. It adds no
+response admission, mutation or coverage extension. See the
+[candidate contract](certified-root-contact-kinematics.md).
+
+Banked predecessor: **M14.8 — Evaluate Earth-relative point-feature
 observations at exact physical-event epochs**, commit
 `2657bb16cdee2a42d1e5f9be830d247fb3c607f6`, annotated tag
-`m14.8-exact-event-earth-relative-observation`. **M14.1 through M14.8 are banked.**
+`m14.8-exact-event-earth-relative-observation`. **M14.1 through M14.9 are banked.**
 M14.8 owns coherent numerical observations, not interval proof. See its
 [banked contract](spacecraft-earth-event-observation.md).
 **M14 — Surface Interaction / Launch Foundation remains OPEN.**
@@ -84,14 +92,15 @@ No visible route uses it. [Validation and reproduction](engineering-evidence/iso
 provides canonical public-time embedding, normalized reduced rational sub-tick
 identity, deterministic exact ordering, versioned serialization and explicit
 overflow/capacity rejection. Legacy integral ordering is preserved; public
-`SimulationInstant` remains integral. Certified-root identity is a separate future
-contract. No automatic contact discovery, event-local transient execution or
+`SimulationInstant` remains integral. Banked M14.9 separately owns certified-root
+identity in its restricted Florida domain. No general contact discovery, event-local transient execution or
 fractional public simulation publication exists.
 
 **Exact event time does not imply exact representable event state.** Rational
 impact time alone does not guarantee an FP64 state whose M14.3/M14.5 represented
 `radialSignedGap` is exactly zero. General contact execution still needs an explicit
-certified event-local physical-evaluation/state contract. M14.6 does not supply it
+response/application contract; the read-only kinematics candidate does not
+authorize that execution. M14.6 does not supply it
 or weaken M14.5 admission. M14.5 remains one authored point feature, frictionless,
 restitution zero, without penetration recovery, a general multi-contact solver,
 persistent support/grounding or automatic touchdown.
@@ -401,18 +410,18 @@ visually finished.
 
 ## Next architectural decision and work boundary
 
-M14 remains open at banked M14.8. The development worktree is `E:\NovaCore` on
-`codex/florida-monotone-contact-certification`; `main` remains the banked baseline.
+M14 remains open at banked M14.9. The development worktree is `E:\NovaCore` on
+`codex/certified-root-contact-kinematics`; `main` remains the banked baseline.
 M13 is closed at M13.6 and there is no M13.7. Preserve the
 accepted NCSM1 physical, regional/facility, visibility, tessellation, memory and
 publication contracts. Historical exact-copy, residual-validation and lifecycle
 experiments do not automatically become production candidates.
 
-Project Control must accept the current bounded Florida certification
-candidate and choose any later responsibility within the open M14 front.
-Only its declared monotone grading-domain discovery is implemented. No physical
-execution, general terrain discovery, solver, launch/landing or measurement
-migration is opened by this candidate.
+Project Control must accept the current bounded root-kinematics candidate
+and choose any later responsibility within the open M14 front. The witness
+qualifies read-only fields at an already certified root. No physical execution,
+general terrain discovery, solver, launch/landing or measurement migration is
+opened by this candidate.
 Do not assign a next milestone or regenerate NCSM1 assets.
 Future work must distinguish physical geometry, depth/ownership and
 presentation/LOD behavior while keeping `H(bodyDirection)` authoritative.

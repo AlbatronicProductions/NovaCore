@@ -70,7 +70,7 @@ paired mutation boundary. Event-safe advancement and persistent support remain
 separate responsibilities. No production route invokes this policy.
 
 Banked M14.8 composes [exact-event Earth-relative observations](spacecraft-earth-event-observation.md)
-without changing canonical numerical evaluators. The unbanked
+without changing canonical numerical evaluators. The banked M14.9
 [Florida monotone contact provider](florida-monotone-contact-certification.md)
 adds Simulation-owned continuous relation/domain/derivative proof for a single
 nonrotating authored point within explicitly qualified seed-relative coverage.
@@ -79,6 +79,12 @@ beside its existing immutable physical query. Simulation has no Graphics project
 dependency. The provider owns immutable root identity and bounded unresolved-aware
 comparison; the transaction engine exposes its own clock/timeline for freshness
 checks. No canonical time/comparer, event execution, response or visible route changes.
+
+The unbanked [qualified root-kinematics candidate](certified-root-contact-kinematics.md)
+extends that provider with same-root normal, material-relative normal velocity
+and fixed lever enclosures. Issuance and consumption revalidate the existing
+authority; bounded width requests can remain unresolved. These are read-only
+physical witnesses, not impulse admission or authoritative replacements.
 
 `Spacecraft.Guidance` is a pure managed math layer. It evaluates orbital flight-reference vectors, deterministically constructs body-forward target orientations, and computes bounded body-space PD torque requests. The celestial sample owns SAS mode selection, exact-time hold-attitude capture, and a deterministic 20 Hz simulation-time cadence. At each active boundary it evaluates guidance and submits a quantized torque request through the existing rigid-body transaction path. The fixture uses `(120, 120, 120) kg·m²` inertia, fixture-specific `(8, 8, 8) N·m` SAS authority, gains `(7.5, 7.5, 7.5)` and `(63, 63, 63)`, `.002` deadbands, and `.01` settlement thresholds for deliberately mildly overdamped behavior. SAS control is sample-locally suspended above 10×; clock and orbital evaluation continue, and resumption begins at the first future cadence boundary. Graphics receives only the resulting evaluated body frame. Full high-warp control behavior remains deferred.
 

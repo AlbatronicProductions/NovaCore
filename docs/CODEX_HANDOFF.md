@@ -34,7 +34,9 @@ Surface Interaction / Launch Foundation has banked **M14.1**, commit
 physical-event epochs**, commit `d0b9f9d69d55b8ba85a7b24a44f93e03cea2dcf6`, tag
 `m14.6-physical-event-epochs`. M14 remains **OPEN**.
 
-M14.1 through M14.8 are banked. M14.8's current baseline is
+M14.1 through M14.9 are banked. The current baseline is M14.9,
+`9698a08b84b9b40b0fa03bec8f8ba80d1d7404e7`, tag
+`m14.9-florida-monotone-contact-certification`. M14.8 is
 `2657bb16cdee2a42d1e5f9be830d247fb3c607f6`, tag
 `m14.8-exact-event-earth-relative-observation`; it owns same-epoch numerical
 Earth/point observations. **M14.7 — Evaluate coherent spacecraft motion at
@@ -59,7 +61,9 @@ unsupported recovery. It is frictionless with restitution zero, no penetration
 recovery, general multi-contact solver, persistent support/grounding or automatic
 touchdown. **Exact event time is not exact representable event state**: M14.6 does
 not guarantee an FP64 impact state satisfying strict represented-zero admission.
-A certified event-local physical-evaluation/state contract remains absent.
+The unbanked [root-kinematics witness](certified-root-contact-kinematics.md)
+qualifies read-only normal, velocity and lever enclosures. It supplies no
+response/application contract or exact FP64 impact state.
 
 The 8,160-byte investigation is resolved as **CANDIDATE-TRIGGERED CLR
 ALLOCATION-CONTEXT ACCOUNTING EFFECT**, not a production allocation regression or
@@ -136,14 +140,16 @@ is the concise performance checkpoint. Historical LiveKernelEvent 141 remains
 
 ## Next architectural decision and work boundary
 
-M13 is closed at M13.6; M14 remains open with M14.1–M14.8 banked. The authorized
+M13 is closed at M13.6; M14 remains open with M14.1–M14.9 banked. The
 [monotone Florida point-contact certification](florida-monotone-contact-certification.md)
 candidate is **BANKED as M14.9**.
 It admits one nonrotating authored point in the existing full-weight grading,
 within one-second cells and seed-relative ±3,600-second coverage. It proves
 clear/root outcomes and bounded comparison, without event execution or response.
-No next milestone number is assigned. Return the candidate to Project Control;
-do not broaden discovery or start contact execution or support.
+The active candidate on `codex/certified-root-contact-kinematics` evaluates
+qualified read-only kinematics at those provider-owned roots. No next milestone
+number is assigned. Return it UNBANKED to Project Control; do not broaden
+discovery or start contact response, execution or support.
 
 - Preserve banked M13.1–M13.6 outcomes and future tessellation/displacement capacity.
 - Historical exact-copy, residual-validation and lifecycle experiments are evidence,

@@ -1,0 +1,92 @@
+{
+  "baseline": {
+    "branch": "main",
+    "head": "9698a08b84b9b40b0fa03bec8f8ba80d1d7404e7",
+    "main": "9698a08b84b9b40b0fa03bec8f8ba80d1d7404e7",
+    "originMain": "9698a08b84b9b40b0fa03bec8f8ba80d1d7404e7",
+    "clean": true
+  },
+  "candidateBranch": "codex/certified-root-contact-kinematics",
+  "sdk": "10.0.303",
+  "target": "net10.0; x64; ordinary default runtime, no profiler/tiering/PGO/GC policy override",
+  "productionInventory": {
+    "baselineCSharpFiles": 224,
+    "unchangedExistingFiles": 222,
+    "modifiedExistingFiles": 2,
+    "newFiles": 1,
+    "method": "SHA256 of all src/**/*.cs excluding bin/obj before/after; all unlisted existing production files byte-identical"
+  },
+  "fingerprints": [
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/FloridaContactMotion.cs",
+      "beforeSha256": "d972d0ce90209c46f6c7a67674b468062068799d5f8112282127fecb5888f9f1",
+      "afterSha256": "b871c6817b132b54716a08bf5c7d70b58bd3f7a15a533427158f244c4dd7d34a"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/FloridaContactProvider.cs",
+      "beforeSha256": "de5c9f8cc8227873c3f3d13993090470b9661c77dc310f40ff58821472213efb",
+      "afterSha256": "7ac1458d4e74d9c674fe6f6b2b72ba345cc12fa28d96c575f7f9a90451388aa6"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/FloridaContactProductionTests.cs",
+      "beforeSha256": "a56fad9bf04e7ab359dae920dc4f0d3de5c287221e22e278c09698647568ea49",
+      "afterSha256": "b7b4cedd192207f190bab5c275cd448c5d9534bcf539a75b2ab16d395cffda74"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/Program.cs",
+      "beforeSha256": "025a4b8a833ece9c0551b1a1a15ee3def0669a14da90e17e44b79414ea799514",
+      "afterSha256": "ff630e164104787546857d47547e21847c13ce68c2b60fa15d89848e1965b842"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "beforeSha256": "dcb3b900c03823abccfd7ac8a23f9446ed3288002f57963f10d67d99f36f5640",
+      "afterSha256": "7c41b2253dbcacfa8edef573fd1ab29b0db6a7e944b076014213e841d9dbfdf1"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/FloridaContactKinematics.cs",
+      "beforeSha256": null,
+      "afterSha256": "f2924f63a75cf16a12d729267fb4e5ab520af2ce975f868d0fb36dc30325a0ad"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/QualifiedFloridaKinematicsTests.cs",
+      "beforeSha256": null,
+      "afterSha256": "6d88e40bd0bd85fe2088bcac55991e7016db70ee81310039ea8f05450b05533d"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/ContactKinematicsOracle.cs",
+      "beforeSha256": null,
+      "afterSha256": "30cff5ad5ef060dcfcc95c0575046d13f4c8c9deede64f1207dfae72875f4dcf"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/QualifiedContactKinematicsTests.cs",
+      "beforeSha256": null,
+      "afterSha256": "7d2cd169ab616780812714d3c1c732b1a46a6c8e227b333cb08cc51dc8ef9ee3"
+    }
+  ],
+  "tags": {
+    "m14.1-canonical-surface-point-queries": "5b9b02ab1d2ba0e903809510908e4819984d4de2",
+    "m14.2-spacecraft-translational-authority": "caa6d93ccd7c4e5924381e077a62585f99e5a32a",
+    "m14.3-spacecraft-terrain-contact-observations": "79978cf8b0fd783d43a661df6df53a2c0202af4a",
+    "m14.4-atomic-contact-response": "28b92f724f8decd3c9356aa5f9f5bbd6c9dd069c",
+    "m14.5-isolated-analytical-contact-response": "b53d48025cfb8142cb32a6fc6fceb6018e33cfcd",
+    "m14.6-physical-event-epochs": "d0b9f9d69d55b8ba85a7b24a44f93e03cea2dcf6",
+    "m14.7-exact-event-spacecraft-motion": "56c0ae95b7f514e2f0440dfe272dd2836f32506e",
+    "m14.8-exact-event-earth-relative-observation": "2657bb16cdee2a42d1e5f9be830d247fb3c607f6",
+    "m14.9-florida-monotone-contact-certification": "9698a08b84b9b40b0fa03bec8f8ba80d1d7404e7"
+  },
+  "ksa": {
+    "version": "2026.9.7.5402+487c3f340de24c6a81037120b6d1129c045c5400",
+    "installedDll": "E:/Kitten Space Agency/KSA.dll",
+    "sha256": "A8A5164204EED962DF9D9025E99F523D9A23EE2CE6E802B18216A9DA35506D2F",
+    "bepuSha256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7",
+    "cachedSource": "build/ksa-residency-reference/assembly-source/KSA",
+    "sourceFingerprints": {
+      "AssemblyInfo.cs": "FF5516E41874502B182B035197A11C3F3DFC4E6D309EE3186BBBAD09C1834BF5",
+      "VehicleUpdateData.cs": "E06EDC2A6B2901ABEC71FA9ABD6668DC8FF88B05DBA84BDF4EE2908D55ED8C0C",
+      "VehicleUpdateState.cs": "6477C8B4EBA2917BD148FC6BB953C979DAB26445A31DAA6C622DCB597FF4F8C0",
+      "VehicleUpdateTask.cs": "1AA77D886DD64BBE4ECD212096476442E5EC431E4BCDCB2EF1EAC0FA63CD3759",
+      "ConstraintSim.cs": "2A34A8B269A74C0555DB344E8BFA3B307EBF4EE1515DD41EE29E6679B8E39410",
+      "PhysicsBubble.cs": "E2FE83C15D846E840EC382E6823E8E3550A04E80E510FE4FCC29CAB9DBDB11D9"
+    }
+  }
+}

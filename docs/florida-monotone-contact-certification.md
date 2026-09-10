@@ -1,7 +1,8 @@
 # Monotone contact on Florida's physical grading
 
-**UNBANKED candidate: Certify monotone point contact on the existing Florida
-grading plane.** M14.8 is the banked baseline; M14 remains open.
+**Banked M14.9: Certify monotone point contact on the existing Florida
+grading plane.** Commit `9698a08b84b9b40b0fa03bec8f8ba80d1d7404e7`, tag
+`m14.9-florida-monotone-contact-certification`; M14 remains open.
 
 `FloridaContactProvider` is an internal, read-only Simulation responsibility. It
 proves a clear interval or a unique approaching root for one complete authored
@@ -16,7 +17,9 @@ definition and reference graph, and a canonical search interval. The interval
 must lie in one whole-second cell, within **[-3,600, +3,600] seconds relative to
 the authoritative Earth Cartesian seed at SimulationInstant.Zero**. This is
 seed-relative qualification, not a moving numerical anchor or general mission-date
-coverage. In particular, it does not cover the normal 2024 launcher start time.
+coverage. Normal Solar startup samples current host UTC; 2024 is an injected
+regression date. Neither general operational dates nor that regression date are
+covered by this seed-local proof. Launcher time and routes are unchanged.
 
 The point can have an arbitrary fixed COM offset. The physical craft must have
 finite positive mass, valid inertia and immutable constant-root-force translation;
@@ -162,7 +165,7 @@ No descriptor-ID tie break exists. Event priority cannot participate before prov
 time equality. `PhysicalEventEpoch`, `PhysicalEventOrderKey` and the canonical
 integer comparer are unchanged.
 
-There is no certificate serialization in this candidate. Replay reconstructs and
+There is no certificate serialization. Replay reconstructs and
 revalidates the frozen relation against current authority; it never trusts a saved
 certified flag. Cross-engine equality is conservatively unresolved unless time
 separation is provable. In-memory use remains single-writer and allocation-free.
@@ -178,9 +181,10 @@ sign or derivative evidence to the certificate. Tests also observe representable
 refined enclosure endpoints without converting the root itself.
 
 The provider does not supply exact event-local physical state or mutation rights.
-A future consumer must preserve root identity, check current applicability, and
-define certified event-local evaluation/application separately. M14.5 still
-requires represented canonical `radialSignedGap == 0`; this candidate neither
+A current [unbanked kinematics candidate](certified-root-contact-kinematics.md)
+preserves root identity and qualifies read-only physical values with checked
+applicability. Response/application remains separate. M14.5 still
+requires represented canonical `radialSignedGap == 0`; this provider neither
 snaps a sample to zero nor bypasses that admission. Fractional/root event execution,
 general terrain discovery, rotating features, contact response scheduling,
 support/rest and landing remain absent.

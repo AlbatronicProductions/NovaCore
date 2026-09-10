@@ -15,6 +15,7 @@ using NovaCore.Core;
 using NovaCore.Core.ReferenceFrames;
 using System.Diagnostics;
 
+if (args.Contains("--root-kinematics-only", StringComparer.Ordinal)) { QualifiedContactKinematicsTests.Run(); return; }
 if (args.Contains("--florida-proof-only", StringComparer.Ordinal)) { FloridaContactProofTests.Run(); return; }
 if (args.Contains("--earth-event-only", StringComparer.Ordinal)) { EarthRelativeObservationTests.Run(); return; }
 if (args.Contains("--earth-event-allocation", StringComparer.Ordinal)) { EarthRelativeObservationTests.Allocation(); return; }
@@ -88,6 +89,7 @@ var tests = new (string Name, Action Test)[]
     ("Exact-event spacecraft motion", SpacecraftPhysicalEventMotionTests.Run),
     ("Exact-event Earth-relative observation", EarthRelativeObservationTests.Run),
     ("Florida monotone contact proof", FloridaContactProofTests.Run),
+    ("Qualified root contact kinematics", QualifiedContactKinematicsTests.Run),
 };
 foreach (var (name, test) in tests) { test(); Console.WriteLine($"PASS {name}"); }
 
