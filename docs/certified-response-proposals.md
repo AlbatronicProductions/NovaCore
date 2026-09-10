@@ -1,9 +1,9 @@
 # Certified isolated-contact response proposals
 
-**UNBANKED — Qualify certified isolated-contact response proposals at provider-owned roots.**
+**BANKED M14.11 — Qualify certified isolated-contact response proposals at provider-owned roots.**
 Baseline: M14.10, `fce80a520240293a0373857986c607caf187eacd`.
-Development branch: `codex/certified-response-proposal`. M14 remains open.
-No milestone number is assigned. [Evidence and reproduction](engineering-evidence/certified-response-proposal/README.md).
+Banked as M14.11. M14 remains open.
+Milestone: M14.11. [Evidence and reproduction](engineering-evidence/certified-response-proposal/README.md).
 
 ## Responsibility
 

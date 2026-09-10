@@ -36,7 +36,7 @@ physical-event epochs**, commit `d0b9f9d69d55b8ba85a7b24a44f93e03cea2dcf6`, tag
 
 M14.1 through M14.10 are banked. The current baseline is M14.10,
 `fce80a520240293a0373857986c607caf187eacd`, tag
-`m14.10-certified-root-contact-kinematics`. Current development is the unbanked
+`m14.10-certified-root-contact-kinematics`. Current banked production includes the
 [certified response proposal](certified-response-proposals.md), on
 `codex/certified-response-proposal`: same-root exact-law enclosures without
 executable FP64 selection or mutation. M14.8 is
@@ -151,7 +151,7 @@ within one-second cells and seed-relative ±3,600-second coverage. It proves
 clear/root outcomes and bounded comparison, without event execution or response.
 The active candidate on `codex/certified-root-contact-kinematics` evaluates
 qualified read-only kinematics at those provider-owned roots. No next milestone
-number is assigned. Return it UNBANKED to Project Control; do not broaden
+number is assigned. M14.11 is BANKED; do not broaden
 discovery or start contact response, execution or support.
 
 - Preserve banked M13.1–M13.6 outcomes and future tessellation/displacement capacity.

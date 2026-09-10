@@ -27,7 +27,7 @@ full-weight grading and physical motion. Coverage is one-second cells within
 ±3,600 seconds of the Earth seed, not general mission dates. It performs no event
 execution, response or support. See the [banked contract](florida-monotone-contact-certification.md).
 
-Current development: **UNBANKED — Qualify certified isolated-contact response
+Current banked production: **M14.11 — Qualify certified isolated-contact response
 proposals at provider-owned roots**, on `codex/certified-response-proposal`.
 The read-only provider qualifies same-root effective mass and exact-law scalar,
 linear and angular impulse enclosures. It selects no executable FP64 command and
