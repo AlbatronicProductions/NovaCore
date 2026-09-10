@@ -2,8 +2,8 @@
 
 **M14.1 — Provide immutable canonical surface-point queries for spacecraft contact**
 is banked at `5b9b02ab1d2ba0e903809510908e4819984d4de2`, annotated tag
-`m14.1-canonical-surface-point-queries`. M14 remains open; M14.2 is the latest
-banked accomplishment. The unbanked [contact generator](contact-generation.md)
+`m14.1-canonical-surface-point-queries`. M14 remains open; see [current state](NOVACORE_CURRENT_STATE.md)
+for the latest banked accomplishment. The banked M14.3 [contact generator](contact-generation.md)
 consumes this API without changing its physical authority or readiness policy.
 
 ## Responsibility

@@ -30,21 +30,36 @@ Surface Interaction / Launch Foundation has banked **M14.1**, commit
 `28b92f724f8decd3c9356aa5f9f5bbd6c9dd069c`, tag
 `m14.4-atomic-contact-response`, and **M14.5**, commit
 `b53d48025cfb8142cb32a6fc6fceb6018e33cfcd`, tag
-`m14.5-isolated-analytical-contact-response`. M14 remains **OPEN**.
+`m14.5-isolated-analytical-contact-response`, and **M14.6 — Establish internal exact
+physical-event epochs**, commit `d0b9f9d69d55b8ba85a7b24a44f93e03cea2dcf6`, tag
+`m14.6-physical-event-epochs`. M14 remains **OPEN**.
 
-Current unbanked candidate: [internal physical-event epochs](physical-event-epochs.md)
-on `codex/physical-event-epoch`; [evidence and reproduction](engineering-evidence/physical-event-epoch/README.md).
-It supplies exact canonical/rational identity and ordering, with no public
-fractional clock, fractional scheduling, event-local execution or automatic
-contact. Banked M14.5 still requires qualified represented canonical zero gap.
-Focused checks pass; full Simulation acceptance remains blocked. Bounded operand
-reporting captured 8,160 allocation-counter bytes in full Debug while exact
-clock/debt/count/completion contracts passed. Isolated candidate and banked
-controls passed; causality remains unproven. See the
-[classification](engineering-evidence/physical-event-epoch/debt-gate-classification.md).
-Do not expand into a diagnostic campaign without Project Control's
-payoff decision. Manual visual acceptance is not required. No next milestone
-number or banking is authorized. Return the candidate for follow-up.
+M14.1 through M14.6 are banked. There is no current unbanked development branch
+or candidate. Begin from main and the [banked epoch contract](physical-event-epochs.md).
+Internal canonical/reduced-rational identity and exact deterministic ordering exist;
+public `SimulationInstant` and canonical publication remain integral. General
+event-local transient execution and automatic contact discovery do not exist.
+
+M14.5 still admits only one qualified authored point at represented canonical
+`radialSignedGap == 0`: positive gap gives no response, negative gap requires
+unsupported recovery. It is frictionless with restitution zero, no penetration
+recovery, general multi-contact solver, persistent support/grounding or automatic
+touchdown. **Exact event time is not exact representable event state**: M14.6 does
+not guarantee an FP64 impact state satisfying strict represented-zero admission.
+A certified event-local physical-evaluation/state contract remains absent.
+
+The 8,160-byte investigation is resolved as **CANDIDATE-TRIGGERED CLR
+ALLOCATION-CONTEXT ACCOUNTING EFFECT**, not a production allocation regression or
+claimed CLR bug. The ordinary zero-allocation measurement class was hardened
+without production changes. Final Simulation passed 5/5 Debug and 5/5 Release,
+37/37 groups each; all 31 migrated windows measured zero. Fresh real-allocation
+controls passed 3/3 per configuration, detecting 152 bytes each. Focused epoch,
+ReferenceFrames, Precision and M14.2–M14.5 gates passed. The five unchanged timed
+windows are not an active blocker. See [current validation and scope](NOVACORE_CURRENT_STATE.md#accepted-m146-validation-and-measurement-correction)
+and [final evidence](engineering-evidence/physical-event-epoch/ordinary-class-migration/README.md).
+
+No next milestone number or production responsibility has been assigned.
+Project Control chooses the next responsibility from current banked truth.
 
 - Work in `E:\NovaCore` and inspect `git status --short` before editing.
 - Preserve unrelated and unstaged user work.
@@ -106,10 +121,10 @@ is the concise performance checkpoint. Historical LiveKernelEvent 141 remains
 
 ## Next architectural decision and work boundary
 
-M13 is closed. There is no M13.7 and no next milestone assignment. Next
-production-front authorization returns to Project Control. Do not start Surface
-Interaction / Launch Foundation, Planetary Environment Foundation or Terrain /
-Material Fidelity based on a provisional research ranking.
+M13 is closed at M13.6; M14 remains open with M14.1–M14.6 banked. There is no
+next milestone assignment or unbanked production candidate. Project Control must
+choose the next responsibility. Do not start implementation from a provisional
+research ranking or treat this documentation correction as engineering authority.
 
 - Preserve banked M13.1–M13.6 outcomes and future tessellation/displacement capacity.
 - Historical exact-copy, residual-validation and lifecycle experiments are evidence,

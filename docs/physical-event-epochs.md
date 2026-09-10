@@ -1,8 +1,9 @@
 # Internal physical-event epochs
 
-Unbanked candidate on `codex/physical-event-epoch`, based on banked M14.5
-`b53d48025cfb8142cb32a6fc6fceb6018e33cfcd`. M14 remains open. No next milestone
-number is assigned. [Validation and unresolved gate](engineering-evidence/physical-event-epoch/README.md).
+**M14.6 — Establish internal exact physical-event epochs** is **BANKED** at
+`d0b9f9d69d55b8ba85a7b24a44f93e03cea2dcf6`, tag `m14.6-physical-event-epochs`.
+M14 remains open; no unbanked candidate or next milestone assignment exists.
+[Accepted validation and provenance](engineering-evidence/physical-event-epoch/README.md).
 
 ## Authority and representation
 
@@ -95,7 +96,13 @@ The intended future sequence is:
 `canonical N → private event epoch → event-local candidate state → physical mutation
 → remaining interval → canonical publication N+1`.
 
-This candidate implements only epoch identity and ordering in that sequence.
+M14.6 implements only epoch identity and ordering in that sequence.
+
+An exact rational impact epoch does not guarantee an FP64 state whose current
+M14.3/M14.5 represented `radialSignedGap` evaluates exactly to zero. The retained
+counterexample remains a limit: general contact execution requires a separate
+certified event-local physical-evaluation/state contract. M14.6 does not provide
+that contract, relax strict zero admission or publish fractional public state.
 
 ## Reference relationship
 

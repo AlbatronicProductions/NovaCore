@@ -3,7 +3,7 @@
 **M14.2 — Establish independent spacecraft translational authority** is banked at
 `caa6d93ccd7c4e5924381e077a62585f99e5a32a`, annotated tag
 `m14.2-spacecraft-translational-authority`. M14.1 remains banked; M14 remains open.
-The unbanked [contact-generation candidate](contact-generation.md) is a read-only
+The banked M14.3 [contact generator](contact-generation.md) is a read-only
 consumer of this authority and implements no response.
 [Validation and decision evidence](engineering-evidence/spacecraft-translation/README.md).
 

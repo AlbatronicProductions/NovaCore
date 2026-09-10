@@ -60,7 +60,7 @@ record, alongside the existing canonical event receipt. It preserves continuous
 force/torque controls and event pose. No automatic contact-response calculation,
 solver interval, friction/rest policy, Bepu dependency or renderer wiring is added.
 
-The unbanked [isolated response policy](isolated-contact-response.md) supplies the
+Banked M14.5's [isolated response policy](isolated-contact-response.md) supplies the
 missing admission/intent producer in `Spacecraft.Contact`. An opaque generator
 receipt retains the same coherent motion and qualified observation. Current
 identity, authority and complete stored states are checked without terrain requery.

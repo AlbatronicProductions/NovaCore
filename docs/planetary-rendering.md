@@ -17,7 +17,7 @@ See [production consolidation](production-consolidation.md) for route provenance
 
 ## Authority boundary
 
-The unbanked [surface-point query contract](surface-point-queries.md) consumes the
+The banked M14.1 [surface-point query contract](surface-point-queries.md) consumes the
 same complete canonical CPU H for future gameplay. It does not consume or change
 this renderer's geometry, shading normals, tessellation, or residency ownership.
 

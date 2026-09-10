@@ -1,11 +1,18 @@
-# Internal physical-event epoch candidate evidence
+# M14.6 internal physical-event epoch evidence
 
 ## Current closeout status
 
-2026-09-10: Project Control has technically accepted the M14.6 candidate.
-It remains UNBANKED. This closeout changes evidence retention only; no production
-or permanent test edits and no validation reruns. See the [file-by-file retention
-ledger and reconstruction recipe](RETENTION.md).
+**BANKED:** M14.6 — Establish internal exact physical-event epochs, commit
+`d0b9f9d69d55b8ba85a7b24a44f93e03cea2dcf6`, tag `m14.6-physical-event-epochs`.
+M14 remains open; no unbanked candidate currently exists. Final acceptance includes
+5/5 Debug and 5/5 Release full Simulation runs, 37/37 groups each, all 31 ordinary
+windows at zero, and real-allocation controls at 152 bytes in 3/3 fresh runs per
+configuration. Focused epoch, ReferenceFrames, Precision and M14.2–M14.5 passed.
+The resolved cause is CANDIDATE-TRIGGERED CLR ALLOCATION-CONTEXT ACCOUNTING EFFECT.
+No production change was made by allocation-test correction. This post-banking
+documentation reconciliation reruns no engineering validation and moves no tag.
+The [retention ledger and reconstruction recipe](RETENTION.md) records the earlier
+evidence-closeout stage, including its then-blocked deletion attempt.
 
 Latest technical result: [ordinary-class migration and final validation](ordinary-class-migration/README.md).
 Resolved mechanism: [runtime accounting](runtime-accounting/README.md).

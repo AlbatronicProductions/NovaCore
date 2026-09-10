@@ -6,7 +6,7 @@ Milestone 6A establishes the managed temporal value types used by later simulati
 
 Scheduled event headers have no payload. Their canonical ascending ordering is `(Time, Priority, Sequence, EventId)`.
 
-The unbanked [internal physical-event epoch candidate](physical-event-epochs.md)
+Banked M14.6's [internal physical-event epoch contract](physical-event-epochs.md)
 separately defines canonical and exact rational identities. Public
 `SimulationInstant`, its tick rate, scheduled headers and live execution remain
 integer-tick. Fractional identity alone does not qualify physical contact state

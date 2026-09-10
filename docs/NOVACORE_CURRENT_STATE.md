@@ -13,9 +13,10 @@ and performs FP64 camera-relative subtraction before GPU transport.
 
 ## Banked production checkpoint
 
-Latest banked accomplishment: **M14.5 — Qualify isolated analytical terrain-contact
-response**, commit `b53d48025cfb8142cb32a6fc6fceb6018e33cfcd`,
-annotated tag `m14.5-isolated-analytical-contact-response`.
+Latest banked accomplishment: **M14.6 — Establish internal exact physical-event
+epochs**, commit `d0b9f9d69d55b8ba85a7b24a44f93e03cea2dcf6`,
+annotated tag `m14.6-physical-event-epochs`. **BANKED.**
+M14.1 through M14.6 are banked; no unbanked candidate currently exists.
 **M14 — Surface Interaction / Launch Foundation remains OPEN.**
 
 M14.1 remains banked at `5b9b02ab1d2ba0e903809510908e4819984d4de2`, tag
@@ -44,16 +45,54 @@ canonical radial gap exactly zero. Positive gaps receive no response; negative
 gaps require unsupported recovery. This is a supplied-instant policy, not impact
 discovery, friction, persistent support, grounding, finite collision or landing.
 No visible route uses it. [Validation and reproduction](engineering-evidence/isolated-contact-response/README.md).
-**Unbanked candidate:** [internal exact physical-event epochs](physical-event-epochs.md)
-on `codex/physical-event-epoch`. Canonical and reduced rational identity/order are
-internal; public time, live scheduling and M14.5 admission remain unchanged. No
-event-local execution or automatic contact is implemented. Focused gates pass,
-but full Simulation acceptance remains blocked by long-duration servicing.
-Bounded follow-up isolated a full Debug allocation-counter delta of 8,160 bytes;
-clock/debt/count/completion checks passed. Five isolated runs per configuration
-passed, as did a banked M14.5 control. Candidate causality remains unproven;
-[follow-up is required](engineering-evidence/physical-event-epoch/debt-gate-classification.md).
-M14 remains open; no next milestone number or banking is assigned.
+**Banked M14.6:** [internal exact physical-event epochs](physical-event-epochs.md)
+provides canonical public-time embedding, normalized reduced rational sub-tick
+identity, deterministic exact ordering, versioned serialization and explicit
+overflow/capacity rejection. Legacy integral ordering is preserved; public
+`SimulationInstant` remains integral. Certified-root identity is a separate future
+contract. No automatic contact discovery, event-local transient execution or
+fractional public simulation publication exists.
+
+**Exact event time does not imply exact representable event state.** Rational
+impact time alone does not guarantee an FP64 state whose M14.3/M14.5 represented
+`radialSignedGap` is exactly zero. General contact execution still needs an explicit
+certified event-local physical-evaluation/state contract. M14.6 does not supply it
+or weaken M14.5 admission. M14.5 remains one authored point feature, frictionless,
+restitution zero, without penetration recovery, a general multi-contact solver,
+persistent support/grounding or automatic touchdown.
+
+### Accepted M14.6 validation and measurement correction
+
+The resolved classification is **CANDIDATE-TRIGGERED CLR ALLOCATION-CONTEXT
+ACCOUNTING EFFECT**. The epoch allocation test's existing GC-region boundary
+changed later CLR allocation-context state. During servicing, unused measured-thread
+context fell from 8,160 bytes to zero while cumulative allocation fields stayed
+unchanged and observed managed object allocation was zero. The per-thread counter
+therefore increased by 8,160 bytes. A separate deliberate allocation control detected
+one real 152-byte object. This is neither a claimed CLR bug nor a production memory
+regression. See the [accounting proof](engineering-evidence/physical-event-epoch/runtime-accounting/README.md).
+
+The inventory found 42 zero-required windows: 31 equivalent ordinary raw-counter
+windows migrated to checked temporary no-GC measurement, six existing checked
+windows remained, and five timing-bearing raw-counter windows stayed unchanged.
+Exact zero, workloads, warmups, counts, checksums and state predicates were preserved;
+positive controls still detect real allocation. The timed family is not an active
+blocker and needs separate treatment only if a proven problem warrants it.
+Allocation-test corrections changed no production code.
+
+| Final accepted gate | Debug | Release |
+|---|---|---|
+| Full Simulation | 5/5 PASS, 37/37 groups each | 5/5 PASS, 37/37 groups each |
+| Migrated ordinary windows | 31/31, 0 bytes each | 31/31, 0 bytes each |
+| Fresh positive controls | 3/3 PASS, 152 bytes each | 3/3 PASS, 152 bytes each |
+| Physical-event epochs, ReferenceFrames, Precision | PASS | PASS |
+| Focused M14.2, M14.3, M14.4, M14.5 | PASS | PASS |
+
+Full solution builds passed with zero warnings/errors; all measured no-GC entry/exit
+checks passed. [Final validation and reproduction](engineering-evidence/physical-event-epoch/ordinary-class-migration/README.md)
+record these completed runs; they were not rerun for documentation reconciliation.
+M14 remains open. No next milestone number or responsibility is assigned;
+Project Control chooses the next responsibility from this banked state.
 
 ### Closed M13 renderer baseline
 
@@ -95,7 +134,7 @@ only until complete NCSM1 publication; non-Earth presentation stays independent.
 P2S5H route convergence. The [P2S5G investigation](M12D-P2S5G-workload-investigation.md)
 records the earlier tessellation-interface compaction and accepted +89 invocation
 accounting difference. These are historical engineering coordinates; M13.6 is
-the current production checkpoint.
+the closed renderer checkpoint.
 
 ### Final accepted performance envelope
 
@@ -326,14 +365,16 @@ visually finished.
 
 ## Next architectural decision and work boundary
 
-Begin from banked M13.6. M13 is closed and there is no M13.7. Preserve the
+Begin from banked M14.6, with M14 open and no unbanked development candidate.
+M13 is closed at M13.6 and there is no M13.7. Preserve the
 accepted NCSM1 physical, regional/facility, visibility, tessellation, memory and
 publication contracts. Historical exact-copy, residual-validation and lifecycle
 experiments do not automatically become production candidates.
 
-Next production-front authorization returns to Project Control. No surface/launch,
-environment, material-fidelity or other next-front implementation is opened by
-this closeout. Do not assign a next milestone or regenerate NCSM1 assets.
+Project Control must choose the next responsibility within the open M14 front.
+No new physical execution, discovery, solver, launch/landing, measurement migration
+or other production implementation is opened by this documentation closeout.
+Do not assign a next milestone or regenerate NCSM1 assets.
 Future work must distinguish physical geometry, depth/ownership and
 presentation/LOD behavior while keeping `H(bodyDirection)` authoritative.
 
