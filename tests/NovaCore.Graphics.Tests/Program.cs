@@ -20,6 +20,7 @@ var tests = new (string, Action)[]
     ("Qualified Florida root contact kinematics", QualifiedFloridaKinematicsTests.Run),
     ("Certified Florida isolated response proposal", CertifiedFloridaResponseTests.Run),
     ("Certified Florida pre-impact velocity tuple", CertifiedFloridaPreImpactVelocityTests.Run),
+    ("Certified Florida post-impact velocity realization", CertifiedFloridaPostImpactVelocityTests.Run),
     ("Exact-event Earth-relative production terrain", EarthRelativeObservationProductionTests.Run),
     ("Contact generation production terrain", ContactGenerationProductionTests.Run),
     ("Physical surface-point query", PhysicalSurfacePointQueryTests.Run),

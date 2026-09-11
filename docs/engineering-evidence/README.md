@@ -8,7 +8,8 @@ records its investigation stage. Follow subsequent accepted conclusions.
 
 | Family | Continuing value | Read the conclusion first |
 |---|---|---|
-| [M14.12 pre-impact velocity tuple — banked](certified-preimpact-velocity/README.md) | Same-root vector containment, source applicability, independent real-root oracle, non-mutation and bounded cost. | [Candidate contract](../certified-preimpact-velocity.md). |
+| [Final post-impact velocity candidate](certified-postimpact-velocity/README.md) | Corrected full Debug/Release acceptance, real Florida final-state certificates, bit replay, zero reusable-path allocation and bounded performance. | [Unbanked contract](../certified-postimpact-velocity.md); ready for Project Control acceptance. |
+| [M14.12 pre-impact velocity tuple — banked](certified-preimpact-velocity/README.md) | Same-root vector containment, source applicability, independent real-root oracle, non-mutation and bounded cost. | [Banked contract](../certified-preimpact-velocity.md). |
 | [Banked M14.11 certified response proposal](certified-response-proposal/README.md) | Exact-law impulse enclosures, independent rational/real-root oracles, identity/refusal, physical invariants and bounded cost. | [Banked contract](../certified-response-proposals.md). |
 | [Banked M14.10 qualified root contact kinematics](certified-root-contact-kinematics/README.md) | Same-root physical normal, material velocity, fixed lever, bounded qualification, identity/lifetime, independent oracle and measured cost. | [Banked contract](../certified-root-contact-kinematics.md). |
 | [Banked M14.9 Florida monotone contact certification](florida-monotone-contact-certification/README.md) | Continuous grading relation, whole-interval containment, source-derived derivative/rounding bounds, exact root identity, bounded refusal, real-Earth validation and cost. | [Banked contract](../florida-monotone-contact-certification.md). |

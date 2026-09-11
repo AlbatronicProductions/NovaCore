@@ -1,0 +1,84 @@
+{
+  "originalSourceCount": 229,
+  "originalSourceDigest": "c5423d5e3b9ddb756cace3fe7f96a399e4d2deeeb1a9a40dc4d10a49504c75c9",
+  "candidate": [
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/CertifiedPostImpactVelocity.cs",
+      "bytes": 2119,
+      "sha256": "71a2adbde0936cf9aadd54d72f6f07903a9d2e8635ee130a53570fd454fdc49e"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/CertifiedPostImpactVelocityMath.cs",
+      "bytes": 14999,
+      "sha256": "097f43798181f0c9f98580f539b27b56d37e2723e55cac60586d2a4cb759ee4d"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/FloridaPostImpactVelocity.cs",
+      "bytes": 6818,
+      "sha256": "10fffef38f012bf03c9e3c15a84f0340f6346f462f628c9e15ee13f6aa63dd20"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/CertifiedPostImpactVelocityTests.cs",
+      "bytes": 24137,
+      "sha256": "ee820d67d9a0b99cbf098cc45a6fd617adba4217e74bfcd0ce14f38ff4feee19"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/CertifiedFloridaPostImpactVelocityTests.cs",
+      "bytes": 37996,
+      "sha256": "8f4884cb05ab7ffe5a46ae20e2f4f540e9480e4d1d5f6628d27a7da1e3b13aee"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "bytes": 248271,
+      "sha256": "17cf3e773d687e2e13f560f2cb7dbf760db96835802cda46d3eadcfc1fdb791a"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/Program.cs",
+      "bytes": 566300,
+      "sha256": "722abc9ef1df0e2424b31b2c873a238b6019e5233c3dbbab11a2cd5ac9ec246d"
+    }
+  ],
+  "tags": [
+    "m14.1-canonical-surface-point-queries|3ccb998031e15cb1898394589c27244d55e06e24|5b9b02ab1d2ba0e903809510908e4819984d4de2",
+    "m14.10-certified-root-contact-kinematics|b07c511aab7109e3d240d9c7c31a444f58e069a5|fce80a520240293a0373857986c607caf187eacd",
+    "m14.11-certified-response-proposal|8ac99fbfad4f8dd6365d696053fc3edfeea2249d|556ca77af88257b5727561709c3a091aaec8cee7",
+    "m14.12-certified-preimpact-velocity|98831b08e07d1bcc251f7aa900f463b98570ef04|e5fde08bcae834d8abc107cd26e7601fbfa3e1e0",
+    "m14.2-spacecraft-translational-authority|ae2f203b97224ff88b38b7c68902ac2d31108a91|caa6d93ccd7c4e5924381e077a62585f99e5a32a",
+    "m14.3-spacecraft-terrain-contact-observations|b9ad79c38b322c8e1e095039d5b69c035a1bcca8|79978cf8b0fd783d43a661df6df53a2c0202af4a",
+    "m14.4-atomic-contact-response|b198d3b381ba4a82577ba89bd5e31e6050d3a896|28b92f724f8decd3c9356aa5f9f5bbd6c9dd069c",
+    "m14.5-isolated-analytical-contact-response|c2964fe4531b8e383d2d89beec2e8c055f3541a5|b53d48025cfb8142cb32a6fc6fceb6018e33cfcd",
+    "m14.6-physical-event-epochs|07adc9983252f2cabf0af9da0a1281457af606bf|d0b9f9d69d55b8ba85a7b24a44f93e03cea2dcf6",
+    "m14.7-exact-event-spacecraft-motion|315da29c4eff5562f9040f7a0aedbb4e961fa877|56c0ae95b7f514e2f0440dfe272dd2836f32506e",
+    "m14.8-exact-event-earth-relative-observation|27a32989cef714a204d0d7ecfbd4618e53de0086|2657bb16cdee2a42d1e5f9be830d247fb3c607f6",
+    "m14.9-florida-monotone-contact-certification|944cb5c1f2011b5944745b210e561d0b9e8b4aaf|9698a08b84b9b40b0fa03bec8f8ba80d1d7404e7"
+  ],
+  "baseline": {
+    "commit": "e5fde08bcae834d8abc107cd26e7601fbfa3e1e0",
+    "initialBranch": "main",
+    "initialWorktree": "clean",
+    "branch": "codex/certified-postimpact-velocity",
+    "headMainOriginAligned": true,
+    "staged": false
+  },
+  "originalProductionVerification": {
+    "beforeAfter229Files": "all identical",
+    "algorithm": "SHA-256",
+    "aggregateEncoding": "UTF-8 of sorted tracked src/*.cs relative path + NUL + lowercase file SHA256 + LF per row; Windows Sort-Object order"
+  },
+  "runtime": {
+    "sdk": "10.0.303",
+    "runtime": "10.0.12",
+    "os": "Windows",
+    "architecture": "x64",
+    "configurationOverrides": "none"
+  },
+  "ksa": {
+    "version": "2026.9.7.5402+487c3f340de24c6a81037120b6d1129c045c5400",
+    "localTree": "E:\\Kitten Space Agency",
+    "sha256": {
+      "KSA.dll": "a8a5164204eed962df9d9025e99f523d9a23ee2ce6e802b18216a9da35506d2f",
+      "BepuPhysics.dll": "77185e513bd530deb322e41dd4acda9ad8e32e626cfa19492fb7481f25ed1fa7",
+      "Brutal.Core.Numerics.dll": "73346cb3be59cb0b480f342da54279eff09d36c8030ab76c954f7b64dfa06a20"
+    }
+  }
+}

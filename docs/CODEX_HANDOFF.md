@@ -34,13 +34,18 @@ Surface Interaction / Launch Foundation has banked **M14.1**, commit
 physical-event epochs**, commit `d0b9f9d69d55b8ba85a7b24a44f93e03cea2dcf6`, tag
 `m14.6-physical-event-epochs`. M14 remains **OPEN**.
 
-M14.1 through M14.11 are banked. The current baseline is M14.11,
-`556ca77af88257b5727561709c3a091aaec8cee7`, tag
-`m14.11-certified-response-proposal`: [same-root exact-law response enclosures](certified-response-proposals.md)
-without executable FP64 selection or mutation. The unbanked
-[pre-impact velocity candidate](certified-preimpact-velocity.md), on
-M14.12 qualifies COM and material-relative vectors
-for later numerical realization; it applies no response. M14.8 is
+M14.1 through M14.12 are banked. The current baseline is M14.12,
+`e5fde08bcae834d8abc107cd26e7601fbfa3e1e0`, tag
+`m14.12-certified-preimpact-velocity`: [same-root pre-impact vectors](certified-preimpact-velocity.md)
+alongside the [exact response law](certified-response-proposals.md).
+The unbanked [final-velocity realization candidate](certified-postimpact-velocity.md)
+on `codex/certified-postimpact-velocity` selects checked final linear/angular bits.
+It grants no mutation rights and performs no private execution. **READY FOR PROJECT
+CONTROL ACCEPTANCE — UNBANKED**: the refusal allocation was attributed to `Environment.Version`
+object construction and locally corrected at immutable runtime preparation.
+Corrected full Debug/Release acceptance gates pass, including real Florida,
+certificate/bit replay and exact-zero reusable paths. Project Control acceptance
+and banking remain outstanding. No further attribution is needed. M14.8 is
 `2657bb16cdee2a42d1e5f9be830d247fb3c607f6`, tag
 `m14.8-exact-event-earth-relative-observation`; it owns same-epoch numerical
 Earth/point observations. **M14.7 — Evaluate coherent spacecraft motion at
@@ -144,16 +149,16 @@ is the concise performance checkpoint. Historical LiveKernelEvent 141 remains
 
 ## Next architectural decision and work boundary
 
-M13 is closed at M13.6; M14 remains open with M14.1–M14.9 banked. The
+M13 is closed at M13.6; M14 remains open with M14.1–M14.12 banked. The
 [monotone Florida point-contact certification](florida-monotone-contact-certification.md)
 candidate is **BANKED as M14.9**.
 It admits one nonrotating authored point in the existing full-weight grading,
 within one-second cells and seed-relative ±3,600-second coverage. It proves
 clear/root outcomes and bounded comparison, without event execution or response.
-The active candidate on `codex/certified-root-contact-kinematics` evaluates
-qualified read-only kinematics at those provider-owned roots. No next milestone
-number is assigned. M14.11 is BANKED; do not broaden
-discovery or start contact response, execution or support.
+The active candidate on `codex/certified-postimpact-velocity` qualifies read-only
+final velocity values at those roots. Its validation result is recorded above.
+No next milestone number is assigned; do not broaden discovery or start
+private execution or support.
 
 - Preserve banked M13.1–M13.6 outcomes and future tessellation/displacement capacity.
 - Historical exact-copy, residual-validation and lifecycle experiments are evidence,

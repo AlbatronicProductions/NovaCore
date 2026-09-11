@@ -13,7 +13,7 @@ and performs FP64 camera-relative subtraction before GPU transport.
 
 ## Banked production checkpoint
 
-Latest banked accomplishment: **M14.11 — Qualify certified isolated-contact response
+Banked predecessor: **M14.11 — Qualify certified isolated-contact response
 proposals at provider-owned roots**, banked main/tag target
 `556ca77af88257b5727561709c3a091aaec8cee7`, tag `m14.11-certified-response-proposal`.
 Implementation commit: `3813791380ad035c308bb93cc404102a659d812d`.
@@ -21,10 +21,24 @@ It supplies checked same-root exact-law scalar, linear and angular impulse enclo
 without executable FP64 selection or mutation. See the [banked contract](certified-response-proposals.md).
 
 Current banked production: **M14.12 — Qualify pre-impact velocity tuples at provider-owned
-contact roots**. It encloses COM inertial-root
+contact roots**, commit `e5fde08bcae834d8abc107cd26e7601fbfa3e1e0`, tag
+`m14.12-certified-preimpact-velocity`. It encloses COM inertial-root
 and full feature/material-relative velocity at the same alpha. It prepares inputs
 for later post-impact numerical realization; no response is applied. See the
-[candidate contract](certified-preimpact-velocity.md).
+[banked contract](certified-preimpact-velocity.md).
+
+Current unbanked candidate: **Certify final paired post-impact velocity states**,
+on `codex/certified-postimpact-velocity`. It selects from a fixed maximum of 65
+final-value candidates and checks nonapproach, momentum/coupling and moving-surface
+energy defects. The result is read-only root-bound evidence; no mutation, canonical
+intent or private execution is implemented. See the
+[numerical contract](certified-postimpact-velocity.md).
+Status: **READY FOR PROJECT CONTROL ACCEPTANCE — UNBANKED**. The 256-byte refusal allocation was
+attributed to repeated runtime-version object construction and corrected by
+preparing the immutable version predicate once. Corrected Debug/Release full
+Simulation, focused regressions and real-Florida integration pass, with identical
+final bits/certificates and zero reusable-path allocation. Project Control acceptance
+and banking remain outstanding; private execution remains outside this responsibility.
 
 Banked predecessor: **M14.9 monotone Florida point-contact certification**,
 commit `9698a08b84b9b40b0fa03bec8f8ba80d1d7404e7`, tag
@@ -43,7 +57,7 @@ mass and inertia at provider-owned roots. Commit
 Banked predecessor: **M14.8 — Evaluate Earth-relative point-feature
 observations at exact physical-event epochs**, commit
 `2657bb16cdee2a42d1e5f9be830d247fb3c607f6`, annotated tag
-`m14.8-exact-event-earth-relative-observation`. **M14.1 through M14.11 are banked.**
+`m14.8-exact-event-earth-relative-observation`. **M14.1 through M14.12 are banked.**
 M14.8 owns coherent numerical observations, not interval proof. See its
 [banked contract](spacecraft-earth-event-observation.md).
 **M14 — Surface Interaction / Launch Foundation remains OPEN.**
@@ -422,16 +436,16 @@ visually finished.
 
 ## Next architectural decision and work boundary
 
-M14 remains open at banked M14.9. The development worktree is `E:\NovaCore` on
-`codex/certified-root-contact-kinematics`; `main` remains the banked baseline.
+M14 remains open at banked M14.12. The development worktree is `E:\NovaCore` on
+`codex/certified-postimpact-velocity`; `main` remains the banked baseline.
 M13 is closed at M13.6 and there is no M13.7. Preserve the
 accepted NCSM1 physical, regional/facility, visibility, tessellation, memory and
 publication contracts. Historical exact-copy, residual-validation and lifecycle
 experiments do not automatically become production candidates.
 
-Project Control must accept the current bounded root-kinematics candidate
-and choose any later responsibility within the open M14 front. The witness
-qualifies read-only fields at an already certified root. No physical execution,
+Project Control must accept the current final-velocity candidate's validated
+bounded result before choosing a later responsibility.
+The receipt qualifies final paired values at an already certified root. No physical execution,
 general terrain discovery, solver, launch/landing or measurement migration is
 opened by this candidate.
 Do not assign a next milestone or regenerate NCSM1 assets.

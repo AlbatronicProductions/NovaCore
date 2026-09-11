@@ -1,0 +1,94 @@
+{
+  "status": "CERTIFIED POST-IMPACT VELOCITY CANDIDATE — FOLLOW-UP REQUIRED",
+  "boundedSequence": "Debug/Release builds once; focused new analytical Debug/Release once; new real Florida headless Debug/Release once; full Simulation Debug/Release once; named regressions/reference/precision once each; deterministic replay. Stop first material failure.",
+  "executed": [
+    {
+      "name": "Debug full solution build",
+      "command": "dotnet build NovaCore.sln -c Debug --nologo",
+      "exitCode": 0,
+      "result": "PASS",
+      "warnings": 0,
+      "errors": 0
+    },
+    {
+      "name": "Release full solution build",
+      "command": "dotnet build NovaCore.sln -c Release --nologo",
+      "exitCode": 0,
+      "result": "PASS",
+      "warnings": 0,
+      "errors": 0
+    },
+    {
+      "name": "Debug focused post-impact analytical",
+      "command": "dotnet tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll --certified-postimpact-velocity-only",
+      "exitCode": 1,
+      "result": "FAIL"
+    }
+  ],
+  "analyticalWitnesses": [
+    "POSTIMPACT_ANALYTICAL central moving surface: candidate=60; evaluated=65; admitted=32; rho=[3.552713678800499E-15,1.065814103640151E-14]",
+    "POSTIMPACT_ANALYTICAL one third final state: candidate=64; evaluated=65; admitted=16; rho=[2.2204460492503116E-16,1.2212453270876736E-15]",
+    "POSTIMPACT_ANALYTICAL rational unit normal and stored-bit attitude: candidate=2; evaluated=65; admitted=32; rho=[2.3758772726977405E-16,1.1822542944628378E-14]",
+    "POSTIMPACT_ANALYTICAL asymmetric all-component angular response: candidate=36; evaluated=65; admitted=32; rho=[5.908051825542763E-15,2.1143364836717653E-14]",
+    "POSTIMPACT_ANALYTICAL surface performs positive inertial work: candidate=64; evaluated=65; admitted=32; rho=[8.881784197001247E-16,2.220446049250315E-15]",
+    "POSTIMPACT_ANALYTICAL unequal component scales: candidate=54; evaluated=65; admitted=32; rho=[7.275180458066184E-12,2.1827747942460024E-11]"
+  ],
+  "stop": {
+    "gate": "post-impact response resolution",
+    "file": "tests/NovaCore.Simulation.Tests/CertifiedPostImpactVelocityTests.cs",
+    "method": "MeasureRefusal",
+    "assertionLine": 244,
+    "allocatedBytes": 256,
+    "expectedBytes": 0,
+    "measuredCalls": 8,
+    "entry": "PASS",
+    "exit": "PASS",
+    "warmupCalls": 32,
+    "timingSamplesBeforeMeasurement": 101,
+    "expectedNumericalOutcome": "UnresolvedResponse",
+    "allocationOwner": "UNRESOLVED",
+    "completedMeasuredCalls": "UNAVAILABLE: count assertion and output follow failed RequireZero",
+    "objectType": "UNAVAILABLE",
+    "managedAllocationCallbacks": "not used",
+    "stack": [
+      "Unhandled exception. System.InvalidOperationException: response resolution: expected zero managed allocation, actual=256",
+      "   at OrdinaryAllocationMeasurement.RequireZero(Int64 bytes, String gate) in E:\\NovaCore\\tests\\NovaCore.Simulation.Tests\\OrdinaryAllocationMeasurement.cs:line 44",
+      "   at CertifiedPostImpactVelocityTests.MeasureRefusal(String name, FloridaContactKinematics input, CertifiedResponseValues response, CertifiedPreImpactVelocityValues preimpact, CertifiedPostImpactVelocityFailure expected) in E:\\NovaCore\\tests\\NovaCore.Simulation.Tests\\CertifiedPostImpactVelocityTests.cs:line 244",
+      "   at CertifiedPostImpactVelocityTests.Refusals() in E:\\NovaCore\\tests\\NovaCore.Simulation.Tests\\CertifiedPostImpactVelocityTests.cs:line 198",
+      "   at CertifiedPostImpactVelocityTests.Run() in E:\\NovaCore\\tests\\NovaCore.Simulation.Tests\\CertifiedPostImpactVelocityTests.cs:line 50",
+      "   at Program.<Main>$(String[] args) in E:\\NovaCore\\tests\\NovaCore.Simulation.Tests\\Program.cs:line 18"
+    ],
+    "classification": "exact-zero allocation contract failure; owner not attributed"
+  },
+  "notExecuted": [
+    "Release focused analytical",
+    "real Florida final bits/defect certificate integration (Debug/Release)",
+    "full Simulation suites (Debug/Release)",
+    "focused M14.2–M14.12 regression commands",
+    "ReferenceFrames (Debug/Release)",
+    "Precision (Debug/Release)",
+    "headless query/stale-source integration",
+    "Debug/Release bit comparison",
+    "qualification/read/source-preparation and numerical-exhaustion performance gates"
+  ],
+  "unreachedAnalytical": [
+    "broad/nonfinite/overflow refusals after response-resolution measurement",
+    "finite-set exhaustion",
+    "positive allocation control at end of exhaustion"
+  ],
+  "performance": {
+    "release": "UNAVAILABLE: stopped before Release execution",
+    "fullRefusalStatistics": "UNAVAILABLE: timing samples collected before failed allocation gate but report not reached",
+    "receiptWorkspaceSize": "UNAVAILABLE: reporting occurs in unexecuted integration test",
+    "fixedSet": "all six completed fixtures evaluated65; no heap bound accepted"
+  },
+  "redTeams": {
+    "numerics": "static PASS; six Debug exact-rational fixtures PASS; further validation blocked",
+    "authority": "static review no blocker; real integration not executed",
+    "arithmetic": "static guard correction: integer bits for subnormal capability checks",
+    "oracle": "pre-validation independent tangent/coupling oracle uses exact J cancellation with Peff, no budget relaxation",
+    "final": "not ready for acceptance"
+  },
+  "diffCheck": "PASS; LF/CRLF conversion warnings only",
+  "nextDecision": "Project Control: classify the new refusal-path allocation gate before resuming acceptance. No forensic probe or correction made after hard stop."
+}

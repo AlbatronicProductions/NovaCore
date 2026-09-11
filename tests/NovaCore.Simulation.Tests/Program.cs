@@ -15,6 +15,7 @@ using NovaCore.Core;
 using NovaCore.Core.ReferenceFrames;
 using System.Diagnostics;
 
+if (args.Contains("--certified-postimpact-velocity-only", StringComparer.Ordinal)) { CertifiedPostImpactVelocityTests.Run(); return; }
 if (args.Contains("--certified-preimpact-velocity-only", StringComparer.Ordinal)) { CertifiedPreImpactVelocityTests.Run(); return; }
 if (args.Contains("--certified-response-only", StringComparer.Ordinal)) { CertifiedContactResponseTests.Run(); return; }
 if (args.Contains("--root-kinematics-only", StringComparer.Ordinal)) { QualifiedContactKinematicsTests.Run(); return; }
@@ -94,6 +95,7 @@ var tests = new (string Name, Action Test)[]
     ("Qualified root contact kinematics", QualifiedContactKinematicsTests.Run),
     ("Certified isolated-contact response proposals", CertifiedContactResponseTests.Run),
     ("Certified pre-impact velocity tuples", CertifiedPreImpactVelocityTests.Run),
+    ("Certified final post-impact velocity states", CertifiedPostImpactVelocityTests.Run),
 };
 foreach (var (name, test) in tests) { test(); Console.WriteLine($"PASS {name}"); }
 

@@ -1,7 +1,8 @@
 # Certified pre-impact velocity tuples
 
-**UNBANKED candidate — Qualify pre-impact velocity tuples at provider-owned contact roots.**
-Baseline: banked M14.11, `556ca77af88257b5727561709c3a091aaec8cee7`.
+**Banked M14.12 — Qualify pre-impact velocity tuples at provider-owned contact roots.**
+Commit/tag target: `e5fde08bcae834d8abc107cd26e7601fbfa3e1e0`,
+`m14.12-certified-preimpact-velocity`.
 M14 remains open. [Evidence and reproduction](engineering-evidence/certified-preimpact-velocity/README.md).
 
 ## Responsibility

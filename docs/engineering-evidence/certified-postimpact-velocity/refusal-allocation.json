@@ -1,0 +1,286 @@
+{
+  "baseline": "e5fde08bcae834d8abc107cd26e7601fbfa3e1e0",
+  "branch": "codex/certified-postimpact-velocity",
+  "primary": "A — ALL EIGHT REFUSAL CALLS ALLOCATE CONSISTENTLY",
+  "candidateCausality": "CANDIDATE PRODUCTION CAUSED",
+  "scope": "R1-R8 repeat one identical response-resolution path, not eight distinct refusal paths.",
+  "originalWitness": {
+    "bytes": 256,
+    "calls": 8,
+    "entry": "PASS",
+    "exit": "PASS"
+  },
+  "matrix": [
+    {
+      "config": "Debug",
+      "run": 1,
+      "exitCode": 1,
+      "total": 256,
+      "completed": 8,
+      "positiveControlBytes": 152,
+      "callBytes": [
+        32,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32
+      ]
+    },
+    {
+      "config": "Debug",
+      "run": 2,
+      "exitCode": 1,
+      "total": 256,
+      "completed": 8,
+      "positiveControlBytes": 152,
+      "callBytes": [
+        32,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32
+      ]
+    },
+    {
+      "config": "Debug",
+      "run": 3,
+      "exitCode": 1,
+      "total": 256,
+      "completed": 8,
+      "positiveControlBytes": 152,
+      "callBytes": [
+        32,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32
+      ]
+    },
+    {
+      "config": "Release",
+      "run": 1,
+      "exitCode": 1,
+      "total": 256,
+      "completed": 8,
+      "positiveControlBytes": 152,
+      "callBytes": [
+        32,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32
+      ]
+    },
+    {
+      "config": "Release",
+      "run": 2,
+      "exitCode": 1,
+      "total": 256,
+      "completed": 8,
+      "positiveControlBytes": 152,
+      "callBytes": [
+        32,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32
+      ]
+    },
+    {
+      "config": "Release",
+      "run": 3,
+      "exitCode": 1,
+      "total": 256,
+      "completed": 8,
+      "positiveControlBytes": 152,
+      "callBytes": [
+        32,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32
+      ]
+    }
+  ],
+  "mechanism": {
+    "path": "MeasureRefusal -> Select -> ArithmeticSupported -> Environment.get_Version -> new System.Version(10,0,12)",
+    "corelib": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Private.CoreLib.dll",
+    "corelibSha256": "1125acc8106c43fc8bad2d203c4c4485df6182d292846c2fff415c1040c54678",
+    "getterIL": "1F0A161F0C73E82A00062A",
+    "decoded": [
+      "ldc.i4.s 10",
+      "ldc.i4.0",
+      "ldc.i4.s 12",
+      "newobj 0x06002AE8: System.Version::.ctor(int32,int32,int32)",
+      "ret"
+    ],
+    "constructorSignature": "200301080808",
+    "fields": [
+      "_Major:int32",
+      "_Minor:int32",
+      "_Build:int32",
+      "_Revision:int32"
+    ],
+    "measuredBytesPerCall": 32,
+    "objectCount": "one constructor per invocation by static installed IL; no allocation callbacks used",
+    "observer": "not needed: source/installed IL identify mechanism"
+  },
+  "correction": {
+    "file": "src/NovaCore.Simulation/Spacecraft/Contact/CertifiedPostImpactVelocityMath.cs",
+    "beforeSha256": "097f43798181f0c9f98580f539b27b56d37e2723e55cac60586d2a4cb759ee4d",
+    "afterSha256": "882a1b7d8849304ee2a98aa3333fd2a6654e084b26b1dd3769c52f1a789840ef",
+    "change": "Prepare immutable runtime-version predicate once at arithmetic-class initialization; retain per-call Windows/x64 and floating-point witnesses.",
+    "semantics": "No numerical recipe, candidate count, thresholds, warmup, workload, refusal or arithmetic-mode change."
+  },
+  "restoration": {
+    "focusedTestSha256": "ee820d67d9a0b99cbf098cc45a6fd617adba4217e74bfcd0ce14f38ff4feee19",
+    "testByteExact": true,
+    "otherSixCandidateFingerprintsUnchanged": true,
+    "originalProductionFiles": 229,
+    "originalProductionUnchanged": true,
+    "tagsUnchanged": true,
+    "indexEmpty": true
+  },
+  "corrected": [
+    {
+      "configuration": "Debug",
+      "kind": "build",
+      "command": "dotnet build tests/NovaCore.Simulation.Tests/NovaCore.Simulation.Tests.csproj -c Debug --nologo",
+      "exitCode": 0,
+      "result": "PASS",
+      "observations": [],
+      "performance": []
+    },
+    {
+      "configuration": "Release",
+      "kind": "build",
+      "command": "dotnet build tests/NovaCore.Simulation.Tests/NovaCore.Simulation.Tests.csproj -c Release --nologo",
+      "exitCode": 0,
+      "result": "PASS",
+      "observations": [],
+      "performance": []
+    },
+    {
+      "configuration": "Debug",
+      "kind": "focused",
+      "command": "dotnet tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll --certified-postimpact-velocity-only",
+      "exitCode": 0,
+      "result": "PASS",
+      "observations": [
+        "ORDINARY_ALLOCATION gate=post-impact response resolution bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=post-impact fixed-set exhaustion bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "CERTIFIED_POSTIMPACT_ANALYTICAL exact-rational/final-state/65-candidates/energy/momentum/rounding/refusal PASS"
+      ],
+      "performance": [
+        {
+          "kind": "postimpact-refusal-cost",
+          "name": "response resolution",
+          "warmups": 32,
+          "timingSamples": 101,
+          "measuredCalls": 8,
+          "bytes": 0,
+          "entry": "PASS",
+          "exit": "PASS",
+          "medianNs": 6800,
+          "p95Ns": 6900,
+          "p99Ns": 6900,
+          "maximumNs": 7000,
+          "timerResolutionNs": 100
+        },
+        {
+          "kind": "postimpact-refusal-cost",
+          "name": "fixed-set exhaustion",
+          "warmups": 32,
+          "timingSamples": 101,
+          "measuredCalls": 8,
+          "bytes": 0,
+          "entry": "PASS",
+          "exit": "PASS",
+          "medianNs": 393900,
+          "p95Ns": 428800,
+          "p99Ns": 432600,
+          "maximumNs": 463800,
+          "timerResolutionNs": 100
+        }
+      ]
+    },
+    {
+      "configuration": "Release",
+      "kind": "focused",
+      "command": "dotnet tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll --certified-postimpact-velocity-only",
+      "exitCode": 0,
+      "result": "PASS",
+      "observations": [
+        "ORDINARY_ALLOCATION gate=post-impact response resolution bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=post-impact fixed-set exhaustion bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "CERTIFIED_POSTIMPACT_ANALYTICAL exact-rational/final-state/65-candidates/energy/momentum/rounding/refusal PASS"
+      ],
+      "performance": [
+        {
+          "kind": "postimpact-refusal-cost",
+          "name": "response resolution",
+          "warmups": 32,
+          "timingSamples": 101,
+          "measuredCalls": 8,
+          "bytes": 0,
+          "entry": "PASS",
+          "exit": "PASS",
+          "medianNs": 5600,
+          "p95Ns": 5700,
+          "p99Ns": 5800,
+          "maximumNs": 5800,
+          "timerResolutionNs": 100
+        },
+        {
+          "kind": "postimpact-refusal-cost",
+          "name": "fixed-set exhaustion",
+          "warmups": 32,
+          "timingSamples": 101,
+          "measuredCalls": 8,
+          "bytes": 0,
+          "entry": "PASS",
+          "exit": "PASS",
+          "medianNs": 321200,
+          "p95Ns": 333200,
+          "p99Ns": 357000,
+          "maximumNs": 579600,
+          "timerResolutionNs": 100
+        }
+      ]
+    }
+  ],
+  "acceptanceMatrix": "NOT RESUMED",
+  "lead": "PASS",
+  "final": "CERTIFIED POST-IMPACT VELOCITY CANDIDATE — READY TO RESUME ACCEPTANCE",
+  "diffCheck": "PASS",
+  "perCallSharedFields": {
+    "entry": "PASS",
+    "exit": "PASS",
+    "actual": "UnresolvedResponse",
+    "correct": true,
+    "zero": false,
+    "explanation": "These exact fields apply to every R1-R8 window of every retained matrix row; callBytes array order is R1 through R8. Lossless removal of repeated fields."
+  }
+}
