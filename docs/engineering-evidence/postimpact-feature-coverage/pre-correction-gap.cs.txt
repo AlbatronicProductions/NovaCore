@@ -1,0 +1,24 @@
+internal readonly struct FloridaPostImpactGap : IPostImpactCoverageGap
+{
+    private readonly FloridaContactMotion motion;
+    private readonly PrivatePostImpactStateValues source;
+    private readonly SpacecraftContactFeature feature;
+    private readonly FacilitySupportRegion region;
+    internal FloridaPostImpactGap(FloridaContactMotion motion, PrivatePostImpactStateValues source,
+        SpacecraftContactFeature feature, FacilitySupportRegion region)
+    { this.motion=motion;this.source=source;this.feature=feature;this.region=region; }
+    internal CoverageFailure Trajectory(FloridaBound sigma,out CoverageTrajectory value)=>motion.PostImpact(source,feature.OffsetFromComMetres,sigma,out value);
+    public CoverageFailure Enclose(FloridaBound sigma,out CoverageGap gap)
+        =>Enclose(sigma,out _,out gap);
+    internal CoverageFailure Enclose(FloridaBound sigma,out CoverageTrajectory value,out CoverageGap gap)
+    {
+        gap=default;
+        var failure=Trajectory(sigma,out value);
+        if(failure!=CoverageFailure.None)return failure;
+        if(!FloridaContactMotion.CoverageDomain(value.BodyPosition,region))return CoverageFailure.GradingDomain;
+        var up=FloridaVector.From(region.Up);
+        gap=new(FloridaVector.Dot(up,value.BodyPosition)-((FloridaBound)region.RadiusMetres+region.PlaneAltitudeMetres),
+            FloridaVector.Dot(up,value.BodyVelocity),FloridaVector.Dot(up,value.BodyAcceleration));
+        return gap.IsFinite?CoverageFailure.None:CoverageFailure.NonFinite;
+    }
+}

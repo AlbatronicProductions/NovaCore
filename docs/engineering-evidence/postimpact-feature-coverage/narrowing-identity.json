@@ -1,0 +1,58 @@
+{
+  "Head": "dc274639f670d122764bb0e8f3d0c95ae201c7a4",
+  "Main": "dc274639f670d122764bb0e8f3d0c95ae201c7a4",
+  "Origin": "dc274639f670d122764bb0e8f3d0c95ae201c7a4",
+  "Branch": "codex/postimpact-feature-coverage",
+  "ChangedSinceNarrowing": [
+    "src/NovaCore.Simulation/Spacecraft/Contact/PostImpactCoverageProvider.cs",
+    "src/NovaCore.Simulation/Spacecraft/Contact/PostImpactCoverageSearch.cs",
+    "tests/NovaCore.Graphics.Tests/PostImpactCoverageProductionTests.cs",
+    "tests/NovaCore.Simulation.Tests/PostImpactCoverageTests.cs"
+  ],
+  "BankedProductionFiles": 241,
+  "BankedProductionUnchanged": true,
+  "TagsUnchanged": true,
+  "TagCount": 55,
+  "AnchorPrefixSha256": "A22923CDC359AF5A349F54B16452BCF98A08917A2D8A5AB34872730E98618181",
+  "AnchorUnchanged": true,
+  "Candidate": [
+    {
+      "Path": "src/NovaCore.Simulation/Spacecraft/Contact/FloridaPostImpactMotion.cs",
+      "Sha256": "6320D932F27FF057C6AB26B3951493E3586DACA6B2BADF2CE7737C8602BED0AC"
+    },
+    {
+      "Path": "src/NovaCore.Simulation/Spacecraft/Contact/PostImpactCoverageProvider.cs",
+      "Sha256": "CF222C6B645E2107CDCB8AFE2E4B80377644951F4C341F7B5C516B1081BFE848"
+    },
+    {
+      "Path": "src/NovaCore.Simulation/Spacecraft/Contact/PostImpactCoverageSearch.cs",
+      "Sha256": "8FA5453FD6E7C7395CF9C459FEE80163DCFFE16E4768891FC4FCD4C525A772A8"
+    },
+    {
+      "Path": "tests/NovaCore.Graphics.Tests/NovaCore.Graphics.Tests.csproj",
+      "Sha256": "B966F3B8BCB0EDC180E68AD4653F610538022D5DD96D86486AC26F0F8E3625CE"
+    },
+    {
+      "Path": "tests/NovaCore.Graphics.Tests/PostImpactCoverageProductionTests.cs",
+      "Sha256": "3463341E5D8483F735195BD69B30B86DBC7822FB59983665FB2F9F13CA26536D"
+    },
+    {
+      "Path": "tests/NovaCore.Graphics.Tests/Program.cs",
+      "Sha256": "362AE7171D39839CB4724CA40EAC0AA9B67E25FD00EADD8AD0E5D5A11D29151D"
+    },
+    {
+      "Path": "tests/NovaCore.Simulation.Tests/PostImpactCoverageCost.cs",
+      "Sha256": "D588B02DFB0D01A7EEAA0A299E2BE15571955204EABCD5616B9A74E14024AA44"
+    },
+    {
+      "Path": "tests/NovaCore.Simulation.Tests/PostImpactCoverageTests.cs",
+      "Sha256": "D69E7782BC42F933D6C0947CF62C01E969499D38AE062E6702D8D65E84F85719"
+    },
+    {
+      "Path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "Sha256": "FD2CA72BA8EBF21878A777E2CA69E4B986AB0D2EB08C359EB8B8730ECE86D626"
+    }
+  ],
+  "StagedPaths": [],
+  "StopwatchFrequency": 10000000
+}

@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Include="..\NovaCore.Simulation.Tests\ContactGenerationFixture.cs" Link="ContactGenerationFixture.cs" />
     <Compile Include="..\NovaCore.Simulation.Tests\OrdinaryAllocationMeasurement.cs" Link="OrdinaryAllocationMeasurement.cs" />
+    <Compile Include="..\NovaCore.Simulation.Tests\PostImpactCoverageCost.cs" Link="PostImpactCoverageCost.cs" />
     <Compile Include="..\NovaCore.Simulation.Tests\ContactKinematicsOracle.cs" Link="ContactKinematicsOracle.cs" />
     <Compile Include="..\NovaCore.Simulation.Tests\CertifiedResponseOracle.cs" Link="CertifiedResponseOracle.cs" />
     <Compile Include="..\NovaCore.Simulation.Tests\PrivatePostImpactStateTests.cs" Link="PrivatePostImpactStateTests.cs" />

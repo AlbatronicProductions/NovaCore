@@ -1,0 +1,41 @@
+{
+  "Baseline": "dc274639f670d122764bb0e8f3d0c95ae201c7a4",
+  "Branch": "codex/postimpact-feature-coverage",
+  "ChangedExistingFiles": [
+    "tests/NovaCore.Graphics.Tests/Program.cs",
+    "tests/NovaCore.Simulation.Tests/Program.cs"
+  ],
+  "AllExistingProductionUnchanged": true,
+  "TagsUnchanged": true,
+  "Candidate": [
+    {
+      "Path": "src/NovaCore.Simulation/Spacecraft/Contact/FloridaPostImpactMotion.cs",
+      "Sha256": "6320D932F27FF057C6AB26B3951493E3586DACA6B2BADF2CE7737C8602BED0AC"
+    },
+    {
+      "Path": "src/NovaCore.Simulation/Spacecraft/Contact/PostImpactCoverageProvider.cs",
+      "Sha256": "BA459824C14AD883DE44154E9C00699EE04714EE2D532A4A4998200A9D88448B"
+    },
+    {
+      "Path": "src/NovaCore.Simulation/Spacecraft/Contact/PostImpactCoverageSearch.cs",
+      "Sha256": "78519834604A7F6CABC72420BF2B64FB4665B4E646557DC5254E724E0A95ED36"
+    },
+    {
+      "Path": "tests/NovaCore.Simulation.Tests/PostImpactCoverageTests.cs",
+      "Sha256": "2954B66AC59C9AF4D565E6620DF0253F85829DD5279091346DE94AF0FE289968"
+    },
+    {
+      "Path": "tests/NovaCore.Graphics.Tests/PostImpactCoverageProductionTests.cs",
+      "Sha256": "C274BA246751A64C69EBE0B70B9B3169F1448CCEB5F603AD0FFF3E349CBB3131"
+    },
+    {
+      "Path": "tests/NovaCore.Graphics.Tests/Program.cs",
+      "Sha256": "2EDC3D57A1D56ECB98E6A2ECE0B24383585532A9F4A3249307BB98E040C29626"
+    },
+    {
+      "Path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "Sha256": "BE354FAF9D8F72231A6025214DDEB7352056F5DE19A71B2D94932D5EA3A0CAB7"
+    }
+  ],
+  "Staged": []
+}

@@ -1,0 +1,89 @@
+{
+  "kind": "diagnostic-only root-anchored scalar inclusion using exported checked trajectory bounds",
+  "theorem": "g(alpha+s)=s*rho+integral_0^s (s-u)*gSecond(alpha+u) du; rho=norm(Up)*NormalResidual; global A bounds gSecond for all u through T",
+  "normUp": {
+    "Lower": 0.9999999999999997,
+    "Upper": 1.0000000000000002
+  },
+  "rootSlope": {
+    "Lower": 3.4947754700991604E-12,
+    "Upper": 1.5620808881757112E-06
+  },
+  "globalSecond": {
+    "Lower": 0.01025540443882647,
+    "Upper": 0.0713826059570931
+  },
+  "domain": "Whole interval grading enclosure fails; curvature concerns the globally defined algebraic plane extension. Existing current-leaf grading checks must remain mandatory.",
+  "witnesses": [
+    {
+      "sigma": {
+        "Lower": 0.03125,
+        "Upper": 0.0312502384185791
+      },
+      "elapsed": {
+        "Lower": 0.015519857406616197,
+        "Upper": 0.015520214234129543
+      },
+      "rawGap": {
+        "Lower": -0.02125374507158995,
+        "Upper": 0.02126941923052073
+      },
+      "anchoredGap": {
+        "Lower": 1.2350890432978456E-06,
+        "Upper": 8.621459597641138E-06
+      },
+      "anchoredFirst": {
+        "Lower": 0.000159162418032541,
+        "Upper": 0.001109435417932713
+      },
+      "positive": true
+    },
+    {
+      "sigma": {
+        "Lower": 0.03125,
+        "Upper": 0.03125011920928955
+      },
+      "elapsed": {
+        "Lower": 0.015519857406616197,
+        "Upper": 0.015520155029662436
+      },
+      "rawGap": {
+        "Lower": -0.021096089854836467,
+        "Upper": 0.021111765876412395
+      },
+      "anchoredGap": {
+        "Lower": 1.2350890432978456E-06,
+        "Upper": 8.621393914233535E-06
+      },
+      "anchoredFirst": {
+        "Lower": 0.000159162418032541,
+        "Upper": 0.0011094311917635665
+      },
+      "positive": true
+    },
+    {
+      "sigma": {
+        "Lower": 0.03125,
+        "Upper": 0.031250059604644775
+      },
+      "elapsed": {
+        "Lower": 0.015519857406616197,
+        "Upper": 0.015520125427428883
+      },
+      "rawGap": {
+        "Lower": -0.021017260849475864,
+        "Upper": 0.021032934077084068
+      },
+      "anchoredGap": {
+        "Lower": 1.2350890432978456E-06,
+        "Upper": 8.621361072623561E-06
+      },
+      "anchoredFirst": {
+        "Lower": 0.000159162418032541,
+        "Upper": 0.0011094290786789933
+      },
+      "positive": true
+    }
+  ],
+  "limitation": "No model rerun, search rerun or production modification; full corrected search usefulness not measured by this script."
+}

@@ -15,6 +15,8 @@ using NovaCore.Core;
 using NovaCore.Core.ReferenceFrames;
 using System.Diagnostics;
 
+if (args.Contains("--postimpact-coverage-only", StringComparer.Ordinal)) { PostImpactCoverageTests.Run(); return; }
+if (args.Contains("--postimpact-coverage-cost", StringComparer.Ordinal)) { PostImpactCoverageTests.Cost(); return; }
 if (args.Contains("--private-propagation-only", StringComparer.Ordinal)) { PrivateCanonicalPropagationTests.Run(); return; }
 if (args.Contains("--private-postimpact-state-only", StringComparer.Ordinal)) { PrivatePostImpactStateTests.Run(); return; }
 if (args.Contains("--certified-postimpact-velocity-only", StringComparer.Ordinal)) { CertifiedPostImpactVelocityTests.Run(); return; }
@@ -100,6 +102,7 @@ var tests = new (string Name, Action Test)[]
     ("Certified final post-impact velocity states", CertifiedPostImpactVelocityTests.Run),
     ("Private root-time post-impact state", PrivatePostImpactStateTests.Run),
     ("Paired private canonical propagation", PrivateCanonicalPropagationTests.Run),
+    ("Post-impact singleton terrain coverage", PostImpactCoverageTests.Run),
 };
 foreach (var (name, test) in tests) { test(); Console.WriteLine($"PASS {name}"); }
 

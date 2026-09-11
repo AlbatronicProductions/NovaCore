@@ -1,0 +1,117 @@
+using System.Reflection;
+using System.Text.Json;
+using NovaCore.Core;
+using NovaCore.Core.Surface;
+using NovaCore.Simulation.Celestial;
+using NovaCore.Simulation.Spacecraft.Contact;
+using Case = FloridaContactProductionTests.Case;
+using Owner = NovaCore.Simulation.Spacecraft.Contact.FloridaContactProvider.Proof.PostImpactCoverageProvider;
+using Stage = NovaCore.Simulation.Spacecraft.Contact.FloridaContactProvider.Proof.PrivateCanonicalState;
+
+internal static class CoverageCausalDiagnostic
+{
+    private const string DirectoryPath = @"E:\NovaCore\.codex\coverage-causal";
+    private static readonly JsonSerializerOptions Options=new(){WriteIndented=true};
+    private static object Field(object value,string name) => value.GetType().GetField(name,BindingFlags.NonPublic|BindingFlags.Instance)!.GetValue(value)!;
+    private readonly record struct Observed(FloridaBound Sigma,CoverageGap Gap,CoverageTrajectory Trajectory,CoverageFailure Failure);
+    private readonly struct Trace(Owner owner,Stage stage,FloridaContactUse use,List<Observed> observations):IPostImpactCoverageGap
+    {
+        public CoverageFailure Enclose(FloridaBound sigma,out CoverageGap gap)
+        {
+            owner.Enclose(stage,use,sigma,out var t,out gap,out var f);
+            observations.Add(new(sigma,gap,t,f));return f;
+        }
+    }
+    private readonly struct Anchored(FloridaContactMotion motion,PrivatePostImpactStateValues source,Double3 feature,FacilitySupportRegion region,FloridaBound rho):IPostImpactCoverageGap
+    {
+        public CoverageFailure Enclose(FloridaBound sigma,out CoverageGap result)
+        {
+            var raw=new FloridaPostImpactGap(motion,source,new(1,feature,ContactFeatureRole.LandingTip),region);
+            var failure=raw.Enclose(sigma,out var t,out result);if(failure!=CoverageFailure.None)return failure;
+            failure=motion.PostImpact(source,feature,new(0,sigma.Upper),out var prefix);if(failure!=CoverageFailure.None)return failure;
+            var second=FloridaVector.Dot(FloridaVector.From(region.Up),prefix.BodyAcceleration);
+            var speed=rho*FloridaVector.From(region.Up).Norm;
+            result=new(t.Elapsed*(speed+second*t.Elapsed/2),speed+second*t.Elapsed,result.Second);
+            return result.IsFinite?CoverageFailure.None:CoverageFailure.NonFinite;
+        }
+    }
+    internal static void Capture(bool force,Case c,FloridaContactProvider provider,PrivatePostImpactStateValues source,
+        PrivateCanonicalStateValues continuation,Owner owner,Stage stage,CertifiedPostImpactVelocityValues final)
+    {
+        var motion=(FloridaContactMotion)Field(provider,"motion");
+        var region=(FacilitySupportRegion)Field(provider,"region");
+        c.System.TryGetPhysicalProperties(SolarSystemBodyIds.Sun,out var sun);
+        var name=force?"force":"coast";
+        var data=new{force,source.FrozenSourceTranslation,source.FrozenSourceRotation,source.Properties,source.InitialLinearVelocityRoot,
+            source.InitialAngularVelocityBody,source.PoseRootEnclosure,source.SourceStart,source.SourceEnd,final.NormalResidual,
+            feature=c.Geometry.GetFeature(0).OffsetFromComMetres,region,seed=Field(motion,"seed"),orientation=Field(motion,"orientation"),
+            craftAcceleration=Field(motion,"craftAcceleration"),earthAcceleration=Field(motion,"earthAcceleration"),earthJerk=Field(motion,"earthJerk"),
+            earthSnap=Field(motion,"earthSnap"),sun.GravitationalParameter,source.TerrainAuthority,continuation.RemainderSeconds};
+        File.WriteAllText(Path.Combine(DirectoryPath,name+"-input.json"),JsonSerializer.Serialize(data,Options));
+        var observations=new List<Observed>();var trace=new Trace(owner,stage,c.Use,observations);
+        var result=PostImpactCoverageSearch.Evaluate(in trace);
+        var direct=owner.Evaluate(stage,c.Use,out _,out var original);
+        if(result!=original)throw new InvalidOperationException("Diagnostic wrapper changed proof");
+        var selected=new List<object>();
+        foreach(var sigma in new[]{new FloridaBound(0,0),new(0,Math.ScaleB(1,-24)),new(0,1d/32),new(0,1)})
+            selected.Add(Inspect(sigma,motion,source,region,c.Geometry.GetFeature(0).OffsetFromComMetres));
+        foreach(var item in observations.Where(x=>x.Sigma.Upper>x.Sigma.Lower).TakeLast(3))
+            selected.Add(Inspect(item.Sigma,motion,source,region,c.Geometry.GetFeature(0).OffsetFromComMetres));
+        var anchored=new Anchored(motion,source,c.Geometry.GetFeature(0).OffsetFromComMetres,region,final.NormalResidual);
+        var anchoredResult=PostImpactCoverageSearch.Evaluate(in anchored);
+        File.WriteAllText(Path.Combine(DirectoryPath,name+"-intervals.json"),JsonSerializer.Serialize(new{result,observations,selected,anchoredDiagnosticOnly=anchoredResult},Options));
+        Console.WriteLine($"CAUSAL_EXPORT {name} status={direct} reason={result.Failure} visits={result.Visits} depth={result.MaximumDepth} prefix={result.ClearPrefix:R} calls={observations.Count} rho={final.NormalResidual}");
+    }
+    private static object Inspect(FloridaBound sigma,FloridaContactMotion motion,PrivatePostImpactStateValues source,FacilitySupportRegion region,Double3 feature)
+    {
+        var model=new FloridaPostImpactGap(motion,source,new(1,feature,ContactFeatureRole.LandingTip),region);
+        var failure=model.Enclose(sigma,out var trajectory,out var gap);
+        var up=FloridaVector.From(region.Up);var east=FloridaVector.From(region.East);var north=FloridaVector.From(region.North);
+        var p=trajectory.BodyPosition;var projection=FloridaVector.Dot(up,p);var k=up.NormSquared;FloridaBound radius=region.RadiusMetres;
+        var outerE=(FloridaBound)region.InnerEastMetres+region.BlendMetres;var outerN=(FloridaBound)region.InnerNorthMetres+region.BlendMetres;
+        var guard=1-(outerE.Square()+outerN.Square())/radius.Square();var perpendicular=p-up*(projection/k);
+        var clampLeft=projection.Square()*(k-guard.Square());var clampRight=guard.Square()*k*perpendicular.NormSquared;
+        var midpoint=source.PoseRootEnclosure.Lower+(source.PoseRootEnclosure.Upper-source.PoseRootEnclosure.Lower)*.5;
+        var central=new FloridaPostImpactGap(motion,source with{PoseRootEnclosure=FloridaBound.Point(midpoint)},new(1,feature,ContactFeatureRole.LandingTip),region);
+        central.Enclose(sigma,out _,out var centralGap);
+        var components=Components(motion,source,region,feature,trajectory);
+        return new{sigma,failure=failure.ToString(),trajectory,gap,centralAlphaDiagnosticOnly=centralGap,components,
+            grading=new{East=FloridaVector.Dot(east,p),North=FloridaVector.Dot(north,p),Up=projection,positiveProjection=projection.Lower>0,
+                eastLeft=(radius*FloridaVector.Dot(east,p).Magnitude).Upper,eastRight=(region.InnerEastMetres*projection).Lower,
+                northLeft=(radius*FloridaVector.Dot(north,p).Magnitude).Upper,northRight=(region.InnerNorthMetres*projection).Lower,
+                guard,clampLeft,clampRight,fullWeight=FloridaContactMotion.CoverageDomain(p,region),
+                finalClampLeft=(radius+region.PlaneAltitudeMetres).Lower,finalClampRight=(radius*k.Sqrt()).Upper}};
+    }
+    private static object Components(FloridaContactMotion motion,PrivatePostImpactStateValues source,FacilitySupportRegion region,Double3 feature,CoverageTrajectory value)
+    {
+        var seed=(CartesianState)Field(motion,"seed");var orientation=(EarthContactOrientation)Field(motion,"orientation");
+        var ca=(FloridaVector)Field(motion,"craftAcceleration");var ea=(FloridaVector)Field(motion,"earthAcceleration");
+        var ej=(FloridaVector)Field(motion,"earthJerk");var snap=(FloridaBound)Field(motion,"earthSnap");
+        var t=value.Time;var s=value.Elapsed;var t0=FloridaBound.Integer(source.FrozenSourceTranslation.Epoch.Ticks)/1_000_000;var dt=t-t0;
+        var v0=FloridaVector.From(source.FrozenSourceTranslation.VelocityRoot);var plus=FloridaVector.From(source.InitialLinearVelocityRoot);
+        var com=FloridaVector.From(source.FrozenSourceTranslation.PositionRoot)+v0*dt+ca*dt.Square()/2+(plus-v0-ca*dt)*s+ca*s.Square();
+        var earth=FloridaVector.From(seed.Position)+FloridaVector.From(seed.Velocity)*t+ea*t.Square()/2+ej*(t*t*t/6);
+        var remainder=(snap*FloridaBound.Pow(FloridaBound.Point(t.Magnitude),4)/24).Upper;earth=earth.Expand(remainder);
+        var lever=FloridaVector.From(feature);var rot=value.Rotation;var w=rot.Spin;var inertia=source.FrozenSourceRotation.PrincipalInertia;
+        var dw=new FloridaVector(((FloridaBound)inertia.Y-inertia.Z)*w.Y*w.Z/inertia.X,
+            ((FloridaBound)inertia.Z-inertia.X)*w.Z*w.X/inertia.Y,((FloridaBound)inertia.X-inertia.Y)*w.X*w.Y/inertia.Z);
+        var rootLever=FloridaContactMotion.RotateFlow(rot.Attitude,lever);
+        var rotationV=FloridaContactMotion.RotateFlow(rot.Attitude,FloridaVector.Cross(w,lever));
+        var angularA=FloridaContactMotion.RotateFlow(rot.Attitude,FloridaVector.Cross(dw,lever));
+        var centripetalA=FloridaContactMotion.RotateFlow(rot.Attitude,FloridaVector.Cross(w,FloridaVector.Cross(w,lever)));
+        FloridaContactMotion.BodyFixedJet(orientation,t,value.RelativePosition,default,default,out _,out var earthRotationV,out _);
+        FloridaContactMotion.BodyFixedJet(orientation,t,value.RelativePosition,value.RelativeVelocity,default,out _,out _,out var earthRotationA);
+        var up=FloridaVector.From(region.Up);
+        FloridaVector Body(FloridaVector vector){FloridaContactMotion.BodyFixedJet(orientation,t,vector,default,default,out var body,out _,out _);return body;}
+        FloridaBound Project(FloridaVector vector)=>FloridaVector.Dot(up,Body(vector));
+        var naive=Body(com-earth+rootLever);
+        return new{absoluteCom=com,absoluteEarth=earth,earthRemainder=remainder,rootLever,rotationV,angularA,centripetalA,
+            earthBasisX=Body(new(1,0,0)),earthBasisY=Body(new(0,1,0)),earthBasisZ=Body(new(0,0,1)),
+            naiveIndependentGap=FloridaVector.Dot(up,naive)-((FloridaBound)region.RadiusMetres+region.PlaneAltitudeMetres),
+            COMDerivative=Project(plus+ca*s),featureDerivative=Project(rotationV),
+            EarthTranslationDerivative=Project(-FloridaVector.From(seed.Velocity)-ea*t-ej*t.Square()/2),
+            EarthRotationDerivative=FloridaVector.Dot(up,earthRotationV),translationalAcceleration=Project(ca),
+            angularAcceleration=Project(angularA),centripetalAcceleration=Project(centripetalA),
+            EarthTranslationAcceleration=Project(-ea-ej*t),EarthRotationAcceleration=FloridaVector.Dot(up,earthRotationA)};
+    }
+}

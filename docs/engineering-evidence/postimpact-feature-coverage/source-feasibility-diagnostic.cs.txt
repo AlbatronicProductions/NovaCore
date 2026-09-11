@@ -1,0 +1,143 @@
+using System.Reflection;
+using System.Text.Json;
+using NovaCore.Core;
+using NovaCore.Core.ReferenceFrames;
+using NovaCore.Core.Surface;
+using NovaCore.Graphics;
+using NovaCore.Simulation.Celestial;
+using NovaCore.Simulation.Clock;
+using NovaCore.Simulation.Time;
+using NovaCore.Simulation.Timeline;
+using NovaCore.Simulation.Transactions;
+using NovaCore.Simulation.Spacecraft;
+using NovaCore.Simulation.Spacecraft.Contact;
+using NovaCore.Simulation.Spacecraft.Rotation;
+using NovaCore.Simulation.Spacecraft.Rotation.Transactions;
+using static ContactGenerationFixture;
+using Owner = NovaCore.Simulation.Spacecraft.Contact.FloridaContactProvider.Proof.PostImpactCoverageProvider;
+
+internal static class SourceFeasibilityDiagnostic
+{
+    private static readonly FloridaKinematicsRequest Kinematics=new(1e-5,1e-8,1e-5,1e-12,24);
+    private static readonly CertifiedResponseRequest Response=new(1e-6,1e-6,1e-6,3e-6);
+    private static readonly CertifiedPreImpactVelocityRequest Preimpact=new(1e-5,1e-4);
+    private static readonly PrivatePostImpactPoseRequest Pose=new(.5);
+    private static readonly PrivatePropagationRequest Request=new(.002,2e-6,2e-6,4e-6);
+    private static void Require(bool value,string contract)=>ContactGenerationFixture.Check(value,"positive beta "+contract);
+    private sealed class Fixture
+    {
+        internal readonly PlanetaryPhysicalSurfacePointQuery Query;
+        internal readonly CelestialSystemDefinition System=SolAnalyticalDefinition.Instance;
+        internal readonly ReferenceFrameGraph Graph=ContactGenerationFixture.Graph();
+        internal readonly ReferenceFrameEvaluation[] Evals,Staging;
+        internal readonly FrameTransform[] Roots,StagingRoots;
+        internal readonly SimulationTimeline Timeline=new(8);
+        internal readonly SimulationClock Clock;
+        internal readonly SimulationTransactionEngine Engine;
+        internal readonly SpacecraftContactGeometry Geometry;
+        internal readonly SimulationInstant Start=new(0),End=new(1000000);
+        internal FloridaContactUse Use=>new(Engine,Geometry,System,Graph,Query);
+        internal Fixture(PlanetaryPhysicalSurfacePointQuery query,int proposal)
+        {
+            Query=query;
+            Evals=new ReferenceFrameEvaluation[System.Count];Staging=new ReferenceFrameEvaluation[System.Count];
+            Roots=new FrameTransform[System.Count];StagingRoots=new FrameTransform[System.Count];
+            Require(EarthPhysicalEventEvaluator.TryEvaluate(System,Graph,PhysicalEventEpoch.FromCanonical(Start),Evals,Roots,Staging,StagingRoots,out var earth)==EarthPhysicalEventStatus.Ready,"real Earth");
+            var site=FloridaFacilitySupport.Region;var sample=query.Query(6,site.Up);Require(sample.IsReady,"real terrain");
+            var normal=earth.BodyFixedToRoot.LocalDirectionToParent(site.Up);
+            var tangent=earth.BodyFixedToRoot.LocalDirectionToParent(site.East);
+            var scale=proposal==1?50d:100d; var normalOffset=proposal==1?2.5:10; var height=proposal==1?25:100; var speed=proposal==1?50:200; var inertia=proposal==1?20000:80000;
+            var lever=tangent*scale-normal*normalOffset;
+            var position=earth.BodyFixedToRoot.LocalToParent(sample.BodyFixedPositionMetres+site.Up*height)-lever;
+            var velocity=earth.VelocityRoot+Double3.Cross(earth.AngularVelocityRoot,earth.BodyFixedToRoot.LocalDirectionToParent(sample.BodyFixedPositionMetres))-normal*speed;
+            var rotation=new SpacecraftRigidBodyRotationState(Craft,Start,DoubleQuaternion.Identity,Double3.Zero,new(inertia,inertia,inertia),Double3.Zero,RigidBodyRotationModel.ConstantBodyTorqueV1);
+            Require(SpacecraftStateStore.TryCreateTranslating([new(Craft,new(1),new(72),"Positive beta authored point")],[rotation],[new(8)],
+                [new(Craft,new(1),Start,position,velocity,Double3.Zero)],Graph,out var store,out _),"spacecraft state");
+            Clock=new(Start,Timeline);Engine=new(Clock,new SimulationState(spacecraft:store),8);
+            Require(SpacecraftContactGeometry.TryCreate(Craft,502,1,[new(1,lever,ContactFeatureRole.LandingTip)],out var geometry),"authored geometry");
+            Geometry=geometry!;
+            Require(Clock.AdvanceByHostDuration(new(1000)).Reason==SimulationHostAdvanceStopReason.Accepted,"pending debt");
+        }
+    }
+    private static PlanetaryPhysicalSurfacePointQuery Acquire()
+    {
+        var repository=GraphicsTestHarness.RepositoryPath();
+        Require(EarthElevationDataset.TryLoad(Path.Combine(repository,"assets","earth","runtime"),out var error),error);
+        Require(TerrainAssetCache.TryResolveRequired(repository,TerrainAssetCache.ProductionEarthLocalAssetId,null,out _,out var path,out error),error);
+        Require(EarthLocalTerrainElevationDataset.TryLoad(path,out error),error);
+        Require(PlanetaryPhysicalSurfacePointQuery.TryAcquire(6,repository,out var query)==PhysicalSurfaceQueryStatus.Ready,"acquire authority");
+        return query!;
+    }
+
+    internal static void Proposal1()=>Diagnose(1);
+    internal static void Proposal3()=>Diagnose(3);
+    private static object Field(object v,string name)=>v.GetType().GetField(name,BindingFlags.Instance|BindingFlags.NonPublic)!.GetValue(v)!;
+    private static void Diagnose(int proposal)
+    {
+        var c=new Fixture(Acquire(),proposal);
+        var admitted=FloridaContactProvider.TryCreate(c.Engine,c.Engine.State.Revision,c.Start,c.End,c.Geometry,c.System,c.Graph,c.Query,c.Query.Authority,
+            c.Evals,c.Roots,c.Staging,c.StagingRoots,out var provider,out var admission);
+        Require(provider is not null,"existing source admission "+admission);
+        var actual=provider!.Evaluate(c.Engine,c.Geometry,c.System,c.Graph,c.Query);
+        var motion=(FloridaContactMotion)Field(provider,"motion");var region=FloridaFacilitySupport.Region;
+        var whole=Detail(motion,region,new(0,1));var first=Detail(motion,region,FloridaBound.Point(0));var last=Detail(motion,region,FloridaBound.Point(1));
+        object? refinement=null;var samples=new List<object>();
+        if(proposal==1)
+        {
+            var refined=actual.Proof.Refine(1e-7,24,c.Use);
+            var bracket=actual.Proof.RootEnclosure;var count=0;string stop="width met";
+            while((FloridaBound.Point(bracket.Upper)-bracket.Lower).Upper>1e-7 && count<=24)
+            {
+                if(count==24){stop="budget";break;}
+                var mid=bracket.Lower+(bracket.Upper-bracket.Lower)*.5;
+                var okay=motion.ProveDomain(FloridaBound.Point(mid),region,out var gap,out var slope);
+                var narrowed=bracket;bool progress=true;
+                if(mid<=bracket.Lower||mid>=bracket.Upper||!okay)progress=false;
+                else if(gap.Lower>0)narrowed=new(mid,bracket.Upper);
+                else if(gap.Upper<0)narrowed=new(bracket.Lower,mid);
+                else progress=false;
+                samples.Add(new{step=count+1,bracket,width=(FloridaBound.Point(bracket.Upper)-bracket.Lower).Upper,mid,okay,gap,slope,progress,narrowed,
+                    decisive=progress?null:Detail(motion,region,FloridaBound.Point(mid))});
+                if(!progress){stop="midpoint sign/domain refusal";break;}bracket=narrowed;count++;
+            }
+            refinement=new{status=refined.Status.ToString(),failure=refined.Failure.ToString(),requestedWidth=1e-7,budget=24,achievedBracket=bracket,
+                achievedWidth=(FloridaBound.Point(bracket.Upper)-bracket.Lower).Upper,successfulSteps=count,stop,recurrence="literal source midpoint decision, diagnostic only; no constructed Proof",samples};
+        }
+        c.Engine.State.Spacecraft.TryGetTranslation(Craft,out var linear,out var properties);c.Engine.State.Spacecraft.TryGetRigidBody(Craft,out var rotation);
+        var data=new{proposal,admissionStatus=admitted.ToString(),admissionFailure=admission.ToString(),providerPresent=true,
+            result=actual.Status.ToString(),failure=actual.Failure.ToString(),actual.Proof.RootEnclosure,actual.Proof.RefinementCount,
+            parameters=new{linear,properties,rotation,feature=c.Geometry.GetFeature(0),region,authority=c.Query.Authority},
+            whole,first,last,refinement,coverageSearchExecuted=false};
+        Directory.CreateDirectory(@"E:\NovaCore\.codex\source-feasibility");
+        File.WriteAllText($@"E:\NovaCore\.codex\source-feasibility\proposal{proposal}.json",JsonSerializer.Serialize(data,new JsonSerializerOptions{WriteIndented=true}));
+        Console.WriteLine(JsonSerializer.Serialize(new{proposal,result=actual.Status.ToString(),failure=actual.Failure.ToString(),refinement,
+            whole,first,last}));
+    }
+    private static object Detail(FloridaContactMotion motion,FacilitySupportRegion region,FloridaBound time)
+    {
+        var evaluated=motion.Evaluate(time,out var q,out var dq);
+        var domain=motion.ProveDomain(time,region,out var gap,out var slope);
+        var up=FloridaVector.From(region.Up);var east=FloridaVector.From(region.East);var north=FloridaVector.From(region.North);
+        var projection=FloridaVector.Dot(up,q);var k=up.NormSquared;FloridaBound radius=region.RadiusMetres;
+        var eastCoordinate=FloridaVector.Dot(east,q);var northCoordinate=FloridaVector.Dot(north,q);
+        var eastLeft=radius*eastCoordinate.Magnitude;var eastRight=region.InnerEastMetres*projection;
+        var northLeft=radius*northCoordinate.Magnitude;var northRight=region.InnerNorthMetres*projection;
+        var outerE=(FloridaBound)region.InnerEastMetres+region.BlendMetres;var outerN=(FloridaBound)region.InnerNorthMetres+region.BlendMetres;
+        var guard=1-(outerE.Square()+outerN.Square())/radius.Square();var perpendicular=q-up*(projection/k);
+        var capLeft=projection.Square()*(k-guard.Square());var capRight=guard.Square()*k*perpendicular.NormSquared;
+        var clampLeft=radius+region.PlaneAltitudeMetres;var clampRight=radius*k.Sqrt();
+        var centerTime=time.Lower+(time.Upper-time.Lower)*.5;FloridaBound t=centerTime;
+        var seed=(CartesianState)Field(motion,"seed");var linear=(NovaCore.Simulation.Spacecraft.Translation.SpacecraftTranslationState)Field(motion,"linear");
+        var offset=(FloridaVector)Field(motion,"offset");var acceleration=(FloridaVector)Field(motion,"craftAcceleration");
+        var earthA=(FloridaVector)Field(motion,"earthAcceleration");var earthJ=(FloridaVector)Field(motion,"earthJerk");
+        var snap=(FloridaBound)Field(motion,"earthSnap");var dt=t-FloridaBound.Integer(linear.Epoch.Ticks)/SimulationInstant.TicksPerSecond;
+        var relative=FloridaVector.From(linear.PositionRoot)-FloridaVector.From(seed.Position)+offset+FloridaVector.From(linear.VelocityRoot)*dt+
+            acceleration*(dt.Square()/2)-FloridaVector.From(seed.Velocity)*t-earthA*(t.Square()/2)-earthJ*(t*t*t/6);
+        var earthRemainder=snap*FloridaBound.Pow(FloridaBound.Point(Math.Abs(centerTime)),4)/24;
+        return new{time,evaluated,domain,gap,slope,q,dq,projection,eastCoordinate,northCoordinate,
+            guards=new{positiveProjection=projection.Lower>0,eastLeft,eastRight,eastPass=eastLeft.Upper<=eastRight.Lower,
+                northLeft,northRight,northPass=northLeft.Upper<=northRight.Lower,guard,capLeft,capRight,capPass=capLeft.Lower>=capRight.Upper,
+                clampLeft,clampRight,clampPass=clampLeft.Lower>clampRight.Upper},
+            center=new{centerTime,relativeBeforeEarthRemainder=relative,earthRemainder,offset}};
+    }
+}

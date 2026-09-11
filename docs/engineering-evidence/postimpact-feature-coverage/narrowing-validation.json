@@ -1,0 +1,1061 @@
+{
+  "baseline": "dc274639f670d122764bb0e8f3d0c95ae201c7a4",
+  "branch": "codex/postimpact-feature-coverage",
+  "contract": "EventFreeThroughTarget or conservative refusal; no next-root authority",
+  "unbanked": true,
+  "builds": [
+    {
+      "configuration": "Debug",
+      "exit": 0,
+      "summary": "Build succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:02.87"
+    },
+    {
+      "configuration": "Release",
+      "exit": 0,
+      "summary": "Build succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:03.35"
+    }
+  ],
+  "implementationCompileCorrection": "Initial new VisitExhaustion test used absent FloridaBound.Width; corrected to Upper-Lower before validation. No runtime gate retries.",
+  "focused": [
+    {
+      "c": "Debug",
+      "n": 1,
+      "exit": 0,
+      "identical": true
+    },
+    {
+      "c": "Debug",
+      "n": 2,
+      "exit": 0,
+      "identical": true
+    },
+    {
+      "c": "Debug",
+      "n": 3,
+      "exit": 0,
+      "identical": true
+    },
+    {
+      "c": "Release",
+      "n": 1,
+      "exit": 0,
+      "identical": true
+    },
+    {
+      "c": "Release",
+      "n": 2,
+      "exit": 0,
+      "identical": true
+    },
+    {
+      "c": "Release",
+      "n": 3,
+      "exit": 0,
+      "identical": true
+    }
+  ],
+  "focusedWitness": [
+    "COVERAGE_PROOF Linear: status=EventFreeThroughTarget failure=None prefixBits=3FF0000000000000 visits=1 depth=0 evaluations=1",
+    "COVERAGE_PROOF OutwardAcceleration: status=EventFreeThroughTarget failure=None prefixBits=3FF0000000000000 visits=1 depth=0 evaluations=1",
+    "COVERAGE_PROOF InwardAcceleration: status=Unresolved failure=DepartureUnproved prefixBits=0000000000000000 visits=25 depth=24 evaluations=25",
+    "COVERAGE_PROOF PersistentContact: status=Unresolved failure=DepartureUnproved prefixBits=0000000000000000 visits=25 depth=24 evaluations=25",
+    "COVERAGE_PROOF quadratic reacquisition: status=Unresolved failure=StrictCrossingDetected prefixBits=3FB0000000000000 visits=8 depth=5 evaluations=10",
+    "COVERAGE_PROOF two roots with clear final endpoint: status=Unresolved failure=StrictCrossingDetected prefixBits=3FC8000000000000 visits=9 depth=4 evaluations=13",
+    "COVERAGE_PROOF boundary-adjacent root: status=Unresolved failure=DepartureUnproved prefixBits=0000000000000000 visits=25 depth=24 evaluations=25",
+    "COVERAGE_PROOF boundary-adjacent root: status=Unresolved failure=StrictCrossingDetected prefixBits=3FE0000000000000 visits=5 depth=2 evaluations=7",
+    "COVERAGE_PROOF exact target root: status=Unresolved failure=RootUnresolved prefixBits=3FEFFFFFE0000000 visits=51 depth=24 evaluations=99",
+    "COVERAGE_PROOF double root grazing: status=Unresolved failure=RootUnresolved prefixBits=3FD7AE1440000000 visits=43 depth=24 evaluations=89",
+    "COVERAGE_PROOF close roots with context uncertainty: status=Unresolved failure=RootUnresolved prefixBits=3FD7AE0D80000000 visits=42 depth=24 evaluations=88",
+    "COVERAGE_PROOF separating COM rotating lever: status=Unresolved failure=StrictCrossingDetected prefixBits=3FC0000000000000 visits=9 depth=5 evaluations=13",
+    "COVERAGE_PROOF inelastic principal-axis reacquisition: status=Unresolved failure=StrictCrossingDetected prefixBits=3FD2000000000000 visits=58 depth=11 evaluations=152",
+    "COVERAGE_PROOF whole-interval grading escape: status=Unresolved failure=GradingDomain prefixBits=3FD8000000000000 visits=27 depth=24 evaluations=27",
+    "COVERAGE_PROOF unresolved trajectory context: status=Unresolved failure=DepartureUnproved prefixBits=0000000000000000 visits=25 depth=24 evaluations=25",
+    "COVERAGE_PROOF visit-limited contact search: status=Unresolved failure=WorkLimit prefixBits=3FDFC00000000000 visits=255 depth=8 evaluations=495",
+    "ROOT_ANCHOR exact-polynomial/positive-negative-departure/intersection/contradiction PASS",
+    "POSTIMPACT_COVERAGE_ANALYTICAL departure/clear/crossing-refusal/interior-contact/boundary/grazing/rotation/domain/work/replay PASS"
+  ],
+  "simulation": [
+    {
+      "configuration": "Debug",
+      "exit": 0,
+      "expectedGroups": 47,
+      "runnerStopsOnFailure": true
+    },
+    {
+      "configuration": "Release",
+      "exit": 0,
+      "expectedGroups": 47,
+      "runnerStopsOnFailure": true
+    }
+  ],
+  "references": [
+    {
+      "configuration": "Debug",
+      "suite": "ReferenceFrames",
+      "exit": 0,
+      "groups": 11
+    },
+    {
+      "configuration": "Debug",
+      "suite": "Precision",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "suite": "ReferenceFrames",
+      "exit": 0,
+      "groups": 11
+    },
+    {
+      "configuration": "Release",
+      "suite": "Precision",
+      "exit": 0
+    }
+  ],
+  "predecessors": [
+    {
+      "c": "Debug",
+      "flag": "translation",
+      "exit": 0
+    },
+    {
+      "c": "Debug",
+      "flag": "contact",
+      "exit": 0
+    },
+    {
+      "c": "Debug",
+      "flag": "contact-response",
+      "exit": 0
+    },
+    {
+      "c": "Debug",
+      "flag": "isolated-contact",
+      "exit": 0
+    },
+    {
+      "c": "Debug",
+      "flag": "physical-event-epoch",
+      "exit": 0
+    },
+    {
+      "c": "Debug",
+      "flag": "exact-event-motion",
+      "exit": 0
+    },
+    {
+      "c": "Debug",
+      "flag": "earth-event",
+      "exit": 0
+    },
+    {
+      "c": "Debug",
+      "flag": "florida-proof",
+      "exit": 0
+    },
+    {
+      "c": "Debug",
+      "flag": "root-kinematics",
+      "exit": 0
+    },
+    {
+      "c": "Debug",
+      "flag": "certified-response",
+      "exit": 0
+    },
+    {
+      "c": "Debug",
+      "flag": "certified-preimpact-velocity",
+      "exit": 0
+    },
+    {
+      "c": "Debug",
+      "flag": "certified-postimpact-velocity",
+      "exit": 0
+    },
+    {
+      "c": "Debug",
+      "flag": "private-postimpact-state",
+      "exit": 0
+    },
+    {
+      "c": "Debug",
+      "flag": "private-propagation",
+      "exit": 0
+    },
+    {
+      "c": "Release",
+      "flag": "translation",
+      "exit": 0
+    },
+    {
+      "c": "Release",
+      "flag": "contact",
+      "exit": 0
+    },
+    {
+      "c": "Release",
+      "flag": "contact-response",
+      "exit": 0
+    },
+    {
+      "c": "Release",
+      "flag": "isolated-contact",
+      "exit": 0
+    },
+    {
+      "c": "Release",
+      "flag": "physical-event-epoch",
+      "exit": 0
+    },
+    {
+      "c": "Release",
+      "flag": "exact-event-motion",
+      "exit": 0
+    },
+    {
+      "c": "Release",
+      "flag": "earth-event",
+      "exit": 0
+    },
+    {
+      "c": "Release",
+      "flag": "florida-proof",
+      "exit": 0
+    },
+    {
+      "c": "Release",
+      "flag": "root-kinematics",
+      "exit": 0
+    },
+    {
+      "c": "Release",
+      "flag": "certified-response",
+      "exit": 0
+    },
+    {
+      "c": "Release",
+      "flag": "certified-preimpact-velocity",
+      "exit": 0
+    },
+    {
+      "c": "Release",
+      "flag": "certified-postimpact-velocity",
+      "exit": 0
+    },
+    {
+      "c": "Release",
+      "flag": "private-postimpact-state",
+      "exit": 0
+    },
+    {
+      "c": "Release",
+      "flag": "private-propagation",
+      "exit": 0
+    }
+  ],
+  "surface": [
+    {
+      "configuration": "Debug",
+      "test": "Physical surface-point query",
+      "exit": 0,
+      "queryFingerprint": "3e08f86757588127099cbb100d3829b73d5e5f29b1de8d0f22ec83de28534912"
+    },
+    {
+      "configuration": "Debug",
+      "test": "Physical surface-point stale snapshot",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "test": "Physical surface-point query",
+      "exit": 0,
+      "queryFingerprint": "3e08f86757588127099cbb100d3829b73d5e5f29b1de8d0f22ec83de28534912"
+    },
+    {
+      "configuration": "Release",
+      "test": "Physical surface-point stale snapshot",
+      "exit": 0
+    }
+  ],
+  "florida": [
+    {
+      "configuration": "Debug",
+      "exit": 0,
+      "witnesses": [
+        {
+          "kind": "postimpact-Florida-coverage",
+          "force": false,
+          "status": "EventFreeThroughTarget",
+          "failure": "None",
+          "Visits": 63,
+          "MaximumDepth": 5,
+          "Evaluations": 63,
+          "ClearPrefix": 1,
+          "rootAlpha": {
+            "Lower": 0.50335693359375,
+            "Upper": 0.5033645629882812
+          },
+          "InitialAngularVelocityBody": {
+            "X": -0.24244695758109136,
+            "Y": -0.10551878857577955,
+            "Z": -0.012351568596309329,
+            "LengthSquared": 0.0700673032296169,
+            "IsFinite": true
+          },
+          "RemainderSeconds": {
+            "Lower": 0.49663543701171836,
+            "Upper": 0.4966430664062505
+          },
+          "geometry": {
+            "DefinitionId": 501,
+            "Version": 1,
+            "ContentSha256": "AD840A087DCDE7FFA54D384C5ED3D97FE7710D3A8B2B25F6F3E9F9BF5486411F"
+          },
+          "terrain": {
+            "BodyId": 6,
+            "Terrain": {
+              "SourceId": 2,
+              "Version": 5,
+              "IsValid": true
+            },
+            "PhysicalGeneration": 4,
+            "ReferenceRadiusMetres": 6371008.8,
+            "GlobalSha256": "4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317",
+            "RegionalSha256": "c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe",
+            "CompositionIdentity": 86364352542676200,
+            "FacilitySupportIdentity": 5597594574148789000,
+            "QueryPolicyVersion": 1
+          },
+          "target": 1000000,
+          "leafStatus": "Ready",
+          "leafFailure": "None",
+          "Elapsed": {
+            "Lower": 0,
+            "Upper": 2.96022335533053e-8
+          },
+          "gap": {
+            "Value": {
+              "Lower": -5e-324,
+              "Upper": 1.106670610066621e-13
+            },
+            "First": {
+              "Lower": -1e-323,
+              "Upper": 0.000003739526506297309
+            },
+            "Second": {
+              "Lower": 0.05866652043696722,
+              "Upper": 0.058666525461916495
+            }
+          },
+          "sourceAndContinuation": "CHECKED_SAME",
+          "canonicalMutation": "NONE"
+        },
+        {
+          "kind": "postimpact-Florida-coverage",
+          "force": true,
+          "status": "Unresolved",
+          "failure": "DepartureUnproved",
+          "Visits": 25,
+          "MaximumDepth": 24,
+          "Evaluations": 25,
+          "ClearPrefix": 0,
+          "rootAlpha": {
+            "Lower": 0.480010986328125,
+            "Upper": 0.48001861572265625
+          },
+          "InitialAngularVelocityBody": {
+            "X": -0.26619050895886387,
+            "Y": -0.11585225043673181,
+            "Z": -0.013561041019835149,
+            "LengthSquared": 0.08446303282457586,
+            "IsFinite": true
+          },
+          "RemainderSeconds": {
+            "Lower": 0.5199813842773433,
+            "Upper": 0.5199890136718756
+          },
+          "geometry": {
+            "DefinitionId": 501,
+            "Version": 1,
+            "ContentSha256": "AD840A087DCDE7FFA54D384C5ED3D97FE7710D3A8B2B25F6F3E9F9BF5486411F"
+          },
+          "terrain": {
+            "BodyId": 6,
+            "Terrain": {
+              "SourceId": 2,
+              "Version": 5,
+              "IsValid": true
+            },
+            "PhysicalGeneration": 4,
+            "ReferenceRadiusMetres": 6371008.8,
+            "GlobalSha256": "4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317",
+            "RegionalSha256": "c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe",
+            "CompositionIdentity": 86364352542676200,
+            "FacilitySupportIdentity": 5597594574148789000,
+            "QueryPolicyVersion": 1
+          },
+          "target": 1000000,
+          "leafStatus": "Ready",
+          "leafFailure": "None",
+          "Elapsed": {
+            "Lower": 0,
+            "Upper": 3.099376044701789e-8
+          },
+          "gap": {
+            "Value": {
+              "Lower": -9.711572038181597e-17,
+              "Upper": 1.7474656719234068e-13
+            },
+            "First": {
+              "Lower": -6.266791701370335e-9,
+              "Upper": 0.000005638120856327202
+            },
+            "Second": {
+              "Lower": -0.13473251572085723,
+              "Upper": -0.13473250991849076
+            }
+          },
+          "sourceAndContinuation": "CHECKED_SAME",
+          "canonicalMutation": "NONE"
+        }
+      ]
+    },
+    {
+      "configuration": "Release",
+      "exit": 0,
+      "witnesses": [
+        {
+          "kind": "postimpact-Florida-coverage",
+          "force": false,
+          "status": "EventFreeThroughTarget",
+          "failure": "None",
+          "Visits": 63,
+          "MaximumDepth": 5,
+          "Evaluations": 63,
+          "ClearPrefix": 1,
+          "rootAlpha": {
+            "Lower": 0.50335693359375,
+            "Upper": 0.5033645629882812
+          },
+          "InitialAngularVelocityBody": {
+            "X": -0.24244695758109136,
+            "Y": -0.10551878857577955,
+            "Z": -0.012351568596309329,
+            "LengthSquared": 0.0700673032296169,
+            "IsFinite": true
+          },
+          "RemainderSeconds": {
+            "Lower": 0.49663543701171836,
+            "Upper": 0.4966430664062505
+          },
+          "geometry": {
+            "DefinitionId": 501,
+            "Version": 1,
+            "ContentSha256": "AD840A087DCDE7FFA54D384C5ED3D97FE7710D3A8B2B25F6F3E9F9BF5486411F"
+          },
+          "terrain": {
+            "BodyId": 6,
+            "Terrain": {
+              "SourceId": 2,
+              "Version": 5,
+              "IsValid": true
+            },
+            "PhysicalGeneration": 4,
+            "ReferenceRadiusMetres": 6371008.8,
+            "GlobalSha256": "4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317",
+            "RegionalSha256": "c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe",
+            "CompositionIdentity": 86364352542676200,
+            "FacilitySupportIdentity": 5597594574148789000,
+            "QueryPolicyVersion": 1
+          },
+          "target": 1000000,
+          "leafStatus": "Ready",
+          "leafFailure": "None",
+          "Elapsed": {
+            "Lower": 0,
+            "Upper": 2.96022335533053e-8
+          },
+          "gap": {
+            "Value": {
+              "Lower": -5e-324,
+              "Upper": 1.106670610066621e-13
+            },
+            "First": {
+              "Lower": -1e-323,
+              "Upper": 0.000003739526506297309
+            },
+            "Second": {
+              "Lower": 0.05866652043696722,
+              "Upper": 0.058666525461916495
+            }
+          },
+          "sourceAndContinuation": "CHECKED_SAME",
+          "canonicalMutation": "NONE"
+        },
+        {
+          "kind": "postimpact-Florida-coverage",
+          "force": true,
+          "status": "Unresolved",
+          "failure": "DepartureUnproved",
+          "Visits": 25,
+          "MaximumDepth": 24,
+          "Evaluations": 25,
+          "ClearPrefix": 0,
+          "rootAlpha": {
+            "Lower": 0.480010986328125,
+            "Upper": 0.48001861572265625
+          },
+          "InitialAngularVelocityBody": {
+            "X": -0.26619050895886387,
+            "Y": -0.11585225043673181,
+            "Z": -0.013561041019835149,
+            "LengthSquared": 0.08446303282457586,
+            "IsFinite": true
+          },
+          "RemainderSeconds": {
+            "Lower": 0.5199813842773433,
+            "Upper": 0.5199890136718756
+          },
+          "geometry": {
+            "DefinitionId": 501,
+            "Version": 1,
+            "ContentSha256": "AD840A087DCDE7FFA54D384C5ED3D97FE7710D3A8B2B25F6F3E9F9BF5486411F"
+          },
+          "terrain": {
+            "BodyId": 6,
+            "Terrain": {
+              "SourceId": 2,
+              "Version": 5,
+              "IsValid": true
+            },
+            "PhysicalGeneration": 4,
+            "ReferenceRadiusMetres": 6371008.8,
+            "GlobalSha256": "4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317",
+            "RegionalSha256": "c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe",
+            "CompositionIdentity": 86364352542676200,
+            "FacilitySupportIdentity": 5597594574148789000,
+            "QueryPolicyVersion": 1
+          },
+          "target": 1000000,
+          "leafStatus": "Ready",
+          "leafFailure": "None",
+          "Elapsed": {
+            "Lower": 0,
+            "Upper": 3.099376044701789e-8
+          },
+          "gap": {
+            "Value": {
+              "Lower": -9.711572038181597e-17,
+              "Upper": 1.7474656719234068e-13
+            },
+            "First": {
+              "Lower": -6.266791701370335e-9,
+              "Upper": 0.000005638120856327202
+            },
+            "Second": {
+              "Lower": -0.13473251572085723,
+              "Upper": -0.13473250991849076
+            }
+          },
+          "sourceAndContinuation": "CHECKED_SAME",
+          "canonicalMutation": "NONE"
+        }
+      ]
+    }
+  ],
+  "costs": [
+    {
+      "configuration": "Debug",
+      "kind": "coverage-cost",
+      "name": "analytical clear certification",
+      "warmup": 32,
+      "samples": 101,
+      "completed": 8,
+      "bytes": 0,
+      "zeroRequired": true,
+      "entry": "PASS",
+      "exit": "PASS",
+      "medianUs": 0.2,
+      "p95Us": 0.2,
+      "p99Us": 0.2,
+      "maximumUs": 0.4
+    },
+    {
+      "configuration": "Debug",
+      "kind": "coverage-cost",
+      "name": "analytical crossing refusal",
+      "warmup": 32,
+      "samples": 101,
+      "completed": 8,
+      "bytes": 0,
+      "zeroRequired": true,
+      "entry": "PASS",
+      "exit": "PASS",
+      "medianUs": 2.5,
+      "p95Us": 2.5,
+      "p99Us": 10.8,
+      "maximumUs": 11.7
+    },
+    {
+      "configuration": "Debug",
+      "kind": "coverage-cost",
+      "name": "depth exhaustion",
+      "warmup": 32,
+      "samples": 101,
+      "completed": 8,
+      "bytes": 0,
+      "zeroRequired": true,
+      "entry": "PASS",
+      "exit": "PASS",
+      "medianUs": 3,
+      "p95Us": 3.1,
+      "p99Us": 9.9,
+      "maximumUs": 11
+    },
+    {
+      "configuration": "Debug",
+      "kind": "coverage-cost",
+      "name": "visit exhaustion",
+      "warmup": 32,
+      "samples": 101,
+      "completed": 8,
+      "bytes": 0,
+      "zeroRequired": true,
+      "entry": "PASS",
+      "exit": "PASS",
+      "medianUs": 122.9,
+      "p95Us": 165.7,
+      "p99Us": 191.8,
+      "maximumUs": 203.9
+    },
+    {
+      "configuration": "Debug",
+      "kind": "coverage-cost",
+      "name": "domain refusal",
+      "warmup": 32,
+      "samples": 101,
+      "completed": 8,
+      "bytes": 0,
+      "zeroRequired": true,
+      "entry": "PASS",
+      "exit": "PASS",
+      "medianUs": 2.2,
+      "p95Us": 2.2,
+      "p99Us": 2.2,
+      "maximumUs": 2.3
+    },
+    {
+      "configuration": "Debug",
+      "kind": "coverage-cost",
+      "name": "coverage owner admission",
+      "warmup": 32,
+      "samples": 101,
+      "completed": 8,
+      "bytes": 122240,
+      "zeroRequired": false,
+      "entry": "PASS",
+      "exit": "PASS",
+      "medianUs": 310.7,
+      "p95Us": 357.5,
+      "p99Us": 389.7,
+      "maximumUs": 403.6
+    },
+    {
+      "configuration": "Debug",
+      "kind": "coverage-cost",
+      "name": "reusable interval",
+      "warmup": 32,
+      "samples": 101,
+      "completed": 8,
+      "bytes": 0,
+      "zeroRequired": true,
+      "entry": "PASS",
+      "exit": "PASS",
+      "medianUs": 179.4,
+      "p95Us": 231.8,
+      "p99Us": 256,
+      "maximumUs": 281.9
+    },
+    {
+      "configuration": "Debug",
+      "kind": "coverage-cost",
+      "name": "real Coast clear certification",
+      "warmup": 32,
+      "samples": 101,
+      "completed": 8,
+      "bytes": 0,
+      "zeroRequired": true,
+      "entry": "PASS",
+      "exit": "PASS",
+      "medianUs": 9234.1,
+      "p95Us": 9437.1,
+      "p99Us": 9540.9,
+      "maximumUs": 10292.6
+    },
+    {
+      "configuration": "Debug",
+      "kind": "coverage-cost",
+      "name": "checked coverage read",
+      "warmup": 32,
+      "samples": 101,
+      "completed": 8,
+      "bytes": 0,
+      "zeroRequired": true,
+      "entry": "PASS",
+      "exit": "PASS",
+      "medianUs": 26.4,
+      "p95Us": 42.3,
+      "p99Us": 71.2,
+      "maximumUs": 94
+    },
+    {
+      "configuration": "Debug",
+      "kind": "coverage-cost",
+      "name": "foreign authority refusal",
+      "warmup": 32,
+      "samples": 101,
+      "completed": 8,
+      "bytes": 0,
+      "zeroRequired": true,
+      "entry": "PASS",
+      "exit": "PASS",
+      "medianUs": 1.1,
+      "p95Us": 1.1,
+      "p99Us": 2,
+      "maximumUs": 2
+    },
+    {
+      "configuration": "Debug",
+      "kind": "coverage-cost",
+      "name": "invalid numerical interval refusal",
+      "warmup": 32,
+      "samples": 101,
+      "completed": 8,
+      "bytes": 0,
+      "zeroRequired": true,
+      "entry": "PASS",
+      "exit": "PASS",
+      "medianUs": 26.7,
+      "p95Us": 41.6,
+      "p99Us": 48.6,
+      "maximumUs": 73.4
+    },
+    {
+      "configuration": "Debug",
+      "kind": "coverage-cost",
+      "name": "real Force departure refusal",
+      "warmup": 32,
+      "samples": 101,
+      "completed": 8,
+      "bytes": 0,
+      "zeroRequired": true,
+      "entry": "PASS",
+      "exit": "PASS",
+      "medianUs": 3868.6,
+      "p95Us": 4166.9,
+      "p99Us": 4220.1,
+      "maximumUs": 4293.5
+    },
+    {
+      "configuration": "Release",
+      "kind": "coverage-cost",
+      "name": "analytical clear certification",
+      "warmup": 32,
+      "samples": 101,
+      "completed": 8,
+      "bytes": 0,
+      "zeroRequired": true,
+      "entry": "PASS",
+      "exit": "PASS",
+      "medianUs": 0.1,
+      "p95Us": 0.2,
+      "p99Us": 0.2,
+      "maximumUs": 0.2
+    },
+    {
+      "configuration": "Release",
+      "kind": "coverage-cost",
+      "name": "analytical crossing refusal",
+      "warmup": 32,
+      "samples": 101,
+      "completed": 8,
+      "bytes": 0,
+      "zeroRequired": true,
+      "entry": "PASS",
+      "exit": "PASS",
+      "medianUs": 1.9,
+      "p95Us": 1.9,
+      "p99Us": 2,
+      "maximumUs": 2
+    },
+    {
+      "configuration": "Release",
+      "kind": "coverage-cost",
+      "name": "depth exhaustion",
+      "warmup": 32,
+      "samples": 101,
+      "completed": 8,
+      "bytes": 0,
+      "zeroRequired": true,
+      "entry": "PASS",
+      "exit": "PASS",
+      "medianUs": 2,
+      "p95Us": 2,
+      "p99Us": 2,
+      "maximumUs": 2
+    },
+    {
+      "configuration": "Release",
+      "kind": "coverage-cost",
+      "name": "visit exhaustion",
+      "warmup": 32,
+      "samples": 101,
+      "completed": 8,
+      "bytes": 0,
+      "zeroRequired": true,
+      "entry": "PASS",
+      "exit": "PASS",
+      "medianUs": 93.7,
+      "p95Us": 99.5,
+      "p99Us": 107.2,
+      "maximumUs": 128.4
+    },
+    {
+      "configuration": "Release",
+      "kind": "coverage-cost",
+      "name": "domain refusal",
+      "warmup": 32,
+      "samples": 101,
+      "completed": 8,
+      "bytes": 0,
+      "zeroRequired": true,
+      "entry": "PASS",
+      "exit": "PASS",
+      "medianUs": 1.3,
+      "p95Us": 1.3,
+      "p99Us": 1.3,
+      "maximumUs": 1.3
+    },
+    {
+      "configuration": "Release",
+      "kind": "coverage-cost",
+      "name": "coverage owner admission",
+      "warmup": 32,
+      "samples": 101,
+      "completed": 8,
+      "bytes": 122240,
+      "zeroRequired": false,
+      "entry": "PASS",
+      "exit": "PASS",
+      "medianUs": 238.9,
+      "p95Us": 265.4,
+      "p99Us": 271.9,
+      "maximumUs": 292.3
+    },
+    {
+      "configuration": "Release",
+      "kind": "coverage-cost",
+      "name": "reusable interval",
+      "warmup": 32,
+      "samples": 101,
+      "completed": 8,
+      "bytes": 0,
+      "zeroRequired": true,
+      "entry": "PASS",
+      "exit": "PASS",
+      "medianUs": 142.5,
+      "p95Us": 164.5,
+      "p99Us": 170.5,
+      "maximumUs": 216
+    },
+    {
+      "configuration": "Release",
+      "kind": "coverage-cost",
+      "name": "real Coast clear certification",
+      "warmup": 32,
+      "samples": 101,
+      "completed": 8,
+      "bytes": 0,
+      "zeroRequired": true,
+      "entry": "PASS",
+      "exit": "PASS",
+      "medianUs": 1208,
+      "p95Us": 1335.8,
+      "p99Us": 1989,
+      "maximumUs": 2013.2
+    },
+    {
+      "configuration": "Release",
+      "kind": "coverage-cost",
+      "name": "checked coverage read",
+      "warmup": 32,
+      "samples": 101,
+      "completed": 8,
+      "bytes": 0,
+      "zeroRequired": true,
+      "entry": "PASS",
+      "exit": "PASS",
+      "medianUs": 2.8,
+      "p95Us": 2.9,
+      "p99Us": 2.9,
+      "maximumUs": 2.9
+    },
+    {
+      "configuration": "Release",
+      "kind": "coverage-cost",
+      "name": "foreign authority refusal",
+      "warmup": 32,
+      "samples": 101,
+      "completed": 8,
+      "bytes": 0,
+      "zeroRequired": true,
+      "entry": "PASS",
+      "exit": "PASS",
+      "medianUs": 0.2,
+      "p95Us": 0.3,
+      "p99Us": 0.3,
+      "maximumUs": 0.3
+    },
+    {
+      "configuration": "Release",
+      "kind": "coverage-cost",
+      "name": "invalid numerical interval refusal",
+      "warmup": 32,
+      "samples": 101,
+      "completed": 8,
+      "bytes": 0,
+      "zeroRequired": true,
+      "entry": "PASS",
+      "exit": "PASS",
+      "medianUs": 2.9,
+      "p95Us": 2.9,
+      "p99Us": 27.2,
+      "maximumUs": 60.9
+    },
+    {
+      "configuration": "Release",
+      "kind": "coverage-cost",
+      "name": "real Force departure refusal",
+      "warmup": 32,
+      "samples": 101,
+      "completed": 8,
+      "bytes": 0,
+      "zeroRequired": true,
+      "entry": "PASS",
+      "exit": "PASS",
+      "medianUs": 468.6,
+      "p95Us": 532.5,
+      "p99Us": 573.7,
+      "maximumUs": 624.4
+    }
+  ],
+  "positive": [
+    {
+      "configuration": "Debug",
+      "family": "Analytical",
+      "witness": "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+    },
+    {
+      "configuration": "Debug",
+      "family": "Florida",
+      "witness": "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+    },
+    {
+      "configuration": "Release",
+      "family": "Analytical",
+      "witness": "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+    },
+    {
+      "configuration": "Release",
+      "family": "Florida",
+      "witness": "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+    }
+  ],
+  "work": [
+    {
+      "configuration": "Debug",
+      "witness": "COVERAGE_WORK analytical clear certification: visits=1 depth=0 enclosures=1 searchStackBytes=600"
+    },
+    {
+      "configuration": "Debug",
+      "witness": "COVERAGE_WORK analytical crossing refusal: visits=8 depth=5 enclosures=10 searchStackBytes=600"
+    },
+    {
+      "configuration": "Debug",
+      "witness": "COVERAGE_WORK depth exhaustion: visits=25 depth=24 enclosures=25 searchStackBytes=600"
+    },
+    {
+      "configuration": "Debug",
+      "witness": "COVERAGE_WORK visit exhaustion: visits=255 depth=8 enclosures=495 searchStackBytes=600"
+    },
+    {
+      "configuration": "Debug",
+      "witness": "COVERAGE_WORK domain refusal: visits=27 depth=24 enclosures=27 searchStackBytes=600"
+    },
+    {
+      "configuration": "Release",
+      "witness": "COVERAGE_WORK analytical clear certification: visits=1 depth=0 enclosures=1 searchStackBytes=600"
+    },
+    {
+      "configuration": "Release",
+      "witness": "COVERAGE_WORK analytical crossing refusal: visits=8 depth=5 enclosures=10 searchStackBytes=600"
+    },
+    {
+      "configuration": "Release",
+      "witness": "COVERAGE_WORK depth exhaustion: visits=25 depth=24 enclosures=25 searchStackBytes=600"
+    },
+    {
+      "configuration": "Release",
+      "witness": "COVERAGE_WORK visit exhaustion: visits=255 depth=8 enclosures=495 searchStackBytes=600"
+    },
+    {
+      "configuration": "Release",
+      "witness": "COVERAGE_WORK domain refusal: visits=27 depth=24 enclosures=27 searchStackBytes=600"
+    }
+  ],
+  "workspace": [
+    {
+      "configuration": "Debug",
+      "kind": "coverage-workspace",
+      "setupTrajectoryEvaluations": 2,
+      "searchTrajectoryEvaluations": 63,
+      "rotationEvaluations": 63,
+      "earthBodyFixedEvaluations": 63,
+      "terrainDomainEvaluations": 63,
+      "terrainPointQueriesDuringCoverage": 0,
+      "searchStackBytes": 600,
+      "receiptBytes": 40,
+      "proofBytes": 32,
+      "valuesBytes": 152
+    },
+    {
+      "configuration": "Release",
+      "kind": "coverage-workspace",
+      "setupTrajectoryEvaluations": 2,
+      "searchTrajectoryEvaluations": 63,
+      "rotationEvaluations": 63,
+      "earthBodyFixedEvaluations": 63,
+      "terrainDomainEvaluations": 63,
+      "terrainPointQueriesDuringCoverage": 0,
+      "searchStackBytes": 600,
+      "receiptBytes": 40,
+      "proofBytes": 32,
+      "valuesBytes": 152
+    }
+  ],
+  "performancePolicy": "32 warmed calls; 101 ordinary-runtime single-call samples; nearest-rank P95/P99; independent checked no-GC allocation measurement of 8 equivalent calls; zero on every reusable path. No profiler/tiering change. Timer ticks 100ns. No whole-frame/high-warp inference.",
+  "review": {
+    "independentVerifier": "PASS",
+    "noNewClearPath": true,
+    "strictCrossingPredicatesUnchanged": true,
+    "anchorAndMotionUnchanged": true,
+    "productionPublication": false
+  },
+  "scratch": {
+    "newDiagnosticTrees": 0,
+    "priorDeferredFiles": 274,
+    "priorDeferredBytes": 7905537,
+    "cleanup": "Previously policy-blocked; no retry. Reviewed manual paths in narrowing-report.md."
+  }
+}

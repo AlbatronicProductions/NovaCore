@@ -1,0 +1,42 @@
+{
+  "baseline": "dc274639f670d122764bb0e8f3d0c95ae201c7a4",
+  "branch": "codex/postimpact-feature-coverage",
+  "proposals": 3,
+  "sourceRuns": [
+    {
+      "proposal": 1,
+      "configuration": "Debug",
+      "exit": 1,
+      "observations": [
+        "{\"phase\":\"alpha\",\"RootEnclosure\":{\"Lower\":0,\"Upper\":1}}",
+        "System.InvalidOperationException: Contact: positive beta alpha refinement Unresolved NumericalResolution"
+      ],
+      "coverageSearchExecuted": false
+    },
+    {
+      "proposal": 2,
+      "executed": false,
+      "disposition": "Conservative static design screen; no measured admission failure"
+    },
+    {
+      "proposal": 3,
+      "configuration": "Debug",
+      "exit": 1,
+      "observations": [
+        "System.InvalidOperationException: Contact: positive beta M14.9 alpha Unresolved"
+      ],
+      "admission": "Provider non-null",
+      "alpha": "Unresolved",
+      "alphaFailureSubreason": "UNAVAILABLE: reporter asserted status without printing Failure enum",
+      "coverageSearchExecuted": false
+    }
+  ],
+  "sameModelOracle": "NOT RUN: no selected fixture reached checked final velocities/private propagation",
+  "betaIssued": false,
+  "release": "NOT RUN",
+  "freshProcessReplay": "NOT RUN",
+  "allocationPerformance": "NOT RUN",
+  "productionChanges": 0,
+  "classification": "POST-IMPACT TERRAIN-CONTACT COVERAGE CANDIDATE — FOLLOW-UP REQUIRED",
+  "judgment": "ESCALATE TO PROJECT CONTROL"
+}

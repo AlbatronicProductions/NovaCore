@@ -1,0 +1,435 @@
+{
+  "baseline": "dc274639f670d122764bb0e8f3d0c95ae201c7a4",
+  "branch": "codex/postimpact-feature-coverage",
+  "operandWitness": "OPERANDS lower=0.5 upper=1 finite=True lowerFinite=True upperFinite=True positiveLower=True upperBelowTarget=False left=FloridaBound { Lower = 0.24999995231628414, Upper = 0.24999995231628425 } right=FloridaBound { Lower = -9.536743161842057E-08, Upper = -9.536743161842051E-08 } derivative=FloridaBound { Lower = -1.0000000953674324, Upper = -9.536743150739822E-08 } leftPositive=True rightNegative=True strictApproach=True beta=0.9999999046325684 exactBeta=9007198395747533/9007199254740992 contains=True betaBelowTarget=True upperEqualsTarget=True betaEqualsTarget=False status=NextEventCertified failure=None",
+  "comparison": {
+    "kind": "Exact source-method control-flow extraction with scripted Read/Refine dependencies; not a real-terrain root witness",
+    "before": {
+      "refusingAttempts": 24,
+      "progressingAttempts": 24,
+      "result": "Unresolved"
+    },
+    "after": {
+      "refusingAttempts": 1,
+      "progressingAttempts": 0,
+      "result": "Unresolved"
+    }
+  },
+  "focusedDebug": {
+    "exit": 0
+  },
+  "focusedRelease": {
+    "exit": 0
+  },
+  "proofRecords": [
+    "COVERAGE_PROOF Linear: status=EventFreeThroughTarget failure=None lowerBits=0000000000000000 upperBits=0000000000000000 prefixBits=3FF0000000000000 visits=1 depth=0 evaluations=1 rootDepth=0",
+    "COVERAGE_PROOF OutwardAcceleration: status=EventFreeThroughTarget failure=None lowerBits=0000000000000000 upperBits=0000000000000000 prefixBits=3FF0000000000000 visits=1 depth=0 evaluations=1 rootDepth=0",
+    "COVERAGE_PROOF InwardAcceleration: status=Unresolved failure=DepartureUnproved lowerBits=0000000000000000 upperBits=0000000000000000 prefixBits=0000000000000000 visits=25 depth=24 evaluations=25 rootDepth=0",
+    "COVERAGE_PROOF PersistentContact: status=Unresolved failure=DepartureUnproved lowerBits=0000000000000000 upperBits=0000000000000000 prefixBits=0000000000000000 visits=25 depth=24 evaluations=25 rootDepth=0",
+    "COVERAGE_PROOF quadratic reacquisition: status=NextEventCertified failure=None lowerBits=3FB0000000000000 upperBits=3FC0000000000000 prefixBits=3FB0000000000000 visits=8 depth=5 evaluations=10 rootDepth=4",
+    "COVERAGE_PROOF two roots with clear final endpoint: status=NextEventCertified failure=None lowerBits=3FC8000000000000 upperBits=3FD0000000000000 prefixBits=3FC8000000000000 visits=9 depth=4 evaluations=13 rootDepth=4",
+    "COVERAGE_PROOF boundary-adjacent root: status=Unresolved failure=DepartureUnproved lowerBits=0000000000000000 upperBits=0000000000000000 prefixBits=0000000000000000 visits=25 depth=24 evaluations=25 rootDepth=0",
+    "COVERAGE_PROOF boundary-adjacent root: status=NextEventCertified failure=None lowerBits=3FE0000000000000 upperBits=3FF0000000000000 prefixBits=3FE0000000000000 visits=5 depth=2 evaluations=7 rootDepth=1",
+    "COVERAGE_PROOF exact target root: status=Unresolved failure=RootUnresolved lowerBits=0000000000000000 upperBits=0000000000000000 prefixBits=3FEFFFFFE0000000 visits=51 depth=24 evaluations=99 rootDepth=0",
+    "COVERAGE_PROOF double root grazing: status=Unresolved failure=RootUnresolved lowerBits=0000000000000000 upperBits=0000000000000000 prefixBits=3FD7AE1440000000 visits=43 depth=24 evaluations=89 rootDepth=0",
+    "COVERAGE_PROOF close roots with context uncertainty: status=Unresolved failure=RootUnresolved lowerBits=0000000000000000 upperBits=0000000000000000 prefixBits=3FD7AE0D80000000 visits=42 depth=24 evaluations=88 rootDepth=0",
+    "COVERAGE_PROOF separating COM rotating lever: status=NextEventCertified failure=None lowerBits=3FC0000000000000 upperBits=3FD0000000000000 prefixBits=3FC0000000000000 visits=9 depth=5 evaluations=13 rootDepth=3",
+    "COVERAGE_PROOF inelastic principal-axis reacquisition: status=NextEventCertified failure=None lowerBits=3FD2000000000000 upperBits=3FD4000000000000 prefixBits=3FD2000000000000 visits=58 depth=11 evaluations=152 rootDepth=5",
+    "COVERAGE_PROOF whole-interval grading escape: status=Unresolved failure=GradingDomain lowerBits=0000000000000000 upperBits=0000000000000000 prefixBits=3FD8000000000000 visits=27 depth=24 evaluations=27 rootDepth=0",
+    "COVERAGE_PROOF unresolved trajectory context: status=Unresolved failure=DepartureUnproved lowerBits=0000000000000000 upperBits=0000000000000000 prefixBits=0000000000000000 visits=25 depth=24 evaluations=25 rootDepth=0"
+  ],
+  "matrix": [
+    {
+      "configuration": "Debug",
+      "run": 1,
+      "exit": 0,
+      "identicalProofRecords": true
+    },
+    {
+      "configuration": "Debug",
+      "run": 2,
+      "exit": 0,
+      "identicalProofRecords": true
+    },
+    {
+      "configuration": "Debug",
+      "run": 3,
+      "exit": 0,
+      "identicalProofRecords": true
+    },
+    {
+      "configuration": "Release",
+      "run": 1,
+      "exit": 0,
+      "identicalProofRecords": true
+    },
+    {
+      "configuration": "Release",
+      "run": 2,
+      "exit": 0,
+      "identicalProofRecords": true
+    },
+    {
+      "configuration": "Release",
+      "run": 3,
+      "exit": 0,
+      "identicalProofRecords": true
+    }
+  ],
+  "builds": [
+    {
+      "configuration": "Debug",
+      "exit": 0,
+      "summary": "Build succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:04.53"
+    },
+    {
+      "configuration": "Release",
+      "exit": 0,
+      "summary": "Build succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:04.21"
+    }
+  ],
+  "fullSimulation": [
+    {
+      "configuration": "Debug",
+      "exit": 0,
+      "groups": 47,
+      "failures": 0
+    },
+    {
+      "configuration": "Release",
+      "exit": 0,
+      "groups": 47,
+      "failures": 0
+    }
+  ],
+  "referencePrecision": [
+    {
+      "configuration": "Debug",
+      "project": "ReferenceFrames",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "project": "Precision",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "project": "ReferenceFrames",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "project": "Precision",
+      "exit": 0
+    }
+  ],
+  "focusedPredecessors": [
+    {
+      "configuration": "Debug",
+      "gate": "translation",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "gate": "contact",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "gate": "contact-response",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "gate": "isolated-contact",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "gate": "physical-event-epoch",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "gate": "exact-event-motion",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "gate": "earth-event",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "gate": "florida-proof",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "gate": "root-kinematics",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "gate": "certified-response",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "gate": "certified-preimpact-velocity",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "gate": "certified-postimpact-velocity",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "gate": "private-postimpact-state",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "gate": "private-propagation",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "gate": "translation",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "gate": "contact",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "gate": "contact-response",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "gate": "isolated-contact",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "gate": "physical-event-epoch",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "gate": "exact-event-motion",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "gate": "earth-event",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "gate": "florida-proof",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "gate": "root-kinematics",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "gate": "certified-response",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "gate": "certified-preimpact-velocity",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "gate": "certified-postimpact-velocity",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "gate": "private-postimpact-state",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "gate": "private-propagation",
+      "exit": 0
+    }
+  ],
+  "Florida": {
+    "configuration": "Debug",
+    "exit": 1,
+    "records": [
+      {
+        "kind": "postimpact-Florida-coverage",
+        "force": false,
+        "status": "Unresolved",
+        "failure": "RootUnresolved",
+        "Visits": 26,
+        "MaximumDepth": 24,
+        "Evaluations": 66,
+        "ClearPrefix": 0.03125,
+        "RootSigma": {
+          "Lower": 0,
+          "Upper": 0
+        },
+        "rootAlpha": {
+          "Lower": 0.50335693359375,
+          "Upper": 0.5033645629882812
+        },
+        "InitialAngularVelocityBody": {
+          "X": -0.24244695758109136,
+          "Y": -0.10551878857577955,
+          "Z": -0.012351568596309329,
+          "LengthSquared": 0.0700673032296169,
+          "IsFinite": true
+        },
+        "RemainderSeconds": {
+          "Lower": 0.49663543701171836,
+          "Upper": 0.4966430664062505
+        },
+        "geometry": {
+          "DefinitionId": 501,
+          "Version": 1,
+          "ContentSha256": "AD840A087DCDE7FFA54D384C5ED3D97FE7710D3A8B2B25F6F3E9F9BF5486411F"
+        },
+        "terrain": {
+          "BodyId": 6,
+          "Terrain": {
+            "SourceId": 2,
+            "Version": 5,
+            "IsValid": true
+          },
+          "PhysicalGeneration": 4,
+          "ReferenceRadiusMetres": 6371008.8,
+          "GlobalSha256": "4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317",
+          "RegionalSha256": "c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe",
+          "CompositionIdentity": 86364352542676200,
+          "FacilitySupportIdentity": 5597594574148789000,
+          "QueryPolicyVersion": 1
+        },
+        "target": 1000000,
+        "leafStatus": "Ready",
+        "leafFailure": "None",
+        "Elapsed": {
+          "Lower": 0,
+          "Upper": 2.96022335533053e-8
+        },
+        "gap": {
+          "Value": {
+            "Lower": -0.020389451645314697,
+            "Upper": 0.020391060970723632
+          },
+          "First": {
+            "Lower": -0.000002191342527747831,
+            "Upper": 0.0000037551628907853134
+          },
+          "Second": {
+            "Lower": 0.05866652043696722,
+            "Upper": 0.058666525461916495
+          }
+        },
+        "sourceAndContinuation": "CHECKED_SAME",
+        "canonicalMutation": "NONE"
+      },
+      {
+        "kind": "postimpact-Florida-coverage",
+        "force": true,
+        "status": "Unresolved",
+        "failure": "DepartureUnproved",
+        "Visits": 25,
+        "MaximumDepth": 24,
+        "Evaluations": 25,
+        "ClearPrefix": 0,
+        "RootSigma": {
+          "Lower": 0,
+          "Upper": 0
+        },
+        "rootAlpha": {
+          "Lower": 0.480010986328125,
+          "Upper": 0.48001861572265625
+        },
+        "InitialAngularVelocityBody": {
+          "X": -0.26619050895886387,
+          "Y": -0.11585225043673181,
+          "Z": -0.013561041019835149,
+          "LengthSquared": 0.08446303282457586,
+          "IsFinite": true
+        },
+        "RemainderSeconds": {
+          "Lower": 0.5199813842773433,
+          "Upper": 0.5199890136718756
+        },
+        "geometry": {
+          "DefinitionId": 501,
+          "Version": 1,
+          "ContentSha256": "AD840A087DCDE7FFA54D384C5ED3D97FE7710D3A8B2B25F6F3E9F9BF5486411F"
+        },
+        "terrain": {
+          "BodyId": 6,
+          "Terrain": {
+            "SourceId": 2,
+            "Version": 5,
+            "IsValid": true
+          },
+          "PhysicalGeneration": 4,
+          "ReferenceRadiusMetres": 6371008.8,
+          "GlobalSha256": "4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317",
+          "RegionalSha256": "c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe",
+          "CompositionIdentity": 86364352542676200,
+          "FacilitySupportIdentity": 5597594574148789000,
+          "QueryPolicyVersion": 1
+        },
+        "target": 1000000,
+        "leafStatus": "Ready",
+        "leafFailure": "None",
+        "Elapsed": {
+          "Lower": 0,
+          "Upper": 3.099376044701789e-8
+        },
+        "gap": {
+          "Value": {
+            "Lower": -0.020393769256770614,
+            "Upper": 0.020394937135279182
+          },
+          "First": {
+            "Lower": -2.987344296032091e-7,
+            "Upper": 0.000005658098571809101
+          },
+          "Second": {
+            "Lower": -0.13473251572085723,
+            "Upper": -0.13473250991849076
+          }
+        },
+        "sourceAndContinuation": "CHECKED_SAME",
+        "canonicalMutation": "NONE"
+      }
+    ],
+    "stop": "Both predeclared representative cases unresolved; no useful supported Florida coverage. Stop on first integration gate failure."
+  },
+  "notRun": [
+    "Release Florida",
+    "candidate allocation campaign",
+    "candidate timing campaign",
+    "opaque beta receipt/refinement/ordering real-terrain validation"
+  ],
+  "limits": {
+    "visits": 255,
+    "searchDepth": 24,
+    "cumulativeRefinement": 24,
+    "totalRootDepth": 48,
+    "stackBytes": 600
+  },
+  "classification": "POST-IMPACT TERRAIN-CONTACT COVERAGE CANDIDATE — FOLLOW-UP REQUIRED",
+  "judgment": "REVISE"
+}

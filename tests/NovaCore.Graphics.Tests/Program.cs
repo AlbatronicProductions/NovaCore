@@ -16,6 +16,8 @@ using NovaCore.Simulation.Time;
 
 var tests = new (string, Action)[]
 {
+    ("Post-impact Florida terrain-contact coverage", PostImpactCoverageProductionTests.Run),
+    ("Post-impact Florida coverage costs", PostImpactCoverageProductionTests.Cost),
     ("Florida monotone contact certification", FloridaContactProductionTests.Run),
     ("Qualified Florida root contact kinematics", QualifiedFloridaKinematicsTests.Run),
     ("Certified Florida isolated response proposal", CertifiedFloridaResponseTests.Run),

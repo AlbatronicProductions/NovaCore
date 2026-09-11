@@ -1,0 +1,101 @@
+using System.Reflection;
+using System.Text.Json;
+using NovaCore.Core;
+using NovaCore.Core.ReferenceFrames;
+using NovaCore.Core.Surface;
+using NovaCore.Graphics;
+using NovaCore.Simulation.Celestial;
+using NovaCore.Simulation.Clock;
+using NovaCore.Simulation.Time;
+using NovaCore.Simulation.Timeline;
+using NovaCore.Simulation.Transactions;
+using NovaCore.Simulation.Spacecraft;
+using NovaCore.Simulation.Spacecraft.Contact;
+using NovaCore.Simulation.Spacecraft.Rotation;
+using NovaCore.Simulation.Spacecraft.Rotation.Transactions;
+using static ContactGenerationFixture;
+using Owner = NovaCore.Simulation.Spacecraft.Contact.FloridaContactProvider.Proof.PostImpactCoverageProvider;
+
+internal static class PositiveBetaProductionTests
+{
+    private static readonly FloridaKinematicsRequest Kinematics=new(1e-5,1e-8,1e-5,1e-12,24);
+    private static readonly CertifiedResponseRequest Response=new(1e-6,1e-6,1e-6,3e-6);
+    private static readonly CertifiedPreImpactVelocityRequest Preimpact=new(1e-5,1e-4);
+    private static readonly PrivatePostImpactPoseRequest Pose=new(.5);
+    private static readonly PrivatePropagationRequest Request=new(.002,2e-6,2e-6,4e-6);
+    private static void Require(bool value,string contract)=>ContactGenerationFixture.Check(value,"positive beta "+contract);
+    private sealed class Fixture
+    {
+        internal readonly PlanetaryPhysicalSurfacePointQuery Query;
+        internal readonly CelestialSystemDefinition System=SolAnalyticalDefinition.Instance;
+        internal readonly ReferenceFrameGraph Graph=ContactGenerationFixture.Graph();
+        internal readonly ReferenceFrameEvaluation[] Evals,Staging;
+        internal readonly FrameTransform[] Roots,StagingRoots;
+        internal readonly SimulationTimeline Timeline=new(8);
+        internal readonly SimulationClock Clock;
+        internal readonly SimulationTransactionEngine Engine;
+        internal readonly SpacecraftContactGeometry Geometry;
+        internal readonly SimulationInstant Start=new(0),End=new(1000000);
+        internal FloridaContactUse Use=>new(Engine,Geometry,System,Graph,Query);
+        internal Fixture(PlanetaryPhysicalSurfacePointQuery query)
+        {
+            Query=query;
+            Evals=new ReferenceFrameEvaluation[System.Count];Staging=new ReferenceFrameEvaluation[System.Count];
+            Roots=new FrameTransform[System.Count];StagingRoots=new FrameTransform[System.Count];
+            Require(EarthPhysicalEventEvaluator.TryEvaluate(System,Graph,PhysicalEventEpoch.FromCanonical(Start),Evals,Roots,Staging,StagingRoots,out var earth)==EarthPhysicalEventStatus.Ready,"real Earth");
+            var site=FloridaFacilitySupport.Region;var sample=query.Query(6,site.Up);Require(sample.IsReady,"real terrain");
+            var normal=earth.BodyFixedToRoot.LocalDirectionToParent(site.Up);
+            var tangent=earth.BodyFixedToRoot.LocalDirectionToParent(site.East);
+            var lever=tangent*100-normal*10;
+            var position=earth.BodyFixedToRoot.LocalToParent(sample.BodyFixedPositionMetres+site.Up*100)-lever;
+            var velocity=earth.VelocityRoot+Double3.Cross(earth.AngularVelocityRoot,earth.BodyFixedToRoot.LocalDirectionToParent(sample.BodyFixedPositionMetres))-normal*200;
+            var rotation=new SpacecraftRigidBodyRotationState(Craft,Start,DoubleQuaternion.Identity,Double3.Zero,new(80000,80000,80000),Double3.Zero,RigidBodyRotationModel.ConstantBodyTorqueV1);
+            Require(SpacecraftStateStore.TryCreateTranslating([new(Craft,new(1),new(72),"Positive beta authored point")],[rotation],[new(8)],
+                [new(Craft,new(1),Start,position,velocity,Double3.Zero)],Graph,out var store,out _),"spacecraft state");
+            Clock=new(Start,Timeline);Engine=new(Clock,new SimulationState(spacecraft:store),8);
+            Require(SpacecraftContactGeometry.TryCreate(Craft,502,1,[new(1,lever,ContactFeatureRole.LandingTip)],out var geometry),"authored geometry");
+            Geometry=geometry!;
+            Require(Clock.AdvanceByHostDuration(new(1000)).Reason==SimulationHostAdvanceStopReason.Accepted,"pending debt");
+        }
+    }
+    private static PlanetaryPhysicalSurfacePointQuery Acquire()
+    {
+        var repository=GraphicsTestHarness.RepositoryPath();
+        Require(EarthElevationDataset.TryLoad(Path.Combine(repository,"assets","earth","runtime"),out var error),error);
+        Require(TerrainAssetCache.TryResolveRequired(repository,TerrainAssetCache.ProductionEarthLocalAssetId,null,out _,out var path,out error),error);
+        Require(EarthLocalTerrainElevationDataset.TryLoad(path,out error),error);
+        Require(PlanetaryPhysicalSurfacePointQuery.TryAcquire(6,repository,out var query)==PhysicalSurfaceQueryStatus.Ready,"acquire authority");
+        return query!;
+    }
+    internal static void Export()
+    {
+        var c=new Fixture(Acquire());
+        FloridaContactProvider.TryCreate(c.Engine,c.Engine.State.Revision,c.Start,c.End,c.Geometry,c.System,c.Graph,c.Query,c.Query.Authority,
+            c.Evals,c.Roots,c.Staging,c.StagingRoots,out var provider,out var admission); Require(provider is not null,"M14.9 admission "+admission);
+        var alpha=provider!.Evaluate(c.Engine,c.Geometry,c.System,c.Graph,c.Query);
+        Require(alpha.Status==FloridaContactStatus.CertifiedUniqueApproachingRoot,"M14.9 alpha "+alpha.Status);
+        Console.WriteLine(JsonSerializer.Serialize(new{phase="alpha",alpha.Proof.RootEnclosure}));
+        var root=alpha.Proof;
+        var k=root.QualifyKinematics(Kinematics,c.Use);Require(k.Status==FloridaKinematicsStatus.Qualified,"M14.10 "+k.Status+" "+k.Failure);
+        var response=root.QualifyResponse(k.Witness,Response,c.Use);Require(response.Status==CertifiedResponseStatus.Qualified,"M14.11 "+response.Status);
+        var pre=root.QualifyPreImpactVelocity(k.Witness,Preimpact,c.Use);Require(pre.Status==CertifiedPreImpactVelocityStatus.Qualified,"M14.12 "+pre.Status);
+        var final=root.QualifyPostImpactVelocity(k.Witness,response.Proposal,Response,pre.Tuple,Preimpact,c.Use);
+        Require(final.Status==CertifiedPostImpactVelocityStatus.Qualified,"M14.13 "+final.Status);
+        var initial=root.PreparePrivatePostImpactState(k.Witness,response.Proposal,Response,pre.Tuple,Preimpact,final.Realization,Pose,c.Use);
+        Require(initial.Status==PrivatePostImpactStateStatus.Ready,"M14.14 "+initial.Status);
+        Require(initial.State.Read(root,final.Realization,Pose,c.Use,out var source)==PrivatePostImpactStateStatus.Ready,"initial read");
+        var staged=root.PreparePrivatePropagation(initial.State,final.Realization,Pose,c.End,Request,c.Use);
+        Require(staged.Status==PrivatePropagationStatus.Ready,"M14.15 "+staged.Status+" "+staged.Failure);
+        Require(staged.State.Read(root,initial.State,final.Realization,Pose,c.End,Request,c.Use,out var continuation)==PrivatePropagationStatus.Ready,"paired read");
+        Require(final.Realization.Read(root,k.Witness,response.Proposal,Response,pre.Tuple,Preimpact,c.Use,out var finalValues)==CertifiedPostImpactVelocityStatus.Qualified,"final read");
+        static object Field(object value,string name)=>value.GetType().GetField(name,BindingFlags.NonPublic|BindingFlags.Instance)!.GetValue(value)!;
+        var motion=Field(provider,"motion");c.System.TryGetPhysicalProperties(SolarSystemBodyIds.Sun,out var sun);
+        var data=new{source.FrozenSourceTranslation,source.FrozenSourceRotation,source.Properties,source.InitialLinearVelocityRoot,source.InitialAngularVelocityBody,
+            source.PoseRootEnclosure,source.SourceStart,source.SourceEnd,finalValues.NormalResidual,feature=c.Geometry.GetFeature(0).OffsetFromComMetres,
+            region=FloridaFacilitySupport.Region,seed=Field(motion,"seed"),orientation=Field(motion,"orientation"),sun.GravitationalParameter,
+            source.TerrainAuthority,continuation.RemainderSeconds};
+        Directory.CreateDirectory(@"E:\NovaCore\.codex\positive-beta");
+        File.WriteAllText(@"E:\NovaCore\.codex\positive-beta\fixture3-input.json",JsonSerializer.Serialize(data,new JsonSerializerOptions{WriteIndented=true}));
+        Console.WriteLine(JsonSerializer.Serialize(new{phase="export-before-coverage-search",root.RootEnclosure,root.RefinementCount,staged=staged.Status.ToString(),source.InitialAngularVelocityBody,finalValues.NormalResidual,geometry=c.Geometry.Identity}));
+    }
+}

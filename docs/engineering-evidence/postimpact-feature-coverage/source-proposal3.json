@@ -1,0 +1,549 @@
+{
+  "proposal": 3,
+  "admissionStatus": "Unresolved",
+  "admissionFailure": "None",
+  "providerPresent": true,
+  "result": "Unresolved",
+  "failure": "GradingDomain",
+  "RootEnclosure": {
+    "Lower": 0,
+    "Upper": 0
+  },
+  "RefinementCount": 0,
+  "parameters": {
+    "linear": {
+      "Spacecraft": {
+        "Value": 71
+      },
+      "RootFrame": {
+        "Value": 1
+      },
+      "Epoch": {
+        "Ticks": 0,
+        "SecondsSinceEpoch": 0
+      },
+      "PositionRoot": {
+        "X": -26507848003.58035,
+        "Y": 132752305647.27423,
+        "Z": 57558844410.83978,
+        "LengthSquared": 2.16388612303595E+22,
+        "IsFinite": true
+      },
+      "VelocityRoot": {
+        "X": -29484.53863517608,
+        "Y": -5351.777990947118,
+        "Z": -2274.819184363178,
+        "LengthSquared": 903154348.5151236,
+        "IsFinite": true
+      },
+      "ConstantForceRoot": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0,
+        "LengthSquared": 0,
+        "IsFinite": true
+      }
+    },
+    "properties": {
+      "MassKilograms": 8
+    },
+    "rotation": {
+      "Spacecraft": {
+        "Value": 71
+      },
+      "Epoch": {
+        "Ticks": 0,
+        "SecondsSinceEpoch": 0
+      },
+      "OrientationLocalToParent": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0,
+        "W": 1,
+        "IsFinite": true,
+        "LengthSquared": 1
+      },
+      "AngularVelocityBody": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0,
+        "LengthSquared": 0,
+        "IsFinite": true
+      },
+      "PrincipalInertia": {
+        "X": 80000,
+        "Y": 80000,
+        "Z": 80000
+      },
+      "ConstantBodyTorque": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0,
+        "LengthSquared": 0,
+        "IsFinite": true
+      },
+      "Model": 1
+    },
+    "feature": {
+      "Id": 1,
+      "OffsetFromComMetres": {
+        "X": 41.7244707672846,
+        "Y": -91.30247326984055,
+        "Z": -4.7882057182275135,
+        "LengthSquared": 10100.000000000002,
+        "IsFinite": true
+      },
+      "Role": 1
+    },
+    "region": {
+      "BodyId": 6,
+      "Revision": 1,
+      "Up": {
+        "X": 0.1433224599406355,
+        "Y": 0.4788205718227514,
+        "Z": 0.8661348234979923,
+        "LengthSquared": 1,
+        "IsFinite": true
+      },
+      "East": {
+        "X": 0.9865841313746494,
+        "Y": 0,
+        "Z": -0.163253642286255,
+        "LengthSquared": 1,
+        "IsFinite": true
+      },
+      "North": {
+        "X": -0.07816920235165153,
+        "Y": 0.8779127861008367,
+        "Z": -0.47239677793606216,
+        "LengthSquared": 1.0000000000000002,
+        "IsFinite": true
+      },
+      "RadiusMetres": 6371008.8,
+      "PlaneAltitudeMetres": 15.134892258793116,
+      "InnerEastMetres": 64,
+      "InnerNorthMetres": 56,
+      "BlendMetres": 128,
+      "DeterministicHash": 5597594574148789740
+    },
+    "authority": {
+      "BodyId": 6,
+      "Terrain": {
+        "SourceId": 2,
+        "Version": 5,
+        "IsValid": true
+      },
+      "PhysicalGeneration": 4,
+      "ReferenceRadiusMetres": 6371008.8,
+      "GlobalSha256": "4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317",
+      "RegionalSha256": "c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe",
+      "CompositionIdentity": 86364352542676184,
+      "FacilitySupportIdentity": 5597594574148789740,
+      "QueryPolicyVersion": 1
+    }
+  },
+  "whole": {
+    "time": {
+      "Lower": 0,
+      "Upper": 1
+    },
+    "evaluated": true,
+    "domain": false,
+    "gap": {
+      "Lower": -100.01611711923034,
+      "Upper": 100.02275551017375
+    },
+    "slope": {
+      "Lower": -200.09101745939216,
+      "Upper": -199.88243412233834
+    },
+    "q": {
+      "X": {
+        "Lower": 913096.4757861082,
+        "Upper": 913125.1693950156
+      },
+      "Y": {
+        "Lower": 3050529.424926899,
+        "Upper": 3050625.2228791616
+      },
+      "Z": {
+        "Lower": 5518079.070870892,
+        "Upper": 5518252.319191658
+      }
+    },
+    "dq": {
+      "X": {
+        "Lower": -28.728645740990007,
+        "Upper": -28.588494937566306
+      },
+      "Y": {
+        "Lower": -95.83298992662205,
+        "Upper": -95.69283912334953
+      },
+      "Z": {
+        "Lower": -173.28335747861672,
+        "Upper": -173.14320667520053
+      }
+    },
+    "projection": {
+      "Lower": 6370923.91877514,
+      "Upper": 6371123.957647768
+    },
+    "eastCoordinate": {
+      "Lower": -28.296737921191383,
+      "Upper": 28.295340684358965
+    },
+    "northCoordinate": {
+      "Lower": -84.09504301100971,
+      "Upper": 84.09210919868202
+    },
+    "guards": {
+      "positiveProjection": true,
+      "eastLeft": {
+        "Lower": 180278766.30720398,
+        "Upper": 180278766.30720404
+      },
+      "eastRight": {
+        "Lower": 407739130.8016089,
+        "Upper": 407751933.2894572
+      },
+      "eastPass": true,
+      "northLeft": {
+        "Lower": 535770259.05952126,
+        "Upper": 535770259.0595214
+      },
+      "northRight": {
+        "Lower": 356771739.4514078,
+        "Upper": 356782941.62827504
+      },
+      "northPass": false,
+      "guard": {
+        "Lower": 0.9999999982576883,
+        "Upper": 0.9999999982576885
+      },
+      "capLeft": {
+        "Lower": 141436.20190102074,
+        "Upper": 141445.13344442745
+      },
+      "capRight": {
+        "Lower": -5E-324,
+        "Upper": 40016.109978426335
+      },
+      "capPass": true,
+      "clampLeft": {
+        "Lower": 6371023.934892258,
+        "Upper": 6371023.93489226
+      },
+      "clampRight": {
+        "Lower": 6371008.799999997,
+        "Upper": 6371008.800000003
+      },
+      "clampPass": true
+    },
+    "center": {
+      "centerTime": 0.5,
+      "relativeBeforeEarthRemainder": {
+        "X": {
+          "Lower": -5270921.191652572,
+          "Upper": -5270921.191652559
+        },
+        "Y": {
+          "Lower": -1871179.7891945648,
+          "Upper": -1871179.7891945615
+        },
+        "Z": {
+          "Lower": 3050577.3239111416,
+          "Upper": 3050577.323911148
+        }
+      },
+      "earthRemainder": {
+        "Lower": 1.9065514026148477E-17,
+        "Upper": 1.906551402614872E-17
+      },
+      "offset": {
+        "X": {
+          "Lower": 41.724470767284586,
+          "Upper": 41.724470767284615
+        },
+        "Y": {
+          "Lower": -91.30247326984058,
+          "Upper": -91.30247326984052
+        },
+        "Z": {
+          "Lower": -4.788205718227515,
+          "Upper": -4.788205718227512
+        }
+      }
+    }
+  },
+  "first": {
+    "time": {
+      "Lower": 0,
+      "Upper": 0
+    },
+    "evaluated": true,
+    "domain": true,
+    "gap": {
+      "Lower": 100.00000017415731,
+      "Upper": 100.00000113900752
+    },
+    "slope": {
+      "Lower": -200.0000000000925,
+      "Upper": -199.9999999999511
+    },
+    "q": {
+      "X": {
+        "Lower": 913125.1549346786,
+        "Upper": 913125.1549355055
+      },
+      "Y": {
+        "Lower": 3050625.2056602347,
+        "Upper": 3050625.205660271
+      },
+      "Z": {
+        "Lower": 5518252.304831236,
+        "Upper": 5518252.304832186
+      }
+    },
+    "dq": {
+      "X": {
+        "Lower": -28.6708079468441,
+        "Upper": -28.670807946698112
+      },
+      "Y": {
+        "Lower": -95.76411436528932,
+        "Upper": -95.76411436528821
+      },
+      "Z": {
+        "Lower": -173.22591957477835,
+        "Upper": -173.22591957464
+      }
+    },
+    "projection": {
+      "Lower": 6371123.934892434,
+      "Upper": 6371123.934893397
+    },
+    "eastCoordinate": {
+      "Lower": -8.040806278586389E-07,
+      "Upper": 1.6752164810895922E-07
+    },
+    "northCoordinate": {
+      "Lower": 1.1036172509193418E-06,
+      "Upper": 1.6512349247932436E-06
+    },
+    "guards": {
+      "positiveProjection": true,
+      "eastLeft": {
+        "Lower": 5.1228047559969125,
+        "Upper": 5.122804755996914
+      },
+      "eastRight": {
+        "Lower": 407751931.8331157,
+        "Upper": 407751931.83317745
+      },
+      "eastPass": true,
+      "northLeft": {
+        "Lower": 10.520032236725092,
+        "Upper": 10.520032236725095
+      },
+      "northRight": {
+        "Lower": 356782940.35397625,
+        "Upper": 356782940.35403025
+      },
+      "northPass": true,
+      "guard": {
+        "Lower": 0.9999999982576883,
+        "Upper": 0.9999999982576885
+      },
+      "capLeft": {
+        "Lower": 141445.08286220834,
+        "Upper": 141445.1324340892
+      },
+      "capRight": {
+        "Lower": 9.166140037242807E-13,
+        "Upper": 5.1905435064182396E-12
+      },
+      "capPass": true,
+      "clampLeft": {
+        "Lower": 6371023.934892258,
+        "Upper": 6371023.93489226
+      },
+      "clampRight": {
+        "Lower": 6371008.799999997,
+        "Upper": 6371008.800000003
+      },
+      "clampPass": true
+    },
+    "center": {
+      "centerTime": 0,
+      "relativeBeforeEarthRemainder": {
+        "X": {
+          "Lower": -5271072.142590854,
+          "Upper": -5271072.142590841
+        },
+        "Y": {
+          "Lower": -1871016.9737226611,
+          "Upper": -1871016.973722658
+        },
+        "Z": {
+          "Lower": 3050625.2056602454,
+          "Upper": 3050625.205660252
+        }
+      },
+      "earthRemainder": {
+        "Lower": -5E-324,
+        "Upper": 5E-324
+      },
+      "offset": {
+        "X": {
+          "Lower": 41.724470767284586,
+          "Upper": 41.724470767284615
+        },
+        "Y": {
+          "Lower": -91.30247326984058,
+          "Upper": -91.30247326984052
+        },
+        "Z": {
+          "Lower": -4.788205718227515,
+          "Upper": -4.788205718227512
+        }
+      }
+    }
+  },
+  "last": {
+    "time": {
+      "Lower": 1,
+      "Upper": 1
+    },
+    "evaluated": true,
+    "domain": true,
+    "gap": {
+      "Lower": -99.9867255780846,
+      "Upper": -99.98672457505016
+    },
+    "slope": {
+      "Lower": -199.9734512350074,
+      "Upper": -199.97345123485974
+    },
+    "q": {
+      "X": {
+        "Lower": 913096.4963641596,
+        "Upper": 913096.4963650253
+      },
+      "Y": {
+        "Lower": 3050529.4427457093,
+        "Upper": 3050529.4427457456
+      },
+      "Z": {
+        "Lower": 5518079.0915492335,
+        "Upper": 5518079.091550221
+      }
+    },
+    "dq": {
+      "X": {
+        "Lower": -28.646333693572792,
+        "Upper": -28.646333693420665
+      },
+      "Y": {
+        "Lower": -95.76171468470582,
+        "Upper": -95.76171468470471
+      },
+      "Z": {
+        "Lower": -173.20064401965922,
+        "Upper": -173.2006440195147
+      }
+    },
+    "projection": {
+      "Lower": 6370923.948166681,
+      "Upper": 6370923.948167683
+    },
+    "eastCoordinate": {
+      "Lower": 0.0036074671661481257,
+      "Upper": 0.0036084830062463884
+    },
+    "northCoordinate": {
+      "Lower": -0.005872101988643409,
+      "Upper": -0.005871533416211604
+    },
+    "guards": {
+      "positiveProjection": true,
+      "eastLeft": {
+        "Lower": 22989.67698744619,
+        "Upper": 22989.676987446197
+      },
+      "eastRight": {
+        "Lower": 407739132.68266755,
+        "Upper": 407739132.68273175
+      },
+      "eastPass": true,
+      "northLeft": {
+        "Lower": 37411.21344414465,
+        "Upper": 37411.21344414466
+      },
+      "northRight": {
+        "Lower": 356771741.0973341,
+        "Upper": 356771741.0973903
+      },
+      "northPass": true,
+      "guard": {
+        "Lower": 0.9999999982576883,
+        "Upper": 0.9999999982576885
+      },
+      "capLeft": {
+        "Lower": 141436.2032060208,
+        "Upper": 141436.25277479133
+      },
+      "capRight": {
+        "Lower": 4.748490597497145E-05,
+        "Upper": 4.7506543663300646E-05
+      },
+      "capPass": true,
+      "clampLeft": {
+        "Lower": 6371023.934892258,
+        "Upper": 6371023.93489226
+      },
+      "clampRight": {
+        "Lower": 6371008.799999997,
+        "Upper": 6371008.800000003
+      },
+      "clampPass": true
+    },
+    "center": {
+      "centerTime": 1,
+      "relativeBeforeEarthRemainder": {
+        "X": {
+          "Lower": -5270770.2409905335,
+          "Upper": -5270770.24099052
+        },
+        "Y": {
+          "Lower": -1871342.6032827357,
+          "Upper": -1871342.6032827324
+        },
+        "Z": {
+          "Lower": 3050529.4427619567,
+          "Upper": 3050529.4427619632
+        }
+      },
+      "earthRemainder": {
+        "Lower": 3.0504822441837564E-16,
+        "Upper": 3.0504822441837953E-16
+      },
+      "offset": {
+        "X": {
+          "Lower": 41.724470767284586,
+          "Upper": 41.724470767284615
+        },
+        "Y": {
+          "Lower": -91.30247326984058,
+          "Upper": -91.30247326984052
+        },
+        "Z": {
+          "Lower": -4.788205718227515,
+          "Upper": -4.788205718227512
+        }
+      }
+    }
+  },
+  "refinement": null,
+  "coverageSearchExecuted": false
+}

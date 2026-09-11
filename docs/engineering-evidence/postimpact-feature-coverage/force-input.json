@@ -1,0 +1,237 @@
+{
+  "force": true,
+  "FrozenSourceTranslation": {
+    "Spacecraft": {
+      "Value": 71
+    },
+    "RootFrame": {
+      "Value": 1
+    },
+    "Epoch": {
+      "Ticks": 0,
+      "SecondsSinceEpoch": 0
+    },
+    "PositionRoot": {
+      "X": -26507847881.73576,
+      "Y": 132752305584.79207,
+      "Z": 57558844355.40893,
+      "LengthSquared": 2.163886120092945E+22,
+      "IsFinite": true
+    },
+    "VelocityRoot": {
+      "X": -29649.17887245524,
+      "Y": -5410.218602301694,
+      "Z": -2179.5338905704507,
+      "LengthSquared": 913094641.1156826,
+      "IsFinite": true
+    },
+    "ConstantForceRoot": {
+      "X": 1.323740601239451,
+      "Y": 0.46987426214734374,
+      "Z": -0.7661129149164023,
+      "LengthSquared": 2.5600000000000005,
+      "IsFinite": true
+    }
+  },
+  "FrozenSourceRotation": {
+    "Spacecraft": {
+      "Value": 71
+    },
+    "Epoch": {
+      "Ticks": 0,
+      "SecondsSinceEpoch": 0
+    },
+    "OrientationLocalToParent": {
+      "X": 0,
+      "Y": 0,
+      "Z": 0.6,
+      "W": 0.8,
+      "IsFinite": true,
+      "LengthSquared": 1
+    },
+    "AngularVelocityBody": {
+      "X": 0,
+      "Y": 0,
+      "Z": 0,
+      "LengthSquared": 0,
+      "IsFinite": true
+    },
+    "PrincipalInertia": {
+      "X": 2,
+      "Y": 3,
+      "Z": 4
+    },
+    "ConstantBodyTorque": {
+      "X": 0,
+      "Y": 0,
+      "Z": 0,
+      "LengthSquared": 0,
+      "IsFinite": true
+    },
+    "Model": 1
+  },
+  "Properties": {
+    "MassKilograms": 8
+  },
+  "InitialLinearVelocityRoot": {
+    "X": -29649.117242956567,
+    "Y": -5410.196727028991,
+    "Z": -2179.5695584237037,
+    "LengthSquared": 913090905.3717469,
+    "IsFinite": true
+  },
+  "InitialAngularVelocityBody": {
+    "X": -0.26619050895886387,
+    "Y": -0.11585225043673181,
+    "Z": -0.013561041019835149,
+    "LengthSquared": 0.08446303282457586,
+    "IsFinite": true
+  },
+  "PoseRootEnclosure": {
+    "Lower": 0.480010986328125,
+    "Upper": 0.48001861572265625
+  },
+  "SourceStart": {
+    "Ticks": 0,
+    "SecondsSinceEpoch": 0
+  },
+  "SourceEnd": {
+    "Ticks": 1000000,
+    "SecondsSinceEpoch": 1
+  },
+  "NormalResidual": {
+    "Lower": 3.4948618737827324E-12,
+    "Upper": 5.36353530052859E-06
+  },
+  "feature": {
+    "X": 1,
+    "Y": -2,
+    "Z": 3,
+    "LengthSquared": 14,
+    "IsFinite": true
+  },
+  "region": {
+    "BodyId": 6,
+    "Revision": 1,
+    "Up": {
+      "X": 0.1433224599406355,
+      "Y": 0.4788205718227514,
+      "Z": 0.8661348234979923,
+      "LengthSquared": 1,
+      "IsFinite": true
+    },
+    "East": {
+      "X": 0.9865841313746494,
+      "Y": 0,
+      "Z": -0.163253642286255,
+      "LengthSquared": 1,
+      "IsFinite": true
+    },
+    "North": {
+      "X": -0.07816920235165153,
+      "Y": 0.8779127861008367,
+      "Z": -0.47239677793606216,
+      "LengthSquared": 1.0000000000000002,
+      "IsFinite": true
+    },
+    "RadiusMetres": 6371008.8,
+    "PlaneAltitudeMetres": 15.134892258793116,
+    "InnerEastMetres": 64,
+    "InnerNorthMetres": 56,
+    "BlendMetres": 128,
+    "DeterministicHash": 5597594574148789740
+  },
+  "seed": {
+    "Position": {
+      "X": -26502576889.713287,
+      "Y": 132754176572.94548,
+      "Z": 57555793780.84592,
+      "LengthSquared": 2.1638727377099214E+22,
+      "IsFinite": true
+    },
+    "Velocity": {
+      "X": -29786.44078798411,
+      "Y": -5026.1456634067235,
+      "Z": -2179.055086235703,
+      "LengthSquared": 917242476.1147153,
+      "IsFinite": true
+    },
+    "IsFinite": true
+  },
+  "orientation": {
+    "Ra0": 0,
+    "RaT": -0.641,
+    "Dec0": 90,
+    "DecT": -0.557,
+    "W0": 190.147,
+    "Wd": 360.9856235,
+    "SecondsPerDay": 86400,
+    "DaysPerCentury": 36525
+  },
+  "craftAcceleration": {
+    "X": {
+      "Lower": 0.16546757515493132,
+      "Upper": 0.16546757515493143
+    },
+    "Y": {
+      "Lower": 0.05873428276841795,
+      "Upper": 0.05873428276841799
+    },
+    "Z": {
+      "Lower": -0.09576411436455033,
+      "Upper": -0.09576411436455026
+    }
+  },
+  "earthAcceleration": {
+    "X": {
+      "Lower": 0.0011049742674238202,
+      "Upper": 0.001104974267423825
+    },
+    "Y": {
+      "Lower": -0.005534931550866654,
+      "Upper": -0.005534931550866631
+    },
+    "Z": {
+      "Lower": -0.002399678768356739,
+      "Upper": -0.0023996787683567286
+    }
+  },
+  "earthJerk": {
+    "X": {
+      "Lower": 1.2423852927837798E-09,
+      "Upper": 1.2423852927837856E-09
+    },
+    "Y": {
+      "Lower": 2.070680153409444E-10,
+      "Upper": 2.070680153409458E-10
+    },
+    "Z": {
+      "Lower": 8.977306786096435E-11,
+      "Upper": 8.977306786096494E-11
+    }
+  },
+  "earthSnap": {
+    "Lower": 7.321157386041023E-15,
+    "Upper": 7.321157386041099E-15
+  },
+  "GravitationalParameter": 1.327124400412794E+20,
+  "TerrainAuthority": {
+    "BodyId": 6,
+    "Terrain": {
+      "SourceId": 2,
+      "Version": 5,
+      "IsValid": true
+    },
+    "PhysicalGeneration": 4,
+    "ReferenceRadiusMetres": 6371008.8,
+    "GlobalSha256": "4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317",
+    "RegionalSha256": "c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe",
+    "CompositionIdentity": 86364352542676184,
+    "FacilitySupportIdentity": 5597594574148789740,
+    "QueryPolicyVersion": 1
+  },
+  "RemainderSeconds": {
+    "Lower": 0.5199813842773433,
+    "Upper": 0.5199890136718756
+  }
+}
