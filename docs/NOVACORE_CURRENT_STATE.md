@@ -473,3 +473,35 @@ Future work must distinguish physical geometry, depth/ownership and
 presentation/LOD behavior while keeping `H(bodyDirection)` authoritative.
 
 Unrelated retirement findings are tracked in [the subsequent debt ledger](repository-debt-retirement.md). Deferral is not permanent acceptance.
+
+## Banked M14.16 — post-impact terrain-contact clearance
+
+**M14.16 — Certify post-impact terrain-contact clearance for the admitted authored point**
+
+Current banked chain:
+
+M14.9 certified contact root alpha
+→ M14.10 qualified contact kinematics
+→ M14.11 certified isolated response
+→ M14.12 qualified pre-impact velocity
+→ M14.13 certified represented post-impact velocities
+→ M14.14 complete private post-impact state
+→ M14.15 certified paired private propagation to T
+→ M14.16 certified singleton terrain clearance through T.
+
+The accepted M14.16 production contract returns `EventFreeThroughTarget`,
+`Unresolved`, `Unsupported`, or `Stale`. Only `EventFreeThroughTarget` issues a checked
+clearance receipt.
+
+Real Florida Coast is certified clear through T. The Force -0.2 m/s^2 fixture remains a
+conservative `DepartureUnproved` refusal.
+
+Authoritative beta / next-root issuance was retired from the accepted contract after
+production qualification proved insufficient. Internal crossing/root mathematics remain
+where required to prevent false clearance.
+
+The M14.15 staged endpoint plus applicable M14.16 clearance is numerically qualified and
+terrain-clear for this admitted singleton terrain event class, but remains PRIVATE and
+NOT canonical publication authority.
+
+M14 remains OPEN. Publication is unimplemented. BEPU gate is NOT REACHED.

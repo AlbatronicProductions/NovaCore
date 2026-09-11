@@ -56,3 +56,11 @@ allowlists the OBS KMT VUID.
 Preserve useful conclusions and reproducibility. Do not append bulk capture output
 by default. Promotion/cleanup authority remains with
 [ENGINEERING_RULES.md](../../ENGINEERING_RULES.md#diagnostic-evidence-lifecycle).
+
+## M14.16 — Banked post-impact terrain-contact clearance
+
+[Banked M14.16 post-impact terrain-contact clearance](postimpact-feature-coverage/README.md)
+| Complete admitted singleton authored point; checked `EventFreeThroughTarget` or
+conservative refusal; real Florida Coast clearance; Force refusal; rotating-feature and
+no-false-clear controls; deterministic Debug/Release validation; zero-allocation reusable
+paths; bounded performance; beta authority deferred. | **Banked contract** |

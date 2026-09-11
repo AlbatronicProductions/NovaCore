@@ -1,4 +1,4 @@
-# Post-impact terrain-contact clearance — UNBANKED
+# Post-impact terrain-contact clearance — BANKED M14.16
 
 Proposed accomplishment: **Certify post-impact terrain-contact clearance for the admitted authored point**.
 
@@ -107,3 +107,34 @@ The candidate remains UNBANKED for Project Control acceptance.
 
 Prior reviewed scratch remains policy-blocked; no deletion retry or workaround.
 Exact paths, counts and the manual cleanup command are in narrowing-report.md.
+
+## Banked production conclusion
+
+**M14.16 — Certify post-impact terrain-contact clearance for the admitted authored point**
+
+Project Control accepted the narrowed production contract.
+
+Production outcomes are:
+
+- `EventFreeThroughTarget`
+- `Unresolved`
+- `Unsupported`
+- `Stale`
+
+Only `EventFreeThroughTarget` issues a checked clearance receipt. The receipt proves
+terrain clearance over `(alpha,T]` only for the complete admitted singleton authored
+point and supported terrain relation.
+
+Checked `NextEventCertified(beta)` / next-root authority is not part of the banked
+contract. Potential crossing, reacquisition, tangency, ambiguous departure, grading
+escape, or exhausted proof returns conservative refusal rather than authoritative beta.
+
+Accepted real Florida witnesses:
+
+- Coast: `EventFreeThroughTarget`, 63 visits, maximum depth 5.
+- Force -0.2 m/s^2: `Unresolved / DepartureUnproved`, 25 visits, maximum depth 24.
+
+M14.16 does not publish the M14.15 staged state, does not provide spacecraft-global
+collision coverage, and does not establish a general contact/constraint solver.
+
+**BEPU GATE NOT REACHED.**

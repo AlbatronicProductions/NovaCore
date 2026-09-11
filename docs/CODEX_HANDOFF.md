@@ -229,3 +229,34 @@ launcher. A launcher built in Release starts the Release Triangle runtime; a
 launcher built in Debug starts Debug.
 
 Unrelated retirement findings are tracked in [the subsequent debt ledger](repository-debt-retirement.md). Deferral is not permanent acceptance.
+
+## Banked M14.16 — post-impact terrain clearance
+
+**M14.16 — Certify post-impact terrain-contact clearance for the admitted authored point**
+
+M14.16 is the current banked production responsibility after M14.15.
+
+For the complete singleton authored point admitted by the existing M14.9–M14.15 chain
+and its supported natural-terrain relation, M14.16 either certifies
+`EventFreeThroughTarget` over `(alpha,T]` or refuses conservatively.
+
+Banked outcomes:
+
+- `EventFreeThroughTarget`
+- `Unresolved`
+- `Unsupported`
+- `Stale`
+
+Checked beta / next-root authority is intentionally not banked. Crossing/root evidence
+is retained only as needed to prevent false clearance.
+
+Real Florida acceptance:
+
+- Coast: `EventFreeThroughTarget`, 63 visits, maximum depth 5.
+- Force -0.2 m/s^2: `Unresolved / DepartureUnproved`, 25 visits, maximum depth 24.
+
+M14.15 remains the staged private propagation authority. M14.16 adds checked terrain
+clearance evidence; it does not publish canonical state.
+
+M14 remains OPEN. Canonical publication has not begun. Beta issuance is deferred.
+BEPU gate remains NOT REACHED.
