@@ -1,6 +1,12 @@
 # NovaCore
 
-**A custom precision space-simulation and game-engine framework for seamless travel from planetary surfaces to orbit and beyond.**
+**A custom precision space-simulation and game-engine framework built for seamless travel from planetary surfaces to orbit and beyond.**
+
+NovaCore brings planetary rendering, spacecraft physics, and surface interaction into one
+coherent runtime. Built independently of Unity and other general-purpose engines, it owns
+its rendering and simulation systems, with high-precision coordinates and deterministic
+physical state at the core. The foundations are working; the complete spaceflight
+experience is still being built.
 
 ![NovaCore Earth against the Milky Way](docs/images/novacore-11a-earth-milky-way.png)
 
@@ -13,55 +19,82 @@
   <img src="docs/images/novacore-11a-solar-warp.png" alt="NovaCore Solar overview at maximum time warp" width="49%">
 </p>
 
-## What is NovaCore?
+*Earlier development captures: Earth, Moon, Sun, Mars, and Solar System time warp.
+These images predate the current terrain and contact work; they do not demonstrate
+completed atmosphere or cloud systems.*
 
-NovaCore is an experimental engine built from the ground up to bring astronomical simulation, planetary terrain, and spacecraft dynamics into one continuous world. It combines a deterministic C# simulation core with a native Vulkan renderer, real planetary data, and high-precision coordinates that reach from the Solar System down to the surface.
+## What Works Today
 
-The ambition is a physically coherent spaceflight experience: explore a planet, launch, travel through space, and return to land. NovaCore is under active development; the engine foundations are working, while the complete flight experience is still being built.
+### Planetary Rendering
 
-## What works today?
+A native Vulkan renderer supports continuous camera travel from orbit to Earth's near
+surface, with real NASA/NOAA imagery and elevation data and optional Florida regional
+detail. Solar System views include planets and moons, Sun-driven day/night lighting,
+Saturn's rings, and an interactive orbital map. Terrain data is verified and prepared
+through a dedicated asset pipeline.
 
-- **Solar System exploration** — simulated planetary motion, Solar Map and free 3D camera modes, orbit paths, and time warp from 0.1× to 7,776,000×.
-- **Planetary rendering** — a native Vulkan renderer with Sun-driven day/night lighting, distinct planets and moons, Saturn's rings, and HDR presentation.
-- **Orbit-to-surface Earth traversal** — continuous camera travel from orbit to the near surface, with real NASA/NOAA imagery and elevation data and optional Florida regional detail.
-- **Physical terrain foundations** — one canonical Earth surface for physical queries, terrain-aware camera clearance, anchored surface objects, and a Florida launch-site proof scene.
-- **Spacecraft motion foundations** — independent translation and rotation, deterministic force and torque transactions, and a bounded attitude-control demonstration.
-- **Spacecraft-to-terrain observations** — deterministic measurements of authored spacecraft contact points against physical terrain, including surface normals, radial gaps, and relative velocities.
-- **Development tools** — a Windows launcher, repeatable scenarios, and automated simulation and graphics validation.
+### Precision Simulation
 
-The latest banked production milestone is **M14.9 — Certify monotone point contact on the existing Florida grading plane**, at [commit `9698a08b`](https://github.com/AlbatronicProductions/NovaCore/commit/9698a08b84b9b40b0fa03bec8f8ba80d1d7404e7), tagged `m14.9-florida-monotone-contact-certification`. M14.1 through M14.9 are banked. A bounded [read-only contact-kinematics candidate](docs/certified-root-contact-kinematics.md) is awaiting Project Control acceptance.
+High-precision world coordinates connect astronomical and local scales. Deterministic
+simulation tracks celestial motion and exact simulation time, with Solar System time
+warp from 0.1× to 7,776,000×. Camera movement and rendering detail do not change physical
+terrain or simulated state.
 
-M14.4 supplies atomic linear/angular contact response, and M14.5 supplies an isolated analytical policy for one qualified point at exactly zero represented radial gap. M14.6 adds internal exact event identity/order; public time remains integral. General contact discovery, event-local execution, persistent grounding, and playable launch/landing remain unfinished. M14 — Surface Interaction / Launch Foundation remains open.
+### Spacecraft Physics
 
-## Why it is interesting
+Spacecraft have independent translation and rigid-body rotation, with high-precision
+position and velocity, force and torque handling, and coupled linear/angular impulse
+response. Repeatable scenarios and automated validation exercise the physical systems.
 
-- **One world across enormous scales.** Planetary and astronomical views share high-precision coordinates, with camera-relative rendering to preserve local detail.
-- **Deterministic simulation.** Exact simulation time and explicit state changes make physical behavior reproducible and testable, including at extreme Solar System time warp.
-- **Terrain with physical meaning.** Earth geography and physical height remain independent of the camera and the detail used to draw the surface.
-- **A clear separation of responsibilities.** Simulation owns truth; rendering owns presentation. Visual systems can evolve while the underlying physical world stays consistent.
+### Terrain Contact & Landing Foundations
 
-## Where it is going
+For the supported single authored contact point and terrain conditions, NovaCore can
+locate a contact event, calculate its isolated physical response, and advance the
+resulting spacecraft motion in a separate validated calculation. It can certify that
+this point remains clear of the supported natural terrain through the next scheduled
+simulation target, or report that clearance could not be established.
 
-**Surface → Contact → Launch → Atmosphere → Orbit → Interplanetary travel → Return → Landing**
+This is a bounded contact foundation: it does not yet cover a whole spacecraft hull,
+multiple landing legs, persistent ground support, friction, or general contact solving.
+It is not finished landing gameplay.
 
-That is the long-term gameplay vision. Future work includes general contact execution and surface interaction, complete spacecraft flight, atmospheres and clouds, water and weather, richer terrain, and maneuver planning and navigation. The current Solar model supports exploration and simulation development; precision navigation beyond its measured accuracy remains future work.
+## Why a Custom Engine?
 
-## Build and explore
+- **Precision across scales.** High-precision physical coordinates and camera-relative
+  rendering connect planetary surfaces with astronomical distances.
+- **Reproducible behavior.** Deterministic state and explicit physical updates make
+  results testable and failures traceable.
+- **Clear ownership.** Simulation owns physical truth; rendering owns its presentation.
+  Performance work focuses on measured costs and bounded workloads.
 
-NovaCore currently targets a configured **Windows development environment** with .NET, MSVC x64, CMake/Ninja, and Vulkan.
+## Current Development
 
-Start with the [Windows build and run guide](docs/build-windows.md) and [terrain asset setup](docs/terrain-assets.md). The repository includes a [Windows development launcher](tools/NovaCore.Launcher) for Solar System, Earth, and Florida scenarios.
+The current focus is moving from validated post-impact calculations to safely applying
+those results to the live spacecraft state. That integration is not yet implemented.
+Persistent rest on terrain, release and liftoff, and broader collision handling remain
+work toward a complete landing-and-launch loop.
 
-## Go deeper
+## Where NovaCore Is Going
 
-| Read about | Documentation |
-|---|---|
-| Implemented systems, measured limits, and open work | [Current engineering state](docs/NOVACORE_CURRENT_STATE.md) |
-| Engine design and ownership | [Architecture](docs/architecture.md) · [Repository map](docs/repository-structure.md) |
-| Earth terrain and rendering | [Planetary rendering](docs/planetary-rendering.md) · [Physical surface queries](docs/surface-point-queries.md) |
-| Spacecraft foundations | [Translation](docs/spacecraft-translation.md) · [Contact observations](docs/contact-generation.md) |
-| Astronomy and time warp | [Celestial simulation](docs/celestial-simulation.md) |
-| Validation and development history | [Engineering evidence](docs/engineering-evidence/README.md) · [M14.6 epoch evidence](docs/engineering-evidence/physical-event-epoch/README.md) |
-| Development conventions | [Engineering rules](ENGINEERING_RULES.md) |
+**Surface → Atmosphere → Orbit → Return → Landing → Launch again**
 
-Dated engineering reports preserve earlier candidate and blocked states. The current-state document and engineering-evidence index identify later accepted results; historical stage judgments do not override banked production truth.
+The goal is one continuous spaceflight experience, with planetary exploration, orbital
+flight, and meaningful terrain interaction sharing the same underlying world.
+Production atmospheres, clouds, and environmental systems remain future work, alongside
+the broader spacecraft and gameplay systems needed to make that journey playable.
+
+## Build & Engineering Documentation
+
+Development currently targets Windows with .NET, MSVC x64, CMake/Ninja, and Vulkan.
+Start with the [build and run guide](docs/build-windows.md) and
+[terrain asset setup](docs/terrain-assets.md).
+
+- [Current state and limitations](docs/NOVACORE_CURRENT_STATE.md)
+- [Engine architecture](docs/architecture.md)
+- [Planetary rendering and terrain](docs/planetary-rendering.md)
+- [Spacecraft motion](docs/spacecraft-translation.md)
+- [Contact clearance and validation](docs/engineering-evidence/postimpact-feature-coverage/README.md)
+- [Engineering evidence](docs/engineering-evidence/README.md)
+
+*Current banked checkpoint: M14.16 — post-impact terrain-contact clearance for the
+supported authored point. Surface interaction and launch foundations remain in development.*
