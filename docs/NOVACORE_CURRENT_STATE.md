@@ -37,7 +37,7 @@ Status: **BANKED M14.13**, main/tag target `704c77f1aab899ccf3452ee3fc88471d1e31
 The refusal allocation was corrected by immutable runtime preparation; the retained
 banked acceptance covers Debug/Release, real Florida and final bit/certificate replay.
 
-The **unbanked private post-impact initial-state candidate** captures source-defined
+- Current banked production: **M14.14 — Construct private post-impact spacecraft state at provider-owned contact roots.**
 COM pose at the same provider-owned alpha, frozen dynamics and unchanged final
 velocity bits. Checked construction/read retain existing source applicability.
 It implements no remainder advancement, endpoint selection or canonical publication.

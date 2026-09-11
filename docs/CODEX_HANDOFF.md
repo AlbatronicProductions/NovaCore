@@ -37,8 +37,8 @@ physical-event epochs**, commit `d0b9f9d69d55b8ba85a7b24a44f93e03cea2dcf6`, tag
 M14.1 through M14.13 are banked. The current baseline is
 `704c77f1aab899ccf3452ee3fc88471d1e311aca`, tag `m14.13-certified-postimpact-velocity`:
 [certified final linear/angular bits](certified-postimpact-velocity.md).
-The **unbanked** [private initial-state candidate](private-postimpact-state.md) on
-`codex/private-root-postimpact-state` adds source-defined pose, frozen dynamics and
+- Banked M14.14 [private post-impact spacecraft state](private-postimpact-state.md) adds source-defined root pose, frozen dynamics and checked access at the same provider-owned alpha.
+- M14.14 adds source-defined pose, frozen dynamics and checked access at the same provider-owned alpha.
 checked access at the same provider root. No remainder advancement, endpoint selection,
 canonical publication or contact reacquisition is implemented. Return it to Project
 Control after the bounded gates in its [evidence](engineering-evidence/private-postimpact-state/README.md).
