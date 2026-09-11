@@ -8,7 +8,7 @@ records its investigation stage. Follow subsequent accepted conclusions.
 
 | Family | Continuing value | Read the conclusion first |
 |---|---|---|
-| [Final post-impact velocity candidate](certified-postimpact-velocity/README.md) | Corrected full Debug/Release acceptance, real Florida final-state certificates, bit replay, zero reusable-path allocation and bounded performance. | [Unbanked contract](../certified-postimpact-velocity.md); ready for Project Control acceptance. |
+| [Banked M14.13 final post-impact velocity](certified-postimpact-velocity/README.md) | Same-root final represented velocity, corrected full Debug/Release acceptance, real Florida certificates, bit replay, zero reusable-path allocation and bounded performance. | [Banked contract](../certified-postimpact-velocity.md); ready for subsequent execution architecture. |
 | [M14.12 pre-impact velocity tuple — banked](certified-preimpact-velocity/README.md) | Same-root vector containment, source applicability, independent real-root oracle, non-mutation and bounded cost. | [Banked contract](../certified-preimpact-velocity.md). |
 | [Banked M14.11 certified response proposal](certified-response-proposal/README.md) | Exact-law impulse enclosures, independent rational/real-root oracles, identity/refusal, physical invariants and bounded cost. | [Banked contract](../certified-response-proposals.md). |
 | [Banked M14.10 qualified root contact kinematics](certified-root-contact-kinematics/README.md) | Same-root physical normal, material velocity, fixed lever, bounded qualification, identity/lifetime, independent oracle and measured cost. | [Banked contract](../certified-root-contact-kinematics.md). |

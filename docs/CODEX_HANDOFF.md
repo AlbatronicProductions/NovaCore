@@ -39,7 +39,7 @@ M14.1 through M14.12 are banked. The current baseline is M14.12,
 `m14.12-certified-preimpact-velocity`: [same-root pre-impact vectors](certified-preimpact-velocity.md)
 alongside the [exact response law](certified-response-proposals.md).
 The unbanked [final-velocity realization candidate](certified-postimpact-velocity.md)
-on `codex/certified-postimpact-velocity` selects checked final linear/angular bits.
+on Banked M14.13 selects checked final linear/angular bits.
 It grants no mutation rights and performs no private execution. **READY FOR PROJECT
 CONTROL ACCEPTANCE — UNBANKED**: the refusal allocation was attributed to `Environment.Version`
 object construction and locally corrected at immutable runtime preparation.
@@ -155,9 +155,9 @@ candidate is **BANKED as M14.9**.
 It admits one nonrotating authored point in the existing full-weight grading,
 within one-second cells and seed-relative ±3,600-second coverage. It proves
 clear/root outcomes and bounded comparison, without event execution or response.
-The active candidate on `codex/certified-postimpact-velocity` qualifies read-only
+Banked M14.13 qualifies read-only
 final velocity values at those roots. Its validation result is recorded above.
-No next milestone number is assigned; do not broaden discovery or start
+M14.13 is banked; do not broaden discovery or start
 private execution or support.
 
 - Preserve banked M13.1–M13.6 outcomes and future tessellation/displacement capacity.

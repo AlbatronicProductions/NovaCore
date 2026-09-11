@@ -27,13 +27,13 @@ and full feature/material-relative velocity at the same alpha. It prepares input
 for later post-impact numerical realization; no response is applied. See the
 [banked contract](certified-preimpact-velocity.md).
 
-Current unbanked candidate: **Certify final paired post-impact velocity states**,
-on `codex/certified-postimpact-velocity`. It selects from a fixed maximum of 65
+Current banked production: **M14.13 — Certify final paired post-impact velocity states**,
+selecting from a fixed maximum of 65
 final-value candidates and checks nonapproach, momentum/coupling and moving-surface
 energy defects. The result is read-only root-bound evidence; no mutation, canonical
 intent or private execution is implemented. See the
 [numerical contract](certified-postimpact-velocity.md).
-Status: **READY FOR PROJECT CONTROL ACCEPTANCE — UNBANKED**. The 256-byte refusal allocation was
+Status: **BANKED M14.13.** The 256-byte refusal allocation was attributed to repeated runtime-version object construction and corrected by immutable runtime preparation.
 attributed to repeated runtime-version object construction and corrected by
 preparing the immutable version predicate once. Corrected Debug/Release full
 Simulation, focused regressions and real-Florida integration pass, with identical
@@ -437,7 +437,7 @@ visually finished.
 ## Next architectural decision and work boundary
 
 M14 remains open at banked M14.12. The development worktree is `E:\NovaCore` on
-`codex/certified-postimpact-velocity`; `main` remains the banked baseline.
+`main`; `main` is the banked baseline.
 M13 is closed at M13.6 and there is no M13.7. Preserve the
 accepted NCSM1 physical, regional/facility, visibility, tessellation, memory and
 publication contracts. Historical exact-copy, residual-validation and lifecycle

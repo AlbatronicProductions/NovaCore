@@ -1,11 +1,11 @@
 # Certified final post-impact velocity states
 
-**UNBANKED candidate — Certify final paired post-impact velocity states.**
+**BANKED M14.13 — Certify final paired post-impact velocity states.**
 Baseline: banked M14.12, `e5fde08bcae834d8abc107cd26e7601fbfa3e1e0`,
 tag `m14.12-certified-preimpact-velocity`. M14 remains open.
 [Evidence and reproduction](engineering-evidence/certified-postimpact-velocity/README.md).
 
-**READY FOR PROJECT CONTROL ACCEPTANCE — UNBANKED.** The original 256-byte refusal allocation was
+**BANKED M14.13.** The original 256-byte refusal allocation was attributed to repeated runtime-version object construction and corrected at immutable runtime preparation.
 attributed to eight calls to the allocating `Environment.Version` getter. Runtime
 version applicability is now prepared once as immutable process metadata; all
 per-call floating-point witnesses remain. Corrected Debug/Release builds, full
