@@ -16,10 +16,10 @@ and performs FP64 camera-relative subtraction before GPU transport.
 Current banked baseline: **M14.14**, main/tag target
 `f64dc07f23a0a765b9b07dd49b895a8f3cb5ebfe`, tag
 `m14.14-private-root-postimpact-state`. M14 remains **OPEN**.
-An unbanked [paired private propagation candidate](private-canonical-propagation.md)
+Banked M14.15 [paired private propagation](private-canonical-propagation.md)
 adds certified conditional continuation to the captured integral source endpoint.
 It grants no event coverage or authoritative publication.
-It is ready for Project Control acceptance, still unbanked. Final normal Release
+It is banked as M14.15. Final normal Release
 passed 5/5 fresh processes, 46/46 groups each, with exact-zero gates intact;
 remaining ReferenceFrames, Precision, focused predecessor and Florida/query/stale
 integration gates passed in Debug/Release. Qualified candidate analytical/Florida

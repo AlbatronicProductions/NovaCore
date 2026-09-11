@@ -15,12 +15,12 @@ not as an onboarding requirement.
 
 ## Repository rules
 
-Active unbanked work: [paired private spacecraft propagation](private-canonical-propagation.md)
-on `codex/root-linked-private-propagation`, based on banked M14.14
+Banked M14.15: [paired private spacecraft propagation](private-canonical-propagation.md)
+on `main`, banked as M14.15
 `f64dc07f23a0a765b9b07dd49b895a8f3cb5ebfe`. It produces conditional staged state
 only. Event coverage and canonical publication remain deferred. No next milestone
 number or banking authority is assigned.
-Ready for Project Control acceptance, still unbanked: final normal Release passed
+Banked M14.15 acceptance: final normal Release passed
 5/5 fresh processes, 46/46 groups each; remaining declared acceptance gates passed.
 Historical real-object allocation witnesses remain retained. Candidate-associated
 process/module/layout effect remains; production causality is not established.

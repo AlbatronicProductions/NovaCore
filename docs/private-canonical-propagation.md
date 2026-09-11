@@ -1,10 +1,10 @@
 # Paired private spacecraft propagation
 
-Unbanked candidate: **Certify paired private spacecraft propagation to a canonical
-target**. M14.14 remains the banked baseline. This is conditional private
+Banked M14.15: **Certify paired private spacecraft propagation to a canonical
+target**. M14.15 is the banked baseline. This is conditional private
 continuation, not authoritative advancement or contact coverage.
 
-**READY FOR PROJECT CONTROL ACCEPTANCE — UNBANKED.** The final normal Release
+**BANKED M14.15.** The final normal Release
 bar passed 5/5 fresh processes, 46/46 groups each, with exact-zero gates intact.
 Outstanding ReferenceFrames, Precision, focused predecessor and Florida/query/stale
 integration gates passed in both configurations; qualified analytical/Florida and
