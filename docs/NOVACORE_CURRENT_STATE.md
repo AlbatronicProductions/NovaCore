@@ -20,8 +20,8 @@ Implementation commit: `3813791380ad035c308bb93cc404102a659d812d`.
 It supplies checked same-root exact-law scalar, linear and angular impulse enclosures,
 without executable FP64 selection or mutation. See the [banked contract](certified-response-proposals.md).
 
-Current unbanked candidate: **Qualify pre-impact velocity tuples at provider-owned
-contact roots**, on `codex/certified-preimpact-velocity`. It encloses COM inertial-root
+Current banked production: **M14.12 — Qualify pre-impact velocity tuples at provider-owned
+contact roots**. It encloses COM inertial-root
 and full feature/material-relative velocity at the same alpha. It prepares inputs
 for later post-impact numerical realization; no response is applied. See the
 [candidate contract](certified-preimpact-velocity.md).

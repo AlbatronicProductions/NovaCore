@@ -39,7 +39,7 @@ M14.1 through M14.11 are banked. The current baseline is M14.11,
 `m14.11-certified-response-proposal`: [same-root exact-law response enclosures](certified-response-proposals.md)
 without executable FP64 selection or mutation. The unbanked
 [pre-impact velocity candidate](certified-preimpact-velocity.md), on
-`codex/certified-preimpact-velocity`, qualifies COM and material-relative vectors
+M14.12 qualifies COM and material-relative vectors
 for later numerical realization; it applies no response. M14.8 is
 `2657bb16cdee2a42d1e5f9be830d247fb3c607f6`, tag
 `m14.8-exact-event-earth-relative-observation`; it owns same-epoch numerical
