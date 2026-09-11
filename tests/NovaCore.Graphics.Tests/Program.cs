@@ -22,6 +22,7 @@ var tests = new (string, Action)[]
     ("Certified Florida pre-impact velocity tuple", CertifiedFloridaPreImpactVelocityTests.Run),
     ("Certified Florida post-impact velocity realization", CertifiedFloridaPostImpactVelocityTests.Run),
     ("Private Florida post-impact initial state", PrivateFloridaPostImpactStateTests.Run),
+    ("Private Florida paired canonical propagation", PrivateFloridaPropagationTests.Run),
     ("Exact-event Earth-relative production terrain", EarthRelativeObservationProductionTests.Run),
     ("Contact generation production terrain", ContactGenerationProductionTests.Run),
     ("Physical surface-point query", PhysicalSurfacePointQueryTests.Run),

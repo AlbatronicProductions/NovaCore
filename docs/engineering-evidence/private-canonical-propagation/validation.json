@@ -1,0 +1,413 @@
+{
+  "status": "PAIRED PRIVATE PROPAGATION CANDIDATE — FOLLOW-UP REQUIRED",
+  "leadJudgment": "ESCALATE TO PROJECT CONTROL",
+  "executionPolicy": "One final full Simulation process per configuration. Stop on first material failure; no retry, profiling or unrelated test migration.",
+  "results": [
+    {
+      "gate": "full solution build",
+      "configuration": "Debug",
+      "exitCode": 0,
+      "warnings": 0,
+      "errors": 0
+    },
+    {
+      "gate": "full solution build",
+      "configuration": "Release",
+      "exitCode": 0,
+      "warnings": 0,
+      "errors": 0
+    },
+    {
+      "gate": "focused paired propagation analytical",
+      "configuration": "Debug",
+      "exitCode": 0,
+      "output": "PRIVATE_PROPAGATION_ANALYTICAL correlation/extrema/irrational/epoch/majorant/spin/normalization/refusal/recontact PASS"
+    },
+    {
+      "gate": "focused paired propagation analytical",
+      "configuration": "Release",
+      "exitCode": 0,
+      "output": "PRIVATE_PROPAGATION_ANALYTICAL correlation/extrema/irrational/epoch/majorant/spin/normalization/refusal/recontact PASS"
+    },
+    {
+      "gate": "real Florida paired propagation",
+      "configuration": "Release",
+      "exitCode": 0
+    },
+    {
+      "gate": "real Florida paired propagation",
+      "configuration": "Debug",
+      "exitCode": 0
+    },
+    {
+      "gate": "Full Simulation",
+      "configuration": "Debug",
+      "exitCode": 0,
+      "groups": 46,
+      "command": "dotnet tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll"
+    },
+    {
+      "gate": "Full Simulation",
+      "configuration": "Release",
+      "exitCode": 1,
+      "command": "dotnet tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "status": "FAIL",
+      "failure": {
+        "gate": "attitude-integration",
+        "allocatedBytes": 12336,
+        "entry": "PASS",
+        "exit": "PASS",
+        "file": "tests/NovaCore.Simulation.Tests/Program.cs",
+        "line": 300,
+        "exception": "InvalidOperationException: attitude-integration: expected zero managed allocation, actual=12336"
+      },
+      "validationStopped": true
+    }
+  ],
+  "fullSimulation": {
+    "Debug": {
+      "passed": 46,
+      "failed": 0,
+      "unreached": 0
+    },
+    "Release": {
+      "passed": 27,
+      "failed": 1,
+      "unreached": 18,
+      "firstFailure": "Spacecraft attitude integration"
+    }
+  },
+  "releaseFailure": {
+    "allocatedBytes": 12336,
+    "noGcEntry": "PASS",
+    "noGcExit": "PASS",
+    "expectedBytes": 0,
+    "workload": "100000 original lookup/evaluation/frame-extraction iterations; unchanged existing method and original warmup.",
+    "reachedAssertion": "Program.cs:300, after completion of the original loop",
+    "witness": [
+      "ORDINARY_ALLOCATION gate=attitude-integration bytes=12336 entry=PASS exit=PASS",
+      "Unhandled exception. System.InvalidOperationException: attitude-integration: expected zero managed allocation, actual=12336",
+      "   at Program.<<Main>$>g__SpacecraftAttitudeIntegrationTests|0_7() in E:\\NovaCore\\tests\\NovaCore.Simulation.Tests\\Program.cs:line 300",
+      "   at Program.<Main>$(String[] args) in E:\\NovaCore\\tests\\NovaCore.Simulation.Tests\\Program.cs:line 104"
+    ],
+    "classification": "ZERO-ALLOCATION GATE FAILURE; CAUSE UNCLASSIFIED",
+    "managedObjects": "UNAVAILABLE",
+    "objectType": "UNAVAILABLE",
+    "allocatingCallStack": "UNAVAILABLE",
+    "recurrence": "One full Release attempt; no retry or baseline reproduction",
+    "candidateCausality": "Not established. New group's execution was unreached; additive assembly/runner changes do not exclude an indirect effect.",
+    "noProductionOrTestCorrectionAfterFailure": true
+  },
+  "notRunAfterStop": [
+    "ReferenceFrames Debug and Release",
+    "Precision Debug and Release",
+    "Separate focused M14.6–M14.14 regression processes in both configurations",
+    "Separate banked private Florida post-impact initial-state regression processes"
+  ],
+  "completedEarlierCoverage": "Full Debug included all registered M14.6–M14.14 groups. New focused Debug/Release and real Florida Debug/Release passed before the full Release stop. This does not replace remaining gates.",
+  "deterministicReplay": {
+    "fixtures": 2,
+    "comparison": "Raw complete PRIVATE_PROPAGATION_REPLAY JSON identical across Debug/Release; identical across independently reconstructed chains and repeated reads. Signed Int64 bit arrays retained verbatim, never converted through floating-point JSON parsing.",
+    "pass": true,
+    "file": "replay-witnesses.json"
+  },
+  "request": {
+    "positionMetres": 0.002,
+    "velocityMetresPerSecond": 0.000002,
+    "angularVelocityRadiansPerSecond": 0.000002,
+    "attitudeChordal": 0.000004,
+    "selection": "Predeclared before Florida validation; no loosening"
+  },
+  "timing": {
+    "warmups": 32,
+    "samples": 101,
+    "medianIndex": 50,
+    "p95Index": 95,
+    "p99Index": 99,
+    "maximumIndex": 100,
+    "clock": "Stopwatch",
+    "units": "microseconds",
+    "runtime": "ordinary default runtime, outside no-GC"
+  },
+  "allocation": {
+    "calls": 8,
+    "measurement": "separate existing checked OrdinaryAllocationMeasurement",
+    "requiredReusableBytes": 0,
+    "positiveControl": {
+      "object": "byte[128]",
+      "counterBytes": {
+        "Debug": 152,
+        "Release": 152
+      },
+      "entry": "PASS",
+      "exit": "PASS"
+    },
+    "sourcePreparationBytesPerCall": 1672
+  },
+  "costs": {
+    "Debug": [
+      {
+        "kind": "private-propagation-cost",
+        "name": "source preparation",
+        "warmup": 32,
+        "samples": 101,
+        "completed": 8,
+        "bytes": 13376,
+        "zeroRequired": false,
+        "entry": "PASS",
+        "exit": "PASS",
+        "medianUs": 4327.9,
+        "p95Us": 4397.4,
+        "p99Us": 4619.1,
+        "maximumUs": 6780.8
+      },
+      {
+        "kind": "private-propagation-cost",
+        "name": "translation evaluation",
+        "warmup": 32,
+        "samples": 101,
+        "completed": 8,
+        "bytes": 0,
+        "zeroRequired": true,
+        "entry": "PASS",
+        "exit": "PASS",
+        "medianUs": 1.6,
+        "p95Us": 1.7,
+        "p99Us": 1.7,
+        "maximumUs": 1.8
+      },
+      {
+        "kind": "private-propagation-cost",
+        "name": "rotational calculation",
+        "warmup": 32,
+        "samples": 101,
+        "completed": 8,
+        "bytes": 0,
+        "zeroRequired": true,
+        "entry": "PASS",
+        "exit": "PASS",
+        "medianUs": 77,
+        "p95Us": 79.8,
+        "p99Us": 91.8,
+        "maximumUs": 102.6
+      },
+      {
+        "kind": "private-propagation-cost",
+        "name": "paired staged construction",
+        "warmup": 32,
+        "samples": 101,
+        "completed": 8,
+        "bytes": 0,
+        "zeroRequired": true,
+        "entry": "PASS",
+        "exit": "PASS",
+        "medianUs": 88.7,
+        "p95Us": 91,
+        "p99Us": 101.3,
+        "maximumUs": 114.5
+      },
+      {
+        "kind": "private-propagation-cost",
+        "name": "checked consumption",
+        "warmup": 32,
+        "samples": 101,
+        "completed": 8,
+        "bytes": 0,
+        "zeroRequired": true,
+        "entry": "PASS",
+        "exit": "PASS",
+        "medianUs": 13.2,
+        "p95Us": 13.3,
+        "p99Us": 13.4,
+        "maximumUs": 17.9
+      },
+      {
+        "kind": "private-propagation-cost",
+        "name": "numerical refusal",
+        "warmup": 32,
+        "samples": 101,
+        "completed": 8,
+        "bytes": 0,
+        "zeroRequired": true,
+        "entry": "PASS",
+        "exit": "PASS",
+        "medianUs": 89.7,
+        "p95Us": 90.9,
+        "p99Us": 92.8,
+        "maximumUs": 95.4
+      },
+      {
+        "kind": "private-propagation-cost",
+        "name": "stale refusal",
+        "warmup": 32,
+        "samples": 101,
+        "completed": 8,
+        "bytes": 0,
+        "zeroRequired": true,
+        "entry": "PASS",
+        "exit": "PASS",
+        "medianUs": 1.8,
+        "p95Us": 1.8,
+        "p99Us": 1.9,
+        "maximumUs": 6.8
+      }
+    ],
+    "Release": [
+      {
+        "kind": "private-propagation-cost",
+        "name": "source preparation",
+        "warmup": 32,
+        "samples": 101,
+        "completed": 8,
+        "bytes": 13376,
+        "zeroRequired": false,
+        "entry": "PASS",
+        "exit": "PASS",
+        "medianUs": 1756.8,
+        "p95Us": 3503.3,
+        "p99Us": 3531.1,
+        "maximumUs": 5150.4
+      },
+      {
+        "kind": "private-propagation-cost",
+        "name": "translation evaluation",
+        "warmup": 32,
+        "samples": 101,
+        "completed": 8,
+        "bytes": 0,
+        "zeroRequired": true,
+        "entry": "PASS",
+        "exit": "PASS",
+        "medianUs": 0.3,
+        "p95Us": 0.3,
+        "p99Us": 0.3,
+        "maximumUs": 0.4
+      },
+      {
+        "kind": "private-propagation-cost",
+        "name": "rotational calculation",
+        "warmup": 32,
+        "samples": 101,
+        "completed": 8,
+        "bytes": 0,
+        "zeroRequired": true,
+        "entry": "PASS",
+        "exit": "PASS",
+        "medianUs": 17.2,
+        "p95Us": 18.2,
+        "p99Us": 22.7,
+        "maximumUs": 22.7
+      },
+      {
+        "kind": "private-propagation-cost",
+        "name": "paired staged construction",
+        "warmup": 32,
+        "samples": 101,
+        "completed": 8,
+        "bytes": 0,
+        "zeroRequired": true,
+        "entry": "PASS",
+        "exit": "PASS",
+        "medianUs": 30.5,
+        "p95Us": 31.4,
+        "p99Us": 33.7,
+        "maximumUs": 34.9
+      },
+      {
+        "kind": "private-propagation-cost",
+        "name": "checked consumption",
+        "warmup": 32,
+        "samples": 101,
+        "completed": 8,
+        "bytes": 0,
+        "zeroRequired": true,
+        "entry": "PASS",
+        "exit": "PASS",
+        "medianUs": 22.1,
+        "p95Us": 23.5,
+        "p99Us": 25.7,
+        "maximumUs": 26.1
+      },
+      {
+        "kind": "private-propagation-cost",
+        "name": "numerical refusal",
+        "warmup": 32,
+        "samples": 101,
+        "completed": 8,
+        "bytes": 0,
+        "zeroRequired": true,
+        "entry": "PASS",
+        "exit": "PASS",
+        "medianUs": 30.6,
+        "p95Us": 31.6,
+        "p99Us": 34.3,
+        "maximumUs": 34.5
+      },
+      {
+        "kind": "private-propagation-cost",
+        "name": "stale refusal",
+        "warmup": 32,
+        "samples": 101,
+        "completed": 8,
+        "bytes": 0,
+        "zeroRequired": true,
+        "entry": "PASS",
+        "exit": "PASS",
+        "medianUs": 1.9,
+        "p95Us": 2,
+        "p99Us": 2,
+        "maximumUs": 2
+      }
+    ]
+  },
+  "work": {
+    "degree": 11,
+    "remainderOrder": 12,
+    "coefficientConvolutionPairs": 66,
+    "majorantConvolutionPairs": 78,
+    "substeps": 0,
+    "retries": 0,
+    "rootSelections": 0,
+    "explicitStackArrayPayloadBytes": 1760,
+    "receiptValueBytes": 5840,
+    "valuesBytes": 1112,
+    "endpointBytes": 544,
+    "newProviderHeapObjects": 0
+  },
+  "limitations": [
+    "Stack payload is not total stack consumption; locals, alignment and frames excluded. Pair counts are not total arithmetic-operation counts.",
+    "Source preparation starts with an existing Case and loaded terrain query; includes M14.9–M14.14 chain reconstruction, excludes asset loading.",
+    "No whole-frame, long-run tiering, high-warp scalability or coverage claim.",
+    "Arithmetic guard reused; unsupported platform/floating-point environment not fault-injected.",
+    "Root uncertainty and outward arithmetic are jointly enclosed; no disjoint attribution of their error radii is claimed."
+  ],
+  "reviews": [
+    {
+      "reviewer": "m14_chain_audit",
+      "scope": "root correlation, translation algebra, checked ownership, nonmutation, target, coverage",
+      "result": "PASS",
+      "finding": "Added explicit RootTargetOrder/default-output pure-kernel test before final full builds."
+    },
+    {
+      "reviewer": "m14_scope_audit",
+      "scope": "Euler/quaternion equations, uniform remainder, final represented normalization, deterministic arithmetic",
+      "result": "PASS",
+      "finding": "Added noncommuting quaternion-order and independent exact-rational final-normalization controls before final full builds; rereview passed."
+    },
+    {
+      "reviewer": "m14_performance_boundary",
+      "scope": "measurement boundaries, bounded work/value/stack sizes, KSA staging responsibility",
+      "result": "PASS",
+      "finding": "Report summed stack-array payload rather than total stack; separate 66 coefficient and 78 majorant pairs."
+    }
+  ],
+  "diffCheck": "PASS; only line-ending conversion warnings",
+  "technicalAcceptance": "NOT CLEARED",
+  "disposal": {
+    "newDisposableEvidenceFiles": 0,
+    "newDisposableEvidenceBytes": 0,
+    "deletedFiles": 0,
+    "deletedBytes": 0,
+    "standardBuildOutputs": "Existing ignored bin/obj deployment rebuilt; not copied into evidence."
+  }
+}

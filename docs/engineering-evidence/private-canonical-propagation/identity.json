@@ -1,0 +1,122 @@
+{
+  "timestamp": "2026-09-10T23:38:11.1109767-04:00",
+  "branch": "codex/root-linked-private-propagation",
+  "head": "f64dc07f23a0a765b9b07dd49b895a8f3cb5ebfe",
+  "main": "f64dc07f23a0a765b9b07dd49b895a8f3cb5ebfe",
+  "originMain": "f64dc07f23a0a765b9b07dd49b895a8f3cb5ebfe",
+  "bankedSourceTree": "62de23d2b57c8490561b30d9d99dc9e4c3c4ac1e",
+  "bankedTestsTree": "fb02703ca8297277c101d3f7873630dde9846b1f",
+  "bankedTrackedProductionCSharp": 233,
+  "files": [
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/PrivateCanonicalPropagation.cs",
+      "sha256": "811ED5FA51C71F604FCCCE7CA2AEE8B4F485E145E0194C901A0AD8354DBA1C12"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/PrivateCanonicalPropagationTests.cs",
+      "sha256": "F426F70768AD1352A1A93A8143F10DD7C6BE57D2451D4D9AAF762F90376582C9"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PrivateFloridaPropagationTests.cs",
+      "sha256": "740583FBF52963FA07D42A9E7E44911585738A5CDD5CC731D9F05DB8030BEE3C"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "sha256": "707EBA72B665072EFC28830D7BE6DFDB0724EF2009C1AB7EB70FED7597CD2CCA"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/Program.cs",
+      "sha256": "36BA9141A4ED787C954ED31243AAA1DD5B5E0B34E62431CB0369AE4627CBA842"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/NovaCore.Graphics.Tests.csproj",
+      "sha256": "83C389DEF2E17F1CABBAF19727418BB437180A091E15CE1B0348576A4A2769BD"
+    }
+  ],
+  "binaries": [
+    {
+      "path": "src/NovaCore.Simulation/bin/Debug/net10.0/NovaCore.Simulation.dll",
+      "sha256": "D358561A28248DAC5B4F3544EE2ED711DA0ACC36F98D28503F72EECBB128E223"
+    },
+    {
+      "path": "src/NovaCore.Simulation/bin/Release/net10.0/NovaCore.Simulation.dll",
+      "sha256": "6773F2A46EDE28B31AFA772174D68B427C34A89BB55DD785F50503936E56C384"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+      "sha256": "8EBA8E545CC199AEE2F60C87D820B3149E86A3CF70C7CFB24DB1B36F41B06DFB"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "sha256": "E1548AFE9A333125C69C9C6DFD503CF21B1F6870442624B665B98784296C578F"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.dll",
+      "sha256": "EA9CB6D4EE233F06A3E19A1C9B63F9F0EBCFEA05FFBEC8140DD8D153FBD0B6DC"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+      "sha256": "ACACB0966DA11439578C1435E0740FCAFF4A8208F30CABD51461114F32BB553F"
+    }
+  ],
+  "ksa": [
+    {
+      "path": "E:/Kitten Space Agency/KSA.dll",
+      "sha256": "A8A5164204EED962DF9D9025E99F523D9A23EE2CE6E802B18216A9DA35506D2F"
+    },
+    {
+      "path": "build/ksa-residency-reference/assembly-source/KSA/VehicleUpdateData.cs",
+      "sha256": "E06EDC2A6B2901ABEC71FA9ABD6668DC8FF88B05DBA84BDF4EE2908D55ED8C0C"
+    },
+    {
+      "path": "build/ksa-residency-reference/assembly-source/KSA/VehicleUpdateState.cs",
+      "sha256": "6477C8B4EBA2917BD148FC6BB953C979DAB26445A31DAA6C622DCB597FF4F8C0"
+    },
+    {
+      "path": "build/ksa-residency-reference/assembly-source/KSA/VehicleUpdateTask.cs",
+      "sha256": "1AA77D886DD64BBE4ECD212096476442E5EC431E4BCDCB2EF1EAC0FA63CD3759"
+    },
+    {
+      "path": "build/ksa-residency-reference/assembly-source/KSA/PhysicsBubble.cs",
+      "sha256": "E2FE83C15D846E840EC382E6823E8E3550A04E80E510FE4FCC29CAB9DBDB11D9"
+    }
+  ],
+  "tags": [
+    "m14.1-canonical-surface-point-queries 3ccb998031e15cb1898394589c27244d55e06e24 5b9b02ab1d2ba0e903809510908e4819984d4de2",
+    "m14.10-certified-root-contact-kinematics b07c511aab7109e3d240d9c7c31a444f58e069a5 fce80a520240293a0373857986c607caf187eacd",
+    "m14.11-certified-response-proposal 8ac99fbfad4f8dd6365d696053fc3edfeea2249d 556ca77af88257b5727561709c3a091aaec8cee7",
+    "m14.12-certified-preimpact-velocity 98831b08e07d1bcc251f7aa900f463b98570ef04 e5fde08bcae834d8abc107cd26e7601fbfa3e1e0",
+    "m14.13-certified-postimpact-velocity 7c94f38cab9cf605c69b3b1874fee0c0091fbbb2 704c77f1aab899ccf3452ee3fc88471d1e311aca",
+    "m14.14-private-root-postimpact-state 412084a0acda2fa96c4be166e1f9f29020ffc577 f64dc07f23a0a765b9b07dd49b895a8f3cb5ebfe",
+    "m14.2-spacecraft-translational-authority ae2f203b97224ff88b38b7c68902ac2d31108a91 caa6d93ccd7c4e5924381e077a62585f99e5a32a",
+    "m14.3-spacecraft-terrain-contact-observations b9ad79c38b322c8e1e095039d5b69c035a1bcca8 79978cf8b0fd783d43a661df6df53a2c0202af4a",
+    "m14.4-atomic-contact-response b198d3b381ba4a82577ba89bd5e31e6050d3a896 28b92f724f8decd3c9356aa5f9f5bbd6c9dd069c",
+    "m14.5-isolated-analytical-contact-response c2964fe4531b8e383d2d89beec2e8c055f3541a5 b53d48025cfb8142cb32a6fc6fceb6018e33cfcd",
+    "m14.6-physical-event-epochs 07adc9983252f2cabf0af9da0a1281457af606bf d0b9f9d69d55b8ba85a7b24a44f93e03cea2dcf6",
+    "m14.7-exact-event-spacecraft-motion 315da29c4eff5562f9040f7a0aedbb4e961fa877 56c0ae95b7f514e2f0440dfe272dd2836f32506e",
+    "m14.8-exact-event-earth-relative-observation 27a32989cef714a204d0d7ecfbd4618e53de0086 2657bb16cdee2a42d1e5f9be830d247fb3c607f6",
+    "m14.9-florida-monotone-contact-certification 944cb5c1f2011b5944745b210e561d0b9e8b4aaf 9698a08b84b9b40b0fa03bec8f8ba80d1d7404e7"
+  ],
+  "initialWorktree": "clean main",
+  "implementationCommit": "64a4173e59d15ad34f0ac3819bc6aa60addeb559",
+  "allBankedTagsUnchanged": true,
+  "existingProductionChanged": 0,
+  "newProductionFiles": 1,
+  "method": "Banked tracked src tree unchanged by git diff against HEAD; SHA256 for all candidate source/test and built assemblies. Existing failing method compared with HEAD after LF normalization.",
+  "failingMethod": {
+    "file": "tests/NovaCore.Simulation.Tests/Program.cs",
+    "method": "SpacecraftAttitudeIntegrationTests",
+    "line": 280,
+    "assertionLine": 300,
+    "unchangedFromBanked": true,
+    "normalizedSha256": "DFEF5A432C87D9073F3926F4D9D2C066A4FD4EEDE1FBD59618D81167A323E327"
+  },
+  "environment": {
+    "sdk": "10.0.303",
+    "runtime": "10.0.12",
+    "os": "Windows",
+    "architecture": "x64",
+    "profiler": false,
+    "runtimeConfigurationChanges": false
+  }
+}

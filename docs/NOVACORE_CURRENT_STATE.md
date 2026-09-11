@@ -13,6 +13,22 @@ and performs FP64 camera-relative subtraction before GPU transport.
 
 ## Banked production checkpoint
 
+Current banked baseline: **M14.14**, main/tag target
+`f64dc07f23a0a765b9b07dd49b895a8f3cb5ebfe`, tag
+`m14.14-private-root-postimpact-state`. M14 remains **OPEN**.
+An unbanked [paired private propagation candidate](private-canonical-propagation.md)
+adds certified conditional continuation to the captured integral source endpoint.
+It grants no event coverage or authoritative publication.
+It is ready for Project Control acceptance, still unbanked. Final normal Release
+passed 5/5 fresh processes, 46/46 groups each, with exact-zero gates intact;
+remaining ReferenceFrames, Precision, focused predecessor and Florida/query/stale
+integration gates passed in Debug/Release. Qualified candidate analytical/Florida
+and deterministic replay evidence remains valid. Historical candidate-associated
+managed allocation witnesses remain documented; production causality is not
+established and no correction was made. Forensics is closed for this acceptance;
+residual uncertainty follows Project Control's declared final acceptance bar.
+See [final acceptance](engineering-evidence/private-canonical-propagation/final-acceptance.md).
+
 Banked predecessor: **M14.11 — Qualify certified isolated-contact response
 proposals at provider-owned roots**, banked main/tag target
 `556ca77af88257b5727561709c3a091aaec8cee7`, tag `m14.11-certified-response-proposal`.

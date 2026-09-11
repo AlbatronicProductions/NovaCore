@@ -1,0 +1,408 @@
+{
+  "baseline": "f64dc07f23a0a765b9b07dd49b895a8f3cb5ebfe",
+  "branch": "codex/root-linked-private-propagation",
+  "originalWitness": {
+    "bytes": 12336,
+    "entry": "PASS",
+    "exit": "PASS",
+    "source": "validation.json",
+    "fullRelease": {
+      "passed": 27,
+      "failed": 1,
+      "unreached": 18
+    }
+  },
+  "classification": "G — MIXED / INSUFFICIENT EVIDENCE",
+  "candidateCausality": "NOT ESTABLISHED",
+  "reason": "Original 12336-byte witness absent in all sixteen bounded runs; two isolated candidate runs reported a different 6192-byte witness. Baseline isolated 5/5 zero; prefix 3/3 zero in each arm. Candidate association of the new intermittent witness is observed, but cause of the original witness is not established.",
+  "historicalRelationship": "SAME NUMERIC WITNESS / CAUSAL RELATION UNKNOWN",
+  "payoff": "No observer, bisection or correction: original witness not reproduced; new isolated counter movement is intermittent and a different magnitude. Candidate acceptance remains blocked. Project Control decides whether a bounded attribution of the 6192-byte witness can materially determine a correction.",
+  "builds": {
+    "baseline": {
+      "configuration": "Release",
+      "project": "tests/NovaCore.Simulation.Tests/NovaCore.Simulation.Tests.csproj",
+      "builds": 1,
+      "result": "PASS",
+      "warnings": 0,
+      "errors": 0
+    },
+    "candidate": {
+      "configuration": "Release",
+      "project": "tests/NovaCore.Simulation.Tests/NovaCore.Simulation.Tests.csproj",
+      "builds": 1,
+      "result": "PASS",
+      "warnings": 0,
+      "errors": 0
+    }
+  },
+  "environment": {
+    "cwd": "E:/NovaCore",
+    "sdk": "10.0.303",
+    "runtimes": [
+      "Microsoft.NETCore.App 10.0.11 [C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App]",
+      "Microsoft.NETCore.App 10.0.12 [C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App]"
+    ],
+    "variables": [
+      {
+        "name": "DOTNET_ROOT",
+        "value": "C:\\Program Files\\dotnet"
+      },
+      {
+        "name": "DOTNET_ROOT(x86)",
+        "value": "C:\\Program Files (x86)\\dotnet"
+      }
+    ],
+    "selection": "Identical net10.0 runtimeconfig, normal installed-host patch selection; no per-process module trace.",
+    "tieringChanges": false,
+    "pgoChanges": false,
+    "profiler": false,
+    "eventPipe": false
+  },
+  "test": {
+    "group": "Spacecraft attitude integration",
+    "method": "SpacecraftAttitudeIntegrationTests",
+    "canonicalFile": "tests/NovaCore.Simulation.Tests/Program.cs",
+    "line": 280,
+    "assertionLine": 300,
+    "oneBasedOrdinal": 28,
+    "methodNormalizedSha256": "DFEF5A432C87D9073F3926F4D9D2C066A4FD4EEDE1FBD59618D81167A323E327",
+    "helperSha256": "3B6F2D9905EA52BFB131DF670F1E6A2116BA340C9EF7767DE1020197D473CFB7",
+    "identity": "Unchanged gate body after LF normalization; helper byte-identical. No banked underlying production file differs. Surrounding candidate wiring adds one selector and the final group.",
+    "warmup": "Original setup evaluates attitude/frame extraction and transactions; immediately before measurement one view.TryGetAttitude call. No extra warmup.",
+    "workload": "100000 original lookup/evaluation/frame-extraction/checksum iterations; original checks and exact zero requirement.",
+    "measurement": "OrdinaryAllocationMeasurement: 1 MiB checked no-GC region; counter after entry, before exit; guaranteed cleanup, entry/exit errors fail; reporting after measured window; timing not combined.",
+    "selector": "if (args.Contains(\"--attitude-integration-only\", StringComparer.Ordinal)) { SpacecraftAttitudeIntegrationTests(); Console.WriteLine(\"PASS Spacecraft attitude integration\"); return; }",
+    "prefixLoop": "foreach (var (name, test) in tests) { test(); Console.WriteLine($\"PASS {name}\"); if (name == \"Spacecraft attitude integration\" && args.Contains(\"--attitude-integration-prefix\", StringComparer.Ordinal)) return; }",
+    "fullArraysRetained": {
+      "baseline": 45,
+      "candidate": 46
+    },
+    "prefix": [
+      "SimulationInstant",
+      "SimulationDuration",
+      "SimulationRate",
+      "Solar UTC and speed presets",
+      "Event ordering",
+      "Internal physical-event epochs",
+      "Timeline topology",
+      "Simulation clock",
+      "Host-duration conversion",
+      "Host-duration debt servicing",
+      "Transaction contracts",
+      "Canonical transaction groups",
+      "Clock execution orchestration",
+      "Celestial contracts",
+      "Celestial system definitions",
+      "Celestial body catalog",
+      "SolAnalytical dataset",
+      "Celestial system time and provenance",
+      "Celestial ephemeris catalogs",
+      "Celestial system evaluation",
+      "Celestial body orientation",
+      "Two-body propagation",
+      "Spacecraft attitude",
+      "Spacecraft translational authority",
+      "Spacecraft contact generation",
+      "Unified linear/angular contact transaction",
+      "Isolated analytical contact response policy",
+      "Spacecraft attitude integration"
+    ],
+    "perturbation": "Identical disposable selector-only wiring is needed because banked runner exposes neither mode. It changes entry/runner IL; cannot prove the original unmodified full process will match this control. Candidate's existing extra selector/group and assembly content remain in its arm."
+  },
+  "arms": [
+    {
+      "arm": "baseline",
+      "head": "f64dc07f23a0a765b9b07dd49b895a8f3cb5ebfe",
+      "groupCount": 45,
+      "targetOneBased": 28,
+      "hashes": [
+        {
+          "path": "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+          "sha256": "5B66DD597C0386E1330FCD3E70DA0E068E66A657F880F1AC060C0753D9A3E6EE"
+        },
+        {
+          "path": "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.dll",
+          "sha256": "F13733CAF1AE3A3A225182FD786083753417B87DD72E49BD893C0AF480C225C5"
+        },
+        {
+          "path": "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.runtimeconfig.json",
+          "sha256": "C230A317A54DD960BCBEB5F347F52E18DC665A26F7EFDA2159FCED9A5AC7E097"
+        },
+        {
+          "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+          "sha256": "59F764223BCD8B308CDD1702083B9A4FBAA200FBD4CC3A09892D280CE8F33718"
+        },
+        {
+          "path": "src/NovaCore.Simulation/Celestial/Data/moon_me_de440_1900_2100.nclo",
+          "sha256": "8EA43F6DD2A20A905F85834D21FDFB92805872AC36C1964E45E733DF015F9E8C"
+        }
+      ]
+    },
+    {
+      "arm": "candidate",
+      "head": "f64dc07f23a0a765b9b07dd49b895a8f3cb5ebfe",
+      "groupCount": 46,
+      "targetOneBased": 28,
+      "hashes": [
+        {
+          "path": "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+          "sha256": "79740A66EA73BBD458021878F98A9EF5C1BD83C14CE411C58A07D2979257FF42"
+        },
+        {
+          "path": "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.dll",
+          "sha256": "3AFF3A6259E61932215710D2E298370DF6A0BDAFE7EAFADD6FCBAF718549D671"
+        },
+        {
+          "path": "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.runtimeconfig.json",
+          "sha256": "C230A317A54DD960BCBEB5F347F52E18DC665A26F7EFDA2159FCED9A5AC7E097"
+        },
+        {
+          "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+          "sha256": "B4BFB3CB356EB03AA038AA280FD29BEEE685024B3C4C801CD74310551D81C5F0"
+        },
+        {
+          "path": "src/NovaCore.Simulation/Celestial/Data/moon_me_de440_1900_2100.nclo",
+          "sha256": "8EA43F6DD2A20A905F85834D21FDFB92805872AC36C1964E45E733DF015F9E8C"
+        }
+      ]
+    }
+  ],
+  "commands": {
+    "build": "dotnet build tests/NovaCore.Simulation.Tests/NovaCore.Simulation.Tests.csproj -c Release -v minimal",
+    "isolated": "dotnet E:/NovaCore/.codex/paired-attitude-differential/{arm}/tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll --attitude-integration-only",
+    "prefix": "dotnet E:/NovaCore/.codex/paired-attitude-differential/{arm}/tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll --attitude-integration-prefix",
+    "positive": "dotnet E:/NovaCore/.codex/paired-attitude-differential/{arm}/tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll --ordinary-allocation-control"
+  },
+  "runs": [
+    {
+      "phase": "isolated",
+      "pair": 1,
+      "arm": "baseline",
+      "exit": 0,
+      "bytes": 0,
+      "entry": "PASS",
+      "regionExit": "PASS",
+      "result": "PASS"
+    },
+    {
+      "phase": "isolated",
+      "pair": 1,
+      "arm": "candidate",
+      "exit": 1,
+      "bytes": 6192,
+      "entry": "PASS",
+      "regionExit": "PASS",
+      "result": "FAIL"
+    },
+    {
+      "phase": "isolated",
+      "pair": 2,
+      "arm": "baseline",
+      "exit": 0,
+      "bytes": 0,
+      "entry": "PASS",
+      "regionExit": "PASS",
+      "result": "PASS"
+    },
+    {
+      "phase": "isolated",
+      "pair": 2,
+      "arm": "candidate",
+      "exit": 0,
+      "bytes": 0,
+      "entry": "PASS",
+      "regionExit": "PASS",
+      "result": "PASS"
+    },
+    {
+      "phase": "isolated",
+      "pair": 3,
+      "arm": "baseline",
+      "exit": 0,
+      "bytes": 0,
+      "entry": "PASS",
+      "regionExit": "PASS",
+      "result": "PASS"
+    },
+    {
+      "phase": "isolated",
+      "pair": 3,
+      "arm": "candidate",
+      "exit": 1,
+      "bytes": 6192,
+      "entry": "PASS",
+      "regionExit": "PASS",
+      "result": "FAIL"
+    },
+    {
+      "phase": "isolated",
+      "pair": 4,
+      "arm": "baseline",
+      "exit": 0,
+      "bytes": 0,
+      "entry": "PASS",
+      "regionExit": "PASS",
+      "result": "PASS"
+    },
+    {
+      "phase": "isolated",
+      "pair": 4,
+      "arm": "candidate",
+      "exit": 0,
+      "bytes": 0,
+      "entry": "PASS",
+      "regionExit": "PASS",
+      "result": "PASS"
+    },
+    {
+      "phase": "isolated",
+      "pair": 5,
+      "arm": "baseline",
+      "exit": 0,
+      "bytes": 0,
+      "entry": "PASS",
+      "regionExit": "PASS",
+      "result": "PASS"
+    },
+    {
+      "phase": "isolated",
+      "pair": 5,
+      "arm": "candidate",
+      "exit": 0,
+      "bytes": 0,
+      "entry": "PASS",
+      "regionExit": "PASS",
+      "result": "PASS"
+    },
+    {
+      "phase": "prefix",
+      "pair": 1,
+      "arm": "baseline",
+      "exit": 0,
+      "bytes": 0,
+      "entry": "PASS",
+      "regionExit": "PASS",
+      "priorPassed": 27,
+      "result": "PASS"
+    },
+    {
+      "phase": "prefix",
+      "pair": 1,
+      "arm": "candidate",
+      "exit": 0,
+      "bytes": 0,
+      "entry": "PASS",
+      "regionExit": "PASS",
+      "priorPassed": 27,
+      "result": "PASS"
+    },
+    {
+      "phase": "prefix",
+      "pair": 2,
+      "arm": "baseline",
+      "exit": 0,
+      "bytes": 0,
+      "entry": "PASS",
+      "regionExit": "PASS",
+      "priorPassed": 27,
+      "result": "PASS"
+    },
+    {
+      "phase": "prefix",
+      "pair": 2,
+      "arm": "candidate",
+      "exit": 0,
+      "bytes": 0,
+      "entry": "PASS",
+      "regionExit": "PASS",
+      "priorPassed": 27,
+      "result": "PASS"
+    },
+    {
+      "phase": "prefix",
+      "pair": 3,
+      "arm": "baseline",
+      "exit": 0,
+      "bytes": 0,
+      "entry": "PASS",
+      "regionExit": "PASS",
+      "priorPassed": 27,
+      "result": "PASS"
+    },
+    {
+      "phase": "prefix",
+      "pair": 3,
+      "arm": "candidate",
+      "exit": 0,
+      "bytes": 0,
+      "entry": "PASS",
+      "regionExit": "PASS",
+      "priorPassed": 27,
+      "result": "PASS"
+    }
+  ],
+  "failureWitnesses": [
+    {
+      "phase": "isolated",
+      "pair": 1,
+      "arm": "candidate",
+      "output": "ORDINARY_ALLOCATION gate=attitude-integration bytes=6192 entry=PASS exit=PASS\r\nUnhandled exception. System.InvalidOperationException: attitude-integration: expected zero managed allocation, actual=6192\r\n   at Program.<<Main>$>g__SpacecraftAttitudeIntegrationTests|0_7() in E:\\NovaCore\\.codex\\paired-attitude-differential\\candidate\\tests\\NovaCore.Simulation.Tests\\Program.cs:line 301\r\n   at Program.<Main>$(String[] args) in E:\\NovaCore\\.codex\\paired-attitude-differential\\candidate\\tests\\NovaCore.Simulation.Tests\\Program.cs:line 18\r\n"
+    },
+    {
+      "phase": "isolated",
+      "pair": 3,
+      "arm": "candidate",
+      "output": "ORDINARY_ALLOCATION gate=attitude-integration bytes=6192 entry=PASS exit=PASS\r\nUnhandled exception. System.InvalidOperationException: attitude-integration: expected zero managed allocation, actual=6192\r\n   at Program.<<Main>$>g__SpacecraftAttitudeIntegrationTests|0_7() in E:\\NovaCore\\.codex\\paired-attitude-differential\\candidate\\tests\\NovaCore.Simulation.Tests\\Program.cs:line 301\r\n   at Program.<Main>$(String[] args) in E:\\NovaCore\\.codex\\paired-attitude-differential\\candidate\\tests\\NovaCore.Simulation.Tests\\Program.cs:line 18\r\n"
+    }
+  ],
+  "positiveControls": [
+    {
+      "arm": "baseline",
+      "exit": 0,
+      "bytes": 152,
+      "entry": "PASS",
+      "regionExit": "PASS"
+    },
+    {
+      "arm": "candidate",
+      "exit": 0,
+      "bytes": 152,
+      "entry": "PASS",
+      "regionExit": "PASS"
+    }
+  ],
+  "matrixCompleted": {
+    "isolated": 10,
+    "prefix": 6,
+    "positive": 2,
+    "freshProcesses": true,
+    "retries": 0,
+    "rebuildsDuringMatrix": 0
+  },
+  "remainingAcceptance": "NOT RUN; classification does not permit resumption",
+  "canonicalIdentity": {
+    "all315SourceProjectFingerprintsUnchanged": true,
+    "candidateSixFingerprintsMatch": "identity.json",
+    "productionEdits": 0,
+    "permanentTestEdits": 0
+  },
+  "correction": "NONE",
+  "cleanup": {
+    "reviewedRoot": "E:/NovaCore/.codex/paired-attitude-differential",
+    "baseline": {
+      "files": 307,
+      "bytes": 20186710
+    },
+    "candidate": {
+      "files": 309,
+      "bytes": 20358663
+    },
+    "totalFiles": 616,
+    "totalBytes": 40545373,
+    "status": "REMOVED: both worktree registrations and comparison root absent",
+    "remainingDisposableFiles": 0,
+    "remainingDisposableBytes": 0
+  },
+  "leadJudgment": "ESCALATE TO PROJECT CONTROL",
+  "finalClassification": "PAIRED PRIVATE PROPAGATION CANDIDATE — FOLLOW-UP REQUIRED"
+}
