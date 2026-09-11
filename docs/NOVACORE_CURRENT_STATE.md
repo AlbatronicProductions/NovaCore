@@ -33,12 +33,16 @@ final-value candidates and checks nonapproach, momentum/coupling and moving-surf
 energy defects. The result is read-only root-bound evidence; no mutation, canonical
 intent or private execution is implemented. See the
 [numerical contract](certified-postimpact-velocity.md).
-Status: **BANKED M14.13.** The 256-byte refusal allocation was attributed to repeated runtime-version object construction and corrected by immutable runtime preparation.
-attributed to repeated runtime-version object construction and corrected by
-preparing the immutable version predicate once. Corrected Debug/Release full
-Simulation, focused regressions and real-Florida integration pass, with identical
-final bits/certificates and zero reusable-path allocation. Project Control acceptance
-and banking remain outstanding; private execution remains outside this responsibility.
+Status: **BANKED M14.13**, main/tag target `704c77f1aab899ccf3452ee3fc88471d1e311aca`.
+The refusal allocation was corrected by immutable runtime preparation; the retained
+banked acceptance covers Debug/Release, real Florida and final bit/certificate replay.
+
+The **unbanked private post-impact initial-state candidate** captures source-defined
+COM pose at the same provider-owned alpha, frozen dynamics and unchanged final
+velocity bits. Checked construction/read retain existing source applicability.
+It implements no remainder advancement, endpoint selection or canonical publication.
+See [current candidate contract](private-postimpact-state.md) and
+[validation evidence](engineering-evidence/private-postimpact-state/README.md).
 
 Banked predecessor: **M14.9 monotone Florida point-contact certification**,
 commit `9698a08b84b9b40b0fa03bec8f8ba80d1d7404e7`, tag

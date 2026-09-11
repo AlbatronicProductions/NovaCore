@@ -34,18 +34,15 @@ Surface Interaction / Launch Foundation has banked **M14.1**, commit
 physical-event epochs**, commit `d0b9f9d69d55b8ba85a7b24a44f93e03cea2dcf6`, tag
 `m14.6-physical-event-epochs`. M14 remains **OPEN**.
 
-M14.1 through M14.12 are banked. The current baseline is M14.12,
-`e5fde08bcae834d8abc107cd26e7601fbfa3e1e0`, tag
-`m14.12-certified-preimpact-velocity`: [same-root pre-impact vectors](certified-preimpact-velocity.md)
-alongside the [exact response law](certified-response-proposals.md).
-The unbanked [final-velocity realization candidate](certified-postimpact-velocity.md)
-on Banked M14.13 selects checked final linear/angular bits.
-It grants no mutation rights and performs no private execution. **READY FOR PROJECT
-CONTROL ACCEPTANCE — UNBANKED**: the refusal allocation was attributed to `Environment.Version`
-object construction and locally corrected at immutable runtime preparation.
-Corrected full Debug/Release acceptance gates pass, including real Florida,
-certificate/bit replay and exact-zero reusable paths. Project Control acceptance
-and banking remain outstanding. No further attribution is needed. M14.8 is
+M14.1 through M14.13 are banked. The current baseline is
+`704c77f1aab899ccf3452ee3fc88471d1e311aca`, tag `m14.13-certified-postimpact-velocity`:
+[certified final linear/angular bits](certified-postimpact-velocity.md).
+The **unbanked** [private initial-state candidate](private-postimpact-state.md) on
+`codex/private-root-postimpact-state` adds source-defined pose, frozen dynamics and
+checked access at the same provider root. No remainder advancement, endpoint selection,
+canonical publication or contact reacquisition is implemented. Return it to Project
+Control after the bounded gates in its [evidence](engineering-evidence/private-postimpact-state/README.md).
+M14.8 is
 `2657bb16cdee2a42d1e5f9be830d247fb3c607f6`, tag
 `m14.8-exact-event-earth-relative-observation`; it owns same-epoch numerical
 Earth/point observations. **M14.7 — Evaluate coherent spacecraft motion at

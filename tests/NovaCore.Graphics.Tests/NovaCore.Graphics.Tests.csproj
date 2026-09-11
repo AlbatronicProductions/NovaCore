@@ -13,6 +13,7 @@
     <Compile Include="..\NovaCore.Simulation.Tests\OrdinaryAllocationMeasurement.cs" Link="OrdinaryAllocationMeasurement.cs" />
     <Compile Include="..\NovaCore.Simulation.Tests\ContactKinematicsOracle.cs" Link="ContactKinematicsOracle.cs" />
     <Compile Include="..\NovaCore.Simulation.Tests\CertifiedResponseOracle.cs" Link="CertifiedResponseOracle.cs" />
+    <Compile Include="..\NovaCore.Simulation.Tests\PrivatePostImpactStateTests.cs" Link="PrivatePostImpactStateTests.cs" />
     <Compile Include="..\..\samples\NovaCore.Triangle\StaticReferenceFrameFixtureSceneFactory.cs" Link="StaticReferenceFrameFixtureSceneFactory.cs" />
     <Compile Include="..\..\samples\NovaCore.Triangle\DynamicReferenceFrameFixtureScene.cs" Link="DynamicReferenceFrameFixtureScene.cs" />
     <Compile Include="..\..\samples\NovaCore.Triangle\CelestialAnalyticalScene.cs" Link="CelestialAnalyticalScene.cs" />

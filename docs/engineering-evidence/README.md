@@ -8,6 +8,7 @@ records its investigation stage. Follow subsequent accepted conclusions.
 
 | Family | Continuing value | Read the conclusion first |
 |---|---|---|
+| [Private post-impact initial-state candidate](private-postimpact-state/README.md) | Source-defined root pose, unchanged certified final bits, immutable preparation, applicability, independent containment and bounded validation. | [Candidate contract](../private-postimpact-state.md); unbanked. |
 | [Banked M14.13 final post-impact velocity](certified-postimpact-velocity/README.md) | Same-root final represented velocity, corrected full Debug/Release acceptance, real Florida certificates, bit replay, zero reusable-path allocation and bounded performance. | [Banked contract](../certified-postimpact-velocity.md); ready for subsequent execution architecture. |
 | [M14.12 pre-impact velocity tuple — banked](certified-preimpact-velocity/README.md) | Same-root vector containment, source applicability, independent real-root oracle, non-mutation and bounded cost. | [Banked contract](../certified-preimpact-velocity.md). |
 | [Banked M14.11 certified response proposal](certified-response-proposal/README.md) | Exact-law impulse enclosures, independent rational/real-root oracles, identity/refusal, physical invariants and bounded cost. | [Banked contract](../certified-response-proposals.md). |

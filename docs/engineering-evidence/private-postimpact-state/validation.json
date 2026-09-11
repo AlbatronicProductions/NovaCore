@@ -1,0 +1,1045 @@
+{
+  "baseline": {
+    "head": "704c77f1aab899ccf3452ee3fc88471d1e311aca",
+    "main": "704c77f1aab899ccf3452ee3fc88471d1e311aca",
+    "originMain": "704c77f1aab899ccf3452ee3fc88471d1e311aca",
+    "startingBranch": "main",
+    "startingWorkingTree": "clean",
+    "branch": "codex/private-root-postimpact-state",
+    "m14_1Through13TagsUnchanged": true
+  },
+  "environment": {
+    "sdk": "10.0.303",
+    "runtime": ".NET 10.0.12 Windows x64",
+    "settings": "ordinary runtime; only DOTNET_ROOT installation variables present; no profiler, tiering, PGO or GC override",
+    "date": "2026-09-10"
+  },
+  "judgment": "PASS",
+  "classification": "PRIVATE ROOT-TIME POST-IMPACT STATE CANDIDATE — READY FOR PROJECT CONTROL ACCEPTANCE",
+  "banking": "UNBANKED; no staging or ref mutation",
+  "results": {
+    "commandsPlanned": 54,
+    "commandsPassed": 54,
+    "failed": 0,
+    "skipped": 0,
+    "unreached": 0,
+    "fullSimulation": {
+      "Debug": {
+        "pass": 45,
+        "fail": 0,
+        "skip": 0
+      },
+      "Release": {
+        "pass": 45,
+        "fail": 0,
+        "skip": 0
+      }
+    },
+    "referenceFrames": {
+      "Debug": 11,
+      "Release": 11
+    },
+    "precision": {
+      "Debug": "PASS",
+      "Release": "PASS"
+    },
+    "diffCheck": "PASS; line-ending conversion warnings only"
+  },
+  "replay": {
+    "debugReleaseExactWitnessLinesEqual": true,
+    "fixtures": 2,
+    "comparison": "exact text comparison of entire two JSON witness records across Debug/Release, including all source data, pose interval bits and final velocity bits; independent provider recreation and repeated reads pass in both configurations",
+    "largeIntegers": "16+ digit integers retained as decimal strings to avoid JSON-consumer binary64 precision loss"
+  },
+  "fixtures": [
+    {
+      "kind": "private-state-values",
+      "fixture": "constant force",
+      "root": {
+        "RootEnclosure": {
+          "Lower": 0,
+          "Upper": 1
+        },
+        "Function": {
+          "Lower": -0.6270703906193377,
+          "Upper": 0.5837039714679123
+        },
+        "Derivative": {
+          "Lower": -1.3348208203963643,
+          "Upper": -0.838630965641275
+        },
+        "RefinementCount": 0
+      },
+      "PoseRootEnclosure": {
+        "Lower": 0.480010986328125,
+        "Upper": 0.48001861572265625
+      },
+      "PositionRoot": {
+        "X": {
+          "Lower": -26507862113.874504,
+          "Upper": -26507862113.648285
+        },
+        "Y": {
+          "Lower": 132752302987.79315,
+          "Upper": 132752302987.83449
+        },
+        "Z": {
+          "Lower": 57558843309.18104,
+          "Upper": 57558843309.1977
+        }
+      },
+      "positionFullWidths": [
+        0.22621917724609378,
+        0.04133605957031251,
+        0.016662597656250003
+      ],
+      "positionMaximumFullWidth": 0.5,
+      "FrozenSourceTranslation": {
+        "Spacecraft": {
+          "Value": 71
+        },
+        "RootFrame": {
+          "Value": 1
+        },
+        "Epoch": {
+          "Ticks": 0,
+          "SecondsSinceEpoch": 0
+        },
+        "PositionRoot": {
+          "X": -26507847881.73576,
+          "Y": 132752305584.79207,
+          "Z": 57558844355.40893,
+          "LengthSquared": 2.163886120092945e+22,
+          "IsFinite": true
+        },
+        "VelocityRoot": {
+          "X": -29649.17887245524,
+          "Y": -5410.218602301694,
+          "Z": -2179.5338905704507,
+          "LengthSquared": 913094641.1156826,
+          "IsFinite": true
+        },
+        "ConstantForceRoot": {
+          "X": 1.323740601239451,
+          "Y": 0.46987426214734374,
+          "Z": -0.7661129149164023,
+          "LengthSquared": 2.5600000000000005,
+          "IsFinite": true
+        }
+      },
+      "FrozenSourceRotation": {
+        "Spacecraft": {
+          "Value": 71
+        },
+        "Epoch": {
+          "Ticks": 0,
+          "SecondsSinceEpoch": 0
+        },
+        "OrientationLocalToParent": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0.6,
+          "W": 0.8,
+          "IsFinite": true,
+          "LengthSquared": 1
+        },
+        "AngularVelocityBody": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0,
+          "LengthSquared": 0,
+          "IsFinite": true
+        },
+        "PrincipalInertia": {
+          "X": 2,
+          "Y": 3,
+          "Z": 4
+        },
+        "ConstantBodyTorque": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0,
+          "LengthSquared": 0,
+          "IsFinite": true
+        },
+        "Model": 1
+      },
+      "Properties": {
+        "MassKilograms": 8
+      },
+      "SourceRevision": {
+        "Value": 0
+      },
+      "SourceTimelineRevision": {
+        "Value": 0
+      },
+      "SourceStart": {
+        "Ticks": 0,
+        "SecondsSinceEpoch": 0
+      },
+      "SourceEnd": {
+        "Ticks": 1000000,
+        "SecondsSinceEpoch": 1
+      },
+      "TerrainAuthority": {
+        "BodyId": 6,
+        "Terrain": {
+          "SourceId": 2,
+          "Version": 5,
+          "IsValid": true
+        },
+        "PhysicalGeneration": 4,
+        "ReferenceRadiusMetres": 6371008.8,
+        "GlobalSha256": "4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317",
+        "RegionalSha256": "c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe",
+        "CompositionIdentity": "86364352542676184",
+        "FacilitySupportIdentity": "5597594574148789740",
+        "QueryPolicyVersion": 1
+      },
+      "finalLinearBits": [
+        "-4549492935608460791",
+        "-4560701447943758911",
+        "-4566360697634986512"
+      ],
+      "finalAngularBits": [
+        "-4624905155029043080",
+        "-4630359581761260500",
+        "-4644401007165410613"
+      ],
+      "completePoseVelocityBits": [
+        "4602318729114550272",
+        "4602318866553503744",
+        "-4460621953345552514",
+        "-4460621953345611816",
+        "4773508460686592780",
+        "4773508460686595489",
+        "4767849158840835249",
+        "4767849158840837433",
+        0,
+        0,
+        "4603579539098121011",
+        "4605380978949069210",
+        "-4549492935608460791",
+        "-4560701447943758911",
+        "-4566360697634986512",
+        "-4624905155029043080",
+        "-4630359581761260500",
+        "-4644401007165410613"
+      ],
+      "poseOracle": "exact-rational polynomial range including interior stationary points",
+      "poseContainment": "PASS"
+    },
+    {
+      "kind": "private-state-values",
+      "fixture": "constant velocity",
+      "root": {
+        "RootEnclosure": {
+          "Lower": 0,
+          "Upper": 1
+        },
+        "Function": {
+          "Lower": -0.5148607240989805,
+          "Upper": 0.5214943047612907
+        },
+        "Derivative": {
+          "Lower": -1.0859821543434376,
+          "Upper": -0.8874696318991051
+        },
+        "RefinementCount": 0
+      },
+      "PoseRootEnclosure": {
+        "Lower": 0.50335693359375,
+        "Upper": 0.5033645629882812
+      },
+      "PositionRoot": {
+        "X": {
+          "Lower": -26507862806.081734,
+          "Upper": -26507862805.855515
+        },
+        "Y": {
+          "Lower": 132752302861.47972,
+          "Upper": 132752302861.52106
+        },
+        "Z": {
+          "Lower": 57558843258.30879,
+          "Upper": 57558843258.32545
+        }
+      },
+      "positionFullWidths": [
+        0.22621917724609378,
+        0.04133605957031251,
+        0.016654968261718753
+      ],
+      "positionMaximumFullWidth": 0.5,
+      "FrozenSourceTranslation": {
+        "Spacecraft": {
+          "Value": 71
+        },
+        "RootFrame": {
+          "Value": 1
+        },
+        "Epoch": {
+          "Ticks": 0,
+          "SecondsSinceEpoch": 0
+        },
+        "PositionRoot": {
+          "X": -26507847881.73576,
+          "Y": 132752305584.79207,
+          "Z": 57558844355.40893,
+          "LengthSquared": 2.163886120092945e+22,
+          "IsFinite": true
+        },
+        "VelocityRoot": {
+          "X": -29649.17887245524,
+          "Y": -5410.218602301694,
+          "Z": -2179.5338905704507,
+          "LengthSquared": 913094641.1156826,
+          "IsFinite": true
+        },
+        "ConstantForceRoot": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0,
+          "LengthSquared": 0,
+          "IsFinite": true
+        }
+      },
+      "FrozenSourceRotation": {
+        "Spacecraft": {
+          "Value": 71
+        },
+        "Epoch": {
+          "Ticks": 0,
+          "SecondsSinceEpoch": 0
+        },
+        "OrientationLocalToParent": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0.6,
+          "W": 0.8,
+          "IsFinite": true,
+          "LengthSquared": 1
+        },
+        "AngularVelocityBody": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0,
+          "LengthSquared": 0,
+          "IsFinite": true
+        },
+        "PrincipalInertia": {
+          "X": 2,
+          "Y": 3,
+          "Z": 4
+        },
+        "ConstantBodyTorque": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0,
+          "LengthSquared": 0,
+          "IsFinite": true
+        },
+        "Model": 1
+      },
+      "Properties": {
+        "MassKilograms": 8
+      },
+      "SourceRevision": {
+        "Value": 0
+      },
+      "SourceTimelineRevision": {
+        "Value": 0
+      },
+      "SourceStart": {
+        "Ticks": 0,
+        "SecondsSinceEpoch": 0
+      },
+      "SourceEnd": {
+        "Ticks": 1000000,
+        "SecondsSinceEpoch": 1
+      },
+      "TerrainAuthority": {
+        "BodyId": 6,
+        "Terrain": {
+          "SourceId": 2,
+          "Version": 5,
+          "IsValid": true
+        },
+        "PhysicalGeneration": 4,
+        "ReferenceRadiusMetres": 6371008.8,
+        "GlobalSha256": "4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317",
+        "RegionalSha256": "c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe",
+        "CompositionIdentity": "86364352542676184",
+        "FacilitySupportIdentity": "5597594574148789740",
+        "QueryPolicyVersion": 1
+      },
+      "finalLinearBits": [
+        "-4549492914212286051",
+        "-4560701417564694165",
+        "-4566360796699009738"
+      ],
+      "finalAngularBits": [
+        "-4625468944341685876",
+        "-4631104186161043409",
+        "-4645098220548566552"
+      ],
+      "completePoseVelocityBits": [
+        "4602709055742410752",
+        "4602709124461887488",
+        "-4460621953164094542",
+        "-4460621953164153844",
+        "4773508460678314703",
+        "4773508460678317412",
+        "4767849158834167322",
+        "4767849158834169505",
+        0,
+        0,
+        "4603579539098121011",
+        "4605380978949069210",
+        "-4549492914212286051",
+        "-4560701417564694165",
+        "-4566360796699009738",
+        "-4625468944341685876",
+        "-4631104186161043409",
+        "-4645098220548566552"
+      ],
+      "poseOracle": "exact-rational polynomial range including interior stationary points",
+      "poseContainment": "PASS"
+    }
+  ],
+  "performance": {
+    "protocol": {
+      "warmups": 32,
+      "timingSamples": 101,
+      "allocationMeasuredCalls": 8,
+      "timing": "default runtime one-call samples, no no-GC timing",
+      "allocation": "checked 1MiB temporary no-GC reservation, counter opens after entry/closes before exit; exact zero for reusable paths",
+      "percentiles": "sorted indexes 50/95/99; max100; no overhead subtraction"
+    },
+    "Debug": [
+      {
+        "kind": "private-state-cost",
+        "name": "source reconstruction",
+        "warmups": 32,
+        "timingSamples": 101,
+        "measuredCalls": 8,
+        "bytes": 13376,
+        "zeroAllocationContract": false,
+        "entry": "PASS",
+        "exit": "PASS",
+        "medianNs": 4350200,
+        "p95Ns": 4445000,
+        "p99Ns": 4495800,
+        "maximumNs": 6737300,
+        "timerResolutionNs": 100
+      },
+      {
+        "kind": "private-state-cost",
+        "name": "private state construction",
+        "warmups": 32,
+        "timingSamples": 101,
+        "measuredCalls": 8,
+        "bytes": 0,
+        "zeroAllocationContract": true,
+        "entry": "PASS",
+        "exit": "PASS",
+        "medianNs": 5500,
+        "p95Ns": 5500,
+        "p99Ns": 5600,
+        "maximumNs": 5800,
+        "timerResolutionNs": 100
+      },
+      {
+        "kind": "private-state-cost",
+        "name": "checked read",
+        "warmups": 32,
+        "timingSamples": 101,
+        "measuredCalls": 8,
+        "bytes": 0,
+        "zeroAllocationContract": true,
+        "entry": "PASS",
+        "exit": "PASS",
+        "medianNs": 6600,
+        "p95Ns": 10400,
+        "p99Ns": 11400,
+        "maximumNs": 12000,
+        "timerResolutionNs": 100
+      },
+      {
+        "kind": "private-state-cost",
+        "name": "invalid pose request refusal",
+        "warmups": 32,
+        "timingSamples": 101,
+        "measuredCalls": 8,
+        "bytes": 0,
+        "zeroAllocationContract": true,
+        "entry": "PASS",
+        "exit": "PASS",
+        "medianNs": 4400,
+        "p95Ns": 6100,
+        "p99Ns": 6900,
+        "maximumNs": 7200,
+        "timerResolutionNs": 100
+      },
+      {
+        "kind": "private-state-cost",
+        "name": "numerical pose refusal",
+        "warmups": 32,
+        "timingSamples": 101,
+        "measuredCalls": 8,
+        "bytes": 0,
+        "zeroAllocationContract": true,
+        "entry": "PASS",
+        "exit": "PASS",
+        "medianNs": 5200,
+        "p95Ns": 7700,
+        "p99Ns": 8700,
+        "maximumNs": 9200,
+        "timerResolutionNs": 100
+      },
+      {
+        "kind": "private-state-cost",
+        "name": "stale source refusal",
+        "warmups": 32,
+        "timingSamples": 101,
+        "measuredCalls": 8,
+        "bytes": 0,
+        "zeroAllocationContract": true,
+        "entry": "PASS",
+        "exit": "PASS",
+        "medianNs": 1600,
+        "p95Ns": 2500,
+        "p99Ns": 2700,
+        "maximumNs": 2700,
+        "timerResolutionNs": 100
+      }
+    ],
+    "Release": [
+      {
+        "kind": "private-state-cost",
+        "name": "source reconstruction",
+        "warmups": 32,
+        "timingSamples": 101,
+        "measuredCalls": 8,
+        "bytes": 13376,
+        "zeroAllocationContract": false,
+        "entry": "PASS",
+        "exit": "PASS",
+        "medianNs": 3439400,
+        "p95Ns": 3472300,
+        "p99Ns": 4563400,
+        "maximumNs": 4865300,
+        "timerResolutionNs": 100
+      },
+      {
+        "kind": "private-state-cost",
+        "name": "private state construction",
+        "warmups": 32,
+        "timingSamples": 101,
+        "measuredCalls": 8,
+        "bytes": 0,
+        "zeroAllocationContract": true,
+        "entry": "PASS",
+        "exit": "PASS",
+        "medianNs": 7000,
+        "p95Ns": 7500,
+        "p99Ns": 7600,
+        "maximumNs": 7900,
+        "timerResolutionNs": 100
+      },
+      {
+        "kind": "private-state-cost",
+        "name": "checked read",
+        "warmups": 32,
+        "timingSamples": 101,
+        "measuredCalls": 8,
+        "bytes": 0,
+        "zeroAllocationContract": true,
+        "entry": "PASS",
+        "exit": "PASS",
+        "medianNs": 12500,
+        "p95Ns": 12900,
+        "p99Ns": 13000,
+        "maximumNs": 13100,
+        "timerResolutionNs": 100
+      },
+      {
+        "kind": "private-state-cost",
+        "name": "invalid pose request refusal",
+        "warmups": 32,
+        "timingSamples": 101,
+        "measuredCalls": 8,
+        "bytes": 0,
+        "zeroAllocationContract": true,
+        "entry": "PASS",
+        "exit": "PASS",
+        "medianNs": 6800,
+        "p95Ns": 7000,
+        "p99Ns": 7100,
+        "maximumNs": 33100,
+        "timerResolutionNs": 100
+      },
+      {
+        "kind": "private-state-cost",
+        "name": "numerical pose refusal",
+        "warmups": 32,
+        "timingSamples": 101,
+        "measuredCalls": 8,
+        "bytes": 0,
+        "zeroAllocationContract": true,
+        "entry": "PASS",
+        "exit": "PASS",
+        "medianNs": 7100,
+        "p95Ns": 7300,
+        "p99Ns": 7400,
+        "maximumNs": 7500,
+        "timerResolutionNs": 100
+      },
+      {
+        "kind": "private-state-cost",
+        "name": "stale source refusal",
+        "warmups": 32,
+        "timingSamples": 101,
+        "measuredCalls": 8,
+        "bytes": 0,
+        "zeroAllocationContract": true,
+        "entry": "PASS",
+        "exit": "PASS",
+        "medianNs": 2400,
+        "p95Ns": 2500,
+        "p99Ns": 2600,
+        "maximumNs": 2600,
+        "timerResolutionNs": 100
+      }
+    ],
+    "positiveControl": {
+      "Debug": {
+        "type": "System.Byte[]",
+        "length": 128,
+        "bytes": 152
+      },
+      "Release": {
+        "type": "System.Byte[]",
+        "length": 128,
+        "bytes": 152
+      }
+    }
+  },
+  "workspace": {
+    "kind": "private-state-workspace",
+    "stateBytes": 4656,
+    "valuesBytes": 504,
+    "resultBytes": 4664,
+    "requestBytes": 8,
+    "newProviderObjectsPerConstruction": 0,
+    "rootRefinements": 0,
+    "responseSelections": 0,
+    "canonicalWrites": 0,
+    "retainedOwner": "existing provider through copied checked receipts; no new global cache or authoritative store"
+  },
+  "redTeam": {
+    "numerical": "PASS: exact rational polynomial extrema independently enclose the whole root bracket; no rounded acceleration, nominal root or independent-coordinate selection",
+    "authority": "PASS: complete issuing-chain checks and frozen source copies, source epoch distinguished from private root initial instant, stale/default/mismatch/refined tuple rejection, same-owner old evidence retained, no canonical mutation",
+    "costAndScope": "PASS: bounded value storage and existing provider graph; no new heap owner, root refinement, response selection, canonical writer, remainder or solver"
+  },
+  "limitations": [
+    "No remainder propagation, endpoint selection, canonical publication, reacquisition or operational contact.",
+    "Position is a correlated source-defined enclosure, not selected represented position bits. Attitude denotes exact normalization of stored source quaternion.",
+    "Unsupported-runtime arithmetic refusal is reviewed at the existing guard; no foreign runtime or arithmetic-mode fault injection was performed.",
+    "Renderer nonmutation follows the absence of a write/publication dependency; no player-facing GPU/window campaign was run.",
+    "Timings are 101 one-call samples after 32 warmups with default tiering, 100ns timer resolution. No long-term steady-state, whole-frame, throughput or general-physics cost inference.",
+    "The pure sqrt(1/2) control proves genuine irrational mathematical containment. Actual Florida integration proves opaque provider-root identity; it does not independently establish that Florida alpha is irrational."
+  ],
+  "gates": [
+    {
+      "id": "build-Debug",
+      "configuration": "Debug",
+      "command": "dotnet build NovaCore.sln -c Debug --nologo -v minimal",
+      "result": "PASS",
+      "exitCode": 0,
+      "warnings": 0,
+      "errors": 0
+    },
+    {
+      "id": "build-Release",
+      "configuration": "Release",
+      "command": "dotnet build NovaCore.sln -c Release --nologo -v minimal",
+      "result": "PASS",
+      "exitCode": 0,
+      "warnings": 0,
+      "errors": 0
+    },
+    {
+      "id": "new-analytical-Debug",
+      "configuration": "Debug",
+      "command": "dotnet tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll --private-postimpact-state-only",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "new-Florida-Debug",
+      "configuration": "Debug",
+      "command": "dotnet tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.dll '--case=Private Florida post-impact initial state'",
+      "result": "PASS",
+      "exitCode": 0,
+      "nativeIdentity": "Native identity: configuration=Debug; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Native.dll; sha256=6E10A80772EFAA51DA256983355B1AB3BDEC49E792891BFC5280C12A596BDC6E; source=E:\\NovaCore\\build\\native-ninja\\NovaCore.Native.dll",
+      "positiveAllocationControlBytes": 152
+    },
+    {
+      "id": "new-analytical-Release",
+      "configuration": "Release",
+      "command": "dotnet tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll --private-postimpact-state-only",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "new-Florida-Release",
+      "configuration": "Release",
+      "command": "dotnet tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll '--case=Private Florida post-impact initial state'",
+      "result": "PASS",
+      "exitCode": 0,
+      "nativeIdentity": "Native identity: configuration=Release; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Native.dll; sha256=62594A23368D008963011AA79FE1D385CCC863976D6014DC79F5CC6DACD5997B; source=E:\\NovaCore\\build\\native-ninja-release\\NovaCore.Native.dll",
+      "positiveAllocationControlBytes": 152
+    },
+    {
+      "id": "full-Simulation-Debug",
+      "configuration": "Debug",
+      "command": "dotnet tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+      "result": "PASS",
+      "exitCode": 0,
+      "registeredGroups": 45,
+      "passedGroups": 45
+    },
+    {
+      "id": "full-Simulation-Release",
+      "configuration": "Release",
+      "command": "dotnet tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "result": "PASS",
+      "exitCode": 0,
+      "registeredGroups": 45,
+      "passedGroups": 45
+    },
+    {
+      "id": "translation-Debug",
+      "configuration": "Debug",
+      "command": "dotnet tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll --translation-only",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "contact-Debug",
+      "configuration": "Debug",
+      "command": "dotnet tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll --contact-only",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "contact-response-Debug",
+      "configuration": "Debug",
+      "command": "dotnet tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll --contact-response-only",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "isolated-contact-Debug",
+      "configuration": "Debug",
+      "command": "dotnet tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll --isolated-contact-only",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "physical-event-epoch-Debug",
+      "configuration": "Debug",
+      "command": "dotnet tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll --physical-event-epoch-only",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "exact-event-motion-Debug",
+      "configuration": "Debug",
+      "command": "dotnet tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll --exact-event-motion-only",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "earth-event-Debug",
+      "configuration": "Debug",
+      "command": "dotnet tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll --earth-event-only",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "florida-proof-Debug",
+      "configuration": "Debug",
+      "command": "dotnet tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll --florida-proof-only",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "root-kinematics-Debug",
+      "configuration": "Debug",
+      "command": "dotnet tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll --root-kinematics-only",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "certified-response-Debug",
+      "configuration": "Debug",
+      "command": "dotnet tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll --certified-response-only",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "certified-preimpact-velocity-Debug",
+      "configuration": "Debug",
+      "command": "dotnet tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll --certified-preimpact-velocity-only",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "certified-postimpact-velocity-Debug",
+      "configuration": "Debug",
+      "command": "dotnet tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll --certified-postimpact-velocity-only",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "translation-Release",
+      "configuration": "Release",
+      "command": "dotnet tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll --translation-only",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "contact-Release",
+      "configuration": "Release",
+      "command": "dotnet tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll --contact-only",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "contact-response-Release",
+      "configuration": "Release",
+      "command": "dotnet tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll --contact-response-only",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "isolated-contact-Release",
+      "configuration": "Release",
+      "command": "dotnet tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll --isolated-contact-only",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "physical-event-epoch-Release",
+      "configuration": "Release",
+      "command": "dotnet tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll --physical-event-epoch-only",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "exact-event-motion-Release",
+      "configuration": "Release",
+      "command": "dotnet tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll --exact-event-motion-only",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "earth-event-Release",
+      "configuration": "Release",
+      "command": "dotnet tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll --earth-event-only",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "florida-proof-Release",
+      "configuration": "Release",
+      "command": "dotnet tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll --florida-proof-only",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "root-kinematics-Release",
+      "configuration": "Release",
+      "command": "dotnet tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll --root-kinematics-only",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "certified-response-Release",
+      "configuration": "Release",
+      "command": "dotnet tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll --certified-response-only",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "certified-preimpact-velocity-Release",
+      "configuration": "Release",
+      "command": "dotnet tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll --certified-preimpact-velocity-only",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "certified-postimpact-velocity-Release",
+      "configuration": "Release",
+      "command": "dotnet tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll --certified-postimpact-velocity-only",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "ReferenceFrames-Debug",
+      "configuration": "Debug",
+      "command": "dotnet tests/NovaCore.ReferenceFrames.Tests/bin/Debug/net10.0/NovaCore.ReferenceFrames.Tests.dll",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "Precision-Debug",
+      "configuration": "Debug",
+      "command": "dotnet tests/NovaCore.Precision.Tests/bin/Debug/net10.0/NovaCore.Precision.Tests.dll",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "ReferenceFrames-Release",
+      "configuration": "Release",
+      "command": "dotnet tests/NovaCore.ReferenceFrames.Tests/bin/Release/net10.0/NovaCore.ReferenceFrames.Tests.dll",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "Precision-Release",
+      "configuration": "Release",
+      "command": "dotnet tests/NovaCore.Precision.Tests/bin/Release/net10.0/NovaCore.Precision.Tests.dll",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "graphics-Physical surface-point query-Debug",
+      "configuration": "Debug",
+      "command": "dotnet tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.dll '--case=Physical surface-point query'",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "graphics-Physical surface-point stale snapshot-Debug",
+      "configuration": "Debug",
+      "command": "dotnet tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.dll '--case=Physical surface-point stale snapshot'",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "graphics-Contact generation production terrain-Debug",
+      "configuration": "Debug",
+      "command": "dotnet tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.dll '--case=Contact generation production terrain'",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "graphics-Exact-event Earth-relative production terrain-Debug",
+      "configuration": "Debug",
+      "command": "dotnet tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.dll '--case=Exact-event Earth-relative production terrain'",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "graphics-Florida monotone contact certification-Debug",
+      "configuration": "Debug",
+      "command": "dotnet tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.dll '--case=Florida monotone contact certification'",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "graphics-Qualified Florida root contact kinematics-Debug",
+      "configuration": "Debug",
+      "command": "dotnet tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.dll '--case=Qualified Florida root contact kinematics'",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "graphics-Certified Florida isolated response proposal-Debug",
+      "configuration": "Debug",
+      "command": "dotnet tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.dll '--case=Certified Florida isolated response proposal'",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "graphics-Certified Florida pre-impact velocity tuple-Debug",
+      "configuration": "Debug",
+      "command": "dotnet tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.dll '--case=Certified Florida pre-impact velocity tuple'",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "graphics-Certified Florida post-impact velocity realization-Debug",
+      "configuration": "Debug",
+      "command": "dotnet tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.dll '--case=Certified Florida post-impact velocity realization'",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "graphics-Physical surface-point query-Release",
+      "configuration": "Release",
+      "command": "dotnet tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll '--case=Physical surface-point query'",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "graphics-Physical surface-point stale snapshot-Release",
+      "configuration": "Release",
+      "command": "dotnet tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll '--case=Physical surface-point stale snapshot'",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "graphics-Contact generation production terrain-Release",
+      "configuration": "Release",
+      "command": "dotnet tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll '--case=Contact generation production terrain'",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "graphics-Exact-event Earth-relative production terrain-Release",
+      "configuration": "Release",
+      "command": "dotnet tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll '--case=Exact-event Earth-relative production terrain'",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "graphics-Florida monotone contact certification-Release",
+      "configuration": "Release",
+      "command": "dotnet tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll '--case=Florida monotone contact certification'",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "graphics-Qualified Florida root contact kinematics-Release",
+      "configuration": "Release",
+      "command": "dotnet tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll '--case=Qualified Florida root contact kinematics'",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "graphics-Certified Florida isolated response proposal-Release",
+      "configuration": "Release",
+      "command": "dotnet tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll '--case=Certified Florida isolated response proposal'",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "graphics-Certified Florida pre-impact velocity tuple-Release",
+      "configuration": "Release",
+      "command": "dotnet tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll '--case=Certified Florida pre-impact velocity tuple'",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "id": "graphics-Certified Florida post-impact velocity realization-Release",
+      "configuration": "Release",
+      "command": "dotnet tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll '--case=Certified Florida post-impact velocity realization'",
+      "result": "PASS",
+      "exitCode": 0
+    }
+  ]
+}
