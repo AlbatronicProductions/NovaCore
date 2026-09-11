@@ -8,7 +8,7 @@ using NovaCore.Simulation.Time;
 namespace NovaCore.Simulation.Spacecraft.Contact;
 
 /// <summary>Source-seed Taylor enclosure of the current Earth ODE; no sampled anchor becomes authority.</summary>
-internal readonly struct FloridaContactMotion
+internal readonly partial struct FloridaContactMotion
 {
     internal const long CoverageSeconds=3600;
     private readonly CartesianState seed;

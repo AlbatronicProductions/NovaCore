@@ -1,0 +1,92 @@
+{
+  "baseline": {
+    "branch": "main",
+    "head": "556ca77af88257b5727561709c3a091aaec8cee7",
+    "main": "556ca77af88257b5727561709c3a091aaec8cee7",
+    "originMain": "556ca77af88257b5727561709c3a091aaec8cee7",
+    "clean": true
+  },
+  "candidateBranch": "codex/certified-preimpact-velocity",
+  "sdk": "10.0.303",
+  "runtime": "Microsoft.NETCore.App 10.0.12; x64; default configuration; no profiler, tiering, PGO or GC policy overrides",
+  "productionInventory": {
+    "baselineCSharpFiles": 227,
+    "unchangedExistingFiles": 226,
+    "modifiedExistingFiles": 1,
+    "newFiles": 2,
+    "method": "SHA256 of rg --files src -g *.cs (excludes ignored generated output) before/after; only listed existing production file differs; its Git diff adds partial, with existing methods unchanged."
+  },
+  "fingerprints": [
+    {
+      "path": "src\\NovaCore.Simulation\\Spacecraft\\Contact\\FloridaContactMotion.cs",
+      "before": "FA2A298FFC35669E34ED583E6CBD4ECCA6126435811BBC27BB7051A9F26E5B58",
+      "after": "21819E317AE671BAD018A9F243DCEB0AF35714623722A1C84E9E33598AFA95CF"
+    },
+    {
+      "path": "src\\NovaCore.Simulation\\Spacecraft\\Contact\\FloridaPreImpactVelocity.cs",
+      "sha256": "48247FC0EF6B14515E11C7DF3FCE0E7952DFDD77AA4B96D02D2BFBB4C06F9432"
+    },
+    {
+      "path": "src\\NovaCore.Simulation\\Spacecraft\\Contact\\CertifiedPreImpactVelocity.cs",
+      "sha256": "74A8E189C4951BEDEA540FCC2F6503EAB034E5C2F9D19A7F8CFFE352CBF623B9"
+    },
+    {
+      "path": "tests\\NovaCore.Simulation.Tests\\Program.cs",
+      "before": "3A4C88DA8C79538AA0E1FFA2F6CEAFF86861F620CACAF2D958808F3D35F1282E",
+      "after": "F1D7AD484DFB860121338D13A31F694E1CE9401B873446FADCF758E6939D50AE"
+    },
+    {
+      "path": "tests\\NovaCore.Graphics.Tests\\Program.cs",
+      "before": "5E07F4338CCF9A0C23C687C81E70C38A7921C656863529033785B29C3CFEDBEF",
+      "after": "65552D26126113D6C832BABA340724326BEE5164409CA9A2B6020747D0E19440"
+    },
+    {
+      "path": "tests\\NovaCore.Simulation.Tests\\CertifiedPreImpactVelocityTests.cs",
+      "sha256": "4CD00FA42CE9F5D35F746EAE79469F44713894B815715925A2991B5001A3C5E6"
+    },
+    {
+      "path": "tests\\NovaCore.Graphics.Tests\\CertifiedFloridaPreImpactVelocityTests.cs",
+      "sha256": "ECF8BAA3D0ECF70D9A8D5899127F06BD137FE4ED58C9F30D44CB1FF45FE29758"
+    }
+  ],
+  "bankedRefs": [
+    "refs/heads/main 556ca77af88257b5727561709c3a091aaec8cee7 ",
+    "refs/remotes/origin/main 556ca77af88257b5727561709c3a091aaec8cee7 ",
+    "refs/tags/m14.1-canonical-surface-point-queries 3ccb998031e15cb1898394589c27244d55e06e24 5b9b02ab1d2ba0e903809510908e4819984d4de2",
+    "refs/tags/m14.10-certified-root-contact-kinematics b07c511aab7109e3d240d9c7c31a444f58e069a5 fce80a520240293a0373857986c607caf187eacd",
+    "refs/tags/m14.11-certified-response-proposal 8ac99fbfad4f8dd6365d696053fc3edfeea2249d 556ca77af88257b5727561709c3a091aaec8cee7",
+    "refs/tags/m14.2-spacecraft-translational-authority ae2f203b97224ff88b38b7c68902ac2d31108a91 caa6d93ccd7c4e5924381e077a62585f99e5a32a",
+    "refs/tags/m14.3-spacecraft-terrain-contact-observations b9ad79c38b322c8e1e095039d5b69c035a1bcca8 79978cf8b0fd783d43a661df6df53a2c0202af4a",
+    "refs/tags/m14.4-atomic-contact-response b198d3b381ba4a82577ba89bd5e31e6050d3a896 28b92f724f8decd3c9356aa5f9f5bbd6c9dd069c",
+    "refs/tags/m14.5-isolated-analytical-contact-response c2964fe4531b8e383d2d89beec2e8c055f3541a5 b53d48025cfb8142cb32a6fc6fceb6018e33cfcd",
+    "refs/tags/m14.6-physical-event-epochs 07adc9983252f2cabf0af9da0a1281457af606bf d0b9f9d69d55b8ba85a7b24a44f93e03cea2dcf6",
+    "refs/tags/m14.7-exact-event-spacecraft-motion 315da29c4eff5562f9040f7a0aedbb4e961fa877 56c0ae95b7f514e2f0440dfe272dd2836f32506e",
+    "refs/tags/m14.8-exact-event-earth-relative-observation 27a32989cef714a204d0d7ecfbd4618e53de0086 2657bb16cdee2a42d1e5f9be830d247fb3c607f6",
+    "refs/tags/m14.9-florida-monotone-contact-certification 944cb5c1f2011b5944745b210e561d0b9e8b4aaf 9698a08b84b9b40b0fa03bec8f8ba80d1d7404e7"
+  ],
+  "bankedRefsUnchanged": true,
+  "ksa": {
+    "identitySource": "../certified-root-contact-kinematics/identity.json",
+    "installedKsa": "E:/Kitten Space Agency/KSA.dll",
+    "version": "2026.9.7.5402+487c3f340de24c6a81037120b6d1129c045c5400",
+    "ksaSha256": "A8A5164204EED962DF9D9025E99F523D9A23EE2CE6E802B18216A9DA35506D2F",
+    "bepuSha256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7",
+    "brutalNumericsSha256": "73346CB3BE59CB0B480F342DA54279EFF09D36C8030AB76C954F7B64DFA06A20",
+    "sixRetainedSourceHashesMatch": true,
+    "assemblyInfoPath": "build/ksa-residency-reference/assembly-source/Properties/AssemblyInfo.cs"
+  },
+  "native": [
+    {
+      "configuration": "Debug",
+      "path": "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Native.dll",
+      "source": "build/native-ninja/NovaCore.Native.dll",
+      "sha256": "6E10A80772EFAA51DA256983355B1AB3BDEC49E792891BFC5280C12A596BDC6E"
+    },
+    {
+      "configuration": "Release",
+      "path": "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Native.dll",
+      "source": "build/native-ninja-release/NovaCore.Native.dll",
+      "sha256": "62594A23368D008963011AA79FE1D385CCC863976D6014DC79F5CC6DACD5997B"
+    }
+  ]
+}

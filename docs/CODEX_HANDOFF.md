@@ -34,12 +34,13 @@ Surface Interaction / Launch Foundation has banked **M14.1**, commit
 physical-event epochs**, commit `d0b9f9d69d55b8ba85a7b24a44f93e03cea2dcf6`, tag
 `m14.6-physical-event-epochs`. M14 remains **OPEN**.
 
-M14.1 through M14.10 are banked. The current baseline is M14.10,
-`fce80a520240293a0373857986c607caf187eacd`, tag
-`m14.10-certified-root-contact-kinematics`. Current banked production includes the
-[certified response proposal](certified-response-proposals.md), on
-`codex/certified-response-proposal`: same-root exact-law enclosures without
-executable FP64 selection or mutation. M14.8 is
+M14.1 through M14.11 are banked. The current baseline is M14.11,
+`556ca77af88257b5727561709c3a091aaec8cee7`, tag
+`m14.11-certified-response-proposal`: [same-root exact-law response enclosures](certified-response-proposals.md)
+without executable FP64 selection or mutation. The unbanked
+[pre-impact velocity candidate](certified-preimpact-velocity.md), on
+`codex/certified-preimpact-velocity`, qualifies COM and material-relative vectors
+for later numerical realization; it applies no response. M14.8 is
 `2657bb16cdee2a42d1e5f9be830d247fb3c607f6`, tag
 `m14.8-exact-event-earth-relative-observation`; it owns same-epoch numerical
 Earth/point observations. **M14.7 — Evaluate coherent spacecraft motion at

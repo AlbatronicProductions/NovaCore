@@ -13,11 +13,18 @@ and performs FP64 camera-relative subtraction before GPU transport.
 
 ## Banked production checkpoint
 
-Latest banked accomplishment: **M14.10 — Evaluate qualified contact kinematics at
-provider-owned certified roots**, commit `fce80a520240293a0373857986c607caf187eacd`,
-tag `m14.10-certified-root-contact-kinematics`. It supplies checked same-root
-normal, relative-speed and lever enclosures with bounded qualification.
-See the [banked contract](certified-root-contact-kinematics.md).
+Latest banked accomplishment: **M14.11 — Qualify certified isolated-contact response
+proposals at provider-owned roots**, banked main/tag target
+`556ca77af88257b5727561709c3a091aaec8cee7`, tag `m14.11-certified-response-proposal`.
+Implementation commit: `3813791380ad035c308bb93cc404102a659d812d`.
+It supplies checked same-root exact-law scalar, linear and angular impulse enclosures,
+without executable FP64 selection or mutation. See the [banked contract](certified-response-proposals.md).
+
+Current unbanked candidate: **Qualify pre-impact velocity tuples at provider-owned
+contact roots**, on `codex/certified-preimpact-velocity`. It encloses COM inertial-root
+and full feature/material-relative velocity at the same alpha. It prepares inputs
+for later post-impact numerical realization; no response is applied. See the
+[candidate contract](certified-preimpact-velocity.md).
 
 Banked predecessor: **M14.9 monotone Florida point-contact certification**,
 commit `9698a08b84b9b40b0fa03bec8f8ba80d1d7404e7`, tag
@@ -27,17 +34,16 @@ full-weight grading and physical motion. Coverage is one-second cells within
 ±3,600 seconds of the Earth seed, not general mission dates. It performs no event
 execution, response or support. See the [banked contract](florida-monotone-contact-certification.md).
 
-Current banked production: **M14.11 — Qualify certified isolated-contact response
-proposals at provider-owned roots**, on `codex/certified-response-proposal`.
-The read-only provider qualifies same-root effective mass and exact-law scalar,
-linear and angular impulse enclosures. It selects no executable FP64 command and
-adds no mutation, support or coverage extension. See the
-[candidate contract](certified-response-proposals.md).
+Banked **M14.10** supplies checked normal, relative normal speed, lever, attitude,
+mass and inertia at provider-owned roots. Commit
+`fce80a520240293a0373857986c607caf187eacd`, tag
+`m14.10-certified-root-contact-kinematics`. See its
+[banked contract](certified-root-contact-kinematics.md).
 
 Banked predecessor: **M14.8 — Evaluate Earth-relative point-feature
 observations at exact physical-event epochs**, commit
 `2657bb16cdee2a42d1e5f9be830d247fb3c607f6`, annotated tag
-`m14.8-exact-event-earth-relative-observation`. **M14.1 through M14.10 are banked.**
+`m14.8-exact-event-earth-relative-observation`. **M14.1 through M14.11 are banked.**
 M14.8 owns coherent numerical observations, not interval proof. See its
 [banked contract](spacecraft-earth-event-observation.md).
 **M14 — Surface Interaction / Launch Foundation remains OPEN.**
