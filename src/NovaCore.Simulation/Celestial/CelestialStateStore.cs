@@ -1,10 +1,18 @@
 using NovaCore.Core;
+using NovaCore.Simulation.Transactions;
 
 namespace NovaCore.Simulation.Celestial;
 
 /// <summary>Fixed-size authoritative celestial records. Caller declaration order is canonical; ID lookup uses a setup-time sorted index.</summary>
 internal sealed class CelestialStateStore
 {
+    internal SimulationState? Owner { get; private set; }
+    internal void BindOwner(SimulationState owner)
+    {
+        if (_definitions.Length == 0) return;
+        if (Owner is not null && !ReferenceEquals(Owner, owner)) throw new InvalidOperationException("Celestial storage already has a canonical state owner.");
+        Owner = owner;
+    }
     private static readonly CelestialBodyDefinition[] EmptyDefinitions = [];
     private static readonly CelestialBodyState[] EmptyStates = [];
     private static readonly ulong[] EmptyLookupIds = [];
@@ -21,7 +29,7 @@ internal sealed class CelestialStateStore
 
     public static CelestialStateStore Empty { get; } = new(EmptyDefinitions, EmptyStates, EmptyLookupIds, EmptyLookupIndices);
     public int Count => _definitions.Length;
-    public CelestialStateView CreateView() => new(this);
+    public CelestialStateView CreateView() => Owner is { } owner ? new(this, owner, owner.BorrowRevision) : new(this);
 
     public static bool TryCreate(ReadOnlySpan<CelestialBodyDefinition> definitions, ReadOnlySpan<CelestialBodyState> states, out CelestialStateStore? store, out CelestialStateStoreStatus status)
     {
@@ -105,7 +113,7 @@ internal sealed class CelestialStateStore
 
     /// <summary>Engine-owned, in-place mutation seam. It changes no revision, timeline, clock, or history state.</summary>
     internal bool TryReplaceTrajectory(CelestialBodyId subject, in TwoBodyTrajectory expected, in TwoBodyTrajectory replacement, out CelestialStateStoreMutationStatus status)
-    {
+    { Owner?.VerifyStoreMutation();
         if (!TryGetIndex(subject, out var index)) { status = CelestialStateStoreMutationStatus.SubjectNotFound; return false; }
         if (_definitions[index].PrimaryBody is null) { status = CelestialStateStoreMutationStatus.RootBody; return false; }
         if (_states[index].Trajectory is not { } current) { status = CelestialStateStoreMutationStatus.NoCurrentTrajectory; return false; }

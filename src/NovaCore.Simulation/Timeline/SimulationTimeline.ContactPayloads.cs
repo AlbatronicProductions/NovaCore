@@ -36,6 +36,7 @@ public sealed partial class SimulationTimeline
     private SimulationScheduleResult AdmitContactImpulse(SimulationInstant currentTime, SimulationEventId oldId,
         SimulationEventId id, int priority, SpacecraftContactImpulseIntent intent, bool replace)
     {
+        PublicationPhase.VerifyOrdinaryMutation();
         if (!intent.IsValid) return SimulationScheduleResult.Failure(SimulationScheduleStatus.InvalidPayload);
         if (_contactFreeHead < 0) return SimulationScheduleResult.Failure(SimulationScheduleStatus.ContactPayloadCapacityExceeded);
         var index = _contactFreeHead;
@@ -55,6 +56,7 @@ public sealed partial class SimulationTimeline
 
     internal bool TryResolveContactImpulse(ScheduledSimulationEvent pending, out SpacecraftContactImpulseIntent intent)
     {
+        PublicationPhase.VerifyRead();
         intent = default;
         if (pending.Header.Kind != SimulationEventKind.SpacecraftContactImpulse ||
             !_pending.TryGet(pending.Header.Id, out var canonical) || canonical != pending || !HasContactPayload(pending)) return false;

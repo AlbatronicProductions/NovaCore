@@ -6,9 +6,9 @@ namespace NovaCore.Simulation.Transactions;
 internal sealed partial class SimulationTransactionEngine
 {
     private readonly List<ProcessedSpacecraftContactImpulse> _contactImpulseHistory;
-    internal int ProcessedContactImpulseCount => _contactImpulseHistory.Count;
+    internal int ProcessedContactImpulseCount { get { _clock.PublicationPhase.VerifyRead(); return _contactImpulseHistory.Count; } }
     internal bool TryGetProcessedContactImpulse(int index, out ProcessedSpacecraftContactImpulse value)
-    {
+    { _clock.PublicationPhase.VerifyRead();
         if ((uint)index < (uint)_contactImpulseHistory.Count) { value = _contactImpulseHistory[index]; return true; }
         value = default;
         return false;
@@ -37,6 +37,7 @@ internal sealed partial class SimulationTransactionEngine
     /// </summary>
     internal ContactImpulseStatus ValidateAndCommit(SpacecraftContactImpulseTransaction transaction)
     {
+        _clock.PublicationPhase.VerifyOrdinaryMutation();
         if (!_clock.Timeline.TryPeekPending(out var pending) || pending.Header != transaction.Event ||
             pending.Header.Kind != SimulationEventKind.SpacecraftContactImpulse) return ContactImpulseStatus.EventMismatch;
         if (transaction.Event.Time != _clock.CurrentTime || transaction.Intent.Time != _clock.CurrentTime)

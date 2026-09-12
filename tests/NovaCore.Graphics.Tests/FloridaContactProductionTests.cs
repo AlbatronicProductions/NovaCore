@@ -79,14 +79,17 @@ internal static class FloridaContactProductionTests
         internal readonly NovaCore.Core.ReferenceFrames.ReferenceFrameEvaluation[] Evals,Staging;
         internal readonly NovaCore.Core.ReferenceFrames.FrameTransform[] Roots,StagingRoots;
         internal readonly SimulationState State;
-        internal readonly SimulationTimeline Timeline=new(8);
+        internal readonly SimulationTimeline Timeline;
         internal readonly SimulationTransactionEngine Engine;
+        internal readonly SimulationClock Clock;
         internal readonly SpacecraftContactGeometry Geometry;
         internal readonly SimulationInstant Start,End;
         internal FloridaContactUse Use=>new(Engine,Geometry,System,Graph,Query);
         internal Case(PlanetaryPhysicalSurfacePointQuery query,double gap,double speed,long start=0,double east=0,double eastSpeed=0,
-            double eastAcceleration=0,double radialAcceleration=0,Double3? omega=null,Double3? torque=null,DoubleQuaternion? attitude=null)
+            double eastAcceleration=0,double radialAcceleration=0,Double3? omega=null,Double3? torque=null,DoubleQuaternion? attitude=null,
+            StateRevision initialRevision=default,int publicationCapacity=0,int contactCapacity=0)
         {
+            Timeline=new(8,contactCapacity);
             Query=query;Start=SimulationInstant.FromWholeSeconds(start);End=SimulationInstant.FromWholeSeconds(start+1);
             Evals=new NovaCore.Core.ReferenceFrames.ReferenceFrameEvaluation[System.Count];Staging=new NovaCore.Core.ReferenceFrames.ReferenceFrameEvaluation[System.Count];
             Roots=new NovaCore.Core.ReferenceFrames.FrameTransform[System.Count];StagingRoots=new NovaCore.Core.ReferenceFrames.FrameTransform[System.Count];
@@ -101,7 +104,8 @@ internal static class FloridaContactProductionTests
             var rotation=new SpacecraftRigidBodyRotationState(Craft,Start,q,omega??Double3.Zero,new(2,3,4),torque??Double3.Zero,RigidBodyRotationModel.ConstantBodyTorqueV1);
             Check(SpacecraftStateStore.TryCreateTranslating([new(Craft,new(1),new(72),"Single authored landing point")],[rotation],[new(8)],
                 [new(Craft,new(1),Start,position,velocity,force)],Graph,out var store,out _),"case state");
-            State=new(spacecraft:store);Engine=new(new SimulationClock(Start,Timeline),State,8);
+            State=new(spacecraft:store,initialRevision:initialRevision);Clock=new SimulationClock(Start,Timeline);
+            Engine=new(Clock,State,8,continuationHistoryCapacity:publicationCapacity);
             Check(SpacecraftContactGeometry.TryCreate(Craft,501,1,[new(1,offset,ContactFeatureRole.LandingTip)],out var geometry),"case geometry");Geometry=geometry!;
         }
         internal bool Admit(out FloridaContactProvider? provider,out FloridaContactFailure failure,SpacecraftContactGeometry? geometry=null,
@@ -112,6 +116,16 @@ internal static class FloridaContactProductionTests
                 Evals,Roots,Staging,StagingRoots,out provider,out failure);return provider is not null;
         }
         internal FloridaContactResult Evaluate(FloridaContactProvider provider)=>provider.Evaluate(Engine,Geometry,System,Graph,Query);
+
+        // Test-only source reconstruction. No selected event time or recorded endpoint is installed.
+        internal Case(PlanetaryPhysicalSurfacePointQuery query,SimulationState state,SimulationClock clock,
+            SimulationTransactionEngine engine,NovaCore.Core.ReferenceFrames.ReferenceFrameGraph graph,
+            SpacecraftContactGeometry geometry,SimulationInstant start,SimulationInstant end)
+        {
+            Query=query;State=state;Clock=clock;Engine=engine;Timeline=clock.Timeline;Graph=graph;Geometry=geometry;Start=start;End=end;
+            Evals=new NovaCore.Core.ReferenceFrames.ReferenceFrameEvaluation[System.Count];Staging=new NovaCore.Core.ReferenceFrames.ReferenceFrameEvaluation[System.Count];
+            Roots=new NovaCore.Core.ReferenceFrames.FrameTransform[System.Count];StagingRoots=new NovaCore.Core.ReferenceFrames.FrameTransform[System.Count];
+        }
     }
     private sealed class ForgedQuery(IPhysicalSurfacePointQuery real):IPhysicalSurfacePointQuery
     { public PhysicalSurfaceAuthorityIdentity Authority=>real.Authority;public PhysicalSurfacePointResult Query(ulong body,in Double3 d)=>real.Query(body,d); }

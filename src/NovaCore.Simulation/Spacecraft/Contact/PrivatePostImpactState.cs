@@ -79,7 +79,7 @@ internal sealed partial class FloridaContactProvider
         /// Single-writer applicability is not a concurrency lock or a consumed publication token.
         /// No mutable refinement generation: an applicable older receipt survives same-owner refinement.
         /// </summary>
-        internal readonly struct PrivatePostImpactState
+        internal readonly partial struct PrivatePostImpactState
         {
             internal const uint Version = 1;
             private readonly Proof root;

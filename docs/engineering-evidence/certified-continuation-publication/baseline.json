@@ -1,0 +1,1414 @@
+{
+  "head": "a4211617eef1e1d23bf8a4f8495388a35f9ed1dd",
+  "main": "a4211617eef1e1d23bf8a4f8495388a35f9ed1dd",
+  "originMain": "a4211617eef1e1d23bf8a4f8495388a35f9ed1dd",
+  "initialStatus": "clean",
+  "tags": [
+    {
+      "name": "m14.1-canonical-surface-point-queries",
+      "object": "3ccb998031e15cb1898394589c27244d55e06e24",
+      "commit": "5b9b02ab1d2ba0e903809510908e4819984d4de2"
+    },
+    {
+      "name": "m14.10-certified-root-contact-kinematics",
+      "object": "b07c511aab7109e3d240d9c7c31a444f58e069a5",
+      "commit": "fce80a520240293a0373857986c607caf187eacd"
+    },
+    {
+      "name": "m14.11-certified-response-proposal",
+      "object": "8ac99fbfad4f8dd6365d696053fc3edfeea2249d",
+      "commit": "556ca77af88257b5727561709c3a091aaec8cee7"
+    },
+    {
+      "name": "m14.12-certified-preimpact-velocity",
+      "object": "98831b08e07d1bcc251f7aa900f463b98570ef04",
+      "commit": "e5fde08bcae834d8abc107cd26e7601fbfa3e1e0"
+    },
+    {
+      "name": "m14.13-certified-postimpact-velocity",
+      "object": "7c94f38cab9cf605c69b3b1874fee0c0091fbbb2",
+      "commit": "704c77f1aab899ccf3452ee3fc88471d1e311aca"
+    },
+    {
+      "name": "m14.14-private-root-postimpact-state",
+      "object": "412084a0acda2fa96c4be166e1f9f29020ffc577",
+      "commit": "f64dc07f23a0a765b9b07dd49b895a8f3cb5ebfe"
+    },
+    {
+      "name": "m14.15-private-canonical-propagation",
+      "object": "6da3eba1410b05ea46a133bb2cf1c81425f8bf72",
+      "commit": "dc274639f670d122764bb0e8f3d0c95ae201c7a4"
+    },
+    {
+      "name": "m14.16-postimpact-terrain-clearance",
+      "object": "a864be12e42cb98cbd38c17905833f781a579253",
+      "commit": "dd3e5f2998c2148e675a0120abd599ef6f05cc4f"
+    },
+    {
+      "name": "m14.2-spacecraft-translational-authority",
+      "object": "ae2f203b97224ff88b38b7c68902ac2d31108a91",
+      "commit": "caa6d93ccd7c4e5924381e077a62585f99e5a32a"
+    },
+    {
+      "name": "m14.3-spacecraft-terrain-contact-observations",
+      "object": "b9ad79c38b322c8e1e095039d5b69c035a1bcca8",
+      "commit": "79978cf8b0fd783d43a661df6df53a2c0202af4a"
+    },
+    {
+      "name": "m14.4-atomic-contact-response",
+      "object": "b198d3b381ba4a82577ba89bd5e31e6050d3a896",
+      "commit": "28b92f724f8decd3c9356aa5f9f5bbd6c9dd069c"
+    },
+    {
+      "name": "m14.5-isolated-analytical-contact-response",
+      "object": "c2964fe4531b8e383d2d89beec2e8c055f3541a5",
+      "commit": "b53d48025cfb8142cb32a6fc6fceb6018e33cfcd"
+    },
+    {
+      "name": "m14.6-physical-event-epochs",
+      "object": "07adc9983252f2cabf0af9da0a1281457af606bf",
+      "commit": "d0b9f9d69d55b8ba85a7b24a44f93e03cea2dcf6"
+    },
+    {
+      "name": "m14.7-exact-event-spacecraft-motion",
+      "object": "315da29c4eff5562f9040f7a0aedbb4e961fa877",
+      "commit": "56c0ae95b7f514e2f0440dfe272dd2836f32506e"
+    },
+    {
+      "name": "m14.8-exact-event-earth-relative-observation",
+      "object": "27a32989cef714a204d0d7ecfbd4618e53de0086",
+      "commit": "2657bb16cdee2a42d1e5f9be830d247fb3c607f6"
+    },
+    {
+      "name": "m14.9-florida-monotone-contact-certification",
+      "object": "944cb5c1f2011b5944745b210e561d0b9e8b4aaf",
+      "commit": "9698a08b84b9b40b0fa03bec8f8ba80d1d7404e7"
+    }
+  ],
+  "sourceAndTestFingerprints": [
+    {
+      "path": "src/NovaCore.Core/AssemblyInfo.cs",
+      "sha256": "bfcf353da3bc0ac28c3316faba9b7473b9fdde202424eaae0cf3786ec36babc5"
+    },
+    {
+      "path": "src/NovaCore.Core/Camera/CameraCommand.cs",
+      "sha256": "52ecfb82dd8b4b2b11c21b8e08875df8b87e121bb32d14dbced8171815d036a8"
+    },
+    {
+      "path": "src/NovaCore.Core/Camera/CameraMath.cs",
+      "sha256": "d89600921ca59d8b79f688363f33d6c627add75ece9ec957c6740693458546f0"
+    },
+    {
+      "path": "src/NovaCore.Core/Camera/CameraMode.cs",
+      "sha256": "eab06b4f8eb671bc5f8dc17c789039ef8cfb191a4fc07c76c9b8f1ba70c7bf54"
+    },
+    {
+      "path": "src/NovaCore.Core/Camera/CameraProjection.cs",
+      "sha256": "1aaad69ec90a214f78e2f59e378af63e425cace2cc264510598660ebb22c7211"
+    },
+    {
+      "path": "src/NovaCore.Core/Camera/CameraState.cs",
+      "sha256": "c091336befb8387c732b69b3ad03096cbbeed49a21bfa8f46b8ecfcf1eeadf84"
+    },
+    {
+      "path": "src/NovaCore.Core/Camera/FreeCameraController.cs",
+      "sha256": "9bec833b4c512b57f794b8f90c15baedbb0898b69f8d4f0e3e73d9286f048772"
+    },
+    {
+      "path": "src/NovaCore.Core/Camera/SurfaceCameraState.cs",
+      "sha256": "ae84b72f83f8fb863703037420f0cf5cdb5ff1ab70eac279ed641931db5af360"
+    },
+    {
+      "path": "src/NovaCore.Core/NovaCore.Core.csproj",
+      "sha256": "e6fcb8e1e93a724d47a829cffd19d47840a5eb088e9ace43f3a34bbaf1524b07"
+    },
+    {
+      "path": "src/NovaCore.Core/Precision.cs",
+      "sha256": "5cf2b9807c050c00f3c3760ba7723aa8e908af899b98ca825051e176c75ec3ab"
+    },
+    {
+      "path": "src/NovaCore.Core/ReferenceFrames/CelestialFrameFactory.cs",
+      "sha256": "bc4859970b92aa154ad92da65f0918b7fc41e711ae37b51943204f0bca81f5a0"
+    },
+    {
+      "path": "src/NovaCore.Core/ReferenceFrames/EvaluatedReferenceFrame.cs",
+      "sha256": "281d588624a2d930879a2983b1bacc64e016b2c97925af47741220c88ce9e0d9"
+    },
+    {
+      "path": "src/NovaCore.Core/ReferenceFrames/FramePosition.cs",
+      "sha256": "9484e2f817eaef4e827c34653bbef4ef05d49af9b4258cd1e9ffc51b7339cac1"
+    },
+    {
+      "path": "src/NovaCore.Core/ReferenceFrames/FrameTransform.cs",
+      "sha256": "5e60efb0f38d31d3bed481d93ca01bfa6b9a4dc7cc7f612e1bd4e4c549dc45ae"
+    },
+    {
+      "path": "src/NovaCore.Core/ReferenceFrames/FrameVelocity.cs",
+      "sha256": "900002840442a6dd8ea1526ebba2dc3a7917359269b7be841114844c9fa8c4c7"
+    },
+    {
+      "path": "src/NovaCore.Core/ReferenceFrames/OrbitalFrameGeometry.cs",
+      "sha256": "3175cdfd3a77d0fab1d78f36f924f0259b2196f071ba1b8f5e7327d298c6e4eb"
+    },
+    {
+      "path": "src/NovaCore.Core/ReferenceFrames/ReferenceFrameDefinition.cs",
+      "sha256": "2eee4f710676eba2bc7773c4e1fafa30cb5409ffcbb7e3d34ff8b0e066573db9"
+    },
+    {
+      "path": "src/NovaCore.Core/ReferenceFrames/ReferenceFrameGraph.cs",
+      "sha256": "5f0f0b5934e208b302f8c3395135ff6f212ca317af0c002e3d53b1870b1173c9"
+    },
+    {
+      "path": "src/NovaCore.Core/ReferenceFrames/ReferenceFrameGraphBuilder.cs",
+      "sha256": "45722b97f293cca9cf290cff3f293d66855035d59ba2c9f29cfdee4d9f0c7ddc"
+    },
+    {
+      "path": "src/NovaCore.Core/ReferenceFrames/ReferenceFrameKind.cs",
+      "sha256": "07a30f44177f10a3fbfeb13d93215ddf07b6000a4bd7c032320b038a6157fdd9"
+    },
+    {
+      "path": "src/NovaCore.Core/ReferenceFrames/ReferenceFrameMath.cs",
+      "sha256": "2d9171f5b9591ffb096baef5894388a63f906ab866d455e7c9949791cefd705d"
+    },
+    {
+      "path": "src/NovaCore.Core/ReferenceFrames/ReferenceFrameNode.cs",
+      "sha256": "34cfd8534ac7e6b0d7c1ed39d5bdb4f0e89e55b65c7efe9b3c91cda249b31a4a"
+    },
+    {
+      "path": "src/NovaCore.Core/ReferenceFrames/ReferenceFramePathQuery.cs",
+      "sha256": "327e65d7c018999bcc78150edd0a806d0a272bfcdd6e654f67923a5766a478b7"
+    },
+    {
+      "path": "src/NovaCore.Core/ReferenceFrames/ReferenceFrameResolver.cs",
+      "sha256": "2c5e9640b02e4af6a5378fc6ab48df4622a7dd0d5da99bae22626a7f062ad793"
+    },
+    {
+      "path": "src/NovaCore.Core/ReferenceFrames/ReferenceFrameSnapshot.cs",
+      "sha256": "680ebd24141e0207abb3d6c8867aef759a76b29be0e65914f7bc76db515a7fb6"
+    },
+    {
+      "path": "src/NovaCore.Core/ReferenceFrames/ReferenceFrameTransformResolver.cs",
+      "sha256": "b180235cbba578a6e3ddf9efa5876143306e8cb69a3a972e5b09cf587adfaf65"
+    },
+    {
+      "path": "src/NovaCore.Core/ReferenceFrames/ReferenceFrameTransformSet.cs",
+      "sha256": "7db4f06a4a1fb1fc45783240ba66e7fc45a0f4f8a01a13f37866112ec53bd0af"
+    },
+    {
+      "path": "src/NovaCore.Core/Surface/AnchoredSurfaceObject.cs",
+      "sha256": "3fca2cab3c99663dbb90d8ca45a4ca6b228b2970aa0fb1ca304e6c2462b7feed"
+    },
+    {
+      "path": "src/NovaCore.Core/Surface/BodyFixedGeography.cs",
+      "sha256": "bdfa08d84a5e250939567b97c82916c8227c2f9acfe7cc827c272ffb61357953"
+    },
+    {
+      "path": "src/NovaCore.Core/Surface/FacilitySupportRegion.cs",
+      "sha256": "5ff6f285c5f28749782f5abb09c808bfbcbba8acca5ea348365952fc2a4140ce"
+    },
+    {
+      "path": "src/NovaCore.Core/Surface/IPhysicalGradingProofSource.cs",
+      "sha256": "b0dc88fc95d630ff2f0fd6026f708669539e2c922bfe9edc86968ff8f7bea81f"
+    },
+    {
+      "path": "src/NovaCore.Core/Surface/PhysicalSurfacePointQuery.cs",
+      "sha256": "16737a617e6b675791ad374f69281cebbe03f029bab15b0127cc039e153b527b"
+    },
+    {
+      "path": "src/NovaCore.Core/Surface/SurfaceAnchor.cs",
+      "sha256": "5f00b99ac22aba0c1bd9c5bfa21869a1fa93b845f19bc604ead68760edfcfd2f"
+    },
+    {
+      "path": "src/NovaCore.EphemerisFormat/EphemerisArtifact.cs",
+      "sha256": "8f27d0413129e6c243f4eabf0a610fda6c5292022118c64f9e5fdeea4610bbad"
+    },
+    {
+      "path": "src/NovaCore.EphemerisFormat/NcpeV2.cs",
+      "sha256": "d1a8208f8120295dbc7bdd9ce0d95278ac1739c07b09c7cf353c330ea7da261a"
+    },
+    {
+      "path": "src/NovaCore.EphemerisFormat/NcpeV2RuntimeHash.cs",
+      "sha256": "13ade699b0112cebf2719e2afeb16b55742945f6422e43086439b14d6dfe72fc"
+    },
+    {
+      "path": "src/NovaCore.EphemerisFormat/NovaCore.EphemerisFormat.csproj",
+      "sha256": "8d654c44b7bebb6b31a9f2f606927f45b5072193adc4eef8cce3f3cf3b278df3"
+    },
+    {
+      "path": "src/NovaCore.Graphics/AssemblyInfo.cs",
+      "sha256": "0ba762a60b35643bf12f72275926539a53b8cd38005401ac3ce783e2b416ae6a"
+    },
+    {
+      "path": "src/NovaCore.Graphics/CameraRelativeRenderPosition.cs",
+      "sha256": "3bdd9dc0ae48bd39c5c8e32dbbd09631897ca231bc3ab00f43de3626b20daf0d"
+    },
+    {
+      "path": "src/NovaCore.Graphics/CameraRenderSnapshotBuilder.cs",
+      "sha256": "f909470f23fb5c3519ddac2b66d3db6b42c1cb157498026ceed539dac582e75d"
+    },
+    {
+      "path": "src/NovaCore.Graphics/EarthElevationDataset.cs",
+      "sha256": "1e15d67364ac336a5a4bf3ec4e6df77b2f7db3437fc315fae776e2158104044c"
+    },
+    {
+      "path": "src/NovaCore.Graphics/EncodedPosition.cs",
+      "sha256": "fc94f892e62a66ab824d2c69b3dab00ab3414621b74f52404ba998a3de362585"
+    },
+    {
+      "path": "src/NovaCore.Graphics/FloridaLaunchSite.cs",
+      "sha256": "abead9f1c2000dca3832a5b7c5a7f6b7fb5edf9cde22829ced92ac79b1c02a92"
+    },
+    {
+      "path": "src/NovaCore.Graphics/FocusTarget.cs",
+      "sha256": "6bb19370a43df682e82840113857a500245d5d9fca4f5b964158071b0db6947a"
+    },
+    {
+      "path": "src/NovaCore.Graphics/GpuCameraData.cs",
+      "sha256": "ba3a44b0e3bcfdc1e74fa6ef8beb0ff416ebd39fc2c4788c69c2e7bb587880b7"
+    },
+    {
+      "path": "src/NovaCore.Graphics/NovaCore.Graphics.csproj",
+      "sha256": "679344321a53f9c4e92ce8a5dca77c352328300ba28dd249032b9076dbab1267"
+    },
+    {
+      "path": "src/NovaCore.Graphics/OrbitLineVertex.cs",
+      "sha256": "6fb49bebbd547f9afcbed4d92e633f7fc0c36c428cd8ce2d9545defc9eb939c4"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetMaterialPresentation.cs",
+      "sha256": "cc14fdcbee70c4e43e21a3de76379ee3b988a83611586251434a24b5dd853a0e"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetaryAnchoredMeshTier.cs",
+      "sha256": "52137a015e852d0ad14ac8891d0238c65693d733b8fb868362697fa4d7a8bced"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetaryBiomeControl.cs",
+      "sha256": "f882e690a6ef7630571b898986a87c4590861f873347210a298ed46adb1e5e79"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetaryCanonicalPhysicalSampleIdentity.cs",
+      "sha256": "3ffa0b22db74b533b04584a0ca20597d3d3e91e97c66c208e07afc09973708f6"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetaryGpuPhysicalHeightQuery.cs",
+      "sha256": "8d860497caeff797a5ace1684c6144631e5e0b8e248ac976cfe16ae19c6afbbd"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetaryLocalTerrain.cs",
+      "sha256": "4c04c8b7dd07e07df418979ee6569fbc1dcbcdb696d9bac860cbff706b7a4113"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetaryNaturalTerrainFamilies.cs",
+      "sha256": "80a6254953daea394fe5ce4cb29f39d078872164fa4e72ee848394db8e812ca9"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetaryNaturalTerrainField.cs",
+      "sha256": "580de64567c09feea752c9aa1edd91a2bb9312276815736df3fc508c23b63221"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetaryNestedScaleMeshRuntimeAdapter.cs",
+      "sha256": "31e1471d7ca3d5c8ef51fa3c31064ff7a6957fd79352d1637d5ea608986bc6a9"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetaryNestedScaleMeshTopology.cs",
+      "sha256": "472949d012bb3b0fd269186d7d474753b21f0ffce551dc09ef6ac163f5e797b8"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetaryNestedScaleMeshTopologyGenerator.cs",
+      "sha256": "f884797d9ef7c7e964e7da401c38f36f916815bbbd9a1e5a8a9297a2e83ff8b8"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetaryPatchTopology.cs",
+      "sha256": "d077e7594486c6646c89ba2317d24b34ec5644b126c8dbb251f4dca540cf9f2e"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetaryPhysicalSurface.cs",
+      "sha256": "22ccb2ed2edb7285e0de40b97003353da6f1cf87df6154c03b7ec7a7ed3f2746"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetaryPhysicalSurfacePointQuery.cs",
+      "sha256": "967042c78766381660ced03b1a1d2288e262bbedeed1b8945385f6a6ed1eadd6"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetaryPhysicalTerrainAuthority.cs",
+      "sha256": "a24ea72ac832c02efc2878519afc4a8ad356c13de54ac508def117dbb34173ac"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetaryPresentationSnapshot.cs",
+      "sha256": "78e14373d3527e31d058ad1913ef44a5016f3f8822c7a135711bbcffa34248f8"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetaryProductionSphericalBillboardMovingRuntime.cs",
+      "sha256": "052d3f1d2fc3b18e9c1bacb80b6925adc7b810e70d98ea778b8d92ec55d81ec7"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetaryProductionSphericalBillboardRuntime.cs",
+      "sha256": "cd3ca9020b66d9df9929866809ca485c830221f579e8cc126186fd0a2d8e1a90"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetaryProductionSphericalBillboardTopology.cs",
+      "sha256": "a82b4883058a05eed47230ef49c4fcf7cc3543813da3bb4891c131ba42eee289"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetaryProductionSphericalBillboardTopologyGenerator.cs",
+      "sha256": "0b2c5bb6e9aac1cc8bf1ff6e72c622db96c8745ff26a001d744fc1c28dc1a90a"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetaryProductionSurface.cs",
+      "sha256": "7142b6d863eeff110d6e1765d367bdfefd9bf6ec2269c073d7aed48e697afc79"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetaryReferenceDisplacedMesh.cs",
+      "sha256": "277e761083ba687e7c818c5e59c0ffb87ba5b4710f298bf01d42b7bbe3a57df4"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetaryRepresentationHandoff.cs",
+      "sha256": "2013d1ac54420df35f7d4460e528e4650db7b9b37ea2a46beed0b2887e71b974"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetaryScreenSpaceSubdivision.cs",
+      "sha256": "a15997214006b4b44df632ecd859e4106ec26c92048d9e9569dce6eca2bb8912"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetarySphericalBillboardGpuProof.cs",
+      "sha256": "c4ab1e1ab53c71b779a92fc139b9561f62c55ef22a54dbb5b9d83a6bd9c56ab7"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetarySphericalBillboardNaturalTerrainProof.cs",
+      "sha256": "7cce9868a5699ef21ff00e5b660e041aa1cd2ba44b30509ded7a62b9b990372b"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetarySphericalBillboardTopology.cs",
+      "sha256": "8b801aadbccb5a3e5a6abb15b32179bb4194f6920238edbd9749ea77ad3ffa3e"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetarySphericalBillboardTopologyGenerator.cs",
+      "sha256": "f62678cbc774e97708f5b1a0f6777a54258cbdd19d7a0af32a324aabd6ab690f"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetarySurface.cs",
+      "sha256": "52f1ee6babd7ee25ac9fc9de5d4c301cb361cc7b0381461852072d5664b62edb"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetarySurfaceCameraPresentation.cs",
+      "sha256": "af6beb59cd92fcdeb693a88a39aa5d7ed159f490e3957c9797b629aa247515a3"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetarySurfaceScatterPlacement.cs",
+      "sha256": "6587f417f2eea39b709a5fd1e396c1b8513cfe3191a8d836e4f02b6d828f5e72"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetaryTerrain.cs",
+      "sha256": "b6c39702ea1486c441e94b2f694ac0ce38ce9a4092e5f30cbf9ac797281899f1"
+    },
+    {
+      "path": "src/NovaCore.Graphics/PlanetaryTerrainMaterialSynthesis.cs",
+      "sha256": "3d679081ed4eeea20342610a09362fc8efbcb5d62db2a5584b1a38401960f5f5"
+    },
+    {
+      "path": "src/NovaCore.Graphics/RenderFrameSubmission.cs",
+      "sha256": "48397dde75105f8820528cafc4a5dfad35a0cc6925aed4995d21b1fe4fd68d93"
+    },
+    {
+      "path": "src/NovaCore.Graphics/RenderObject.cs",
+      "sha256": "b5d9dafc0ee0ced74103e601863409ee603170ea8b0184750fbeee4d559ee833"
+    },
+    {
+      "path": "src/NovaCore.Graphics/RenderObjectId.cs",
+      "sha256": "b81952d171dbf839b1e27c9981050026750f1913e75e9a11a9a695230698b9fd"
+    },
+    {
+      "path": "src/NovaCore.Graphics/RenderSubmission.cs",
+      "sha256": "f219d08b25e1131342247d7b6dca2d8d09910408efbb9f90fc6226edf031e9b3"
+    },
+    {
+      "path": "src/NovaCore.Graphics/RenderTransform.cs",
+      "sha256": "4470def58b291950e20476a89a21c9c86831804cfa231769b48c5c8a6048371c"
+    },
+    {
+      "path": "src/NovaCore.Graphics/ResolvedDirectionIndicator.cs",
+      "sha256": "323e2ea8e480e0cfba268431a966ed4f2ed7ea021e40fc60a1b6805d620033cc"
+    },
+    {
+      "path": "src/NovaCore.Graphics/ResolvedOrbitCurve.cs",
+      "sha256": "1844a065508c0db6767c0a9acbb1b3a7aaa52f8f140f258a2e3e5f6f5766dcb0"
+    },
+    {
+      "path": "src/NovaCore.Graphics/ResolvedRenderObject.cs",
+      "sha256": "5b5ef3806afdcf53140afdea36dc04e43ed5d740fa5f481cde30ec9473d0b814"
+    },
+    {
+      "path": "src/NovaCore.Graphics/ResolvedRenderSnapshot.cs",
+      "sha256": "ead608fcc4dca4b308b20d25b4f2af146b53a4e0c5a0a415e613303c89199deb"
+    },
+    {
+      "path": "src/NovaCore.Graphics/ResolvedRenderSubmissionBuilder.cs",
+      "sha256": "ac5958dcf04e3ce3869154972d63cd7dcc47aba68b36ee8f6676cc803f7bff73"
+    },
+    {
+      "path": "src/NovaCore.Graphics/SolarLightingPresentation.cs",
+      "sha256": "bab581fd23fd36955884f96b43e596ad3e0b17405629ed9308a1680ccf446a24"
+    },
+    {
+      "path": "src/NovaCore.Graphics/SurfaceAnchorAcquisition.cs",
+      "sha256": "a031c41cf88f7c445588cfd313842d2ac3b4f10cd2f8402e6f8a45ea1a6c3341"
+    },
+    {
+      "path": "src/NovaCore.Graphics/SurfaceCameraAuthority.cs",
+      "sha256": "9b5dfd9003e3b326a96b5479b970258a262332c14bd93fb5149750097feb02a4"
+    },
+    {
+      "path": "src/NovaCore.Graphics/TerrainAssetDistribution.cs",
+      "sha256": "f866fbfc428697aceecad626dda6eb017630485cf066d208993e5b663b5321a7"
+    },
+    {
+      "path": "src/NovaCore.Graphics/TerrainCacheCleanup.cs",
+      "sha256": "5c31058684a8fd83126cf14273785dd4d3b337d6a33e12296f0809bf54d376ec"
+    },
+    {
+      "path": "src/NovaCore.Interop/NativeRuntime.cs",
+      "sha256": "88f7e27975e0350f70bd4fd6a779ad68d066404a09eda4a4b0f1abc7262688ce"
+    },
+    {
+      "path": "src/NovaCore.Interop/NovaCore.Interop.csproj",
+      "sha256": "5484832cfdeb05127b312b3c63a1ff38d24974d39fdb0b67a17ad3b60f6526ce"
+    },
+    {
+      "path": "src/NovaCore.Platform/Logging.cs",
+      "sha256": "bb0283075c819f76dde74ebf28adce328a17e891d1be5b3703813e2b05817d8f"
+    },
+    {
+      "path": "src/NovaCore.Platform/NovaCore.Platform.csproj",
+      "sha256": "e6fcb8e1e93a724d47a829cffd19d47840a5eb088e9ace43f3a34bbaf1524b07"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/AnalyticalKeplerSecularCorrectionEvaluator.cs",
+      "sha256": "ae9d4c492be75a82780c71ed94960191573a8595812339235dbae1fe4d5002e6"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/AnalyticalOrbitSampler.cs",
+      "sha256": "bb5c45086212c59814e0fc42fab69808078dabde4a1a091bac824ada5014f4c2"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/CartesianState.cs",
+      "sha256": "a2c3b57bb701736f292c33d78e672ece44ae6db769408b8df21e7ea7c91678f4"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/CelestialBodyCatalog.cs",
+      "sha256": "62583eb76fac8615bcfc960498bd50f4922c92bbdd987851ad9ee92cd62ba037"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/CelestialBodyDefinition.cs",
+      "sha256": "f444ff39efd277522ef1045fff319d41a73232b33e73c4ad94f378157cc21ca3"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/CelestialBodyId.cs",
+      "sha256": "0178ef1fab358a3ff8fa6a55fe861c663c89d798f7e9d81117753ae06124fee4"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/CelestialBodyOrientation.cs",
+      "sha256": "e1d5cf2661e0d11f24f2bdd9061d1b583dbe72519245eb726b6b1716ffe44e99"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/CelestialBodyState.cs",
+      "sha256": "317b56acc59b615e26c7d60ba1abb426f753ba1f67bb2ce9119a460210b8f422"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/CelestialContractHash.cs",
+      "sha256": "9134297946cba10bad73fb921e3819a8f8210ff5896cf9c5f58e2320b96f7235"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/CelestialEphemerisCatalogs.cs",
+      "sha256": "73473d4572a3103e01b23210681d43b425c96c017b8df4db7c9c6b83cee7a0f2"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/CelestialEphemerisMetadata.cs",
+      "sha256": "580c736839e5b6d30a938b334060c405b20a35da8929d0dd4fd45a141ab0656a"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/CelestialHierarchyNode.cs",
+      "sha256": "ad2d89b7ad83b30e89269a0cf66f5a86457c530f882edb6dc1fcd37d935c2c33"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/CelestialStateStore.cs",
+      "sha256": "c0b37a8d64d00fd8c15f5240f8e8c0cd65a07b630600ed48aa707b812636a581"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/CelestialStateStoreMutationStatus.cs",
+      "sha256": "c885a6dcb240a92d716cb62954e0c9ce54fac4590fb78359fa96c66e7cd950dd"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/CelestialStateStoreStatus.cs",
+      "sha256": "73fd1d6f2eec83f10d9cebf22532e359fcfccf30fab0904332515c9f8785019a"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/CelestialStateView.cs",
+      "sha256": "f04d0bdd41342afffba28adf6902548a47f4a0efe66c580baff9079e1864cc0f"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/CelestialSystemDefinition.cs",
+      "sha256": "db3d2119a02e839fb1d36c9728f948e333987072c1ea0c0989cf11992f03c0bd"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/CelestialSystemDefinitionHash.cs",
+      "sha256": "3cd0740f09f489ea3755fac1a8195426dee26c6361104d054ba46199813205d9"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/CelestialSystemEvaluation.cs",
+      "sha256": "a2021bc490a72080173f59b472eb6d1bd41c8a480208bb71a05b98800ed1495d"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/CelestialSystemEvaluationHash.cs",
+      "sha256": "8bd6812c92e6b17035eff28228bf8b365a7ea5616d765d862248f2f0160f345e"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/CelestialSystemEvaluator.cs",
+      "sha256": "a9cd509e5bf1d33e7dab43ceffdc51dac474e1f3a06ee218850de1a4c0a823e5"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/CelestialSystemFixtures.cs",
+      "sha256": "f1d347e3e0cf42e2c0c0d8f3c30298f8decd871062b370b7b49997e9c705ba32"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/CelestialSystemId.cs",
+      "sha256": "e1a3da87767877eff41c445a624ced6c67c7a53214d82bf36971b9956dedd326"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/CelestialSystemTime.cs",
+      "sha256": "112e89e551dacb1937dfe92396cf1205c1e55d8fdf40fe0cd388cad41b64465c"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/CelestialSystemValidationResult.cs",
+      "sha256": "16b790288bbd7d93450f13e89511e2ed92c498ffd9179589ff54abf60bb64171"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/CelestialTrajectoryEvaluator.cs",
+      "sha256": "74dcb7eceb98e03f125f57cbd131e018fb09d437406d3e68c826a37e57e2d842"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/CelestialTrajectoryModel.cs",
+      "sha256": "d81c30d88bbcb386716f9d903d9181d4e3b0b82e621664e47fe4002f0489cf5e"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/Data/moon_me_de440_1900_2100.nclo",
+      "sha256": "8ea43f6dd2a20a905f85834d21fdfb92805872ac36c1964e45e733df015f9e8c"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/EarthContactProofModel.cs",
+      "sha256": "32de87a3e3a53cd50d3cc9136ffd48a1cd25e565764f899f2ca18d6073c4d580"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/EarthPhysicalEventEvaluation.cs",
+      "sha256": "bfcd0ec3d5f634b2b8fc3a7a009762497cfee7927f148555eaa045d4d15098ff"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/EarthPhysicalEventOrientation.cs",
+      "sha256": "3ba9e6a8beb3a2ea3476a5613c1c62daa71bd584b63b72051680cc350f99675d"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/LunarHighPrecisionOrientation.cs",
+      "sha256": "f64d8dd7b650e00c9c7a98fce7fc328713669f172949b0cdec361786c18ef57b"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/NcpeCelestialSystemLoader.cs",
+      "sha256": "50f6dd088a3b7d2222d401c38be302c008f68d4b71c89948306db311d3306352"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/ReferenceFrames/CelestialReferenceFrameEvaluationStatus.cs",
+      "sha256": "68efafe6c8aa02989cb0fec899d19659b42c1d2a06235e18cf0c9d721acf3642"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/ReferenceFrames/CelestialReferenceFrameEvaluator.cs",
+      "sha256": "98d323d1df97d076fd09e3287de65717245614ac9dc92b80bb036c99ac29cd4a"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/SampledEphemeris.cs",
+      "sha256": "618a6c87bcc23dbeaeb5236b019d0320b0a3e62948ad9a25d32e84e81a3d8461"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/SolAnalyticalDefinition.cs",
+      "sha256": "dc4be333409d1418448c8e4b1afeae459b36844279631d51a9159cf38e30cd5d"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/Transactions/CelestialImpulseEvaluationStatus.cs",
+      "sha256": "d2aca3ff3c8d22f3713dacae4d3aa0a86686cf71521e5f692ea44cf4486d2252"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/Transactions/CelestialImpulseEvaluator.cs",
+      "sha256": "a4c61746e7a4354da73db4327f5eeb22249d60fea64c2361e69cfddd8e470374"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/Transactions/CelestialTrajectoryReplacementTransaction.cs",
+      "sha256": "f4688c33898f49af353f2e676d465f5778b2fca223617a3977b15c73834df674"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/Transactions/CelestialTrajectoryTransactionEvaluator.cs",
+      "sha256": "4a33457e5192e745fcece4b3030a7628d9883db4fd8b548e39e1b82ee246c2c6"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/Transactions/CelestialTrajectoryTransactionStatus.cs",
+      "sha256": "916bd9da36065204410c10fb380e19400202bd38d6ba8f8b4fca77ea01114b15"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/Transactions/ProcessedCelestialImpulseAudit.cs",
+      "sha256": "9418ddd20f9051445c3163472d956036996e129965936c33e87e3ad5f388452e"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/Transactions/ProcessedCelestialTrajectoryTransition.cs",
+      "sha256": "53283b69c26535b9f88552976e269b9cf98ff5643595a3b6501aa84016be639e"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/TwoBodyPropagationResult.cs",
+      "sha256": "07434954eaa5a0522f00c1f76ee24b8940fc6df92ace2719f96fa12de50b13a6"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/TwoBodyPropagationStatus.cs",
+      "sha256": "564ae418776f7aac14cd2656fbb28e8d9e531592cbfab11366bc0b1604a51feb"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/TwoBodyTrajectory.cs",
+      "sha256": "5a1499686dda4edbd318f8b92605b34d25ad65f0ceafc51f6dc6128711a3fa30"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/TwoBodyTrajectoryIdentity.cs",
+      "sha256": "de7d531c098403ccfde5902ff883c6bd784a1996cf0f3453565f72ddcfd42664"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/UniversalVariableTwoBodyPropagator.cs",
+      "sha256": "af614085b7b5b2a68e7b6922ce5da00d128243ea2636cfc1b38e3b247d82497d"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Clock/SimulationAdvanceResult.cs",
+      "sha256": "f31d8fe83e5a92ac2bd2e3a0b2694ddd879f6c18c4f7f6dbf08213a2d8278608"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Clock/SimulationAdvanceStopReason.cs",
+      "sha256": "d7c1c7062dbfec4f3be103b6f08665690e923bb51f6f19f9810f626aad26af0f"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Clock/SimulationClock.cs",
+      "sha256": "13033c6dc2d7faffa3a21f3e06539b18e8377963d22ccaac0b184a17594a28bb"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Clock/SimulationClockSettings.cs",
+      "sha256": "e19dd72688e5c2dc5e9d8d23bf089faf17aa1c0916d1631a49f73fec69753cf4"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Clock/SimulationHostAdvanceResult.cs",
+      "sha256": "87a80652594e64a4b9af44f6fed68b141dd67f4d233fc8ccdb6d2dee4d9edd1f"
+    },
+    {
+      "path": "src/NovaCore.Simulation/NovaCore.Simulation.csproj",
+      "sha256": "33d9a627d6aee044767a19fd4b14fefdb23af42f06825dcc2cab46ffc532bacf"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Properties/AssemblyInfo.cs",
+      "sha256": "61d9a7d581edef3738619b77f6568e2655b352c2ef4cc27aa851152390b3b2a1"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/CertifiedContactResponse.cs",
+      "sha256": "9ef8cc2fc0963c38eecdb1e7306f4df52fdb4145f9ffe28be4d157a1760b2bc9"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/CertifiedPostImpactVelocity.cs",
+      "sha256": "07687b870103f9fc931f0593938acf152e4b2f74ffde18da65dcc712b9b53e60"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/CertifiedPostImpactVelocityMath.cs",
+      "sha256": "9b749af0473fe60c76b2a8f5352d06b7a37c68237a421d88a1ce0691031cb5ec"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/CertifiedPreImpactVelocity.cs",
+      "sha256": "c77acb4f2d58ba9446a1d3e3ddd6601129a30ac671e81b031a92e31617a574f8"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/ContactBodyMotion.cs",
+      "sha256": "2edccc606f7a14ac43a7c53bfeb1b8a2c2f7ee89c5deb42d244f65a82e0101df"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/FloridaCertifiedResponse.cs",
+      "sha256": "34a0fe3eed5557cbf6170c42bee340fcd9fe65d0b548a1479138d1c4464d464e"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/FloridaContactBounds.cs",
+      "sha256": "8fa4828ecbba62a54f56bbe3b1904967c29130a1e72615279502253cb9a0c5e7"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/FloridaContactKinematics.cs",
+      "sha256": "2d249d95c7a313eeb2bd35072edd455cf5318cd3ccacd298bf4a03121eda9bd6"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/FloridaContactMotion.cs",
+      "sha256": "93d705394583a8ecb08c6aace2a8123a01d72a7c463501457ab99939e2da29dd"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/FloridaContactProvider.cs",
+      "sha256": "e86e1de4c16b348e250b21c0b6a0ff871357a23d8b32dac183e0ada7bb1bb9bb"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/FloridaPostImpactMotion.cs",
+      "sha256": "7f4077e184cd5b48c83acd8f688ae9ea63c374e48d582c02afdeb06ae44355ff"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/FloridaPostImpactVelocity.cs",
+      "sha256": "4afb88a70e023bdf44c58c8a477b1381c03c8aa5961baf717a88c1437b64f883"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/FloridaPreImpactVelocity.cs",
+      "sha256": "0ae663000facff89bb6ab93dc39709343decee9b8c125969b025d73d01aee429"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/IsolatedContactResponsePolicy.cs",
+      "sha256": "175bdd275bd9de78fa3196de1585bab1cb56c7b2be14bcf63275736b1af7c6d6"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/PostImpactCoverageProvider.cs",
+      "sha256": "5329a9c186d50689925c36e520bfa48b9050485d326fc9d0029f635933ca8285"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/PostImpactCoverageSearch.cs",
+      "sha256": "19ba488e068c31302ef4173053feb12c7a31ccc0ed0ee0b2258cae4c13f279d0"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/PrivateCanonicalPropagation.cs",
+      "sha256": "44eb46f5e5bf25fe4ed8fd6462749b7828fb275500a498a279c798df0eecbc47"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/PrivatePostImpactState.cs",
+      "sha256": "6d1d7f0d41f65f2f7a947e932bbebdc0296395b7b1494d1047b5e17049c82c20"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/SpacecraftContactGenerator.cs",
+      "sha256": "60b0329c75cb587676fdeaa0c2f44d8caac177efe0a13f7f21e4a932f8fc0c6a"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/SpacecraftContactGeometry.cs",
+      "sha256": "612c89ce35b4494fc67d840b9d33a7333977cfd777eea77db45d8ddd131b910a"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/SpacecraftContactImpulse.cs",
+      "sha256": "3dd79ffb33aa0a16ba840755297509b54fbe58fb6f8cf1df7b617054a0d3cd40"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/SpacecraftPhysicalEventObservation.cs",
+      "sha256": "56cb57e90fd52ba6ac15c4748b1fa0cc67554de8524b87115b38be11f551a3aa"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Guidance/FlightReferenceEvaluator.cs",
+      "sha256": "8afdf57c1569708b6b62865fd0b89acdd3c59f79eb6150abf5e4c9dfc30c6086"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Guidance/SpacecraftSasController.cs",
+      "sha256": "fe1f2d9b7554642d658b6235439ba33f79396f502406d6d93d75b210d5505407"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/ReferenceFrames/SpacecraftReferenceFrameEvaluator.cs",
+      "sha256": "07cd9176791aacd08727036ac7078d0541a271642ef904178a809ad8381e3aa4"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Rotation/PrincipalMomentsOfInertia.cs",
+      "sha256": "3600e05cf9e2e9579e5840758dc70c3e3034135184db037aab9c7184a7f63f3d"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Rotation/RigidBodyRotationModel.cs",
+      "sha256": "d940b3743a486efdf83c5e1a950cea53ae71078892b80180c0525265ee12c1e1"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Rotation/SpacecraftPhysicalEventRotationEvaluator.cs",
+      "sha256": "2da9d5789f38668e5ba0bd4f5217f7c07cdd13788ee7359c969ae13556fe50ec"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Rotation/SpacecraftRigidBodyRotationEvaluation.cs",
+      "sha256": "243b24a1744e60dbae83ff7fbbd4552c6684df9b853c23a8566118f7b2f7cd52"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Rotation/SpacecraftRigidBodyRotationEvaluator.cs",
+      "sha256": "040b8d92bf02649ef363d70a849e4ab97ea1f81826cbea00eb8a66defc5db7b8"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Rotation/SpacecraftRigidBodyRotationState.cs",
+      "sha256": "008d4fa751440db93370cc8f67c0def44252c4016c333fee69f5dbd664d4f5e7"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Rotation/SpacecraftTorqueCommand.cs",
+      "sha256": "6ed253eb7200c363ca5bef3c0cb4d22eba7409cdc143febd98a4682bfc5ffe21"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Rotation/Transactions/RigidBodyTorqueReplacementTransaction.cs",
+      "sha256": "1a103caedeaf786eaefc3e2b43d023538de6ae1711211558f86969337b7360c7"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Rotation/Transactions/RigidBodyTorqueTransactionEvaluator.cs",
+      "sha256": "dddbaf938239efe126bac214368821a485b881099b2f83befb3dc57d75e43273"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftAttitudeEvaluation.cs",
+      "sha256": "fa80156b585aef3f7124f75e79a3d9e1821d568dd88782e634d65487529fd4f8"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftAttitudeEvaluator.cs",
+      "sha256": "db90b9959ddb66e835775261aedfe6e590bbde6052876955f74cff77f0fb0ba0"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftAttitudeModel.cs",
+      "sha256": "9fc4084a83fde76bf279e14ba4c4d3339d87f7286b72614e1e8815f225f93440"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftAttitudeState.cs",
+      "sha256": "840011f1620b932f11b3400ee79ee66e3806cab0b1b629e1d71bcc27414fa21a"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftDefinition.cs",
+      "sha256": "318647f3c7e54f48b70a702296dddacc071dbe14d2dbd2120dc4c8ecbe96cebd"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftId.cs",
+      "sha256": "d71413500982cdedae63651787e036947442ee52bd0c1d1bae35871b3398fe1b"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.cs",
+      "sha256": "b3b233b1dddacc74f179f8359366f39b628cb024c604a2ac80f753b03b9cf581"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftStateStoreStatus.cs",
+      "sha256": "87e8e5e269755ee7ed68ae5c4d5fcd7b5dcf0059e39ac31a863a4a5c1d425f10"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftStateView.cs",
+      "sha256": "90f29a80180c009135cff5290584cf18c54e3beb63c931a23bd80c97e33e989c"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Transactions/SpacecraftAttitudeReplacementTransaction.cs",
+      "sha256": "45a098be76314ae1345c03a184c21df7959b1ea5f546f0172c6a310f2873085e"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Transactions/SpacecraftAttitudeTransactionEvaluator.cs",
+      "sha256": "d179d5183be9c146e6c5c376e3f59da1d354f0bb5d02c39f658cc1be394add25"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftForceTransaction.cs",
+      "sha256": "d9f1c93ff20aa0f57de1ffc65d6c777e05a33cb183da005185ea08e5cc7f18a8"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftMotionEvaluator.cs",
+      "sha256": "8018209ec9d8b20545e2d4d7b6637a005e9e33a30bed4f1edec629d4491d3f4f"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftPhysicalEventMotion.cs",
+      "sha256": "b584f473e43c034f93316cf0e07a50da9c195952a1a75d213a0f9a7c529247f6"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftPhysicalEventMotionEvaluator.cs",
+      "sha256": "4656e1b6db450f10937652b61bb2f7c905101c8af6faa1614faaf7fabb71f617"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftPhysicalEventTranslationEvaluator.cs",
+      "sha256": "d82707dde236529ee928df6398d9400de45d421ee71a42b1078f2b6d16fec6d6"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftTranslationEvaluator.cs",
+      "sha256": "1991c124b73b3097e4133f4c13b5a8d7ae7481ad7642d78581c557b45480f4ed"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftTranslationState.cs",
+      "sha256": "dc563e205dec5d66bc3330a8427fca258e0e4fa7abdac87000894090e594417f"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Time/PhysicalEventDuration.cs",
+      "sha256": "2f5babc36019a212fccb6316efb2a0c0c69c0c8d42db1f5bbe659d424b22f7e5"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Time/PhysicalEventEpoch.cs",
+      "sha256": "27c36dfdbca7adeac3bbc23a824eee28f2d9ccd5d36315ae696fbe64a1ec7aa8"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Time/SimulationDuration.cs",
+      "sha256": "b544d2b67889ce9488f13d843898ba135b90641cf406dd13808ba5d53eefcf90"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Time/SimulationInstant.cs",
+      "sha256": "26d8ef2dd5025002c78e7a64131b2e453d8adeb67d0fe6b908551b4b7fab22b5"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Time/SimulationRate.cs",
+      "sha256": "10e3d9f725a3fbb7a12d27e1440407b465a72261548667ed05625d9bd870cc1f"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Time/SimulationSpeedPresets.cs",
+      "sha256": "fc43ecbc0ce9f64d6b1723f140f6783f26837d4dd6ccff253c7bfb74c5be355e"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Time/SolarUtcTime.cs",
+      "sha256": "22bdfa81d770fcabf964e1e474c4edec6bcac2549b3dce1720b0958273141197"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Timeline/PhysicalEventOrderKey.cs",
+      "sha256": "8767cdc15b7029b6e1a704b0fb55b013586db9c9c369a59798d9fe9fc8b99929"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Timeline/ScheduledSimulationEvent.cs",
+      "sha256": "2a0d32e24443ed4b4bc1dd59daeddce295b125889d489efb18a9833dfbbe1618"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Timeline/SimulationCancelResult.cs",
+      "sha256": "50803a7c45bfd38e050de0c44e9588a33a5c91877ff0f0d3925ec859acef557b"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Timeline/SimulationEventHeader.cs",
+      "sha256": "59f0b71930de8caccebd102bfa96758b905bcd801b5ee72e0d60fb5786564c91"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Timeline/SimulationEventHeaderComparer.cs",
+      "sha256": "689b6e36d9409ff6c8be66664f17a2587a6fdee502bedc2503d554fe3f486903"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Timeline/SimulationEventHeap.cs",
+      "sha256": "80813993155e42709215bed6e00e814a38ec7352c8a46fff71f43767f5092118"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Timeline/SimulationEventId.cs",
+      "sha256": "098b11606f9398b01bdaf17c1de081678613c47944182d3e32ce858cb78b9ac8"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Timeline/SimulationEventKind.cs",
+      "sha256": "b2e2137f45a55cd1e52df9ae154c7be79893b15b5e20f8124eb4d522b4b63ba4"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Timeline/SimulationEventPayload.cs",
+      "sha256": "8c3e1ed7cf753b1531b0f82e53ed6218cec62db995cfe46d8967ffbbe58309ba"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Timeline/SimulationEventRequest.cs",
+      "sha256": "3ff7c9e9e749350294f7f43227618be4eac28932a03d043d13720d80093d74f7"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Timeline/SimulationEventSequence.cs",
+      "sha256": "8d68f9248fdf0c8d892a3c428e9883f7b861a3b1186f0cec3a7de8531dd3036f"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Timeline/SimulationScheduleResult.cs",
+      "sha256": "3755d461d16e7ee565481cd32b7d3be4dae4732d1dce7a1c57d7cad3bdc3aee9"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Timeline/SimulationTimeline.ContactPayloads.cs",
+      "sha256": "119936350ba0f316447a88e7c017600209c25dff8cc83392b1656d9962d31b35"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Timeline/SimulationTimeline.cs",
+      "sha256": "45b8808cd63ce7d140edf90b7eaffe0bef8a7177ad3ca0f9185477708e0bd375"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Timeline/StateRevision.cs",
+      "sha256": "cbb5586a113065ca01f0d13af508837b2ae1f4a064cbc4a05b23b5c285ac2aff"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Timeline/TimelineRevision.cs",
+      "sha256": "60d7a89f3c313a0c0626a918ab6458c1447e955cb1c9c38417840fcbb66e1a52"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/ProcessedSimulationEvent.cs",
+      "sha256": "d7dc6599accdb5ebf37c1c989cd6935ff39404b7dec20e73285f37ecadb124bc"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationCanonicalGroupResult.cs",
+      "sha256": "bd53eb7bcbd0c2cd82447c18c56d317b0e0eed4d85a4c3edd262e23d4966f42e"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationDebtServiceResult.cs",
+      "sha256": "a5ce054f3c4165de19c37b7ce852fd0b7027e3a56c36c7562f316debc65253bb"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationEventEvaluator.cs",
+      "sha256": "cc9cadd16efb1f66da0856c81e292fdf782fdfba97be7fcc13999db4784b9b7a"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationExecutionOrchestrator.cs",
+      "sha256": "2d200f301fc02d1390d3c587ac1f8e7d929743dd64640a23f127f17712595b1c"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationExecutionResult.cs",
+      "sha256": "d2fa761439baa91c361cefcf1b96606641ca78e74bbf84b2d61b92094fc7371a"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationState.cs",
+      "sha256": "0c95ca25fcb8fec80cc2c084614fb809e4b54e00a07db552110d254ed4505137"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationStateView.cs",
+      "sha256": "68346f1b72089d5c1bf932d558484f15bd1b4b1955cda26a81cc22c20b1276ab"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransaction.cs",
+      "sha256": "5ed32d66547afa037f53cbc6abd548601f9171a263a0fb3ce1250e1f8d05f842"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.ContactImpulse.cs",
+      "sha256": "7b78e6045ca6d38fce8bb5931aad2bedca5a7a5b9d72913259a95980638dd061"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.ContactProof.cs",
+      "sha256": "fccb3da7d06e233f00f3f9c52a157c425204e8ee7d7117f0fa157eee8f6c4114"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.cs",
+      "sha256": "cc8f1bb7084c0da8e32a2ff408cf995311b0c62a83f3b2e5ab220ed7a160d4d7"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionResult.cs",
+      "sha256": "af2b0b6107067ebb91e94737852acf24624ab95ff8e9782f6806a00ec3e8da1f"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionValidationResult.cs",
+      "sha256": "56138e4d5ed9faaaecce02e53b7d5a06ca01560e754f5af635b7b841c24ddb1b"
+    },
+    {
+      "path": "tests/.gitkeep",
+      "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+    },
+    {
+      "path": "tests/NovaCore.Camera.Tests/NovaCore.Camera.Tests.csproj",
+      "sha256": "bc34398626133519c12de6b566f43c2647e0a01ab4d19f11793781964c6c2170"
+    },
+    {
+      "path": "tests/NovaCore.Camera.Tests/Program.cs",
+      "sha256": "d45264a903a526edae66da00c396601ebac8d389e494f831c2b303f66922395a"
+    },
+    {
+      "path": "tests/NovaCore.EphemerisBuilder.Tests/NovaCore.EphemerisBuilder.Tests.csproj",
+      "sha256": "4802e13b97bc714fe139d0287ce7ccf4f8cf39242760d1da567b6d2d9fb0f6bd"
+    },
+    {
+      "path": "tests/NovaCore.EphemerisBuilder.Tests/Program.cs",
+      "sha256": "f7ff540a65a52533bec60c355fde88a2c5d86010978000100d415d5af04b4303"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/CacheLifecycleTests.cs",
+      "sha256": "b0a71f656665174a8c3476cacbd2e1c033ef7cd139c2d6f35d8b38df7e32da22"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/CertifiedFloridaPostImpactVelocityTests.cs",
+      "sha256": "e2566b20b37efc4d7d7d00a859c3f38f0ab76d63f6175f15b58ac9cc07dcdf52"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/CertifiedFloridaPreImpactVelocityTests.cs",
+      "sha256": "2115d62c5143b8d25fb95c37a9dc8a97abcb2a3aea158ee48781fddf7362fafe"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/CertifiedFloridaResponseTests.cs",
+      "sha256": "76af650316470139077999140df4e147d2391c2313564dc8d2c5ee3b8d053e97"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/ContactGenerationProductionTests.cs",
+      "sha256": "3faa7704743b417da31fe19bb9413007e298c4f72c9224a1050da1d0c7ace4a9"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/EarthRelativeObservationProductionTests.cs",
+      "sha256": "a24b655be6722748126e3b2703875ff364526b22d6ac72272ce5772ed8846b63"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/EarthRouteConvergenceTests.cs",
+      "sha256": "ea6f0fe140728ddf1ba17aefcd242602705d0dd4586d73f3a2ff6f7b3c306fb4"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/FacilityLightingTests.cs",
+      "sha256": "0febb3cc11cfa4eb72af4d5db67747e690b8d50855c84676f14fc4d49e9f73c1"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/FacilitySupportTests.cs",
+      "sha256": "e84fd69dc1d81c2239e4c80773305cf69d4e6044e2a1a513874e4fc4f1138e73"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/FloridaContactProductionTests.cs",
+      "sha256": "eee32322c94422942769b27f4be9881b6943cd55dacf1350d713d4f391efd964"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/FloridaFoundationSeatingTests.cs",
+      "sha256": "efca8530d3e31f8d64cc2a4660019603c026f567b9c7bd04a76172a706041644"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/GpuDisplacedMeshPreparationTests.cs",
+      "sha256": "e01592658d60cb49667718505d5d83e556d33b6603ec212766a25879d1fe3c3b"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/GpuPhysicalHeightPreparationTests.cs",
+      "sha256": "950d5e1976f394bd0a8c1547b9cc35f14aa3282abe3b1d1fd2241a156a91696c"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/GraphicsTestHarness.cs",
+      "sha256": "93f3e07e99dcd078265fb541db6d311dfc519a2b6e685d4aeeb91beac0a5933a"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/LocalTerrainPayload2Tests.cs",
+      "sha256": "965175c5ef91ef5a6eb1b55555713303cda06b0088233ce97edfabbfb9a762e5"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/NovaCore.Graphics.Tests.csproj",
+      "sha256": "3334221b1349574175f1d3894f6c1dafa8870c570ffd5718992c03e0d29932c9"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PhysicalSurfacePointQueryTests.cs",
+      "sha256": "c09116ad07ba7c5a521ef58e414268db3596d07b8af286c0c91a3ba2457cb96e"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryBillboardSurfaceWorkloadTests.cs",
+      "sha256": "6c424e6406f4be689c5219787695a7471da8856768fa85786beea5536ec96ab7"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryCanonicalPhysicalSurfaceAuthorityTests.cs",
+      "sha256": "2a76647dee8f61ca7e2280e74d1b7d4b2c32f30e99d5c99622930d1198486b27"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryNaturalTerrainFamiliesTests.cs",
+      "sha256": "9e028a69e2c092911bc3a5731073ea5fe5fb19f612ed3df1c76bd42b2cdebc65"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryNaturalTerrainFieldTests.cs",
+      "sha256": "1845580e95a8f8ff752c82d84467dc23244a2617dc5678564beb92d50e40bccd"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryNaturalTerrainPreparationTests.cs",
+      "sha256": "49c9c46235fb163e0228907b51cb63ff53ef3a91ddc340d5d5eec7d663441d52"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryNaturalTerrainRendererIntegrationTests.cs",
+      "sha256": "d4fa4ddd91d71196641652f5c5acfbdb05a5f93ad08b64fa8e901f4c7b1cd3de"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryNestedScaleMeshTopologyTests.cs",
+      "sha256": "a03073766021b46e24239c4bcd92503835a557ac9de827a10346285d65cad112"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryPhysicalFrequencyContinuityTests.cs",
+      "sha256": "355f08f8410b2e3d7986e061bcad99b2f335b61fefe8699b56b5f42720d2d15a"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryPhysicalSurfaceModifierTests.cs",
+      "sha256": "f49839c22c07f1282921074045bc3a5098fd5386b3e9d3068b9783419e1c2f87"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryProductionMaterialNoiseTests.cs",
+      "sha256": "5a51b9c3a7cef181df699d98be26b2dccd55d7644a473c2d94ab3dc9f210db6f"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryProductionSphericalBillboardRuntimeTests.cs",
+      "sha256": "2b12fdb84ea2d88fc61dfff00855d6c77d89cee94021849f3039dd5d21f67ed5"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryProductionSphericalBillboardTopologyTests.cs",
+      "sha256": "3c0ba0cefc8e25ac0dee8248d5c5b688f11871b2c3edc5d6743039ec5c3bcba1"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryScreenSpaceSubdivisionTests.cs",
+      "sha256": "c165c7dabd1d79e648884215c90bfb87b454e51100cf835fe3c34002c6429f52"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetarySphericalBillboardGpuRuntimeTests.cs",
+      "sha256": "cb18144d4e3e8d3d3715f247f700a1192c3c87dee9688ec5bcde105312375184"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetarySphericalBillboardNaturalTerrainTests.cs",
+      "sha256": "5d242bca10532c1a53ff3e72dabd6dfe04ed4b2a8fa1b95a1513df29f84d361c"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetarySphericalBillboardTopologyTests.cs",
+      "sha256": "a51d567bc7dbfa1a10b60d9fea78c466077d4b42014b7f99c2aa6b2d5113c4ba"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PostImpactCoverageProductionTests.cs",
+      "sha256": "b2ca9b680ec47240db612ee0b8fc9565bffd39f155f4e89f318560312a0548bb"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PrivateFloridaPostImpactStateTests.cs",
+      "sha256": "99e987ef18a42f9bb6c210aad5fb48ab3c3919319e30762350bdbf6f388f7467"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PrivateFloridaPropagationTests.cs",
+      "sha256": "d51478bbaf85473e5fd9a3282fc647bc2590bbd612a52159ce4f28c4f7e9727c"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/Program.cs",
+      "sha256": "33728505173d436c7c6d4e873285ff537b3e064c8c25956da6ddbb4306fab0c2"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/QualifiedFloridaKinematicsTests.cs",
+      "sha256": "7127662d8ec108f8e9823ae5e77b84b645e224de1d87dd5f29672127291ccf74"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/RegionalPhysicalResidencyTests.cs",
+      "sha256": "02d0e3d046b4c030ccf9e88cb1c487b5ff922ba368c2fddd4763ec82b5f30daa"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/TerrainRenderAuthorityTests.cs",
+      "sha256": "0fbb1ccefda721b933188cdf11edd617c20746ef8cb2b9231ecbb40839b8c44c"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/VulkanValidationEnvironment.cs",
+      "sha256": "9969db56dd22394190ffc61240d5c9f8a7510f7589df793a1773d6f18d1c61c5"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/WindowLifecycleTests.cs",
+      "sha256": "750813aa4f21a0df63df2ca23aedf97826753f8993dd87a6f89c7a3dcd39e8f4"
+    },
+    {
+      "path": "tests/NovaCore.Launcher.Tests/GlobalUsings.cs",
+      "sha256": "02d5024a826d5522aee635db399ddf6723a935add057eaf5f1909181cfb577db"
+    },
+    {
+      "path": "tests/NovaCore.Launcher.Tests/NovaCore.Launcher.Tests.csproj",
+      "sha256": "98598aaaeb5ab2d169867d384cce038db7b550726f2d23e8f17e793da0df9791"
+    },
+    {
+      "path": "tests/NovaCore.Launcher.Tests/Program.cs",
+      "sha256": "4ff9006c7b5debe21646a3c1a6dde9a2006868cc29d2d9db82305e0f83368264"
+    },
+    {
+      "path": "tests/NovaCore.NaifEphemerisAdapter.Tests/CompactSolarOracleValidation.cs",
+      "sha256": "508383b3e082a568e39dac956862cf7e8e6efb5376cf4c559dc5f033b0ddb2ce"
+    },
+    {
+      "path": "tests/NovaCore.NaifEphemerisAdapter.Tests/NovaCore.NaifEphemerisAdapter.Tests.csproj",
+      "sha256": "f1090a1f89d45890c415e45ef06b91cd4f3a5d97dfa526f7b3429dc815e97d8f"
+    },
+    {
+      "path": "tests/NovaCore.NaifEphemerisAdapter.Tests/Program.cs",
+      "sha256": "aa3ed7147a130e1a46cc6fa58dbfe4d8fb8798bd35d0a5d5cfdc47b248fd85cc"
+    },
+    {
+      "path": "tests/NovaCore.Precision.Tests/NovaCore.Precision.Tests.csproj",
+      "sha256": "d93ffd6d26b0626ad4a83afaf2f18a0e3252f338f24bec1edfdb51ceaf4f5001"
+    },
+    {
+      "path": "tests/NovaCore.Precision.Tests/Program.cs",
+      "sha256": "d84b7c6fa51259892170ddd6b082aa4f152f29c2359da24a2ee2da2af3bd6c40"
+    },
+    {
+      "path": "tests/NovaCore.ReferenceFrames.Tests/NovaCore.ReferenceFrames.Tests.csproj",
+      "sha256": "fa82a9b52c336846a1040232b5efc22ab986f53a941b1bf0060afeefa0efed27"
+    },
+    {
+      "path": "tests/NovaCore.ReferenceFrames.Tests/Program.cs",
+      "sha256": "aee9d29ce623b7ab43946c2e1724d9d86336a0c596dbe70eec685d52232798b2"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/CertifiedContactResponseTests.cs",
+      "sha256": "e4ac5fbe77994c2f5556340dee30b959c400ab9f2f988294db25a42b47b0fc86"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/CertifiedPostImpactVelocityTests.cs",
+      "sha256": "ab19c97b4ec87ff802c02d8b7c6bdfdc62ba10619988b26f8ca572956f31df95"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/CertifiedPreImpactVelocityTests.cs",
+      "sha256": "90a9cb82ebea4bebc092da09744de06071468fe676ae0c43afe4d5afa8ec6e98"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/CertifiedResponseOracle.cs",
+      "sha256": "75bf666697a6f1043643af63bb49a3ded05385cde49772a6d7d11fc8399b1f7e"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/ContactGenerationFixture.cs",
+      "sha256": "19e0696f8c25425ceb03388df0cff5da1f9fa74a0fa0e90cf023d51be5daa9f9"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/ContactGenerationTests.cs",
+      "sha256": "1361289f656a2d20a388a802aa9419d9497583b6dc16b8d86711da8354934697"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/ContactKinematicsOracle.cs",
+      "sha256": "eed735f15476ace53e7f27de6ac5a25588c8104a644c6fc887bb50b726a25e05"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/ContactResponseTests.cs",
+      "sha256": "59604fdfe84563bccc45f87887d7c3800b0f5535c1f005e660676a1a17b3d4a0"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/EarthRelativeObservationTests.cs",
+      "sha256": "85c7ff9afcc7e381e31670b7f426848acb225c44c5feb9d9f3e69b7344e48ac1"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/FloridaContactProofTests.cs",
+      "sha256": "fede94e5d95be1cba101825514e3caec6ef7c5d086795f7d30897758c027d7f5"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/IsolatedContactResponseTests.cs",
+      "sha256": "85526a9618bef6a72d51342c38df9dec2507520620c04ba4a49c15eca2046947"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/NovaCore.Simulation.Tests.csproj",
+      "sha256": "7eb998a1e382762d7e515693106c72461dca058fd21e3b58ba4ed7c4949ad616"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/OrdinaryAllocationMeasurement.cs",
+      "sha256": "3b6f2d9905ea52bfb131df670f1e6a2116ba340c9ef7767de1020197d473cfb7"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/PhysicalEventEpochTests.cs",
+      "sha256": "89ddb14301915314660dbc151da4808adb0d17dae1a46cd78ab856f05eb04540"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/PostImpactCoverageCost.cs",
+      "sha256": "380b2c1c78785f852f6af9bcc065cd5a575cfe2acbcadf6dcd800c8738354c02"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/PostImpactCoverageTests.cs",
+      "sha256": "a3b507339fac03e85e148a8e935107879e77817b9d0a99570b4fa2ed022e0864"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/PrivateCanonicalPropagationTests.cs",
+      "sha256": "97d279bdda4354661c6006f16f1e19184a69d1881d90efcf0a29b7ade4cbdc51"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/PrivatePostImpactStateTests.cs",
+      "sha256": "2514ffb830275a3743bd0a8934a9c3a51a6ac73f2fa5cc37e8686d02d0a74c90"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "sha256": "14034d04b2853ef6bfaa703466162a9408ddb82df05854522ccea739083a67d1"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/QualifiedContactKinematicsTests.cs",
+      "sha256": "2fbd64b0040d339425defc142f367bd89faba9c683dc6b5278880bb9a0ac8c67"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/SpacecraftPhysicalEventMotionTests.cs",
+      "sha256": "a86970d126d29ba2e55a4d778d6d6d27517334afcb3308005d6485aa7c03aba9"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/SpacecraftTranslationTests.cs",
+      "sha256": "959335531a58ce90cadce9b58d132356c06d238959d99b4ddcb13b9ffebcc924"
+    },
+    {
+      "path": "tests/fixtures/terrain/README.md",
+      "sha256": "6928be06be4b75292bb7ddaceb2413db80910d41164fc0e2128efa9bb48f9924"
+    },
+    {
+      "path": "tests/fixtures/terrain/local-payload2.nccube",
+      "sha256": "19366ff801f81204ca1be18efa466785126a5bd1601fb2b28cc89be1fe749524"
+    },
+    {
+      "path": "tests/fixtures/terrain/tiny-global.content.json",
+      "sha256": "d6cf113d73a9493bde2d163b4e0b7a378f3baa65a8bc4fabc5936a15a4abfedf"
+    },
+    {
+      "path": "tests/fixtures/terrain/tiny-global.json",
+      "sha256": "80646fe55d3af7c18c5933aef5743c55b8fa39c1be67bf6b6b61d214dfc23963"
+    },
+    {
+      "path": "tests/fixtures/terrain/tiny-global.nccube",
+      "sha256": "78fdca1b5378fa2a13c35d283a9c2198a0c4b3a872e5870108700404534bbbda"
+    },
+    {
+      "path": "tests/fixtures/terrain/tiny-local.content.json",
+      "sha256": "587dabc63be50dfe87babbda85822e639f3cfe7772957639335ac4d60a1d5674"
+    },
+    {
+      "path": "tests/fixtures/terrain/tiny-local.json",
+      "sha256": "42f0278e2cc03fa149d7eb14e8ce51598331d8146e22f5ead8a84a8cce1b986a"
+    },
+    {
+      "path": "tests/fixtures/terrain/tiny-local.nccube",
+      "sha256": "f91d5922c8cd22d1aa200b3800a7bf87aa4fa8ae9f9b18e04008e735289a6f3d"
+    }
+  ]
+}

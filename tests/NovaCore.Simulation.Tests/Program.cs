@@ -15,6 +15,7 @@ using NovaCore.Core;
 using NovaCore.Core.ReferenceFrames;
 using System.Diagnostics;
 
+if (args.Contains("--continuation-ownership-only", StringComparer.Ordinal)) { ContinuationOwnershipTests.Run(); return; }
 if (args.Contains("--postimpact-coverage-only", StringComparer.Ordinal)) { PostImpactCoverageTests.Run(); return; }
 if (args.Contains("--postimpact-coverage-cost", StringComparer.Ordinal)) { PostImpactCoverageTests.Cost(); return; }
 if (args.Contains("--private-propagation-only", StringComparer.Ordinal)) { PrivateCanonicalPropagationTests.Run(); return; }
@@ -103,6 +104,7 @@ var tests = new (string Name, Action Test)[]
     ("Private root-time post-impact state", PrivatePostImpactStateTests.Run),
     ("Paired private canonical propagation", PrivateCanonicalPropagationTests.Run),
     ("Post-impact singleton terrain coverage", PostImpactCoverageTests.Run),
+    ("Certified continuation ownership", ContinuationOwnershipTests.Run),
 };
 foreach (var (name, test) in tests) { test(); Console.WriteLine($"PASS {name}"); }
 
@@ -298,6 +300,8 @@ static void SpacecraftAttitudeIntegrationTests()
     Check(engine.ValidateAndCommit(transaction).Status == SpacecraftAttitudeTransactionStatus.StateRevisionMismatch, "stale attitude candidate rejection");
     var noOp = SpacecraftAttitudeTransactionEvaluator.TryCreateReplacement(engine.State, clock.CurrentTime, id, replacement); Check(noOp.Status == SpacecraftAttitudeTransactionStatus.ReplacementNoOp, "attitude no-op rejection");
     var mismatch = new SpacecraftAttitudeReplacementTransaction(SimulationInstant.FromWholeSeconds(1), engine.State.Revision, id, replacement, initial); Check(engine.ValidateAndCommit(mismatch).Status == SpacecraftAttitudeTransactionStatus.TimeMismatch, "attitude time mismatch rejection");
+    Check(!view.TryGetAttitude(id, out _), "standalone spacecraft borrow expires after ownership binding");
+    view = engine.State.Spacecraft;
     _ = view.TryGetAttitude(id, out _); using var ordinary29 = new OrdinaryAllocationMeasurement("attitude-integration"); ulong hash = 14695981039346656037UL;
     for (var index = 0; index < 100_000; index++) { Check(view.TryGetAttitude(id, out var warm), "warm spacecraft lookup"); var evaluated = SpacecraftAttitudeEvaluator.TryEvaluate(warm, new SimulationInstant(index)); Check(evaluated.Succeeded && SpacecraftReferenceFrameEvaluator.TryEvaluate(view, graph, new SimulationInstant(index), evaluations) == SpacecraftReferenceFrameEvaluationStatus.Success, "warm spacecraft evaluation/extraction"); hash = Mix(hash, (ulong)BitConverter.DoubleToInt64Bits(evaluated.OrientationLocalToParent.W)); }
     OrdinaryAllocationMeasurement.RequireZero(ordinary29.Complete(), "attitude-integration"); Console.WriteLine($"Deterministic spacecraft-attitude integration hash: 0x{hash:X16}; allocation=0 bytes");
@@ -547,6 +551,8 @@ static void CelestialContractTests()
     Check(view.Count == 3 && view.GetDefinition(0).Id.Value == 10 && view.GetDefinition(1).Id.Value == 20 && view.GetState(0).Trajectory is null, "root representation and caller declaration order");
     Check(view.TryGetIndex(new CelestialBodyId(30), out var moonIndex) && moonIndex == 2 && view.TryGetDefinition(new CelestialBodyId(10), out var star) && star.GravitationalParameter == 1000d && view.TryGetState(new CelestialBodyId(20), out var planet) && planet.Trajectory!.Value.CentralBody == new CelestialBodyId(10), "allocation-free ID lookup and immutable records");
     var state = new SimulationState(store); var stateView = state.CreateView(); Check(stateView.Revision == StateRevision.Zero && stateView.Celestial.Count == 3, "SimulationState owns celestial store without revision mutation");
+    Throws<InvalidOperationException>(() => _ = view.Count);
+    view = stateView.Celestial; // Ownership binding expires the standalone borrow; preserve all data/hash/allocation checks through the current owner.
     var hash = CelestialContractHash.Compute(view); Check(hash == CelestialContractHash.Compute(view), "celestial raw-value hash repeatability"); Console.WriteLine($"Deterministic celestial-contract hash: 0x{hash:X16}");
     Check(CelestialStateStore.TryCreate(definitions, states, out var repeatedStore, out var repeatedStatus) && repeatedStore is not null && repeatedStatus == CelestialStateStoreStatus.Success && CelestialContractHash.Compute(repeatedStore.CreateView()) == hash, "repeated construction produces identical celestial hash");
     definitions[1] = definitions[1] with { GravitationalParameter = 999d }; states[1] = CelestialBodyState.Root(new CelestialBodyId(20));

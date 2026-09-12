@@ -27,6 +27,8 @@ internal sealed partial class FloridaContactProvider
             private readonly PreImpactVelocity preimpact;
             private readonly CertifiedPreImpactVelocityRequest preimpactRequest;
             private readonly CertifiedPostImpactVelocityValues values;
+            // Value provenance only. This property never grants applicability or publication authority.
+            internal int RecordedCandidateIndex => values.CandidateIndex;
 
             private PostImpactVelocity(in Proof root, in Kinematics witness, in ResponseProposal response,
                 in CertifiedResponseRequest responseRequest, in PreImpactVelocity preimpact,

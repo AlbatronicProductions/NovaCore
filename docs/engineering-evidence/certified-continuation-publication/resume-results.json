@@ -1,0 +1,481 @@
+{
+  "status": "CERTIFIED CONTINUATION PUBLICATION CANDIDATE — READY FOR PROJECT CONTROL ACCEPTANCE",
+  "date": "2026-09-12",
+  "production": "Frozen; 248 production fingerprints matched, including 244 pre-existing and four candidate-added files.",
+  "baseline": "a4211617eef1e1d23bf8a4f8495388a35f9ed1dd",
+  "builds": [
+    {
+      "configuration": "Debug",
+      "exit": 0,
+      "warnings": 0,
+      "errors": 0
+    },
+    {
+      "configuration": "Release",
+      "exit": 0,
+      "warnings": 0,
+      "errors": 0
+    }
+  ],
+  "fullSimulation": [
+    {
+      "configuration": "Debug",
+      "groups": 48,
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "groups": 48,
+      "exit": 0
+    }
+  ],
+  "referenceFrames": [
+    {
+      "configuration": "Debug",
+      "groups": 11,
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "groups": 11,
+      "exit": 0
+    }
+  ],
+  "precision": [
+    {
+      "configuration": "Debug",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "exit": 0
+    }
+  ],
+  "graphics": [
+    {
+      "configuration": "Debug",
+      "name": "Certified Florida continuation publication",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "name": "Certified continuation acceptance gaps",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "name": "Certified continuation allocation matrix",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "name": "Physical surface-point query",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "name": "Physical surface-point stale snapshot",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "name": "Contact generation production terrain",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "name": "Exact-event Earth-relative production terrain",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "name": "Florida monotone contact certification",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "name": "Qualified Florida root contact kinematics",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "name": "Certified Florida isolated response proposal",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "name": "Certified Florida pre-impact velocity tuple",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "name": "Certified Florida post-impact velocity realization",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "name": "Private Florida post-impact initial state",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "name": "Private Florida paired canonical propagation",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "name": "Post-impact Florida terrain-contact coverage",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "name": "Certified Florida continuation publication",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "name": "Certified continuation acceptance gaps",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "name": "Certified continuation allocation matrix",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "name": "Physical surface-point query",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "name": "Physical surface-point stale snapshot",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "name": "Contact generation production terrain",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "name": "Exact-event Earth-relative production terrain",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "name": "Florida monotone contact certification",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "name": "Qualified Florida root contact kinematics",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "name": "Certified Florida isolated response proposal",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "name": "Certified Florida pre-impact velocity tuple",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "name": "Certified Florida post-impact velocity realization",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "name": "Private Florida post-impact initial state",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "name": "Private Florida paired canonical propagation",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "name": "Post-impact Florida terrain-contact coverage",
+      "exit": 0
+    }
+  ],
+  "focusedSimulation": [
+    {
+      "configuration": "Debug",
+      "selector": "--continuation-ownership-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "selector": "--translation-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "selector": "--contact-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "selector": "--contact-response-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "selector": "--isolated-contact-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "selector": "--physical-event-epoch-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "selector": "--exact-event-motion-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "selector": "--earth-event-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "selector": "--florida-proof-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "selector": "--root-kinematics-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "selector": "--certified-response-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "selector": "--certified-preimpact-velocity-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "selector": "--certified-postimpact-velocity-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "selector": "--private-postimpact-state-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "selector": "--private-propagation-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "selector": "--postimpact-coverage-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "selector": "--continuation-ownership-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "selector": "--translation-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "selector": "--contact-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "selector": "--contact-response-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "selector": "--isolated-contact-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "selector": "--physical-event-epoch-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "selector": "--exact-event-motion-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "selector": "--earth-event-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "selector": "--florida-proof-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "selector": "--root-kinematics-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "selector": "--certified-response-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "selector": "--certified-preimpact-velocity-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "selector": "--certified-postimpact-velocity-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "selector": "--private-postimpact-state-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "selector": "--private-propagation-only",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "selector": "--postimpact-coverage-only",
+      "exit": 0
+    }
+  ],
+  "allocation": [
+    {
+      "configuration": "Debug",
+      "lines": [
+        "PUBLICATION_ALLOCATION path=prepare-history calls=8 bytes=0",
+        "PUBLICATION_ALLOCATION path=final-recheck calls=8 bytes=0",
+        "PUBLICATION_ALLOCATION path=write-only-commit calls=8 bytes=0",
+        "ORDINARY_ALLOCATION gate=full-success bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=copied-observation bytes=0 entry=PASS exit=PASS",
+        "PUBLICATION_ALLOCATION path=stale-endpoint calls=32 bytes=0",
+        "PUBLICATION_ALLOCATION path=stale-clearance calls=32 bytes=0",
+        "PUBLICATION_ALLOCATION path=timeline-conflict calls=32 bytes=0",
+        "PUBLICATION_ALLOCATION path=insufficient-debt calls=32 bytes=0",
+        "PUBLICATION_ALLOCATION path=history-capacity calls=32 bytes=0",
+        "PUBLICATION_ALLOCATION path=reentrant calls=32 bytes=0",
+        "PUBLICATION_ALLOCATION path=wrong-thread calls=32 bytes=0",
+        "ORDINARY_ALLOCATION gate=engine-history-setup bytes=11512 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-source-proof-reconstruction bytes=65248 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-record-comparison bytes=45688 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-publication-installation bytes=0 entry=PASS exit=PASS",
+        "PUBLICATION_SETUP_ALLOCATION calls=8 engineHistoryBytes=92096 replaySourceProofBytes=521984 replayComparisonBytes=365504 installationBytes=0",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+      ]
+    },
+    {
+      "configuration": "Release",
+      "lines": [
+        "PUBLICATION_ALLOCATION path=prepare-history calls=8 bytes=0",
+        "PUBLICATION_ALLOCATION path=final-recheck calls=8 bytes=0",
+        "PUBLICATION_ALLOCATION path=write-only-commit calls=8 bytes=0",
+        "ORDINARY_ALLOCATION gate=full-success bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=copied-observation bytes=0 entry=PASS exit=PASS",
+        "PUBLICATION_ALLOCATION path=stale-endpoint calls=32 bytes=0",
+        "PUBLICATION_ALLOCATION path=stale-clearance calls=32 bytes=0",
+        "PUBLICATION_ALLOCATION path=timeline-conflict calls=32 bytes=0",
+        "PUBLICATION_ALLOCATION path=insufficient-debt calls=32 bytes=0",
+        "PUBLICATION_ALLOCATION path=history-capacity calls=32 bytes=0",
+        "PUBLICATION_ALLOCATION path=reentrant calls=32 bytes=0",
+        "PUBLICATION_ALLOCATION path=wrong-thread calls=32 bytes=0",
+        "ORDINARY_ALLOCATION gate=engine-history-setup bytes=11512 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-source-proof-reconstruction bytes=65176 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-record-comparison bytes=45688 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-publication-installation bytes=0 entry=PASS exit=PASS",
+        "PUBLICATION_SETUP_ALLOCATION calls=8 engineHistoryBytes=92096 replaySourceProofBytes=521408 replayComparisonBytes=365504 installationBytes=0",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+      ]
+    }
+  ],
+  "replay": {
+    "perConfiguration": {
+      "debtCadenceVariants": 9,
+      "incompatibleRecords": 7
+    },
+    "recordComparison": "Complete raw-bit record compared before publication; same publisher used; complete final record and copied observation compared."
+  },
+  "eventMatrix": {
+    "kinds": 7,
+    "epochs": [
+      "N",
+      "midpoint",
+      "inclusive T"
+    ],
+    "casesPerConfiguration": 21,
+    "refusal": "PendingEvent",
+    "completeTimelineUnchanged": true
+  },
+  "resolvedValidationStops": [
+    {
+      "configuration": "Debug",
+      "passed": 13,
+      "failed": "Celestial contracts",
+      "cause": "pre-binding standalone borrow reused after state ownership binding",
+      "correction": "assert old borrow expires; reacquire current owner view; original workload and thresholds preserved"
+    },
+    {
+      "configuration": "Debug",
+      "passed": 27,
+      "failed": "Spacecraft attitude integration",
+      "cause": "pre-binding standalone borrow reused after binding and attitude transaction",
+      "correction": "assert old lookup refuses; reacquire current owner view; original warmup and 100000 iterations preserved"
+    }
+  ],
+  "performance": {
+    "source": "results.json; unchanged executable publication source; no publication remeasurement",
+    "totalUs": {
+      "median": 18.7,
+      "p95": 254.3,
+      "p99": 273.4,
+      "max": 296.3
+    },
+    "commitUs": {
+      "median": 0.5,
+      "p95": 1,
+      "p99": 1.6,
+      "max": 3.8
+    },
+    "isolatedImpact": "LOW",
+    "commitImpact": "NEGLIGIBLE",
+    "aggregateWarp": "UNMEASURED",
+    "ksaEquivalentCost": "UNMEASURED"
+  },
+  "review": {
+    "independentCommit": "PASS",
+    "borrowTestCorrections": "PASS",
+    "scope": "Single owner thread and current production entry points; not a general concurrent container."
+  },
+  "disposal": {
+    "remainingFiles": 1,
+    "remainingBytes": 7357,
+    "path": "E:\\NovaCore\\.codex\\prepare_publication_guards.py",
+    "automaticDeletion": "previously blocked by policy; not retried"
+  },
+  "noBanking": true
+}

@@ -1,0 +1,158 @@
+{
+  "configuration": "Release",
+  "sdk": "10.0.303",
+  "runtime": "10.0.12",
+  "os": "Windows 10.0.26200 win-x64",
+  "predeclared": "8 fresh warmup fixtures; 128 fresh direct total publications and 128 separate phase fixtures; 2 warmups and 16 fresh reconstruction fixtures; no retries/outlier removal/GC isolation in timing",
+  "costs": [
+    {
+      "name": "preflight-including-record",
+      "count": 128,
+      "unit": "us",
+      "median": 12.7,
+      "p95": 160.1,
+      "p99": 168.2,
+      "max": 260.1
+    },
+    {
+      "name": "final-applicability-recheck",
+      "count": 128,
+      "unit": "us",
+      "median": 6.1,
+      "p95": 98.5,
+      "p99": 107.6,
+      "max": 117.8
+    },
+    {
+      "name": "history-record-preparation-subset",
+      "count": 128,
+      "unit": "us",
+      "median": 0.5,
+      "p95": 1.3,
+      "p99": 2,
+      "max": 2.3
+    },
+    {
+      "name": "write-only-commit",
+      "count": 128,
+      "unit": "us",
+      "median": 0.5,
+      "p95": 1,
+      "p99": 1.6,
+      "max": 3.8
+    },
+    {
+      "name": "copied-observation",
+      "count": 128,
+      "unit": "us",
+      "median": 0.3,
+      "p95": 0.6,
+      "p99": 0.8,
+      "max": 1
+    },
+    {
+      "name": "total-success",
+      "count": 128,
+      "unit": "us",
+      "median": 18.7,
+      "p95": 254.3,
+      "p99": 273.4,
+      "max": 296.3
+    },
+    {
+      "name": "empty-timestamp-pair",
+      "count": 128,
+      "unit": "us",
+      "median": 0,
+      "p95": 0.1,
+      "p99": 0.1,
+      "max": 0.1
+    },
+    {
+      "name": "history-capacity-refusal",
+      "count": 128,
+      "unit": "us",
+      "median": 5.2,
+      "p95": 7.3,
+      "p99": 8.2,
+      "max": 8.5
+    },
+    {
+      "name": "insufficient-debt-refusal",
+      "count": 128,
+      "unit": "us",
+      "median": 5.1,
+      "p95": 7.5,
+      "p99": 7.7,
+      "max": 7.8
+    },
+    {
+      "name": "clock-conflict-refusal",
+      "count": 128,
+      "unit": "us",
+      "median": 0.3,
+      "p95": 0.4,
+      "p99": 0.4,
+      "max": 0.4
+    },
+    {
+      "name": "Force-clearance-refusal",
+      "count": 128,
+      "unit": "us",
+      "median": 1.9,
+      "p95": 2,
+      "p99": 2,
+      "max": 2
+    },
+    {
+      "name": "source-proof-replay-reconstruction-and-publication",
+      "count": 16,
+      "unit": "us",
+      "median": 1751.5,
+      "p95": 1988.4,
+      "p99": 1988.4,
+      "max": 1988.4
+    }
+  ],
+  "allocation": {
+    "Debug": {
+      "successFresh8": 0,
+      "observationAndConsumedRefusal32": 0,
+      "positiveByteArray128": 152
+    },
+    "Release": {
+      "privatePrepareRecheckHistoryCommitFresh8": 0
+    },
+    "unmeasured": [
+      "source/proof construction",
+      "setup/history array reservation",
+      "separate stale/conflict/capacity/debt refusals",
+      "separate checked observation",
+      "replay reconstruction",
+      "separate replay publication"
+    ]
+  },
+  "storage": {
+    "historyRecordValueBytes": 1216,
+    "observationValueBytes": 312,
+    "preparedValueBytes": 1536,
+    "publicationArrayGrowthPerSuccessBytes": 0,
+    "recordsPerSuccess": 1,
+    "notes": "Fixed-capacity setup array; actual retained history increases by one 1216-byte value per success. Values retain immutable strings but no provider, proof or capability. Setup allocation and transitive retained bytes not measured."
+  },
+  "validation": {
+    "debugGraphicsProjectBuild": "PASS 0 warnings 0 errors (before cost test added)",
+    "releaseGraphicsProjectBuild": "PASS 0 warnings 0 errors (all current Graphics candidate files)",
+    "debugFloridaFocused": "PASS one fresh process",
+    "releaseCost": "PASS measurement assertions; headroom acceptance deferred",
+    "fullSolution": "NOT RUN - performance stop",
+    "fullSimulation": "NOT RUN - performance stop",
+    "referenceFrames": "NOT RUN",
+    "precision": "NOT RUN",
+    "predecessorRegressionMatrix": "NOT RUN",
+    "ownershipUnitTests": "IMPLEMENTED NOT BUILT OR RUN"
+  },
+  "judgment": "ESCALATE TO PROJECT CONTROL",
+  "classification": "CERTIFIED CONTINUATION PUBLICATION CANDIDATE — FOLLOW-UP REQUIRED",
+  "headroom": "MATERIAL potential aggregate impact, no measured display-frame regression or known invocation multiplicity; optimization and further validation stopped under user stop bar"
+}

@@ -1,0 +1,46 @@
+{
+  "head": "a4211617eef1e1d23bf8a4f8495388a35f9ed1dd",
+  "branch": "codex/certified-continuation-publication",
+  "productionChecked": 248,
+  "productionMismatches": 0,
+  "frozenProductionIdentity": "identity.json plus baseline.json",
+  "testFiles": [
+    {
+      "path": "tests/NovaCore.Graphics.Tests/CertifiedContinuationCost.cs",
+      "sha256": "008792ee1d966bcbee47b912bc09cc539f4e504301ba52dfbecc2afc89b80347"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/CertifiedContinuationFixture.cs",
+      "sha256": "623ff1b17e4bb35e193bc36d1f6d17888cdc551f2b3232e564e75a1f3dbf4a94"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/CertifiedContinuationPublicationTests.cs",
+      "sha256": "3f05966095a6b53f420d029f997832921ade4717b8513cd5d23ef9ace335a191"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/ContinuationAcceptanceTests.cs",
+      "sha256": "88d7cbf20b0a34c3c5f8567c21c645618341a5fdf5ee6670af18a375710d9aa5"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/ContinuationAllocationTests.cs",
+      "sha256": "7b6abbceea769e6ca6ea8d23635c103c597bd1d636429dedcb8677759a51ab93"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/FloridaContactProductionTests.cs",
+      "sha256": "b8471c60545511ee40d59189603bb61da3579bfecc53c7e251074c80d24a217d"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/Program.cs",
+      "sha256": "9c019f6dc52362071c16af40b4d0914931c3f47e0b58a6eb1fb6441dccef7a58"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/ContinuationOwnershipTests.cs",
+      "sha256": "8a9cd6b75d2c3e942bfbb1e4f7c8400bb8d4d34d137dbac6bed51c305a90e070"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "sha256": "07a3f4f115ec8c2c370a17f0bbf00cf529192695107d081fa21525a57b53a0a3"
+    }
+  ],
+  "stagedCount": 0
+}

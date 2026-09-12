@@ -16,6 +16,10 @@ using NovaCore.Simulation.Time;
 
 var tests = new (string, Action)[]
 {
+    ("Certified Florida continuation publication", CertifiedContinuationPublicationTests.Run),
+    ("Certified continuation acceptance gaps", ContinuationAcceptanceTests.Run),
+    ("Certified continuation allocation matrix", ContinuationAllocationTests.Run),
+    ("Certified Florida publication costs", CertifiedContinuationCost.Run),
     ("Post-impact Florida terrain-contact coverage", PostImpactCoverageProductionTests.Run),
     ("Post-impact Florida coverage costs", PostImpactCoverageProductionTests.Cost),
     ("Florida monotone contact certification", FloridaContactProductionTests.Run),

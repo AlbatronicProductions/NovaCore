@@ -48,8 +48,9 @@ internal sealed partial class FloridaContactProvider
         {
             private readonly Proof original;
             private readonly FloridaContactKinematics values;
-            private Kinematics(in Proof original,in FloridaContactKinematics values)
-            {this.original=original;this.values=values;}
+            internal readonly FloridaKinematicsRequest CapturedRequest;
+            private Kinematics(in Proof original,in FloridaContactKinematics values,in FloridaKinematicsRequest request)
+            {this.original=original;this.values=values;CapturedRequest=request;}
 
             private static bool Applicable(FloridaContactProvider owner,in FloridaContactUse current)=>
                 current.Engine is not null&&current.Geometry is not null&&current.System is not null&&current.Graph is not null&&
@@ -86,7 +87,7 @@ internal sealed partial class FloridaContactProvider
                         var data=new FloridaContactKinematics(root,bracket,normal,speed,owner.geometry.GetFeature(0).OffsetFromComMetres,
                             lever,owner.angular.OrientationLocalToParent,owner.properties.MassKilograms,owner.angular.PrincipalInertia,
                             owner.authority,count);
-                        return new(FloridaKinematicsStatus.Qualified,FloridaKinematicsFailure.None,new(root,data));
+                        return new(FloridaKinematicsStatus.Qualified,FloridaKinematicsFailure.None,new(root,data,request));
                     }
                     if(count==request.RefinementBudget)return new(FloridaKinematicsStatus.Unresolved,FloridaKinematicsFailure.RefinementBudget);
                     if(!TryNarrow(owner,bracket,out bracket))return new(FloridaKinematicsStatus.Unresolved,FloridaKinematicsFailure.NumericalResolution);

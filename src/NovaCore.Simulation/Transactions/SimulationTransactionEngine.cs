@@ -23,7 +23,7 @@ internal sealed partial class SimulationTransactionEngine
     private bool _isExecutingGroup;
     private readonly SimulationExecutionOrchestrator _orchestrator;
 
-    public SimulationTransactionEngine(SimulationClock clock, SimulationState state, int initialHistoryCapacity = 0, int? contactImpulseHistoryCapacity = null)
+    public SimulationTransactionEngine(SimulationClock clock, SimulationState state, int initialHistoryCapacity = 0, int? contactImpulseHistoryCapacity = null, int continuationHistoryCapacity = 0)
     {
         _clock = clock ?? throw new ArgumentNullException(nameof(clock));
         _state = state ?? throw new ArgumentNullException(nameof(state));
@@ -34,22 +34,25 @@ internal sealed partial class SimulationTransactionEngine
         _rigidBodyTorqueHistory = new List<ProcessedRigidBodyTorqueTransition>(initialHistoryCapacity);
         _spacecraftForceHistory = new List<ProcessedSpacecraftForceTransition>(initialHistoryCapacity);
         _contactImpulseHistory = new(contactImpulseHistoryCapacity ?? initialHistoryCapacity);
+        if (continuationHistoryCapacity < 0) throw new ArgumentOutOfRangeException(nameof(continuationHistoryCapacity));
+        _continuationHistory = new ProcessedCertifiedContinuation[continuationHistoryCapacity];
+        _state.BindPublicationClock(_clock, this);
         _orchestrator = new SimulationExecutionOrchestrator(_clock, this);
     }
 
     public SimulationStateView State => _state.CreateView();
-    public int ProcessedCount => _history.Count;
-    internal int ProcessedSpacecraftForceCount => _spacecraftForceHistory.Count;
+    public int ProcessedCount { get { _clock.PublicationPhase.VerifyRead(); return _history.Count; } }
+    internal int ProcessedSpacecraftForceCount { get { _clock.PublicationPhase.VerifyRead(); return _spacecraftForceHistory.Count; } }
     internal bool TryGetProcessedSpacecraftForce(int index, out ProcessedSpacecraftForceTransition value)
-    { if ((uint)index < (uint)_spacecraftForceHistory.Count) { value = _spacecraftForceHistory[index]; return true; } value = default; return false; }
-    internal int ProcessedSpacecraftAttitudeCount => _spacecraftAttitudeHistory.Count;
-    internal int ProcessedRigidBodyTorqueCount => _rigidBodyTorqueHistory.Count;
+    { _clock.PublicationPhase.VerifyRead(); if ((uint)index < (uint)_spacecraftForceHistory.Count) { value = _spacecraftForceHistory[index]; return true; } value = default; return false; }
+    internal int ProcessedSpacecraftAttitudeCount { get { _clock.PublicationPhase.VerifyRead(); return _spacecraftAttitudeHistory.Count; } }
+    internal int ProcessedRigidBodyTorqueCount { get { _clock.PublicationPhase.VerifyRead(); return _rigidBodyTorqueHistory.Count; } }
     internal bool TryGetProcessedSpacecraftAttitude(int index, out ProcessedSpacecraftAttitudeTransition value)
-    { if ((uint)index < (uint)_spacecraftAttitudeHistory.Count) { value = _spacecraftAttitudeHistory[index]; return true; } value = default; return false; }
+    { _clock.PublicationPhase.VerifyRead(); if ((uint)index < (uint)_spacecraftAttitudeHistory.Count) { value = _spacecraftAttitudeHistory[index]; return true; } value = default; return false; }
     internal bool TryGetProcessedRigidBodyTorque(int index, out ProcessedRigidBodyTorqueTransition value)
-    { if ((uint)index < (uint)_rigidBodyTorqueHistory.Count) { value = _rigidBodyTorqueHistory[index]; return true; } value = default; return false; }
+    { _clock.PublicationPhase.VerifyRead(); if ((uint)index < (uint)_rigidBodyTorqueHistory.Count) { value = _rigidBodyTorqueHistory[index]; return true; } value = default; return false; }
     public bool TryGetProcessed(int index, out ProcessedSimulationEvent value)
-    {
+    { _clock.PublicationPhase.VerifyRead();
         if ((uint)index < (uint)_history.Count) { value = _history[index]; return true; }
         value = default; return false;
     }
@@ -75,6 +78,7 @@ internal sealed partial class SimulationTransactionEngine
     /// <summary>Executes one same-time group without exceeding the supplied call-wide event budget.</summary>
     internal SimulationCanonicalGroupResult ExecuteCanonicalGroup(int maximumEventCount)
     {
+        _clock.PublicationPhase.VerifyOrdinaryMutation();
         if (maximumEventCount <= 0) throw new ArgumentOutOfRangeException(nameof(maximumEventCount));
         Debug.Assert(maximumEventCount <= _clock.MaximumEventsPerAdvance);
         var groupTime = _clock.CurrentTime;
@@ -117,6 +121,7 @@ internal sealed partial class SimulationTransactionEngine
 
     public SimulationTransactionResult ValidateAndCommit(SimulationTransaction transaction)
     {
+        _clock.PublicationPhase.VerifyOrdinaryMutation();
         // A contact event cannot fall through to another mutation or marker path, including stripped/mixed proposals.
         if (transaction.Event.Kind == SimulationEventKind.SpacecraftContactImpulse || transaction.ContactImpulseReplacement is not null)
             return ValidateAndCommitContactEnvelope(transaction);
@@ -171,6 +176,7 @@ internal sealed partial class SimulationTransactionEngine
     /// <summary>Commits one already-evaluated celestial replacement without introducing a second state mutation path.</summary>
     internal CelestialTrajectoryTransactionResult ValidateAndCommit(CelestialTrajectoryReplacementTransaction transaction)
     {
+        _clock.PublicationPhase.VerifyOrdinaryMutation();
         var validation = Validate(transaction);
         if (validation != CelestialTrajectoryTransactionStatus.Success) return new(validation, null);
 
@@ -208,6 +214,7 @@ internal sealed partial class SimulationTransactionEngine
     /// <summary>Commits one pure direct attitude candidate. It neither consumes a timeline event nor advances time.</summary>
     internal SpacecraftAttitudeTransactionResult ValidateAndCommit(SpacecraftAttitudeReplacementTransaction transaction)
     {
+        _clock.PublicationPhase.VerifyOrdinaryMutation();
         var validation = Validate(transaction);
         if (validation != SpacecraftAttitudeTransactionStatus.Success) return new(validation, null);
         if (_spacecraftAttitudeHistory.Count == _spacecraftAttitudeHistory.Capacity)
@@ -240,6 +247,7 @@ internal sealed partial class SimulationTransactionEngine
     /// <summary>Commits one direct player-control replacement; it neither consumes a timeline event nor advances time.</summary>
     internal RigidBodyTorqueTransactionResult ValidateAndCommit(RigidBodyTorqueReplacementTransaction transaction)
     {
+        _clock.PublicationPhase.VerifyOrdinaryMutation();
         var validation = ValidateDirect(transaction);
         if (validation != RigidBodyTorqueTransactionStatus.Success) return new(validation, null);
         var before = _state.CreateView().Revision;
@@ -334,6 +342,7 @@ internal sealed partial class SimulationTransactionEngine
     /// <summary>Canonical force intent is re-evaluated before commit: callers cannot inject arbitrary pose or momentum.</summary>
     internal SpacecraftTranslationStatus ValidateAndCommit(SpacecraftForceTransaction transaction)
     {
+        _clock.PublicationPhase.VerifyOrdinaryMutation();
         if (!_clock.Timeline.TryPeekPending(out var pending) || pending.Header != transaction.Event ||
             pending.Header.Kind != SimulationEventKind.SpacecraftForce) return SpacecraftTranslationStatus.EventMismatch;
         if (transaction.Event.Time != _clock.CurrentTime) return SpacecraftTranslationStatus.TimeMismatch;

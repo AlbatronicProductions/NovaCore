@@ -1,0 +1,125 @@
+{
+  "head": "a4211617eef1e1d23bf8a4f8495388a35f9ed1dd",
+  "branch": "codex/certified-continuation-publication",
+  "baselineChecked": 331,
+  "baselineUnchanged": 315,
+  "modified": [
+    {
+      "path": "src/NovaCore.Simulation/Celestial/CelestialStateStore.cs",
+      "sha256": "4116db002b058ef10f158198588d7ad39bc0519e584d7a03477c7082ea8ad50b"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Celestial/CelestialStateView.cs",
+      "sha256": "ae9b7bc3da578c17d50fe09287f97b33236de5c1979ffeb51eed35fde02ceb5c"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Clock/SimulationClock.cs",
+      "sha256": "04b65285fa1488d486cb6342039aac222f337c0b677fff0980cd39f66bd9d362"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/FloridaContactKinematics.cs",
+      "sha256": "8cf5c3465a294189fa884311bc0add239e411cd9b9bbaf0b7f8bec1575e91943"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/FloridaPostImpactVelocity.cs",
+      "sha256": "2d4c8718cba4b480950a0525e804ab167cab83c1ddd9c4048cd498d9c1fb4d88"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/PrivatePostImpactState.cs",
+      "sha256": "e30fbf12a69fe55d0d3a6a0f303149617753f6c34d365d818323768c7d8a659a"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.cs",
+      "sha256": "1a2a0030f4425a52ead65ad02cf629d9819a62da65ceec078709c4d35ed2c0ce"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftStateView.cs",
+      "sha256": "5702f94c2af406b5c2ef3f955ac3a36b4875dbb94cd71024f33258f07368d91d"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Timeline/SimulationTimeline.ContactPayloads.cs",
+      "sha256": "2df8e01e63aff5c66666b74fc79b7d928adfc1edd8ab995a532e5c6ac23380e1"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Timeline/SimulationTimeline.cs",
+      "sha256": "ef52c87281c80f89abfc3329ac428af4bfab254198779e9d6aa8daeec20139a2"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationState.cs",
+      "sha256": "ca6eea582ccfead5b7ed7fdc861e555e87e87743d5c424590d92c4e837d78337"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.ContactImpulse.cs",
+      "sha256": "2dd0f931ee830a55f26c52f40d682ce45d90e4075f04e5ef44945d014ac49983"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.cs",
+      "sha256": "62b96cf9e91a57e27d468fa9b8bf9f00ae139a602a07470ac2e37eb4b7ca81ae"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/FloridaContactProductionTests.cs",
+      "sha256": "75dd54f18202d1ee2674b7231a3fb9dc8924d2610de56ff172583e241b97189c"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/Program.cs",
+      "sha256": "5e423e85a814e913eb50fb16211bcfd6650d738e1fb7e5e2d6ed01c076c7c117"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "sha256": "2e92a10d3d483bf0ddf3594ebe2fcb51244c6267253a0e0b981b5e232cf6f434"
+    }
+  ],
+  "added": [
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/FloridaPublicationProvenance.cs",
+      "sha256": "e2f80b0f33b1034826401c8fb1771292cef239bed37fbd5af94714d6a64d9afd"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/CertifiedContinuationPublication.cs",
+      "sha256": "3c5a449dc0ccbc7c2bc9f1711984b14bad1629e567aa40a4d737e8eeaeb58f95"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/ContinuationPublicationPhase.cs",
+      "sha256": "7b73cb3dd52bb4d99c3078aa6c945a538018edc4e5724b1087cf948348d263d2"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Continuation.cs",
+      "sha256": "c6b85399e5d75b30596fec625d27fc34bdcd26318fd2d8b83fb1019b6ebe8bda"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/CertifiedContinuationCost.cs",
+      "sha256": "008792ee1d966bcbee47b912bc09cc539f4e504301ba52dfbecc2afc89b80347"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/CertifiedContinuationFixture.cs",
+      "sha256": "907274449958dc76068fffa411db833e963ae3b6a1f128573659d53931c10151"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/CertifiedContinuationPublicationTests.cs",
+      "sha256": "856d2a09cc35fc147d1c76b2a1acef1dcbf6c28b06799da173078d0ee71fa378"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/ContinuationOwnershipTests.cs",
+      "sha256": "a6b99c3c53fb458fa9da1652827dec3038b80aa228eae2317cf2673c88f3b923"
+    }
+  ],
+  "unchangedTags": [
+    "m14.1-canonical-surface-point-queries",
+    "m14.10-certified-root-contact-kinematics",
+    "m14.11-certified-response-proposal",
+    "m14.12-certified-preimpact-velocity",
+    "m14.13-certified-postimpact-velocity",
+    "m14.14-private-root-postimpact-state",
+    "m14.15-private-canonical-propagation",
+    "m14.16-postimpact-terrain-clearance",
+    "m14.2-spacecraft-translational-authority",
+    "m14.3-spacecraft-terrain-contact-observations",
+    "m14.4-atomic-contact-response",
+    "m14.5-isolated-analytical-contact-response",
+    "m14.6-physical-event-epochs",
+    "m14.7-exact-event-spacecraft-motion",
+    "m14.8-exact-event-earth-relative-observation",
+    "m14.9-florida-monotone-contact-certification"
+  ],
+  "stagedCount": 0
+}

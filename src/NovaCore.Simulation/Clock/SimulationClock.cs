@@ -1,3 +1,4 @@
+using NovaCore.Simulation.Transactions;
 using NovaCore.Simulation.Time;
 using NovaCore.Simulation.Timeline;
 
@@ -9,6 +10,7 @@ namespace NovaCore.Simulation.Clock;
 /// </summary>
 public sealed class SimulationClock
 {
+    internal ContinuationPublicationPhase PublicationPhase => Timeline.PublicationPhase;
     private readonly SimulationClockSettings _settings;
     private bool _isAdvancing;
     private bool _isPaused;
@@ -31,21 +33,22 @@ public sealed class SimulationClock
         _settings = selectedSettings;
     }
 
-    public SimulationInstant CurrentTime => _currentTime;
-    public bool IsPaused => _isPaused;
-    public SimulationRate Rate => _rate;
-    public long RateRemainder => _rateRemainder;
+    public SimulationInstant CurrentTime { get { PublicationPhase.VerifyRead(); return _currentTime; } }
+    public bool IsPaused { get { PublicationPhase.VerifyRead(); return _isPaused; } }
+    public SimulationRate Rate { get { PublicationPhase.VerifyRead(); return _rate; } }
+    public long RateRemainder { get { PublicationPhase.VerifyRead(); return _rateRemainder; } }
     public SimulationTimeline Timeline { get; }
     public SimulationClockSettings Settings => _settings;
     public int MaximumEventsPerAdvance => _settings.MaximumEventsPerAdvance;
-    internal SimulationDuration PendingSimulationDebt => _pendingSimulationDebt;
+    internal SimulationDuration PendingSimulationDebt { get { PublicationPhase.VerifyRead(); return _pendingSimulationDebt; } }
 
-    public void Pause() => _isPaused = true;
-    public void Resume() => _isPaused = false;
+    public void Pause() { PublicationPhase.VerifyOrdinaryMutation(); _isPaused = true; }
+    public void Resume() { PublicationPhase.VerifyOrdinaryMutation(); _isPaused = false; }
 
     /// <summary>Changes the future host-duration rate only; 6B-2 performs no host-duration advancement.</summary>
     public bool TrySetRate(SimulationRate rate)
     {
+        PublicationPhase.VerifyOrdinaryMutation();
         if (_rate == rate) return false;
         _rate = rate;
         _rateRemainder = 0;
@@ -58,6 +61,7 @@ public sealed class SimulationClock
     /// </summary>
     internal SimulationHostAdvanceResult AdvanceByHostDuration(SimulationDuration hostDuration)
     {
+        PublicationPhase.VerifyOrdinaryMutation();
         var debtBefore = _pendingSimulationDebt;
         var remainderBefore = _rateRemainder;
         if (_isPaused) return HostResult(SimulationHostAdvanceStopReason.Paused, hostDuration, SimulationDuration.Zero, debtBefore, remainderBefore);
@@ -89,6 +93,7 @@ public sealed class SimulationClock
     /// <summary>Consumes only simulation time already traversed by the authoritative clock.</summary>
     internal void ConsumePendingSimulationDebt(SimulationDuration traversed)
     {
+        PublicationPhase.VerifyOrdinaryMutation();
         if (traversed.Ticks < 0 || traversed.Ticks > _pendingSimulationDebt.Ticks)
             throw new InvalidOperationException("Only traversed nonnegative simulation time may reduce retained debt.");
         _pendingSimulationDebt = new SimulationDuration(_pendingSimulationDebt.Ticks - traversed.Ticks);
@@ -100,6 +105,7 @@ public sealed class SimulationClock
     /// </summary>
     public SimulationAdvanceResult AdvanceTo(SimulationInstant target)
     {
+        PublicationPhase.VerifyOrdinaryMutation();
         if (_isAdvancing) return Result(SimulationAdvanceStopReason.ReentrantAdvance, target, null, 0);
         _isAdvancing = true;
         try
@@ -125,6 +131,7 @@ public sealed class SimulationClock
     /// <summary>Moves to the canonical next pending boundary without consuming it. Valid while paused.</summary>
     public SimulationAdvanceResult AdvanceUntilNextEvent()
     {
+        PublicationPhase.VerifyOrdinaryMutation();
         var requested = _currentTime;
         if (_isAdvancing) return Result(SimulationAdvanceStopReason.ReentrantAdvance, requested, null, 0);
         _isAdvancing = true;
@@ -157,8 +164,17 @@ public sealed class SimulationClock
 
     internal void AdvanceAfterSuccessfulTransaction(SimulationInstant time)
     {
+        PublicationPhase.VerifyOrdinaryMutation();
         if (time < _currentTime) throw new InvalidOperationException("A transaction cannot move authoritative time backward.");
         _currentTime = time;
+    }
+
+    // Caller has prepared and revalidated both values under the owning publication phase.
+    // No arithmetic, callback, guard or ordinary rejection remains in this write-only seam.
+    internal void InstallCertifiedContinuation(SimulationInstant target, SimulationDuration debt)
+    {
+        _currentTime = target;
+        _pendingSimulationDebt = debt;
     }
 
     private SimulationAdvanceResult Result(SimulationAdvanceStopReason reason, SimulationInstant requested, SimulationEventHeader? boundary, int examined) =>
