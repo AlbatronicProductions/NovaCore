@@ -12,10 +12,13 @@ void main(){
   vec2 corners[6]=vec2[6](vec2(-1,-1),vec2(1,-1),vec2(-1,1),vec2(-1,1),vec2(1,-1),vec2(1,1));
   local=corners[gl_VertexIndex];
   vec4 center=frameData.camera.viewProjection*vec4(p.centerRadius.xyz,1.0)+frameData.camera.viewProjection*vec4(p.centerLow.xyz,0.0);
+  // The halo belongs to the same forward celestial source as the stellar disc.
+  // abs(w) would reflect a rear-facing source into a second, visible sky direction.
+  if(stellar==0u||center.w<=0.0){gl_Position=vec4(2,2,2,1);return;}
   float scaleX=length(vec3(frameData.camera.viewProjection[0][0],frameData.camera.viewProjection[1][0],frameData.camera.viewProjection[2][0]));
   float scaleY=length(vec3(frameData.camera.viewProjection[0][1],frameData.camera.viewProjection[1][1],frameData.camera.viewProjection[2][1]));
   float angular=p.centerRadius.w/max(length(p.centerRadius.xyz+p.centerLow.xyz),p.centerRadius.w*1.001)*max(scaleX,scaleY);
   float extent=max(angular*2.0,.012);
-  vec2 ndc=center.xy/max(abs(center.w),1e-6)+local*extent;
+  vec2 ndc=center.xy/center.w+local*extent;
   gl_Position=stellar!=0u?vec4(ndc,0,1):vec4(2,2,2,1);
 }

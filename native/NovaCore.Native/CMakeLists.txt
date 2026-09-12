@@ -223,3 +223,9 @@ add_dependencies(NovaCoreSurfaceMaterialCoordinatesTests NovaCoreSurfaceMaterial
 target_compile_features(NovaCoreSurfaceMaterialCoordinatesTests PRIVATE cxx_std_20)
 target_compile_definitions(NovaCoreSurfaceMaterialCoordinatesTests PRIVATE NOMINMAX WIN32_LEAN_AND_MEAN)
 target_link_libraries(NovaCoreSurfaceMaterialCoordinatesTests PRIVATE Vulkan::Vulkan)
+
+# Actual stellar/background production shaders, rendered offscreen under camera rotations.
+add_executable(NovaCoreStellarProjectionTests EXCLUDE_FROM_ALL StellarProjectionTests.cpp)
+add_dependencies(NovaCoreStellarProjectionTests NovaCoreShaders)
+target_compile_features(NovaCoreStellarProjectionTests PRIVATE cxx_std_20)
+target_link_libraries(NovaCoreStellarProjectionTests PRIVATE Vulkan::Vulkan)

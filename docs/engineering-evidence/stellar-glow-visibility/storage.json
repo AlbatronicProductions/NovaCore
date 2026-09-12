@@ -1,0 +1,14 @@
+{
+  "scratchPath": "E:\\NovaCore\\build\\stellar-artifact",
+  "createdDisposableFiles": 102,
+  "createdDisposableBytes": 196832188,
+  "disposedFiles": 0,
+  "disposedBytes": 0,
+  "disposableRemainingFiles": 102,
+  "disposableRemainingBytes": 196832188,
+  "cleanupStatus": "Automatic deletion rejected before execution: blocked by policy. No retry. Manual cleanup pending.",
+  "manualCommand": "Remove-Item -LiteralPath 'E:\\NovaCore\\build\\stellar-artifact' -Recurse -Force",
+  "originalVideoAndLogModified": false,
+  "retained": ["README.md", "results.json", "before.png", "after.png", "storage.json"],
+  "reproductionImplementation": "native/NovaCore.Native/StellarProjectionTests.cpp"
+}

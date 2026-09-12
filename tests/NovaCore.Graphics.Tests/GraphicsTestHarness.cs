@@ -94,7 +94,7 @@ internal static class GraphicsTestHarness
     {
         VerifyValidationLayer();
         var failed = 0;
-        foreach (var (name, shader) in new[] { ("NovaCoreFacilityVisibilityTests", "facility_visibility_test.comp.spv"), ("NovaCoreSurfaceMaterialCoordinatesTests", "surface_material_coordinates_test.comp.spv") })
+        foreach (var (name, shader) in new[] { ("NovaCoreFacilityVisibilityTests", "facility_visibility_test.comp.spv"), ("NovaCoreSurfaceMaterialCoordinatesTests", "surface_material_coordinates_test.comp.spv"), ("NovaCoreStellarProjectionTests", "stellar_glow.vert.spv") })
         {
             var start = new ProcessStartInfo(RepositoryPath("build", NativeDirectory, name + ".exe")) { UseShellExecute=false, RedirectStandardOutput=true, RedirectStandardError=true };
             start.ArgumentList.Add(RepositoryPath("build", NativeDirectory, "shaders", shader));
@@ -104,7 +104,7 @@ internal static class GraphicsTestHarness
             if(child.ExitCode!=0) failed++;
             Console.WriteLine($"{(child.ExitCode==0?"PASS":"FAIL")} [native-gpu] {name}");
         }
-        Console.WriteLine($"Native GPU {Configuration}: pass={2-failed}; fail={failed}; skip=0"); return failed==0?0:1;
+        Console.WriteLine($"Native GPU {Configuration}: pass={3-failed}; fail={failed}; skip=0"); return failed==0?0:1;
     }
     private static void VerifyValidationLayer()
     {

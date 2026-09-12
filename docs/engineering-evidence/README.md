@@ -8,6 +8,7 @@ records its investigation stage. Follow subsequent accepted conclusions.
 
 | Family | Continuing value | Read the conclusion first |
 |---|---|---|
+| [Stellar glow visibility](stellar-glow-visibility/README.md) | Signed Sun projection, rear-hemisphere raster isolation, unchanged front HDR, strict regression and bounded cost. | Corrected candidate; physical acceptance pending; unbanked. |
 | [Certified continuation publication candidate](certified-continuation-publication/README.md) | Exact paired installation, clock/debt/history, replay, refusal/allocation and Debug/Release regression qualification; existing costs retained. | [Candidate report](certified-continuation-publication/README.md): ready for Project Control acceptance; unbanked. |
 | [Banked M14.15 paired private canonical propagation](private-canonical-propagation/README.md) | Root correlation, certified endpoints, Florida replay, bounded costs and preserved historical allocation witnesses. Final normal Release 5/5 and remaining gates passed; production allocation causality remains unestablished. | [Final acceptance](private-canonical-propagation/final-acceptance.md): accepted and banked as M14.15; event coverage/publication deferred. |
 | [Banked M14.14 private post-impact state](private-postimpact-state/README.md) | Source-defined root pose, unchanged certified final bits, immutable preparation, applicability, independent containment and bounded validation. | [Banked contract](../private-postimpact-state.md); ready for subsequent root-linked propagation architecture. |

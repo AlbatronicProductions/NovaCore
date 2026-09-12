@@ -1,0 +1,157 @@
+{
+  "baseline": "a890a12c5cfb6c1eb4ee15906a21161bc4930988",
+  "date": "2026-09-12",
+  "gpu": "AMD Radeon RX 6800 XT",
+  "witness": {
+    "baseline": [
+      "GPU AMD Radeon RX 6800 XT viewport 860x360",
+      "WITNESS pose=0 yaw=0 pitch=0 clipW=-1.496e+11 signedPixel=430,180 absolutePixel=430,180 centroid=430,180 glowPixels=64 otherPixels=0 fullHDR=14028031306158314959 backgroundHDR=6201633549976027251",
+      "WITNESS pose=1 yaw=0.2 pitch=0.1 clipW=-1.45885e+11 signedPixel=366.484,148.719 absolutePixel=493.516,211.281 centroid=493.515,211.327 glowPixels=60 otherPixels=0 fullHDR=5797446474154025746 backgroundHDR=5738697426067890455",
+      "WITNESS pose=2 yaw=-0.3 pitch=-0.2 clipW=-1.40069e+11 signedPixel=528.403,243.199 absolutePixel=331.597,116.801 centroid=331.597,116.758 glowPixels=62 otherPixels=0 fullHDR=2712173463646512089 backgroundHDR=6524261376236540013",
+      "WITNESS pose=3 yaw=1.4 pitch=0 clipW=-2.54271e+10 signedPixel=-1377.6,180 absolutePixel=2237.6,180 centroid=-1,-1 glowPixels=0 otherPixels=0 fullHDR=6604679339724652049 backgroundHDR=6604679339724652049",
+      "WITNESS pose=4 yaw=3.14159 pitch=0 clipW=1.496e+11 signedPixel=430,180 absolutePixel=430,180 centroid=430,180 glowPixels=60 otherPixels=4 fullHDR=11901088398779466341 backgroundHDR=15387738055894977196",
+      "WITNESS pose=5 yaw=3.3 pitch=0 clipW=1.47727e+11 signedPixel=380.196,180 absolutePixel=380.196,180 centroid=379.727,180 glowPixels=54 otherPixels=6 fullHDR=11430145551605971388 backgroundHDR=11148701483887555011"
+    ],
+    "candidate": [
+      "GPU AMD Radeon RX 6800 XT viewport 860x360",
+      "WITNESS pose=0 yaw=0 pitch=0 clipW=-1.496e+11 signedPixel=430,180 absolutePixel=430,180 centroid=-1,-1 glowPixels=0 otherPixels=0 fullHDR=6201633549976027251 backgroundHDR=6201633549976027251",
+      "WITNESS pose=1 yaw=0.2 pitch=0.1 clipW=-1.45885e+11 signedPixel=366.484,148.719 absolutePixel=493.516,211.281 centroid=-1,-1 glowPixels=0 otherPixels=0 fullHDR=5738697426067890455 backgroundHDR=5738697426067890455",
+      "WITNESS pose=2 yaw=-0.3 pitch=-0.2 clipW=-1.40069e+11 signedPixel=528.403,243.199 absolutePixel=331.597,116.801 centroid=-1,-1 glowPixels=0 otherPixels=0 fullHDR=6524261376236540013 backgroundHDR=6524261376236540013",
+      "WITNESS pose=3 yaw=1.4 pitch=0 clipW=-2.54271e+10 signedPixel=-1377.6,180 absolutePixel=2237.6,180 centroid=-1,-1 glowPixels=0 otherPixels=0 fullHDR=6604679339724652049 backgroundHDR=6604679339724652049",
+      "WITNESS pose=4 yaw=3.14159 pitch=0 clipW=1.496e+11 signedPixel=430,180 absolutePixel=430,180 centroid=430,180 glowPixels=60 otherPixels=4 fullHDR=11901088398779466341 backgroundHDR=15387738055894977196",
+      "WITNESS pose=5 yaw=3.3 pitch=0 clipW=1.47727e+11 signedPixel=380.196,180 absolutePixel=380.196,180 centroid=379.727,180 glowPixels=54 otherPixels=6 fullHDR=11430145551605971388 backgroundHDR=11148701483887555011"
+    ]
+  },
+  "native": {
+    "Debug": {
+      "exit": 0,
+      "pass": 3,
+      "fail": 0
+    },
+    "Release": {
+      "exit": 0,
+      "pass": 3,
+      "fail": 0
+    }
+  },
+  "performance": {
+    "unit": "ms",
+    "columns": [
+      "median",
+      "p95",
+      "p99",
+      "max"
+    ],
+    "samplesPerPose": 128,
+    "warmupPerPose": 16,
+    "viewport": [
+      3440,
+      1440
+    ],
+    "scope": "Isolated R32G32B32A32 HDR pass; not whole production/display frame",
+    "baselineRear": {
+      "background": [
+        0.6964,
+        0.80368,
+        0.80448,
+        0.80508
+      ],
+      "glow": [
+        0.00008,
+        0.00012,
+        0.00012,
+        0.00024
+      ],
+      "total": [
+        0.70048,
+        0.83228,
+        0.89544,
+        0.9214
+      ],
+      "cpuSubmit": [
+        0.022,
+        0.0446,
+        0.0634,
+        0.069
+      ]
+    },
+    "candidateRear": {
+      "background": [
+        0.78212,
+        0.80348,
+        0.80436,
+        0.80456
+      ],
+      "glow": [
+        0.00012,
+        0.00012,
+        0.00012,
+        0.00016
+      ],
+      "total": [
+        0.78932,
+        0.87728,
+        0.9784,
+        0.99652
+      ],
+      "cpuSubmit": [
+        0.0225,
+        0.0622,
+        0.0804,
+        0.0961
+      ]
+    },
+    "baselineFront": {
+      "background": [
+        0.66436,
+        0.67476,
+        0.67576,
+        0.67584
+      ],
+      "glow": [
+        0.00008,
+        0.00012,
+        0.00016,
+        0.00024
+      ],
+      "total": [
+        0.66816,
+        0.76376,
+        0.83152,
+        0.84988
+      ],
+      "cpuSubmit": [
+        0.0215,
+        0.0537,
+        0.0636,
+        0.0879
+      ]
+    },
+    "candidateFront": {
+      "background": [
+        0.72368,
+        0.74196,
+        0.745,
+        0.74584
+      ],
+      "glow": [
+        0.00012,
+        0.00012,
+        0.00016,
+        0.00036
+      ],
+      "total": [
+        0.72884,
+        0.8012,
+        0.89484,
+        0.89684
+      ],
+      "cpuSubmit": [
+        0.0221,
+        0.0573,
+        0.0828,
+        0.0841
+      ]
+    }
+  }
+}

@@ -109,10 +109,11 @@ Headless-only success must be reported as headless-only.
 Native cases are explicit CMake targets excluded from the default build:
 
 ```powershell
-cmake --build build/native-ninja --target NovaCoreRegionalPhysicalTests NovaCoreFacilityVisibilityTests NovaCoreSurfaceMaterialCoordinatesTests
+cmake --build build/native-ninja --target NovaCoreRegionalPhysicalTests NovaCoreFacilityVisibilityTests NovaCoreSurfaceMaterialCoordinatesTests NovaCoreStellarProjectionTests
 build/native-ninja/NovaCoreRegionalPhysicalTests.exe <verified-Florida-nccube-path>
 build/native-ninja/NovaCoreFacilityVisibilityTests.exe build/native-ninja/shaders/facility_visibility_test.comp.spv
 build/native-ninja/NovaCoreSurfaceMaterialCoordinatesTests.exe build/native-ninja/shaders/surface_material_coordinates_test.comp.spv
+build/native-ninja/NovaCoreStellarProjectionTests.exe build/native-ninja/shaders/stellar_glow.vert.spv
 # Repeat using build/native-ninja-release.
 ```
 
