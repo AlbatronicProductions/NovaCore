@@ -1,0 +1,254 @@
+{
+  "Observed": "2026-09-12T12:45:41.134016-04:00",
+  "Computer": "ALBATRONIC007",
+  "Branch": "codex/bepu-local-contact-staging",
+  "Head": "3933d832b73511a8d08468b7b27a9b2820e2f8ee",
+  "Main": "3933d832b73511a8d08468b7b27a9b2820e2f8ee",
+  "OriginMain": "3933d832b73511a8d08468b7b27a9b2820e2f8ee",
+  "BaselineFilesChecked": 501,
+  "ChangedBaselineFiles": [
+    "src/NovaCore.Simulation/NovaCore.Simulation.csproj"
+  ],
+  "ProjectProposalSHA256": "B36A1385F5B603AEFAE79FF910A895AD68F4856B7509DA8EFBB530845563712D",
+  "BranchRemoteTagRefChanges": [],
+  "Staged": [],
+  "Windows": {
+    "ProductName": "Windows 10 Pro",
+    "DisplayVersion": "25H2",
+    "CurrentBuild": "26200",
+    "UBR": 9445
+  },
+  "Services": [
+    {
+      "Name": "BITS",
+      "Status": "Stopped",
+      "StartType": "Manual"
+    },
+    {
+      "Name": "CryptSvc",
+      "Status": "Running",
+      "StartType": "Automatic"
+    },
+    {
+      "Name": "TrustedInstaller",
+      "Status": "Stopped",
+      "StartType": "Manual"
+    },
+    {
+      "Name": "wuauserv",
+      "Status": "Stopped",
+      "StartType": "Manual"
+    }
+  ],
+  "CausalWinner": "D. AUTHROOT REGISTRY ACCESS FAILURE",
+  "CryptSvc": {
+    "Name": "CryptSvc",
+    "ProcessId": 5196,
+    "StartName": "NT Authority\\NetworkService",
+    "State": "Running",
+    "PathName": "C:\\WINDOWS\\system32\\svchost.exe -k NetworkService -p"
+  },
+  "StoreDenialCount": 6,
+  "StoreDenialTimes": [
+    "2026-09-12T12:40:25.505477-04:00",
+    "2026-09-12T12:40:25.4761231-04:00",
+    "2026-09-12T12:40:25.3890082-04:00",
+    "2026-09-12T12:40:25.2462631-04:00",
+    "2026-09-12T12:40:25.1781509-04:00",
+    "2026-09-12T12:40:25.1716193-04:00"
+  ],
+  "StoreDenialWitness": {
+    "Time": "2026-09-12T12:40:25.505477-04:00",
+    "Id": 60,
+    "Process": "svchost.exe",
+    "ProcessId": "5196",
+    "User": "S-1-5-20",
+    "Result": "5",
+    "Detail": "<CertificateStore xmlns=\"http://schemas.microsoft.com/win/2004/08/events/event\"><Store type=\"CERT_STORE_PROV_SYSTEM_REGISTRY_W\" constant=\"13\" location=\"CERT_SYSTEM_STORE_LOCAL_MACHINE_ID\">AuthRoot</Store><Flags value=\"20000\" /><EventAuxInfo ProcessName=\"svchost.exe\" /><CorrelationAuxInfo TaskId=\"{29809315-94CD-4D91-B935-B318E29E05A3}\" SeqNumber=\"1\" /><Result value=\"5\">Access is denied.</Result></CertificateStore>"
+  },
+  "AutomaticRootRetrievalWitness": {
+    "Time": "2026-09-12T12:40:25.16741-04:00",
+    "Id": 20,
+    "Process": "certutil.exe",
+    "ProcessId": "32300",
+    "User": "S-1-5-21-513716787-2197471995-1695497529-1001",
+    "Result": "0",
+    "Detail": "<CertAutoRootUrlRetrievalWire xmlns=\"http://schemas.microsoft.com/win/2004/08/events/event\"><SubjectCertificate fileRef=\"DDFB16CD4931C973A2037D3FC83A4D7D775D05E4.cer\" subjectName=\"DigiCert Trusted Root G4\" /><URL scheme=\"http\">http://ctldl.windowsupdate.com/msdownload/update/v3/static/trustedr/en/authrootstl.cab</URL><EventAuxInfo ProcessName=\"certutil.exe\" /><CorrelationAuxInfo TaskId=\"{8C64A787-740F-408E-A779-7F729288C0D3}\" SeqNumber=\"13\" /><Result value=\"0\" /></CertAutoRootUrlRetrievalWire>"
+  },
+  "AuthRootACLs": [
+    {
+      "Key": "HKLM:\\SOFTWARE\\Microsoft\\SystemCertificates\\AuthRoot",
+      "Owner": "NT AUTHORITY\\SYSTEM",
+      "Protected": false,
+      "Sddl": "O:SYG:SYD:AI(A;;KA;;;S-1-5-80-242729624-280608522-2219052887-3187409060-2225943459)(A;OICIIO;GA;;;S-1-5-80-242729624-280608522-2219052887-3187409060-2225943459)(A;ID;KR;;;BU)(A;CIIOID;GR;;;BU)(A;ID;KA;;;BA)(A;CIIOID;GA;;;BA)(A;ID;KA;;;SY)(A;CIIOID;GA;;;SY)(A;CIIOID;GA;;;CO)(A;ID;KR;;;AC)(A;CIIOID;GR;;;AC)(A;ID;KR;;;S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681)(A;CIIOID;GR;;;S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681)",
+      "CryptSvcGrant": [
+        "FullControl",
+        "268435456"
+      ]
+    },
+    {
+      "Key": "HKLM:\\SOFTWARE\\Microsoft\\SystemCertificates\\AuthRoot\\AutoUpdate",
+      "Owner": "NT AUTHORITY\\SYSTEM",
+      "Protected": false,
+      "Sddl": "O:SYG:SYD:AI(A;ID;KA;;;S-1-5-80-242729624-280608522-2219052887-3187409060-2225943459)(A;OICIIOID;GA;;;S-1-5-80-242729624-280608522-2219052887-3187409060-2225943459)(A;ID;KR;;;BU)(A;CIIOID;GR;;;BU)(A;ID;KA;;;BA)(A;CIIOID;GA;;;BA)(A;ID;KA;;;SY)(A;CIIOID;GA;;;SY)(A;CIIOID;GA;;;CO)(A;ID;KR;;;AC)(A;CIIOID;GR;;;AC)(A;ID;KR;;;S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681)(A;CIIOID;GR;;;S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681)",
+      "CryptSvcGrant": [
+        "FullControl",
+        "268435456"
+      ]
+    },
+    {
+      "Key": "HKLM:\\SOFTWARE\\Microsoft\\SystemCertificates\\AuthRoot\\Certificates",
+      "Owner": "NT AUTHORITY\\SYSTEM",
+      "Protected": false,
+      "Sddl": "O:SYG:SYD:AI(A;ID;KA;;;S-1-5-80-242729624-280608522-2219052887-3187409060-2225943459)(A;OICIIOID;GA;;;S-1-5-80-242729624-280608522-2219052887-3187409060-2225943459)(A;ID;KR;;;BU)(A;CIIOID;GR;;;BU)(A;ID;KA;;;BA)(A;CIIOID;GA;;;BA)(A;ID;KA;;;SY)(A;CIIOID;GA;;;SY)(A;CIIOID;GA;;;CO)(A;ID;KR;;;AC)(A;CIIOID;GR;;;AC)(A;ID;KR;;;S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681)(A;CIIOID;GR;;;S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681)",
+      "CryptSvcGrant": [
+        "FullControl",
+        "268435456"
+      ]
+    },
+    {
+      "Key": "HKLM:\\SOFTWARE\\Microsoft\\SystemCertificates\\AuthRoot\\CRLs",
+      "Owner": "NT AUTHORITY\\SYSTEM",
+      "Protected": true,
+      "Sddl": "O:SYG:SYD:PAI(A;CIIO;KA;;;CO)(A;CI;KA;;;SY)(A;CI;KA;;;BA)(A;CI;KR;;;BU)(A;CI;KR;;;AC)(A;CI;KR;;;S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681)",
+      "CryptSvcGrant": []
+    },
+    {
+      "Key": "HKLM:\\SOFTWARE\\Microsoft\\SystemCertificates\\AuthRoot\\CTLs",
+      "Owner": "NT AUTHORITY\\SYSTEM",
+      "Protected": true,
+      "Sddl": "O:SYG:SYD:PAI(A;CIIO;KA;;;CO)(A;CI;KA;;;SY)(A;CI;KA;;;BA)(A;CI;KR;;;BU)(A;CI;KR;;;AC)(A;CI;KR;;;S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681)",
+      "CryptSvcGrant": []
+    }
+  ],
+  "AuthRootLastSyncBeforeUtc": "2024-01-29T11:54:37.0902125Z",
+  "AuthRootLastSyncAfterUtc": "2026-08-29T16:37:42.2480511Z",
+  "RegistryCTLThisUpdateLocal": "2023-11-07T16:36:00-05:00",
+  "RegistryCTLSequence": "1401da11ba19606c20",
+  "RegistryCTLSHA256": "4276AF3669A141A59388BC56A87F6614D9A9BDDDF560636C264219A7EB11256F",
+  "RegistryCTLBytes": 175647,
+  "RetrievedCTLThisUpdateLocal": "2026-08-25T03:24:00-04:00",
+  "RetrievedCTLSequence": "1401dd3462c779aec7",
+  "DefaultElevatedCommand": {
+    "Command": "certutil -verifyctl -f AuthRootWU",
+    "Directory": "E:\\NovaCore\\build\\bepu-trust-recovery\\host-recovery",
+    "Administrator": true,
+    "Start": "2026-09-12T12:28:56.6332822-04:00",
+    "End": "2026-09-12T12:30:16.371223-04:00",
+    "ExitCode": 0
+  },
+  "MatchedElevatedCommand": {
+    "Start": "2026-09-12T12:37:42.2207104-04:00",
+    "End": "2026-09-12T12:37:59.3593269-04:00",
+    "Administrator": true,
+    "ExitCode": 0
+  },
+  "MatchedNonElevated": {
+    "Time": "2026-09-12T12:40:25.5468204-04:00",
+    "Administrator": false,
+    "CtlExit": -2147024891,
+    "SignerProcessExit": 0
+  },
+  "CapiLoggingFinal": {
+    "Enabled": false,
+    "Complete": "2026-09-12T12:40:25.7639941-04:00"
+  },
+  "ProcMon": "Official Microsoft-signed tool downloaded; automated capture rejected before execution: blocked by policy. No capture or retry.",
+  "Repair": "No ACL/policy/service/component repair. Supported elevated certutil diagnostic refreshed retrieval caches and sync fields, but registry CTL remains stale.",
+  "RootChainAfter": "Ordinary signer chain: CERT_E_UNTRUSTEDROOT 0x800B0109 despite certutil process exit 0; leaf revocation passed.",
+  "SignatureAcceptance": "NOT RUN: Windows dynamic trust servicing gate remains failed",
+  "CleanRestores": "NOT RUN: prerequisite trust gate failed",
+  "AdapterResumed": false,
+  "EvidenceSources": [
+    {
+      "Path": "E:\\NovaCore\\build\\bepu-trust-recovery\\host-recovery\\ctl-elevated.txt",
+      "Bytes": 670213,
+      "SHA256": "AA5E18150CA1B56A7F9FFDD9ED720816DD0D027431F37674D2DA8135B9B1EB53"
+    },
+    {
+      "Path": "E:\\NovaCore\\build\\bepu-trust-recovery\\host-recovery\\ctl-matched-elevated.txt",
+      "Bytes": 60610,
+      "SHA256": "BA76D1F43FED1FDA179F9E32D50369AF288252171D037EEF9C4CE4AC87F4ABC6"
+    },
+    {
+      "Path": "E:\\NovaCore\\build\\bepu-trust-recovery\\host-recovery\\ctl-logged-nonelevated.txt",
+      "Bytes": 109,
+      "SHA256": "AC565D68B437AAF3266BA1F78E73BD6AE4759FFE747DF0C002535515388E182E"
+    },
+    {
+      "Path": "E:\\NovaCore\\build\\bepu-trust-recovery\\host-recovery\\signer-logged-nonelevated.txt",
+      "Bytes": 6155,
+      "SHA256": "356A935928C1C978A8D33B74189927FDBFF452554B7DEE9D4EB73C7851153FA5"
+    },
+    {
+      "Path": "E:\\NovaCore\\build\\bepu-trust-recovery\\host-recovery\\authroot-after.stl",
+      "Bytes": 175647,
+      "SHA256": "4276AF3669A141A59388BC56A87F6614D9A9BDDDF560636C264219A7EB11256F"
+    },
+    {
+      "Path": "E:\\NovaCore\\build\\bepu-trust-recovery\\host-recovery\\authroot-after-dump.txt",
+      "Bytes": 705739,
+      "SHA256": "D762DBA693A6EDED50926888189B1829DE4B2E570CD314B18A1D33D8D2B76148"
+    },
+    {
+      "Path": "E:\\NovaCore\\build\\bepu-trust-recovery\\host-recovery\\capi-normal-summary.json",
+      "Bytes": 132297,
+      "SHA256": "17ED078E439A4846DD41D96DB11F0A160A94865E4A877196B9CDAD1CFD380C8A"
+    },
+    {
+      "Path": "E:\\NovaCore\\build\\bepu-trust-recovery\\host-recovery\\WindowsUpdate.log",
+      "Bytes": 8409462,
+      "SHA256": "B682E6BEF8ED82FD9081B2F9C6D90FA1B4A6387C5EEAFDBF7FF710E015C477EC"
+    },
+    {
+      "Path": "E:\\NovaCore\\build\\bepu-trust-recovery\\host-recovery\\cbs-candidates.txt",
+      "Bytes": 556,
+      "SHA256": "7A16F13DC4D7A6E552017BE086F06714AF8367362B3B6B40463FD534417BDB76"
+    }
+  ],
+  "RootPresence": [
+    {
+      "Store": "Cert:\\CurrentUser\\Root",
+      "Thumbprint": "DDFB16CD4931C973A2037D3FC83A4D7D775D05E4",
+      "Present": false
+    },
+    {
+      "Store": "Cert:\\CurrentUser\\Root",
+      "Thumbprint": "0563B8630D62D75ABBC8AB1E4BDFB5A899B24D43",
+      "Present": false
+    },
+    {
+      "Store": "Cert:\\CurrentUser\\AuthRoot",
+      "Thumbprint": "DDFB16CD4931C973A2037D3FC83A4D7D775D05E4",
+      "Present": false
+    },
+    {
+      "Store": "Cert:\\CurrentUser\\AuthRoot",
+      "Thumbprint": "0563B8630D62D75ABBC8AB1E4BDFB5A899B24D43",
+      "Present": false
+    },
+    {
+      "Store": "Cert:\\LocalMachine\\Root",
+      "Thumbprint": "DDFB16CD4931C973A2037D3FC83A4D7D775D05E4",
+      "Present": false
+    },
+    {
+      "Store": "Cert:\\LocalMachine\\Root",
+      "Thumbprint": "0563B8630D62D75ABBC8AB1E4BDFB5A899B24D43",
+      "Present": false
+    },
+    {
+      "Store": "Cert:\\LocalMachine\\AuthRoot",
+      "Thumbprint": "DDFB16CD4931C973A2037D3FC83A4D7D775D05E4",
+      "Present": false
+    },
+    {
+      "Store": "Cert:\\LocalMachine\\AuthRoot",
+      "Thumbprint": "0563B8630D62D75ABBC8AB1E4BDFB5A899B24D43",
+      "Present": false
+    }
+  ],
+  "DisposableFiles": 57,
+  "DisposableBytes": 24226270.0,
+  "Cleanup": "Deferred while blocker remains; no deletion attempted during host recovery."
+}

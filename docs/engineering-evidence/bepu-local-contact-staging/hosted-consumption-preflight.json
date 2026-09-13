@@ -1,0 +1,124 @@
+{
+  "head": "3933d832b73511a8d08468b7b27a9b2820e2f8ee",
+  "main": "3933d832b73511a8d08468b7b27a9b2820e2f8ee",
+  "originMain": "3933d832b73511a8d08468b7b27a9b2820e2f8ee",
+  "branch": "codex/bepu-local-contact-staging",
+  "hostedRun": "NOT STARTED",
+  "reason": "Prepared workflow and candidate are local and uncommitted; ticket prohibits commit and push",
+  "remoteBranches": [
+    "main"
+  ],
+  "remoteWorkflows": [
+    {
+      "path": ".github/workflows/bepu-signature-qualification.yml",
+      "name": "BEPU independent signature qualification",
+      "id": 356900973
+    }
+  ],
+  "matchedCandidateInputs": [
+    {
+      "path": "Directory.Build.props",
+      "sha256": "B9DBD63133E8C0A6ABD0B3DFE2E2013C6943AA3879D952D9CC391BE45D0529A9",
+      "matchesValidatedExport": true
+    },
+    {
+      "path": "Directory.Build.targets",
+      "sha256": "57165F94B025B59A1524F31F2D39C3FD454199732492D3716B93935A4D857E0F",
+      "matchesValidatedExport": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/NovaCore.Simulation.csproj",
+      "sha256": "2599019296A0F5E0562FF0832C0128F8EE23917BBDD96CA1E32AFFE56D352FBD",
+      "matchesValidatedExport": true
+    },
+    {
+      "path": "external/bepu/Bepu.targets",
+      "sha256": "CA31C347A3D465CCEB5FF10E549BEFE2FBF1037B8C57E1034073C484CE47EB8F",
+      "matchesValidatedExport": true
+    },
+    {
+      "path": "external/bepu/Bepu.references.props",
+      "sha256": "8F1E02C0456715149B378D19E05361FE394A9B9D307B650061BDEFAC9CB889EE",
+      "matchesValidatedExport": true
+    },
+    {
+      "path": "tests/NovaCore.BepuDependency.Tests/Program.cs",
+      "sha256": "814C9AB537FA25D074840591B33530C173159324FBDAA93A6888E77C3006C60D",
+      "matchesValidatedExport": true
+    },
+    {
+      "path": "tests/NovaCore.BepuDependency.Tests/NovaCore.BepuDependency.Tests.csproj",
+      "sha256": "BF9F2946765C98D60E6F8E5D82D29CF3C45E1DA7A833803C622DC784CE4A0A5E",
+      "matchesValidatedExport": true
+    }
+  ],
+  "staged": [],
+  "trackedDiffNumstat": [
+    "5\t0\t.gitattributes",
+    "6\t0\tNovaCore.sln",
+    "8\t1\tsrc/NovaCore.Simulation/NovaCore.Simulation.csproj"
+  ],
+  "untrackedCandidatePaths": [
+    ".github/workflows/verified-bepu.yml",
+    "Directory.Build.targets",
+    "docs/engineering-evidence/bepu-local-contact-staging/README.md",
+    "docs/engineering-evidence/bepu-local-contact-staging/authroot-acl-qualification.md",
+    "docs/engineering-evidence/bepu-local-contact-staging/authroot-manual-capture.md",
+    "docs/engineering-evidence/bepu-local-contact-staging/baseline.json",
+    "docs/engineering-evidence/bepu-local-contact-staging/closeout.json",
+    "docs/engineering-evidence/bepu-local-contact-staging/collect-authroot-baseline.ps1",
+    "docs/engineering-evidence/bepu-local-contact-staging/dependency-provenance.json",
+    "docs/engineering-evidence/bepu-local-contact-staging/healthy-authroot-baseline.md",
+    "docs/engineering-evidence/bepu-local-contact-staging/host-trust-recovery.md",
+    "docs/engineering-evidence/bepu-local-contact-staging/host-trust-witness.json",
+    "docs/engineering-evidence/bepu-local-contact-staging/hosted-consumption-preflight.json",
+    "docs/engineering-evidence/bepu-local-contact-staging/hosted-consumption-qualification.md",
+    "docs/engineering-evidence/bepu-local-contact-staging/phase2-authroot-acls.json",
+    "docs/engineering-evidence/bepu-local-contact-staging/phase2-authroot-denial.csv",
+    "docs/engineering-evidence/bepu-local-contact-staging/phase2-authroot-witness.json",
+    "docs/engineering-evidence/bepu-local-contact-staging/phase2-manifest-witness.json",
+    "docs/engineering-evidence/bepu-local-contact-staging/phase3-acl-comparison.json",
+    "docs/engineering-evidence/bepu-local-contact-staging/phase3-current-host.json",
+    "docs/engineering-evidence/bepu-local-contact-staging/trust-closeout.json",
+    "docs/engineering-evidence/bepu-local-contact-staging/trust-evidence.json",
+    "docs/engineering-evidence/bepu-local-contact-staging/trust-recovery.md",
+    "docs/engineering-evidence/bepu-local-contact-staging/verified-binary-cleanup.json",
+    "docs/engineering-evidence/bepu-local-contact-staging/verified-binary-consumption.md",
+    "docs/engineering-evidence/bepu-local-contact-staging/verified-binary-results.json",
+    "external/bepu/2.5.0-beta.29/LICENSE.txt",
+    "external/bepu/2.5.0-beta.29/lib/BepuPhysics.dll",
+    "external/bepu/2.5.0-beta.29/lib/BepuUtilities.dll",
+    "external/bepu/2.5.0-beta.29/manifest/bepu-2.5.0-beta.29.json",
+    "external/bepu/2.5.0-beta.29/packages/BepuPhysics.2.5.0-beta.29.nupkg",
+    "external/bepu/2.5.0-beta.29/packages/BepuUtilities.2.5.0-beta.29.nupkg",
+    "external/bepu/ATTRIBUTION.txt",
+    "external/bepu/Bepu.references.props",
+    "external/bepu/Bepu.targets",
+    "external/bepu/README.md",
+    "tests/NovaCore.BepuDependency.Tests/NovaCore.BepuDependency.Tests.csproj",
+    "tests/NovaCore.BepuDependency.Tests/Program.cs",
+    "tools/dependencies/Measure-BepuVerification.ps1",
+    "tools/dependencies/Test-BepuBoundary.ps1"
+  ],
+  "scratch": [
+    {
+      "path": "E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045054-162",
+      "bytes": 59133941.0,
+      "files": 499
+    },
+    {
+      "path": "E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045157-600",
+      "bytes": 65007035.0,
+      "files": 520
+    },
+    {
+      "path": "E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566",
+      "bytes": 90516270.0,
+      "files": 848
+    }
+  ],
+  "cleanup": "CLEANUP REQUIRES MANUAL PROJECT CONTROL EXECUTION",
+  "cleanupRejection": "blocked by policy, before execution; no retry",
+  "lead": "ESCALATE TO PROJECT CONTROL",
+  "classification": "VERIFIED BEPU BINARY CONSUMPTION — FOLLOW-UP REQUIRED"
+}

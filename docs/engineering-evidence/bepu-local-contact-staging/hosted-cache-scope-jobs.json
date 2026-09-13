@@ -1,0 +1,750 @@
+[
+  {
+    "id": 103679269867,
+    "name": "dependency (ubuntu-24.04, Debug)",
+    "result": "success",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1
+      },
+      {
+        "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2
+      },
+      {
+        "name": "Run actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3
+      },
+      {
+        "name": "Configure isolated NuGet cache",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4
+      },
+      {
+        "name": "Select SDK and empty package sources",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5
+      },
+      {
+        "name": "Verify archives and build dependency closure",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6
+      },
+      {
+        "name": "Inspect runtime binding",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7
+      },
+      {
+        "name": "Publish verified dependencies",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8
+      },
+      {
+        "name": "Inspect published binding",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9
+      },
+      {
+        "name": "Post Run actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 17
+      },
+      {
+        "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 18
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 19
+      }
+    ],
+    "os": [
+      "Ubuntu",
+      "24.04.5",
+      "LTS"
+    ],
+    "runnerImage": [
+      "Image: ubuntu-24.04",
+      "Version: 20260907.300.1",
+      "Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260907.300/images/ubuntu/Ubuntu2404-Readme.md",
+      "Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260907.300"
+    ],
+    "cache": "Isolated NuGet cache: /home/runner/work/_temp/bepu-empty-cache; initial entries: 0",
+    "cacheEnvironment": [
+      "  NUGET_PACKAGES: /home/runner/work/_temp/bepu-empty-cache"
+    ],
+    "checkout": [
+      "13692c61bdb3c4721b8dc2ecba4d88b903c09b9c"
+    ],
+    "sdkEvidence": [
+      "  dotnet-version: 10.0.303",
+      "[command]/home/runner/work/_actions/actions/setup-dotnet/a98b56852c35b8e3190ac28c8c2271da59106c68/externals/install-dotnet.sh --skip-non-versioned-files --version 10.0.303",
+      "dotnet-install: .NET Core SDK with version '10.0.303' is already installed.",
+      "dotnet new globaljson --sdk-version 10.0.303 --roll-forward disable"
+    ],
+    "sourceConfig": [
+      "Set-Content NuGet.Config '<configuration><packageSources><clear /></packageSources></configuration>'"
+    ],
+    "buildSummary": [
+      "Build succeeded.",
+      "    0 Warning(s)",
+      "    0 Error(s)",
+      "Time Elapsed 00:00:12.90"
+    ],
+    "warningsErrors": [],
+    "runtimeInspection": {
+      "result": "PASS",
+      "assemblies": [
+        {
+          "name": "BepuPhysics",
+          "identity": "BepuPhysics, Version=2.5.0.0, Culture=neutral, PublicKeyToken=9345ce38ee48a1cd",
+          "sha256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7",
+          "typeCount": 736,
+          "references": [
+            "System.Runtime, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "BepuUtilities, Version=2.5.0.0, Culture=neutral, PublicKeyToken=a595ef937c270ac9",
+            "System.Numerics.Vectors, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Runtime.Intrinsics, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51",
+            "System.Collections, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Threading, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Console, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Threading.Thread, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Memory, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51"
+          ]
+        },
+        {
+          "name": "BepuUtilities",
+          "identity": "BepuUtilities, Version=2.5.0.0, Culture=neutral, PublicKeyToken=a595ef937c270ac9",
+          "sha256": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68",
+          "typeCount": 91,
+          "references": [
+            "System.Runtime, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Numerics.Vectors, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Runtime.Intrinsics, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51",
+            "System.Threading, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Threading.Thread, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Collections, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Runtime.InteropServices, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+          ]
+        }
+      ]
+    },
+    "publishedInspection": {
+      "result": "PASS",
+      "assemblies": [
+        {
+          "name": "BepuPhysics",
+          "identity": "BepuPhysics, Version=2.5.0.0, Culture=neutral, PublicKeyToken=9345ce38ee48a1cd",
+          "sha256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7",
+          "typeCount": 736,
+          "references": [
+            "System.Runtime, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "BepuUtilities, Version=2.5.0.0, Culture=neutral, PublicKeyToken=a595ef937c270ac9",
+            "System.Numerics.Vectors, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Runtime.Intrinsics, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51",
+            "System.Collections, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Threading, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Console, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Threading.Thread, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Memory, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51"
+          ]
+        },
+        {
+          "name": "BepuUtilities",
+          "identity": "BepuUtilities, Version=2.5.0.0, Culture=neutral, PublicKeyToken=a595ef937c270ac9",
+          "sha256": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68",
+          "typeCount": 91,
+          "references": [
+            "System.Runtime, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Numerics.Vectors, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Runtime.Intrinsics, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51",
+            "System.Threading, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Threading.Thread, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Collections, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Runtime.InteropServices, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": 103679269911,
+    "name": "dependency (windows-latest, Debug)",
+    "result": "success",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1
+      },
+      {
+        "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2
+      },
+      {
+        "name": "Run actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3
+      },
+      {
+        "name": "Configure isolated NuGet cache",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4
+      },
+      {
+        "name": "Select SDK and empty package sources",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5
+      },
+      {
+        "name": "Verify archives and build dependency closure",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6
+      },
+      {
+        "name": "Inspect runtime binding",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7
+      },
+      {
+        "name": "Publish verified dependencies",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8
+      },
+      {
+        "name": "Inspect published binding",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9
+      },
+      {
+        "name": "Post Run actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 17
+      },
+      {
+        "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 18
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 19
+      }
+    ],
+    "os": [
+      "Microsoft Windows Server 2025",
+      "10.0.26100",
+      "Datacenter"
+    ],
+    "runnerImage": [
+      "Image: windows-2025-vs2026",
+      "Version: 20260907.229.1",
+      "Included Software: https://github.com/actions/runner-images/blob/win25-vs2026/20260907.229/images/windows/Windows2025-VS2026-Readme.md",
+      "Image Release: https://github.com/actions/runner-images/releases/tag/win25-vs2026%2F20260907.229"
+    ],
+    "cache": "Isolated NuGet cache: D:\\a\\_temp\\bepu-empty-cache; initial entries: 0",
+    "cacheEnvironment": [
+      "  NUGET_PACKAGES: D:\\a\\_temp\\bepu-empty-cache"
+    ],
+    "checkout": [
+      "13692c61bdb3c4721b8dc2ecba4d88b903c09b9c"
+    ],
+    "sdkEvidence": [
+      "  dotnet-version: 10.0.303",
+      "[command]\"C:\\Program Files\\PowerShell\\7\\pwsh.exe\" -NoLogo -Sta -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -Command & 'D:\\a\\_actions\\actions\\setup-dotnet\\a98b56852c35b8e3190ac28c8c2271da59106c68\\externals\\install-dotnet.ps1' -SkipNonVersionedFiles -Version 10.0.303",
+      "dotnet-install: .NET Core SDK with version '10.0.303' is already installed.",
+      "dotnet new globaljson --sdk-version 10.0.303 --roll-forward disable"
+    ],
+    "sourceConfig": [
+      "Set-Content NuGet.Config '<configuration><packageSources><clear /></packageSources></configuration>'"
+    ],
+    "buildSummary": [
+      "Build succeeded.",
+      "    0 Warning(s)",
+      "    0 Error(s)",
+      "Time Elapsed 00:00:11.62"
+    ],
+    "warningsErrors": [],
+    "runtimeInspection": {
+      "result": "PASS",
+      "assemblies": [
+        {
+          "name": "BepuPhysics",
+          "identity": "BepuPhysics, Version=2.5.0.0, Culture=neutral, PublicKeyToken=9345ce38ee48a1cd",
+          "sha256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7",
+          "typeCount": 736,
+          "references": [
+            "System.Runtime, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "BepuUtilities, Version=2.5.0.0, Culture=neutral, PublicKeyToken=a595ef937c270ac9",
+            "System.Numerics.Vectors, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Runtime.Intrinsics, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51",
+            "System.Collections, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Threading, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Console, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Threading.Thread, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Memory, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51"
+          ]
+        },
+        {
+          "name": "BepuUtilities",
+          "identity": "BepuUtilities, Version=2.5.0.0, Culture=neutral, PublicKeyToken=a595ef937c270ac9",
+          "sha256": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68",
+          "typeCount": 91,
+          "references": [
+            "System.Runtime, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Numerics.Vectors, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Runtime.Intrinsics, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51",
+            "System.Threading, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Threading.Thread, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Collections, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Runtime.InteropServices, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+          ]
+        }
+      ]
+    },
+    "publishedInspection": {
+      "result": "PASS",
+      "assemblies": [
+        {
+          "name": "BepuPhysics",
+          "identity": "BepuPhysics, Version=2.5.0.0, Culture=neutral, PublicKeyToken=9345ce38ee48a1cd",
+          "sha256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7",
+          "typeCount": 736,
+          "references": [
+            "System.Runtime, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "BepuUtilities, Version=2.5.0.0, Culture=neutral, PublicKeyToken=a595ef937c270ac9",
+            "System.Numerics.Vectors, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Runtime.Intrinsics, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51",
+            "System.Collections, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Threading, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Console, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Threading.Thread, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Memory, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51"
+          ]
+        },
+        {
+          "name": "BepuUtilities",
+          "identity": "BepuUtilities, Version=2.5.0.0, Culture=neutral, PublicKeyToken=a595ef937c270ac9",
+          "sha256": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68",
+          "typeCount": 91,
+          "references": [
+            "System.Runtime, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Numerics.Vectors, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Runtime.Intrinsics, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51",
+            "System.Threading, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Threading.Thread, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Collections, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Runtime.InteropServices, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": 103679269915,
+    "name": "dependency (windows-latest, Release)",
+    "result": "success",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1
+      },
+      {
+        "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2
+      },
+      {
+        "name": "Run actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3
+      },
+      {
+        "name": "Configure isolated NuGet cache",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4
+      },
+      {
+        "name": "Select SDK and empty package sources",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5
+      },
+      {
+        "name": "Verify archives and build dependency closure",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6
+      },
+      {
+        "name": "Inspect runtime binding",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7
+      },
+      {
+        "name": "Publish verified dependencies",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8
+      },
+      {
+        "name": "Inspect published binding",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9
+      },
+      {
+        "name": "Post Run actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 17
+      },
+      {
+        "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 18
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 19
+      }
+    ],
+    "os": [
+      "Microsoft Windows Server 2025",
+      "10.0.26100",
+      "Datacenter"
+    ],
+    "runnerImage": [
+      "Image: windows-2025-vs2026",
+      "Version: 20260907.229.1",
+      "Included Software: https://github.com/actions/runner-images/blob/win25-vs2026/20260907.229/images/windows/Windows2025-VS2026-Readme.md",
+      "Image Release: https://github.com/actions/runner-images/releases/tag/win25-vs2026%2F20260907.229"
+    ],
+    "cache": "Isolated NuGet cache: D:\\a\\_temp\\bepu-empty-cache; initial entries: 0",
+    "cacheEnvironment": [
+      "  NUGET_PACKAGES: D:\\a\\_temp\\bepu-empty-cache"
+    ],
+    "checkout": [
+      "13692c61bdb3c4721b8dc2ecba4d88b903c09b9c"
+    ],
+    "sdkEvidence": [
+      "  dotnet-version: 10.0.303",
+      "[command]\"C:\\Program Files\\PowerShell\\7\\pwsh.exe\" -NoLogo -Sta -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -Command & 'D:\\a\\_actions\\actions\\setup-dotnet\\a98b56852c35b8e3190ac28c8c2271da59106c68\\externals\\install-dotnet.ps1' -SkipNonVersionedFiles -Version 10.0.303",
+      "dotnet-install: .NET Core SDK with version '10.0.303' is already installed.",
+      "dotnet new globaljson --sdk-version 10.0.303 --roll-forward disable"
+    ],
+    "sourceConfig": [
+      "Set-Content NuGet.Config '<configuration><packageSources><clear /></packageSources></configuration>'"
+    ],
+    "buildSummary": [
+      "Build succeeded.",
+      "    0 Warning(s)",
+      "    0 Error(s)",
+      "Time Elapsed 00:00:13.77"
+    ],
+    "warningsErrors": [],
+    "runtimeInspection": {
+      "result": "PASS",
+      "assemblies": [
+        {
+          "name": "BepuPhysics",
+          "identity": "BepuPhysics, Version=2.5.0.0, Culture=neutral, PublicKeyToken=9345ce38ee48a1cd",
+          "sha256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7",
+          "typeCount": 736,
+          "references": [
+            "System.Runtime, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "BepuUtilities, Version=2.5.0.0, Culture=neutral, PublicKeyToken=a595ef937c270ac9",
+            "System.Numerics.Vectors, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Runtime.Intrinsics, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51",
+            "System.Collections, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Threading, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Console, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Threading.Thread, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Memory, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51"
+          ]
+        },
+        {
+          "name": "BepuUtilities",
+          "identity": "BepuUtilities, Version=2.5.0.0, Culture=neutral, PublicKeyToken=a595ef937c270ac9",
+          "sha256": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68",
+          "typeCount": 91,
+          "references": [
+            "System.Runtime, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Numerics.Vectors, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Runtime.Intrinsics, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51",
+            "System.Threading, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Threading.Thread, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Collections, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Runtime.InteropServices, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+          ]
+        }
+      ]
+    },
+    "publishedInspection": {
+      "result": "PASS",
+      "assemblies": [
+        {
+          "name": "BepuPhysics",
+          "identity": "BepuPhysics, Version=2.5.0.0, Culture=neutral, PublicKeyToken=9345ce38ee48a1cd",
+          "sha256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7",
+          "typeCount": 736,
+          "references": [
+            "System.Runtime, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "BepuUtilities, Version=2.5.0.0, Culture=neutral, PublicKeyToken=a595ef937c270ac9",
+            "System.Numerics.Vectors, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Runtime.Intrinsics, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51",
+            "System.Collections, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Threading, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Console, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Threading.Thread, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Memory, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51"
+          ]
+        },
+        {
+          "name": "BepuUtilities",
+          "identity": "BepuUtilities, Version=2.5.0.0, Culture=neutral, PublicKeyToken=a595ef937c270ac9",
+          "sha256": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68",
+          "typeCount": 91,
+          "references": [
+            "System.Runtime, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Numerics.Vectors, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Runtime.Intrinsics, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51",
+            "System.Threading, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Threading.Thread, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Collections, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Runtime.InteropServices, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": 103679269916,
+    "name": "dependency (ubuntu-24.04, Release)",
+    "result": "success",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1
+      },
+      {
+        "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2
+      },
+      {
+        "name": "Run actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3
+      },
+      {
+        "name": "Configure isolated NuGet cache",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4
+      },
+      {
+        "name": "Select SDK and empty package sources",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5
+      },
+      {
+        "name": "Verify archives and build dependency closure",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6
+      },
+      {
+        "name": "Inspect runtime binding",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7
+      },
+      {
+        "name": "Publish verified dependencies",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8
+      },
+      {
+        "name": "Inspect published binding",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9
+      },
+      {
+        "name": "Post Run actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 17
+      },
+      {
+        "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 18
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 19
+      }
+    ],
+    "os": [
+      "Ubuntu",
+      "24.04.5",
+      "LTS"
+    ],
+    "runnerImage": [
+      "Image: ubuntu-24.04",
+      "Version: 20260907.300.1",
+      "Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260907.300/images/ubuntu/Ubuntu2404-Readme.md",
+      "Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260907.300"
+    ],
+    "cache": "Isolated NuGet cache: /home/runner/work/_temp/bepu-empty-cache; initial entries: 0",
+    "cacheEnvironment": [
+      "  NUGET_PACKAGES: /home/runner/work/_temp/bepu-empty-cache"
+    ],
+    "checkout": [
+      "13692c61bdb3c4721b8dc2ecba4d88b903c09b9c"
+    ],
+    "sdkEvidence": [
+      "  dotnet-version: 10.0.303",
+      "[command]/home/runner/work/_actions/actions/setup-dotnet/a98b56852c35b8e3190ac28c8c2271da59106c68/externals/install-dotnet.sh --skip-non-versioned-files --version 10.0.303",
+      "dotnet-install: .NET Core SDK with version '10.0.303' is already installed.",
+      "dotnet new globaljson --sdk-version 10.0.303 --roll-forward disable"
+    ],
+    "sourceConfig": [
+      "Set-Content NuGet.Config '<configuration><packageSources><clear /></packageSources></configuration>'"
+    ],
+    "buildSummary": [
+      "Build succeeded.",
+      "    0 Warning(s)",
+      "    0 Error(s)",
+      "Time Elapsed 00:00:12.71"
+    ],
+    "warningsErrors": [],
+    "runtimeInspection": {
+      "result": "PASS",
+      "assemblies": [
+        {
+          "name": "BepuPhysics",
+          "identity": "BepuPhysics, Version=2.5.0.0, Culture=neutral, PublicKeyToken=9345ce38ee48a1cd",
+          "sha256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7",
+          "typeCount": 736,
+          "references": [
+            "System.Runtime, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "BepuUtilities, Version=2.5.0.0, Culture=neutral, PublicKeyToken=a595ef937c270ac9",
+            "System.Numerics.Vectors, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Runtime.Intrinsics, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51",
+            "System.Collections, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Threading, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Console, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Threading.Thread, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Memory, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51"
+          ]
+        },
+        {
+          "name": "BepuUtilities",
+          "identity": "BepuUtilities, Version=2.5.0.0, Culture=neutral, PublicKeyToken=a595ef937c270ac9",
+          "sha256": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68",
+          "typeCount": 91,
+          "references": [
+            "System.Runtime, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Numerics.Vectors, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Runtime.Intrinsics, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51",
+            "System.Threading, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Threading.Thread, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Collections, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Runtime.InteropServices, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+          ]
+        }
+      ]
+    },
+    "publishedInspection": {
+      "result": "PASS",
+      "assemblies": [
+        {
+          "name": "BepuPhysics",
+          "identity": "BepuPhysics, Version=2.5.0.0, Culture=neutral, PublicKeyToken=9345ce38ee48a1cd",
+          "sha256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7",
+          "typeCount": 736,
+          "references": [
+            "System.Runtime, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "BepuUtilities, Version=2.5.0.0, Culture=neutral, PublicKeyToken=a595ef937c270ac9",
+            "System.Numerics.Vectors, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Runtime.Intrinsics, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51",
+            "System.Collections, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Threading, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Console, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Threading.Thread, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Memory, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51"
+          ]
+        },
+        {
+          "name": "BepuUtilities",
+          "identity": "BepuUtilities, Version=2.5.0.0, Culture=neutral, PublicKeyToken=a595ef937c270ac9",
+          "sha256": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68",
+          "typeCount": 91,
+          "references": [
+            "System.Runtime, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Numerics.Vectors, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Runtime.Intrinsics, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51",
+            "System.Threading, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Threading.Thread, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Collections, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Runtime.InteropServices, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+          ]
+        }
+      ]
+    }
+  }
+]

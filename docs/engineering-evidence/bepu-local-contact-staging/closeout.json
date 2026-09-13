@@ -1,0 +1,17 @@
+{
+  "Head": "3933d832b73511a8d08468b7b27a9b2820e2f8ee",
+  "Main": "3933d832b73511a8d08468b7b27a9b2820e2f8ee",
+  "OriginMain": "3933d832b73511a8d08468b7b27a9b2820e2f8ee",
+  "Branch": "codex/bepu-local-contact-staging",
+  "BaselineFilesCompared": 501,
+  "ChangedFiles": [
+    "src/NovaCore.Simulation/NovaCore.Simulation.csproj"
+  ],
+  "ExistingRefsUnchanged": true,
+  "Staged": [],
+  "RestoreExitCode": 1,
+  "BuildsAndTests": "NOT RUN - dependency admission failed",
+  "LeadJudgment": "ESCALATE TO PROJECT CONTROL",
+  "Classification": "BLOCKED",
+  "IncompleteLockDisposedFiles": 1
+}

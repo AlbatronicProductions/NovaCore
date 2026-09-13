@@ -1,0 +1,25 @@
+{
+  "disposedBytes": 0,
+  "historicalTrustRecovery": "Untouched",
+  "disposedFiles": 0,
+  "reviewedDisposable": [
+    {
+      "path": "E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045054-162",
+      "files": 499,
+      "bytes": 59133941.0
+    },
+    {
+      "path": "E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045157-600",
+      "files": 520,
+      "bytes": 65007035.0
+    },
+    {
+      "path": "E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566",
+      "files": 848,
+      "bytes": 90516270.0
+    }
+  ],
+  "remainingBytes": 214657246.0,
+  "cleanupStatus": "DEFERRED - automatic approval review rejected before execution: blocked by policy; not retried",
+  "remainingFiles": 1867.0
+}

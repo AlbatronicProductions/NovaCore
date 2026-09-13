@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "dependency": "BEPUphysics v2",
+  "version": "2.5.0-beta.29",
+  "qualifiedAtUtc": "2026-09-13T04:23:42Z",
+  "packages": [
+    {
+      "id": "BepuPhysics",
+      "version": "2.5.0-beta.29",
+      "packageFile": "packages/BepuPhysics.2.5.0-beta.29.nupkg",
+      "packageBytes": 442721,
+      "packageSha256": "D4A952F5417B53B08DE20D507C21745C9DD004E2529864098DFEC7A2CFF11E42",
+      "archiveSha512Base64": "P3A/P9K7JmEUkdqa4S8CuFqOm0QnOyv17T3nGbQdNNxyfW/Ac3jGjk5eT8JHhz2MVfQpamexsra8ZBZ6kLJ/WQ==",
+      "nugetContentHash": "+/MSXnRpK3dPWQmVKL+dfO05gXcbqDlOUmHIvy2sAUiLFuSOga7E9AfcEwMMHn76Rdlz9ZKWYE+WyJJLIqmGbg==",
+      "assemblyFile": "lib/BepuPhysics.dll",
+      "assemblyBytes": 880640,
+      "assemblySha256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7",
+      "assemblyIdentity": "BepuPhysics, Version=2.5.0.0, Culture=neutral, PublicKeyToken=9345ce38ee48a1cd",
+      "targetFramework": "net8.0",
+      "archiveEntry": "lib/net8.0/BepuPhysics.dll",
+      "officialUrl": "https://api.nuget.org/v3-flatcontainer/bepuphysics/2.5.0-beta.29/bepuphysics.2.5.0-beta.29.nupkg",
+      "catalogUrl": "https://api.nuget.org/v3/catalog0/data/2026.04.18.22.43.12/bepuphysics.2.5.0-beta.29.json",
+      "sourceCommit": "f73164bb3c9ca733eb3329f1f6b1cea4e216ece7",
+      "license": "Apache-2.0",
+      "signatureVerificationExitCode": 0,
+      "repositoryChainSha256": [
+        "1F4B311D9ACC115C8DC8018B5A49E00FCE6DA8E2855F9F014CA6F34570BC482D",
+        "46011EDE1C147EB2BC731A539B7C047B7EE93E48B9D3C3BA710CE132BBDFAC6B",
+        "552F7BDCF1A7AF9E6CE672017F4F12ABF77240C78E761AC203D1D9D20AC89988"
+      ],
+      "timestampChainSha256": [
+        "4AA03FA22CD75C84C55C938F828E676B9CAECAB33FE36D269AA334F146110A33",
+        "CA0B1554ECD901EA19DCAD8749E9F2648C8D6DFCEA1ADD9D2C2109415BB82CCD",
+        "552F7BDCF1A7AF9E6CE672017F4F12ABF77240C78E761AC203D1D9D20AC89988"
+      ]
+    },
+    {
+      "id": "BepuUtilities",
+      "version": "2.5.0-beta.29",
+      "packageFile": "packages/BepuUtilities.2.5.0-beta.29.nupkg",
+      "packageBytes": 149735,
+      "packageSha256": "8168EC4905F3AD5F923564557DAAB2BAB1100EE46B424CA5F1C97BD7684DE19F",
+      "archiveSha512Base64": "odWExp1HmQVoHpzKhrqPLeHpUKWVOORFy1qnkc9MRwOKgcBUe9f+F7Dp683LHXFizMYI4OEHKrjH+zQbPtYNBg==",
+      "nugetContentHash": "FF+QQpNQ3bP1PBzTp/rbRgIcSLNTbUjNU0KQAjl9aQ/zXGnwkh9oGcMFCO5Q/E9cMr0HOZlGkvhs4+SIgXFq5g==",
+      "assemblyFile": "lib/BepuUtilities.dll",
+      "assemblyBytes": 163328,
+      "assemblySha256": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68",
+      "assemblyIdentity": "BepuUtilities, Version=2.5.0.0, Culture=neutral, PublicKeyToken=a595ef937c270ac9",
+      "targetFramework": "net8.0",
+      "archiveEntry": "lib/net8.0/BepuUtilities.dll",
+      "officialUrl": "https://api.nuget.org/v3-flatcontainer/bepuutilities/2.5.0-beta.29/bepuutilities.2.5.0-beta.29.nupkg",
+      "catalogUrl": "https://api.nuget.org/v3/catalog0/data/2026.04.18.22.43.12/bepuutilities.2.5.0-beta.29.json",
+      "sourceCommit": "f73164bb3c9ca733eb3329f1f6b1cea4e216ece7",
+      "license": "Apache-2.0",
+      "signatureVerificationExitCode": 0,
+      "repositoryChainSha256": [
+        "1F4B311D9ACC115C8DC8018B5A49E00FCE6DA8E2855F9F014CA6F34570BC482D",
+        "46011EDE1C147EB2BC731A539B7C047B7EE93E48B9D3C3BA710CE132BBDFAC6B",
+        "552F7BDCF1A7AF9E6CE672017F4F12ABF77240C78E761AC203D1D9D20AC89988"
+      ],
+      "timestampChainSha256": [
+        "4AA03FA22CD75C84C55C938F828E676B9CAECAB33FE36D269AA334F146110A33",
+        "CA0B1554ECD901EA19DCAD8749E9F2648C8D6DFCEA1ADD9D2C2109415BB82CCD",
+        "552F7BDCF1A7AF9E6CE672017F4F12ABF77240C78E761AC203D1D9D20AC89988"
+      ]
+    }
+  ],
+  "qualification": {
+    "runUrl": "https://github.com/AlbatronicProductions/NovaCore/actions/runs/34737772989",
+    "jobId": "103672122554",
+    "workflowCommit": "15c9f7cc436fc7da249406e2faedee4425b0bc62",
+    "workflowSha256": "9B3154445B6A71B46CEC6F46472F07C0032DC914E4DE067817C0491D98289CF1",
+    "environment": "GitHub-hosted Ubuntu 24.04.5 x64, image 20260907.300.1; SDK 10.0.303, NuGet 7.6.0.0, runtime 10.0.11",
+    "admissionRecordSha256": "9D9FBC38D7034B38AAE9DC1CBE817BFD3C9620F81A15467259FA100624743B4B",
+    "reportSha256": "1852978FDAADFC0527E5303A49402A0AAF9D38126300C83C7522B551B897648F",
+    "linuxResultSha256": "80A03BD337A404DC6B37FC47985D5C2684FBEE02652E02617644FE8FAC31ED5A",
+    "result": "Repository signature and timestamp verification PASS; normal trust, no root import or bypass"
+  },
+  "license": {
+    "id": "Apache-2.0",
+    "file": "LICENSE.txt",
+    "sha256": "4CD13F7A31E98F51C4FB960A115E9A9AB9C42284CA5D5C9B5CCBCF322DE45BFD",
+    "sourceUrl": "https://raw.githubusercontent.com/bepu/bepuphysics2/f73164bb3c9ca733eb3329f1f6b1cea4e216ece7/LICENSE.md",
+    "copyright": "Copyright Bepu Entertainment LLC",
+    "notice": "Neither approved package contains a NOTICE file; inspect upstream source tree at the pinned commit before update"
+  },
+  "updatePolicy": "No floating or same-version replacement. Explicit version selection, official acquisition, independent healthy signature/timestamp verification, archive/content/DLL identities, closure/license review, regression and deployment validation, Project Control acceptance before banking. Review advisories and trust freshness for releases."
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "Name": "BepuPhysics",
+    "Version": "2.5.0-beta.29",
+    "Path": "E:\\Kitten Space Agency\\BepuPhysics.dll",
+    "PackageUrl": "https://api.nuget.org/v3-flatcontainer/bepuphysics/2.5.0-beta.29/bepuphysics.2.5.0-beta.29.nupkg",
+    "InstalledSHA256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7",
+    "PackageDLLSHA256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7",
+    "Identical": true,
+    "NuSpec": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<package xmlns=\"http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd\">\r\n  <metadata>\r\n    <id>BepuPhysics</id>\r\n    <version>2.5.0-beta.29</version>\r\n    <authors>Ross Nordby</authors>\r\n    <license type=\"expression\">Apache-2.0</license>\r\n    <licenseUrl>https://licenses.nuget.org/Apache-2.0</licenseUrl>\r\n    <icon>bepuphysicslogo256.png</icon>\r\n    <projectUrl>https://github.com/bepu/bepuphysics2</projectUrl>\r\n    <description>Speedy real time physics simulation library.</description>\r\n    <copyright>© Bepu Entertainment LLC</copyright>\r\n    <tags>physics 3d rigid body real time simulation</tags>\r\n    <repository type=\"git\" url=\"https://github.com/bepu/bepuphysics2\" commit=\"f73164bb3c9ca733eb3329f1f6b1cea4e216ece7\" />\r\n    <dependencies>\r\n      <group targetFramework=\"net8.0\">\r\n        <dependency id=\"BepuUtilities\" version=\"2.5.0-beta.29\" exclude=\"Build,Analyzers\" />\r\n      </group>\r\n    </dependencies>\r\n  </metadata>\r\n</package>"
+  },
+  {
+    "Name": "BepuUtilities",
+    "Version": "2.5.0-beta.29",
+    "Path": "E:\\Kitten Space Agency\\BepuUtilities.dll",
+    "PackageUrl": "https://api.nuget.org/v3-flatcontainer/bepuutilities/2.5.0-beta.29/bepuutilities.2.5.0-beta.29.nupkg",
+    "InstalledSHA256": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68",
+    "PackageDLLSHA256": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68",
+    "Identical": true,
+    "NuSpec": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<package xmlns=\"http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd\">\r\n  <metadata>\r\n    <id>BepuUtilities</id>\r\n    <version>2.5.0-beta.29</version>\r\n    <authors>Ross Nordby</authors>\r\n    <license type=\"expression\">Apache-2.0</license>\r\n    <licenseUrl>https://licenses.nuget.org/Apache-2.0</licenseUrl>\r\n    <icon>bepuphysicslogo256.png</icon>\r\n    <projectUrl>https://github.com/bepu/bepuphysics2</projectUrl>\r\n    <description>Supporting utilities library for BEPUphysics v2.</description>\r\n    <copyright>© Bepu Entertainment LLC</copyright>\r\n    <repository type=\"git\" url=\"https://github.com/bepu/bepuphysics2\" commit=\"f73164bb3c9ca733eb3329f1f6b1cea4e216ece7\" />\r\n    <dependencies>\r\n      <group targetFramework=\"net8.0\" />\r\n    </dependencies>\r\n  </metadata>\r\n</package>"
+  }
+]

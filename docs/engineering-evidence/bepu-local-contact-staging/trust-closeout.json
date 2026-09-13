@@ -1,0 +1,16 @@
+{
+  "Head": "3933d832b73511a8d08468b7b27a9b2820e2f8ee",
+  "Branch": "codex/bepu-local-contact-staging",
+  "RefsUnchanged": false,
+  "ChangedBaselineFiles": [
+    "src/NovaCore.Simulation/NovaCore.Simulation.csproj"
+  ],
+  "Staged": [],
+  "Trust": "UNRESOLVED",
+  "AdapterResumed": false,
+  "TemporaryFiles": 20,
+  "TemporaryBytes": 988898.0,
+  "Cleanup": "Automatic approval review rejected one log deletion: blocked by policy. No deletion or retry.",
+  "BranchRemoteTagRefsUnchanged": true,
+  "OtherRefChanges": "Only Codex-managed turn-diffs capture/checkpoint refs changed automatically between turns; no Git branch/tag/remote ref was changed by this work."
+}

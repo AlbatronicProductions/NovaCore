@@ -1,0 +1,160 @@
+{
+  "Observed": "2026-09-12T13:06:29.0406593-04:00",
+  "Purpose": "Read-only search for exact AuthRoot child-key default ACL; not repair input",
+  "Sources": [
+    {
+      "Source": "C:\\Windows\\WinSxS\\Manifests\\amd64_microsoft-windows-capi2-cryptext-reg_31bf3856ad364e35_10.0.26100.1_none_f75dee5da2654a41.manifest",
+      "SourceSHA256": "660626190D39663FA6C3C1E45F559C63749DA6900EB05DCCC79C5A2496A125C6",
+      "OutputSHA256": "795ED6A37E11E6BE6EA5838C97F8C625563075E98525F7320DFF08BC93C28C95",
+      "Bytes": 24620
+    },
+    {
+      "Source": "C:\\Windows\\WinSxS\\Manifests\\amd64_microsoft-windows-capi2-cryptdlg-reg_31bf3856ad364e35_10.0.26100.1_none_ebf720c3098b96f3.manifest",
+      "SourceSHA256": "0CFF88C14004DF739333509D3AA8B390A4C5B7BB4473920A95B45805BA203C1B",
+      "OutputSHA256": "29F2257E434B90CD206F49C00A984AC5039BBEEF90E810FC75122CDE2AA174CD",
+      "Bytes": 5381
+    },
+    {
+      "Source": "C:\\Windows\\WinSxS\\Manifests\\amd64_microsoft-windows-capi2-instrumentation_31bf3856ad364e35_10.0.26100.1_none_baa1b8a56ebe2a25.manifest",
+      "SourceSHA256": "18CC8795061E8716ED4745EC659B558FFD839F0BDBE6D7A78E8D5836107949B2",
+      "OutputSHA256": "4C551E89907AFD245F16C4E1241C900F6C04C5EB1740CCAC7624CF6F351617E1",
+      "Bytes": 12988
+    },
+    {
+      "Source": "C:\\Windows\\WinSxS\\Manifests\\amd64_microsoft-windows-capi2-wintrust-reg_31bf3856ad364e35_10.0.26100.1_none_85f00279fc19c88c.manifest",
+      "SourceSHA256": "CC91ABC12597D784FEFB4822CAE0BA7D7B5A38868B7186F1A56E37F4C902B29E",
+      "OutputSHA256": "7F30814EDC3B0BF0B1DCE340DA6AD7A3768B1F7A9D908AFE3B7F4B56AA96DF7E",
+      "Bytes": 65658
+    },
+    {
+      "Source": "C:\\Windows\\WinSxS\\Manifests\\amd64_microsoft-windows-capi2-weakcrypto_31bf3856ad364e35_10.0.26100.1_none_fd322872956da08e.manifest",
+      "SourceSHA256": "BD691A393774CCF063E233638B567D60EF22BBF01998CC43DDBF8AF36BB43801",
+      "OutputSHA256": "5F509EC0FFA3BA810351326D26279CAEAFEAE7939C30BE813BD68225E1218851",
+      "Bytes": 1901
+    },
+    {
+      "Source": "C:\\Windows\\WinSxS\\Manifests\\amd64_microsoft-windows-capi2_31bf3856ad364e35_10.0.26100.1_none_5521245a4d1bebf0.manifest",
+      "SourceSHA256": "774765FD0E2614BF86559FBA4398A328B116A37A964C99ACB711FA47ADA2761D",
+      "OutputSHA256": "610CD1044E7BFED12CDD4F3134EE4F4D6CB8CDEEEEC645CDCE94B9595210BA2D",
+      "Bytes": 818
+    },
+    {
+      "Source": "C:\\Windows\\WinSxS\\Manifests\\amd64_microsoft-windows-capi2-certs_31bf3856ad364e35_10.0.26100.1_none_bf826397fcb23416.manifest",
+      "SourceSHA256": "6F59CE3E10413A31707D9848380F6B08A1F33AD18F23D872E6909D8FBD0EA101",
+      "OutputSHA256": "566FB9C0362653BBA6C200F674D9C7DC3C49F291A92633042B28988782AF07F9",
+      "Bytes": 99451
+    },
+    {
+      "Source": "C:\\Windows\\WinSxS\\Manifests\\amd64_microsoft-windows-capi2-test-root_31bf3856ad364e35_10.0.26100.1_none_68644aed8bef633a.manifest",
+      "SourceSHA256": "F1F280EB4F5F937ACA94F27D1726E929BE079531E2FAEA97C01D29B98713DDFB",
+      "OutputSHA256": "B44383AD2F004F7C520AC101600839968F46090C1E40AC0B7C42D87A1CFB1056",
+      "Bytes": 557
+    },
+    {
+      "Source": "C:\\Windows\\WinSxS\\Manifests\\amd64_microsoft-windows-capi2-setreg_31bf3856ad364e35_10.0.26100.1_none_f12e7be06548f4d7.manifest",
+      "SourceSHA256": "969D43DA301FD719FE16CC75630A38311A663837D8E2F0489123C7E7228785A8",
+      "OutputSHA256": "5857ADBEA57F3D6965E87B5CDF8F54180A9CA8CAC175C5F4A54AC20AC908DFC9",
+      "Bytes": 1867
+    },
+    {
+      "Source": "C:\\Windows\\WinSxS\\Manifests\\amd64_microsoft-windows-capi2-cryptnet-reg_31bf3856ad364e35_10.0.26100.1_none_85f31101d295b13d.manifest",
+      "SourceSHA256": "D428C71FB46A6A5FCA22AB06F883ED2C028ECE31BCB75D9F08DDF195457CFBA3",
+      "OutputSHA256": "4EA5E2DA3C6F1BF091E59793CCDAE440623340E1F32F2666CE5DE45EC5A71399",
+      "Bytes": 2285
+    },
+    {
+      "Source": "C:\\Windows\\WinSxS\\Manifests\\amd64_microsoft-windows-cryptsvc-dll_31bf3856ad364e35_10.0.26100.1591_none_11bf948b4ad6252d.manifest",
+      "SourceSHA256": "D892DDE4A3CB8309E542CE35AAA388ACD11C6DB3A2AF7DC75DF7EC488062317C",
+      "OutputSHA256": "8538DFC7369FB6F4FED490765430CF34F6183E71922BCC37A9EF8089F1B30FF4",
+      "Bytes": 2360
+    },
+    {
+      "Source": "C:\\Windows\\WinSxS\\Manifests\\amd64_microsoft-windows-crypt32-dll_31bf3856ad364e35_10.0.26100.8972_none_f70273408dfce0e6.manifest",
+      "SourceSHA256": "8A90FBC9A9EB8212A0C7B3D41209E771D815E7ED5F208694D9EF74553021E62B",
+      "OutputSHA256": "4145B88CA95BAC02816049A88E39BA86452639CB07BC9DAD6231E2A6B38604E2",
+      "Bytes": 3347
+    },
+    {
+      "Source": "C:\\Windows\\WinSxS\\Manifests\\amd64_microsoft-windows-cryptsvc-dll_31bf3856ad364e35_10.0.26100.9278_none_11dd73734ac03b4b.manifest",
+      "SourceSHA256": "3A05122BA7AAADA4D3772D0B103CAB63C755BA36F2EC2842A8853FECFF16C06F",
+      "OutputSHA256": "53721E7B209F9CC1F20A224A2A02B5E3EDD5B5EF40250FFB3C515B5C3F516912",
+      "Bytes": 2360
+    },
+    {
+      "Source": "C:\\Windows\\WinSxS\\Manifests\\amd64_microsoft-windows-crypt32-dll_31bf3856ad364e35_10.0.26100.9278_none_f74d9bea8dc4b43c.manifest",
+      "SourceSHA256": "26001023A74E5E5965D66E349D44F7C8BA3FD348FDC4F00DAEBA7C4E191F9259",
+      "OutputSHA256": "145257D5D751CB8BE25BF6DB0F64E134D56A08CABE6EE3170F66AEB7B7D52635",
+      "Bytes": 3347
+    },
+    {
+      "Source": "C:\\Windows\\WinSxS\\Manifests\\amd64_microsoft-windows-cryptography_31bf3856ad364e35_10.0.26100.1_none_e6867e6028abce95.manifest",
+      "SourceSHA256": "40B4DAB92253EAA7953C039550256CC18B338DB9B17EC9ABC5C7A1CCE6B75E6F",
+      "OutputSHA256": "75FD45019EC46801239EA7DF1166E3A82E484D2B8FB60319F116707CE0A974C6",
+      "Bytes": 8394
+    },
+    {
+      "Source": "C:\\Windows\\WinSxS\\Manifests\\amd64_microsoft-windows-cryptsvc-dll_31bf3856ad364e35_10.0.26100.8972_none_11924ac94af867f5.manifest",
+      "SourceSHA256": "3345D32519047710396BFA29415A3B41CBE2F3572DB536EDD1289BA87162BE37",
+      "OutputSHA256": "2A886A4D2E4D901A39E4C240CEEBF69C9B7CA27E8DDEEA4E30AC51C791ECA92D",
+      "Bytes": 2360
+    },
+    {
+      "Source": "C:\\Windows\\WinSxS\\Manifests\\amd64_microsoft-windows-d..on-certificatestore_31bf3856ad364e35_10.0.26100.1_none_b6d828a178994d4f.manifest",
+      "SourceSHA256": "1EC9F3A42CB580546A39284D554B5FA4B842E2DAEC50A5CC4B1B82B7E71D7F1E",
+      "OutputSHA256": "D0D8E2D2BC4C0688A1DAB47E4854341A6DD8FDB8E0B265CE461BC574D95F6235",
+      "Bytes": 11342
+    },
+    {
+      "Source": "C:\\Windows\\WinSxS\\Manifests\\amd64_microsoft-windows-d..trustedcertificates_31bf3856ad364e35_10.0.26100.1_none_e21fc90613c655cc.manifest",
+      "SourceSHA256": "547538F890AA1A604122C34CD551C4B154FCBCD3F3F19B9C40E4289C9BC00EA4",
+      "OutputSHA256": "410FA34B3B9BF2673C75B559840C045E4A163455057335D6EA88ED799266FB24",
+      "Bytes": 16224
+    },
+    {
+      "Source": "C:\\Windows\\WinSxS\\Manifests\\amd64_microsoft-windows-crypt32-dll_31bf3856ad364e35_10.0.26100.1591_none_f72fbd028dda9e1e.manifest",
+      "SourceSHA256": "8F99D921B8346A655C8CFBC7EA2893B79B5D5627358B0EFA1FFA79BC49B07DAF",
+      "OutputSHA256": "39965A4C4E08EDC0116299184F488927CF100D906D1388136A556CB4DAACDC1B",
+      "Bytes": 3349
+    },
+    {
+      "Source": "C:\\Windows\\WinSxS\\Manifests\\amd64_microsoft-windows-sf-capi2_31bf3856ad364e35_10.0.26100.1_none_ab5b2e97e7a4c6fa.manifest",
+      "SourceSHA256": "A0C3296B2AC0FC5D84C6DBD53CC5A1D46A083BF550D2E72F1CD617DE96CB6D2F",
+      "OutputSHA256": "668759296EFF83D65EA32E4B6D62BEC6C772FECDA4CE601C90D4956A1696AA5D",
+      "Bytes": 4733
+    }
+  ],
+  "XMLValidCount": 20,
+  "AuthRootRegistryDefinitions": [
+    {
+      "Manifest": "C:\\Windows\\WinSxS\\Manifests\\amd64_microsoft-windows-capi2-certs_31bf3856ad364e35_10.0.26100.1_none_bf826397fcb23416.manifest",
+      "SourceSHA256": "6F59CE3E10413A31707D9848380F6B08A1F33AD18F23D872E6909D8FBD0EA101",
+      "DecodedSHA256": "566FB9C0362653BBA6C200F674D9C7DC3C49F291A92633042B28988782AF07F9",
+      "Key": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\SystemCertificates\\AuthRoot",
+      "DescriptorName": "DACL-AuthRoot",
+      "SDDL": "D:AI(A;CIOI;GA;;;S-1-5-80-242729624-280608522-2219052887-3187409060-2225943459)",
+      "OperationHint": "replace"
+    },
+    {
+      "Manifest": "C:\\Windows\\WinSxS\\Manifests\\amd64_microsoft-windows-capi2-certs_31bf3856ad364e35_10.0.26100.1_none_bf826397fcb23416.manifest",
+      "SourceSHA256": "6F59CE3E10413A31707D9848380F6B08A1F33AD18F23D872E6909D8FBD0EA101",
+      "DecodedSHA256": "566FB9C0362653BBA6C200F674D9C7DC3C49F291A92633042B28988782AF07F9",
+      "Key": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\SystemCertificates\\AuthRoot\\Certificates",
+      "DescriptorName": null,
+      "SDDL": null,
+      "OperationHint": null
+    },
+    {
+      "Manifest": "C:\\Windows\\WinSxS\\Manifests\\amd64_microsoft-windows-sf-capi2_31bf3856ad364e35_10.0.26100.1_none_ab5b2e97e7a4c6fa.manifest",
+      "SourceSHA256": "A0C3296B2AC0FC5D84C6DBD53CC5A1D46A083BF550D2E72F1CD617DE96CB6D2F",
+      "DecodedSHA256": "668759296EFF83D65EA32E4B6D62BEC6C772FECDA4CE601C90D4956A1696AA5D",
+      "Key": "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\SystemCertificates\\AuthRoot\\",
+      "DescriptorName": "CRYPTSVC_SDDL",
+      "SDDL": "D:AI(A;CIOI;GA;;;S-1-5-80-242729624-280608522-2219052887-3187409060-2225943459)",
+      "OperationHint": "replace"
+    }
+  ],
+  "Finding": "CAPI2-certs and SF-CAPI2 define the same inheritable CryptSvc GENERIC_ALL ACE on the AuthRoot parent. CAPI2-certs names Certificates without a local descriptor. Neither defines AuthRoot CRLs or CTLs. No exact complete default descriptor for either protected child was qualified.",
+  "Qualification": "Individual manifest catalog binding was not verified. Windows directory location, assembly publicKeyToken, and signed decoding DLLs are not substituted for that verification. Parent-only declarations are insufficient even if authenticated.",
+  "Decode": "DCM1 header removed; PA30 decoded with local MSDelta ApplyDeltaB and dictionary resource type 614 from installed servicing-stack wcp.dll, loaded as data/image resource. No Windows file was changed.",
+  "OtherBaselineSearch": "Official Microsoft store/CTL documentation supplies location/access semantics but no exact child ACL. defltbase.inf/Windows INF search found no AuthRoot default. No verified healthy equivalent 25H2 comparison machine or VM was available; common local VM tooling was absent, and Hyper-V data directory could not be read non-elevated."
+}

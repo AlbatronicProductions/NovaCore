@@ -1,0 +1,66 @@
+{
+  "mergeCommit": "13692c61bdb3c4721b8dc2ecba4d88b903c09b9c",
+  "jobs": [
+    {
+      "id": 103679269867,
+      "name": "dependency (ubuntu-24.04, Debug)",
+      "runner_name": "GitHub Actions 1000000125",
+      "runner_group_name": "GitHub Actions",
+      "labels": [
+        "ubuntu-24.04"
+      ],
+      "started_at": "2026-09-13T05:31:12Z",
+      "completed_at": "2026-09-13T05:31:50Z",
+      "conclusion": "success"
+    },
+    {
+      "id": 103679269911,
+      "name": "dependency (windows-latest, Debug)",
+      "runner_name": "GitHub Actions 1000000126",
+      "runner_group_name": "GitHub Actions",
+      "labels": [
+        "windows-latest"
+      ],
+      "started_at": "2026-09-13T05:31:14Z",
+      "completed_at": "2026-09-13T05:32:19Z",
+      "conclusion": "success"
+    },
+    {
+      "id": 103679269915,
+      "name": "dependency (windows-latest, Release)",
+      "runner_name": "GitHub Actions 1000000127",
+      "runner_group_name": "GitHub Actions",
+      "labels": [
+        "windows-latest"
+      ],
+      "started_at": "2026-09-13T05:31:12Z",
+      "completed_at": "2026-09-13T05:31:59Z",
+      "conclusion": "success"
+    },
+    {
+      "id": 103679269916,
+      "name": "dependency (ubuntu-24.04, Release)",
+      "runner_name": "GitHub Actions 1000000128",
+      "runner_group_name": "GitHub Actions",
+      "labels": [
+        "ubuntu-24.04"
+      ],
+      "started_at": "2026-09-13T05:31:12Z",
+      "completed_at": "2026-09-13T05:31:46Z",
+      "conclusion": "success"
+    }
+  ],
+  "run": {
+    "id": 34740497443,
+    "html_url": "https://github.com/AlbatronicProductions/NovaCore/actions/runs/34740497443",
+    "head_sha": "fbeec05c78359189b25c33109d332f5b8c6474d5",
+    "event": "pull_request",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-09-13T05:31:10Z",
+    "run_started_at": "2026-09-13T05:31:10Z",
+    "updated_at": "2026-09-13T05:32:19Z",
+    "run_attempt": 1
+  },
+  "mergeTree": "5ab1968fa38e2a116cb5d82a6cf1f3bc9c51db99"
+}

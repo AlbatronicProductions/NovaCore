@@ -1,0 +1,146 @@
+{
+  "Observed": "2026-09-12T13:22:52.1743677-04:00",
+  "CurrentSource": "phase3-current-host.json",
+  "CurrentHostSDDL": "O:SYG:SYD:PAI(A;CIIO;KA;;;CO)(A;CI;KA;;;SY)(A;CI;KA;;;BA)(A;CI;KR;;;BU)(A;CI;KR;;;AC)(A;CI;KR;;;S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681)",
+  "CurrentFields": {
+    "OwnerSID": "S-1-5-18",
+    "GroupSID": "S-1-5-18",
+    "Protected": true,
+    "Canonical": true,
+    "ControlFlags": "DiscretionaryAclPresent, DiscretionaryAclAutoInherited, DiscretionaryAclProtected, SelfRelative",
+    "ACEs": [
+      {
+        "Order": 0,
+        "Type": "AccessAllowed",
+        "SID": "S-1-3-0",
+        "AccessMask": "0x000F003F",
+        "AceFlags": "ContainerInherit, InheritOnly",
+        "Inherited": false,
+        "InheritanceFlags": "ContainerInherit",
+        "PropagationFlags": "InheritOnly"
+      },
+      {
+        "Order": 1,
+        "Type": "AccessAllowed",
+        "SID": "S-1-5-18",
+        "AccessMask": "0x000F003F",
+        "AceFlags": "ContainerInherit",
+        "Inherited": false,
+        "InheritanceFlags": "ContainerInherit",
+        "PropagationFlags": "None"
+      },
+      {
+        "Order": 2,
+        "Type": "AccessAllowed",
+        "SID": "S-1-5-32-544",
+        "AccessMask": "0x000F003F",
+        "AceFlags": "ContainerInherit",
+        "Inherited": false,
+        "InheritanceFlags": "ContainerInherit",
+        "PropagationFlags": "None"
+      },
+      {
+        "Order": 3,
+        "Type": "AccessAllowed",
+        "SID": "S-1-5-32-545",
+        "AccessMask": "0x00020019",
+        "AceFlags": "ContainerInherit",
+        "Inherited": false,
+        "InheritanceFlags": "ContainerInherit",
+        "PropagationFlags": "None"
+      },
+      {
+        "Order": 4,
+        "Type": "AccessAllowed",
+        "SID": "S-1-15-2-1",
+        "AccessMask": "0x00020019",
+        "AceFlags": "ContainerInherit",
+        "Inherited": false,
+        "InheritanceFlags": "ContainerInherit",
+        "PropagationFlags": "None"
+      },
+      {
+        "Order": 5,
+        "Type": "AccessAllowed",
+        "SID": "S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681",
+        "AccessMask": "0x00020019",
+        "AceFlags": "ContainerInherit",
+        "Inherited": false,
+        "InheritanceFlags": "ContainerInherit",
+        "PropagationFlags": "None"
+      }
+    ]
+  },
+  "PriorPhaseACLChanges": [],
+  "HealthyBaselines": [],
+  "HealthyCRLsSDDL": null,
+  "DeltaStatus": "NOT COMPUTABLE: no qualified healthy baseline",
+  "MissingOrChangedACEs": null,
+  "OwnerDifference": null,
+  "GroupDifference": null,
+  "ProtectionDifference": null,
+  "OrderingDifference": null,
+  "ServiceTokenMembership": "UNAVAILABLE: non-elevated OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION) returned error 5",
+  "UserAvailability": "Project Control reported: No independent baseline is available",
+  "LocalScreening": {
+    "Features": [
+      {
+        "Name": "VirtualMachinePlatform",
+        "InstallState": 1
+      },
+      {
+        "Name": "HypervisorPlatform",
+        "InstallState": 2
+      },
+      {
+        "Name": "Microsoft-Hyper-V-All",
+        "InstallState": 2
+      },
+      {
+        "Name": "Microsoft-Hyper-V",
+        "InstallState": 2
+      },
+      {
+        "Name": "Microsoft-Hyper-V-Tools-All",
+        "InstallState": 2
+      },
+      {
+        "Name": "Microsoft-Hyper-V-Management-PowerShell",
+        "InstallState": 2
+      },
+      {
+        "Name": "Microsoft-Hyper-V-Hypervisor",
+        "InstallState": 2
+      },
+      {
+        "Name": "Microsoft-Hyper-V-Services",
+        "InstallState": 2
+      },
+      {
+        "Name": "Microsoft-Hyper-V-Management-Clients",
+        "InstallState": 2
+      },
+      {
+        "Name": "Containers-DisposableClientVM",
+        "InstallState": 2
+      }
+    ],
+    "InstallStateMeaning": "1 enabled; 2 disabled; 3 absent; 4 unknown",
+    "SandboxExecutablePresent": false,
+    "SandboxPackages": [],
+    "VMCommands": [],
+    "MediaSearchLocations": [
+      "E:\\",
+      "C:\\Users\\Tyler\\Downloads",
+      "C:\\Users\\Tyler\\Documents"
+    ],
+    "MediaFound": [],
+    "SearchLimit": "Top-level reviewed directories only; not a claim that no image or VM exists elsewhere",
+    "FreshVM": "NOT PROVISIONED: no existing configured Windows VM environment found; installing/enabling a platform and potential host reboot requires a separately planned provisioning step"
+  },
+  "RootCauseDecision": "E. ANOTHER PROVEN RESULT: no healthy baseline acquired; expected child ACL and repair delta remain unqualified",
+  "RepairQualification": "UNQUALIFIED",
+  "ProposedMutation": null,
+  "ProposedRollback": null,
+  "FinalClassification": "AUTHROOT ACL BASELINE — STILL UNQUALIFIED"
+}

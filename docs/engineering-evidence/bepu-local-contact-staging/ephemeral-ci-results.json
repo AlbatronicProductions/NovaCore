@@ -1,0 +1,168 @@
+{
+  "baseline": "3933d832b73511a8d08468b7b27a9b2820e2f8ee",
+  "branch": "codex/validation-bepu-binary-consumption-ci-20260913",
+  "commit": "2063928ef89ce79b12bf6f1f1184619c59ee8547",
+  "tree": "dab7526e517339046ca07e017253b660c6d96806",
+  "inputs": [
+    {
+      "path": ".gitattributes",
+      "sha256": "4689AF3355E8453DDF20AE8D88214F23EE0A7F857AD5A9299F79A8E9564EB024",
+      "bytes": 787,
+      "blob": "08a7cfff845ab3381e768dffb80aae5e0af80c5a"
+    },
+    {
+      "path": "NovaCore.sln",
+      "sha256": "A38D19C9E699541522A4E9C9A8E033E0CAFA2C7F827043C18585CE634BF76E99",
+      "bytes": 11521,
+      "blob": "d1c0c9b7d78887a319eb9d30e97d168c640264a9"
+    },
+    {
+      "path": "Directory.Build.targets",
+      "sha256": "57165F94B025B59A1524F31F2D39C3FD454199732492D3716B93935A4D857E0F",
+      "bytes": 166,
+      "blob": "1cbf11677bc2b701015257f13c32e073e02d682f"
+    },
+    {
+      "path": "src/NovaCore.Simulation/NovaCore.Simulation.csproj",
+      "sha256": "2599019296A0F5E0562FF0832C0128F8EE23917BBDD96CA1E32AFFE56D352FBD",
+      "bytes": 474,
+      "blob": "d7f9682010a95bcdf9abf74c8bd628efbebf89d2"
+    },
+    {
+      "path": ".github/workflows/verified-bepu.yml",
+      "sha256": "0958D384A7B372CC68DF39201F9D03524182C451D3F21C382C3D0FB34298F718",
+      "bytes": 1900,
+      "blob": "4cdf4aa59f977769553dd788345231c55c0027cb"
+    },
+    {
+      "path": "tests/NovaCore.BepuDependency.Tests/Program.cs",
+      "sha256": "814C9AB537FA25D074840591B33530C173159324FBDAA93A6888E77C3006C60D",
+      "bytes": 2657,
+      "blob": "7e1f17806185b18aebc7fc50bc7c178d6508e8dd"
+    },
+    {
+      "path": "tests/NovaCore.BepuDependency.Tests/NovaCore.BepuDependency.Tests.csproj",
+      "sha256": "BF9F2946765C98D60E6F8E5D82D29CF3C45E1DA7A833803C622DC784CE4A0A5E",
+      "bytes": 220,
+      "blob": "0b1cc15138333109f51d1cf8948466d0e2e967b8"
+    },
+    {
+      "path": "external/bepu/2.5.0-beta.29/LICENSE.txt",
+      "sha256": "4CD13F7A31E98F51C4FB960A115E9A9AB9C42284CA5D5C9B5CCBCF322DE45BFD",
+      "bytes": 10140,
+      "blob": "895657b9a966424100865826cff85a6a1b4c8bb9"
+    },
+    {
+      "path": "external/bepu/2.5.0-beta.29/lib/BepuPhysics.dll",
+      "sha256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7",
+      "bytes": 880640,
+      "blob": "5955112679d802b5090a8d5ef998770e93751a20"
+    },
+    {
+      "path": "external/bepu/2.5.0-beta.29/lib/BepuUtilities.dll",
+      "sha256": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68",
+      "bytes": 163328,
+      "blob": "58aca00b87e6a324e5ab647b9e8604b81add3ab1"
+    },
+    {
+      "path": "external/bepu/2.5.0-beta.29/manifest/bepu-2.5.0-beta.29.json",
+      "sha256": "C76F2DE75DAC81C8695109977E1F8A4DCCAFF29DA0BB96884C46C0B33362240E",
+      "bytes": 5426,
+      "blob": "22864af89051d897061b9db2cf9c9c4038205372"
+    },
+    {
+      "path": "external/bepu/2.5.0-beta.29/packages/BepuPhysics.2.5.0-beta.29.nupkg",
+      "sha256": "D4A952F5417B53B08DE20D507C21745C9DD004E2529864098DFEC7A2CFF11E42",
+      "bytes": 442721,
+      "blob": "ee42c07c82eb88060cf74522eeed04e0baabaedf"
+    },
+    {
+      "path": "external/bepu/2.5.0-beta.29/packages/BepuUtilities.2.5.0-beta.29.nupkg",
+      "sha256": "8168EC4905F3AD5F923564557DAAB2BAB1100EE46B424CA5F1C97BD7684DE19F",
+      "bytes": 149735,
+      "blob": "80135fb68f2b512f1728611f50167d24ce2165f6"
+    },
+    {
+      "path": "external/bepu/ATTRIBUTION.txt",
+      "sha256": "FF40F4AE2A543AC6B2FFFD693210E9753B53937AC6E18A4FC8B7B131E5E2EDF3",
+      "bytes": 374,
+      "blob": "50e86453e4f364b2cf87c94c285fa8aa3f7aac45"
+    },
+    {
+      "path": "external/bepu/Bepu.references.props",
+      "sha256": "8F1E02C0456715149B378D19E05361FE394A9B9D307B650061BDEFAC9CB889EE",
+      "bytes": 1169,
+      "blob": "1117cce444386fa8b7a6c2d941c78bd03e9bc8fa"
+    },
+    {
+      "path": "external/bepu/Bepu.targets",
+      "sha256": "CA31C347A3D465CCEB5FF10E549BEFE2FBF1037B8C57E1034073C484CE47EB8F",
+      "bytes": 5922,
+      "blob": "8022046fc716a441e997796de1dfaca07ee7649c"
+    },
+    {
+      "path": "external/bepu/README.md",
+      "sha256": "B35D7185970B7B12495D4F650AA59124D2E910BB9DBB0DC98B90F2FEC8550C14",
+      "bytes": 4720,
+      "blob": "5ec3d799b4ab7c8c525b062c49d9558cb10e237c"
+    }
+  ],
+  "snapshotEquivalence": "PASS",
+  "diffStat": " .gitattributes                                     |   5 +\n .github/workflows/verified-bepu.yml                |  47 ++++\n Directory.Build.targets                            |   4 +\n NovaCore.sln                                       | 270 +++++++++++----------\n external/bepu/2.5.0-beta.29/LICENSE.txt            | 174 +++++++++++++\n external/bepu/2.5.0-beta.29/lib/BepuPhysics.dll    | Bin 0 -> 880640 bytes\n external/bepu/2.5.0-beta.29/lib/BepuUtilities.dll  | Bin 0 -> 163328 bytes\n .../2.5.0-beta.29/manifest/bepu-2.5.0-beta.29.json |  88 +++++++\n .../packages/BepuPhysics.2.5.0-beta.29.nupkg       | Bin 0 -> 442721 bytes\n .../packages/BepuUtilities.2.5.0-beta.29.nupkg     | Bin 0 -> 149735 bytes\n external/bepu/ATTRIBUTION.txt                      |   6 +\n external/bepu/Bepu.references.props                |  19 ++\n external/bepu/Bepu.targets                         |  70 ++++++\n external/bepu/README.md                            |  79 ++++++\n src/NovaCore.Simulation/NovaCore.Simulation.csproj |   9 +-\n .../NovaCore.BepuDependency.Tests.csproj           |   4 +\n tests/NovaCore.BepuDependency.Tests/Program.cs     |  44 ++++\n 17 files changed, 686 insertions(+), 133 deletions(-)\n",
+  "originalFilesRechecked": 1812,
+  "originalFilesChanged": [],
+  "run": {
+    "id": 34739828038,
+    "html_url": "https://github.com/AlbatronicProductions/NovaCore/actions/runs/34739828038",
+    "event": "push",
+    "head_sha": "2063928ef89ce79b12bf6f1f1184619c59ee8547",
+    "status": "completed",
+    "conclusion": "failure",
+    "created_at": "2026-09-13T05:14:58Z",
+    "updated_at": "2026-09-13T05:14:58Z",
+    "run_started_at": "2026-09-13T05:14:58Z",
+    "run_attempt": 1
+  },
+  "jobs": {
+    "total_count": 0,
+    "jobs": []
+  },
+  "runner": "UNAVAILABLE - rejected before job scheduling",
+  "failureClass": "A. workflow/mechanical transport failure",
+  "error": "(Line: 24, Col: 23): Unrecognized named-value: 'runner'. Located at position 1 within expression: runner.temp",
+  "remoteBranchRetired": true,
+  "localBranchRetired": true,
+  "temporaryWorktreeCreated": false,
+  "draftPR": {
+    "number": 1,
+    "url": "https://github.com/AlbatronicProductions/NovaCore/pull/1",
+    "state": "closed",
+    "merged": false
+  },
+  "newHostedRuns": 1,
+  "cleanup": "CLEANUP REQUIRES MANUAL PROJECT CONTROL EXECUTION",
+  "solver": "NOT STARTED",
+  "remainingTemporaryFiles": [
+    {
+      "path": "E:\\NovaCore\\build\\bepu-hosted-qualification\\snapshot.index",
+      "bytes": 245622
+    },
+    {
+      "path": "E:\\NovaCore\\build\\bepu-hosted-qualification\\snapshot.json",
+      "bytes": 267528
+    },
+    {
+      "path": "E:\\NovaCore\\build\\bepu-hosted-qualification\\hosted-response.json",
+      "bytes": 12237
+    },
+    {
+      "path": "E:\\NovaCore\\build\\bepu-hosted-qualification\\create_snapshot.py",
+      "bytes": 3141
+    },
+    {
+      "path": "E:\\NovaCore\\build\\bepu-hosted-qualification\\capture_result.py",
+      "bytes": 2087
+    }
+  ],
+  "oldThreeScratchDirectoriesAbsent": true
+}

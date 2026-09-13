@@ -1,0 +1,507 @@
+{
+  "branch": "codex/bepu-local-contact-staging",
+  "head": "3933d832b73511a8d08468b7b27a9b2820e2f8ee",
+  "main": "3933d832b73511a8d08468b7b27a9b2820e2f8ee",
+  "originMain": "3933d832b73511a8d08468b7b27a9b2820e2f8ee",
+  "sdk": "10.0.303",
+  "runtime": "10.0.12",
+  "externalEvidence": [
+    {
+      "file": "REPORT.md",
+      "sha256": "1852978FDAADFC0527E5303A49402A0AAF9D38126300C83C7522B551B897648F"
+    },
+    {
+      "file": "admission-record.json",
+      "sha256": "9D9FBC38D7034B38AAE9DC1CBE817BFD3C9620F81A15467259FA100624743B4B"
+    },
+    {
+      "file": "linux-result.json",
+      "sha256": "80A03BD337A404DC6B37FC47985D5C2684FBEE02652E02617644FE8FAC31ED5A"
+    }
+  ],
+  "independentIdentity": "PASS",
+  "artifacts": [
+    {
+      "sha256": "FF40F4AE2A543AC6B2FFFD693210E9753B53937AC6E18A4FC8B7B131E5E2EDF3",
+      "bytes": 374,
+      "path": "external/bepu/ATTRIBUTION.txt"
+    },
+    {
+      "sha256": "8F1E02C0456715149B378D19E05361FE394A9B9D307B650061BDEFAC9CB889EE",
+      "bytes": 1169,
+      "path": "external/bepu/Bepu.references.props"
+    },
+    {
+      "sha256": "CA31C347A3D465CCEB5FF10E549BEFE2FBF1037B8C57E1034073C484CE47EB8F",
+      "bytes": 5922,
+      "path": "external/bepu/Bepu.targets"
+    },
+    {
+      "sha256": "B35D7185970B7B12495D4F650AA59124D2E910BB9DBB0DC98B90F2FEC8550C14",
+      "bytes": 4720,
+      "path": "external/bepu/README.md"
+    },
+    {
+      "sha256": "4CD13F7A31E98F51C4FB960A115E9A9AB9C42284CA5D5C9B5CCBCF322DE45BFD",
+      "bytes": 10140,
+      "path": "external/bepu/2.5.0-beta.29/LICENSE.txt"
+    },
+    {
+      "sha256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7",
+      "bytes": 880640,
+      "path": "external/bepu/2.5.0-beta.29/lib/BepuPhysics.dll"
+    },
+    {
+      "sha256": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68",
+      "bytes": 163328,
+      "path": "external/bepu/2.5.0-beta.29/lib/BepuUtilities.dll"
+    },
+    {
+      "sha256": "C76F2DE75DAC81C8695109977E1F8A4DCCAFF29DA0BB96884C46C0B33362240E",
+      "bytes": 5426,
+      "path": "external/bepu/2.5.0-beta.29/manifest/bepu-2.5.0-beta.29.json"
+    },
+    {
+      "sha256": "D4A952F5417B53B08DE20D507C21745C9DD004E2529864098DFEC7A2CFF11E42",
+      "bytes": 442721,
+      "path": "external/bepu/2.5.0-beta.29/packages/BepuPhysics.2.5.0-beta.29.nupkg"
+    },
+    {
+      "sha256": "8168EC4905F3AD5F923564557DAAB2BAB1100EE46B424CA5F1C97BD7684DE19F",
+      "bytes": 149735,
+      "path": "external/bepu/2.5.0-beta.29/packages/BepuUtilities.2.5.0-beta.29.nupkg"
+    }
+  ],
+  "boundaryRuns": [
+    {
+      "name": "clean-empty-debug",
+      "exit": 0,
+      "expectedFailure": false,
+      "seconds": 1.9100893,
+      "witness": []
+    },
+    {
+      "name": "empty-debug-load",
+      "exit": 0,
+      "expectedFailure": false,
+      "seconds": 0.5666698,
+      "witness": []
+    },
+    {
+      "name": "hostile-clean-release",
+      "exit": 0,
+      "expectedFailure": false,
+      "seconds": 1.7617967,
+      "witness": []
+    },
+    {
+      "name": "hostile-release-load",
+      "exit": 0,
+      "expectedFailure": false,
+      "seconds": 0.5666454,
+      "witness": []
+    },
+    {
+      "name": "publish",
+      "exit": 0,
+      "expectedFailure": false,
+      "seconds": 0.6263776,
+      "witness": []
+    },
+    {
+      "name": "published-load",
+      "exit": 0,
+      "expectedFailure": false,
+      "seconds": 0.0890444,
+      "witness": []
+    },
+    {
+      "name": "indirect-build",
+      "exit": 0,
+      "expectedFailure": false,
+      "seconds": 1.719833,
+      "witness": []
+    },
+    {
+      "name": "indirect-load",
+      "exit": 0,
+      "expectedFailure": false,
+      "seconds": 0.5953127,
+      "witness": []
+    },
+    {
+      "name": "tamper-BepuPhysics.dll",
+      "exit": 1,
+      "expectedFailure": true,
+      "seconds": 0.5503139,
+      "witness": [
+        "E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\Bepu.targets(26,5): error MSB3952: File hash mismatch. Expected E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\2.5.0-beta.29/lib/BepuPhysics.dll to have a SHA256 file hash of 77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7, but it was 4E28EAA4497B9618FE39F7A62AD2F86A77EE0100F03BA7EF409DB8C32A82BA61. [E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\src\\NovaCore.EphemerisFormat\\NovaCore.EphemerisFormat.csproj]",
+        "E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\Bepu.targets(26,5): error MSB3952: File hash mismatch. Expected E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\2.5.0-beta.29/lib/BepuPhysics.dll to have a SHA256 file hash of 77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7, but it was 4E28EAA4497B9618FE39F7A62AD2F86A77EE0100F03BA7EF409DB8C32A82BA61. [E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\src\\NovaCore.Core\\NovaCore.Core.csproj]"
+      ]
+    },
+    {
+      "name": "tamper-BepuUtilities.dll",
+      "exit": 1,
+      "expectedFailure": true,
+      "seconds": 0.5320868,
+      "witness": [
+        "E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\Bepu.targets(27,5): error MSB3952: File hash mismatch. Expected E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\2.5.0-beta.29/lib/BepuUtilities.dll to have a SHA256 file hash of E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68, but it was B857F78BFC3FF0617E2E7C2D00FF0F0A7AC5D784324F29AFD7AB6113AD09AE5F. [E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\src\\NovaCore.Core\\NovaCore.Core.csproj]",
+        "E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\Bepu.targets(27,5): error MSB3952: File hash mismatch. Expected E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\2.5.0-beta.29/lib/BepuUtilities.dll to have a SHA256 file hash of E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68, but it was B857F78BFC3FF0617E2E7C2D00FF0F0A7AC5D784324F29AFD7AB6113AD09AE5F. [E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\src\\NovaCore.EphemerisFormat\\NovaCore.EphemerisFormat.csproj]"
+      ]
+    },
+    {
+      "name": "tamper-bepu-2.5.0-beta.29.json",
+      "exit": 1,
+      "expectedFailure": true,
+      "seconds": 0.516436,
+      "witness": [
+        "E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\Bepu.targets(22,5): error MSB3952: File hash mismatch. Expected E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\2.5.0-beta.29/manifest/bepu-2.5.0-beta.29.json to have a SHA256 file hash of C76F2DE75DAC81C8695109977E1F8A4DCCAFF29DA0BB96884C46C0B33362240E, but it was 08336DB308BF496142AC2180E604A77AAE9F5CB65A4CACDD1CD3F2F4676FC803. [E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\src\\NovaCore.Core\\NovaCore.Core.csproj]",
+        "E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\Bepu.targets(22,5): error MSB3952: File hash mismatch. Expected E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\2.5.0-beta.29/manifest/bepu-2.5.0-beta.29.json to have a SHA256 file hash of C76F2DE75DAC81C8695109977E1F8A4DCCAFF29DA0BB96884C46C0B33362240E, but it was 08336DB308BF496142AC2180E604A77AAE9F5CB65A4CACDD1CD3F2F4676FC803. [E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\src\\NovaCore.EphemerisFormat\\NovaCore.EphemerisFormat.csproj]"
+      ]
+    },
+    {
+      "name": "tamper-BepuPhysics.2.5.0-beta.29.nupkg",
+      "exit": 1,
+      "expectedFailure": true,
+      "seconds": 0.3701789,
+      "witness": [
+        "E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\Bepu.targets(30,5): error MSB3952: File hash mismatch. Expected E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\2.5.0-beta.29/packages/BepuPhysics.2.5.0-beta.29.nupkg to have a SHA256 file hash of D4A952F5417B53B08DE20D507C21745C9DD004E2529864098DFEC7A2CFF11E42, but it was 01D4728393AE013BECF07288A58D154C1913AA41C0416362A19CF656348BBB83. [E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\tests\\NovaCore.BepuDependency.Tests\\NovaCore.BepuDependency.Tests.csproj]"
+      ]
+    },
+    {
+      "name": "tamper-BepuUtilities.2.5.0-beta.29.nupkg",
+      "exit": 1,
+      "expectedFailure": true,
+      "seconds": 0.3644313,
+      "witness": [
+        "E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\Bepu.targets(31,5): error MSB3952: File hash mismatch. Expected E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\2.5.0-beta.29/packages/BepuUtilities.2.5.0-beta.29.nupkg to have a SHA256 file hash of 8168EC4905F3AD5F923564557DAAB2BAB1100EE46B424CA5F1C97BD7684DE19F, but it was 611E7FF65B022E5045F3BF51E62B8117459A599FE254C2CB0A214E82CF007CD7. [E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\tests\\NovaCore.BepuDependency.Tests\\NovaCore.BepuDependency.Tests.csproj]"
+      ]
+    },
+    {
+      "name": "missing-BepuPhysics.dll",
+      "exit": 1,
+      "expectedFailure": true,
+      "seconds": 0.5058671,
+      "witness": [
+        "E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\Bepu.targets(26,5): error MSB3954: Failed to compute hash for file 'E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\2.5.0-beta.29/lib/BepuPhysics.dll' because it does not exist or is inaccessible. [E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\src\\NovaCore.Core\\NovaCore.Core.csproj]",
+        "E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\Bepu.targets(26,5): error MSB3954: Failed to compute hash for file 'E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\2.5.0-beta.29/lib/BepuPhysics.dll' because it does not exist or is inaccessible. [E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\src\\NovaCore.EphemerisFormat\\NovaCore.EphemerisFormat.csproj]"
+      ]
+    },
+    {
+      "name": "missing-BepuUtilities.dll",
+      "exit": 1,
+      "expectedFailure": true,
+      "seconds": 0.5086976,
+      "witness": [
+        "E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\Bepu.targets(27,5): error MSB3954: Failed to compute hash for file 'E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\2.5.0-beta.29/lib/BepuUtilities.dll' because it does not exist or is inaccessible. [E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\src\\NovaCore.EphemerisFormat\\NovaCore.EphemerisFormat.csproj]",
+        "E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\Bepu.targets(27,5): error MSB3954: Failed to compute hash for file 'E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\2.5.0-beta.29/lib/BepuUtilities.dll' because it does not exist or is inaccessible. [E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\src\\NovaCore.Core\\NovaCore.Core.csproj]"
+      ]
+    },
+    {
+      "name": "missing-bepu-2.5.0-beta.29.json",
+      "exit": 1,
+      "expectedFailure": true,
+      "seconds": 0.5091579,
+      "witness": [
+        "E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\Bepu.targets(22,5): error MSB3954: Failed to compute hash for file 'E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\2.5.0-beta.29/manifest/bepu-2.5.0-beta.29.json' because it does not exist or is inaccessible. [E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\src\\NovaCore.EphemerisFormat\\NovaCore.EphemerisFormat.csproj]",
+        "E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\Bepu.targets(22,5): error MSB3954: Failed to compute hash for file 'E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\2.5.0-beta.29/manifest/bepu-2.5.0-beta.29.json' because it does not exist or is inaccessible. [E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\src\\NovaCore.Core\\NovaCore.Core.csproj]"
+      ]
+    },
+    {
+      "name": "missing-BepuPhysics.2.5.0-beta.29.nupkg",
+      "exit": 1,
+      "expectedFailure": true,
+      "seconds": 0.3654615,
+      "witness": [
+        "E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\Bepu.targets(30,5): error MSB3954: Failed to compute hash for file 'E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\2.5.0-beta.29/packages/BepuPhysics.2.5.0-beta.29.nupkg' because it does not exist or is inaccessible. [E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\tests\\NovaCore.BepuDependency.Tests\\NovaCore.BepuDependency.Tests.csproj]"
+      ]
+    },
+    {
+      "name": "wrong-managed-assembly-version",
+      "exit": 1,
+      "expectedFailure": true,
+      "seconds": 0.5413531,
+      "witness": [
+        "E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\Bepu.targets(26,5): error MSB3952: File hash mismatch. Expected E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\2.5.0-beta.29/lib/BepuPhysics.dll to have a SHA256 file hash of 77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7, but it was DE04F7427396859EBC105D87B86A3BDF6CFD773C2D6E29D6EF6D2290DAF340E1. [E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\src\\NovaCore.Core\\NovaCore.Core.csproj]",
+        "E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\Bepu.targets(26,5): error MSB3952: File hash mismatch. Expected E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\2.5.0-beta.29/lib/BepuPhysics.dll to have a SHA256 file hash of 77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7, but it was DE04F7427396859EBC105D87B86A3BDF6CFD773C2D6E29D6EF6D2290DAF340E1. [E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\src\\NovaCore.EphemerisFormat\\NovaCore.EphemerisFormat.csproj]"
+      ]
+    },
+    {
+      "name": "stale-output-publish",
+      "exit": 0,
+      "expectedFailure": false,
+      "seconds": 0.6562043,
+      "witness": []
+    },
+    {
+      "name": "stale-output-published-load",
+      "exit": 0,
+      "expectedFailure": false,
+      "seconds": 0.0944477,
+      "witness": []
+    },
+    {
+      "name": "restored-provenance",
+      "exit": 0,
+      "expectedFailure": false,
+      "seconds": 0.383171,
+      "witness": []
+    },
+    {
+      "name": "restored-build",
+      "exit": 0,
+      "expectedFailure": false,
+      "seconds": 1.4237551,
+      "witness": []
+    },
+    {
+      "name": "restored-load",
+      "exit": 0,
+      "expectedFailure": false,
+      "seconds": 0.6060268,
+      "witness": []
+    }
+  ],
+  "performance": [
+    {
+      "arm": "control",
+      "mode": "warm",
+      "iteration": 0,
+      "seconds": 1.6318267,
+      "hashTask": []
+    },
+    {
+      "arm": "verified",
+      "mode": "warm",
+      "iteration": 0,
+      "seconds": 1.5892973,
+      "hashTask": []
+    },
+    {
+      "arm": "control",
+      "mode": "incremental",
+      "iteration": 1,
+      "seconds": 1.0666625,
+      "hashTask": []
+    },
+    {
+      "arm": "verified",
+      "mode": "incremental",
+      "iteration": 1,
+      "seconds": 0.9982307,
+      "hashTask": []
+    },
+    {
+      "arm": "verified",
+      "mode": "incremental",
+      "iteration": 2,
+      "seconds": 0.9854756,
+      "hashTask": []
+    },
+    {
+      "arm": "control",
+      "mode": "incremental",
+      "iteration": 2,
+      "seconds": 0.9423379,
+      "hashTask": []
+    },
+    {
+      "arm": "control",
+      "mode": "incremental",
+      "iteration": 3,
+      "seconds": 0.9300578,
+      "hashTask": []
+    },
+    {
+      "arm": "verified",
+      "mode": "incremental",
+      "iteration": 3,
+      "seconds": 0.9836922,
+      "hashTask": []
+    },
+    {
+      "arm": "control",
+      "mode": "rebuild",
+      "iteration": 1,
+      "seconds": 1.3824193,
+      "hashTask": []
+    },
+    {
+      "arm": "verified",
+      "mode": "rebuild",
+      "iteration": 1,
+      "seconds": 1.7227311,
+      "hashTask": []
+    },
+    {
+      "arm": "verified",
+      "mode": "rebuild",
+      "iteration": 2,
+      "seconds": 1.7242872,
+      "hashTask": []
+    },
+    {
+      "arm": "control",
+      "mode": "rebuild",
+      "iteration": 2,
+      "seconds": 1.4003322,
+      "hashTask": []
+    },
+    {
+      "arm": "control",
+      "mode": "rebuild",
+      "iteration": 3,
+      "seconds": 1.4443676,
+      "hashTask": []
+    },
+    {
+      "arm": "verified",
+      "mode": "rebuild",
+      "iteration": 3,
+      "seconds": 1.7303723,
+      "hashTask": []
+    },
+    {
+      "arm": "verified",
+      "mode": "verify-dll",
+      "iteration": 1,
+      "seconds": 0.404343,
+      "hashTask": [
+        "        8 ms  VerifyFileHash                             4 calls"
+      ]
+    },
+    {
+      "arm": "verified",
+      "mode": "verify-package",
+      "iteration": 1,
+      "seconds": 0.3795718,
+      "hashTask": [
+        "       10 ms  VerifyFileHash                             8 calls"
+      ]
+    },
+    {
+      "arm": "verified",
+      "mode": "verify-dll",
+      "iteration": 2,
+      "seconds": 0.3787272,
+      "hashTask": [
+        "        8 ms  VerifyFileHash                             4 calls"
+      ]
+    },
+    {
+      "arm": "verified",
+      "mode": "verify-package",
+      "iteration": 2,
+      "seconds": 0.3771512,
+      "hashTask": [
+        "       10 ms  VerifyFileHash                             8 calls"
+      ]
+    },
+    {
+      "arm": "verified",
+      "mode": "verify-dll",
+      "iteration": 3,
+      "seconds": 0.3785367,
+      "hashTask": [
+        "        7 ms  VerifyFileHash                             4 calls"
+      ]
+    },
+    {
+      "arm": "verified",
+      "mode": "verify-package",
+      "iteration": 3,
+      "seconds": 0.3830796,
+      "hashTask": [
+        "       10 ms  VerifyFileHash                             8 calls"
+      ]
+    }
+  ],
+  "closure": {
+    "result": "PASS",
+    "assemblies": [
+      {
+        "name": "BepuPhysics",
+        "identity": "BepuPhysics, Version=2.5.0.0, Culture=neutral, PublicKeyToken=9345ce38ee48a1cd",
+        "sha256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7",
+        "typeCount": 736,
+        "references": [
+          "System.Runtime, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "BepuUtilities, Version=2.5.0.0, Culture=neutral, PublicKeyToken=a595ef937c270ac9",
+          "System.Numerics.Vectors, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "System.Runtime.Intrinsics, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51",
+          "System.Collections, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "System.Threading, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "System.Console, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "System.Threading.Thread, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "System.Memory, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51"
+        ]
+      },
+      {
+        "name": "BepuUtilities",
+        "identity": "BepuUtilities, Version=2.5.0.0, Culture=neutral, PublicKeyToken=a595ef937c270ac9",
+        "sha256": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68",
+        "typeCount": 91,
+        "references": [
+          "System.Runtime, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "System.Numerics.Vectors, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "System.Runtime.Intrinsics, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51",
+          "System.Threading, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "System.Threading.Thread, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "System.Collections, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+          "System.Runtime.InteropServices, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        ]
+      }
+    ]
+  },
+  "fullSolution": [
+    {
+      "errors": 0,
+      "result": "PASS",
+      "warnings": 0,
+      "elapsedSeconds": 3.47,
+      "configuration": "Debug"
+    },
+    {
+      "errors": 0,
+      "result": "PASS",
+      "warnings": 0,
+      "elapsedSeconds": 3.89,
+      "configuration": "Release"
+    }
+  ],
+  "productionBaselineFiles": 501,
+  "existingFilesChanged": [
+    "src/NovaCore.Simulation/NovaCore.Simulation.csproj"
+  ],
+  "triangleOutputs": [
+    {
+      "sha256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7",
+      "file": "samples/NovaCore.Triangle/bin/Debug/net10.0/BepuPhysics.dll",
+      "configuration": "Debug"
+    },
+    {
+      "sha256": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68",
+      "file": "samples/NovaCore.Triangle/bin/Debug/net10.0/BepuUtilities.dll",
+      "configuration": "Debug"
+    },
+    {
+      "sha256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7",
+      "file": "samples/NovaCore.Triangle/bin/Release/net10.0/BepuPhysics.dll",
+      "configuration": "Release"
+    },
+    {
+      "sha256": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68",
+      "file": "samples/NovaCore.Triangle/bin/Release/net10.0/BepuUtilities.dll",
+      "configuration": "Release"
+    }
+  ],
+  "hostedConsumptionWorkflow": "PREPARED NOT EXECUTED",
+  "scratchRoot": "E:\\NovaCore\\build\\bepu-binary-validation",
+  "ciArchiveTamper": {
+    "witness": [
+      "E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\Bepu.targets(30,5): error MSB3952: File hash mismatch. Expected E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\2.5.0-beta.29/packages/BepuPhysics.2.5.0-beta.29.nupkg to have a SHA256 file hash of D4A952F5417B53B08DE20D507C21745C9DD004E2529864098DFEC7A2CFF11E42, but it was 01D4728393AE013BECF07288A58D154C1913AA41C0416362A19CF656348BBB83. [E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\src\\NovaCore.EphemerisFormat\\NovaCore.EphemerisFormat.csproj]",
+      "E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\Bepu.targets(30,5): error MSB3952: File hash mismatch. Expected E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\external\\bepu\\2.5.0-beta.29/packages/BepuPhysics.2.5.0-beta.29.nupkg to have a SHA256 file hash of D4A952F5417B53B08DE20D507C21745C9DD004E2529864098DFEC7A2CFF11E42, but it was 01D4728393AE013BECF07288A58D154C1913AA41C0416362A19CF656348BBB83. [E:\\NovaCore\\build\\bepu-binary-validation\\20260913-045232-566\\checkout\\src\\NovaCore.Core\\NovaCore.Core.csproj]"
+    ],
+    "exit": 1
+  }
+}

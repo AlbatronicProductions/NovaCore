@@ -1,0 +1,433 @@
+{
+  "SDK": "10.0.303",
+  "NuGet": "7.6.0.0",
+  "Runtime": "10.0.12",
+  "Windows": "10.0.26200",
+  "PowerShell": "7.6.6",
+  "Timezone": "Eastern Standard Time",
+  "Configuration": [
+    {
+      "Path": "E:\\NuGet.Config",
+      "Exists": false
+    },
+    {
+      "Path": "E:\\NovaCore\\NuGet.Config",
+      "Exists": false
+    },
+    {
+      "Path": "E:\\NovaCore\\src\\NuGet.Config",
+      "Exists": false
+    },
+    {
+      "Path": "E:\\NovaCore\\src\\NovaCore.Simulation\\NuGet.Config",
+      "Exists": false
+    },
+    {
+      "Path": "C:\\Users\\Tyler\\AppData\\Roaming\\NuGet\\NuGet.Config",
+      "Exists": true,
+      "SignatureValidationMode": null,
+      "TrustedSignersPresent": false,
+      "SourceMappingPresent": false
+    }
+  ],
+  "PackageIdentities": [
+    {
+      "Name": "BepuPhysics",
+      "Bytes": 442721,
+      "SHA256": "D4A952F5417B53B08DE20D507C21745C9DD004E2529864098DFEC7A2CFF11E42",
+      "SHA512": "P3A/P9K7JmEUkdqa4S8CuFqOm0QnOyv17T3nGbQdNNxyfW/Ac3jGjk5eT8JHhz2MVfQpamexsra8ZBZ6kLJ/WQ==",
+      "DLLSHA256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7",
+      "URL": "https://api.nuget.org/v3-flatcontainer/bepuphysics/2.5.0-beta.29/bepuphysics.2.5.0-beta.29.nupkg"
+    },
+    {
+      "Name": "BepuUtilities",
+      "Bytes": 149735,
+      "SHA256": "8168EC4905F3AD5F923564557DAAB2BAB1100EE46B424CA5F1C97BD7684DE19F",
+      "SHA512": "odWExp1HmQVoHpzKhrqPLeHpUKWVOORFy1qnkc9MRwOKgcBUe9f+F7Dp683LHXFizMYI4OEHKrjH+zQbPtYNBg==",
+      "DLLSHA256": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68",
+      "URL": "https://api.nuget.org/v3-flatcontainer/bepuutilities/2.5.0-beta.29/bepuutilities.2.5.0-beta.29.nupkg"
+    }
+  ],
+  "Chains": [
+    {
+      "Role": "signer",
+      "OnlineBuild": false,
+      "Status": [
+        {
+          "Status": 32,
+          "StatusInformation": "A certificate chain processed, but terminated in a root certificate which is not trusted by the trust provider."
+        },
+        {
+          "Status": 64,
+          "StatusInformation": "The revocation function was unable to check revocation for the certificate."
+        },
+        {
+          "Status": 16777216,
+          "StatusInformation": "The revocation function was unable to check revocation because the revocation server was offline."
+        }
+      ],
+      "Elements": [
+        {
+          "Subject": "CN=NuGet.org Repository by Microsoft, O=NuGet.org Repository by Microsoft, L=Redmond, S=Washington, C=US",
+          "Issuer": "CN=DigiCert Trusted G4 Code Signing RSA4096 SHA384 2021 CA1, O=\"DigiCert, Inc.\", C=US",
+          "SHA1": "C72FE7739A9EECB8EC1E4F596DB3BB74039B1DE2",
+          "SHA256": "1F4B311D9ACC115C8DC8018B5A49E00FCE6DA8E2855F9F014CA6F34570BC482D",
+          "NotBefore": "2024-02-22T19:00:00-05:00",
+          "NotAfter": "2027-05-18T19:59:59-04:00",
+          "SignatureAlgorithm": "sha384RSA",
+          "Extensions": [
+            {
+              "OID": "2.5.29.37",
+              "Value": "Code Signing (1.3.6.1.5.5.7.3.3)\r\n"
+            },
+            {
+              "OID": "2.5.29.31",
+              "Value": "[1]CRL Distribution Point\r\n     Distribution Point Name:\r\n          Full Name:\r\n               URL=http://crl3.digicert.com/DigiCertTrustedG4CodeSigningRSA4096SHA3842021CA1.crl\r\n[2]CRL Distribution Point\r\n     Distribution Point Name:\r\n          Full Name:\r\n               URL=http://crl4.digicert.com/DigiCertTrustedG4CodeSigningRSA4096SHA3842021CA1.crl\r\n"
+            },
+            {
+              "OID": "1.3.6.1.5.5.7.1.1",
+              "Value": "[1]Authority Info Access\r\n     Access Method=On-line Certificate Status Protocol (1.3.6.1.5.5.7.48.1)\r\n     Alternative Name:\r\n          URL=http://ocsp.digicert.com\r\n[2]Authority Info Access\r\n     Access Method=Certification Authority Issuer (1.3.6.1.5.5.7.48.2)\r\n     Alternative Name:\r\n          URL=http://cacerts.digicert.com/DigiCertTrustedG4CodeSigningRSA4096SHA3842021CA1.crt\r\n"
+            }
+          ],
+          "Status": [
+            {
+              "Status": 64,
+              "StatusInformation": "The revocation function was unable to check revocation for the certificate."
+            },
+            {
+              "Status": 16777216,
+              "StatusInformation": "The revocation function was unable to check revocation because the revocation server was offline."
+            }
+          ],
+          "UserRootPresent": false,
+          "MachineRootPresent": false,
+          "UserIntermediatePresent": false,
+          "MachineIntermediatePresent": false
+        },
+        {
+          "Subject": "CN=DigiCert Trusted G4 Code Signing RSA4096 SHA384 2021 CA1, O=\"DigiCert, Inc.\", C=US",
+          "Issuer": "CN=DigiCert Trusted Root G4, OU=www.digicert.com, O=DigiCert Inc, C=US",
+          "SHA1": "7B0F360B775F76C94A12CA48445AA2D2A875701C",
+          "SHA256": "46011EDE1C147EB2BC731A539B7C047B7EE93E48B9D3C3BA710CE132BBDFAC6B",
+          "NotBefore": "2021-04-28T20:00:00-04:00",
+          "NotAfter": "2036-04-28T19:59:59-04:00",
+          "SignatureAlgorithm": "sha384RSA",
+          "Extensions": [
+            {
+              "OID": "2.5.29.37",
+              "Value": "Code Signing (1.3.6.1.5.5.7.3.3)\r\n"
+            },
+            {
+              "OID": "1.3.6.1.5.5.7.1.1",
+              "Value": "[1]Authority Info Access\r\n     Access Method=On-line Certificate Status Protocol (1.3.6.1.5.5.7.48.1)\r\n     Alternative Name:\r\n          URL=http://ocsp.digicert.com\r\n[2]Authority Info Access\r\n     Access Method=Certification Authority Issuer (1.3.6.1.5.5.7.48.2)\r\n     Alternative Name:\r\n          URL=http://cacerts.digicert.com/DigiCertTrustedRootG4.crt\r\n"
+            },
+            {
+              "OID": "2.5.29.31",
+              "Value": "[1]CRL Distribution Point\r\n     Distribution Point Name:\r\n          Full Name:\r\n               URL=http://crl3.digicert.com/DigiCertTrustedRootG4.crl\r\n"
+            }
+          ],
+          "Status": [
+            {
+              "Status": 64,
+              "StatusInformation": "The revocation function was unable to check revocation for the certificate."
+            },
+            {
+              "Status": 16777216,
+              "StatusInformation": "The revocation function was unable to check revocation because the revocation server was offline."
+            }
+          ],
+          "UserRootPresent": false,
+          "MachineRootPresent": false,
+          "UserIntermediatePresent": true,
+          "MachineIntermediatePresent": false
+        },
+        {
+          "Subject": "CN=DigiCert Trusted Root G4, OU=www.digicert.com, O=DigiCert Inc, C=US",
+          "Issuer": "CN=DigiCert Assured ID Root CA, OU=www.digicert.com, O=DigiCert Inc, C=US",
+          "SHA1": "A99D5B79E9F1CDA59CDAB6373169D5353F5874C6",
+          "SHA256": "33846B545A49C9BE4903C60E01713C1BD4E4EF31EA65CD95D69E62794F30B941",
+          "NotBefore": "2022-07-31T20:00:00-04:00",
+          "NotAfter": "2031-11-09T18:59:59-05:00",
+          "SignatureAlgorithm": "sha384RSA",
+          "Extensions": [
+            {
+              "OID": "1.3.6.1.5.5.7.1.1",
+              "Value": "[1]Authority Info Access\r\n     Access Method=On-line Certificate Status Protocol (1.3.6.1.5.5.7.48.1)\r\n     Alternative Name:\r\n          URL=http://ocsp.digicert.com\r\n[2]Authority Info Access\r\n     Access Method=Certification Authority Issuer (1.3.6.1.5.5.7.48.2)\r\n     Alternative Name:\r\n          URL=http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt\r\n"
+            },
+            {
+              "OID": "2.5.29.31",
+              "Value": "[1]CRL Distribution Point\r\n     Distribution Point Name:\r\n          Full Name:\r\n               URL=http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl\r\n"
+            }
+          ],
+          "Status": [
+            {
+              "Status": 64,
+              "StatusInformation": "The revocation function was unable to check revocation for the certificate."
+            },
+            {
+              "Status": 16777216,
+              "StatusInformation": "The revocation function was unable to check revocation because the revocation server was offline."
+            }
+          ],
+          "UserRootPresent": false,
+          "MachineRootPresent": false,
+          "UserIntermediatePresent": false,
+          "MachineIntermediatePresent": false
+        },
+        {
+          "Subject": "CN=DigiCert Assured ID Root CA, OU=www.digicert.com, O=DigiCert Inc, C=US",
+          "Issuer": "CN=DigiCert Assured ID Root CA, OU=www.digicert.com, O=DigiCert Inc, C=US",
+          "SHA1": "0563B8630D62D75ABBC8AB1E4BDFB5A899B24D43",
+          "SHA256": "3E9099B5015E8F486C00BCEA9D111EE721FABA355A89BCF1DF69561E3DC6325C",
+          "NotBefore": "2006-11-09T19:00:00-05:00",
+          "NotAfter": "2031-11-09T19:00:00-05:00",
+          "SignatureAlgorithm": "sha1RSA",
+          "Extensions": [],
+          "Status": [
+            {
+              "Status": 32,
+              "StatusInformation": "A certificate chain processed, but terminated in a root certificate which is not trusted by the trust provider."
+            }
+          ],
+          "UserRootPresent": false,
+          "MachineRootPresent": false,
+          "UserIntermediatePresent": false,
+          "MachineIntermediatePresent": false
+        }
+      ]
+    },
+    {
+      "Role": "timestamp",
+      "OnlineBuild": false,
+      "Status": [
+        {
+          "Status": 32,
+          "StatusInformation": "A certificate chain processed, but terminated in a root certificate which is not trusted by the trust provider."
+        },
+        {
+          "Status": 64,
+          "StatusInformation": "The revocation function was unable to check revocation for the certificate."
+        },
+        {
+          "Status": 16777216,
+          "StatusInformation": "The revocation function was unable to check revocation because the revocation server was offline."
+        }
+      ],
+      "Elements": [
+        {
+          "Subject": "CN=DigiCert SHA256 RSA4096 Timestamp Responder 2025 1, O=\"DigiCert, Inc.\", C=US",
+          "Issuer": "CN=DigiCert Trusted G4 TimeStamping RSA4096 SHA256 2025 CA1, O=\"DigiCert, Inc.\", C=US",
+          "SHA1": "DD6230AC860A2D306BDA38B16879523007FB417E",
+          "SHA256": "4AA03FA22CD75C84C55C938F828E676B9CAECAB33FE36D269AA334F146110A33",
+          "NotBefore": "2025-06-03T20:00:00-04:00",
+          "NotAfter": "2036-09-03T19:59:59-04:00",
+          "SignatureAlgorithm": "sha256RSA",
+          "Extensions": [
+            {
+              "OID": "2.5.29.37",
+              "Value": "Time Stamping (1.3.6.1.5.5.7.3.8)\r\n"
+            },
+            {
+              "OID": "1.3.6.1.5.5.7.1.1",
+              "Value": "[1]Authority Info Access\r\n     Access Method=On-line Certificate Status Protocol (1.3.6.1.5.5.7.48.1)\r\n     Alternative Name:\r\n          URL=http://ocsp.digicert.com\r\n[2]Authority Info Access\r\n     Access Method=Certification Authority Issuer (1.3.6.1.5.5.7.48.2)\r\n     Alternative Name:\r\n          URL=http://cacerts.digicert.com/DigiCertTrustedG4TimeStampingRSA4096SHA2562025CA1.crt\r\n"
+            },
+            {
+              "OID": "2.5.29.31",
+              "Value": "[1]CRL Distribution Point\r\n     Distribution Point Name:\r\n          Full Name:\r\n               URL=http://crl3.digicert.com/DigiCertTrustedG4TimeStampingRSA4096SHA2562025CA1.crl\r\n"
+            }
+          ],
+          "Status": [
+            {
+              "Status": 64,
+              "StatusInformation": "The revocation function was unable to check revocation for the certificate."
+            },
+            {
+              "Status": 16777216,
+              "StatusInformation": "The revocation function was unable to check revocation because the revocation server was offline."
+            }
+          ],
+          "UserRootPresent": false,
+          "MachineRootPresent": false,
+          "UserIntermediatePresent": false,
+          "MachineIntermediatePresent": false
+        },
+        {
+          "Subject": "CN=DigiCert Trusted G4 TimeStamping RSA4096 SHA256 2025 CA1, O=\"DigiCert, Inc.\", C=US",
+          "Issuer": "CN=DigiCert Trusted Root G4, OU=www.digicert.com, O=DigiCert Inc, C=US",
+          "SHA1": "07894D00FC194A17DB273AEB5CF8FACEF14423A4",
+          "SHA256": "CA0B1554ECD901EA19DCAD8749E9F2648C8D6DFCEA1ADD9D2C2109415BB82CCD",
+          "NotBefore": "2025-05-06T20:00:00-04:00",
+          "NotAfter": "2038-01-14T18:59:59-05:00",
+          "SignatureAlgorithm": "sha256RSA",
+          "Extensions": [
+            {
+              "OID": "2.5.29.37",
+              "Value": "Time Stamping (1.3.6.1.5.5.7.3.8)\r\n"
+            },
+            {
+              "OID": "1.3.6.1.5.5.7.1.1",
+              "Value": "[1]Authority Info Access\r\n     Access Method=On-line Certificate Status Protocol (1.3.6.1.5.5.7.48.1)\r\n     Alternative Name:\r\n          URL=http://ocsp.digicert.com\r\n[2]Authority Info Access\r\n     Access Method=Certification Authority Issuer (1.3.6.1.5.5.7.48.2)\r\n     Alternative Name:\r\n          URL=http://cacerts.digicert.com/DigiCertTrustedRootG4.crt\r\n"
+            },
+            {
+              "OID": "2.5.29.31",
+              "Value": "[1]CRL Distribution Point\r\n     Distribution Point Name:\r\n          Full Name:\r\n               URL=http://crl3.digicert.com/DigiCertTrustedRootG4.crl\r\n"
+            }
+          ],
+          "Status": [
+            {
+              "Status": 64,
+              "StatusInformation": "The revocation function was unable to check revocation for the certificate."
+            },
+            {
+              "Status": 16777216,
+              "StatusInformation": "The revocation function was unable to check revocation because the revocation server was offline."
+            }
+          ],
+          "UserRootPresent": false,
+          "MachineRootPresent": false,
+          "UserIntermediatePresent": false,
+          "MachineIntermediatePresent": false
+        },
+        {
+          "Subject": "CN=DigiCert Trusted Root G4, OU=www.digicert.com, O=DigiCert Inc, C=US",
+          "Issuer": "CN=DigiCert Assured ID Root CA, OU=www.digicert.com, O=DigiCert Inc, C=US",
+          "SHA1": "A99D5B79E9F1CDA59CDAB6373169D5353F5874C6",
+          "SHA256": "33846B545A49C9BE4903C60E01713C1BD4E4EF31EA65CD95D69E62794F30B941",
+          "NotBefore": "2022-07-31T20:00:00-04:00",
+          "NotAfter": "2031-11-09T18:59:59-05:00",
+          "SignatureAlgorithm": "sha384RSA",
+          "Extensions": [
+            {
+              "OID": "1.3.6.1.5.5.7.1.1",
+              "Value": "[1]Authority Info Access\r\n     Access Method=On-line Certificate Status Protocol (1.3.6.1.5.5.7.48.1)\r\n     Alternative Name:\r\n          URL=http://ocsp.digicert.com\r\n[2]Authority Info Access\r\n     Access Method=Certification Authority Issuer (1.3.6.1.5.5.7.48.2)\r\n     Alternative Name:\r\n          URL=http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt\r\n"
+            },
+            {
+              "OID": "2.5.29.31",
+              "Value": "[1]CRL Distribution Point\r\n     Distribution Point Name:\r\n          Full Name:\r\n               URL=http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl\r\n"
+            }
+          ],
+          "Status": [
+            {
+              "Status": 64,
+              "StatusInformation": "The revocation function was unable to check revocation for the certificate."
+            },
+            {
+              "Status": 16777216,
+              "StatusInformation": "The revocation function was unable to check revocation because the revocation server was offline."
+            }
+          ],
+          "UserRootPresent": false,
+          "MachineRootPresent": false,
+          "UserIntermediatePresent": false,
+          "MachineIntermediatePresent": false
+        },
+        {
+          "Subject": "CN=DigiCert Assured ID Root CA, OU=www.digicert.com, O=DigiCert Inc, C=US",
+          "Issuer": "CN=DigiCert Assured ID Root CA, OU=www.digicert.com, O=DigiCert Inc, C=US",
+          "SHA1": "0563B8630D62D75ABBC8AB1E4BDFB5A899B24D43",
+          "SHA256": "3E9099B5015E8F486C00BCEA9D111EE721FABA355A89BCF1DF69561E3DC6325C",
+          "NotBefore": "2006-11-09T19:00:00-05:00",
+          "NotAfter": "2031-11-09T19:00:00-05:00",
+          "SignatureAlgorithm": "sha1RSA",
+          "Extensions": [],
+          "Status": [
+            {
+              "Status": 32,
+              "StatusInformation": "A certificate chain processed, but terminated in a root certificate which is not trusted by the trust provider."
+            }
+          ],
+          "UserRootPresent": false,
+          "MachineRootPresent": false,
+          "UserIntermediatePresent": false,
+          "MachineIntermediatePresent": false
+        }
+      ]
+    }
+  ],
+  "Endpoints": [
+    {
+      "URL": "http://crl3.digicert.com/DigiCertTrustedG4CodeSigningRSA4096SHA3842021CA1.crl",
+      "Status": 200,
+      "Bytes": 183866,
+      "ContentType": "application/pkix-crl",
+      "ErrorText": null
+    },
+    {
+      "URL": "http://crl4.digicert.com/DigiCertTrustedG4CodeSigningRSA4096SHA3842021CA1.crl",
+      "Status": 200,
+      "Bytes": 183866,
+      "ContentType": "application/pkix-crl",
+      "ErrorText": null
+    },
+    {
+      "URL": "http://crl3.digicert.com/DigiCertTrustedG4TimeStampingRSA4096SHA2562025CA1.crl",
+      "Status": 200,
+      "Bytes": 929,
+      "ContentType": "application/pkix-crl",
+      "ErrorText": null
+    },
+    {
+      "URL": "http://crl3.digicert.com/DigiCertTrustedRootG4.crl",
+      "Status": 200,
+      "Bytes": 737,
+      "ContentType": "application/pkix-crl",
+      "ErrorText": null
+    },
+    {
+      "URL": "http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl",
+      "Status": 200,
+      "Bytes": 1077,
+      "ContentType": "application/pkix-crl",
+      "ErrorText": null
+    },
+    {
+      "URL": "http://cacerts.digicert.com/DigiCertTrustedRootG4.crt",
+      "Status": 200,
+      "Bytes": 1428,
+      "ContentType": "application/pkix-cert",
+      "ErrorText": null
+    },
+    {
+      "URL": "http://ocsp.digicert.com",
+      "Status": 200,
+      "Bytes": 896,
+      "ContentType": "text/html",
+      "ErrorText": null
+    },
+    {
+      "URL": "http://www.download.windowsupdate.com/msdownload/update/v3/static/trustedr/en/authrootstl.cab",
+      "Status": 200,
+      "Bytes": 80736,
+      "ContentType": "application/vnd.ms-cab-compressed",
+      "ErrorText": null
+    }
+  ],
+  "FinalRootPresence": [
+    {
+      "SHA1": "DDFB16CD4931C973A2037D3FC83A4D7D775D05E4",
+      "UserRoot": false,
+      "MachineRoot": false
+    },
+    {
+      "SHA1": "0563B8630D62D75ABBC8AB1E4BDFB5A899B24D43",
+      "UserRoot": false,
+      "MachineRoot": false
+    }
+  ],
+  "AutomaticRootUpdateDisablePolicyPresent": false,
+  "CachedCTLLastSync": "2024-01-29T11:54:37.0902125Z",
+  "DirectVerifyExitCodes": {
+    "BepuUtilities": [
+      1,
+      1
+    ],
+    "BepuPhysics": [
+      1,
+      1
+    ]
+  },
+  "FreshRestoreExitCode": 1,
+  "RefreshError": "0x80070005 ERROR_ACCESS_DENIED",
+  "WinningCause": "B. MISSING OR STALE TRUSTED ROOT",
+  "AdapterResumed": false
+}

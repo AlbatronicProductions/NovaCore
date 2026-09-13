@@ -1,0 +1,736 @@
+{
+  "Observed": "2026-09-12T13:21:45.8913625-04:00",
+  "Computer": "ALBATRONIC007",
+  "SourceDescription": "Affected production host ALBATRONIC007; read-only non-elevated Phase 3 observation",
+  "SourceKind": "AffectedHost",
+  "HealthyQualification": "NOT ESTABLISHED BY THIS READ-ONLY COLLECTION; requires source provenance and successful normal trust-servicing evidence",
+  "Windows": {
+    "Caption": "Microsoft Windows 11 Pro",
+    "EditionID": "Professional",
+    "DisplayVersion": "25H2",
+    "Build": "26200",
+    "UBR": 9445,
+    "Architecture": "64-bit",
+    "Domain": "WORKGROUP",
+    "PartOfDomain": false,
+    "JoinAndMDMIndicators": [
+      "AzureAdJoined : NO",
+      "EnterpriseJoined : NO",
+      "DomainJoined : NO",
+      "WorkplaceJoined : NO"
+    ],
+    "MDMLimit": "Indicators do not prove every possible enrollment/policy source absent"
+  },
+  "CryptSvc": {
+    "Configuration": {
+      "Name": "CryptSvc",
+      "ProcessId": 5196,
+      "StartName": "NT Authority\\NetworkService",
+      "StartMode": "Auto",
+      "State": "Running",
+      "PathName": "C:\\WINDOWS\\system32\\svchost.exe -k NetworkService -p"
+    },
+    "SIDType": [
+      "[SC] QueryServiceConfig2 SUCCESS",
+      "",
+      "SERVICE_NAME: CryptSvc",
+      "SERVICE_SID_TYPE:  UNRESTRICTED"
+    ],
+    "SID": [
+      "",
+      "NAME: CryptSvc",
+      "SERVICE SID: S-1-5-80-242729624-280608522-2219052887-3187409060-2225943459",
+      "STATUS: Active"
+    ],
+    "Token": {
+      "ProcessId": 5196,
+      "Status": "UNAVAILABLE",
+      "ErrorOperation": "OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION)",
+      "ErrorCode": 5,
+      "UserSID": null,
+      "Groups": null,
+      "RestrictedSIDs": null
+    },
+    "TokenLimit": "Primary process token only; no claim about an impersonating thread token at the earlier denial"
+  },
+  "Collector": {
+    "PowerShell": "7.6.6",
+    "TokenSelfCheck": "PASS",
+    "Elevated": false,
+    "SHA256": "B8EC77275184932991A7392C1194872955ECE527716FB91867905DF4E2F0466B"
+  },
+  "RootPolicy": [
+    {
+      "Path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\SystemCertificates\\AuthRoot",
+      "Status": "ABSENT"
+    },
+    {
+      "Path": "HKLM:\\SOFTWARE\\Microsoft\\SystemCertificates\\AuthRoot\\AutoUpdate",
+      "Name": "DisableRootAutoUpdate",
+      "Present": false,
+      "Value": null
+    },
+    {
+      "Path": "HKLM:\\SOFTWARE\\Microsoft\\SystemCertificates\\AuthRoot\\AutoUpdate",
+      "Name": "EnableDisallowedCertAutoUpdate",
+      "Present": false,
+      "Value": null
+    },
+    {
+      "Path": "HKLM:\\SOFTWARE\\Microsoft\\SystemCertificates\\AuthRoot\\AutoUpdate",
+      "Name": "RootDirUrl",
+      "Present": false,
+      "Value": null
+    }
+  ],
+  "RegistryCTL": {
+    "Bytes": 175647,
+    "SHA256": "4276AF3669A141A59388BC56A87F6614D9A9BDDDF560636C264219A7EB11256F"
+  },
+  "ACLSections": "Owner,Group,DACL; SACL not requested",
+  "Keys": [
+    {
+      "Key": "HKLM:\\SOFTWARE\\Microsoft\\SystemCertificates\\AuthRoot",
+      "Status": "OBSERVED",
+      "OwnerSID": "S-1-5-18",
+      "GroupSID": "S-1-5-18",
+      "Protected": false,
+      "Canonical": true,
+      "ControlFlags": "DiscretionaryAclPresent, DiscretionaryAclAutoInherited, SelfRelative",
+      "SDDL": "O:SYG:SYD:AI(A;;KA;;;S-1-5-80-242729624-280608522-2219052887-3187409060-2225943459)(A;OICIIO;GA;;;S-1-5-80-242729624-280608522-2219052887-3187409060-2225943459)(A;ID;KR;;;BU)(A;CIIOID;GR;;;BU)(A;ID;KA;;;BA)(A;CIIOID;GA;;;BA)(A;ID;KA;;;SY)(A;CIIOID;GA;;;SY)(A;CIIOID;GA;;;CO)(A;ID;KR;;;AC)(A;CIIOID;GR;;;AC)(A;ID;KR;;;S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681)(A;CIIOID;GR;;;S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681)",
+      "ACEs": [
+        {
+          "Order": 0,
+          "Type": "AccessAllowed",
+          "SID": "S-1-5-80-242729624-280608522-2219052887-3187409060-2225943459",
+          "AccessMask": "0x000F003F",
+          "AceFlags": "None",
+          "Inherited": false,
+          "InheritanceFlags": "None",
+          "PropagationFlags": "None"
+        },
+        {
+          "Order": 1,
+          "Type": "AccessAllowed",
+          "SID": "S-1-5-80-242729624-280608522-2219052887-3187409060-2225943459",
+          "AccessMask": "0x10000000",
+          "AceFlags": "ObjectInherit, ContainerInherit, InheritOnly",
+          "Inherited": false,
+          "InheritanceFlags": "ObjectInherit, ContainerInherit",
+          "PropagationFlags": "InheritOnly"
+        },
+        {
+          "Order": 2,
+          "Type": "AccessAllowed",
+          "SID": "S-1-5-32-545",
+          "AccessMask": "0x00020019",
+          "AceFlags": "Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "None",
+          "PropagationFlags": "None"
+        },
+        {
+          "Order": 3,
+          "Type": "AccessAllowed",
+          "SID": "S-1-5-32-545",
+          "AccessMask": "0x80000000",
+          "AceFlags": "ContainerInherit, InheritOnly, Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "ContainerInherit",
+          "PropagationFlags": "InheritOnly"
+        },
+        {
+          "Order": 4,
+          "Type": "AccessAllowed",
+          "SID": "S-1-5-32-544",
+          "AccessMask": "0x000F003F",
+          "AceFlags": "Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "None",
+          "PropagationFlags": "None"
+        },
+        {
+          "Order": 5,
+          "Type": "AccessAllowed",
+          "SID": "S-1-5-32-544",
+          "AccessMask": "0x10000000",
+          "AceFlags": "ContainerInherit, InheritOnly, Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "ContainerInherit",
+          "PropagationFlags": "InheritOnly"
+        },
+        {
+          "Order": 6,
+          "Type": "AccessAllowed",
+          "SID": "S-1-5-18",
+          "AccessMask": "0x000F003F",
+          "AceFlags": "Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "None",
+          "PropagationFlags": "None"
+        },
+        {
+          "Order": 7,
+          "Type": "AccessAllowed",
+          "SID": "S-1-5-18",
+          "AccessMask": "0x10000000",
+          "AceFlags": "ContainerInherit, InheritOnly, Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "ContainerInherit",
+          "PropagationFlags": "InheritOnly"
+        },
+        {
+          "Order": 8,
+          "Type": "AccessAllowed",
+          "SID": "S-1-3-0",
+          "AccessMask": "0x10000000",
+          "AceFlags": "ContainerInherit, InheritOnly, Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "ContainerInherit",
+          "PropagationFlags": "InheritOnly"
+        },
+        {
+          "Order": 9,
+          "Type": "AccessAllowed",
+          "SID": "S-1-15-2-1",
+          "AccessMask": "0x00020019",
+          "AceFlags": "Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "None",
+          "PropagationFlags": "None"
+        },
+        {
+          "Order": 10,
+          "Type": "AccessAllowed",
+          "SID": "S-1-15-2-1",
+          "AccessMask": "0x80000000",
+          "AceFlags": "ContainerInherit, InheritOnly, Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "ContainerInherit",
+          "PropagationFlags": "InheritOnly"
+        },
+        {
+          "Order": 11,
+          "Type": "AccessAllowed",
+          "SID": "S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681",
+          "AccessMask": "0x00020019",
+          "AceFlags": "Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "None",
+          "PropagationFlags": "None"
+        },
+        {
+          "Order": 12,
+          "Type": "AccessAllowed",
+          "SID": "S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681",
+          "AccessMask": "0x80000000",
+          "AceFlags": "ContainerInherit, InheritOnly, Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "ContainerInherit",
+          "PropagationFlags": "InheritOnly"
+        }
+      ],
+      "CryptSvcACEs": [
+        {
+          "Order": 0,
+          "Type": "AccessAllowed",
+          "SID": "S-1-5-80-242729624-280608522-2219052887-3187409060-2225943459",
+          "AccessMask": "0x000F003F",
+          "AceFlags": "None",
+          "Inherited": false,
+          "InheritanceFlags": "None",
+          "PropagationFlags": "None"
+        },
+        {
+          "Order": 1,
+          "Type": "AccessAllowed",
+          "SID": "S-1-5-80-242729624-280608522-2219052887-3187409060-2225943459",
+          "AccessMask": "0x10000000",
+          "AceFlags": "ObjectInherit, ContainerInherit, InheritOnly",
+          "Inherited": false,
+          "InheritanceFlags": "ObjectInherit, ContainerInherit",
+          "PropagationFlags": "InheritOnly"
+        }
+      ],
+      "NetworkServiceACEs": []
+    },
+    {
+      "Key": "HKLM:\\SOFTWARE\\Microsoft\\SystemCertificates\\AuthRoot\\AutoUpdate",
+      "Status": "OBSERVED",
+      "OwnerSID": "S-1-5-18",
+      "GroupSID": "S-1-5-18",
+      "Protected": false,
+      "Canonical": true,
+      "ControlFlags": "DiscretionaryAclPresent, DiscretionaryAclAutoInherited, SelfRelative",
+      "SDDL": "O:SYG:SYD:AI(A;ID;KA;;;S-1-5-80-242729624-280608522-2219052887-3187409060-2225943459)(A;OICIIOID;GA;;;S-1-5-80-242729624-280608522-2219052887-3187409060-2225943459)(A;ID;KR;;;BU)(A;CIIOID;GR;;;BU)(A;ID;KA;;;BA)(A;CIIOID;GA;;;BA)(A;ID;KA;;;SY)(A;CIIOID;GA;;;SY)(A;CIIOID;GA;;;CO)(A;ID;KR;;;AC)(A;CIIOID;GR;;;AC)(A;ID;KR;;;S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681)(A;CIIOID;GR;;;S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681)",
+      "ACEs": [
+        {
+          "Order": 0,
+          "Type": "AccessAllowed",
+          "SID": "S-1-5-80-242729624-280608522-2219052887-3187409060-2225943459",
+          "AccessMask": "0x000F003F",
+          "AceFlags": "Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "None",
+          "PropagationFlags": "None"
+        },
+        {
+          "Order": 1,
+          "Type": "AccessAllowed",
+          "SID": "S-1-5-80-242729624-280608522-2219052887-3187409060-2225943459",
+          "AccessMask": "0x10000000",
+          "AceFlags": "ObjectInherit, ContainerInherit, InheritOnly, Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "ObjectInherit, ContainerInherit",
+          "PropagationFlags": "InheritOnly"
+        },
+        {
+          "Order": 2,
+          "Type": "AccessAllowed",
+          "SID": "S-1-5-32-545",
+          "AccessMask": "0x00020019",
+          "AceFlags": "Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "None",
+          "PropagationFlags": "None"
+        },
+        {
+          "Order": 3,
+          "Type": "AccessAllowed",
+          "SID": "S-1-5-32-545",
+          "AccessMask": "0x80000000",
+          "AceFlags": "ContainerInherit, InheritOnly, Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "ContainerInherit",
+          "PropagationFlags": "InheritOnly"
+        },
+        {
+          "Order": 4,
+          "Type": "AccessAllowed",
+          "SID": "S-1-5-32-544",
+          "AccessMask": "0x000F003F",
+          "AceFlags": "Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "None",
+          "PropagationFlags": "None"
+        },
+        {
+          "Order": 5,
+          "Type": "AccessAllowed",
+          "SID": "S-1-5-32-544",
+          "AccessMask": "0x10000000",
+          "AceFlags": "ContainerInherit, InheritOnly, Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "ContainerInherit",
+          "PropagationFlags": "InheritOnly"
+        },
+        {
+          "Order": 6,
+          "Type": "AccessAllowed",
+          "SID": "S-1-5-18",
+          "AccessMask": "0x000F003F",
+          "AceFlags": "Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "None",
+          "PropagationFlags": "None"
+        },
+        {
+          "Order": 7,
+          "Type": "AccessAllowed",
+          "SID": "S-1-5-18",
+          "AccessMask": "0x10000000",
+          "AceFlags": "ContainerInherit, InheritOnly, Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "ContainerInherit",
+          "PropagationFlags": "InheritOnly"
+        },
+        {
+          "Order": 8,
+          "Type": "AccessAllowed",
+          "SID": "S-1-3-0",
+          "AccessMask": "0x10000000",
+          "AceFlags": "ContainerInherit, InheritOnly, Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "ContainerInherit",
+          "PropagationFlags": "InheritOnly"
+        },
+        {
+          "Order": 9,
+          "Type": "AccessAllowed",
+          "SID": "S-1-15-2-1",
+          "AccessMask": "0x00020019",
+          "AceFlags": "Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "None",
+          "PropagationFlags": "None"
+        },
+        {
+          "Order": 10,
+          "Type": "AccessAllowed",
+          "SID": "S-1-15-2-1",
+          "AccessMask": "0x80000000",
+          "AceFlags": "ContainerInherit, InheritOnly, Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "ContainerInherit",
+          "PropagationFlags": "InheritOnly"
+        },
+        {
+          "Order": 11,
+          "Type": "AccessAllowed",
+          "SID": "S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681",
+          "AccessMask": "0x00020019",
+          "AceFlags": "Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "None",
+          "PropagationFlags": "None"
+        },
+        {
+          "Order": 12,
+          "Type": "AccessAllowed",
+          "SID": "S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681",
+          "AccessMask": "0x80000000",
+          "AceFlags": "ContainerInherit, InheritOnly, Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "ContainerInherit",
+          "PropagationFlags": "InheritOnly"
+        }
+      ],
+      "CryptSvcACEs": [
+        {
+          "Order": 0,
+          "Type": "AccessAllowed",
+          "SID": "S-1-5-80-242729624-280608522-2219052887-3187409060-2225943459",
+          "AccessMask": "0x000F003F",
+          "AceFlags": "Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "None",
+          "PropagationFlags": "None"
+        },
+        {
+          "Order": 1,
+          "Type": "AccessAllowed",
+          "SID": "S-1-5-80-242729624-280608522-2219052887-3187409060-2225943459",
+          "AccessMask": "0x10000000",
+          "AceFlags": "ObjectInherit, ContainerInherit, InheritOnly, Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "ObjectInherit, ContainerInherit",
+          "PropagationFlags": "InheritOnly"
+        }
+      ],
+      "NetworkServiceACEs": []
+    },
+    {
+      "Key": "HKLM:\\SOFTWARE\\Microsoft\\SystemCertificates\\AuthRoot\\Certificates",
+      "Status": "OBSERVED",
+      "OwnerSID": "S-1-5-18",
+      "GroupSID": "S-1-5-18",
+      "Protected": false,
+      "Canonical": true,
+      "ControlFlags": "DiscretionaryAclPresent, DiscretionaryAclAutoInherited, SelfRelative",
+      "SDDL": "O:SYG:SYD:AI(A;ID;KA;;;S-1-5-80-242729624-280608522-2219052887-3187409060-2225943459)(A;OICIIOID;GA;;;S-1-5-80-242729624-280608522-2219052887-3187409060-2225943459)(A;ID;KR;;;BU)(A;CIIOID;GR;;;BU)(A;ID;KA;;;BA)(A;CIIOID;GA;;;BA)(A;ID;KA;;;SY)(A;CIIOID;GA;;;SY)(A;CIIOID;GA;;;CO)(A;ID;KR;;;AC)(A;CIIOID;GR;;;AC)(A;ID;KR;;;S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681)(A;CIIOID;GR;;;S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681)",
+      "ACEs": [
+        {
+          "Order": 0,
+          "Type": "AccessAllowed",
+          "SID": "S-1-5-80-242729624-280608522-2219052887-3187409060-2225943459",
+          "AccessMask": "0x000F003F",
+          "AceFlags": "Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "None",
+          "PropagationFlags": "None"
+        },
+        {
+          "Order": 1,
+          "Type": "AccessAllowed",
+          "SID": "S-1-5-80-242729624-280608522-2219052887-3187409060-2225943459",
+          "AccessMask": "0x10000000",
+          "AceFlags": "ObjectInherit, ContainerInherit, InheritOnly, Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "ObjectInherit, ContainerInherit",
+          "PropagationFlags": "InheritOnly"
+        },
+        {
+          "Order": 2,
+          "Type": "AccessAllowed",
+          "SID": "S-1-5-32-545",
+          "AccessMask": "0x00020019",
+          "AceFlags": "Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "None",
+          "PropagationFlags": "None"
+        },
+        {
+          "Order": 3,
+          "Type": "AccessAllowed",
+          "SID": "S-1-5-32-545",
+          "AccessMask": "0x80000000",
+          "AceFlags": "ContainerInherit, InheritOnly, Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "ContainerInherit",
+          "PropagationFlags": "InheritOnly"
+        },
+        {
+          "Order": 4,
+          "Type": "AccessAllowed",
+          "SID": "S-1-5-32-544",
+          "AccessMask": "0x000F003F",
+          "AceFlags": "Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "None",
+          "PropagationFlags": "None"
+        },
+        {
+          "Order": 5,
+          "Type": "AccessAllowed",
+          "SID": "S-1-5-32-544",
+          "AccessMask": "0x10000000",
+          "AceFlags": "ContainerInherit, InheritOnly, Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "ContainerInherit",
+          "PropagationFlags": "InheritOnly"
+        },
+        {
+          "Order": 6,
+          "Type": "AccessAllowed",
+          "SID": "S-1-5-18",
+          "AccessMask": "0x000F003F",
+          "AceFlags": "Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "None",
+          "PropagationFlags": "None"
+        },
+        {
+          "Order": 7,
+          "Type": "AccessAllowed",
+          "SID": "S-1-5-18",
+          "AccessMask": "0x10000000",
+          "AceFlags": "ContainerInherit, InheritOnly, Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "ContainerInherit",
+          "PropagationFlags": "InheritOnly"
+        },
+        {
+          "Order": 8,
+          "Type": "AccessAllowed",
+          "SID": "S-1-3-0",
+          "AccessMask": "0x10000000",
+          "AceFlags": "ContainerInherit, InheritOnly, Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "ContainerInherit",
+          "PropagationFlags": "InheritOnly"
+        },
+        {
+          "Order": 9,
+          "Type": "AccessAllowed",
+          "SID": "S-1-15-2-1",
+          "AccessMask": "0x00020019",
+          "AceFlags": "Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "None",
+          "PropagationFlags": "None"
+        },
+        {
+          "Order": 10,
+          "Type": "AccessAllowed",
+          "SID": "S-1-15-2-1",
+          "AccessMask": "0x80000000",
+          "AceFlags": "ContainerInherit, InheritOnly, Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "ContainerInherit",
+          "PropagationFlags": "InheritOnly"
+        },
+        {
+          "Order": 11,
+          "Type": "AccessAllowed",
+          "SID": "S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681",
+          "AccessMask": "0x00020019",
+          "AceFlags": "Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "None",
+          "PropagationFlags": "None"
+        },
+        {
+          "Order": 12,
+          "Type": "AccessAllowed",
+          "SID": "S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681",
+          "AccessMask": "0x80000000",
+          "AceFlags": "ContainerInherit, InheritOnly, Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "ContainerInherit",
+          "PropagationFlags": "InheritOnly"
+        }
+      ],
+      "CryptSvcACEs": [
+        {
+          "Order": 0,
+          "Type": "AccessAllowed",
+          "SID": "S-1-5-80-242729624-280608522-2219052887-3187409060-2225943459",
+          "AccessMask": "0x000F003F",
+          "AceFlags": "Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "None",
+          "PropagationFlags": "None"
+        },
+        {
+          "Order": 1,
+          "Type": "AccessAllowed",
+          "SID": "S-1-5-80-242729624-280608522-2219052887-3187409060-2225943459",
+          "AccessMask": "0x10000000",
+          "AceFlags": "ObjectInherit, ContainerInherit, InheritOnly, Inherited",
+          "Inherited": true,
+          "InheritanceFlags": "ObjectInherit, ContainerInherit",
+          "PropagationFlags": "InheritOnly"
+        }
+      ],
+      "NetworkServiceACEs": []
+    },
+    {
+      "Key": "HKLM:\\SOFTWARE\\Microsoft\\SystemCertificates\\AuthRoot\\CRLs",
+      "Status": "OBSERVED",
+      "OwnerSID": "S-1-5-18",
+      "GroupSID": "S-1-5-18",
+      "Protected": true,
+      "Canonical": true,
+      "ControlFlags": "DiscretionaryAclPresent, DiscretionaryAclAutoInherited, DiscretionaryAclProtected, SelfRelative",
+      "SDDL": "O:SYG:SYD:PAI(A;CIIO;KA;;;CO)(A;CI;KA;;;SY)(A;CI;KA;;;BA)(A;CI;KR;;;BU)(A;CI;KR;;;AC)(A;CI;KR;;;S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681)",
+      "ACEs": [
+        {
+          "Order": 0,
+          "Type": "AccessAllowed",
+          "SID": "S-1-3-0",
+          "AccessMask": "0x000F003F",
+          "AceFlags": "ContainerInherit, InheritOnly",
+          "Inherited": false,
+          "InheritanceFlags": "ContainerInherit",
+          "PropagationFlags": "InheritOnly"
+        },
+        {
+          "Order": 1,
+          "Type": "AccessAllowed",
+          "SID": "S-1-5-18",
+          "AccessMask": "0x000F003F",
+          "AceFlags": "ContainerInherit",
+          "Inherited": false,
+          "InheritanceFlags": "ContainerInherit",
+          "PropagationFlags": "None"
+        },
+        {
+          "Order": 2,
+          "Type": "AccessAllowed",
+          "SID": "S-1-5-32-544",
+          "AccessMask": "0x000F003F",
+          "AceFlags": "ContainerInherit",
+          "Inherited": false,
+          "InheritanceFlags": "ContainerInherit",
+          "PropagationFlags": "None"
+        },
+        {
+          "Order": 3,
+          "Type": "AccessAllowed",
+          "SID": "S-1-5-32-545",
+          "AccessMask": "0x00020019",
+          "AceFlags": "ContainerInherit",
+          "Inherited": false,
+          "InheritanceFlags": "ContainerInherit",
+          "PropagationFlags": "None"
+        },
+        {
+          "Order": 4,
+          "Type": "AccessAllowed",
+          "SID": "S-1-15-2-1",
+          "AccessMask": "0x00020019",
+          "AceFlags": "ContainerInherit",
+          "Inherited": false,
+          "InheritanceFlags": "ContainerInherit",
+          "PropagationFlags": "None"
+        },
+        {
+          "Order": 5,
+          "Type": "AccessAllowed",
+          "SID": "S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681",
+          "AccessMask": "0x00020019",
+          "AceFlags": "ContainerInherit",
+          "Inherited": false,
+          "InheritanceFlags": "ContainerInherit",
+          "PropagationFlags": "None"
+        }
+      ],
+      "CryptSvcACEs": [],
+      "NetworkServiceACEs": []
+    },
+    {
+      "Key": "HKLM:\\SOFTWARE\\Microsoft\\SystemCertificates\\AuthRoot\\CTLs",
+      "Status": "OBSERVED",
+      "OwnerSID": "S-1-5-18",
+      "GroupSID": "S-1-5-18",
+      "Protected": true,
+      "Canonical": true,
+      "ControlFlags": "DiscretionaryAclPresent, DiscretionaryAclAutoInherited, DiscretionaryAclProtected, SelfRelative",
+      "SDDL": "O:SYG:SYD:PAI(A;CIIO;KA;;;CO)(A;CI;KA;;;SY)(A;CI;KA;;;BA)(A;CI;KR;;;BU)(A;CI;KR;;;AC)(A;CI;KR;;;S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681)",
+      "ACEs": [
+        {
+          "Order": 0,
+          "Type": "AccessAllowed",
+          "SID": "S-1-3-0",
+          "AccessMask": "0x000F003F",
+          "AceFlags": "ContainerInherit, InheritOnly",
+          "Inherited": false,
+          "InheritanceFlags": "ContainerInherit",
+          "PropagationFlags": "InheritOnly"
+        },
+        {
+          "Order": 1,
+          "Type": "AccessAllowed",
+          "SID": "S-1-5-18",
+          "AccessMask": "0x000F003F",
+          "AceFlags": "ContainerInherit",
+          "Inherited": false,
+          "InheritanceFlags": "ContainerInherit",
+          "PropagationFlags": "None"
+        },
+        {
+          "Order": 2,
+          "Type": "AccessAllowed",
+          "SID": "S-1-5-32-544",
+          "AccessMask": "0x000F003F",
+          "AceFlags": "ContainerInherit",
+          "Inherited": false,
+          "InheritanceFlags": "ContainerInherit",
+          "PropagationFlags": "None"
+        },
+        {
+          "Order": 3,
+          "Type": "AccessAllowed",
+          "SID": "S-1-5-32-545",
+          "AccessMask": "0x00020019",
+          "AceFlags": "ContainerInherit",
+          "Inherited": false,
+          "InheritanceFlags": "ContainerInherit",
+          "PropagationFlags": "None"
+        },
+        {
+          "Order": 4,
+          "Type": "AccessAllowed",
+          "SID": "S-1-15-2-1",
+          "AccessMask": "0x00020019",
+          "AceFlags": "ContainerInherit",
+          "Inherited": false,
+          "InheritanceFlags": "ContainerInherit",
+          "PropagationFlags": "None"
+        },
+        {
+          "Order": 5,
+          "Type": "AccessAllowed",
+          "SID": "S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681",
+          "AccessMask": "0x00020019",
+          "AceFlags": "ContainerInherit",
+          "Inherited": false,
+          "InheritanceFlags": "ContainerInherit",
+          "PropagationFlags": "None"
+        }
+      ],
+      "CryptSvcACEs": [],
+      "NetworkServiceACEs": []
+    }
+  ]
+}

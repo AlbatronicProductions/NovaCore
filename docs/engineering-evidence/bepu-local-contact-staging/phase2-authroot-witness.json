@@ -1,0 +1,72 @@
+{
+  "Observed": "2026-09-12T13:08:24.9168931-04:00",
+  "Branch": "codex/bepu-local-contact-staging",
+  "Head": "3933d832b73511a8d08468b7b27a9b2820e2f8ee",
+  "Main": "3933d832b73511a8d08468b7b27a9b2820e2f8ee",
+  "OriginMain": "3933d832b73511a8d08468b7b27a9b2820e2f8ee",
+  "M1417": "a890a12c5cfb6c1eb4ee15906a21161bc4930988",
+  "Identity": {
+    "FilesChecked": 501,
+    "ChangedBaselineFiles": [
+      "src/NovaCore.Simulation/NovaCore.Simulation.csproj"
+    ],
+    "ProjectProposalSHA256": "B36A1385F5B603AEFAE79FF910A895AD68F4856B7509DA8EFBB530845563712D",
+    "RefDifferences": [],
+    "AclDrift": [],
+    "Staged": []
+  },
+  "Attempt": {
+    "Start": "2026-09-12T13:03:22.8589864-04:00",
+    "End": "2026-09-12T13:03:35.0172345-04:00",
+    "Command": "certutil -verify -urlfetch E:\\NovaCore\\build\\bepu-trust-recovery\\signer.cer",
+    "CapturedExit": "0",
+    "OutputSHA256": "2EB2DBCFB7132BFC5C441C9C622D67FA36D0DD058171BC934434F2D893CC66E0",
+    "ChainResult": "CERT_E_UNTRUSTEDROOT 0x800b0109",
+    "LeafRevocation": "Passed",
+    "ExitCaveat": "certutil completion/exit zero does not establish trusted-chain success"
+  },
+  "ServiceAtCapture": {
+    "Name": "CryptSvc",
+    "ProcessId": 5196,
+    "StartName": "NT Authority\\NetworkService",
+    "State": "Running"
+  },
+  "Trace": {
+    "Source": "E:\\NovaCore\\build\\bepu-trust-recovery\\host-recovery\\phase2\\authroot-denial.csv",
+    "Retained": "phase2-authroot-denial.csv",
+    "SHA256": "984BC270C0F4EDF4B76DA79632B6F43CBA16597D7A44067772D0CAD0C6594A49",
+    "Bytes": 2116,
+    "Rows": 12,
+    "FirstLocalTime": "1:03:23.1050813 PM",
+    "LastLocalTime": "1:03:23.4841331 PM",
+    "DateBasis": "2026-09-12, attempt start/end records, America/New_York UTC-04:00",
+    "Process": "svchost.exe",
+    "PID": 5196,
+    "Operation": "RegCreateKey",
+    "Path": "HKLM\\SOFTWARE\\Microsoft\\SystemCertificates\\AuthRoot\\CRLs",
+    "DesiredAccess": "Read/Write, Delete",
+    "Result": "ACCESS DENIED",
+    "RawNumericMask": "UNAVAILABLE in saved CSV",
+    "CallStack": "UNAVAILABLE in saved CSV",
+    "PerEventUser": "UNAVAILABLE in saved CSV; service configuration and prior CAPI2 identify NETWORK SERVICE",
+    "Qualification": "First denied AuthRoot operation captured by the requested filter. No denial on CTLs captured; no claim that CTLs is healthy or requires the same repair."
+  },
+  "CurrentDeniedKeySDDL": "O:SYG:SYD:PAI(A;CIIO;KA;;;CO)(A;CI;KA;;;SY)(A;CI;KA;;;BA)(A;CI;KR;;;BU)(A;CI;KR;;;AC)(A;CI;KR;;;S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681)",
+  "CurrentACL": "phase2-authroot-acls.json; owner/group/DACL only, SACL not requested; five keys unchanged on final readback",
+  "ExpectedChildSDDL": "UNQUALIFIED",
+  "ManifestEvidence": "phase2-manifest-witness.json; parent-only descriptors do not establish exact child baseline",
+  "PreciseRepairDelta": "UNQUALIFIED; no default child owner/protection/ACE/mask/ordering baseline established",
+  "RepairProposed": false,
+  "ACLMutationPerformed": false,
+  "RegistryCTL": {
+    "SHA256": "4276AF3669A141A59388BC56A87F6614D9A9BDDDF560636C264219A7EB11256F",
+    "Bytes": 175647,
+    "ThisUpdate": "2023-11-07 16:36 EST",
+    "State": "Unchanged from phase 1; not refreshed by the manual attempt"
+  },
+  "PackageVerificationThisPhase": "NOT RUN; host trust not recovered",
+  "CleanRestoresThisPhase": 0,
+  "AdapterResumed": false,
+  "Classification": "AUTHROOT ACL DEFECT — EXACT DENIAL PROVEN, REPAIR BASELINE UNQUALIFIED",
+  "LeadJudgment": "ESCALATE TO PROJECT CONTROL"
+}
