@@ -96,5 +96,6 @@ Start with the [build and run guide](docs/build-windows.md) and
 - [Contact clearance and validation](docs/engineering-evidence/postimpact-feature-coverage/README.md)
 - [Engineering evidence](docs/engineering-evidence/README.md)
 
-*Current banked checkpoint: M14.16 — post-impact terrain-contact clearance for the
-supported authored point. Surface interaction and launch foundations remain in development.*
+*Project Control accepted M14.18 — Staged Finite-Body BEPU Contact. Git refs establish
+banking state; [current scope](docs/NOVACORE_CURRENT_STATE.md) remains bounded private
+solving. Surface Interaction / Launch Foundation remains OPEN.*

@@ -7,7 +7,7 @@ The retained solver draft remains **UNQUALIFIED — NOT PART OF THIS CORRECTION*
 
 HEAD/main/origin/main remain `f77d97adaf3ea2637214dfdfd6343973f9d147d7`.
 Branch: `codex/bepu-local-contact-staging-v2`. No refs, commits, tags or canonical
-index entries changed. The previous [build blocker](staging-build-blocker.md)
+index entries changed. The previous build attempt
 correctly recorded a banked manifest/pin contradiction.
 
 The banked and initial working manifest contained 5,338 bytes, 88 LF endings,

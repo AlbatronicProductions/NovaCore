@@ -11,9 +11,37 @@ renderer. Simulation owns celestial identity, exact time, physical state, and
 reference-frame transforms. Graphics consumes immutable root-resolved snapshots
 and performs FP64 camera-relative subtraction before GPU transport.
 
-## Banked production checkpoint
+## Accepted M14.18 production responsibility
 
-Current banked baseline: **M14.14**, main/tag target
+**M14.18 — Staged Finite-Body BEPU Contact** is **PASS / ACCEPT** by Project Control.
+It qualifies staged finite-body contact stepping in a bounded persistent local BEPU
+world behind NovaCore canonical authority. The preceding production baseline is
+`b78f5b8c763b8d118b93f48fc4f87e78d7b6b4b2` (restore qualified BEPU manifest identity).
+The approved tag is `m14.18-staged-finite-body-bepu-contact`; Git refs establish
+banking state. M14 remains **OPEN**; no subsequent responsibility is authorized.
+
+NovaCore owns FP64 position/velocity, canonical orientation/angular state, exact
+time, revisions, event ordering, mass/inertia, force/torque, publication and history.
+BEPU retains private body/static/broadphase, manifolds, constraints, warm-start and
+activity state. M14.18 exports paired staged state without canonical BEPU publication.
+It qualifies exact interval admission, bounded local precision transport, retained
+manifold/warm-start continuation and authority isolation.
+
+The qualification-only 2 x 1 x 1 m, 1,000 kg box contacts an authored planar slab.
+The 20 mm transient penetration bar is 2% of its minimum dimension, not a universal
+contact tolerance. Centered/tilted peaks are 5.455954/4.164368 mm, with 600/600 final
+supported steps each. Warmed full step/export allocates zero managed bytes; the
+positive control detects 152 bytes. Retained storage is bounded at 518,096 bytes
+below 8 MiB. Three fresh Release processes pass the declared performance bars.
+
+Canonical BEPU publication, live Earth collision, arbitrary triangle-mesh terrain,
+production spacecraft colliders, landing gear, grounded gameplay, launchpad support
+and rotating/rebased local frames remain outside qualification. See the
+[accepted result](engineering-evidence/bepu-local-contact-staging/README.md).
+
+## Banked predecessor checkpoints
+
+Banked M14.14 checkpoint, main/tag target
 `f64dc07f23a0a765b9b07dd49b895a8f3cb5ebfe`, tag
 `m14.14-private-root-postimpact-state`. M14 remains **OPEN**.
 Banked M14.15 [paired private propagation](private-canonical-propagation.md)
@@ -36,14 +64,14 @@ Implementation commit: `3813791380ad035c308bb93cc404102a659d812d`.
 It supplies checked same-root exact-law scalar, linear and angular impulse enclosures,
 without executable FP64 selection or mutation. See the [banked contract](certified-response-proposals.md).
 
-Current banked production: **M14.12 — Qualify pre-impact velocity tuples at provider-owned
+Banked predecessor: **M14.12 — Qualify pre-impact velocity tuples at provider-owned
 contact roots**, commit `e5fde08bcae834d8abc107cd26e7601fbfa3e1e0`, tag
 `m14.12-certified-preimpact-velocity`. It encloses COM inertial-root
 and full feature/material-relative velocity at the same alpha. It prepares inputs
 for later post-impact numerical realization; no response is applied. See the
 [banked contract](certified-preimpact-velocity.md).
 
-Current banked production: **M14.13 — Certify final paired post-impact velocity states**,
+Banked predecessor: **M14.13 — Certify final paired post-impact velocity states**,
 selecting from a fixed maximum of 65
 final-value candidates and checks nonapproach, momentum/coupling and moving-surface
 energy defects. The result is read-only root-bound evidence; no mutation, canonical
@@ -53,11 +81,11 @@ Status: **BANKED M14.13**, main/tag target `704c77f1aab899ccf3452ee3fc88471d1e31
 The refusal allocation was corrected by immutable runtime preparation; the retained
 banked acceptance covers Debug/Release, real Florida and final bit/certificate replay.
 
-- Current banked production: **M14.14 — Construct private post-impact spacecraft state at provider-owned contact roots.**
+- Banked predecessor: **M14.14 — Construct private post-impact spacecraft state at provider-owned contact roots.**
 COM pose at the same provider-owned alpha, frozen dynamics and unchanged final
 velocity bits. Checked construction/read retain existing source applicability.
 It implements no remainder advancement, endpoint selection or canonical publication.
-See [current candidate contract](private-postimpact-state.md) and
+See [banked contract](private-postimpact-state.md) and
 [validation evidence](engineering-evidence/private-postimpact-state/README.md).
 
 Banked predecessor: **M14.9 monotone Florida point-contact certification**,
@@ -456,18 +484,16 @@ visually finished.
 
 ## Next architectural decision and work boundary
 
-M14 remains open at banked M14.12. The development worktree is `E:\NovaCore` on
-`main`; `main` is the banked baseline.
+M14.18 has Project Control acceptance for the bounded staged-contact responsibility
+above. Git refs establish actual banking state. No later production responsibility
+or milestone number is authorized; the next decision remains with Project Control.
 M13 is closed at M13.6 and there is no M13.7. Preserve the
 accepted NCSM1 physical, regional/facility, visibility, tessellation, memory and
 publication contracts. Historical exact-copy, residual-validation and lifecycle
 experiments do not automatically become production candidates.
 
-Project Control must accept the current final-velocity candidate's validated
-bounded result before choosing a later responsibility.
-The receipt qualifies final paired values at an already certified root. No physical execution,
-general terrain discovery, solver, launch/landing or measurement migration is
-opened by this candidate.
+The accepted BEPU result is private staged solving only. Live canonical BEPU
+publication, real terrain collision and launch/landing remain separate responsibilities.
 Do not assign a next milestone or regenerate NCSM1 assets.
 Future work must distinguish physical geometry, depth/ownership and
 presentation/LOD behavior while keeping `H(bodyDirection)` authoritative.
@@ -478,7 +504,7 @@ Unrelated retirement findings are tracked in [the subsequent debt ledger](reposi
 
 **M14.16 — Certify post-impact terrain-contact clearance for the admitted authored point**
 
-Current banked chain:
+Banked chain through M14.16:
 
 M14.9 certified contact root alpha
 → M14.10 qualified contact kinematics
@@ -500,8 +526,7 @@ Authoritative beta / next-root issuance was retired from the accepted contract a
 production qualification proved insufficient. Internal crossing/root mathematics remain
 where required to prevent false clearance.
 
-The M14.15 staged endpoint plus applicable M14.16 clearance is numerically qualified and
-terrain-clear for this admitted singleton terrain event class, but remains PRIVATE and
-NOT canonical publication authority.
-
-M14 remains OPEN. Publication is unimplemented. BEPU gate is NOT REACHED.
+M14.15 endpoint and M14.16 clearance receipts do not independently authorize canonical
+publication. Banked M14.17 separately admits certified paired continuation publication
+at canonical T under its existing ownership contract. M14.18 adds private BEPU
+solving only and supplies no BEPU publication authority. M14 remains OPEN.

@@ -15,11 +15,16 @@ not as an onboarding requirement.
 
 ## Repository rules
 
+Project Control accepted **M14.18 — Staged Finite-Body BEPU Contact**. Resume from the
+[current-state boundaries](NOVACORE_CURRENT_STATE.md) and
+[accepted qualification](engineering-evidence/bepu-local-contact-staging/README.md).
+The approved tag is `m14.18-staged-finite-body-bepu-contact`; inspect Git refs for
+actual banking state. No subsequent responsibility or milestone number is authorized.
+
 Banked M14.15: [paired private spacecraft propagation](private-canonical-propagation.md)
-on `main`, banked as M14.15
-`f64dc07f23a0a765b9b07dd49b895a8f3cb5ebfe`. It produces conditional staged state
-only. Event coverage and canonical publication remain deferred. No next milestone
-number or banking authority is assigned.
+at `dc274639f670d122764bb0e8f3d0c95ae201c7a4`, tag
+`m14.15-private-canonical-propagation`. It produces conditional staged state only;
+event coverage and canonical publication were deferred by M14.15.
 Banked M14.15 acceptance: final normal Release passed
 5/5 fresh processes, 46/46 groups each; remaining declared acceptance gates passed.
 Historical real-object allocation witnesses remain retained. Candidate-associated
@@ -46,14 +51,13 @@ Surface Interaction / Launch Foundation has banked **M14.1**, commit
 physical-event epochs**, commit `d0b9f9d69d55b8ba85a7b24a44f93e03cea2dcf6`, tag
 `m14.6-physical-event-epochs`. M14 remains **OPEN**.
 
-M14.1 through M14.13 are banked. The current baseline is
+At the M14.13 checkpoint, the banked baseline was
 `704c77f1aab899ccf3452ee3fc88471d1e311aca`, tag `m14.13-certified-postimpact-velocity`:
 [certified final linear/angular bits](certified-postimpact-velocity.md).
 - Banked M14.14 [private post-impact spacecraft state](private-postimpact-state.md) adds source-defined root pose, frozen dynamics and checked access at the same provider-owned alpha.
-- M14.14 adds source-defined pose, frozen dynamics and checked access at the same provider-owned alpha.
-checked access at the same provider root. No remainder advancement, endpoint selection,
-canonical publication or contact reacquisition is implemented. Return it to Project
-Control after the bounded gates in its [evidence](engineering-evidence/private-postimpact-state/README.md).
+- M14.14 itself implements no remainder advancement, endpoint selection, canonical
+  publication or contact reacquisition. Its accepted gates are retained in the
+  [evidence](engineering-evidence/private-postimpact-state/README.md).
 M14.8 is
 `2657bb16cdee2a42d1e5f9be830d247fb3c607f6`, tag
 `m14.8-exact-event-earth-relative-observation`; it owns same-epoch numerical
@@ -158,16 +162,11 @@ is the concise performance checkpoint. Historical LiveKernelEvent 141 remains
 
 ## Next architectural decision and work boundary
 
-M13 is closed at M13.6; M14 remains open with M14.1–M14.12 banked. The
-[monotone Florida point-contact certification](florida-monotone-contact-certification.md)
-candidate is **BANKED as M14.9**.
-It admits one nonrotating authored point in the existing full-weight grading,
-within one-second cells and seed-relative ±3,600-second coverage. It proves
-clear/root outcomes and bounded comparison, without event execution or response.
-Banked M14.13 qualifies read-only
-final velocity values at those roots. Its validation result is recorded above.
-M14.13 is banked; do not broaden discovery or start
-private execution or support.
+M13 is closed at M13.6; M14 remains OPEN. Project Control accepted M14.18's bounded
+private BEPU contact stepping. Canonical BEPU publication, live Earth/mesh terrain,
+production spacecraft colliders, landing gear, grounded gameplay, launchpad support
+and rotating/rebased local frames remain outside qualification. The next production
+responsibility returns to Project Control; no later milestone is assigned.
 
 - Preserve banked M13.1–M13.6 outcomes and future tessellation/displacement capacity.
 - Historical exact-copy, residual-validation and lifecycle experiments are evidence,
@@ -234,7 +233,7 @@ Unrelated retirement findings are tracked in [the subsequent debt ledger](reposi
 
 **M14.16 — Certify post-impact terrain-contact clearance for the admitted authored point**
 
-M14.16 is the current banked production responsibility after M14.15.
+M14.16 is the banked terrain-clearance responsibility following M14.15.
 
 For the complete singleton authored point admitted by the existing M14.9–M14.15 chain
 and its supported natural-terrain relation, M14.16 either certifies
@@ -258,5 +257,6 @@ Real Florida acceptance:
 M14.15 remains the staged private propagation authority. M14.16 adds checked terrain
 clearance evidence; it does not publish canonical state.
 
-M14 remains OPEN. Canonical publication has not begun. Beta issuance is deferred.
-BEPU gate remains NOT REACHED.
+Banked M14.17 separately admits certified paired continuation publication at canonical
+T. M14.18 qualifies private BEPU solving without BEPU publication authority. M14
+remains OPEN; beta issuance remains outside the accepted singleton-clearance contract.

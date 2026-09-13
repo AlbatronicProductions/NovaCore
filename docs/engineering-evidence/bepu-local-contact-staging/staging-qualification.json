@@ -1,0 +1,435 @@
+{
+  "date": "2026-09-13",
+  "baseline": "b78f5b8c763b8d118b93f48fc4f87e78d7b6b4b2",
+  "branch": "codex/bepu-local-contact-staging-v2",
+  "status": "STAGED FINITE-BODY BEPU CONTACT — READY FOR PROJECT CONTROL ACCEPTANCE",
+  "bankedAtQualification": false,
+  "projectControlAcceptance": {
+    "judgment": "PASS / ACCEPT",
+    "milestone": "M14.18 — Staged Finite-Body BEPU Contact",
+    "approvedTag": "m14.18-staged-finite-body-bepu-contact",
+    "bankingIdentity": "Git refs; final review itself performs no banking",
+    "measurementsChangedByFinalReview": false
+  },
+  "environment": {
+    "architecture": "x64",
+    "SDK": "10.0.303",
+    "profiler": "NONE",
+    "runtime": "10.0.12",
+    "host": "ALBATRONIC007",
+    "runtimeConfigurationChanges": "NONE"
+  },
+  "correction": "One planar static representation change: coplanar two-triangle mesh replaced by authored 128x2x128m static slab with unchanged top y=0.",
+  "qualityBar": {
+    "maximumPenetrationMetres": 0.02,
+    "derivation": "2 percent of qualification box minimum 1m dimension",
+    "scope": "qualification-only"
+  },
+  "builds": [
+    {
+      "result": "PASS",
+      "warnings": 0,
+      "configuration": "Debug",
+      "errors": 0
+    },
+    {
+      "result": "PASS",
+      "warnings": 0,
+      "configuration": "Release",
+      "errors": 0
+    }
+  ],
+  "focusedQualification": [
+    {
+      "exit": 0,
+      "output": [
+        "STAGING_ADMISSION PASS: exact schedule; authority/configuration/event/world/frontier/thread/disposal/torque/geometry refusals; post-step invalidation",
+        "STAGING_CONTACT tilted=False steps=1200 seconds=20 max_points=4 max_depth_m=0.005455954 geometric_peak_m=0.005455926960645563 max_omega_rad_s=0.04990220942226812 rest_y_m=0.49966177344322205 rest_drift_m=5.960464477539063E-08 speed_m_s=9.169306265126838E-07 support_steps=600",
+        "STAGING_CONTACT tilted=True steps=1200 seconds=20 max_points=4 max_depth_m=0.004164368 geometric_peak_m=0.004164378500802757 max_omega_rad_s=3.5320871536617684 rest_y_m=0.49966174364089966 rest_drift_m=5.960464477539063E-08 speed_m_s=9.405539856306131E-07 support_steps=600",
+        "STAGING_PRECISION bound_m=1024 tolerance_m=0.001 margin_m=0.02 local_import_position_error_m=2.3010547423046216E-07 local_import_velocity_error_m_s=5.691492973191235E-13 root_reconstruction_error_m=0 root_velocity_error_m_s=0 forced_velocity_y=-1.0000001192092896",
+        "ORDINARY_ALLOCATION gate=private-bepu-full-step-export bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "STAGING_STORAGE pool_bytes=458752 managed_allocation_upper_bound_bytes=59344 retained_upper_bound_bytes=518096 bound_bytes=8388608 measured_steps=1024 allocation_bytes=0",
+        "PASS Local contact staging: authority, exact time, persistent finite-body contact, paired export, negatives, allocation/storage"
+      ],
+      "configuration": "Debug"
+    },
+    {
+      "exit": 0,
+      "output": [
+        "STAGING_ADMISSION PASS: exact schedule; authority/configuration/event/world/frontier/thread/disposal/torque/geometry refusals; post-step invalidation",
+        "STAGING_CONTACT tilted=False steps=1200 seconds=20 max_points=4 max_depth_m=0.005455954 geometric_peak_m=0.005455926960645563 max_omega_rad_s=0.04990220942226812 rest_y_m=0.49966177344322205 rest_drift_m=5.960464477539063E-08 speed_m_s=9.169306265126838E-07 support_steps=600",
+        "STAGING_CONTACT tilted=True steps=1200 seconds=20 max_points=4 max_depth_m=0.004164368 geometric_peak_m=0.004164378500802757 max_omega_rad_s=3.5320871536617684 rest_y_m=0.49966174364089966 rest_drift_m=5.960464477539063E-08 speed_m_s=9.405539856306131E-07 support_steps=600",
+        "STAGING_PRECISION bound_m=1024 tolerance_m=0.001 margin_m=0.02 local_import_position_error_m=2.3010547423046216E-07 local_import_velocity_error_m_s=5.691492973191235E-13 root_reconstruction_error_m=0 root_velocity_error_m_s=0 forced_velocity_y=-1.0000001192092896",
+        "ORDINARY_ALLOCATION gate=private-bepu-full-step-export bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "STAGING_STORAGE pool_bytes=458752 managed_allocation_upper_bound_bytes=59344 retained_upper_bound_bytes=518096 bound_bytes=8388608 measured_steps=1024 allocation_bytes=0",
+        "PASS Local contact staging: authority, exact time, persistent finite-body contact, paired export, negatives, allocation/storage"
+      ],
+      "configuration": "Release"
+    }
+  ],
+  "predecessorGates": [
+    {
+      "gate": "--exact-event-motion-only",
+      "configuration": "Debug",
+      "exit": 0
+    },
+    {
+      "gate": "--translation-only",
+      "configuration": "Debug",
+      "exit": 0
+    },
+    {
+      "gate": "--contact-only",
+      "configuration": "Debug",
+      "exit": 0
+    },
+    {
+      "gate": "--contact-response-only",
+      "configuration": "Debug",
+      "exit": 0
+    },
+    {
+      "gate": "--isolated-contact-only",
+      "configuration": "Debug",
+      "exit": 0
+    },
+    {
+      "gate": "--earth-event-only",
+      "configuration": "Debug",
+      "exit": 0
+    },
+    {
+      "gate": "--florida-proof-only",
+      "configuration": "Debug",
+      "exit": 0
+    },
+    {
+      "gate": "--root-kinematics-only",
+      "configuration": "Debug",
+      "exit": 0
+    },
+    {
+      "gate": "--certified-response-only",
+      "configuration": "Debug",
+      "exit": 0
+    },
+    {
+      "gate": "--certified-preimpact-velocity-only",
+      "configuration": "Debug",
+      "exit": 0
+    },
+    {
+      "gate": "--certified-postimpact-velocity-only",
+      "configuration": "Debug",
+      "exit": 0
+    },
+    {
+      "gate": "--private-postimpact-state-only",
+      "configuration": "Debug",
+      "exit": 0
+    },
+    {
+      "gate": "--private-propagation-only",
+      "configuration": "Debug",
+      "exit": 0
+    },
+    {
+      "gate": "--postimpact-coverage-only",
+      "configuration": "Debug",
+      "exit": 0
+    },
+    {
+      "gate": "--continuation-ownership-only",
+      "configuration": "Debug",
+      "exit": 0
+    },
+    {
+      "gate": "--exact-event-motion-only",
+      "configuration": "Release",
+      "exit": 0
+    },
+    {
+      "gate": "--translation-only",
+      "configuration": "Release",
+      "exit": 0
+    },
+    {
+      "gate": "--contact-only",
+      "configuration": "Release",
+      "exit": 0
+    },
+    {
+      "gate": "--contact-response-only",
+      "configuration": "Release",
+      "exit": 0
+    },
+    {
+      "gate": "--isolated-contact-only",
+      "configuration": "Release",
+      "exit": 0
+    },
+    {
+      "gate": "--earth-event-only",
+      "configuration": "Release",
+      "exit": 0
+    },
+    {
+      "gate": "--florida-proof-only",
+      "configuration": "Release",
+      "exit": 0
+    },
+    {
+      "gate": "--root-kinematics-only",
+      "configuration": "Release",
+      "exit": 0
+    },
+    {
+      "gate": "--certified-response-only",
+      "configuration": "Release",
+      "exit": 0
+    },
+    {
+      "gate": "--certified-preimpact-velocity-only",
+      "configuration": "Release",
+      "exit": 0
+    },
+    {
+      "gate": "--certified-postimpact-velocity-only",
+      "configuration": "Release",
+      "exit": 0
+    },
+    {
+      "gate": "--private-postimpact-state-only",
+      "configuration": "Release",
+      "exit": 0
+    },
+    {
+      "gate": "--private-propagation-only",
+      "configuration": "Release",
+      "exit": 0
+    },
+    {
+      "gate": "--postimpact-coverage-only",
+      "configuration": "Release",
+      "exit": 0
+    },
+    {
+      "gate": "--continuation-ownership-only",
+      "configuration": "Release",
+      "exit": 0
+    }
+  ],
+  "supportingGates": [
+    {
+      "configuration": "Debug",
+      "project": "NovaCore.ReferenceFrames.Tests",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "project": "NovaCore.Precision.Tests",
+      "exit": 0
+    },
+    {
+      "configuration": "Debug",
+      "project": "NovaCore.BepuDependency.Tests",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "project": "NovaCore.ReferenceFrames.Tests",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "project": "NovaCore.Precision.Tests",
+      "exit": 0
+    },
+    {
+      "configuration": "Release",
+      "project": "NovaCore.BepuDependency.Tests",
+      "exit": 0
+    }
+  ],
+  "performance": [
+    {
+      "run": 1,
+      "exit": 0,
+      "process": 34780,
+      "result": "PASS",
+      "warmSteps": 128,
+      "completed": 1024,
+      "medianMs": 0.0146,
+      "p95Ms": 0.015,
+      "p99Ms": 0.0292,
+      "maxMs": 0.0502,
+      "creationMs": 29.7303,
+      "disposalMs": 2.2174,
+      "worstFive": [
+        {
+          "sample": 6,
+          "step": 134,
+          "milliseconds": 0.0502
+        },
+        {
+          "sample": 27,
+          "step": 155,
+          "milliseconds": 0.0296
+        },
+        {
+          "sample": 17,
+          "step": 145,
+          "milliseconds": 0.0296
+        },
+        {
+          "sample": 35,
+          "step": 163,
+          "milliseconds": 0.0294
+        },
+        {
+          "sample": 21,
+          "step": 149,
+          "milliseconds": 0.0294
+        }
+      ]
+    },
+    {
+      "run": 2,
+      "exit": 0,
+      "process": 23456,
+      "result": "PASS",
+      "warmSteps": 128,
+      "completed": 1024,
+      "medianMs": 0.0133,
+      "p95Ms": 0.0138,
+      "p99Ms": 0.0245,
+      "maxMs": 0.0696,
+      "creationMs": 30.5348,
+      "disposalMs": 2.5079,
+      "worstFive": [
+        {
+          "sample": 748,
+          "step": 876,
+          "milliseconds": 0.0696
+        },
+        {
+          "sample": 699,
+          "step": 827,
+          "milliseconds": 0.0647
+        },
+        {
+          "sample": 300,
+          "step": 428,
+          "milliseconds": 0.0586
+        },
+        {
+          "sample": 346,
+          "step": 474,
+          "milliseconds": 0.0571
+        },
+        {
+          "sample": 693,
+          "step": 821,
+          "milliseconds": 0.0482
+        }
+      ]
+    },
+    {
+      "run": 3,
+      "exit": 0,
+      "process": 2812,
+      "result": "PASS",
+      "warmSteps": 128,
+      "completed": 1024,
+      "medianMs": 0.0147,
+      "p95Ms": 0.0163,
+      "p99Ms": 0.0279,
+      "maxMs": 0.0705,
+      "creationMs": 30.4891,
+      "disposalMs": 2.2978,
+      "worstFive": [
+        {
+          "sample": 269,
+          "step": 397,
+          "milliseconds": 0.0705
+        },
+        {
+          "sample": 994,
+          "step": 1122,
+          "milliseconds": 0.0701
+        },
+        {
+          "sample": 221,
+          "step": 349,
+          "milliseconds": 0.0642
+        },
+        {
+          "sample": 629,
+          "step": 757,
+          "milliseconds": 0.0599
+        },
+        {
+          "sample": 951,
+          "step": 1079,
+          "milliseconds": 0.0598
+        }
+      ]
+    }
+  ],
+  "aggregate": {
+    "medianMs": 0.0145,
+    "samples": 3072,
+    "p95Ms": 0.0151,
+    "p99Ms": 0.0291,
+    "maxMs": 0.0705
+  },
+  "performanceLimitsMs": {
+    "median": 0.05,
+    "p99": 0.25,
+    "maximum": 0.5,
+    "p95": 0.1
+  },
+  "sourceHashes": {
+    "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.ContactProof.cs": "9F5F9954439BED11EDEC053B2BDECB4DB3578AA7D6379259E0891A69A86C014E",
+    "tests/NovaCore.Simulation.Tests/Program.cs": "4F8E3075255C7B69FCC97FF4B31C8924FBB19F1511A15A9DAAABDDECA4B3243A",
+    "tests/NovaCore.Simulation.Tests/LocalContactStagingTests.cs": "266FD9CEBD0BF9EE0DCAC08FE02F2B1C242EDEB4EF7AAD445CB562813DF2D0F5",
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactCallbacks.cs": "435081070FCD790EBAF16525091BD52CEC06DBDE175D02B388AA28380539AFEA",
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs": "4663BC13DC1102DBE08C9F1D554E6AE683B8A816093A3F8FF50CD2D8EFB98AB0",
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs": "04C8A288B57D6D841FE9D6742673F07FE3E6CD0E21247374F270C0A8CC9DEB20"
+  },
+  "sourceHashesBefore": {
+    "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.ContactProof.cs": "9F5F9954439BED11EDEC053B2BDECB4DB3578AA7D6379259E0891A69A86C014E",
+    "tests/NovaCore.Simulation.Tests/Program.cs": "4F8E3075255C7B69FCC97FF4B31C8924FBB19F1511A15A9DAAABDDECA4B3243A",
+    "tests/NovaCore.Simulation.Tests/LocalContactStagingTests.cs": "E0C1DD860A95EF6A41FDC6B435596F1697B12E692F129E7BD4101D15C12DC387",
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactCallbacks.cs": "435081070FCD790EBAF16525091BD52CEC06DBDE175D02B388AA28380539AFEA",
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs": "4663BC13DC1102DBE08C9F1D554E6AE683B8A816093A3F8FF50CD2D8EFB98AB0",
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs": "5D7DEB1D87F89BF186B838F33242C8F73AD9D1D172F3E7351CF004E1D465570F"
+  },
+  "changedThisFollowup": [
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs",
+    "tests/NovaCore.Simulation.Tests/LocalContactStagingTests.cs"
+  ],
+  "review": {
+    "scope": "Slab top-face central-impact qualification; arbitrary mesh terrain contact not qualified",
+    "causal": "PASS: exact pinned MeshReduction deletion branch matches child/parent witness",
+    "authority": "PASS: unchanged source/time/frontier/force/export/nonmutation boundary"
+  },
+  "noRendererChanges": true,
+  "noLiveEarth": true,
+  "noCanonicalPublication": true,
+  "noDisplayWorkMultipliedByWarp": true,
+  "cleanup": {
+    "path": "E:\\NovaCore\\build\\bepu-tilted-impact",
+    "priorFiles": 48,
+    "priorBytes": 17630836.0,
+    "remainingFiles": 0,
+    "remainingBytes": 0,
+    "disposition": "REMOVED MANUALLY BY PROJECT CONTROL; ABSENCE INDEPENDENTLY VERIFIED AT FINAL BANKING REVIEW",
+    "reason": "Earlier automatic deletion was blocked by policy. No deletion retried during final review.",
+    "priorDeferredScratch": "UNCHANGED; no prior blocked cleanup retried"
+  }
+}

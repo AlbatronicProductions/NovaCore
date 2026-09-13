@@ -80,11 +80,29 @@ dependency. The provider owns immutable root identity and bounded unresolved-awa
 comparison; the transaction engine exposes its own clock/timeline for freshness
 checks. No canonical time/comparer, event execution, response or visible route changes.
 
-The unbanked [qualified root-kinematics candidate](certified-root-contact-kinematics.md)
+Banked M14.10 [qualified root kinematics](certified-root-contact-kinematics.md)
 extends that provider with same-root normal, material-relative normal velocity
 and fixed lever enclosures. Issuance and consumption revalidate the existing
 authority; bounded width requests can remain unresolved. These are read-only
 physical witnesses, not impulse admission or authoritative replacements.
+
+Accepted **M14.18 — Staged Finite-Body BEPU Contact** retains one subordinate private
+BEPU world: body/static state, collision/manifold state, constraints, warm starts,
+activity state and pool lifetime. A copied canonical source captures engine/configuration
+identity, revisions, mass/inertia, force and exact source time. Admission validates
+source, world identity/frontier, pending events and the exact next endpoint before
+advancement. Failed qualification/export after advancement invalidates the world;
+further step/read attempts refuse. NovaCore retains canonical publication/history
+and force/torque authority; the admitted slice refuses unsupported nonzero torque.
+
+The 1,000,000-tick second remains authoritative. Private endpoints use
+`SourceStart + floor(n * 1_000_000 / 60)`; float dt is derived from each admitted
+integer interval. Position/velocity reduce in FP64 before bounded FP32 transport
+and reconstruct paired staged FP64 results. Fixed frame orientation and constant
+translational frame velocity exclude rotation/rebasing. The box/slab are qualification
+geometry for authored planar contact. Canonical BEPU publication, real Earth/mesh
+terrain and production spacecraft collision geometry remain separate responsibilities.
+See the [accepted qualification](engineering-evidence/bepu-local-contact-staging/README.md).
 
 `Spacecraft.Guidance` is a pure managed math layer. It evaluates orbital flight-reference vectors, deterministically constructs body-forward target orientations, and computes bounded body-space PD torque requests. The celestial sample owns SAS mode selection, exact-time hold-attitude capture, and a deterministic 20 Hz simulation-time cadence. At each active boundary it evaluates guidance and submits a quantized torque request through the existing rigid-body transaction path. The fixture uses `(120, 120, 120) kg·m²` inertia, fixture-specific `(8, 8, 8) N·m` SAS authority, gains `(7.5, 7.5, 7.5)` and `(63, 63, 63)`, `.002` deadbands, and `.01` settlement thresholds for deliberately mildly overdamped behavior. SAS control is sample-locally suspended above 10×; clock and orbital evaluation continue, and resumption begins at the first future cadence boundary. Graphics receives only the resulting evaluated body frame. Full high-warp control behavior remains deferred.
 
@@ -118,7 +136,7 @@ NCPE v2 remains the deterministic artifact contract for fixed and sampled celest
 
 `PlanetaryPresentationSnapshot` is the parallel immutable renderer input for evaluated celestial bodies. `PlanetaryBodyPresentationProvider` copies stable identity, root-resolved center, physical radius, color, and presentation label data from evaluated authority; graphics cannot mutate its celestial source. A separate immutable `PlanetMaterialCatalog` maps those stable identities to presentation-only material and optional ring records. Earth production uses the 18-level immutable NCSM1 New Earth Renderer scale-mesh library. Projected error and hysteresis select one persistent topology resource, while a camera-facing pupil snaps to exact lattice identity and reuses matching physical samples across movement. Every level and pupil evaluates the same canonical body-fixed `H(bodyDirection)`; topology density changes representation, never physical truth. One current and at most one incoming GPU generation exist. The incoming generation publishes atomically only after complete physical preparation, conservative visibility/compaction, indirect payload creation, GPU execution, and fence confirmation; a complete zero-visible generation is a valid sole owner and regenerates visible work on re-entry. Earth presentation authority is selected from body focus and eligibility, never inferred from resident Earth resources. Distant-body presentation, cheaper derived material classification, rings, labels, markers, and orbit paths remain presentation only. See [Current Engineering State](NOVACORE_CURRENT_STATE.md) for the accepted baseline and next work boundary.
 
-The latest banked production milestone is **M13.6**, commit
+The closed renderer baseline is **M13.6**, commit
 `90fef759243dd67918cd556e19027159e5a5eada`, tag
 `m13.6-cpu-cached-terrain-residency-keys`. **M13 — NCSM1 Terrain Performance is
 CLOSED; there is no M13.7.** Next production-front authorization returns to

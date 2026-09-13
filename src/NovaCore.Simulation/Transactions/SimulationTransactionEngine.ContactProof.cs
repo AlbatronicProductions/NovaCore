@@ -5,6 +5,7 @@ namespace NovaCore.Simulation.Transactions;
 
 internal sealed partial class SimulationTransactionEngine
 {
+    internal bool IsContactProofOwnerThread => _clock.PublicationPhase.IsOwnerThread;
     // Read access to this engine's OWN clock/timeline prevents an unrelated empty timeline
     // being supplied as proof that the engine's future motion segment is unchanged.
     internal SimulationInstant ContactProofCurrentTime => _clock.CurrentTime;

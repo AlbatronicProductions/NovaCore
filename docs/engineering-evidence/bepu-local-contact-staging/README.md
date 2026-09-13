@@ -1,4 +1,22 @@
-# Staged finite-body contact: dependency follow-ups
+# Staged finite-body contact: qualification and provenance
+
+**M14.18 — Staged Finite-Body BEPU Contact: Project Control PASS / ACCEPT.**
+
+Accepted [staged contact qualification](staging-qualification.md),
+with [identity/results](staging-qualification.json), [tilted-impact witness](tilted-impact-witness.json)
+and [reproduction instructions](tilted-impact-reproduction.md) identify the accepted
+implementation. The [final banking review and manual plan](m14.18-banking-review.md)
+records the pre-bank review; Git refs establish actual banking state. The approved
+tag is `m14.18-staged-finite-body-bepu-contact`. Qualification covers private retained
+solving against an authored planar static fixture, without canonical BEPU publication
+or arbitrary triangle-mesh terrain qualification. M14 remains OPEN; no next
+production responsibility is authorized.
+
+The production baseline preceding M14.18 is `b78f5b8c763b8d118b93f48fc4f87e78d7b6b4b2`, including the banked
+[manifest byte restoration](manifest-byte-restoration.md). Dependency/provenance work
+is closed. The following older dispositions describe their dated attempts only.
+
+## Historical dependency follow-ups
 
 Final qualification follow-up: [Hosted consumption dispatch blocker](hosted-consumption-qualification.md).
 Local qualification remains valid; hosted candidate CI cannot start under the
