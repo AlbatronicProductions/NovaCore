@@ -5,6 +5,7 @@ var tests = new (string Name, Action Test)[]
 {
     ("default selection", DefaultSelection),
     ("scenario catalog", ScenarioCatalogMappings),
+    ("contact development scenarios", ContactDevelopmentScenarios),
     ("Earth fullscreen native preset", EarthFullscreenNativePreset),
     ("M12D spherical billboard GPU proof preset", M12DSphericalBillboardGpuProofPreset),
     ("new Earth renderer preset", NewEarthRendererPreset),
@@ -37,10 +38,21 @@ static void DefaultSelection()
 
 static void ScenarioCatalogMappings()
 {
-    Equal(8, ScenarioCatalog.All.Count);
-    Equal(8, ScenarioCatalog.All.Count(definition => definition.IsSupported));
+    Equal(10, ScenarioCatalog.All.Count);
+    Equal(10, ScenarioCatalog.All.Count(definition => definition.IsSupported));
     True(ScenarioCatalog.All.Select(definition => definition.Preset).Distinct().Count() == ScenarioCatalog.All.Count,
         "Scenario presets must be unique.");
+}
+
+static void ContactDevelopmentScenarios()
+{
+    foreach(var pair in new[]{(NovaCoreScenarioPreset.ContactCentered,"contact-centered"),(NovaCoreScenarioPreset.ContactTilted,"contact-tilted")})
+    {
+        var configuration=Create(pair.Item1);
+        True(LaunchCommandBuilder.BuildArguments(configuration).Contains("--scene="+pair.Item2),"Contact scenario route");
+        Equal(NovaCoreStartingBody.None,configuration.StartingBody);
+        Equal(NovaCorePhysicalSurface.Generation3,configuration.PhysicalSurface);
+    }
 }
 
 static void M12DSphericalBillboardGpuProofPreset()

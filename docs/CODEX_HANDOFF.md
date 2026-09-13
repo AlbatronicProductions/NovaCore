@@ -15,6 +15,13 @@ not as an onboarding requirement.
 
 ## Repository rules
 
+Active unbanked branch: `codex/contact-episode-servicing`. The
+[candidate report](engineering-evidence/contact-episode-servicing/README.md)
+preserves passing accounting/trajectory/regression qualification, corrected Unicode
+status and repeated manual PASS, and an UNRESOLVED whole-frame tail classification.
+Do not restart validation or broaden into rendering
+forensics without Project Control's follow-up scope. No milestone is assigned.
+
 Project Control accepted **M14.18 — Staged Finite-Body BEPU Contact**. Resume from the
 [current-state boundaries](NOVACORE_CURRENT_STATE.md) and
 [accepted qualification](engineering-evidence/bepu-local-contact-staging/README.md).

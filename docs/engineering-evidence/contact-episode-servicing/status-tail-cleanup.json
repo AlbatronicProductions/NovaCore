@@ -1,0 +1,173 @@
+{
+  "capturedUtc": "2026-09-13T18:07:22.117649Z",
+  "authorization": "User explicitly reauthorized exact ten-file cleanup after prior policy rejection",
+  "status": "NOT REMOVED - renewed exact-scope deletion rejected before execution: blocked by policy. No alternate deletion attempted.",
+  "files": [
+    {
+      "path": "E:\\NovaCore\\build\\contact-episode-servicing-live\\centered.stdout.txt",
+      "bytes": 20938,
+      "sha256": "B5EFE7AD5B59C39BF0452EC2991D1CE11C23BF96C87E4594C0C0EAA72B6CC25B",
+      "lastWriteTimeUtc": "2026-09-13T17:38:41.7694763Z",
+      "classification": "DISPOSE",
+      "reason": "Superseded live log; exact contact result lines and provenance preserved here",
+      "retainedResultLines": [
+        "CONTACT_LIVE_READY tilted=False setup_ms=10.7581 world_ms=29.5731 binding_presentation_ms=2.0316 debt=0 steps=1200 rate=1:1 qualification_only=true",
+        "CONTACT_LIVE_END status=Completed - final canonical endpoint held frontier=1200 clock=20000000 debt=339 revision=1200 history=1200",
+        "CONTACT_LIVE_FRAME samples=3589 median_ms=5.554500 p95_ms=5.686200 p99_ms=5.896200 max_ms=36.064200 measurement=callback_to_callback_including_present_and_host_scheduling objective_ms=6.666667 storage_bytes=800000"
+      ]
+    },
+    {
+      "path": "E:\\NovaCore\\build\\contact-episode-servicing-live\\centered.stderr.txt",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "lastWriteTimeUtc": "2026-09-13T17:37:38.027846Z",
+      "classification": "DISPOSE",
+      "reason": "Empty stream",
+      "retainedResultLines": []
+    },
+    {
+      "path": "E:\\NovaCore\\build\\contact-episode-servicing-live\\tilted.stdout.txt",
+      "bytes": 41202,
+      "sha256": "C46744E5DC6F3495B17ADB88435921665E259E52AA8A11BAB14DA0561542F1FD",
+      "lastWriteTimeUtc": "2026-09-13T17:42:15.2309739Z",
+      "classification": "DISPOSE",
+      "reason": "Superseded live log; exact contact result lines and provenance preserved here",
+      "retainedResultLines": [
+        "CONTACT_LIVE_READY tilted=True setup_ms=10.4005 world_ms=29.3538 binding_presentation_ms=2.0501 debt=0 steps=1200 rate=1:1 qualification_only=true",
+        "CONTACT_LIVE_END status=Completed - final canonical endpoint held frontier=1200 clock=20000000 debt=5279 revision=1200 history=1200",
+        "CONTACT_LIVE_FRAME samples=3590 median_ms=5.555000 p95_ms=5.689100 p99_ms=5.880000 max_ms=40.435800 measurement=callback_to_callback_including_present_and_host_scheduling objective_ms=6.666667 storage_bytes=800000"
+      ]
+    },
+    {
+      "path": "E:\\NovaCore\\build\\contact-episode-servicing-live\\tilted.stderr.txt",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "lastWriteTimeUtc": "2026-09-13T17:40:01.5083467Z",
+      "classification": "DISPOSE",
+      "reason": "Empty stream",
+      "retainedResultLines": []
+    },
+    {
+      "path": "E:\\NovaCore\\build\\contact-episode-servicing-live\\centered-manual.stdout.txt",
+      "bytes": 7274,
+      "sha256": "568266A1F170F71AE27003D0F076DF8AAE15F1B532B184F7A09F682A93770D07",
+      "lastWriteTimeUtc": "2026-09-13T17:45:23.1657682Z",
+      "classification": "DISPOSE",
+      "reason": "Superseded live log; exact contact result lines and provenance preserved here",
+      "retainedResultLines": [
+        "CONTACT_LIVE_READY tilted=False setup_ms=10.6971 world_ms=29.4626 binding_presentation_ms=2.1052 debt=0 steps=1200 rate=1:1 qualification_only=true"
+      ]
+    },
+    {
+      "path": "E:\\NovaCore\\build\\contact-episode-servicing-live\\centered-manual.stderr.txt",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "lastWriteTimeUtc": "2026-09-13T17:45:23.1657682Z",
+      "classification": "DISPOSE",
+      "reason": "Empty stream",
+      "retainedResultLines": []
+    },
+    {
+      "path": "E:\\NovaCore\\build\\contact-episode-servicing-live\\tilted-manual.stdout.txt",
+      "bytes": 13410,
+      "sha256": "E3E35BA4E3F829F5F6DE67C51BD5AA76779F8EBC70D106E992FF3BF9B22B8739",
+      "lastWriteTimeUtc": "2026-09-13T17:51:33.2291728Z",
+      "classification": "DISPOSE",
+      "reason": "Superseded live log; exact contact result lines and provenance preserved here",
+      "retainedResultLines": [
+        "CONTACT_LIVE_READY tilted=True setup_ms=10.8710 world_ms=29.5700 binding_presentation_ms=2.0697 debt=0 steps=1200 rate=1:1 qualification_only=true",
+        "CONTACT_LIVE_END status=Completed - final canonical endpoint held frontier=1200 clock=20000000 debt=3954 revision=1200 history=1200",
+        "CONTACT_LIVE_FRAME samples=3585 median_ms=5.557000 p95_ms=6.111700 p99_ms=6.398100 max_ms=40.206500 measurement=callback_to_callback_including_present_and_host_scheduling objective_ms=6.666667 storage_bytes=800000"
+      ]
+    },
+    {
+      "path": "E:\\NovaCore\\build\\contact-episode-servicing-live\\tilted-manual.stderr.txt",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "lastWriteTimeUtc": "2026-09-13T17:51:33.2291728Z",
+      "classification": "DISPOSE",
+      "reason": "Empty stream",
+      "retainedResultLines": []
+    },
+    {
+      "path": "E:\\NovaCore\\build\\contact-episode-servicing-live\\centered-status-tail.stderr.txt",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "lastWriteTimeUtc": "2026-09-13T18:01:45.9690713Z",
+      "classification": "DISPOSE",
+      "reason": "Empty stream",
+      "retainedResultLines": []
+    },
+    {
+      "path": "E:\\NovaCore\\build\\contact-episode-servicing-live\\tilted-status-tail.stderr.txt",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "lastWriteTimeUtc": "2026-09-13T18:00:15.5978017Z",
+      "classification": "DISPOSE",
+      "reason": "Empty stream",
+      "retainedResultLines": []
+    },
+    {
+      "path": "E:\\NovaCore\\build\\contact-episode-servicing-live\\centered-status-tail.stdout.txt",
+      "bytes": 14840,
+      "sha256": "72164DCDAB0A63B2D287F159021779DA5F214A8406411CD03DD6236EC6905D8B",
+      "lastWriteTimeUtc": "2026-09-13T18:01:45.9690713Z",
+      "classification": "KEEP",
+      "reason": "Active unresolved tail observation",
+      "retainedResultLines": [
+        "CONTACT_LIVE_READY tilted=False setup_ms=11.3256 world_ms=31.0280 binding_presentation_ms=1.9644 debt=0 steps=1200 rate=1:1 qualification_only=true",
+        "CONTACT_VISIBLE_STATUS roundtrip=PASS text=NovaCore - Contact development / centered - READY - prepared; Space starts 20-second episode",
+        "CONTACT_VISIBLE_STATUS roundtrip=PASS text=NovaCore - Contact development / centered - RUNNING (20-second episode)",
+        "CONTACT_VISIBLE_STATUS roundtrip=PASS text=NovaCore - Contact development / centered - COMPLETED - final canonical endpoint held",
+        "CONTACT_LIVE_END status=COMPLETED - final canonical endpoint held frontier=1200 clock=20000000 debt=304 revision=1200 history=1200",
+        "CONTACT_FRAME_TAIL index=4 ms=28.0666 preceding_frontier=0->1 preceding_credit_ms=0.0403 preceding_service_ms=27.394 outside_credit_service_ms=0.6323000000000043",
+        "CONTACT_FRAME_TAIL index=96 ms=19.3493 preceding_frontier=32->33 preceding_credit_ms=0.0032 preceding_service_ms=18.599 outside_credit_service_ms=0.7470999999999997",
+        "CONTACT_FRAME_TAIL index=537 ms=3048.6131 preceding_frontier=180->180 preceding_credit_ms=0.0015 preceding_service_ms=0.0014 outside_credit_service_ms=3048.6102",
+        "CONTACT_FRAME_TAIL index=650 ms=92.7292 preceding_frontier=399->400 preceding_credit_ms=0.0009 preceding_service_ms=0.0483 outside_credit_service_ms=92.68",
+        "CONTACT_FRAME_TAIL index=651 ms=44.63 preceding_frontier=400->404 preceding_credit_ms=0.003 preceding_service_ms=0.0692 outside_credit_service_ms=44.5578",
+        "CONTACT_FRAME_TAIL index=652 ms=22.3925 preceding_frontier=404->408 preceding_credit_ms=0.0031 preceding_service_ms=0.0669 outside_credit_service_ms=22.322499999999998",
+        "CONTACT_FRAME_TAIL index=697 ms=16.6168 preceding_frontier=423->423 preceding_credit_ms=0.0015 preceding_service_ms=0.0007 outside_credit_service_ms=16.614600000000003",
+        "CONTACT_FRAME_TAIL index=699 ms=10.6183 preceding_frontier=424->424 preceding_credit_ms=0.0006 preceding_service_ms=0.0005 outside_credit_service_ms=10.617199999999999",
+        "CONTACT_FRAME_TAIL index=815 ms=719.4324 preceding_frontier=463->463 preceding_credit_ms=0.0008 preceding_service_ms=0.0007 outside_credit_service_ms=719.4309",
+        "CONTACT_FRAME_TAIL index=816 ms=28.2832 preceding_frontier=463->467 preceding_credit_ms=0.003 preceding_service_ms=0.0712 outside_credit_service_ms=28.209",
+        "CONTACT_FRAME_TAIL index=817 ms=26.412 preceding_frontier=467->471 preceding_credit_ms=0.003 preceding_service_ms=0.0693 outside_credit_service_ms=26.3397",
+        "CONTACT_FRAME_TAIL index=820 ms=18.7238 preceding_frontier=479->483 preceding_credit_ms=0.001 preceding_service_ms=0.0308 outside_credit_service_ms=18.692",
+        "CONTACT_FRAME_TAIL index=822 ms=10.2576 preceding_frontier=487->491 preceding_credit_ms=0.0016 preceding_service_ms=0.0384 outside_credit_service_ms=10.217600000000001",
+        "CONTACT_FRAME_TAIL index=1615 ms=7.2443 preceding_frontier=775->776 preceding_credit_ms=0.0008 preceding_service_ms=0.0331 outside_credit_service_ms=7.2104",
+        "CONTACT_FRAME_TAIL_COUNT above_6_67=14 samples=2888 zero_based=true window=previous_callback_to_current_callback waits=UNAVAILABLE",
+        "CONTACT_LIVE_FRAME samples=2888 median_ms=5.555300 p95_ms=5.695200 p99_ms=6.004000 max_ms=3048.613100 measurement=callback_to_callback_including_present_and_host_scheduling objective_ms=6.666667 storage_bytes=800000"
+      ]
+    },
+    {
+      "path": "E:\\NovaCore\\build\\contact-episode-servicing-live\\tilted-status-tail.stdout.txt",
+      "bytes": 13802,
+      "sha256": "BDC7604F43430880F7D640B844095DF543A464D8CE826044B0950E95A41D2E4D",
+      "lastWriteTimeUtc": "2026-09-13T18:00:15.5978017Z",
+      "classification": "KEEP",
+      "reason": "Active unresolved tail observation",
+      "retainedResultLines": [
+        "CONTACT_LIVE_READY tilted=True setup_ms=10.7280 world_ms=29.0234 binding_presentation_ms=1.9342 debt=0 steps=1200 rate=1:1 qualification_only=true",
+        "CONTACT_VISIBLE_STATUS roundtrip=PASS text=NovaCore - Contact development / tilted - READY - prepared; Space starts 20-second episode",
+        "CONTACT_VISIBLE_STATUS roundtrip=PASS text=NovaCore - Contact development / tilted - RUNNING (20-second episode)",
+        "CONTACT_VISIBLE_STATUS roundtrip=PASS text=NovaCore - Contact development / tilted - COMPLETED - final canonical endpoint held",
+        "CONTACT_LIVE_END status=COMPLETED - final canonical endpoint held frontier=1200 clock=20000000 debt=342 revision=1200 history=1200",
+        "CONTACT_FRAME_TAIL index=4 ms=28.5446 preceding_frontier=0->1 preceding_credit_ms=0.017 preceding_service_ms=27.7216 outside_credit_service_ms=0.8060000000000009",
+        "CONTACT_FRAME_TAIL index=91 ms=19.9873 preceding_frontier=30->31 preceding_credit_ms=0.0045 preceding_service_ms=19.3235 outside_credit_service_ms=0.6593000000000018",
+        "CONTACT_FRAME_TAIL index=101 ms=9.2088 preceding_frontier=34->35 preceding_credit_ms=0.0041 preceding_service_ms=8.6818 outside_credit_service_ms=0.5228999999999999",
+        "CONTACT_FRAME_TAIL index=163 ms=10.9019 preceding_frontier=55->55 preceding_credit_ms=0.0009 preceding_service_ms=0.0007 outside_credit_service_ms=10.9003",
+        "CONTACT_FRAME_TAIL index=198 ms=11.1242 preceding_frontier=67->67 preceding_credit_ms=0.0007 preceding_service_ms=0.001 outside_credit_service_ms=11.1225",
+        "CONTACT_FRAME_TAIL index=305 ms=11.1114 preceding_frontier=103->103 preceding_credit_ms=0.001 preceding_service_ms=0.0008 outside_credit_service_ms=11.1096",
+        "CONTACT_FRAME_TAIL index=421 ms=11.1154 preceding_frontier=142->142 preceding_credit_ms=0.0015 preceding_service_ms=0.0011 outside_credit_service_ms=11.1128",
+        "CONTACT_FRAME_TAIL index=881 ms=11.1901 preceding_frontier=296->296 preceding_credit_ms=0.0007 preceding_service_ms=0.0008 outside_credit_service_ms=11.1886",
+        "CONTACT_FRAME_TAIL index=1006 ms=11.0476 preceding_frontier=338->338 preceding_credit_ms=0.0014 preceding_service_ms=0.0012 outside_credit_service_ms=11.044999999999998",
+        "CONTACT_FRAME_TAIL index=1970 ms=11.1926 preceding_frontier=659->660 preceding_credit_ms=0.0007 preceding_service_ms=0.0315 outside_credit_service_ms=11.160400000000001",
+        "CONTACT_FRAME_TAIL_COUNT above_6_67=10 samples=3590 zero_based=true window=previous_callback_to_current_callback waits=UNAVAILABLE",
+        "CONTACT_LIVE_FRAME samples=3590 median_ms=5.555700 p95_ms=5.727100 p99_ms=6.006200 max_ms=28.544600 measurement=callback_to_callback_including_present_and_host_scheduling objective_ms=6.666667 storage_bytes=800000"
+      ]
+    }
+  ],
+  "disposeCount": 10,
+  "disposeBytes": 82824.0,
+  "keepCount": 2,
+  "keepBytes": 28642.0
+}

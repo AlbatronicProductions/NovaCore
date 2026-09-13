@@ -62,6 +62,15 @@ public sealed class SimulationClock
     internal SimulationHostAdvanceResult AdvanceByHostDuration(SimulationDuration hostDuration)
     {
         PublicationPhase.VerifyOrdinaryMutation();
+        var result = PrepareHostAdvance(hostDuration);
+        if (result.Reason == SimulationHostAdvanceStopReason.Accepted) InstallHostAdvance(result);
+        return result;
+    }
+
+    // Pure preparation shared by ordinary advancement and owner-controlled contact accounting.
+    internal SimulationHostAdvanceResult PrepareHostAdvance(SimulationDuration hostDuration)
+    {
+        PublicationPhase.VerifyRead();
         var debtBefore = _pendingSimulationDebt;
         var remainderBefore = _rateRemainder;
         if (_isPaused) return HostResult(SimulationHostAdvanceStopReason.Paused, hostDuration, SimulationDuration.Zero, debtBefore, remainderBefore);
@@ -76,9 +85,14 @@ public sealed class SimulationClock
 
         var derived = new SimulationDuration(derivedTicks);
         var proposedDebt = new SimulationDuration(debtBefore.Ticks + derivedTicks);
-        _rateRemainder = proposedRemainder;
-        _pendingSimulationDebt = proposedDebt;
         return new(SimulationHostAdvanceStopReason.Accepted, hostDuration, derived, debtBefore, proposedDebt, remainderBefore, proposedRemainder, _currentTime);
+    }
+
+    // Fixed accounting writes. Caller has admitted/rechecked the prepared result under its owner phase.
+    internal void InstallHostAdvance(in SimulationHostAdvanceResult prepared)
+    {
+        _rateRemainder = prepared.RateRemainderAfter;
+        _pendingSimulationDebt = prepared.DebtAfter;
     }
 
     /// <summary>Returns the exact target represented by retained debt without advancing time.</summary>

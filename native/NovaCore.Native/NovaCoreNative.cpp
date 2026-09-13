@@ -461,6 +461,7 @@ struct App {
   Mesh triangle{};
   Mesh floridaLaunchPad{};
   Mesh floridaLaunchFoundation{};
+  Mesh contactQualificationBody{}, contactQualificationSupport{};
   Mesh planetaryPatch{};
   Mesh distantPlanetary{};
   Mesh stellarSun{};
@@ -599,7 +600,8 @@ LRESULT CALLBACK Proc(HWND h, UINT m, WPARAM w, LPARAM l) {
     DestroyWindow(h);
   if (m == WM_DESTROY)
     PostQuitMessage(0);
-  return DefWindowProc(h, m, w, l);
+  // RegisterClassW/CreateWindowExW deliver Unicode text messages regardless of UNICODE defines.
+  return DefWindowProcW(h, m, w, l);
 }
 VKAPI_ATTR VkBool32 VKAPI_CALL
 Debug(VkDebugUtilsMessageSeverityFlagBitsEXT severity, VkDebugUtilsMessageTypeFlagsEXT,
@@ -720,6 +722,15 @@ void CreateMesh(App &a) {
   Buffer(a,sizeof(Vertex)*padVertices.size(),VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,a.floridaLaunchFoundation.vb,a.floridaLaunchFoundation.vm,padVertices.data());
   Buffer(a,sizeof(uint32_t)*padIndices.size(),VK_BUFFER_USAGE_INDEX_BUFFER_BIT,a.floridaLaunchFoundation.ib,a.floridaLaunchFoundation.im,padIndices.data());
   a.floridaLaunchFoundation.indices=(uint32_t)padIndices.size();
+  // Opt-in contact witness meshes: centered unit cubes, independent of facility geometry.
+  for(int kind=0;kind<2;kind++){
+    padVertices.clear();padIndices.clear();
+    box(-.5f,-.5f,-.5f,.5f,.5f,.5f,kind==0?std::array<float,3>{.12f,.55f,.95f}:std::array<float,3>{.32f,.34f,.38f});
+    auto& mesh=kind==0?a.contactQualificationBody:a.contactQualificationSupport;
+    Buffer(a,sizeof(Vertex)*padVertices.size(),VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,mesh.vb,mesh.vm,padVertices.data());
+    Buffer(a,sizeof(uint32_t)*padIndices.size(),VK_BUFFER_USAGE_INDEX_BUFFER_BIT,mesh.ib,mesh.im,padIndices.data());
+    mesh.indices=(uint32_t)padIndices.size();
+  }
 }
 void DestroyMesh(App &a) {
   if (a.triangle.vb)
@@ -741,6 +752,13 @@ void DestroyMesh(App &a) {
   if(a.floridaLaunchFoundation.ib)vkDestroyBuffer(a.device,a.floridaLaunchFoundation.ib,nullptr);
   if(a.floridaLaunchFoundation.im)vkFreeMemory(a.device,a.floridaLaunchFoundation.im,nullptr);
   a.floridaLaunchFoundation={};
+  for(auto* mesh:{&a.contactQualificationBody,&a.contactQualificationSupport}){
+    if(mesh->vb)vkDestroyBuffer(a.device,mesh->vb,nullptr);
+    if(mesh->vm)vkFreeMemory(a.device,mesh->vm,nullptr);
+    if(mesh->ib)vkDestroyBuffer(a.device,mesh->ib,nullptr);
+    if(mesh->im)vkFreeMemory(a.device,mesh->im,nullptr);
+    *mesh={};
+  }
   if(a.planetaryPatch.vb)vkDestroyBuffer(a.device,a.planetaryPatch.vb,nullptr);
   if(a.planetaryPatch.vm)vkFreeMemory(a.device,a.planetaryPatch.vm,nullptr);
   if(a.planetaryPatch.ib)vkDestroyBuffer(a.device,a.planetaryPatch.ib,nullptr);
@@ -763,7 +781,7 @@ void DestroyMesh(App &a) {
   a.planetaryRing={};
 }
 Mesh *MeshFor(App &a, NcMeshHandle h) {
-  return h.value == 1 ? &a.triangle : h.value == 3 ? &a.floridaLaunchPad : h.value == 4 ? &a.floridaLaunchFoundation : nullptr;
+  return h.value == 1 ? &a.triangle : h.value == 3 ? &a.floridaLaunchPad : h.value == 4 ? &a.floridaLaunchFoundation : h.value == 5 ? &a.contactQualificationBody : h.value == 6 ? &a.contactQualificationSupport : nullptr;
 }
 void Validate(App &a) {
   auto *s = a.submission;

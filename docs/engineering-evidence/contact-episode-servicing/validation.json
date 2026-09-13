@@ -1,0 +1,293 @@
+{
+  "status": "HOST-PACED CANONICAL CONTACT SERVICING — FOLLOW-UP REQUIRED",
+  "leadJudgment": "REVISE",
+  "banked": false,
+  "milestoneAssigned": false,
+  "baseline": "3e1028339e9e80648ed15c510644d871259c26bd",
+  "branch": "codex/contact-episode-servicing",
+  "fullSimulation": {
+    "Debug": {
+      "groups": 51,
+      "passed": 51
+    },
+    "Release": {
+      "groups": 51,
+      "passed": 51
+    }
+  },
+  "builds": {
+    "Debug": {
+      "warnings": 0,
+      "errors": 0
+    },
+    "Release": {
+      "warnings": 0,
+      "errors": 0
+    },
+    "nativeDebug": "PASS",
+    "nativeRelease": "PASS"
+  },
+  "regressions": {
+    "servicing": "Debug/Release PASS",
+    "M14_17": "3 focused cases Debug/Release PASS",
+    "M14_18": "Debug/Release PASS",
+    "M14_19": "Debug/Release PASS",
+    "ReferenceFrames": "Debug/Release PASS",
+    "Precision": "Debug/Release PASS",
+    "BepuDependency": "Debug/Release PASS",
+    "copiedPresentation": "Debug/Release PASS",
+    "Launcher": "16/16 Debug, 16/16 Release"
+  },
+  "longSequences": {
+    "steps": 1200,
+    "centeredSchedulesHz": [
+      30,
+      60,
+      150,
+      240
+    ],
+    "tiltedSchedulesHz": [
+      30,
+      60,
+      150,
+      240
+    ],
+    "delayedScheduleCreditTicks": 500000,
+    "movingTiltedScheduleHz": 150,
+    "shortIntervals": 400,
+    "longIntervals": 800,
+    "totalTicks": 20000000,
+    "stateRevisionIncrease": 1200,
+    "historyEntries": 1200,
+    "timelineRevisionIncrease": 0,
+    "finalSyntheticDebt": 0,
+    "finalSupport": "600/600",
+    "trajectory": "Exact physical endpoint bits at every committed frontier vs corresponding prefunded reference"
+  },
+  "allocation": {
+    "completeBytes": 0,
+    "noWorkBytes": 0,
+    "backlogBytes": 0,
+    "positiveControlBytes": 152,
+    "positiveControl": "System.Byte[128]",
+    "configurations": [
+      "Debug",
+      "Release"
+    ]
+  },
+  "storage": {
+    "managedSetupUpperBoundBytes": 952600,
+    "nativePoolBytes": 458752,
+    "combinedUpperBoundBytes": 1411352,
+    "includedHistoryPayloadBytes": 892800,
+    "limitBytes": 8388608
+  },
+  "performance": [
+    {
+      "process": 1,
+      "warm": 128,
+      "measured": 1024,
+      "medianMs": 0.0189,
+      "p95Ms": 0.0271,
+      "p99Ms": 0.0653,
+      "maxMs": 0.2692,
+      "coldTotalMs": 41.2016,
+      "tails": [
+        {
+          "index": 235,
+          "ms": 0.2692
+        },
+        {
+          "index": 238,
+          "ms": 0.223
+        },
+        {
+          "index": 237,
+          "ms": 0.1747
+        },
+        {
+          "index": 248,
+          "ms": 0.1464
+        },
+        {
+          "index": 278,
+          "ms": 0.1419
+        },
+        {
+          "index": 236,
+          "ms": 0.0915
+        },
+        {
+          "index": 240,
+          "ms": 0.0787
+        },
+        {
+          "index": 239,
+          "ms": 0.0734
+        }
+      ]
+    },
+    {
+      "process": 2,
+      "warm": 128,
+      "measured": 1024,
+      "medianMs": 0.0188,
+      "p95Ms": 0.0193,
+      "p99Ms": 0.0231,
+      "maxMs": 0.052,
+      "coldTotalMs": 41.2594,
+      "tails": [
+        {
+          "index": 89,
+          "ms": 0.052
+        },
+        {
+          "index": 905,
+          "ms": 0.0456
+        },
+        {
+          "index": 404,
+          "ms": 0.0375
+        },
+        {
+          "index": 246,
+          "ms": 0.025
+        },
+        {
+          "index": 799,
+          "ms": 0.0243
+        },
+        {
+          "index": 193,
+          "ms": 0.024
+        },
+        {
+          "index": 720,
+          "ms": 0.024
+        },
+        {
+          "index": 852,
+          "ms": 0.0238
+        }
+      ]
+    },
+    {
+      "process": 3,
+      "warm": 128,
+      "measured": 1024,
+      "medianMs": 0.0207,
+      "p95Ms": 0.0212,
+      "p99Ms": 0.0242,
+      "maxMs": 0.0493,
+      "coldTotalMs": 40.5592,
+      "tails": [
+        {
+          "index": 37,
+          "ms": 0.0493
+        },
+        {
+          "index": 780,
+          "ms": 0.0491
+        },
+        {
+          "index": 589,
+          "ms": 0.0401
+        },
+        {
+          "index": 84,
+          "ms": 0.0259
+        },
+        {
+          "index": 945,
+          "ms": 0.0259
+        },
+        {
+          "index": 874,
+          "ms": 0.0252
+        },
+        {
+          "index": 38,
+          "ms": 0.0251
+        },
+        {
+          "index": 397,
+          "ms": 0.0249
+        }
+      ]
+    }
+  ],
+  "performanceResult": "3/3 PASS; no retries",
+  "liveFrames": [
+    {
+      "case": "centered",
+      "configuration": "Release",
+      "width": 1280,
+      "height": 720,
+      "samples": 3589,
+      "medianMs": 5.5545,
+      "p95Ms": 5.6862,
+      "p99Ms": 5.8962,
+      "maxMs": 36.0642,
+      "finalClock": 20000000,
+      "frontier": 1200,
+      "revision": 1200,
+      "history": 1200,
+      "retainedDebt": 339,
+      "cold": {
+        "setupMs": 10.7581,
+        "worldMs": 29.5731,
+        "bindingPresentationMs": 2.0316
+      },
+      "uiCaptureDuringEpisode": true
+    },
+    {
+      "case": "tilted",
+      "configuration": "Release",
+      "width": 1280,
+      "height": 720,
+      "samples": 3590,
+      "medianMs": 5.555,
+      "p95Ms": 5.6891,
+      "p99Ms": 5.88,
+      "maxMs": 40.4358,
+      "finalClock": 20000000,
+      "frontier": 1200,
+      "revision": 1200,
+      "history": 1200,
+      "retainedDebt": 5279,
+      "cold": {
+        "setupMs": 10.4005,
+        "worldMs": 29.3538,
+        "bindingPresentationMs": 2.0501
+      },
+      "uiCaptureDuringEpisode": false
+    }
+  ],
+  "frameMeasurement": "callback-to-callback including present and host scheduling; maxima exceed the 6.67 ms objective; no attribution or optimization",
+  "manualAcceptance": "PASS - Project Control explicitly accepted centered and tilted behavior; separate visible-status defect remains",
+  "materialStop": {
+    "responsibility": "Visible contact-window status",
+    "observed": "Native window title and screenshot remain N after attempted scenario-specific running/completed status update",
+    "cause": "UNQUALIFIED",
+    "furtherImplementationOrRuns": "NONE after material stop"
+  },
+  "presentation": {
+    "frameObservationPayloadBytes": 800000,
+    "totalPresentationRetainedBytes": "NOT MEASURED",
+    "driverReservationBytes": "NOT MEASURED",
+    "meshLogicalPayloadBytes": 2016
+  },
+  "userManualTilted": {
+    "frontier": 1200,
+    "clock": 20000000,
+    "debt": 2657,
+    "revision": 1200,
+    "history": 1200,
+    "frameSamples": 3591,
+    "medianMs": 5.5557,
+    "p95Ms": 6.2106,
+    "p99Ms": 6.4575,
+    "maxMs": 35.7652
+  },
+  "userManualCenteredLog": "Ready line present; no terminal line. User manual PASS retained; agent-centered run separately reached completion."
+}

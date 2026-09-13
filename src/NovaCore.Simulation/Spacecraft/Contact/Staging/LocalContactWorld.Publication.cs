@@ -9,7 +9,8 @@ namespace NovaCore.Simulation.Spacecraft.Contact.Staging;
 internal sealed partial class LocalContactWorld
 {
     // The original source, frame and solver remain immutable. Only the engine's fixed acknowledgement
-    // changes these expected authority tokens. Debt is provisioned before binding, never auto-rebound.
+    // changes these expected authority tokens. Explicit owner host credit can acknowledge clock accounting;
+    // ordinary external changes are never auto-rebound.
     private sealed class PublicationBinding
     {
         internal readonly SimulationTransactionEngine Engine;
@@ -23,6 +24,7 @@ internal sealed partial class LocalContactWorld
         internal ContinuationClockState Clock;
         internal long AcknowledgedFrontier;
         internal bool Pending;
+        internal long HostInputSequence;
 
         internal PublicationBinding(SimulationTransactionEngine engine, SpacecraftDefinition definition,
             SpacecraftPhysicalProperties properties, TimelineRevision timeline, PersistentContactEpisode episode,

@@ -6,6 +6,14 @@ public static class ScenarioCatalog
 
     public static IReadOnlyList<NovaCoreScenarioDefinition> All { get; } =
     [
+        new(NovaCoreScenarioPreset.ContactCentered, "Development — Canonical Contact / Centered",
+            "Live 20-second canonical contact episode. Qualification-only box and slab; no free-flight entry.", NovaCoreScene.ContactCentered,
+            NovaCoreStartingBody.None, null, null, NovaCoreWindowMode.Windowed, NovaCoreResolutionPreset.Resolution1280x720,
+            NovaCoreDiagnosticsMode.PerformanceTelemetry, NovaCorePhysicalSurface.Generation3, true, null),
+        new(NovaCoreScenarioPreset.ContactTilted, "Development — Canonical Contact / Tilted",
+            "Live tilted/angular qualification box with retained contact publication and host-paced servicing.", NovaCoreScene.ContactTilted,
+            NovaCoreStartingBody.None, null, null, NovaCoreWindowMode.Windowed, NovaCoreResolutionPreset.Resolution1280x720,
+            NovaCoreDiagnosticsMode.PerformanceTelemetry, NovaCorePhysicalSurface.Generation3, true, null),
         new(NovaCoreScenarioPreset.SolarSystemOverview, "Solar System Overview",
             "Interactive Solar map using the normal production scene.", NovaCoreScene.Solar,
             NovaCoreStartingBody.None, null, null, NovaCoreWindowMode.Windowed,

@@ -15,6 +15,9 @@ using NovaCore.Core;
 using NovaCore.Core.ReferenceFrames;
 using System.Diagnostics;
 
+if (args.Contains("--contact-servicing-cheap", StringComparer.Ordinal)) { ContactServicingTests.Cheap(); return; }
+if (args.Contains("--contact-servicing-only", StringComparer.Ordinal)) { ContactServicingTests.Run(); return; }
+if (args.Contains("--contact-servicing-performance", StringComparer.Ordinal)) { ContactServicingTests.Performance(); return; }
 if (args.Contains("--persistent-contact-only", StringComparer.Ordinal)) { PersistentContactPublicationTests.Run(); return; }
 if (args.Contains("--persistent-contact-performance", StringComparer.Ordinal)) { PersistentContactPublicationTests.Performance(); return; }
 if (args.Contains("--local-contact-staging-only", StringComparer.Ordinal)) { LocalContactStagingTests.Run(); return; }
@@ -111,6 +114,7 @@ var tests = new (string Name, Action Test)[]
     ("Certified continuation ownership", ContinuationOwnershipTests.Run),
     ("Private finite-body contact staging", LocalContactStagingTests.Run),
     ("Persistent contact publication", PersistentContactPublicationTests.Run),
+    ("Host-paced contact servicing", ContactServicingTests.Run),
 };
 foreach (var (name, test) in tests) { test(); Console.WriteLine($"PASS {name}"); }
 

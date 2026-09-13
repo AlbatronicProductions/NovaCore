@@ -13,6 +13,13 @@ and performs FP64 camera-relative subtraction before GPU transport.
 
 ## Banked M14.19 — Persistent BEPU Contact Publication
 
+The unbanked [host-paced contact servicing candidate](engineering-evidence/contact-episode-servicing/README.md)
+adds a narrow owner-authorized host-credit operation, bounded retained-debt servicing
+and opt-in box/slab development scenes. Numerical/regression gates and user manual
+acceptance passed. The Unicode window-status correction and repeated manual check also pass;
+the bounded whole-frame tail classification remains UNRESOLVED. This does not change
+the banked M14.19 scope or authorize live terrain/gameplay integration.
+
 Project Control accepted and banked **M14.19 — Persistent BEPU Contact Publication**
 at `fc6fbf269d7a8022ce2fe184aea0dfc94716db05`, tag
 `m14.19-persistent-bepu-contact-publication`.

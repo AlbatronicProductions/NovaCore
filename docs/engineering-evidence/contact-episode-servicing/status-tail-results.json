@@ -1,0 +1,87 @@
+{
+  "baseline": "3e1028339e9e80648ed15c510644d871259c26bd",
+  "branch": "codex/contact-episode-servicing",
+  "status": "PASS",
+  "manualCentered": "PASS - user confirmed READY/RUNNING/COMPLETED, physical stability, camera independence, title-bar hold, final hold",
+  "manualTilted": "PASS - user confirmed same",
+  "tailClassification": "UNRESOLVED",
+  "leadJudgment": "ESCALATE TO PROJECT CONTROL",
+  "simulationProductionBytesChanged": false,
+  "changedCandidateFiles": [
+    {
+      "path": "native/NovaCore.Native/NovaCoreNative.cpp",
+      "beforeSha256": "07C469C30B03AD1E38893AB28634666EF1078009543E2A5EF8AF15BCD1E2B574",
+      "afterSha256": "C7B7F0090CF34705360517E3A2178BD63914444816F05323C8B2EE8681767C26"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/ContactDevelopmentScene.cs",
+      "beforeSha256": "8EDC4959D0D7C753FEF0ACF26B8959489AEFB75BBA00F8AAAB6B7F9FEA04F819",
+      "afterSha256": "2BF6E1DD6F155DA396117A4D6C55B17C6794F333A198CACF8C6F4D92E26E2C38"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/Program.cs",
+      "beforeSha256": "7A4D7A5F71E1B13A2EB230F1DD6ECEFB4A429830FBB104CDEF52EAAA633B29BA",
+      "afterSha256": "B91D870279E9AF3BD9C5B8FAC3F9362B790A0CEBED12AED99CBD79B51EE05A5E"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/ContactDevelopmentPresentationTests.cs",
+      "beforeSha256": "B4E52E3F5EB980EEF1191AE6BD22CD5DE4DA5F1EEA0D8D48A1ACF75E2EC86DB0",
+      "afterSha256": "E7311A6CD2684C08B628D3FC0A72310AA68306053DCDA1C66E5053F6EFDE7EA2"
+    }
+  ],
+  "nativeReleaseSha256": "6438E3AF7A4DC6592603038707C9221C19A2AF6E9CCC9168FFA8B70E24E7BBE4",
+  "observations": [
+    {
+      "case": "centered",
+      "sourcePath": "E:\\NovaCore\\build\\contact-episode-servicing-live\\centered-status-tail.stdout.txt",
+      "sourceSha256": "72164DCDAB0A63B2D287F159021779DA5F214A8406411CD03DD6236EC6905D8B",
+      "lines": [
+        "CONTACT_LIVE_READY tilted=False setup_ms=11.3256 world_ms=31.0280 binding_presentation_ms=1.9644 debt=0 steps=1200 rate=1:1 qualification_only=true",
+        "CONTACT_VISIBLE_STATUS roundtrip=PASS text=NovaCore - Contact development / centered - READY - prepared; Space starts 20-second episode",
+        "CONTACT_VISIBLE_STATUS roundtrip=PASS text=NovaCore - Contact development / centered - RUNNING (20-second episode)",
+        "CONTACT_VISIBLE_STATUS roundtrip=PASS text=NovaCore - Contact development / centered - COMPLETED - final canonical endpoint held",
+        "CONTACT_LIVE_END status=COMPLETED - final canonical endpoint held frontier=1200 clock=20000000 debt=304 revision=1200 history=1200",
+        "CONTACT_FRAME_TAIL index=4 ms=28.0666 preceding_frontier=0->1 preceding_credit_ms=0.0403 preceding_service_ms=27.394 outside_credit_service_ms=0.6323000000000043",
+        "CONTACT_FRAME_TAIL index=96 ms=19.3493 preceding_frontier=32->33 preceding_credit_ms=0.0032 preceding_service_ms=18.599 outside_credit_service_ms=0.7470999999999997",
+        "CONTACT_FRAME_TAIL index=537 ms=3048.6131 preceding_frontier=180->180 preceding_credit_ms=0.0015 preceding_service_ms=0.0014 outside_credit_service_ms=3048.6102",
+        "CONTACT_FRAME_TAIL index=650 ms=92.7292 preceding_frontier=399->400 preceding_credit_ms=0.0009 preceding_service_ms=0.0483 outside_credit_service_ms=92.68",
+        "CONTACT_FRAME_TAIL index=651 ms=44.63 preceding_frontier=400->404 preceding_credit_ms=0.003 preceding_service_ms=0.0692 outside_credit_service_ms=44.5578",
+        "CONTACT_FRAME_TAIL index=652 ms=22.3925 preceding_frontier=404->408 preceding_credit_ms=0.0031 preceding_service_ms=0.0669 outside_credit_service_ms=22.322499999999998",
+        "CONTACT_FRAME_TAIL index=697 ms=16.6168 preceding_frontier=423->423 preceding_credit_ms=0.0015 preceding_service_ms=0.0007 outside_credit_service_ms=16.614600000000003",
+        "CONTACT_FRAME_TAIL index=699 ms=10.6183 preceding_frontier=424->424 preceding_credit_ms=0.0006 preceding_service_ms=0.0005 outside_credit_service_ms=10.617199999999999",
+        "CONTACT_FRAME_TAIL index=815 ms=719.4324 preceding_frontier=463->463 preceding_credit_ms=0.0008 preceding_service_ms=0.0007 outside_credit_service_ms=719.4309",
+        "CONTACT_FRAME_TAIL index=816 ms=28.2832 preceding_frontier=463->467 preceding_credit_ms=0.003 preceding_service_ms=0.0712 outside_credit_service_ms=28.209",
+        "CONTACT_FRAME_TAIL index=817 ms=26.412 preceding_frontier=467->471 preceding_credit_ms=0.003 preceding_service_ms=0.0693 outside_credit_service_ms=26.3397",
+        "CONTACT_FRAME_TAIL index=820 ms=18.7238 preceding_frontier=479->483 preceding_credit_ms=0.001 preceding_service_ms=0.0308 outside_credit_service_ms=18.692",
+        "CONTACT_FRAME_TAIL index=822 ms=10.2576 preceding_frontier=487->491 preceding_credit_ms=0.0016 preceding_service_ms=0.0384 outside_credit_service_ms=10.217600000000001",
+        "CONTACT_FRAME_TAIL index=1615 ms=7.2443 preceding_frontier=775->776 preceding_credit_ms=0.0008 preceding_service_ms=0.0331 outside_credit_service_ms=7.2104",
+        "CONTACT_FRAME_TAIL_COUNT above_6_67=14 samples=2888 zero_based=true window=previous_callback_to_current_callback waits=UNAVAILABLE",
+        "CONTACT_LIVE_FRAME samples=2888 median_ms=5.555300 p95_ms=5.695200 p99_ms=6.004000 max_ms=3048.613100 measurement=callback_to_callback_including_present_and_host_scheduling objective_ms=6.666667 storage_bytes=800000"
+      ]
+    },
+    {
+      "case": "tilted",
+      "sourcePath": "E:\\NovaCore\\build\\contact-episode-servicing-live\\tilted-status-tail.stdout.txt",
+      "sourceSha256": "BDC7604F43430880F7D640B844095DF543A464D8CE826044B0950E95A41D2E4D",
+      "lines": [
+        "CONTACT_LIVE_READY tilted=True setup_ms=10.7280 world_ms=29.0234 binding_presentation_ms=1.9342 debt=0 steps=1200 rate=1:1 qualification_only=true",
+        "CONTACT_VISIBLE_STATUS roundtrip=PASS text=NovaCore - Contact development / tilted - READY - prepared; Space starts 20-second episode",
+        "CONTACT_VISIBLE_STATUS roundtrip=PASS text=NovaCore - Contact development / tilted - RUNNING (20-second episode)",
+        "CONTACT_VISIBLE_STATUS roundtrip=PASS text=NovaCore - Contact development / tilted - COMPLETED - final canonical endpoint held",
+        "CONTACT_LIVE_END status=COMPLETED - final canonical endpoint held frontier=1200 clock=20000000 debt=342 revision=1200 history=1200",
+        "CONTACT_FRAME_TAIL index=4 ms=28.5446 preceding_frontier=0->1 preceding_credit_ms=0.017 preceding_service_ms=27.7216 outside_credit_service_ms=0.8060000000000009",
+        "CONTACT_FRAME_TAIL index=91 ms=19.9873 preceding_frontier=30->31 preceding_credit_ms=0.0045 preceding_service_ms=19.3235 outside_credit_service_ms=0.6593000000000018",
+        "CONTACT_FRAME_TAIL index=101 ms=9.2088 preceding_frontier=34->35 preceding_credit_ms=0.0041 preceding_service_ms=8.6818 outside_credit_service_ms=0.5228999999999999",
+        "CONTACT_FRAME_TAIL index=163 ms=10.9019 preceding_frontier=55->55 preceding_credit_ms=0.0009 preceding_service_ms=0.0007 outside_credit_service_ms=10.9003",
+        "CONTACT_FRAME_TAIL index=198 ms=11.1242 preceding_frontier=67->67 preceding_credit_ms=0.0007 preceding_service_ms=0.001 outside_credit_service_ms=11.1225",
+        "CONTACT_FRAME_TAIL index=305 ms=11.1114 preceding_frontier=103->103 preceding_credit_ms=0.001 preceding_service_ms=0.0008 outside_credit_service_ms=11.1096",
+        "CONTACT_FRAME_TAIL index=421 ms=11.1154 preceding_frontier=142->142 preceding_credit_ms=0.0015 preceding_service_ms=0.0011 outside_credit_service_ms=11.1128",
+        "CONTACT_FRAME_TAIL index=881 ms=11.1901 preceding_frontier=296->296 preceding_credit_ms=0.0007 preceding_service_ms=0.0008 outside_credit_service_ms=11.1886",
+        "CONTACT_FRAME_TAIL index=1006 ms=11.0476 preceding_frontier=338->338 preceding_credit_ms=0.0014 preceding_service_ms=0.0012 outside_credit_service_ms=11.044999999999998",
+        "CONTACT_FRAME_TAIL index=1970 ms=11.1926 preceding_frontier=659->660 preceding_credit_ms=0.0007 preceding_service_ms=0.0315 outside_credit_service_ms=11.160400000000001",
+        "CONTACT_FRAME_TAIL_COUNT above_6_67=10 samples=3590 zero_based=true window=previous_callback_to_current_callback waits=UNAVAILABLE",
+        "CONTACT_LIVE_FRAME samples=3590 median_ms=5.555700 p95_ms=5.727100 p99_ms=6.006200 max_ms=28.544600 measurement=callback_to_callback_including_present_and_host_scheduling objective_ms=6.666667 storage_bytes=800000"
+      ]
+    }
+  ]
+}
