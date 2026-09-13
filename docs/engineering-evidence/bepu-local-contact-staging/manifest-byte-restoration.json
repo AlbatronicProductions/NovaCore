@@ -1,0 +1,101 @@
+{
+  "baseline": "f77d97adaf3ea2637214dfdfd6343973f9d147d7",
+  "branch": "codex/bepu-local-contact-staging-v2",
+  "originalManifestSha256": "777F1634603A4CCCA55E778706498BBD463447F14EA075359B0AEE16F8BC9C03",
+  "qualifiedManifestSha256": "C76F2DE75DAC81C8695109977E1F8A4DCCAFF29DA0BB96884C46C0B33362240E",
+  "sourceCommit": "fbeec05c78359189b25c33109d332f5b8c6474d5",
+  "repairBlob": "22864af89051d897061b9db2cf9c9c4038205372",
+  "checkoutManifestSha256": "C76F2DE75DAC81C8695109977E1F8A4DCCAFF29DA0BB96884C46C0B33362240E",
+  "semanticEquality": true,
+  "checkoutFileCount": 201,
+  "exportBoundary": "banked tracked dependency test closure plus only restored manifest; solver drafts excluded",
+  "sourceBytes": 5338,
+  "restoredBytes": 5426,
+  "attributesJudgment": "UNCHANGED \u2014 EXISTING RULE SUFFICIENT",
+  "builds": {
+    "Debug": {
+      "result": "PASS",
+      "warnings": 0,
+      "errors": 0
+    },
+    "Release": {
+      "result": "PASS",
+      "warnings": 0,
+      "errors": 0
+    }
+  },
+  "dependencyTests": {
+    "Debug": "PASS",
+    "Release": "PASS"
+  },
+  "ciArchiveVerification": "PASS in both builds; SHA256 and SHA512 unchanged",
+  "checkedPreexistingFiles": 359,
+  "changedInCheckedFiles": [
+    "external/bepu/2.5.0-beta.29/manifest/bepu-2.5.0-beta.29.json"
+  ],
+  "solverDraftStatus": "UNQUALIFIED \u2014 NOT PART OF THIS CORRECTION",
+  "solverDraftFingerprints": {
+    "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.ContactProof.cs": "9F5F9954439BED11EDEC053B2BDECB4DB3578AA7D6379259E0891A69A86C014E",
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactCallbacks.cs": "5D07035A3A3AF63421FAAB51C35E70A3769A69EA227B8B9DFC0D51F8AB3F8A4E",
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs": "AB520F078AE2FE09BFC7F4AD95B6BCBB87E734D06060586E1E1994E301A09CE0",
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs": "F3C29FED30A645FF2581C4FB26F67DADFF597D7A040A49CBB35C2E4EDB9456A7"
+  },
+  "artifacts": [
+    {
+      "path": "external/bepu/2.5.0-beta.29/LICENSE.txt",
+      "bytes": 10140,
+      "sha256": "4CD13F7A31E98F51C4FB960A115E9A9AB9C42284CA5D5C9B5CCBCF322DE45BFD"
+    },
+    {
+      "path": "external/bepu/2.5.0-beta.29/lib/BepuPhysics.dll",
+      "bytes": 880640,
+      "sha256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7"
+    },
+    {
+      "path": "external/bepu/2.5.0-beta.29/lib/BepuUtilities.dll",
+      "bytes": 163328,
+      "sha256": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68"
+    },
+    {
+      "path": "external/bepu/2.5.0-beta.29/manifest/bepu-2.5.0-beta.29.json",
+      "bytes": 5426,
+      "sha256": "C76F2DE75DAC81C8695109977E1F8A4DCCAFF29DA0BB96884C46C0B33362240E"
+    },
+    {
+      "path": "external/bepu/2.5.0-beta.29/packages/BepuPhysics.2.5.0-beta.29.nupkg",
+      "bytes": 442721,
+      "sha256": "D4A952F5417B53B08DE20D507C21745C9DD004E2529864098DFEC7A2CFF11E42"
+    },
+    {
+      "path": "external/bepu/2.5.0-beta.29/packages/BepuUtilities.2.5.0-beta.29.nupkg",
+      "bytes": 149735,
+      "sha256": "8168EC4905F3AD5F923564557DAAB2BAB1100EE46B424CA5F1C97BD7684DE19F"
+    }
+  ],
+  "defaultDiffCheck": {
+    "exitCode": 2,
+    "findings": 88,
+    "cause": "qualified CRLF terminal CR only"
+  },
+  "crlfAwareDiffCheck": {
+    "exitCode": 0,
+    "result": "PASS",
+    "command": "git -c core.whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol diff --check"
+  },
+  "refsUnchanged": true,
+  "canonicalStagedPaths": [],
+  "solverCompilation": "NOT RUN",
+  "temporaryOutput": {
+    "path": "E:\\NovaCore\\build\\bepu-manifest-byte-restoration",
+    "files": 427,
+    "bytes": 45394157,
+    "remainingFiles": 427,
+    "remainingBytes": 45394157,
+    "cleanup": "Automatic deletion rejected by policy before execution; no retry; manual cleanup required",
+    "disposedFiles": 0
+  },
+  "retainedEvidenceFiles": [
+    "docs/engineering-evidence/bepu-local-contact-staging/manifest-byte-restoration.md",
+    "docs/engineering-evidence/bepu-local-contact-staging/manifest-byte-restoration.json"
+  ]
+}
