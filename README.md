@@ -65,6 +65,10 @@ keeps authority over double-precision position and velocity, orientation, exact 
 event ordering, and history. BEPU solves bounded local contacts and exports private
 staged results; it does not publish those results into authoritative spacecraft state.
 
+Accepted M14.19 adds NovaCore-owned validation and canonical publication of those
+endpoints across repeated exact simulation intervals, while the retained private
+BEPU world continues after each successful publication. Banking is pending.
+
 These are qualified engineering cases. They do **not** establish live Earth terrain
 collision, arbitrary terrain-mesh contact, a production spacecraft collider, landing
 gear, launchpad support, or grounded gameplay. BEPU repeatability is qualified within
@@ -82,11 +86,11 @@ the tested setup; cross-platform solver determinism is not claimed.
 ## Current Development
 
 M14.18 is accepted and banked. The broader **Surface Interaction / Launch Foundation**
-remains open, with its next scope subject to Project Control's exit review.
+remains open. M14.19 persistent BEPU contact publication is accepted and awaits banking.
 
-Applying staged BEPU results to authoritative spacecraft state, integrating production
-colliders and terrain, and completing persistent ground support, release, and liftoff
-remain unfinished. The retained qualification demonstrates the local solver foundation;
+Integrating production colliders and terrain, and completing persistent ground support,
+release, and liftoff remain unfinished. The retained qualification demonstrates bounded
+solver continuation and canonical endpoint publication;
 it does not establish an end-to-end landing-and-launch loop.
 
 ## Where NovaCore Is Going

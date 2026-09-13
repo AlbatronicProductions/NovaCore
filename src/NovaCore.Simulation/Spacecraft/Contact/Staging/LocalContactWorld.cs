@@ -11,15 +11,18 @@ using NovaCore.Simulation.Transactions;
 
 namespace NovaCore.Simulation.Spacecraft.Contact.Staging;
 
-/// <summary>Persistent, thread-owned, private solver continuation. No canonical publication or serialization.</summary>
-internal sealed class LocalContactWorld : IDisposable
+/// <summary>Persistent, thread-owned solver continuation. Canonical publication belongs exclusively to the engine.</summary>
+internal sealed partial class LocalContactWorld : IDisposable
 {
     internal readonly struct Receipt
     {
         internal readonly LocalContactWorld? Owner;
         internal readonly long Step;
-        internal Receipt(LocalContactWorld owner, long step) { Owner = owner; Step = step; }
-        internal long Generation => Owner?.Generation ?? 0;
+        private readonly object? seal;
+        internal long Generation { get; }
+        internal Receipt(LocalContactWorld owner, long step, object? seal = null)
+        { Owner = owner; Step = step; this.seal = seal; Generation = owner.Generation; }
+        internal bool IsIssuedBy(object identity) => ReferenceEquals(seal, identity);
     }
 
     internal readonly record struct Export(SpacecraftMotion Motion, SimulationInstant Source,
@@ -40,6 +43,7 @@ internal sealed class LocalContactWorld : IDisposable
     private long frontier;
     private Export export;
     private bool disposed, invalidated;
+    private readonly object receiptIdentity = new();
     internal long Generation { get; } = Interlocked.Increment(ref nextGeneration);
     internal ulong PoolBytes => pool.GetTotalAllocatedByteCount();
     internal double ImportPositionError { get; }
@@ -101,7 +105,7 @@ internal sealed class LocalContactWorld : IDisposable
         var fp = ToFloat(p); var fv = ToFloat(v);
         world = new(source, fp, fv, Quaternion.Normalize(new((float)q.X, (float)q.Y, (float)q.Z, (float)q.W)),
             ToFloat(w), ToFloat(a), Math.Sqrt((FromFloat(fp) - p).LengthSquared), Math.Sqrt((FromFloat(fv) - v).LengthSquared));
-        initial = new(world, 0); return LocalContactStatus.Success;
+        initial = new(world, 0, world.receiptIdentity); return LocalContactStatus.Success;
     }
 
     internal LocalContactStatus Step(SimulationTransactionEngine engine, LocalContactConfiguration configuration,
@@ -110,6 +114,7 @@ internal sealed class LocalContactWorld : IDisposable
         next = default;
         var status = Validate(engine, configuration, previous, target);
         if (status != LocalContactStatus.Success) return status;
+        if (publication is not null && publication.Pending) return LocalContactStatus.PublicationPending;
         if (frontier == long.MaxValue || !source.TryEndpoint(frontier + 1, out var expected) || target != expected ||
             !source.TryEndpoint(frontier, out var current) || target <= current) return LocalContactStatus.InvalidInterval;
         var dt = (float)((target.Ticks - current.Ticks) / (double)SimulationInstant.TicksPerSecond);
@@ -118,7 +123,7 @@ internal sealed class LocalContactWorld : IDisposable
         invalidated = true;
         try { simulation.Timestep(dt); }
         catch (Exception) { return LocalContactStatus.SolverFailure; }
-        status = source.Validate(engine, configuration, target);
+        status = ValidateAuthority(engine, configuration, target);
         if (status != LocalContactStatus.Success) return status;
         var state = simulation.Bodies.GetBodyReference(body);
         var p = FromFloat(state.Pose.Position); var v = FromFloat(state.Velocity.Linear); var w = FromFloat(state.Velocity.Angular);
@@ -132,12 +137,14 @@ internal sealed class LocalContactWorld : IDisposable
         var omega = q.Conjugate().Rotate(configuration.LocalToRoot.Rotate(w));
         if (!LocalContactConfiguration.RootSpacingFits(rootPosition, configuration.ContactTolerance) ||
             !rootVelocity.IsFinite || !omega.IsFinite) return LocalContactStatus.PrecisionEnvelopeExceeded;
-        var paired = source.Motion with { Time = target, PositionRoot = rootPosition, VelocityRoot = rootVelocity, BodyToRoot = q, AngularVelocityBody = omega };
+        var paired = source.Motion with { Time = target, Revision = publication?.Revision ?? source.Motion.Revision,
+            PositionRoot = rootPosition, VelocityRoot = rootVelocity, BodyToRoot = q, AngularVelocityBody = omega };
         frontier++;
         export = new(paired, source.Motion.Time, source.TimelineRevision, Generation, frontier, metrics.Contacts,
             metrics.MaximumDepth, Math.Sqrt(p.LengthSquared), Math.Sqrt(v.LengthSquared), ImportPositionError, ImportVelocityError,
             state.Constraints.Count);
-        invalidated = false; next = new(this, frontier); return LocalContactStatus.Success;
+        if (publication is not null) publication.Pending = true;
+        invalidated = false; next = new(this, frontier, receiptIdentity); return LocalContactStatus.Success;
     }
 
     internal LocalContactStatus Read(SimulationTransactionEngine engine, LocalContactConfiguration configuration, Receipt receipt, out Export result)
@@ -155,7 +162,9 @@ internal sealed class LocalContactWorld : IDisposable
         if (invalidated) return LocalContactStatus.Invalidated;
         if (!ReferenceEquals(receipt.Owner, this)) return LocalContactStatus.GenerationMismatch;
         if (receipt.Step != frontier) return LocalContactStatus.FrontierMismatch;
-        return source.Validate(engine, configuration, target);
+        if (publication is not null && (!receipt.IsIssuedBy(receiptIdentity) || receipt.Generation != Generation))
+            return LocalContactStatus.GenerationMismatch;
+        return ValidateAuthority(engine, configuration, target);
     }
 
     internal LocalContactStatus TryDispose()

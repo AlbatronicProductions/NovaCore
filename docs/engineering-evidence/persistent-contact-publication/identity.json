@@ -1,0 +1,167 @@
+{
+  "date": "2026-09-13",
+  "baseline": "30ccb218859811cb5185aee7a55669d23b1ddf26",
+  "main": "30ccb218859811cb5185aee7a55669d23b1ddf26",
+  "originMain": "30ccb218859811cb5185aee7a55669d23b1ddf26",
+  "branch": "codex/bepu-persistent-contact-publication",
+  "bankedM1418": "e66d3a5d30dab14a60f28e9cc77a0c854ad53127",
+  "tag": "m14.18-staged-finite-body-bepu-contact",
+  "tagObject": "2faa9e568ef5f1e723f22d9635447179e4585053",
+  "sdk": "10.0.303",
+  "latestInstalledNet10Runtime": "10.0.12",
+  "computer": "ALBATRONIC007",
+  "os": "Microsoft Windows NT 10.0.26200.0",
+  "architecture": "X64",
+  "candidate": [
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs",
+      "sha256": "C558E300C9F0CB4CEE180680FD83814E1019E79940B9EC07BCFEB8814AECBC97",
+      "bytes": 10154
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs",
+      "sha256": "061B2B8BF1F3B6C47729ACA04576C18D5139CC5A365DF4883BFA1A916783F3E1",
+      "bytes": 12764
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Publication.cs",
+      "sha256": "8735D61FA137E26263B48A4E485B9E754D3BA51E5B663BB1E9865261788CF6D7",
+      "bytes": 8619
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.cs",
+      "sha256": "9D46A3B6043DF9A99B6B6418E3DBC249FB213917EFCA49716C9BECACA1890C75",
+      "bytes": 29751
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.PersistentContact.cs",
+      "sha256": "78B86A49224FF7ACB48DE9BA6F3A6827D8C8E992D516B44AFA24FC3728693813",
+      "bytes": 8113
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/PersistentContactPublication.cs",
+      "sha256": "DC61C18A9EDED7BBFD4BCE2C8E89880AFF72D771D501363EDEC2BF9085E2AC39",
+      "bytes": 2760
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "sha256": "0AEB8692FB9F75D130DAB6C13F048D23DEA5B1B3A347EFCA9A659C25AD2063AD",
+      "bytes": 250235
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/PersistentContactPublicationTests.cs",
+      "sha256": "CE3DF4E02C80117A7E722A43244612BB8DFACEF63D67C26F58BB8C19C521DEB0",
+      "bytes": 32082
+    }
+  ],
+  "preserved": [
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Continuation.cs",
+      "sha256": "5C60D6BB1CCF01FAFC6891AABA5FBF2302A302A98E42E53DDCCC5C0C3089AD2A",
+      "bankedBlob": "ce10a426a7b0216a30ff5971d8475c13eb881922",
+      "unchanged": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/CertifiedContinuationPublication.cs",
+      "sha256": "8253C61083FC048BCEAAB1CBFC2EE5971523EF5F42C21B5D53DF7CCFE2217815",
+      "bankedBlob": "293e2a64b942cd5886feab00420f49685b1c35fa",
+      "unchanged": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/ContinuationPublicationPhase.cs",
+      "sha256": "852C3E80A5CDF371B0E03DF6FEA31C20B4954B27C7F368E6AC22DEA6EF881F9C",
+      "bankedBlob": "8b2214e8077bf93e7b1aeddafbfae1174a2de218",
+      "unchanged": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationState.cs",
+      "sha256": "137BA1DB8CF388760CD4546B3639BE8DB2CAF9A2949442856E8642B71B4CDFBB",
+      "bankedBlob": "244c18f4505f25ab1fa6c75369a3312811a6df7a",
+      "unchanged": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Clock/SimulationClock.cs",
+      "sha256": "B08557581DBC1C6838FE9BA8C87AFB7538BBD6AF4CBF61412537790F9F769435",
+      "bankedBlob": "ac81c9fa9e4fe6d0664f25f10eed4089f20ec45c",
+      "unchanged": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactCallbacks.cs",
+      "sha256": "196BA63EC53DA5630EEDD154CDE9BBD5710ACE536EF4E17F4BB6E94A74610826",
+      "bankedBlob": "c4e890569eb937567872bf98714748ef74b3eaf8",
+      "unchanged": true
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/LocalContactStagingTests.cs",
+      "sha256": "9F90F915C1F523A8C3EB6BD7C1B5DF260F267CBB09FE842865DFB6C29BC37382",
+      "bankedBlob": "37709af19e1ec5efdc612ac4072dd823942c789b",
+      "unchanged": true
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/OrdinaryAllocationMeasurement.cs",
+      "sha256": "3B6F2D9905EA52BFB131DF670F1E6A2116BA340C9EF7767DE1020197D473CFB7",
+      "bankedBlob": "7e7ffa5f4bd8d2668167ac930be3f4467725a3fd",
+      "unchanged": true
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/CertifiedContinuationPublicationTests.cs",
+      "sha256": "9F0306133456F953C7B618A7798F7C0BFFC07EEB16AC67C24A00CFDCF51C4EA6",
+      "bankedBlob": "0f5a47059745fd464d745bb31d313566a87a5004",
+      "unchanged": true
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/ContinuationAcceptanceTests.cs",
+      "sha256": "7F26DBDDAB6D407C1595B8F5EE5704FB549B4B8CCDC1B3BAD12F15D711556FC6",
+      "bankedBlob": "8fab197cadf86d3ee80635bb03b4b3dc8e26331b",
+      "unchanged": true
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/ContinuationAllocationTests.cs",
+      "sha256": "99C916C2848703FE4088BCBF17301571555C2AC42BD89AB359C069988695BC51",
+      "bankedBlob": "b21b96d08c0c35b3778972a8bf8af72cf6ef6eeb",
+      "unchanged": true
+    }
+  ],
+  "binaries": [
+    {
+      "path": "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.dll",
+      "sha256": "49B976418BF2210442A0CC83F52B79A929E6C80CAB745B468EC5FD9ED981864B"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+      "sha256": "7024FFDE4232CD0EDE26C9EBF1186512D9834DB2676294F05F4EEEEBBBD65E33"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/BepuPhysics.dll",
+      "sha256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/BepuUtilities.dll",
+      "sha256": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.dll",
+      "sha256": "B32222B09A3D206869DF124E925210CA8CA4A1148FF80A5ABC40E45D9E9018FA"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "sha256": "A748637E6AEBA191DA010D2DE17743A6C2F5997767F7FACCDD140D709F9E92F0"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/BepuPhysics.dll",
+      "sha256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/BepuUtilities.dll",
+      "sha256": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68"
+    }
+  ],
+  "preExistingExcluded": {
+    "path": "docs/engineering-evidence/bepu-local-contact-staging/staging-build-blocker.md",
+    "sha256": "3DAB84C722F700945E25F6276ACDCA4874968CA39AD724EB82047D020D7056E7",
+    "bytes": 5366
+  },
+  "stagedFiles": [],
+  "banked": false,
+  "newDisposableDiagnostics": 0
+}

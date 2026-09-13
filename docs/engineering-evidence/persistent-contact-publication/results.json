@@ -1,0 +1,267 @@
+{
+  "date": "2026-09-13",
+  "builds": {
+    "Debug": {
+      "pass": true,
+      "warnings": 0,
+      "errors": 0
+    },
+    "Release": {
+      "pass": true,
+      "warnings": 0,
+      "errors": 0
+    }
+  },
+  "simulation": {
+    "Debug": {
+      "groups": 50,
+      "pass": true
+    },
+    "Release": {
+      "groups": 50,
+      "pass": true
+    }
+  },
+  "focused": {
+    "persistentContact": [
+      "Debug PASS",
+      "Release PASS"
+    ],
+    "M1417": [
+      "Debug 3/3 PASS",
+      "Release 3/3 PASS"
+    ],
+    "M1418": [
+      "Debug PASS",
+      "Release PASS"
+    ],
+    "referenceFrames": [
+      "Debug PASS",
+      "Release PASS"
+    ],
+    "precision": [
+      "Debug PASS",
+      "Release PASS"
+    ],
+    "verifiedBepuDependency": [
+      "Debug PASS",
+      "Release PASS"
+    ]
+  },
+  "sequences": [
+    {
+      "tilted": false,
+      "moving": false,
+      "steps": 1200,
+      "supported": 600,
+      "geometricPeakM": 0.005455926960645563,
+      "manifoldDepthM": 0.005455954000353813,
+      "restDriftM": 5.960464477539063e-8
+    },
+    {
+      "tilted": true,
+      "moving": false,
+      "steps": 1200,
+      "supported": 600,
+      "geometricPeakM": 0.004164378500802757,
+      "manifoldDepthM": 0.004164367914199829,
+      "restDriftM": 5.960464477539063e-8
+    },
+    {
+      "tilted": true,
+      "moving": true,
+      "steps": 1200,
+      "supported": 600,
+      "geometricPeakM": 0.004164354113830093,
+      "manifoldDepthM": 0.004164367914199829,
+      "restDriftM": 4.0696466752088156e-8
+    }
+  ],
+  "allSequences": {
+    "rawPhysicalTrajectory": "EXACT private-only match",
+    "interval16666": 400,
+    "interval16667": 800,
+    "originalT0": true,
+    "originalMovingFrameEpoch": true
+  },
+  "historyReplay": {
+    "steps": 80,
+    "equalValueRecords": true,
+    "differentWorldGenerations": true
+  },
+  "allocation": {
+    "DebugBytes": 0,
+    "ReleaseBytes": 0,
+    "warm": 128,
+    "measured": 1024,
+    "positiveControlType": "byte[128]",
+    "positiveControlBytes": 152,
+    "entry": "PASS",
+    "exit": "PASS"
+  },
+  "storage": {
+    "nativePoolBytes": 458752,
+    "managedSetupAndWarmAllocationUpperBoundBytes": 952936,
+    "historyPayloadIncludedBytes": 892800,
+    "otherManagedUpperBoundBytes": 60136,
+    "combinedUpperBoundBytes": 1411688,
+    "limitBytes": 8388608
+  },
+  "performance": [
+    {
+      "run": 1,
+      "exitCode": 0,
+      "median_ms": 0.0161,
+      "p95_ms": 0.0183,
+      "p99_ms": 0.0245,
+      "max_ms": 0.1152,
+      "worst_measured_index": 394,
+      "over_005ms": 4,
+      "over_010ms": 1,
+      "fixture_history_cold_ms": 12.7229,
+      "world_cold_ms": 30.8003,
+      "binding_cold_ms": 0.6985,
+      "warm": 128,
+      "measured": 1024,
+      "tails": [
+        {
+          "index": 394,
+          "ms": 0.1152
+        },
+        {
+          "index": 618,
+          "ms": 0.0609
+        },
+        {
+          "index": 950,
+          "ms": 0.0569
+        },
+        {
+          "index": 289,
+          "ms": 0.0553
+        },
+        {
+          "index": 451,
+          "ms": 0.0437
+        },
+        {
+          "index": 817,
+          "ms": 0.0424
+        },
+        {
+          "index": 335,
+          "ms": 0.034
+        },
+        {
+          "index": 338,
+          "ms": 0.0304
+        }
+      ]
+    },
+    {
+      "run": 2,
+      "exitCode": 0,
+      "median_ms": 0.0163,
+      "p95_ms": 0.0189,
+      "p99_ms": 0.0329,
+      "max_ms": 0.1773,
+      "worst_measured_index": 543,
+      "over_005ms": 4,
+      "over_010ms": 1,
+      "fixture_history_cold_ms": 12.3897,
+      "world_cold_ms": 30.498,
+      "binding_cold_ms": 0.6927,
+      "warm": 128,
+      "measured": 1024,
+      "tails": [
+        {
+          "index": 543,
+          "ms": 0.1773
+        },
+        {
+          "index": 91,
+          "ms": 0.093
+        },
+        {
+          "index": 626,
+          "ms": 0.0606
+        },
+        {
+          "index": 424,
+          "ms": 0.0574
+        },
+        {
+          "index": 953,
+          "ms": 0.0469
+        },
+        {
+          "index": 850,
+          "ms": 0.0445
+        },
+        {
+          "index": 963,
+          "ms": 0.0394
+        },
+        {
+          "index": 851,
+          "ms": 0.0389
+        }
+      ]
+    },
+    {
+      "run": 3,
+      "exitCode": 0,
+      "median_ms": 0.0163,
+      "p95_ms": 0.0168,
+      "p99_ms": 0.0276,
+      "max_ms": 0.1112,
+      "worst_measured_index": 507,
+      "over_005ms": 5,
+      "over_010ms": 1,
+      "fixture_history_cold_ms": 12.4501,
+      "world_cold_ms": 30.6268,
+      "binding_cold_ms": 0.7368,
+      "warm": 128,
+      "measured": 1024,
+      "tails": [
+        {
+          "index": 507,
+          "ms": 0.1112
+        },
+        {
+          "index": 71,
+          "ms": 0.0672
+        },
+        {
+          "index": 733,
+          "ms": 0.0589
+        },
+        {
+          "index": 409,
+          "ms": 0.0554
+        },
+        {
+          "index": 529,
+          "ms": 0.0513
+        },
+        {
+          "index": 829,
+          "ms": 0.0398
+        },
+        {
+          "index": 438,
+          "ms": 0.0373
+        },
+        {
+          "index": 460,
+          "ms": 0.0293
+        }
+      ]
+    }
+  ],
+  "review": {
+    "atomicity": "PASS read-only independent review",
+    "episodeTests": "PASS read-only independent review"
+  },
+  "status": "UNBANKED; awaiting Project Control acceptance"
+}

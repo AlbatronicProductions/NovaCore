@@ -11,6 +11,15 @@ renderer. Simulation owns celestial identity, exact time, physical state, and
 reference-frame transforms. Graphics consumes immutable root-resolved snapshots
 and performs FP64 camera-relative subtraction before GPU transport.
 
+## Accepted M14.19 — banking pending
+
+Project Control accepted **M14.19 — Persistent BEPU Contact Publication** on
+`codex/bepu-persistent-contact-publication`; it remains unbanked.
+It installs one genuine staged BEPU endpoint and acknowledges the retained private
+world in the same canonical owner phase. M14.17 certified clearance remains a separate
+contract; M14.18 private-only stepping remains supported.
+See the [candidate contract and evidence](engineering-evidence/persistent-contact-publication/README.md).
+
 ## Accepted M14.18 production responsibility
 
 **M14.18 — Staged Finite-Body BEPU Contact** is **PASS / ACCEPT** by Project Control.
@@ -18,7 +27,7 @@ It qualifies staged finite-body contact stepping in a bounded persistent local B
 world behind NovaCore canonical authority. The preceding production baseline is
 `b78f5b8c763b8d118b93f48fc4f87e78d7b6b4b2` (restore qualified BEPU manifest identity).
 The approved tag is `m14.18-staged-finite-body-bepu-contact`; Git refs establish
-banking state. M14 remains **OPEN**; no subsequent responsibility is authorized.
+banking state. M14 remains **OPEN**. The sibling candidate above is authorized but unbanked.
 
 NovaCore owns FP64 position/velocity, canonical orientation/angular state, exact
 time, revisions, event ordering, mass/inertia, force/torque, publication and history.
@@ -36,7 +45,7 @@ below 8 MiB. Three fresh Release processes pass the declared performance bars.
 
 Canonical BEPU publication, live Earth collision, arbitrary triangle-mesh terrain,
 production spacecraft colliders, landing gear, grounded gameplay, launchpad support
-and rotating/rebased local frames remain outside qualification. See the
+and rotating/rebased local frames remain outside M14.18 qualification. See the
 [accepted result](engineering-evidence/bepu-local-contact-staging/README.md).
 
 ## Banked predecessor checkpoints

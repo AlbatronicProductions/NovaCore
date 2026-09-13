@@ -8,6 +8,7 @@ records its investigation stage. Follow subsequent accepted conclusions.
 
 | Family | Continuing value | Read the conclusion first |
 |---|---|---|
+| [M14.19 persistent BEPU contact publication](persistent-contact-publication/README.md) | Sibling atomic endpoint publication, same-phase acknowledgement, retained solver trajectory, deterministic history, refusal/terminal witnesses and bounded complete-path qualification. | Project Control ACCEPTED; UNBANKED; banking pending. |
 | [M14.18 Staged Finite-Body BEPU Contact](bepu-local-contact-staging/README.md) | Retained private solver, authored planar finite-body contact, exact time/precision transport, authority isolation, causal geometry correction, zero warmed allocation, bounded storage and qualified performance. | Project Control PASS / ACCEPT; staged solving only. Git refs establish actual banking identity. |
 | [Stellar glow visibility](stellar-glow-visibility/README.md) | Signed Sun projection, rear-hemisphere raster isolation, unchanged front HDR, strict regression and bounded cost. | Corrected candidate; physical acceptance pending; unbanked. |
 | [Banked M14.17 certified continuation publication](certified-continuation-publication/README.md) | Exact paired installation, clock/debt/history, replay, refusal/allocation and Debug/Release regression qualification; existing costs retained. | Banked tag `m14.17-certified-continuation-publication`; the dated report preserves its qualification-stage wording. |

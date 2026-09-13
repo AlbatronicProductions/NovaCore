@@ -15,6 +15,8 @@ using NovaCore.Core;
 using NovaCore.Core.ReferenceFrames;
 using System.Diagnostics;
 
+if (args.Contains("--persistent-contact-only", StringComparer.Ordinal)) { PersistentContactPublicationTests.Run(); return; }
+if (args.Contains("--persistent-contact-performance", StringComparer.Ordinal)) { PersistentContactPublicationTests.Performance(); return; }
 if (args.Contains("--local-contact-staging-only", StringComparer.Ordinal)) { LocalContactStagingTests.Run(); return; }
 if (args.Contains("--local-contact-staging-performance", StringComparer.Ordinal)) { LocalContactStagingTests.Performance(); return; }
 if (args.Contains("--continuation-ownership-only", StringComparer.Ordinal)) { ContinuationOwnershipTests.Run(); return; }
@@ -108,6 +110,7 @@ var tests = new (string Name, Action Test)[]
     ("Post-impact singleton terrain coverage", PostImpactCoverageTests.Run),
     ("Certified continuation ownership", ContinuationOwnershipTests.Run),
     ("Private finite-body contact staging", LocalContactStagingTests.Run),
+    ("Persistent contact publication", PersistentContactPublicationTests.Run),
 };
 foreach (var (name, test) in tests) { test(); Console.WriteLine($"PASS {name}"); }
 

@@ -19,7 +19,10 @@ Project Control accepted **M14.18 — Staged Finite-Body BEPU Contact**. Resume 
 [current-state boundaries](NOVACORE_CURRENT_STATE.md) and
 [accepted qualification](engineering-evidence/bepu-local-contact-staging/README.md).
 The approved tag is `m14.18-staged-finite-body-bepu-contact`; inspect Git refs for
-actual banking state. No subsequent responsibility or milestone number is authorized.
+actual banking state. The [persistent-contact publication candidate](engineering-evidence/persistent-contact-publication/README.md)
+is accepted by Project Control as **M14.19 — Persistent BEPU Contact Publication** on
+`codex/bepu-persistent-contact-publication`. Banking remains pending.
+No live terrain/collider or gameplay integration is authorized.
 
 Banked M14.15: [paired private spacecraft propagation](private-canonical-propagation.md)
 at `dc274639f670d122764bb0e8f3d0c95ae201c7a4`, tag

@@ -23,7 +23,7 @@ internal sealed partial class SimulationTransactionEngine
     private bool _isExecutingGroup;
     private readonly SimulationExecutionOrchestrator _orchestrator;
 
-    public SimulationTransactionEngine(SimulationClock clock, SimulationState state, int initialHistoryCapacity = 0, int? contactImpulseHistoryCapacity = null, int continuationHistoryCapacity = 0)
+    public SimulationTransactionEngine(SimulationClock clock, SimulationState state, int initialHistoryCapacity = 0, int? contactImpulseHistoryCapacity = null, int continuationHistoryCapacity = 0, int persistentContactHistoryCapacity = 0)
     {
         _clock = clock ?? throw new ArgumentNullException(nameof(clock));
         _state = state ?? throw new ArgumentNullException(nameof(state));
@@ -36,6 +36,8 @@ internal sealed partial class SimulationTransactionEngine
         _contactImpulseHistory = new(contactImpulseHistoryCapacity ?? initialHistoryCapacity);
         if (continuationHistoryCapacity < 0) throw new ArgumentOutOfRangeException(nameof(continuationHistoryCapacity));
         _continuationHistory = new ProcessedCertifiedContinuation[continuationHistoryCapacity];
+        if (persistentContactHistoryCapacity < 0) throw new ArgumentOutOfRangeException(nameof(persistentContactHistoryCapacity));
+        _persistentContactHistory = new ProcessedPersistentContact[persistentContactHistoryCapacity];
         _state.BindPublicationClock(_clock, this);
         _orchestrator = new SimulationExecutionOrchestrator(_clock, this);
     }

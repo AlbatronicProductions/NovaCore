@@ -12,7 +12,7 @@ internal enum LocalContactStatus : byte
     Success, InvalidConfiguration, InvalidSource, UnsupportedForceTorqueState,
     ForeignEngine, ChangedAuthority, TimelineConflict, PendingEvent, InvalidInterval,
     ConfigurationMismatch, GenerationMismatch, FrontierMismatch, WrongThread,
-    Disposed, Invalidated, PrecisionEnvelopeExceeded, SolverFailure,
+    Disposed, Invalidated, PrecisionEnvelopeExceeded, SolverFailure, PublicationPending,
 }
 
 /// <summary>Immutable qualification geometry and fixed inertial transport; not gameplay collision authority.</summary>
