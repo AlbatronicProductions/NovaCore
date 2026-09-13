@@ -2,11 +2,15 @@
 
 **A custom precision space-simulation and game-engine framework built for seamless travel from planetary surfaces to orbit and beyond.**
 
-NovaCore brings planetary rendering, spacecraft physics, and surface interaction into one
-coherent runtime. Built independently of Unity and other general-purpose engines, it owns
-its rendering and simulation systems, with high-precision coordinates and deterministic
-physical state at the core. The foundations are working; the complete spaceflight
-experience is still being built.
+NovaCore combines planetary rendering and high-precision spacecraft simulation in a
+custom C# framework with a native Vulkan renderer. Built independently of Unity and
+other general-purpose engines, it owns its world coordinates, simulation time, physical
+state, and rendering architecture. Surface interaction is advancing through qualified
+engineering foundations; the complete spaceflight experience is still being built.
+
+**Latest banked milestone: M14.18 — Staged Finite-Body BEPU Contact.**
+Qualified local contact solving now runs behind NovaCore's authoritative simulation
+state. This is a bounded physics foundation, not completed landing gameplay.
 
 ![NovaCore Earth against the Milky Way](docs/images/novacore-11a-earth-milky-way.png)
 
@@ -46,17 +50,25 @@ Spacecraft have independent translation and rigid-body rotation, with high-preci
 position and velocity, force and torque handling, and coupled linear/angular impulse
 response. Repeatable scenarios and automated validation exercise the physical systems.
 
-### Terrain Contact & Landing Foundations
+### Qualified Surface-Interaction Foundations
 
-For the supported single authored contact point and terrain conditions, NovaCore can
-locate a contact event, calculate its isolated physical response, and advance the
-resulting spacecraft motion in a separate validated calculation. It can certify that
-this point remains clear of the supported natural terrain through the next scheduled
-simulation target, or report that clearance could not be established.
+For one authored contact point within supported terrain and motion conditions,
+NovaCore can certify a contact event, calculate its isolated response, and validate
+the resulting motion through the next scheduled simulation target. The earlier
+M14.17 milestone added atomic publication of that certified continuation into
+authoritative spacecraft state, subject to its clearance and applicability checks.
 
-This is a bounded contact foundation: it does not yet cover a whole spacecraft hull,
-multiple landing legs, persistent ground support, friction, or general contact solving.
-It is not finished landing gameplay.
+M14.18 adds a separate **staged finite-body contact** foundation using BEPU Physics.
+Qualification covers a box contacting an authored planar slab, including centered
+and tilted impacts and continued support in a retained local solver world. NovaCore
+keeps authority over double-precision position and velocity, orientation, exact time,
+event ordering, and history. BEPU solves bounded local contacts and exports private
+staged results; it does not publish those results into authoritative spacecraft state.
+
+These are qualified engineering cases. They do **not** establish live Earth terrain
+collision, arbitrary terrain-mesh contact, a production spacecraft collider, landing
+gear, launchpad support, or grounded gameplay. BEPU repeatability is qualified within
+the tested setup; cross-platform solver determinism is not claimed.
 
 ## Why a Custom Engine?
 
@@ -69,10 +81,13 @@ It is not finished landing gameplay.
 
 ## Current Development
 
-The current focus is moving from validated post-impact calculations to safely applying
-those results to the live spacecraft state. That integration is not yet implemented.
-Persistent rest on terrain, release and liftoff, and broader collision handling remain
-work toward a complete landing-and-launch loop.
+M14.18 is accepted and banked. The broader **Surface Interaction / Launch Foundation**
+remains open, with its next scope subject to Project Control's exit review.
+
+Applying staged BEPU results to authoritative spacecraft state, integrating production
+colliders and terrain, and completing persistent ground support, release, and liftoff
+remain unfinished. The retained qualification demonstrates the local solver foundation;
+it does not establish an end-to-end landing-and-launch loop.
 
 ## Where NovaCore Is Going
 
@@ -94,8 +109,9 @@ Start with the [build and run guide](docs/build-windows.md) and
 - [Planetary rendering and terrain](docs/planetary-rendering.md)
 - [Spacecraft motion](docs/spacecraft-translation.md)
 - [Contact clearance and validation](docs/engineering-evidence/postimpact-feature-coverage/README.md)
+- [M14.18 staged BEPU contact qualification](docs/engineering-evidence/bepu-local-contact-staging/staging-qualification.md)
 - [Engineering evidence](docs/engineering-evidence/README.md)
 
-*Project Control accepted M14.18 — Staged Finite-Body BEPU Contact. Git refs establish
-banking state; [current scope](docs/NOVACORE_CURRENT_STATE.md) remains bounded private
-solving. Surface Interaction / Launch Foundation remains OPEN.*
+*Banked checkpoint: [M14.18 — Staged Finite-Body BEPU Contact](https://github.com/AlbatronicProductions/NovaCore/tree/m14.18-staged-finite-body-bepu-contact).
+See the [current scope and limitations](docs/NOVACORE_CURRENT_STATE.md) for the precise
+engineering boundaries.*
