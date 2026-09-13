@@ -19,9 +19,9 @@ Project Control accepted **M14.18 — Staged Finite-Body BEPU Contact**. Resume 
 [current-state boundaries](NOVACORE_CURRENT_STATE.md) and
 [accepted qualification](engineering-evidence/bepu-local-contact-staging/README.md).
 The approved tag is `m14.18-staged-finite-body-bepu-contact`; inspect Git refs for
-actual banking state. The [persistent-contact publication candidate](engineering-evidence/persistent-contact-publication/README.md)
-is accepted by Project Control as **M14.19 — Persistent BEPU Contact Publication** on
-`codex/bepu-persistent-contact-publication`. Banking remains pending.
+actual banking state. [M14.19 — Persistent BEPU Contact Publication](engineering-evidence/persistent-contact-publication/README.md)
+is accepted and banked at `fc6fbf269d7a8022ce2fe184aea0dfc94716db05`, tag
+`m14.19-persistent-bepu-contact-publication`.
 No live terrain/collider or gameplay integration is authorized.
 
 Banked M14.15: [paired private spacecraft propagation](private-canonical-propagation.md)
@@ -165,11 +165,12 @@ is the concise performance checkpoint. Historical LiveKernelEvent 141 remains
 
 ## Next architectural decision and work boundary
 
-M13 is closed at M13.6; M14 remains OPEN. Project Control accepted M14.18's bounded
-private BEPU contact stepping. Canonical BEPU publication, live Earth/mesh terrain,
+M13 is closed at M13.6; M14 remains OPEN. Banked M14.19 adds repeated validated
+canonical endpoint publication with retained private BEPU solver/world continuity.
+Live host-paced servicing, live Earth/mesh terrain,
 production spacecraft colliders, landing gear, grounded gameplay, launchpad support
-and rotating/rebased local frames remain outside qualification. The next production
-responsibility returns to Project Control; no later milestone is assigned.
+and rotating/rebased local frames remain outside qualification. Further production
+work requires its own active Project Control ticket; no later milestone is assigned here.
 
 - Preserve banked M13.1–M13.6 outcomes and future tessellation/displacement capacity.
 - Historical exact-copy, residual-validation and lifecycle experiments are evidence,
@@ -261,5 +262,6 @@ M14.15 remains the staged private propagation authority. M14.16 adds checked ter
 clearance evidence; it does not publish canonical state.
 
 Banked M14.17 separately admits certified paired continuation publication at canonical
-T. M14.18 qualifies private BEPU solving without BEPU publication authority. M14
+T. M14.18 qualifies private BEPU solving; banked M14.19 adds a separate persistent-contact
+publication boundary under NovaCore canonical authority. M14
 remains OPEN; beta issuance remains outside the accepted singleton-clearance contract.

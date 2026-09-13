@@ -11,14 +11,19 @@ renderer. Simulation owns celestial identity, exact time, physical state, and
 reference-frame transforms. Graphics consumes immutable root-resolved snapshots
 and performs FP64 camera-relative subtraction before GPU transport.
 
-## Accepted M14.19 — banking pending
+## Banked M14.19 — Persistent BEPU Contact Publication
 
-Project Control accepted **M14.19 — Persistent BEPU Contact Publication** on
-`codex/bepu-persistent-contact-publication`; it remains unbanked.
-It installs one genuine staged BEPU endpoint and acknowledges the retained private
-world in the same canonical owner phase. M14.17 certified clearance remains a separate
+Project Control accepted and banked **M14.19 — Persistent BEPU Contact Publication**
+at `fc6fbf269d7a8022ce2fe184aea0dfc94716db05`, tag
+`m14.19-persistent-bepu-contact-publication`.
+It repeatedly validates and installs genuine staged BEPU endpoints and acknowledges
+the retained private world in the same canonical owner phase. NovaCore retains
+canonical authority; private solver/world continuity survives successful publication.
+M14.17 certified clearance remains a separate
 contract; M14.18 private-only stepping remains supported.
-See the [candidate contract and evidence](engineering-evidence/persistent-contact-publication/README.md).
+Qualification covers published endpoints for the authored box/slab, with pre-provisioned
+simulation debt; no live host-paced caller or complete landing capability is qualified.
+See the [banked contract and evidence](engineering-evidence/persistent-contact-publication/README.md).
 
 ## Accepted M14.18 production responsibility
 
@@ -27,7 +32,7 @@ It qualifies staged finite-body contact stepping in a bounded persistent local B
 world behind NovaCore canonical authority. The preceding production baseline is
 `b78f5b8c763b8d118b93f48fc4f87e78d7b6b4b2` (restore qualified BEPU manifest identity).
 The approved tag is `m14.18-staged-finite-body-bepu-contact`; Git refs establish
-banking state. M14 remains **OPEN**. The sibling candidate above is authorized but unbanked.
+banking state. M14 remains **OPEN**. The sibling M14.19 publication boundary above is banked.
 
 NovaCore owns FP64 position/velocity, canonical orientation/angular state, exact
 time, revisions, event ordering, mass/inertia, force/torque, publication and history.
@@ -493,16 +498,17 @@ visually finished.
 
 ## Next architectural decision and work boundary
 
-M14.18 has Project Control acceptance for the bounded staged-contact responsibility
-above. Git refs establish actual banking state. No later production responsibility
-or milestone number is authorized; the next decision remains with Project Control.
+M14.19 is banked for the bounded persistent-contact publication responsibility above.
+Further production work requires its own active Project Control ticket; this status
+reconciliation does not authorize another implementation or milestone.
 M13 is closed at M13.6 and there is no M13.7. Preserve the
 accepted NCSM1 physical, regional/facility, visibility, tessellation, memory and
 publication contracts. Historical exact-copy, residual-validation and lifecycle
 experiments do not automatically become production candidates.
 
-The accepted BEPU result is private staged solving only. Live canonical BEPU
-publication, real terrain collision and launch/landing remain separate responsibilities.
+The banked BEPU result includes repeated canonical endpoint publication while retaining
+the private solver world. Live host-paced servicing, real terrain collision and
+launch/landing remain unqualified by M14.19.
 Do not assign a next milestone or regenerate NCSM1 assets.
 Future work must distinguish physical geometry, depth/ownership and
 presentation/LOD behavior while keeping `H(bodyDirection)` authoritative.
@@ -538,4 +544,5 @@ where required to prevent false clearance.
 M14.15 endpoint and M14.16 clearance receipts do not independently authorize canonical
 publication. Banked M14.17 separately admits certified paired continuation publication
 at canonical T under its existing ownership contract. M14.18 adds private BEPU
-solving only and supplies no BEPU publication authority. M14 remains OPEN.
+solving only and supplies no BEPU publication authority. Banked M14.19 adds the separate
+persistent-contact publication boundary described above. M14 remains OPEN.

@@ -8,9 +8,11 @@ other general-purpose engines, it owns its world coordinates, simulation time, p
 state, and rendering architecture. Surface interaction is advancing through qualified
 engineering foundations; the complete spaceflight experience is still being built.
 
-**Latest banked milestone: M14.18 — Staged Finite-Body BEPU Contact.**
-Qualified local contact solving now runs behind NovaCore's authoritative simulation
-state. This is a bounded physics foundation, not completed landing gameplay.
+**Latest banked milestone: M14.19 — Persistent BEPU Contact Publication.**
+NovaCore now repeatedly validates and publishes BEPU-supported contact endpoints into
+its authoritative simulation state while retaining the private solver world between
+steps. Qualification covers an authored box and planar slab; complete landing gameplay
+remains in development.
 
 ![NovaCore Earth against the Milky Way](docs/images/novacore-11a-earth-milky-way.png)
 
@@ -58,21 +60,26 @@ the resulting motion through the next scheduled simulation target. The earlier
 M14.17 milestone added atomic publication of that certified continuation into
 authoritative spacecraft state, subject to its clearance and applicability checks.
 
-M14.18 adds a separate **staged finite-body contact** foundation using BEPU Physics.
+M14.18 established a separate **staged finite-body contact** foundation using BEPU Physics.
 Qualification covers a box contacting an authored planar slab, including centered
 and tilted impacts and continued support in a retained local solver world. NovaCore
 keeps authority over double-precision position and velocity, orientation, exact time,
 event ordering, and history. BEPU solves bounded local contacts and exports private
-staged results; it does not publish those results into authoritative spacecraft state.
+staged results for NovaCore to validate and publish.
 
-Accepted M14.19 adds NovaCore-owned validation and canonical publication of those
-endpoints across repeated exact simulation intervals, while the retained private
-BEPU world continues after each successful publication. Banking is pending.
+Banked **M14.19 — Persistent BEPU Contact Publication** adds NovaCore-owned validation
+and atomic publication of those endpoints into canonical state across repeated exact
+simulation intervals. The private BEPU world retains its contact and solver continuity
+after each successful publication. NovaCore remains the authority for physical state,
+exact time, revisions, and history. Support is qualified at the published endpoints;
+motion between or beyond those endpoints is not certified by this result.
 
 These are qualified engineering cases. They do **not** establish live Earth terrain
 collision, arbitrary terrain-mesh contact, a production spacecraft collider, landing
-gear, launchpad support, or grounded gameplay. BEPU repeatability is qualified within
-the tested setup; cross-platform solver determinism is not claimed.
+gear, launchpad gameplay, departure and contact reacquisition, or complete landing
+capability. A final spacecraft and grounded gameplay remain unfinished. BEPU
+repeatability is qualified within the tested setup; cross-platform solver determinism
+is not claimed.
 
 ## Why a Custom Engine?
 
@@ -85,13 +92,13 @@ the tested setup; cross-platform solver determinism is not claimed.
 
 ## Current Development
 
-M14.18 is accepted and banked. The broader **Surface Interaction / Launch Foundation**
-remains open. M14.19 persistent BEPU contact publication is accepted and awaits banking.
+M14.19 is accepted and **banked**, building on M14.18's retained local contact solver.
+The broader **Surface Interaction / Launch Foundation** remains open.
 
-Integrating production colliders and terrain, and completing persistent ground support,
-release, and liftoff remain unfinished. The retained qualification demonstrates bounded
-solver continuation and canonical endpoint publication;
-it does not establish an end-to-end landing-and-launch loop.
+The qualified contact episodes use pre-provisioned simulation time. Continuous servicing
+from live host elapsed time is not yet qualified. Production collider and terrain
+integration, departure and reacquisition, and the end-to-end landing-and-launch loop
+remain unfinished.
 
 ## Where NovaCore Is Going
 
@@ -114,8 +121,10 @@ Start with the [build and run guide](docs/build-windows.md) and
 - [Spacecraft motion](docs/spacecraft-translation.md)
 - [Contact clearance and validation](docs/engineering-evidence/postimpact-feature-coverage/README.md)
 - [M14.18 staged BEPU contact qualification](docs/engineering-evidence/bepu-local-contact-staging/staging-qualification.md)
+- [M14.19 persistent contact publication qualification](docs/engineering-evidence/persistent-contact-publication/README.md)
 - [Engineering evidence](docs/engineering-evidence/README.md)
 
-*Banked checkpoint: [M14.18 — Staged Finite-Body BEPU Contact](https://github.com/AlbatronicProductions/NovaCore/tree/m14.18-staged-finite-body-bepu-contact).
+*Latest banked checkpoint: [M14.19 — Persistent BEPU Contact Publication](https://github.com/AlbatronicProductions/NovaCore/tree/m14.19-persistent-bepu-contact-publication).
+Predecessor: [M14.18 — Staged Finite-Body BEPU Contact](https://github.com/AlbatronicProductions/NovaCore/tree/m14.18-staged-finite-body-bepu-contact).
 See the [current scope and limitations](docs/NOVACORE_CURRENT_STATE.md) for the precise
 engineering boundaries.*

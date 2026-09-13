@@ -1,8 +1,10 @@
-# Persistent BEPU contact publication candidate
+# M14.19 — Persistent BEPU Contact Publication
 
-Project Control subsequently accepted this accomplishment as **M14.19 — Persistent
-BEPU Contact Publication**. Banking remains pending. The qualification-stage report
-below, including its then-current acceptance status, is retained unchanged as evidence.
+Project Control subsequently accepted and banked this accomplishment as **M14.19 —
+Persistent BEPU Contact Publication** at `fc6fbf269d7a8022ce2fe184aea0dfc94716db05`,
+tag `m14.19-persistent-bepu-contact-publication`. The qualification-stage report below,
+including its then-current branch, refs and acceptance status, is retained unchanged
+as historical evidence.
 
 ## Baseline / branch
 

@@ -100,9 +100,17 @@ The 1,000,000-tick second remains authoritative. Private endpoints use
 integer interval. Position/velocity reduce in FP64 before bounded FP32 transport
 and reconstruct paired staged FP64 results. Fixed frame orientation and constant
 translational frame velocity exclude rotation/rebasing. The box/slab are qualification
-geometry for authored planar contact. Canonical BEPU publication, real Earth/mesh
-terrain and production spacecraft collision geometry remain separate responsibilities.
+geometry for authored planar contact. Real Earth/mesh terrain and production
+spacecraft collision geometry remain separate responsibilities.
 See the [accepted qualification](engineering-evidence/bepu-local-contact-staging/README.md).
+
+Banked **M14.19 — Persistent BEPU Contact Publication** adds a sibling NovaCore-owned
+boundary that validates and atomically publishes staged endpoints across repeated exact
+intervals, then acknowledges the retained private world in the same owner phase.
+Solver/world continuity stays private; NovaCore retains canonical state, time, revision
+and history authority. M14.17 certified clearance and M14.18 private-only stepping retain
+their separate contracts. No live host-paced contact caller or terrain/gameplay integration
+is qualified by this milestone. See the [banked publication evidence](engineering-evidence/persistent-contact-publication/README.md).
 
 `Spacecraft.Guidance` is a pure managed math layer. It evaluates orbital flight-reference vectors, deterministically constructs body-forward target orientations, and computes bounded body-space PD torque requests. The celestial sample owns SAS mode selection, exact-time hold-attitude capture, and a deterministic 20 Hz simulation-time cadence. At each active boundary it evaluates guidance and submits a quantized torque request through the existing rigid-body transaction path. The fixture uses `(120, 120, 120) kg·m²` inertia, fixture-specific `(8, 8, 8) N·m` SAS authority, gains `(7.5, 7.5, 7.5)` and `(63, 63, 63)`, `.002` deadbands, and `.01` settlement thresholds for deliberately mildly overdamped behavior. SAS control is sample-locally suspended above 10×; clock and orbital evaluation continue, and resumption begins at the first future cadence boundary. Graphics receives only the resulting evaluated body frame. Full high-warp control behavior remains deferred.
 
