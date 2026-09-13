@@ -1,0 +1,6 @@
+BEPUphysics v2 — BepuPhysics and BepuUtilities 2.5.0-beta.29
+Copyright Bepu Entertainment LLC. Author: Ross Nordby.
+Licensed under the Apache License, Version 2.0; see LICENSE.txt.
+Source: https://github.com/bepu/bepuphysics2
+Source commit: f73164bb3c9ca733eb3329f1f6b1cea4e216ece7
+The assemblies are unmodified extracts of independently authenticated NuGet.org packages.

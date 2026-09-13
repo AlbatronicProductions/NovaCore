@@ -1,0 +1,4 @@
+<Project>
+  <!-- Shared deployment checks cover projects receiving Simulation's transitive binaries. -->
+  <Import Project="external/bepu/Bepu.targets" />
+</Project>

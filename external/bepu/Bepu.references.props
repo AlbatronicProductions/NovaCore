@@ -1,0 +1,19 @@
+<Project>
+  <PropertyGroup>
+    <NovaCoreUsesBepu>true</NovaCoreUsesBepu>
+  </PropertyGroup>
+  <ItemGroup>
+    <_ApprovedBepuReference Include="BepuPhysics, Version=2.5.0.0, Culture=neutral, PublicKeyToken=9345ce38ee48a1cd">
+      <HintPath>$(MSBuildThisFileDirectory)2.5.0-beta.29/lib/BepuPhysics.dll</HintPath>
+      <SpecificVersion>true</SpecificVersion>
+      <Private>true</Private>
+    </_ApprovedBepuReference>
+    <_ApprovedBepuReference Include="BepuUtilities, Version=2.5.0.0, Culture=neutral, PublicKeyToken=a595ef937c270ac9">
+      <HintPath>$(MSBuildThisFileDirectory)2.5.0-beta.29/lib/BepuUtilities.dll</HintPath>
+      <SpecificVersion>true</SpecificVersion>
+      <Private>true</Private>
+    </_ApprovedBepuReference>
+    <_ApprovedBepuContent Include="$(MSBuildThisFileDirectory)2.5.0-beta.29/LICENSE.txt" Link="third-party/Bepu/LICENSE.txt" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <_ApprovedBepuContent Include="$(MSBuildThisFileDirectory)ATTRIBUTION.txt" Link="third-party/Bepu/ATTRIBUTION.txt" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

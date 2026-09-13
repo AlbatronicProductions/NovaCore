@@ -1,0 +1,70 @@
+<Project>
+  <Import Project="Bepu.references.props" />
+  <!-- The SDK adds transitive ProjectReferences before reference resolution.
+       Explicit references are required even before Simulation uses BEPU types.
+       This preserves deployment and deps.json without dummy production calls. -->
+  <Target Name="ConfigureBepuConsumers" AfterTargets="IncludeTransitiveProjectReferences"
+          BeforeTargets="ResolveAssemblyReferences" DependsOnTargets="IncludeTransitiveProjectReferences">
+    <PropertyGroup Condition="'@(ProjectReference->WithMetadataValue('Filename', 'NovaCore.Simulation'))' != ''">
+      <NovaCoreUsesBepu>true</NovaCoreUsesBepu>
+    </PropertyGroup>
+    <ItemGroup Condition="'$(NovaCoreUsesBepu)' == 'true'">
+      <Reference Include="@(_ApprovedBepuReference)" />
+      <Content Include="@(_ApprovedBepuContent)" />
+    </ItemGroup>
+  </Target>
+  <PropertyGroup>
+    <_NovaCoreBepuDirectory>$(MSBuildThisFileDirectory)2.5.0-beta.29/</_NovaCoreBepuDirectory>
+  </PropertyGroup>
+  <!-- These literal pins and this build file are reviewed trust inputs. Never
+       regenerate pins from whatever binaries happen to be on a build machine. -->
+  <Target Name="VerifyBepuManifest">
+    <VerifyFileHash File="$(_NovaCoreBepuDirectory)manifest/bepu-2.5.0-beta.29.json" Hash="C76F2DE75DAC81C8695109977E1F8A4DCCAFF29DA0BB96884C46C0B33362240E" />
+    <VerifyFileHash File="$(_NovaCoreBepuDirectory)LICENSE.txt" Hash="4CD13F7A31E98F51C4FB960A115E9A9AB9C42284CA5D5C9B5CCBCF322DE45BFD" />
+  </Target>
+  <Target Name="VerifyBepuBinaries" DependsOnTargets="VerifyBepuManifest">
+    <VerifyFileHash File="$(_NovaCoreBepuDirectory)lib/BepuPhysics.dll" Hash="77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7" />
+    <VerifyFileHash File="$(_NovaCoreBepuDirectory)lib/BepuUtilities.dll" Hash="E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68" />
+  </Target>
+  <Target Name="VerifyBepuPackages" DependsOnTargets="VerifyBepuBinaries">
+    <VerifyFileHash File="$(_NovaCoreBepuDirectory)packages/BepuPhysics.2.5.0-beta.29.nupkg" Hash="D4A952F5417B53B08DE20D507C21745C9DD004E2529864098DFEC7A2CFF11E42" />
+    <VerifyFileHash File="$(_NovaCoreBepuDirectory)packages/BepuUtilities.2.5.0-beta.29.nupkg" Hash="8168EC4905F3AD5F923564557DAAB2BAB1100EE46B424CA5F1C97BD7684DE19F" />
+    <VerifyFileHash File="$(_NovaCoreBepuDirectory)packages/BepuPhysics.2.5.0-beta.29.nupkg" Algorithm="SHA512" HashEncoding="base64" Hash="P3A/P9K7JmEUkdqa4S8CuFqOm0QnOyv17T3nGbQdNNxyfW/Ac3jGjk5eT8JHhz2MVfQpamexsra8ZBZ6kLJ/WQ==" />
+    <VerifyFileHash File="$(_NovaCoreBepuDirectory)packages/BepuUtilities.2.5.0-beta.29.nupkg" Algorithm="SHA512" HashEncoding="base64" Hash="odWExp1HmQVoHpzKhrqPLeHpUKWVOORFy1qnkc9MRwOKgcBUe9f+F7Dp683LHXFizMYI4OEHKrjH+zQbPtYNBg==" />
+  </Target>
+  <Target Name="VerifyBepuBeforeConsumption" BeforeTargets="ResolveAssemblyReferences;CoreCompile"
+          DependsOnTargets="ConfigureBepuConsumers">
+    <CallTarget Targets="VerifyBepuBinaries" Condition="'$(NovaCoreUsesBepu)' == 'true'" />
+  </Target>
+  <Target Name="VerifyBepuCIProvenance" BeforeTargets="ResolveAssemblyReferences;CoreCompile"
+          DependsOnTargets="ConfigureBepuConsumers">
+    <CallTarget Targets="VerifyBepuPackages" Condition="'$(NovaCoreUsesBepu)' == 'true' and '$(ContinuousIntegrationBuild)' == 'true'" />
+  </Target>
+  <Target Name="VerifyResolvedBepuReferences" AfterTargets="ResolveAssemblyReferences" BeforeTargets="CoreCompile">
+    <ItemGroup>
+      <_ResolvedBepuPhysics Include="@(ReferencePath)" Condition="'%(Filename)' == 'BepuPhysics'" />
+      <_ResolvedBepuUtilities Include="@(ReferencePath)" Condition="'%(Filename)' == 'BepuUtilities'" />
+    </ItemGroup>
+    <VerifyFileHash File="%(_ResolvedBepuPhysics.Identity)" Hash="77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7" Condition="'@(_ResolvedBepuPhysics)' != ''" />
+    <VerifyFileHash File="%(_ResolvedBepuUtilities.Identity)" Hash="E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68" Condition="'@(_ResolvedBepuUtilities)' != ''" />
+  </Target>
+  <Target Name="IdentifyBepuDeployment">
+    <ItemGroup>
+      <_BepuDeployment Include="@(ReferenceCopyLocalPaths)" Condition="'%(Filename)' == 'BepuPhysics' or '%(Filename)' == 'BepuUtilities'" />
+    </ItemGroup>
+  </Target>
+  <Target Name="VerifyBepuBuildOutput" AfterTargets="CopyFilesToOutputDirectory" DependsOnTargets="IdentifyBepuDeployment"
+          Condition="'$(NovaCoreUsesBepu)' == 'true' or '@(ReferenceCopyLocalPaths->WithMetadataValue('Filename', 'BepuPhysics'))' != '' or Exists('$(TargetDir)BepuPhysics.dll') or Exists('$(TargetDir)BepuUtilities.dll')">
+    <CallTarget Targets="VerifyBepuBinaries" />
+    <VerifyFileHash File="$(TargetDir)BepuPhysics.dll" Hash="77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7" />
+    <VerifyFileHash File="$(TargetDir)BepuUtilities.dll" Hash="E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68" />
+    <VerifyFileHash File="$(TargetDir)third-party/Bepu/LICENSE.txt" Hash="4CD13F7A31E98F51C4FB960A115E9A9AB9C42284CA5D5C9B5CCBCF322DE45BFD" />
+  </Target>
+  <Target Name="VerifyBepuPublishOutput" AfterTargets="Publish" DependsOnTargets="IdentifyBepuDeployment"
+          Condition="'$(NovaCoreUsesBepu)' == 'true' or '@(ReferenceCopyLocalPaths->WithMetadataValue('Filename', 'BepuPhysics'))' != '' or Exists('$(PublishDir)BepuPhysics.dll') or Exists('$(PublishDir)BepuUtilities.dll')">
+    <CallTarget Targets="VerifyBepuBinaries" />
+    <VerifyFileHash File="$(PublishDir)BepuPhysics.dll" Hash="77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7" />
+    <VerifyFileHash File="$(PublishDir)BepuUtilities.dll" Hash="E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68" />
+    <VerifyFileHash File="$(PublishDir)third-party/Bepu/LICENSE.txt" Hash="4CD13F7A31E98F51C4FB960A115E9A9AB9C42284CA5D5C9B5CCBCF322DE45BFD" />
+  </Target>
+</Project>
