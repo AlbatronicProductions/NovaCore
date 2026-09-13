@@ -15,6 +15,21 @@ using NovaCore.Core;
 using NovaCore.Core.ReferenceFrames;
 using System.Diagnostics;
 
+if (args.Contains("--compound-selector-only", StringComparer.Ordinal)) { CompoundContactSelectorTests.Run(); return; }
+if (args.Contains("--compound-selector-allocation", StringComparer.Ordinal)) { CompoundContactSelectorTests.Cost(allocationOnly: true); return; }
+if (args.Contains("--engineering-article-allocation", StringComparer.Ordinal)) { EngineeringContactArticleTests.Allocation(); return; }
+if (args.Contains("--engineering-article-storage", StringComparer.Ordinal)) { EngineeringContactArticleTests.Storage(); return; }
+if (args.Contains("--engineering-article-schedules", StringComparer.Ordinal)) { EngineeringContactArticleTests.Schedules(); return; }
+if (args.Contains("--engineering-article-performance", StringComparer.Ordinal)) { EngineeringContactArticleTests.Performance(); return; }
+if (args.Contains("--engineering-article-cold", StringComparer.Ordinal)) { EngineeringContactArticleTests.ColdDiagnostics(); return; }
+foreach (var kind in new[] { "centered", "tilted", "mirrored", "moving" })
+    if (args.Contains("--engineering-article-physical-" + kind, StringComparer.Ordinal)) { EngineeringContactArticleTests.Physical(kind); return; }
+if (args.Contains("--compound-selector-cost", StringComparer.Ordinal)) { CompoundContactSelectorTests.Cost(); return; }
+if (args.Contains("--compound-coverage-tilted", StringComparer.Ordinal)) { EngineeringContactArticleTests.CoverageTilted(); return; }
+if (args.Contains("--compound-coverage-regressions", StringComparer.Ordinal)) { EngineeringContactArticleTests.CoverageRegressions(); return; }
+if (args.Contains("--compound-coverage-rest-witness", StringComparer.Ordinal)) { EngineeringContactArticleTests.CoverageRestWitness(); return; }
+if (args.Contains("--engineering-article-cheap", StringComparer.Ordinal)) { EngineeringContactArticleTests.Cheap(); return; }
+if (args.Contains("--engineering-article-contact", StringComparer.Ordinal)) { EngineeringContactArticleTests.Contacts(); return; }
 if (args.Contains("--contact-servicing-cheap", StringComparer.Ordinal)) { ContactServicingTests.Cheap(); return; }
 if (args.Contains("--contact-servicing-only", StringComparer.Ordinal)) { ContactServicingTests.Run(); return; }
 if (args.Contains("--contact-servicing-performance", StringComparer.Ordinal)) { ContactServicingTests.Performance(); return; }
@@ -113,8 +128,13 @@ var tests = new (string Name, Action Test)[]
     ("Post-impact singleton terrain coverage", PostImpactCoverageTests.Run),
     ("Certified continuation ownership", ContinuationOwnershipTests.Run),
     ("Private finite-body contact staging", LocalContactStagingTests.Run),
+    ("Compound contact selection", CompoundContactSelectorTests.Run),
     ("Persistent contact publication", PersistentContactPublicationTests.Run),
     ("Host-paced contact servicing", ContactServicingTests.Run),
+    ("Engineering article definition and lifetime", EngineeringContactArticleTests.Cheap),
+    ("Engineering article physical contact", EngineeringContactArticleTests.Contacts),
+    ("Engineering article schedules and private equivalence", EngineeringContactArticleTests.Schedules),
+    ("Engineering article allocation", EngineeringContactArticleTests.Allocation),
 };
 foreach (var (name, test) in tests) { test(); Console.WriteLine($"PASS {name}"); }
 

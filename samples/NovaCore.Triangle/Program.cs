@@ -64,9 +64,9 @@ static unsafe int Run(SampleOptions options,LogOptions log,bool productionEarth)
     }
     var root=new ReferenceFrameId(1); var defaultStart=new UniversePosition(new Double3(4e12,-3e12,7e12),root);
     ResolvedRenderSnapshot? snapshot=null; FixtureSceneDiagnostics fixture=default; DynamicReferenceFrameFixtureScene? dynamic=null; CelestialAnalyticalScene? celestial=null; EarthPlanetaryScene? earth=null; SolarSystemScene? sol=null; ContactDevelopmentScene? contact=null; var cameraPosition=defaultStart.Value;var cameraOrientation=DoubleQuaternion.Identity; var projection=new CameraProjection(Math.PI/3,16d/9,.01,1000); var movementSpeed=.1d;
-    if(options.Scene is "contact-centered" or "contact-tilted")
+    if(options.Scene is "contact-centered" or "contact-tilted" or "article-centered" or "article-tilted")
     {
-        contact=new ContactDevelopmentScene(options.Scene=="contact-tilted"); snapshot=contact.InitialSnapshot;
+        contact=new ContactDevelopmentScene(options.Scene.EndsWith("tilted",StringComparison.Ordinal),options.Scene.StartsWith("article-",StringComparison.Ordinal)); snapshot=contact.InitialSnapshot;
         cameraPosition=new Double3(6,4,8);cameraOrientation=DoubleQuaternion.FromAxisAngle(Double3.UnitY,Math.Atan2(6,8))*DoubleQuaternion.FromAxisAngle(Double3.UnitX,-Math.Atan2(3,10));
         movementSpeed=3d;
     }

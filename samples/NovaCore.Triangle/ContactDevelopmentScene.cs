@@ -19,6 +19,7 @@ internal sealed class ContactDevelopmentScene : IDisposable
     private readonly SimulationTransactionEngine engine;
     private readonly LocalContactWorld world;
     private readonly LocalContactConfiguration configuration;
+    private readonly EngineeringContactArticle? article;
     private LocalContactWorld.Receipt receipt;
     private SpacecraftTranslationState linear;
     private SpacecraftRigidBodyRotationState angular;
@@ -39,20 +40,26 @@ internal sealed class ContactDevelopmentScene : IDisposable
     internal SpacecraftTranslationState PresentedTranslation => linear;
     internal SpacecraftRigidBodyRotationState PresentedRotation => angular;
 
-    internal ContactDevelopmentScene(bool tilted)
+    internal ContactDevelopmentScene(bool tilted, bool engineeringArticle = false)
     {
-        windowLabel = "NovaCore - Contact development / " + (tilted ? "tilted" : "centered") + " - ";
+        windowLabel = "NovaCore - " + (engineeringArticle ? "Engineering spacecraft article" : "Contact development") + " / " + (tilted ? "tilted" : "centered") + " - ";
         var cold = Stopwatch.GetTimestamp();
+        article = engineeringArticle ? EngineeringContactArticle.Create() : null;
         var craft = new SpacecraftId(901); var body = new ReferenceFrameId(902);
         var graph = new ReferenceFrameGraphBuilder();
         graph.Add(new ReferenceFrameNode(Root,null,ReferenceFrameKind.Ecl,"Contact qualification root"));
-        graph.Add(new ReferenceFrameNode(body,Root,ReferenceFrameKind.Ccf,"Qualification-only box"));
-        Require(LocalContactConfiguration.TryCreate(1,Root,Double3.Zero,Double3.Zero,DoubleQuaternion.Identity,new(2,1,1),64,out var config)==LocalContactStatus.Success,"configuration");
+        graph.Add(new ReferenceFrameNode(body,Root,ReferenceFrameKind.Ccf,article is null ? "Qualification-only box" : "Engineering article COM"));
+        LocalContactConfiguration? config;
+        var configurationStatus = article is null
+            ? LocalContactConfiguration.TryCreate(1,Root,Double3.Zero,Double3.Zero,DoubleQuaternion.Identity,new(2,1,1),64,out config)
+            : LocalContactConfiguration.TryCreateArticle(1,Root,Double3.Zero,Double3.Zero,DoubleQuaternion.Identity,article,64,out config);
+        Require(configurationStatus==LocalContactStatus.Success,"configuration");
         configuration=config!;
-        linear=new(craft,Root,SimulationInstant.Zero,new(0,2,0),Double3.Zero,new(0,-9810,0));
+        var mass = article?.MassKilograms ?? 1000;
+        linear=new(craft,Root,SimulationInstant.Zero,new(0,2,0),Double3.Zero,new(0,-9.81*mass,0));
         angular=new(craft,SimulationInstant.Zero,tilted?DoubleQuaternion.FromAxisAngle(Double3.UnitZ,.25):DoubleQuaternion.Identity,
-            Double3.Zero,configuration.BoxInertia(1000),Double3.Zero,RigidBodyRotationModel.ConstantBodyTorqueV1);
-        Require(SpacecraftStateStore.TryCreateTranslating([new(craft,Root,body,"Qualification-only box")],[angular],[new(1000)],[linear],graph.Build(),out var store,out _),"state");
+            Double3.Zero,article?.PrincipalInertia ?? configuration.BoxInertia(1000),Double3.Zero,RigidBodyRotationModel.ConstantBodyTorqueV1);
+        Require(SpacecraftStateStore.TryCreateTranslating([new(craft,Root,body,article is null ? "Qualification-only box" : "Engineering bus/pods v1")],[angular],[new(mass)],[linear],graph.Build(),out var store,out _),"state");
         var clock=new SimulationClock(SimulationInstant.Zero,new SimulationTimeline(4));
         engine=new(clock,new SimulationState(spacecraft:store),4,persistentContactHistoryCapacity:1200);
         Require(LocalContactSource.Capture(engine,craft,configuration,new(20_000_000),out var source)==LocalContactStatus.Success,"source");
@@ -63,13 +70,15 @@ internal sealed class ContactDevelopmentScene : IDisposable
         try
         {
             Require(engine.BeginPersistentContact(world,configuration,receipt)==LocalContactStatus.Success,"binding");
-            Require(ResolvedRenderSnapshot.TryCreate([
-                new(new(1),new(linear.PositionRoot,Root),angular.OrientationLocalToParent,new(2,1,1),MeshHandle.ContactQualificationBody),
-                new(new(2),new(new(0,-1,0),Root),DoubleQuaternion.Identity,new(128,2,128),MeshHandle.ContactQualificationSupport)
-            ],out var snapshot,out _),"presentation");
+            var count = article is null ? 1 : 3;
+            var objects = new ResolvedRenderObject[count+1];
+            for(var i=0;i<count;i++) objects[i]=PresentedBody(i);
+            objects[count]=new(new((uint)count+1),new(new(0,-1,0),Root),DoubleQuaternion.Identity,new(128,2,128),MeshHandle.ContactQualificationSupport);
+            Require(ResolvedRenderSnapshot.TryCreate(objects,out var snapshot,out _),"presentation");
             InitialSnapshot=snapshot!;
             Console.WriteLine($"CONTACT_LIVE_READY tilted={tilted} setup_ms={setupMs:F4} world_ms={worldMs:F4} binding_presentation_ms={Stopwatch.GetElapsedTime(cold).TotalMilliseconds:F4} debt=0 steps=1200 rate=1:1 qualification_only=true");
-            Console.WriteLine("Contact development: blue 2 x 1 x 1 m box / gray slab. Camera WASD/QE, mouse look, R camera reset. Fixed 20-second episode; no free-flight entry. Relaunch for an explicit cold restart.");
+            if(article is null) Console.WriteLine("Contact development: blue 2 x 1 x 1 m box / gray slab. Camera WASD/QE, mouse look, R camera reset. Fixed 20-second episode; no free-flight entry. Relaunch for an explicit cold restart.");
+            if(article is not null) Console.WriteLine("ENGINEERING ARTICLE v1: 1.5 x 1 x 2.5 m central bus + two 0.5 x 1 x 1.5 m side pods; 1000 kg; authored COM offset (0,0,0.1) m. The three visible boxes use the collision article dimensions and COM-relative poses. No production spacecraft asset or free-flight entry.");
         }
         catch { world.Dispose(); throw; }
     }
@@ -152,9 +161,22 @@ internal sealed class ContactDevelopmentScene : IDisposable
     internal void BuildSubmission(in GpuCameraData camera,in UniversePosition cameraRoot,RenderFrameSubmission submission)
     {
         submission.Begin(camera,cameraRoot);
-        submission.Add(new UniversePosition(linear.PositionRoot,Root),angular.OrientationLocalToParent,new(2,1,1),MeshHandle.ContactQualificationBody);
+        var count = article is null ? 1 : 3;
+        for(var i=0;i<count;i++)
+        {
+            var body=PresentedBody(i);
+            submission.Add(body.RootPosition,body.RootOrientation,body.Scale,body.Mesh);
+        }
         submission.Add(new UniversePosition(new(0,-1,0),Root),DoubleQuaternion.Identity,new(128,2,128),MeshHandle.ContactQualificationSupport);
         submission.Complete();
+    }
+    // Copied canonical body pose plus immutable authored child offsets. COM subtraction occurs once.
+    internal ResolvedRenderObject PresentedBody(int child)
+    {
+        if(article is null) return new(new(1),new(linear.PositionRoot,Root),angular.OrientationLocalToParent,new(2,1,1),MeshHandle.ContactQualificationBody);
+        var shape=article.Child(child);
+        return new(new((uint)child+1),new(linear.PositionRoot+angular.OrientationLocalToParent.Rotate(article.ChildCentreBody(child)),Root),
+            angular.OrientationLocalToParent*shape.Orientation,shape.Dimensions,MeshHandle.ContactQualificationBody);
     }
     private void Fail(string reason){terminal=true;Status="FAILED - "+reason;Console.Error.WriteLine("CONTACT_LIVE_FAILED "+reason);}
     private void Report()

@@ -1,0 +1,90 @@
+{
+  "disposition": "ENGINEERING SPACECRAFT CONTACT ARTICLE — FOLLOW-UP REQUIRED",
+  "lead_judgment": "REVISE",
+  "baseline": "5537d08e4ab051a7f31bc638b5f717ef3ce4f3e0",
+  "compile": {
+    "baseline_CS0103_resolved": true,
+    "first_resumed_build": {
+      "result": "FAIL",
+      "errors": 6,
+      "responsibility": "Previously uncompiled article test API references only"
+    },
+    "after_bounded_draft_corrections": {
+      "configuration": "Debug",
+      "result": "PASS",
+      "warnings": 0,
+      "errors": 0,
+      "reported_seconds": 2.95
+    }
+  },
+  "cheap": {
+    "command": "dotnet run --project tests/NovaCore.Simulation.Tests -c Debug --no-build -- --engineering-article-cheap",
+    "exit_code": 0,
+    "result": "PASS",
+    "definition": {
+      "MassKilograms": 1000,
+      "CentreOfMassAssembly": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0.1,
+        "LengthSquared": 0.010000000000000002,
+        "IsFinite": true
+      },
+      "Tensor": {
+        "XX": 577.5,
+        "YY": 848.3333333333333,
+        "ZZ": 437.5,
+        "XY": 0,
+        "XZ": 0,
+        "YZ": 0
+      },
+      "SmallestFeature": 0.5,
+      "BoundingRadius": 1.7705931209625774,
+      "Identity": {
+        "Version": 1,
+        "A": "11924782583587566515",
+        "B": "2487338776908849966",
+        "C": "10970259085846249193",
+        "D": "16680824850243033112",
+        "encoding_note": "Exact decimal UInt64 strings transcribed from the original retained ARTICLE_DEFINITION output. Corrects precision lost by the earlier JSON-number transcription; no article identity or source change."
+      }
+    }
+  },
+  "contacts": {
+    "command": "dotnet run --project tests/NovaCore.Simulation.Tests -c Debug --no-build -- --engineering-article-contact",
+    "fresh_processes": 1,
+    "exit_code": 1,
+    "centered": {
+      "tilted": false,
+      "moving": false,
+      "supported": 600,
+      "childMask": 7,
+      "peak_m": 0.007420579678659611,
+      "max_drift_m": 6.122245311970352e-8,
+      "max_omega": 0.05351199929532568,
+      "n16666": 400,
+      "n16667": 800,
+      "ticks": 20000000,
+      "revision": 1200,
+      "history": 1200,
+      "article_preparation_ms": 3.7318,
+      "world_preparation_ms": 30.3266,
+      "first_step_ms": 28.9757,
+      "first_contact_step": 33,
+      "first_contact_ms": 25.5881
+    },
+    "tilted": {
+      "result": "FAIL",
+      "first_failing_interval": 35,
+      "peak_penetration_metres": 0.08786423715152591,
+      "ceiling_metres": 0.02,
+      "elapsed_canonical_ticks": 583333,
+      "completed_1200": false,
+      "final_support_600": "NOT REACHED",
+      "cause": "UNATTRIBUTED; no further diagnosis authorized after physical gate failure"
+    },
+    "retry_count": 0
+  },
+  "remaining_gates": "NOT RUN after the first physical gate failure: allocation/positive control, private-only and host-partition comparisons, moving-frame sequence, storage, Release timing, visible scenario, frames/manual acceptance, full/regression validation",
+  "note": "The pre-existing qualification-box thresholds, solver settings, materials, corrected owner-phase publisher and host servicing code were not altered."
+}

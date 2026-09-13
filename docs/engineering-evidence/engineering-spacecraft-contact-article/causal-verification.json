@@ -1,0 +1,27 @@
+{
+  "rows": 41,
+  "raw_canonical_position_velocity_bit_equal": true,
+  "private_continuity_bit_equal": true,
+  "callback_pose_equals_pre_step": true,
+  "clock_debt_revision_history_exact": true,
+  "retained_body_static_world": true,
+  "instrumented_signal_identical": true,
+  "max_independent_disagreement_metres": 2.639361484924052E-08,
+  "runtime_child_contacts_at_35": [
+    {
+      "child": "0",
+      "contacts": 4
+    },
+    {
+      "child": "1",
+      "contacts": 4
+    },
+    {
+      "child": "2",
+      "contacts": 4
+    }
+  ],
+  "parent_contacts_at_35": 4,
+  "permanent_correction": "NONE",
+  "underlying_solver_mechanism": "UNRESOLVED; reduction chronology does not prove sole cause"
+}

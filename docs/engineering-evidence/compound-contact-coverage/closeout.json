@@ -1,0 +1,51 @@
+{
+  "baseline": "5537d08e4ab051a7f31bc638b5f717ef3ce4f3e0",
+  "branch": "codex/engineering-spacecraft-contact-article",
+  "main": "5537d08e4ab051a7f31bc638b5f717ef3ce4f3e0",
+  "origin_main": "5537d08e4ab051a7f31bc638b5f717ef3ce4f3e0",
+  "frozen_inputs_verified": 369,
+  "article_source_test_fingerprints": 9,
+  "historical_tags_unchanged": true,
+  "new_production_test_changes": 0,
+  "staged_count": 0,
+  "new_scratch": {
+    "path": "E:\\NovaCore\\build\\compound-coverage-investigation",
+    "files": 139,
+    "bytes": 21973615.0,
+    "disposition": "RETAINED — automatic approval review rejected one deletion attempt before execution as blocked by policy; no retry/workaround"
+  },
+  "protected_old_scratch": {
+    "path": "E:\\NovaCore\\build\\engineering-article-tilt-probe",
+    "files": 7,
+    "bytes": 398585,
+    "disposition": "UNTOUCHED; deletion not attempted"
+  },
+  "validation": {
+    "diagnostic_build": "PASS 0 warnings/errors; earlier scratch-only compile wiring error corrected before physics",
+    "processes": 3,
+    "retries": 0,
+    "candidate_qualification_resumed": false,
+    "comparison": "PASS",
+    "physical_bits_through_34": "IDENTICAL",
+    "normal_matches_prior_41_endpoint_bits": true,
+    "warm_start_before_intervention": "ALL ZERO",
+    "static_reproduction_syntax": "PASS",
+    "packaged_reproducer_additional_run": false
+  },
+  "judgment": "PASS — CAUSAL POLICY DEFECT PROVEN",
+  "diff_check": "PASS",
+  "final_git_status": [
+    " M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactCallbacks.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Publication.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs",
+    " M src/NovaCore.Simulation/Transactions/PersistentContactPublication.cs",
+    " M tests/NovaCore.Simulation.Tests/Program.cs",
+    "?? docs/engineering-evidence/bepu-local-contact-staging/staging-build-blocker.md",
+    "?? docs/engineering-evidence/compound-contact-coverage/",
+    "?? docs/engineering-evidence/engineering-spacecraft-contact-article/",
+    "?? src/NovaCore.Simulation/Spacecraft/Contact/Staging/EngineeringContactArticle.cs",
+    "?? src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Article.cs",
+    "?? tests/NovaCore.Simulation.Tests/EngineeringContactArticleTests.cs"
+  ]
+}

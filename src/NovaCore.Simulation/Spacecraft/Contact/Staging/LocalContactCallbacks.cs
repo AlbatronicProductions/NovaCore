@@ -11,6 +11,8 @@ internal sealed class LocalContactMetrics
 {
     internal int Contacts;
     internal float MaximumDepth;
+    internal int ArticleChildMask;
+    internal CompoundContactCoverage? Coverage;
 }
 
 internal struct LocalContactCallbacks(LocalContactMetrics metrics) : INarrowPhaseCallbacks
@@ -25,12 +27,21 @@ internal struct LocalContactCallbacks(LocalContactMetrics metrics) : INarrowPhas
         // Qualification dry contact: dimensionless mu=.5, critical damping, 30 Hz spring.
         // Recovery 2 m/s bounds penetration correction separately from physical source force.
         material = new PairMaterialProperties(.5f, 2f, new SpringSettings(30, 1));
+        if (metrics.Coverage is { } coverage && !coverage.Parent(workerIndex, pair, ref manifold)) return false;
         metrics.Contacts = Math.Max(metrics.Contacts, manifold.Count);
         for (var i = 0; i < manifold.Count; i++) metrics.MaximumDepth = Math.Max(metrics.MaximumDepth, manifold.GetDepth(i));
         return true;
     }
     public bool ConfigureContactManifold(int workerIndex, CollidablePair pair, int childA, int childB,
-        ref ConvexContactManifold manifold) => true;
+        ref ConvexContactManifold manifold)
+    {
+        // Bounded diagnostic only. Independent corner/support tests establish physical support;
+        // this mask establishes which of the three distinct compound children supplied manifolds.
+        var child = pair.A.Mobility == CollidableMobility.Dynamic ? childA : childB;
+        if (manifold.Count > 0 && (uint)child < EngineeringContactArticle.ChildCount)
+            metrics.ArticleChildMask |= 1 << child;
+        return metrics.Coverage?.Child(workerIndex, pair, childA, childB, ref manifold) ?? true;
+    }
     public void Dispose() { }
 }
 

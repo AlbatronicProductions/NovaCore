@@ -24,6 +24,9 @@ internal sealed class LocalContactConfiguration
     internal Double3 OriginVelocityRoot { get; }
     internal DoubleQuaternion LocalToRoot { get; }
     internal Double3 BoxDimensions { get; }
+    internal EngineeringContactArticle? Article { get; }
+    // The new article uses the original 2 m thick slab. Legacy box fixtures retain their exact geometry.
+    internal double SlabHalfThickness => Article is null ? BoxDimensions.Y : 1;
     internal double PlaneHalfExtent { get; }
     internal double ContactTolerance { get; }
     internal double MaximumCoordinate { get; }
@@ -33,40 +36,60 @@ internal sealed class LocalContactConfiguration
     // Speculative reach must cover the admitted surface speed over a whole exact step.
     // Margin alone is a geometric/depth cushion, not the motion horizon.
     internal double MaximumSpeculativeMargin => MaximumSpeed * (16667d / 1_000_000) + Margin;
-    internal double BoundingRadius => Math.Sqrt(BoxDimensions.LengthSquared) * .5;
+    internal double BoundingRadius => Article?.BoundingRadius ?? Math.Sqrt(BoxDimensions.LengthSquared) * .5;
 
     private LocalContactConfiguration(long revision, ReferenceFrameId root, Double3 origin, Double3 velocity,
-        DoubleQuaternion rotation, Double3 dimensions, double planeHalfExtent, double tolerance, double coordinate)
+        DoubleQuaternion rotation, Double3 dimensions, double planeHalfExtent, double tolerance, double coordinate,
+        EngineeringContactArticle? article)
     {
         Revision = revision; RootFrame = root; OriginRoot = origin; OriginVelocityRoot = velocity;
         LocalToRoot = rotation; BoxDimensions = dimensions; PlaneHalfExtent = planeHalfExtent;
+        Article = article;
         ContactTolerance = tolerance; MaximumCoordinate = coordinate;
         // At most half the smallest extent per largest exact step, including rotation at the box radius.
-        MaximumSpeed = Math.Min(dimensions.X, Math.Min(dimensions.Y, dimensions.Z)) * .5 / (16667d / 1_000_000);
-        MaximumAngularSpeed = MaximumSpeed / (Math.Sqrt(dimensions.LengthSquared) * .5);
+        MaximumSpeed = (article?.SmallestFeature ?? Math.Min(dimensions.X, Math.Min(dimensions.Y, dimensions.Z))) * .5 / (16667d / 1_000_000);
+        MaximumAngularSpeed = MaximumSpeed / BoundingRadius;
     }
 
     internal static LocalContactStatus TryCreate(long revision, ReferenceFrameId root, Double3 origin,
         Double3 velocity, DoubleQuaternion rotation, Double3 dimensions, double planeHalfExtent,
         out LocalContactConfiguration? configuration)
+        => TryCreateCore(revision, root, origin, velocity, rotation, dimensions, planeHalfExtent, null, out configuration);
+
+    internal static LocalContactStatus TryCreateArticle(long revision, ReferenceFrameId root, Double3 origin,
+        Double3 velocity, DoubleQuaternion rotation, EngineeringContactArticle? article, double planeHalfExtent,
+        out LocalContactConfiguration? configuration)
+    {
+        configuration = null;
+        return article is null ? LocalContactStatus.InvalidConfiguration :
+            TryCreateCore(revision, root, origin, velocity, rotation, article.Dimensions, planeHalfExtent, article, out configuration);
+    }
+
+    private static LocalContactStatus TryCreateCore(long revision, ReferenceFrameId root, Double3 origin,
+        Double3 velocity, DoubleQuaternion rotation, Double3 dimensions, double planeHalfExtent,
+        EngineeringContactArticle? article, out LocalContactConfiguration? configuration)
     {
         configuration = null;
         if (revision <= 0 || root.Value == 0 || !origin.IsFinite || !velocity.IsFinite || !rotation.IsFinite ||
             Math.Abs(rotation.LengthSquared - 1) > 1e-12 || !dimensions.IsFinite ||
             dimensions.X <= 0 || dimensions.Y <= 0 || dimensions.Z <= 0 || !double.IsFinite(planeHalfExtent))
             return LocalContactStatus.InvalidConfiguration;
-        var minimum = Math.Min(dimensions.X, Math.Min(dimensions.Y, dimensions.Z));
+        var minimum = article?.SmallestFeature ?? Math.Min(dimensions.X, Math.Min(dimensions.Y, dimensions.Z));
         var tolerance = minimum / 1000; // Qualification requires one-thousandth of the smallest body dimension.
         // Eight float spacings fit inside the contact tolerance. Power-of-two bound is exclusive.
         var bound = Math.Pow(2, Math.Floor(Math.Log2(tolerance / 8)) + 23);
-        if (!double.IsFinite(bound) || bound <= 0 || planeHalfExtent <= Math.Sqrt(dimensions.LengthSquared) ||
+        if (!double.IsFinite(bound) || bound <= 0 || planeHalfExtent <= (article is null ? Math.Sqrt(dimensions.LengthSquared) : 2 * article.BoundingRadius) ||
             planeHalfExtent >= bound || (float)minimum <= 0 || !float.IsFinite((float)bound) ||
             !double.IsFinite(dimensions.LengthSquared) || tolerance <= 0 ||
             !double.IsFinite(minimum / (16667d / 1_000_000)) ||
             !FloatGeometryFits(dimensions, planeHalfExtent, tolerance) ||
             !RootSpacingFits(origin, tolerance))
             return LocalContactStatus.InvalidConfiguration;
-        configuration = new(revision, root, origin, velocity, rotation, dimensions, planeHalfExtent, tolerance, bound);
+        if (article is not null)
+            for (var i = 0; i < EngineeringContactArticle.ChildCount; i++)
+                if (!FloatGeometryFits(article.Child(i).Dimensions, planeHalfExtent, tolerance))
+                    return LocalContactStatus.InvalidConfiguration;
+        configuration = new(revision, root, origin, velocity, rotation, dimensions, planeHalfExtent, tolerance, bound, article);
         return LocalContactStatus.Success;
     }
 
@@ -91,6 +114,10 @@ internal sealed class LocalContactConfiguration
         mass * (BoxDimensions.Y * BoxDimensions.Y + BoxDimensions.Z * BoxDimensions.Z) / 12,
         mass * (BoxDimensions.X * BoxDimensions.X + BoxDimensions.Z * BoxDimensions.Z) / 12,
         mass * (BoxDimensions.X * BoxDimensions.X + BoxDimensions.Y * BoxDimensions.Y) / 12);
+
+    internal bool AdmitsMassInertia(double mass, PrincipalMomentsOfInertia inertia) => Article is { } article
+        ? mass == article.MassKilograms && inertia == article.PrincipalInertia
+        : inertia == BoxInertia(mass);
 }
 
 /// <summary>Copied immutable source. Never retains a borrowed state view or claims solver cache serialization.</summary>
@@ -125,7 +152,7 @@ internal sealed class LocalContactSource
         var view = engine.State;
         if (!view.Spacecraft.TryGetTranslation(subject, out var linear, out var mass) ||
             !view.Spacecraft.TryGetRigidBody(subject, out var angular) || !mass.IsValid ||
-            linear.RootFrame != configuration.RootFrame || angular.PrincipalInertia != configuration.BoxInertia(mass.MassKilograms))
+            linear.RootFrame != configuration.RootFrame || !configuration.AdmitsMassInertia(mass.MassKilograms, angular.PrincipalInertia))
             return LocalContactStatus.InvalidSource;
         if (angular.ConstantBodyTorque != Double3.Zero || angular.Model != RigidBodyRotationModel.ConstantBodyTorqueV1)
             return LocalContactStatus.UnsupportedForceTorqueState;

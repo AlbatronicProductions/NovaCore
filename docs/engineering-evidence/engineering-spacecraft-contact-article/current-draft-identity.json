@@ -1,0 +1,43 @@
+{
+  "baseline": "5537d08e4ab051a7f31bc638b5f717ef3ce4f3e0",
+  "branch": "codex/engineering-spacecraft-contact-article",
+  "disposition": "UNQUALIFIED ARTICLE DRAFT; TILTED PHYSICAL GATE FAILED; UNBANKED",
+  "files": [
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/EngineeringContactArticle.cs",
+      "sha256": "8D5BA352905624C5EC7C53DC2869B7BCE023EB95B0133DE25EE98BCB272796FD"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Article.cs",
+      "sha256": "0D0BA22FD45EB647695C41905557BC50609B4FADB75E7480AD2E8D7E4287B3AF"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactCallbacks.cs",
+      "sha256": "B2D59C3A47120FBD1EF8E320EF9866EAC39F4C6CDFE4BBF3978C3F3DB4781C11"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs",
+      "sha256": "CA626F456C048ED6610B4FB89FD6187D3ABC30E29496B59DEFD4813D281C625C"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Publication.cs",
+      "sha256": "956ED8FFC99297C6DFBBDCAEC6A2ED8E8C7C1277FE9C1E85186B76ECEE172FD3"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs",
+      "sha256": "9242E87CEEF8E78BC907C1FB60AC1BABEA99E7C9BCD63480203CF3FBEEE1EDAE"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/PersistentContactPublication.cs",
+      "sha256": "4DBDB0AFF7AD257EE36286C20EB55105CE729569584F131CEE0B89114960768F"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/EngineeringContactArticleTests.cs",
+      "sha256": "285A31C2E1920452737C98F3E8DC85F802B26BE8E0B5090A1ACF4A5C94144DCD"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "sha256": "D1657EA22CE6E171421B997FD25E8D9894D9DD403D3204F9B65B6E472EF7CAAB"
+    }
+  ]
+}

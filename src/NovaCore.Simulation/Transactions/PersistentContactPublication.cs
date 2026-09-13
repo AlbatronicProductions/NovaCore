@@ -23,7 +23,8 @@ internal readonly record struct PersistentContactPublicationRequest(LocalContact
 /// <summary>Value provenance for a qualification episode. No solver capability or global generation order.</summary>
 internal readonly record struct PersistentContactEpisode(long Sequence, SimulationInstant Start, SimulationInstant End,
     long ConfigurationRevision, ReferenceFrameId Root, Double3 Origin, Double3 OriginVelocity,
-    DoubleQuaternion LocalToRoot, Double3 BoxDimensions, double PlaneHalfExtent);
+    DoubleQuaternion LocalToRoot, Double3 BoxDimensions, double PlaneHalfExtent,
+    EngineeringArticleIdentity Article = default);
 
 /// <summary>One canonical paired endpoint publication; contains only deterministic values.</summary>
 internal readonly record struct ProcessedPersistentContact(uint Version, int Index, PersistentContactEpisode Episode,

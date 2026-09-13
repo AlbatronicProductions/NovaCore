@@ -1,0 +1,61 @@
+{
+  "disposition": "BLOCKED; UNQUALIFIED DRAFT; UNBANKED",
+  "baseline": "f0c8e0f2c16de98e492ef4b9b4a5a24f372e8b18",
+  "branch": "codex/engineering-spacecraft-contact-article",
+  "sdk": "10.0.303",
+  "draft_files": [
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/EngineeringContactArticle.cs",
+      "sha256": "088237DDA5A342A31DB500DDAADA8522A1B244AC33BB4C3C306EA313AFDC4362"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Article.cs",
+      "sha256": "0D0BA22FD45EB647695C41905557BC50609B4FADB75E7480AD2E8D7E4287B3AF"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactCallbacks.cs",
+      "sha256": "B2D59C3A47120FBD1EF8E320EF9866EAC39F4C6CDFE4BBF3978C3F3DB4781C11"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs",
+      "sha256": "CA626F456C048ED6610B4FB89FD6187D3ABC30E29496B59DEFD4813D281C625C"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Publication.cs",
+      "sha256": "956ED8FFC99297C6DFBBDCAEC6A2ED8E8C7C1277FE9C1E85186B76ECEE172FD3"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs",
+      "sha256": "9242E87CEEF8E78BC907C1FB60AC1BABEA99E7C9BCD63480203CF3FBEEE1EDAE"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/PersistentContactPublication.cs",
+      "sha256": "4DBDB0AFF7AD257EE36286C20EB55105CE729569584F131CEE0B89114960768F"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/EngineeringContactArticleTests.cs",
+      "sha256": "F2AA09811FED6BC867FBF7CE89A075391CBBDE049216A6CFB7152C10E25E8E68"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "sha256": "D1657EA22CE6E171421B997FD25E8D9894D9DD403D3204F9B65B6E472EF7CAAB"
+    }
+  ],
+  "unchanged_blocker_files": [
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.ContactServicing.cs",
+      "sha256": "0881493EC1E74187652F8C23D91CD5AE400A3C4DF6EF4A05A39EA0A5BE29AF87",
+      "working_git_blob": "36abb02cfb4452c5de778750d7ff70e8bf95c90c",
+      "baseline_git_blob": "36abb02cfb4452c5de778750d7ff70e8bf95c90c"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.PersistentContact.cs",
+      "sha256": "17EF3ECF801BF0E593770FF40396D5267413BA596FF5BA942610E4F28CDFCC37",
+      "working_git_blob": "566c91cf68c8bec80680c3ff64c2e1b16fbc6f89",
+      "baseline_git_blob": "566c91cf68c8bec80680c3ff64c2e1b16fbc6f89"
+    }
+  ],
+  "attempted_build": "dotnet build tests/NovaCore.Simulation.Tests/NovaCore.Simulation.Tests.csproj -c Debug --nologo",
+  "build_result": "FAIL CS0103: missing PublishPersistentContactInOwnedPhase at unchanged servicing line 100",
+  "qualification_runs": 0
+}

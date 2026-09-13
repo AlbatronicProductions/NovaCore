@@ -1,0 +1,15 @@
+<Project>
+  <Target Name="InjectDisposableCoverageProbe" BeforeTargets="CoreCompile">
+    <ItemGroup Condition="'$(MSBuildProjectName)' == 'NovaCore.Simulation'">
+      <Compile Remove="@(Compile)" Condition="'%(Compile.Filename)%(Compile.Extension)' == 'LocalContactCallbacks.cs'" />
+      <Compile Include="$(MSBuildThisFileDirectory)LocalContactCallbacks.cs" />
+      <Compile Include="$(MSBuildThisFileDirectory)CoverageRuntime.cs" />
+    </ItemGroup>
+    <ItemGroup Condition="'$(MSBuildProjectName)' == 'NovaCore.Simulation.Tests'">
+      <Compile Remove="@(Compile)" Condition="'%(Compile.Filename)%(Compile.Extension)' == 'EngineeringContactArticleTests.cs' or '%(Compile.Filename)%(Compile.Extension)' == 'Program.cs'" />
+      <Compile Include="$(MSBuildThisFileDirectory)EngineeringContactArticleTests.cs" />
+      <Compile Include="$(MSBuildThisFileDirectory)Program.cs" />
+      <Compile Include="$(MSBuildThisFileDirectory)CoverageTests.cs" />
+    </ItemGroup>
+  </Target>
+</Project>

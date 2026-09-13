@@ -28,7 +28,7 @@ internal sealed partial class LocalContactWorld : IDisposable
     internal readonly record struct Export(SpacecraftMotion Motion, SimulationInstant Source,
         TimelineRevision TimelineRevision, long Generation, long Frontier, int ContactPoints, float MaximumDepth,
         double LocalPositionMagnitude, double LocalSpeed, double ImportPositionError, double ImportVelocityError,
-        int ConstraintCount = 0);
+        int ConstraintCount = 0, int ArticleContactChildMask = 0);
 
     private static long nextGeneration;
     private readonly int ownerThread = Environment.CurrentManagedThreadId;
@@ -38,6 +38,7 @@ internal sealed partial class LocalContactWorld : IDisposable
     private readonly BepuPhysics.Simulation simulation;
     private readonly BodyHandle body;
     private readonly TypedIndex surfaceShape;
+    private readonly TypedIndex bodyShape;
     private readonly StaticHandle plane;
     private readonly LocalContactMetrics metrics;
     private long frontier;
@@ -60,8 +61,8 @@ internal sealed partial class LocalContactWorld : IDisposable
         try
         {
             var d = configuration.BoxDimensions;
-            var box = new Box((float)d.X, (float)d.Y, (float)d.Z);
-            var shape = simulation.Shapes.Add(box);
+            bodyShape = configuration.Article is { } article ? CreateArticleShape(simulation.Shapes, pool, article) :
+                simulation.Shapes.Add(new Box((float)d.X, (float)d.Y, (float)d.Z));
             var inertia = source.Motion.Inertia;
             var bodyInertia = new BodyInertia { InverseMass = (float)(1 / source.Motion.Properties.MassKilograms) };
             bodyInertia.InverseInertiaTensor.XX = (float)(1 / inertia.X);
@@ -69,20 +70,32 @@ internal sealed partial class LocalContactWorld : IDisposable
             bodyInertia.InverseInertiaTensor.ZZ = (float)(1 / inertia.Z);
             body = simulation.Bodies.Add(BodyDescription.CreateDynamic(new RigidPose(position, orientation),
                 new BodyVelocity(velocity, angularVelocity), bodyInertia,
-                new CollidableDescription(shape, (float)configuration.MaximumSpeculativeMargin), new BodyActivityDescription(-1)));
+                new CollidableDescription(bodyShape, (float)configuration.MaximumSpeculativeMargin), new BodyActivityDescription(-1)));
             // Qualification-only planar surface: a finite slab with its top at local y=0.
             // The two-triangle version dropped the advancing corner manifold at its internal seam.
             // A single convex face preserves that planar coverage without changing solver quality settings.
-            // Thickness is two body heights, entirely below the unchanged authored contact plane.
+            // Legacy box thickness is retained; engineering-article thickness is explicitly 2 m.
             var h = (float)configuration.PlaneHalfExtent;
-            var halfThickness = (float)d.Y;
+            var halfThickness = (float)configuration.SlabHalfThickness;
             surfaceShape = simulation.Shapes.Add(new Box(2 * h, 2 * halfThickness, 2 * h));
             plane = simulation.Statics.Add(new StaticDescription(new Vector3(0, -halfThickness, 0), surfaceShape));
+            if (bodyShape.Type == Compound.Id)
+                metrics.Coverage = new(simulation, body, plane, bodyShape, acceleration, (float)configuration.ContactTolerance);
             // Initial receipt retains the original FP64 source, without a needless float round trip.
             export = new(source.Motion, source.Motion.Time, source.TimelineRevision, Generation, 0, 0, 0,
                 position.Length(), velocity.Length(), positionError, velocityError);
         }
-        catch { simulation.Dispose(); pool.Clear(); throw; }
+        catch
+        {
+            try
+            {
+                if (configuration.Article is not null && bodyShape.Exists)
+                    simulation.Shapes.RecursivelyRemoveAndDispose(bodyShape, pool);
+                simulation.Dispose();
+            }
+            finally { pool.Clear(); }
+            throw;
+        }
     }
 
     internal static LocalContactStatus TryCreate(SimulationTransactionEngine engine, LocalContactSource source,
@@ -118,11 +131,13 @@ internal sealed partial class LocalContactWorld : IDisposable
         if (frontier == long.MaxValue || !source.TryEndpoint(frontier + 1, out var expected) || target != expected ||
             !source.TryEndpoint(frontier, out var current) || target <= current) return LocalContactStatus.InvalidInterval;
         var dt = (float)((target.Ticks - current.Ticks) / (double)SimulationInstant.TicksPerSecond);
-        metrics.Contacts = 0; metrics.MaximumDepth = 0;
+        metrics.Contacts = 0; metrics.MaximumDepth = 0; metrics.ArticleChildMask = 0;
+        metrics.Coverage?.Begin(dt);
         // All admissions precede mutation. Once advanced, any failed export destroys continuation permission.
         invalidated = true;
         try { simulation.Timestep(dt); }
         catch (Exception) { return LocalContactStatus.SolverFailure; }
+        if (metrics.Coverage?.Failed == true) return LocalContactStatus.SolverFailure;
         status = ValidateAuthority(engine, configuration, target);
         if (status != LocalContactStatus.Success) return status;
         var state = simulation.Bodies.GetBodyReference(body);
@@ -142,7 +157,7 @@ internal sealed partial class LocalContactWorld : IDisposable
         frontier++;
         export = new(paired, source.Motion.Time, source.TimelineRevision, Generation, frontier, metrics.Contacts,
             metrics.MaximumDepth, Math.Sqrt(p.LengthSquared), Math.Sqrt(v.LengthSquared), ImportPositionError, ImportVelocityError,
-            state.Constraints.Count);
+            state.Constraints.Count, configuration.Article is null ? 0 : metrics.ArticleChildMask);
         if (publication is not null) publication.Pending = true;
         invalidated = false; next = new(this, frontier, receiptIdentity); return LocalContactStatus.Success;
     }
@@ -177,6 +192,11 @@ internal sealed partial class LocalContactWorld : IDisposable
         {
             simulation.Statics.Remove(plane);
             simulation.Shapes.RemoveAndDispose(surfaceShape, pool);
+            if (configuration.Article is not null)
+            {
+                simulation.Bodies.Remove(body);
+                simulation.Shapes.RecursivelyRemoveAndDispose(bodyShape, pool);
+            }
             simulation.Dispose();
         }
         finally { pool.Clear(); }

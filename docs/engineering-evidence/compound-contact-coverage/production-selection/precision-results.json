@@ -1,0 +1,535 @@
+{
+  "schema": 1,
+  "configuration": "Debug",
+  "sdk": "10.0.303",
+  "runtime": "10.0.12",
+  "baseline": "5537d08e4ab051a7f31bc638b5f717ef3ce4f3e0",
+  "scope": "Precision-aware established-support correctness/stability only; UNBANKED; formal qualification deferred",
+  "originalDecisionTrace": {
+    "before": {
+      "order": [
+        0,
+        2,
+        1,
+        3
+      ],
+      "steps": [
+        {
+          "selectedBefore": [
+            0
+          ],
+          "choices": [
+            {
+              "feature": 1,
+              "distance": 1
+            },
+            {
+              "feature": 2,
+              "distance": 2
+            },
+            {
+              "feature": 3,
+              "distance": 1
+            },
+            {
+              "feature": 4,
+              "distance": 0.3670068381445477
+            },
+            {
+              "feature": 5,
+              "distance": 2
+            }
+          ],
+          "winner": 2
+        },
+        {
+          "selectedBefore": [
+            0,
+            2
+          ],
+          "choices": [
+            {
+              "feature": 1,
+              "distance": 1
+            },
+            {
+              "feature": 3,
+              "distance": 1
+            },
+            {
+              "feature": 4,
+              "distance": 0.3670068381445477
+            },
+            {
+              "feature": 5,
+              "distance": 0.3670068381445477
+            }
+          ],
+          "winner": 1
+        },
+        {
+          "selectedBefore": [
+            0,
+            2,
+            1
+          ],
+          "choices": [
+            {
+              "feature": 3,
+              "distance": 1
+            },
+            {
+              "feature": 4,
+              "distance": 0.3670068381445477
+            },
+            {
+              "feature": 5,
+              "distance": 0.3670068381445477
+            }
+          ],
+          "winner": 3
+        }
+      ]
+    },
+    "after": {
+      "order": [
+        4,
+        5,
+        0,
+        1
+      ],
+      "steps": [
+        {
+          "selectedBefore": [
+            4
+          ],
+          "choices": [
+            {
+              "feature": 0,
+              "distance": 0.3670068381445477
+            },
+            {
+              "feature": 1,
+              "distance": 0.3670068381445477
+            },
+            {
+              "feature": 2,
+              "distance": 2
+            },
+            {
+              "feature": 3,
+              "distance": 2
+            },
+            {
+              "feature": 5,
+              "distance": 2.6666666666666665
+            }
+          ],
+          "winner": 5
+        },
+        {
+          "selectedBefore": [
+            4,
+            5
+          ],
+          "choices": [
+            {
+              "feature": 0,
+              "distance": 0.3670068381445477
+            },
+            {
+              "feature": 1,
+              "distance": 0.3670068381445477
+            },
+            {
+              "feature": 2,
+              "distance": 0.3670068381445477
+            },
+            {
+              "feature": 3,
+              "distance": 0.3670068381445477
+            }
+          ],
+          "winner": 0
+        },
+        {
+          "selectedBefore": [
+            4,
+            5,
+            0
+          ],
+          "choices": [
+            {
+              "feature": 1,
+              "distance": 0.3670068381445477
+            },
+            {
+              "feature": 2,
+              "distance": 0.3670068381445477
+            },
+            {
+              "feature": 3,
+              "distance": 0.3670068381445477
+            }
+          ],
+          "winner": 1
+        }
+      ]
+    }
+  },
+  "unit": [
+    "SELECTOR synthetic=deep-cluster/angular-approach/deep-separating PASS",
+    "SELECTOR synthetic=mirror/30-permutations PASS",
+    "SELECTOR synthetic=duplicates/separating-speculative/100-rest-noise PASS",
+    "SELECTOR synthetic=multiple-imminent-normal-directions PASS",
+    "SELECTOR synthetic=gravity/angular-noise-rest-regression PASS",
+    "SELECTOR synthetic=relative-motion/acceleration/invalid-data PASS",
+    "SELECTOR_REST_DEPTH before=[0,1,2,3] after=[0,1,2,3] depth_change_m=.00001 resolution_m=0.0005",
+    "SELECTOR_PRECISION ten_um=PASS below_resolution=11/11 above_resolution=PASS exact_boundary=PASS chain=PASS permutations=720/720 mirror=PASS deep=PASS signed_depth=PASS original_bits=PASS nonfinite=PASS"
+  ],
+  "rest": {
+    "changes": 0,
+    "disappeared": 0,
+    "equivalent": 0,
+    "distinctNativeKept": 0,
+    "distinctNativeDropped": 0,
+    "resolution": 0.0005,
+    "comparedTransitions": 599,
+    "transitionSteps": [],
+    "rawChanges": 0,
+    "nativeChanges": 0,
+    "maximumRestDepthSpread": 0.00016781393787823617
+  },
+  "physical": [
+    {
+      "tilted": true,
+      "tiltAngle": 0.25,
+      "moving": false,
+      "supported": 600,
+      "childMask": 7,
+      "peak_m": 0.006945546380241474,
+      "peakStep": 35,
+      "restingSetChanges": 0,
+      "max_drift_m": 8.708620871908054e-8,
+      "max_omega": 3.162903474481871,
+      "n16666": 400,
+      "n16667": 800,
+      "ticks": 20000000,
+      "revision": 1200,
+      "history": 1200,
+      "article_preparation_ms": 3.8222,
+      "world_preparation_ms": 32.9054,
+      "first_step_ms": 29.744,
+      "first_contact_step": 30,
+      "first_contact_ms": 24.6761
+    },
+    {
+      "tilted": false,
+      "tiltAngle": 0.25,
+      "moving": false,
+      "supported": 600,
+      "childMask": 7,
+      "peak_m": 0.005819714882528193,
+      "peakStep": 34,
+      "restingSetChanges": 0,
+      "max_drift_m": 6.205949151489612e-8,
+      "max_omega": 0.07002790492497588,
+      "n16666": 400,
+      "n16667": 800,
+      "ticks": 20000000,
+      "revision": 1200,
+      "history": 1200,
+      "article_preparation_ms": 3.5283,
+      "world_preparation_ms": 29.8655,
+      "first_step_ms": 26.7698,
+      "first_contact_step": 33,
+      "first_contact_ms": 25.398
+    },
+    {
+      "tilted": true,
+      "tiltAngle": -0.25,
+      "moving": false,
+      "supported": 600,
+      "childMask": 7,
+      "peak_m": 0.006688154529344681,
+      "peakStep": 35,
+      "restingSetChanges": 0,
+      "max_drift_m": 4.779568526503322e-8,
+      "max_omega": 3.162721813138588,
+      "n16666": 400,
+      "n16667": 800,
+      "ticks": 20000000,
+      "revision": 1200,
+      "history": 1200,
+      "article_preparation_ms": 0.0323,
+      "world_preparation_ms": 0.1783,
+      "first_step_ms": 0.0587,
+      "first_contact_step": 30,
+      "first_contact_ms": 3.9
+    },
+    {
+      "tilted": true,
+      "tiltAngle": 0.25,
+      "moving": true,
+      "supported": 600,
+      "childMask": 7,
+      "peak_m": 0.006945746950922316,
+      "peakStep": 35,
+      "restingSetChanges": 0,
+      "max_drift_m": 4.467548163206231e-7,
+      "max_omega": 3.1629034744818716,
+      "n16666": 400,
+      "n16667": 800,
+      "ticks": 20000000,
+      "revision": 1200,
+      "history": 1200,
+      "article_preparation_ms": 0.0176,
+      "world_preparation_ms": 0.1422,
+      "first_step_ms": 0.0474,
+      "first_contact_step": 30,
+      "first_contact_ms": 0.0433
+    },
+    {
+      "tilted": true,
+      "tiltAngle": 0.25,
+      "moving": false,
+      "supported": 600,
+      "childMask": 7,
+      "peak_m": 0.006945546380241474,
+      "peakStep": 35,
+      "restingSetChanges": 0,
+      "max_drift_m": 8.708620871908054e-8,
+      "max_omega": 3.162903474481871,
+      "n16666": 400,
+      "n16667": 800,
+      "ticks": 20000000,
+      "revision": 1200,
+      "history": 1200,
+      "article_preparation_ms": 0.0183,
+      "world_preparation_ms": 0.121,
+      "first_step_ms": 0.0324,
+      "first_contact_step": 30,
+      "first_contact_ms": 0.042
+    },
+    {
+      "tilted": true,
+      "tiltAngle": 0.25,
+      "moving": false,
+      "supported": 600,
+      "childMask": 7,
+      "peak_m": 0.006945546380241474,
+      "peakStep": 35,
+      "restingSetChanges": 0,
+      "max_drift_m": 8.708620871908054e-8,
+      "max_omega": 3.162903474481871,
+      "n16666": 400,
+      "n16667": 800,
+      "ticks": 20000000,
+      "revision": 1200,
+      "history": 1200,
+      "article_preparation_ms": 0.0153,
+      "world_preparation_ms": 1.5908,
+      "first_step_ms": 0.0664,
+      "first_contact_step": 30,
+      "first_contact_ms": 0.0463
+    }
+  ],
+  "critical": [
+    {
+      "step": 35,
+      "minY": -0.006945546380241474,
+      "omega": [
+        0.01988060953990352,
+        -0.00016472965709461913,
+        -0.30171107125927676
+      ],
+      "contacts": [
+        {
+          "ChildA": 0,
+          "ChildB": 0,
+          "RawFeature": -4,
+          "FeatureId": -4,
+          "offset": [
+            -0.7478794,
+            -0.50583684,
+            -1.3493737
+          ],
+          "normal": [
+            5.883294e-12,
+            1,
+            0
+          ],
+          "Depth": -0.0009932541,
+          "prediction": 0.027667030763374217,
+          "selectionOrder": 0
+        },
+        {
+          "ChildA": 2,
+          "ChildB": 0,
+          "RawFeature": -20,
+          "FeatureId": -532,
+          "offset": [
+            1.251866,
+            -0.5058369,
+            -0.34890294
+          ],
+          "normal": [
+            5.883294e-12,
+            1,
+            0
+          ],
+          "Depth": -0.009753902,
+          "prediction": 0.12422554714615375,
+          "selectionOrder": 1
+        },
+        {
+          "ChildA": 0,
+          "ChildB": 0,
+          "RawFeature": -5,
+          "FeatureId": -5,
+          "offset": [
+            -0.7484839,
+            -0.50583684,
+            1.150623
+          ],
+          "normal": [
+            5.883294e-12,
+            1,
+            0
+          ],
+          "Depth": -0.0049989386,
+          "prediction": 0.023381969730236606,
+          "selectionOrder": 2
+        },
+        {
+          "ChildA": 2,
+          "ChildB": 0,
+          "RawFeature": -5,
+          "FeatureId": -517,
+          "offset": [
+            0.7515065,
+            -0.5058369,
+            1.1509771
+          ],
+          "normal": [
+            5.883294e-12,
+            1,
+            0
+          ],
+          "Depth": -0.010367731,
+          "prediction": 0.09708636004883249,
+          "selectionOrder": 3
+        }
+      ]
+    },
+    {
+      "step": 40,
+      "minY": -0.0004151843020882007,
+      "omega": [
+        0.0019078106945262943,
+        -6.1928119816154e-8,
+        0.00182996702431353
+      ],
+      "contacts": [
+        {
+          "ChildA": 0,
+          "ChildB": 0,
+          "RawFeature": -21,
+          "FeatureId": -21,
+          "offset": [
+            0.74980235,
+            -0.49951953,
+            1.150158
+          ],
+          "normal": [
+            -5.222489e-13,
+            1,
+            0
+          ],
+          "Depth": 0.00041336208,
+          "prediction": 0.0028595832481203842,
+          "selectionOrder": 0
+        },
+        {
+          "ChildA": 0,
+          "ChildB": 0,
+          "RawFeature": -4,
+          "FeatureId": -4,
+          "offset": [
+            -0.7497551,
+            -0.49951953,
+            -1.3501076
+          ],
+          "normal": [
+            -5.222489e-13,
+            1,
+            0
+          ],
+          "Depth": 0.00055771676,
+          "prediction": 0.002834390349245236,
+          "selectionOrder": 1
+        },
+        {
+          "ChildA": 1,
+          "ChildB": 0,
+          "RawFeature": -5,
+          "FeatureId": -261,
+          "offset": [
+            -1.2501976,
+            -0.49951944,
+            1.149804
+          ],
+          "normal": [
+            -5.222489e-13,
+            1,
+            0
+          ],
+          "Depth": 0.0004371939,
+          "prediction": 0.0030030291086751704,
+          "selectionOrder": 2
+        },
+        {
+          "ChildA": 2,
+          "ChildB": 0,
+          "RawFeature": -4,
+          "FeatureId": -516,
+          "offset": [
+            0.7500679,
+            -0.4995194,
+            -0.34984192
+          ],
+          "normal": [
+            -5.222489e-13,
+            1,
+            0
+          ],
+          "Depth": 0.0004893968,
+          "prediction": 0.002780063260798993,
+          "selectionOrder": 3
+        }
+      ]
+    }
+  ],
+  "determinism": "COVERAGE_REPEAT same-build endpoint_identity=1200/1200 selection_identity=1200/1200 publication_history=1200/1200 PASS",
+  "execution": {
+    "selectorRevisionCount": 1,
+    "failures": 0,
+    "finalFocusedDebugBuild": "PASS: zero warnings/errors",
+    "restProcesses": 2,
+    "note": "One initial zero-transition rest observation, then one enriched rest witness to report availability/native-set/depth-span data. No policy adjustment between them.",
+    "physicalProcessCount": 2,
+    "physicalSequences": 6,
+    "performanceCampaign": false,
+    "allocationCampaign": false,
+    "releaseCampaign": false,
+    "broadRegressions": false,
+    "incidentalTimingNote": "Cold/first-contact milliseconds in the existing physical reporter are incidental Debug observations, not a timing or performance qualification campaign."
+  },
+  "redTeam": {
+    "verifier": "Independent read-only selector_math_review; no edits or physics runs by reviewer",
+    "verdict": "PASS for authorized correctness/stability only",
+    "mathematicalReview": "Common-maximum contextual cohort avoids pairwise epsilon chaining. Strict computed-gap boundary and stable identity order are explicit.",
+    "physicalReview": "0/599 resting transitions, no raw/native identity changes, all four physical cases below 20 mm with 600/600 support; repeat endpoint/selection/history values match at all 1200 frontiers.",
+    "limitations": "No universal invariance at the explicit resolution boundary, label-free degenerate symmetry, cross-platform bit identity, allocation/performance qualification, or article acceptance is claimed."
+  }
+}

@@ -1,0 +1,327 @@
+{
+  "head": "5537d08e4ab051a7f31bc638b5f717ef3ce4f3e0",
+  "branch": "codex/engineering-spacecraft-contact-article",
+  "main": "5537d08e4ab051a7f31bc638b5f717ef3ce4f3e0",
+  "origin_main": "5537d08e4ab051a7f31bc638b5f717ef3ce4f3e0",
+  "input_mismatches": [],
+  "repository_file_count_excluding_closeout": 1896,
+  "repository_tree_sha256_excluding_closeout": "E9406DF21F2CA075491F07AF413A11B524960A4BCDD585B3BA5F68D02D8834AD",
+  "repository_tree_method": "SHA256 of UTF8 sorted path + space + uppercase SHA256 rows joined LF without final LF; git ls-files --cached --others --exclude-standard; exclude this closeout file only",
+  "changed_files": [
+    {
+      "path": "docs/engineering-evidence/bepu-local-contact-staging/staging-build-blocker.md",
+      "bytes": 5366,
+      "sha256": "3DAB84C722F700945E25F6276ACDCA4874968CA39AD724EB82047D020D7056E7"
+    },
+    {
+      "path": "docs/engineering-evidence/compound-contact-coverage/closeout.json",
+      "bytes": 2485,
+      "sha256": "928372563AC7B28F0329D7EE5794A4EC46299396E86C88858C7C23939985AA0F"
+    },
+    {
+      "path": "docs/engineering-evidence/compound-contact-coverage/comparison.json",
+      "bytes": 88785,
+      "sha256": "3354F5F6603DC1A479ED359615C33BF26A25D348875D271C3CE3BCFA2B64EC9E"
+    },
+    {
+      "path": "docs/engineering-evidence/compound-contact-coverage/formal-qualification/commands.md",
+      "bytes": 4681,
+      "sha256": "6C009E7586092B346F75226C57C51B09A296C81EA142A0A564A3E4FC804FCCC3"
+    },
+    {
+      "path": "docs/engineering-evidence/compound-contact-coverage/formal-qualification/identity.json",
+      "bytes": 81251,
+      "sha256": "74DE3482EC950B07959EEAD0A8B865389B33DC316C3EA6A86BD97D612072E7B7"
+    },
+    {
+      "path": "docs/engineering-evidence/compound-contact-coverage/formal-qualification/launch.ps1",
+      "bytes": 1545,
+      "sha256": "310E69A4A297DEB1B3C6787982EB7233A28DA9A0EAE2032D28CA00932D199053"
+    },
+    {
+      "path": "docs/engineering-evidence/compound-contact-coverage/formal-qualification/manual-acceptance.md",
+      "bytes": 2954,
+      "sha256": "EA23C1E511213FE41B2955F9498C98108CAA299DCF881002716A78A29D183600"
+    },
+    {
+      "path": "docs/engineering-evidence/compound-contact-coverage/formal-qualification/README.md",
+      "bytes": 16034,
+      "sha256": "B2F69D4359E063FD17435F9D00B47C81DFE21682BC9C6DDCCD47D929E4DC2EF9"
+    },
+    {
+      "path": "docs/engineering-evidence/compound-contact-coverage/formal-qualification/reproduce.ps1",
+      "bytes": 1945,
+      "sha256": "7A3695A2D3A12964388EB657C362B7762EFD69A3A0DBE10E15700633ABE89CB7"
+    },
+    {
+      "path": "docs/engineering-evidence/compound-contact-coverage/formal-qualification/results.json",
+      "bytes": 41158,
+      "sha256": "036E7FBCF84198B4FA702F115BB76CE9F9E6A072885FA35AEC9E11360CC0372B"
+    },
+    {
+      "path": "docs/engineering-evidence/compound-contact-coverage/formal-qualification/verifier.md",
+      "bytes": 2836,
+      "sha256": "5083B47B6F0B2B032BDD67450506EA13D1A353FD00477C5172F99770BBBF9B58"
+    },
+    {
+      "path": "docs/engineering-evidence/compound-contact-coverage/production-selection/identity.json",
+      "bytes": 5003,
+      "sha256": "2DE539E29C689BCB7A7722C4BA959A3789F8C7C3FDF7D84D2FF4210B868695CA"
+    },
+    {
+      "path": "docs/engineering-evidence/compound-contact-coverage/production-selection/precision-identity.json",
+      "bytes": 4199,
+      "sha256": "E0F675CF6F83771FE52778F902E2C130EEE43EBC3CF4F34696094504ACF89C15"
+    },
+    {
+      "path": "docs/engineering-evidence/compound-contact-coverage/production-selection/precision-reproduce.ps1",
+      "bytes": 3139,
+      "sha256": "BDA4582FCC0D359FFA3B780F1EEDA67CD5D34112221A3EAE74EF4BFF51BBD319"
+    },
+    {
+      "path": "docs/engineering-evidence/compound-contact-coverage/production-selection/precision-results.json",
+      "bytes": 13840,
+      "sha256": "ED1C1A3EF22467D99CA196E7AC2DEDA22C566F32D51006AD7B53E73672A49A2F"
+    },
+    {
+      "path": "docs/engineering-evidence/compound-contact-coverage/production-selection/precision-stability.md",
+      "bytes": 16781,
+      "sha256": "64E2B076C80A34A701DEAF45566CFC7CDE55CC029CB5ED3EE5C433330E48AC4C"
+    },
+    {
+      "path": "docs/engineering-evidence/compound-contact-coverage/production-selection/README.md",
+      "bytes": 17129,
+      "sha256": "61EA2A97664B65BFB95C2EE75D1C7F1FA1F8351269218CCF0D62CAD3DC287831"
+    },
+    {
+      "path": "docs/engineering-evidence/compound-contact-coverage/production-selection/reproduce.ps1",
+      "bytes": 1694,
+      "sha256": "7616862A29B4D7B7370D1F983302DB9E9812351D29DDE56757B93B6B9F66DDFB"
+    },
+    {
+      "path": "docs/engineering-evidence/compound-contact-coverage/production-selection/results.json",
+      "bytes": 18282,
+      "sha256": "5C921F9644F647688E2179361D72EA2403E38CA901AF746CDCA7DBE8E16F050C"
+    },
+    {
+      "path": "docs/engineering-evidence/compound-contact-coverage/README.md",
+      "bytes": 18124,
+      "sha256": "D409C4EABAF7266D64612F679E611BA27E3FE2987AF3D46BFDCFB0F1A3BC3407"
+    },
+    {
+      "path": "docs/engineering-evidence/compound-contact-coverage/reproduce.ps1",
+      "bytes": 4978,
+      "sha256": "CEE4EAE71574E5D779939C85FD4E9B04DC6540BD500F290D609043C556C65B5A"
+    },
+    {
+      "path": "docs/engineering-evidence/compound-contact-coverage/reproduction/CoverageRuntime.cs",
+      "bytes": 8909,
+      "sha256": "D66581A5ED2DBAEF0ED16694ECFCC9742D58DCA91A67035A47E6C5D35175997D"
+    },
+    {
+      "path": "docs/engineering-evidence/compound-contact-coverage/reproduction/CoverageTests.cs",
+      "bytes": 3069,
+      "sha256": "CAC49C3786F815098C4FD35B8438102ACBA543BA3A74BAA152B7AB0AD1C29803"
+    },
+    {
+      "path": "docs/engineering-evidence/compound-contact-coverage/reproduction/inject.targets",
+      "bytes": 998,
+      "sha256": "DEE2F4EC1FBCF1A7C44C5C0585BBAE41BC6421843DBAAB1AA7513A23AA9709D5"
+    },
+    {
+      "path": "docs/engineering-evidence/engineering-spacecraft-contact-article/baseline-resumption.json",
+      "bytes": 2688,
+      "sha256": "D4EDBD3D24343A27D8E739D4AFAB2C95D852E602DABE00867045E97A0B8D8C29"
+    },
+    {
+      "path": "docs/engineering-evidence/engineering-spacecraft-contact-article/causal-verification.json",
+      "bytes": 724,
+      "sha256": "8BEDE94F31F3B0F606554D510AE5821D248599575B4C6A7AE112667DED7FE43D"
+    },
+    {
+      "path": "docs/engineering-evidence/engineering-spacecraft-contact-article/current-draft-identity.json",
+      "bytes": 1926,
+      "sha256": "F1ED86A5AB585A81A182D183C51FC12719A4979673D6834026DA41FBBDA6F6A1"
+    },
+    {
+      "path": "docs/engineering-evidence/engineering-spacecraft-contact-article/draft-identity.json",
+      "bytes": 2915,
+      "sha256": "BC29CC4EF36EED7F4101A5F9FD6989713AD90F303A4BDB6A21E542040C576C26"
+    },
+    {
+      "path": "docs/engineering-evidence/engineering-spacecraft-contact-article/README.md",
+      "bytes": 13288,
+      "sha256": "97A7D1FE17874C2F8D65A46EA2B90BBB788A1EEC0FC648D8517E63B299F2A87F"
+    },
+    {
+      "path": "docs/engineering-evidence/engineering-spacecraft-contact-article/reproduce-transient.ps1",
+      "bytes": 11212,
+      "sha256": "7FE3BC6ED451E948B20B0B7C33C1F73AD1EB0FF5AEE28FB59C746A36AB1EE457"
+    },
+    {
+      "path": "docs/engineering-evidence/engineering-spacecraft-contact-article/resumed-validation.json",
+      "bytes": 3152,
+      "sha256": "325115FCBB0A3DC760ECF0E56950CF48CD24AB879FB85CCD1AFC66C7C5220131"
+    },
+    {
+      "path": "docs/engineering-evidence/engineering-spacecraft-contact-article/stopped-work.md",
+      "bytes": 9798,
+      "sha256": "53A437F41DCFF9EBEEB3A50C64B3F35D34D190862FEE458B0FD1A835EB4AF077"
+    },
+    {
+      "path": "docs/engineering-evidence/engineering-spacecraft-contact-article/tilted-causal-review.md",
+      "bytes": 14041,
+      "sha256": "4EE109707B028E59582E2ABE9A5081EF6188E37EB53A83AEFDA91CF72FD34F54"
+    },
+    {
+      "path": "docs/engineering-evidence/engineering-spacecraft-contact-article/tilted-transient-witness.json",
+      "bytes": 50442,
+      "sha256": "7E280C693E6D368CE25B66FDE31333781815EF5331E0BD79DDF619EFB62028E7"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/ContactDevelopmentScene.cs",
+      "bytes": 13903,
+      "sha256": "ABC48C816EB29555AB9942ADA86AC4A16C3CE6158BEC8145405AB43BAB43A87D"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/Program.cs",
+      "bytes": 60116,
+      "sha256": "67D9D0453BADCAD7AAF6FC4A62DAC545524F9068B34B9ADDA02AC90E6022D49C"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/SampleOptions.cs",
+      "bytes": 5426,
+      "sha256": "F217125AB5C7DCE1B9F1A424BC383CB5BA912C22E8420477394652131EF5CF27"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CompoundContactCoverage.cs",
+      "bytes": 7803,
+      "sha256": "DACBF31F495A2A2FEBA07CF9BC62022898FA7954929276E27871FDAB8AAC0A2F"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CompoundContactSelector.cs",
+      "bytes": 7125,
+      "sha256": "4B4837D88E914EE5FFF081935A85125FCCB6052247A2B8283C6876671B137DCF"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/EngineeringContactArticle.cs",
+      "bytes": 8203,
+      "sha256": "8D5BA352905624C5EC7C53DC2869B7BCE023EB95B0133DE25EE98BCB272796FD"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactCallbacks.cs",
+      "bytes": 3596,
+      "sha256": "80266CF2947E899DBB57A7ACC1418A8061484F88D978966B47BA09CEA6BCC1D7"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs",
+      "bytes": 12025,
+      "sha256": "CA626F456C048ED6610B4FB89FD6187D3ABC30E29496B59DEFD4813D281C625C"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Article.cs",
+      "bytes": 2908,
+      "sha256": "0D0BA22FD45EB647695C41905557BC50609B4FADB75E7480AD2E8D7E4287B3AF"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs",
+      "bytes": 13829,
+      "sha256": "41FE19BD750E942E565A8478C6DC3CDF0A5D782106FDD12C3EFFA5B5EF8BAA9D"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Publication.cs",
+      "bytes": 8895,
+      "sha256": "956ED8FFC99297C6DFBBDCAEC6A2ED8E8C7C1277FE9C1E85186B76ECEE172FD3"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/PersistentContactPublication.cs",
+      "bytes": 2853,
+      "sha256": "4DBDB0AFF7AD257EE36286C20EB55105CE729569584F131CEE0B89114960768F"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/ContactDevelopmentPresentationTests.cs",
+      "bytes": 7158,
+      "sha256": "F554B11E19C7BCE8E95216956AB114AE24A1BA57B8F1ECABD20E29C1F13A0440"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/CompoundContactSelectorTests.cs",
+      "bytes": 14296,
+      "sha256": "04793891DB644C695D3640763CD34CAB021E52D462132EB3A53DC16C597EBE10"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/EngineeringContactArticleQualificationTests.cs",
+      "bytes": 20124,
+      "sha256": "264450B9B00C45A4336693D2A217EE23DFCE045B9F425CB9F8F2C9FA343EE375"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/EngineeringContactArticleTests.cs",
+      "bytes": 26111,
+      "sha256": "0F121E94DD63191CD38B54AB6304DA4947FF1470387D70252D6C5DFF0A06E50F"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "bytes": 253058,
+      "sha256": "10EF4D956D938C73A3A45D0302C62C45C1444FA13CB97F00F8BF375150AA8D40"
+    }
+  ],
+  "tag_count": 60,
+  "tag_sha256": "FC7DF21E976D8178C850F640E7BBD40CF98C9339550299876E826AE4EDF28785",
+  "diff_check_exit": 0,
+  "staged": [],
+  "unstaged_tracked_count": 10,
+  "status": [
+    " M samples/NovaCore.Triangle/ContactDevelopmentScene.cs",
+    " M samples/NovaCore.Triangle/Program.cs",
+    " M samples/NovaCore.Triangle/SampleOptions.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactCallbacks.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Publication.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs",
+    " M src/NovaCore.Simulation/Transactions/PersistentContactPublication.cs",
+    " M tests/NovaCore.Graphics.Tests/ContactDevelopmentPresentationTests.cs",
+    " M tests/NovaCore.Simulation.Tests/Program.cs",
+    "?? docs/engineering-evidence/bepu-local-contact-staging/staging-build-blocker.md",
+    "?? docs/engineering-evidence/compound-contact-coverage/",
+    "?? docs/engineering-evidence/engineering-spacecraft-contact-article/",
+    "?? src/NovaCore.Simulation/Spacecraft/Contact/Staging/CompoundContactCoverage.cs",
+    "?? src/NovaCore.Simulation/Spacecraft/Contact/Staging/CompoundContactSelector.cs",
+    "?? src/NovaCore.Simulation/Spacecraft/Contact/Staging/EngineeringContactArticle.cs",
+    "?? src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Article.cs",
+    "?? tests/NovaCore.Simulation.Tests/CompoundContactSelectorTests.cs",
+    "?? tests/NovaCore.Simulation.Tests/EngineeringContactArticleQualificationTests.cs",
+    "?? tests/NovaCore.Simulation.Tests/EngineeringContactArticleTests.cs"
+  ],
+  "time": "2026-09-13T19:07:23.5170974-04:00",
+  "preexisting_changed_files_intentionally_updated": [
+    {
+      "path": "docs/engineering-evidence/compound-contact-coverage/production-selection/README.md",
+      "before": "FF240B552A1A50F296CB1B23194F99912793AE0BC653799388E2480C68476F9F",
+      "after": "61EA2A97664B65BFB95C2EE75D1C7F1FA1F8351269218CCF0D62CAD3DC287831"
+    },
+    {
+      "path": "docs/engineering-evidence/compound-contact-coverage/README.md",
+      "before": "0CF2D04EBD1E5ECF57A9D794C906DA7C6413FE548FF1DFDF12CAE3DB02045ACC",
+      "after": "D409C4EABAF7266D64612F679E611BA27E3FE2987AF3D46BFDCFB0F1A3BC3407"
+    },
+    {
+      "path": "docs/engineering-evidence/engineering-spacecraft-contact-article/README.md",
+      "before": "9844563CF7C25147302138DE892EED08BF6DD0276518C8DEF817EFF9E344658E",
+      "after": "97A7D1FE17874C2F8D65A46EA2B90BBB788A1EEC0FC648D8517E63B299F2A87F"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/CompoundContactSelectorTests.cs",
+      "before": "C5C9A9E1D96D2F7EE99384B9144317E77341F5CEBE214B4BDD8BBA02785CFC44",
+      "after": "04793891DB644C695D3640763CD34CAB021E52D462132EB3A53DC16C597EBE10"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/EngineeringContactArticleTests.cs",
+      "before": "6D8EDB6A45324E63D982D5A264906B9D3F09D788287D3EB4FE74E5EBDF50B9E4",
+      "after": "0F121E94DD63191CD38B54AB6304DA4947FF1470387D70252D6C5DFF0A06E50F"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "before": "9858F9F82713A153558F935A708A08ADEC8F00ABB100505D641D6E70A0B11045",
+      "after": "10EF4D956D938C73A3A45D0302C62C45C1444FA13CB97F00F8BF375150AA8D40"
+    }
+  ]
+}

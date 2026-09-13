@@ -1,0 +1,109 @@
+{
+  "baseline": "5537d08e4ab051a7f31bc638b5f717ef3ce4f3e0",
+  "branch": "codex/engineering-spacecraft-contact-article",
+  "disposition": "UNQUALIFIED; RESTING STABILITY FAILURE; UNBANKED",
+  "preflight_count": 369,
+  "unchanged_preexisting_count": 365,
+  "changed_preexisting_count": 4,
+  "new_input_count": 3,
+  "preflight_tree_sha256": "A484B49182D28E2C1B5ACA50D5A7B0AC4BE6A4E58F8BC92A4312B34FB2D285B2",
+  "current_tree_sha256": "260C0BE8580496D7F3C2B10D75A8D1A5F9829C12380F7C8376F2AA0AD8BDECCA",
+  "tree_method": "SHA256 UTF8 no BOM of sorted relative path + space + SHA256 rows joined LF, no trailing LF; inputs from git ls-files --cached --others --exclude-standard -- src tests external/bepu",
+  "changed": [
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactCallbacks.cs",
+      "before": "B2D59C3A47120FBD1EF8E320EF9866EAC39F4C6CDFE4BBF3978C3F3DB4781C11",
+      "sha256": "80266CF2947E899DBB57A7ACC1418A8061484F88D978966B47BA09CEA6BCC1D7"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs",
+      "before": "9242E87CEEF8E78BC907C1FB60AC1BABEA99E7C9BCD63480203CF3FBEEE1EDAE",
+      "sha256": "41FE19BD750E942E565A8478C6DC3CDF0A5D782106FDD12C3EFFA5B5EF8BAA9D"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/EngineeringContactArticleTests.cs",
+      "before": "285A31C2E1920452737C98F3E8DC85F802B26BE8E0B5090A1ACF4A5C94144DCD",
+      "sha256": "7798C84413F17CA43B9F1BC6826DEEFC4CB8A65B0DDA9A3932D80849F19D635D"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "before": "D1657EA22CE6E171421B997FD25E8D9894D9DD403D3204F9B65B6E472EF7CAAB",
+      "sha256": "9858F9F82713A153558F935A708A08ADEC8F00ABB100505D641D6E70A0B11045"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CompoundContactSelector.cs",
+      "before": null,
+      "sha256": "702FE57E089BEA151966462009854DFE7445884B0FAD0C691816FC96E4F4A9AA"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CompoundContactCoverage.cs",
+      "before": null,
+      "sha256": "DACBF31F495A2A2FEBA07CF9BC62022898FA7954929276E27871FDAB8AAC0A2F"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/CompoundContactSelectorTests.cs",
+      "before": null,
+      "sha256": "729CFF35C06449803EFB4A87EE9EF5EC969E1DF23E4A4D3E58DA92D68B808D9A"
+    }
+  ],
+  "protected": [
+    {
+      "path": "external/bepu/2.5.0-beta.29/lib/BepuPhysics.dll",
+      "sha256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7"
+    },
+    {
+      "path": "external/bepu/2.5.0-beta.29/lib/BepuUtilities.dll",
+      "sha256": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68"
+    },
+    {
+      "path": "external/bepu/2.5.0-beta.29/LICENSE.txt",
+      "sha256": "4CD13F7A31E98F51C4FB960A115E9A9AB9C42284CA5D5C9B5CCBCF322DE45BFD"
+    },
+    {
+      "path": "external/bepu/2.5.0-beta.29/manifest/bepu-2.5.0-beta.29.json",
+      "sha256": "C76F2DE75DAC81C8695109977E1F8A4DCCAFF29DA0BB96884C46C0B33362240E"
+    },
+    {
+      "path": "external/bepu/2.5.0-beta.29/packages/BepuPhysics.2.5.0-beta.29.nupkg",
+      "sha256": "D4A952F5417B53B08DE20D507C21745C9DD004E2529864098DFEC7A2CFF11E42"
+    },
+    {
+      "path": "external/bepu/2.5.0-beta.29/packages/BepuUtilities.2.5.0-beta.29.nupkg",
+      "sha256": "8168EC4905F3AD5F923564557DAAB2BAB1100EE46B424CA5F1C97BD7684DE19F"
+    },
+    {
+      "path": "external/bepu/ATTRIBUTION.txt",
+      "sha256": "FF40F4AE2A543AC6B2FFFD693210E9753B53937AC6E18A4FC8B7B131E5E2EDF3"
+    },
+    {
+      "path": "external/bepu/Bepu.references.props",
+      "sha256": "8F1E02C0456715149B378D19E05361FE394A9B9D307B650061BDEFAC9CB889EE"
+    },
+    {
+      "path": "external/bepu/Bepu.targets",
+      "sha256": "CA31C347A3D465CCEB5FF10E549BEFE2FBF1037B8C57E1034073C484CE47EB8F"
+    },
+    {
+      "path": "external/bepu/README.md",
+      "sha256": "B35D7185970B7B12495D4F650AA59124D2E910BB9DBB0DC98B90F2FEC8550C14"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/EngineeringContactArticle.cs",
+      "sha256": "8D5BA352905624C5EC7C53DC2869B7BCE023EB95B0133DE25EE98BCB272796FD"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Article.cs",
+      "sha256": "0D0BA22FD45EB647695C41905557BC50609B4FADB75E7480AD2E8D7E4287B3AF"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.ContactServicing.cs",
+      "sha256": "0881493EC1E74187652F8C23D91CD5AE400A3C4DF6EF4A05A39EA0A5BE29AF87"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.PersistentContact.cs",
+      "sha256": "057F8CEFB885F719AD4D88CF0C64DB88628F0279FCAB441BAF3A430608E5D18F"
+    }
+  ],
+  "tag_ref_sha256": "FC7DF21E976D8178C850F640E7BBD40CF98C9339550299876E826AE4EDF28785",
+  "tags_unchanged": true
+}

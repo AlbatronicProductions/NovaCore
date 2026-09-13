@@ -1,0 +1,886 @@
+{
+  "schema": 1,
+  "date": "2026-09-13",
+  "qualification": "Four-contact coverage selector and engineering spacecraft article",
+  "baseline": "5537d08e4ab051a7f31bc638b5f717ef3ce4f3e0",
+  "branch": "codex/engineering-spacecraft-contact-article",
+  "environment": [
+    ".NET SDK:",
+    " Version:           10.0.303",
+    " Commit:            e730f1db75",
+    " Workload version:  10.0.300-manifests.330ea142",
+    " MSBuild version:   18.6.14+e730f1db7",
+    "",
+    "Runtime Environment:",
+    " OS Name:     Windows",
+    " OS Version:  10.0.26200",
+    " OS Platform: Windows",
+    " RID:         win-x64",
+    " Base Path:   C:\\Program Files\\dotnet\\sdk\\10.0.303\\",
+    "",
+    ".NET workloads installed:",
+    "There are no installed workloads to display.",
+    "Configured to use workload sets when installing new manifests.",
+    "No workload sets are installed. Run \"dotnet workload restore\" to install a workload set.",
+    "",
+    "Host:",
+    "  Version:      10.0.12",
+    "  Architecture: x64",
+    "  Commit:       95017c711e",
+    "",
+    ".NET SDKs installed:",
+    "  10.0.303 [C:\\Program Files\\dotnet\\sdk]",
+    "",
+    ".NET runtimes installed:",
+    "  Microsoft.AspNetCore.App 10.0.11 [C:\\Program Files\\dotnet\\shared\\Microsoft.AspNetCore.App]",
+    "  Microsoft.NETCore.App 6.0.36 [C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App]",
+    "  Microsoft.NETCore.App 8.0.31 [C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App]",
+    "  Microsoft.NETCore.App 9.0.20 [C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App]",
+    "  Microsoft.NETCore.App 10.0.11 [C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App]",
+    "  Microsoft.NETCore.App 10.0.12 [C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App]",
+    "  Microsoft.WindowsDesktop.App 6.0.36 [C:\\Program Files\\dotnet\\shared\\Microsoft.WindowsDesktop.App]",
+    "  Microsoft.WindowsDesktop.App 8.0.31 [C:\\Program Files\\dotnet\\shared\\Microsoft.WindowsDesktop.App]",
+    "  Microsoft.WindowsDesktop.App 9.0.20 [C:\\Program Files\\dotnet\\shared\\Microsoft.WindowsDesktop.App]",
+    "  Microsoft.WindowsDesktop.App 10.0.11 [C:\\Program Files\\dotnet\\shared\\Microsoft.WindowsDesktop.App]",
+    "  Microsoft.WindowsDesktop.App 10.0.12 [C:\\Program Files\\dotnet\\shared\\Microsoft.WindowsDesktop.App]",
+    "",
+    "Other architectures found:",
+    "  x86   [C:\\Program Files (x86)\\dotnet]",
+    "    registered at [HKLM\\SOFTWARE\\dotnet\\Setup\\InstalledVersions\\x86\\InstallLocation]",
+    "",
+    "Environment variables:",
+    "  DOTNET_ROOT                              [C:\\Program Files\\dotnet]",
+    "  DOTNET_ROOT(x86)                         [C:\\Program Files (x86)\\dotnet]",
+    "",
+    "global.json file:",
+    "  Not found",
+    "",
+    "Learn more:",
+    "  https://aka.ms/dotnet/info",
+    "",
+    "Download .NET:",
+    "  https://aka.ms/dotnet/download"
+  ],
+  "builds": {
+    "preflight_debug": {
+      "exitCode": 0,
+      "warnings": 0,
+      "errors": 0,
+      "seconds": 7.12,
+      "command": "dotnet build NovaCore.sln -c Debug --no-restore -v minimal"
+    },
+    "preflight_release": {
+      "exitCode": 0,
+      "warnings": 0,
+      "errors": 0,
+      "seconds": 5.56,
+      "command": "dotnet build NovaCore.sln -c Release --no-restore -v minimal"
+    },
+    "final_debug": {
+      "exitCode": 0,
+      "output": "\r\nBuild succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:02.08\r\n"
+    },
+    "final_release": {
+      "exitCode": 0,
+      "summary": [
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)",
+        "Time Elapsed 00:00:01.42"
+      ],
+      "command": "dotnet build NovaCore.sln -c Release --nologo"
+    }
+  },
+  "allocation": [
+    {
+      "key": "formalAllocationDebug",
+      "exitCode": 0,
+      "witness": [
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=article-centered-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=article-centered-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=article-centered-backlog bytes=0 entry=PASS exit=PASS",
+        "ARTICLE_ALLOCATION tilted=False complete=1024 no_work=1024 backlog_calls=128 backlog_intervals=512 PASS",
+        "ORDINARY_ALLOCATION gate=article-tilted-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=article-tilted-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=article-tilted-backlog bytes=0 entry=PASS exit=PASS",
+        "ARTICLE_ALLOCATION tilted=True complete=1024 no_work=1024 backlog_calls=128 backlog_intervals=512 PASS"
+      ]
+    },
+    {
+      "key": "formalSelectorAllocationDebug",
+      "exitCode": 0,
+      "witness": [
+        "ORDINARY_ALLOCATION gate=compound-contact-selection bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "SELECTOR_ALLOCATION candidates=12 warm=128 measured=1024 PASS"
+      ]
+    },
+    {
+      "key": "formalAllocationRelease",
+      "exitCode": 0,
+      "witness": [
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=article-centered-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=article-centered-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=article-centered-backlog bytes=0 entry=PASS exit=PASS",
+        "ARTICLE_ALLOCATION tilted=False complete=1024 no_work=1024 backlog_calls=128 backlog_intervals=512 PASS",
+        "ORDINARY_ALLOCATION gate=article-tilted-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=article-tilted-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=article-tilted-backlog bytes=0 entry=PASS exit=PASS",
+        "ARTICLE_ALLOCATION tilted=True complete=1024 no_work=1024 backlog_calls=128 backlog_intervals=512 PASS"
+      ]
+    },
+    {
+      "key": "formalSelectorAllocationRelease",
+      "exitCode": 0,
+      "witness": [
+        "ORDINARY_ALLOCATION gate=compound-contact-selection bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "SELECTOR_ALLOCATION candidates=12 warm=128 measured=1024 PASS"
+      ]
+    }
+  ],
+  "storage": {
+    "exitCode": 0,
+    "witness": [
+      "ARTICLE_STORAGE managed_cold_warm_upper_bound=1048120 native_pool=540672 combined_upper_bound=1588792 history_payload_included=940800 selector_array_payload_included=1427 limit=8388608",
+      "ARTICLE_DEFINITION {\"MassKilograms\":1000,\"CentreOfMassAssembly\":{\"X\":0,\"Y\":0,\"Z\":0.1,\"LengthSquared\":0.010000000000000002,\"IsFinite\":true},\"Tensor\":{\"XX\":577.5,\"YY\":848.3333333333333,\"ZZ\":437.5,\"XY\":0,\"XZ\":0,\"YZ\":0},\"SmallestFeature\":0.5,\"BoundingRadius\":1.7705931209625774,\"Identity\":{\"Version\":1,\"A\":11924782583587566515,\"B\":2487338776908849966,\"C\":10970259085846249193,\"D\":16680824850243033112}}",
+      "PASS engineering article analytical, geometry, identity, admission and lifetime gates",
+      "ARTICLE_STORAGE_LIFETIME bounded_to_completion=PASS compound_disposal=PASS construction_failure_cleanup=PASS"
+    ],
+    "interpretation": "Measured cold+warm managed allocated bytes plus actual owned native-pool bytes is a conservative retained-storage upper bound, not an exact live-heap census. History and selector payloads are included, not additional."
+  },
+  "physical": [
+    {
+      "kind": "centered",
+      "exitCode": 0,
+      "tilted": false,
+      "tiltAngle": 0.25,
+      "moving": false,
+      "supported": 600,
+      "childMask": 7,
+      "peak_m": 0.005819714882528193,
+      "peakStep": 34,
+      "restingSetChanges": 0,
+      "max_drift_m": 6.205949151489612e-8,
+      "max_omega": 0.07002790492497588,
+      "n16666": 400,
+      "n16667": 800,
+      "ticks": 20000000,
+      "revision": 1200,
+      "history": 1200,
+      "article_preparation_ms": 4.5832,
+      "world_preparation_ms": 29.7148,
+      "first_step_ms": 26.0226,
+      "first_contact_step": 33,
+      "first_contact_ms": 26.379
+    },
+    {
+      "kind": "tilted",
+      "exitCode": 0,
+      "tilted": true,
+      "tiltAngle": 0.25,
+      "moving": false,
+      "supported": 600,
+      "childMask": 7,
+      "peak_m": 0.006945546380241474,
+      "peakStep": 35,
+      "restingSetChanges": 0,
+      "max_drift_m": 8.708620871908054e-8,
+      "max_omega": 3.162903474481871,
+      "n16666": 400,
+      "n16667": 800,
+      "ticks": 20000000,
+      "revision": 1200,
+      "history": 1200,
+      "article_preparation_ms": 4.6617,
+      "world_preparation_ms": 29.8343,
+      "first_step_ms": 25.6894,
+      "first_contact_step": 30,
+      "first_contact_ms": 22.4885
+    },
+    {
+      "kind": "mirrored",
+      "exitCode": 0,
+      "tilted": true,
+      "tiltAngle": -0.25,
+      "moving": false,
+      "supported": 600,
+      "childMask": 7,
+      "peak_m": 0.006688154529344681,
+      "peakStep": 35,
+      "restingSetChanges": 0,
+      "max_drift_m": 4.779568526503322e-8,
+      "max_omega": 3.162721813138588,
+      "n16666": 400,
+      "n16667": 800,
+      "ticks": 20000000,
+      "revision": 1200,
+      "history": 1200,
+      "article_preparation_ms": 4.6377,
+      "world_preparation_ms": 30.591,
+      "first_step_ms": 25.4201,
+      "first_contact_step": 30,
+      "first_contact_ms": 22.4111
+    },
+    {
+      "kind": "moving",
+      "exitCode": 0,
+      "tilted": true,
+      "tiltAngle": 0.25,
+      "moving": true,
+      "supported": 600,
+      "childMask": 7,
+      "peak_m": 0.006945746950922316,
+      "peakStep": 35,
+      "restingSetChanges": 0,
+      "max_drift_m": 4.467548163206231e-7,
+      "max_omega": 3.1629034744818716,
+      "n16666": 400,
+      "n16667": 800,
+      "ticks": 20000000,
+      "revision": 1200,
+      "history": 1200,
+      "article_preparation_ms": 4.6819,
+      "world_preparation_ms": 30.4689,
+      "first_step_ms": 25.9375,
+      "first_contact_step": 30,
+      "first_contact_ms": 23.0638
+    }
+  ],
+  "schedules": {
+    "exitCode": 0,
+    "witness": [
+      "ARTICLE_SCHEDULE tilted=False hz=30 endpoints=1200/1200 support=600/600 selector_service_boundaries=600 selector_differences=0 budget_stops=0 accepted=20000000 debt=0 history=1200 final_hold=PASS",
+      "ARTICLE_SCHEDULE tilted=False hz=60 endpoints=1200/1200 support=600/600 selector_service_boundaries=1200 selector_differences=0 budget_stops=0 accepted=20000000 debt=0 history=1200 final_hold=PASS",
+      "ARTICLE_SCHEDULE tilted=False hz=150 endpoints=1200/1200 support=600/600 selector_service_boundaries=1200 selector_differences=0 budget_stops=0 accepted=20000000 debt=0 history=1200 final_hold=PASS",
+      "ARTICLE_SCHEDULE tilted=False hz=240 endpoints=1200/1200 support=600/600 selector_service_boundaries=1200 selector_differences=0 budget_stops=0 accepted=20000000 debt=0 history=1200 final_hold=PASS",
+      "ARTICLE_SCHEDULE tilted=False hz=0 endpoints=1200/1200 support=600/600 selector_service_boundaries=300 selector_differences=0 budget_stops=299 accepted=20000000 debt=0 history=1200 final_hold=PASS",
+      "ARTICLE_PRIVATE_EQUIVALENCE tilted=False endpoints=1200/1200 canonical_nonmutation=PASS",
+      "ARTICLE_SCHEDULE tilted=True hz=30 endpoints=1200/1200 support=600/600 selector_service_boundaries=600 selector_differences=0 budget_stops=0 accepted=20000000 debt=0 history=1200 final_hold=PASS",
+      "ARTICLE_SCHEDULE tilted=True hz=60 endpoints=1200/1200 support=600/600 selector_service_boundaries=1200 selector_differences=0 budget_stops=0 accepted=20000000 debt=0 history=1200 final_hold=PASS",
+      "ARTICLE_SCHEDULE tilted=True hz=150 endpoints=1200/1200 support=600/600 selector_service_boundaries=1200 selector_differences=0 budget_stops=0 accepted=20000000 debt=0 history=1200 final_hold=PASS",
+      "ARTICLE_SCHEDULE tilted=True hz=240 endpoints=1200/1200 support=600/600 selector_service_boundaries=1200 selector_differences=0 budget_stops=0 accepted=20000000 debt=0 history=1200 final_hold=PASS",
+      "ARTICLE_SCHEDULE tilted=True hz=0 endpoints=1200/1200 support=600/600 selector_service_boundaries=300 selector_differences=0 budget_stops=299 accepted=20000000 debt=0 history=1200 final_hold=PASS",
+      "ARTICLE_PRIVATE_EQUIVALENCE tilted=True endpoints=1200/1200 canonical_nonmutation=PASS"
+    ],
+    "scope": "All 1200 physical endpoints and publication accounting compared per schedule. Selector identities compared at every observable completed service frontier: 600/1200/1200/1200/300 checks for 30/60/150/240/delayed respectively; no differences. Internal batched selector snapshots not retained."
+  },
+  "qualification_harness_correction": {
+    "classification": "SPLIT — revision metadata differs legitimately between private-only and published paths",
+    "first_failure": "New whole-SpacecraftMotion equality failed at private step 2.",
+    "attribution": {
+      "step": 2,
+      "read": "Success",
+      "private_revision": 0,
+      "published_export_revision": 1,
+      "all_other_fields_equal": true,
+      "private_canonical_revision": 0,
+      "published_canonical_revision": 2
+    },
+    "reproduction_count": 1,
+    "correction": "Retain exact physical fields and raw FP64 bit equality, assert private source revision=0, published staged revision=n-1 and canonical committed revision=n independently, using the banked M14.19 trajectory contract. No production correction.",
+    "outcome": "Corrected schedules PASS; independent review agreed."
+  },
+  "performance": [
+    {
+      "process": 1,
+      "exitCode": 0,
+      "median_ms": 0.0304,
+      "p95_ms": 0.031,
+      "p99_ms": 0.0334,
+      "max_ms": 0.0734,
+      "cold_preparation_ms": 46.8546,
+      "warm": 128,
+      "measured": 1024,
+      "first_measured_frontier": 129,
+      "last_measured_frontier": 1152,
+      "tails": [
+        {
+          "frontier": 256,
+          "ms": 0.0734
+        },
+        {
+          "frontier": 257,
+          "ms": 0.0374
+        },
+        {
+          "frontier": 467,
+          "ms": 0.036
+        },
+        {
+          "frontier": 335,
+          "ms": 0.0355
+        },
+        {
+          "frontier": 781,
+          "ms": 0.0355
+        },
+        {
+          "frontier": 266,
+          "ms": 0.0351
+        },
+        {
+          "frontier": 979,
+          "ms": 0.0339
+        },
+        {
+          "frontier": 145,
+          "ms": 0.0338
+        }
+      ]
+    },
+    {
+      "process": 2,
+      "exitCode": 0,
+      "median_ms": 0.0305,
+      "p95_ms": 0.0311,
+      "p99_ms": 0.0337,
+      "max_ms": 0.0392,
+      "cold_preparation_ms": 46.6478,
+      "warm": 128,
+      "measured": 1024,
+      "first_measured_frontier": 129,
+      "last_measured_frontier": 1152,
+      "tails": [
+        {
+          "frontier": 890,
+          "ms": 0.0392
+        },
+        {
+          "frontier": 891,
+          "ms": 0.0364
+        },
+        {
+          "frontier": 1110,
+          "ms": 0.0348
+        },
+        {
+          "frontier": 1020,
+          "ms": 0.0343
+        },
+        {
+          "frontier": 914,
+          "ms": 0.0342
+        },
+        {
+          "frontier": 409,
+          "ms": 0.0339
+        },
+        {
+          "frontier": 174,
+          "ms": 0.0338
+        },
+        {
+          "frontier": 920,
+          "ms": 0.0338
+        }
+      ]
+    },
+    {
+      "process": 3,
+      "exitCode": 0,
+      "median_ms": 0.0307,
+      "p95_ms": 0.0465,
+      "p99_ms": 0.0795,
+      "max_ms": 0.1178,
+      "cold_preparation_ms": 46.5159,
+      "warm": 128,
+      "measured": 1024,
+      "first_measured_frontier": 129,
+      "last_measured_frontier": 1152,
+      "tails": [
+        {
+          "frontier": 164,
+          "ms": 0.1178
+        },
+        {
+          "frontier": 529,
+          "ms": 0.0901
+        },
+        {
+          "frontier": 433,
+          "ms": 0.0898
+        },
+        {
+          "frontier": 897,
+          "ms": 0.0871
+        },
+        {
+          "frontier": 898,
+          "ms": 0.0869
+        },
+        {
+          "frontier": 475,
+          "ms": 0.0846
+        },
+        {
+          "frontier": 434,
+          "ms": 0.0844
+        },
+        {
+          "frontier": 1000,
+          "ms": 0.0837
+        }
+      ]
+    }
+  ],
+  "selector_cost": {
+    "exitCode": 0,
+    "witness": [
+      "ORDINARY_ALLOCATION gate=compound-contact-selection bytes=0 entry=PASS exit=PASS",
+      "SELECTOR_COST candidates=12 iterations=1024 median_us=3.6 p95_us=4.3 p99_us=6.3 max_us=33.1",
+      "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+      "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+    ],
+    "scope": "Isolated representative 12-candidate production-selector call; not a claim of production callback attribution or a replacement for complete-operation timing."
+  },
+  "cold": {
+    "exitCode": 0,
+    "article_preparation_ms": 5.334,
+    "world_preparation_ms": 33.6616,
+    "first_operation_ms": 30.8964,
+    "first_manifold_step": 30,
+    "first_manifold_operation_ms": 26.1779,
+    "first_specialized_step": 31,
+    "first_specialized_operation_ms": 15.5634,
+    "raw_count_histogram": [
+      29,
+      0,
+      1,
+      0,
+      0,
+      0,
+      3,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1167
+    ],
+    "selected_count_histogram": [
+      30,
+      0,
+      0,
+      0,
+      1170
+    ],
+    "steps": 1200,
+    "note": "First manifold may be speculative. Timings cover the whole operation; no isolated callback attribution."
+  },
+  "full_simulation": [
+    {
+      "configuration": "Debug",
+      "exitCode": 0,
+      "registered_groups": 56,
+      "passed_groups": [
+        "SimulationInstant",
+        "SimulationDuration",
+        "SimulationRate",
+        "Solar UTC and speed presets",
+        "Event ordering",
+        "Internal physical-event epochs",
+        "Timeline topology",
+        "Simulation clock",
+        "Host-duration conversion",
+        "Host-duration debt servicing",
+        "Transaction contracts",
+        "Canonical transaction groups",
+        "Clock execution orchestration",
+        "Celestial contracts",
+        "Celestial system definitions",
+        "Celestial body catalog",
+        "SolAnalytical dataset",
+        "Celestial system time and provenance",
+        "Celestial ephemeris catalogs",
+        "Celestial system evaluation",
+        "Celestial body orientation",
+        "Two-body propagation",
+        "Spacecraft attitude",
+        "Spacecraft translational authority",
+        "Spacecraft contact generation",
+        "Unified linear/angular contact transaction",
+        "Isolated analytical contact response policy",
+        "Spacecraft attitude integration",
+        "Rigid-body rotation",
+        "Rigid-body torque transaction",
+        "Flight reference and SAS guidance",
+        "SAS sign/frame continuity proof",
+        "Analytical orbit sampling",
+        "Celestial frame extraction",
+        "Celestial trajectory replacement",
+        "Celestial impulse events",
+        "Allocation",
+        "Exact-event spacecraft motion",
+        "Exact-event Earth-relative observation",
+        "Florida monotone contact proof",
+        "Qualified root contact kinematics",
+        "Certified isolated-contact response proposals",
+        "Certified pre-impact velocity tuples",
+        "Certified final post-impact velocity states",
+        "Private root-time post-impact state",
+        "Paired private canonical propagation",
+        "Post-impact singleton terrain coverage",
+        "Certified continuation ownership",
+        "Private finite-body contact staging",
+        "Compound contact selection",
+        "Persistent contact publication",
+        "Host-paced contact servicing",
+        "Engineering article definition and lifetime",
+        "Engineering article physical contact",
+        "Engineering article schedules and private equivalence",
+        "Engineering article allocation"
+      ]
+    },
+    {
+      "configuration": "Release",
+      "exitCode": 0,
+      "registered_groups": 56,
+      "passed_groups": [
+        "SimulationInstant",
+        "SimulationDuration",
+        "SimulationRate",
+        "Solar UTC and speed presets",
+        "Event ordering",
+        "Internal physical-event epochs",
+        "Timeline topology",
+        "Simulation clock",
+        "Host-duration conversion",
+        "Host-duration debt servicing",
+        "Transaction contracts",
+        "Canonical transaction groups",
+        "Clock execution orchestration",
+        "Celestial contracts",
+        "Celestial system definitions",
+        "Celestial body catalog",
+        "SolAnalytical dataset",
+        "Celestial system time and provenance",
+        "Celestial ephemeris catalogs",
+        "Celestial system evaluation",
+        "Celestial body orientation",
+        "Two-body propagation",
+        "Spacecraft attitude",
+        "Spacecraft translational authority",
+        "Spacecraft contact generation",
+        "Unified linear/angular contact transaction",
+        "Isolated analytical contact response policy",
+        "Spacecraft attitude integration",
+        "Rigid-body rotation",
+        "Rigid-body torque transaction",
+        "Flight reference and SAS guidance",
+        "SAS sign/frame continuity proof",
+        "Analytical orbit sampling",
+        "Celestial frame extraction",
+        "Celestial trajectory replacement",
+        "Celestial impulse events",
+        "Allocation",
+        "Exact-event spacecraft motion",
+        "Exact-event Earth-relative observation",
+        "Florida monotone contact proof",
+        "Qualified root contact kinematics",
+        "Certified isolated-contact response proposals",
+        "Certified pre-impact velocity tuples",
+        "Certified final post-impact velocity states",
+        "Private root-time post-impact state",
+        "Paired private canonical propagation",
+        "Post-impact singleton terrain coverage",
+        "Certified continuation ownership",
+        "Private finite-body contact staging",
+        "Compound contact selection",
+        "Persistent contact publication",
+        "Host-paced contact servicing",
+        "Engineering article definition and lifetime",
+        "Engineering article physical contact",
+        "Engineering article schedules and private equivalence",
+        "Engineering article allocation"
+      ]
+    }
+  ],
+  "focused_regressions": [
+    {
+      "command": "dotnet tests/NovaCore.ReferenceFrames.Tests/bin/Debug/net10.0/NovaCore.ReferenceFrames.Tests.dll",
+      "exitCode": 0,
+      "summary": [
+        "PASS transform algebra",
+        "PASS hierarchy and conversion",
+        "PASS reference-frame graph",
+        "PASS reference-frame paths",
+        "PASS transform resolution",
+        "PASS static universe fixture",
+        "PASS ORB",
+        "PASS CCI/CCF",
+        "PASS rotating velocity",
+        "PASS surface anchor authority",
+        "PASS validation"
+      ]
+    },
+    {
+      "command": "dotnet tests/NovaCore.Precision.Tests/bin/Debug/net10.0/NovaCore.Precision.Tests.dll",
+      "exitCode": 0,
+      "summary": [
+        "kilometre        1000           0              PASS",
+        "metre            1              0              PASS",
+        "centimetre       0.02001953125  0              PASS",
+        "millimetre       0.0009765625   0              PASS",
+        "negative root    0.5            0              PASS",
+        "mixed signs      0.02978515625  0              PASS",
+        "near zero        1000           5.204170427930421E-18 PASS",
+        "PASS"
+      ]
+    },
+    {
+      "command": "dotnet tests/NovaCore.BepuDependency.Tests/bin/Debug/net10.0/NovaCore.BepuDependency.Tests.dll",
+      "exitCode": 0,
+      "summary": []
+    },
+    {
+      "command": "dotnet tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.dll '--case=Contact development canonical presentation'",
+      "exitCode": 0,
+      "summary": [
+        "PASS Contact development canonical presentation and lifecycle",
+        "PASS Engineering article copied geometry, COM, camera, bounded catch-up and final hold"
+      ]
+    },
+    {
+      "command": "dotnet tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.dll '--case=Certified Florida continuation publication'",
+      "exitCode": 0,
+      "summary": [
+        "PUBLICATION_REFUSAL contract=pending NoOpMarker at 500000 status=PendingEvent unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=pending NoOpMarker at 1000000 status=PendingEvent unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=pending CelestialImpulse at 0 status=PendingEvent unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=pending CelestialImpulse at 500000 status=PendingEvent unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=pending CelestialImpulse at 1000000 status=PendingEvent unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=pending RigidBodyTorque at 0 status=PendingEvent unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=pending RigidBodyTorque at 500000 status=PendingEvent unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=pending RigidBodyTorque at 1000000 status=PendingEvent unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=pending SpacecraftForce at 0 status=PendingEvent unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=pending SpacecraftForce at 500000 status=PendingEvent unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=pending SpacecraftForce at 1000000 status=PendingEvent unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=pending SpacecraftContactImpulse at 0 status=PendingEvent unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=pending SpacecraftContactImpulse at 500000 status=PendingEvent unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=pending SpacecraftContactImpulse at 1000000 status=PendingEvent unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=changed source state status=StaleEndpoint unchanged=PASS",
+        "ORDINARY_ALLOCATION gate=certified-publication-success bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=certified-publication-observation-refusal bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS"
+      ]
+    },
+    {
+      "command": "dotnet tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.dll '--case=Certified continuation acceptance gaps'",
+      "exitCode": 0,
+      "summary": [
+        "PUBLICATION_REFUSAL contract=independent coherent endpoint staleness status=StaleEndpoint unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=N greater than SourceStart status=StaleEndpoint unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=direct attitude status=StaleEndpoint unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=direct torque status=StaleEndpoint unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=direct force status=StaleEndpoint unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=direct translation status=StaleEndpoint unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=direct rotation status=StaleEndpoint unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=different physical-property authority status=ForeignEngine unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=change after early read status=ClockConflict unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=occupied fixed history status=HistoryCapacityFailure unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=zero debt status=InsufficientDebt unchanged=PASS"
+      ]
+    },
+    {
+      "command": "dotnet tests/NovaCore.Launcher.Tests/bin/Debug/net10.0-windows/NovaCore.Launcher.Tests.dll",
+      "exitCode": 0,
+      "summary": [
+        "PASS default selection",
+        "PASS scenario catalog",
+        "PASS contact development scenarios",
+        "PASS Earth fullscreen native preset",
+        "PASS M12D spherical billboard GPU proof preset",
+        "PASS new Earth renderer preset",
+        "PASS Earth fullscreen Solar camera path",
+        "PASS structured launch environment",
+        "PASS launcher build configuration",
+        "PASS Earth orbital arguments",
+        "PASS invariant altitude formatting",
+        "PASS subdivision diagnostic mapping",
+        "PASS Florida launch mapping",
+        "PASS invalid configuration rejection",
+        "PASS diagnostics arguments",
+        "PASS existing production scenarios",
+        "NovaCore launcher tests passed: 16"
+      ]
+    },
+    {
+      "command": "dotnet tests/NovaCore.ReferenceFrames.Tests/bin/Release/net10.0/NovaCore.ReferenceFrames.Tests.dll",
+      "exitCode": 0,
+      "summary": [
+        "PASS transform algebra",
+        "PASS hierarchy and conversion",
+        "PASS reference-frame graph",
+        "PASS reference-frame paths",
+        "PASS transform resolution",
+        "PASS static universe fixture",
+        "PASS ORB",
+        "PASS CCI/CCF",
+        "PASS rotating velocity",
+        "PASS surface anchor authority",
+        "PASS validation"
+      ]
+    },
+    {
+      "command": "dotnet tests/NovaCore.Precision.Tests/bin/Release/net10.0/NovaCore.Precision.Tests.dll",
+      "exitCode": 0,
+      "summary": [
+        "kilometre        1000           0              PASS",
+        "metre            1              0              PASS",
+        "centimetre       0.02001953125  0              PASS",
+        "millimetre       0.0009765625   0              PASS",
+        "negative root    0.5            0              PASS",
+        "mixed signs      0.02978515625  0              PASS",
+        "near zero        1000           5.204170427930421E-18 PASS",
+        "PASS"
+      ]
+    },
+    {
+      "command": "dotnet tests/NovaCore.BepuDependency.Tests/bin/Release/net10.0/NovaCore.BepuDependency.Tests.dll",
+      "exitCode": 0,
+      "summary": []
+    },
+    {
+      "command": "dotnet tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll '--case=Contact development canonical presentation'",
+      "exitCode": 0,
+      "summary": [
+        "PASS Contact development canonical presentation and lifecycle",
+        "PASS Engineering article copied geometry, COM, camera, bounded catch-up and final hold"
+      ]
+    },
+    {
+      "command": "dotnet tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll '--case=Certified Florida continuation publication'",
+      "exitCode": 0,
+      "summary": [
+        "PUBLICATION_REFUSAL contract=pending NoOpMarker at 500000 status=PendingEvent unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=pending NoOpMarker at 1000000 status=PendingEvent unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=pending CelestialImpulse at 0 status=PendingEvent unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=pending CelestialImpulse at 500000 status=PendingEvent unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=pending CelestialImpulse at 1000000 status=PendingEvent unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=pending RigidBodyTorque at 0 status=PendingEvent unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=pending RigidBodyTorque at 500000 status=PendingEvent unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=pending RigidBodyTorque at 1000000 status=PendingEvent unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=pending SpacecraftForce at 0 status=PendingEvent unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=pending SpacecraftForce at 500000 status=PendingEvent unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=pending SpacecraftForce at 1000000 status=PendingEvent unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=pending SpacecraftContactImpulse at 0 status=PendingEvent unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=pending SpacecraftContactImpulse at 500000 status=PendingEvent unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=pending SpacecraftContactImpulse at 1000000 status=PendingEvent unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=changed source state status=StaleEndpoint unchanged=PASS",
+        "ORDINARY_ALLOCATION gate=certified-publication-success bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=certified-publication-observation-refusal bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS"
+      ]
+    },
+    {
+      "command": "dotnet tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll '--case=Certified continuation acceptance gaps'",
+      "exitCode": 0,
+      "summary": [
+        "PUBLICATION_REFUSAL contract=independent coherent endpoint staleness status=StaleEndpoint unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=N greater than SourceStart status=StaleEndpoint unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=direct attitude status=StaleEndpoint unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=direct torque status=StaleEndpoint unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=direct force status=StaleEndpoint unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=direct translation status=StaleEndpoint unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=direct rotation status=StaleEndpoint unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=different physical-property authority status=ForeignEngine unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=change after early read status=ClockConflict unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=occupied fixed history status=HistoryCapacityFailure unchanged=PASS",
+        "PUBLICATION_REFUSAL contract=zero debt status=InsufficientDebt unchanged=PASS"
+      ]
+    },
+    {
+      "command": "dotnet tests/NovaCore.Launcher.Tests/bin/Release/net10.0-windows/NovaCore.Launcher.Tests.dll",
+      "exitCode": 0,
+      "summary": [
+        "PASS default selection",
+        "PASS scenario catalog",
+        "PASS contact development scenarios",
+        "PASS Earth fullscreen native preset",
+        "PASS M12D spherical billboard GPU proof preset",
+        "PASS new Earth renderer preset",
+        "PASS Earth fullscreen Solar camera path",
+        "PASS structured launch environment",
+        "PASS launcher build configuration",
+        "PASS Earth orbital arguments",
+        "PASS invariant altitude formatting",
+        "PASS subdivision diagnostic mapping",
+        "PASS Florida launch mapping",
+        "PASS invalid configuration rejection",
+        "PASS diagnostics arguments",
+        "PASS existing production scenarios",
+        "NovaCore launcher tests passed: 16"
+      ]
+    }
+  ],
+  "manual": {
+    "source": "User's explicit article acceptance reply in this task, 2026-09-13",
+    "centered": "PASS",
+    "tilted": "PASS",
+    "statement": "Shape/slab agreement correct. Settling/tipping behaved correctly. Camera movement did not affect physics. No COM jump/explosion. Brief title-bar hold recovered boundedly. READY/RUNNING/COMPLETED readable. Final endpoint remained held.",
+    "limitation": "User did not specify title-bar hold duration or frame index. No individual tail is attributed to that interaction. FAILED-state behavior was checked automatically, not deliberately induced in manual accepted episodes."
+  },
+  "live": [
+    {
+      "case": "centered",
+      "stdout_bytes": 20132,
+      "stdout_sha256": "C938CF66E9193B4900A180BDA2BFBE4529F7AE5E94D1E3CFB64DEEACB8282E24",
+      "stderr_bytes": 0,
+      "decisive_lines": [
+        "CONTACT_LIVE_READY tilted=False setup_ms=16.4124 world_ms=30.7103 binding_presentation_ms=2.0769 debt=0 steps=1200 rate=1:1 qualification_only=true",
+        "[native] GPU: AMD Radeon RX 6800 XT | Vulkan 1.4",
+        "[native] Swapchain: format=37 colorSpace=0 extent=1280x720; HDR scene format=97",
+        "CONTACT_VISIBLE_STATUS roundtrip=PASS text=NovaCore - Engineering spacecraft article / centered - READY - prepared; Space starts 20-second episode",
+        "[native] Swapchain: format=37 colorSpace=0 extent=1280x720; HDR scene format=97",
+        "CONTACT_VISIBLE_STATUS roundtrip=PASS text=NovaCore - Engineering spacecraft article / centered - RUNNING (20-second episode)",
+        "CONTACT_VISIBLE_STATUS roundtrip=PASS text=NovaCore - Engineering spacecraft article / centered - COMPLETED - final canonical endpoint held",
+        "CONTACT_LIVE_END status=COMPLETED - final canonical endpoint held frontier=1200 clock=20000000 debt=336 revision=1200 history=1200",
+        "CONTACT_FRAME_TAIL index=4 ms=28.938 preceding_frontier=0->1 preceding_credit_ms=0.0294 preceding_service_ms=27.9806 outside_credit_service_ms=0.9280000000000008",
+        "CONTACT_FRAME_TAIL index=97 ms=30.3887 preceding_frontier=32->33 preceding_credit_ms=0.0376 preceding_service_ms=29.5387 outside_credit_service_ms=0.8124000000000002",
+        "CONTACT_FRAME_TAIL index=277 ms=11.3372 preceding_frontier=94->94 preceding_credit_ms=0.0012 preceding_service_ms=0.001 outside_credit_service_ms=11.334999999999999",
+        "CONTACT_FRAME_TAIL_COUNT above_6_67=3 samples=3595 zero_based=true window=previous_callback_to_current_callback waits=UNAVAILABLE",
+        "CONTACT_LIVE_FRAME samples=3595 median_ms=5.555400 p95_ms=5.722600 p99_ms=6.010800 max_ms=30.388700 measurement=callback_to_callback_including_present_and_host_scheduling objective_ms=6.666667 storage_bytes=800000",
+        "[native] Average frame time: 5.758 ms (10201 frames)",
+        "[native] Frame pacing: p50=5.462 ms; p95=5.799 ms; p99=5.975 ms; max=35.714 ms; samples=8192",
+        "[native] Fence wait pacing: average=4.919 ms; p95=5.200 ms; max=10.840 ms; samples=8192",
+        "[native] CPU timings: update=5.065 ms; fence=4.929; inspection=0.031; hostCallback=0.103; validationUpload=0.002; record=0.047; submit=0.027; present=0.264",
+        "[native] GPU timing averages: total=0.038 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.015; preSurface=0.000; toneMap=0.011"
+      ]
+    },
+    {
+      "case": "tilted",
+      "stdout_bytes": 11599,
+      "stdout_sha256": "A5A57B88DB2D567DCDE46C17A71D78A53AD24CA3D1D87653096226146BA8FF84",
+      "stderr_bytes": 0,
+      "decisive_lines": [
+        "CONTACT_LIVE_READY tilted=True setup_ms=16.0195 world_ms=31.7073 binding_presentation_ms=2.1082 debt=0 steps=1200 rate=1:1 qualification_only=true",
+        "[native] GPU: AMD Radeon RX 6800 XT | Vulkan 1.4",
+        "[native] Swapchain: format=37 colorSpace=0 extent=1280x720; HDR scene format=97",
+        "CONTACT_VISIBLE_STATUS roundtrip=PASS text=NovaCore - Engineering spacecraft article / tilted - READY - prepared; Space starts 20-second episode",
+        "[native] Swapchain: format=37 colorSpace=0 extent=1280x720; HDR scene format=97",
+        "CONTACT_VISIBLE_STATUS roundtrip=PASS text=NovaCore - Engineering spacecraft article / tilted - RUNNING (20-second episode)",
+        "CONTACT_VISIBLE_STATUS roundtrip=PASS text=NovaCore - Engineering spacecraft article / tilted - COMPLETED - final canonical endpoint held",
+        "CONTACT_LIVE_END status=COMPLETED - final canonical endpoint held frontier=1200 clock=20000000 debt=4979 revision=1200 history=1200",
+        "CONTACT_FRAME_TAIL index=4 ms=28.1261 preceding_frontier=0->1 preceding_credit_ms=0.0281 preceding_service_ms=27.6019 outside_credit_service_ms=0.496100000000002",
+        "CONTACT_FRAME_TAIL index=88 ms=25.8204 preceding_frontier=29->30 preceding_credit_ms=0.0043 preceding_service_ms=25.3296 outside_credit_service_ms=0.4864999999999995",
+        "CONTACT_FRAME_TAIL index=89 ms=13.9771 preceding_frontier=30->31 preceding_credit_ms=0.0033 preceding_service_ms=13.5245 outside_credit_service_ms=0.4493000000000009",
+        "CONTACT_FRAME_TAIL index=3000 ms=6.7417 preceding_frontier=1001->1002 preceding_credit_ms=0.0015 preceding_service_ms=0.0405 outside_credit_service_ms=6.6997",
+        "CONTACT_FRAME_TAIL_COUNT above_6_67=4 samples=3595 zero_based=true window=previous_callback_to_current_callback waits=UNAVAILABLE",
+        "CONTACT_LIVE_FRAME samples=3595 median_ms=5.557000 p95_ms=5.717900 p99_ms=6.046600 max_ms=28.126100 measurement=callback_to_callback_including_present_and_host_scheduling objective_ms=6.666667 storage_bytes=800000",
+        "[native] Average frame time: 6.059 ms (4710 frames)",
+        "[native] Frame pacing: p50=5.500 ms; p95=5.813 ms; p99=6.012 ms; max=35.415 ms; samples=4710",
+        "[native] Fence wait pacing: average=4.943 ms; p95=5.209 ms; max=6.210 ms; samples=4710",
+        "[native] CPU timings: update=5.097 ms; fence=4.943; inspection=0.030; hostCallback=0.122; validationUpload=0.002; record=0.044; submit=0.028; present=0.262",
+        "[native] GPU timing averages: total=0.039 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.015; preSurface=0.000; toneMap=0.011"
+      ]
+    }
+  ],
+  "no_solver_changes_during_formal_qualification": true
+}

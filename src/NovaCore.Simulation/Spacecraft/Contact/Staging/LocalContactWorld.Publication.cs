@@ -52,7 +52,7 @@ internal sealed partial class LocalContactWorld
             !view.Spacecraft.TryGetDefinition(source.Motion.Spacecraft, out var definition)) return LocalContactStatus.InvalidSource;
         var identity = new PersistentContactEpisode(episode, source.Motion.Time, source.End, config.Revision,
             config.RootFrame, config.OriginRoot, config.OriginVelocityRoot, config.LocalToRoot,
-            config.BoxDimensions, config.PlaneHalfExtent);
+            config.BoxDimensions, config.PlaneHalfExtent, config.Article?.Identity ?? default);
         publication = new(engine, definition, properties, source.TimelineRevision, identity,
             linear, angular, view.Revision, engine.CaptureContinuationClock());
         return LocalContactStatus.Success;

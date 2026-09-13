@@ -1,0 +1,58 @@
+{
+  "old_baseline": "f0c8e0f2c16de98e492ef4b9b4a5a24f372e8b18",
+  "new_baseline": "5537d08e4ab051a7f31bc638b5f717ef3ce4f3e0",
+  "method": "Fast-forward candidate ref with disjoint working edits; no stash, patch reapplication or merge commit",
+  "stopped_draft_matches": 9,
+  "unchanged_paths": [
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/EngineeringContactArticle.cs",
+      "sha256": "088237DDA5A342A31DB500DDAADA8522A1B244AC33BB4C3C306EA313AFDC4362"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Article.cs",
+      "sha256": "0D0BA22FD45EB647695C41905557BC50609B4FADB75E7480AD2E8D7E4287B3AF"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactCallbacks.cs",
+      "sha256": "B2D59C3A47120FBD1EF8E320EF9866EAC39F4C6CDFE4BBF3978C3F3DB4781C11"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs",
+      "sha256": "CA626F456C048ED6610B4FB89FD6187D3ABC30E29496B59DEFD4813D281C625C"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Publication.cs",
+      "sha256": "956ED8FFC99297C6DFBBDCAEC6A2ED8E8C7C1277FE9C1E85186B76ECEE172FD3"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs",
+      "sha256": "9242E87CEEF8E78BC907C1FB60AC1BABEA99E7C9BCD63480203CF3FBEEE1EDAE"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/PersistentContactPublication.cs",
+      "sha256": "4DBDB0AFF7AD257EE36286C20EB55105CE729569584F131CEE0B89114960768F"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/EngineeringContactArticleTests.cs",
+      "sha256": "F2AA09811FED6BC867FBF7CE89A075391CBBDE049216A6CFB7152C10E25E8E68"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "sha256": "D1657EA22CE6E171421B997FD25E8D9894D9DD403D3204F9B65B6E472EF7CAAB"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\engineering-spacecraft-contact-article\\draft-identity.json",
+      "sha256": "BC29CC4EF36EED7F4101A5F9FD6989713AD90F303A4BDB6A21E542040C576C26"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\engineering-spacecraft-contact-article\\README.md",
+      "sha256": "53A437F41DCFF9EBEEB3A50C64B3F35D34D190862FEE458B0FD1A835EB4AF077"
+    },
+    {
+      "path": "docs/engineering-evidence/bepu-local-contact-staging/staging-build-blocker.md",
+      "sha256": "3DAB84C722F700945E25F6276ACDCA4874968CA39AD724EB82047D020D7056E7"
+    }
+  ],
+  "historical_tags_unchanged": true,
+  "staged_paths": 0
+}
