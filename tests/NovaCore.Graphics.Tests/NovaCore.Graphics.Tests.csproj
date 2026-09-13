@@ -19,6 +19,7 @@
     <Compile Include="..\..\samples\NovaCore.Triangle\StaticReferenceFrameFixtureSceneFactory.cs" Link="StaticReferenceFrameFixtureSceneFactory.cs" />
     <Compile Include="..\..\samples\NovaCore.Triangle\DynamicReferenceFrameFixtureScene.cs" Link="DynamicReferenceFrameFixtureScene.cs" />
     <Compile Include="..\..\samples\NovaCore.Triangle\CelestialAnalyticalScene.cs" Link="CelestialAnalyticalScene.cs" />
+    <Compile Include="..\..\samples\NovaCore.Triangle\ContactDevelopmentScene.cs" Link="ContactDevelopmentScene.cs" />
     <Compile Include="..\..\samples\NovaCore.Triangle\SampleOptions.cs" Link="SampleOptions.cs" />
     <Compile Include="..\..\samples\NovaCore.Triangle\EarthRoutePolicy.cs" Link="EarthRoutePolicy.cs" />
     <Compile Include="..\..\samples\NovaCore.Triangle\EarthPlanetaryScene.cs" Link="EarthPlanetaryScene.cs" />
