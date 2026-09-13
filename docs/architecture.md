@@ -112,6 +112,18 @@ and history authority. M14.17 certified clearance and M14.18 private-only steppi
 their separate contracts. No live host-paced contact caller or terrain/gameplay integration
 is qualified by this milestone. See the [banked publication evidence](engineering-evidence/persistent-contact-publication/README.md).
 
+Banked **M14.20** adds bounded host-paced canonical contact servicing. **M14.21 —
+Authored Compound Spacecraft Contact** extends the corrected servicing/publication path
+to an immutable three-box bus/pod article on an authored planar slab. NovaCore owns
+the precision-aware four-contact compound selector and canonical state/time/history;
+BEPU remains the private contact solver with retained manifold and warm-start continuity.
+Host servicing preserves exact intervals and retained debt; copied canonical pose drives
+one presentation submission per display frame. Stable support and centered/tilted manual
+presentation are qualified for this article. General geometry, live contact acquisition/
+departure, terrain integration and landing gameplay remain separate responsibilities.
+See [current state](NOVACORE_CURRENT_STATE.md) and the
+[formal qualification](engineering-evidence/compound-contact-coverage/formal-qualification/README.md).
+
 `Spacecraft.Guidance` is a pure managed math layer. It evaluates orbital flight-reference vectors, deterministically constructs body-forward target orientations, and computes bounded body-space PD torque requests. The celestial sample owns SAS mode selection, exact-time hold-attitude capture, and a deterministic 20 Hz simulation-time cadence. At each active boundary it evaluates guidance and submits a quantized torque request through the existing rigid-body transaction path. The fixture uses `(120, 120, 120) kg·m²` inertia, fixture-specific `(8, 8, 8) N·m` SAS authority, gains `(7.5, 7.5, 7.5)` and `(63, 63, 63)`, `.002` deadbands, and `.01` settlement thresholds for deliberately mildly overdamped behavior. SAS control is sample-locally suspended above 10×; clock and orbital evaluation continue, and resumption begins at the first future cadence boundary. Graphics receives only the resulting evaluated body frame. Full high-warp control behavior remains deferred.
 
 The celestial assembly performs pure elliptic universal-variable evaluation from immutable Cartesian epoch state and central μ resolved through the read-only celestial view. `CelestialReferenceFrameEvaluator` is the narrow translational extraction pass from that authority into caller-provided `ReferenceFrameEvaluation` staging storage at one exact `SimulationInstant`. It validates a one-root, one-to-one celestial/frame mapping and emits identity-orientation inertial carrier transforms, preventing body spin from rotating child trajectories. Beside it, `CelestialBodyFixedFrameEvaluator` composes an evaluated center with the exact-epoch PCK-derived body rotation for a body-centered CCF consumer. The Moon's normal 1900–2100 path composes a checked six-hour DE440 residual pack with the deterministic `IAU_MOON` fallback model; CSPICE and source kernels remain offline-only. Neither evaluator owns topology, publication, camera, render transport, or mutation.

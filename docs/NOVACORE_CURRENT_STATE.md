@@ -11,14 +11,42 @@ renderer. Simulation owns celestial identity, exact time, physical state, and
 reference-frame transforms. Graphics consumes immutable root-resolved snapshots
 and performs FP64 camera-relative subtraction before GPU transport.
 
-## Banked M14.19 — Persistent BEPU Contact Publication
+## Banked M14.21 — Authored Compound Spacecraft Contact
 
-The unbanked [host-paced contact servicing candidate](engineering-evidence/contact-episode-servicing/README.md)
-adds a narrow owner-authorized host-credit operation, bounded retained-debt servicing
-and opt-in box/slab development scenes. Numerical/regression gates and user manual
-acceptance passed. The Unicode window-status correction and repeated manual check also pass;
-the bounded whole-frame tail classification remains UNRESOLVED. This does not change
-the banked M14.19 scope or authorize live terrain/gameplay integration.
+Project Control accepted and banked **M14.21 — Authored Compound Spacecraft Contact**
+at `b6e8fa568585706ce38c0609aeb14db4a643123e`, tag
+`m14.21-authored-compound-spacecraft-contact`. It builds on M14.19 canonical
+publication and [M14.20 host-paced servicing](engineering-evidence/contact-episode-servicing/README.md), including the owner-phase correction
+at `5537d08e4ab051a7f31bc638b5f717ef3ce4f3e0`.
+
+One authored three-box bus/pod engineering article contacts an authored planar slab.
+A NovaCore-owned, precision-aware four-contact compound selector qualifies stable
+supported contact in centered, tilted, mirrored and constant-moving-frame cases.
+Each Release case completes 1,200 intervals with 600/600 final supported steps and
+no rest selection changes. NovaCore retains canonical physical state, exact time,
+revisions, publication and history; BEPU remains the retained private local contact solver.
+Bounded host-paced servicing preserves exact intervals and retained debt across the
+tested host schedules. Presentation uses copied canonical pose once per display frame.
+
+Three fresh Release campaigns passed warmed complete-operation performance:
+median 0.0304–0.0307 ms, highest P95 0.0465 ms, highest P99 0.0795 ms and maximum
+0.1178 ms. The measured operation includes host admission, service, export, publication,
+acknowledgement and copied observation. Warmed managed allocation is zero in the
+qualified paths; cold setup and whole-frame rendering are separate measurements.
+Cold first-use hitches remain, including approximately 28–30 ms live frames; this is
+not an every-frame performance guarantee. Project Control explicitly accepted both
+centered and tilted presentations, including shape/slab agreement, settling/tipping,
+camera independence, bounded delay recovery, readable status and the final held endpoint.
+
+See the [formal qualification](engineering-evidence/compound-contact-coverage/formal-qualification/README.md)
+and [manual acceptance](engineering-evidence/compound-contact-coverage/formal-qualification/manual-acceptance.md).
+Those reports preserve their pre-banking stage; the Git checkpoint above establishes
+the later banking state. M14 remains **OPEN**. Arbitrary spacecraft geometry, live
+contact acquisition/departure, production landing gear, complete landing gameplay,
+Florida launchpad integration, spacecraft flight controls, production spacecraft art
+and live Earth/mesh terrain collision remain outside this qualification.
+
+## Banked M14.19 — Persistent BEPU Contact Publication
 
 Project Control accepted and banked **M14.19 — Persistent BEPU Contact Publication**
 at `fc6fbf269d7a8022ce2fe184aea0dfc94716db05`, tag
@@ -28,8 +56,9 @@ the retained private world in the same canonical owner phase. NovaCore retains
 canonical authority; private solver/world continuity survives successful publication.
 M14.17 certified clearance remains a separate
 contract; M14.18 private-only stepping remains supported.
-Qualification covers published endpoints for the authored box/slab, with pre-provisioned
-simulation debt; no live host-paced caller or complete landing capability is qualified.
+M14.19 qualification covers published endpoints for the authored box/slab, with
+pre-provisioned simulation debt. M14.20–M14.21 extend this with host-paced servicing
+and the authored compound article above; complete landing gameplay remains unfinished.
 See the [banked contract and evidence](engineering-evidence/persistent-contact-publication/README.md).
 
 ## Accepted M14.18 production responsibility
@@ -505,7 +534,7 @@ visually finished.
 
 ## Next architectural decision and work boundary
 
-M14.19 is banked for the bounded persistent-contact publication responsibility above.
+M14.21 is banked for the bounded authored compound-contact responsibility above.
 Further production work requires its own active Project Control ticket; this status
 reconciliation does not authorize another implementation or milestone.
 M13 is closed at M13.6 and there is no M13.7. Preserve the
@@ -513,9 +542,10 @@ accepted NCSM1 physical, regional/facility, visibility, tessellation, memory and
 publication contracts. Historical exact-copy, residual-validation and lifecycle
 experiments do not automatically become production candidates.
 
-The banked BEPU result includes repeated canonical endpoint publication while retaining
-the private solver world. Live host-paced servicing, real terrain collision and
-launch/landing remain unqualified by M14.19.
+The banked contact result includes the authored compound selector, stable supported
+contact, repeated canonical endpoint publication and bounded live host-paced servicing
+while retaining the private solver world. General contact acquisition/departure, real
+terrain collision and complete launch/landing gameplay remain unqualified.
 Do not assign a next milestone or regenerate NCSM1 assets.
 Future work must distinguish physical geometry, depth/ownership and
 presentation/LOD behavior while keeping `H(bodyDirection)` authoritative.

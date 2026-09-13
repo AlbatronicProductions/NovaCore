@@ -15,12 +15,17 @@ not as an onboarding requirement.
 
 ## Repository rules
 
-Active unbanked branch: `codex/contact-episode-servicing`. The
-[candidate report](engineering-evidence/contact-episode-servicing/README.md)
-preserves passing accounting/trajectory/regression qualification, corrected Unicode
-status and repeated manual PASS, and an UNRESOLVED whole-frame tail classification.
-Do not restart validation or broaden into rendering
-forensics without Project Control's follow-up scope. No milestone is assigned.
+Latest banked checkpoint: **M14.21 — Authored Compound Spacecraft Contact**,
+`b6e8fa568585706ce38c0609aeb14db4a643123e`, tag
+`m14.21-authored-compound-spacecraft-contact`. Inspect current Git refs before resuming;
+later documentation commits may advance main without moving this milestone tag.
+The [formal qualification](engineering-evidence/compound-contact-coverage/formal-qualification/README.md)
+records passing article/selector physics, host schedules, warmed allocation and Release
+performance, regressions and explicit centered/tilted manual presentation acceptance.
+The historical [host-paced candidate report](engineering-evidence/contact-episode-servicing/README.md)
+and formal report retain their pre-banking status and cold/whole-frame limits;
+they do not reopen an active candidate. Resume from the
+[current-state boundaries](NOVACORE_CURRENT_STATE.md).
 
 Project Control accepted **M14.18 — Staged Finite-Body BEPU Contact**. Resume from the
 [current-state boundaries](NOVACORE_CURRENT_STATE.md) and
@@ -172,11 +177,13 @@ is the concise performance checkpoint. Historical LiveKernelEvent 141 remains
 
 ## Next architectural decision and work boundary
 
-M13 is closed at M13.6; M14 remains OPEN. Banked M14.19 adds repeated validated
-canonical endpoint publication with retained private BEPU solver/world continuity.
-Live host-paced servicing, live Earth/mesh terrain,
-production spacecraft colliders, landing gear, grounded gameplay, launchpad support
-and rotating/rebased local frames remain outside qualification. Further production
+M13 is closed at M13.6; M14 remains OPEN. Banked M14.21 qualifies the authored
+compound article and NovaCore-owned four-contact selector on the corrected M14.20
+host-paced servicing path, retaining M14.19 canonical publication and private BEPU
+solver/world continuity. Arbitrary spacecraft geometry, live contact acquisition/
+departure, live Earth/mesh terrain, production landing gear, grounded gameplay,
+Florida launchpad integration, flight controls, production spacecraft art and
+rotating/rebased local frames remain outside qualification. Further production
 work requires its own active Project Control ticket; no later milestone is assigned here.
 
 - Preserve banked M13.1–M13.6 outcomes and future tessellation/displacement capacity.
