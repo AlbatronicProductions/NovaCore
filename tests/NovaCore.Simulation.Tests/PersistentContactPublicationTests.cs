@@ -106,9 +106,50 @@ internal static class PersistentContactPublicationTests
     internal static void Run()
     {
         LongSequence(false, false); LongSequence(true, false); LongSequence(true, true);
-        DeterministicHistory(); ClockBoundaries(); Refusals(); AcknowledgementFailure(); AllocationAndStorage();
+        DeterministicHistory(); ClockBoundaries(); Refusals(); OwnedPhaseContract(); AcknowledgementFailure(); AllocationAndStorage();
         Check(!RuntimeHelpers.IsReferenceOrContainsReferences<ProcessedPersistentContact>(), "history has no live references");
         Console.WriteLine("PASS Persistent contact publication: exact paired authority, retained trajectory, 28 refusal/terminal responsibilities, allocation/storage");
+    }
+
+    private delegate PersistentContactPublicationResult OwnedPublisher(LocalContactWorld world,
+        LocalContactConfiguration configuration, in PersistentContactPublicationRequest request, bool failAcknowledgementForTest);
+
+    private static void OwnedPhaseContract()
+    {
+        var f = Create(); using var world = World(f, true, out var receipt); Stage(f, world, ref receipt);
+        var before = Capture(f);
+        var request = new PersistentContactPublicationRequest(receipt, f.Engine.CaptureContinuationClock());
+        var publish = typeof(SimulationTransactionEngine)
+            .GetMethod("PublishPersistentContactInOwnedPhase", BindingFlags.Instance | BindingFlags.NonPublic)!
+            .CreateDelegate<OwnedPublisher>(f.Engine);
+        PublicationStatus(publish(world, f.Configuration, request, false),
+            PersistentContactPublicationStatus.ReentrantPublication, "owned body refuses unowned phase");
+        Check(Capture(f) == before && !f.Clock.PublicationPhase.IsActive, "unowned body refusal nonmutation");
+        var foreignOwner = new object();
+        Check(f.Clock.PublicationPhase.TryEnter(foreignOwner), "foreign owner enters phase");
+        try
+        {
+            PublicationStatus(publish(world, f.Configuration, request, false),
+                PersistentContactPublicationStatus.ReentrantPublication, "owned body refuses foreign phase owner");
+            Check(Capture(f) == before && f.Clock.PublicationPhase.IsOwnedBy(foreignOwner), "foreign owner preserved");
+        }
+        finally { f.Clock.PublicationPhase.Exit(); }
+        Check(f.Clock.PublicationPhase.TryEnter(f.Engine), "engine enters phase for shared body");
+        try
+        {
+            var threadResult = default(PersistentContactPublicationResult);
+            var thread = new Thread(() => threadResult = publish(world, f.Configuration, request, false));
+            thread.Start(); thread.Join();
+            PublicationStatus(threadResult, PersistentContactPublicationStatus.ReentrantPublication, "owned body refuses wrong thread");
+            Check(Capture(f) == before && f.Engine.OwnsPersistentPublicationPhase, "wrong thread refusal preserves owner");
+            PublicationStatus(publish(world, f.Configuration, request, false),
+                PersistentContactPublicationStatus.Published, "owned body accepts engine phase");
+            Check(f.Engine.OwnsPersistentPublicationPhase && f.Engine.ProcessedPersistentContactCount == 1,
+                "shared body commits once and leaves phase held");
+        }
+        finally { f.Clock.PublicationPhase.Exit(); }
+        Check(Operation(f, world, ref receipt, 2, out _, out _), "ordinary publisher continues after shared-body acknowledgement");
+        Console.WriteLine("PASS persistent contact shared-body phase ownership");
     }
 
     private static void LongSequence(bool tilted, bool moving)

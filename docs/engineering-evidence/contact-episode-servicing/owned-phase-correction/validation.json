@@ -1,0 +1,394 @@
+{
+  "date": "2026-09-13",
+  "baseline": "f0c8e0f2c16de98e492ef4b9b4a5a24f372e8b18",
+  "worktree": "E:\\NovaCore-M1420-Correction",
+  "status": "PASS",
+  "banked": false,
+  "recovery": {
+    "sha256": "7A5521A072992E7D5360B733DCE7EE29CA00EB093D923F7E0B544CCC744610CF",
+    "bytes": 8696,
+    "LF_regions": [
+      [
+        51,
+        63
+      ],
+      [
+        126,
+        127
+      ]
+    ],
+    "normalizedBlob": "fd2759cce1c5dbeecc1c9c3ad5b7f41ef11a2bcc"
+  },
+  "candidateRootTree": "44d7f8d16848133593d80216737f2db4ea58ef68",
+  "bankedPublisherBlob": "566c91cf68c8bec80680c3ff64c2e1b16fbc6f89",
+  "publicationBody": {
+    "identicalToM1419AndRecoveredM1420": true,
+    "sha256LF": "133DECA2CE4E0C93A20AA6FE06C771B01B8455EB142BDC728C05CED8BCF168C1",
+    "onlyAdditionalProductionChange": "Explicit existing-phase IsOwnedBy(this) guard"
+  },
+  "builds": {
+    "baselineDebug": {
+      "exitCode": 1,
+      "warnings": 0,
+      "errors": 1,
+      "diagnostic": "CS0103",
+      "location": "SimulationTransactionEngine.ContactServicing.cs(100,35)"
+    },
+    "correctedDebug": {
+      "exitCode": 0,
+      "warnings": 0,
+      "errors": 0
+    },
+    "correctedRelease": {
+      "exitCode": 0,
+      "warnings": 0,
+      "errors": 0
+    }
+  },
+  "tests": [
+    {
+      "name": "debug-publication",
+      "exitCode": 0,
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+        "--persistent-contact-only"
+      ]
+    },
+    {
+      "name": "debug-servicing",
+      "exitCode": 0,
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+        "--contact-servicing-only"
+      ]
+    },
+    {
+      "name": "debug-servicing-cheap",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+        "--contact-servicing-cheap"
+      ],
+      "exitCode": 0,
+      "seconds": 0.222,
+      "log": "debug-servicing-cheap.log"
+    },
+    {
+      "name": "debug-graphics-contact-presentation",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.dll",
+        "--case=Contact development canonical presentation"
+      ],
+      "exitCode": 0,
+      "seconds": 0.255,
+      "log": "debug-graphics-contact-presentation.log"
+    },
+    {
+      "name": "debug-graphics-certified-publication",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.dll",
+        "--case=Certified Florida continuation publication"
+      ],
+      "exitCode": 0,
+      "seconds": 2.434,
+      "log": "debug-graphics-certified-publication.log"
+    },
+    {
+      "name": "debug-graphics-certified-gaps",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.dll",
+        "--case=Certified continuation acceptance gaps"
+      ],
+      "exitCode": 0,
+      "seconds": 1.935,
+      "log": "debug-graphics-certified-gaps.log"
+    },
+    {
+      "name": "debug-graphics-certified-allocation",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.dll",
+        "--case=Certified continuation allocation matrix"
+      ],
+      "exitCode": 0,
+      "seconds": 2.349,
+      "log": "debug-graphics-certified-allocation.log"
+    },
+    {
+      "name": "debug-simulation-full",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll"
+      ],
+      "exitCode": 0,
+      "seconds": 8.559,
+      "log": "debug-simulation-full.log"
+    },
+    {
+      "name": "release-publication",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--persistent-contact-only"
+      ],
+      "exitCode": 0,
+      "seconds": 0.562,
+      "log": "release-publication.log"
+    },
+    {
+      "name": "release-servicing",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--contact-servicing-only"
+      ],
+      "exitCode": 0,
+      "seconds": 0.682,
+      "log": "release-servicing.log"
+    },
+    {
+      "name": "release-servicing-cheap",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--contact-servicing-cheap"
+      ],
+      "exitCode": 0,
+      "seconds": 0.21,
+      "log": "release-servicing-cheap.log"
+    },
+    {
+      "name": "release-graphics-contact-presentation",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+        "--case=Contact development canonical presentation"
+      ],
+      "exitCode": 0,
+      "seconds": 0.371,
+      "log": "release-graphics-contact-presentation.log"
+    },
+    {
+      "name": "release-graphics-certified-publication",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+        "--case=Certified Florida continuation publication"
+      ],
+      "exitCode": 0,
+      "seconds": 1.503,
+      "log": "release-graphics-certified-publication.log"
+    },
+    {
+      "name": "release-graphics-certified-gaps",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+        "--case=Certified continuation acceptance gaps"
+      ],
+      "exitCode": 0,
+      "seconds": 1.149,
+      "log": "release-graphics-certified-gaps.log"
+    },
+    {
+      "name": "release-graphics-certified-allocation",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+        "--case=Certified continuation allocation matrix"
+      ],
+      "exitCode": 0,
+      "seconds": 1.461,
+      "log": "release-graphics-certified-allocation.log"
+    },
+    {
+      "name": "release-simulation-full",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll"
+      ],
+      "exitCode": 0,
+      "seconds": 4.254,
+      "log": "release-simulation-full.log"
+    },
+    {
+      "name": "release-publication-timing",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--persistent-contact-performance"
+      ],
+      "exitCode": 0,
+      "seconds": 0.172,
+      "log": "release-publication-timing.log"
+    },
+    {
+      "name": "release-servicing-timing",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--contact-servicing-performance"
+      ],
+      "exitCode": 0,
+      "seconds": 0.174,
+      "log": "release-servicing-timing.log"
+    }
+  ],
+  "allocation": {
+    "Debug": {
+      "persistentCompleteBytes": 0,
+      "serviceCompleteBytes": 0,
+      "serviceNoWorkBytes": 0,
+      "serviceBacklogBytes": 0,
+      "positiveControlBytes": 152
+    },
+    "Release": {
+      "persistentCompleteBytes": 0,
+      "serviceCompleteBytes": 0,
+      "serviceNoWorkBytes": 0,
+      "serviceBacklogBytes": 0,
+      "positiveControlBytes": 152
+    }
+  },
+  "timing": {
+    "publication": {
+      "median_ms": 0.0159,
+      "p95_ms": 0.0163,
+      "p99_ms": 0.0184,
+      "max_ms": 0.0597,
+      "worst_measured_index": 462,
+      "over_005ms": 1,
+      "over_010ms": 0,
+      "fixture_history_cold_ms": 11.8145,
+      "world_cold_ms": 28.4186,
+      "binding_cold_ms": 0.6529,
+      "warm": 128,
+      "measured": 1024,
+      "tails": [
+        {
+          "index": 462,
+          "ms": 0.0597
+        },
+        {
+          "index": 14,
+          "ms": 0.0211
+        },
+        {
+          "index": 805,
+          "ms": 0.0205
+        },
+        {
+          "index": 804,
+          "ms": 0.0204
+        },
+        {
+          "index": 140,
+          "ms": 0.0192
+        },
+        {
+          "index": 840,
+          "ms": 0.0192
+        },
+        {
+          "index": 498,
+          "ms": 0.0191
+        },
+        {
+          "index": 606,
+          "ms": 0.0191
+        }
+      ]
+    },
+    "servicing": {
+      "median_ms": 0.0187,
+      "p95_ms": 0.0191,
+      "p99_ms": 0.0213,
+      "max_ms": 0.0304,
+      "cold_total_ms": 40.3746,
+      "warm": 128,
+      "measured": 1024,
+      "tails": [
+        {
+          "index": 777,
+          "ms": 0.0304
+        },
+        {
+          "index": 646,
+          "ms": 0.0218
+        },
+        {
+          "index": 234,
+          "ms": 0.0217
+        },
+        {
+          "index": 48,
+          "ms": 0.0216
+        },
+        {
+          "index": 327,
+          "ms": 0.0216
+        },
+        {
+          "index": 488,
+          "ms": 0.0216
+        },
+        {
+          "index": 19,
+          "ms": 0.0214
+        },
+        {
+          "index": 739,
+          "ms": 0.0214
+        }
+      ]
+    }
+  },
+  "changedSourceFiles": [
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.PersistentContact.cs",
+      "bytes": 8823,
+      "sha256": "9E574A5C07685150DE078402B868676BB97BACF8EB4CE7F54E2EE6173ED0B8A3",
+      "sha256LF": "E73147EA1BFEBE4C54825C47AC5750CA82B50E196E58A0B0926CD59EDC98ECD7",
+      "gitBlobLF": "4c7aea197588e41a2f229ec8868fda88a490d214"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/PersistentContactPublicationTests.cs",
+      "bytes": 35323,
+      "sha256": "7A12FF8FF7737AEEDC6C4762F972F47EF4BD9D89CA0F28D3CBACDA4E371FE195",
+      "sha256LF": "14EBDCD6C24A42B73A27A3B5A0392CC286C63B50E69EC6DB8BE3CAC0B957D7D7",
+      "gitBlobLF": "5139692895ded4a8f882a898cefab26731cf11a5"
+    }
+  ],
+  "preservation": {
+    "articleBranch": "codex/engineering-spacecraft-contact-article",
+    "articleHead": "f0c8e0f2c16de98e492ef4b9b4a5a24f372e8b18",
+    "allPreexistingDirtyAndUntrackedFileHashesUnchanged": true,
+    "preexistingFileCount": 12,
+    "statusUnchanged": true,
+    "allOriginalRefsUnchanged": true,
+    "correctionIndexEmpty": true,
+    "milestoneTagObject": "ac96f952b9c44220cd93042c0d7c6e8e07d227d5",
+    "milestoneTagCommit": "49712256756e7d5433fc3ecf6aa1d1880a9f36a8"
+  },
+  "environmentPrerequisites": [
+    "Native DLL and shader build prerequisites built from unchanged isolated baseline source.",
+    "Initial corrected full build failed on missing native artifacts; resolved by native Debug/Release builds, no source changes.",
+    "Graphics root discovery requires .git directory: isolated audit/graphics-root git init plus assets/build junctions to correction worktree.",
+    "Initial M14.17 Graphics test lacked fixture cache: rerun with NOVACORE_ASSET_CACHE=E:/NovaCore/.novacore/cache/terrain/v1; exact asset hash validated by existing loader."
+  ],
+  "rawAuditDirectory": "E:\\NovaCore-M1420-Correction-audit",
+  "finalChecks": {
+    "gitDiffCheck": true,
+    "newEvidenceWhitespaceCheck": true,
+    "evidenceLinksValid": true,
+    "sourceFingerprintsMatchTestedBytes": true,
+    "acceptedSourceExactFingerprintMatch": true,
+    "articleAndAllOriginalRefsReverified": true,
+    "reproductionScriptPowerShellParse": "PASS; constituent build/test commands executed, script itself not rerun"
+  }
+}

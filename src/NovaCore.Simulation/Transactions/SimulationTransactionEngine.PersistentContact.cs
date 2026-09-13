@@ -52,6 +52,16 @@ internal sealed partial class SimulationTransactionEngine
         if (_isExecutingGroup || !phase.TryEnter(this)) return new(PersistentContactPublicationStatus.ReentrantPublication);
         try
         {
+            return PublishPersistentContactInOwnedPhase(world, configuration, request, failAcknowledgementForTest);
+        }
+        finally { phase.Exit(); }
+    }
+
+    // The servicing owner can reuse the identical publisher while retaining the same exclusive phase.
+    private PersistentContactPublicationResult PublishPersistentContactInOwnedPhase(LocalContactWorld world,
+        LocalContactConfiguration configuration, in PersistentContactPublicationRequest request, bool failAcknowledgementForTest)
+    {
+            if (!_clock.PublicationPhase.IsOwnedBy(this)) return new(PersistentContactPublicationStatus.ReentrantPublication);
             if (world is null || configuration is null) return new(PersistentContactPublicationStatus.InvalidReceipt);
             if (CaptureContinuationClock() != request.Clock) return new(PersistentContactPublicationStatus.ClockConflict);
             var status = world.PreparePublication(this, configuration, request.Receipt,
@@ -114,7 +124,5 @@ internal sealed partial class SimulationTransactionEngine
             }
             catch (Exception) { acknowledgement.Invalidate(); return terminal; }
             return success;
-        }
-        finally { phase.Exit(); }
     }
 }
