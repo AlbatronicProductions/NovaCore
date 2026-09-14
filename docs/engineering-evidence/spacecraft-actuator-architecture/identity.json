@@ -1,0 +1,371 @@
+{
+  "scope": "Architecture investigation only; no implementation or qualification campaign",
+  "repository": "E:/NovaCore",
+  "before": {
+    "date": "2026-09-13T22:18:47.8010961-04:00",
+    "head": "c70ccfacf3607d1342396c702682781b42bb525e",
+    "main": "c70ccfacf3607d1342396c702682781b42bb525e",
+    "origin_main": "c70ccfacf3607d1342396c702682781b42bb525e",
+    "branch": "codex/spacecraft-command-authority",
+    "tracked_files": 1913,
+    "tracked_aggregate_sha256": "5C01C78EB2EE22CDA6C3269DC58ACFBB4C443DF01BB80F58524D08CD796F762B",
+    "tag_refs": 62,
+    "tag_aggregate_sha256": "917BD05E46D9EAB193EC32EC0A1E1CE0E7E304F850E60715965ADDB0642231D7",
+    "blocker_sha256": "3DAB84C722F700945E25F6276ACDCA4874968CA39AD724EB82047D020D7056E7",
+    "status": [
+      "?? docs/engineering-evidence/bepu-local-contact-staging/staging-build-blocker.md"
+    ],
+    "ksa_dll_sha256": "A8A5164204EED962DF9D9025E99F523D9A23EE2CE6E802B18216A9DA35506D2F"
+  },
+  "after": {
+    "verified_at": "2026-09-13T22:36:18.7264895-04:00",
+    "head": "c70ccfacf3607d1342396c702682781b42bb525e",
+    "main": "c70ccfacf3607d1342396c702682781b42bb525e",
+    "origin_main": "c70ccfacf3607d1342396c702682781b42bb525e",
+    "remote_main": "c70ccfacf3607d1342396c702682781b42bb525e",
+    "branch": "codex/spacecraft-command-authority",
+    "m14_22_commit": "899f11f727205340bdd550dd65a853e253de0ed3",
+    "m14_22_tag_object": "e943a128ef425ff7427b917f2bb04056e58282f5",
+    "tracked_files": 1913,
+    "tracked_aggregate_sha256": "5C01C78EB2EE22CDA6C3269DC58ACFBB4C443DF01BB80F58524D08CD796F762B",
+    "tag_refs": 62,
+    "tag_aggregate_sha256": "917BD05E46D9EAB193EC32EC0A1E1CE0E7E304F850E60715965ADDB0642231D7",
+    "blocker_sha256": "3DAB84C722F700945E25F6276ACDCA4874968CA39AD724EB82047D020D7056E7",
+    "staged_count": 0,
+    "unstaged_tracked_count": 0,
+    "diff_check": "PASS",
+    "status": [
+      "?? docs/engineering-evidence/bepu-local-contact-staging/staging-build-blocker.md",
+      "?? docs/engineering-evidence/spacecraft-actuator-architecture/"
+    ]
+  },
+  "tracked_bytes_preserved": true,
+  "tags_preserved": true,
+  "evidence_budget_bytes": 98304,
+  "ksa": {
+    "installed_binary": "E:/Kitten Space Agency/KSA.dll",
+    "sha256": "A8A5164204EED962DF9D9025E99F523D9A23EE2CE6E802B18216A9DA35506D2F",
+    "product_version": "2026.9.7.5402+487c3f340de24c6a81037120b6d1129c045c5400",
+    "source_root": "E:/NovaCore/build/ksa-residency-reference/assembly-source/KSA/",
+    "provenance": "Existing private decompilation, installed binary matches retained qualified identity; not regenerated",
+    "prior_provenance": "docs/engineering-evidence/spacecraft-control-architecture/identity.json",
+    "prior_non_null_source_hashes_matched": 20,
+    "source_files": [
+      {
+        "path": "FlightComputer.cs",
+        "bytes": 67974,
+        "sha256": "BDBD74A15AB90973F71DBAFB32AF70875829E0D15A849BAEA1B38D9D3B89D5A2"
+      },
+      {
+        "path": "FlightComputerOutput.cs",
+        "bytes": 1393,
+        "sha256": "72EB4F7943C5083179F64DC13E4DE866DC88378CE08CC63367B17720F6A4E2EF"
+      },
+      {
+        "path": "EngineController.cs",
+        "bytes": 3326,
+        "sha256": "373B42A3A33B27B55ADCF7D0674E75E13071A4B80F01F82A300931ADAFA8458B"
+      },
+      {
+        "path": "EngineControllerState.cs",
+        "bytes": 988,
+        "sha256": "B263170216921855A124D14DEA5816CB6552D9C365D5893BD9FB0AA81075BB47"
+      },
+      {
+        "path": "Rocket.cs",
+        "bytes": 13721,
+        "sha256": "8B3C3C1D57F9D3354F2AB23711ED38B867F3CE851D44B243F4A5F1C5E8B98BA5"
+      },
+      {
+        "path": "RocketCore.cs",
+        "bytes": 7384,
+        "sha256": "A6964FB3CC4578DA560CF18658A3DD9B0800A33E111EE4212BD50ED680A83F00"
+      },
+      {
+        "path": "RocketCoreState.cs",
+        "bytes": 2497,
+        "sha256": "30D5703A93046C7AF6B674893846FB656CE6E6629B6DB2554E92AE641DEC0A72"
+      },
+      {
+        "path": "RocketCoreCommand.cs",
+        "bytes": 428,
+        "sha256": "94D0578BE4520C26C31BFB46214A2DA1B0AE1559D5C9107B983FC53AAB8169F5"
+      },
+      {
+        "path": "Combustor.cs",
+        "bytes": 6720,
+        "sha256": "508F9F42517F2746D5933FAD075C5CDC6F8B1F9F27758581DF00BDB2D664968C"
+      },
+      {
+        "path": "CombustorConfig.cs",
+        "bytes": 1100,
+        "sha256": "50C26F6E42E58249DDF960EF5E4B4C6636EBCE4CA022B33C11AB44360A2820FA"
+      },
+      {
+        "path": "SolidMotor.cs",
+        "bytes": 23623,
+        "sha256": "569B0F255E03C55579B99B4A3C58977041AB42C51BCE1BAAB673713190AF0F88"
+      },
+      {
+        "path": "RocketNozzle.cs",
+        "bytes": 12209,
+        "sha256": "B43740BBF71A9AD85FF887F2B515F94D6600D58DCBFDCEC3E0714F28AB7669DF"
+      },
+      {
+        "path": "RocketNozzleState.cs",
+        "bytes": 3399,
+        "sha256": "C28660C17CDED01733C8EB0F616D9141140C1C350F6290A921554A1894E6F224"
+      },
+      {
+        "path": "RocketNozzleFxState.cs",
+        "bytes": 641,
+        "sha256": "ED150890590651A4D2344735E4EB74D8B674D8125716E1AAD562967FF085ADBD"
+      },
+      {
+        "path": "NozzlePerformance.cs",
+        "bytes": 1684,
+        "sha256": "52F4C605BF6844DDE7A6D49225E57EF2CE7A0026540A34289C555AA37925AAC4"
+      },
+      {
+        "path": "ActiveNozzle.cs",
+        "bytes": 550,
+        "sha256": "D4B3B068A2A65F8530F4366C639AFF8FE9AFBC5DAE6BDA7763E61C7FA9CA1B68"
+      },
+      {
+        "path": "GimbalReference.cs",
+        "bytes": 1922,
+        "sha256": "262395A482BC2FDA3E9F691080F81D90BF503A02B7FB0DCED18C767175FEE27E"
+      },
+      {
+        "path": "GimbalController.cs",
+        "bytes": 2688,
+        "sha256": "1AAC49E4328E8E29D9ADA9B0913D96078A580211C3EB2C16F1747038AC0D6FCA"
+      },
+      {
+        "path": "GimbalControllerState.cs",
+        "bytes": 493,
+        "sha256": "6B810AAB1A6DE04CCF95F62FD67CAB5A9443B01BE4A3B639747A33743B1418B2"
+      },
+      {
+        "path": "Gimbal.cs",
+        "bytes": 4585,
+        "sha256": "1645A526D56EEEB4A0B92C127F11B32FE8BB2E84A3B588E2D2B780BD718ECCD7"
+      },
+      {
+        "path": "GimbalAxis.cs",
+        "bytes": 338,
+        "sha256": "D58836263812CC7C5862BA7397454D19171BB18B87127E094DC50963079B5157"
+      },
+      {
+        "path": "GimbalState.cs",
+        "bytes": 556,
+        "sha256": "28471A8830C7FE754A499898EB38148342B73C8DC36301EF17E6A0DA50834E01"
+      },
+      {
+        "path": "ThrusterController.cs",
+        "bytes": 10712,
+        "sha256": "0182353FE30AE4FC61CD49742848854D73E9A112324C3D9794277FC38528136D"
+      },
+      {
+        "path": "ThrusterControllerState.cs",
+        "bytes": 1473,
+        "sha256": "D985768B4253983BDB8EDB4D850BE6DA26A6ED6090FB2786942862EFE7B84D42"
+      },
+      {
+        "path": "ThrusterControllerGlobalState.cs",
+        "bytes": 2288,
+        "sha256": "4B0764D171E7C61C9AC37651BCAD532666A64E1BC6532B1E09A0334AEB359E6E"
+      },
+      {
+        "path": "ThrusterAuthority.cs",
+        "bytes": 1525,
+        "sha256": "1AEC720DCF4F89A8B161304C6F5063159FB1F19D8C2E1C2AD88E1E073E98CAB3"
+      },
+      {
+        "path": "VehicleUpdateState.cs",
+        "bytes": 21830,
+        "sha256": "6477C8B4EBA2917BD148FC6BB953C979DAB26445A31DAA6C622DCB597FF4F8C0"
+      },
+      {
+        "path": "VehicleUpdateData.cs",
+        "bytes": 4132,
+        "sha256": "E06EDC2A6B2901ABEC71FA9ABD6668DC8FF88B05DBA84BDF4EE2908D55ED8C0C"
+      },
+      {
+        "path": "VehicleProperties.cs",
+        "bytes": 4571,
+        "sha256": "F7677C7D1C530D960682D2C4BF5399B05F3767504F8FEAB56DF0CEEB4C8D16D6"
+      },
+      {
+        "path": "PhysicsStates.cs",
+        "bytes": 44396,
+        "sha256": "D244258CD9B1EE46E11904D8D9D28E9391C66E56CC6D1FD991AF18DDC0BD099C"
+      },
+      {
+        "path": "PhysicsBubble.cs",
+        "bytes": 105371,
+        "sha256": "E2FE83C15D846E840EC382E6823E8E3550A04E80E510FE4FCC29CAB9DBDB11D9"
+      },
+      {
+        "path": "Vehicle.cs",
+        "bytes": 248041,
+        "sha256": "2D78978FA20F37FB57599FDFF1B8501069F23AAD92DB23425B0749F10C8DA344"
+      },
+      {
+        "path": "PartTree.cs",
+        "bytes": 44447,
+        "sha256": "FCD4815CDB01B7EA1982A8CFDD71BF0D584025EB72F053F6E94BD1A4CA833822"
+      },
+      {
+        "path": "ModuleStateUpdaters.cs",
+        "bytes": 3498,
+        "sha256": "8BFA7616D38538BDE6FB5E40EC6735FFD95D5904A799D48A91551E5A711FC7A3"
+      },
+      {
+        "path": "ResourceManager.cs",
+        "bytes": 22119,
+        "sha256": "147670C46F33B04975DA022A509A2653CFEFBFA5848BE297C772253ECA18D61C"
+      },
+      {
+        "path": "Mole.cs",
+        "bytes": 4770,
+        "sha256": "A8C4953FBB57F573970F64030499D75C65A554B498B9FD51655E780EFEE131D9"
+      },
+      {
+        "path": "SequencePerformanceList.cs",
+        "bytes": 31231,
+        "sha256": "DFA3E2B4296DE0CF5EEF3C5BDFB93A52A0394C681A5A62667C90C86A912BD725"
+      }
+    ]
+  },
+  "novacore_source_files": [
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Commands/SpacecraftCommand.cs",
+      "bytes": 4927,
+      "sha256": "3A120893AD56D0E52E137AD507BE9667732759DEAD3E17F55455079E55DA5C6C"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Commands/SpacecraftCommandAuthority.cs",
+      "bytes": 1864,
+      "sha256": "80DBF95521F9BBF76C645D02F9638371E365556000700B363259A45AFE9DB641"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.SpacecraftCommands.cs",
+      "bytes": 17471,
+      "sha256": "CCBEF8005A3E882597EFDC4A8E764A8D5DCAA1C3752FD2DF88AB9EA1B43A2120"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Guidance/SpacecraftSasController.cs",
+      "bytes": 6812,
+      "sha256": "FE1F2D9B7554642D658B6235439BA33F79396F502406D6D93D75B210D5505407"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Rotation/SpacecraftRigidBodyRotationEvaluator.cs",
+      "bytes": 10192,
+      "sha256": "040B8D92BF02649EF363D70A849E4AB97EA1F81826CBEA00EB8A66DEFC5DB7B8"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftTranslationEvaluator.cs",
+      "bytes": 2361,
+      "sha256": "1991C124B73B3097E4133F4C13B5A8D7AE7481AD7642D78581C557B45480F4ED"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftTranslationState.cs",
+      "bytes": 1768,
+      "sha256": "DC563E205DEC5D66BC3330A8427FCA258E0E4FA7ABDAC87000894090E594417F"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftForceTransaction.cs",
+      "bytes": 2264,
+      "sha256": "D9F1C93FF20AA0F57DE1FFC65D6C777E05A33CB183DA005185EA08E5CC7F18A8"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Rotation/Transactions/RigidBodyTorqueReplacementTransaction.cs",
+      "bytes": 1560,
+      "sha256": "1A103CAEDEAF786EAEFC3E2B43D023538DE6AE1711211558F86969337B7360C7"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftMotionEvaluator.cs",
+      "bytes": 2052,
+      "sha256": "8018209EC9D8B20545E2D4D7B6637A005E9E33A30BED4F1EDEC629D4491D3F4F"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftAttitudeEvaluator.cs",
+      "bytes": 5063,
+      "sha256": "DB90B9959DDB66E835775261AEDFE6E590BBDE6052876955F74CFF77F0FB0BA0"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.PersistentContact.cs",
+      "bytes": 8839,
+      "sha256": "057F8CEFB885F719AD4D88CF0C64DB88628F0279FCAB441BAF3A430608E5D18F"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.ContactServicing.cs",
+      "bytes": 8181,
+      "sha256": "0881493EC1E74187652F8C23D91CD5AE400A3C4DF6EF4A05A39EA0A5BE29AF87"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs",
+      "bytes": 12025,
+      "sha256": "CA626F456C048ED6610B4FB89FD6187D3ABC30E29496B59DEFD4813D281C625C"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Publication.cs",
+      "bytes": 8895,
+      "sha256": "956ED8FFC99297C6DFBBDCAEC6A2ED8E8C7C1277FE9C1E85186B76ECEE172FD3"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Servicing.cs",
+      "bytes": 2676,
+      "sha256": "CC388F59351EAC4D0F1633C2EDBF67F92D3B8E42BD4A62B7CAB1C851A79EE8ED"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactCallbacks.cs",
+      "bytes": 3596,
+      "sha256": "80266CF2947E899DBB57A7ACC1418A8061484F88D978966B47BA09CEA6BCC1D7"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/EngineeringContactArticle.cs",
+      "bytes": 8203,
+      "sha256": "8D5BA352905624C5EC7C53DC2869B7BCE023EB95B0133DE25EE98BCB272796FD"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Time/PhysicalEventEpoch.cs",
+      "bytes": 7131,
+      "sha256": "27C36DFDBCA7ADEAC3BBC23A824EEE28F2D9CCD5D36315AE696FBE64A1EC7AA8"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Time/PhysicalEventDuration.cs",
+      "bytes": 1763,
+      "sha256": "2F5BABC36019A212FCCB6316EFB2A0C0C69C0C8D42DB1F5BBE659D424B22F7E5"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/PrivateCanonicalPropagation.cs",
+      "bytes": 20090,
+      "sha256": "44EB46F5E5BF25FE4ED8FD6462749B7828FB275500A498A279C798DF0EECBC47"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/CelestialAnalyticalScene.cs",
+      "bytes": 35080,
+      "sha256": "51123E1CBE8EA7E5E5D397A369A278CA8B0353777A5FBE5CB123D01FE17D41B9"
+    }
+  ],
+  "official_history_freshly_read": [
+    "1442679965236854785",
+    "1468433433167532104",
+    "1534637795740750058"
+  ],
+  "prior_history": "docs/engineering-evidence/spacecraft-control-architecture/history-convergence.md",
+  "independent_review": {
+    "verifier": "actuator_red_team",
+    "result": "PASS",
+    "attacks": 18,
+    "scope": "Architecture recommendation only; no implementation/physical qualification/banking"
+  },
+  "experiments": [],
+  "production_changes": [],
+  "test_changes": [],
+  "builds_or_tests_executed": [],
+  "new_disposable_artifacts": [],
+  "aggregate_algorithm": "Tracked: git ls-files order; path + SP + decimal length + SP + uppercase SHA256; LF join without final LF; UTF8 SHA256. Tags: git show-ref --tags output, LF join without final LF; UTF8 SHA256."
+}
