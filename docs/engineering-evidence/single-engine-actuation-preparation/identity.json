@@ -1,0 +1,192 @@
+{
+  "baseline": {
+    "head": "c70ccfacf3607d1342396c702682781b42bb525e",
+    "main": "c70ccfacf3607d1342396c702682781b42bb525e",
+    "origin": "c70ccfacf3607d1342396c702682781b42bb525e",
+    "remote": [
+      "c70ccfacf3607d1342396c702682781b42bb525e\trefs/heads/main"
+    ],
+    "branch": "codex/single-engine-actuation-preparation",
+    "M1422": {
+      "commit": "899f11f727205340bdd550dd65a853e253de0ed3",
+      "tag": "m14.22-canonical-spacecraft-command-authority"
+    },
+    "M1421": {
+      "commit": "b6e8fa568585706ce38c0609aeb14db4a643123e",
+      "tag": "m14.21-authored-compound-spacecraft-contact"
+    }
+  },
+  "allHistoricalTagRefs": [
+    "3ceaff9c9f1a3ac4fa5cb8fcb62d02a6d3d0dd94 refs/tags/m11b-7h1-gpu-terrain-baseline",
+    "ed1a3fbe764ea6141ebdfa988a6fdd4d167e0372 refs/tags/m12b-procedural-surface-baseline",
+    "2ca86cce99b70a56ac0a58e6f891392a09cd723b refs/tags/m12c-phase1b-stable",
+    "b65d73b15460ec356ae6e67dcb14cd8f4f8945ca refs/tags/m12d-p2s2-foundation",
+    "827cb9b7f329337bb72bce28abad5d585d837524 refs/tags/m12d-p2s3-gpu-runtime",
+    "a9f3e3172617708c3b5c0eef59d5290f91a2abec refs/tags/m12d-p2s4-canonical-terrain",
+    "6409949114f3797471b131d8005b7feac7d3fd54 refs/tags/m12d-p2s5b-production-topology",
+    "a90b024777e3b8fe8259dc7b0fa15b4a9e0f349b refs/tags/m12d-p2s5c1-interactive-billboard",
+    "37e74ad58bf53a03c35c3abeff256803dbcb4443 refs/tags/m12d-p2s5c2-moving-billboard",
+    "b04c5f3415ff4f4c5e30ca8d87515f8b610eaef4 refs/tags/m12d-p2s5c3-production-billboard-stabilization",
+    "724b779917f1cac665f6537b18edbfd70a6bfe8a refs/tags/m12d-p2s5f-new-earth-renderer",
+    "b9eb5e0628cf84f7d83c896c2fd962b426780147 refs/tags/m12d-p2s5g-surface-workload-efficiency",
+    "5d7efb2f035ccf22700b03380b4193fc82220f8a refs/tags/m12d-p2s5h-earth-route-convergence",
+    "b534d149b74b0ca854e4fb09267fc84321cc52ff refs/tags/m13.1-ncsm1-tes-hotpath",
+    "add1c94658c1de869124c75606ce0a084c77ba25 refs/tags/m13.2-ordinary-terrain-shading",
+    "bb08cba20947f863391649e68e2e4fe7035520db refs/tags/m13.3-prepared-physical-terrain",
+    "668efe2b06d2fcc907a0f46674c493b7670a2751 refs/tags/m13.4-zero-contribution-terrain-material-noise",
+    "75712e4bc990e11c3072a37299c55187cc30e0a1 refs/tags/m13.5-local-gpu-terrain-working-data",
+    "81dadf42fa9e91d8f946ebc30c3cbe3b621761fe refs/tags/m13.6-cpu-cached-terrain-residency-keys",
+    "3ccb998031e15cb1898394589c27244d55e06e24 refs/tags/m14.1-canonical-surface-point-queries",
+    "b07c511aab7109e3d240d9c7c31a444f58e069a5 refs/tags/m14.10-certified-root-contact-kinematics",
+    "8ac99fbfad4f8dd6365d696053fc3edfeea2249d refs/tags/m14.11-certified-response-proposal",
+    "98831b08e07d1bcc251f7aa900f463b98570ef04 refs/tags/m14.12-certified-preimpact-velocity",
+    "7c94f38cab9cf605c69b3b1874fee0c0091fbbb2 refs/tags/m14.13-certified-postimpact-velocity",
+    "412084a0acda2fa96c4be166e1f9f29020ffc577 refs/tags/m14.14-private-root-postimpact-state",
+    "6da3eba1410b05ea46a133bb2cf1c81425f8bf72 refs/tags/m14.15-private-canonical-propagation",
+    "a864be12e42cb98cbd38c17905833f781a579253 refs/tags/m14.16-postimpact-terrain-clearance",
+    "3f48fe441ac54458e9b413a909fae134abb112de refs/tags/m14.17-certified-continuation-publication",
+    "2faa9e568ef5f1e723f22d9635447179e4585053 refs/tags/m14.18-staged-finite-body-bepu-contact",
+    "684ed841de1432e89772282d8951f7cd8f70a625 refs/tags/m14.19-persistent-bepu-contact-publication",
+    "ae2f203b97224ff88b38b7c68902ac2d31108a91 refs/tags/m14.2-spacecraft-translational-authority",
+    "ac96f952b9c44220cd93042c0d7c6e8e07d227d5 refs/tags/m14.20-host-paced-canonical-contact-servicing",
+    "d8c13e46a9272e5ef6eb89acbe23c29709e3c55b refs/tags/m14.21-authored-compound-spacecraft-contact",
+    "e943a128ef425ff7427b917f2bb04056e58282f5 refs/tags/m14.22-canonical-spacecraft-command-authority",
+    "b9ad79c38b322c8e1e095039d5b69c035a1bcca8 refs/tags/m14.3-spacecraft-terrain-contact-observations",
+    "b198d3b381ba4a82577ba89bd5e31e6050d3a896 refs/tags/m14.4-atomic-contact-response",
+    "c2964fe4531b8e383d2d89beec2e8c055f3541a5 refs/tags/m14.5-isolated-analytical-contact-response",
+    "07adc9983252f2cabf0af9da0a1281457af606bf refs/tags/m14.6-physical-event-epochs",
+    "315da29c4eff5562f9040f7a0aedbb4e961fa877 refs/tags/m14.7-exact-event-spacecraft-motion",
+    "27a32989cef714a204d0d7ecfbd4618e53de0086 refs/tags/m14.8-exact-event-earth-relative-observation",
+    "944cb5c1f2011b5944745b210e561d0b9e8b4aaf refs/tags/m14.9-florida-monotone-contact-certification",
+    "88a108cafaab3b030c0e48568d98330dd07607b7 refs/tags/milestone-10A",
+    "5ba3f5bdb97cb7efa831b8be3a681894a0338228 refs/tags/milestone-10A-2A-2",
+    "14693e902933430df890b5a0e39170a5b247eb97 refs/tags/milestone-10A-3",
+    "52762291bf25446cd2c37594d74302eebd1dd4f7 refs/tags/milestone-10A-4",
+    "c485b158ee8e35e105aaf452afd8b8ff3890a870 refs/tags/milestone-10A-5",
+    "a9d15d10d5e077d74807bed196c3ea5e9bb03e00 refs/tags/milestone-10A-6",
+    "dfa242e0c67574b8659de1ecd1c742e1daabd89b refs/tags/milestone-10A-7",
+    "f95eed79f60201f2ffce78533fe205bee2ebbabc refs/tags/milestone-10B-1",
+    "15cd78446c87be9423aaa2067068bcb6360f57b1 refs/tags/milestone-10B-2A",
+    "209954827f6c824bc7e6d796a781d72aa6e983e8 refs/tags/milestone-10B-2B",
+    "f1ecd38f2211ee98566b35dec6d92b37a3d47b7a refs/tags/milestone-11A",
+    "16dbfd0f3e7b438101781d3d6d0642272efb7b2a refs/tags/milestone-11B-7F",
+    "4a022dbeac91708b69d5f77fb6034da06f40bbf1 refs/tags/milestone-9A-4E-3",
+    "586dc57df705a4a0f1a5812c114aa981c3e500d1 refs/tags/milestone-9A-4E-5A",
+    "3f26635d2da0e4dd5773589a4299eb82fc0c8ca8 refs/tags/milestone-9A-celestial-v3",
+    "4997e30bd40ebae011a20dd6b58c88a9caed7a6c refs/tags/v0.2.0",
+    "764637f7662420e7c3494aee8c9e748b04db6626 refs/tags/v0.2.1",
+    "18c8a6d2e78e1b8a2bfaddd88dba955bf00b1631 refs/tags/v0.3.0",
+    "435e4cab66df0ce6885c84282ca014295e2c3cdd refs/tags/v0.4.0",
+    "141f7f623220ec3f0d5a79b30cebdcb48605a76a refs/tags/v0.4.1-docs",
+    "3759e1df199ae28acfc51376fa89295730798cad refs/tags/v0.5.0"
+  ],
+  "candidate": [
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Actuation/SingleEngineActuation.cs",
+      "bytes": 5562,
+      "sha256": "BB9D97A5C7811BE3D34D6569D3C73393BBCB1B82597BDC0A0D6FCBFF9F5343ED"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.EnginePreparation.cs",
+      "bytes": 15710,
+      "sha256": "1641B0566A61174578993DDD765E44D7695E28F481B8333A3BAAC4CCF19EF55D"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.SpacecraftCommands.cs",
+      "bytes": 17797,
+      "sha256": "B248E526DE296F9F50C71545649F533D62D402BB6E0F7D19202D1011BFA34F09"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/SingleEngineActuationTests.cs",
+      "bytes": 29874,
+      "sha256": "7E8196B73828D6AFC1B274BBCBB703F1E34A42D67BA4C639071C89BD4AD2A11A"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/SingleEngineActuationTests.Measurements.cs",
+      "bytes": 7973,
+      "sha256": "BCF415695FBFE296C85E159913413EE2FC5CA93E194B781D6D57F1D261897D7A"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/EngineeringContactArticleTests.EngineProposals.cs",
+      "bytes": 6176,
+      "sha256": "FCA115E4036FCCD0B89C5F961B8FEAC7747E7262680A969C6065B6BD58A6B6E1"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "bytes": 254805,
+      "sha256": "38AE5D0F7BF1E56F323E17027287151DC35B128FE61ED7344D988F75488BADE7"
+    }
+  ],
+  "changedTrackedBefore": [
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.SpacecraftCommands.cs",
+      "bytes": 17471,
+      "sha256": "CCBEF8005A3E882597EFDC4A8E764A8D5DCAA1C3752FD2DF88AB9EA1B43A2120"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "bytes": 254011,
+      "sha256": "C32A85969C8994AB632D1DE473717C92B75F0E265ADE441A2DBBE90B6952E37F"
+    }
+  ],
+  "preservation": {
+    "tagsUnchanged": true,
+    "allPreexistingUntrackedUnchanged": true,
+    "protectedTrackedUnchanged": 1911,
+    "expectedTrackedChanges": 2,
+    "staged": 0,
+    "untrackedBefore": [
+      {
+        "path": "docs/engineering-evidence/bepu-local-contact-staging/staging-build-blocker.md",
+        "bytes": 5366,
+        "sha256": "3DAB84C722F700945E25F6276ACDCA4874968CA39AD724EB82047D020D7056E7"
+      },
+      {
+        "path": "docs/engineering-evidence/spacecraft-actuator-architecture/README.md",
+        "bytes": 4188,
+        "sha256": "8BB997D91B0ADDAA2EB7062A1845E17281666E6D495B56CF66028967CEA7F786"
+      },
+      {
+        "path": "docs/engineering-evidence/spacecraft-actuator-architecture/actuator-authority-contract.md",
+        "bytes": 21478,
+        "sha256": "425584C4EA25944FD3B885CD5F8678E363F30A43B691D9932000AF57E2217C7E"
+      },
+      {
+        "path": "docs/engineering-evidence/spacecraft-actuator-architecture/architecture-candidates.md",
+        "bytes": 11433,
+        "sha256": "9600D91EB670E7EA9CE854F2D0822B209E988789D5BEB8448097FE16075D2852"
+      },
+      {
+        "path": "docs/engineering-evidence/spacecraft-actuator-architecture/current-novacore-map.md",
+        "bytes": 7815,
+        "sha256": "A03D711F3A2223F5C8506949A4897C2AA5BAB6C5FD4B2D34AD69E3416661F9E3"
+      },
+      {
+        "path": "docs/engineering-evidence/spacecraft-actuator-architecture/identity.json",
+        "bytes": 14230,
+        "sha256": "357614BA6EE800002A6B414A616455D3C7354372A440B52BB56231DADFCF259C"
+      },
+      {
+        "path": "docs/engineering-evidence/spacecraft-actuator-architecture/ksa-actuator-map.md",
+        "bytes": 9582,
+        "sha256": "9217B2A8E8E85644E2D67D5724F89946971B64C2AE63F3861D8EF611607394B6"
+      },
+      {
+        "path": "docs/engineering-evidence/spacecraft-actuator-architecture/ksa-history-convergence.md",
+        "bytes": 7857,
+        "sha256": "372B7179006A0134F2051FF7C07425B0B1C2662AE98D47707EDC6F4AB3E735B4"
+      },
+      {
+        "path": "docs/engineering-evidence/spacecraft-actuator-architecture/verification.md",
+        "bytes": 7963,
+        "sha256": "770929BAD3C79B00A0FEBCB6DDA1D65BC1D1F27A97F1F8C3E5BB6FD1FFAC0E1B"
+      }
+    ]
+  },
+  "tooling": {
+    "sdk": "10.0.303",
+    "installedNetRuntime": "10.0.12",
+    "runtimeConfigurationChange": false
+  },
+  "status": "UNBANKED; no staging/commit/tag/push"
+}

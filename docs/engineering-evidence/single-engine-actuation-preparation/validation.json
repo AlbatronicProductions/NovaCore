@@ -1,0 +1,476 @@
+{
+  "scope": "single-engine preparation only; no physical application",
+  "plan": {
+    "builds": [
+      "Debug",
+      "Release"
+    ],
+    "focused": [
+      "--engine-preparation-cheap",
+      "--engine-preparation-allocation",
+      "--engine-preparation-article",
+      "--spacecraft-command-cheap",
+      "--spacecraft-command-schedules",
+      "--spacecraft-command-allocation"
+    ],
+    "fullSimulation": {
+      "Debug": 1,
+      "Release": 1
+    },
+    "other": [
+      "ReferenceFrames",
+      "Precision",
+      "BepuDependency"
+    ],
+    "performance": {
+      "configuration": "Release",
+      "processes": 1,
+      "warm": 256,
+      "samples": 4096
+    },
+    "retry": false
+  },
+  "builds": {
+    "Debug": {
+      "result": "PASS",
+      "warnings": 0,
+      "errors": 0
+    },
+    "Release": {
+      "result": "PASS",
+      "warnings": 0,
+      "errors": 0
+    }
+  },
+  "focused": [
+    {
+      "configuration": "Debug",
+      "gate": "--engine-preparation-cheap",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Debug",
+      "gate": "--engine-preparation-allocation",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Debug",
+      "gate": "--engine-preparation-article",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Debug",
+      "gate": "--spacecraft-command-cheap",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Debug",
+      "gate": "--spacecraft-command-schedules",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Debug",
+      "gate": "--spacecraft-command-allocation",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Release",
+      "gate": "--engine-preparation-cheap",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Release",
+      "gate": "--engine-preparation-allocation",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Release",
+      "gate": "--engine-preparation-article",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Release",
+      "gate": "--spacecraft-command-cheap",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Release",
+      "gate": "--spacecraft-command-schedules",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Release",
+      "gate": "--spacecraft-command-allocation",
+      "exitCode": 0
+    }
+  ],
+  "fullSimulation": [
+    {
+      "configuration": "Debug",
+      "exit": 0,
+      "registered": 63,
+      "passed": 63,
+      "missing": []
+    },
+    {
+      "configuration": "Release",
+      "exit": 0,
+      "registered": 63,
+      "passed": 63,
+      "missing": []
+    }
+  ],
+  "otherRegressions": [
+    {
+      "configuration": "Debug",
+      "project": "ReferenceFrames",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Debug",
+      "project": "Precision",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Debug",
+      "project": "BepuDependency",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Release",
+      "project": "ReferenceFrames",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Release",
+      "project": "Precision",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Release",
+      "project": "BepuDependency",
+      "exitCode": 0
+    }
+  ],
+  "allocation": [
+    {
+      "configuration": "Debug",
+      "scope": "--engine-preparation-allocation",
+      "gates": [
+        {
+          "gate": "engine-complete",
+          "bytes": "0",
+          "entry": "PASS",
+          "exit": "PASS"
+        },
+        {
+          "gate": "engine-no-edge-preparation",
+          "bytes": "0",
+          "entry": "PASS",
+          "exit": "PASS"
+        },
+        {
+          "gate": "engine-transition-capture",
+          "bytes": "0",
+          "entry": "PASS",
+          "exit": "PASS"
+        },
+        {
+          "gate": "engine-preparation",
+          "bytes": "0",
+          "entry": "PASS",
+          "exit": "PASS"
+        },
+        {
+          "gate": "engine-preview",
+          "bytes": "0",
+          "entry": "PASS",
+          "exit": "PASS"
+        },
+        {
+          "gate": "engine-duplicate-refusal",
+          "bytes": "0",
+          "entry": "PASS",
+          "exit": "PASS"
+        },
+        {
+          "gate": "positive-control",
+          "bytes": "152",
+          "entry": "PASS",
+          "exit": "PASS"
+        }
+      ]
+    },
+    {
+      "configuration": "Debug",
+      "scope": "--spacecraft-command-allocation",
+      "gates": [
+        {
+          "gate": "command-complete",
+          "bytes": "0",
+          "entry": "PASS",
+          "exit": "PASS"
+        },
+        {
+          "gate": "command-admission",
+          "bytes": "0",
+          "entry": "PASS",
+          "exit": "PASS"
+        },
+        {
+          "gate": "command-commit",
+          "bytes": "0",
+          "entry": "PASS",
+          "exit": "PASS"
+        },
+        {
+          "gate": "command-no-work-observation-consumption",
+          "bytes": "0",
+          "entry": "PASS",
+          "exit": "PASS"
+        },
+        {
+          "gate": "command-pending-poll",
+          "bytes": "0",
+          "entry": "PASS",
+          "exit": "PASS"
+        },
+        {
+          "gate": "command-funded-backlog-consumption",
+          "bytes": "0",
+          "entry": "PASS",
+          "exit": "PASS"
+        },
+        {
+          "gate": "positive-control",
+          "bytes": "152",
+          "entry": "PASS",
+          "exit": "PASS"
+        }
+      ]
+    },
+    {
+      "configuration": "Release",
+      "scope": "--engine-preparation-allocation",
+      "gates": [
+        {
+          "gate": "engine-complete",
+          "bytes": "0",
+          "entry": "PASS",
+          "exit": "PASS"
+        },
+        {
+          "gate": "engine-no-edge-preparation",
+          "bytes": "0",
+          "entry": "PASS",
+          "exit": "PASS"
+        },
+        {
+          "gate": "engine-transition-capture",
+          "bytes": "0",
+          "entry": "PASS",
+          "exit": "PASS"
+        },
+        {
+          "gate": "engine-preparation",
+          "bytes": "0",
+          "entry": "PASS",
+          "exit": "PASS"
+        },
+        {
+          "gate": "engine-preview",
+          "bytes": "0",
+          "entry": "PASS",
+          "exit": "PASS"
+        },
+        {
+          "gate": "engine-duplicate-refusal",
+          "bytes": "0",
+          "entry": "PASS",
+          "exit": "PASS"
+        },
+        {
+          "gate": "positive-control",
+          "bytes": "152",
+          "entry": "PASS",
+          "exit": "PASS"
+        }
+      ]
+    },
+    {
+      "configuration": "Release",
+      "scope": "--spacecraft-command-allocation",
+      "gates": [
+        {
+          "gate": "command-complete",
+          "bytes": "0",
+          "entry": "PASS",
+          "exit": "PASS"
+        },
+        {
+          "gate": "command-admission",
+          "bytes": "0",
+          "entry": "PASS",
+          "exit": "PASS"
+        },
+        {
+          "gate": "command-commit",
+          "bytes": "0",
+          "entry": "PASS",
+          "exit": "PASS"
+        },
+        {
+          "gate": "command-no-work-observation-consumption",
+          "bytes": "0",
+          "entry": "PASS",
+          "exit": "PASS"
+        },
+        {
+          "gate": "command-pending-poll",
+          "bytes": "0",
+          "entry": "PASS",
+          "exit": "PASS"
+        },
+        {
+          "gate": "command-funded-backlog-consumption",
+          "bytes": "0",
+          "entry": "PASS",
+          "exit": "PASS"
+        },
+        {
+          "gate": "positive-control",
+          "bytes": "152",
+          "entry": "PASS",
+          "exit": "PASS"
+        }
+      ]
+    }
+  ],
+  "article": [
+    {
+      "configuration": "Debug",
+      "cases": [
+        {
+          "tilted": false,
+          "moving": false,
+          "exactEndpointMatches": 1200,
+          "intervals": 1200,
+          "supported": 600,
+          "peakPenetrationMetres": 0.005819714882528193,
+          "peakStep": 34,
+          "shortIntervals": 400,
+          "longIntervals": 800,
+          "ticks": 20000000,
+          "stateRevision": 1200,
+          "history": 1200
+        },
+        {
+          "tilted": true,
+          "moving": false,
+          "exactEndpointMatches": 1200,
+          "intervals": 1200,
+          "supported": 600,
+          "peakPenetrationMetres": 0.006945546380241474,
+          "peakStep": 35,
+          "shortIntervals": 400,
+          "longIntervals": 800,
+          "ticks": 20000000,
+          "stateRevision": 1200,
+          "history": 1200
+        },
+        {
+          "tilted": true,
+          "moving": true,
+          "exactEndpointMatches": 1200,
+          "intervals": 1200,
+          "supported": 600,
+          "peakPenetrationMetres": 0.006945746950922316,
+          "peakStep": 35,
+          "shortIntervals": 400,
+          "longIntervals": 800,
+          "ticks": 20000000,
+          "stateRevision": 1200,
+          "history": 1200
+        }
+      ]
+    },
+    {
+      "configuration": "Release",
+      "cases": [
+        {
+          "tilted": false,
+          "moving": false,
+          "exactEndpointMatches": 1200,
+          "intervals": 1200,
+          "supported": 600,
+          "peakPenetrationMetres": 0.005819714882528193,
+          "peakStep": 34,
+          "shortIntervals": 400,
+          "longIntervals": 800,
+          "ticks": 20000000,
+          "stateRevision": 1200,
+          "history": 1200
+        },
+        {
+          "tilted": true,
+          "moving": false,
+          "exactEndpointMatches": 1200,
+          "intervals": 1200,
+          "supported": 600,
+          "peakPenetrationMetres": 0.006945546380241474,
+          "peakStep": 35,
+          "shortIntervals": 400,
+          "longIntervals": 800,
+          "ticks": 20000000,
+          "stateRevision": 1200,
+          "history": 1200
+        },
+        {
+          "tilted": true,
+          "moving": true,
+          "exactEndpointMatches": 1200,
+          "intervals": 1200,
+          "supported": 600,
+          "peakPenetrationMetres": 0.006945746950922316,
+          "peakStep": 35,
+          "shortIntervals": 400,
+          "longIntervals": 800,
+          "ticks": 20000000,
+          "stateRevision": 1200,
+          "history": 1200
+        }
+      ]
+    }
+  ],
+  "performance": {
+    "configuration": "Release",
+    "processes": 1,
+    "warm": 256,
+    "samples": 4096,
+    "medianMilliseconds": 0.0023,
+    "p95Milliseconds": 0.0024,
+    "p99Milliseconds": 0.0024,
+    "maxMilliseconds": 0.005,
+    "scope": "Captured transition consumption + proposal preparation + preview copy, including cheap result/command observation checks. Input admission/commit, boundary closure, explicit retirement and harness clock advancement outside timing.",
+    "runtime": "ordinary; no no-GC timing boundary; no profiler/tiering override",
+    "hardCeiling": "none requested"
+  },
+  "storage": {
+    "retainedGraphBytes": 1128,
+    "objects": 5,
+    "engineReferenceBytes": 8,
+    "retainedIncludingReferenceBytes": 1136,
+    "edgeCapacity": 7,
+    "edgePayloadBytes": 224,
+    "definitionValueBytes": 88,
+    "previewValueBytes": 328,
+    "unboundedHistoryBytes": 0,
+    "method": "Checked isolated cold allocation counter after warm binding; all five allocations remain retained: definition, authority, storage (including copied preview/source values), seal, edge array. Existing canonical/command fixture excluded. Engine reference accounted separately; object alignment may determine marginal engine object size."
+  },
+  "failures": {
+    "qualificationGates": 0,
+    "retries": 0,
+    "developmentCompile": "One CS0019 in newly written test receipt comparison corrected to value Equals before qualification. No production defect involved."
+  },
+  "redTeam": "Independent source/test PASS after one bounded future-segment applicability correction; execution results qualified by lead."
+}

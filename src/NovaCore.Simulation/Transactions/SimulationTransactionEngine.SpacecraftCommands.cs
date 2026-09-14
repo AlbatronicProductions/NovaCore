@@ -118,6 +118,7 @@ internal sealed partial class SimulationTransactionEngine
             if (_commands!.Revoked) return new(SpacecraftCommandStatus.IngressRevoked);
             if (!revoke && !ValidCommand(intent, authority.RootFrame)) return new(SpacecraftCommandStatus.InvalidInput);
             if (_commands!.Count >= (revoke ? _commands!.Pending.Length : SpacecraftCommandAuthority.OrdinaryCapacity)) return new(SpacecraftCommandStatus.Capacity);
+            if (!CanReserveEngineTransition(intent.Kind)) return new(SpacecraftCommandStatus.Capacity);
             if (!_clock.TryGetPendingSimulationDebtTarget(out var horizon)) return new(SpacecraftCommandStatus.ArithmeticOverflow);
             if (!authority.TryBoundaryAtOrAfter(horizon, _commands!.ClosedThrough + 1, out _, out var epoch)) return new(SpacecraftCommandStatus.SourceExhausted);
             if (HasContactProofBoundaryThrough(epoch)) return new(SpacecraftCommandStatus.PendingEvent);
@@ -188,12 +189,14 @@ internal sealed partial class SimulationTransactionEngine
             var changed = after != before;
             if (changed && _commands!.Revision.Value == ulong.MaxValue) return new(SpacecraftCommandStatus.RevisionOverflow);
             var revision = changed ? new CommandRevision(_commands!.Revision.Value + 1) : _commands!.Revision;
+            if (!CanCaptureEngineTransition(intent.Kind)) return new(SpacecraftCommandStatus.Capacity);
             if (refusePreparedForTest) return new(SpacecraftCommandStatus.PreparationRefused);
             status = ValidateCommandAuthority(authority); if (status != SpacecraftCommandStatus.Accepted) return new(status);
             // Fixed bounded commit: all expected refusals precede the first write. No physics/clock/revision/history writes.
             if (changed) _commands!.State = after; // A no-op retains original bits, including signed zero.
             _commands!.Revision = revision; _commands!.LastConsumedSequence = pending.Sequence;
             if (changed) _commands!.LastTransitionEpoch = current;
+            CaptureEngineTransition(pending, revision); // Optional bounded owner-private handoff; preflighted above.
             for (var i = 1; i < _commands!.Count; i++) _commands!.Pending[i - 1] = _commands!.Pending[i];
             _commands!.Pending[--_commands!.Count] = default;
             return new(changed ? SpacecraftCommandStatus.Committed : SpacecraftCommandStatus.NoChange, pending.Sequence, current, _commands!.Copy());

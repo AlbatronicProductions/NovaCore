@@ -15,6 +15,10 @@ using NovaCore.Core;
 using NovaCore.Core.ReferenceFrames;
 using System.Diagnostics;
 
+if (args.Contains("--engine-preparation-cheap", StringComparer.Ordinal)) { SingleEngineActuationTests.Cheap(); return; }
+if (args.Contains("--engine-preparation-allocation", StringComparer.Ordinal)) { SingleEngineActuationTests.Allocation(); return; }
+if (args.Contains("--engine-preparation-cost", StringComparer.Ordinal)) { SingleEngineActuationTests.Cost(); return; }
+if (args.Contains("--engine-preparation-article", StringComparer.Ordinal)) { EngineeringContactArticleTests.EngineProposalNonActuation(); return; }
 if (args.Contains("--spacecraft-command-cheap", StringComparer.Ordinal)) { SpacecraftCommandTests.Cheap(); return; }
 if (args.Contains("--spacecraft-command-schedules", StringComparer.Ordinal)) { SpacecraftCommandTests.Schedules(); return; }
 if (args.Contains("--spacecraft-command-article", StringComparer.Ordinal)) { EngineeringContactArticleTests.CommandNonActuation(); return; }
@@ -145,6 +149,9 @@ var tests = new (string Name, Action Test)[]
     ("Spacecraft command accepted-stream replay", SpacecraftCommandTests.Schedules),
     ("Spacecraft command non-actuating article", EngineeringContactArticleTests.CommandNonActuation),
     ("Spacecraft command allocation", SpacecraftCommandTests.Allocation),
+    ("Single-engine actuation preparation", SingleEngineActuationTests.Cheap),
+    ("Single-engine actuation allocation", SingleEngineActuationTests.Allocation),
+    ("Single-engine proposal article non-actuation", EngineeringContactArticleTests.EngineProposalNonActuation),
 };
 foreach (var (name, test) in tests) { test(); Console.WriteLine($"PASS {name}"); }
 
