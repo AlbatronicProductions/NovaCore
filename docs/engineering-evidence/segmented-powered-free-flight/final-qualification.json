@@ -1,0 +1,396 @@
+{
+  "schema": 1,
+  "ticket": "Resume final qualification after non-reproducible allocation anomaly",
+  "status": "PASS — READY FOR PROJECT CONTROL ACCEPTANCE",
+  "candidate_banked": false,
+  "milestone_assigned": false,
+  "integrity_preflight": {
+    "utc": "2026-09-14T14:28:10.3249513Z",
+    "branch": "codex/segmented-powered-free-flight",
+    "head": "89a432ce3b96a5dcb0751cfdc26bfd6776c883a1",
+    "main": "89a432ce3b96a5dcb0751cfdc26bfd6776c883a1",
+    "origin_main": "89a432ce3b96a5dcb0751cfdc26bfd6776c883a1",
+    "remote_main": "89a432ce3b96a5dcb0751cfdc26bfd6776c883a1",
+    "recorded_fingerprints_checked": 46,
+    "mismatches": [],
+    "staged": [],
+    "diff_check": "PASS",
+    "historical_tags": 64,
+    "historical_tags_unchanged": true,
+    "architecture_files": 11,
+    "architecture_unchanged": true
+  },
+  "manual_release_identity": [
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/NovaCore.Triangle.exe",
+      "sha256": "6F721ABC94E12ADE8CDE5E9EBBE2CEB112C517E31E7FCCDCE97F54E4EAB81F92",
+      "bytes": 162304
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/NovaCore.Triangle.dll",
+      "sha256": "705B749368FFB12FBA579DB637ED5E9295E6BBA9E0721622A4AFE14E19DD4F67",
+      "bytes": 263168
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/NovaCore.Simulation.dll",
+      "sha256": "3CB3491662FA24E91E304E50349EDD059CA5D2D5E57AD9264D553038455F65E2",
+      "bytes": 4253184
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/NovaCore.Triangle.runtimeconfig.json",
+      "sha256": "C230A317A54DD960BCBEB5F347F52E18DC665A26F7EFDA2159FCED9A5AC7E097",
+      "bytes": 342
+    }
+  ],
+  "manual": {
+    "scenario": "powered-free-flight",
+    "launch_script": "launch.ps1",
+    "result": "PASS",
+    "observer": "user / Project Control",
+    "acceptance_date": "2026-09-14",
+    "timezone": "America/New_York",
+    "exact_user_response": "PASS",
+    "response_scope": "The manual question enumerated acceleration, requested versus actual throttle/state, fuel decrease, exhaustion/coast, camera independence, final hold, readable/truthful status and no visible authority mismatch.",
+    "outcomes": {
+      "acceleration": "PASS",
+      "requested_actual_distinction": "PASS — user acceptance",
+      "fuel_decrease": "PASS",
+      "exhaustion_then_coast": "PASS",
+      "camera_independence": "PASS",
+      "final_hold": "PASS",
+      "status_readability_truthfulness": "PASS",
+      "no_visible_authority_split": "PASS"
+    },
+    "process": {
+      "pid": 58676,
+      "exit_code": 0
+    },
+    "canonical_end": {
+      "frontier": 480,
+      "ticks": 8000000,
+      "debt_ticks": 3995,
+      "state_revision": 480,
+      "history": 480,
+      "activity": "EnabledNoFeed",
+      "displayed_fuel_grams": 0,
+      "displayed_velocity_x_mps": 4.998
+    },
+    "logs": [
+      {
+        "path": "build/segmented-powered-free-flight-live/live.stdout.txt",
+        "bytes": 24066,
+        "sha256": "CDD20BE98BB87BD16A488091D12090F08A2D0EA846F9AF8BF29CB4191109D1D4"
+      },
+      {
+        "path": "build/segmented-powered-free-flight-live/live.stderr.txt",
+        "bytes": 0,
+        "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+      }
+    ],
+    "existing_telemetry_report_only": {
+      "cold_preparation_ms": 19.3077,
+      "whole_callback_interval_samples": 1441,
+      "median_ms": 5.5555,
+      "p95_ms": 5.7121,
+      "p99_ms": 6.0194,
+      "max_ms": 14.3217,
+      "note": "Includes presentation/driver/host scheduling. Manual acceptance was authority/physical agreement, not a performance test. No new timing campaign or optimization."
+    }
+  },
+  "final_independent_verifier": {
+    "status": "PASS",
+    "mode": "one independent read-only review after manual PASS",
+    "record": "final-verifier.md",
+    "responsibilities": [
+      {
+        "number": 1,
+        "responsibility": "Physical canonical thrust",
+        "result": "PASS"
+      },
+      {
+        "number": 2,
+        "responsibility": "Changing stage mass",
+        "result": "PASS"
+      },
+      {
+        "number": 3,
+        "responsibility": "Atomic resource/motion",
+        "result": "PASS"
+      },
+      {
+        "number": 4,
+        "responsibility": "Actual-state synchronization",
+        "result": "PASS"
+      },
+      {
+        "number": 5,
+        "responsibility": "Tiny exact events",
+        "result": "PASS"
+      },
+      {
+        "number": 6,
+        "responsibility": "Stage orientation",
+        "result": "PASS"
+      },
+      {
+        "number": 7,
+        "responsibility": "Lease replay",
+        "result": "PASS"
+      },
+      {
+        "number": 8,
+        "responsibility": "Postcommit invalidation",
+        "result": "PASS"
+      },
+      {
+        "number": 9,
+        "responsibility": "Endpoint-only validity",
+        "result": "PASS"
+      },
+      {
+        "number": 10,
+        "responsibility": "Host histories",
+        "result": "PASS"
+      },
+      {
+        "number": 11,
+        "responsibility": "Allocation evidence",
+        "result": "PASS"
+      },
+      {
+        "number": 12,
+        "responsibility": "Original anomaly",
+        "result": "PASS"
+      },
+      {
+        "number": 13,
+        "responsibility": "Copied canonical presentation",
+        "result": "PASS"
+      },
+      {
+        "number": 14,
+        "responsibility": "Free-flight-only scope",
+        "result": "PASS"
+      },
+      {
+        "number": 15,
+        "responsibility": "M14.21-M14.24 protection",
+        "result": "PASS"
+      }
+    ],
+    "concrete_defects": 0
+  },
+  "allocation_anomaly": {
+    "original_clock_bytes": 12336,
+    "expected_bytes": 0,
+    "subsequent_authorized_full_Release_zero_byte_passes": 9,
+    "each_groups": 67,
+    "cause": "UNRESOLVED",
+    "correction": "NONE",
+    "Project_Control_disposition": "Bounded stability evidence sufficient to resume remaining qualification; anomaly not fixed."
+  },
+  "source_and_test_changes_this_ticket": [],
+  "performance_repeated": false,
+  "allocation_campaign_repeated": false,
+  "manual_acceptance_is_performance_test": false,
+  "lead_judgment": "PASS",
+  "final_integrity": {
+    "checked": 50,
+    "mismatches": [],
+    "protected": [
+      {
+        "milestone": "M14.21",
+        "tag": "m14.21-authored-compound-spacecraft-contact",
+        "tag_object": "d8c13e46a9272e5ef6eb89acbe23c29709e3c55b",
+        "commit": "b6e8fa568585706ce38c0609aeb14db4a643123e",
+        "unchanged": true
+      },
+      {
+        "milestone": "M14.22",
+        "tag": "m14.22-canonical-spacecraft-command-authority",
+        "tag_object": "e943a128ef425ff7427b917f2bb04056e58282f5",
+        "commit": "899f11f727205340bdd550dd65a853e253de0ed3",
+        "unchanged": true
+      },
+      {
+        "milestone": "M14.23",
+        "tag": "m14.23-prepared-single-engine-actuation",
+        "tag_object": "cd22cc96d88d2b6cf3ca48740ad41baecbbe7c9e",
+        "commit": "6c9830237bc29bbd3c9cf5f4644b6409c32eaa9b",
+        "unchanged": true
+      },
+      {
+        "milestone": "M14.24",
+        "tag": "m14.24-exact-finite-propellant-segmentation",
+        "tag_object": "50aa4e984e6646a9334e4e87356a43ffdf138e73",
+        "commit": "89a432ce3b96a5dcb0751cfdc26bfd6776c883a1",
+        "unchanged": true
+      }
+    ],
+    "refs": [
+      "89a432ce3b96a5dcb0751cfdc26bfd6776c883a1",
+      "89a432ce3b96a5dcb0751cfdc26bfd6776c883a1",
+      "89a432ce3b96a5dcb0751cfdc26bfd6776c883a1"
+    ],
+    "branch": "codex/segmented-powered-free-flight",
+    "staged": [],
+    "process_still_running": []
+  },
+  "retained_performance_ms": [
+    {
+      "process": 1,
+      "median": 0.0423,
+      "p95": 0.184,
+      "p99": 0.1905,
+      "max": 0.2212
+    },
+    {
+      "process": 2,
+      "median": 0.0421,
+      "p95": 0.182,
+      "p99": 0.1909,
+      "max": 0.2213
+    },
+    {
+      "process": 3,
+      "median": 0.043,
+      "p95": 0.1866,
+      "p99": 0.1939,
+      "max": 0.222
+    }
+  ],
+  "required_disclosure": "One original full Release process reported 12,336 warmed bytes in the pre-existing clock allocation gate. The failure did not reproduce in the immediately authorized follow-up or in eight additional predeclared fresh full Release processes; all nine later processes reported zero bytes and 67/67 groups. No correction was made and the original cause remains unknown.",
+  "next_action": "STOP FOR PROJECT CONTROL. Do not bank, tag, assign a milestone, begin powered contact or begin Florida launch.",
+  "disposable_cleanup": {
+    "status": "TEMPORARY MANUAL LOGS RETAINED — MANUAL CLEANUP REQUIRED",
+    "attempts": 1,
+    "executed": false,
+    "reason": "Automatic approval review rejected the exact two-file deletion command as blocked by policy before execution; no retry or workaround.",
+    "removed_files": 0,
+    "removed_bytes": 0,
+    "remaining_files": 2,
+    "remaining_bytes": 24066,
+    "paths": [
+      "build/segmented-powered-free-flight-live/live.stdout.txt",
+      "build/segmented-powered-free-flight-live/live.stderr.txt"
+    ],
+    "reproduction_preserved": true
+  },
+  "closeout_integrity": {
+    "utc": "2026-09-14T14:41:12.2593270Z",
+    "branch": "codex/segmented-powered-free-flight",
+    "refs": [
+      "89a432ce3b96a5dcb0751cfdc26bfd6776c883a1",
+      "89a432ce3b96a5dcb0751cfdc26bfd6776c883a1",
+      "89a432ce3b96a5dcb0751cfdc26bfd6776c883a1"
+    ],
+    "remote_main": "89a432ce3b96a5dcb0751cfdc26bfd6776c883a1",
+    "fingerprints_checked": 50,
+    "mismatches": [],
+    "input_tree_files": 1974,
+    "input_tree_sha256": "092C10C32BC0D219F0D6A1F080FF6D89EBDA53294608AE009D3286F995C59144",
+    "protected": [
+      {
+        "milestone": "M14.21",
+        "tag": "m14.21-authored-compound-spacecraft-contact",
+        "tag_object": "d8c13e46a9272e5ef6eb89acbe23c29709e3c55b",
+        "commit": "b6e8fa568585706ce38c0609aeb14db4a643123e"
+      },
+      {
+        "milestone": "M14.22",
+        "tag": "m14.22-canonical-spacecraft-command-authority",
+        "tag_object": "e943a128ef425ff7427b917f2bb04056e58282f5",
+        "commit": "899f11f727205340bdd550dd65a853e253de0ed3"
+      },
+      {
+        "milestone": "M14.23",
+        "tag": "m14.23-prepared-single-engine-actuation",
+        "tag_object": "cd22cc96d88d2b6cf3ca48740ad41baecbbe7c9e",
+        "commit": "6c9830237bc29bbd3c9cf5f4644b6409c32eaa9b"
+      },
+      {
+        "milestone": "M14.24",
+        "tag": "m14.24-exact-finite-propellant-segmentation",
+        "tag_object": "50aa4e984e6646a9334e4e87356a43ffdf138e73",
+        "commit": "89a432ce3b96a5dcb0751cfdc26bfd6776c883a1"
+      }
+    ],
+    "status_short": [
+      " M samples/NovaCore.Triangle/Program.cs",
+      " M samples/NovaCore.Triangle/SampleOptions.cs",
+      " M src/NovaCore.Simulation/Spacecraft/ReferenceFrames/SpacecraftReferenceFrameEvaluator.cs",
+      " M src/NovaCore.Simulation/Spacecraft/Resources/FinitePropellantSegmentation.cs",
+      " M src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.cs",
+      " M src/NovaCore.Simulation/Spacecraft/SpacecraftStateView.cs",
+      " M src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftMotionEvaluator.cs",
+      " M src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftPhysicalEventMotionEvaluator.cs",
+      " M src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftTranslationState.cs",
+      " M src/NovaCore.Simulation/Transactions/SimulationState.cs",
+      " M src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.EnginePreparation.cs",
+      " M src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Propellant.cs",
+      " M src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.SpacecraftCommands.cs",
+      " M tests/NovaCore.Graphics.Tests/NovaCore.Graphics.Tests.csproj",
+      " M tests/NovaCore.Graphics.Tests/Program.cs",
+      " M tests/NovaCore.Launcher.Tests/Program.cs",
+      " M tests/NovaCore.Simulation.Tests/FinitePropellantTests.cs",
+      " M tests/NovaCore.Simulation.Tests/Program.cs",
+      " M tools/NovaCore.Launcher/LaunchCommandBuilder.cs",
+      " M tools/NovaCore.Launcher/LaunchConfiguration.cs",
+      " M tools/NovaCore.Launcher/ScenarioCatalog.cs",
+      "?? docs/engineering-evidence/powered-dynamics-architecture/",
+      "?? docs/engineering-evidence/segmented-powered-free-flight/",
+      "?? samples/NovaCore.Triangle/PoweredFlightDevelopmentScene.cs",
+      "?? src/NovaCore.Simulation/Spacecraft/Actuation/PoweredFlightEvaluator.cs",
+      "?? src/NovaCore.Simulation/Spacecraft/Actuation/PoweredFlightNumerics.cs",
+      "?? src/NovaCore.Simulation/Spacecraft/Actuation/PoweredFreeFlight.cs",
+      "?? src/NovaCore.Simulation/Spacecraft/SpacecraftAppliedEndpoint.cs",
+      "?? src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.PoweredFreeFlight.cs",
+      "?? tests/NovaCore.Graphics.Tests/PoweredFlightPresentationTests.cs",
+      "?? tests/NovaCore.Simulation.Tests/PoweredFreeFlightTests.Authority.cs",
+      "?? tests/NovaCore.Simulation.Tests/PoweredFreeFlightTests.Physics.cs",
+      "?? tests/NovaCore.Simulation.Tests/PoweredFreeFlightTests.Qualification.cs",
+      "?? tests/NovaCore.Simulation.Tests/PoweredFreeFlightTests.cs"
+    ],
+    "staged": [],
+    "unstaged_tracked": [
+      "samples/NovaCore.Triangle/Program.cs",
+      "samples/NovaCore.Triangle/SampleOptions.cs",
+      "src/NovaCore.Simulation/Spacecraft/ReferenceFrames/SpacecraftReferenceFrameEvaluator.cs",
+      "src/NovaCore.Simulation/Spacecraft/Resources/FinitePropellantSegmentation.cs",
+      "src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.cs",
+      "src/NovaCore.Simulation/Spacecraft/SpacecraftStateView.cs",
+      "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftMotionEvaluator.cs",
+      "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftPhysicalEventMotionEvaluator.cs",
+      "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftTranslationState.cs",
+      "src/NovaCore.Simulation/Transactions/SimulationState.cs",
+      "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.EnginePreparation.cs",
+      "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Propellant.cs",
+      "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.SpacecraftCommands.cs",
+      "tests/NovaCore.Graphics.Tests/NovaCore.Graphics.Tests.csproj",
+      "tests/NovaCore.Graphics.Tests/Program.cs",
+      "tests/NovaCore.Launcher.Tests/Program.cs",
+      "tests/NovaCore.Simulation.Tests/FinitePropellantTests.cs",
+      "tests/NovaCore.Simulation.Tests/Program.cs",
+      "tools/NovaCore.Launcher/LaunchCommandBuilder.cs",
+      "tools/NovaCore.Launcher/LaunchConfiguration.cs",
+      "tools/NovaCore.Launcher/ScenarioCatalog.cs"
+    ],
+    "diff_check_exit": 0,
+    "diff_check_output": "Native Git line-ending warnings omitted from serialized ErrorRecord; exit code retained.",
+    "manual_logs_remaining": [
+      {
+        "path": "build/segmented-powered-free-flight-live/live.stdout.txt",
+        "bytes": 24066,
+        "sha256": "CDD20BE98BB87BD16A488091D12090F08A2D0EA846F9AF8BF29CB4191109D1D4"
+      },
+      {
+        "path": "build/segmented-powered-free-flight-live/live.stderr.txt",
+        "bytes": 0,
+        "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+      }
+    ],
+    "process_still_running": [],
+    "historical_tags_unchanged": true,
+    "historical_tag_count": 64
+  }
+}

@@ -8,11 +8,8 @@ other general-purpose engines, it owns its world coordinates, simulation time, p
 state, and rendering architecture. Surface interaction is advancing through qualified
 engineering foundations; the complete spaceflight experience is still being built.
 
-**Latest banked milestone: M14.21 — Authored Compound Spacecraft Contact.**
-NovaCore now qualifies stable supported contact for an authored three-part spacecraft
-article on a planar slab, using its own four-contact compound selector, canonical
-endpoint publication, and bounded host-paced servicing. BEPU remains the private local
-contact solver; complete landing gameplay remains in development.
+**Latest banked milestone: M15.0 — Segmented Powered Free Flight.**
+NovaCore now supports bounded canonical powered spacecraft free flight with finite propellant, changing mass, exact exhaustion-to-coast segmentation, and atomic physical/resource/actuator publication. Powered retained contact, liftoff, Florida launch integration, gimbal/RCS, attitude-control hardware, and production spacecraft art remain under active development.
 
 ![NovaCore Earth against the Milky Way](docs/images/novacore-11a-earth-milky-way.png)
 

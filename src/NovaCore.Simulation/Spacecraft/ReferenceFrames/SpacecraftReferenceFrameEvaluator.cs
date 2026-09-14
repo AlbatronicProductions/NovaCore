@@ -20,6 +20,17 @@ internal static class SpacecraftReferenceFrameEvaluator
             var definition = spacecraft.GetDefinition(index);
             if (!graph.TryGetIndex(definition.CarrierFrame, out var carrierIndex) || !graph.TryGetIndex(definition.BodyFrame, out var bodyIndex)) return SpacecraftReferenceFrameEvaluationStatus.FrameMissing;
             if (graph.GetParentIndexAt(bodyIndex) != carrierIndex) return SpacecraftReferenceFrameEvaluationStatus.CarrierOwnershipMismatch;
+            if (spacecraft.TryGetAppliedEndpoint(definition.Id, out var endpoint))
+            {
+                var endpointRoot = graph.GetNodeAt(carrierIndex);
+                if (graph.RootCount != 1 || endpointRoot.ParentId is not null || endpointRoot.Kind != ReferenceFrameKind.Ecl || endpoint.RootFrame != endpointRoot.Id)
+                    return SpacecraftReferenceFrameEvaluationStatus.CarrierOwnershipMismatch;
+                if (requestedTime != endpoint.Epoch) return SpacecraftReferenceFrameEvaluationStatus.TranslationEvaluationFailed;
+                destination[bodyIndex] = new(definition.BodyFrame, new EvaluatedReferenceFrame(
+                    new FrameTransform(endpoint.PositionRoot, endpoint.BodyToRoot), endpoint.VelocityRoot,
+                    endpoint.BodyToRoot.Rotate(endpoint.AngularVelocityBody), false));
+                continue;
+            }
             DoubleQuaternion orientation;
             Double3 angularVelocity;
             if (spacecraft.TryGetRigidBody(definition.Id, out var rigid))

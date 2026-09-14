@@ -329,7 +329,7 @@ internal static partial class FinitePropellantTests
         var foreign=new Fixture();foreign.Seal();
         Check(f.Engine.PrepareFinitePropellant(foreign.Resource,f.EngineToken,f.Target,out _)==PropellantPreparationStatus.InvalidAuthority&&
             foreign.Engine.PrepareFinitePropellant(foreign.Resource,f.EngineToken,foreign.Target,out _)==PropellantPreparationStatus.InvalidEngineProposal,"foreign owner and token");
-        var fabricated=new PropellantResourceAuthority(f.Parent,f.Definition);
+        var fabricated=new PropellantResourceAuthority(f.Engine,f.Parent,f.Definition);
         Check(f.Engine.ObserveFinitePropellant(fabricated,out _,out _)==PropellantPreparationStatus.InvalidAuthority,"equal resource values cannot forge ownership");
         Check(f.Engine.PreviewFinitePropellant(f.Resource,new(token.Generation,new object()),out _)==PropellantPreparationStatus.InvalidProposal,"fabricated resource seal");
         Check(Task.Run(()=>f.Engine.PrepareFinitePropellant(f.Resource,f.EngineToken,f.Target,out _)).GetAwaiter().GetResult()==PropellantPreparationStatus.WrongOwnerThread,"wrong owner");
@@ -357,8 +357,13 @@ internal static partial class FinitePropellantTests
         foreach(var field in new[]{"ResourceRevision","RemainingUnits","Definition"})
         {
             var stale=new Fixture();stale.Seal();stale.Prepare(out var old);
-            if(field=="ResourceRevision")SetField(stale.Resource,field,1UL);
-            else if(field=="RemainingUnits")SetField(stale.Resource,field,PropellantInteger.FromUInt64(1));
+            if(field is "ResourceRevision" or "RemainingUnits")
+            {
+                var mutatedCanonicalStorage=typeof(SimulationTransactionEngine).GetField("_propellantPreparation",BindingFlags.Instance|BindingFlags.NonPublic)!.GetValue(stale.Engine)!;
+                var canonical=stale.Resource.Copy();
+                SetField(mutatedCanonicalStorage,"Canonical",field=="ResourceRevision" ? canonical with {ResourceRevision=1} :
+                    canonical with {RemainingUnits=PropellantInteger.FromUInt64(1)});
+            }
             else
             {
                 PropellantDefinition.TryCreate(stale.Definition.Values with{Version=2},1d/128,out var changed);
@@ -387,8 +392,8 @@ internal static partial class FinitePropellantTests
                 stale.Capture()==captured&&stale.Source(out var p)==state&&p==stateProgress,"external source change cannot authorize resource");
         }
         var exhausted=new Fixture();exhausted.Seal();
-        var storage=typeof(SimulationTransactionEngine).GetField("_propellantPreparation",BindingFlags.NonPublic|BindingFlags.Instance)!.GetValue(exhausted.Engine)!;
-        SetField(storage,"Generation",ulong.MaxValue);
+        var resourceStorage=typeof(SimulationTransactionEngine).GetField("_propellantPreparation",BindingFlags.NonPublic|BindingFlags.Instance)!.GetValue(exhausted.Engine)!;
+        SetField(resourceStorage,"Generation",ulong.MaxValue);
         Check(exhausted.Engine.PrepareFinitePropellant(exhausted.Resource,exhausted.EngineToken,exhausted.Target,out _)==PropellantPreparationStatus.GenerationExhausted,
             "private seal cannot wrap and revive stale token");
     }

@@ -1,0 +1,244 @@
+{
+  "schema": 1,
+  "status": "FOLLOW-UP REQUIRED",
+  "lead_judgment": "REVISE",
+  "banked": false,
+  "qualification_stop": {
+    "configuration": "Release",
+    "suite": "Simulation",
+    "fresh_runs": 1,
+    "passed_groups": 8,
+    "failed_groups": 1,
+    "unreached_groups": 58,
+    "total_groups": 67,
+    "first_failure": "Simulation clock",
+    "gate": "clock",
+    "expected_bytes": 0,
+    "actual_bytes": 12336,
+    "checked_region_entry": "PASS",
+    "checked_region_exit": "PASS",
+    "exit_code": -532462766,
+    "retries": 0,
+    "attribution": "UNRESOLVED",
+    "work_after_stop": "read-only identity checks and concise evidence only"
+  },
+  "environment": {
+    "sdk": "10.0.303",
+    "runtime": "10.0.12",
+    "os": "Microsoft Windows 10.0.26200",
+    "architecture": "X64",
+    "profiling": false
+  },
+  "builds": {
+    "Debug": {
+      "result": "PASS",
+      "warnings": 0,
+      "errors": 0
+    },
+    "Release": {
+      "result": "PASS",
+      "warnings": 0,
+      "errors": 0
+    },
+    "qualification_note": "Both solution builds passed before the later new-label-only encoding correction. The corrected Release launcher rebuilt and passed 17 tests. No final full rebuild or Debug launcher rerun was performed after the material Release suite failure."
+  },
+  "physics": {
+    "Debug": "PASS",
+    "Release": "PASS",
+    "predeclared_component_ceilings": {
+      "position_m": 0.000001,
+      "velocity_mps": 0.000001,
+      "orientation_rad": 1e-9,
+      "angular_velocity_radps": 1e-9
+    },
+    "observed": {
+      "analytic_x_error_m": 2.220446049250313e-16,
+      "analytic_v_error_mps": 0,
+      "rotating_x_error_m": 1.0842021724855044e-19,
+      "rotating_vy_error_mps": 2.439454888092385e-19,
+      "rotating_orientation_error_rad": 6.938893903907228e-18,
+      "frozen_root_missing_dvy_mps": 0.00008247412062658337
+    },
+    "tiny_complete_publication_cases": 3,
+    "tiny_each_dv": "4.9406564584124654E-324 (double.Epsilon)",
+    "independent_ratio_stage_mass_controls": "PASS"
+  },
+  "authority": {
+    "Debug": "PASS",
+    "Release": "PASS",
+    "precommit_nonmutation": "PASS",
+    "physical_ack_terminal": "PASS",
+    "host_ack_terminal": "PASS",
+    "lease_retirement_and_replay": "PASS",
+    "cancel_reissue_and_initial_history": "PASS",
+    "endpoint_only_fences": "PASS"
+  },
+  "allocation": {
+    "Debug": "PASS",
+    "Release": "PASS",
+    "windows": [
+      {
+        "gate": "complete-full",
+        "bytes": 0
+      },
+      {
+        "gate": "complete-unpowered",
+        "bytes": 0
+      },
+      {
+        "gate": "interior-prepare-commit-ack",
+        "bytes": 0
+      },
+      {
+        "gate": "physical-joint-preparation",
+        "bytes": 0
+      },
+      {
+        "gate": "fixed-publication-ack-observation",
+        "bytes": 0
+      },
+      {
+        "gate": "no-work-refusal",
+        "bytes": 0
+      },
+      {
+        "gate": "backlog-existing-debt",
+        "bytes": 0
+      }
+    ],
+    "each_checked_entry_exit": "PASS",
+    "positive_control": {
+      "type": "System.Byte[]",
+      "length": 128,
+      "bytes_Debug": 152,
+      "bytes_Release": 152
+    },
+    "separate_from_timing": true
+  },
+  "schedules": {
+    "Debug": "PASS",
+    "Release": "PASS",
+    "fixtures": [
+      "straight",
+      "rotating"
+    ],
+    "host_hz": [
+      30,
+      60,
+      150,
+      240
+    ],
+    "delayed": "400 frames alternating cumulative 100ms credit and zero-credit drain",
+    "each_endpoints": 1200,
+    "each_short_intervals": 400,
+    "each_long_intervals": 800,
+    "each_ticks": 20000000,
+    "each_final_debt": 0,
+    "each_state_revision": 1200,
+    "each_actuator_revision": 1200,
+    "each_timeline_revision": 0,
+    "each_history": 1200,
+    "delayed_each_budget_hits": 200,
+    "physical_resource_actuator_exhaustion_history": "bit-identical to prefunded reference on same machine/build",
+    "accounting_records": "DebtBefore/After partition-dependent, checked exact conservation at every record/frame",
+    "shutdown": "PASS"
+  },
+  "performance": [
+    {
+      "process": 1,
+      "warm_complete_operations": 128,
+      "measured_complete_operations": 1024,
+      "result": "MEASURED",
+      "raw_summary": "POWERED_STORAGE record_bytes=4032 history_bytes=4838424 all_cold_managed_upper_bound=4870592 cold_ms=0.5151 <=8MiB=True\r\nPOWERED_COST runtime=10.0.12 samples=1024 warm=128 median_ms=0.0423 p95_ms=0.184 p99_ms=0.1905 max_ms=0.2212 worst_index=171 frame_headroom_objective_ms=6.67"
+    },
+    {
+      "process": 2,
+      "warm_complete_operations": 128,
+      "measured_complete_operations": 1024,
+      "result": "MEASURED",
+      "raw_summary": "POWERED_STORAGE record_bytes=4032 history_bytes=4838424 all_cold_managed_upper_bound=4878600 cold_ms=0.4537 <=8MiB=True\r\nPOWERED_COST runtime=10.0.12 samples=1024 warm=128 median_ms=0.0421 p95_ms=0.182 p99_ms=0.1909 max_ms=0.2213 worst_index=171 frame_headroom_objective_ms=6.67"
+    },
+    {
+      "process": 3,
+      "warm_complete_operations": 128,
+      "measured_complete_operations": 1024,
+      "result": "MEASURED",
+      "raw_summary": "POWERED_STORAGE record_bytes=4032 history_bytes=4838424 all_cold_managed_upper_bound=4870592 cold_ms=0.3484 <=8MiB=True\r\nPOWERED_COST runtime=10.0.12 samples=1024 warm=128 median_ms=0.043 p95_ms=0.1866 p99_ms=0.1939 max_ms=0.222 worst_index=171 frame_headroom_objective_ms=6.67"
+    }
+  ],
+  "performance_interpretation": {
+    "measurement": "ordinary runtime, no checked no-GC timing wrapper",
+    "mixed_workload": "powered then depleted coast; do not present median as powered-only",
+    "repeated_worst_index": 171,
+    "overall_interval_of_worst": 300,
+    "attribution": "coincides with nominal depletion frontier; no profiler/timing causality claimed",
+    "whole_frame_objective_ms": 6.67,
+    "maximum_fraction_of_frame_objective": 0.03328335832083958,
+    "whole_frame_qualification": "NOT MEASURED; manual live run pending"
+  },
+  "storage": {
+    "record_bytes": 4032,
+    "history_capacity": 1200,
+    "history_including_array_bytes": 4838424,
+    "cold_managed_allocation_upper_bounds_bytes": [
+      4870592,
+      4878600,
+      4870592
+    ],
+    "cold_nonhistory_upper_bounds_bytes": [
+      32168,
+      40176,
+      32168
+    ],
+    "unmanaged_physics_world_bytes": 0,
+    "method": "Every retained physics/owner/source/resource object is allocated in the measured cold constructor; allocation delta includes transients and is therefore an upper bound, not an exact live-heap measurement.",
+    "comparison_8MiB": "below, not an invented new timing/storage acceptance gate",
+    "cold_preparation_ms": [
+      0.5151,
+      0.4537,
+      0.3484
+    ],
+    "presentation_frame_samples_bytes": 160000,
+    "presentation_costs_separate": true
+  },
+  "regressions": {
+    "full_Debug_Simulation": "PASS 67/67, including M14.17-M14.24 groups",
+    "full_Release_Simulation": "FAIL at ninth group; later regressions unreached",
+    "focused_Debug_command_engine_resource": "PASS before full suites",
+    "Graphics_powered_presentation": {
+      "Debug": "PASS",
+      "Release": "PASS"
+    },
+    "Launcher_Release": "PASS 17/17 after new-label byte correction",
+    "Launcher_Debug_latest": "NOT RERUN after label correction",
+    "ReferenceFrames": "NOT RUN after stop",
+    "Precision": "NOT RUN after stop",
+    "BepuDependency": "NOT RUN after stop"
+  },
+  "presentation": {
+    "automated": "PASS copied pose/preparation/start/acceleration/depletion/camera/backlog/final hold/invalid input",
+    "manual": "PENDING at qualification stop",
+    "cold_first_scene_ms": {
+      "Debug": 18.0815,
+      "Release": 16.2212
+    },
+    "cold_second_scene_ms": {
+      "Debug": 0.0804,
+      "Release": 0.0511
+    },
+    "cold_note": "first includes initialization/JIT; these are numerical presentation test construction observations, not manual whole-frame measurements",
+    "frame_distribution": "UNAVAILABLE pending manual run",
+    "logs_retained_at_stop": false
+  },
+  "verification": {
+    "numerical": "PASS scoped source review",
+    "atomic_lifetime": "PASS scoped source review",
+    "contact_scope_and_presentation": "PASS scoped source review",
+    "overall_acceptance": "INCOMPLETE",
+    "coverage_limits": [
+      "Definition/configuration mutation and ResourceRevision/ActuatorRevision overflow: source-reviewed; no dedicated new permanent witness claimed.",
+      "Sealed endpoint ordinary publication-refusal/retry: source-reviewed; current tests instead cover preparation-refusal retry and insufficient service funding.",
+      "Nonfinite cold-torque rejection and AcceptedCredit.CanonicalCommitted: source-reviewed; no dedicated assertions for those exact cases."
+    ]
+  }
+}

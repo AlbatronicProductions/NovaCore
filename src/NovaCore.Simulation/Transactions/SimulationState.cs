@@ -59,6 +59,12 @@ internal sealed class SimulationState
     internal bool TryPrepareContinuationSlot(in SpacecraftTranslationState linear, in SpacecraftRigidBodyRotationState angular,
         out int index) => _spacecraft.TryPrepareContinuationSlot(linear, angular, out index);
 
+    internal void PrepareAppliedEndpointStorage() => _spacecraft.PrepareAppliedEndpointStorage();
+    internal bool TryPrepareAppliedSlot(SpacecraftId subject, in SpacecraftPhysicalSource source, out int index) =>
+        _spacecraft.TryPrepareAppliedSlot(subject, source, out index);
+    internal void InstallAppliedEndpoint(int index, in SpacecraftAppliedEndpoint endpoint, StateRevision revision)
+    { _spacecraft.InstallAppliedEndpoint(index, endpoint); _revision = revision; }
+
     // The specialized publisher has checked both slots, ownership and successor arithmetic.
     internal void InstallCertifiedContinuation(int index, in SpacecraftTranslationState linear,
         in SpacecraftRigidBodyRotationState angular, StateRevision revision)

@@ -1,0 +1,436 @@
+{
+  "schema": 1,
+  "baseline_commit": "89a432ce3b96a5dcb0751cfdc26bfd6776c883a1",
+  "branch": "codex/segmented-powered-free-flight",
+  "head_main_origin_main_remote_main_unchanged": true,
+  "staged_paths": 0,
+  "banked": false,
+  "baseline_tracked_files": 1952,
+  "baseline_tracked_unchanged": 1931,
+  "baseline_tracked_modified": 21,
+  "historical_tags": {
+    "count": 64,
+    "unchanged": true
+  },
+  "protected_milestones": [
+    {
+      "milestone": "M14.21",
+      "tag": "m14.21-authored-compound-spacecraft-contact",
+      "tag_object": "d8c13e46a9272e5ef6eb89acbe23c29709e3c55b",
+      "commit": "b6e8fa568585706ce38c0609aeb14db4a643123e"
+    },
+    {
+      "milestone": "M14.22",
+      "tag": "m14.22-canonical-spacecraft-command-authority",
+      "tag_object": "e943a128ef425ff7427b917f2bb04056e58282f5",
+      "commit": "899f11f727205340bdd550dd65a853e253de0ed3"
+    },
+    {
+      "milestone": "M14.23",
+      "tag": "m14.23-prepared-single-engine-actuation",
+      "tag_object": "cd22cc96d88d2b6cf3ca48740ad41baecbbe7c9e",
+      "commit": "6c9830237bc29bbd3c9cf5f4644b6409c32eaa9b"
+    },
+    {
+      "milestone": "M14.24",
+      "tag": "m14.24-exact-finite-propellant-segmentation",
+      "tag_object": "50aa4e984e6646a9334e4e87356a43ffdf138e73",
+      "commit": "89a432ce3b96a5dcb0751cfdc26bfd6776c883a1"
+    }
+  ],
+  "candidate_files": [
+    {
+      "path": "samples/NovaCore.Triangle/PoweredFlightDevelopmentScene.cs",
+      "sha256": "7E42031049C3C75F6DD4171DF74277036FB69C58E6D033A0706F390AA80F5B90",
+      "bytes": 10034,
+      "change": "new"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/Program.cs",
+      "sha256": "3664EBEB26664B8BD5E5AE023692C7E8D29C5771F22FEAC873C4D5A71B5DB223",
+      "bytes": 60669,
+      "before_sha256": "67D9D0453BADCAD7AAF6FC4A62DAC545524F9068B34B9ADDA02AC90E6022D49C",
+      "change": "modified"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/SampleOptions.cs",
+      "sha256": "39C9BF3DB7BDCDEA9A24CFDBD1F428AE0026D20C6108BB0D15075CD61F4FDE85",
+      "bytes": 5455,
+      "before_sha256": "F217125AB5C7DCE1B9F1A424BC383CB5BA912C22E8420477394652131EF5CF27",
+      "change": "modified"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Actuation/PoweredFlightEvaluator.cs",
+      "sha256": "D2FEAA4DB663B4D9ECCDE41588AD28EF0AE28299E609BC6933AE06A84D63B647",
+      "bytes": 9451,
+      "change": "new"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Actuation/PoweredFlightNumerics.cs",
+      "sha256": "E46798B6123AC3478F03784EE40FACE5736ADED24AA37BCF886B751ADE7D41C1",
+      "bytes": 5324,
+      "change": "new"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Actuation/PoweredFreeFlight.cs",
+      "sha256": "57DC2C42D1A12719EAB168B96B59AA3364884E86F12E5AE6F44ED38FA2BA44B0",
+      "bytes": 3024,
+      "change": "new"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/ReferenceFrames/SpacecraftReferenceFrameEvaluator.cs",
+      "sha256": "A5A655B15E8A1E38B0FA34AF191D63704D22968CB89151D6A66293293543B930",
+      "bytes": 4976,
+      "before_sha256": "07CD9176791AACD08727036AC7078D0541A271642EF904178A809AD8381E3AA4",
+      "change": "modified"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Resources/FinitePropellantSegmentation.cs",
+      "sha256": "36BFC58B0EE3C4F89B31DB987C19806680212DDB57F08B3B5D2067CD97EA2D33",
+      "bytes": 9316,
+      "before_sha256": "71867C21DB6099C52BC5A7F1830B06851A52C5D1AD6D80A3E59BB4D0CE69B925",
+      "change": "modified"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftAppliedEndpoint.cs",
+      "sha256": "E53FBEE3AE992A645DEDD713C993C6986287516E6BF169384D4CB29DB69271CA",
+      "bytes": 3061,
+      "change": "new"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.cs",
+      "sha256": "7959390F0B49EA2BCC86D5BD2E3A478D87D290CCC94A3A450313126323B28E6C",
+      "bytes": 14519,
+      "before_sha256": "1A2A0030F4425A52EAD65AD02CF629D9819A62DA65CEEC078709C4D35ED2C0CE",
+      "change": "modified"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftStateView.cs",
+      "sha256": "0970B3E5404254AF0050CBBD984B3B43F27CB3EC400F1A153FC827323216C271",
+      "bytes": 2702,
+      "before_sha256": "8FDF0D4DC0BC85D6096ED81937EAB78E0DD7D780E723BE3B46A7A2D7A53247DA",
+      "change": "modified"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftMotionEvaluator.cs",
+      "sha256": "BC6AA5358A1D6381FC954F02E191D243ED909D4D40F12A09EC31049DC045D7CF",
+      "bytes": 2536,
+      "before_sha256": "8018209EC9D8B20545E2D4D7B6637A005E9E33A30BED4F1EDEC629D4491D3F4F",
+      "change": "modified"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftPhysicalEventMotionEvaluator.cs",
+      "sha256": "D7C8C4BF0DFBB89C0A340D3B7437CC929913A3735B43B83BEA094014A21A1789",
+      "bytes": 2381,
+      "before_sha256": "4656E1B6DB450F10937652B61BB2F7C905101C8AF6FAA1614FAAF7FABB71F617",
+      "change": "modified"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftTranslationState.cs",
+      "sha256": "4BEC9FB7E9D56041038E2536A96E8565414C01482C24CBBF3DF951655CFD9026",
+      "bytes": 1793,
+      "before_sha256": "DC563E205DEC5D66BC3330A8427FCA258E0E4FA7ABDAC87000894090E594417F",
+      "change": "modified"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationState.cs",
+      "sha256": "5B354A397D0D4063449AD5C4B67CE12DCB84D4214DEC065CFE64437C828362E9",
+      "bytes": 7311,
+      "before_sha256": "137BA1DB8CF388760CD4546B3639BE8DB2CAF9A2949442856E8642B71B4CDFBB",
+      "change": "modified"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.EnginePreparation.cs",
+      "sha256": "0A1A3B741BDC490006206DCAC5EF5CD45BB7CCCBAF95F0F31ACF7DC641518791",
+      "bytes": 16349,
+      "before_sha256": "D4429843AEB86D3DE80ECFE2C90CF3AF5774470CA590ED4801B23B0C41CD9276",
+      "change": "modified"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.PoweredFreeFlight.cs",
+      "sha256": "C71DB01D3CECF028CC0F4CD79530049DADBBAAF9FB1387B2DDDF444F7F9E4006",
+      "bytes": 23201,
+      "change": "new"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Propellant.cs",
+      "sha256": "1AC6FF92A9E7E779152E01FDCA576DE30D8DFDBB9B555EFFCA751D5DB3D569B6",
+      "bytes": 12673,
+      "before_sha256": "1465152F84E91DCDFE30D375C5066029877E121694BB9590EC91D48959E75BCE",
+      "change": "modified"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.SpacecraftCommands.cs",
+      "sha256": "EEBEA1C6E0BDA9E90C642AA70EE5EF2FB3765C1B69C94117E43E6C5A0E361BEC",
+      "bytes": 18526,
+      "before_sha256": "B248E526DE296F9F50C71545649F533D62D402BB6E0F7D19202D1011BFA34F09",
+      "change": "modified"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/NovaCore.Graphics.Tests.csproj",
+      "sha256": "5F64F757EEFB81E3A5EAE970B7E889BD9F9E00D630A34072BAE01A56D5BDB65F",
+      "bytes": 3133,
+      "before_sha256": "F7C21FFD78973018F4BF77ABAEE8C4F060B5A70619F8EEFD876ECFA996D1FA07",
+      "change": "modified"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PoweredFlightPresentationTests.cs",
+      "sha256": "8E2BE687E3705F3B7768B7F8198FA3CB9B14CB449482422D8A2ADCB5A4BF66BE",
+      "bytes": 2685,
+      "change": "new"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/Program.cs",
+      "sha256": "ABACF60824AF270A0644060DD7B2E8C4A84816E5209A48F736993AC046FAB55A",
+      "bytes": 567310,
+      "before_sha256": "018DFA1B6DE5AB8CA1DC6E3971AF8F61C9597683C391961DDEB1AA2A4C59BD01",
+      "change": "modified"
+    },
+    {
+      "path": "tests/NovaCore.Launcher.Tests/Program.cs",
+      "sha256": "E660E789FF6CD70D1C1E81C1CA86C36FB2E2E0CC47090B433435B54092E702DF",
+      "bytes": 16216,
+      "before_sha256": "68DCF92B537A493CF38BB6C01B597C1CC800B6CB70F10779F2370568665AC764",
+      "change": "modified"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/FinitePropellantTests.cs",
+      "sha256": "B770FCCBD0BAA6A3B4F30BCF7047D76BB0D1B6CEA6B2FEDBCA45D9F3DCA2847B",
+      "bytes": 32062,
+      "before_sha256": "64568B7E70C1C06BD75E76780535C204AFDE9C84A66AC33395BA32B56AD8B2E1",
+      "change": "modified"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/PoweredFreeFlightTests.Authority.cs",
+      "sha256": "11C317AA9DEBB417CA80E6AAF1F707A7ECEA147EC67D1E7CB2225ABFB0FD9A5A",
+      "bytes": 16596,
+      "change": "new"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/PoweredFreeFlightTests.cs",
+      "sha256": "AAE5CFF8C29E024EFC7332B70C5C64B637E1D991AFB1F46BF65EB49422872C29",
+      "bytes": 3424,
+      "change": "new"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/PoweredFreeFlightTests.Physics.cs",
+      "sha256": "392E2F4743DCD8F2CF1613E5819971FF2C9F2EEB8560D810AD289A422393227F",
+      "bytes": 11300,
+      "change": "new"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/PoweredFreeFlightTests.Qualification.cs",
+      "sha256": "8F27C8770390A632252B7B582B266C7016D441F9E1B76A39CEA0621C554A7F70",
+      "bytes": 10573,
+      "change": "new"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "sha256": "324D755F14276630BFEFD8A919D6B2FAAAE4E96398DCE1DAA6E42847CB6AAA7B",
+      "bytes": 256427,
+      "before_sha256": "0A4207757B9EA20ACB09CBF87A0C1D8EFEDE5C043EEF255274496354C519A460",
+      "change": "modified"
+    },
+    {
+      "path": "tools/NovaCore.Launcher/LaunchCommandBuilder.cs",
+      "sha256": "1F01405FC60E1E2C1C895827240210EA49D87B226652CD51A065C54AC2813563",
+      "bytes": 4526,
+      "before_sha256": "3E5981C28FE4225A4EF62A17052EE9D2FECBD732C6DBC74171E4766B56F71D5E",
+      "change": "modified"
+    },
+    {
+      "path": "tools/NovaCore.Launcher/LaunchConfiguration.cs",
+      "sha256": "860267E204E804651BA85F42A9C5FB25A2A704EA9E182FED6937525E55ACBD36",
+      "bytes": 2680,
+      "before_sha256": "59B23310F305E6A877459336405394B7E4D44FB00122F28F0D0BB735F778171C",
+      "change": "modified"
+    },
+    {
+      "path": "tools/NovaCore.Launcher/ScenarioCatalog.cs",
+      "sha256": "ACD657B7C8FCEC7ED7F8F833B503F7BF180CC5DB703668919ED3CB0867BBB6BC",
+      "bytes": 8611,
+      "before_sha256": "20EE8492CE511E3CECEC6C4CB5BDC0AC76ABA430D140159A4A9212751FB10CA9",
+      "change": "modified"
+    }
+  ],
+  "architecture_files": [
+    {
+      "path": "docs/engineering-evidence/powered-dynamics-architecture/architecture-candidates.md",
+      "bytes": 11396,
+      "sha256": "E3D69C78DA16D9D09400BF9C35B56EBE1304259273C845BBA2EF96699F6E9B8F"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-dynamics-architecture/arithmetic-witness.py",
+      "bytes": 4525,
+      "sha256": "9689D8631F1A90A6D2E673D1E5863A9AA5510CAE34BAE7BA11CD6B2369E6F4A0"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-dynamics-architecture/atomic-publication-contract.md",
+      "bytes": 13753,
+      "sha256": "18EA126F76F2DF2BD09FE6855419111F1A26F3C0D2717BEE8001D182E77BBCC0"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-dynamics-architecture/contact-bepu-assessment.md",
+      "bytes": 7002,
+      "sha256": "E7D181C81B4A2C8DBDDC436A9733842E759070E3E75C18B2634FB2E242A68DD4"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-dynamics-architecture/current-novacore-dynamics-map.md",
+      "bytes": 7424,
+      "sha256": "C982EDF76099C40B80C71A913F5085906501843BE30C934304AD333EEC0B50FC"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-dynamics-architecture/identity.json",
+      "bytes": 22132,
+      "sha256": "6DF51ECAA6D4BD4B09044D264239DAC4EE2E236D755A3933347440344FCB1A60"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-dynamics-architecture/ksa-dynamics-convergence.md",
+      "bytes": 4387,
+      "sha256": "B660044D8F9DB36F58FF84EBEA020292F22897105FC1F4EC290793F8074F2520"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-dynamics-architecture/README.md",
+      "bytes": 6668,
+      "sha256": "A233B65997496E019985CAD301ECFEEF289A6EA1EDBBE885EC5AB4336A4C4BF9"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-dynamics-architecture/segmented-integration-contract.md",
+      "bytes": 9893,
+      "sha256": "FA6B78A442D1CDBEFFFF871673BA5C3E26BBAC03A1EC517C60E1D478104A35B9"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-dynamics-architecture/variable-mass-equations.md",
+      "bytes": 7901,
+      "sha256": "FA5C7C82DB7784142281FABA49F931B226BD9F0693DDB0ABAB26D4E01DCDD420"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-dynamics-architecture/verification.md",
+      "bytes": 8460,
+      "sha256": "65DC7643A8944D236BCCE387E20733633BFCEBC078DE5D770753A8F3ED1CE131"
+    }
+  ],
+  "architecture_count": 11,
+  "architecture_bytes": 103541,
+  "architecture_all_unchanged": true,
+  "required_future_evidence_closure": [
+    "docs/engineering-evidence/powered-dynamics-architecture/",
+    "docs/engineering-evidence/segmented-powered-free-flight/"
+  ],
+  "protected_groups": {
+    "contact_production": {
+      "files": 43,
+      "unchanged": true,
+      "paths": [
+        "src/NovaCore.Simulation/Celestial/EarthContactProofModel.cs",
+        "src/NovaCore.Simulation/Spacecraft/Contact/CertifiedContactResponse.cs",
+        "src/NovaCore.Simulation/Spacecraft/Contact/CertifiedPostImpactVelocity.cs",
+        "src/NovaCore.Simulation/Spacecraft/Contact/CertifiedPostImpactVelocityMath.cs",
+        "src/NovaCore.Simulation/Spacecraft/Contact/CertifiedPreImpactVelocity.cs",
+        "src/NovaCore.Simulation/Spacecraft/Contact/ContactBodyMotion.cs",
+        "src/NovaCore.Simulation/Spacecraft/Contact/FloridaCertifiedResponse.cs",
+        "src/NovaCore.Simulation/Spacecraft/Contact/FloridaContactBounds.cs",
+        "src/NovaCore.Simulation/Spacecraft/Contact/FloridaContactKinematics.cs",
+        "src/NovaCore.Simulation/Spacecraft/Contact/FloridaContactMotion.cs",
+        "src/NovaCore.Simulation/Spacecraft/Contact/FloridaContactProvider.cs",
+        "src/NovaCore.Simulation/Spacecraft/Contact/FloridaPostImpactMotion.cs",
+        "src/NovaCore.Simulation/Spacecraft/Contact/FloridaPostImpactVelocity.cs",
+        "src/NovaCore.Simulation/Spacecraft/Contact/FloridaPreImpactVelocity.cs",
+        "src/NovaCore.Simulation/Spacecraft/Contact/FloridaPublicationProvenance.cs",
+        "src/NovaCore.Simulation/Spacecraft/Contact/IsolatedContactResponsePolicy.cs",
+        "src/NovaCore.Simulation/Spacecraft/Contact/PostImpactCoverageProvider.cs",
+        "src/NovaCore.Simulation/Spacecraft/Contact/PostImpactCoverageSearch.cs",
+        "src/NovaCore.Simulation/Spacecraft/Contact/PrivateCanonicalPropagation.cs",
+        "src/NovaCore.Simulation/Spacecraft/Contact/PrivatePostImpactState.cs",
+        "src/NovaCore.Simulation/Spacecraft/Contact/SpacecraftContactGenerator.cs",
+        "src/NovaCore.Simulation/Spacecraft/Contact/SpacecraftContactGeometry.cs",
+        "src/NovaCore.Simulation/Spacecraft/Contact/SpacecraftContactImpulse.cs",
+        "src/NovaCore.Simulation/Spacecraft/Contact/SpacecraftPhysicalEventObservation.cs",
+        "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CompoundContactCoverage.cs",
+        "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CompoundContactSelector.cs",
+        "src/NovaCore.Simulation/Spacecraft/Contact/Staging/EngineeringContactArticle.cs",
+        "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactCallbacks.cs",
+        "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs",
+        "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Article.cs",
+        "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Publication.cs",
+        "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Servicing.cs",
+        "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs",
+        "src/NovaCore.Simulation/Timeline/SimulationTimeline.ContactPayloads.cs",
+        "src/NovaCore.Simulation/Transactions/CertifiedContinuationPublication.cs",
+        "src/NovaCore.Simulation/Transactions/ContinuationPublicationPhase.cs",
+        "src/NovaCore.Simulation/Transactions/PersistentContactPublication.cs",
+        "src/NovaCore.Simulation/Transactions/PersistentContactServicing.cs",
+        "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.ContactImpulse.cs",
+        "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.ContactProof.cs",
+        "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.ContactServicing.cs",
+        "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Continuation.cs",
+        "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.PersistentContact.cs"
+      ]
+    },
+    "bepu_dependency": {
+      "files": 12,
+      "unchanged": true,
+      "paths": [
+        "external/bepu/2.5.0-beta.29/LICENSE.txt",
+        "external/bepu/2.5.0-beta.29/lib/BepuPhysics.dll",
+        "external/bepu/2.5.0-beta.29/lib/BepuUtilities.dll",
+        "external/bepu/2.5.0-beta.29/manifest/bepu-2.5.0-beta.29.json",
+        "external/bepu/2.5.0-beta.29/packages/BepuPhysics.2.5.0-beta.29.nupkg",
+        "external/bepu/2.5.0-beta.29/packages/BepuUtilities.2.5.0-beta.29.nupkg",
+        "external/bepu/ATTRIBUTION.txt",
+        "external/bepu/Bepu.references.props",
+        "external/bepu/Bepu.targets",
+        "external/bepu/README.md",
+        "tests/NovaCore.BepuDependency.Tests/NovaCore.BepuDependency.Tests.csproj",
+        "tests/NovaCore.BepuDependency.Tests/Program.cs"
+      ]
+    },
+    "blender": {
+      "files": 0,
+      "unchanged": true,
+      "paths": []
+    },
+    "clock_production": {
+      "files": 5,
+      "unchanged": true,
+      "paths": [
+        "src/NovaCore.Simulation/Clock/SimulationAdvanceResult.cs",
+        "src/NovaCore.Simulation/Clock/SimulationAdvanceStopReason.cs",
+        "src/NovaCore.Simulation/Clock/SimulationClock.cs",
+        "src/NovaCore.Simulation/Clock/SimulationClockSettings.cs",
+        "src/NovaCore.Simulation/Clock/SimulationHostAdvanceResult.cs"
+      ]
+    },
+    "allocation_helper": {
+      "files": 1,
+      "unchanged": true,
+      "paths": [
+        "tests/NovaCore.Simulation.Tests/OrdinaryAllocationMeasurement.cs"
+      ]
+    }
+  },
+  "blender_note": "No Blender source exists in this tracked baseline; no separate Blender workspace was accessed or modified by this task.",
+  "failure_source": {
+    "clock_method": "tests/NovaCore.Simulation.Tests/Program.cs:1263",
+    "allocation_window_line": 1299,
+    "assertion_line": 1301,
+    "body_equal_after_LF_normalization": true,
+    "body_sha256": "5F2C022831447C3BCC4D594586B04724BE83F659E39E1C37C512F0BFF33B9082",
+    "allocation_helper_raw_unchanged": true
+  },
+  "tested_binaries": [
+    {
+      "path": "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+      "sha256": "632A6E0E57F7607D8E7A0D574A0C96F924BACD9ACB0E8ECB29277CD2532884CF"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "sha256": "FBE5389E45F80F63014B939B13976F630D7B9DDE59604B29B7F0FCE976E312FF"
+    },
+    {
+      "path": "src/NovaCore.Simulation/bin/Release/net10.0/NovaCore.Simulation.dll",
+      "sha256": "3CB3491662FA24E91E304E50349EDD059CA5D2D5E57AD9264D553038455F65E2"
+    }
+  ],
+  "evidence_budget_bytes": 196608
+}

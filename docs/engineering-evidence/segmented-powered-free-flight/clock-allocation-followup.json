@@ -1,0 +1,148 @@
+{
+  "schema": 1,
+  "ticket": "Full-Release clock allocation failure attribution",
+  "phase_reached": 1,
+  "disposition": "FAILURE NOT REPRODUCED — PHASE 1 STOP",
+  "lead_judgment": "REVISE",
+  "causal_classification": "UNRESOLVED — Phase 7 not reached",
+  "candidate_banked": false,
+  "baseline": {
+    "branch": "codex/segmented-powered-free-flight",
+    "head": "89a432ce3b96a5dcb0751cfdc26bfd6776c883a1",
+    "main": "89a432ce3b96a5dcb0751cfdc26bfd6776c883a1",
+    "origin_main": "89a432ce3b96a5dcb0751cfdc26bfd6776c883a1",
+    "remote_main": "89a432ce3b96a5dcb0751cfdc26bfd6776c883a1",
+    "staged_paths": 0,
+    "historical_tags": 64,
+    "historical_tags_unchanged": true,
+    "protected_M14_21_to_M14_24_unchanged": true
+  },
+  "identity": {
+    "record": "identity.json",
+    "source_test_sample_launcher_files": 32,
+    "architecture_files": 11,
+    "tested_binaries": 3,
+    "checked_before": 46,
+    "mismatches_before": 0,
+    "checked_after": 46,
+    "mismatches_after": 0,
+    "rebuilt": false,
+    "source_or_permanent_test_changed": false,
+    "actual_loaded_copy_note": "Test output directory NovaCore.Simulation.dll matches the recorded Release production DLL SHA-256.",
+    "protected_clock_and_helper": [
+      {
+        "path": "tests/NovaCore.Simulation.Tests/OrdinaryAllocationMeasurement.cs",
+        "sha256": "3B6F2D9905EA52BFB131DF670F1E6A2116BA340C9EF7767DE1020197D473CFB7",
+        "unchanged": true
+      },
+      {
+        "path": "src/NovaCore.Simulation/Clock/SimulationAdvanceResult.cs",
+        "sha256": "F31D8FE83E5A92AC2BD2E3A0B2694DDD879F6C18C4F7F6DBF08213A2D8278608",
+        "unchanged": true
+      },
+      {
+        "path": "src/NovaCore.Simulation/Clock/SimulationAdvanceStopReason.cs",
+        "sha256": "D7C1C7062DBFEC4F3BE103B6F08665690E923BB51F6F19F9810F626AAD26AF0F",
+        "unchanged": true
+      },
+      {
+        "path": "src/NovaCore.Simulation/Clock/SimulationClock.cs",
+        "sha256": "9C047247B3DC03A842DAD92BF713B9D31C08A06FCB53B1CFAD05207DA2C0F168",
+        "unchanged": true
+      },
+      {
+        "path": "src/NovaCore.Simulation/Clock/SimulationClockSettings.cs",
+        "sha256": "E19DD72688E5C2DC5E9D8D23BF089FAF17AA1C0916D1631A49F73FEC69753CF4",
+        "unchanged": true
+      },
+      {
+        "path": "src/NovaCore.Simulation/Clock/SimulationHostAdvanceResult.cs",
+        "sha256": "87A80652594E64A4B9AF44F6FED68B141DD67F4D233FC8CCDB6D2DEE4D9EDD1F",
+        "unchanged": true
+      }
+    ]
+  },
+  "original_witness": {
+    "configuration": "Release",
+    "clock_bytes": 12336,
+    "expected_bytes": 0,
+    "full_passed": 8,
+    "full_failed": 1,
+    "full_unreached": 58,
+    "retries": 0,
+    "record": "validation.json"
+  },
+  "one_authorized_reproduction": {
+    "started_utc": "2026-09-14T13:52:05.2652668Z",
+    "finished_utc": "2026-09-14T13:52:11.8423841Z",
+    "process_id": 53432,
+    "executable": "C:\\Program Files\\dotnet\\dotnet.exe",
+    "arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll"
+    ],
+    "working_directory": "E:\\NovaCore",
+    "sdk": "10.0.303",
+    "runtime": "10.0.12",
+    "coreclr_path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\coreclr.dll",
+    "coreclr_file_version": "10,0,1226,42308 @Commit: 95017c711e6afc1085133d440e42b4bd78155701",
+    "exit_code": 0,
+    "stderr": "",
+    "clock_witness": "ORDINARY_ALLOCATION gate=clock bytes=0 entry=PASS exit=PASS",
+    "clock_bytes": 0,
+    "no_gc_entry": "PASS",
+    "no_gc_exit": "PASS",
+    "full_passed": 67,
+    "full_failed": 0,
+    "full_unreached": 0,
+    "attempts_this_ticket": 1,
+    "retries": 0,
+    "predecessors": [
+      "Segmented powered free flight",
+      "SimulationInstant",
+      "SimulationDuration",
+      "SimulationRate",
+      "Solar UTC and speed presets",
+      "Event ordering",
+      "Internal physical-event epochs",
+      "Timeline topology"
+    ],
+    "immediately_preceding_group": "Timeline topology",
+    "preceding_two_groups": [
+      "Internal physical-event epochs",
+      "Timeline topology"
+    ],
+    "positive_control_occurrences": 11,
+    "positive_control_distinct_witnesses": [
+      "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+    ],
+    "observation_method": "Unmodified CLI process; stdout/stderr captured externally. One read-only loaded-coreclr module inventory collected process identity. No target instrumentation, profiler, runtime settings, warmup or order changes."
+  },
+  "scope_stop": {
+    "final_git_diff_check": "PASS",
+    "final_staged_paths": 0,
+    "final_unstaged_tracked_paths": 21,
+    "candidate_source_test_correction_paths": [],
+    "baseline_clock_control": "NOT RUN — Phase 1 stop rule",
+    "baseline_full_control": "NOT RUN — Phase 1 stop rule",
+    "standalone_candidate": "NOT RUN — Phase 1 stop rule",
+    "predecessor_reduction": "NOT RUN",
+    "allocation_attribution": "NOT RUN",
+    "correction": "NONE",
+    "Debug_rerun": "NOT RUN; preceding ticket passed 67/67",
+    "focused_preservation_rerun": "NOT RUN; no source correction",
+    "performance_rerun": "NOT RUN",
+    "manual_acceptance": "PENDING; not performed in this ticket"
+  },
+  "inference": {
+    "established": "Observed clock counter result is not stable across the two retained full Release processes despite matched recorded candidate/source/binary identities and unchanged test order.",
+    "not_established": [
+      "Object type/count/stack or any accounting mechanism",
+      "A minimal triggering predecessor",
+      "Pre-existing baseline failure",
+      "Candidate production regression or exoneration",
+      "One-time initialization or harness defect",
+      "Intermittent failure fixed or acceptance cleared"
+    ],
+    "explanation_limit": "The varying outcomes demonstrate non-repeatability; the differing runtime/process condition has not been identified. No causal label is inferred from the byte magnitude."
+  }
+}

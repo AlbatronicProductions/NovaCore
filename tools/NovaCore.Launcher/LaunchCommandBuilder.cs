@@ -89,7 +89,8 @@ public static class LaunchCommandBuilder
     private static string SceneArgument(NovaCoreScene scene) => scene switch
     {
         NovaCoreScene.Solar => "sol",
-        NovaCoreScene.ContactCentered => "contact-centered",
+        NovaCoreScene.PoweredFreeFlight => "powered-free-flight",
+            NovaCoreScene.ContactCentered => "contact-centered",
         NovaCoreScene.ContactTilted => "contact-tilted",
         NovaCoreScene.Earth => "earth",
         NovaCoreScene.SubdivisionDiagnostic => "planetary-subdivision-diagnostic",

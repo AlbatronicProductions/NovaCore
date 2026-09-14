@@ -19,6 +19,13 @@ internal static class SpacecraftMotionEvaluator
         SimulationInstant time, out SpacecraftMotion motion)
     {
         motion = default;
+        if (state.Spacecraft.TryGetAppliedEndpoint(subject, out var endpoint))
+        {
+            if (time != endpoint.Epoch) return SpacecraftTranslationStatus.OutsideQualifiedEndpoint;
+            motion = new(subject, time, state.Revision, endpoint.RootFrame, endpoint.PositionRoot, endpoint.VelocityRoot,
+                endpoint.BodyToRoot, endpoint.AngularVelocityBody, endpoint.Properties, endpoint.Inertia);
+            return SpacecraftTranslationStatus.Success;
+        }
         if (!state.Spacecraft.TryGetTranslation(subject, out var translation, out var properties) ||
             !state.Spacecraft.TryGetRigidBody(subject, out var rotation)) return SpacecraftTranslationStatus.SubjectNotFound;
         if (time < rotation.Epoch) return SpacecraftTranslationStatus.TimeBeforeEpoch;

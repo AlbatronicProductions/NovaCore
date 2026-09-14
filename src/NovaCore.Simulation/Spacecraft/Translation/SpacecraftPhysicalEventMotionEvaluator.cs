@@ -20,6 +20,7 @@ internal static class SpacecraftPhysicalEventMotionEvaluator
             return status;
         }
         // Copy immutable segments before numerical work. This view is neither a deep snapshot nor a lock.
+        if (state.Spacecraft.TryGetAppliedEndpoint(subject, out _)) return SpacecraftTranslationStatus.OutsideQualifiedEndpoint;
         if (!state.Spacecraft.TryGetTranslation(subject, out var linear, out var properties) ||
             !state.Spacecraft.TryGetRigidBody(subject, out var angular)) return SpacecraftTranslationStatus.SubjectNotFound;
         var revision = state.Revision;

@@ -15,6 +15,13 @@ using NovaCore.Core;
 using NovaCore.Core.ReferenceFrames;
 using System.Diagnostics;
 
+if (args.Contains("--powered-free-flight-arithmetic", StringComparer.Ordinal)) { PoweredFreeFlightTests.Arithmetic(); return; }
+if (args.Contains("--powered-free-flight-physics", StringComparer.Ordinal)) { PoweredFreeFlightTests.Physics(); return; }
+if (args.Contains("--powered-free-flight-authority", StringComparer.Ordinal)) { PoweredFreeFlightTests.Authority(); return; }
+if (args.Contains("--powered-free-flight-schedules", StringComparer.Ordinal)) { PoweredFreeFlightTests.Schedules(); return; }
+if (args.Contains("--powered-free-flight-allocation", StringComparer.Ordinal)) { PoweredFreeFlightTests.Allocation(); return; }
+if (args.Contains("--powered-free-flight-cost", StringComparer.Ordinal)) { PoweredFreeFlightTests.Cost(); return; }
+
 if (args.Contains("--finite-propellant-cheap", StringComparer.Ordinal)) { FinitePropellantTests.Cheap(); return; }
 if (args.Contains("--finite-propellant-allocation", StringComparer.Ordinal)) { FinitePropellantTests.Allocation(); return; }
 if (args.Contains("--finite-propellant-cost", StringComparer.Ordinal)) { FinitePropellantTests.Cost(); return; }
@@ -93,6 +100,7 @@ if (args.Contains("--orientation-only", StringComparer.Ordinal))
 
 var tests = new (string Name, Action Test)[]
 {
+    ("Segmented powered free flight", ()=>{PoweredFreeFlightTests.Physics();PoweredFreeFlightTests.Authority();}),
     ("SimulationInstant", InstantTests),
     ("SimulationDuration", DurationTests),
     ("SimulationRate", RateTests),

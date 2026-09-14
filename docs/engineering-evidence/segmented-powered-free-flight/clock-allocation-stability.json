@@ -1,0 +1,470 @@
+{
+  "schema": 1,
+  "ticket": "Intermittent Release clock-allocation characterization",
+  "status": "COMPLETE — 8/8 PASS",
+  "planned_fresh_processes": 8,
+  "early_stop": "Only a reproduced nonzero clock allocation; otherwise stop after process 8.",
+  "qualification_change_authorized": false,
+  "production_or_permanent_test_change_authorized": false,
+  "baseline_control_authorized": false,
+  "standalone_clock_authorized": false,
+  "manual_acceptance": "DEFERRED",
+  "identity": {
+    "input_tree_files": 1974,
+    "input_tree_sha256": "092C10C32BC0D219F0D6A1F080FF6D89EBDA53294608AE009D3286F995C59144",
+    "input_tree_definition": "All git tracked and nonignored untracked files, excluding current segmented-powered-free-flight evidence package. UTF-8 path TAB uppercase raw SHA256 LF, sorted by ordinal path.",
+    "fingerprints_checked": 46,
+    "mismatches": [],
+    "runtime_closure_files": [
+      {
+        "path": "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/BepuPhysics.dll",
+        "bytes": 880640,
+        "sha256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7"
+      },
+      {
+        "path": "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/BepuUtilities.dll",
+        "bytes": 163328,
+        "sha256": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68"
+      },
+      {
+        "path": "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Core.dll",
+        "bytes": 93696,
+        "sha256": "4E17970E564B4424389E5243B53BB5F87DB46B16390E1C0B355B56E432D9C583"
+      },
+      {
+        "path": "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Core.pdb",
+        "bytes": 32272,
+        "sha256": "DC1F92C5F6C57DBC4AA5E05A996CBC239F92354A82F4123D70854CC9EC0EA3C8"
+      },
+      {
+        "path": "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.EphemerisFormat.dll",
+        "bytes": 77312,
+        "sha256": "FFE91AC54B2B5768741E608A7E6ECB6F078F1165D1A42367D85385B231A04BEF"
+      },
+      {
+        "path": "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.EphemerisFormat.pdb",
+        "bytes": 27836,
+        "sha256": "260F16B7E3EED060864F92984083BA79CB6D65C0C100C8C6C11C2E491ACA9FF3"
+      },
+      {
+        "path": "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.dll",
+        "bytes": 4253184,
+        "sha256": "3CB3491662FA24E91E304E50349EDD059CA5D2D5E57AD9264D553038455F65E2"
+      },
+      {
+        "path": "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.pdb",
+        "bytes": 191348,
+        "sha256": "D2997B38B183B183C00F16C5823F8E4889919DEFCCA40A3608A0BA01D3660F10"
+      },
+      {
+        "path": "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.deps.json",
+        "bytes": 2386,
+        "sha256": "237988A9AB78E41A0BF5DD05032461BF4D1338F8B71ABE696134F1D6BC360913"
+      },
+      {
+        "path": "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "bytes": 764928,
+        "sha256": "FBE5389E45F80F63014B939B13976F630D7B9DDE59604B29B7F0FCE976E312FF"
+      },
+      {
+        "path": "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.exe",
+        "bytes": 162816,
+        "sha256": "825450211100EFDD200B43CC12F8E67244CDF357DEC0E497E35F9AE9A21C6C8D"
+      },
+      {
+        "path": "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.pdb",
+        "bytes": 159920,
+        "sha256": "6D1F108D78E7FDDDB30B16FFD605DA2B707CCF7B8420818C2F49EC8F30EC6AC6"
+      },
+      {
+        "path": "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.runtimeconfig.json",
+        "bytes": 342,
+        "sha256": "C230A317A54DD960BCBEB5F347F52E18DC665A26F7EFDA2159FCED9A5AC7E097"
+      }
+    ],
+    "identity_manifest_sha256": "51BDB386E1CBDC78B7C3352FB3355457DF5CD39441F53A23DA52E480EE91867D"
+  },
+  "environment": {
+    "head": "89a432ce3b96a5dcb0751cfdc26bfd6776c883a1",
+    "main": "89a432ce3b96a5dcb0751cfdc26bfd6776c883a1",
+    "origin_main": "89a432ce3b96a5dcb0751cfdc26bfd6776c883a1",
+    "remote_main": [
+      "89a432ce3b96a5dcb0751cfdc26bfd6776c883a1\trefs/heads/main"
+    ],
+    "branch": "codex/segmented-powered-free-flight",
+    "staged": [],
+    "os": "Microsoft Windows 10.0.26200",
+    "cpu_architecture": "X64",
+    "logical_processor_count": 24,
+    "os_logical_processor_count": 24,
+    "sdk": "10.0.303",
+    "environment": [
+      {
+        "Name": "DOTNET_ROOT",
+        "Value": "C:\\Program Files\\dotnet"
+      },
+      {
+        "Name": "DOTNET_ROOT(x86)",
+        "Value": "C:\\Program Files (x86)\\dotnet"
+      }
+    ],
+    "working_directory": "E:\\NovaCore",
+    "dotnet_executable": "C:\\Program Files\\dotnet\\dotnet.exe",
+    "registered_groups": [
+      "Segmented powered free flight",
+      "SimulationInstant",
+      "SimulationDuration",
+      "SimulationRate",
+      "Solar UTC and speed presets",
+      "Event ordering",
+      "Internal physical-event epochs",
+      "Timeline topology",
+      "Simulation clock",
+      "Host-duration conversion",
+      "Host-duration debt servicing",
+      "Transaction contracts",
+      "Canonical transaction groups",
+      "Clock execution orchestration",
+      "Celestial contracts",
+      "Celestial system definitions",
+      "Celestial body catalog",
+      "SolAnalytical dataset",
+      "Celestial system time and provenance",
+      "Celestial ephemeris catalogs",
+      "Celestial system evaluation",
+      "Celestial body orientation",
+      "Two-body propagation",
+      "Spacecraft attitude",
+      "Spacecraft translational authority",
+      "Spacecraft contact generation",
+      "Unified linear/angular contact transaction",
+      "Isolated analytical contact response policy",
+      "Spacecraft attitude integration",
+      "Rigid-body rotation",
+      "Rigid-body torque transaction",
+      "Flight reference and SAS guidance",
+      "SAS sign/frame continuity proof",
+      "Analytical orbit sampling",
+      "Celestial frame extraction",
+      "Celestial trajectory replacement",
+      "Celestial impulse events",
+      "Allocation",
+      "Exact-event spacecraft motion",
+      "Exact-event Earth-relative observation",
+      "Florida monotone contact proof",
+      "Qualified root contact kinematics",
+      "Certified isolated-contact response proposals",
+      "Certified pre-impact velocity tuples",
+      "Certified final post-impact velocity states",
+      "Private root-time post-impact state",
+      "Paired private canonical propagation",
+      "Post-impact singleton terrain coverage",
+      "Certified continuation ownership",
+      "Private finite-body contact staging",
+      "Compound contact selection",
+      "Persistent contact publication",
+      "Host-paced contact servicing",
+      "Engineering article definition and lifetime",
+      "Engineering article physical contact",
+      "Engineering article schedules and private equivalence",
+      "Engineering article allocation",
+      "Spacecraft command authority",
+      "Spacecraft command accepted-stream replay",
+      "Spacecraft command non-actuating article",
+      "Spacecraft command allocation",
+      "Single-engine actuation preparation",
+      "Single-engine actuation allocation",
+      "Single-engine proposal article non-actuation",
+      "Finite-propellant segmentation",
+      "Finite-propellant allocation",
+      "Finite-propellant proposal article non-actuation"
+    ]
+  },
+  "gc_mode": "UNAVAILABLE externally; runtimeconfig contains no explicit System.GC.Server setting; no process instrumentation added.",
+  "historical_tags": {
+    "count": 64,
+    "unchanged": true
+  },
+  "runtime_expected": "10.0.12",
+  "command": [
+    "C:\\Program Files\\dotnet\\dotnet.exe",
+    "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll"
+  ],
+  "runs": [
+    {
+      "index": 1,
+      "pid": 3772,
+      "start_utc": "2026-09-14T14:20:30.6251981Z",
+      "end_utc": "2026-09-14T14:20:37.2098434Z",
+      "exit_code": 0,
+      "overall_result": "PASS",
+      "clock_allocated_bytes": 0,
+      "clock_entry": "PASS",
+      "clock_exit": "PASS",
+      "clock_witness": "ORDINARY_ALLOCATION gate=clock bytes=0 entry=PASS exit=PASS",
+      "immediately_preceding_registered_group": "Timeline topology",
+      "groups_completed": 67,
+      "registered_groups": 67,
+      "runtime_modules": [
+        {
+          "path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\coreclr.dll",
+          "version": "10,0,1226,42308 @Commit: 95017c711e6afc1085133d440e42b4bd78155701"
+        }
+      ],
+      "existing_harness_runtime_facts": [
+        "Timeline allocation gate: allocated=0; valid=True; pending=100; cancelled=9900; GC-before=(9, 8, 8); GC-after=(10, 9, 9)"
+      ],
+      "stdout_utf8_bytes": 44180,
+      "stdout_utf8_sha256": "591F3B3E68510333222CFE1C966C7C1F798A261792779322BDD29E5087B2D659",
+      "stderr_utf8_bytes": 0,
+      "stderr_utf8_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "index": 2,
+      "pid": 37788,
+      "start_utc": "2026-09-14T14:20:37.5410279Z",
+      "end_utc": "2026-09-14T14:20:44.1985782Z",
+      "exit_code": 0,
+      "overall_result": "PASS",
+      "clock_allocated_bytes": 0,
+      "clock_entry": "PASS",
+      "clock_exit": "PASS",
+      "clock_witness": "ORDINARY_ALLOCATION gate=clock bytes=0 entry=PASS exit=PASS",
+      "immediately_preceding_registered_group": "Timeline topology",
+      "groups_completed": 67,
+      "registered_groups": 67,
+      "runtime_modules": [
+        {
+          "path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\coreclr.dll",
+          "version": "10,0,1226,42308 @Commit: 95017c711e6afc1085133d440e42b4bd78155701"
+        }
+      ],
+      "existing_harness_runtime_facts": [
+        "Timeline allocation gate: allocated=0; valid=True; pending=100; cancelled=9900; GC-before=(9, 8, 8); GC-after=(10, 9, 9)"
+      ],
+      "stdout_utf8_bytes": 44184,
+      "stdout_utf8_sha256": "339909554016229998CB6BA95DF52AF5BE5CACEB3C8B734A556EF99CC783289C",
+      "stderr_utf8_bytes": 0,
+      "stderr_utf8_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "index": 3,
+      "pid": 30436,
+      "start_utc": "2026-09-14T14:20:52.2858909Z",
+      "end_utc": "2026-09-14T14:20:58.7950915Z",
+      "exit_code": 0,
+      "overall_result": "PASS",
+      "clock_allocated_bytes": 0,
+      "clock_entry": "PASS",
+      "clock_exit": "PASS",
+      "clock_witness": "ORDINARY_ALLOCATION gate=clock bytes=0 entry=PASS exit=PASS",
+      "immediately_preceding_registered_group": "Timeline topology",
+      "groups_completed": 67,
+      "registered_groups": 67,
+      "runtime_modules": [
+        {
+          "path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\coreclr.dll",
+          "version": "10,0,1226,42308 @Commit: 95017c711e6afc1085133d440e42b4bd78155701"
+        }
+      ],
+      "existing_harness_runtime_facts": [
+        "Timeline allocation gate: allocated=0; valid=True; pending=100; cancelled=9900; GC-before=(9, 8, 8); GC-after=(10, 9, 9)"
+      ],
+      "stdout_utf8_bytes": 44183,
+      "stdout_utf8_sha256": "9995ABB312A5E566FD307CD089B39B89FB5958CAC039D0A5E23BF054A8F7274D",
+      "stderr_utf8_bytes": 0,
+      "stderr_utf8_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "index": 4,
+      "pid": 6028,
+      "start_utc": "2026-09-14T14:20:59.1018509Z",
+      "end_utc": "2026-09-14T14:21:05.7496671Z",
+      "exit_code": 0,
+      "overall_result": "PASS",
+      "clock_allocated_bytes": 0,
+      "clock_entry": "PASS",
+      "clock_exit": "PASS",
+      "clock_witness": "ORDINARY_ALLOCATION gate=clock bytes=0 entry=PASS exit=PASS",
+      "immediately_preceding_registered_group": "Timeline topology",
+      "groups_completed": 67,
+      "registered_groups": 67,
+      "runtime_modules": [
+        {
+          "path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\coreclr.dll",
+          "version": "10,0,1226,42308 @Commit: 95017c711e6afc1085133d440e42b4bd78155701"
+        }
+      ],
+      "existing_harness_runtime_facts": [
+        "Timeline allocation gate: allocated=0; valid=True; pending=100; cancelled=9900; GC-before=(9, 8, 8); GC-after=(10, 9, 9)"
+      ],
+      "stdout_utf8_bytes": 44182,
+      "stdout_utf8_sha256": "D5F6CE6B6681040408370DB905531F6288B2AF5DD47493C073761D26738424BB",
+      "stderr_utf8_bytes": 0,
+      "stderr_utf8_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "index": 5,
+      "pid": 65516,
+      "start_utc": "2026-09-14T14:21:15.5989221Z",
+      "end_utc": "2026-09-14T14:21:22.2323463Z",
+      "exit_code": 0,
+      "overall_result": "PASS",
+      "clock_allocated_bytes": 0,
+      "clock_entry": "PASS",
+      "clock_exit": "PASS",
+      "clock_witness": "ORDINARY_ALLOCATION gate=clock bytes=0 entry=PASS exit=PASS",
+      "immediately_preceding_registered_group": "Timeline topology",
+      "groups_completed": 67,
+      "registered_groups": 67,
+      "runtime_modules": [
+        {
+          "path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\coreclr.dll",
+          "version": "10,0,1226,42308 @Commit: 95017c711e6afc1085133d440e42b4bd78155701"
+        }
+      ],
+      "existing_harness_runtime_facts": [
+        "Timeline allocation gate: allocated=0; valid=True; pending=100; cancelled=9900; GC-before=(9, 8, 8); GC-after=(10, 9, 9)"
+      ],
+      "stdout_utf8_bytes": 44178,
+      "stdout_utf8_sha256": "0CCE0B36F19501916545E616E392EA0D502D53910A4CE0E7DE5213BE598D7566",
+      "stderr_utf8_bytes": 0,
+      "stderr_utf8_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "index": 6,
+      "pid": 32564,
+      "start_utc": "2026-09-14T14:21:22.5337955Z",
+      "end_utc": "2026-09-14T14:21:29.2303883Z",
+      "exit_code": 0,
+      "overall_result": "PASS",
+      "clock_allocated_bytes": 0,
+      "clock_entry": "PASS",
+      "clock_exit": "PASS",
+      "clock_witness": "ORDINARY_ALLOCATION gate=clock bytes=0 entry=PASS exit=PASS",
+      "immediately_preceding_registered_group": "Timeline topology",
+      "groups_completed": 67,
+      "registered_groups": 67,
+      "runtime_modules": [
+        {
+          "path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\coreclr.dll",
+          "version": "10,0,1226,42308 @Commit: 95017c711e6afc1085133d440e42b4bd78155701"
+        }
+      ],
+      "existing_harness_runtime_facts": [
+        "Timeline allocation gate: allocated=0; valid=True; pending=100; cancelled=9900; GC-before=(9, 8, 8); GC-after=(10, 9, 9)"
+      ],
+      "stdout_utf8_bytes": 44181,
+      "stdout_utf8_sha256": "4BE9D109DD2A7304C08126A31FF0E8E9B33CFE809109379D2673A485E61FACB0",
+      "stderr_utf8_bytes": 0,
+      "stderr_utf8_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "index": 7,
+      "pid": 42180,
+      "start_utc": "2026-09-14T14:21:39.8893484Z",
+      "end_utc": "2026-09-14T14:21:46.5368057Z",
+      "exit_code": 0,
+      "overall_result": "PASS",
+      "clock_allocated_bytes": 0,
+      "clock_entry": "PASS",
+      "clock_exit": "PASS",
+      "clock_witness": "ORDINARY_ALLOCATION gate=clock bytes=0 entry=PASS exit=PASS",
+      "immediately_preceding_registered_group": "Timeline topology",
+      "groups_completed": 67,
+      "registered_groups": 67,
+      "runtime_modules": [
+        {
+          "path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\coreclr.dll",
+          "version": "10,0,1226,42308 @Commit: 95017c711e6afc1085133d440e42b4bd78155701"
+        }
+      ],
+      "existing_harness_runtime_facts": [
+        "Timeline allocation gate: allocated=0; valid=True; pending=100; cancelled=9900; GC-before=(9, 8, 8); GC-after=(10, 9, 9)"
+      ],
+      "stdout_utf8_bytes": 44183,
+      "stdout_utf8_sha256": "1C33ADB2AE127D6164EAAE10408C9D09813DCC6F6D172DCC2ED1D02D2FC6E621",
+      "stderr_utf8_bytes": 0,
+      "stderr_utf8_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "index": 8,
+      "pid": 42868,
+      "start_utc": "2026-09-14T14:21:46.8421694Z",
+      "end_utc": "2026-09-14T14:21:53.5359178Z",
+      "exit_code": 0,
+      "overall_result": "PASS",
+      "clock_allocated_bytes": 0,
+      "clock_entry": "PASS",
+      "clock_exit": "PASS",
+      "clock_witness": "ORDINARY_ALLOCATION gate=clock bytes=0 entry=PASS exit=PASS",
+      "immediately_preceding_registered_group": "Timeline topology",
+      "groups_completed": 67,
+      "registered_groups": 67,
+      "runtime_modules": [
+        {
+          "path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\coreclr.dll",
+          "version": "10,0,1226,42308 @Commit: 95017c711e6afc1085133d440e42b4bd78155701"
+        }
+      ],
+      "existing_harness_runtime_facts": [
+        "Timeline allocation gate: allocated=0; valid=True; pending=100; cancelled=9900; GC-before=(9, 8, 8); GC-after=(10, 9, 9)"
+      ],
+      "stdout_utf8_bytes": 44184,
+      "stdout_utf8_sha256": "30B44B2BC57A16B2E95F75E25FC03B1A0B1B357F4C7A6A560C4CA74FC8009FCF",
+      "stderr_utf8_bytes": 0,
+      "stderr_utf8_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    }
+  ],
+  "postflight": {
+    "input_tree_files": 1974,
+    "input_tree_sha256": "092C10C32BC0D219F0D6A1F080FF6D89EBDA53294608AE009D3286F995C59144",
+    "runtime_closure_checked": 13,
+    "runtime_closure_mismatches": [],
+    "recorded_fingerprints_checked": 46,
+    "recorded_fingerprint_mismatches": [],
+    "refs": [
+      "89a432ce3b96a5dcb0751cfdc26bfd6776c883a1",
+      "89a432ce3b96a5dcb0751cfdc26bfd6776c883a1",
+      "89a432ce3b96a5dcb0751cfdc26bfd6776c883a1"
+    ],
+    "staged": [],
+    "tags_count": 64,
+    "tags_unchanged": true,
+    "input_tree_unchanged": true
+  },
+  "conclusion": {
+    "classification": "REVISE — STABILITY CHARACTERIZATION COMPLETE",
+    "exact_clock_values_bytes": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "full_groups_passed_each": 67,
+    "earlier_followup_passes": 1,
+    "total_authorized_reproduction_stability_processes_after_original_failure": 9,
+    "text": "The original failure did not recur in nine total authorized reproduction/stability processes after the original failure (one earlier follow-up plus this eight-process campaign).",
+    "cause": "UNRESOLVED",
+    "failure_fixed_claim": false,
+    "original_nonzero_witness_retained": true,
+    "qualification_state": "UNCHANGED — candidate UNBANKED; manual acceptance pending",
+    "next_action": "STOP FOR PROJECT CONTROL",
+    "baseline_control": "NOT RUN",
+    "standalone_control": "NOT RUN",
+    "instrumentation": "NONE; only external output capture and loaded module identity inspection",
+    "correction": "NONE"
+  },
+  "retention": {
+    "passing_stdout_files": 0,
+    "passing_stderr_files": 0,
+    "failing_processes": 0,
+    "transient_captured_stdout_utf8_bytes": 353455,
+    "output_hash_definition": "SHA256 of UTF-8 encoding of externally captured stdout/stderr strings, preserving captured newlines.",
+    "reason": "Concise results and hashes retain reproduction/provenance; no duplicate passing logs persisted."
+  }
+}

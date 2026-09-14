@@ -17,6 +17,8 @@ internal readonly struct SpacecraftStateView
     private bool Current => _owner is not null ? _owner.IsBorrowCurrent(_revision) : _store.Owner is null;
     private void Verify() { if (!Current) throw new InvalidOperationException("Spacecraft state borrow expired; acquire a current view or retain copied values."); }
     public int Count { get { Verify(); return _store.Count; } }
+    internal bool TryGetAppliedEndpoint(SpacecraftId id, out SpacecraftAppliedEndpoint endpoint)
+    { if (Current) return _store.TryGetAppliedEndpoint(id, out endpoint); endpoint = default; return false; }
     internal bool TryGetTranslation(SpacecraftId id, out SpacecraftTranslationState translation, out SpacecraftPhysicalProperties properties)
     { if (Current) return _store.TryGetTranslation(id, out translation, out properties); translation = default; properties = default; return false; }
     internal SpacecraftDefinition GetDefinition(int index) { Verify(); return _store.GetDefinitionAt(index); }

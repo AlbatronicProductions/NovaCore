@@ -11,7 +11,8 @@ public enum NovaCoreScenarioPreset
     M12DSphericalBillboardGpuProof,
     NewEarthRenderer,
     ContactCentered,
-    ContactTilted
+    ContactTilted,
+    PoweredFreeFlight
 }
 
 public enum NovaCoreScene
@@ -22,7 +23,8 @@ public enum NovaCoreScene
     SphericalBillboardGpuProof,
     ProductionSphericalBillboard,
     ContactCentered,
-    ContactTilted
+    ContactTilted,
+    PoweredFreeFlight
 }
 
 public enum NovaCoreStartingBody

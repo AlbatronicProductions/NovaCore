@@ -14,8 +14,11 @@ using NovaCore.Simulation.Celestial;
 using NovaCore.Simulation.Spacecraft.Guidance;
 using NovaCore.Simulation.Time;
 
+if(args.Contains("--powered-free-flight-presentation",StringComparer.Ordinal)){PoweredFlightPresentationTests.Run();return 0;}
+
 var tests = new (string, Action)[]
 {
+    ("Powered free-flight canonical presentation", PoweredFlightPresentationTests.Run),
     ("Contact development canonical presentation", ContactDevelopmentPresentationTests.Run),
     ("Certified Florida continuation publication", CertifiedContinuationPublicationTests.Run),
     ("Certified continuation acceptance gaps", ContinuationAcceptanceTests.Run),

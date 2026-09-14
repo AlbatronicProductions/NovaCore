@@ -63,7 +63,7 @@ internal sealed partial class SimulationTransactionEngine
         if (authority is null || !ReferenceEquals(authority, _commands?.Authority)) return SpacecraftCommandStatus.InvalidAuthority;
         if (!SupportedCommandClock) return SpacecraftCommandStatus.UnsupportedClock;
         if (_clock.CurrentTime < authority.Origin || _clock.CurrentTime > authority.End) return SpacecraftCommandStatus.SourceExhausted;
-        if (!_state.CreateView().Spacecraft.TryGetTranslation(authority.Spacecraft, out var linear, out _) || linear.RootFrame != authority.RootFrame)
+        if (!SpacecraftPhysicalSource.TryCapture(_state.CreateView().Spacecraft, authority.Spacecraft, out var physical) || physical.RootFrame != authority.RootFrame)
             return SpacecraftCommandStatus.SubjectUnavailable;
         if (_commands!.Count > 0 && _commands!.Pending[0].Epoch < _clock.CurrentTime) return SpacecraftCommandStatus.MissedBoundary;
         if (!_clock.TryGetPendingSimulationDebtTarget(out var horizon)) return SpacecraftCommandStatus.ArithmeticOverflow;
@@ -143,65 +143,68 @@ internal sealed partial class SimulationTransactionEngine
     private SpacecraftCommandCommit CommitNextSpacecraftCommandCore(SpacecraftCommandAuthority authority, bool refusePreparedForTest)
     {
         var entered = EnterCommandPhase(); if (entered != SpacecraftCommandStatus.Accepted) return new(entered);
-        try
-        {
-            var status = ValidateCommandAuthority(authority); if (status != SpacecraftCommandStatus.Accepted) return new(status);
-            if (!authority.TryBoundaryAtOrAfter(_clock.CurrentTime, 0, out var index, out var current) || current != _clock.CurrentTime)
-                return new(SpacecraftCommandStatus.NotAtBoundary);
-            if (index <= _commands!.ClosedThrough) return new(SpacecraftCommandStatus.BoundaryClosed);
-            if (_commands!.Count == 0) return new(SpacecraftCommandStatus.NoCommand, Observation: _commands!.Copy());
-            var pending = _commands!.Pending[0];
-            if (pending.Epoch > current) return new(SpacecraftCommandStatus.Pending, pending.Sequence, pending.Epoch, _commands!.Copy());
-            if (HasContactProofBoundaryThrough(current)) return new(SpacecraftCommandStatus.PendingEvent);
-            var before = _commands!.State; var after = before; var intent = pending.Intent;
-            switch (intent.Kind)
-            {
-                case SpacecraftCommandKind.IgniteRequest:
-                case SpacecraftCommandKind.ShutdownRequest:
-                    after = after with { LastEngineRequest = intent.Kind, EngineRequestSequence = pending.Sequence }; break;
-                case SpacecraftCommandKind.HeldAxes:
-                    after = after with { RotationIntent = intent.Rotation, TranslationIntent = intent.Translation }; break;
-                case SpacecraftCommandKind.ThrottlePosition: after = after with { RequestedThrottlePosition = intent.Throttle }; break;
-                case SpacecraftCommandKind.RcsEnabled: after = after with { RequestedRcsEnabled = intent.Enabled }; break;
-                case SpacecraftCommandKind.Mode: after = after with { RequestedMode = intent.Mode }; break;
-                case SpacecraftCommandKind.Target:
-                    var target = intent.Target;
-                    if (target.Kind == CommandTargetKind.CaptureAttitude)
-                    {
-                        if (SpacecraftMotionEvaluator.TryEvaluate(_state.CreateView(), authority.Spacecraft, current, out var motion) != SpacecraftTranslationStatus.Success)
-                            return new(SpacecraftCommandStatus.InvalidTarget);
-                        target = new(CommandTargetKind.Attitude, motion.RootFrame, motion.BodyToRoot, default);
-                    }
-                    else if (target.Kind == CommandTargetKind.Attitude && target != before.Target)
-                    {
-                        // Prepare at E against its deterministic predecessor, never against admission-time state.
-                        // Re-submitting the copied committed target preserves its exact bits without renormalization drift.
-                        if (SpacecraftAttitudeEvaluator.TryCanonicalize(target.Attitude, out var canonical) != SpacecraftAttitudeEvaluationStatus.Success)
-                            return new(SpacecraftCommandStatus.InvalidTarget);
-                        target = target with { Attitude = canonical };
-                    }
-                    after = after with { Target = target }; break;
-                case SpacecraftCommandKind.Neutralize:
-                    // Held intent/assist are released. Latched throttle/RCS and engine requests are not silently rewritten.
-                    after = after with { RotationIntent = default, TranslationIntent = default, RequestedMode = RequestedControlMode.Manual, Target = default }; break;
-                default: return new(SpacecraftCommandStatus.InvalidInput);
-            }
-            var changed = after != before;
-            if (changed && _commands!.Revision.Value == ulong.MaxValue) return new(SpacecraftCommandStatus.RevisionOverflow);
-            var revision = changed ? new CommandRevision(_commands!.Revision.Value + 1) : _commands!.Revision;
-            if (!CanCaptureEngineTransition(intent.Kind)) return new(SpacecraftCommandStatus.Capacity);
-            if (refusePreparedForTest) return new(SpacecraftCommandStatus.PreparationRefused);
-            status = ValidateCommandAuthority(authority); if (status != SpacecraftCommandStatus.Accepted) return new(status);
-            // Fixed bounded commit: all expected refusals precede the first write. No physics/clock/revision/history writes.
-            if (changed) _commands!.State = after; // A no-op retains original bits, including signed zero.
-            _commands!.Revision = revision; _commands!.LastConsumedSequence = pending.Sequence;
-            if (changed) _commands!.LastTransitionEpoch = current;
-            CaptureEngineTransition(pending, revision); // Optional bounded owner-private handoff; preflighted above.
-            for (var i = 1; i < _commands!.Count; i++) _commands!.Pending[i - 1] = _commands!.Pending[i];
-            _commands!.Pending[--_commands!.Count] = default;
-            return new(changed ? SpacecraftCommandStatus.Committed : SpacecraftCommandStatus.NoChange, pending.Sequence, current, _commands!.Copy());
-        }
+        try { return CommitNextSpacecraftCommandInOwnedPhase(authority, refusePreparedForTest); }
         finally { _clock.PublicationPhase.Exit(); }
+    }
+
+    private SpacecraftCommandCommit CommitNextSpacecraftCommandInOwnedPhase(SpacecraftCommandAuthority authority, bool refusePreparedForTest)
+    {
+        if (!_clock.PublicationPhase.IsOwnedBy(this)) { return new(SpacecraftCommandStatus.ReentrantOperation); }
+        var status = ValidateCommandAuthority(authority); if (status != SpacecraftCommandStatus.Accepted) return new(status);
+        if (!authority.TryBoundaryAtOrAfter(_clock.CurrentTime, 0, out var index, out var current) || current != _clock.CurrentTime)
+            return new(SpacecraftCommandStatus.NotAtBoundary);
+        if (index <= _commands!.ClosedThrough) return new(SpacecraftCommandStatus.BoundaryClosed);
+        if (_commands!.Count == 0) return new(SpacecraftCommandStatus.NoCommand, Observation: _commands!.Copy());
+        var pending = _commands!.Pending[0];
+        if (pending.Epoch > current) return new(SpacecraftCommandStatus.Pending, pending.Sequence, pending.Epoch, _commands!.Copy());
+        if (HasContactProofBoundaryThrough(current)) return new(SpacecraftCommandStatus.PendingEvent);
+        var before = _commands!.State; var after = before; var intent = pending.Intent;
+        switch (intent.Kind)
+        {
+            case SpacecraftCommandKind.IgniteRequest:
+            case SpacecraftCommandKind.ShutdownRequest:
+                after = after with { LastEngineRequest = intent.Kind, EngineRequestSequence = pending.Sequence }; break;
+            case SpacecraftCommandKind.HeldAxes:
+                after = after with { RotationIntent = intent.Rotation, TranslationIntent = intent.Translation }; break;
+            case SpacecraftCommandKind.ThrottlePosition: after = after with { RequestedThrottlePosition = intent.Throttle }; break;
+            case SpacecraftCommandKind.RcsEnabled: after = after with { RequestedRcsEnabled = intent.Enabled }; break;
+            case SpacecraftCommandKind.Mode: after = after with { RequestedMode = intent.Mode }; break;
+            case SpacecraftCommandKind.Target:
+                var target = intent.Target;
+                if (target.Kind == CommandTargetKind.CaptureAttitude)
+                {
+                    if (SpacecraftMotionEvaluator.TryEvaluate(_state.CreateView(), authority.Spacecraft, current, out var motion) != SpacecraftTranslationStatus.Success)
+                        return new(SpacecraftCommandStatus.InvalidTarget);
+                    target = new(CommandTargetKind.Attitude, motion.RootFrame, motion.BodyToRoot, default);
+                }
+                else if (target.Kind == CommandTargetKind.Attitude && target != before.Target)
+                {
+                    // Prepare at E against its deterministic predecessor, never against admission-time state.
+                    // Re-submitting the copied committed target preserves its exact bits without renormalization drift.
+                    if (SpacecraftAttitudeEvaluator.TryCanonicalize(target.Attitude, out var canonical) != SpacecraftAttitudeEvaluationStatus.Success)
+                        return new(SpacecraftCommandStatus.InvalidTarget);
+                    target = target with { Attitude = canonical };
+                }
+                after = after with { Target = target }; break;
+            case SpacecraftCommandKind.Neutralize:
+                // Held intent/assist are released. Latched throttle/RCS and engine requests are not silently rewritten.
+                after = after with { RotationIntent = default, TranslationIntent = default, RequestedMode = RequestedControlMode.Manual, Target = default }; break;
+            default: return new(SpacecraftCommandStatus.InvalidInput);
+        }
+        var changed = after != before;
+        if (changed && _commands!.Revision.Value == ulong.MaxValue) return new(SpacecraftCommandStatus.RevisionOverflow);
+        var revision = changed ? new CommandRevision(_commands!.Revision.Value + 1) : _commands!.Revision;
+        if (!CanCaptureEngineTransition(intent.Kind)) return new(SpacecraftCommandStatus.Capacity);
+        if (refusePreparedForTest) return new(SpacecraftCommandStatus.PreparationRefused);
+        status = ValidateCommandAuthority(authority); if (status != SpacecraftCommandStatus.Accepted) return new(status);
+        // Fixed bounded commit: all expected refusals precede the first write. No physics/clock/revision/history writes.
+        if (changed) _commands!.State = after; // A no-op retains original bits, including signed zero.
+        _commands!.Revision = revision; _commands!.LastConsumedSequence = pending.Sequence;
+        if (changed) _commands!.LastTransitionEpoch = current;
+        CaptureEngineTransition(pending, revision); // Optional bounded owner-private handoff; preflighted above.
+        for (var i = 1; i < _commands!.Count; i++) _commands!.Pending[i - 1] = _commands!.Pending[i];
+        _commands!.Pending[--_commands!.Count] = default;
+        return new(changed ? SpacecraftCommandStatus.Committed : SpacecraftCommandStatus.NoChange, pending.Sequence, current, _commands!.Copy());
     }
 
     /// <summary>Freeze this boundary immediately before evaluating the following interval; copied demand never applies physics.</summary>
@@ -209,18 +212,22 @@ internal sealed partial class SimulationTransactionEngine
     {
         demand = default;
         var entered = EnterCommandPhase(); if (entered != SpacecraftCommandStatus.Accepted) return entered;
-        try
-        {
-            var status = ValidateCommandAuthority(authority); if (status != SpacecraftCommandStatus.Accepted) return status;
-            if (!authority.TryBoundaryAtOrAfter(_clock.CurrentTime, 0, out var index, out var epoch) || epoch != _clock.CurrentTime)
-                return SpacecraftCommandStatus.NotAtBoundary;
-            if (index <= _commands!.ClosedThrough) return SpacecraftCommandStatus.BoundaryClosed;
-            if (_commands!.Count > 0 && _commands!.Pending[0].Epoch == epoch) return SpacecraftCommandStatus.Pending;
-            if (HasContactProofBoundaryThrough(epoch)) return SpacecraftCommandStatus.PendingEvent;
-            demand = _commands!.Copy().ConsumeWithoutActuation(); _commands!.ClosedThrough = index;
-            return SpacecraftCommandStatus.BoundaryReady;
-        }
+        try { return CloseSpacecraftCommandBoundaryInOwnedPhase(authority, out demand); }
         finally { _clock.PublicationPhase.Exit(); }
+    }
+
+    private SpacecraftCommandStatus CloseSpacecraftCommandBoundaryInOwnedPhase(SpacecraftCommandAuthority authority, out RequestedControlDemand demand)
+    {
+        demand = default;
+        if (!_clock.PublicationPhase.IsOwnedBy(this)) { demand = default; return SpacecraftCommandStatus.ReentrantOperation; }
+        var status = ValidateCommandAuthority(authority); if (status != SpacecraftCommandStatus.Accepted) return status;
+        if (!authority.TryBoundaryAtOrAfter(_clock.CurrentTime, 0, out var index, out var epoch) || epoch != _clock.CurrentTime)
+            return SpacecraftCommandStatus.NotAtBoundary;
+        if (index <= _commands!.ClosedThrough) return SpacecraftCommandStatus.BoundaryClosed;
+        if (_commands!.Count > 0 && _commands!.Pending[0].Epoch == epoch) return SpacecraftCommandStatus.Pending;
+        if (HasContactProofBoundaryThrough(epoch)) return SpacecraftCommandStatus.PendingEvent;
+        demand = _commands!.Copy().ConsumeWithoutActuation(); _commands!.ClosedThrough = index;
+        return SpacecraftCommandStatus.BoundaryReady;
     }
 
     internal SpacecraftCommandStatus ObserveSpacecraftCommands(SpacecraftCommandAuthority authority, out SpacecraftCommandObservation observation)

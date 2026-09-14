@@ -2,6 +2,7 @@ using NovaCore.Core;
 using NovaCore.Simulation.Spacecraft.Actuation;
 using NovaCore.Simulation.Spacecraft.Rotation;
 using NovaCore.Simulation.Time;
+using NovaCore.Simulation.Transactions;
 
 namespace NovaCore.Simulation.Spacecraft.Resources;
 
@@ -47,16 +48,17 @@ internal sealed class PropellantDefinition
         return PropellantPreparationStatus.Ready;
     }
 }
-/// <summary>Cold canonical source. This slice exposes no live resource writer or revision increment.</summary>
+/// <summary>Immutable capability. Canonical resource storage and its only writer belong to the transaction engine.</summary>
 internal sealed class PropellantResourceAuthority
 {
     internal readonly EnginePreparationAuthority Engine;
     internal readonly PropellantDefinition Definition;
-    internal readonly PropellantInteger RemainingUnits;
-    internal readonly ulong ResourceRevision;
-    internal PropellantResourceAuthority(EnginePreparationAuthority engine, PropellantDefinition definition)
-    { Engine = engine; Definition = definition; RemainingUnits = definition.InitialUnits; ResourceRevision = 0; }
-    internal PropellantSourceObservation Copy() => new(Definition.Values, Definition.InitialUnits, RemainingUnits, ResourceRevision);
+    private readonly SimulationTransactionEngine _owner;
+    internal PropellantInteger RemainingUnits => Copy().RemainingUnits;
+    internal ulong ResourceRevision => Copy().ResourceRevision;
+    internal PropellantResourceAuthority(SimulationTransactionEngine owner, EnginePreparationAuthority engine, PropellantDefinition definition)
+    { _owner = owner; Engine = engine; Definition = definition; }
+    internal PropellantSourceObservation Copy() => _owner.CopyFinitePropellantSource(this);
 }
 internal readonly record struct PropellantSourceObservation(PropellantDefinitionValues Definition,
     PropellantInteger InitialUnits, PropellantInteger RemainingUnits, ulong ResourceRevision);
