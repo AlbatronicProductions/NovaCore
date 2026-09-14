@@ -15,6 +15,10 @@ using NovaCore.Core;
 using NovaCore.Core.ReferenceFrames;
 using System.Diagnostics;
 
+if (args.Contains("--finite-propellant-cheap", StringComparer.Ordinal)) { FinitePropellantTests.Cheap(); return; }
+if (args.Contains("--finite-propellant-allocation", StringComparer.Ordinal)) { FinitePropellantTests.Allocation(); return; }
+if (args.Contains("--finite-propellant-cost", StringComparer.Ordinal)) { FinitePropellantTests.Cost(); return; }
+if (args.Contains("--finite-propellant-article", StringComparer.Ordinal)) { EngineeringContactArticleTests.ResourceProposalNonActuation(); return; }
 if (args.Contains("--engine-preparation-cheap", StringComparer.Ordinal)) { SingleEngineActuationTests.Cheap(); return; }
 if (args.Contains("--engine-preparation-allocation", StringComparer.Ordinal)) { SingleEngineActuationTests.Allocation(); return; }
 if (args.Contains("--engine-preparation-cost", StringComparer.Ordinal)) { SingleEngineActuationTests.Cost(); return; }
@@ -152,6 +156,9 @@ var tests = new (string Name, Action Test)[]
     ("Single-engine actuation preparation", SingleEngineActuationTests.Cheap),
     ("Single-engine actuation allocation", SingleEngineActuationTests.Allocation),
     ("Single-engine proposal article non-actuation", EngineeringContactArticleTests.EngineProposalNonActuation),
+    ("Finite-propellant segmentation", FinitePropellantTests.Cheap),
+    ("Finite-propellant allocation", FinitePropellantTests.Allocation),
+    ("Finite-propellant proposal article non-actuation", EngineeringContactArticleTests.ResourceProposalNonActuation),
 };
 foreach (var (name, test) in tests) { test(); Console.WriteLine($"PASS {name}"); }
 

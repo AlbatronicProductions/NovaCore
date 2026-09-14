@@ -198,24 +198,30 @@ internal sealed partial class SimulationTransactionEngine
     {
         preview = default;
         var entered = EnterEnginePreparationPhase(); if (entered != EnginePreparationStatus.Ready) return entered;
-        try
-        {
-            if (!OwnsEnginePreparation(authority)) return EnginePreparationStatus.InvalidAuthority;
-            var p = _enginePreparation!;
-            if (!p.Active || !proposal.IsIssuedBy(p.Seal) || proposal.Boundary != p.LastBoundary) return EnginePreparationStatus.InvalidProposal;
-            var view = _state.CreateView();
-            if (ValidateCommandAuthority(authority.Commands) != SpacecraftCommandStatus.Accepted ||
-                CaptureContinuationClock() != p.Clock || view.Revision != p.Preview.SourceStateRevision ||
-                _clock.Timeline.Revision != p.Preview.SourceTimelineRevision || _commands!.Revision != p.Preview.SourceCommandRevision ||
-                _commands.LastConsumedSequence != p.Preview.SourceCommandSequence || _commands.ClosedThrough != p.LastBoundary ||
-                !view.Spacecraft.TryGetTranslation(authority.Commands.Spacecraft, out var linear, out var mass) ||
-                !view.Spacecraft.TryGetRigidBody(authority.Commands.Spacecraft, out var angular) ||
-                !view.Spacecraft.TryGetDefinition(authority.Commands.Spacecraft, out var craft) ||
-                linear != p.Linear || angular != p.Angular || mass != p.Mass || craft != p.Craft)
-                return EnginePreparationStatus.StaleSource;
-            preview = p.Preview; return EnginePreparationStatus.Preview;
-        }
+        try { return ReadSingleEngineActuationInOwnedPhase(authority, proposal, out preview); }
         finally { _clock.PublicationPhase.Exit(); }
+    }
+
+    // Shared source reader only. Public preview still acquires the same exclusive owner phase.
+    private EnginePreparationStatus ReadSingleEngineActuationInOwnedPhase(EnginePreparationAuthority authority,
+        EngineActuationProposal proposal, out EngineActuationPreview preview)
+    {
+        preview = default;
+        if (!_clock.PublicationPhase.IsOwnedBy(this)) return EnginePreparationStatus.ReentrantOperation;
+        if (!OwnsEnginePreparation(authority)) return EnginePreparationStatus.InvalidAuthority;
+        var p = _enginePreparation!;
+        if (!p.Active || !proposal.IsIssuedBy(p.Seal) || proposal.Boundary != p.LastBoundary) return EnginePreparationStatus.InvalidProposal;
+        var view = _state.CreateView();
+        if (ValidateCommandAuthority(authority.Commands) != SpacecraftCommandStatus.Accepted ||
+            CaptureContinuationClock() != p.Clock || view.Revision != p.Preview.SourceStateRevision ||
+            _clock.Timeline.Revision != p.Preview.SourceTimelineRevision || _commands!.Revision != p.Preview.SourceCommandRevision ||
+            _commands.LastConsumedSequence != p.Preview.SourceCommandSequence || _commands.ClosedThrough != p.LastBoundary ||
+            !view.Spacecraft.TryGetTranslation(authority.Commands.Spacecraft, out var linear, out var mass) ||
+            !view.Spacecraft.TryGetRigidBody(authority.Commands.Spacecraft, out var angular) ||
+            !view.Spacecraft.TryGetDefinition(authority.Commands.Spacecraft, out var craft) ||
+            linear != p.Linear || angular != p.Angular || mass != p.Mass || craft != p.Craft)
+            return EnginePreparationStatus.StaleSource;
+        preview = p.Preview; return EnginePreparationStatus.Preview;
     }
 
     /// <summary>Explicit owner retirement, including stale sources. Does not apply, acknowledge, rewind or resurrect edges.</summary>

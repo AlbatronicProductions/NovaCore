@@ -1,0 +1,188 @@
+{
+  "scope": "Bounded nonphysical finite-propellant segmentation candidate, unbanked",
+  "repository": "E:/NovaCore",
+  "head": "cad23d1ba9476a75d9897b8c20924cc3f1497db9",
+  "main": "cad23d1ba9476a75d9897b8c20924cc3f1497db9",
+  "origin_main": "cad23d1ba9476a75d9897b8c20924cc3f1497db9",
+  "remote_main": "cad23d1ba9476a75d9897b8c20924cc3f1497db9",
+  "branch": "codex/finite-propellant-segmentation",
+  "milestones": {
+    "m14_23": {
+      "commit": "6c9830237bc29bbd3c9cf5f4644b6409c32eaa9b",
+      "tag": "m14.23-prepared-single-engine-actuation",
+      "tagObject": "cd22cc96d88d2b6cf3ca48740ad41baecbbe7c9e"
+    },
+    "m14_22": "899f11f727205340bdd550dd65a853e253de0ed3",
+    "m14_21": "b6e8fa568585706ce38c0609aeb14db4a643123e"
+  },
+  "preservation": {
+    "baselineTrackedCount": 1932,
+    "unchangedTrackedCount": 1930,
+    "intendedTrackedChanges": [
+      {
+        "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.EnginePreparation.cs",
+        "before": "1641B0566A61174578993DDD765E44D7695E28F481B8333A3BAAC4CCF19EF55D",
+        "after": "D4429843AEB86D3DE80ECFE2C90CF3AF5774470CA590ED4801B23B0C41CD9276"
+      },
+      {
+        "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+        "before": "38AE5D0F7BF1E56F323E17027287151DC35B128FE61ED7344D988F75488BADE7",
+        "after": "0A4207757B9EA20ACB09CBF87A0C1D8EFEDE5C043EEF255274496354C519A460"
+      }
+    ],
+    "newSourceAndTestFiles": 6,
+    "allHistoricalTagsUnchanged": true,
+    "historicalTagCount": 63,
+    "stagedCount": 0,
+    "blender": "Untouched",
+    "preexistingUntracked": [
+      {
+        "path": "docs/engineering-evidence/bepu-local-contact-staging/staging-build-blocker.md",
+        "sha256": "3DAB84C722F700945E25F6276ACDCA4874968CA39AD724EB82047D020D7056E7"
+      }
+    ]
+  },
+  "candidateSourceAndTests": [
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.EnginePreparation.cs",
+      "bytes": 16149,
+      "sha256": "D4429843AEB86D3DE80ECFE2C90CF3AF5774470CA590ED4801B23B0C41CD9276"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Propellant.cs",
+      "bytes": 11195,
+      "sha256": "1465152F84E91DCDFE30D375C5066029877E121694BB9590EC91D48959E75BCE"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Resources/PropellantInteger.cs",
+      "bytes": 7388,
+      "sha256": "9CD3EEF877047A44102D925F612DEB263A3396DA8FB600A18FC144C935B5AF41"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Resources/FinitePropellantSegmentation.cs",
+      "bytes": 9226,
+      "sha256": "71867C21DB6099C52BC5A7F1830B06851A52C5D1AD6D80A3E59BB4D0CE69B925"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "bytes": 255567,
+      "sha256": "0A4207757B9EA20ACB09CBF87A0C1D8EFEDE5C043EEF255274496354C519A460"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/FinitePropellantTests.cs",
+      "bytes": 31281,
+      "sha256": "64568B7E70C1C06BD75E76780535C204AFDE9C84A66AC33395BA32B56AD8B2E1"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/FinitePropellantTests.Measurements.cs",
+      "bytes": 7154,
+      "sha256": "2ED5F4A51024D3CA4E724CFAA77822B3A479250EB34F3A442F9BB280DED7DB0E"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/EngineeringContactArticleTests.ResourceProposals.cs",
+      "bytes": 8096,
+      "sha256": "EF76D0584907CB8C8F7B2FD47CF23C15ECE0C6DE07EA3DD6B7FC633CFB6D7A27"
+    }
+  ],
+  "acceptedArchitecture": {
+    "path": "docs/engineering-evidence/finite-propellant-architecture",
+    "unchanged": true,
+    "files": [
+      {
+        "path": "architecture-candidates.md",
+        "bytes": 11622,
+        "sha256": "2BF20621F4579490D14AF2B1B79D90BB0CFF2F38D3C89467E63F6BEEF422A02F"
+      },
+      {
+        "path": "arithmetic-witness.py",
+        "bytes": 2751,
+        "sha256": "C5EFCEDC615FDF8BA054CAA4DC7095CF57C099860CBE7F616ED4734ED923B473"
+      },
+      {
+        "path": "current-novacore-map.md",
+        "bytes": 9007,
+        "sha256": "4D4B611060CDB798CA1B24E61BF9B8A1621261F4FD0F8A73687079DF6DB768C4"
+      },
+      {
+        "path": "exhaustion-event-contract.md",
+        "bytes": 10947,
+        "sha256": "223D6DCB1AECB8926A2F1A8F81A35ECE225D37EC45AC7406C5F85F7533065D2F"
+      },
+      {
+        "path": "identity.json",
+        "bytes": 16261,
+        "sha256": "16CB0DA27BC279A11902740E841D43C1D3695A090B3D60554C5C61BC62CBDC6B"
+      },
+      {
+        "path": "ksa-resource-convergence.md",
+        "bytes": 5991,
+        "sha256": "68E2CF6C507040A0002D310B81422C102F83EFDA90F39F5445BA705B0A0FC081"
+      },
+      {
+        "path": "README.md",
+        "bytes": 8609,
+        "sha256": "F46315CEBAB1571B695F933337A2B4D44E589397049340954E11DF4EB3FCE0AD"
+      },
+      {
+        "path": "resource-authority-contract.md",
+        "bytes": 12778,
+        "sha256": "A5A422E90110D6E1CE4A87429111CC3F958C68A17E767047397418BA05239EFF"
+      },
+      {
+        "path": "verification.md",
+        "bytes": 7141,
+        "sha256": "B2293982F33DB78CFF0268A6B93C97A12A0E17987A40093CAED38E66E99BFC41"
+      }
+    ],
+    "requiredInFutureBankingStageTree": true
+  },
+  "sourcePredicateVerification": {
+    "m14_23PreviewBody": "Exact match after whitespace removal",
+    "onlyAdditionalPredicate": "Explicit existing-owner-phase guard",
+    "physicalEngineProposalMath": "Unchanged"
+  },
+  "evidence": {
+    "budgetBytes": 131072,
+    "filesExcludingIdentity": [
+      {
+        "path": "README.md",
+        "bytes": 10923,
+        "sha256": "7C29E3703F5EB9B41BC8DBFC58A61A353FA80AC42F6232D2607444E510957754"
+      },
+      {
+        "path": "reproduce.ps1",
+        "bytes": 1804,
+        "sha256": "C61A1A6C183358B0E1CBCAC7873E2AD9FCBA43863DEBD43CABFEC327CB170C65"
+      },
+      {
+        "path": "validation.json",
+        "bytes": 15448,
+        "sha256": "49848A48B7F3986B715F168D915A52648E3C6534ABB9BA5A473A02CA85BA3B9F"
+      },
+      {
+        "path": "verification.md",
+        "bytes": 4325,
+        "sha256": "E55E20765771CC31C0951A250DA22D58B4C976E89171189D4D92670CEB82FC05"
+      }
+    ],
+    "identitySelfHash": "Excluded",
+    "newDisposableDiagnosticFiles": 0,
+    "normalBuildOutputs": "Existing bin/obj trees rebuilt; no extra copy or bulk diagnostic tree",
+    "cleanup": "No unrelated scratch or evidence removed"
+  },
+  "currentStatus": [
+    " M src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.EnginePreparation.cs",
+    " M tests/NovaCore.Simulation.Tests/Program.cs",
+    "?? docs/engineering-evidence/bepu-local-contact-staging/staging-build-blocker.md",
+    "?? docs/engineering-evidence/finite-propellant-architecture/",
+    "?? docs/engineering-evidence/finite-propellant-segmentation/",
+    "?? src/NovaCore.Simulation/Spacecraft/Resources/",
+    "?? src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Propellant.cs",
+    "?? tests/NovaCore.Simulation.Tests/EngineeringContactArticleTests.ResourceProposals.cs",
+    "?? tests/NovaCore.Simulation.Tests/FinitePropellantTests.Measurements.cs",
+    "?? tests/NovaCore.Simulation.Tests/FinitePropellantTests.cs"
+  ],
+  "judgment": "PASS",
+  "banked": false,
+  "futureStagePolicy": "Accepted fingerprints -> exact stage set including both evidence packages -> dependency/link closure -> staged-tree check/build -> only after Project Control authorization commit/tag/atomic push/remote verify"
+}

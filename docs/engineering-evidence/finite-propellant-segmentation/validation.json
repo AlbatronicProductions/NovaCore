@@ -1,0 +1,337 @@
+{
+  "scope": "Nonphysical resource preparation qualification; no fuel consumption or force application",
+  "baseline": "cad23d1ba9476a75d9897b8c20924cc3f1497db9",
+  "tooling": {
+    "sdk": "10.0.303",
+    "dotnetHost": "10.0.12",
+    "platform": "Windows x64",
+    "runtimeConfiguration": "net10.0, Microsoft.NETCore.App 10.0.0 framework-dependent; ordinary host patch selection"
+  },
+  "builds": {
+    "Debug": {
+      "solution": "PASS",
+      "warnings": 0,
+      "errors": 0
+    },
+    "Release": {
+      "solution": "PASS",
+      "warnings": 0,
+      "errors": 0
+    },
+    "afterOracleStrengthening": {
+      "Debug": "Simulation test project rebuild PASS",
+      "Release": "Simulation test project rebuild PASS"
+    }
+  },
+  "focused": [
+    {
+      "configuration": "Debug",
+      "flag": "--finite-propellant-allocation",
+      "exitCode": 0,
+      "result": "PASS",
+      "output": [
+        "ORDINARY_ALLOCATION gate=propellant-full bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-endpoint bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-interior bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-tiny-interior bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-empty bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-no-demand bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-copied-observation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-refusals bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PROPELLANT_ALLOCATION PASS gates=8 expected_bytes=0 operations_per_gate=1024"
+      ]
+    },
+    {
+      "configuration": "Debug",
+      "flag": "--finite-propellant-article",
+      "exitCode": 0,
+      "result": "PASS",
+      "output": [
+        "ARTICLE_CONTACT {\"tilted\":false,\"tiltAngle\":0.25,\"moving\":false,\"supported\":600,\"childMask\":7,\"peak_m\":0.005819714882528193,\"peakStep\":34,\"restingSetChanges\":0,\"max_drift_m\":6.205949151489612E-08,\"max_omega\":0.07002790492497588,\"n16666\":400,\"n16667\":800,\"ticks\":20000000,\"revision\":1200,\"history\":1200,\"article_preparation_ms\":4.0692,\"world_preparation_ms\":30.9345,\"first_step_ms\":28.0826,\"first_contact_step\":33,\"first_contact_ms\":26.5158}",
+        "RESOURCE_ARTICLE PASS tilted=False moving=False endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS no_force_applied=PASS",
+        "ARTICLE_CONTACT {\"tilted\":true,\"tiltAngle\":0.25,\"moving\":false,\"supported\":600,\"childMask\":7,\"peak_m\":0.006945546380241474,\"peakStep\":35,\"restingSetChanges\":0,\"max_drift_m\":8.708620871908054E-08,\"max_omega\":3.162903474481871,\"n16666\":400,\"n16667\":800,\"ticks\":20000000,\"revision\":1200,\"history\":1200,\"article_preparation_ms\":0.021,\"world_preparation_ms\":0.1603,\"first_step_ms\":0.0432,\"first_contact_step\":30,\"first_contact_ms\":4.803}",
+        "RESOURCE_ARTICLE PASS tilted=True moving=False endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS no_force_applied=PASS",
+        "ARTICLE_CONTACT {\"tilted\":true,\"tiltAngle\":0.25,\"moving\":true,\"supported\":600,\"childMask\":7,\"peak_m\":0.006945746950922316,\"peakStep\":35,\"restingSetChanges\":0,\"max_drift_m\":4.467548163206231E-07,\"max_omega\":3.1629034744818716,\"n16666\":400,\"n16667\":800,\"ticks\":20000000,\"revision\":1200,\"history\":1200,\"article_preparation_ms\":0.0171,\"world_preparation_ms\":1.2287,\"first_step_ms\":0.0442,\"first_contact_step\":30,\"first_contact_ms\":0.0448}",
+        "RESOURCE_ARTICLE PASS tilted=True moving=True endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS no_force_applied=PASS"
+      ]
+    },
+    {
+      "configuration": "Debug",
+      "flag": "--engine-preparation-cheap",
+      "exitCode": 0,
+      "result": "PASS",
+      "output": [
+        "ENGINE_CHEAP PASS definition/math/ordered-capture/refusal/seal/replay/body-frame/conditional-preview/determinism"
+      ]
+    },
+    {
+      "configuration": "Debug",
+      "flag": "--engine-preparation-allocation",
+      "exitCode": 0,
+      "result": "PASS",
+      "output": [
+        "ORDINARY_ALLOCATION gate=engine-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-no-edge-preparation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-transition-capture bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-preparation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-preview bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-duplicate-refusal bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ENGINE_ALLOCATION PASS complete=0 no_edge=0 capture=0 preparation=0 preview=0 duplicate_refusal=0"
+      ]
+    },
+    {
+      "configuration": "Release",
+      "flag": "--finite-propellant-cheap",
+      "exitCode": 0,
+      "result": "PASS",
+      "output": [
+        "PROPELLANT_ARITHMETIC PASS binary64_cases=6141 random_cases=512 limb_bits=2176 maximum_product_bits=2161 exact_conservation=PASS",
+        "PROPELLANT_CHEAP PASS analytical=PASS authority=PASS mass_law=PASS no_canonical_mutation=PASS"
+      ]
+    },
+    {
+      "configuration": "Release",
+      "flag": "--finite-propellant-allocation",
+      "exitCode": 0,
+      "result": "PASS",
+      "output": [
+        "ORDINARY_ALLOCATION gate=propellant-full bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-endpoint bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-interior bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-tiny-interior bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-empty bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-no-demand bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-copied-observation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-refusals bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PROPELLANT_ALLOCATION PASS gates=8 expected_bytes=0 operations_per_gate=1024"
+      ]
+    },
+    {
+      "configuration": "Release",
+      "flag": "--finite-propellant-cost",
+      "exitCode": 0,
+      "result": "PASS",
+      "output": [
+        "PROPELLANT_PERFORMANCE warm=256 samples=4096 median_ms=0.0325 p95_ms=0.0379 p99_ms=0.0712 max_ms=0.1171 retirement=outside timing_runtime=ordinary threshold=REPORT_ONLY",
+        "ORDINARY_ALLOCATION gate=propellant-cold-retained bytes=4280 entry=PASS exit=PASS",
+        "PROPELLANT_STORAGE retained_graph_bytes=4280 objects=4 owner_reference_bytes=8 bounded_total_bytes=4288 integer_bytes=272 definition_values_bytes=88 source_observation_bytes=640 ratio_bytes=544 witness_value_bytes=1512 proposal_value_bytes=3224 token_bytes=16 progress_bytes=16 growing_history_bytes=0"
+      ]
+    }
+  ],
+  "fullSuites": [
+    {
+      "configuration": "Debug",
+      "exitCode": 0,
+      "expectedGroups": 66,
+      "passedGroups": 66,
+      "missingGroups": [],
+      "resourceResults": [
+        "PROPELLANT_ARITHMETIC PASS binary64_cases=6141 random_cases=512 limb_bits=2176 maximum_product_bits=2161 exact_conservation=PASS",
+        "PROPELLANT_CHEAP PASS analytical=PASS authority=PASS mass_law=PASS no_canonical_mutation=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-full bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-endpoint bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-interior bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-tiny-interior bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-empty bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-no-demand bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-copied-observation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-refusals bytes=0 entry=PASS exit=PASS",
+        "PROPELLANT_ALLOCATION PASS gates=8 expected_bytes=0 operations_per_gate=1024",
+        "RESOURCE_ARTICLE PASS tilted=False moving=False endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS no_force_applied=PASS",
+        "RESOURCE_ARTICLE PASS tilted=True moving=False endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS no_force_applied=PASS",
+        "RESOURCE_ARTICLE PASS tilted=True moving=True endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS no_force_applied=PASS"
+      ]
+    },
+    {
+      "configuration": "Release",
+      "exitCode": 0,
+      "expectedGroups": 66,
+      "passedGroups": 66,
+      "missingGroups": [],
+      "resourceResults": [
+        "PROPELLANT_ARITHMETIC PASS binary64_cases=6141 random_cases=512 limb_bits=2176 maximum_product_bits=2161 exact_conservation=PASS",
+        "PROPELLANT_CHEAP PASS analytical=PASS authority=PASS mass_law=PASS no_canonical_mutation=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-full bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-endpoint bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-interior bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-tiny-interior bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-empty bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-no-demand bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-copied-observation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-refusals bytes=0 entry=PASS exit=PASS",
+        "PROPELLANT_ALLOCATION PASS gates=8 expected_bytes=0 operations_per_gate=1024",
+        "RESOURCE_ARTICLE PASS tilted=False moving=False endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS no_force_applied=PASS",
+        "RESOURCE_ARTICLE PASS tilted=True moving=False endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS no_force_applied=PASS",
+        "RESOURCE_ARTICLE PASS tilted=True moving=True endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS no_force_applied=PASS"
+      ]
+    }
+  ],
+  "finalOracleStrengthening": {
+    "change": "Independent min consumption, classification and both ratio cross products; tests only",
+    "Debug": "PASS",
+    "Release": "PASS",
+    "fullSuiteRepeatsAfterStrengthening": 0,
+    "reason": "Only assertions in focused correctness helper changed; rebuilt and reran that entire group. Production and measurement methods unchanged."
+  },
+  "regressions": [
+    {
+      "project": "NovaCore.ReferenceFrames.Tests",
+      "configuration": "Debug",
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "project": "NovaCore.Precision.Tests",
+      "configuration": "Debug",
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "project": "NovaCore.BepuDependency.Tests",
+      "configuration": "Debug",
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "project": "NovaCore.ReferenceFrames.Tests",
+      "configuration": "Release",
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "project": "NovaCore.Precision.Tests",
+      "configuration": "Release",
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "project": "NovaCore.BepuDependency.Tests",
+      "configuration": "Release",
+      "exitCode": 0,
+      "result": "PASS"
+    }
+  ],
+  "allocation": {
+    "gates": 8,
+    "warmOperations": 128,
+    "measuredOperations": 1024,
+    "DebugBytes": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "ReleaseBytes": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "entryExit": "PASS every window",
+    "positiveControlBytes": 152,
+    "control": "byte[128]",
+    "measurement": "Existing checked 1 MiB no-GC helper; separate from timing"
+  },
+  "cost": {
+    "configuration": "Release",
+    "freshProcesses": 1,
+    "warmOperations": 256,
+    "samples": 4096,
+    "medianMilliseconds": 0.0325,
+    "p95Milliseconds": 0.0379,
+    "p99Milliseconds": 0.0712,
+    "maxMilliseconds": 0.1171,
+    "includes": "Source checks, exact prepare/seal, copied preview/segment and source/progress observation",
+    "excludes": "Retirement, parent preparation, physical integration",
+    "threshold": "REPORT_ONLY"
+  },
+  "storage": {
+    "retainedGraphBytes": 4280,
+    "objectCount": 4,
+    "definition": 656,
+    "authority": 312,
+    "preparationSlot": 3288,
+    "seal": 24,
+    "ownerReference": 8,
+    "boundedTotalBytes": 4288,
+    "integer": 272,
+    "ratio": 544,
+    "sourceObservation": 640,
+    "exhaustionWitness": 1512,
+    "preview": 3224,
+    "token": 16,
+    "progress": 16,
+    "growingHistoryBytes": 0,
+    "method": "Checked allocation measurement around only cold definition and binding; all allocations retained; x64 layout"
+  },
+  "article": {
+    "adapter": "Explicit zero resource, unchanged existing structural mass; positive conditional engine demand",
+    "endpointMatchesPerConfiguration": {
+      "centered": 1200,
+      "tilted": 1200,
+      "tiltedMovingFrame": 1200
+    },
+    "finalSupportPerCase": "600/600",
+    "referencePeakPenetrationMetres": [
+      0.005819714882528193,
+      0.006945546380241474,
+      0.006945746950922316
+    ],
+    "intervalCounts": {
+      "ticks16666": 400,
+      "ticks16667": 800,
+      "totalTicks": 20000000
+    },
+    "stateRevisionIncrease": 1200,
+    "historyIncrease": 1200,
+    "finalDebt": 0,
+    "claim": "Non-actuation bit identity only"
+  },
+  "developmentFindings": [
+    {
+      "kind": "Test compile",
+      "cause": "Ambiguous target-typed ReferenceFrameGraphBuilder.Add",
+      "correction": "Explicit ReferenceFrameNode"
+    },
+    {
+      "kind": "Test expectation",
+      "cause": "4096 exact tiny debits cross lower-double rounding midpoint; old assertion expected1",
+      "correction": "Independent exact conservation and next-lower-double versus naive1 witness"
+    },
+    {
+      "kind": "Independent verifier",
+      "cause": "Conservation did not separately establish powered ratio",
+      "correction": "Independent minimum consumption and both ratio oracle checks; Debug/Release focused pass"
+    }
+  ],
+  "measuredBinaries": [
+    {
+      "Path": "E:\\NovaCore\\tests\\NovaCore.Simulation.Tests\\bin\\Release\\net10.0\\NovaCore.Simulation.Tests.dll",
+      "Hash": "7D95B152D74EE70398193E1F92CEDCE36799E254F3A0DD9E32369A46B1A0A3AA"
+    },
+    {
+      "Path": "E:\\NovaCore\\src\\NovaCore.Simulation\\bin\\Release\\net10.0\\NovaCore.Simulation.dll",
+      "Hash": "64B2775B7BE9ECC56F543D0F6F0D12C449EAE77726130A540999A144919ECE86"
+    }
+  ],
+  "finalReleaseBinaries": {
+    "simulationSha256": "64B2775B7BE9ECC56F543D0F6F0D12C449EAE77726130A540999A144919ECE86",
+    "testsSha256": "D7DF72022F2F0239179FC6B95D436F674F255EE0A87354B3E6AE5608C1E7FA90"
+  },
+  "judgment": "PASS",
+  "banked": false
+}
