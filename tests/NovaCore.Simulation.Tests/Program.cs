@@ -15,6 +15,12 @@ using NovaCore.Core;
 using NovaCore.Core.ReferenceFrames;
 using System.Diagnostics;
 
+if (args.Contains("--spacecraft-command-cheap", StringComparer.Ordinal)) { SpacecraftCommandTests.Cheap(); return; }
+if (args.Contains("--spacecraft-command-schedules", StringComparer.Ordinal)) { SpacecraftCommandTests.Schedules(); return; }
+if (args.Contains("--spacecraft-command-article", StringComparer.Ordinal)) { EngineeringContactArticleTests.CommandNonActuation(); return; }
+if (args.Contains("--spacecraft-command-allocation", StringComparer.Ordinal)) { SpacecraftCommandTests.Allocation(); return; }
+if (args.Contains("--spacecraft-command-cost", StringComparer.Ordinal)) { SpacecraftCommandTests.Cost(); return; }
+
 if (args.Contains("--compound-selector-only", StringComparer.Ordinal)) { CompoundContactSelectorTests.Run(); return; }
 if (args.Contains("--compound-selector-allocation", StringComparer.Ordinal)) { CompoundContactSelectorTests.Cost(allocationOnly: true); return; }
 if (args.Contains("--engineering-article-allocation", StringComparer.Ordinal)) { EngineeringContactArticleTests.Allocation(); return; }
@@ -135,6 +141,10 @@ var tests = new (string Name, Action Test)[]
     ("Engineering article physical contact", EngineeringContactArticleTests.Contacts),
     ("Engineering article schedules and private equivalence", EngineeringContactArticleTests.Schedules),
     ("Engineering article allocation", EngineeringContactArticleTests.Allocation),
+    ("Spacecraft command authority", SpacecraftCommandTests.Cheap),
+    ("Spacecraft command accepted-stream replay", SpacecraftCommandTests.Schedules),
+    ("Spacecraft command non-actuating article", EngineeringContactArticleTests.CommandNonActuation),
+    ("Spacecraft command allocation", SpacecraftCommandTests.Allocation),
 };
 foreach (var (name, test) in tests) { test(); Console.WriteLine($"PASS {name}"); }
 

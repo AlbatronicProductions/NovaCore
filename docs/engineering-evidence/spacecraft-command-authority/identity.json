@@ -1,0 +1,76 @@
+{
+  "baseline": "8c291881b323be3e3038d57d2ac180eff826f065",
+  "branch": "codex/spacecraft-command-authority",
+  "head": "8c291881b323be3e3038d57d2ac180eff826f065",
+  "main": "8c291881b323be3e3038d57d2ac180eff826f065",
+  "origin_main": "8c291881b323be3e3038d57d2ac180eff826f065",
+  "remote_main": "8c291881b323be3e3038d57d2ac180eff826f065\trefs/heads/main",
+  "banked_m14_21": "b6e8fa568585706ce38c0609aeb14db4a643123e",
+  "tracked_before": 1896,
+  "tracked_unchanged": 1895,
+  "changed_tracked": [
+    "tests/NovaCore.Simulation.Tests/Program.cs"
+  ],
+  "preexisting_production_csharp": 254,
+  "preexisting_source_changes": [],
+  "preexisting_untracked_count": 7,
+  "preexisting_untracked_changed": [],
+  "historical_tag_ref_count": 61,
+  "tags_unchanged": true,
+  "baseline_file_aggregate_sha256": "36A69C411AFF67F7C7F926AD5506C7A750D14842A464F9CD998B9269BD8CCAA4",
+  "staged": [],
+  "candidate_inputs": [
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Commands/SpacecraftCommand.cs",
+      "bytes": 4927,
+      "sha256": "3A120893AD56D0E52E137AD507BE9667732759DEAD3E17F55455079E55DA5C6C"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Commands/SpacecraftCommandAuthority.cs",
+      "bytes": 1864,
+      "sha256": "80DBF95521F9BBF76C645D02F9638371E365556000700B363259A45AFE9DB641"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.SpacecraftCommands.cs",
+      "bytes": 17471,
+      "sha256": "CCBEF8005A3E882597EFDC4A8E764A8D5DCAA1C3752FD2DF88AB9EA1B43A2120"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "bytes": 254011,
+      "sha256": "C32A85969C8994AB632D1DE473717C92B75F0E265ADE441A2DBBE90B6952E37F"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/SpacecraftCommandTests.cs",
+      "bytes": 31812,
+      "sha256": "61590FD4610C96C7E06BD4E290ACBC7DFEDEBA57838A7639150A62181102EEDF"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/EngineeringContactArticleTests.Commands.cs",
+      "bytes": 5147,
+      "sha256": "5544229A7090D457781819B699638627D6B6FAA423D643D954A3BA45EFB5867F"
+    }
+  ],
+  "validation_sha256": "9CA3813A29D60A3116B59C0C84B92B6C5FF5582B93A7C694E07779636B329E30",
+  "validation_sdk": "10.0.303",
+  "validation_gate_count": 19,
+  "simulation_registered_groups": 60,
+  "scratch_cleanup": {
+    "status": "automatic approval review rejected deletion before execution: blocked by policy",
+    "reviewed_path": "E:\\NovaCore\\build\\spacecraft-command-authority\\baseline.json",
+    "remaining_files": 1,
+    "remaining_bytes": 402165.0,
+    "deleted_files": 0,
+    "retry": false
+  },
+  "final_checks": {
+    "candidate_fingerprints": "PASS",
+    "preexisting_identity": "PASS",
+    "independent_verifier": "PASS",
+    "diff_check": "PASS",
+    "new_file_whitespace_check": "PASS",
+    "evidence_links": "PASS",
+    "staged_count": 0,
+    "banked": false
+  }
+}

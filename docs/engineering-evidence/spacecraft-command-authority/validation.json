@@ -1,0 +1,503 @@
+{
+  "baseline": "8c291881b323be3e3038d57d2ac180eff826f065",
+  "sdk": "10.0.303",
+  "gates": [
+    {
+      "gate": "build-Debug",
+      "arguments": [
+        "build",
+        "NovaCore.sln",
+        "-c",
+        "Debug",
+        "--nologo",
+        "-v:q"
+      ],
+      "exit_code": 0,
+      "seconds": 4.9756385,
+      "witness": [
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)"
+      ]
+    },
+    {
+      "gate": "build-Release",
+      "arguments": [
+        "build",
+        "NovaCore.sln",
+        "-c",
+        "Release",
+        "--nologo",
+        "-v:q"
+      ],
+      "exit_code": 0,
+      "seconds": 4.9400296,
+      "witness": [
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)"
+      ]
+    },
+    {
+      "gate": "command-cheap-Debug",
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+        "--spacecraft-command-cheap"
+      ],
+      "exit_code": 0,
+      "seconds": 0.0717452,
+      "witness": [
+        "COMMAND_BACKLOG PASS H=50000 E=50000 later-H=100000 old-state-through=33333 new-state-at=50000 hold=captured-at-E",
+        "COMMAND_CHEAP PASS zero-debt/lifetime/edges/noops/frames/revocation/capacity/refusal/revision/nonactuation"
+      ]
+    },
+    {
+      "gate": "command-schedules-Debug",
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+        "--spacecraft-command-schedules"
+      ],
+      "exit_code": 0,
+      "seconds": 0.0653816,
+      "witness": [
+        "COMMAND_SCHEDULES PASS 30/60/150/240/delayed history=8/8 funding=2000000 boundary=120"
+      ]
+    },
+    {
+      "gate": "command-article-Debug",
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+        "--spacecraft-command-article"
+      ],
+      "exit_code": 0,
+      "seconds": 0.4676797,
+      "witness": [
+        "ARTICLE_CONTACT {\"tilted\":false,\"tiltAngle\":0.25,\"moving\":false,\"supported\":600,\"childMask\":7,\"peak_m\":0.005819714882528193,\"peakStep\":34,\"restingSetChanges\":0,\"max_drift_m\":6.205949151489612E-08,\"max_omega\":0.07002790492497588,\"n16666\":400,\"n16667\":800,\"ticks\":20000000,\"revision\":1200,\"history\":1200,\"article_preparation_ms\":4.0736,\"world_preparation_ms\":32.5114,\"first_step_ms\":27.7743,\"first_contact_step\":33,\"first_contact_ms\":27.1029}",
+        "COMMAND_ARTICLE PASS tilted=False moving=False endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS",
+        "ARTICLE_CONTACT {\"tilted\":true,\"tiltAngle\":0.25,\"moving\":false,\"supported\":600,\"childMask\":7,\"peak_m\":0.006945546380241474,\"peakStep\":35,\"restingSetChanges\":0,\"max_drift_m\":8.708620871908054E-08,\"max_omega\":3.162903474481871,\"n16666\":400,\"n16667\":800,\"ticks\":20000000,\"revision\":1200,\"history\":1200,\"article_preparation_ms\":0.0182,\"world_preparation_ms\":0.2064,\"first_step_ms\":0.0414,\"first_contact_step\":30,\"first_contact_ms\":3.947}",
+        "COMMAND_ARTICLE PASS tilted=True moving=False endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS",
+        "ARTICLE_CONTACT {\"tilted\":true,\"tiltAngle\":0.25,\"moving\":true,\"supported\":600,\"childMask\":7,\"peak_m\":0.006945746950922316,\"peakStep\":35,\"restingSetChanges\":0,\"max_drift_m\":4.467548163206231E-07,\"max_omega\":3.1629034744818716,\"n16666\":400,\"n16667\":800,\"ticks\":20000000,\"revision\":1200,\"history\":1200,\"article_preparation_ms\":0.0177,\"world_preparation_ms\":1.2222,\"first_step_ms\":0.0485,\"first_contact_step\":30,\"first_contact_ms\":0.0425}",
+        "COMMAND_ARTICLE PASS tilted=True moving=True endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS"
+      ]
+    },
+    {
+      "gate": "command-allocation-Debug",
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+        "--spacecraft-command-allocation"
+      ],
+      "exit_code": 0,
+      "seconds": 0.063977,
+      "witness": [
+        "ORDINARY_ALLOCATION gate=command-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-admission bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-commit bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-no-work-observation-consumption bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-pending-poll bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-funded-backlog-consumption bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "COMMAND_ALLOCATION PASS complete=0 admission=0 commit=0 observation-consumer=0 no-work=0 backlog=0"
+      ]
+    },
+    {
+      "gate": "command-cheap-Release",
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--spacecraft-command-cheap"
+      ],
+      "exit_code": 0,
+      "seconds": 0.2059586,
+      "witness": [
+        "COMMAND_BACKLOG PASS H=50000 E=50000 later-H=100000 old-state-through=33333 new-state-at=50000 hold=captured-at-E",
+        "COMMAND_CHEAP PASS zero-debt/lifetime/edges/noops/frames/revocation/capacity/refusal/revision/nonactuation"
+      ]
+    },
+    {
+      "gate": "command-schedules-Release",
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--spacecraft-command-schedules"
+      ],
+      "exit_code": 0,
+      "seconds": 0.0633209,
+      "witness": [
+        "COMMAND_SCHEDULES PASS 30/60/150/240/delayed history=8/8 funding=2000000 boundary=120"
+      ]
+    },
+    {
+      "gate": "command-article-Release",
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--spacecraft-command-article"
+      ],
+      "exit_code": 0,
+      "seconds": 0.4324497,
+      "witness": [
+        "ARTICLE_CONTACT {\"tilted\":false,\"tiltAngle\":0.25,\"moving\":false,\"supported\":600,\"childMask\":7,\"peak_m\":0.005819714882528193,\"peakStep\":34,\"restingSetChanges\":0,\"max_drift_m\":6.205949151489612E-08,\"max_omega\":0.07002790492497588,\"n16666\":400,\"n16667\":800,\"ticks\":20000000,\"revision\":1200,\"history\":1200,\"article_preparation_ms\":4.7479,\"world_preparation_ms\":30.7533,\"first_step_ms\":26.1963,\"first_contact_step\":33,\"first_contact_ms\":27.3668}",
+        "COMMAND_ARTICLE PASS tilted=False moving=False endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS",
+        "ARTICLE_CONTACT {\"tilted\":true,\"tiltAngle\":0.25,\"moving\":false,\"supported\":600,\"childMask\":7,\"peak_m\":0.006945546380241474,\"peakStep\":35,\"restingSetChanges\":0,\"max_drift_m\":8.708620871908054E-08,\"max_omega\":3.162903474481871,\"n16666\":400,\"n16667\":800,\"ticks\":20000000,\"revision\":1200,\"history\":1200,\"article_preparation_ms\":0.0103,\"world_preparation_ms\":0.1143,\"first_step_ms\":0.0356,\"first_contact_step\":30,\"first_contact_ms\":4.1254}",
+        "COMMAND_ARTICLE PASS tilted=True moving=False endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS",
+        "ARTICLE_CONTACT {\"tilted\":true,\"tiltAngle\":0.25,\"moving\":true,\"supported\":600,\"childMask\":7,\"peak_m\":0.006945746950922316,\"peakStep\":35,\"restingSetChanges\":0,\"max_drift_m\":4.467548163206231E-07,\"max_omega\":3.1629034744818716,\"n16666\":400,\"n16667\":800,\"ticks\":20000000,\"revision\":1200,\"history\":1200,\"article_preparation_ms\":0.0095,\"world_preparation_ms\":0.896,\"first_step_ms\":0.0399,\"first_contact_step\":30,\"first_contact_ms\":0.0433}",
+        "COMMAND_ARTICLE PASS tilted=True moving=True endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS"
+      ]
+    },
+    {
+      "gate": "command-allocation-Release",
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--spacecraft-command-allocation"
+      ],
+      "exit_code": 0,
+      "seconds": 0.0619607,
+      "witness": [
+        "ORDINARY_ALLOCATION gate=command-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-admission bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-commit bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-no-work-observation-consumption bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-pending-poll bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-funded-backlog-consumption bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "COMMAND_ALLOCATION PASS complete=0 admission=0 commit=0 observation-consumer=0 no-work=0 backlog=0"
+      ]
+    },
+    {
+      "gate": "simulation-full-Debug",
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll"
+      ],
+      "exit_code": 0,
+      "seconds": 10.0104144,
+      "witness": [
+        "PASS SimulationInstant",
+        "PASS SimulationDuration",
+        "PASS SimulationRate",
+        "PASS Solar UTC and speed presets",
+        "PASS Event ordering",
+        "PASS Internal physical-event epochs",
+        "PASS Timeline topology",
+        "PASS Simulation clock",
+        "PASS Host-duration conversion",
+        "PASS Host-duration debt servicing",
+        "PASS Transaction contracts",
+        "PASS Canonical transaction groups",
+        "PASS Clock execution orchestration",
+        "PASS Celestial contracts",
+        "PASS Celestial system definitions",
+        "PASS Celestial body catalog",
+        "PASS SolAnalytical dataset",
+        "PASS Celestial system time and provenance",
+        "PASS Celestial ephemeris catalogs",
+        "PASS Celestial system evaluation",
+        "PASS Celestial body orientation",
+        "PASS Two-body propagation",
+        "PASS Spacecraft attitude",
+        "PASS Spacecraft translation: contracts, numerical oracle, transactions, cadence, frames, allocations",
+        "PASS Spacecraft translational authority",
+        "PASS Contact generation: immutable identity, analytical point geometry, rotating frames, readiness, replay, no mutation, allocations",
+        "PASS Spacecraft contact generation",
+        "PASS Contact payload lifetime: explicit capacity, cancellation, retry, replacement, sequence ABA/overflow, history independence, 9900 slot reuses",
+        "PASS Contact response: impulse contracts, coupled publication, analytical conservation, forgery/preflight rejection, exact-time replay and independent force/torque compatibility",
+        "PASS Unified linear/angular contact transaction",
+        "PASS Isolated contact response: strict canonical-zero-gap admission, qualified receipt, conservative velocity sign, independent impulse oracle, atomic transaction, refusal, zero-allocation contracts",
+        "PASS Isolated analytical contact response policy",
+        "PASS Spacecraft attitude integration",
+        "PASS Rigid-body rotation",
+        "PASS Rigid-body torque transaction",
+        "PASS Flight reference and SAS guidance",
+        "PASS SAS sign/frame continuity proof",
+        "PASS Analytical orbit sampling",
+        "PASS Celestial frame extraction",
+        "PASS Celestial trajectory replacement",
+        "PASS Celestial impulse events",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Allocation",
+        "PASS Exact-event spacecraft motion: exact duration, canonical bits, rational oracle, rotation, failures, replay, immutability, allocation",
+        "PASS Exact-event spacecraft motion",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Earth exact-event observation: canonical bits/status, orbit/Euler oracles, same-E frames, refusals, replay, authority",
+        "PASS Exact-event Earth-relative observation",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Florida monotone contact proof",
+        "PASS Qualified root contact kinematics",
+        "PASS Certified isolated-contact response proposals",
+        "PASS Certified pre-impact velocity tuples",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Certified final post-impact velocity states",
+        "PASS Private root-time post-impact state",
+        "PASS Paired private canonical propagation",
+        "PASS Post-impact singleton terrain coverage",
+        "PASS continuation ownership: owner thread, exclusive phase, borrowed lifetime, copied observation, single engine",
+        "PASS Certified continuation ownership",
+        "ORDINARY_ALLOCATION gate=private-bepu-full-step-export bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Local contact staging: authority, exact time, persistent finite-body contact, paired export, negatives, allocation/storage",
+        "PASS Private finite-body contact staging",
+        "PASS Compound contact selection",
+        "PASS persistent contact shared-body phase ownership",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Persistent contact publication: exact paired authority, retained trajectory, 28 refusal/terminal responsibilities, allocation/storage",
+        "PASS Persistent contact publication",
+        "PASS contact servicing cheap: exact credit, no unfunded step, unchanged external-debt refusal, original moving epoch/lattice",
+        "PASS contact servicing refusal matrix",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS host-paced contact servicing",
+        "PASS Host-paced contact servicing",
+        "ARTICLE_DEFINITION {\"MassKilograms\":1000,\"CentreOfMassAssembly\":{\"X\":0,\"Y\":0,\"Z\":0.1,\"LengthSquared\":0.010000000000000002,\"IsFinite\":true},\"Tensor\":{\"XX\":577.5,\"YY\":848.3333333333333,\"ZZ\":437.5,\"XY\":0,\"XZ\":0,\"YZ\":0},\"SmallestFeature\":0.5,\"BoundingRadius\":1.7705931209625774,\"Identity\":{\"Version\":1,\"A\":11924782583587566515,\"B\":2487338776908849966,\"C\":10970259085846249193,\"D\":16680824850243033112}}",
+        "PASS engineering article analytical, geometry, identity, admission and lifetime gates",
+        "PASS Engineering article definition and lifetime",
+        "ARTICLE_CONTACT {\"tilted\":false,\"tiltAngle\":0.25,\"moving\":false,\"supported\":600,\"childMask\":7,\"peak_m\":0.005819714882528193,\"peakStep\":34,\"restingSetChanges\":0,\"max_drift_m\":6.205949151489612E-08,\"max_omega\":0.07002790492497588,\"n16666\":400,\"n16667\":800,\"ticks\":20000000,\"revision\":1200,\"history\":1200,\"article_preparation_ms\":0.0113,\"world_preparation_ms\":0.1068,\"first_step_ms\":1.02,\"first_contact_step\":33,\"first_contact_ms\":14.0091}",
+        "ARTICLE_CONTACT {\"tilted\":true,\"tiltAngle\":0.25,\"moving\":false,\"supported\":600,\"childMask\":7,\"peak_m\":0.006945546380241474,\"peakStep\":35,\"restingSetChanges\":0,\"max_drift_m\":8.708620871908054E-08,\"max_omega\":3.162903474481871,\"n16666\":400,\"n16667\":800,\"ticks\":20000000,\"revision\":1200,\"history\":1200,\"article_preparation_ms\":0.0228,\"world_preparation_ms\":0.5303,\"first_step_ms\":0.0327,\"first_contact_step\":30,\"first_contact_ms\":0.7126}",
+        "PASS Engineering article physical contact",
+        "ARTICLE_CONTACT {\"tilted\":false,\"tiltAngle\":0.25,\"moving\":false,\"supported\":600,\"childMask\":7,\"peak_m\":0.005819714882528193,\"peakStep\":34,\"restingSetChanges\":0,\"max_drift_m\":6.205949151489612E-08,\"max_omega\":0.07002790492497588,\"n16666\":400,\"n16667\":800,\"ticks\":20000000,\"revision\":1200,\"history\":1200,\"article_preparation_ms\":0.0117,\"world_preparation_ms\":0.0841,\"first_step_ms\":0.0251,\"first_contact_step\":33,\"first_contact_ms\":0.0352}",
+        "ARTICLE_CONTACT {\"tilted\":true,\"tiltAngle\":0.25,\"moving\":false,\"supported\":600,\"childMask\":7,\"peak_m\":0.006945546380241474,\"peakStep\":35,\"restingSetChanges\":0,\"max_drift_m\":8.708620871908054E-08,\"max_omega\":3.162903474481871,\"n16666\":400,\"n16667\":800,\"ticks\":20000000,\"revision\":1200,\"history\":1200,\"article_preparation_ms\":0.0141,\"world_preparation_ms\":0.0932,\"first_step_ms\":0.031,\"first_contact_step\":30,\"first_contact_ms\":0.0331}",
+        "PASS Engineering article schedules and private equivalence",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Engineering article allocation",
+        "COMMAND_BACKLOG PASS H=50000 E=50000 later-H=100000 old-state-through=33333 new-state-at=50000 hold=captured-at-E",
+        "COMMAND_CHEAP PASS zero-debt/lifetime/edges/noops/frames/revocation/capacity/refusal/revision/nonactuation",
+        "PASS Spacecraft command authority",
+        "COMMAND_SCHEDULES PASS 30/60/150/240/delayed history=8/8 funding=2000000 boundary=120",
+        "PASS Spacecraft command accepted-stream replay",
+        "ARTICLE_CONTACT {\"tilted\":false,\"tiltAngle\":0.25,\"moving\":false,\"supported\":600,\"childMask\":7,\"peak_m\":0.005819714882528193,\"peakStep\":34,\"restingSetChanges\":0,\"max_drift_m\":6.205949151489612E-08,\"max_omega\":0.07002790492497588,\"n16666\":400,\"n16667\":800,\"ticks\":20000000,\"revision\":1200,\"history\":1200,\"article_preparation_ms\":0.0117,\"world_preparation_ms\":0.0817,\"first_step_ms\":0.0238,\"first_contact_step\":33,\"first_contact_ms\":0.0322}",
+        "COMMAND_ARTICLE PASS tilted=False moving=False endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS",
+        "ARTICLE_CONTACT {\"tilted\":true,\"tiltAngle\":0.25,\"moving\":false,\"supported\":600,\"childMask\":7,\"peak_m\":0.006945546380241474,\"peakStep\":35,\"restingSetChanges\":0,\"max_drift_m\":8.708620871908054E-08,\"max_omega\":3.162903474481871,\"n16666\":400,\"n16667\":800,\"ticks\":20000000,\"revision\":1200,\"history\":1200,\"article_preparation_ms\":0.0115,\"world_preparation_ms\":0.0899,\"first_step_ms\":0.0296,\"first_contact_step\":30,\"first_contact_ms\":0.0203}",
+        "COMMAND_ARTICLE PASS tilted=True moving=False endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS",
+        "ARTICLE_CONTACT {\"tilted\":true,\"tiltAngle\":0.25,\"moving\":true,\"supported\":600,\"childMask\":7,\"peak_m\":0.006945746950922316,\"peakStep\":35,\"restingSetChanges\":0,\"max_drift_m\":4.467548163206231E-07,\"max_omega\":3.1629034744818716,\"n16666\":400,\"n16667\":800,\"ticks\":20000000,\"revision\":1200,\"history\":1200,\"article_preparation_ms\":0.0127,\"world_preparation_ms\":0.0855,\"first_step_ms\":0.0286,\"first_contact_step\":30,\"first_contact_ms\":0.0186}",
+        "COMMAND_ARTICLE PASS tilted=True moving=True endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS",
+        "PASS Spacecraft command non-actuating article",
+        "ORDINARY_ALLOCATION gate=command-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-admission bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-commit bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-no-work-observation-consumption bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-pending-poll bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-funded-backlog-consumption bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "COMMAND_ALLOCATION PASS complete=0 admission=0 commit=0 observation-consumer=0 no-work=0 backlog=0",
+        "PASS Spacecraft command allocation"
+      ]
+    },
+    {
+      "gate": "simulation-full-Release",
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll"
+      ],
+      "exit_code": 0,
+      "seconds": 5.3121988,
+      "witness": [
+        "PASS SimulationInstant",
+        "PASS SimulationDuration",
+        "PASS SimulationRate",
+        "PASS Solar UTC and speed presets",
+        "PASS Event ordering",
+        "PASS Internal physical-event epochs",
+        "PASS Timeline topology",
+        "PASS Simulation clock",
+        "PASS Host-duration conversion",
+        "PASS Host-duration debt servicing",
+        "PASS Transaction contracts",
+        "PASS Canonical transaction groups",
+        "PASS Clock execution orchestration",
+        "PASS Celestial contracts",
+        "PASS Celestial system definitions",
+        "PASS Celestial body catalog",
+        "PASS SolAnalytical dataset",
+        "PASS Celestial system time and provenance",
+        "PASS Celestial ephemeris catalogs",
+        "PASS Celestial system evaluation",
+        "PASS Celestial body orientation",
+        "PASS Two-body propagation",
+        "PASS Spacecraft attitude",
+        "PASS Spacecraft translation: contracts, numerical oracle, transactions, cadence, frames, allocations",
+        "PASS Spacecraft translational authority",
+        "PASS Contact generation: immutable identity, analytical point geometry, rotating frames, readiness, replay, no mutation, allocations",
+        "PASS Spacecraft contact generation",
+        "PASS Contact payload lifetime: explicit capacity, cancellation, retry, replacement, sequence ABA/overflow, history independence, 9900 slot reuses",
+        "PASS Contact response: impulse contracts, coupled publication, analytical conservation, forgery/preflight rejection, exact-time replay and independent force/torque compatibility",
+        "PASS Unified linear/angular contact transaction",
+        "PASS Isolated contact response: strict canonical-zero-gap admission, qualified receipt, conservative velocity sign, independent impulse oracle, atomic transaction, refusal, zero-allocation contracts",
+        "PASS Isolated analytical contact response policy",
+        "PASS Spacecraft attitude integration",
+        "PASS Rigid-body rotation",
+        "PASS Rigid-body torque transaction",
+        "PASS Flight reference and SAS guidance",
+        "PASS SAS sign/frame continuity proof",
+        "PASS Analytical orbit sampling",
+        "PASS Celestial frame extraction",
+        "PASS Celestial trajectory replacement",
+        "PASS Celestial impulse events",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Allocation",
+        "PASS Exact-event spacecraft motion: exact duration, canonical bits, rational oracle, rotation, failures, replay, immutability, allocation",
+        "PASS Exact-event spacecraft motion",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Earth exact-event observation: canonical bits/status, orbit/Euler oracles, same-E frames, refusals, replay, authority",
+        "PASS Exact-event Earth-relative observation",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Florida monotone contact proof",
+        "PASS Qualified root contact kinematics",
+        "PASS Certified isolated-contact response proposals",
+        "PASS Certified pre-impact velocity tuples",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Certified final post-impact velocity states",
+        "PASS Private root-time post-impact state",
+        "PASS Paired private canonical propagation",
+        "PASS Post-impact singleton terrain coverage",
+        "PASS continuation ownership: owner thread, exclusive phase, borrowed lifetime, copied observation, single engine",
+        "PASS Certified continuation ownership",
+        "ORDINARY_ALLOCATION gate=private-bepu-full-step-export bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Local contact staging: authority, exact time, persistent finite-body contact, paired export, negatives, allocation/storage",
+        "PASS Private finite-body contact staging",
+        "PASS Compound contact selection",
+        "PASS persistent contact shared-body phase ownership",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Persistent contact publication: exact paired authority, retained trajectory, 28 refusal/terminal responsibilities, allocation/storage",
+        "PASS Persistent contact publication",
+        "PASS contact servicing cheap: exact credit, no unfunded step, unchanged external-debt refusal, original moving epoch/lattice",
+        "PASS contact servicing refusal matrix",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS host-paced contact servicing",
+        "PASS Host-paced contact servicing",
+        "ARTICLE_DEFINITION {\"MassKilograms\":1000,\"CentreOfMassAssembly\":{\"X\":0,\"Y\":0,\"Z\":0.1,\"LengthSquared\":0.010000000000000002,\"IsFinite\":true},\"Tensor\":{\"XX\":577.5,\"YY\":848.3333333333333,\"ZZ\":437.5,\"XY\":0,\"XZ\":0,\"YZ\":0},\"SmallestFeature\":0.5,\"BoundingRadius\":1.7705931209625774,\"Identity\":{\"Version\":1,\"A\":11924782583587566515,\"B\":2487338776908849966,\"C\":10970259085846249193,\"D\":16680824850243033112}}",
+        "PASS engineering article analytical, geometry, identity, admission and lifetime gates",
+        "PASS Engineering article definition and lifetime",
+        "ARTICLE_CONTACT {\"tilted\":false,\"tiltAngle\":0.25,\"moving\":false,\"supported\":600,\"childMask\":7,\"peak_m\":0.005819714882528193,\"peakStep\":34,\"restingSetChanges\":0,\"max_drift_m\":6.205949151489612E-08,\"max_omega\":0.07002790492497588,\"n16666\":400,\"n16667\":800,\"ticks\":20000000,\"revision\":1200,\"history\":1200,\"article_preparation_ms\":0.0047,\"world_preparation_ms\":0.1024,\"first_step_ms\":0.8295,\"first_contact_step\":33,\"first_contact_ms\":16.2071}",
+        "ARTICLE_CONTACT {\"tilted\":true,\"tiltAngle\":0.25,\"moving\":false,\"supported\":600,\"childMask\":7,\"peak_m\":0.006945546380241474,\"peakStep\":35,\"restingSetChanges\":0,\"max_drift_m\":8.708620871908054E-08,\"max_omega\":3.162903474481871,\"n16666\":400,\"n16667\":800,\"ticks\":20000000,\"revision\":1200,\"history\":1200,\"article_preparation_ms\":0.012,\"world_preparation_ms\":0.1193,\"first_step_ms\":0.0305,\"first_contact_step\":30,\"first_contact_ms\":0.7913}",
+        "PASS Engineering article physical contact",
+        "ARTICLE_CONTACT {\"tilted\":false,\"tiltAngle\":0.25,\"moving\":false,\"supported\":600,\"childMask\":7,\"peak_m\":0.005819714882528193,\"peakStep\":34,\"restingSetChanges\":0,\"max_drift_m\":6.205949151489612E-08,\"max_omega\":0.07002790492497588,\"n16666\":400,\"n16667\":800,\"ticks\":20000000,\"revision\":1200,\"history\":1200,\"article_preparation_ms\":0.0137,\"world_preparation_ms\":0.1176,\"first_step_ms\":0.0321,\"first_contact_step\":33,\"first_contact_ms\":0.0704}",
+        "ARTICLE_CONTACT {\"tilted\":true,\"tiltAngle\":0.25,\"moving\":false,\"supported\":600,\"childMask\":7,\"peak_m\":0.006945546380241474,\"peakStep\":35,\"restingSetChanges\":0,\"max_drift_m\":8.708620871908054E-08,\"max_omega\":3.162903474481871,\"n16666\":400,\"n16667\":800,\"ticks\":20000000,\"revision\":1200,\"history\":1200,\"article_preparation_ms\":0.0154,\"world_preparation_ms\":0.1367,\"first_step_ms\":0.0258,\"first_contact_step\":30,\"first_contact_ms\":0.0435}",
+        "PASS Engineering article schedules and private equivalence",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Engineering article allocation",
+        "COMMAND_BACKLOG PASS H=50000 E=50000 later-H=100000 old-state-through=33333 new-state-at=50000 hold=captured-at-E",
+        "COMMAND_CHEAP PASS zero-debt/lifetime/edges/noops/frames/revocation/capacity/refusal/revision/nonactuation",
+        "PASS Spacecraft command authority",
+        "COMMAND_SCHEDULES PASS 30/60/150/240/delayed history=8/8 funding=2000000 boundary=120",
+        "PASS Spacecraft command accepted-stream replay",
+        "ARTICLE_CONTACT {\"tilted\":false,\"tiltAngle\":0.25,\"moving\":false,\"supported\":600,\"childMask\":7,\"peak_m\":0.005819714882528193,\"peakStep\":34,\"restingSetChanges\":0,\"max_drift_m\":6.205949151489612E-08,\"max_omega\":0.07002790492497588,\"n16666\":400,\"n16667\":800,\"ticks\":20000000,\"revision\":1200,\"history\":1200,\"article_preparation_ms\":0.008,\"world_preparation_ms\":0.1118,\"first_step_ms\":0.0415,\"first_contact_step\":33,\"first_contact_ms\":0.0575}",
+        "COMMAND_ARTICLE PASS tilted=False moving=False endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS",
+        "ARTICLE_CONTACT {\"tilted\":true,\"tiltAngle\":0.25,\"moving\":false,\"supported\":600,\"childMask\":7,\"peak_m\":0.006945546380241474,\"peakStep\":35,\"restingSetChanges\":0,\"max_drift_m\":8.708620871908054E-08,\"max_omega\":3.162903474481871,\"n16666\":400,\"n16667\":800,\"ticks\":20000000,\"revision\":1200,\"history\":1200,\"article_preparation_ms\":0.0046,\"world_preparation_ms\":0.32,\"first_step_ms\":0.0224,\"first_contact_step\":30,\"first_contact_ms\":0.0288}",
+        "COMMAND_ARTICLE PASS tilted=True moving=False endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS",
+        "ARTICLE_CONTACT {\"tilted\":true,\"tiltAngle\":0.25,\"moving\":true,\"supported\":600,\"childMask\":7,\"peak_m\":0.006945746950922316,\"peakStep\":35,\"restingSetChanges\":0,\"max_drift_m\":4.467548163206231E-07,\"max_omega\":3.1629034744818716,\"n16666\":400,\"n16667\":800,\"ticks\":20000000,\"revision\":1200,\"history\":1200,\"article_preparation_ms\":0.0051,\"world_preparation_ms\":0.0903,\"first_step_ms\":0.0268,\"first_contact_step\":30,\"first_contact_ms\":0.0304}",
+        "COMMAND_ARTICLE PASS tilted=True moving=True endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS",
+        "PASS Spacecraft command non-actuating article",
+        "ORDINARY_ALLOCATION gate=command-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-admission bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-commit bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-no-work-observation-consumption bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-pending-poll bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-funded-backlog-consumption bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "COMMAND_ALLOCATION PASS complete=0 admission=0 commit=0 observation-consumer=0 no-work=0 backlog=0",
+        "PASS Spacecraft command allocation"
+      ]
+    },
+    {
+      "gate": "NovaCore.ReferenceFrames.Tests-Debug",
+      "arguments": [
+        "tests/NovaCore.ReferenceFrames.Tests/bin/Debug/net10.0/NovaCore.ReferenceFrames.Tests.dll"
+      ],
+      "exit_code": 0,
+      "seconds": 1.1579242,
+      "witness": [
+        "PASS transform algebra",
+        "PASS hierarchy and conversion",
+        "PASS reference-frame graph",
+        "PASS reference-frame paths",
+        "PASS transform resolution",
+        "PASS static universe fixture",
+        "PASS ORB",
+        "PASS CCI/CCF",
+        "PASS rotating velocity",
+        "PASS surface anchor authority",
+        "PASS validation"
+      ]
+    },
+    {
+      "gate": "NovaCore.Precision.Tests-Debug",
+      "arguments": [
+        "tests/NovaCore.Precision.Tests/bin/Debug/net10.0/NovaCore.Precision.Tests.dll"
+      ],
+      "exit_code": 0,
+      "seconds": 0.2135669,
+      "witness": []
+    },
+    {
+      "gate": "NovaCore.BepuDependency.Tests-Debug",
+      "arguments": [
+        "tests/NovaCore.BepuDependency.Tests/bin/Debug/net10.0/NovaCore.BepuDependency.Tests.dll"
+      ],
+      "exit_code": 0,
+      "seconds": 0.0963063,
+      "witness": [
+        "      \"name\": \"BepuPhysics\",",
+        "      \"identity\": \"BepuPhysics, Version=2.5.0.0, Culture=neutral, PublicKeyToken=9345ce38ee48a1cd\",",
+        "      \"sha256\": \"77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7\",",
+        "        \"BepuUtilities, Version=2.5.0.0, Culture=neutral, PublicKeyToken=a595ef937c270ac9\",",
+        "      \"name\": \"BepuUtilities\",",
+        "      \"identity\": \"BepuUtilities, Version=2.5.0.0, Culture=neutral, PublicKeyToken=a595ef937c270ac9\",",
+        "      \"sha256\": \"E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68\","
+      ]
+    },
+    {
+      "gate": "NovaCore.ReferenceFrames.Tests-Release",
+      "arguments": [
+        "tests/NovaCore.ReferenceFrames.Tests/bin/Release/net10.0/NovaCore.ReferenceFrames.Tests.dll"
+      ],
+      "exit_code": 0,
+      "seconds": 0.4507708,
+      "witness": [
+        "PASS transform algebra",
+        "PASS hierarchy and conversion",
+        "PASS reference-frame graph",
+        "PASS reference-frame paths",
+        "PASS transform resolution",
+        "PASS static universe fixture",
+        "PASS ORB",
+        "PASS CCI/CCF",
+        "PASS rotating velocity",
+        "PASS surface anchor authority",
+        "PASS validation"
+      ]
+    },
+    {
+      "gate": "NovaCore.Precision.Tests-Release",
+      "arguments": [
+        "tests/NovaCore.Precision.Tests/bin/Release/net10.0/NovaCore.Precision.Tests.dll"
+      ],
+      "exit_code": 0,
+      "seconds": 0.155114,
+      "witness": []
+    },
+    {
+      "gate": "NovaCore.BepuDependency.Tests-Release",
+      "arguments": [
+        "tests/NovaCore.BepuDependency.Tests/bin/Release/net10.0/NovaCore.BepuDependency.Tests.dll"
+      ],
+      "exit_code": 0,
+      "seconds": 0.0953082,
+      "witness": [
+        "      \"name\": \"BepuPhysics\",",
+        "      \"identity\": \"BepuPhysics, Version=2.5.0.0, Culture=neutral, PublicKeyToken=9345ce38ee48a1cd\",",
+        "      \"sha256\": \"77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7\",",
+        "        \"BepuUtilities, Version=2.5.0.0, Culture=neutral, PublicKeyToken=a595ef937c270ac9\",",
+        "      \"name\": \"BepuUtilities\",",
+        "      \"identity\": \"BepuUtilities, Version=2.5.0.0, Culture=neutral, PublicKeyToken=a595ef937c270ac9\",",
+        "      \"sha256\": \"E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68\","
+      ]
+    },
+    {
+      "gate": "command-cost-Release",
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--spacecraft-command-cost"
+      ],
+      "exit_code": 0,
+      "seconds": 0.066941,
+      "witness": [
+        "COMMAND_PERFORMANCE samples=4096 median_ms=0.0013 p95_ms=0.0014 p99_ms=0.0014 max_ms=0.007",
+        "COMMAND_STORAGE capability_owner_array_bytes=1608 queue_payload_bytes=1280 state_value_bytes=152 observation_value_bytes=224 demand_value_bytes=168 engine_reference_bytes=8 production_history_bytes=0"
+      ]
+    }
+  ]
+}
