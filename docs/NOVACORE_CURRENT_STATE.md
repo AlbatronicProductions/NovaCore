@@ -408,10 +408,12 @@ capacity remain, without a second physical authority. Material shading may consu
 cheaper deterministic derived information, but no material, LOD, cache, or fallback path
 may become a second height or ownership authority.
 
-`earth-surface-v5` and optional `earth-florida-m12` remain manifest-resolved,
-hash-verified distribution and sampling inputs. They improve macro material,
-classification, and regional physical fidelity. They are not competing visible
-Earth surfaces. The retired adaptive patch, stitch-template, and radial-Eyeball
+`earth-surface-v5` and `earth-florida-m12` remain manifest-resolved,
+hash-verified distribution and sampling inputs required by current production
+Earth/Solar preparation. They supply macro material, classification, and regional
+physical fidelity; canonical surface queries also require the complete regional
+identity. They are not competing visible Earth surfaces. The retired adaptive
+patch, stitch-template, and radial-Eyeball
 architectures must not be restored as production ownership paths.
 
 ## Pupil and scale behavior

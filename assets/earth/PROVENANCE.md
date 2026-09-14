@@ -96,6 +96,8 @@ EPSG:4326 raster into canonical face-aligned records and cross-face gutters.
 
 Generated payloads are installed through `NovaCore.AssetTool` into the ignored
 content-addressed runtime cache. Normal runtime performs no implicit download.
-NumPy 2.3.5, Pillow 11.3.0, Rasterio, and PyProj are the offline Python
-dependencies for the regional build. Generated packages and the source TIFF
-remain in ignored content-addressed/source caches, not ordinary Git history.
+NumPy 2.3.5 and Pillow 11.3.0 are the offline Python dependencies for the
+regional build, pinned in `tools/earth_data/requirements.txt`. The builder reads
+the geographic GeoTIFF with Pillow and samples it with NumPy. Generated packages
+and the source TIFF remain in ignored content-addressed/source caches, not ordinary
+Git history.

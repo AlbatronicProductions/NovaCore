@@ -37,9 +37,12 @@ with SHA-256
 `c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe`.
 Its tracked manifest is `assets/terrain/manifests/earth-florida-m12.json`; it
 uses terrain version 5, NCCUBE2 schema 3 / payload 3, with a complete
-Florida L8-L11 record hierarchy. A missing regional object is reported
-explicitly while the coherent global terrain-v5 sampling source remains
-available. Runtime residency is bounded to 256 channel-complete records
+Florida L8-L11 record hierarchy. Both packages are required by the current
+production Earth/Solar routes, including Florida Launch Site. The startup
+warning about a missing regional object does not provide a supported global-only
+mode: complete NCSM1 physical preparation and canonical physical queries require
+the regional dataset, and Florida's authored support depends on its survey.
+Runtime residency is bounded to 256 channel-complete records
 (BC7/R16/BC5/R8, 89,210,880 bytes). These records feed canonical physical and
 presentation preparation for the production spherical billboard; they do not
 publish a separate visible terrain owner.

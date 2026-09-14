@@ -50,8 +50,10 @@ normals, collision, or ownership.
 
 `earth-surface-v5` and `earth-florida-m12` are distribution and sampling inputs.
 The global package supplies macro material/classification data and the regional
-package improves physical and presentation fidelity where installed. Neither is
-an independent visible terrain owner.
+package supplies regional physical elevation to the shared surface. Both are
+required for current production Earth/Solar preparation; global bootstrap does
+not provide a supported production route without the regional dataset. Neither
+is an independent visible terrain owner.
 
 ## Production spherical-billboard representation
 
