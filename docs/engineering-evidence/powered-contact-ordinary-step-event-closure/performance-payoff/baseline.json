@@ -1,0 +1,58 @@
+{
+  "boundary": "A: fixed prepared off-COM FP32 input plus ordinary retained BEPU target step",
+  "sampling": "128 warm and1024 measured independent single-target fixtures per process",
+  "processes": [
+    {
+      "process": 1,
+      "resultFile": "candidate-process-1.json",
+      "summary": {
+        "count": 1024,
+        "medianUs": 2.9,
+        "p95Us": 4.5,
+        "p99Us": 6.3,
+        "maxUs": 74.7,
+        "collectionDeltas": [
+          0,
+          0,
+          0
+        ]
+      },
+      "allocation": 0
+    },
+    {
+      "process": 2,
+      "resultFile": "candidate-process-2.json",
+      "summary": {
+        "count": 1024,
+        "medianUs": 2.9,
+        "p95Us": 5,
+        "p99Us": 5.8,
+        "maxUs": 43.8,
+        "collectionDeltas": [
+          0,
+          0,
+          0
+        ]
+      },
+      "allocation": 0
+    },
+    {
+      "process": 3,
+      "resultFile": "candidate-process-3.json",
+      "summary": {
+        "count": 1024,
+        "medianUs": 2.7,
+        "p95Us": 5.2,
+        "p99Us": 6.6,
+        "maxUs": 11.6,
+        "collectionDeltas": [
+          0,
+          0,
+          0
+        ]
+      },
+      "allocation": 0
+    }
+  ],
+  "tails": "Full top-ten rows are in the referenced process JSON; not duplicated here"
+}

@@ -11,6 +11,40 @@ renderer. Simulation owns celestial identity, exact time, physical state, and
 reference-frame transforms. Graphics consumes immutable root-resolved snapshots
 and performs FP64 camera-relative subtraction before GPU transport.
 
+## Current bank — M15.1
+
+The latest banked production milestone is **M15.1 — Finite-Fuel Retained Powered
+Contact**, tag `m15.1-finite-fuel-retained-powered-contact`. Its atomic bank includes
+the operative NovaCore Source-Available License 1.0 and companion policies,
+effective September 15, 2026. The bank's parent is
+`49057fecceb0f725d5f551ec40e2780971b0d81d`; the annotated tag identifies its commit.
+M15.0 free flight remains banked at `4607d8c802006d5e1a01c595ab608cf53a4dab6b`.
+
+**M15.1 is BANKED.**
+The canonical command/engine/resource chain feeds an ordinary retained contact
+consumer. Source mass remains held through the BEPU solve; an independently
+prepared exact resource successor joins physical, mass and actual-actuator
+successors at atomic publication. Same-phase acknowledgement updates properties
+on the same retained body for the next interval. No event-sized constrained solve,
+world reconstruction or contact-to-free-flight transition is implied.
+
+Final qualification passed full Debug/Release builds and Simulation 74/74 in each,
+protected regressions, five exact-zero allocation windows and a 152-byte positive
+control. Conservative retained storage was 5,450,568 bytes, below 8 MiB. Integrated
+performance and explicit supported-contact manual acceptance passed; historical
+median micro-gate failures remain failures. The observed whole-frame maximum was
+15.978 ms, cause unattributed; maximum contact servicing was 0.3236 ms.
+See the [historical bank-candidate qualification](engineering-evidence/powered-contact-bank-candidate/README.md)
+for exact populations, source identity, manual witness and limitations.
+
+M15.0 free flight and this supported-contact path are separate regimes. Departure,
+liftoff, recontact, Florida launch integration and complete landing gameplay remain
+unimplemented. Numerical research and optimization are closed. Historical reports
+retain their pre-bank judgments; the current license and policies are linked from
+[LICENSING.md](../LICENSING.md). No next responsibility is authorized by this bank.
+Older milestone sections below describe their own banked scope, not the latest
+production checkpoint.
+
 ## Banked M14.21 — Authored Compound Spacecraft Contact
 
 Project Control accepted and banked **M14.21 — Authored Compound Spacecraft Contact**

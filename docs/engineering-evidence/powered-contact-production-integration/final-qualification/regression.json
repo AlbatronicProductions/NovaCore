@@ -1,0 +1,217 @@
+{
+  "ordinaryRegisteredGroups": 74,
+  "registeredNames": [
+    "Segmented powered free flight",
+    "SimulationInstant",
+    "SimulationDuration",
+    "SimulationRate",
+    "Solar UTC and speed presets",
+    "Event ordering",
+    "Internal physical-event epochs",
+    "Timeline topology",
+    "Simulation clock",
+    "Host-duration conversion",
+    "Host-duration debt servicing",
+    "Transaction contracts",
+    "Canonical transaction groups",
+    "Clock execution orchestration",
+    "Celestial contracts",
+    "Celestial system definitions",
+    "Celestial body catalog",
+    "SolAnalytical dataset",
+    "Celestial system time and provenance",
+    "Celestial ephemeris catalogs",
+    "Celestial system evaluation",
+    "Celestial body orientation",
+    "Two-body propagation",
+    "Spacecraft attitude",
+    "Spacecraft translational authority",
+    "Spacecraft contact generation",
+    "Unified linear/angular contact transaction",
+    "Isolated analytical contact response policy",
+    "Spacecraft attitude integration",
+    "Rigid-body rotation",
+    "Rigid-body torque transaction",
+    "Flight reference and SAS guidance",
+    "SAS sign/frame continuity proof",
+    "Analytical orbit sampling",
+    "Celestial frame extraction",
+    "Celestial trajectory replacement",
+    "Celestial impulse events",
+    "Allocation",
+    "Exact-event spacecraft motion",
+    "Exact-event Earth-relative observation",
+    "Florida monotone contact proof",
+    "Qualified root contact kinematics",
+    "Certified isolated-contact response proposals",
+    "Certified pre-impact velocity tuples",
+    "Certified final post-impact velocity states",
+    "Private root-time post-impact state",
+    "Paired private canonical propagation",
+    "Post-impact singleton terrain coverage",
+    "Certified continuation ownership",
+    "Private finite-body contact staging",
+    "Compound contact selection",
+    "Persistent contact publication",
+    "Host-paced contact servicing",
+    "Engineering article definition and lifetime",
+    "Engineering article physical contact",
+    "Engineering article schedules and private equivalence",
+    "Engineering article allocation",
+    "Spacecraft command authority",
+    "Spacecraft command accepted-stream replay",
+    "Spacecraft command non-actuating article",
+    "Spacecraft command allocation",
+    "Single-engine actuation preparation",
+    "Single-engine actuation allocation",
+    "Single-engine proposal article non-actuation",
+    "Finite-propellant segmentation",
+    "Finite-propellant allocation",
+    "Finite-propellant proposal article non-actuation",
+    "Powered contact exact mapper and joint successor",
+    "Powered contact physical bounds",
+    "Powered contact discrete work",
+    "Powered contact authority and terminal failures",
+    "Powered contact ready lifetime",
+    "Powered contact host partitions and moving frame",
+    "Powered contact zero allocation"
+  ],
+  "runs": [
+    {
+      "name": "Full Simulation",
+      "configuration": "debug",
+      "passed": 74,
+      "failed": 0,
+      "logSha256": "94931ea8ed1c243d3232c7af8d75c23d0402b80465ee8acdb15799714d1ce67a"
+    },
+    {
+      "name": "NovaCore.ReferenceFrames.Tests",
+      "configuration": "debug",
+      "result": "PASS",
+      "logSha256": "3efd4521749e5ede803960613a1c309c94ce9095ee47b41f4047b091c443727c"
+    },
+    {
+      "name": "NovaCore.Precision.Tests",
+      "configuration": "debug",
+      "result": "PASS",
+      "logSha256": "e95659a046bb5cbefe85f93f2bfced5f02eefe6d6cf54a20f1bde4aa7e806c09"
+    },
+    {
+      "name": "NovaCore.BepuDependency.Tests",
+      "configuration": "debug",
+      "result": "PASS",
+      "logSha256": "46b9f239058362b8bf65ab1eec1459970d5561559439d3bf0b2fe9c8ab6a2a00"
+    },
+    {
+      "name": "powered-contact-presentation",
+      "configuration": "debug",
+      "result": "PASS",
+      "logSha256": "c99cef95fa70bf32846794251ad02670aa6e01595f68de7ffc5efe26b3c5a087"
+    },
+    {
+      "name": "powered-free-flight-presentation",
+      "configuration": "debug",
+      "result": "PASS",
+      "logSha256": "b3fc4169b3fa8d6a85c0b15de4cc2489ebd49b7c0bed0454ef3613a47ea535b4"
+    },
+    {
+      "name": "powered-contact-authority",
+      "configuration": "debug",
+      "result": "PASS",
+      "logSha256": "0cb428fadf18a3c687432f813fdbac74ae4213614c3bb8aec80745350aed2a36"
+    },
+    {
+      "name": "powered-free-flight-arithmetic",
+      "configuration": "debug",
+      "result": "PASS",
+      "logSha256": "8a8e9e7333d72a7014ab15be875f35319e81991cc7e2fde354a4cffc6a60cd8e"
+    },
+    {
+      "name": "powered-free-flight-schedules",
+      "configuration": "debug",
+      "result": "PASS",
+      "logSha256": "0e1abef58e20acb3549bb3dee1b5e17637f77b8ff7a2baa91229cf43970faa02"
+    },
+    {
+      "name": "powered-free-flight-allocation",
+      "configuration": "debug",
+      "result": "PASS",
+      "logSha256": "7e36d9045b1b53bf2a874d0a8aed1e53eff6a88e32083ab6b4219a0f610e0248"
+    },
+    {
+      "name": "Full Simulation",
+      "configuration": "release",
+      "passed": 74,
+      "failed": 0,
+      "logSha256": "f34c489d968f42be64dbca6c7d790402bab42c36ea018941e5957afb1c45c6e9"
+    },
+    {
+      "name": "NovaCore.ReferenceFrames.Tests",
+      "configuration": "release",
+      "result": "PASS",
+      "logSha256": "a034604e5d6b5fd378db11a5654b958fb47e9a4c34d49b30322f2f3508bc97ba"
+    },
+    {
+      "name": "NovaCore.Precision.Tests",
+      "configuration": "release",
+      "result": "PASS",
+      "logSha256": "3326da43da2c7024492d2c8373408ed59bedd7f0647843627b17a13f196a3cca"
+    },
+    {
+      "name": "NovaCore.BepuDependency.Tests",
+      "configuration": "release",
+      "result": "PASS",
+      "logSha256": "46b9f239058362b8bf65ab1eec1459970d5561559439d3bf0b2fe9c8ab6a2a00"
+    },
+    {
+      "name": "powered-contact-presentation",
+      "configuration": "release",
+      "result": "PASS",
+      "logSha256": "71af450525294d019db6bc178c4141dd163f93b1db93c57ff01b014d205ca520"
+    },
+    {
+      "name": "powered-free-flight-presentation",
+      "configuration": "release",
+      "result": "PASS",
+      "logSha256": "55f86ca82bc9aae444ae37f66796f5cce2d04a8b9a484f69b2402e43518fcce1"
+    },
+    {
+      "name": "powered-contact-authority",
+      "configuration": "release",
+      "result": "PASS",
+      "logSha256": "0cb428fadf18a3c687432f813fdbac74ae4213614c3bb8aec80745350aed2a36"
+    },
+    {
+      "name": "powered-free-flight-arithmetic",
+      "configuration": "release",
+      "result": "PASS",
+      "logSha256": "8a8e9e7333d72a7014ab15be875f35319e81991cc7e2fde354a4cffc6a60cd8e"
+    },
+    {
+      "name": "powered-free-flight-schedules",
+      "configuration": "release",
+      "result": "PASS",
+      "logSha256": "0e1abef58e20acb3549bb3dee1b5e17637f77b8ff7a2baa91229cf43970faa02"
+    },
+    {
+      "name": "powered-free-flight-allocation",
+      "configuration": "release",
+      "result": "PASS",
+      "logSha256": "7e36d9045b1b53bf2a874d0a8aed1e53eff6a88e32083ab6b4219a0f610e0248"
+    },
+    {
+      "name": "build-debug-final.txt",
+      "result": "PASS 0 warnings/errors"
+    },
+    {
+      "name": "build-release-final.txt",
+      "result": "PASS 0 warnings/errors"
+    }
+  ],
+  "boundedCorrection": {
+    "firstFailure": "refusal-release.txt new test expected StaleSource",
+    "provenCause": "publisher maps unreadable resource/engine parent to InvalidProposal before writes",
+    "correction": "new test exact expected status only; canonical/native nonmutation preserved",
+    "correctedResult": "PASS"
+  }
+}

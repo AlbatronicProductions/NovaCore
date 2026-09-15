@@ -1,0 +1,286 @@
+{
+  "status": "FAIL",
+  "endpointNativeDifferences": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "rows": [
+    {
+      "field": "impulses",
+      "component": 0,
+      "target": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "actual": {
+        "Mantissa": -1.5,
+        "Exponent": -53
+      },
+      "error": {
+        "Mantissa": 1.5,
+        "Exponent": -53
+      },
+      "referenceSizedUlp": {
+        "Mantissa": 1,
+        "Exponent": -54
+      },
+      "pass": false
+    },
+    {
+      "field": "impulses",
+      "component": 1,
+      "target": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "actual": {
+        "Mantissa": -1.5,
+        "Exponent": -53
+      },
+      "error": {
+        "Mantissa": 1.5,
+        "Exponent": -53
+      },
+      "referenceSizedUlp": {
+        "Mantissa": 1,
+        "Exponent": -54
+      },
+      "pass": false
+    },
+    {
+      "field": "impulses",
+      "component": 2,
+      "target": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "actual": {
+        "Mantissa": 1.25,
+        "Exponent": -52
+      },
+      "error": {
+        "Mantissa": 1.25,
+        "Exponent": -52
+      },
+      "referenceSizedUlp": {
+        "Mantissa": 1,
+        "Exponent": -54
+      },
+      "pass": false
+    },
+    {
+      "field": "impulses",
+      "component": 3,
+      "target": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "actual": {
+        "Mantissa": 1,
+        "Exponent": -52
+      },
+      "error": {
+        "Mantissa": 1,
+        "Exponent": -52
+      },
+      "referenceSizedUlp": {
+        "Mantissa": 1,
+        "Exponent": -54
+      },
+      "pass": false
+    },
+    {
+      "field": "impulses",
+      "component": 4,
+      "target": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "actual": {
+        "Mantissa": 1.0009765625,
+        "Exponent": -55
+      },
+      "error": {
+        "Mantissa": 1.0009765625,
+        "Exponent": -55
+      },
+      "referenceSizedUlp": {
+        "Mantissa": 1,
+        "Exponent": -80
+      },
+      "pass": false
+    },
+    {
+      "field": "impulses",
+      "component": 5,
+      "target": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "actual": {
+        "Mantissa": 1.00048828125,
+        "Exponent": -54
+      },
+      "error": {
+        "Mantissa": 1.00048828125,
+        "Exponent": -54
+      },
+      "referenceSizedUlp": {
+        "Mantissa": 1,
+        "Exponent": -78
+      },
+      "pass": false
+    },
+    {
+      "field": "impulses",
+      "component": 6,
+      "target": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "actual": {
+        "Mantissa": 1.064453125,
+        "Exponent": -89
+      },
+      "error": {
+        "Mantissa": 1.064453125,
+        "Exponent": -89
+      },
+      "referenceSizedUlp": {
+        "Mantissa": 1,
+        "Exponent": -114
+      },
+      "pass": false
+    },
+    {
+      "field": "increment",
+      "component": 0,
+      "target": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "actual": {
+        "Mantissa": 1.00048828125,
+        "Exponent": -57
+      },
+      "error": {
+        "Mantissa": 1.00048828125,
+        "Exponent": -57
+      },
+      "referenceSizedUlp": {
+        "Mantissa": 1,
+        "Exponent": -81
+      },
+      "pass": false
+    },
+    {
+      "field": "increment",
+      "component": 1,
+      "target": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "actual": {
+        "Mantissa": 1.25,
+        "Exponent": -55
+      },
+      "error": {
+        "Mantissa": 1.25,
+        "Exponent": -55
+      },
+      "referenceSizedUlp": {
+        "Mantissa": 1,
+        "Exponent": -84
+      },
+      "pass": false
+    },
+    {
+      "field": "increment",
+      "component": 2,
+      "target": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "actual": {
+        "Mantissa": -1.0009765625,
+        "Exponent": -58
+      },
+      "error": {
+        "Mantissa": 1.0009765625,
+        "Exponent": -58
+      },
+      "referenceSizedUlp": {
+        "Mantissa": 1,
+        "Exponent": -83
+      },
+      "pass": false
+    },
+    {
+      "field": "increment",
+      "component": 3,
+      "target": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "actual": {
+        "Mantissa": -1,
+        "Exponent": -57
+      },
+      "error": {
+        "Mantissa": 1,
+        "Exponent": -57
+      },
+      "referenceSizedUlp": {
+        "Mantissa": 1,
+        "Exponent": -82
+      },
+      "pass": false
+    },
+    {
+      "field": "increment",
+      "component": 4,
+      "target": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "actual": {
+        "Mantissa": -1.23388671875,
+        "Exponent": -88
+      },
+      "error": {
+        "Mantissa": 1.23388671875,
+        "Exponent": -88
+      },
+      "referenceSizedUlp": {
+        "Mantissa": 1,
+        "Exponent": -114
+      },
+      "pass": false
+    },
+    {
+      "field": "increment",
+      "component": 5,
+      "target": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "actual": {
+        "Mantissa": -1,
+        "Exponent": -56
+      },
+      "error": {
+        "Mantissa": 1,
+        "Exponent": -56
+      },
+      "referenceSizedUlp": {
+        "Mantissa": 1,
+        "Exponent": -80
+      },
+      "pass": false
+    }
+  ]
+}

@@ -1,0 +1,189 @@
+{
+  "date": "2026-09-15",
+  "judgment": "REVISE FAILED",
+  "reason": "One class-B composition changes four frozen binary64 projections by one ULP; six FP32 inputs and exact ledger match. Semantic stop.",
+  "branch": "codex/powered-contact-numerical-prerequisite",
+  "head": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "main": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "originMain": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "remoteMain": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "startingFiles": 2457,
+  "closingProtectedFiles": 2457,
+  "startingAggregate": "6218D693972091799405C23484060DB7FACBDC20604A2033448825462B5CE2D5",
+  "closingAggregate": "6218D693972091799405C23484060DB7FACBDC20604A2033448825462B5CE2D5",
+  "aggregateAlgorithm": "Sorted unique git ls-files --cached --others --exclude-standard. Closing excludes only this allocation-closure child. Rows: path + literal backtick-t + uppercase SHA256; join LF; SHA256 UTF8.",
+  "historicalTags": 65,
+  "tagsUnchanged": true,
+  "tagReference": "../../../powered-contact-chronological-event-feasibility/identity.json",
+  "staged": [],
+  "trackedChanges": [],
+  "diffCheckExit": 0,
+  "hashes": [
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Resources/PropellantInteger.cs",
+      "sha256": "9CD3EEF877047A44102D925F612DEB263A3396DA8FB600A18FC144C935B5AF41"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Resources/FinitePropellantSegmentation.cs",
+      "sha256": "36BFC58B0EE3C4F89B31DB987C19806680212DDB57F08B3B5D2067CD97EA2D33"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Actuation/PoweredFlightNumerics.cs",
+      "sha256": "E46798B6123AC3478F03784EE40FACE5736ADED24AA37BCF886B751ADE7D41C1"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/OrdinaryAllocationMeasurement.cs",
+      "sha256": "3B6F2D9905EA52BFB131DF670F1E6A2116BA340C9EF7767DE1020197D473CFB7"
+    },
+    {
+      "path": "docs\\engineering-evidence\\powered-contact-ordinary-step-event-closure\\performance-payoff\\allocation-closure\\allocation-cause.json",
+      "sha256": "7D32E66283514BE1286B5D4AD6E440ECE020F0316189AA7F1CA7140EA993015E"
+    },
+    {
+      "path": "docs\\engineering-evidence\\powered-contact-ordinary-step-event-closure\\performance-payoff\\allocation-closure\\attribution-witness.txt",
+      "sha256": "CA1530E8ADB9DE2277E65512829796E037449464DA3A900E7C4086F446C42EF8"
+    },
+    {
+      "path": "docs\\engineering-evidence\\powered-contact-ordinary-step-event-closure\\performance-payoff\\allocation-closure\\Attribution.cs",
+      "sha256": "96DFD86A3BF866F58147950D03A7B4DC2E9E58C6027F5D85EA9606B796F5D51F"
+    },
+    {
+      "path": "docs\\engineering-evidence\\powered-contact-ordinary-step-event-closure\\performance-payoff\\allocation-closure\\corrected-semantics.json",
+      "sha256": "A9EE5CBC031AB202B344C62CA5C42CDAE26D8567F8450287798C4A45F8E70880"
+    },
+    {
+      "path": "docs\\engineering-evidence\\powered-contact-ordinary-step-event-closure\\performance-payoff\\allocation-closure\\correction-witness.txt",
+      "sha256": "A6648AF0D6FE6D474F52C4F6B697737A9B817126C2949B50A848BF13C1392677"
+    },
+    {
+      "path": "docs\\engineering-evidence\\powered-contact-ordinary-step-event-closure\\performance-payoff\\allocation-closure\\Correction.cs",
+      "sha256": "076D00462384BFC2B85ABB24B1F405DE17D4484C1D8508F267091C43DCCFE071"
+    },
+    {
+      "path": "docs\\engineering-evidence\\powered-contact-ordinary-step-event-closure\\performance-payoff\\allocation-closure\\plan.md",
+      "sha256": "FB5FB5206300C12B40A211637BF4FEB1F0C56B2EE7D5BBB006ABBB9A0EFF6C83"
+    },
+    {
+      "path": "docs\\engineering-evidence\\powered-contact-ordinary-step-event-closure\\performance-payoff\\allocation-closure\\README.md",
+      "sha256": "9F0BDD08DA6B42479C504817816CD79A0EBCA1130D8BF4557E52877F6EAFC499"
+    },
+    {
+      "path": "docs\\engineering-evidence\\powered-contact-ordinary-step-event-closure\\performance-payoff\\allocation-closure\\reproduce.ps1",
+      "sha256": "737599D153BFAB1E789558626E50E00557DFCC1205B07285C9F47044AB0B5AB3"
+    },
+    {
+      "path": "docs\\engineering-evidence\\powered-contact-ordinary-step-event-closure\\performance-payoff\\allocation-closure\\reuse-decision.md",
+      "sha256": "890FACFC11440AB271792469350728A199B2A4C1D3459678BBBB16B2BA172D06"
+    }
+  ],
+  "builds": {
+    "release": 2,
+    "warnings": 0,
+    "errors": 0
+  },
+  "freshProcesses": {
+    "attribution": 1,
+    "correctionSemanticCheck": 1,
+    "correctedAllocation": 0,
+    "timing": 0,
+    "solverCalls": 0
+  },
+  "independentVerifier": "PASS on allocation attribution and STOP/REVISE FAILED; no corrected allocation or performance PASS",
+  "runtime": ".NET 10.0.12",
+  "sdk": "10.0.303",
+  "runtimeNumericsSha256": "8AC94FB810C092A9297A903762E79A75AE07D7229D0721540C391F86D3D5D220",
+  "cleanup": {
+    "root": "E:\\NovaCore\\build\\powered-contact-event-allocation-closure",
+    "files": 72,
+    "bytes": 3178060,
+    "reparsePoints": [],
+    "inventory": [
+      {
+        "path": "E:\\NovaCore\\build\\powered-contact-event-allocation-closure\\attribution",
+        "files": 36,
+        "bytes": 1561824,
+        "components": [
+          {
+            "path": "E:\\NovaCore\\build\\powered-contact-event-allocation-closure\\attribution\\bin",
+            "files": 9,
+            "bytes": 1268424
+          },
+          {
+            "path": "E:\\NovaCore\\build\\powered-contact-event-allocation-closure\\attribution\\obj",
+            "files": 22,
+            "bytes": 283702
+          }
+        ],
+        "rootFiles": [
+          {
+            "Name": "AllocationRevision.csproj",
+            "Length": 584
+          },
+          {
+            "Name": "Rational.cs",
+            "Length": 1365
+          },
+          {
+            "Name": "result.json",
+            "Length": 5652
+          },
+          {
+            "Name": "RetainedMapper.cs",
+            "Length": 1657
+          },
+          {
+            "Name": "stdout.txt",
+            "Length": 440
+          }
+        ]
+      },
+      {
+        "path": "E:\\NovaCore\\build\\powered-contact-event-allocation-closure\\correction",
+        "files": 36,
+        "bytes": 1616236,
+        "components": [
+          {
+            "path": "E:\\NovaCore\\build\\powered-contact-event-allocation-closure\\correction\\bin",
+            "files": 9,
+            "bytes": 1295260
+          },
+          {
+            "path": "E:\\NovaCore\\build\\powered-contact-event-allocation-closure\\correction\\obj",
+            "files": 22,
+            "bytes": 314603
+          }
+        ],
+        "rootFiles": [
+          {
+            "Name": "AllocationRevision.csproj",
+            "Length": 954
+          },
+          {
+            "Name": "Rational.cs",
+            "Length": 1365
+          },
+          {
+            "Name": "result.json",
+            "Length": 2302
+          },
+          {
+            "Name": "RetainedMapper.cs",
+            "Length": 1657
+          },
+          {
+            "Name": "stdout.txt",
+            "Length": 95
+          }
+        ]
+      }
+    ],
+    "previousScratchExists": false,
+    "filesRemoved": 0,
+    "bytesRemoved": 0,
+    "automaticDeletionAttempted": false,
+    "disposition": "Retained for exact manual cleanup in README; no prior blocked deletion retried."
+  },
+  "noProductionChanges": true,
+  "noPermanentTestChanges": true,
+  "noSecondCorrection": true
+}

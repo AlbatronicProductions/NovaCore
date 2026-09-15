@@ -1,0 +1,405 @@
+{
+  "arithmetic": "Existing Scaled/ScaleMath; no epsilon",
+  "observations": [
+    {
+      "witness": "baseline-historical",
+      "classification": {
+        "Finite": true,
+        "PositiveNormals": true,
+        "Cache": {
+          "N0": {
+            "Mantissa": 1.2262190859646194,
+            "Exponent": -1071
+          },
+          "N1": {
+            "Mantissa": 1.2262184712520776,
+            "Exponent": -1071
+          },
+          "N2": {
+            "Mantissa": 1.2262189453355816,
+            "Exponent": -1071
+          },
+          "N3": {
+            "Mantissa": 1.2262186118811154,
+            "Exponent": -1071
+          },
+          "T0": {
+            "Mantissa": -1.329072006604855,
+            "Exponent": -1074
+          },
+          "T1": {
+            "Mantissa": -1.1803433687238891,
+            "Exponent": -1072
+          },
+          "Twist": {
+            "Mantissa": -1.3709542721275163,
+            "Exponent": -1072
+          }
+        },
+        "TangentMagnitude": {
+          "Mantissa": 1.2262187786083485,
+          "Exponent": -1072
+        },
+        "TangentCap": {
+          "Mantissa": 1.2262187786083485,
+          "Exponent": -1072
+        },
+        "TwistMagnitude": {
+          "Mantissa": 1.3709542721275163,
+          "Exponent": -1072
+        },
+        "TwistCap": {
+          "Mantissa": 1.3709542721275163,
+          "Exponent": -1072
+        },
+        "Tangent": "BOUNDARY-SATURATED",
+        "Twist": "BOUNDARY-SATURATED",
+        "ClosedFeasible": true
+      }
+    },
+    {
+      "witness": "powered-historical",
+      "classification": {
+        "Finite": true,
+        "PositiveNormals": true,
+        "Cache": {
+          "N0": {
+            "Mantissa": 1.2262190859646194,
+            "Exponent": -1071
+          },
+          "N1": {
+            "Mantissa": 1.2262184712520776,
+            "Exponent": -1071
+          },
+          "N2": {
+            "Mantissa": 1.2262189453355816,
+            "Exponent": -1071
+          },
+          "N3": {
+            "Mantissa": 1.2262186118811154,
+            "Exponent": -1071
+          },
+          "T0": {
+            "Mantissa": -1.329072006604855,
+            "Exponent": -1074
+          },
+          "T1": {
+            "Mantissa": -1.1803433687238891,
+            "Exponent": -1072
+          },
+          "Twist": {
+            "Mantissa": -1.3709542721275163,
+            "Exponent": -1072
+          }
+        },
+        "TangentMagnitude": {
+          "Mantissa": 1.2262187786083485,
+          "Exponent": -1072
+        },
+        "TangentCap": {
+          "Mantissa": 1.2262187786083485,
+          "Exponent": -1072
+        },
+        "TwistMagnitude": {
+          "Mantissa": 1.3709542721275163,
+          "Exponent": -1072
+        },
+        "TwistCap": {
+          "Mantissa": 1.3709542721275163,
+          "Exponent": -1072
+        },
+        "Tangent": "BOUNDARY-SATURATED",
+        "Twist": "BOUNDARY-SATURATED",
+        "ClosedFeasible": true
+      }
+    },
+    {
+      "witness": "baseline-basis-transport",
+      "classification": {
+        "Finite": true,
+        "PositiveNormals": true,
+        "Cache": {
+          "N0": {
+            "Mantissa": 1.2262190859646198,
+            "Exponent": -1071
+          },
+          "N1": {
+            "Mantissa": 1.2262184712520772,
+            "Exponent": -1071
+          },
+          "N2": {
+            "Mantissa": 1.2262189453355816,
+            "Exponent": -1071
+          },
+          "N3": {
+            "Mantissa": 1.2262186118811154,
+            "Exponent": -1071
+          },
+          "T0": {
+            "Mantissa": -1.329072006604855,
+            "Exponent": -1074
+          },
+          "T1": {
+            "Mantissa": -1.1803433687238891,
+            "Exponent": -1072
+          },
+          "Twist": {
+            "Mantissa": -1.370954272127516,
+            "Exponent": -1072
+          }
+        },
+        "TangentMagnitude": {
+          "Mantissa": 1.2262187786083485,
+          "Exponent": -1072
+        },
+        "TangentCap": {
+          "Mantissa": 1.2262187786083485,
+          "Exponent": -1072
+        },
+        "TwistMagnitude": {
+          "Mantissa": 1.370954272127516,
+          "Exponent": -1072
+        },
+        "TwistCap": {
+          "Mantissa": 1.3709542721275163,
+          "Exponent": -1072
+        },
+        "Tangent": "BOUNDARY-SATURATED",
+        "Twist": "INTERIOR",
+        "ClosedFeasible": true
+      }
+    },
+    {
+      "witness": "baseline-duration-transform",
+      "classification": {
+        "Finite": true,
+        "PositiveNormals": true,
+        "Cache": {
+          "N0": {
+            "Mantissa": 1.3079147063479266,
+            "Exponent": -2
+          },
+          "N1": {
+            "Mantissa": 1.3079140506807756,
+            "Exponent": -2
+          },
+          "N2": {
+            "Mantissa": 1.3079145563496195,
+            "Exponent": -2
+          },
+          "N3": {
+            "Mantissa": 1.3079142006790827,
+            "Exponent": -2
+          },
+          "T0": {
+            "Mantissa": -1.4176200999728967,
+            "Exponent": -5
+          },
+          "T1": {
+            "Mantissa": -1.2589825653217495,
+            "Exponent": -3
+          },
+          "Twist": {
+            "Mantissa": -1.4622927295537398,
+            "Exponent": -3
+          }
+        },
+        "TangentMagnitude": {
+          "Mantissa": 1.307914378514351,
+          "Exponent": -3
+        },
+        "TangentCap": {
+          "Mantissa": 1.3079143785143512,
+          "Exponent": -3
+        },
+        "TwistMagnitude": {
+          "Mantissa": 1.4622927295537398,
+          "Exponent": -3
+        },
+        "TwistCap": {
+          "Mantissa": 1.4622927295537398,
+          "Exponent": -3
+        },
+        "Tangent": "INTERIOR",
+        "Twist": "BOUNDARY-SATURATED",
+        "ClosedFeasible": true
+      }
+    },
+    {
+      "witness": "baseline-load-correction",
+      "classification": {
+        "Finite": true,
+        "PositiveNormals": true,
+        "Cache": {
+          "N0": {
+            "Mantissa": 1.3079147063479266,
+            "Exponent": -2
+          },
+          "N1": {
+            "Mantissa": 1.3079140506807756,
+            "Exponent": -2
+          },
+          "N2": {
+            "Mantissa": 1.3079145563496195,
+            "Exponent": -2
+          },
+          "N3": {
+            "Mantissa": 1.3079142006790827,
+            "Exponent": -2
+          },
+          "T0": {
+            "Mantissa": -1.4176200999728967,
+            "Exponent": -5
+          },
+          "T1": {
+            "Mantissa": -1.2589825653217495,
+            "Exponent": -3
+          },
+          "Twist": {
+            "Mantissa": -1.4622927295537398,
+            "Exponent": -3
+          }
+        },
+        "TangentMagnitude": {
+          "Mantissa": 1.307914378514351,
+          "Exponent": -3
+        },
+        "TangentCap": {
+          "Mantissa": 1.3079143785143512,
+          "Exponent": -3
+        },
+        "TwistMagnitude": {
+          "Mantissa": 1.4622927295537398,
+          "Exponent": -3
+        },
+        "TwistCap": {
+          "Mantissa": 1.4622927295537398,
+          "Exponent": -3
+        },
+        "Tangent": "INTERIOR",
+        "Twist": "BOUNDARY-SATURATED",
+        "ClosedFeasible": true
+      }
+    },
+    {
+      "witness": "baseline-after-D",
+      "classification": {
+        "Finite": true,
+        "PositiveNormals": true,
+        "Cache": {
+          "N0": {
+            "Mantissa": 1.3079480105059857,
+            "Exponent": -2
+          },
+          "N1": {
+            "Mantissa": 1.3079473548388347,
+            "Exponent": -2
+          },
+          "N2": {
+            "Mantissa": 1.3079478605076786,
+            "Exponent": -2
+          },
+          "N3": {
+            "Mantissa": 1.3079475048371418,
+            "Exponent": -2
+          },
+          "T0": {
+            "Mantissa": -1.4176200999728967,
+            "Exponent": -5
+          },
+          "T1": {
+            "Mantissa": -1.2589825653217495,
+            "Exponent": -3
+          },
+          "Twist": {
+            "Mantissa": -1.4622927295537398,
+            "Exponent": -3
+          }
+        },
+        "TangentMagnitude": {
+          "Mantissa": 1.307914378514351,
+          "Exponent": -3
+        },
+        "TangentCap": {
+          "Mantissa": 1.3079476826724101,
+          "Exponent": -3
+        },
+        "TwistMagnitude": {
+          "Mantissa": 1.4622927295537398,
+          "Exponent": -3
+        },
+        "TwistCap": {
+          "Mantissa": 1.4623299647344168,
+          "Exponent": -3
+        },
+        "Tangent": "INTERIOR",
+        "Twist": "INTERIOR",
+        "ClosedFeasible": true
+      }
+    },
+    {
+      "witness": "baseline-after-eight-sweeps",
+      "classification": {
+        "Finite": true,
+        "PositiveNormals": true,
+        "Cache": {
+          "N0": {
+            "Mantissa": 1.3122500063284743,
+            "Exponent": -2
+          },
+          "N1": {
+            "Mantissa": 1.3018663499475978,
+            "Exponent": -2
+          },
+          "N2": {
+            "Mantissa": 1.3065415482752256,
+            "Exponent": -2
+          },
+          "N3": {
+            "Mantissa": 1.3122697260311404,
+            "Exponent": -2
+          },
+          "T0": {
+            "Mantissa": -1.0311570722863113,
+            "Exponent": -9
+          },
+          "T1": {
+            "Mantissa": 1.1918021188482704,
+            "Exponent": -10
+          },
+          "Twist": {
+            "Mantissa": 1.268273515635476,
+            "Exponent": -45
+          }
+        },
+        "TangentMagnitude": {
+          "Mantissa": 1.1909588491416836,
+          "Exponent": -9
+        },
+        "TangentCap": {
+          "Mantissa": 1.3082319076456095,
+          "Exponent": -3
+        },
+        "TwistMagnitude": {
+          "Mantissa": 1.268273515635476,
+          "Exponent": -45
+        },
+        "TwistCap": {
+          "Mantissa": 1.4626477379149052,
+          "Exponent": -3
+        },
+        "Tangent": "INTERIOR",
+        "Twist": "INTERIOR",
+        "ClosedFeasible": true
+      }
+    }
+  ],
+  "unreached": [
+    "powered preparation/solve",
+    "paired response",
+    "boundary-boundary",
+    "boundary-infeasible"
+  ],
+  "firstFailure": "Baseline eight-sweep physical accuracy",
+  "solverAdmissions": 1
+}

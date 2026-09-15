@@ -1,0 +1,6 @@
+{
+  "status": "STOP",
+  "firstGate": "tiny-exact-reference-admission",
+  "error": "actual tiny retained event lies outside the qualified inactive-friction reference/response domain",
+  "type": "InvalidOperationException"
+}

@@ -127,7 +127,9 @@ internal sealed partial class LocalContactWorld : IDisposable
         next = default;
         var status = Validate(engine, configuration, previous, target);
         if (status != LocalContactStatus.Success) return status;
-        if (publication is not null && publication.Pending) return LocalContactStatus.PublicationPending;
+        if ((publication is not null && publication.Pending) || powered?.Pending == true) return LocalContactStatus.PublicationPending;
+        if (powered is { } activePower && (!engine.OwnsPersistentPublicationPhase || activePower.PreparedFrontier != frontier + 1))
+            return LocalContactStatus.InvalidSource;
         if (frontier == long.MaxValue || !source.TryEndpoint(frontier + 1, out var expected) || target != expected ||
             !source.TryEndpoint(frontier, out var current) || target <= current) return LocalContactStatus.InvalidInterval;
         var dt = (float)((target.Ticks - current.Ticks) / (double)SimulationInstant.TicksPerSecond);
@@ -135,6 +137,7 @@ internal sealed partial class LocalContactWorld : IDisposable
         metrics.Coverage?.Begin(dt);
         // All admissions precede mutation. Once advanced, any failed export destroys continuation permission.
         invalidated = true;
+        if (powered is not null) powered.PreparedFrontier = 0;
         try { simulation.Timestep(dt); }
         catch (Exception) { return LocalContactStatus.SolverFailure; }
         if (metrics.Coverage?.Failed == true) return LocalContactStatus.SolverFailure;
@@ -152,13 +155,15 @@ internal sealed partial class LocalContactWorld : IDisposable
         var omega = q.Conjugate().Rotate(configuration.LocalToRoot.Rotate(w));
         if (!LocalContactConfiguration.RootSpacingFits(rootPosition, configuration.ContactTolerance) ||
             !rootVelocity.IsFinite || !omega.IsFinite) return LocalContactStatus.PrecisionEnvelopeExceeded;
-        var paired = source.Motion with { Time = target, Revision = publication?.Revision ?? source.Motion.Revision,
+        var paired = source.Motion with { Time = target, Revision = powered?.Expected.StateRevision ?? publication?.Revision ?? source.Motion.Revision,
+            Properties = powered?.Physical.Properties ?? source.Motion.Properties,
             PositionRoot = rootPosition, VelocityRoot = rootVelocity, BodyToRoot = q, AngularVelocityBody = omega };
         frontier++;
         export = new(paired, source.Motion.Time, source.TimelineRevision, Generation, frontier, metrics.Contacts,
             metrics.MaximumDepth, Math.Sqrt(p.LengthSquared), Math.Sqrt(v.LengthSquared), ImportPositionError, ImportVelocityError,
             state.Constraints.Count, configuration.Article is null ? 0 : metrics.ArticleChildMask);
         if (publication is not null) publication.Pending = true;
+        if (powered is not null) powered.Pending = true;
         invalidated = false; next = new(this, frontier, receiptIdentity); return LocalContactStatus.Success;
     }
 
@@ -177,7 +182,7 @@ internal sealed partial class LocalContactWorld : IDisposable
         if (invalidated) return LocalContactStatus.Invalidated;
         if (!ReferenceEquals(receipt.Owner, this)) return LocalContactStatus.GenerationMismatch;
         if (receipt.Step != frontier) return LocalContactStatus.FrontierMismatch;
-        if (publication is not null && (!receipt.IsIssuedBy(receiptIdentity) || receipt.Generation != Generation))
+        if ((publication is not null || powered is not null) && (!receipt.IsIssuedBy(receiptIdentity) || receipt.Generation != Generation))
             return LocalContactStatus.GenerationMismatch;
         return ValidateAuthority(engine, configuration, target);
     }

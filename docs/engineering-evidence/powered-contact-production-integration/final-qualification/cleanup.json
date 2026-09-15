@@ -1,0 +1,28 @@
+{
+  "removed": 0,
+  "manualAcceptancePending": false,
+  "paths": [
+    {
+      "path": "E:\\NovaCore\\build\\powered-contact-lifecycle-correction",
+      "files": 0,
+      "bytes": 0,
+      "exists": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\powered-contact-final-median-closure",
+      "files": 0,
+      "bytes": 0,
+      "exists": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\powered-contact-final-qualification",
+      "files": 1479,
+      "bytes": 316448918,
+      "exists": true
+    }
+  ],
+  "oldRootsNoDeletionRetry": true,
+  "newRootNeededForOpenManualWindow": false,
+  "manualLogSaved": true,
+  "disposition": "DISPOSABLE - concise manual and validation evidence retained; no deletion attempted"
+}

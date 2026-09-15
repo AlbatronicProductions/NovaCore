@@ -1,0 +1,6 @@
+{
+  "mode": "regressions",
+  "runtime": ".NET 10.0.12",
+  "process": 26144,
+  "thread": 2
+}

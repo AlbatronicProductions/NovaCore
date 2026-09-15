@@ -1,0 +1,465 @@
+{
+  "schema": 1,
+  "ticket": "Powered retained contact architecture investigation",
+  "judgment": "REVISE",
+  "production_implementation_authorized": false,
+  "milestone_assigned": false,
+  "utc": "2026-09-14T17:03:28.3431725Z",
+  "repository": "E:/NovaCore",
+  "head": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "main": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "origin_main": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "remote_main": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "branch": "codex/segmented-powered-free-flight",
+  "m15_tag": {
+    "name": "m15.0-segmented-powered-free-flight",
+    "tag_object": "72c387e0bbe512a569650978522bbb3a0022ffc3",
+    "commit": "4607d8c802006d5e1a01c595ab608cf53a4dab6b"
+  },
+  "preservation": {
+    "tracked_files_before": 1991,
+    "tracked_files_after": 1991,
+    "raw_sha256_files_compared": 1991,
+    "mismatches": [],
+    "tags_count": 65,
+    "tags_unchanged": true,
+    "staged": [],
+    "initial_status": [],
+    "final_status": [
+      "?? docs/engineering-evidence/powered-contact-architecture/"
+    ],
+    "production_tests_dependencies_changed": [],
+    "blender": "No Blender workspace, source or assets accessed or modified",
+    "method": "All tracked file raw SHA-256 arrays captured in memory before and after; per-path comparison; selected source identities retained below. Git refs and tag object lists compared separately."
+  },
+  "selected_source_fingerprints": [
+    {
+      "path": "ENGINEERING_RULES.md",
+      "sha256": "2CDF0D5B89CB86FEAB5A66DE3DBC03278D5071E14C428CF7D0EE6FEAB544C703"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs",
+      "sha256": "CA626F456C048ED6610B4FB89FD6187D3ABC30E29496B59DEFD4813D281C625C"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs",
+      "sha256": "41FE19BD750E942E565A8478C6DC3CDF0A5D782106FDD12C3EFFA5B5EF8BAA9D"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Article.cs",
+      "sha256": "0D0BA22FD45EB647695C41905557BC50609B4FADB75E7480AD2E8D7E4287B3AF"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Publication.cs",
+      "sha256": "956ED8FFC99297C6DFBBDCAEC6A2ED8E8C7C1277FE9C1E85186B76ECEE172FD3"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Servicing.cs",
+      "sha256": "CC388F59351EAC4D0F1633C2EDBF67F92D3B8E42BD4A62B7CAB1C851A79EE8ED"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactCallbacks.cs",
+      "sha256": "80266CF2947E899DBB57A7ACC1418A8061484F88D978966B47BA09CEA6BCC1D7"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CompoundContactCoverage.cs",
+      "sha256": "DACBF31F495A2A2FEBA07CF9BC62022898FA7954929276E27871FDAB8AAC0A2F"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CompoundContactSelector.cs",
+      "sha256": "4B4837D88E914EE5FFF081935A85125FCCB6052247A2B8283C6876671B137DCF"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/EngineeringContactArticle.cs",
+      "sha256": "8D5BA352905624C5EC7C53DC2869B7BCE023EB95B0133DE25EE98BCB272796FD"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.PersistentContact.cs",
+      "sha256": "057F8CEFB885F719AD4D88CF0C64DB88628F0279FCAB441BAF3A430608E5D18F"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.ContactServicing.cs",
+      "sha256": "0881493EC1E74187652F8C23D91CD5AE400A3C4DF6EF4A05A39EA0A5BE29AF87"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.PoweredFreeFlight.cs",
+      "sha256": "C71DB01D3CECF028CC0F4CD79530049DADBBAAF9FB1387B2DDDF444F7F9E4006"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.EnginePreparation.cs",
+      "sha256": "0A1A3B741BDC490006206DCAC5EF5CD45BB7CCCBAF95F0F31ACF7DC641518791"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Propellant.cs",
+      "sha256": "1AC6FF92A9E7E779152E01FDCA576DE30D8DFDBB9B555EFFCA751D5DB3D569B6"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.SpacecraftCommands.cs",
+      "sha256": "EEBEA1C6E0BDA9E90C642AA70EE5EF2FB3765C1B69C94117E43E6C5A0E361BEC"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationState.cs",
+      "sha256": "5B354A397D0D4063449AD5C4B67CE12DCB84D4214DEC065CFE64437C828362E9"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Actuation/PoweredFlightEvaluator.cs",
+      "sha256": "D2FEAA4DB663B4D9ECCDE41588AD28EF0AE28299E609BC6933AE06A84D63B647"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Actuation/PoweredFlightNumerics.cs",
+      "sha256": "E46798B6123AC3478F03784EE40FACE5736ADED24AA37BCF886B751ADE7D41C1"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Actuation/PoweredFreeFlight.cs",
+      "sha256": "57DC2C42D1A12719EAB168B96B59AA3364884E86F12E5AE6F44ED38FA2BA44B0"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Actuation/SingleEngineActuation.cs",
+      "sha256": "BB9D97A5C7811BE3D34D6569D3C73393BBCB1B82597BDC0A0D6FCBFF9F5343ED"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Resources/FinitePropellantSegmentation.cs",
+      "sha256": "36BFC58B0EE3C4F89B31DB987C19806680212DDB57F08B3B5D2067CD97EA2D33"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Resources/PropellantInteger.cs",
+      "sha256": "9CD3EEF877047A44102D925F612DEB263A3396DA8FB600A18FC144C935B5AF41"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftAppliedEndpoint.cs",
+      "sha256": "E53FBEE3AE992A645DEDD713C993C6986287516E6BF169384D4CB29DB69271CA"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.cs",
+      "sha256": "7959390F0B49EA2BCC86D5BD2E3A478D87D290CCC94A3A450313126323B28E6C"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/FloridaContactProvider.cs",
+      "sha256": "E86E1DE4C16B348E250B21C0B6A0FF871357A23D8B32DAC183E0ADA7BB1BB9BB"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/ContactDevelopmentScene.cs",
+      "sha256": "ABC48C816EB29555AB9942ADA86AC4A16C3CE6158BEC8145405AB43BAB43A87D"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/PoweredFlightDevelopmentScene.cs",
+      "sha256": "7E42031049C3C75F6DD4171DF74277036FB69C58E6D033A0706F390AA80F5B90"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/EngineeringContactArticleTests.cs",
+      "sha256": "0F121E94DD63191CD38B54AB6304DA4947FF1470387D70252D6C5DFF0A06E50F"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/PoweredFreeFlightTests.cs",
+      "sha256": "AAE5CFF8C29E024EFC7332B70C5C64B637E1D991AFB1F46BF65EB49422872C29"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/PoweredFreeFlightTests.Physics.cs",
+      "sha256": "392E2F4743DCD8F2CF1613E5819971FF2C9F2EEB8560D810AD289A422393227F"
+    },
+    {
+      "path": "tools/NovaCore.Launcher/ScenarioCatalog.cs",
+      "sha256": "ACD657B7C8FCEC7ED7F8F833B503F7BF180CC5DB703668919ED3CB0867BBB6BC"
+    }
+  ],
+  "historical_tag_refs": [
+    "3ceaff9c9f1a3ac4fa5cb8fcb62d02a6d3d0dd94 refs/tags/m11b-7h1-gpu-terrain-baseline",
+    "ed1a3fbe764ea6141ebdfa988a6fdd4d167e0372 refs/tags/m12b-procedural-surface-baseline",
+    "2ca86cce99b70a56ac0a58e6f891392a09cd723b refs/tags/m12c-phase1b-stable",
+    "b65d73b15460ec356ae6e67dcb14cd8f4f8945ca refs/tags/m12d-p2s2-foundation",
+    "827cb9b7f329337bb72bce28abad5d585d837524 refs/tags/m12d-p2s3-gpu-runtime",
+    "a9f3e3172617708c3b5c0eef59d5290f91a2abec refs/tags/m12d-p2s4-canonical-terrain",
+    "6409949114f3797471b131d8005b7feac7d3fd54 refs/tags/m12d-p2s5b-production-topology",
+    "a90b024777e3b8fe8259dc7b0fa15b4a9e0f349b refs/tags/m12d-p2s5c1-interactive-billboard",
+    "37e74ad58bf53a03c35c3abeff256803dbcb4443 refs/tags/m12d-p2s5c2-moving-billboard",
+    "b04c5f3415ff4f4c5e30ca8d87515f8b610eaef4 refs/tags/m12d-p2s5c3-production-billboard-stabilization",
+    "724b779917f1cac665f6537b18edbfd70a6bfe8a refs/tags/m12d-p2s5f-new-earth-renderer",
+    "b9eb5e0628cf84f7d83c896c2fd962b426780147 refs/tags/m12d-p2s5g-surface-workload-efficiency",
+    "5d7efb2f035ccf22700b03380b4193fc82220f8a refs/tags/m12d-p2s5h-earth-route-convergence",
+    "b534d149b74b0ca854e4fb09267fc84321cc52ff refs/tags/m13.1-ncsm1-tes-hotpath",
+    "add1c94658c1de869124c75606ce0a084c77ba25 refs/tags/m13.2-ordinary-terrain-shading",
+    "bb08cba20947f863391649e68e2e4fe7035520db refs/tags/m13.3-prepared-physical-terrain",
+    "668efe2b06d2fcc907a0f46674c493b7670a2751 refs/tags/m13.4-zero-contribution-terrain-material-noise",
+    "75712e4bc990e11c3072a37299c55187cc30e0a1 refs/tags/m13.5-local-gpu-terrain-working-data",
+    "81dadf42fa9e91d8f946ebc30c3cbe3b621761fe refs/tags/m13.6-cpu-cached-terrain-residency-keys",
+    "3ccb998031e15cb1898394589c27244d55e06e24 refs/tags/m14.1-canonical-surface-point-queries",
+    "b07c511aab7109e3d240d9c7c31a444f58e069a5 refs/tags/m14.10-certified-root-contact-kinematics",
+    "8ac99fbfad4f8dd6365d696053fc3edfeea2249d refs/tags/m14.11-certified-response-proposal",
+    "98831b08e07d1bcc251f7aa900f463b98570ef04 refs/tags/m14.12-certified-preimpact-velocity",
+    "7c94f38cab9cf605c69b3b1874fee0c0091fbbb2 refs/tags/m14.13-certified-postimpact-velocity",
+    "412084a0acda2fa96c4be166e1f9f29020ffc577 refs/tags/m14.14-private-root-postimpact-state",
+    "6da3eba1410b05ea46a133bb2cf1c81425f8bf72 refs/tags/m14.15-private-canonical-propagation",
+    "a864be12e42cb98cbd38c17905833f781a579253 refs/tags/m14.16-postimpact-terrain-clearance",
+    "3f48fe441ac54458e9b413a909fae134abb112de refs/tags/m14.17-certified-continuation-publication",
+    "2faa9e568ef5f1e723f22d9635447179e4585053 refs/tags/m14.18-staged-finite-body-bepu-contact",
+    "684ed841de1432e89772282d8951f7cd8f70a625 refs/tags/m14.19-persistent-bepu-contact-publication",
+    "ae2f203b97224ff88b38b7c68902ac2d31108a91 refs/tags/m14.2-spacecraft-translational-authority",
+    "ac96f952b9c44220cd93042c0d7c6e8e07d227d5 refs/tags/m14.20-host-paced-canonical-contact-servicing",
+    "d8c13e46a9272e5ef6eb89acbe23c29709e3c55b refs/tags/m14.21-authored-compound-spacecraft-contact",
+    "e943a128ef425ff7427b917f2bb04056e58282f5 refs/tags/m14.22-canonical-spacecraft-command-authority",
+    "cd22cc96d88d2b6cf3ca48740ad41baecbbe7c9e refs/tags/m14.23-prepared-single-engine-actuation",
+    "50aa4e984e6646a9334e4e87356a43ffdf138e73 refs/tags/m14.24-exact-finite-propellant-segmentation",
+    "b9ad79c38b322c8e1e095039d5b69c035a1bcca8 refs/tags/m14.3-spacecraft-terrain-contact-observations",
+    "b198d3b381ba4a82577ba89bd5e31e6050d3a896 refs/tags/m14.4-atomic-contact-response",
+    "c2964fe4531b8e383d2d89beec2e8c055f3541a5 refs/tags/m14.5-isolated-analytical-contact-response",
+    "07adc9983252f2cabf0af9da0a1281457af606bf refs/tags/m14.6-physical-event-epochs",
+    "315da29c4eff5562f9040f7a0aedbb4e961fa877 refs/tags/m14.7-exact-event-spacecraft-motion",
+    "27a32989cef714a204d0d7ecfbd4618e53de0086 refs/tags/m14.8-exact-event-earth-relative-observation",
+    "944cb5c1f2011b5944745b210e561d0b9e8b4aaf refs/tags/m14.9-florida-monotone-contact-certification",
+    "72c387e0bbe512a569650978522bbb3a0022ffc3 refs/tags/m15.0-segmented-powered-free-flight",
+    "88a108cafaab3b030c0e48568d98330dd07607b7 refs/tags/milestone-10A",
+    "5ba3f5bdb97cb7efa831b8be3a681894a0338228 refs/tags/milestone-10A-2A-2",
+    "14693e902933430df890b5a0e39170a5b247eb97 refs/tags/milestone-10A-3",
+    "52762291bf25446cd2c37594d74302eebd1dd4f7 refs/tags/milestone-10A-4",
+    "c485b158ee8e35e105aaf452afd8b8ff3890a870 refs/tags/milestone-10A-5",
+    "a9d15d10d5e077d74807bed196c3ea5e9bb03e00 refs/tags/milestone-10A-6",
+    "dfa242e0c67574b8659de1ecd1c742e1daabd89b refs/tags/milestone-10A-7",
+    "f95eed79f60201f2ffce78533fe205bee2ebbabc refs/tags/milestone-10B-1",
+    "15cd78446c87be9423aaa2067068bcb6360f57b1 refs/tags/milestone-10B-2A",
+    "209954827f6c824bc7e6d796a781d72aa6e983e8 refs/tags/milestone-10B-2B",
+    "f1ecd38f2211ee98566b35dec6d92b37a3d47b7a refs/tags/milestone-11A",
+    "16dbfd0f3e7b438101781d3d6d0642272efb7b2a refs/tags/milestone-11B-7F",
+    "4a022dbeac91708b69d5f77fb6034da06f40bbf1 refs/tags/milestone-9A-4E-3",
+    "586dc57df705a4a0f1a5812c114aa981c3e500d1 refs/tags/milestone-9A-4E-5A",
+    "3f26635d2da0e4dd5773589a4299eb82fc0c8ca8 refs/tags/milestone-9A-celestial-v3",
+    "4997e30bd40ebae011a20dd6b58c88a9caed7a6c refs/tags/v0.2.0",
+    "764637f7662420e7c3494aee8c9e748b04db6626 refs/tags/v0.2.1",
+    "18c8a6d2e78e1b8a2bfaddd88dba955bf00b1631 refs/tags/v0.3.0",
+    "435e4cab66df0ce6885c84282ca014295e2c3cdd refs/tags/v0.4.0",
+    "141f7f623220ec3f0d5a79b30cebdcb48605a76a refs/tags/v0.4.1-docs",
+    "3759e1df199ae28acfc51376fa89295730798cad refs/tags/v0.5.0"
+  ],
+  "bepu": {
+    "version": "2.5.0-beta.29",
+    "commit": "f73164bb3c9ca733eb3329f1f6b1cea4e216ece7",
+    "manifest_sha256": "C76F2DE75DAC81C8695109977E1F8A4DCCAFF29DA0BB96884C46C0B33362240E",
+    "consumed_files": [
+      {
+        "path": "external\\bepu\\2.5.0-beta.29\\packages\\BepuPhysics.2.5.0-beta.29.nupkg",
+        "bytes": 442721,
+        "sha256": "D4A952F5417B53B08DE20D507C21745C9DD004E2529864098DFEC7A2CFF11E42",
+        "source_commit": "f73164bb3c9ca733eb3329f1f6b1cea4e216ece7"
+      },
+      {
+        "path": "external\\bepu\\2.5.0-beta.29\\lib\\BepuPhysics.dll",
+        "bytes": 880640,
+        "sha256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7",
+        "source_commit": "f73164bb3c9ca733eb3329f1f6b1cea4e216ece7"
+      },
+      {
+        "path": "external\\bepu\\2.5.0-beta.29\\packages\\BepuUtilities.2.5.0-beta.29.nupkg",
+        "bytes": 149735,
+        "sha256": "8168EC4905F3AD5F923564557DAAB2BAB1100EE46B424CA5F1C97BD7684DE19F",
+        "source_commit": "f73164bb3c9ca733eb3329f1f6b1cea4e216ece7"
+      },
+      {
+        "path": "external\\bepu\\2.5.0-beta.29\\lib\\BepuUtilities.dll",
+        "bytes": 163328,
+        "sha256": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68",
+        "source_commit": "f73164bb3c9ca733eb3329f1f6b1cea4e216ece7"
+      }
+    ],
+    "source_url_template": "https://raw.githubusercontent.com/bepu/bepuphysics2/f73164bb3c9ca733eb3329f1f6b1cea4e216ece7/{path}",
+    "source_capture": "Exact HTTP response bytes inspected and hashed in memory by read-only investigator; no new source dumps retained",
+    "source_files": [
+      {
+        "path": "BepuPhysics/Bodies.cs",
+        "bytes": 48379,
+        "sha256": "558F7882D562F3A416A433CBD863BF87E634FA60A03BDC02EEB074DEF0D831F0"
+      },
+      {
+        "path": "BepuPhysics/BodyReference.cs",
+        "bytes": 20693,
+        "sha256": "A84F2052D58902B71E666EFE96199FB7205B9581342205B8CD138E4F27D9FE33"
+      },
+      {
+        "path": "BepuPhysics/PoseIntegrator.cs",
+        "bytes": 46317,
+        "sha256": "6588697D885B354DB4582629C589821B0B5469236967736A099C19F25934E7F1"
+      },
+      {
+        "path": "BepuPhysics/Solver.cs",
+        "bytes": 126387,
+        "sha256": "E79C2DACC4F22024CC0413F8514186D41413DF17C98CD92CF61B4632C1F59FAB"
+      },
+      {
+        "path": "BepuPhysics/Solver_Solve.cs",
+        "bytes": 93441,
+        "sha256": "385E7049D39CF6D3EAB8B459BBFAC29CB957F786FFA6B075805E9753D2A596E4"
+      },
+      {
+        "path": "BepuPhysics/Constraints/TypeProcessor.cs",
+        "bytes": 100317,
+        "sha256": "B4DF764735EC6D23571A90B577DF85AF911D1B8A0FBD7481BCCB668B41F0FCC6"
+      },
+      {
+        "path": "BepuPhysics/Constraints/Contact/PenetrationLimit.cs",
+        "bytes": 9752,
+        "sha256": "8FB07EC7D1E2F146E875DCE6D97EC63052D0306F8D51E6A55C3B1B36C9A7EB38"
+      },
+      {
+        "path": "BepuPhysics/Constraints/SpringSettings.cs",
+        "bytes": 5618,
+        "sha256": "200537D595C0FFF68EF793AC7AFC0462650ED6752C2B577797D4101E3D962580"
+      },
+      {
+        "path": "BepuPhysics/DefaultTimestepper.cs",
+        "bytes": 1917,
+        "sha256": "31BDD2DFB8F1BB06274988695DF381603A42B1DFAFCD0816AD032CC4C418A027"
+      }
+    ],
+    "retained_source_witnesses": [
+      {
+        "path": "build/compound-coverage-investigation/DefaultTimestepper.cs",
+        "sha256": "31BDD2DFB8F1BB06274988695DF381603A42B1DFAFCD0816AD032CC4C418A027"
+      },
+      {
+        "path": "build/compound-coverage-investigation/NarrowPhaseConstraintUpdate.cs",
+        "sha256": "49897BA76273CFB4C96803C119872C7C50AD1556B5CB95B03EFB8238DE495AFE"
+      },
+      {
+        "path": "build/compound-coverage-investigation/ContactManifold.cs",
+        "sha256": "0FC7492A7C9EC4DFCF50667C3BC11E8E1C3AE8B61C65F7F1507DF37BF6FCF49A"
+      }
+    ]
+  },
+  "ksa": {
+    "binary": {
+      "path": "E:\\Kitten Space Agency\\KSA.dll",
+      "bytes": 4798552,
+      "sha256": "A8A5164204EED962DF9D9025E99F523D9A23EE2CE6E802B18216A9DA35506D2F",
+      "product_version": "2026.9.7.5402+487c3f340de24c6a81037120b6d1129c045c5400"
+    },
+    "source_provenance": "Existing retained private source matched installed binary/prior manifest. Ten prior manifest entries rehashed; two additional files inspected. No fresh decompilation/copy.",
+    "source_files": [
+      {
+        "path": "E:\\NovaCore\\build\\ksa-residency-reference\\assembly-source\\KSA\\NozzlePerformance.cs",
+        "bytes": 1684,
+        "sha256": "52F4C605BF6844DDE7A6D49225E57EF2CE7A0026540A34289C555AA37925AAC4",
+        "prior_manifest_match": true
+      },
+      {
+        "path": "E:\\NovaCore\\build\\ksa-residency-reference\\assembly-source\\KSA\\VehicleUpdateState.cs",
+        "bytes": 21830,
+        "sha256": "6477C8B4EBA2917BD148FC6BB953C979DAB26445A31DAA6C622DCB597FF4F8C0",
+        "prior_manifest_match": true
+      },
+      {
+        "path": "E:\\NovaCore\\build\\ksa-residency-reference\\assembly-source\\KSA\\Disturbances.cs",
+        "bytes": 1164,
+        "sha256": "F5275296DC327366AD4ABDC8C4C76C4F05824A7A64E96B94DD83BDA75C853031",
+        "prior_manifest_match": true
+      },
+      {
+        "path": "E:\\NovaCore\\build\\ksa-residency-reference\\assembly-source\\KSA\\PhysicsStates.cs",
+        "bytes": 44396,
+        "sha256": "D244258CD9B1EE46E11904D8D9D28E9391C66E56CC6D1FD991AF18DDC0BD099C",
+        "prior_manifest_match": true
+      },
+      {
+        "path": "E:\\NovaCore\\build\\ksa-residency-reference\\assembly-source\\KSA\\VehicleProperties.cs",
+        "bytes": 4571,
+        "sha256": "F7677C7D1C530D960682D2C4BF5399B05F3767504F8FEAB56DF0CEEB4C8D16D6",
+        "prior_manifest_match": true
+      },
+      {
+        "path": "E:\\NovaCore\\build\\ksa-residency-reference\\assembly-source\\KSA\\PartTree.cs",
+        "bytes": 44447,
+        "sha256": "FCD4815CDB01B7EA1982A8CFDD71BF0D584025EB72F053F6E94BD1A4CA833822",
+        "prior_manifest_match": true
+      },
+      {
+        "path": "E:\\NovaCore\\build\\ksa-residency-reference\\assembly-source\\KSA\\PhysicsBubble.cs",
+        "bytes": 105371,
+        "sha256": "E2FE83C15D846E840EC382E6823E8E3550A04E80E510FE4FCC29CAB9DBDB11D9",
+        "prior_manifest_match": true
+      },
+      {
+        "path": "E:\\NovaCore\\build\\ksa-residency-reference\\assembly-source\\KSA\\PoseIntegratorCallbacks.cs",
+        "bytes": 7191,
+        "sha256": "C87ECC40AB635AD5FC62BCA8F6F5434BA8A108BCE81FBBF61851E9CE407D7C62",
+        "prior_manifest_match": true
+      },
+      {
+        "path": "E:\\NovaCore\\build\\ksa-residency-reference\\assembly-source\\KSA\\ConstraintSim.cs",
+        "bytes": 51403,
+        "sha256": "2A34A8B269A74C0555DB344E8BFA3B307EBF4EE1515DD41EE29E6679B8E39410",
+        "prior_manifest_match": true
+      },
+      {
+        "path": "E:\\NovaCore\\build\\ksa-residency-reference\\assembly-source\\KSA\\Vehicle.cs",
+        "bytes": 248041,
+        "sha256": "2D78978FA20F37FB57599FDFF1B8501069F23AAD92DB23425B0749F10C8DA344",
+        "prior_manifest_match": true
+      },
+      {
+        "path": "E:\\NovaCore\\build\\ksa-residency-reference\\assembly-source\\KSA\\VehicleUpdateTask.cs",
+        "bytes": 15298,
+        "sha256": "1AA77D886DD64BBE4ECD212096476442E5EC431E4BCDCB2EF1EAC0FA63CD3759",
+        "prior_manifest_match": null
+      },
+      {
+        "path": "E:\\NovaCore\\build\\ksa-residency-reference\\assembly-source\\KSA\\ConstraintSimPool.cs",
+        "bytes": 634,
+        "sha256": "4DDE0FD29195E0F341A7A170EA5938203DDFD2F49ADEB690436C161C364F7167",
+        "prior_manifest_match": null
+      }
+    ],
+    "official_history_files": [
+      {
+        "path": "E:\\Kitten Space Agency\\Content\\Versions\\v2026.4.X.4141.json",
+        "bytes": 13038,
+        "sha256": "EE5A39699409F3BA6D5C10CF52339ED3C052E56D2DD1DF4B06C3D155303C63E9"
+      },
+      {
+        "path": "E:\\Kitten Space Agency\\Content\\Versions\\v2026.6.X.4568.json",
+        "bytes": 11758,
+        "sha256": "5791E5938EE4BB67B5823B0054EF6EA4F24D317E01698CCD98C9405764FBEA23"
+      },
+      {
+        "path": "E:\\Kitten Space Agency\\Content\\Versions\\v2026.6.X.4680.json",
+        "bytes": 17093,
+        "sha256": "5F86ED0D1E2FB5FAC528EA912B3FD6F9DE196E7D89CEC32BA847025C1869638B"
+      },
+      {
+        "path": "E:\\Kitten Space Agency\\Content\\Versions\\v2026.8.X.5261.json",
+        "bytes": 30059,
+        "sha256": "E2D5C6EBC35F69B59BF24945650005E07B536155794E4FE03D12C803EACBBC3A"
+      },
+      {
+        "path": "E:\\Kitten Space Agency\\Content\\Versions\\v2026.8.X.5348.json",
+        "bytes": 34634,
+        "sha256": "17F9E94DC0D57F2E3F2A886A56E0896C26E7E52CA9DC6E6AF75A42C2AFB5F7C9"
+      }
+    ],
+    "history_correction": "Repeated-jet-command incident belongs to rev5176, not prior report's5177. Prior banked evidence unchanged."
+  },
+  "verification": {
+    "independent_verifier": "REVISE",
+    "attack_count": 28,
+    "read_only": true,
+    "source_anchor_gyro_targeted_reset_corrections_applied": true,
+    "runtime_tests_run": 0,
+    "builds_run": 0,
+    "new_allocation_campaigns": 0,
+    "new_performance_campaigns": 0,
+    "git_diff_check": "PASS",
+    "evidence_links_and_whitespace": "PASS",
+    "selected_source_recheck": "32/32 PASS",
+    "retained_pinned_bepu_source_recheck": "3/3 PASS"
+  },
+  "unresolved": [
+    "Event-aware changing-mass constraint numerical operator including exact tiny durations, force/constraint/selector consistency and finite-iteration warm-start behavior",
+    "Departure consumer equivalence for article/environment, interval coverage and recontact/reactivation"
+  ],
+  "evidence_policy": {
+    "budget_bytes": 163840,
+    "new_build_trees": 0,
+    "new_runtime_dumps": 0,
+    "new_source_dumps": 0,
+    "cleanup_attempted": false,
+    "existing_scratch": "untouched",
+    "retained_files": 15
+  },
+  "next": "STOP FOR PROJECT CONTROL. Scope bounded numerical proof before supported-only production ticket. No M15.1 or Florida implementation."
+}

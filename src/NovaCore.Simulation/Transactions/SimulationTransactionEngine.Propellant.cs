@@ -46,6 +46,9 @@ internal sealed partial class SimulationTransactionEngine
             BitConverter.DoubleToInt64Bits(physical.Properties.MassKilograms) == BitConverter.DoubleToInt64Bits(total) &&
             physical.Inertia == definition.Values.DryInertia;
     }
+
+    private bool PropellantSourceMassInOwnedPhase(PropellantResourceAuthority authority, out double total)
+        => PreparedContactSourceMass(authority, out total) || PropellantMassMatches(authority, out total);
     /// <summary>Cold source construction only, before command consumption/closure. Does not alter physical mass.</summary>
     internal PropellantPreparationStatus BindFinitePropellant(EnginePreparationAuthority engine,
         PropellantDefinition? definition, out PropellantResourceAuthority? authority)
@@ -121,7 +124,7 @@ internal sealed partial class SimulationTransactionEngine
         var ticks128 = (Int128)target.Ticks - engine.Start.Ticks;
         if (ticks128 > long.MaxValue) return PropellantPreparationStatus.InvalidInterval;
         if (p.Generation == ulong.MaxValue) return PropellantPreparationStatus.GenerationExhausted;
-        if (!PropellantMassMatches(authority, out var sourceMass)) return PropellantPreparationStatus.StaleSource;
+        if (!PropellantSourceMassInOwnedPhase(authority, out var sourceMass)) return PropellantPreparationStatus.StaleSource;
         var source = authority.Copy();
         var physicalDemand = engine.ProposedThrustNewtons != 0 || engine.ProposedForceBodyNewtons != default ||
             engine.ProposedMomentBodyNewtonMetres != default;
@@ -138,7 +141,7 @@ internal sealed partial class SimulationTransactionEngine
             new(sourceMass, source.Definition.DryInertia), new(successorMass, source.Definition.DryInertia));
         if (refusePreparedForTest) return PropellantPreparationStatus.PreparationRefused;
         if (ReadSingleEngineActuationInOwnedPhase(authority.Engine, parent, out _) != EnginePreparationStatus.Preview ||
-            authority.Copy() != source || !PropellantMassMatches(authority, out var recheckedMass) ||
+            authority.Copy() != source || !PropellantSourceMassInOwnedPhase(authority, out var recheckedMass) ||
             recheckedMass != sourceMass) return PropellantPreparationStatus.StaleSource;
         // Fixed private seal writes only. Canonical resource, mass, revisions and engine cursor never change.
         p.Generation++; p.Parent = parent; p.Preview = preview; p.Active = true;
@@ -164,7 +167,7 @@ internal sealed partial class SimulationTransactionEngine
         if (!p.Active || !proposal.IsIssuedBy(p.Seal) || proposal.Generation != p.Generation)
             return PropellantPreparationStatus.InvalidProposal;
         if (ReadSingleEngineActuationInOwnedPhase(authority.Engine, p.Parent, out _) != EnginePreparationStatus.Preview ||
-            authority.Copy() != p.Preview.Resource || !PropellantMassMatches(authority, out _))
+            authority.Copy() != p.Preview.Resource || !PropellantSourceMassInOwnedPhase(authority, out _))
             return PropellantPreparationStatus.StaleSource;
         preview = p.Preview; return PropellantPreparationStatus.Preview;
     }

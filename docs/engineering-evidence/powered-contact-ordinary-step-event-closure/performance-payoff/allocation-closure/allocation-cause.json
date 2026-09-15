@@ -1,0 +1,228 @@
+{
+  "result": "CAUSE_SCOPES_RECONCILED",
+  "runtime": "10.0.12",
+  "thread": 2,
+  "warmCallsEach": 128,
+  "positiveControlBytes": 152,
+  "emptyScopeBytes": 0,
+  "originalMapBytes": 1936,
+  "scopedMapBytes": 1936,
+  "scopeSumBytes": 1936,
+  "scopes": [
+    {
+      "scope": "hp/H",
+      "callsPerMap": 1,
+      "bytes": 128
+    },
+    {
+      "scope": "Fx*duty",
+      "callsPerMap": 1,
+      "bytes": 128
+    },
+    {
+      "scope": "Fy*duty",
+      "callsPerMap": 1,
+      "bytes": 128
+    },
+    {
+      "scope": "-1*e",
+      "callsPerMap": 1,
+      "bytes": 0
+    },
+    {
+      "scope": "(-e)*effectiveFy",
+      "callsPerMap": 1,
+      "bytes": 128
+    },
+    {
+      "scope": "e*effectiveFx",
+      "callsPerMap": 1,
+      "bytes": 128
+    },
+    {
+      "scope": "effectiveFx/mass",
+      "callsPerMap": 1,
+      "bytes": 192
+    },
+    {
+      "scope": "effectiveFy/mass",
+      "callsPerMap": 1,
+      "bytes": 192
+    },
+    {
+      "scope": "ay-gravity",
+      "callsPerMap": 1,
+      "bytes": 240
+    },
+    {
+      "scope": "torqueX/inertia",
+      "callsPerMap": 1,
+      "bytes": 128
+    },
+    {
+      "scope": "torqueY/inertia",
+      "callsPerMap": 1,
+      "bytes": 128
+    },
+    {
+      "scope": "ax.Value",
+      "callsPerMap": 1,
+      "bytes": 64
+    },
+    {
+      "scope": "ay.Value",
+      "callsPerMap": 1,
+      "bytes": 64
+    },
+    {
+      "scope": "wx.Value",
+      "callsPerMap": 1,
+      "bytes": 0
+    },
+    {
+      "scope": "wy.Value",
+      "callsPerMap": 1,
+      "bytes": 64
+    },
+    {
+      "scope": "1/mass",
+      "callsPerMap": 1,
+      "bytes": 160
+    },
+    {
+      "scope": "inverseMass.Value",
+      "callsPerMap": 1,
+      "bytes": 64
+    },
+    {
+      "scope": "H.Value",
+      "callsPerMap": 1,
+      "bytes": 0
+    }
+  ],
+  "binary64Values": [
+    2.999951172669716,
+    -5.810065103107045,
+    -1.5999999999999999,
+    1.2,
+    0.12499796552790482,
+    0.016666666666666666
+  ],
+  "binary64Bits": [
+    4613937708291699916,
+    -4605144466669050101,
+    -4613487458278336103,
+    4608083138725491507,
+    4593671473318741604,
+    4580461061010952465
+  ],
+  "fp32Bits": [
+    1077935923,
+    -1061557234,
+    -1077097267,
+    1067030938,
+    1040187119,
+    1015580809
+  ],
+  "runtimeInspection": {
+    "assembly": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Runtime.Numerics.dll",
+    "version": "10.0.12\u002B95017c711e6afc1085133d440e42b4bd78155701",
+    "backingFields": [
+      {
+        "name": "_sign",
+        "type": "System.Int32"
+      },
+      {
+        "name": "_bits",
+        "type": "System.UInt32[]"
+      }
+    ],
+    "allocationSites": [
+      {
+        "method": "System.Numerics.BigInteger.Void .ctor(UInt32)",
+        "offset": 32,
+        "operation": "newarr",
+        "type": "System.UInt32"
+      },
+      {
+        "method": "System.Numerics.BigInteger.Void .ctor(Int64)",
+        "offset": 88,
+        "operation": "newarr",
+        "type": "System.UInt32"
+      },
+      {
+        "method": "System.Numerics.BigInteger.Void .ctor(Int64)",
+        "offset": 111,
+        "operation": "newarr",
+        "type": "System.UInt32"
+      },
+      {
+        "method": "System.Numerics.BigInteger.Void .ctor(UInt64)",
+        "offset": 39,
+        "operation": "newarr",
+        "type": "System.UInt32"
+      },
+      {
+        "method": "System.Numerics.BigInteger.Void .ctor(UInt64)",
+        "offset": 69,
+        "operation": "newarr",
+        "type": "System.UInt32"
+      },
+      {
+        "method": "System.Numerics.BigInteger.Void .ctor(Double)",
+        "offset": 218,
+        "operation": "newarr",
+        "type": "System.UInt32"
+      },
+      {
+        "method": "System.Numerics.BigInteger.Void .ctor(System.Decimal)",
+        "offset": 140,
+        "operation": "newarr",
+        "type": "System.UInt32"
+      },
+      {
+        "method": "System.Numerics.BigInteger.Void .ctor(System.ReadOnlySpan\u00601[System.Byte], Boolean, Boolean)",
+        "offset": 278,
+        "operation": "newarr",
+        "type": "System.UInt32"
+      },
+      {
+        "method": "System.Numerics.BigInteger.Void .ctor(System.ReadOnlySpan\u00601[System.Byte], Boolean, Boolean)",
+        "offset": 351,
+        "operation": "newarr",
+        "type": "System.UInt32"
+      },
+      {
+        "method": "System.Numerics.BigInteger.Void .ctor(System.ReadOnlySpan\u00601[System.Byte], Boolean, Boolean)",
+        "offset": 732,
+        "operation": "newarr",
+        "type": "System.UInt32"
+      },
+      {
+        "method": "System.Numerics.BigInteger.Void .ctor(System.ReadOnlySpan\u00601[System.UInt32], Boolean)",
+        "offset": 167,
+        "operation": "newarr",
+        "type": "System.UInt32"
+      },
+      {
+        "method": "System.Numerics.BigInteger.Void .ctor(System.ReadOnlySpan\u00601[System.UInt32], Boolean)",
+        "offset": 206,
+        "operation": "call",
+        "type": "UInt32[] ToArray()"
+      },
+      {
+        "method": "System.Numerics.BigInteger.Void .ctor(System.Span\u00601[System.UInt32])",
+        "offset": 249,
+        "operation": "newarr",
+        "type": "System.UInt32"
+      },
+      {
+        "method": "System.Numerics.BigInteger.Void .ctor(System.Span\u00601[System.UInt32])",
+        "offset": 349,
+        "operation": "call",
+        "type": "UInt32[] ToArray()"
+      }
+    ],
+    "scope": "Static actual-runtime IL sites; not branch-hit/object-count tracing"
+  }
+}

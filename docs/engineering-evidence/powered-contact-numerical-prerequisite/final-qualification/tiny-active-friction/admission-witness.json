@@ -1,0 +1,31 @@
+{
+  "kind": "OFFLINE SAVED-INPUT ARITHMETIC ONLY",
+  "candidateRuns": 0,
+  "solverCalls": 0,
+  "source": "GeneralizedTransport.Feasible strict comparisons; Scaled/ScaleMath binary64 operations",
+  "tangentLength": {
+    "mantissa": 1.2262187786083485,
+    "exponent": -1072,
+    "mantissaBits": "3FF39E9794FDD29F"
+  },
+  "tangentCap": {
+    "mantissa": 1.2262187786083485,
+    "exponent": -1072,
+    "mantissaBits": "3FF39E9794FDD29F"
+  },
+  "tangentComparison": 0,
+  "twistMagnitude": {
+    "mantissa": 1.3709542721275163,
+    "exponent": -1072,
+    "mantissaBits": "3FF5EF6DBF319630"
+  },
+  "twistCap": {
+    "mantissa": 1.3709542721275163,
+    "exponent": -1072,
+    "mantissaBits": "3FF5EF6DBF319630"
+  },
+  "twistComparison": 0,
+  "strictTangentPass": false,
+  "strictTwistPass": false,
+  "conclusion": "Accepted active-boundary history fails strict old-cache admission before transport elimination"
+}

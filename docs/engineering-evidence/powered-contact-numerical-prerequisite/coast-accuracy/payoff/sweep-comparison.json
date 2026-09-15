@@ -1,0 +1,96 @@
+{
+  "sameEquationAndSeedHash": "B54BF9287686719B8D5EDCB8B175E63721780F209FAA5F0CECAC6675ED884628",
+  "minimumTestedPassing": 11,
+  "scope": "Exact captured first coast; no claim for arbitrary future pieces or synthetics at eleven sweeps",
+  "existingEight": {
+    "Normal": 0.00028747062645639865,
+    "Linear": 0.00008390478684903634,
+    "Angular": 0.00015175030441508136,
+    "Residual": 0.0002825229372442679,
+    "ResidualComponents": [
+      -0.0002825229372442679,
+      0.00000855611499067954,
+      0.00012322043623936993,
+      -0.000028202428470203625,
+      0,
+      1.5705438221735205e-22,
+      0
+    ],
+    "Pass": false
+  },
+  "measuredHere": [
+    {
+      "path": "results/02-ordinary-9.json",
+      "sweeps": 9,
+      "status": "FAIL",
+      "accuracy": {
+        "Normal": 0.0001983637052881404,
+        "Linear": 0.00006306617555079572,
+        "Angular": 0.00011605795254128146,
+        "Residual": 0.0002121399687052674,
+        "ResidualComponents": [
+          -0.0002121399687052674,
+          0.00002164436035482954,
+          0.00008374434056699522,
+          -0.00001672899988263541,
+          0,
+          -3.238273602741431e-21,
+          0
+        ],
+        "Pass": false
+      },
+      "equationAndSeedHash": "B54BF9287686719B8D5EDCB8B175E63721780F209FAA5F0CECAC6675ED884628"
+    },
+    {
+      "path": "results/03-ordinary-10.json",
+      "sweeps": 10,
+      "status": "FAIL",
+      "accuracy": {
+        "Normal": 0.00013603468940759367,
+        "Linear": 0.00004625091261748741,
+        "Angular": 0.00008608505945279062,
+        "Residual": 0.0001549218767435814,
+        "ResidualComponents": [
+          -0.0001549218767435814,
+          0.00002382126401380811,
+          0.00005656759987650971,
+          -0.000010147800285604952,
+          0,
+          1.257204992943482e-22,
+          0
+        ],
+        "Pass": false
+      },
+      "equationAndSeedHash": "B54BF9287686719B8D5EDCB8B175E63721780F209FAA5F0CECAC6675ED884628"
+    },
+    {
+      "path": "results/04-ordinary-11.json",
+      "sweeps": 11,
+      "status": "PASS",
+      "accuracy": {
+        "Normal": 0.00009267637410592666,
+        "Linear": 0.000033270019022461644,
+        "Angular": 0.00006242086067353624,
+        "Residual": 0.00011086606380708,
+        "ResidualComponents": [
+          -0.00011086606380708,
+          0.00002147542057002432,
+          0.0000379427343935183,
+          -0.00000624260195687085,
+          0,
+          9.864732749223198e-23,
+          0
+        ],
+        "Pass": true
+      },
+      "equationAndSeedHash": "B54BF9287686719B8D5EDCB8B175E63721780F209FAA5F0CECAC6675ED884628"
+    }
+  ],
+  "priorTwelve": {
+    "path": "../convergence.json",
+    "sweeps": 12,
+    "pass": true,
+    "rerun": false
+  },
+  "DPlusExtraSweeps": false
+}

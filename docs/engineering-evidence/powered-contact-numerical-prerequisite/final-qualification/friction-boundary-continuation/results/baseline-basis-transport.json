@@ -1,0 +1,108 @@
+{
+  "stage": "basis-transport",
+  "geometry": {
+    "Features": {
+      "A": -4,
+      "B": -21,
+      "C": -5,
+      "D": -20
+    },
+    "Normal": {
+      "X": 0,
+      "Y": 1,
+      "Z": -6.199399327222466E-11
+    },
+    "Tangent0": {
+      "X": 0,
+      "Y": 0,
+      "Z": -1
+    },
+    "Tangent1": {
+      "X": 1,
+      "Y": -0,
+      "Z": 0
+    },
+    "Lever0": {
+      "X": -1,
+      "Y": -0.4995858669281006,
+      "Z": -0.5
+    },
+    "Lever1": {
+      "X": 1,
+      "Y": -0.4995858669281006,
+      "Z": 0.5
+    },
+    "Lever2": {
+      "X": -1,
+      "Y": -0.4995858669281006,
+      "Z": 0.5
+    },
+    "Lever3": {
+      "X": 1,
+      "Y": -0.4995858669281006,
+      "Z": -0.5
+    },
+    "Depth0": 0.00041413315921090543,
+    "Depth1": 0.0004141329845879227,
+    "Depth2": 0.0004141331010032445,
+    "Depth3": 0.0004141330427955836,
+    "Omega": 188.4955596923828,
+    "Friction": 0.5,
+    "Recovery": 2,
+    "TwiceDamping": 2
+  },
+  "classification": {
+    "Finite": true,
+    "PositiveNormals": true,
+    "Cache": {
+      "N0": {
+        "Mantissa": 1.2262190859646198,
+        "Exponent": -1071
+      },
+      "N1": {
+        "Mantissa": 1.2262184712520772,
+        "Exponent": -1071
+      },
+      "N2": {
+        "Mantissa": 1.2262189453355816,
+        "Exponent": -1071
+      },
+      "N3": {
+        "Mantissa": 1.2262186118811154,
+        "Exponent": -1071
+      },
+      "T0": {
+        "Mantissa": -1.329072006604855,
+        "Exponent": -1074
+      },
+      "T1": {
+        "Mantissa": -1.1803433687238891,
+        "Exponent": -1072
+      },
+      "Twist": {
+        "Mantissa": -1.370954272127516,
+        "Exponent": -1072
+      }
+    },
+    "TangentMagnitude": {
+      "Mantissa": 1.2262187786083485,
+      "Exponent": -1072
+    },
+    "TangentCap": {
+      "Mantissa": 1.2262187786083485,
+      "Exponent": -1072
+    },
+    "TwistMagnitude": {
+      "Mantissa": 1.370954272127516,
+      "Exponent": -1072
+    },
+    "TwistCap": {
+      "Mantissa": 1.3709542721275163,
+      "Exponent": -1072
+    },
+    "Tangent": "BOUNDARY-SATURATED",
+    "Twist": "INTERIOR",
+    "ClosedFeasible": true
+  },
+  "solverAdmissions": 0
+}

@@ -1,0 +1,135 @@
+{
+  "schema": 1,
+  "date": "2026-09-15",
+  "task": "Binary64 projection ownership / contract gate",
+  "mode": "SOURCE_ONLY",
+  "refs": {
+    "branch": "codex/powered-contact-numerical-prerequisite",
+    "head": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+    "main": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+    "originMain": "49057fecceb0f725d5f551ec40e2780971b0d81d"
+  },
+  "contractClassification": "B. REQUIRED OUTCOME / WRONG METRIC",
+  "valueClassifications": {
+    "ax": "D. NATIVE / BEPU TRANSPORT INTERMEDIATE",
+    "wx": "D. NATIVE / BEPU TRANSPORT INTERMEDIATE",
+    "ay": "D. NATIVE / BEPU TRANSPORT INTERMEDIATE",
+    "wy": "D. NATIVE / BEPU TRANSPORT INTERMEDIATE"
+  },
+  "laterCapturedCopies": "F. DIAGNOSTIC / EVIDENCE ONLY",
+  "independentVerifier": "PASS, including final report review",
+  "judgment": "PASS — CONTRACT RESOLVED",
+  "preserved": {
+    "staged": 0,
+    "trackedChanges": 0,
+    "preExistingFiles": 2468,
+    "aggregation": "Sorted unique git ls-files --cached --others --exclude-standard minus this projection-contract child; relative path + literal backtick-t + uppercase SHA256 per row, LF joined, UTF8 SHA256",
+    "afterSha256": "C6B43FAEF31AB6789E4E88975390EEF018C0940E098A28C8AF86BAFFF5108B61",
+    "historicalTags": 65,
+    "beforeSha256": "C6B43FAEF31AB6789E4E88975390EEF018C0940E098A28C8AF86BAFFF5108B61",
+    "tagChanges": 0
+  },
+  "execution": {
+    "timingRuns": 0,
+    "physicalRuns": 0,
+    "builds": 0,
+    "mapperExperiments": 0,
+    "allocationRechecks": 0
+  },
+  "sourceHashes": [
+    {
+      "path": "src/NovaCore.Simulation/NovaCore.Simulation.csproj",
+      "sha256": "2599019296A0F5E0562FF0832C0128F8EE23917BBDD96CA1E32AFFE56D352FBD"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Resources/PropellantInteger.cs",
+      "sha256": "9CD3EEF877047A44102D925F612DEB263A3396DA8FB600A18FC144C935B5AF41"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Resources/FinitePropellantSegmentation.cs",
+      "sha256": "36BFC58B0EE3C4F89B31DB987C19806680212DDB57F08B3B5D2067CD97EA2D33"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Actuation/PoweredFlightNumerics.cs",
+      "sha256": "E46798B6123AC3478F03784EE40FACE5736ADED24AA37BCF886B751ADE7D41C1"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Actuation/PoweredFlightEvaluator.cs",
+      "sha256": "D2FEAA4DB663B4D9ECCDE41588AD28EF0AE28299E609BC6933AE06A84D63B647"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.PoweredFreeFlight.cs",
+      "sha256": "C71DB01D3CECF028CC0F4CD79530049DADBBAAF9FB1387B2DDDF444F7F9E4006"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs",
+      "sha256": "41FE19BD750E942E565A8478C6DC3CDF0A5D782106FDD12C3EFFA5B5EF8BAA9D"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactCallbacks.cs",
+      "sha256": "80266CF2947E899DBB57A7ACC1418A8061484F88D978966B47BA09CEA6BCC1D7"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Publication.cs",
+      "sha256": "956ED8FFC99297C6DFBBDCAEC6A2ED8E8C7C1277FE9C1E85186B76ECEE172FD3"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs",
+      "sha256": "CA626F456C048ED6610B4FB89FD6187D3ABC30E29496B59DEFD4813D281C625C"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/PoweredFreeFlightTests.cs",
+      "sha256": "AAE5CFF8C29E024EFC7332B70C5C64B637E1D991AFB1F46BF65EB49422872C29"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/Program.cs",
+      "sha256": "7DC5838082E1C4BEA99D270CBEB26A20E47CEA9999A15716A52EDCEF486B07C7"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/OrdinaryClosure.csproj",
+      "sha256": "6F1FFA6A5336A04A6DAB2AD1EA625F3295B0DB79F163FE42066330ABC2542E22"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/Program.cs",
+      "sha256": "1529DE51803106572720B4D305BAFA2376C5C1C7E43D277C34A1324B79477A97"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-closure/Attribution.cs",
+      "sha256": "96DFD86A3BF866F58147950D03A7B4DC2E9E58C6027F5D85EA9606B796F5D51F"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-closure/Correction.cs",
+      "sha256": "076D00462384BFC2B85ABB24B1F405DE17D4484C1D8508F267091C43DCCFE071"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-closure/corrected-semantics.json",
+      "sha256": "A9EE5CBC031AB202B344C62CA5C42CDAE26D8567F8450287798C4A45F8E70880"
+    }
+  ],
+  "reportSha256": "6E756CF3F1EA16C54A46BB9D523DA2BFC2D3248DFB2CB59EBCDAFEC33B3DBAC2",
+  "diffCheck": "PASS",
+  "newReportWhitespaceCheck": "PASS",
+  "disposable": {
+    "createdThisGate": 0,
+    "totalFiles": 72,
+    "retainedPriorGate": [
+      {
+        "path": "E:\\NovaCore\\build\\powered-contact-event-allocation-closure\\attribution",
+        "files": 36,
+        "bytes": 1561824.0
+      },
+      {
+        "path": "E:\\NovaCore\\build\\powered-contact-event-allocation-closure\\correction",
+        "files": 36,
+        "bytes": 1616236.0
+      }
+    ],
+    "manualCleanup": "Remove-Item -LiteralPath 'E:\\NovaCore\\build\\powered-contact-event-allocation-closure' -Recurse -Force",
+    "totalBytes": 3178060,
+    "deletionAttempts": 0,
+    "verification": "Test-Path -LiteralPath 'E:\\NovaCore\\build\\powered-contact-event-allocation-closure'",
+    "reparsePoints": 0
+  },
+  "nextAction": "Project Control authorization for diagnostic contract migration and one exact-zero allocation recheck; performance only on PASS",
+  "unbanked": true
+}

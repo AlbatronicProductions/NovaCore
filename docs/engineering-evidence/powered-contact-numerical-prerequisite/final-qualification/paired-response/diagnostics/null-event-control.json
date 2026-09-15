@@ -1,0 +1,860 @@
+{
+  "status": "PASS",
+  "zeroEngineForce": true,
+  "sameTinyDuration": true,
+  "samePhysicalInputs": true,
+  "difference": "PieceKind.Coast versus PieceKind.Powered only; diagnostic prepare/begin/complete/coast lifecycle",
+  "pairs": [
+    {
+      "kind": "Coast",
+      "tinyCache": [
+        {
+          "Mantissa": 1.2262190859646194,
+          "Exponent": -1071
+        },
+        {
+          "Mantissa": 1.2262184712520776,
+          "Exponent": -1071
+        },
+        {
+          "Mantissa": 1.2262189453355816,
+          "Exponent": -1071
+        },
+        {
+          "Mantissa": 1.2262186118811154,
+          "Exponent": -1071
+        },
+        {
+          "Mantissa": -1.329072006604855,
+          "Exponent": -1074
+        },
+        {
+          "Mantissa": -1.1803433687238891,
+          "Exponent": -1072
+        },
+        {
+          "Mantissa": -1.3709542721275163,
+          "Exponent": -1072
+        }
+      ],
+      "tinyIncrements": [
+        {
+          "Mantissa": -1.1803433687238891,
+          "Exponent": -1075
+        },
+        {
+          "Mantissa": -1.0230625616386533,
+          "Exponent": -1087
+        },
+        {
+          "Mantissa": 1.3290720041722726,
+          "Exponent": -1077
+        },
+        {
+          "Mantissa": -1.3279689287639416,
+          "Exponent": -1076
+        },
+        {
+          "Mantissa": -1.3709542721275165,
+          "Exponent": -1073
+        },
+        {
+          "Mantissa": -1.179369522771568,
+          "Exponent": -1074
+        }
+      ],
+      "tinyEndpoint": {
+        "Linear": {
+          "X": -1.0288123686308381E-09,
+          "Y": -6.332993507385254E-07,
+          "Z": 5.035674099929111E-10
+        },
+        "Angular": {
+          "X": 1.0079697077003402E-09,
+          "Y": 1.6226184275932743E-19,
+          "Z": 2.0593304839167104E-09
+        }
+      },
+      "accepted": {
+        "Identity": {
+          "World": 1,
+          "Body": 0,
+          "BodyGeneration": 1,
+          "Constraint": 0,
+          "ManifoldGeneration": 1
+        },
+        "Generation": 2,
+        "Piece": 1,
+        "Kind": "Coast",
+        "ProducingGeometry": {
+          "Features": {
+            "A": -4,
+            "B": -21,
+            "C": -5,
+            "D": -20
+          },
+          "Normal": {
+            "X": 0,
+            "Y": 1,
+            "Z": -6.199399327222466E-11
+          },
+          "Tangent0": {
+            "X": 0,
+            "Y": 0,
+            "Z": -1
+          },
+          "Tangent1": {
+            "X": 1,
+            "Y": -0,
+            "Z": 0
+          },
+          "Lever0": {
+            "X": -1,
+            "Y": -0.4995858669281006,
+            "Z": -0.5
+          },
+          "Lever1": {
+            "X": 1,
+            "Y": -0.4995858669281006,
+            "Z": 0.5
+          },
+          "Lever2": {
+            "X": -1,
+            "Y": -0.4995858669281006,
+            "Z": 0.5
+          },
+          "Lever3": {
+            "X": 1,
+            "Y": -0.4995858669281006,
+            "Z": -0.5
+          },
+          "Depth0": 0.00041413315921090543,
+          "Depth1": 0.0004141329845879227,
+          "Depth2": 0.0004141331010032445,
+          "Depth3": 0.0004141330427955836,
+          "Omega": 188.4955596923828,
+          "Friction": 0.5,
+          "Recovery": 2,
+          "TwiceDamping": 2
+        },
+        "ProducingDuration": {},
+        "Cache": {
+          "N0": {
+            "Mantissa": 1.2262190859646194,
+            "Exponent": -1071
+          },
+          "N1": {
+            "Mantissa": 1.2262184712520776,
+            "Exponent": -1071
+          },
+          "N2": {
+            "Mantissa": 1.2262189453355816,
+            "Exponent": -1071
+          },
+          "N3": {
+            "Mantissa": 1.2262186118811154,
+            "Exponent": -1071
+          },
+          "T0": {
+            "Mantissa": -1.329072006604855,
+            "Exponent": -1074
+          },
+          "T1": {
+            "Mantissa": -1.1803433687238891,
+            "Exponent": -1072
+          },
+          "Twist": {
+            "Mantissa": -1.3709542721275163,
+            "Exponent": -1072
+          }
+        },
+        "Load": {
+          "Gravity": {
+            "X": 0,
+            "Y": -9.81,
+            "Z": 0
+          },
+          "Force": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Torque": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          }
+        },
+        "Endpoint": {
+          "Linear": {
+            "X": -1.0288123686308381E-09,
+            "Y": -6.332993507385254E-07,
+            "Z": 5.035674099929111E-10
+          },
+          "Angular": {
+            "X": 1.0079697077003402E-09,
+            "Y": 1.6226184275932743E-19,
+            "Z": 2.0593304839167104E-09
+          }
+        }
+      },
+      "coast": {
+        "name": "zero-input-Coast",
+        "status": "Ready",
+        "sweeps": 12,
+        "d": true,
+        "cache": [
+          {
+            "Mantissa": 1.3057877848309636,
+            "Exponent": -2
+          },
+          {
+            "Mantissa": 1.3048364466094455,
+            "Exponent": -2
+          },
+          {
+            "Mantissa": 1.3103495762153572,
+            "Exponent": -2
+          },
+          {
+            "Mantissa": 1.3105563190508847,
+            "Exponent": -2
+          },
+          {
+            "Mantissa": -1.1858752595220894,
+            "Exponent": -13
+          },
+          {
+            "Mantissa": 1.5249308270032198,
+            "Exponent": -13
+          },
+          {
+            "Mantissa": 1.6227609027740955,
+            "Exponent": -48
+          }
+        ],
+        "increments": [
+          {
+            "Mantissa": 1.5249308270032198,
+            "Exponent": -16
+          },
+          {
+            "Mantissa": -1.0673901295604082,
+            "Exponent": -17
+          },
+          {
+            "Mantissa": 1.1858745953076772,
+            "Exponent": -16
+          },
+          {
+            "Mantissa": 1.1868576293000013,
+            "Exponent": -15
+          },
+          {
+            "Mantissa": -1.6254913856852027,
+            "Exponent": -49
+          },
+          {
+            "Mantissa": -1.526194922589868,
+            "Exponent": -15
+          }
+        ],
+        "endpoint": {
+          "Linear": {
+            "X": 2.326756901177718E-05,
+            "Y": -8.776839767916933E-06,
+            "Z": 1.8095513871787392E-05
+          },
+          "Angular": {
+            "X": 3.622102839512278E-05,
+            "Y": -2.887290478505341E-15,
+            "Z": -4.657371345363071E-05
+          }
+        },
+        "nativeBits": [
+          4537488599205019648,
+          13754670593901330432,
+          4535962078170578944,
+          4540470104835489792,
+          13612694625419526144,
+          13765369928666316800
+        ],
+        "proof": {
+          "Transport": {
+            "LinearError": 0,
+            "AngularError": 0,
+            "Condition": 6.894922329493201,
+            "ErrorScreen": 8.763842645481506E-13
+          },
+          "Transported": {
+            "N0": {
+              "Mantissa": 1.2262190859646198,
+              "Exponent": -1071
+            },
+            "N1": {
+              "Mantissa": 1.2262184712520772,
+              "Exponent": -1071
+            },
+            "N2": {
+              "Mantissa": 1.2262189453355816,
+              "Exponent": -1071
+            },
+            "N3": {
+              "Mantissa": 1.2262186118811154,
+              "Exponent": -1071
+            },
+            "T0": {
+              "Mantissa": -1.329072006604855,
+              "Exponent": -1074
+            },
+            "T1": {
+              "Mantissa": -1.1803433687238891,
+              "Exponent": -1072
+            },
+            "Twist": {
+              "Mantissa": -1.370954272127516,
+              "Exponent": -1072
+            }
+          },
+          "DurationScaled": {
+            "N0": {
+              "Mantissa": 1.3079147063479266,
+              "Exponent": -2
+            },
+            "N1": {
+              "Mantissa": 1.3079140506807756,
+              "Exponent": -2
+            },
+            "N2": {
+              "Mantissa": 1.3079145563496195,
+              "Exponent": -2
+            },
+            "N3": {
+              "Mantissa": 1.3079142006790827,
+              "Exponent": -2
+            },
+            "T0": {
+              "Mantissa": -1.4176200999728967,
+              "Exponent": -5
+            },
+            "T1": {
+              "Mantissa": -1.2589825653217495,
+              "Exponent": -3
+            },
+            "Twist": {
+              "Mantissa": -1.4622927295537398,
+              "Exponent": -3
+            }
+          },
+          "LoadShift": {
+            "Mantissa": 0,
+            "Exponent": 0
+          },
+          "BeforeD": {
+            "N0": {
+              "Mantissa": 1.3079147063479266,
+              "Exponent": -2
+            },
+            "N1": {
+              "Mantissa": 1.3079140506807756,
+              "Exponent": -2
+            },
+            "N2": {
+              "Mantissa": 1.3079145563496195,
+              "Exponent": -2
+            },
+            "N3": {
+              "Mantissa": 1.3079142006790827,
+              "Exponent": -2
+            },
+            "T0": {
+              "Mantissa": -1.4176200999728967,
+              "Exponent": -5
+            },
+            "T1": {
+              "Mantissa": -1.2589825653217495,
+              "Exponent": -3
+            },
+            "Twist": {
+              "Mantissa": -1.4622927295537398,
+              "Exponent": -3
+            }
+          },
+          "DDelta": {
+            "Mantissa": 1.0913106512799293,
+            "Exponent": -17
+          },
+          "DNumerator": {
+            "Mantissa": -1.1926597985238914,
+            "Exponent": -16
+          },
+          "DDenominator": 2.1857384001981397,
+          "AfterD": {
+            "N0": {
+              "Mantissa": 1.3079480105059857,
+              "Exponent": -2
+            },
+            "N1": {
+              "Mantissa": 1.3079473548388347,
+              "Exponent": -2
+            },
+            "N2": {
+              "Mantissa": 1.3079478605076786,
+              "Exponent": -2
+            },
+            "N3": {
+              "Mantissa": 1.3079475048371418,
+              "Exponent": -2
+            },
+            "T0": {
+              "Mantissa": -1.4176200999728967,
+              "Exponent": -5
+            },
+            "T1": {
+              "Mantissa": -1.2589825653217495,
+              "Exponent": -3
+            },
+            "Twist": {
+              "Mantissa": -1.4622927295537398,
+              "Exponent": -3
+            }
+          },
+          "NormalClamps": 0,
+          "TangentClamps": 0,
+          "TwistClamps": 0
+        },
+        "normalError": 6.515099072568198E-05,
+        "linearError": 3.0578904433522485E-05,
+        "angularError": 5.899788511897079E-05,
+        "residual": 0.00010894215130867486,
+        "acceptedUnchanged": true
+      }
+    },
+    {
+      "kind": "Powered",
+      "tinyCache": [
+        {
+          "Mantissa": 1.2262190859646194,
+          "Exponent": -1071
+        },
+        {
+          "Mantissa": 1.2262184712520776,
+          "Exponent": -1071
+        },
+        {
+          "Mantissa": 1.2262189453355816,
+          "Exponent": -1071
+        },
+        {
+          "Mantissa": 1.2262186118811154,
+          "Exponent": -1071
+        },
+        {
+          "Mantissa": -1.329072006604855,
+          "Exponent": -1074
+        },
+        {
+          "Mantissa": -1.1803433687238891,
+          "Exponent": -1072
+        },
+        {
+          "Mantissa": -1.3709542721275163,
+          "Exponent": -1072
+        }
+      ],
+      "tinyIncrements": [
+        {
+          "Mantissa": -1.1803433687238891,
+          "Exponent": -1075
+        },
+        {
+          "Mantissa": -1.0230625616386533,
+          "Exponent": -1087
+        },
+        {
+          "Mantissa": 1.3290720041722726,
+          "Exponent": -1077
+        },
+        {
+          "Mantissa": -1.3279689287639416,
+          "Exponent": -1076
+        },
+        {
+          "Mantissa": -1.3709542721275165,
+          "Exponent": -1073
+        },
+        {
+          "Mantissa": -1.179369522771568,
+          "Exponent": -1074
+        }
+      ],
+      "tinyEndpoint": {
+        "Linear": {
+          "X": -1.0288123686308381E-09,
+          "Y": -6.332993507385254E-07,
+          "Z": 5.035674099929111E-10
+        },
+        "Angular": {
+          "X": 1.0079697077003402E-09,
+          "Y": 1.6226184275932743E-19,
+          "Z": 2.0593304839167104E-09
+        }
+      },
+      "accepted": {
+        "Identity": {
+          "World": 1,
+          "Body": 0,
+          "BodyGeneration": 1,
+          "Constraint": 0,
+          "ManifoldGeneration": 1
+        },
+        "Generation": 2,
+        "Piece": 1,
+        "Kind": "Powered",
+        "ProducingGeometry": {
+          "Features": {
+            "A": -4,
+            "B": -21,
+            "C": -5,
+            "D": -20
+          },
+          "Normal": {
+            "X": 0,
+            "Y": 1,
+            "Z": -6.199399327222466E-11
+          },
+          "Tangent0": {
+            "X": 0,
+            "Y": 0,
+            "Z": -1
+          },
+          "Tangent1": {
+            "X": 1,
+            "Y": -0,
+            "Z": 0
+          },
+          "Lever0": {
+            "X": -1,
+            "Y": -0.4995858669281006,
+            "Z": -0.5
+          },
+          "Lever1": {
+            "X": 1,
+            "Y": -0.4995858669281006,
+            "Z": 0.5
+          },
+          "Lever2": {
+            "X": -1,
+            "Y": -0.4995858669281006,
+            "Z": 0.5
+          },
+          "Lever3": {
+            "X": 1,
+            "Y": -0.4995858669281006,
+            "Z": -0.5
+          },
+          "Depth0": 0.00041413315921090543,
+          "Depth1": 0.0004141329845879227,
+          "Depth2": 0.0004141331010032445,
+          "Depth3": 0.0004141330427955836,
+          "Omega": 188.4955596923828,
+          "Friction": 0.5,
+          "Recovery": 2,
+          "TwiceDamping": 2
+        },
+        "ProducingDuration": {},
+        "Cache": {
+          "N0": {
+            "Mantissa": 1.2262190859646194,
+            "Exponent": -1071
+          },
+          "N1": {
+            "Mantissa": 1.2262184712520776,
+            "Exponent": -1071
+          },
+          "N2": {
+            "Mantissa": 1.2262189453355816,
+            "Exponent": -1071
+          },
+          "N3": {
+            "Mantissa": 1.2262186118811154,
+            "Exponent": -1071
+          },
+          "T0": {
+            "Mantissa": -1.329072006604855,
+            "Exponent": -1074
+          },
+          "T1": {
+            "Mantissa": -1.1803433687238891,
+            "Exponent": -1072
+          },
+          "Twist": {
+            "Mantissa": -1.3709542721275163,
+            "Exponent": -1072
+          }
+        },
+        "Load": {
+          "Gravity": {
+            "X": 0,
+            "Y": -9.81,
+            "Z": 0
+          },
+          "Force": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Torque": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          }
+        },
+        "Endpoint": {
+          "Linear": {
+            "X": -1.0288123686308381E-09,
+            "Y": -6.332993507385254E-07,
+            "Z": 5.035674099929111E-10
+          },
+          "Angular": {
+            "X": 1.0079697077003402E-09,
+            "Y": 1.6226184275932743E-19,
+            "Z": 2.0593304839167104E-09
+          }
+        }
+      },
+      "coast": {
+        "name": "zero-input-Powered",
+        "status": "Ready",
+        "sweeps": 12,
+        "d": true,
+        "cache": [
+          {
+            "Mantissa": 1.3057877848309636,
+            "Exponent": -2
+          },
+          {
+            "Mantissa": 1.3048364466094455,
+            "Exponent": -2
+          },
+          {
+            "Mantissa": 1.3103495762153572,
+            "Exponent": -2
+          },
+          {
+            "Mantissa": 1.3105563190508847,
+            "Exponent": -2
+          },
+          {
+            "Mantissa": -1.1858752595220894,
+            "Exponent": -13
+          },
+          {
+            "Mantissa": 1.5249308270032198,
+            "Exponent": -13
+          },
+          {
+            "Mantissa": 1.6227609027740955,
+            "Exponent": -48
+          }
+        ],
+        "increments": [
+          {
+            "Mantissa": 1.5249308270032198,
+            "Exponent": -16
+          },
+          {
+            "Mantissa": -1.0673901295604082,
+            "Exponent": -17
+          },
+          {
+            "Mantissa": 1.1858745953076772,
+            "Exponent": -16
+          },
+          {
+            "Mantissa": 1.1868576293000013,
+            "Exponent": -15
+          },
+          {
+            "Mantissa": -1.6254913856852027,
+            "Exponent": -49
+          },
+          {
+            "Mantissa": -1.526194922589868,
+            "Exponent": -15
+          }
+        ],
+        "endpoint": {
+          "Linear": {
+            "X": 2.326756901177718E-05,
+            "Y": -8.776839767916933E-06,
+            "Z": 1.8095513871787392E-05
+          },
+          "Angular": {
+            "X": 3.622102839512278E-05,
+            "Y": -2.887290478505341E-15,
+            "Z": -4.657371345363071E-05
+          }
+        },
+        "nativeBits": [
+          4537488599205019648,
+          13754670593901330432,
+          4535962078170578944,
+          4540470104835489792,
+          13612694625419526144,
+          13765369928666316800
+        ],
+        "proof": {
+          "Transport": {
+            "LinearError": 0,
+            "AngularError": 0,
+            "Condition": 6.894922329493201,
+            "ErrorScreen": 8.763842645481506E-13
+          },
+          "Transported": {
+            "N0": {
+              "Mantissa": 1.2262190859646198,
+              "Exponent": -1071
+            },
+            "N1": {
+              "Mantissa": 1.2262184712520772,
+              "Exponent": -1071
+            },
+            "N2": {
+              "Mantissa": 1.2262189453355816,
+              "Exponent": -1071
+            },
+            "N3": {
+              "Mantissa": 1.2262186118811154,
+              "Exponent": -1071
+            },
+            "T0": {
+              "Mantissa": -1.329072006604855,
+              "Exponent": -1074
+            },
+            "T1": {
+              "Mantissa": -1.1803433687238891,
+              "Exponent": -1072
+            },
+            "Twist": {
+              "Mantissa": -1.370954272127516,
+              "Exponent": -1072
+            }
+          },
+          "DurationScaled": {
+            "N0": {
+              "Mantissa": 1.3079147063479266,
+              "Exponent": -2
+            },
+            "N1": {
+              "Mantissa": 1.3079140506807756,
+              "Exponent": -2
+            },
+            "N2": {
+              "Mantissa": 1.3079145563496195,
+              "Exponent": -2
+            },
+            "N3": {
+              "Mantissa": 1.3079142006790827,
+              "Exponent": -2
+            },
+            "T0": {
+              "Mantissa": -1.4176200999728967,
+              "Exponent": -5
+            },
+            "T1": {
+              "Mantissa": -1.2589825653217495,
+              "Exponent": -3
+            },
+            "Twist": {
+              "Mantissa": -1.4622927295537398,
+              "Exponent": -3
+            }
+          },
+          "LoadShift": {
+            "Mantissa": 0,
+            "Exponent": 0
+          },
+          "BeforeD": {
+            "N0": {
+              "Mantissa": 1.3079147063479266,
+              "Exponent": -2
+            },
+            "N1": {
+              "Mantissa": 1.3079140506807756,
+              "Exponent": -2
+            },
+            "N2": {
+              "Mantissa": 1.3079145563496195,
+              "Exponent": -2
+            },
+            "N3": {
+              "Mantissa": 1.3079142006790827,
+              "Exponent": -2
+            },
+            "T0": {
+              "Mantissa": -1.4176200999728967,
+              "Exponent": -5
+            },
+            "T1": {
+              "Mantissa": -1.2589825653217495,
+              "Exponent": -3
+            },
+            "Twist": {
+              "Mantissa": -1.4622927295537398,
+              "Exponent": -3
+            }
+          },
+          "DDelta": {
+            "Mantissa": 1.0913106512799293,
+            "Exponent": -17
+          },
+          "DNumerator": {
+            "Mantissa": -1.1926597985238914,
+            "Exponent": -16
+          },
+          "DDenominator": 2.1857384001981397,
+          "AfterD": {
+            "N0": {
+              "Mantissa": 1.3079480105059857,
+              "Exponent": -2
+            },
+            "N1": {
+              "Mantissa": 1.3079473548388347,
+              "Exponent": -2
+            },
+            "N2": {
+              "Mantissa": 1.3079478605076786,
+              "Exponent": -2
+            },
+            "N3": {
+              "Mantissa": 1.3079475048371418,
+              "Exponent": -2
+            },
+            "T0": {
+              "Mantissa": -1.4176200999728967,
+              "Exponent": -5
+            },
+            "T1": {
+              "Mantissa": -1.2589825653217495,
+              "Exponent": -3
+            },
+            "Twist": {
+              "Mantissa": -1.4622927295537398,
+              "Exponent": -3
+            }
+          },
+          "NormalClamps": 0,
+          "TangentClamps": 0,
+          "TwistClamps": 0
+        },
+        "normalError": 6.515099072568198E-05,
+        "linearError": 3.0578904433522485E-05,
+        "angularError": 5.899788511897079E-05,
+        "residual": 0.00010894215130867486,
+        "acceptedUnchanged": true
+      }
+    }
+  ],
+  "nativeWorldInstallations": 0
+}

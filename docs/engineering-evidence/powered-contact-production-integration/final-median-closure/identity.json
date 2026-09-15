@@ -1,0 +1,181 @@
+{
+  "scope": "First ready correction preserved; final median investigation restored exactly; no second correction",
+  "head": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "main": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "originMain": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "branch": "codex/powered-contact-production-integration",
+  "dotnetSdk": "10.0.303",
+  "runtime": "10.0.12",
+  "tagsUnchanged": true,
+  "tagCount": 65,
+  "stagedPaths": [],
+  "candidateFiles": [
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Actuation/OrdinaryContactInputProjection.cs",
+      "bytes": 6077,
+      "sha256": "628C4B86F2652CFD87E257B081A9900C3E8E580193715C18644DEDA933FB16E2"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Actuation/PoweredFreeFlight.cs",
+      "bytes": 3458,
+      "sha256": "377537D0B16D0912F1644DD0B016EE9A9A4E83D01888B5C0D77B7BE8386D5903"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactCallbacks.cs",
+      "bytes": 4061,
+      "sha256": "C8E5C1C8D37220CB2ADE10DCC51BC7D6D85E2D329D456F30510E5797ED9F0272"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs",
+      "bytes": 15257,
+      "sha256": "5D8305106F5FE40EC72953795E72589CA1862014E89E64184FE0EA3ADB5F72DB"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs",
+      "bytes": 14302,
+      "sha256": "D68BBDC7AE16EB3FC641ECD6F1F48E237F7A6A383FE2C4E90BF966B183075148"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Powered.cs",
+      "bytes": 12922,
+      "sha256": "3ACDAC9C6C94602CBA86FE89D1B1959D2D83B5A26F17EBF63436FCCC97DBA830"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Publication.cs",
+      "bytes": 10235,
+      "sha256": "07934C53FB5E2E0BAF7BCF0A8B4478F28F41DFFEB0160D0909990EF41E4A0A7F"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/PoweredContactPreparation.cs",
+      "bytes": 9535,
+      "sha256": "A232EB35C231101EA8071FE9B48AA4C24B5FBE1A48C35BE9CD5ED10BB171013A"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.PoweredContact.cs",
+      "bytes": 9716,
+      "sha256": "11AC90B6D37FFA1B6F181B2064BD1F38169014EA07E01FD95874F201DB2E8FB7"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.PoweredFreeFlight.cs",
+      "bytes": 29270,
+      "sha256": "445B3DCE5E47BAF4B561D201B6291DE15BC83F5F48E12BE8E8021891960D7062"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/PoweredContactTests.Authority.cs",
+      "bytes": 15314,
+      "sha256": "C8077C424B9B0181410F0BA9D6E6F2FDC387F580FF0D013021A119AE8A78F0A8"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/PoweredContactTests.cs",
+      "bytes": 10861,
+      "sha256": "C8AB3F145D05E369C271E34962ABD761D664DA6FE309E973F202C9FDE1700D60"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/PoweredContactTests.NativeRows.cs",
+      "bytes": 11795,
+      "sha256": "FD96C55C31A3961D8597E42DCC4F3F30A5FD7881BC095DA4FDC6FE79E90035A4"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/PoweredContactTests.Physics.cs",
+      "bytes": 12733,
+      "sha256": "0A7DA853EF32DD8D345EB854DE4BA321BC6181BCCF9947C83FA5EE788BFF2F7B"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/PoweredContactTests.Qualification.cs",
+      "bytes": 15175,
+      "sha256": "28407475124FF98FCECE4813DED19C8A58AAF2F8D8CD4FFB56E44CA5485D877D"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/PoweredContactTests.Work.cs",
+      "bytes": 7840,
+      "sha256": "031FB3ADD035C8EE3A3E58672162FE4D0FC238A429D75F6686E517DDA9C982F5"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "bytes": 257490,
+      "sha256": "6AA516A6F85458B3D8A74CFB0D38DD850AF069978A692BB8BFDC9AC809C76959"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Propellant.cs",
+      "bytes": 12915,
+      "sha256": "D62183EE8768021C259039F46D01958828F56247FDF0192933AC6824F8E3F3C8"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/PoweredContactTests.Lifecycle.cs",
+      "bytes": 6127,
+      "sha256": "35B4A4CB1BA8FB8D3E6B56912B595A4736C32A33E7DF52399DB458361EE54487"
+    }
+  ],
+  "changedFromStopped17": [
+    "src/NovaCore.Simulation/Spacecraft/Actuation/OrdinaryContactInputProjection.cs",
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Powered.cs",
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Publication.cs",
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/PoweredContactPreparation.cs",
+    "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.PoweredFreeFlight.cs",
+    "tests/NovaCore.Simulation.Tests/PoweredContactTests.Qualification.cs",
+    "tests/NovaCore.Simulation.Tests/Program.cs"
+  ],
+  "additionalFiles": [
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Propellant.cs",
+      "bytes": 12915,
+      "sha256": "D62183EE8768021C259039F46D01958828F56247FDF0192933AC6824F8E3F3C8"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/PoweredContactTests.Lifecycle.cs",
+      "bytes": 6127,
+      "sha256": "35B4A4CB1BA8FB8D3E6B56912B595A4736C32A33E7DF52399DB458361EE54487"
+    }
+  ],
+  "gitStatus": [
+    "M src/NovaCore.Simulation/Spacecraft/Actuation/PoweredFreeFlight.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactCallbacks.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Publication.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs",
+    " M src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.PoweredFreeFlight.cs",
+    " M src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Propellant.cs",
+    " M tests/NovaCore.Simulation.Tests/Program.cs",
+    "?? docs/engineering-evidence/powered-contact-architecture/",
+    "?? docs/engineering-evidence/powered-contact-chronological-event-feasibility/",
+    "?? docs/engineering-evidence/powered-contact-event-lifecycle-convergence/",
+    "?? docs/engineering-evidence/powered-contact-numerical-prerequisite/",
+    "?? docs/engineering-evidence/powered-contact-ordinary-step-event-closure/",
+    "?? docs/engineering-evidence/powered-contact-production-integration-design/",
+    "?? docs/engineering-evidence/powered-contact-production-integration/",
+    "?? src/NovaCore.Simulation/Spacecraft/Actuation/OrdinaryContactInputProjection.cs",
+    "?? src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Powered.cs",
+    "?? src/NovaCore.Simulation/Spacecraft/Contact/Staging/PoweredContactPreparation.cs",
+    "?? src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.PoweredContact.cs",
+    "?? tests/NovaCore.ContactNumerics.DurationProbe/",
+    "?? tests/NovaCore.ContactNumerics.IntegratedProbe/",
+    "?? tests/NovaCore.ContactNumerics.OwnedCacheProbe/",
+    "?? tests/NovaCore.ContactNumerics.PreconditionedProbe/",
+    "?? tests/NovaCore.ContactNumerics.WorldProbe/",
+    "?? tests/NovaCore.Simulation.Tests/PoweredContactTests.Authority.cs",
+    "?? tests/NovaCore.Simulation.Tests/PoweredContactTests.Lifecycle.cs",
+    "?? tests/NovaCore.Simulation.Tests/PoweredContactTests.NativeRows.cs",
+    "?? tests/NovaCore.Simulation.Tests/PoweredContactTests.Physics.cs",
+    "?? tests/NovaCore.Simulation.Tests/PoweredContactTests.Qualification.cs",
+    "?? tests/NovaCore.Simulation.Tests/PoweredContactTests.Work.cs",
+    "?? tests/NovaCore.Simulation.Tests/PoweredContactTests.cs"
+  ],
+  "scratchBeforeCleanup": [
+    {
+      "path": "E:\\NovaCore\\build\\powered-contact-performance-revision",
+      "files": 0,
+      "bytes": 0
+    },
+    {
+      "path": "E:\\NovaCore\\build\\powered-contact-lifecycle-correction",
+      "files": 253,
+      "bytes": 44749838
+    },
+    {
+      "path": "E:\\NovaCore\\build\\powered-contact-final-median-closure",
+      "files": 125,
+      "bytes": 22941027
+    }
+  ],
+  "gitVersion": "git version 2.55.0.windows.3"
+}

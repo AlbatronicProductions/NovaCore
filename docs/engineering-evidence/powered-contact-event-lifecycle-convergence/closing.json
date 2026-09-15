@@ -1,0 +1,120 @@
+{
+  "judgment": "PASS - current-source architecture investigation only",
+  "currentKsaBuild": "2026.9.10.5438+c9291b5dd3347e847020c8fb3dd11dfce6a728e9",
+  "independentVerifier": "PASS restored after current5438 closure and provenance corrections",
+  "protectedFiles": 2370,
+  "protectedAggregateSha256": "92FB58DA0CEE9CDDBBF7F42EAFB90DA1D10B02C252535BA86410A5EC74042A4D",
+  "protectedTagRefs": 65,
+  "protectedTagsUnchanged": true,
+  "productionChanges": 0,
+  "permanentTestChanges": 0,
+  "trackedChanges": 0,
+  "stagedChanges": 0,
+  "buildsRun": 0,
+  "qualificationRuns": 0,
+  "arithmeticWitnessRuns": 1,
+  "disposableCreatedFiles": 0,
+  "disposableCreatedBytes": 0,
+  "disposableRemovedFiles": 0,
+  "previouslyReviewedPairedOutputs": {
+    "bin": {
+      "exists": false,
+      "files": 0,
+      "bytes": 0
+    },
+    "obj": {
+      "exists": false,
+      "files": 0,
+      "bytes": 0
+    }
+  },
+  "candidateRemainsUnbanked": true,
+  "evidenceManifestExcludesThisFile": true,
+  "files": [
+    {
+      "File": "analytic-witnesses.py",
+      "Bytes": 3388,
+      "SHA256": "71D85C7D60D9BF3A23B48E7918FF7F4F7BFEFF7ACAC972868C63E3CAE7321941"
+    },
+    {
+      "File": "analytical-results.json",
+      "Bytes": 1608,
+      "SHA256": "6214B1BB0032C0B6F8F4996D1DFF33B51B42C776A81D6FE907BD303C272F6162"
+    },
+    {
+      "File": "architecture-candidates.md",
+      "Bytes": 11509,
+      "SHA256": "0E6F97C9D2EE01D0B65EBF7CBBF58755C2DBFBC9A4566B27708D26357A0B38BD"
+    },
+    {
+      "File": "cleanup.md",
+      "Bytes": 2814,
+      "SHA256": "B40CD9A7FC183E8145ABDA6FEF896B27F48B9D2D1650EBABB7C2B5653A114784"
+    },
+    {
+      "File": "equivalence-matrix.md",
+      "Bytes": 4076,
+      "SHA256": "C8ABB73D08B1B641327B82DF2441DAF371EA6599DF0F6F4559D7AE68AF6779D6"
+    },
+    {
+      "File": "exact-event-physical-requirements.md",
+      "Bytes": 8435,
+      "SHA256": "CC63EF8A9184D5CB0FDB0A0D5D08B94F2E0DF9C261F778B3585047C6E8E63357"
+    },
+    {
+      "File": "identity.json",
+      "Bytes": 12830,
+      "SHA256": "52FD50D3080C4D77108235C54E4C6683FEF0BA811E61CC5699877AFD140B27FB"
+    },
+    {
+      "File": "ksa-5402-snapshot.md",
+      "Bytes": 9701,
+      "SHA256": "049EC80B8878ECE5A6B3512072B343ADE35D926D9DD20CF4B6BD37EA5363B412"
+    },
+    {
+      "File": "ksa-current-lifecycle.md",
+      "Bytes": 14480,
+      "SHA256": "AD9EA78DB271BBBB845C8E1EC54A12608FC1B44021976660AACFA8C98CD7F91B"
+    },
+    {
+      "File": "ksa-live-changelog.md",
+      "Bytes": 4573,
+      "SHA256": "C7DFCCABCC92FF5A9B98E69A90D4D19B116746C7631A1C279C1F00B9D8391112"
+    },
+    {
+      "File": "ksa-source-provenance.md",
+      "Bytes": 7646,
+      "SHA256": "07978A2E5D65A94178445BFFB2E18FABBEC9E6A1CA5A2D6EBA447B7F629C51DF"
+    },
+    {
+      "File": "mechanism-test-disposition.md",
+      "Bytes": 7719,
+      "SHA256": "866ACBC58FDA70BA6D9D1209E0CA12903C809A2FF3DE98289951C80C44813CCD"
+    },
+    {
+      "File": "novacore-outcome-mechanism-map.md",
+      "Bytes": 5297,
+      "SHA256": "62E37B9C42E790932D163E925548A44E906D71BB730B5B553DA52EB6160423C4"
+    },
+    {
+      "File": "plan.md",
+      "Bytes": 2015,
+      "SHA256": "811381E261F947E7DBD7D3A405DA6BE3AC5452493E6AB4D331815A6D98BCA2EC"
+    },
+    {
+      "File": "README.md",
+      "Bytes": 12582,
+      "SHA256": "1050AE3A26C4DAF8F55E91D2A249502DA5F9C54150BBF59F7C70D1AEA5DA4ECB"
+    },
+    {
+      "File": "reproduce.md",
+      "Bytes": 5077,
+      "SHA256": "B99E548003387612A32FCFA855BC542370F280EE54534793407E220D4876A224"
+    },
+    {
+      "File": "verification.md",
+      "Bytes": 6135,
+      "SHA256": "C8CB24B70BA46B852F6664D59E87E8ABFD8876CFF91258F1033BA550A562AC44"
+    }
+  ]
+}

@@ -1,0 +1,808 @@
+{
+  "population": "UNPOWERED STILL-FUELLED RETAINED-CONTACT CONTROL",
+  "warm": 128,
+  "samples": 1024,
+  "thread": 2,
+  "gc": [
+    0,
+    0,
+    0
+  ],
+  "allocationMax": 0,
+  "allocationTotal": 0,
+  "equivalence": "1152 exact history/endpoint/native matches",
+  "groups": [
+    {
+      "name": "AllEngineResourceUpperBound",
+      "statistics": {
+        "median": 0.0234,
+        "p95": 0.024300000000000002,
+        "p99": 0.0269,
+        "max": 0.045399999999999996,
+        "mean": 0.023538281249999973
+      },
+      "residual": {
+        "median": 0.046,
+        "p95": 0.049199999999999994,
+        "p99": 0.05180000000000001,
+        "max": 0.13720000000000004,
+        "mean": 0.04660156249999972
+      }
+    },
+    {
+      "name": "AllPreviewReadersUpperBound",
+      "statistics": {
+        "median": 0.0084,
+        "p95": 0.0087,
+        "p99": 0.0098,
+        "max": 0.0114,
+        "mean": 0.008399316406250006
+      },
+      "residual": {
+        "median": 0.061000000000000006,
+        "p95": 0.0644,
+        "p99": 0.0679,
+        "max": 0.16110000000000002,
+        "mean": 0.06174052734375045
+      }
+    }
+  ],
+  "complete": {
+    "median": 0.0694,
+    "p95": 0.073,
+    "p99": 0.077,
+    "max": 0.1714,
+    "mean": 0.07013984374999963
+  },
+  "phases": [
+    {
+      "name": "A_HostResidual",
+      "calls": 2048,
+      "statistics": {
+        "median": 0.0032,
+        "p95": 0.0036,
+        "p99": 0.004,
+        "max": 0.0134,
+        "mean": 0.003243652343750005
+      }
+    },
+    {
+      "name": "B_EngineResource",
+      "calls": 3072,
+      "statistics": {
+        "median": 0.0022,
+        "p95": 0.0024,
+        "p99": 0.003,
+        "max": 0.0242,
+        "mean": 0.002265624999999987
+      }
+    },
+    {
+      "name": "C_MapperExclusive",
+      "calls": 1024,
+      "statistics": {
+        "median": 0.0038,
+        "p95": 0.0039,
+        "p99": 0.0043,
+        "max": 0.009,
+        "mean": 0.0038097656250000037
+      }
+    },
+    {
+      "name": "D_ContactValidation",
+      "calls": 8192,
+      "statistics": {
+        "median": 0.0102,
+        "p95": 0.0106,
+        "p99": 0.012,
+        "max": 0.0186,
+        "mean": 0.010250097656250167
+      }
+    },
+    {
+      "name": "E_BEPU",
+      "calls": 1024,
+      "statistics": {
+        "median": 0.0114,
+        "p95": 0.0119,
+        "p99": 0.0143,
+        "max": 0.0593,
+        "mean": 0.011530468749999943
+      }
+    },
+    {
+      "name": "F_ExportSeal",
+      "calls": 4096,
+      "statistics": {
+        "median": 0.0018,
+        "p95": 0.0021,
+        "p99": 0.0025,
+        "max": 0.0049,
+        "mean": 0.0018642578125000083
+      }
+    },
+    {
+      "name": "G_TransactionPrepareValidate",
+      "calls": 2048,
+      "statistics": {
+        "median": 0.0084,
+        "p95": 0.0088,
+        "p99": 0.0105,
+        "max": 0.0194,
+        "mean": 0.008482421875000038
+      }
+    },
+    {
+      "name": "H_CanonicalWrites",
+      "calls": 1024,
+      "statistics": {
+        "median": 0.0004,
+        "p95": 0.0027,
+        "p99": 0.0031,
+        "max": 0.0043,
+        "mean": 0.0005721679687500024
+      }
+    },
+    {
+      "name": "I_AckBodyUpdate",
+      "calls": 4096,
+      "statistics": {
+        "median": 0.0002,
+        "p95": 0.0003,
+        "p99": 0.0003,
+        "max": 0.0018,
+        "mean": 0.00022646484374999978
+      }
+    },
+    {
+      "name": "J_MassReconstruction",
+      "calls": 0,
+      "statistics": {
+        "median": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0,
+        "mean": 0
+      }
+    },
+    {
+      "name": "K_Ratio",
+      "calls": 0,
+      "statistics": {
+        "median": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0,
+        "mean": 0
+      }
+    },
+    {
+      "name": "L_PoweredSource",
+      "calls": 4096,
+      "statistics": {
+        "median": 0.0066,
+        "p95": 0.0069,
+        "p99": 0.0081,
+        "max": 0.0187,
+        "mean": 0.00662226562500003
+      }
+    },
+    {
+      "name": "M_EnginePreviewRead",
+      "calls": 6144,
+      "statistics": {
+        "median": 0.0033,
+        "p95": 0.0035,
+        "p99": 0.004,
+        "max": 0.006,
+        "mean": 0.0032995117187500063
+      }
+    },
+    {
+      "name": "N_ResourcePrepare",
+      "calls": 1024,
+      "statistics": {
+        "median": 0.0128,
+        "p95": 0.0131,
+        "p99": 0.0155,
+        "max": 0.0212,
+        "mean": 0.01287333984375012
+      }
+    },
+    {
+      "name": "O_ResourcePreviewRead",
+      "calls": 4096,
+      "statistics": {
+        "median": 0.0051,
+        "p95": 0.0054,
+        "p99": 0.0057,
+        "max": 0.0079,
+        "mean": 0.005099804687500013
+      }
+    }
+  ],
+  "nested": [
+    {
+      "parent": "A_HostResidual",
+      "child": "A_HostResidual",
+      "total_ms": 70.9179,
+      "statistics": {
+        "median": 0.0685,
+        "p95": 0.0719,
+        "p99": 0.0761,
+        "max": 0.1672,
+        "mean": 0.06925576171875038
+      }
+    },
+    {
+      "parent": "A_HostResidual",
+      "child": "B_EngineResource",
+      "total_ms": 2.32,
+      "statistics": {
+        "median": 0.0022,
+        "p95": 0.0024,
+        "p99": 0.003,
+        "max": 0.0242,
+        "mean": 0.002265624999999987
+      }
+    },
+    {
+      "parent": "A_HostResidual",
+      "child": "G_TransactionPrepareValidate",
+      "total_ms": 38.8941,
+      "statistics": {
+        "median": 0.0375,
+        "p95": 0.0403,
+        "p99": 0.0431,
+        "max": 0.1062,
+        "mean": 0.03798251953125052
+      }
+    },
+    {
+      "parent": "A_HostResidual",
+      "child": "I_AckBodyUpdate",
+      "total_ms": 0.0399,
+      "statistics": {
+        "median": 0,
+        "p95": 0.0001,
+        "p99": 0.0001,
+        "max": 0.0001,
+        "mean": 3.896484375000011e-05
+      }
+    },
+    {
+      "parent": "A_HostResidual",
+      "child": "L_PoweredSource",
+      "total_ms": 12.9665,
+      "statistics": {
+        "median": 0.0126,
+        "p95": 0.0129,
+        "p99": 0.0152,
+        "max": 0.026,
+        "mean": 0.012662597656250251
+      }
+    },
+    {
+      "parent": "A_HostResidual",
+      "child": "N_ResourcePrepare",
+      "total_ms": 14.2812,
+      "statistics": {
+        "median": 0.0139,
+        "p95": 0.0142,
+        "p99": 0.0167,
+        "max": 0.0226,
+        "mean": 0.013946484374999717
+      }
+    },
+    {
+      "parent": "D_ContactValidation",
+      "child": "C_MapperExclusive",
+      "total_ms": 3.9012,
+      "statistics": {
+        "median": 0.0038,
+        "p95": 0.0039,
+        "p99": 0.0043,
+        "max": 0.009,
+        "mean": 0.0038097656250000037
+      }
+    },
+    {
+      "parent": "D_ContactValidation",
+      "child": "E_BEPU",
+      "total_ms": 11.8072,
+      "statistics": {
+        "median": 0.0114,
+        "p95": 0.0119,
+        "p99": 0.0143,
+        "max": 0.0593,
+        "mean": 0.011530468749999943
+      }
+    },
+    {
+      "parent": "D_ContactValidation",
+      "child": "F_ExportSeal",
+      "total_ms": 0.8115,
+      "statistics": {
+        "median": 0.0008,
+        "p95": 0.0009,
+        "p99": 0.0011,
+        "max": 0.0031,
+        "mean": 0.0007924804687500142
+      }
+    },
+    {
+      "parent": "F_ExportSeal",
+      "child": "D_ContactValidation",
+      "total_ms": 3.1829,
+      "statistics": {
+        "median": 0.0031,
+        "p95": 0.0032,
+        "p99": 0.0036,
+        "max": 0.0058,
+        "mean": 0.0031083007812500304
+      }
+    },
+    {
+      "parent": "G_TransactionPrepareValidate",
+      "child": "D_ContactValidation",
+      "total_ms": 17.6478,
+      "statistics": {
+        "median": 0.017,
+        "p95": 0.0177,
+        "p99": 0.0208,
+        "max": 0.0711,
+        "mean": 0.017234179687500007
+      }
+    },
+    {
+      "parent": "G_TransactionPrepareValidate",
+      "child": "F_ExportSeal",
+      "total_ms": 4.2804,
+      "statistics": {
+        "median": 0.0042,
+        "p95": 0.0043,
+        "p99": 0.0049,
+        "max": 0.0072,
+        "mean": 0.004180078125
+      }
+    },
+    {
+      "parent": "G_TransactionPrepareValidate",
+      "child": "H_CanonicalWrites",
+      "total_ms": 0.5859,
+      "statistics": {
+        "median": 0.0004,
+        "p95": 0.0027,
+        "p99": 0.0031,
+        "max": 0.0043,
+        "mean": 0.0005721679687500024
+      }
+    },
+    {
+      "parent": "G_TransactionPrepareValidate",
+      "child": "I_AckBodyUpdate",
+      "total_ms": 0.192,
+      "statistics": {
+        "median": 0.0002,
+        "p95": 0.0002,
+        "p99": 0.0003,
+        "max": 0.0017,
+        "mean": 0.00018750000000000304
+      }
+    },
+    {
+      "parent": "G_TransactionPrepareValidate",
+      "child": "O_ResourcePreviewRead",
+      "total_ms": 7.502,
+      "statistics": {
+        "median": 0.0073,
+        "p95": 0.0075,
+        "p99": 0.0085,
+        "max": 0.0102,
+        "mean": 0.007326171874999911
+      }
+    },
+    {
+      "parent": "I_AckBodyUpdate",
+      "child": "I_AckBodyUpdate",
+      "total_ms": 0.0446,
+      "statistics": {
+        "median": 0,
+        "p95": 0.0001,
+        "p99": 0.0001,
+        "max": 0.0001,
+        "mean": 4.3554687500000245e-05
+      }
+    },
+    {
+      "parent": "L_PoweredSource",
+      "child": "D_ContactValidation",
+      "total_ms": 6.1853,
+      "statistics": {
+        "median": 0.006,
+        "p95": 0.0062,
+        "p99": 0.0071,
+        "max": 0.0132,
+        "mean": 0.006040332031249955
+      }
+    },
+    {
+      "parent": "N_ResourcePrepare",
+      "child": "M_EnginePreviewRead",
+      "total_ms": 1.0989,
+      "statistics": {
+        "median": 0.0011,
+        "p95": 0.0012,
+        "p99": 0.0014,
+        "max": 0.0038,
+        "mean": 0.0010731445312500013
+      }
+    },
+    {
+      "parent": "O_ResourcePreviewRead",
+      "child": "M_EnginePreviewRead",
+      "total_ms": 2.2798,
+      "statistics": {
+        "median": 0.0022,
+        "p95": 0.0024,
+        "p99": 0.0026,
+        "max": 0.0042,
+        "mean": 0.002226367187499998
+      }
+    }
+  ],
+  "slow": [
+    {
+      "index": 45,
+      "total_ms": 0.1714,
+      "phase_ms": [
+        0.0134,
+        0.0059,
+        0.0046,
+        0.0148,
+        0.0593,
+        0.0044,
+        0.0194,
+        0.0008,
+        0.0018,
+        0,
+        0,
+        0.0187,
+        0.0044,
+        0.018,
+        0.0059
+      ],
+      "allocation": 0
+    },
+    {
+      "index": 0,
+      "total_ms": 0.1052,
+      "phase_ms": [
+        0.0062,
+        0.0036,
+        0.0043,
+        0.0123,
+        0.0283,
+        0.0035,
+        0.0125,
+        0.0007,
+        0.0006,
+        0,
+        0,
+        0.0087,
+        0.0036,
+        0.0155,
+        0.0054
+      ],
+      "allocation": 0
+    },
+    {
+      "index": 831,
+      "total_ms": 0.1024,
+      "phase_ms": [
+        0.0052,
+        0.0027,
+        0.0055,
+        0.0128,
+        0.0214,
+        0.003,
+        0.0114,
+        0.0006,
+        0.0004,
+        0,
+        0,
+        0.008,
+        0.0044,
+        0.0212,
+        0.0058
+      ],
+      "allocation": 0
+    },
+    {
+      "index": 1023,
+      "total_ms": 0.098,
+      "phase_ms": [
+        0.0045,
+        0.0242,
+        0.0038,
+        0.0113,
+        0.0132,
+        0.0019,
+        0.0089,
+        0.0003,
+        0.0003,
+        0,
+        0,
+        0.0084,
+        0.0033,
+        0.0129,
+        0.005
+      ],
+      "allocation": 0
+    },
+    {
+      "index": 159,
+      "total_ms": 0.0921,
+      "phase_ms": [
+        0.0043,
+        0.0021,
+        0.0043,
+        0.0186,
+        0.0158,
+        0.0025,
+        0.0115,
+        0.0005,
+        0.0003,
+        0,
+        0,
+        0.0071,
+        0.0047,
+        0.0143,
+        0.0061
+      ],
+      "allocation": 0
+    },
+    {
+      "index": 373,
+      "total_ms": 0.0849,
+      "phase_ms": [
+        0.0036,
+        0.0031,
+        0.009,
+        0.0116,
+        0.0127,
+        0.0021,
+        0.0088,
+        0.0007,
+        0.0003,
+        0,
+        0,
+        0.0075,
+        0.004,
+        0.0162,
+        0.0053
+      ],
+      "allocation": 0
+    },
+    {
+      "index": 830,
+      "total_ms": 0.082,
+      "phase_ms": [
+        0.0038,
+        0.0023,
+        0.0042,
+        0.0114,
+        0.016,
+        0.0025,
+        0.0105,
+        0.0005,
+        0.0003,
+        0,
+        0,
+        0.0068,
+        0.0042,
+        0.0138,
+        0.0057
+      ],
+      "allocation": 0
+    },
+    {
+      "index": 595,
+      "total_ms": 0.0816,
+      "phase_ms": [
+        0.0039,
+        0.0085,
+        0.0038,
+        0.0117,
+        0.0124,
+        0.002,
+        0.0086,
+        0.0005,
+        0.0002,
+        0,
+        0,
+        0.0082,
+        0.0037,
+        0.0131,
+        0.005
+      ],
+      "allocation": 0
+    },
+    {
+      "index": 802,
+      "total_ms": 0.0799,
+      "phase_ms": [
+        0.0039,
+        0.0033,
+        0.0039,
+        0.0115,
+        0.0125,
+        0.0019,
+        0.0086,
+        0.0004,
+        0.0002,
+        0,
+        0,
+        0.0081,
+        0.0037,
+        0.0169,
+        0.005
+      ],
+      "allocation": 0
+    },
+    {
+      "index": 6,
+      "total_ms": 0.0788,
+      "phase_ms": [
+        0.0041,
+        0.0031,
+        0.0041,
+        0.012,
+        0.0132,
+        0.0019,
+        0.0091,
+        0.0003,
+        0.0003,
+        0,
+        0,
+        0.0081,
+        0.0035,
+        0.0139,
+        0.0052
+      ],
+      "allocation": 0
+    },
+    {
+      "index": 61,
+      "total_ms": 0.077,
+      "phase_ms": [
+        0.0038,
+        0.0022,
+        0.0039,
+        0.0113,
+        0.014,
+        0.0028,
+        0.0097,
+        0.0003,
+        0.0002,
+        0,
+        0,
+        0.0065,
+        0.0038,
+        0.013,
+        0.0055
+      ],
+      "allocation": 0
+    },
+    {
+      "index": 387,
+      "total_ms": 0.077,
+      "phase_ms": [
+        0.0037,
+        0.0022,
+        0.0043,
+        0.0107,
+        0.0155,
+        0.0021,
+        0.0086,
+        0.0002,
+        0.0002,
+        0,
+        0,
+        0.0065,
+        0.0038,
+        0.0139,
+        0.0053
+      ],
+      "allocation": 0
+    },
+    {
+      "index": 922,
+      "total_ms": 0.0766,
+      "phase_ms": [
+        0.0034,
+        0.0021,
+        0.0038,
+        0.0107,
+        0.0112,
+        0.0024,
+        0.0101,
+        0.0032,
+        0.0002,
+        0,
+        0,
+        0.0067,
+        0.004,
+        0.0128,
+        0.006
+      ],
+      "allocation": 0
+    },
+    {
+      "index": 609,
+      "total_ms": 0.0764,
+      "phase_ms": [
+        0.004,
+        0.0028,
+        0.0038,
+        0.0115,
+        0.0123,
+        0.0019,
+        0.0085,
+        0.0004,
+        0.0002,
+        0,
+        0,
+        0.0088,
+        0.0036,
+        0.0135,
+        0.0051
+      ],
+      "allocation": 0
+    },
+    {
+      "index": 801,
+      "total_ms": 0.0764,
+      "phase_ms": [
+        0.0036,
+        0.0021,
+        0.0037,
+        0.0114,
+        0.0118,
+        0.0018,
+        0.0088,
+        0.0004,
+        0.0004,
+        0,
+        0,
+        0.0071,
+        0.0035,
+        0.0161,
+        0.0057
+      ],
+      "allocation": 0
+    },
+    {
+      "index": 766,
+      "total_ms": 0.0761,
+      "phase_ms": [
+        0.0039,
+        0.003,
+        0.0038,
+        0.0122,
+        0.0121,
+        0.0021,
+        0.0086,
+        0.0005,
+        0.0003,
+        0,
+        0,
+        0.008,
+        0.0036,
+        0.0131,
+        0.0049
+      ],
+      "allocation": 0
+    }
+  ]
+}

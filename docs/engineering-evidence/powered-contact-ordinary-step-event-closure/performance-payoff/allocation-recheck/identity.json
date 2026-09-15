@@ -1,0 +1,381 @@
+{
+  "schema": 1,
+  "date": "2026-09-15",
+  "task": "Accepted diagnostic contract migration, exact-zero allocation recheck and conditional performance/payoff",
+  "branch": "codex/powered-contact-numerical-prerequisite",
+  "head": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "main": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "originMain": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "remoteMain": [
+    "49057fecceb0f725d5f551ec40e2780971b0d81d\trefs/heads/main"
+  ],
+  "machine": "ALBATRONIC007",
+  "sdk": "10.0.303",
+  "runtime": "10.0.12",
+  "architecture": "X64",
+  "runtimeOverrides": [],
+  "tags": [
+    "refs/tags/m11b-7h1-gpu-terrain-baseline 3ceaff9c9f1a3ac4fa5cb8fcb62d02a6d3d0dd94",
+    "refs/tags/m12b-procedural-surface-baseline ed1a3fbe764ea6141ebdfa988a6fdd4d167e0372",
+    "refs/tags/m12c-phase1b-stable 2ca86cce99b70a56ac0a58e6f891392a09cd723b",
+    "refs/tags/m12d-p2s2-foundation b65d73b15460ec356ae6e67dcb14cd8f4f8945ca",
+    "refs/tags/m12d-p2s3-gpu-runtime 827cb9b7f329337bb72bce28abad5d585d837524",
+    "refs/tags/m12d-p2s4-canonical-terrain a9f3e3172617708c3b5c0eef59d5290f91a2abec",
+    "refs/tags/m12d-p2s5b-production-topology 6409949114f3797471b131d8005b7feac7d3fd54",
+    "refs/tags/m12d-p2s5c1-interactive-billboard a90b024777e3b8fe8259dc7b0fa15b4a9e0f349b",
+    "refs/tags/m12d-p2s5c2-moving-billboard 37e74ad58bf53a03c35c3abeff256803dbcb4443",
+    "refs/tags/m12d-p2s5c3-production-billboard-stabilization b04c5f3415ff4f4c5e30ca8d87515f8b610eaef4",
+    "refs/tags/m12d-p2s5f-new-earth-renderer 724b779917f1cac665f6537b18edbfd70a6bfe8a",
+    "refs/tags/m12d-p2s5g-surface-workload-efficiency b9eb5e0628cf84f7d83c896c2fd962b426780147",
+    "refs/tags/m12d-p2s5h-earth-route-convergence 5d7efb2f035ccf22700b03380b4193fc82220f8a",
+    "refs/tags/m13.1-ncsm1-tes-hotpath b534d149b74b0ca854e4fb09267fc84321cc52ff",
+    "refs/tags/m13.2-ordinary-terrain-shading add1c94658c1de869124c75606ce0a084c77ba25",
+    "refs/tags/m13.3-prepared-physical-terrain bb08cba20947f863391649e68e2e4fe7035520db",
+    "refs/tags/m13.4-zero-contribution-terrain-material-noise 668efe2b06d2fcc907a0f46674c493b7670a2751",
+    "refs/tags/m13.5-local-gpu-terrain-working-data 75712e4bc990e11c3072a37299c55187cc30e0a1",
+    "refs/tags/m13.6-cpu-cached-terrain-residency-keys 81dadf42fa9e91d8f946ebc30c3cbe3b621761fe",
+    "refs/tags/m14.1-canonical-surface-point-queries 3ccb998031e15cb1898394589c27244d55e06e24",
+    "refs/tags/m14.10-certified-root-contact-kinematics b07c511aab7109e3d240d9c7c31a444f58e069a5",
+    "refs/tags/m14.11-certified-response-proposal 8ac99fbfad4f8dd6365d696053fc3edfeea2249d",
+    "refs/tags/m14.12-certified-preimpact-velocity 98831b08e07d1bcc251f7aa900f463b98570ef04",
+    "refs/tags/m14.13-certified-postimpact-velocity 7c94f38cab9cf605c69b3b1874fee0c0091fbbb2",
+    "refs/tags/m14.14-private-root-postimpact-state 412084a0acda2fa96c4be166e1f9f29020ffc577",
+    "refs/tags/m14.15-private-canonical-propagation 6da3eba1410b05ea46a133bb2cf1c81425f8bf72",
+    "refs/tags/m14.16-postimpact-terrain-clearance a864be12e42cb98cbd38c17905833f781a579253",
+    "refs/tags/m14.17-certified-continuation-publication 3f48fe441ac54458e9b413a909fae134abb112de",
+    "refs/tags/m14.18-staged-finite-body-bepu-contact 2faa9e568ef5f1e723f22d9635447179e4585053",
+    "refs/tags/m14.19-persistent-bepu-contact-publication 684ed841de1432e89772282d8951f7cd8f70a625",
+    "refs/tags/m14.2-spacecraft-translational-authority ae2f203b97224ff88b38b7c68902ac2d31108a91",
+    "refs/tags/m14.20-host-paced-canonical-contact-servicing ac96f952b9c44220cd93042c0d7c6e8e07d227d5",
+    "refs/tags/m14.21-authored-compound-spacecraft-contact d8c13e46a9272e5ef6eb89acbe23c29709e3c55b",
+    "refs/tags/m14.22-canonical-spacecraft-command-authority e943a128ef425ff7427b917f2bb04056e58282f5",
+    "refs/tags/m14.23-prepared-single-engine-actuation cd22cc96d88d2b6cf3ca48740ad41baecbbe7c9e",
+    "refs/tags/m14.24-exact-finite-propellant-segmentation 50aa4e984e6646a9334e4e87356a43ffdf138e73",
+    "refs/tags/m14.3-spacecraft-terrain-contact-observations b9ad79c38b322c8e1e095039d5b69c035a1bcca8",
+    "refs/tags/m14.4-atomic-contact-response b198d3b381ba4a82577ba89bd5e31e6050d3a896",
+    "refs/tags/m14.5-isolated-analytical-contact-response c2964fe4531b8e383d2d89beec2e8c055f3541a5",
+    "refs/tags/m14.6-physical-event-epochs 07adc9983252f2cabf0af9da0a1281457af606bf",
+    "refs/tags/m14.7-exact-event-spacecraft-motion 315da29c4eff5562f9040f7a0aedbb4e961fa877",
+    "refs/tags/m14.8-exact-event-earth-relative-observation 27a32989cef714a204d0d7ecfbd4618e53de0086",
+    "refs/tags/m14.9-florida-monotone-contact-certification 944cb5c1f2011b5944745b210e561d0b9e8b4aaf",
+    "refs/tags/m15.0-segmented-powered-free-flight 72c387e0bbe512a569650978522bbb3a0022ffc3",
+    "refs/tags/milestone-10A 88a108cafaab3b030c0e48568d98330dd07607b7",
+    "refs/tags/milestone-10A-2A-2 5ba3f5bdb97cb7efa831b8be3a681894a0338228",
+    "refs/tags/milestone-10A-3 14693e902933430df890b5a0e39170a5b247eb97",
+    "refs/tags/milestone-10A-4 52762291bf25446cd2c37594d74302eebd1dd4f7",
+    "refs/tags/milestone-10A-5 c485b158ee8e35e105aaf452afd8b8ff3890a870",
+    "refs/tags/milestone-10A-6 a9d15d10d5e077d74807bed196c3ea5e9bb03e00",
+    "refs/tags/milestone-10A-7 dfa242e0c67574b8659de1ecd1c742e1daabd89b",
+    "refs/tags/milestone-10B-1 f95eed79f60201f2ffce78533fe205bee2ebbabc",
+    "refs/tags/milestone-10B-2A 15cd78446c87be9423aaa2067068bcb6360f57b1",
+    "refs/tags/milestone-10B-2B 209954827f6c824bc7e6d796a781d72aa6e983e8",
+    "refs/tags/milestone-11A f1ecd38f2211ee98566b35dec6d92b37a3d47b7a",
+    "refs/tags/milestone-11B-7F 16dbfd0f3e7b438101781d3d6d0642272efb7b2a",
+    "refs/tags/milestone-9A-4E-3 4a022dbeac91708b69d5f77fb6034da06f40bbf1",
+    "refs/tags/milestone-9A-4E-5A 586dc57df705a4a0f1a5812c114aa981c3e500d1",
+    "refs/tags/milestone-9A-celestial-v3 3f26635d2da0e4dd5773589a4299eb82fc0c8ca8",
+    "refs/tags/v0.2.0 4997e30bd40ebae011a20dd6b58c88a9caed7a6c",
+    "refs/tags/v0.2.1 764637f7662420e7c3494aee8c9e748b04db6626",
+    "refs/tags/v0.3.0 18c8a6d2e78e1b8a2bfaddd88dba955bf00b1631",
+    "refs/tags/v0.4.0 435e4cab66df0ce6885c84282ca014295e2c3cdd",
+    "refs/tags/v0.4.1-docs 141f7f623220ec3f0d5a79b30cebdcb48605a76a",
+    "refs/tags/v0.5.0 3759e1df199ae28acfc51376fa89295730798cad"
+  ],
+  "preserved": {
+    "blenderWrites": 0,
+    "afterSha256": "E416D1E2018990B3A27D38EF7004766E9F82532E67E9D9E49FB6A3179457F50E",
+    "changedTags": 0,
+    "stagedPaths": 0,
+    "aggregation": "Sorted unique git ls-files cached/others/exclude-standard minus explicitly new files; each relative path + literal backtick-t + uppercase SHA256; LF joined UTF8 SHA256",
+    "ksaWrites": 0,
+    "beforeSha256": "E416D1E2018990B3A27D38EF7004766E9F82532E67E9D9E49FB6A3179457F50E",
+    "historicalTags": 65,
+    "trackedChanges": 0,
+    "existingFiles": 2470
+  },
+  "unchangedSourceHashes": [
+    {
+      "path": "src/NovaCore.Simulation/NovaCore.Simulation.csproj",
+      "sha256": "2599019296A0F5E0562FF0832C0128F8EE23917BBDD96CA1E32AFFE56D352FBD"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Resources/PropellantInteger.cs",
+      "sha256": "9CD3EEF877047A44102D925F612DEB263A3396DA8FB600A18FC144C935B5AF41"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Resources/FinitePropellantSegmentation.cs",
+      "sha256": "36BFC58B0EE3C4F89B31DB987C19806680212DDB57F08B3B5D2067CD97EA2D33"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Actuation/PoweredFlightNumerics.cs",
+      "sha256": "E46798B6123AC3478F03784EE40FACE5736ADED24AA37BCF886B751ADE7D41C1"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Actuation/PoweredFlightEvaluator.cs",
+      "sha256": "D2FEAA4DB663B4D9ECCDE41588AD28EF0AE28299E609BC6933AE06A84D63B647"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.PoweredFreeFlight.cs",
+      "sha256": "C71DB01D3CECF028CC0F4CD79530049DADBBAAF9FB1387B2DDDF444F7F9E4006"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs",
+      "sha256": "41FE19BD750E942E565A8478C6DC3CDF0A5D782106FDD12C3EFFA5B5EF8BAA9D"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactCallbacks.cs",
+      "sha256": "80266CF2947E899DBB57A7ACC1418A8061484F88D978966B47BA09CEA6BCC1D7"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Publication.cs",
+      "sha256": "956ED8FFC99297C6DFBBDCAEC6A2ED8E8C7C1277FE9C1E85186B76ECEE172FD3"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs",
+      "sha256": "CA626F456C048ED6610B4FB89FD6187D3ABC30E29496B59DEFD4813D281C625C"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/PoweredFreeFlightTests.cs",
+      "sha256": "AAE5CFF8C29E024EFC7332B70C5C64B637E1D991AFB1F46BF65EB49422872C29"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/Program.cs",
+      "sha256": "7DC5838082E1C4BEA99D270CBEB26A20E47CEA9999A15716A52EDCEF486B07C7"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/OrdinaryClosure.csproj",
+      "sha256": "6F1FFA6A5336A04A6DAB2AD1EA625F3295B0DB79F163FE42066330ABC2542E22"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/Program.cs",
+      "sha256": "1529DE51803106572720B4D305BAFA2376C5C1C7E43D277C34A1324B79477A97"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-closure/Attribution.cs",
+      "sha256": "96DFD86A3BF866F58147950D03A7B4DC2E9E58C6027F5D85EA9606B796F5D51F"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-closure/Correction.cs",
+      "sha256": "076D00462384BFC2B85ABB24B1F405DE17D4484C1D8508F267091C43DCCFE071"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-closure/corrected-semantics.json",
+      "sha256": "A9EE5CBC031AB202B344C62CA5C42CDAE26D8567F8450287798C4A45F8E70880"
+    }
+  ],
+  "mapper": {
+    "visibilityOnly": "private to internal Map for diagnostic reuse",
+    "fixedInputAndImportIdentical": true,
+    "coreSha256": "F113D819540483A32B3863E97CD2516A7FA3DA9BD556364E7DABBECF1603C46C",
+    "bodyIdentical": true
+  },
+  "execution": {
+    "nativeProcesses": 1,
+    "allocationBuild": "PASS",
+    "fullSolutionBuilds": 0,
+    "newMapperAttempts": 0,
+    "allocationProcesses": 1,
+    "timingProcesses": 3,
+    "nativeBuild": "PASS",
+    "permanentTestRuns": 0,
+    "runtimeRetries": 0,
+    "profilerRuns": 0,
+    "timingBuilds": [
+      "CS0121 in diagnostic cold-storage Math.Max signed/unsigned counter; no process started",
+      "PASS after reporting counter type changed to ulong; zero warnings/errors"
+    ]
+  },
+  "judgment": "PASS — PERFORMANCE / PAYOFF UNCERTAIN",
+  "independentVerifier": "PASS all18 objections and source/result review",
+  "newEvidenceHashes": [
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-recheck/allocation-witness.txt",
+      "sha256": "939188C524303A781EA32BEAD5E2BDEB875F68A04C064BB860B73B774C5C2D08",
+      "bytes": 596
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-recheck/allocation.json",
+      "sha256": "FF7FE0B9C438A8B0A2DEF09F840EBC0921F4006FAAED2973D7ADDF1899F29B03",
+      "bytes": 2210
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-recheck/cleanup.md",
+      "sha256": "2CD170F2E1D507320A4FB150D437D9E3E5C8F7E92EB677D91318B62EA09E0BA8",
+      "bytes": 2266
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-recheck/contract.md",
+      "sha256": "DFA4CAD44A9CC13996D67CBAB05CDC632ED2F4EB7D5D9D7B70C1132559518FD6",
+      "bytes": 2622
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-recheck/fp32-equivalence.json",
+      "sha256": "8E53B5A66CA9B716BFF452824984DC1FEA2F1DBEB5B54D752E712854651660D1",
+      "bytes": 3354
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-recheck/native-equivalence.json",
+      "sha256": "43DA2991DD4701B1F7C124E2D974558B88E8A07E9D1227D7BCF9B12EBE044CFE",
+      "bytes": 2328
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-recheck/native.ps1",
+      "sha256": "0D3C5230F79BA48E36642D1871DC06B2B2F292FF233451275BC59D1141166A33",
+      "bytes": 5103
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-recheck/README.md",
+      "sha256": "C8E335700A2E8120C04E305F9A95FE4DCCF9DD5361E82B33FA0DD533E3E2680E",
+      "bytes": 1180
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-recheck/recheck.ps1",
+      "sha256": "C5CD150F2CFFE7850F2950FA5F04F5E05206FAC5A4AC1BC7528FB5BBB8DA4C59",
+      "bytes": 6406
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-recheck/reproduce.md",
+      "sha256": "1E2BEA77EED2E4D598475BDAF6CC66056DEAACC0017665930FFACD3B5FE6D910",
+      "bytes": 2668
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-recheck/timing-plan.md",
+      "sha256": "BA5661BE28C9BE7DB6384A8DC7FCE8E8C7110AFC87C563FD29065E114C4ECDE8",
+      "bytes": 3815
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-recheck/Timing.cs",
+      "sha256": "0AB10855C910812D901D0634834D71E83274F405E7186C0E8B23AF460D7D2177",
+      "bytes": 13114
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-recheck/timing.ps1",
+      "sha256": "D768F728F9238CABCA39AF2E1B6A1C3619F7443D77A05FF64FD820E54A9AACBE",
+      "bytes": 2393
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocations.md",
+      "sha256": "0E7475FF81348D92DA565241641350E90875CAD9FA6F052B537184BC97D850BF",
+      "bytes": 1664
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/baseline.json",
+      "sha256": "B8C8DBED19753E67355E81FD2E11362A252F6A8ECEBF73EED47C0DCBA5B74844",
+      "bytes": 1323
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/candidate-a-comparison.md",
+      "sha256": "C23DA0EA42FDA12FFE38CE263DE06826820888A5E62F2127F9A2A1C90BD2A55F",
+      "bytes": 1284
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/candidate-process-1.json",
+      "sha256": "9D73AD86A83A2D1919B6EF6721D3919E1CA71FE791CB8D89135CECCC96683805",
+      "bytes": 8025
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/candidate-process-2.json",
+      "sha256": "8264DAEC816FBF86122A39CFB9BCC46028EF9BD6088571238CAC05CD057886DC",
+      "bytes": 8037
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/candidate-process-3.json",
+      "sha256": "BB0951445A9F42241EA7EAEB198DB005BE0C7F64C099493D47A8F50E590C8421",
+      "bytes": 8044
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/event-preparation.json",
+      "sha256": "5F9647FFBC36488985F886544FC7554FA276E84F9A1F6B589BBECCF7D148DE45",
+      "bytes": 1231
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/mechanism-payoff.md",
+      "sha256": "896CD02CC93D27C46ABBF1C6125DF4C1F8165F4F0D61588E74554040F04DEA16",
+      "bytes": 2816
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/qualification-result.md",
+      "sha256": "4E5B710194EEA88827E5A407773EBA23457A0B79A4EE8B31EBA3F1FB33774CAC",
+      "bytes": 8005
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/retained-state.md",
+      "sha256": "23234B65E7BE686882326E35E0278F29B7E8914E6250D6846B2EE9D1DF079C3E",
+      "bytes": 2335
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/solver-work.md",
+      "sha256": "831A2CCE940D42C8B98EBA641235481A261E4D2EDC5A4BFA72C3D353AE6099E5",
+      "bytes": 2099
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/tails.md",
+      "sha256": "B0F8C28272CFB16A999DA6059EC33FD162885DCA28F095CEDD5F2110DD31317B",
+      "bytes": 2389
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/verification.md",
+      "sha256": "3CFEB44FB1F7E0DEEEC1B469AD5D93FDDEFF5AF1AAEAE4D85C9610620972311A",
+      "bytes": 3737
+    }
+  ],
+  "generatedReproductionHashes": [
+    {
+      "path": "build/powered-contact-allocation-recheck/allocation/ActiveCorrection.cs",
+      "sha256": "09A7348C626548C387C5C273DC0126D60C1D2690B2551858E0FEFDC7D2C904DA"
+    },
+    {
+      "path": "build/powered-contact-allocation-recheck/allocation/RetainedMapper.cs",
+      "sha256": "D84CA80B404E4EEA09C7C9402367323E569B70BCCEC2AA4711A08796703F83E9"
+    },
+    {
+      "path": "build/powered-contact-allocation-recheck/native/NativeWitness.cs",
+      "sha256": "A40A4C152632A65D81238AC58BC88F98C1937FB9931C5A6AAFA981FD098B0D7A"
+    },
+    {
+      "path": "build/powered-contact-allocation-recheck/timing/NativeTypes.cs",
+      "sha256": "EE5264555B0220529B990EDC9174D7C363FFD1EEB40E4724EF3958A019F43D07"
+    },
+    {
+      "path": "build/powered-contact-allocation-recheck/timing/build.txt",
+      "sha256": "1DF17453F27F4C04D5073AED23E4E4CE0ABB462C1FBABA0AA80788B098B8758C"
+    },
+    {
+      "path": "build/powered-contact-allocation-recheck/timing/build-corrected.txt",
+      "sha256": "C9FC734F5E9859F7559163791C13F6F989CBD9D7C22DD91863648BF7BC095E38"
+    }
+  ],
+  "cleanup": {
+    "status": "BLOCKED_BY_AUTOMATIC_POLICY_MANUAL_CLEANUP_REQUIRED",
+    "bytesBefore": 5146766,
+    "filesBefore": 115,
+    "root": "E:\\NovaCore\\build\\powered-contact-allocation-recheck",
+    "children": [
+      {
+        "path": "allocation",
+        "bytes": 1631804,
+        "files": 38
+      },
+      {
+        "path": "native",
+        "bytes": 1761744,
+        "files": 36
+      },
+      {
+        "path": "timing",
+        "bytes": 1753218,
+        "files": 41
+      }
+    ],
+    "manualCommand": "if (Test-Path -LiteralPath 'E:\\NovaCore\\build\\powered-contact-allocation-recheck') { Remove-Item -LiteralPath 'E:\\NovaCore\\build\\powered-contact-allocation-recheck' -Recurse -Force }",
+    "verificationCommand": "Test-Path -LiteralPath 'E:\\NovaCore\\build\\powered-contact-allocation-recheck'",
+    "oldRootDeletionAttempts": 0,
+    "previousReviewedRoot": "E:\\NovaCore\\build\\powered-contact-event-allocation-closure",
+    "previousRootCurrentlyExists": false,
+    "automaticAttempts": 1,
+    "deletionsExecuted": 0,
+    "filesRemaining": 115,
+    "bytesRemaining": 5146766.0
+  },
+  "unbanked": true
+}

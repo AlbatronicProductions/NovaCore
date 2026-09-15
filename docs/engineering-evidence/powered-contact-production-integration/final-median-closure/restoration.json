@@ -1,0 +1,51 @@
+{
+  "exactByteRestoration": true,
+  "temporarySourcesRemaining": 0,
+  "files": [
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.PoweredFreeFlight.cs",
+      "bytes": 29270,
+      "sha256": "445B3DCE5E47BAF4B561D201B6291DE15BC83F5F48E12BE8E8021891960D7062"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.EnginePreparation.cs",
+      "bytes": 16349,
+      "sha256": "0A1A3B741BDC490006206DCAC5EF5CD45BB7CCCBAF95F0F31ACF7DC641518791"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Propellant.cs",
+      "bytes": 12915,
+      "sha256": "D62183EE8768021C259039F46D01958828F56247FDF0192933AC6824F8E3F3C8"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.SpacecraftCommands.cs",
+      "bytes": 18526,
+      "sha256": "EEBEA1C6E0BDA9E90C642AA70EE5EF2FB3765C1B69C94117E43E6C5A0E361BEC"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Powered.cs",
+      "bytes": 12922,
+      "sha256": "3ACDAC9C6C94602CBA86FE89D1B1959D2D83B5A26F17EBF63436FCCC97DBA830"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs",
+      "bytes": 14302,
+      "sha256": "D68BBDC7AE16EB3FC641ECD6F1F48E237F7A6A383FE2C4E90BF966B183075148"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Actuation/OrdinaryContactInputProjection.cs",
+      "bytes": 6077,
+      "sha256": "628C4B86F2652CFD87E257B081A9900C3E8E580193715C18644DEDA933FB16E2"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Actuation/PoweredFlightNumerics.cs",
+      "bytes": 5324,
+      "sha256": "E46798B6123AC3478F03784EE40FACE5736ADED24AA37BCF886B751ADE7D41C1"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "bytes": 257490,
+      "sha256": "6AA516A6F85458B3D8A74CFB0D38DD850AF069978A692BB8BFDC9AC809C76959"
+    }
+  ]
+}

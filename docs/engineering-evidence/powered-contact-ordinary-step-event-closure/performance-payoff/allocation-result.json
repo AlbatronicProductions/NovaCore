@@ -1,0 +1,44 @@
+{
+  "outcome": "STOP_WARMED_CANDIDATE_ALLOCATION_REVISE",
+  "boundary": "C: exact retained input read, duty/wrench/source-mass mapping, float projections; no solver",
+  "configuration": "Release",
+  "runtime": ".NET 10.0.12",
+  "os": "Microsoft Windows 10.0.26200",
+  "architecture": "X64",
+  "processId": 49600,
+  "threadBefore": 2,
+  "threadAfter": 2,
+  "warmOperations": 128,
+  "measuredOperations": 1,
+  "allocationBytes": 1936,
+  "exactRequiredBytes": 0,
+  "entry": "PASS",
+  "exit": "PASS",
+  "immutableReadControlBytes": 0,
+  "gcBefore": [
+    2,
+    2,
+    2
+  ],
+  "gcAfter": [
+    3,
+    3,
+    3
+  ],
+  "setupManagedCounterBytes": 215952,
+  "setupBoundary": "read/parse two retained JSON files and immutable exact input construction; not retained storage",
+  "warmupRawCounterBytes": 247808,
+  "preparedBitsMatch": true,
+  "projectedBits": [
+    1077935923,
+    -1061557234,
+    -1077097267,
+    1067030938,
+    1040187119,
+    1015580809
+  ],
+  "solverCalls": 0,
+  "timingProcessesExecuted": 0,
+  "retainedStorageBytes": null,
+  "retainedStorageStatus": "NOT MEASURED: allocation-first stage only"
+}

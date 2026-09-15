@@ -1,0 +1,1811 @@
+{
+  "referenceRounding": [
+    {
+      "field": "impulses",
+      "component": 0,
+      "installedReferenceExactlyEqual": true,
+      "roundedAbsoluteDifference": "0",
+      "commonBinary53Hex": "0x1.4ed5a92f504a0p-2",
+      "unroundedSourceDifference": "-9.0416244834214760137E-324",
+      "roundDifferenceNotDifferenceOfRounds": "-9.0416244834214756339E-324",
+      "referenceSizedUlp": {
+        "fraction": "1/18014398509481984",
+        "decimal": "5.5511151231257827021E-17"
+      }
+    },
+    {
+      "field": "impulses",
+      "component": 1,
+      "installedReferenceExactlyEqual": true,
+      "roundedAbsoluteDifference": "0",
+      "commonBinary53Hex": "0x1.4ed5a8648ea55p-2",
+      "unroundedSourceDifference": "-9.0416244834799224042E-324",
+      "roundDifferenceNotDifferenceOfRounds": "-9.0416244834799218625E-324",
+      "referenceSizedUlp": {
+        "fraction": "1/18014398509481984",
+        "decimal": "5.5511151231257827021E-17"
+      }
+    },
+    {
+      "field": "impulses",
+      "component": 2,
+      "installedReferenceExactlyEqual": true,
+      "roundedAbsoluteDifference": "0",
+      "commonBinary53Hex": "0x1.4ed5a8ee22f01p-2",
+      "unroundedSourceDifference": "-9.0416244834799224042E-324",
+      "roundDifferenceNotDifferenceOfRounds": "-9.0416244834799218625E-324",
+      "referenceSizedUlp": {
+        "fraction": "1/18014398509481984",
+        "decimal": "5.5511151231257827021E-17"
+      }
+    },
+    {
+      "field": "impulses",
+      "component": 3,
+      "installedReferenceExactlyEqual": true,
+      "roundedAbsoluteDifference": "0",
+      "commonBinary53Hex": "0x1.4ed5a8a5bbff3p-2",
+      "unroundedSourceDifference": "-9.0416244834214760137E-324",
+      "roundDifferenceNotDifferenceOfRounds": "-9.0416244834214756339E-324",
+      "referenceSizedUlp": {
+        "fraction": "1/18014398509481984",
+        "decimal": "5.5511151231257827021E-17"
+      }
+    },
+    {
+      "field": "impulses",
+      "component": 4,
+      "installedReferenceExactlyEqual": true,
+      "roundedAbsoluteDifference": "0",
+      "commonBinary53Hex": "-0x1.0a47d7ddbe1b1p-28",
+      "unroundedSourceDifference": "2.1836597558771553861E-333",
+      "roundDifferenceNotDifferenceOfRounds": "2.1836597558771553143E-333",
+      "referenceSizedUlp": {
+        "fraction": "1/1208925819614629174706176",
+        "decimal": "8.2718061255302767487E-25"
+      }
+    },
+    {
+      "field": "impulses",
+      "component": 5,
+      "installedReferenceExactlyEqual": true,
+      "roundedAbsoluteDifference": "0",
+      "commonBinary53Hex": "0x1.13288f3dd2024p-26",
+      "unroundedSourceDifference": "-2.9527017443970740576E-645",
+      "roundDifferenceNotDifferenceOfRounds": "-2.9527017443970738899E-645",
+      "referenceSizedUlp": {
+        "fraction": "1/302231454903657293676544",
+        "decimal": "3.3087224502121106995E-24"
+      }
+    },
+    {
+      "field": "impulses",
+      "component": 6,
+      "installedReferenceExactlyEqual": true,
+      "roundedAbsoluteDifference": "0",
+      "commonBinary53Hex": "0x1.f7f124b6f691ep-62",
+      "unroundedSourceDifference": "-3.4295266767804982524E-645",
+      "roundDifferenceNotDifferenceOfRounds": "-3.4295266767804982781E-645",
+      "referenceSizedUlp": {
+        "fraction": "1/20769187434139310514121985316880384",
+        "decimal": "4.8148248609680896326E-35"
+      }
+    },
+    {
+      "field": "increment",
+      "component": 0,
+      "installedReferenceExactlyEqual": true,
+      "roundedAbsoluteDifference": "0",
+      "commonBinary53Hex": "0x1.13288f3dd2024p-29",
+      "unroundedSourceDifference": "-3.6908771804963425720E-646",
+      "roundDifferenceNotDifferenceOfRounds": "-3.6908771804963423624E-646",
+      "referenceSizedUlp": {
+        "fraction": "1/2417851639229258349412352",
+        "decimal": "4.1359030627651383744E-25"
+      }
+    },
+    {
+      "field": "increment",
+      "component": 1,
+      "installedReferenceExactlyEqual": true,
+      "roundedAbsoluteDifference": "0",
+      "commonBinary53Hex": "0x1.6e9a6201675c6p-32",
+      "unroundedSourceDifference": "-4.5208122417253496045E-324",
+      "roundDifferenceNotDifferenceOfRounds": "-4.5208122417253493741E-324",
+      "referenceSizedUlp": {
+        "fraction": "1/19342813113834066795298816",
+        "decimal": "5.1698788284564229679E-26"
+      }
+    },
+    {
+      "field": "increment",
+      "component": 2,
+      "installedReferenceExactlyEqual": true,
+      "roundedAbsoluteDifference": "0",
+      "commonBinary53Hex": "0x1.04b561f104bd5p-31",
+      "unroundedSourceDifference": "7.3057342138677686369E-336",
+      "roundDifferenceNotDifferenceOfRounds": "7.3057342138677681887E-336",
+      "referenceSizedUlp": {
+        "fraction": "1/9671406556917033397649408",
+        "decimal": "1.0339757656912845936E-25"
+      }
+    },
+    {
+      "field": "increment",
+      "component": 3,
+      "installedReferenceExactlyEqual": true,
+      "roundedAbsoluteDifference": "0",
+      "commonBinary53Hex": "0x1.04ecb4e310028p-30",
+      "unroundedSourceDifference": "1.4623580644484475612E-335",
+      "roundDifferenceNotDifferenceOfRounds": "1.4623580644484476182E-335",
+      "referenceSizedUlp": {
+        "fraction": "1/4835703278458516698824704",
+        "decimal": "2.0679515313825691872E-25"
+      }
+    },
+    {
+      "field": "increment",
+      "component": 4,
+      "installedReferenceExactlyEqual": true,
+      "roundedAbsoluteDifference": "0",
+      "commonBinary53Hex": "-0x1.4e24bbaeb4137p-62",
+      "unroundedSourceDifference": "-1.7147633383902491262E-645",
+      "roundDifferenceNotDifferenceOfRounds": "-1.7147633383902491390E-645",
+      "referenceSizedUlp": {
+        "fraction": "1/20769187434139310514121985316880384",
+        "decimal": "4.8148248609680896326E-35"
+      }
+    },
+    {
+      "field": "increment",
+      "component": 5,
+      "installedReferenceExactlyEqual": true,
+      "roundedAbsoluteDifference": "0",
+      "commonBinary53Hex": "-0x1.1362f3e52ff2dp-28",
+      "unroundedSourceDifference": "-7.3756403027105852813E-646",
+      "roundDifferenceNotDifferenceOfRounds": "-7.3756403027105849649E-646",
+      "referenceSizedUlp": {
+        "fraction": "1/1208925819614629174706176",
+        "decimal": "8.2718061255302767487E-25"
+      }
+    }
+  ],
+  "inputDifferencePaths": [
+    "/accepted/Kind",
+    "/accepted/Load/Force/Y"
+  ],
+  "fixedCoastEquationsIdentical": true,
+  "firstNonzeroDiagnosticDelta": {
+    "N0": "S3",
+    "N1": "S3",
+    "N2": "S3",
+    "N3": "S3",
+    "T0": "sweep-1",
+    "T1": "sweep-1",
+    "Twist": "sweep-1",
+    "dVx": "sweep-1",
+    "dVy": "S3",
+    "dVz": "S3",
+    "dWx": "S3",
+    "dWy": "sweep-1",
+    "dWz": "sweep-1"
+  },
+  "stages": [
+    {
+      "stage": "S0",
+      "deltas": {
+        "N0": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "N1": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "N2": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "N3": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "T0": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "T1": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "Twist": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dVx": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dVy": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dVz": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dWx": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dWy": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dWz": {
+          "fraction": "0",
+          "decimal": "0"
+        }
+      },
+      "note": "increments before S_FINAL are diagnostic exports of the saved stage, not extra candidate operations"
+    },
+    {
+      "stage": "S1",
+      "deltas": {
+        "N0": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "N1": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "N2": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "N3": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "T0": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "T1": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "Twist": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dVx": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dVy": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dVz": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dWx": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dWy": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dWz": {
+          "fraction": "0",
+          "decimal": "0"
+        }
+      },
+      "note": "increments before S_FINAL are diagnostic exports of the saved stage, not extra candidate operations"
+    },
+    {
+      "stage": "S2",
+      "deltas": {
+        "N0": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "N1": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "N2": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "N3": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "T0": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "T1": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "Twist": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dVx": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dVy": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dVz": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dWx": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dWy": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dWz": {
+          "fraction": "0",
+          "decimal": "0"
+        }
+      },
+      "note": "increments before S_FINAL are diagnostic exports of the saved stage, not extra candidate operations"
+    },
+    {
+      "stage": "S3",
+      "deltas": {
+        "N0": {
+          "fraction": "1098861475945377/18014398509481984",
+          "decimal": "0.060999065573407007523"
+        },
+        "N1": {
+          "fraction": "1098861475945377/18014398509481984",
+          "decimal": "0.060999065573407007523"
+        },
+        "N2": {
+          "fraction": "1098861475945377/18014398509481984",
+          "decimal": "0.060999065573407007523"
+        },
+        "N3": {
+          "fraction": "1098861475945377/18014398509481984",
+          "decimal": "0.060999065573407007523"
+        },
+        "T0": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "T1": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "Twist": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dVx": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dVy": {
+          "fraction": "1098861475945377/36028797018963968",
+          "decimal": "0.030499532786703503762"
+        },
+        "dVz": {
+          "fraction": "-1089965/576460752303423488",
+          "decimal": "-1.8907878734930605447E-12"
+        },
+        "dWx": {
+          "fraction": "68067/18014398509481984",
+          "decimal": "3.7784775308580265119E-12"
+        },
+        "dWy": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dWz": {
+          "fraction": "0",
+          "decimal": "0"
+        }
+      },
+      "note": "increments before S_FINAL are diagnostic exports of the saved stage, not extra candidate operations"
+    },
+    {
+      "stage": "S4",
+      "deltas": {
+        "N0": {
+          "fraction": "1098861475945377/18014398509481984",
+          "decimal": "0.060999065573407007523"
+        },
+        "N1": {
+          "fraction": "1098861475945377/18014398509481984",
+          "decimal": "0.060999065573407007523"
+        },
+        "N2": {
+          "fraction": "1098861475945377/18014398509481984",
+          "decimal": "0.060999065573407007523"
+        },
+        "N3": {
+          "fraction": "1098861475945377/18014398509481984",
+          "decimal": "0.060999065573407007523"
+        },
+        "T0": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "T1": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "Twist": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dVx": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dVy": {
+          "fraction": "1098861475945377/36028797018963968",
+          "decimal": "0.030499532786703503762"
+        },
+        "dVz": {
+          "fraction": "-1089965/576460752303423488",
+          "decimal": "-1.8907878734930605447E-12"
+        },
+        "dWx": {
+          "fraction": "68067/18014398509481984",
+          "decimal": "3.7784775308580265119E-12"
+        },
+        "dWy": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dWz": {
+          "fraction": "0",
+          "decimal": "0"
+        }
+      },
+      "note": "increments before S_FINAL are diagnostic exports of the saved stage, not extra candidate operations"
+    },
+    {
+      "stage": "S5",
+      "deltas": {
+        "N0": {
+          "fraction": "-1/9007199254740992",
+          "decimal": "-1.1102230246251565404E-16"
+        },
+        "N1": {
+          "fraction": "-1/9007199254740992",
+          "decimal": "-1.1102230246251565404E-16"
+        },
+        "N2": {
+          "fraction": "-1/9007199254740992",
+          "decimal": "-1.1102230246251565404E-16"
+        },
+        "N3": {
+          "fraction": "-1/9007199254740992",
+          "decimal": "-1.1102230246251565404E-16"
+        },
+        "T0": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "T1": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "Twist": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dVx": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dVy": {
+          "fraction": "-5/72057594037927936",
+          "decimal": "-6.9388939039072283776E-17"
+        },
+        "dVz": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dWx": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dWy": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dWz": {
+          "fraction": "0",
+          "decimal": "0"
+        }
+      },
+      "note": "increments before S_FINAL are diagnostic exports of the saved stage, not extra candidate operations"
+    },
+    {
+      "stage": "S6",
+      "deltas": {
+        "N0": {
+          "fraction": "-1/9007199254740992",
+          "decimal": "-1.1102230246251565404E-16"
+        },
+        "N1": {
+          "fraction": "-1/9007199254740992",
+          "decimal": "-1.1102230246251565404E-16"
+        },
+        "N2": {
+          "fraction": "-1/9007199254740992",
+          "decimal": "-1.1102230246251565404E-16"
+        },
+        "N3": {
+          "fraction": "-1/9007199254740992",
+          "decimal": "-1.1102230246251565404E-16"
+        },
+        "T0": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "T1": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "Twist": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dVx": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dVy": {
+          "fraction": "-5/72057594037927936",
+          "decimal": "-6.9388939039072283776E-17"
+        },
+        "dVz": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dWx": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dWy": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dWz": {
+          "fraction": "0",
+          "decimal": "0"
+        }
+      },
+      "note": "increments before S_FINAL are diagnostic exports of the saved stage, not extra candidate operations"
+    },
+    {
+      "stage": "sweep-1",
+      "deltas": {
+        "N0": {
+          "fraction": "-3/18014398509481984",
+          "decimal": "-1.6653345369377348106E-16"
+        },
+        "N1": {
+          "fraction": "-1/9007199254740992",
+          "decimal": "-1.1102230246251565404E-16"
+        },
+        "N2": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "N3": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "T0": {
+          "fraction": "15/576460752303423488",
+          "decimal": "2.6020852139652106416E-17"
+        },
+        "T1": {
+          "fraction": "-1/18014398509481984",
+          "decimal": "-5.5511151231257827021E-17"
+        },
+        "Twist": {
+          "fraction": "-1/618970019642690137449562112",
+          "decimal": "-1.6155871338926321775E-27"
+        },
+        "dVx": {
+          "fraction": "-1/144115188075855872",
+          "decimal": "-6.9388939039072283776E-18"
+        },
+        "dVy": {
+          "fraction": "-3/72057594037927936",
+          "decimal": "-4.1633363423443370266E-17"
+        },
+        "dVz": {
+          "fraction": "-15/4611686018427387904",
+          "decimal": "-3.2526065174565133020E-18"
+        },
+        "dWx": {
+          "fraction": "-17/2305843009213693952",
+          "decimal": "-7.3725747729014301513E-18"
+        },
+        "dWy": {
+          "fraction": "1/1237940039285380274899124224",
+          "decimal": "8.0779356694631608874E-28"
+        },
+        "dWz": {
+          "fraction": "1/72057594037927936",
+          "decimal": "1.3877787807814456755E-17"
+        }
+      },
+      "note": "increments before S_FINAL are diagnostic exports of the saved stage, not extra candidate operations"
+    },
+    {
+      "stage": "sweep-2",
+      "deltas": {
+        "N0": {
+          "fraction": "-1/4503599627370496",
+          "decimal": "-2.2204460492503130808E-16"
+        },
+        "N1": {
+          "fraction": "-1/18014398509481984",
+          "decimal": "-5.5511151231257827021E-17"
+        },
+        "N2": {
+          "fraction": "3/18014398509481984",
+          "decimal": "1.6653345369377348106E-16"
+        },
+        "N3": {
+          "fraction": "1/18014398509481984",
+          "decimal": "5.5511151231257827021E-17"
+        },
+        "T0": {
+          "fraction": "5/36028797018963968",
+          "decimal": "1.3877787807814456755E-16"
+        },
+        "T1": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "Twist": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dVx": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dVy": {
+          "fraction": "-1/72057594037927936",
+          "decimal": "-1.3877787807814456755E-17"
+        },
+        "dVz": {
+          "fraction": "-5/288230376151711744",
+          "decimal": "-1.7347234759768070944E-17"
+        },
+        "dWx": {
+          "fraction": "-5/144115188075855872",
+          "decimal": "-3.4694469519536141888E-17"
+        },
+        "dWy": {
+          "fraction": "1/618970019642690137449562112",
+          "decimal": "1.6155871338926321775E-27"
+        },
+        "dWz": {
+          "fraction": "1/36028797018963968",
+          "decimal": "2.7755575615628913511E-17"
+        }
+      },
+      "note": "increments before S_FINAL are diagnostic exports of the saved stage, not extra candidate operations"
+    },
+    {
+      "stage": "sweep-3",
+      "deltas": {
+        "N0": {
+          "fraction": "-1/9007199254740992",
+          "decimal": "-1.1102230246251565404E-16"
+        },
+        "N1": {
+          "fraction": "-1/18014398509481984",
+          "decimal": "-5.5511151231257827021E-17"
+        },
+        "N2": {
+          "fraction": "3/18014398509481984",
+          "decimal": "1.6653345369377348106E-16"
+        },
+        "N3": {
+          "fraction": "3/18014398509481984",
+          "decimal": "1.6653345369377348106E-16"
+        },
+        "T0": {
+          "fraction": "1/36028797018963968",
+          "decimal": "2.7755575615628913511E-17"
+        },
+        "T1": {
+          "fraction": "-1/18014398509481984",
+          "decimal": "-5.5511151231257827021E-17"
+        },
+        "Twist": {
+          "fraction": "-17/9903520314283042199192993792",
+          "decimal": "-1.7165613297609216886E-27"
+        },
+        "dVx": {
+          "fraction": "-1/144115188075855872",
+          "decimal": "-6.9388939039072283776E-18"
+        },
+        "dVy": {
+          "fraction": "1/36028797018963968",
+          "decimal": "2.7755575615628913511E-17"
+        },
+        "dVz": {
+          "fraction": "-1/288230376151711744",
+          "decimal": "-3.4694469519536141888E-18"
+        },
+        "dWx": {
+          "fraction": "-1/144115188075855872",
+          "decimal": "-6.9388939039072283776E-18"
+        },
+        "dWy": {
+          "fraction": "15/19807040628566084398385987584",
+          "decimal": "7.5730646901217133320E-28"
+        },
+        "dWz": {
+          "fraction": "1/72057594037927936",
+          "decimal": "1.3877787807814456755E-17"
+        }
+      },
+      "note": "increments before S_FINAL are diagnostic exports of the saved stage, not extra candidate operations"
+    },
+    {
+      "stage": "sweep-4",
+      "deltas": {
+        "N0": {
+          "fraction": "-3/18014398509481984",
+          "decimal": "-1.6653345369377348106E-16"
+        },
+        "N1": {
+          "fraction": "-1/9007199254740992",
+          "decimal": "-1.1102230246251565404E-16"
+        },
+        "N2": {
+          "fraction": "1/9007199254740992",
+          "decimal": "1.1102230246251565404E-16"
+        },
+        "N3": {
+          "fraction": "1/18014398509481984",
+          "decimal": "5.5511151231257827021E-17"
+        },
+        "T0": {
+          "fraction": "1/18014398509481984",
+          "decimal": "5.5511151231257827021E-17"
+        },
+        "T1": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "Twist": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dVx": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dVy": {
+          "fraction": "-1/144115188075855872",
+          "decimal": "-6.9388939039072283776E-18"
+        },
+        "dVz": {
+          "fraction": "-1/144115188075855872",
+          "decimal": "-6.9388939039072283776E-18"
+        },
+        "dWx": {
+          "fraction": "-1/72057594037927936",
+          "decimal": "-1.3877787807814456755E-17"
+        },
+        "dWy": {
+          "fraction": "1/618970019642690137449562112",
+          "decimal": "1.6155871338926321775E-27"
+        },
+        "dWz": {
+          "fraction": "0",
+          "decimal": "0"
+        }
+      },
+      "note": "increments before S_FINAL are diagnostic exports of the saved stage, not extra candidate operations"
+    },
+    {
+      "stage": "sweep-5",
+      "deltas": {
+        "N0": {
+          "fraction": "-3/18014398509481984",
+          "decimal": "-1.6653345369377348106E-16"
+        },
+        "N1": {
+          "fraction": "-3/18014398509481984",
+          "decimal": "-1.6653345369377348106E-16"
+        },
+        "N2": {
+          "fraction": "1/18014398509481984",
+          "decimal": "5.5511151231257827021E-17"
+        },
+        "N3": {
+          "fraction": "1/9007199254740992",
+          "decimal": "1.1102230246251565404E-16"
+        },
+        "T0": {
+          "fraction": "-1/36028797018963968",
+          "decimal": "-2.7755575615628913511E-17"
+        },
+        "T1": {
+          "fraction": "-255/4611686018427387904",
+          "decimal": "-5.5294310796760726134E-17"
+        },
+        "Twist": {
+          "fraction": "-271/158456325028528675187087900672",
+          "decimal": "-1.7102504425191535941E-27"
+        },
+        "dVx": {
+          "fraction": "-255/36893488147419103232",
+          "decimal": "-6.9117888495950907668E-18"
+        },
+        "dVy": {
+          "fraction": "-3/144115188075855872",
+          "decimal": "-2.0816681711721685133E-17"
+        },
+        "dVz": {
+          "fraction": "1/288230376151711744",
+          "decimal": "3.4694469519536141888E-18"
+        },
+        "dWx": {
+          "fraction": "1/144115188075855872",
+          "decimal": "6.9388939039072283776E-18"
+        },
+        "dWy": {
+          "fraction": "753/316912650057057350374175801344",
+          "decimal": "2.3760490465256875579E-27"
+        },
+        "dWz": {
+          "fraction": "129/9223372036854775808",
+          "decimal": "1.3986208025063007199E-17"
+        }
+      },
+      "note": "increments before S_FINAL are diagnostic exports of the saved stage, not extra candidate operations"
+    },
+    {
+      "stage": "sweep-6",
+      "deltas": {
+        "N0": {
+          "fraction": "-1/18014398509481984",
+          "decimal": "-5.5511151231257827021E-17"
+        },
+        "N1": {
+          "fraction": "-3/18014398509481984",
+          "decimal": "-1.6653345369377348106E-16"
+        },
+        "N2": {
+          "fraction": "1/18014398509481984",
+          "decimal": "5.5511151231257827021E-17"
+        },
+        "N3": {
+          "fraction": "1/9007199254740992",
+          "decimal": "1.1102230246251565404E-16"
+        },
+        "T0": {
+          "fraction": "-3/36028797018963968",
+          "decimal": "-8.3266726846886740532E-17"
+        },
+        "T1": {
+          "fraction": "1/18014398509481984",
+          "decimal": "5.5511151231257827021E-17"
+        },
+        "Twist": {
+          "fraction": "17/9903520314283042199192993792",
+          "decimal": "1.7165613297609216886E-27"
+        },
+        "dVx": {
+          "fraction": "1/144115188075855872",
+          "decimal": "6.9388939039072283776E-18"
+        },
+        "dVy": {
+          "fraction": "-3/144115188075855872",
+          "decimal": "-2.0816681711721685133E-17"
+        },
+        "dVz": {
+          "fraction": "3/288230376151711744",
+          "decimal": "1.0408340855860842566E-17"
+        },
+        "dWx": {
+          "fraction": "3/144115188075855872",
+          "decimal": "2.0816681711721685133E-17"
+        },
+        "dWy": {
+          "fraction": "-47/19807040628566084398385987584",
+          "decimal": "-2.3728936029048035107E-27"
+        },
+        "dWz": {
+          "fraction": "-1/72057594037927936",
+          "decimal": "-1.3877787807814456755E-17"
+        }
+      },
+      "note": "increments before S_FINAL are diagnostic exports of the saved stage, not extra candidate operations"
+    },
+    {
+      "stage": "sweep-7",
+      "deltas": {
+        "N0": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "N1": {
+          "fraction": "-3/18014398509481984",
+          "decimal": "-1.6653345369377348106E-16"
+        },
+        "N2": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "N3": {
+          "fraction": "1/9007199254740992",
+          "decimal": "1.1102230246251565404E-16"
+        },
+        "T0": {
+          "fraction": "-5/36028797018963968",
+          "decimal": "-1.3877787807814456755E-16"
+        },
+        "T1": {
+          "fraction": "255/4611686018427387904",
+          "decimal": "5.5294310796760726134E-17"
+        },
+        "Twist": {
+          "fraction": "271/158456325028528675187087900672",
+          "decimal": "1.7102504425191535941E-27"
+        },
+        "dVx": {
+          "fraction": "255/36893488147419103232",
+          "decimal": "6.9117888495950907668E-18"
+        },
+        "dVy": {
+          "fraction": "-1/72057594037927936",
+          "decimal": "-1.3877787807814456755E-17"
+        },
+        "dVz": {
+          "fraction": "5/288230376151711744",
+          "decimal": "1.7347234759768070944E-17"
+        },
+        "dWx": {
+          "fraction": "321/9223372036854775808",
+          "decimal": "3.4802889736784692332E-17"
+        },
+        "dWy": {
+          "fraction": "-241/316912650057057350374175801344",
+          "decimal": "-7.6046191263305538042E-28"
+        },
+        "dWz": {
+          "fraction": "-257/18446744073709551616",
+          "decimal": "-1.3931997916438731977E-17"
+        }
+      },
+      "note": "increments before S_FINAL are diagnostic exports of the saved stage, not extra candidate operations"
+    },
+    {
+      "stage": "sweep-8",
+      "deltas": {
+        "N0": {
+          "fraction": "-1/9007199254740992",
+          "decimal": "-1.1102230246251565404E-16"
+        },
+        "N1": {
+          "fraction": "-1/9007199254740992",
+          "decimal": "-1.1102230246251565404E-16"
+        },
+        "N2": {
+          "fraction": "1/9007199254740992",
+          "decimal": "1.1102230246251565404E-16"
+        },
+        "N3": {
+          "fraction": "1/9007199254740992",
+          "decimal": "1.1102230246251565404E-16"
+        },
+        "T0": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "T1": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "Twist": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dVx": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dVy": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dVz": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dWx": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dWy": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dWz": {
+          "fraction": "0",
+          "decimal": "0"
+        }
+      },
+      "note": "increments before S_FINAL are diagnostic exports of the saved stage, not extra candidate operations"
+    },
+    {
+      "stage": "sweep-9",
+      "deltas": {
+        "N0": {
+          "fraction": "-1/9007199254740992",
+          "decimal": "-1.1102230246251565404E-16"
+        },
+        "N1": {
+          "fraction": "-1/4503599627370496",
+          "decimal": "-2.2204460492503130808E-16"
+        },
+        "N2": {
+          "fraction": "1/9007199254740992",
+          "decimal": "1.1102230246251565404E-16"
+        },
+        "N3": {
+          "fraction": "1/4503599627370496",
+          "decimal": "2.2204460492503130808E-16"
+        },
+        "T0": {
+          "fraction": "-385/4611686018427387904",
+          "decimal": "-8.3483567281383841419E-17"
+        },
+        "T1": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "Twist": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dVx": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dVy": {
+          "fraction": "1/72057594037927936",
+          "decimal": "1.3877787807814456755E-17"
+        },
+        "dVz": {
+          "fraction": "385/36893488147419103232",
+          "decimal": "1.0435445910172980177E-17"
+        },
+        "dWx": {
+          "fraction": "639/18446744073709551616",
+          "decimal": "3.4640259410911866667E-17"
+        },
+        "dWy": {
+          "fraction": "1/618970019642690137449562112",
+          "decimal": "1.6155871338926321775E-27"
+        },
+        "dWz": {
+          "fraction": "0",
+          "decimal": "0"
+        }
+      },
+      "note": "increments before S_FINAL are diagnostic exports of the saved stage, not extra candidate operations"
+    },
+    {
+      "stage": "sweep-10",
+      "deltas": {
+        "N0": {
+          "fraction": "-1/9007199254740992",
+          "decimal": "-1.1102230246251565404E-16"
+        },
+        "N1": {
+          "fraction": "-1/4503599627370496",
+          "decimal": "-2.2204460492503130808E-16"
+        },
+        "N2": {
+          "fraction": "1/9007199254740992",
+          "decimal": "1.1102230246251565404E-16"
+        },
+        "N3": {
+          "fraction": "1/4503599627370496",
+          "decimal": "2.2204460492503130808E-16"
+        },
+        "T0": {
+          "fraction": "-1025/9223372036854775808",
+          "decimal": "-1.1113072267976420449E-16"
+        },
+        "T1": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "Twist": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dVx": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dVy": {
+          "fraction": "1/72057594037927936",
+          "decimal": "1.3877787807814456755E-17"
+        },
+        "dVz": {
+          "fraction": "1025/73786976294838206464",
+          "decimal": "1.3891340334970525561E-17"
+        },
+        "dWx": {
+          "fraction": "1/36028797018963968",
+          "decimal": "2.7755575615628913511E-17"
+        },
+        "dWy": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dWz": {
+          "fraction": "0",
+          "decimal": "0"
+        }
+      },
+      "note": "increments before S_FINAL are diagnostic exports of the saved stage, not extra candidate operations"
+    },
+    {
+      "stage": "sweep-11",
+      "deltas": {
+        "N0": {
+          "fraction": "-3/18014398509481984",
+          "decimal": "-1.6653345369377348106E-16"
+        },
+        "N1": {
+          "fraction": "-5/18014398509481984",
+          "decimal": "-2.7755575615628913511E-16"
+        },
+        "N2": {
+          "fraction": "3/18014398509481984",
+          "decimal": "1.6653345369377348106E-16"
+        },
+        "N3": {
+          "fraction": "1/4503599627370496",
+          "decimal": "2.2204460492503130808E-16"
+        },
+        "T0": {
+          "fraction": "-1537/18446744073709551616",
+          "decimal": "-8.3320936955511015753E-17"
+        },
+        "T1": {
+          "fraction": "1025/18446744073709551616",
+          "decimal": "5.5565361339882102243E-17"
+        },
+        "Twist": {
+          "fraction": "1091/633825300114114700748351602688",
+          "decimal": "1.7212944951922477594E-27"
+        },
+        "dVx": {
+          "fraction": "1025/147573952589676412928",
+          "decimal": "6.9456701674852627804E-18"
+        },
+        "dVy": {
+          "fraction": "-1/144115188075855872",
+          "decimal": "-6.9388939039072283776E-18"
+        },
+        "dVz": {
+          "fraction": "1537/147573952589676412928",
+          "decimal": "1.0415117119438876969E-17"
+        },
+        "dWx": {
+          "fraction": "3/144115188075855872",
+          "decimal": "2.0816681711721685133E-17"
+        },
+        "dWy": {
+          "fraction": "1091/1267650600228229401496703205376",
+          "decimal": "8.6064724759612387970E-28"
+        },
+        "dWz": {
+          "fraction": "-1/72057594037927936",
+          "decimal": "-1.3877787807814456755E-17"
+        }
+      },
+      "note": "increments before S_FINAL are diagnostic exports of the saved stage, not extra candidate operations"
+    },
+    {
+      "stage": "sweep-12",
+      "deltas": {
+        "N0": {
+          "fraction": "-3/18014398509481984",
+          "decimal": "-1.6653345369377348106E-16"
+        },
+        "N1": {
+          "fraction": "-3/18014398509481984",
+          "decimal": "-1.6653345369377348106E-16"
+        },
+        "N2": {
+          "fraction": "5/18014398509481984",
+          "decimal": "2.7755575615628913511E-16"
+        },
+        "N3": {
+          "fraction": "1/4503599627370496",
+          "decimal": "2.2204460492503130808E-16"
+        },
+        "T0": {
+          "fraction": "1025/36893488147419103232",
+          "decimal": "2.7782680669941051121E-17"
+        },
+        "T1": {
+          "fraction": "2049/36893488147419103232",
+          "decimal": "5.5538256285569964632E-17"
+        },
+        "Twist": {
+          "fraction": "545/316912650057057350374175801344",
+          "decimal": "1.7197167733818057358E-27"
+        },
+        "dVx": {
+          "fraction": "2049/295147905179352825856",
+          "decimal": "6.9422820356962455790E-18"
+        },
+        "dVy": {
+          "fraction": "5/144115188075855872",
+          "decimal": "3.4694469519536141888E-17"
+        },
+        "dVz": {
+          "fraction": "-1025/295147905179352825856",
+          "decimal": "-3.4728350837426313902E-18"
+        },
+        "dWx": {
+          "fraction": "-1/144115188075855872",
+          "decimal": "-6.9388939039072283776E-18"
+        },
+        "dWy": {
+          "fraction": "-2527/633825300114114700748351602688",
+          "decimal": "-3.9869030149869936646E-27"
+        },
+        "dWz": {
+          "fraction": "-1/72057594037927936",
+          "decimal": "-1.3877787807814456755E-17"
+        }
+      },
+      "note": "increments before S_FINAL are diagnostic exports of the saved stage, not extra candidate operations"
+    },
+    {
+      "stage": "S_FINAL",
+      "deltas": {
+        "N0": {
+          "fraction": "-3/18014398509481984",
+          "decimal": "-1.6653345369377348106E-16"
+        },
+        "N1": {
+          "fraction": "-3/18014398509481984",
+          "decimal": "-1.6653345369377348106E-16"
+        },
+        "N2": {
+          "fraction": "5/18014398509481984",
+          "decimal": "2.7755575615628913511E-16"
+        },
+        "N3": {
+          "fraction": "1/4503599627370496",
+          "decimal": "2.2204460492503130808E-16"
+        },
+        "T0": {
+          "fraction": "1025/36893488147419103232",
+          "decimal": "2.7782680669941051121E-17"
+        },
+        "T1": {
+          "fraction": "2049/36893488147419103232",
+          "decimal": "5.5538256285569964632E-17"
+        },
+        "Twist": {
+          "fraction": "545/316912650057057350374175801344",
+          "decimal": "1.7197167733818057358E-27"
+        },
+        "dVx": {
+          "fraction": "2049/295147905179352825856",
+          "decimal": "6.9422820356962455790E-18"
+        },
+        "dVy": {
+          "fraction": "5/144115188075855872",
+          "decimal": "3.4694469519536141888E-17"
+        },
+        "dVz": {
+          "fraction": "-1025/295147905179352825856",
+          "decimal": "-3.4728350837426313902E-18"
+        },
+        "dWx": {
+          "fraction": "-1/144115188075855872",
+          "decimal": "-6.9388939039072283776E-18"
+        },
+        "dWy": {
+          "fraction": "-2527/633825300114114700748351602688",
+          "decimal": "-3.9869030149869936646E-27"
+        },
+        "dWz": {
+          "fraction": "-1/72057594037927936",
+          "decimal": "-1.3877787807814456755E-17"
+        }
+      },
+      "note": "increments before S_FINAL are diagnostic exports of the saved stage, not extra candidate operations"
+    }
+  ],
+  "sweeps": [
+    {
+      "mode": "12",
+      "pairedPasses": 0,
+      "nativeSame": true,
+      "delta": {
+        "N0": {
+          "fraction": "-3/18014398509481984",
+          "decimal": "-1.6653345369377348106E-16"
+        },
+        "N1": {
+          "fraction": "-3/18014398509481984",
+          "decimal": "-1.6653345369377348106E-16"
+        },
+        "N2": {
+          "fraction": "5/18014398509481984",
+          "decimal": "2.7755575615628913511E-16"
+        },
+        "N3": {
+          "fraction": "1/4503599627370496",
+          "decimal": "2.2204460492503130808E-16"
+        },
+        "T0": {
+          "fraction": "1025/36893488147419103232",
+          "decimal": "2.7782680669941051121E-17"
+        },
+        "T1": {
+          "fraction": "2049/36893488147419103232",
+          "decimal": "5.5538256285569964632E-17"
+        },
+        "Twist": {
+          "fraction": "545/316912650057057350374175801344",
+          "decimal": "1.7197167733818057358E-27"
+        },
+        "dVx": {
+          "fraction": "2049/295147905179352825856",
+          "decimal": "6.9422820356962455790E-18"
+        },
+        "dVy": {
+          "fraction": "5/144115188075855872",
+          "decimal": "3.4694469519536141888E-17"
+        },
+        "dVz": {
+          "fraction": "-1025/295147905179352825856",
+          "decimal": "-3.4728350837426313902E-18"
+        },
+        "dWx": {
+          "fraction": "-1/144115188075855872",
+          "decimal": "-6.9388939039072283776E-18"
+        },
+        "dWy": {
+          "fraction": "-2527/633825300114114700748351602688",
+          "decimal": "-3.9869030149869936646E-27"
+        },
+        "dWz": {
+          "fraction": "-1/72057594037927936",
+          "decimal": "-1.3877787807814456755E-17"
+        }
+      },
+      "errorInReferenceUlps": {
+        "N0": "3",
+        "N1": "3",
+        "N2": "5",
+        "N3": "4",
+        "T0": "33587200",
+        "T1": "16785408",
+        "Twist": "35717120",
+        "dVx": "16785408",
+        "dVy": "671088640",
+        "dVz": "33587200",
+        "dWx": "33554432",
+        "dWy": "82804736",
+        "dWz": "16777216"
+      },
+      "baseline": {
+        "normalError": 6.515099072568198e-05,
+        "linearError": 3.0578904433522485e-05,
+        "angularError": 5.899788511897079e-05,
+        "residual": 0.00010894215130867486
+      },
+      "powered": {
+        "normalError": 6.515099072545993e-05,
+        "linearError": 3.057890443351647e-05,
+        "angularError": 5.899788511897749e-05,
+        "residual": 0.00010894215130865751
+      }
+    },
+    {
+      "mode": "16",
+      "pairedPasses": 5,
+      "nativeSame": true,
+      "delta": {
+        "N0": {
+          "fraction": "-1/4503599627370496",
+          "decimal": "-2.2204460492503130808E-16"
+        },
+        "N1": {
+          "fraction": "-3/18014398509481984",
+          "decimal": "-1.6653345369377348106E-16"
+        },
+        "N2": {
+          "fraction": "1/9007199254740992",
+          "decimal": "1.1102230246251565404E-16"
+        },
+        "N3": {
+          "fraction": "1/18014398509481984",
+          "decimal": "5.5511151231257827021E-17"
+        },
+        "T0": {
+          "fraction": "4099/73786976294838206464",
+          "decimal": "5.5551808812726033437E-17"
+        },
+        "T1": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "Twist": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dVx": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dVy": {
+          "fraction": "-5/144115188075855872",
+          "decimal": "-3.4694469519536141888E-17"
+        },
+        "dVz": {
+          "fraction": "-4099/590295810358705651712",
+          "decimal": "-6.9439761015907541797E-18"
+        },
+        "dWx": {
+          "fraction": "-1/72057594037927936",
+          "decimal": "-1.3877787807814456755E-17"
+        },
+        "dWy": {
+          "fraction": "1/618970019642690137449562112",
+          "decimal": "1.6155871338926321775E-27"
+        },
+        "dWz": {
+          "fraction": "0",
+          "decimal": "0"
+        }
+      },
+      "errorInReferenceUlps": {
+        "N0": "4",
+        "N1": "3",
+        "N2": "2",
+        "N3": "1",
+        "T0": "67158016",
+        "T1": "0",
+        "Twist": "0",
+        "dVx": "0",
+        "dVy": "671088640",
+        "dVz": "67158016",
+        "dWx": "67108864",
+        "dWy": "33554432",
+        "dWz": "0"
+      },
+      "baseline": {
+        "normalError": 5.641477569207076e-05,
+        "linearError": 1.2309055543492396e-05,
+        "angularError": 2.0194367680042666e-05,
+        "residual": 3.64532221281833e-05
+      },
+      "powered": {
+        "normalError": 5.641477569229281e-05,
+        "linearError": 1.2309055543517856e-05,
+        "angularError": 2.0194367680056283e-05,
+        "residual": 3.645322212823534e-05
+      }
+    },
+    {
+      "mode": "24",
+      "pairedPasses": 3,
+      "nativeSame": true,
+      "delta": {
+        "N0": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "N1": {
+          "fraction": "1/18014398509481984",
+          "decimal": "5.5511151231257827021E-17"
+        },
+        "N2": {
+          "fraction": "1/9007199254740992",
+          "decimal": "1.1102230246251565404E-16"
+        },
+        "N3": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "T0": {
+          "fraction": "12299/147573952589676412928",
+          "decimal": "8.3341265746245118962E-17"
+        },
+        "T1": {
+          "fraction": "32795/590295810358705651712",
+          "decimal": "5.5556891010409559239E-17"
+        },
+        "Twist": {
+          "fraction": "69799/40564819207303340847894502572032",
+          "decimal": "1.7206781976100438439E-27"
+        },
+        "dVx": {
+          "fraction": "32795/4722366482869645213696",
+          "decimal": "6.9446113763011949049E-18"
+        },
+        "dVy": {
+          "fraction": "1/72057594037927936",
+          "decimal": "1.3877787807814456755E-17"
+        },
+        "dVz": {
+          "fraction": "-12299/1180591620717411303424",
+          "decimal": "-1.0417658218280639870E-17"
+        },
+        "dWx": {
+          "fraction": "-12287/590295810358705651712",
+          "decimal": "-2.0814987645827176532E-17"
+        },
+        "dWy": {
+          "fraction": "-61273/81129638414606681695789005144064",
+          "decimal": "-7.5524803508761025552E-28"
+        },
+        "dWz": {
+          "fraction": "-1/72057594037927936",
+          "decimal": "-1.3877787807814456755E-17"
+        }
+      },
+      "errorInReferenceUlps": {
+        "N0": "0",
+        "N1": "1",
+        "N2": "2",
+        "N3": "0",
+        "T0": "100753408",
+        "T1": "16791040",
+        "Twist": "35737088",
+        "dVx": "16791040",
+        "dVy": "268435456",
+        "dVz": "100753408",
+        "dWx": "100655104",
+        "dWy": "15685888",
+        "dWz": "16777216"
+      },
+      "baseline": {
+        "normalError": 2.1624392451347063e-05,
+        "linearError": 6.386684273564677e-06,
+        "angularError": 1.158253804660202e-05,
+        "residual": 1.8926427987682947e-05
+      },
+      "powered": {
+        "normalError": 2.1624392451347063e-05,
+        "linearError": 6.386684273567508e-06,
+        "angularError": 1.1582538046621214e-05,
+        "residual": 1.89264279876656e-05
+      }
+    },
+    {
+      "mode": "32",
+      "pairedPasses": 13,
+      "nativeSame": true,
+      "delta": {
+        "N0": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "N1": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "N2": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "N3": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "T0": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "T1": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "Twist": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dVx": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dVy": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dVz": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dWx": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dWy": {
+          "fraction": "0",
+          "decimal": "0"
+        },
+        "dWz": {
+          "fraction": "0",
+          "decimal": "0"
+        }
+      },
+      "errorInReferenceUlps": {
+        "N0": "0",
+        "N1": "0",
+        "N2": "0",
+        "N3": "0",
+        "T0": "0",
+        "T1": "0",
+        "Twist": "0",
+        "dVx": "0",
+        "dVy": "0",
+        "dVz": "0",
+        "dWx": "0",
+        "dWy": "0",
+        "dWz": "0"
+      },
+      "baseline": {
+        "normalError": 7.713483306748259e-06,
+        "linearError": 2.3152431710016435e-06,
+        "angularError": 4.213334143698738e-06,
+        "residual": 6.8476675359412325e-06
+      },
+      "powered": {
+        "normalError": 7.713483306748259e-06,
+        "linearError": 2.3152431710016435e-06,
+        "angularError": 4.213334143698738e-06,
+        "residual": 6.8476675359412325e-06
+      }
+    },
+    {
+      "mode": "noD",
+      "pairedPasses": 0,
+      "nativeSame": false,
+      "delta": {
+        "N0": {
+          "fraction": "-118686709626305/18014398509481984",
+          "decimal": "-0.0065884358872062009915"
+        },
+        "N1": {
+          "fraction": "-1405476183795/281474976710656",
+          "decimal": "-0.0049932544633968234393"
+        },
+        "N2": {
+          "fraction": "55394511092429/9007199254740992",
+          "decimal": "0.0061500261652668308798"
+        },
+        "N3": {
+          "fraction": "84869852385321/18014398509481984",
+          "decimal": "0.0047112232107360818567"
+        },
+        "T0": {
+          "fraction": "27983557069596349/18446744073709551616",
+          "decimal": "0.0015169916684364228893"
+        },
+        "T1": {
+          "fraction": "-46154761777962079/295147905179352825856",
+          "decimal": "-0.00015637841559442940400"
+        },
+        "Twist": {
+          "fraction": "-24558176822940635/5070602400912917605986812821504",
+          "decimal": "-4.8432463997806552712E-15"
+        },
+        "dVx": {
+          "fraction": "-46154761777962079/2361183241434822606848",
+          "decimal": "-0.000019547301949303675500"
+        },
+        "dVy": {
+          "fraction": "-12978310819005/144115188075855872",
+          "decimal": "-0.000090055121825007022895"
+        },
+        "dVz": {
+          "fraction": "-27983557068772463/147573952589676412928",
+          "decimal": "-0.00018962395854896999247"
+        },
+        "dWx": {
+          "fraction": "-28006754115003845/73786976294838206464",
+          "decimal": "-0.00037956229569693137303"
+        },
+        "dWy": {
+          "fraction": "24598908834196517/10141204801825835211973625643008",
+          "decimal": "2.4256396862991760751E-15"
+        },
+        "dWz": {
+          "fraction": "46193021894075689/1180591620717411303424",
+          "decimal": "0.000039127011477521353825"
+        }
+      },
+      "errorInReferenceUlps": {
+        "N0": "118686709626305",
+        "N1": "89950475762880",
+        "N2": "110789022184858",
+        "N3": "84869852385321",
+        "T0": "1833930396113066328064",
+        "T1": "47262476060633168896",
+        "Twist": "100590292266764840960",
+        "dVx": "47262476060633168896",
+        "dVy": "1741919391404670320640",
+        "dVz": "1833930396059072135168",
+        "dWx": "1835450637680891985920",
+        "dWy": "50378565292434466816",
+        "dWz": "47301654419533505536"
+      },
+      "baseline": {
+        "normalError": 6.505265446477004e-05,
+        "linearError": 3.05929867571265e-05,
+        "angularError": 5.903391816652841e-05,
+        "residual": 0.00010892945639677366
+      },
+      "powered": {
+        "normalError": 0.0007854936290649928,
+        "linearError": 0.0001976561305575968,
+        "angularError": 0.00034337224761628137,
+        "residual": 0.0005933457167411066
+      }
+    }
+  ],
+  "downstream": {
+    "bothReady": true,
+    "equationsIdentical": true,
+    "cacheEqual": true,
+    "incrementsEqual": true,
+    "endpointEqual": true,
+    "nativeBitsEqual": true,
+    "normalClamps": [
+      0,
+      0
+    ],
+    "tangentClamps": [
+      0,
+      0
+    ],
+    "twistClamps": [
+      0,
+      0
+    ],
+    "scope": "one identical frozen-geometry piece, diagnostic owner promotion; not a native-world trajectory"
+  },
+  "minimumAchievablePairedDifference": 0,
+  "minimumWitness": "D32 coalesces all thirteen fields with identical fixed equations; deterministic continuation preserves equality. Not absolute convergence.",
+  "optionalTwoTimesControl": "NOT RUN; zero-input control and identical equations already isolate historical load plus finite arithmetic."
+}

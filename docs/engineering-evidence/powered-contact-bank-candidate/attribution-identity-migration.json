@@ -1,0 +1,26 @@
+[
+  {
+    "path": "tests/NovaCore.Simulation.Tests/PoweredContactTests.NativeRows.cs",
+    "oldSha256": "FD96C55C31A3961D8597E42DCC4F3F30A5FD7881BC095DA4FDC6FE79E90035A4",
+    "newSha256": "FE52EEB23E4F4A1411B809AACE29BC86B8C500B541BE741C3D6B6D53194E9D66",
+    "oldText": "MIT license:",
+    "newText": "Apache-2.0 license:",
+    "onlyExactReplacement": true
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/generate-work-observer.ps1",
+    "oldSha256": "A04C6C344542E5BEC7276D066680DBBE3E55EC5C1089F682771B97E6C57E7956",
+    "newSha256": "19076ACC81333E98A6A7388DAE18D89C165F2414DE8C591EBA9650149A1540B2",
+    "oldText": "MIT license:",
+    "newText": "Apache-2.0 license:",
+    "onlyExactReplacement": true
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/reproduce.md",
+    "oldSha256": "469B66067B0FD6D442333EA04B437D44E41EDDC336A6FA5CED8B3E99CA8A3AAC",
+    "newSha256": "B4FDBEDE1D3299B78E56E8B8406244003512F25C204DAF1365FE4CB8ABDAF979",
+    "oldText": "generator, MIT license and",
+    "newText": "generator, Apache-2.0 license and",
+    "onlyExactReplacement": true
+  }
+]

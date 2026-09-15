@@ -1,0 +1,19 @@
+{
+  "files": [
+    {
+      "source": "tests\\NovaCore.ContactNumerics.IntegratedProbe\\GeneralizedTransport.cs",
+      "sourceSha256": "1F6D822706189946510DA57859517E54B6C24CBE1A441A8962A60F7B9B5C365E",
+      "diagnostic": "DiagnosticTransport.cs",
+      "diagnosticSha256": "11B2FD3A98A54285552862FD178D58EC19BEA3DC8221FC011C98D5F3732E560C"
+    },
+    {
+      "source": "tests\\NovaCore.ContactNumerics.IntegratedProbe\\RetainedOperator.cs",
+      "sourceSha256": "A8CC41111339DC91965E9CEC8626373F7B7EE37D285987F337A2562AF2F1AD34",
+      "diagnostic": "DiagnosticOperator.cs",
+      "diagnosticSha256": "FE607CE3A94629058A406CAA4BECC81D61A383ECC985A6812A8B3A3B2D4C3BAC"
+    }
+  ],
+  "solverAndBiasVerbatim": true,
+  "transportAlgebraVerbatim": true,
+  "scope": "Historical/current admission separation and diagnostics only"
+}

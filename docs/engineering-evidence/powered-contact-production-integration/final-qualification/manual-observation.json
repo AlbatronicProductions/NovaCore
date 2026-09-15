@@ -1,0 +1,43 @@
+{
+  "reportedBy": "Project Control user",
+  "observation": "Window opened with light-blue rectangular body stationary; each Space advanced expected title/status stages to COMPLETED; no visible motion, jump, disappearance, contact instability, error or abort.",
+  "supportedStationaryObservation": "PASS - centered upward thrust 4.76837158203125 N below weight 78.48030453943647 N; no commanded lateral force or torque; no departure intended",
+  "cameraCheck": "PASS - user explicitly confirmed both camera and title-bar checks; no issue",
+  "delayedFrameCheck": "PASS - user confirmed brief title-bar hold; no issue. Saved budgetHits=0, so no live service-budget exhaustion is claimed.",
+  "stdoutSha256": "8F0C457ADD10B20E89672D8FF5E840F4B9CEA684BA8B05C60C30C04FBB99DEB1",
+  "stderrBytes": 0,
+  "decisiveLogLines": [
+    "POWERED_CONTACT_LIVE_READY cold_ms=93.8007 geometry=2x1x1_slab16x2x16 fixture=CenteredEndpoint source_mass_policy=unchanged debt=0",
+    "POWERED_CONTACT_VISIBLE_STATUS POWERED HELD - Space: exhaust next exact interval | actual=ProducingOutput throttle=59.6% fuel=15.522353 mg tick=16666",
+    "POWERED_CONTACT_VISIBLE_STATUS EXHAUSTED HELD - Space: start live dry continuation | actual=EnabledNoFeed throttle=0.0% fuel=0.000000 mg tick=33333",
+    "POWERED_CONTACT_LIVE_END frontier=1200 history=1200 ticks=20000000 budgetHits=0 debt=364 status=COMPLETED - final supported endpoint held | actual=EnabledNoFeed throttle=0.0% fuel=0.000000 mg tick=20000000",
+    "POWERED_CONTACT_LIVE_FRAME samples=3592 median_ms=5.5557 p95_ms=5.671 p99_ms=5.7869 max_ms=15.978 includes_present_and_host_scheduling=true",
+    "POWERED_CONTACT_LIVE_WORK samples=3592 median_ms=0.0055 p95_ms=0.0543 p99_ms=0.1109 max_ms=0.3236 includes_credit_and_bounded_service=true",
+    "[native] Frame pacing: p50=5.521 ms; p95=5.768 ms; p99=5.877 ms; max=19.761 ms; samples=8192",
+    "[native] Fence wait pacing: average=5.068 ms; p95=5.240 ms; max=8.827 ms; samples=8192",
+    "[native] CPU timings: update=5.197 ms; fence=5.070; inspection=0.036; hostCallback=0.089; validationUpload=0.002; record=0.040; submit=0.027; present=0.238"
+  ],
+  "liveFrame": {
+    "samples": 3592,
+    "medianMs": 5.5557,
+    "p95Ms": 5.671,
+    "p99Ms": 5.7869,
+    "maxMs": 15.978
+  },
+  "liveCreditAndService": {
+    "medianMs": 0.0055,
+    "p95Ms": 0.0543,
+    "p99Ms": 0.1109,
+    "maxMs": 0.3236
+  },
+  "completion": {
+    "frontier": 1200,
+    "history": 1200,
+    "ticks": 20000000,
+    "retainedDebtTicks": 364,
+    "budgetHits": 0
+  },
+  "coldPreparationMs": 93.8007,
+  "manualVisibleContract": "PASS - stable supported powered/exhausted/dry route; no visible displacement required",
+  "independentVerifier": "Core supplied observation/log PASS; subsequent user confirmation completes camera/title-bar checklist"
+}

@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "speculativeStateUnchanged": true,
+  "wrongPreparedCompletion": "InstallFailure",
+  "invalidated": true,
+  "acceptedGeneration": 1
+}

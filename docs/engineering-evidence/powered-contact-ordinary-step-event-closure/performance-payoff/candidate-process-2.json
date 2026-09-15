@@ -1,0 +1,361 @@
+{
+  "result": "PERFORMANCE_PROCESS_PASS",
+  "process": 2,
+  "runtime": "10.0.12",
+  "architecture": "X64",
+  "stopwatchFrequency": 10000000,
+  "warmPerArm": 128,
+  "measuredPerArm": 1024,
+  "A": {
+    "count": 1024,
+    "medianUs": 2.9,
+    "p95Us": 5,
+    "p99Us": 5.8,
+    "maxUs": 43.8,
+    "preparationMedianUs": 0,
+    "nativeAndBindingMedianUs": 2.9,
+    "collectionDeltas": [
+      0,
+      0,
+      0
+    ],
+    "topTen": [
+      {
+        "Index": 800,
+        "totalUs": 43.8,
+        "preparationUs": 0,
+        "nativeAndBindingUs": 43.8,
+        "Gen0": 0,
+        "Gen1": 0,
+        "Gen2": 0
+      },
+      {
+        "Index": 338,
+        "totalUs": 16,
+        "preparationUs": 0,
+        "nativeAndBindingUs": 16,
+        "Gen0": 0,
+        "Gen1": 0,
+        "Gen2": 0
+      },
+      {
+        "Index": 499,
+        "totalUs": 14.9,
+        "preparationUs": 0,
+        "nativeAndBindingUs": 14.9,
+        "Gen0": 0,
+        "Gen1": 0,
+        "Gen2": 0
+      },
+      {
+        "Index": 834,
+        "totalUs": 14.7,
+        "preparationUs": 0.1,
+        "nativeAndBindingUs": 14.6,
+        "Gen0": 0,
+        "Gen1": 0,
+        "Gen2": 0
+      },
+      {
+        "Index": 596,
+        "totalUs": 11.1,
+        "preparationUs": 0.1,
+        "nativeAndBindingUs": 11,
+        "Gen0": 0,
+        "Gen1": 0,
+        "Gen2": 0
+      },
+      {
+        "Index": 494,
+        "totalUs": 7.2,
+        "preparationUs": 0,
+        "nativeAndBindingUs": 7.2,
+        "Gen0": 0,
+        "Gen1": 0,
+        "Gen2": 0
+      },
+      {
+        "Index": 481,
+        "totalUs": 6.6,
+        "preparationUs": 0,
+        "nativeAndBindingUs": 6.6,
+        "Gen0": 0,
+        "Gen1": 0,
+        "Gen2": 0
+      },
+      {
+        "Index": 2,
+        "totalUs": 6.5,
+        "preparationUs": 0,
+        "nativeAndBindingUs": 6.5,
+        "Gen0": 0,
+        "Gen1": 0,
+        "Gen2": 0
+      },
+      {
+        "Index": 0,
+        "totalUs": 5.8,
+        "preparationUs": 0,
+        "nativeAndBindingUs": 5.8,
+        "Gen0": 0,
+        "Gen1": 0,
+        "Gen2": 0
+      },
+      {
+        "Index": 10,
+        "totalUs": 5.8,
+        "preparationUs": 0,
+        "nativeAndBindingUs": 5.8,
+        "Gen0": 0,
+        "Gen1": 0,
+        "Gen2": 0
+      }
+    ]
+  },
+  "B": {
+    "count": 1024,
+    "medianUs": 24,
+    "p95Us": 260.4,
+    "p99Us": 313.2,
+    "maxUs": 357.2,
+    "preparationMedianUs": 21.3,
+    "nativeAndBindingMedianUs": 2.6,
+    "collectionDeltas": [
+      0,
+      0,
+      0
+    ],
+    "topTen": [
+      {
+        "Index": 320,
+        "totalUs": 357.2,
+        "preparationUs": 353.1,
+        "nativeAndBindingUs": 4.1,
+        "Gen0": 0,
+        "Gen1": 0,
+        "Gen2": 0
+      },
+      {
+        "Index": 131,
+        "totalUs": 356.5,
+        "preparationUs": 349.8,
+        "nativeAndBindingUs": 6.7,
+        "Gen0": 0,
+        "Gen1": 0,
+        "Gen2": 0
+      },
+      {
+        "Index": 91,
+        "totalUs": 346.6,
+        "preparationUs": 338.9,
+        "nativeAndBindingUs": 7.7,
+        "Gen0": 0,
+        "Gen1": 0,
+        "Gen2": 0
+      },
+      {
+        "Index": 121,
+        "totalUs": 341,
+        "preparationUs": 334.1,
+        "nativeAndBindingUs": 6.9,
+        "Gen0": 0,
+        "Gen1": 0,
+        "Gen2": 0
+      },
+      {
+        "Index": 325,
+        "totalUs": 338.5,
+        "preparationUs": 332.9,
+        "nativeAndBindingUs": 5.6,
+        "Gen0": 0,
+        "Gen1": 0,
+        "Gen2": 0
+      },
+      {
+        "Index": 197,
+        "totalUs": 332.1,
+        "preparationUs": 326,
+        "nativeAndBindingUs": 6.1,
+        "Gen0": 0,
+        "Gen1": 0,
+        "Gen2": 0
+      },
+      {
+        "Index": 54,
+        "totalUs": 326.8,
+        "preparationUs": 320,
+        "nativeAndBindingUs": 6.8,
+        "Gen0": 0,
+        "Gen1": 0,
+        "Gen2": 0
+      },
+      {
+        "Index": 241,
+        "totalUs": 321.6,
+        "preparationUs": 316.3,
+        "nativeAndBindingUs": 5.3,
+        "Gen0": 0,
+        "Gen1": 0,
+        "Gen2": 0
+      },
+      {
+        "Index": 253,
+        "totalUs": 321.5,
+        "preparationUs": 316.3,
+        "nativeAndBindingUs": 5.2,
+        "Gen0": 0,
+        "Gen1": 0,
+        "Gen2": 0
+      },
+      {
+        "Index": 290,
+        "totalUs": 319.9,
+        "preparationUs": 315.4,
+        "nativeAndBindingUs": 4.5,
+        "Gen0": 0,
+        "Gen1": 0,
+        "Gen2": 0
+      }
+    ]
+  },
+  "C": {
+    "count": 1024,
+    "medianUs": 20.3,
+    "p95Us": 20.6,
+    "p99Us": 22.7,
+    "maxUs": 45.3,
+    "preparationMedianUs": 20.3,
+    "nativeAndBindingMedianUs": 0,
+    "collectionDeltas": [
+      0,
+      0,
+      0
+    ],
+    "topTen": [
+      {
+        "Index": 134,
+        "totalUs": 45.3,
+        "preparationUs": 45.3,
+        "nativeAndBindingUs": 0,
+        "Gen0": 0,
+        "Gen1": 0,
+        "Gen2": 0
+      },
+      {
+        "Index": 443,
+        "totalUs": 26.8,
+        "preparationUs": 26.8,
+        "nativeAndBindingUs": 0,
+        "Gen0": 0,
+        "Gen1": 0,
+        "Gen2": 0
+      },
+      {
+        "Index": 444,
+        "totalUs": 25.5,
+        "preparationUs": 25.5,
+        "nativeAndBindingUs": 0,
+        "Gen0": 0,
+        "Gen1": 0,
+        "Gen2": 0
+      },
+      {
+        "Index": 491,
+        "totalUs": 24.3,
+        "preparationUs": 24.3,
+        "nativeAndBindingUs": 0,
+        "Gen0": 0,
+        "Gen1": 0,
+        "Gen2": 0
+      },
+      {
+        "Index": 862,
+        "totalUs": 24.2,
+        "preparationUs": 24.2,
+        "nativeAndBindingUs": 0,
+        "Gen0": 0,
+        "Gen1": 0,
+        "Gen2": 0
+      },
+      {
+        "Index": 946,
+        "totalUs": 23.9,
+        "preparationUs": 23.9,
+        "nativeAndBindingUs": 0,
+        "Gen0": 0,
+        "Gen1": 0,
+        "Gen2": 0
+      },
+      {
+        "Index": 42,
+        "totalUs": 23,
+        "preparationUs": 23,
+        "nativeAndBindingUs": 0,
+        "Gen0": 0,
+        "Gen1": 0,
+        "Gen2": 0
+      },
+      {
+        "Index": 393,
+        "totalUs": 23,
+        "preparationUs": 23,
+        "nativeAndBindingUs": 0,
+        "Gen0": 0,
+        "Gen1": 0,
+        "Gen2": 0
+      },
+      {
+        "Index": 590,
+        "totalUs": 22.9,
+        "preparationUs": 22.9,
+        "nativeAndBindingUs": 0,
+        "Gen0": 0,
+        "Gen1": 0,
+        "Gen2": 0
+      },
+      {
+        "Index": 675,
+        "totalUs": 22.9,
+        "preparationUs": 22.9,
+        "nativeAndBindingUs": 0,
+        "Gen0": 0,
+        "Gen1": 0,
+        "Gen2": 0
+      }
+    ]
+  },
+  "allocations": {
+    "A": 0,
+    "B": 0,
+    "C128": 0
+  },
+  "sourceChecks": 2304,
+  "endpointChecks": 2304,
+  "observedTimedAndWarmSubsteps": 2304,
+  "explicitTimedAndWarmTimestepCalls": 2304,
+  "configuredIterationsPerStep": 8,
+  "configuredSubsteps": 1,
+  "independentlyObservedIterations": "UNAVAILABLE; no iteration scheduler override",
+  "ordinaryDtBits": 1015580809,
+  "nativeIdentity": "all checked against retained off-com source/endpoint including contacts/cache",
+  "eventSizedSteps": 0,
+  "manualCacheWrites": 0,
+  "cold": {
+    "worldCount": 2304,
+    "preparationStepsPerWorld": 120,
+    "totalPreparationUs": 1423584.3,
+    "meanPreparationUsPerWorld": 617.8751302083333,
+    "totalManagedCounterBytes": 115034520,
+    "maxConcurrentNativePoolBytes": 6029312
+  },
+  "campaignIncludingColdFixturesAndAllocationControlsCollectionDeltas": [
+    9,
+    4,
+    3
+  ],
+  "fixedInputValueBytes": 3832,
+  "projectedValueBytes": 48,
+  "preparedValueBytes": 24,
+  "newMapperRetainedHeapBytes": 0,
+  "limitations": "Repeated one-interval retained-world fixtures, not live depletion/canonical publication or whole-engine performance. Inner timestamps included; no subtraction."
+}

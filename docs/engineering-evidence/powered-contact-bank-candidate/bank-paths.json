@@ -1,0 +1,2390 @@
+[
+  {
+    "path": "docs/architecture.md",
+    "category": "ARCHITECTURE DOC"
+  },
+  {
+    "path": "docs/CODEX_HANDOFF.md",
+    "category": "CURRENT-STATE DOC"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-architecture/architecture-candidates.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-architecture/atomic-publication.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-architecture/bepu-mass-wrench-assessment.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-architecture/convergence-map.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-architecture/current-contact-lifecycle.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-architecture/current-powered-lifecycle.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-architecture/departure-regime-contract.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-architecture/florida-gap.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-architecture/identity.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-architecture/ksa-convergence.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-architecture/powered-contact-physics.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-architecture/README.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-architecture/reproduction.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-architecture/verification.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-architecture/warm-start-contract.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-bank-candidate/architecture-audit.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-bank-candidate/attribution-identity-migration.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-bank-candidate/bank-contents.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-bank-candidate/bank-paths.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-bank-candidate/cleanup.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-bank-candidate/commit-proposal.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-bank-candidate/documentation-audit.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-bank-candidate/evidence-consolidation.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-bank-candidate/final-review.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-bank-candidate/identity.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-bank-candidate/legal-file-classification.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-bank-candidate/licensing-strategy.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-bank-candidate/preservation-manifest.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-bank-candidate/qualified-source-identity.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-bank-candidate/README.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-bank-candidate/root-license-candidate-review.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-bank-candidate/standard-license-evaluation.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-bank-candidate/tag-proposal.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-bank-candidate/third-party-audit.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-bank-candidate/verification.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-bank-candidate/whitespace-cleanup.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-bank-candidate/whitespace-closure.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-bank-candidate/whitespace-generator-migration.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-bank-candidate/whitespace-git-preflight.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-bank-candidate/whitespace-identity-migration.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-bank-candidate/whitespace-protected-identity.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-bank-candidate/whitespace-result.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-bank-candidate/whitespace-supporting-migrations.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-chronological-event-feasibility/candidate-derivation.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-chronological-event-feasibility/chronology.py",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-chronological-event-feasibility/cleanup.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-chronological-event-feasibility/closing.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-chronological-event-feasibility/friction-work.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-chronological-event-feasibility/identity.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-chronological-event-feasibility/ksa-tradeoff.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-chronological-event-feasibility/mechanism-disposition.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-chronological-event-feasibility/model-contract.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-chronological-event-feasibility/necessity-payoff.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-chronological-event-feasibility/off-com.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-chronological-event-feasibility/ordinary-event.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-chronological-event-feasibility/rank-conditioning.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-chronological-event-feasibility/README.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-chronological-event-feasibility/realistic-payoff.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-chronological-event-feasibility/reference-derivation.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-chronological-event-feasibility/reproduce.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-chronological-event-feasibility/retained-world-bridge.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-chronological-event-feasibility/tiny-audit.py",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-chronological-event-feasibility/tiny-differential.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-chronological-event-feasibility/tiny-event.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-chronological-event-feasibility/verification.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-event-lifecycle-convergence/analytic-witnesses.py",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-event-lifecycle-convergence/analytical-results.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-event-lifecycle-convergence/architecture-candidates.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-event-lifecycle-convergence/cleanup.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-event-lifecycle-convergence/closing.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-event-lifecycle-convergence/equivalence-matrix.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-event-lifecycle-convergence/exact-event-physical-requirements.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-event-lifecycle-convergence/identity.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-event-lifecycle-convergence/ksa-5402-snapshot.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-event-lifecycle-convergence/ksa-current-lifecycle.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-event-lifecycle-convergence/ksa-live-changelog.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-event-lifecycle-convergence/ksa-source-provenance.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-event-lifecycle-convergence/mechanism-test-disposition.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-event-lifecycle-convergence/novacore-outcome-mechanism-map.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-event-lifecycle-convergence/plan.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-event-lifecycle-convergence/README.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-event-lifecycle-convergence/reproduce.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-event-lifecycle-convergence/verification.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/basis-compatibility/bepu-basis-semantics.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/basis-compatibility/cleanup.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/basis-compatibility/compatibility-contract.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/basis-compatibility/identity.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/basis-compatibility/original-coast-witness.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/basis-compatibility/plan.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/basis-compatibility/Probe.cs",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/basis-compatibility/README.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/basis-compatibility/synthetic-results.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/basis-compatibility/transport-derivation.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/basis-compatibility/verification.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/cache-contract.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/cache-setup-correction.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/candidate-comparison.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/audit-payoff.py",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/causal-reconstruction.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/coast-delta-table.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/controlled-witnesses.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/convergence.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/diagnostic-payoff-plan.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/identity.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/modal-decomposition.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/payoff-arithmetic.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/Payoff.cs",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/payoff/HotKernel.cs",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/payoff/identity.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/payoff/measured-results.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/payoff/plan.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/payoff/Probe.cs",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/payoff/README.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/payoff/results/01-coast-D.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/payoff/results/02-ordinary-9.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/payoff/results/03-ordinary-10.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/payoff/results/04-ordinary-11.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/payoff/results/05-identical-D.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/payoff/results/06-tiny-normal-D.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/payoff/results/07-tangent-only-D.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/payoff/results/08-lever-only-D.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/payoff/results/09-moderate-normal-refusal.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/payoff/results/10-normal-and-tangent-refusal.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/payoff/results/allocation.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/payoff/results/correctness-attempt.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/payoff/results/correctness-summary.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/payoff/results/cost-attempt.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/payoff/results/release-equivalence.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/payoff/results/timing.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/payoff/sweep-comparison.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/payoff/verification.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/plan.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/Probe.cs",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/README.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/verification.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-admission/cleanup.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-admission/identity.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-admission/plan.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-admission/predicate-trace.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-admission/Probe.cs",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-admission/README.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-admission/rejected-input.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-admission/selector-comparison.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-admission/source-vs-successor.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-admission/support-witness.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-admission/verification.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coupled-contract.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/duration-history/identity.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/duration-history/plan.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/duration-history/README.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/duration-history/results.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/duration-history/source-and-math.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/duration-history/verification.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/duration-provenance/cleanup.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/duration-provenance/contract.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/duration-provenance/identity.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/duration-provenance/README.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/duration-provenance/results.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/duration-provenance/verification.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/baseline-reproduction-check.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/causal-reconstruction.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/ConvergenceStudy.csproj",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/curve-freeze-v2.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/curve-freeze.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/curve-results-v2/component-trace.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/curve-results-v2/convergence.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/curve-results-v2/first-pass-trace.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/curve-results-v2/fixed-equations.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/curve-results-v2/harness-equivalence.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/curve-results-v2/initialization-controls.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/curve-results/stop.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/generate.py",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/generated-identity.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/identity.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/matrix-freeze.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/matrix-results/active-set-matrix.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/matrix-results/history-0.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/matrix-results/history-1.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/matrix-results/references.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/MatrixDriver.cs",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/payoff-1/payoff.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/payoff-2/payoff.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/payoff-3/payoff.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/payoff-freeze.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/payoff-plan.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/PayoffDriver.cs",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/PayoffStudy.csproj",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/plan.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/powered_prediction.py",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/powered-prediction.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/README.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/reconstruct.py",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/StudyControl.cs",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/StudyDriver.cs",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/StudyOperator.cs",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/StudyTransport.cs",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/TimingOperator.cs.txt",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/verification.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/bepu-boundary-semantics.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/BoundaryDiagnostic.csproj",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/BoundaryDriver.cs",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/BoundaryPolicy.cs",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/diagnostic-copy-identity.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/DiagnosticOperator.cs",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/DiagnosticTransport.cs",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/generate.py",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/historical-cache-validity.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/identity.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/plan.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/pre-execution-freeze.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/README.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/results/attempt.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/results/baseline-after-D.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/results/baseline-basis-transport.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/results/baseline-coast.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/results/baseline-duration-transform.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/results/baseline-historical.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/results/baseline-load-correction.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/results/baseline-preparation.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/results/powered-historical.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/results/stop.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/stage-classification.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/verification.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/identity.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/operator-contract.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/analysis.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/analyze.py",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/cleanup.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/contract-audit.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/d_arithmetic.py",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/d-arithmetic.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/diagnostics/baseline-historical.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/diagnostics/completion.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/diagnostics/downstream-sensitivity.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/diagnostics/identical-control.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/diagnostics/null-event-control.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/diagnostics/powered-historical.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/diagnostics/stage-delta-inputs.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/diagnostics/sweep-results.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/field-ownership.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/generate.py",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/generation.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/identity.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/InputDriver.cs.txt",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/ksa-convergence.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/PairedDriver.cs",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/plan.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/preflight.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/README.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/Reproduce.csproj",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/reproduction/attempt.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/reproduction/baseline-coast.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/reproduction/baseline-historical.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/reproduction/baseline-preparation.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/reproduction/paired-response.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/reproduction/powered-coast.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/reproduction/powered-historical.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/reproduction/powered-preparation.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/reproduction/stop.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/trace-freeze.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/Trace.csproj",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/TraceOperator.cs.txt",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/verification.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/plan.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/README.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/results/01-original32N.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/results/02-actual128.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/results/03-basis.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/results/04-exact-coast.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/results/05-moderate-normal.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/results/05-normal-and-tangent.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/results/06-lifecycle.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/results/installed-coast.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/results/installed-powered.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/results/powered-coast.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/results/regression-results.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/results/regressions-attempt.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/results/sequence-attempt.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/results/sequence-coast.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/results/sequence-powered.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/results/sequence-seed.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/results/tiny-attempt.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/results/tiny-event.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/results/tiny-stop.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/admission_witness.py",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/admission-witness.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/bepu-friction-contract.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/candidate-results/attempt.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/candidate-results/baseline-coast-input.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/candidate-results/baseline-coast.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/candidate-results/baseline-installed.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/candidate-results/baseline-tiny.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/candidate-results/failure.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/candidate-results/powered-coast-input.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/candidate-results/powered-installed.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/candidate-results/powered-tiny.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/coast_reference.py",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/coast-policy.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/coast-reference.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/compare_tiny.py",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/comparison-policy.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/identity.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/plan.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/pre-candidate-freeze.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/pre-coast-freeze.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/README.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/reference-derivation.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/reference-results/baseline-reference.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/reference-results/powered-reference.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/reference-results/reference-inputs.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/reference-results/separated-response.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/reference.py",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/reproduce.py",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/tiny-comparison.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/TinyActiveCandidate.cs",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/TinyActiveCandidate.csproj",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/verification.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-plan.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/candidate-selection.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/cleanup.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/coast-freeze.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/CoastDriver.cs",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-regressions/01-original32N.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-regressions/02-actual128.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-regressions/03-basis.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-regressions/04-exact-coast.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-regressions/05-moderate-normal.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-regressions/05-normal-and-tangent.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-regressions/06-lifecycle.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-regressions/07-composition.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-regressions/regression-results.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-regressions/regressions-attempt.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-sequence/installed-coast.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-sequence/installed-powered.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-sequence/powered-coast.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-sequence/sequence-attempt.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-sequence/sequence-coast.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-sequence/sequence-powered.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-sequence/sequence-seed.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/FinalPolicy.cs",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/gate-freeze.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/GateQualification.cs",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/generate.py",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/generated-identity.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/identity.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/no-d-regressions/01-original32N.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/no-d-regressions/02-actual128.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/no-d-regressions/03-basis.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/no-d-regressions/04-exact-coast.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/no-d-regressions/05-moderate-normal.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/no-d-regressions/regressions-attempt.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/no-d-regressions/regressions-stop.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/plan.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/preflight.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/README.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/select_d.py",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/selected-freeze-v2.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/selected-freeze.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/SelectedGate.csproj",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/SelectedOperator.cs.txt",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/SelectedQualification.cs.txt",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/TwelveGate.csproj",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/TwelveOperator.cs",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/TwelveTransport.cs",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/verification.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/verification.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/four-row-contract.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/historical-early-convergence-verification.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/historical-early-convergence.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/historical-early-convergence.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/identity.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/operator-contract.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/preconditioning/contract.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/preconditioning/identity.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/preconditioning/interior-plan.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/preconditioning/README.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/preconditioning/results.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/preconditioning/verification.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/primitive-limitations.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/README.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/reference-derivations.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/validation.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/verification.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/CANDIDATE-A-HISTORY.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/candidate-a-reproduction-inputs.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/centered-baseline-8.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/check-support.py",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/cleanup-reviewed.ps1",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/cleanup.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/consolidation-manifest.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/CONSOLIDATION-MANIFEST.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/CONSOLIDATION-VERIFICATION.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/final-inventory.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/friction-work/bepu-friction-source.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/friction-work/check-work.py",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/friction-work/cleanup.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/friction-work/frozen-contract.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/friction-work/identity.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/friction-work/ksa-current-work-ownership.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/friction-work/measurements.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/friction-work/observer-plan.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/friction-work/Observer.cs",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/friction-work/off-com-trace.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/friction-work/prepare-observer.ps1",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/friction-work/README.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/friction-work/reproduce.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/friction-work/verification.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/friction-work/work-derivation.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/friction-work/yaw-baseline-trace.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/historical-run-provenance.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/identity.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/inputs.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/low-thrust-8.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/mid-event-8.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/near-end-8.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/near-unloading-8.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/off-com-8.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/off-com-repeat1.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/off-com-repeat2.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/OrdinaryClosure.csproj",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-closure/allocation-cause.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-closure/attribution-witness.txt",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-closure/Attribution.cs",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-closure/corrected-semantics.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-closure/correction-witness.txt",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-closure/Correction.cs",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-closure/identity.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-closure/plan.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-closure/README.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-closure/reproduce.ps1",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-closure/reuse-decision.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-recheck/allocation-witness.txt",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-recheck/allocation.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-recheck/cleanup.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-recheck/contract.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-recheck/fp32-equivalence.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-recheck/identity.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-recheck/native-equivalence.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-recheck/native.ps1",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-recheck/README.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-recheck/recheck.ps1",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-recheck/reproduce.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-recheck/timing-plan.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-recheck/Timing.cs",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-recheck/timing.ps1",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-result.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocation-witness.txt",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/allocations.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/baseline.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/candidate-a-comparison.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/candidate-process-1.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/candidate-process-2.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/candidate-process-3.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/event-preparation.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/identity.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/mechanism-payoff.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/plan.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/Program.cs",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/projection-contract/identity.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/projection-contract/README.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/qualification-result.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/README.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/reproduce.ps1",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/retained-state.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/solver-work.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/tails.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/performance-payoff/verification.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/plan.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/prepare.py",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/PRODUCTION-DIRECTION-HANDOFF.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/Program.cs",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/README.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/reproduce-candidate-a.ps1",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/reproduce.ps1",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/REPRODUCTION-INDEX.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/results-summary.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/sliding-baseline-8.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/summarize.py",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/tiny-event-8.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/yaw-baseline-8.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/zero-event-8.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration-design/architecture.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration-design/identity.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration-design/ksa-current-review.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration-design/mass-stop.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration-design/novacore-current-owner-map.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration-design/README.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration-design/reproduce.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration-design/verification.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/cleanup.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-median-closure/attribution.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-median-closure/cleanup.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-median-closure/cleanup.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-median-closure/evidence-inventory.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-median-closure/identity.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-median-closure/plan.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-median-closure/probe.py",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-median-closure/REPORT.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-median-closure/reproduce.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-median-closure/restoration.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-median-closure/verification.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-qualification/allocation.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-qualification/cleanup.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-qualification/cleanup.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-qualification/determinism.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-qualification/evidence-inventory.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-qualification/identity.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-qualification/launch.ps1",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-qualification/manual-acceptance.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-qualification/manual-observation.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-qualification/performance.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-qualification/performance.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-qualification/plan.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-qualification/README.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-qualification/refusal-closeout.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-qualification/regression.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-qualification/reproduce.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-qualification/storage.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-qualification/verification.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-qualification/visible-route.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/generate-work-observer.ps1",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/identity.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/lifecycle-cost-convergence/authority-lifetime.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/lifecycle-cost-convergence/correction-contract.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/lifecycle-cost-convergence/correction.patch",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/lifecycle-cost-convergence/ksa-lifecycle.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/lifecycle-cost-convergence/operation-validation.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/lifecycle-cost-convergence/preimages.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/lifecycle-cost-convergence/REPORT.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/lifecycle-cost-convergence/validation-payoff-closure.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/lifecycle-cost-convergence/validation.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/lifecycle-cost-convergence/validation.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/performance-plan.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/performance-revision/attribution.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/performance-revision/cleanup.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/performance-revision/instrument.py",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/performance-revision/plan.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/performance-revision/REPORT.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/performance-revision/reproduce.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/performance-revision/verification.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/README.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/reproduce.md",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/validation.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/verification.json",
+    "category": "ENGINEERING EVIDENCE"
+  },
+  {
+    "path": "docs/engineering-evidence/README.md",
+    "category": "CURRENT-STATE DOC"
+  },
+  {
+    "path": "docs/NOVACORE_CURRENT_STATE.md",
+    "category": "CURRENT-STATE DOC"
+  },
+  {
+    "path": "LICENSING.md",
+    "category": "LICENSING STATUS"
+  },
+  {
+    "path": "NOTICE.md",
+    "category": "OWNERSHIP / NOTICE"
+  },
+  {
+    "path": "README.md",
+    "category": "PUBLIC README"
+  },
+  {
+    "path": "samples/NovaCore.Triangle/PoweredContactDevelopmentScene.cs",
+    "category": "SAMPLE PRESENTATION"
+  },
+  {
+    "path": "samples/NovaCore.Triangle/Program.cs",
+    "category": "SAMPLE PRESENTATION"
+  },
+  {
+    "path": "samples/NovaCore.Triangle/SampleOptions.cs",
+    "category": "SAMPLE PRESENTATION"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Actuation/OrdinaryContactInputProjection.cs",
+    "category": "PRODUCTION SOURCE"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Actuation/PoweredFreeFlight.cs",
+    "category": "PRODUCTION SOURCE"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactCallbacks.cs",
+    "category": "PRODUCTION SOURCE"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs",
+    "category": "PRODUCTION SOURCE"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs",
+    "category": "PRODUCTION SOURCE"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Powered.cs",
+    "category": "PRODUCTION SOURCE"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Publication.cs",
+    "category": "PRODUCTION SOURCE"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/PoweredContactPreparation.cs",
+    "category": "PRODUCTION SOURCE"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.PoweredContact.cs",
+    "category": "PRODUCTION SOURCE"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.PoweredFreeFlight.cs",
+    "category": "PRODUCTION SOURCE"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Propellant.cs",
+    "category": "PRODUCTION SOURCE"
+  },
+  {
+    "path": "tests/NovaCore.ContactNumerics.DurationProbe/DurationStudy.cs",
+    "category": "ENGINEERING REPRODUCTION SOURCE"
+  },
+  {
+    "path": "tests/NovaCore.ContactNumerics.DurationProbe/NovaCore.ContactNumerics.DurationProbe.csproj",
+    "category": "ENGINEERING REPRODUCTION SOURCE"
+  },
+  {
+    "path": "tests/NovaCore.ContactNumerics.IntegratedProbe/ContactGeometry.cs",
+    "category": "ENGINEERING REPRODUCTION SOURCE"
+  },
+  {
+    "path": "tests/NovaCore.ContactNumerics.IntegratedProbe/GeneralizedTransport.cs",
+    "category": "ENGINEERING REPRODUCTION SOURCE"
+  },
+  {
+    "path": "tests/NovaCore.ContactNumerics.IntegratedProbe/NovaCore.ContactNumerics.IntegratedProbe.csproj",
+    "category": "ENGINEERING REPRODUCTION SOURCE"
+  },
+  {
+    "path": "tests/NovaCore.ContactNumerics.IntegratedProbe/Qualification.cs",
+    "category": "ENGINEERING REPRODUCTION SOURCE"
+  },
+  {
+    "path": "tests/NovaCore.ContactNumerics.IntegratedProbe/RetainedOperator.cs",
+    "category": "ENGINEERING REPRODUCTION SOURCE"
+  },
+  {
+    "path": "tests/NovaCore.ContactNumerics.IntegratedProbe/RetainedWorld.cs",
+    "category": "ENGINEERING REPRODUCTION SOURCE"
+  },
+  {
+    "path": "tests/NovaCore.ContactNumerics.IntegratedProbe/ScaledArithmetic.cs",
+    "category": "ENGINEERING REPRODUCTION SOURCE"
+  },
+  {
+    "path": "tests/NovaCore.ContactNumerics.IntegratedProbe/TinyReference.cs",
+    "category": "ENGINEERING REPRODUCTION SOURCE"
+  },
+  {
+    "path": "tests/NovaCore.ContactNumerics.OwnedCacheProbe/CacheHistory.cs",
+    "category": "ENGINEERING REPRODUCTION SOURCE"
+  },
+  {
+    "path": "tests/NovaCore.ContactNumerics.OwnedCacheProbe/NovaCore.ContactNumerics.OwnedCacheProbe.csproj",
+    "category": "ENGINEERING REPRODUCTION SOURCE"
+  },
+  {
+    "path": "tests/NovaCore.ContactNumerics.OwnedCacheProbe/OwnedQualification.cs",
+    "category": "ENGINEERING REPRODUCTION SOURCE"
+  },
+  {
+    "path": "tests/NovaCore.ContactNumerics.PreconditionedProbe/CommonNormal.cs",
+    "category": "ENGINEERING REPRODUCTION SOURCE"
+  },
+  {
+    "path": "tests/NovaCore.ContactNumerics.PreconditionedProbe/NovaCore.ContactNumerics.PreconditionedProbe.csproj",
+    "category": "ENGINEERING REPRODUCTION SOURCE"
+  },
+  {
+    "path": "tests/NovaCore.ContactNumerics.PreconditionedProbe/PieceKernel.cs",
+    "category": "ENGINEERING REPRODUCTION SOURCE"
+  },
+  {
+    "path": "tests/NovaCore.ContactNumerics.PreconditionedProbe/Qualification.cs",
+    "category": "ENGINEERING REPRODUCTION SOURCE"
+  },
+  {
+    "path": "tests/NovaCore.ContactNumerics.WorldProbe/KernelProbe.cs",
+    "category": "ENGINEERING REPRODUCTION SOURCE"
+  },
+  {
+    "path": "tests/NovaCore.ContactNumerics.WorldProbe/NovaCore.ContactNumerics.WorldProbe.csproj",
+    "category": "ENGINEERING REPRODUCTION SOURCE"
+  },
+  {
+    "path": "tests/NovaCore.ContactNumerics.WorldProbe/Program.cs",
+    "category": "ENGINEERING REPRODUCTION SOURCE"
+  },
+  {
+    "path": "tests/NovaCore.Graphics.Tests/NovaCore.Graphics.Tests.csproj",
+    "category": "PERMANENT TEST"
+  },
+  {
+    "path": "tests/NovaCore.Graphics.Tests/PoweredContactPresentationTests.cs",
+    "category": "PERMANENT TEST"
+  },
+  {
+    "path": "tests/NovaCore.Graphics.Tests/Program.cs",
+    "category": "PERMANENT TEST"
+  },
+  {
+    "path": "tests/NovaCore.Simulation.Tests/PoweredContactTests.Authority.cs",
+    "category": "PERMANENT TEST"
+  },
+  {
+    "path": "tests/NovaCore.Simulation.Tests/PoweredContactTests.Characterization.cs",
+    "category": "PERMANENT TEST"
+  },
+  {
+    "path": "tests/NovaCore.Simulation.Tests/PoweredContactTests.cs",
+    "category": "PERMANENT TEST"
+  },
+  {
+    "path": "tests/NovaCore.Simulation.Tests/PoweredContactTests.Lifecycle.cs",
+    "category": "PERMANENT TEST"
+  },
+  {
+    "path": "tests/NovaCore.Simulation.Tests/PoweredContactTests.NativeRows.cs",
+    "category": "PERMANENT TEST"
+  },
+  {
+    "path": "tests/NovaCore.Simulation.Tests/PoweredContactTests.Physics.cs",
+    "category": "PERMANENT TEST"
+  },
+  {
+    "path": "tests/NovaCore.Simulation.Tests/PoweredContactTests.Qualification.cs",
+    "category": "PERMANENT TEST"
+  },
+  {
+    "path": "tests/NovaCore.Simulation.Tests/PoweredContactTests.Work.cs",
+    "category": "PERMANENT TEST"
+  },
+  {
+    "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+    "category": "PERMANENT TEST"
+  }
+]

@@ -1,0 +1,160 @@
+{
+  "date": "2026-09-15",
+  "judgment": "PASS — FRICTION WORK QUALIFIED",
+  "scope": "Two bounded Method A ordered discrete impulse-work approximations; not continuous-history reconstruction",
+  "banked": false,
+  "head": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "main": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "originMain": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "remoteMain": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "branch": "codex/powered-contact-numerical-prerequisite",
+  "protectedStartingFiles": 2434,
+  "protectedClosingFiles": 2434,
+  "startingAggregateSha256": "54BEA80F64E9528092D3F943AD6DCA8E1F49111D0BA8AA108CCE779589DC8C71",
+  "closingAggregateSha256": "54BEA80F64E9528092D3F943AD6DCA8E1F49111D0BA8AA108CCE779589DC8C71",
+  "aggregateAlgorithm": "Sorted unique git ls-files --cached --others --exclude-standard, exclude only this friction-work child; path + literal backtick-t + uppercase file SHA256; join LF; SHA256 UTF8",
+  "historicalTagCount": 65,
+  "historicalTagsUnchanged": true,
+  "protectedMilestones": [
+    {
+      "tag": "m14.21-authored-compound-spacecraft-contact",
+      "object": "d8c13e46a9272e5ef6eb89acbe23c29709e3c55b",
+      "commit": "b6e8fa568585706ce38c0609aeb14db4a643123e"
+    },
+    {
+      "tag": "m14.22-canonical-spacecraft-command-authority",
+      "object": "e943a128ef425ff7427b917f2bb04056e58282f5",
+      "commit": "899f11f727205340bdd550dd65a853e253de0ed3"
+    },
+    {
+      "tag": "m14.23-prepared-single-engine-actuation",
+      "object": "cd22cc96d88d2b6cf3ca48740ad41baecbbe7c9e",
+      "commit": "6c9830237bc29bbd3c9cf5f4644b6409c32eaa9b"
+    },
+    {
+      "tag": "m14.24-exact-finite-propellant-segmentation",
+      "object": "50aa4e984e6646a9334e4e87356a43ffdf138e73",
+      "commit": "89a432ce3b96a5dcb0751cfdc26bfd6776c883a1"
+    },
+    {
+      "tag": "m15.0-segmented-powered-free-flight",
+      "object": "72c387e0bbe512a569650978522bbb3a0022ffc3",
+      "commit": "4607d8c802006d5e1a01c595ab608cf53a4dab6b"
+    }
+  ],
+  "tagReference": "../../powered-contact-chronological-event-feasibility/identity.json",
+  "ksaRoot": "E:\\Kitten Space Agency",
+  "ksaBuild": "2026.9.10.5438+c9291b5dd3347e847020c8fb3dd11dfce6a728e9",
+  "ksaFiles": [
+    {
+      "File": "KSA.dll",
+      "Hash": "A03E98153C6F353AF6F280CD3BDC1C71C718008E2049F508DC6FBE54457A0AA8"
+    },
+    {
+      "File": "KSA.deps.json",
+      "Hash": "23FCAA825C40F828349310C8DC480F292F9BE65DE6C4D378B36FBA64F7EE37B3"
+    },
+    {
+      "File": "BepuPhysics.dll",
+      "Hash": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7"
+    },
+    {
+      "File": "BepuUtilities.dll",
+      "Hash": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68"
+    }
+  ],
+  "ksaWrites": 0,
+  "blenderWrites": 0,
+  "blenderWholeTreeHash": "not measured; no Blender operations",
+  "productionChanges": 0,
+  "permanentTestChanges": 0,
+  "stagedPaths": [],
+  "unstagedTrackedPaths": [],
+  "sdk": "10.0.303",
+  "runtime": "10.0.12",
+  "architecture": "X64",
+  "configuration": "Release",
+  "bepu": "2.5.0-beta.29+f73164bb3c9ca733eb3329f1f6b1cea4e216ece7",
+  "bepuDllsUnchanged": true,
+  "diagnosticMechanism": "Temporary processor slot 3 dispatch override; native prestep/impulse types and original arithmetic; restores finally",
+  "generatedFunctionsSha256": "33F156010CE28B917FF7031BF97116EBD6414553CB26A1BAC858A6A1EFFEDED4",
+  "generatedHarnessSha256": "67DE557C56F973338188ECD9B18250C82013C1BEC809956BB704155292924D9B",
+  "diagnosticAssemblySha256": "906E5B6D8405191F5B60A2E462153DF2DAECADC5BFE863CB9227A92F70ABF9AD",
+  "build": "First attempt PASS zero warnings/errors",
+  "actualFreshWorldProcesses": 2,
+  "cases": [
+    "off-com",
+    "yaw-baseline"
+  ],
+  "warmPreparationStepsPerWorld": 120,
+  "targetStepsPerWorld": 1,
+  "iterations": 8,
+  "substeps": 1,
+  "backendDtBits": 1015580809,
+  "observedApplicationsPerWitness": 54,
+  "observedSamplesPerWitness": 108,
+  "worldRetries": 0,
+  "performanceRuns": 0,
+  "technicalReaderCorrection": "First offline decode rejected exact-diagonal metric premise; full captured tensor used on same trace; no world rerun",
+  "nativeOriginalValuesIdentical": true,
+  "nativeIdentityException": "binaryIdentity.bepuPath only",
+  "arithmeticSourceRecovery": "PASS independently verified",
+  "independentOriginalInternalRowReplay": false,
+  "exactEnergyTelescoping": true,
+  "exactImpulseTelescoping": true,
+  "independentVerifier": "PASS: full-matrix exact Gaussian elimination independently reproduces all channel energies; 22-point review",
+  "methodA": "Direct bounded discrete-work comparison PASS",
+  "methodB": "Conditional physical enclosure not qualified; no physical-history premise established; no width impossibility claim",
+  "methodsConsidered": 2,
+  "disposableRoot": "E:\\NovaCore\\build\\powered-contact-friction-work",
+  "disposableFiles": 42,
+  "disposableBytes": 1845724,
+  "disposedFiles": 0,
+  "disposedBytes": 0,
+  "cleanup": "One automatic attempt rejected before execution: blocked by policy; no retry/workaround",
+  "cleanupInstructions": "cleanup.md",
+  "previousDisposableRoot": "E:\\NovaCore\\build\\powered-contact-ordinary-step-event-closure",
+  "previousDisposableRootExists": false,
+  "previousRootDeletionAttemptsThisTicket": 0,
+  "retainedBudgetBytes": 131072,
+  "retainedFiles": 16,
+  "manifestExcludesSelf": true,
+  "manifest": {
+    "bepu-friction-source.md": "4C0D7BF998A62C577025C1FE55B6915793784E078E11987E9A845DAD4EA7800B",
+    "check-work.py": "7BAD3AA0FF6EAF0F4FF6FA6AC9D6F73AA6BA09F0BB0F6116E290E1A6E0A0B399",
+    "cleanup.md": "D77E4122B041FDF43CA7BECCBBAC67F85253F3051725F76560B400597B132234",
+    "frozen-contract.md": "ED1876907DDE665574F51A6B68DB498C89FBF37944184BCD173EC0833F9870E6",
+    "ksa-current-work-ownership.md": "E4B7D7A5B1CAAAD3E8BC60345B33CA2C99305E8252CE61807C07708110898D08",
+    "measurements.json": "0351E43A0835B80687AB4166F00BDF81BB05D44EF12E7B1F14C827F8519AE796",
+    "observer-plan.md": "DB95B46F270588330614E08ABD8A6C2F51F6006C9A1B02BC2857EAB7B89E8FE3",
+    "Observer.cs": "46AFF62CDD21E24CEEFB6B828DA18B31EC4DBA0D80524D02C561B3C460946E4E",
+    "off-com-trace.json": "E6E2225BB66AF22527DBFFF777B6B15BF491577D9B63A64D3B17D89E0E0BD070",
+    "prepare-observer.ps1": "2423DAC0FB3194FE44C6CA57DD7F14FEB34A5BA668F1E47B2E765FA9253E49D2",
+    "README.md": "BB0D8D787D2EEF9B5EFFEA9949DC6BA7BBE471FA0C4FD053C2A19CB700A585F1",
+    "reproduce.md": "9766B6612D277D1E3037BD9F518E033C957514E793B046D9399466D09B9AE8E9",
+    "verification.md": "29680ED3CCF8695483184F5965462DCF7211464858D9C07F89556E383E438C3B",
+    "work-derivation.md": "2FF7259763FC5EAA052A3468358AF6BDF7D7AF7F5E5398C06A67122E1C1F98FA",
+    "yaw-baseline-trace.json": "B15F975183E5418822439F8E7EF412D5B2B3CEDD4B9258D47693D7A83B0AB87D"
+  },
+  "gitStatusShort": [
+    "?? docs/engineering-evidence/powered-contact-architecture/",
+    "?? docs/engineering-evidence/powered-contact-chronological-event-feasibility/",
+    "?? docs/engineering-evidence/powered-contact-event-lifecycle-convergence/",
+    "?? docs/engineering-evidence/powered-contact-numerical-prerequisite/",
+    "?? docs/engineering-evidence/powered-contact-ordinary-step-event-closure/",
+    "?? tests/NovaCore.ContactNumerics.ConvergenceProbe/",
+    "?? tests/NovaCore.ContactNumerics.CoupledProbe/",
+    "?? tests/NovaCore.ContactNumerics.DurationProbe/",
+    "?? tests/NovaCore.ContactNumerics.IntegratedProbe/",
+    "?? tests/NovaCore.ContactNumerics.OwnedCacheProbe/",
+    "?? tests/NovaCore.ContactNumerics.PreconditionedProbe/",
+    "?? tests/NovaCore.ContactNumerics.Probe/",
+    "?? tests/NovaCore.ContactNumerics.WorldProbe/"
+  ],
+  "diffCheck": "PASS",
+  "cachedDiffCheck": "PASS",
+  "newUntrackedFileWhitespaceCheck": "PASS under current repository Git line-ending configuration",
+  "offlineRetainedTraceReproduction": "PASS both; no world executed",
+  "cleanupResolvedExact": true,
+  "cleanupReparsePoints": 0
+}

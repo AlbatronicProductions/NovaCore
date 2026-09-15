@@ -1,0 +1,310 @@
+{
+  "measure": {
+    "Arm": "prior-manufactured-1",
+    "Sweeps": 8,
+    "D": true,
+    "NormalError": 0,
+    "TangentError": 0,
+    "TwistError": 0,
+    "LinearError": 0,
+    "AngularError": 0,
+    "Residual": 0.004367320268554277,
+    "Pass": true,
+    "NormalClamps": 0,
+    "TangentClamps": 8,
+    "TwistClamps": 8,
+    "Impulses": [
+      0.015625,
+      0.015625,
+      0.015625,
+      0.015625,
+      0.0078125,
+      0,
+      0.008734640537108554
+    ],
+    "Endpoint": {
+      "Linear": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0.0019529461942511261
+      },
+      "Angular": {
+        "X": 0,
+        "Y": -0.004367320268554277,
+        "Z": 0
+      }
+    },
+    "Preparation": {
+      "Transport": {
+        "LinearError": 0,
+        "AngularError": 0,
+        "Condition": 6.896598723275516,
+        "ErrorScreen": 8.765973438348777E-13
+      },
+      "Transported": {
+        "N0": {
+          "Mantissa": 1,
+          "Exponent": -6
+        },
+        "N1": {
+          "Mantissa": 1,
+          "Exponent": -6
+        },
+        "N2": {
+          "Mantissa": 1,
+          "Exponent": -6
+        },
+        "N3": {
+          "Mantissa": 1,
+          "Exponent": -6
+        },
+        "T0": {
+          "Mantissa": 1,
+          "Exponent": -7
+        },
+        "T1": {
+          "Mantissa": 0,
+          "Exponent": 0
+        },
+        "Twist": {
+          "Mantissa": 1.118033988749895,
+          "Exponent": -7
+        }
+      },
+      "DurationScaled": {
+        "N0": {
+          "Mantissa": 1,
+          "Exponent": -6
+        },
+        "N1": {
+          "Mantissa": 1,
+          "Exponent": -6
+        },
+        "N2": {
+          "Mantissa": 1,
+          "Exponent": -6
+        },
+        "N3": {
+          "Mantissa": 1,
+          "Exponent": -6
+        },
+        "T0": {
+          "Mantissa": 1,
+          "Exponent": -7
+        },
+        "T1": {
+          "Mantissa": 0,
+          "Exponent": 0
+        },
+        "Twist": {
+          "Mantissa": 1.118033988749895,
+          "Exponent": -7
+        }
+      },
+      "LoadShift": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "BeforeD": {
+        "N0": {
+          "Mantissa": 1,
+          "Exponent": -6
+        },
+        "N1": {
+          "Mantissa": 1,
+          "Exponent": -6
+        },
+        "N2": {
+          "Mantissa": 1,
+          "Exponent": -6
+        },
+        "N3": {
+          "Mantissa": 1,
+          "Exponent": -6
+        },
+        "T0": {
+          "Mantissa": 1,
+          "Exponent": -7
+        },
+        "T1": {
+          "Mantissa": 0,
+          "Exponent": 0
+        },
+        "Twist": {
+          "Mantissa": 1.118033988749895,
+          "Exponent": -7
+        }
+      },
+      "DDelta": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "DNumerator": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "DDenominator": 2.375,
+      "AfterD": {
+        "N0": {
+          "Mantissa": 1,
+          "Exponent": -6
+        },
+        "N1": {
+          "Mantissa": 1,
+          "Exponent": -6
+        },
+        "N2": {
+          "Mantissa": 1,
+          "Exponent": -6
+        },
+        "N3": {
+          "Mantissa": 1,
+          "Exponent": -6
+        },
+        "T0": {
+          "Mantissa": 1,
+          "Exponent": -7
+        },
+        "T1": {
+          "Mantissa": 0,
+          "Exponent": 0
+        },
+        "Twist": {
+          "Mantissa": 1.118033988749895,
+          "Exponent": -7
+        }
+      },
+      "NormalClamps": 0,
+      "TangentClamps": 8,
+      "TwistClamps": 8
+    }
+  },
+  "accepted": {
+    "Identity": {
+      "World": 102,
+      "Body": 0,
+      "BodyGeneration": 1,
+      "Constraint": 0,
+      "ManifoldGeneration": 1
+    },
+    "Generation": 2,
+    "Piece": 1,
+    "Kind": "Coast",
+    "ProducingGeometry": {
+      "Features": {
+        "A": 1,
+        "B": 2,
+        "C": 3,
+        "D": 4
+      },
+      "Normal": {
+        "X": 0,
+        "Y": 1,
+        "Z": 0
+      },
+      "Tangent0": {
+        "X": 0,
+        "Y": 0,
+        "Z": -1
+      },
+      "Tangent1": {
+        "X": 1,
+        "Y": 0,
+        "Z": 0
+      },
+      "Lever0": {
+        "X": -1,
+        "Y": -0.4999542236328125,
+        "Z": -0.5
+      },
+      "Lever1": {
+        "X": 1,
+        "Y": -0.4999542236328125,
+        "Z": 0.5
+      },
+      "Lever2": {
+        "X": -1,
+        "Y": -0.4999542236328125,
+        "Z": 0.5
+      },
+      "Lever3": {
+        "X": 1,
+        "Y": -0.4999542236328125,
+        "Z": -0.5
+      },
+      "Depth0": 4.57763671875E-05,
+      "Depth1": 4.57763671875E-05,
+      "Depth2": 4.57763671875E-05,
+      "Depth3": 4.57763671875E-05,
+      "Omega": 128,
+      "Friction": 0.5,
+      "Recovery": 2,
+      "TwiceDamping": 2
+    },
+    "ProducingDuration": {},
+    "Cache": {
+      "N0": {
+        "Mantissa": 1,
+        "Exponent": -6
+      },
+      "N1": {
+        "Mantissa": 1,
+        "Exponent": -6
+      },
+      "N2": {
+        "Mantissa": 1,
+        "Exponent": -6
+      },
+      "N3": {
+        "Mantissa": 1,
+        "Exponent": -6
+      },
+      "T0": {
+        "Mantissa": 1,
+        "Exponent": -7
+      },
+      "T1": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "Twist": {
+        "Mantissa": 1.118033988749895,
+        "Exponent": -7
+      }
+    },
+    "Load": {
+      "Gravity": {
+        "X": 0,
+        "Y": -0.5,
+        "Z": 0.18748855643207207
+      },
+      "Force": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0
+      },
+      "Torque": {
+        "X": -0.24997711181640625,
+        "Y": -1.118033988749895,
+        "Z": 0
+      }
+    },
+    "Endpoint": {
+      "Linear": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0.0019529461860656738
+      },
+      "Angular": {
+        "X": 0,
+        "Y": -0.004367320332676172,
+        "Z": 0
+      }
+    }
+  },
+  "classification": [
+    "SATURATED",
+    "SATURATED"
+  ],
+  "scope": "Verified manufactured prior solve and numerical-owner installation; no native world"
+}

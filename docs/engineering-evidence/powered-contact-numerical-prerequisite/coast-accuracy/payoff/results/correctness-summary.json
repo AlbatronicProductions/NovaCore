@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "coastMeasured": true,
+  "syntheticsMeasured": 4,
+  "expectedRefusals": 2,
+  "smallestTestedPassing": 11,
+  "testedHere": [
+    9,
+    10,
+    11
+  ],
+  "priorTwelvePass": true,
+  "allPerCaseRecordsDurable": true,
+  "noAdoption": true
+}

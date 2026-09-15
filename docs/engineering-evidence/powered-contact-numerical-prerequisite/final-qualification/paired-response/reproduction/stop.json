@@ -1,0 +1,8 @@
+{
+  "status": "STOP",
+  "cause": "previously frozen coast represented branch-response bars",
+  "type": "InvalidOperationException",
+  "solverAdmissions": 2,
+  "canonicalMutations": 0,
+  "permanentSourceChanges": 0
+}

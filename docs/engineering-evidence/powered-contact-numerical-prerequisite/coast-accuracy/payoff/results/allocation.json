@@ -1,0 +1,17 @@
+{
+  "calls": 4096,
+  "bytes": 0,
+  "pass": true,
+  "entry": "PASS",
+  "exit": "PASS",
+  "reservationBytes": 1048576,
+  "boundary": "unchanged OrdinaryAllocationMeasurement",
+  "positiveControl": {
+    "type": "System.Byte[]",
+    "length": 128,
+    "bytes": 152,
+    "pass": true
+  },
+  "scope": "D preparation plus allocation-safe diagnostic local eight-sweep operator only",
+  "allocationChecksum": -3.594971473912183
+}

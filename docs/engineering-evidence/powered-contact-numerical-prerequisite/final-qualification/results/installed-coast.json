@@ -1,0 +1,142 @@
+{
+  "status": "PASS",
+  "after": {
+    "Identity": {
+      "World": 1,
+      "Body": 0,
+      "BodyGeneration": 1,
+      "Constraint": 0,
+      "ManifoldGeneration": 1
+    },
+    "Generation": 3,
+    "Piece": 2,
+    "Kind": "Coast",
+    "ProducingGeometry": {
+      "Features": {
+        "A": -4,
+        "B": -21,
+        "C": -5,
+        "D": -20
+      },
+      "Normal": {
+        "X": 0,
+        "Y": 1,
+        "Z": 9.633030484401672E-11
+      },
+      "Tangent0": {
+        "X": -0,
+        "Y": 0,
+        "Z": -1
+      },
+      "Tangent1": {
+        "X": 1,
+        "Y": -0,
+        "Z": -0
+      },
+      "Lever0": {
+        "X": -1,
+        "Y": -0.49964094161987305,
+        "Z": -0.5
+      },
+      "Lever1": {
+        "X": 1,
+        "Y": -0.49964094161987305,
+        "Z": 0.5
+      },
+      "Lever2": {
+        "X": -1,
+        "Y": -0.49964094161987305,
+        "Z": 0.5
+      },
+      "Lever3": {
+        "X": 1,
+        "Y": -0.49964094161987305,
+        "Z": -0.5
+      },
+      "Depth0": 0.00035905835102312267,
+      "Depth1": 0.0003590584092307836,
+      "Depth2": 0.00035905843833461404,
+      "Depth3": 0.0003590583219192922,
+      "Omega": 188.4955596923828,
+      "Friction": 0.5,
+      "Recovery": 2,
+      "TwiceDamping": 2
+    },
+    "ProducingDuration": {},
+    "Cache": {
+      "N0": {
+        "Mantissa": 1.2621082947313256,
+        "Exponent": -3
+      },
+      "N1": {
+        "Mantissa": 1.2621084670812432,
+        "Exponent": -3
+      },
+      "N2": {
+        "Mantissa": 1.2621084287723543,
+        "Exponent": -3
+      },
+      "N3": {
+        "Mantissa": 1.262108276162982,
+        "Exponent": -3
+      },
+      "T0": {
+        "Mantissa": 1.3670070827155278,
+        "Exponent": -26
+      },
+      "T1": {
+        "Mantissa": -1.3245991790759013,
+        "Exponent": -29
+      },
+      "Twist": {
+        "Mantissa": 1.7719833385540138,
+        "Exponent": -63
+      }
+    },
+    "Load": {
+      "Gravity": {
+        "X": 0,
+        "Y": -9.81,
+        "Z": 0
+      },
+      "Force": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0
+      },
+      "Torque": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0
+      }
+    },
+    "Endpoint": {
+      "Linear": {
+        "X": 3.8827110970807155E-10,
+        "Y": -0.0008776600006967783,
+        "Z": -8.564579045966525E-10
+      },
+      "Angular": {
+        "X": -1.7141468244830094E-09,
+        "Y": 7.4858300934749E-20,
+        "Z": -7.771002730194709E-10
+      }
+    }
+  },
+  "position": {
+    "X": -1.1340906E-10,
+    "Y": 0.49963313,
+    "Z": 9.198752E-09
+  },
+  "orientation": {
+    "IsIdentity": false,
+    "X": 4.0577052E-11,
+    "Y": 3.3890425E-12,
+    "Z": 2.1311945E-12,
+    "W": 1
+  },
+  "acceptedPieces": 2,
+  "Unsafe": false,
+  "identityUnchanged": true,
+  "producingGeometryExact": true
+}

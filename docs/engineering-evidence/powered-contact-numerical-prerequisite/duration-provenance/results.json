@@ -1,0 +1,2171 @@
+{
+  "schemaVersion": 1,
+  "status": "STOPPED_AT_FIRST_FAILURE",
+  "judgment": "REVISE",
+  "operatorQualified": false,
+  "runtime": ".NET 10.0.12",
+  "sdk": "10.0.303",
+  "sweeps": 8,
+  "absoluteErrorBars": {
+    "summedNormalImpulse": 0.0001,
+    "linearVelocity": 0.0001,
+    "angularVelocity": 0.0001
+  },
+  "execution": [
+    {
+      "configuration": "Debug",
+      "phase": "contracts",
+      "status": "PASS",
+      "checks": 165,
+      "records": 18
+    },
+    {
+      "configuration": "Release",
+      "phase": "contracts",
+      "status": "PASS",
+      "checks": 165,
+      "records": 18,
+      "byteIdenticalToDebug": true
+    },
+    {
+      "configuration": "Debug",
+      "phase": "interior",
+      "status": "FAIL",
+      "checks": 139,
+      "records": 44,
+      "firstFailure": "owned_coast_continuation: scoped retained-support admission: UnsupportedSupport",
+      "retries": 0
+    }
+  ],
+  "rawReportIdentities": [
+    {
+      "path": "contracts-debug.json",
+      "bytes": 24420,
+      "sha256": "0AFEE08BD9D99717470878754A8D2BDF57BAD443C72140CB503DE33665E554C1"
+    },
+    {
+      "path": "contracts-release.json",
+      "bytes": 24420,
+      "sha256": "0AFEE08BD9D99717470878754A8D2BDF57BAD443C72140CB503DE33665E554C1"
+    },
+    {
+      "path": "interior-debug.json",
+      "bytes": 93276,
+      "sha256": "043D01C11B0541626E7FC6A6D0D8AB57261AE49ED9B43989F91C2E55A59C92D9"
+    }
+  ],
+  "componentContracts": {
+    "phase": "contracts",
+    "status": "PASS",
+    "firstFailure": null,
+    "checks": 165,
+    "results": [
+      {
+        "name": "lifecycle_prepare_discard",
+        "checks": 30,
+        "installedPiece": 1,
+        "installedDuration": {
+          "Significand": 1,
+          "Exponent": -7
+        },
+        "canonicalMutations": 0
+      },
+      {
+        "name": "scaled_tiny_provenance_roundtrip",
+        "tinyNumerical": {
+          "Significand": 1,
+          "Exponent": -1075
+        },
+        "exactPositive": true,
+        "small": {
+          "N0": {
+            "Mantissa": 1,
+            "Exponent": -1075
+          },
+          "N1": {
+            "Mantissa": 1,
+            "Exponent": -1075
+          },
+          "N2": {
+            "Mantissa": 1,
+            "Exponent": -1075
+          },
+          "N3": {
+            "Mantissa": 1,
+            "Exponent": -1075
+          },
+          "T0": {
+            "Mantissa": 1,
+            "Exponent": -1076
+          },
+          "T1": {
+            "Mantissa": -1,
+            "Exponent": -1076
+          },
+          "Twist": {
+            "Mantissa": 1,
+            "Exponent": -1077
+          }
+        },
+        "returned": {
+          "N0": {
+            "Mantissa": 1,
+            "Exponent": -7
+          },
+          "N1": {
+            "Mantissa": 1,
+            "Exponent": -7
+          },
+          "N2": {
+            "Mantissa": 1,
+            "Exponent": -7
+          },
+          "N3": {
+            "Mantissa": 1,
+            "Exponent": -7
+          },
+          "T0": {
+            "Mantissa": 1,
+            "Exponent": -8
+          },
+          "T1": {
+            "Mantissa": -1,
+            "Exponent": -8
+          },
+          "Twist": {
+            "Mantissa": 1,
+            "Exponent": -9
+          }
+        },
+        "finiteNormal": 0.015625,
+        "retainedWorldQualification": false,
+        "cacheDurationBytes": 576,
+        "acceptedCacheBytes": 904
+      },
+      {
+        "name": "component_normal",
+        "h": 0.01666666753590107,
+        "ratio": 1,
+        "guess": [
+          0.327000017054379,
+          0.327000017054379,
+          0.327000017054379,
+          0.327000017054379,
+          0,
+          0,
+          0
+        ],
+        "reference": {
+          "Impulses": [
+            0.3270000166806032,
+            0.32700001668060313,
+            0.3270000166806032,
+            0.3270000166806031,
+            -2.5581826466586102e-17,
+            4.7494648525569064e-17,
+            0
+          ],
+          "Velocity": {
+            "Linear": {
+              "X": 5.936831065696133e-18,
+              "Y": -1.868879079269803e-10,
+              "Z": 3.1977283083232628e-18
+            },
+            "Angular": {
+              "X": 2.1360118998982387e-17,
+              "Y": 0,
+              "Z": 3.962923774702118e-17
+            }
+          },
+          "Residual": 6.418708505432684e-17,
+          "Admissible": true
+        },
+        "error": {
+          "impulse": 6.52544684953682e-12,
+          "linear": 1.9010254739259296e-12,
+          "angular": 3.4343331461852835e-12,
+          "pass": true
+        },
+        "rawError": {
+          "impulse": 6.52544684953682e-12,
+          "linear": 1.9010254739259296e-12,
+          "angular": 3.4343331461852835e-12,
+          "pass": true
+        },
+        "normalClamps": 0,
+        "tangentClamps": 0,
+        "twistClamps": 0,
+        "oldC": 0.9417004502447641,
+        "currentC": 0.9417004502447641
+      },
+      {
+        "name": "component_normal",
+        "h": 0.008333333767950535,
+        "ratio": 0.5,
+        "guess": [
+          0.1635000085271895,
+          0.1635000085271895,
+          0.1635000085271895,
+          0.1635000085271895,
+          0,
+          0,
+          0
+        ],
+        "reference": {
+          "Impulses": [
+            0.16350000806311632,
+            0.1635000080631162,
+            0.16350000806311632,
+            0.1635000080631162,
+            0,
+            0,
+            0
+          ],
+          "Velocity": {
+            "Linear": {
+              "X": 0,
+              "Y": -2.3203661214665772e-10,
+              "Z": 0
+            },
+            "Angular": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          "Residual": 2.7755575615628914e-17,
+          "Admissible": true
+        },
+        "error": {
+          "impulse": 6.151079645633217e-12,
+          "linear": 1.9584324626198252e-12,
+          "angular": 3.602376421605089e-12,
+          "pass": true
+        },
+        "rawError": {
+          "impulse": 0.0021671494005313097,
+          "linear": 0.0006899886979037374,
+          "angular": 0.0012691745664705218,
+          "pass": false
+        },
+        "normalClamps": 0,
+        "tangentClamps": 0,
+        "twistClamps": 0,
+        "oldC": 0.9417004502447641,
+        "currentC": 0.8486910458056718
+      },
+      {
+        "name": "component_normal",
+        "h": 0.004166666883975267,
+        "ratio": 0.25,
+        "guess": [
+          0.08175000426359474,
+          0.08175000426359474,
+          0.08175000426359474,
+          0.08175000426359474,
+          0,
+          0,
+          0
+        ],
+        "reference": {
+          "Impulses": [
+            0.08175000381627782,
+            0.08175000381627784,
+            0.08175000381627781,
+            0.08175000381627782,
+            -9.86504702303531e-18,
+            6.053121913338123e-18,
+            0
+          ],
+          "Velocity": {
+            "Linear": {
+              "X": 7.566402391672653e-19,
+              "Y": -2.2365845807337248e-10,
+              "Z": 1.2331308778794137e-18
+            },
+            "Angular": {
+              "X": 7.942079100102014e-18,
+              "Y": 0,
+              "Z": 1.5132804783345307e-18
+            }
+          },
+          "Residual": 7.661929499646898e-18,
+          "Admissible": true
+        },
+        "error": {
+          "impulse": 6.26110274737357e-13,
+          "linear": 2.592120847438109e-13,
+          "angular": 4.942333756328126e-13,
+          "pass": true
+        },
+        "rawError": {
+          "impulse": 0.0003432696450688111,
+          "linear": 0.00014211841781938174,
+          "angular": 0.0002709722322625209,
+          "pass": false
+        },
+        "normalClamps": 0,
+        "tangentClamps": 0,
+        "twistClamps": 0,
+        "oldC": 0.9417004502447641,
+        "currentC": 0.6862889533287794
+      },
+      {
+        "name": "component_normal",
+        "h": 0.03333333507180214,
+        "ratio": 2,
+        "guess": [
+          0.654000034108758,
+          0.654000034108758,
+          0.654000034108758,
+          0.654000034108758,
+          0,
+          0,
+          0
+        ],
+        "reference": {
+          "Impulses": [
+            0.6540000338623039,
+            0.6540000338623022,
+            0.654000033862304,
+            0.6540000338623022,
+            -1.484957174981313e-16,
+            -4.8227249886548556e-17,
+            0
+          ],
+          "Velocity": {
+            "Linear": {
+              "X": -6.0284062358185696e-18,
+              "Y": -1.2322742826142985e-10,
+              "Z": 1.856196468726641e-17
+            },
+            "Angular": {
+              "X": -3.712392937453282e-17,
+              "Y": 0,
+              "Z": 4.3454338759620686e-17
+            }
+          },
+          "Residual": 6.201630344688711e-17,
+          "Admissible": true
+        },
+        "error": {
+          "impulse": 1.970867913314578e-12,
+          "linear": 5.556856892876483e-13,
+          "angular": 9.962518787867791e-13,
+          "pass": true
+        },
+        "rawError": {
+          "impulse": 0.0026145242981137073,
+          "linear": 0.0007372837561445855,
+          "angular": 0.0013217850682729676,
+          "pass": false
+        },
+        "normalClamps": 0,
+        "tangentClamps": 0,
+        "twistClamps": 0,
+        "oldC": 0.9417004502447641,
+        "currentC": 0.9811480083297867
+      },
+      {
+        "name": "component_normal",
+        "h": 0.0078125,
+        "ratio": 0.4687499755527837,
+        "guess": [
+          0.15328125,
+          0.15328125,
+          0.15328125,
+          0.15328125,
+          0,
+          0,
+          0
+        ],
+        "reference": {
+          "Impulses": [
+            0.15328124953236066,
+            0.15328124953236066,
+            0.15328124953236064,
+            0.15328124953236066,
+            -1.1312216250637379e-17,
+            -1.9485432478197382e-17,
+            0
+          ],
+          "Velocity": {
+            "Linear": {
+              "X": -2.4356790597746728e-18,
+              "Y": -2.338196754270161e-10,
+              "Z": 1.4140270313296723e-18
+            },
+            "Angular": {
+              "X": 4.110839841247884e-18,
+              "Y": 0,
+              "Z": -1.8749145927363802e-17
+            }
+          },
+          "Residual": 3.121290670384859e-17,
+          "Admissible": true
+        },
+        "error": {
+          "impulse": 5.5846438584694624e-12,
+          "linear": 1.8016401234308837e-12,
+          "angular": 3.321780522773792e-12,
+          "pass": true
+        },
+        "rawError": {
+          "impulse": 0.0020745440368090673,
+          "linear": 0.0006692706693905815,
+          "angular": 0.0012339812014713796,
+          "pass": false
+        },
+        "normalClamps": 0,
+        "tangentClamps": 0,
+        "twistClamps": 0,
+        "oldC": 0.9417004502447641,
+        "currentC": 0.836437139773597
+      },
+      {
+        "name": "component_tangent",
+        "h": 0.01666666753590107,
+        "ratio": 1,
+        "guess": [
+          0.327000017054379,
+          0.327000017054379,
+          0.327000017054379,
+          0.327000017054379,
+          0.08175000426359474,
+          0.04087500213179737,
+          0
+        ],
+        "reference": {
+          "Impulses": [
+            0.3270000166806034,
+            0.32700001668060297,
+            0.3270000166806034,
+            0.3270000166806029,
+            0.08175000426359473,
+            0.04087500213179737,
+            0
+          ],
+          "Velocity": {
+            "Linear": {
+              "X": 0,
+              "Y": -1.8688790098808639e-10,
+              "Z": 1.734723475976807e-18
+            },
+            "Angular": {
+              "X": -3.469446951953614e-18,
+              "Y": 0,
+              "Z": 2.0816681711721685e-17
+            }
+          },
+          "Residual": 6.765421556309548e-17,
+          "Admissible": true
+        },
+        "error": {
+          "impulse": 6.525668894141745e-12,
+          "linear": 1.9010529231119557e-12,
+          "angular": 3.4343462007688398e-12,
+          "pass": true
+        },
+        "rawError": {
+          "impulse": 6.525668894141745e-12,
+          "linear": 1.9010529231119557e-12,
+          "angular": 3.4343462007688398e-12,
+          "pass": true
+        },
+        "normalClamps": 0,
+        "tangentClamps": 0,
+        "twistClamps": 0,
+        "oldC": 0.9417004502447641,
+        "currentC": 0.9417004502447641
+      },
+      {
+        "name": "component_tangent",
+        "h": 0.008333333767950535,
+        "ratio": 0.5,
+        "guess": [
+          0.1635000085271895,
+          0.1635000085271895,
+          0.1635000085271895,
+          0.1635000085271895,
+          0.04087500213179737,
+          0.020437501065898686,
+          0
+        ],
+        "reference": {
+          "Impulses": [
+            0.1635000080631163,
+            0.1635000080631163,
+            0.16350000806311624,
+            0.16350000806311626,
+            0.04087500213179732,
+            0.020437501065898648,
+            0
+          ],
+          "Velocity": {
+            "Linear": {
+              "X": -4.7704895589362195e-18,
+              "Y": -2.3203661561610467e-10,
+              "Z": 6.938893903907228e-18
+            },
+            "Angular": {
+              "X": 1.3877787807814457e-17,
+              "Y": 0,
+              "Z": -2.688821387764051e-17
+            }
+          },
+          "Residual": 4.423544863740858e-17,
+          "Admissible": true
+        },
+        "error": {
+          "impulse": 6.150968623330755e-12,
+          "linear": 1.9584330909333686e-12,
+          "angular": 3.6023637578985196e-12,
+          "pass": true
+        },
+        "rawError": {
+          "impulse": 0.0020786729454409514,
+          "linear": 0.0006591978439795303,
+          "angular": 0.0012116567641651608,
+          "pass": false
+        },
+        "normalClamps": 0,
+        "tangentClamps": 0,
+        "twistClamps": 0,
+        "oldC": 0.9417004502447641,
+        "currentC": 0.8486910458056718
+      },
+      {
+        "name": "component_tangent",
+        "h": 0.004166666883975267,
+        "ratio": 0.25,
+        "guess": [
+          0.08175000426359474,
+          0.08175000426359474,
+          0.08175000426359474,
+          0.08175000426359474,
+          0.020437501065898686,
+          0.010218750532949343,
+          0
+        ],
+        "reference": {
+          "Impulses": [
+            0.08175000381627784,
+            0.08175000381627782,
+            0.0817500038162778,
+            0.08175000381627781,
+            0.020437501065898662,
+            0.010218750532949348,
+            0
+          ],
+          "Velocity": {
+            "Linear": {
+              "X": 6.505213034913027e-19,
+              "Y": -2.2365846154281943e-10,
+              "Z": 3.0357660829594124e-18
+            },
+            "Angular": {
+              "X": 7.806255641895632e-18,
+              "Y": 0,
+              "Z": -1.431146867680866e-17
+            }
+          },
+          "Residual": 2.3418766925686896e-17,
+          "Admissible": true
+        },
+        "error": {
+          "impulse": 6.260547635861258e-13,
+          "linear": 2.592124861029552e-13,
+          "angular": 4.942171646243959e-13,
+          "pass": true
+        },
+        "rawError": {
+          "impulse": 0.0002925289296367706,
+          "linear": 0.00012242545157589084,
+          "angular": 0.0002336742205659044,
+          "pass": false
+        },
+        "normalClamps": 0,
+        "tangentClamps": 0,
+        "twistClamps": 0,
+        "oldC": 0.9417004502447641,
+        "currentC": 0.6862889533287794
+      },
+      {
+        "name": "component_tangent",
+        "h": 0.03333333507180214,
+        "ratio": 2,
+        "guess": [
+          0.654000034108758,
+          0.654000034108758,
+          0.654000034108758,
+          0.654000034108758,
+          0.1635000085271895,
+          0.08175000426359474,
+          0
+        ],
+        "reference": {
+          "Impulses": [
+            0.6540000338623048,
+            0.6540000338623012,
+            0.6540000338623048,
+            0.6540000338623011,
+            0.16350000852718927,
+            0.08175000426359469,
+            0
+          ],
+          "Velocity": {
+            "Linear": {
+              "X": -6.938893903907228e-18,
+              "Y": -1.2322746989479327e-10,
+              "Z": 2.7755575615628914e-17
+            },
+            "Angular": {
+              "X": 0,
+              "Y": 0,
+              "Z": 2.7755575615628914e-17
+            }
+          },
+          "Residual": 1.249000902703301e-16,
+          "Admissible": true
+        },
+        "error": {
+          "impulse": 1.9699797348948778e-12,
+          "linear": 5.55649306864253e-13,
+          "angular": 9.962324578115384e-13,
+          "pass": true
+        },
+        "rawError": {
+          "impulse": 0.002637216750310145,
+          "linear": 0.0007163145371251246,
+          "angular": 0.0012719056775681115,
+          "pass": false
+        },
+        "normalClamps": 0,
+        "tangentClamps": 0,
+        "twistClamps": 0,
+        "oldC": 0.9417004502447641,
+        "currentC": 0.9811480083297867
+      },
+      {
+        "name": "component_tangent",
+        "h": 0.0078125,
+        "ratio": 0.4687499755527837,
+        "guess": [
+          0.15328125,
+          0.15328125,
+          0.15328125,
+          0.15328125,
+          0.0383203125,
+          0.01916015625,
+          0
+        ],
+        "reference": {
+          "Impulses": [
+            0.1532812495323607,
+            0.15328124953236058,
+            0.1532812495323607,
+            0.15328124953236064,
+            0.03832031250000002,
+            0.019160156250000004,
+            0
+          ],
+          "Velocity": {
+            "Linear": {
+              "X": 4.336808689942018e-19,
+              "Y": -2.3381968583535695e-10,
+              "Z": -2.6020852139652106e-18
+            },
+            "Angular": {
+              "X": -1.0408340855860843e-17,
+              "Y": 0,
+              "Z": -2.7755575615628914e-17
+            }
+          },
+          "Residual": 3.642919299551295e-17,
+          "Admissible": true
+        },
+        "error": {
+          "impulse": 5.5846438584694624e-12,
+          "linear": 1.8016337664585536e-12,
+          "angular": 3.3217711219398673e-12,
+          "pass": true
+        },
+        "rawError": {
+          "impulse": 0.0019802871888807694,
+          "linear": 0.0006365181603755723,
+          "angular": 0.0011728279454160167,
+          "pass": false
+        },
+        "normalClamps": 0,
+        "tangentClamps": 0,
+        "twistClamps": 0,
+        "oldC": 0.9417004502447641,
+        "currentC": 0.836437139773597
+      },
+      {
+        "name": "component_twist",
+        "h": 0.01666666753590107,
+        "ratio": 1,
+        "guess": [
+          0.327000017054379,
+          0.327000017054379,
+          0.327000017054379,
+          0.327000017054379,
+          0,
+          0,
+          0.09139928334714775
+        ],
+        "reference": {
+          "Impulses": [
+            0.3270000166806032,
+            0.32700001668060313,
+            0.3270000166806032,
+            0.3270000166806031,
+            -2.5581826466586102e-17,
+            4.7494648525569064e-17,
+            0.09139928334714775
+          ],
+          "Velocity": {
+            "Linear": {
+              "X": 5.936831065696133e-18,
+              "Y": -1.868879079269803e-10,
+              "Z": 3.1977283083232628e-18
+            },
+            "Angular": {
+              "X": 2.1360118998982387e-17,
+              "Y": 0,
+              "Z": 3.962923774702118e-17
+            }
+          },
+          "Residual": 6.418708505432684e-17,
+          "Admissible": true
+        },
+        "error": {
+          "impulse": 6.52544684953682e-12,
+          "linear": 1.9010254739259296e-12,
+          "angular": 3.4343331461852835e-12,
+          "pass": true
+        },
+        "rawError": {
+          "impulse": 6.52544684953682e-12,
+          "linear": 1.9010254739259296e-12,
+          "angular": 3.4343331461852835e-12,
+          "pass": true
+        },
+        "normalClamps": 0,
+        "tangentClamps": 0,
+        "twistClamps": 0,
+        "oldC": 0.9417004502447641,
+        "currentC": 0.9417004502447641
+      },
+      {
+        "name": "component_twist",
+        "h": 0.008333333767950535,
+        "ratio": 0.5,
+        "guess": [
+          0.1635000085271895,
+          0.1635000085271895,
+          0.1635000085271895,
+          0.1635000085271895,
+          0,
+          0,
+          0.045699641673573876
+        ],
+        "reference": {
+          "Impulses": [
+            0.16350000806311632,
+            0.1635000080631162,
+            0.16350000806311632,
+            0.1635000080631162,
+            0,
+            0,
+            0.045699641673573876
+          ],
+          "Velocity": {
+            "Linear": {
+              "X": 0,
+              "Y": -2.3203661214665772e-10,
+              "Z": 0
+            },
+            "Angular": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            }
+          },
+          "Residual": 2.7755575615628914e-17,
+          "Admissible": true
+        },
+        "error": {
+          "impulse": 6.151079645633217e-12,
+          "linear": 1.9584324626198252e-12,
+          "angular": 3.602376421605089e-12,
+          "pass": true
+        },
+        "rawError": {
+          "impulse": 0.0021671494005313097,
+          "linear": 0.0006899886979037374,
+          "angular": 0.0012691745664705218,
+          "pass": false
+        },
+        "normalClamps": 0,
+        "tangentClamps": 0,
+        "twistClamps": 0,
+        "oldC": 0.9417004502447641,
+        "currentC": 0.8486910458056718
+      },
+      {
+        "name": "component_twist",
+        "h": 0.004166666883975267,
+        "ratio": 0.25,
+        "guess": [
+          0.08175000426359474,
+          0.08175000426359474,
+          0.08175000426359474,
+          0.08175000426359474,
+          0,
+          0,
+          0.022849820836786938
+        ],
+        "reference": {
+          "Impulses": [
+            0.08175000381627782,
+            0.08175000381627784,
+            0.08175000381627781,
+            0.08175000381627782,
+            -9.86504702303531e-18,
+            6.053121913338123e-18,
+            0.022849820836786938
+          ],
+          "Velocity": {
+            "Linear": {
+              "X": 7.566402391672653e-19,
+              "Y": -2.2365845807337248e-10,
+              "Z": 1.2331308778794137e-18
+            },
+            "Angular": {
+              "X": 7.942079100102014e-18,
+              "Y": 0,
+              "Z": 1.5132804783345307e-18
+            }
+          },
+          "Residual": 7.661929499646898e-18,
+          "Admissible": true
+        },
+        "error": {
+          "impulse": 6.26110274737357e-13,
+          "linear": 2.592120847438109e-13,
+          "angular": 4.942333756328126e-13,
+          "pass": true
+        },
+        "rawError": {
+          "impulse": 0.0003432696450688111,
+          "linear": 0.00014211841781938174,
+          "angular": 0.0002709722322625209,
+          "pass": false
+        },
+        "normalClamps": 0,
+        "tangentClamps": 0,
+        "twistClamps": 0,
+        "oldC": 0.9417004502447641,
+        "currentC": 0.6862889533287794
+      },
+      {
+        "name": "component_twist",
+        "h": 0.03333333507180214,
+        "ratio": 2,
+        "guess": [
+          0.654000034108758,
+          0.654000034108758,
+          0.654000034108758,
+          0.654000034108758,
+          0,
+          0,
+          0.1827985666942955
+        ],
+        "reference": {
+          "Impulses": [
+            0.6540000338623039,
+            0.6540000338623022,
+            0.654000033862304,
+            0.6540000338623022,
+            -1.484957174981313e-16,
+            -4.8227249886548556e-17,
+            0.1827985666942955
+          ],
+          "Velocity": {
+            "Linear": {
+              "X": -6.0284062358185696e-18,
+              "Y": -1.2322742826142985e-10,
+              "Z": 1.856196468726641e-17
+            },
+            "Angular": {
+              "X": -3.712392937453282e-17,
+              "Y": 0,
+              "Z": 4.3454338759620686e-17
+            }
+          },
+          "Residual": 6.201630344688711e-17,
+          "Admissible": true
+        },
+        "error": {
+          "impulse": 1.970867913314578e-12,
+          "linear": 5.556856892876483e-13,
+          "angular": 9.962518787867791e-13,
+          "pass": true
+        },
+        "rawError": {
+          "impulse": 0.0026145242981137073,
+          "linear": 0.0007372837561445855,
+          "angular": 0.0013217850682729676,
+          "pass": false
+        },
+        "normalClamps": 0,
+        "tangentClamps": 0,
+        "twistClamps": 0,
+        "oldC": 0.9417004502447641,
+        "currentC": 0.9811480083297867
+      },
+      {
+        "name": "component_twist",
+        "h": 0.0078125,
+        "ratio": 0.4687499755527837,
+        "guess": [
+          0.15328125,
+          0.15328125,
+          0.15328125,
+          0.15328125,
+          0,
+          0,
+          0.04284341183451746
+        ],
+        "reference": {
+          "Impulses": [
+            0.15328124953236066,
+            0.15328124953236066,
+            0.15328124953236064,
+            0.15328124953236066,
+            -1.1312216250637379e-17,
+            -1.9485432478197382e-17,
+            0.04284341183451746
+          ],
+          "Velocity": {
+            "Linear": {
+              "X": -2.4356790597746728e-18,
+              "Y": -2.338196754270161e-10,
+              "Z": 1.4140270313296723e-18
+            },
+            "Angular": {
+              "X": 4.110839841247884e-18,
+              "Y": 0,
+              "Z": -1.8749145927363802e-17
+            }
+          },
+          "Residual": 3.121290670384859e-17,
+          "Admissible": true
+        },
+        "error": {
+          "impulse": 5.5846438584694624e-12,
+          "linear": 1.8016401234308837e-12,
+          "angular": 3.321780522773792e-12,
+          "pass": true
+        },
+        "rawError": {
+          "impulse": 0.0020745440368090673,
+          "linear": 0.0006692706693905815,
+          "angular": 0.0012339812014713796,
+          "pass": false
+        },
+        "normalClamps": 0,
+        "tangentClamps": 0,
+        "twistClamps": 0,
+        "oldC": 0.9417004502447641,
+        "currentC": 0.836437139773597
+      },
+      {
+        "name": "unloaded_soft_counterexample",
+        "physicalRatio": 1.2976854437948657,
+        "durationRatio": 0.5,
+        "admission": "refused by zero compressive drive; predictor is not universal physical conversion"
+      }
+    ],
+    "runtime": ".NET 10.0.12",
+    "sweeps": 8,
+    "bar": 0.0001,
+    "operatorQualified": false,
+    "canonicalMutations": 0
+  },
+  "interior": {
+    "decisive": [
+      {
+        "name": "actual_seed",
+        "worlds": 1,
+        "preparationSteps": 120,
+        "oldDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -6
+        },
+        "oldSolverBits": "4580461061261492224",
+        "features": {
+          "A": -4,
+          "B": -21,
+          "C": -5,
+          "D": -20
+        },
+        "source": {
+          "Linear": {
+            "X": -1.0169570741069833e-10,
+            "Y": 1.266525941900909e-7,
+            "Z": 7.511074429089604e-9
+          },
+          "Angular": {
+            "X": 1.503461355412128e-8,
+            "Y": 3.675332775104734e-20,
+            "Z": 2.035601687211397e-10
+          }
+        },
+        "initial": [
+          0.3273193836212158,
+          0.3273193836212158,
+          0.32731935381889343,
+          0.32731935381889343,
+          -5.777245348781435e-10,
+          -1.1464568183683355e-10,
+          7.350670073853443e-20
+        ],
+        "powered": {
+          "Significand": 1,
+          "Exponent": -7
+        },
+        "coast": {
+          "Significand": 1.133248,
+          "Exponent": -7
+        }
+      },
+      {
+        "name": "original_owned_powered_piece_admission",
+        "admission": "Ready",
+        "piece": 1,
+        "previousKind": "Preparation",
+        "previousDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -6
+        },
+        "currentDuration": {
+          "Significand": 1,
+          "Exponent": -7
+        },
+        "exactDurationPositive": true,
+        "identity": {
+          "World": 1,
+          "Body": 0,
+          "BodyGeneration": 1,
+          "Constraint": 0,
+          "ManifoldGeneration": 1
+        },
+        "features": {
+          "A": -4,
+          "B": -21,
+          "C": -5,
+          "D": -20
+        },
+        "load": {
+          "Gravity": {
+            "X": 0,
+            "Y": -9.81,
+            "Z": 0
+          },
+          "Force": {
+            "X": 0,
+            "Y": 32,
+            "Z": 0
+          },
+          "Torque": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          }
+        },
+        "acceptedTupleUnchanged": true
+      },
+      {
+        "name": "original_owned_powered_piece",
+        "mass": 8.00390625,
+        "h": 0.0078125,
+        "load": {
+          "Gravity": {
+            "X": 0,
+            "Y": -9.81,
+            "Z": 0
+          },
+          "Force": {
+            "X": 0,
+            "Y": 32,
+            "Z": 0
+          },
+          "Torque": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          }
+        },
+        "previousDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -6
+        },
+        "currentDuration": {
+          "Significand": 1,
+          "Exponent": -7
+        },
+        "source": {
+          "Linear": {
+            "X": -1.0169570741069833e-10,
+            "Y": 1.266525941900909e-7,
+            "Z": 7.511074429089604e-9
+          },
+          "Angular": {
+            "X": 1.503461355412128e-8,
+            "Y": 3.675332775104734e-20,
+            "Z": 2.035601687211397e-10
+          }
+        },
+        "guess": [
+          0.10511019632724276,
+          0.10511019632724276,
+          0.10511018235740487,
+          0.10511018235740487,
+          -2.7080836160037306e-10,
+          -5.3740160558247945e-11,
+          3.44562641741538e-20
+        ],
+        "initialError": [
+          0.0000606456406417738,
+          0.00006060289856457679,
+          0.00006058581980450395,
+          0.00006063477972585718,
+          -4.616241401347847e-8,
+          -6.273101086573984e-9,
+          3.5404369714491056e-19
+        ],
+        "common": {
+          "Shift": {
+            "Mantissa": -1.54626421578094,
+            "Exponent": -5
+          },
+          "SumResponse": 1.9990239141044412,
+          "DiagonalResponse": 2.9997559785261103,
+          "ProjectedAcceleration": 15.99219131283553
+        },
+        "solved": {
+          "Impulses": [
+            0.10504676424375983,
+            0.10504872380017406,
+            0.10505176230355139,
+            0.10505026063039369,
+            0.0000017310663727755002,
+            -4.579949523737266e-7,
+            1.592006543710134e-17
+          ],
+          "Velocity": {
+            "Linear": {
+              "X": -5.732312460329846e-8,
+              "Y": 0.0070933048787225495,
+              "Z": -2.0876294161971816e-7
+            },
+            "Angular": {
+              "X": -4.178722915987736e-7,
+              "Y": -8.034676655604588e-18,
+              "Z": 1.1474136766580518e-7
+            }
+          },
+          "NormalClamps": 0,
+          "TangentClamps": 0,
+          "TwistClamps": 0
+        },
+        "reference": {
+          "Impulses": [
+            0.10504955068660099,
+            0.10504959342867819,
+            0.10504959653760036,
+            0.10504954757767901,
+            4.58916056518781e-8,
+            6.219360926015735e-9,
+            -3.1958743297075674e-19
+          ],
+          "Velocity": {
+            "Linear": {
+              "X": 6.753449939363141e-10,
+              "Y": 0.007093401987890916,
+              "Z": 1.7810995699257741e-9
+            },
+            "Angular": {
+              "X": 3.5651545883759142e-9,
+              "Y": 9.465950580625806e-20,
+              "Z": -1.3518106115160706e-9
+            }
+          },
+          "Residual": 1.9945269477068763e-17,
+          "Admissible": true
+        },
+        "error": {
+          "impulse": 7.772526796068213e-7,
+          "linear": 2.3900377891757947e-7,
+          "angular": 4.3713515883680234e-7,
+          "pass": true
+        },
+        "acceptedTupleUnchanged": true
+      },
+      {
+        "name": "original_owned_powered_piece_installed",
+        "piece": 1,
+        "kind": "Powered",
+        "duration": {
+          "Significand": 1,
+          "Exponent": -7
+        },
+        "exactDurationRetained": true,
+        "identity": {
+          "World": 1,
+          "Body": 0,
+          "BodyGeneration": 1,
+          "Constraint": 0,
+          "ManifoldGeneration": 1
+        },
+        "cache": {
+          "N0": {
+            "Mantissa": 1.6807482279001573,
+            "Exponent": -4
+          },
+          "N1": {
+            "Mantissa": 1.680779580802785,
+            "Exponent": -4
+          },
+          "N2": {
+            "Mantissa": 1.6808281968568222,
+            "Exponent": -4
+          },
+          "N3": {
+            "Mantissa": 1.680804170086299,
+            "Exponent": -4
+          },
+          "T0": {
+            "Mantissa": 1.8151546528994429,
+            "Exponent": -20
+          },
+          "T1": {
+            "Mantissa": -1.920970060720931,
+            "Exponent": -22
+          },
+          "Twist": {
+            "Mantissa": 1.1471616123238961,
+            "Exponent": -56
+          }
+        },
+        "endpoint": {
+          "Linear": {
+            "X": -5.732312402528805e-8,
+            "Y": 0.007093304768204689,
+            "Z": -2.087629411562375e-7
+          },
+          "Angular": {
+            "X": -4.1787228610701277e-7,
+            "Y": -8.034676604968475e-18,
+            "Z": 1.1474136840661231e-7
+          }
+        },
+        "position": "<-5.7012634E-10, 0.4996409, 7.562232E-09>",
+        "orientation": "{X:-1.5973015E-09 Y:3.3890425E-12 Z:4.5922702E-10 W:1}",
+        "invalidated": false
+      },
+      {
+        "name": "owned_coast_continuation_admission",
+        "admission": "UnsupportedSupport",
+        "piece": 2,
+        "previousKind": "Powered",
+        "previousDuration": {
+          "Significand": 1,
+          "Exponent": -7
+        },
+        "currentDuration": {
+          "Significand": 1.133248,
+          "Exponent": -7
+        },
+        "exactDurationPositive": true,
+        "identity": {
+          "World": 1,
+          "Body": 0,
+          "BodyGeneration": 1,
+          "Constraint": 0,
+          "ManifoldGeneration": 1
+        },
+        "features": {
+          "A": -4,
+          "B": -21,
+          "C": -5,
+          "D": -20
+        },
+        "load": {
+          "Gravity": {
+            "X": 0,
+            "Y": -9.81,
+            "Z": 0
+          },
+          "Force": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Torque": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          }
+        },
+        "acceptedTupleUnchanged": true
+      },
+      {
+        "name": "failure_linearization",
+        "acceptedPieces": 1,
+        "worldUnsafe": true,
+        "invalidated": true,
+        "lastAcceptedPiece": 1,
+        "lastAcceptedDuration": {
+          "Significand": 1,
+          "Exponent": -7
+        },
+        "acceptedCache": {
+          "N0": {
+            "Mantissa": 1.6807482279001573,
+            "Exponent": -4
+          },
+          "N1": {
+            "Mantissa": 1.680779580802785,
+            "Exponent": -4
+          },
+          "N2": {
+            "Mantissa": 1.6808281968568222,
+            "Exponent": -4
+          },
+          "N3": {
+            "Mantissa": 1.680804170086299,
+            "Exponent": -4
+          },
+          "T0": {
+            "Mantissa": 1.8151546528994429,
+            "Exponent": -20
+          },
+          "T1": {
+            "Mantissa": -1.920970060720931,
+            "Exponent": -22
+          },
+          "Twist": {
+            "Mantissa": 1.1471616123238961,
+            "Exponent": -56
+          }
+        },
+        "acceptedEndpoint": {
+          "Linear": {
+            "X": -5.732312402528805e-8,
+            "Y": 0.007093304768204689,
+            "Z": -2.087629411562375e-7
+          },
+          "Angular": {
+            "X": -4.1787228610701277e-7,
+            "Y": -8.034676604968475e-18,
+            "Z": 1.1474136840661231e-7
+          }
+        },
+        "lastInstallationPiece": 1,
+        "lastInstallationWritesAttempted": true,
+        "lastInstallationTransportVerified": true,
+        "canonicalMutations": 0
+      }
+    ],
+    "composition": [
+      {
+        "case": 1,
+        "name": "original_owned_powered_piece",
+        "h": 0.0078125,
+        "mass": 8.00390625,
+        "forceY": 32,
+        "previousDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -6
+        },
+        "currentDuration": {
+          "Significand": 1,
+          "Exponent": -7
+        },
+        "error": {
+          "impulse": 7.772526796068213e-7,
+          "linear": 2.3900377891757947e-7,
+          "angular": 4.3713515883680234e-7,
+          "pass": true
+        },
+        "referenceResidual": 1.9945269477068763e-17,
+        "referenceAdmissible": true,
+        "clamps": {
+          "normal": 0,
+          "tangent": 0,
+          "twist": 0
+        },
+        "common": {
+          "Shift": {
+            "Mantissa": -1.54626421578094,
+            "Exponent": -5
+          },
+          "SumResponse": 1.9990239141044412,
+          "DiagonalResponse": 2.9997559785261103,
+          "ProjectedAcceleration": 15.99219131283553
+        },
+        "acceptedTupleUnchanged": true
+      },
+      {
+        "case": 2,
+        "name": "owned_composition",
+        "h": 0.01666666753590107,
+        "mass": 8.00390625,
+        "forceY": 0,
+        "previousDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -6
+        },
+        "currentDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -6
+        },
+        "error": {
+          "impulse": 0.0000030528216232728056,
+          "linear": 7.747303964713257e-7,
+          "angular": 0.0000013497903980167703,
+          "pass": true
+        },
+        "referenceResidual": 7.731669262370093e-17,
+        "referenceAdmissible": true,
+        "clamps": {
+          "normal": 0,
+          "tangent": 0,
+          "twist": 0
+        },
+        "common": {
+          "Shift": {
+            "Mantissa": 0,
+            "Exponent": 0
+          },
+          "SumResponse": 0,
+          "DiagonalResponse": 0,
+          "ProjectedAcceleration": 0
+        },
+        "acceptedTupleUnchanged": true
+      },
+      {
+        "case": 3,
+        "name": "owned_composition",
+        "h": 0.01666666753590107,
+        "mass": 8.00390625,
+        "forceY": 16,
+        "previousDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -6
+        },
+        "currentDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -6
+        },
+        "error": {
+          "impulse": 0.0000030528216261593855,
+          "linear": 7.747304201561164e-7,
+          "angular": 0.0000013497904520263892,
+          "pass": true
+        },
+        "referenceResidual": 5.789483594809066e-17,
+        "referenceAdmissible": true,
+        "clamps": {
+          "normal": 0,
+          "tangent": 0,
+          "twist": 0
+        },
+        "common": {
+          "Shift": {
+            "Mantissa": -1.9519914945239463,
+            "Exponent": -5
+          },
+          "SumResponse": 1.9990239141044412,
+          "DiagonalResponse": 2.9997559785261103,
+          "ProjectedAcceleration": 7.996095656417765
+        },
+        "acceptedTupleUnchanged": true
+      },
+      {
+        "case": 4,
+        "name": "owned_composition",
+        "h": 0.01666666753590107,
+        "mass": 8.00390625,
+        "forceY": 32,
+        "previousDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -6
+        },
+        "currentDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -6
+        },
+        "error": {
+          "impulse": 0.000003052821628601876,
+          "linear": 7.74730443829361e-7,
+          "angular": 0.0000013497905061662754,
+          "pass": true
+        },
+        "referenceResidual": 5.603463351588778e-17,
+        "referenceAdmissible": true,
+        "clamps": {
+          "normal": 0,
+          "tangent": 0,
+          "twist": 0
+        },
+        "common": {
+          "Shift": {
+            "Mantissa": -1.9519914945239463,
+            "Exponent": -4
+          },
+          "SumResponse": 1.9990239141044412,
+          "DiagonalResponse": 2.9997559785261103,
+          "ProjectedAcceleration": 15.99219131283553
+        },
+        "acceptedTupleUnchanged": true
+      },
+      {
+        "case": 5,
+        "name": "owned_composition",
+        "h": 0.01666666753590107,
+        "mass": 8.00390625,
+        "forceY": 64,
+        "previousDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -6
+        },
+        "currentDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -6
+        },
+        "error": {
+          "impulse": 0.0000030528216343195247,
+          "linear": 7.747304912061694e-7,
+          "angular": 0.0000013497906143186619,
+          "pass": true
+        },
+        "referenceResidual": 2.3663414897631345e-17,
+        "referenceAdmissible": true,
+        "clamps": {
+          "normal": 0,
+          "tangent": 0,
+          "twist": 0
+        },
+        "common": {
+          "Shift": {
+            "Mantissa": -1.9519914945239463,
+            "Exponent": -3
+          },
+          "SumResponse": 1.9990239141044412,
+          "DiagonalResponse": 2.9997559785261103,
+          "ProjectedAcceleration": 31.98438262567106
+        },
+        "acceptedTupleUnchanged": true
+      },
+      {
+        "case": 6,
+        "name": "owned_composition",
+        "h": 0.008333333767950535,
+        "mass": 8.00390625,
+        "forceY": 0,
+        "previousDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -6
+        },
+        "currentDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -7
+        },
+        "error": {
+          "impulse": 9.475359832311625e-7,
+          "linear": 2.8293462661006596e-7,
+          "angular": 5.143804399004443e-7,
+          "pass": true
+        },
+        "referenceResidual": 5.293224403164666e-17,
+        "referenceAdmissible": true,
+        "clamps": {
+          "normal": 0,
+          "tangent": 0,
+          "twist": 0
+        },
+        "common": {
+          "Shift": {
+            "Mantissa": 0,
+            "Exponent": 0
+          },
+          "SumResponse": 0,
+          "DiagonalResponse": 0,
+          "ProjectedAcceleration": 0
+        },
+        "acceptedTupleUnchanged": true
+      },
+      {
+        "case": 7,
+        "name": "owned_composition",
+        "h": 0.008333333767950535,
+        "mass": 8.00390625,
+        "forceY": 16,
+        "previousDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -6
+        },
+        "currentDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -7
+        },
+        "error": {
+          "impulse": 9.475359639132819e-7,
+          "linear": 2.829346276730467e-7,
+          "angular": 5.143804445257701e-7,
+          "pass": true
+        },
+        "referenceResidual": 4.7304162978527206e-17,
+        "referenceAdmissible": true,
+        "clamps": {
+          "normal": 0,
+          "tangent": 0,
+          "twist": 0
+        },
+        "common": {
+          "Shift": {
+            "Mantissa": -1.6830549193840474,
+            "Exponent": -6
+          },
+          "SumResponse": 1.9990239141044412,
+          "DiagonalResponse": 2.9997559785261103,
+          "ProjectedAcceleration": 7.996095656417765
+        },
+        "acceptedTupleUnchanged": true
+      },
+      {
+        "case": 8,
+        "name": "owned_composition",
+        "h": 0.008333333767950535,
+        "mass": 8.00390625,
+        "forceY": 32,
+        "previousDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -6
+        },
+        "currentDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -7
+        },
+        "error": {
+          "impulse": 9.475359447619347e-7,
+          "linear": 2.8293462873957757e-7,
+          "angular": 5.143804490706991e-7,
+          "pass": true
+        },
+        "referenceResidual": 8.98058121007032e-18,
+        "referenceAdmissible": true,
+        "clamps": {
+          "normal": 0,
+          "tangent": 0,
+          "twist": 0
+        },
+        "common": {
+          "Shift": {
+            "Mantissa": -1.6830549193840474,
+            "Exponent": -5
+          },
+          "SumResponse": 1.9990239141044412,
+          "DiagonalResponse": 2.9997559785261103,
+          "ProjectedAcceleration": 15.99219131283553
+        },
+        "acceptedTupleUnchanged": true
+      },
+      {
+        "case": 9,
+        "name": "owned_composition",
+        "h": 0.008333333767950535,
+        "mass": 8.00390625,
+        "forceY": 64,
+        "previousDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -6
+        },
+        "currentDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -7
+        },
+        "error": {
+          "impulse": 9.475359060706623e-7,
+          "linear": 2.829346308630453e-7,
+          "angular": 5.14380458193716e-7,
+          "pass": true
+        },
+        "referenceResidual": 1.2504165685549458e-17,
+        "referenceAdmissible": true,
+        "clamps": {
+          "normal": 0,
+          "tangent": 0,
+          "twist": 0
+        },
+        "common": {
+          "Shift": {
+            "Mantissa": -1.6830549193840474,
+            "Exponent": -4
+          },
+          "SumResponse": 1.9990239141044412,
+          "DiagonalResponse": 2.9997559785261103,
+          "ProjectedAcceleration": 31.98438262567106
+        },
+        "acceptedTupleUnchanged": true
+      },
+      {
+        "case": 10,
+        "name": "owned_composition",
+        "h": 0.004166666883975267,
+        "mass": 8.00390625,
+        "forceY": 0,
+        "previousDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -6
+        },
+        "currentDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -8
+        },
+        "error": {
+          "impulse": 1.3972623946756357e-8,
+          "linear": 2.0387434321056968e-8,
+          "angular": 4.0658816862308546e-8,
+          "pass": true
+        },
+        "referenceResidual": 1.3768129094393761e-17,
+        "referenceAdmissible": true,
+        "clamps": {
+          "normal": 0,
+          "tangent": 0,
+          "twist": 0
+        },
+        "common": {
+          "Shift": {
+            "Mantissa": 0,
+            "Exponent": 0
+          },
+          "SumResponse": 0,
+          "DiagonalResponse": 0,
+          "ProjectedAcceleration": 0
+        },
+        "acceptedTupleUnchanged": true
+      },
+      {
+        "case": 11,
+        "name": "owned_composition",
+        "h": 0.004166666883975267,
+        "mass": 8.00390625,
+        "forceY": 16,
+        "previousDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -6
+        },
+        "currentDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -8
+        },
+        "error": {
+          "impulse": 1.3972619949953469e-8,
+          "linear": 2.0387433998428703e-8,
+          "angular": 4.065881630973904e-8,
+          "pass": true
+        },
+        "referenceResidual": 2.568759616690067e-17,
+        "referenceAdmissible": true,
+        "clamps": {
+          "normal": 0,
+          "tangent": 0,
+          "twist": 0
+        },
+        "common": {
+          "Shift": {
+            "Mantissa": -1.2653618912016722,
+            "Exponent": -7
+          },
+          "SumResponse": 1.9990239141044412,
+          "DiagonalResponse": 2.9997559785261103,
+          "ProjectedAcceleration": 7.996095656417765
+        },
+        "acceptedTupleUnchanged": true
+      },
+      {
+        "case": 12,
+        "name": "owned_composition",
+        "h": 0.004166666883975267,
+        "mass": 8.00390625,
+        "forceY": 32,
+        "previousDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -6
+        },
+        "currentDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -8
+        },
+        "error": {
+          "impulse": 1.397261595315058e-8,
+          "linear": 2.0387433675779093e-8,
+          "angular": 4.065881573665968e-8,
+          "pass": true
+        },
+        "referenceResidual": 3.0155033425972216e-17,
+        "referenceAdmissible": true,
+        "clamps": {
+          "normal": 0,
+          "tangent": 0,
+          "twist": 0
+        },
+        "common": {
+          "Shift": {
+            "Mantissa": -1.2653618912016722,
+            "Exponent": -6
+          },
+          "SumResponse": 1.9990239141044412,
+          "DiagonalResponse": 2.9997559785261103,
+          "ProjectedAcceleration": 15.99219131283553
+        },
+        "acceptedTupleUnchanged": true
+      },
+      {
+        "case": 13,
+        "name": "owned_composition",
+        "h": 0.004166666883975267,
+        "mass": 8.00390625,
+        "forceY": 64,
+        "previousDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -6
+        },
+        "currentDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -8
+        },
+        "error": {
+          "impulse": 1.3972607876278076e-8,
+          "linear": 2.0387433032547785e-8,
+          "angular": 4.065881462601114e-8,
+          "pass": true
+        },
+        "referenceResidual": 6.04303165791331e-18,
+        "referenceAdmissible": true,
+        "clamps": {
+          "normal": 0,
+          "tangent": 0,
+          "twist": 0
+        },
+        "common": {
+          "Shift": {
+            "Mantissa": -1.2653618912016722,
+            "Exponent": -5
+          },
+          "SumResponse": 1.9990239141044412,
+          "DiagonalResponse": 2.9997559785261103,
+          "ProjectedAcceleration": 31.98438262567106
+        },
+        "acceptedTupleUnchanged": true
+      },
+      {
+        "case": 14,
+        "name": "owned_composition",
+        "h": 0.0020833334419876337,
+        "mass": 8.00390625,
+        "forceY": 0,
+        "previousDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -6
+        },
+        "currentDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -9
+        },
+        "error": {
+          "impulse": 2.7503499200332016e-9,
+          "linear": 5.181383100498316e-10,
+          "angular": 7.762426427521817e-10,
+          "pass": true
+        },
+        "referenceResidual": 1.0888693736557124e-17,
+        "referenceAdmissible": true,
+        "clamps": {
+          "normal": 0,
+          "tangent": 0,
+          "twist": 0
+        },
+        "common": {
+          "Shift": {
+            "Mantissa": 0,
+            "Exponent": 0
+          },
+          "SumResponse": 0,
+          "DiagonalResponse": 0,
+          "ProjectedAcceleration": 0
+        },
+        "acceptedTupleUnchanged": true
+      },
+      {
+        "case": 15,
+        "name": "owned_composition",
+        "h": 0.0020833334419876337,
+        "mass": 8.00390625,
+        "forceY": 16,
+        "previousDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -6
+        },
+        "currentDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -9
+        },
+        "error": {
+          "impulse": 2.7503499755443528e-9,
+          "linear": 5.181383143346672e-10,
+          "angular": 7.762426393880375e-10,
+          "pass": true
+        },
+        "referenceResidual": 1.8319057621798193e-17,
+        "referenceAdmissible": true,
+        "clamps": {
+          "normal": 0,
+          "tangent": 0,
+          "twist": 0
+        },
+        "common": {
+          "Shift": {
+            "Mantissa": -1.6428864512856172,
+            "Exponent": -9
+          },
+          "SumResponse": 1.9990239141044412,
+          "DiagonalResponse": 2.9997559785261103,
+          "ProjectedAcceleration": 7.996095656417765
+        },
+        "acceptedTupleUnchanged": true
+      },
+      {
+        "case": 16,
+        "name": "owned_composition",
+        "h": 0.0020833334419876337,
+        "mass": 8.00390625,
+        "forceY": 32,
+        "previousDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -6
+        },
+        "currentDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -9
+        },
+        "error": {
+          "impulse": 2.750350031055504e-9,
+          "linear": 5.181383140969054e-10,
+          "angular": 7.762426397277255e-10,
+          "pass": true
+        },
+        "referenceResidual": 1.9594726670285887e-17,
+        "referenceAdmissible": true,
+        "clamps": {
+          "normal": 0,
+          "tangent": 0,
+          "twist": 0
+        },
+        "common": {
+          "Shift": {
+            "Mantissa": -1.6428864512856172,
+            "Exponent": -8
+          },
+          "SumResponse": 1.9990239141044412,
+          "DiagonalResponse": 2.9997559785261103,
+          "ProjectedAcceleration": 15.99219131283553
+        },
+        "acceptedTupleUnchanged": true
+      },
+      {
+        "case": 17,
+        "name": "owned_composition",
+        "h": 0.0020833334419876337,
+        "mass": 8.00390625,
+        "forceY": 64,
+        "previousDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -6
+        },
+        "currentDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -9
+        },
+        "error": {
+          "impulse": 2.7503501559555943e-9,
+          "linear": 5.181383254325864e-10,
+          "angular": 7.762426322597909e-10,
+          "pass": true
+        },
+        "referenceResidual": 7.62237442570086e-18,
+        "referenceAdmissible": true,
+        "clamps": {
+          "normal": 0,
+          "tangent": 0,
+          "twist": 0
+        },
+        "common": {
+          "Shift": {
+            "Mantissa": -1.6428864512856172,
+            "Exponent": -7
+          },
+          "SumResponse": 1.9990239141044412,
+          "DiagonalResponse": 2.9997559785261103,
+          "ProjectedAcceleration": 31.98438262567106
+        },
+        "acceptedTupleUnchanged": true
+      },
+      {
+        "case": 18,
+        "name": "owned_composition",
+        "h": 0.0078125,
+        "mass": 8.00390625,
+        "forceY": 0,
+        "previousDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -6
+        },
+        "currentDuration": {
+          "Significand": 1,
+          "Exponent": -7
+        },
+        "error": {
+          "impulse": 7.772527165217369e-7,
+          "linear": 2.390037781578439e-7,
+          "angular": 4.3713515305548145e-7,
+          "pass": true
+        },
+        "referenceResidual": 2.1690457408179825e-17,
+        "referenceAdmissible": true,
+        "clamps": {
+          "normal": 0,
+          "tangent": 0,
+          "twist": 0
+        },
+        "common": {
+          "Shift": {
+            "Mantissa": 0,
+            "Exponent": 0
+          },
+          "SumResponse": 0,
+          "DiagonalResponse": 0,
+          "ProjectedAcceleration": 0
+        },
+        "acceptedTupleUnchanged": true
+      },
+      {
+        "case": 19,
+        "name": "owned_composition",
+        "h": 0.0078125,
+        "mass": 8.00390625,
+        "forceY": 16,
+        "previousDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -6
+        },
+        "currentDuration": {
+          "Significand": 1,
+          "Exponent": -7
+        },
+        "error": {
+          "impulse": 7.77252698203057e-7,
+          "linear": 2.3900377854521753e-7,
+          "angular": 4.371351559415058e-7,
+          "pass": true
+        },
+        "referenceResidual": 1.5245504894481593e-17,
+        "referenceAdmissible": true,
+        "clamps": {
+          "normal": 0,
+          "tangent": 0,
+          "twist": 0
+        },
+        "common": {
+          "Shift": {
+            "Mantissa": -1.54626421578094,
+            "Exponent": -6
+          },
+          "SumResponse": 1.9990239141044412,
+          "DiagonalResponse": 2.9997559785261103,
+          "ProjectedAcceleration": 7.996095656417765
+        },
+        "acceptedTupleUnchanged": true
+      },
+      {
+        "case": 20,
+        "name": "owned_composition",
+        "h": 0.0078125,
+        "mass": 8.00390625,
+        "forceY": 64,
+        "previousDuration": {
+          "Significand": 1.0666667222976685,
+          "Exponent": -6
+        },
+        "currentDuration": {
+          "Significand": 1,
+          "Exponent": -7
+        },
+        "error": {
+          "impulse": 7.772526425808834e-7,
+          "linear": 2.3900377967316573e-7,
+          "angular": 4.371351645977012e-7,
+          "pass": true
+        },
+        "referenceResidual": 5.1191639715104906e-18,
+        "referenceAdmissible": true,
+        "clamps": {
+          "normal": 0,
+          "tangent": 0,
+          "twist": 0
+        },
+        "common": {
+          "Shift": {
+            "Mantissa": -1.54626421578094,
+            "Exponent": -4
+          },
+          "SumResponse": 1.9990239141044412,
+          "DiagonalResponse": 2.9997559785261103,
+          "ProjectedAcceleration": 31.98438262567106
+        },
+        "acceptedTupleUnchanged": true
+      }
+    ],
+    "all20Pass": true,
+    "maxErrors": {
+      "impulse": 0.0000030528216343195247,
+      "linear": 7.747304912061694e-7,
+      "angular": 0.0000013497906143186619
+    },
+    "specificFailedSupportPredicate": "UNKNOWN",
+    "coastSolveRan": false,
+    "coastResultInstalled": false,
+    "privateCollisionRefreshRan": true,
+    "acceptedTuplePreserved": true,
+    "canonicalMutations": 0
+  },
+  "unreached": [
+    "Release retained interior",
+    "complete tiny-event retained world",
+    "selector consistency",
+    "off-COM/asymmetric contact",
+    "long retained support",
+    "zero-constraint M15.0 comparison",
+    "complete retained determinism",
+    "warmed allocation and positive control",
+    "complete retained storage",
+    "formal Release timing"
+  ]
+}

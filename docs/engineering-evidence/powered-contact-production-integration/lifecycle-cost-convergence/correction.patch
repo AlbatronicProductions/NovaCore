@@ -1,0 +1,309 @@
+--- a/src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.PoweredFreeFlight.cs
++++ b/src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.PoweredFreeFlight.cs
+@@ -37,0 +38,3 @@
++        // Issued only by uninterrupted service after its full source admission. Never a public lease.
++        internal bool ReadyContactInterval;
++        internal long ReadyContactFrontier;
+@@ -59,0 +63,21 @@
++    }
++
++    internal bool OwnsReadyContactSource(LocalContactWorld world, PoweredFlightAuthority authority)
++        => authority is { Consumer: PoweredPhysicalConsumer.RetainedContact } && _clock.PublicationPhase.IsOwnedBy(this) &&
++            _poweredFlight is { ReadyContactInterval: true, Invalidated: false } p &&
++            ReferenceEquals(p.Authority, authority) && ReferenceEquals(p.Contact, world) &&
++            p.ReadyContactFrontier == p.Frontier;
++
++    private PoweredFlightStatus CheckPreparedPoweredSource(PoweredFlightAuthority authority)
++        => _poweredFlight?.Contact is { } world && OwnsReadyContactSource(world, authority)
++            ? PoweredFlightStatus.Ready : CheckPoweredSource(authority);
++
++    private bool PreparedContactSourceMass(PropellantResourceAuthority authority, out double mass)
++    {
++        mass = 0;
++        if (_poweredFlight is not { Contact: { } world } p || !ReferenceEquals(p.Authority.Resource, authority) ||
++            !OwnsReadyContactSource(world, p.Authority)) return false;
++        // Cold binding proves resource-to-mass equality; joint successor installation preserves it.
++        // Entry admits that exact acknowledged pair. Live engine/resource readers still recheck it.
++        mass = p.ExpectedPhysical.Properties.MassKilograms;
++        return true;
+@@ -199 +223 @@
+-        var status = CheckPoweredSource(authority); if (status != PoweredFlightStatus.Ready) return status;
++        var status = CheckPreparedPoweredSource(authority); if (status != PoweredFlightStatus.Ready) return status;
+@@ -239 +263 @@
+-        status = CheckPoweredSource(authority);
++        status = CheckPreparedPoweredSource(authority);
+@@ -259 +283 @@
+-        var status = CheckPoweredSource(authority); if (status != PoweredFlightStatus.Ready) return new(status);
++        var status = CheckPreparedPoweredSource(authority); if (status != PoweredFlightStatus.Ready) return new(status);
+@@ -291 +315 @@
+-        status = CheckPoweredSource(authority); if (status != PoweredFlightStatus.Ready) return new(status);
++        status = CheckPreparedPoweredSource(authority); if (status != PoweredFlightStatus.Ready) return new(status);
+@@ -296,0 +321,2 @@
++        // The old source proof expires before the first successor write, including terminal ack failure.
++        p.ReadyContactInterval = false;
+@@ -340,0 +367,6 @@
++                // The same owner remains held through ready preparation, solve and application.
++                // No callback in this path carries canonical authority. External APIs cannot inherit this proof.
++                p.ReadyContactFrontier = p.Frontier;
++                p.ReadyContactInterval = p.Contact is not null;
++                try
++                {
+@@ -361,0 +394,2 @@
++                }
++                finally { p.ReadyContactInterval = false; }
+--- a/src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Propellant.cs
++++ b/src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Propellant.cs
+@@ -37 +37 @@
+-    private bool PropellantMassMatches(PropellantResourceAuthority authority, out double total)
++    private bool PropellantMassMatches(PropellantResourceAuthority authority, out double total)
+@@ -47,2 +47,5 @@
+-            physical.Inertia == definition.Values.DryInertia;
+-    }
++            physical.Inertia == definition.Values.DryInertia;
++    }
++
++    private bool PropellantSourceMassInOwnedPhase(PropellantResourceAuthority authority, out double total)
++        => PreparedContactSourceMass(authority, out total) || PropellantMassMatches(authority, out total);
+@@ -124 +127 @@
+-        if (!PropellantMassMatches(authority, out var sourceMass)) return PropellantPreparationStatus.StaleSource;
++        if (!PropellantSourceMassInOwnedPhase(authority, out var sourceMass)) return PropellantPreparationStatus.StaleSource;
+@@ -141 +144 @@
+-            authority.Copy() != source || !PropellantMassMatches(authority, out var recheckedMass) ||
++            authority.Copy() != source || !PropellantSourceMassInOwnedPhase(authority, out var recheckedMass) ||
+@@ -167 +170 @@
+-            authority.Copy() != p.Preview.Resource || !PropellantMassMatches(authority, out _))
++            authority.Copy() != p.Preview.Resource || !PropellantSourceMassInOwnedPhase(authority, out _))
+--- a/src/NovaCore.Simulation/Spacecraft/Actuation/OrdinaryContactInputProjection.cs
++++ b/src/NovaCore.Simulation/Spacecraft/Actuation/OrdinaryContactInputProjection.cs
+@@ -9,0 +10,32 @@
++
++/// <summary>Cold schedule-invariant numerical facts. Not a source, proposal or step capability.</summary>
++internal readonly struct OrdinaryContactProjectionSchedule
++{
++    private readonly PoweredBinaryScale shortDuration, longDuration, zeroDuty;
++    private OrdinaryContactProjectionSchedule(PoweredBinaryScale shortDuration, PoweredBinaryScale longDuration,
++        PoweredBinaryScale zeroDuty)
++    { this.shortDuration = shortDuration; this.longDuration = longDuration; this.zeroDuty = zeroDuty; }
++
++    internal static bool TryPrepare(out OrdinaryContactProjectionSchedule result)
++    {
++        result = default;
++        var one = PropellantInteger.FromUInt64(1);
++        if (!PoweredFlightNumerics.TryRatio(PropellantInteger.FromUInt64(16666), one, PropellantInteger.TicksPerSecond, out var shorter) ||
++            !PoweredFlightNumerics.TryRatio(PropellantInteger.FromUInt64(16667), one, PropellantInteger.TicksPerSecond, out var longer) ||
++            !PoweredFlightNumerics.TryRatio(default, one, 1, out var zero)) return false;
++        result = new(shorter, longer, zero); return true;
++    }
++
++    internal bool TryMap(in PropellantDuration powered, uint ticks, Double3 forceLocal, Double3 momentLocal,
++        double sourceMass, double sphericalDryInertia, Double3 gravityLocal, out OrdinaryContactInput input)
++    {
++        input = default;
++        if (ticks is not (16666 or 16667) ||
++            !OrdinaryContactInputProjection.Validate(powered, ticks, 1, forceLocal, momentLocal, sourceMass,
++                sphericalDryInertia, gravityLocal, out var numerator)) return false;
++        var duty = zeroDuty;
++        if (!numerator.IsZero && !PoweredFlightNumerics.TryRatio(numerator, powered.Denominator, ticks, out duty)) return false;
++        return OrdinaryContactInputProjection.Finish(duty, ticks == 16666 ? shortDuration : longDuration,
++            forceLocal, momentLocal, sourceMass, sphericalDryInertia, gravityLocal, out input);
++    }
++}
+@@ -21 +53,15 @@
+-        if (ordinaryTickNumerator == 0 || ordinaryTickDenominator == 0 ||
++        if (!Validate(powered, ordinaryTickNumerator, ordinaryTickDenominator, forceLocal, momentLocal,
++            sourceMass, sphericalDryInertia, gravityLocal, out var numerator) ||
++            !PoweredFlightNumerics.TryRatio(numerator, powered.Denominator, ordinaryTickNumerator, out var duty)) return false;
++        var hn = PropellantInteger.FromUInt64(ordinaryTickNumerator);
++        var hd = PropellantInteger.FromUInt64(ordinaryTickDenominator);
++        if (!PoweredFlightNumerics.TryRatio(hn, hd, PropellantInteger.TicksPerSecond, out var duration)) return false;
++        return Finish(duty, duration, forceLocal, momentLocal, sourceMass, sphericalDryInertia, gravityLocal, out input);
++    }
++
++    internal static bool Validate(in PropellantDuration powered, uint ordinaryTickNumerator, uint ordinaryTickDenominator,
++        Double3 forceLocal, Double3 momentLocal, double sourceMass, double sphericalDryInertia, Double3 gravityLocal,
++        out PropellantInteger numerator)
++    {
++        numerator = default;
++        return !(ordinaryTickNumerator == 0 || ordinaryTickDenominator == 0 || powered.Denominator.IsZero ||
+@@ -25 +71 @@
+-            !PropellantInteger.TryMultiply(powered.Numerator, ordinaryTickDenominator, out var numerator) ||
++            !PropellantInteger.TryMultiply(powered.Numerator, ordinaryTickDenominator, out numerator) ||
+@@ -27,6 +73,8 @@
+-            PropellantInteger.Compare(numerator, denominator) > 0 ||
+-            !PoweredFlightNumerics.TryRatio(numerator, powered.Denominator, ordinaryTickNumerator, out var duty) ||
+-            duty.Exponent > 0 || (duty.Exponent == 0 && duty.Significand > 1)) return false;
+-        var hn = PropellantInteger.FromUInt64(ordinaryTickNumerator);
+-        var hd = PropellantInteger.FromUInt64(ordinaryTickDenominator);
+-        if (!PoweredFlightNumerics.TryRatio(hn, hd, PropellantInteger.TicksPerSecond, out var duration)) return false;
++            PropellantInteger.Compare(numerator, denominator) > 0);
++    }
++
++    internal static bool Finish(PoweredBinaryScale duty, PoweredBinaryScale duration, Double3 forceLocal,
++        Double3 momentLocal, double sourceMass, double sphericalDryInertia, Double3 gravityLocal, out OrdinaryContactInput input)
++    {
++        input = default;
++        if (duty.Exponent > 0 || (duty.Exponent == 0 && duty.Significand > 1)) return false;
+--- a/src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Powered.cs
++++ b/src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Powered.cs
+@@ -21,0 +22 @@
++        internal readonly OrdinaryContactProjectionSchedule Projection = preparation.Projection;
+@@ -85,0 +87,14 @@
++    // Only input/step consumers may reuse the engine's continuously-owned source proof.
++    // Endpoint reads deliberately continue through the full canonical comparison above.
++    private PoweredFlightStatus CompareReadyPoweredAuthority(SimulationTransactionEngine engine,
++        PoweredFlightAuthority authority, Receipt receipt, bool allowPending)
++    {
++        if (powered is not { } p || !ReferenceEquals(p.Engine, engine) || !ReferenceEquals(p.Authority, authority))
++            return PoweredFlightStatus.InvalidAuthority;
++        if (!ReferenceEquals(receipt.Owner, this) || receipt.Generation != Generation || !receipt.IsIssuedBy(receiptIdentity) ||
++            receipt.Step != frontier) return PoweredFlightStatus.InvalidProposal;
++        if (p.Pending && !allowPending) return PoweredFlightStatus.OutstandingProposal;
++        return frontier == p.Expected.Actuator.Frontier + (p.Pending ? 1 : 0)
++            ? PoweredFlightStatus.Ready : PoweredFlightStatus.InvalidProposal;
++    }
++
+@@ -90 +105,5 @@
+-        var status = CheckPoweredAuthority(engine, authority, receipt, false);
++        if (Environment.CurrentManagedThreadId != ownerThread) return PoweredFlightStatus.WrongOwnerThread;
++        if (disposed || invalidated) return PoweredFlightStatus.Invalidated;
++        var status = engine.OwnsReadyContactSource(this, authority)
++            ? CompareReadyPoweredAuthority(engine, authority, receipt, false)
++            : CheckPoweredAuthority(engine, authority, receipt, false);
+@@ -105,2 +124,2 @@
+-        if (ticks is not (16666 or 16667) || !OrdinaryContactInputProjection.TryMap(segmentation.PoweredDuration,
+-            (uint)ticks, 1, force, moment, p.Physical.Properties.MassKilograms, 2,
++        if (ticks is not (16666 or 16667) || !p.Projection.TryMap(segmentation.PoweredDuration,
++            (uint)ticks, force, moment, p.Physical.Properties.MassKilograms, 2,
+--- a/src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Publication.cs
++++ b/src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Publication.cs
+@@ -71 +71,3 @@
+-                return ComparePoweredAuthority(engine, power.Authority, CurrentPoweredReceipt, true) switch
++                return (engine.OwnsReadyContactSource(this, power.Authority)
++                    ? CompareReadyPoweredAuthority(engine, power.Authority, CurrentPoweredReceipt, true)
++                    : ComparePoweredAuthority(engine, power.Authority, CurrentPoweredReceipt, true)) switch
+--- a/src/NovaCore.Simulation/Spacecraft/Contact/Staging/PoweredContactPreparation.cs
++++ b/src/NovaCore.Simulation/Spacecraft/Contact/Staging/PoweredContactPreparation.cs
+@@ -41,0 +42 @@
++    internal readonly OrdinaryContactProjectionSchedule Projection;
+@@ -53,0 +55,2 @@
++        if (!OrdinaryContactProjectionSchedule.TryPrepare(out Projection))
++            throw new InvalidOperationException("Invalid ordinary contact projection schedule.");
+--- a/tests/NovaCore.Simulation.Tests/Program.cs
++++ b/tests/NovaCore.Simulation.Tests/Program.cs
+@@ -30,0 +31,2 @@
++if (args.Contains("--powered-contact-control-cost", StringComparer.Ordinal)) { PoweredContactTests.UnpoweredStillFuelledControl(); return; }
++if (args.Contains("--powered-contact-lifecycle", StringComparer.Ordinal)) { PoweredContactTests.Lifecycle(); return; }
+--- a/tests/NovaCore.Simulation.Tests/PoweredContactTests.Qualification.cs
++++ b/tests/NovaCore.Simulation.Tests/PoweredContactTests.Qualification.cs
+@@ -123 +123 @@
+-    internal static void Cost()
++    internal static void UnpoweredStillFuelledControl()
+@@ -135 +135,10 @@
+-        Distribution("dry-supported-retained", samples, gc, Collections());
++        Distribution("UNPOWERED STILL-FUELLED RETAINED-CONTACT CONTROL", samples, gc, Collections());
++        Check(dry.Observe.Resource.RemainingUnits == dry.Prepared.ResourceDefinition.InitialUnits &&
++            dry.Observe.Actuator.Activity == ActualEngineActivity.Off, "control is OFF and still fuelled");
++        Console.WriteLine("POWERED_CONTACT_CONTROL PASS fixture=CenteredBaseline engine=OFF fuel_kg=0.000013020833333333334");
++    }
++
++    internal static void Cost()
++    {
++        UnpoweredStillFuelledControl();
++        var samples = new double[1024]; int[] gc;
+--- /dev/null
++++ b/tests/NovaCore.Simulation.Tests/PoweredContactTests.Lifecycle.cs
+@@ -0,0 +1,94 @@
++using NovaCore.Core;
++using NovaCore.Simulation.Spacecraft;
++using NovaCore.Simulation.Spacecraft.Actuation;
++using NovaCore.Simulation.Spacecraft.Contact.Staging;
++using NovaCore.Simulation.Spacecraft.Resources;
++using NovaCore.Simulation.Spacecraft.Translation;
++
++internal static partial class PoweredContactTests
++{
++    private static void NoReadyPermission(Contact c)
++    {
++        Check(!c.Engine.OwnsReadyContactSource(c.World, c.Power), "released owner has no readiness");
++        Check(c.Clock.PublicationPhase.TryEnter(c.Engine), "manual phase for readiness refusal");
++        try { Check(!c.Engine.OwnsReadyContactSource(c.World, c.Power), "phase ownership alone cannot issue interval readiness"); }
++        finally { c.Clock.PublicationPhase.Exit(); }
++    }
++
++    internal static void Lifecycle()
++    {
++        Check(OrdinaryContactProjectionSchedule.TryPrepare(out var schedule), "cold projection schedule");
++        var one = PropellantInteger.FromUInt64(1);
++        foreach (var ticks in new[] { 16666U, 16667U })
++        {
++            var durations = new[] { new PropellantDuration(default, one),
++                new PropellantDuration(PropellantInteger.FromUInt64(ticks), one),
++                new PropellantDuration(PropellantInteger.FromUInt64(ticks), PropellantInteger.FromUInt64(2)),
++                new PropellantDuration(one, PropellantInteger.FromUInt64(ulong.MaxValue)) };
++            foreach (var duration in durations)
++            {
++                Check(OrdinaryContactInputProjection.TryMap(duration, ticks, 1, new(48, 64, 0), new(-6.4, 4.8, 0),
++                    8.000130208333333, 2, PoweredContactPreparation.GravityLocal, out var original) &&
++                    schedule.TryMap(duration, ticks, new(48, 64, 0), new(-6.4, 4.8, 0), 8.000130208333333, 2,
++                    PoweredContactPreparation.GravityLocal, out var prepared) && original == prepared,
++                    "cold schedule and original mapper identical");
++            }
++        }
++        Check(!default(OrdinaryContactProjectionSchedule).TryMap(new(default, one), 16666, default, default, 8, 2, default, out _) &&
++            !schedule.TryMap(default, 16666, default, default, 8, 2, default, out _) &&
++            !schedule.TryMap(new(default, one), 16665, default, default, 8, 2, default, out _) &&
++            !schedule.TryMap(new(PropellantInteger.FromUInt64(16667), one), 16666, default, default, 8, 2, default, out _),
++            "unprepared/invalid denominator/wrong H/out-of-interval projection refuses");
++
++        foreach (var fixture in Enum.GetValues<PoweredContactFixture>())
++        {
++            using var direct = new Contact(fixture, capacity: 4);
++            using var ready = new Contact(fixture, capacity: 4);
++            for (var i = 0; i < 3; i++)
++            {
++                direct.Seal(); direct.Apply(); Complete(ready);
++                Check(ready.Engine.TryGetPoweredFlightRecord(i, out var actual) && direct.Engine.TryGetPoweredFlightRecord(i, out var expected) &&
++                    actual == expected && actual.Endpoint.SameBits(expected.Endpoint) &&
++                    NativeBits(ready).SequenceEqual(NativeBits(direct)), "ready/direct full record and native bits " + fixture);
++                NoReadyPermission(ready);
++            }
++        }
++        using (var c = new Contact())
++        {
++            c.Seal(); c.Engine.RetireFinitePropellant(c.Resource, c.FuelLease); c.Engine.DiscardSingleEngineProposal(c.Actuation, c.EngineLease);
++            var before = Canonical(c); var native = NativeBits(c);
++            Check(c.Engine.ServicePoweredContactDebt(c.Power).Status == PoweredFlightStatus.EngineBlocked, "refusal inside readiness");
++            Unchanged(c, before, native, "ready refusal"); NoReadyPermission(c);
++        }
++        using (var c = new Contact())
++        {
++            c.Credit(16666); var before = Canonical(c);
++            var native = Native(c); native.Simulation.Bodies[native.Body].Velocity.Linear.X = (float)(2 * c.Prepared.Configuration.MaximumSpeed);
++            Check(c.Engine.ServicePoweredContactDebt(c.Power).Status == PoweredFlightStatus.NumericalFailure && Canonical(c) == before &&
++                c.Engine.ServicePoweredContactDebt(c.Power).Status == PoweredFlightStatus.Invalidated, "ready native failure poisons without canonical debit");
++            NoReadyPermission(c);
++        }
++        using (var c = new Contact())
++        {
++            c.Credit(16666);
++            ((SpacecraftPhysicalProperties[])Field(c.Store, "_properties"))[0] = new(9);
++            var before = Canonical(c); var native = NativeBits(c);
++            Check(c.Engine.ServicePoweredContactDebt(c.Power).Status == PoweredFlightStatus.StaleSource, "unrevised mass mutation prevents readiness");
++            Unchanged(c, before, native, "mass mutation"); NoReadyPermission(c);
++        }
++        using (var c = new Contact())
++        {
++            Complete(c); c.Seal();
++            Check(c.Engine.PreparePoweredContact(c.Power, c.FuelLease, out c.PhysicalLease) == PoweredFlightStatus.Prepared, "separate prepare after ready service");
++            var owner = Field(c.Engine, "_poweredFlight"); var record = (PoweredFlightRecord)Field(owner, "Prepared");
++            Set(owner, "Prepared", record with { Endpoint = record.Endpoint with { PositionRoot = record.Endpoint.PositionRoot + Double3.UnitX } });
++            var before = Canonical(c); var native = NativeBits(c);
++            Check(c.Engine.PublishPoweredContact(c.Power, c.PhysicalLease).Status == PoweredFlightStatus.InvalidProposal, "separate retry remains fully checked");
++            Unchanged(c, before, native, "retry mismatch"); NoReadyPermission(c);
++            Set(owner, "Prepared", record);
++            Check(c.Engine.PublishPoweredContact(c.Power, c.PhysicalLease).Status == PoweredFlightStatus.Published &&
++                NativeBits(c).SequenceEqual(native), "valid retry publishes without solver replay"); NoReadyPermission(c);
++        }
++        Console.WriteLine("POWERED_CONTACT_LIFECYCLE PASS fixtures=11 frontiers=3 exact_record_native_identity=PASS projection=PASS refusal_cleanup=PASS retry=PASS");
++    }
++}

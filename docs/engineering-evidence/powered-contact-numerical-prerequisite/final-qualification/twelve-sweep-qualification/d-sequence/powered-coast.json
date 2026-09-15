@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "acceptedPieces": 2,
+  "worldsCreated": 1,
+  "poweredSeconds": 0.0078125,
+  "coastSeconds": 0.0088535,
+  "totalTicks": 16666,
+  "deepest": 0.0003668665885925293,
+  "normalVelocity": -0.0008776600589044392,
+  "canonicalCapabilities": 0,
+  "canonicalMutations": 0,
+  "reconstruction": false
+}

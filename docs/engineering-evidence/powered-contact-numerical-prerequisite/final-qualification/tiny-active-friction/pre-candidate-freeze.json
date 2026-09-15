@@ -1,0 +1,47 @@
+{
+  "beforeCandidateExecution": true,
+  "priorFilesVerifiedUnchanged": 2163,
+  "referenceReview": "independent arithmetic and source/KKT/representation reviews PASS",
+  "files": [
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/TinyActiveCandidate.cs",
+      "sha256": "C03A1AA2A672A0D7056C68B17E4AAA175943B72A6892ED8791A6D3BD836B3DDE"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/TinyActiveCandidate.csproj",
+      "sha256": "F8FE3788568A30F5409062120C06CAA83FC139C0B81E0879FABF75C2930E945A"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/compare_tiny.py",
+      "sha256": "E8438F5296B2649229C3713EBFC95BE3757DC50C9391D8D190DFD627413900F0"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/comparison-policy.md",
+      "sha256": "273E3323EF9A85D406708F7505429A557613B3434DEB78D23FBDF40316E80326"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/plan.md",
+      "sha256": "3AC62306144A9FEF481D1ABE0B00A42C0D82DDFC0E68C1583249F9EA83458C0B"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/reference-results/baseline-reference.json",
+      "sha256": "C20254262F66D289ECABD987E426C8C5A36168970C78CDE964908FF8B58BDAE4"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/reference-results/powered-reference.json",
+      "sha256": "483D5FAFBA55D9FB06578395A3BD11A628A3603ED022BC4DF8758D1643F54555"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/reference-results/reference-inputs.json",
+      "sha256": "A9E62B054E2F1E4A89F9D1A53B0BAEF713FCA2AB7C5842034657AA2FF85BCB66"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/reference-results/separated-response.json",
+      "sha256": "167D41DFAA171E7EED1AF1A03EFAD6FFF70A9824918631E0B2F07D8D67D0DD5D"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/reference.py",
+      "sha256": "D50BD7D3E9586B1BB030257647B2F6CFD140D1AD28111CBF5A0F7A7E41398195"
+    }
+  ]
+}

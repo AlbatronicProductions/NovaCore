@@ -1,6 +1,6 @@
 # NovaCore
 
-**A space simulation and game framework, built for the journey from ground to orbit.**
+**A precision space-simulation and game framework by Albatronic Productions.**
 
 NovaCore is a custom-built foundation for exploring planetary worlds and flying
 spacecraft across vast distances. It is being developed toward one continuous
@@ -29,6 +29,12 @@ the full player experience is still being assembled.
 
 ## Working today
 
+**Current banked milestone:** M15.1 — Finite-Fuel Retained Powered Contact.
+Ordinary retained BEPU contact now joins exact propellant consumption and
+exhaustion with atomic motion/resource/mass/actuator publication, followed by a
+dry/off actuator transition and same-body dry retained contact. It does not
+implement liftoff or departure.
+
 - **Earth exploration:** move the camera from orbital views down toward terrain,
   with Sun-driven day and night, NASA/NOAA source imagery and elevation, and USGS
   regional detail around Florida.
@@ -39,6 +45,10 @@ the full player experience is still being assembled.
   mass, and continues into coasting when the fuel runs out.
 - **Surface interaction foundations:** explore an anchored Florida site and inspect
   separate demonstrations of simple bodies settling against a slab.
+- **Finite-fuel retained powered contact:** apply finite-fuel propulsion while a
+  body remains supported, with physical state, remaining fuel, mass and actual
+  actuator state published together. This bounded contact path is separate from
+  powered free flight.
 
 These capabilities are exercised in separate development scenarios. The current
 powered-flight demonstration uses a simple cube in free space, without gravity or
@@ -61,8 +71,8 @@ continue to evolve. They do not depict finished spacecraft or atmosphere systems
 
 That connected journey is the long-term goal. Work ahead includes flight controls,
 finished spacecraft models, facilities, liftoff and landing interactions, richer
-terrain, and atmosphere, cloud and water systems. Powered ground contact and
-Florida launch integration are not yet complete.
+terrain, and atmosphere, cloud and water systems. Supported-contact departure,
+surface-to-flight transition and Florida launch integration remain future work.
 
 The intended player experience is straightforward: download a packaged build,
 launch an executable, and enter the simulation. Today's source build and scenario
@@ -137,6 +147,18 @@ For the powered-flight scene directly, after building Release:
 dotnet run --project samples/NovaCore.Triangle -c Release -- --scene=powered-free-flight
 ```
 
+The banked powered-contact scenario has a separate direct route:
+
+```powershell
+dotnet run --project samples/NovaCore.Triangle -c Release -- --scene=powered-contact
+```
+
+For powered contact, Space advances two inspection intervals, then starts live
+dry continuation. The body remaining stationary on its support is expected;
+camera movement does not pilot it. This path passed Debug/Release regression,
+exact-zero warmed allocation contracts, retained-storage limits and integrated
+frame qualification on the recorded host. This is not a universal FPS guarantee.
+
 </details>
 
 ## For developers
@@ -150,6 +172,7 @@ contracts, implementation limits and reproducible evidence live in the documenta
 | Planetary rendering and data | [Renderer](docs/planetary-rendering.md) · [Terrain assets](docs/terrain-assets.md) · [Source provenance](assets/earth/PROVENANCE.md) |
 | Simulation and spacecraft | [Simulation time](docs/simulation-time.md) · [Spacecraft motion](docs/spacecraft-translation.md) · [Attitude dynamics](docs/spacecraft-attitude.md) |
 | Powered flight | [Physics contract](docs/engineering-evidence/segmented-powered-free-flight/physics-contract.md) · [Qualification](docs/engineering-evidence/segmented-powered-free-flight/final-qualification.md) |
+| M15.1 retained powered contact | [Qualification history, limits and reproduction](docs/engineering-evidence/powered-contact-bank-candidate/README.md) · [Banked source](https://github.com/AlbatronicProductions/NovaCore/tree/m15.1-finite-fuel-retained-powered-contact) |
 | Development state and history | [Engineering overview](docs/NOVACORE_CURRENT_STATE.md) · [Evidence index](docs/engineering-evidence/README.md) · [Powered-flight source checkpoint](https://github.com/AlbatronicProductions/NovaCore/tree/m15.0-segmented-powered-free-flight) |
 
 Historical reports retain their original scope and status; the linked source
@@ -158,9 +181,19 @@ checkpoint identifies the published powered-flight implementation.
 ## Feedback and license
 
 Useful bug reports include the build/commit, hardware, reproduction steps and logs.
-For code contributions, start with the [engineering rules](ENGINEERING_RULES.md).
+For code contributions, read the [engineering rules](ENGINEERING_RULES.md) and
+the intentional-contribution terms in [LICENSE](LICENSE), section 12.
 
-This repository currently has no project-wide license file. Bundled BEPU has its
-own [license](external/bepu/2.5.0-beta.29/LICENSE.txt) and
-[dependency provenance](external/bepu/README.md); Earth source credits are recorded
-in the [data provenance](assets/earth/PROVENANCE.md).
+NovaCore is source-available under the [NovaCore Source-Available License 1.0](LICENSE).
+Original NovaCore material is owned by Tyler Alba, operating under the
+project/developer name Albatronic Productions, unless otherwise noted.
+Personal use and private personal modifications are permitted. Independent
+creators may monetize their content and keep its revenue under the license.
+See [NOTICE](NOTICE.md), [licensing](LICENSING.md), the
+[Creator Content Policy](docs/legal/CREATOR-CONTENT-POLICY.md),
+[Modding Policy](docs/legal/MODDING-POLICY.md) and
+[commercial licensing](docs/legal/COMMERCIAL-LICENSING.md) for rights and limits.
+
+Bundled BEPU retains its own [Apache-2.0 license](external/bepu/2.5.0-beta.29/LICENSE.txt)
+and [dependency provenance](external/bepu/README.md). NASA, NOAA and USGS source
+credits and data boundaries remain in [data provenance](assets/earth/PROVENANCE.md).

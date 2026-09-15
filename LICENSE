@@ -1,0 +1,222 @@
+NovaCore Source-Available License 1.0
+Effective date: September 15, 2026
+
+1. Licensor, material and ownership
+
+"Licensor" means Tyler Alba, operating under the project/developer name
+"Albatronic Productions." "NovaCore Material" means original NovaCore source,
+binaries, documentation and authored assets expressly made available under this
+license, only to the extent Licensor owns or is authorized to license the relevant
+rights. Independently licensed components, upstream-derived code, datasets and
+other third-party material are excluded. Ownership remains with the respective
+rights holders. Source access does not transfer ownership. Rights not expressly
+granted are reserved, subject to independently applicable law, platform terms and
+other licenses.
+
+An authorized copy is a copy supplied or distribution authorized by Licensor,
+or otherwise lawfully obtained under independently applicable rights.
+
+2. Personal use, source inspection and private modification
+
+Subject to these terms, Licensor grants you nonexclusive, worldwide, royalty-free
+copyright permission to obtain and retain authorized copies, inspect available
+source, build and run NovaCore, and privately modify it for your own personal
+play, study, experimentation and hobby use. You may keep private personal copies
+and private forks for those purposes. You need not publish your changes.
+
+This personal permission does not authorize general public distribution of
+modified or unmodified core/framework material, commercial framework embedding
+or sublicensing. Sections 3 and 4 separately permit their stated activities,
+including the expressly permitted compensated mod development and monetized
+creator activities. Running an authorized NovaCore copy for those activities is
+permitted; you need not be a noncommercial creator to exercise section 4.
+
+3. Supported original mods
+
+You may create and use original mod content through interfaces, formats and
+distribution methods expressly designated by Licensor as supported for modding.
+No interface, SDK, distribution service or continuing technical compatibility is
+promised. Private core-source modification does not become a distributable mod.
+
+You may distribute your own original supported-mod files for free through those
+supported means. Do not bundle NovaCore core code, binaries or extracted assets
+under this permission. Independently licensed material requires its own applicable
+permissions. You retain your original mod contributions and may license them to
+recipients, without sublicensing NovaCore or changing its terms. Recipients need
+their own lawful rights to their NovaCore copy.
+
+Charging users for mod access, downloads, versions or updates requires separate
+written authorization, unless a later operative policy expressly permits it.
+Genuinely voluntary donations or tips not conditioned on access are permitted;
+an access charge does not become a donation merely by being labelled one.
+Monetized creator content about a mod is permitted under section 4.
+
+Compensated development of a mod for a client or employer is permitted in itself,
+including payment for that development work and delivery of the original mod
+files to that client or employer. This does not authorize selling mod access to
+users, distributing NovaCore itself, or commercially embedding its framework.
+Those activities remain subject to their separate requirements.
+
+The NovaCore Modding Policy 1.0 at docs/legal/MODDING-POLICY.md is an operative
+companion recognized for these mod permissions, subject to section 11.
+
+4. Independent creator content and monetization
+
+You may record, reproduce, edit, publish, display, perform and stream independent
+content featuring authorized NovaCore use and its original audiovisual output.
+This includes videos, Shorts, livestreams, screenshots, reviews and articles,
+commentary, tutorials, technical demonstrations, showcases, social posts and
+educational content. Critical coverage is included; no favorable opinion is required.
+
+You may monetize that content through advertising, platform revenue sharing,
+memberships, subscriptions, sponsorships, donations, tips and sales of independent
+content such as a paid review/article. As between you and Licensor, its independent
+creator revenue belongs to you; this license imposes no creator revenue share.
+Platform, tax and third-party obligations remain separately applicable.
+
+This permission covers inclusion of NovaCore output in your content, not delivery
+of runnable NovaCore, core source or standalone extracted assets. It does not
+authorize selling, sublicensing or rebranding NovaCore, commercial framework
+embedding or a claim to authorship/ownership of NovaCore. You retain your original
+creative contributions; featured NovaCore and third-party material retain their
+respective ownership.
+
+The NovaCore Creator Content Policy 1.0 at docs/legal/CREATOR-CONTENT-POLICY.md is
+an operative companion recognized for these creator permissions, subject to section 11.
+
+5. Reserved framework and commercial rights
+
+These terms grant no general permission to mirror, sell, redistribute, sublicense
+or white-label NovaCore; publicly distribute modified NovaCore core/framework
+material; rebrand it as another framework; or incorporate protected NovaCore
+Material into another commercial game, framework, product or service. Where
+NovaCore rights are needed, commercial framework exploitation and sublicensing
+require separate written authorization from Licensor. No price, royalty, support
+duty, automatic approval or entitlement to an agreement is implied.
+
+These reservations concern protected material, not ownership of ideas or
+independently created work. Rights independently supplied by law, third-party
+licenses and applicable hosting-platform terms, including permitted on-platform
+viewing and forking, are unaffected. A platform Fork button is not a grant from
+this license of unrestricted off-platform redistribution.
+
+6. Notices, identification and branding
+
+Preserve applicable copyright and license notices when actually distributing
+NovaCore Material under an authorized distribution permission. Ordinary independent
+videos, streams and reviews do not require legal boilerplate, a credits link or
+a per-frame logo. Normal identification of NovaCore and Albatronic Productions
+is encouraged, not a condition of the creator permission.
+
+Do not falsely claim authorship of NovaCore or official endorsement, approval or
+authorization. Truthful nominative identification in reviews, videos, streams,
+mods and tutorials is permitted. Licensor reserves names, logos and endorsement
+identity to the extent legally held; no right to deceptive endorsement or
+rebranding is granted. No registered-trademark or separate-company status is asserted.
+
+7. Third-party material and independent rights
+
+Third-party licenses and applicable source terms control their respective
+components, upstream-derived code, datasets, tools and assets in preference to
+these terms for that material. This license neither restricts rights those
+sources grant independently nor supplies rights Licensor does not possess.
+BEPU and its derived observer code retain their Apache-2.0 scope. NASA, NOAA,
+USGS and other independently sourced material retain their own applicable terms
+and provenance. Media creation may require separate permission for particular
+third-party content; this license does not clear every asset for every media use.
+Applicable statutory rights and exceptions remain unaffected.
+
+8. Patent scope
+
+Only to the extent necessary, if any, to exercise the rights expressly granted
+by this license, Licensor permits that exercise under patent claims Licensor
+owns or controls and is authorized to license. No broad independent patent
+license, rights for other uses, or third-party patent rights are granted.
+This is not a representation of patent clearance or freedom from infringement.
+Independent third-party patent grants remain governed by their own terms.
+
+9. Warranty and liability
+
+To the extent permitted by applicable law, NovaCore Material is provided as is
+and as available, without express or implied warranties, including merchantability,
+fitness for a particular purpose and noninfringement. To that extent, Licensor
+disclaims liability for loss or damage arising from use or inability to use it.
+Mandatory consumer rights and liabilities that cannot lawfully be excluded remain
+unaffected.
+
+10. Breach, cure, termination and survival
+
+For a curable breach, Licensor will give written notice identifying the breach
+and allow 30 days after your receipt to cure it. If cured within that period,
+rights will not terminate solely for that cured breach. If it remains uncured
+after that period, Licensor may terminate the affected permissions by written
+notice. A breach that cannot reasonably be cured may result in immediate
+termination by written notice. Notices may be delivered through written contact
+channels provided by the recipient; a cure period does not begin before receipt.
+After termination, cease activities relying on terminated rights except as
+expressly preserved below. Late cure alone does not reinstate rights; reinstatement
+requires separate written authorization unless expressly provided by this license.
+
+Creator works lawfully created and already published while compliant may remain
+hosted, viewable and monetized after a later unrelated termination. This survival
+does not protect never-compliant or infringing works. Materially new works or
+releases after termination require valid rights; survival does not restore
+terminated software permissions or excuse a separate breach.
+
+Previously lawful, compliant, already-released free supported-mod versions may
+remain hosted, downloadable and usable by compliant recipients under the applicable
+terms, with their own lawful NovaCore rights. After termination the author has no
+permission for new versions, updates or releases without reinstatement or separate
+authorization. Never-compliant or infringing material has no survival protection.
+A later withdrawal of a supported designation does not by itself revoke the
+existing compliant version's permissions or this survival; technical compatibility
+and ongoing support are not promised.
+
+Termination does not transfer your original work to Licensor, terminate another
+person's independently obtained rights merely by association, alter third-party
+licenses, or extinguish rights independently supplied by law. Remedies for
+infringement and breaches are preserved. The contribution grant in section 12
+survives termination of your permissions to use NovaCore.
+
+11. Version, companions and precedence
+
+Rights granted under NovaCore Source-Available License 1.0 remain governed by 1.0
+unless you affirmatively accept later terms for later or new uses. Website edits
+and online policy replacements alone do not retroactively change those rights.
+The recognized Creator Content Policy 1.0 and Modding Policy 1.0 share this
+license's effective date and may specialize or grant permissions within their
+recognized creator/modding scope. Root LICENSE controls an actual conflict unless
+it expressly delegates the specific matter; section 3 expressly allows a later
+operative policy to permit paid-mod access. A later policy does not silently
+withdraw previously granted 1.0 permissions.
+
+NOTICE.md and LICENSING.md explain ownership and licensing. Commercial licensing
+information is not itself an agreement. A separate written agreement governs
+only the rights and parties actually covered by that agreement.
+
+12. Intentional contributions
+
+For contributions you intentionally submit for inclusion in NovaCore under these
+terms, you must hold or have authority to grant the necessary rights. You retain
+your copyright; submission is not a copyright assignment. You grant Licensor a
+nonexclusive, worldwide, perpetual, irrevocable, royalty-free copyright license
+to use, modify, reproduce, maintain, distribute, publicly release and commercially
+license your contribution, and sublicense it as part of NovaCore. You also grant
+the patent rights you control that are necessary for those acts with your
+contribution, alone or in its submitted combination with NovaCore, including
+sublicensing as part of NovaCore. This does not grant rights in unrelated inventions
+or third-party rights you cannot license.
+
+Identify material subject to other terms and any limits on your authority when
+submitting. Do not submit material for inclusion unless sufficient rights for
+those uses are available. Material clearly marked as not a contribution and
+ordinary discussion not submitted for inclusion are not contributions under
+this section. A separately agreed written contribution arrangement controls
+its own scope. This section does not retroactively acquire rights in earlier
+submissions or make Licensor the owner of another party's work.
+
+13. Governing law
+
+This license is governed by the laws of the Commonwealth of Pennsylvania,
+United States, subject to mandatory protections that applicable law does not
+permit the parties to exclude.

@@ -1,0 +1,569 @@
+[
+  {
+    "path": "tests/NovaCore.Simulation.Tests/PoweredContactTests.NativeRows.cs",
+    "oldSha256": "FE52EEB23E4F4A1411B809AACE29BC86B8C500B541BE741C3D6B6D53194E9D66",
+    "oldBytes": 11802,
+    "lines": [
+      "11",
+      "22",
+      "23",
+      "48",
+      "51",
+      "53",
+      "86",
+      "88",
+      "93",
+      "97"
+    ],
+    "defect": "10 trailing-whitespace lines",
+    "bom": false,
+    "crlf": 0,
+    "lf": 120,
+    "semanticChange": "NONE",
+    "purpose": "Permanent native-row oracle",
+    "requiredForBank": true,
+    "newSha256": "6A81D91522B6C5E833A8377E62AFF9D3E87D752EB18119A56ABD6E3247609803",
+    "newBytes": 11737,
+    "removedByteRanges": [
+      {
+        "byteOffset": 594,
+        "hex": "20202020202020",
+        "line": 11
+      },
+      {
+        "byteOffset": 1481,
+        "hex": "202020202020202020202020202020",
+        "line": 22
+      },
+      {
+        "byteOffset": 1555,
+        "hex": "20",
+        "line": 23
+      },
+      {
+        "byteOffset": 4047,
+        "hex": "2020202020202020",
+        "line": 48
+      },
+      {
+        "byteOffset": 4391,
+        "hex": "202020202020202020202020",
+        "line": 51
+      },
+      {
+        "byteOffset": 4543,
+        "hex": "20",
+        "line": 53
+      },
+      {
+        "byteOffset": 8937,
+        "hex": "202020202020202020202020202020",
+        "line": 86
+      },
+      {
+        "byteOffset": 8959,
+        "hex": "20202020",
+        "line": 88
+      },
+      {
+        "byteOffset": 9240,
+        "hex": "20",
+        "line": 93
+      },
+      {
+        "byteOffset": 9692,
+        "hex": "20",
+        "line": 97
+      }
+    ],
+    "exactReversePass": true,
+    "provenanceEffect": "Historical hash retained; whitespace-only successor",
+    "reproductionEffect": "Update current seals only; retain historical identity"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-architecture/architecture-candidates.md",
+    "oldSha256": "05EC690D4F53A918BE841700670C4812D5DFDA175719246C89557842BB051EF7",
+    "oldBytes": 7476,
+    "lines": [
+      "66"
+    ],
+    "defect": "New blank line at EOF",
+    "bom": false,
+    "crlf": 0,
+    "lf": 66,
+    "semanticChange": "NONE",
+    "purpose": "Distinct retained architecture/qualification history",
+    "requiredForBank": true,
+    "newSha256": "707D344E67E43DFE5124DACC8D8551D9D21091850CFB1489F42909CCC611F08D",
+    "newBytes": 7475,
+    "removedByteRanges": [
+      {
+        "byteOffset": 7475,
+        "hex": "0A",
+        "line": 66
+      }
+    ],
+    "exactReversePass": true,
+    "provenanceEffect": "Historical hash retained; whitespace-only successor",
+    "reproductionEffect": "Update current seals only; retain historical identity"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-architecture/atomic-publication.md",
+    "oldSha256": "71032AFBBE0CA7F23EDDC9EE90518F0C1BB7083C5B80EB045617EDA49BAF2AE8",
+    "oldBytes": 5703,
+    "lines": [
+      "59"
+    ],
+    "defect": "New blank line at EOF",
+    "bom": false,
+    "crlf": 0,
+    "lf": 59,
+    "semanticChange": "NONE",
+    "purpose": "Distinct retained architecture/qualification history",
+    "requiredForBank": true,
+    "newSha256": "EF40A7BED5576927E7559E44B9564E2B9EA9FDBBC04A883F0B2F8FD2791580D0",
+    "newBytes": 5702,
+    "removedByteRanges": [
+      {
+        "byteOffset": 5702,
+        "hex": "0A",
+        "line": 59
+      }
+    ],
+    "exactReversePass": true,
+    "provenanceEffect": "Historical hash retained; whitespace-only successor",
+    "reproductionEffect": "Update current seals only; retain historical identity"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-architecture/bepu-mass-wrench-assessment.md",
+    "oldSha256": "78A27A6D07D69C8995CD4CAB73D558C8850256CD0294014B9B0126B8F25DEB72",
+    "oldBytes": 5771,
+    "lines": [
+      "50"
+    ],
+    "defect": "New blank line at EOF",
+    "bom": false,
+    "crlf": 0,
+    "lf": 50,
+    "semanticChange": "NONE",
+    "purpose": "Distinct retained architecture/qualification history",
+    "requiredForBank": true,
+    "newSha256": "058ED1162FA20459C2CCDD0B2A1FDC472D56F95D66F35B4B84672BB93EBCACA5",
+    "newBytes": 5770,
+    "removedByteRanges": [
+      {
+        "byteOffset": 5770,
+        "hex": "0A",
+        "line": 50
+      }
+    ],
+    "exactReversePass": true,
+    "provenanceEffect": "Historical hash retained; whitespace-only successor",
+    "reproductionEffect": "Update current seals only; retain historical identity"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-architecture/convergence-map.md",
+    "oldSha256": "81B17DFE7A73FFD3DD90F75B2EBE7C3F745541FA99C6DFF089EDBE9723E87413",
+    "oldBytes": 6422,
+    "lines": [
+      "63"
+    ],
+    "defect": "New blank line at EOF",
+    "bom": false,
+    "crlf": 0,
+    "lf": 63,
+    "semanticChange": "NONE",
+    "purpose": "Distinct retained architecture/qualification history",
+    "requiredForBank": true,
+    "newSha256": "91373278A808029DA8CF6A72B46804B584442C93DAD153AA59B46CD1F744A469",
+    "newBytes": 6421,
+    "removedByteRanges": [
+      {
+        "byteOffset": 6421,
+        "hex": "0A",
+        "line": 63
+      }
+    ],
+    "exactReversePass": true,
+    "provenanceEffect": "Historical hash retained; whitespace-only successor",
+    "reproductionEffect": "Update current seals only; retain historical identity"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-architecture/departure-regime-contract.md",
+    "oldSha256": "86A990D1EEC17EB008A657051168CC81B79BBDBFCA45E91987EEDBA9389FA81B",
+    "oldBytes": 5835,
+    "lines": [
+      "47"
+    ],
+    "defect": "New blank line at EOF",
+    "bom": false,
+    "crlf": 0,
+    "lf": 47,
+    "semanticChange": "NONE",
+    "purpose": "Distinct retained architecture/qualification history",
+    "requiredForBank": true,
+    "newSha256": "260E29B0FCF4EB604C967073CBDD923F6217B481F1A14B4717445F495EB7B1C0",
+    "newBytes": 5834,
+    "removedByteRanges": [
+      {
+        "byteOffset": 5834,
+        "hex": "0A",
+        "line": 47
+      }
+    ],
+    "exactReversePass": true,
+    "provenanceEffect": "Historical hash retained; whitespace-only successor",
+    "reproductionEffect": "Update current seals only; retain historical identity"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-architecture/florida-gap.md",
+    "oldSha256": "57B6478061C6BDC97F79DBACDD7BB402D32458AF1A3DC901CAE329ACBFB7BC80",
+    "oldBytes": 3517,
+    "lines": [
+      "28"
+    ],
+    "defect": "New blank line at EOF",
+    "bom": false,
+    "crlf": 0,
+    "lf": 28,
+    "semanticChange": "NONE",
+    "purpose": "Distinct retained architecture/qualification history",
+    "requiredForBank": true,
+    "newSha256": "83540A8454BFCB9E93472F5A36BD17C291E1F139B8428562D38A7DC731DEB68F",
+    "newBytes": 3516,
+    "removedByteRanges": [
+      {
+        "byteOffset": 3516,
+        "hex": "0A",
+        "line": 28
+      }
+    ],
+    "exactReversePass": true,
+    "provenanceEffect": "Historical hash retained; whitespace-only successor",
+    "reproductionEffect": "Update current seals only; retain historical identity"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-architecture/ksa-convergence.md",
+    "oldSha256": "FDF27784AB27449B9296A596510F68EFB44E0D117C906AF2FA2D5CC9D5282B65",
+    "oldBytes": 4852,
+    "lines": [
+      "43"
+    ],
+    "defect": "New blank line at EOF",
+    "bom": false,
+    "crlf": 0,
+    "lf": 43,
+    "semanticChange": "NONE",
+    "purpose": "Distinct retained architecture/qualification history",
+    "requiredForBank": true,
+    "newSha256": "384D0CECDA3D8BE0F15EFE9DFA3DCD47483B46DD4AC13AB0E7002AE5A9977CD9",
+    "newBytes": 4851,
+    "removedByteRanges": [
+      {
+        "byteOffset": 4851,
+        "hex": "0A",
+        "line": 43
+      }
+    ],
+    "exactReversePass": true,
+    "provenanceEffect": "Historical hash retained; whitespace-only successor",
+    "reproductionEffect": "Update current seals only; retain historical identity"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-architecture/reproduction.md",
+    "oldSha256": "A63E988784D56661F3FF79E8D831D3DE1045B7A587873602C06DED3799C88B15",
+    "oldBytes": 3491,
+    "lines": [
+      "56"
+    ],
+    "defect": "New blank line at EOF",
+    "bom": false,
+    "crlf": 0,
+    "lf": 56,
+    "semanticChange": "NONE",
+    "purpose": "Distinct retained architecture/qualification history",
+    "requiredForBank": true,
+    "newSha256": "0595CB31455B86788EC3BA16E2CAC58E69FD94B5E15A5D65D9D0241FEB17B0E9",
+    "newBytes": 3490,
+    "removedByteRanges": [
+      {
+        "byteOffset": 3490,
+        "hex": "0A",
+        "line": 56
+      }
+    ],
+    "exactReversePass": true,
+    "provenanceEffect": "Historical hash retained; whitespace-only successor",
+    "reproductionEffect": "Update current seals only; retain historical identity"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-architecture/verification.md",
+    "oldSha256": "253BFD9810847FCF0324ED21EC0B5B0379CA891165EE1B57AC03EE7FCE554227",
+    "oldBytes": 6849,
+    "lines": [
+      "66"
+    ],
+    "defect": "New blank line at EOF",
+    "bom": false,
+    "crlf": 0,
+    "lf": 66,
+    "semanticChange": "NONE",
+    "purpose": "Distinct retained architecture/qualification history",
+    "requiredForBank": true,
+    "newSha256": "91261111B57CB229BC34FE6A2817641AC46A05972E658699156EFC085D98CC93",
+    "newBytes": 6848,
+    "removedByteRanges": [
+      {
+        "byteOffset": 6848,
+        "hex": "0A",
+        "line": 66
+      }
+    ],
+    "exactReversePass": true,
+    "provenanceEffect": "Historical hash retained; whitespace-only successor",
+    "reproductionEffect": "Update current seals only; retain historical identity"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-event-lifecycle-convergence/exact-event-physical-requirements.md",
+    "oldSha256": "CC63EF8A9184D5CB0FDB0A0D5D08B94F2E0DF9C261F778B3585047C6E8E63357",
+    "oldBytes": 8435,
+    "lines": [
+      "87"
+    ],
+    "defect": "New blank line at EOF",
+    "bom": false,
+    "crlf": 0,
+    "lf": 87,
+    "semanticChange": "NONE",
+    "purpose": "Distinct retained architecture/qualification history",
+    "requiredForBank": true,
+    "newSha256": "F5789622DCBEBF888AFE09844888B2853D5D475A8D586755BDC289D6274341BE",
+    "newBytes": 8434,
+    "removedByteRanges": [
+      {
+        "byteOffset": 8434,
+        "hex": "0A",
+        "line": 87
+      }
+    ],
+    "exactReversePass": true,
+    "provenanceEffect": "Historical hash retained; whitespace-only successor",
+    "reproductionEffect": "Update current seals only; retain historical identity"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-event-lifecycle-convergence/mechanism-test-disposition.md",
+    "oldSha256": "866ACBC58FDA70BA6D9D1209E0CA12903C809A2FF3DE98289951C80C44813CCD",
+    "oldBytes": 7719,
+    "lines": [
+      "46"
+    ],
+    "defect": "New blank line at EOF",
+    "bom": false,
+    "crlf": 0,
+    "lf": 46,
+    "semanticChange": "NONE",
+    "purpose": "Distinct retained architecture/qualification history",
+    "requiredForBank": true,
+    "newSha256": "E257A8C454F887F080CC227E3F576092CCA364E4F938D04B45A9B92E7C213A26",
+    "newBytes": 7718,
+    "removedByteRanges": [
+      {
+        "byteOffset": 7718,
+        "hex": "0A",
+        "line": 46
+      }
+    ],
+    "exactReversePass": true,
+    "provenanceEffect": "Historical hash retained; whitespace-only successor",
+    "reproductionEffect": "Update current seals only; retain historical identity"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-event-lifecycle-convergence/novacore-outcome-mechanism-map.md",
+    "oldSha256": "62E37B9C42E790932D163E925548A44E906D71BB730B5B553DA52EB6160423C4",
+    "oldBytes": 5297,
+    "lines": [
+      "42"
+    ],
+    "defect": "New blank line at EOF",
+    "bom": false,
+    "crlf": 0,
+    "lf": 42,
+    "semanticChange": "NONE",
+    "purpose": "Distinct retained architecture/qualification history",
+    "requiredForBank": true,
+    "newSha256": "D8492AD5774F259F05FE8B3491FEF10118AF50A00CF1174DDAE70C47A3640047",
+    "newBytes": 5296,
+    "removedByteRanges": [
+      {
+        "byteOffset": 5296,
+        "hex": "0A",
+        "line": 42
+      }
+    ],
+    "exactReversePass": true,
+    "provenanceEffect": "Historical hash retained; whitespace-only successor",
+    "reproductionEffect": "Update current seals only; retain historical identity"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/payoff/HotKernel.cs",
+    "oldSha256": "5E26615B6E21DA8B72DDC2587FAF6F9B1249364BEAD72F6405BF21CA04103707",
+    "oldBytes": 5249,
+    "lines": [
+      "91"
+    ],
+    "defect": "New blank line at EOF",
+    "bom": false,
+    "crlf": 0,
+    "lf": 91,
+    "semanticChange": "NONE",
+    "purpose": "Retained historical reproduction source",
+    "requiredForBank": true,
+    "newSha256": "DC2336837548C4225DEB9F870CCCA30966CE5FB117A3203CAC944EEBF9BACBE9",
+    "newBytes": 5248,
+    "removedByteRanges": [
+      {
+        "byteOffset": 5248,
+        "hex": "0A",
+        "line": 91
+      }
+    ],
+    "exactReversePass": true,
+    "provenanceEffect": "Historical hash retained; whitespace-only successor",
+    "reproductionEffect": "Update current seals only; retain historical identity"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/payoff/plan.md",
+    "oldSha256": "8DF3806FE7EC37F9E17F720B01CF27203AF8C6FA55F12CC793316E3D3700A36A",
+    "oldBytes": 5135,
+    "lines": [
+      "28"
+    ],
+    "defect": "New blank line at EOF",
+    "bom": false,
+    "crlf": 0,
+    "lf": 28,
+    "semanticChange": "NONE",
+    "purpose": "Distinct retained architecture/qualification history",
+    "requiredForBank": true,
+    "newSha256": "EE8405B41F4F53689FDAA5E6EE87CC85BF2C68CADA0EB5DA541447F822CE165B",
+    "newBytes": 5134,
+    "removedByteRanges": [
+      {
+        "byteOffset": 5134,
+        "hex": "0A",
+        "line": 28
+      }
+    ],
+    "exactReversePass": true,
+    "provenanceEffect": "Historical hash retained; whitespace-only successor",
+    "reproductionEffect": "Update current seals only; retain historical identity"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/payoff/Probe.cs",
+    "oldSha256": "A30E6B95B4A38DD13F714ADCDD46564F1C82E70D66FFCA8C917AB9FE4A395E5F",
+    "oldBytes": 19061,
+    "lines": [
+      "271"
+    ],
+    "defect": "New blank line at EOF",
+    "bom": false,
+    "crlf": 0,
+    "lf": 271,
+    "semanticChange": "NONE",
+    "purpose": "Retained historical reproduction source",
+    "requiredForBank": true,
+    "newSha256": "D056309A59B3BF5F73FF3DFC976829245508E0BCCC72F7E59031C7F87EE17BCE",
+    "newBytes": 19060,
+    "removedByteRanges": [
+      {
+        "byteOffset": 19060,
+        "hex": "0A",
+        "line": 271
+      }
+    ],
+    "exactReversePass": true,
+    "provenanceEffect": "Historical hash retained; whitespace-only successor",
+    "reproductionEffect": "Update current seals only; retain historical identity"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/payoff/verification.md",
+    "oldSha256": "90A8DBE12785E730451631CCB4EC3DF47BA6729B4303F6E8344EDBA4E44F12FE",
+    "oldBytes": 6569,
+    "lines": [
+      "67"
+    ],
+    "defect": "New blank line at EOF",
+    "bom": false,
+    "crlf": 0,
+    "lf": 67,
+    "semanticChange": "NONE",
+    "purpose": "Distinct retained architecture/qualification history",
+    "requiredForBank": true,
+    "newSha256": "A698748B384D84C5D8986C123ADE36DC5D4074C354A2DD58287C09B5563BA96D",
+    "newBytes": 6568,
+    "removedByteRanges": [
+      {
+        "byteOffset": 6568,
+        "hex": "0A",
+        "line": 67
+      }
+    ],
+    "exactReversePass": true,
+    "provenanceEffect": "Historical hash retained; whitespace-only successor",
+    "reproductionEffect": "Update current seals only; retain historical identity"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/verification.md",
+    "oldSha256": "914FBC819CFF8123AE3A64D9D3E6EA0AC0F5151521C52C0FE439B8709B0F4A46",
+    "oldBytes": 6391,
+    "lines": [
+      "73"
+    ],
+    "defect": "New blank line at EOF",
+    "bom": false,
+    "crlf": 0,
+    "lf": 73,
+    "semanticChange": "NONE",
+    "purpose": "Distinct retained architecture/qualification history",
+    "requiredForBank": true,
+    "newSha256": "D7DDE1BC583F2F611DEFF6874CEF336FB68F1C36C5C86C3FBF3EE3342CDFE4D0",
+    "newBytes": 6390,
+    "removedByteRanges": [
+      {
+        "byteOffset": 6390,
+        "hex": "0A",
+        "line": 73
+      }
+    ],
+    "exactReversePass": true,
+    "provenanceEffect": "Historical hash retained; whitespace-only successor",
+    "reproductionEffect": "Update current seals only; retain historical identity"
+  },
+  {
+    "path": "tests/NovaCore.ContactNumerics.PreconditionedProbe/PieceKernel.cs",
+    "oldSha256": "EC913B958BB5D9000977380C8F54B024A0D37EAD73B83631D464418FD24ADDD7",
+    "oldBytes": 7555,
+    "lines": [
+      "135"
+    ],
+    "defect": "New blank line at EOF",
+    "bom": false,
+    "crlf": 1,
+    "lf": 134,
+    "semanticChange": "NONE",
+    "purpose": "Retained historical reproduction source",
+    "requiredForBank": true,
+    "newSha256": "A64CBF550C744EDDFF026FE93C4061923E1F578CDEDC916A9F277BB272DFEFBE",
+    "newBytes": 7553,
+    "removedByteRanges": [
+      {
+        "byteOffset": 7553,
+        "hex": "0D0A",
+        "line": 135
+      }
+    ],
+    "exactReversePass": true,
+    "provenanceEffect": "Historical hash retained; whitespace-only successor",
+    "reproductionEffect": "Update current seals only; retain historical identity"
+  }
+]

@@ -1,0 +1,149 @@
+{
+  "schema": 1,
+  "baseline": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "main": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "originMain": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "remoteMain": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "branch": "codex/powered-contact-numerical-prerequisite",
+  "protectedTags": [
+    {
+      "tag": "m14.21-authored-compound-spacecraft-contact",
+      "object": "d8c13e46a9272e5ef6eb89acbe23c29709e3c55b",
+      "commit": "b6e8fa568585706ce38c0609aeb14db4a643123e"
+    },
+    {
+      "tag": "m14.22-canonical-spacecraft-command-authority",
+      "object": "e943a128ef425ff7427b917f2bb04056e58282f5",
+      "commit": "899f11f727205340bdd550dd65a853e253de0ed3"
+    },
+    {
+      "tag": "m14.23-prepared-single-engine-actuation",
+      "object": "cd22cc96d88d2b6cf3ca48740ad41baecbbe7c9e",
+      "commit": "6c9830237bc29bbd3c9cf5f4644b6409c32eaa9b"
+    },
+    {
+      "tag": "m14.24-exact-finite-propellant-segmentation",
+      "object": "50aa4e984e6646a9334e4e87356a43ffdf138e73",
+      "commit": "89a432ce3b96a5dcb0751cfdc26bfd6776c883a1"
+    },
+    {
+      "tag": "m15.0-segmented-powered-free-flight",
+      "object": "72c387e0bbe512a569650978522bbb3a0022ffc3",
+      "commit": "4607d8c802006d5e1a01c595ab608cf53a4dab6b"
+    }
+  ],
+  "preservation": {
+    "preExistingFiles": 2045,
+    "changedPreExistingFiles": [],
+    "allTagRefs": 65,
+    "allTagsUnchanged": true,
+    "trackedChanges": 0,
+    "staged": 0,
+    "productionChanged": false,
+    "permanentTestsChanged": false,
+    "BlenderTouched": false
+  },
+  "dependency": {
+    "version": "2.5.0-beta.29",
+    "sourceCommit": "f73164bb3c9ca733eb3329f1f6b1cea4e216ece7",
+    "manifestSha256": "C76F2DE75DAC81C8695109977E1F8A4DCCAFF29DA0BB96884C46C0B33362240E",
+    "physicsSha256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7",
+    "utilitiesSha256": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68"
+  },
+  "sourceProvenance": {
+    "root": "https://raw.githubusercontent.com/bepu/bepuphysics2/f73164bb3c9ca733eb3329f1f6b1cea4e216ece7/",
+    "method": "Read-only pinned HTTP source; DefaultTimestepper and NarrowPhaseConstraintUpdate also retained locally; no complete local BEPU source checkout",
+    "sha256": {
+      "BepuPhysics/CollisionDetection/PairCache.cs": "0CE02E8501EC80B66B8531570C72AC8551BBA8B3B3114CA9B25B6F1698231E72",
+      "BepuPhysics/Constraints/TypeBatch.cs": "0B0472712C17D512599F684D31DA06A5C0F40ABCBDA84ED285D419A3365531B9",
+      "BepuPhysics/Constraints/Contact/ContactConvexTypes.cs": "B259BD56D6EF9405FC98A38E97A9D6CA154CDA11CB908C901800298B7D771DA5",
+      "BepuPhysics/Solver.cs": "E79C2DACC4F22024CC0413F8514186D41413DF17C98CD92CF61B4632C1F59FAB",
+      "BepuPhysics/Solver_Solve.cs": "385E7049D39CF6D3EAB8B459BBFAC29CB957F786FFA6B075805E9753D2A596E4",
+      "BepuPhysics/Constraints/SpringSettings.cs": "200537D595C0FFF68EF793AC7AFC0462650ED6752C2B577797D4101E3D962580",
+      "BepuPhysics/Constraints/Contact/PenetrationLimitOneBody.cs": "D18AAB6E0CE7EE26EA76E47EB6125B133AE6D2953EFB1BEE44E58BE5531E3341",
+      "BepuPhysics/Constraints/Contact/TangentFrictionOneBody.cs": "3E102918561194C5871AF95F35F03A3FEE5FB39884CE4E60AC50F7E1CE195573",
+      "BepuPhysics/Constraints/Contact/TwistFrictionOneBody.cs": "554C03FBD6FAA9DB6D738FE613AF64BCB44EA88F2F1259C7E8536E5C51962440",
+      "BepuPhysics/Constraints/OneBodyTypeProcessor.cs": "DDDC1988A0B792A0A5C69D6A3959EBAEE5612CF3532ED237E29E048B6C73A192",
+      "BepuPhysics/Constraints/TypeProcessor.cs": "B4DF764735EC6D23571A90B577DF85AF911D1B8A0FBD7481BCCB668B41F0FCC6",
+      "BepuPhysics/DefaultTimestepper.cs": "31BDD2DFB8F1BB06274988695DF381603A42B1DFAFCD0816AD032CC4C418A027",
+      "BepuPhysics/CollisionDetection/NarrowPhaseConstraintUpdate.cs": "49897BA76273CFB4C96803C119872C7C50AD1556B5CB95B03EFB8238DE495AFE"
+    }
+  },
+  "acceptedPreconditioning": [
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/preconditioning/contract.md",
+      "sha256": "43BC09CAA8146F88DF996E17C42BF06225D880E2B3FC994BBFC76C0E2BBA3E8E"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/preconditioning/identity.json",
+      "sha256": "9E37FDE8E0E5547145B2280DA7A73FDAFF33B19407BDD3100C12F88ACE5329CB"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/preconditioning/interior-plan.md",
+      "sha256": "3F36E3760B6D97C4CCD08118DF0357B27534F5C1F1A2E2EA575C3051CACF72D8"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/preconditioning/README.md",
+      "sha256": "330E56F2360EBF4D7C4BB5782C089728A025CACD2DA0ACB3750E924DC5D81AAF"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/preconditioning/reproduce.ps1",
+      "sha256": "6E5BF258602CF6DEF8D0E22EEC57700C3EC0F3971B7B034151DF1DB365E679E5"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/preconditioning/results.json",
+      "sha256": "86364DB83910004993F9403EAEC666931864FC0772BBA5BADA4B8223FAE507A7"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/preconditioning/verification.md",
+      "sha256": "9E38273344EB0CE95878AD7A26B2526E0E415DDA12E93A1C14C7015B880DAEC4"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.PreconditionedProbe/CommonNormal.cs",
+      "sha256": "9740EE702EAF0146AE5A4EAB7E3E247611ABC02CF380B0BF84B4702B13C26E03"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.PreconditionedProbe/NovaCore.ContactNumerics.PreconditionedProbe.csproj",
+      "sha256": "7C83EEBDC78163048A98F7AF2AA70A0542A6C857C4CFCD8D2E4A6867E4FAF8B9"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.PreconditionedProbe/PieceKernel.cs",
+      "sha256": "EC913B958BB5D9000977380C8F54B024A0D37EAD73B83631D464418FD24ADDD7"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.PreconditionedProbe/Qualification.cs",
+      "sha256": "3302F5199FBFF1AB9C27BD8EB3A98093E0A3CBA84ECE7154A718D3E61C8C482D"
+    }
+  ],
+  "newDiagnostic": [
+    {
+      "path": "tests/NovaCore.ContactNumerics.DurationProbe/DurationStudy.cs",
+      "sha256": "811A2FB9F9A45C4B9042DF646174E9471FBFD4285454568AA37A469C6E07D5E0"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.DurationProbe/NovaCore.ContactNumerics.DurationProbe.csproj",
+      "sha256": "4D99224CC1A062515EFB271BE1D7ADA5BC800C9CAB056021D6A1E05F5031E34B"
+    }
+  ],
+  "results": {
+    "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/duration-history/results.json",
+    "sha256": "4045367DB811CD298C865E58E00AFC4CF95C6DEB9EB850E1C26A2DDEC5B21C0D"
+  },
+  "runtime": ".NET 10.0.12",
+  "sdk": "10.0.303",
+  "build": {
+    "diagnosticDllSha256": "E08F8A0DB0B1E280043E5E6A2BA27070C56DA895ED7F1B9213559761B4DF0D5D",
+    "configuration": "Debug",
+    "passed": true,
+    "warnings": 0,
+    "errors": 0
+  },
+  "execution": {
+    "captureProcesses": 1,
+    "studyProcesses": 1,
+    "numericalRetries": 0,
+    "secondCandidateEvaluated": false,
+    "productionCorrectionAdopted": false,
+    "operatorQualified": false
+  }
+}

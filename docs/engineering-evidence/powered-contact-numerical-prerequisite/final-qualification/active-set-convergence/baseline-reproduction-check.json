@@ -1,0 +1,38 @@
+[
+  {
+    "file": "baseline-after-D.json",
+    "exact": true
+  },
+  {
+    "file": "baseline-basis-transport.json",
+    "exact": true
+  },
+  {
+    "file": "baseline-coast.json",
+    "exact": true
+  },
+  {
+    "file": "baseline-duration-transform.json",
+    "exact": true
+  },
+  {
+    "file": "baseline-historical.json",
+    "exact": true
+  },
+  {
+    "file": "baseline-load-correction.json",
+    "exact": true
+  },
+  {
+    "file": "baseline-preparation.json",
+    "exact": true
+  },
+  {
+    "file": "powered-historical.json",
+    "exact": true
+  },
+  {
+    "file": "stop.json",
+    "exact": true
+  }
+]

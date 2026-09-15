@@ -1,0 +1,58 @@
+[
+  {
+    "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.PoweredFreeFlight.cs",
+    "bytes": 27146,
+    "sha256": "EAB4A763FF1A0553A89349E90F9A0665F2ED17D221FFA694BCBDEA0F097B074F",
+    "utf8Bom": false,
+    "newline": "LF"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Propellant.cs",
+    "bytes": 12673,
+    "sha256": "1AC6FF92A9E7E779152E01FDCA576DE30D8DFDBB9B555EFFCA751D5DB3D569B6",
+    "utf8Bom": false,
+    "newline": "CRLF"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Actuation/OrdinaryContactInputProjection.cs",
+    "bytes": 3172,
+    "sha256": "1ECEE811F05987C49900D5C18C267EEE03D591AB9B4BA7120480564EE5B735F2",
+    "utf8Bom": false,
+    "newline": "LF"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Powered.cs",
+    "bytes": 11527,
+    "sha256": "4681A12AAA968DBF906657EB393CC2778DF3EB0A3B67A197478FA64DE4779165",
+    "utf8Bom": false,
+    "newline": "LF"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Publication.cs",
+    "bytes": 10053,
+    "sha256": "9DA09342767DCE5995DBEBCFBBDB68730E300CB906839D87AA5DCC475D751378",
+    "utf8Bom": false,
+    "newline": "CRLF"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/PoweredContactPreparation.cs",
+    "bytes": 9294,
+    "sha256": "19A7920EFD3E691ACC15A38FB5735D82D2436BB9384C06BDCBABC891BF194813",
+    "utf8Bom": false,
+    "newline": "LF"
+  },
+  {
+    "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+    "bytes": 257230,
+    "sha256": "177E7C8313295B95214A416FACDDBE51355BB82D402C4BA8D6C4C658B03E03BF",
+    "utf8Bom": false,
+    "newline": "CRLF"
+  },
+  {
+    "path": "tests/NovaCore.Simulation.Tests/PoweredContactTests.Qualification.cs",
+    "bytes": 14654,
+    "sha256": "122DBA6BCA19945B8B1D57254BD975D4C37E0191A745E548862A777E41967203",
+    "utf8Bom": false,
+    "newline": "LF"
+  }
+]

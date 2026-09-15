@@ -1,0 +1,156 @@
+[
+  {
+    "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-architecture",
+    "classification": "RETAIN",
+    "files": 15,
+    "bytes": 108440.0,
+    "responsibility": "Distinct historical contracts, results, source and reproduction closure",
+    "survivingConclusion": "bank-candidate/README.md plus original records",
+    "reproductionDependency": "Retain original paths and csproj/source links; historical baseline for Candidate A",
+    "preservationDestination": "docs/engineering-evidence/powered-contact-bank-candidate",
+    "safeToRemove": false
+  },
+  {
+    "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-chronological-event-feasibility",
+    "classification": "RETAIN",
+    "files": 22,
+    "bytes": 181089.0,
+    "responsibility": "Distinct historical contracts, results, source and reproduction closure",
+    "survivingConclusion": "bank-candidate/README.md plus original records",
+    "reproductionDependency": "Retain original paths and csproj/source links; historical baseline for Candidate A",
+    "preservationDestination": "docs/engineering-evidence/powered-contact-bank-candidate",
+    "safeToRemove": false
+  },
+  {
+    "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-event-lifecycle-convergence",
+    "classification": "RETAIN",
+    "files": 18,
+    "bytes": 123524.0,
+    "responsibility": "Distinct historical contracts, results, source and reproduction closure",
+    "survivingConclusion": "bank-candidate/README.md plus original records",
+    "reproductionDependency": "Retain original paths and csproj/source links; historical baseline for Candidate A",
+    "preservationDestination": "docs/engineering-evidence/powered-contact-bank-candidate",
+    "safeToRemove": false
+  },
+  {
+    "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite",
+    "classification": "RETAIN",
+    "files": 300,
+    "bytes": 3163608.0,
+    "responsibility": "Distinct historical contracts, results, source and reproduction closure",
+    "survivingConclusion": "bank-candidate/README.md plus original records",
+    "reproductionDependency": "Retain original paths and csproj/source links; historical baseline for Candidate A",
+    "preservationDestination": "docs/engineering-evidence/powered-contact-bank-candidate",
+    "safeToRemove": false
+  },
+  {
+    "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-ordinary-step-event-closure",
+    "classification": "RETAIN",
+    "files": 98,
+    "bytes": 803257.0,
+    "responsibility": "Distinct historical contracts, results, source and reproduction closure",
+    "survivingConclusion": "bank-candidate/README.md plus original records",
+    "reproductionDependency": "Retain original paths and csproj/source links; historical baseline for Candidate A",
+    "preservationDestination": "docs/engineering-evidence/powered-contact-bank-candidate",
+    "safeToRemove": false
+  },
+  {
+    "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-production-integration",
+    "classification": "RETAIN",
+    "files": 55,
+    "bytes": 364611.0,
+    "responsibility": "Distinct historical contracts, results, source and reproduction closure",
+    "survivingConclusion": "bank-candidate/README.md plus original records",
+    "reproductionDependency": "Retain original paths and csproj/source links; historical baseline for Candidate A",
+    "preservationDestination": "docs/engineering-evidence/powered-contact-bank-candidate",
+    "safeToRemove": false
+  },
+  {
+    "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-production-integration-design",
+    "classification": "RETAIN",
+    "files": 8,
+    "bytes": 106344.0,
+    "responsibility": "Distinct historical contracts, results, source and reproduction closure",
+    "survivingConclusion": "bank-candidate/README.md plus original records",
+    "reproductionDependency": "Retain original paths and csproj/source links; historical baseline for Candidate A",
+    "preservationDestination": "docs/engineering-evidence/powered-contact-bank-candidate",
+    "safeToRemove": false
+  },
+  {
+    "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.DurationProbe",
+    "classification": "RETAIN",
+    "files": 2,
+    "bytes": 17183.0,
+    "responsibility": "Distinct historical contracts, results, source and reproduction closure",
+    "survivingConclusion": "bank-candidate/README.md plus original records",
+    "reproductionDependency": "Retain original paths and csproj/source links; historical baseline for Candidate A",
+    "preservationDestination": "docs/engineering-evidence/powered-contact-bank-candidate",
+    "safeToRemove": false
+  },
+  {
+    "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.IntegratedProbe",
+    "classification": "RETAIN",
+    "files": 8,
+    "bytes": 55978.0,
+    "responsibility": "Distinct historical contracts, results, source and reproduction closure",
+    "survivingConclusion": "bank-candidate/README.md plus original records",
+    "reproductionDependency": "Retain original paths and csproj/source links; historical baseline for Candidate A",
+    "preservationDestination": "docs/engineering-evidence/powered-contact-bank-candidate",
+    "safeToRemove": false
+  },
+  {
+    "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.OwnedCacheProbe",
+    "classification": "RETAIN",
+    "files": 3,
+    "bytes": 38690.0,
+    "responsibility": "Distinct historical contracts, results, source and reproduction closure",
+    "survivingConclusion": "bank-candidate/README.md plus original records",
+    "reproductionDependency": "Retain original paths and csproj/source links; historical baseline for Candidate A",
+    "preservationDestination": "docs/engineering-evidence/powered-contact-bank-candidate",
+    "safeToRemove": false
+  },
+  {
+    "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.PreconditionedProbe",
+    "classification": "RETAIN",
+    "files": 4,
+    "bytes": 33166.0,
+    "responsibility": "Distinct historical contracts, results, source and reproduction closure",
+    "survivingConclusion": "bank-candidate/README.md plus original records",
+    "reproductionDependency": "Retain original paths and csproj/source links; historical baseline for Candidate A",
+    "preservationDestination": "docs/engineering-evidence/powered-contact-bank-candidate",
+    "safeToRemove": false
+  },
+  {
+    "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.WorldProbe",
+    "classification": "RETAIN",
+    "files": 3,
+    "bytes": 24669.0,
+    "responsibility": "Distinct historical contracts, results, source and reproduction closure",
+    "survivingConclusion": "bank-candidate/README.md plus original records",
+    "reproductionDependency": "Retain original paths and csproj/source links; historical baseline for Candidate A",
+    "preservationDestination": "docs/engineering-evidence/powered-contact-bank-candidate",
+    "safeToRemove": false
+  },
+  {
+    "path": "E:\\NovaCore\\build\\powered-contact-attribution-correction",
+    "classification": "DISPOSABLE",
+    "files": 224,
+    "bytes": 44470220.0,
+    "responsibility": "Attribution-only build/generator requalification output",
+    "survivingConclusion": "bank-candidate/verification.md and attribution-identity-migration.json",
+    "reproductionDependency": "SDK, pinned upstream source, corrected generator, qualified successor source",
+    "preservationDestination": "docs/engineering-evidence/powered-contact-bank-candidate",
+    "safeToRemove": true
+  },
+  {
+    "path": "E:\\NovaCore\\build\\powered-contact-production-integration",
+    "classification": "DISPOSABLE",
+    "files": 1,
+    "bytes": 104525.0,
+    "responsibility": "Attribution-only build/generator requalification output",
+    "survivingConclusion": "bank-candidate/verification.md and attribution-identity-migration.json",
+    "reproductionDependency": "SDK, pinned upstream source, corrected generator, qualified successor source",
+    "preservationDestination": "docs/engineering-evidence/powered-contact-bank-candidate",
+    "safeToRemove": true
+  }
+]

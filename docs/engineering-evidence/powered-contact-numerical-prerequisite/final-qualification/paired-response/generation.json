@@ -1,0 +1,9 @@
+{
+  "selectedSha256": "6983854494a227eae4b5f28be83f0298de66182607ca8c4ca89dedde31b36522",
+  "changes": [
+    "observation snapshots only",
+    "diagnostic UseD and Sweeps controls",
+    "two input helpers made internal in disposable driver"
+  ],
+  "candidateModified": false
+}

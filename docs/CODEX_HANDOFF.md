@@ -15,7 +15,21 @@ not as an onboarding requirement.
 
 ## Repository rules
 
-Latest banked checkpoint: **M14.21 — Authored Compound Spacecraft Contact**,
+Latest banked production checkpoint: **M15.1 — Finite-Fuel Retained Powered Contact**,
+tag `m15.1-finite-fuel-retained-powered-contact`, parent
+`49057fecceb0f725d5f551ec40e2780971b0d81d`. The annotated tag identifies the atomic
+engineering/license bank. M15.0 free flight remains at
+`4607d8c802006d5e1a01c595ab608cf53a4dab6b`.
+
+**M15.1 is BANKED.** Use the historical
+[bank-candidate report](engineering-evidence/powered-contact-bank-candidate/README.md)
+for qualification and the explicit attribution/whitespace identity migrations.
+Technical/manual acceptance passed; numerical research and optimization are closed.
+The operative [LICENSE](../LICENSE) and [public policies](../LICENSING.md) are
+effective September 15, 2026. Old review drafts remain historical/non-operative.
+No departure, Florida or next milestone work is authorized by this bank.
+
+Earlier banked checkpoint: **M14.21 — Authored Compound Spacecraft Contact**,
 `b6e8fa568585706ce38c0609aeb14db4a643123e`, tag
 `m14.21-authored-compound-spacecraft-contact`. Inspect current Git refs before resuming;
 later documentation commits may advance main without moving this milestone tag.
@@ -177,6 +191,9 @@ is the concise performance checkpoint. Historical LiveKernelEvent 141 remains
 
 ## Next architectural decision and work boundary
 
+M15.1 retained powered contact is banked; M15.0 free flight remains separate.
+Contact-to-flight transition remains unimplemented and requires Project Control
+selection. The following earlier boundaries remain:
 M13 is closed at M13.6; M14 remains OPEN. Banked M14.21 qualifies the authored
 compound article and NovaCore-owned four-contact selector on the corrected M14.20
 host-paced servicing path, retaining M14.19 canonical publication and private BEPU

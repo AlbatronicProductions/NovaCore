@@ -1,0 +1,1154 @@
+{
+  "schema": 1,
+  "judgment": "REVISE",
+  "fullOperatorQualified": false,
+  "stopReason": "First material numerical failure: mass_and_powered local seven-row kernel after eight sweeps",
+  "environment": {
+    "sdk": "10.0.303",
+    "runtime": ".NET 10.0.12",
+    "architecture": "X64",
+    "vectorLanes": 8
+  },
+  "executed": {
+    "scalarDebug": "PASS",
+    "scalarRelease": "PASS",
+    "coupledDebug": "PASS",
+    "coupledRelease": "PASS",
+    "initialCacheDebug": "TECHNICAL FAIL: no constraint, before solver",
+    "cacheCountDiagnostic": "TECHNICAL FAIL: contacts=0 constraints=0; gravity prediction absent",
+    "correctedCacheDebug": "PASS",
+    "correctedCacheRelease": "PASS",
+    "kernelDebug": "FAIL: mass_and_powered",
+    "kernelRelease": "NOT RUN: stopped"
+  },
+  "debugReleaseOutputIdentity": {
+    "debug.json": true,
+    "coupled-debug.json": true,
+    "cache-debug.json": true
+  },
+  "scalarWitness": {
+    "classification": "PRIMITIVE WITNESSES REPRODUCED; FULL OPERATOR UNQUALIFIED",
+    "runtime": ".NET 10.0.12",
+    "architecture": "X64",
+    "vectorLanes": 8,
+    "iterations": 8,
+    "physicsHash": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7",
+    "exact": {
+      "Significand": 1,
+      "Exponent": -1075,
+      "Value": 0,
+      "freeEpsilon": 5E-324,
+      "freeBits": 1,
+      "floatProjection": 0
+    },
+    "springPositiveFloat": {
+      "dt": 7.17E-43,
+      "angularFrequency": 188.49556,
+      "positiveDuration": true,
+      "inverseDuration": "∞",
+      "bias": "94.24778",
+      "cfm": "0",
+      "softness": "NaN",
+      "finite": false,
+      "stable": {
+        "Bias": 94.2477798461914,
+        "Cfm": 2.704778632488785E-40,
+        "Softness": 1
+      }
+    },
+    "springSimilarity": {
+      "dt": 1,
+      "angularFrequency": 1.3524E-40,
+      "positiveDuration": true,
+      "inverseDuration": "1",
+      "bias": "6.762E-41",
+      "cfm": "0",
+      "softness": "NaN",
+      "finite": false,
+      "stable": {
+        "Bias": 6.761965739599405E-41,
+        "Cfm": 2.704786295839762E-40,
+        "Softness": 1
+      }
+    },
+    "regularScaleControl": {
+      "Velocity": -0.007287442684173584,
+      "Impulse": 0.9417004585266113
+    },
+    "tiny": {
+      "hExponent": -151,
+      "inward": -7.006492321624085E-46,
+      "inputFloat": 0,
+      "stockCold": {
+        "Velocity": 0,
+        "Impulse": 0
+      },
+      "stockWarm": {
+        "Velocity": 0,
+        "Impulse": 0
+      },
+      "stockWarmControl": {
+        "Velocity": 0,
+        "Impulse": 0
+      },
+      "ordinaryCold": {
+        "Velocity": -4.0847538003384053E-47,
+        "Impulse": 5.278413553272196E-45
+      },
+      "ordinaryWarm": {
+        "Velocity": 0,
+        "Impulse": 0
+      },
+      "ordinaryWarmControl": {
+        "Velocity": 0,
+        "Impulse": 0
+      },
+      "microFactored": {
+        "Velocity": -7.006492321624085E-46,
+        "Impulse": 7.402738562588112E-88
+      },
+      "coastFactored": {
+        "Velocity": -4.084753800338409E-47,
+        "Impulse": 5.278413553272196E-45
+      },
+      "expectedVelocity": -4.0847537624871817E-47,
+      "expectedImpulse": 5.278413556300294E-45,
+      "velocityAbsoluteBar": 8.169507524974363E-53,
+      "impulseAbsoluteBar": 1.0556827112600588E-50,
+      "velocityRelativeError": 9.266464910460823E-09,
+      "impulseRelativeError": 5.736757917236251E-10,
+      "forceOnlyPostAdd": {
+        "Velocity": -7.006492321624085E-46,
+        "Impulse": 0
+      }
+    },
+    "fullWorldQualification": "NOT RUN: scalar row does not implement coupled retained constraints"
+  },
+  "coupledWitness": {
+    "classification": "COUPLED NORMAL PRIMITIVE ONLY; RETAINED WORLD UNQUALIFIED",
+    "cases": [
+      {
+        "mass": 8,
+        "sweeps": 1,
+        "warm": false,
+        "actual": {
+          "BaseImpulses": {
+            "A": 0.18834008908162708,
+            "B": 0.29475605654745274
+          },
+          "ResponseImpulses": {
+            "A": 1.883400890816271,
+            "B": 2.1942002091480193
+          },
+          "ResponseVelocity": {
+            "A": -0.49029986250446367,
+            "B": 0.40539965916587417
+          },
+          "Active": true
+        },
+        "expectedBase": {
+          "A": 0.18834008908162708,
+          "B": 0.29475605654745274
+        },
+        "expectedResponse": {
+          "A": 1.883400890816271,
+          "B": 2.1942002091480193
+        },
+        "baseError": 0,
+        "responseError": 0,
+        "epsilonScaleImpulses": {
+          "A": 1E-323,
+          "B": 1E-323
+        },
+        "tinyScaleVelocity": {
+          "A": -3.4352822219308695E-46,
+          "B": 2.8404295991347186E-46
+        }
+      },
+      {
+        "mass": 8,
+        "sweeps": 1,
+        "warm": true,
+        "actual": {
+          "BaseImpulses": {
+            "A": 0.7533603563265083,
+            "B": 0.6140039589449298
+          },
+          "ResponseImpulses": {
+            "A": 1.883400890816271,
+            "B": 2.1942002091480193
+          },
+          "ResponseVelocity": {
+            "A": -0.49029986250446367,
+            "B": 0.40539965916587417
+          },
+          "Active": true
+        },
+        "expectedBase": {
+          "A": 0.7533603563265083,
+          "B": 0.6140039589449298
+        },
+        "expectedResponse": {
+          "A": 1.883400890816271,
+          "B": 2.1942002091480193
+        },
+        "baseError": 0,
+        "responseError": 0,
+        "epsilonScaleImpulses": {
+          "A": 1E-323,
+          "B": 1E-323
+        },
+        "tinyScaleVelocity": {
+          "A": -3.4352822219308695E-46,
+          "B": 2.8404295991347186E-46
+        }
+      },
+      {
+        "mass": 8,
+        "sweeps": 8,
+        "warm": false,
+        "actual": {
+          "BaseImpulses": {
+            "A": 0.43290320902056395,
+            "B": 0.4329391759335928
+          },
+          "ResponseImpulses": {
+            "A": 3.7039587283903965,
+            "B": 3.222852285068915
+          },
+          "ResponseVelocity": {
+            "A": -0.13414862331758604,
+            "B": 0.009446778339259332
+          },
+          "Active": true
+        },
+        "expectedBase": {
+          "A": 0.4329032090205638,
+          "B": 0.4329391759335927
+        },
+        "expectedResponse": {
+          "A": 3.7039587283903965,
+          "B": 3.2228522850689143
+        },
+        "baseError": 1.6653345369377348E-16,
+        "responseError": 8.881784197001252E-16,
+        "epsilonScaleImpulses": {
+          "A": 2E-323,
+          "B": 1.5E-323
+        },
+        "tinyScaleVelocity": {
+          "A": -9.399112992311083E-47,
+          "B": 6.618877989810524E-48
+        }
+      },
+      {
+        "mass": 8,
+        "sweeps": 8,
+        "warm": true,
+        "actual": {
+          "BaseImpulses": {
+            "A": 0.43309417692975544,
+            "B": 0.43304707667267944
+          },
+          "ResponseImpulses": {
+            "A": 3.7039587283903965,
+            "B": 3.222852285068915
+          },
+          "ResponseVelocity": {
+            "A": -0.13414862331758604,
+            "B": 0.009446778339259332
+          },
+          "Active": true
+        },
+        "expectedBase": {
+          "A": 0.4330941769297553,
+          "B": 0.43304707667267933
+        },
+        "expectedResponse": {
+          "A": 3.7039587283903965,
+          "B": 3.2228522850689143
+        },
+        "baseError": 1.1102230246251565E-16,
+        "responseError": 8.881784197001252E-16,
+        "epsilonScaleImpulses": {
+          "A": 2E-323,
+          "B": 1.5E-323
+        },
+        "tinyScaleVelocity": {
+          "A": -9.399112992311083E-47,
+          "B": 6.618877989810524E-48
+        }
+      },
+      {
+        "mass": 8.00390625,
+        "sweeps": 1,
+        "warm": false,
+        "actual": {
+          "BaseImpulses": {
+            "A": 0.1883584744866526,
+            "B": 0.29481253445368666
+          },
+          "ResponseImpulses": {
+            "A": 1.8835847448665262,
+            "B": 2.194691446590256
+          },
+          "ResponseVelocity": {
+            "A": -0.4904642728096944,
+            "B": 0.40555335086186495
+          },
+          "Active": true
+        },
+        "expectedBase": {
+          "A": 0.1883584744866526,
+          "B": 0.2948125344536866
+        },
+        "expectedResponse": {
+          "A": 1.8835847448665262,
+          "B": 2.194691446590256
+        },
+        "baseError": 5.551115123125783E-17,
+        "responseError": 0,
+        "epsilonScaleImpulses": {
+          "A": 1E-323,
+          "B": 1E-323
+        },
+        "tinyScaleVelocity": {
+          "A": -3.4364341614720645E-46,
+          "B": 2.8415064388225754E-46
+        }
+      },
+      {
+        "mass": 8.00390625,
+        "sweeps": 1,
+        "warm": true,
+        "actual": {
+          "BaseImpulses": {
+            "A": 0.7535258249717381,
+            "B": 0.6142266685080181
+          },
+          "ResponseImpulses": {
+            "A": 1.8835847448665262,
+            "B": 2.194691446590256
+          },
+          "ResponseVelocity": {
+            "A": -0.4904642728096944,
+            "B": 0.40555335086186495
+          },
+          "Active": true
+        },
+        "expectedBase": {
+          "A": 0.753525824971738,
+          "B": 0.614226668508018
+        },
+        "expectedResponse": {
+          "A": 1.8835847448665262,
+          "B": 2.194691446590256
+        },
+        "baseError": 1.1102230246251565E-16,
+        "responseError": 0,
+        "epsilonScaleImpulses": {
+          "A": 1E-323,
+          "B": 1E-323
+        },
+        "tinyScaleVelocity": {
+          "A": -3.4364341614720645E-46,
+          "B": 2.8415064388225754E-46
+        }
+      },
+      {
+        "mass": 8.00390625,
+        "sweeps": 8,
+        "warm": false,
+        "actual": {
+          "BaseImpulses": {
+            "A": 0.433091589515778,
+            "B": 0.4331277006506591
+          },
+          "ResponseImpulses": {
+            "A": 3.705466827482618,
+            "B": 3.224359716118642
+          },
+          "ResponseVelocity": {
+            "A": -0.13419443867158487,
+            "B": 0.009446444318012004
+          },
+          "Active": true
+        },
+        "expectedBase": {
+          "A": 0.433091589515778,
+          "B": 0.433127700650659
+        },
+        "expectedResponse": {
+          "A": 3.705466827482618,
+          "B": 3.224359716118642
+        },
+        "baseError": 1.1102230246251565E-16,
+        "responseError": 0,
+        "epsilonScaleImpulses": {
+          "A": 2E-323,
+          "B": 1.5E-323
+        },
+        "tinyScaleVelocity": {
+          "A": -9.402323041571136E-47,
+          "B": 6.618643958080057E-48
+        }
+      },
+      {
+        "mass": 8.00390625,
+        "sweeps": 8,
+        "warm": true,
+        "actual": {
+          "BaseImpulses": {
+            "A": 0.43328330446239516,
+            "B": 0.43323605167908713
+          },
+          "ResponseImpulses": {
+            "A": 3.705466827482618,
+            "B": 3.224359716118642
+          },
+          "ResponseVelocity": {
+            "A": -0.13419443867158487,
+            "B": 0.009446444318012004
+          },
+          "Active": true
+        },
+        "expectedBase": {
+          "A": 0.4332833044623951,
+          "B": 0.43323605167908696
+        },
+        "expectedResponse": {
+          "A": 3.705466827482618,
+          "B": 3.224359716118642
+        },
+        "baseError": 1.6653345369377348E-16,
+        "responseError": 0,
+        "epsilonScaleImpulses": {
+          "A": 2E-323,
+          "B": 1.5E-323
+        },
+        "tinyScaleVelocity": {
+          "A": -9.402323041571136E-47,
+          "B": 6.618643958080057E-48
+        }
+      }
+    ],
+    "micro": {
+      "BaseImpulses": {
+        "A": 2.641643223674875E-44,
+        "B": 2.641643223674875E-44
+      },
+      "ResponseImpulses": {
+        "A": 2.6416432236748752E-43,
+        "B": 1.5849859342049251E-43
+      },
+      "ResponseVelocity": {
+        "A": -1,
+        "B": 0.25
+      },
+      "Active": true
+    },
+    "coast": {
+      "BaseImpulses": {
+        "A": 0.43309417692975544,
+        "B": 0.43304707667267944
+      },
+      "ResponseImpulses": {
+        "A": 3.7039587283903965,
+        "B": 3.222852285068915
+      },
+      "ResponseVelocity": {
+        "A": -0.13414862331758604,
+        "B": 0.009446778339259332
+      },
+      "Active": true
+    },
+    "iterations": 8,
+    "canonicalMutations": 0,
+    "worldSteps": 0
+  },
+  "cacheWitness": {
+    "classification": "RETAINED CACHE ACCESS WITNESS ONLY",
+    "body": 0,
+    "slab": 0,
+    "constraint": 0,
+    "featureBefore": [
+      -4,
+      -21,
+      -5,
+      -20
+    ],
+    "featureAfter": [
+      -4,
+      -21,
+      -5,
+      -20
+    ],
+    "cacheAfter": [
+      0.25,
+      0.5,
+      0.75,
+      1,
+      0.03125,
+      -0.0625,
+      0.125
+    ],
+    "bodyPosition": "<0, 0.5, 0>",
+    "worldsCreated": 1,
+    "collisionRefreshes": 2,
+    "solverSteps": 0,
+    "canonicalMutations": 0,
+    "poolBytes": 3014656
+  },
+  "decisiveFourContactWitness": {
+    "classification": "FINITE-ITERATION REFERENCE GATE FAILURE",
+    "firstFailure": "mass_and_powered",
+    "iterations": 8,
+    "coldPreparationSteps": 120,
+    "dt": 0.016666666666666666,
+    "omega": 188.4955596923828,
+    "body": 0,
+    "constraint": 0,
+    "features": [
+      -4,
+      -21,
+      -5,
+      -20
+    ],
+    "contacts": [
+      {
+        "offset": "<-1, -0.4995855, -0.5>",
+        "normal": "<0, 1, 7.0024236E-11>",
+        "Depth": 0.0004144907,
+        "FeatureId": -4
+      },
+      {
+        "offset": "<1, -0.4995855, 0.5>",
+        "normal": "<0, 1, 7.0024236E-11>",
+        "Depth": 0.0004144907,
+        "FeatureId": -21
+      },
+      {
+        "offset": "<-1, -0.4995855, 0.5>",
+        "normal": "<0, 1, 7.0024236E-11>",
+        "Depth": 0.00041449076,
+        "FeatureId": -5
+      },
+      {
+        "offset": "<1, -0.4995855, -0.5>",
+        "normal": "<0, 1, 7.0024236E-11>",
+        "Depth": 0.00041449064,
+        "FeatureId": -20
+      }
+    ],
+    "position": "<-1.2228941E-10, 0.4995855, 9.193192E-09>",
+    "deepest": 0.0004144906997680664,
+    "sourceSpeed": 1.2687515988630745E-07,
+    "impulseBar": 0.0001,
+    "velocityBar": 0.0001,
+    "results": [
+      {
+        "Name": "unchanged_supported",
+        "result": "PASS",
+        "sourceMass": 8.0078125,
+        "successorMass": 8.0078125,
+        "stageMass": 8.0078125,
+        "inverseMass": 0.1248780487804878,
+        "transportInverseMass": 0.12487805,
+        "Thrust": 0,
+        "source": {
+          "Linear": {
+            "X": -1.0169570741069833E-10,
+            "Y": 1.266525941900909E-07,
+            "Z": 7.511074429089604E-09
+          },
+          "Angular": {
+            "X": 1.503461355412128E-08,
+            "Y": 3.675332775104734E-20,
+            "Z": 2.035601687211397E-10
+          }
+        },
+        "free": {
+          "Linear": {
+            "X": -1.0169570741069833E-10,
+            "Y": -0.16349987334740582,
+            "Z": 7.511074429089604E-09
+          },
+          "Angular": {
+            "X": 1.503461355412128E-08,
+            "Y": 3.675332775104734E-20,
+            "Z": 2.035601687211397E-10
+          }
+        },
+        "initial": [
+          0.3273193836212158,
+          0.3273193836212158,
+          0.32731935381889343,
+          0.32731935381889343,
+          -5.777245348781435E-10,
+          -1.1464568183683355E-10,
+          7.350670073853443E-20
+        ],
+        "first": {
+          "Impulses": [
+            0.3273193452973896,
+            0.327319339458224,
+            0.32731934876797847,
+            0.327319326626721,
+            8.246703121986857E-09,
+            2.7994080412603756E-08,
+            -1.0813344874547405E-18
+          ],
+          "Velocity": {
+            "Linear": {
+              "X": 3.3941504319193315E-09,
+              "Y": 1.2870063328257464E-07,
+              "Z": 6.492691197140268E-09
+            },
+            "Angular": {
+              "X": 1.2996155977114324E-08,
+              "Y": 4.757399634636538E-19,
+              "Z": -6.79393291591867E-09
+            }
+          },
+          "NormalClamps": 0,
+          "TangentClamps": 0,
+          "TwistClamps": 0
+        },
+        "last": {
+          "Impulses": [
+            0.32731928921303466,
+            0.3273193449482792,
+            0.32731936787196725,
+            0.3273193062776147,
+            5.8785111689130116E-08,
+            5.861967862008194E-09,
+            -3.0708471788556646E-19
+          ],
+          "Velocity": {
+            "Linear": {
+              "X": 6.303354012108127E-10,
+              "Y": 1.2222702799186136E-07,
+              "Z": 1.8155334635101876E-10
+            },
+            "Angular": {
+              "X": 3.634079700047558E-10,
+              "Y": 8.835075097945629E-20,
+              "Z": -1.2617167473974973E-09
+            }
+          },
+          "NormalClamps": 0,
+          "TangentClamps": 0,
+          "TwistClamps": 0
+        },
+        "cold": {
+          "Impulses": [
+            0.38443648404476694,
+            0.37256197033277766,
+            0.27354669610986204,
+            0.2853725283374684,
+            -0.011855956992510559,
+            4.8705246002068226E-05,
+            -1.7039622048718018E-15
+          ],
+          "Velocity": {
+            "Linear": {
+              "X": 6.082114390404524E-06,
+              "Y": 0.0008293587399932217,
+              "Z": 0.0014805562982315571
+            },
+            "Angular": {
+              "X": 0.0029635693403225107,
+              "Y": 8.524975364859439E-16,
+              "Z": -1.2174321066521874E-05
+            }
+          },
+          "NormalClamps": 0,
+          "TangentClamps": 1,
+          "TwistClamps": 0
+        },
+        "oracle": {
+          "Impulses": [
+            0.3273192996472984,
+            0.3273193551196138,
+            0.3273193575471562,
+            0.327319297219756,
+            5.801979761568821E-08,
+            4.857454515030824E-09,
+            -2.719437332349412E-19
+          ],
+          "Velocity": {
+            "Linear": {
+              "X": 5.048937344663217E-10,
+              "Y": 1.223797449281805E-07,
+              "Z": 2.7712427455738484E-10
+            },
+            "Angular": {
+              "X": 5.547084342428475E-10,
+              "Y": 7.076826285418019E-20,
+              "Z": -1.010625276708854E-09
+            }
+          },
+          "Residual": 4.7496807346131365E-17,
+          "Admissible": true
+        },
+        "finiteReference": {
+          "first": [
+            0.32731934529738965,
+            0.32731933945822406,
+            0.32731934876797847,
+            0.32731932662672103,
+            8.246703142458078E-09,
+            2.7994080407773742E-08,
+            -1.081334488604187E-18
+          ],
+          "eighth": [
+            0.32731928921303477,
+            0.3273193449482792,
+            0.3273193678719672,
+            0.3273193062776147,
+            5.8785111574063635E-08,
+            5.861968004263519E-09,
+            -3.0708472334865394E-19
+          ],
+          "error": 1.422553255209828E-16,
+          "arithmeticBar": 1.2017196691052438E-08,
+          "transitionInfinityNorm": 2.0404455412933022,
+          "valid": true
+        },
+        "impulseError": 1.2229286472376089E-09,
+        "linearError": 2.1952648294126998E-10,
+        "angularError": 3.156624688972308E-10,
+        "firstImpulseError": 5.06164885560878E-08,
+        "coldImpulseError": 0.006640369291050607
+      },
+      {
+        "Name": "mass_only",
+        "result": "PASS",
+        "sourceMass": 8.0078125,
+        "successorMass": 8,
+        "stageMass": 8.00390625,
+        "inverseMass": 0.12493899463152758,
+        "transportInverseMass": 0.124938995,
+        "Thrust": 0,
+        "source": {
+          "Linear": {
+            "X": -1.0169570741069833E-10,
+            "Y": 1.266525941900909E-07,
+            "Z": 7.511074429089604E-09
+          },
+          "Angular": {
+            "X": 1.503461355412128E-08,
+            "Y": 3.675332775104734E-20,
+            "Z": 2.035601687211397E-10
+          }
+        },
+        "free": {
+          "Linear": {
+            "X": -1.0169570741069833E-10,
+            "Y": -0.16349987334740582,
+            "Z": 7.511074429089604E-09
+          },
+          "Angular": {
+            "X": 1.503461355412128E-08,
+            "Y": 3.675332775104734E-20,
+            "Z": 2.035601687211397E-10
+          }
+        },
+        "initial": [
+          0.3273193836212158,
+          0.3273193836212158,
+          0.32731935381889343,
+          0.32731935381889343,
+          -5.777245348781435E-10,
+          -1.1464568183683355E-10,
+          7.350670073853443E-20
+        ],
+        "first": {
+          "Impulses": [
+            0.32721759566548125,
+            0.327153698389771,
+            0.32722946331632075,
+            0.3272331710765628,
+            -3.38106720990847E-05,
+            6.0204198070480415E-05,
+            -2.1062311237968295E-15
+          ],
+          "Velocity": {
+            "Linear": {
+              "X": 7.521750283815765E-06,
+              "Y": 2.4521812536960896E-05,
+              "Z": 4.2317939049758774E-06
+            },
+            "Angular": {
+              "X": 8.470609787898348E-06,
+              "Y": 1.0542836216840058E-15,
+              "Z": -1.505598169641075E-05
+            }
+          },
+          "NormalClamps": 0,
+          "TangentClamps": 0,
+          "TwistClamps": 0
+        },
+        "last": {
+          "Impulses": [
+            0.3271448943854691,
+            0.32715034501175444,
+            0.3271955242943022,
+            0.32719006589902555,
+            5.455932988634902E-06,
+            7.770886504318415E-09,
+            -3.7386459782500847E-19
+          ],
+          "Velocity": {
+            "Linear": {
+              "X": 8.691910398345501E-10,
+              "Y": 5.393795191127593E-06,
+              "Z": -6.741362586164602E-07
+            },
+            "Angular": {
+              "X": -1.3493911373786581E-06,
+              "Y": 1.2182987200867183E-19,
+              "Z": -1.7398243548622512E-09
+            }
+          },
+          "NormalClamps": 0,
+          "TangentClamps": 0,
+          "TwistClamps": 0
+        },
+        "cold": {
+          "Impulses": [
+            0.3842785502886452,
+            0.3724088926600159,
+            0.27340737240847324,
+            0.28522718499757355,
+            -0.011847624415911626,
+            4.9857198704668503E-05,
+            -1.7442610743314572E-15
+          ],
+          "Velocity": {
+            "Linear": {
+              "X": 6.229006585598171E-06,
+              "Y": 0.0008351349936411637,
+              "Z": 0.0014802378058778002
+            },
+            "Angular": {
+              "X": 0.0029629318271283916,
+              "Y": 8.730866320690322E-16,
+              "Z": -1.246834920074594E-05
+            }
+          },
+          "NormalClamps": 0,
+          "TangentClamps": 1,
+          "TwistClamps": 0
+        },
+        "oracle": {
+          "Impulses": [
+            0.32717094296068544,
+            0.32717099842093283,
+            0.32717100084790035,
+            0.327170940533717,
+            5.7992973423919605E-08,
+            4.855119992898881E-09,
+            -2.718620644281981E-19
+          ],
+          "Velocity": {
+            "Linear": {
+              "X": 5.048981033175171E-10,
+              "Y": 5.775255516739242E-06,
+              "Z": 2.769399920042229E-10
+            },
+            "Angular": {
+              "X": 5.543395335213539E-10,
+              "Y": 7.076887398467922E-20,
+              "Z": -1.0106340217856184E-09
+            }
+          },
+          "Residual": 6.879000133896525E-17,
+          "Admissible": true
+        },
+        "finiteReference": {
+          "first": [
+            0.3272175956654812,
+            0.327153698389771,
+            0.3272294633163207,
+            0.3272331710765628,
+            -3.381067209918902E-05,
+            6.020419807050806E-05,
+            -2.1062311237960485E-15
+          ],
+          "eighth": [
+            0.32714489438546906,
+            0.3271503450117545,
+            0.32719552429430226,
+            0.32719006589902544,
+            5.455932988638129E-06,
+            7.770886591742995E-09,
+            -3.738645995605498E-19
+          ],
+          "error": 1.1102230246251565E-16,
+          "arithmeticBar": 1.2007574034009311E-08,
+          "transitionInfinityNorm": 2.04020318901344,
+          "valid": true
+        },
+        "impulseError": 3.0531726844529317E-06,
+        "linearError": 7.748195113588641E-07,
+        "angularError": 1.3499456738529124E-06,
+        "firstImpulseError": 0.00015004568489995762,
+        "coldImpulseError": 0.006638117591472259
+      },
+      {
+        "Name": "mass_and_powered",
+        "result": "FAIL",
+        "sourceMass": 8.0078125,
+        "successorMass": 8,
+        "stageMass": 8.00390625,
+        "inverseMass": 0.12493899463152758,
+        "transportInverseMass": 0.124938995,
+        "Thrust": 32,
+        "source": {
+          "Linear": {
+            "X": -1.0169570741069833E-10,
+            "Y": 1.266525941900909E-07,
+            "Z": 7.511074429089604E-09
+          },
+          "Angular": {
+            "X": 1.503461355412128E-08,
+            "Y": 3.675332775104734E-20,
+            "Z": 2.035601687211397E-10
+          }
+        },
+        "free": {
+          "Linear": {
+            "X": -1.0169570741069833E-10,
+            "Y": -0.09686574287725777,
+            "Z": 7.511074429089604E-09
+          },
+          "Angular": {
+            "X": 1.503461355412128E-08,
+            "Y": 3.675332775104734E-20,
+            "Z": 2.035601687211397E-10
+          }
+        },
+        "initial": [
+          0.3273193836212158,
+          0.3273193836212158,
+          0.32731935381889343,
+          0.32731935381889343,
+          -5.777245348781435E-10,
+          -1.1464568183683355E-10,
+          7.350670073853443E-20
+        ],
+        "first": {
+          "Impulses": [
+            0.24354493587755985,
+            0.1909406350818143,
+            0.25331317410054766,
+            0.25638412255486603,
+            -0.02784441525606441,
+            0.04954543548425579,
+            -1.7332527194139648E-12
+          ],
+          "Velocity": {
+            "Linear": {
+              "X": 0.006190156796288422,
+              "Y": 0.021099515350846518,
+              "Z": 0.003478860767530312
+            },
+            "Angular": {
+              "X": 0.0069634941421802725,
+              "Y": 8.676412642979216E-13,
+              "Z": -0.012390585157201546
+            }
+          },
+          "NormalClamps": 0,
+          "TangentClamps": 0,
+          "TwistClamps": 0
+        },
+        "last": {
+          "Impulses": [
+            0.18373325887865327,
+            0.18817514595360382,
+            0.22535415537844955,
+            0.22091068770928257,
+            0.004443761173990721,
+            1.5809797858321675E-06,
+            -5.5409579105610847E-17
+          ],
+          "Velocity": {
+            "Linear": {
+              "X": 1.974243292672281E-07,
+              "Y": 0.005356000152277236,
+              "Z": -0.0005551915352285889
+            },
+            "Angular": {
+              "X": -0.0011113043210685745,
+              "Y": 2.7671915313751188E-17,
+              "Z": -3.9517625229565593E-07
+            }
+          },
+          "NormalClamps": 0,
+          "TangentClamps": 0,
+          "TwistClamps": 0
+        },
+        "cold": {
+          "Impulses": [
+            0.24098411129683553,
+            0.2335405756694733,
+            0.17145594580185808,
+            0.17886822105047243,
+            -0.0074297173400137435,
+            3.1268004390049826E-05,
+            -1.093953545772336E-15
+          ],
+          "Velocity": {
+            "Linear": {
+              "X": 3.906491336919606E-06,
+              "Y": 0.0061900436418108815,
+              "Z": 0.0009282689331485762
+            },
+            "Angular": {
+              "X": 0.001858078178546048,
+              "Y": 5.475520562848894E-16,
+              "Z": -7.819464864764601E-06
+            }
+          },
+          "NormalClamps": 0,
+          "TangentClamps": 1,
+          "TwistClamps": 0
+        },
+        "oracle": {
+          "Impulses": [
+            0.20517148178659617,
+            0.20517153724773443,
+            0.20517153967470253,
+            0.20517147935962837,
+            5.795969276309926E-08,
+            4.855120047206488E-09,
+            -2.7186206632804625E-19
+          ],
+          "Velocity": {
+            "Linear": {
+              "X": 5.04898110102655E-10,
+              "Y": 0.005669945627172372,
+              "Z": 2.768286694079871E-10
+            },
+            "Angular": {
+              "X": 5.541167036201943E-10,
+              "Y": 7.076887061137445E-20,
+              "Z": -1.010633966586608E-09
+            }
+          },
+          "Residual": 5.519675414929199E-17,
+          "Admissible": true
+        },
+        "finiteReference": {
+          "first": [
+            0.2435449358775599,
+            0.1909406350818143,
+            0.2533131741005476,
+            0.256384122554866,
+            -0.0278444152560645,
+            0.04954543548425588,
+            -1.7332527194139668E-12
+          ],
+          "eighth": [
+            0.18373325887865335,
+            0.1881751459536039,
+            0.2253541553784495,
+            0.22091068770928252,
+            0.004443761173990701,
+            1.5809797859017661E-06,
+            -5.5409579107774575E-17
+          ],
+          "error": 9.020562075079397E-17,
+          "arithmeticBar": 1.0394375476802455E-08,
+          "transitionInfinityNorm": 2.04020318901344,
+          "valid": true
+        },
+        "impulseError": 0.002512790148672339,
+        "linearError": 0.0006378085513379522,
+        "angularError": 0.0011113049450880265,
+        "firstImpulseError": 0.12349682954612629,
+        "coldImpulseError": 0.0041628157499777885
+      }
+    ],
+    "poolBytes": 3014656,
+    "canonicalMutations": 0
+  },
+  "rawResultProvenance": [
+    {
+      "name": "cache-debug.json",
+      "bytes": 514,
+      "sha256": "8B9C673497F8FDE1F667A49D2F0CE25BE70C9A3719879E098200B288C6EA2A8C"
+    },
+    {
+      "name": "cache-release.json",
+      "bytes": 514,
+      "sha256": "8B9C673497F8FDE1F667A49D2F0CE25BE70C9A3719879E098200B288C6EA2A8C"
+    },
+    {
+      "name": "coupled-debug.json",
+      "bytes": 8435,
+      "sha256": "7EF575D1FB585629B9582DED38CFA77F80803051088425B21F02469B4018D816"
+    },
+    {
+      "name": "coupled-release.json",
+      "bytes": 8435,
+      "sha256": "7EF575D1FB585629B9582DED38CFA77F80803051088425B21F02469B4018D816"
+    },
+    {
+      "name": "debug.json",
+      "bytes": 2568,
+      "sha256": "27FEE7E923E9C11BFBC622636E068FD9A6D9B790CA76F97EACD3CFCB8CE3E0ED"
+    },
+    {
+      "name": "kernel-debug.json",
+      "bytes": 16445,
+      "sha256": "C4F6EFA2C2F7F60F0DCDBFFAFF847AFD145FE275951F751AE3F9C2D94E526E22"
+    },
+    {
+      "name": "release.json",
+      "bytes": 2568,
+      "sha256": "27FEE7E923E9C11BFBC622636E068FD9A6D9B790CA76F97EACD3CFCB8CE3E0ED"
+    }
+  ],
+  "notQualified": [
+    "full retained-world tiny event",
+    "continuous changing-mass physical reference",
+    "full powered-coast trajectory",
+    "powered compound selector",
+    "off-COM oracle",
+    "long support",
+    "no-contact M15 comparison",
+    "deterministic strongest sequence",
+    "warmed allocation and positive control",
+    "total retained operator storage",
+    "direct timing"
+  ],
+  "storage": {
+    "bepuCacheProbePoolBytes": 3014656,
+    "totalRetainedOperator": "UNQUALIFIED",
+    "source": "BufferPool.GetTotalAllocatedByteCount; excludes managed world/diagnostic allocations"
+  },
+  "allocation": {
+    "measuredBytes": null,
+    "positiveControl": null,
+    "status": "NOT RUN after correctness failure; diagnostic kernel routines allocate"
+  },
+  "performance": {
+    "median": null,
+    "p95": null,
+    "p99": null,
+    "max": null,
+    "status": "NOT RUN after correctness failure"
+  },
+  "cleanup": {
+    "path": "E:\\NovaCore\\build\\powered-contact-numerical-prerequisite",
+    "disposableFiles": 179,
+    "disposableBytes": 9583502,
+    "removedFiles": 0,
+    "status": "Automatic approval review rejected guarded deletion before execution: blocked by policy",
+    "retried": false,
+    "olderScratch": "UNTOUCHED"
+  }
+}

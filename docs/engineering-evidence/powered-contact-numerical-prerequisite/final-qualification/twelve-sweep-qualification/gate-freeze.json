@@ -1,0 +1,47 @@
+{
+  "mechanism": "NO-D + 12",
+  "stage": "before first numerical run",
+  "files": [
+    {
+      "path": "CoastDriver.cs",
+      "sha256": "5F765131F7A2005D2589E6E7FD8C1CCDB61FE4455EC567415560837A1E55E46C"
+    },
+    {
+      "path": "FinalPolicy.cs",
+      "sha256": "E031024B291EDA9D11CAB69F0AA0EA1AB281F73B88BF50D539870BC1F25255F1"
+    },
+    {
+      "path": "GateQualification.cs",
+      "sha256": "5C0CB1941EC925B564BF1FFCC85D0CFE160FDD137CEC90A14F8298760A987B39"
+    },
+    {
+      "path": "generate.py",
+      "sha256": "8367DE64669DE010EA504D72CFB29A96D10D0887865FAC35CE0EA31BBD6ACAA3"
+    },
+    {
+      "path": "generated-identity.json",
+      "sha256": "F862FB9E0298D0ADC12CB8E1BD8559F5D67F34D5E8F95DE84966144A14B0FA3F"
+    },
+    {
+      "path": "plan.md",
+      "sha256": "3F5B233D423032EF42F6BF4D4D3929196BC907BD725052E82B114CF61DCF6F55"
+    },
+    {
+      "path": "preflight.json",
+      "sha256": "619D84189FA913FE6E6185589C481C0FFD4FF22A7E2EB0D6AC4EE657C6444187"
+    },
+    {
+      "path": "TwelveGate.csproj",
+      "sha256": "6F5DAEB332109363A5D01569216A9820C2F342704E4736EEBFCB541918885377"
+    },
+    {
+      "path": "TwelveOperator.cs",
+      "sha256": "B76710BF04DF37F0A790D441C5063AA97886234F292077F9AE27B9FE70A40D93"
+    },
+    {
+      "path": "TwelveTransport.cs",
+      "sha256": "3E67A648FA782950EAC6988BBBD96012AF3966D7BAAD2C03F3BEE19904839090"
+    }
+  ],
+  "dllHash": "7118CECB648A82C8EC550AE19CFEB84A3488C3CA62060765FAD4B5AC9F0D5CB8"
+}

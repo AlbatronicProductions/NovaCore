@@ -1,0 +1,7 @@
+{
+  "status": "STOP",
+  "error": "coast candidate admission baseline: BasisRefusal",
+  "type": "InvalidOperationException",
+  "baselineAccepted": 1,
+  "poweredAccepted": 1
+}

@@ -1,0 +1,46 @@
+{
+  "candidateRuns": 0,
+  "preflightReview": "PASS; paired-response gate added before first execution",
+  "files": [
+    {
+      "path": "bepu-boundary-semantics.md",
+      "sha256": "1E7471A181A553AE35F7AD8AE686143D8F3AD4E11C0B7C9A74141096C4C00F4D"
+    },
+    {
+      "path": "BoundaryDiagnostic.csproj",
+      "sha256": "AAE938CCE7D756E0D839AB01B9F2E3A0560A62A7AF61A43836EB7FA2551B6757"
+    },
+    {
+      "path": "BoundaryDriver.cs",
+      "sha256": "5E308F7B507E1076166CE26F56C1985D89CEA1A14FFE9BA579A4C27EE27EF939"
+    },
+    {
+      "path": "BoundaryPolicy.cs",
+      "sha256": "BE6D05491A68C0F6C3767D188B6EDCD8B7E01E271ECF3C0D90EDDFDE481EAFD5"
+    },
+    {
+      "path": "diagnostic-copy-identity.json",
+      "sha256": "93D31395C4F757EB6B9FD93298465D6CFE4531CDEC231B8CA6F25D472B8C5470"
+    },
+    {
+      "path": "DiagnosticOperator.cs",
+      "sha256": "FE607CE3A94629058A406CAA4BECC81D61A383ECC985A6812A8B3A3B2D4C3BAC"
+    },
+    {
+      "path": "DiagnosticTransport.cs",
+      "sha256": "11B2FD3A98A54285552862FD178D58EC19BEA3DC8221FC011C98D5F3732E560C"
+    },
+    {
+      "path": "generate.py",
+      "sha256": "3A27B92B5F3D899526C3A6ECE9FDC28B389EE6B55F96FC9A9475D071574EDBC2"
+    },
+    {
+      "path": "historical-cache-validity.md",
+      "sha256": "B8C8D7FEC76F9A4DE9BFA042648769F04E219CC83D24AAA8E051B559E1794083"
+    },
+    {
+      "path": "plan.md",
+      "sha256": "38432E460504253ED63E613E7899622DED0CE47DB1CAF0758E2187FB57DF8299"
+    }
+  ]
+}

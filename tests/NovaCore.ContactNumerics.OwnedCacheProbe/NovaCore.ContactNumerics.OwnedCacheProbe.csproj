@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <NovaCoreUsesBepu>true</NovaCoreUsesBepu>
+    <StartupObject>OwnedQualification</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../NovaCore.ContactNumerics.WorldProbe/Program.cs" Link="Historical/World.cs" />
+    <Compile Include="../NovaCore.ContactNumerics.WorldProbe/KernelProbe.cs" Link="Historical/Kernel.cs" />
+    <Compile Include="../NovaCore.ContactNumerics.PreconditionedProbe/PieceKernel.cs" Link="Accepted/PieceKernel.cs" />
+    <Compile Include="../NovaCore.ContactNumerics.PreconditionedProbe/CommonNormal.cs" Link="Accepted/CommonNormal.cs" />
+    <Compile Include="../../src/NovaCore.Simulation/Spacecraft/Resources/PropellantInteger.cs" Link="Banked/PropellantInteger.cs" />
+    <Compile Include="../../src/NovaCore.Simulation/Spacecraft/Actuation/PoweredFlightNumerics.cs" Link="Banked/PoweredFlightNumerics.cs" />
+  </ItemGroup>
+</Project>

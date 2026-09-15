@@ -1,0 +1,17 @@
+{
+  "coldMs": 1.8198,
+  "managedColdAllocationTraffic": 4991816,
+  "managedRetainedHeapDeltaEstimate": 4937496,
+  "managedEndHeapDeltaEstimate": 4937904,
+  "nativeRetainedInitial": 458752,
+  "nativeRetainedFinal": 458752,
+  "nativePeak": 458752,
+  "historyBytesIncluded": 4857624,
+  "mapperValueBytes": 48,
+  "mapperCopies": 2,
+  "managedConservativeRetainedUpperBound": 4991816,
+  "combinedConservativeUpperBound": 5450568,
+  "transactionOwner": "included in managed bound; history separately identified; no double counting",
+  "intervals": 1200,
+  "method": "forced full-GC live-heap deltas are estimates; cold allocation traffic is a distinct conservative managed retention upper bound"
+}

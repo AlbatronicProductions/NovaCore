@@ -1,0 +1,12 @@
+{
+  "candidate": "D + 12",
+  "frozen": true,
+  "reason": "No-D + 12 changed the protected moderate-normal expected refusal to Ready. Ticket requires every expected refusal to remain a refusal, so D retirement fails.",
+  "noDPhysicalResults": "Original32N, actual1/128, captured first coast pass. Compatible generalized transport passes.",
+  "noDLimitation": "No claim no-D violates its final current-feasibility check: its own prepared guess is closed-feasible. The protected admission outcome changes when D is omitted.",
+  "sourceOfSelection": "Phase2 simplification decision: retain D+12 on any protected outcome regression; do not rescue no-D.",
+  "reportingCorrection": "no-d-regressions/05-moderate-normal.json solverCalls:0 was inherited hard-coded reporting for the expected refusal. Ready and the solver source prove one admitted Prepare and twelve sweeps. Its referenceCalls:0 remains correct.",
+  "noDRemainingGates": "Not run after first regression. Composition, second known refusal, lifecycle, actual retained sequence and tiny baseline not reached in no-D arm.",
+  "adoptedProductionCorrection": false,
+  "changedOriginalCandidate": false
+}

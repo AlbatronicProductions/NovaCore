@@ -1,0 +1,233 @@
+{
+  "schema": 1,
+  "baseline": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "branch": "codex/powered-contact-numerical-prerequisite",
+  "main": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "originMain": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "protectedTags": [
+    {
+      "tag": "m14.21-authored-compound-spacecraft-contact",
+      "object": "d8c13e46a9272e5ef6eb89acbe23c29709e3c55b",
+      "commit": "b6e8fa568585706ce38c0609aeb14db4a643123e"
+    },
+    {
+      "tag": "m14.22-canonical-spacecraft-command-authority",
+      "object": "e943a128ef425ff7427b917f2bb04056e58282f5",
+      "commit": "899f11f727205340bdd550dd65a853e253de0ed3"
+    },
+    {
+      "tag": "m14.23-prepared-single-engine-actuation",
+      "object": "cd22cc96d88d2b6cf3ca48740ad41baecbbe7c9e",
+      "commit": "6c9830237bc29bbd3c9cf5f4644b6409c32eaa9b"
+    },
+    {
+      "tag": "m14.24-exact-finite-propellant-segmentation",
+      "object": "50aa4e984e6646a9334e4e87356a43ffdf138e73",
+      "commit": "89a432ce3b96a5dcb0751cfdc26bfd6776c883a1"
+    },
+    {
+      "tag": "m15.0-segmented-powered-free-flight",
+      "object": "72c387e0bbe512a569650978522bbb3a0022ffc3",
+      "commit": "4607d8c802006d5e1a01c595ab608cf53a4dab6b"
+    }
+  ],
+  "preservation": {
+    "trackedFiles": 1991,
+    "preexistingUntracked": 15,
+    "rawFingerprintsChecked": 2006,
+    "fileMismatches": 0,
+    "tagRefsChecked": 65,
+    "tagDifferences": 0,
+    "manifestSha256": "54AED2538DD8DDAFD553EDE3A3F8AAEC425F3DF3A604C3113A5BDAB5548F3E90",
+    "manifestEncoding": "SHA256 UTF8 join LF of original ordered path + NUL + uppercase SHA256; no trailing LF",
+    "preexistingEvidence": [
+      {
+        "path": "docs/engineering-evidence/powered-contact-architecture/README.md",
+        "sha256": "01B90CD213789543BDF1B9E1D81DF9C3405FF9853FEC1A8BE3DE9B979797043E"
+      },
+      {
+        "path": "docs/engineering-evidence/powered-contact-architecture/architecture-candidates.md",
+        "sha256": "05EC690D4F53A918BE841700670C4812D5DFDA175719246C89557842BB051EF7"
+      },
+      {
+        "path": "docs/engineering-evidence/powered-contact-architecture/atomic-publication.md",
+        "sha256": "71032AFBBE0CA7F23EDDC9EE90518F0C1BB7083C5B80EB045617EDA49BAF2AE8"
+      },
+      {
+        "path": "docs/engineering-evidence/powered-contact-architecture/bepu-mass-wrench-assessment.md",
+        "sha256": "78A27A6D07D69C8995CD4CAB73D558C8850256CD0294014B9B0126B8F25DEB72"
+      },
+      {
+        "path": "docs/engineering-evidence/powered-contact-architecture/convergence-map.md",
+        "sha256": "81B17DFE7A73FFD3DD90F75B2EBE7C3F745541FA99C6DFF089EDBE9723E87413"
+      },
+      {
+        "path": "docs/engineering-evidence/powered-contact-architecture/current-contact-lifecycle.md",
+        "sha256": "0F4194CC028D577A7C6E8C90B8C022381CF8550D4D3FCFCD94A77D3C0E803F82"
+      },
+      {
+        "path": "docs/engineering-evidence/powered-contact-architecture/current-powered-lifecycle.md",
+        "sha256": "1C5B48FC99184BAA413F6AA6FA8FF14D25A7EAC72E83743B926D866537A7339D"
+      },
+      {
+        "path": "docs/engineering-evidence/powered-contact-architecture/departure-regime-contract.md",
+        "sha256": "86A990D1EEC17EB008A657051168CC81B79BBDBFCA45E91987EEDBA9389FA81B"
+      },
+      {
+        "path": "docs/engineering-evidence/powered-contact-architecture/florida-gap.md",
+        "sha256": "57B6478061C6BDC97F79DBACDD7BB402D32458AF1A3DC901CAE329ACBFB7BC80"
+      },
+      {
+        "path": "docs/engineering-evidence/powered-contact-architecture/identity.json",
+        "sha256": "6C870009B556B3C27B327B1DB892DAA7DBB7578DD3DE30BE4E44B3C9F26E5DAC"
+      },
+      {
+        "path": "docs/engineering-evidence/powered-contact-architecture/ksa-convergence.md",
+        "sha256": "FDF27784AB27449B9296A596510F68EFB44E0D117C906AF2FA2D5CC9D5282B65"
+      },
+      {
+        "path": "docs/engineering-evidence/powered-contact-architecture/powered-contact-physics.md",
+        "sha256": "45B7197A4AE7BC30540C71F813C9C702B255DC76A84E06585F722610118938E3"
+      },
+      {
+        "path": "docs/engineering-evidence/powered-contact-architecture/reproduction.md",
+        "sha256": "A63E988784D56661F3FF79E8D831D3DE1045B7A587873602C06DED3799C88B15"
+      },
+      {
+        "path": "docs/engineering-evidence/powered-contact-architecture/verification.md",
+        "sha256": "253BFD9810847FCF0324ED21EC0B5B0379CA891165EE1B57AC03EE7FCE554227"
+      },
+      {
+        "path": "docs/engineering-evidence/powered-contact-architecture/warm-start-contract.md",
+        "sha256": "1F77DA26F0A79314C0F516247F89B6C592BB121E71C31A7DE79B970595DC10C8"
+      }
+    ]
+  },
+  "newDiagnosticSources": [
+    {
+      "path": "tests/NovaCore.ContactNumerics.Probe/NovaCore.ContactNumerics.Probe.csproj",
+      "bytes": 568,
+      "sha256": "91E6357D63CCDE79B5F3D8D39FD9BD287929FB70C3151CBEA855AD685B1382FA"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.Probe/Program.cs",
+      "bytes": 10741,
+      "sha256": "774F1E8A0E6CB472493F923A8FCCC5AC6DB95303990CA88ECC30A1846104A7C2"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.CoupledProbe/NovaCore.ContactNumerics.CoupledProbe.csproj",
+      "bytes": 107,
+      "sha256": "68E564D3988E81391AFFD33BD68ED9CC9E69408B57058CB8689707C293CF5A5E"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.CoupledProbe/Program.cs",
+      "bytes": 5312,
+      "sha256": "7684C628B520B55C713B8A5E0DAD8B14DF60DD93D0F109A4BAFA79CD56078AB0"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.WorldProbe/KernelProbe.cs",
+      "bytes": 16100,
+      "sha256": "621569AE2331D48BF4B0E4C65D1345E9A10C2ADB2FB1D1E64FFF5D0645FE7E24"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.WorldProbe/NovaCore.ContactNumerics.WorldProbe.csproj",
+      "bytes": 148,
+      "sha256": "7971DF9ECA56260BF0C4A4B459B486FDD5825889195D33132C6E2D030BB52B55"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.WorldProbe/Program.cs",
+      "bytes": 8421,
+      "sha256": "04FA4662E192070FC0E7F48436087CEFDC0E8F0DCD609265F92B12F619FDE902"
+    }
+  ],
+  "preregistrations": [
+    {
+      "path": "cache-contract.md",
+      "sha256": "01CA10152D940FD6A85A1D4538CE264A0AFDEF8A59D18D845FD91B3852032C92"
+    },
+    {
+      "path": "coupled-contract.md",
+      "sha256": "C986B8AC447DC553F219E2642DF82530F43836C225511332DF2A7746C4A170B1"
+    },
+    {
+      "path": "four-row-contract.md",
+      "sha256": "8CF5BF56E2ABD28A4B51434DBDAA0BFC0332F6CA560D460FDEB2B579382A04F8"
+    },
+    {
+      "path": "operator-contract.md",
+      "sha256": "BF91EC594C127B680FE5DB5368905B24F8CD4E84D53FDA8F1415BCA4E2CA264F"
+    }
+  ],
+  "kernelPreRunSourceSha256": "621569AE2331D48BF4B0E4C65D1345E9A10C2ADB2FB1D1E64FFF5D0645FE7E24",
+  "kernelPreRunContractSha256": "8CF5BF56E2ABD28A4B51434DBDAA0BFC0332F6CA560D460FDEB2B579382A04F8",
+  "dependency": {
+    "version": "2.5.0-beta.29",
+    "sourceCommit": "f73164bb3c9ca733eb3329f1f6b1cea4e216ece7",
+    "manifestSha256": "C76F2DE75DAC81C8695109977E1F8A4DCCAFF29DA0BB96884C46C0B33362240E",
+    "physicsSha256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7",
+    "utilitiesSha256": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68"
+  },
+  "newEvidenceManifestExcludesSelf": true,
+  "evidenceFiles": [
+    {
+      "path": "cache-contract.md",
+      "bytes": 1012,
+      "sha256": "01CA10152D940FD6A85A1D4538CE264A0AFDEF8A59D18D845FD91B3852032C92"
+    },
+    {
+      "path": "cache-setup-correction.md",
+      "bytes": 1346,
+      "sha256": "9D7062A7B9EA78C75DBF551CE6FE25E1BF107CF98BB7CF97F16E40107F31E271"
+    },
+    {
+      "path": "candidate-comparison.md",
+      "bytes": 2394,
+      "sha256": "ACCFA87AF787715832B13025B2672EC08D8F46F543120D782E73DDCBA530F5A6"
+    },
+    {
+      "path": "coupled-contract.md",
+      "bytes": 2839,
+      "sha256": "C986B8AC447DC553F219E2642DF82530F43836C225511332DF2A7746C4A170B1"
+    },
+    {
+      "path": "four-row-contract.md",
+      "bytes": 5632,
+      "sha256": "8CF5BF56E2ABD28A4B51434DBDAA0BFC0332F6CA560D460FDEB2B579382A04F8"
+    },
+    {
+      "path": "operator-contract.md",
+      "bytes": 6972,
+      "sha256": "BF91EC594C127B680FE5DB5368905B24F8CD4E84D53FDA8F1415BCA4E2CA264F"
+    },
+    {
+      "path": "primitive-limitations.md",
+      "bytes": 2711,
+      "sha256": "951A7AFD5828C3E3E076117EA8DF2896374BBE4123C834C82BF8882476515085"
+    },
+    {
+      "path": "README.md",
+      "bytes": 7786,
+      "sha256": "9C4EB29C8B10FF656FB8DE74AD75B421090B4429D805C392D5FD8BC5FA1415C8"
+    },
+    {
+      "path": "reference-derivations.md",
+      "bytes": 7030,
+      "sha256": "D22FD080A331C23121E4DF0FF29E580AF201265ED0ABF36C7F420FF33DEA40CC"
+    },
+    {
+      "path": "reproduce.ps1",
+      "bytes": 2570,
+      "sha256": "C1582D76ACF39F21D596A6B36B5502979513952374299AF762E72741C725DF8D"
+    },
+    {
+      "path": "validation.json",
+      "bytes": 33390,
+      "sha256": "FC8C1FC486A47DFB2D04E5C8D2A2720167EE9C7D3FFABB00676ED044C891CEF9"
+    },
+    {
+      "path": "verification.md",
+      "bytes": 4304,
+      "sha256": "00D8B05C568EF3A910653ECBE92EC4F29AA4071CB6F9F57F3888ECDE1543D4E1"
+    }
+  ]
+}

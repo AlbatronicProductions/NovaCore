@@ -1,0 +1,442 @@
+{
+  "judgment": "REVISE",
+  "firstMaterialFailure": "Baseline coast physical accuracy after feasible initialization and unchanged eight sweeps",
+  "head": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "main": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "originMain": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "remoteMain": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "branch": "codex/powered-contact-numerical-prerequisite",
+  "sdk": "10.0.303",
+  "runtime": ".NET 10.0.12",
+  "candidateProcess": 58288,
+  "managedThread": 2,
+  "toolSession": 99718,
+  "driverDll": {
+    "path": "bin\\Debug\\net10.0\\BoundaryDiagnostic.dll",
+    "bytes": 236032,
+    "sha256": "86C0789DB81F855D5C182A2DDFC66DC358A6D5B54B2E5ADDC6184A11F69B930E"
+  },
+  "priorNonignoredFiles": 2198,
+  "priorFilesChanged": [],
+  "productionFiles": 274,
+  "productionCsFiles": 267,
+  "permanentTestsChanged": [],
+  "existingCandidateChanged": [],
+  "tags": [
+    "3ceaff9c9f1a3ac4fa5cb8fcb62d02a6d3d0dd94 refs/tags/m11b-7h1-gpu-terrain-baseline",
+    "ed1a3fbe764ea6141ebdfa988a6fdd4d167e0372 refs/tags/m12b-procedural-surface-baseline",
+    "2ca86cce99b70a56ac0a58e6f891392a09cd723b refs/tags/m12c-phase1b-stable",
+    "b65d73b15460ec356ae6e67dcb14cd8f4f8945ca refs/tags/m12d-p2s2-foundation",
+    "827cb9b7f329337bb72bce28abad5d585d837524 refs/tags/m12d-p2s3-gpu-runtime",
+    "a9f3e3172617708c3b5c0eef59d5290f91a2abec refs/tags/m12d-p2s4-canonical-terrain",
+    "6409949114f3797471b131d8005b7feac7d3fd54 refs/tags/m12d-p2s5b-production-topology",
+    "a90b024777e3b8fe8259dc7b0fa15b4a9e0f349b refs/tags/m12d-p2s5c1-interactive-billboard",
+    "37e74ad58bf53a03c35c3abeff256803dbcb4443 refs/tags/m12d-p2s5c2-moving-billboard",
+    "b04c5f3415ff4f4c5e30ca8d87515f8b610eaef4 refs/tags/m12d-p2s5c3-production-billboard-stabilization",
+    "724b779917f1cac665f6537b18edbfd70a6bfe8a refs/tags/m12d-p2s5f-new-earth-renderer",
+    "b9eb5e0628cf84f7d83c896c2fd962b426780147 refs/tags/m12d-p2s5g-surface-workload-efficiency",
+    "5d7efb2f035ccf22700b03380b4193fc82220f8a refs/tags/m12d-p2s5h-earth-route-convergence",
+    "b534d149b74b0ca854e4fb09267fc84321cc52ff refs/tags/m13.1-ncsm1-tes-hotpath",
+    "add1c94658c1de869124c75606ce0a084c77ba25 refs/tags/m13.2-ordinary-terrain-shading",
+    "bb08cba20947f863391649e68e2e4fe7035520db refs/tags/m13.3-prepared-physical-terrain",
+    "668efe2b06d2fcc907a0f46674c493b7670a2751 refs/tags/m13.4-zero-contribution-terrain-material-noise",
+    "75712e4bc990e11c3072a37299c55187cc30e0a1 refs/tags/m13.5-local-gpu-terrain-working-data",
+    "81dadf42fa9e91d8f946ebc30c3cbe3b621761fe refs/tags/m13.6-cpu-cached-terrain-residency-keys",
+    "3ccb998031e15cb1898394589c27244d55e06e24 refs/tags/m14.1-canonical-surface-point-queries",
+    "b07c511aab7109e3d240d9c7c31a444f58e069a5 refs/tags/m14.10-certified-root-contact-kinematics",
+    "8ac99fbfad4f8dd6365d696053fc3edfeea2249d refs/tags/m14.11-certified-response-proposal",
+    "98831b08e07d1bcc251f7aa900f463b98570ef04 refs/tags/m14.12-certified-preimpact-velocity",
+    "7c94f38cab9cf605c69b3b1874fee0c0091fbbb2 refs/tags/m14.13-certified-postimpact-velocity",
+    "412084a0acda2fa96c4be166e1f9f29020ffc577 refs/tags/m14.14-private-root-postimpact-state",
+    "6da3eba1410b05ea46a133bb2cf1c81425f8bf72 refs/tags/m14.15-private-canonical-propagation",
+    "a864be12e42cb98cbd38c17905833f781a579253 refs/tags/m14.16-postimpact-terrain-clearance",
+    "3f48fe441ac54458e9b413a909fae134abb112de refs/tags/m14.17-certified-continuation-publication",
+    "2faa9e568ef5f1e723f22d9635447179e4585053 refs/tags/m14.18-staged-finite-body-bepu-contact",
+    "684ed841de1432e89772282d8951f7cd8f70a625 refs/tags/m14.19-persistent-bepu-contact-publication",
+    "ae2f203b97224ff88b38b7c68902ac2d31108a91 refs/tags/m14.2-spacecraft-translational-authority",
+    "ac96f952b9c44220cd93042c0d7c6e8e07d227d5 refs/tags/m14.20-host-paced-canonical-contact-servicing",
+    "d8c13e46a9272e5ef6eb89acbe23c29709e3c55b refs/tags/m14.21-authored-compound-spacecraft-contact",
+    "e943a128ef425ff7427b917f2bb04056e58282f5 refs/tags/m14.22-canonical-spacecraft-command-authority",
+    "cd22cc96d88d2b6cf3ca48740ad41baecbbe7c9e refs/tags/m14.23-prepared-single-engine-actuation",
+    "50aa4e984e6646a9334e4e87356a43ffdf138e73 refs/tags/m14.24-exact-finite-propellant-segmentation",
+    "b9ad79c38b322c8e1e095039d5b69c035a1bcca8 refs/tags/m14.3-spacecraft-terrain-contact-observations",
+    "b198d3b381ba4a82577ba89bd5e31e6050d3a896 refs/tags/m14.4-atomic-contact-response",
+    "c2964fe4531b8e383d2d89beec2e8c055f3541a5 refs/tags/m14.5-isolated-analytical-contact-response",
+    "07adc9983252f2cabf0af9da0a1281457af606bf refs/tags/m14.6-physical-event-epochs",
+    "315da29c4eff5562f9040f7a0aedbb4e961fa877 refs/tags/m14.7-exact-event-spacecraft-motion",
+    "27a32989cef714a204d0d7ecfbd4618e53de0086 refs/tags/m14.8-exact-event-earth-relative-observation",
+    "944cb5c1f2011b5944745b210e561d0b9e8b4aaf refs/tags/m14.9-florida-monotone-contact-certification",
+    "72c387e0bbe512a569650978522bbb3a0022ffc3 refs/tags/m15.0-segmented-powered-free-flight",
+    "88a108cafaab3b030c0e48568d98330dd07607b7 refs/tags/milestone-10A",
+    "5ba3f5bdb97cb7efa831b8be3a681894a0338228 refs/tags/milestone-10A-2A-2",
+    "14693e902933430df890b5a0e39170a5b247eb97 refs/tags/milestone-10A-3",
+    "52762291bf25446cd2c37594d74302eebd1dd4f7 refs/tags/milestone-10A-4",
+    "c485b158ee8e35e105aaf452afd8b8ff3890a870 refs/tags/milestone-10A-5",
+    "a9d15d10d5e077d74807bed196c3ea5e9bb03e00 refs/tags/milestone-10A-6",
+    "dfa242e0c67574b8659de1ecd1c742e1daabd89b refs/tags/milestone-10A-7",
+    "f95eed79f60201f2ffce78533fe205bee2ebbabc refs/tags/milestone-10B-1",
+    "15cd78446c87be9423aaa2067068bcb6360f57b1 refs/tags/milestone-10B-2A",
+    "209954827f6c824bc7e6d796a781d72aa6e983e8 refs/tags/milestone-10B-2B",
+    "f1ecd38f2211ee98566b35dec6d92b37a3d47b7a refs/tags/milestone-11A",
+    "16dbfd0f3e7b438101781d3d6d0642272efb7b2a refs/tags/milestone-11B-7F",
+    "4a022dbeac91708b69d5f77fb6034da06f40bbf1 refs/tags/milestone-9A-4E-3",
+    "586dc57df705a4a0f1a5812c114aa981c3e500d1 refs/tags/milestone-9A-4E-5A",
+    "3f26635d2da0e4dd5773589a4299eb82fc0c8ca8 refs/tags/milestone-9A-celestial-v3",
+    "4997e30bd40ebae011a20dd6b58c88a9caed7a6c refs/tags/v0.2.0",
+    "764637f7662420e7c3494aee8c9e748b04db6626 refs/tags/v0.2.1",
+    "18c8a6d2e78e1b8a2bfaddd88dba955bf00b1631 refs/tags/v0.3.0",
+    "435e4cab66df0ce6885c84282ca014295e2c3cdd refs/tags/v0.4.0",
+    "141f7f623220ec3f0d5a79b30cebdcb48605a76a refs/tags/v0.4.1-docs",
+    "3759e1df199ae28acfc51376fa89295730798cad refs/tags/v0.5.0"
+  ],
+  "all65TagsUnchanged": true,
+  "M150": "4607d8c802006d5e1a01c595ab608cf53a4dab6b",
+  "protectedM1421to24": [
+    "b6e8fa568585706ce38c0609aeb14db4a643123e",
+    "899f11f727205340bdd550dd65a853e253de0ed3",
+    "6c9830237bc29bbd3c9cf5f4644b6409c32eaa9b",
+    "89a432ce3b96a5dcb0751cfdc26bfd6776c883a1"
+  ],
+  "blender": "Untouched",
+  "stagedPaths": [],
+  "trackedDiffPaths": [],
+  "gitStatus": [
+    "?? docs/engineering-evidence/powered-contact-architecture/",
+    "?? docs/engineering-evidence/powered-contact-numerical-prerequisite/",
+    "?? tests/NovaCore.ContactNumerics.ConvergenceProbe/",
+    "?? tests/NovaCore.ContactNumerics.CoupledProbe/",
+    "?? tests/NovaCore.ContactNumerics.DurationProbe/",
+    "?? tests/NovaCore.ContactNumerics.IntegratedProbe/",
+    "?? tests/NovaCore.ContactNumerics.OwnedCacheProbe/",
+    "?? tests/NovaCore.ContactNumerics.PreconditionedProbe/",
+    "?? tests/NovaCore.ContactNumerics.Probe/",
+    "?? tests/NovaCore.ContactNumerics.WorldProbe/"
+  ],
+  "diffCheck": 0,
+  "cachedDiffCheck": 0,
+  "preExecutionFreezeUnchanged": true,
+  "reproductionInputs": [
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/results/tiny-event.json",
+      "sha256": "AD7268656C896F528216E00CC745BE1046E6CFC2184E9EA890B38EADCA0C0431"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/candidate-results/baseline-coast-input.json",
+      "sha256": "C9A3276FFB19E633CB842002F735795BC97C39A3DC0090ED7476A95E670DD849"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/candidate-results/baseline-installed.json",
+      "sha256": "AA9E1B48DF104715AD20E3CBFFFBC034340E246BC429B6739D2C1EFEB168794F"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/candidate-results/powered-coast-input.json",
+      "sha256": "441E384E23376C418DA5FC15728C3193F8683A09375F1DD89CDC5017FD5C05F4"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/candidate-results/powered-installed.json",
+      "sha256": "54AAAD502FC744F5CFA9712922E336646CFDF1C4497E5EDBD26B9B4779C3D3A2"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/coast-policy.md",
+      "sha256": "44808502985E4D093DB4FE86773DEFC4FB92FB98D0601C0492A802890FBC83FD"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/coast-reference.json",
+      "sha256": "ABE661642FD8CBE4228B4F9E47BAEBD313C89014F140D7222D1F92A44B21672B"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/coast_reference.py",
+      "sha256": "276B03A0EB3D1AB51DFD5673767B854F9E5B78155B0BCC54223AA95E5253B39B"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/comparison-policy.md",
+      "sha256": "273E3323EF9A85D406708F7505429A557613B3434DEB78D23FBDF40316E80326"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/identity.json",
+      "sha256": "8BBD2D23D14C585BCB35732467E5ED9427FDDD4CEC85CB5D548EF35410473ED6"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/reference.py",
+      "sha256": "D50BD7D3E9586B1BB030257647B2F6CFD140D1AD28111CBF5A0F7A7E41398195"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/tiny-comparison.json",
+      "sha256": "7E3D7682BE5D71C97F6CC11A604B087582330C20C2A244E1F375488EB508FC5E"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.IntegratedProbe/ContactGeometry.cs",
+      "sha256": "48A2B831DB8CD6027DEC456CF67A010B51F2D8776D3204F8BCCAA05B50E96A07"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.IntegratedProbe/GeneralizedTransport.cs",
+      "sha256": "1F6D822706189946510DA57859517E54B6C24CBE1A441A8962A60F7B9B5C365E"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.IntegratedProbe/NovaCore.ContactNumerics.IntegratedProbe.csproj",
+      "sha256": "1E6C10FABD6DC307107190C5CB48A814B7821DFEE836D6C1C06311A254F19E75"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.IntegratedProbe/Qualification.cs",
+      "sha256": "98F0525D25A10A840FE6B87575D489C02CA469B7C88117419B7F3B12FBABCF8F"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.IntegratedProbe/RetainedOperator.cs",
+      "sha256": "A8CC41111339DC91965E9CEC8626373F7B7EE37D285987F337A2562AF2F1AD34"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.IntegratedProbe/RetainedWorld.cs",
+      "sha256": "29D01C59DD1281A3697EC9EB465CCEF8A640FFF56ECF011A784CB1DF08B1A770"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.IntegratedProbe/ScaledArithmetic.cs",
+      "sha256": "DFE5FB8152E1359C81A6C29A9546F31AE95DA19EF365D0CF9E974F4F2323ADD4"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.IntegratedProbe/TinyReference.cs",
+      "sha256": "6FCCB92048BB66FBB8EBBAF45B1997B8FA0722031F4625A76A60FF91096766E0"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.OwnedCacheProbe/CacheHistory.cs",
+      "sha256": "DE2C34AE309975110307AA574E945F3183A1325C96FF28A9C18243AF12790210"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.PreconditionedProbe/CommonNormal.cs",
+      "sha256": "9740EE702EAF0146AE5A4EAB7E3E247611ABC02CF380B0BF84B4702B13C26E03"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.PreconditionedProbe/PieceKernel.cs",
+      "sha256": "EC913B958BB5D9000977380C8F54B024A0D37EAD73B83631D464418FD24ADDD7"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.WorldProbe/KernelProbe.cs",
+      "sha256": "621569AE2331D48BF4B0E4C65D1345E9A10C2ADB2FB1D1E64FFF5D0645FE7E24"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.WorldProbe/Program.cs",
+      "sha256": "04FA4662E192070FC0E7F48436087CEFDC0E8F0DCD609265F92B12F619FDE902"
+    },
+    {
+      "path": "Directory.Build.props",
+      "sha256": "B9DBD63133E8C0A6ABD0B3DFE2E2013C6943AA3879D952D9CC391BE45D0529A9"
+    },
+    {
+      "path": "Directory.Build.targets",
+      "sha256": "57165F94B025B59A1524F31F2D39C3FD454199732492D3716B93935A4D857E0F"
+    },
+    {
+      "path": "external/bepu/2.5.0-beta.29/LICENSE.txt",
+      "sha256": "4CD13F7A31E98F51C4FB960A115E9A9AB9C42284CA5D5C9B5CCBCF322DE45BFD"
+    },
+    {
+      "path": "external/bepu/2.5.0-beta.29/lib/BepuPhysics.dll",
+      "sha256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7"
+    },
+    {
+      "path": "external/bepu/2.5.0-beta.29/lib/BepuUtilities.dll",
+      "sha256": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68"
+    },
+    {
+      "path": "external/bepu/2.5.0-beta.29/manifest/bepu-2.5.0-beta.29.json",
+      "sha256": "C76F2DE75DAC81C8695109977E1F8A4DCCAFF29DA0BB96884C46C0B33362240E"
+    },
+    {
+      "path": "external/bepu/2.5.0-beta.29/packages/BepuPhysics.2.5.0-beta.29.nupkg",
+      "sha256": "D4A952F5417B53B08DE20D507C21745C9DD004E2529864098DFEC7A2CFF11E42"
+    },
+    {
+      "path": "external/bepu/2.5.0-beta.29/packages/BepuUtilities.2.5.0-beta.29.nupkg",
+      "sha256": "8168EC4905F3AD5F923564557DAAB2BAB1100EE46B424CA5F1C97BD7684DE19F"
+    },
+    {
+      "path": "external/bepu/ATTRIBUTION.txt",
+      "sha256": "FF40F4AE2A543AC6B2FFFD693210E9753B53937AC6E18A4FC8B7B131E5E2EDF3"
+    },
+    {
+      "path": "external/bepu/Bepu.references.props",
+      "sha256": "8F1E02C0456715149B378D19E05361FE394A9B9D307B650061BDEFAC9CB889EE"
+    },
+    {
+      "path": "external/bepu/Bepu.targets",
+      "sha256": "CA31C347A3D465CCEB5FF10E549BEFE2FBF1037B8C57E1034073C484CE47EB8F"
+    },
+    {
+      "path": "external/bepu/README.md",
+      "sha256": "B35D7185970B7B12495D4F650AA59124D2E910BB9DBB0DC98B90F2FEC8550C14"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Actuation/PoweredFlightNumerics.cs",
+      "sha256": "E46798B6123AC3478F03784EE40FACE5736ADED24AA37BCF886B751ADE7D41C1"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Resources/PropellantInteger.cs",
+      "sha256": "9CD3EEF877047A44102D925F612DEB263A3396DA8FB600A18FC144C935B5AF41"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/OrdinaryAllocationMeasurement.cs",
+      "sha256": "3B6F2D9905EA52BFB131DF670F1E6A2116BA340C9EF7767DE1020197D473CFB7"
+    }
+  ],
+  "validation": {
+    "debugBuilds": 2,
+    "buildWarnings": 0,
+    "buildErrors": 0,
+    "numericalProcesses": 1,
+    "baselineCoastSolves": 1,
+    "sweeps": 8,
+    "poweredCoastSolves": 0,
+    "coastInstalls": 0,
+    "canonicalMutations": 0,
+    "retries": 0,
+    "counterWitnesses": 0,
+    "fullSuites": 0,
+    "performanceRuns": 0,
+    "allocationRuns": 0
+  },
+  "disposable": {
+    "removedFiles": 0,
+    "removedBytes": 0,
+    "remainingFiles": 31,
+    "remainingBytes": 2111235,
+    "paths": [
+      {
+        "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\friction-boundary-continuation\\bin",
+        "files": 9,
+        "bytes": 1515840
+      },
+      {
+        "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\friction-boundary-continuation\\obj",
+        "files": 22,
+        "bytes": 595395
+      }
+    ],
+    "disposition": "One cleanup attempt rejected by automatic approval review: blocked by policy. No retry. All older blocked paths untouched."
+  },
+  "evidenceFilesExcludingSelf": [
+    {
+      "path": "bepu-boundary-semantics.md",
+      "sha256": "1E7471A181A553AE35F7AD8AE686143D8F3AD4E11C0B7C9A74141096C4C00F4D",
+      "bytes": 2812
+    },
+    {
+      "path": "BoundaryDiagnostic.csproj",
+      "sha256": "AAE938CCE7D756E0D839AB01B9F2E3A0560A62A7AF61A43836EB7FA2551B6757",
+      "bytes": 1710
+    },
+    {
+      "path": "BoundaryDriver.cs",
+      "sha256": "5E308F7B507E1076166CE26F56C1985D89CEA1A14FFE9BA579A4C27EE27EF939",
+      "bytes": 10403
+    },
+    {
+      "path": "BoundaryPolicy.cs",
+      "sha256": "BE6D05491A68C0F6C3767D188B6EDCD8B7E01E271ECF3C0D90EDDFDE481EAFD5",
+      "bytes": 2180
+    },
+    {
+      "path": "diagnostic-copy-identity.json",
+      "sha256": "93D31395C4F757EB6B9FD93298465D6CFE4531CDEC231B8CA6F25D472B8C5470",
+      "bytes": 846
+    },
+    {
+      "path": "DiagnosticOperator.cs",
+      "sha256": "FE607CE3A94629058A406CAA4BECC81D61A383ECC985A6812A8B3A3B2D4C3BAC",
+      "bytes": 13444
+    },
+    {
+      "path": "DiagnosticTransport.cs",
+      "sha256": "11B2FD3A98A54285552862FD178D58EC19BEA3DC8221FC011C98D5F3732E560C",
+      "bytes": 4559
+    },
+    {
+      "path": "generate.py",
+      "sha256": "3A27B92B5F3D899526C3A6ECE9FDC28B389EE6B55F96FC9A9475D071574EDBC2",
+      "bytes": 3047
+    },
+    {
+      "path": "historical-cache-validity.md",
+      "sha256": "B8C8D7FEC76F9A4DE9BFA042648769F04E219CC83D24AAA8E051B559E1794083",
+      "bytes": 3304
+    },
+    {
+      "path": "plan.md",
+      "sha256": "38432E460504253ED63E613E7899622DED0CE47DB1CAF0758E2187FB57DF8299",
+      "bytes": 2271
+    },
+    {
+      "path": "pre-execution-freeze.json",
+      "sha256": "4DCDC0F537475B366124E029B17208DE5869EF87EAEC416C750C4F6CA2C81A9F",
+      "bytes": 1465
+    },
+    {
+      "path": "README.md",
+      "sha256": "9CBACB15689964099ECD8C2723E8E129F6A6D90031A4535A96E516A44504F8CD",
+      "bytes": 9628
+    },
+    {
+      "path": "reproduce.ps1",
+      "sha256": "035203613E020DA213D8ECC0BB682DF67799A8A6C34B2D5E433951305B762CD9",
+      "bytes": 1688
+    },
+    {
+      "path": "results/attempt.json",
+      "sha256": "DE6D4C3837C65E053D44E8D6CD3C21C4A3B0968326EAABBD91E74CD0B4DCF2F5",
+      "bytes": 160
+    },
+    {
+      "path": "results/baseline-after-D.json",
+      "sha256": "CF32E82981D0D96E638698A0C14E4F8CD32882F6E25EDDC34882BC10C07F9118",
+      "bytes": 2201
+    },
+    {
+      "path": "results/baseline-basis-transport.json",
+      "sha256": "2ED562BE6D49D6FE0D7D7B0B31B72AD96C6D9BFFEEF2BE79B6629B4F7739119B",
+      "bytes": 2250
+    },
+    {
+      "path": "results/baseline-coast.json",
+      "sha256": "6FCE5AB9AFD2398EAD32E0A0896EBF98C75C89CDAC24D51CD82A753D208DEE71",
+      "bytes": 7861
+    },
+    {
+      "path": "results/baseline-duration-transform.json",
+      "sha256": "61D4A2F48E72318364EF6E213AF64B9CC692EE32D4614406E24F745524DD509F",
+      "bytes": 2222
+    },
+    {
+      "path": "results/baseline-historical.json",
+      "sha256": "288AE763570EB1BE284C897021E294654CDCC1EFBB070314C427C066BD864F9E",
+      "bytes": 5067
+    },
+    {
+      "path": "results/baseline-load-correction.json",
+      "sha256": "62B2B420ED98CBE96A8CEF54B7BBD55104F01E698885F67462659012824969E5",
+      "bytes": 2219
+    },
+    {
+      "path": "results/baseline-preparation.json",
+      "sha256": "0E8FB8AD8BF1E7EB203CCF2786A4D4271E71922DB859E3A967421BEE61D1AF73",
+      "bytes": 3327
+    },
+    {
+      "path": "results/powered-historical.json",
+      "sha256": "DAC46E388B2E1F740A1BFAB55F5DBCC312E68A2C0507789DC7DC38A5B592BC60",
+      "bytes": 5069
+    },
+    {
+      "path": "results/stop.json",
+      "sha256": "AEE505C4B5E302E4979861A806D79C7BFAA1EAF733723A7428A0534296465AB0",
+      "bytes": 188
+    },
+    {
+      "path": "stage-classification.json",
+      "sha256": "ADA4286AB3E1C14AA1D3E3B00DC4FAC15FC30200B3E7ADA8474F8AB2CBDB3202",
+      "bytes": 10685
+    },
+    {
+      "path": "verification.md",
+      "sha256": "FA60D92FD18FBFD93C537BEDE77C3D385C41B1416A148F990AF5F91ED6D402BA",
+      "bytes": 3537
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "status": "STOP",
+  "firstGate": "moderate-normal",
+  "error": "known friction-infeasible refusal",
+  "type": "InvalidOperationException"
+}

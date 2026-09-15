@@ -1,0 +1,1954 @@
+{
+  "schema": 1,
+  "phase": "CLEANUP_COMPLETED",
+  "baseline": {
+    "HEAD": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+    "main": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+    "origin/main": "49057fecceb0f725d5f551ec40e2780971b0d81d"
+  },
+  "branch": "codex/powered-contact-numerical-prerequisite",
+  "tags": [
+    "3ceaff9c9f1a3ac4fa5cb8fcb62d02a6d3d0dd94 refs/tags/m11b-7h1-gpu-terrain-baseline",
+    "ed1a3fbe764ea6141ebdfa988a6fdd4d167e0372 refs/tags/m12b-procedural-surface-baseline",
+    "2ca86cce99b70a56ac0a58e6f891392a09cd723b refs/tags/m12c-phase1b-stable",
+    "b65d73b15460ec356ae6e67dcb14cd8f4f8945ca refs/tags/m12d-p2s2-foundation",
+    "827cb9b7f329337bb72bce28abad5d585d837524 refs/tags/m12d-p2s3-gpu-runtime",
+    "a9f3e3172617708c3b5c0eef59d5290f91a2abec refs/tags/m12d-p2s4-canonical-terrain",
+    "6409949114f3797471b131d8005b7feac7d3fd54 refs/tags/m12d-p2s5b-production-topology",
+    "a90b024777e3b8fe8259dc7b0fa15b4a9e0f349b refs/tags/m12d-p2s5c1-interactive-billboard",
+    "37e74ad58bf53a03c35c3abeff256803dbcb4443 refs/tags/m12d-p2s5c2-moving-billboard",
+    "b04c5f3415ff4f4c5e30ca8d87515f8b610eaef4 refs/tags/m12d-p2s5c3-production-billboard-stabilization",
+    "724b779917f1cac665f6537b18edbfd70a6bfe8a refs/tags/m12d-p2s5f-new-earth-renderer",
+    "b9eb5e0628cf84f7d83c896c2fd962b426780147 refs/tags/m12d-p2s5g-surface-workload-efficiency",
+    "5d7efb2f035ccf22700b03380b4193fc82220f8a refs/tags/m12d-p2s5h-earth-route-convergence",
+    "b534d149b74b0ca854e4fb09267fc84321cc52ff refs/tags/m13.1-ncsm1-tes-hotpath",
+    "add1c94658c1de869124c75606ce0a084c77ba25 refs/tags/m13.2-ordinary-terrain-shading",
+    "bb08cba20947f863391649e68e2e4fe7035520db refs/tags/m13.3-prepared-physical-terrain",
+    "668efe2b06d2fcc907a0f46674c493b7670a2751 refs/tags/m13.4-zero-contribution-terrain-material-noise",
+    "75712e4bc990e11c3072a37299c55187cc30e0a1 refs/tags/m13.5-local-gpu-terrain-working-data",
+    "81dadf42fa9e91d8f946ebc30c3cbe3b621761fe refs/tags/m13.6-cpu-cached-terrain-residency-keys",
+    "3ccb998031e15cb1898394589c27244d55e06e24 refs/tags/m14.1-canonical-surface-point-queries",
+    "b07c511aab7109e3d240d9c7c31a444f58e069a5 refs/tags/m14.10-certified-root-contact-kinematics",
+    "8ac99fbfad4f8dd6365d696053fc3edfeea2249d refs/tags/m14.11-certified-response-proposal",
+    "98831b08e07d1bcc251f7aa900f463b98570ef04 refs/tags/m14.12-certified-preimpact-velocity",
+    "7c94f38cab9cf605c69b3b1874fee0c0091fbbb2 refs/tags/m14.13-certified-postimpact-velocity",
+    "412084a0acda2fa96c4be166e1f9f29020ffc577 refs/tags/m14.14-private-root-postimpact-state",
+    "6da3eba1410b05ea46a133bb2cf1c81425f8bf72 refs/tags/m14.15-private-canonical-propagation",
+    "a864be12e42cb98cbd38c17905833f781a579253 refs/tags/m14.16-postimpact-terrain-clearance",
+    "3f48fe441ac54458e9b413a909fae134abb112de refs/tags/m14.17-certified-continuation-publication",
+    "2faa9e568ef5f1e723f22d9635447179e4585053 refs/tags/m14.18-staged-finite-body-bepu-contact",
+    "684ed841de1432e89772282d8951f7cd8f70a625 refs/tags/m14.19-persistent-bepu-contact-publication",
+    "ae2f203b97224ff88b38b7c68902ac2d31108a91 refs/tags/m14.2-spacecraft-translational-authority",
+    "ac96f952b9c44220cd93042c0d7c6e8e07d227d5 refs/tags/m14.20-host-paced-canonical-contact-servicing",
+    "d8c13e46a9272e5ef6eb89acbe23c29709e3c55b refs/tags/m14.21-authored-compound-spacecraft-contact",
+    "e943a128ef425ff7427b917f2bb04056e58282f5 refs/tags/m14.22-canonical-spacecraft-command-authority",
+    "cd22cc96d88d2b6cf3ca48740ad41baecbbe7c9e refs/tags/m14.23-prepared-single-engine-actuation",
+    "50aa4e984e6646a9334e4e87356a43ffdf138e73 refs/tags/m14.24-exact-finite-propellant-segmentation",
+    "b9ad79c38b322c8e1e095039d5b69c035a1bcca8 refs/tags/m14.3-spacecraft-terrain-contact-observations",
+    "b198d3b381ba4a82577ba89bd5e31e6050d3a896 refs/tags/m14.4-atomic-contact-response",
+    "c2964fe4531b8e383d2d89beec2e8c055f3541a5 refs/tags/m14.5-isolated-analytical-contact-response",
+    "07adc9983252f2cabf0af9da0a1281457af606bf refs/tags/m14.6-physical-event-epochs",
+    "315da29c4eff5562f9040f7a0aedbb4e961fa877 refs/tags/m14.7-exact-event-spacecraft-motion",
+    "27a32989cef714a204d0d7ecfbd4618e53de0086 refs/tags/m14.8-exact-event-earth-relative-observation",
+    "944cb5c1f2011b5944745b210e561d0b9e8b4aaf refs/tags/m14.9-florida-monotone-contact-certification",
+    "72c387e0bbe512a569650978522bbb3a0022ffc3 refs/tags/m15.0-segmented-powered-free-flight",
+    "88a108cafaab3b030c0e48568d98330dd07607b7 refs/tags/milestone-10A",
+    "5ba3f5bdb97cb7efa831b8be3a681894a0338228 refs/tags/milestone-10A-2A-2",
+    "14693e902933430df890b5a0e39170a5b247eb97 refs/tags/milestone-10A-3",
+    "52762291bf25446cd2c37594d74302eebd1dd4f7 refs/tags/milestone-10A-4",
+    "c485b158ee8e35e105aaf452afd8b8ff3890a870 refs/tags/milestone-10A-5",
+    "a9d15d10d5e077d74807bed196c3ea5e9bb03e00 refs/tags/milestone-10A-6",
+    "dfa242e0c67574b8659de1ecd1c742e1daabd89b refs/tags/milestone-10A-7",
+    "f95eed79f60201f2ffce78533fe205bee2ebbabc refs/tags/milestone-10B-1",
+    "15cd78446c87be9423aaa2067068bcb6360f57b1 refs/tags/milestone-10B-2A",
+    "209954827f6c824bc7e6d796a781d72aa6e983e8 refs/tags/milestone-10B-2B",
+    "f1ecd38f2211ee98566b35dec6d92b37a3d47b7a refs/tags/milestone-11A",
+    "16dbfd0f3e7b438101781d3d6d0642272efb7b2a refs/tags/milestone-11B-7F",
+    "4a022dbeac91708b69d5f77fb6034da06f40bbf1 refs/tags/milestone-9A-4E-3",
+    "586dc57df705a4a0f1a5812c114aa981c3e500d1 refs/tags/milestone-9A-4E-5A",
+    "3f26635d2da0e4dd5773589a4299eb82fc0c8ca8 refs/tags/milestone-9A-celestial-v3",
+    "4997e30bd40ebae011a20dd6b58c88a9caed7a6c refs/tags/v0.2.0",
+    "764637f7662420e7c3494aee8c9e748b04db6626 refs/tags/v0.2.1",
+    "18c8a6d2e78e1b8a2bfaddd88dba955bf00b1631 refs/tags/v0.3.0",
+    "435e4cab66df0ce6885c84282ca014295e2c3cdd refs/tags/v0.4.0",
+    "141f7f623220ec3f0d5a79b30cebdcb48605a76a refs/tags/v0.4.1-docs",
+    "3759e1df199ae28acfc51376fa89295730798cad refs/tags/v0.5.0"
+  ],
+  "initial": [
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-architecture",
+      "files": 15,
+      "bytes": 108440
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-chronological-event-feasibility",
+      "files": 22,
+      "bytes": 181089
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-event-lifecycle-convergence",
+      "files": 18,
+      "bytes": 123524
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite",
+      "files": 460,
+      "bytes": 11783848
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-ordinary-step-event-closure",
+      "files": 87,
+      "bytes": 619014
+    },
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.ConvergenceProbe",
+      "files": 2,
+      "bytes": 21160
+    },
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.CoupledProbe",
+      "files": 2,
+      "bytes": 5419
+    },
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.DurationProbe",
+      "files": 2,
+      "bytes": 17183
+    },
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.IntegratedProbe",
+      "files": 8,
+      "bytes": 55978
+    },
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.OwnedCacheProbe",
+      "files": 3,
+      "bytes": 38690
+    },
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.PreconditionedProbe",
+      "files": 4,
+      "bytes": 33166
+    },
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.Probe",
+      "files": 2,
+      "bytes": 11309
+    },
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.WorldProbe",
+      "files": 3,
+      "bytes": 24669
+    }
+  ],
+  "rootClassifications": [
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-architecture",
+      "classification": "CONSOLIDATE",
+      "files": 15,
+      "bytes": 108440
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-chronological-event-feasibility",
+      "classification": "RETAIN",
+      "files": 22,
+      "bytes": 181089
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-event-lifecycle-convergence",
+      "classification": "RETAIN",
+      "files": 18,
+      "bytes": 123524
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite",
+      "classification": "CONSOLIDATE",
+      "files": 460,
+      "bytes": 11783848
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-ordinary-step-event-closure",
+      "classification": "RETAIN",
+      "files": 87,
+      "bytes": 619014
+    },
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.ConvergenceProbe",
+      "classification": "RETIRE",
+      "files": 2,
+      "bytes": 21160
+    },
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.CoupledProbe",
+      "classification": "RETIRE",
+      "files": 2,
+      "bytes": 5419
+    },
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.DurationProbe",
+      "classification": "RETAIN",
+      "files": 2,
+      "bytes": 17183
+    },
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.IntegratedProbe",
+      "classification": "RETAIN",
+      "files": 8,
+      "bytes": 55978
+    },
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.OwnedCacheProbe",
+      "classification": "RETAIN",
+      "files": 3,
+      "bytes": 38690
+    },
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.PreconditionedProbe",
+      "classification": "RETAIN",
+      "files": 4,
+      "bytes": 33166
+    },
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.Probe",
+      "classification": "RETIRE",
+      "files": 2,
+      "bytes": 11309
+    },
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.WorldProbe",
+      "classification": "RETAIN",
+      "files": 3,
+      "bytes": 24669
+    }
+  ],
+  "children": [
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-architecture",
+      "classification": "CONSOLIDATE",
+      "directFiles": 15,
+      "directBytes": 108440,
+      "role": "Active reproduction or architecture/provenance evidence"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-chronological-event-feasibility",
+      "classification": "RETAIN",
+      "directFiles": 22,
+      "directBytes": 181089,
+      "role": "Active reproduction or architecture/provenance evidence"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-event-lifecycle-convergence",
+      "classification": "RETAIN",
+      "directFiles": 18,
+      "directBytes": 123524,
+      "role": "Active reproduction or architecture/provenance evidence"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite",
+      "classification": "CONSOLIDATE",
+      "directFiles": 13,
+      "directBytes": 87331,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\basis-compatibility",
+      "classification": "CONSOLIDATE",
+      "directFiles": 12,
+      "directBytes": 126185,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\coast-accuracy",
+      "classification": "CONSOLIDATE",
+      "directFiles": 16,
+      "directBytes": 321726,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\coast-accuracy\\payoff",
+      "classification": "CONSOLIDATE",
+      "directFiles": 9,
+      "directBytes": 82790,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\coast-accuracy\\payoff\\results",
+      "classification": "CONSOLIDATE",
+      "directFiles": 16,
+      "directBytes": 59779,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\coast-admission",
+      "classification": "CONSOLIDATE",
+      "directFiles": 12,
+      "directBytes": 147468,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\convergence",
+      "classification": "CONSOLIDATE",
+      "directFiles": 6,
+      "directBytes": 89362,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\duration-history",
+      "classification": "CONSOLIDATE",
+      "directFiles": 7,
+      "directBytes": 178073,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\duration-provenance",
+      "classification": "CONSOLIDATE",
+      "directFiles": 7,
+      "directBytes": 90009,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification",
+      "classification": "CONSOLIDATE",
+      "directFiles": 7,
+      "directBytes": 45434,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\active-set-convergence",
+      "classification": "CONSOLIDATE",
+      "directFiles": 26,
+      "directBytes": 180217,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\active-set-convergence\\baseline-reproduction",
+      "classification": "CONSOLIDATE",
+      "directFiles": 10,
+      "directBytes": 30564,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\active-set-convergence\\bin\\Debug\\net10.0",
+      "classification": "DISPOSABLE",
+      "directFiles": 7,
+      "directBytes": 1537173,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\active-set-convergence\\bin\\Debug\\net10.0\\third-party\\Bepu",
+      "classification": "DISPOSABLE",
+      "directFiles": 2,
+      "directBytes": 10514,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\active-set-convergence\\bin\\Release\\net10.0",
+      "classification": "DISPOSABLE",
+      "directFiles": 7,
+      "directBytes": 1514497,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\active-set-convergence\\bin\\Release\\net10.0\\third-party\\Bepu",
+      "classification": "DISPOSABLE",
+      "directFiles": 2,
+      "directBytes": 10514,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\active-set-convergence\\curve-results",
+      "classification": "CONSOLIDATE",
+      "directFiles": 1,
+      "directBytes": 1350,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\active-set-convergence\\curve-results-v2",
+      "classification": "CONSOLIDATE",
+      "directFiles": 6,
+      "directBytes": 198800,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\active-set-convergence\\matrix-results",
+      "classification": "CONSOLIDATE",
+      "directFiles": 4,
+      "directBytes": 101877,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\active-set-convergence\\obj",
+      "classification": "DISPOSABLE",
+      "directFiles": 8,
+      "directBytes": 67755,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\active-set-convergence\\obj\\Debug\\net10.0",
+      "classification": "DISPOSABLE",
+      "directFiles": 15,
+      "directBytes": 500427,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\active-set-convergence\\obj\\Debug\\net10.0\\ref",
+      "classification": "DISPOSABLE",
+      "directFiles": 1,
+      "directBytes": 43008,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\active-set-convergence\\obj\\Debug\\net10.0\\refint",
+      "classification": "DISPOSABLE",
+      "directFiles": 1,
+      "directBytes": 43008,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\active-set-convergence\\obj\\Release\\net10.0",
+      "classification": "DISPOSABLE",
+      "directFiles": 15,
+      "directBytes": 477647,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\active-set-convergence\\obj\\Release\\net10.0\\ref",
+      "classification": "DISPOSABLE",
+      "directFiles": 1,
+      "directBytes": 42496,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\active-set-convergence\\obj\\Release\\net10.0\\refint",
+      "classification": "DISPOSABLE",
+      "directFiles": 1,
+      "directBytes": 42496,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\active-set-convergence\\payoff-1",
+      "classification": "CONSOLIDATE",
+      "directFiles": 1,
+      "directBytes": 17788,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\active-set-convergence\\payoff-2",
+      "classification": "CONSOLIDATE",
+      "directFiles": 1,
+      "directBytes": 17783,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\active-set-convergence\\payoff-3",
+      "classification": "CONSOLIDATE",
+      "directFiles": 1,
+      "directBytes": 17781,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\friction-boundary-continuation",
+      "classification": "CONSOLIDATE",
+      "directFiles": 16,
+      "directBytes": 92051,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\friction-boundary-continuation\\bin\\Debug\\net10.0",
+      "classification": "DISPOSABLE",
+      "directFiles": 7,
+      "directBytes": 1505326,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\friction-boundary-continuation\\bin\\Debug\\net10.0\\third-party\\Bepu",
+      "classification": "DISPOSABLE",
+      "directFiles": 2,
+      "directBytes": 10514,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\friction-boundary-continuation\\obj",
+      "classification": "DISPOSABLE",
+      "directFiles": 5,
+      "directBytes": 44687,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\friction-boundary-continuation\\obj\\Debug\\net10.0",
+      "classification": "DISPOSABLE",
+      "directFiles": 15,
+      "directBytes": 468788,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\friction-boundary-continuation\\obj\\Debug\\net10.0\\ref",
+      "classification": "DISPOSABLE",
+      "directFiles": 1,
+      "directBytes": 40960,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\friction-boundary-continuation\\obj\\Debug\\net10.0\\refint",
+      "classification": "DISPOSABLE",
+      "directFiles": 1,
+      "directBytes": 40960,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\friction-boundary-continuation\\results",
+      "classification": "CONSOLIDATE",
+      "directFiles": 10,
+      "directBytes": 30564,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\paired-response",
+      "classification": "CONSOLIDATE",
+      "directFiles": 22,
+      "directBytes": 173515,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\paired-response\\diagnostics",
+      "classification": "CONSOLIDATE",
+      "directFiles": 8,
+      "directBytes": 178577,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\paired-response\\reproduction",
+      "classification": "CONSOLIDATE",
+      "directFiles": 9,
+      "directBytes": 38548,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\results",
+      "classification": "CONSOLIDATE",
+      "directFiles": 19,
+      "directBytes": 73986,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\tiny-active-friction",
+      "classification": "CONSOLIDATE",
+      "directFiles": 21,
+      "directBytes": 326471,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\tiny-active-friction\\__pycache__",
+      "classification": "DISPOSABLE",
+      "directFiles": 1,
+      "directBytes": 34779,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\tiny-active-friction\\bin\\Debug\\net10.0",
+      "classification": "DISPOSABLE",
+      "directFiles": 7,
+      "directBytes": 1494297,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\tiny-active-friction\\bin\\Debug\\net10.0\\third-party\\Bepu",
+      "classification": "DISPOSABLE",
+      "directFiles": 2,
+      "directBytes": 10514,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\tiny-active-friction\\candidate-results",
+      "classification": "CONSOLIDATE",
+      "directFiles": 9,
+      "directBytes": 54081,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\tiny-active-friction\\obj",
+      "classification": "DISPOSABLE",
+      "directFiles": 5,
+      "directBytes": 44606,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\tiny-active-friction\\obj\\Debug\\net10.0",
+      "classification": "DISPOSABLE",
+      "directFiles": 15,
+      "directBytes": 457556,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\tiny-active-friction\\obj\\Debug\\net10.0\\ref",
+      "classification": "DISPOSABLE",
+      "directFiles": 1,
+      "directBytes": 38400,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\tiny-active-friction\\obj\\Debug\\net10.0\\refint",
+      "classification": "DISPOSABLE",
+      "directFiles": 1,
+      "directBytes": 38400,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\tiny-active-friction\\reference-results",
+      "classification": "CONSOLIDATE",
+      "directFiles": 4,
+      "directBytes": 113210,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\twelve-sweep-qualification",
+      "classification": "CONSOLIDATE",
+      "directFiles": 24,
+      "directBytes": 163246,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\twelve-sweep-qualification\\d-regressions",
+      "classification": "CONSOLIDATE",
+      "directFiles": 10,
+      "directBytes": 46238,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\twelve-sweep-qualification\\d-sequence",
+      "classification": "CONSOLIDATE",
+      "directFiles": 7,
+      "directBytes": 31269,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\twelve-sweep-qualification\\d-tiny-coasts",
+      "classification": "CONSOLIDATE",
+      "directFiles": 9,
+      "directBytes": 38548,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\twelve-sweep-qualification\\no-d-regressions",
+      "classification": "CONSOLIDATE",
+      "directFiles": 7,
+      "directBytes": 33077,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\preconditioning",
+      "classification": "CONSOLIDATE",
+      "directFiles": 7,
+      "directBytes": 76828,
+      "role": "Frozen historical source/math/results anchor"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-ordinary-step-event-closure",
+      "classification": "RETAIN",
+      "directFiles": 24,
+      "directBytes": 260746,
+      "role": "Active reproduction or architecture/provenance evidence"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-ordinary-step-event-closure\\friction-work",
+      "classification": "RETAIN",
+      "directFiles": 16,
+      "directBytes": 113603,
+      "role": "Active reproduction or architecture/provenance evidence"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-ordinary-step-event-closure\\performance-payoff",
+      "classification": "RETAIN",
+      "directFiles": 20,
+      "directBytes": 90976,
+      "role": "Active reproduction or architecture/provenance evidence"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-ordinary-step-event-closure\\performance-payoff\\allocation-closure",
+      "classification": "RETAIN",
+      "directFiles": 11,
+      "directBytes": 62925,
+      "role": "Active reproduction or architecture/provenance evidence"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-ordinary-step-event-closure\\performance-payoff\\allocation-recheck",
+      "classification": "RETAIN",
+      "directFiles": 14,
+      "directBytes": 68311,
+      "role": "Active reproduction or architecture/provenance evidence"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-ordinary-step-event-closure\\performance-payoff\\projection-contract",
+      "classification": "RETAIN",
+      "directFiles": 2,
+      "directBytes": 22453,
+      "role": "Active reproduction or architecture/provenance evidence"
+    },
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.ConvergenceProbe",
+      "classification": "RETIRE",
+      "directFiles": 2,
+      "directBytes": 21160,
+      "role": "Active reproduction or architecture/provenance evidence"
+    },
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.CoupledProbe",
+      "classification": "RETIRE",
+      "directFiles": 2,
+      "directBytes": 5419,
+      "role": "Active reproduction or architecture/provenance evidence"
+    },
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.DurationProbe",
+      "classification": "RETAIN",
+      "directFiles": 2,
+      "directBytes": 17183,
+      "role": "Active reproduction or architecture/provenance evidence"
+    },
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.IntegratedProbe",
+      "classification": "RETAIN",
+      "directFiles": 8,
+      "directBytes": 55978,
+      "role": "Active reproduction or architecture/provenance evidence"
+    },
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.OwnedCacheProbe",
+      "classification": "RETAIN",
+      "directFiles": 3,
+      "directBytes": 38690,
+      "role": "Active reproduction or architecture/provenance evidence"
+    },
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.PreconditionedProbe",
+      "classification": "RETAIN",
+      "directFiles": 4,
+      "directBytes": 33166,
+      "role": "Active reproduction or architecture/provenance evidence"
+    },
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.Probe",
+      "classification": "RETIRE",
+      "directFiles": 2,
+      "directBytes": 11309,
+      "role": "Active reproduction or architecture/provenance evidence"
+    },
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.WorldProbe",
+      "classification": "RETAIN",
+      "directFiles": 3,
+      "directBytes": 24669,
+      "role": "Active reproduction or architecture/provenance evidence"
+    }
+  ],
+  "actions": [
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\active-set-convergence\\bin",
+      "classification": "DISPOSABLE",
+      "files": 18,
+      "bytes": 3072698,
+      "responsibility": "Rebuildable compiler/runtime cache; source and results retained.",
+      "conclusionDestination": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/REPRODUCTION-INDEX.md",
+      "reproductionDependency": "No production/permanent-test dependency; no active reproduction requires this path.",
+      "deletionSafe": true,
+      "reason": "Rebuildable compiler/runtime cache; source and results retained.",
+      "originalFiles": [],
+      "status": "REMOVED_ON_SINGLE_REVIEWED_ATTEMPT"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\active-set-convergence\\obj",
+      "classification": "DISPOSABLE",
+      "files": 42,
+      "bytes": 1216837,
+      "responsibility": "Rebuildable compiler/runtime cache; source and results retained.",
+      "conclusionDestination": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/REPRODUCTION-INDEX.md",
+      "reproductionDependency": "No production/permanent-test dependency; no active reproduction requires this path.",
+      "deletionSafe": true,
+      "reason": "Rebuildable compiler/runtime cache; source and results retained.",
+      "originalFiles": [],
+      "status": "REMOVED_ON_SINGLE_REVIEWED_ATTEMPT"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\friction-boundary-continuation\\bin",
+      "classification": "DISPOSABLE",
+      "files": 9,
+      "bytes": 1515840,
+      "responsibility": "Rebuildable compiler/runtime cache; source and results retained.",
+      "conclusionDestination": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/REPRODUCTION-INDEX.md",
+      "reproductionDependency": "No production/permanent-test dependency; no active reproduction requires this path.",
+      "deletionSafe": true,
+      "reason": "Rebuildable compiler/runtime cache; source and results retained.",
+      "originalFiles": [],
+      "status": "REMOVED_ON_SINGLE_REVIEWED_ATTEMPT"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\friction-boundary-continuation\\obj",
+      "classification": "DISPOSABLE",
+      "files": 22,
+      "bytes": 595395,
+      "responsibility": "Rebuildable compiler/runtime cache; source and results retained.",
+      "conclusionDestination": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/REPRODUCTION-INDEX.md",
+      "reproductionDependency": "No production/permanent-test dependency; no active reproduction requires this path.",
+      "deletionSafe": true,
+      "reason": "Rebuildable compiler/runtime cache; source and results retained.",
+      "originalFiles": [],
+      "status": "REMOVED_ON_SINGLE_REVIEWED_ATTEMPT"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\tiny-active-friction\\bin",
+      "classification": "DISPOSABLE",
+      "files": 9,
+      "bytes": 1504811,
+      "responsibility": "Rebuildable compiler/runtime cache; source and results retained.",
+      "conclusionDestination": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/REPRODUCTION-INDEX.md",
+      "reproductionDependency": "No production/permanent-test dependency; no active reproduction requires this path.",
+      "deletionSafe": true,
+      "reason": "Rebuildable compiler/runtime cache; source and results retained.",
+      "originalFiles": [],
+      "status": "REMOVED_ON_SINGLE_REVIEWED_ATTEMPT"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\tiny-active-friction\\obj",
+      "classification": "DISPOSABLE",
+      "files": 22,
+      "bytes": 578962,
+      "responsibility": "Rebuildable compiler/runtime cache; source and results retained.",
+      "conclusionDestination": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/REPRODUCTION-INDEX.md",
+      "reproductionDependency": "No production/permanent-test dependency; no active reproduction requires this path.",
+      "deletionSafe": true,
+      "reason": "Rebuildable compiler/runtime cache; source and results retained.",
+      "originalFiles": [],
+      "status": "REMOVED_ON_SINGLE_REVIEWED_ATTEMPT"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\tiny-active-friction\\__pycache__",
+      "classification": "DISPOSABLE",
+      "files": 1,
+      "bytes": 34779,
+      "responsibility": "Rebuildable compiler/runtime cache; source and results retained.",
+      "conclusionDestination": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/REPRODUCTION-INDEX.md",
+      "reproductionDependency": "No production/permanent-test dependency; no active reproduction requires this path.",
+      "deletionSafe": true,
+      "reason": "Rebuildable compiler/runtime cache; source and results retained.",
+      "originalFiles": [],
+      "status": "REMOVED_ON_SINGLE_REVIEWED_ATTEMPT"
+    },
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.Probe",
+      "classification": "RETIRE",
+      "files": 2,
+      "bytes": 11309,
+      "responsibility": "Superseded leaf campaign; original primitive/convergence findings retained HISTORICAL-ONLY.",
+      "conclusionDestination": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/CANDIDATE-A-HISTORY.md",
+      "reproductionDependency": "No production/permanent-test dependency; no active reproduction requires this path.",
+      "deletionSafe": true,
+      "reason": "Superseded leaf campaign; original primitive/convergence findings retained HISTORICAL-ONLY.",
+      "originalFiles": [
+        {
+          "path": "tests/NovaCore.ContactNumerics.Probe/NovaCore.ContactNumerics.Probe.csproj",
+          "bytes": 568,
+          "sha256": "91E6357D63CCDE79B5F3D8D39FD9BD287929FB70C3151CBEA855AD685B1382FA"
+        },
+        {
+          "path": "tests/NovaCore.ContactNumerics.Probe/Program.cs",
+          "bytes": 10741,
+          "sha256": "774F1E8A0E6CB472493F923A8FCCC5AC6DB95303990CA88ECC30A1846104A7C2"
+        }
+      ],
+      "status": "REMOVED_ON_SINGLE_REVIEWED_ATTEMPT"
+    },
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.CoupledProbe",
+      "classification": "RETIRE",
+      "files": 2,
+      "bytes": 5419,
+      "responsibility": "Superseded leaf campaign; original primitive/convergence findings retained HISTORICAL-ONLY.",
+      "conclusionDestination": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/CANDIDATE-A-HISTORY.md",
+      "reproductionDependency": "No production/permanent-test dependency; no active reproduction requires this path.",
+      "deletionSafe": true,
+      "reason": "Superseded leaf campaign; original primitive/convergence findings retained HISTORICAL-ONLY.",
+      "originalFiles": [
+        {
+          "path": "tests/NovaCore.ContactNumerics.CoupledProbe/NovaCore.ContactNumerics.CoupledProbe.csproj",
+          "bytes": 107,
+          "sha256": "68E564D3988E81391AFFD33BD68ED9CC9E69408B57058CB8689707C293CF5A5E"
+        },
+        {
+          "path": "tests/NovaCore.ContactNumerics.CoupledProbe/Program.cs",
+          "bytes": 5312,
+          "sha256": "7684C628B520B55C713B8A5E0DAD8B14DF60DD93D0F109A4BAFA79CD56078AB0"
+        }
+      ],
+      "status": "REMOVED_ON_SINGLE_REVIEWED_ATTEMPT"
+    },
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.ConvergenceProbe",
+      "classification": "RETIRE",
+      "files": 2,
+      "bytes": 21160,
+      "responsibility": "Superseded leaf campaign; original primitive/convergence findings retained HISTORICAL-ONLY.",
+      "conclusionDestination": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/CANDIDATE-A-HISTORY.md",
+      "reproductionDependency": "No production/permanent-test dependency; no active reproduction requires this path.",
+      "deletionSafe": true,
+      "reason": "Superseded leaf campaign; original primitive/convergence findings retained HISTORICAL-ONLY.",
+      "originalFiles": [
+        {
+          "path": "tests/NovaCore.ContactNumerics.ConvergenceProbe/NovaCore.ContactNumerics.ConvergenceProbe.csproj",
+          "bytes": 476,
+          "sha256": "5C73B302A4452C168343B4A660CC8DBDB3176286D25E5FF242FCD26211342F48"
+        },
+        {
+          "path": "tests/NovaCore.ContactNumerics.ConvergenceProbe/Study.cs",
+          "bytes": 20684,
+          "sha256": "8E9FE3436AC4DF0EC13E4924358C4B661D0563C12884AC605C09B4EAB91F20C5"
+        }
+      ],
+      "status": "REMOVED_ON_SINGLE_REVIEWED_ATTEMPT"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\convergence",
+      "classification": "CONSOLIDATE",
+      "files": 6,
+      "bytes": 89362,
+      "responsibility": "Early campaign retained as complete report/results/verifier at numerical root; planning/hash inventory and old wrapper superseded.",
+      "conclusionDestination": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/CANDIDATE-A-HISTORY.md",
+      "reproductionDependency": "No production/permanent-test dependency; no active reproduction requires this path.",
+      "deletionSafe": true,
+      "reason": "Early campaign retained as complete report/results/verifier at numerical root; planning/hash inventory and old wrapper superseded.",
+      "originalFiles": [
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/convergence/identity.json",
+          "bytes": 5578,
+          "sha256": "3A6EEF27755C3BB12C4106C55401CB980D72FBFF7853E214430EE2FF8545774E"
+        },
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/convergence/plan.md",
+          "bytes": 4880,
+          "sha256": "A8FCFE2E91F22A478E8EDF79B8EAB0F2803B83B0727D7637BC1B39AADECB1BDF"
+        },
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/convergence/README.md",
+          "bytes": 11976,
+          "sha256": "59446FEC2DEEF51E67AFEB9FD20F1BF4C4887F5A323202647CFBC83174802506"
+        },
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/convergence/reproduce.ps1",
+          "bytes": 2329,
+          "sha256": "F24010B3D50922213B70A59D9DB2DC141D761D198E9A878068136A00A4754CCE"
+        },
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/convergence/results.json",
+          "bytes": 61473,
+          "sha256": "0EB67EDFDE3D3FB8FB70089F481EBBAC02C8D3F01244FAA2DF92583B9DF94E6C"
+        },
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/convergence/verification.md",
+          "bytes": 3126,
+          "sha256": "4783645614A17CDD897059C60918C341D48A0A5B41C4911BBD9349C69434781E"
+        }
+      ],
+      "status": "REMOVED_ON_SINGLE_REVIEWED_ATTEMPT"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\active-set-convergence\\baseline-reproduction",
+      "classification": "CONSOLIDATE",
+      "files": 10,
+      "bytes": 30564,
+      "responsibility": "Numerical outputs are byte-identical to surviving result set; distinct process attempt preserved in historical-run-provenance.json.",
+      "conclusionDestination": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/results",
+      "reproductionDependency": "Consumers use surviving result paths; old campaign hash wrappers retired.",
+      "deletionSafe": true,
+      "reason": "Numerical outputs are byte-identical to surviving result set; distinct process attempt preserved in historical-run-provenance.json.",
+      "originalFiles": [
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/baseline-reproduction/attempt.json",
+          "bytes": 160,
+          "sha256": "DEB526E3EBFDDA5BB57106196FDA06E3D82D1B236A487E621E1C2D72531C318C"
+        },
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/baseline-reproduction/baseline-after-D.json",
+          "bytes": 2201,
+          "sha256": "CF32E82981D0D96E638698A0C14E4F8CD32882F6E25EDDC34882BC10C07F9118"
+        },
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/baseline-reproduction/baseline-basis-transport.json",
+          "bytes": 2250,
+          "sha256": "2ED562BE6D49D6FE0D7D7B0B31B72AD96C6D9BFFEEF2BE79B6629B4F7739119B"
+        },
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/baseline-reproduction/baseline-coast.json",
+          "bytes": 7861,
+          "sha256": "6FCE5AB9AFD2398EAD32E0A0896EBF98C75C89CDAC24D51CD82A753D208DEE71"
+        },
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/baseline-reproduction/baseline-duration-transform.json",
+          "bytes": 2222,
+          "sha256": "61D4A2F48E72318364EF6E213AF64B9CC692EE32D4614406E24F745524DD509F"
+        },
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/baseline-reproduction/baseline-historical.json",
+          "bytes": 5067,
+          "sha256": "288AE763570EB1BE284C897021E294654CDCC1EFBB070314C427C066BD864F9E"
+        },
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/baseline-reproduction/baseline-load-correction.json",
+          "bytes": 2219,
+          "sha256": "62B2B420ED98CBE96A8CEF54B7BBD55104F01E698885F67462659012824969E5"
+        },
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/baseline-reproduction/baseline-preparation.json",
+          "bytes": 3327,
+          "sha256": "0E8FB8AD8BF1E7EB203CCF2786A4D4271E71922DB859E3A967421BEE61D1AF73"
+        },
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/baseline-reproduction/powered-historical.json",
+          "bytes": 5069,
+          "sha256": "DAC46E388B2E1F740A1BFAB55F5DBCC312E68A2C0507789DC7DC38A5B592BC60"
+        },
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/baseline-reproduction/stop.json",
+          "bytes": 188,
+          "sha256": "AEE505C4B5E302E4979861A806D79C7BFAA1EAF733723A7428A0534296465AB0"
+        }
+      ],
+      "status": "REMOVED_ON_SINGLE_REVIEWED_ATTEMPT"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\twelve-sweep-qualification\\d-tiny-coasts",
+      "classification": "CONSOLIDATE",
+      "files": 9,
+      "bytes": 38548,
+      "responsibility": "Numerical outputs are byte-identical to surviving result set; distinct process attempt preserved in historical-run-provenance.json.",
+      "conclusionDestination": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/reproduction",
+      "reproductionDependency": "Consumers use surviving result paths; old campaign hash wrappers retired.",
+      "deletionSafe": true,
+      "reason": "Numerical outputs are byte-identical to surviving result set; distinct process attempt preserved in historical-run-provenance.json.",
+      "originalFiles": [
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-tiny-coasts/attempt.json",
+          "bytes": 161,
+          "sha256": "86BFC6548E934A75D0B8A833683C63A5F0760B04727B097030ED1EA7AF4A75E3"
+        },
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-tiny-coasts/baseline-coast.json",
+          "bytes": 7871,
+          "sha256": "E8D9C1773F6330780C59231A12129582F54B39BE8144BD8D503EF23EBCE0C996"
+        },
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-tiny-coasts/baseline-historical.json",
+          "bytes": 5067,
+          "sha256": "288AE763570EB1BE284C897021E294654CDCC1EFBB070314C427C066BD864F9E"
+        },
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-tiny-coasts/baseline-preparation.json",
+          "bytes": 3327,
+          "sha256": "0E8FB8AD8BF1E7EB203CCF2786A4D4271E71922DB859E3A967421BEE61D1AF73"
+        },
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-tiny-coasts/paired-response.json",
+          "bytes": 5609,
+          "sha256": "883D55275A0A506AA74B226F1731403AC2732063593E578291E143BFD60DE0D9"
+        },
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-tiny-coasts/powered-coast.json",
+          "bytes": 7880,
+          "sha256": "B9E47CD2FDBE8A000A778B29CEC61565B8F78C240F6F60A84DB0FFBE3992BF0E"
+        },
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-tiny-coasts/powered-historical.json",
+          "bytes": 5069,
+          "sha256": "DAC46E388B2E1F740A1BFAB55F5DBCC312E68A2C0507789DC7DC38A5B592BC60"
+        },
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-tiny-coasts/powered-preparation.json",
+          "bytes": 3341,
+          "sha256": "601E5A5D8D064B6B68474AADAF4DE42E5B310522538EFA73CEFBD39D61BE5C46"
+        },
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-tiny-coasts/stop.json",
+          "bytes": 223,
+          "sha256": "6C849F4104F8909455633DB86D2E2906276E2DD04ACE47DB9893A335DB7EF812"
+        }
+      ],
+      "status": "REMOVED_ON_SINGLE_REVIEWED_ATTEMPT"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\basis-compatibility\\reproduce.ps1",
+      "classification": "RETIRE",
+      "files": 1,
+      "bytes": 2279,
+      "responsibility": "Broad historical campaign automation superseded by targeted A1/A2/A3 entry; remaining exploratory campaigns explicitly HISTORICAL-ONLY.",
+      "conclusionDestination": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/REPRODUCTION-INDEX.md",
+      "reproductionDependency": "No production/permanent-test dependency; no active reproduction requires this path.",
+      "deletionSafe": true,
+      "reason": "Broad historical campaign automation superseded by targeted A1/A2/A3 entry; remaining exploratory campaigns explicitly HISTORICAL-ONLY.",
+      "originalFiles": [
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/basis-compatibility/reproduce.ps1",
+          "bytes": 2279,
+          "sha256": "14827DBE4EEB3122DD0035FEDDF5FF2498F0A102292138069A3BDE8348834A26"
+        }
+      ],
+      "status": "REMOVED_ON_SINGLE_REVIEWED_ATTEMPT"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\coast-accuracy\\payoff\\reproduce.ps1",
+      "classification": "RETIRE",
+      "files": 1,
+      "bytes": 3592,
+      "responsibility": "Broad historical campaign automation superseded by targeted A1/A2/A3 entry; remaining exploratory campaigns explicitly HISTORICAL-ONLY.",
+      "conclusionDestination": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/REPRODUCTION-INDEX.md",
+      "reproductionDependency": "No production/permanent-test dependency; no active reproduction requires this path.",
+      "deletionSafe": true,
+      "reason": "Broad historical campaign automation superseded by targeted A1/A2/A3 entry; remaining exploratory campaigns explicitly HISTORICAL-ONLY.",
+      "originalFiles": [
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/payoff/reproduce.ps1",
+          "bytes": 3592,
+          "sha256": "4601E5B0F743E0B04B967C72A1D5B257D72E2A56C82F1424E83CA46B52F58EAD"
+        }
+      ],
+      "status": "REMOVED_ON_SINGLE_REVIEWED_ATTEMPT"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\coast-accuracy\\reproduce-payoff.ps1",
+      "classification": "RETIRE",
+      "files": 1,
+      "bytes": 1520,
+      "responsibility": "Broad historical campaign automation superseded by targeted A1/A2/A3 entry; remaining exploratory campaigns explicitly HISTORICAL-ONLY.",
+      "conclusionDestination": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/REPRODUCTION-INDEX.md",
+      "reproductionDependency": "No production/permanent-test dependency; no active reproduction requires this path.",
+      "deletionSafe": true,
+      "reason": "Broad historical campaign automation superseded by targeted A1/A2/A3 entry; remaining exploratory campaigns explicitly HISTORICAL-ONLY.",
+      "originalFiles": [
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/reproduce-payoff.ps1",
+          "bytes": 1520,
+          "sha256": "FF014E532C27599EEA42ABCC5D21BC9535F53783BDA6010B0D531EAEA0B2B135"
+        }
+      ],
+      "status": "REMOVED_ON_SINGLE_REVIEWED_ATTEMPT"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\coast-accuracy\\reproduce.ps1",
+      "classification": "RETIRE",
+      "files": 1,
+      "bytes": 2452,
+      "responsibility": "Broad historical campaign automation superseded by targeted A1/A2/A3 entry; remaining exploratory campaigns explicitly HISTORICAL-ONLY.",
+      "conclusionDestination": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/REPRODUCTION-INDEX.md",
+      "reproductionDependency": "No production/permanent-test dependency; no active reproduction requires this path.",
+      "deletionSafe": true,
+      "reason": "Broad historical campaign automation superseded by targeted A1/A2/A3 entry; remaining exploratory campaigns explicitly HISTORICAL-ONLY.",
+      "originalFiles": [
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/reproduce.ps1",
+          "bytes": 2452,
+          "sha256": "E9FFA417F2A048F33BF9D33FB8FD7462E85D9F16CE6D2374733B7D2F7268232F"
+        }
+      ],
+      "status": "REMOVED_ON_SINGLE_REVIEWED_ATTEMPT"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\coast-admission\\reproduce.ps1",
+      "classification": "RETIRE",
+      "files": 1,
+      "bytes": 8513,
+      "responsibility": "Broad historical campaign automation superseded by targeted A1/A2/A3 entry; remaining exploratory campaigns explicitly HISTORICAL-ONLY.",
+      "conclusionDestination": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/REPRODUCTION-INDEX.md",
+      "reproductionDependency": "No production/permanent-test dependency; no active reproduction requires this path.",
+      "deletionSafe": true,
+      "reason": "Broad historical campaign automation superseded by targeted A1/A2/A3 entry; remaining exploratory campaigns explicitly HISTORICAL-ONLY.",
+      "originalFiles": [
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-admission/reproduce.ps1",
+          "bytes": 8513,
+          "sha256": "D3A2C45B5149374FC6BC70531B49732FDE849D6431665F03AB6630F12131B386"
+        }
+      ],
+      "status": "REMOVED_ON_SINGLE_REVIEWED_ATTEMPT"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\duration-history\\reproduce.ps1",
+      "classification": "RETIRE",
+      "files": 1,
+      "bytes": 7334,
+      "responsibility": "Broad historical campaign automation superseded by targeted A1/A2/A3 entry; remaining exploratory campaigns explicitly HISTORICAL-ONLY.",
+      "conclusionDestination": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/REPRODUCTION-INDEX.md",
+      "reproductionDependency": "No production/permanent-test dependency; no active reproduction requires this path.",
+      "deletionSafe": true,
+      "reason": "Broad historical campaign automation superseded by targeted A1/A2/A3 entry; remaining exploratory campaigns explicitly HISTORICAL-ONLY.",
+      "originalFiles": [
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/duration-history/reproduce.ps1",
+          "bytes": 7334,
+          "sha256": "E2658179453CE7E3054E44E80A91EDC47A6441AEF73063D88135204D8E2B9678"
+        }
+      ],
+      "status": "REMOVED_ON_SINGLE_REVIEWED_ATTEMPT"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\duration-provenance\\reproduce.ps1",
+      "classification": "RETIRE",
+      "files": 1,
+      "bytes": 2576,
+      "responsibility": "Broad historical campaign automation superseded by targeted A1/A2/A3 entry; remaining exploratory campaigns explicitly HISTORICAL-ONLY.",
+      "conclusionDestination": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/REPRODUCTION-INDEX.md",
+      "reproductionDependency": "No production/permanent-test dependency; no active reproduction requires this path.",
+      "deletionSafe": true,
+      "reason": "Broad historical campaign automation superseded by targeted A1/A2/A3 entry; remaining exploratory campaigns explicitly HISTORICAL-ONLY.",
+      "originalFiles": [
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/duration-provenance/reproduce.ps1",
+          "bytes": 2576,
+          "sha256": "E89B70BE9C24CBA4F713164DC7BB61A493CE50CEEA55D3D79D9C5A26718F4C23"
+        }
+      ],
+      "status": "REMOVED_ON_SINGLE_REVIEWED_ATTEMPT"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\active-set-convergence\\reproduce.ps1",
+      "classification": "RETIRE",
+      "files": 1,
+      "bytes": 4515,
+      "responsibility": "Broad historical campaign automation superseded by targeted A1/A2/A3 entry; remaining exploratory campaigns explicitly HISTORICAL-ONLY.",
+      "conclusionDestination": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/REPRODUCTION-INDEX.md",
+      "reproductionDependency": "No production/permanent-test dependency; no active reproduction requires this path.",
+      "deletionSafe": true,
+      "reason": "Broad historical campaign automation superseded by targeted A1/A2/A3 entry; remaining exploratory campaigns explicitly HISTORICAL-ONLY.",
+      "originalFiles": [
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/reproduce.ps1",
+          "bytes": 4515,
+          "sha256": "BAAE2BC33007DC7240F4F34BDB797955CA0710DF4A1ED631C6066987B118E876"
+        }
+      ],
+      "status": "REMOVED_ON_SINGLE_REVIEWED_ATTEMPT"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\friction-boundary-continuation\\reproduce.ps1",
+      "classification": "RETIRE",
+      "files": 1,
+      "bytes": 1688,
+      "responsibility": "Broad historical campaign automation superseded by targeted A1/A2/A3 entry; remaining exploratory campaigns explicitly HISTORICAL-ONLY.",
+      "conclusionDestination": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/REPRODUCTION-INDEX.md",
+      "reproductionDependency": "No production/permanent-test dependency; no active reproduction requires this path.",
+      "deletionSafe": true,
+      "reason": "Broad historical campaign automation superseded by targeted A1/A2/A3 entry; remaining exploratory campaigns explicitly HISTORICAL-ONLY.",
+      "originalFiles": [
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/reproduce.ps1",
+          "bytes": 1688,
+          "sha256": "035203613E020DA213D8ECC0BB682DF67799A8A6C34B2D5E433951305B762CD9"
+        }
+      ],
+      "status": "REMOVED_ON_SINGLE_REVIEWED_ATTEMPT"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\paired-response\\reproduce.ps1",
+      "classification": "RETIRE",
+      "files": 1,
+      "bytes": 2965,
+      "responsibility": "Broad historical campaign automation superseded by targeted A1/A2/A3 entry; remaining exploratory campaigns explicitly HISTORICAL-ONLY.",
+      "conclusionDestination": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/REPRODUCTION-INDEX.md",
+      "reproductionDependency": "No production/permanent-test dependency; no active reproduction requires this path.",
+      "deletionSafe": true,
+      "reason": "Broad historical campaign automation superseded by targeted A1/A2/A3 entry; remaining exploratory campaigns explicitly HISTORICAL-ONLY.",
+      "originalFiles": [
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/reproduce.ps1",
+          "bytes": 2965,
+          "sha256": "75E81AA8857AA511F999FFF0879E47F446E66928EA0FE266E148A275D5F21E92"
+        }
+      ],
+      "status": "REMOVED_ON_SINGLE_REVIEWED_ATTEMPT"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\reproduce.ps1",
+      "classification": "RETIRE",
+      "files": 1,
+      "bytes": 2126,
+      "responsibility": "Broad historical campaign automation superseded by targeted A1/A2/A3 entry; remaining exploratory campaigns explicitly HISTORICAL-ONLY.",
+      "conclusionDestination": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/REPRODUCTION-INDEX.md",
+      "reproductionDependency": "No production/permanent-test dependency; no active reproduction requires this path.",
+      "deletionSafe": true,
+      "reason": "Broad historical campaign automation superseded by targeted A1/A2/A3 entry; remaining exploratory campaigns explicitly HISTORICAL-ONLY.",
+      "originalFiles": [
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/reproduce.ps1",
+          "bytes": 2126,
+          "sha256": "12C94A019277D8E680ED196A0FD916D4D646DABD2660491E1CCFDA78D91403CA"
+        }
+      ],
+      "status": "REMOVED_ON_SINGLE_REVIEWED_ATTEMPT"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\tiny-active-friction\\reproduce.ps1",
+      "classification": "RETIRE",
+      "files": 1,
+      "bytes": 333,
+      "responsibility": "Broad historical campaign automation superseded by targeted A1/A2/A3 entry; remaining exploratory campaigns explicitly HISTORICAL-ONLY.",
+      "conclusionDestination": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/REPRODUCTION-INDEX.md",
+      "reproductionDependency": "No production/permanent-test dependency; no active reproduction requires this path.",
+      "deletionSafe": true,
+      "reason": "Broad historical campaign automation superseded by targeted A1/A2/A3 entry; remaining exploratory campaigns explicitly HISTORICAL-ONLY.",
+      "originalFiles": [
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/reproduce.ps1",
+          "bytes": 333,
+          "sha256": "AF850CE9EB2604F9C65D976CEDF294CA60732A966074D58D51447FF3DA29F690"
+        }
+      ],
+      "status": "REMOVED_ON_SINGLE_REVIEWED_ATTEMPT"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\twelve-sweep-qualification\\reproduce.ps1",
+      "classification": "RETIRE",
+      "files": 1,
+      "bytes": 2808,
+      "responsibility": "Broad historical campaign automation superseded by targeted A1/A2/A3 entry; remaining exploratory campaigns explicitly HISTORICAL-ONLY.",
+      "conclusionDestination": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/REPRODUCTION-INDEX.md",
+      "reproductionDependency": "No production/permanent-test dependency; no active reproduction requires this path.",
+      "deletionSafe": true,
+      "reason": "Broad historical campaign automation superseded by targeted A1/A2/A3 entry; remaining exploratory campaigns explicitly HISTORICAL-ONLY.",
+      "originalFiles": [
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/reproduce.ps1",
+          "bytes": 2808,
+          "sha256": "C0B60A233AD5EB71970962E7F784AC3224AF5A4D80385ECCE2B08B37CEDB8C3A"
+        }
+      ],
+      "status": "REMOVED_ON_SINGLE_REVIEWED_ATTEMPT"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\preconditioning\\reproduce.ps1",
+      "classification": "RETIRE",
+      "files": 1,
+      "bytes": 2994,
+      "responsibility": "Broad historical campaign automation superseded by targeted A1/A2/A3 entry; remaining exploratory campaigns explicitly HISTORICAL-ONLY.",
+      "conclusionDestination": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/REPRODUCTION-INDEX.md",
+      "reproductionDependency": "No production/permanent-test dependency; no active reproduction requires this path.",
+      "deletionSafe": true,
+      "reason": "Broad historical campaign automation superseded by targeted A1/A2/A3 entry; remaining exploratory campaigns explicitly HISTORICAL-ONLY.",
+      "originalFiles": [
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/preconditioning/reproduce.ps1",
+          "bytes": 2994,
+          "sha256": "6E5BF258602CF6DEF8D0E22EEC57700C3EC0F3971B7B034151DF1DB365E679E5"
+        }
+      ],
+      "status": "REMOVED_ON_SINGLE_REVIEWED_ATTEMPT"
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\reproduce.ps1",
+      "classification": "RETIRE",
+      "files": 1,
+      "bytes": 2570,
+      "responsibility": "Broad historical campaign automation superseded by targeted A1/A2/A3 entry; remaining exploratory campaigns explicitly HISTORICAL-ONLY.",
+      "conclusionDestination": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/REPRODUCTION-INDEX.md",
+      "reproductionDependency": "No production/permanent-test dependency; no active reproduction requires this path.",
+      "deletionSafe": true,
+      "reason": "Broad historical campaign automation superseded by targeted A1/A2/A3 entry; remaining exploratory campaigns explicitly HISTORICAL-ONLY.",
+      "originalFiles": [
+        {
+          "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/reproduce.ps1",
+          "bytes": 2570,
+          "sha256": "C1582D76ACF39F21D596A6B36B5502979513952374299AF762E72741C725DF8D"
+        }
+      ],
+      "status": "REMOVED_ON_SINGLE_REVIEWED_ATTEMPT"
+    }
+  ],
+  "duplicateAliases": [
+    {
+      "retired": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/baseline-reproduction/baseline-after-D.json",
+      "surviving": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/results/baseline-after-D.json",
+      "sha256": "CF32E82981D0D96E638698A0C14E4F8CD32882F6E25EDDC34882BC10C07F9118"
+    },
+    {
+      "retired": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/baseline-reproduction/baseline-basis-transport.json",
+      "surviving": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/results/baseline-basis-transport.json",
+      "sha256": "2ED562BE6D49D6FE0D7D7B0B31B72AD96C6D9BFFEEF2BE79B6629B4F7739119B"
+    },
+    {
+      "retired": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/baseline-reproduction/baseline-coast.json",
+      "surviving": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/results/baseline-coast.json",
+      "sha256": "6FCE5AB9AFD2398EAD32E0A0896EBF98C75C89CDAC24D51CD82A753D208DEE71"
+    },
+    {
+      "retired": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/baseline-reproduction/baseline-duration-transform.json",
+      "surviving": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/results/baseline-duration-transform.json",
+      "sha256": "61D4A2F48E72318364EF6E213AF64B9CC692EE32D4614406E24F745524DD509F"
+    },
+    {
+      "retired": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/baseline-reproduction/baseline-historical.json",
+      "surviving": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/results/baseline-historical.json",
+      "sha256": "288AE763570EB1BE284C897021E294654CDCC1EFBB070314C427C066BD864F9E"
+    },
+    {
+      "retired": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/baseline-reproduction/baseline-load-correction.json",
+      "surviving": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/results/baseline-load-correction.json",
+      "sha256": "62B2B420ED98CBE96A8CEF54B7BBD55104F01E698885F67462659012824969E5"
+    },
+    {
+      "retired": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/baseline-reproduction/baseline-preparation.json",
+      "surviving": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/results/baseline-preparation.json",
+      "sha256": "0E8FB8AD8BF1E7EB203CCF2786A4D4271E71922DB859E3A967421BEE61D1AF73"
+    },
+    {
+      "retired": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/baseline-reproduction/powered-historical.json",
+      "surviving": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/results/powered-historical.json",
+      "sha256": "DAC46E388B2E1F740A1BFAB55F5DBCC312E68A2C0507789DC7DC38A5B592BC60"
+    },
+    {
+      "retired": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/baseline-reproduction/stop.json",
+      "surviving": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/results/stop.json",
+      "sha256": "AEE505C4B5E302E4979861A806D79C7BFAA1EAF733723A7428A0534296465AB0"
+    },
+    {
+      "retired": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-tiny-coasts/baseline-coast.json",
+      "surviving": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/reproduction/baseline-coast.json",
+      "sha256": "E8D9C1773F6330780C59231A12129582F54B39BE8144BD8D503EF23EBCE0C996"
+    },
+    {
+      "retired": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-tiny-coasts/baseline-historical.json",
+      "surviving": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/reproduction/baseline-historical.json",
+      "sha256": "288AE763570EB1BE284C897021E294654CDCC1EFBB070314C427C066BD864F9E"
+    },
+    {
+      "retired": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-tiny-coasts/baseline-preparation.json",
+      "surviving": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/reproduction/baseline-preparation.json",
+      "sha256": "0E8FB8AD8BF1E7EB203CCF2786A4D4271E71922DB859E3A967421BEE61D1AF73"
+    },
+    {
+      "retired": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-tiny-coasts/paired-response.json",
+      "surviving": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/reproduction/paired-response.json",
+      "sha256": "883D55275A0A506AA74B226F1731403AC2732063593E578291E143BFD60DE0D9"
+    },
+    {
+      "retired": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-tiny-coasts/powered-coast.json",
+      "surviving": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/reproduction/powered-coast.json",
+      "sha256": "B9E47CD2FDBE8A000A778B29CEC61565B8F78C240F6F60A84DB0FFBE3992BF0E"
+    },
+    {
+      "retired": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-tiny-coasts/powered-historical.json",
+      "surviving": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/reproduction/powered-historical.json",
+      "sha256": "DAC46E388B2E1F740A1BFAB55F5DBCC312E68A2C0507789DC7DC38A5B592BC60"
+    },
+    {
+      "retired": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-tiny-coasts/powered-preparation.json",
+      "surviving": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/reproduction/powered-preparation.json",
+      "sha256": "601E5A5D8D064B6B68474AADAF4DE42E5B310522538EFA73CEFBD39D61BE5C46"
+    },
+    {
+      "retired": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-tiny-coasts/stop.json",
+      "surviving": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/reproduction/stop.json",
+      "sha256": "6C849F4104F8909455633DB86D2E2906276E2DD04ACE47DB9893A335DB7EF812"
+    }
+  ],
+  "historicalProvenance": "Original identity/preflight manifests describe original runs, not current membership.",
+  "newSourcePolicy": "Diagnostic wrapper only; no numerical code changes; no production/permanent tests changed.",
+  "documentationChanges": [
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/cache-contract.md",
+      "originalSha256": "01CA10152D940FD6A85A1D4538CE264A0AFDEF8A59D18D845FD91B3852032C92",
+      "currentSha256": "A544D7F81CF4C864FE6FEC9E0EB55D277884C1B49B2FE0E27515C46BAB0688E7",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/cache-setup-correction.md",
+      "originalSha256": "9D7062A7B9EA78C75DBF551CE6FE25E1BF107CF98BB7CF97F16E40107F31E271",
+      "currentSha256": "5EEEC8B1BE9F8095B90A9FDCADF3CDA19C0D59B05A8A1218AD82CF13B7269EFA",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/candidate-comparison.md",
+      "originalSha256": "ACCFA87AF787715832B13025B2672EC08D8F46F543120D782E73DDCBA530F5A6",
+      "currentSha256": "51393EF93FDDC5F25434829A2A11DAC07B533212059AC633CDA67D041ACE13A1",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coupled-contract.md",
+      "originalSha256": "C986B8AC447DC553F219E2642DF82530F43836C225511332DF2A7746C4A170B1",
+      "currentSha256": "1708431DB5463600830B29A1999D3404281E3547FA8D779FBDC29DC9D4AF7460",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/four-row-contract.md",
+      "originalSha256": "8CF5BF56E2ABD28A4B51434DBDAA0BFC0332F6CA560D460FDEB2B579382A04F8",
+      "currentSha256": "C6CB16C73951CD0115DDBC65E77C48EE1119EEB84E9E9829689E3FACB5FF21DD",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/historical-early-convergence-verification.md",
+      "originalSha256": "4783645614A17CDD897059C60918C341D48A0A5B41C4911BBD9349C69434781E",
+      "currentSha256": "FED112A9D29FFBD27AABDCB31507B468E4D7529D487702F3A5532649B1D71B45",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/historical-early-convergence.md",
+      "originalSha256": "59446FEC2DEEF51E67AFEB9FD20F1BF4C4887F5A323202647CFBC83174802506",
+      "currentSha256": "D7E0EDC1E406266FE32FB2C4D75287480D80437CEEFE8E1BFD73312546D237C4",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/operator-contract.md",
+      "originalSha256": "BF91EC594C127B680FE5DB5368905B24F8CD4E84D53FDA8F1415BCA4E2CA264F",
+      "currentSha256": "AF622DC7428EBD8A91F7B4AE71BD5CD462092D0E8D7852D65AE9CAD541F600D5",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/primitive-limitations.md",
+      "originalSha256": "951A7AFD5828C3E3E076117EA8DF2896374BBE4123C834C82BF8882476515085",
+      "currentSha256": "16C01ABB906B0B2D179E5C553EA539E61C0A64E42701061F65C76712240EF34A",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/README.md",
+      "originalSha256": "9C4EB29C8B10FF656FB8DE74AD75B421090B4429D805C392D5FD8BC5FA1415C8",
+      "currentSha256": "8C2DECC36B243A9D20A25D448DA793EDAFE2A2567B692A915D61BCF81F089301",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/reference-derivations.md",
+      "originalSha256": "D22FD080A331C23121E4DF0FF29E580AF201265ED0ABF36C7F420FF33DEA40CC",
+      "currentSha256": "D8BD0A19880EE0C41203C2863ADD752E593835E01E542F06EB72D8CA0A1F3028",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/verification.md",
+      "originalSha256": "00D8B05C568EF3A910653ECBE92EC4F29AA4071CB6F9F57F3888ECDE1543D4E1",
+      "currentSha256": "6609E986CC7F22BC6A6E70B85D8C693B57D95B5532CCF1BC252188879B9B2153",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/basis-compatibility/bepu-basis-semantics.md",
+      "originalSha256": "B564E306F365E77AAE763C72278B859866CDBF1C1B3237DF3138DEFD4F7416DE",
+      "currentSha256": "EE781AA5C98BD19A0C78E76741AB9E89A1AC3543B58D2AE287CA111A4005E4ED",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/basis-compatibility/cleanup.md",
+      "originalSha256": "32F06B479C11470B244CA1F7E36D908E9BAE589CF276850CBB45464DCBBF381D",
+      "currentSha256": "1788E6EA01A2295C1A935F96F0FD67C1468A353F8FED127674ED2F9856B23AD3",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/basis-compatibility/compatibility-contract.md",
+      "originalSha256": "451E7B3725B449F41DD0FC189BB0939639597EA9EAB9578EA79752E9D947F8E7",
+      "currentSha256": "67292B36847C9E17D125EA256A65CD51D7E3135D2135A02543B83834B2CEDC57",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/basis-compatibility/plan.md",
+      "originalSha256": "604F27BB3AA08598566456E0188C31D5FEAC7FE1D9650F370EA349E8BEA3B113",
+      "currentSha256": "191D5F658096E8761A3C58CEA03C31232BEBDE382F5951BCBA5497982A833992",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/basis-compatibility/README.md",
+      "originalSha256": "FA0ADA760574F4EAF074146D394718C0E3D2B043B74734D7D2529242D6CE863F",
+      "currentSha256": "AF7BE573640C09788C4BC0022D6D24928990FFC900072FC9CF71C35AA7CF5A37",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/basis-compatibility/transport-derivation.md",
+      "originalSha256": "FF36B269CC90C99244682531D43E9AE4812CD8CCE7F88A3BC76A501831FCB931",
+      "currentSha256": "AC83861FADC9789727788CC359ACB1BC67BF3F3F3E3234579DB740C8D8C80910",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/basis-compatibility/verification.md",
+      "originalSha256": "C66D9A2DB3751FD5DC3F1AF4478AE755F6DAB056193B35639575FCE0C3C0DDCC",
+      "currentSha256": "1B0D21AE11D39E3C6F13DEF7205EDF80E97285A814F35A10DAC63779F090FF95",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/causal-reconstruction.md",
+      "originalSha256": "DCD28E6640F07F51B96BD724074DDA4F2D6C8E26802D6089F32B026EE340AEC9",
+      "currentSha256": "C364524943F197D07CD906614640B82DE1C8E0635184AC31B8167127E4FF85B2",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/coast-delta-table.md",
+      "originalSha256": "F18AE28AF9C85D444C9388CD546025D897736E9D2572AB8969EB3294D085A684",
+      "currentSha256": "47F70D74FE9D1DA8EAF530208ED62F3137B3F0B5A6801CD667C5007B13AB248D",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/diagnostic-payoff-plan.md",
+      "originalSha256": "07D1F794FFFE3A2C66F533989A719526CD05126067DB9CEDBD983DEE64607878",
+      "currentSha256": "B1B4F288DDB2C975C03BE8EAA9B5B4B247990102F38C4C53ABB331ABB16F5C17",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/modal-decomposition.md",
+      "originalSha256": "A7308CC29C5E0A3D1814CA63E813E703CAF00A8B40843029848700B5F17B3ADB",
+      "currentSha256": "00D63D1E5290B8B0F0A56C62DBDFF1A9CC395B47F2ADADA45F251F4C58330464",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/plan.md",
+      "originalSha256": "7FC726D371A9A88B4AFCAE423AFBC660D8F3566C7CB3F9AE6F178687418D9A6D",
+      "currentSha256": "67496742955845B9BE11E73E09B9345077F095D1B85781622FE16BF0D4765A06",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/README.md",
+      "originalSha256": "C499AF5786BA30DD0B1B567B3924F0DBC78964C97532DB4BCC73FD1B91308A70",
+      "currentSha256": "BBDE37179B6B6187CBEC3C0BCA6642840CC750021C488FE9AF32B844AA389E14",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/verification.md",
+      "originalSha256": "2699F496D2DA428E1588889453D3AE65478B91B1677D44D73940EBE7AF2B1782",
+      "currentSha256": "914FBC819CFF8123AE3A64D9D3E6EA0AC0F5151521C52C0FE439B8709B0F4A46",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/payoff/plan.md",
+      "originalSha256": "2B61BDC56976A1AB9D32CAA7B328DB4366B8622A4F3B2A646162E7485706B545",
+      "currentSha256": "8DF3806FE7EC37F9E17F720B01CF27203AF8C6FA55F12CC793316E3D3700A36A",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/payoff/README.md",
+      "originalSha256": "5C9B124D13481E92F6B7F20D6CB948EB12F868E179B43E4BF8765F2E0A351945",
+      "currentSha256": "285DA1E94D8D59D2E622B59D49E0CF42B17EA5D167282D53696EF473C685B932",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-accuracy/payoff/verification.md",
+      "originalSha256": "8E9FCCA3AC9EBC0FB39069972FD9738190E9F1EC243DDDCEFFF51D6914119AD4",
+      "currentSha256": "90A8DBE12785E730451631CCB4EC3DF47BA6729B4303F6E8344EDBA4E44F12FE",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-admission/cleanup.md",
+      "originalSha256": "BC5A4677B041A9E35EE318686497CF2CF492FE31F2E4171A43E32F91A47B1E18",
+      "currentSha256": "844178F905C915A82E1E2D1B7E1996D657A7000DA30680D8E8D75EF394011964",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-admission/plan.md",
+      "originalSha256": "7B76BAF2BE6B549883B3B2A2CD258210529635563C00D90F268A6B7E320958FE",
+      "currentSha256": "D45F68ABA2AFF5F8607A99CD9669DD9F53DD1A8F7FE926669A56CAA4415952FE",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-admission/predicate-trace.md",
+      "originalSha256": "3A08F00C779EBAFBAEDB7846C4188AA01F328FEC4C4CE712FE8354A047A74EE6",
+      "currentSha256": "C92FACAAE3338BEF6FCFE79D1EDB96D7F61692D5486799C8859D8C4D77E4D0FA",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-admission/README.md",
+      "originalSha256": "E5ED652DED5886743D38688C81862BD05E2E3C4921DF1874AE13018EFD938761",
+      "currentSha256": "5971D6D3CB17573777C164DE971ADF870DC206D1172BCB16EC411D5D53EEE0AA",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-admission/selector-comparison.md",
+      "originalSha256": "35A9C0D9A37263106A18A810AE85CD1D454C14738192BF3EA7F1D6D494A735E8",
+      "currentSha256": "E56F9DC80DAB294CAAD89E2FEEE7BA10CE1C8B7BF54201D49E4FBA8268667B67",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-admission/source-vs-successor.md",
+      "originalSha256": "98DCA122FFFA4392A773316E3404EC26976A8CB1CCB5826275006B08515AF288",
+      "currentSha256": "6ECCB487EDD999D2D4081AA5C4FAF8F8667377A4BFB1359C2830CD83BB14ADB4",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-admission/support-witness.md",
+      "originalSha256": "5AD794E4B661DA3F938325A3EBD23C2A05D68F2EC1B50104CB4C6F1672340534",
+      "currentSha256": "7FFD58A8134C9C9A6F51C95E15C84F792E1453E0C4C090E1A6E65D1D37F320E0",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/coast-admission/verification.md",
+      "originalSha256": "8B4FE80566BE22C036BD33BF62044B63494A421ED9E2434BC2AD7989BA9E8279",
+      "currentSha256": "31048E60D36DD60661C47458040CF3B0F808933E4698F8D6F29D3AB35500C211",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/duration-history/plan.md",
+      "originalSha256": "3E49FEF156AB41E5ABE916A306D2088FAA5C08BDFCA32EB3052AAA42C6AEAA1A",
+      "currentSha256": "EFC25A70826324E23AD1ABE439A1E08E5D92CC6A63251B39999564FF174F6122",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/duration-history/README.md",
+      "originalSha256": "243D48B4A339D34F1CD0C1A477DF34D3EC4130BB960D8C5159A975E3C745A611",
+      "currentSha256": "23509A73E74F18C4E415F4E8243808C0FAD1F25AB503C483181AB39C95B799A8",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/duration-history/source-and-math.md",
+      "originalSha256": "BFF5DE2AAF2F0EB42322DF5AB12F1DC5695A3C606C40E86BA4E6A57DA8B0C7F3",
+      "currentSha256": "37B9BB3C15BE3AE37CA8D1CB3EDE9A4E15FAD15DD1F6A90A33EB198D3F9B194C",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/duration-history/verification.md",
+      "originalSha256": "E3941FCF1527BA4483437069BC40D92216B753A6100968711C60F290E9526D45",
+      "currentSha256": "9E9D1FE4921ACF8EA1B18C11AE25503992B5E483BC467D2CCADA7B427A176E5A",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/duration-provenance/cleanup.md",
+      "originalSha256": "0B4EF96D67A3F288B1423A0B24E95B02500D93CE0938F0EC57D920C7D253C73F",
+      "currentSha256": "7E7B701C43BA9E94755C16CCFC30F978DB49ABAC01A146D2412B0F386C4D29C0",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/duration-provenance/contract.md",
+      "originalSha256": "71966AE9CF09BED0519FA3289F57F3807B61161AD8D906404C84030D2E3DDE10",
+      "currentSha256": "CAC89CCB84F1DB8D3C394D71AD48E5B9BA50FA99BCDE6E10FB10885A63E33998",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/duration-provenance/README.md",
+      "originalSha256": "708E4A4CE77FC7898160FD401441521DA5776F35130F8A12B285EBEDEB9ABC92",
+      "currentSha256": "220DBB90EB3E93FB865FE4D424DCD614B398E63755A4DB612F04557B2223F822",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/duration-provenance/verification.md",
+      "originalSha256": "75A77EB1D4212F19D6C38050B27561CC633D95652DD2786852A07FFD9F8F6F70",
+      "currentSha256": "247FEF3B380F41C9840B1DA8C30B286EF4B01C90C4EC54E6E27EAC67C50F25B8",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/operator-contract.md",
+      "originalSha256": "A63DBFFAF914EC769481E9F390925EE854095ADB0B69610D1B8F1631DE1644FE",
+      "currentSha256": "0998BB8407725ED839B9862F6B0B48E815ECF209237F36B13F22DDFE9E0268A5",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/plan.md",
+      "originalSha256": "081F543B169AA25EA9A67E3C855E60D9D4E9D12573847ECA10D56669B71111CA",
+      "currentSha256": "AA6512011F9A834E889B1E07629A94684C5092B9512A2ADBB2D81F06A9EB8CC7",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/README.md",
+      "originalSha256": "66C6D44723600D2175AD11DCA84B37E3B57F844DDC017B2AECED44FFE0721A3C",
+      "currentSha256": "EC2DDE60A4179A27392192E3CC2D628347D84F4F655525727763F1E464EB1049",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-plan.md",
+      "originalSha256": "BEE0D8527E868141497BCE795D7A2697AEDB48577D87DD26B8EF97483328BBF8",
+      "currentSha256": "57536B2898CD680DAEB09C358F788B17DDF7FFBD18790E5CA846F657F14ED160",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/verification.md",
+      "originalSha256": "C146DDEDFC1BBAFBDC4E62582CBB51251E01793DD8BEF961D939471893C87278",
+      "currentSha256": "E36584EEAEC22B377C5084ACCD0F6B5545018202817B63AA8837AF969F5EBCAE",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/payoff-plan.md",
+      "originalSha256": "0A352FE101EAC6461D5ADEC4519123D2779AD6EEA234C4C9A7BFDF9E00FDBC2C",
+      "currentSha256": "B61FF5A097EBA24073A301727094067DA02E5A25924D800C9E0AF6E5C17260D5",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/plan.md",
+      "originalSha256": "3AB85BEF40A8E6ACD58C67C90CBCAE51A3BB77EEC22C6882B496438E053E38EE",
+      "currentSha256": "1B83F93683E76960680CFE438E11684A68E0290953F4E895624C28957CDB236E",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/README.md",
+      "originalSha256": "AEF68B0F17F84934142C1E48EDAFC1F1893C98960CD06F80EB59B1A34CFE46D0",
+      "currentSha256": "403C6766117F38D82CE7BC6C244B759304A26F37F7E376AEDF42F78AFD7DD964",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/verification.md",
+      "originalSha256": "76497FB0B532AB1BDC910D5975FD34D4A77D30623D056DBADD81A1F7645EC0C6",
+      "currentSha256": "DDC27F58988A393251849DC3C4FE7A35CC689A1E04EAC0D7A6510BBF66BFCE55",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/bepu-boundary-semantics.md",
+      "originalSha256": "1E7471A181A553AE35F7AD8AE686143D8F3AD4E11C0B7C9A74141096C4C00F4D",
+      "currentSha256": "2166BA88E239CA1F9749A72B7EAB78CBEB16FF43BA90BA266047340954FD3B54",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/historical-cache-validity.md",
+      "originalSha256": "B8C8D7FEC76F9A4DE9BFA042648769F04E219CC83D24AAA8E051B559E1794083",
+      "currentSha256": "A4A7EC80AB2D102FC010C384C78398C7012183DBAB4F88445AF58280AB02533C",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/plan.md",
+      "originalSha256": "38432E460504253ED63E613E7899622DED0CE47DB1CAF0758E2187FB57DF8299",
+      "currentSha256": "144CC342683DCA727320D369C40E5F72BED129D46A88D2CA14767A6FCBD17E83",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/README.md",
+      "originalSha256": "9CBACB15689964099ECD8C2723E8E129F6A6D90031A4535A96E516A44504F8CD",
+      "currentSha256": "8C02E779C7E8E43FEDBB74D322D9FDA2C56EE33BC6A05584FDDC120C59B9C614",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/verification.md",
+      "originalSha256": "FA60D92FD18FBFD93C537BEDE77C3D385C41B1416A148F990AF5F91ED6D402BA",
+      "currentSha256": "AEDA7F04A1EC6CA4569258416454F2A69935A758EDE4290E8EFEA4F571690C7F",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/cleanup.md",
+      "originalSha256": "D1F23587D8BD0DD5F481FEB2BEB561F1A7F39E9A4E1DC70FF02FFD7E966E4168",
+      "currentSha256": "3D9E936FFE88D2889DE31EF3173155E5257ECAC3E50A92AF91AB6EF713BC6301",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/contract-audit.md",
+      "originalSha256": "D331B6D402DB692AE8892E87A92F6224DF519501F20E05B075B3A0B33D8A019E",
+      "currentSha256": "178CEFD273A9ACD06AEDB63E9BC6B274ED5E0E102EF8860D14BA163B3743715A",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/field-ownership.md",
+      "originalSha256": "AE25D3C7B6184D34C29B80EC11D6E64C182841FAD3AF19B00F1224B340DE7079",
+      "currentSha256": "3BFEF0A8B9CC023219F4A1D2990D6A469C0BE3CFC9C31BA68562929F8148EA75",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/ksa-convergence.md",
+      "originalSha256": "1778406FB6B732567FE3A567E7BD48C291000CABB0F3CA2825F49FFAED01FF11",
+      "currentSha256": "65FA2206E063F1C9F45CD1B91BEC3ACDB9AD762BE704252101128CA27647DF8A",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/plan.md",
+      "originalSha256": "B4092B6D6E1E667E9CF5D02E79AA18B86D635FA354964329AC1E554D13AC6D59",
+      "currentSha256": "265A33285FC7BA52DF3E518DABBE3B23E21FE7AACEFF4DBB16033D3F98F1EBD2",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/README.md",
+      "originalSha256": "6DF2B40241167A655D6A024966C02ABC107D104509D55678322921D12172F1BC",
+      "currentSha256": "C4410B554DAFDB034C72A49C1E585C3DC0903DEE65A42EBAF11D55200E920961",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/verification.md",
+      "originalSha256": "C80641DDFF881B788696AE5A5FB34696D94E7A1AE0B9131AA510B0B1CEC144F3",
+      "currentSha256": "08394FBD0BB13FEB230D1CA1B9C0D33375E5C98AE1F2902DB3E4D91FA32BB6DE",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/bepu-friction-contract.md",
+      "originalSha256": "884B015E0ABE1041E8CDF681E0BED1657C0CC8CE4C1464E8D27F79BB8DE54378",
+      "currentSha256": "3F4FF305AD2431EB338BBC08FA38C4579CA53802B1E42D983B4EFC6849C0A87C",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/coast-policy.md",
+      "originalSha256": "44808502985E4D093DB4FE86773DEFC4FB92FB98D0601C0492A802890FBC83FD",
+      "currentSha256": "87328296DB5988C1885CB252FB1442C591183F56DA1C0C1394FE7882AB4A36FD",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/comparison-policy.md",
+      "originalSha256": "273E3323EF9A85D406708F7505429A557613B3434DEB78D23FBDF40316E80326",
+      "currentSha256": "4386B32D61EC0817BEEC54FB52D1B9A5CC6B913C11AE2AF76EEF44844F47E194",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/plan.md",
+      "originalSha256": "3AC62306144A9FEF481D1ABE0B00A42C0D82DDFC0E68C1583249F9EA83458C0B",
+      "currentSha256": "B00C76483F65B4E83A140C27653D3851F4CC58D345E0B8F2817B43D83674E142",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/README.md",
+      "originalSha256": "02453B901ACFC8E674F7E2DE3187A2D8D159D146238627A17CA071120F104A2F",
+      "currentSha256": "0431737963E8695809C9415C2F24FC653E797F001360E774B574F4C2861164AA",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/reference-derivation.md",
+      "originalSha256": "9FE26A516D79976463DBA5E0F894D4B9F5C1DAEBECA7B8A8E756D125E7040A87",
+      "currentSha256": "FD04DE89C9E42D6BC8B1E0259C739514D2D8F38C2FA957F54C6619A1238401D2",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/verification.md",
+      "originalSha256": "4EAF741E5E27C8F4F72E3F01CDFD78B58B70E5666DC8C9F8B051C25FE649F8ED",
+      "currentSha256": "D36D9D08A6D9E985F669FD6540215236D82D5FD89398811BDA9FDD4D363CC776",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/cleanup.md",
+      "originalSha256": "0A00110D475E17F459238E8B268E2C44AD64A717583254CFFF2C910C92D72313",
+      "currentSha256": "60A55152DB6CBEBD3DC69A438A4555108E39D57844BAA76CBF1D752BE21011BA",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/plan.md",
+      "originalSha256": "3F5B233D423032EF42F6BF4D4D3929196BC907BD725052E82B114CF61DCF6F55",
+      "currentSha256": "4CF8A0E87845419AE26C3BF072D687179BF4A45133E6F2367B2D7EA286AB0886",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/README.md",
+      "originalSha256": "C16ADED00E30B3FF22D2BD9B0D29C063A5BBE014E43C5833B2497D7AB996B1A8",
+      "currentSha256": "9D6DDE18064354EE8296BD68D0C915E40C362AD083F0010CF6FA5E4BDEFF877E",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/verification.md",
+      "originalSha256": "5FDD073C6B4A5A917427DD02951D1BCEB5B0DC11656A27905B64E364CC753BA0",
+      "currentSha256": "65B9E2135CCD2407E02B704A06B1EE8695FD263E1FC5A284BDFA7F82E94FC2FC",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/preconditioning/contract.md",
+      "originalSha256": "43BC09CAA8146F88DF996E17C42BF06225D880E2B3FC994BBFC76C0E2BBA3E8E",
+      "currentSha256": "ADFE8980727592143396242FB095F16C1474412ADCCAD45CFBC8111B95F57005",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/preconditioning/interior-plan.md",
+      "originalSha256": "3F36E3760B6D97C4CCD08118DF0357B27534F5C1F1A2E2EA575C3051CACF72D8",
+      "currentSha256": "2F883E0978982E5195ACF5A8CBCB8931F852E8AA5A8A0A6BB8440D9621B96C85",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/preconditioning/README.md",
+      "originalSha256": "330E56F2360EBF4D7C4BB5782C089728A025CACD2DA0ACB3750E924DC5D81AAF",
+      "currentSha256": "97D075DCD749604C829FB2CD2D15C9CF1495DA64CB14E80D652947B2113E1D82",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/preconditioning/verification.md",
+      "originalSha256": "9E38273344EB0CE95878AD7A26B2526E0E415DDA12E93A1C14C7015B880DAEC4",
+      "currentSha256": "2FE1E1C4D601A4A729AADF6404894F599F00BE9F38AA91D0FDC883115264B00D",
+      "change": "Historical-context notice and retirement/copy links only; original numerical conclusions unchanged."
+    }
+  ],
+  "childrenSemantics": "Nonrecursive initial direct-child counts; preservation copies excluded.",
+  "cleanup": {
+    "attempts": 1,
+    "mechanism": "PowerShell Remove-Item -LiteralPath through cleanup-reviewed.ps1 -Delete",
+    "exitCode": 0,
+    "policyBlocks": 0,
+    "removedFiles": 169,
+    "removedBytes": 8763949,
+    "disposableRemovedFiles": 123,
+    "disposableRemovedBytes": 8519322,
+    "remainingReviewedPaths": 0,
+    "remainingDisposableBytes": 0,
+    "remainingRetiredBlockedPaths": 0
+  },
+  "finalVerification": "PASS \u2014 CONSOLIDATED; independent 22/22; no numerical requalification",
+  "finalInventory": "final-inventory.json"
+}

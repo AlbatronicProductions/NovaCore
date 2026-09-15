@@ -25,8 +25,9 @@ internal sealed class LocalContactConfiguration
     internal DoubleQuaternion LocalToRoot { get; }
     internal Double3 BoxDimensions { get; }
     internal EngineeringContactArticle? Article { get; }
+    internal bool ResourceAwareNumericalFixture { get; private init; }
     // The new article uses the original 2 m thick slab. Legacy box fixtures retain their exact geometry.
-    internal double SlabHalfThickness => Article is null ? BoxDimensions.Y : 1;
+    internal double SlabHalfThickness => Article is null && !ResourceAwareNumericalFixture ? BoxDimensions.Y : 1;
     internal double PlaneHalfExtent { get; }
     internal double ContactTolerance { get; }
     internal double MaximumCoordinate { get; }
@@ -35,7 +36,7 @@ internal sealed class LocalContactConfiguration
     internal double Margin => 20 * ContactTolerance;
     // Speculative reach must cover the admitted surface speed over a whole exact step.
     // Margin alone is a geometric/depth cushion, not the motion horizon.
-    internal double MaximumSpeculativeMargin => MaximumSpeed * (16667d / 1_000_000) + Margin;
+    internal double MaximumSpeculativeMargin => ResourceAwareNumericalFixture ? .01 : MaximumSpeed * (16667d / 1_000_000) + Margin;
     internal double BoundingRadius => Article?.BoundingRadius ?? Math.Sqrt(BoxDimensions.LengthSquared) * .5;
 
     private LocalContactConfiguration(long revision, ReferenceFrameId root, Double3 origin, Double3 velocity,
@@ -63,6 +64,18 @@ internal sealed class LocalContactConfiguration
         configuration = null;
         return article is null ? LocalContactStatus.InvalidConfiguration :
             TryCreateCore(revision, root, origin, velocity, rotation, article.Dimensions, planeHalfExtent, article, out configuration);
+    }
+
+    // Separate named numerical fixture, not a new interpretation of homogeneous-box/article inertia.
+    internal static LocalContactStatus TryCreatePoweredFixture(ReferenceFrameId root, Double3 origin,
+        Double3 velocity, out LocalContactConfiguration? configuration)
+    {
+        var status = TryCreateCore(1, root, origin, velocity, DoubleQuaternion.Identity,
+            new(2, 1, 1), 8, null, out configuration);
+        if (status == LocalContactStatus.Success)
+            configuration = new(1, root, origin, velocity, DoubleQuaternion.Identity, new(2, 1, 1), 8,
+                configuration!.ContactTolerance, configuration.MaximumCoordinate, null) { ResourceAwareNumericalFixture = true };
+        return status;
     }
 
     private static LocalContactStatus TryCreateCore(long revision, ReferenceFrameId root, Double3 origin,
@@ -117,7 +130,7 @@ internal sealed class LocalContactConfiguration
 
     internal bool AdmitsMassInertia(double mass, PrincipalMomentsOfInertia inertia) => Article is { } article
         ? mass == article.MassKilograms && inertia == article.PrincipalInertia
-        : inertia == BoxInertia(mass);
+        : !ResourceAwareNumericalFixture && inertia == BoxInertia(mass);
 }
 
 /// <summary>Copied immutable source. Never retains a borrowed state view or claims solver cache serialization.</summary>
@@ -177,6 +190,32 @@ internal sealed class LocalContactSource
             return LocalContactStatus.ChangedAuthority;
         if (target < Motion.Time || target > End) return LocalContactStatus.InvalidInterval;
         return current.HasContactProofBoundaryThrough(target) ? LocalContactStatus.PendingEvent : LocalContactStatus.Success;
+    }
+
+    internal static LocalContactStatus CapturePoweredPreparation(SimulationTransactionEngine engine, SpacecraftId subject,
+        PoweredContactPreparation prepared, SimulationInstant end, out LocalContactSource? source)
+    {
+        source = null;
+        if (!engine.OwnsPersistentPublicationPhase) return LocalContactStatus.WrongThread;
+        if (!prepared.Available || !prepared.Configuration.ResourceAwareNumericalFixture) return LocalContactStatus.InvalidSource;
+        var view = engine.State;
+        var start = engine.ContactProofCurrentTime;
+        if (end <= start || (Int128)end.Ticks - start.Ticks > long.MaxValue) return LocalContactStatus.InvalidInterval;
+        if (!view.Spacecraft.TryGetTranslation(subject, out var linear, out var mass) ||
+            !view.Spacecraft.TryGetRigidBody(subject, out var angular) || linear.RootFrame != prepared.Configuration.RootFrame ||
+            linear.Epoch != start || angular.Epoch != start || linear.ConstantForceRoot != Double3.Zero ||
+            angular.ConstantBodyTorque != Double3.Zero || angular.Model != RigidBodyRotationModel.ConstantBodyTorqueV1 ||
+            mass.MassKilograms != prepared.ResourceDefinition.InitialTotalMassKilograms || angular.PrincipalInertia != new PrincipalMomentsOfInertia(2, 2, 2))
+            return LocalContactStatus.InvalidSource;
+        var actual = new SpacecraftAppliedEndpoint(subject, linear.RootFrame, start, linear.PositionRoot, linear.VelocityRoot,
+            angular.OrientationLocalToParent, angular.AngularVelocityBody, mass, angular.PrincipalInertia, AppliedEndpointValidity.EndpointOnly);
+        var wanted = actual with { PositionRoot = prepared.Initial.Position, VelocityRoot = prepared.Initial.Velocity,
+            BodyToRoot = prepared.Initial.Orientation, AngularVelocityBody = prepared.Initial.AngularVelocity };
+        if (!actual.SameBits(wanted)) return LocalContactStatus.ChangedAuthority;
+        var motion = new SpacecraftMotion(subject, start, view.Revision, linear.RootFrame, actual.PositionRoot,
+            actual.VelocityRoot, actual.BodyToRoot, actual.AngularVelocityBody, mass, angular.PrincipalInertia);
+        source = new(engine, prepared.Configuration, linear, angular, motion, engine.ContactProofTimelineRevision, end);
+        return LocalContactStatus.Success;
     }
 
     internal bool TryEndpoint(long step, out SimulationInstant endpoint)

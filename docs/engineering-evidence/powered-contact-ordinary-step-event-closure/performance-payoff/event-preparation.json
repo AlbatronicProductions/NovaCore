@@ -1,0 +1,57 @@
+{
+  "boundary": "C: unchanged banked-reuse Map plus six FP32 projections",
+  "processes": [
+    {
+      "process": 1,
+      "resultFile": "candidate-process-1.json",
+      "summary": {
+        "count": 1024,
+        "medianUs": 20.4,
+        "p95Us": 20.8,
+        "p99Us": 23.1,
+        "maxUs": 37.2,
+        "collectionDeltas": [
+          0,
+          0,
+          0
+        ]
+      },
+      "allocation128": 0
+    },
+    {
+      "process": 2,
+      "resultFile": "candidate-process-2.json",
+      "summary": {
+        "count": 1024,
+        "medianUs": 20.3,
+        "p95Us": 20.6,
+        "p99Us": 22.7,
+        "maxUs": 45.3,
+        "collectionDeltas": [
+          0,
+          0,
+          0
+        ]
+      },
+      "allocation128": 0
+    },
+    {
+      "process": 3,
+      "resultFile": "candidate-process-3.json",
+      "summary": {
+        "count": 1024,
+        "medianUs": 20.6,
+        "p95Us": 20.7,
+        "p99Us": 24.2,
+        "maxUs": 35.3,
+        "collectionDeltas": [
+          0,
+          0,
+          0
+        ]
+      },
+      "allocation128": 0
+    }
+  ],
+  "tails": "Full top-ten rows are in the referenced process JSON; not duplicated here"
+}

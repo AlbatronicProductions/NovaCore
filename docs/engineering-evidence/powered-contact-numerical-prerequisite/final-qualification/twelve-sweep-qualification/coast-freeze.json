@@ -1,0 +1,6 @@
+{
+  "mechanism": "D + 12",
+  "selectedSourcesUnchanged": true,
+  "binarySha256": "DDBBD11180E4926B9024642BA0EB6BD61CD79F787E0F90E45250C1C4EAF63C65",
+  "order": "baseline then powered then frozen paired-response; stop on first failure"
+}

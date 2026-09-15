@@ -1,5 +1,32 @@
 # Architecture
 
+## Banked M15.1 — Finite-Fuel Retained Powered Contact
+
+Canonical command authority → prepared engine demand → exact finite-resource
+authority → selected retained-contact consumer → ordinary retained BEPU solve →
+sealed physical endpoint + exact resource successor + canonical mass + actual
+actuator successor → atomic canonical publication → same-phase acknowledgement →
+same-body property update → next interval.
+
+The constrained solve holds source mass/inertia through one ordinary step (eight
+iterations, one substep). Exact fuel/event accounting is prepared independently;
+it does not split contact into event-sized solves. Original episode/frame epochs,
+the retained body, manifolds and warm starts survive successful publication.
+The prepared/ready lifecycle reuses immutable facts while retaining mutable
+revision, command/resource, clock/debt, event and receipt applicability checks.
+Canonical physical/resource/actuator authority remains NovaCore-owned. Precommit
+refusal preserves canonical state; committed-but-unacknowledged failure keeps
+canonical results and invalidates private continuation.
+
+M15.0 segmented powered free flight remains a separate consumer. No departure or
+recontact transition is provided. Candidate-A duration scaling, tiny constrained
+pieces, twelve-sweep policy and load correction remain historical experiments.
+The [historical bank-candidate report](engineering-evidence/powered-contact-bank-candidate/README.md)
+retains qualification and reproduction. The annotated
+`m15.1-finite-fuel-retained-powered-contact` tag identifies the atomic engineering
+and operative-license bank; earlier milestone descriptions below
+retain their narrower scope.
+
 Directory placement and source/cache/history boundaries have one owner:
 [repository structure](repository-structure.md). This document owns subsystem
 relationships; [current state](NOVACORE_CURRENT_STATE.md) owns the production checkpoint.

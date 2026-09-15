@@ -1,0 +1,28 @@
+{
+  "automaticCleanup": "Rejected before execution: blocked by policy",
+  "retryCount": 0,
+  "paths": [
+    {
+      "path": "E:\\NovaCore\\build\\powered-contact-performance-revision",
+      "exists": false,
+      "files": 0,
+      "bytes": 0
+    },
+    {
+      "path": "E:\\NovaCore\\build\\powered-contact-lifecycle-correction",
+      "exists": true,
+      "files": 253,
+      "bytes": 44749838.0
+    },
+    {
+      "path": "E:\\NovaCore\\build\\powered-contact-final-median-closure",
+      "exists": true,
+      "files": 125,
+      "bytes": 22941027.0
+    }
+  ],
+  "removedFiles": 0,
+  "removedBytes": 0,
+  "remainingFiles": 378.0,
+  "remainingBytes": 67690865.0
+}

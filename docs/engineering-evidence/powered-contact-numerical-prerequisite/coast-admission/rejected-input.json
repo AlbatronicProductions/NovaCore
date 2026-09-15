@@ -1,0 +1,2947 @@
+{
+  "records": [
+    {
+      "type": "world_capture",
+      "label": "powered-source",
+      "beforeRefusal": true,
+      "position": {
+        "x": -1.2228941470571186E-10,
+        "y": 0.49958550930023193,
+        "z": 9.193191985445992E-09,
+        "bits": [
+          "AF067569",
+          "3EFFC9AC",
+          "321DF016"
+        ]
+      },
+      "orientation": {
+        "x": 3.501211820466921E-11,
+        "y": 3.389042518842089E-12,
+        "z": 1.1018538512153064E-11,
+        "w": 1,
+        "bits": [
+          "2E19FC24",
+          "2C6E7B90",
+          "2D41D716",
+          "3F800000"
+        ]
+      },
+      "linearVelocity": {
+        "x": -1.0169570741069833E-10,
+        "y": 1.266525941900909E-07,
+        "z": 7.511074429089604E-09,
+        "bits": [
+          "AEDFA198",
+          "3407FE00",
+          "32010A0E"
+        ]
+      },
+      "angularVelocity": {
+        "x": 1.503461355412128E-08,
+        "y": 3.675332775104734E-20,
+        "z": 2.035601687211397E-10,
+        "bits": [
+          "32812577",
+          "1F2D900C",
+          "2F5FD118"
+        ]
+      },
+      "nativeInverseMass": 0.12493899464607239,
+      "nativeInverseInertia": {
+        "xx": 0.5,
+        "yy": 0.5,
+        "zz": 0.5,
+        "yx": 0,
+        "zx": 0,
+        "zy": 0
+      },
+      "body": 0,
+      "constraint": 0,
+      "constraintCount": 1,
+      "ownerIdentity": {
+        "World": 1,
+        "Body": 0,
+        "BodyGeneration": 1,
+        "Constraint": 0,
+        "ManifoldGeneration": 1
+      },
+      "piece": 0,
+      "kind": "Preparation",
+      "acceptedNormal": {
+        "X": 0,
+        "Y": 1,
+        "Z": 7.002423640933841E-11
+      },
+      "invalidated": false,
+      "callback": {
+        "count": 4,
+        "rows": [
+          {
+            "index": 0,
+            "feature": -4,
+            "normal": {
+              "x": 0,
+              "y": 1,
+              "z": 7.002423640933841E-11,
+              "bits": [
+                "00000000",
+                "3F800000",
+                "2E99FC24"
+              ]
+            },
+            "offset": {
+              "x": -1,
+              "y": -0.49958550930023193,
+              "z": -0.5,
+              "bits": [
+                "BF800000",
+                "BEFFC9AC",
+                "BF000000"
+              ]
+            },
+            "depth": 0.0004144906997680664
+          },
+          {
+            "index": 1,
+            "feature": -21,
+            "normal": {
+              "x": 0,
+              "y": 1,
+              "z": 7.002423640933841E-11,
+              "bits": [
+                "00000000",
+                "3F800000",
+                "2E99FC24"
+              ]
+            },
+            "offset": {
+              "x": 1,
+              "y": -0.49958550930023193,
+              "z": 0.5,
+              "bits": [
+                "3F800000",
+                "BEFFC9AC",
+                "3F000000"
+              ]
+            },
+            "depth": 0.0004144906997680664
+          },
+          {
+            "index": 2,
+            "feature": -5,
+            "normal": {
+              "x": 0,
+              "y": 1,
+              "z": 7.002423640933841E-11,
+              "bits": [
+                "00000000",
+                "3F800000",
+                "2E99FC24"
+              ]
+            },
+            "offset": {
+              "x": -1,
+              "y": -0.49958550930023193,
+              "z": 0.5,
+              "bits": [
+                "BF800000",
+                "BEFFC9AC",
+                "3F000000"
+              ]
+            },
+            "depth": 0.0004144907579757273
+          },
+          {
+            "index": 3,
+            "feature": -20,
+            "normal": {
+              "x": 0,
+              "y": 1,
+              "z": 7.002423640933841E-11,
+              "bits": [
+                "00000000",
+                "3F800000",
+                "2E99FC24"
+              ]
+            },
+            "offset": {
+              "x": 1,
+              "y": -0.49958550930023193,
+              "z": -0.5,
+              "bits": [
+                "3F800000",
+                "BEFFC9AC",
+                "BF000000"
+              ]
+            },
+            "depth": 0.0004144906415604055
+          }
+        ]
+      },
+      "solverRows": [
+        {
+          "index": 0,
+          "feature": -4,
+          "normal": {
+            "x": 0,
+            "y": 1,
+            "z": 7.002423640933841E-11,
+            "bits": [
+              "00000000",
+              "3F800000",
+              "2E99FC24"
+            ]
+          },
+          "offset": {
+            "x": -1,
+            "y": -0.49958550930023193,
+            "z": -0.5,
+            "bits": [
+              "BF800000",
+              "BEFFC9AC",
+              "BF000000"
+            ]
+          },
+          "worldPoint": {
+            "X": -1.0000000001222895,
+            "Y": 0,
+            "Z": -0.499999990806808
+          },
+          "depth": 0.0004144906997680664,
+          "pointNormalVelocity": 1.339663407984304E-07,
+          "verticalVelocity": 1.339663407984304E-07,
+          "normalDotUp": 1,
+          "normalSquared": 1,
+          "planeGap": 0,
+          "withinSlabXZ": true
+        },
+        {
+          "index": 1,
+          "feature": -21,
+          "normal": {
+            "x": 0,
+            "y": 1,
+            "z": 7.002423640933841E-11,
+            "bits": [
+              "00000000",
+              "3F800000",
+              "2E99FC24"
+            ]
+          },
+          "offset": {
+            "x": 1,
+            "y": -0.49958550930023193,
+            "z": 0.5,
+            "bits": [
+              "3F800000",
+              "BEFFC9AC",
+              "3F000000"
+            ]
+          },
+          "worldPoint": {
+            "X": 0.9999999998777106,
+            "Y": 0,
+            "Z": 0.500000009193192
+          },
+          "depth": 0.0004144906997680664,
+          "pointNormalVelocity": 1.193388475817514E-07,
+          "verticalVelocity": 1.193388475817514E-07,
+          "normalDotUp": 1,
+          "normalSquared": 1,
+          "planeGap": 0,
+          "withinSlabXZ": true
+        },
+        {
+          "index": 2,
+          "feature": -5,
+          "normal": {
+            "x": 0,
+            "y": 1,
+            "z": 7.002423640933841E-11,
+            "bits": [
+              "00000000",
+              "3F800000",
+              "2E99FC24"
+            ]
+          },
+          "offset": {
+            "x": -1,
+            "y": -0.49958550930023193,
+            "z": 0.5,
+            "bits": [
+              "BF800000",
+              "BEFFC9AC",
+              "3F000000"
+            ]
+          },
+          "worldPoint": {
+            "X": -1.0000000001222895,
+            "Y": 0,
+            "Z": 0.500000009193192
+          },
+          "depth": 0.0004144907579757273,
+          "pointNormalVelocity": 1.1893172724430912E-07,
+          "verticalVelocity": 1.1893172724430912E-07,
+          "normalDotUp": 1,
+          "normalSquared": 1,
+          "planeGap": 0,
+          "withinSlabXZ": true
+        },
+        {
+          "index": 3,
+          "feature": -20,
+          "normal": {
+            "x": 0,
+            "y": 1,
+            "z": 7.002423640933841E-11,
+            "bits": [
+              "00000000",
+              "3F800000",
+              "2E99FC24"
+            ]
+          },
+          "offset": {
+            "x": 1,
+            "y": -0.49958550930023193,
+            "z": -0.5,
+            "bits": [
+              "3F800000",
+              "BEFFC9AC",
+              "BF000000"
+            ]
+          },
+          "worldPoint": {
+            "X": 0.9999999998777106,
+            "Y": 0,
+            "Z": -0.499999990806808
+          },
+          "depth": 0.0004144906415604055,
+          "pointNormalVelocity": 1.3437346113587267E-07,
+          "verticalVelocity": 1.3437346113587267E-07,
+          "normalDotUp": 1,
+          "normalSquared": 1,
+          "planeGap": 0,
+          "withinSlabXZ": true
+        }
+      ],
+      "corners": [
+        {
+          "local": {
+            "X": -1,
+            "Y": -0.5,
+            "Z": -0.5
+          },
+          "world": {
+            "X": -1.00000000011466,
+            "Y": -0.00041449068679300094,
+            "Z": -0.4999999908350421
+          },
+          "velocity": {
+            "X": 8.437692885364094E-14,
+            "Y": 1.3396634079885643E-07,
+            "Z": -6.2323477392068316E-12
+          },
+          "planeGap": -0.00041449068679300094,
+          "withinSlabXZ": true
+        },
+        {
+          "local": {
+            "X": -1,
+            "Y": -0.5,
+            "Z": 0.5
+          },
+          "world": {
+            "X": -1.000000000107882,
+            "Y": -0.0004144907568172096,
+            "Z": 0.5000000091649579
+          },
+          "velocity": {
+            "X": 8.43769798611001E-14,
+            "Y": 1.1893172724473654E-07,
+            "Z": -6.232348791994339E-12
+          },
+          "planeGap": -0.0004144907568172096,
+          "withinSlabXZ": true
+        },
+        {
+          "local": {
+            "X": -1,
+            "Y": 0.5,
+            "Z": -0.5
+          },
+          "world": {
+            "X": -1.000000000136697,
+            "Y": 0.999585509313207,
+            "Z": -0.49999999076501783
+          },
+          "velocity": {
+            "X": -2.0347579179228604E-10,
+            "Y": 1.3396634079779917E-07,
+            "Z": 1.5028381206382072E-08
+          },
+          "planeGap": 0.999585509313207,
+          "withinSlabXZ": true
+        },
+        {
+          "local": {
+            "X": -1,
+            "Y": 0.5,
+            "Z": 0.5
+          },
+          "world": {
+            "X": -1.000000000129919,
+            "Y": 0.9995855092431827,
+            "Z": 0.5000000092349822
+          },
+          "velocity": {
+            "X": -2.0347579174127856E-10,
+            "Y": 1.1893172724367927E-07,
+            "Z": 1.5028381205329283E-08
+          },
+          "planeGap": 0.9995855092431827,
+          "withinSlabXZ": true
+        },
+        {
+          "local": {
+            "X": 1,
+            "Y": -0.5,
+            "Z": -0.5
+          },
+          "world": {
+            "X": 0.99999999988534,
+            "Y": -0.0004144906427188677,
+            "Z": -0.49999999084859825
+          },
+          "velocity": {
+            "X": 8.437691988189784E-14,
+            "Y": 1.3437346113650252E-07,
+            "Z": -6.232347150077219E-12
+          },
+          "planeGap": -0.0004144906427188677,
+          "withinSlabXZ": true
+        },
+        {
+          "local": {
+            "X": 1,
+            "Y": -0.5,
+            "Z": 0.5
+          },
+          "world": {
+            "X": 0.9999999998921182,
+            "Y": -0.00041449071274313187,
+            "Z": 0.5000000091514019
+          },
+          "velocity": {
+            "X": 8.437697088936993E-14,
+            "Y": 1.1933884758238262E-07,
+            "Z": -6.232348202864726E-12
+          },
+          "planeGap": -0.00041449071274313187,
+          "withinSlabXZ": true
+        },
+        {
+          "local": {
+            "X": 1,
+            "Y": 0.5,
+            "Z": -0.5
+          },
+          "world": {
+            "X": 0.999999999863303,
+            "Y": 0.9995855093572811,
+            "Z": -0.499999990778574
+          },
+          "velocity": {
+            "X": -2.0347579180125777E-10,
+            "Y": 1.3437346113544524E-07,
+            "Z": 1.5028381206971203E-08
+          },
+          "planeGap": 0.9995855093572811,
+          "withinSlabXZ": true
+        },
+        {
+          "local": {
+            "X": 1,
+            "Y": 0.5,
+            "Z": 0.5
+          },
+          "world": {
+            "X": 0.9999999998700811,
+            "Y": 0.9995855092872569,
+            "Z": 0.5000000092214261
+          },
+          "velocity": {
+            "X": -2.034757917502503E-10,
+            "Y": 1.1933884758132536E-07,
+            "Z": 1.5028381205918414E-08
+          },
+          "planeGap": 0.9995855092872569,
+          "withinSlabXZ": true
+        }
+      ],
+      "supportFunctionGap": -0.0004144907568172096,
+      "deepestCornerPenetration": 0.0004144907568172096,
+      "shallowestCornerPenetration": -0.9995855093572811,
+      "frameEpoch": "NOT APPLICABLE: standalone fixed-origin box/slab fixture; no canonical/frame epoch capability"
+    },
+    {
+      "type": "admission",
+      "label": "original_owned_powered_piece",
+      "status": "Ready",
+      "inputs": {
+        "identity": {
+          "World": 1,
+          "Body": 0,
+          "BodyGeneration": 1,
+          "Constraint": 0,
+          "ManifoldGeneration": 1
+        },
+        "features": {
+          "A": -4,
+          "B": -21,
+          "C": -5,
+          "D": -20
+        },
+        "previousPiece": 0,
+        "nextPiece": 1,
+        "previousKind": "Preparation",
+        "nextKind": "Powered",
+        "invalidated": false,
+        "previousDuration": {
+          "origin": "ActualSolverBinary",
+          "solverBits": "4580461061261492224",
+          "scale": {
+            "Significand": 1.0666667222976685,
+            "Exponent": -6
+          },
+          "exactPositive": true,
+          "exactValueBytesHex": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        },
+        "currentDuration": {
+          "origin": "ExactEvent",
+          "solverBits": "0",
+          "scale": {
+            "Significand": 1,
+            "Exponent": -7
+          },
+          "exactPositive": true,
+          "exactValueBytesHex": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000127A000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        },
+        "source": {
+          "Linear": {
+            "X": -1.0169570741069833E-10,
+            "Y": 1.266525941900909E-07,
+            "Z": 7.511074429089604E-09
+          },
+          "Angular": {
+            "X": 1.503461355412128E-08,
+            "Y": 3.675332775104734E-20,
+            "Z": 2.035601687211397E-10
+          }
+        },
+        "body": {
+          "Mass": 0.12493899463152758,
+          "Diagonal": {
+            "X": 0.5,
+            "Y": 0.5,
+            "Z": 0.5
+          },
+          "OffDiagonal": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          }
+        },
+        "previousLoad": {
+          "Gravity": {
+            "X": 0,
+            "Y": -9.81,
+            "Z": 0
+          },
+          "Force": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Torque": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          }
+        },
+        "currentLoad": {
+          "Gravity": {
+            "X": 0,
+            "Y": -9.81,
+            "Z": 0
+          },
+          "Force": {
+            "X": 0,
+            "Y": 32,
+            "Z": 0
+          },
+          "Torque": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          }
+        },
+        "currentOmega": 188.4955596923828,
+        "twiceDamping": 2,
+        "friction": 0.5,
+        "recovery": 2,
+        "expectedNormal": {
+          "X": 0,
+          "Y": 1,
+          "Z": 7.002423640933841E-11
+        },
+        "cache": {
+          "N0": {
+            "Mantissa": 1.3092775344848633,
+            "Exponent": -2
+          },
+          "N1": {
+            "Mantissa": 1.3092775344848633,
+            "Exponent": -2
+          },
+          "N2": {
+            "Mantissa": 1.3092774152755737,
+            "Exponent": -2
+          },
+          "N3": {
+            "Mantissa": 1.3092774152755737,
+            "Exponent": -2
+          },
+          "T0": {
+            "Mantissa": -1.2406539916992188,
+            "Exponent": -31
+          },
+          "T1": {
+            "Mantissa": -1.9695978164672852,
+            "Exponent": -34
+          },
+          "Twist": {
+            "Mantissa": 1.3559592962265015,
+            "Exponent": -64
+          }
+        },
+        "cacheValues": [
+          0.3273193836212158,
+          0.3273193836212158,
+          0.32731935381889343,
+          0.32731935381889343,
+          -5.777245348781435E-10,
+          -1.1464568183683355E-10,
+          7.350670073853443E-20
+        ],
+        "nativeCache": [
+          0.3273193836212158,
+          0.3273193836212158,
+          0.32731935381889343,
+          0.32731935381889343,
+          -5.777245348781435E-10,
+          -1.1464568183683355E-10,
+          7.350670073853443E-20
+        ],
+        "nativeCacheBits": [
+          "3EA79668",
+          "3EA79668",
+          "3EA79667",
+          "3EA79667",
+          "B01ECDC0",
+          "AEFC1BC8",
+          "1FAD9013"
+        ],
+        "previousAcceleration": {
+          "X": 0,
+          "Y": -9.81,
+          "Z": 0
+        },
+        "currentAcceleration": {
+          "X": 0,
+          "Y": -5.811952171791118,
+          "Z": 0
+        },
+        "previousAngularAcceleration": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0
+        },
+        "currentAngularAcceleration": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0
+        },
+        "rows": [
+          {
+            "index": 0,
+            "row": {
+              "Identity": -4,
+              "Normal": {
+                "X": 0,
+                "Y": 1,
+                "Z": 7.002423640933841E-11
+              },
+              "Lever": {
+                "X": -1,
+                "Y": -0.49958550930023193,
+                "Z": -0.5
+              }
+            },
+            "depth": 0.0004144906997680664,
+            "normalSquared": 1,
+            "normalError": 0,
+            "unitBound": 9.5367431640625E-07,
+            "previousNormalDrive": -9.81,
+            "currentNormalDrive": -5.811952171791118,
+            "pointNormalVelocity": 1.339663407984304E-07,
+            "speedBound": 0.029999400011999758,
+            "normalCacheMantissa": 1.3092775344848633
+          },
+          {
+            "index": 1,
+            "row": {
+              "Identity": -21,
+              "Normal": {
+                "X": 0,
+                "Y": 1,
+                "Z": 7.002423640933841E-11
+              },
+              "Lever": {
+                "X": 1,
+                "Y": -0.49958550930023193,
+                "Z": 0.5
+              }
+            },
+            "depth": 0.0004144906997680664,
+            "normalSquared": 1,
+            "normalError": 0,
+            "unitBound": 9.5367431640625E-07,
+            "previousNormalDrive": -9.81,
+            "currentNormalDrive": -5.811952171791118,
+            "pointNormalVelocity": 1.193388475817514E-07,
+            "speedBound": 0.029999400011999758,
+            "normalCacheMantissa": 1.3092775344848633
+          },
+          {
+            "index": 2,
+            "row": {
+              "Identity": -5,
+              "Normal": {
+                "X": 0,
+                "Y": 1,
+                "Z": 7.002423640933841E-11
+              },
+              "Lever": {
+                "X": -1,
+                "Y": -0.49958550930023193,
+                "Z": 0.5
+              }
+            },
+            "depth": 0.0004144907579757273,
+            "normalSquared": 1,
+            "normalError": 0,
+            "unitBound": 9.5367431640625E-07,
+            "previousNormalDrive": -9.81,
+            "currentNormalDrive": -5.811952171791118,
+            "pointNormalVelocity": 1.1893172724430912E-07,
+            "speedBound": 0.029999400011999758,
+            "normalCacheMantissa": 1.3092774152755737
+          },
+          {
+            "index": 3,
+            "row": {
+              "Identity": -20,
+              "Normal": {
+                "X": 0,
+                "Y": 1,
+                "Z": 7.002423640933841E-11
+              },
+              "Lever": {
+                "X": 1,
+                "Y": -0.49958550930023193,
+                "Z": -0.5
+              }
+            },
+            "depth": 0.0004144906415604055,
+            "normalSquared": 1,
+            "normalError": 0,
+            "unitBound": 9.5367431640625E-07,
+            "previousNormalDrive": -9.81,
+            "currentNormalDrive": -5.811952171791118,
+            "pointNormalVelocity": 1.3437346113587267E-07,
+            "speedBound": 0.029999400011999758,
+            "normalCacheMantissa": 1.3092774152755737
+          }
+        ],
+        "center": {
+          "X": 0,
+          "Y": -0.49958550930023193,
+          "Z": 0
+        },
+        "totalNormal": 1.3092774748802185,
+        "tangentMagnitude": 5.889900428394352E-10,
+        "tangentCap": 0.1636596843600273,
+        "twistMagnitude": 7.350670073853443E-20,
+        "twistCap": 0.18297708970259013,
+        "cacheFreeSupport": true,
+        "cacheFreeMeaning": "diagnostic only: excludes historical normal equality, previous-load drive and impulse feasibility; retains current geometry/load/speed checks"
+      },
+      "predicates": [
+        {
+          "order": 1,
+          "rowIndex": -1,
+          "rejectionExpression": "rows.Length!=4",
+          "result": "PASS"
+        },
+        {
+          "order": 2,
+          "rowIndex": -1,
+          "rejectionExpression": "depths.Length!=4",
+          "result": "PASS"
+        },
+        {
+          "order": 3,
+          "rowIndex": -1,
+          "rejectionExpression": "!body.Valid",
+          "result": "PASS"
+        },
+        {
+          "order": 4,
+          "rowIndex": -1,
+          "rejectionExpression": "!previous.Finite",
+          "result": "PASS"
+        },
+        {
+          "order": 5,
+          "rowIndex": -1,
+          "rejectionExpression": "!next.Finite",
+          "result": "PASS"
+        },
+        {
+          "order": 6,
+          "rowIndex": -1,
+          "rejectionExpression": "omega\u003C=0",
+          "result": "PASS"
+        },
+        {
+          "order": 7,
+          "rowIndex": -1,
+          "rejectionExpression": "!double.IsFinite(omega)",
+          "result": "PASS"
+        },
+        {
+          "order": 8,
+          "rowIndex": -1,
+          "rejectionExpression": "!v.Finite",
+          "result": "PASS"
+        },
+        {
+          "order": 9,
+          "rowIndex": -1,
+          "rejectionExpression": "!w.Finite",
+          "result": "PASS"
+        },
+        {
+          "order": 10,
+          "rowIndex": -1,
+          "rejectionExpression": "!a0.Finite",
+          "result": "PASS"
+        },
+        {
+          "order": 11,
+          "rowIndex": -1,
+          "rejectionExpression": "!a1.Finite",
+          "result": "PASS"
+        },
+        {
+          "order": 12,
+          "rowIndex": -1,
+          "rejectionExpression": "!w0.Finite",
+          "result": "PASS"
+        },
+        {
+          "order": 13,
+          "rowIndex": -1,
+          "rejectionExpression": "!w1.Finite",
+          "result": "PASS"
+        },
+        {
+          "order": 14,
+          "rowIndex": 0,
+          "rejectionExpression": "row.Identity!=features.At(i)",
+          "result": "PASS"
+        },
+        {
+          "order": 15,
+          "rowIndex": 0,
+          "rejectionExpression": "row.Normal!=normal",
+          "result": "PASS"
+        },
+        {
+          "order": 16,
+          "rowIndex": 0,
+          "rejectionExpression": "!row.Normal.Finite",
+          "result": "PASS"
+        },
+        {
+          "order": 17,
+          "rowIndex": 0,
+          "rejectionExpression": "!row.Lever.Finite",
+          "result": "PASS"
+        },
+        {
+          "order": 18,
+          "rowIndex": 0,
+          "rejectionExpression": "Math.Abs(D3.Dot(row.Normal,row.Normal)-1)\u003E8*Math.ScaleB(1d,-23)",
+          "result": "PASS"
+        },
+        {
+          "order": 19,
+          "rowIndex": 0,
+          "rejectionExpression": "!double.IsFinite(depths[i])",
+          "result": "PASS"
+        },
+        {
+          "order": 20,
+          "rowIndex": 0,
+          "rejectionExpression": "depths[i]\u003C=0",
+          "result": "PASS"
+        },
+        {
+          "order": 21,
+          "rowIndex": 0,
+          "rejectionExpression": "depths[i]\u003E.020",
+          "result": "PASS"
+        },
+        {
+          "order": 22,
+          "rowIndex": 0,
+          "rejectionExpression": "D3.Dot(row.Normal,a0)\u002BD3.Dot(row.Moment,w0)\u003E=0",
+          "result": "PASS"
+        },
+        {
+          "order": 23,
+          "rowIndex": 0,
+          "rejectionExpression": "D3.Dot(row.Normal,a1)\u002BD3.Dot(row.Moment,w1)\u003E=0",
+          "result": "PASS"
+        },
+        {
+          "order": 24,
+          "rowIndex": 0,
+          "rejectionExpression": "Math.Abs(D3.Dot(row.Normal,v)\u002BD3.Dot(row.Moment,w))\u003E.0005/(16667d/1e6)",
+          "result": "PASS"
+        },
+        {
+          "order": 25,
+          "rowIndex": 0,
+          "rejectionExpression": "cache.At(i).Mantissa\u003C=0",
+          "result": "PASS"
+        },
+        {
+          "order": 26,
+          "rowIndex": 1,
+          "rejectionExpression": "row.Identity!=features.At(i)",
+          "result": "PASS"
+        },
+        {
+          "order": 27,
+          "rowIndex": 1,
+          "rejectionExpression": "row.Normal!=normal",
+          "result": "PASS"
+        },
+        {
+          "order": 28,
+          "rowIndex": 1,
+          "rejectionExpression": "!row.Normal.Finite",
+          "result": "PASS"
+        },
+        {
+          "order": 29,
+          "rowIndex": 1,
+          "rejectionExpression": "!row.Lever.Finite",
+          "result": "PASS"
+        },
+        {
+          "order": 30,
+          "rowIndex": 1,
+          "rejectionExpression": "Math.Abs(D3.Dot(row.Normal,row.Normal)-1)\u003E8*Math.ScaleB(1d,-23)",
+          "result": "PASS"
+        },
+        {
+          "order": 31,
+          "rowIndex": 1,
+          "rejectionExpression": "!double.IsFinite(depths[i])",
+          "result": "PASS"
+        },
+        {
+          "order": 32,
+          "rowIndex": 1,
+          "rejectionExpression": "depths[i]\u003C=0",
+          "result": "PASS"
+        },
+        {
+          "order": 33,
+          "rowIndex": 1,
+          "rejectionExpression": "depths[i]\u003E.020",
+          "result": "PASS"
+        },
+        {
+          "order": 34,
+          "rowIndex": 1,
+          "rejectionExpression": "D3.Dot(row.Normal,a0)\u002BD3.Dot(row.Moment,w0)\u003E=0",
+          "result": "PASS"
+        },
+        {
+          "order": 35,
+          "rowIndex": 1,
+          "rejectionExpression": "D3.Dot(row.Normal,a1)\u002BD3.Dot(row.Moment,w1)\u003E=0",
+          "result": "PASS"
+        },
+        {
+          "order": 36,
+          "rowIndex": 1,
+          "rejectionExpression": "Math.Abs(D3.Dot(row.Normal,v)\u002BD3.Dot(row.Moment,w))\u003E.0005/(16667d/1e6)",
+          "result": "PASS"
+        },
+        {
+          "order": 37,
+          "rowIndex": 1,
+          "rejectionExpression": "cache.At(i).Mantissa\u003C=0",
+          "result": "PASS"
+        },
+        {
+          "order": 38,
+          "rowIndex": 2,
+          "rejectionExpression": "row.Identity!=features.At(i)",
+          "result": "PASS"
+        },
+        {
+          "order": 39,
+          "rowIndex": 2,
+          "rejectionExpression": "row.Normal!=normal",
+          "result": "PASS"
+        },
+        {
+          "order": 40,
+          "rowIndex": 2,
+          "rejectionExpression": "!row.Normal.Finite",
+          "result": "PASS"
+        },
+        {
+          "order": 41,
+          "rowIndex": 2,
+          "rejectionExpression": "!row.Lever.Finite",
+          "result": "PASS"
+        },
+        {
+          "order": 42,
+          "rowIndex": 2,
+          "rejectionExpression": "Math.Abs(D3.Dot(row.Normal,row.Normal)-1)\u003E8*Math.ScaleB(1d,-23)",
+          "result": "PASS"
+        },
+        {
+          "order": 43,
+          "rowIndex": 2,
+          "rejectionExpression": "!double.IsFinite(depths[i])",
+          "result": "PASS"
+        },
+        {
+          "order": 44,
+          "rowIndex": 2,
+          "rejectionExpression": "depths[i]\u003C=0",
+          "result": "PASS"
+        },
+        {
+          "order": 45,
+          "rowIndex": 2,
+          "rejectionExpression": "depths[i]\u003E.020",
+          "result": "PASS"
+        },
+        {
+          "order": 46,
+          "rowIndex": 2,
+          "rejectionExpression": "D3.Dot(row.Normal,a0)\u002BD3.Dot(row.Moment,w0)\u003E=0",
+          "result": "PASS"
+        },
+        {
+          "order": 47,
+          "rowIndex": 2,
+          "rejectionExpression": "D3.Dot(row.Normal,a1)\u002BD3.Dot(row.Moment,w1)\u003E=0",
+          "result": "PASS"
+        },
+        {
+          "order": 48,
+          "rowIndex": 2,
+          "rejectionExpression": "Math.Abs(D3.Dot(row.Normal,v)\u002BD3.Dot(row.Moment,w))\u003E.0005/(16667d/1e6)",
+          "result": "PASS"
+        },
+        {
+          "order": 49,
+          "rowIndex": 2,
+          "rejectionExpression": "cache.At(i).Mantissa\u003C=0",
+          "result": "PASS"
+        },
+        {
+          "order": 50,
+          "rowIndex": 3,
+          "rejectionExpression": "row.Identity!=features.At(i)",
+          "result": "PASS"
+        },
+        {
+          "order": 51,
+          "rowIndex": 3,
+          "rejectionExpression": "row.Normal!=normal",
+          "result": "PASS"
+        },
+        {
+          "order": 52,
+          "rowIndex": 3,
+          "rejectionExpression": "!row.Normal.Finite",
+          "result": "PASS"
+        },
+        {
+          "order": 53,
+          "rowIndex": 3,
+          "rejectionExpression": "!row.Lever.Finite",
+          "result": "PASS"
+        },
+        {
+          "order": 54,
+          "rowIndex": 3,
+          "rejectionExpression": "Math.Abs(D3.Dot(row.Normal,row.Normal)-1)\u003E8*Math.ScaleB(1d,-23)",
+          "result": "PASS"
+        },
+        {
+          "order": 55,
+          "rowIndex": 3,
+          "rejectionExpression": "!double.IsFinite(depths[i])",
+          "result": "PASS"
+        },
+        {
+          "order": 56,
+          "rowIndex": 3,
+          "rejectionExpression": "depths[i]\u003C=0",
+          "result": "PASS"
+        },
+        {
+          "order": 57,
+          "rowIndex": 3,
+          "rejectionExpression": "depths[i]\u003E.020",
+          "result": "PASS"
+        },
+        {
+          "order": 58,
+          "rowIndex": 3,
+          "rejectionExpression": "D3.Dot(row.Normal,a0)\u002BD3.Dot(row.Moment,w0)\u003E=0",
+          "result": "PASS"
+        },
+        {
+          "order": 59,
+          "rowIndex": 3,
+          "rejectionExpression": "D3.Dot(row.Normal,a1)\u002BD3.Dot(row.Moment,w1)\u003E=0",
+          "result": "PASS"
+        },
+        {
+          "order": 60,
+          "rowIndex": 3,
+          "rejectionExpression": "Math.Abs(D3.Dot(row.Normal,v)\u002BD3.Dot(row.Moment,w))\u003E.0005/(16667d/1e6)",
+          "result": "PASS"
+        },
+        {
+          "order": 61,
+          "rowIndex": 3,
+          "rejectionExpression": "cache.At(i).Mantissa\u003C=0",
+          "result": "PASS"
+        },
+        {
+          "order": 62,
+          "rowIndex": 3,
+          "rejectionExpression": "tangentMagnitude \u003C .125*totalNormal",
+          "result": "PASS"
+        },
+        {
+          "order": 63,
+          "rowIndex": 3,
+          "rejectionExpression": "abs(twist) \u003C twistCap",
+          "result": "PASS"
+        }
+      ],
+      "firstFalse": null,
+      "laterPredicates": "NOT EVALUATED after first false in actual short-circuit order",
+      "acceptedTupleUnchanged": true,
+      "invalidated": false,
+      "coastSolves": 0
+    },
+    {
+      "type": "world_capture",
+      "label": "installed-powered-endpoint-before-coast-refresh",
+      "beforeRefusal": true,
+      "position": {
+        "x": -5.701263350310626E-10,
+        "y": 0.49964091181755066,
+        "z": 7.562231729707491E-09,
+        "bits": [
+          "B01CB713",
+          "3EFFD0EF",
+          "3201EB0C"
+        ]
+      },
+      "orientation": {
+        "x": -1.5973015132786372E-09,
+        "y": 3.389042518842089E-12,
+        "z": 4.592270175240998E-10,
+        "w": 1,
+        "bits": [
+          "B0DB880D",
+          "2C6E7B90",
+          "2FFC7675",
+          "3F800000"
+        ]
+      },
+      "linearVelocity": {
+        "x": -5.732312402528805E-08,
+        "y": 0.007093304768204689,
+        "z": -2.087629411562375E-07,
+        "bits": [
+          "B3763371",
+          "3BE86EF4",
+          "B4602852"
+        ]
+      },
+      "angularVelocity": {
+        "x": -4.1787228610701277E-07,
+        "y": -8.034676604968475E-18,
+        "z": 1.1474136840661231E-07,
+        "bits": [
+          "B4E057EE",
+          "A31436B0",
+          "33F667BC"
+        ]
+      },
+      "nativeInverseMass": 0.12493899464607239,
+      "nativeInverseInertia": {
+        "xx": 0.5,
+        "yy": 0.5,
+        "zz": 0.5,
+        "yx": 0,
+        "zx": 0,
+        "zy": 0
+      },
+      "body": 0,
+      "constraint": 0,
+      "constraintCount": 1,
+      "ownerIdentity": {
+        "World": 1,
+        "Body": 0,
+        "BodyGeneration": 1,
+        "Constraint": 0,
+        "ManifoldGeneration": 1
+      },
+      "piece": 1,
+      "kind": "Powered",
+      "acceptedNormal": {
+        "X": 0,
+        "Y": 1,
+        "Z": 7.002423640933841E-11
+      },
+      "invalidated": false,
+      "callback": {
+        "count": 4,
+        "rows": [
+          {
+            "index": 0,
+            "feature": -4,
+            "normal": {
+              "x": 0,
+              "y": 1,
+              "z": 7.002423640933841E-11,
+              "bits": [
+                "00000000",
+                "3F800000",
+                "2E99FC24"
+              ]
+            },
+            "offset": {
+              "x": -1,
+              "y": -0.49958550930023193,
+              "z": -0.5,
+              "bits": [
+                "BF800000",
+                "BEFFC9AC",
+                "BF000000"
+              ]
+            },
+            "depth": 0.0004144906997680664
+          },
+          {
+            "index": 1,
+            "feature": -21,
+            "normal": {
+              "x": 0,
+              "y": 1,
+              "z": 7.002423640933841E-11,
+              "bits": [
+                "00000000",
+                "3F800000",
+                "2E99FC24"
+              ]
+            },
+            "offset": {
+              "x": 1,
+              "y": -0.49958550930023193,
+              "z": 0.5,
+              "bits": [
+                "3F800000",
+                "BEFFC9AC",
+                "3F000000"
+              ]
+            },
+            "depth": 0.0004144906997680664
+          },
+          {
+            "index": 2,
+            "feature": -5,
+            "normal": {
+              "x": 0,
+              "y": 1,
+              "z": 7.002423640933841E-11,
+              "bits": [
+                "00000000",
+                "3F800000",
+                "2E99FC24"
+              ]
+            },
+            "offset": {
+              "x": -1,
+              "y": -0.49958550930023193,
+              "z": 0.5,
+              "bits": [
+                "BF800000",
+                "BEFFC9AC",
+                "3F000000"
+              ]
+            },
+            "depth": 0.0004144907579757273
+          },
+          {
+            "index": 3,
+            "feature": -20,
+            "normal": {
+              "x": 0,
+              "y": 1,
+              "z": 7.002423640933841E-11,
+              "bits": [
+                "00000000",
+                "3F800000",
+                "2E99FC24"
+              ]
+            },
+            "offset": {
+              "x": 1,
+              "y": -0.49958550930023193,
+              "z": -0.5,
+              "bits": [
+                "3F800000",
+                "BEFFC9AC",
+                "BF000000"
+              ]
+            },
+            "depth": 0.0004144906415604055
+          }
+        ]
+      },
+      "solverRows": [
+        {
+          "index": 0,
+          "feature": -4,
+          "normal": {
+            "x": 0,
+            "y": 1,
+            "z": 7.002423640933841E-11,
+            "bits": [
+              "00000000",
+              "3F800000",
+              "2E99FC24"
+            ]
+          },
+          "offset": {
+            "x": -1,
+            "y": -0.49958550930023193,
+            "z": -0.5,
+            "bits": [
+              "BF800000",
+              "BEFFC9AC",
+              "BF000000"
+            ]
+          },
+          "worldPoint": {
+            "X": -1.0000000005701264,
+            "Y": 5.5402517318725586E-05,
+            "Z": -0.49999999243776827
+          },
+          "depth": 0.0004144906997680664,
+          "pointNormalVelocity": 0.007092981090693229,
+          "verticalVelocity": 0.007092981090693229,
+          "normalDotUp": 1,
+          "normalSquared": 1,
+          "planeGap": 5.5402517318725586E-05,
+          "withinSlabXZ": true
+        },
+        {
+          "index": 1,
+          "feature": -21,
+          "normal": {
+            "x": 0,
+            "y": 1,
+            "z": 7.002423640933841E-11,
+            "bits": [
+              "00000000",
+              "3F800000",
+              "2E99FC24"
+            ]
+          },
+          "offset": {
+            "x": 1,
+            "y": -0.49958550930023193,
+            "z": 0.5,
+            "bits": [
+              "3F800000",
+              "BEFFC9AC",
+              "3F000000"
+            ]
+          },
+          "worldPoint": {
+            "X": 0.9999999994298736,
+            "Y": 5.5402517318725586E-05,
+            "Z": 0.5000000075622317
+          },
+          "depth": 0.0004144906997680664,
+          "pointNormalVelocity": 0.007093628445716149,
+          "verticalVelocity": 0.007093628445716149,
+          "normalDotUp": 1,
+          "normalSquared": 1,
+          "planeGap": 5.5402517318725586E-05,
+          "withinSlabXZ": true
+        },
+        {
+          "index": 2,
+          "feature": -5,
+          "normal": {
+            "x": 0,
+            "y": 1,
+            "z": 7.002423640933841E-11,
+            "bits": [
+              "00000000",
+              "3F800000",
+              "2E99FC24"
+            ]
+          },
+          "offset": {
+            "x": -1,
+            "y": -0.49958550930023193,
+            "z": 0.5,
+            "bits": [
+              "BF800000",
+              "BEFFC9AC",
+              "3F000000"
+            ]
+          },
+          "worldPoint": {
+            "X": -1.0000000005701264,
+            "Y": 5.5402517318725586E-05,
+            "Z": 0.5000000075622317
+          },
+          "depth": 0.0004144907579757273,
+          "pointNormalVelocity": 0.007093398962979336,
+          "verticalVelocity": 0.007093398962979336,
+          "normalDotUp": 1,
+          "normalSquared": 1,
+          "planeGap": 5.5402517318725586E-05,
+          "withinSlabXZ": true
+        },
+        {
+          "index": 3,
+          "feature": -20,
+          "normal": {
+            "x": 0,
+            "y": 1,
+            "z": 7.002423640933841E-11,
+            "bits": [
+              "00000000",
+              "3F800000",
+              "2E99FC24"
+            ]
+          },
+          "offset": {
+            "x": 1,
+            "y": -0.49958550930023193,
+            "z": -0.5,
+            "bits": [
+              "3F800000",
+              "BEFFC9AC",
+              "BF000000"
+            ]
+          },
+          "worldPoint": {
+            "X": 0.9999999994298736,
+            "Y": 5.5402517318725586E-05,
+            "Z": -0.49999999243776827
+          },
+          "depth": 0.0004144906415604055,
+          "pointNormalVelocity": 0.007093210573430042,
+          "verticalVelocity": 0.007093210573430042,
+          "normalDotUp": 1,
+          "normalSquared": 1,
+          "planeGap": 5.5402517318725586E-05,
+          "withinSlabXZ": true
+        }
+      ],
+      "corners": [
+        {
+          "local": {
+            "X": -1,
+            "Y": -0.5,
+            "Z": -0.5
+          },
+          "world": {
+            "X": -1.0000000001142884,
+            "Y": -0.00035909069820483364,
+            "Z": -0.4999999908336887
+          },
+          "velocity": {
+            "X": 4.756047069666559E-11,
+            "Y": 0.007092981090693951,
+            "Z": 1.732029404987209E-10
+          },
+          "planeGap": -0.00035909069820483364,
+          "withinSlabXZ": true
+        },
+        {
+          "local": {
+            "X": -1,
+            "Y": -0.5,
+            "Z": 0.5
+          },
+          "world": {
+            "X": -1.0000000001075102,
+            "Y": -0.0003590875036018071,
+            "Z": 0.5000000091663114
+          },
+          "velocity": {
+            "X": 4.756009610887149E-11,
+            "Y": 0.007093398962980059,
+            "Z": 1.732016055626464E-10
+          },
+          "planeGap": -0.0003590875036018071,
+          "withinSlabXZ": true
+        },
+        {
+          "local": {
+            "X": -1,
+            "Y": 0.5,
+            "Z": -0.5
+          },
+          "world": {
+            "X": -1.0000000010327426,
+            "Y": 0.999640909301795,
+            "Z": -0.49999999402829165
+          },
+          "velocity": {
+            "X": -1.1469380793591563E-07,
+            "Y": 0.007092981090692512,
+            "Z": -4.176990831665141E-07
+          },
+          "planeGap": 0.999640909301795,
+          "withinSlabXZ": true
+        },
+        {
+          "local": {
+            "X": -1,
+            "Y": 0.5,
+            "Z": 0.5
+          },
+          "world": {
+            "X": -1.0000000010259644,
+            "Y": 0.9996409124963982,
+            "Z": 0.5000000059717082
+          },
+          "velocity": {
+            "X": -1.1469380831050343E-07,
+            "Y": 0.007093398962978619,
+            "Z": -4.176990845014502E-07
+          },
+          "planeGap": 0.9996409124963982,
+          "withinSlabXZ": true
+        },
+        {
+          "local": {
+            "X": 1,
+            "Y": -0.5,
+            "Z": -0.5
+          },
+          "world": {
+            "X": 0.9999999998857116,
+            "Y": -0.00035908886129687456,
+            "Z": -0.49999999084724484
+          },
+          "velocity": {
+            "X": 4.7560259927333123E-11,
+            "Y": 0.0070932105734307594,
+            "Z": 1.7320218897514412E-10
+          },
+          "planeGap": -0.00035908886129687456,
+          "withinSlabXZ": true
+        },
+        {
+          "local": {
+            "X": 1,
+            "Y": -0.5,
+            "Z": 0.5
+          },
+          "world": {
+            "X": 0.9999999998924898,
+            "Y": -0.0003590856666937925,
+            "Z": 0.5000000091527551
+          },
+          "velocity": {
+            "X": 4.7559885339532406E-11,
+            "Y": 0.0070936284457168665,
+            "Z": 1.7320085403904315E-10
+          },
+          "planeGap": -0.0003590856666937925,
+          "withinSlabXZ": true
+        },
+        {
+          "local": {
+            "X": 1,
+            "Y": 0.5,
+            "Z": -0.5
+          },
+          "world": {
+            "X": 0.9999999989672577,
+            "Y": 0.9996409111387031,
+            "Z": -0.4999999940418479
+          },
+          "velocity": {
+            "X": -1.1469380814668498E-07,
+            "Y": 0.007093210573429319,
+            "Z": -4.1769908391803765E-07
+          },
+          "planeGap": 0.9996409111387031,
+          "withinSlabXZ": true
+        },
+        {
+          "local": {
+            "X": 1,
+            "Y": 0.5,
+            "Z": 0.5
+          },
+          "world": {
+            "X": 0.9999999989740358,
+            "Y": 0.9996409143333062,
+            "Z": 0.5000000059581522
+          },
+          "velocity": {
+            "X": -1.1469380852127277E-07,
+            "Y": 0.007093628445715427,
+            "Z": -4.176990852529737E-07
+          },
+          "planeGap": 0.9996409143333062,
+          "withinSlabXZ": true
+        }
+      ],
+      "supportFunctionGap": -0.00035909069820483364,
+      "deepestCornerPenetration": 0.00035909069820483364,
+      "shallowestCornerPenetration": -0.9996409143333062,
+      "frameEpoch": "NOT APPLICABLE: standalone fixed-origin box/slab fixture; no canonical/frame epoch capability"
+    },
+    {
+      "type": "world_capture",
+      "label": "coast-source",
+      "beforeRefusal": true,
+      "position": {
+        "x": -5.701263350310626E-10,
+        "y": 0.49964091181755066,
+        "z": 7.562231729707491E-09,
+        "bits": [
+          "B01CB713",
+          "3EFFD0EF",
+          "3201EB0C"
+        ]
+      },
+      "orientation": {
+        "x": -1.5973015132786372E-09,
+        "y": 3.389042518842089E-12,
+        "z": 4.592270175240998E-10,
+        "w": 1,
+        "bits": [
+          "B0DB880D",
+          "2C6E7B90",
+          "2FFC7675",
+          "3F800000"
+        ]
+      },
+      "linearVelocity": {
+        "x": -5.732312402528805E-08,
+        "y": 0.007093304768204689,
+        "z": -2.087629411562375E-07,
+        "bits": [
+          "B3763371",
+          "3BE86EF4",
+          "B4602852"
+        ]
+      },
+      "angularVelocity": {
+        "x": -4.1787228610701277E-07,
+        "y": -8.034676604968475E-18,
+        "z": 1.1474136840661231E-07,
+        "bits": [
+          "B4E057EE",
+          "A31436B0",
+          "33F667BC"
+        ]
+      },
+      "nativeInverseMass": 0.125,
+      "nativeInverseInertia": {
+        "xx": 0.5,
+        "yy": 0.5,
+        "zz": 0.5,
+        "yx": 0,
+        "zx": 0,
+        "zy": 0
+      },
+      "body": 0,
+      "constraint": 0,
+      "constraintCount": 1,
+      "ownerIdentity": {
+        "World": 1,
+        "Body": 0,
+        "BodyGeneration": 1,
+        "Constraint": 0,
+        "ManifoldGeneration": 1
+      },
+      "piece": 1,
+      "kind": "Powered",
+      "acceptedNormal": {
+        "X": 0,
+        "Y": 1,
+        "Z": 7.002423640933841E-11
+      },
+      "invalidated": false,
+      "callback": {
+        "count": 4,
+        "rows": [
+          {
+            "index": 0,
+            "feature": -4,
+            "normal": {
+              "x": 0,
+              "y": 1,
+              "z": -3.1946030265572745E-09,
+              "bits": [
+                "00000000",
+                "3F800000",
+                "B15B880D"
+              ]
+            },
+            "offset": {
+              "x": -1,
+              "y": -0.49964094161987305,
+              "z": -0.5,
+              "bits": [
+                "BF800000",
+                "BEFFD0F0",
+                "BF000000"
+              ]
+            },
+            "depth": 0.0003590608830563724
+          },
+          {
+            "index": 1,
+            "feature": -21,
+            "normal": {
+              "x": 0,
+              "y": 1,
+              "z": -3.1946030265572745E-09,
+              "bits": [
+                "00000000",
+                "3F800000",
+                "B15B880D"
+              ]
+            },
+            "offset": {
+              "x": 1,
+              "y": -0.49964094161987305,
+              "z": 0.5,
+              "bits": [
+                "3F800000",
+                "BEFFD0F0",
+                "3F000000"
+              ]
+            },
+            "depth": 0.00035905587719753385
+          },
+          {
+            "index": 2,
+            "feature": -5,
+            "normal": {
+              "x": 0,
+              "y": 1,
+              "z": -3.1946030265572745E-09,
+              "bits": [
+                "00000000",
+                "3F800000",
+                "B15B880D"
+              ]
+            },
+            "offset": {
+              "x": -1,
+              "y": -0.49964094161987305,
+              "z": 0.5,
+              "bits": [
+                "BF800000",
+                "BEFFD0F0",
+                "3F000000"
+              ]
+            },
+            "depth": 0.0003590577107388526
+          },
+          {
+            "index": 3,
+            "feature": -20,
+            "normal": {
+              "x": 0,
+              "y": 1,
+              "z": -3.1946030265572745E-09,
+              "bits": [
+                "00000000",
+                "3F800000",
+                "B15B880D"
+              ]
+            },
+            "offset": {
+              "x": 1,
+              "y": -0.49964094161987305,
+              "z": -0.5,
+              "bits": [
+                "3F800000",
+                "BEFFD0F0",
+                "BF000000"
+              ]
+            },
+            "depth": 0.00035905904951505363
+          }
+        ]
+      },
+      "solverRows": [
+        {
+          "index": 0,
+          "feature": -4,
+          "normal": {
+            "x": 0,
+            "y": 1,
+            "z": -3.1946030265572745E-09,
+            "bits": [
+              "00000000",
+              "3F800000",
+              "B15B880D"
+            ]
+          },
+          "offset": {
+            "x": -1,
+            "y": -0.49964094161987305,
+            "z": -0.5,
+            "bits": [
+              "BF800000",
+              "BEFFD0F0",
+              "BF000000"
+            ]
+          },
+          "worldPoint": {
+            "X": -1.0000000005701264,
+            "Y": -2.980232238769531E-08,
+            "Z": -0.49999999243776827
+          },
+          "depth": 0.0003590608830563724,
+          "pointNormalVelocity": 0.007092981090693229,
+          "verticalVelocity": 0.007092981090693229,
+          "normalDotUp": 1,
+          "normalSquared": 1,
+          "planeGap": -2.980232238769531E-08,
+          "withinSlabXZ": true
+        },
+        {
+          "index": 1,
+          "feature": -21,
+          "normal": {
+            "x": 0,
+            "y": 1,
+            "z": -3.1946030265572745E-09,
+            "bits": [
+              "00000000",
+              "3F800000",
+              "B15B880D"
+            ]
+          },
+          "offset": {
+            "x": 1,
+            "y": -0.49964094161987305,
+            "z": 0.5,
+            "bits": [
+              "3F800000",
+              "BEFFD0F0",
+              "3F000000"
+            ]
+          },
+          "worldPoint": {
+            "X": 0.9999999994298736,
+            "Y": -2.980232238769531E-08,
+            "Z": 0.5000000075622317
+          },
+          "depth": 0.00035905587719753385,
+          "pointNormalVelocity": 0.007093628445716149,
+          "verticalVelocity": 0.007093628445716149,
+          "normalDotUp": 1,
+          "normalSquared": 1,
+          "planeGap": -2.980232238769531E-08,
+          "withinSlabXZ": true
+        },
+        {
+          "index": 2,
+          "feature": -5,
+          "normal": {
+            "x": 0,
+            "y": 1,
+            "z": -3.1946030265572745E-09,
+            "bits": [
+              "00000000",
+              "3F800000",
+              "B15B880D"
+            ]
+          },
+          "offset": {
+            "x": -1,
+            "y": -0.49964094161987305,
+            "z": 0.5,
+            "bits": [
+              "BF800000",
+              "BEFFD0F0",
+              "3F000000"
+            ]
+          },
+          "worldPoint": {
+            "X": -1.0000000005701264,
+            "Y": -2.980232238769531E-08,
+            "Z": 0.5000000075622317
+          },
+          "depth": 0.0003590577107388526,
+          "pointNormalVelocity": 0.007093398962979336,
+          "verticalVelocity": 0.007093398962979336,
+          "normalDotUp": 1,
+          "normalSquared": 1,
+          "planeGap": -2.980232238769531E-08,
+          "withinSlabXZ": true
+        },
+        {
+          "index": 3,
+          "feature": -20,
+          "normal": {
+            "x": 0,
+            "y": 1,
+            "z": -3.1946030265572745E-09,
+            "bits": [
+              "00000000",
+              "3F800000",
+              "B15B880D"
+            ]
+          },
+          "offset": {
+            "x": 1,
+            "y": -0.49964094161987305,
+            "z": -0.5,
+            "bits": [
+              "3F800000",
+              "BEFFD0F0",
+              "BF000000"
+            ]
+          },
+          "worldPoint": {
+            "X": 0.9999999994298736,
+            "Y": -2.980232238769531E-08,
+            "Z": -0.49999999243776827
+          },
+          "depth": 0.00035905904951505363,
+          "pointNormalVelocity": 0.007093210573430042,
+          "verticalVelocity": 0.007093210573430042,
+          "normalDotUp": 1,
+          "normalSquared": 1,
+          "planeGap": -2.980232238769531E-08,
+          "withinSlabXZ": true
+        }
+      ],
+      "corners": [
+        {
+          "local": {
+            "X": -1,
+            "Y": -0.5,
+            "Z": -0.5
+          },
+          "world": {
+            "X": -1.0000000001142884,
+            "Y": -0.00035909069820483364,
+            "Z": -0.4999999908336887
+          },
+          "velocity": {
+            "X": 4.756047069666559E-11,
+            "Y": 0.007092981090693951,
+            "Z": 1.732029404987209E-10
+          },
+          "planeGap": -0.00035909069820483364,
+          "withinSlabXZ": true
+        },
+        {
+          "local": {
+            "X": -1,
+            "Y": -0.5,
+            "Z": 0.5
+          },
+          "world": {
+            "X": -1.0000000001075102,
+            "Y": -0.0003590875036018071,
+            "Z": 0.5000000091663114
+          },
+          "velocity": {
+            "X": 4.756009610887149E-11,
+            "Y": 0.007093398962980059,
+            "Z": 1.732016055626464E-10
+          },
+          "planeGap": -0.0003590875036018071,
+          "withinSlabXZ": true
+        },
+        {
+          "local": {
+            "X": -1,
+            "Y": 0.5,
+            "Z": -0.5
+          },
+          "world": {
+            "X": -1.0000000010327426,
+            "Y": 0.999640909301795,
+            "Z": -0.49999999402829165
+          },
+          "velocity": {
+            "X": -1.1469380793591563E-07,
+            "Y": 0.007092981090692512,
+            "Z": -4.176990831665141E-07
+          },
+          "planeGap": 0.999640909301795,
+          "withinSlabXZ": true
+        },
+        {
+          "local": {
+            "X": -1,
+            "Y": 0.5,
+            "Z": 0.5
+          },
+          "world": {
+            "X": -1.0000000010259644,
+            "Y": 0.9996409124963982,
+            "Z": 0.5000000059717082
+          },
+          "velocity": {
+            "X": -1.1469380831050343E-07,
+            "Y": 0.007093398962978619,
+            "Z": -4.176990845014502E-07
+          },
+          "planeGap": 0.9996409124963982,
+          "withinSlabXZ": true
+        },
+        {
+          "local": {
+            "X": 1,
+            "Y": -0.5,
+            "Z": -0.5
+          },
+          "world": {
+            "X": 0.9999999998857116,
+            "Y": -0.00035908886129687456,
+            "Z": -0.49999999084724484
+          },
+          "velocity": {
+            "X": 4.7560259927333123E-11,
+            "Y": 0.0070932105734307594,
+            "Z": 1.7320218897514412E-10
+          },
+          "planeGap": -0.00035908886129687456,
+          "withinSlabXZ": true
+        },
+        {
+          "local": {
+            "X": 1,
+            "Y": -0.5,
+            "Z": 0.5
+          },
+          "world": {
+            "X": 0.9999999998924898,
+            "Y": -0.0003590856666937925,
+            "Z": 0.5000000091527551
+          },
+          "velocity": {
+            "X": 4.7559885339532406E-11,
+            "Y": 0.0070936284457168665,
+            "Z": 1.7320085403904315E-10
+          },
+          "planeGap": -0.0003590856666937925,
+          "withinSlabXZ": true
+        },
+        {
+          "local": {
+            "X": 1,
+            "Y": 0.5,
+            "Z": -0.5
+          },
+          "world": {
+            "X": 0.9999999989672577,
+            "Y": 0.9996409111387031,
+            "Z": -0.4999999940418479
+          },
+          "velocity": {
+            "X": -1.1469380814668498E-07,
+            "Y": 0.007093210573429319,
+            "Z": -4.1769908391803765E-07
+          },
+          "planeGap": 0.9996409111387031,
+          "withinSlabXZ": true
+        },
+        {
+          "local": {
+            "X": 1,
+            "Y": 0.5,
+            "Z": 0.5
+          },
+          "world": {
+            "X": 0.9999999989740358,
+            "Y": 0.9996409143333062,
+            "Z": 0.5000000059581522
+          },
+          "velocity": {
+            "X": -1.1469380852127277E-07,
+            "Y": 0.007093628445715427,
+            "Z": -4.176990852529737E-07
+          },
+          "planeGap": 0.9996409143333062,
+          "withinSlabXZ": true
+        }
+      ],
+      "supportFunctionGap": -0.00035909069820483364,
+      "deepestCornerPenetration": 0.00035909069820483364,
+      "shallowestCornerPenetration": -0.9996409143333062,
+      "frameEpoch": "NOT APPLICABLE: standalone fixed-origin box/slab fixture; no canonical/frame epoch capability"
+    },
+    {
+      "type": "admission",
+      "label": "successor_powered_comparison",
+      "status": "UnsupportedSupport",
+      "inputs": {
+        "identity": {
+          "World": 1,
+          "Body": 0,
+          "BodyGeneration": 1,
+          "Constraint": 0,
+          "ManifoldGeneration": 1
+        },
+        "features": {
+          "A": -4,
+          "B": -21,
+          "C": -5,
+          "D": -20
+        },
+        "previousPiece": 1,
+        "nextPiece": 2,
+        "previousKind": "Powered",
+        "nextKind": "Powered",
+        "invalidated": false,
+        "previousDuration": {
+          "origin": "ExactEvent",
+          "solverBits": "0",
+          "scale": {
+            "Significand": 1,
+            "Exponent": -7
+          },
+          "exactPositive": true,
+          "exactValueBytesHex": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000127A000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        },
+        "currentDuration": {
+          "origin": "ExactEvent",
+          "solverBits": "0",
+          "scale": {
+            "Significand": 1.133248,
+            "Exponent": -7
+          },
+          "exactPositive": true,
+          "exactValueBytesHex": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000568A000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        },
+        "source": {
+          "Linear": {
+            "X": -5.732312402528805E-08,
+            "Y": 0.007093304768204689,
+            "Z": -2.087629411562375E-07
+          },
+          "Angular": {
+            "X": -4.1787228610701277E-07,
+            "Y": -8.034676604968475E-18,
+            "Z": 1.1474136840661231E-07
+          }
+        },
+        "body": {
+          "Mass": 0.125,
+          "Diagonal": {
+            "X": 0.5,
+            "Y": 0.5,
+            "Z": 0.5
+          },
+          "OffDiagonal": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          }
+        },
+        "previousLoad": {
+          "Gravity": {
+            "X": 0,
+            "Y": -9.81,
+            "Z": 0
+          },
+          "Force": {
+            "X": 0,
+            "Y": 32,
+            "Z": 0
+          },
+          "Torque": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          }
+        },
+        "currentLoad": {
+          "Gravity": {
+            "X": 0,
+            "Y": -9.81,
+            "Z": 0
+          },
+          "Force": {
+            "X": 0,
+            "Y": 32,
+            "Z": 0
+          },
+          "Torque": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          }
+        },
+        "currentOmega": 188.4955596923828,
+        "twiceDamping": 2,
+        "friction": 0.5,
+        "recovery": 2,
+        "expectedNormal": {
+          "X": 0,
+          "Y": 1,
+          "Z": 7.002423640933841E-11
+        },
+        "cache": {
+          "N0": {
+            "Mantissa": 1.6807482279001573,
+            "Exponent": -4
+          },
+          "N1": {
+            "Mantissa": 1.680779580802785,
+            "Exponent": -4
+          },
+          "N2": {
+            "Mantissa": 1.6808281968568222,
+            "Exponent": -4
+          },
+          "N3": {
+            "Mantissa": 1.680804170086299,
+            "Exponent": -4
+          },
+          "T0": {
+            "Mantissa": 1.8151546528994429,
+            "Exponent": -20
+          },
+          "T1": {
+            "Mantissa": -1.920970060720931,
+            "Exponent": -22
+          },
+          "Twist": {
+            "Mantissa": 1.1471616123238961,
+            "Exponent": -56
+          }
+        },
+        "cacheValues": [
+          0.10504676424375983,
+          0.10504872380017406,
+          0.10505176230355139,
+          0.10505026063039369,
+          1.7310663727755002E-06,
+          -4.579949523737266E-07,
+          1.592006543710134E-17
+        ],
+        "nativeCache": [
+          0.10504676401615143,
+          0.10504872351884842,
+          0.10505176335573196,
+          0.10505025833845139,
+          1.7310663906755508E-06,
+          -4.5799495751452923E-07,
+          1.5920065307344605E-17
+        ],
+        "nativeCacheBits": [
+          "3DD722C2",
+          "3DD723C9",
+          "3DD72561",
+          "3DD72497",
+          "35E856FD",
+          "B4F5E259",
+          "2392D631"
+        ],
+        "previousAcceleration": {
+          "X": 0,
+          "Y": -5.8100000000000005,
+          "Z": 0
+        },
+        "currentAcceleration": {
+          "X": 0,
+          "Y": -5.8100000000000005,
+          "Z": 0
+        },
+        "previousAngularAcceleration": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0
+        },
+        "currentAngularAcceleration": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0
+        },
+        "rows": [
+          {
+            "index": 0,
+            "row": {
+              "Identity": -4,
+              "Normal": {
+                "X": 0,
+                "Y": 1,
+                "Z": -3.1946030265572745E-09
+              },
+              "Lever": {
+                "X": -1,
+                "Y": -0.49964094161987305,
+                "Z": -0.5
+              }
+            },
+            "depth": 0.0003590608830563724,
+            "normalSquared": 1,
+            "normalError": 0,
+            "unitBound": 9.5367431640625E-07,
+            "previousNormalDrive": -5.8100000000000005,
+            "currentNormalDrive": -5.8100000000000005,
+            "pointNormalVelocity": 0.007092981090693229,
+            "speedBound": 0.029999400011999758,
+            "normalCacheMantissa": 1.6807482279001573
+          },
+          {
+            "index": 1,
+            "row": {
+              "Identity": -21,
+              "Normal": {
+                "X": 0,
+                "Y": 1,
+                "Z": -3.1946030265572745E-09
+              },
+              "Lever": {
+                "X": 1,
+                "Y": -0.49964094161987305,
+                "Z": 0.5
+              }
+            },
+            "depth": 0.00035905587719753385,
+            "normalSquared": 1,
+            "normalError": 0,
+            "unitBound": 9.5367431640625E-07,
+            "previousNormalDrive": -5.8100000000000005,
+            "currentNormalDrive": -5.8100000000000005,
+            "pointNormalVelocity": 0.007093628445716149,
+            "speedBound": 0.029999400011999758,
+            "normalCacheMantissa": 1.680779580802785
+          },
+          {
+            "index": 2,
+            "row": {
+              "Identity": -5,
+              "Normal": {
+                "X": 0,
+                "Y": 1,
+                "Z": -3.1946030265572745E-09
+              },
+              "Lever": {
+                "X": -1,
+                "Y": -0.49964094161987305,
+                "Z": 0.5
+              }
+            },
+            "depth": 0.0003590577107388526,
+            "normalSquared": 1,
+            "normalError": 0,
+            "unitBound": 9.5367431640625E-07,
+            "previousNormalDrive": -5.8100000000000005,
+            "currentNormalDrive": -5.8100000000000005,
+            "pointNormalVelocity": 0.007093398962979336,
+            "speedBound": 0.029999400011999758,
+            "normalCacheMantissa": 1.6808281968568222
+          },
+          {
+            "index": 3,
+            "row": {
+              "Identity": -20,
+              "Normal": {
+                "X": 0,
+                "Y": 1,
+                "Z": -3.1946030265572745E-09
+              },
+              "Lever": {
+                "X": 1,
+                "Y": -0.49964094161987305,
+                "Z": -0.5
+              }
+            },
+            "depth": 0.00035905904951505363,
+            "normalSquared": 1,
+            "normalError": 0,
+            "unitBound": 9.5367431640625E-07,
+            "previousNormalDrive": -5.8100000000000005,
+            "currentNormalDrive": -5.8100000000000005,
+            "pointNormalVelocity": 0.007093210573430042,
+            "speedBound": 0.029999400011999758,
+            "normalCacheMantissa": 1.680804170086299
+          }
+        ],
+        "center": {
+          "X": 0,
+          "Y": -0.49964094161987305,
+          "Z": 0
+        },
+        "totalNormal": 0.420197510977879,
+        "tangentMagnitude": 1.7906284269367387E-06,
+        "tangentCap": 0.052524688872234875,
+        "twistMagnitude": 1.592006543710134E-17,
+        "twistCap": 0.05872438740767197,
+        "cacheFreeSupport": true,
+        "cacheFreeMeaning": "diagnostic only: excludes historical normal equality, previous-load drive and impulse feasibility; retains current geometry/load/speed checks"
+      },
+      "predicates": [
+        {
+          "order": 1,
+          "rowIndex": -1,
+          "rejectionExpression": "rows.Length!=4",
+          "result": "PASS"
+        },
+        {
+          "order": 2,
+          "rowIndex": -1,
+          "rejectionExpression": "depths.Length!=4",
+          "result": "PASS"
+        },
+        {
+          "order": 3,
+          "rowIndex": -1,
+          "rejectionExpression": "!body.Valid",
+          "result": "PASS"
+        },
+        {
+          "order": 4,
+          "rowIndex": -1,
+          "rejectionExpression": "!previous.Finite",
+          "result": "PASS"
+        },
+        {
+          "order": 5,
+          "rowIndex": -1,
+          "rejectionExpression": "!next.Finite",
+          "result": "PASS"
+        },
+        {
+          "order": 6,
+          "rowIndex": -1,
+          "rejectionExpression": "omega\u003C=0",
+          "result": "PASS"
+        },
+        {
+          "order": 7,
+          "rowIndex": -1,
+          "rejectionExpression": "!double.IsFinite(omega)",
+          "result": "PASS"
+        },
+        {
+          "order": 8,
+          "rowIndex": -1,
+          "rejectionExpression": "!v.Finite",
+          "result": "PASS"
+        },
+        {
+          "order": 9,
+          "rowIndex": -1,
+          "rejectionExpression": "!w.Finite",
+          "result": "PASS"
+        },
+        {
+          "order": 10,
+          "rowIndex": -1,
+          "rejectionExpression": "!a0.Finite",
+          "result": "PASS"
+        },
+        {
+          "order": 11,
+          "rowIndex": -1,
+          "rejectionExpression": "!a1.Finite",
+          "result": "PASS"
+        },
+        {
+          "order": 12,
+          "rowIndex": -1,
+          "rejectionExpression": "!w0.Finite",
+          "result": "PASS"
+        },
+        {
+          "order": 13,
+          "rowIndex": -1,
+          "rejectionExpression": "!w1.Finite",
+          "result": "PASS"
+        },
+        {
+          "order": 14,
+          "rowIndex": 0,
+          "rejectionExpression": "row.Identity!=features.At(i)",
+          "result": "PASS"
+        },
+        {
+          "order": 15,
+          "rowIndex": 0,
+          "rejectionExpression": "row.Normal!=normal",
+          "result": "FAIL"
+        }
+      ],
+      "firstFalse": "row.Normal!=normal",
+      "laterPredicates": "NOT EVALUATED after first false in actual short-circuit order",
+      "acceptedTupleUnchanged": true,
+      "invalidated": false,
+      "coastSolves": 0
+    },
+    {
+      "type": "admission",
+      "label": "owned_coast_continuation",
+      "status": "UnsupportedSupport",
+      "inputs": {
+        "identity": {
+          "World": 1,
+          "Body": 0,
+          "BodyGeneration": 1,
+          "Constraint": 0,
+          "ManifoldGeneration": 1
+        },
+        "features": {
+          "A": -4,
+          "B": -21,
+          "C": -5,
+          "D": -20
+        },
+        "previousPiece": 1,
+        "nextPiece": 2,
+        "previousKind": "Powered",
+        "nextKind": "Coast",
+        "invalidated": false,
+        "previousDuration": {
+          "origin": "ExactEvent",
+          "solverBits": "0",
+          "scale": {
+            "Significand": 1,
+            "Exponent": -7
+          },
+          "exactPositive": true,
+          "exactValueBytesHex": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000127A000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        },
+        "currentDuration": {
+          "origin": "ExactEvent",
+          "solverBits": "0",
+          "scale": {
+            "Significand": 1.133248,
+            "Exponent": -7
+          },
+          "exactPositive": true,
+          "exactValueBytesHex": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000568A000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        },
+        "source": {
+          "Linear": {
+            "X": -5.732312402528805E-08,
+            "Y": 0.007093304768204689,
+            "Z": -2.087629411562375E-07
+          },
+          "Angular": {
+            "X": -4.1787228610701277E-07,
+            "Y": -8.034676604968475E-18,
+            "Z": 1.1474136840661231E-07
+          }
+        },
+        "body": {
+          "Mass": 0.125,
+          "Diagonal": {
+            "X": 0.5,
+            "Y": 0.5,
+            "Z": 0.5
+          },
+          "OffDiagonal": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          }
+        },
+        "previousLoad": {
+          "Gravity": {
+            "X": 0,
+            "Y": -9.81,
+            "Z": 0
+          },
+          "Force": {
+            "X": 0,
+            "Y": 32,
+            "Z": 0
+          },
+          "Torque": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          }
+        },
+        "currentLoad": {
+          "Gravity": {
+            "X": 0,
+            "Y": -9.81,
+            "Z": 0
+          },
+          "Force": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          "Torque": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          }
+        },
+        "currentOmega": 188.4955596923828,
+        "twiceDamping": 2,
+        "friction": 0.5,
+        "recovery": 2,
+        "expectedNormal": {
+          "X": 0,
+          "Y": 1,
+          "Z": 7.002423640933841E-11
+        },
+        "cache": {
+          "N0": {
+            "Mantissa": 1.6807482279001573,
+            "Exponent": -4
+          },
+          "N1": {
+            "Mantissa": 1.680779580802785,
+            "Exponent": -4
+          },
+          "N2": {
+            "Mantissa": 1.6808281968568222,
+            "Exponent": -4
+          },
+          "N3": {
+            "Mantissa": 1.680804170086299,
+            "Exponent": -4
+          },
+          "T0": {
+            "Mantissa": 1.8151546528994429,
+            "Exponent": -20
+          },
+          "T1": {
+            "Mantissa": -1.920970060720931,
+            "Exponent": -22
+          },
+          "Twist": {
+            "Mantissa": 1.1471616123238961,
+            "Exponent": -56
+          }
+        },
+        "cacheValues": [
+          0.10504676424375983,
+          0.10504872380017406,
+          0.10505176230355139,
+          0.10505026063039369,
+          1.7310663727755002E-06,
+          -4.579949523737266E-07,
+          1.592006543710134E-17
+        ],
+        "nativeCache": [
+          0.10504676401615143,
+          0.10504872351884842,
+          0.10505176335573196,
+          0.10505025833845139,
+          1.7310663906755508E-06,
+          -4.5799495751452923E-07,
+          1.5920065307344605E-17
+        ],
+        "nativeCacheBits": [
+          "3DD722C2",
+          "3DD723C9",
+          "3DD72561",
+          "3DD72497",
+          "35E856FD",
+          "B4F5E259",
+          "2392D631"
+        ],
+        "previousAcceleration": {
+          "X": 0,
+          "Y": -5.8100000000000005,
+          "Z": 0
+        },
+        "currentAcceleration": {
+          "X": 0,
+          "Y": -9.81,
+          "Z": 0
+        },
+        "previousAngularAcceleration": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0
+        },
+        "currentAngularAcceleration": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0
+        },
+        "rows": [
+          {
+            "index": 0,
+            "row": {
+              "Identity": -4,
+              "Normal": {
+                "X": 0,
+                "Y": 1,
+                "Z": -3.1946030265572745E-09
+              },
+              "Lever": {
+                "X": -1,
+                "Y": -0.49964094161987305,
+                "Z": -0.5
+              }
+            },
+            "depth": 0.0003590608830563724,
+            "normalSquared": 1,
+            "normalError": 0,
+            "unitBound": 9.5367431640625E-07,
+            "previousNormalDrive": -5.8100000000000005,
+            "currentNormalDrive": -9.81,
+            "pointNormalVelocity": 0.007092981090693229,
+            "speedBound": 0.029999400011999758,
+            "normalCacheMantissa": 1.6807482279001573
+          },
+          {
+            "index": 1,
+            "row": {
+              "Identity": -21,
+              "Normal": {
+                "X": 0,
+                "Y": 1,
+                "Z": -3.1946030265572745E-09
+              },
+              "Lever": {
+                "X": 1,
+                "Y": -0.49964094161987305,
+                "Z": 0.5
+              }
+            },
+            "depth": 0.00035905587719753385,
+            "normalSquared": 1,
+            "normalError": 0,
+            "unitBound": 9.5367431640625E-07,
+            "previousNormalDrive": -5.8100000000000005,
+            "currentNormalDrive": -9.81,
+            "pointNormalVelocity": 0.007093628445716149,
+            "speedBound": 0.029999400011999758,
+            "normalCacheMantissa": 1.680779580802785
+          },
+          {
+            "index": 2,
+            "row": {
+              "Identity": -5,
+              "Normal": {
+                "X": 0,
+                "Y": 1,
+                "Z": -3.1946030265572745E-09
+              },
+              "Lever": {
+                "X": -1,
+                "Y": -0.49964094161987305,
+                "Z": 0.5
+              }
+            },
+            "depth": 0.0003590577107388526,
+            "normalSquared": 1,
+            "normalError": 0,
+            "unitBound": 9.5367431640625E-07,
+            "previousNormalDrive": -5.8100000000000005,
+            "currentNormalDrive": -9.81,
+            "pointNormalVelocity": 0.007093398962979336,
+            "speedBound": 0.029999400011999758,
+            "normalCacheMantissa": 1.6808281968568222
+          },
+          {
+            "index": 3,
+            "row": {
+              "Identity": -20,
+              "Normal": {
+                "X": 0,
+                "Y": 1,
+                "Z": -3.1946030265572745E-09
+              },
+              "Lever": {
+                "X": 1,
+                "Y": -0.49964094161987305,
+                "Z": -0.5
+              }
+            },
+            "depth": 0.00035905904951505363,
+            "normalSquared": 1,
+            "normalError": 0,
+            "unitBound": 9.5367431640625E-07,
+            "previousNormalDrive": -5.8100000000000005,
+            "currentNormalDrive": -9.81,
+            "pointNormalVelocity": 0.007093210573430042,
+            "speedBound": 0.029999400011999758,
+            "normalCacheMantissa": 1.680804170086299
+          }
+        ],
+        "center": {
+          "X": 0,
+          "Y": -0.49964094161987305,
+          "Z": 0
+        },
+        "totalNormal": 0.420197510977879,
+        "tangentMagnitude": 1.7906284269367387E-06,
+        "tangentCap": 0.052524688872234875,
+        "twistMagnitude": 1.592006543710134E-17,
+        "twistCap": 0.05872438740767197,
+        "cacheFreeSupport": true,
+        "cacheFreeMeaning": "diagnostic only: excludes historical normal equality, previous-load drive and impulse feasibility; retains current geometry/load/speed checks"
+      },
+      "predicates": [
+        {
+          "order": 1,
+          "rowIndex": -1,
+          "rejectionExpression": "rows.Length!=4",
+          "result": "PASS"
+        },
+        {
+          "order": 2,
+          "rowIndex": -1,
+          "rejectionExpression": "depths.Length!=4",
+          "result": "PASS"
+        },
+        {
+          "order": 3,
+          "rowIndex": -1,
+          "rejectionExpression": "!body.Valid",
+          "result": "PASS"
+        },
+        {
+          "order": 4,
+          "rowIndex": -1,
+          "rejectionExpression": "!previous.Finite",
+          "result": "PASS"
+        },
+        {
+          "order": 5,
+          "rowIndex": -1,
+          "rejectionExpression": "!next.Finite",
+          "result": "PASS"
+        },
+        {
+          "order": 6,
+          "rowIndex": -1,
+          "rejectionExpression": "omega\u003C=0",
+          "result": "PASS"
+        },
+        {
+          "order": 7,
+          "rowIndex": -1,
+          "rejectionExpression": "!double.IsFinite(omega)",
+          "result": "PASS"
+        },
+        {
+          "order": 8,
+          "rowIndex": -1,
+          "rejectionExpression": "!v.Finite",
+          "result": "PASS"
+        },
+        {
+          "order": 9,
+          "rowIndex": -1,
+          "rejectionExpression": "!w.Finite",
+          "result": "PASS"
+        },
+        {
+          "order": 10,
+          "rowIndex": -1,
+          "rejectionExpression": "!a0.Finite",
+          "result": "PASS"
+        },
+        {
+          "order": 11,
+          "rowIndex": -1,
+          "rejectionExpression": "!a1.Finite",
+          "result": "PASS"
+        },
+        {
+          "order": 12,
+          "rowIndex": -1,
+          "rejectionExpression": "!w0.Finite",
+          "result": "PASS"
+        },
+        {
+          "order": 13,
+          "rowIndex": -1,
+          "rejectionExpression": "!w1.Finite",
+          "result": "PASS"
+        },
+        {
+          "order": 14,
+          "rowIndex": 0,
+          "rejectionExpression": "row.Identity!=features.At(i)",
+          "result": "PASS"
+        },
+        {
+          "order": 15,
+          "rowIndex": 0,
+          "rejectionExpression": "row.Normal!=normal",
+          "result": "FAIL"
+        }
+      ],
+      "firstFalse": "row.Normal!=normal",
+      "laterPredicates": "NOT EVALUATED after first false in actual short-circuit order",
+      "acceptedTupleUnchanged": true,
+      "invalidated": false,
+      "coastSolves": 0
+    }
+  ],
+  "productionChanges": 0,
+  "canonicalMutations": 0,
+  "coastSolves": 0
+}

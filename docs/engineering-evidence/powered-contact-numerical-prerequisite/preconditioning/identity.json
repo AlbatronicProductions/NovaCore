@@ -1,0 +1,196 @@
+{
+  "schema": 1,
+  "baseline": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "branch": "codex/powered-contact-numerical-prerequisite",
+  "main": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "originMain": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "remoteMain": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "protectedTags": [
+    {
+      "tag": "m14.21-authored-compound-spacecraft-contact",
+      "object": "d8c13e46a9272e5ef6eb89acbe23c29709e3c55b",
+      "commit": "b6e8fa568585706ce38c0609aeb14db4a643123e"
+    },
+    {
+      "tag": "m14.22-canonical-spacecraft-command-authority",
+      "object": "e943a128ef425ff7427b917f2bb04056e58282f5",
+      "commit": "899f11f727205340bdd550dd65a853e253de0ed3"
+    },
+    {
+      "tag": "m14.23-prepared-single-engine-actuation",
+      "object": "cd22cc96d88d2b6cf3ca48740ad41baecbbe7c9e",
+      "commit": "6c9830237bc29bbd3c9cf5f4644b6409c32eaa9b"
+    },
+    {
+      "tag": "m14.24-exact-finite-propellant-segmentation",
+      "object": "50aa4e984e6646a9334e4e87356a43ffdf138e73",
+      "commit": "89a432ce3b96a5dcb0751cfdc26bfd6776c883a1"
+    },
+    {
+      "tag": "m15.0-segmented-powered-free-flight",
+      "object": "72c387e0bbe512a569650978522bbb3a0022ffc3",
+      "commit": "4607d8c802006d5e1a01c595ab608cf53a4dab6b"
+    }
+  ],
+  "dependency": {
+    "version": "2.5.0-beta.29",
+    "sourceCommit": "f73164bb3c9ca733eb3329f1f6b1cea4e216ece7",
+    "manifestSha256": "C76F2DE75DAC81C8695109977E1F8A4DCCAFF29DA0BB96884C46C0B33362240E",
+    "physicsSha256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7",
+    "utilitiesSha256": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68"
+  },
+  "preservation": {
+    "preexistingFiles": 2034,
+    "mismatches": 0,
+    "tagRefs": 65,
+    "tagDifferences": 0,
+    "productionChanged": 0,
+    "permanentRunnerChanged": 0,
+    "staged": 0,
+    "trackedModified": 0
+  },
+  "candidateSources": [
+    {
+      "path": "tests/NovaCore.ContactNumerics.PreconditionedProbe/CommonNormal.cs",
+      "bytes": 6133,
+      "sha256": "9740EE702EAF0146AE5A4EAB7E3E247611ABC02CF380B0BF84B4702B13C26E03"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.PreconditionedProbe/NovaCore.ContactNumerics.PreconditionedProbe.csproj",
+      "bytes": 724,
+      "sha256": "7C83EEBDC78163048A98F7AF2AA70A0542A6C857C4CFCD8D2E4A6867E4FAF8B9"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.PreconditionedProbe/PieceKernel.cs",
+      "bytes": 7555,
+      "sha256": "EC913B958BB5D9000977380C8F54B024A0D37EAD73B83631D464418FD24ADDD7"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.PreconditionedProbe/Qualification.cs",
+      "bytes": 18754,
+      "sha256": "3302F5199FBFF1AB9C27BD8EB3A98093E0A3CBA84ECE7154A718D3E61C8C482D"
+    }
+  ],
+  "unchangedHistoricalSources": [
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Actuation/PoweredFlightNumerics.cs",
+      "sha256": "E46798B6123AC3478F03784EE40FACE5736ADED24AA37BCF886B751ADE7D41C1"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Resources/PropellantInteger.cs",
+      "sha256": "9CD3EEF877047A44102D925F612DEB263A3396DA8FB600A18FC144C935B5AF41"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.ConvergenceProbe/NovaCore.ContactNumerics.ConvergenceProbe.csproj",
+      "sha256": "5C73B302A4452C168343B4A660CC8DBDB3176286D25E5FF242FCD26211342F48"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.ConvergenceProbe/Study.cs",
+      "sha256": "8E9FE3436AC4DF0EC13E4924358C4B661D0563C12884AC605C09B4EAB91F20C5"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.CoupledProbe/NovaCore.ContactNumerics.CoupledProbe.csproj",
+      "sha256": "68E564D3988E81391AFFD33BD68ED9CC9E69408B57058CB8689707C293CF5A5E"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.CoupledProbe/Program.cs",
+      "sha256": "7684C628B520B55C713B8A5E0DAD8B14DF60DD93D0F109A4BAFA79CD56078AB0"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.Probe/NovaCore.ContactNumerics.Probe.csproj",
+      "sha256": "91E6357D63CCDE79B5F3D8D39FD9BD287929FB70C3151CBEA855AD685B1382FA"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.Probe/Program.cs",
+      "sha256": "774F1E8A0E6CB472493F923A8FCCC5AC6DB95303990CA88ECC30A1846104A7C2"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.WorldProbe/KernelProbe.cs",
+      "sha256": "621569AE2331D48BF4B0E4C65D1345E9A10C2ADB2FB1D1E64FFF5D0645FE7E24"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.WorldProbe/NovaCore.ContactNumerics.WorldProbe.csproj",
+      "sha256": "7971DF9ECA56260BF0C4A4B459B486FDD5825889195D33132C6E2D030BB52B55"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.WorldProbe/Program.cs",
+      "sha256": "04FA4662E192070FC0E7F48436087CEFDC0E8F0DCD609265F92B12F619FDE902"
+    }
+  ],
+  "evidenceManifestExcludesSelf": true,
+  "evidence": [
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/preconditioning/contract.md",
+      "bytes": 6960,
+      "sha256": "43BC09CAA8146F88DF996E17C42BF06225D880E2B3FC994BBFC76C0E2BBA3E8E"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/preconditioning/interior-plan.md",
+      "bytes": 1533,
+      "sha256": "3F36E3760B6D97C4CCD08118DF0357B27534F5C1F1A2E2EA575C3051CACF72D8"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/preconditioning/README.md",
+      "bytes": 10775,
+      "sha256": "330E56F2360EBF4D7C4BB5782C089728A025CACD2DA0ACB3750E924DC5D81AAF"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/preconditioning/reproduce.ps1",
+      "bytes": 2994,
+      "sha256": "6E5BF258602CF6DEF8D0E22EEC57700C3EC0F3971B7B034151DF1DB365E679E5"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/preconditioning/results.json",
+      "bytes": 42884,
+      "sha256": "86364DB83910004993F9403EAEC666931864FC0772BBA5BADA4B8223FAE507A7"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/preconditioning/verification.md",
+      "bytes": 3903,
+      "sha256": "9E38273344EB0CE95878AD7A26B2526E0E415DDA12E93A1C14C7015B880DAEC4"
+    }
+  ],
+  "executions": {
+    "syntheticDebug": {
+      "exit": 0,
+      "cases": 34
+    },
+    "syntheticRelease": {
+      "exit": 0,
+      "cases": 34
+    },
+    "localDebug": {
+      "exit": 0,
+      "cases": 6
+    },
+    "localRelease": {
+      "exit": 0,
+      "cases": 6
+    },
+    "interiorDebug": {
+      "exit": 1,
+      "firstFailure": "interior_powered_7812_5_ticks: eight-sweep physical accuracy gate",
+      "afterFailureRuns": 0
+    }
+  },
+  "buildIdentity": {
+    "qualifiedCommonNormalSHA256": "9740EE702EAF0146AE5A4EAB7E3E247611ABC02CF380B0BF84B4702B13C26E03",
+    "earlyQualificationSHA256": "8080743F1D600EE10E3D9A8E16F688C74CCF3A726D3E270D4CAC810D1D73845E",
+    "earlyVsFinal": "Only unexecuted Interior was refined before its first run; synthetic/local source unchanged",
+    "finalQualificationSHA256": "3302F5199FBFF1AB9C27BD8EB3A98093E0A3CBA84ECE7154A718D3E61C8C482D"
+  },
+  "sdk": "10.0.303",
+  "runtime": ".NET 10.0.12 X64",
+  "judgment": "REVISE",
+  "operatorQualified": false,
+  "banked": false,
+  "blenderUntouched": true,
+  "cleanup": {
+    "disposedFiles": 0,
+    "path": "E:/NovaCore/build/powered-contact-preconditioning",
+    "remainingFiles": 62,
+    "remainingBytes": 3609335,
+    "status": "One guarded attempt rejected before execution as blocked by policy; no retry",
+    "previousConvergenceScratchUntouched": true
+  }
+}

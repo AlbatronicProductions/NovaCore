@@ -1,0 +1,102 @@
+[
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/lifecycle-cost-convergence/authority-lifetime.md",
+    "bytes": 15142,
+    "sha256": "24C70F1DDD6B93C0CCFC460F70317E88B3B9008A43342596A1920FA4FBE8C81A"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/lifecycle-cost-convergence/correction-contract.md",
+    "bytes": 5979,
+    "sha256": "2961D955F27B2A2C8BA6ED5ED26AD2F5C61E1ECBB5BFABAF1AEB08F71B962350"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/lifecycle-cost-convergence/correction.patch",
+    "bytes": 20290,
+    "sha256": "F2F82B9E034CA11FA4CDD9CBCC21DD64F8BB3F61B3ABFFE91BE7F89C1BE38CF0"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/lifecycle-cost-convergence/ksa-lifecycle.md",
+    "bytes": 9244,
+    "sha256": "60ACFD49A9C0A57E172BD69D842DF607E8618530480056613B941FD0C361A255"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/lifecycle-cost-convergence/operation-validation.md",
+    "bytes": 18650,
+    "sha256": "1E48C6A940CE754D5AD9A7EF407A6E091B611F8DE998C5168D4DB2B455780E7D"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/lifecycle-cost-convergence/preimages.json",
+    "bytes": 2010,
+    "sha256": "449F7FCC48A3CF758B7A6A0B00A6AAB0E0570D6DD160385354A6630398F750A9"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/lifecycle-cost-convergence/REPORT.md",
+    "bytes": 6654,
+    "sha256": "538599BC4980A185389A6763B14EC9E635A284F12C29AFBEE46D50280C24AB72"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/lifecycle-cost-convergence/validation-payoff-closure.md",
+    "bytes": 8205,
+    "sha256": "9C959EC5C6AB8879952006C4F1D302A13A8BDEC995C2E1A8B1C20FB281172E5F"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/lifecycle-cost-convergence/validation.json",
+    "bytes": 17798,
+    "sha256": "914479EDE07C373C41B7AC2D7637201464E0D05E2ECA7B762A8EE0A6A013618F"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/lifecycle-cost-convergence/validation.md",
+    "bytes": 4368,
+    "sha256": "8C890674E4FBEBCCAD3B8BA7E5CCB497EF6641C8ED1EA7052F25B6FC56914F35"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-median-closure/attribution.json",
+    "bytes": 16115,
+    "sha256": "3C2A2C107774C07E38FB2DF222E26317394DC60BCB9E0DB094331EE495CE02AB"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-median-closure/cleanup.json",
+    "bytes": 696,
+    "sha256": "E90BC7AB9920754C3B2A98DDAAE754210766777949A28289E0C3C472AC319925"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-median-closure/cleanup.md",
+    "bytes": 2362,
+    "sha256": "4B4D28FEFA22CF5D537C50FD399C8662C232155155AEF4BC8FA17A9396497EEC"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-median-closure/identity.json",
+    "bytes": 8468,
+    "sha256": "2717952DE18BC73FDB47911F15147F70F5EBA2F1D0D9D315B92DB48B96A2B2BC"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-median-closure/plan.md",
+    "bytes": 3770,
+    "sha256": "7B63589F8D823F32D4FB15C573131A24885339BB23B5AD81BC31336ECE53B205"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-median-closure/probe.py",
+    "bytes": 2968,
+    "sha256": "FE4A503535EBA8400B525D618AB890C8F8DDAE83DAF92304009E2A5382E0CC67"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-median-closure/REPORT.md",
+    "bytes": 10976,
+    "sha256": "DF9A48B761FA4B2E6D0D2090615AE5180D5E928E853D6340E49445E38247EE19"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-median-closure/reproduce.md",
+    "bytes": 3922,
+    "sha256": "72B6411B77A76A467018CFF944E594610C12D7D982EB15A4B49C5D926522E917"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-median-closure/restoration.json",
+    "bytes": 2033,
+    "sha256": "CD3D7A832B119FB755AC5BA3ACF9BF2D03BF6796DC17F12C126D7821A20ABEF8"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-production-integration/final-median-closure/verification.md",
+    "bytes": 3557,
+    "sha256": "1BD704F6265477AB013D21F8B772747DC4D9FD11A4A5656CAE5BBB6ACB110826"
+  }
+]

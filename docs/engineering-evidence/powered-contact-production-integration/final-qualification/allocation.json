@@ -1,0 +1,20 @@
+{
+  "debug": [
+    "ORDINARY_ALLOCATION gate=powered-contact-dry-complete bytes=0 entry=PASS exit=PASS",
+    "ORDINARY_ALLOCATION gate=powered-contact-interior-exhaustion-to-dry bytes=0 entry=PASS exit=PASS",
+    "ORDINARY_ALLOCATION gate=powered-contact-no-work bytes=0 entry=PASS exit=PASS",
+    "ORDINARY_ALLOCATION gate=powered-contact-backlog bytes=0 entry=PASS exit=PASS",
+    "ORDINARY_ALLOCATION gate=powered-contact-input-projection bytes=0 entry=PASS exit=PASS",
+    "POWERED_CONTACT_ALLOCATION PASS five_exact_zero_windows positive_control=NONZERO",
+    "positive-control byte[128] 152 B entry/exit PASS"
+  ],
+  "release": [
+    "ORDINARY_ALLOCATION gate=powered-contact-dry-complete bytes=0 entry=PASS exit=PASS",
+    "ORDINARY_ALLOCATION gate=powered-contact-interior-exhaustion-to-dry bytes=0 entry=PASS exit=PASS",
+    "ORDINARY_ALLOCATION gate=powered-contact-no-work bytes=0 entry=PASS exit=PASS",
+    "ORDINARY_ALLOCATION gate=powered-contact-backlog bytes=0 entry=PASS exit=PASS",
+    "ORDINARY_ALLOCATION gate=powered-contact-input-projection bytes=0 entry=PASS exit=PASS",
+    "POWERED_CONTACT_ALLOCATION PASS five_exact_zero_windows positive_control=NONZERO",
+    "positive-control byte[128] 152 B entry/exit PASS"
+  ]
+}

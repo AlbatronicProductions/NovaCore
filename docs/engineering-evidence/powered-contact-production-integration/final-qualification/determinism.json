@@ -1,0 +1,32 @@
+{
+  "debug": [
+    "POWERED_CONTACT_REFUSAL_CLOSEOUT PASS stale_command_after_step wrong_interval_before_input no_extra_debit_or_step",
+    "POWERED_CONTACT_SEQUENCE CenteredEndpoint hz=30 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+    "POWERED_CONTACT_SEQUENCE CenteredEndpoint hz=60 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+    "POWERED_CONTACT_SEQUENCE CenteredEndpoint hz=150 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+    "POWERED_CONTACT_SEQUENCE CenteredEndpoint hz=240 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+    "POWERED_CONTACT_SEQUENCE CenteredEndpoint hz=-1 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=200 PASS",
+    "POWERED_CONTACT_MOVING CenteredEndpoint intervals=1200 original_frame_epoch=PASS nativeBits=PASS",
+    "POWERED_CONTACT_SEQUENCE OffCom hz=30 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+    "POWERED_CONTACT_SEQUENCE OffCom hz=60 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+    "POWERED_CONTACT_SEQUENCE OffCom hz=150 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+    "POWERED_CONTACT_SEQUENCE OffCom hz=240 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+    "POWERED_CONTACT_SEQUENCE OffCom hz=-1 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=200 PASS",
+    "POWERED_CONTACT_MOVING OffCom intervals=1200 original_frame_epoch=PASS nativeBits=PASS"
+  ],
+  "release": [
+    "POWERED_CONTACT_REFUSAL_CLOSEOUT PASS stale_command_after_step wrong_interval_before_input no_extra_debit_or_step",
+    "POWERED_CONTACT_SEQUENCE CenteredEndpoint hz=30 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+    "POWERED_CONTACT_SEQUENCE CenteredEndpoint hz=60 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+    "POWERED_CONTACT_SEQUENCE CenteredEndpoint hz=150 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+    "POWERED_CONTACT_SEQUENCE CenteredEndpoint hz=240 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+    "POWERED_CONTACT_SEQUENCE CenteredEndpoint hz=-1 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=200 PASS",
+    "POWERED_CONTACT_MOVING CenteredEndpoint intervals=1200 original_frame_epoch=PASS nativeBits=PASS",
+    "POWERED_CONTACT_SEQUENCE OffCom hz=30 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+    "POWERED_CONTACT_SEQUENCE OffCom hz=60 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+    "POWERED_CONTACT_SEQUENCE OffCom hz=150 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+    "POWERED_CONTACT_SEQUENCE OffCom hz=240 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+    "POWERED_CONTACT_SEQUENCE OffCom hz=-1 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=200 PASS",
+    "POWERED_CONTACT_MOVING OffCom intervals=1200 original_frame_epoch=PASS nativeBits=PASS"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "mechanism": "NO-D + 12",
+  "solverArithmeticVerbatim": true,
+  "files": [
+    {
+      "path": "CoastDriver.cs",
+      "sha256": "5F765131F7A2005D2589E6E7FD8C1CCDB61FE4455EC567415560837A1E55E46C"
+    },
+    {
+      "path": "FinalPolicy.cs",
+      "sha256": "E031024B291EDA9D11CAB69F0AA0EA1AB281F73B88BF50D539870BC1F25255F1"
+    },
+    {
+      "path": "GateQualification.cs",
+      "sha256": "5C0CB1941EC925B564BF1FFCC85D0CFE160FDD137CEC90A14F8298760A987B39"
+    },
+    {
+      "path": "generate.py",
+      "sha256": "8367DE64669DE010EA504D72CFB29A96D10D0887865FAC35CE0EA31BBD6ACAA3"
+    },
+    {
+      "path": "TwelveGate.csproj",
+      "sha256": "6F5DAEB332109363A5D01569216A9820C2F342704E4736EEBFCB541918885377"
+    },
+    {
+      "path": "TwelveOperator.cs",
+      "sha256": "B76710BF04DF37F0A790D441C5063AA97886234F292077F9AE27B9FE70A40D93"
+    },
+    {
+      "path": "TwelveTransport.cs",
+      "sha256": "3E67A648FA782950EAC6988BBBD96012AF3966D7BAAD2C03F3BEE19904839090"
+    }
+  ]
+}

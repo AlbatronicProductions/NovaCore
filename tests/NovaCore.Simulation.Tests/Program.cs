@@ -21,6 +21,17 @@ if (args.Contains("--powered-free-flight-authority", StringComparer.Ordinal)) { 
 if (args.Contains("--powered-free-flight-schedules", StringComparer.Ordinal)) { PoweredFreeFlightTests.Schedules(); return; }
 if (args.Contains("--powered-free-flight-allocation", StringComparer.Ordinal)) { PoweredFreeFlightTests.Allocation(); return; }
 if (args.Contains("--powered-free-flight-cost", StringComparer.Ordinal)) { PoweredFreeFlightTests.Cost(); return; }
+if (args.Contains("--powered-contact-cheap", StringComparer.Ordinal)) { PoweredContactTests.Cheap(); return; }
+if (args.Contains("--powered-contact-physics", StringComparer.Ordinal)) { PoweredContactTests.Physics(); return; }
+if (args.Contains("--powered-contact-work", StringComparer.Ordinal)) { PoweredContactTests.Work(); return; }
+if (args.Contains("--powered-contact-authority", StringComparer.Ordinal)) { PoweredContactTests.Authority(); return; }
+if (args.Contains("--powered-contact-sequences", StringComparer.Ordinal)) { PoweredContactTests.Sequences(); return; }
+if (args.Contains("--powered-contact-allocation", StringComparer.Ordinal)) { PoweredContactTests.Allocation(); return; }
+if (args.Contains("--powered-contact-cost", StringComparer.Ordinal)) { PoweredContactTests.Cost(); return; }
+if (args.Contains("--powered-contact-control-cost", StringComparer.Ordinal)) { PoweredContactTests.UnpoweredStillFuelledControl(); return; }
+if (args.Contains("--powered-contact-lifecycle", StringComparer.Ordinal)) { PoweredContactTests.Lifecycle(); return; }
+if (args.Contains("--powered-contact-characterization", StringComparer.Ordinal)) { PoweredContactTests.Characterization(); return; }
+if (args.Contains("--powered-contact-storage", StringComparer.Ordinal)) { PoweredContactTests.StorageCharacterization(); return; }
 
 if (args.Contains("--finite-propellant-cheap", StringComparer.Ordinal)) { FinitePropellantTests.Cheap(); return; }
 if (args.Contains("--finite-propellant-allocation", StringComparer.Ordinal)) { FinitePropellantTests.Allocation(); return; }
@@ -167,6 +178,13 @@ var tests = new (string Name, Action Test)[]
     ("Finite-propellant segmentation", FinitePropellantTests.Cheap),
     ("Finite-propellant allocation", FinitePropellantTests.Allocation),
     ("Finite-propellant proposal article non-actuation", EngineeringContactArticleTests.ResourceProposalNonActuation),
+    ("Powered contact exact mapper and joint successor", PoweredContactTests.Cheap),
+    ("Powered contact physical bounds", PoweredContactTests.Physics),
+    ("Powered contact discrete work", PoweredContactTests.Work),
+    ("Powered contact authority and terminal failures", PoweredContactTests.Authority),
+    ("Powered contact ready lifetime", PoweredContactTests.Lifecycle),
+    ("Powered contact host partitions and moving frame", PoweredContactTests.Sequences),
+    ("Powered contact zero allocation", PoweredContactTests.Allocation),
 };
 foreach (var (name, test) in tests) { test(); Console.WriteLine($"PASS {name}"); }
 

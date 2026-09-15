@@ -1,0 +1,13 @@
+{
+  "solverArithmeticVerbatim": true,
+  "files": [
+    {
+      "path": "StudyOperator.cs",
+      "sha256": "C6E46EF213155FFDB1C9536FFAACEAD30D7646046CC042752D14F8B28395B289"
+    },
+    {
+      "path": "StudyTransport.cs",
+      "sha256": "BF4A014FDBC181DF2CB40CB836B087FB514ED1DBE601D49536ABCD9800250CE0"
+    }
+  ]
+}

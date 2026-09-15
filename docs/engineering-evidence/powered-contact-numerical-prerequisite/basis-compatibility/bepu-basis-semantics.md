@@ -1,0 +1,23 @@
+> Historical fallback evidence. Original judgments and measurements remain unchanged. Old campaign commands/counts describe their original runs; current reproduction and retirement records are in [../../powered-contact-ordinary-step-event-closure/REPRODUCTION-INDEX.md](../../powered-contact-ordinary-step-event-closure/REPRODUCTION-INDEX.md).
+
+# Exact pinned cache semantics
+
+Upstream commit: `f73164bb3c9ca733eb3329f1f6b1cea4e216ece7`, BEPU2.5.0-beta.29. Repository binary/package/manifest pins remain unchanged. This is the single dynamic body / static slab, four-contact convex constraint, not compound-selector or generic two-body qualification.
+
+| Responsibility | Exact source | Finding |
+|---|---|---|
+| Current normal and contact offsets/depths | [ContactConvexTypes](https://github.com/bepu/bepuphysics2/blob/f73164bb3c9ca733eb3329f1f6b1cea4e216ece7/BepuPhysics/Constraints/Contact/ContactConvexTypes.cs), Contact4OneBody | One shared normal, four lever arms; cached fields are four normals, tangent pair, twist. |
+| Tangent construction | [Helpers.cs lines19–31 and45–55](https://github.com/bepu/bepuphysics2/blob/f73164bb3c9ca733eb3329f1f6b1cea4e216ece7/BepuPhysics/Helpers.cs#L19-L55) | Revised Frisvad completion, deterministic from normal only; sign branch at Z=0. In ideal arithmetic t1 cross n=t2, hence determinant[n,t1,t2] is negative. FP32 completion is not exactly orthonormal. |
+| Friction center and warm application | [ContactConvexTypes](https://github.com/bepu/bepuphysics2/blob/f73164bb3c9ca733eb3329f1f6b1cea4e216ece7/BepuPhysics/Constraints/Contact/ContactConvexTypes.cs), FrictionHelpers/Contact4OneBodyFunctions | Center averages nonnegative-depth offsets; if none, averages all4. Warm start applies shared tangent, four normals, then twist using refreshed geometry. |
+| Normal application/update | [PenetrationLimitOneBody](https://github.com/bepu/bepuphysics2/blob/f73164bb3c9ca733eb3329f1f6b1cea4e216ece7/BepuPhysics/Constraints/Contact/PenetrationLimitOneBody.cs) | Normal scalar has N·s units; linear impulse n*lambda and moment (r cross n)*lambda. Solve accumulates a unilateral normal impulse. |
+| Tangent application/update | [TangentFrictionOneBody](https://github.com/bepu/bepuphysics2/blob/f73164bb3c9ca733eb3329f1f6b1cea4e216ece7/BepuPhysics/Constraints/Contact/TangentFrictionOneBody.cs) | Two N·s components, shared friction-center moment, coupled2x2 solve. Magnitude clamp includes the pinned1e-16f denominator guard. |
+| Twist application/update | [TwistFrictionOneBody](https://github.com/bepu/bepuphysics2/blob/f73164bb3c9ca733eb3329f1f6b1cea4e216ece7/BepuPhysics/Constraints/Contact/TwistFrictionOneBody.cs) | Scalar N·m·s impulse about the current normal; no linear impulse. Solve clamps accumulated scalar. |
+| Cache refresh | [ContactConstraintAccessor](https://github.com/bepu/bepuphysics2/blob/f73164bb3c9ca733eb3329f1f6b1cea4e216ece7/BepuPhysics/CollisionDetection/ContactConstraintAccessor.cs), lines26–75; [NarrowPhaseConstraintUpdate](https://github.com/bepu/bepuphysics2/blob/f73164bb3c9ca733eb3329f1f6b1cea4e216ece7/BepuPhysics/CollisionDetection/NarrowPhaseConstraintUpdate.cs), UpdateConstraint | Same-type update remaps normal values by feature, distributes unmatched normal sum, and leaves tangent/twist values untouched. It replaces geometry without an old/new generalized-impulse basis transform. This claim excludes type replacement. |
+
+For4 contacts, actual bounds are tangent magnitude <=(mu/4)*sum(normal), and abs(twist)<=(mu/4)*sum(normal_i*radius_i). Here mu=.5, coefficient=.125. Warm start does not first enforce these current caps; solve updates do. This investigation conservatively refuses an infeasible transported candidate instead of silently clamping it.
+
+Diagnostic extraction: unchanged WorldProbe reader takes current prestep rows and all7 accumulated components; feature IDs come from the callback. The accepted private double/scaled cache is the prerequisite's authoritative history; native floats are verified projections. No claim that native and private values have identical precision.
+
+The actual coast tangent axes are unchanged: t1=(0,0,-1), t2=(1,0,0). Its two normals have nonzero dot with t1, so using orthonormal dot projections would be incorrect at the declared1e-12 bar. The separate seam witness has materially changed tangent axes; it is explicitly refused by the unchanged conditioning screen, despite small reconstructed algebraic residual.
+
+New source hashes: Helpers.cs `BF736A8D6E4628880DA1B0FC291B72E98E7269F95EB3C468CC84A7365DE75E85`; ContactConstraintAccessor.cs `D3815EAD80E3854F3AF5B4E559FB24040237BCF1E96C05D8D48396DB89D11E20` (HTTP response bytes, independent source reader).

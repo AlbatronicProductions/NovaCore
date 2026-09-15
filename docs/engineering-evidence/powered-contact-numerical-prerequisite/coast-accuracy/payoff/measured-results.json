@@ -1,0 +1,149 @@
+{
+  "kind": "Measured payoff closure index; per-case files are authoritative",
+  "coast": "01-coast-D.json",
+  "measured": [
+    {
+      "path": "results/01-coast-D.json",
+      "name": "original-coast",
+      "accuracy": {
+        "Normal": 5.06884889617254e-9,
+        "Linear": 6.809610599826729e-9,
+        "Angular": 1.3569883411937979e-8,
+        "Residual": 2.1580527354111273e-8,
+        "ResidualComponents": [
+          -1.4432545885910487e-8,
+          2.1580527354111273e-8,
+          -6.094029303469989e-9,
+          2.1013772032302474e-9,
+          -5.293955920339377e-23,
+          -1.2818947761449854e-24,
+          0
+        ],
+        "Pass": true
+      },
+      "status": "PASS"
+    },
+    {
+      "path": "results/05-identical-D.json",
+      "name": "identical",
+      "accuracy": {
+        "Normal": 0.000039080373235522714,
+        "Linear": 0.000007089481269170275,
+        "Angular": 0.000010275614599611217,
+        "Residual": 0.000026499440572674837,
+        "ResidualComponents": [
+          0.000014840277089686604,
+          0.000026499440572674837,
+          -0.00002234087297099674,
+          0.00000532846325049241,
+          0,
+          0,
+          0
+        ],
+        "Pass": true
+      },
+      "status": "PASS"
+    },
+    {
+      "path": "results/06-tiny-normal-D.json",
+      "name": "tiny-normal",
+      "accuracy": {
+        "Normal": 0.00003908045053979681,
+        "Linear": 0.00000708949467611282,
+        "Angular": 0.00001027563322384576,
+        "Residual": 0.000026499479638061424,
+        "ResidualComponents": [
+          0.000014840320273556526,
+          0.000026499479638061424,
+          -0.00002234091566272512,
+          0.00000532847179690276,
+          0,
+          -1.256106570115257e-21,
+          0
+        ],
+        "Pass": true
+      },
+      "status": "PASS"
+    },
+    {
+      "path": "results/07-tangent-only-D.json",
+      "name": "tangent-only",
+      "accuracy": {
+        "Normal": 0.00003908037323541169,
+        "Linear": 0.0000070894812691593466,
+        "Angular": 0.000010275614599637702,
+        "Residual": 0.000026499440572661054,
+        "ResidualComponents": [
+          0.000014840277089651815,
+          0.000026499440572661054,
+          -0.000022340872971018345,
+          0.000005328463250458507,
+          0,
+          0,
+          0
+        ],
+        "Pass": true
+      },
+      "status": "PASS"
+    },
+    {
+      "path": "results/08-lever-only-D.json",
+      "name": "lever-only",
+      "accuracy": {
+        "Normal": 0.000039109239025281184,
+        "Linear": 0.0000070957622060732525,
+        "Angular": 0.000010284029868298154,
+        "Residual": 0.00002652315479979341,
+        "ResidualComponents": [
+          0.000014846198607759252,
+          0.00002652315479979341,
+          -0.00002235834948871371,
+          0.000005334272811322681,
+          0,
+          0,
+          0
+        ],
+        "Pass": true
+      },
+      "status": "PASS"
+    }
+  ],
+  "expectedRefusals": [
+    {
+      "path": "results/09-moderate-normal-refusal.json",
+      "name": "moderate-normal",
+      "status": "EXPECTED REFUSAL",
+      "admission": {
+        "Status": 4,
+        "Delta": -0.07591297908448875,
+        "Numerator": 0.18999119990382665,
+        "Denominator": 2.5027498880313,
+        "Tangent": 0.09002167204944704,
+        "TangentCap": 0.08654382766644907,
+        "Twist": 0.019936033571649185,
+        "TwistCap": 0.09675894084760354
+      },
+      "solverCalls": 0,
+      "referenceCalls": 0
+    },
+    {
+      "path": "results/10-normal-and-tangent-refusal.json",
+      "name": "normal-and-tangent",
+      "status": "EXPECTED REFUSAL",
+      "admission": {
+        "Status": 4,
+        "Delta": -0.07591297908448871,
+        "Numerator": 0.18999119990382654,
+        "Denominator": 2.5027498880313,
+        "Tangent": 0.09002167204944701,
+        "TangentCap": 0.08654382766644908,
+        "Twist": 0.019936033571649185,
+        "TwistCap": 0.09675894084760356
+      },
+      "solverCalls": 0,
+      "referenceCalls": 0
+    }
+  ],
+  "correctnessProcessId": 21760,
+  "costProcessId": 8728
+}

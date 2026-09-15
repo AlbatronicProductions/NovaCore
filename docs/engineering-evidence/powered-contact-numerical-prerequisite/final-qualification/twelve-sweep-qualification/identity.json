@@ -1,0 +1,501 @@
+{
+  "judgment": "REVISE",
+  "candidate": "D + 12",
+  "status": "PRIVATE CONSTRAINED NUMERICAL PREREQUISITE UNQUALIFIED / UNBANKED",
+  "firstSelectedFailure": "Phase6 frozen represented powered-minus-baseline coast cache/increment response:13/13 components fail; native endpoint6/6pass; both absolute branchespass.",
+  "head": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "main": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "originMain": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "remoteMain": [
+    "49057fecceb0f725d5f551ec40e2780971b0d81d\trefs/heads/main"
+  ],
+  "branch": "codex/powered-contact-numerical-prerequisite",
+  "sdk": "10.0.303",
+  "runtime": ".NET 10.0.12",
+  "pinnedBepu": {
+    "version": "2.5.0-beta.29",
+    "sourceRevision": "f73164bb3c9ca733eb3329f1f6b1cea4e216ece7"
+  },
+  "preExistingNonignoredFiles": 2274,
+  "priorFilesChanged": [],
+  "productionFiles": 274,
+  "productionCsFiles": 267,
+  "productionChanges": [],
+  "permanentTestChanges": [],
+  "originalPrerequisiteChanges": [],
+  "priorEvidenceChanges": [],
+  "newStandaloneCandidate": [
+    "SelectedOperator.cs.txt",
+    "TwelveTransport.cs",
+    "FinalPolicy.cs",
+    "SelectedGate.csproj"
+  ],
+  "all65TagsUnchanged": true,
+  "tags": [
+    "3ceaff9c9f1a3ac4fa5cb8fcb62d02a6d3d0dd94 refs/tags/m11b-7h1-gpu-terrain-baseline",
+    "ed1a3fbe764ea6141ebdfa988a6fdd4d167e0372 refs/tags/m12b-procedural-surface-baseline",
+    "2ca86cce99b70a56ac0a58e6f891392a09cd723b refs/tags/m12c-phase1b-stable",
+    "b65d73b15460ec356ae6e67dcb14cd8f4f8945ca refs/tags/m12d-p2s2-foundation",
+    "827cb9b7f329337bb72bce28abad5d585d837524 refs/tags/m12d-p2s3-gpu-runtime",
+    "a9f3e3172617708c3b5c0eef59d5290f91a2abec refs/tags/m12d-p2s4-canonical-terrain",
+    "6409949114f3797471b131d8005b7feac7d3fd54 refs/tags/m12d-p2s5b-production-topology",
+    "a90b024777e3b8fe8259dc7b0fa15b4a9e0f349b refs/tags/m12d-p2s5c1-interactive-billboard",
+    "37e74ad58bf53a03c35c3abeff256803dbcb4443 refs/tags/m12d-p2s5c2-moving-billboard",
+    "b04c5f3415ff4f4c5e30ca8d87515f8b610eaef4 refs/tags/m12d-p2s5c3-production-billboard-stabilization",
+    "724b779917f1cac665f6537b18edbfd70a6bfe8a refs/tags/m12d-p2s5f-new-earth-renderer",
+    "b9eb5e0628cf84f7d83c896c2fd962b426780147 refs/tags/m12d-p2s5g-surface-workload-efficiency",
+    "5d7efb2f035ccf22700b03380b4193fc82220f8a refs/tags/m12d-p2s5h-earth-route-convergence",
+    "b534d149b74b0ca854e4fb09267fc84321cc52ff refs/tags/m13.1-ncsm1-tes-hotpath",
+    "add1c94658c1de869124c75606ce0a084c77ba25 refs/tags/m13.2-ordinary-terrain-shading",
+    "bb08cba20947f863391649e68e2e4fe7035520db refs/tags/m13.3-prepared-physical-terrain",
+    "668efe2b06d2fcc907a0f46674c493b7670a2751 refs/tags/m13.4-zero-contribution-terrain-material-noise",
+    "75712e4bc990e11c3072a37299c55187cc30e0a1 refs/tags/m13.5-local-gpu-terrain-working-data",
+    "81dadf42fa9e91d8f946ebc30c3cbe3b621761fe refs/tags/m13.6-cpu-cached-terrain-residency-keys",
+    "3ccb998031e15cb1898394589c27244d55e06e24 refs/tags/m14.1-canonical-surface-point-queries",
+    "b07c511aab7109e3d240d9c7c31a444f58e069a5 refs/tags/m14.10-certified-root-contact-kinematics",
+    "8ac99fbfad4f8dd6365d696053fc3edfeea2249d refs/tags/m14.11-certified-response-proposal",
+    "98831b08e07d1bcc251f7aa900f463b98570ef04 refs/tags/m14.12-certified-preimpact-velocity",
+    "7c94f38cab9cf605c69b3b1874fee0c0091fbbb2 refs/tags/m14.13-certified-postimpact-velocity",
+    "412084a0acda2fa96c4be166e1f9f29020ffc577 refs/tags/m14.14-private-root-postimpact-state",
+    "6da3eba1410b05ea46a133bb2cf1c81425f8bf72 refs/tags/m14.15-private-canonical-propagation",
+    "a864be12e42cb98cbd38c17905833f781a579253 refs/tags/m14.16-postimpact-terrain-clearance",
+    "3f48fe441ac54458e9b413a909fae134abb112de refs/tags/m14.17-certified-continuation-publication",
+    "2faa9e568ef5f1e723f22d9635447179e4585053 refs/tags/m14.18-staged-finite-body-bepu-contact",
+    "684ed841de1432e89772282d8951f7cd8f70a625 refs/tags/m14.19-persistent-bepu-contact-publication",
+    "ae2f203b97224ff88b38b7c68902ac2d31108a91 refs/tags/m14.2-spacecraft-translational-authority",
+    "ac96f952b9c44220cd93042c0d7c6e8e07d227d5 refs/tags/m14.20-host-paced-canonical-contact-servicing",
+    "d8c13e46a9272e5ef6eb89acbe23c29709e3c55b refs/tags/m14.21-authored-compound-spacecraft-contact",
+    "e943a128ef425ff7427b917f2bb04056e58282f5 refs/tags/m14.22-canonical-spacecraft-command-authority",
+    "cd22cc96d88d2b6cf3ca48740ad41baecbbe7c9e refs/tags/m14.23-prepared-single-engine-actuation",
+    "50aa4e984e6646a9334e4e87356a43ffdf138e73 refs/tags/m14.24-exact-finite-propellant-segmentation",
+    "b9ad79c38b322c8e1e095039d5b69c035a1bcca8 refs/tags/m14.3-spacecraft-terrain-contact-observations",
+    "b198d3b381ba4a82577ba89bd5e31e6050d3a896 refs/tags/m14.4-atomic-contact-response",
+    "c2964fe4531b8e383d2d89beec2e8c055f3541a5 refs/tags/m14.5-isolated-analytical-contact-response",
+    "07adc9983252f2cabf0af9da0a1281457af606bf refs/tags/m14.6-physical-event-epochs",
+    "315da29c4eff5562f9040f7a0aedbb4e961fa877 refs/tags/m14.7-exact-event-spacecraft-motion",
+    "27a32989cef714a204d0d7ecfbd4618e53de0086 refs/tags/m14.8-exact-event-earth-relative-observation",
+    "944cb5c1f2011b5944745b210e561d0b9e8b4aaf refs/tags/m14.9-florida-monotone-contact-certification",
+    "72c387e0bbe512a569650978522bbb3a0022ffc3 refs/tags/m15.0-segmented-powered-free-flight",
+    "88a108cafaab3b030c0e48568d98330dd07607b7 refs/tags/milestone-10A",
+    "5ba3f5bdb97cb7efa831b8be3a681894a0338228 refs/tags/milestone-10A-2A-2",
+    "14693e902933430df890b5a0e39170a5b247eb97 refs/tags/milestone-10A-3",
+    "52762291bf25446cd2c37594d74302eebd1dd4f7 refs/tags/milestone-10A-4",
+    "c485b158ee8e35e105aaf452afd8b8ff3890a870 refs/tags/milestone-10A-5",
+    "a9d15d10d5e077d74807bed196c3ea5e9bb03e00 refs/tags/milestone-10A-6",
+    "dfa242e0c67574b8659de1ecd1c742e1daabd89b refs/tags/milestone-10A-7",
+    "f95eed79f60201f2ffce78533fe205bee2ebbabc refs/tags/milestone-10B-1",
+    "15cd78446c87be9423aaa2067068bcb6360f57b1 refs/tags/milestone-10B-2A",
+    "209954827f6c824bc7e6d796a781d72aa6e983e8 refs/tags/milestone-10B-2B",
+    "f1ecd38f2211ee98566b35dec6d92b37a3d47b7a refs/tags/milestone-11A",
+    "16dbfd0f3e7b438101781d3d6d0642272efb7b2a refs/tags/milestone-11B-7F",
+    "4a022dbeac91708b69d5f77fb6034da06f40bbf1 refs/tags/milestone-9A-4E-3",
+    "586dc57df705a4a0f1a5812c114aa981c3e500d1 refs/tags/milestone-9A-4E-5A",
+    "3f26635d2da0e4dd5773589a4299eb82fc0c8ca8 refs/tags/milestone-9A-celestial-v3",
+    "4997e30bd40ebae011a20dd6b58c88a9caed7a6c refs/tags/v0.2.0",
+    "764637f7662420e7c3494aee8c9e748b04db6626 refs/tags/v0.2.1",
+    "18c8a6d2e78e1b8a2bfaddd88dba955bf00b1631 refs/tags/v0.3.0",
+    "435e4cab66df0ce6885c84282ca014295e2c3cdd refs/tags/v0.4.0",
+    "141f7f623220ec3f0d5a79b30cebdcb48605a76a refs/tags/v0.4.1-docs",
+    "3759e1df199ae28acfc51376fa89295730798cad refs/tags/v0.5.0"
+  ],
+  "protected": [
+    {
+      "tag": "m15.0-segmented-powered-free-flight",
+      "commit": "4607d8c802006d5e1a01c595ab608cf53a4dab6b"
+    },
+    {
+      "tag": "m14.21-authored-compound-spacecraft-contact",
+      "commit": "b6e8fa568585706ce38c0609aeb14db4a643123e"
+    },
+    {
+      "tag": "m14.22-canonical-spacecraft-command-authority",
+      "commit": "899f11f727205340bdd550dd65a853e253de0ed3"
+    },
+    {
+      "tag": "m14.23-prepared-single-engine-actuation",
+      "commit": "6c9830237bc29bbd3c9cf5f4644b6409c32eaa9b"
+    },
+    {
+      "tag": "m14.24-exact-finite-propellant-segmentation",
+      "commit": "89a432ce3b96a5dcb0751cfdc26bfd6776c883a1"
+    }
+  ],
+  "blender": "Untouched",
+  "stagedPaths": [],
+  "trackedDiffPaths": [],
+  "gitStatus": [
+    "?? docs/engineering-evidence/powered-contact-architecture/",
+    "?? docs/engineering-evidence/powered-contact-numerical-prerequisite/",
+    "?? tests/NovaCore.ContactNumerics.ConvergenceProbe/",
+    "?? tests/NovaCore.ContactNumerics.CoupledProbe/",
+    "?? tests/NovaCore.ContactNumerics.DurationProbe/",
+    "?? tests/NovaCore.ContactNumerics.IntegratedProbe/",
+    "?? tests/NovaCore.ContactNumerics.OwnedCacheProbe/",
+    "?? tests/NovaCore.ContactNumerics.PreconditionedProbe/",
+    "?? tests/NovaCore.ContactNumerics.Probe/",
+    "?? tests/NovaCore.ContactNumerics.WorldProbe/"
+  ],
+  "diffCheck": "PASS",
+  "cachedDiffCheck": "PASS",
+  "executions": {
+    "debugBuilds": 5,
+    "debugBuildWarnings": 0,
+    "debugBuildErrors": 0,
+    "numericalProcesses": 4,
+    "processes": [
+      {
+        "mode": "no-D regressions",
+        "result": "STOP at protected moderate-normal refusal changed toReady",
+        "solverAdmissions": 4,
+        "sweepsPerAdmission": 12
+      },
+      {
+        "mode": "selected D regressions",
+        "result": "PASS eight cases",
+        "solverAdmissions": 6,
+        "sweepsPerAdmission": 12
+      },
+      {
+        "mode": "selected actual retained sequence",
+        "result": "PASS two installed pieces in one retained world",
+        "solverAdmissions": 2,
+        "sweepsPerAdmission": 12,
+        "nativePreparationTimesteps": 120
+      },
+      {
+        "mode": "selected tiny coasts",
+        "result": "Both absolutePASS; pairresponseFAIL",
+        "solverAdmissions": 2,
+        "sweepsPerAdmission": 12,
+        "coastInstalls": 0
+      }
+    ],
+    "mechanicalAttempt": "One absent-binary launch after changing AssemblyName in a shared output directory. Zero candidate execution. Source unchanged rebuild and selected-freeze-v2 before actual run.",
+    "releaseBuilds": 0,
+    "correctnessRetries": 0,
+    "additionalNumericalCallsAfterMaterialStop": 0,
+    "allocation": "NOT RUN",
+    "positiveControl": "NOT RUN",
+    "retainedStorage": "NOT QUALIFIED",
+    "formalPerformance": "NOT RUN",
+    "unreached": [
+      "Boundary-to-boundary full campaign",
+      "Selector",
+      "Off-COM",
+      "Long support",
+      "M15zero-constraint",
+      "Determinism repeat",
+      "M14.21static numerical regression"
+    ]
+  },
+  "reportingCorrections": [
+    "Raw no-d-regressions/05-moderate-normal.json solverCalls0 is inherited hardcoding, incorrectforReady. It executed one preparation/twelve sweeps. Raw evidence preserved; candidate-selection.json corrects it.",
+    "Internal CacheDuration JSONobjects do not expose rawduration data. Exact construction/equality/limb assertions and earlier rawlimb captures remain authoritative."
+  ],
+  "cleanup": {
+    "disposition": "MANUAL CLEANUP PENDING; no automated deletion attempted this ticket",
+    "paths": [
+      {
+        "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\twelve-sweep-qualification\\bin",
+        "files": 14,
+        "bytes": 1970811
+      },
+      {
+        "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\twelve-sweep-qualification\\obj",
+        "files": 39,
+        "bytes": 997887
+      }
+    ],
+    "totalFiles": 53,
+    "totalBytes": 2968698,
+    "removedFiles": 0,
+    "removedBytes": 0,
+    "manualCommand": "Remove-Item -LiteralPath `\n  'E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\twelve-sweep-qualification\\bin', `\n  'E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite\\final-qualification\\twelve-sweep-qualification\\obj' `\n  -Recurse -Force -ErrorAction Stop",
+    "nonDestructiveVerification": "Exact self-contained PowerShell command retained in cleanup.md",
+    "olderBlockedPaths": "Untouched; no retry",
+    "generatedSource": "KEEP: exact candidate/control reproduction source; not disposable"
+  },
+  "preflightInputCount": 105,
+  "evidenceFilesExcludingSelf": [
+    {
+      "path": "CoastDriver.cs",
+      "sha256": "5F765131F7A2005D2589E6E7FD8C1CCDB61FE4455EC567415560837A1E55E46C",
+      "bytes": 10519
+    },
+    {
+      "path": "FinalPolicy.cs",
+      "sha256": "E031024B291EDA9D11CAB69F0AA0EA1AB281F73B88BF50D539870BC1F25255F1",
+      "bytes": 2221
+    },
+    {
+      "path": "GateQualification.cs",
+      "sha256": "5C0CB1941EC925B564BF1FFCC85D0CFE160FDD137CEC90A14F8298760A987B39",
+      "bytes": 13360
+    },
+    {
+      "path": "README.md",
+      "sha256": "C16ADED00E30B3FF22D2BD9B0D29C063A5BBE014E43C5833B2497D7AB996B1A8",
+      "bytes": 11922
+    },
+    {
+      "path": "SelectedGate.csproj",
+      "sha256": "EE9BD859D21D0AE5B66770C6F5E862ED1F4C89EE5A9B281E1B172C1AFEF9DF5C",
+      "bytes": 1953
+    },
+    {
+      "path": "SelectedOperator.cs.txt",
+      "sha256": "6983854494A227EAE4B5F28BE83F0298DE66182607CA8C4CA89DEDDE31B36522",
+      "bytes": 13082
+    },
+    {
+      "path": "SelectedQualification.cs.txt",
+      "sha256": "069EE894E42CC09C74E7E58A8896B578CCA63D5962BEBD9CE86779621049F5A9",
+      "bytes": 13473
+    },
+    {
+      "path": "TwelveGate.csproj",
+      "sha256": "6F5DAEB332109363A5D01569216A9820C2F342704E4736EEBFCB541918885377",
+      "bytes": 1784
+    },
+    {
+      "path": "TwelveOperator.cs",
+      "sha256": "B76710BF04DF37F0A790D441C5063AA97886234F292077F9AE27B9FE70A40D93",
+      "bytes": 11637
+    },
+    {
+      "path": "TwelveTransport.cs",
+      "sha256": "3E67A648FA782950EAC6988BBBD96012AF3966D7BAAD2C03F3BEE19904839090",
+      "bytes": 4553
+    },
+    {
+      "path": "candidate-selection.json",
+      "sha256": "94FB3DEEEF7FA492669D0A982242BA569B0BC95944C525CE576D7DE09AA1BF88",
+      "bytes": 1156
+    },
+    {
+      "path": "cleanup.md",
+      "sha256": "0A00110D475E17F459238E8B268E2C44AD64A717583254CFFF2C910C92D72313",
+      "bytes": 2459
+    },
+    {
+      "path": "coast-freeze.json",
+      "sha256": "1D65A821B501A7AE3173BA4F6CF3D50CA72BFED98D7E221E6335A798FA962490",
+      "bytes": 243
+    },
+    {
+      "path": "d-regressions/01-original32N.json",
+      "sha256": "D7EB6D9E095E5F2664B7E73DBFF2F7402583771716D48DD076E3FEFAACC9AE90",
+      "bytes": 9448
+    },
+    {
+      "path": "d-regressions/02-actual128.json",
+      "sha256": "25CDEB51DBD490DDAE118E88568C6F46B69D8F192FC8B5D1352762B23B9CD80F",
+      "bytes": 9452
+    },
+    {
+      "path": "d-regressions/03-basis.json",
+      "sha256": "63F9A1B39651DDE9C5D93235A22F40FAB5C36E3AEFAB73DEC939BFF59B6E1715",
+      "bytes": 1410
+    },
+    {
+      "path": "d-regressions/04-exact-coast.json",
+      "sha256": "5443DA7749177E17A2EAF86618D646F456573C49C7F2B9900D4DC19E8AB716F1",
+      "bytes": 9440
+    },
+    {
+      "path": "d-regressions/05-moderate-normal.json",
+      "sha256": "35C7D815B82F3FB6B3EF9DC71E83FD4E091C9A095149D5A06D478B5D87BAAE9F",
+      "bytes": 3289
+    },
+    {
+      "path": "d-regressions/05-normal-and-tangent.json",
+      "sha256": "1FA301BBF7C441E8CB9DA374335B50E4A8F3ED399A8DD35FB8B27832EFC4A444",
+      "bytes": 3353
+    },
+    {
+      "path": "d-regressions/06-lifecycle.json",
+      "sha256": "9F936095183828602458976458BB160E13DBD8AEDF6E12902983D6B99743FF0C",
+      "bytes": 163
+    },
+    {
+      "path": "d-regressions/07-composition.json",
+      "sha256": "C4B78910A29ED3E50630F1A848316B0E43CEAE67E7D1CE909A0688E5FDB388E4",
+      "bytes": 9448
+    },
+    {
+      "path": "d-regressions/regression-results.json",
+      "sha256": "4299AAC08F061E20FFFD28087B09DEB0E1C8BF784AC8AFD8ECC8F64A1E91551D",
+      "bytes": 138
+    },
+    {
+      "path": "d-regressions/regressions-attempt.json",
+      "sha256": "B16BAADE7C832C657C28CF5AD12C6CBFB2DDD2E60661A3EA10CED44E8B905CB3",
+      "bytes": 97
+    },
+    {
+      "path": "d-sequence/installed-coast.json",
+      "sha256": "C1BC38A4667E5350206088BC3A8340CBE11D1A43C6DB0B607BFBE7EC3589DDF3",
+      "bytes": 2932
+    },
+    {
+      "path": "d-sequence/installed-powered.json",
+      "sha256": "2E2B03F93D59C946DC090E0AAB1C006973E8B72DED93DB4B52CE54627EDE02D8",
+      "bytes": 2927
+    },
+    {
+      "path": "d-sequence/powered-coast.json",
+      "sha256": "755175F64BD09667E710F8D15C82B7D4271258F95CFA5D109D94B4F29EE60C98",
+      "bytes": 327
+    },
+    {
+      "path": "d-sequence/sequence-attempt.json",
+      "sha256": "3CCFCF20CD60D126B713B09B9F18F6196722C26E81F75106CEF65C79E402D4ED",
+      "bytes": 93
+    },
+    {
+      "path": "d-sequence/sequence-coast.json",
+      "sha256": "EE4D563A1EEF325D6DCB97058618FBE4288075FD1F27F66C8CCC869D8B46E915",
+      "bytes": 11008
+    },
+    {
+      "path": "d-sequence/sequence-powered.json",
+      "sha256": "6AC93A1EA4C160752611D2699ECF09AA8806F0766DCA51ACBDAA2E05BDA13A36",
+      "bytes": 11027
+    },
+    {
+      "path": "d-sequence/sequence-seed.json",
+      "sha256": "02AA6D4E4C34C342F84F511266B7FF7C51FBDB2356511205BCE935768012EDC7",
+      "bytes": 2955
+    },
+    {
+      "path": "d-tiny-coasts/attempt.json",
+      "sha256": "86BFC6548E934A75D0B8A833683C63A5F0760B04727B097030ED1EA7AF4A75E3",
+      "bytes": 161
+    },
+    {
+      "path": "d-tiny-coasts/baseline-coast.json",
+      "sha256": "E8D9C1773F6330780C59231A12129582F54B39BE8144BD8D503EF23EBCE0C996",
+      "bytes": 7871
+    },
+    {
+      "path": "d-tiny-coasts/baseline-historical.json",
+      "sha256": "288AE763570EB1BE284C897021E294654CDCC1EFBB070314C427C066BD864F9E",
+      "bytes": 5067
+    },
+    {
+      "path": "d-tiny-coasts/baseline-preparation.json",
+      "sha256": "0E8FB8AD8BF1E7EB203CCF2786A4D4271E71922DB859E3A967421BEE61D1AF73",
+      "bytes": 3327
+    },
+    {
+      "path": "d-tiny-coasts/paired-response.json",
+      "sha256": "883D55275A0A506AA74B226F1731403AC2732063593E578291E143BFD60DE0D9",
+      "bytes": 5609
+    },
+    {
+      "path": "d-tiny-coasts/powered-coast.json",
+      "sha256": "B9E47CD2FDBE8A000A778B29CEC61565B8F78C240F6F60A84DB0FFBE3992BF0E",
+      "bytes": 7880
+    },
+    {
+      "path": "d-tiny-coasts/powered-historical.json",
+      "sha256": "DAC46E388B2E1F740A1BFAB55F5DBCC312E68A2C0507789DC7DC38A5B592BC60",
+      "bytes": 5069
+    },
+    {
+      "path": "d-tiny-coasts/powered-preparation.json",
+      "sha256": "601E5A5D8D064B6B68474AADAF4DE42E5B310522538EFA73CEFBD39D61BE5C46",
+      "bytes": 3341
+    },
+    {
+      "path": "d-tiny-coasts/stop.json",
+      "sha256": "6C849F4104F8909455633DB86D2E2906276E2DD04ACE47DB9893A335DB7EF812",
+      "bytes": 223
+    },
+    {
+      "path": "gate-freeze.json",
+      "sha256": "1E8C9DFC58574566EB5F7AD451CB37E8E4CEC00AA74ACA1C562615994871FBA7",
+      "bytes": 1512
+    },
+    {
+      "path": "generate.py",
+      "sha256": "8367DE64669DE010EA504D72CFB29A96D10D0887865FAC35CE0EA31BBD6ACAA3",
+      "bytes": 3231
+    },
+    {
+      "path": "generated-identity.json",
+      "sha256": "F862FB9E0298D0ADC12CB8E1BD8559F5D67F34D5E8F95DE84966144A14B0FA3F",
+      "bytes": 993
+    },
+    {
+      "path": "no-d-regressions/01-original32N.json",
+      "sha256": "51596BCE24E255EEF48D27AC13FAB78C6C693C623C341E6DCBA0E79DB07401C2",
+      "bytes": 9394
+    },
+    {
+      "path": "no-d-regressions/02-actual128.json",
+      "sha256": "45981B6797B06D32186F9E8E65EF6474AE5683E0EE9905ECCB5A6078A4659933",
+      "bytes": 9401
+    },
+    {
+      "path": "no-d-regressions/03-basis.json",
+      "sha256": "63F9A1B39651DDE9C5D93235A22F40FAB5C36E3AEFAB73DEC939BFF59B6E1715",
+      "bytes": 1410
+    },
+    {
+      "path": "no-d-regressions/04-exact-coast.json",
+      "sha256": "0A6965C5D2EC1297D563887FCB4DCA4B98194CCC034E53D1DBD7F8AC14E3BF9C",
+      "bytes": 9389
+    },
+    {
+      "path": "no-d-regressions/05-moderate-normal.json",
+      "sha256": "789A56F5770514BD48B47CB5882683B986C576648BDB0B11C6A39A4E9B9D2F61",
+      "bytes": 3237
+    },
+    {
+      "path": "no-d-regressions/regressions-attempt.json",
+      "sha256": "4E32C861DD78AF42866A08588C5E599AD465C2CA14B107B220BE73324CD6CB07",
+      "bytes": 97
+    },
+    {
+      "path": "no-d-regressions/regressions-stop.json",
+      "sha256": "839DBEE229F548D28FE8064BDB7FDA016753DE4E0579BCACD7A8664E654EB6E1",
+      "bytes": 149
+    },
+    {
+      "path": "plan.md",
+      "sha256": "3F5B233D423032EF42F6BF4D4D3929196BC907BD725052E82B114CF61DCF6F55",
+      "bytes": 3164
+    },
+    {
+      "path": "preflight.json",
+      "sha256": "619D84189FA913FE6E6185589C481C0FFD4FF22A7E2EB0D6AC4EE657C6444187",
+      "bytes": 32047
+    },
+    {
+      "path": "reproduce.ps1",
+      "sha256": "C0B60A233AD5EB71970962E7F784AC3224AF5A4D80385ECCE2B08B37CEDB8C3A",
+      "bytes": 2808
+    },
+    {
+      "path": "select_d.py",
+      "sha256": "881C66CD2ED3DC50CDDAF998AAE8964E685AA58EB978A0192ACD442247CCD63C",
+      "bytes": 3026
+    },
+    {
+      "path": "selected-freeze-v2.json",
+      "sha256": "76DE8D6EF526E876CD70B211AA5C7AE8357A9189290158F74D5CB3F2FBA0AD80",
+      "bytes": 1489
+    },
+    {
+      "path": "selected-freeze.json",
+      "sha256": "EB0D62DC043E260E594A5583B36490691CD74F7A1D6CE499BF0905F430E09777",
+      "bytes": 1421
+    },
+    {
+      "path": "verification.md",
+      "sha256": "5FDD073C6B4A5A917427DD02951D1BCEB5B0DC11656A27905B64E364CC753BA0",
+      "bytes": 4440
+    }
+  ]
+}

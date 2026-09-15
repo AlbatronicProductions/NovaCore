@@ -1,0 +1,12 @@
+{
+  "utc": "2026-09-15T01:54:32.6439433Z",
+  "head": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "branch": "codex/powered-contact-numerical-prerequisite",
+  "priorInputsChecked": 105,
+  "selectedInputsChecked": 8,
+  "selectedOperatorSha256": "6983854494A227EAE4B5F28BE83F0298DE66182607CA8C4CA89DEDDE31B36522",
+  "reproductionBinarySha256": "CDA885F38FF9D4C77D12B506CE8FCAADC023A7E550D2B4A49AC1EB0FE22909AC",
+  "ksaGate": "PARTIAL equivalence; no conclusive redirect",
+  "sdk": "10.0.303",
+  "runtime": "10.0.12"
+}

@@ -1,0 +1,107 @@
+{
+  "result": "NATIVE_EQUIVALENCE_PASS",
+  "oldWitnessSha256": "0607084EEAB96D11BE81EFDA642D11DB49435A9C2C9B83D9DFC5936BA3E21FE8",
+  "newWitnessSha256": "943746DB92242C3EC060F77565A8CCB55B316118BA32FF958B32752A3CC67DB3",
+  "excludedField": "binaryIdentity.bepuPath only (different build output directory)",
+  "oldBepuPath": "E:\\NovaCore\\build\\powered-contact-ordinary-step-event-closure\\bin\\BepuPhysics.dll",
+  "newBepuPath": "E:\\NovaCore\\build\\powered-contact-allocation-recheck\\native\\bin\\Release\\net10.0\\BepuPhysics.dll",
+  "sections": [
+    {
+      "section": "name",
+      "identical": true
+    },
+    {
+      "section": "iterations",
+      "identical": true
+    },
+    {
+      "section": "preparationIterations",
+      "identical": true
+    },
+    {
+      "section": "preparationSteps",
+      "identical": true
+    },
+    {
+      "section": "worlds",
+      "identical": true
+    },
+    {
+      "section": "backendSteps",
+      "identical": true
+    },
+    {
+      "section": "backendDt",
+      "identical": true
+    },
+    {
+      "section": "backendDtBits",
+      "identical": true
+    },
+    {
+      "section": "substeps",
+      "identical": true
+    },
+    {
+      "section": "result",
+      "identical": true
+    },
+    {
+      "section": "failures",
+      "identical": true
+    },
+    {
+      "section": "measured",
+      "identical": true
+    },
+    {
+      "section": "bars",
+      "identical": true
+    },
+    {
+      "section": "ledger",
+      "identical": true
+    },
+    {
+      "section": "prepared",
+      "identical": true
+    },
+    {
+      "section": "observation",
+      "identical": true
+    },
+    {
+      "section": "work",
+      "identical": true
+    },
+    {
+      "section": "stages",
+      "identical": true
+    },
+    {
+      "section": "snapshots",
+      "identical": true
+    },
+    {
+      "section": "poolBytes",
+      "identical": true
+    },
+    {
+      "section": "reference",
+      "identical": true
+    },
+    {
+      "section": "input",
+      "identical": true
+    },
+    {
+      "section": "binaryIdentity",
+      "identical": true
+    }
+  ],
+  "sourceAndEndpointSnapshots": 4,
+  "ordinarySteps": 1,
+  "substeps": 1,
+  "iterations": 8,
+  "nativeDtBits": 1015580809
+}

@@ -1,0 +1,150 @@
+{
+  "date": "2026-09-15",
+  "judgment": "REVISE",
+  "payoffClassification": "PERFORMANCE REVISE",
+  "banked": false,
+  "branch": "codex/powered-contact-numerical-prerequisite",
+  "head": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "main": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "originMain": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "remoteMain": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "protectedStartingFiles": 2450,
+  "protectedClosingFiles": 2450,
+  "startingAggregateSha256": "29E8AF1B527932CEEFDEAC2FFAC70F855C1E5956AF6FF41BFEF33AF5EC0113BF",
+  "closingAggregateSha256": "29E8AF1B527932CEEFDEAC2FFAC70F855C1E5956AF6FF41BFEF33AF5EC0113BF",
+  "aggregateAlgorithm": "Sorted unique git ls-files --cached --others --exclude-standard; closing excludes only this performance-payoff child. Each existing file: path + literal backtick-t + uppercase file SHA256; join LF; SHA256 UTF8.",
+  "historicalTagCount": 65,
+  "historicalTagsUnchanged": true,
+  "tagReference": "../../powered-contact-chronological-event-feasibility/identity.json",
+  "protectedMilestoneIdentityReference": "../friction-work/identity.json",
+  "trackedChanged": [],
+  "staged": [],
+  "gitDiffCheckExit": 0,
+  "originalRationalTypeSha256": "5ACA68ED803F6769953F6C3DF69E2D87FC59888E29D569EF47EB1BDEDEDBA193",
+  "exactRationalExtraction": true,
+  "hashes": [
+    {
+      "path": "docs\\engineering-evidence\\powered-contact-ordinary-step-event-closure\\performance-payoff\\plan.md",
+      "bytes": 4359,
+      "sha256": "37CB84DCCDB51EAFAD9C68922EAED4208FCCC03A114AA32193620A202E5F97B1"
+    },
+    {
+      "path": "docs\\engineering-evidence\\powered-contact-ordinary-step-event-closure\\performance-payoff\\Program.cs",
+      "bytes": 7008,
+      "sha256": "1529DE51803106572720B4D305BAFA2376C5C1C7E43D277C34A1324B79477A97"
+    },
+    {
+      "path": "docs\\engineering-evidence\\powered-contact-ordinary-step-event-closure\\performance-payoff\\reproduce.ps1",
+      "bytes": 3441,
+      "sha256": "DDF7781D4728553ADAF650ED559239303D6145C92D1E2A042233366D159AED31"
+    },
+    {
+      "path": "docs\\engineering-evidence\\powered-contact-ordinary-step-event-closure\\performance-payoff\\allocation-result.json",
+      "bytes": 1155,
+      "sha256": "A3D6395F7D5D622243E594BE4C9F28CA07968EDF4E65B4A179B5392ED5116C2A"
+    },
+    {
+      "path": "docs\\engineering-evidence\\powered-contact-ordinary-step-event-closure\\performance-payoff\\allocation-witness.txt",
+      "bytes": 399,
+      "sha256": "BF1B776FCBB66E3F194AF43CE471FC3DEEEEB193173B5AF4FCBBAA53F2BF3D1D"
+    },
+    {
+      "path": "docs\\engineering-evidence\\powered-contact-ordinary-step-event-closure\\Program.cs",
+      "bytes": 17062,
+      "sha256": "7DC5838082E1C4BEA99D270CBEB26A20E47CEA9999A15716A52EDCEF486B07C7"
+    },
+    {
+      "path": "docs\\engineering-evidence\\powered-contact-ordinary-step-event-closure\\inputs.json",
+      "bytes": 14689,
+      "sha256": "6920D051FA273A4AFAAA4787788B5D972C3B4B38372491A171743869031477D0"
+    },
+    {
+      "path": "docs\\engineering-evidence\\powered-contact-ordinary-step-event-closure\\off-com-8.json",
+      "bytes": 14768,
+      "sha256": "0607084EEAB96D11BE81EFDA642D11DB49435A9C2C9B83D9DFC5936BA3E21FE8"
+    },
+    {
+      "path": "tests\\NovaCore.Simulation.Tests\\OrdinaryAllocationMeasurement.cs",
+      "bytes": 2518,
+      "sha256": "3B6F2D9905EA52BFB131DF670F1E6A2116BA340C9EF7767DE1020197D473CFB7"
+    },
+    {
+      "path": "build\\powered-contact-ordinary-step-performance-payoff\\Rational.cs",
+      "bytes": 1365,
+      "sha256": "452EDBB75EB5F43758AE5688A956D79744A2B601A2F7596D9C602088397CB096"
+    },
+    {
+      "path": "build\\powered-contact-ordinary-step-performance-payoff\\PreparationAllocation.csproj",
+      "bytes": 487,
+      "sha256": "29B4BA92F733D5593BD1B9A699198F70C2802252593432CB4403094B2C2EC68A"
+    },
+    {
+      "path": "build\\powered-contact-ordinary-step-performance-payoff\\bin\\Release\\net10.0\\PreparationAllocation.dll",
+      "bytes": 26624,
+      "sha256": "A3B74698BA66287E648424911A877D949E42D9625C259C377594A1085F90DAF3"
+    }
+  ],
+  "sdk": "10.0.303",
+  "runtime": ".NET 10.0.12",
+  "os": "Microsoft Windows 10.0.26200",
+  "architecture": "X64",
+  "runtimeEnvironment": [
+    {
+      "Name": "DOTNET_ROOT",
+      "Value": "C:\\Program Files\\dotnet"
+    },
+    {
+      "Name": "DOTNET_ROOT(x86)",
+      "Value": "C:\\Program Files (x86)\\dotnet"
+    }
+  ],
+  "measurement": {
+    "freshReleaseProcesses": 1,
+    "processId": 49600,
+    "boundary": "C preparation allocation only",
+    "warmCalls": 128,
+    "measuredCalls": 1,
+    "bytes": 1936,
+    "requiredBytes": 0,
+    "positiveControlBytes": 152,
+    "readControlBytes": 0,
+    "entry": "PASS",
+    "exit": "PASS",
+    "sameThread": 2,
+    "projectedBitsMatch": true,
+    "exitCode": 2,
+    "solverCalls": 0,
+    "timingProcesses": 0,
+    "allocationAttributionEscalation": false
+  },
+  "builds": {
+    "release": 2,
+    "reason": "Initial diagnostic build, then pre-run reporting-only clarification; both zero warnings/errors; no process rerun",
+    "fullSolution": "NOT RUN"
+  },
+  "independentVerifier": "PASS on boundary, evidence and STOP/REVISE; performance acceptance NOT QUALIFIED",
+  "cleanup": {
+    "newScratch": {
+      "path": "E:\\NovaCore\\build\\powered-contact-ordinary-step-performance-payoff",
+      "filesBefore": 35,
+      "bytesBefore": 1536559,
+      "filesRemaining": 35,
+      "bytesRemaining": 1536559,
+      "filesRemoved": 0,
+      "bytesRemoved": 0,
+      "disposition": "Automatic approval review rejected the sole reviewed deletion before execution: blocked by policy. No retry or workaround. Manual cleanup command in README and final report.",
+      "reparsePoints": 0
+    },
+    "priorFrictionScratch": {
+      "path": "E:\\NovaCore\\build\\powered-contact-friction-work",
+      "exists": false,
+      "files": 0,
+      "bytes": 0,
+      "deletionAttempted": false
+    }
+  },
+  "noProductionChange": true,
+  "noPermanentTestChange": true,
+  "noCandidateARetirement": true,
+  "noNewKsaClaim": true
+}

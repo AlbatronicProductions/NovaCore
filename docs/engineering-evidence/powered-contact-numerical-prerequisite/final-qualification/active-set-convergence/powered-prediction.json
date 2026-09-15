@@ -1,0 +1,52 @@
+{
+  "status": "PREDICTION ONLY",
+  "bitwiseInputChecks": {
+    "Identity": true,
+    "Generation": true,
+    "Piece": true,
+    "ProducingGeometry": true,
+    "Cache": true,
+    "Endpoint": true,
+    "currentGeometry": true
+  },
+  "baselineOldLoad": {
+    "Gravity": {
+      "X": 0.0,
+      "Y": -9.81,
+      "Z": 0.0
+    },
+    "Force": {
+      "X": 0.0,
+      "Y": 0.0,
+      "Z": 0.0
+    },
+    "Torque": {
+      "X": 0.0,
+      "Y": 0.0,
+      "Z": 0.0
+    }
+  },
+  "poweredOldLoad": {
+    "Gravity": {
+      "X": 0.0,
+      "Y": -9.81,
+      "Z": 0.0
+    },
+    "Force": {
+      "X": 0.0,
+      "Y": 16.0,
+      "Z": 0.0
+    },
+    "Torque": {
+      "X": 0.0,
+      "Y": 0.0,
+      "Z": 0.0
+    }
+  },
+  "exactDuration": "Each prior installed exact2^-1075; same following exact16666/1000000 minus2^-1075",
+  "equation": "Same current coast geometry, source, mass, duration and load imply identical K/b/reference.",
+  "preparation": "The different old load adds only a common normal shift s*q. D(x+s*q)=D(x) in exact arithmetic.",
+  "prediction": "Same tangent mismatch/coupling and approximately same finite-sweep errors; represented common-shift/D cancellation can differ by rounding. No claim of measured powered equality.",
+  "noDPrediction": "Not equal by this argument: without D the common old-load shift survives.",
+  "poweredSolverCalls": 0
+}

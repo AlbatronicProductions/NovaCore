@@ -1,0 +1,1072 @@
+{
+  "historicalResultPreserved": "../final-median-closure/REPORT.md",
+  "contractTicket": "871aeec9-08d9-44b3-8276-11bdb173def8",
+  "processes": 3,
+  "results": [
+    {
+      "population": "UNPOWERED STILL-FUELLED RETAINED-CONTACT CONTROL",
+      "warm": 128,
+      "samples": 1024,
+      "medianMs": 0.069,
+      "p95Ms": 0.0714,
+      "p99Ms": 0.0735,
+      "maxMs": 0.1009,
+      "tails": [
+        {
+          "index": 0,
+          "ms": 0.1009,
+          "collections": 0
+        },
+        {
+          "index": 738,
+          "ms": 0.0999,
+          "collections": 0
+        },
+        {
+          "index": 737,
+          "ms": 0.0992,
+          "collections": 0
+        },
+        {
+          "index": 1,
+          "ms": 0.0804,
+          "collections": 0
+        },
+        {
+          "index": 41,
+          "ms": 0.0752,
+          "collections": 0
+        },
+        {
+          "index": 778,
+          "ms": 0.0741,
+          "collections": 0
+        },
+        {
+          "index": 746,
+          "ms": 0.074,
+          "collections": 0
+        },
+        {
+          "index": 898,
+          "ms": 0.0739,
+          "collections": 0
+        }
+      ],
+      "collectionsIncludingCold": [
+        0,
+        0,
+        0
+      ],
+      "collectionsDuringTimedOperations": 0,
+      "solverStepsPerSample": 1,
+      "iterations": 8,
+      "substeps": 1,
+      "ownerThreads": 1,
+      "synchronization": "exclusive owner phase; no waiting lock",
+      "lifetime": "one retained world",
+      "allocation": "separate checked exact-zero gate",
+      "historicalTargetsOnly": [
+        0.05,
+        0.1,
+        0.25,
+        0.5
+      ],
+      "process": 1
+    },
+    {
+      "population": "GENUINE EXHAUSTED-DRY RETAINED CONTACT",
+      "warm": 128,
+      "samples": 1024,
+      "medianMs": 0.067,
+      "p95Ms": 0.0701,
+      "p99Ms": 0.1,
+      "maxMs": 0.2258,
+      "tails": [
+        {
+          "index": 448,
+          "ms": 0.2258,
+          "collections": 0
+        },
+        {
+          "index": 452,
+          "ms": 0.1437,
+          "collections": 0
+        },
+        {
+          "index": 449,
+          "ms": 0.1414,
+          "collections": 0
+        },
+        {
+          "index": 453,
+          "ms": 0.1358,
+          "collections": 0
+        },
+        {
+          "index": 450,
+          "ms": 0.1357,
+          "collections": 0
+        },
+        {
+          "index": 451,
+          "ms": 0.134,
+          "collections": 0
+        },
+        {
+          "index": 454,
+          "ms": 0.1203,
+          "collections": 0
+        },
+        {
+          "index": 447,
+          "ms": 0.119,
+          "collections": 0
+        }
+      ],
+      "collectionsIncludingCold": [
+        0,
+        0,
+        0
+      ],
+      "collectionsDuringTimedOperations": 0,
+      "solverStepsPerSample": 1,
+      "iterations": 8,
+      "substeps": 1,
+      "ownerThreads": 1,
+      "synchronization": "exclusive owner phase; no waiting lock",
+      "lifetime": "one retained world",
+      "allocation": "separate checked exact-zero gate",
+      "historicalTargetsOnly": [
+        0.05,
+        0.1,
+        0.25,
+        0.5
+      ],
+      "process": 1
+    },
+    {
+      "population": "PRODUCTION POWERED-CONTACT INTERVAL",
+      "warm": 128,
+      "samples": 1024,
+      "medianMs": 0.0355,
+      "p95Ms": 0.1205,
+      "p99Ms": 0.1572,
+      "maxMs": 0.2199,
+      "tails": [
+        {
+          "index": 166,
+          "ms": 0.2199,
+          "collections": 0
+        },
+        {
+          "index": 130,
+          "ms": 0.1939,
+          "collections": 0
+        },
+        {
+          "index": 135,
+          "ms": 0.1811,
+          "collections": 0
+        },
+        {
+          "index": 46,
+          "ms": 0.178,
+          "collections": 0
+        },
+        {
+          "index": 105,
+          "ms": 0.1775,
+          "collections": 0
+        },
+        {
+          "index": 390,
+          "ms": 0.1675,
+          "collections": 0
+        },
+        {
+          "index": 71,
+          "ms": 0.1629,
+          "collections": 0
+        },
+        {
+          "index": 330,
+          "ms": 0.1609,
+          "collections": 0
+        }
+      ],
+      "collectionsIncludingCold": [
+        6,
+        1,
+        0
+      ],
+      "collectionsDuringTimedOperations": 0,
+      "solverStepsPerSample": 1,
+      "iterations": 8,
+      "substeps": 1,
+      "ownerThreads": 1,
+      "synchronization": "exclusive owner phase; no waiting lock",
+      "lifetime": "independent prepared episodes; cold construction and disposal excluded",
+      "allocation": "separate checked exact-zero gate",
+      "historicalTargetsOnly": [
+        0.05,
+        0.1,
+        0.25,
+        0.5
+      ],
+      "process": 1
+    },
+    {
+      "population": "GENUINE EXHAUSTION -> DRY CONTINUATION",
+      "warm": 128,
+      "samples": 1024,
+      "medianMs": 0.0199,
+      "p95Ms": 0.0257,
+      "p99Ms": 0.0361,
+      "maxMs": 0.0845,
+      "tails": [
+        {
+          "index": 829,
+          "ms": 0.0845,
+          "collections": 0
+        },
+        {
+          "index": 186,
+          "ms": 0.0704,
+          "collections": 0
+        },
+        {
+          "index": 745,
+          "ms": 0.0702,
+          "collections": 0
+        },
+        {
+          "index": 502,
+          "ms": 0.0689,
+          "collections": 0
+        },
+        {
+          "index": 516,
+          "ms": 0.0681,
+          "collections": 0
+        },
+        {
+          "index": 936,
+          "ms": 0.0661,
+          "collections": 0
+        },
+        {
+          "index": 231,
+          "ms": 0.0532,
+          "collections": 0
+        },
+        {
+          "index": 564,
+          "ms": 0.0451,
+          "collections": 0
+        }
+      ],
+      "collectionsIncludingCold": [
+        7,
+        0,
+        0
+      ],
+      "collectionsDuringTimedOperations": 0,
+      "solverStepsPerSample": 2,
+      "iterations": 8,
+      "substeps": 1,
+      "ownerThreads": 1,
+      "synchronization": "exclusive owner phase; no waiting lock",
+      "lifetime": "independent prepared episodes; cold construction and disposal excluded",
+      "allocation": "separate checked exact-zero gate",
+      "historicalTargetsOnly": [
+        0.05,
+        0.1,
+        0.25,
+        0.5
+      ],
+      "process": 1
+    },
+    {
+      "population": "EVENT-TO-ORDINARY INPUT PREPARATION",
+      "warm": 128,
+      "samples": 1024,
+      "medianMs": 0.0026,
+      "p95Ms": 0.0027,
+      "p99Ms": 0.0032,
+      "maxMs": 0.052,
+      "tails": [
+        {
+          "index": 250,
+          "ms": 0.052,
+          "collections": 0
+        },
+        {
+          "index": 205,
+          "ms": 0.016,
+          "collections": 0
+        },
+        {
+          "index": 398,
+          "ms": 0.0057,
+          "collections": 0
+        },
+        {
+          "index": 671,
+          "ms": 0.0035,
+          "collections": 0
+        },
+        {
+          "index": 704,
+          "ms": 0.0035,
+          "collections": 0
+        },
+        {
+          "index": 299,
+          "ms": 0.0034,
+          "collections": 0
+        },
+        {
+          "index": 701,
+          "ms": 0.0034,
+          "collections": 0
+        },
+        {
+          "index": 705,
+          "ms": 0.0033,
+          "collections": 0
+        }
+      ],
+      "collectionsIncludingCold": [
+        0,
+        0,
+        0
+      ],
+      "collectionsDuringTimedOperations": 0,
+      "solverStepsPerSample": 0,
+      "iterations": 0,
+      "substeps": 0,
+      "ownerThreads": 1,
+      "synchronization": "none",
+      "lifetime": "accepted prepared production mapper; exact event preview",
+      "allocation": "separate checked exact-zero gate",
+      "historicalTargetsOnly": [
+        0.05,
+        0.1,
+        0.25,
+        0.5
+      ],
+      "process": 1
+    },
+    {
+      "population": "UNPOWERED STILL-FUELLED RETAINED-CONTACT CONTROL",
+      "warm": 128,
+      "samples": 1024,
+      "medianMs": 0.069,
+      "p95Ms": 0.0716,
+      "p99Ms": 0.073,
+      "maxMs": 0.0991,
+      "tails": [
+        {
+          "index": 0,
+          "ms": 0.0991,
+          "collections": 0
+        },
+        {
+          "index": 915,
+          "ms": 0.0774,
+          "collections": 0
+        },
+        {
+          "index": 1,
+          "ms": 0.0759,
+          "collections": 0
+        },
+        {
+          "index": 14,
+          "ms": 0.0749,
+          "collections": 0
+        },
+        {
+          "index": 916,
+          "ms": 0.0745,
+          "collections": 0
+        },
+        {
+          "index": 44,
+          "ms": 0.0744,
+          "collections": 0
+        },
+        {
+          "index": 43,
+          "ms": 0.0743,
+          "collections": 0
+        },
+        {
+          "index": 179,
+          "ms": 0.0743,
+          "collections": 0
+        }
+      ],
+      "collectionsIncludingCold": [
+        0,
+        0,
+        0
+      ],
+      "collectionsDuringTimedOperations": 0,
+      "solverStepsPerSample": 1,
+      "iterations": 8,
+      "substeps": 1,
+      "ownerThreads": 1,
+      "synchronization": "exclusive owner phase; no waiting lock",
+      "lifetime": "one retained world",
+      "allocation": "separate checked exact-zero gate",
+      "historicalTargetsOnly": [
+        0.05,
+        0.1,
+        0.25,
+        0.5
+      ],
+      "process": 2
+    },
+    {
+      "population": "GENUINE EXHAUSTED-DRY RETAINED CONTACT",
+      "warm": 128,
+      "samples": 1024,
+      "medianMs": 0.0678,
+      "p95Ms": 0.0709,
+      "p99Ms": 0.0733,
+      "maxMs": 0.1151,
+      "tails": [
+        {
+          "index": 211,
+          "ms": 0.1151,
+          "collections": 0
+        },
+        {
+          "index": 210,
+          "ms": 0.0848,
+          "collections": 0
+        },
+        {
+          "index": 799,
+          "ms": 0.0821,
+          "collections": 0
+        },
+        {
+          "index": 144,
+          "ms": 0.0815,
+          "collections": 0
+        },
+        {
+          "index": 371,
+          "ms": 0.077,
+          "collections": 0
+        },
+        {
+          "index": 193,
+          "ms": 0.0745,
+          "collections": 0
+        },
+        {
+          "index": 274,
+          "ms": 0.074,
+          "collections": 0
+        },
+        {
+          "index": 242,
+          "ms": 0.0736,
+          "collections": 0
+        }
+      ],
+      "collectionsIncludingCold": [
+        0,
+        0,
+        0
+      ],
+      "collectionsDuringTimedOperations": 0,
+      "solverStepsPerSample": 1,
+      "iterations": 8,
+      "substeps": 1,
+      "ownerThreads": 1,
+      "synchronization": "exclusive owner phase; no waiting lock",
+      "lifetime": "one retained world",
+      "allocation": "separate checked exact-zero gate",
+      "historicalTargetsOnly": [
+        0.05,
+        0.1,
+        0.25,
+        0.5
+      ],
+      "process": 2
+    },
+    {
+      "population": "PRODUCTION POWERED-CONTACT INTERVAL",
+      "warm": 128,
+      "samples": 1024,
+      "medianMs": 0.0363,
+      "p95Ms": 0.0444,
+      "p99Ms": 0.0536,
+      "maxMs": 0.0645,
+      "tails": [
+        {
+          "index": 0,
+          "ms": 0.0645,
+          "collections": 0
+        },
+        {
+          "index": 2,
+          "ms": 0.0611,
+          "collections": 0
+        },
+        {
+          "index": 203,
+          "ms": 0.061,
+          "collections": 0
+        },
+        {
+          "index": 198,
+          "ms": 0.0605,
+          "collections": 0
+        },
+        {
+          "index": 3,
+          "ms": 0.0582,
+          "collections": 0
+        },
+        {
+          "index": 1,
+          "ms": 0.0568,
+          "collections": 0
+        },
+        {
+          "index": 266,
+          "ms": 0.0568,
+          "collections": 0
+        },
+        {
+          "index": 142,
+          "ms": 0.0564,
+          "collections": 0
+        }
+      ],
+      "collectionsIncludingCold": [
+        6,
+        1,
+        0
+      ],
+      "collectionsDuringTimedOperations": 0,
+      "solverStepsPerSample": 1,
+      "iterations": 8,
+      "substeps": 1,
+      "ownerThreads": 1,
+      "synchronization": "exclusive owner phase; no waiting lock",
+      "lifetime": "independent prepared episodes; cold construction and disposal excluded",
+      "allocation": "separate checked exact-zero gate",
+      "historicalTargetsOnly": [
+        0.05,
+        0.1,
+        0.25,
+        0.5
+      ],
+      "process": 2
+    },
+    {
+      "population": "GENUINE EXHAUSTION -> DRY CONTINUATION",
+      "warm": 128,
+      "samples": 1024,
+      "medianMs": 0.0197,
+      "p95Ms": 0.0279,
+      "p99Ms": 0.031,
+      "maxMs": 0.0658,
+      "tails": [
+        {
+          "index": 953,
+          "ms": 0.0658,
+          "collections": 0
+        },
+        {
+          "index": 179,
+          "ms": 0.054,
+          "collections": 0
+        },
+        {
+          "index": 258,
+          "ms": 0.0384,
+          "collections": 0
+        },
+        {
+          "index": 86,
+          "ms": 0.0367,
+          "collections": 0
+        },
+        {
+          "index": 315,
+          "ms": 0.036,
+          "collections": 0
+        },
+        {
+          "index": 954,
+          "ms": 0.0353,
+          "collections": 0
+        },
+        {
+          "index": 237,
+          "ms": 0.0349,
+          "collections": 0
+        },
+        {
+          "index": 423,
+          "ms": 0.0342,
+          "collections": 0
+        }
+      ],
+      "collectionsIncludingCold": [
+        7,
+        0,
+        0
+      ],
+      "collectionsDuringTimedOperations": 0,
+      "solverStepsPerSample": 2,
+      "iterations": 8,
+      "substeps": 1,
+      "ownerThreads": 1,
+      "synchronization": "exclusive owner phase; no waiting lock",
+      "lifetime": "independent prepared episodes; cold construction and disposal excluded",
+      "allocation": "separate checked exact-zero gate",
+      "historicalTargetsOnly": [
+        0.05,
+        0.1,
+        0.25,
+        0.5
+      ],
+      "process": 2
+    },
+    {
+      "population": "EVENT-TO-ORDINARY INPUT PREPARATION",
+      "warm": 128,
+      "samples": 1024,
+      "medianMs": 0.0025,
+      "p95Ms": 0.0025,
+      "p99Ms": 0.0025,
+      "maxMs": 0.0073,
+      "tails": [
+        {
+          "index": 135,
+          "ms": 0.0073,
+          "collections": 0
+        },
+        {
+          "index": 928,
+          "ms": 0.0047,
+          "collections": 0
+        },
+        {
+          "index": 105,
+          "ms": 0.0035,
+          "collections": 0
+        },
+        {
+          "index": 0,
+          "ms": 0.0025,
+          "collections": 0
+        },
+        {
+          "index": 1,
+          "ms": 0.0025,
+          "collections": 0
+        },
+        {
+          "index": 2,
+          "ms": 0.0025,
+          "collections": 0
+        },
+        {
+          "index": 3,
+          "ms": 0.0025,
+          "collections": 0
+        },
+        {
+          "index": 4,
+          "ms": 0.0025,
+          "collections": 0
+        }
+      ],
+      "collectionsIncludingCold": [
+        0,
+        0,
+        0
+      ],
+      "collectionsDuringTimedOperations": 0,
+      "solverStepsPerSample": 0,
+      "iterations": 0,
+      "substeps": 0,
+      "ownerThreads": 1,
+      "synchronization": "none",
+      "lifetime": "accepted prepared production mapper; exact event preview",
+      "allocation": "separate checked exact-zero gate",
+      "historicalTargetsOnly": [
+        0.05,
+        0.1,
+        0.25,
+        0.5
+      ],
+      "process": 2
+    },
+    {
+      "population": "UNPOWERED STILL-FUELLED RETAINED-CONTACT CONTROL",
+      "warm": 128,
+      "samples": 1024,
+      "medianMs": 0.069,
+      "p95Ms": 0.0748,
+      "p99Ms": 0.0877,
+      "maxMs": 0.0994,
+      "tails": [
+        {
+          "index": 111,
+          "ms": 0.0994,
+          "collections": 0
+        },
+        {
+          "index": 0,
+          "ms": 0.0985,
+          "collections": 0
+        },
+        {
+          "index": 742,
+          "ms": 0.0956,
+          "collections": 0
+        },
+        {
+          "index": 18,
+          "ms": 0.0945,
+          "collections": 0
+        },
+        {
+          "index": 692,
+          "ms": 0.0927,
+          "collections": 0
+        },
+        {
+          "index": 950,
+          "ms": 0.0922,
+          "collections": 0
+        },
+        {
+          "index": 311,
+          "ms": 0.0909,
+          "collections": 0
+        },
+        {
+          "index": 526,
+          "ms": 0.0899,
+          "collections": 0
+        }
+      ],
+      "collectionsIncludingCold": [
+        0,
+        0,
+        0
+      ],
+      "collectionsDuringTimedOperations": 0,
+      "solverStepsPerSample": 1,
+      "iterations": 8,
+      "substeps": 1,
+      "ownerThreads": 1,
+      "synchronization": "exclusive owner phase; no waiting lock",
+      "lifetime": "one retained world",
+      "allocation": "separate checked exact-zero gate",
+      "historicalTargetsOnly": [
+        0.05,
+        0.1,
+        0.25,
+        0.5
+      ],
+      "process": 3
+    },
+    {
+      "population": "GENUINE EXHAUSTED-DRY RETAINED CONTACT",
+      "warm": 128,
+      "samples": 1024,
+      "medianMs": 0.0671,
+      "p95Ms": 0.0745,
+      "p99Ms": 0.1166,
+      "maxMs": 0.1574,
+      "tails": [
+        {
+          "index": 333,
+          "ms": 0.1574,
+          "collections": 0
+        },
+        {
+          "index": 402,
+          "ms": 0.1516,
+          "collections": 0
+        },
+        {
+          "index": 808,
+          "ms": 0.1456,
+          "collections": 0
+        },
+        {
+          "index": 165,
+          "ms": 0.1446,
+          "collections": 0
+        },
+        {
+          "index": 467,
+          "ms": 0.1299,
+          "collections": 0
+        },
+        {
+          "index": 881,
+          "ms": 0.1298,
+          "collections": 0
+        },
+        {
+          "index": 391,
+          "ms": 0.1234,
+          "collections": 0
+        },
+        {
+          "index": 389,
+          "ms": 0.1211,
+          "collections": 0
+        }
+      ],
+      "collectionsIncludingCold": [
+        0,
+        0,
+        0
+      ],
+      "collectionsDuringTimedOperations": 0,
+      "solverStepsPerSample": 1,
+      "iterations": 8,
+      "substeps": 1,
+      "ownerThreads": 1,
+      "synchronization": "exclusive owner phase; no waiting lock",
+      "lifetime": "one retained world",
+      "allocation": "separate checked exact-zero gate",
+      "historicalTargetsOnly": [
+        0.05,
+        0.1,
+        0.25,
+        0.5
+      ],
+      "process": 3
+    },
+    {
+      "population": "PRODUCTION POWERED-CONTACT INTERVAL",
+      "warm": 128,
+      "samples": 1024,
+      "medianMs": 0.0376,
+      "p95Ms": 0.0469,
+      "p99Ms": 0.0618,
+      "maxMs": 0.0867,
+      "tails": [
+        {
+          "index": 545,
+          "ms": 0.0867,
+          "collections": 0
+        },
+        {
+          "index": 578,
+          "ms": 0.0815,
+          "collections": 0
+        },
+        {
+          "index": 0,
+          "ms": 0.0735,
+          "collections": 0
+        },
+        {
+          "index": 473,
+          "ms": 0.0667,
+          "collections": 0
+        },
+        {
+          "index": 2,
+          "ms": 0.0663,
+          "collections": 0
+        },
+        {
+          "index": 1,
+          "ms": 0.0654,
+          "collections": 0
+        },
+        {
+          "index": 146,
+          "ms": 0.0649,
+          "collections": 0
+        },
+        {
+          "index": 3,
+          "ms": 0.0639,
+          "collections": 0
+        }
+      ],
+      "collectionsIncludingCold": [
+        6,
+        1,
+        0
+      ],
+      "collectionsDuringTimedOperations": 0,
+      "solverStepsPerSample": 1,
+      "iterations": 8,
+      "substeps": 1,
+      "ownerThreads": 1,
+      "synchronization": "exclusive owner phase; no waiting lock",
+      "lifetime": "independent prepared episodes; cold construction and disposal excluded",
+      "allocation": "separate checked exact-zero gate",
+      "historicalTargetsOnly": [
+        0.05,
+        0.1,
+        0.25,
+        0.5
+      ],
+      "process": 3
+    },
+    {
+      "population": "GENUINE EXHAUSTION -> DRY CONTINUATION",
+      "warm": 128,
+      "samples": 1024,
+      "medianMs": 0.0202,
+      "p95Ms": 0.0287,
+      "p99Ms": 0.0319,
+      "maxMs": 0.0562,
+      "tails": [
+        {
+          "index": 134,
+          "ms": 0.0562,
+          "collections": 0
+        },
+        {
+          "index": 253,
+          "ms": 0.0452,
+          "collections": 0
+        },
+        {
+          "index": 86,
+          "ms": 0.0389,
+          "collections": 0
+        },
+        {
+          "index": 259,
+          "ms": 0.0373,
+          "collections": 0
+        },
+        {
+          "index": 440,
+          "ms": 0.0363,
+          "collections": 0
+        },
+        {
+          "index": 66,
+          "ms": 0.0346,
+          "collections": 0
+        },
+        {
+          "index": 217,
+          "ms": 0.0342,
+          "collections": 0
+        },
+        {
+          "index": 362,
+          "ms": 0.0338,
+          "collections": 0
+        }
+      ],
+      "collectionsIncludingCold": [
+        7,
+        0,
+        0
+      ],
+      "collectionsDuringTimedOperations": 0,
+      "solverStepsPerSample": 2,
+      "iterations": 8,
+      "substeps": 1,
+      "ownerThreads": 1,
+      "synchronization": "exclusive owner phase; no waiting lock",
+      "lifetime": "independent prepared episodes; cold construction and disposal excluded",
+      "allocation": "separate checked exact-zero gate",
+      "historicalTargetsOnly": [
+        0.05,
+        0.1,
+        0.25,
+        0.5
+      ],
+      "process": 3
+    },
+    {
+      "population": "EVENT-TO-ORDINARY INPUT PREPARATION",
+      "warm": 128,
+      "samples": 1024,
+      "medianMs": 0.0026,
+      "p95Ms": 0.0027,
+      "p99Ms": 0.0027,
+      "maxMs": 0.0158,
+      "tails": [
+        {
+          "index": 154,
+          "ms": 0.0158,
+          "collections": 0
+        },
+        {
+          "index": 894,
+          "ms": 0.0089,
+          "collections": 0
+        },
+        {
+          "index": 335,
+          "ms": 0.0057,
+          "collections": 0
+        },
+        {
+          "index": 61,
+          "ms": 0.0037,
+          "collections": 0
+        },
+        {
+          "index": 0,
+          "ms": 0.0027,
+          "collections": 0
+        },
+        {
+          "index": 3,
+          "ms": 0.0027,
+          "collections": 0
+        },
+        {
+          "index": 6,
+          "ms": 0.0027,
+          "collections": 0
+        },
+        {
+          "index": 9,
+          "ms": 0.0027,
+          "collections": 0
+        }
+      ],
+      "collectionsIncludingCold": [
+        0,
+        0,
+        0
+      ],
+      "collectionsDuringTimedOperations": 0,
+      "solverStepsPerSample": 0,
+      "iterations": 0,
+      "substeps": 0,
+      "ownerThreads": 1,
+      "synchronization": "none",
+      "lifetime": "accepted prepared production mapper; exact event preview",
+      "allocation": "separate checked exact-zero gate",
+      "historicalTargetsOnly": [
+        0.05,
+        0.1,
+        0.25,
+        0.5
+      ],
+      "process": 3
+    }
+  ]
+}

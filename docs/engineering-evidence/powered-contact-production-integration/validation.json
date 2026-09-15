@@ -1,0 +1,326 @@
+{
+  "scope": "Unbanked draft; stop at first material qualification failure",
+  "builds": {
+    "debugSimulationProject": {
+      "result": "PASS",
+      "warnings": 0,
+      "errors": 0
+    },
+    "releaseSimulationProject": {
+      "result": "PASS",
+      "warnings": 0,
+      "errors": 0
+    },
+    "fullSolution": "NOT RUN"
+  },
+  "focused": {
+    "debug": [
+      {
+        "gate": "cheap",
+        "result": "PASS"
+      },
+      {
+        "gate": "physics",
+        "result": "PASS"
+      },
+      {
+        "gate": "work",
+        "result": "PASS"
+      },
+      {
+        "gate": "authority",
+        "result": "PASS"
+      },
+      {
+        "gate": "sequences",
+        "result": "PASS"
+      },
+      {
+        "gate": "allocation",
+        "result": "PASS"
+      }
+    ],
+    "release": [
+      {
+        "flag": "--powered-contact-cheap",
+        "exitCode": 0,
+        "witness": [
+          "POWERED_CONTACT_MAPPER PASS six_native_bits=PASS",
+          "POWERED_CONTACT_CHEAP PASS full=16666 endpoint_exhaustion=33333 dry=50000 exact_resource=PASS joint_successor=PASS"
+        ]
+      },
+      {
+        "flag": "--powered-contact-work",
+        "exitCode": 0,
+        "witness": [
+          "POWERED_CONTACT_WORK OffCom applications=54 edges=108 exactTelescopes=PASS nativeBits=PASS tangent=-0.1048833757758171 twist=-0.012745794725816662 tangentError=0.004177657978519753 twistError=0.0006884086400016885",
+          "POWERED_CONTACT_WORK YawBaseline applications=54 edges=108 exactTelescopes=PASS nativeBits=PASS tangent=-0.16015435172999565 twist=-0.013582194484826894 tangentError=0.001671110138672799 twistError=3.2028185372595663E-07"
+        ]
+      },
+      {
+        "flag": "--powered-contact-authority",
+        "exitCode": 0,
+        "witness": [
+          "POWERED_CONTACT_AUTHORITY PASS precommit_nonmutation pending_retry joint_lease_once source_resource_world_guards terminal_physical terminal_credit export_failure property_only"
+        ]
+      },
+      {
+        "flag": "--powered-contact-sequences",
+        "exitCode": 0,
+        "witness": [
+          "POWERED_CONTACT_SEQUENCE CenteredEndpoint hz=30 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+          "POWERED_CONTACT_SEQUENCE CenteredEndpoint hz=60 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+          "POWERED_CONTACT_SEQUENCE CenteredEndpoint hz=150 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+          "POWERED_CONTACT_SEQUENCE CenteredEndpoint hz=240 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+          "POWERED_CONTACT_SEQUENCE CenteredEndpoint hz=-1 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=200 PASS",
+          "POWERED_CONTACT_MOVING CenteredEndpoint intervals=1200 original_frame_epoch=PASS nativeBits=PASS",
+          "POWERED_CONTACT_SEQUENCE OffCom hz=30 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+          "POWERED_CONTACT_SEQUENCE OffCom hz=60 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+          "POWERED_CONTACT_SEQUENCE OffCom hz=150 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+          "POWERED_CONTACT_SEQUENCE OffCom hz=240 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+          "POWERED_CONTACT_SEQUENCE OffCom hz=-1 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=200 PASS",
+          "POWERED_CONTACT_MOVING OffCom intervals=1200 original_frame_epoch=PASS nativeBits=PASS"
+        ]
+      },
+      {
+        "flag": "--powered-contact-allocation",
+        "exitCode": 0,
+        "witness": [
+          "ORDINARY_ALLOCATION gate=powered-contact-dry-complete bytes=0 entry=PASS exit=PASS",
+          "ORDINARY_ALLOCATION gate=powered-contact-interior-exhaustion-to-dry bytes=0 entry=PASS exit=PASS",
+          "ORDINARY_ALLOCATION gate=powered-contact-no-work bytes=0 entry=PASS exit=PASS",
+          "ORDINARY_ALLOCATION gate=powered-contact-backlog bytes=0 entry=PASS exit=PASS",
+          "ORDINARY_ALLOCATION gate=powered-contact-input-projection bytes=0 entry=PASS exit=PASS",
+          "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+          "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+          "POWERED_CONTACT_ALLOCATION PASS five_exact_zero_windows positive_control=NONZERO"
+        ]
+      }
+    ]
+  },
+  "physical": {
+    "configuration": "Debug and Release; identical reported first-interval errors",
+    "ordinaryTicks": 16666,
+    "iterations": 8,
+    "substeps": 1,
+    "gravity": [
+      0,
+      -9.81,
+      0
+    ],
+    "sourceMass": "held through ordinary solve",
+    "cases": [
+      {
+        "fixture": "CenteredBaseline",
+        "velocity": 6.91431425604005e-7,
+        "angularRate": 1.1189353443798017e-7,
+        "position": 9.316369897761485e-10,
+        "orientation": 2.0805657665328786e-9,
+        "normalImpulse": 2.062171813310698e-7,
+        "tangentImpulse": 3.8736956753385413e-7,
+        "twistImpulse": 1.550963648536927e-23,
+        "supportMoment": 3.8743019104003906e-7,
+        "sourcePenetration": 0.00041419279405352505,
+        "penetration": 0.0004141937264614537,
+        "sourceOrientation": 2.16038214836841e-10
+      },
+      {
+        "fixture": "LowThrust",
+        "velocity": 0.0006718294117314919,
+        "angularRate": 0.00013889689901787117,
+        "position": 0.000011205903167334408,
+        "orientation": 0.000002315071525277855,
+        "normalImpulse": 0.005352758963572235,
+        "tangentImpulse": 0.0005550683837027727,
+        "twistImpulse": 1.3100635078708636e-17,
+        "supportMoment": 0.0005550682672718225,
+        "sourcePenetration": 0.00041419279405352505,
+        "penetration": 0.00040420464988599747,
+        "sourceOrientation": 2.16038214836841e-10
+      },
+      {
+        "fixture": "SlidingBaseline",
+        "velocity": 0.000009425805467478799,
+        "angularRate": 0.000924616180660514,
+        "position": 0.00017031681160073142,
+        "orientation": 0.000015409662362315645,
+        "normalImpulse": 0.00008002587121591631,
+        "tangentImpulse": 0.00001044863496893117,
+        "twistImpulse": 4.951679691278521e-12,
+        "supportMoment": 0.0019119542869001005,
+        "sourcePenetration": 0.00041419271260845214,
+        "penetration": 0.0004297488675396588,
+        "sourceOrientation": 6.127359968334131e-11
+      },
+      {
+        "fixture": "NearUnloading",
+        "velocity": 0.0008246755515590297,
+        "angularRate": 0.0008725112887900726,
+        "position": 0.00017038024756332783,
+        "orientation": 0.000014541270451728926,
+        "normalImpulse": 0.0065541947329712524,
+        "tangentImpulse": 0.0008193316231005769,
+        "twistImpulse": 4.6733307328128415e-12,
+        "supportMoment": 0.0014046873645654446,
+        "sourcePenetration": 0.00041419271260845214,
+        "penetration": 0.00041598175221368994,
+        "sourceOrientation": 6.127359968334131e-11
+      },
+      {
+        "fixture": "YawBaseline",
+        "velocity": 0.000009251363841142824,
+        "angularRate": 0.000924647751412714,
+        "position": 0.00017031867424062202,
+        "orientation": 0.0007618612707889043,
+        "normalImpulse": 0.00008005494046026129,
+        "tangentImpulse": 0.000010445322254467256,
+        "twistImpulse": 0.000011198631955811056,
+        "supportMoment": 0.001911987148070031,
+        "sourcePenetration": 0.00041419269054632224,
+        "penetration": 0.00042975076742157725,
+        "sourceOrientation": 1.80223203941821e-11
+      },
+      {
+        "fixture": "OffCom",
+        "velocity": 0.005552701937765838,
+        "angularRate": 0.004255174893994246,
+        "position": 0.00011038638339334947,
+        "orientation": 0.0005764221449875955,
+        "normalImpulse": 0.044101357249882955,
+        "tangentImpulse": 0.005514372482788661,
+        "twistImpulse": 0.006163353641131908,
+        "supportMoment": 0.006058892130930111,
+        "sourcePenetration": 0.00041419269054632224,
+        "penetration": 0.00035549858727113026,
+        "sourceOrientation": 1.80223203941821e-11
+      },
+      {
+        "fixture": "NearEnd",
+        "velocity": 0.0010855602029493719,
+        "angularRate": 0.0008625937726538606,
+        "position": 0.00007931171643697851,
+        "orientation": 0.000014375915159901824,
+        "normalImpulse": 0.00862492675732418,
+        "tangentImpulse": 0.0010781983868226241,
+        "twistImpulse": 1.7309242580920703e-11,
+        "supportMoment": 0.001264812336867099,
+        "sourcePenetration": 0.00041419281725707524,
+        "penetration": 0.00041180176419031156,
+        "sourceOrientation": 2.3049161304349646e-10
+      },
+      {
+        "fixture": "MidEvent",
+        "velocity": 0.0027269346493188204,
+        "angularRate": 0.0008818111381079758,
+        "position": 0.00007066689556758448,
+        "orientation": 0.000014696172631075475,
+        "normalImpulse": 0.021660856974589082,
+        "tangentImpulse": 0.002707790636932614,
+        "twistImpulse": 5.640465958883789e-12,
+        "supportMoment": 0.001038617735733368,
+        "sourcePenetration": 0.00041419277091458984,
+        "penetration": 0.0003853541176173092,
+        "sourceOrientation": 9.979494456015854e-11
+      },
+      {
+        "fixture": "TinyEvent",
+        "velocity": 0.00000946278831314307,
+        "angularRate": 0.0009246404827949511,
+        "position": 0.00017031867424091102,
+        "orientation": 0.0007618488398786422,
+        "normalImpulse": 0.00008012389785783114,
+        "tangentImpulse": 0.000010453512263373325,
+        "twistImpulse": 0.000011193517640534223,
+        "supportMoment": 0.0019119679520154104,
+        "sourcePenetration": 0.0004141927622216546,
+        "penetration": 0.00042975054010985225,
+        "sourceOrientation": 8.294488639083642e-11
+      },
+      {
+        "fixture": "ZeroEvent",
+        "velocity": 0.00000946278831314307,
+        "angularRate": 0.0009246404827949511,
+        "position": 0.0001703186742409145,
+        "orientation": 0.0007618488398786422,
+        "normalImpulse": 0.0000801238978576091,
+        "tangentImpulse": 0.000010453512263346752,
+        "twistImpulse": 0.000011193517640534223,
+        "supportMoment": 0.0019119679520154243,
+        "sourcePenetration": 0.0004141927622216546,
+        "penetration": 0.00042975054010985225,
+        "sourceOrientation": 8.294488639083642e-11
+      },
+      {
+        "fixture": "CenteredEndpoint",
+        "velocity": 0.0008009621396915888,
+        "angularRate": 0.00016555186135884945,
+        "position": 0.000013363116707101388,
+        "orientation": 0.0000027592826101394845,
+        "normalImpulse": 0.006380313116807201,
+        "tangentImpulse": 0.0006616539487169728,
+        "twistImpulse": 1.4501204056993622e-17,
+        "supportMoment": 0.0006616562772698704,
+        "sourcePenetration": 0.0004141928244800752,
+        "penetration": 0.00040228104760986483,
+        "sourceOrientation": 2.016308342847591e-10
+      }
+    ]
+  },
+  "performance": {
+    "predeclaredProcesses": 3,
+    "executedProcesses": 1,
+    "run1": {
+      "status": "FAIL",
+      "population": "CenteredBaseline engine-off, still-fuelled retained contact complete owner operation",
+      "rawLabel": "dry-supported-retained",
+      "labelCorrection": "Raw label is inaccurate: CenteredBaseline retains 1.3020833333333334e-5 kg fuel, Ignite=false. Exhausted/no-feed dry timing was not reached. No code edit or retry after STOP.",
+      "warm": 128,
+      "samples": 1024,
+      "median_ms": 0.1464,
+      "p95_ms": 0.1854,
+      "p99_ms": 0.2448,
+      "max_ms": 1.0729,
+      "worstIndex": 957,
+      "gcCollections": [
+        0,
+        0,
+        0
+      ],
+      "ceilings_ms": [
+        0.05,
+        0.1,
+        0.25,
+        0.5
+      ],
+      "failed": [
+        "median",
+        "p95",
+        "maximum"
+      ]
+    },
+    "remaining": "STOPPED; no retry; event and mapper timing populations not reached",
+    "attribution": "UNRESOLVED; no subphase attribution or identity with historical Boundary-B tail established"
+  },
+  "storage": {
+    "managedColdAllocationUpperBound": 4942232,
+    "nativePool": 458752,
+    "combinedUpperBound": 5400984,
+    "ceiling": 8388608,
+    "historyIncluded": 4857624,
+    "recordBytes": 4048,
+    "cold_ms": 2.0944,
+    "method": "All managed construction allocations plus exclusive native pool; conservative upper bound includes temporary cold allocations, not working set"
+  },
+  "deferred": [
+    "performance processes2/3",
+    "powered/event/preparation timing",
+    "new visible route",
+    "full solution builds",
+    "full Simulation suites",
+    "M14.21-M15.0 focused regressions",
+    "verified BEPU dependency gate",
+    "ReferenceFrames/Precision regression runs",
+    "normal full-runner registration of new tests"
+  ],
+  "judgment": "REVISE"
+}

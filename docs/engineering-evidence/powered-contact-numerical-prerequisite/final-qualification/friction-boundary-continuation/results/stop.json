@@ -1,0 +1,8 @@
+{
+  "status": "STOP",
+  "cause": "coast physical errors",
+  "type": "InvalidOperationException",
+  "solverAdmissions": 1,
+  "canonicalMutations": 0,
+  "permanentSourceChanges": 0
+}

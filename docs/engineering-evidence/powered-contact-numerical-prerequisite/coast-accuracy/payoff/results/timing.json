@@ -1,0 +1,69 @@
+{
+  "configuration": "Release",
+  "processId": 8728,
+  "runtime": "10.0.12",
+  "timestampFrequency": 10000000,
+  "warmCallsPerArm": 4096,
+  "samplesPerArm": 4096,
+  "order": "ABC/BCA/CAB rotating each round",
+  "units": "microseconds per individual local operation",
+  "baseline8": {
+    "samples": 4096,
+    "medianUs": 2.9,
+    "p95Us": 3,
+    "p99Us": 3,
+    "maxUs": 5.9,
+    "quartileBlockMedianUs": [
+      2.9,
+      2.9,
+      2.9,
+      2.9
+    ]
+  },
+  "D8": {
+    "samples": 4096,
+    "medianUs": 3.4,
+    "p95Us": 3.5,
+    "p99Us": 3.5,
+    "maxUs": 10.7,
+    "quartileBlockMedianUs": [
+      3.4,
+      3.4,
+      3.4,
+      3.4
+    ]
+  },
+  "ordinaryPassing": {
+    "samples": 4096,
+    "medianUs": 3.9,
+    "p95Us": 4,
+    "p99Us": 4,
+    "maxUs": 7,
+    "quartileBlockMedianUs": [
+      3.9,
+      3.9,
+      3.9,
+      3.9
+    ]
+  },
+  "passingSweeps": 11,
+  "timestampPairOverhead": {
+    "samples": 1024,
+    "medianUs": 0,
+    "p95Us": 0.1,
+    "p99Us": 0.1,
+    "maxUs": 0.1,
+    "quartileBlockMedianUs": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "checksum": -11.831003603417859,
+  "includes": "seed copy; D checks/current-equation preparation if D; solve; velocity reconstruction",
+  "excludes": "cold fixture/current input capture, reference, reporting; no world or frame",
+  "allocationSafeStorageAdapter": true,
+  "subtraction": false,
+  "noTieringOrPgoChanges": true
+}

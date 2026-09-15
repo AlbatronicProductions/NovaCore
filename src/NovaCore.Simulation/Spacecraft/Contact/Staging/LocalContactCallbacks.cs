@@ -45,7 +45,12 @@ internal struct LocalContactCallbacks(LocalContactMetrics metrics) : INarrowPhas
     public void Dispose() { }
 }
 
-internal struct LocalContactIntegrator(Vector3 acceleration) : IPoseIntegratorCallbacks
+internal sealed class LocalContactStepInput
+{
+    internal Vector3 Linear, Angular;
+}
+
+internal struct LocalContactIntegrator(Vector3 acceleration, LocalContactStepInput? prepared = null) : IPoseIntegratorCallbacks
 {
     // Torque-free asymmetric bodies still need gyroscopic angular momentum integration.
     public AngularIntegrationMode AngularIntegrationMode => AngularIntegrationMode.ConserveMomentumWithGyroscopicTorque;
@@ -58,8 +63,15 @@ internal struct LocalContactIntegrator(Vector3 acceleration) : IPoseIntegratorCa
         ref BodyVelocityWide velocity)
     {
         // No hidden gravity: source force / source mass, transformed once into the fixed local frame.
-        velocity.Linear.X += new Vector<float>(acceleration.X) * dt;
-        velocity.Linear.Y += new Vector<float>(acceleration.Y) * dt;
-        velocity.Linear.Z += new Vector<float>(acceleration.Z) * dt;
+        var linear = prepared is null ? acceleration : prepared.Linear;
+        velocity.Linear.X += new Vector<float>(linear.X) * dt;
+        velocity.Linear.Y += new Vector<float>(linear.Y) * dt;
+        velocity.Linear.Z += new Vector<float>(linear.Z) * dt;
+        if (prepared is not null)
+        {
+            velocity.Angular.X += new Vector<float>(prepared.Angular.X) * dt;
+            velocity.Angular.Y += new Vector<float>(prepared.Angular.Y) * dt;
+            velocity.Angular.Z += new Vector<float>(prepared.Angular.Z) * dt;
+        }
     }
 }

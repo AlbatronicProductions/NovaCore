@@ -1,0 +1,36 @@
+{
+  "baseline": {
+    "rowResiduals": [
+      0.03377321181059524,
+      -0.03378231108273969,
+      0.044839176278109606,
+      -0.044848275550254155
+    ],
+    "numerator": -1.8198544288999807e-05,
+    "denominator": 2.1857384001981397,
+    "delta": 8.326039514769969e-06,
+    "numeratorHex": "-0x1.3152270dea000p-16",
+    "deltaHex": "0x1.176022850614fp-17"
+  },
+  "powered": {
+    "rowResiduals": [
+      0.06710521181254296,
+      -0.0004503110846873562,
+      0.07817117627616194,
+      -0.011516275548306296
+    ],
+    "numerator": 0.13330980145571125,
+    "denominator": 2.1857384001981397,
+    "delta": -0.06099073953389233,
+    "numeratorHex": "0x1.1104baabe8840p-3",
+    "deltaHex": "-0x1.f3a2d9f50580fp-5"
+  },
+  "exactCancellation": {
+    "requestedLoadShift": "8790891807563013/144115188075855872",
+    "representedNormalShift": "1098861475945377/18014398509481984",
+    "additionDifferenceMinusRequestedShift": "3/144115188075855872",
+    "deltaDifference": "-36007492843778167119/590295810358705651712",
+    "representedShiftPlusDeltaDifference": "-53583/590295810358705651712",
+    "finalNormalDifference": "-1/9007199254740992"
+  }
+}

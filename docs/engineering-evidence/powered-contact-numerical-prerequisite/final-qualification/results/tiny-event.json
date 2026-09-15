@@ -1,0 +1,261 @@
+{
+  "status": "REFERENCE DOMAIN FAILURE",
+  "exactPositive": true,
+  "seconds": {
+    "Significand": 1,
+    "Exponent": -1075
+  },
+  "fp64Seconds": 0,
+  "fp32Seconds": 0,
+  "fuel": 5E-324,
+  "flow": 2,
+  "force": 16,
+  "mass": 8,
+  "source": {
+    "Linear": {
+      "X": -1.0288123686308381E-09,
+      "Y": -6.332993507385254E-07,
+      "Z": 5.035674099929111E-10
+    },
+    "Angular": {
+      "X": 1.0079697077003402E-09,
+      "Y": 1.6226184275932743E-19,
+      "Z": 2.0593304839167104E-09
+    }
+  },
+  "geometry": {
+    "Features": {
+      "A": -4,
+      "B": -21,
+      "C": -5,
+      "D": -20
+    },
+    "Normal": {
+      "X": 0,
+      "Y": 1,
+      "Z": -6.199399327222466E-11
+    },
+    "Tangent0": {
+      "X": 0,
+      "Y": 0,
+      "Z": -1
+    },
+    "Tangent1": {
+      "X": 1,
+      "Y": -0,
+      "Z": 0
+    },
+    "Lever0": {
+      "X": -1,
+      "Y": -0.4995858669281006,
+      "Z": -0.5
+    },
+    "Lever1": {
+      "X": 1,
+      "Y": -0.4995858669281006,
+      "Z": 0.5
+    },
+    "Lever2": {
+      "X": -1,
+      "Y": -0.4995858669281006,
+      "Z": 0.5
+    },
+    "Lever3": {
+      "X": 1,
+      "Y": -0.4995858669281006,
+      "Z": -0.5
+    },
+    "Depth0": 0.00041413315921090543,
+    "Depth1": 0.0004141329845879227,
+    "Depth2": 0.0004141331010032445,
+    "Depth3": 0.0004141330427955836,
+    "Omega": 188.4955596923828,
+    "Friction": 0.5,
+    "Recovery": 2,
+    "TwiceDamping": 2
+  },
+  "accepted": {
+    "Identity": {
+      "World": 1,
+      "Body": 0,
+      "BodyGeneration": 1,
+      "Constraint": 0,
+      "ManifoldGeneration": 1
+    },
+    "Generation": 1,
+    "Piece": 0,
+    "Kind": "Preparation",
+    "ProducingGeometry": {
+      "Features": {
+        "A": -4,
+        "B": -21,
+        "C": -5,
+        "D": -20
+      },
+      "Normal": {
+        "X": 0,
+        "Y": 1,
+        "Z": -7.87934925639E-11
+      },
+      "Tangent0": {
+        "X": 0,
+        "Y": 0,
+        "Z": -1
+      },
+      "Tangent1": {
+        "X": 1,
+        "Y": -0,
+        "Z": 0
+      },
+      "Lever0": {
+        "X": -1,
+        "Y": -0.4995858669281006,
+        "Z": -0.5
+      },
+      "Lever1": {
+        "X": 1,
+        "Y": -0.4995858669281006,
+        "Z": 0.5
+      },
+      "Lever2": {
+        "X": -1,
+        "Y": -0.4995858669281006,
+        "Z": 0.5
+      },
+      "Lever3": {
+        "X": 1,
+        "Y": -0.4995858669281006,
+        "Z": -0.5
+      },
+      "Depth0": 0.000414133130107075,
+      "Depth1": 0.00041413301369175315,
+      "Depth2": 0.0004141330427955836,
+      "Depth3": 0.0004141331010032445,
+      "Omega": 188.4955596923828,
+      "Friction": 0.5,
+      "Recovery": 2,
+      "TwiceDamping": 2
+    },
+    "ProducingDuration": {},
+    "Cache": {
+      "N0": {
+        "Mantissa": 1.308000087738037,
+        "Exponent": -2
+      },
+      "N1": {
+        "Mantissa": 1.3079999685287476,
+        "Exponent": -2
+      },
+      "N2": {
+        "Mantissa": 1.3079999685287476,
+        "Exponent": -2
+      },
+      "N3": {
+        "Mantissa": 1.308000087738037,
+        "Exponent": -2
+      },
+      "T0": {
+        "Mantissa": -1.7848753929138184,
+        "Exponent": -26
+      },
+      "T1": {
+        "Mantissa": 1.7281309366226196,
+        "Exponent": -28
+      },
+      "Twist": {
+        "Mantissa": 1.4966014623641968,
+        "Exponent": -62
+      }
+    },
+    "Load": {
+      "Gravity": {
+        "X": 0,
+        "Y": -9.81,
+        "Z": 0
+      },
+      "Force": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0
+      },
+      "Torque": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0
+      }
+    },
+    "Endpoint": {
+      "Linear": {
+        "X": -1.0288123686308381E-09,
+        "Y": -6.332993507385254E-07,
+        "Z": 5.035674099929111E-10
+      },
+      "Angular": {
+        "X": 1.0079697077003402E-09,
+        "Y": 1.6226184275932743E-19,
+        "Z": 2.0593304839167104E-09
+      }
+    }
+  },
+  "reference": "Exact rational elimination of current seven-row interior equations; all h terms retained",
+  "referenceImpulseScales": [
+    {
+      "Mantissa": 1.2262190859646185,
+      "Exponent": -1071
+    },
+    {
+      "Mantissa": 1.2262184712520787,
+      "Exponent": -1071
+    },
+    {
+      "Mantissa": 1.2262189453355807,
+      "Exponent": -1071
+    },
+    {
+      "Mantissa": 1.2262186118811167,
+      "Exponent": -1071
+    },
+    {
+      "Mantissa": -1.480687565407647,
+      "Exponent": -55
+    },
+    {
+      "Mantissa": -1.3149925213198024,
+      "Exponent": -53
+    },
+    {
+      "Mantissa": -1.276356964886128,
+      "Exponent": -64
+    }
+  ],
+  "tangentMagnitude": {
+    "Mantissa": 1.3661012262179046,
+    "Exponent": -53
+  },
+  "tangentCap": {
+    "Mantissa": 1.2262187786083483,
+    "Exponent": -1072
+  },
+  "tangentSquared": {
+    "Mantissa": 1.8662325602740628,
+    "Exponent": -106
+  },
+  "capSquared": {
+    "Mantissa": 1.50361249301175,
+    "Exponent": -2144
+  },
+  "exactPositiveNormals": true,
+  "exactEquationResidualZero": true,
+  "exactTangentCapFeasible": false,
+  "exactTangentCapComparison": 1,
+  "referenceAdmissible": false,
+  "acceptedTupleUnchanged": true,
+  "nativeGeometryRefreshed": true,
+  "Unsafe": true,
+  "candidateSolverCalls": 0,
+  "endpointInstalls": 0,
+  "cacheInstalls": 0,
+  "coastCalls": 0,
+  "canonicalMutations": 0,
+  "meaning": "An infeasible interior solution is not a physical contact reference; no candidate accuracy is inferred from it."
+}

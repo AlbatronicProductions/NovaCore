@@ -1,0 +1,148 @@
+{
+  "judgment": "REJECT C",
+  "scope": "mathematical feasibility passed; production advancement rejected on payoff/bridge gate",
+  "protectedFilesUnchanged": 2388,
+  "protectedAggregateSha256": "93E6078C8548A5911F2E6A9F2FD03871AA0BD70C972ECA39EAC96C1F03816DCF",
+  "stagedPaths": [],
+  "unstagedTrackedPaths": [],
+  "statusShort": [
+    "?? docs/engineering-evidence/powered-contact-architecture/",
+    "?? docs/engineering-evidence/powered-contact-chronological-event-feasibility/",
+    "?? docs/engineering-evidence/powered-contact-event-lifecycle-convergence/",
+    "?? docs/engineering-evidence/powered-contact-numerical-prerequisite/",
+    "?? tests/NovaCore.ContactNumerics.ConvergenceProbe/",
+    "?? tests/NovaCore.ContactNumerics.CoupledProbe/",
+    "?? tests/NovaCore.ContactNumerics.DurationProbe/",
+    "?? tests/NovaCore.ContactNumerics.IntegratedProbe/",
+    "?? tests/NovaCore.ContactNumerics.OwnedCacheProbe/",
+    "?? tests/NovaCore.ContactNumerics.PreconditionedProbe/",
+    "?? tests/NovaCore.ContactNumerics.Probe/",
+    "?? tests/NovaCore.ContactNumerics.WorldProbe/"
+  ],
+  "diffCheck": "PASS",
+  "cachedDiffCheck": "PASS",
+  "evidenceSyntaxJsonLinksWhitespace": "PASS",
+  "allHistoricalTags": "UNCHANGED",
+  "ksaInspectedFiles": "UNCHANGED",
+  "blenderWriteOperations": 0,
+  "productionFilesChanged": 0,
+  "permanentTestsChanged": 0,
+  "newEvidenceRoot": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-chronological-event-feasibility",
+  "retainedFiles": 22,
+  "retainedBytes": 181089.0,
+  "budgetBytes": 262144,
+  "disposablePaths": [],
+  "disposableFiles": 0,
+  "disposableBytes": 0,
+  "deletedFiles": 0,
+  "manualCleanupCommand": "NOT APPLICABLE: no disposable target created; retained source/evidence/results must not be deleted",
+  "verifier": "independent22question review supports math feasibility and REJECT C advancement",
+  "manifestExcludesSelf": true,
+  "manifest": [
+    {
+      "file": "candidate-derivation.md",
+      "bytes": 2657,
+      "sha256": "1997D03108C9208835E4875F4CB1FF28948D15A42B7AC8FF6F0B8A04A875AEE6"
+    },
+    {
+      "file": "chronology.py",
+      "bytes": 10671,
+      "sha256": "FA73A09F15DBC6F74CE0FFC3516D3B3BB2F0867C513AA4034CB4A6616F4D42F1"
+    },
+    {
+      "file": "cleanup.md",
+      "bytes": 1717,
+      "sha256": "48948D19A7940CEA5EA5B6B395550680C9603A1B8C66B6111BC50D44DE5B1820"
+    },
+    {
+      "file": "friction-work.json",
+      "bytes": 11608,
+      "sha256": "02C32A5E3CB841F683800ED4F9CD6182CA80A91FFC4B064403EC11F3A4774F9C"
+    },
+    {
+      "file": "identity.json",
+      "bytes": 8973,
+      "sha256": "C34C1C2F9A25609101120E40AE92665A3F44C7D25F154E78BC6239661AE009F9"
+    },
+    {
+      "file": "ksa-tradeoff.md",
+      "bytes": 4584,
+      "sha256": "C8FBB5869A1264FF0030719CD5E51B4EC0ED9CFAD19CF4DCDCE754BD9A3B3C35"
+    },
+    {
+      "file": "mechanism-disposition.md",
+      "bytes": 2462,
+      "sha256": "F202F0A787201842D710758F2F38D1307FF0486EB0C0995F18D9343C9ADF18CC"
+    },
+    {
+      "file": "model-contract.md",
+      "bytes": 6112,
+      "sha256": "E567CA2B31155A701DEB215274304C1DDB2FF7CC7D87113534F9EA1E7281E739"
+    },
+    {
+      "file": "necessity-payoff.md",
+      "bytes": 6676,
+      "sha256": "186C4D56AA97FB2F1968D8444AA638A06D1A4AD05B446DD08F726CEFCD56F8EF"
+    },
+    {
+      "file": "off-com.json",
+      "bytes": 11766,
+      "sha256": "C63E4662DE8CCC4156E16518E889DBDF58740AD42B8ECB4116899D01770AF043"
+    },
+    {
+      "file": "ordinary-event.json",
+      "bytes": 11635,
+      "sha256": "AC728800825794D38062701F3550B88C09C542C04922EDE06E7242C01CC358B2"
+    },
+    {
+      "file": "rank-conditioning.md",
+      "bytes": 1437,
+      "sha256": "1540534D21EFEA111FAF39D06F7834ADE09B5741737B845441ED71FC796498D4"
+    },
+    {
+      "file": "README.md",
+      "bytes": 11789,
+      "sha256": "C8A766FB622D52C8CBA3E1695C8E77E9B4DDF8BBE0B4570F93786F01D38BE324"
+    },
+    {
+      "file": "realistic-payoff.json",
+      "bytes": 42226,
+      "sha256": "8DBE80E769A7C0E48F8C4593519170E33B5E447D840E88BB5ED4605C841F6CB1"
+    },
+    {
+      "file": "reference-derivation.md",
+      "bytes": 1982,
+      "sha256": "AF50596B7E4B94E78B0B3A41D8184BDE03E4D7E0D8F38EC22B14D462E2299C03"
+    },
+    {
+      "file": "reproduce.md",
+      "bytes": 2385,
+      "sha256": "96D2944449A3A1C38AF45EDDD223C82B3082E60834BF2CDD252B63D784E3AC65"
+    },
+    {
+      "file": "retained-world-bridge.md",
+      "bytes": 5217,
+      "sha256": "70DFF371668581B5C624372C00144A14258917CE49E5FAE239FC2A83FABD7FC8"
+    },
+    {
+      "file": "tiny-audit.py",
+      "bytes": 2120,
+      "sha256": "321645486975AAD7488FADFFBB7D18C27B1D37AE8AFE89082280ADA5FBCF2031"
+    },
+    {
+      "file": "tiny-differential.json",
+      "bytes": 2812,
+      "sha256": "5FA7E8F6C564456F178F63CF7F4907EFF92721B492EAB2D64B106751E0E9B598"
+    },
+    {
+      "file": "tiny-event.json",
+      "bytes": 22806,
+      "sha256": "B6D4B2E5DB78A37F9A9A373EBFC049313C54D75210B748F9CA17A632B30AB869"
+    },
+    {
+      "file": "verification.md",
+      "bytes": 4189,
+      "sha256": "63DF69F301C8578FF98F437C8005EE3C29C79211031D89A5FB522FF45D06EF6F"
+    }
+  ]
+}

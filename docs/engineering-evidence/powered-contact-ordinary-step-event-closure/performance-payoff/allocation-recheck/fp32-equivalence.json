@@ -1,0 +1,119 @@
+{
+  "result": "FP32_EQUIVALENCE_PASS",
+  "exactLedgerIdentical": true,
+  "rows": [
+    {
+      "name": "ax",
+      "witnessBits": 1077935923,
+      "oldMapperBits": 1077935923,
+      "correctedMapperBits": 1077935923,
+      "equal": true
+    },
+    {
+      "name": "ay",
+      "witnessBits": -1061557234,
+      "oldMapperBits": -1061557234,
+      "correctedMapperBits": -1061557234,
+      "equal": true
+    },
+    {
+      "name": "wx",
+      "witnessBits": -1077097267,
+      "oldMapperBits": -1077097267,
+      "correctedMapperBits": -1077097267,
+      "equal": true
+    },
+    {
+      "name": "wy",
+      "witnessBits": 1067030938,
+      "oldMapperBits": 1067030938,
+      "correctedMapperBits": 1067030938,
+      "equal": true
+    },
+    {
+      "name": "inverseMass",
+      "witnessBits": 1040187119,
+      "oldMapperBits": 1040187119,
+      "correctedMapperBits": 1040187119,
+      "equal": true
+    },
+    {
+      "name": "H",
+      "witnessBits": 1015580809,
+      "oldMapperBits": 1015580809,
+      "correctedMapperBits": 1015580809,
+      "equal": true
+    }
+  ],
+  "binary64ObservationOnly": [
+    {
+      "name": "ax",
+      "oldValue": 2.999951172669716,
+      "newValue": 2.9999511726697157,
+      "oldDoubleBits": 4613937708291699916,
+      "newDoubleBits": 4613937708291699915,
+      "doubleEqual": false,
+      "oldFloatBits": 1077935923,
+      "newFloatBits": 1077935923,
+      "floatEqual": true
+    },
+    {
+      "name": "ay",
+      "oldValue": -5.810065103107045,
+      "newValue": -5.810065103107046,
+      "oldDoubleBits": -4605144466669050101,
+      "newDoubleBits": -4605144466669050100,
+      "doubleEqual": false,
+      "oldFloatBits": -1061557234,
+      "newFloatBits": -1061557234,
+      "floatEqual": true
+    },
+    {
+      "name": "wx",
+      "oldValue": -1.5999999999999999,
+      "newValue": -1.6,
+      "oldDoubleBits": -4613487458278336103,
+      "newDoubleBits": -4613487458278336102,
+      "doubleEqual": false,
+      "oldFloatBits": -1077097267,
+      "newFloatBits": -1077097267,
+      "floatEqual": true
+    },
+    {
+      "name": "wy",
+      "oldValue": 1.2,
+      "newValue": 1.2000000000000002,
+      "oldDoubleBits": 4608083138725491507,
+      "newDoubleBits": 4608083138725491508,
+      "doubleEqual": false,
+      "oldFloatBits": 1067030938,
+      "newFloatBits": 1067030938,
+      "floatEqual": true
+    },
+    {
+      "name": "inverseMass",
+      "oldValue": 0.12499796552790482,
+      "newValue": 0.12499796552790482,
+      "oldDoubleBits": 4593671473318741604,
+      "newDoubleBits": 4593671473318741604,
+      "doubleEqual": true,
+      "oldFloatBits": 1040187119,
+      "newFloatBits": 1040187119,
+      "floatEqual": true
+    },
+    {
+      "name": "H",
+      "oldValue": 0.016666666666666666,
+      "newValue": 0.016666666666666666,
+      "oldDoubleBits": 4580461061010952465,
+      "newDoubleBits": 4580461061010952465,
+      "doubleEqual": true,
+      "oldFloatBits": 1015580809,
+      "newFloatBits": 1015580809,
+      "floatEqual": true
+    }
+  ],
+  "historicalStop": "PRESERVED",
+  "activeContract": "Accepted projection-contract B; no tolerance",
+  "determinism": "All warmed corrected outputs compare to their own initial binary64 result and the retained six FP32 inputs"
+}

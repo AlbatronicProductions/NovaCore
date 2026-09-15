@@ -1,0 +1,39 @@
+{
+  "candidateCoastCalls": 0,
+  "tinyPair": "PASS; installed normally",
+  "referenceReview": "PASS; unique admitted interior linear-system solution, not a global all-active-sets uniqueness proof",
+  "files": [
+    {
+      "path": "coast-policy.md",
+      "sha256": "44808502985E4D093DB4FE86773DEFC4FB92FB98D0601C0492A802890FBC83FD"
+    },
+    {
+      "path": "coast_reference.py",
+      "sha256": "276B03A0EB3D1AB51DFD5673767B854F9E5B78155B0BCC54223AA95E5253B39B"
+    },
+    {
+      "path": "coast-reference.json",
+      "sha256": "ABE661642FD8CBE4228B4F9E47BAEBD313C89014F140D7222D1F92A44B21672B"
+    },
+    {
+      "path": "tiny-comparison.json",
+      "sha256": "7E3D7682BE5D71C97F6CC11A604B087582330C20C2A244E1F375488EB508FC5E"
+    },
+    {
+      "path": "candidate-results/baseline-installed.json",
+      "sha256": "AA9E1B48DF104715AD20E3CBFFFBC034340E246BC429B6739D2C1EFEB168794F"
+    },
+    {
+      "path": "candidate-results/powered-installed.json",
+      "sha256": "54AAAD502FC744F5CFA9712922E336646CFDF1C4497E5EDBD26B9B4779C3D3A2"
+    },
+    {
+      "path": "candidate-results/baseline-coast-input.json",
+      "sha256": "C9A3276FFB19E633CB842002F735795BC97C39A3DC0090ED7476A95E670DD849"
+    },
+    {
+      "path": "candidate-results/powered-coast-input.json",
+      "sha256": "441E384E23376C418DA5FC15728C3193F8683A09375F1DD89CDC5017FD5C05F4"
+    }
+  ]
+}

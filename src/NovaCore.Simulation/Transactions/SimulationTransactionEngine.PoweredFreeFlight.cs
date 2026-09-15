@@ -3,6 +3,7 @@ using NovaCore.Simulation.Clock;
 using NovaCore.Simulation.Spacecraft;
 using NovaCore.Simulation.Spacecraft.Actuation;
 using NovaCore.Simulation.Spacecraft.Commands;
+using NovaCore.Simulation.Spacecraft.Contact.Staging;
 using NovaCore.Simulation.Spacecraft.Resources;
 using NovaCore.Simulation.Spacecraft.Translation;
 using NovaCore.Simulation.Time;
@@ -31,6 +32,12 @@ internal sealed partial class SimulationTransactionEngine
         internal PoweredFlightRecord Prepared;
         internal PoweredFlightObservation Observation;
         internal PoweredFlightEpisode Episode;
+        internal LocalContactWorld? Contact;
+        internal LocalContactConfiguration? ContactConfiguration;
+        internal LocalContactWorld.Receipt ContactReceipt;
+        // Issued only by uninterrupted service after its full source admission. Never a public lease.
+        internal bool ReadyContactInterval;
+        internal long ReadyContactFrontier;
     }
     private PoweredFlightStorage? _poweredFlight;
 
@@ -52,7 +59,28 @@ internal sealed partial class SimulationTransactionEngine
             !view.Spacecraft.TryGetDefinition(authority.Commands.Spacecraft, out var definition) || definition != p.ExpectedDefinition ||
             authority.Resource.Copy() != p.ExpectedResource || authority.Resource.Definition.Values != p.ExpectedResource.Definition)
             return PoweredFlightStatus.StaleSource;
-        return PoweredFlightStatus.Ready;
+        return p.Contact?.CheckPoweredAuthority(this, authority, p.ContactReceipt, true) ?? PoweredFlightStatus.Ready;
+    }
+
+    internal bool OwnsReadyContactSource(LocalContactWorld world, PoweredFlightAuthority authority)
+        => authority is { Consumer: PoweredPhysicalConsumer.RetainedContact } && _clock.PublicationPhase.IsOwnedBy(this) &&
+            _poweredFlight is { ReadyContactInterval: true, Invalidated: false } p &&
+            ReferenceEquals(p.Authority, authority) && ReferenceEquals(p.Contact, world) &&
+            p.ReadyContactFrontier == p.Frontier;
+
+    private PoweredFlightStatus CheckPreparedPoweredSource(PoweredFlightAuthority authority)
+        => _poweredFlight?.Contact is { } world && OwnsReadyContactSource(world, authority)
+            ? PoweredFlightStatus.Ready : CheckPoweredSource(authority);
+
+    private bool PreparedContactSourceMass(PropellantResourceAuthority authority, out double mass)
+    {
+        mass = 0;
+        if (_poweredFlight is not { Contact: { } world } p || !ReferenceEquals(p.Authority.Resource, authority) ||
+            !OwnsReadyContactSource(world, p.Authority)) return false;
+        // Cold binding proves resource-to-mass equality; joint successor installation preserves it.
+        // Entry admits that exact acknowledged pair. Live engine/resource readers still recheck it.
+        mass = p.ExpectedPhysical.Properties.MassKilograms;
+        return true;
     }
 
     internal PoweredFlightStatus BeginPoweredFreeFlight(PropellantResourceAuthority resource, int historyCapacity,
@@ -101,6 +129,9 @@ internal sealed partial class SimulationTransactionEngine
     }
 
     internal PoweredFlightResult ObservePoweredFreeFlight(PoweredFlightAuthority authority)
+        => authority is { Consumer: PoweredPhysicalConsumer.FreeFlight } ? ObservePowered(authority) : new(PoweredFlightStatus.InvalidAuthority);
+
+    private PoweredFlightResult ObservePowered(PoweredFlightAuthority authority)
     {
         var entered = EnterPoweredPhase(); if (entered != PoweredFlightStatus.Ready) return new(entered);
         try
@@ -123,6 +154,7 @@ internal sealed partial class SimulationTransactionEngine
     /// <summary>Explicit private cancellation, including a stale resource lease. Never rewinds the parent engine cursor.</summary>
     internal PoweredFlightStatus RetirePoweredFlightProposal(PoweredFlightAuthority authority, PoweredFlightProposal proposal)
     {
+        if (authority is not { Consumer: PoweredPhysicalConsumer.FreeFlight }) return PoweredFlightStatus.InvalidAuthority;
         var entered = EnterPoweredPhase(); if (entered != PoweredFlightStatus.Ready) return entered;
         try
         {
@@ -138,6 +170,10 @@ internal sealed partial class SimulationTransactionEngine
     }
     internal PoweredFlightResult AdmitPoweredHostTime(PoweredFlightAuthority authority, long sequence, SimulationDuration elapsed,
         bool failAcknowledgementForTest = false)
+        => authority is { Consumer: PoweredPhysicalConsumer.FreeFlight } ? AdmitPoweredTime(authority, sequence, elapsed, failAcknowledgementForTest) : new(PoweredFlightStatus.InvalidAuthority);
+
+    private PoweredFlightResult AdmitPoweredTime(PoweredFlightAuthority authority, long sequence, SimulationDuration elapsed,
+        bool failAcknowledgementForTest)
     {
         var entered = EnterPoweredPhase(); if (entered != PoweredFlightStatus.Ready) return new(entered);
         try
@@ -155,11 +191,16 @@ internal sealed partial class SimulationTransactionEngine
             // M14.22 requires a representable funded horizon as well as representable debt.
             if ((Int128)after.Time.Ticks + after.Debt.Ticks > long.MaxValue) return new(PoweredFlightStatus.ArithmeticOverflow);
             status = CheckPoweredSource(authority); if (status != PoweredFlightStatus.Ready) return new(status);
+            var creditObservation = p.Observation with { Clock = after };
+            LocalContactWorld.PoweredAcknowledgement contactCredit = default;
+            if (p.Contact is not null && !LocalContactWorld.PoweredAcknowledgement.TryPrepare(p.Contact, this,
+                creditObservation, sequence, true, out contactCredit)) return new(PoweredFlightStatus.StaleSource);
             _clock.InstallHostAdvance(prepared);
             p.Observation = p.Observation with { Clock = after };
             if (failAcknowledgementForTest)
-            { p.Invalidated = true; return new(PoweredFlightStatus.CanonicalCommittedPrivateInvalidated, p.Observation); }
+            { p.Invalidated = true; p.Contact?.InvalidatePoweredContinuation(); return new(PoweredFlightStatus.CanonicalCommittedPrivateInvalidated, p.Observation); }
             p.ExpectedClock = after; p.HostSequence = sequence;
+            if (p.Contact is not null) contactCredit.Commit();
             p.Observation = p.Observation with { Clock = after };
             return new(PoweredFlightStatus.AcceptedCredit, p.Observation);
         }
@@ -170,6 +211,7 @@ internal sealed partial class SimulationTransactionEngine
         out PoweredFlightProposal proposal, bool refuseForTest = false)
     {
         proposal = default;
+        if (authority is not { Consumer: PoweredPhysicalConsumer.FreeFlight }) return PoweredFlightStatus.InvalidAuthority;
         var entered = EnterPoweredPhase(); if (entered != PoweredFlightStatus.Ready) return entered;
         try { return PreparePoweredFlightInOwnedPhase(authority, resource, out proposal, refuseForTest); }
         finally { _clock.PublicationPhase.Exit(); }
@@ -178,7 +220,7 @@ internal sealed partial class SimulationTransactionEngine
         out PoweredFlightProposal proposal, bool refuseForTest)
     {
         proposal = default;
-        var status = CheckPoweredSource(authority); if (status != PoweredFlightStatus.Ready) return status;
+        var status = CheckPreparedPoweredSource(authority); if (status != PoweredFlightStatus.Ready) return status;
         var p = _poweredFlight!;
         if (p.Active) return PoweredFlightStatus.OutstandingProposal;
         if (p.Generation == long.MaxValue) return PoweredFlightStatus.ArithmeticOverflow;
@@ -190,9 +232,19 @@ internal sealed partial class SimulationTransactionEngine
         var kinematics = source.IsEndpoint ? new PoweredKinematics(source.Endpoint.PositionRoot, source.Endpoint.VelocityRoot,
             source.Endpoint.BodyToRoot, source.Endpoint.AngularVelocityBody) : new(source.Linear.PositionRoot, source.Linear.VelocityRoot,
             source.Angular.OrientationLocalToParent, source.Angular.AngularVelocityBody);
-        var evaluated = PoweredFlightEvaluator.Evaluate(kinematics, segmentation, out var value, out _);
-        if (evaluated != PoweredEvaluationStatus.Success)
-            return evaluated == PoweredEvaluationStatus.OutsideModel ? PoweredFlightStatus.OutsideModel : PoweredFlightStatus.NumericalFailure;
+        PoweredKinematics value;
+        if (authority is { Consumer: PoweredPhysicalConsumer.RetainedContact })
+        {
+            if (refuseForTest) return PoweredFlightStatus.PreparationRefused;
+            status = PreparePoweredContactPhysical(p, segmentation, out value);
+            if (status != PoweredFlightStatus.Prepared) return status;
+        }
+        else
+        {
+            var evaluated = PoweredFlightEvaluator.Evaluate(kinematics, segmentation, out value, out _);
+            if (evaluated != PoweredEvaluationStatus.Success)
+                return evaluated == PoweredEvaluationStatus.OutsideModel ? PoweredFlightStatus.OutsideModel : PoweredFlightStatus.NumericalFailure;
+        }
         if (p.ExpectedRevision.Value == ulong.MaxValue || p.Actual.ActuatorRevision == ulong.MaxValue ||
             (!segmentation.ConsumedUnits.IsZero && p.ExpectedResource.ResourceRevision == ulong.MaxValue)) return PoweredFlightStatus.RevisionOverflow;
         var endpoint = new SpacecraftAppliedEndpoint(authority.Commands.Spacecraft, authority.Commands.RootFrame, segmentation.Engine.End,
@@ -205,10 +257,14 @@ internal sealed partial class SimulationTransactionEngine
             segmentation.PoweredDuration, p.Frontier + 1, p.Actual.ActuatorRevision + 1);
         var record = new PoweredFlightRecord(1, p.Frontier, segmentation, endpoint, actuator, p.ExpectedRevision,
             new(p.ExpectedRevision.Value + 1), p.ExpectedResource.ResourceRevision + (segmentation.ConsumedUnits.IsZero ? 0UL : 1UL), p.ExpectedTimeline);
+        if (p.Contact is not null) record = record with { Version = 2, Consumer = authority.Consumer,
+            ContactFixture = p.Episode.ContactFixture, ContactFrontier = p.ContactReceipt.Step };
         if (refuseForTest) return PoweredFlightStatus.PreparationRefused;
-        status = CheckPoweredSource(authority); if (status != PoweredFlightStatus.Ready) return status;
+        status = CheckPreparedPoweredSource(authority);
+        if (status != PoweredFlightStatus.Ready)
+            return p.Contact is null ? status : InvalidatePoweredContact(p, PoweredFlightStatus.Invalidated);
         if (ReadFinitePropellantInOwnedPhase(authority.Resource, resource, out _) != PropellantPreparationStatus.Preview)
-            return PoweredFlightStatus.InvalidProposal;
+            return p.Contact is null ? PoweredFlightStatus.InvalidProposal : InvalidatePoweredContact(p, PoweredFlightStatus.Invalidated);
         p.Prepared = record; p.ResourceLease = resource; p.Generation++; p.Active = true;
         proposal = new(p.Generation, p.Seal);
         return PoweredFlightStatus.Prepared;
@@ -217,13 +273,14 @@ internal sealed partial class SimulationTransactionEngine
     internal PoweredFlightResult PublishPoweredFlight(PoweredFlightAuthority authority, PoweredFlightProposal proposal,
         bool failAcknowledgementForTest = false)
     {
+        if (authority is not { Consumer: PoweredPhysicalConsumer.FreeFlight }) return new(PoweredFlightStatus.InvalidAuthority);
         var entered = EnterPoweredPhase(); if (entered != PoweredFlightStatus.Ready) return new(entered);
         try { return PublishPoweredFlightInOwnedPhase(authority, proposal, failAcknowledgementForTest); }
         finally { _clock.PublicationPhase.Exit(); }
     }
     private PoweredFlightResult PublishPoweredFlightInOwnedPhase(PoweredFlightAuthority authority, PoweredFlightProposal proposal, bool failAcknowledgementForTest)
     {
-        var status = CheckPoweredSource(authority); if (status != PoweredFlightStatus.Ready) return new(status);
+        var status = CheckPreparedPoweredSource(authority); if (status != PoweredFlightStatus.Ready) return new(status);
         var p = _poweredFlight!;
         if (!p.Active || !proposal.IsIssuedBy(p.Seal) || proposal.Generation != p.Generation) return new(PoweredFlightStatus.InvalidProposal);
         if (ReadFinitePropellantInOwnedPhase(authority.Resource, p.ResourceLease, out var resource) != PropellantPreparationStatus.Preview)
@@ -241,13 +298,28 @@ internal sealed partial class SimulationTransactionEngine
         var successorResource = p.ExpectedResource with { RemainingUnits = resource.SuccessorUnits, ResourceRevision = record.ResourceRevision };
         var successorPhysical = new SpacecraftPhysicalSource(true, endpoint, default, default, endpoint.Properties);
         var observation = new PoweredFlightObservation(endpoint, successorResource, record.Actuator, record.StateRevision, record.TimelineRevision, clock, p.Count + 1);
+        LocalContactWorld.PoweredAcknowledgement contactAck = default;
+        if (p.Contact is not null)
+        {
+            if (p.Contact.ReadPoweredEndpoint(this, authority, p.ContactReceipt, out var native) != PoweredFlightStatus.Prepared)
+                return new(PoweredFlightStatus.InvalidProposal);
+            var expectedEndpoint = new SpacecraftAppliedEndpoint(native.Motion.Spacecraft, native.Motion.RootFrame,
+                native.Motion.Time, native.Motion.PositionRoot, native.Motion.VelocityRoot, native.Motion.BodyToRoot,
+                native.Motion.AngularVelocityBody, new(resource.ProposedSuccessorMass.TotalMassKilograms),
+                resource.ProposedSuccessorMass.Inertia, AppliedEndpointValidity.EndpointOnly);
+            if (!expectedEndpoint.SameBits(endpoint) ||
+                !LocalContactWorld.PoweredAcknowledgement.TryPrepare(p.Contact, this, observation, p.HostSequence, false, out contactAck))
+                return new(PoweredFlightStatus.InvalidProposal);
+        }
         // Final recheck; no callback or release of the transaction owner before fixed writes.
-        status = CheckPoweredSource(authority); if (status != PoweredFlightStatus.Ready) return new(status);
+        status = CheckPreparedPoweredSource(authority); if (status != PoweredFlightStatus.Ready) return new(status);
         if (ReadFinitePropellantInOwnedPhase(authority.Resource, p.ResourceLease, out _) != PropellantPreparationStatus.Preview ||
             !_state.TryPrepareAppliedSlot(authority.Commands.Spacecraft, p.ExpectedPhysical, out var again) || again != slot)
             return new(PoweredFlightStatus.StaleSource);
 
         // ONE CANONICAL TRANSACTION: fixed prevalidated slots, no numerical work, allocation or normal refusal.
+        // The old source proof expires before the first successor write, including terminal ack failure.
+        p.ReadyContactInterval = false;
         _state.InstallAppliedEndpoint(slot, endpoint, record.StateRevision);
         _propellantPreparation!.Canonical = successorResource;
         p.Actual = record.Actuator;
@@ -260,16 +332,20 @@ internal sealed partial class SimulationTransactionEngine
         p.Active = false; p.ResourceLease = default; p.Prepared = default;
         try
         {
-            if (failAcknowledgementForTest) { p.Invalidated = true; return new(PoweredFlightStatus.CanonicalCommittedPrivateInvalidated, observation, 1); }
+            if (failAcknowledgementForTest) { p.Invalidated = true; p.Contact?.InvalidatePoweredContinuation(); return new(PoweredFlightStatus.CanonicalCommittedPrivateInvalidated, observation, 1); }
             p.ExpectedPhysical = successorPhysical; p.ExpectedResource = successorResource;
             p.ExpectedClock = clock; p.ExpectedRevision = record.StateRevision; p.Frontier = record.Actuator.Frontier;
+            if (p.Contact is not null) contactAck.Commit();
         }
-        catch (Exception) { p.Invalidated = true; return new(PoweredFlightStatus.CanonicalCommittedPrivateInvalidated, observation, 1); }
+        catch (Exception) { p.Invalidated = true; p.Contact?.InvalidatePoweredContinuation(); return new(PoweredFlightStatus.CanonicalCommittedPrivateInvalidated, observation, 1); }
         return new(PoweredFlightStatus.Published, observation, 1);
     }
 
     /// <summary>Bounded drain. Each interval uses the just-committed state; host credit is a separate once-only operation.</summary>
     internal PoweredFlightResult ServicePoweredFlightDebt(PoweredFlightAuthority authority)
+        => authority is { Consumer: PoweredPhysicalConsumer.FreeFlight } ? ServicePoweredDebt(authority) : new(PoweredFlightStatus.InvalidAuthority);
+
+    private PoweredFlightResult ServicePoweredDebt(PoweredFlightAuthority authority)
     {
         var entered = EnterPoweredPhase(); if (entered != PoweredFlightStatus.Ready) return new(entered);
         try
@@ -288,6 +364,12 @@ internal sealed partial class SimulationTransactionEngine
                 if (p.ExpectedClock.Debt.Ticks < (Int128)target.Ticks - p.ExpectedClock.Time.Ticks)
                     return new(PoweredFlightStatus.AwaitingDebt, p.Observation, count);
                 if (count == 4) return new(PoweredFlightStatus.BudgetExhausted, p.Observation, count);
+                // The same owner remains held through ready preparation, solve and application.
+                // No callback in this path carries canonical authority. External APIs cannot inherit this proof.
+                p.ReadyContactFrontier = p.Frontier;
+                p.ReadyContactInterval = p.Contact is not null;
+                try
+                {
                 if (_commands!.ClosedThrough < p.Frontier)
                 {
                     for (var i = 0; i <= SpacecraftCommandAuthority.OrdinaryCapacity + 1; i++)
@@ -309,6 +391,8 @@ internal sealed partial class SimulationTransactionEngine
                 var published = PublishPoweredFlightInOwnedPhase(authority, proposal, false);
                 count += published.PublishedCount;
                 if (published.Status != PoweredFlightStatus.Published) return published with { PublishedCount = count };
+                }
+                finally { p.ReadyContactInterval = false; }
             }
         }
         finally { _clock.PublicationPhase.Exit(); }

@@ -1,0 +1,20 @@
+# KSA responsibility convergence matrix
+
+Current5438 installed build and resolved IL anchors: [current proof](ksa-current-lifecycle.md). Initial5402 readable provenance remains historical. NovaCore positive requirements: [outcome map](novacore-outcome-mechanism-map.md). ADOPT is an ownership conclusion, not authorization to alter code. The existing backend ownership facts are accepted prior evidence, reidentified with unchanged backend hashes; new lifecycle facts use current5438 methods below.
+
+| Responsibility | KSA direct current evidence | Classification | NovaCore consequence |
+|---|---|---|---|
+| Retained manifold ownership | Current ConstraintSim.Simulate0600069D; accepted retained Simulation/backend matching at unchanged pinned beta.29 | ADOPT | Retain solver resources; don't reconstruct per event or publication |
+| Solver cache ownership | Accepted backend FP32 accumulated impulses; current callback060006BD retains terrain aggregate use | ADOPT | Cache is private numerical continuation with real downstream effects, not canonical ledger or purely diagnostic |
+| Physics timestep | FullPhysicsConstrainedStep06001C19 / Simulate0600069D; min(remaining,1/60), float handoff, selected outer substeps including pair horizons | ADAPT | Separate exact ledger chronology from numerical partition only after physical proof; do not copy float(h)=0 |
+| Iteration policy | Current ConstraintSim constructor06000684 loads8/1 before SolveDescription call004B and retains Simulation00A7. No discovered exact-cache one-ULP convergence gate | ADAPT | Select convergence/performance for NovaCore operator. Neither KSA 8 nor diagnostic 32 overrides frozen D12 |
+| Propulsion force timing | Current UpdateActiveNozzles06001C59 / ComputeDerivatives06001B8F / callback060006BD | ADAPT | Prepare game-owned force, apply within constrained evolution. Exact event/mass/rotation consequences need chronological integration |
+| Resource debit timing | Current constrained06001C19 consume0364; staged06001C45/46 and06003F38; Combustor0600153B/Mole0600149C | INTENTIONALLY DIFFER | M14.24 exact admitted debit and M15.0 joint canonical publication cannot become after-the-fact clamp |
+| Exhaustion event | RocketCore06001524 availability + later liquid drain; SolidMotor060015CE residual cutoff; no exact resource split in traced closure | INTENTIONALLY DIFFER | Exact positive exhaustion and actual-engine order remain; no premature engine shutdown or nominal fuel overapplication |
+| Changing mass | CopyToBepu06001B40, constrained06001C19, properties consume/recompute06001B46; no inner-loop upload | ADAPT | Game owns derived mass, but NovaCore must prove mass-weighted impulse/reaction. Fixed source/endpoint mass unqualified |
+| Body-state application | Current ReadBack → ready06001BF8 → sequential Vehicle apply06002F31 | ADAPT | Reuse copied staged result responsibility, preserve NovaCore atomic owner commit rather than sequential partial authority |
+| Contact/free transition | Current FullPhysicsStepUntil06001C02 and pair-clearance scheduler0600311A/1B; accepted activity/off-rails scope | ADAPT | Supports future game payoff; no imported regime framework or implemented departure here. Mathematical mode changes remain explicit |
+| Private cache validation | Accepted backend feature matching, same-type reuse and current friction projection; poison on timestep exception | ADAPT | Retain genuine provenance, valid saturated history/current feasibility and fail-closed owned continuation; no new split yet |
+| Canonical publication | Current ready/apply06001BF8/06002F31 and module install06003F1C; no rollback-safe exact clock/resource/history transaction | INTENTIONALLY DIFFER | NovaCore exact StateRevision/debt/clock/history/engine/resource paired fixed publication and same-phase ack remain |
+
+Exact subnormal KSA test requirements and its private test suite are UNAVAILABLE / UNPROVEN. No negative assertion about all proprietary code is needed for this matrix. KSA official history is explanatory only and does not supply missing implementation behavior.

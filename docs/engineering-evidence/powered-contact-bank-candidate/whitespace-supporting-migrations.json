@@ -1,0 +1,14 @@
+[
+  {
+    "path": "docs/engineering-evidence/powered-contact-bank-candidate/qualified-source-identity.json",
+    "oldSha256": "9F673540FA970F3395FAFAD4E8DBBB150A153ACC300B444D3CA8C9CBA49F3F76",
+    "newSha256": "E87D369947B076987EA605C4E762BC7A73A18FA85AB819A5C4C94CFC28BBC5CA",
+    "reason": "Current successor seal only; historical hashes retained in prior manifests"
+  },
+  {
+    "path": "docs/engineering-evidence/powered-contact-ordinary-step-event-closure/candidate-a-reproduction-inputs.json",
+    "oldSha256": "7BFA75B00B91A38468DBB4FCAFA20A4ECC88502D67E989A4CC3F312FD95F17D1",
+    "newSha256": "309C7B1DFBF89DC7D0465CA47E426A96BF87A1AF81D22B149D9B98F7061BCB14",
+    "reason": "Current successor seal only; historical hashes retained in prior manifests"
+  }
+]

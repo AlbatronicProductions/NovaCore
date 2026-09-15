@@ -1,0 +1,6 @@
+ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS
+ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152
+ORDINARY_ALLOCATION gate=attribution-empty-scopes bytes=0 entry=PASS exit=PASS
+ORDINARY_ALLOCATION gate=attribution-original-map bytes=1936 entry=PASS exit=PASS
+ORDINARY_ALLOCATION gate=attribution-scoped-map bytes=1936 entry=PASS exit=PASS
+ATTRIBUTION reconciled=1936 original=1936 trace=1936 control=0

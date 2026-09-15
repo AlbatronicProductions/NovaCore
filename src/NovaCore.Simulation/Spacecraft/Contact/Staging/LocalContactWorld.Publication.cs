@@ -44,7 +44,7 @@ internal sealed partial class LocalContactWorld
         if (!engine.OwnsPersistentPublicationPhase) return LocalContactStatus.WrongThread;
         var status = Validate(engine, config, initial, source.Motion.Time);
         if (status != LocalContactStatus.Success) return status;
-        if (frontier != 0 || publication is not null || !initial.IsIssuedBy(receiptIdentity))
+        if (frontier != 0 || publication is not null || powered is not null || !initial.IsIssuedBy(receiptIdentity))
             return LocalContactStatus.FrontierMismatch;
         var view = engine.State;
         if (!view.Spacecraft.TryGetTranslation(source.Motion.Spacecraft, out var linear, out var properties) ||
@@ -61,6 +61,23 @@ internal sealed partial class LocalContactWorld
     private LocalContactStatus ValidateAuthority(SimulationTransactionEngine engine, LocalContactConfiguration config,
         SimulationInstant target)
     {
+        if (powered is { } power)
+        {
+            if (!ReferenceEquals(config, configuration)) return LocalContactStatus.ConfigurationMismatch;
+            if (target < power.Expected.Clock.Time || target > source.End) return LocalContactStatus.InvalidInterval;
+            if (engine.HasContactProofBoundaryThrough(target)) return LocalContactStatus.PendingEvent;
+            // Step marks the world invalid before numerical mutation; the authority recheck following
+            // a successful solve must still compare canonical tokens while that poison flag is set.
+                return (engine.OwnsReadyContactSource(this, power.Authority)
+                    ? CompareReadyPoweredAuthority(engine, power.Authority, CurrentPoweredReceipt, true)
+                    : ComparePoweredAuthority(engine, power.Authority, CurrentPoweredReceipt, true)) switch
+                {
+                    Spacecraft.Actuation.PoweredFlightStatus.Ready => LocalContactStatus.Success,
+                    Spacecraft.Actuation.PoweredFlightStatus.WrongOwnerThread => LocalContactStatus.WrongThread,
+                    Spacecraft.Actuation.PoweredFlightStatus.InvalidAuthority => LocalContactStatus.ForeignEngine,
+                    _ => LocalContactStatus.ChangedAuthority,
+                };
+        }
         if (publication is not { } p) return source.Validate(engine, config, target);
         if (!ReferenceEquals(engine, p.Engine)) return LocalContactStatus.ForeignEngine;
         if (!engine.IsContactProofOwnerThread) return LocalContactStatus.WrongThread;
@@ -87,7 +104,7 @@ internal sealed partial class LocalContactWorld
         if (!ReferenceEquals(receipt.Owner, this) || !receipt.IsIssuedBy(receiptIdentity) || receipt.Generation != Generation)
             return PersistentContactPublicationStatus.InvalidReceipt;
         if (disposed || invalidated) return PersistentContactPublicationStatus.WorldUnavailable;
-        if (publication is not { } p) return PersistentContactPublicationStatus.NotPublishing;
+        if (powered is not null || publication is not { } p) return PersistentContactPublicationStatus.NotPublishing;
         if (!p.Pending || receipt.Step != frontier || frontier != p.AcknowledgedFrontier + 1)
             return PersistentContactPublicationStatus.FrontierConflict;
         var status = ValidateAuthority(engine, config, export.Motion.Time);

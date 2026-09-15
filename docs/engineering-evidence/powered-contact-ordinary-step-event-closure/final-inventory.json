@@ -1,0 +1,108 @@
+{
+  "judgment": "PASS \u2014 CONSOLIDATED",
+  "baseline": {
+    "HEAD": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+    "main": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+    "origin/main": "49057fecceb0f725d5f551ec40e2780971b0d81d"
+  },
+  "remoteMain": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "branch": "codex/powered-contact-numerical-prerequisite",
+  "trackedModifications": [],
+  "stagedPaths": [],
+  "gitStatusShort": [
+    "?? docs/engineering-evidence/powered-contact-architecture/",
+    "?? docs/engineering-evidence/powered-contact-chronological-event-feasibility/",
+    "?? docs/engineering-evidence/powered-contact-event-lifecycle-convergence/",
+    "?? docs/engineering-evidence/powered-contact-numerical-prerequisite/",
+    "?? docs/engineering-evidence/powered-contact-ordinary-step-event-closure/",
+    "?? tests/NovaCore.ContactNumerics.DurationProbe/",
+    "?? tests/NovaCore.ContactNumerics.IntegratedProbe/",
+    "?? tests/NovaCore.ContactNumerics.OwnedCacheProbe/",
+    "?? tests/NovaCore.ContactNumerics.PreconditionedProbe/",
+    "?? tests/NovaCore.ContactNumerics.WorldProbe/"
+  ],
+  "historicalTagsUnchanged": true,
+  "tagCount": 65,
+  "initialFiles": 628,
+  "initialBytes": 13023489,
+  "removed": {
+    "attempts": 1,
+    "mechanism": "PowerShell Remove-Item -LiteralPath through cleanup-reviewed.ps1 -Delete",
+    "exitCode": 0,
+    "policyBlocks": 0,
+    "removedFiles": 169,
+    "removedBytes": 8763949,
+    "disposableRemovedFiles": 123,
+    "disposableRemovedBytes": 8519322,
+    "remainingReviewedPaths": 0,
+    "remainingDisposableBytes": 0,
+    "remainingRetiredBlockedPaths": 0
+  },
+  "remainingDisposablePaths": [],
+  "remainingRetiredBlockedPaths": [],
+  "productionChanges": 0,
+  "permanentTestChanges": 0,
+  "builds": 0,
+  "numericalRuns": 0,
+  "performanceRuns": 0,
+  "unbanked": true,
+  "diffCheck": "PASS",
+  "cachedDiffCheck": "PASS",
+  "remainingRoots": [
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-architecture",
+      "files": 15,
+      "bytes": 108440
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-chronological-event-feasibility",
+      "files": 22,
+      "bytes": 181089
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-event-lifecycle-convergence",
+      "files": 18,
+      "bytes": 123524
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-numerical-prerequisite",
+      "files": 300,
+      "bytes": 3163608
+    },
+    {
+      "path": "E:\\NovaCore\\docs\\engineering-evidence\\powered-contact-ordinary-step-event-closure",
+      "files": 98,
+      "bytes": 803257
+    },
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.DurationProbe",
+      "files": 2,
+      "bytes": 17183
+    },
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.IntegratedProbe",
+      "files": 8,
+      "bytes": 55978
+    },
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.OwnedCacheProbe",
+      "files": 3,
+      "bytes": 38690
+    },
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.PreconditionedProbe",
+      "files": 4,
+      "bytes": 33166
+    },
+    {
+      "path": "E:\\NovaCore\\tests\\NovaCore.ContactNumerics.WorldProbe",
+      "files": 3,
+      "bytes": 24669
+    }
+  ],
+  "remainingFiles": 473,
+  "retainedBytes": 4549604,
+  "netReductionBytes": 8473885,
+  "evidenceFiles": 453,
+  "diagnosticSourceRoots": 5
+}

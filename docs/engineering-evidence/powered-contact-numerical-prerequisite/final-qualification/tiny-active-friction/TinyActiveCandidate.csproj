@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <NovaCoreUsesBepu>true</NovaCoreUsesBepu>
+    <StartupObject>TinyActiveCandidate</StartupObject>
+    <RepoRoot>$([MSBuild]::NormalizeDirectory('$(MSBuildThisFileDirectory)', '../../../../../'))</RepoRoot>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(RepoRoot)tests/NovaCore.ContactNumerics.IntegratedProbe/*.cs" Link="Unchanged/%(Filename)%(Extension)" />
+    <Compile Include="$(RepoRoot)tests/NovaCore.ContactNumerics.WorldProbe/Program.cs" Link="Retained/World.cs" />
+    <Compile Include="$(RepoRoot)tests/NovaCore.ContactNumerics.WorldProbe/KernelProbe.cs" Link="Retained/Kernel.cs" />
+    <Compile Include="$(RepoRoot)tests/NovaCore.ContactNumerics.PreconditionedProbe/PieceKernel.cs" Link="Retained/PieceKernel.cs" />
+    <Compile Include="$(RepoRoot)tests/NovaCore.ContactNumerics.PreconditionedProbe/CommonNormal.cs" Link="Retained/CommonNormal.cs" />
+    <Compile Include="$(RepoRoot)tests/NovaCore.ContactNumerics.OwnedCacheProbe/CacheHistory.cs" Link="Retained/DurationValues.cs" />
+    <Compile Include="$(RepoRoot)src/NovaCore.Simulation/Spacecraft/Resources/PropellantInteger.cs" Link="Banked/PropellantInteger.cs" />
+    <Compile Include="$(RepoRoot)src/NovaCore.Simulation/Spacecraft/Actuation/PoweredFlightNumerics.cs" Link="Banked/PoweredFlightNumerics.cs" />
+    <Compile Include="$(RepoRoot)tests/NovaCore.Simulation.Tests/OrdinaryAllocationMeasurement.cs" Link="Qualified/AllocationMeasurement.cs" />
+  </ItemGroup>
+</Project>

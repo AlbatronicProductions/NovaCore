@@ -15,11 +15,13 @@ internal enum PoweredFlightStatus
     CommandBlocked, EngineBlocked, ResourceBlocked, Retired
 }
 internal enum ActualEngineActivity { Off, EnabledNoFeed, EnabledIdle, ProducingOutput }
+internal enum PoweredPhysicalConsumer { FreeFlight, RetainedContact }
 internal readonly record struct ActualEngineState(ActualEngineActivity Activity, ProposedEngineLatch Latch, double EndpointThrottle,
     PropellantDuration AppliedPoweredDuration, long Frontier, ulong ActuatorRevision);
-internal sealed class PoweredFlightAuthority(PropellantResourceAuthority resource)
+internal sealed class PoweredFlightAuthority(PropellantResourceAuthority resource, PoweredPhysicalConsumer consumer = PoweredPhysicalConsumer.FreeFlight)
 {
     internal readonly PropellantResourceAuthority Resource = resource;
+    internal readonly PoweredPhysicalConsumer Consumer = consumer;
     internal SpacecraftCommandAuthority Commands => Resource.Engine.Commands;
 }
 internal readonly struct PoweredFlightProposal(long generation, object? seal = null)
@@ -32,9 +34,11 @@ internal readonly struct PoweredFlightProposal(long generation, object? seal = n
 internal readonly record struct PoweredFlightRecord(int Version, long Index, PropellantSegmentationPreview Segmentation,
     SpacecraftAppliedEndpoint Endpoint, ActualEngineState Actuator, StateRevision BeforeRevision,
     StateRevision StateRevision, ulong ResourceRevision, TimelineRevision TimelineRevision,
-    SimulationDuration DebtBefore = default, SimulationDuration DebtAfter = default);
+    SimulationDuration DebtBefore = default, SimulationDuration DebtAfter = default,
+    PoweredPhysicalConsumer Consumer = PoweredPhysicalConsumer.FreeFlight, int ContactFixture = -1, long ContactFrontier = 0);
 internal readonly record struct PoweredFlightEpisode(int NumericalPolicyVersion, SpacecraftDefinition Definition,
-    PoweredFlightObservation Initial, SimulationInstant End, IdealEngineDefinitionValues EngineDefinition);
+    PoweredFlightObservation Initial, SimulationInstant End, IdealEngineDefinitionValues EngineDefinition,
+    PoweredPhysicalConsumer Consumer = PoweredPhysicalConsumer.FreeFlight, int ContactFixture = -1);
 internal readonly record struct PoweredFlightObservation(SpacecraftAppliedEndpoint Endpoint, PropellantSourceObservation Resource,
     ActualEngineState Actuator, StateRevision StateRevision, TimelineRevision TimelineRevision, ContinuationClockState Clock, int HistoryCount);
 internal readonly record struct PoweredFlightResult(PoweredFlightStatus Status, PoweredFlightObservation Observation = default,

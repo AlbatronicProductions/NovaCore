@@ -1,0 +1,48 @@
+{
+  "mechanism": "D + 12",
+  "stage": "before any selected-candidate execution",
+  "files": [
+    {
+      "path": "SelectedOperator.cs.txt",
+      "sha256": "6983854494A227EAE4B5F28BE83F0298DE66182607CA8C4CA89DEDDE31B36522"
+    },
+    {
+      "path": "SelectedQualification.cs.txt",
+      "sha256": "069EE894E42CC09C74E7E58A8896B578CCA63D5962BEBD9CE86779621049F5A9"
+    },
+    {
+      "path": "SelectedGate.csproj",
+      "sha256": "EE9BD859D21D0AE5B66770C6F5E862ED1F4C89EE5A9B281E1B172C1AFEF9DF5C"
+    },
+    {
+      "path": "CoastDriver.cs",
+      "sha256": "5F765131F7A2005D2589E6E7FD8C1CCDB61FE4455EC567415560837A1E55E46C"
+    },
+    {
+      "path": "FinalPolicy.cs",
+      "sha256": "E031024B291EDA9D11CAB69F0AA0EA1AB281F73B88BF50D539870BC1F25255F1"
+    },
+    {
+      "path": "TwelveTransport.cs",
+      "sha256": "3E67A648FA782950EAC6988BBBD96012AF3966D7BAAD2C03F3BEE19904839090"
+    },
+    {
+      "path": "select_d.py",
+      "sha256": "881C66CD2ED3DC50CDDAF998AAE8964E685AA58EB978A0192ACD442247CCD63C"
+    },
+    {
+      "path": "candidate-selection.json",
+      "sha256": "94FB3DEEEF7FA492669D0A982242BA569B0BC95944C525CE576D7DE09AA1BF88"
+    }
+  ],
+  "binaries": [
+    {
+      "name": "SelectedGate",
+      "sha256": null
+    },
+    {
+      "name": "SelectedCoast",
+      "sha256": "DDBBD11180E4926B9024642BA0EB6BD61CD79F787E0F90E45250C1C4EAF63C65"
+    }
+  ]
+}

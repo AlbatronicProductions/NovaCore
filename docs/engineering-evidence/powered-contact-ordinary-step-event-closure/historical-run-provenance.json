@@ -1,0 +1,113 @@
+{
+  "attempts": [
+    {
+      "originalPath": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/baseline-reproduction/attempt.json",
+      "sha256": "DEB526E3EBFDDA5BB57106196FDA06E3D82D1B236A487E621E1C2D72531C318C",
+      "record": {
+        "runtime": ".NET 10.0.12",
+        "process": 30412,
+        "thread": 2,
+        "kind": "saved accepted tuple diagnostic; no native/canonical world",
+        "sweeps": 8
+      }
+    },
+    {
+      "originalPath": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-tiny-coasts/attempt.json",
+      "sha256": "86BFC6548E934A75D0B8A833683C63A5F0760B04727B097030ED1EA7AF4A75E3",
+      "record": {
+        "runtime": ".NET 10.0.12",
+        "process": 35936,
+        "thread": 2,
+        "kind": "saved accepted tuple diagnostic; no native/canonical world",
+        "sweeps": 12
+      }
+    }
+  ],
+  "duplicateAliases": [
+    {
+      "retired": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/baseline-reproduction/baseline-after-D.json",
+      "surviving": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/results/baseline-after-D.json",
+      "sha256": "CF32E82981D0D96E638698A0C14E4F8CD32882F6E25EDDC34882BC10C07F9118"
+    },
+    {
+      "retired": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/baseline-reproduction/baseline-basis-transport.json",
+      "surviving": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/results/baseline-basis-transport.json",
+      "sha256": "2ED562BE6D49D6FE0D7D7B0B31B72AD96C6D9BFFEEF2BE79B6629B4F7739119B"
+    },
+    {
+      "retired": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/baseline-reproduction/baseline-coast.json",
+      "surviving": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/results/baseline-coast.json",
+      "sha256": "6FCE5AB9AFD2398EAD32E0A0896EBF98C75C89CDAC24D51CD82A753D208DEE71"
+    },
+    {
+      "retired": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/baseline-reproduction/baseline-duration-transform.json",
+      "surviving": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/results/baseline-duration-transform.json",
+      "sha256": "61D4A2F48E72318364EF6E213AF64B9CC692EE32D4614406E24F745524DD509F"
+    },
+    {
+      "retired": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/baseline-reproduction/baseline-historical.json",
+      "surviving": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/results/baseline-historical.json",
+      "sha256": "288AE763570EB1BE284C897021E294654CDCC1EFBB070314C427C066BD864F9E"
+    },
+    {
+      "retired": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/baseline-reproduction/baseline-load-correction.json",
+      "surviving": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/results/baseline-load-correction.json",
+      "sha256": "62B2B420ED98CBE96A8CEF54B7BBD55104F01E698885F67462659012824969E5"
+    },
+    {
+      "retired": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/baseline-reproduction/baseline-preparation.json",
+      "surviving": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/results/baseline-preparation.json",
+      "sha256": "0E8FB8AD8BF1E7EB203CCF2786A4D4271E71922DB859E3A967421BEE61D1AF73"
+    },
+    {
+      "retired": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/baseline-reproduction/powered-historical.json",
+      "surviving": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/results/powered-historical.json",
+      "sha256": "DAC46E388B2E1F740A1BFAB55F5DBCC312E68A2C0507789DC7DC38A5B592BC60"
+    },
+    {
+      "retired": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/active-set-convergence/baseline-reproduction/stop.json",
+      "surviving": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/friction-boundary-continuation/results/stop.json",
+      "sha256": "AEE505C4B5E302E4979861A806D79C7BFAA1EAF733723A7428A0534296465AB0"
+    },
+    {
+      "retired": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-tiny-coasts/baseline-coast.json",
+      "surviving": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/reproduction/baseline-coast.json",
+      "sha256": "E8D9C1773F6330780C59231A12129582F54B39BE8144BD8D503EF23EBCE0C996"
+    },
+    {
+      "retired": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-tiny-coasts/baseline-historical.json",
+      "surviving": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/reproduction/baseline-historical.json",
+      "sha256": "288AE763570EB1BE284C897021E294654CDCC1EFBB070314C427C066BD864F9E"
+    },
+    {
+      "retired": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-tiny-coasts/baseline-preparation.json",
+      "surviving": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/reproduction/baseline-preparation.json",
+      "sha256": "0E8FB8AD8BF1E7EB203CCF2786A4D4271E71922DB859E3A967421BEE61D1AF73"
+    },
+    {
+      "retired": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-tiny-coasts/paired-response.json",
+      "surviving": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/reproduction/paired-response.json",
+      "sha256": "883D55275A0A506AA74B226F1731403AC2732063593E578291E143BFD60DE0D9"
+    },
+    {
+      "retired": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-tiny-coasts/powered-coast.json",
+      "surviving": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/reproduction/powered-coast.json",
+      "sha256": "B9E47CD2FDBE8A000A778B29CEC61565B8F78C240F6F60A84DB0FFBE3992BF0E"
+    },
+    {
+      "retired": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-tiny-coasts/powered-historical.json",
+      "surviving": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/reproduction/powered-historical.json",
+      "sha256": "DAC46E388B2E1F740A1BFAB55F5DBCC312E68A2C0507789DC7DC38A5B592BC60"
+    },
+    {
+      "retired": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-tiny-coasts/powered-preparation.json",
+      "surviving": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/reproduction/powered-preparation.json",
+      "sha256": "601E5A5D8D064B6B68474AADAF4DE42E5B310522538EFA73CEFBD39D61BE5C46"
+    },
+    {
+      "retired": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/d-tiny-coasts/stop.json",
+      "surviving": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/reproduction/stop.json",
+      "sha256": "6C849F4104F8909455633DB86D2E2906276E2DD04ACE47DB9893A335DB7EF812"
+    }
+  ]
+}

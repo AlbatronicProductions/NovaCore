@@ -1,0 +1,92 @@
+[
+  {
+    "path": "docs\\engineering-evidence\\powered-contact-production-integration\\final-qualification\\allocation.json",
+    "bytes": 1263,
+    "sha256": "E5C82A37802E40FAF603F61B0866AC8881FEAE3CC6F912313D46873D5479887E"
+  },
+  {
+    "path": "docs\\engineering-evidence\\powered-contact-production-integration\\final-qualification\\cleanup.json",
+    "bytes": 757,
+    "sha256": "DC639D87FFB2557F85DAC6DD3CD4B7ED4514731522A273782A01AB1E699AA893"
+  },
+  {
+    "path": "docs\\engineering-evidence\\powered-contact-production-integration\\final-qualification\\cleanup.md",
+    "bytes": 1618,
+    "sha256": "C528991852695C9AAC0FFFB03E7B7C521B706A56A9E6AC5FBE7368E657D72375"
+  },
+  {
+    "path": "docs\\engineering-evidence\\powered-contact-production-integration\\final-qualification\\determinism.json",
+    "bytes": 3445,
+    "sha256": "07F249856C5223D35D1EB27BAB6E3562EAF6D5223A089A0250467F18A1D05951"
+  },
+  {
+    "path": "docs\\engineering-evidence\\powered-contact-production-integration\\final-qualification\\identity.json",
+    "bytes": 10925,
+    "sha256": "D2AA2EF3A5530DBFA465D4BE625458DD862C34A907046F590BADDD8BD6B15C8C"
+  },
+  {
+    "path": "docs\\engineering-evidence\\powered-contact-production-integration\\final-qualification\\launch.ps1",
+    "bytes": 1383,
+    "sha256": "B0F624F330A42EADC7F87619D52F8663162FF4C6E830B6D85AC03C8665F7C91B"
+  },
+  {
+    "path": "docs\\engineering-evidence\\powered-contact-production-integration\\final-qualification\\manual-acceptance.md",
+    "bytes": 2683,
+    "sha256": "7C4527F833B706FAF58E25EEB3F44925CDDD88C94DB77DA8FCDEE21376BF0D63"
+  },
+  {
+    "path": "docs\\engineering-evidence\\powered-contact-production-integration\\final-qualification\\manual-observation.json",
+    "bytes": 2843,
+    "sha256": "6F1434E5E30F508C121B859C73376BEF3E8B70C63D1AB4AB8C9CACCB1DCEB7C4"
+  },
+  {
+    "path": "docs\\engineering-evidence\\powered-contact-production-integration\\final-qualification\\performance.json",
+    "bytes": 24090,
+    "sha256": "2105DB9CFED92DBB9DDEFCF146CC077CF288602DC4B824D6292058BE98A096A6"
+  },
+  {
+    "path": "docs\\engineering-evidence\\powered-contact-production-integration\\final-qualification\\performance.md",
+    "bytes": 3616,
+    "sha256": "D9AABAA745E2F3D71BC482FFF45BF6A38C68C687FA9DF92C7479DC178930B962"
+  },
+  {
+    "path": "docs\\engineering-evidence\\powered-contact-production-integration\\final-qualification\\plan.md",
+    "bytes": 2257,
+    "sha256": "B5F110843590851C45FAA5750FFAED33E40163389BCCEC718E804E2FCE9D55B8"
+  },
+  {
+    "path": "docs\\engineering-evidence\\powered-contact-production-integration\\final-qualification\\README.md",
+    "bytes": 4895,
+    "sha256": "481C2FD5E2C96E3F0797248029455AF4F1D31707201ED7E52EBE8BE0F582ED29"
+  },
+  {
+    "path": "docs\\engineering-evidence\\powered-contact-production-integration\\final-qualification\\refusal-closeout.md",
+    "bytes": 2536,
+    "sha256": "3D181FC4EC24A138AC522B2B0BEA98E1408BAC3155B32C56DBD3671583875E4C"
+  },
+  {
+    "path": "docs\\engineering-evidence\\powered-contact-production-integration\\final-qualification\\regression.json",
+    "bytes": 7728,
+    "sha256": "6A81A3FB23299F9D2AD247D339BA426467313EB70C2B1A38C14B5C7B11034232"
+  },
+  {
+    "path": "docs\\engineering-evidence\\powered-contact-production-integration\\final-qualification\\reproduce.md",
+    "bytes": 2429,
+    "sha256": "EB3B3426B580EC913FBA52DE4EAB669FE4B1BC125AE5821B60872B454604B8C7"
+  },
+  {
+    "path": "docs\\engineering-evidence\\powered-contact-production-integration\\final-qualification\\storage.json",
+    "bytes": 709,
+    "sha256": "1FF341B474982F29998611343F8E93C38CE3512AF0A165B9EAC9E4AA126A837B"
+  },
+  {
+    "path": "docs\\engineering-evidence\\powered-contact-production-integration\\final-qualification\\verification.md",
+    "bytes": 2457,
+    "sha256": "786BFBB189BCC17B08AA10AAF037A11AE11660695844C26BEF5374B201DBEAB7"
+  },
+  {
+    "path": "docs\\engineering-evidence\\powered-contact-production-integration\\final-qualification\\visible-route.md",
+    "bytes": 2309,
+    "sha256": "EA6AE6BE4D8A29FDC7FE758B59891834D4B0D59FD3ADA5C6E8C8AE72616AC35B"
+  }
+]

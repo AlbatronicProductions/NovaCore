@@ -1,0 +1,151 @@
+{
+  "status": "DRefusal",
+  "expected": "DRefusal",
+  "proof": {
+    "Transport": {
+      "LinearError": 5.204170427930421E-18,
+      "AngularError": 6.165746321498593E-17,
+      "Condition": 7.189406614197859,
+      "ErrorScreen": 9.138149100200987E-13
+    },
+    "Transported": {
+      "N0": {
+        "Mantissa": 1.995201663022058,
+        "Exponent": -3
+      },
+      "N1": {
+        "Mantissa": 1.988808487656132,
+        "Exponent": -3
+      },
+      "N2": {
+        "Mantissa": 1.995201663022058,
+        "Exponent": -3
+      },
+      "N3": {
+        "Mantissa": 1.9888084876561316,
+        "Exponent": -3
+      },
+      "T0": {
+        "Mantissa": 1.4381233494648564,
+        "Exponent": -4
+      },
+      "T1": {
+        "Mantissa": -1.28,
+        "Exponent": -8
+      },
+      "Twist": {
+        "Mantissa": 1.2759061485855479,
+        "Exponent": -6
+      }
+    },
+    "DurationScaled": {
+      "N0": {
+        "Mantissa": 1.995201663022058,
+        "Exponent": -3
+      },
+      "N1": {
+        "Mantissa": 1.9888084876561323,
+        "Exponent": -3
+      },
+      "N2": {
+        "Mantissa": 1.995201663022058,
+        "Exponent": -3
+      },
+      "N3": {
+        "Mantissa": 1.9888084876561318,
+        "Exponent": -3
+      },
+      "T0": {
+        "Mantissa": 1.4381233494648564,
+        "Exponent": -4
+      },
+      "T1": {
+        "Mantissa": -1.28,
+        "Exponent": -8
+      },
+      "Twist": {
+        "Mantissa": 1.2759061485855479,
+        "Exponent": -6
+      }
+    },
+    "LoadShift": {
+      "Mantissa": 0,
+      "Exponent": 0
+    },
+    "BeforeD": {
+      "N0": {
+        "Mantissa": 1.995201663022058,
+        "Exponent": -3
+      },
+      "N1": {
+        "Mantissa": 1.9888084876561323,
+        "Exponent": -3
+      },
+      "N2": {
+        "Mantissa": 1.995201663022058,
+        "Exponent": -3
+      },
+      "N3": {
+        "Mantissa": 1.9888084876561318,
+        "Exponent": -3
+      },
+      "T0": {
+        "Mantissa": 1.4381233494648564,
+        "Exponent": -4
+      },
+      "T1": {
+        "Mantissa": -1.28,
+        "Exponent": -8
+      },
+      "Twist": {
+        "Mantissa": 1.2759061485855479,
+        "Exponent": -6
+      }
+    },
+    "DDelta": {
+      "Mantissa": -1.21460766535182,
+      "Exponent": -4
+    },
+    "DNumerator": {
+      "Mantissa": 1.5199295992306132,
+      "Exponent": -3
+    },
+    "DDenominator": 2.5027498880313,
+    "AfterD": {
+      "N0": {
+        "Mantissa": 1.387897830346148,
+        "Exponent": -3
+      },
+      "N1": {
+        "Mantissa": 1.3815046549802221,
+        "Exponent": -3
+      },
+      "N2": {
+        "Mantissa": 1.387897830346148,
+        "Exponent": -3
+      },
+      "N3": {
+        "Mantissa": 1.3815046549802217,
+        "Exponent": -3
+      },
+      "T0": {
+        "Mantissa": 1.4381233494648564,
+        "Exponent": -4
+      },
+      "T1": {
+        "Mantissa": -1.28,
+        "Exponent": -8
+      },
+      "Twist": {
+        "Mantissa": 1.2759061485855479,
+        "Exponent": -6
+      }
+    },
+    "NormalClamps": 0,
+    "TangentClamps": 0,
+    "TwistClamps": 0
+  },
+  "acceptedUnchanged": true,
+  "solverCalls": 0,
+  "referenceCalls": 0
+}

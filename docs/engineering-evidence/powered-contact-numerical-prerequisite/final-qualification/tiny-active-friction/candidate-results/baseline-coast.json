@@ -1,0 +1,299 @@
+{
+  "status": "BasisRefusal",
+  "proof": {
+    "Transport": {
+      "LinearError": 0,
+      "AngularError": 0,
+      "Condition": 0,
+      "ErrorScreen": 0
+    },
+    "Transported": {
+      "N0": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "N1": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "N2": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "N3": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "T0": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "T1": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "Twist": {
+        "Mantissa": 0,
+        "Exponent": 0
+      }
+    },
+    "DurationScaled": {
+      "N0": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "N1": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "N2": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "N3": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "T0": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "T1": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "Twist": {
+        "Mantissa": 0,
+        "Exponent": 0
+      }
+    },
+    "LoadShift": {
+      "Mantissa": 0,
+      "Exponent": 0
+    },
+    "BeforeD": {
+      "N0": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "N1": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "N2": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "N3": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "T0": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "T1": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "Twist": {
+        "Mantissa": 0,
+        "Exponent": 0
+      }
+    },
+    "DDelta": {
+      "Mantissa": 0,
+      "Exponent": 0
+    },
+    "DNumerator": {
+      "Mantissa": 0,
+      "Exponent": 0
+    },
+    "DDenominator": 0,
+    "AfterD": {
+      "N0": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "N1": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "N2": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "N3": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "T0": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "T1": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "Twist": {
+        "Mantissa": 0,
+        "Exponent": 0
+      }
+    },
+    "NormalClamps": 0,
+    "TangentClamps": 0,
+    "TwistClamps": 0
+  },
+  "target": {
+    "Identity": {
+      "World": 0,
+      "Body": 0,
+      "BodyGeneration": 0,
+      "Constraint": 0,
+      "ManifoldGeneration": 0
+    },
+    "Generation": 0,
+    "Piece": 0,
+    "Kind": "Preparation",
+    "ProducingGeometry": {
+      "Features": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 0
+      },
+      "Normal": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0
+      },
+      "Tangent0": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0
+      },
+      "Tangent1": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0
+      },
+      "Lever0": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0
+      },
+      "Lever1": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0
+      },
+      "Lever2": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0
+      },
+      "Lever3": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0
+      },
+      "Depth0": 0,
+      "Depth1": 0,
+      "Depth2": 0,
+      "Depth3": 0,
+      "Omega": 0,
+      "Friction": 0,
+      "Recovery": 0,
+      "TwiceDamping": 0
+    },
+    "ProducingDuration": {},
+    "Cache": {
+      "N0": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "N1": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "N2": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "N3": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "T0": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "T1": {
+        "Mantissa": 0,
+        "Exponent": 0
+      },
+      "Twist": {
+        "Mantissa": 0,
+        "Exponent": 0
+      }
+    },
+    "Load": {
+      "Gravity": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0
+      },
+      "Force": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0
+      },
+      "Torque": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0
+      }
+    },
+    "Endpoint": {
+      "Linear": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0
+      },
+      "Angular": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0
+      }
+    }
+  },
+  "increments": [
+    {
+      "Mantissa": 0,
+      "Exponent": 0
+    },
+    {
+      "Mantissa": 0,
+      "Exponent": 0
+    },
+    {
+      "Mantissa": 0,
+      "Exponent": 0
+    },
+    {
+      "Mantissa": 0,
+      "Exponent": 0
+    },
+    {
+      "Mantissa": 0,
+      "Exponent": 0
+    },
+    {
+      "Mantissa": 0,
+      "Exponent": 0
+    }
+  ],
+  "acceptedUnchanged": true,
+  "Unsafe": true,
+  "canonicalMutations": 0
+}

@@ -1,0 +1,210 @@
+{
+  "baseline": "49057fecceb0f725d5f551ec40e2780971b0d81d",
+  "scope": "A1 original world, A2 selected D12 paired, A3 trace; baseline Git guards remaining tracked dependency infrastructure.",
+  "inputs": [
+    {
+      "path": "Directory.Build.props",
+      "sha256": "B9DBD63133E8C0A6ABD0B3DFE2E2013C6943AA3879D952D9CC391BE45D0529A9"
+    },
+    {
+      "path": "Directory.Build.targets",
+      "sha256": "57165F94B025B59A1524F31F2D39C3FD454199732492D3716B93935A4D857E0F"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/InputDriver.cs.txt",
+      "sha256": "1F9CF12D19AC746FE6140C8B93ED9848143264C1EA6F0F60B83D161F36452B1B"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/PairedDriver.cs",
+      "sha256": "72BA8C1FCC905FFF38FFDD96FFF30EC5AD2CF2F71CD074DF8651839F2969BA14"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/Reproduce.csproj",
+      "sha256": "D55395CDAA92B662B8EF38125B66A5DD598D2E57F2C420AA1E7183DE27A1D577"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/Trace.csproj",
+      "sha256": "9B0527B0F143ED072E5CB2ED82776C7DBC95034D41D12D54E062FE97DDFD3E50"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/TraceOperator.cs.txt",
+      "sha256": "3618388EE2B58909B09D4F70A31090CA13C1B54D4A414BFFDCEBF4E1F361AF8D"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/diagnostics/baseline-historical.json",
+      "sha256": "288AE763570EB1BE284C897021E294654CDCC1EFBB070314C427C066BD864F9E"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/diagnostics/completion.json",
+      "sha256": "908B31165DBF060C188C998114A94783C6F0706F842E3496C7188373C23CA98A"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/diagnostics/downstream-sensitivity.json",
+      "sha256": "3C5F7835EDB5C52CC621827F6A1127BE2CA650CD21ACB7DC306C70152AB84CD0"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/diagnostics/identical-control.json",
+      "sha256": "0F0ADCD1CBBFDF0D4A40F7F2EB13EDC62A9D5A8E7A6169D03802D3BE996C03AE"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/diagnostics/null-event-control.json",
+      "sha256": "7C45CBA59F9B7AFA942D38566E6AC04B64488F452B209CA84DBED51E1D800E24"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/diagnostics/powered-historical.json",
+      "sha256": "DAC46E388B2E1F740A1BFAB55F5DBCC312E68A2C0507789DC7DC38A5B592BC60"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/diagnostics/stage-delta-inputs.json",
+      "sha256": "A7332519B093C8FB82F78E5A8661D9A65FC95372B3CE77CD812CE44C8DE9C9A7"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/diagnostics/sweep-results.json",
+      "sha256": "1AB5B8D3536E9687DAC5A8EF10EC9E1C5E8B3C7CE447174759A281DA9598C001"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/reproduction/baseline-coast.json",
+      "sha256": "E8D9C1773F6330780C59231A12129582F54B39BE8144BD8D503EF23EBCE0C996"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/reproduction/paired-response.json",
+      "sha256": "883D55275A0A506AA74B226F1731403AC2732063593E578291E143BFD60DE0D9"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/paired-response/reproduction/powered-coast.json",
+      "sha256": "B9E47CD2FDBE8A000A778B29CEC61565B8F78C240F6F60A84DB0FFBE3992BF0E"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/candidate-results/baseline-coast-input.json",
+      "sha256": "C9A3276FFB19E633CB842002F735795BC97C39A3DC0090ED7476A95E670DD849"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/candidate-results/baseline-installed.json",
+      "sha256": "AA9E1B48DF104715AD20E3CBFFFBC034340E246BC429B6739D2C1EFEB168794F"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/candidate-results/baseline-tiny.json",
+      "sha256": "51FDFA1FE120662D70412D63A9E560B2367374D96EDC77074478F25C013D2845"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/candidate-results/powered-coast-input.json",
+      "sha256": "441E384E23376C418DA5FC15728C3193F8683A09375F1DD89CDC5017FD5C05F4"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/candidate-results/powered-installed.json",
+      "sha256": "54AAAD502FC744F5CFA9712922E336646CFDF1C4497E5EDBD26B9B4779C3D3A2"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/coast-reference.json",
+      "sha256": "ABE661642FD8CBE4228B4F9E47BAEBD313C89014F140D7222D1F92A44B21672B"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/tiny-active-friction/tiny-comparison.json",
+      "sha256": "7E3D7682BE5D71C97F6CC11A604B087582330C20C2A244E1F375488EB508FC5E"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/CoastDriver.cs",
+      "sha256": "5F765131F7A2005D2589E6E7FD8C1CCDB61FE4455EC567415560837A1E55E46C"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/FinalPolicy.cs",
+      "sha256": "E031024B291EDA9D11CAB69F0AA0EA1AB281F73B88BF50D539870BC1F25255F1"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/SelectedOperator.cs.txt",
+      "sha256": "6983854494A227EAE4B5F28BE83F0298DE66182607CA8C4CA89DEDDE31B36522"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/SelectedQualification.cs.txt",
+      "sha256": "069EE894E42CC09C74E7E58A8896B578CCA63D5962BEBD9CE86779621049F5A9"
+    },
+    {
+      "path": "docs/engineering-evidence/powered-contact-numerical-prerequisite/final-qualification/twelve-sweep-qualification/TwelveTransport.cs",
+      "sha256": "3E67A648FA782950EAC6988BBBD96012AF3966D7BAAD2C03F3BEE19904839090"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Actuation/PoweredFlightNumerics.cs",
+      "sha256": "E46798B6123AC3478F03784EE40FACE5736ADED24AA37BCF886B751ADE7D41C1"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Resources/PropellantInteger.cs",
+      "sha256": "9CD3EEF877047A44102D925F612DEB263A3396DA8FB600A18FC144C935B5AF41"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.IntegratedProbe/ContactGeometry.cs",
+      "sha256": "48A2B831DB8CD6027DEC456CF67A010B51F2D8776D3204F8BCCAA05B50E96A07"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.IntegratedProbe/GeneralizedTransport.cs",
+      "sha256": "1F6D822706189946510DA57859517E54B6C24CBE1A441A8962A60F7B9B5C365E"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.IntegratedProbe/NovaCore.ContactNumerics.IntegratedProbe.csproj",
+      "sha256": "1E6C10FABD6DC307107190C5CB48A814B7821DFEE836D6C1C06311A254F19E75"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.IntegratedProbe/Qualification.cs",
+      "sha256": "98F0525D25A10A840FE6B87575D489C02CA469B7C88117419B7F3B12FBABCF8F"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.IntegratedProbe/RetainedOperator.cs",
+      "sha256": "A8CC41111339DC91965E9CEC8626373F7B7EE37D285987F337A2562AF2F1AD34"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.IntegratedProbe/RetainedWorld.cs",
+      "sha256": "29D01C59DD1281A3697EC9EB465CCEF8A640FFF56ECF011A784CB1DF08B1A770"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.IntegratedProbe/ScaledArithmetic.cs",
+      "sha256": "DFE5FB8152E1359C81A6C29A9546F31AE95DA19EF365D0CF9E974F4F2323ADD4"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.IntegratedProbe/TinyReference.cs",
+      "sha256": "6FCCB92048BB66FBB8EBBAF45B1997B8FA0722031F4625A76A60FF91096766E0"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.OwnedCacheProbe/CacheHistory.cs",
+      "sha256": "DE2C34AE309975110307AA574E945F3183A1325C96FF28A9C18243AF12790210"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.OwnedCacheProbe/NovaCore.ContactNumerics.OwnedCacheProbe.csproj",
+      "sha256": "B93AC78100CCB60F93E46388717BD2ABD0AFBB8E4BAFBA7BC387733C60B797C0"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.OwnedCacheProbe/OwnedQualification.cs",
+      "sha256": "D272424BC8D2E283D22BF8643997FF1875C94541900E2DB1B803FF4B744AD70C"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.PreconditionedProbe/CommonNormal.cs",
+      "sha256": "9740EE702EAF0146AE5A4EAB7E3E247611ABC02CF380B0BF84B4702B13C26E03"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.PreconditionedProbe/NovaCore.ContactNumerics.PreconditionedProbe.csproj",
+      "sha256": "7C83EEBDC78163048A98F7AF2AA70A0542A6C857C4CFCD8D2E4A6867E4FAF8B9"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.PreconditionedProbe/PieceKernel.cs",
+      "sha256": "A64CBF550C744EDDFF026FE93C4061923E1F578CDEDC916A9F277BB272DFEFBE"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.PreconditionedProbe/Qualification.cs",
+      "sha256": "3302F5199FBFF1AB9C27BD8EB3A98093E0A3CBA84ECE7154A718D3E61C8C482D"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.WorldProbe/KernelProbe.cs",
+      "sha256": "621569AE2331D48BF4B0E4C65D1345E9A10C2ADB2FB1D1E64FFF5D0645FE7E24"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.WorldProbe/NovaCore.ContactNumerics.WorldProbe.csproj",
+      "sha256": "7971DF9ECA56260BF0C4A4B459B486FDD5825889195D33132C6E2D030BB52B55"
+    },
+    {
+      "path": "tests/NovaCore.ContactNumerics.WorldProbe/Program.cs",
+      "sha256": "04FA4662E192070FC0E7F48436087CEFDC0E8F0DCD609265F92B12F619FDE902"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/OrdinaryAllocationMeasurement.cs",
+      "sha256": "3B6F2D9905EA52BFB131DF670F1E6A2116BA340C9EF7767DE1020197D473CFB7"
+    }
+  ]
+}

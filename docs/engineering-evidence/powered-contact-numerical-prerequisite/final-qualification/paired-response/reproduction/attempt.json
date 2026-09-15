@@ -1,0 +1,7 @@
+{
+  "runtime": ".NET 10.0.12",
+  "process": 58196,
+  "thread": 2,
+  "kind": "saved accepted tuple diagnostic; no native/canonical world",
+  "sweeps": 12
+}

@@ -1,0 +1,49 @@
+{
+  "scope": "Analytical architecture witnesses only; not BEPU or candidate qualification",
+  "unilateral_order": {
+    "impulse_then_contact": "0",
+    "contact_then_impulse": "-1"
+  },
+  "softness": {
+    "split_decay": "256/1225",
+    "merged_decay": "1/4",
+    "same": false,
+    "model": "fixed-geometry zero-bias scalar discrete map"
+  },
+  "departure": {
+    "event_impulse": "1",
+    "averaged_impulse": "1",
+    "ordered_y": "3/8",
+    "ordered_v": "0",
+    "averaged_y": "0",
+    "averaged_v": "0"
+  },
+  "friction": {
+    "ordered_distance": "1",
+    "ordered_final_velocity": "0",
+    "engine_work": "1",
+    "friction_dissipation": "1",
+    "averaged_force": "2/3",
+    "averaged_distance": "0",
+    "averaged_work": "0",
+    "same_total_engine_impulse": true
+  },
+  "changing_mass": {
+    "reference_dv": "0.031234751137774684670746397056549973523578698681105159608275144780811907968828133",
+    "source_mass_dv": "0.031219512195121951219512195121951219512195121951219512195121951219512195121951220",
+    "successor_mass_dv": "0.0312500",
+    "midpoint_mass_dv": "0.031234748657881893606637384089799902391410444119082479258174719375305026842362128",
+    "source_or_successor_error_bound": "0.0000152587890625",
+    "midpoint_error_bound": "2.4835268656412760416666666666666666666666666666666666666666666666666666666666667E-9"
+  },
+  "tiny": {
+    "duration": "2^-1075 s",
+    "positive_exact": true,
+    "double_duration": 0.0,
+    "force": "16 N",
+    "mass": "8 kg",
+    "free_delta_v": "2^-1074 m/s",
+    "resource": "2^-1074 kg at 2 kg/s",
+    "does_not_prove_contact_response": true
+  }
+}

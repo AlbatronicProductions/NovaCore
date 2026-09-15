@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "cases": 8,
+  "sweeps": 12,
+  "physicalBar": 0.0001,
+  "transportBar": 1E-12,
+  "productionMutations": 0
+}
