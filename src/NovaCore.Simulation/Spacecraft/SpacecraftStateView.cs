@@ -4,6 +4,7 @@ using NovaCore.Simulation.Spacecraft.Rotation;
 using NovaCore.Simulation.Spacecraft.Translation;
 using NovaCore.Simulation.Transactions;
 using NovaCore.Simulation.Timeline;
+using NovaCore.Simulation.Spacecraft.Assemblies;
 
 /// <summary>Borrowed read view. State-owned views refuse newer slots after their captured revision expires.</summary>
 internal readonly struct SpacecraftStateView
@@ -17,6 +18,8 @@ internal readonly struct SpacecraftStateView
     private bool Current => _owner is not null ? _owner.IsBorrowCurrent(_revision) : _store.Owner is null;
     private void Verify() { if (!Current) throw new InvalidOperationException("Spacecraft state borrow expired; acquire a current view or retain copied values."); }
     public int Count { get { Verify(); return _store.Count; } }
+    internal bool TryGetAssembly(SpacecraftId id,out AssemblyLaunch? launch,out AssemblyRuntimeState state)
+    { if(Current)return _store.TryGetAssembly(id,out launch,out state);launch=null;state=default;return false; }
     internal bool TryGetAppliedEndpoint(SpacecraftId id, out SpacecraftAppliedEndpoint endpoint)
     { if (Current) return _store.TryGetAppliedEndpoint(id, out endpoint); endpoint = default; return false; }
     internal bool TryGetTranslation(SpacecraftId id, out SpacecraftTranslationState translation, out SpacecraftPhysicalProperties properties)

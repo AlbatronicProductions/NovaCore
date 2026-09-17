@@ -4,6 +4,7 @@ using NovaCore.Simulation.Celestial;
 using NovaCore.Simulation.Spacecraft;
 using NovaCore.Simulation.Spacecraft.Rotation;
 using NovaCore.Simulation.Spacecraft.Translation;
+using NovaCore.Simulation.Spacecraft.Assemblies;
 
 namespace NovaCore.Simulation.Transactions;
 
@@ -60,6 +61,9 @@ internal sealed class SimulationState
         out int index) => _spacecraft.TryPrepareContinuationSlot(linear, angular, out index);
 
     internal void PrepareAppliedEndpointStorage() => _spacecraft.PrepareAppliedEndpointStorage();
+    internal bool TryPrepareAssemblySlot(AssemblyLaunch launch,in AssemblyRuntimeState expected,out int index)=>_spacecraft.TryPrepareAssemblySlot(launch,expected,out index);
+    internal void InstallAssembly(int index,in AssemblyRuntimeState successor,StateRevision revision)
+    { _spacecraft.InstallAssembly(index,successor);_revision=revision; }
     internal bool TryPrepareAppliedSlot(SpacecraftId subject, in SpacecraftPhysicalSource source, out int index) =>
         _spacecraft.TryPrepareAppliedSlot(subject, source, out index);
     internal void InstallAppliedEndpoint(int index, in SpacecraftAppliedEndpoint endpoint, StateRevision revision)

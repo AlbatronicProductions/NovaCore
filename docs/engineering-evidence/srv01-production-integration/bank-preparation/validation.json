@@ -1,0 +1,596 @@
+{
+  "date": "2026-09-17T02:56:49.2566167-04:00",
+  "sourceChanges": 0,
+  "configurations": [
+    "Debug",
+    "Release"
+  ],
+  "result": "PASS",
+  "firstAttempt": "MSB4126: inherited Platform=x64; compilation did not start. Reproduction invocation explicitly selects existing Any CPU configuration; no production/test changes.",
+  "manual": "Accepted final manual PASS reused with 55/55 sealed candidate files unchanged",
+  "performance": "Accepted three-process measurements reused; no new performance campaign",
+  "logs": [
+    {
+      "name": "assembly-allocation-debug.log",
+      "bytes": 1436,
+      "sha256": "8CD743DEE6994768F171B2456B8EB1C0146EDF93CADFA2E63A182E73265784EE",
+      "decisiveLines": [
+        "ORDINARY_ALLOCATION gate=B-no-demand bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=B-main-only bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=B-RCS-pair-only bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=B-concurrent-main-RCS-gimbal bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=B-exhausted-no-feed bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=B-endpoint-exhaustion bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=B-interior-exhaustion bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=C-preparation-B-concurrent-main-RCS-gimbal bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=D-publication-B-concurrent-main-RCS-gimbal bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=C-preparation-B-interior-exhaustion bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=D-publication-B-interior-exhaustion bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=assembly-no-work-refusal bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=assembly-four-interval-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=assembly-credit-capacity-refusal bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ASSEMBLY_ALLOCATION {\"windows\":14,\"bytes\":0,\"positiveControl\":\"nonzero required\",\"policy\":\"checked existing helper; no tolerance, subtraction or retry\"}"
+      ]
+    },
+    {
+      "name": "assembly-allocation-release.log",
+      "bytes": 1436,
+      "sha256": "8CD743DEE6994768F171B2456B8EB1C0146EDF93CADFA2E63A182E73265784EE",
+      "decisiveLines": [
+        "ORDINARY_ALLOCATION gate=B-no-demand bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=B-main-only bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=B-RCS-pair-only bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=B-concurrent-main-RCS-gimbal bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=B-exhausted-no-feed bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=B-endpoint-exhaustion bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=B-interior-exhaustion bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=C-preparation-B-concurrent-main-RCS-gimbal bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=D-publication-B-concurrent-main-RCS-gimbal bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=C-preparation-B-interior-exhaustion bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=D-publication-B-interior-exhaustion bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=assembly-no-work-refusal bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=assembly-four-interval-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=assembly-credit-capacity-refusal bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ASSEMBLY_ALLOCATION {\"windows\":14,\"bytes\":0,\"positiveControl\":\"nonzero required\",\"policy\":\"checked existing helper; no tolerance, subtraction or retry\"}"
+      ]
+    },
+    {
+      "name": "assembly-production-debug.log",
+      "bytes": 110,
+      "sha256": "286A4EFD5BF6B0865E3B8B742348BDF09867875403E6D18871C9EE30F868D641",
+      "decisiveLines": [
+        "ASSEMBLY_PRODUCTION PASS checks=41634 independent_trajectories=24 ordinary_owner=SimulationTransactionEngine"
+      ]
+    },
+    {
+      "name": "assembly-production-release.log",
+      "bytes": 110,
+      "sha256": "286A4EFD5BF6B0865E3B8B742348BDF09867875403E6D18871C9EE30F868D641",
+      "decisiveLines": [
+        "ASSEMBLY_PRODUCTION PASS checks=41634 independent_trajectories=24 ordinary_owner=SimulationTransactionEngine"
+      ]
+    },
+    {
+      "name": "capacity-debug.log",
+      "bytes": 111,
+      "sha256": "9CD1BF36E377CE2FC59D4167B1553618B56D0C4253C3EE38ED45AAF51C1BC264",
+      "decisiveLines": [
+        "PREPARED_SUBMISSION PASS counts=37,38,39,37,54 bytes=4416 overflow=refused canary=unchanged recreate=retained"
+      ]
+    },
+    {
+      "name": "capacity-release.log",
+      "bytes": 111,
+      "sha256": "9CD1BF36E377CE2FC59D4167B1553618B56D0C4253C3EE38ED45AAF51C1BC264",
+      "decisiveLines": [
+        "PREPARED_SUBMISSION PASS counts=37,38,39,37,54 bytes=4416 overflow=refused canary=unchanged recreate=retained"
+      ]
+    },
+    {
+      "name": "configure-debug.log",
+      "bytes": 147,
+      "sha256": "A4848B5B2EB781ED1943496153389ED7F400570C33A9256BF839E39FA192625E",
+      "decisiveLines": []
+    },
+    {
+      "name": "configure-release.log",
+      "bytes": 637,
+      "sha256": "116D79C1CBC5D0F7AB151E029FB3D2859B71E830C816E3A393B24FEA8FC8C8D0",
+      "decisiveLines": []
+    },
+    {
+      "name": "engine-preparation-cheap-debug.log",
+      "bytes": 114,
+      "sha256": "C16EBDB043A86759149123E0F1D6CFC55CB2E790646FD3DB23F3530DA95582DA",
+      "decisiveLines": [
+        "ENGINE_CHEAP PASS definition/math/ordered-capture/refusal/seal/replay/body-frame/conditional-preview/determinism"
+      ]
+    },
+    {
+      "name": "engine-preparation-cheap-release.log",
+      "bytes": 114,
+      "sha256": "C16EBDB043A86759149123E0F1D6CFC55CB2E790646FD3DB23F3530DA95582DA",
+      "decisiveLines": [
+        "ENGINE_CHEAP PASS definition/math/ordered-capture/refusal/seal/replay/body-frame/conditional-preview/determinism"
+      ]
+    },
+    {
+      "name": "exhaust-gpu-debug.log",
+      "bytes": 214,
+      "sha256": "B16D9B8A17318A39EDF0A801817803986CC458DB0604266F673A97744D21528F",
+      "decisiveLines": [
+        "EXHAUST_GPU PASS pure-emission separate-extinction optical-depth-resolve off-clear order-independent depth-before/inside/behind axial inside-camera RCS_depth_sum=14.5544 duplicate=29.1087 order_max=0 validation=0"
+      ]
+    },
+    {
+      "name": "exhaust-gpu-release.log",
+      "bytes": 214,
+      "sha256": "B16D9B8A17318A39EDF0A801817803986CC458DB0604266F673A97744D21528F",
+      "decisiveLines": [
+        "EXHAUST_GPU PASS pure-emission separate-extinction optical-depth-resolve off-clear order-independent depth-before/inside/behind axial inside-camera RCS_depth_sum=14.5544 duplicate=29.1087 order_max=0 validation=0"
+      ]
+    },
+    {
+      "name": "finite-propellant-cheap-debug.log",
+      "bytes": 225,
+      "sha256": "747916E73C90E115268A56D18941FDA9F05407D55D7236AFFC5EC31AF41E12E9",
+      "decisiveLines": [
+        "PROPELLANT_ARITHMETIC PASS binary64_cases=6141 random_cases=512 limb_bits=2176 maximum_product_bits=2161 exact_conservation=PASS",
+        "PROPELLANT_CHEAP PASS analytical=PASS authority=PASS mass_law=PASS no_canonical_mutation=PASS"
+      ]
+    },
+    {
+      "name": "finite-propellant-cheap-release.log",
+      "bytes": 225,
+      "sha256": "747916E73C90E115268A56D18941FDA9F05407D55D7236AFFC5EC31AF41E12E9",
+      "decisiveLines": [
+        "PROPELLANT_ARITHMETIC PASS binary64_cases=6141 random_cases=512 limb_bits=2176 maximum_product_bits=2161 exact_conservation=PASS",
+        "PROPELLANT_CHEAP PASS analytical=PASS authority=PASS mass_law=PASS no_canonical_mutation=PASS"
+      ]
+    },
+    {
+      "name": "first-solution-debug-platform-failure.log",
+      "bytes": 853,
+      "sha256": "555177ECCDA285FC9C0CF3A9AAC9A8702C0E17A45DFEB3FFE8C7B0237DF3CC84",
+      "decisiveLines": [
+        "E:\\NovaCore\\NovaCore.sln.metaproj : error MSB4126: The specified solution configuration \"Debug|x64\" is invalid. Please specify a valid solution configuration using the Configuration and Platform properties (e.g. MSBuild.exe Solution.sln /p:Configuration=Debug /p:Platform=\"Any CPU\") or leave those properties blank to use the default solution configuration. [E:\\NovaCore\\NovaCore.sln]",
+        "Build FAILED.",
+        "E:\\NovaCore\\NovaCore.sln.metaproj : error MSB4126: The specified solution configuration \"Debug|x64\" is invalid. Please specify a valid solution configuration using the Configuration and Platform properties (e.g. MSBuild.exe Solution.sln /p:Configuration=Debug /p:Platform=\"Any CPU\") or leave those properties blank to use the default solution configuration. [E:\\NovaCore\\NovaCore.sln]",
+        "    0 Warning(s)",
+        "    1 Error(s)"
+      ]
+    },
+    {
+      "name": "graphics-debug-Contact-development-canonical-presentation.log",
+      "bytes": 2809,
+      "sha256": "80AA7ABC2073FA94068D74ACA7C87D519CEDD6E467B821103D0F5FF528C5728B",
+      "decisiveLines": [
+        "CONTACT_LIVE_FAILED Host credit InvalidDuration/Success",
+        "PASS Contact development canonical presentation and lifecycle",
+        "CONTACT_LIVE_FAILED Host credit InvalidDuration/Success",
+        "PASS Engineering article copied geometry, COM, camera, bounded catch-up and final hold"
+      ]
+    },
+    {
+      "name": "graphics-debug-Powered-contact-canonical-presentation.log",
+      "bytes": 3947,
+      "sha256": "A1D48302089402BC4270F94B1FBE75CDEADBDEB72F0E6EE08838882AFD5858A7",
+      "decisiveLines": [
+        "POWERED_CONTACT_PRESENTATION PASS ready/inspection/powered/exhaustion/canonical_geometry/camera/bounded_backlog/completion"
+      ]
+    },
+    {
+      "name": "graphics-debug-Powered-free-flight-canonical-presentation.log",
+      "bytes": 1285,
+      "sha256": "213DE5D4CDDA474B314EC76DAEE2DD1C93623C28C3948924B36D0D62E99810C7",
+      "decisiveLines": [
+        "POWERED_LIVE_FAILED host credit InvalidInput",
+        "POWERED_PRESENTATION PASS canonical_pose/ready/start/acceleration/depletion/camera/backlog/final_hold/failed_input"
+      ]
+    },
+    {
+      "name": "graphics-debug-Transport-layout.log",
+      "bytes": 306,
+      "sha256": "BB5CF29D839650E0D9F19D86F3CF424D6B6A58101A18F87234C54B23A9C55B96",
+      "decisiveLines": []
+    },
+    {
+      "name": "graphics-release-Contact-development-canonical-presentation.log",
+      "bytes": 2815,
+      "sha256": "29CD9434A8792C67059B1F266BF24F84B1E02630FF71AF16CBD239AEAF1AF03A",
+      "decisiveLines": [
+        "CONTACT_LIVE_FAILED Host credit InvalidDuration/Success",
+        "PASS Contact development canonical presentation and lifecycle",
+        "CONTACT_LIVE_FAILED Host credit InvalidDuration/Success",
+        "PASS Engineering article copied geometry, COM, camera, bounded catch-up and final hold"
+      ]
+    },
+    {
+      "name": "graphics-release-Powered-contact-canonical-presentation.log",
+      "bytes": 3954,
+      "sha256": "737919AE32F72EC3C2609BBAC3E92B686DBF50E27136F46D88FEBDDA8418C6A8",
+      "decisiveLines": [
+        "POWERED_CONTACT_PRESENTATION PASS ready/inspection/powered/exhaustion/canonical_geometry/camera/bounded_backlog/completion"
+      ]
+    },
+    {
+      "name": "graphics-release-Powered-free-flight-canonical-presentation.log",
+      "bytes": 1291,
+      "sha256": "BE7F237B44EE4A69A991692AFBD9AB687613E0233F6E94FCCC41212537AEDC3F",
+      "decisiveLines": [
+        "POWERED_LIVE_FAILED host credit InvalidInput",
+        "POWERED_PRESENTATION PASS canonical_pose/ready/start/acceleration/depletion/camera/backlog/final_hold/failed_input"
+      ]
+    },
+    {
+      "name": "graphics-release-Transport-layout.log",
+      "bytes": 312,
+      "sha256": "6C26328FCA92FB2B09CE8C2271B921CD3D30D2B74DB58089F963B5A4BD384298",
+      "decisiveLines": []
+    },
+    {
+      "name": "native-debug.log",
+      "bytes": 23,
+      "sha256": "71AA391EC7D7E291B419A7F40FBA91919E14AC2394AB4E8B66ED126E267D70F6",
+      "decisiveLines": []
+    },
+    {
+      "name": "native-release.log",
+      "bytes": 4098,
+      "sha256": "FC98EA95159ACAAB9F74249F77A90086E35FE014D364CA9AEABCD098A0708C5F",
+      "decisiveLines": []
+    },
+    {
+      "name": "powered-contact-allocation-debug.log",
+      "bytes": 642,
+      "sha256": "FE6C82FE50D44A4E1530913F3AA7F4C84B99498367C3779E88D1DCFA9E3FE136",
+      "decisiveLines": [
+        "ORDINARY_ALLOCATION gate=powered-contact-dry-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-contact-interior-exhaustion-to-dry bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-contact-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-contact-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-contact-input-projection bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "POWERED_CONTACT_ALLOCATION PASS five_exact_zero_windows positive_control=NONZERO"
+      ]
+    },
+    {
+      "name": "powered-contact-allocation-release.log",
+      "bytes": 642,
+      "sha256": "FE6C82FE50D44A4E1530913F3AA7F4C84B99498367C3779E88D1DCFA9E3FE136",
+      "decisiveLines": [
+        "ORDINARY_ALLOCATION gate=powered-contact-dry-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-contact-interior-exhaustion-to-dry bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-contact-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-contact-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-contact-input-projection bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "POWERED_CONTACT_ALLOCATION PASS five_exact_zero_windows positive_control=NONZERO"
+      ]
+    },
+    {
+      "name": "powered-contact-authority-debug.log",
+      "bytes": 292,
+      "sha256": "0CB428FADF18A3C687432F813FDBAC74AE4213614C3BB8AEC80745350AED2A36",
+      "decisiveLines": [
+        "POWERED_CONTACT_REFUSAL_CLOSEOUT PASS stale_command_after_step wrong_interval_before_input no_extra_debit_or_step",
+        "POWERED_CONTACT_AUTHORITY PASS precommit_nonmutation pending_retry joint_lease_once source_resource_world_guards terminal_physical terminal_credit export_failure property_only"
+      ]
+    },
+    {
+      "name": "powered-contact-authority-release.log",
+      "bytes": 292,
+      "sha256": "0CB428FADF18A3C687432F813FDBAC74AE4213614C3BB8AEC80745350AED2A36",
+      "decisiveLines": [
+        "POWERED_CONTACT_REFUSAL_CLOSEOUT PASS stale_command_after_step wrong_interval_before_input no_extra_debit_or_step",
+        "POWERED_CONTACT_AUTHORITY PASS precommit_nonmutation pending_retry joint_lease_once source_resource_world_guards terminal_physical terminal_credit export_failure property_only"
+      ]
+    },
+    {
+      "name": "powered-contact-cheap-debug.log",
+      "bytes": 166,
+      "sha256": "B29CBAD8FF836F64B62062B00C7BE7AA98D777BE0B61EEBF9814B6A0D42B25ED",
+      "decisiveLines": [
+        "POWERED_CONTACT_MAPPER PASS six_native_bits=PASS",
+        "POWERED_CONTACT_CHEAP PASS full=16666 endpoint_exhaustion=33333 dry=50000 exact_resource=PASS joint_successor=PASS"
+      ]
+    },
+    {
+      "name": "powered-contact-cheap-release.log",
+      "bytes": 166,
+      "sha256": "B29CBAD8FF836F64B62062B00C7BE7AA98D777BE0B61EEBF9814B6A0D42B25ED",
+      "decisiveLines": [
+        "POWERED_CONTACT_MAPPER PASS six_native_bits=PASS",
+        "POWERED_CONTACT_CHEAP PASS full=16666 endpoint_exhaustion=33333 dry=50000 exact_resource=PASS joint_successor=PASS"
+      ]
+    },
+    {
+      "name": "powered-contact-lifecycle-debug.log",
+      "bytes": 138,
+      "sha256": "464F99EBB6351257CBB5EB5CCA32D9FBE3C316F4AC42F669781DD7491502FBF7",
+      "decisiveLines": [
+        "POWERED_CONTACT_LIFECYCLE PASS fixtures=11 frontiers=3 exact_record_native_identity=PASS projection=PASS refusal_cleanup=PASS retry=PASS"
+      ]
+    },
+    {
+      "name": "powered-contact-lifecycle-release.log",
+      "bytes": 138,
+      "sha256": "464F99EBB6351257CBB5EB5CCA32D9FBE3C316F4AC42F669781DD7491502FBF7",
+      "decisiveLines": [
+        "POWERED_CONTACT_LIFECYCLE PASS fixtures=11 frontiers=3 exact_record_native_identity=PASS projection=PASS refusal_cleanup=PASS retry=PASS"
+      ]
+    },
+    {
+      "name": "powered-contact-physics-debug.log",
+      "bytes": 4693,
+      "sha256": "F2AEC611949B2794DCCD0DB4902585FBD82046ACB4C17DF7EB6930CBE3827AEE",
+      "decisiveLines": []
+    },
+    {
+      "name": "powered-contact-physics-release.log",
+      "bytes": 4693,
+      "sha256": "F2AEC611949B2794DCCD0DB4902585FBD82046ACB4C17DF7EB6930CBE3827AEE",
+      "decisiveLines": []
+    },
+    {
+      "name": "powered-contact-sequences-debug.log",
+      "bytes": 1494,
+      "sha256": "50B75A83D902D944DE2400A2BB476793487C8D7A876CF60783B90CFC776D586C",
+      "decisiveLines": [
+        "POWERED_CONTACT_SEQUENCE CenteredEndpoint hz=30 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+        "POWERED_CONTACT_SEQUENCE CenteredEndpoint hz=60 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+        "POWERED_CONTACT_SEQUENCE CenteredEndpoint hz=150 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+        "POWERED_CONTACT_SEQUENCE CenteredEndpoint hz=240 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+        "POWERED_CONTACT_SEQUENCE CenteredEndpoint hz=-1 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=200 PASS",
+        "POWERED_CONTACT_MOVING CenteredEndpoint intervals=1200 original_frame_epoch=PASS nativeBits=PASS",
+        "POWERED_CONTACT_SEQUENCE OffCom hz=30 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+        "POWERED_CONTACT_SEQUENCE OffCom hz=60 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+        "POWERED_CONTACT_SEQUENCE OffCom hz=150 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+        "POWERED_CONTACT_SEQUENCE OffCom hz=240 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+        "POWERED_CONTACT_SEQUENCE OffCom hz=-1 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=200 PASS",
+        "POWERED_CONTACT_MOVING OffCom intervals=1200 original_frame_epoch=PASS nativeBits=PASS"
+      ]
+    },
+    {
+      "name": "powered-contact-sequences-release.log",
+      "bytes": 1494,
+      "sha256": "50B75A83D902D944DE2400A2BB476793487C8D7A876CF60783B90CFC776D586C",
+      "decisiveLines": [
+        "POWERED_CONTACT_SEQUENCE CenteredEndpoint hz=30 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+        "POWERED_CONTACT_SEQUENCE CenteredEndpoint hz=60 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+        "POWERED_CONTACT_SEQUENCE CenteredEndpoint hz=150 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+        "POWERED_CONTACT_SEQUENCE CenteredEndpoint hz=240 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+        "POWERED_CONTACT_SEQUENCE CenteredEndpoint hz=-1 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=200 PASS",
+        "POWERED_CONTACT_MOVING CenteredEndpoint intervals=1200 original_frame_epoch=PASS nativeBits=PASS",
+        "POWERED_CONTACT_SEQUENCE OffCom hz=30 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+        "POWERED_CONTACT_SEQUENCE OffCom hz=60 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+        "POWERED_CONTACT_SEQUENCE OffCom hz=150 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+        "POWERED_CONTACT_SEQUENCE OffCom hz=240 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+        "POWERED_CONTACT_SEQUENCE OffCom hz=-1 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=200 PASS",
+        "POWERED_CONTACT_MOVING OffCom intervals=1200 original_frame_epoch=PASS nativeBits=PASS"
+      ]
+    },
+    {
+      "name": "powered-contact-work-debug.log",
+      "bytes": 437,
+      "sha256": "8C5AFB366278353EF2983E90C48D21E530FDAB0A69E6655781B1A565EE506DEB",
+      "decisiveLines": [
+        "POWERED_CONTACT_WORK OffCom applications=54 edges=108 exactTelescopes=PASS nativeBits=PASS tangent=-0.1048833757758171 twist=-0.012745794725816662 tangentError=0.004177657978519753 twistError=0.0006884086400016885",
+        "POWERED_CONTACT_WORK YawBaseline applications=54 edges=108 exactTelescopes=PASS nativeBits=PASS tangent=-0.16015435172999565 twist=-0.013582194484826894 tangentError=0.001671110138672799 twistError=3.2028185372595663E-07"
+      ]
+    },
+    {
+      "name": "powered-contact-work-release.log",
+      "bytes": 437,
+      "sha256": "8C5AFB366278353EF2983E90C48D21E530FDAB0A69E6655781B1A565EE506DEB",
+      "decisiveLines": [
+        "POWERED_CONTACT_WORK OffCom applications=54 edges=108 exactTelescopes=PASS nativeBits=PASS tangent=-0.1048833757758171 twist=-0.012745794725816662 tangentError=0.004177657978519753 twistError=0.0006884086400016885",
+        "POWERED_CONTACT_WORK YawBaseline applications=54 edges=108 exactTelescopes=PASS nativeBits=PASS tangent=-0.16015435172999565 twist=-0.013582194484826894 tangentError=0.001671110138672799 twistError=3.2028185372595663E-07"
+      ]
+    },
+    {
+      "name": "powered-free-flight-allocation-debug.log",
+      "bytes": 804,
+      "sha256": "7E36D9045B1B53BF2A874D0A8AED1E53EFF6A88E32083AB6B4219A0F610E0248",
+      "decisiveLines": [
+        "ORDINARY_ALLOCATION gate=powered-complete-full bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-complete-unpowered bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-interior-prepare-commit-ack bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-physical-joint-preparation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-fixed-publication-ack-observation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-no-work-refusal bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-backlog-existing-debt bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "POWERED_ALLOCATION PASS exact_zero=7_windows positive_control=NONZERO"
+      ]
+    },
+    {
+      "name": "powered-free-flight-allocation-release.log",
+      "bytes": 804,
+      "sha256": "7E36D9045B1B53BF2A874D0A8AED1E53EFF6A88E32083AB6B4219A0F610E0248",
+      "decisiveLines": [
+        "ORDINARY_ALLOCATION gate=powered-complete-full bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-complete-unpowered bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-interior-prepare-commit-ack bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-physical-joint-preparation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-fixed-publication-ack-observation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-no-work-refusal bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-backlog-existing-debt bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "POWERED_ALLOCATION PASS exact_zero=7_windows positive_control=NONZERO"
+      ]
+    },
+    {
+      "name": "powered-free-flight-arithmetic-debug.log",
+      "bytes": 108,
+      "sha256": "8A8E9E7333D72A7014AB15BE875F35319E81991CC7E2FDE354A4CFFC6A60CD8E",
+      "decisiveLines": [
+        "POWERED_ARITHMETIC PASS ratio_rounding=PASS stage_mass=PASS tiny_seconds=0 tiny_dv=4.9406564584124654E-324"
+      ]
+    },
+    {
+      "name": "powered-free-flight-arithmetic-release.log",
+      "bytes": 108,
+      "sha256": "8A8E9E7333D72A7014AB15BE875F35319E81991CC7E2FDE354A4CFFC6A60CD8E",
+      "decisiveLines": [
+        "POWERED_ARITHMETIC PASS ratio_rounding=PASS stage_mass=PASS tiny_seconds=0 tiny_dv=4.9406564584124654E-324"
+      ]
+    },
+    {
+      "name": "powered-free-flight-authority-debug.log",
+      "bytes": 123,
+      "sha256": "6DE5E530C3BC63785D59F311A3E92FBD4563F861522FE0A3F3FE290F668F64F1",
+      "decisiveLines": [
+        "POWERED_AUTHORITY PASS owner/nonmutation/atomic/revisions/exhaustion/leases/endpoint-only/terminal-ack/event/debt/history"
+      ]
+    },
+    {
+      "name": "powered-free-flight-authority-release.log",
+      "bytes": 123,
+      "sha256": "6DE5E530C3BC63785D59F311A3E92FBD4563F861522FE0A3F3FE290F668F64F1",
+      "decisiveLines": [
+        "POWERED_AUTHORITY PASS owner/nonmutation/atomic/revisions/exhaustion/leases/endpoint-only/terminal-ack/event/debt/history"
+      ]
+    },
+    {
+      "name": "powered-free-flight-physics-debug.log",
+      "bytes": 365,
+      "sha256": "352637EDAA3B6FC76C1FC7F38A3D4556294B38D10CABF5FF2EF3F978F211C3C1",
+      "decisiveLines": [
+        "POWERED_ARITHMETIC PASS ratio_rounding=PASS stage_mass=PASS tiny_seconds=0 tiny_dv=4.9406564584124654E-324",
+        "POWERED_PHYSICS PASS analytic_x_error=2.220446049250313E-16 analytic_v_error=0 rotating_x_error=1.0842021724855044E-19 rotating_v_error=2.439454888092385E-19 rotating_q_error=6.938893903907228E-18 frozen_root_missing_dvy=8.247412062658337E-05 tiny_cases=3"
+      ]
+    },
+    {
+      "name": "powered-free-flight-physics-release.log",
+      "bytes": 365,
+      "sha256": "352637EDAA3B6FC76C1FC7F38A3D4556294B38D10CABF5FF2EF3F978F211C3C1",
+      "decisiveLines": [
+        "POWERED_ARITHMETIC PASS ratio_rounding=PASS stage_mass=PASS tiny_seconds=0 tiny_dv=4.9406564584124654E-324",
+        "POWERED_PHYSICS PASS analytic_x_error=2.220446049250313E-16 analytic_v_error=0 rotating_x_error=1.0842021724855044E-19 rotating_v_error=2.439454888092385E-19 rotating_q_error=6.938893903907228E-18 frozen_root_missing_dvy=8.247412062658337E-05 tiny_cases=3"
+      ]
+    },
+    {
+      "name": "powered-free-flight-schedules-debug.log",
+      "bytes": 1054,
+      "sha256": "0E1ABEF58E20ACB3549BB3DEE1B5E17637F77B8FF7A2BAA91229CF43970FAA02",
+      "decisiveLines": [
+        "POWERED_SCHEDULE straight hz=30 frames=600 endpoints=1200 short=400 long=800 debt=0 budget_hits=0 PASS",
+        "POWERED_SCHEDULE straight hz=60 frames=1200 endpoints=1200 short=400 long=800 debt=0 budget_hits=0 PASS",
+        "POWERED_SCHEDULE straight hz=150 frames=3000 endpoints=1200 short=400 long=800 debt=0 budget_hits=0 PASS",
+        "POWERED_SCHEDULE straight hz=240 frames=4800 endpoints=1200 short=400 long=800 debt=0 budget_hits=0 PASS",
+        "POWERED_SCHEDULE straight hz=-1 frames=400 endpoints=1200 short=400 long=800 debt=0 budget_hits=200 PASS",
+        "POWERED_SCHEDULE rotating hz=30 frames=600 endpoints=1200 short=400 long=800 debt=0 budget_hits=0 PASS",
+        "POWERED_SCHEDULE rotating hz=60 frames=1200 endpoints=1200 short=400 long=800 debt=0 budget_hits=0 PASS",
+        "POWERED_SCHEDULE rotating hz=150 frames=3000 endpoints=1200 short=400 long=800 debt=0 budget_hits=0 PASS",
+        "POWERED_SCHEDULE rotating hz=240 frames=4800 endpoints=1200 short=400 long=800 debt=0 budget_hits=0 PASS",
+        "POWERED_SCHEDULE rotating hz=-1 frames=400 endpoints=1200 short=400 long=800 debt=0 budget_hits=200 PASS"
+      ]
+    },
+    {
+      "name": "powered-free-flight-schedules-release.log",
+      "bytes": 1054,
+      "sha256": "0E1ABEF58E20ACB3549BB3DEE1B5E17637F77B8FF7A2BAA91229CF43970FAA02",
+      "decisiveLines": [
+        "POWERED_SCHEDULE straight hz=30 frames=600 endpoints=1200 short=400 long=800 debt=0 budget_hits=0 PASS",
+        "POWERED_SCHEDULE straight hz=60 frames=1200 endpoints=1200 short=400 long=800 debt=0 budget_hits=0 PASS",
+        "POWERED_SCHEDULE straight hz=150 frames=3000 endpoints=1200 short=400 long=800 debt=0 budget_hits=0 PASS",
+        "POWERED_SCHEDULE straight hz=240 frames=4800 endpoints=1200 short=400 long=800 debt=0 budget_hits=0 PASS",
+        "POWERED_SCHEDULE straight hz=-1 frames=400 endpoints=1200 short=400 long=800 debt=0 budget_hits=200 PASS",
+        "POWERED_SCHEDULE rotating hz=30 frames=600 endpoints=1200 short=400 long=800 debt=0 budget_hits=0 PASS",
+        "POWERED_SCHEDULE rotating hz=60 frames=1200 endpoints=1200 short=400 long=800 debt=0 budget_hits=0 PASS",
+        "POWERED_SCHEDULE rotating hz=150 frames=3000 endpoints=1200 short=400 long=800 debt=0 budget_hits=0 PASS",
+        "POWERED_SCHEDULE rotating hz=240 frames=4800 endpoints=1200 short=400 long=800 debt=0 budget_hits=0 PASS",
+        "POWERED_SCHEDULE rotating hz=-1 frames=400 endpoints=1200 short=400 long=800 debt=0 budget_hits=200 PASS"
+      ]
+    },
+    {
+      "name": "presentation-debug.log",
+      "bytes": 3746,
+      "sha256": "B710ACF995510F116A5B716DF67A3E8A510FBD185978A541025C82672306FBDB",
+      "decisiveLines": [
+        "ORDINARY_ALLOCATION gate=assembly-application-service-presentation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=assembly-terminal-presentation bytes=0 entry=PASS exit=PASS",
+        "ASSEMBLY_PRESENTATION PASS ready/start/64Hz/material-origin/copied-pose/camera/backlog/plan/final-hold/CLI/zero-allocation"
+      ]
+    },
+    {
+      "name": "presentation-release.log",
+      "bytes": 3745,
+      "sha256": "5CF2286E06AB47DD4070D74C4C09E7BF5048B9D48DE79DB38D5A7DB2993AB1C7",
+      "decisiveLines": [
+        "ORDINARY_ALLOCATION gate=assembly-application-service-presentation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=assembly-terminal-presentation bytes=0 entry=PASS exit=PASS",
+        "ASSEMBLY_PRESENTATION PASS ready/start/64Hz/material-origin/copied-pose/camera/backlog/plan/final-hold/CLI/zero-allocation"
+      ]
+    },
+    {
+      "name": "solution-debug.log",
+      "bytes": 5152,
+      "sha256": "7EE448B795660FD313A90F88EC15C6DE225E317BF7184049A237324961271A04",
+      "decisiveLines": [
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)"
+      ]
+    },
+    {
+      "name": "solution-release.log",
+      "bytes": 3209,
+      "sha256": "DAFE47A8037AAA5C9F22A6CF003951A456877300A3E8E59C5D6E872CDE8B45F5",
+      "decisiveLines": [
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)"
+      ]
+    },
+    {
+      "name": "spacecraft-command-cheap-debug.log",
+      "bytes": 223,
+      "sha256": "7E51E3C383E8AE1046A749DEF506768ED3E4291CD5DB3EA2928C7F9AD01717E1",
+      "decisiveLines": [
+        "COMMAND_BACKLOG PASS H=50000 E=50000 later-H=100000 old-state-through=33333 new-state-at=50000 hold=captured-at-E",
+        "COMMAND_CHEAP PASS zero-debt/lifetime/edges/noops/frames/revocation/capacity/refusal/revision/nonactuation"
+      ]
+    },
+    {
+      "name": "spacecraft-command-cheap-release.log",
+      "bytes": 223,
+      "sha256": "7E51E3C383E8AE1046A749DEF506768ED3E4291CD5DB3EA2928C7F9AD01717E1",
+      "decisiveLines": [
+        "COMMAND_BACKLOG PASS H=50000 E=50000 later-H=100000 old-state-through=33333 new-state-at=50000 hold=captured-at-E",
+        "COMMAND_CHEAP PASS zero-debt/lifetime/edges/noops/frames/revocation/capacity/refusal/revision/nonactuation"
+      ]
+    },
+    {
+      "name": "srv01-integration-debug.log",
+      "bytes": 220,
+      "sha256": "F672E14E501B8C2C67CE311A5406F280B6B7EE1EA386917AB5F0301E17D2F923",
+      "decisiveLines": [
+        "ASSEMBLY_FOUR_HORN_OWNERSHIP PASS checks=16260 independent_trajectories=24",
+        "SRV01_INTEGRATION PASS sixteen endpoints/identity/shared-feed/mass/COM/tensor/command-wrench/bit15/refusals/replay/24-independent-trajectories"
+      ]
+    },
+    {
+      "name": "srv01-integration-release.log",
+      "bytes": 220,
+      "sha256": "F672E14E501B8C2C67CE311A5406F280B6B7EE1EA386917AB5F0301E17D2F923",
+      "decisiveLines": [
+        "ASSEMBLY_FOUR_HORN_OWNERSHIP PASS checks=16260 independent_trajectories=24",
+        "SRV01_INTEGRATION PASS sixteen endpoints/identity/shared-feed/mass/COM/tensor/command-wrench/bit15/refusals/replay/24-independent-trajectories"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,269 @@
+{
+  "reviewedAt": "2026-09-17T01:52:32.492561-04:00",
+  "root": "E:\\NovaCore\\build\\srv01-integration",
+  "files": 1925,
+  "bytes": 382623053.0,
+  "directories": [
+    {
+      "path": "E:\\NovaCore\\build\\srv01-integration\\artifacts",
+      "files": 1467,
+      "bytes": 323898600.0
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-integration\\exhaust-correction",
+      "files": 118,
+      "bytes": 2371035.0
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-integration\\exhaust-ksa",
+      "files": 2,
+      "bytes": 15257.0
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-integration\\ksa",
+      "files": 7,
+      "bytes": 146261.0
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-integration\\launcher",
+      "files": 24,
+      "bytes": 3009994.0
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-integration\\native-debug",
+      "files": 120,
+      "bytes": 43081450.0
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-integration\\native-release",
+      "files": 99,
+      "bytes": 6249940.0
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-integration\\proof",
+      "files": 4,
+      "bytes": 142967.0
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-integration\\visual-intake",
+      "files": 32,
+      "bytes": 1403147.0
+    }
+  ],
+  "rootLevelFiles": [
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\allocation-debug.log",
+      "Length": 1436
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\allocation-release.log",
+      "Length": 1436
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\build-debug.log",
+      "Length": 82
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\build-native.log",
+      "Length": 314
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\build-release.log",
+      "Length": 82
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\cost-release-1.log",
+      "Length": 662204
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\cost-release-2.log",
+      "Length": 662363
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\cost-release-3.log",
+      "Length": 662077
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\final-build-Debug.log",
+      "Length": 82
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\final-build-Release.log",
+      "Length": 82
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\finalize-evidence.py",
+      "Length": 8179
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\graphics-build-Debug.log",
+      "Length": 82
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\graphics-build-Release.log",
+      "Length": 82
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\graphics-Debug-Contact-development-canonical-presentation.log",
+      "Length": 2799
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\graphics-Debug-Generic-grid-and-frames-startup.log",
+      "Length": 1435
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\graphics-Debug-Powered-contact-canonical-presentation.log",
+      "Length": 3937
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\graphics-Debug-Powered-free-flight-canonical-presentation.log",
+      "Length": 1275
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\graphics-Debug-Stock-assembly-canonical-presentation.log",
+      "Length": 3405
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\graphics-Debug-Transport-layout.log",
+      "Length": 296
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\graphics-Release-Contact-development-canonical-presentation.log",
+      "Length": 2805
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\graphics-Release-Powered-contact-canonical-presentation.log",
+      "Length": 3943
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\graphics-Release-Powered-free-flight-canonical-presentation.log",
+      "Length": 1281
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\graphics-Release-Stock-assembly-canonical-presentation.log",
+      "Length": 3409
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\graphics-Release-Transport-layout.log",
+      "Length": 302
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\launcher-debug.log",
+      "Length": 647
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\launcher-release.log",
+      "Length": 647
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\live-launcher-1280-1.log",
+      "Length": 4001
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\live-launcher-1280-2.log",
+      "Length": 4000
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\live-launcher-1280-3.log",
+      "Length": 4000
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\live-release-1.log",
+      "Length": 3998
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\live-release-2.log",
+      "Length": 3999
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\live-release-3.log",
+      "Length": 3997
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\manual-live.err",
+      "Length": 0
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\manual-live.log",
+      "Length": 22818
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\NovaCore.BepuDependency.Tests-debug.log",
+      "Length": 2215
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\NovaCore.BepuDependency.Tests-release.log",
+      "Length": 2215
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\NovaCore.Graphics.Tests-debug.log",
+      "Length": 52982
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\NovaCore.Launcher.Tests-debug.log",
+      "Length": 869
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\NovaCore.Precision.Tests-debug.log",
+      "Length": 693
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\NovaCore.Precision.Tests-release.log",
+      "Length": 692
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\NovaCore.ReferenceFrames.Tests-debug.log",
+      "Length": 934
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\NovaCore.ReferenceFrames.Tests-release.log",
+      "Length": 934
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\NovaCore.Simulation.Tests-debug.log",
+      "Length": 52767
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\NovaCore.Simulation.Tests-release.log",
+      "Length": 52758
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\presentation-debug.log",
+      "Length": 3108
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\presentation-release.log",
+      "Length": 3108
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\simulation-release.log",
+      "Length": 52762
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\smoke-frames.log",
+      "Length": 2245
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\smoke-grid.log",
+      "Length": 2245
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\srv01-debug.log",
+      "Length": 220
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\srv01-release.log",
+      "Length": 220
+    },
+    {
+      "FullName": "E:\\NovaCore\\build\\srv01-integration\\storage-release.log",
+      "Length": 1940
+    }
+  ],
+  "classification": "DISPOSE: rebuildable output, raw logs, KSA read-only dumps, reproduced proof, duplicate visual intake; concise retained evidence and current source suffice",
+  "reparsePoints": 0,
+  "disposition": "TEMPORARY OUTPUT RETAINED - MANUAL PROJECT CONTROL CLEANUP REQUIRED",
+  "manualCommand": "Remove-Item -LiteralPath 'E:\\NovaCore\\build\\srv01-integration' -Recurse -Force -ErrorAction Stop",
+  "verificationCommand": "Test-Path -LiteralPath 'E:\\NovaCore\\build\\srv01-integration'",
+  "automaticDeletion": "Rejected before execution: blocked by policy. No retry or workaround."
+}

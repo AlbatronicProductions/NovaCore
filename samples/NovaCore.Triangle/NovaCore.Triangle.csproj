@@ -2,6 +2,7 @@
   <PropertyGroup><OutputType>Exe</OutputType><PlatformTarget>x64</PlatformTarget><AllowUnsafeBlocks>true</AllowUnsafeBlocks><NativeBuildDirectory>native-ninja</NativeBuildDirectory></PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'"><NativeBuildDirectory>native-ninja-release</NativeBuildDirectory></PropertyGroup>
   <ItemGroup>
+    <Content Include="..\..\assets\visual\SRV01\*.glb" Link="assets\visual\SRV01\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
     <ProjectReference Include="..\..\src\NovaCore.Core\NovaCore.Core.csproj" />
     <ProjectReference Include="..\..\src\NovaCore.Graphics\NovaCore.Graphics.csproj" />
     <ProjectReference Include="..\..\src\NovaCore.Interop\NovaCore.Interop.csproj" />
@@ -12,6 +13,9 @@
     <ItemGroup>
       <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\triangle.vert.spv" />
       <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\triangle.frag.spv" />
+      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\exhaust.vert.spv" />
+      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\exhaust.frag.spv" />
+      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\exhaust_resolve.frag.spv" />
       <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\orbit.vert.spv" />
       <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\orbit.frag.spv" />
       <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\orbit_previous.frag.spv" />

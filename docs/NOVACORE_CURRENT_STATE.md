@@ -13,6 +13,29 @@ and performs FP64 camera-relative subtraction before GPU transport.
 
 ## Current bank — M15.1
 
+**Accepted candidate, bank preparation only (2026-09-17): SRV-01 Reusable Production
+Spacecraft Integration.** M15.2 is the proposed next sequential milestone, not a
+banked checkpoint. Branch `codex/srv01-production-integration` remains based on
+`09463ec6c323daf233205cb08306d38611c22e6e`; no commit/tag/push is authorized.
+One capsule, tank/service body, gimbaled main engine and four reusable four-horn
+blocks form one explicit seven-part stock assembly with 16 physical RCS jets,
+two exact species stores, explicit feeds and current mass/COM/inertia. Runtime
+loads four accepted GLBs, never Blender source. Copied canonical state drives
+main/RCS nozzle-local exhaust once per display frame; capacity and terminal
+shutdown have qualified native/managed coverage. Current KSA plume responsibilities
+are ADOPT/ADAPT using original NovaCore code and geometry.
+
+The bounded two-second scenario and final exhaust visual acceptance are PASS.
+No construction editor, staging/decoupling, docking, atmosphere/gas-model parity,
+departure or Florida integration is claimed. Release maxima 35.130–40.196 ms
+remain unattributed; there is no all-frame 6.67-ms guarantee or exact overlapping
+plume transport claim. Synchronous explicit save/restore allocates and can hitch;
+it is outside the warmed zero-allocation interval contract. Authorized historical
+terrain payload retirement removed exact replay of those old experiments only;
+their records/hashes remain and current global/Florida terrain is preserved.
+See [bank preparation](engineering-evidence/srv01-production-integration/bank-preparation/README.md)
+and the [accepted qualification](engineering-evidence/srv01-production-integration/README.md).
+
 The latest banked production milestone is **M15.1 — Finite-Fuel Retained Powered
 Contact**, tag `m15.1-finite-fuel-retained-powered-contact`. Its atomic bank includes
 the operative NovaCore Source-Available License 1.0 and companion policies,

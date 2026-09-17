@@ -1,0 +1,69 @@
+{
+  "date": "2026-09-17T01:40:45.5861665-04:00",
+  "root": "E:\\Kitten Space Agency",
+  "writes": 0,
+  "files": [
+    {
+      "path": "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\VolumetricExhaust\\VolumetricExhaust.vert",
+      "bytes": 2941,
+      "sha256": "F9F3DEA23EE15E61032202907931B0296E0C7640B914072180714FE05A4777A9"
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\VolumetricExhaust\\VolumetricExhaust.frag",
+      "bytes": 32166,
+      "sha256": "B1A1619B55A61EC43C5D781F9001AD1200701EA66EE80B43699326ADF66D3064"
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\VolumetricExhaust\\PhysicalDensity.glsl",
+      "bytes": 4028,
+      "sha256": "115B859F98E9D5EC050BFA5BDDB68408D972E0534F645738075459A8F1FF912A"
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\VolumetricExhaust\\VolumeBounds.glsl",
+      "bytes": 5232,
+      "sha256": "1C83C79FF0F1FCAB10966882B5F357457F2F4B9C5119C17DCBBB1EE5D82DCF7E"
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\VolumetricExhaust\\ExhaustOit.comp",
+      "bytes": 2262,
+      "sha256": "35F24D342FB88412FD57E51F45734622B9897A6141612E6FC0689282A2773CEF"
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\VolumetricExhaust\\Upscaling\\Compose.comp",
+      "bytes": 3919,
+      "sha256": "38F78F4318CF5B3E52963B46C33B13F216313404B34C3503A9D60EB6D9AE321A"
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\TransparenciesMsaa\\TransparencyMsaaCompose.glsl",
+      "bytes": 3194,
+      "sha256": "ECBFF6F803A88CF954761887CCA56E07AEAF19430B754A9C502EDB6703AD575E"
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\Content\\Core\\Meshes\\box_with_midseam.glb",
+      "bytes": 2068,
+      "sha256": "361162A2C548C80FF9CA7495450E87AEC1BB603309C6D8CD9EE187262E7E5884"
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\Content\\Core\\ExhaustAssets.xml",
+      "bytes": 66655,
+      "sha256": "F876D81622BA740C551536A5C5AD067EF602B39304C524FC72A358CC40242750"
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\KSA.dll",
+      "bytes": 4936792,
+      "sha256": "A03E98153C6F353AF6F280CD3BDC1C71C718008E2049F508DC6FBE54457A0AA8"
+    }
+  ],
+  "currentMethodILHeaders": [
+    "ExhaustGasDynamics.ComputePlumeCurveCoeff 06002305 154 bytes SHA256 04EE53B2663A5C7BCAADA8CE7C0CEC9DE01AEC37C0ED338EDE391A54C4E13D75",
+    "ExhaustGasDynamics.ComputePlumeRadius 06002306 34 bytes SHA256 01F2C21D59B8C244E93500E367B71ADA13F24C3BD952C07F02B133BDD64DB24F",
+    "ExhaustGasDynamics.ComputeVacuumPlumeLengthForDensity 0600230B 70 bytes SHA256 130482D94E3F2AB073E5AE9C41D3F5A2B2EFCBFDE1B469DABC050B8AC860311B",
+    "ExhaustGasDynamics.ComputePlumeRadiusForDensity 0600230C 642 bytes SHA256 1C80AEAABC7BF425DBB5BB440109E42E2449FF7D6659804803CD4D6F95137C32",
+    "ExhaustGasDynamics.ComputeTemplateLength 0600230E 75 bytes SHA256 27E6DB317479B41F144F5D0341B29B3F99BBCDB93130F57D3402E385D6EEA2D5",
+    "ExhaustGasDynamics.ComputeCoreLength 0600230F 155 bytes SHA256 C07BF99B526B1CF2AA38B6A59CE7371E69A03A89DEF97BC775D7F0B351A0DF70",
+    "VolumetricExhaustRenderer.UpdateFrameData 0600233B 132 bytes SHA256 3B2457C045EF927D150CC39A9745DB4844404FFE6B01DAAA1A88BDEEA696B817",
+    "VolumetricExhaustRenderer.Render 0600234E 1027 bytes SHA256 27C89B09290A013B68CF2A4E8470AD089622E44E9DAB216CB36FD6A17CC955EA",
+    "VolumetricExhaustRenderer.CreateRenderingPass 06002363 2782 bytes SHA256 1785219F780DEA8CEAB54F665FEE5B3CDBAFF513EF54A732A6794F51970DA65C"
+  ],
+  "officialHistory": "Directly inspected authenticated #live-changelog; exact four URLs retained in exhaust-correction.md"
+}

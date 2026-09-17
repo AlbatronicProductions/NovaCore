@@ -14,11 +14,14 @@ using NovaCore.Simulation.Celestial;
 using NovaCore.Simulation.Spacecraft.Guidance;
 using NovaCore.Simulation.Time;
 
+if(args.Contains("--assembly-presentation",StringComparer.Ordinal)){StockAssemblyPresentationTests.Run();return 0;}
+
 if(args.Contains("--powered-free-flight-presentation",StringComparer.Ordinal)){PoweredFlightPresentationTests.Run();return 0;}
 if(args.Contains("--powered-contact-presentation",StringComparer.Ordinal)){PoweredContactPresentationTests.Run();return 0;}
 
 var tests = new (string, Action)[]
 {
+    ("Stock assembly canonical presentation", StockAssemblyPresentationTests.Run),
     ("Powered free-flight canonical presentation", PoweredFlightPresentationTests.Run),
     ("Contact development canonical presentation", ContactDevelopmentPresentationTests.Run),
     ("Powered contact canonical presentation", PoweredContactPresentationTests.Run),
@@ -4287,7 +4290,13 @@ static void CelestialSasControlCadenceTest()
     highWarp.ApplyPresentationInput(highWarpCamera, new NativeInputState { RateIncrease = 1 }, out _, out _);
     Check(highWarp.TorqueTransitionCount == activeTransitions + 1, "repeated unsupported rate changes do not duplicate zero torque");
     Check(highWarp.TryAdvanceByHostDuration(SimulationDuration.FromTicks(1), new NativeInputState { SasModeKey = 1 }, out highWarpError) && highWarp.SasMode == SpacecraftSasMode.Off && !highWarp.SasControlSuspended && highWarp.TorqueTransitionCount == activeTransitions + 1, $"off while suspended clears without duplicate zero torque: {highWarpError}");
-    _ = CelestialAnalyticalScene.QuantizeSasTorque(Double3.UnitX); var allocationBefore = GC.GetAllocatedBytesForCurrentThread(); for (var index = 0; index < 100_000; index++) _ = CelestialAnalyticalScene.QuantizeSasTorque(new Double3(index * .001d, -index * .001d, 0d)); Check(GC.GetAllocatedBytesForCurrentThread() == allocationBefore, "warmed SAS torque quantization allocates zero bytes");
+    _ = CelestialAnalyticalScene.QuantizeSasTorque(Double3.UnitX);
+    using(var allocation=new OrdinaryAllocationMeasurement("celestial-SAS-quantization"))
+    {
+        for (var index = 0; index < 100_000; index++) _ = CelestialAnalyticalScene.QuantizeSasTorque(new Double3(index * .001d, -index * .001d, 0d));
+        OrdinaryAllocationMeasurement.RequireZero(allocation.Complete(),"warmed SAS torque quantization allocates zero bytes");
+    }
+    OrdinaryAllocationMeasurement.PositiveControl();
     Console.WriteLine($"Deterministic SAS cadence hash: 0x{cadenceHash:X16}; quantization allocation=0 bytes");
 }
 
@@ -4371,7 +4380,13 @@ static void CelestialSasDiagnosticIndicatorsTest()
     Check(CelestialAnalyticalScene.TryCreate(out var replay, out var replayError) && replay is not null, $"SAS indicator replay: {replayError}"); var replayScene = replay!; var replayCamera = new CameraState(new FramePosition(root, CelestialAnalyticalScene.Camera.Position), DoubleQuaternion.Identity, CelestialAnalyticalScene.Camera.Projection, CameraMode.Free); SetSupportedRate(replayScene, replayCamera); Check(replayScene.TryAdvanceByHostDuration(SimulationDuration.FromTicks(1), new NativeInputState { SasModeKey = 3 }, out replayError), $"SAS indicator replay advance: {replayError}");
     var forwardHash = IndicatorHash(prograde.BodyForwardIndicator!.Value); var targetHash = IndicatorHash(prograde.TargetDirectionIndicator!.Value); Check(forwardHash == IndicatorHash(replayScene.CurrentSnapshot.BodyForwardIndicator!.Value) && targetHash == IndicatorHash(replayScene.CurrentSnapshot.TargetDirectionIndicator!.Value), "indicator hashes are deterministic");
     var submission = new RenderFrameSubmission(3, 257); var cameraRoot = new UniversePosition(CelestialAnalyticalScene.Camera.Position, root); var gpuCamera = Camera(cameraRoot); Check(ResolvedRenderSubmissionBuilder.TryBuild(prograde, gpuCamera, cameraRoot, submission) == ResolvedRenderSubmissionBuildStatus.Success && submission.BodyForwardVertexCount == 2 && submission.TargetDirectionVertexCount == 2, "indicator transport uses fixed two-vertex streams");
-    _ = ResolvedRenderSubmissionBuilder.TryBuild(prograde, gpuCamera, cameraRoot, submission); var before = GC.GetAllocatedBytesForCurrentThread(); for (var index = 0; index < 100_000; index++) Check(ResolvedRenderSubmissionBuilder.TryBuild(prograde, gpuCamera, cameraRoot, submission) == ResolvedRenderSubmissionBuildStatus.Success, "warm indicator transport"); Check(GC.GetAllocatedBytesForCurrentThread() == before, "warm indicator transport allocation");
+    _ = ResolvedRenderSubmissionBuilder.TryBuild(prograde, gpuCamera, cameraRoot, submission);
+    using(var allocation=new OrdinaryAllocationMeasurement("celestial-indicator-transport"))
+    {
+        for (var index = 0; index < 100_000; index++) Check(ResolvedRenderSubmissionBuilder.TryBuild(prograde, gpuCamera, cameraRoot, submission) == ResolvedRenderSubmissionBuildStatus.Success, "warm indicator transport");
+        OrdinaryAllocationMeasurement.RequireZero(allocation.Complete(),"warm indicator transport allocation");
+    }
+    OrdinaryAllocationMeasurement.PositiveControl();
     Console.WriteLine($"Deterministic SAS indicator hashes: forward=0x{forwardHash:X16}; target=0x{targetHash:X16}; transport allocation=0 bytes");
 }
 
@@ -4550,7 +4565,12 @@ static void CelestialAnalyticalFixturePublicationTest()
     var initialCurve = beforeImpulse.OrbitCurve; var beforeImpulseAllocation = GC.GetAllocatedBytesForCurrentThread(); Check(scene.TryAdvanceByHostDuration(SimulationDuration.FromSecondsRounded(.0001d), out var impulseError), $"celestial impulse advance: {impulseError}"); var impulseCurveBytes = GC.GetAllocatedBytesForCurrentThread() - beforeImpulseAllocation; Check(scene.CurrentTime == SimulationInstant.FromWholeSeconds(100_000) && !ReferenceEquals(beforeImpulse, scene.CurrentSnapshot) && scene.OrbitCurveBuildCount == 2 && !ReferenceEquals(initialCurve, scene.CurrentSnapshot.OrbitCurve) && ReferenceEquals(initialCurve, scene.CurrentSnapshot.PreviousOrbitCurve) && scene.CurrentSnapshot.Objects[2].Scale.X > 0d && impulseCurveBytes > 0, "canonical impulse publication includes one ghost and burn marker");
     var hash = DynamicSnapshotHash(scene.CurrentTime, scene.CurrentSnapshot); var activeOrbitHash = OrbitHash(scene.CurrentSnapshot.OrbitCurve!); var ghostOrbitHash = OrbitHash(scene.CurrentSnapshot.PreviousOrbitCurve!); var burnHash = MixDouble3(14695981039346656037UL, scene.CurrentSnapshot.Objects[2].RootPosition.Value); Check(activeOrbitHash != ghostOrbitHash, "active and ghost curves differ"); Check(CelestialAnalyticalScene.TryCreate(out var replay, out var replayError) && replay is not null, $"celestial replay creation: {replayError}"); Check(replay!.TryAdvanceByHostDuration(SimulationDuration.FromWholeSeconds(10), out var replayAdvanceError), $"celestial replay advance: {replayAdvanceError}"); Check(hash == DynamicSnapshotHash(replay.CurrentTime, replay.CurrentSnapshot), "celestial exact-time replay");
     var cameraRoot = new UniversePosition(new Double3(0, 0, 24), root); var camera = Camera(cameraRoot); var submission = new RenderFrameSubmission(3, 257); Check(ResolvedRenderSubmissionBuilder.TryBuild(scene.CurrentSnapshot, camera, cameraRoot, submission) == ResolvedRenderSubmissionBuildStatus.Success && submission.PreviousOrbitVertexCount == 257, "celestial submission");
-    var beforeSubmission = GC.GetAllocatedBytesForCurrentThread(); for (var index = 0; index < 100_000; index++) Check(ResolvedRenderSubmissionBuilder.TryBuild(scene.CurrentSnapshot, camera, cameraRoot, submission) == ResolvedRenderSubmissionBuildStatus.Success, "warm celestial submission"); Check(GC.GetAllocatedBytesForCurrentThread() == beforeSubmission, "warm celestial submission allocation");
+    using(var allocation=new OrdinaryAllocationMeasurement("celestial-submission"))
+    {
+        for (var index = 0; index < 100_000; index++) Check(ResolvedRenderSubmissionBuilder.TryBuild(scene.CurrentSnapshot, camera, cameraRoot, submission) == ResolvedRenderSubmissionBuildStatus.Success, "warm celestial submission");
+        OrdinaryAllocationMeasurement.RequireZero(allocation.Complete(),"warm celestial submission allocation");
+    }
+    OrdinaryAllocationMeasurement.PositiveControl();
     _ = scene.TryAdvanceByHostDuration(SimulationDuration.FromTicks(1), out _); var beforePublication = GC.GetAllocatedBytesForCurrentThread(); const int publicationIterations = 20; for (var index = 0; index < publicationIterations; index++) Check(scene.TryAdvanceByHostDuration(SimulationDuration.FromTicks(1_000), out var publicationError), $"celestial publication: {publicationError}"); var publicationBytes = GC.GetAllocatedBytesForCurrentThread() - beforePublication; Check(publicationBytes > 0, "celestial immutable publication allocation measured"); Console.WriteLine($"Celestial fixture snapshot hash: 0x{hash:X16}; active=0x{activeOrbitHash:X16}; ghost=0x{ghostOrbitHash:X16}; burn=0x{burnHash:X16}; curve replacement/publication allocations: {impulseCurveBytes} bytes; unchanged publication allocations: {publicationBytes / publicationIterations} bytes/update ({publicationBytes} bytes/{publicationIterations} updates)");
 }
 static void VerifyFixtureViewport(ReadOnlySpan<ResolvedRenderObject> objects, ReferenceFrameId root, UniversePosition cameraRoot, double aspect, int width, int height, string label)

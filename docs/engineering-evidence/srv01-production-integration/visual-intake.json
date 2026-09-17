@@ -1,0 +1,30 @@
+[
+  {
+    "asset": "NC_SRV_Capsule_A",
+    "sourceSha256": "bba689d9a149616b50d1896e156590243f7f7741d3d2989d37f6d6c1030ba5ab",
+    "glbSha256": "6b045a63186ed63fa1c6d48ef7e7ab89299f83b4f533897b8679b22068ceff6a",
+    "bytes": 123968,
+    "verified": true
+  },
+  {
+    "asset": "NC_SRV_Tank_A",
+    "sourceSha256": "4ee1527c2bfd6e74aa45dfc64ba53ae44b6d2547eb1626b835d5b5a0eb9556eb",
+    "glbSha256": "22cd027892f20596238d7a7580a4e73032071f6303a73cb211915bab4c4de378",
+    "bytes": 256312,
+    "verified": true
+  },
+  {
+    "asset": "NC_SRV_Main_A",
+    "sourceSha256": "ba8673cb0071067466949e10a08559ed051a876e1d65be4f8ea33226d679059c",
+    "glbSha256": "3b02f9e3788a2ba85ea8c0238e2f61f8c916d7757e2c535b8348cb8e6c1ad46f",
+    "bytes": 130064,
+    "verified": true
+  },
+  {
+    "asset": "NC_SRV_Rcs_A",
+    "sourceSha256": "95af32bcb4393c36daf2e1ef354b8215661757fb865f90c430b96fc5cb399ec5",
+    "glbSha256": "6118cb37bd8b7678d0eacc032391b1143143e2360e351cdcbd67508a3124ca5b",
+    "bytes": 143776,
+    "verified": true
+  }
+]

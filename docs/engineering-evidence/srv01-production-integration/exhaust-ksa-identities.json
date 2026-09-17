@@ -1,0 +1,170 @@
+{
+  "inspectionDate": "2026-09-17",
+  "installedBuild": "2026.9.10.5438+c9291b5dd3347e847020c8fb3dd11dfce6a728e9",
+  "ksaWrites": 0,
+  "files": [
+    {
+      "path": "E:\\Kitten Space Agency\\KSA.dll",
+      "bytes": 4936792,
+      "sha256": "A03E98153C6F353AF6F280CD3BDC1C71C718008E2049F508DC6FBE54457A0AA8"
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\Content\\Core\\CorePropulsionAGameData.xml",
+      "bytes": 39089,
+      "sha256": "D6A7E3EE26ADD68B8CCC572DCCD94ED24B26764C2191C919EF60A86B4924D48B"
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\Content\\Core\\CorePropulsionBGameData.xml",
+      "bytes": 16462,
+      "sha256": "412C75A2C15397C9526288B9A61C9349AE4D51DBA0A1D11ED6A78ED5B79F33AF"
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\Content\\Core\\ExhaustAssets.xml",
+      "bytes": 66655,
+      "sha256": "F876D81622BA740C551536A5C5AD067EF602B39304C524FC72A358CC40242750"
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\Content\\Core\\PlumeTrailAssets.xml",
+      "bytes": 449,
+      "sha256": "E4D77D402E0D5CFD12F75E2BAC8B8FC30DE4311CE94C50867C819600CA42DB52"
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\Content\\Core\\DefaultAssets.xml",
+      "bytes": 26313,
+      "sha256": "B7043D8D6937D107BE0F85E7F77FA87B4CF6B660AC95599637CDD86CE0E51688"
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\VolumetricExhaust\\VolumetricExhaust.vert",
+      "bytes": 2941,
+      "sha256": "F9F3DEA23EE15E61032202907931B0296E0C7640B914072180714FE05A4777A9"
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\Content\\Core\\Shaders\\VolumetricExhaust\\VolumetricExhaust.frag",
+      "bytes": 32166,
+      "sha256": "B1A1619B55A61EC43C5D781F9001AD1200701EA66EE80B43699326ADF66D3064"
+    }
+  ],
+  "methods": [
+    {
+      "method": "RocketNozzle.CreateStates",
+      "token": "06001554",
+      "ilBytes": 131,
+      "ilSha256": "796FE303E4E646C6E2B5BA7EC87AC9FE13485F8556721C00B91AC77864CD42E8"
+    },
+    {
+      "method": "RocketNozzle.UpdateState",
+      "token": "0600155C",
+      "ilBytes": 595,
+      "ilSha256": "70DF697D2FDA5B3817FB3118295E8759DDC8D430810FDC5FC6F298B219ABC542"
+    },
+    {
+      "method": "RocketNozzle.ComputePlumeData",
+      "token": "0600155D",
+      "ilBytes": 164,
+      "ilSha256": "007009257EDFC8BAC48D8952C9AAF33DAF42FACE82A4E1A1A27DA3FDCE7F976A"
+    },
+    {
+      "method": "RocketNozzle.ComputePlumeData",
+      "token": "0600155E",
+      "ilBytes": 50,
+      "ilSha256": "DABC3B1DA465E16FD8B6BBD721909FC5FEB82CD183CE37DF1B2BD3F8196E3627"
+    },
+    {
+      "method": "RocketNozzleState.AccumulateStepData",
+      "token": "0600155F",
+      "ilBytes": 56,
+      "ilSha256": "7787BAA9A9F28014E316E7C8FCDBCA1737445EB6F789911BA16B951554E05B24"
+    },
+    {
+      "method": "RocketNozzleState.FinalizeStepData",
+      "token": "06001560",
+      "ilBytes": 30,
+      "ilSha256": "D80B48483A5FE03E7AB72C1487C8E45335CE72562F24476E27854C02A7F8B1A9"
+    },
+    {
+      "method": "Program.OnPreRender",
+      "token": "06001D5A",
+      "ilBytes": 693,
+      "ilSha256": "817658B5752D9F6F12863D20753DF80571872DB1D0DDE4859ECB22881151CC7D"
+    },
+    {
+      "method": "Program.RenderGame",
+      "token": "06001D93",
+      "ilBytes": 3839,
+      "ilSha256": "160FE3AD8FE81C8A7DB8B2E0A8A9B3E0D7A0424A0FA64AB6EC798182175F58C6"
+    },
+    {
+      "method": "VolumetricExhaustInstance.UpdateState",
+      "token": "06002291",
+      "ilBytes": 1489,
+      "ilSha256": "712743DA97BE7F547DAED0F7C16A6C4B957D1C8F918A1B7391626954F549BCB5"
+    },
+    {
+      "method": "PlumeData.Compute",
+      "token": "06002324",
+      "ilBytes": 498,
+      "ilSha256": "F7F4A7F86F8CC09F83D9959BCEFAF2745C13421B33995D7FBE95C4A1D45FD554"
+    },
+    {
+      "method": "PlumeData.ClampAmbientPressure",
+      "token": "06002326",
+      "ilBytes": 12,
+      "ilSha256": "340EBF688F34E584F59B4BD6E4CCFCD735E8E9324C617F01E7979C846EA73966"
+    },
+    {
+      "method": "VolumetricExhaustRenderer.UpdateFrameData",
+      "token": "0600233B",
+      "ilBytes": 132,
+      "ilSha256": "3B2457C045EF927D150CC39A9745DB4844404FFE6B01DAAA1A88BDEEA696B817"
+    },
+    {
+      "method": "VolumetricExhaustRenderer.AddPlume",
+      "token": "06002342",
+      "ilBytes": 230,
+      "ilSha256": "E095822288FEA0CA66AC7F37DDEF69C7DAB1451DA89A9F322E08C4F51F011AEF"
+    },
+    {
+      "method": "VolumetricExhaustRenderer.UpdatePendingPlumes",
+      "token": "06002343",
+      "ilBytes": 186,
+      "ilSha256": "BE61ED7362CBF50DEB3F3FA0E9F28CF32049B807C767EEC1E1FFEDB7B37AB97C"
+    },
+    {
+      "method": "VolumetricExhaustRenderer.UpdatePendingPlumes",
+      "token": "06002344",
+      "ilBytes": 276,
+      "ilSha256": "BCB2608AE6B4E75C5D687D4EDE66B9C969B4E0BB9BB21AB15DC2F9D9B6443869"
+    },
+    {
+      "method": "VolumetricExhaustRenderer.EndPlumeGrouping",
+      "token": "06002345",
+      "ilBytes": 379,
+      "ilSha256": "CCCF49A174ABA95A684A4717FDA438E1F31721567B842ACB5BA9C64F8AFFCF81"
+    },
+    {
+      "method": "VolumetricExhaustRenderer.AddInstanceCore",
+      "token": "0600234B",
+      "ilBytes": 1988,
+      "ilSha256": "BD9973223F6E47FFA5DED3A05D112FC727A6F9ED052C09A3EAB587AF6BE34412"
+    },
+    {
+      "method": "Vehicle.UpdatePlumeTrailEmitters",
+      "token": "06002F9E",
+      "ilBytes": 425,
+      "ilSha256": "3AABAF9D6A59E8036943C94B944F71A17E6A1F548B6C96063B30F1FC220370DC"
+    },
+    {
+      "method": "Vehicle.AddVolumetricExhaustInstances",
+      "token": "06002F9F",
+      "ilBytes": 645,
+      "ilSha256": "7F040519239B67832CFA325D98A4CE5BEBB72882D192911548D69F9AC349F40A"
+    },
+    {
+      "method": "Vehicle.SpawnParticles",
+      "token": "06002FA1",
+      "ilBytes": 79,
+      "ilSha256": "E7FDD6330AF4E0D29B2423BA090A1A9424480A86FCCA2B54DE2827E99D20B6C4"
+    }
+  ],
+  "methodHashMeaning": "SHA256 of PEReader GetILBytes from actual installed DLL; resolved current operands were read; not executable invocation or CSharp source hashes"
+}

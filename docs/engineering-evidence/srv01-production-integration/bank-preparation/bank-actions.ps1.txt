@@ -1,0 +1,45 @@
+# INERT PLAN ONLY. Do not execute without explicit Project Control bank/push authorization.
+Set-Location -LiteralPath 'E:\NovaCore'
+$ErrorActionPreference='Stop'
+$base='09463ec6c323daf233205cb08306d38611c22e6e'
+$branch='codex/srv01-production-integration'
+$tag='m15.2-srv01-reusable-production-spacecraft-integration'
+$manifest='docs/engineering-evidence/srv01-production-integration/bank-preparation/bank-manifest.txt'
+if((git branch --show-current) -ne $branch){throw 'Unexpected branch'}
+if((git rev-parse HEAD) -ne $base -or (git rev-parse main) -ne $base){throw 'Local baseline changed'}
+if(((git ls-remote origin refs/heads/main) -split '\s+')[0] -ne $base){throw 'Remote moved'}
+if(@(git diff --cached --name-only).Count){throw 'Unexpected staged work'}
+if(@(git tag --list $tag).Count){throw 'Proposed tag already exists'}
+$seal=Get-Content 'docs/engineering-evidence/srv01-production-integration/final-identities.json' -Raw|ConvertFrom-Json
+foreach($row in $seal.candidateFiles){if((Get-FileHash -LiteralPath $row.path).Hash -ne $row.sha256){throw "Qualified identity drift: $($row.path)"}}
+# Review all documentation/evidence bytes and manifest against this bank-ready packet first.
+git add --pathspec-from-file=$manifest
+if($LASTEXITCODE){throw 'Exact staging failed; stop for review'}
+$expected=@(Get-Content -LiteralPath $manifest|Sort-Object)
+$actual=@(git diff --cached --name-only|Sort-Object)
+if(Compare-Object -CaseSensitive $expected $actual){throw 'Staged manifest mismatch; do not commit'}
+git diff --cached --check
+if($LASTEXITCODE){throw 'Staged whitespace failure'}
+$tree=git write-tree
+if($LASTEXITCODE){throw 'Cannot identify staged tree'}
+# HUMAN/AGENT FINAL STAGED REVIEW: complete tree, protected hashes, excluded material and tags.
+git commit -m 'NovaCore M15.2: Integrate SRV-01 reusable production spacecraft'
+if($LASTEXITCODE){throw 'Commit failed'}
+$commit=git rev-parse HEAD
+if((git rev-parse HEAD^) -ne $base -or (git rev-parse 'HEAD^{tree}') -ne $tree){throw 'Commit differs from reviewed parent/tree'}
+git tag -a $tag $commit -m 'NovaCore M15.2 — SRV-01 Reusable Production Spacecraft Integration'
+if($LASTEXITCODE){throw 'Tag creation failed'}
+if((git cat-file -t $tag) -ne 'tag' -or (git rev-parse "$tag^{}") -ne $commit){throw 'Tag identity wrong'}
+if(((git ls-remote origin refs/heads/main) -split '\s+')[0] -ne $base){throw 'Remote moved; no push'}
+# Only if the later authorization includes main integration and publication:
+git switch main
+if($LASTEXITCODE){throw 'Main switch failed'}
+git merge --ff-only $branch
+if($LASTEXITCODE){throw 'Fast-forward failed'}
+git push origin main
+if($LASTEXITCODE){throw 'Main push failed'}
+git push origin $tag
+if($LASTEXITCODE){throw 'Tag push failed'}
+git ls-remote origin refs/heads/main "refs/tags/$tag" "refs/tags/$tag^{}"
+# Require remote main and peeled tag == $commit; verify remote public files and unchanged historical tags.
+# No force, reset, automatic merge/rebase, or cleanup is authorized by this plan itself.

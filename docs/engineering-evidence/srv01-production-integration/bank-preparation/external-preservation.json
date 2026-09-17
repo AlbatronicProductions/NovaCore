@@ -1,0 +1,642 @@
+[
+  {
+    "path": "E:\\NovaCore\\.novacore\\cache\\sources\\usgs-3dep\\USGS_13_n29w081_20221103.tif",
+    "sha256": "532AB3A4ADE336D9A7D266E6745A12F043DB928BA8BF28A4576886DE421A74CD",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore\\.novacore\\cache\\terrain\\v1\\.generation\\earth_local_v2.nccube.manifest.json",
+    "sha256": "3532E50008E9C7BAE811747C13AB4445E92DA617D8804450E27ECB289325C077",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore\\.novacore\\cache\\terrain\\v1\\.generation\\earth_surface_v5.nccube.manifest.json",
+    "sha256": "2DA63796092582FC3BFBC444907A1DCACA8042F0055F144CAF50A725E41148F9",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore\\.novacore\\cache\\terrain\\v1\\sha256\\38\\38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae.nccube",
+    "sha256": "38EC671F475896F2C0A674E952F4121F117B18B1446BD363E3596BADA4BF47AE",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore\\.novacore\\cache\\terrain\\v1\\sha256\\c4\\c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe.nccube",
+    "sha256": "C45C6D94E004E1A2927DC65D405A347B1800C619B22B2EB6B3543F3C445D3AFE",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\assets\\visual\\RLV1\\canonical.json",
+    "sha256": "612ED5E918CEBDFC86A236A7276923E36D22DA8EA3168686CB3898C26606DE07",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\assets\\visual\\RLV1\\NC_RLV1.blend",
+    "sha256": "254E91AE482B744D4CA370CC21E9ABAFCFE99CB96CA3132B46A1B85A3BC69A00",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\assets\\visual\\SRV01\\canonical.json",
+    "sha256": "BAAF996C664D69EEA430389536A7250AC28E4F9E50A44ED915C3B1680E8E9858",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\assets\\visual\\SRV01\\parts\\NC_SRV_Capsule_A.blend",
+    "sha256": "BBA689D9A149616B50D1896E156590243F7F7741D3D2989D37F6D6C1030BA5AB",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\assets\\visual\\SRV01\\parts\\NC_SRV_Main_A.blend",
+    "sha256": "BA8673CB0071067466949E10A08559ED051A876E1D65BE4F8EA33226D679059C",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\assets\\visual\\SRV01\\parts\\NC_SRV_Rcs_A.blend",
+    "sha256": "95AF32BCB4393C36DAF2E1EF354B8215661757FB865F90C430B96FC5CB399EC5",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\assets\\visual\\SRV01\\parts\\NC_SRV_Tank_A.blend",
+    "sha256": "4EE1527C2BFD6E74AA45DFC64BA53AE44B6D2547EB1626B835D5B5A0EB9556EB",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\.gitignore",
+    "sha256": "862263FA1F46C20F0D1E4DAC5FFCC75ABD55C08211B2C3864C5F8764B9D87793",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\launch_blender.ps1",
+    "sha256": "E1C19D0B1EA78D23249C05C6E4E72472D4E241713F82BFB42D06D39AB76B5D4F",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\README.md",
+    "sha256": "B39C80C4F74F86BFF5234D9370C4CB00DA3D255D543388401272B7EF369C0370",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\run_blender_validation.ps1",
+    "sha256": "B69FCBC316831BC377539D1F22BD137F74B0B6E6E46F6CC66E05DC1B3A982D08",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\evidence\\environment.json",
+    "sha256": "C1341ED2DFA7CB0EF7A96E284A3780F2A2EEB8C837953525BE68D5A88FCCDC40",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\evidence\\gauntlet.json",
+    "sha256": "EA433B488B9559E51B93E91131D041F31D17C3BD6FDB9A4216A9D48CB3908614",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\evidence\\manifest.json",
+    "sha256": "428549B6412B03D89A204E0ABB75AE53FC094E8A4484491FC2D21B2BCF91D930",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\evidence\\qualification.json",
+    "sha256": "84E43AC4B0652C68A03F5DF0E07A455496E1CEF6955235391DDD4EC8AC504258",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\evidence\\render-hashes.json",
+    "sha256": "7D9D32D445036A406B1322A3B8432C07F6519BD0634AD4E1F049A0F1DDDD8307",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\evidence\\validation.json",
+    "sha256": "5303685F0190CC873957A65E7CE33F0ACEEBAE07CD44032BCA5597AD9E5BB39B",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\lifecycle\\history.py",
+    "sha256": "DEB28C22EAFA3B7A46FDB183EC3D73E1CF652A6F99B355F1866208F6EA7BC0B0",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\lifecycle\\inventory_consolidation.py",
+    "sha256": "0DE9FE7346F6A1A97D8B37097D84050CFBD4A827725C683F7A58EB68F7C3A7EB",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\lifecycle\\Open-Review.ps1",
+    "sha256": "3B816860980A39F825D63B5F5DC07962CF68F4862023359A3C4C18F162FC5706",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\lifecycle\\prepare_consolidation.py",
+    "sha256": "A1CFF61666BEE78F74EB8F43118E6012E7B71DC16783C2A2912A79ED2DC30548",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\lifecycle\\README.md",
+    "sha256": "C5085ED767BE642AAA5CCE7958AC93EE9B105618096D0F959C9157D34A8681B9",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\lifecycle\\review_scene.py",
+    "sha256": "4487B93B6BD4113B894B21420BC5C30784AF2E6A037002A877A15F468E25E46C",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\lifecycle\\review_ui.py",
+    "sha256": "FA7CC5A0160DCD435835AC2A05BCA19D94CE65AA44A6D9654C3957E8858E2CA5",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\lifecycle\\test_owner.py",
+    "sha256": "57AC3EA168676279C64A613A32E0F7728126A3149B6C6759E816DC3496E41D8D",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\lifecycle\\test_review.py",
+    "sha256": "D458E5D4F107D6E75BD45D962346161AB5C41C70F58B8DE8193372971FBD6FB0",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\lifecycle\\workflow.py",
+    "sha256": "62BEF68FD29FCB250B4C88DFBDA9D4E689BD3DF166E7246F7CE000002060918E",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\rlv1_blockout\\build.py",
+    "sha256": "1B022A631E02CAB1BF6EA2FD5D079B68A89EFE353607772D2C1D93C431FBB8F7",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\rlv1_blockout\\compare_candidate3.py",
+    "sha256": "3D9103332FA87ABA9B5018239CD828221B63CA66F441C554E334C84852A40EF9",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\rlv1_blockout\\launch.ps1",
+    "sha256": "A3D8F7793FF503A62045DF2D3A89F494AA84632C4EFBF8EC7A9E48F46D6973AF",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\rlv1_blockout\\README.md",
+    "sha256": "D9D20A937899A34D88CC8172FFD4E65F0DDC7A8D10E85B07196712471B8E402F",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\rlv1_blockout\\render.py",
+    "sha256": "06B9963F7D011967669A0FDE1C57ED0E28D137013077C25ACD20E27AE60A661A",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\rlv1_blockout\\source_stats.py",
+    "sha256": "EDDDDFB307960A820C47FC84ABF22EC493390EE9AD4D741A224272337194847A",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\rlv1_blockout\\test_witness.py",
+    "sha256": "F8190880CF9BB76B38534754D14BB5136E83CE182E1EBE89011844142D2DF594",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\rlv1_blockout\\verify_blockout.py",
+    "sha256": "2C757B355E622F693E678562CCB284D8690226CE29364A8B317B7BC359B25AE1",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\schemas\\physical-definition.schema.json",
+    "sha256": "186B224EA16B06AF7A71CD2648E3FC7E3BC1B5B4E8B3AF7532759B7EE4E3EB12",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\scripts\\bridge.py",
+    "sha256": "B3A598EFD98684FEFB38FEC2800DE72A91D6E6F62058EFF2BDDE77A57EA252DC",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\scripts\\contract.py",
+    "sha256": "B9307BB49190AA03594A13A67E3602685786937C0726609AF38C3F07E30A0364",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\scripts\\inspect_environment.py",
+    "sha256": "AD34005F4FEACFC272DB0D34DD2288C0EDCC535D5B56564710F076FC9ADD1916",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\srv_parts\\authored_normals.py",
+    "sha256": "D7AF0812BAF8286EBD8640744E1A915918BDC4901AC135C0F0899E1CA85458C2",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\srv_parts\\build.py",
+    "sha256": "A6791096351488A11EBB229C7E6946B7AA48ED2EEFB5E6FE0EFCC6433034B5EE",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\srv_parts\\check_geometry.py",
+    "sha256": "958D9D362E4225A4ABE471BC04E08F7B38D4FCE0C285B33C27D630168A8FDAAD",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\srv_parts\\mount_closeups.py",
+    "sha256": "AF9D753F64E891AD27242997F6857D1104159144010BE1022727495362E58E14",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\srv_parts\\Open-Review.ps1",
+    "sha256": "CA141D6B4539F4AB1F39782291E1966246EBDF22B951AE7C92D7FBB6BEA02C9B",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\srv_parts\\presentation_references.json",
+    "sha256": "1611DACBEA63C4A24A6B80FBD3591113EFC64FB02DC7BC2A5E98E5052BE13886",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\srv_parts\\qualify.py",
+    "sha256": "BF16ABF2D9178B3CBD8D3F014A0A172661A21376C8E95F0A1442FFC1E02B83A1",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\srv_parts\\render.py",
+    "sha256": "6D4EB7D64CD6AE49EB20B58E77BDF5D7FA93F3D8D7EC73A85BBA9DA1569F051C",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\srv_parts\\review_scene.py",
+    "sha256": "059B257176D3D0D282575997D392E497F7ADF55AE345B99C3BF39D39EE7D8E45",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\srv_parts\\review_ui.py",
+    "sha256": "9C750CCF7074ADF718D9FA7F09EFD5BDE6BE229D26E65B92D11CF24F03FA0D45",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\srv_parts\\specs.py",
+    "sha256": "A3675CFC91AB96EF3BED34F84F6C369720C7D5C0E703A1D62EF9F8FEDB51F1D1",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\srv_parts\\triangle_contacts.py",
+    "sha256": "CCEAEEA117FCD606F0F5923773BEA7408E063A4989A89E1FE4E308B45D7B6AC8",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\srv_parts\\verify_parts.py",
+    "sha256": "8341C0F9175BFE1FEA44A7862C0DE798859D7DF9BC7B59854BB60634666D68D6",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\srv_parts\\visual_contact_patch.py",
+    "sha256": "9AC0310E1C576BF5C2DE620EE57313DFCF33C483AFAA731A441B88640BE1465C",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\srv_parts\\visual_contract.json",
+    "sha256": "521B017515995324459498A9DA47FC71675D893D69F5DA11E1D55174C1B5997B",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\srv_parts\\workflow.py",
+    "sha256": "53BA0C7BA5649BE6BDC0A20AD6583E1149F244AB1228B08EAA14798EC99DCF4D",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\srv_parts\\__pycache__\\specs.cpython-313.pyc",
+    "sha256": "AB62D5FF6D178F924DDBEDBFC8C0F7A6DD390E7EFFA93B6E516EC00BD8AA7DDC",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\srv_parts\\__pycache__\\triangle_contacts.cpython-313.pyc",
+    "sha256": "64E9DF3188AEBA83EF84475BF25BF528E9CA14EC9D6A8F24CC8CD200290C179D",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\srv_parts\\__pycache__\\visual_contact_patch.cpython-313.pyc",
+    "sha256": "B873BBDEE2FD70DE43C588A901007926BC70C49DD882E328D13CE875B9884DE3",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\tests\\mutate_fixture.py",
+    "sha256": "8830EFD075A382BCDD93124904730E244F8742A66878AB1FC8C162D30BF2F293",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\tests\\run_gauntlet.ps1",
+    "sha256": "FA697C4D651D083D824EA94993B8E25208CF1EA594C12E796E7F62B6CE63BB29",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\tests\\test_contract.py",
+    "sha256": "F7663A7B999162C3CEDCC4789B2BA41E0C77E0EC244E625985783CEDC38CD31C",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\tests\\verify_glb.py",
+    "sha256": "15EEFDB56ED5F64DA5A47736D0E180F87242741C5DCAFBDFAD8AE3D5A6C37319",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\tests\\verify_reference.py",
+    "sha256": "04C0BF32FB3CEA297B78C8F897C7FC9D70BBC4BF6C4D15DE2C3F03A94BE188AA",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\visual\\contract.py",
+    "sha256": "31553D1BB9A2616611F860F6AE4D942CD96B2CBA3B796EDEDC28C50D7153C384",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\visual\\fixture.py",
+    "sha256": "FCEDC7C08141EF4A2480354FE9527B9B7F41FA26DAA92D58FFF539CA62C3DBFE",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\visual\\launch.ps1",
+    "sha256": "3F2731E7627302432DFFDC54ED8AE8D4C0DE37D39285DC3A1601E8CBF61FB51F",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\visual\\profile.py",
+    "sha256": "9CD34C20CE78E59D7207A0FEA7467D4FAB5918B2D498A240E23C9513DA65CB61",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\visual\\README.md",
+    "sha256": "8E5E0D62CD28EC697296E14D9C886134F5381CF9FC067577219CC3E68A612932",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\visual\\evidence\\independent-glb.json",
+    "sha256": "376159B7F692AE0107797B0EBD5A45BE59EE40E760CD994A9BF5C72C27146EAD",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\visual\\evidence\\integration.json",
+    "sha256": "CAD891A3EF6A62D97C434DA944C9F1EE5ACC0212AE18FFFEF1071D5290E3506D",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\visual\\evidence\\legacy-preservation.json",
+    "sha256": "21B234F1A62CFD5041E3F2B9724B4F7929A0043FAE8259509BC6576CD4D02557",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\visual\\evidence\\manifest.json",
+    "sha256": "785331AB0BF591C1DC19788A2251D23E8B6455DD3E4AA8701B6356BAA6500E41",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\visual\\evidence\\master-flags.json",
+    "sha256": "A96DE7876DCBC1483D7869968687D8A2F1026CDEEE2759BD0A99312D8F627440",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\visual\\evidence\\source-and-evidence-hashes.json",
+    "sha256": "52C2615539173C3BF95C3B8787114F8CD69E95C15A52B109D315D5E02F906BEC",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\visual\\evidence\\unit-results.json",
+    "sha256": "6B02D68308048F1711F3FB63A6FB2A281A70FBA959EEC49DEF2EB93FF19A7478",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\visual\\evidence\\validation.json",
+    "sha256": "73CACB49AC45EA6E587A22A41ABDDF6236F20FB381CB3A7587E0AE144D0229B4",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\visual\\tests\\check_master_flags.py",
+    "sha256": "38463D786E8512F7C86E62B22C532C2284883FD80644FBD53E3C6988624EEAFC",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\visual\\tests\\make_negatives.py",
+    "sha256": "8751C0894A7D1D892DDC1E1C63187B935C74BB1D48340C5DDD12AE4783C863C5",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\visual\\tests\\run_tests.py",
+    "sha256": "6B2262338B9B7A63DD71173F86E7BB2C62D0D22C80C0EACB109F3D564C100C61",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\visual\\tests\\test_contract.py",
+    "sha256": "66E72D1B6C09010C4F92C7A4CF55D7B5E0FCFA9C8516D7DA89AAA3FC7158CC99",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\tools\\blender\\visual\\tests\\verify_glb.py",
+    "sha256": "CCE7C1FC9FC14C0D7416743C6564483D72BE40DEA126F56A501E9CDDFC7F19F6",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-evidence\\RLV1\\accepted-inputs-preserved.json",
+    "sha256": "E62E1672B740FBCE162084A3A203D2E3DEA643AF7A7FA8D348CD2C53ED0DD9DC",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-evidence\\RLV1\\candidate2-source-stats.json",
+    "sha256": "4F65AFFC0E704FA600ACAA0B9704507B9AF6076209B6B6370E0A3B2EEA19450B",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-evidence\\RLV1\\current-recipe.json",
+    "sha256": "7C31674F2CBA0FBCBD49CCF003DE3742EC49B2297711A5E26CA9596545154C22",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-evidence\\RLV1\\current-validation.json",
+    "sha256": "41D31992D8FF2507FCD47AAE23F3EAB158DA9D305940F2D9B24868497CF56A41",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-evidence\\RLV1\\helper-leakage.json",
+    "sha256": "4F662973D457A998E6FA74DCBAD4F644D61A6CD6C714246402AC868706402D36",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-evidence\\RLV1\\historical-reproduction.json",
+    "sha256": "26B2AC494BC6E740833C2C46E7AA58FD474DD97965DA78895BB53B12CED6B29F",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-evidence\\RLV1\\owner-red-team.json",
+    "sha256": "B9529AE7FAE71489FD187AA24CFC07EC3CFB0274A9513CF46A79EBD14B99474D",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-evidence\\RLV1\\reproduced-blockout-witness.json",
+    "sha256": "31569723331A297B3A96727214B52A17F9FDC46C9AFA8A7E7696BB558A392CD6",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-evidence\\RLV1\\reproduced-witness-tests.json",
+    "sha256": "19324111A7E98B269BDAAECD94F51134EBEC3471792CE6500E03BC80E4D64EC4",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-evidence\\RLV1\\retired-package-coverage.json",
+    "sha256": "DB23A35FED662A351A7FE03F4FF1A992EF4BE9A0F99E163B026AA8C37087047C",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-evidence\\RLV1\\review-red-team.json",
+    "sha256": "8D5F271AB6AE0534075E3399164E9D42250332E6413D122A45221B7E3AD00053",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-evidence\\RLV1\\revision-history.jsonl",
+    "sha256": "7DDBA8194D5E39715289D37DF6BED795880D9A4CEAA7B57B42F7F697BDB0441F",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-evidence\\RLV1\\recipes\\2b58d4c4b7dea08dbae5f074d0c929fb76678e6b57701759224611993f294d9f.zip",
+    "sha256": "6F557D3A3350169BE0CF940BDF689D60247D776F8445A7FC0ADB27947F517CA9",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-evidence\\RLV1\\seals\\candidate1-front-original.png",
+    "sha256": "3E2BBBC6D13379AD13E3D5403E0B383368B37BB106504D2F4DB1C7EEC7F7485D",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-evidence\\RLV1\\seals\\step-b-candidate2-recipe.json",
+    "sha256": "4AEB2C2EE33B726837E2F656C8372C239F37AF1E8B0273FDB005EC634E32B39B",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-evidence\\RLV1\\seals\\step-b-candidate2-recipe.zip",
+    "sha256": "D205114AC2BF3A72C55DD3B616FCCD7964A8DE8E252D18A4577C1FFDE261C59F",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-evidence\\SRV01\\assembled-side.png",
+    "sha256": "7D7528E25753137D1AC0D316D809C5A45EF98434F85374707C80C949EC6E7227",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-evidence\\SRV01\\current-publication.json",
+    "sha256": "32F930B93B79D4692561956EC6D66D6E70A790EA3F6CE1FCBA2583A940F98E58",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-evidence\\SRV01\\publication-attempt\\NC_SRV_Capsule_A.json",
+    "sha256": "4157B981DBBB436D660CB498700097D7223648C45673007C296940B992B43392",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-evidence\\SRV01\\publication-attempt\\NC_SRV_Main_A.json",
+    "sha256": "075EC3E36A8EC4A59B616C7AF9E0DA47EED0208266AA84F68D1BE3E1DA74312D",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-evidence\\SRV01\\publication-attempt\\NC_SRV_Rcs_A.json",
+    "sha256": "CD445EF7D2810C730C08F7CA78732F9F2687AFC6D89347DE53CCF8730A7594B9",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-evidence\\SRV01\\publication-attempt\\NC_SRV_Tank_A.json",
+    "sha256": "66FA1F37BB797C8AD448EF041D9DAA8B21DA6C826533BEF1A71FCAE580892457",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-evidence\\SRV01\\rcs-closeups\\rcs_01.png",
+    "sha256": "3E589409B4409F8FB1AC8B88571C2870964163D0F049F9DF4D93778A6DD938F6",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-evidence\\SRV01\\rcs-closeups\\rcs_02.png",
+    "sha256": "5FFE664684739AA26F76359190E2814ACF930D7110BA058E94F7637FC9A0EB31",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-evidence\\SRV01\\rcs-closeups\\rcs_03.png",
+    "sha256": "CBD7D31964A4F7F5B05788C965EAB85988E2B1A58AF13BADCDD6F23EEA99EB3E",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-evidence\\SRV01\\rcs-closeups\\rcs_04.png",
+    "sha256": "A257615769B9AF7C4F81AD13DEDCC1EC41E4C0EC40524CCDD12367811EF92B83",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-evidence\\SRV01\\review-images\\01_Capsule.png",
+    "sha256": "52AA4BFF8730DAA76C355C8F9B42DB1CB7B193AED17E348139DBE4D3D9AB778A",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-evidence\\SRV01\\review-images\\02_Tank.png",
+    "sha256": "E8BED557BB077158E693539A5255FCC232037719D8CCB51F1D8EEFB1F8C30AA4",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-evidence\\SRV01\\review-images\\03_Main_Engine.png",
+    "sha256": "A9229D862167A205DC833B2FD0049DC2B7575861914B9693AA6CA406CDEB80E2",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-evidence\\SRV01\\review-images\\04_RCS_Jet.png",
+    "sha256": "1A45C0936A9B7F14E87A9B1F9711D3F6D95CABAB5C2AF0CE7D773E30AB327E35",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-evidence\\SRV01\\review-images\\05_Assembled_Profile.png",
+    "sha256": "2569F03D0A4897074258149BCC9A52C93EA7135363DC672F084B582A63047FC1",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-evidence\\SRV01\\review-images\\06_Assembled_Three_Quarter.png",
+    "sha256": "A489B6D40161155E50A8C3DBA4B9D7ACCDA3866435C02CF234FEE7D7FC9D4DBE",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-evidence\\SRV01\\review-images\\07_Engine_Closeup.png",
+    "sha256": "C33658A080D036933366BC14F7B6B0482FD8E8BB5F0D9F6804EA2815AD6E7710",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-evidence\\SRV01\\review-images\\08_RCS_Mount_Closeup.png",
+    "sha256": "EB2184BA909EE22F881A05D5BB9517C94F74A591AAB9A76B18A9AC8B6826A1D4",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-evidence\\SRV01\\review-images\\09_Aft.png",
+    "sha256": "6C51B352068B057A45120FF9D7A555EC579367541AA09EB88795C14964141C0B",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-evidence\\SRV01\\review-images\\10_Exploded.png",
+    "sha256": "9D1147DB1FED79791B076AC29951A9604DD29F2BFC6EED1384342146D753C918",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-review\\RLV1\\.writer-key",
+    "sha256": "7A307D35ED425F12AF2568CFBAA74F50621FA439866935DB10DE5DC8A3551C72",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-review\\RLV1\\latest.json",
+    "sha256": "EEFEF7671DB534ED1DEF9764D84FD4789408CE944EE5E29F68C372EB6E684399",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-review\\RLV1\\NC_RLV1.review.blend",
+    "sha256": "C1688E1773F753D15909D87015737E95D8E1AAEB74C28E056A6CADEB060330F8",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-review\\SRV01\\.writer-key",
+    "sha256": "B6F195B9CC586DFAB02C817909CCDE9304D36BFB297A4D0D0712CE7505E0C5B3",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-review\\SRV01\\latest.json",
+    "sha256": "DB05468A1BD529C9D64EBE4EF50AE8B62CAB64D1F2C419D33657D13C11ED071C",
+    "matches": true
+  },
+  {
+    "path": "E:\\NovaCore-Blender-Visual-StepB\\visual-review\\SRV01\\NC_SRV01.review.blend",
+    "sha256": "6E2CFB04803BA6AD1E5D3790A9D39557F6CBE031BE553926C4A68E666DED7564",
+    "matches": true
+  }
+]

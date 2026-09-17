@@ -13,11 +13,14 @@ internal static class GraphicsTestHarness
     }
 #if DEBUG
     internal const string Configuration = "Debug";
-    internal const string NativeDirectory = "native-ninja";
 #else
     internal const string Configuration = "Release";
-    internal const string NativeDirectory = "native-ninja-release";
 #endif
+    // Compare the deployed DLL with the exact build selected at compilation,
+    // including isolated candidate outputs. The hash/loaded-path gate stays strict.
+    internal static readonly string NativeDirectory = typeof(GraphicsTestHarness).Assembly
+        .GetCustomAttributes(typeof(System.Reflection.AssemblyMetadataAttribute), false)
+        .Cast<System.Reflection.AssemblyMetadataAttribute>().Single(a => a.Key == "NativeBuildDirectory").Value!;
     private static readonly HashSet<string> GpuTests =
     [
         "M12D-P2S3 spherical billboard GPU runtime proof",

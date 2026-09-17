@@ -1,0 +1,652 @@
+{
+  "date": "2026-09-17",
+  "scope": "Final KSA-method renderer; not the superseded generic-volume implementation",
+  "judgment": "PASS",
+  "unbanked": true,
+  "manual": {
+    "result": "PASS",
+    "source": "Project Control explicit reply to final revised build checklist",
+    "reply": "PASS",
+    "requestIdentity": "call_pH255vORiALYQmn0KT8j7KFR",
+    "checks": [
+      "bell attachment",
+      "bright core and soft edges",
+      "published gimbal alignment",
+      "only commanded RCS horns",
+      "camera independence",
+      "no exhaust after shutdown/final hold"
+    ],
+    "log": "build/srv01-integration/exhaust-correction/method-manual-release.log",
+    "identity": "final-identities.json"
+  },
+  "builds": {
+    "Debug": "0 warnings / 0 errors",
+    "Release": "0 warnings / 0 errors"
+  },
+  "gpu": {
+    "Debug": "PASS",
+    "Release": "PASS",
+    "actualProductionSpirv": true,
+    "vulkanValidationErrors": 0,
+    "RcsDepthSum": 14.5544,
+    "duplicateDepthSum": 29.1087,
+    "maxOrderDifference": 0
+  },
+  "allocation": {
+    "applicationServiceAndPresentationBytes": 0,
+    "terminalPresentationBytes": 0,
+    "assemblyWindows": 14,
+    "assemblyWindowBytes": 0,
+    "positiveByte128": 152,
+    "entry": "PASS",
+    "exit": "PASS",
+    "Debug": "PASS",
+    "Release": "PASS"
+  },
+  "capacity": {
+    "objects": 54,
+    "bytes": 4416,
+    "initialObjects": 37,
+    "overflow55": "refused before copy, canary intact",
+    "recreation": "same prepared capacity"
+  },
+  "frames": [
+    {
+      "process": 1,
+      "frames": 480,
+      "frameMs": {
+        "median": 5.553,
+        "p95": 5.844,
+        "p99": 6.239,
+        "maximum": 35.592
+      },
+      "gpuAverageMs": 0.109,
+      "coldManagedPreparationMs": 145.6626,
+      "retainedDebtTicks": 3831
+    },
+    {
+      "process": 2,
+      "frames": 480,
+      "frameMs": {
+        "median": 5.532,
+        "p95": 5.827,
+        "p99": 6.341,
+        "maximum": 35.13
+      },
+      "gpuAverageMs": 0.108,
+      "coldManagedPreparationMs": 142.6501,
+      "retainedDebtTicks": 2077
+    },
+    {
+      "process": 3,
+      "frames": 480,
+      "frameMs": {
+        "median": 5.547,
+        "p95": 5.836,
+        "p99": 6.032,
+        "maximum": 40.196
+      },
+      "gpuAverageMs": 0.111,
+      "coldManagedPreparationMs": 142.9987,
+      "retainedDebtTicks": 2488
+    }
+  ],
+  "presentationStorage": {
+    "extent": "1280x720",
+    "oitTargets": 2,
+    "gpuImageAllocatedBytes": 9896672,
+    "sharedMeshBytes": 1359096,
+    "submissionBytes": 4416,
+    "physicsStorageContribution": 0
+  },
+  "endpoint": {
+    "frontier": 128,
+    "stateRevision": 128,
+    "ticks": 2000000,
+    "fuelKg": "29.9521484375",
+    "oxidizerKg": "44.92822265625",
+    "massKg": "704.88037109375",
+    "comX": "1.0418789203343042",
+    "completed": true,
+    "failed": false
+  },
+  "failureHistory": [
+    "Initial missing exhaust manual PASS withdrawn.",
+    "Generic-volume visual PASS was superseded by method clarification.",
+    "Initial managed compile missing NovaCore.Interop using was corrected.",
+    "Initial native test compilation required explicit shader-stage enum cast.",
+    "First offscreen run passed image assertions but failed its strict validation-error gate because three Epic implicit-layer JSON manifests were absent. No API VUID. Process-local VK_IMPLICIT_LAYER_PATH set to an empty directory while explicit Khronos validation remained on; no registry change, counter suppression, or quality relaxation."
+  ],
+  "limitations": [
+    "No full gas/Mach/atmospheric or cross-platform visual qualification.",
+    "Weighted blended radiance is approximate; pure-emission overlap is weighted average, not physically exact summed light.",
+    "Frame maxima 35.130-40.196 ms remain UNATTRIBUTED; no all-frame 6.67 ms guarantee.",
+    "Debug and manual maxima remain in decisive lines; GPU average does not attribute CPU/host tails.",
+    "Runtime service maxima include cold/JIT paths; no inference of new hot-path regression from frame maxima."
+  ],
+  "redTeam": {
+    "methodAndBounds": "no material blocker",
+    "exactNozzleIdentity": "main 0 / jet + 1 independently checked",
+    "proprietaryAssets": "no KSA asset import; original shader/noise/proxy",
+    "capacityAndLifecycle": "preserved"
+  },
+  "logs": [
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-final-assembly-allocation-debug.log",
+      "bytes": 1436,
+      "sha256": "8CD743DEE6994768F171B2456B8EB1C0146EDF93CADFA2E63A182E73265784EE",
+      "decisiveLines": [
+        "ORDINARY_ALLOCATION gate=B-no-demand bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=B-main-only bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=B-RCS-pair-only bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=B-concurrent-main-RCS-gimbal bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=B-exhausted-no-feed bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=B-endpoint-exhaustion bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=B-interior-exhaustion bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=C-preparation-B-concurrent-main-RCS-gimbal bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=D-publication-B-concurrent-main-RCS-gimbal bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=C-preparation-B-interior-exhaustion bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=D-publication-B-interior-exhaustion bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=assembly-no-work-refusal bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=assembly-four-interval-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=assembly-credit-capacity-refusal bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ASSEMBLY_ALLOCATION {\"windows\":14,\"bytes\":0,\"positiveControl\":\"nonzero required\",\"policy\":\"checked existing helper; no tolerance, subtraction or retry\"}"
+      ]
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-final-assembly-allocation-release.log",
+      "bytes": 1436,
+      "sha256": "8CD743DEE6994768F171B2456B8EB1C0146EDF93CADFA2E63A182E73265784EE",
+      "decisiveLines": [
+        "ORDINARY_ALLOCATION gate=B-no-demand bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=B-main-only bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=B-RCS-pair-only bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=B-concurrent-main-RCS-gimbal bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=B-exhausted-no-feed bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=B-endpoint-exhaustion bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=B-interior-exhaustion bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=C-preparation-B-concurrent-main-RCS-gimbal bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=D-publication-B-concurrent-main-RCS-gimbal bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=C-preparation-B-interior-exhaustion bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=D-publication-B-interior-exhaustion bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=assembly-no-work-refusal bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=assembly-four-interval-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=assembly-credit-capacity-refusal bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ASSEMBLY_ALLOCATION {\"windows\":14,\"bytes\":0,\"positiveControl\":\"nonzero required\",\"policy\":\"checked existing helper; no tolerance, subtraction or retry\"}"
+      ]
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-final-build-debug.log",
+      "bytes": 82,
+      "sha256": "893F899CCDF095C5423B95A41B19FBA5CAB1E7F87A782D016ABFB76452881E7D",
+      "decisiveLines": [
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)"
+      ]
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-final-build-release.log",
+      "bytes": 82,
+      "sha256": "6967E139543928DB26C0F5D3F0644D97FF14A91AF86A86212F655B27CEFDADC7",
+      "decisiveLines": [
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)"
+      ]
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-final-capacity-debug.log",
+      "bytes": 111,
+      "sha256": "9CD1BF36E377CE2FC59D4167B1553618B56D0C4253C3EE38ED45AAF51C1BC264",
+      "decisiveLines": [
+        "PREPARED_SUBMISSION PASS counts=37,38,39,37,54 bytes=4416 overflow=refused canary=unchanged recreate=retained"
+      ]
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-final-capacity-release.log",
+      "bytes": 111,
+      "sha256": "9CD1BF36E377CE2FC59D4167B1553618B56D0C4253C3EE38ED45AAF51C1BC264",
+      "decisiveLines": [
+        "PREPARED_SUBMISSION PASS counts=37,38,39,37,54 bytes=4416 overflow=refused canary=unchanged recreate=retained"
+      ]
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-final-frame-1.log",
+      "bytes": 4365,
+      "sha256": "6BE80F0EC8BE843E750380FC62A3271558A3A802FB0C4C426304A34DA641BAB1",
+      "decisiveLines": [
+        "SRV01_COLD_PREPARATION ms=145.6626 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "[native] EXHAUST_PRESENTATION_STORAGE targets=2 allocated_bytes=9896672 extent=1280x720 physics_bytes=0",
+        "[native] PREPARED_VISUAL_SUBMISSION capacity=54 bytes=4416 initial_active=37",
+        "[native] EXHAUST_PRESENTATION_STORAGE targets=2 allocated_bytes=9896672 extent=1280x720 physics_bytes=0",
+        "[native] PREPARED_VISUAL_SUBMISSION capacity=54 bytes=4416 initial_active=37",
+        "STOCK_ASSEMBLY_END completed=True failed=False failure=Invalid frontier=128 revision=128 time=2000000 fuel_kg=29.9521484375 oxidizer_kg=44.92822265625 mass_kg=704.88037109375 com_x=1.0418789203343042 debt=3831",
+        "STOCK_ASSEMBLY_FRAME samples=357 median_ms=5.5519 p95_ms=5.7721 p99_ms=6.3278 max_ms=33.926 measurement=display_callback_interval_including_present_host_scheduling",
+        "SRV01_LIVE_SERVICE samples=357 median_ms=0.0055 p95_ms=0.1047 p99_ms=0.2477 max_ms=6.3584 includes=host_admission_bounded_service_copied_observation",
+        "[native] Average frame time: 5.611 ms (480 frames)",
+        "[native] Frame pacing: p50=5.553 ms; p95=5.844 ms; p99=6.239 ms; max=35.592 ms; samples=480",
+        "[native] CPU timings: update=5.148 ms; fence=4.930; inspection=0.031; hostCallback=0.185; validationUpload=0.002; record=0.063; submit=0.030; present=0.220",
+        "[native] GPU timing averages: total=0.109 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.019; preSurface=0.001; toneMap=0.042"
+      ]
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-final-frame-2.log",
+      "bytes": 4365,
+      "sha256": "17196CBC897EDE04EE16147CC2662B6C58FC1E59A2CD6CC623D96EFA72FBC590",
+      "decisiveLines": [
+        "SRV01_COLD_PREPARATION ms=142.6501 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "[native] EXHAUST_PRESENTATION_STORAGE targets=2 allocated_bytes=9896672 extent=1280x720 physics_bytes=0",
+        "[native] PREPARED_VISUAL_SUBMISSION capacity=54 bytes=4416 initial_active=37",
+        "[native] EXHAUST_PRESENTATION_STORAGE targets=2 allocated_bytes=9896672 extent=1280x720 physics_bytes=0",
+        "[native] PREPARED_VISUAL_SUBMISSION capacity=54 bytes=4416 initial_active=37",
+        "STOCK_ASSEMBLY_END completed=True failed=False failure=Invalid frontier=128 revision=128 time=2000000 fuel_kg=29.9521484375 oxidizer_kg=44.92822265625 mass_kg=704.88037109375 com_x=1.0418789203343042 debt=2077",
+        "STOCK_ASSEMBLY_FRAME samples=356 median_ms=5.5558 p95_ms=5.7352 p99_ms=6.1334 max_ms=36.6664 measurement=display_callback_interval_including_present_host_scheduling",
+        "SRV01_LIVE_SERVICE samples=356 median_ms=0.006 p95_ms=0.1164 p99_ms=0.2995 max_ms=6.2488 includes=host_admission_bounded_service_copied_observation",
+        "[native] Average frame time: 5.611 ms (480 frames)",
+        "[native] Frame pacing: p50=5.532 ms; p95=5.827 ms; p99=6.341 ms; max=35.130 ms; samples=480",
+        "[native] CPU timings: update=5.150 ms; fence=4.953; inspection=0.031; hostCallback=0.163; validationUpload=0.003; record=0.063; submit=0.028; present=0.224",
+        "[native] GPU timing averages: total=0.108 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.027; preSurface=0.001; toneMap=0.042"
+      ]
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-final-frame-3.log",
+      "bytes": 4365,
+      "sha256": "E9987144D97B72542239D9DD5BAA52BB508C1639763A0594E8E5AAB051105883",
+      "decisiveLines": [
+        "SRV01_COLD_PREPARATION ms=142.9987 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "[native] EXHAUST_PRESENTATION_STORAGE targets=2 allocated_bytes=9896672 extent=1280x720 physics_bytes=0",
+        "[native] PREPARED_VISUAL_SUBMISSION capacity=54 bytes=4416 initial_active=37",
+        "[native] EXHAUST_PRESENTATION_STORAGE targets=2 allocated_bytes=9896672 extent=1280x720 physics_bytes=0",
+        "[native] PREPARED_VISUAL_SUBMISSION capacity=54 bytes=4416 initial_active=37",
+        "STOCK_ASSEMBLY_END completed=True failed=False failure=Invalid frontier=128 revision=128 time=2000000 fuel_kg=29.9521484375 oxidizer_kg=44.92822265625 mass_kg=704.88037109375 com_x=1.0418789203343042 debt=2488",
+        "STOCK_ASSEMBLY_FRAME samples=356 median_ms=5.5571 p95_ms=5.7416 p99_ms=5.9517 max_ms=37.7111 measurement=display_callback_interval_including_present_host_scheduling",
+        "SRV01_LIVE_SERVICE samples=356 median_ms=0.005 p95_ms=0.1102 p99_ms=0.2203 max_ms=6.2308 includes=host_admission_bounded_service_copied_observation",
+        "[native] Average frame time: 5.614 ms (480 frames)",
+        "[native] Frame pacing: p50=5.547 ms; p95=5.836 ms; p99=6.032 ms; max=40.196 ms; samples=480",
+        "[native] CPU timings: update=5.166 ms; fence=4.969; inspection=0.031; hostCallback=0.164; validationUpload=0.002; record=0.059; submit=0.028; present=0.216",
+        "[native] GPU timing averages: total=0.111 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.021; preSurface=0.001; toneMap=0.042"
+      ]
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-final-gpu-debug.log",
+      "bytes": 214,
+      "sha256": "B16D9B8A17318A39EDF0A801817803986CC458DB0604266F673A97744D21528F",
+      "decisiveLines": [
+        "EXHAUST_GPU PASS pure-emission separate-extinction optical-depth-resolve off-clear order-independent depth-before/inside/behind axial inside-camera RCS_depth_sum=14.5544 duplicate=29.1087 order_max=0 validation=0"
+      ]
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-final-gpu-release.log",
+      "bytes": 214,
+      "sha256": "B16D9B8A17318A39EDF0A801817803986CC458DB0604266F673A97744D21528F",
+      "decisiveLines": [
+        "EXHAUST_GPU PASS pure-emission separate-extinction optical-depth-resolve off-clear order-independent depth-before/inside/behind axial inside-camera RCS_depth_sum=14.5544 duplicate=29.1087 order_max=0 validation=0"
+      ]
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-final-graphics-debug-Contact-development-canonical-presentation.log",
+      "bytes": 2799,
+      "sha256": "16C0F510EB027A32CEFC2EE84F7790B938BBA6B9569571302F32A13D482EE9A6",
+      "decisiveLines": [
+        "CONTACT_LIVE_FAILED Host credit InvalidDuration/Success",
+        "PASS Contact development canonical presentation and lifecycle",
+        "CONTACT_LIVE_FAILED Host credit InvalidDuration/Success",
+        "PASS Engineering article copied geometry, COM, camera, bounded catch-up and final hold"
+      ]
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-final-graphics-debug-Powered-contact-canonical-presentation.log",
+      "bytes": 3937,
+      "sha256": "DF3868716A36B55F945C7E05CB9224942783CA606716AD55F2CBEAD020B4A4A3",
+      "decisiveLines": [
+        "POWERED_CONTACT_PRESENTATION PASS ready/inspection/powered/exhaustion/canonical_geometry/camera/bounded_backlog/completion"
+      ]
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-final-graphics-debug-Powered-free-flight-canonical-presentation.log",
+      "bytes": 1275,
+      "sha256": "F3666443FB81508F42EC583282C573A60377218782294FD100D62BD694854D69",
+      "decisiveLines": [
+        "POWERED_LIVE_FAILED host credit InvalidInput",
+        "POWERED_PRESENTATION PASS canonical_pose/ready/start/acceleration/depletion/camera/backlog/final_hold/failed_input"
+      ]
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-final-graphics-debug-Transport-layout.log",
+      "bytes": 296,
+      "sha256": "F2B471ACF2B1F7D6EEBFDC642974117E382D53B3E30639F76ED941D57F49F5D3",
+      "decisiveLines": []
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-final-graphics-release-Contact-development-canonical-presentation.log",
+      "bytes": 2805,
+      "sha256": "32F104B20389E224C81214B0BB60B3987B8FA4B1578DA76B3BE35C439FEE86D0",
+      "decisiveLines": [
+        "CONTACT_LIVE_FAILED Host credit InvalidDuration/Success",
+        "PASS Contact development canonical presentation and lifecycle",
+        "CONTACT_LIVE_FAILED Host credit InvalidDuration/Success",
+        "PASS Engineering article copied geometry, COM, camera, bounded catch-up and final hold"
+      ]
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-final-graphics-release-Powered-contact-canonical-presentation.log",
+      "bytes": 3943,
+      "sha256": "0FC86D99D03DDF37515134F0B72D116D1201563A844655C133E8F05E4EB9183F",
+      "decisiveLines": [
+        "POWERED_CONTACT_PRESENTATION PASS ready/inspection/powered/exhaustion/canonical_geometry/camera/bounded_backlog/completion"
+      ]
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-final-graphics-release-Powered-free-flight-canonical-presentation.log",
+      "bytes": 1281,
+      "sha256": "779196CF5EF867EC8DEEAAC83ACB9D1F556C85F36F6FB2D9CC1F4650830AFCC7",
+      "decisiveLines": [
+        "POWERED_LIVE_FAILED host credit InvalidInput",
+        "POWERED_PRESENTATION PASS canonical_pose/ready/start/acceleration/depletion/camera/backlog/final_hold/failed_input"
+      ]
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-final-graphics-release-Transport-layout.log",
+      "bytes": 302,
+      "sha256": "86B4E91CEACA19B88F89CB0D68D8487D10438400A67B1C80FA6D63C5837AAD78",
+      "decisiveLines": []
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-final-live-debug.log",
+      "bytes": 5221,
+      "sha256": "126ABBF35886594FE42D45BAFB40707AC0A88BE3A6FB68C824432E119A59FD7C",
+      "decisiveLines": [
+        "SRV01_COLD_PREPARATION ms=155.8493 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "[native] EXHAUST_PRESENTATION_STORAGE targets=2 allocated_bytes=9896672 extent=1280x720 physics_bytes=0",
+        "[native] Vulkan validation [warning][WARNING-Shader-OutputNotConsumed]: vkCreateGraphicsPipelines(): pCreateInfos[0] (SPIR-V Interface) [VK_SHADER_STAGE_VERTEX_BIT] has an Output value declared at Location 11 Component 0, but there is no corresponding Input declared in [VK_SHADER_STAGE_FRAGMENT_BIT].",
+        "[native] PREPARED_VISUAL_SUBMISSION capacity=54 bytes=4416 initial_active=37",
+        "[native] EXHAUST_PRESENTATION_STORAGE targets=2 allocated_bytes=9896672 extent=1280x720 physics_bytes=0",
+        "[native] Vulkan validation [warning][WARNING-Shader-OutputNotConsumed]: vkCreateGraphicsPipelines(): pCreateInfos[0] (SPIR-V Interface) [VK_SHADER_STAGE_VERTEX_BIT] has an Output value declared at Location 11 Component 0, but there is no corresponding Input declared in [VK_SHADER_STAGE_FRAGMENT_BIT].",
+        "[native] PREPARED_VISUAL_SUBMISSION capacity=54 bytes=4416 initial_active=37",
+        "STOCK_ASSEMBLY_END completed=True failed=False failure=Invalid frontier=128 revision=128 time=2000000 fuel_kg=29.9521484375 oxidizer_kg=44.92822265625 mass_kg=704.88037109375 com_x=1.0418789203343042 debt=1982",
+        "STOCK_ASSEMBLY_FRAME samples=338 median_ms=5.5578 p95_ms=5.7562 p99_ms=6.1177 max_ms=136.0256 measurement=display_callback_interval_including_present_host_scheduling",
+        "SRV01_LIVE_SERVICE samples=338 median_ms=0.0244 p95_ms=0.2412 p99_ms=0.3104 max_ms=6.7356 includes=host_admission_bounded_service_copied_observation",
+        "[native] Average frame time: 5.822 ms (480 frames)",
+        "[native] Frame pacing: p50=5.547 ms; p95=5.938 ms; p99=6.393 ms; max=137.521 ms; samples=480",
+        "[native] CPU timings: update=4.853 ms; fence=4.582; inspection=0.038; hostCallback=0.226; validationUpload=0.008; record=0.323; submit=0.060; present=0.223",
+        "[native] GPU timing averages: total=0.106 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.030; preSurface=0.002; toneMap=0.040"
+      ]
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-final-native-build.log",
+      "bytes": 691,
+      "sha256": "AE22964042E58D3BB1E7D71C30B549D906F2073DFF8F9A2E9385468CB4A5D6B3",
+      "decisiveLines": []
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-final-presentation-debug.log",
+      "bytes": 3745,
+      "sha256": "1EBAA966F001B5212C1273D50DED1C7C30868B3BD84E2273F66632379723D1D7",
+      "decisiveLines": [
+        "SRV01_COLD_PREPARATION ms=154.6004 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "SRV01_COLD_PREPARATION ms=16.6833 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "SRV01_COLD_PREPARATION ms=14.3787 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "SRV01_COLD_PREPARATION ms=14.1952 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "ORDINARY_ALLOCATION gate=assembly-application-service-presentation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=assembly-terminal-presentation bytes=0 entry=PASS exit=PASS",
+        "SRV01_COLD_PREPARATION ms=15.341 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "SRV01_COLD_PREPARATION ms=13.9006 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "ASSEMBLY_PRESENTATION PASS ready/start/64Hz/material-origin/copied-pose/camera/backlog/plan/final-hold/CLI/zero-allocation"
+      ]
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-final-presentation-release.log",
+      "bytes": 3744,
+      "sha256": "4D334AD6A50A4EF61F90D1221815FE3CA11E9C7033F6ED15817B991A35B55D53",
+      "decisiveLines": [
+        "SRV01_COLD_PREPARATION ms=153.2911 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "SRV01_COLD_PREPARATION ms=11.5592 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "SRV01_COLD_PREPARATION ms=10.4878 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "SRV01_COLD_PREPARATION ms=9.8938 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "ORDINARY_ALLOCATION gate=assembly-application-service-presentation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=assembly-terminal-presentation bytes=0 entry=PASS exit=PASS",
+        "SRV01_COLD_PREPARATION ms=11.1741 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "SRV01_COLD_PREPARATION ms=9.7986 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "ASSEMBLY_PRESENTATION PASS ready/start/64Hz/material-origin/copied-pose/camera/backlog/plan/final-hold/CLI/zero-allocation"
+      ]
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-final-smoke-debug-frames.log",
+      "bytes": 3100,
+      "sha256": "5A38A4C01CF0438435ED1A6144B048233D4705A3898C040D3BF4FCFF6E84DBEB",
+      "decisiveLines": [
+        "[native] Vulkan validation [warning][WARNING-Shader-OutputNotConsumed]: vkCreateGraphicsPipelines(): pCreateInfos[0] (SPIR-V Interface) [VK_SHADER_STAGE_VERTEX_BIT] has an Output value declared at Location 11 Component 0, but there is no corresponding Input declared in [VK_SHADER_STAGE_FRAGMENT_BIT].",
+        "[native] Vulkan validation [warning][WARNING-Shader-OutputNotConsumed]: vkCreateGraphicsPipelines(): pCreateInfos[0] (SPIR-V Interface) [VK_SHADER_STAGE_VERTEX_BIT] has an Output value declared at Location 11 Component 0, but there is no corresponding Input declared in [VK_SHADER_STAGE_FRAGMENT_BIT].",
+        "[native] Average frame time: 12.442 ms (16 frames)",
+        "[native] Frame pacing: p50=5.265 ms; p95=125.325 ms; p99=125.325 ms; max=125.325 ms; samples=16",
+        "[native] CPU timings: update=3.654 ms; fence=3.389; inspection=0.040; hostCallback=0.217; validationUpload=0.008; record=0.215; submit=0.073; present=0.694",
+        "[native] GPU timing averages: total=0.022 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.012; preSurface=0.000; toneMap=0.007"
+      ]
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-final-smoke-debug-grid.log",
+      "bytes": 3100,
+      "sha256": "BC930C944F5E2760B0F4FA2FBA59CE3F247E2B04B67337976217BB3816FA8963",
+      "decisiveLines": [
+        "[native] Vulkan validation [warning][WARNING-Shader-OutputNotConsumed]: vkCreateGraphicsPipelines(): pCreateInfos[0] (SPIR-V Interface) [VK_SHADER_STAGE_VERTEX_BIT] has an Output value declared at Location 11 Component 0, but there is no corresponding Input declared in [VK_SHADER_STAGE_FRAGMENT_BIT].",
+        "[native] Vulkan validation [warning][WARNING-Shader-OutputNotConsumed]: vkCreateGraphicsPipelines(): pCreateInfos[0] (SPIR-V Interface) [VK_SHADER_STAGE_VERTEX_BIT] has an Output value declared at Location 11 Component 0, but there is no corresponding Input declared in [VK_SHADER_STAGE_FRAGMENT_BIT].",
+        "[native] Average frame time: 12.831 ms (16 frames)",
+        "[native] Frame pacing: p50=5.376 ms; p95=131.444 ms; p99=131.444 ms; max=131.444 ms; samples=16",
+        "[native] CPU timings: update=3.617 ms; fence=3.298; inspection=0.037; hostCallback=0.270; validationUpload=0.012; record=0.225; submit=0.071; present=0.814",
+        "[native] GPU timing averages: total=0.022 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.012; preSurface=0.000; toneMap=0.008"
+      ]
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-final-smoke-release-frames.log",
+      "bytes": 2243,
+      "sha256": "511B549F73AEB5BA8F12C84E4AE104368C2EAA3C9D24AF6B6EF390C67F974EA9",
+      "decisiveLines": [
+        "[native] Average frame time: 6.693 ms (16 frames)",
+        "[native] Frame pacing: p50=5.389 ms; p95=33.687 ms; p99=33.687 ms; max=33.687 ms; samples=16",
+        "[native] CPU timings: update=3.770 ms; fence=3.523; inspection=0.030; hostCallback=0.212; validationUpload=0.005; record=0.062; submit=0.060; present=0.669",
+        "[native] GPU timing averages: total=0.022 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.012; preSurface=0.000; toneMap=0.008"
+      ]
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-final-smoke-release-grid.log",
+      "bytes": 2243,
+      "sha256": "F1F47B1649C940C699B1D08830003EA7003BFBC6040EAEC238DF609DE56F1245",
+      "decisiveLines": [
+        "[native] Average frame time: 6.646 ms (16 frames)",
+        "[native] Frame pacing: p50=5.445 ms; p95=35.657 ms; p99=35.657 ms; max=35.657 ms; samples=16",
+        "[native] CPU timings: update=3.810 ms; fence=3.511; inspection=0.029; hostCallback=0.266; validationUpload=0.004; record=0.057; submit=0.055; present=0.664",
+        "[native] GPU timing averages: total=0.023 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.012; preSurface=0.000; toneMap=0.008"
+      ]
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-final-srv01-integration-debug.log",
+      "bytes": 220,
+      "sha256": "F672E14E501B8C2C67CE311A5406F280B6B7EE1EA386917AB5F0301E17D2F923",
+      "decisiveLines": [
+        "ASSEMBLY_FOUR_HORN_OWNERSHIP PASS checks=16260 independent_trajectories=24",
+        "SRV01_INTEGRATION PASS sixteen endpoints/identity/shared-feed/mass/COM/tensor/command-wrench/bit15/refusals/replay/24-independent-trajectories"
+      ]
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-final-srv01-integration-release.log",
+      "bytes": 220,
+      "sha256": "F672E14E501B8C2C67CE311A5406F280B6B7EE1EA386917AB5F0301E17D2F923",
+      "decisiveLines": [
+        "ASSEMBLY_FOUR_HORN_OWNERSHIP PASS checks=16260 independent_trajectories=24",
+        "SRV01_INTEGRATION PASS sixteen endpoints/identity/shared-feed/mass/COM/tensor/command-wrench/bit15/refusals/replay/24-independent-trajectories"
+      ]
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-gpu-build-fixed.log",
+      "bytes": 175,
+      "sha256": "E3689CA275EA24DEA5EABE507EC4BF9E079FF0064D5AAFBF2E62F5F8BA36A48C",
+      "decisiveLines": []
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-gpu-build.log",
+      "bytes": 1054,
+      "sha256": "80B14D27FEFEB9798E06637E0220AC3C665A84EA2D8BF539D630A15056281C37",
+      "decisiveLines": [
+        "FAILED: [code=2] CMakeFiles/NovaCoreExhaustPresentationTests.dir/ExhaustPresentationTests.cpp.obj ",
+        "E:\\NovaCore\\native\\NovaCore.Native\\ExhaustPresentationTests.cpp(21): error C2397: conversion from 'VkImageAspectFlagBits' to 'VkImageAspectFlags' requires a narrowing conversion"
+      ]
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-gpu-release-isolated.log",
+      "bytes": 214,
+      "sha256": "D2F439FCBD5A071D280AD7092EE7645EAF2EE484C376A9DDA9E21B8183F50863",
+      "decisiveLines": [
+        "EXHAUST_GPU PASS pure-emission separate-extinction optical-depth-resolve off-clear order-independent depth-before/inside/behind axial inside-camera RCS_depth_sum=14.9793 duplicate=29.9586 order_max=0 validation=0"
+      ]
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-gpu-release.log",
+      "bytes": 583,
+      "sha256": "1D7742AC45EE976D44E797B828B3F8B5C104E3D09DCFB39200575D7BFA33C0B4",
+      "decisiveLines": [
+        "EXHAUST_GPU FAIL Vulkan validation errors"
+      ]
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-live-debug.log",
+      "bytes": 5009,
+      "sha256": "21B9A6F1B882A6884799D5B55C84F63B0DC277CC40D1ABA7EC0D0CEF20F4BF11",
+      "decisiveLines": [
+        "SRV01_COLD_PREPARATION ms=150.4242 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "[native] Vulkan validation [warning][WARNING-Shader-OutputNotConsumed]: vkCreateGraphicsPipelines(): pCreateInfos[0] (SPIR-V Interface) [VK_SHADER_STAGE_VERTEX_BIT] has an Output value declared at Location 11 Component 0, but there is no corresponding Input declared in [VK_SHADER_STAGE_FRAGMENT_BIT].",
+        "[native] PREPARED_VISUAL_SUBMISSION capacity=54 bytes=4416 initial_active=37",
+        "[native] Vulkan validation [warning][WARNING-Shader-OutputNotConsumed]: vkCreateGraphicsPipelines(): pCreateInfos[0] (SPIR-V Interface) [VK_SHADER_STAGE_VERTEX_BIT] has an Output value declared at Location 11 Component 0, but there is no corresponding Input declared in [VK_SHADER_STAGE_FRAGMENT_BIT].",
+        "[native] PREPARED_VISUAL_SUBMISSION capacity=54 bytes=4416 initial_active=37",
+        "STOCK_ASSEMBLY_END completed=True failed=False failure=Invalid frontier=128 revision=128 time=2000000 fuel_kg=29.9521484375 oxidizer_kg=44.92822265625 mass_kg=704.88037109375 com_x=1.0418789203343042 debt=3173",
+        "STOCK_ASSEMBLY_FRAME samples=336 median_ms=5.5512 p95_ms=5.7586 p99_ms=6.3013 max_ms=144.026 measurement=display_callback_interval_including_present_host_scheduling",
+        "SRV01_LIVE_SERVICE samples=336 median_ms=0.0242 p95_ms=0.2504 p99_ms=0.2954 max_ms=7.006 includes=host_admission_bounded_service_copied_observation",
+        "[native] Average frame time: 5.852 ms (480 frames)",
+        "[native] Frame pacing: p50=5.540 ms; p95=5.943 ms; p99=6.377 ms; max=145.725 ms; samples=480",
+        "[native] CPU timings: update=4.893 ms; fence=4.610; inspection=0.040; hostCallback=0.236; validationUpload=0.008; record=0.311; submit=0.056; present=0.213",
+        "[native] GPU timing averages: total=0.106 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.029; preSurface=0.001; toneMap=0.040"
+      ]
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-managed-debug.log",
+      "bytes": 82,
+      "sha256": "15771D2B6EF0425FE037BDC9425C7AE01C2722A54D252CF7954FABD228CCC319",
+      "decisiveLines": [
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)"
+      ]
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-managed-release-fixed.log",
+      "bytes": 82,
+      "sha256": "80DEE430DA891FD24F8F5D9F90CBDF3DF9DBE085117E33913C32E490C579A70D",
+      "decisiveLines": [
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)"
+      ]
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-managed-release.log",
+      "bytes": 1257,
+      "sha256": "5F5E5E040DDB2C86BB63B795EA3CED898B81314AFA7A682892D51F153F29942F",
+      "decisiveLines": [
+        "E:\\NovaCore\\samples\\NovaCore.Triangle\\StockAssemblyDevelopmentScene.cs(127,49): error CS0246: The type or namespace name 'NativeRenderObject' could not be found (are you missing a using directive or an assembly reference?) [E:\\NovaCore\\samples\\NovaCore.Triangle\\NovaCore.Triangle.csproj]",
+        "E:\\NovaCore\\samples\\NovaCore.Triangle\\StockAssemblyDevelopmentScene.cs(127,49): error CS0246: The type or namespace name 'NativeRenderObject' could not be found (are you missing a using directive or an assembly reference?) [E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\NovaCore.Graphics.Tests.csproj]",
+        "Build FAILED.",
+        "E:\\NovaCore\\samples\\NovaCore.Triangle\\StockAssemblyDevelopmentScene.cs(127,49): error CS0246: The type or namespace name 'NativeRenderObject' could not be found (are you missing a using directive or an assembly reference?) [E:\\NovaCore\\samples\\NovaCore.Triangle\\NovaCore.Triangle.csproj]",
+        "E:\\NovaCore\\samples\\NovaCore.Triangle\\StockAssemblyDevelopmentScene.cs(127,49): error CS0246: The type or namespace name 'NativeRenderObject' could not be found (are you missing a using directive or an assembly reference?) [E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\NovaCore.Graphics.Tests.csproj]",
+        "    0 Warning(s)",
+        "    2 Error(s)"
+      ]
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-manual-release.log",
+      "bytes": 5912,
+      "sha256": "A7BA49F5F2BED9FA24FEEA6B7B38C5136C3E8204428D218DDE6D1DBE724A44A5",
+      "decisiveLines": [
+        "SRV01_COLD_PREPARATION ms=161.4693 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "[native] EXHAUST_PRESENTATION_STORAGE targets=2 allocated_bytes=9896672 extent=1280x720 physics_bytes=0",
+        "[native] PREPARED_VISUAL_SUBMISSION capacity=54 bytes=4416 initial_active=37",
+        "[native] EXHAUST_PRESENTATION_STORAGE targets=2 allocated_bytes=9896672 extent=1280x720 physics_bytes=0",
+        "[native] PREPARED_VISUAL_SUBMISSION capacity=54 bytes=4416 initial_active=37",
+        "STOCK_ASSEMBLY_END completed=True failed=False failure=Invalid frontier=128 revision=128 time=2000000 fuel_kg=29.9521484375 oxidizer_kg=44.92822265625 mass_kg=704.88037109375 com_x=1.0418789203343042 debt=4578",
+        "STOCK_ASSEMBLY_FRAME samples=361 median_ms=5.5552 p95_ms=5.7222 p99_ms=5.9338 max_ms=6.1017 measurement=display_callback_interval_including_present_host_scheduling",
+        "SRV01_LIVE_SERVICE samples=361 median_ms=0.0067 p95_ms=0.1129 p99_ms=0.3326 max_ms=4.4229 includes=host_admission_bounded_service_copied_observation",
+        "[native] Average frame time: 5.679 ms (1419 frames)",
+        "[native] Frame pacing: p50=5.509 ms; p95=5.847 ms; p99=6.069 ms; max=38.232 ms; samples=1419",
+        "[native] CPU timings: update=5.074 ms; fence=4.905; inspection=0.032; hostCallback=0.134; validationUpload=0.003; record=0.061; submit=0.032; present=0.228",
+        "[native] GPU timing averages: total=0.092 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.021; preSurface=0.001; toneMap=0.026"
+      ]
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-manual-release.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "decisiveLines": []
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-native-debug.log",
+      "bytes": 441,
+      "sha256": "A331D213426918CE1F656D807C882E103612989CEF2378D1BCAEA6617F929954",
+      "decisiveLines": []
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-native-release.log",
+      "bytes": 443,
+      "sha256": "8EA54FF0AA9AE0682288BEC2BB7920C902D3DD4DD53A94929B7142B7686C248C",
+      "decisiveLines": []
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-presentation-debug.log",
+      "bytes": 3746,
+      "sha256": "2ADB364BA21AFDA8DB05843151979EFEE093D951FE6177115B4AAF4292504A53",
+      "decisiveLines": [
+        "SRV01_COLD_PREPARATION ms=151.6906 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "SRV01_COLD_PREPARATION ms=16.1342 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "SRV01_COLD_PREPARATION ms=15.5082 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "SRV01_COLD_PREPARATION ms=15.0502 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "ORDINARY_ALLOCATION gate=assembly-application-service-presentation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=assembly-terminal-presentation bytes=0 entry=PASS exit=PASS",
+        "SRV01_COLD_PREPARATION ms=16.9387 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "SRV01_COLD_PREPARATION ms=14.9297 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "ASSEMBLY_PRESENTATION PASS ready/start/64Hz/material-origin/copied-pose/camera/backlog/plan/final-hold/CLI/zero-allocation"
+      ]
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-presentation-release.log",
+      "bytes": 3745,
+      "sha256": "5006C39AF2ABD41FE20B283D7DF0505FD4C95F04613D75E0C599E5ABEAB3D006",
+      "decisiveLines": [
+        "SRV01_COLD_PREPARATION ms=176.6921 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "SRV01_COLD_PREPARATION ms=14.479 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "SRV01_COLD_PREPARATION ms=10.9973 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "SRV01_COLD_PREPARATION ms=11.0117 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "ORDINARY_ALLOCATION gate=assembly-application-service-presentation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=assembly-terminal-presentation bytes=0 entry=PASS exit=PASS",
+        "SRV01_COLD_PREPARATION ms=11.7177 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "SRV01_COLD_PREPARATION ms=12.2081 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "ASSEMBLY_PRESENTATION PASS ready/start/64Hz/material-origin/copied-pose/camera/backlog/plan/final-hold/CLI/zero-allocation"
+      ]
+    },
+    {
+      "path": "build/srv01-integration/exhaust-correction/method-storage-build.log",
+      "bytes": 270,
+      "sha256": "797DEF1CB67EFE14F79A351E7BF7965AA8546B54786D44352C7749CE35CB0CB8",
+      "decisiveLines": []
+    }
+  ]
+}

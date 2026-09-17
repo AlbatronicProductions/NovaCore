@@ -1,4 +1,5 @@
 #include "NovaCoreNative.h"
+#include "PreparedSubmissionStorage.h"
 #include "ProductionCubeSurface.h"
 #include "LocalTerrainPack.h"
 #include "RegionalPhysicalResidency.h"
@@ -213,12 +214,12 @@ static_assert(ProductionBillboardZeroVisiblePublicationRegression(),
   "a complete zero-visible generation must publish and later regenerate visible work");
 static_assert(ProductionBillboardMalformedZeroWorkRegression(),
   "malformed zero-work production billboard generations must remain rejected");
-struct Vertex {
-  float position[3];
-  float color[3];
-  float normal[3];
-};
-static_assert(sizeof(Vertex) == 36);
+using Vertex = NcVisualVertex;
+static_assert(sizeof(Vertex) == 48);
+static_assert(sizeof(NcVisualMesh) == 32);
+static_assert(offsetof(NcVisualMesh,presentationKind)==24);
+static_assert(offsetof(Vertex,color)==12&&offsetof(Vertex,normal)==24&&offsetof(Vertex,material)==36);
+static_assert(offsetof(NcVisualMesh,indices)==8&&offsetof(NcVisualMesh,vertexCount)==16&&offsetof(NcVisualMesh,indexCount)==20);
 struct PatchVertex { float uv[2]; };
 static_assert(sizeof(PatchVertex) == 8);
 struct DistantVertex { float position[3]; };
@@ -320,6 +321,10 @@ struct App {
   VkImage sceneDepth{};
   VkDeviceMemory sceneDepthMemory{};
   VkImageView sceneDepthView{};
+  VkImageView sceneDepthReadView{};
+  VkImage exhaustTargets[2]{};
+  VkImageView exhaustViews[2]{};
+  VkDeviceMemory exhaustMemory[2]{};
   std::array<VkImage,3> productionImages{};
   std::array<VkDeviceMemory,3> productionImageMemory{};
   std::array<VkImageView,3> productionImageViews{};
@@ -356,6 +361,10 @@ struct App {
   bool surfaceContextValid{},productionSurfaceLogged{},productionRootsReadyLogged{},productionGeometryTraceLogged{};uint32_t earthTransitionTraceRemaining{},earthSubmissionTraceRemaining{};uint64_t recordSerial{},submitSerial{},presentSerial{};
   VkPipelineLayout pipelineLayout{};
   VkPipeline pipeline{};
+  VkPipeline visualPipeline{};
+  VkPipeline exhaustPipeline{};
+  uint32_t exhaustMeshHandle{}, preparedObjectCapacity{};
+
   VkPipeline backgroundPipeline{};
   VkPipeline toneMapPipeline{};
   VkPipeline stellarSunPipeline{};
@@ -462,6 +471,7 @@ struct App {
   Mesh floridaLaunchPad{};
   Mesh floridaLaunchFoundation{};
   Mesh contactQualificationBody{}, contactQualificationSupport{};
+  std::vector<Mesh> visualMeshes;
   Mesh planetaryPatch{};
   Mesh distantPlanetary{};
   Mesh stellarSun{};
@@ -732,7 +742,36 @@ void CreateMesh(App &a) {
     mesh.indices=(uint32_t)padIndices.size();
   }
 }
+void CreateVisualMeshes(App &a,const NcVisualMesh* inputs,uint32_t count){
+  if(count>64u||(count&&!inputs))throw std::runtime_error("invalid visual mesh count");
+  uint64_t vertices=0,indices=0;
+  for(uint32_t n=0;n<count;n++){
+    const auto &m=inputs[n];vertices+=m.vertexCount;indices+=m.indexCount;
+    if(m.presentationKind>1u||(m.presentationKind&&a.exhaustMeshHandle))throw std::runtime_error("invalid visual presentation kind");
+    if(m.presentationKind)a.exhaustMeshHandle=1024u+n;
+    if(!m.vertices||!m.indices||!m.vertexCount||!m.indexCount||m.indexCount%3u||vertices>262144u||indices>1048576u)throw std::runtime_error("visual mesh capacity exceeded");
+    for(uint32_t j=0;j<m.vertexCount;j++){
+      const auto &v=m.vertices[j];for(float x:v.position)if(!std::isfinite(x))throw std::runtime_error("invalid visual position");
+      for(float x:v.normal)if(!std::isfinite(x))throw std::runtime_error("invalid visual normal");
+      for(float x:v.color)if(!std::isfinite(x)||x<0||x>1)throw std::runtime_error("invalid visual color");
+      if(!std::isfinite(v.material[0])||v.material[0]<0||v.material[0]>1||!std::isfinite(v.material[1])||v.material[1]<=0||v.material[1]>1||!std::isfinite(v.material[2])||v.material[2]<0||v.material[2]>8)throw std::runtime_error("invalid visual material");
+    }
+    for(uint32_t j=0;j<m.indexCount;j++)if(m.indices[j]>=m.vertexCount)throw std::runtime_error("visual index outside vertex array");
+  }
+  a.visualMeshes.resize(count);
+  for(uint32_t n=0;n<count;n++){
+    const auto &s=inputs[n];auto &d=a.visualMeshes[n];
+    Buffer(a,sizeof(Vertex)*s.vertexCount,VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,d.vb,d.vm,s.vertices);
+    Buffer(a,sizeof(uint32_t)*s.indexCount,VK_BUFFER_USAGE_INDEX_BUFFER_BIT,d.ib,d.im,s.indices);d.indices=s.indexCount;
+  }
+  if(count){char message[192];std::snprintf(message,sizeof message,"REUSABLE_VISUAL_MESHES count=%u vertices=%llu indices=%llu gpu_buffer_bytes=%llu",count,(unsigned long long)vertices,(unsigned long long)indices,(unsigned long long)(vertices*sizeof(Vertex)+indices*sizeof(uint32_t)));a.Log(NC_LOG_ALWAYS,message);}
+}
 void DestroyMesh(App &a) {
+  for(auto &m:a.visualMeshes){
+    if(m.vb)vkDestroyBuffer(a.device,m.vb,nullptr);if(m.vm)vkFreeMemory(a.device,m.vm,nullptr);
+    if(m.ib)vkDestroyBuffer(a.device,m.ib,nullptr);if(m.im)vkFreeMemory(a.device,m.im,nullptr);m={};
+  }
+  a.visualMeshes.clear();
   if (a.triangle.vb)
     vkDestroyBuffer(a.device, a.triangle.vb, nullptr);
   if (a.triangle.vm)
@@ -781,9 +820,11 @@ void DestroyMesh(App &a) {
   a.planetaryRing={};
 }
 Mesh *MeshFor(App &a, NcMeshHandle h) {
+  if(h.value>=1024u&&h.value-1024u<a.visualMeshes.size())return &a.visualMeshes[h.value-1024u];
   return h.value == 1 ? &a.triangle : h.value == 3 ? &a.floridaLaunchPad : h.value == 4 ? &a.floridaLaunchFoundation : h.value == 5 ? &a.contactQualificationBody : h.value == 6 ? &a.contactQualificationSupport : nullptr;
 }
 void Validate(App &a) {
+  if(a.submission->objectCount>a.preparedObjectCapacity)throw std::runtime_error("render submission exceeds prepared capacity");
   auto *s = a.submission;
   if ((s->objectCount && !s->objects) || (s->batchCount && !s->batches))
     throw std::runtime_error("invalid frame submission pointer");
@@ -984,6 +1025,8 @@ void DestroySwap(App &a) {
   a.framebuffers.clear();
   if (a.pipeline)
     vkDestroyPipeline(a.device, a.pipeline, nullptr);
+  if(a.visualPipeline)vkDestroyPipeline(a.device,a.visualPipeline,nullptr);
+  if(a.exhaustPipeline)vkDestroyPipeline(a.device,a.exhaustPipeline,nullptr);
   if(a.backgroundPipeline)vkDestroyPipeline(a.device,a.backgroundPipeline,nullptr);
   if(a.toneMapPipeline)vkDestroyPipeline(a.device,a.toneMapPipeline,nullptr);
   if(a.stellarSunPipeline)vkDestroyPipeline(a.device,a.stellarSunPipeline,nullptr);
@@ -1039,6 +1082,8 @@ void DestroySwap(App &a) {
   if (a.targetDirectionPipeline)
     vkDestroyPipeline(a.device, a.targetDirectionPipeline, nullptr);
   a.pipeline = {};
+  a.visualPipeline={};
+  a.exhaustPipeline={};
   a.backgroundPipeline={};
   a.toneMapPipeline={};
   a.stellarSunPipeline={};
@@ -1071,8 +1116,9 @@ void DestroySwap(App &a) {
   if(a.sceneColorView)vkDestroyImageView(a.device,a.sceneColorView,nullptr);
   if(a.sceneColor)vkDestroyImage(a.device,a.sceneColor,nullptr);
   if(a.sceneColorMemory)vkFreeMemory(a.device,a.sceneColorMemory,nullptr);
+  for(int i=0;i<2;i++){if(a.exhaustViews[i])vkDestroyImageView(a.device,a.exhaustViews[i],nullptr);if(a.exhaustTargets[i])vkDestroyImage(a.device,a.exhaustTargets[i],nullptr);if(a.exhaustMemory[i])vkFreeMemory(a.device,a.exhaustMemory[i],nullptr);a.exhaustViews[i]={};a.exhaustTargets[i]={};a.exhaustMemory[i]={};}
   a.sceneColorView={};a.sceneColor={};a.sceneColorMemory={};
-  if(a.sceneDepthView)vkDestroyImageView(a.device,a.sceneDepthView,nullptr);
+  if(a.sceneDepthReadView)vkDestroyImageView(a.device,a.sceneDepthReadView,nullptr);a.sceneDepthReadView={};if(a.sceneDepthView)vkDestroyImageView(a.device,a.sceneDepthView,nullptr);
   if(a.sceneDepth)vkDestroyImage(a.device,a.sceneDepth,nullptr);
   if(a.sceneDepthMemory)vkFreeMemory(a.device,a.sceneDepthMemory,nullptr);
   a.sceneDepthView={};a.sceneDepth={};a.sceneDepthMemory={};
@@ -1243,7 +1289,19 @@ void CreateSceneColor(App &a){
   VkImageCreateInfo image{VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO};image.imageType=VK_IMAGE_TYPE_2D;image.format=App::SceneFormat;image.extent={a.extent.width,a.extent.height,1};image.mipLevels=1;image.arrayLayers=1;image.samples=VK_SAMPLE_COUNT_1_BIT;image.tiling=VK_IMAGE_TILING_OPTIMAL;image.usage=VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT|VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT;image.sharingMode=VK_SHARING_MODE_EXCLUSIVE;image.initialLayout=VK_IMAGE_LAYOUT_UNDEFINED;
   a.Check(vkCreateImage(a.device,&image,nullptr,&a.sceneColor),"HDR scene-color image failed");VkMemoryRequirements requirements;vkGetImageMemoryRequirements(a.device,a.sceneColor,&requirements);VkMemoryAllocateInfo allocation{VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO};allocation.allocationSize=requirements.size;allocation.memoryTypeIndex=Memory(a,requirements.memoryTypeBits,VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);a.Check(vkAllocateMemory(a.device,&allocation,nullptr,&a.sceneColorMemory),"HDR scene-color memory failed");a.Check(vkBindImageMemory(a.device,a.sceneColor,a.sceneColorMemory,0),"HDR scene-color bind failed");
   VkImageViewCreateInfo view{VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO};view.image=a.sceneColor;view.viewType=VK_IMAGE_VIEW_TYPE_2D;view.format=App::SceneFormat;view.subresourceRange.aspectMask=VK_IMAGE_ASPECT_COLOR_BIT;view.subresourceRange.levelCount=1;view.subresourceRange.layerCount=1;a.Check(vkCreateImageView(a.device,&view,nullptr,&a.sceneColorView),"HDR scene-color view failed");
-  VkImageCreateInfo depth=image;depth.format=App::DepthFormat;depth.usage=VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT;a.Check(vkCreateImage(a.device,&depth,nullptr,&a.sceneDepth),"scene-depth image failed");vkGetImageMemoryRequirements(a.device,a.sceneDepth,&requirements);allocation.allocationSize=requirements.size;allocation.memoryTypeIndex=Memory(a,requirements.memoryTypeBits,VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);a.Check(vkAllocateMemory(a.device,&allocation,nullptr,&a.sceneDepthMemory),"scene-depth memory failed");a.Check(vkBindImageMemory(a.device,a.sceneDepth,a.sceneDepthMemory,0),"scene-depth bind failed");view.image=a.sceneDepth;view.format=App::DepthFormat;view.subresourceRange.aspectMask=VK_IMAGE_ASPECT_DEPTH_BIT|VK_IMAGE_ASPECT_STENCIL_BIT;a.Check(vkCreateImageView(a.device,&view,nullptr,&a.sceneDepthView),"scene-depth view failed");
+  VkImageCreateInfo depth=image;depth.format=App::DepthFormat;depth.usage=VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT|(a.exhaustMeshHandle?VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT:0);a.Check(vkCreateImage(a.device,&depth,nullptr,&a.sceneDepth),"scene-depth image failed");vkGetImageMemoryRequirements(a.device,a.sceneDepth,&requirements);allocation.allocationSize=requirements.size;allocation.memoryTypeIndex=Memory(a,requirements.memoryTypeBits,VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);a.Check(vkAllocateMemory(a.device,&allocation,nullptr,&a.sceneDepthMemory),"scene-depth memory failed");a.Check(vkBindImageMemory(a.device,a.sceneDepth,a.sceneDepthMemory,0),"scene-depth bind failed");view.image=a.sceneDepth;view.format=App::DepthFormat;view.subresourceRange.aspectMask=VK_IMAGE_ASPECT_DEPTH_BIT|VK_IMAGE_ASPECT_STENCIL_BIT;a.Check(vkCreateImageView(a.device,&view,nullptr,&a.sceneDepthView),"scene-depth view failed");
+  if(a.exhaustMeshHandle){
+    view.subresourceRange.aspectMask=VK_IMAGE_ASPECT_DEPTH_BIT;a.Check(vkCreateImageView(a.device,&view,nullptr,&a.sceneDepthReadView),"exhaust depth input view failed");
+    VkDeviceSize exhaustAllocatedBytes=0;
+    for(int i=0;i<2;i++){
+      image.format=i==0?App::SceneFormat:VK_FORMAT_R16_SFLOAT;
+      a.Check(vkCreateImage(a.device,&image,nullptr,&a.exhaustTargets[i]),"exhaust target failed");
+      vkGetImageMemoryRequirements(a.device,a.exhaustTargets[i],&requirements);allocation.allocationSize=requirements.size;exhaustAllocatedBytes+=requirements.size;allocation.memoryTypeIndex=Memory(a,requirements.memoryTypeBits,VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
+      a.Check(vkAllocateMemory(a.device,&allocation,nullptr,&a.exhaustMemory[i]),"exhaust target memory failed");a.Check(vkBindImageMemory(a.device,a.exhaustTargets[i],a.exhaustMemory[i],0),"exhaust target bind failed");
+      view.image=a.exhaustTargets[i];view.format=image.format;view.subresourceRange.aspectMask=VK_IMAGE_ASPECT_COLOR_BIT;a.Check(vkCreateImageView(a.device,&view,nullptr,&a.exhaustViews[i]),"exhaust target view failed");
+    }
+    char report[192];std::snprintf(report,sizeof report,"EXHAUST_PRESENTATION_STORAGE targets=2 allocated_bytes=%llu extent=%ux%u physics_bytes=0",(unsigned long long)exhaustAllocatedBytes,a.extent.width,a.extent.height);a.Log(NC_LOG_ALWAYS,report);
+  }
 }
 void Swap(App &a) {
   VkSurfaceCapabilitiesKHR c;
@@ -1299,7 +1357,7 @@ void Swap(App &a) {
             "view failed");
   }
   CreateSceneColor(a);
-  VkAttachmentDescription attachments[3]{};
+  VkAttachmentDescription attachments[5]{};
   attachments[0].format=App::SceneFormat;attachments[0].samples=VK_SAMPLE_COUNT_1_BIT;attachments[0].loadOp=VK_ATTACHMENT_LOAD_OP_CLEAR;attachments[0].storeOp=VK_ATTACHMENT_STORE_OP_DONT_CARE;attachments[0].initialLayout=VK_IMAGE_LAYOUT_UNDEFINED;attachments[0].finalLayout=VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
   attachments[1].format=a.format;attachments[1].samples=VK_SAMPLE_COUNT_1_BIT;attachments[1].loadOp=VK_ATTACHMENT_LOAD_OP_DONT_CARE;attachments[1].storeOp=VK_ATTACHMENT_STORE_OP_STORE;attachments[1].initialLayout=VK_IMAGE_LAYOUT_UNDEFINED;attachments[1].finalLayout=VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
   attachments[2].format=App::DepthFormat;attachments[2].samples=VK_SAMPLE_COUNT_1_BIT;attachments[2].loadOp=VK_ATTACHMENT_LOAD_OP_CLEAR;attachments[2].storeOp=VK_ATTACHMENT_STORE_OP_DONT_CARE;attachments[2].stencilLoadOp=VK_ATTACHMENT_LOAD_OP_CLEAR;attachments[2].stencilStoreOp=VK_ATTACHMENT_STORE_OP_DONT_CARE;attachments[2].initialLayout=VK_IMAGE_LAYOUT_UNDEFINED;attachments[2].finalLayout=VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
@@ -1307,16 +1365,29 @@ void Swap(App &a) {
   VkAttachmentReference sceneInput{0,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL};
   VkAttachmentReference swapColor{1,VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL};
   VkAttachmentReference sceneDepth{2,VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL};
-  VkSubpassDescription subpasses[2]{};subpasses[0].pipelineBindPoint=VK_PIPELINE_BIND_POINT_GRAPHICS;subpasses[0].colorAttachmentCount=1;subpasses[0].pColorAttachments=&sceneColor;subpasses[0].pDepthStencilAttachment=&sceneDepth;subpasses[1].pipelineBindPoint=VK_PIPELINE_BIND_POINT_GRAPHICS;subpasses[1].inputAttachmentCount=1;subpasses[1].pInputAttachments=&sceneInput;subpasses[1].colorAttachmentCount=1;subpasses[1].pColorAttachments=&swapColor;
-  VkSubpassDependency dependencies[3]{};
+  if(a.exhaustMeshHandle){attachments[3]=attachments[0];attachments[4]=attachments[0];attachments[4].format=VK_FORMAT_R16_SFLOAT;}
+  // Conditional full-resolution weighted OIT, resolved with tone mapping. Legacy routes retain two subpasses.
+  const uint32_t toneSubpass=a.exhaustMeshHandle?2u:1u;
+  VkAttachmentReference depthInput{2,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL};
+  VkAttachmentReference exhaustColors[2]{{3,VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL},{4,VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL}};
+  VkAttachmentReference resolveInputs[3]{sceneInput,{3,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL},{4,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL}};
+  const uint32_t preservedScene=0;
+  VkSubpassDescription subpasses[3]{};
+  subpasses[0].pipelineBindPoint=VK_PIPELINE_BIND_POINT_GRAPHICS;subpasses[0].colorAttachmentCount=1;subpasses[0].pColorAttachments=&sceneColor;subpasses[0].pDepthStencilAttachment=&sceneDepth;
+  if(a.exhaustMeshHandle){subpasses[1].pipelineBindPoint=VK_PIPELINE_BIND_POINT_GRAPHICS;subpasses[1].inputAttachmentCount=1;subpasses[1].pInputAttachments=&depthInput;subpasses[1].colorAttachmentCount=2;subpasses[1].pColorAttachments=exhaustColors;subpasses[1].preserveAttachmentCount=1;subpasses[1].pPreserveAttachments=&preservedScene;}
+  subpasses[toneSubpass].pipelineBindPoint=VK_PIPELINE_BIND_POINT_GRAPHICS;subpasses[toneSubpass].inputAttachmentCount=a.exhaustMeshHandle?3u:1u;subpasses[toneSubpass].pInputAttachments=resolveInputs;subpasses[toneSubpass].colorAttachmentCount=1;subpasses[toneSubpass].pColorAttachments=&swapColor;
+  VkSubpassDependency dependencies[5]{};
   dependencies[0].srcSubpass=VK_SUBPASS_EXTERNAL;dependencies[0].dstSubpass=0;dependencies[0].srcStageMask=VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT|VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT;dependencies[0].dstStageMask=VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT|VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT;dependencies[0].dstAccessMask=VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT|VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT;
-  dependencies[1].srcSubpass=0;dependencies[1].dstSubpass=1;dependencies[1].srcStageMask=VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;dependencies[1].dstStageMask=VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;dependencies[1].srcAccessMask=VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;dependencies[1].dstAccessMask=VK_ACCESS_INPUT_ATTACHMENT_READ_BIT;dependencies[1].dependencyFlags=VK_DEPENDENCY_BY_REGION_BIT;
-  dependencies[2].srcSubpass=1;dependencies[2].dstSubpass=VK_SUBPASS_EXTERNAL;dependencies[2].srcStageMask=VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;dependencies[2].dstStageMask=VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT;dependencies[2].srcAccessMask=VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+  for(uint32_t i=1;i<=toneSubpass;i++){
+    auto& d=dependencies[i];d.srcSubpass=i-1;d.dstSubpass=i;d.srcStageMask=VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT|VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT|VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT;d.dstStageMask=VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT|VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;d.srcAccessMask=VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT|VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT;d.dstAccessMask=VK_ACCESS_INPUT_ATTACHMENT_READ_BIT|VK_ACCESS_COLOR_ATTACHMENT_READ_BIT|VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;d.dependencyFlags=VK_DEPENDENCY_BY_REGION_BIT;
+  }
+  auto& lastDependency=dependencies[toneSubpass+1];lastDependency.srcSubpass=toneSubpass;lastDependency.dstSubpass=VK_SUBPASS_EXTERNAL;lastDependency.srcStageMask=VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;lastDependency.dstStageMask=VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT;lastDependency.srcAccessMask=VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+  if(a.exhaustMeshHandle)dependencies[4]={0,2,VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,VK_ACCESS_INPUT_ATTACHMENT_READ_BIT,VK_DEPENDENCY_BY_REGION_BIT};
   VkRenderPassCreateInfo rp{VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO};
-  rp.attachmentCount=3;rp.pAttachments=attachments;rp.subpassCount=2;rp.pSubpasses=subpasses;rp.dependencyCount=3;rp.pDependencies=dependencies;
+  rp.attachmentCount=a.exhaustMeshHandle?5u:3u;rp.pAttachments=attachments;rp.subpassCount=toneSubpass+1;rp.pSubpasses=subpasses;rp.dependencyCount=a.exhaustMeshHandle?5u:3u;rp.pDependencies=dependencies;
   a.Check(vkCreateRenderPass(a.device, &rp, nullptr, &a.renderPass),
           "render pass failed");
-  VkDescriptorSetLayoutBinding binds[46]{};
+  VkDescriptorSetLayoutBinding binds[49]{};
   const VkShaderStageFlags terrainStages=VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT|VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT|VK_SHADER_STAGE_FRAGMENT_BIT;
   for(uint32_t binding=0;binding<7;binding++){binds[binding].binding=binding;binds[binding].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;binds[binding].descriptorCount=1;binds[binding].stageFlags=binding==0?terrainStages|VK_SHADER_STAGE_COMPUTE_BIT:(binding==1?VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_COMPUTE_BIT:(binding==2?terrainStages|VK_SHADER_STAGE_COMPUTE_BIT:(binding==6?terrainStages|VK_SHADER_STAGE_COMPUTE_BIT:VK_SHADER_STAGE_COMPUTE_BIT)));}
   binds[7].binding=7;binds[7].descriptorType=VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT;binds[7].descriptorCount=1;binds[7].stageFlags=VK_SHADER_STAGE_FRAGMENT_BIT;
@@ -1332,6 +1403,7 @@ void Swap(App &a) {
       VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO};
   for(uint32_t i=40;i<45;++i){binds[i].binding=53+i-40;binds[i].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;binds[i].descriptorCount=1;binds[i].stageFlags=VK_SHADER_STAGE_COMPUTE_BIT;}
   binds[45]={58,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT,nullptr};
+  if(a.exhaustMeshHandle)for(uint32_t i=0;i<3;i++)binds[46+i]={59+i,VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT,1,VK_SHADER_STAGE_FRAGMENT_BIT,nullptr};
   std::vector<VkDescriptorSetLayoutBinding> activeBindings; for(const auto &binding:binds)if(binding.descriptorCount)activeBindings.push_back(binding);
   dl.bindingCount = uint32_t(activeBindings.size());
   dl.pBindings = activeBindings.data();
@@ -1354,15 +1426,16 @@ void Swap(App &a) {
        VK_SHADER_STAGE_FRAGMENT_BIT, fs, "main"}};
   VkVertexInputBindingDescription vb{0, sizeof(Vertex),
                                      VK_VERTEX_INPUT_RATE_VERTEX};
-  VkVertexInputAttributeDescription va[3]{
+  VkVertexInputAttributeDescription va[4]{
       {0, 0, VK_FORMAT_R32G32B32_SFLOAT, offsetof(Vertex, position)},
       {1, 0, VK_FORMAT_R32G32B32_SFLOAT, offsetof(Vertex, color)},
-      {2, 0, VK_FORMAT_R32G32B32_SFLOAT, offsetof(Vertex, normal)}};
+      {2, 0, VK_FORMAT_R32G32B32_SFLOAT, offsetof(Vertex, normal)},
+      {3, 0, VK_FORMAT_R32G32B32_SFLOAT, offsetof(Vertex, material)}};
   VkPipelineVertexInputStateCreateInfo vi{
       VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO};
   vi.vertexBindingDescriptionCount = 1;
   vi.pVertexBindingDescriptions = &vb;
-  vi.vertexAttributeDescriptionCount = 3;
+  vi.vertexAttributeDescriptionCount = 4;
   vi.pVertexAttributeDescriptions = va;
   VkPipelineInputAssemblyStateCreateInfo ia{
       VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO};
@@ -1407,15 +1480,35 @@ void Swap(App &a) {
   gp.renderPass = a.renderPass;
   VkPipeline trianglePipeline{};
   VkResult triangleResult = vkCreateGraphicsPipelines(a.device, {}, 1, &gp, nullptr, &trianglePipeline);
+  VkResult visualResult=VK_SUCCESS;
+  if(triangleResult==VK_SUCCESS&&!a.visualMeshes.empty()){
+    rs.cullMode=VK_CULL_MODE_BACK_BIT;
+    rs.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE;
+    visualResult=vkCreateGraphicsPipelines(a.device,{},1,&gp,nullptr,&a.visualPipeline);
+    rs.cullMode=VK_CULL_MODE_NONE;
+    rs.frontFace=VK_FRONT_FACE_CLOCKWISE;
+  }
   vkDestroyShaderModule(a.device, vs, nullptr);
   vkDestroyShaderModule(a.device, fs, nullptr);
   if (triangleResult != VK_SUCCESS && trianglePipeline) vkDestroyPipeline(a.device, trianglePipeline, nullptr);
   a.Check(triangleResult, "pipeline failed");
   a.pipeline = trianglePipeline;
+  a.Check(visualResult,"reusable visual pipeline failed");
+  if(a.exhaustMeshHandle){
+    VkShaderModule ev=Shader(a,"shaders/exhaust.vert.spv"),ef{};
+    try{ef=Shader(a,"shaders/exhaust.frag.spv");}catch(...){vkDestroyShaderModule(a.device,ev,nullptr);throw;}
+    VkPipelineShaderStageCreateInfo es[2]{{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_VERTEX_BIT,ev,"main"},{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_FRAGMENT_BIT,ef,"main"}};
+    auto er=rs;er.cullMode=VK_CULL_MODE_FRONT_BIT;er.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE;
+    auto ea=ca;ea.blendEnable=VK_TRUE;ea.srcColorBlendFactor=VK_BLEND_FACTOR_ONE;ea.dstColorBlendFactor=VK_BLEND_FACTOR_ONE;ea.colorBlendOp=VK_BLEND_OP_ADD;ea.srcAlphaBlendFactor=VK_BLEND_FACTOR_ONE;ea.dstAlphaBlendFactor=VK_BLEND_FACTOR_ONE;ea.alphaBlendOp=VK_BLEND_OP_ADD;
+    VkPipelineColorBlendAttachmentState accumulators[2]{ea,ea};
+    auto eb=cb;eb.attachmentCount=2;eb.pAttachments=accumulators;auto ei=vi;ei.vertexAttributeDescriptionCount=1;
+    auto ep=gp;ep.pStages=es;ep.pVertexInputState=&ei;ep.pRasterizationState=&er;ep.pDepthStencilState=&noDepth;ep.pColorBlendState=&eb;ep.subpass=1;
+    const auto result=vkCreateGraphicsPipelines(a.device,{},1,&ep,nullptr,&a.exhaustPipeline);vkDestroyShaderModule(a.device,ev,nullptr);vkDestroyShaderModule(a.device,ef,nullptr);a.Check(result,"exhaust volume pipeline failed");
+  }
   VkPipelineVertexInputStateCreateInfo fullscreenInput{VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO};
   auto createFullscreenPipeline=[&](const char* fragment,uint32_t subpass,VkPipeline &destination,const char* failure){VkShaderModule fullscreenVs=Shader(a,"shaders/fullscreen.vert.spv"),fullscreenFs{};try{fullscreenFs=Shader(a,fragment);}catch(...){vkDestroyShaderModule(a.device,fullscreenVs,nullptr);throw;}VkPipelineShaderStageCreateInfo fullscreenStages[2]{{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_VERTEX_BIT,fullscreenVs,"main"},{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_FRAGMENT_BIT,fullscreenFs,"main"}};VkGraphicsPipelineCreateInfo create=gp;create.pStages=fullscreenStages;create.pVertexInputState=&fullscreenInput;create.pDepthStencilState=&noDepth;create.subpass=subpass;VkResult result=vkCreateGraphicsPipelines(a.device,{},1,&create,nullptr,&destination);vkDestroyShaderModule(a.device,fullscreenVs,nullptr);vkDestroyShaderModule(a.device,fullscreenFs,nullptr);a.Check(result,failure);};
   createFullscreenPipeline("shaders/space_background.frag.spv",0,a.backgroundPipeline,"space background pipeline failed");
-  createFullscreenPipeline("shaders/tone_map.frag.spv",1,a.toneMapPipeline,"tone-map pipeline failed");
+  createFullscreenPipeline(a.exhaustMeshHandle?"shaders/exhaust_resolve.frag.spv":"shaders/tone_map.frag.spv",toneSubpass,a.toneMapPipeline,"tone-map pipeline failed");
   VkShaderModule planetaryVs{},planetaryFs{};
   try{planetaryVs=Shader(a,"shaders/planetary.vert.spv");planetaryFs=Shader(a,"shaders/planetary.frag.spv");}catch(...){if(planetaryVs)vkDestroyShaderModule(a.device,planetaryVs,nullptr);throw;}
   VkPipelineShaderStageCreateInfo planetaryStages[2]{{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_VERTEX_BIT,planetaryVs,"main"},{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_FRAGMENT_BIT,planetaryFs,"main"}};
@@ -1544,10 +1637,10 @@ void Swap(App &a) {
   a.targetDirectionPipeline = targetDirectionPipeline;
   a.framebuffers.resize(a.views.size());
   for (size_t i = 0; i < a.views.size(); i++) {
-    VkImageView attachments[]{a.sceneColorView,a.views[i],a.sceneDepthView};
+    VkImageView attachments[]{a.sceneColorView,a.views[i],a.sceneDepthView,a.exhaustViews[0],a.exhaustViews[1]};
     VkFramebufferCreateInfo fb{VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO};
     fb.renderPass = a.renderPass;
-    fb.attachmentCount = 3;
+    fb.attachmentCount = a.exhaustMeshHandle?5u:3u;
     fb.pAttachments = attachments;
     fb.width = a.extent.width;
     fb.height = a.extent.height;
@@ -1726,8 +1819,7 @@ void Submission(App &a) {
                       source is not permitted */
 }
 void CreateSubmission(App &a) {
-  a.submissionSize = sizeof(NcCameraData) +
-                     sizeof(NcRenderObject) * a.submission->objectCount;
+  a.submissionSize = nc::SubmissionBytes(a.preparedObjectCapacity);
   VkBufferCreateInfo ci{VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO};
   ci.size = a.submissionSize;
   ci.usage = VK_BUFFER_USAGE_STORAGE_BUFFER_BIT;
@@ -1749,6 +1841,7 @@ void CreateSubmission(App &a) {
   a.Check(vkMapMemory(a.device, a.submissionMemory, 0, a.submissionSize, 0,
                       &a.mapped),
           "submission map failed");
+  if(a.exhaustMeshHandle){char text[160];std::snprintf(text,sizeof text,"PREPARED_VISUAL_SUBMISSION capacity=%u bytes=%llu initial_active=%u",a.preparedObjectCapacity,(unsigned long long)a.submissionSize,a.submission->objectCount);a.Log(NC_LOG_ALWAYS,text);}
   CreatePatchBuffer(a,sizeof(NcPlanetaryPatch)*GpuPatchCapacity);
   CreateHostBuffer(a,sizeof(NcPlanetaryGpuConstants),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,a.gpuInputBuffer,a.gpuInputMemory,a.gpuInputMapped,"planetary GPU input buffer failed");
   CreateHostBuffer(a,sizeof(uint32_t)*4*GpuPatchCapacity*2,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,a.gpuWorkBuffer,a.gpuWorkMemory,a.gpuWorkMapped,"planetary GPU work buffer failed");
@@ -1768,7 +1861,7 @@ void CreateSubmission(App &a) {
   }
   CreateTerrainResidency(a);
   CreateProductionBillboard(a);
-  VkDescriptorPoolSize ps[3]{{VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,39},{VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT,1},{VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,7}};
+  VkDescriptorPoolSize ps[3]{{VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,39},{VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT,a.exhaustMeshHandle?4u:1u},{VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,7}};
   VkDescriptorPoolCreateInfo pi{VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO};
   pi.maxSets = 1;
   pi.poolSizeCount = 3;
@@ -1793,6 +1886,10 @@ void CreateSubmission(App &a) {
   if(a.productionPack){VkDescriptorBufferInfo physicalOracleInfo{a.physicalOracleBuffer,0,PhysicalOracleBytes};VkWriteDescriptorSet physicalOracleWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};physicalOracleWrite.dstSet=a.descriptor;physicalOracleWrite.dstBinding=33;physicalOracleWrite.descriptorCount=1;physicalOracleWrite.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;physicalOracleWrite.pBufferInfo=&physicalOracleInfo;vkUpdateDescriptorSets(a.device,1,&physicalOracleWrite,0,nullptr);}
   VkDescriptorBufferInfo naturalGlobalInfo{a.naturalGlobalPreparedBuffer,0,32u+VkDeviceSize(NaturalGlobalPatchCount)*NaturalGlobalVerticesPerPatch*sizeof(double)*4u};VkWriteDescriptorSet naturalGlobalWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};naturalGlobalWrite.dstSet=a.descriptor;naturalGlobalWrite.dstBinding=35;naturalGlobalWrite.descriptorCount=1;naturalGlobalWrite.descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;naturalGlobalWrite.pBufferInfo=&naturalGlobalInfo;vkUpdateDescriptorSets(a.device,1,&naturalGlobalWrite,0,nullptr);
   VkDescriptorImageInfo sceneInput{};sceneInput.imageView=a.sceneColorView;sceneInput.imageLayout=VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;VkWriteDescriptorSet sceneWrite{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};sceneWrite.dstSet=a.descriptor;sceneWrite.dstBinding=7;sceneWrite.descriptorCount=1;sceneWrite.descriptorType=VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT;sceneWrite.pImageInfo=&sceneInput;vkUpdateDescriptorSets(a.device,1,&sceneWrite,0,nullptr);
+  if(a.exhaustMeshHandle){
+    VkDescriptorImageInfo inputs[3]{{{},a.sceneDepthReadView,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL},{{},a.exhaustViews[0],VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL},{{},a.exhaustViews[1],VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL}};
+    for(uint32_t i=0;i<3;i++){auto write=sceneWrite;write.dstBinding=59+i;write.pImageInfo=&inputs[i];vkUpdateDescriptorSets(a.device,1,&write,0,nullptr);}
+  }
   if(a.productionPack){VkDescriptorImageInfo productionInfos[3]{};VkWriteDescriptorSet productionWrites[3]{};for(uint32_t index=0;index<3;index++){productionInfos[index]={a.productionSampler,a.productionImageViews[index],VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL};productionWrites[index].sType=VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;productionWrites[index].dstSet=a.descriptor;productionWrites[index].dstBinding=24+index;productionWrites[index].descriptorCount=1;productionWrites[index].descriptorType=VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;productionWrites[index].pImageInfo=&productionInfos[index];}vkUpdateDescriptorSets(a.device,3,productionWrites,0,nullptr);}
 }
 void EnsurePatchCapacity(App &a,uint32_t count) {
@@ -1830,10 +1927,7 @@ void UploadFacilityVisibility(App& a) {
 }
 void Upload(App &a) {
   UploadFacilityVisibility(a);
-  std::memcpy(a.mapped, &a.submission->camera, sizeof(NcCameraData));
-  std::memcpy((char *)a.mapped + sizeof(NcCameraData),
-              a.submission->objects,
-              sizeof(NcRenderObject) * a.submission->objectCount);
+  nc::CopyPreparedSubmission(a.mapped,a.submissionSize,a.preparedObjectCapacity,*a.submission);
   auto gpuInput=a.submission->planetaryGpu;gpuInput.terrainFrame=static_cast<uint32_t>(++a.frame);if((a.submission->productionBillboardFlags&32u)!=0u)gpuInput.targetTexelPixels=-1001.0f;else if((a.submission->productionBillboardFlags&64u)!=0u)gpuInput.targetTexelPixels=-1002.0f;else if((a.submission->productionBillboardFlags&256u)!=0u)gpuInput.targetTexelPixels=-1003.0f;else if((a.submission->productionBillboardFlags&512u)!=0u)gpuInput.targetTexelPixels=-1004.0f;else if((a.submission->productionBillboardFlags&16384u)!=0u)gpuInput.targetTexelPixels=-1005.0f;else if((a.submission->productionBillboardFlags&32768u)!=0u)gpuInput.targetTexelPixels=-1006.0f;else if((a.submission->productionBillboardFlags&2u)!=0u)gpuInput.targetTexelPixels=-std::abs(gpuInput.targetTexelPixels);const bool productionSurface=a.submission->planetarySurfaceMode==NC_PLANETARY_SURFACE_PRODUCTION_CUBE;if(productionSurface){if(!a.productionPack)throw std::runtime_error("production cube pack is required for mode 2");gpuInput.maximumLevel=std::min(gpuInput.maximumLevel,a.productionPack->MaximumLevel());}if(a.submission->planetaryMode==NC_PLANETARY_CPU_REFERENCE)gpuInput.terrainVersion=0;
   const auto &contextPresentation=a.submission->planetaryPresentation;
   const uint64_t contextBody=uint64_t(contextPresentation.bodyIdLow)|(uint64_t(contextPresentation.bodyIdHigh)<<32u);
@@ -1976,12 +2070,12 @@ void Record(App &a, uint32_t image) {
   vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,a.timestampQueries,2);
   NcSolarLighting lighting=a.submission->solarLighting;if(!lighting.enabled){lighting.exposure=1;lighting.ambientFloor=.025f;lighting.photosphereR=1;lighting.photosphereG=.91f;lighting.photosphereB=.68f;lighting.sourceRadiance=32;}lighting.speedHud|=a.surfaceDiagnostic<<16;
   vkCmdPushConstants(c,a.pipelineLayout,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,0,sizeof(lighting),&lighting);
-  VkClearValue clears[3]{};clears[0].color={{0,0,0,1}};clears[1].color={{0,0,0,1}};clears[2].depthStencil={0,0};
+  VkClearValue clears[5]{};clears[0].color={{0,0,0,1}};clears[1].color={{0,0,0,1}};clears[2].depthStencil={0,0};
   VkRenderPassBeginInfo rp{VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO};
   rp.renderPass = a.renderPass;
   rp.framebuffer = a.framebuffers[image];
   rp.renderArea = {{0, 0}, a.extent};
-  rp.clearValueCount = 3;
+  rp.clearValueCount = a.exhaustMeshHandle?5u:3u;
   rp.pClearValues = clears;
   vkCmdBeginRenderPass(c, &rp, VK_SUBPASS_CONTENTS_INLINE);
   vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.backgroundPipeline);
@@ -1994,7 +2088,9 @@ void Record(App &a, uint32_t image) {
                           0, 1, &a.descriptor, 0, nullptr);
   for (uint32_t i = 0; i < a.submission->batchCount; i++) {
     auto &b = a.submission->batches[i];
+    if(b.mesh.value==a.exhaustMeshHandle)continue;
     auto *m = MeshFor(a, b.mesh);
+    vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,b.mesh.value>=1024u?a.visualPipeline:a.pipeline);
     VkDeviceSize offset = 0;
     vkCmdBindVertexBuffers(c, 0, 1, &m->vb, &offset);
     vkCmdBindIndexBuffer(c, m->ib, 0, VK_INDEX_TYPE_UINT32);
@@ -2042,6 +2138,13 @@ void Record(App &a, uint32_t image) {
   if (a.submission->targetDirectionVertexCount == 2 && a.targetDirectionBuffer) { VkDeviceSize offset = 0; vkCmdBindPipeline(c, VK_PIPELINE_BIND_POINT_GRAPHICS, a.targetDirectionPipeline); vkCmdBindVertexBuffers(c, 0, 1, &a.targetDirectionBuffer, &offset); vkCmdDraw(c, 2, 1, 0, 0); }
   if(solarOverlay){VkDeviceSize offset=0;vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.stellarSunPipeline);vkCmdBindVertexBuffers(c,0,1,&a.stellarSun.vb,&offset);vkCmdBindIndexBuffer(c,a.stellarSun.ib,0,VK_INDEX_TYPE_UINT32);vkCmdDrawIndexed(c,a.stellarSun.indices,distantCount,0,0,0);vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.solarMarkerPipeline);vkCmdDraw(c,24,10,0,0);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.solarLabelPipeline);vkCmdDraw(c,42,10,0,0);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.solarSpeedHudPipeline);vkCmdDraw(c,210,1,0,0);}
   vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT,a.timestampQueries,7);
+  if(a.exhaustMeshHandle){
+    vkCmdNextSubpass(c,VK_SUBPASS_CONTENTS_INLINE);
+    vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.exhaustPipeline);
+    vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);
+    for(uint32_t i=0;i<a.submission->batchCount;i++){const auto& b=a.submission->batches[i];if(b.mesh.value!=a.exhaustMeshHandle)continue;auto* m=MeshFor(a,b.mesh);VkDeviceSize offset=0;vkCmdBindVertexBuffers(c,0,1,&m->vb,&offset);vkCmdBindIndexBuffer(c,m->ib,0,VK_INDEX_TYPE_UINT32);vkCmdDrawIndexed(c,m->indices,b.objectCount,0,0,b.firstObject);}
+    vkCmdPushConstants(c,a.pipelineLayout,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,0,sizeof(lighting),&lighting);
+  }
   vkCmdNextSubpass(c,VK_SUBPASS_CONTENTS_INLINE);
   vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.toneMapPipeline);
   vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);
@@ -2487,11 +2590,13 @@ extern "C" NC_API NcResult __cdecl nc_get_abi_layout(NcAbiLayout *o) {
         (uint32_t)offsetof(NcInputState, viewportHeightPixels)};
   return NC_SUCCESS;
 }
-static NcResult RunRenderer(NcFrameSubmission *s, NcHostCallback cb, void *data, const NcRuntimeAssets *assets) {
+static NcResult RunRenderer(NcFrameSubmission *s, NcHostCallback cb, void *data, const NcRuntimeAssets *assets,const NcVisualMesh* meshes=nullptr,uint32_t meshCount=0,uint32_t preparedObjectCapacity=0) {
   if (!cb || !s || !s->objects || !s->objectCount || !s->batches ||
       !s->batchCount || (assets && (assets->size != sizeof(NcRuntimeAssets) || assets->version != 3u || !assets->productionTerrainPathUtf8 || !assets->elevationOraclePathUtf8)))
     return NC_INVALID_ARGUMENT;
+  if(meshCount && (!preparedObjectCapacity || preparedObjectCapacity<s->objectCount || preparedObjectCapacity>4096u))return NC_INVALID_ARGUMENT;
   App a;
+  a.preparedObjectCapacity=preparedObjectCapacity?preparedObjectCapacity:s->objectCount;
   a.cb = cb;
   a.cbData = data;
   a.submission = s;
@@ -2507,6 +2612,7 @@ static NcResult RunRenderer(NcFrameSubmission *s, NcHostCallback cb, void *data,
     Surface(a);
     Device(a);
     CreateMesh(a);
+    CreateVisualMeshes(a,meshes,meshCount);
     CreateProductionCubeSurface(a);
     CreateLocalTerrain(a);
     Validate(a);
@@ -2587,3 +2693,4 @@ extern "C" NC_API NcResult __cdecl nc_run_spherical_billboard_gpu_proof_frame(co
 extern "C" NC_API NcResult __cdecl nc_shutdown_spherical_billboard_gpu_proof(){return ShutdownSphericalBillboardGpuProof();}
 extern "C" NC_API NcResult __cdecl nc_run_renderer(NcFrameSubmission *s, NcHostCallback cb, void *data) { return RunRenderer(s,cb,data,nullptr); }
 extern "C" NC_API NcResult __cdecl nc_run_renderer_with_assets(NcFrameSubmission *s, NcHostCallback cb, void *data, const NcRuntimeAssets *assets) { return RunRenderer(s,cb,data,assets); }
+extern "C" NC_API NcResult __cdecl nc_run_renderer_with_visual_meshes(NcFrameSubmission *s,NcHostCallback cb,void *data,const NcVisualMesh* meshes,uint32_t count,uint32_t preparedObjectCapacity){return RunRenderer(s,cb,data,nullptr,meshes,count,preparedObjectCapacity);}

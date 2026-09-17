@@ -22,7 +22,7 @@ internal enum SpacecraftTranslationStatus : byte
     Success, InvalidState, InvalidMass, TimeBeforeEpoch, DurationOverflow, NonFiniteResult,
     SubjectNotFound, FrameMismatch, RotationEvaluationFailed, StateRevisionMismatch,
     TimeMismatch, ExpectedStateMismatch, InvalidReplacement, HistoryCapacityFailure,
-    StateRevisionOverflow, EventMismatch, OutsideQualifiedEndpoint,
+    StateRevisionOverflow, EventMismatch, OutsideQualifiedEndpoint, AssemblyMotionRequiresTypedView,
 }
 
 internal readonly record struct SpacecraftTranslationEvaluation(

@@ -4,5 +4,7 @@
     <ProjectReference Include="..\NovaCore.Core\NovaCore.Core.csproj" />
     <ProjectReference Include="..\NovaCore.EphemerisFormat\NovaCore.EphemerisFormat.csproj" />
     <EmbeddedResource Include="Celestial\Data\moon_me_de440_1900_2100.nclo" LogicalName="NovaCore.Simulation.Celestial.Data.moon_me_de440_1900_2100.nclo" />
+    <EmbeddedResource Include="Spacecraft\Assemblies\Data\SRV01-G0-B.json" LogicalName="NovaCore.Stock.SRV01.G0B" />
+    <EmbeddedResource Include="Spacecraft\Assemblies\Data\SRV01-FourHorn.json" LogicalName="NovaCore.Stock.SRV01.FourHorn" />
   </ItemGroup>
 </Project>

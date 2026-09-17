@@ -1,0 +1,22 @@
+[
+  {
+    "asset": "NC_SRV_Capsule_A",
+    "bytes": 123968,
+    "glbSha256": "6b045a63186ed63fa1c6d48ef7e7ab89299f83b4f533897b8679b22068ceff6a"
+  },
+  {
+    "asset": "NC_SRV_Tank_A",
+    "bytes": 256312,
+    "glbSha256": "22cd027892f20596238d7a7580a4e73032071f6303a73cb211915bab4c4de378"
+  },
+  {
+    "asset": "NC_SRV_Main_A",
+    "bytes": 130064,
+    "glbSha256": "3b02f9e3788a2ba85ea8c0238e2f61f8c916d7757e2c535b8348cb8e6c1ad46f"
+  },
+  {
+    "asset": "NC_SRV_Rcs_A",
+    "bytes": 143776,
+    "glbSha256": "6118cb37bd8b7678d0eacc032391b1143143e2360e351cdcbd67508a3124ca5b"
+  }
+]

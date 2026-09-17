@@ -131,6 +131,20 @@ public struct NativeFacilityCasterDefinition
 public unsafe struct NativeFrameSubmission { public NativeCameraData Camera; public NativeRenderObject* Objects; public uint ObjectCount; public NativeDrawBatch* Batches; public uint BatchCount; public NativeOrbitLineVertex* OrbitVertices; public uint OrbitVertexCount; public NativeOrbitLineVertex* PreviousOrbitVertices; public uint PreviousOrbitVertexCount; public NativeOrbitLineVertex* BodyForwardVertices; public uint BodyForwardVertexCount; public NativeOrbitLineVertex* TargetDirectionVertices; public uint TargetDirectionVertexCount; public NativePlanetaryPatch* PlanetaryPatches; public uint PlanetaryPatchCount; public uint PlanetaryGpuAlignmentPadding; public NativePlanetaryGpuConstants PlanetaryGpu; public NativePlanetaryMode PlanetaryMode; public NativePlanetarySurfaceMode PlanetarySurfaceMode; public uint PhysicalSurfaceGeneration,PlanetaryPadding2; public NativePlanetaryPresentation PlanetaryPresentation; public NativePlanetaryPresentation* DistantBodies; public uint DistantBodyCount, DistantBodyPadding; public NativeSolarLighting SolarLighting; public fixed ulong ReservedSurface[24]; public NativeProductionSphericalBillboardSubmission* ProductionBillboard; public uint ProductionBillboardFlags,ProductionBillboardPadding; public NativeProductionBillboardFrame* ProductionBillboardFrame; public NativeFacilityCasterDefinition* FacilityCaster; }
 
 [StructLayout(LayoutKind.Sequential)]
+public struct NativeVisualVertex
+{
+    public float X,Y,Z,R,G,B,Nx,Ny,Nz,Metallic,Roughness,Emission;
+}
+[StructLayout(LayoutKind.Sequential)]
+public unsafe struct NativeVisualMesh
+{
+    public NativeVisualVertex* Vertices;
+    public uint* Indices;
+    public uint VertexCount,IndexCount;
+    // 0: opaque authored surface; 1: original display-frame exhaust volume proxy.
+    public uint PresentationKind;
+}
+[StructLayout(LayoutKind.Sequential)]
 public unsafe struct NativeRuntimeAssets
 {
     public uint Size, Version;
@@ -347,6 +361,9 @@ public static partial class NativeRuntime
 
     [LibraryImport("NovaCore.Native", EntryPoint = "nc_run_renderer_with_assets")]
     public static unsafe partial NativeResult RunRendererWithAssets(NativeFrameSubmission* submission, HostCallback callback, IntPtr userData, NativeRuntimeAssets* assets);
+
+    [LibraryImport("NovaCore.Native", EntryPoint = "nc_run_renderer_with_visual_meshes")]
+    public static unsafe partial NativeResult RunRendererWithVisualMeshes(NativeFrameSubmission* submission, HostCallback callback, IntPtr userData, NativeVisualMesh* meshes, uint count, uint preparedObjectCapacity);
 
     [LibraryImport("NovaCore.Native", EntryPoint = "nc_get_abi_layout")]
     public static partial NativeResult GetAbiLayout(out NativeAbiLayout layout);

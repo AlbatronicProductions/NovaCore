@@ -35,6 +35,15 @@ exhaustion with atomic motion/resource/mass/actuator publication, followed by a
 dry/off actuator transition and same-body dry retained contact. It does not
 implement liftoff or departure.
 
+**Accepted, awaiting banking:** SRV-01 Reusable Production Spacecraft Integration.
+The development scenario assembles a capsule, tank/service body, gimbaled main
+engine and four reusable four-horn RCS blocks. Its 16 physical jets share exact
+fuel/oxidizer authority; current mass, centre of mass and inertia drive motion.
+Accepted runtime assets and nozzle-attached main/RCS exhaust follow copied
+canonical state. This is a bounded recorded free-flight scenario, not an arbitrary
+construction editor or a contact/departure transition. See the
+[accepted SRV-01 result](docs/engineering-evidence/srv01-production-integration/README.md).
+
 - **Earth exploration:** move the camera from orbital views down toward terrain,
   with Sun-driven day and night, NASA/NOAA source imagery and elevation, and USGS
   regional detail around Florida.
@@ -51,8 +60,8 @@ implement liftoff or departure.
   powered free flight.
 
 These capabilities are exercised in separate development scenarios. The current
-powered-flight demonstration uses a simple cube in free space, without gravity or
-contact; piloted flight and complete terrain landing are still ahead.
+powered-flight cube and the reusable-part SRV-01 scenario operate in free space,
+without gravity or contact; piloted flight and complete terrain landing are still ahead.
 
 ## Screenshots
 

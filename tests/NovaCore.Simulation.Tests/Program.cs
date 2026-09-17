@@ -15,6 +15,13 @@ using NovaCore.Core;
 using NovaCore.Core.ReferenceFrames;
 using System.Diagnostics;
 
+if (args.Length==2&&args[0]=="--author-srv01") { Srv01IntegrationTests.Author(args[1]); return; }
+if (args.Contains("--srv01-integration",StringComparer.Ordinal)) { Srv01IntegrationTests.Run(); return; }
+if (args.Contains("--assembly-production", StringComparer.Ordinal)) { AssemblyProductionTests.Run(); return; }
+if (args.Contains("--assembly-allocation", StringComparer.Ordinal)) { AssemblyProductionMeasurements.Allocation(); return; }
+if (args.Contains("--assembly-cost", StringComparer.Ordinal)) { AssemblyProductionMeasurements.Cost(); return; }
+if (args.Contains("--assembly-storage", StringComparer.Ordinal)) { AssemblyProductionMeasurements.Storage(); return; }
+
 if (args.Contains("--powered-free-flight-arithmetic", StringComparer.Ordinal)) { PoweredFreeFlightTests.Arithmetic(); return; }
 if (args.Contains("--powered-free-flight-physics", StringComparer.Ordinal)) { PoweredFreeFlightTests.Physics(); return; }
 if (args.Contains("--powered-free-flight-authority", StringComparer.Ordinal)) { PoweredFreeFlightTests.Authority(); return; }
@@ -111,6 +118,8 @@ if (args.Contains("--orientation-only", StringComparer.Ordinal))
 
 var tests = new (string Name, Action Test)[]
 {
+    ("Stock assembly production path", AssemblyProductionTests.Run),
+    ("SRV01 sixteen-jet integration", Srv01IntegrationTests.Run),
     ("Segmented powered free flight", ()=>{PoweredFreeFlightTests.Physics();PoweredFreeFlightTests.Authority();}),
     ("SimulationInstant", InstantTests),
     ("SimulationDuration", DurationTests),

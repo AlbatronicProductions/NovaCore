@@ -3,6 +3,13 @@
   <PropertyGroup><NativeBuildDirectory>native-ninja</NativeBuildDirectory></PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'"><NativeBuildDirectory>native-ninja-release</NativeBuildDirectory></PropertyGroup>
   <ItemGroup>
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+      <_Parameter1>NativeBuildDirectory</_Parameter1>
+      <_Parameter2>$(NativeBuildDirectory)</_Parameter2>
+    </AssemblyAttribute>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\assets\visual\SRV01\*.glb" Link="assets\visual\SRV01\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
     <ProjectReference Include="..\..\src\NovaCore.Core\NovaCore.Core.csproj" />
     <ProjectReference Include="..\..\src\NovaCore.Graphics\NovaCore.Graphics.csproj" />
     <ProjectReference Include="..\..\src\NovaCore.Interop\NovaCore.Interop.csproj" />
@@ -20,6 +27,7 @@
     <Compile Include="..\..\samples\NovaCore.Triangle\DynamicReferenceFrameFixtureScene.cs" Link="DynamicReferenceFrameFixtureScene.cs" />
     <Compile Include="..\..\samples\NovaCore.Triangle\CelestialAnalyticalScene.cs" Link="CelestialAnalyticalScene.cs" />
     <Compile Include="..\..\samples\NovaCore.Triangle\ContactDevelopmentScene.cs" Link="ContactDevelopmentScene.cs" />
+    <Compile Include="..\..\samples\NovaCore.Triangle\StockAssemblyDevelopmentScene.cs" Link="StockAssemblyDevelopmentScene.cs" />
     <Compile Include="..\..\samples\NovaCore.Triangle\PoweredFlightDevelopmentScene.cs" Link="PoweredFlightDevelopmentScene.cs" />
     <Compile Include="..\..\samples\NovaCore.Triangle\PoweredContactDevelopmentScene.cs" Link="PoweredContactDevelopmentScene.cs" />
     <Compile Include="..\..\samples\NovaCore.Triangle\SampleOptions.cs" Link="SampleOptions.cs" />

@@ -15,6 +15,16 @@ not as an onboarding requirement.
 
 ## Repository rules
 
+SRV-01 integration is accepted and **UNBANKED**, on
+`codex/srv01-production-integration`. The current authorized action is bank
+preparation only: exact manifest, protected-identity verification and bounded
+regressions. Proposed M15.2 is **SRV-01 Reusable Production Spacecraft Integration**.
+Do not commit/tag/push or open a new front without Project Control authorization.
+Use the [bank-ready packet](engineering-evidence/srv01-production-integration/bank-preparation/README.md).
+Accepted limitations include unattributed frame maxima, approximate plume overlap,
+no atmospheric/gas parity and synchronous save/restore hitches. Historical retired
+terrain payloads need not be restored; current terrain authority remains required.
+
 Latest banked production checkpoint: **M15.1 — Finite-Fuel Retained Powered Contact**,
 tag `m15.1-finite-fuel-retained-powered-contact`, parent
 `49057fecceb0f725d5f551ec40e2780971b0d81d`. The annotated tag identifies the atomic

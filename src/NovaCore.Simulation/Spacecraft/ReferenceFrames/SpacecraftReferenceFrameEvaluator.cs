@@ -20,6 +20,15 @@ internal static class SpacecraftReferenceFrameEvaluator
             var definition = spacecraft.GetDefinition(index);
             if (!graph.TryGetIndex(definition.CarrierFrame, out var carrierIndex) || !graph.TryGetIndex(definition.BodyFrame, out var bodyIndex)) return SpacecraftReferenceFrameEvaluationStatus.FrameMissing;
             if (graph.GetParentIndexAt(bodyIndex) != carrierIndex) return SpacecraftReferenceFrameEvaluationStatus.CarrierOwnershipMismatch;
+            if(spacecraft.TryGetAssembly(definition.Id,out _,out var assembly))
+            {
+                var root=graph.GetNodeAt(carrierIndex);
+                if(graph.RootCount!=1||root.ParentId is not null||root.Kind!=ReferenceFrameKind.Ecl)return SpacecraftReferenceFrameEvaluationStatus.CarrierOwnershipMismatch;
+                if(requestedTime!=assembly.Epoch)return SpacecraftReferenceFrameEvaluationStatus.TranslationEvaluationFailed;
+                var m=assembly.Motion;
+                destination[bodyIndex]=new(definition.BodyFrame,new EvaluatedReferenceFrame(new FrameTransform(m.PositionO,m.BodyToWorld),m.VelocityO,m.BodyToWorld.Rotate(m.AngularVelocityBody),false));
+                continue;
+            }
             if (spacecraft.TryGetAppliedEndpoint(definition.Id, out var endpoint))
             {
                 var endpointRoot = graph.GetNodeAt(carrierIndex);

@@ -6,7 +6,7 @@ using NovaCore.Simulation.Transactions;
 namespace NovaCore.Simulation.Spacecraft;
 
 /// <summary>Fixed-size authoritative spacecraft records. Declaration order is canonical; lookup indices allocate only at setup.</summary>
-internal sealed class SpacecraftStateStore
+internal sealed partial class SpacecraftStateStore
 {
     internal SimulationState? Owner { get; private set; }
     internal void BindOwner(SimulationState owner)
@@ -27,6 +27,7 @@ internal sealed class SpacecraftStateStore
     // Optional cold storage: unchanged legacy/contact stores incur no new endpoint array.
     internal void PrepareAppliedEndpointStorage() => _appliedEndpoints ??= new SpacecraftAppliedEndpoint[_definitions.Length];
     private bool IsApplied(int index) => _appliedEndpoints is not null && _appliedEndpoints[index].Validity != AppliedEndpointValidity.Invalid;
+    private bool IsInstantaneous(int index) => IsApplied(index) || IsAssembly(index);
     internal bool TryGetAppliedEndpoint(SpacecraftId id, out SpacecraftAppliedEndpoint endpoint)
     {
         if (TryGetIndex(id, out var index) && IsApplied(index)) { endpoint = _appliedEndpoints![index]; return true; }
@@ -35,6 +36,7 @@ internal sealed class SpacecraftStateStore
     internal bool TryPrepareAppliedSlot(SpacecraftId id, in SpacecraftPhysicalSource expected, out int index)
     {
         if (!TryGetIndex(id, out index) || _appliedEndpoints is null) return false;
+        if (IsAssembly(index)) return false;
         if (expected.IsEndpoint) return IsApplied(index) && _appliedEndpoints[index].SameBits(expected.Endpoint);
         return !IsApplied(index) && _hasRigidBody[index] && _translations[index] == expected.Linear &&
             _rigidBodies[index] == expected.Angular && _properties[index] == expected.Properties;
@@ -117,14 +119,14 @@ internal sealed class SpacecraftStateStore
 
     internal bool TryGetTranslation(SpacecraftId id, out SpacecraftTranslationState translation, out SpacecraftPhysicalProperties properties)
     {
-        if (TryGetIndex(id, out var index) && !IsApplied(index) && _properties[index].IsValid)
+        if (TryGetIndex(id, out var index) && !IsInstantaneous(index) && _properties[index].IsValid)
         { translation = _translations[index]; properties = _properties[index]; return true; }
         translation = default; properties = default; return false;
     }
 
     internal bool TryReplaceTranslation(in SpacecraftTranslationState expected, in SpacecraftTranslationState replacement)
     { Owner?.VerifyStoreMutation();
-        if (!TryGetIndex(expected.Spacecraft, out var index) || IsApplied(index) || !_properties[index].IsValid || _translations[index] != expected) return false;
+        if (!TryGetIndex(expected.Spacecraft, out var index) || IsInstantaneous(index) || !_properties[index].IsValid || _translations[index] != expected) return false;
         _translations[index] = replacement; return true;
     }
 
@@ -132,7 +134,7 @@ internal sealed class SpacecraftStateStore
     internal bool TryReplaceContactResponse(in SpacecraftTranslationState expectedLinear, in SpacecraftTranslationState replacementLinear,
         in SpacecraftRigidBodyRotationState expectedAngular, in SpacecraftRigidBodyRotationState replacementAngular)
     { Owner?.VerifyStoreMutation();
-        if (!TryGetIndex(expectedLinear.Spacecraft, out var index) || IsApplied(index) || !_properties[index].IsValid || !_hasRigidBody[index] ||
+        if (!TryGetIndex(expectedLinear.Spacecraft, out var index) || IsInstantaneous(index) || !_properties[index].IsValid || !_hasRigidBody[index] ||
             expectedAngular.Spacecraft != expectedLinear.Spacecraft || replacementLinear.Spacecraft != expectedLinear.Spacecraft ||
             replacementAngular.Spacecraft != expectedLinear.Spacecraft ||
             _translations[index] != expectedLinear || _rigidBodies[index] != expectedAngular) return false;
@@ -141,7 +143,7 @@ internal sealed class SpacecraftStateStore
         return true;
     }
     internal bool TryPrepareContinuationSlot(in SpacecraftTranslationState linear, in SpacecraftRigidBodyRotationState angular,
-        out int index) => TryGetIndex(linear.Spacecraft, out index) && !IsApplied(index) && _properties[index].IsValid && _hasRigidBody[index] &&
+        out int index) => TryGetIndex(linear.Spacecraft, out index) && !IsInstantaneous(index) && _properties[index].IsValid && _hasRigidBody[index] &&
         angular.Spacecraft == linear.Spacecraft && _translations[index] == linear && _rigidBodies[index] == angular;
 
     // Fixed arrays, validated index and complete prepared records; no lookup or normal refusal.
@@ -151,14 +153,14 @@ internal sealed class SpacecraftStateStore
         _rigidBodies[index] = angular;
     }
 
-    internal SpacecraftAttitudeState GetAttitudeAt(int index) => IsApplied(index)
+    internal SpacecraftAttitudeState GetAttitudeAt(int index) => IsInstantaneous(index)
         ? throw new InvalidOperationException("Endpoint-only state has no legacy attitude propagation segment.") : _attitudes[index];
     internal bool TryGetIndex(SpacecraftId id, out int index) { var found = Array.BinarySearch(_lookupIds, id.Value); if (found >= 0) { index = _lookupIndices[found]; return true; } index = -1; return false; }
     internal bool TryGetDefinition(SpacecraftId id, out SpacecraftDefinition value) { if (TryGetIndex(id, out var index)) { value = _definitions[index]; return true; } value = default; return false; }
-    internal bool TryGetAttitude(SpacecraftId id, out SpacecraftAttitudeState value) { if (TryGetIndex(id, out var index) && !IsApplied(index)) { value = _attitudes[index]; return true; } value = default; return false; }
-    internal bool TryGetRigidBody(SpacecraftId id, out SpacecraftRigidBodyRotationState value) { if (TryGetIndex(id, out var index) && !IsApplied(index) && _hasRigidBody[index]) { value = _rigidBodies[index]; return true; } value = default; return false; }
+    internal bool TryGetAttitude(SpacecraftId id, out SpacecraftAttitudeState value) { if (TryGetIndex(id, out var index) && !IsInstantaneous(index)) { value = _attitudes[index]; return true; } value = default; return false; }
+    internal bool TryGetRigidBody(SpacecraftId id, out SpacecraftRigidBodyRotationState value) { if (TryGetIndex(id, out var index) && !IsInstantaneous(index) && _hasRigidBody[index]) { value = _rigidBodies[index]; return true; } value = default; return false; }
     internal bool TryReplaceAttitude(SpacecraftId subject, in SpacecraftAttitudeState expected, in SpacecraftAttitudeState replacement, out SpacecraftStateStoreMutationStatus status)
-    { Owner?.VerifyStoreMutation(); if (!TryGetIndex(subject, out var index)) { status = SpacecraftStateStoreMutationStatus.SubjectNotFound; return false; } if (IsApplied(index) || _attitudes[index] != expected) { status = SpacecraftStateStoreMutationStatus.ExpectedAttitudeMismatch; return false; } _attitudes[index] = replacement; status = SpacecraftStateStoreMutationStatus.Success; return true; }
+    { Owner?.VerifyStoreMutation(); if (!TryGetIndex(subject, out var index)) { status = SpacecraftStateStoreMutationStatus.SubjectNotFound; return false; } if (IsInstantaneous(index) || _attitudes[index] != expected) { status = SpacecraftStateStoreMutationStatus.ExpectedAttitudeMismatch; return false; } _attitudes[index] = replacement; status = SpacecraftStateStoreMutationStatus.Success; return true; }
     internal bool TryReplaceRigidBody(SpacecraftId subject, in SpacecraftRigidBodyRotationState expected, in SpacecraftRigidBodyRotationState replacement, out SpacecraftStateStoreMutationStatus status)
-    { Owner?.VerifyStoreMutation(); if (!TryGetIndex(subject, out var index)) { status = SpacecraftStateStoreMutationStatus.SubjectNotFound; return false; } if (IsApplied(index) || !_hasRigidBody[index] || _rigidBodies[index] != expected) { status = SpacecraftStateStoreMutationStatus.ExpectedAttitudeMismatch; return false; } _rigidBodies[index] = replacement; status = SpacecraftStateStoreMutationStatus.Success; return true; }
+    { Owner?.VerifyStoreMutation(); if (!TryGetIndex(subject, out var index)) { status = SpacecraftStateStoreMutationStatus.SubjectNotFound; return false; } if (IsInstantaneous(index) || !_hasRigidBody[index] || _rigidBodies[index] != expected) { status = SpacecraftStateStoreMutationStatus.ExpectedAttitudeMismatch; return false; } _rigidBodies[index] = replacement; status = SpacecraftStateStoreMutationStatus.Success; return true; }
 }

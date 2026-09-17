@@ -6,6 +6,10 @@ public static class ScenarioCatalog
 
     public static IReadOnlyList<NovaCoreScenarioDefinition> All { get; } =
     [
+        new(NovaCoreScenarioPreset.StockAssembly, "SRV-01 — Reusable Spacecraft Parts",
+            "Seven authored reusable parts, sixteen physical RCS jets, exact fuel and oxidizer. Space starts a bounded 2-second main/gimbal/RCS episode; no gravity or contact.", NovaCoreScene.StockAssembly,
+            NovaCoreStartingBody.None, null, null, NovaCoreWindowMode.Windowed, NovaCoreResolutionPreset.Resolution1280x720,
+            NovaCoreDiagnosticsMode.PerformanceTelemetry, NovaCorePhysicalSurface.Generation3, true, null),
         new(NovaCoreScenarioPreset.PoweredFreeFlight, "Development - Powered Free Flight",
             "Authored dry cube, finite point fuel, one ideal engine; no gravity/contact. Space starts an 8-second canonical episode.", NovaCoreScene.PoweredFreeFlight,
             NovaCoreStartingBody.None, null, null, NovaCoreWindowMode.Windowed, NovaCoreResolutionPreset.Resolution1280x720,

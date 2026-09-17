@@ -13,6 +13,9 @@ struct NcEncodedPosition { float high[4]; float low[4]; };
 struct NcFloat4x4 { float columns[16]; };
 struct alignas(16) NcCameraData { NcEncodedPosition position; NcFloat4x4 viewProjection; };
 struct NcMeshHandle { uint32_t value; };
+// Cold, bounded reusable visual meshes. Handles are 1024 + array index.
+struct NcVisualVertex { float position[3], color[3], normal[3], material[3]; };
+struct NcVisualMesh { const NcVisualVertex* vertices; const uint32_t* indices; uint32_t vertexCount, indexCount; uint32_t presentationKind; };
 struct NcRenderTransform { float rotation[4]; float scale[4]; };
 // std430-compatible: 80 bytes, 16-byte alignment; position=0, transform=32, mesh=64.
 struct alignas(16) NcRenderObject { NcEncodedPosition position; NcRenderTransform transform; NcMeshHandle mesh; uint32_t padding[3]; };
@@ -245,6 +248,7 @@ typedef void(__cdecl* NcHostCallback)(NcHostEvent* hostEvent, void* userData);
 enum NcResult : int32_t { NC_SUCCESS = 0, NC_FAILURE = 1, NC_INVALID_ARGUMENT = 2 };
 NC_API NcResult __cdecl nc_run_renderer(NcFrameSubmission* submission, NcHostCallback callback, void* userData);
 NC_API NcResult __cdecl nc_run_renderer_with_assets(NcFrameSubmission* submission, NcHostCallback callback, void* userData, const NcRuntimeAssets* assets);
+NC_API NcResult __cdecl nc_run_renderer_with_visual_meshes(NcFrameSubmission* submission, NcHostCallback callback, void* userData, const NcVisualMesh* meshes, uint32_t count, uint32_t preparedObjectCapacity);
 NC_API NcResult __cdecl nc_validate_planetary_patches(const NcPlanetaryPatch* patches, uint32_t count);
 NC_API NcResult __cdecl nc_validate_terrain_asset(const char* pathUtf8, uint64_t bodyId, uint32_t terrainVersion, uint32_t expectedRecordCount);
 NC_API NcResult __cdecl nc_query_planetary_physical_heights(const NcPlanetaryHeightQuery* queries, uint32_t count, NcPlanetaryHeightResult* results, const NcPlanetaryHeightQueryAssets* assets, NcPlanetaryHeightQueryMetrics* metrics);

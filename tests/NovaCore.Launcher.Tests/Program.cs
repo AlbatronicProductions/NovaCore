@@ -7,6 +7,7 @@ var tests = new (string Name, Action Test)[]
     ("scenario catalog", ScenarioCatalogMappings),
     ("contact development scenarios", ContactDevelopmentScenarios),
     ("powered free-flight scenario", PoweredFreeFlightScenario),
+    ("stock assembly scenario", StockAssemblyScenario),
     ("Earth fullscreen native preset", EarthFullscreenNativePreset),
     ("M12D spherical billboard GPU proof preset", M12DSphericalBillboardGpuProofPreset),
     ("new Earth renderer preset", NewEarthRendererPreset),
@@ -39,8 +40,8 @@ static void DefaultSelection()
 
 static void ScenarioCatalogMappings()
 {
-    Equal(11, ScenarioCatalog.All.Count);
-    Equal(11, ScenarioCatalog.All.Count(definition => definition.IsSupported));
+    Equal(12, ScenarioCatalog.All.Count);
+    Equal(12, ScenarioCatalog.All.Count(definition => definition.IsSupported));
     True(ScenarioCatalog.All.Select(definition => definition.Preset).Distinct().Count() == ScenarioCatalog.All.Count,
         "Scenario presets must be unique.");
 }
@@ -59,6 +60,13 @@ static void PoweredFreeFlightScenario()
 {
     var configuration=Create(NovaCoreScenarioPreset.PoweredFreeFlight);
     True(LaunchCommandBuilder.BuildArguments(configuration).Contains("--scene=powered-free-flight"),"Powered sibling route");
+    Equal(NovaCoreStartingBody.None,configuration.StartingBody);
+    Equal(NovaCorePhysicalSurface.Generation3,configuration.PhysicalSurface);
+}
+static void StockAssemblyScenario()
+{
+    var configuration=Create(NovaCoreScenarioPreset.StockAssembly);
+    True(LaunchCommandBuilder.BuildArguments(configuration).Contains("--scene=stock-assembly"),"Stock assembly application route");
     Equal(NovaCoreStartingBody.None,configuration.StartingBody);
     Equal(NovaCorePhysicalSurface.Generation3,configuration.PhysicalSurface);
 }

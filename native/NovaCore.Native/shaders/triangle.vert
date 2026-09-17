@@ -20,10 +20,12 @@ layout(std430, set = 0, binding = 0) readonly buffer GpuFrameData {
 layout(location = 0) in vec3 inPosition;
 layout(location = 1) in vec3 inColor;
 layout(location = 2) in vec3 inNormal;
+layout(location = 3) in vec3 inMaterial;
 layout(location = 0) out vec3 color;
 layout(location = 1) out vec3 normal;
 layout(location = 2) out vec3 cameraRelativePosition;
 layout(location = 3) flat out uint mesh;
+layout(location = 4) out vec3 material;
 
 // Right-handed Hamilton rotation, XYZW quaternion: q * v * conjugate(q).
 vec3 Rotate(vec4 q, vec3 v) {
@@ -38,7 +40,8 @@ void main() {
   vec3 presented = local + relativePosition;
   gl_Position = frameData.camera.viewProjection * vec4(presented, 1.0);
   color = inColor;
-  normal = normalize(Rotate(object.rotation, inNormal));
+  normal = normalize(Rotate(object.rotation, object.mesh>=1024u?inNormal/object.scale.xyz:inNormal));
   cameraRelativePosition = presented;
   mesh = object.mesh;
+  material = inMaterial;
 }

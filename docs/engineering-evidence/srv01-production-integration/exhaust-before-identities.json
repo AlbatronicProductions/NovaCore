@@ -1,0 +1,217 @@
+[
+  {
+    "path": "native/NovaCore.Native/NovaCoreNative.cpp",
+    "bytes": 293706,
+    "sha256": "EB38AA2CCAF0F692F1A2ADE415DE914C177F12C15DB8AF73E1AF5C69F37218AD"
+  },
+  {
+    "path": "native/NovaCore.Native/NovaCoreNative.h",
+    "bytes": 18498,
+    "sha256": "AF437555BC74B1E310F54826B203981347F1865D6B829BE694D3A88E24CFE440"
+  },
+  {
+    "path": "native/NovaCore.Native/shaders/triangle.frag",
+    "bytes": 1760,
+    "sha256": "8E4D36A9CE99887404FFF3F647506613F5756A3992FBBA31DADBA32D62CDA7AF"
+  },
+  {
+    "path": "native/NovaCore.Native/shaders/triangle.vert",
+    "bytes": 1605,
+    "sha256": "493CBEEA82EDE6A832952ACE15279FDE06AE0519EB7701B5D9F76C9C15FD6EAA"
+  },
+  {
+    "path": "samples/NovaCore.Triangle/NovaCore.Triangle.csproj",
+    "bytes": 8513,
+    "sha256": "C1E8FC138591B9BF5B466028122F11A1FC3FC1C40D0B9E94F6FC5010E8A7BEDD"
+  },
+  {
+    "path": "samples/NovaCore.Triangle/Program.cs",
+    "bytes": 62289,
+    "sha256": "6B66C6A9EA396083D7530C5E03E24DCF0EF0E67A3B361684BD94C368AAE49AF3"
+  },
+  {
+    "path": "samples/NovaCore.Triangle/SampleOptions.cs",
+    "bytes": 5698,
+    "sha256": "5C80C2BC7D57BEF986BAAACF09F9D9DAB954F7E61702E538D7F2AC7E5397E9B2"
+  },
+  {
+    "path": "src/NovaCore.Interop/NativeRuntime.cs",
+    "bytes": 22883,
+    "sha256": "AB213371E2FF7B2E82458A51B76758523CBD91828D16E491D67D9D90EE94B046"
+  },
+  {
+    "path": "src/NovaCore.Simulation/NovaCore.Simulation.csproj",
+    "bytes": 724,
+    "sha256": "D6F56C7F77CE99E87014AD00CFBEC90E14B9C13D7A470A13AF13F191E1FFD62A"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/ReferenceFrames/SpacecraftReferenceFrameEvaluator.cs",
+    "bytes": 5719,
+    "sha256": "2551EA1CE3B7CC3004C4649FCE0D6FA56591935E0A18EDF5E52C1B8EBDC13DAA"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.cs",
+    "bytes": 14729,
+    "sha256": "6FBD449E88EE529747DCA8E4AED5134E5C0000029D4CDBEC9DED51E1DAD68798"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftStateView.cs",
+    "bytes": 2973,
+    "sha256": "47B5959A95533D06D6AA7DD8343C0020B2CEB15137A39FDC5A9B66EC9A64F070"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftMotionEvaluator.cs",
+    "bytes": 4085,
+    "sha256": "2D75A905E514E4E140B74B662A61A29CAB0278CE72A08C51CD44EF6DD10F032D"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftTranslationState.cs",
+    "bytes": 1826,
+    "sha256": "98E478EBBB79EFB2D28AFE85ED4DD32DE744009079118BB199F462758185C02E"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Transactions/SimulationState.cs",
+    "bytes": 7716,
+    "sha256": "36AD86812A1055EFD0A90037A0063E2DB9FE4CE1D1FFF313518A612D919E32EF"
+  },
+  {
+    "path": "tests/NovaCore.Graphics.Tests/GraphicsTestHarness.cs",
+    "bytes": 10327,
+    "sha256": "0486023BF8BC39EEDA718A90C666A4CA4D9F596D80F04B0A6EF8B59533D81506"
+  },
+  {
+    "path": "tests/NovaCore.Graphics.Tests/NovaCore.Graphics.Tests.csproj",
+    "bytes": 3791,
+    "sha256": "CDF836762ABC1580FE7518CD4D1E78057A1C8CC120FD085F12CDA5AC1E8C861B"
+  },
+  {
+    "path": "tests/NovaCore.Graphics.Tests/Program.cs",
+    "bytes": 568052,
+    "sha256": "E186E745ED14539782A8A321E1CA52D38C8B9193CBE3735ED1BFCB8507C3B96E"
+  },
+  {
+    "path": "tests/NovaCore.Launcher.Tests/Program.cs",
+    "bytes": 16663,
+    "sha256": "042247F66E9C21AD4840D156F10EB15B73A2D7B6008B24B45DE9BB11300A21F9"
+  },
+  {
+    "path": "tests/NovaCore.Simulation.Tests/NovaCore.Simulation.Tests.csproj",
+    "bytes": 309,
+    "sha256": "729BDA87D60478834E7549D4BBECA8DFC93E7B56043DFEDF0C414E0CC5B63810"
+  },
+  {
+    "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+    "bytes": 259177,
+    "sha256": "3530E26C2944113EE64DF29EE80894BBAC173070BDBF0536851F495D2D267568"
+  },
+  {
+    "path": "tools/NovaCore.Launcher/LaunchCommandBuilder.cs",
+    "bytes": 4584,
+    "sha256": "A3012D78B62B6666E942ADB3748FAAD08F2544AD8087E4BDAB10A680D540E939"
+  },
+  {
+    "path": "tools/NovaCore.Launcher/LaunchConfiguration.cs",
+    "bytes": 2720,
+    "sha256": "EBC638EEDA37E03A08D472C0915305757E82AB812742B856708979664B71DECB"
+  },
+  {
+    "path": "tools/NovaCore.Launcher/ScenarioCatalog.cs",
+    "bytes": 9145,
+    "sha256": "20B32DDF3E2B0381DCC83EA7B81F9C7DE65786D0B5266E5CF89FC3394B5CA7AD"
+  },
+  {
+    "path": "samples/NovaCore.Triangle/StockAssemblyDevelopmentScene.cs",
+    "bytes": 13226,
+    "sha256": "C454B3E01BA3595F68E776CF2B11241BD6D4F2B0612011FA803BDD34680AB37E"
+  },
+  {
+    "path": "src/NovaCore.Graphics/ReusablePartVisuals.cs",
+    "bytes": 14451,
+    "sha256": "F7A63573DB039ED912511B28CCD2C077221C84EAED30DFFDC49E41EC55AABCB3"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyApplicationSession.cs",
+    "bytes": 2084,
+    "sha256": "19817756EAA34F03A85A1435C931346FB28339DEFB2FE8BD12906D648F19E8AB"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDesign.cs",
+    "bytes": 24463,
+    "sha256": "6E314E6D9EDA1B4DCD0238A9645D56FD8A1C67BE162E34DF08E1771FA856B79B"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDynamics.cs",
+    "bytes": 4812,
+    "sha256": "9266404C38F8BFEE639CD6422CB5F84E0796C093C99E05CA0B4562C56DAB1B27"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFlight.cs",
+    "bytes": 10854,
+    "sha256": "167DA48B5DB2862AFB128B494C6F3B380F7EAB26099BFA36B2471AAE4B909FCA"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyProfileAdmission.cs",
+    "bytes": 4749,
+    "sha256": "071C2EB691EB950C699A1501E67E3AD94E6D9F78A76491FEC328DFA32BA08319"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyResources.cs",
+    "bytes": 4125,
+    "sha256": "881908D8654C874ED7A7C2DBC8A04B586F0FCCAEED1EBBF7559BF244D21B2E20"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/Data/SRV01-FourHorn.json",
+    "bytes": 11917,
+    "sha256": "AC23C15AE52ADC5E8E836BD954D9084B10A2699CC01F0A6906A992724EA67FCF"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/Data/SRV01-G0-B.json",
+    "bytes": 8777,
+    "sha256": "A06153AD518BC7FC7FD365E17CD1F3ED84C09052674401A84049F9AD61212340"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.Assemblies.cs",
+    "bytes": 2962,
+    "sha256": "CA95752706E7785E77A02A896F5331C73490DDCD6D69AD87A18CD6A3005708C5"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Assemblies.cs",
+    "bytes": 13199,
+    "sha256": "961BF9C5905903E1E805C9A950969A9678951DDBCD9E91A7C406B1314DF98829"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblySave.cs",
+    "bytes": 6288,
+    "sha256": "81C967C2555066111BA466093466CF3D3A0A82575CCA522D161BED80F0B9FDDB"
+  },
+  {
+    "path": "tests/NovaCore.Graphics.Tests/StockAssemblyPresentationTests.cs",
+    "bytes": 8395,
+    "sha256": "FC46CE0A21A817B223932DA7E20D21EAD00FD7849ED48866061ACD49FC7F99EA"
+  },
+  {
+    "path": "tests/NovaCore.Simulation.Tests/AssemblyProductionMeasurements.cs",
+    "bytes": 26265,
+    "sha256": "6B9C1711ED3105A7BCA5D34948D2BDC6176F7D9BC7F2A7BAF97152C418EF8166"
+  },
+  {
+    "path": "tests/NovaCore.Simulation.Tests/AssemblyProductionTests.cs",
+    "bytes": 52239,
+    "sha256": "2EA432E4EDE5B904AA4BD99D0024767AF23C9AE691E68ECCC09D98914B3D96A3"
+  },
+  {
+    "path": "tests/NovaCore.Simulation.Tests/Data/Assembly-FourHorn-Reference-Endpoints.json",
+    "bytes": 62704,
+    "sha256": "3A173370E2A011FA8EBB6014ED22804FBAF7183B6E6E0524941039904E288C96"
+  },
+  {
+    "path": "tests/NovaCore.Simulation.Tests/Data/Assembly-Reference-Endpoints.json",
+    "bytes": 27912,
+    "sha256": "2FC90B50E227462E87C35148D8C3FC862091F521F4B45EA54D0F07BA60160431"
+  },
+  {
+    "path": "tests/NovaCore.Simulation.Tests/Srv01IntegrationTests.cs",
+    "bytes": 11764,
+    "sha256": "F288F3B3003A8D5667EA08CCEF709669BD2A5E0890C036024844B83338A255D6"
+  }
+]

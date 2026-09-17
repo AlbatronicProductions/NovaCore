@@ -1,0 +1,545 @@
+{
+  "result": "BANK-READY",
+  "bankingActionsPerformed": false,
+  "stagedPaths": [],
+  "counts": {
+    "PRODUCTION RUNTIME": 36,
+    "PRODUCTION ASSET": 5,
+    "PERMANENT TEST": 14,
+    "DOCUMENTATION": 5,
+    "RETAINED ENGINEERING EVIDENCE": 33
+  },
+  "includedPaths": 93,
+  "excludedChangedPaths": 32,
+  "unclassifiedPaths": 0,
+  "missingPaths": 0,
+  "unexpectedPaths": 0,
+  "diffCheck": "PASS",
+  "newTextWhitespace": "PASS",
+  "relativeLinks": "PASS",
+  "head": "09463ec6c323daf233205cb08306d38611c22e6e",
+  "main": "09463ec6c323daf233205cb08306d38611c22e6e",
+  "originMain": "09463ec6c323daf233205cb08306d38611c22e6e",
+  "remoteMain": "09463ec6c323daf233205cb08306d38611c22e6e",
+  "mergeBase": "09463ec6c323daf233205cb08306d38611c22e6e",
+  "branch": "codex/srv01-production-integration",
+  "tagsUnchanged": 66,
+  "worktrees": [
+    "worktree E:/NovaCore",
+    "HEAD 09463ec6c323daf233205cb08306d38611c22e6e",
+    "branch refs/heads/codex/srv01-production-integration",
+    "",
+    "worktree E:/NovaCore-Blender-Visual-StepB",
+    "HEAD 09463ec6c323daf233205cb08306d38611c22e6e",
+    "branch refs/heads/codex/blender-rlv1-gray-blockout"
+  ],
+  "acceptedCandidateFiles": 55,
+  "protectedSimulationFiles": 25,
+  "acceptedRuntimeGLBs": 4,
+  "ksaFiles": 14,
+  "ksaWrites": 0,
+  "unrelatedLegalFiles": 30,
+  "externalPreservation": "123 Blender files + 5 current terrain/source files match external-preservation.json",
+  "historicalRemovedFilesStillAbsent": 207,
+  "oldSrvOutputAbsent": true,
+  "newOutput": "excluded; manual cleanup pending per disposable.json",
+  "ignoredPolicy": ".gitignore:3:build/\tbuild/srv01-bank-preparation\n.gitignore:10:/.novacore/cache/\t.novacore/cache",
+  "independentRedTeam": "PASS - source authority and final packet/manifest review; no material issue; save/restore disclosure added",
+  "includedContentHashes": [
+    {
+      "path": "README.md",
+      "sha256": "5DBD8B8534D52E57693B2C2A2AAA26C5735991ACD1DFBF90C3B192A1CE9C1B6A"
+    },
+    {
+      "path": "assets/visual/SRV01/NC_SRV_Capsule_A.glb",
+      "sha256": "6B045A63186ED63FA1C6D48EF7E7AB89299F83B4F533897B8679B22068CEFF6A"
+    },
+    {
+      "path": "assets/visual/SRV01/NC_SRV_Main_A.glb",
+      "sha256": "3B02F9E3788A2BA85EA8C0238E2F61F8C916D7757E2C535B8348CB8E6C1AD46F"
+    },
+    {
+      "path": "assets/visual/SRV01/NC_SRV_Rcs_A.glb",
+      "sha256": "6118CB37BD8B7678D0EACC032391B1143143E2360E351CDCBD67508A3124CA5B"
+    },
+    {
+      "path": "assets/visual/SRV01/NC_SRV_Tank_A.glb",
+      "sha256": "22CD027892F20596238D7A7580A4E73032071F6303A73CB211915BAB4C4DE378"
+    },
+    {
+      "path": "assets/visual/SRV01/manifest.json",
+      "sha256": "F6067E7CF5AEF41F7819E22BE9762C15832C23397F76C766C897A554DB37EEB6"
+    },
+    {
+      "path": "docs/CODEX_HANDOFF.md",
+      "sha256": "22935387003973023D1C171762658D4570A817F1FDE2BC4CD2E1FA7CF30A145A"
+    },
+    {
+      "path": "docs/NOVACORE_CURRENT_STATE.md",
+      "sha256": "7DCE28FC2603240263D8EE97FEB85B7CB45E7EB9C9D3791C6D59239C47261EEB"
+    },
+    {
+      "path": "docs/architecture.md",
+      "sha256": "976EC435A61E061BDE22B781A4562DBF9C7B40B22240B6D144269A1119C2AA95"
+    },
+    {
+      "path": "docs/engineering-evidence/README.md",
+      "sha256": "4A2CEFEF7F27DF4FA3C97CCF19AB21C4619B60E18B0172CBAB849506FBD55EF9"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/README.md",
+      "sha256": "BD6F6192BC28115A704A9401A8024CB580693DE5627F92AE3569CFC2EB482ED3"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/bank-preparation/README.md",
+      "sha256": "5D83ABE6ABE0F04434068BB2F2E1EF9D0063776FC01C3ECCFBD31D45CEA537AB"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/bank-preparation/bank-actions.ps1.txt",
+      "sha256": "3BF96BF5BBC6E7C9C2333E95DAAB335091E204C3F521E5F671A283593E42832E"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/bank-preparation/bank-manifest.json",
+      "sha256": "FE181FEDA589B958CFC1A64955AF0B7700D115041DE41B9CCF7DF1B19BEC0946"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/bank-preparation/bank-manifest.txt",
+      "sha256": "95D3001290F5838FE4E05D20F8E671258D5C412343138FD194A42DD9D43B2EFE"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/bank-preparation/disposable.json",
+      "sha256": "F239DF9B9EEC3E39A4B727BEAAC71B5E3D2CF5F16592A37D141B9E92B32AA7BB"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/bank-preparation/external-preservation.json",
+      "sha256": "DA939B48D08E6DE78109244C1AE297FE48D30172DA7DC5CBB44DB68375A16057"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/bank-preparation/manifest.md",
+      "sha256": "3C72E73998056BEA8E8FC9A459A3F784657272FF0490CC1C5949CF6AD2F1427D"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/bank-preparation/preflight.json",
+      "sha256": "FFEF747A69DBEE711D9544DC7D33FEF95C3D07EF48E6F275AEFC0460A0856ACE"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/bank-preparation/validate.ps1",
+      "sha256": "C33E198EED28D69852C07928D72AA4DB49CB704E7F158943D1ACDFA080A352D2"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/bank-preparation/validation.json",
+      "sha256": "BF986C2634FA8C9CB5C3DC65843956E9EA595C33236A48F470442DCBE63E4502"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/cleanup.md",
+      "sha256": "932E15DAD5E9C8C26A97A244C1603BA228B3B39BA7113F9D1066488E6758CD36"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/disposable-inventory.json",
+      "sha256": "4BB5CB03B068789BCB47855F7D3C6385EA408449A8856CF71A702CFDD486A758"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/exhaust-before-identities.json",
+      "sha256": "632628BC477D38C57DE8EE3639498FC2068D288AC196E36D4006A6890367FD91"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/exhaust-correction.md",
+      "sha256": "5EF6C6F189A2DBA91907E0FC2E5061809AF6AA7DCBC6C21B67589EF2C0DBFD89"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/exhaust-ksa-identities.json",
+      "sha256": "92DC7B6E0E8A5FBA07E16EE6BB04FB1AF3FCA08E114AD27F6D4B023BEACAD3C2"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/exhaust-method-identities.json",
+      "sha256": "B9CE0DAB74F14FE024CFD92EB9229CB964CE2DFD0C74EC167B66BE2F6132C496"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/exhaust-method.md",
+      "sha256": "A03D91F126196A4132A3BE9D3D96C531A52A52A16B0B7C448F419C8E2753E6EB"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/final-identities.json",
+      "sha256": "27BC6F97057706E034EB1F0F2AA172DD534B302D7E17CBA431FA2D719B8A4B20"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/gate0.md",
+      "sha256": "30C41262DEB6D407860F8B121B48558AE400A27C5AFC7D4D9F8229C3FCA3315C"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/imported-candidate.json",
+      "sha256": "2FF64A01C5661604587937963171CB9FCC265B055CA88C4189E3DB7D2F0135B3"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/inspect-current-ksa.ps1",
+      "sha256": "45857C82E2CE4898F9B3F8A8C4220CDEEB86EB2824216773DD37C7F731E36BD4"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/intake-visuals.ps1",
+      "sha256": "B9025CDD725C1BF26F0AF908A9F9AA612E61AC555CB7162CC374D2F9AFC8B110"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/launch.ps1",
+      "sha256": "B9608EF965BAFC2D3CFC6A44E352BFE1D557A4B052F361C7E7DBB433D0CEA355"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/manual-acceptance.md",
+      "sha256": "097475311E62C85C0ED0CAFB505FD0AD5F4D51A32552B2661F0D1AFCE6E2D739"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/method-results.json",
+      "sha256": "5153CC8A6A3B324432067703E888E01B62B8C45A36F3F971970FA16D6120FE3E"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/oracle-report.md",
+      "sha256": "748C485FB68105C836EAFFFF2C5B10A7B8691BD35B036997A9DB0F0BC4710446"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/preflight.json",
+      "sha256": "A34A60A428D877855C878A84FDDA7D45653B4E110E6044FC7E40FA8D2D1C076F"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/reproduce-oracle.py",
+      "sha256": "D49531B4A046877820A220D4122D93A4786436DD9D4298B3742609DD6D1FD9C6"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/reproduction.md",
+      "sha256": "86D41E51C1E73D917B17340E8F254BFD8A3080D8EA985CC562C77F63CA4703B3"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/results.json",
+      "sha256": "7B5F81FD5291A3A1050E77A616859B796537DE3999B7E6211A7C68CA4321C8E7"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/visual-intake.json",
+      "sha256": "239AB80DB3878BEC1326E7D5DDD6769C207BBFB6684232593012D872004C300F"
+    },
+    {
+      "path": "native/NovaCore.Native/CMakeLists.txt",
+      "sha256": "82A55D6144FC32015C167C5D9A6B817F3BDB18CBDA4A584C448B4F3CFC058040"
+    },
+    {
+      "path": "native/NovaCore.Native/ExhaustPresentationTests.cpp",
+      "sha256": "43F71492A10053106C2811A564F66DDD4813E5B88E07FE156314FD51BFB65AA0"
+    },
+    {
+      "path": "native/NovaCore.Native/NovaCoreNative.cpp",
+      "sha256": "4C468B0302603B59397A1D82C6E6E08577A2853F166FFEE7D2552107363C99B6"
+    },
+    {
+      "path": "native/NovaCore.Native/NovaCoreNative.h",
+      "sha256": "5D917747DEC4B83F95D71CDB7296680366CCD9BEA1E33BA49E7EFB473A08709C"
+    },
+    {
+      "path": "native/NovaCore.Native/PreparedSubmissionStorage.h",
+      "sha256": "4ACFFF770E0EE4AD7CF6FAA2C847785FF8A4F45940714489D0BBFE1939EAFD56"
+    },
+    {
+      "path": "native/NovaCore.Native/PreparedSubmissionStorageTests.cpp",
+      "sha256": "B3C6D5EB367E3244F5F33C96EEED5F239D3A3F044A5231082D38FBB0E34A0B68"
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/exhaust.frag",
+      "sha256": "4544F0E9FF9E305E9BA5D42FE7594026A9F84978FF408267517F6A3494D52909"
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/exhaust.vert",
+      "sha256": "8024281F12FD249D2E01F3C95FBAF726F05519990BAA54CE568FD0F0521DF40F"
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/exhaust_resolve.frag",
+      "sha256": "1822A003F72AC07CB33E86A0159BEED682A5E9D1499E94DB67AE42A84BAECED1"
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/triangle.frag",
+      "sha256": "8E4D36A9CE99887404FFF3F647506613F5756A3992FBBA31DADBA32D62CDA7AF"
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/triangle.vert",
+      "sha256": "493CBEEA82EDE6A832952ACE15279FDE06AE0519EB7701B5D9F76C9C15FD6EAA"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/NovaCore.Triangle.csproj",
+      "sha256": "C951EEAB9F6C6C568FB2D564AB03B7E799A8322A0AD89F6B3688B0E26AD65ED1"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/Program.cs",
+      "sha256": "C75C86806AF101A19C15F5C353FFFF9E9040F6288BB7B55BF48098EBDA3A73F1"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/SampleOptions.cs",
+      "sha256": "5C80C2BC7D57BEF986BAAACF09F9D9DAB954F7E61702E538D7F2AC7E5397E9B2"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/StockAssemblyDevelopmentScene.cs",
+      "sha256": "F9FFEBF66BA032C611937078B819188E1F87CCF03E90F785566BE3703D41FDEC"
+    },
+    {
+      "path": "src/NovaCore.Graphics/ReusablePartVisuals.cs",
+      "sha256": "2DBCD5FDD5829A964E04829831E9C7654454098095ECD38E40FF54EC4752A929"
+    },
+    {
+      "path": "src/NovaCore.Interop/NativeRuntime.cs",
+      "sha256": "C19081E8B7E056C0A6A19575E5B687DB7EAE4240A9DBD004AADDBF921A20245B"
+    },
+    {
+      "path": "src/NovaCore.Simulation/NovaCore.Simulation.csproj",
+      "sha256": "D6F56C7F77CE99E87014AD00CFBEC90E14B9C13D7A470A13AF13F191E1FFD62A"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyApplicationSession.cs",
+      "sha256": "19817756EAA34F03A85A1435C931346FB28339DEFB2FE8BD12906D648F19E8AB"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDesign.cs",
+      "sha256": "6E314E6D9EDA1B4DCD0238A9645D56FD8A1C67BE162E34DF08E1771FA856B79B"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDynamics.cs",
+      "sha256": "9266404C38F8BFEE639CD6422CB5F84E0796C093C99E05CA0B4562C56DAB1B27"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFlight.cs",
+      "sha256": "167DA48B5DB2862AFB128B494C6F3B380F7EAB26099BFA36B2471AAE4B909FCA"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyProfileAdmission.cs",
+      "sha256": "071C2EB691EB950C699A1501E67E3AD94E6D9F78A76491FEC328DFA32BA08319"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyResources.cs",
+      "sha256": "881908D8654C874ED7A7C2DBC8A04B586F0FCCAEED1EBBF7559BF244D21B2E20"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/Data/SRV01-FourHorn.json",
+      "sha256": "AC23C15AE52ADC5E8E836BD954D9084B10A2699CC01F0A6906A992724EA67FCF"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/Data/SRV01-G0-B.json",
+      "sha256": "A06153AD518BC7FC7FD365E17CD1F3ED84C09052674401A84049F9AD61212340"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/ReferenceFrames/SpacecraftReferenceFrameEvaluator.cs",
+      "sha256": "2551EA1CE3B7CC3004C4649FCE0D6FA56591935E0A18EDF5E52C1B8EBDC13DAA"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.Assemblies.cs",
+      "sha256": "CA95752706E7785E77A02A896F5331C73490DDCD6D69AD87A18CD6A3005708C5"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.cs",
+      "sha256": "6FBD449E88EE529747DCA8E4AED5134E5C0000029D4CDBEC9DED51E1DAD68798"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftStateView.cs",
+      "sha256": "47B5959A95533D06D6AA7DD8343C0020B2CEB15137A39FDC5A9B66EC9A64F070"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftMotionEvaluator.cs",
+      "sha256": "2D75A905E514E4E140B74B662A61A29CAB0278CE72A08C51CD44EF6DD10F032D"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftTranslationState.cs",
+      "sha256": "98E478EBBB79EFB2D28AFE85ED4DD32DE744009079118BB199F462758185C02E"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationState.cs",
+      "sha256": "36AD86812A1055EFD0A90037A0063E2DB9FE4CE1D1FFF313518A612D919E32EF"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Assemblies.cs",
+      "sha256": "961BF9C5905903E1E805C9A950969A9678951DDBCD9E91A7C406B1314DF98829"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblySave.cs",
+      "sha256": "81C967C2555066111BA466093466CF3D3A0A82575CCA522D161BED80F0B9FDDB"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/GraphicsTestHarness.cs",
+      "sha256": "0486023BF8BC39EEDA718A90C666A4CA4D9F596D80F04B0A6EF8B59533D81506"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/NovaCore.Graphics.Tests.csproj",
+      "sha256": "CDF836762ABC1580FE7518CD4D1E78057A1C8CC120FD085F12CDA5AC1E8C861B"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/Program.cs",
+      "sha256": "E186E745ED14539782A8A321E1CA52D38C8B9193CBE3735ED1BFCB8507C3B96E"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/StockAssemblyPresentationTests.cs",
+      "sha256": "F566C5191F9414A843DF231990248160548BF3A2368B72997C1F0DC20EA0412F"
+    },
+    {
+      "path": "tests/NovaCore.Launcher.Tests/Program.cs",
+      "sha256": "042247F66E9C21AD4840D156F10EB15B73A2D7B6008B24B45DE9BB11300A21F9"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyProductionMeasurements.cs",
+      "sha256": "6B9C1711ED3105A7BCA5D34948D2BDC6176F7D9BC7F2A7BAF97152C418EF8166"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyProductionTests.cs",
+      "sha256": "2EA432E4EDE5B904AA4BD99D0024767AF23C9AE691E68ECCC09D98914B3D96A3"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Data/Assembly-FourHorn-Reference-Endpoints.json",
+      "sha256": "3A173370E2A011FA8EBB6014ED22804FBAF7183B6E6E0524941039904E288C96"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Data/Assembly-Reference-Endpoints.json",
+      "sha256": "2FC90B50E227462E87C35148D8C3FC862091F521F4B45EA54D0F07BA60160431"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/NovaCore.Simulation.Tests.csproj",
+      "sha256": "729BDA87D60478834E7549D4BBECA8DFC93E7B56043DFEDF0C414E0CC5B63810"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "sha256": "3530E26C2944113EE64DF29EE80894BBAC173070BDBF0536851F495D2D267568"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Srv01IntegrationTests.cs",
+      "sha256": "F288F3B3003A8D5667EA08CCEF709669BD2A5E0890C036024844B83338A255D6"
+    },
+    {
+      "path": "tools/NovaCore.Launcher/LaunchCommandBuilder.cs",
+      "sha256": "A3012D78B62B6666E942ADB3748FAAD08F2544AD8087E4BDAB10A680D540E939"
+    },
+    {
+      "path": "tools/NovaCore.Launcher/LaunchConfiguration.cs",
+      "sha256": "EBC638EEDA37E03A08D472C0915305757E82AB812742B856708979664B71DECB"
+    },
+    {
+      "path": "tools/NovaCore.Launcher/ScenarioCatalog.cs",
+      "sha256": "20B32DDF3E2B0381DCC83EA7B81F9C7DE65786D0B5266E5CF89FC3394B5CA7AD"
+    }
+  ],
+  "selfHashPolicy": "audit.json not self-hashed; complete membership is in bank-manifest.json",
+  "statusBeforeFinalAuditWrite": [
+    "M README.md",
+    " M docs/CODEX_HANDOFF.md",
+    " M docs/NOVACORE_CURRENT_STATE.md",
+    " M docs/architecture.md",
+    " M docs/engineering-evidence/README.md",
+    " M native/NovaCore.Native/CMakeLists.txt",
+    " M native/NovaCore.Native/NovaCoreNative.cpp",
+    " M native/NovaCore.Native/NovaCoreNative.h",
+    " M native/NovaCore.Native/shaders/triangle.frag",
+    " M native/NovaCore.Native/shaders/triangle.vert",
+    " M samples/NovaCore.Triangle/NovaCore.Triangle.csproj",
+    " M samples/NovaCore.Triangle/Program.cs",
+    " M samples/NovaCore.Triangle/SampleOptions.cs",
+    " M src/NovaCore.Interop/NativeRuntime.cs",
+    " M src/NovaCore.Simulation/NovaCore.Simulation.csproj",
+    " M src/NovaCore.Simulation/Spacecraft/ReferenceFrames/SpacecraftReferenceFrameEvaluator.cs",
+    " M src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.cs",
+    " M src/NovaCore.Simulation/Spacecraft/SpacecraftStateView.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftMotionEvaluator.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftTranslationState.cs",
+    " M src/NovaCore.Simulation/Transactions/SimulationState.cs",
+    " M tests/NovaCore.Graphics.Tests/GraphicsTestHarness.cs",
+    " M tests/NovaCore.Graphics.Tests/NovaCore.Graphics.Tests.csproj",
+    " M tests/NovaCore.Graphics.Tests/Program.cs",
+    " M tests/NovaCore.Launcher.Tests/Program.cs",
+    " M tests/NovaCore.Simulation.Tests/NovaCore.Simulation.Tests.csproj",
+    " M tests/NovaCore.Simulation.Tests/Program.cs",
+    " M tools/NovaCore.Launcher/LaunchCommandBuilder.cs",
+    " M tools/NovaCore.Launcher/LaunchConfiguration.cs",
+    " M tools/NovaCore.Launcher/ScenarioCatalog.cs",
+    "?? assets/visual/SRV01/NC_SRV_Capsule_A.glb",
+    "?? assets/visual/SRV01/NC_SRV_Main_A.glb",
+    "?? assets/visual/SRV01/NC_SRV_Rcs_A.glb",
+    "?? assets/visual/SRV01/NC_SRV_Tank_A.glb",
+    "?? assets/visual/SRV01/manifest.json",
+    "?? docs/engineering-evidence/srv01-production-integration/README.md",
+    "?? docs/engineering-evidence/srv01-production-integration/bank-preparation/README.md",
+    "?? docs/engineering-evidence/srv01-production-integration/bank-preparation/bank-actions.ps1.txt",
+    "?? docs/engineering-evidence/srv01-production-integration/bank-preparation/bank-manifest.json",
+    "?? docs/engineering-evidence/srv01-production-integration/bank-preparation/bank-manifest.txt",
+    "?? docs/engineering-evidence/srv01-production-integration/bank-preparation/disposable.json",
+    "?? docs/engineering-evidence/srv01-production-integration/bank-preparation/external-preservation.json",
+    "?? docs/engineering-evidence/srv01-production-integration/bank-preparation/manifest.md",
+    "?? docs/engineering-evidence/srv01-production-integration/bank-preparation/preflight.json",
+    "?? docs/engineering-evidence/srv01-production-integration/bank-preparation/validate.ps1",
+    "?? docs/engineering-evidence/srv01-production-integration/bank-preparation/validation.json",
+    "?? docs/engineering-evidence/srv01-production-integration/cleanup.md",
+    "?? docs/engineering-evidence/srv01-production-integration/closeout.json",
+    "?? docs/engineering-evidence/srv01-production-integration/disposable-inventory.json",
+    "?? docs/engineering-evidence/srv01-production-integration/exhaust-before-identities.json",
+    "?? docs/engineering-evidence/srv01-production-integration/exhaust-correction.md",
+    "?? docs/engineering-evidence/srv01-production-integration/exhaust-ksa-identities.json",
+    "?? docs/engineering-evidence/srv01-production-integration/exhaust-ksa.md",
+    "?? docs/engineering-evidence/srv01-production-integration/exhaust-method-identities.json",
+    "?? docs/engineering-evidence/srv01-production-integration/exhaust-method.md",
+    "?? docs/engineering-evidence/srv01-production-integration/final-identities.json",
+    "?? docs/engineering-evidence/srv01-production-integration/gate0.md",
+    "?? docs/engineering-evidence/srv01-production-integration/imported-candidate.json",
+    "?? docs/engineering-evidence/srv01-production-integration/inspect-current-ksa.ps1",
+    "?? docs/engineering-evidence/srv01-production-integration/intake-visuals.ps1",
+    "?? docs/engineering-evidence/srv01-production-integration/launch.ps1",
+    "?? docs/engineering-evidence/srv01-production-integration/manual-acceptance.md",
+    "?? docs/engineering-evidence/srv01-production-integration/method-results.json",
+    "?? docs/engineering-evidence/srv01-production-integration/oracle-report.md",
+    "?? docs/engineering-evidence/srv01-production-integration/preflight.json",
+    "?? docs/engineering-evidence/srv01-production-integration/reproduce-oracle.py",
+    "?? docs/engineering-evidence/srv01-production-integration/reproduction.md",
+    "?? docs/engineering-evidence/srv01-production-integration/results.json",
+    "?? docs/engineering-evidence/srv01-production-integration/visual-intake.json",
+    "?? docs/legal/CREATOR-CONTENT-POLICY-DRAFT.md",
+    "?? docs/legal/LEGAL-REVIEW-TODO.md",
+    "?? docs/legal/MODDING-POLICY-DRAFT.md",
+    "?? docs/legal/ROOT-LICENSE-CANDIDATE.md",
+    "?? docs/legal/finalization/COMMERCIAL-LICENSING-PROPOSED.md",
+    "?? docs/legal/finalization/CREATOR-CONTENT-POLICY-PROPOSED.md",
+    "?? docs/legal/finalization/IDENTITY.json",
+    "?? docs/legal/finalization/INSTALLATION-PLAN.md",
+    "?? docs/legal/finalization/LEGAL-REVIEW-BRIEF.md",
+    "?? docs/legal/finalization/LICENSING-PROPOSED.md",
+    "?? docs/legal/finalization/MODDING-POLICY-PROPOSED.md",
+    "?? docs/legal/finalization/NOTICE-PROPOSED.md",
+    "?? docs/legal/finalization/PROJECT-CONTROL-DECISIONS.md",
+    "?? docs/legal/finalization/REPORT.md",
+    "?? docs/legal/finalization/RIGHTS-MATRIX.md",
+    "?? docs/legal/finalization/ROOT-LICENSE-PROPOSED.md",
+    "?? docs/legal/finalization/THIRD-PARTY-SCOPE.md",
+    "?? docs/legal/finalization/m15.1-release/COMMERCIAL-LICENSING-preinstallation.md",
+    "?? docs/legal/finalization/m15.1-release/FINAL-REPORT.md",
+    "?? docs/legal/finalization/m15.1-release/commit.json",
+    "?? docs/legal/finalization/m15.1-release/final-bank-paths.json",
+    "?? docs/legal/finalization/m15.1-release/preflight.json",
+    "?? docs/legal/finalization/m15.1-release/prospective.json",
+    "?? docs/legal/finalization/m15.1-release/release-gates.md",
+    "?? docs/legal/finalization/m15.1-release/remote-tags-before.txt",
+    "?? docs/legal/finalization/m15.1-release/remote-verification-stop.json",
+    "?? docs/legal/finalization/m15.1-release/remote-verification.json",
+    "?? docs/legal/finalization/m15.1-release/rights-matrix.md",
+    "?? docs/legal/finalization/m15.1-release/staged.json",
+    "?? docs/legal/finalization/m15.1-release/withheld-paths.json",
+    "?? native/NovaCore.Native/ExhaustPresentationTests.cpp",
+    "?? native/NovaCore.Native/PreparedSubmissionStorage.h",
+    "?? native/NovaCore.Native/PreparedSubmissionStorageTests.cpp",
+    "?? native/NovaCore.Native/shaders/exhaust.frag",
+    "?? native/NovaCore.Native/shaders/exhaust.vert",
+    "?? native/NovaCore.Native/shaders/exhaust_resolve.frag",
+    "?? samples/NovaCore.Triangle/StockAssemblyDevelopmentScene.cs",
+    "?? src/NovaCore.Graphics/ReusablePartVisuals.cs",
+    "?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyApplicationSession.cs",
+    "?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDesign.cs",
+    "?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDynamics.cs",
+    "?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFlight.cs",
+    "?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyProfileAdmission.cs",
+    "?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyResources.cs",
+    "?? src/NovaCore.Simulation/Spacecraft/Assemblies/Data/SRV01-FourHorn.json",
+    "?? src/NovaCore.Simulation/Spacecraft/Assemblies/Data/SRV01-G0-B.json",
+    "?? src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.Assemblies.cs",
+    "?? src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Assemblies.cs",
+    "?? src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblySave.cs",
+    "?? tests/NovaCore.Graphics.Tests/StockAssemblyPresentationTests.cs",
+    "?? tests/NovaCore.Simulation.Tests/AssemblyProductionMeasurements.cs",
+    "?? tests/NovaCore.Simulation.Tests/AssemblyProductionTests.cs",
+    "?? tests/NovaCore.Simulation.Tests/Data/Assembly-FourHorn-Reference-Endpoints.json",
+    "?? tests/NovaCore.Simulation.Tests/Data/Assembly-Reference-Endpoints.json",
+    "?? tests/NovaCore.Simulation.Tests/Srv01IntegrationTests.cs"
+  ]
+}

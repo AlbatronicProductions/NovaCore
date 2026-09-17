@@ -1,5 +1,33 @@
 # Architecture
 
+## Accepted SRV-01 integration — awaiting bank authorization
+
+Immutable reusable part definitions → persistent named part instances →
+deterministic structural assembly and explicit typed feed graph → exact fuel and
+oxidizer state → current assembly mass/COM/inertia → canonical main/gimbal and
+sixteen-jet command realization → finite-resource segmented free-flight successor
+→ atomic canonical publication → copied application observation → display-frame
+presentation. Structural attachment does not imply resource connectivity.
+
+The stock vehicle has seven instances from four reusable definitions. Four RCS
+instances share the same four-horn definition; physical `(part, actuator)` tuples
+bind every promised visual horn. Four hash-pinned published GLBs supply visuals,
+not mass or force authority; editable Blender source remains outside runtime.
+
+Prepared native submission capacity follows the complete possible instance set,
+not the first READY active count, and survives resize. The specialized plume pass
+adapts current KSA's nozzle-local density/emission/extinction method with original
+NovaCore assets/code. Copied realized state, gimbal and simulation time drive each
+nozzle. Terminal hold removes active exhaust. Rendering runs once per display
+frame after bounded servicing, not per physics interval. Weighted overlap remains
+approximate; the admitted vacuum profile does not claim gas/atmosphere parity.
+
+This separate free-flight stock scenario does not widen M15.1 retained contact,
+add departure or create an arbitrary construction/vehicle framework. Synchronous
+save/restore is explicit cold work and may hitch. See the
+[accepted result](engineering-evidence/srv01-production-integration/README.md)
+and [bank-preparation packet](engineering-evidence/srv01-production-integration/bank-preparation/README.md).
+
 ## Banked M15.1 — Finite-Fuel Retained Powered Contact
 
 Canonical command authority → prepared engine demand → exact finite-resource

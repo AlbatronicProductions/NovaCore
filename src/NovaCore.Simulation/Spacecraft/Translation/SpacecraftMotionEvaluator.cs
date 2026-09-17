@@ -3,6 +3,7 @@ using NovaCore.Simulation.Spacecraft.Rotation;
 using NovaCore.Simulation.Time;
 using NovaCore.Simulation.Timeline;
 using NovaCore.Simulation.Transactions;
+using NovaCore.Simulation.Spacecraft.Assemblies;
 
 namespace NovaCore.Simulation.Spacecraft.Translation;
 
@@ -14,11 +15,22 @@ internal readonly record struct SpacecraftMotion(
 
 internal static class SpacecraftMotionEvaluator
 {
+    /// <summary>Explicit fixed material-origin observation, never a COM propagation segment.</summary>
+    internal static SpacecraftTranslationStatus TryEvaluateAssembly(SimulationStateView state,SpacecraftId subject,
+        SimulationInstant time,out AssemblyPublishedMotion motion)
+    {
+        motion=default;
+        if(!state.Spacecraft.TryGetAssembly(subject,out var launch,out var value))return SpacecraftTranslationStatus.SubjectNotFound;
+        if(time!=value.Epoch)return SpacecraftTranslationStatus.OutsideQualifiedEndpoint;
+        motion=new(subject,launch!.Spacecraft.CarrierFrame,time,state.Revision,value.Motion,value.Mass);
+        return SpacecraftTranslationStatus.Success;
+    }
     /// <summary>Call within the simulation single-writer phase using a fresh state view. Output is complete or default.</summary>
     internal static SpacecraftTranslationStatus TryEvaluate(SimulationStateView state, SpacecraftId subject,
         SimulationInstant time, out SpacecraftMotion motion)
     {
         motion = default;
+        if(state.Spacecraft.TryGetAssembly(subject,out _,out _))return SpacecraftTranslationStatus.AssemblyMotionRequiresTypedView;
         if (state.Spacecraft.TryGetAppliedEndpoint(subject, out var endpoint))
         {
             if (time != endpoint.Epoch) return SpacecraftTranslationStatus.OutsideQualifiedEndpoint;
@@ -37,4 +49,13 @@ internal static class SpacecraftMotionEvaluator
             angular.OrientationLocalToParent, angular.AngularVelocityBody, properties, rotation.PrincipalInertia);
         return SpacecraftTranslationStatus.Success;
     }
+}
+
+internal readonly record struct AssemblyPublishedMotion(SpacecraftId Spacecraft,ReferenceFrameId RootFrame,
+    SimulationInstant Time,StateRevision Revision,AssemblyMotion MaterialOriginMotion,AssemblyMass CurrentMass)
+{
+    internal Double3 CenterOfMassPositionRoot=>MaterialOriginMotion.PositionO+MaterialOriginMotion.BodyToWorld.Rotate(CurrentMass.Com);
+    // Rigid material velocity here is not the derivative of the migrating COM coordinate.
+    internal Double3 MaterialVelocityAtCurrentComRoot=>MaterialOriginMotion.VelocityO+
+        MaterialOriginMotion.BodyToWorld.Rotate(Double3.Cross(MaterialOriginMotion.AngularVelocityBody,CurrentMass.Com));
 }

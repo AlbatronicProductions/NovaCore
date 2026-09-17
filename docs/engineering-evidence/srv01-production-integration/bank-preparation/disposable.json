@@ -1,0 +1,8 @@
+{
+  "path": "E:\\NovaCore\\build\\srv01-bank-preparation",
+  "files": 1743,
+  "bytes": 369674038.0,
+  "disposition": "RETAINED - automatic approval review blocked deletion before execution; manual cleanup command provided; excluded from bank",
+  "command": "Remove-Item -LiteralPath 'E:\\NovaCore\\build\\srv01-bank-preparation' -Recurse -Force -ErrorAction Stop",
+  "verification": "Test-Path -LiteralPath 'E:\\NovaCore\\build\\srv01-bank-preparation'"
+}

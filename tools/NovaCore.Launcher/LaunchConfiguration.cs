@@ -12,7 +12,8 @@ public enum NovaCoreScenarioPreset
     NewEarthRenderer,
     ContactCentered,
     ContactTilted,
-    PoweredFreeFlight
+    PoweredFreeFlight,
+    StockAssembly
 }
 
 public enum NovaCoreScene
@@ -24,7 +25,8 @@ public enum NovaCoreScene
     ProductionSphericalBillboard,
     ContactCentered,
     ContactTilted,
-    PoweredFreeFlight
+    PoweredFreeFlight,
+    StockAssembly
 }
 
 public enum NovaCoreStartingBody

@@ -1,0 +1,578 @@
+{
+  "baseline": "09463ec6c323daf233205cb08306d38611c22e6e",
+  "branch": "codex/srv01-production-integration",
+  "proposedMilestone": "M15.2",
+  "title": "SRV-01 Reusable Production Spacecraft Integration",
+  "stagingPerformed": false,
+  "total": 93,
+  "counts": {
+    "PRODUCTION RUNTIME": 36,
+    "PRODUCTION ASSET": 5,
+    "PERMANENT TEST": 14,
+    "DOCUMENTATION": 5,
+    "RETAINED ENGINEERING EVIDENCE": 33
+  },
+  "included": [
+    {
+      "path": "README.md",
+      "category": "DOCUMENTATION"
+    },
+    {
+      "path": "assets/visual/SRV01/NC_SRV_Capsule_A.glb",
+      "category": "PRODUCTION ASSET"
+    },
+    {
+      "path": "assets/visual/SRV01/NC_SRV_Main_A.glb",
+      "category": "PRODUCTION ASSET"
+    },
+    {
+      "path": "assets/visual/SRV01/NC_SRV_Rcs_A.glb",
+      "category": "PRODUCTION ASSET"
+    },
+    {
+      "path": "assets/visual/SRV01/NC_SRV_Tank_A.glb",
+      "category": "PRODUCTION ASSET"
+    },
+    {
+      "path": "assets/visual/SRV01/manifest.json",
+      "category": "PRODUCTION ASSET"
+    },
+    {
+      "path": "docs/CODEX_HANDOFF.md",
+      "category": "DOCUMENTATION"
+    },
+    {
+      "path": "docs/NOVACORE_CURRENT_STATE.md",
+      "category": "DOCUMENTATION"
+    },
+    {
+      "path": "docs/architecture.md",
+      "category": "DOCUMENTATION"
+    },
+    {
+      "path": "docs/engineering-evidence/README.md",
+      "category": "DOCUMENTATION"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/README.md",
+      "category": "RETAINED ENGINEERING EVIDENCE"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/bank-preparation/README.md",
+      "category": "RETAINED ENGINEERING EVIDENCE"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/bank-preparation/audit.json",
+      "category": "RETAINED ENGINEERING EVIDENCE"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/bank-preparation/bank-actions.ps1.txt",
+      "category": "RETAINED ENGINEERING EVIDENCE"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/bank-preparation/bank-manifest.json",
+      "category": "RETAINED ENGINEERING EVIDENCE"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/bank-preparation/bank-manifest.txt",
+      "category": "RETAINED ENGINEERING EVIDENCE"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/bank-preparation/disposable.json",
+      "category": "RETAINED ENGINEERING EVIDENCE"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/bank-preparation/external-preservation.json",
+      "category": "RETAINED ENGINEERING EVIDENCE"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/bank-preparation/manifest.md",
+      "category": "RETAINED ENGINEERING EVIDENCE"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/bank-preparation/preflight.json",
+      "category": "RETAINED ENGINEERING EVIDENCE"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/bank-preparation/validate.ps1",
+      "category": "RETAINED ENGINEERING EVIDENCE"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/bank-preparation/validation.json",
+      "category": "RETAINED ENGINEERING EVIDENCE"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/cleanup.md",
+      "category": "RETAINED ENGINEERING EVIDENCE"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/disposable-inventory.json",
+      "category": "RETAINED ENGINEERING EVIDENCE"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/exhaust-before-identities.json",
+      "category": "RETAINED ENGINEERING EVIDENCE"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/exhaust-correction.md",
+      "category": "RETAINED ENGINEERING EVIDENCE"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/exhaust-ksa-identities.json",
+      "category": "RETAINED ENGINEERING EVIDENCE"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/exhaust-method-identities.json",
+      "category": "RETAINED ENGINEERING EVIDENCE"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/exhaust-method.md",
+      "category": "RETAINED ENGINEERING EVIDENCE"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/final-identities.json",
+      "category": "RETAINED ENGINEERING EVIDENCE"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/gate0.md",
+      "category": "RETAINED ENGINEERING EVIDENCE"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/imported-candidate.json",
+      "category": "RETAINED ENGINEERING EVIDENCE"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/inspect-current-ksa.ps1",
+      "category": "RETAINED ENGINEERING EVIDENCE"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/intake-visuals.ps1",
+      "category": "RETAINED ENGINEERING EVIDENCE"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/launch.ps1",
+      "category": "RETAINED ENGINEERING EVIDENCE"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/manual-acceptance.md",
+      "category": "RETAINED ENGINEERING EVIDENCE"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/method-results.json",
+      "category": "RETAINED ENGINEERING EVIDENCE"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/oracle-report.md",
+      "category": "RETAINED ENGINEERING EVIDENCE"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/preflight.json",
+      "category": "RETAINED ENGINEERING EVIDENCE"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/reproduce-oracle.py",
+      "category": "RETAINED ENGINEERING EVIDENCE"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/reproduction.md",
+      "category": "RETAINED ENGINEERING EVIDENCE"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/results.json",
+      "category": "RETAINED ENGINEERING EVIDENCE"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/visual-intake.json",
+      "category": "RETAINED ENGINEERING EVIDENCE"
+    },
+    {
+      "path": "native/NovaCore.Native/CMakeLists.txt",
+      "category": "PRODUCTION RUNTIME"
+    },
+    {
+      "path": "native/NovaCore.Native/ExhaustPresentationTests.cpp",
+      "category": "PERMANENT TEST"
+    },
+    {
+      "path": "native/NovaCore.Native/NovaCoreNative.cpp",
+      "category": "PRODUCTION RUNTIME"
+    },
+    {
+      "path": "native/NovaCore.Native/NovaCoreNative.h",
+      "category": "PRODUCTION RUNTIME"
+    },
+    {
+      "path": "native/NovaCore.Native/PreparedSubmissionStorage.h",
+      "category": "PRODUCTION RUNTIME"
+    },
+    {
+      "path": "native/NovaCore.Native/PreparedSubmissionStorageTests.cpp",
+      "category": "PERMANENT TEST"
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/exhaust.frag",
+      "category": "PRODUCTION RUNTIME"
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/exhaust.vert",
+      "category": "PRODUCTION RUNTIME"
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/exhaust_resolve.frag",
+      "category": "PRODUCTION RUNTIME"
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/triangle.frag",
+      "category": "PRODUCTION RUNTIME"
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/triangle.vert",
+      "category": "PRODUCTION RUNTIME"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/NovaCore.Triangle.csproj",
+      "category": "PRODUCTION RUNTIME"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/Program.cs",
+      "category": "PRODUCTION RUNTIME"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/SampleOptions.cs",
+      "category": "PRODUCTION RUNTIME"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/StockAssemblyDevelopmentScene.cs",
+      "category": "PRODUCTION RUNTIME"
+    },
+    {
+      "path": "src/NovaCore.Graphics/ReusablePartVisuals.cs",
+      "category": "PRODUCTION RUNTIME"
+    },
+    {
+      "path": "src/NovaCore.Interop/NativeRuntime.cs",
+      "category": "PRODUCTION RUNTIME"
+    },
+    {
+      "path": "src/NovaCore.Simulation/NovaCore.Simulation.csproj",
+      "category": "PRODUCTION RUNTIME"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyApplicationSession.cs",
+      "category": "PRODUCTION RUNTIME"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDesign.cs",
+      "category": "PRODUCTION RUNTIME"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDynamics.cs",
+      "category": "PRODUCTION RUNTIME"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFlight.cs",
+      "category": "PRODUCTION RUNTIME"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyProfileAdmission.cs",
+      "category": "PRODUCTION RUNTIME"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyResources.cs",
+      "category": "PRODUCTION RUNTIME"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/Data/SRV01-FourHorn.json",
+      "category": "PRODUCTION RUNTIME"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/Data/SRV01-G0-B.json",
+      "category": "PRODUCTION RUNTIME"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/ReferenceFrames/SpacecraftReferenceFrameEvaluator.cs",
+      "category": "PRODUCTION RUNTIME"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.Assemblies.cs",
+      "category": "PRODUCTION RUNTIME"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.cs",
+      "category": "PRODUCTION RUNTIME"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftStateView.cs",
+      "category": "PRODUCTION RUNTIME"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftMotionEvaluator.cs",
+      "category": "PRODUCTION RUNTIME"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftTranslationState.cs",
+      "category": "PRODUCTION RUNTIME"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationState.cs",
+      "category": "PRODUCTION RUNTIME"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Assemblies.cs",
+      "category": "PRODUCTION RUNTIME"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblySave.cs",
+      "category": "PRODUCTION RUNTIME"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/GraphicsTestHarness.cs",
+      "category": "PERMANENT TEST"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/NovaCore.Graphics.Tests.csproj",
+      "category": "PERMANENT TEST"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/Program.cs",
+      "category": "PERMANENT TEST"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/StockAssemblyPresentationTests.cs",
+      "category": "PERMANENT TEST"
+    },
+    {
+      "path": "tests/NovaCore.Launcher.Tests/Program.cs",
+      "category": "PERMANENT TEST"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyProductionMeasurements.cs",
+      "category": "PERMANENT TEST"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyProductionTests.cs",
+      "category": "PERMANENT TEST"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Data/Assembly-FourHorn-Reference-Endpoints.json",
+      "category": "PERMANENT TEST"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Data/Assembly-Reference-Endpoints.json",
+      "category": "PERMANENT TEST"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/NovaCore.Simulation.Tests.csproj",
+      "category": "PERMANENT TEST"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "category": "PERMANENT TEST"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Srv01IntegrationTests.cs",
+      "category": "PERMANENT TEST"
+    },
+    {
+      "path": "tools/NovaCore.Launcher/LaunchCommandBuilder.cs",
+      "category": "PRODUCTION RUNTIME"
+    },
+    {
+      "path": "tools/NovaCore.Launcher/LaunchConfiguration.cs",
+      "category": "PRODUCTION RUNTIME"
+    },
+    {
+      "path": "tools/NovaCore.Launcher/ScenarioCatalog.cs",
+      "category": "PRODUCTION RUNTIME"
+    }
+  ],
+  "excluded": [
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/closeout.json",
+      "category": "RETAINED ENGINEERING EVIDENCE",
+      "reason": "Superseded/duplicated local narrative or status; decisive current method, hashes and failure history retained elsewhere"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/exhaust-ksa.md",
+      "category": "RETAINED ENGINEERING EVIDENCE",
+      "reason": "Superseded/duplicated local narrative or status; decisive current method, hashes and failure history retained elsewhere"
+    },
+    {
+      "path": "docs/legal/CREATOR-CONTENT-POLICY-DRAFT.md",
+      "category": "UNRELATED",
+      "reason": "Preexisting legal review; not part of SRV-01"
+    },
+    {
+      "path": "docs/legal/LEGAL-REVIEW-TODO.md",
+      "category": "UNRELATED",
+      "reason": "Preexisting legal review; not part of SRV-01"
+    },
+    {
+      "path": "docs/legal/MODDING-POLICY-DRAFT.md",
+      "category": "UNRELATED",
+      "reason": "Preexisting legal review; not part of SRV-01"
+    },
+    {
+      "path": "docs/legal/ROOT-LICENSE-CANDIDATE.md",
+      "category": "UNRELATED",
+      "reason": "Preexisting legal review; not part of SRV-01"
+    },
+    {
+      "path": "docs/legal/finalization/COMMERCIAL-LICENSING-PROPOSED.md",
+      "category": "UNRELATED",
+      "reason": "Preexisting legal review; not part of SRV-01"
+    },
+    {
+      "path": "docs/legal/finalization/CREATOR-CONTENT-POLICY-PROPOSED.md",
+      "category": "UNRELATED",
+      "reason": "Preexisting legal review; not part of SRV-01"
+    },
+    {
+      "path": "docs/legal/finalization/IDENTITY.json",
+      "category": "UNRELATED",
+      "reason": "Preexisting legal review; not part of SRV-01"
+    },
+    {
+      "path": "docs/legal/finalization/INSTALLATION-PLAN.md",
+      "category": "UNRELATED",
+      "reason": "Preexisting legal review; not part of SRV-01"
+    },
+    {
+      "path": "docs/legal/finalization/LEGAL-REVIEW-BRIEF.md",
+      "category": "UNRELATED",
+      "reason": "Preexisting legal review; not part of SRV-01"
+    },
+    {
+      "path": "docs/legal/finalization/LICENSING-PROPOSED.md",
+      "category": "UNRELATED",
+      "reason": "Preexisting legal review; not part of SRV-01"
+    },
+    {
+      "path": "docs/legal/finalization/MODDING-POLICY-PROPOSED.md",
+      "category": "UNRELATED",
+      "reason": "Preexisting legal review; not part of SRV-01"
+    },
+    {
+      "path": "docs/legal/finalization/NOTICE-PROPOSED.md",
+      "category": "UNRELATED",
+      "reason": "Preexisting legal review; not part of SRV-01"
+    },
+    {
+      "path": "docs/legal/finalization/PROJECT-CONTROL-DECISIONS.md",
+      "category": "UNRELATED",
+      "reason": "Preexisting legal review; not part of SRV-01"
+    },
+    {
+      "path": "docs/legal/finalization/REPORT.md",
+      "category": "UNRELATED",
+      "reason": "Preexisting legal review; not part of SRV-01"
+    },
+    {
+      "path": "docs/legal/finalization/RIGHTS-MATRIX.md",
+      "category": "UNRELATED",
+      "reason": "Preexisting legal review; not part of SRV-01"
+    },
+    {
+      "path": "docs/legal/finalization/ROOT-LICENSE-PROPOSED.md",
+      "category": "UNRELATED",
+      "reason": "Preexisting legal review; not part of SRV-01"
+    },
+    {
+      "path": "docs/legal/finalization/THIRD-PARTY-SCOPE.md",
+      "category": "UNRELATED",
+      "reason": "Preexisting legal review; not part of SRV-01"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/COMMERCIAL-LICENSING-preinstallation.md",
+      "category": "UNRELATED",
+      "reason": "Preexisting legal review; not part of SRV-01"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/FINAL-REPORT.md",
+      "category": "UNRELATED",
+      "reason": "Preexisting legal review; not part of SRV-01"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/commit.json",
+      "category": "UNRELATED",
+      "reason": "Preexisting legal review; not part of SRV-01"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/final-bank-paths.json",
+      "category": "UNRELATED",
+      "reason": "Preexisting legal review; not part of SRV-01"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/preflight.json",
+      "category": "UNRELATED",
+      "reason": "Preexisting legal review; not part of SRV-01"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/prospective.json",
+      "category": "UNRELATED",
+      "reason": "Preexisting legal review; not part of SRV-01"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/release-gates.md",
+      "category": "UNRELATED",
+      "reason": "Preexisting legal review; not part of SRV-01"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/remote-tags-before.txt",
+      "category": "UNRELATED",
+      "reason": "Preexisting legal review; not part of SRV-01"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/remote-verification-stop.json",
+      "category": "UNRELATED",
+      "reason": "Preexisting legal review; not part of SRV-01"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/remote-verification.json",
+      "category": "UNRELATED",
+      "reason": "Preexisting legal review; not part of SRV-01"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/rights-matrix.md",
+      "category": "UNRELATED",
+      "reason": "Preexisting legal review; not part of SRV-01"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/staged.json",
+      "category": "UNRELATED",
+      "reason": "Preexisting legal review; not part of SRV-01"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/withheld-paths.json",
+      "category": "UNRELATED",
+      "reason": "Preexisting legal review; not part of SRV-01"
+    }
+  ],
+  "excludedCategories": [
+    {
+      "path": "build/**; **/bin/**; **/obj/**",
+      "category": "BUILD OUTPUT",
+      "reason": "All ignored rebuildable output; current owned root build/srv01-bank-preparation"
+    },
+    {
+      "path": ".codex/**; .novacore/cache/**",
+      "category": "UNRELATED",
+      "reason": "Ignored scratch/acquisition/cache; current terrain is preserved outside bank"
+    },
+    {
+      "path": "E:/NovaCore-Blender-Visual-StepB/**",
+      "category": "UNRELATED",
+      "reason": "Editable source, review and tooling remain in separate worktree; only four accepted GLBs plus manifest enter production"
+    },
+    {
+      "path": "E:/Kitten Space Agency/**",
+      "category": "UNRELATED",
+      "reason": "Read-only reference; no source/assets copied into bank"
+    },
+    {
+      "path": "E:/NovaCore-Archives/authorized-historical-cleanup-20260917/manifest.json targets",
+      "category": "EXPERIMENT",
+      "reason": "Authorized retired historical terrain/diagnostic payloads remain absent"
+    }
+  ]
+}

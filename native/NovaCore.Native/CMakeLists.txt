@@ -229,3 +229,20 @@ add_executable(NovaCoreStellarProjectionTests EXCLUDE_FROM_ALL StellarProjection
 add_dependencies(NovaCoreStellarProjectionTests NovaCoreShaders)
 target_compile_features(NovaCoreStellarProjectionTests PRIVATE cxx_std_20)
 target_link_libraries(NovaCoreStellarProjectionTests PRIVATE Vulkan::Vulkan)
+
+# Bounded reusable-nozzle presentation and native active-length/capacity contract.
+foreach(EXHAUST_SHADER exhaust.vert exhaust.frag exhaust_resolve.frag)
+  add_custom_command(OUTPUT "${SPIRV_DIR}/${EXHAUST_SHADER}.spv"
+    COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/${EXHAUST_SHADER}" -o "${SPIRV_DIR}/${EXHAUST_SHADER}.spv"
+    DEPENDS "${SHADER_DIR}/${EXHAUST_SHADER}")
+endforeach()
+add_custom_target(NovaCoreExhaustShaders DEPENDS "${SPIRV_DIR}/exhaust.vert.spv" "${SPIRV_DIR}/exhaust.frag.spv" "${SPIRV_DIR}/exhaust_resolve.frag.spv")
+add_dependencies(NovaCore.Native NovaCoreExhaustShaders)
+add_executable(NovaCorePreparedSubmissionTests EXCLUDE_FROM_ALL PreparedSubmissionStorageTests.cpp)
+target_compile_features(NovaCorePreparedSubmissionTests PRIVATE cxx_std_20)
+
+# Production exhaust SPIR-V, blend/resolve and depth/lifetime correctness.
+add_executable(NovaCoreExhaustPresentationTests EXCLUDE_FROM_ALL ExhaustPresentationTests.cpp)
+add_dependencies(NovaCoreExhaustPresentationTests NovaCoreExhaustShaders NovaCoreShaders)
+target_compile_features(NovaCoreExhaustPresentationTests PRIVATE cxx_std_20)
+target_link_libraries(NovaCoreExhaustPresentationTests PRIVATE Vulkan::Vulkan)
