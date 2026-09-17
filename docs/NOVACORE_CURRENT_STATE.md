@@ -11,12 +11,14 @@ renderer. Simulation owns celestial identity, exact time, physical state, and
 reference-frame transforms. Graphics consumes immutable root-resolved snapshots
 and performs FP64 camera-relative subtraction before GPU transport.
 
-## Current bank — M15.1
+## Current bank — M15.2
 
-**Accepted candidate, bank preparation only (2026-09-17): SRV-01 Reusable Production
-Spacecraft Integration.** M15.2 is the proposed next sequential milestone, not a
-banked checkpoint. Branch `codex/srv01-production-integration` remains based on
-`09463ec6c323daf233205cb08306d38611c22e6e`; no commit/tag/push is authorized.
+**M15.2 — SRV-01 Reusable Production Spacecraft Integration is BANKED** at
+`c3de150db8563864d23c4951b4630559453d8f56`, annotated tag
+`m15.2-srv01-reusable-production-spacecraft-integration`.
+The SRV-01 production-integration front is closed. No next major front is
+currently authorized until Project Control reviews current production.
+
 One capsule, tank/service body, gimbaled main engine and four reusable four-horn
 blocks form one explicit seven-part stock assembly with 16 physical RCS jets,
 two exact species stores, explicit feeds and current mass/COM/inertia. Runtime
@@ -33,10 +35,12 @@ plume transport claim. Synchronous explicit save/restore allocates and can hitch
 it is outside the warmed zero-allocation interval contract. Authorized historical
 terrain payload retirement removed exact replay of those old experiments only;
 their records/hashes remain and current global/Florida terrain is preserved.
-See [bank preparation](engineering-evidence/srv01-production-integration/bank-preparation/README.md)
+See the [historical bank-preparation record](engineering-evidence/srv01-production-integration/bank-preparation/README.md)
 and the [accepted qualification](engineering-evidence/srv01-production-integration/README.md).
 
-The latest banked production milestone is **M15.1 — Finite-Fuel Retained Powered
+## Banked M15.1 — Finite-Fuel Retained Powered Contact
+
+The preceding banked production milestone is **M15.1 — Finite-Fuel Retained Powered
 Contact**, tag `m15.1-finite-fuel-retained-powered-contact`. Its atomic bank includes
 the operative NovaCore Source-Available License 1.0 and companion policies,
 effective September 15, 2026. The bank's parent is
