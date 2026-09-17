@@ -29,14 +29,8 @@ the full player experience is still being assembled.
 
 ## Working today
 
-**Current banked milestone:** M15.1 — Finite-Fuel Retained Powered Contact.
-Ordinary retained BEPU contact now joins exact propellant consumption and
-exhaustion with atomic motion/resource/mass/actuator publication, followed by a
-dry/off actuator transition and same-body dry retained contact. It does not
-implement liftoff or departure.
-
-**Accepted, awaiting banking:** SRV-01 Reusable Production Spacecraft Integration.
-The development scenario assembles a capsule, tank/service body, gimbaled main
+**Current banked milestone:** [M15.2 — SRV-01 Reusable Production Spacecraft Integration](https://github.com/AlbatronicProductions/NovaCore/tree/m15.2-srv01-reusable-production-spacecraft-integration).
+The SRV-01 development scenario assembles a capsule, tank/service body, gimbaled main
 engine and four reusable four-horn RCS blocks. Its 16 physical jets share exact
 fuel/oxidizer authority; current mass, centre of mass and inertia drive motion.
 Accepted runtime assets and nozzle-attached main/RCS exhaust follow copied
@@ -147,6 +141,9 @@ not intended as the final player flow or a list of finished game modes.
 - **Powered flight:** Development - Powered Free Flight shows a fixed burn, fuel
   exhaustion and coast. Wait for READY, then press Space. Camera movement does not
   pilot the craft. This scene does not require Earth terrain packages.
+- **SRV-01 spacecraft:** SRV-01 — Reusable Spacecraft Parts demonstrates the
+  assembled vehicle, gimbaled main engine, RCS and nozzle-attached exhaust.
+  Wait for READY, then press Space to start the recorded sequence.
 - **Contact:** the centered and tilted contact scenes show bounded box-and-slab
   interaction; they do not implement spacecraft landing on Earth terrain.
 
@@ -154,6 +151,12 @@ For the powered-flight scene directly, after building Release:
 
 ```powershell
 dotnet run --project samples/NovaCore.Triangle -c Release -- --scene=powered-free-flight
+```
+
+For the banked SRV-01 spacecraft scenario:
+
+```powershell
+dotnet run --project samples/NovaCore.Triangle -c Release -- --scene=stock-assembly
 ```
 
 The banked powered-contact scenario has a separate direct route:
@@ -181,6 +184,7 @@ contracts, implementation limits and reproducible evidence live in the documenta
 | Planetary rendering and data | [Renderer](docs/planetary-rendering.md) · [Terrain assets](docs/terrain-assets.md) · [Source provenance](assets/earth/PROVENANCE.md) |
 | Simulation and spacecraft | [Simulation time](docs/simulation-time.md) · [Spacecraft motion](docs/spacecraft-translation.md) · [Attitude dynamics](docs/spacecraft-attitude.md) |
 | Powered flight | [Physics contract](docs/engineering-evidence/segmented-powered-free-flight/physics-contract.md) · [Qualification](docs/engineering-evidence/segmented-powered-free-flight/final-qualification.md) |
+| M15.2 reusable SRV-01 spacecraft | [Qualification, limits and reproduction](docs/engineering-evidence/srv01-production-integration/README.md) · [Banked source](https://github.com/AlbatronicProductions/NovaCore/tree/m15.2-srv01-reusable-production-spacecraft-integration) |
 | M15.1 retained powered contact | [Qualification history, limits and reproduction](docs/engineering-evidence/powered-contact-bank-candidate/README.md) · [Banked source](https://github.com/AlbatronicProductions/NovaCore/tree/m15.1-finite-fuel-retained-powered-contact) |
 | Development state and history | [Engineering overview](docs/NOVACORE_CURRENT_STATE.md) · [Evidence index](docs/engineering-evidence/README.md) · [Powered-flight source checkpoint](https://github.com/AlbatronicProductions/NovaCore/tree/m15.0-segmented-powered-free-flight) |
 
