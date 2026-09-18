@@ -13,20 +13,24 @@ ignored scratch, not session authority. Investigation archives are indexed under
 [engineering history](engineering-evidence/README.md); consult them for provenance,
 not as an onboarding requirement.
 
-## Current candidate and stop boundary
+## Current bank and stop boundary
 
 The canonical SRV-01 surface-to-flight foundation (Stage1–5) has Project Control
 manual acceptance **PASS** for the final simplified Florida slab route, including
 **FL Launchpad → Play** and preserved Solar navigation. Use the
-[final closeout](engineering-evidence/srv01-surface-to-flight-foundation-final/README.md),
-not historical pending/failed child reports, to establish current candidate state.
+[final closeout](engineering-evidence/srv01-surface-to-flight-foundation-final/README.md)
+for qualification; its pre-bank wording is historical. The bank identity below is current.
 Full final Debug/Release builds, Simulation80/80, Launcher18/18 and76 total gates pass.
 
-Current baseline: `ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5`.
-Candidate: `codex/srv01-supported-contact-admission`, **UNBANKED**.
-No milestone number; no stage/commit/tag/push/merge authority in this closeout.
-Stop for Project Control's banking decision. Stage6 and the next gameplay front
-remain closed. Preserve exact include/exclude lists and all historical tags.
+Current bank: **M15.3 — Canonical SRV-01 Florida Supported-Flight Foundation**,
+commit `544f25ad618bcad7a2753de69108ca3c4095df11`, annotated tag
+`m15.3-canonical-srv01-florida-supported-flight-foundation`. **BANKED; front closed.**
+Stage 6 and the next major implementation front remain unauthorized pending
+Project Control review. Preserve the bank commit and every historical tag.
+
+The accepted M15.3 subject, `NovaCore: Bank canonical SRV-01 Florida supported-flight foundation`,
+omits the milestone identity. This is a naming/convention discrepancy only; do not
+rewrite it. For future milestone banks use `NovaCore M<milestone>: <bank accomplishment>`.
 
 Qualified support/powered support and fixed-slab consumer handoff do not establish
 rotating-site powered departure, an Earth launch stack, orbital qualification or
@@ -38,11 +42,11 @@ provenance is consolidated, with no new public branding language or copied asset
 
 ## Repository rules
 
-Latest banked production checkpoint: **M15.2 — SRV-01 Reusable Production
+Previous banked production checkpoint: **M15.2 — SRV-01 Reusable Production
 Spacecraft Integration**, commit `c3de150db8563864d23c4951b4630559453d8f56`,
 annotated tag `m15.2-srv01-reusable-production-spacecraft-integration`.
 **M15.2 is BANKED; its original SRV-01 production-integration front is closed.**
-The later accepted Stage1–5 candidate is described above; no further front is authorized.
+The subsequent banked M15.3 foundation is described above; no further front is authorized.
 Use the [accepted qualification](engineering-evidence/srv01-production-integration/README.md)
 for the banked scope. The [bank-preparation packet](engineering-evidence/srv01-production-integration/bank-preparation/README.md)
 is historical evidence of the pre-bank state, not current instructions.

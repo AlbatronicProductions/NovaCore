@@ -29,14 +29,19 @@ the full player experience is still being assembled.
 
 ## Working today
 
-**Current banked milestone:** [M15.2 — SRV-01 Reusable Production Spacecraft Integration](https://github.com/AlbatronicProductions/NovaCore/tree/m15.2-srv01-reusable-production-spacecraft-integration).
-The SRV-01 development scenario assembles a capsule, tank/service body, gimbaled main
-engine and four reusable four-horn RCS blocks. Its 16 physical jets share exact
-fuel/oxidizer authority; current mass, centre of mass and inertia drive motion.
-Accepted runtime assets and nozzle-attached main/RCS exhaust follow copied
-canonical state. This is a bounded recorded free-flight scenario, not an arbitrary
-construction editor or a contact/departure transition. See the
-[accepted SRV-01 result](docs/engineering-evidence/srv01-production-integration/README.md).
+**Current banked milestone: [M15.3 — Canonical SRV-01 Florida Supported-Flight Foundation](https://github.com/AlbatronicProductions/NovaCore/tree/m15.3-canonical-srv01-florida-supported-flight-foundation).**
+The current production foundation integrates the canonical stock SRV-01 through
+retained and powered support, bounded contact-to-free-flight ownership transfer in
+its qualified fixed-slab domain, finite propulsion/resource mechanics, and
+authenticated rotating-Florida support. **FL Launchpad → Play** places the stock
+spacecraft on a shared physical/visible launch slab while preserving Solar-system
+exploration, planet focus, overview, zoom and camera navigation.
+
+Powered Florida departure and player launch gameplay remain future work. M15.3
+does not qualify an Earth launch stack or orbit insertion, player Z/X/WASD/QE
+flight controls, a spacecraft-follow camera, SAS/navball/autopilot, production
+lighting/shadows, or atmosphere/aerodynamics/reentry. See the
+[current engineering state](docs/NOVACORE_CURRENT_STATE.md).
 
 - **Earth exploration:** move the camera from orbital views down toward terrain,
   with Sun-driven day and night, NASA/NOAA source imagery and elevation, and USGS
@@ -46,16 +51,17 @@ construction editor or a contact/departure transition. See the
 - **Spacecraft motion and propulsion:** simulate translation and rotation under
   forces and torques. Powered flight consumes finite propellant, changes spacecraft
   mass, and continues into coasting when the fuel runs out.
-- **Surface interaction foundations:** explore an anchored Florida site and inspect
-  separate demonstrations of simple bodies settling against a slab.
+- **Surface interaction foundations:** explore the authenticated Florida site with
+  stock SRV-01 supported on one physical/visible slab; separate qualification scenes
+  exercise retained contact and bounded ownership transfer to free flight.
 - **Finite-fuel retained powered contact:** apply finite-fuel propulsion while a
   body remains supported, with physical state, remaining fuel, mass and actual
   actuator state published together. This bounded contact path is separate from
   powered free flight.
 
-These capabilities are exercised in separate development scenarios. The current
-powered-flight cube and the reusable-part SRV-01 scenario operate in free space,
-without gravity or contact; piloted flight and complete terrain landing are still ahead.
+These capabilities are exercised in bounded development scenarios. The original
+powered-flight cube and recorded SRV-01 free-flight scene remain separate from the
+supported-contact routes; piloted flight and complete terrain landing are still ahead.
 
 ## Screenshots
 
@@ -74,8 +80,8 @@ continue to evolve. They do not depict finished spacecraft or atmosphere systems
 
 That connected journey is the long-term goal. Work ahead includes flight controls,
 finished spacecraft models, facilities, liftoff and landing interactions, richer
-terrain, and atmosphere, cloud and water systems. Supported-contact departure,
-surface-to-flight transition and Florida launch integration remain future work.
+terrain, and atmosphere, cloud and water systems. Rotating-site powered departure
+and a connected player-controlled surface-to-flight journey remain future work.
 
 The intended player experience is straightforward: download a packaged build,
 launch an executable, and enter the simulation. Today's source build and scenario
@@ -137,7 +143,8 @@ These scenarios exercise specific NovaCore systems during development. They are
 not intended as the final player flow or a list of finished game modes.
 
 - **Planetary exploration:** New Earth Renderer and Solar System Overview open
-  planetary views; Florida Launch Site opens the anchored site without liftoff.
+  planetary views. **FL Launchpad → Play** opens the shared Florida slab scenario
+  with supported stock SRV-01 and Solar navigation, without liftoff.
 - **Powered flight:** Development - Powered Free Flight shows a fixed burn, fuel
   exhaustion and coast. Wait for READY, then press Space. Camera movement does not
   pilot the craft. This scene does not require Earth terrain packages.
@@ -184,6 +191,7 @@ contracts, implementation limits and reproducible evidence live in the documenta
 | Planetary rendering and data | [Renderer](docs/planetary-rendering.md) · [Terrain assets](docs/terrain-assets.md) · [Source provenance](assets/earth/PROVENANCE.md) |
 | Simulation and spacecraft | [Simulation time](docs/simulation-time.md) · [Spacecraft motion](docs/spacecraft-translation.md) · [Attitude dynamics](docs/spacecraft-attitude.md) |
 | Powered flight | [Physics contract](docs/engineering-evidence/segmented-powered-free-flight/physics-contract.md) · [Qualification](docs/engineering-evidence/segmented-powered-free-flight/final-qualification.md) |
+| M15.3 supported-flight foundation | [Current scope and limits](docs/NOVACORE_CURRENT_STATE.md) · [Banked source](https://github.com/AlbatronicProductions/NovaCore/tree/m15.3-canonical-srv01-florida-supported-flight-foundation) |
 | M15.2 reusable SRV-01 spacecraft | [Qualification, limits and reproduction](docs/engineering-evidence/srv01-production-integration/README.md) · [Banked source](https://github.com/AlbatronicProductions/NovaCore/tree/m15.2-srv01-reusable-production-spacecraft-integration) |
 | M15.1 retained powered contact | [Qualification history, limits and reproduction](docs/engineering-evidence/powered-contact-bank-candidate/README.md) · [Banked source](https://github.com/AlbatronicProductions/NovaCore/tree/m15.1-finite-fuel-retained-powered-contact) |
 | Development state and history | [Engineering overview](docs/NOVACORE_CURRENT_STATE.md) · [Evidence index](docs/engineering-evidence/README.md) · [Powered-flight source checkpoint](https://github.com/AlbatronicProductions/NovaCore/tree/m15.0-segmented-powered-free-flight) |

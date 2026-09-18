@@ -1,6 +1,6 @@
 # Architecture
 
-## Accepted unbanked surface-to-flight foundation
+## Banked M15.3 — canonical SRV-01 Florida supported-flight foundation
 
 Canonical assembled SRV-01 → explicit collision/source admission → one retained
 subordinate BEPU world/body → ordinary supported or powered interval → sealed paired
@@ -21,8 +21,11 @@ Launcher FL Launchpad and the bounded manual route share construction; the GUI r
 its Solar owner and camera/focus/overview/zoom capabilities. Copied canonical endpoints
 drive presentation, never live BEPU bodies. One display render follows bounded servicing.
 
-Stage1–5 and final manual support/presentation acceptance are accepted, **UNBANKED**.
-No milestone assigned. Lighting/shadows, startup response, rotating-site departure,
+Stage 1–5 and final manual support/presentation acceptance are **BANKED as M15.3**,
+commit `544f25ad618bcad7a2753de69108ca3c4095df11`, tag
+`m15.3-canonical-srv01-florida-supported-flight-foundation`.
+The linked closeout retains its historical pre-bank wording.
+Lighting/shadows, startup response, rotating-site departure,
 launch-stack/control/navigation and atmosphere remain deferred. See the
 [final contract, evidence and source map](engineering-evidence/srv01-surface-to-flight-foundation-final/README.md).
 

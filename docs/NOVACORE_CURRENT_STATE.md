@@ -11,13 +11,14 @@ renderer. Simulation owns celestial identity, exact time, physical state, and
 reference-frame transforms. Graphics consumes immutable root-resolved snapshots
 and performs FP64 camera-relative subtraction before GPU transport.
 
-## Accepted unbanked candidate — canonical SRV-01 surface-to-flight foundation
+## Current bank — M15.3
 
-Project Control has accepted the Stage 1–5 responsibility, including the final
-simplified Florida slab manual route. The candidate remains **UNBANKED**, with no
-milestone number assigned and Stage 6 **CLOSED**. Baseline main is
-`ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5`; candidate branch is
-`codex/srv01-supported-contact-admission`. Banking requires separate authorization.
+**M15.3 — Canonical SRV-01 Florida Supported-Flight Foundation is BANKED** at
+`544f25ad618bcad7a2753de69108ca3c4095df11`, annotated tag
+`m15.3-canonical-srv01-florida-supported-flight-foundation`.
+Project Control accepted the Stage 1–5 responsibility, including the final
+simplified Florida slab manual route. This production front is closed; Stage 6
+and any next major implementation front require separate Project Control authorization.
 
 Qualified now: canonical stock SRV-01 retained support and powered support; explicit
 consumer transfer to free flight in the bounded fixed-slab separation domain;
@@ -43,16 +44,16 @@ development-sizing evidence, not the current stock Florida vehicle or orbital pr
 
 Use the [consolidated final record](engineering-evidence/srv01-surface-to-flight-foundation-final/README.md)
 for exact source identities, regression, manual acceptance, performance/residuals,
-cleanup and proposed banking paths. Earlier child reports remain historical.
-No next implementation front is authorized by this closeout.
+cleanup and pre-bank preparation. Its unbanked/proposed wording records the historical
+preparation state; the bank identity above is current. Earlier child reports remain historical.
 
-## Current bank — M15.2
+## Previous bank — M15.2
 
 **M15.2 — SRV-01 Reusable Production Spacecraft Integration is BANKED** at
 `c3de150db8563864d23c4951b4630559453d8f56`, annotated tag
 `m15.2-srv01-reusable-production-spacecraft-integration`.
-The original SRV-01 production-integration front is closed. The accepted unbanked
-Stage 1–5 foundation above is its subsequent bounded candidate.
+The original SRV-01 production-integration front is closed. M15.3 above is its
+subsequent banked Stage 1–5 foundation.
 
 One capsule, tank/service body, gimbaled main engine and four reusable four-horn
 blocks form one explicit seven-part stock assembly with 16 physical RCS jets,
