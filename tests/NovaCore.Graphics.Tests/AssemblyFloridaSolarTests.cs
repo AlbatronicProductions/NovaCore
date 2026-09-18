@@ -10,6 +10,7 @@ using NovaCore.Simulation.Spacecraft.Translation;
 
 internal static partial class AssemblyFloridaSiteTests
 {
+    internal static void PrepareCameraFixture() => _=Site(true);
     internal static void SolarConsumer()
     {
         var preset=ScenarioCatalog.Get(NovaCoreScenarioPreset.FloridaLaunchSite);

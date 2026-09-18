@@ -14,6 +14,10 @@ using NovaCore.Simulation.Time;
 /// <summary>Ordinary application adapter for a registered stock assembly. Reusable asset presentation consumes copied canonical state only.</summary>
 internal sealed class StockAssemblyDevelopmentScene : IDisposable
 {
+    // Presentation lifetime only: never enters canonical state, replay or design identity.
+    private static long nextFocusGeneration;
+    private readonly ulong focusGeneration = checked((ulong)Interlocked.Increment(ref nextFocusGeneration));
+    private bool disposed;
     private readonly AssemblyApplicationSession session;
     private AssemblyFlightObservation observation;
     private readonly CompiledAssemblyDesign design;
@@ -37,6 +41,23 @@ internal sealed class StockAssemblyDevelopmentScene : IDisposable
     internal bool Failed {get;private set;}
     internal AssemblyFlightStatus Failure {get;private set;}
     internal AssemblyFlightObservation Observation=>observation;
+    internal SceneObjectFocusObservation PrepareFocusObservation()
+    {
+        FloridaView?.RefreshDisplayFrame();
+        var position = FloridaView?.Position(observation.State.Motion.PositionO) ??
+            new UniversePosition(observation.State.Motion.PositionO, session.Launch.Spacecraft.CarrierFrame);
+        return new(session.Launch.Spacecraft.Id.Value, focusGeneration,
+            FloridaView?.Site.Authority.BodyId ?? 0, position,
+            checked((long)observation.StateRevision.Value), observation.State.Epoch.Ticks,
+            FloridaView?.Solar.PresentationTicks ?? observation.State.Epoch.Ticks,
+            disposed ? SceneObjectFocusStatus.Retired : Failed ? SceneObjectFocusStatus.Failed :
+            Completed ? SceneObjectFocusStatus.Held : started ? SceneObjectFocusStatus.Active : SceneObjectFocusStatus.Prepared)
+        {
+            ReferenceFrame = FloridaView is { } view
+                ? new(view.Site.Authority.BodyId, view.Site.LocalToBodyFixed)
+                : SceneObjectFocusReferenceFrame.Root
+        };
+    }
     // A terminal observation is historical. It is not an instruction to keep firing FX.
     internal bool ActiveExhaust=>started&&!Completed&&!Failed;
     internal ResolvedRenderSnapshot InitialSnapshot {get;}
@@ -214,7 +235,7 @@ internal sealed class StockAssemblyDevelopmentScene : IDisposable
         else{var s=Math.Sqrt(1+m.I-m.A-m.E)*2;w=(m.D-m.B)/s;x=(m.C+m.G)/s;y=(m.F+m.H)/s;z=s/4;}
         return new DoubleQuaternion(x,y,z,w).Normalized();
     }
-    public void Dispose(){session.Dispose();Visuals.Dispose();}
+    public void Dispose(){if(disposed)return;disposed=true;session.Dispose();Visuals.Dispose();}
     private unsafe void UpdateTitle()
     {
         if(titledFrontier==observation.State.Frontier&&titledStarted==started&&titledCompleted==Completed&&titledFailed==Failed)return;

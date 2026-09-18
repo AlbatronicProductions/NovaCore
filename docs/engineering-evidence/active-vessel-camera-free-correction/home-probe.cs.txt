@@ -1,0 +1,69 @@
+using System.Text.Json;
+using NovaCore.Core;
+using NovaCore.Core.Camera;
+using NovaCore.Graphics;
+using NovaCore.Interop;
+using NovaCore.Simulation.Time;
+
+internal static class HomeTransitionProbe
+{
+    private static double[] V(Double3 v)=>[v.X,v.Y,v.Z];
+    private static double[] Q(DoubleQuaternion q)=>[q.X,q.Y,q.Z,q.W];
+    internal static void Run()
+    {
+        AssemblyFloridaSiteTests.PrepareCameraFixture();
+        if(!SolarSystemScene.TryCreateAt(new(1),SimulationInstant.Zero,out var value,out var error))throw new Exception(error);
+        var solar=value!;
+        using var scene=new StockAssemblyDevelopmentScene(supportedContact:true,floridaSupport:true,solarWorld:solar);
+        var camera=new CameraState(new(new(1),default),DoubleQuaternion.Identity,new(Math.PI/3,16d/9,.01,1e15),CameraMode.Free);
+        scene.FloridaView!.PrepareCamera(camera);
+        if(!solar.BindActiveVessel(scene.PrepareFocusObservation())||!solar.RefocusActiveVessel(camera))throw new Exception("bind");
+        var controller=new FreeCameraController(.1,.003,1.45);
+        var originalEye=camera.Position.Value;var originalEarth=solar.FocusedBody.Position.Value;
+        var originalSite=scene.PrepareFocusObservation().MaterialOrigin.Value;
+        var originalLocal=solar.FocusedBody.BodyFixedToRoot.Conjugate().Rotate(originalSite-originalEarth);
+        var canonical=scene.Observation;
+        void Capture(string phase)
+        {
+            var body=solar.FocusedBody;var target=scene.PrepareFocusObservation().MaterialOrigin.Value;
+            Console.WriteLine("HOME_PROBE "+JsonSerializer.Serialize(new{phase,displayTicks=solar.CurrentTime.Ticks,
+                focusKind=solar.CurrentFocusTarget.Kind.ToString(),focusId=solar.CurrentFocusTarget.SceneObjectId,
+                active=solar.ActiveVesselId,environment=solar.EnvironmentalBodyId,focusIndex=solar.FocusIndex,
+                cameraMode=camera.Mode.ToString(),cameraAuthority=solar.CurrentCameraReferenceAuthority.ToString(),free=solar.IsFreeCamera,
+                world=V(camera.Position.Value),rootFrame=camera.Position.Frame.ToString(),orientation=Q(camera.Orientation),
+                bodyLocalEye=V(body.BodyFixedToRoot.Conjugate().Rotate(camera.Position.Value-body.Position.Value)),
+                earthWorld=V(body.Position.Value),earthRotation=Q(body.BodyFixedToRoot),siteWorld=V(target),siteOrientation=Q(scene.PresentedPart(6).RootOrientation),
+                focusAnchor=V(solar.CurrentFocusRoot),relativeOrigin=V(camera.Position.Value),
+                translationRight=V(camera.Orientation.Rotate(Double3.UnitX)),translationUp=V(camera.Orientation.Rotate(Double3.UnitY)),translationForward=V(camera.Orientation.Rotate(new(0,0,-1))),
+                speed=controller.MovementSpeed,maximumSpeed=FreeCameraController.MaximumSpeed,
+                nearClip=camera.Projection.NearClip,eyeDisplacement=Math.Sqrt((camera.Position.Value-originalEye).LengthSquared),
+                siteDistance=Math.Sqrt((target-camera.Position.Value).LengthSquared),
+                earthTranslation=Math.Sqrt((body.Position.Value-originalEarth).LengthSquared),
+                siteRotationOnly=Math.Sqrt((body.BodyFixedToRoot.Rotate(originalLocal)-(originalSite-originalEarth)).LengthSquared),
+                canonicalUnchanged=scene.Observation==canonical}));
+        }
+        Capture("before-home");
+        solar.ApplyPresentationInput(camera,new(){CameraActions=NativeCameraActions.Free},out _,out _);
+        Capture("immediately-after-home-no-time");
+        solar.EnforceFinalCameraInvariant(camera);Capture("same-epoch-final-invariant");
+        Span<CameraCommand> commands=stackalloc CameraCommand[4];
+        for(var i=1;i<=600;i++)
+        {
+            var input=new NativeInputState{DeltaSeconds=1f/60,MoveRight=1};
+            solar.ApplyPresentationInput(camera,input,out _,out _);
+            if(!solar.TryAdvanceByHostDuration(new(16667),camera,out error))throw new Exception(error);
+            solar.RefreshActiveVessel(camera,scene.PrepareFocusObservation());
+            if(i==1)Capture("first-display-before-controller-and-constraint");
+            var count=DebugCameraInput.Map(input,commands);
+            controller.Update(camera,commands[..count],input.DeltaSeconds);
+            if(i==1)Capture("first-display-after-controller-before-constraint");
+            solar.EnforceFinalCameraInvariant(camera);solar.Update(camera);
+            if(i is 1 or 6 or 60 or 600)Capture("after-display-"+i);
+        }
+        solar.ApplyPresentationInput(camera,new(){MouseWheelDetents=100},out _,out _);
+        controller.Update(camera,[new(CameraCommandKind.AdjustSpeed,new(100,0,0),default)],1d/60);
+        Capture("maximum-free-speed");
+        if(!solar.RefocusActiveVessel(camera))throw new Exception("refocus");
+        Capture("refocused-vessel");
+    }
+}

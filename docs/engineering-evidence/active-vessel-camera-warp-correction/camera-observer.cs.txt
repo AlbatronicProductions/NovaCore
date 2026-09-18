@@ -1,0 +1,71 @@
+// Disposable Program overlay only; never deployed. Uses actual host/native render.
+file static class CameraProbe
+{
+    const int Segment=1200,Warm=180;
+    static readonly bool MatchedCelestial=Environment.GetEnvironmentVariable("NOVACORE_WARP_MATCHED_CELESTIAL")=="1";
+    static readonly int Count=MatchedCelestial?1200:4800;
+    static readonly double[] Callback=new double[Count],Interval=new double[Count],Focus=new double[Count];
+    static readonly long[] Allocated=new long[Count],FocusAllocated=new long[Count],Epoch=new long[Count];
+    static readonly int[,] GcBefore=new int[Count,3],GcAfter=new int[Count,3];
+    static int frame;
+    static long start,last,allocated,focusStart,focusAllocated;
+    internal static void ServiceAssembly(HostState state)
+    {
+        state.Assembly!.Start();
+        state.Assembly.Advance(new SimulationDuration(((frame+1L)*1_000_000/60)-(frame*1_000_000L/60)));
+    }
+    internal static void Begin(HostState state,ref NativeInputState input)
+    {
+        start=System.Diagnostics.Stopwatch.GetTimestamp();
+        if(frame>=Count)return;
+        Interval[frame]=last==0?0:(start-last)*1000d/System.Diagnostics.Stopwatch.Frequency;last=start;
+        for(var i=0;i<3;i++)GcBefore[frame,i]=GC.CollectionCount(i);
+        allocated=GC.GetAllocatedBytesForCurrentThread();
+        var width=input.ViewportWidthPixels;var height=input.ViewportHeightPixels;
+        input=default;input.DeltaSeconds=1f/60;input.ViewportWidthPixels=width;input.ViewportHeightPixels=height;
+        var route=frame/Segment;var local=frame%Segment;var solar=state.Sol!;
+        if(local==0)
+        {
+            if(route==0){if(MatchedCelestial)solar.ResetPresentationCamera(state.Camera);solar.Focus(state.Camera,NativePresentationFocus.Earth);}
+            else input.CameraActions=NativeCameraActions.FocusActiveVessel;
+        }
+        var desired=route==2?120:route==3?14400:1;
+        if(solar.Rate.Numerator<desired*solar.Rate.Denominator)input.RateIncrease=1;
+        if(solar.Rate.Numerator>desired*solar.Rate.Denominator)input.RateDecrease=1;
+        // Dynamic but bounded local input, identical schedule on both versions.
+        input.LookActive=1;input.MouseDeltaX=(local/60&1)==0?.10f:-.10f;
+        input.MouseDeltaY=(local/60&1)==0?.03f:-.03f;
+        if(local%120==30)input.MouseWheelDetents=1;
+        if(local%120==90)input.MouseWheelDetents=-1;
+    }
+    internal static void BeginFocus(){focusAllocated=GC.GetAllocatedBytesForCurrentThread();focusStart=System.Diagnostics.Stopwatch.GetTimestamp();}
+    internal static void EndFocus()
+    {
+        if(frame>=Count)return;
+        Focus[frame]=(System.Diagnostics.Stopwatch.GetTimestamp()-focusStart)*1000d/System.Diagnostics.Stopwatch.Frequency;
+        FocusAllocated[frame]=GC.GetAllocatedBytesForCurrentThread()-focusAllocated;
+    }
+    internal static void End(HostState state)
+    {
+        if(frame>=Count)return;
+        Callback[frame]=(System.Diagnostics.Stopwatch.GetTimestamp()-start)*1000d/System.Diagnostics.Stopwatch.Frequency;
+        Allocated[frame]=GC.GetAllocatedBytesForCurrentThread()-allocated;
+        for(var i=0;i<3;i++)GcAfter[frame,i]=GC.CollectionCount(i);
+        Epoch[frame]=state.Assembly!.Observation.State.Epoch.Ticks;
+        if(++frame!=Count)return;
+        Console.WriteLine($"WARP_RENDER_ID version=PROBE_VERSION epoch=j2000 resolution=960x540 displayDt=1/60 physicalCredit=fixed60Hz count={Count} matchedCelestial={MatchedCelestial} segment=1200 warm=180 viewInput=alternating-drag-wheel native=unchanged");
+        for(var route=0;route<Count/Segment;route++)
+        {
+            var first=route*Segment+Warm;var end=(route+1)*Segment;
+            var name=new[]{"celestial-1x","vessel-1x","vessel-120x","vessel-14400x"}[route];
+            var gc=new[]{GcAfter[end-1,0]-GcBefore[first,0],GcAfter[end-1,1]-GcBefore[first,1],GcAfter[end-1,2]-GcBefore[first,2]};
+            foreach(var population in new[]{("callback",Callback),("display-interval",Interval),("focus-copy-refresh",Focus)})
+            {
+                var rows=population.Item2.Skip(first).Take(end-first).Select((ms,i)=>new{ms,index=i+first}).ToArray();
+                var sorted=rows.Select(x=>x.ms).Order().ToArray();double P(double p)=>sorted[(int)Math.Ceiling(p*sorted.Length)-1];
+                var transition=population.Item2.Skip(route*Segment).Take(Warm).Select((ms,i)=>new{ms,index=route*Segment+i}).ToArray();
+                Console.WriteLine("WARP_RENDER_COST "+System.Text.Json.JsonSerializer.Serialize(new{version="PROBE_VERSION",route=name,population=population.Item1,count=sorted.Length,median=P(.5),p95=P(.95),p99=P(.99),maximum=P(1),gc,allocated=Allocated.Skip(first).Take(end-first).Sum(),focusAllocated=FocusAllocated.Skip(first).Take(end-first).Sum(),physicalStart=Epoch[first],physicalEnd=Epoch[end-1],tails=rows.OrderByDescending(x=>x.ms).Take(8),transitionFirstEight=transition.Take(8),transitionTails=transition.OrderByDescending(x=>x.ms).Take(4)}));
+            }
+        }
+    }
+}

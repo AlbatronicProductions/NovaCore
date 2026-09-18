@@ -112,7 +112,7 @@ static_assert(offsetof(NcFrameSubmission, productionBillboardFrame) == 784);
 static_assert(offsetof(NcFrameSubmission, facilityCaster) == 792);
 static_assert(sizeof(NcOrbitLineVertex) == 24);
 static_assert(sizeof(NcRuntimeAssets) == 32);
-static_assert(sizeof(NcInputState) == 84);
+static_assert(sizeof(NcInputState) == 88);
 static_assert(sizeof(NcPresentationFocus) == 4);
 static_assert(offsetof(NcInputState, deltaSeconds) == 0);
 static_assert(offsetof(NcInputState, moveLeft) == 4);
@@ -135,6 +135,10 @@ static_assert(offsetof(NcInputState, slowModifier) == 68);
 static_assert(offsetof(NcInputState, presentationFocus) == 72);
 static_assert(offsetof(NcInputState, viewportWidthPixels) == 76);
 static_assert(offsetof(NcInputState, viewportHeightPixels) == 80);
+static_assert(offsetof(NcInputState, cameraActions) == 84);
+static_assert(offsetof(NcHostEvent, input) == 16);
+static_assert(offsetof(NcHostEvent, submission) == 104);
+static_assert(sizeof(NcHostEvent) == 112);
 
 struct ProductionBillboardPublicationReadiness {
   bool fenceComplete{};
@@ -509,7 +513,7 @@ struct App {
   bool pauseWasDown{}, rateDecreaseWasDown{}, rateIncreaseWasDown{};
   std::array<bool, 8> sasModeWasDown{};
   std::array<bool, 10> presentationFocusWasDown{};
-  bool resetWasDown{};
+  bool resetWasDown{}, focusVesselWasDown{};
   uint32_t surfaceDiagnostic{};
   void Log(uint32_t cat, const char *msg) const {
     if (cb) {
@@ -2496,6 +2500,9 @@ void Update(App &a, float dt) {
   for (int key = 0; key < 8; ++key) if (rising('0' + key, a.sasModeWasDown[key])) { sasModeKey = static_cast<uint32_t>(key + 1); break; }
   uint32_t presentationFocus = 0;
   for (int index = 0; index < 10; ++index) { const int key = index == 9 ? '0' : '1' + index; if (rising(key, a.presentationFocusWasDown[index])) { presentationFocus = static_cast<uint32_t>(index + 1); break; } }
+  const bool focusVessel = rising('F', a.focusVesselWasDown);
+  // HOME is unbound: surface free navigation needs an explicit frame owner.
+  const uint32_t cameraActions = GetForegroundWindow() == a.window && focusVessel ? 1u : 0u;
   NcInputState in{dt,
                   (RegionalValidationKeyState('A') & 0x8000) != 0,
                   (RegionalValidationKeyState('D') & 0x8000) != 0,
@@ -2515,7 +2522,7 @@ void Update(App &a, float dt) {
                   (RegionalValidationKeyState(VK_CONTROL) & 0x8000) != 0,
                   static_cast<NcPresentationFocus>(presentationFocus),
                   a.extent.width,
-                  a.extent.height};
+                  a.extent.height, cameraActions};
   NcHostEvent e{NC_UPDATE_FRAME, NC_LOG_NONE, nullptr, in, a.submission};
   a.cb(&e, a.cbData);
   const auto callbackEnd=std::chrono::steady_clock::now();
@@ -2587,7 +2594,7 @@ extern "C" NC_API NcResult __cdecl nc_get_abi_layout(NcAbiLayout *o) {
         (uint32_t)offsetof(NcInputState, presentationFocus),
         (uint32_t)offsetof(NcFrameSubmission, solarLighting),
         (uint32_t)offsetof(NcInputState, viewportWidthPixels),
-        (uint32_t)offsetof(NcInputState, viewportHeightPixels)};
+        (uint32_t)offsetof(NcInputState, viewportHeightPixels), (uint32_t)offsetof(NcInputState, cameraActions)};
   return NC_SUCCESS;
 }
 static NcResult RunRenderer(NcFrameSubmission *s, NcHostCallback cb, void *data, const NcRuntimeAssets *assets,const NcVisualMesh* meshes=nullptr,uint32_t meshCount=0,uint32_t preparedObjectCapacity=0) {

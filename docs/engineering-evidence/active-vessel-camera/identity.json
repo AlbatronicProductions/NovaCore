@@ -1,0 +1,252 @@
+{
+  "capturedUtc": "2026-09-18T15:07:39.4433114Z",
+  "head": "45b1bbcdd8d0e1d42f79f3bb5124e80753ce0e8f",
+  "branch": "main",
+  "bank": "544f25ad618bcad7a2753de69108ca3c4095df11",
+  "tagObject": "e1de2ac72f266c01f3c8fe2e3e475151f0423204",
+  "remote": [
+    "45b1bbcdd8d0e1d42f79f3bb5124e80753ce0e8f\trefs/heads/main",
+    "e1de2ac72f266c01f3c8fe2e3e475151f0423204\trefs/tags/m15.3-canonical-srv01-florida-supported-flight-foundation",
+    "544f25ad618bcad7a2753de69108ca3c4095df11\trefs/tags/m15.3-canonical-srv01-florida-supported-flight-foundation^{}"
+  ],
+  "indexEmpty": true,
+  "diffCheck": "PASS",
+  "productionTestPaths": [
+    {
+      "path": "native/NovaCore.Native/NovaCoreNative.cpp",
+      "sha256": "3B3FCD1B965DC155C794A7756189C25DC23D401A54D64921B4802BED8FF63EC3"
+    },
+    {
+      "path": "native/NovaCore.Native/NovaCoreNative.h",
+      "sha256": "AADBEE1AE791C8EB6572995CA62323BC15C594810238F4DEB4DEC003BD6754BF"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/Program.cs",
+      "sha256": "FD4A78A583C15709554363303A78924D02AA46251329115D78ECE70DFB4626B8"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/SolarSystemScene.cs",
+      "sha256": "7EFDD533AB556272CBE7F9DFDE99CE224DA4C91EF3B1D89E34DDA3DE87466922"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/StockAssemblyDevelopmentScene.cs",
+      "sha256": "340E06FFEB2597AC6BA9B68231AC3BECF309252AAACE09F2E4FD22B0831D23A1"
+    },
+    {
+      "path": "src/NovaCore.Graphics/FocusTarget.cs",
+      "sha256": "A768961B61D633A5458E638CB2CA4AA2233C9888C6CCB7B45D5AA4DC9DF082D3"
+    },
+    {
+      "path": "src/NovaCore.Graphics/SceneObjectFocusObservation.cs",
+      "sha256": "93058499488D0F88A417C466302673C08DFE095A77028A2ACB4F3C01E575D9B8"
+    },
+    {
+      "path": "src/NovaCore.Interop/NativeRuntime.cs",
+      "sha256": "44A25F865A63CA452412CF3C7FC904E3A1DAC8B85A50B6CF420E61CFB3A06C50"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/AssemblyFloridaSolarTests.cs",
+      "sha256": "0EF49A0F829F12E1ECC882CB5EF494B6CA9D5302922246F1EEDD9BA727DC48FA"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/Program.cs",
+      "sha256": "EBD2CFF93CB7CC8EEA00538065C3BFA68C3D5E2F267D46F4FA124B0F1D9498BA"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/ActiveVesselCameraTests.cs",
+      "sha256": "5CDF19C060DAB7E30BB374CE884BD8A6992C646841B63DA1110851DD778229A1"
+    }
+  ],
+  "runtimeBinaries": [
+    {
+      "path": "build/active-vessel-camera/baseline/bin/NovaCore.Triangle/release/NovaCore.Triangle.dll",
+      "sha256": "34D8C1E3AACC5AD64A7B1A310CEF0CD479AF5B668AC32D6B29F29A4A50F132F6"
+    },
+    {
+      "path": "build/active-vessel-camera/baseline/bin/NovaCore.Triangle/release/NovaCore.Interop.dll",
+      "sha256": "2D3031F1C40E300B7E1561284D23234422EB49BDE5A670D3E588174BD619F6D0"
+    },
+    {
+      "path": "build/active-vessel-camera/baseline/bin/NovaCore.Triangle/release/NovaCore.Graphics.dll",
+      "sha256": "A486B7E87F1FA863238B01DBD15DC6F1DB314788C7B769536C49302DA9BBE15A"
+    },
+    {
+      "path": "build/active-vessel-camera/baseline/bin/NovaCore.Triangle/release/NovaCore.Simulation.dll",
+      "sha256": "27ED5A3CA33F1B55E6AA3C5EEA25E256003F579FA8FD10CC468C9D81FC1F3041"
+    },
+    {
+      "path": "build/active-vessel-camera/baseline/bin/NovaCore.Triangle/release/NovaCore.Native.dll",
+      "sha256": "D6A2087FA877B1BDF8174D348206D27D0E8B3475DBA86CDAEFFEC11837A266FD"
+    },
+    {
+      "path": "build/active-vessel-camera/candidate/bin/NovaCore.Triangle/release/NovaCore.Triangle.dll",
+      "sha256": "1DF7668CCADE9292EA8F7237EC85764B2F80A34D0B13368124F35ABB154A3938"
+    },
+    {
+      "path": "build/active-vessel-camera/candidate/bin/NovaCore.Triangle/release/NovaCore.Interop.dll",
+      "sha256": "ECE71425E0CC0E167EBFEFEC23115361C7331669A961D904B5F969C6F43C4D47"
+    },
+    {
+      "path": "build/active-vessel-camera/candidate/bin/NovaCore.Triangle/release/NovaCore.Graphics.dll",
+      "sha256": "F308E2DD8B794BF3E3DC53632E5D44A8DB70E1CC54E2969150AB51B7EC6E2C41"
+    },
+    {
+      "path": "build/active-vessel-camera/candidate/bin/NovaCore.Triangle/release/NovaCore.Simulation.dll",
+      "sha256": "39D04E9FC3469F82DAFA21DE14ECD019AACFD91707EB34FC01AB0E66F06A5AE7"
+    },
+    {
+      "path": "build/active-vessel-camera/candidate/bin/NovaCore.Triangle/release/NovaCore.Native.dll",
+      "sha256": "176A4F4DCCF4F8FB57AEEAF22B0BAC1D0939110F237322A5F1313005B35ED945"
+    }
+  ],
+  "originalUntrackedCount": 50,
+  "originalUntrackedPreserved": true,
+  "unrelatedSourceInputsPreserved": true,
+  "ksaSha256": "A03E98153C6F353AF6F280CD3BDC1C71C718008E2049F508DC6FBE54457A0AA8",
+  "manualAcceptance": "PENDING",
+  "milestone": "NOT ASSIGNED",
+  "bankingAuthorized": false,
+  "deployedFiles": 88,
+  "deploymentManifestSha256": "44B1F326E9C148F7653924B175183B6FE1393B600A2B157C79A2B66498872795",
+  "temporaryFiles": 2351,
+  "temporaryBytes": 633148307.0,
+  "temporaryDisposition": "Retained pending manual acceptance; no automatic deletion",
+  "packageBudgetBytes": 262144,
+  "packageFilesExcludingThisIdentity": [
+    {
+      "name": "allocation.json",
+      "bytes": 6199,
+      "sha256": "58F4E1D84AC66BA8B4294AD727AA043CB0B9CA2D3C3CB8B14F9807756257AC86"
+    },
+    {
+      "name": "build-candidate.ps1",
+      "bytes": 1142,
+      "sha256": "5211F8EE7DEB8C73C3F527C497CEBD4ABA57AA6B8D049FF5859DCC09EA821E62"
+    },
+    {
+      "name": "build-observer.ps1",
+      "bytes": 3079,
+      "sha256": "53A05065F301B4F07F7C731790AB3715BA71EA5CB58008396B3C952A44FA22CB"
+    },
+    {
+      "name": "camera-observer.cs.txt",
+      "bytes": 6134,
+      "sha256": "EF277A84EE786E4001B5D736BDB037476DB1DF9494155E1760CAF95363B8CD27"
+    },
+    {
+      "name": "capture-performance.ps1",
+      "bytes": 1689,
+      "sha256": "F643A3624636802D754F15CA0FEC39571E8C72DE8A350D61C1EA8790DDC94FE8"
+    },
+    {
+      "name": "cleanup.md",
+      "bytes": 858,
+      "sha256": "EE82DCFA1E545E8DCED15E2F74F305B47B4F26B8DEF5C75026DC72DE57F99C79"
+    },
+    {
+      "name": "closeout-identity.ps1",
+      "bytes": 4371,
+      "sha256": "6CEFE1AC921D676233BE9FD71B876D169FBD0407C133AE3A9B21F1D4655CFB2B"
+    },
+    {
+      "name": "consolidate.ps1",
+      "bytes": 4720,
+      "sha256": "49C93005EEA6D3C4E88A4D3F9C2C74555434B6462B6ADA5EF4F0FF24D2999A22"
+    },
+    {
+      "name": "entry-identity.json",
+      "bytes": 24477,
+      "sha256": "31421617E0887E383FE08B75D1F6D389AA5BBC0B424A9C1CEEB8D14BD1E6CFEC"
+    },
+    {
+      "name": "epoch-precision.md",
+      "bytes": 2029,
+      "sha256": "A8F4CE27576A3216175CD7757D1079739CAC45FF4B675663AC18EC07BC40BEFC"
+    },
+    {
+      "name": "implementation.md",
+      "bytes": 1824,
+      "sha256": "B6C10D835F98784597F2435EB4886C1B970C0F209C7F45B530326DEBC96DF0A1"
+    },
+    {
+      "name": "input-bindings.md",
+      "bytes": 1756,
+      "sha256": "ACF62A7A7587B70299FD9CDE432E64BC2ED302857FBEE69E516ACEFEE3BBC278"
+    },
+    {
+      "name": "ksa-current-camera.md",
+      "bytes": 2633,
+      "sha256": "6EC44BCEDE33EB9DCE70AD1CA6A35449E77D5A014811D8F4916FF499AE62B7A7"
+    },
+    {
+      "name": "manual-route.md",
+      "bytes": 2244,
+      "sha256": "729E2FCD47EC5AD9CA460C2991C95A54B253871A6A2B9C369AAF62D26C66B2A5"
+    },
+    {
+      "name": "owner-map.md",
+      "bytes": 1415,
+      "sha256": "DD2DB95D3CE2928DFE4641C687EC2099A908B1406CEAEBE3D953DC8B067A79BA"
+    },
+    {
+      "name": "performance.json",
+      "bytes": 84866,
+      "sha256": "8B03C1D03C03D9DDA6B78B67CF589DC217CD04731DC71DE94A27C3AC47B8F2B4"
+    },
+    {
+      "name": "performance.md",
+      "bytes": 5163,
+      "sha256": "402EFEB3F42A4EA9F848FB2953FC2BBADF4D94C1D51A97DE2E2C29BF0DCCECC3"
+    },
+    {
+      "name": "prepare-launcher.ps1",
+      "bytes": 1496,
+      "sha256": "C6E12C0D366F6653B63F4F2D2BF2D891B49FAA795D3C3D305C641AAFFEC92FC8"
+    },
+    {
+      "name": "README.md",
+      "bytes": 6949,
+      "sha256": "FD13A3F93FD494F599FC5EECF60933BFDFFC534EF598F53D81DFFC682C7357D6"
+    },
+    {
+      "name": "regression.json",
+      "bytes": 47717,
+      "sha256": "9639DC5D65FB39BFF0E3EEA64C7EA049864CFCAFAB08C47F488DD9132D93C497"
+    },
+    {
+      "name": "repo-truth.md",
+      "bytes": 1203,
+      "sha256": "8B539418C6DEFCF3134984835BF2660766E97EF8719D5D2CC6D3F2CD6F5D5D83"
+    },
+    {
+      "name": "reproduce.md",
+      "bytes": 3060,
+      "sha256": "C23E02D07347B487821E05B60A9A1E519CAFCB1ABD81285C74FB1D82FC2572AE"
+    },
+    {
+      "name": "target-contract.md",
+      "bytes": 1687,
+      "sha256": "2AC3C58FCB10AC81C3DB7DE8C258F44A948D699BCE4161C9D9E0651182778C0D"
+    },
+    {
+      "name": "test-contract.md",
+      "bytes": 2441,
+      "sha256": "BC069E5144FE70BFA87DDB5229E38EE2FA8F23B050F2951EC0E261C419DBD506"
+    },
+    {
+      "name": "validate.ps1",
+      "bytes": 3252,
+      "sha256": "28156FB656AF3D898998E064DF2F1C175D36643505C5D242444FB93CC36A1955"
+    },
+    {
+      "name": "validation.json",
+      "bytes": 1037,
+      "sha256": "EFEAA0BB94FD2F153EC374A1CC1C04CCF9F466020E49E99EFA92A18DA1D3D22D"
+    },
+    {
+      "name": "verification.md",
+      "bytes": 3380,
+      "sha256": "64599C83A0B5660CB356C342D46BBFB3C1435473670EC0BD85BE8CFE39E0F71B"
+    }
+  ]
+}

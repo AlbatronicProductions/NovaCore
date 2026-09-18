@@ -1,0 +1,65 @@
+using System.Text.Json;
+using NovaCore.Core;
+using NovaCore.Core.Camera;
+using NovaCore.Core.Surface;
+using NovaCore.Graphics;
+using NovaCore.Interop;
+using NovaCore.Simulation.Time;
+
+internal static class WarpFrameProbe
+{
+    static double[] V(Double3 v)=>[v.X,v.Y,v.Z];
+    static double[] Q(DoubleQuaternion q)=>[q.X,q.Y,q.Z,q.W];
+    static double N(Double3 v)=>Math.Sqrt(v.LengthSquared);
+    internal static void Run()
+    {
+        AssemblyFloridaSiteTests.PrepareCameraFixture();
+        foreach(var factor in new[]{1L,120L,14400L,86400L})
+        {
+            if(!SolarSystemScene.TryCreateAt(new(1),SimulationInstant.Zero,out var value,out var error))throw new Exception(error);
+            var solar=value!;
+            using var scene=new StockAssemblyDevelopmentScene(supportedContact:true,floridaSupport:true,solarWorld:solar);
+            var camera=new CameraState(new(new(1),default),DoubleQuaternion.Identity,new(Math.PI/3,16d/9,.01,1e15),CameraMode.Free);
+            scene.FloridaView!.PrepareCamera(camera);
+            if(!solar.BindActiveVessel(scene.PrepareFocusObservation())||!solar.RefocusActiveVessel(camera))throw new Exception("bind");
+            while(solar.Rate.Numerator!=factor||solar.Rate.Denominator!=1)
+                solar.ApplyPresentationInput(camera,new(){RateIncrease=1},out _,out _);
+            var canonical=scene.Observation;
+            var firstOffset=Double3.Zero;var firstHorizon=Double3.Zero;var firstAzimuth=0d;var firstElevation=0d;
+            var maxAzimuth=0d;var maxElevation=0d;var maxHorizon=0d;var maxDistance=0d;
+            var firstDistance=0d;
+            void Capture(int frame,bool emit)
+            {
+                var target=scene.PrepareFocusObservation();var earth=solar.FocusedBody;
+                var rootToBody=earth.BodyFixedToRoot.Conjugate();
+                var offset=camera.Position.Value-target.MaterialOrigin.Value;
+                var bodyOffset=rootToBody.Rotate(offset);
+                var direction=rootToBody.Rotate(target.MaterialOrigin.Value-earth.Position.Value).Normalized();
+                var east=Double3.Cross(Double3.UnitY,direction).Normalized();var north=Double3.Cross(direction,east).Normalized();
+                var local=new Double3(Double3.Dot(bodyOffset,east),Double3.Dot(bodyOffset,north),Double3.Dot(bodyOffset,direction));
+                var azimuth=Math.Atan2(local.X,local.Y);var elevation=Math.Asin(Math.Clamp(local.Z/N(local),-1d,1d));
+                var horizon=camera.Orientation.Conjugate().Rotate(earth.BodyFixedToRoot.Rotate(direction));
+                var distance=N(offset);
+                if(frame==0){firstOffset=bodyOffset;firstHorizon=horizon;firstAzimuth=azimuth;firstElevation=elevation;firstDistance=distance;}
+                maxAzimuth=Math.Max(maxAzimuth,Math.Abs(Math.IEEERemainder(azimuth-firstAzimuth,Math.Tau)));
+                maxElevation=Math.Max(maxElevation,Math.Abs(elevation-firstElevation));
+                maxHorizon=Math.Max(maxHorizon,N(horizon-firstHorizon));maxDistance=Math.Max(maxDistance,Math.Abs(distance-firstDistance));
+                if(emit)Console.WriteLine("WARP_TRACE "+JsonSerializer.Serialize(new{factor,frame,displayTicks=solar.CurrentTime.Ticks,observationTicks=target.ObservationTicks,
+                    canonicalPosition=V(canonical.State.Motion.PositionO),canonicalOrientation=Q(canonical.State.Motion.BodyToWorld),canonicalUnchanged=canonical==scene.Observation,
+                    earthOrientation=Q(earth.BodyFixedToRoot),environment=solar.EnvironmentalBodyId,focus=solar.CurrentFocusTarget.SceneObjectId,
+                    orbitYaw=solar.OrbitYawRadians,orbitPitch=solar.OrbitPitchRadians,rootEye=V(camera.Position.Value),focusPoint=V(target.MaterialOrigin.Value),rootOffset=V(offset),bodyOffset=V(bodyOffset),bodyOffsetChange=N(bodyOffset-firstOffset),
+                    cameraOrientation=Q(camera.Orientation),bodyNormal=V(direction),east=V(east),north=V(north),up=V(direction),horizonInView=V(horizon),azimuth,elevation,distance,aimDot=Double3.Dot((-offset).Normalized(),camera.Orientation.Rotate(new(0,0,-1)))}));
+            }
+            Capture(0,true);
+            for(var frame=1;frame<=600;frame++)
+            {
+                solar.ApplyPresentationInput(camera,new(){DeltaSeconds=1f/60},out _,out _);
+                if(!solar.TryAdvanceByHostDuration(new(16667),camera,out error))throw new Exception(error);
+                if(!solar.RefreshActiveVessel(camera,scene.PrepareFocusObservation()))throw new Exception("refresh");
+                solar.EnforceFinalCameraInvariant(camera);solar.Update(camera);
+                Capture(frame,frame is 1 or 60 or 600);
+            }
+            Console.WriteLine("WARP_SUMMARY "+JsonSerializer.Serialize(new{factor,frames=600,maxAzimuthRadians=maxAzimuth,maxElevationRadians=maxElevation,maxHorizonVectorChange=maxHorizon,maxDistanceMetres=maxDistance,canonicalUnchanged=canonical==scene.Observation}));
+        }
+    }
+}

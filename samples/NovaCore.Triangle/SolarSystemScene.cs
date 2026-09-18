@@ -309,6 +309,16 @@ internal sealed class SolarSystemScene
     private bool _bodyLocalCameraPlacementPending;
     private bool _bodyLocalCameraPlacementUseOrbitCandidate;
     private FocusTarget _focusTarget = FocusTarget.BodyCenter(BodyOrder[0]);
+    private SceneObjectFocusObservation _activeVessel;
+    private ulong _activeVesselId, _activeVesselGeneration;
+    private int _activeVesselEnvironmentIndex=-1;
+    private bool _hasVesselView;
+    private (double Distance, double Yaw, double Pitch, DoubleQuaternion Orientation) _vesselView;
+    private int _activeVesselFrameIndex=-1;
+    private DoubleQuaternion _vesselFrameToRoot=DoubleQuaternion.Identity;
+    private DoubleQuaternion _vesselOrbitOrientation=DoubleQuaternion.Identity;
+    internal long PresentationTicks { get; private set; }
+    internal long ActiveVesselPoseRevision { get; private set; }
     private CameraReferenceAuthority _cameraReferenceAuthority;
     private SurfaceCameraState _surfaceCameraState;
     private Double3 _surfaceCameraPivotRoot;
@@ -393,8 +403,14 @@ internal sealed class SolarSystemScene
     internal bool DetailedComputeRequested => ProductionSurfaceEligible;
     internal PlanetRenderProxy FocusedBody => Presentation.Bodies[FocusIndex];
     internal FocusTarget CurrentFocusTarget => _focusTarget;
+    internal ulong ActiveVesselId => _activeVesselId;
+    internal ulong ActiveVesselGeneration => _activeVesselGeneration;
+    internal SceneObjectFocusObservation ActiveVesselObservation => _activeVessel;
+    internal ulong EnvironmentalBodyId => FocusedBody.BodyId;
     internal Double3 CurrentFocusRoot => _cameraReferenceAuthority==CameraReferenceAuthority.SurfaceRelative
         ? _surfaceCameraPivotRoot
+        : _focusTarget.Kind==FocusTargetKind.SceneObject
+        ? _activeVessel.MaterialOrigin.Value
         : _focusTarget.Kind==FocusTargetKind.SurfaceAnchor
         ? SurfaceFocusHandoffPolicy.BlendedRoot(FocusedBody.Position.Value,EvaluateSurfaceAnchorRoot(),_surfaceAnchorBlend)
         : FocusedBody.Position.Value;
@@ -441,8 +457,12 @@ internal sealed class SolarSystemScene
     internal double MoonOrbitEndpointMismatchMetres => _moonOrbitEndpointMismatchMetres;
     internal SolarCameraPresentationMode CameraPresentationMode { get; private set; }
     internal CameraProjection Projection => new(Math.PI / 3d, 16d / 9d,
-        FocusIndex>0&&double.IsFinite(_surfaceAltitudeMetres)&&_surfaceAltitudeMetres>=0d?PlanetarySurfaceCameraPolicy.NearClipMetres(_surfaceAltitudeMetres):PlanetarySurfaceCameraPolicy.MaximumNearClipMetres,
+        _focusTarget.Kind==FocusTargetKind.SceneObject
+        ? Math.Max(.01d,Math.Min(_orbitDistance*.01d,EnvironmentNearClip))
+        : EnvironmentNearClip,
         SolAnalyticalDefinition.AstronomicalUnitMetres * MaximumOverviewDistanceAu);
+    private double EnvironmentNearClip => FocusIndex>0&&double.IsFinite(_surfaceAltitudeMetres)&&_surfaceAltitudeMetres>=0d
+        ? PlanetarySurfaceCameraPolicy.NearClipMetres(_surfaceAltitudeMetres):PlanetarySurfaceCameraPolicy.MaximumNearClipMetres;
     internal PlanetaryCameraPresentationMode SurfaceCameraMode=>_surfaceCameraMode;
     internal SurfaceAnchorFocus? SurfaceFocus=>_focusTarget.Kind==FocusTargetKind.SurfaceAnchor?_focusTarget.SurfaceAnchor:null;
     internal double SurfaceAnchorBlend=>_surfaceAnchorBlend;
@@ -557,6 +577,7 @@ internal sealed class SolarSystemScene
     internal bool Focus(CameraState camera, int index)
     {
         if ((uint)index >= Presentation.Count) return false;
+        SaveVesselView();
         FocusIndex = index;
         _cameraReferenceAuthority=CameraReferenceAuthority.Inertial;_surfaceCameraState=default;_surfaceCameraPivotRoot=default;_inertialOrbitOrientationOverride=null;_inertialOrbitOffsetDirectionOverride=null;
         _focusTarget = FocusTarget.BodyCenter(Presentation.Bodies[index].BodyId);
@@ -575,7 +596,124 @@ internal sealed class SolarSystemScene
         return value is >= 1 and <= 10 && Focus(camera, (int)value - 1);
     }
 
-    internal void ApplyPresentationInput(CameraState camera, in NativeInputState input, out bool rateChanged, out bool pauseChanged)
+    // Registration is an explicit scene-lifetime operation, never a target scan or
+    // a camera action that selects a different physical/control owner.
+    internal bool BindActiveVessel(in SceneObjectFocusObservation value)
+    {
+        if(_activeVesselId!=0&&_activeVessel.Status!=SceneObjectFocusStatus.Retired)return false;
+        if(!value.IsAvailable||value.MaterialOrigin.Frame!=Presentation.RootFrame||value.DisplayTicks!=CurrentTime.Ticks||value.DisplayTicks!=PresentationTicks)return false;
+        var environment=-1;
+        for(var i=0;i<Presentation.Count;i++)if(Presentation.Bodies[i].BodyId==value.EnvironmentalBodyId){environment=i;break;}
+        if(environment<0||!TryResolveVesselFrameIndex(value.ReferenceFrame,out var frameIndex))return false;
+        _activeVesselEnvironmentIndex=environment;
+        _activeVesselFrameIndex=frameIndex;
+        _vesselFrameToRoot=ResolveVesselFrame(value.ReferenceFrame,frameIndex);
+        _activeVesselId=value.CanonicalId;_activeVesselGeneration=value.Generation;
+        _activeVessel=value;_hasVesselView=false;
+        return true;
+    }
+
+    internal bool RefreshActiveVessel(CameraState camera,in SceneObjectFocusObservation value)
+    {
+        if(_activeVesselId==0)return false;
+        var frameChanged=value.ReferenceFrame!=_activeVessel.ReferenceFrame;
+        var nextFrameIndex=_activeVesselFrameIndex;
+        if(value.CanonicalId!=_activeVesselId||value.Generation!=_activeVesselGeneration||
+            !ValidVesselObservation(value)||value.PublicationRevision<_activeVessel.PublicationRevision||
+            (frameChanged&&!TryResolveVesselFrameIndex(value.ReferenceFrame,out nextFrameIndex)))
+        {
+            _activeVessel=_activeVessel with{Status=SceneObjectFocusStatus.Retired};
+            if(_focusTarget.Kind==FocusTargetKind.SceneObject)Focus(camera,FocusIndex);
+            return false;
+        }
+        // A retired binding cannot be revived by a delayed observation. A new
+        // publisher must be explicitly bound at its scene lifetime boundary.
+        if(_activeVessel.Status==SceneObjectFocusStatus.Retired)return false;
+        var nextFrame=ResolveVesselFrame(value.ReferenceFrame,nextFrameIndex);
+        if(frameChanged)
+        {
+            // The old and new bases are evaluated at THIS display epoch. Using
+            // the cached previous-epoch rotation would introduce a warp jump.
+            var transport=(nextFrame.Conjugate()*ResolveVesselFrame(_activeVessel.ReferenceFrame,_activeVesselFrameIndex)).Normalized();
+            if(_focusTarget.Kind==FocusTargetKind.SceneObject)
+            {
+                _vesselOrbitOrientation=(transport*_vesselOrbitOrientation).Normalized();
+                VesselAngles(_vesselOrbitOrientation,out _orbitYawRadians,out _orbitPitchRadians);
+            }
+            if(_hasVesselView)
+            {
+                var retained=(transport*_vesselView.Orientation).Normalized();
+                VesselAngles(retained,out var yaw,out var pitch);
+                _vesselView=(_vesselView.Distance,yaw,pitch,retained);
+            }
+        }
+        _activeVesselFrameIndex=nextFrameIndex;
+        _vesselFrameToRoot=nextFrame;
+        _activeVessel=value;
+        if(_focusTarget.Kind==FocusTargetKind.SceneObject)ApplyOrbitPose(camera);
+        return true;
+    }
+
+    private bool ValidVesselObservation(in SceneObjectFocusObservation value) =>
+        value.IsAvailable&&value.MaterialOrigin.Frame==Presentation.RootFrame&&
+        value.DisplayTicks==CurrentTime.Ticks&&value.DisplayTicks==PresentationTicks&&_activeVesselEnvironmentIndex>=0&&
+        Presentation.Bodies[_activeVesselEnvironmentIndex].BodyId==value.EnvironmentalBodyId;
+
+    private bool TryResolveVesselFrameIndex(in SceneObjectFocusReferenceFrame frame,out int index)
+    {
+        index=-1;
+        if(!frame.IsValid)return false;
+        if(frame.ParentBodyId==0)return true;
+        for(var i=0;i<Presentation.Count;i++)
+            if(Presentation.Bodies[i].BodyId==frame.ParentBodyId){index=i;return true;}
+        return false;
+    }
+
+    private DoubleQuaternion ResolveVesselFrame(in SceneObjectFocusReferenceFrame frame,int index) =>
+        index<0 ? frame.LocalToParent : (Presentation.Bodies[index].BodyFixedToRoot*frame.LocalToParent).Normalized();
+
+    internal bool RefocusActiveVessel(CameraState camera,bool applyPose=true)
+    {
+        if(!ValidVesselObservation(_activeVessel))return false;
+        SaveVesselView();
+        var initialOffset=camera.Position.Value-_activeVessel.MaterialOrigin.Value;
+        FocusIndex=_activeVesselEnvironmentIndex;
+        ClearSurfaceCameraFocus();
+        _focusTarget=FocusTarget.SceneObject(_activeVesselId);
+        if(_hasVesselView)
+        { _orbitDistance=_vesselView.Distance;_orbitYawRadians=_vesselView.Yaw;_orbitPitchRadians=_vesselView.Pitch;_vesselOrbitOrientation=_vesselView.Orientation; }
+        else
+        {
+            // Retain the prepared viewing direction. If entered from a
+            // distant celestial view, initialize above the local horizon.
+            if(!initialOffset.IsFinite||initialOffset.LengthSquared<1d||initialOffset.LengthSquared>1600d)
+                initialOffset=(_activeVessel.MaterialOrigin.Value-FocusedBody.Position.Value).Normalized()*2d+Double3.UnitY;
+            var radial=_vesselFrameToRoot.Conjugate().Rotate(initialOffset.Normalized());
+            _orbitDistance=24d;_orbitYawRadians=Math.Atan2(radial.X,radial.Z);
+            _orbitPitchRadians=-Math.Asin(Math.Clamp(radial.Y,-1d,1d));
+            _vesselOrbitOrientation=(DoubleQuaternion.FromAxisAngle(Double3.UnitY,_orbitYawRadians)*
+                DoubleQuaternion.FromAxisAngle(Double3.UnitX,_orbitPitchRadians)).Normalized();
+        }
+        CameraPresentationMode=SolarCameraPresentationMode.Free3D;
+        if(applyPose)ApplyOrbitPose(camera);return true;
+    }
+
+    private void SaveVesselView()
+    {
+        if(_focusTarget.Kind!=FocusTargetKind.SceneObject)return;
+        _vesselView=(_orbitDistance,_orbitYawRadians,_orbitPitchRadians,_vesselOrbitOrientation);_hasVesselView=true;
+    }
+
+    private void ClearSurfaceCameraFocus()
+    {
+        _cameraReferenceAuthority=CameraReferenceAuthority.Inertial;_surfaceCameraState=default;_surfaceCameraPivotRoot=default;
+        _inertialOrbitOrientationOverride=null;_inertialOrbitOffsetDirectionOverride=null;
+        _surfaceAnchorBlend=0;_retainedVisualAimAnchor=null;_retainedVisualAimOffsetRoot=default;_retainedVisualAimWeight=0;
+        _bodyLocalCameraAltitudeDemandMetres=double.NaN;_bodyLocalCameraPlacementPending=false;_bodyLocalCameraPlacementUseOrbitCandidate=false;
+        _surfaceCameraMode=PlanetaryCameraPresentationMode.Orbital;
+    }
+
+    internal void ApplyPresentationInput(CameraState camera, in NativeInputState input, out bool rateChanged, out bool pauseChanged,bool deferVesselPose=false)
     {
         AdvanceSpeedHud(input.DeltaSeconds);
         rateChanged = false;
@@ -592,6 +730,21 @@ internal sealed class SolarSystemScene
         {
             if (_clock.IsPaused) _clock.Resume(); else _clock.Pause();
             pauseChanged = true;
+        }
+
+        // FREE is deferred: changing controller without a retained parent frame
+        // loses the moving surface context. Only F is a camera action here.
+        // Celestial selection and reset remain host-owned, view-only actions.
+        if((input.CameraActions&NativeCameraActions.FocusActiveVessel)!=0)RefocusActiveVessel(camera,false);
+        if(_focusTarget.Kind==FocusTargetKind.SceneObject)
+        {
+            _surfaceCameraToggleWasDown=input.MoveUp!=0;
+            if(input.MouseWheelDetents!=0)_orbitDistance=SolarCameraZoomPolicy.ApplyTargetRelative(
+                _orbitDistance,.5d,SolAnalyticalDefinition.AstronomicalUnitMetres*MaximumOverviewDistanceAu,input.MouseWheelDetents);
+            if(input.LookActive!=0)ApplyVesselLook(input.MouseDeltaX,input.MouseDeltaY);
+            // Final display placement follows the refreshed copied observation.
+            if(!deferVesselPose)ApplyOrbitPose(camera);
+            return;
         }
 
         var surfaceToggleDown=input.MoveUp!=0;
@@ -735,12 +888,13 @@ internal sealed class SolarSystemScene
         }
         _clock.ConsumePendingSimulationDebt(new SimulationDuration(_clock.CurrentTime.Ticks - before.Ticks));
         if (!TryPublishAt(_clock.CurrentTime, out error)) return false;
-        ApplyOrbitPose(camera);
+        if(_focusTarget.Kind!=FocusTargetKind.SceneObject)ApplyOrbitPose(camera);
         return true;
     }
 
     internal void ResetPresentationCamera(CameraState camera)
     {
+        SaveVesselView();
         FocusIndex = 0;
         _cameraReferenceAuthority=CameraReferenceAuthority.Inertial;_surfaceCameraState=default;_surfaceCameraPivotRoot=default;_surfaceCameraToggleWasDown=false;_inertialOrbitOrientationOverride=null;_inertialOrbitOffsetDirectionOverride=null;
         _focusTarget = FocusTarget.BodyCenter(Presentation.Bodies[0].BodyId);
@@ -991,6 +1145,7 @@ internal sealed class SolarSystemScene
             return false;
         }
         Presentation = candidate;
+        PresentationTicks = time.Ticks;
         error = string.Empty;
         return true;
     }
@@ -1400,6 +1555,17 @@ internal sealed class SolarSystemScene
 
     private void ApplyOrbitPose(CameraState camera,bool allowFocusTransition=false,bool surfaceHandoffResolvedForPose=false)
     {
+        if(_focusTarget.Kind==FocusTargetKind.SceneObject)
+        {
+            if(_focusTarget.SceneObjectId!=_activeVessel.CanonicalId||!ValidVesselObservation(_activeVessel)){Focus(camera,FocusIndex);return;}
+            var target=CurrentFocusRoot;
+            camera.Orientation=(_vesselFrameToRoot*_vesselOrbitOrientation).Normalized();
+            camera.Position=camera.Position with{Value=target+camera.Orientation.Rotate(Double3.UnitZ)*_orbitDistance};
+            AimAtVessel(camera);
+            EnforceFinalCameraInvariant(camera);
+            ActiveVesselPoseRevision=unchecked(ActiveVesselPoseRevision+1);
+            camera.Projection=Projection;camera.Validate();Update(camera);return;
+        }
         if(_cameraReferenceAuthority==CameraReferenceAuthority.SurfaceRelative)
         {
             ApplySurfaceCameraPose(camera);
@@ -1525,6 +1691,7 @@ internal sealed class SolarSystemScene
 
     internal double EnforceFinalCameraInvariant(CameraState camera)
     {
+        var unconstrainedEye=camera.Position;
         var terrain=FocusedTerrain;
         if(_cameraReferenceAuthority==CameraReferenceAuthority.SurfaceRelative)
         {
@@ -1561,7 +1728,40 @@ internal sealed class SolarSystemScene
         if(!double.IsFinite(altitude)||(FocusedBodyHasNavigableSolidSurface&&!SurfaceFocusHandoffPolicy.SatisfiesMinimumTerrainClearance(altitude)))
             ThrowFinalCameraClearanceFailure(FocusedBody.BodyId,altitude);
         _surfaceAltitudeMetres=altitude;
+        if(_focusTarget.Kind==FocusTargetKind.SceneObject&&camera.Position!=unconstrainedEye)AimAtVessel(camera);
         return altitude;
+    }
+
+    private void AimAtVessel(CameraState camera)
+    {
+        var offset=camera.Position.Value-CurrentFocusRoot;
+        if(offset.LengthSquared<=1e-12d)return;
+        var radial=offset.Normalized();
+        var desired=(_vesselFrameToRoot*_vesselOrbitOrientation).Normalized();
+        var from=desired.Rotate(Double3.UnitZ);
+        var dot=Math.Clamp(Double3.Dot(from,radial),-1d,1d);
+        // Minimal swing aims from the constrained eye without discarding the
+        // transported horizon/roll. Deterministic right axis at the antipode.
+        var cross=Double3.Cross(from,radial);
+        var swing=dot < -1d+1e-12
+            ? DoubleQuaternion.FromAxisAngle(desired.Rotate(Double3.UnitX),Math.PI)
+            : new DoubleQuaternion(cross.X,cross.Y,cross.Z,1d+dot).Normalized();
+        camera.Orientation=(swing*desired).Normalized();
+    }
+
+    private static void VesselAngles(in DoubleQuaternion orientation,out double yaw,out double pitch)
+    {
+        var radial=orientation.Rotate(Double3.UnitZ);
+        yaw=Math.Atan2(radial.X,radial.Z);pitch=-Math.Asin(Math.Clamp(radial.Y,-1d,1d));
+    }
+
+    private void ApplyVesselLook(float deltaX,float deltaY)
+    {
+        var yawed=(DoubleQuaternion.FromAxisAngle(Double3.UnitY,-deltaX*OrbitSensitivity)*_vesselOrbitOrientation).Normalized();
+        var candidate=(DoubleQuaternion.FromAxisAngle(yawed.Rotate(Double3.UnitX),-deltaY*OrbitSensitivity)*yawed).Normalized();
+        VesselAngles(candidate,out var yaw,out var pitch);
+        if(Math.Abs(pitch)>1.45d){candidate=yawed;VesselAngles(candidate,out yaw,out pitch);}
+        _vesselOrbitOrientation=candidate;_orbitYawRadians=yaw;_orbitPitchRadians=pitch;
     }
 
     private void RecordCameraExteriorConstraint(in CameraExteriorConstraintResult value)

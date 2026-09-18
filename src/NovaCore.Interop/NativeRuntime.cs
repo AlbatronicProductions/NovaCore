@@ -340,11 +340,14 @@ public struct NativeAbiLayout
     public uint EncodedPositionSize, CameraDataSize, CameraPositionOffset, CameraViewProjectionOffset, RenderTransformSize, RenderObjectSize, RenderObjectPositionOffset, RenderObjectTransformOffset, RenderObjectMeshOffset;
     public uint DrawBatchSize, OrbitLineVertexSize, FrameSubmissionSize, FrameObjectsOffset, FrameBatchesOffset, FrameOrbitVerticesOffset, FrameOrbitVertexCountOffset;
     public uint InputStateSize, InputDeltaSecondsOffset, InputMoveLeftOffset, InputMoveRightOffset, InputMoveForwardOffset, InputMoveBackwardOffset, InputMoveDownOffset, InputMoveUpOffset, InputResetOffset, InputLookActiveOffset, InputMouseDeltaXOffset, InputMouseDeltaYOffset, InputMouseWheelDetentsOffset, InputPauseToggleOffset, InputRateDecreaseOffset, InputRateIncreaseOffset, InputSasModeKeyOffset, InputFastModifierOffset, InputSlowModifierOffset;
-    public uint FramePlanetaryGpuOffset, FramePlanetaryModeOffset, FramePlanetaryPresentationOffset, InputPresentationFocusOffset, FrameSolarLightingOffset, InputViewportWidthOffset, InputViewportHeightOffset;
+    public uint FramePlanetaryGpuOffset, FramePlanetaryModeOffset, FramePlanetaryPresentationOffset, InputPresentationFocusOffset, FrameSolarLightingOffset, InputViewportWidthOffset, InputViewportHeightOffset, InputCameraActionsOffset;
 }
 
 [StructLayout(LayoutKind.Sequential)]
-public struct NativeInputState { public float DeltaSeconds; public uint MoveLeft, MoveRight, MoveForward, MoveBackward, MoveDown, MoveUp, Reset, LookActive; public float MouseDeltaX, MouseDeltaY; public int MouseWheelDetents; public uint PauseToggle, RateDecrease, RateIncrease, SasModeKey, FastModifier, SlowModifier; public NativePresentationFocus PresentationFocus; public uint ViewportWidthPixels, ViewportHeightPixels; }
+public struct NativeInputState { public float DeltaSeconds; public uint MoveLeft, MoveRight, MoveForward, MoveBackward, MoveDown, MoveUp, Reset, LookActive; public float MouseDeltaX, MouseDeltaY; public int MouseWheelDetents; public uint PauseToggle, RateDecrease, RateIncrease, SasModeKey, FastModifier, SlowModifier; public NativePresentationFocus PresentationFocus; public uint ViewportWidthPixels, ViewportHeightPixels; public NativeCameraActions CameraActions; }
+
+// Bit 2 is reserved; FREE navigation is deferred pending a frame contract.
+[Flags] public enum NativeCameraActions : uint { None=0, FocusActiveVessel=1 }
 
 public enum NativeHostEventType : uint { Diagnostic = 1, UpdateFrame = 2 }
 

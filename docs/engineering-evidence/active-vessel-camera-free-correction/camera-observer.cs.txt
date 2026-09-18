@@ -1,0 +1,86 @@
+// Appended only to the disposable Program compile overlay; accesses its file-local HostState.
+file static class CameraProbe
+{
+    private const int Count=4800, Segment=1200, Warm=180;
+    private static readonly double[] Callback=new double[Count], Interval=new double[Count];
+    private static readonly int[,] Collections=new int[Count,3];
+    private static readonly int[,] AfterCollections=new int[Count,3];
+    private static readonly long[] PhysicalTicks=new long[Count];
+    private static readonly bool NewRoutes=Environment.GetEnvironmentVariable("NOVACORE_CAMERA_PROBE")=="new";
+    private static readonly bool FixedPhysical=Environment.GetEnvironmentVariable("NOVACORE_CAMERA_PROBE_CADENCE")=="fixed";
+    private static int frame;
+    private static long started,last;
+    internal static void ServiceAssembly(HostState state)
+    {
+        if(!FixedPhysical){state.Assembly?.AdvanceLive(state.AssemblyAutoStart);return;}
+        state.Assembly!.Start();
+        state.Assembly.Advance(new SimulationDuration(((frame+1L)*1_000_000/60)-(frame*1_000_000L/60)));
+    }
+    internal static void Begin(HostState state,ref NativeInputState input)
+    {
+        started=System.Diagnostics.Stopwatch.GetTimestamp();
+        if(frame>=Count)return;
+        Interval[frame]=last==0?0:(started-last)*1000d/System.Diagnostics.Stopwatch.Frequency;last=started;
+        for(var i=0;i<3;i++)Collections[frame,i]=GC.CollectionCount(i);
+        var width=input.ViewportWidthPixels;var height=input.ViewportHeightPixels;
+        input=default;input.DeltaSeconds=1f/60;input.ViewportWidthPixels=width;input.ViewportHeightPixels=height;
+        var route=frame/Segment;var local=frame%Segment;var solar=state.Sol!;
+        if(!NewRoutes)
+        {
+            if(local==0)
+            {
+                if(route==0)solar.TryStartAtFloridaSupportSlab(state.Camera,NovaCore.Core.Surface.FloridaSlabSupport.AuthoredTop-NovaCore.Simulation.Spacecraft.Assemblies.AssemblyContactProfile.SupportPlaneAtOrigin);
+                else solar.Focus(state.Camera,route==2?NativePresentationFocus.Moon:NativePresentationFocus.Earth);
+            }
+            if(route==3&&local%120==0)input.PresentationFocus=(local/120&1)==0?NativePresentationFocus.Earth:NativePresentationFocus.Moon;
+        }
+        else
+        {
+#if CAMERA_CANDIDATE
+            if(local==0)
+            {
+                if(route==1)input.PresentationFocus=NativePresentationFocus.Earth;
+                else if(route==2)input.CameraActions=NativeCameraActions.FocusActiveVessel;
+                else input.CameraActions=NativeCameraActions.FocusActiveVessel;
+            }
+            if(route==3&&local%120==0)
+            {
+                if((local/120&1)==0)input.PresentationFocus=NativePresentationFocus.Moon;
+                else input.CameraActions=NativeCameraActions.FocusActiveVessel;
+            }
+            if(route==2&&local%120==0)input.CameraActions=NativeCameraActions.FocusActiveVessel;
+#else
+            throw new InvalidOperationException("New camera semantics do not exist in the baseline.");
+#endif
+        }
+        input.LookActive=1;input.MouseDeltaX=(local/60&1)==0?.10f:-.10f;
+        input.MouseDeltaY=(local/60&1)==0?.03f:-.03f;
+        if(local%120==30)input.MouseWheelDetents=1;
+        if(local%120==90)input.MouseWheelDetents=-1;
+    }
+    internal static void End(HostState state)
+    {
+        if(frame>=Count)return;
+        Callback[frame]=(System.Diagnostics.Stopwatch.GetTimestamp()-started)*1000d/System.Diagnostics.Stopwatch.Frequency;
+        for(var i=0;i<3;i++)AfterCollections[frame,i]=GC.CollectionCount(i);
+        PhysicalTicks[frame]=state.Assembly!.Observation.State.Epoch.Ticks;
+        if(++frame!=Count)return;
+        Console.WriteLine("CAMERA_PROBE_ID version=PROBE_VERSION routes="+(NewRoutes?"new":"matched")+" cadence="+(FixedPhysical?"fixed":"live")+" epoch=j2000 resolution=960x540 frameDt=1/60 count=4800 segment=1200 warmPerSegment=180 instrumentation=preallocated-callback-and-interval");
+        for(var i=0;i<8;i++)Console.WriteLine($"CAMERA_PROBE_FIRST index={i} intervalMs={Interval[i]:R} callbackMs={Callback[i]:R}");
+        for(var route=0;route<4;route++)
+        {
+            var start=route*Segment+Warm;var end=(route+1)*Segment;
+            var gc=new[]{AfterCollections[end-1,0]-Collections[start,0],AfterCollections[end-1,1]-Collections[start,1],AfterCollections[end-1,2]-Collections[start,2]};
+            foreach(var population in new[]{("callback",Callback),("display-interval",Interval)})
+            {
+                var rows=population.Item2.Skip(start).Take(end-start).Select((ms,i)=>new{ms,index=i+start}).ToArray();
+                var sorted=rows.Select(x=>x.ms).Order().ToArray();double P(double q)=>sorted[(int)Math.Ceiling(q*sorted.Length)-1];
+                var name=NewRoutes?new[]{"vessel-follow","celestial","vessel-refocus","switch-refocus"}[route]:new[]{"florida-existing","earth-existing","moon-existing","celestial-switch-existing"}[route];
+                Console.WriteLine("CAMERA_PROBE_COST "+System.Text.Json.JsonSerializer.Serialize(new{version="PROBE_VERSION",newRoutes=NewRoutes,route=name,population=population.Item1,count=sorted.Length,median=P(.5),p95=P(.95),p99=P(.99),maximum=P(1),gc,tails=rows.OrderByDescending(x=>x.ms).Take(8)}));
+                var transition=population.Item2.Skip(route*Segment).Take(Warm).Select((ms,i)=>new{ms,index=route*Segment+i}).ToArray();
+                Console.WriteLine("CAMERA_PROBE_TRANSITION "+System.Text.Json.JsonSerializer.Serialize(new{route=name,population=population.Item1,count=Warm,firstEight=transition.Take(8),tails=transition.OrderByDescending(x=>x.ms).Take(4),physicalStart=PhysicalTicks[start],physicalEnd=PhysicalTicks[end-1]}));
+                if(route==3)Console.WriteLine("CAMERA_PROBE_SWITCH "+System.Text.Json.JsonSerializer.Serialize(new{route=name,population=population.Item1,events=Enumerable.Range(0,10).Select(i=>new{index=route*Segment+i*120,actionMs=population.Item2[route*Segment+i*120],nextMs=population.Item2[route*Segment+i*120+1]})}));
+            }
+        }
+    }
+}

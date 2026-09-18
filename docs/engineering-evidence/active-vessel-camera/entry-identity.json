@@ -1,0 +1,551 @@
+{
+  "capturedUtc": "2026-09-18T14:35:44.0191442Z",
+  "head": "45b1bbcdd8d0e1d42f79f3bb5124e80753ce0e8f",
+  "tagObject": "e1de2ac72f266c01f3c8fe2e3e475151f0423204",
+  "bank": "544f25ad618bcad7a2753de69108ca3c4095df11",
+  "trackedClean": true,
+  "preExistingUntracked": [
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/README.md",
+      "sha256": "85707966A3F693CA61116895C141F88A83401E6EC2BEF71D7DCD79B6C0E8729A"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/candidate-comparison.md",
+      "sha256": "A55EEA05909208FFF544EBE0AB0D0662DA4AD87668D34B520EFB841C6EBCC42E"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/dependency-graph.md",
+      "sha256": "27F1B344A8509BC4680669BAFC5EFAF456DB5C0AF025556E0FA2A2E807C7E569"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/identity.json",
+      "sha256": "E8091133682A817EF396552A777F1089E2C288C6649C1AD98EBBAD6E66CC7D75"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/ksa-camera.md",
+      "sha256": "7BA26D11DE35F2039AFAD4E807901250B662640B16A9B3BC88838CFE1A187F4C"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/ksa-departure.md",
+      "sha256": "B54DF4E2892055D801CEA2C52A41C385BE42D2844ACE64AA386811134104DE3B"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/ksa-launch-stack.md",
+      "sha256": "49B49569309F349C668F78822E97380E0AACFBA0D14512C6EB7C292E7654FD90"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/ksa-live-history.md",
+      "sha256": "336A13A531F2D6CE45526C2412CF93D7774691C9DD963679BFF95404DEA3D18A"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/ksa-navigation-sas.md",
+      "sha256": "5501EC714E83903A1986F33C7B5656C194F3BD6DDBD6372917AC211B102D9C39"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/ksa-player-input.md",
+      "sha256": "62994C41B575F928866CFC3836A3FDC7F92C3877960479EAFDE1333A66003A22"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/novacore-owner-map.md",
+      "sha256": "AD51D35FF402E8F8A6B3C01743B9F7BD96F1B1A914A38FEA6BB4594CCF47B930"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/promotion-judgment.md",
+      "sha256": "E30320C2A893C2B720D770DBD663E9D93520E5CAA990D81285F114D936DAEA6D"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/red-team.md",
+      "sha256": "2DDB044D461F724D4491FEDAAE6DA40498C8B35163CFC17571470386E47071DF"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/repo-truth.md",
+      "sha256": "A500723D2064F0EE3E8A0D8001EB7B2C471845673C345AC5236724BEE0C84F90"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/reproduce.md",
+      "sha256": "B8A6CE6FF2920FD61AD98E855A8C559FF575877335A9E7F8526FA7B7076C6E98"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/verification.json",
+      "sha256": "AE00BF0A73FD44FE5E246005C7FCB604C230F13BE8B03A6F961F7960F8CDD3B6"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/verification.md",
+      "sha256": "4A1CC10CD407C0C49EC73555B2C31FDF3E0BA91B06A5DA40DE93CCFD86239BC9"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/verify-review.ps1",
+      "sha256": "C068516C73D263CEEEFA7A71631B1E66219DBD3EA67E6AF09DC291041803E812"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/closeout.json",
+      "sha256": "F9F8C81D7F8C1DC94F8C80F3F62D857593A5F3D2B0E4150EDCC4CA595E414C48"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/exhaust-ksa.md",
+      "sha256": "C71E2149375B41C29DA6D3177FBE7137C6443E9006508740B85AA6BA118F5D1D"
+    },
+    {
+      "path": "docs/legal/CREATOR-CONTENT-POLICY-DRAFT.md",
+      "sha256": "45D6A9966A89962BBBE0CA167FD62A07E39FE74B37621C73FF4558F852A44D0C"
+    },
+    {
+      "path": "docs/legal/LEGAL-REVIEW-TODO.md",
+      "sha256": "BC6A94CE816093A0A72C27975DB20C7F22F5F7EB9A36DC28ABE49837A8C019FE"
+    },
+    {
+      "path": "docs/legal/MODDING-POLICY-DRAFT.md",
+      "sha256": "BF7D6144200EAE6EDDA286B19C0AA83E3D262F0E1ED956FE881E3B9333313AD7"
+    },
+    {
+      "path": "docs/legal/ROOT-LICENSE-CANDIDATE.md",
+      "sha256": "9768C62CFC86E4EF8A090CA1EE8F4E1DEC9DA9486A8EA5E63C3075953D47180C"
+    },
+    {
+      "path": "docs/legal/finalization/COMMERCIAL-LICENSING-PROPOSED.md",
+      "sha256": "2D9A9B426232826FE19D1678AEF8FEADB7A241B4ABBA5FA9A9B201325D5B58C3"
+    },
+    {
+      "path": "docs/legal/finalization/CREATOR-CONTENT-POLICY-PROPOSED.md",
+      "sha256": "25D48B0A2C5E8EFA243DEE627A17685D16A4F2DDC7C84337559BDDDB1D6CE81F"
+    },
+    {
+      "path": "docs/legal/finalization/IDENTITY.json",
+      "sha256": "F46F7B4215CD7C4311233DEB3B36434798941B602478ED9AB20539BFF3A2263B"
+    },
+    {
+      "path": "docs/legal/finalization/INSTALLATION-PLAN.md",
+      "sha256": "8923E3630C2D44DB6DD9B13E41FEA51CD847403BEE3F9EDFCE56543D5609E364"
+    },
+    {
+      "path": "docs/legal/finalization/LEGAL-REVIEW-BRIEF.md",
+      "sha256": "5CB5AC5616369CC6F399C323B9C6351EAB0D4E2253BBBF08C6F8E317A7C06E00"
+    },
+    {
+      "path": "docs/legal/finalization/LICENSING-PROPOSED.md",
+      "sha256": "41EAD10AB96F1E1987AC847109D442E158B290F82CFB6F598047ADA3C1DEFA62"
+    },
+    {
+      "path": "docs/legal/finalization/MODDING-POLICY-PROPOSED.md",
+      "sha256": "6F5440BD5D0C28487E48591C88D6A21761514823E5855F4598072D679E5AD433"
+    },
+    {
+      "path": "docs/legal/finalization/NOTICE-PROPOSED.md",
+      "sha256": "6C0F70CDDE3DCD6EFDE8904A9CB592AA4517C2C5793627C665984AF6BC9BFABA"
+    },
+    {
+      "path": "docs/legal/finalization/PROJECT-CONTROL-DECISIONS.md",
+      "sha256": "16A305F5992222FE8A998B3C052DA505D439E863B140CDBB9951DE7D3A17DCE5"
+    },
+    {
+      "path": "docs/legal/finalization/REPORT.md",
+      "sha256": "EA6FA514E054B018868F3A6266C036C1E426126EA18507C9AE31B514962E1F6A"
+    },
+    {
+      "path": "docs/legal/finalization/RIGHTS-MATRIX.md",
+      "sha256": "031471F49DE563EBCC56CEEF5DC3817C2506226858E4B09A8898978D9853B075"
+    },
+    {
+      "path": "docs/legal/finalization/ROOT-LICENSE-PROPOSED.md",
+      "sha256": "D55E23207DD1FB93B51B097CAAFC3003E733DD4D8B281E66884078B3372E0CE2"
+    },
+    {
+      "path": "docs/legal/finalization/THIRD-PARTY-SCOPE.md",
+      "sha256": "4CD4B3C87F0DF2F833772A2FA1E03AB4BE69E4EC8CF449BE7F75D1CC99F3298F"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/COMMERCIAL-LICENSING-preinstallation.md",
+      "sha256": "255BBF8B40BC0558CA51CC4314705D3BE7BD15E3509749086C6918483EA9E585"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/FINAL-REPORT.md",
+      "sha256": "9303CF44C330801D9E73B52A905E780762D69538B6B8131840F190CABAA31E4E"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/commit.json",
+      "sha256": "4ADADD439E0BC32E2A67504DE8568997D418582C7906F3EFE7E52ED9F1A3146D"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/final-bank-paths.json",
+      "sha256": "2DF837472BF5AAB7E7320F7E191A50D28F5F0074B6F6F43BB00714C00FD739E6"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/preflight.json",
+      "sha256": "466650DDEA93B66B73216F0470AC59C4A28693372CBEB0F95EB5FE9E41A8D497"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/prospective.json",
+      "sha256": "25CC007BFDD7E09929527F566A908945A86EDD4D3F341E46D4AF24438A0DB363"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/release-gates.md",
+      "sha256": "AAD2D98BC7EBA715FF9E6E9A30DE798BF6D33B95EEA6BA2F9176CEE2BA51CF1C"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/remote-tags-before.txt",
+      "sha256": "E8EB8AF4105E9C97475DF9CF8AE53CBA68BA23A71EF9B9AA7749C0B97A9891B3"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/remote-verification-stop.json",
+      "sha256": "DF5F0D2378AC6A50EEA2133D2C9F38584E623F7679DF7CD2EB827FD971BA97EB"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/remote-verification.json",
+      "sha256": "85D493C3748A3BE0D9BCD57C6DB01DB16FE29B56D39AC6D6B749E4DB434D8E5A"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/rights-matrix.md",
+      "sha256": "1AA52F7883FC10B4657DD0A86097FA2E28A9C09145CE6135771F410222B9E2A6"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/staged.json",
+      "sha256": "70B12C49D710E6B8BED292B4743469F4479822E01A2BFC3621BBFA79F848961C"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/withheld-paths.json",
+      "sha256": "F3E079029EF026043F6F995149EDDE307EA688A4AC12EB121B9F2E32ECDD9396"
+    }
+  ],
+  "sourceInputs": [
+    {
+      "path": "native/NovaCore.Native/NovaCoreNative.cpp",
+      "sha256": "FE9145E174A66C8257FE43ACA818E3E01251C5BCBD2A17F6F18DDEACE04552AF"
+    },
+    {
+      "path": "native/NovaCore.Native/NovaCoreNative.h",
+      "sha256": "C01015CF371A42B97DEA3102C3DE935237BF72FE182475CADA6DF821878043CC"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/CelestialAnalyticalScene.cs",
+      "sha256": "51123E1CBE8EA7E5E5D397A369A278CA8B0353777A5FBE5CB123D01FE17D41B9"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/ContactDevelopmentScene.cs",
+      "sha256": "ABC48C816EB29555AB9942ADA86AC4A16C3CE6158BEC8145405AB43BAB43A87D"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/DebugCameraInput.cs",
+      "sha256": "022D400FD2BA160A4BA6D0B02776C023BDE2A082124B4C64558FDA62E516104D"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/DynamicReferenceFrameFixtureScene.cs",
+      "sha256": "2E59D5A51E5EBA7D1F214C0B810C59BA5CF3B1521FBBB878ECD0DB19C54390BE"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/EarthPlanetaryScene.cs",
+      "sha256": "2CBE209304CA79CE338FDAAE58D05CE2810B41BC4101457EF18DDB9D83797360"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/EarthRoutePolicy.cs",
+      "sha256": "C8797498C664861B9C2E7D9E37B07EFB038442CDFAEFFD3ED57EBC13FAA56434"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/EarthRouteValidation.cs",
+      "sha256": "F529488C3A48A078068A87D0BF7C837A93B6263472B9C391062B65C5553391E4"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/NovaCore.Triangle.csproj",
+      "sha256": "C951EEAB9F6C6C568FB2D564AB03B7E799A8322A0AD89F6B3688B0E26AD65ED1"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/PoweredContactDevelopmentScene.cs",
+      "sha256": "2E132FA95BEA56A6EB21C5F82040EC3C0B9C7AC2419A812CBDFDD316A1389956"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/PoweredFlightDevelopmentScene.cs",
+      "sha256": "7E42031049C3C75F6DD4171DF74277036FB69C58E6D033A0706F390AA80F5B90"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/ProductionBillboardDesktopTraversal.cs",
+      "sha256": "7EE16FE600550283317374D365F10F50E0CAC46A53C7AE93C2D482618A964032"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/Program.cs",
+      "sha256": "4081E6FAF1A6DC36CC3CEFD16BEE87BC2DFE27C25EBA53E26DFFF0E660A2BE82"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/ReferenceFrameDemoSceneFactory.cs",
+      "sha256": "8416612AD51FB1158598C860FC44A3A8482623086D3DF0FFA0192C44D85006D8"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/SampleOptions.cs",
+      "sha256": "5D95C8F1C282B7C4EE3F39919D0C9FD735D52D71C8708123CF2B4EDBF4F2462F"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/SampleSceneFactory.cs",
+      "sha256": "BB485AA477AFA1B1F44230F705F7F7CDBFF331EFEA27DDF20705AEF6D9C6B7DB"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/SolarPlanetMaterials.cs",
+      "sha256": "D194A27DA7894036F40F1647A3A0FCAE46C988DC2CBF9167AFC0A74429DC2C85"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/SolarSystemScene.cs",
+      "sha256": "07A8AD33636416D843BB3213D5ADED1DB4BEA41A52FF0F88C8B15F4640984888"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/SolarWarpVulkanTraversal.cs",
+      "sha256": "5C3EB862870C320346F906D93310CC99744E742458219D34D151EF7C28D30396"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/StaticReferenceFrameFixtureSceneFactory.cs",
+      "sha256": "BC4EA2EF5911E0495AFFB52789A0A3BAF5E374A73AF1231DAD339C420CDFAF27"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/StockAssemblyDevelopmentScene.cs",
+      "sha256": "2495C2FF061367B3114E0350393D96EEE3E178027F7734D176251C119BE646A9"
+    },
+    {
+      "path": "src/NovaCore.Graphics/FocusTarget.cs",
+      "sha256": "6BB19370A43DF682E82840113857A500245D5D9FCA4F5B964158071B0DB6947A"
+    },
+    {
+      "path": "src/NovaCore.Interop/NativeRuntime.cs",
+      "sha256": "2FE27ACF1D1D0A35B5C3994ADDF26753B8D238C178E143702383D818A499E09B"
+    },
+    {
+      "path": "tests/NovaCore.Camera.Tests/NovaCore.Camera.Tests.csproj",
+      "sha256": "BC34398626133519C12DE6B566F43C2647E0A01AB4D19F11793781964C6C2170"
+    },
+    {
+      "path": "tests/NovaCore.Camera.Tests/Program.cs",
+      "sha256": "D45264A903A526EDAE66DA00C396601EBAC8D389E494F831C2B303F66922395A"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/AssemblyFloridaQualificationTests.cs",
+      "sha256": "2FD9B17C96025E7D74FAE056C3891EEA6F526160B6BE953268DAC75832170826"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/AssemblyFloridaSiteTests.cs",
+      "sha256": "738A98550EBC0726A844E259ACADCD25B3F91E48CD418B3B6DADEAC1CF81A89B"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/AssemblyFloridaSolarTests.cs",
+      "sha256": "DC78DCDA579827BFA2ED6607C1A20DD77D32A433C9CF3AC52FA7191E34C8699E"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/CacheLifecycleTests.cs",
+      "sha256": "B0A71F656665174A8C3476CACBD2E1C033EF7CD139C2D6F35D8B38DF7E32DA22"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/CertifiedContinuationCost.cs",
+      "sha256": "C0947945CA36E36BDA3072BCA15F6ABCFBA62D9AF17F245A970EFBD39AC2D677"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/CertifiedContinuationFixture.cs",
+      "sha256": "1D42DE9F94100EFA014D0F11DA16678BBF00D4CF9EB77DA0EF299BE3AA2A948F"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/CertifiedContinuationPublicationTests.cs",
+      "sha256": "9F0306133456F953C7B618A7798F7C0BFFC07EEB16AC67C24A00CFDCF51C4EA6"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/CertifiedFloridaPostImpactVelocityTests.cs",
+      "sha256": "E2566B20B37EFC4D7D7D00A859C3F38F0AB76D63F6175F15B58AC9CC07DCDF52"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/CertifiedFloridaPreImpactVelocityTests.cs",
+      "sha256": "2115D62C5143B8D25FB95C37A9DC8A97ABCB2A3AEA158EE48781FDDF7362FAFE"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/CertifiedFloridaResponseTests.cs",
+      "sha256": "76AF650316470139077999140DF4E147D2391C2313564DC8D2C5EE3B8D053E97"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/ContactDevelopmentPresentationTests.cs",
+      "sha256": "F554B11E19C7BCE8E95216956AB114AE24A1BA57B8F1ECABD20E29C1F13A0440"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/ContactGenerationProductionTests.cs",
+      "sha256": "3FAA7704743B417DA31FE19BB9413007E298C4F72C9224A1050DA1D0C7ACE4A9"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/ContinuationAcceptanceTests.cs",
+      "sha256": "7F26DBDDAB6D407C1595B8F5EE5704FB549B4B8CCDC1B3BAD12F15D711556FC6"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/ContinuationAllocationTests.cs",
+      "sha256": "99C916C2848703FE4088BCBF17301571555C2AC42BD89AB359C069988695BC51"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/EarthRelativeObservationProductionTests.cs",
+      "sha256": "A24B655BE6722748126E3B2703875FF364526B22D6AC72272CE5772ED8846B63"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/EarthRouteConvergenceTests.cs",
+      "sha256": "EA6F0FE140728DDF1BA17AEFCD242602705D0DD4586D73F3A2FF6F7B3C306FB4"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/FacilityLightingTests.cs",
+      "sha256": "0FEBB3CC11CFA4EB72AF4D5DB67747E690B8D50855C84676F14FC4D49E9F73C1"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/FacilitySupportTests.cs",
+      "sha256": "E84FD69DC1D81C2239E4C80773305CF69D4E6044E2A1A513874E4FC4F1138E73"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/FloridaContactProductionTests.cs",
+      "sha256": "B965540983F1A29B69FF3952D6C5F0858B3908F9B0D2D9262B956EB41CA40199"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/FloridaFoundationSeatingTests.cs",
+      "sha256": "EFCA8530D3E31F8D64CC2A4660019603C026F567B9C7BD04A76172A706041644"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/GpuDisplacedMeshPreparationTests.cs",
+      "sha256": "E01592658D60CB49667718505D5D83E556D33B6603EC212766A25879D1FE3C3B"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/GpuPhysicalHeightPreparationTests.cs",
+      "sha256": "950D5E1976F394BD0A8C1547B9CC35F14AA3282ABE3B1D1FD2241A156A91696C"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/GraphicsTestHarness.cs",
+      "sha256": "0486023BF8BC39EEDA718A90C666A4CA4D9F596D80F04B0A6EF8B59533D81506"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/LocalTerrainPayload2Tests.cs",
+      "sha256": "965175C5EF91EF5A6EB1B55555713303CDA06B0088233CE97EDFABBFB9A762E5"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/NovaCore.Graphics.Tests.csproj",
+      "sha256": "55C90FA2D724958606F247836FE9910AD30EA50235DD6005FE00494233E35DF3"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PhysicalSurfacePointQueryTests.cs",
+      "sha256": "C09116AD07BA7C5A521EF58E414268DB3596D07B8AF286C0C91A3BA2457CB96E"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryBillboardSurfaceWorkloadTests.cs",
+      "sha256": "6C424E6406F4BE689C5219787695A7471DA8856768FA85786BEEA5536EC96AB7"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryCanonicalPhysicalSurfaceAuthorityTests.cs",
+      "sha256": "2A76647DEE8F61CA7E2280E74D1B7D4B2C32F30E99D5C99622930D1198486B27"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryNaturalTerrainFamiliesTests.cs",
+      "sha256": "9E028A69E2C092911BC3A5731073EA5FE5FB19F612ED3DF1C76BD42B2CDEBC65"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryNaturalTerrainFieldTests.cs",
+      "sha256": "1845580E95A8F8FF752C82D84467DC23244A2617DC5678564BEB92D50E40BCCD"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryNaturalTerrainPreparationTests.cs",
+      "sha256": "49C9C46235FB163E0228907B51CB63FF53EF3A91DDC340D5D5EEC7D663441D52"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryNaturalTerrainRendererIntegrationTests.cs",
+      "sha256": "D4FA4DDD91D71196641652F5C5ACFBDB05A5F93AD08B64FA8E901F4C7B1CD3DE"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryNestedScaleMeshTopologyTests.cs",
+      "sha256": "A03073766021B46E24239C4BCD92503835A557AC9DE827A10346285D65CAD112"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryPhysicalFrequencyContinuityTests.cs",
+      "sha256": "355F08F8410B2E3D7986E061BCAD99B2F335B61FEFE8699B56B5F42720D2D15A"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryPhysicalSurfaceModifierTests.cs",
+      "sha256": "F49839C22C07F1282921074045BC3A5098FD5386B3E9D3068B9783419E1C2F87"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryProductionMaterialNoiseTests.cs",
+      "sha256": "5A51B9C3A7CEF181DF699D98BE26B2DCCD55D7644A473C2D94AB3DC9F210DB6F"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryProductionSphericalBillboardRuntimeTests.cs",
+      "sha256": "2B12FDB84EA2D88FC61DFFF00855D6C77D89CEE94021849F3039DD5D21F67ED5"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryProductionSphericalBillboardTopologyTests.cs",
+      "sha256": "3C0BA0CEFC8E25AC0DEE8248D5C5B688F11871B2C3EDC5D6743039EC5C3BCBA1"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetaryScreenSpaceSubdivisionTests.cs",
+      "sha256": "C165C7DABD1D79E648884215C90BFB87B454E51100CF835FE3C34002C6429F52"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetarySphericalBillboardGpuRuntimeTests.cs",
+      "sha256": "CB18144D4E3E8D3D3715F247F700A1192C3C87DEE9688EC5BCDE105312375184"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetarySphericalBillboardNaturalTerrainTests.cs",
+      "sha256": "5D242BCA10532C1A53FF3E72DABD6DFE04ED4B2A8FA1B95A1513DF29F84D361C"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlanetarySphericalBillboardTopologyTests.cs",
+      "sha256": "A51D567BC7DBFA1A10B60D9FEA78C466077D4B42014B7F99C2AA6B2D5113C4BA"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PostImpactCoverageProductionTests.cs",
+      "sha256": "B2CA9B680EC47240DB612EE0B8FC9565BFFD39F155F4E89F318560312A0548BB"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PoweredContactPresentationTests.cs",
+      "sha256": "17520796667ED67C5323A0605089E18A80DDE835CF888525113B4F79330659F2"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PoweredFlightPresentationTests.cs",
+      "sha256": "8E2BE687E3705F3B7768B7F8198FA3CB9B14CB449482422D8A2ADCB5A4BF66BE"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PrivateFloridaPostImpactStateTests.cs",
+      "sha256": "99E987EF18A42F9BB6C210AAD5FB48AB3C3919319E30762350BDBF6F388F7467"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PrivateFloridaPropagationTests.cs",
+      "sha256": "D51478BBAF85473E5FD9A3282FC647BC2590BBD612A52159CE4F28C4F7E9727C"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/Program.cs",
+      "sha256": "77C5DB939A1666A3B107BAEE5CF6909962366CD01A4EC0C01C33C90B4D519788"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/QualifiedFloridaKinematicsTests.cs",
+      "sha256": "7127662D8EC108F8E9823AE5E77B84B645E224DE1D87DD5F29672127291CCF74"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/RegionalPhysicalResidencyTests.cs",
+      "sha256": "02D0E3D046B4C030CCF9E88CB1C487B5FF922BA368C2FDDD4763EC82B5F30DAA"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/StockAssemblyPresentationTests.cs",
+      "sha256": "F987806D3262197F1A4CF3B581AAA0DDEA256C012912F914D63F84ACC4CCD867"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/TerrainRenderAuthorityTests.cs",
+      "sha256": "0FBB1CCEFDA721B933188CDF11EDD617C20746EF8CB2B9231ECBB40839B8C44C"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/VulkanValidationEnvironment.cs",
+      "sha256": "9969DB56DD22394190FFC61240D5C9F8A7510F7589DF793A1773D6F18D1C61C5"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/WindowLifecycleTests.cs",
+      "sha256": "750813AA4F21A0DF63DF2CA23AEDF97826753F8993DD87A6F89C7A3DCD39E8F4"
+    },
+    {
+      "path": "tests/NovaCore.Launcher.Tests/GlobalUsings.cs",
+      "sha256": "02D5024A826D5522AEE635DB399DDF6723A935ADD057EAF5F1909181CFB577DB"
+    },
+    {
+      "path": "tests/NovaCore.Launcher.Tests/NovaCore.Launcher.Tests.csproj",
+      "sha256": "98598AAAEB5AB2D169867D384CCE038DB7B550726F2D23E8F17E793DA0DF9791"
+    },
+    {
+      "path": "tests/NovaCore.Launcher.Tests/Program.cs",
+      "sha256": "D5E7B7A499405A00602B4636A35476D50FCBB8C6278BC038DF884A7999EEEDBE"
+    }
+  ],
+  "requestSha256": "2C2B84DCC989F55511C3927DC1C41E86C5DAC8431AA3CFDAB701366234F9283E",
+  "ksaSha256": "A03E98153C6F353AF6F280CD3BDC1C71C718008E2049F508DC6FBE54457A0AA8",
+  "ksaInstalled": "2026.9.10.5438+c9291b5dd3347e847020c8fb3dd11dfce6a728e9",
+  "ksaLatestHistory": 5460,
+  "ksaMaterialCameraSupersession": false,
+  "packageBudgetBytes": 262144,
+  "bankingAuthorized": false,
+  "milestoneAssigned": false
+}

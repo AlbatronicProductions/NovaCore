@@ -1,0 +1,380 @@
+{
+  "capturedUtc": "2026-09-18T15:39:01.3458204Z",
+  "head": "45b1bbcdd8d0e1d42f79f3bb5124e80753ce0e8f",
+  "requestSha256": "206D551FA185225469373B4ED7402B787F5D45B5AE3D07C3B243B82FAB6C2943",
+  "manualAcceptance": "FAILED_STEP_5_HOME",
+  "previousRuntimeSha256": "1DF7668CCADE9292EA8F7237EC85764B2F80A34D0B13368124F35ABB154A3938",
+  "ksaSha256": "A03E98153C6F353AF6F280CD3BDC1C71C718008E2049F508DC6FBE54457A0AA8",
+  "ksaVersion": "2026.9.10.5438+c9291b5dd3347e847020c8fb3dd11dfce6a728e9",
+  "source": [
+    {
+      "path": "native/NovaCore.Native/NovaCoreNative.cpp",
+      "sha256": "3B3FCD1B965DC155C794A7756189C25DC23D401A54D64921B4802BED8FF63EC3"
+    },
+    {
+      "path": "native/NovaCore.Native/NovaCoreNative.h",
+      "sha256": "AADBEE1AE791C8EB6572995CA62323BC15C594810238F4DEB4DEC003BD6754BF"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/Program.cs",
+      "sha256": "FD4A78A583C15709554363303A78924D02AA46251329115D78ECE70DFB4626B8"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/SolarSystemScene.cs",
+      "sha256": "7EFDD533AB556272CBE7F9DFDE99CE224DA4C91EF3B1D89E34DDA3DE87466922"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/StockAssemblyDevelopmentScene.cs",
+      "sha256": "340E06FFEB2597AC6BA9B68231AC3BECF309252AAACE09F2E4FD22B0831D23A1"
+    },
+    {
+      "path": "src/NovaCore.Graphics/FocusTarget.cs",
+      "sha256": "A768961B61D633A5458E638CB2CA4AA2233C9888C6CCB7B45D5AA4DC9DF082D3"
+    },
+    {
+      "path": "src/NovaCore.Graphics/SceneObjectFocusObservation.cs",
+      "sha256": "93058499488D0F88A417C466302673C08DFE095A77028A2ACB4F3C01E575D9B8"
+    },
+    {
+      "path": "src/NovaCore.Interop/NativeRuntime.cs",
+      "sha256": "44A25F865A63CA452412CF3C7FC904E3A1DAC8B85A50B6CF420E61CFB3A06C50"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/AssemblyFloridaSolarTests.cs",
+      "sha256": "0EF49A0F829F12E1ECC882CB5EF494B6CA9D5302922246F1EEDD9BA727DC48FA"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/Program.cs",
+      "sha256": "EBD2CFF93CB7CC8EEA00538065C3BFA68C3D5E2F267D46F4FA124B0F1D9498BA"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/ActiveVesselCameraTests.cs",
+      "sha256": "5CDF19C060DAB7E30BB374CE884BD8A6992C646841B63DA1110851DD778229A1"
+    }
+  ],
+  "untracked": [
+    {
+      "path": "docs/engineering-evidence/active-vessel-camera/README.md",
+      "sha256": "FD13A3F93FD494F599FC5EECF60933BFDFFC534EF598F53D81DFFC682C7357D6"
+    },
+    {
+      "path": "docs/engineering-evidence/active-vessel-camera/allocation.json",
+      "sha256": "58F4E1D84AC66BA8B4294AD727AA043CB0B9CA2D3C3CB8B14F9807756257AC86"
+    },
+    {
+      "path": "docs/engineering-evidence/active-vessel-camera/build-candidate.ps1",
+      "sha256": "5211F8EE7DEB8C73C3F527C497CEBD4ABA57AA6B8D049FF5859DCC09EA821E62"
+    },
+    {
+      "path": "docs/engineering-evidence/active-vessel-camera/build-observer.ps1",
+      "sha256": "53A05065F301B4F07F7C731790AB3715BA71EA5CB58008396B3C952A44FA22CB"
+    },
+    {
+      "path": "docs/engineering-evidence/active-vessel-camera/camera-observer.cs.txt",
+      "sha256": "EF277A84EE786E4001B5D736BDB037476DB1DF9494155E1760CAF95363B8CD27"
+    },
+    {
+      "path": "docs/engineering-evidence/active-vessel-camera/capture-performance.ps1",
+      "sha256": "F643A3624636802D754F15CA0FEC39571E8C72DE8A350D61C1EA8790DDC94FE8"
+    },
+    {
+      "path": "docs/engineering-evidence/active-vessel-camera/cleanup.md",
+      "sha256": "EE82DCFA1E545E8DCED15E2F74F305B47B4F26B8DEF5C75026DC72DE57F99C79"
+    },
+    {
+      "path": "docs/engineering-evidence/active-vessel-camera/closeout-identity.ps1",
+      "sha256": "6CEFE1AC921D676233BE9FD71B876D169FBD0407C133AE3A9B21F1D4655CFB2B"
+    },
+    {
+      "path": "docs/engineering-evidence/active-vessel-camera/consolidate.ps1",
+      "sha256": "49C93005EEA6D3C4E88A4D3F9C2C74555434B6462B6ADA5EF4F0FF24D2999A22"
+    },
+    {
+      "path": "docs/engineering-evidence/active-vessel-camera/entry-identity.json",
+      "sha256": "31421617E0887E383FE08B75D1F6D389AA5BBC0B424A9C1CEEB8D14BD1E6CFEC"
+    },
+    {
+      "path": "docs/engineering-evidence/active-vessel-camera/epoch-precision.md",
+      "sha256": "A8F4CE27576A3216175CD7757D1079739CAC45FF4B675663AC18EC07BC40BEFC"
+    },
+    {
+      "path": "docs/engineering-evidence/active-vessel-camera/identity.json",
+      "sha256": "35EE497792EBE57BF939922900937E0C280F11BD612B6854FFF35281FD1FFF13"
+    },
+    {
+      "path": "docs/engineering-evidence/active-vessel-camera/implementation.md",
+      "sha256": "B6C10D835F98784597F2435EB4886C1B970C0F209C7F45B530326DEBC96DF0A1"
+    },
+    {
+      "path": "docs/engineering-evidence/active-vessel-camera/input-bindings.md",
+      "sha256": "ACF62A7A7587B70299FD9CDE432E64BC2ED302857FBEE69E516ACEFEE3BBC278"
+    },
+    {
+      "path": "docs/engineering-evidence/active-vessel-camera/ksa-current-camera.md",
+      "sha256": "6EC44BCEDE33EB9DCE70AD1CA6A35449E77D5A014811D8F4916FF499AE62B7A7"
+    },
+    {
+      "path": "docs/engineering-evidence/active-vessel-camera/manual-route.md",
+      "sha256": "729E2FCD47EC5AD9CA460C2991C95A54B253871A6A2B9C369AAF62D26C66B2A5"
+    },
+    {
+      "path": "docs/engineering-evidence/active-vessel-camera/owner-map.md",
+      "sha256": "DD2DB95D3CE2928DFE4641C687EC2099A908B1406CEAEBE3D953DC8B067A79BA"
+    },
+    {
+      "path": "docs/engineering-evidence/active-vessel-camera/performance.json",
+      "sha256": "8B03C1D03C03D9DDA6B78B67CF589DC217CD04731DC71DE94A27C3AC47B8F2B4"
+    },
+    {
+      "path": "docs/engineering-evidence/active-vessel-camera/performance.md",
+      "sha256": "402EFEB3F42A4EA9F848FB2953FC2BBADF4D94C1D51A97DE2E2C29BF0DCCECC3"
+    },
+    {
+      "path": "docs/engineering-evidence/active-vessel-camera/prepare-launcher.ps1",
+      "sha256": "C6E12C0D366F6653B63F4F2D2BF2D891B49FAA795D3C3D305C641AAFFEC92FC8"
+    },
+    {
+      "path": "docs/engineering-evidence/active-vessel-camera/regression.json",
+      "sha256": "9639DC5D65FB39BFF0E3EEA64C7EA049864CFCAFAB08C47F488DD9132D93C497"
+    },
+    {
+      "path": "docs/engineering-evidence/active-vessel-camera/repo-truth.md",
+      "sha256": "8B539418C6DEFCF3134984835BF2660766E97EF8719D5D2CC6D3F2CD6F5D5D83"
+    },
+    {
+      "path": "docs/engineering-evidence/active-vessel-camera/reproduce.md",
+      "sha256": "C23E02D07347B487821E05B60A9A1E519CAFCB1ABD81285C74FB1D82FC2572AE"
+    },
+    {
+      "path": "docs/engineering-evidence/active-vessel-camera/target-contract.md",
+      "sha256": "2AC3C58FCB10AC81C3DB7DE8C258F44A948D699BCE4161C9D9E0651182778C0D"
+    },
+    {
+      "path": "docs/engineering-evidence/active-vessel-camera/test-contract.md",
+      "sha256": "BC069E5144FE70BFA87DDB5229E38EE2FA8F23B050F2951EC0E261C419DBD506"
+    },
+    {
+      "path": "docs/engineering-evidence/active-vessel-camera/validate.ps1",
+      "sha256": "28156FB656AF3D898998E064DF2F1C175D36643505C5D242444FB93CC36A1955"
+    },
+    {
+      "path": "docs/engineering-evidence/active-vessel-camera/validation.json",
+      "sha256": "EFEAA0BB94FD2F153EC374A1CC1C04CCF9F466020E49E99EFA92A18DA1D3D22D"
+    },
+    {
+      "path": "docs/engineering-evidence/active-vessel-camera/verification.md",
+      "sha256": "64599C83A0B5660CB356C342D46BBFB3C1435473670EC0BD85BE8CFE39E0F71B"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/README.md",
+      "sha256": "85707966A3F693CA61116895C141F88A83401E6EC2BEF71D7DCD79B6C0E8729A"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/candidate-comparison.md",
+      "sha256": "A55EEA05909208FFF544EBE0AB0D0662DA4AD87668D34B520EFB841C6EBCC42E"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/dependency-graph.md",
+      "sha256": "27F1B344A8509BC4680669BAFC5EFAF456DB5C0AF025556E0FA2A2E807C7E569"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/identity.json",
+      "sha256": "E8091133682A817EF396552A777F1089E2C288C6649C1AD98EBBAD6E66CC7D75"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/ksa-camera.md",
+      "sha256": "7BA26D11DE35F2039AFAD4E807901250B662640B16A9B3BC88838CFE1A187F4C"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/ksa-departure.md",
+      "sha256": "B54DF4E2892055D801CEA2C52A41C385BE42D2844ACE64AA386811134104DE3B"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/ksa-launch-stack.md",
+      "sha256": "49B49569309F349C668F78822E97380E0AACFBA0D14512C6EB7C292E7654FD90"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/ksa-live-history.md",
+      "sha256": "336A13A531F2D6CE45526C2412CF93D7774691C9DD963679BFF95404DEA3D18A"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/ksa-navigation-sas.md",
+      "sha256": "5501EC714E83903A1986F33C7B5656C194F3BD6DDBD6372917AC211B102D9C39"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/ksa-player-input.md",
+      "sha256": "62994C41B575F928866CFC3836A3FDC7F92C3877960479EAFDE1333A66003A22"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/novacore-owner-map.md",
+      "sha256": "AD51D35FF402E8F8A6B3C01743B9F7BD96F1B1A914A38FEA6BB4594CCF47B930"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/promotion-judgment.md",
+      "sha256": "E30320C2A893C2B720D770DBD663E9D93520E5CAA990D81285F114D936DAEA6D"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/red-team.md",
+      "sha256": "2DDB044D461F724D4491FEDAAE6DA40498C8B35163CFC17571470386E47071DF"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/repo-truth.md",
+      "sha256": "A500723D2064F0EE3E8A0D8001EB7B2C471845673C345AC5236724BEE0C84F90"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/reproduce.md",
+      "sha256": "B8A6CE6FF2920FD61AD98E855A8C559FF575877335A9E7F8526FA7B7076C6E98"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/verification.json",
+      "sha256": "AE00BF0A73FD44FE5E246005C7FCB604C230F13BE8B03A6F961F7960F8CDD3B6"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/verification.md",
+      "sha256": "4A1CC10CD407C0C49EC73555B2C31FDF3E0BA91B06A5DA40DE93CCFD86239BC9"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/verify-review.ps1",
+      "sha256": "C068516C73D263CEEEFA7A71631B1E66219DBD3EA67E6AF09DC291041803E812"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/closeout.json",
+      "sha256": "F9F8C81D7F8C1DC94F8C80F3F62D857593A5F3D2B0E4150EDCC4CA595E414C48"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/exhaust-ksa.md",
+      "sha256": "C71E2149375B41C29DA6D3177FBE7137C6443E9006508740B85AA6BA118F5D1D"
+    },
+    {
+      "path": "docs/legal/CREATOR-CONTENT-POLICY-DRAFT.md",
+      "sha256": "45D6A9966A89962BBBE0CA167FD62A07E39FE74B37621C73FF4558F852A44D0C"
+    },
+    {
+      "path": "docs/legal/LEGAL-REVIEW-TODO.md",
+      "sha256": "BC6A94CE816093A0A72C27975DB20C7F22F5F7EB9A36DC28ABE49837A8C019FE"
+    },
+    {
+      "path": "docs/legal/MODDING-POLICY-DRAFT.md",
+      "sha256": "BF7D6144200EAE6EDDA286B19C0AA83E3D262F0E1ED956FE881E3B9333313AD7"
+    },
+    {
+      "path": "docs/legal/ROOT-LICENSE-CANDIDATE.md",
+      "sha256": "9768C62CFC86E4EF8A090CA1EE8F4E1DEC9DA9486A8EA5E63C3075953D47180C"
+    },
+    {
+      "path": "docs/legal/finalization/COMMERCIAL-LICENSING-PROPOSED.md",
+      "sha256": "2D9A9B426232826FE19D1678AEF8FEADB7A241B4ABBA5FA9A9B201325D5B58C3"
+    },
+    {
+      "path": "docs/legal/finalization/CREATOR-CONTENT-POLICY-PROPOSED.md",
+      "sha256": "25D48B0A2C5E8EFA243DEE627A17685D16A4F2DDC7C84337559BDDDB1D6CE81F"
+    },
+    {
+      "path": "docs/legal/finalization/IDENTITY.json",
+      "sha256": "F46F7B4215CD7C4311233DEB3B36434798941B602478ED9AB20539BFF3A2263B"
+    },
+    {
+      "path": "docs/legal/finalization/INSTALLATION-PLAN.md",
+      "sha256": "8923E3630C2D44DB6DD9B13E41FEA51CD847403BEE3F9EDFCE56543D5609E364"
+    },
+    {
+      "path": "docs/legal/finalization/LEGAL-REVIEW-BRIEF.md",
+      "sha256": "5CB5AC5616369CC6F399C323B9C6351EAB0D4E2253BBBF08C6F8E317A7C06E00"
+    },
+    {
+      "path": "docs/legal/finalization/LICENSING-PROPOSED.md",
+      "sha256": "41EAD10AB96F1E1987AC847109D442E158B290F82CFB6F598047ADA3C1DEFA62"
+    },
+    {
+      "path": "docs/legal/finalization/MODDING-POLICY-PROPOSED.md",
+      "sha256": "6F5440BD5D0C28487E48591C88D6A21761514823E5855F4598072D679E5AD433"
+    },
+    {
+      "path": "docs/legal/finalization/NOTICE-PROPOSED.md",
+      "sha256": "6C0F70CDDE3DCD6EFDE8904A9CB592AA4517C2C5793627C665984AF6BC9BFABA"
+    },
+    {
+      "path": "docs/legal/finalization/PROJECT-CONTROL-DECISIONS.md",
+      "sha256": "16A305F5992222FE8A998B3C052DA505D439E863B140CDBB9951DE7D3A17DCE5"
+    },
+    {
+      "path": "docs/legal/finalization/REPORT.md",
+      "sha256": "EA6FA514E054B018868F3A6266C036C1E426126EA18507C9AE31B514962E1F6A"
+    },
+    {
+      "path": "docs/legal/finalization/RIGHTS-MATRIX.md",
+      "sha256": "031471F49DE563EBCC56CEEF5DC3817C2506226858E4B09A8898978D9853B075"
+    },
+    {
+      "path": "docs/legal/finalization/ROOT-LICENSE-PROPOSED.md",
+      "sha256": "D55E23207DD1FB93B51B097CAAFC3003E733DD4D8B281E66884078B3372E0CE2"
+    },
+    {
+      "path": "docs/legal/finalization/THIRD-PARTY-SCOPE.md",
+      "sha256": "4CD4B3C87F0DF2F833772A2FA1E03AB4BE69E4EC8CF449BE7F75D1CC99F3298F"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/COMMERCIAL-LICENSING-preinstallation.md",
+      "sha256": "255BBF8B40BC0558CA51CC4314705D3BE7BD15E3509749086C6918483EA9E585"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/FINAL-REPORT.md",
+      "sha256": "9303CF44C330801D9E73B52A905E780762D69538B6B8131840F190CABAA31E4E"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/commit.json",
+      "sha256": "4ADADD439E0BC32E2A67504DE8568997D418582C7906F3EFE7E52ED9F1A3146D"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/final-bank-paths.json",
+      "sha256": "2DF837472BF5AAB7E7320F7E191A50D28F5F0074B6F6F43BB00714C00FD739E6"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/preflight.json",
+      "sha256": "466650DDEA93B66B73216F0470AC59C4A28693372CBEB0F95EB5FE9E41A8D497"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/prospective.json",
+      "sha256": "25CC007BFDD7E09929527F566A908945A86EDD4D3F341E46D4AF24438A0DB363"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/release-gates.md",
+      "sha256": "AAD2D98BC7EBA715FF9E6E9A30DE798BF6D33B95EEA6BA2F9176CEE2BA51CF1C"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/remote-tags-before.txt",
+      "sha256": "E8EB8AF4105E9C97475DF9CF8AE53CBA68BA23A71EF9B9AA7749C0B97A9891B3"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/remote-verification-stop.json",
+      "sha256": "DF5F0D2378AC6A50EEA2133D2C9F38584E623F7679DF7CD2EB827FD971BA97EB"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/remote-verification.json",
+      "sha256": "85D493C3748A3BE0D9BCD57C6DB01DB16FE29B56D39AC6D6B749E4DB434D8E5A"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/rights-matrix.md",
+      "sha256": "1AA52F7883FC10B4657DD0A86097FA2E28A9C09145CE6135771F410222B9E2A6"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/staged.json",
+      "sha256": "70B12C49D710E6B8BED292B4743469F4479822E01A2BFC3621BBFA79F848961C"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/withheld-paths.json",
+      "sha256": "F3E079029EF026043F6F995149EDDE307EA688A4AC12EB121B9F2E32ECDD9396"
+    },
+    {
+      "path": "src/NovaCore.Graphics/SceneObjectFocusObservation.cs",
+      "sha256": "93058499488D0F88A417C466302673C08DFE095A77028A2ACB4F3C01E575D9B8"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/ActiveVesselCameraTests.cs",
+      "sha256": "5CDF19C060DAB7E30BB374CE884BD8A6992C646841B63DA1110851DD778229A1"
+    }
+  ],
+  "packageBudgetBytes": 196608,
+  "milestoneAssigned": false,
+  "bankingAuthorized": false
+}

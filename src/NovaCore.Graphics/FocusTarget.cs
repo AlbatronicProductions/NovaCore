@@ -77,7 +77,8 @@ public readonly record struct SurfaceAnchorFocus(
 
 /// <summary>
 /// Camera-follow identity only. Current root position is evaluated from current upstream authority;
-/// camera orientation is deliberately absent and remains independently root-inertial by default.
+/// Camera orientation is separate: scene-object observations supply its reference
+/// frame; existing celestial focus retains its own camera authority.
 /// </summary>
 public readonly record struct FocusTarget
 {
@@ -128,7 +129,7 @@ public readonly record struct FocusTarget
         return rootPosition.Value.IsFinite;
     }
 
-    /// <summary>Future vessel/scene-object seam; the caller supplies the current authoritative root position.</summary>
+    /// <summary>Vessel/scene-object seam; the caller supplies the current copied presentation root position.</summary>
     public bool TryEvaluateSceneObject(
         ulong currentSceneObjectId,
         in UniversePosition currentRootPosition,
