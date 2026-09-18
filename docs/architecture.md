@@ -1,5 +1,21 @@
 # Architecture
 
+## Banked M15.5 — player flight controls
+
+Canonical live command authority accepts Z/X main-engine and WASD/QE attitude
+demand in the bounded stock free-flight route. Physical engine, gimbal and RCS
+allocation consumes exact finite resources and publishes copied state. Camera
+focus remains separate from control authority. This bank does not join the
+controls to Florida supported contact or qualify powered departure. See the
+[accepted campaign evidence](engineering-evidence/player-flight-controls-gauntlet/README.md).
+
+## Banked M15.4 — unified active-vessel camera
+
+The active vessel and celestial bodies share a focus/follow/orbit/zoom camera
+route with corrected rotating-Earth and time-warp horizon behavior. Camera
+observation does not command the vessel. FREE remains deferred and HOME unbound.
+See the [camera evidence](engineering-evidence/active-vessel-camera/README.md).
+
 ## Banked M15.3 — canonical SRV-01 Florida supported-flight foundation
 
 Canonical assembled SRV-01 → explicit collision/source admission → one retained
@@ -26,7 +42,7 @@ commit `544f25ad618bcad7a2753de69108ca3c4095df11`, tag
 `m15.3-canonical-srv01-florida-supported-flight-foundation`.
 The linked closeout retains its historical pre-bank wording.
 Lighting/shadows, startup response, rotating-site departure,
-launch-stack/control/navigation and atmosphere remain deferred. See the
+launch-stack integration/navigation and atmosphere remain deferred. See the
 [final contract, evidence and source map](engineering-evidence/srv01-surface-to-flight-foundation-final/README.md).
 
 ## Banked M15.2 — SRV-01 reusable production integration

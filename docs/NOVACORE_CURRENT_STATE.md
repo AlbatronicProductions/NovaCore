@@ -11,7 +11,45 @@ renderer. Simulation owns celestial identity, exact time, physical state, and
 reference-frame transforms. Graphics consumes immutable root-resolved snapshots
 and performs FP64 camera-relative subtraction before GPU transport.
 
-## Current bank — M15.3
+## Current bank — M15.5
+
+**M15.5 — Player Flight Controls is BANKED** at
+`3d4de806b9856da9a56f3b4e48ec0e68a927de45`, annotated tag
+`m15.5-player-flight-controls`. Remote verification at banking matched this
+commit and the peeled tag. The bounded free-flight route accepts Z/X engine commands
+and WASD/QE attitude demand through the physical engine, gimbal and RCS path.
+It preserves exact finite-resource/depletion behavior and deterministic command
+authority. Project Control's manual acceptance and the completed engineering
+gauntlet preceded banking; the [campaign record](engineering-evidence/player-flight-controls-gauntlet/README.md)
+retains its historical pre-bank wording. This does not qualify Florida powered
+departure, a lift-capable Earth vehicle, orbit insertion, SAS/navball/autopilot,
+or flight-compatible warp. A launcher GUI preset remains a separate, unbanked
+disposition from the sealed M15.5 production and test candidate.
+
+## Previous bank — M15.4
+
+**M15.4 — Unified Active-Vessel Camera is BANKED AND CLOSED** at
+`6e1e8ef424eef4ad022a30ca4b2b261eb580b0ae`, tag
+`m15.4-unified-active-vessel-camera`. Its tag preserves this bank.
+Project Control accepted the corrected rotating-Earth/time-warp horizon behavior,
+vessel focus/follow/orbit/zoom, celestial focus and F-refocus. FREE remains deferred;
+HOME remains unbound. Earlier manual-deployment and acceptance provenance remains
+in the camera correction evidence.
+
+The player flight controls gauntlet qualified Stages 1–6 before M15.5 banking.
+Stage 5 recovery proved real native held/released input and focus clearing; the
+original tap result was a harness/event-duration mismatch. Stage 6 engineering
+passes five native integrated episodes, exact replay/depletion, 58 final gates
+and independent review. Project Control reports **manual acceptance PASS**, including
+accepted terminal endpoint hold as harness behavior rather than X-induced momentum
+loss. Its historical evidence records the earlier unbanked stop; M15.5 above is
+the subsequent bank. No recovery/Stage 6 production
+correction was needed. See the [campaign record](engineering-evidence/player-flight-controls-gauntlet/README.md)
+and [manual route](engineering-evidence/player-flight-controls-gauntlet/manual-route.md).
+M15.3 remains the accepted Florida support foundation; rotating-site departure,
+launch stack and assist/navigation/physical-warp work remain outside this campaign.
+
+## Previous bank — M15.3
 
 **M15.3 — Canonical SRV-01 Florida Supported-Flight Foundation is BANKED** at
 `544f25ad618bcad7a2753de69108ca3c4095df11`, annotated tag
@@ -37,7 +75,7 @@ Post-work inclusive contact/presentation storage6,469,952B <8MiB.
 Lighting/shadows are **DEFERRED** and manually accepted as a limitation. Startup /
 first-present responsiveness and disclosed cold/warm frame tails remain unresolved.
 Rotating-site powered departure is **NOT QUALIFIED**. A development Earth-launch
-stack, player launch/attitude controls, spacecraft-focus camera, SAS/navball/autopilot,
+stack, integrated Florida player launch, SAS/navball/autopilot,
 atmosphere/aerodynamics/thermal/reentry remain future work. Stock SRV-01 is not
 required to be an entire Earth SSTO. Oversized Stage4 arithmetic is historical
 development-sizing evidence, not the current stock Florida vehicle or orbital proof.

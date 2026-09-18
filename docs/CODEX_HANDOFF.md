@@ -15,6 +15,18 @@ not as an onboarding requirement.
 
 ## Current bank and stop boundary
 
+Current bank: **M15.5 — Player Flight Controls**, commit
+`3d4de806b9856da9a56f3b4e48ec0e68a927de45`, annotated tag
+`m15.5-player-flight-controls`. Project Control accepted the bounded Z/X and
+WASD/QE free-flight control route. The [campaign evidence](engineering-evidence/player-flight-controls-gauntlet/README.md)
+records qualification and historical pre-bank wording. M15.4 at
+`6e1e8ef424eef4ad022a30ca4b2b261eb580b0ae` remains the unified camera bank;
+M15.3 below remains the Florida support bank. Rotating-site powered departure,
+a lift-capable development vehicle and connected Florida player launch are not
+qualified. Review the smallest next responsibility with Project Control before
+production implementation or banking. Four modified launcher preset files are
+outside the sealed M15.5 bank and require separate disposition.
+
 The canonical SRV-01 surface-to-flight foundation (Stage1–5) has Project Control
 manual acceptance **PASS** for the final simplified Florida slab route, including
 **FL Launchpad → Play** and preserved Solar navigation. Use the
@@ -22,11 +34,11 @@ manual acceptance **PASS** for the final simplified Florida slab route, includin
 for qualification; its pre-bank wording is historical. The bank identity below is current.
 Full final Debug/Release builds, Simulation80/80, Launcher18/18 and76 total gates pass.
 
-Current bank: **M15.3 — Canonical SRV-01 Florida Supported-Flight Foundation**,
+Earlier bank: **M15.3 — Canonical SRV-01 Florida Supported-Flight Foundation**,
 commit `544f25ad618bcad7a2753de69108ca3c4095df11`, annotated tag
 `m15.3-canonical-srv01-florida-supported-flight-foundation`. **BANKED; front closed.**
-Stage 6 and the next major implementation front remain unauthorized pending
-Project Control review. Preserve the bank commit and every historical tag.
+The next major implementation front remains subject to Project Control review.
+Preserve the bank commit and every historical tag.
 
 The accepted M15.3 subject, `NovaCore: Bank canonical SRV-01 Florida supported-flight foundation`,
 omits the milestone identity. This is a naming/convention discrepancy only; do not
@@ -34,9 +46,9 @@ rewrite it. For future milestone banks use `NovaCore M<milestone>: <bank accompl
 
 Qualified support/powered support and fixed-slab consumer handoff do not establish
 rotating-site powered departure, an Earth launch stack, orbital qualification or
-player launch controls. Stock705kg Florida support is separate from historical
+connected Florida player launch. Stock705kg Florida support is separate from historical
 oversized Stage4 development arithmetic. Lighting/shadows, startup/first-present,
-spacecraft-focus camera, SAS/navball/autopilot and atmospheric flight remain deferred.
+SAS/navball/autopilot and atmospheric flight remain deferred.
 Current KSA remains an internal engineering reference: retained direct source/history
 provenance is consolidated, with no new public branding language or copied assets.
 
@@ -46,7 +58,7 @@ Previous banked production checkpoint: **M15.2 — SRV-01 Reusable Production
 Spacecraft Integration**, commit `c3de150db8563864d23c4951b4630559453d8f56`,
 annotated tag `m15.2-srv01-reusable-production-spacecraft-integration`.
 **M15.2 is BANKED; its original SRV-01 production-integration front is closed.**
-The subsequent banked M15.3 foundation is described above; no further front is authorized.
+The subsequent banked M15.3–M15.5 foundations are described above; no new front is authorized.
 Use the [accepted qualification](engineering-evidence/srv01-production-integration/README.md)
 for the banked scope. The [bank-preparation packet](engineering-evidence/srv01-production-integration/bank-preparation/README.md)
 is historical evidence of the pre-bank state, not current instructions.

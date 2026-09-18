@@ -29,7 +29,7 @@ the full player experience is still being assembled.
 
 ## Working today
 
-**Current banked milestone: [M15.3 — Canonical SRV-01 Florida Supported-Flight Foundation](https://github.com/AlbatronicProductions/NovaCore/tree/m15.3-canonical-srv01-florida-supported-flight-foundation).**
+**Current banked milestone: [M15.5 — Player Flight Controls](https://github.com/AlbatronicProductions/NovaCore/tree/m15.5-player-flight-controls).**
 The current production foundation integrates the canonical stock SRV-01 through
 retained and powered support, bounded contact-to-free-flight ownership transfer in
 its qualified fixed-slab domain, finite propulsion/resource mechanics, and
@@ -37,10 +37,12 @@ authenticated rotating-Florida support. **FL Launchpad → Play** places the sto
 spacecraft on a shared physical/visible launch slab while preserving Solar-system
 exploration, planet focus, overview, zoom and camera navigation.
 
-Powered Florida departure and player launch gameplay remain future work. M15.3
-does not qualify an Earth launch stack or orbit insertion, player Z/X/WASD/QE
-flight controls, a spacecraft-follow camera, SAS/navball/autopilot, production
-lighting/shadows, or atmosphere/aerodynamics/reentry. See the
+M15.4 adds a unified active-vessel camera, and M15.5 qualifies Z/X engine and
+WASD/QE attitude controls through physical actuators in a bounded free-flight
+development route. Powered Florida departure and connected player launch gameplay
+remain future work. These banks do not qualify an Earth launch stack or orbit
+insertion, SAS/navball/autopilot, production lighting/shadows, or
+atmosphere/aerodynamics/reentry. See the
 [current engineering state](docs/NOVACORE_CURRENT_STATE.md).
 
 - **Earth exploration:** move the camera from orbital views down toward terrain,
@@ -60,8 +62,8 @@ lighting/shadows, or atmosphere/aerodynamics/reentry. See the
   powered free flight.
 
 These capabilities are exercised in bounded development scenarios. The original
-powered-flight cube and recorded SRV-01 free-flight scene remain separate from the
-supported-contact routes; piloted flight and complete terrain landing are still ahead.
+powered-flight cube and SRV-01 control route remain separate from Florida support;
+connected player launch and complete terrain landing are still ahead.
 
 ## Screenshots
 
@@ -78,8 +80,8 @@ continue to evolve. They do not depict finished spacecraft or atmosphere systems
 
 **Surface → Launch → Atmosphere → Orbit → Interplanetary flight → Return → Landing**
 
-That connected journey is the long-term goal. Work ahead includes flight controls,
-finished spacecraft models, facilities, liftoff and landing interactions, richer
+That connected journey is the long-term goal. Work ahead includes connected launch
+controls, finished spacecraft models, facilities, liftoff and landing interactions, richer
 terrain, and atmosphere, cloud and water systems. Rotating-site powered departure
 and a connected player-controlled surface-to-flight journey remain future work.
 
@@ -191,6 +193,8 @@ contracts, implementation limits and reproducible evidence live in the documenta
 | Planetary rendering and data | [Renderer](docs/planetary-rendering.md) · [Terrain assets](docs/terrain-assets.md) · [Source provenance](assets/earth/PROVENANCE.md) |
 | Simulation and spacecraft | [Simulation time](docs/simulation-time.md) · [Spacecraft motion](docs/spacecraft-translation.md) · [Attitude dynamics](docs/spacecraft-attitude.md) |
 | Powered flight | [Physics contract](docs/engineering-evidence/segmented-powered-free-flight/physics-contract.md) · [Qualification](docs/engineering-evidence/segmented-powered-free-flight/final-qualification.md) |
+| M15.5 player flight controls | [Qualification and limits](docs/engineering-evidence/player-flight-controls-gauntlet/README.md) · [Banked source](https://github.com/AlbatronicProductions/NovaCore/tree/m15.5-player-flight-controls) |
+| M15.4 active-vessel camera | [Qualification and limits](docs/engineering-evidence/active-vessel-camera/README.md) · [Banked source](https://github.com/AlbatronicProductions/NovaCore/tree/m15.4-unified-active-vessel-camera) |
 | M15.3 supported-flight foundation | [Current scope and limits](docs/NOVACORE_CURRENT_STATE.md) · [Banked source](https://github.com/AlbatronicProductions/NovaCore/tree/m15.3-canonical-srv01-florida-supported-flight-foundation) |
 | M15.2 reusable SRV-01 spacecraft | [Qualification, limits and reproduction](docs/engineering-evidence/srv01-production-integration/README.md) · [Banked source](https://github.com/AlbatronicProductions/NovaCore/tree/m15.2-srv01-reusable-production-spacecraft-integration) |
 | M15.1 retained powered contact | [Qualification history, limits and reproduction](docs/engineering-evidence/powered-contact-bank-candidate/README.md) · [Banked source](https://github.com/AlbatronicProductions/NovaCore/tree/m15.1-finite-fuel-retained-powered-contact) |
